@@ -7,7 +7,7 @@ import { globSync } from 'glob';
 import kebabCase from 'lodash/kebabCase';
 import { renderToString } from 'react-dom/server';
 
-import { resetWarned } from '../../components/utils/warning';
+import { resetWarned } from '../../components/_util/warning';
 import { render } from '../utils';
 import { TriggerMockContext } from './demoTestContext';
 import { excludeWarning, isSafeWarning } from './excludeWarning';
