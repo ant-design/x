@@ -1,2 +1,3 @@
-export { default as ChatBox } from './chat-box';
+export { default as Chatbox } from './chatbox';
+export type { ChatboxProps } from './chatbox';
 export { default as version } from './version';

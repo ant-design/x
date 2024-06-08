@@ -113,8 +113,10 @@
     "not dead"
   ],
   "dependencies": {
+    "@ant-design/colors": "^7.0.2",
     "@ant-design/cssinjs": "^1.19.1",
     "@babel/runtime": "^7.24.5",
+    "@ctrl/tinycolor": "^4.1.0",
     "classnames": "^2.5.1",
     "rc-util": "^5.39.3"
   },
@@ -173,7 +175,7 @@
     "@typescript-eslint/parser": "^7.8.0",
     "adm-zip": "^0.5.12",
     "ali-oss": "^6.20.0",
-    "antd": "^5.17.0",
+    "antd": "^5.18.0",
     "antd-style": "^3.6.2",
     "antd-token-previewer": "^2.0.8",
     "axios": "^1.6.8",
@@ -184,6 +186,7 @@
     "cross-env": "^7.0.3",
     "cross-fetch": "^4.0.0",
     "crypto": "^1.0.1",
+    "dayjs": "^1.11.11",
     "dekko": "^0.2.1",
     "dumi": "^2.3.2",
     "dumi-plugin-color-chunk": "^1.1.0",
@@ -286,9 +289,9 @@
     "webpack-bundle-analyzer": "^4.10.2"
   },
   "peerDependencies": {
+    "antd": ">=5.0.0",
     "react": ">=16.9.0",
-    "react-dom": ">=16.9.0",
-    "antd": ">=5.0.0"
+    "react-dom": ">=16.9.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"

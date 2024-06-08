@@ -7,7 +7,7 @@ import { globSync } from 'glob';
 import kebabCase from 'lodash/kebabCase';
 import { renderToString } from 'react-dom/server';
 
-import { resetWarned } from '../../components/_util/warning';
+import { resetWarned } from '../../components/utils/warning';
 import { render } from '../utils';
 import { TriggerMockContext } from './demoTestContext';
 import { excludeWarning, isSafeWarning } from './excludeWarning';
@@ -36,13 +36,16 @@ function baseText(doInject: boolean, component: string, options: Options = {}) {
     file = file.split(path.sep).join('/');
     const testMethod =
       options.skip === true ||
-      (Array.isArray(options.skip) && options.skip.some((c) => file.includes(c)))
+      (Array.isArray(options.skip) &&
+        options.skip.some((c) => file.includes(c)))
         ? test.skip
         : test;
 
     // function doTest(name: string, openTrigger = false) {
     testMethod(
-      doInject ? `renders ${file} extend context correctly` : `renders ${file} correctly`,
+      doInject
+        ? `renders ${file} extend context correctly`
+        : `renders ${file} correctly`,
       () => {
         resetWarned();
 
@@ -83,7 +86,9 @@ function baseText(doInject: boolean, component: string, options: Options = {}) {
 
         // Snapshot of warning info
         if (doInject) {
-          const errorMessageSet = new Set(errSpy.mock.calls.map((args) => args[0]));
+          const errorMessageSet = new Set(
+            errSpy.mock.calls.map((args) => args[0]),
+          );
           const errorMessages = Array.from(errorMessageSet)
             .filter((msg) => !isSafeWarning(msg, true))
             .sort();

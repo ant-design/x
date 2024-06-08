@@ -8,7 +8,9 @@ describe('component changelog match snapshot', () => {
   const testFn = testDist ? it : it.skip;
 
   testFn('misc changelog snapshot', () => {
-    const changelog = require(path.join(process.cwd(), '.dumi', 'preset', 'misc-changelog.json'));
+    const changelog = require(
+      path.join(process.cwd(), '.dumi', 'preset', 'misc-changelog.json'),
+    );
     expect(changelog).toMatchSnapshot();
   });
 });
