@@ -1,17 +1,17 @@
 /* eslint-disable react/no-danger */
 import React from 'react';
 import { UserOutlined } from '@ant-design/icons';
+import { Avatar } from 'antd';
+import markdownit from 'markdown-it';
 import { Chatbox } from '@ant-design/x';
 import type { ChatboxProps } from '@ant-design/x';
-// import markdownit from 'markdown-it';
-import { Avatar } from 'antd';
 
 const sentences = [
   '# Title \n An enterprise-class UI design language and React UI library. \n ...丨',
   '# 标题 \n 企业级产品设计体系，创造高效愉悦的工作体验。\n ...丨',
 ];
 
-// const md = markdownit({ html: true, breaks: true });
+const md = markdownit({ html: true, breaks: true });
 
 const useLoopSentence = () => {
   const [index, setIndex] = React.useState<number>(0);
@@ -30,7 +30,7 @@ const contentRender: ChatboxProps['contentRender'] = (content) => {
   if (!content) {
     return null;
   }
-  return <span dangerouslySetInnerHTML={{ __html: '' }} />;
+  return <span dangerouslySetInnerHTML={{ __html: md.render(content) }} />;
 };
 
 const App: React.FC = () => {
