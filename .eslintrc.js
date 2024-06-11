@@ -145,9 +145,16 @@ module.exports = {
       },
     },
     {
-      files: ['**/*.test.ts', '**/*.test.tsx', '**/*.spec.ts', '**/*.spec.tsx'],
+      files: [
+        '**/*.test.ts',
+        '**/*.test.tsx',
+        '**/*.spec.ts',
+        '**/*.spec.tsx',
+        '**/tests/**',
+      ],
       rules: {
         'compat/compat': 0,
+        'import/no-extraneous-dependencies': 0,
       },
     },
   ],

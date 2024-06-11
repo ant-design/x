@@ -35,7 +35,7 @@ const useStyle = createStyles(({ token, css, cx }) => {
     `,
     cardItem: css`
       &:hover {
-        box-shadow: ${token.boxShadowCard};
+        box-shadow: ${(token as any).boxShadowCard};
       }
     `,
     sliderItem: css`

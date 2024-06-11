@@ -15,7 +15,7 @@ jobs:
 
       - uses: actions/setup-node@v1
         with:
-          node-version: '16'
+          node-version: '18'
 
       - name: cache package-lock.json
         uses: actions/cache@v2
@@ -24,7 +24,7 @@ jobs:
           key: lock-${{ github.sha }}
 
       - name: create package-lock.json
-        run: npm i --package-lock-only
+        run: npm i --package-lock-only --ignore-scripts
 
       - name: hack for singe file
         run: |

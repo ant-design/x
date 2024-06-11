@@ -77,6 +77,7 @@ export const devUseWarning: (component: string) => TypeWarning =
 
               deprecatedWarnList[component] =
                 deprecatedWarnList[component] || [];
+
               if (!deprecatedWarnList[component].includes(message || '')) {
                 deprecatedWarnList[component].push(message || '');
               }
