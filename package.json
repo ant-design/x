@@ -129,6 +129,7 @@
     "@npmcli/run-script": "^8.1.0",
     "@octokit/rest": "^20.1.0",
     "@qixian.cs/github-contributors-list": "^2.0.1",
+    "@rc-component/trigger": "^2.2.0",
     "@size-limit/file": "^11.1.2",
     "@stackblitz/sdk": "^1.9.0",
     "@testing-library/dom": "^10.1.0",
@@ -184,6 +185,7 @@
     "cross-env": "^7.0.3",
     "cross-fetch": "^4.0.0",
     "crypto": "^1.0.1",
+    "dayjs": "^1.11.11",
     "dekko": "^0.2.1",
     "dumi": "^2.3.2",
     "dumi-plugin-color-chunk": "^1.1.0",
@@ -245,6 +247,8 @@
     "puppeteer": "^22.7.1",
     "qs": "^6.12.1",
     "rc-footer": "^0.6.8",
+    "rc-resize-observer": "^1.4.0",
+    "rc-virtual-list": "^3.14.2",
     "react": "^18.3.1",
     "react-copy-to-clipboard": "^5.1.0",
     "react-countup": "^6.5.3",
@@ -278,7 +282,7 @@
     "tar-fs": "^3.0.6",
     "terser": "^5.31.0",
     "tsx": "^4.8.2",
-    "typedoc": "^0.25.13",
+    "typedoc": "^0.26.3",
     "typescript": "~5.4.5",
     "vanilla-jsoneditor": "^0.23.2",
     "vanilla-tilt": "^1.8.1",
@@ -286,9 +290,9 @@
     "webpack-bundle-analyzer": "^4.10.2"
   },
   "peerDependencies": {
+    "antd": ">=5.0.0",
     "react": ">=16.9.0",
-    "react-dom": ">=16.9.0",
-    "antd": ">=5.0.0"
+    "react-dom": ">=16.9.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"

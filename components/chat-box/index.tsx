@@ -1,11 +1,14 @@
 import React from 'react';
-import classNames from 'classnames';
 
-export interface ChatBoxProps {}
+export interface ChatBoxProps {
+  rootClassName?: string;
+}
 
-const ChatBox = React.forwardRef<HTMLElement, ChatBoxProps>((props, ref) => {
-  return <div>2333</div>;
-});
+const ChatBox = React.forwardRef<HTMLElement, ChatBoxProps>(
+  ({ rootClassName }: ChatBoxProps) => (
+    <div className={rootClassName}>2333</div>
+  ),
+);
 
 if (process.env.NODE_ENV !== 'production') {
   ChatBox.displayName = 'ChatBox';

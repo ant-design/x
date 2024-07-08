@@ -10,7 +10,6 @@ import {
   MessageOutlined,
   QuestionCircleOutlined,
   TwitterOutlined,
-  UsergroupAddOutlined,
   ZhihuOutlined,
 } from '@ant-design/icons';
 import { TinyColor } from '@ctrl/tinycolor';
