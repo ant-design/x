@@ -12,13 +12,13 @@ const ComponentsBlock = React.lazy(() => import('./ComponentsBlock'));
 
 const locales = {
   cn: {
-    slogan: '助力设计开发者「更灵活」地搭建出「更美」的产品，让用户「快乐工作」～',
+    slogan: '打造 AI 驱动界面，一键接入智能对话组件与 API 服务',
     start: '开始使用',
     designLanguage: '设计语言',
   },
   en: {
     slogan:
-      'Help designers/developers building beautiful products more flexible and working with happiness',
+      'Crafting AI-driven interfaces, seamlessly integrating smart chat components and API services at your fingertips.',
     start: 'Getting Started',
     designLanguage: 'Design Language',
   },
@@ -89,7 +89,9 @@ const useStyle = () => {
         position: absolute;
         inset-inline-end: 0;
         top: -38px;
-        transform: ${isRTL ? 'rotate3d(24, 83, -45, 57deg)' : 'rotate3d(24, -83, 45, 57deg)'};
+        transform: ${isRTL
+          ? 'rotate3d(24, 83, -45, 57deg)'
+          : 'rotate3d(24, -83, 45, 57deg)'};
       `,
       child: css`
         position: relative;
@@ -117,13 +119,23 @@ const PreviewBanner: React.FC<React.PropsWithChildren> = (props) => {
     <GroupMaskLayer>
       {/* Image Left Top */}
       <img
-        style={{ position: 'absolute', left: isMobile ? -120 : 0, top: 0, width: 240 }}
+        style={{
+          position: 'absolute',
+          left: isMobile ? -120 : 0,
+          top: 0,
+          width: 240,
+        }}
         src="https://gw.alipayobjects.com/zos/bmw-prod/49f963db-b2a8-4f15-857a-270d771a1204.svg"
         alt="bg"
       />
       {/* Image Right Top */}
       <img
-        style={{ position: 'absolute', right: isMobile ? 0 : '40%', bottom: 120, width: 240 }}
+        style={{
+          position: 'absolute',
+          right: isMobile ? 0 : '40%',
+          bottom: 120,
+          width: 240,
+        }}
         src="https://gw.alipayobjects.com/zos/bmw-prod/e152223c-bcae-4913-8938-54fda9efe330.svg"
         alt="bg"
       />
@@ -143,12 +155,24 @@ const PreviewBanner: React.FC<React.PropsWithChildren> = (props) => {
           <p>{locale.slogan}</p>
         </Typography>
         <Flex gap="middle" className={styles.btnWrap}>
-          <Link to={utils.getLocalizedPathname('/components/overview/', isZhCN, search)}>
+          <Link
+            to={utils.getLocalizedPathname(
+              '/components/overview/',
+              isZhCN,
+              search,
+            )}
+          >
             <Button size="large" type="primary">
               {locale.start}
             </Button>
           </Link>
-          <Link to={utils.getLocalizedPathname('/docs/spec/introduce/', isZhCN, search)}>
+          <Link
+            to={utils.getLocalizedPathname(
+              '/docs/spec/introduce/',
+              isZhCN,
+              search,
+            )}
+          >
             <Button size="large">{locale.designLanguage}</Button>
           </Link>
         </Flex>

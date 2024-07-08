@@ -10,7 +10,7 @@ import MockDate from 'mockdate';
 import type { HTTPRequest } from 'puppeteer';
 import ReactDOMServer from 'react-dom/server';
 
-import { App, ConfigProvider, theme } from '../../components';
+import { App, ConfigProvider, theme } from 'antd';
 import { fillWindowEnv } from '../setup';
 import { render } from '../utils';
 import { TriggerMockContext } from './demoTestContext';
@@ -107,7 +107,11 @@ export default function imageTest(
     container = doc.querySelector<HTMLDivElement>('#root')!;
   });
 
-  function test(name: string, suffix: string, themedComponent: React.ReactElement) {
+  function test(
+    name: string,
+    suffix: string,
+    themedComponent: React.ReactElement,
+  ) {
     it(name, async () => {
       await page.setViewport({ width: 800, height: 600 });
 
@@ -124,7 +128,9 @@ export default function imageTest(
       MockDate.set(dayjs('2016-11-22').valueOf());
       page.on('request', onRequestHandle);
       await page.goto(`file://${process.cwd()}/tests/index.html`);
-      await page.addStyleTag({ path: `${process.cwd()}/components/style/reset.css` });
+      await page.addStyleTag({
+        path: `${process.cwd()}/components/style/reset.css`,
+      });
       await page.addStyleTag({ content: '*{animation: none!important;}' });
 
       const cache = createCache();
@@ -184,12 +190,14 @@ export default function imageTest(
           head.innerHTML += ssrStyle;
           // Inject open trigger with block style
           if (triggerClassName) {
-            document.querySelectorAll<HTMLElement>(`.${triggerClassName}`).forEach((node) => {
-              const blockStart = document.createElement('div');
-              const blockEnd = document.createElement('div');
-              node.parentNode?.insertBefore(blockStart, node);
-              node.parentNode?.insertBefore(blockEnd, node.nextSibling);
-            });
+            document
+              .querySelectorAll<HTMLElement>(`.${triggerClassName}`)
+              .forEach((node) => {
+                const blockStart = document.createElement('div');
+                const blockEnd = document.createElement('div');
+                node.parentNode?.insertBefore(blockStart, node);
+                node.parentNode?.insertBefore(blockEnd, node.nextSibling);
+              });
           }
         },
         html,
@@ -199,7 +207,9 @@ export default function imageTest(
 
       if (!options.onlyViewport) {
         // Get scroll height of the rendered page and set viewport
-        const bodyHeight = await page.evaluate(() => document.body.scrollHeight);
+        const bodyHeight = await page.evaluate(
+          () => document.body.scrollHeight,
+        );
         await page.setViewport({ width: 800, height: bodyHeight });
       }
 
@@ -207,7 +217,10 @@ export default function imageTest(
         fullPage: !options.onlyViewport,
       });
 
-      await fse.writeFile(path.join(snapshotPath, `${identifier}${suffix}.png`), image);
+      await fse.writeFile(
+        path.join(snapshotPath, `${identifier}${suffix}.png`),
+        image,
+      );
 
       MockDate.reset();
       page.off('request', onRequestHandle);
@@ -218,15 +231,29 @@ export default function imageTest(
     test(
       `component image screenshot should correct ${key}`,
       `.${key}`,
-      <div style={{ background: key === 'dark' ? '#000' : '', padding: `24px 12px` }} key={key}>
+      <div
+        style={{
+          background: key === 'dark' ? '#000' : '',
+          padding: `24px 12px`,
+        }}
+        key={key}
+      >
         <ConfigProvider theme={{ algorithm }}>{component}</ConfigProvider>
       </div>,
     );
     test(
       `[CSS Var] component image screenshot should correct ${key}`,
       `.${key}.css-var`,
-      <div style={{ background: key === 'dark' ? '#000' : '', padding: `24px 12px` }} key={key}>
-        <ConfigProvider theme={{ algorithm, cssVar: true }}>{component}</ConfigProvider>
+      <div
+        style={{
+          background: key === 'dark' ? '#000' : '',
+          padding: `24px 12px`,
+        }}
+        key={key}
+      >
+        <ConfigProvider theme={{ algorithm, cssVar: true }}>
+          {component}
+        </ConfigProvider>
       </div>,
     );
   });
@@ -249,7 +276,10 @@ export function imageDemoTest(component: string, options: Options = {}) {
   );
 
   files.forEach((file) => {
-    if (Array.isArray(options.skip) && options.skip.some((c) => file.endsWith(c))) {
+    if (
+      Array.isArray(options.skip) &&
+      options.skip.some((c) => file.endsWith(c))
+    ) {
       describeMethod = describe.skip;
     } else {
       describeMethod = describe;
