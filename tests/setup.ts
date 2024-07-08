@@ -1,14 +1,14 @@
 /* eslint-disable no-console, import/prefer-default-export */
 import util from 'util';
-import React from 'react';
 import type { DOMWindow } from 'jsdom';
-
-// eslint-disable-next-line no-console
-console.log('Current React Version:', React.version);
 
 const originConsoleErr = console.error;
 
-const ignoreWarns = ['validateDOMNesting', 'on an unmounted component', 'not wrapped in act'];
+const ignoreWarns = [
+  'validateDOMNesting',
+  'on an unmounted component',
+  'not wrapped in act',
+];
 
 // Hack off React warning to avoid too large log in CI.
 console.error = (...args) => {
@@ -51,8 +51,14 @@ export function fillWindowEnv(window: Window | DOMWindow) {
 
   // ref: https://jestjs.io/docs/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom
   // ref: https://github.com/jsdom/jsdom/issues/2524
-  Object.defineProperty(win, 'TextEncoder', { writable: true, value: util.TextEncoder });
-  Object.defineProperty(win, 'TextDecoder', { writable: true, value: util.TextDecoder });
+  Object.defineProperty(win, 'TextEncoder', {
+    writable: true,
+    value: util.TextEncoder,
+  });
+  Object.defineProperty(win, 'TextDecoder', {
+    writable: true,
+    value: util.TextDecoder,
+  });
 }
 
 /* eslint-disable global-require */
@@ -60,5 +66,7 @@ if (typeof window !== 'undefined') {
   fillWindowEnv(window);
 }
 
-global.requestAnimationFrame = global.requestAnimationFrame || global.setTimeout;
-global.cancelAnimationFrame = global.cancelAnimationFrame || global.clearTimeout;
+global.requestAnimationFrame =
+  global.requestAnimationFrame || global.setTimeout;
+global.cancelAnimationFrame =
+  global.cancelAnimationFrame || global.clearTimeout;
