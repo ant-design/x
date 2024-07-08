@@ -3,7 +3,7 @@ import React from 'react';
 import ChatBox from '..';
 import { render } from '../../../tests/utils';
 
-describe('Flex', () => {
+describe('ChatBox', () => {
   it('basic', () => {
     render(<ChatBox />);
   });

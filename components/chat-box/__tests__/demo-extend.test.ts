@@ -1,3 +1,3 @@
 import { extendTest } from '../../../tests/shared/demoTest';
 
-extendTest('flex');
+extendTest('chat-box');
