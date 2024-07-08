@@ -1,5 +1,5 @@
 import React from 'react';
-import { BgColorsOutlined, SmileOutlined } from '@ant-design/icons';
+import { BgColorsOutlined } from '@ant-design/icons';
 import { FloatButton } from 'antd';
 import { useTheme } from 'antd-style';
 import { CompactTheme, DarkTheme } from 'antd-token-previewer/es/icons';
