@@ -10,7 +10,7 @@ import {
 import chalk from 'chalk';
 import ReactDOMServer from 'react-dom/server';
 
-import { ConfigProvider } from '../components';
+import { ConfigProvider } from 'antd';
 import { generateCssinjs } from './generate-cssinjs';
 
 console.log(chalk.green(`🔥 Checking CSS-in-JS...`));
