@@ -1,10 +1,7 @@
 import { Keyframes, unit } from '@ant-design/cssinjs';
-import type {
-  FullToken,
-  GenerateStyle,
-  GetDefaultToken,
-} from '../../theme/internal';
-import { genStyleHooks, mergeToken } from '../../theme/internal';
+import type { CSSInterpolation } from '@ant-design/cssinjs';
+import { genStyleUtils, mergeToken } from '@ant-design/cssinjs-utils';
+import type { GetDefaultToken, FullToken } from '@ant-design/cssinjs-utils';
 
 const loadingMove = new Keyframes('loadingMove', {
   '0%': {
@@ -40,9 +37,14 @@ export interface ComponentToken {
   //
 }
 
-export interface ChatboxToken extends FullToken<'Chatbox'> {
+export interface ChatboxToken extends FullToken<any, any, any> {
   chatboxContentMaxWidth: number | string;
 }
+
+export type GenerateStyle<
+  C extends Record<PropertyKey, any> = Record<PropertyKey, any>,
+  ReturnType = CSSInterpolation,
+> = (token: C) => ReturnType;
 
 const genChatboxStyle: GenerateStyle<ChatboxToken> = (token) => {
   const {
@@ -128,11 +130,21 @@ const genChatboxStyle: GenerateStyle<ChatboxToken> = (token) => {
   };
 };
 
-export const prepareComponentToken: GetDefaultToken<'Chatbox'> = () => ({
+export const prepareComponentToken: GetDefaultToken<any, any, any> = () => ({
   //
 });
 
-export default genStyleHooks<'Chatbox'>(
+const { genStyleHooks } = genStyleUtils({
+  usePrefix: () => ({
+    rootPrefixCls: 'ant',
+    iconPrefixCls: 'anticon',
+  }),
+  useToken: () => ({
+    token: {},
+  }),
+});
+
+export default genStyleHooks(
   'Chatbox',
   (token) => {
     const { paddingXS, calc } = token;

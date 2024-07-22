@@ -115,7 +115,7 @@
   "dependencies": {
     "@ant-design/colors": "^7.0.2",
     "@ant-design/cssinjs": "^1.19.1",
-    "@ant-design/cssinjs-utils": "^1.0.0",
+    "@ant-design/cssinjs-utils": "^1.0.1",
     "@babel/runtime": "^7.24.5",
     "@ctrl/tinycolor": "^4.1.0",
     "classnames": "^2.5.1",
