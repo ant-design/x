@@ -5,6 +5,8 @@ import type { GetDefaultToken, FullToken } from '@ant-design/cssinjs-utils';
 import { ConfigContext } from 'antd/lib/config-provider';
 import useAntdToken from 'antd/lib/theme/useToken';
 import React from 'react';
+import type { AnyObject } from '../../_util/type';
+import type { ComponentTokenMap } from '../../theme/components';
 
 const loadingMove = new Keyframes('loadingMove', {
   '0%': {
@@ -40,11 +42,7 @@ export interface ComponentToken {
   //
 }
 
-interface ComponentTokenMap {
-  Chatbox?: ComponentToken;
-}
-
-export interface ChatboxToken extends FullToken<any, any, any> {
+interface ChatboxToken extends FullToken<AnyObject, AnyObject, 'Chatbox'> {
   chatboxContentMaxWidth: number | string;
 }
 
@@ -141,7 +139,11 @@ export const prepareComponentToken: GetDefaultToken<any, any, any> = () => ({
   //
 });
 
-const { genStyleHooks } = genStyleUtils<ComponentTokenMap, object, object>({
+const { genStyleHooks } = genStyleUtils<
+  ComponentTokenMap,
+  AnyObject,
+  AnyObject
+>({
   usePrefix: () => {
     const { getPrefixCls, iconPrefixCls } = React.useContext(ConfigContext);
     return {
@@ -153,12 +155,16 @@ const { genStyleHooks } = genStyleUtils<ComponentTokenMap, object, object>({
     const [, token] = useAntdToken();
     return { token };
   },
+  useCSP: () => {
+    const { csp } = React.useContext(ConfigContext);
+    return csp ?? {};
+  },
 });
 
-export default genStyleHooks(
+export default genStyleHooks<'Chatbox'>(
   'Chatbox',
   (token) => {
-    const { paddingXS, calc } = token as any;
+    const { paddingXS, calc } = token;
     const chatBoxToken = mergeToken<ChatboxToken>(token, {
       chatboxContentMaxWidth: `calc(100% - ${calc(paddingXS).add(32).equal()})`,
     });
