@@ -18,8 +18,8 @@ export const { genStyleHooks, genComponentStyleHook } = genStyleUtils<
     };
   },
   useToken: () => {
-    const [, token] = useAntdToken();
-    return { token };
+    const [, token, , realToken] = useAntdToken();
+    return { token, realToken };
   },
   useCSP: () => {
     const { csp } = React.useContext(ConfigContext);
