@@ -1,12 +1,12 @@
 import { Keyframes, unit } from '@ant-design/cssinjs';
-import type { CSSInterpolation } from '@ant-design/cssinjs';
-import { genStyleUtils, mergeToken } from '@ant-design/cssinjs-utils';
-import type { GetDefaultToken, FullToken } from '@ant-design/cssinjs-utils';
-import { ConfigContext } from 'antd/lib/config-provider';
-import useAntdToken from 'antd/lib/theme/useToken';
-import React from 'react';
-import type { AnyObject } from '../../_util/type';
-import type { ComponentTokenMap } from '../../theme/components';
+import { mergeToken } from '@ant-design/cssinjs-utils';
+
+import { genStyleHooks } from '../../theme/genStyleUtils';
+import type {
+  FullToken,
+  GenerateStyle,
+  GetDefaultToken,
+} from '../../theme/cssinjs-utils';
 
 const loadingMove = new Keyframes('loadingMove', {
   '0%': {
@@ -42,14 +42,9 @@ export interface ComponentToken {
   //
 }
 
-interface ChatboxToken extends FullToken<AnyObject, AnyObject, 'Chatbox'> {
+interface ChatboxToken extends FullToken<'Chatbox'> {
   chatboxContentMaxWidth: number | string;
 }
-
-export type GenerateStyle<
-  C extends Record<PropertyKey, any> = Record<PropertyKey, any>,
-  ReturnType = CSSInterpolation,
-> = (token: C) => ReturnType;
 
 const genChatboxStyle: GenerateStyle<ChatboxToken> = (token) => {
   const {
@@ -135,31 +130,7 @@ const genChatboxStyle: GenerateStyle<ChatboxToken> = (token) => {
   };
 };
 
-export const prepareComponentToken: GetDefaultToken<any, any, any> = () => ({
-  //
-});
-
-const { genStyleHooks } = genStyleUtils<
-  ComponentTokenMap,
-  AnyObject,
-  AnyObject
->({
-  usePrefix: () => {
-    const { getPrefixCls, iconPrefixCls } = React.useContext(ConfigContext);
-    return {
-      iconPrefixCls,
-      rootPrefixCls: getPrefixCls(),
-    };
-  },
-  useToken: () => {
-    const [, token] = useAntdToken();
-    return { token };
-  },
-  useCSP: () => {
-    const { csp } = React.useContext(ConfigContext);
-    return csp ?? {};
-  },
-});
+export const prepareComponentToken: GetDefaultToken<'Chatbox'> = () => ({});
 
 export default genStyleHooks<'Chatbox'>(
   'Chatbox',
