@@ -39,3 +39,5 @@ package-lock.json
 .dumi/tmp
 .dumi/tmp-production
 .node
+_site/
+server/
