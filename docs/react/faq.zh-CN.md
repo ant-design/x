@@ -9,7 +9,7 @@ title: FAQ
 
 ---
 
-## `undefined` 和 `null` 在 `antd` 的受控组件中有区别吗？
+## `undefined` 和 `null` 在 `antd` 的受控组件中有区别吗？？？
 
 **有区别。antd 约定：`undefined` 是非受控的标志，`null` 作为显式的受控空值。**
 
