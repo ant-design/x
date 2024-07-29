@@ -2,7 +2,7 @@
 category: Components
 group: 数据展示
 title: Bubble
-subtitle: 聊天框
+subtitle: 聊天气泡
 description: 用于聊天的气泡组件。
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*HjY3QKszqFEAAAAAAAAAAAAADrJ8AQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*G8njQogkGwAAAAAAAAAAAAAADrJ8AQ/original
