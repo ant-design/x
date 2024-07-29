@@ -18,14 +18,23 @@ export type OverrideToken = OverrideTokenTypeUtil<ComponentTokenMap, AnyObject>;
 
 export type OverrideComponent = TokenMapKey<ComponentTokenMap>;
 
-export type FullToken<C extends TokenMapKey<ComponentTokenMap>> =
-  FullTokenTypeUtil<ComponentTokenMap, AnyObject, C>;
+export type FullToken<C extends TokenMapKey<ComponentTokenMap>> = FullTokenTypeUtil<
+  ComponentTokenMap,
+  AnyObject,
+  C
+>;
 
-export type GetDefaultToken<C extends TokenMapKey<ComponentTokenMap>> =
-  GetDefaultTokenTypeUtil<ComponentTokenMap, AnyObject, C>;
+export type GetDefaultToken<C extends TokenMapKey<ComponentTokenMap>> = GetDefaultTokenTypeUtil<
+  ComponentTokenMap,
+  AnyObject,
+  C
+>;
 
-export type GenStyleFn<C extends TokenMapKey<ComponentTokenMap>> =
-  GenStyleFnTypeUtil<ComponentTokenMap, AnyObject, C>;
+export type GenStyleFn<C extends TokenMapKey<ComponentTokenMap>> = GenStyleFnTypeUtil<
+  ComponentTokenMap,
+  AnyObject,
+  C
+>;
 
 export type GenerateStyle<
   ComponentToken extends AnyObject = AnyObject,

@@ -1,12 +1,7 @@
 import { Keyframes, unit } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
-
 import { genStyleHooks } from '../../theme/genStyleUtils';
-import type {
-  FullToken,
-  GenerateStyle,
-  GetDefaultToken,
-} from '../../theme/cssinjs-utils';
+import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 
 const loadingMove = new Keyframes('loadingMove', {
   '0%': {
@@ -47,16 +42,8 @@ interface BubbleToken extends FullToken<'Bubble'> {
 }
 
 const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
-  const {
-    componentCls,
-    fontSize,
-    lineHeight,
-    paddingSM,
-    padding,
-    paddingXS,
-    colorText,
-    calc,
-  } = token;
+  const { componentCls, fontSize, lineHeight, paddingSM, padding, paddingXS, colorText, calc } =
+    token;
   return {
     [componentCls]: {
       display: 'flex',
@@ -91,10 +78,7 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
         color: colorText,
         fontSize: token.fontSize,
         lineHeight: token.lineHeight,
-        minHeight: calc(paddingSM)
-          .mul(2)
-          .add(calc(lineHeight).mul(fontSize))
-          .equal(),
+        minHeight: calc(paddingSM).mul(2).add(calc(lineHeight).mul(fontSize)).equal(),
         maxWidth: token.bubbleContentMaxWidth,
         backgroundColor: token.colorInfoBg,
         borderRadius: token.borderRadiusLG,

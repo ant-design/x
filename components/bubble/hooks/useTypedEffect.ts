@@ -2,14 +2,9 @@ import React from 'react';
 
 import type { TypingOption } from '../interface';
 
-const useTypedEffect = (
-  content?: string,
-  mergedTyping?: Required<TypingOption> | false,
-) => {
+const useTypedEffect = (content?: string, mergedTyping?: Required<TypingOption> | false) => {
   const [typedContent, setTypedContent] = React.useState<string>('');
-  const [isTyping, setIsTyping] = React.useState<boolean>(
-    mergedTyping !== false,
-  );
+  const [isTyping, setIsTyping] = React.useState<boolean>(mergedTyping !== false);
 
   const timerRef = React.useRef<ReturnType<typeof setTimeout>>();
 

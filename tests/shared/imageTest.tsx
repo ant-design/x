@@ -107,11 +107,7 @@ export default function imageTest(
     container = doc.querySelector<HTMLDivElement>('#root')!;
   });
 
-  function test(
-    name: string,
-    suffix: string,
-    themedComponent: React.ReactElement,
-  ) {
+  function test(name: string, suffix: string, themedComponent: React.ReactElement) {
     it(name, async () => {
       await page.setViewport({ width: 800, height: 600 });
 
@@ -190,14 +186,12 @@ export default function imageTest(
           head.innerHTML += ssrStyle;
           // Inject open trigger with block style
           if (triggerClassName) {
-            document
-              .querySelectorAll<HTMLElement>(`.${triggerClassName}`)
-              .forEach((node) => {
-                const blockStart = document.createElement('div');
-                const blockEnd = document.createElement('div');
-                node.parentNode?.insertBefore(blockStart, node);
-                node.parentNode?.insertBefore(blockEnd, node.nextSibling);
-              });
+            document.querySelectorAll<HTMLElement>(`.${triggerClassName}`).forEach((node) => {
+              const blockStart = document.createElement('div');
+              const blockEnd = document.createElement('div');
+              node.parentNode?.insertBefore(blockStart, node);
+              node.parentNode?.insertBefore(blockEnd, node.nextSibling);
+            });
           }
         },
         html,
@@ -207,9 +201,7 @@ export default function imageTest(
 
       if (!options.onlyViewport) {
         // Get scroll height of the rendered page and set viewport
-        const bodyHeight = await page.evaluate(
-          () => document.body.scrollHeight,
-        );
+        const bodyHeight = await page.evaluate(() => document.body.scrollHeight);
         await page.setViewport({ width: 800, height: bodyHeight });
       }
 
@@ -217,10 +209,7 @@ export default function imageTest(
         fullPage: !options.onlyViewport,
       });
 
-      await fse.writeFile(
-        path.join(snapshotPath, `${identifier}${suffix}.png`),
-        image,
-      );
+      await fse.writeFile(path.join(snapshotPath, `${identifier}${suffix}.png`), image);
 
       MockDate.reset();
       page.off('request', onRequestHandle);
@@ -251,9 +240,7 @@ export default function imageTest(
         }}
         key={key}
       >
-        <ConfigProvider theme={{ algorithm, cssVar: true }}>
-          {component}
-        </ConfigProvider>
+        <ConfigProvider theme={{ algorithm, cssVar: true }}>{component}</ConfigProvider>
       </div>,
     );
   });
@@ -276,10 +263,7 @@ export function imageDemoTest(component: string, options: Options = {}) {
   );
 
   files.forEach((file) => {
-    if (
-      Array.isArray(options.skip) &&
-      options.skip.some((c) => file.endsWith(c))
-    ) {
+    if (Array.isArray(options.skip) && options.skip.some((c) => file.endsWith(c))) {
       describeMethod = describe.skip;
     } else {
       describeMethod = describe;

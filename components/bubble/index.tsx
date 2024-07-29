@@ -45,10 +45,7 @@ const Bubble: React.FC<Readonly<BubbleProps>> = (props) => {
 
   const mergedAvatarCls = classnames(`${prefixCls}-avatar`, classNames?.avatar);
 
-  const mergedContentCls = classnames(
-    `${prefixCls}-content`,
-    classNames?.content,
-  );
+  const mergedContentCls = classnames(`${prefixCls}-content`, classNames?.content);
 
   const mergedText = mergedTyping !== false ? typedContent : content;
 

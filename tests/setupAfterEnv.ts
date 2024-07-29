@@ -42,14 +42,8 @@ function cleanup(node: HTMLElement) {
 
 function formatHTML(nodes: any) {
   let cloneNodes: any;
-  if (
-    Array.isArray(nodes) ||
-    nodes instanceof HTMLCollection ||
-    nodes instanceof NodeList
-  ) {
-    cloneNodes = Array.from(nodes).map((node) =>
-      cleanup(node.cloneNode(true) as any),
-    );
+  if (Array.isArray(nodes) || nodes instanceof HTMLCollection || nodes instanceof NodeList) {
+    cloneNodes = Array.from(nodes).map((node) => cleanup(node.cloneNode(true) as any));
   } else {
     cloneNodes = cleanup(nodes.cloneNode(true));
   }
@@ -95,8 +89,7 @@ expect.addSnapshotSerializer({
 
 /** Demo Test only accept render as SSR to make sure align with both `server` & `client` side */
 expect.addSnapshotSerializer({
-  test: (node) =>
-    node && typeof node === 'object' && node.type === 'demo' && node.html,
+  test: (node) => node && typeof node === 'object' && node.type === 'demo' && node.html,
   // @ts-ignore
   print: ({ html }) => {
     const { JSDOM } = jsdom;

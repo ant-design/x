@@ -4,11 +4,7 @@ import type { DOMWindow } from 'jsdom';
 
 const originConsoleErr = console.error;
 
-const ignoreWarns = [
-  'validateDOMNesting',
-  'on an unmounted component',
-  'not wrapped in act',
-];
+const ignoreWarns = ['validateDOMNesting', 'on an unmounted component', 'not wrapped in act'];
 
 // Hack off React warning to avoid too large log in CI.
 console.error = (...args) => {
@@ -66,7 +62,5 @@ if (typeof window !== 'undefined') {
   fillWindowEnv(window);
 }
 
-global.requestAnimationFrame =
-  global.requestAnimationFrame || global.setTimeout;
-global.cancelAnimationFrame =
-  global.cancelAnimationFrame || global.clearTimeout;
+global.requestAnimationFrame = global.requestAnimationFrame || global.setTimeout;
+global.cancelAnimationFrame = global.cancelAnimationFrame || global.clearTimeout;

@@ -37,12 +37,7 @@ type BaseTypeWarning = (
 ) => void;
 
 type TypeWarning = BaseTypeWarning & {
-  deprecated: (
-    valid: boolean,
-    oldProp: string,
-    newProp: string,
-    message?: string,
-  ) => void;
+  deprecated: (valid: boolean, oldProp: string, newProp: string, message?: string) => void;
 };
 
 export interface WarningContextProps {
@@ -74,8 +69,7 @@ export const devUseWarning: (component: string) => TypeWarning =
                 deprecatedWarnList = {};
               }
 
-              deprecatedWarnList[component] =
-                deprecatedWarnList[component] || [];
+              deprecatedWarnList[component] = deprecatedWarnList[component] || [];
 
               if (!deprecatedWarnList[component].includes(message || '')) {
                 deprecatedWarnList[component].push(message || '');

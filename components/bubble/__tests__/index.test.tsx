@@ -24,9 +24,7 @@ describe('bubble', () => {
 
   it('Bubble support content', () => {
     const { container } = render(<Bubble content="hello world" />);
-    const element = container.querySelector<HTMLDivElement>(
-      '.ant-bubble .ant-bubble-content',
-    );
+    const element = container.querySelector<HTMLDivElement>('.ant-bubble .ant-bubble-content');
     expect(element?.textContent).toBe('hello world');
   });
 
@@ -34,35 +32,24 @@ describe('bubble', () => {
     const { container } = render(
       <Bubble
         content="test-contentRender"
-        contentRender={(content) => (
-          <span className="test-contentRender">{content}</span>
-        )}
+        contentRender={(content) => <span className="test-contentRender">{content}</span>}
       />,
     );
-    const element = container.querySelector<HTMLSpanElement>(
-      '.ant-bubble .test-contentRender',
-    );
+    const element = container.querySelector<HTMLSpanElement>('.ant-bubble .test-contentRender');
     expect(element).toBeTruthy();
     expect(element?.textContent).toBe('test-contentRender');
   });
 
   it('Bubble support typing', () => {
     const { container } = render(<Bubble typing content="test" />);
-    expect(container.querySelector<HTMLDivElement>('.ant-bubble')).toHaveClass(
-      'ant-bubble-typing',
-    );
+    expect(container.querySelector<HTMLDivElement>('.ant-bubble')).toHaveClass('ant-bubble-typing');
   });
 
   it('Bubble support avatar', () => {
     const { container } = render(
-      <Bubble
-        avatar={<span className="test-avatar">avatar</span>}
-        content=""
-      />,
+      <Bubble avatar={<span className="test-avatar">avatar</span>} content="" />,
     );
-    expect(
-      container.querySelector<HTMLSpanElement>('.ant-bubble .test-avatar'),
-    ).toBeTruthy();
+    expect(container.querySelector<HTMLSpanElement>('.ant-bubble .test-avatar')).toBeTruthy();
   });
 
   it('Bubble support loading', () => {
@@ -72,9 +59,7 @@ describe('bubble', () => {
   });
 
   it('Bubble support placement', () => {
-    const { container, rerender } = render(
-      <Bubble placement="start" content="" />,
-    );
+    const { container, rerender } = render(<Bubble placement="start" content="" />);
     const element = container.querySelector<HTMLDivElement>('.ant-bubble');
     expect(element).toHaveClass('ant-bubble-start');
     rerender(<Bubble placement="end" content="" />);
@@ -83,9 +68,7 @@ describe('bubble', () => {
 
   it('Bubble support typing effect', async () => {
     const { container } = render(<Bubble typing content="你好你好你好" />);
-    const element = container.querySelector<HTMLDivElement>(
-      '.ant-bubble .ant-bubble-content',
-    );
+    const element = container.querySelector<HTMLDivElement>('.ant-bubble .ant-bubble-content');
     expect(element?.textContent).toBe('你');
     await waitFakeTimer();
     expect(element?.textContent).toBe('你好你好你好');
@@ -103,11 +86,8 @@ describe('bubble', () => {
       />,
     );
     const element = container.querySelector<HTMLDivElement>('.ant-bubble');
-    const avatarElement =
-      element?.querySelector<HTMLDivElement>('.ant-bubble-avatar');
-    const contentElement = element?.querySelector<HTMLDivElement>(
-      '.ant-bubble-content',
-    );
+    const avatarElement = element?.querySelector<HTMLDivElement>('.ant-bubble-avatar');
+    const contentElement = element?.querySelector<HTMLDivElement>('.ant-bubble-content');
     expect(element).toHaveClass('test-className');
     expect(avatarElement).toHaveClass('test-avatar');
     expect(contentElement).toHaveClass('test-content');

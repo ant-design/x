@@ -5,7 +5,7 @@ import React from 'react';
 import useAntdToken from 'antd/lib/theme/useToken';
 import { ConfigContext } from 'antd/lib/config-provider';
 
-export const { genStyleHooks, genComponentStyleHook } = genStyleUtils<
+export const { genStyleHooks, genComponentStyleHook, genSubStyleComponent } = genStyleUtils<
   ComponentTokenMap,
   AnyObject,
   AnyObject
@@ -18,8 +18,8 @@ export const { genStyleHooks, genComponentStyleHook } = genStyleUtils<
     };
   },
   useToken: () => {
-    const [, token, , realToken] = useAntdToken();
-    return { token, realToken };
+    const [theme, token, hashId, realToken, cssVar] = useAntdToken();
+    return { theme, token, hashId, realToken, cssVar };
   },
   useCSP: () => {
     const { csp } = React.useContext(ConfigContext);
