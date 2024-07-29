@@ -1,7 +1,7 @@
 ---
 category: Components
 group: 数据展示
-title: Chatbox
+title: Bubble
 subtitle: 聊天框
 description: 用于聊天的气泡组件。
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*HjY3QKszqFEAAAAAAAAAAAAADrJ8AQ/original
@@ -27,7 +27,7 @@ demo:
 
 通用属性参考：[通用属性](/docs/react/common-props)
 
-### Chatbox
+### Bubble
 
 | 属性          | 说明                 | 类型                                                | 默认值  | 版本 |
 | ------------- | -------------------- | --------------------------------------------------- | ------- | ---- |
@@ -46,4 +46,4 @@ demo:
 
 ## 主题变量（Design Token）
 
-<ComponentTokenTable component="Chatbox"></ComponentTokenTable>
+<ComponentTokenTable component="Bubble"></ComponentTokenTable>

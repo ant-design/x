@@ -9,7 +9,7 @@ export interface TypingOption {
   interval?: number;
 }
 
-export interface ChatboxProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface BubbleProps extends React.HTMLAttributes<HTMLDivElement> {
   prefixCls?: string;
   rootClassName?: string;
   classNames?: {

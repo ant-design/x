@@ -1,7 +1,7 @@
 ---
 category: Components
 group: Data Display
-title: Chatbox
+title: Bubble
 description: A bubble component for chat.
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*HjY3QKszqFEAAAAAAAAAAAAADrJ8AQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*G8njQogkGwAAAAAAAAAAAAAADrJ8AQ/original
@@ -26,7 +26,7 @@ Often used when chatting.
 
 Common props ref：[Common props](/docs/react/common-props)
 
-### Chatbox
+### Bubble
 
 | Property      | Description                     | Type                                                | Default | Version |
 | ------------- | ------------------------------- | --------------------------------------------------- | ------- | ------- |
@@ -36,7 +36,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | placement     | Direction of Message            | `start \| end`                                      | `start` |         |
 | loading       | Loading state of Message        | `boolean`                                           | -       |         |
 | typing        | Show message with typing motion | `boolean \| { step?: number, interval?: number }`   | `false` |         |
-| content       | Content of Chatbox              | `string`                                            | -       |         |
+| content       | Content of bubble               | `string`                                            | -       |         |
 | contentRender | Display cuztomized content      | `(content?: string) => ReactNode`                   | -       |         |
 
 ## Semantic DOM
@@ -45,4 +45,4 @@ Common props ref：[Common props](/docs/react/common-props)
 
 ## Design Token
 
-<ComponentTokenTable component="Chatbox"></ComponentTokenTable>
+<ComponentTokenTable component="Bubble"></ComponentTokenTable>

@@ -1,3 +1,3 @@
-export { default as Chatbox } from './chatbox';
-export type { ChatboxProps } from './chatbox';
+export { default as Bubble } from './bubble';
+export type { BubbleProps } from './bubble';
 export { default as version } from './version';

@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import type { ChatboxProps } from './interface';
+import type { BubbleProps } from './interface';
 import Loading from './loading';
 import useStyle from './style';
 import useTypingValue from './hooks/useTypingValue';
@@ -14,7 +14,7 @@ const getPrefixCls = (suffixCls?: string, customizePrefixCls?: string) => {
   return suffixCls ? `ant-${suffixCls}` : 'ant';
 };
 
-const Chatbox: React.FC<ChatboxProps> = (props) => {
+const Bubble: React.FC<Readonly<BubbleProps>> = (props) => {
   const {
     prefixCls: customizePrefixCls,
     className,
@@ -31,7 +31,7 @@ const Chatbox: React.FC<ChatboxProps> = (props) => {
     ...otherHtmlProps
   } = props;
 
-  const prefixCls = getPrefixCls('chatbox', customizePrefixCls);
+  const prefixCls = getPrefixCls('bubble', customizePrefixCls);
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
 
   const mergedTyping = useTypingValue(typing);
@@ -74,9 +74,9 @@ const Chatbox: React.FC<ChatboxProps> = (props) => {
 };
 
 if (process.env.NODE_ENV !== 'production') {
-  Chatbox.displayName = 'Chatbox';
+  Bubble.displayName = 'Bubble';
 }
 
-export type { ChatboxProps };
+export type { BubbleProps };
 
-export default Chatbox;
+export default Bubble;

@@ -3,7 +3,7 @@ import { UserOutlined } from '@ant-design/icons';
 import { Avatar } from 'antd';
 import SemanticPreview from '../../../.dumi/components/SemanticPreview';
 import useLocale from '../../../.dumi/hooks/useLocale';
-import { Chatbox } from '@ant-design/x';
+import { Bubble } from '@ant-design/x';
 
 const locales = {
   cn: {
@@ -25,7 +25,7 @@ const App: React.FC = () => {
         { name: 'content', desc: locale.content },
       ]}
     >
-      <Chatbox
+      <Bubble
         content="Feel free to use Ant Design !"
         avatar={<Avatar size={32} icon={<UserOutlined />} />}
       />

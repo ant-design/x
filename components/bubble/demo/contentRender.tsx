@@ -3,8 +3,8 @@ import React from 'react';
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar } from 'antd';
 import markdownit from 'markdown-it';
-import { Chatbox } from '@ant-design/x';
-import type { ChatboxProps } from '@ant-design/x';
+import { Bubble } from '@ant-design/x';
+import type { BubbleProps } from '@ant-design/x';
 
 const sentences = [
   '# Title \n An enterprise-class UI design language and React UI library. \n ...丨',
@@ -26,17 +26,17 @@ const useLoopSentence = () => {
   return sentences[index];
 };
 
-const contentRender: ChatboxProps['contentRender'] = (content) => {
+const contentRender: BubbleProps['contentRender'] = (content) => {
   if (!content) {
     return null;
   }
   return <span dangerouslySetInnerHTML={{ __html: md.render(content) }} />;
 };
 
-const App: React.FC = () => {
+const App = () => {
   const content = useLoopSentence();
   return (
-    <Chatbox
+    <Bubble
       typing
       content={content}
       contentRender={contentRender}

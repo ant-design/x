@@ -42,11 +42,11 @@ export interface ComponentToken {
   //
 }
 
-interface ChatboxToken extends FullToken<'Chatbox'> {
-  chatboxContentMaxWidth: number | string;
+interface BubbleToken extends FullToken<'Bubble'> {
+  bubbleContentMaxWidth: number | string;
 }
 
-const genChatboxStyle: GenerateStyle<ChatboxToken> = (token) => {
+const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
   const {
     componentCls,
     fontSize,
@@ -95,7 +95,7 @@ const genChatboxStyle: GenerateStyle<ChatboxToken> = (token) => {
           .mul(2)
           .add(calc(lineHeight).mul(fontSize))
           .equal(),
-        maxWidth: token.chatboxContentMaxWidth,
+        maxWidth: token.bubbleContentMaxWidth,
         backgroundColor: token.colorInfoBg,
         borderRadius: token.borderRadiusLG,
         boxShadow: token.boxShadowTertiary,
@@ -131,16 +131,16 @@ const genChatboxStyle: GenerateStyle<ChatboxToken> = (token) => {
   };
 };
 
-export const prepareComponentToken: GetDefaultToken<'Chatbox'> = () => ({});
+export const prepareComponentToken: GetDefaultToken<'Bubble'> = () => ({});
 
-export default genStyleHooks<'Chatbox'>(
-  'Chatbox',
+export default genStyleHooks<'Bubble'>(
+  'Bubble',
   (token) => {
     const { paddingXS, calc } = token;
-    const chatBoxToken = mergeToken<ChatboxToken>(token, {
-      chatboxContentMaxWidth: `calc(100% - ${unit(calc(paddingXS).add(32).equal())})`,
+    const bubbleToken = mergeToken<BubbleToken>(token, {
+      bubbleContentMaxWidth: `calc(100% - ${unit(calc(paddingXS).add(32).equal())})`,
     });
-    return genChatboxStyle(chatBoxToken);
+    return genBubbleStyle(bubbleToken);
   },
   prepareComponentToken,
 );

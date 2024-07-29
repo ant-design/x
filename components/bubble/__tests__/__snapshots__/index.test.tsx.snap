@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`bubble Bubble component work 1`] = `
+<div
+  class="ant-bubble ant-bubble-start"
+>
+  <div
+    class="ant-bubble-content"
+  >
+    test
+  </div>
+</div>
+`;

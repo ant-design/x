@@ -1,11 +1,11 @@
 import React from 'react';
 
-import Chatbox from '..';
+import Bubble from '..';
 import mountTest from '../../../tests/shared/mountTest';
 import { render, waitFakeTimer } from '../../../tests/utils';
 
-describe('chatbox', () => {
-  mountTest(() => <Chatbox content="test" />);
+describe('bubble', () => {
+  mountTest(() => <Bubble content="test" />);
 
   beforeAll(() => {
     jest.useFakeTimers();
@@ -15,24 +15,24 @@ describe('chatbox', () => {
     jest.useRealTimers();
   });
 
-  it('Chatbox component work', () => {
-    const { container } = render(<Chatbox content="test" />);
-    const element = container.querySelector<HTMLDivElement>('.ant-chatbox');
+  it('Bubble component work', () => {
+    const { container } = render(<Bubble content="test" />);
+    const element = container.querySelector<HTMLDivElement>('.ant-bubble');
     expect(element).toBeTruthy();
     expect(element).toMatchSnapshot();
   });
 
-  it('Chatbox support content', () => {
-    const { container } = render(<Chatbox content="hello world" />);
+  it('Bubble support content', () => {
+    const { container } = render(<Bubble content="hello world" />);
     const element = container.querySelector<HTMLDivElement>(
-      '.ant-chatbox .ant-chatbox-content',
+      '.ant-bubble .ant-bubble-content',
     );
     expect(element?.textContent).toBe('hello world');
   });
 
-  it('Chatbox support contentRender', () => {
+  it('Bubble support contentRender', () => {
     const { container } = render(
-      <Chatbox
+      <Bubble
         content="test-contentRender"
         contentRender={(content) => (
           <span className="test-contentRender">{content}</span>
@@ -40,60 +40,60 @@ describe('chatbox', () => {
       />,
     );
     const element = container.querySelector<HTMLSpanElement>(
-      '.ant-chatbox .test-contentRender',
+      '.ant-bubble .test-contentRender',
     );
     expect(element).toBeTruthy();
     expect(element?.textContent).toBe('test-contentRender');
   });
 
-  it('Chatbox support typing', () => {
-    const { container } = render(<Chatbox typing content="test" />);
-    expect(container.querySelector<HTMLDivElement>('.ant-chatbox')).toHaveClass(
-      'ant-chatbox-typing',
+  it('Bubble support typing', () => {
+    const { container } = render(<Bubble typing content="test" />);
+    expect(container.querySelector<HTMLDivElement>('.ant-bubble')).toHaveClass(
+      'ant-bubble-typing',
     );
   });
 
-  it('Chatbox support avatar', () => {
+  it('Bubble support avatar', () => {
     const { container } = render(
-      <Chatbox
+      <Bubble
         avatar={<span className="test-avatar">avatar</span>}
         content=""
       />,
     );
     expect(
-      container.querySelector<HTMLSpanElement>('.ant-chatbox .test-avatar'),
+      container.querySelector<HTMLSpanElement>('.ant-bubble .test-avatar'),
     ).toBeTruthy();
   });
 
-  it('Chatbox support loading', () => {
-    const { container } = render(<Chatbox content="" loading />);
-    const selectors = '.ant-chatbox .ant-chatbox-content .ant-chatbox-dot';
+  it('Bubble support loading', () => {
+    const { container } = render(<Bubble content="" loading />);
+    const selectors = '.ant-bubble .ant-bubble-content .ant-bubble-dot';
     expect(container.querySelector<HTMLSpanElement>(selectors)).toBeTruthy();
   });
 
-  it('Chatbox support placement', () => {
+  it('Bubble support placement', () => {
     const { container, rerender } = render(
-      <Chatbox placement="start" content="" />,
+      <Bubble placement="start" content="" />,
     );
-    const element = container.querySelector<HTMLDivElement>('.ant-chatbox');
-    expect(element).toHaveClass('ant-chatbox-start');
-    rerender(<Chatbox placement="end" content="" />);
-    expect(element).toHaveClass('ant-chatbox-end');
+    const element = container.querySelector<HTMLDivElement>('.ant-bubble');
+    expect(element).toHaveClass('ant-bubble-start');
+    rerender(<Bubble placement="end" content="" />);
+    expect(element).toHaveClass('ant-bubble-end');
   });
 
-  it('Chatbox support typing effect', async () => {
-    const { container } = render(<Chatbox typing content="你好你好你好" />);
+  it('Bubble support typing effect', async () => {
+    const { container } = render(<Bubble typing content="你好你好你好" />);
     const element = container.querySelector<HTMLDivElement>(
-      '.ant-chatbox .ant-chatbox-content',
+      '.ant-bubble .ant-bubble-content',
     );
     expect(element?.textContent).toBe('你');
     await waitFakeTimer();
     expect(element?.textContent).toBe('你好你好你好');
   });
 
-  it('Chatbox Should support className & classNames & style & styles', () => {
+  it('Bubble Should support className & classNames & style & styles', () => {
     const { container } = render(
-      <Chatbox
+      <Bubble
         content="hello"
         avatar={<span>avatar</span>}
         className="test-className"
@@ -102,12 +102,11 @@ describe('chatbox', () => {
         styles={{ avatar: { color: 'red' }, content: { color: 'blue' } }}
       />,
     );
-    const element = container.querySelector<HTMLDivElement>('.ant-chatbox');
-    const avatarElement = element?.querySelector<HTMLDivElement>(
-      '.ant-chatbox-avatar',
-    );
+    const element = container.querySelector<HTMLDivElement>('.ant-bubble');
+    const avatarElement =
+      element?.querySelector<HTMLDivElement>('.ant-bubble-avatar');
     const contentElement = element?.querySelector<HTMLDivElement>(
-      '.ant-chatbox-content',
+      '.ant-bubble-content',
     );
     expect(element).toHaveClass('test-className');
     expect(avatarElement).toHaveClass('test-avatar');

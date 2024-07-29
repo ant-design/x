@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { ChatboxProps, TypingOption } from '../interface';
+import type { BubbleProps, TypingOption } from '../interface';
 
 function isObject(value: any): value is Record<PropertyKey, any> {
   return value && typeof value === 'object';
@@ -11,7 +11,7 @@ const defaultTypingOption: Required<TypingOption> = {
   interval: 100,
 };
 
-const useTypingValue = (typing: ChatboxProps['typing']) => {
+const useTypingValue = (typing: BubbleProps['typing']) => {
   const mergedTyping = React.useMemo<Required<TypingOption> | false>(
     () => {
       if (isObject(typing)) {

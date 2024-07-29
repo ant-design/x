@@ -1,5 +1,5 @@
-import type { ComponentToken as ChatboxComponentToken } from '../chatbox/style';
+import type { ComponentToken as BubbleComponentToken } from '../bubble/style';
 
 export interface ComponentTokenMap {
-  Chatbox?: ChatboxComponentToken;
+  Bubble?: BubbleComponentToken;
 }
