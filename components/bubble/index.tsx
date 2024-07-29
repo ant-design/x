@@ -6,13 +6,7 @@ import Loading from './loading';
 import useStyle from './style';
 import useTypingValue from './hooks/useTypingValue';
 import useTypedEffect from './hooks/useTypedEffect';
-
-const getPrefixCls = (suffixCls?: string, customizePrefixCls?: string) => {
-  if (customizePrefixCls) {
-    return customizePrefixCls;
-  }
-  return suffixCls ? `ant-${suffixCls}` : 'ant';
-};
+import getPrefixCls from '../_util/getPrefixCls';
 
 const Bubble: React.FC<Readonly<BubbleProps>> = (props) => {
   const {
@@ -32,6 +26,7 @@ const Bubble: React.FC<Readonly<BubbleProps>> = (props) => {
   } = props;
 
   const prefixCls = getPrefixCls('bubble', customizePrefixCls);
+
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
 
   const mergedTyping = useTypingValue(typing);

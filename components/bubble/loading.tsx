@@ -4,13 +4,13 @@ interface LoadingProps {
   prefixCls?: string;
 }
 
-const Loading: React.FC<LoadingProps> = (props) => {
+const Loading: React.FC<Readonly<LoadingProps>> = (props) => {
   const { prefixCls } = props;
   return (
     <span className={`${prefixCls}-dot`}>
-      <i className={`${prefixCls}-dot-item`} key={1} />
-      <i className={`${prefixCls}-dot-item`} key={2} />
-      <i className={`${prefixCls}-dot-item`} key={3} />
+      <i className={`${prefixCls}-dot-item`} key={`item-${1}`} />
+      <i className={`${prefixCls}-dot-item`} key={`item-${2}`} />
+      <i className={`${prefixCls}-dot-item`} key={`item-${3}`} />
     </span>
   );
 };
