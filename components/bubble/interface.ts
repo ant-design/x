@@ -27,5 +27,5 @@ export interface BubbleProps extends React.HTMLAttributes<HTMLDivElement> {
   loading?: boolean;
   typing?: boolean | TypingOption;
   content: string;
-  messageRender?: (content?: string) => React.ReactNode;
+  messageRender?: (content: string) => React.ReactNode;
 }

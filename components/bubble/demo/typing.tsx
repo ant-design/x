@@ -2,27 +2,29 @@ import React from 'react';
 import { UserOutlined } from '@ant-design/icons';
 import { Bubble } from '@ant-design/x';
 
-const sentences = ['Feel free to use Ant Design !', '欢迎使用 Ant Design！'];
-
-const useLoopSentence = () => {
-  const [index, setIndex] = React.useState<number>(0);
-  const timerRef = React.useRef<ReturnType<typeof setTimeout>>();
-  React.useEffect(() => {
-    timerRef.current = setTimeout(
-      () => setIndex((prevState) => (prevState ? 0 : 1)),
-      sentences[index].length * 100 + 1000,
-    );
-    return () => clearTimeout(timerRef.current);
-  }, [index]);
-  return sentences[index];
-};
+const text = 'Ant Design X love you!';
 
 const App = () => {
-  const content = useLoopSentence();
+  const [renderKey, setRenderKey] = React.useState(0);
+
+  React.useEffect(() => {
+    const id = setTimeout(
+      () => {
+        setRenderKey((prev) => prev + 1);
+      },
+      text.length * 100 + 2000,
+    );
+
+    return () => {
+      clearTimeout(id);
+    };
+  }, [renderKey]);
+
   return (
     <Bubble
-      content={content}
-      typing={{ step: 1, interval: 100 }}
+      key={renderKey}
+      content={text}
+      typing={{ step: 2, interval: 100 }}
       avatar={{ icon: <UserOutlined /> }}
     />
   );
