@@ -22,7 +22,7 @@ const Bubble: React.FC<Readonly<BubbleProps>> = (props) => {
     loading = false,
     typing,
     content = '',
-    contentRender,
+    messageRender,
     ...otherHtmlProps
   } = props;
 
@@ -46,14 +46,14 @@ const Bubble: React.FC<Readonly<BubbleProps>> = (props) => {
     hashId,
     cssVarCls,
     `${prefixCls}-${placement}`,
-    { [`${prefixCls}-typing`]: isTyping && !loading && !contentRender },
+    { [`${prefixCls}-typing`]: isTyping && !loading && !messageRender },
   );
 
   // ============================ Avatar ============================
   const avatarNode = React.isValidElement(avatar) ? avatar : <Avatar {...avatar} />;
 
   // =========================== Content ============================
-  const mergedContent = contentRender ? contentRender(typedContent) : typedContent;
+  const mergedContent = messageRender ? messageRender(typedContent) : typedContent;
 
   // ============================ Render ============================
   return wrapCSSVar(

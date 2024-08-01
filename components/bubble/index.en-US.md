@@ -20,7 +20,7 @@ Often used when chatting.
 <code src="./demo/avatar-and-placement.tsx">Placement and avatar</code>
 <code src="./demo/loading.tsx">Loading</code>
 <code src="./demo/typing.tsx">Typing effect</code>
-<code src="./demo/contentRender.tsx">Content render</code>
+<code src="./demo/markdown.tsx">Content render</code>
 
 ## API
 
@@ -37,7 +37,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | loading       | Loading state of Message        | `boolean`                                           | -       |         |
 | typing        | Show message with typing motion | `boolean \| { step?: number, interval?: number }`   | `false` |         |
 | content       | Content of bubble               | `string`                                            | -       |         |
-| contentRender | Display cuztomized content      | `(content?: string) => ReactNode`                   | -       |         |
+| messageRender | Display customized content      | `(content?: string) => ReactNode`                   | -       |         |
 
 ## Semantic DOM
 
