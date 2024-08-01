@@ -70,6 +70,7 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
       [`& ${componentCls}-avatar`]: {
         display: 'inline-flex',
         justifyContent: 'center',
+        alignSelf: 'flex-start',
       },
       [`& ${componentCls}-content`]: {
         position: 'relative',

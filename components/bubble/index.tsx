@@ -4,10 +4,10 @@ import classnames from 'classnames';
 import type { BubbleProps } from './interface';
 import Loading from './loading';
 import useStyle from './style';
-import useTypingValue from './hooks/useTypingValue';
 import useTypedEffect from './hooks/useTypedEffect';
 import getPrefixCls from '../_util/getPrefixCls';
 import { Avatar } from 'antd';
+import useTypingConfig from './hooks/useTypingConfig';
 
 const Bubble: React.FC<Readonly<BubbleProps>> = (props) => {
   const {
@@ -21,7 +21,7 @@ const Bubble: React.FC<Readonly<BubbleProps>> = (props) => {
     placement = 'start',
     loading = false,
     typing,
-    content,
+    content = '',
     contentRender,
     ...otherHtmlProps
   } = props;
@@ -30,9 +30,14 @@ const Bubble: React.FC<Readonly<BubbleProps>> = (props) => {
 
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
 
-  const mergedTyping = useTypingValue(typing);
+  const [typingEnabled, typingStep, typingInterval] = useTypingConfig(typing);
 
-  const { typedContent, isTyping } = useTypedEffect(content, mergedTyping);
+  const [typedContent, isTyping] = useTypedEffect(
+    content,
+    typingEnabled,
+    typingStep,
+    typingInterval,
+  );
 
   const mergedCls = classnames(
     className,
@@ -48,9 +53,7 @@ const Bubble: React.FC<Readonly<BubbleProps>> = (props) => {
   const avatarNode = React.isValidElement(avatar) ? avatar : <Avatar {...avatar} />;
 
   // =========================== Content ============================
-  const mergedText = mergedTyping !== false ? typedContent : content;
-
-  const mergedContent = contentRender ? contentRender(mergedText) : mergedText;
+  const mergedContent = contentRender ? contentRender(typedContent) : typedContent;
 
   // ============================ Render ============================
   return wrapCSSVar(

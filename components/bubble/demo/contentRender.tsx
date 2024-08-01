@@ -34,13 +34,16 @@ const contentRender: BubbleProps['contentRender'] = (content) => {
 
 const App = () => {
   const content = useLoopSentence();
+
   return (
-    <Bubble
-      typing
-      content={content}
-      contentRender={contentRender}
-      avatar={{ icon: <UserOutlined /> }}
-    />
+    <div style={{ height: 100 }}>
+      <Bubble
+        typing
+        content={content}
+        contentRender={contentRender}
+        avatar={{ icon: <UserOutlined /> }}
+      />
+    </div>
   );
 };
 

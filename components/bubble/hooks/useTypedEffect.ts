@@ -1,46 +1,39 @@
-import React from 'react';
+import * as React from 'react';
+import useLayoutEffect from 'rc-util/lib/hooks/useLayoutEffect';
 
-import type { TypingOption } from '../interface';
+/**
+ * Return typed content and typing status when typing is enabled.
+ * Or return content directly.
+ */
+const useTypedEffect = (
+  content: string,
+  typingEnabled: boolean,
+  typingStep: number,
+  typingInterval: number,
+): [typedContent: string, isTyping: boolean] => {
+  const [typingIndex, setTypingIndex] = React.useState<number>(0);
 
-const useTypedEffect = (content?: string, mergedTyping?: Required<TypingOption> | false) => {
-  const [typedContent, setTypedContent] = React.useState<string>('');
-  const [isTyping, setIsTyping] = React.useState<boolean>(mergedTyping !== false);
+  // Reset typing index when content changed
+  useLayoutEffect(() => {
+    setTypingIndex(0);
+  }, [content, typingEnabled]);
 
-  const timerRef = React.useRef<ReturnType<typeof setTimeout>>();
-
-  const clearTimer = () => {
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
-    }
-  };
-
+  // Start typing
   React.useEffect(() => {
-    if (!content || !mergedTyping) {
-      return;
+    if (typingIndex < content.length) {
+      const id = setTimeout(() => {
+        setTypingIndex((prev) => prev + typingStep);
+      }, typingInterval);
+
+      return () => {
+        clearTimeout(id);
+      };
     }
-    setIsTyping(true);
-    let stepCount = 0;
-    const { step, interval } = mergedTyping;
+  }, [typingIndex, typingEnabled]);
 
-    const typedTimer = () => {
-      stepCount += step;
-      setTypedContent(content.slice(0, stepCount) ?? '');
-      if (stepCount < content.length) {
-        timerRef.current = setTimeout(typedTimer, interval);
-      } else {
-        setIsTyping(false);
-      }
-    };
+  const mergedTypingContent = typingEnabled ? content.slice(0, typingIndex) : content;
 
-    typedTimer();
-
-    return () => {
-      clearTimer();
-      setIsTyping(false);
-    };
-  }, [content, mergedTyping]);
-
-  return { typedContent, isTyping };
+  return [mergedTypingContent, typingEnabled && typingIndex < content.length];
 };
 
 export default useTypedEffect;
