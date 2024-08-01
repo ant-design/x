@@ -21,7 +21,7 @@ demo:
 <code src="./demo/avatar-and-placement.tsx">支持位置和头像</code>
 <code src="./demo/loading.tsx">加载中</code>
 <code src="./demo/typing.tsx">打字效果</code>
-<code src="./demo/contentRender.tsx">自定义渲染</code>
+<code src="./demo/markdown.tsx">自定义渲染</code>
 
 ## API
 
@@ -38,7 +38,7 @@ demo:
 | loading       | 聊天内容加载状态     | `boolean`                                           | -       |      |
 | typing        | 设置聊天内容打字动画 | `boolean \| { step?: number, interval?: number }`   | `false` |      |
 | content       | 聊天内容             | `string`                                            | -       |      |
-| contentRender | 自定义渲染内容       | `(content?: string) => ReactNode`                   | -       |      |
+| messageRender | 自定义渲染内容       | `(content?: string) => ReactNode`                   | -       |      |
 
 ## Semantic DOM
 

@@ -11,16 +11,16 @@ const useTypedEffect = (
   typingStep: number,
   typingInterval: number,
 ): [typedContent: string, isTyping: boolean] => {
-  const [typingIndex, setTypingIndex] = React.useState<number>(0);
+  const [typingIndex, setTypingIndex] = React.useState<number>(1);
 
   // Reset typing index when content changed
   useLayoutEffect(() => {
-    setTypingIndex(0);
+    setTypingIndex(1);
   }, [content, typingEnabled]);
 
   // Start typing
   React.useEffect(() => {
-    if (typingIndex < content.length) {
+    if (typingEnabled && typingIndex < content.length) {
       const id = setTimeout(() => {
         setTypingIndex((prev) => prev + typingStep);
       }, typingInterval);

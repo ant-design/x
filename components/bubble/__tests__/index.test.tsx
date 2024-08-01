@@ -28,16 +28,16 @@ describe('bubble', () => {
     expect(element?.textContent).toBe('hello world');
   });
 
-  it('Bubble support contentRender', () => {
+  it('Bubble support messageRender', () => {
     const { container } = render(
       <Bubble
-        content="test-contentRender"
-        contentRender={(content) => <span className="test-contentRender">{content}</span>}
+        content="test-messageRender"
+        messageRender={(content) => <span className="test-messageRender">{content}</span>}
       />,
     );
-    const element = container.querySelector<HTMLSpanElement>('.ant-bubble .test-contentRender');
+    const element = container.querySelector<HTMLSpanElement>('.ant-bubble .test-messageRender');
     expect(element).toBeTruthy();
-    expect(element?.textContent).toBe('test-contentRender');
+    expect(element?.textContent).toBe('test-messageRender');
   });
 
   it('Bubble support typing', () => {
