@@ -4,43 +4,44 @@ import { UserOutlined } from '@ant-design/icons';
 import markdownit from 'markdown-it';
 import { Bubble } from '@ant-design/x';
 import type { BubbleProps } from '@ant-design/x';
-
-const sentences = [
-  '# Title \n An enterprise-class UI design language and React UI library. \n ...丨',
-  '# 标题 \n 企业级产品设计体系，创造高效愉悦的工作体验。\n ...丨',
-];
+import { Typography } from 'antd';
 
 const md = markdownit({ html: true, breaks: true });
 
-const useLoopSentence = () => {
-  const [index, setIndex] = React.useState<number>(0);
-  const timerRef = React.useRef<ReturnType<typeof setTimeout>>();
-  React.useEffect(() => {
-    timerRef.current = setTimeout(
-      () => setIndex((prevState) => (prevState ? 0 : 1)),
-      sentences[index].length * 100 + 1000,
-    );
-    return () => clearTimeout(timerRef.current);
-  }, [index]);
-  return sentences[index];
-};
+const text = `
+> Render as markdown content to show rich text!
 
-const contentRender: BubbleProps['contentRender'] = (content) => {
-  if (!content) {
-    return null;
-  }
-  return <span dangerouslySetInnerHTML={{ __html: md.render(content) }} />;
-};
+Link: [Ant Design X](https://x.ant.design)
+`.trim();
+
+const contentRender: BubbleProps['messageRender'] = (content) => (
+  <Typography>
+    <div dangerouslySetInnerHTML={{ __html: md.render(content) }} />
+  </Typography>
+);
 
 const App = () => {
-  const content = useLoopSentence();
+  const [renderKey, setRenderKey] = React.useState(0);
+
+  React.useEffect(() => {
+    const id = setTimeout(
+      () => {
+        setRenderKey((prev) => prev + 1);
+      },
+      text.length * 100 + 2000,
+    );
+
+    return () => {
+      clearTimeout(id);
+    };
+  }, [renderKey]);
 
   return (
-    <div style={{ height: 100 }}>
+    <div style={{ height: 100 }} key={renderKey}>
       <Bubble
         typing
-        content={content}
-        contentRender={contentRender}
+        content={text}
+        messageRender={contentRender}
         avatar={{ icon: <UserOutlined /> }}
       />
     </div>
