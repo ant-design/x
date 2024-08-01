@@ -1,3 +1,5 @@
+import type { AvatarProps } from 'antd';
+
 export interface TypingOption {
   /**
    * @default 1
@@ -20,7 +22,7 @@ export interface BubbleProps extends React.HTMLAttributes<HTMLDivElement> {
     avatar?: React.CSSProperties;
     content?: React.CSSProperties;
   };
-  avatar?: React.ReactNode;
+  avatar?: AvatarProps | React.ReactElement;
   placement?: 'start' | 'end';
   loading?: boolean;
   typing?: boolean | TypingOption;

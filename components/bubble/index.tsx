@@ -7,6 +7,7 @@ import useStyle from './style';
 import useTypingValue from './hooks/useTypingValue';
 import useTypedEffect from './hooks/useTypedEffect';
 import getPrefixCls from '../_util/getPrefixCls';
+import { Avatar } from 'antd';
 
 const Bubble: React.FC<Readonly<BubbleProps>> = (props) => {
   const {
@@ -43,22 +44,32 @@ const Bubble: React.FC<Readonly<BubbleProps>> = (props) => {
     { [`${prefixCls}-typing`]: isTyping && !loading && !contentRender },
   );
 
-  const mergedAvatarCls = classnames(`${prefixCls}-avatar`, classNames?.avatar);
+  // ============================ Avatar ============================
+  const avatarNode = React.isValidElement(avatar) ? avatar : <Avatar {...avatar} />;
 
-  const mergedContentCls = classnames(`${prefixCls}-content`, classNames?.content);
-
+  // =========================== Content ============================
   const mergedText = mergedTyping !== false ? typedContent : content;
 
   const mergedContent = contentRender ? contentRender(mergedText) : mergedText;
 
+  // ============================ Render ============================
   return wrapCSSVar(
     <div style={style} className={mergedCls} {...otherHtmlProps}>
+      {/* Avatar */}
       {avatar && (
-        <div style={styles?.avatar} className={mergedAvatarCls}>
-          {avatar}
+        <div
+          style={styles?.avatar}
+          className={classnames(`${prefixCls}-avatar`, classNames?.avatar)}
+        >
+          {avatarNode}
         </div>
       )}
-      <div style={styles?.content} className={mergedContentCls}>
+
+      {/* Content */}
+      <div
+        style={styles?.content}
+        className={classnames(`${prefixCls}-content`, classNames?.content)}
+      >
         {loading ? <Loading prefixCls={prefixCls} /> : mergedContent}
       </div>
     </div>,
