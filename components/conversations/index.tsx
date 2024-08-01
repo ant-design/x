@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Button, Dropdown } from 'antd';
+import { Button, Dropdown, Typography } from 'antd';
 import { MoreOutlined } from '@ant-design/icons';
 import classnames from 'classnames';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
@@ -24,7 +24,6 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
     styles,
     classNames,
   } = props;
-
 
   const [mergedActiveKey, setMergedActiveKey] = useMergedState(defaultActiveKey, {
     value: activeKey,
@@ -79,11 +78,15 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
         onClick={itemProps.onClick}
         key={key}
       >
-        <span className={mergedLabelCls}>{label}</span>
+        <Typography.Text
+          className={mergedLabelCls}
+          ellipsis={{ tooltip: label }}
+        >
+          {label}
+        </Typography.Text>
         {menu &&
           <Dropdown
             menu={menu}
-            autoAdjustOverflow
             getPopupContainer={(triggerNode) => triggerNode.parentElement ?? document.body}
           >
             <Button

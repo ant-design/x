@@ -8,18 +8,18 @@ export interface ConversationsToken extends FullToken<'Conversations'> { };
 
 const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
 
-  const { componentCls, paddingSM, colorBgTextActive, borderRadius, colorBgTextHover, colorText } = token;
+  const { componentCls, paddingSM, colorBgTextActive, borderRadius, colorBgTextHover, colorText, lineHeight, fontSize, paddingXS } = token;
 
   return {
     [componentCls]: {
       display: 'flex',
-      gap: 8,
+      gap: paddingXS,
       flexDirection: 'column',
       width: 268,
       [`& ${componentCls}-item`]: {
         display: 'flex',
         alignItems: 'center',
-        height: 20,
+        height: lineHeight * fontSize,
         borderRadius,
         padding: paddingSM,
         '&:hover': {

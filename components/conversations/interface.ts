@@ -42,8 +42,6 @@ export interface ConversationProps extends Record<string, any> {
   pinned?: boolean;
 };
 
-
-
 /**
  * @desc 会话列表组件参数
  * @descEN Props for the conversation list component
