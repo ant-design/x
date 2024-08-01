@@ -116,6 +116,7 @@
     "@ant-design/colors": "^7.1.0",
     "@ant-design/cssinjs": "^1.21.0",
     "@ant-design/cssinjs-utils": "^1.0.3",
+    "@ant-design/icons": "^5.4.0",
     "@babel/runtime": "^7.24.8",
     "@ctrl/tinycolor": "^4.1.0",
     "classnames": "^2.5.1",
