@@ -1,6 +1,5 @@
 import React from 'react';
 import { UserOutlined } from '@ant-design/icons';
-import { Avatar } from 'antd';
 import { Bubble } from '@ant-design/x';
 
 const sentences = ['Feel free to use Ant Design !', '欢迎使用 Ant Design！'];
@@ -24,7 +23,7 @@ const App = () => {
     <Bubble
       content={content}
       typing={{ step: 1, interval: 100 }}
-      avatar={<Avatar size={32} icon={<UserOutlined />} />}
+      avatar={{ icon: <UserOutlined /> }}
     />
   );
 };

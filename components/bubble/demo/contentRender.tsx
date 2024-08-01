@@ -1,7 +1,6 @@
 /* eslint-disable react/no-danger */
 import React from 'react';
 import { UserOutlined } from '@ant-design/icons';
-import { Avatar } from 'antd';
 import markdownit from 'markdown-it';
 import { Bubble } from '@ant-design/x';
 import type { BubbleProps } from '@ant-design/x';
@@ -40,7 +39,7 @@ const App = () => {
       typing
       content={content}
       contentRender={contentRender}
-      avatar={<Avatar size={32} icon={<UserOutlined />} />}
+      avatar={{ icon: <UserOutlined /> }}
     />
   );
 };

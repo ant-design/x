@@ -1,17 +1,13 @@
 import React from 'react';
 import { UserOutlined } from '@ant-design/icons';
-import { Avatar, Flex, Switch } from 'antd';
+import { Flex, Switch } from 'antd';
 import { Bubble } from '@ant-design/x';
 
 const App: React.FC = () => {
   const [loading, setLoading] = React.useState<boolean>(true);
   return (
     <Flex gap="large" vertical>
-      <Bubble
-        loading={loading}
-        content="hello world !"
-        avatar={<Avatar size={32} icon={<UserOutlined />} />}
-      />
+      <Bubble loading={loading} content="hello world !" avatar={{ icon: <UserOutlined /> }} />
       <Flex gap="large" wrap>
         Loading state:
         <Switch checked={loading} onChange={setLoading} />
