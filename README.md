@@ -1,6 +1,6 @@
 <div align="center"><a name="readme-top"></a>
 
-<img height="180" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg">
+<img height="180" src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*1SDwSrOnSakAAAAAAAAAAAAADgCCAQ/original">
 
 <h1>Ant Design</h1>
 
