@@ -6,7 +6,7 @@ description: A bubble component for chat.
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*HjY3QKszqFEAAAAAAAAAAAAADrJ8AQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*G8njQogkGwAAAAAAAAAAAAAADrJ8AQ/original
 demo:
-  cols: 2
+  cols: 1
 ---
 
 ## When To Use
