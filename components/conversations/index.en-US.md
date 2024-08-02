@@ -20,34 +20,35 @@ demo:
 <code src="./demo/basic.tsx">Basic</code>
 <code src="./demo/with-menu.tsx">Operations</code>
 <code src="./demo/controlled-mode.tsx">Controlled Mode</code>
-<code src="./demo/sorter-by-time.tsx">Sorter</code>
+<code src="./demo/group.tsx">Group</code>
 
 ## API
 
 Common props ref：[Common props](/docs/react/common-props)
 
-#### Conversations
+### ConversationsProps
 
-| Property    | Description             | Type                               | Default | Version |
-|-------------|-------------------------|------------------------------------|---------|---------|
-| `data`      | Conversations data source   | `ConversationProps[]`              | -       | -       |
-| `activeKey` | Currently selected key  | `ConversationProps['key']`         | -       | -       |
-| `onChange`  | Change callback         | `(value: ConversationProps) => void` | -     | -       |
-| `menu`      | Chat operation menu     | `MenuProps['items']`               | -       | -       |
-| `sorter`    | Sorting method          | `'SORT_BY_TIME'`                   | -       | -       |
-| `styles`    | Semantic structure styles | `Record<'list' \| 'item', React.CSSProperties>` | - | -    |
-| `classNames`| Semantic structure classNames | `Record<'list' \| 'item', string>` | - | -    |
+| Property           | Description                  | Type                                                                                          | Default | Version |
+|--------------------|------------------------------|-----------------------------------------------------------------------------------------------|---------|---------|
+| data               | Data source for conversation list | `ConversationProps[]`                                                                         | -       | -       |
+| activeKey          | Currently selected value     | `ConversationProps['key']`                                                                    | -       | -       |
+| defaultActiveKey   | Default selected value       | `ConversationProps['key']`                                                                    | -       | -       |
+| onActiveChange     | Callback for selection change | (value: `ConversationProps['key']`, preValue: `ConversationProps['key']`) => void              | -       | -       |
+| menu               | Operation menu for conversations | MenuProps \| ((value: `ConversationProps`) => MenuProps)                               | -       | -       |
+| groupable          | If grouping is supported, it defaults to the `ConversationProps.group` field | boolean \| { components?: Record<'title', React.ComponentType<{ group: GroupType }>> } | -       | -       |
+| styles             | Semantic structure styles    | Record<'list' \| 'item', React.CSSProperties>                                                 | -       | -       |
+| classNames         | Semantic structure class names | Record<'list' \| 'item', string>                                                              | -       | -       |
 
-#### Conversation
+### ConversationProps
 
-| Property   | Description       | Type               | Default | Version |
-|------------|-------------------|--------------------|---------|---------|
-| `key`      | Unique identifier | `string`           | -       | -       |
-| `label`    | Chat name         | `string`           | -       | -       |
-| `timestamp`| Chat timestamp    | `number`           | -       | -       |
-| `pinned`    | Pinned to top     | `boolean`          | -       | -       |
-
-## Semantic DOM
+| Property  | Description                | Type              | Default | Version |
+|-----------|----------------------------|-------------------|---------|---------|
+| key       | Unique identifier          | string            | -       | -       |
+| label     | Conversation name          | React.ReactNode   | -       | -       |
+| timestamp | Conversation timestamp     | number            | -       | -       |
+| group     | Conversation type, linked to `ConversationsProps.groupable` |  string | -       | -       |
+| icon      | Conversation icon          | React.ReactNode   | -       | -       |
+| disabled  | Whether to disable         | boolean           | -       | -       |
 
 
 ## Design Token

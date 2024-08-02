@@ -4,4 +4,4 @@
 
 ## en-US
 
-Use the 'menu' property to configure conversation.
+Use the `menu` property to configure conversation.

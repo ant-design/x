@@ -1,16 +1,8 @@
-import type { ReactNode } from 'react';
+import type React from 'react';
 import type { MenuProps } from 'antd';
 import type { BaseProps } from '../_util/type';
 
-/**
- * @desc 会话列表排序方式
- * @descEN Sort method for the conversation list
- */
-export type SorterType = 'TIME_ACS' | 'TIME_DESC';
-
-export type SorterMap = {
-  [key in SorterType]?: (data: ConversationProps[]) => ConversationProps[];
-};
+export type GroupType = string;
 
 /**
  * @desc 会话数据
@@ -27,7 +19,7 @@ export interface ConversationProps extends Record<string, any> {
    * @desc 会话名称
    * @descEN Conversation name
    */
-  label?: ReactNode;
+  label?: React.ReactNode;
 
   /**
    * @desc 会话时间戳
@@ -36,22 +28,16 @@ export interface ConversationProps extends Record<string, any> {
   timestamp?: number;
 
   /**
-  * @desc 是否固定于顶部
-  * @descEN Whether to pin to the top
-  */
-  pinned?: boolean;
-
-  /**
-   * @desc 会话分组类型
+   * @desc 会话分组类型，与 {@link ConversationsProps.groupable} 联动
    * @descEN Conversation type
    */
-  type?: string;
+  group?: GroupType;
 
   /**
    * @desc 会话图标
    * @descEN conversation icon
    */
-  icon?: ReactNode;
+  icon?: React.ReactNode;
 
   /**
    * @desc 是否禁用
@@ -64,7 +50,7 @@ export interface ConversationProps extends Record<string, any> {
  * @desc 会话列表组件参数
  * @descEN Props for the conversation list component
  */
-export interface ConversationsProps extends BaseProps {
+export interface ConversationsProps extends BaseProps, React.HTMLAttributes<HTMLUListElement> {
 
   /**
    * @desc 会话列表数据源
@@ -94,13 +80,19 @@ export interface ConversationsProps extends BaseProps {
    * @desc 会话操作菜单
    * @descEN Operation menu for conversations
    */
-  menu?: MenuProps | ((value: ConversationProps['key']) => MenuProps);
+  menu?: MenuProps | ((value: ConversationProps) => MenuProps);
 
   /**
-   * @desc 排序方式
-   * @descEN Sorting method
+   * @desc 是否支持分组, 开启后默认按 {@link ConversationProps.group} 字段分组
+   * @descEN If grouping is supported, it defaults to the {@link ConversationProps.group} field
    */
-  sorter?: SorterType;
+  groupable?: boolean | {
+    /**
+     * @desc 语义化自定义渲染
+     * @descEN Semantic custom rendering
+     */
+    components?: Record<'title', React.ComponentType<{ group: GroupType }>>;
+  };
 
   /** 
    * @desc 语义化结构 style

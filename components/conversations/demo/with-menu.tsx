@@ -1,10 +1,10 @@
 import React from 'react';
-import { message } from 'antd';
 import { Conversations } from '@ant-design/x';
-import type { ConversationProps } from '@ant-design/x';
+import type { ConversationProps, ConversationsProps } from '@ant-design/x';
 import { EditOutlined, DeleteOutlined, GithubOutlined, CarOutlined, AlipayCircleOutlined } from '@ant-design/icons';
+import { message } from 'antd';
 
-const data: ConversationProps[] = [
+const dataSource: ConversationProps[] = [
   // 基础示例
   {
     key: 'demo1',
@@ -35,33 +35,49 @@ const data: ConversationProps[] = [
   },
 ];
 
-const menuItems = [
-  {
-    label: '重命名',
-    key: 'mod',
-    icon: <EditOutlined />,
-  },
-  {
-    label: '删除',
-    key: 'delete',
-    icon: <DeleteOutlined />,
-    danger: true,
-  },
-];
+const App = () => {
 
-const App = () => (
-  <div>
+  const [data, setData] = React.useState(dataSource);
+
+  const menuConfig: ConversationsProps['menu'] = (convInfo) => ({
+    items: [
+     
+      {
+        label: '重命名',
+        key: 'mod',
+        icon: <EditOutlined />,
+        disabled: typeof convInfo.label !== 'string',
+
+      },
+      {
+        label: '删除',
+        key: 'delete',
+        icon: <DeleteOutlined />,
+        danger: true,
+      },
+    ],
+    onClick: (menuInfo) => {
+      switch (menuInfo.key) {
+        case 'delete':
+          setData(data.filter((item) => convInfo.key !== item.key));
+          break;
+        case 'mod':
+          message.info(`${menuInfo.key} ${convInfo.key}`);
+          break;
+        default:
+          break;
+      }
+
+    },
+  });
+
+  return (
     <Conversations
-      menu={{
-        items: menuItems,
-        onClick: (v) => {
-          message.info(`${v.key} clicked`);
-        },
-      }}
-      defaultActiveKey="demo2"
+      menu={menuConfig}
+      defaultActiveKey="demo3"
       data={data}
     />
-  </div>
-);
+  )
+}
 
 export default App;
