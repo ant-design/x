@@ -11,11 +11,15 @@ const useTypedEffect = (
   typingStep: number,
   typingInterval: number,
 ): [typedContent: string, isTyping: boolean] => {
+  const [prevContent, setPrevContent] = React.useState<string>('');
   const [typingIndex, setTypingIndex] = React.useState<number>(1);
 
   // Reset typing index when content changed
-  useLayoutEffect(() => {
-    setTypingIndex(1);
+  React.useEffect(() => {
+    setPrevContent(content);
+    if (content.indexOf(prevContent) !== 0) {
+      setTypingIndex(1);
+    }
   }, [content, typingEnabled]);
 
   // Start typing
@@ -29,7 +33,7 @@ const useTypedEffect = (
         clearTimeout(id);
       };
     }
-  }, [typingIndex, typingEnabled]);
+  }, [typingIndex, typingEnabled, content]);
 
   const mergedTypingContent = typingEnabled ? content.slice(0, typingIndex) : content;
 
