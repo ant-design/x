@@ -67,11 +67,19 @@ describe('bubble', () => {
   });
 
   it('Bubble support typing effect', async () => {
-    const { container } = render(<Bubble typing content="你好你好你好" />);
+    const { container, rerender } = render(<Bubble typing content="你好你好你好" />);
     const element = container.querySelector<HTMLDivElement>('.ant-bubble .ant-bubble-content');
+
     expect(element?.textContent).toBe('你');
     await waitFakeTimer();
     expect(element?.textContent).toBe('你好你好你好');
+
+    // Continue typing
+    rerender(<Bubble typing content="你好你好你好?!" />);
+    expect(element?.textContent).toBe('你好你好你好');
+
+    await waitFakeTimer();
+    expect(element?.textContent).toBe('你好你好你好?!');
   });
 
   it('Bubble Should support className & classNames & style & styles', () => {

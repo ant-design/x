@@ -263,7 +263,9 @@ exports[`renders components/bubble/demo/markdown.tsx extend context correctly 1`
       <article
         class="ant-typography"
       >
-        <div />
+        <div>
+          <blockquote />
+        </div>
       </article>
     </div>
   </div>
@@ -308,7 +310,9 @@ exports[`renders components/bubble/demo/typing.tsx extend context correctly 1`] 
     </div>
     <div
       class="ant-bubble-content"
-    />
+    >
+      A
+    </div>
   </div>
   <button
     class="ant-btn ant-btn-default"
