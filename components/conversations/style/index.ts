@@ -17,7 +17,7 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => ({
       display: 'flex',
       gap: token.paddingXS,
       alignItems: 'center',
-      height: token.lineHeight * token.fontSize,
+      height: token.calc(token.lineHeight).mul(token.fontSize).equal(),
       borderRadius: token.borderRadius,
       padding: token.paddingSM,
       cursor: 'pointer',
@@ -53,7 +53,7 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => ({
     },
     // 会话操作菜单
     [`& ${token.componentCls}-menu`]: {
-      float: 'right',
+      float: 'inline-end',
       fontWeight: token.fontWeightStrong,
       fontSize: token.fontSizeLG,
       display: 'none',
@@ -63,7 +63,7 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => ({
     },
     // 会话图标
     [`& ${token.componentCls}-icon`]: {
-      float: 'left',
+      float: 'inline-start',
     },
   },
 });
