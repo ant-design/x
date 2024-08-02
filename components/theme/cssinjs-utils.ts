@@ -8,13 +8,11 @@ import type {
 } from '@ant-design/cssinjs-utils';
 import type { CSSInterpolation } from '@ant-design/cssinjs';
 import type { AliasToken } from 'antd/es/theme/internal';
-
-import type { ComponentTokenMap } from './components';
 import type { AnyObject } from '../_util/type';
+import type { ComponentTokenMap } from './components';
 
 /** Final token which contains the components level override */
 export type GlobalToken = GlobalTokenTypeUtil<ComponentTokenMap, AliasToken>;
-
 export type OverrideToken = OverrideTokenTypeUtil<ComponentTokenMap, AliasToken>;
 
 export type OverrideComponent = TokenMapKey<ComponentTokenMap>;
