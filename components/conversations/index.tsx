@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Button, Dropdown, Typography } from 'antd';
+import { Dropdown, Typography } from 'antd';
 import { MoreOutlined } from '@ant-design/icons';
 import classnames from 'classnames';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
@@ -18,7 +18,7 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
     data = [],
     activeKey,
     defaultActiveKey = '',
-    onChange,
+    onActiveChange,
     menu,
     sorter,
     styles,
@@ -28,7 +28,7 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
   const [mergedActiveKey, setMergedActiveKey] = useMergedState(defaultActiveKey, {
     value: activeKey,
     defaultValue: defaultActiveKey,
-    onChange,
+    onChange: onActiveChange,
   });
 
   const prefixCls = getPrefixCls('conversations', customizePrefixCls);
@@ -54,7 +54,8 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
     className: classnames(
       classNames?.item,
       `${prefixCls}-item`,
-      { [`${prefixCls}-item-active`]: item.key === mergedActiveKey },
+      { [`${prefixCls}-item-active`]: item.key === mergedActiveKey && !item.disabled },
+      { [`${prefixCls}-item-disabled`]: item.disabled },
     ),
     style: styles?.item,
     onClick: () => setMergedActiveKey(item.key),
@@ -64,10 +65,6 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
   const mergedMenuCls = classnames(`${prefixCls}-menu`, classNames?.item);
 
   const convNodes = sortedData.reduce((nodes, item) => {
-    const {
-      key,
-      label,
-    } = item;
 
     const itemProps = makeItemProps(item);
 
@@ -75,27 +72,30 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
       <li
         className={itemProps.className}
         style={itemProps.style}
-        onClick={itemProps.onClick}
-        key={key}
+        onClick={item.disabled ? undefined : itemProps.onClick}
+        key={item.key}
       >
+        {item.icon && <div className={`${prefixCls}-icon`}>
+          {item.icon}
+        </div>}
         <Typography.Text
           className={mergedLabelCls}
-          ellipsis={{ tooltip: label }}
+          ellipsis={{ tooltip: item.label }}
         >
-          {label}
+          {item.label}
         </Typography.Text>
-        {menu &&
+        {menu && !item.disabled &&
           <Dropdown
-            menu={menu}
+            menu={typeof menu === 'function' ? menu(item.key) : menu}
+            disabled={item.disabled}
             getPopupContainer={(triggerNode) => triggerNode.parentElement ?? document.body}
           >
-            <Button
+            <MoreOutlined
               onClick={(event) => {
                 event.stopPropagation();
               }}
+              disabled={item.disabled}
               className={mergedMenuCls}
-              type="text"
-              icon={<MoreOutlined />}
             />
           </Dropdown>}
       </li>

@@ -40,6 +40,24 @@ export interface ConversationProps extends Record<string, any> {
   * @descEN Whether to pin to the top
   */
   pinned?: boolean;
+
+  /**
+   * @desc 会话分组类型
+   * @descEN Conversation type
+   */
+  type?: string;
+
+  /**
+   * @desc 会话图标
+   * @descEN conversation icon
+   */
+  icon?: ReactNode;
+
+  /**
+   * @desc 是否禁用
+   * @descEN Whether to disable
+   */
+  disabled?: boolean;
 };
 
 /**
@@ -70,13 +88,13 @@ export interface ConversationsProps extends BaseProps {
    * @desc 选中变更回调
    * @descEN Callback for selection change
    */
-  onChange?: (value: ConversationProps['key'], preValue: ConversationProps['key']) => void;
+  onActiveChange?: (value: ConversationProps['key'], preValue: ConversationProps['key']) => void;
 
   /**
    * @desc 会话操作菜单
    * @descEN Operation menu for conversations
    */
-  menu?: MenuProps;
+  menu?: MenuProps | ((value: ConversationProps['key']) => MenuProps);
 
   /**
    * @desc 排序方式

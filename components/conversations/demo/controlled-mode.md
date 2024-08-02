@@ -1,7 +1,9 @@
 ## zh-CN
 
-受控模式
+使用` activeKey `、` onChange `属性
 
 ## en-US
 
-Controlled mode.
+Use the 'activeKey' 'onChange' property to configure conversation.
+
+

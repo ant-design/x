@@ -6,49 +6,67 @@ export interface ComponentToken { };
 
 export interface ConversationsToken extends FullToken<'Conversations'> { };
 
-const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
-
-  const { componentCls, paddingSM, colorBgTextActive, borderRadius, colorBgTextHover, colorText, lineHeight, fontSize, paddingXS } = token;
-
-  return {
-    [componentCls]: {
+const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => ({
+  [token.componentCls]: {
+    display: 'flex',
+    gap: token.paddingXS,
+    flexDirection: 'column',
+    width: 268,
+    // 会话列表项
+    [`& ${token.componentCls}-item`]: {
       display: 'flex',
-      gap: paddingXS,
-      flexDirection: 'column',
-      width: 268,
-      [`& ${componentCls}-item`]: {
-        display: 'flex',
-        alignItems: 'center',
-        height: lineHeight * fontSize,
-        borderRadius,
-        padding: paddingSM,
+      gap: token.paddingXS,
+      alignItems: 'center',
+      height: token.lineHeight * token.fontSize,
+      borderRadius: token.borderRadius,
+      padding: token.paddingSM,
+      cursor: 'pointer',
+      // 悬浮样式
+      '&:hover': {
+        backgroundColor: token.colorBgTextHover,
+      },
+      // 选中样式
+      '&-active': {
+        backgroundColor: token.colorBgTextActive,
         '&:hover': {
-          backgroundColor: colorBgTextHover,
-        },
-        '&-active': {
-          backgroundColor: colorBgTextActive,
-          '&:hover': {
-            backgroundColor: colorBgTextActive,
-          },
-        },
-        '&:hover, &-active': {
-          [`& ${componentCls}-menu`]: {
-            display: 'inline-block',
-          },
+          backgroundColor: token.colorBgTextActive,
         },
       },
-      [`& ${componentCls}-label`]: {
-        flex: 1,
-        color: colorText,
+      // 禁用样式
+      '&-disabled': {
+        cursor: 'not-allowed',
+        [`& ${token.componentCls}-label`]: {
+          color: token.colorTextDisabled,
+        },
       },
-      [`& ${componentCls}-menu`]: {
-        float: 'right',
-        cursor: 'pointer',
-        display: 'none',
+      // 悬浮、选中时激活操作菜单
+      '&:hover, &-active': {
+        [`& ${token.componentCls}-menu`]: {
+          display: 'inline-block',
+        },
       },
     },
-  }
-};
+    // 会话名
+    [`& ${token.componentCls}-label`]: {
+      flex: 1,
+      color: token.colorText,
+    },
+    // 会话操作菜单
+    [`& ${token.componentCls}-menu`]: {
+      float: 'right',
+      fontWeight: token.fontWeightStrong,
+      fontSize: token.fontSizeLG,
+      display: 'none',
+      '&:hover': {
+        color: token.colorIconHover,
+      },
+    },
+    // 会话图标
+    [`& ${token.componentCls}-icon`]: {
+      float: 'left',
+    },
+  },
+});
 
 export const prepareComponentToken: GetDefaultToken<'Conversations'> = () => ({});
 
