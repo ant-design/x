@@ -5,12 +5,10 @@ import cliProgress from 'cli-progress';
 import fs from 'fs-extra';
 import ReactDOMServer from 'react-dom/server';
 
-import { DesignTokenContext } from 'antd/lib/theme/internal';
 import seedToken from 'antd/lib/theme/themes/seed';
-import * as antdStatistic from 'antd/lib/theme/util/statistic';
 import { generateCssinjs, styleFiles } from './generate-cssinjs';
 
-const { statistic } = antdStatistic as any;
+import { DesignTokenContext, statistic } from 'antd/lib/theme/internal';
 
 console.log(`🪄 Collecting token statistics...`);
 
@@ -52,8 +50,5 @@ bar.start(styleFiles.length, 0);
   bar.stop();
   const tokenPath = `${process.cwd()}/components/version/token.json`;
   fs.writeJsonSync(tokenPath, statistic, 'utf8');
-  console.log(
-    chalk.green(`✅ Collected token statistics successfully, check it in`),
-    tokenPath,
-  );
+  console.log(chalk.green(`✅ Collected token statistics successfully, check it in`), tokenPath);
 })();

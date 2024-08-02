@@ -1,8 +1,8 @@
 <div align="center"><a name="readme-top"></a>
 
-<img height="180" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg">
+<img height="180" src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*1SDwSrOnSakAAAAAAAAAAAAADgCCAQ/original">
 
-<h1>Ant Design</h1>
+<h1>Ant Design X</h1>
 
 一套企业级 UI 设计语言和 React 组件库。
 
