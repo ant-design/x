@@ -15,7 +15,7 @@ const useTypedEffect = (
   const [typingIndex, setTypingIndex] = React.useState<number>(1);
 
   // Reset typing index when content changed
-  React.useEffect(() => {
+  useLayoutEffect(() => {
     setPrevContent(content);
     if (content.indexOf(prevContent) !== 0) {
       setTypingIndex(1);
