@@ -53,7 +53,6 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => ({
     },
     // 会话操作菜单
     [`& ${token.componentCls}-menu`]: {
-      float: 'inline-end',
       fontWeight: token.fontWeightStrong,
       fontSize: token.fontSizeLG,
       display: 'none',
@@ -63,7 +62,6 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => ({
     },
     // 会话图标
     [`& ${token.componentCls}-icon`]: {
-      float: 'inline-start',
     },
   },
 });
