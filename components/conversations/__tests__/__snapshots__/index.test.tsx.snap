@@ -17,7 +17,8 @@ exports[`Conversations Component Conversations component work 1`] = `
       </div>
     </div>
     <span
-      class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+      aria-label="What is Ant Design X ?"
+      class="ant-typography ant-typography-ellipsis ant-conversations-label"
     >
       What is Ant Design X ?
     </span>
@@ -26,7 +27,7 @@ exports[`Conversations Component Conversations component work 1`] = `
     class="ant-conversations-item"
   >
     <span
-      class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+      class="ant-typography ant-typography-ellipsis ant-conversations-label"
     >
       <div>
         Getting Started: 
@@ -44,7 +45,8 @@ exports[`Conversations Component Conversations component work 1`] = `
     class="ant-conversations-item"
   >
     <span
-      class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+      aria-label="In Docker, use 🐑 Ollama and initialize"
+      class="ant-typography ant-typography-ellipsis ant-conversations-label"
     >
       In Docker, use 🐑 Ollama and initialize
     </span>
@@ -53,7 +55,8 @@ exports[`Conversations Component Conversations component work 1`] = `
     class="ant-conversations-item ant-conversations-item-disabled"
   >
     <span
-      class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+      aria-label="Expired, please go to the recycle bin to check"
+      class="ant-typography ant-typography-ellipsis ant-conversations-label"
     >
       Expired, please go to the recycle bin to check
     </span>

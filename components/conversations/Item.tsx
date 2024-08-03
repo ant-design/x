@@ -5,7 +5,7 @@ import { MoreOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import type { ConversationProps } from './interface';
 
-interface ConversationsItemProps extends ConversationProps, React.HTMLAttributes<HTMLLIElement> {
+interface ConversationsItemProps extends React.HTMLAttributes<HTMLLIElement> {
   classNames?: {
     item?: string;
     label?: string;
@@ -16,19 +16,22 @@ interface ConversationsItemProps extends ConversationProps, React.HTMLAttributes
   };
   prefixCls?: string;
   menu?: MenuProps;
+  item: ConversationProps;
 }
 
 const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
   const {
     classNames,
     styles,
-    disabled,
     onClick,
-    icon,
-    label,
-    key,
     prefixCls,
     menu,
+    item: {
+      disabled,
+      icon,
+      label,
+      key,
+    }
   } = props;
 
   const [ellipsised, setEllipsised] = React.useState(false);
@@ -37,6 +40,7 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
   return (
     <Tooltip
       title={label}
+      key={key}
       open={ellipsised && opened}
       onOpenChange={(open) => {
         setOpened(open);

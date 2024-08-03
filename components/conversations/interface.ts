@@ -96,18 +96,18 @@ export interface ConversationsProps extends BaseProps, React.HTMLAttributes<HTML
      * @desc 语义化自定义渲染
      * @descEN Semantic custom rendering
      */
-    components?: Record<'title', React.ComponentType<{ group: GroupType }>>;
+    components?: Partial<Record<'title', React.ComponentType<{ group: GroupType }>>>;
   };
 
   /** 
    * @desc 语义化结构 style
    * @descEN Semantic structure styles
    */
-  styles?: Record<'list' | 'item', React.CSSProperties>;
+  styles?: Partial<Record<'list' | 'item', React.CSSProperties>>;
 
   /** 
    * @desc 语义化结构 className
    * @descEN Semantic structure class names
    */
-  classNames?: Record<'list' | 'item', string>;
+  classNames?: Partial<Record<'list' | 'item', string>>;
 };

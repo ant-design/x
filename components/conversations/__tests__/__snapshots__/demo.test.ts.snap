@@ -299,19 +299,9 @@ exports[`renders components/conversations/demo/group.tsx correctly 1`] = `
   </li>
   <li>
     <div
-      class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
+      class="ant-divider ant-divider-horizontal ant-divider-plain"
       role="separator"
-    >
-      <span
-        class="ant-divider-inner-text"
-      >
-        <span
-          class="ant-typography ant-typography-secondary"
-        >
-          default
-        </span>
-      </span>
-    </div>
+    />
   </li>
   <li
     class="ant-conversations-item"

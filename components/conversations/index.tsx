@@ -42,7 +42,8 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
   );
 
   const getItemProps = (item: ConversationProps) => ({
-    ...item,
+    item,
+    key: item.key,
     classNames: {
       item: classnames(
         classNames?.item,
@@ -63,7 +64,7 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
   // // ============================ Render Items ============================
   const convItems = React.useMemo(
     () => {
-      if (!groupable) return data.map(item => React.createElement(ConversationsItem, getItemProps(item)));
+      if (!groupable) return data.map(item => <ConversationsItem {...getItemProps(item)} />);
 
       const map = data.reduce<Record<string, React.ReactNode[]>>(
         (acc, item) => {
@@ -81,7 +82,7 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
             ];
           }
 
-          acc[group].push(React.createElement(ConversationsItem, getItemProps(item)));
+          acc[group].push(<ConversationsItem {...getItemProps(item)} />);
 
           return acc;
         },
