@@ -381,7 +381,7 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
           <span
             class="ant-typography ant-typography-secondary"
           >
-            pinned
+            Group1
           </span>
         </span>
       </div>
@@ -510,9 +510,19 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
     </div>
     <li>
       <div
-        class="ant-divider ant-divider-horizontal ant-divider-plain"
+        class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
         role="separator"
-      />
+      >
+        <span
+          class="ant-divider-inner-text"
+        >
+          <span
+            class="ant-typography ant-typography-secondary"
+          >
+            Group2
+          </span>
+        </span>
+      </div>
     </li>
     <li
       class="ant-conversations-item"
