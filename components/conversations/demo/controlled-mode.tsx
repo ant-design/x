@@ -36,7 +36,7 @@ const App = () => {
         boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
         borderRadius: 8,
         padding: 12,
-        width: 268
+        width: 268,
       }}
     >
       <Conversations

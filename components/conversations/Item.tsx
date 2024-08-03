@@ -31,7 +31,7 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
       icon,
       label,
       key,
-    }
+    },
   } = props;
 
   const [ellipsised, setEllipsised] = React.useState(false);

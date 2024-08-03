@@ -1,8 +1,8 @@
 import React from 'react';
-import Conversations from '..';
+import Conversations from '../index';
 import { render, fireEvent } from '../../../tests/utils';
 
-import type { ConversationProps } from '..';
+import type { ConversationProps } from '../index';
 import mountTest from '../../../tests/shared/mountTest';
 
 
@@ -12,7 +12,7 @@ const data: ConversationProps[] = [
     label: 'What is Ant Design X ?',
     timestamp: 794620800,
     icon: <div id="conversation-test-id">icon</div>,
-    group: 'pinned'
+    group: 'pinned',
   },
   {
     key: 'demo2',

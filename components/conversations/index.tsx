@@ -43,7 +43,6 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
 
   const getItemProps = (item: ConversationProps) => ({
     item,
-    key: item.key,
     classNames: {
       item: classnames(
         classNames?.item,
@@ -55,7 +54,7 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
       menu: `${prefixCls}-menu`,
     },
     prefixCls,
-    styles: styles,
+    styles,
     menu: typeof menu === 'function' ? menu(item) : menu,
     onClick: () => setMergedActiveKey(item.key),
   });
@@ -64,7 +63,7 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
   // // ============================ Render Items ============================
   const convItems = React.useMemo(
     () => {
-      if (!groupable) return data.map(item => <ConversationsItem {...getItemProps(item)} />);
+      if (!groupable) return data.map(item => <ConversationsItem key={item.key} {...getItemProps(item)} />);
 
       const map = data.reduce<Record<string, React.ReactNode[]>>(
         (acc, item) => {
@@ -78,15 +77,15 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
             acc[group] = [
               <li key={group}>
                 <GroupTitleComponent group={group} />
-              </li>
+              </li>,
             ];
           }
 
-          acc[group].push(<ConversationsItem {...getItemProps(item)} />);
+          acc[group].push(<ConversationsItem key={item.key} {...getItemProps(item)} />);
 
           return acc;
         },
-        {}
+        {},
       );
 
       if (typeof groupable === 'object' && typeof groupable?.sort === 'function') {
