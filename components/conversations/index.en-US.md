@@ -38,8 +38,8 @@ Common props ref：[Common props](/docs/react/common-props)
 | onActiveChange     | Callback for selection change | (value: string, preValue: string) => void              | -       | -       |
 | menu               | Operation menu for conversations | MenuProps \| ((value: `ConversationProps`) => MenuProps)                               | -       | -       |
 | groupable          | If grouping is supported, it defaults to the `ConversationProps.group` field | boolean \| { components?: Record<'title', React.ComponentType<{ group: string }>> } | -       | -       |
-| styles             | Semantic structure styles    | Record<'list' \| 'item', React.CSSProperties>                                                 | -       | -       |
-| classNames         | Semantic structure class names | Record<'list' \| 'item', string>                                                              | -       | -       |
+| styles             | Semantic structure styles    | Record<'list' \| 'item' \| 'icon' \| 'label' \| 'menuIcon', React.CSSProperties>                                                 | -       | -       |
+| classNames         | Semantic structure class names | Record<'list' \| 'item' \| 'icon' \| 'label' \| 'menuIcon', string>                                                              | -       | -       |
 
 ### ConversationProps
 

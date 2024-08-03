@@ -9,25 +9,27 @@ const data: ConversationProps[] = [
     label: 'What is Ant Design X ?',
     timestamp: 794620800,
     icon: <GithubOutlined />,
-    group: 'pinned',
+    group: 'Group1',
   },
   {
     key: 'demo2',
     label: <div>Getting Started: <a target="_blank" href='https://ant-design.antgroup.com/index-cn' rel="noreferrer">Ant Design !</a></div>,
     timestamp: 794620900,
     icon: <AlipayCircleOutlined />,
-    group: 'pinned',
+    group: 'Group1',
   },
   {
     key: 'demo4',
     label: 'In Docker, use 🐑 Ollama and initialize',
     timestamp: 794621100,
     icon: <DockerOutlined />,
+    group: 'Group2',
   },
   {
     key: 'demo5',
     label: 'Expired, please go to the recycle bin to check',
     timestamp: 794621200,
+    group: 'Group2',
   },
 ];
 
