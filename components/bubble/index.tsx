@@ -5,9 +5,9 @@ import type { BubbleProps } from './interface';
 import Loading from './loading';
 import useStyle from './style';
 import useTypedEffect from './hooks/useTypedEffect';
-import getPrefixCls from '../_util/getPrefixCls';
 import { Avatar } from 'antd';
 import useTypingConfig from './hooks/useTypingConfig';
+import useConfigContext from '../config-provider/useConfigContext';
 
 const Bubble: React.FC<Readonly<BubbleProps>> = (props) => {
   const {
@@ -25,6 +25,8 @@ const Bubble: React.FC<Readonly<BubbleProps>> = (props) => {
     messageRender,
     ...otherHtmlProps
   } = props;
+
+  const { getPrefixCls } = useConfigContext();
 
   const prefixCls = getPrefixCls('bubble', customizePrefixCls);
 
