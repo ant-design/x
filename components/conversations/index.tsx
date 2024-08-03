@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react';
-import { Divider, Dropdown, Typography } from 'antd';
-import { MoreOutlined } from '@ant-design/icons';
+import React from 'react';
+import { Divider, Typography } from 'antd';
 import classnames from 'classnames';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
+import ConversationsItem from './Item';
 
 import useStyle from './style';
 import getPrefixCls from '../_util/getPrefixCls';
@@ -24,13 +24,13 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
     groupable,
   } = props;
 
+  const prefixCls = getPrefixCls('conversations', customizePrefixCls);
+
   const [mergedActiveKey, setMergedActiveKey] = useMergedState(defaultActiveKey, {
     value: activeKey,
     defaultValue: defaultActiveKey,
     onChange: onActiveChange,
   });
-
-  const prefixCls = getPrefixCls('conversations', customizePrefixCls);
 
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
 
@@ -42,23 +42,8 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
     styles?.list,
   );
 
-  const makeItemProps = (item: ConversationProps) => ({
-    className: classnames(
-      classNames?.item,
-      `${prefixCls}-item`,
-      { [`${prefixCls}-item-active`]: item.key === mergedActiveKey && !item.disabled },
-      { [`${prefixCls}-item-disabled`]: item.disabled },
-    ),
-    style: styles?.item,
-    menu: typeof menu === 'function' ? menu(item) : menu,
-    onClick: () => setMergedActiveKey(item.key),
-  });
-
-  const mergedLabelCls = classnames(`${prefixCls}-label`, classNames?.item);
-  const mergedMenuCls = classnames(`${prefixCls}-menu`, classNames?.item);
-
   const groupedMap = data.reduce((map, item) => {
-    const { group = 'default' } = item;
+    const { group = '' } = item;
 
     if (!Array.isArray(map[group])) {
       map[group] = [];
@@ -69,44 +54,26 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
     return map;
   }, {} as Record<GroupType, ConversationProps[]>);
 
-  function renderConversationItem(item: ConversationProps) {
-    const itemProps = makeItemProps(item);
+  const getItemProps = React.useCallback((item: ConversationProps) => ({
+    ...item,
+    classNames: {
+      item: classnames(
+        classNames?.item,
+        `${prefixCls}-item`,
+        { [`${prefixCls}-item-active`]: item.key === mergedActiveKey && !item.disabled },
+        { [`${prefixCls}-item-disabled`]: item.disabled },
+      ),
+      label: classnames(`${prefixCls}-label`, classNames?.item),
+      menu: `${prefixCls}-menu`,
+    },
+    prefixCls,
+    styles: styles,
+    menu: typeof menu === 'function' ? menu(item) : menu,
+    onClick: () => setMergedActiveKey(item.key),
+  }), [classNames, prefixCls, mergedActiveKey, styles, menu, setMergedActiveKey]);
 
-    return (
-      <li
-        className={itemProps.className}
-        style={itemProps.style}
-        onClick={item.disabled ? undefined : itemProps.onClick}
-        key={item.key}
-      >
-        {item.icon && <div className={`${prefixCls}-icon`}>
-          {item.icon}
-        </div>}
-        <Typography.Text
-          className={mergedLabelCls}
-          ellipsis={{ tooltip: item.label }}
-        >
-          {item.label}
-        </Typography.Text>
-        {menu && !item.disabled &&
-          <Dropdown
-            menu={itemProps.menu}
-            disabled={item.disabled}
-            getPopupContainer={(triggerNode) => triggerNode.parentElement ?? document.body}
-          >
-            <MoreOutlined
-              onClick={(event) => {
-                event.stopPropagation();
-              }}
-              disabled={item.disabled}
-              className={mergedMenuCls}
-            />
-          </Dropdown>}
-      </li>
-    )
-  }
-
-  const conversationItems = useMemo(() => Object.keys(groupedMap).reduce(
+  // ============================ Render Items ============================
+  const convItems = React.useMemo(() => Object.keys(groupedMap).reduce(
     (nodes, group) => {
 
       if (groupable) {
@@ -129,15 +96,17 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
 
       return [
         ...nodes,
-        ...groupedMap[group].map(renderConversationItem),
-      ]
+        ...groupedMap[group].map(item => React.createElement(ConversationsItem, getItemProps(item))),
+      ];
     },
     [] as ReactNode[],
-  ), [groupedMap, groupable]);
+  ), [groupedMap, groupable, getItemProps]);
 
+  
+  // ============================ Render ============================
   return wrapCSSVar(
     <ul className={mergedCls} style={styles?.list}>
-      {conversationItems}
+      {convItems}
     </ul>,
   );
 };
