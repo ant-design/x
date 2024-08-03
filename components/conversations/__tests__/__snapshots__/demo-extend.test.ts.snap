@@ -949,7 +949,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
       </span>
       <span
         aria-label="more"
-        class="anticon anticon-more ant-dropdown-trigger ant-conversations-menu"
+        class="anticon anticon-more ant-dropdown-trigger ant-conversations-menu-icon"
         role="img"
         tabindex="-1"
       >
@@ -1143,7 +1143,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
       </span>
       <span
         aria-label="more"
-        class="anticon anticon-more ant-dropdown-trigger ant-conversations-menu"
+        class="anticon anticon-more ant-dropdown-trigger ant-conversations-menu-icon"
         role="img"
         tabindex="-1"
       >
@@ -1336,7 +1336,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
       </span>
       <span
         aria-label="more"
-        class="anticon anticon-more ant-dropdown-trigger ant-conversations-menu"
+        class="anticon anticon-more ant-dropdown-trigger ant-conversations-menu-icon"
         role="img"
         tabindex="-1"
       >

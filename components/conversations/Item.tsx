@@ -1,20 +1,12 @@
 import React from 'react';
 import { Tooltip, Typography, Dropdown } from 'antd';
-import { MoreOutlined } from '@ant-design/icons';
-
 import type { MenuProps } from 'antd';
-import type { ConversationProps } from './interface';
+import { MoreOutlined } from '@ant-design/icons';
+import type { ConversationProps, ConversationsProps } from './interface';
 
 interface ConversationsItemProps extends React.HTMLAttributes<HTMLLIElement> {
-  classNames?: {
-    item?: string;
-    label?: string;
-    menu?: string;
-  };
-  styles?: {
-    item?: React.CSSProperties;
-  };
-  prefixCls?: string;
+  classNames?: ConversationsProps['classNames'];
+  styles?: ConversationsProps['styles'];
   menu?: MenuProps;
   item: ConversationProps;
 }
@@ -24,7 +16,6 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
     classNames,
     styles,
     onClick,
-    prefixCls,
     menu,
     item: {
       disabled,
@@ -52,11 +43,15 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
         onClick={disabled ? undefined : onClick}
         key={key}
       >
-        {icon && <div className={`${prefixCls}-icon`}>
-          {icon}
-        </div>}
+        {icon && (
+          <div className={classNames?.icon} style={styles?.icon}>
+            {icon}
+          </div>
+        )
+        }
         <Typography.Text
           className={classNames?.label}
+          style={styles?.label}
           ellipsis={{
             onEllipsis: setEllipsised,
           }}
@@ -82,7 +77,8 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
                 event.stopPropagation();
               }}
               disabled={disabled}
-              className={classNames?.menu}
+              className={classNames?.menuIcon}
+              style={styles?.menuIcon}
             />
           </Dropdown>}
       </li>

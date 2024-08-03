@@ -87,7 +87,7 @@ describe('Conversations Component', () => {
     });
     const { getByText, container } = render(<Conversations data={data} menu={menu} defaultActiveKey="demo1" />);
     expect(menu).toHaveBeenCalled();
-    const menuElement = container.querySelector('.ant-conversations-menu');
+    const menuElement = container.querySelector('.ant-conversations-menu-icon');
     expect(menuElement).toBeInTheDocument();
     fireEvent.click(menuElement as HTMLElement);
     expect(getByText('重命名')).toBeInTheDocument();

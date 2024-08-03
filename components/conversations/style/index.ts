@@ -41,7 +41,7 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => ({
       },
       // 悬浮、选中时激活操作菜单
       '&:hover, &-active': {
-        [`& ${token.componentCls}-menu`]: {
+        [`& ${token.componentCls}-menu-icon`]: {
           display: 'inline-block',
         },
       },
@@ -52,7 +52,7 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => ({
       color: token.colorText,
     },
     // 会话操作菜单
-    [`& ${token.componentCls}-menu`]: {
+    [`& ${token.componentCls}-menu-icon`]: {
       fontWeight: token.fontWeightStrong,
       fontSize: token.fontSizeLG,
       display: 'none',

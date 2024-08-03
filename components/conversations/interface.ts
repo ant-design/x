@@ -1,6 +1,5 @@
 import type React from 'react';
 import type { MenuProps } from 'antd';
-import type { BaseProps } from '../_util/type';
 
 export type GroupType = string;
 
@@ -50,7 +49,7 @@ export interface ConversationProps extends Record<string, any> {
  * @desc 会话列表组件参数
  * @descEN Props for the conversation list component
  */
-export interface ConversationsProps extends BaseProps, React.HTMLAttributes<HTMLUListElement> {
+export interface ConversationsProps extends React.HTMLAttributes<HTMLUListElement> {
 
   /**
    * @desc 会话列表数据源
@@ -103,11 +102,23 @@ export interface ConversationsProps extends BaseProps, React.HTMLAttributes<HTML
    * @desc 语义化结构 style
    * @descEN Semantic structure styles
    */
-  styles?: Partial<Record<'list' | 'item', React.CSSProperties>>;
+  styles?: Partial<Record<'list' | 'item' | 'icon' | 'label' | 'menuIcon', React.CSSProperties>>;
 
   /** 
    * @desc 语义化结构 className
    * @descEN Semantic structure class names
    */
-  classNames?: Partial<Record<'list' | 'item', string>>;
+  classNames?: Partial<Record<'list' | 'item' | 'icon' | 'label' | 'menuIcon', string>>;
+
+  /**
+   * @desc 自定义前缀
+   * @descEN Prefix
+   */
+  prefixCls?: string;
+
+  /**
+   * @desc 自定义根类名
+   * @descEN Custom class name
+   */
+  rootClassName?: string;
 };

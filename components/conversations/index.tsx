@@ -21,6 +21,7 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
     styles,
     classNames,
     groupable,
+    ...htmlULProps
   } = props;
 
   const prefixCls = getPrefixCls('conversations', customizePrefixCls);
@@ -50,8 +51,9 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
         { [`${prefixCls}-item-active`]: item.key === mergedActiveKey && !item.disabled },
         { [`${prefixCls}-item-disabled`]: item.disabled },
       ),
-      label: `${prefixCls}-label`,
-      menu: `${prefixCls}-menu`,
+      label: classnames(`${prefixCls}-label`, classNames?.label),
+      menuIcon: classnames(`${prefixCls}-menu-icon`, classNames?.menuIcon),
+      icon: classnames(`${prefixCls}-icon`, classNames?.icon),
     },
     prefixCls,
     styles,
@@ -102,7 +104,11 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
 
   // ============================ Render ============================
   return wrapCSSVar(
-    <ul className={mergedCls} style={styles?.list}>
+    <ul
+      {...htmlULProps}
+      className={mergedCls}
+      style={styles?.list}
+    >
       {convItems}
     </ul>,
   );
