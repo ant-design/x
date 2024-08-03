@@ -1,9 +1,8 @@
 import { genStyleUtils } from '@ant-design/cssinjs-utils';
 import type { ComponentTokenMap } from './components';
 import type { AnyObject } from '../_util/type';
-import React from 'react';
 import useAntdToken from 'antd/lib/theme/useToken';
-import { ConfigContext } from 'antd/lib/config-provider';
+import useConfigContext from '../config-provider/useConfigContext';
 
 export const { genStyleHooks, genComponentStyleHook, genSubStyleComponent } = genStyleUtils<
   ComponentTokenMap,
@@ -11,7 +10,7 @@ export const { genStyleHooks, genComponentStyleHook, genSubStyleComponent } = ge
   AnyObject
 >({
   usePrefix: () => {
-    const { getPrefixCls, iconPrefixCls } = React.useContext(ConfigContext);
+    const { getPrefixCls, iconPrefixCls } = useConfigContext();
     return {
       iconPrefixCls,
       rootPrefixCls: getPrefixCls(),
@@ -22,7 +21,7 @@ export const { genStyleHooks, genComponentStyleHook, genSubStyleComponent } = ge
     return { theme, token, hashId, realToken, cssVar };
   },
   useCSP: () => {
-    const { csp } = React.useContext(ConfigContext);
+    const { csp } = useConfigContext();
     return csp ?? {};
   },
 });
