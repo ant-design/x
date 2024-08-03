@@ -41,7 +41,7 @@ const App = () => {
 
   const menuConfig: ConversationsProps['menu'] = (convInfo) => ({
     items: [
-     
+
       {
         label: '重命名',
         key: 'mod',
@@ -72,11 +72,21 @@ const App = () => {
   });
 
   return (
-    <Conversations
-      menu={menuConfig}
-      defaultActiveKey="demo3"
-      data={data}
-    />
+    <div
+      style={{
+        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+        borderRadius: 8,
+        padding: 12,
+        width: 268
+      }}
+    >
+      <Conversations
+        menu={menuConfig}
+        defaultActiveKey="demo3"
+        data={data}
+      />
+    </div>
+
   )
 }
 

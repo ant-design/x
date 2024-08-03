@@ -11,8 +11,8 @@ const data: ConversationProps[] = [
     timestamp: 794620800,
     icon: <GithubOutlined />,
   },
-   // 超长 label 示例
-   {
+  // 超长 label 示例
+  {
     key: 'demo3',
     label: 'Tour Xinjiang north and south big circle travel plan !',
     timestamp: 794621000,
@@ -31,12 +31,21 @@ const App = () => {
   const [activeKey, setActiveKey] = useState<string>();
 
   return (
-    <Conversations
-      defaultActiveKey="demo3"
-      activeKey={activeKey}
-      onActiveChange={(v) => setActiveKey(v)}
-      data={data}
-    />
+    <div
+      style={{
+        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+        borderRadius: 8,
+        padding: 12,
+        width: 268
+      }}
+    >
+      <Conversations
+        defaultActiveKey="demo3"
+        activeKey={activeKey}
+        onActiveChange={(v) => setActiveKey(v)}
+        data={data}
+      />
+    </div>
   )
 }
 

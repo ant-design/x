@@ -32,11 +32,20 @@ const data: ConversationProps[] = [
 ];
 
 const App = () => (
-  <Conversations
-    groupable
-    defaultActiveKey="demo1"
-    data={data}
-  />
+  <div
+    style={{
+      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+      borderRadius: 8,
+      padding: 12,
+      width: 268
+    }}
+  >
+    <Conversations
+      groupable
+      defaultActiveKey="demo1"
+      data={data}
+    />
+  </div>
 );
 
 export default App;

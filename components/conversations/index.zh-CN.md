@@ -22,6 +22,8 @@ demo:
 <code src="./demo/with-menu.tsx">会话操作</code>
 <code src="./demo/controlled-mode.tsx">受控模式</code>
 <code src="./demo/group.tsx">分组展示</code>
+<code src="./demo/group-sort.tsx">分组排序</code>
+<code src="./demo/infinite-load.tsx">滚动加载</code>
 
 
 ## API

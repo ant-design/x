@@ -21,6 +21,8 @@ demo:
 <code src="./demo/with-menu.tsx">Operations</code>
 <code src="./demo/controlled-mode.tsx">Controlled Mode</code>
 <code src="./demo/group.tsx">Group</code>
+<code src="./demo/group-sort.tsx">Group Sort</code>
+<code src="./demo/infinite-load.tsx">Scrolling loaded</code>
 
 ## API
 

@@ -1,36 +1,36 @@
 import React from 'react';
-import { Conversations } from '@ant-design/x';
 import type { ConversationProps } from '@ant-design/x';
+import { Conversations } from '@ant-design/x';
 import { GithubOutlined, AlipayCircleOutlined, DockerOutlined } from '@ant-design/icons';
 
 const data: ConversationProps[] = [
-  // 基础示例
   {
     key: 'demo1',
     label: 'What is Ant Design X ?',
     timestamp: 794620800,
     icon: <GithubOutlined />,
+    group: 'Pinned',
   },
-  // 自定义 label 示例
   {
     key: 'demo2',
     label: <div>Getting Started: <a target="_blank" href='https://ant-design.antgroup.com/index-cn' rel="noreferrer">Ant Design !</a></div>,
     timestamp: 794620900,
     icon: <AlipayCircleOutlined />,
+    group: 'Pinned',
   },
-  // 长 label 示例
+  // 默认分组
   {
     key: 'demo4',
     label: 'In Docker, use 🐑 Ollama and initialize',
     timestamp: 794621100,
     icon: <DockerOutlined />,
   },
-  // 禁用示例
   {
     key: 'demo5',
     label: 'Expired, please go to the recycle bin to check',
     timestamp: 794621200,
     disabled: true,
+    group: 'Expired',
   },
 ];
 
@@ -43,10 +43,18 @@ const App = () => (
       width: 268
     }}
   >
-    <Conversations data={data} defaultActiveKey="demo1" />
+    <Conversations
+      groupable={{
+        sort(a, b) {
+          if (a === b) return 0;
+
+          return a === 'Pinned' ? -1 : 1;
+        }
+      }}
+      defaultActiveKey="demo1"
+      data={data}
+    />
   </div>
 );
-
-
 
 export default App;
