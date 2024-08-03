@@ -31,11 +31,11 @@ Common props ref：[Common props](/docs/react/common-props)
 | Property           | Description                  | Type                                                                                          | Default | Version |
 |--------------------|------------------------------|-----------------------------------------------------------------------------------------------|---------|---------|
 | data               | Data source for conversation list | `ConversationProps[]`                                                                         | -       | -       |
-| activeKey          | Currently selected value     | `ConversationProps['key']`                                                                    | -       | -       |
-| defaultActiveKey   | Default selected value       | `ConversationProps['key']`                                                                    | -       | -       |
-| onActiveChange     | Callback for selection change | (value: `ConversationProps['key']`, preValue: `ConversationProps['key']`) => void              | -       | -       |
+| activeKey          | Currently selected value     | string                                                                    | -       | -       |
+| defaultActiveKey   | Default selected value       | string                                                                    | -       | -       |
+| onActiveChange     | Callback for selection change | (value: string, preValue: string) => void              | -       | -       |
 | menu               | Operation menu for conversations | MenuProps \| ((value: `ConversationProps`) => MenuProps)                               | -       | -       |
-| groupable          | If grouping is supported, it defaults to the `ConversationProps.group` field | boolean \| { components?: Record<'title', React.ComponentType<{ group: GroupType }>> } | -       | -       |
+| groupable          | If grouping is supported, it defaults to the `ConversationProps.group` field | boolean \| { components?: Record<'title', React.ComponentType<{ group: string }>> } | -       | -       |
 | styles             | Semantic structure styles    | Record<'list' \| 'item', React.CSSProperties>                                                 | -       | -       |
 | classNames         | Semantic structure class names | Record<'list' \| 'item', string>                                                              | -       | -       |
 
@@ -50,6 +50,11 @@ Common props ref：[Common props](/docs/react/common-props)
 | icon      | Conversation icon          | React.ReactNode   | -       | -       |
 | disabled  | Whether to disable         | boolean           | -       | -       |
 
+### GroupableProps
+| Property    | Description             | Type                               | Default | Version |
+|-------------|-------------------------|------------------------------------|---------|---------|
+| `sort`       | Group sorter         | `(a: string, b: string) => number` | -  | -    |
+| `components` | Semantic custom rendering       | `Record<'title', React.ComponentType<{ group: string }>>` | -   | -    |
 
 ## Design Token
 

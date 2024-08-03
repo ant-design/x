@@ -88,6 +88,11 @@ export interface ConversationsProps extends BaseProps, React.HTMLAttributes<HTML
    */
   groupable?: boolean | {
     /**
+     * @desc 分组排序函数
+     * @descEN Group sorter
+     */
+    sort?: (a: GroupType, b: GroupType) => number;
+    /**
      * @desc 语义化自定义渲染
      * @descEN Semantic custom rendering
      */

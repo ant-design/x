@@ -32,9 +32,18 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
   } = props;
 
   const [ellipsised, setEllipsised] = React.useState(false);
+  const [opened, setOpened] = React.useState(false);
 
   return (
-    <Tooltip title={ellipsised ? label : undefined} placement="right" mouseLeaveDelay={0}>
+    <Tooltip
+      title={label}
+      open={ellipsised && opened}
+      onOpenChange={(open) => {
+        setOpened(open);
+      }}
+      placement="right"
+      mouseLeaveDelay={0}
+    >
       <li
         className={classNames?.item}
         style={styles?.item}
@@ -47,8 +56,8 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
         <Typography.Text
           className={classNames?.label}
           ellipsis={{
-            onEllipsis: (v) => {
-              setEllipsised(v);
+            onEllipsis: (value) => {
+              setEllipsised(value);
             },
           }}
         >
@@ -57,14 +66,20 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
         {menu && !disabled &&
           <Dropdown
             menu={menu}
+            placement="bottomRight"
             trigger={['click']}
+            mouseLeaveDelay={0}
             disabled={disabled}
+            onOpenChange={(open) => {
+              if (open) {
+                setOpened(!open);
+              }
+            }}
             getPopupContainer={(triggerNode) => triggerNode.parentElement ?? document.body}
           >
             <MoreOutlined
               onClick={(event) => {
                 event.stopPropagation();
-                setEllipsised(false);
               }}
               disabled={disabled}
               className={classNames?.menu}

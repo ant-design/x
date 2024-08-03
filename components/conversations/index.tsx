@@ -1,5 +1,4 @@
 import React from 'react';
-import { Divider, Typography } from 'antd';
 import classnames from 'classnames';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import ConversationsItem from './Item';
@@ -7,8 +6,8 @@ import ConversationsItem from './Item';
 import useStyle from './style';
 import getPrefixCls from '../_util/getPrefixCls';
 
-import type { ReactNode } from 'react';
-import type { ConversationsProps, ConversationProps, GroupType } from './interface';
+import type { ConversationsProps, ConversationProps } from './interface';
+import DefaultGroupTitle, { __UNGROUPED } from './GroupTitle';
 
 const Conversations: React.FC<ConversationsProps> = (props) => {
   const {
@@ -39,22 +38,10 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
     prefixCls,
     hashId,
     cssVarCls,
-    styles?.list,
+    classNames?.list,
   );
 
-  const groupedMap = data.reduce((map, item) => {
-    const { group = '' } = item;
-
-    if (!Array.isArray(map[group])) {
-      map[group] = [];
-    }
-
-    map[group].push(item);
-
-    return map;
-  }, {} as Record<GroupType, ConversationProps[]>);
-
-  const getItemProps = React.useCallback((item: ConversationProps) => ({
+  const getItemProps = (item: ConversationProps) => ({
     ...item,
     classNames: {
       item: classnames(
@@ -63,46 +50,56 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
         { [`${prefixCls}-item-active`]: item.key === mergedActiveKey && !item.disabled },
         { [`${prefixCls}-item-disabled`]: item.disabled },
       ),
-      label: classnames(`${prefixCls}-label`, classNames?.item),
+      label: `${prefixCls}-label`,
       menu: `${prefixCls}-menu`,
     },
     prefixCls,
     styles: styles,
     menu: typeof menu === 'function' ? menu(item) : menu,
     onClick: () => setMergedActiveKey(item.key),
-  }), [classNames, prefixCls, mergedActiveKey, styles, menu, setMergedActiveKey]);
+  });
 
-  // ============================ Render Items ============================
-  const convItems = React.useMemo(() => Object.keys(groupedMap).reduce(
-    (nodes, group) => {
 
-      if (groupable) {
-        nodes.push(
-          <li key={group}>
-            {
-              (typeof groupable === 'object' && React.isValidElement(groupable.components?.title))
-                ? React.createElement(groupable.components.title, { group })
-                : (
-                  <Divider orientation="left" plain>
-                    <Typography.Text type="secondary">
-                      {group}
-                    </Typography.Text>
-                  </Divider>
-                )
-            }
-          </li>,
-        );
+  // // ============================ Render Items ============================
+  const convItems = React.useMemo(
+    () => {
+      if (!groupable) return data.map(item => React.createElement(ConversationsItem, getItemProps(item)));
+
+      const map = data.reduce<Record<string, React.ReactNode[]>>(
+        (acc, item) => {
+          const group = item.group || __UNGROUPED;
+
+          if (!acc[group]) {
+            const GroupTitleComponent = (typeof groupable === 'object' && React.isValidElement(groupable.components?.title))
+              ? groupable.components.title
+              : DefaultGroupTitle;
+            
+            acc[group] = [
+              <li key={group}>
+                <GroupTitleComponent group={group} />
+              </li>
+            ];
+          }
+
+          acc[group].push(React.createElement(ConversationsItem, getItemProps(item)));
+
+          return acc;
+        },
+        {}
+      );
+
+      if (typeof groupable === 'object' && typeof groupable?.sort === 'function') {
+        return Object
+          .keys(map)
+          .sort(groupable.sort)
+          .flatMap(group => map[group]);
       }
 
-      return [
-        ...nodes,
-        ...groupedMap[group].map(item => React.createElement(ConversationsItem, getItemProps(item))),
-      ];
+      return Object.values(map).flat();
     },
-    [] as ReactNode[],
-  ), [groupedMap, groupable, getItemProps]);
+    [data, groupable, getItemProps],
+  );
 
-  
   // ============================ Render ============================
   return wrapCSSVar(
     <ul className={mergedCls} style={styles?.list}>
