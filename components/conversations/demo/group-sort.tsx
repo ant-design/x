@@ -49,7 +49,7 @@ const App = () => (
           if (a === b) return 0;
 
           return a === 'Pinned' ? -1 : 1;
-        }
+        },
       }}
       defaultActiveKey="demo1"
       data={data}

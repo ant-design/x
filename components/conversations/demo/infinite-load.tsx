@@ -29,7 +29,7 @@ const App: React.FC = () => {
 
         setData([
           ...data,
-          ...formmatedData
+          ...formmatedData,
         ]);
         setLoading(false);
       })

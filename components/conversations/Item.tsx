@@ -42,9 +42,7 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
       title={label}
       key={key}
       open={ellipsised && opened}
-      onOpenChange={(open) => {
-        setOpened(open);
-      }}
+      onOpenChange={setOpened}
       placement="right"
       mouseLeaveDelay={0}
     >
@@ -60,9 +58,7 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
         <Typography.Text
           className={classNames?.label}
           ellipsis={{
-            onEllipsis: (value) => {
-              setEllipsised(value);
-            },
+            onEllipsis: setEllipsised,
           }}
         >
           {label}
