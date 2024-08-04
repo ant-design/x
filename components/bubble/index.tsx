@@ -26,7 +26,7 @@ const Bubble: React.FC<Readonly<BubbleProps>> = (props) => {
     ...otherHtmlProps
   } = props;
 
-  const { getPrefixCls } = useConfigContext();
+  const { direction, getPrefixCls } = useConfigContext();
 
   const prefixCls = getPrefixCls('bubble', customizePrefixCls);
 
@@ -48,7 +48,10 @@ const Bubble: React.FC<Readonly<BubbleProps>> = (props) => {
     hashId,
     cssVarCls,
     `${prefixCls}-${placement}`,
-    { [`${prefixCls}-typing`]: isTyping && !loading && !messageRender },
+    {
+      [`${prefixCls}-rtl`]: direction === 'rtl',
+      [`${prefixCls}-typing`]: isTyping && !loading && !messageRender,
+    },
   );
 
   // ============================ Avatar ============================
