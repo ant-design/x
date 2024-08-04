@@ -12,6 +12,9 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => ({
     gap: token.paddingXS,
     flexDirection: 'column',
     width: 268,
+    [`&${token.componentCls}-rtl`]: {
+      direction: 'rtl',
+    },
     // 会话列表项
     [`& ${token.componentCls}-item`]: {
       display: 'flex',

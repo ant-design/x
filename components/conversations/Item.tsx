@@ -9,6 +9,7 @@ export interface ConversationsItemProps extends React.HTMLAttributes<HTMLLIEleme
   styles?: ConversationsProps['styles'];
   menu?: MenuProps;
   item: ConversationProps;
+  direction?: "ltr" | "rtl";
 }
 
 const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
@@ -23,6 +24,7 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
       label,
       key,
     },
+    direction,
   } = props;
 
   const [ellipsised, setEllipsised] = React.useState(false);
@@ -34,7 +36,7 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
       key={key}
       open={ellipsised && opened}
       onOpenChange={setOpened}
-      placement="right"
+      placement={direction === 'ltr' ? 'right' : 'left'}
     >
       <li
         className={classNames?.item}
@@ -60,7 +62,7 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
         {menu && !disabled &&
           <Dropdown
             menu={menu}
-            placement="bottomRight"
+            placement={direction === 'ltr' ? 'bottomRight' : 'bottomLeft'}
             trigger={['click']}
             disabled={disabled}
             onOpenChange={(open) => {

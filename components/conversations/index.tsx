@@ -24,6 +24,7 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
     styles,
     classNames,
     groupable,
+    className,
     ...htmlULProps
   } = props;
 
@@ -33,7 +34,7 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
     onChange: onActiveChange,
   });
 
-  const { getPrefixCls } = useConfigContext();
+  const { getPrefixCls, direction } = useConfigContext();
 
   const prefixCls = getPrefixCls('conversations', customizePrefixCls);
 
@@ -42,11 +43,15 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
   const groupedData = useGroupable(data, groupable);
 
   const mergedCls = classnames(
+    className,
     rootClassName,
     prefixCls,
     hashId,
     cssVarCls,
     classNames?.list,
+    {
+      [`${prefixCls}-rtl`]: direction === 'rtl',
+    },
   );
 
   const getItemProps = (item: ConversationProps) => ({
@@ -66,11 +71,12 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
     styles,
     menu: typeof menu === 'function' ? menu(item) : menu,
     onClick: () => setMergedActiveKey(item.key),
+    direction,
   });
 
   // ============================ Render ============================
   const itemRender = (item: ConversationProps) => <ConversationsItem key={item.key} {...getItemProps(item)} />;
-  
+
   const groupRender = (group: string) => <GroupTitle key={group} group={group} groupable={groupable} />;
 
   return wrapCSSVar(
