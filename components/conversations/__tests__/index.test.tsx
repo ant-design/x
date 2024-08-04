@@ -4,7 +4,7 @@ import { render, fireEvent } from '../../../tests/utils';
 
 import type { ConversationProps } from '../index';
 import mountTest from '../../../tests/shared/mountTest';
-
+import rtlTest from '../../../tests/shared/rtlTest';
 
 const data: ConversationProps[] = [
   {
@@ -34,6 +34,7 @@ const data: ConversationProps[] = [
 
 describe('Conversations Component', () => {
   mountTest(() => <Conversations />);
+  rtlTest(() => <Conversations data={data} />);
 
   beforeAll(() => {
     jest.useFakeTimers();
