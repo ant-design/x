@@ -3,13 +3,14 @@ import { Tooltip, Typography, Dropdown } from 'antd';
 import type { MenuProps } from 'antd';
 import { MoreOutlined } from '@ant-design/icons';
 import type { ConversationProps, ConversationsProps } from './interface';
+import type { DirectionType } from 'antd/es/config-provider';
 
 export interface ConversationsItemProps extends React.HTMLAttributes<HTMLLIElement> {
   classNames?: ConversationsProps['classNames'];
   styles?: ConversationsProps['styles'];
   menu?: MenuProps;
   item: ConversationProps;
-  direction?: "ltr" | "rtl";
+  direction?: DirectionType;
 }
 
 const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
