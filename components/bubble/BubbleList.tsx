@@ -3,13 +3,18 @@ import pickAttrs from 'rc-util/lib/pickAttrs';
 import useConfigContext from '../config-provider/useConfigContext';
 import classNames from 'classnames';
 import type { BubbleProps } from './interface';
-import Bubble from './Bubble';
+import Bubble, { BubbleContext } from './Bubble';
 import useStyle from './style';
+import type { GetProp } from 'antd';
+import { useEvent } from 'rc-util';
+
+const EMPTY_DATA: GetProp<BubbleListProps, 'data'> = [];
 
 export interface BubbleListProps extends React.HTMLAttributes<HTMLDivElement> {
   prefixCls?: string;
   rootClassName?: string;
   data?: BubbleProps[];
+  autoScroll?: boolean;
 }
 
 export default function BubbleList(props: BubbleListProps) {
@@ -17,13 +22,17 @@ export default function BubbleList(props: BubbleListProps) {
     prefixCls: customizePrefixCls,
     rootClassName,
     className,
-    data = [],
+    data = EMPTY_DATA,
+    autoScroll = true,
     ...restProps
   } = props;
   const domProps = pickAttrs(restProps, {
     attr: true,
     aria: true,
   });
+
+  // ============================= Refs =============================
+  const listRef = React.useRef<HTMLDivElement>(null);
 
   // ============================ Prefix ============================
   const { getPrefixCls } = useConfigContext();
@@ -33,17 +42,47 @@ export default function BubbleList(props: BubbleListProps) {
 
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
 
+  // ============================ Scroll ============================
+  const [updateCount, setUpdateCount] = React.useState(0);
+
+  const onInternalScroll: React.UIEventHandler<HTMLDivElement> = (e) => {
+    console.log('>>>', e.currentTarget.scrollTop);
+  };
+
+  React.useEffect(() => {
+    console.log('??!!!');
+  }, [updateCount]);
+
+  // =========================== Context ============================
+  // When bubble content update, we try to trigger `autoScroll` for sync
+  const onBubbleUpdate = useEvent(() => {
+    if (autoScroll) {
+      setUpdateCount((c) => c + 1);
+    }
+  });
+
+  const context = React.useMemo(
+    () => ({
+      onUpdate: onBubbleUpdate,
+    }),
+    [],
+  );
+
   // ============================ Render ============================
   return wrapCSSVar(
-    <div
-      {...domProps}
-      className={classNames(listPrefixCls, rootClassName, className, hashId, cssVarCls)}
-    >
-      {data.map((bubble, index) => {
-        const key = bubble.key ?? index;
+    <BubbleContext.Provider value={context}>
+      <div
+        {...domProps}
+        className={classNames(listPrefixCls, rootClassName, className, hashId, cssVarCls)}
+        ref={listRef}
+        onScroll={onInternalScroll}
+      >
+        {data.map((bubble, index) => {
+          const key = bubble.key ?? index;
 
-        return <Bubble key={key} {...bubble} />;
-      })}
-    </div>,
+          return <Bubble key={key} {...bubble} />;
+        })}
+      </div>
+    </BubbleContext.Provider>,
   );
 }

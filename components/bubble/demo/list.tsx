@@ -11,13 +11,17 @@ const App = () => {
       <Bubble.List
         style={{ maxHeight: 300 }}
         data={Array.from({ length: count }).map((_, i) => {
-          const placement = i % 2 ? 'start' : 'end';
+          const isStart = !!(i % 2);
+          const placement = isStart ? 'start' : 'end';
+          const content = isStart ? 'Mock response content. '.repeat(10) : 'Mock request content.';
 
           return {
             placement,
-            content: 'Mock bubble content!',
+            content,
             avatar: { icon: <UserOutlined /> },
-            typing: true,
+            typing: {
+              step: 5,
+            },
           };
         })}
       />

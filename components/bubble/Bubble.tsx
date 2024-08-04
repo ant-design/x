@@ -9,6 +9,12 @@ import { Avatar } from 'antd';
 import useTypingConfig from './hooks/useTypingConfig';
 import useConfigContext from '../config-provider/useConfigContext';
 
+export interface BubbleContextProps {
+  onUpdate?: VoidFunction;
+}
+
+export const BubbleContext = React.createContext<BubbleContextProps>({});
+
 const Bubble: React.FC<Readonly<BubbleProps>> = (props) => {
   const {
     prefixCls: customizePrefixCls,
@@ -26,12 +32,14 @@ const Bubble: React.FC<Readonly<BubbleProps>> = (props) => {
     ...otherHtmlProps
   } = props;
 
+  const { onUpdate } = React.useContext(BubbleContext);
+
+  // ============================ Prefix ============================
   const { getPrefixCls } = useConfigContext();
 
   const prefixCls = getPrefixCls('bubble', customizePrefixCls);
 
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
-
+  // ============================ Typing ============================
   const [typingEnabled, typingStep, typingInterval] = useTypingConfig(typing);
 
   const [typedContent, isTyping] = useTypedEffect(
@@ -40,6 +48,13 @@ const Bubble: React.FC<Readonly<BubbleProps>> = (props) => {
     typingStep,
     typingInterval,
   );
+
+  React.useEffect(() => {
+    onUpdate?.();
+  }, [typedContent]);
+
+  // ============================ Styles ============================
+  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
 
   const mergedCls = classnames(
     className,
