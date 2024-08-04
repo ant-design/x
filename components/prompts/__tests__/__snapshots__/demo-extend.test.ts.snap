@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] = `
+<div
+  class="ant-bubble"
+/>
+`;
+
+exports[`renders components/prompts/demo/basic.tsx extend context correctly 2`] = `[]`;
