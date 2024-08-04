@@ -33,16 +33,15 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
   return (
     <Tooltip
       title={label}
-      key={key}
       open={ellipsised && opened}
       onOpenChange={setOpened}
       placement={direction === 'ltr' ? 'right' : 'left'}
     >
       <li
+        id={key}
         className={classNames?.item}
         style={styles?.item}
         onClick={disabled ? undefined : onClick}
-        key={key}
       >
         {icon && (
           <div className={classNames?.icon} style={styles?.icon}>

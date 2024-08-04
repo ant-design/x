@@ -35,7 +35,7 @@ const GroupTitle: React.FC<GroupTitleProps> = (props) => {
   }, [groupable, group]);
 
   return (
-    <li key={group}>
+    <li id={group}>
       {groupTitle}
     </li>
   );
