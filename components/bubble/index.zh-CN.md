@@ -22,6 +22,7 @@ demo:
 <code src="./demo/loading.tsx">加载中</code>
 <code src="./demo/typing.tsx">打字效果</code>
 <code src="./demo/markdown.tsx">自定义渲染</code>
+<code src="./demo/list.tsx">气泡列表</code>
 
 ## API
 
