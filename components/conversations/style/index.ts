@@ -20,7 +20,6 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => ({
       display: 'flex',
       gap: token.paddingXS,
       alignItems: 'center',
-      height: token.calc(token.lineHeight).mul(token.fontSize).equal(),
       borderRadius: token.borderRadius,
       padding: token.paddingSM,
       cursor: 'pointer',
@@ -45,7 +44,7 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => ({
       // 悬浮、选中时激活操作菜单
       '&:hover, &-active': {
         [`& ${token.componentCls}-menu-icon`]: {
-          display: 'inline-block',
+          opacity: 1,
         },
       },
     },
@@ -56,9 +55,7 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => ({
     },
     // 会话操作菜单
     [`& ${token.componentCls}-menu-icon`]: {
-      fontWeight: token.fontWeightStrong,
-      fontSize: token.fontSizeLG,
-      display: 'none',
+      opacity: 0,
       '&:hover': {
         color: token.colorIconHover,
       },

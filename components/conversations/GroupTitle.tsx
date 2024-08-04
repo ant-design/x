@@ -2,6 +2,7 @@ import React from 'react';
 import { Divider, Typography } from 'antd';
 
 import type { GroupType, ConversationsProps } from './interface';
+import type { DirectionType } from 'antd/es/config-provider';
 
 /**
  * 🔥 Only for handling ungrouped data. Do not use it for any other purpose! 🔥
@@ -10,11 +11,12 @@ export const __UNGROUPED = '__ungrouped';
 
 interface GroupTitleProps {
   group?: GroupType;
-  groupable?: ConversationsProps['groupable']
+  groupable?: ConversationsProps['groupable'];
+  direction?: DirectionType;
 };
 
 const GroupTitle: React.FC<GroupTitleProps> = (props) => {
-  const { groupable, group } = props;
+  const { groupable, group, direction } = props;
 
   const groupTitle = React.useMemo(() => {
     if (
@@ -28,11 +30,14 @@ const GroupTitle: React.FC<GroupTitleProps> = (props) => {
     const isValidGroupTitle = group !== undefined && group !== __UNGROUPED;
 
     return (
-      <Divider orientation="left" plain>
+      <Divider
+        orientation={direction === 'ltr' ? 'right' : 'left'}
+        plain
+      >
         {isValidGroupTitle && <Typography.Text type="secondary">{group}</Typography.Text>}
       </Divider>
     )
-  }, [groupable, group]);
+  }, [groupable, group, direction]);
 
   return (
     <li id={group}>
