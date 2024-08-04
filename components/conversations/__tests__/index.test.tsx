@@ -100,7 +100,7 @@ describe('Conversations Component', () => {
   });
 
   it('should use custom group title component', () => {
-    const { getByText } = render(<Conversations data={data} groupable={{ components: { title: ({group}) => <div>{group}</div> } }} />);
+    const { getByText } = render(<Conversations data={data} groupable={{ title: (group) => <div>{group}</div> }} />);
     expect(getByText('pinned')).toBeInTheDocument();
   });
 

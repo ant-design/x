@@ -58,7 +58,7 @@ demo:
 | 属性         | 说明                 | 类型                                | 默认值 | 版本 |
 |--------------|----------------------|-------------------------------------|--------|------|
 | `sort`       | 分组排序函数         | `(a: string, b: string) => number` | -  | -    |
-| `components` | 自定义渲染组件       | `Record<'title', React.ComponentType<{ group: string }>>` | -   | -    |
+| `title` | 自定义渲染组件       | `React.ComponentType<{ group: string }>` | -   | -    |
 
 ## 主题变量（Design Token）
 

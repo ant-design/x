@@ -1,13 +1,16 @@
 import React from 'react';
 import classnames from 'classnames';
-import useMergedState from 'rc-util/lib/hooks/useMergedState';
+
 import ConversationsItem from './Item';
+import GroupTitle from './GroupTitle';
+
+import useMergedState from 'rc-util/lib/hooks/useMergedState';
+import useConfigContext from '../config-provider/useConfigContext';
+import useGroupable from './hooks/useGroupable';
 
 import useStyle from './style';
-import getPrefixCls from '../_util/getPrefixCls';
 
 import type { ConversationsProps, ConversationProps } from './interface';
-import DefaultGroupTitle, { __UNGROUPED } from './GroupTitle';
 
 const Conversations: React.FC<ConversationsProps> = (props) => {
   const {
@@ -24,15 +27,19 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
     ...htmlULProps
   } = props;
 
-  const prefixCls = getPrefixCls('conversations', customizePrefixCls);
-
   const [mergedActiveKey, setMergedActiveKey] = useMergedState(defaultActiveKey, {
     value: activeKey,
     defaultValue: defaultActiveKey,
     onChange: onActiveChange,
   });
 
+  const { getPrefixCls } = useConfigContext();
+
+  const prefixCls = getPrefixCls('conversations', customizePrefixCls);
+
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+
+  const groupedData = useGroupable(data, groupable);
 
   const mergedCls = classnames(
     rootClassName,
@@ -61,55 +68,25 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
     onClick: () => setMergedActiveKey(item.key),
   });
 
-
-  // // ============================ Render Items ============================
-  const convItems = React.useMemo(
-    () => {
-      if (!groupable) return data.map(item => <ConversationsItem key={item.key} {...getItemProps(item)} />);
-
-      const map = data.reduce<Record<string, React.ReactNode[]>>(
-        (acc, item) => {
-          const group = item.group || __UNGROUPED;
-
-          if (!acc[group]) {
-            const GroupTitleComponent = (typeof groupable === 'object' && React.isValidElement(groupable.components?.title))
-              ? groupable.components.title
-              : DefaultGroupTitle;
-            
-            acc[group] = [
-              <li key={group}>
-                <GroupTitleComponent group={group} />
-              </li>,
-            ];
-          }
-
-          acc[group].push(<ConversationsItem key={item.key} {...getItemProps(item)} />);
-
-          return acc;
-        },
-        {},
-      );
-
-      if (typeof groupable === 'object' && typeof groupable?.sort === 'function') {
-        return Object
-          .keys(map)
-          .sort(groupable.sort)
-          .flatMap(group => map[group]);
-      }
-
-      return Object.values(map).flat();
-    },
-    [data, groupable, getItemProps],
-  );
-
   // ============================ Render ============================
+  const itemRender = (item: ConversationProps) => <ConversationsItem key={item.key} {...getItemProps(item)} />;
+  
+  const groupRender = (group: string) => <GroupTitle key={group} group={group} groupable={groupable} />;
+
   return wrapCSSVar(
     <ul
       {...htmlULProps}
       className={mergedCls}
       style={styles?.list}
     >
-      {convItems}
+      {
+        !groupable
+          ? groupedData.data.map(itemRender)
+          : groupedData.groups.flatMap((group) => [
+              groupRender(group),
+              ...groupedData.groupedData[group].map(itemRender),
+          ])
+      }
     </ul>,
   );
 };

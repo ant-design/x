@@ -37,7 +37,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | defaultActiveKey   | Default selected value       | string                                                                    | -       | -       |
 | onActiveChange     | Callback for selection change | (value: string, preValue: string) => void              | -       | -       |
 | menu               | Operation menu for conversations | MenuProps \| ((value: `ConversationProps`) => MenuProps)                               | -       | -       |
-| groupable          | If grouping is supported, it defaults to the `ConversationProps.group` field | boolean \| { components?: Record<'title', React.ComponentType<{ group: string }>> } | -       | -       |
+| groupable          | If grouping is supported, it defaults to the `ConversationProps.group` field | boolean \| GroupableProps | -       | -       |
 | styles             | Semantic structure styles    | Record<'list' \| 'item' \| 'icon' \| 'label' \| 'menuIcon', React.CSSProperties>                                                 | -       | -       |
 | classNames         | Semantic structure class names | Record<'list' \| 'item' \| 'icon' \| 'label' \| 'menuIcon', string>                                                              | -       | -       |
 
@@ -56,7 +56,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | Property    | Description             | Type                               | Default | Version |
 |-------------|-------------------------|------------------------------------|---------|---------|
 | `sort`       | Group sorter         | `(a: string, b: string) => number` | -  | -    |
-| `components` | Semantic custom rendering       | `Record<'title', React.ComponentType<{ group: string }>>` | -   | -    |
+| `title` | Semantic custom rendering       | `React.ComponentType<{ group: string }>` | -   | -    |
 
 ## Design Token
 

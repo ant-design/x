@@ -1,5 +1,6 @@
 import type React from 'react';
 import type { MenuProps } from 'antd';
+import type { AnyObject } from '../_util/type';
 
 export type GroupType = string;
 
@@ -7,7 +8,7 @@ export type GroupType = string;
  * @desc 会话数据
  * @descEN Conversation data
  */
-export interface ConversationProps extends Record<string, any> {
+export interface ConversationProps extends AnyObject {
   /**
    * @desc 唯一标识
    * @descEN Unique identifier
@@ -92,10 +93,10 @@ export interface ConversationsProps extends React.HTMLAttributes<HTMLUListElemen
      */
     sort?: (a: GroupType, b: GroupType) => number;
     /**
-     * @desc 语义化自定义渲染
+     * @desc 自定义分组标签渲染
      * @descEN Semantic custom rendering
      */
-    components?: Partial<Record<'title', React.ComponentType<{ group: GroupType }>>>;
+    title?: (group: GroupType) => React.ReactNode;
   };
 
   /** 

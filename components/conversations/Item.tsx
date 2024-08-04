@@ -4,7 +4,7 @@ import type { MenuProps } from 'antd';
 import { MoreOutlined } from '@ant-design/icons';
 import type { ConversationProps, ConversationsProps } from './interface';
 
-interface ConversationsItemProps extends React.HTMLAttributes<HTMLLIElement> {
+export interface ConversationsItemProps extends React.HTMLAttributes<HTMLLIElement> {
   classNames?: ConversationsProps['classNames'];
   styles?: ConversationsProps['styles'];
   menu?: MenuProps;
@@ -35,7 +35,6 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
       open={ellipsised && opened}
       onOpenChange={setOpened}
       placement="right"
-      mouseLeaveDelay={0}
     >
       <li
         className={classNames?.item}
@@ -63,7 +62,6 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
             menu={menu}
             placement="bottomRight"
             trigger={['click']}
-            mouseLeaveDelay={0}
             disabled={disabled}
             onOpenChange={(open) => {
               if (open) {
