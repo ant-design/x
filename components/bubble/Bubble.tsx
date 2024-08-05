@@ -9,8 +9,6 @@ import { Avatar } from 'antd';
 import useTypingConfig from './hooks/useTypingConfig';
 import useConfigContext from '../config-provider/useConfigContext';
 
-export type { BubbleProps };
-
 export interface BubbleRef {
   nativeElement: HTMLElement;
 }
