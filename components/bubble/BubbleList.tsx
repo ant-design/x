@@ -87,6 +87,7 @@ function BubbleList(props: BubbleListProps, ref: React.Ref<BubbleListRef>) {
     }
   }, [updateCount]);
 
+  // Always scroll to bottom when data change
   React.useEffect(() => {
     if (autoScroll) {
       setUpdateCount((c) => c + 1);
