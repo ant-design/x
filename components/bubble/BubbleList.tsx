@@ -9,6 +9,9 @@ import useStyle from './style';
 import { useEvent } from 'rc-util';
 import useListData from './hooks/useListData';
 
+/** When scroll is in the safe threshold, do scroll even it's not the end */
+const AUTO_SCROLL_THRESHOLD = 100;
+
 export interface BubbleListRef {
   nativeElement: HTMLDivElement;
   scrollTo: (info: {
@@ -91,7 +94,10 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   React.useEffect(() => {
     if (autoScroll) {
       setUpdateCount((c) => c + 1);
-      setScrollReachEnd(true);
+
+      const scrollOffset =
+        listRef.current!.scrollHeight - listRef.current!.scrollTop - listRef.current!.clientHeight;
+      setScrollReachEnd(scrollOffset <= AUTO_SCROLL_THRESHOLD);
     }
   }, [mergedData.length]);
 
