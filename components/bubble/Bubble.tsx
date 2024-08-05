@@ -9,13 +9,17 @@ import { Avatar } from 'antd';
 import useTypingConfig from './hooks/useTypingConfig';
 import useConfigContext from '../config-provider/useConfigContext';
 
+export interface BubbleRef {
+  nativeElement: HTMLElement;
+}
+
 export interface BubbleContextProps {
   onUpdate?: VoidFunction;
 }
 
 export const BubbleContext = React.createContext<BubbleContextProps>({});
 
-const Bubble: React.FC<Readonly<BubbleProps>> = (props) => {
+function Bubble(props: BubbleProps, ref: React.Ref<BubbleRef>) {
   const {
     prefixCls: customizePrefixCls,
     className,
@@ -33,6 +37,13 @@ const Bubble: React.FC<Readonly<BubbleProps>> = (props) => {
   } = props;
 
   const { onUpdate } = React.useContext(BubbleContext);
+
+  // ============================= Refs =============================
+  const divRef = React.useRef<HTMLDivElement>(null);
+
+  React.useImperativeHandle(ref, () => ({
+    nativeElement: divRef.current!,
+  }));
 
   // ============================ Prefix ============================
   const { getPrefixCls } = useConfigContext();
@@ -74,7 +85,7 @@ const Bubble: React.FC<Readonly<BubbleProps>> = (props) => {
 
   // ============================ Render ============================
   return wrapCSSVar(
-    <div style={style} className={mergedCls} {...otherHtmlProps}>
+    <div style={style} className={mergedCls} {...otherHtmlProps} ref={divRef}>
       {/* Avatar */}
       {avatar && (
         <div
@@ -94,12 +105,8 @@ const Bubble: React.FC<Readonly<BubbleProps>> = (props) => {
       </div>
     </div>,
   );
-};
-
-if (process.env.NODE_ENV !== 'production') {
-  Bubble.displayName = 'Bubble';
 }
 
 export type { BubbleProps };
 
-export default Bubble;
+export default React.forwardRef(Bubble);

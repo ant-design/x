@@ -4,26 +4,46 @@ import useConfigContext from '../config-provider/useConfigContext';
 import classNames from 'classnames';
 import type { BubbleProps } from './interface';
 import Bubble, { BubbleContext } from './Bubble';
+import type { BubbleRef } from './Bubble';
 import useStyle from './style';
-import type { GetProp } from 'antd';
 import { useEvent } from 'rc-util';
+import useListData from './hooks/useListData';
 
-const EMPTY_DATA: GetProp<BubbleListProps, 'data'> = [];
+export interface BubbleListRef {
+  nativeElement: HTMLDivElement;
+  scrollTo: (info: {
+    offset?: number;
+    key?: string | number;
+    behavior?: ScrollBehavior;
+    block?: ScrollLogicalPosition;
+  }) => void;
+}
+
+export type BubbleDataType = BubbleProps & {
+  key?: string | number;
+  role?: string;
+};
+
+export type RoleType = Partial<Omit<BubbleProps, 'content'>>;
+
+export type RolesType = Record<string, RoleType> | ((bubbleDataP: BubbleDataType) => RoleType);
 
 export interface BubbleListProps extends React.HTMLAttributes<HTMLDivElement> {
   prefixCls?: string;
   rootClassName?: string;
-  data?: BubbleProps[];
+  data?: BubbleDataType[];
   autoScroll?: boolean;
+  roles?: RolesType;
 }
 
-export default function BubbleList(props: BubbleListProps) {
+function BubbleList(props: BubbleListProps, ref: React.Ref<BubbleListRef>) {
   const {
     prefixCls: customizePrefixCls,
     rootClassName,
     className,
-    data = EMPTY_DATA,
+    data,
     autoScroll = true,
+    roles,
     ...restProps
   } = props;
   const domProps = pickAttrs(restProps, {
@@ -34,6 +54,8 @@ export default function BubbleList(props: BubbleListProps) {
   // ============================= Refs =============================
   const listRef = React.useRef<HTMLDivElement>(null);
 
+  const bubbleRefs = React.useRef<Record<string, BubbleRef>>({});
+
   // ============================ Prefix ============================
   const { getPrefixCls } = useConfigContext();
 
@@ -42,16 +64,63 @@ export default function BubbleList(props: BubbleListProps) {
 
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
 
+  // ============================= Data =============================
+  const mergedData = useListData(data, roles);
+
   // ============================ Scroll ============================
+  // Is current scrollTop at the end. User scroll will make this false.
+  const [scrollReachEnd, setScrollReachEnd] = React.useState(true);
+
   const [updateCount, setUpdateCount] = React.useState(0);
 
   const onInternalScroll: React.UIEventHandler<HTMLDivElement> = (e) => {
-    console.log('>>>', e.currentTarget.scrollTop);
+    const target = e.target as HTMLElement;
+
+    setScrollReachEnd(target.scrollTop + target.clientHeight === target.scrollHeight);
   };
 
   React.useEffect(() => {
-    console.log('??!!!');
+    if (autoScroll && listRef.current && scrollReachEnd) {
+      listRef.current.scrollTo({
+        top: listRef.current.scrollHeight,
+      });
+    }
   }, [updateCount]);
+
+  React.useEffect(() => {
+    if (autoScroll) {
+      setUpdateCount((c) => c + 1);
+      setScrollReachEnd(true);
+    }
+  }, [mergedData.length]);
+
+  // ========================== Outer Ref ===========================
+  React.useImperativeHandle(ref, () => ({
+    nativeElement: listRef.current!,
+    scrollTo: ({ key, offset, behavior = 'smooth', block }) => {
+      if (typeof offset === 'number') {
+        // Offset scroll
+        listRef.current!.scrollTo({
+          top: offset,
+          behavior,
+        });
+      } else if (key !== undefined) {
+        // Key scroll
+        const bubbleInst = bubbleRefs.current[key];
+
+        if (bubbleInst) {
+          // Block current auto scrolling
+          setScrollReachEnd(false);
+
+          // Do native scroll
+          bubbleInst.nativeElement.scrollIntoView({
+            behavior,
+            block,
+          });
+        }
+      }
+    },
+  }));
 
   // =========================== Context ============================
   // When bubble content update, we try to trigger `autoScroll` for sync
@@ -77,12 +146,26 @@ export default function BubbleList(props: BubbleListProps) {
         ref={listRef}
         onScroll={onInternalScroll}
       >
-        {data.map((bubble, index) => {
-          const key = bubble.key ?? index;
+        {mergedData.map(({ key, ...bubble }, index) => {
+          const mergedKey = key ?? index;
 
-          return <Bubble key={key} {...bubble} />;
+          return (
+            <Bubble
+              {...bubble}
+              key={mergedKey}
+              ref={(node) => {
+                if (node) {
+                  bubbleRefs.current[mergedKey] = node;
+                } else {
+                  delete bubbleRefs.current[mergedKey];
+                }
+              }}
+            />
+          );
         })}
       </div>
     </BubbleContext.Provider>,
   );
 }
+
+export default React.forwardRef(BubbleList);
