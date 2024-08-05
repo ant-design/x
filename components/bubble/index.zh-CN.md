@@ -30,16 +30,24 @@ demo:
 
 ### Bubble
 
-| 属性          | 说明                 | 类型                                                | 默认值  | 版本 |
-| ------------- | -------------------- | --------------------------------------------------- | ------- | ---- |
-| avatar        | 展示头像             | `React.ReactNode`                                   | -       |      |
-| classNames    | 语义化结构 class     | [Record<SemanticDOM, string>](#semantic-dom)        | -       |      |
-| styles        | 语义化结构 style     | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | -       |      |
-| placement     | 信息位置             | `start \| end`                                      | `start` |      |
-| loading       | 聊天内容加载状态     | `boolean`                                           | -       |      |
-| typing        | 设置聊天内容打字动画 | `boolean \| { step?: number, interval?: number }`   | `false` |      |
-| content       | 聊天内容             | `string`                                            | -       |      |
-| messageRender | 自定义渲染内容       | `(content?: string) => ReactNode`                   | -       |      |
+| 属性 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| avatar | 展示头像 | React.ReactNode | - |  |
+| classNames | 语义化结构 class | [Record<SemanticDOM, string>](#semantic-dom) | - |  |
+| styles | 语义化结构 style | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - |  |
+| placement | 信息位置 | `start` \| `end` | `start` |  |
+| loading | 聊天内容加载状态 | boolean | - |  |
+| typing | 设置聊天内容打字动画 | boolean \| { step?: number, interval?: number } | false |  |
+| content | 聊天内容 | string | - |  |
+| messageRender | 自定义渲染内容 | (content?: string) => ReactNode | - |  |
+
+### Bubble.List
+
+| 属性 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| autoScroll | 当内容更新时，自动滚动到最新位置。如果用户滚动，则会暂停自动滚动。 | boolean | true |  |
+| data | 气泡数据列表 | (BubbleProps & { key?: string \| number, role?: string })[] | - |  |
+| roles | 设置气泡默认属性，`data` 中的 `role` 会进行自动对应 | Record<string, BubbleProps> \| (bubble) => BubbleProps | - |  |
 
 ## Semantic DOM
 
