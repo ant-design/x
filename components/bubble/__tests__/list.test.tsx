@@ -97,4 +97,25 @@ describe('Bubble.List', () => {
 
     scrollSpy.mockRestore();
   });
+
+  it('roles function', () => {
+    const { container } = render(
+      <Bubble.List
+        roles={(bubble) => ({
+          avatar: { style: { background: '#FF0000' } },
+          placement: bubble.key as any,
+        })}
+        data={[
+          {
+            key: 'end',
+            content: 'little',
+          },
+        ]}
+      />,
+    );
+
+    expect(container.querySelector('.ant-bubble-end .ant-bubble-avatar > span')!).toHaveStyle({
+      background: '#FF0000',
+    });
+  });
 });

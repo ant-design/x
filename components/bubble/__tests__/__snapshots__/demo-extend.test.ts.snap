@@ -167,7 +167,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
     </button>
   </div>
   <div
-    class="ant-bubble-list"
+    class="ant-bubble-list ant-bubble-list-reach-end"
     style="max-height: 300px;"
   >
     <div
