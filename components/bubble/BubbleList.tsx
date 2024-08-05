@@ -111,7 +111,8 @@ function BubbleList(props: BubbleListProps, ref: React.Ref<BubbleListRef>) {
 
         if (bubbleInst) {
           // Block current auto scrolling
-          setScrollReachEnd(false);
+          const index = mergedData.findIndex((dataItem) => dataItem.key === key);
+          setScrollReachEnd(index === mergedData.length - 1);
 
           // Do native scroll
           bubbleInst.nativeElement.scrollIntoView({
@@ -143,7 +144,9 @@ function BubbleList(props: BubbleListProps, ref: React.Ref<BubbleListRef>) {
     <BubbleContext.Provider value={context}>
       <div
         {...domProps}
-        className={classNames(listPrefixCls, rootClassName, className, hashId, cssVarCls)}
+        className={classNames(listPrefixCls, rootClassName, className, hashId, cssVarCls, {
+          [`${listPrefixCls}-reach-end`]: scrollReachEnd,
+        })}
         ref={listRef}
         onScroll={onInternalScroll}
       >
