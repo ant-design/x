@@ -9,9 +9,6 @@ import useStyle from './style';
 import { useEvent } from 'rc-util';
 import useListData from './hooks/useListData';
 
-/** When scroll is in the safe threshold, do scroll even it's not the end */
-const AUTO_SCROLL_THRESHOLD = 100;
-
 export interface BubbleListRef {
   nativeElement: HTMLDivElement;
   scrollTo: (info: {
@@ -93,11 +90,21 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   // Always scroll to bottom when data change
   React.useEffect(() => {
     if (autoScroll) {
-      setUpdateCount((c) => c + 1);
+      const lastItemKey = mergedData[mergedData.length - 2]?.key;
+      const bubbleInst = bubbleRefs.current[lastItemKey!];
 
-      const scrollOffset =
-        listRef.current!.scrollHeight - listRef.current!.scrollTop - listRef.current!.clientHeight;
-      setScrollReachEnd(scrollOffset <= AUTO_SCROLL_THRESHOLD);
+      // Auto scroll if last 2 item is visible
+      if (bubbleInst) {
+        const { nativeElement } = bubbleInst;
+        const { top, bottom } = nativeElement.getBoundingClientRect();
+        const { top: listTop, bottom: listBottom } = listRef.current!.getBoundingClientRect();
+
+        const isVisible = top < listBottom && bottom > listTop;
+        if (isVisible) {
+          setUpdateCount((c) => c + 1);
+          setScrollReachEnd(true);
+        }
+      }
     }
   }, [mergedData.length]);
 
@@ -156,23 +163,19 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
         ref={listRef}
         onScroll={onInternalScroll}
       >
-        {mergedData.map(({ key, ...bubble }, index) => {
-          const mergedKey = key ?? index;
-
-          return (
-            <Bubble
-              {...bubble}
-              key={mergedKey}
-              ref={(node) => {
-                if (node) {
-                  bubbleRefs.current[mergedKey] = node;
-                } else {
-                  delete bubbleRefs.current[mergedKey];
-                }
-              }}
-            />
-          );
-        })}
+        {mergedData.map(({ key, ...bubble }) => (
+          <Bubble
+            {...bubble}
+            key={key}
+            ref={(node) => {
+              if (node) {
+                bubbleRefs.current[key] = node;
+              } else {
+                delete bubbleRefs.current[key];
+              }
+            }}
+          />
+        ))}
       </div>
     </BubbleContext.Provider>,
   );

@@ -23,10 +23,15 @@ export default function useListData(
 
   return React.useMemo(
     () =>
-      (data || []).map((bubbleData) => ({
-        ...getRoleBubbleProps(bubbleData),
-        ...bubbleData,
-      })),
+      (data || []).map((bubbleData, i) => {
+        const mergedKey = bubbleData.key ?? `preset_${i}`;
+
+        return {
+          ...getRoleBubbleProps(bubbleData),
+          ...bubbleData,
+          key: mergedKey,
+        };
+      }),
     [data, getRoleBubbleProps],
   );
 }

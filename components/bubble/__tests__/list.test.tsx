@@ -118,4 +118,42 @@ describe('Bubble.List', () => {
       background: '#FF0000',
     });
   });
+
+  it('autoScroll when data change', () => {
+    const scrollSpy = spyElementPrototypes(HTMLElement, {
+      scrollTop: {
+        get: () => 0,
+      },
+      clientHeight: {
+        get: () => 10,
+      },
+      scrollHeight: {
+        get: () => 100,
+      },
+      getBoundingClientRect() {
+        if ((this as any as HTMLElement).classList.contains('ant-bubble-list')) {
+          return {
+            top: 0,
+            bottom: 10,
+          };
+        }
+
+        return {
+          top: -10,
+          bottom: 1,
+        };
+      },
+    });
+
+    const getData = (count: number) =>
+      Array.from({ length: count }, (_, i) => ({ key: i, content: String(i) }));
+
+    const { container, rerender } = render(<Bubble.List data={getData(5)} />);
+
+    rerender(<Bubble.List data={getData(6)} />);
+
+    expect(container.querySelector('.ant-bubble-list-reach-end')).toBeTruthy();
+
+    scrollSpy.mockRestore();
+  });
 });
