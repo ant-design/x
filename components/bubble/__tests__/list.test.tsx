@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Bubble from '..';
-import { fireEvent, render, waitFakeTimer } from '../../../tests/utils';
+import { fireEvent, render } from '../../../tests/utils';
 import { spyElementPrototypes } from 'rc-util/lib/test/domHook';
 import type { BubbleListRef } from '../BubbleList';
 
