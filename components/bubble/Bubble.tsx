@@ -9,6 +9,8 @@ import { Avatar } from 'antd';
 import useTypingConfig from './hooks/useTypingConfig';
 import useConfigContext from '../config-provider/useConfigContext';
 
+export type { BubbleProps };
+
 export interface BubbleRef {
   nativeElement: HTMLElement;
 }
@@ -107,6 +109,10 @@ function Bubble(props: BubbleProps, ref: React.Ref<BubbleRef>) {
   );
 }
 
-export type { BubbleProps };
+const ForwardBubble = React.forwardRef(Bubble);
 
-export default React.forwardRef(Bubble);
+if (process.env.NODE_ENV !== 'production') {
+  ForwardBubble.displayName = 'Bubble';
+}
+
+export default ForwardBubble;

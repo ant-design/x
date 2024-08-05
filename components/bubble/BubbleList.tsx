@@ -169,4 +169,10 @@ function BubbleList(props: BubbleListProps, ref: React.Ref<BubbleListRef>) {
   );
 }
 
-export default React.forwardRef(BubbleList);
+const ForwardBubbleList = React.forwardRef(BubbleList);
+
+if (process.env.NODE_ENV !== 'production') {
+  ForwardBubbleList.displayName = 'BubbleList';
+}
+
+export default ForwardBubbleList;
