@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Conversations } from '@ant-design/x';
-import { Avatar, Divider, Spin } from 'antd';
+import { Avatar, Divider, Spin, Card } from 'antd';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { RedoOutlined } from '@ant-design/icons';
 
@@ -19,10 +19,9 @@ const App: React.FC = () => {
       .then((res) => res.json())
       .then((body) => {
 
-        const formmatedData = body.results.map((i: any, index: number) => ({
+        const formmatedData = body.results.map((i: any) => ({
           key: i.email,
           label: `${i.name.title} ${i.name.first} ${i.name.last}`,
-          timestamp: 794620800 + index,
           icon: <Avatar  src={i.picture.thumbnail} />,
           group: i.nat,
         }))
@@ -43,15 +42,12 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div
+    <Card
       id="scrollableDiv"
       style={{
         height: 600,
-        width: 268,
+        width: 320,
         overflow: 'auto',
-        padding: 12,
-        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-        borderRadius: 8,
       }}
     >
       <InfiniteScroll
@@ -64,7 +60,7 @@ const App: React.FC = () => {
       >
         <Conversations data={data} defaultActiveKey="demo1" groupable />
       </InfiniteScroll>
-    </div>
+    </Card>
   );
 };
 
