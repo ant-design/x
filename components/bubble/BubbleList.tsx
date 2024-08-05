@@ -36,7 +36,7 @@ export interface BubbleListProps extends React.HTMLAttributes<HTMLDivElement> {
   roles?: RolesType;
 }
 
-function BubbleList(props: BubbleListProps, ref: React.Ref<BubbleListRef>) {
+const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps> = (props, ref) => {
   const {
     prefixCls: customizePrefixCls,
     rootClassName,
@@ -170,7 +170,7 @@ function BubbleList(props: BubbleListProps, ref: React.Ref<BubbleListRef>) {
       </div>
     </BubbleContext.Provider>,
   );
-}
+};
 
 const ForwardBubbleList = React.forwardRef(BubbleList);
 

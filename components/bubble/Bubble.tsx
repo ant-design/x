@@ -19,7 +19,7 @@ export interface BubbleContextProps {
 
 export const BubbleContext = React.createContext<BubbleContextProps>({});
 
-function Bubble(props: BubbleProps, ref: React.Ref<BubbleRef>) {
+const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, ref) => {
   const {
     prefixCls: customizePrefixCls,
     className,
@@ -108,7 +108,7 @@ function Bubble(props: BubbleProps, ref: React.Ref<BubbleRef>) {
       </div>
     </div>,
   );
-}
+};
 
 const ForwardBubble = React.forwardRef(Bubble);
 
