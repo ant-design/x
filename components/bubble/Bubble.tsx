@@ -48,7 +48,7 @@ function Bubble(props: BubbleProps, ref: React.Ref<BubbleRef>) {
   }));
 
   // ============================ Prefix ============================
-  const { getPrefixCls } = useConfigContext();
+  const { direction, getPrefixCls } = useConfigContext();
 
   const prefixCls = getPrefixCls('bubble', customizePrefixCls);
 
@@ -76,7 +76,10 @@ function Bubble(props: BubbleProps, ref: React.Ref<BubbleRef>) {
     hashId,
     cssVarCls,
     `${prefixCls}-${placement}`,
-    { [`${prefixCls}-typing`]: isTyping && !loading && !messageRender },
+    {
+      [`${prefixCls}-rtl`]: direction === 'rtl',
+      [`${prefixCls}-typing`]: isTyping && !loading && !messageRender,
+    },
   );
 
   // ============================ Avatar ============================

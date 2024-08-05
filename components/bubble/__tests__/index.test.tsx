@@ -2,11 +2,12 @@ import React from 'react';
 
 import Bubble from '..';
 import mountTest from '../../../tests/shared/mountTest';
+import rtlTest from '../../../tests/shared/rtlTest';
 import { render, waitFakeTimer } from '../../../tests/utils';
 
 describe('bubble', () => {
   mountTest(() => <Bubble content="test" />);
-
+  rtlTest(() => <Bubble content="test" />);
   beforeAll(() => {
     jest.useFakeTimers();
   });
