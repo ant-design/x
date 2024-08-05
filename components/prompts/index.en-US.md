@@ -17,8 +17,34 @@ The Prompts component is used to display a predefined set of questions or sugges
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">Basic</code>
+<code src="./demo/disabled.tsx">Disabled</code>
+<code src="./demo/onclick.tsx">Click</code>
+<code src="./demo/flex-vertical.tsx">Vertical</code>
+<code src="./demo/flex-wrap.tsx">Wrap</code>
+<code src="./demo/with-scroll.tsx">With Scroll</code>
 
 ## API
+
+### PromptsProps
+| Property        | Description                                              | Type                                                      | Default | Version |
+|-----------------|----------------------------------------------------------|-----------------------------------------------------------|---------|---------|
+| `data`          | List containing multiple prompt items.                   | `PromptProps[]`                                           | -       | -       |
+| `title`         | Title displayed at the top of the prompt list.           | `React.ReactNode`                                         | -       | -       |
+| `onClick`       | Callback function when a prompt item is clicked.         | `(params: { item: PromptProps; domEvent: React.MouseEvent<HTMLElement, MouseEvent>; }) => void` | -       | -       |
+| `flex`          | Configure the flex layout of the prompt list, similar to antd's Flex component. | `Omit<FlexProps, 'children'>`                            | -       | -       |
+| `styles`        | Custom styles for different parts of each prompt item.   | `Record<'item' \| 'icon' \| 'label' \| 'desc' \| 'title', React.CSSProperties>` | -       | -       |
+| `classNames`    | Custom style class names for different parts of each prompt item. | `Record<'item' \| 'icon' \| 'label' \| 'desc' \| 'title', string>`            | -       | -       |
+| `prefixCls`     | Prefix for style class names.                            | `string`                                                  | -       | -       |
+| `rootClassName` | Style class name for the root node.                      | `string`                                                  | -       | -       |
+
+### PromptProps
+| Property        | Description                                              | Type                                                      | Default | Version |
+|-----------------|----------------------------------------------------------|-----------------------------------------------------------|---------|---------|
+| `key`           | Unique identifier used to distinguish each prompt item.  | `string`                                                  | -       | -       |
+| `icon`          | Prompt icon displayed on the left side of the prompt item. | `React.ReactNode`                                        | -       | -       |
+| `label`         | Prompt label displaying the main content of the prompt.  | `React.ReactNode`                                         | -       | -       |
+| `description`   | Prompt description providing additional information.     | `React.ReactNode`                                         | -       | -       |
+| `disabled`      | When set to `true`, click events are disabled.            | `boolean`                                                 | `false` | -       |
 
 ## Semantic DOM
 
