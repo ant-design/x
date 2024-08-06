@@ -57,6 +57,7 @@ const App: React.FC = () => {
         loader={<div style={{ textAlign: 'center' }}><Spin indicator={<RedoOutlined spin />} size="small" /></div>}
         endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
         scrollableTarget="scrollableDiv"
+        style={{ width: 270 }}
       >
         <Conversations data={data} defaultActiveKey="demo1" groupable />
       </InfiniteScroll>
