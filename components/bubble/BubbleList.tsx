@@ -90,6 +90,7 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   // Always scroll to bottom when data change
   React.useEffect(() => {
     if (autoScroll) {
+      // New date come, the origin last one is the second last one
       const lastItemKey = mergedData[mergedData.length - 2]?.key;
       const bubbleInst = bubbleRefs.current[lastItemKey!];
 
