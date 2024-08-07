@@ -5,7 +5,3 @@
 ## en-US
 
 Enable typing output by setting the `typing` prop. If the updated `content` is a subset of the previous content, it will continue to output, otherwise it will output again.
-
-```
-
-```
