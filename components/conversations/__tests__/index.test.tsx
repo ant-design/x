@@ -67,7 +67,7 @@ describe('Conversations Component', () => {
     const onActiveChange = jest.fn();
     const { getByText } = render(<Conversations data={data} onActiveChange={onActiveChange} />);
     fireEvent.click(getByText('What is Ant Design X ?'));
-    expect(onActiveChange).toHaveBeenCalledWith('demo1', '');
+    expect(onActiveChange).toHaveBeenCalledWith('demo1', undefined);
     fireEvent.click(getByText('In Docker, use 🐑 Ollama and initialize'));
     expect(onActiveChange).toHaveBeenCalledWith('demo4', 'demo1');
   });

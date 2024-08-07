@@ -10,15 +10,15 @@ import useGroupable from './hooks/useGroupable';
 
 import useStyle from './style';
 
-import type { ConversationsProps, ConversationProps } from './interface';
+import type { ConversationsProps, ConversationProps, Groupable } from './interface';
 
 const Conversations: React.FC<ConversationsProps> = (props) => {
   const {
     prefixCls: customizePrefixCls,
     rootClassName,
-    data = [],
+    data,
     activeKey,
-    defaultActiveKey = '',
+    defaultActiveKey,
     onActiveChange,
     menu,
     styles,
@@ -28,19 +28,25 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
     ...htmlULProps
   } = props;
 
-  const [mergedActiveKey, setMergedActiveKey] = useMergedState(defaultActiveKey, {
-    value: activeKey,
-    defaultValue: defaultActiveKey,
-    onChange: onActiveChange,
-  });
+  // ============================ ActiveKey ============================
+  const [mergedActiveKey, setMergedActiveKey] = useMergedState<ConversationsProps['activeKey']>(
+    defaultActiveKey,
+    {
+      value: activeKey,
+      onChange: onActiveChange,
+    },
+  );
 
+  // ============================ Groupable ============================
+  const [groupMap, sortable, customTitleable] = useGroupable(data, groupable);
+
+  // ============================ Prefix ============================
   const { getPrefixCls, direction } = useConfigContext();
 
   const prefixCls = getPrefixCls('conversations', customizePrefixCls);
 
+  // ============================ Style ============================
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
-
-  const groupedData = useGroupable(data, groupable);
 
   const mergedCls = classnames(
     className,
@@ -48,51 +54,51 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
     prefixCls,
     hashId,
     cssVarCls,
-    classNames?.list,
     {
       [`${prefixCls}-rtl`]: direction === 'rtl',
     },
   );
 
-  const getItemProps = (item: ConversationProps) => ({
-    item,
-    classNames: {
-      item: classnames(
-        classNames?.item,
-        `${prefixCls}-item`,
-        { [`${prefixCls}-item-active`]: item.key === mergedActiveKey && !item.disabled },
-        { [`${prefixCls}-item-disabled`]: item.disabled },
-      ),
-      label: classnames(`${prefixCls}-label`, classNames?.label),
-      menuIcon: classnames(`${prefixCls}-menu-icon`, classNames?.menuIcon),
-      icon: classnames(`${prefixCls}-icon`, classNames?.icon),
-    },
-    prefixCls,
-    styles,
-    menu: typeof menu === 'function' ? menu(item) : menu,
-    onClick: () => setMergedActiveKey(item.key),
-    direction,
-  });
+  // ============================ Item Render ============================
+  const itemRender = (item: ConversationProps) => (
+    <ConversationsItem
+      key={item.key}
+      info={item}
+      className={classNames?.item}
+      style={styles?.item}
+      menu={typeof menu === 'function' ? menu(item) : menu}
+      active={mergedActiveKey === item.key}
+      onClick={() => setMergedActiveKey(item.key)}
+    />
+  );
+  // ==================== Group Title Render ==========================
+  const groupTitleRender = (group: string) => {
 
+    if (customTitleable) return (groupable as Groupable)?.title?.(group);
+
+    return <GroupTitle group={group} key={group} />;
+  }
+  // ==================== Item List Render ============================
+  const itemListRender = () => {
+
+    if (!groupable) return data?.map(itemRender);
+
+    const groupKeys = sortable
+      ? Object.keys(groupMap).sort((groupable as Groupable).sort)
+      : Object.keys(groupMap)
+
+    return groupKeys.flatMap((group) => [
+      groupTitleRender(group),
+      ...(groupMap[group].map(itemRender) || []),
+    ]);
+  }
   // ============================ Render ============================
-  const itemRender = (item: ConversationProps) => <ConversationsItem key={item.key} {...getItemProps(item)} />;
-
-  const groupRender = (group: string) => <GroupTitle key={group} group={group} groupable={groupable} />;
-
   return wrapCSSVar(
     <ul
       {...htmlULProps}
       className={mergedCls}
-      style={styles?.list}
     >
-      {
-        !groupable
-          ? groupedData.data.map(itemRender)
-          : groupedData.groups.flatMap((group) => [
-              groupRender(group),
-              ...groupedData.groupedData[group].map(itemRender),
-          ])
-      }
+      {itemListRender()}
     </ul>,
   );
 };

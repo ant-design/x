@@ -2,7 +2,7 @@ import type React from 'react';
 import type { MenuProps } from 'antd';
 import type { AnyObject } from '../_util/type';
 
-export type GroupType = string;
+type GroupType = string;
 
 /**
  * @desc 会话数据
@@ -46,6 +46,24 @@ export interface ConversationProps extends AnyObject {
   disabled?: boolean;
 };
 
+
+export type GroupSorter = Parameters<Array<GroupType>['sort']>[0];
+
+export type GroupTitleRender = ((group?: GroupType) => React.ReactNode) | undefined;
+
+export interface Groupable {
+  /**
+   * @desc 分组排序函数
+   * @descEN Group sorter
+   */
+  sort?: GroupSorter;
+  /**
+   * @desc 自定义分组标签渲染
+   * @descEN Semantic custom rendering
+   */
+  title?: GroupTitleRender;
+}
+
 /**
  * @desc 会话列表组件参数
  * @descEN Props for the conversation list component
@@ -74,7 +92,7 @@ export interface ConversationsProps extends React.HTMLAttributes<HTMLUListElemen
    * @desc 选中变更回调
    * @descEN Callback for selection change
    */
-  onActiveChange?: (value: ConversationProps['key'], preValue: ConversationProps['key']) => void;
+  onActiveChange?: (value?: ConversationProps['key'], preValue?: ConversationProps['key']) => void;
 
   /**
    * @desc 会话操作菜单
@@ -86,30 +104,19 @@ export interface ConversationsProps extends React.HTMLAttributes<HTMLUListElemen
    * @desc 是否支持分组, 开启后默认按 {@link ConversationProps.group} 字段分组
    * @descEN If grouping is supported, it defaults to the {@link ConversationProps.group} field
    */
-  groupable?: boolean | {
-    /**
-     * @desc 分组排序函数
-     * @descEN Group sorter
-     */
-    sort?: (a: GroupType, b: GroupType) => number;
-    /**
-     * @desc 自定义分组标签渲染
-     * @descEN Semantic custom rendering
-     */
-    title?: (group: GroupType) => React.ReactNode;
-  };
+  groupable?: boolean | Groupable;
 
   /** 
    * @desc 语义化结构 style
    * @descEN Semantic structure styles
    */
-  styles?: Partial<Record<'list' | 'item' | 'icon' | 'label' | 'menuIcon', React.CSSProperties>>;
+  styles?: Partial<Record<'item', React.CSSProperties>>;
 
   /** 
    * @desc 语义化结构 className
    * @descEN Semantic structure class names
    */
-  classNames?: Partial<Record<'list' | 'item' | 'icon' | 'label' | 'menuIcon', string>>;
+  classNames?: Partial<Record<'item', string>>;
 
   /**
    * @desc 自定义前缀

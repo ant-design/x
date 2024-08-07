@@ -1,70 +1,85 @@
 import React from 'react';
+import classnames from 'classnames';
 import { Tooltip, Typography, Dropdown } from 'antd';
-import type { MenuProps } from 'antd';
-import { MoreOutlined } from '@ant-design/icons';
-import type { ConversationProps, ConversationsProps } from './interface';
-import type { DirectionType } from 'antd/es/config-provider';
 
-export interface ConversationsItemProps extends React.HTMLAttributes<HTMLLIElement> {
-  classNames?: ConversationsProps['classNames'];
-  styles?: ConversationsProps['styles'];
+import { MoreOutlined } from '@ant-design/icons';
+import useConfigContext from '../config-provider/useConfigContext';
+
+import type { MenuProps } from 'antd';
+import type { ConversationProps } from './interface';
+
+export interface ConversationsItemProps extends Omit<React.HTMLAttributes<HTMLLIElement>, 'onClick'> {
+  info: ConversationProps;
+  prefixCls?: string;
   menu?: MenuProps;
-  item: ConversationProps;
-  direction?: DirectionType;
+  active?: boolean;
+  onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>, info: ConversationProps) => void;
 }
 
 const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
   const {
-    classNames,
-    styles,
+    prefixCls: customizePrefixCls,
+    info,
+    className,
     onClick,
+    active,
     menu,
-    item: {
-      disabled,
-      icon,
-      label,
-      key,
-    },
-    direction,
+    ...htmlLiProps
   } = props;
 
+  // ============================ Ellipsis ============================
   const [ellipsised, setEllipsised] = React.useState(false);
+
+  // ============================ Tootip ============================
   const [opened, setOpened] = React.useState(false);
 
+  // ============================ Prefix ============================
+  const { getPrefixCls, direction } = useConfigContext();
+
+  const prefixCls = getPrefixCls('conversations', customizePrefixCls);
+
+  // ============================ Style ============================
+  const mergedCls = classnames(
+    className,
+    `${prefixCls}-item`,
+    { [`${prefixCls}-item-active`]: active && !info.disabled },
+    { [`${prefixCls}-item-disabled`]: info.disabled },
+  );
+
+  // ============================ Render ============================
   return (
     <Tooltip
-      title={label}
+      title={info.label}
       open={ellipsised && opened}
       onOpenChange={setOpened}
       placement={direction === 'ltr' ? 'right' : 'left'}
     >
       <li
-        id={key}
-        className={classNames?.item}
-        style={styles?.item}
-        onClick={disabled ? undefined : onClick}
+        {...htmlLiProps}
+        className={mergedCls}
+        id={info.key}
+        onClick={(event) => info.disabled ? undefined : onClick?.(event, info)}
       >
-        {icon && (
-          <div className={classNames?.icon} style={styles?.icon}>
-            {icon}
+        {info.icon && (
+          <div className={`${prefixCls}-icon`}>
+            {info.icon}
           </div>
         )
         }
         <Typography.Text
-          className={classNames?.label}
-          style={styles?.label}
+          className={`${prefixCls}-label`}
           ellipsis={{
             onEllipsis: setEllipsised,
           }}
         >
-          {label}
+          {info.label}
         </Typography.Text>
-        {menu && !disabled &&
+        {menu && !info.disabled &&
           <Dropdown
             menu={menu}
             placement={direction === 'ltr' ? 'bottomRight' : 'bottomLeft'}
             trigger={['click']}
-            disabled={disabled}
+            disabled={info.disabled}
             onOpenChange={(open) => {
               if (open) {
                 setOpened(!open);
@@ -73,12 +88,9 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
             getPopupContainer={(triggerNode) => triggerNode.parentElement ?? document.body}
           >
             <MoreOutlined
-              onClick={(event) => {
-                event.stopPropagation();
-              }}
-              disabled={disabled}
-              className={classNames?.menuIcon}
-              style={styles?.menuIcon}
+              onClick={(event) => event.stopPropagation()}
+              disabled={info.disabled}
+              className={`${prefixCls}-menu-icon`}
             />
           </Dropdown>}
       </li>

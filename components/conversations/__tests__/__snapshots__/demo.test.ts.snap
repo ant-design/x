@@ -239,9 +239,7 @@ exports[`renders components/conversations/demo/group.tsx correctly 1`] = `
     <ul
       class="ant-conversations"
     >
-      <li
-        id="Group1"
-      >
+      <li>
         <div
           class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
           role="separator"
@@ -333,9 +331,7 @@ exports[`renders components/conversations/demo/group.tsx correctly 1`] = `
           </div>
         </span>
       </li>
-      <li
-        id="Group2"
-      >
+      <li>
         <div
           class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
           role="separator"
@@ -411,9 +407,7 @@ exports[`renders components/conversations/demo/group-sort.tsx correctly 1`] = `
     <ul
       class="ant-conversations"
     >
-      <li
-        id="Pinned"
-      >
+      <li>
         <div
           class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
           role="separator"
@@ -505,9 +499,7 @@ exports[`renders components/conversations/demo/group-sort.tsx correctly 1`] = `
           </div>
         </span>
       </li>
-      <li
-        id="__ungrouped"
-      >
+      <li>
         <div
           class="ant-divider ant-divider-horizontal ant-divider-plain"
           role="separator"
@@ -547,9 +539,7 @@ exports[`renders components/conversations/demo/group-sort.tsx correctly 1`] = `
           In Docker, use 🐑 Ollama and initialize
         </span>
       </li>
-      <li
-        id="Expired"
-      >
+      <li>
         <div
           class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
           role="separator"

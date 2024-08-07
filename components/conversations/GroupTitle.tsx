@@ -1,47 +1,25 @@
 import React from 'react';
 import { Divider, Typography } from 'antd';
+import { isValidGroupTitle } from './hooks/useGroupable';
 
-import type { GroupType, ConversationsProps } from './interface';
-import type { DirectionType } from 'antd/es/config-provider';
-
-/**
- * 🔥 Only for handling ungrouped data. Do not use it for any other purpose! 🔥
- */
-export const __UNGROUPED = '__ungrouped';
+import type { ConversationProps } from './interface';
+import useConfigContext from '../config-provider/useConfigContext';
 
 interface GroupTitleProps {
-  group?: GroupType;
-  groupable?: ConversationsProps['groupable'];
-  direction?: DirectionType;
+  group?: ConversationProps['group'];
 };
 
 const GroupTitle: React.FC<GroupTitleProps> = (props) => {
-  const { groupable, group, direction } = props;
+  const { direction } = useConfigContext();
 
-  const groupTitle = React.useMemo(() => {
-    if (
-      typeof groupable === 'object'
-      && typeof groupable?.title === 'function'
-      && group !== undefined
-    ) {
-      return groupable.title(group);
-    }
-
-    const isValidGroupTitle = group !== undefined && group !== __UNGROUPED;
-
-    return (
+  return (
+    <li>
       <Divider
         orientation={direction === 'ltr' ? 'right' : 'left'}
         plain
       >
-        {isValidGroupTitle && <Typography.Text type="secondary">{group}</Typography.Text>}
+        {isValidGroupTitle(props.group) && <Typography.Text type="secondary">{props.group}</Typography.Text>}
       </Divider>
-    )
-  }, [groupable, group, direction]);
-
-  return (
-    <li id={group}>
-      {groupTitle}
     </li>
   );
 };
