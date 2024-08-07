@@ -15,7 +15,7 @@ const GroupTitle: React.FC<GroupTitleProps> = (props) => {
   return (
     <li>
       <Divider
-        orientation={direction === 'ltr' ? 'right' : 'left'}
+        orientation={direction === 'ltr' ? 'left' : 'right'}
         plain
       >
         {isValidGroupTitle(props.group) && <Typography.Text type="secondary">{props.group}</Typography.Text>}

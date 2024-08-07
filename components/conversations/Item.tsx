@@ -57,7 +57,6 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
       <li
         {...htmlLiProps}
         className={mergedCls}
-        id={info.key}
         onClick={(event) => info.disabled ? undefined : onClick?.(event, info)}
       >
         {info.icon && (
