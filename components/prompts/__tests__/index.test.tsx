@@ -69,10 +69,7 @@ describe('bubble', () => {
     const { getByText } = render(<Prompts {...mockProps} />);
     const button = getByText(/label 1/i);
     fireEvent.click(button);
-    expect(mockProps.onClick).toHaveBeenCalledWith({
-      item: mockData[0],
-      domEvent: expect.any(Object),
-    });
+    expect(mockProps.onClick).toHaveBeenCalledWith(expect.any(Object), mockData[0]);
   });
 
   it('should disable buttons correctly', () => {

@@ -25,6 +25,6 @@ const data: PromptsProps['data'] = [
   },
 ];
 
-const App = () => (<Prompts title="🤔 You might also want to ask:" data={data} flex={{ vertical: true }} />);
+const App = () => (<Prompts title="🤔 You might also want to ask:" data={data} vertical />);
 
 export default App;

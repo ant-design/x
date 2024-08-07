@@ -1,5 +1,3 @@
-import type { FlexProps } from 'antd';
-
 export interface PromptProps {
   /**
    * @desc 唯一标识用于区分每个提示项。
@@ -49,28 +47,31 @@ export interface PromptsProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
    * @desc Item 提示项被点击时的回调函数。
    * @descEN Callback function when a prompt item is clicked.
    */
-  onClick?: (params: {
-    item: PromptProps;
-    domEvent: React.MouseEvent<HTMLElement, MouseEvent>;
-  }) => void;
+  onClick?: (domEvent: React.MouseEvent<HTMLElement, MouseEvent>, info: PromptProps) => void;
 
   /**
-   * @desc 弹性布局配置 - 同 antd 配置提示列表的弹性布局，类似于 antd 的 Flex 组件。
-   * @descEN Configure the flex layout of the prompt list, similar to antd's Flex component.
+   * @desc 提示列表是否垂直排列。
+   * @descEN Whether the prompt list is arranged vertically.
    */
-  flex?: Omit<FlexProps, 'children'>;
+  vertical?: boolean;
+
+  /**
+   * @desc 提示列表是否换行。
+   * @descEN Whether the prompt list is wrapped.
+   */
+  wrap?: boolean;
 
   /**
    * @desc 自定义样式，用于各个提示项的不同部分。
    * @descEN Custom styles for different parts of each prompt item.
    */
-  styles?: Record<'item' | 'icon' | 'label' | 'desc' | 'title', React.CSSProperties>;
+  styles?: Partial<Record<'list' | 'item' | 'content' | 'title', React.CSSProperties>>;
 
   /**
    * @desc 自定义样式类名，用于各个提示项的不同部分。
    * @descEN Custom style class names for different parts of each prompt item.
    */
-  classNames?: Record<'item' | 'icon' | 'label' | 'desc' | 'title', string>;
+  classNames?: Partial<Record<'list' | 'item' | 'content' | 'title', string>>;
 
   /**
    * @desc 样式类名的前缀。

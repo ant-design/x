@@ -47,7 +47,7 @@ const data: PromptsProps['data'] = [
 ];
 
 
-const App = () => (<Prompts title="✨ Inspirational Sparks and Marvelous Tips" data={data} flex={{ wrap: 'wrap' }} />);
+const App = () => (<Prompts title="✨ Inspirational Sparks and Marvelous Tips" data={data} wrap />);
 
 export default App;
 

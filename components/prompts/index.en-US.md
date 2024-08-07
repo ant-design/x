@@ -28,14 +28,15 @@ The Prompts component is used to display a predefined set of questions or sugges
 ### PromptsProps
 | Property        | Description                                              | Type                                                      | Default | Version |
 |-----------------|----------------------------------------------------------|-----------------------------------------------------------|---------|---------|
-| `data`          | List containing multiple prompt items.                   | `PromptProps[]`                                           | -       | -       |
-| `title`         | Title displayed at the top of the prompt list.           | `React.ReactNode`                                         | -       | -       |
-| `onClick`       | Callback function when a prompt item is clicked.         | `(params: { item: PromptProps; domEvent: React.MouseEvent<HTMLElement, MouseEvent>; }) => void` | -       | -       |
-| `flex`          | Configure the flex layout of the prompt list, similar to antd's Flex component. | `Omit<FlexProps, 'children'>`                            | -       | -       |
-| `styles`        | Custom styles for different parts of each prompt item.   | `Record<'item' \| 'icon' \| 'label' \| 'desc' \| 'title', React.CSSProperties>` | -       | -       |
-| `classNames`    | Custom style class names for different parts of each prompt item. | `Record<'item' \| 'icon' \| 'label' \| 'desc' \| 'title', string>`            | -       | -       |
-| `prefixCls`     | Prefix for style class names.                            | `string`                                                  | -       | -       |
-| `rootClassName` | Style class name for the root node.                      | `string`                                                  | -       | -       |
+| `data`          | List containing multiple prompt items.                   | PromptProps[]                                           | -       | -       |
+| `title`         | Title displayed at the top of the prompt list.           | React.ReactNode                                         | -       | -       |
+| `vertical`      | When set to `true`, the Prompts will be arranged vertically.         | boolean                                                | `false` | -    |
+| `wrap`      | When set to `true`, the Prompts will automatically wrap.          | boolean                                                | `false` | -    |
+| `onClick`       | Callback function when a prompt item is clicked.         | (event: React.MouseEvent<HTMLElement, MouseEvent>, info: PromptProps) => void | -       | -       |
+| `styles`        | Custom styles for different parts of each prompt item.   | Record<'list' \| 'item' \| 'content' \| 'title', React.CSSProperties> | -       | -       |
+| `classNames`    | Custom style class names for different parts of each prompt item. | Record<'list' \| 'item' \| 'content' \| 'title', string>            | -       | -       |
+| `prefixCls`     | Prefix for style class names.                            | string                                                  | -       | -       |
+| `rootClassName` | Style class name for the root node.                      | string                                                  | -       | -       |
 
 ### PromptProps
 | Property        | Description                                              | Type                                                      | Default | Version |

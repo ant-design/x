@@ -30,23 +30,24 @@ Prompts 组件用于显示一组与当前上下文相关的预定义的问题或
 ### PromptsProps
 | 属性            | 说明                           | 类型                                                      | 默认值 | 版本 |
 |-----------------|------------------------------|----------------------------------------------------------|-------|------|
-| `data`          | 包含多个提示项的列表。                 | `PromptProps[]`                                          | -     | -    |
-| `title`         | 显示在提示列表顶部的标题。               | `React.ReactNode`                                        | -     | -    |
-| `onClick`       | 提示项被点击时的回调函数。              | `(params: { item: PromptProps; domEvent: React.MouseEvent<HTMLElement, MouseEvent>; }) => void` | -     | -    |
-| `flex`          | 配置提示列表的弹性布局，类似于 antd 的 Flex 组件。 | `Omit<FlexProps, 'children'>`                            | -     | -    |
-| `styles`        | 自定义样式，用于各个提示项的不同部分。      | `Record<'item' \| 'icon' \| 'label' \| 'desc' \| 'title', React.CSSProperties>` | -     | -    |
-| `classNames`    | 自定义样式类名，用于各个提示项的不同部分。  | `Record<'item' \| 'icon' \| 'label' \| 'desc' \| 'title', string>`            | -     | -    |
-| `prefixCls`     | 样式类名的前缀。                       | `string`                                                 | -     | -    |
-| `rootClassName` | 根节点的样式类名。                     | `string`                                                 | -     | -    |
+| `data`          | 包含多个提示项的列表。                 | PromptProps[]                                          | -     | -    |
+| `title`         | 显示在提示列表顶部的标题。               | React.ReactNode                                      | -     | -    |
+| `vertical`      | 设置为 `true` 时, 提示列表将垂直排列。         | boolean                                                | `false` | -    |
+| `wrap`      | 设置为 `true` 时, 提示列表将自动换行。          | boolean                                                | `false` | -    |
+| `onClick`       | 提示项被点击时的回调函数。              | (event: React.MouseEvent<HTMLElement, MouseEvent>, info: PromptProps) => void | -     | -    |
+| `styles`        | 自定义样式，用于各个提示项的不同部分。      | Record<'list' \| 'item' \| 'content' \| 'title', React.CSSProperties> | -     | -    |
+| `classNames`    | 自定义样式类名，用于各个提示项的不同部分。  | Record<'list' \| 'item' \| 'content' \| 'title', string>            | -     | -    |
+| `prefixCls`     | 样式类名的前缀。                       | string                                                 | -     | -    |
+| `rootClassName` | 根节点的样式类名。                     | string                                                 | -     | -    |
 
-### PromptsProps
+### PromptProps
 | 属性            | 说明                           | 类型                                                      | 默认值 | 版本 |
 |-----------------|------------------------------|----------------------------------------------------------|-------|------|
-| `key`           | 唯一标识用于区分每个提示项。         | `string`                                                 | -     | -    |
-| `icon`          | 提示图标显示在提示项的左侧。           | `React.ReactNode`                                        | -     | -    |
-| `label`         | 提示标签显示提示的主要内容。           | `React.ReactNode`                                        | -     | -    |
-| `description`   | 提示描述提供额外的信息。               | `React.ReactNode`                                        | -     | -    |
-| `disabled`      | 设置为 `true` 时禁用点击事件。          | `boolean`                                                | `false` | -    |
+| `key`           | 唯一标识用于区分每个提示项。         | string                                                 | -     | -    |
+| `icon`          | 提示图标显示在提示项的左侧。           | React.ReactNode                                        | -     | -    |
+| `label`         | 提示标签显示提示的主要内容。           | React.ReactNode                                        | -     | -    |
+| `description`   | 提示描述提供额外的信息。               | React.ReactNode                                        | -     | -    |
+| `disabled`      | 设置为 `true` 时禁用点击事件。          | boolean                                                | `false` | -    |
 
 ## Semantic DOM
 

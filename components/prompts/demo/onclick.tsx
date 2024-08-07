@@ -29,11 +29,11 @@ const data: PromptsProps['data'] = [
 const App = () => (
   <Prompts
     data={data}
-    onClick={({ item, domEvent }) => {
-      console.log(domEvent);
+    onClick={(event, info) => {
+      console.log(event);
       message.open({
-        icon: item.icon,
-        content: item.description,
+        icon: info.icon,
+        content: info.description,
       })
     }}
   />

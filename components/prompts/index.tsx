@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import { Button, Typography, Flex } from 'antd';
+import { Button, Typography } from 'antd';
 
 import useConfigContext from '../config-provider/useConfigContext';
 
@@ -15,7 +15,8 @@ const Prompts: React.FC<PromptsProps> = (props) => {
     className,
     data,
     onClick,
-    flex = {},
+    vertical,
+    wrap,
     rootClassName,
     styles,
     classNames,
@@ -23,10 +24,12 @@ const Prompts: React.FC<PromptsProps> = (props) => {
     ...htmlProps
   } = props;
 
-  const { getPrefixCls } = useConfigContext();
+  // ============================ PrefixCls ============================
+  const { getPrefixCls, direction } = useConfigContext();
 
   const prefixCls = getPrefixCls('prompts', customizePrefixCls);
 
+  // ============================ Style ============================
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
 
   const mergedCls = classnames(
@@ -35,14 +38,24 @@ const Prompts: React.FC<PromptsProps> = (props) => {
     prefixCls,
     hashId,
     cssVarCls,
+    { [`${prefixCls}-rtl`]: direction === 'rtl' },
   );
 
+  const mergedListCls = classnames(
+    `${prefixCls}-list`,
+    classNames?.list,
+    { [`${prefixCls}-list-wrap`]: wrap },
+    { [`${prefixCls}-list-vertical`]: vertical },
+  );
+
+  // ============================ Render ============================
   return wrapCSSVar(
     <div
       {...htmlProps}
       className={mergedCls}
       style={style}
     >
+      {/* Title */}
       {title && (
         <Typography.Title
           level={5}
@@ -52,55 +65,57 @@ const Prompts: React.FC<PromptsProps> = (props) => {
           {title}
         </Typography.Title>
       )}
-      <Flex
-        wrap={false}
-        gap={12}
-        {...flex}
-        component="ul"
-      >
+      {/* Prompt List */}
+      <ul className={mergedListCls} style={styles?.list}>
         {
-          data?.map(i => (
-            <li key={i.key}>
+          data?.map(info => (
+            <li key={info.key}>
+              {/* Prompt Item */}
               <Button
-                type={i.disabled ? 'default' : 'text'}
+                type={info.disabled ? 'default' : 'text'}
                 style={styles?.item}
-                disabled={i.disabled}
+                disabled={info.disabled}
                 className={classnames(`${prefixCls}-item`, classNames?.item)}
-                onClick={(e) => onClick?.({ item: i, domEvent: e })}
+                onClick={(event) => onClick?.(event, info)}
               >
-                {i.icon && (
-                  <div
-                    className={classnames(`${prefixCls}-icon`, classNames?.icon)}
-                    style={styles?.icon}
-                  >
-                    {i.icon}
+                {/* Icon */}
+                {info.icon && (
+                  <div className={`${prefixCls}-icon`}>
+                    {info.icon}
                   </div>
                 )}
-                <Flex vertical align="flex-start" gap={8}>
-                  {i.label && <Typography.Text
-                    strong
-                    ellipsis
-                    className={classnames(`${prefixCls}-label`, classNames?.label)}
-                    style={styles?.label}
-                    disabled={i.disabled}
-                  >
-                    {i.label}
-                  </Typography.Text>}
-                  {i.description && <Typography.Text
-                    className={classnames(`${prefixCls}-desc`, classNames?.desc)}
-                    style={styles?.desc}
-                    
-                    type="secondary"
-                    disabled={i.disabled}
-                  >
-                    {i.description}
-                  </Typography.Text>}
-                </Flex>
+                {/* Content */}
+                <div
+                  className={classnames(`${prefixCls}-content`, classNames?.content)}
+                  style={styles?.content}
+                >
+                  {/* Label */}
+                  {info.label && (
+                    <Typography.Text
+                      strong
+                      ellipsis
+                      className={`${prefixCls}-label`}
+                      disabled={info.disabled}
+                    >
+                      {info.label}
+                    </Typography.Text>
+                  )}
+                  {/* Description */}
+                  {info.description && (
+                    <Typography.Text
+                      className={`${prefixCls}-desc`}
+                      type="secondary"
+                      disabled={info.disabled}
+                    >
+                      {info.description}
+                    </Typography.Text>
+                  )}
+                </div>
               </Button>
             </li>
           ))
         }
-      </Flex>
+      </ul>
     </div>,
   );
 };

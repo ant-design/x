@@ -15,6 +15,21 @@ const genPromptsStyle: GenerateStyle<PromptsToken> = (token) => {
     [componentCls]: {
       maxWidth: '100%',
 
+      [`&${componentCls}-rtl`]: {
+        direction: 'rtl',
+      },
+      [`& ${componentCls}-title`]: {
+      },
+      [`& ${componentCls}-list`]: {
+        display: 'flex',
+        gap: token.paddingSM,
+        '&-wrap': {
+          flexWrap: 'wrap',
+        },
+        '&-vertical': {
+          flexDirection: 'column',
+        },
+      },
       [`& ${componentCls}-item`]: {
         display: 'flex',
         gap: token.paddingSM,
@@ -24,14 +39,11 @@ const genPromptsStyle: GenerateStyle<PromptsToken> = (token) => {
         justifyContent: 'flex-start',
         borderRadius: token.borderRadiusLG,
         border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorderSecondary}`,
-
-        [`& ${componentCls}-icon`]: {
-
-        },
-        [`& ${componentCls}-label`]: {
-        },
-        [`& ${componentCls}-desc`]: {
-
+        [`& ${componentCls}-content`]: {
+          display: 'inline-flex',
+          gap: token.paddingXS,
+          flexDirection: 'column',
+          alignItems: 'flex-start',
         },
       },
     },

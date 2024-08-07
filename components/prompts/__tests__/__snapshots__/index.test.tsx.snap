@@ -2,11 +2,10 @@
 
 exports[`bubble rtl render component should be rendered correctly in RTL direction 1`] = `
 <div
-  class="ant-prompts"
+  class="ant-prompts ant-prompts-rtl"
 >
   <ul
-    class="ant-flex ant-flex-rtl"
-    style="gap: 12px;"
+    class="ant-prompts-list"
   />
 </div>
 `;

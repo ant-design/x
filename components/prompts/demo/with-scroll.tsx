@@ -1,68 +1,68 @@
 import React from 'react';
 import { Prompts } from '@ant-design/x';
 import type { PromptsProps } from '@ant-design/x';
-import { BulbOutlined, InfoCircleOutlined, WarningOutlined, RocketOutlined, CheckCircleOutlined, CoffeeOutlined, SmileOutlined, FireOutlined, ThunderboltOutlined, HeartOutlined } from '@ant-design/icons';
+import { BulbOutlined, InfoCircleOutlined, SmileOutlined, FileTextOutlined, FireOutlined, CoffeeOutlined, CalendarOutlined, HistoryOutlined, ShareAltOutlined, SettingOutlined } from '@ant-design/icons';
 
 const data: PromptsProps['data'] = [
   {
-    key: "1",
-    icon: <BulbOutlined style={{ color: '#FFD700' }} />,  
-    label: "Ignite Your Creativity",
+    key: '1',
+    icon: <BulbOutlined style={{ color: '#FFD700' }} />, 
+    label: 'Get Inspired',
   },
   {
-    key: "2",
-    icon: <InfoCircleOutlined style={{ color: '#1890FF' }} />,  
-    label: "Uncover Background Info",
+    key: '10',
+    icon: <SettingOutlined style={{ color: '#EB2F96' }} />, 
+    label: 'Settings',
   },
   {
-    key: "3",
-    icon: <WarningOutlined style={{ color: '#FF4D4F' }} />,  
-    label: "Troubleshooting Guide",
+    key: '2',
+    icon: <InfoCircleOutlined style={{ color: '#1890FF' }} />, 
+    label: 'Background Info',
   },
   {
-    key: "4",
-    icon: <RocketOutlined style={{ color: '#722ED1' }} />,  
-    label: "Efficiency Boost Battle",
+    key: '3',
+    icon: <SmileOutlined style={{ color: '#FAAD14' }} />, 
+    label: 'Send a Compliment',
   },
   {
-    key: "5",
-    icon: <CheckCircleOutlined style={{ color: '#52C41A' }} />,  
-    label: "Task Completion Secrets",
+    key: '4',
+    icon: <FileTextOutlined style={{ color: '#52C41A' }} />, 
+    label: 'Draft a Message',
   },
   {
-    key: "6",
-    icon: <CoffeeOutlined style={{ color: '#964B00' }} />,  
-    label: "Time for a Coffee Break",
+    key: '5',
+    icon: <FireOutlined style={{ color: '#FF4D4F' }} />, 
+    label: 'Send an Alert',
   },
   {
-    key: "7",
-    icon: <SmileOutlined style={{ color: '#FAAD14' }} />,  
-    label: "Smile Through Challenges",
+    key: '6',
+    icon: <CoffeeOutlined style={{ color: '#964B00' }} />, 
+    label: 'Take a Break',
   },
   {
-    key: "8",
-    icon: <FireOutlined style={{ color: '#FF4D4F' }} />,  
-    label: "High-Pressure Rescue",
+    key: '7',
+    icon: <CalendarOutlined style={{ color: '#722ED1' }} />, 
+    label: 'Schedule a Meeting',
   },
   {
-    key: "9",
-    icon: <ThunderboltOutlined style={{ color: '#1890FF' }} />,  
-    label: "Emergency Guide",
+    key: '8',
+    icon: <HistoryOutlined style={{ color: '#1890FF' }} />, 
+    label: 'View History',
   },
   {
-    key: "10",
-    icon: <HeartOutlined style={{ color: '#EB2F96' }} />,  
-    label: "Magic of Teamwork",
+    key: '9',
+    icon: <ShareAltOutlined style={{ color: '#52C41A' }} />, 
+    label: 'Share Content',
   },
 ];
-
 
 const App = () => (
   <Prompts
     data={data}
-    flex={{
-      style: {
+    styles={{
+      list: {
         overflow: 'scroll',
+        scrollbarWidth: 'none',
       },
     }}
   />
