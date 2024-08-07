@@ -9,7 +9,7 @@ function useTypingConfig(typing: BubbleProps['typing']) {
 
     let baseConfig: Required<TypingOption> = {
       step: 1,
-      interval: 100,
+      interval: 50,
     };
 
     if (typeof typing === 'object') {

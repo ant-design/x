@@ -2,6 +2,7 @@ import { Keyframes, unit } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
+import genBubbleListStyle from './list';
 
 const loadingMove = new Keyframes('loadingMove', {
   '0%': {
@@ -37,7 +38,7 @@ export interface ComponentToken {
   //
 }
 
-interface BubbleToken extends FullToken<'Bubble'> {
+export interface BubbleToken extends FullToken<'Bubble'> {
   bubbleContentMaxWidth: number | string;
 }
 
@@ -125,7 +126,7 @@ export default genStyleHooks<'Bubble'>(
     const bubbleToken = mergeToken<BubbleToken>(token, {
       bubbleContentMaxWidth: `calc(100% - ${unit(calc(paddingXS).add(32).equal())})`,
     });
-    return genBubbleStyle(bubbleToken);
+    return [genBubbleStyle(bubbleToken), genBubbleListStyle(bubbleToken)];
   },
   prepareComponentToken,
 );
