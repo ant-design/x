@@ -13,7 +13,7 @@ export interface ConversationsItemProps extends Omit<React.HTMLAttributes<HTMLLI
   prefixCls?: string;
   menu?: MenuProps;
   active?: boolean;
-  onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>, info: ConversationProps) => void;
+  onClick?: (info: ConversationProps) => void;
 }
 
 const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
@@ -57,7 +57,7 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
       <li
         {...htmlLiProps}
         className={mergedCls}
-        onClick={(event) => info.disabled ? undefined : onClick?.(event, info)}
+        onClick={() => info.disabled ? undefined : onClick?.(info)}
       >
         {info.icon && (
           <div className={`${prefixCls}-icon`}>

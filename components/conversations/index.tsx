@@ -68,7 +68,7 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
       style={styles?.item}
       menu={typeof menu === 'function' ? menu(item) : menu}
       active={mergedActiveKey === item.key}
-      onClick={() => setMergedActiveKey(item.key)}
+      onClick={(info) => setMergedActiveKey(info.key)}
     />
   );
   // ==================== Group Title Render ==========================
