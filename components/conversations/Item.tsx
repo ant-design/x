@@ -28,7 +28,7 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
   } = props;
 
   // ============================ Ellipsis ============================
-  const [ellipsised, setEllipsised] = React.useState(false);
+  const [ellipsised, onEllipsis] = React.useState(false);
 
   // ============================ Tootip ============================
   const [opened, setOpened] = React.useState(false);
@@ -68,7 +68,7 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
         <Typography.Text
           className={`${prefixCls}-label`}
           ellipsis={{
-            onEllipsis: setEllipsised,
+            onEllipsis,
           }}
         >
           {info.label}
