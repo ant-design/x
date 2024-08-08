@@ -34,6 +34,7 @@ const data: ConversationProps[] = [
 
 describe('Conversations Component', () => {
   mountTest(() => <Conversations />);
+
   rtlTest(() => <Conversations data={data} />);
 
   beforeAll(() => {
@@ -70,6 +71,8 @@ describe('Conversations Component', () => {
     expect(onActiveChange).toHaveBeenCalledWith('demo1', undefined);
     fireEvent.click(getByText('In Docker, use 🐑 Ollama and initialize'));
     expect(onActiveChange).toHaveBeenCalledWith('demo4', 'demo1');
+    fireEvent.click(getByText('Expired, please go to the recycle bin to check'));
+    expect(onActiveChange).toHaveBeenCalledWith('demo4', 'demo1');
   });
 
   it('should handle menu function', () => {
@@ -86,7 +89,19 @@ describe('Conversations Component', () => {
         },
       ],
     });
-    const { getByText, container } = render(<Conversations data={data} menu={menu} defaultActiveKey="demo1" />);
+    const { getByText, container } = render(
+      <Conversations
+        data={[
+          {
+            key: 'demo5',
+            label: 'Looooooooooooooooooooooooooonnnnnnnnnnnnnnnnnnnnnnnnnnnnngggggggggggggggggggggg',
+            timestamp: 794621200,
+          },
+        ]}
+        menu={menu}
+        defaultActiveKey="demo1"
+      />,
+    );
     expect(menu).toHaveBeenCalled();
     const menuElement = container.querySelector('.ant-conversations-menu-icon');
     expect(menuElement).toBeInTheDocument();

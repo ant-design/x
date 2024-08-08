@@ -6,7 +6,6 @@ exports[`Conversations Component Conversations component work 1`] = `
 >
   <li
     class="ant-conversations-item"
-    id="demo1"
   >
     <div
       class="ant-conversations-icon"
@@ -26,7 +25,6 @@ exports[`Conversations Component Conversations component work 1`] = `
   </li>
   <li
     class="ant-conversations-item"
-    id="demo2"
   >
     <span
       class="ant-typography ant-typography-ellipsis ant-conversations-label"
@@ -45,7 +43,6 @@ exports[`Conversations Component Conversations component work 1`] = `
   </li>
   <li
     class="ant-conversations-item"
-    id="demo4"
   >
     <span
       aria-label="In Docker, use 🐑 Ollama and initialize"
@@ -56,7 +53,6 @@ exports[`Conversations Component Conversations component work 1`] = `
   </li>
   <li
     class="ant-conversations-item ant-conversations-item-disabled"
-    id="demo5"
   >
     <span
       aria-label="Expired, please go to the recycle bin to check"
@@ -74,7 +70,6 @@ exports[`Conversations Component rtl render component should be rendered correct
 >
   <li
     class="ant-conversations-item"
-    id="demo1"
   >
     <div
       class="ant-conversations-icon"
@@ -94,7 +89,6 @@ exports[`Conversations Component rtl render component should be rendered correct
   </li>
   <li
     class="ant-conversations-item"
-    id="demo2"
   >
     <span
       class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-conversations-label"
@@ -113,7 +107,6 @@ exports[`Conversations Component rtl render component should be rendered correct
   </li>
   <li
     class="ant-conversations-item"
-    id="demo4"
   >
     <span
       aria-label="In Docker, use 🐑 Ollama and initialize"
@@ -124,7 +117,6 @@ exports[`Conversations Component rtl render component should be rendered correct
   </li>
   <li
     class="ant-conversations-item ant-conversations-item-disabled"
-    id="demo5"
   >
     <span
       aria-label="Expired, please go to the recycle bin to check"
