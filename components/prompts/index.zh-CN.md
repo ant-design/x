@@ -21,8 +21,8 @@ Prompts 组件用于显示一组与当前上下文相关的预定义的问题或
 <code src="./demo/disabled.tsx">不可用状态</code>
 <code src="./demo/onclick.tsx">点击事件</code>
 <code src="./demo/flex-vertical.tsx">纵向展示</code>
-<code src="./demo/flex-wrap.tsx">可换行</code>
 <code src="./demo/with-scroll.tsx">横向滚动</code>
+<code src="./demo/flex-wrap.tsx">可换行</code>
 ## API
 
 通用属性参考：[通用属性](/docs/react/common-props)

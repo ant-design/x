@@ -18,8 +18,8 @@ const Prompts: React.FC<PromptsProps> = (props) => {
     vertical,
     wrap,
     rootClassName,
-    styles,
-    classNames,
+    styles = {},
+    classNames = {},
     style,
     ...htmlProps
   } = props;
@@ -43,7 +43,7 @@ const Prompts: React.FC<PromptsProps> = (props) => {
 
   const mergedListCls = classnames(
     `${prefixCls}-list`,
-    classNames?.list,
+    classNames.list,
     { [`${prefixCls}-list-wrap`]: wrap },
     { [`${prefixCls}-list-vertical`]: vertical },
   );
@@ -59,23 +59,23 @@ const Prompts: React.FC<PromptsProps> = (props) => {
       {title && (
         <Typography.Title
           level={5}
-          className={classnames(`${prefixCls}-title`, classNames?.title)}
-          style={styles?.title}
+          className={classnames(`${prefixCls}-title`, classNames.title)}
+          style={styles.title}
         >
           {title}
         </Typography.Title>
       )}
       {/* Prompt List */}
-      <ul className={mergedListCls} style={styles?.list}>
+      <ul className={mergedListCls} style={styles.list}>
         {
           data?.map((info, index) => (
             <li key={info.key || `key_${index}`}>
               {/* Prompt Item */}
               <Button
                 type={info.disabled ? 'default' : 'text'}
-                style={styles?.item}
+                style={styles.item}
                 disabled={info.disabled}
-                className={classnames(`${prefixCls}-item`, classNames?.item)}
+                className={classnames(`${prefixCls}-item`, classNames.item)}
                 onClick={(event) => onClick?.(event, { data: info })}
               >
                 {/* Icon */}
@@ -86,8 +86,8 @@ const Prompts: React.FC<PromptsProps> = (props) => {
                 )}
                 {/* Content */}
                 <div
-                  className={classnames(`${prefixCls}-content`, classNames?.content)}
-                  style={styles?.content}
+                  className={classnames(`${prefixCls}-content`, classNames.content)}
+                  style={styles.content}
                 >
                   {/* Label */}
                   {info.label && (
