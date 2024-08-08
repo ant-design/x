@@ -10,7 +10,7 @@ import useGroupable from './hooks/useGroupable';
 
 import useStyle from './style';
 
-import type { ConversationsProps, ConversationProps, Groupable } from './interface';
+import type { ConversationsProps, ConversationProps } from './interface';
 
 const Conversations: React.FC<ConversationsProps> = (props) => {
   const {
@@ -38,7 +38,7 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
   );
 
   // ============================ Groupable ============================
-  const [groupMap, sortable, customTitleable] = useGroupable(data, groupable);
+  const [groupList, ungrouped] = useGroupable(groupable, data);
 
   // ============================ Prefix ============================
   const { getPrefixCls, direction } = useConfigContext();
@@ -59,46 +59,42 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
     },
   );
 
-  // ============================ Item Render ============================
-  const itemRender = (item: ConversationProps) => (
-    <ConversationsItem
-      key={item.key}
-      info={item}
-      className={classNames?.item}
-      style={styles?.item}
-      menu={typeof menu === 'function' ? menu(item) : menu}
-      active={mergedActiveKey === item.key}
-      onClick={(info) => setMergedActiveKey(info.key)}
-    />
-  );
-  // ==================== Group Title Render ==========================
-  const groupTitleRender = (group: string) => {
-
-    if (customTitleable) return (groupable as Groupable)?.title?.(group);
-
-    return <GroupTitle group={group} key={group} />;
-  }
-  // ==================== Item List Render ============================
-  const itemListRender = () => {
-
-    if (!groupable) return data?.map(itemRender);
-
-    const groupKeys = sortable
-      ? Object.keys(groupMap).sort((groupable as Groupable).sort)
-      : Object.keys(groupMap)
-
-    return groupKeys.flatMap((group) => [
-      groupTitleRender(group),
-      ...(groupMap[group].map(itemRender) || []),
-    ]);
-  }
   // ============================ Render ============================
   return wrapCSSVar(
     <ul
       {...htmlULProps}
       className={mergedCls}
     >
-      {itemListRender()}
+      {
+        groupList.flatMap((groupInfo, groupIndex) => {
+          const convItems = groupInfo.data.map(
+            (convInfo: ConversationProps, convIndex: number) => (
+              <ConversationsItem
+                key={convInfo.key || `key-${convIndex}`}
+                info={convInfo}
+                prefixCls={prefixCls}
+                direction={direction}
+                className={classNames?.item}
+                style={styles?.item}
+                menu={typeof menu === 'function' ? menu(convInfo) : menu}
+                active={mergedActiveKey === convInfo.key}
+                onClick={(info) => setMergedActiveKey(info.key)}
+              />
+            ),
+          );
+          
+          return ungrouped
+            ? convItems
+            : (
+              <li key={groupInfo.name || `key-${groupIndex}`}>
+                {groupInfo.title || <GroupTitle group={groupInfo.name} direction={direction} key={groupInfo.name} />}
+                <ul className={`${prefixCls}-list`}>
+                  {convItems}
+                </ul>
+              </li>
+            );
+        })
+      }
     </ul>,
   );
 };

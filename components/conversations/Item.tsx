@@ -1,16 +1,16 @@
 import React from 'react';
 import classnames from 'classnames';
 import { Tooltip, Typography, Dropdown } from 'antd';
-
 import { MoreOutlined } from '@ant-design/icons';
-import useConfigContext from '../config-provider/useConfigContext';
 
 import type { MenuProps } from 'antd';
+import type { DirectionType } from 'antd/es/config-provider';
 import type { ConversationProps } from './interface';
 
 export interface ConversationsItemProps extends Omit<React.HTMLAttributes<HTMLLIElement>, 'onClick'> {
   info: ConversationProps;
   prefixCls?: string;
+  direction?: DirectionType;
   menu?: MenuProps;
   active?: boolean;
   onClick?: (info: ConversationProps) => void;
@@ -18,9 +18,10 @@ export interface ConversationsItemProps extends Omit<React.HTMLAttributes<HTMLLI
 
 const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
   const {
-    prefixCls: customizePrefixCls,
+    prefixCls,
     info,
     className,
+    direction,
     onClick,
     active,
     menu,
@@ -32,11 +33,6 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
 
   // ============================ Tootip ============================
   const [opened, setOpened] = React.useState(false);
-
-  // ============================ Prefix ============================
-  const { getPrefixCls, direction } = useConfigContext();
-
-  const prefixCls = getPrefixCls('conversations', customizePrefixCls);
 
   // ============================ Style ============================
   const mergedCls = classnames(
@@ -84,7 +80,6 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
                 setOpened(!open);
               }
             }}
-            getPopupContainer={(triggerNode) => triggerNode.parentElement ?? document.body}
           >
             <MoreOutlined
               onClick={(event) => event.stopPropagation()}

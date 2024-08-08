@@ -1,27 +1,21 @@
 import React from 'react';
 import { Divider, Typography } from 'antd';
-import { isValidGroupTitle } from './hooks/useGroupable';
 
+import type { DirectionType } from 'antd/es/config-provider';
 import type { ConversationProps } from './interface';
-import useConfigContext from '../config-provider/useConfigContext';
 
 interface GroupTitleProps {
   group?: ConversationProps['group'];
+  direction?: DirectionType;
 };
 
-const GroupTitle: React.FC<GroupTitleProps> = (props) => {
-  const { direction } = useConfigContext();
-
-  return (
-    <li>
-      <Divider
-        orientation={direction === 'ltr' ? 'left' : 'right'}
-        plain
-      >
-        {isValidGroupTitle(props.group) && <Typography.Text type="secondary">{props.group}</Typography.Text>}
-      </Divider>
-    </li>
-  );
-};
+const GroupTitle: React.FC<GroupTitleProps> = (props) => (
+  <Divider
+    orientation={props?.direction === 'ltr' ? 'left' : 'right'}
+    plain
+  >
+    {props?.group && <Typography.Text type="secondary">{props.group}</Typography.Text>}
+  </Divider>
+);
 
 export default GroupTitle;
