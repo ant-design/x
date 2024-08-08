@@ -32,7 +32,7 @@ Common props ref：[Common props](/docs/react/common-props)
 
 | Property           | Description                  | Type                                                                                          | Default | Version |
 |--------------------|------------------------------|-----------------------------------------------------------------------------------------------|---------|---------|
-| data               | Data source for conversation list | `ConversationProps[]`                                                                         | -       | -       |
+| data               | Data source for conversation list | `ConversationProps`[]                                                                         | -       | -       |
 | activeKey          | Currently selected value     | string                                                                    | -       | -       |
 | defaultActiveKey   | Default selected value       | string                                                                    | -       | -       |
 | onActiveChange     | Callback for selection change | (value?: string, preValue?: string) => void              | -       | -       |
@@ -55,8 +55,8 @@ Common props ref：[Common props](/docs/react/common-props)
 ### GroupableProps
 | Property    | Description             | Type                               | Default | Version |
 |-------------|-------------------------|------------------------------------|---------|---------|
-| `sort`       | Group sorter         | `(a: string, b: string) => number` | -  | -    |
-| `title` | Semantic custom rendering       | `React.ComponentType<{ group: string }>` | -   | -    |
+| `sort`       | Group sorter         | (a: string, b: string) => number | -  | -    |
+| `title` | Semantic custom rendering       | ((group: string, info: { components: { GroupTitle: React.ComponentType } }) => React.ReactNode) | -   | -    |
 
 ## Design Token
 

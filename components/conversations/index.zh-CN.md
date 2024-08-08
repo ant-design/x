@@ -34,7 +34,7 @@ demo:
 
 | 属性              | 说明                          | 类型                                                                                          | 默认值 | 版本 |
 |-------------------|-------------------------------|-----------------------------------------------------------------------------------------------|--------|------|
-| data              | 会话列表数据源                | `ConversationProps[]`                                                                         | -      | -    |
+| data              | 会话列表数据源                | `ConversationProps`[]                                                                         | -      | -    |
 | activeKey         | 当前选中的值                  | string                                                                   | -      | -    |
 | defaultActiveKey  | 默认选中值                    | string                                                                  | -      | -    |
 | onActiveChange    | 选中变更回调                  | (value?: string, preValue?: string) => void              | -      | -    |
@@ -57,8 +57,8 @@ demo:
 ### GroupableProps
 | 属性         | 说明                 | 类型                                | 默认值 | 版本 |
 |--------------|----------------------|-------------------------------------|--------|------|
-| `sort`       | 分组排序函数         | `(a: string, b: string) => number` | -  | -    |
-| `title` | 自定义渲染组件       | `React.ComponentType<{ group: string }>` | -   | -    |
+| `sort`       | 分组排序函数         | (a: string, b: string) => number | -  | -    |
+| `title` | 自定义渲染组件       | ((group: string, info: { components: { GroupTitle: React.ComponentType } }) => React.ReactNode) | -   | -    |
 
 ## 主题变量（Design Token）
 
