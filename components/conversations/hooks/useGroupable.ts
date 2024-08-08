@@ -9,7 +9,7 @@ const __UNGROUPED = '__ungrouped';
 type GroupList = {
   data: ConversationProps[];
   name?: string;
-  title?: React.ReactNode;
+  title?: Groupable['title'];
 }[];
 
 type GroupMap = Record<string, ConversationProps[]>;
@@ -24,12 +24,12 @@ const useGroupable: UseGroupable = (
   data: ConversationProps[] = [],
 ) => {
   const [
-    ungrouped,
+    enableGroup,
     sort,
     title,
   ] = React.useMemo(() => {
     if (!groupable) {
-      return [true, undefined, undefined];
+      return [false, undefined, undefined];
     }
 
     let baseConfig: Groupable = {
@@ -42,7 +42,7 @@ const useGroupable: UseGroupable = (
     }
 
     return [
-      false,
+      true,
       baseConfig.sort,
       baseConfig.title,
     ];
@@ -50,7 +50,7 @@ const useGroupable: UseGroupable = (
 
   return React.useMemo(() => {
     // 未开启分组模式直接返回
-    if (ungrouped) {
+    if (!enableGroup) {
       const groupList = [
         {
           name: __UNGROUPED,
@@ -59,7 +59,7 @@ const useGroupable: UseGroupable = (
         },
       ]
 
-      return [groupList, ungrouped];
+      return [groupList, enableGroup];
     };
 
     // 1. 将 data 做数据分组，填充 groupMap
@@ -83,14 +83,14 @@ const useGroupable: UseGroupable = (
       ? Object.keys(groupMap).sort(sort)
       : Object.keys(groupMap);
 
-    // 2. groupMap 转 groupList
+    // 3. groupMap 转 groupList
     const groupList = groupKeys.map((group) => ({
       name: group === __UNGROUPED ? undefined : group,
-      title: title && title(group),
+      title,
       data: groupMap[group],
     }));
 
-    return [groupList, ungrouped];
+    return [groupList, enableGroup];
   }, [data, groupable]);
 };
 

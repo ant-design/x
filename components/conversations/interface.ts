@@ -1,6 +1,7 @@
 import type React from 'react';
 import type { MenuProps } from 'antd';
 import type { AnyObject } from '../_util/type';
+import type { DirectionType } from 'antd/es/config-provider';
 
 type GroupType = string;
 
@@ -49,7 +50,22 @@ export interface ConversationProps extends AnyObject {
 
 export type GroupSorter = Parameters<Array<GroupType>['sort']>[0];
 
-export type GroupTitleRender = ((group?: GroupType) => React.ReactNode) | undefined;
+
+export interface GroupTitleProps {
+  group?: ConversationProps['group'];
+  direction?: DirectionType;
+};
+
+export type GroupTitleRenderComponents = {
+  components: {
+    GroupTitle: React.ComponentType<GroupTitleProps>;
+  };
+}
+
+export type GroupTitleRender = ((
+  group: GroupType,
+  info: GroupTitleRenderComponents,
+) => React.ReactNode) | undefined;
 
 export interface Groupable {
   /**

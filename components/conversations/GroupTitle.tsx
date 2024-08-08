@@ -1,13 +1,8 @@
 import React from 'react';
 import { Divider, Typography } from 'antd';
 
-import type { DirectionType } from 'antd/es/config-provider';
-import type { ConversationProps } from './interface';
+import type { GroupTitleProps } from './interface';
 
-interface GroupTitleProps {
-  group?: ConversationProps['group'];
-  direction?: DirectionType;
-};
 
 const GroupTitle: React.FC<GroupTitleProps> = (props) => (
   <Divider

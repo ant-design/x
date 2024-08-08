@@ -22,7 +22,7 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
     info,
     className,
     direction,
-    onClick,
+    onClick = () => {},
     active,
     menu,
     ...htmlLiProps
@@ -53,7 +53,7 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
       <li
         {...htmlLiProps}
         className={mergedCls}
-        onClick={() => info.disabled ? undefined : onClick?.(info)}
+        onClick={() => info.disabled ? undefined : onClick(info)}
       >
         {info.icon && (
           <div className={`${prefixCls}-icon`}>

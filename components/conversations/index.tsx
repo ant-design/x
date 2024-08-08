@@ -21,8 +21,8 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
     defaultActiveKey,
     onActiveChange,
     menu,
-    styles,
-    classNames,
+    styles = {},
+    classNames = {},
     groupable,
     className,
     ...htmlULProps
@@ -38,7 +38,7 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
   );
 
   // ============================ Groupable ============================
-  const [groupList, ungrouped] = useGroupable(groupable, data);
+  const [groupList, enableGroup] = useGroupable(groupable, data);
 
   // ============================ Prefix ============================
   const { getPrefixCls, direction } = useConfigContext();
@@ -66,7 +66,7 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
       className={mergedCls}
     >
       {
-        groupList.flatMap((groupInfo, groupIndex) => {
+        groupList.map((groupInfo, groupIndex) => {
           const convItems = groupInfo.data.map(
             (convInfo: ConversationProps, convIndex: number) => (
               <ConversationsItem
@@ -74,25 +74,28 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
                 info={convInfo}
                 prefixCls={prefixCls}
                 direction={direction}
-                className={classNames?.item}
-                style={styles?.item}
+                className={classNames.item}
+                style={styles.item}
                 menu={typeof menu === 'function' ? menu(convInfo) : menu}
                 active={mergedActiveKey === convInfo.key}
                 onClick={(info) => setMergedActiveKey(info.key)}
               />
             ),
           );
-          
-          return ungrouped
-            ? convItems
-            : (
+
+          return enableGroup
+            ? (
               <li key={groupInfo.name || `key-${groupIndex}`}>
-                {groupInfo.title || <GroupTitle group={groupInfo.name} direction={direction} key={groupInfo.name} />}
+                {
+                  groupInfo.title?.(groupInfo.name!, { components: { GroupTitle } })
+                  || <GroupTitle group={groupInfo.name} direction={direction} key={groupInfo.name} />
+                }
                 <ul className={`${prefixCls}-list`}>
                   {convItems}
                 </ul>
               </li>
-            );
+            )
+            : convItems;
         })
       }
     </ul>,
