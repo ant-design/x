@@ -68,15 +68,15 @@ const Prompts: React.FC<PromptsProps> = (props) => {
       {/* Prompt List */}
       <ul className={mergedListCls} style={styles?.list}>
         {
-          data?.map(info => (
-            <li key={info.key}>
+          data?.map((info, index) => (
+            <li key={info.key || `key_${index}`}>
               {/* Prompt Item */}
               <Button
                 type={info.disabled ? 'default' : 'text'}
                 style={styles?.item}
                 disabled={info.disabled}
                 className={classnames(`${prefixCls}-item`, classNames?.item)}
-                onClick={(event) => onClick?.(event, info)}
+                onClick={(event) => onClick?.(event, { data: info })}
               >
                 {/* Icon */}
                 {info.icon && (

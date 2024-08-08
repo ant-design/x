@@ -47,7 +47,12 @@ export interface PromptsProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
    * @desc Item 提示项被点击时的回调函数。
    * @descEN Callback function when a prompt item is clicked.
    */
-  onClick?: (domEvent: React.MouseEvent<HTMLElement, MouseEvent>, info: PromptProps) => void;
+  onClick?: (
+    domEvent: React.MouseEvent<HTMLElement, MouseEvent>,
+    info: {
+      data: PromptProps;
+    },
+  ) => void;
 
   /**
    * @desc 提示列表是否垂直排列。

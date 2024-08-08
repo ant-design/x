@@ -57,15 +57,7 @@ const data: PromptsProps['data'] = [
 ];
 
 const App = () => (
-  <Prompts
-    data={data}
-    styles={{
-      list: {
-        overflow: 'scroll',
-        scrollbarWidth: 'none',
-      },
-    }}
-  />
+  <Prompts data={data} />
 );
 
 export default App;

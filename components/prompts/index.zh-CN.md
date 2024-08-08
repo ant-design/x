@@ -34,7 +34,7 @@ Prompts 组件用于显示一组与当前上下文相关的预定义的问题或
 | `title`         | 显示在提示列表顶部的标题。               | React.ReactNode                                      | -     | -    |
 | `vertical`      | 设置为 `true` 时, 提示列表将垂直排列。         | boolean                                                | `false` | -    |
 | `wrap`      | 设置为 `true` 时, 提示列表将自动换行。          | boolean                                                | `false` | -    |
-| `onClick`       | 提示项被点击时的回调函数。              | (event: React.MouseEvent<HTMLElement, MouseEvent>, info: PromptProps) => void | -     | -    |
+| `onClick`       | 提示项被点击时的回调函数。              | (event: React.MouseEvent<HTMLElement, MouseEvent>, info: { data: PromptProps }) => void | -     | -    |
 | `styles`        | 自定义样式，用于各个提示项的不同部分。      | Record<'list' \| 'item' \| 'content' \| 'title', React.CSSProperties> | -     | -    |
 | `classNames`    | 自定义样式类名，用于各个提示项的不同部分。  | Record<'list' \| 'item' \| 'content' \| 'title', string>            | -     | -    |
 | `prefixCls`     | 样式类名的前缀。                       | string                                                 | -     | -    |

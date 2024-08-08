@@ -23,6 +23,11 @@ const genPromptsStyle: GenerateStyle<PromptsToken> = (token) => {
       [`& ${componentCls}-list`]: {
         display: 'flex',
         gap: token.paddingSM,
+        overflowX: 'scroll',
+        '&::-webkit-scrollbar': {
+          display: 'none',
+        },
+
         '&-wrap': {
           flexWrap: 'wrap',
         },

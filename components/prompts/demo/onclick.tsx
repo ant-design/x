@@ -32,8 +32,8 @@ const App = () => (
     onClick={(event, info) => {
       console.log(event);
       message.open({
-        icon: info.icon,
-        content: info.description,
+        icon: info.data.icon,
+        content: info.data.description,
       })
     }}
   />

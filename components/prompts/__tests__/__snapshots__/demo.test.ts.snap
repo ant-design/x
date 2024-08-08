@@ -913,7 +913,6 @@ exports[`renders components/prompts/demo/with-scroll.tsx correctly 1`] = `
 >
   <ul
     class="ant-prompts-list"
-    style="overflow:scroll;scrollbar-width:none"
   >
     <li>
       <button

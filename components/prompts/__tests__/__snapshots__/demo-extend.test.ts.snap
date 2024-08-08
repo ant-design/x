@@ -923,7 +923,6 @@ exports[`renders components/prompts/demo/with-scroll.tsx extend context correctl
 >
   <ul
     class="ant-prompts-list"
-    style="overflow: scroll;"
   >
     <li>
       <button
