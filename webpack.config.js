@@ -32,6 +32,17 @@ function externalCssinjs(config) {
   config.resolve.alias['@ant-design/cssinjs'] = path.resolve(__dirname, 'alias/cssinjs');
 }
 
+function addAntdAlias(config) {
+  config.resolve = config.resolve || {};
+  config.resolve.alias = config.resolve.alias || {};
+
+  if (process.env.ESBUILD || process.env.CSB_REPO) {
+    config.resolve.alias['antd/es/theme/internal'] = path.resolve(__dirname, 'node_modules/antd/es/theme/internal');
+  } else {
+    config.resolve.alias['antd/es/theme/internal'] = path.resolve(__dirname, 'node_modules/antd/lib/theme/internal');
+  }
+}
+
 let webpackConfig = getWebpackConfig(false);
 
 // Used for `size-limit` ci which only need to check min files
@@ -46,6 +57,7 @@ if (process.env.RUN_ENV === 'PRODUCTION') {
     addLocales(config);
     externalDayjs(config);
     externalCssinjs(config);
+    addAntdAlias(config);
 
     // Reduce non-minified dist files size
     config.optimization.usedExports = true;
