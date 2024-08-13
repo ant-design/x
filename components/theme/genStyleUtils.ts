@@ -1,13 +1,14 @@
 import { genStyleUtils } from '@ant-design/cssinjs-utils';
 import type { ComponentTokenMap } from './components';
-import type { AnyObject } from '../_util/type';
+
 import useAntdToken from 'antd/es/theme/useToken';
+import type { AliasToken, SeedToken } from 'antd/es/theme/internal';
 import useConfigContext from '../config-provider/useConfigContext';
 
 export const { genStyleHooks, genComponentStyleHook, genSubStyleComponent } = genStyleUtils<
   ComponentTokenMap,
-  AnyObject,
-  AnyObject
+  AliasToken,
+  SeedToken
 >({
   usePrefix: () => {
     const { getPrefixCls, iconPrefixCls } = useConfigContext();
