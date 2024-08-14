@@ -4,7 +4,7 @@ import { FireOutlined, CoffeeOutlined, SmileOutlined } from '@ant-design/icons';
 
 import type { PromptsProps } from '@ant-design/x';
 
-const data: PromptsProps['data'] = [
+const items: PromptsProps['items'] = [
   {
     key: "6",
     icon: <CoffeeOutlined style={{ color: '#964B00' }} />,
@@ -25,6 +25,6 @@ const data: PromptsProps['data'] = [
   },
 ];
 
-const App = () => (<Prompts title="🤔 You might also want to ask:" data={data} vertical />);
+const App = () => (<Prompts title="🤔 You might also want to ask:" items={items} vertical />);
 
 export default App;

@@ -3,7 +3,7 @@ import { Prompts } from '@ant-design/x';
 import type { PromptsProps } from '@ant-design/x';
 import { CheckCircleOutlined, CoffeeOutlined } from '@ant-design/icons';
 
-const data: PromptsProps['data'] = [
+const items: PromptsProps['items'] = [
    {
     key: "5",
     icon: <CheckCircleOutlined style={{ color: '#52C41A' }} />,  
@@ -20,6 +20,6 @@ const data: PromptsProps['data'] = [
   },
 ];
 
-const App = () => (<Prompts title="☕️ It's time to relax!" data={data} />);
+const App = () => (<Prompts title="☕️ It's time to relax!" items={items} />);
 
 export default App;

@@ -26,28 +26,32 @@ The Prompts component is used to display a predefined set of questions or sugges
 ## API
 
 ### PromptsProps
-| Property        | Description                                              | Type                                                      | Default | Version |
-|-----------------|----------------------------------------------------------|-----------------------------------------------------------|---------|---------|
-| `data`          | List containing multiple prompt items.                   | PromptProps[]                                           | -       | -       |
-| `title`         | Title displayed at the top of the prompt list.           | React.ReactNode                                         | -       | -       |
-| `vertical`      | When set to `true`, the Prompts will be arranged vertically.         | boolean                                                | `false` | -    |
-| `wrap`      | When set to `true`, the Prompts will automatically wrap.          | boolean                                                | `false` | -    |
-| `onClick`       | Callback function when a prompt item is clicked.         | (event: React.MouseEvent<HTMLElement, MouseEvent>, info: { data: PromptProps }) => void | -       | -       |
-| `styles`        | Custom styles for different parts of each prompt item.   | Record<'list' \| 'item' \| 'content' \| 'title', React.CSSProperties> | -       | -       |
-| `classNames`    | Custom style class names for different parts of each prompt item. | Record<'list' \| 'item' \| 'content' \| 'title', string>            | -       | -       |
-| `prefixCls`     | Prefix for style class names.                            | string                                                  | -       | -       |
-| `rootClassName` | Style class name for the root node.                      | string                                                  | -       | -       |
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| classNames | Custom style class names for different parts of each prompt item. | Record<'list' \| 'item' \| 'content' \| 'title', string> | - | - |
+| items | List containing multiple prompt items. | PromptProps[] | - | - |
+| prefixCls | Prefix for style class names. | string | - | - |
+| rootClassName | Style class name for the root node. | string | - | - |
+| styles | Custom styles for different parts of each prompt item. | Record<'list' \| 'item' \| 'content' \| 'title', React.CSSProperties> | - | - |
+| title | Title displayed at the top of the prompt list. | React.ReactNode | - | - |
+| vertical | When set to `true`, the Prompts will be arranged vertically. | boolean | `false` | - |
+| wrap | When set to `true`, the Prompts will automatically wrap. | boolean | `false` | - |
+| onClick | Callback function when a prompt item is clicked. | (event: React.MouseEvent<HTMLElement, MouseEvent>, info: { data: PromptProps }) => void | - | - |
 
 ### PromptProps
-| Property        | Description                                              | Type                                                      | Default | Version |
-|-----------------|----------------------------------------------------------|-----------------------------------------------------------|---------|---------|
-| `key`           | Unique identifier used to distinguish each prompt item.  | `string`                                                  | -       | -       |
-| `icon`          | Prompt icon displayed on the left side of the prompt item. | `React.ReactNode`                                        | -       | -       |
-| `label`         | Prompt label displaying the main content of the prompt.  | `React.ReactNode`                                         | -       | -       |
-| `description`   | Prompt description providing additional information.     | `React.ReactNode`                                         | -       | -       |
-| `disabled`      | When set to `true`, click events are disabled.            | `boolean`                                                 | `false` | -       |
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| description | Prompt description providing additional information. | React.ReactNode | - | - |
+| disabled | When set to `true`, click events are disabled. | boolean | `false` | - |
+| icon | Prompt icon displayed on the left side of the prompt item. | React.ReactNode | - | - |
+| key | Unique identifier used to distinguish each prompt item. | string | - | - |
+| label | Prompt label displaying the main content of the prompt. | React.ReactNode | - | - |
 
 ## Semantic DOM
+
+<code src="./demo/_semantic.tsx" simplify="true"></code>
 
 ## Design Token
 
