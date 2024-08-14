@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Conversations Component Conversations component work 1`] = `
+<ul
+  class="ant-conversations"
+>
+  <li
+    class="ant-conversations-item"
+  >
+    <div
+      class="ant-conversations-icon"
+    >
+      <div
+        id="conversation-test-id"
+      >
+        icon
+      </div>
+    </div>
+    <span
+      aria-label="What is Ant Design X ?"
+      class="ant-typography ant-typography-ellipsis ant-conversations-label"
+    >
+      What is Ant Design X ?
+    </span>
+  </li>
+  <li
+    class="ant-conversations-item"
+  >
+    <span
+      class="ant-typography ant-typography-ellipsis ant-conversations-label"
+    >
+      <div>
+        Getting Started:
+        <a
+          href="https://ant-design.antgroup.com/index-cn"
+          rel="noreferrer"
+          target="_blank"
+        >
+          Ant Design !
+        </a>
+      </div>
+    </span>
+  </li>
+  <li
+    class="ant-conversations-item"
+  >
+    <span
+      aria-label="In Docker, use 🐑 Ollama and initialize"
+      class="ant-typography ant-typography-ellipsis ant-conversations-label"
+    >
+      In Docker, use 🐑 Ollama and initialize
+    </span>
+  </li>
+  <li
+    class="ant-conversations-item ant-conversations-item-disabled"
+  >
+    <span
+      aria-label="Expired, please go to the recycle bin to check"
+      class="ant-typography ant-typography-ellipsis ant-conversations-label"
+    >
+      Expired, please go to the recycle bin to check
+    </span>
+  </li>
+</ul>
+`;
+
+exports[`Conversations Component rtl render component should be rendered correctly in RTL direction 1`] = `
+<ul
+  class="ant-conversations ant-conversations-rtl"
+>
+  <li
+    class="ant-conversations-item"
+  >
+    <div
+      class="ant-conversations-icon"
+    >
+      <div
+        id="conversation-test-id"
+      >
+        icon
+      </div>
+    </div>
+    <span
+      aria-label="What is Ant Design X ?"
+      class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-conversations-label"
+    >
+      What is Ant Design X ?
+    </span>
+  </li>
+  <li
+    class="ant-conversations-item"
+  >
+    <span
+      class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-conversations-label"
+    >
+      <div>
+        Getting Started:
+        <a
+          href="https://ant-design.antgroup.com/index-cn"
+          rel="noreferrer"
+          target="_blank"
+        >
+          Ant Design !
+        </a>
+      </div>
+    </span>
+  </li>
+  <li
+    class="ant-conversations-item"
+  >
+    <span
+      aria-label="In Docker, use 🐑 Ollama and initialize"
+      class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-conversations-label"
+    >
+      In Docker, use 🐑 Ollama and initialize
+    </span>
+  </li>
+  <li
+    class="ant-conversations-item ant-conversations-item-disabled"
+  >
+    <span
+      aria-label="Expired, please go to the recycle bin to check"
+      class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-conversations-label"
+    >
+      Expired, please go to the recycle bin to check
+    </span>
+  </li>
+</ul>
+`;
