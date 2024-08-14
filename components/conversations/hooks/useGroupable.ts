@@ -1,5 +1,6 @@
 import React from 'react';
-import type { ConversationsProps, Conversation, Groupable } from '../interface';
+import type { Conversation, Groupable } from '../interface';
+import type { ConversationsProps } from '..';
 
 /**
  * 🔥 Only for handling ungrouped data. Do not use it for any other purpose! 🔥
@@ -23,11 +24,7 @@ const useGroupable: UseGroupable = (
   groupable?: ConversationsProps['groupable'],
   data: Conversation[] = [],
 ) => {
-  const [
-    enableGroup,
-    sort,
-    title,
-  ] = React.useMemo(() => {
+  const [enableGroup, sort, title] = React.useMemo(() => {
     if (!groupable) {
       return [false, undefined, undefined];
     }
@@ -41,11 +38,7 @@ const useGroupable: UseGroupable = (
       baseConfig = { ...baseConfig, ...groupable };
     }
 
-    return [
-      true,
-      baseConfig.sort,
-      baseConfig.title,
-    ];
+    return [true, baseConfig.sort, baseConfig.title];
   }, [groupable]);
 
   return React.useMemo(() => {
@@ -57,31 +50,26 @@ const useGroupable: UseGroupable = (
           data,
           title: undefined,
         },
-      ]
+      ];
 
       return [groupList, enableGroup];
-    };
+    }
 
     // 1. 将 data 做数据分组，填充 groupMap
-    const groupMap = data.reduce<GroupMap>(
-      (acc, item) => {
-        const group = item.group || __UNGROUPED;
+    const groupMap = data.reduce<GroupMap>((acc, item) => {
+      const group = item.group || __UNGROUPED;
 
-        if (!acc[group]) {
-          acc[group] = [];
-        }
+      if (!acc[group]) {
+        acc[group] = [];
+      }
 
-        acc[group].push(item);
+      acc[group].push(item);
 
-        return acc;
-      },
-      {},
-    );
+      return acc;
+    }, {});
 
     // 2. 存在 sort 时对 groupKeys 排序
-    const groupKeys = sort
-      ? Object.keys(groupMap).sort(sort)
-      : Object.keys(groupMap);
+    const groupKeys = sort ? Object.keys(groupMap).sort(sort) : Object.keys(groupMap);
 
     // 3. groupMap 转 groupList
     const groupList = groupKeys.map((group) => ({
