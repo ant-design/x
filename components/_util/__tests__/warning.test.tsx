@@ -1,7 +1,12 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import warning, { devUseWarning, WarningContext } from '../warning';
 
-import { devUseWarning as useWarning } from '../warning';
+const TestUnStrictProvider: React.FC<{ children: React.ReactNode }> = (props) => {
+  const [strict] = React.useState(false);
+  const context = React.useMemo(() => ({ strict }), [strict]);
+  return <WarningContext.Provider value={context}>{props.children}</WarningContext.Provider>;
+};
 
 describe('Test warning', () => {
   let spy: jest.SpyInstance;
@@ -22,25 +27,14 @@ describe('Test warning', () => {
     spy.mockReset();
   });
 
-  it('Test noop', async () => {
-    const { noop } = await import('../warning');
-    const value = noop();
-
-    expect(value).toBe(undefined);
-    expect(spy).not.toHaveBeenCalled();
-    expect(noop).not.toThrow();
-  });
-
   describe('process.env.NODE_ENV !== "production"', () => {
     it('If `false`, exec `console.error`', async () => {
-      const warning = (await import('../warning')).default;
       warning(false, 'error');
 
       expect(spy).toHaveBeenCalled();
     });
 
     it('If `true`, do not exec `console.error`', async () => {
-      const warning = (await import('../warning')).default;
       warning(true, 'error message');
 
       expect(spy).not.toHaveBeenCalled();
@@ -48,9 +42,9 @@ describe('Test warning', () => {
     it('should show warning when using devUseWarning', async () => {
       const App = () => {
         // Don't use dynamic import to fixed issue: TypeError: Cannot read properties of null (reading 'useContext')
-        const warning = useWarning('Test');
-        warning(false, 'usage', 'test message');
-        warning.deprecated(false, 'old prop', 'new prop');
+        const devWarning = devUseWarning('Test');
+        devWarning(false, 'usage', 'test message');
+        devWarning.deprecated(false, 'old prop', 'new prop');
         return null;
       };
       render(<App />);
@@ -60,6 +54,21 @@ describe('Test warning', () => {
         'Warning: [antd: Test] `old prop` is deprecated. Please use `new prop` instead.',
       );
       expect(spy).toHaveBeenCalledTimes(2);
+    });
+    it('should show warning once, when strict is `false`.', () => {
+      const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+      const App = () => {
+        const devWarning = devUseWarning('Test');
+        devWarning.deprecated(false, 'old prop', 'new prop');
+        devWarning.deprecated(false, 'old prop', 'new prop');
+        return null;
+      };
+      render(
+        <TestUnStrictProvider>
+          <App />
+        </TestUnStrictProvider>,
+      );
+      expect(warn).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -79,10 +88,6 @@ describe('Test warning', () => {
       restoreNodeEnv();
     });
     it('Whether `true` or `false`, do not exec `console.error`', async () => {
-      const { default: warning, noop } = await import('../warning');
-
-      expect(warning).toEqual(noop);
-
       warning(false, 'error message');
       expect(spy).not.toHaveBeenCalled();
 
@@ -91,11 +96,10 @@ describe('Test warning', () => {
     });
 
     it('should not show warning when using devUseWarning', async () => {
-      const { devUseWarning } = await import('../warning');
       const App = () => {
-        const warning = devUseWarning('Test');
-        warning(false, 'usage', 'test message');
-        warning.deprecated(false, 'old prop', 'new prop');
+        const devWarning = devUseWarning('Test');
+        devWarning(false, 'usage', 'test message');
+        devWarning.deprecated(false, 'old prop', 'new prop');
         return null;
       };
       render(<App />);

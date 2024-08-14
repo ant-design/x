@@ -1,6 +1,7 @@
 import * as React from 'react';
 import rcWarning, { resetWarned as rcResetWarned } from 'rc-util/lib/warning';
 
+/* istanbul ignore next */
 export function noop() {}
 
 let deprecatedWarnList: Record<string, string[]> | null = null;
