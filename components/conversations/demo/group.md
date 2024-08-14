@@ -4,4 +4,4 @@
 
 ## en-US
 
-After using ` groupable ` properties open group, open the default according to [Conversation.Group](/components/conversations#conversation) field group
+After using `groupable` properties open group, open the default according to [Conversation.Group](/components/conversations#conversation) field group

@@ -10,7 +10,6 @@ const data: Conversation[] = [
   {
     key: 'demo1',
     label: 'What is Ant Design X ?',
-    timestamp: 794620800,
     icon: <div id="conversation-test-id">icon</div>,
     group: 'pinned',
   },
@@ -24,25 +23,41 @@ const data: Conversation[] = [
         </a>
       </div>
     ),
-    timestamp: 794620900,
   },
   {
     key: 'demo4',
     label: 'In Docker, use 🐑 Ollama and initialize',
-    timestamp: 794621100,
   },
   {
     key: 'demo5',
     label: 'Expired, please go to the recycle bin to check',
-    timestamp: 794621200,
     disabled: true,
   },
+  // Used to test the case where there is no key
+  {
+    label: 'No key',
+    disabled: true,
+  } as any,
 ];
+
+const menu = jest.fn().mockReturnValue({
+  items: [
+    {
+      label: '重命名',
+      key: 'mod',
+    },
+    {
+      label: '删除',
+      key: 'delete',
+      danger: true,
+    },
+  ],
+});
 
 describe('Conversations Component', () => {
   mountTest(() => <Conversations />);
 
-  rtlTest(() => <Conversations data={data} />);
+  rtlTest(() => <Conversations data={data} groupable menu={menu} />);
 
   beforeAll(() => {
     jest.useFakeTimers();
@@ -83,32 +98,8 @@ describe('Conversations Component', () => {
   });
 
   it('should handle menu function', () => {
-    const menu = jest.fn().mockReturnValue({
-      items: [
-        {
-          label: '重命名',
-          key: 'mod',
-        },
-        {
-          label: '删除',
-          key: 'delete',
-          danger: true,
-        },
-      ],
-    });
     const { getByText, container } = render(
-      <Conversations
-        data={[
-          {
-            key: 'demo5',
-            label:
-              'Looooooooooooooooooooooooooonnnnnnnnnnnnnnnnnnnnnnnnnnnnngggggggggggggggggggggg',
-            timestamp: 794621200,
-          },
-        ]}
-        menu={menu}
-        defaultActiveKey="demo1"
-      />,
+      <Conversations data={data} menu={menu} defaultActiveKey="demo1" />,
     );
     expect(menu).toHaveBeenCalled();
     const menuElement = container.querySelector('.ant-conversations-menu-icon');
@@ -116,6 +107,9 @@ describe('Conversations Component', () => {
     fireEvent.click(menuElement as HTMLElement);
     expect(getByText('重命名')).toBeInTheDocument();
     expect(getByText('删除')).toBeInTheDocument();
+    fireEvent.click(menuElement as HTMLElement);
+    const element = container.querySelector('.ant-dropdown-open');
+    expect(element).not.toBeInTheDocument();
   });
 
   it('should group items when groupable is true', () => {
