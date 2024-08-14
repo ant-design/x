@@ -4,7 +4,7 @@ import type { ConversationsProps } from '@ant-design/x';
 import { EditOutlined, DeleteOutlined, StopOutlined } from '@ant-design/icons';
 import { Card, type GetProp, App } from 'antd';
 
-const data: GetProp<ConversationsProps, 'data'> = Array.from({ length: 4 }).map((_, index) => ({
+const items: GetProp<ConversationsProps, 'items'> = Array.from({ length: 4 }).map((_, index) => ({
   key: `item${index + 1}`,
   label: `Conversation Item ${index + 1}`,
   disabled: index === 3,
@@ -40,7 +40,7 @@ const Demo = () => {
 
   return (
     <Card style={{ width: 320 }} size="small">
-      <Conversations menu={menuConfig} defaultActiveKey="demo3" data={data} />
+      <Conversations menu={menuConfig} defaultActiveKey="demo3" items={items} />
     </Card>
   );
 };

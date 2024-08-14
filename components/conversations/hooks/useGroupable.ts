@@ -15,15 +15,10 @@ type GroupList = {
 
 type GroupMap = Record<string, Conversation[]>;
 
-type UseGroupable = (
+const useGroupable = (
   groupable?: ConversationsProps['groupable'],
-  data?: Conversation[],
-) => [GroupList, boolean];
-
-const useGroupable: UseGroupable = (
-  groupable?: ConversationsProps['groupable'],
-  data: Conversation[] = [],
-) => {
+  items: Conversation[] = [],
+): [groupList: GroupList, enableGroup: boolean] => {
   const [enableGroup, sort, title] = React.useMemo(() => {
     if (!groupable) {
       return [false, undefined, undefined];
@@ -47,7 +42,7 @@ const useGroupable: UseGroupable = (
       const groupList = [
         {
           name: __UNGROUPED,
-          data,
+          data: items,
           title: undefined,
         },
       ];
@@ -56,7 +51,7 @@ const useGroupable: UseGroupable = (
     }
 
     // 1. 将 data 做数据分组，填充 groupMap
-    const groupMap = data.reduce<GroupMap>((acc, item) => {
+    const groupMap = items.reduce<GroupMap>((acc, item) => {
       const group = item.group || __UNGROUPED;
 
       if (!acc[group]) {
@@ -79,7 +74,7 @@ const useGroupable: UseGroupable = (
     }));
 
     return [groupList, enableGroup];
-  }, [data, groupable]);
+  }, [items, groupable]);
 };
 
 export default useGroupable;

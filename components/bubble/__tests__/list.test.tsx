@@ -33,7 +33,7 @@ describe('Bubble.List', () => {
     render(
       <Bubble.List
         ref={listRef}
-        data={[
+        items={[
           {
             key: 'bamboo',
             content: 'little',
@@ -77,7 +77,7 @@ describe('Bubble.List', () => {
 
     const { container } = render(
       <Bubble.List
-        data={[
+        items={[
           {
             key: 'bamboo',
             content: 'little',
@@ -107,7 +107,7 @@ describe('Bubble.List', () => {
           avatar: { style: { background: '#FF0000' } },
           placement: bubble.key as any,
         })}
-        data={[
+        items={[
           {
             key: 'end',
             content: 'little',
@@ -150,9 +150,9 @@ describe('Bubble.List', () => {
     const getData = (count: number) =>
       Array.from({ length: count }, (_, i) => ({ key: i, content: String(i) }));
 
-    const { container, rerender } = render(<Bubble.List data={getData(5)} />);
+    const { container, rerender } = render(<Bubble.List items={getData(5)} />);
 
-    rerender(<Bubble.List data={getData(6)} />);
+    rerender(<Bubble.List items={getData(6)} />);
 
     expect(container.querySelector('.ant-bubble-list-reach-end')).toBeTruthy();
 

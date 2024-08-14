@@ -32,9 +32,9 @@ Common props ref：[Common props](/docs/react/common-props)
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| data | Data source for conversation list | `Conversation`[] | - | - |
 | activeKey | Currently selected value | string | - | - |
 | defaultActiveKey | Default selected value | string | - | - |
+| items | Data source for conversation list | `Conversation`[] | - | - |
 | onActiveChange | Callback for selection change | (value: string) => void | - | - |
 | menu | Operation menu for conversations | MenuProps \| ((value: `Conversation`) => MenuProps) | - | - |
 | groupable | If grouping is supported, it defaults to the `Conversation.group` field | boolean \| GroupableProps | - | - |

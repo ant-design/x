@@ -33,9 +33,9 @@ demo:
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| data | 会话列表数据源 | `Conversation`[] | - | - |
 | activeKey | 当前选中的值 | string | - | - |
 | defaultActiveKey | 默认选中值 | string | - | - |
+| items | 会话列表数据源 | `Conversation`[] | - | - |
 | onActiveChange | 选中变更回调 | (value: string) => void | - | - |
 | menu | 会话操作菜单 | MenuProps \| ((value: `Conversation`) => MenuProps) | - | - |
 | groupable | 是否支持分组, 开启后默认按 `Conversation.group` 字段分组 | boolean \| GroupableProps | - | - |

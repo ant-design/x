@@ -47,7 +47,7 @@ const App = () => {
         ref={listRef}
         style={{ maxHeight: 300 }}
         roles={roles}
-        data={Array.from({ length: count }).map((_, i) => {
+        items={Array.from({ length: count }).map((_, i) => {
           const isAI = !!(i % 2);
           const content = isAI ? 'Mock AI content. '.repeat(20) : 'Mock user content.';
 
