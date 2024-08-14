@@ -1,11 +1,11 @@
 import React from 'react';
 
-import Prompts from '..';
+import Prompts, { type PromptsProps } from '..';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
 import { render, fireEvent } from '../../../tests/utils';
 
-import type { PromptsProps, PromptProps } from '../interface';
+import type { PromptProps } from '../interface';
 
 // Mock data
 const mockData: PromptProps[] = [
@@ -27,8 +27,8 @@ const mockData: PromptProps[] = [
 
 const mockProps: PromptsProps = {
   title: 'Test Title',
-  data: mockData,
-  onClick: jest.fn(),
+  items: mockData,
+  onItemClick: jest.fn(),
   prefixCls: 'custom',
 };
 
@@ -50,14 +50,14 @@ describe('bubble', () => {
   });
 
   it('should render the correct number of buttons', () => {
-    const { getAllByRole } = render(<Prompts data={mockProps.data} />);
+    const { getAllByRole } = render(<Prompts items={mockProps.items} />);
     const buttons = getAllByRole('button');
     expect(buttons).toHaveLength(mockData.length);
   });
 
   it('should render the labels and descriptions', () => {
     const { getByText } = render(<Prompts {...mockProps} />);
-    mockData.forEach(item => {
+    mockData.forEach((item) => {
       const label = getByText(item.label as string);
       const description = getByText(item.description as string);
       expect(label).toBeInTheDocument();
@@ -65,27 +65,26 @@ describe('bubble', () => {
     });
   });
 
-  it('should call onClick when a button is clicked', () => {
+  it('should call onItemClick when a button is clicked', () => {
     const { getByText } = render(<Prompts {...mockProps} />);
     const button = getByText(/label 1/i);
     fireEvent.click(button);
-    expect(mockProps.onClick).toHaveBeenCalledWith(expect.any(Object), { data: mockData[0] });
+    expect(mockProps.onItemClick).toHaveBeenCalledWith({ data: mockData[0] });
   });
 
   it('should disable buttons correctly', () => {
-    const { getByText } = render(<Prompts data={mockProps.data} />);
+    const { getByText } = render(<Prompts items={mockProps.items} />);
     const disabledButton = getByText(/label 2/i).closest('button');
     expect(disabledButton).toBeDisabled();
   });
 
   it('should render icons', () => {
-    const { getByText } = render(<Prompts data={mockProps.data} />);
-    mockData.forEach(item => {
+    const { getByText } = render(<Prompts items={mockProps.items} />);
+    mockData.forEach((item) => {
       if (item.icon) {
         const icon = getByText(`Icon ${item.key}`);
         expect(icon).toBeInTheDocument();
       }
     });
   });
-
 });

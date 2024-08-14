@@ -417,7 +417,7 @@ exports[`renders components/prompts/demo/flex-vertical.tsx correctly 1`] = `
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-typography-default ant-prompts-desc"
+            class="ant-typography ant-prompts-desc"
           >
             How to rest effectively after long hours of work?
           </span>
@@ -457,7 +457,7 @@ exports[`renders components/prompts/demo/flex-vertical.tsx correctly 1`] = `
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-typography-default ant-prompts-desc"
+            class="ant-typography ant-prompts-desc"
           >
             What are the secrets to maintaining a positive mindset?
           </span>
@@ -497,7 +497,7 @@ exports[`renders components/prompts/demo/flex-vertical.tsx correctly 1`] = `
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-typography-default ant-prompts-desc"
+            class="ant-typography ant-prompts-desc"
           >
             How to stay calm under immense pressure?
           </span>
@@ -553,7 +553,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx correctly 1`] = `
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-typography-default ant-prompts-desc"
+            class="ant-typography ant-prompts-desc"
           >
             Got any sparks for a new project?
           </span>
@@ -596,7 +596,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx correctly 1`] = `
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-typography-default ant-prompts-desc"
+            class="ant-typography ant-prompts-desc"
           >
             Help me understand the background of this topic.
           </span>
@@ -636,7 +636,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx correctly 1`] = `
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-typography-default ant-prompts-desc"
+            class="ant-typography ant-prompts-desc"
           >
             How to solve common issues? Share some tips!
           </span>
@@ -676,7 +676,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx correctly 1`] = `
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-typography-default ant-prompts-desc"
+            class="ant-typography ant-prompts-desc"
           >
             How can I work faster and better?
           </span>
@@ -719,7 +719,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx correctly 1`] = `
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-typography-default ant-prompts-desc"
+            class="ant-typography ant-prompts-desc"
           >
             What are some tricks for getting tasks done?
           </span>
@@ -759,7 +759,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx correctly 1`] = `
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-typography-default ant-prompts-desc"
+            class="ant-typography ant-prompts-desc"
           >
             How to rest effectively after long hours of work?
           </span>
@@ -799,7 +799,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx correctly 1`] = `
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-typography-default ant-prompts-desc"
+            class="ant-typography ant-prompts-desc"
           >
             What are the secrets to maintaining a positive mindset?
           </span>
@@ -839,7 +839,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx correctly 1`] = `
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-typography-default ant-prompts-desc"
+            class="ant-typography ant-prompts-desc"
           >
             How to stay calm under immense pressure?
           </span>
