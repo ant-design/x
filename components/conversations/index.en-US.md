@@ -30,33 +30,34 @@ Common props ref：[Common props](/docs/react/common-props)
 
 ### ConversationsProps
 
-| Property           | Description                  | Type                                                                                          | Default | Version |
-|--------------------|------------------------------|-----------------------------------------------------------------------------------------------|---------|---------|
-| data               | Data source for conversation list | `Conversation`[]                                                                         | -       | -       |
-| activeKey          | Currently selected value     | string                                                                    | -       | -       |
-| defaultActiveKey   | Default selected value       | string                                                                    | -       | -       |
-| onActiveChange     | Callback for selection change | (value?: string, preValue?: string) => void              | -       | -       |
-| menu               | Operation menu for conversations | MenuProps \| ((value: `Conversation`) => MenuProps)                               | -       | -       |
-| groupable          | If grouping is supported, it defaults to the `Conversation.group` field | boolean \| GroupableProps | -       | -       |
-| styles             | Semantic structure styles    | Record<'item', React.CSSProperties>                                                  | -       | -       |
-| classNames         | Semantic structure class names | Record<'item', string>                                                             | -       | -       |
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| data | Data source for conversation list | `Conversation`[] | - | - |
+| activeKey | Currently selected value | string | - | - |
+| defaultActiveKey | Default selected value | string | - | - |
+| onActiveChange | Callback for selection change | (value: string) => void | - | - |
+| menu | Operation menu for conversations | MenuProps \| ((value: `Conversation`) => MenuProps) | - | - |
+| groupable | If grouping is supported, it defaults to the `Conversation.group` field | boolean \| GroupableProps | - | - |
+| styles | Semantic structure styles | Record<'item', React.CSSProperties> | - | - |
+| classNames | Semantic structure class names | Record<'item', string> | - | - |
 
 ### Conversation
 
-| Property  | Description                | Type              | Default | Version |
-|-----------|----------------------------|-------------------|---------|---------|
-| key       | Unique identifier          | string            | -       | -       |
-| label     | Conversation name          | React.ReactNode   | -       | -       |
-| timestamp | Conversation timestamp     | number            | -       | -       |
-| group     | Conversation type, linked to `ConversationsProps.groupable` |  string | -       | -       |
-| icon      | Conversation icon          | React.ReactNode   | -       | -       |
-| disabled  | Whether to disable         | boolean           | -       | -       |
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| key | Unique identifier | string | - | - |
+| label | Conversation name | React.ReactNode | - | - |
+| timestamp | Conversation timestamp | number | - | - |
+| group | Conversation type, linked to `ConversationsProps.groupable` | string | - | - |
+| icon | Conversation icon | React.ReactNode | - | - |
+| disabled | Whether to disable | boolean | - | - |
 
 ### GroupableProps
-| Property    | Description             | Type                               | Default | Version |
-|-------------|-------------------------|------------------------------------|---------|---------|
-| `sort`       | Group sorter         | (a: string, b: string) => number | -  | -    |
-| `title` | Semantic custom rendering       | ((group: string, info: { components: { GroupTitle: React.ComponentType } }) => React.ReactNode) | -   | -    |
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| `sort` | Group sorter | (a: string, b: string) => number | - | - |
+| `title` | Semantic custom rendering | ((group: string, info: { components: { GroupTitle: React.ComponentType } }) => React.ReactNode) | - | - |
 
 ## Design Token
 

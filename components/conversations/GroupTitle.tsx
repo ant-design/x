@@ -16,7 +16,7 @@ const GroupTitle: React.FC<GroupTitleProps> = ({ children }) => {
   const { direction } = React.useContext(GroupTitleContext);
 
   return (
-    <Divider orientation={direction === 'ltr' ? 'left' : 'right'} plain>
+    <Divider orientation={direction === 'rtl' ? 'right' : 'left'} plain>
       {children && <Typography.Text type="secondary">{children}</Typography.Text>}
     </Divider>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import type { MenuProps } from 'antd';
 
-import ConversationsItem from './Item';
+import ConversationsItem, { type ConversationsItemProps } from './Item';
 import GroupTitle, { GroupTitleContext } from './GroupTitle';
 
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
@@ -40,7 +40,7 @@ export interface ConversationsProps extends React.HTMLAttributes<HTMLUListElemen
    * @desc 选中变更回调
    * @descEN Callback for selection change
    */
-  onActiveChange?: (value: Conversation['key'], preValue?: Conversation['key']) => void;
+  onActiveChange?: (value: string) => void;
 
   /**
    * @desc 会话操作菜单
@@ -100,7 +100,6 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
     defaultActiveKey,
     {
       value: activeKey,
-      onChange: onActiveChange,
     },
   );
 
@@ -119,6 +118,15 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
     [`${prefixCls}-rtl`]: direction === 'rtl',
   });
 
+  // ============================ Events ============================
+  const onConversationItemClick: ConversationsItemProps['onClick'] = (info) => {
+    setMergedActiveKey(info.key);
+
+    if (onActiveChange) {
+      onActiveChange(info.key);
+    }
+  };
+
   // ============================ Render ============================
   return wrapCSSVar(
     <ul {...htmlULProps} className={mergedCls}>
@@ -133,7 +141,7 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
             style={styles.item}
             menu={typeof menu === 'function' ? menu(convInfo) : menu}
             active={mergedActiveKey === convInfo.key}
-            onClick={(info) => setMergedActiveKey(info.key)}
+            onClick={onConversationItemClick}
           />
         ));
 
