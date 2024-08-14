@@ -14,7 +14,7 @@ const locales = {
   },
 };
 
-const data: PromptsProps['data'] = [
+const items: PromptsProps['items'] = [
   {
     key: '1',
     icon: <BulbOutlined style={{ color: '#FFD700' }} />,
@@ -49,7 +49,7 @@ const App: React.FC = () => {
         { name: 'itemContent', desc: locale.itemContent },
       ]}
     >
-      <Prompts title="✨ Inspirational Sparks and Marvelous Tips" data={data} />
+      <Prompts title="✨ Inspirational Sparks and Marvelous Tips" items={items} />
     </SemanticPreview>
   );
 };

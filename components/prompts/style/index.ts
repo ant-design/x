@@ -3,12 +3,11 @@ import { mergeToken } from '@ant-design/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 
-export interface ComponentToken { };
+export interface ComponentToken {}
 
-export interface PromptsToken extends FullToken<'Prompts'> { };
+export interface PromptsToken extends FullToken<'Prompts'> {}
 
 const genPromptsStyle: GenerateStyle<PromptsToken> = (token) => {
-
   const { componentCls } = token;
 
   return {
@@ -18,8 +17,7 @@ const genPromptsStyle: GenerateStyle<PromptsToken> = (token) => {
       [`&${componentCls}-rtl`]: {
         direction: 'rtl',
       },
-      [`& ${componentCls}-title`]: {
-      },
+      [`& ${componentCls}-title`]: {},
       [`& ${componentCls}-list`]: {
         display: 'flex',
         gap: token.paddingSM,
@@ -35,6 +33,8 @@ const genPromptsStyle: GenerateStyle<PromptsToken> = (token) => {
           flexDirection: 'column',
         },
       },
+
+      // ========================= item =========================
       [`& ${componentCls}-item`]: {
         display: 'flex',
         gap: token.paddingSM,
@@ -44,6 +44,7 @@ const genPromptsStyle: GenerateStyle<PromptsToken> = (token) => {
         justifyContent: 'flex-start',
         borderRadius: token.borderRadiusLG,
         border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorderSecondary}`,
+
         [`& ${componentCls}-content`]: {
           display: 'inline-flex',
           gap: token.paddingXS,
@@ -52,7 +53,7 @@ const genPromptsStyle: GenerateStyle<PromptsToken> = (token) => {
         },
       },
     },
-  }
+  };
 };
 
 export const prepareComponentToken: GetDefaultToken<'Prompts'> = () => ({});

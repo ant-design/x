@@ -2,161 +2,259 @@
 
 exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] = `
 <div
-  class="ant-prompts"
+  class="ant-app"
 >
-  <h5
-    class="ant-typography ant-prompts-title"
+  <div
+    class="ant-prompts"
   >
-    ✨ Inspirational Sparks and Marvelous Tips
-  </h5>
-  <ul
-    class="ant-prompts-list"
-  >
-    <li>
-      <button
-        class="ant-btn ant-btn-text ant-prompts-item"
-        type="button"
-      >
-        <div
-          class="ant-prompts-icon"
+    <h5
+      class="ant-typography ant-prompts-title"
+    >
+      ✨ Inspirational Sparks and Marvelous Tips
+    </h5>
+    <ul
+      class="ant-prompts-list"
+    >
+      <li>
+        <button
+          class="ant-btn ant-btn-text ant-prompts-item"
+          type="button"
         >
-          <span
-            aria-label="bulb"
-            class="anticon anticon-bulb"
-            role="img"
-            style="color: rgb(255, 215, 0);"
+          <div
+            class="ant-prompts-icon"
           >
-            <svg
-              aria-hidden="true"
-              data-icon="bulb"
-              fill="currentColor"
-              focusable="false"
-              height="1em"
-              viewBox="64 64 896 896"
-              width="1em"
+            <span
+              aria-label="bulb"
+              class="anticon anticon-bulb"
+              role="img"
+              style="color: rgb(255, 215, 0);"
             >
-              <path
-                d="M632 888H392c-4.4 0-8 3.6-8 8v32c0 17.7 14.3 32 32 32h192c17.7 0 32-14.3 32-32v-32c0-4.4-3.6-8-8-8zM512 64c-181.1 0-328 146.9-328 328 0 121.4 66 227.4 164 284.1V792c0 17.7 14.3 32 32 32h264c17.7 0 32-14.3 32-32V676.1c98-56.7 164-162.7 164-284.1 0-181.1-146.9-328-328-328zm127.9 549.8L604 634.6V752H420V634.6l-35.9-20.8C305.4 568.3 256 484.5 256 392c0-141.4 114.6-256 256-256s256 114.6 256 256c0 92.5-49.4 176.3-128.1 221.8z"
-              />
-            </svg>
-          </span>
-        </div>
-        <div
-          class="ant-prompts-content"
-        >
-          <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
+              <svg
+                aria-hidden="true"
+                data-icon="bulb"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M632 888H392c-4.4 0-8 3.6-8 8v32c0 17.7 14.3 32 32 32h192c17.7 0 32-14.3 32-32v-32c0-4.4-3.6-8-8-8zM512 64c-181.1 0-328 146.9-328 328 0 121.4 66 227.4 164 284.1V792c0 17.7 14.3 32 32 32h264c17.7 0 32-14.3 32-32V676.1c98-56.7 164-162.7 164-284.1 0-181.1-146.9-328-328-328zm127.9 549.8L604 634.6V752H420V634.6l-35.9-20.8C305.4 568.3 256 484.5 256 392c0-141.4 114.6-256 256-256s256 114.6 256 256c0 92.5-49.4 176.3-128.1 221.8z"
+                />
+              </svg>
+            </span>
+          </div>
+          <div
+            class="ant-prompts-content"
           >
-            <strong>
-              Ignite Your Creativity
-            </strong>
-          </span>
-          <span
-            class="ant-typography ant-typography-secondary ant-prompts-desc"
-          >
-            Got any sparks for a new project?
-          </span>
-        </div>
-      </button>
-    </li>
-    <li>
-      <button
-        class="ant-btn ant-btn-text ant-prompts-item"
-        type="button"
-      >
-        <div
-          class="ant-prompts-icon"
-        >
-          <span
-            aria-label="info-circle"
-            class="anticon anticon-info-circle"
-            role="img"
-            style="color: rgb(24, 144, 255);"
-          >
-            <svg
-              aria-hidden="true"
-              data-icon="info-circle"
-              fill="currentColor"
-              focusable="false"
-              height="1em"
-              viewBox="64 64 896 896"
-              width="1em"
+            <span
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
             >
-              <path
-                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-              />
-              <path
-                d="M464 336a48 48 0 1096 0 48 48 0 10-96 0zm72 112h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V456c0-4.4-3.6-8-8-8z"
-              />
-            </svg>
-          </span>
-        </div>
-        <div
-          class="ant-prompts-content"
-        >
-          <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
-          >
-            <strong>
-              Uncover Background Info
-            </strong>
-          </span>
-          <span
-            class="ant-typography ant-typography-secondary ant-prompts-desc"
-          >
-            Help me understand the background of this topic.
-          </span>
-        </div>
-      </button>
-    </li>
-    <li>
-      <button
-        class="ant-btn ant-btn-text ant-prompts-item"
-        type="button"
-      >
-        <div
-          class="ant-prompts-icon"
-        >
-          <span
-            aria-label="rocket"
-            class="anticon anticon-rocket"
-            role="img"
-            style="color: rgb(114, 46, 209);"
-          >
-            <svg
-              aria-hidden="true"
-              data-icon="rocket"
-              fill="currentColor"
-              focusable="false"
-              height="1em"
-              viewBox="64 64 896 896"
-              width="1em"
+              <strong>
+                Ignite Your Creativity
+              </strong>
+            </span>
+            <span
+              class="ant-typography ant-typography-secondary ant-prompts-desc"
             >
-              <path
-                d="M864 736c0-111.6-65.4-208-160-252.9V317.3c0-15.1-5.3-29.7-15.1-41.2L536.5 95.4C530.1 87.8 521 84 512 84s-18.1 3.8-24.5 11.4L335.1 276.1a63.97 63.97 0 00-15.1 41.2v165.8C225.4 528 160 624.4 160 736h156.5c-2.3 7.2-3.5 15-3.5 23.8 0 22.1 7.6 43.7 21.4 60.8a97.2 97.2 0 0043.1 30.6c23.1 54 75.6 88.8 134.5 88.8 29.1 0 57.3-8.6 81.4-24.8 23.6-15.8 41.9-37.9 53-64a97 97 0 0043.1-30.5 97.52 97.52 0 0021.4-60.8c0-8.4-1.1-16.4-3.1-23.8H864zM762.3 621.4c9.4 14.6 17 30.3 22.5 46.6H700V558.7a211.6 211.6 0 0162.3 62.7zM388 483.1V318.8l124-147 124 147V668H388V483.1zM239.2 668c5.5-16.3 13.1-32 22.5-46.6 16.3-25.2 37.5-46.5 62.3-62.7V668h-84.8zm388.9 116.2c-5.2 3-11.2 4.2-17.1 3.4l-19.5-2.4-2.8 19.4c-5.4 37.9-38.4 66.5-76.7 66.5-38.3 0-71.3-28.6-76.7-66.5l-2.8-19.5-19.5 2.5a27.7 27.7 0 01-17.1-3.5c-8.7-5-14.1-14.3-14.1-24.4 0-10.6 5.9-19.4 14.6-23.8h231.3c8.8 4.5 14.6 13.3 14.6 23.8-.1 10.2-5.5 19.6-14.2 24.5zM464 400a48 48 0 1096 0 48 48 0 10-96 0z"
-              />
-            </svg>
-          </span>
-        </div>
-        <div
-          class="ant-prompts-content"
+              Got any sparks for a new project?
+            </span>
+          </div>
+        </button>
+      </li>
+      <li>
+        <button
+          class="ant-btn ant-btn-text ant-prompts-item"
+          type="button"
         >
-          <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
+          <div
+            class="ant-prompts-icon"
           >
-            <strong>
-              Efficiency Boost Battle
-            </strong>
-          </span>
-          <span
-            class="ant-typography ant-typography-secondary ant-prompts-desc"
+            <span
+              aria-label="info-circle"
+              class="anticon anticon-info-circle"
+              role="img"
+              style="color: rgb(24, 144, 255);"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="info-circle"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                />
+                <path
+                  d="M464 336a48 48 0 1096 0 48 48 0 10-96 0zm72 112h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V456c0-4.4-3.6-8-8-8z"
+                />
+              </svg>
+            </span>
+          </div>
+          <div
+            class="ant-prompts-content"
           >
-            How can I work faster and better?
-          </span>
-        </div>
-      </button>
-    </li>
-  </ul>
+            <span
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
+            >
+              <strong>
+                Uncover Background Info
+              </strong>
+            </span>
+            <span
+              class="ant-typography ant-typography-secondary ant-prompts-desc"
+            >
+              Help me understand the background of this topic.
+            </span>
+          </div>
+        </button>
+      </li>
+      <li>
+        <button
+          class="ant-btn ant-btn-text ant-prompts-item"
+          type="button"
+        >
+          <div
+            class="ant-prompts-icon"
+          >
+            <span
+              aria-label="rocket"
+              class="anticon anticon-rocket"
+              role="img"
+              style="color: rgb(114, 46, 209);"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="rocket"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M864 736c0-111.6-65.4-208-160-252.9V317.3c0-15.1-5.3-29.7-15.1-41.2L536.5 95.4C530.1 87.8 521 84 512 84s-18.1 3.8-24.5 11.4L335.1 276.1a63.97 63.97 0 00-15.1 41.2v165.8C225.4 528 160 624.4 160 736h156.5c-2.3 7.2-3.5 15-3.5 23.8 0 22.1 7.6 43.7 21.4 60.8a97.2 97.2 0 0043.1 30.6c23.1 54 75.6 88.8 134.5 88.8 29.1 0 57.3-8.6 81.4-24.8 23.6-15.8 41.9-37.9 53-64a97 97 0 0043.1-30.5 97.52 97.52 0 0021.4-60.8c0-8.4-1.1-16.4-3.1-23.8H864zM762.3 621.4c9.4 14.6 17 30.3 22.5 46.6H700V558.7a211.6 211.6 0 0162.3 62.7zM388 483.1V318.8l124-147 124 147V668H388V483.1zM239.2 668c5.5-16.3 13.1-32 22.5-46.6 16.3-25.2 37.5-46.5 62.3-62.7V668h-84.8zm388.9 116.2c-5.2 3-11.2 4.2-17.1 3.4l-19.5-2.4-2.8 19.4c-5.4 37.9-38.4 66.5-76.7 66.5-38.3 0-71.3-28.6-76.7-66.5l-2.8-19.5-19.5 2.5a27.7 27.7 0 01-17.1-3.5c-8.7-5-14.1-14.3-14.1-24.4 0-10.6 5.9-19.4 14.6-23.8h231.3c8.8 4.5 14.6 13.3 14.6 23.8-.1 10.2-5.5 19.6-14.2 24.5zM464 400a48 48 0 1096 0 48 48 0 10-96 0z"
+                />
+              </svg>
+            </span>
+          </div>
+          <div
+            class="ant-prompts-content"
+          >
+            <span
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
+            >
+              <strong>
+                Efficiency Boost Battle
+              </strong>
+            </span>
+            <span
+              class="ant-typography ant-typography-secondary ant-prompts-desc"
+            >
+              How can I work faster and better?
+            </span>
+          </div>
+        </button>
+      </li>
+      <li>
+        <button
+          class="ant-btn ant-btn-text ant-prompts-item"
+          type="button"
+        >
+          <div
+            class="ant-prompts-icon"
+          >
+            <span
+              aria-label="smile"
+              class="anticon anticon-smile"
+              role="img"
+              style="color: rgb(82, 196, 26);"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="smile"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M288 421a48 48 0 1096 0 48 48 0 10-96 0zm352 0a48 48 0 1096 0 48 48 0 10-96 0zM512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm263 711c-34.2 34.2-74 61-118.3 79.8C611 874.2 562.3 884 512 884c-50.3 0-99-9.8-144.8-29.2A370.4 370.4 0 01248.9 775c-34.2-34.2-61-74-79.8-118.3C149.8 611 140 562.3 140 512s9.8-99 29.2-144.8A370.4 370.4 0 01249 248.9c34.2-34.2 74-61 118.3-79.8C413 149.8 461.7 140 512 140c50.3 0 99 9.8 144.8 29.2A370.4 370.4 0 01775.1 249c34.2 34.2 61 74 79.8 118.3C874.2 413 884 461.7 884 512s-9.8 99-29.2 144.8A368.89 368.89 0 01775 775zM664 533h-48.1c-4.2 0-7.8 3.2-8.1 7.4C604 589.9 562.5 629 512 629s-92.1-39.1-95.8-88.6c-.3-4.2-3.9-7.4-8.1-7.4H360a8 8 0 00-8 8.4c4.4 84.3 74.5 151.6 160 151.6s155.6-67.3 160-151.6a8 8 0 00-8-8.4z"
+                />
+              </svg>
+            </span>
+          </div>
+          <div
+            class="ant-prompts-content"
+          >
+            <span
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
+            >
+              <strong>
+                Tell me a Joke
+              </strong>
+            </span>
+            <span
+              class="ant-typography ant-typography-secondary ant-prompts-desc"
+            >
+              Why do not ants get sick? Because they have tiny ant-bodies!
+            </span>
+          </div>
+        </button>
+      </li>
+      <li>
+        <button
+          class="ant-btn ant-btn-text ant-prompts-item"
+          type="button"
+        >
+          <div
+            class="ant-prompts-icon"
+          >
+            <span
+              aria-label="warning"
+              class="anticon anticon-warning"
+              role="img"
+              style="color: rgb(255, 77, 79);"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="warning"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M464 720a48 48 0 1096 0 48 48 0 10-96 0zm16-304v184c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V416c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8zm475.7 440l-416-720c-6.2-10.7-16.9-16-27.7-16s-21.6 5.3-27.7 16l-416 720C56 877.4 71.4 904 96 904h832c24.6 0 40-26.6 27.7-48zm-783.5-27.9L512 239.9l339.8 588.2H172.2z"
+                />
+              </svg>
+            </span>
+          </div>
+          <div
+            class="ant-prompts-content"
+          >
+            <span
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
+            >
+              <strong>
+                Common Issue Solutions
+              </strong>
+            </span>
+            <span
+              class="ant-typography ant-typography-secondary ant-prompts-desc"
+            >
+              How to solve common issues? Share some tips!
+            </span>
+          </div>
+        </button>
+      </li>
+    </ul>
+  </div>
 </div>
 `;
 
@@ -323,7 +421,7 @@ exports[`renders components/prompts/demo/flex-vertical.tsx extend context correc
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-typography-secondary ant-prompts-desc"
+            class="ant-typography ant-typography-default ant-prompts-desc"
           >
             How to rest effectively after long hours of work?
           </span>
@@ -363,7 +461,7 @@ exports[`renders components/prompts/demo/flex-vertical.tsx extend context correc
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-typography-secondary ant-prompts-desc"
+            class="ant-typography ant-typography-default ant-prompts-desc"
           >
             What are the secrets to maintaining a positive mindset?
           </span>
@@ -403,7 +501,7 @@ exports[`renders components/prompts/demo/flex-vertical.tsx extend context correc
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-typography-secondary ant-prompts-desc"
+            class="ant-typography ant-typography-default ant-prompts-desc"
           >
             How to stay calm under immense pressure?
           </span>
@@ -461,7 +559,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-typography-secondary ant-prompts-desc"
+            class="ant-typography ant-typography-default ant-prompts-desc"
           >
             Got any sparks for a new project?
           </span>
@@ -504,7 +602,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-typography-secondary ant-prompts-desc"
+            class="ant-typography ant-typography-default ant-prompts-desc"
           >
             Help me understand the background of this topic.
           </span>
@@ -544,7 +642,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-typography-secondary ant-prompts-desc"
+            class="ant-typography ant-typography-default ant-prompts-desc"
           >
             How to solve common issues? Share some tips!
           </span>
@@ -584,7 +682,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-typography-secondary ant-prompts-desc"
+            class="ant-typography ant-typography-default ant-prompts-desc"
           >
             How can I work faster and better?
           </span>
@@ -627,7 +725,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-typography-secondary ant-prompts-desc"
+            class="ant-typography ant-typography-default ant-prompts-desc"
           >
             What are some tricks for getting tasks done?
           </span>
@@ -667,7 +765,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-typography-secondary ant-prompts-desc"
+            class="ant-typography ant-typography-default ant-prompts-desc"
           >
             How to rest effectively after long hours of work?
           </span>
@@ -707,7 +805,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-typography-secondary ant-prompts-desc"
+            class="ant-typography ant-typography-default ant-prompts-desc"
           >
             What are the secrets to maintaining a positive mindset?
           </span>
@@ -747,7 +845,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-typography-secondary ant-prompts-desc"
+            class="ant-typography ant-typography-default ant-prompts-desc"
           >
             How to stay calm under immense pressure?
           </span>
@@ -759,596 +857,3 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
 `;
 
 exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 2`] = `[]`;
-
-exports[`renders components/prompts/demo/onclick.tsx extend context correctly 1`] = `
-<div
-  class="ant-prompts"
->
-  <ul
-    class="ant-prompts-list"
-  >
-    <li>
-      <button
-        class="ant-btn ant-btn-text ant-prompts-item"
-        type="button"
-      >
-        <div
-          class="ant-prompts-icon"
-        >
-          <span
-            aria-label="rocket"
-            class="anticon anticon-rocket"
-            role="img"
-            style="color: rgb(114, 46, 209);"
-          >
-            <svg
-              aria-hidden="true"
-              data-icon="rocket"
-              fill="currentColor"
-              focusable="false"
-              height="1em"
-              viewBox="64 64 896 896"
-              width="1em"
-            >
-              <path
-                d="M864 736c0-111.6-65.4-208-160-252.9V317.3c0-15.1-5.3-29.7-15.1-41.2L536.5 95.4C530.1 87.8 521 84 512 84s-18.1 3.8-24.5 11.4L335.1 276.1a63.97 63.97 0 00-15.1 41.2v165.8C225.4 528 160 624.4 160 736h156.5c-2.3 7.2-3.5 15-3.5 23.8 0 22.1 7.6 43.7 21.4 60.8a97.2 97.2 0 0043.1 30.6c23.1 54 75.6 88.8 134.5 88.8 29.1 0 57.3-8.6 81.4-24.8 23.6-15.8 41.9-37.9 53-64a97 97 0 0043.1-30.5 97.52 97.52 0 0021.4-60.8c0-8.4-1.1-16.4-3.1-23.8H864zM762.3 621.4c9.4 14.6 17 30.3 22.5 46.6H700V558.7a211.6 211.6 0 0162.3 62.7zM388 483.1V318.8l124-147 124 147V668H388V483.1zM239.2 668c5.5-16.3 13.1-32 22.5-46.6 16.3-25.2 37.5-46.5 62.3-62.7V668h-84.8zm388.9 116.2c-5.2 3-11.2 4.2-17.1 3.4l-19.5-2.4-2.8 19.4c-5.4 37.9-38.4 66.5-76.7 66.5-38.3 0-71.3-28.6-76.7-66.5l-2.8-19.5-19.5 2.5a27.7 27.7 0 01-17.1-3.5c-8.7-5-14.1-14.3-14.1-24.4 0-10.6 5.9-19.4 14.6-23.8h231.3c8.8 4.5 14.6 13.3 14.6 23.8-.1 10.2-5.5 19.6-14.2 24.5zM464 400a48 48 0 1096 0 48 48 0 10-96 0z"
-              />
-            </svg>
-          </span>
-        </div>
-        <div
-          class="ant-prompts-content"
-        >
-          <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
-          >
-            <strong>
-              Efficiency Boost Battle
-            </strong>
-          </span>
-          <span
-            class="ant-typography ant-typography-secondary ant-prompts-desc"
-          >
-            How can I work faster and better?
-          </span>
-        </div>
-      </button>
-    </li>
-    <li>
-      <button
-        class="ant-btn ant-btn-text ant-prompts-item"
-        type="button"
-      >
-        <div
-          class="ant-prompts-icon"
-        >
-          <span
-            aria-label="check-circle"
-            class="anticon anticon-check-circle"
-            role="img"
-            style="color: rgb(82, 196, 26);"
-          >
-            <svg
-              aria-hidden="true"
-              data-icon="check-circle"
-              fill="currentColor"
-              focusable="false"
-              height="1em"
-              viewBox="64 64 896 896"
-              width="1em"
-            >
-              <path
-                d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0051.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"
-              />
-              <path
-                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-              />
-            </svg>
-          </span>
-        </div>
-        <div
-          class="ant-prompts-content"
-        >
-          <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
-          >
-            <strong>
-              Task Completion Secrets
-            </strong>
-          </span>
-          <span
-            class="ant-typography ant-typography-secondary ant-prompts-desc"
-          >
-            What are some tricks for getting tasks done?
-          </span>
-        </div>
-      </button>
-    </li>
-    <li>
-      <button
-        class="ant-btn ant-btn-text ant-prompts-item"
-        type="button"
-      >
-        <div
-          class="ant-prompts-icon"
-        >
-          <span
-            aria-label="coffee"
-            class="anticon anticon-coffee"
-            role="img"
-            style="color: rgb(150, 75, 0);"
-          >
-            <svg
-              aria-hidden="true"
-              data-icon="coffee"
-              fill="currentColor"
-              focusable="false"
-              height="1em"
-              viewBox="0 0 1024 1024"
-              width="1em"
-            >
-              <path
-                d="M275 281c19.9 0 36-16.1 36-36V36c0-19.9-16.1-36-36-36s-36 16.1-36 36v209c0 19.9 16.1 36 36 36zm613 144H768c0-39.8-32.2-72-72-72H200c-39.8 0-72 32.2-72 72v248c0 3.4.2 6.7.7 9.9-.5 7-.7 14-.7 21.1 0 176.7 143.3 320 320 320 160.1 0 292.7-117.5 316.3-271H888c39.8 0 72-32.2 72-72V497c0-39.8-32.2-72-72-72zM696 681h-1.1c.7 7.6 1.1 15.2 1.1 23 0 137-111 248-248 248S200 841 200 704c0-7.8.4-15.4 1.1-23H200V425h496v256zm192-8H776V497h112v176zM613 281c19.9 0 36-16.1 36-36V36c0-19.9-16.1-36-36-36s-36 16.1-36 36v209c0 19.9 16.1 36 36 36zm-170 0c19.9 0 36-16.1 36-36V36c0-19.9-16.1-36-36-36s-36 16.1-36 36v209c0 19.9 16.1 36 36 36z"
-              />
-            </svg>
-          </span>
-        </div>
-        <div
-          class="ant-prompts-content"
-        >
-          <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
-          >
-            <strong>
-              Time for a Coffee Break
-            </strong>
-          </span>
-          <span
-            class="ant-typography ant-typography-secondary ant-prompts-desc"
-          >
-            How to rest effectively after long hours of work?
-          </span>
-        </div>
-      </button>
-    </li>
-  </ul>
-</div>
-`;
-
-exports[`renders components/prompts/demo/onclick.tsx extend context correctly 2`] = `[]`;
-
-exports[`renders components/prompts/demo/with-scroll.tsx extend context correctly 1`] = `
-<div
-  class="ant-prompts"
->
-  <ul
-    class="ant-prompts-list"
-  >
-    <li>
-      <button
-        class="ant-btn ant-btn-text ant-prompts-item"
-        type="button"
-      >
-        <div
-          class="ant-prompts-icon"
-        >
-          <span
-            aria-label="bulb"
-            class="anticon anticon-bulb"
-            role="img"
-            style="color: rgb(255, 215, 0);"
-          >
-            <svg
-              aria-hidden="true"
-              data-icon="bulb"
-              fill="currentColor"
-              focusable="false"
-              height="1em"
-              viewBox="64 64 896 896"
-              width="1em"
-            >
-              <path
-                d="M632 888H392c-4.4 0-8 3.6-8 8v32c0 17.7 14.3 32 32 32h192c17.7 0 32-14.3 32-32v-32c0-4.4-3.6-8-8-8zM512 64c-181.1 0-328 146.9-328 328 0 121.4 66 227.4 164 284.1V792c0 17.7 14.3 32 32 32h264c17.7 0 32-14.3 32-32V676.1c98-56.7 164-162.7 164-284.1 0-181.1-146.9-328-328-328zm127.9 549.8L604 634.6V752H420V634.6l-35.9-20.8C305.4 568.3 256 484.5 256 392c0-141.4 114.6-256 256-256s256 114.6 256 256c0 92.5-49.4 176.3-128.1 221.8z"
-              />
-            </svg>
-          </span>
-        </div>
-        <div
-          class="ant-prompts-content"
-        >
-          <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
-          >
-            <strong>
-              Get Inspired
-            </strong>
-          </span>
-        </div>
-      </button>
-    </li>
-    <li>
-      <button
-        class="ant-btn ant-btn-text ant-prompts-item"
-        type="button"
-      >
-        <div
-          class="ant-prompts-icon"
-        >
-          <span
-            aria-label="setting"
-            class="anticon anticon-setting"
-            role="img"
-            style="color: rgb(235, 47, 150);"
-          >
-            <svg
-              aria-hidden="true"
-              data-icon="setting"
-              fill="currentColor"
-              focusable="false"
-              height="1em"
-              viewBox="64 64 896 896"
-              width="1em"
-            >
-              <path
-                d="M924.8 625.7l-65.5-56c3.1-19 4.7-38.4 4.7-57.8s-1.6-38.8-4.7-57.8l65.5-56a32.03 32.03 0 009.3-35.2l-.9-2.6a443.74 443.74 0 00-79.7-137.9l-1.8-2.1a32.12 32.12 0 00-35.1-9.5l-81.3 28.9c-30-24.6-63.5-44-99.7-57.6l-15.7-85a32.05 32.05 0 00-25.8-25.7l-2.7-.5c-52.1-9.4-106.9-9.4-159 0l-2.7.5a32.05 32.05 0 00-25.8 25.7l-15.8 85.4a351.86 351.86 0 00-99 57.4l-81.9-29.1a32 32 0 00-35.1 9.5l-1.8 2.1a446.02 446.02 0 00-79.7 137.9l-.9 2.6c-4.5 12.5-.8 26.5 9.3 35.2l66.3 56.6c-3.1 18.8-4.6 38-4.6 57.1 0 19.2 1.5 38.4 4.6 57.1L99 625.5a32.03 32.03 0 00-9.3 35.2l.9 2.6c18.1 50.4 44.9 96.9 79.7 137.9l1.8 2.1a32.12 32.12 0 0035.1 9.5l81.9-29.1c29.8 24.5 63.1 43.9 99 57.4l15.8 85.4a32.05 32.05 0 0025.8 25.7l2.7.5a449.4 449.4 0 00159 0l2.7-.5a32.05 32.05 0 0025.8-25.7l15.7-85a350 350 0 0099.7-57.6l81.3 28.9a32 32 0 0035.1-9.5l1.8-2.1c34.8-41.1 61.6-87.5 79.7-137.9l.9-2.6c4.5-12.3.8-26.3-9.3-35zM788.3 465.9c2.5 15.1 3.8 30.6 3.8 46.1s-1.3 31-3.8 46.1l-6.6 40.1 74.7 63.9a370.03 370.03 0 01-42.6 73.6L721 702.8l-31.4 25.8c-23.9 19.6-50.5 35-79.3 45.8l-38.1 14.3-17.9 97a377.5 377.5 0 01-85 0l-17.9-97.2-37.8-14.5c-28.5-10.8-55-26.2-78.7-45.7l-31.4-25.9-93.4 33.2c-17-22.9-31.2-47.6-42.6-73.6l75.5-64.5-6.5-40c-2.4-14.9-3.7-30.3-3.7-45.5 0-15.3 1.2-30.6 3.7-45.5l6.5-40-75.5-64.5c11.3-26.1 25.6-50.7 42.6-73.6l93.4 33.2 31.4-25.9c23.7-19.5 50.2-34.9 78.7-45.7l37.9-14.3 17.9-97.2c28.1-3.2 56.8-3.2 85 0l17.9 97 38.1 14.3c28.7 10.8 55.4 26.2 79.3 45.8l31.4 25.8 92.8-32.9c17 22.9 31.2 47.6 42.6 73.6L781.8 426l6.5 39.9zM512 326c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm79.2 255.2A111.6 111.6 0 01512 614c-29.9 0-58-11.7-79.2-32.8A111.6 111.6 0 01400 502c0-29.9 11.7-58 32.8-79.2C454 401.6 482.1 390 512 390c29.9 0 58 11.6 79.2 32.8A111.6 111.6 0 01624 502c0 29.9-11.7 58-32.8 79.2z"
-              />
-            </svg>
-          </span>
-        </div>
-        <div
-          class="ant-prompts-content"
-        >
-          <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
-          >
-            <strong>
-              Settings
-            </strong>
-          </span>
-        </div>
-      </button>
-    </li>
-    <li>
-      <button
-        class="ant-btn ant-btn-text ant-prompts-item"
-        type="button"
-      >
-        <div
-          class="ant-prompts-icon"
-        >
-          <span
-            aria-label="info-circle"
-            class="anticon anticon-info-circle"
-            role="img"
-            style="color: rgb(24, 144, 255);"
-          >
-            <svg
-              aria-hidden="true"
-              data-icon="info-circle"
-              fill="currentColor"
-              focusable="false"
-              height="1em"
-              viewBox="64 64 896 896"
-              width="1em"
-            >
-              <path
-                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-              />
-              <path
-                d="M464 336a48 48 0 1096 0 48 48 0 10-96 0zm72 112h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V456c0-4.4-3.6-8-8-8z"
-              />
-            </svg>
-          </span>
-        </div>
-        <div
-          class="ant-prompts-content"
-        >
-          <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
-          >
-            <strong>
-              Background Info
-            </strong>
-          </span>
-        </div>
-      </button>
-    </li>
-    <li>
-      <button
-        class="ant-btn ant-btn-text ant-prompts-item"
-        type="button"
-      >
-        <div
-          class="ant-prompts-icon"
-        >
-          <span
-            aria-label="smile"
-            class="anticon anticon-smile"
-            role="img"
-            style="color: rgb(250, 173, 20);"
-          >
-            <svg
-              aria-hidden="true"
-              data-icon="smile"
-              fill="currentColor"
-              focusable="false"
-              height="1em"
-              viewBox="64 64 896 896"
-              width="1em"
-            >
-              <path
-                d="M288 421a48 48 0 1096 0 48 48 0 10-96 0zm352 0a48 48 0 1096 0 48 48 0 10-96 0zM512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm263 711c-34.2 34.2-74 61-118.3 79.8C611 874.2 562.3 884 512 884c-50.3 0-99-9.8-144.8-29.2A370.4 370.4 0 01248.9 775c-34.2-34.2-61-74-79.8-118.3C149.8 611 140 562.3 140 512s9.8-99 29.2-144.8A370.4 370.4 0 01249 248.9c34.2-34.2 74-61 118.3-79.8C413 149.8 461.7 140 512 140c50.3 0 99 9.8 144.8 29.2A370.4 370.4 0 01775.1 249c34.2 34.2 61 74 79.8 118.3C874.2 413 884 461.7 884 512s-9.8 99-29.2 144.8A368.89 368.89 0 01775 775zM664 533h-48.1c-4.2 0-7.8 3.2-8.1 7.4C604 589.9 562.5 629 512 629s-92.1-39.1-95.8-88.6c-.3-4.2-3.9-7.4-8.1-7.4H360a8 8 0 00-8 8.4c4.4 84.3 74.5 151.6 160 151.6s155.6-67.3 160-151.6a8 8 0 00-8-8.4z"
-              />
-            </svg>
-          </span>
-        </div>
-        <div
-          class="ant-prompts-content"
-        >
-          <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
-          >
-            <strong>
-              Send a Compliment
-            </strong>
-          </span>
-        </div>
-      </button>
-    </li>
-    <li>
-      <button
-        class="ant-btn ant-btn-text ant-prompts-item"
-        type="button"
-      >
-        <div
-          class="ant-prompts-icon"
-        >
-          <span
-            aria-label="file-text"
-            class="anticon anticon-file-text"
-            role="img"
-            style="color: rgb(82, 196, 26);"
-          >
-            <svg
-              aria-hidden="true"
-              data-icon="file-text"
-              fill="currentColor"
-              focusable="false"
-              height="1em"
-              viewBox="64 64 896 896"
-              width="1em"
-            >
-              <path
-                d="M854.6 288.6L639.4 73.4c-6-6-14.1-9.4-22.6-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.7-9.4-22.7zM790.2 326H602V137.8L790.2 326zm1.8 562H232V136h302v216a42 42 0 0042 42h216v494zM504 618H320c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8zM312 490v48c0 4.4 3.6 8 8 8h384c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H320c-4.4 0-8 3.6-8 8z"
-              />
-            </svg>
-          </span>
-        </div>
-        <div
-          class="ant-prompts-content"
-        >
-          <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
-          >
-            <strong>
-              Draft a Message
-            </strong>
-          </span>
-        </div>
-      </button>
-    </li>
-    <li>
-      <button
-        class="ant-btn ant-btn-text ant-prompts-item"
-        type="button"
-      >
-        <div
-          class="ant-prompts-icon"
-        >
-          <span
-            aria-label="fire"
-            class="anticon anticon-fire"
-            role="img"
-            style="color: rgb(255, 77, 79);"
-          >
-            <svg
-              aria-hidden="true"
-              data-icon="fire"
-              fill="currentColor"
-              focusable="false"
-              height="1em"
-              viewBox="64 64 896 896"
-              width="1em"
-            >
-              <path
-                d="M834.1 469.2A347.49 347.49 0 00751.2 354l-29.1-26.7a8.09 8.09 0 00-13 3.3l-13 37.3c-8.1 23.4-23 47.3-44.1 70.8-1.4 1.5-3 1.9-4.1 2-1.1.1-2.8-.1-4.3-1.5-1.4-1.2-2.1-3-2-4.8 3.7-60.2-14.3-128.1-53.7-202C555.3 171 510 123.1 453.4 89.7l-41.3-24.3c-5.4-3.2-12.3 1-12 7.3l2.2 48c1.5 32.8-2.3 61.8-11.3 85.9-11 29.5-26.8 56.9-47 81.5a295.64 295.64 0 01-47.5 46.1 352.6 352.6 0 00-100.3 121.5A347.75 347.75 0 00160 610c0 47.2 9.3 92.9 27.7 136a349.4 349.4 0 0075.5 110.9c32.4 32 70 57.2 111.9 74.7C418.5 949.8 464.5 959 512 959s93.5-9.2 136.9-27.3A348.6 348.6 0 00760.8 857c32.4-32 57.8-69.4 75.5-110.9a344.2 344.2 0 0027.7-136c0-48.8-10-96.2-29.9-140.9zM713 808.5c-53.7 53.2-125 82.4-201 82.4s-147.3-29.2-201-82.4c-53.5-53.1-83-123.5-83-198.4 0-43.5 9.8-85.2 29.1-124 18.8-37.9 46.8-71.8 80.8-97.9a349.6 349.6 0 0058.6-56.8c25-30.5 44.6-64.5 58.2-101a240 240 0 0012.1-46.5c24.1 22.2 44.3 49 61.2 80.4 33.4 62.6 48.8 118.3 45.8 165.7a74.01 74.01 0 0024.4 59.8 73.36 73.36 0 0053.4 18.8c19.7-1 37.8-9.7 51-24.4 13.3-14.9 24.8-30.1 34.4-45.6 14 17.9 25.7 37.4 35 58.4 15.9 35.8 24 73.9 24 113.1 0 74.9-29.5 145.4-83 198.4z"
-              />
-            </svg>
-          </span>
-        </div>
-        <div
-          class="ant-prompts-content"
-        >
-          <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
-          >
-            <strong>
-              Send an Alert
-            </strong>
-          </span>
-        </div>
-      </button>
-    </li>
-    <li>
-      <button
-        class="ant-btn ant-btn-text ant-prompts-item"
-        type="button"
-      >
-        <div
-          class="ant-prompts-icon"
-        >
-          <span
-            aria-label="coffee"
-            class="anticon anticon-coffee"
-            role="img"
-            style="color: rgb(150, 75, 0);"
-          >
-            <svg
-              aria-hidden="true"
-              data-icon="coffee"
-              fill="currentColor"
-              focusable="false"
-              height="1em"
-              viewBox="0 0 1024 1024"
-              width="1em"
-            >
-              <path
-                d="M275 281c19.9 0 36-16.1 36-36V36c0-19.9-16.1-36-36-36s-36 16.1-36 36v209c0 19.9 16.1 36 36 36zm613 144H768c0-39.8-32.2-72-72-72H200c-39.8 0-72 32.2-72 72v248c0 3.4.2 6.7.7 9.9-.5 7-.7 14-.7 21.1 0 176.7 143.3 320 320 320 160.1 0 292.7-117.5 316.3-271H888c39.8 0 72-32.2 72-72V497c0-39.8-32.2-72-72-72zM696 681h-1.1c.7 7.6 1.1 15.2 1.1 23 0 137-111 248-248 248S200 841 200 704c0-7.8.4-15.4 1.1-23H200V425h496v256zm192-8H776V497h112v176zM613 281c19.9 0 36-16.1 36-36V36c0-19.9-16.1-36-36-36s-36 16.1-36 36v209c0 19.9 16.1 36 36 36zm-170 0c19.9 0 36-16.1 36-36V36c0-19.9-16.1-36-36-36s-36 16.1-36 36v209c0 19.9 16.1 36 36 36z"
-              />
-            </svg>
-          </span>
-        </div>
-        <div
-          class="ant-prompts-content"
-        >
-          <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
-          >
-            <strong>
-              Take a Break
-            </strong>
-          </span>
-        </div>
-      </button>
-    </li>
-    <li>
-      <button
-        class="ant-btn ant-btn-text ant-prompts-item"
-        type="button"
-      >
-        <div
-          class="ant-prompts-icon"
-        >
-          <span
-            aria-label="calendar"
-            class="anticon anticon-calendar"
-            role="img"
-            style="color: rgb(114, 46, 209);"
-          >
-            <svg
-              aria-hidden="true"
-              data-icon="calendar"
-              fill="currentColor"
-              focusable="false"
-              height="1em"
-              viewBox="64 64 896 896"
-              width="1em"
-            >
-              <path
-                d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"
-              />
-            </svg>
-          </span>
-        </div>
-        <div
-          class="ant-prompts-content"
-        >
-          <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
-          >
-            <strong>
-              Schedule a Meeting
-            </strong>
-          </span>
-        </div>
-      </button>
-    </li>
-    <li>
-      <button
-        class="ant-btn ant-btn-text ant-prompts-item"
-        type="button"
-      >
-        <div
-          class="ant-prompts-icon"
-        >
-          <span
-            aria-label="history"
-            class="anticon anticon-history"
-            role="img"
-            style="color: rgb(24, 144, 255);"
-          >
-            <svg
-              aria-hidden="true"
-              data-icon="history"
-              fill="currentColor"
-              focusable="false"
-              height="1em"
-              viewBox="64 64 896 896"
-              width="1em"
-            >
-              <path
-                d="M536.1 273H488c-4.4 0-8 3.6-8 8v275.3c0 2.6 1.2 5 3.3 6.5l165.3 120.7c3.6 2.6 8.6 1.9 11.2-1.7l28.6-39c2.7-3.7 1.9-8.7-1.7-11.2L544.1 528.5V281c0-4.4-3.6-8-8-8zm219.8 75.2l156.8 38.3c5 1.2 9.9-2.6 9.9-7.7l.8-161.5c0-6.7-7.7-10.5-12.9-6.3L752.9 334.1a8 8 0 003 14.1zm167.7 301.1l-56.7-19.5a8 8 0 00-10.1 4.8c-1.9 5.1-3.9 10.1-6 15.1-17.8 42.1-43.3 80-75.9 112.5a353 353 0 01-112.5 75.9 352.18 352.18 0 01-137.7 27.8c-47.8 0-94.1-9.3-137.7-27.8a353 353 0 01-112.5-75.9c-32.5-32.5-58-70.4-75.9-112.5A353.44 353.44 0 01171 512c0-47.8 9.3-94.2 27.8-137.8 17.8-42.1 43.3-80 75.9-112.5a353 353 0 01112.5-75.9C430.6 167.3 477 158 524.8 158s94.1 9.3 137.7 27.8A353 353 0 01775 261.7c10.2 10.3 19.8 21 28.6 32.3l59.8-46.8C784.7 146.6 662.2 81.9 524.6 82 285 82.1 92.6 276.7 95 516.4 97.4 751.9 288.9 942 524.8 942c185.5 0 343.5-117.6 403.7-282.3 1.5-4.2-.7-8.9-4.9-10.4z"
-              />
-            </svg>
-          </span>
-        </div>
-        <div
-          class="ant-prompts-content"
-        >
-          <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
-          >
-            <strong>
-              View History
-            </strong>
-          </span>
-        </div>
-      </button>
-    </li>
-    <li>
-      <button
-        class="ant-btn ant-btn-text ant-prompts-item"
-        type="button"
-      >
-        <div
-          class="ant-prompts-icon"
-        >
-          <span
-            aria-label="share-alt"
-            class="anticon anticon-share-alt"
-            role="img"
-            style="color: rgb(82, 196, 26);"
-          >
-            <svg
-              aria-hidden="true"
-              data-icon="share-alt"
-              fill="currentColor"
-              focusable="false"
-              height="1em"
-              viewBox="64 64 896 896"
-              width="1em"
-            >
-              <path
-                d="M752 664c-28.5 0-54.8 10-75.4 26.7L469.4 540.8a160.68 160.68 0 000-57.6l207.2-149.9C697.2 350 723.5 360 752 360c66.2 0 120-53.8 120-120s-53.8-120-120-120-120 53.8-120 120c0 11.6 1.6 22.7 4.7 33.3L439.9 415.8C410.7 377.1 364.3 352 312 352c-88.4 0-160 71.6-160 160s71.6 160 160 160c52.3 0 98.7-25.1 127.9-63.8l196.8 142.5c-3.1 10.6-4.7 21.8-4.7 33.3 0 66.2 53.8 120 120 120s120-53.8 120-120-53.8-120-120-120zm0-476c28.7 0 52 23.3 52 52s-23.3 52-52 52-52-23.3-52-52 23.3-52 52-52zM312 600c-48.5 0-88-39.5-88-88s39.5-88 88-88 88 39.5 88 88-39.5 88-88 88zm440 236c-28.7 0-52-23.3-52-52s23.3-52 52-52 52 23.3 52 52-23.3 52-52 52z"
-              />
-            </svg>
-          </span>
-        </div>
-        <div
-          class="ant-prompts-content"
-        >
-          <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
-          >
-            <strong>
-              Share Content
-            </strong>
-          </span>
-        </div>
-      </button>
-    </li>
-  </ul>
-</div>
-`;
-
-exports[`renders components/prompts/demo/with-scroll.tsx extend context correctly 2`] = `[]`;

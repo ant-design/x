@@ -149,7 +149,7 @@ const Prompts: React.FC<PromptsProps> = (props) => {
                 {info.description && (
                   <Typography.Text
                     className={`${prefixCls}-desc`}
-                    type="secondary"
+                    type={info.label ? 'secondary' : 'default'}
                     disabled={info.disabled}
                   >
                     {info.description}
