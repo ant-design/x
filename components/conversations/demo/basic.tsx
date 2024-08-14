@@ -6,15 +6,15 @@ import { GithubOutlined, AlipayCircleOutlined, DockerOutlined } from '@ant-desig
 import type { GetProp } from 'antd';
 
 const data: GetProp<ConversationsProps, 'data'> = [
-  // 基础示例
+  // Basic
   {
-    key: 'demo1',
-    label: 'What is Ant Design X ?',
+    key: 'item1',
+    label: 'What is Ant Design X?',
     icon: <GithubOutlined />,
   },
-  // 自定义 label 示例
+  // label as ReactNode
   {
-    key: 'demo2',
+    key: 'item2',
     label: (
       <div>
         Getting Started:{' '}
@@ -25,23 +25,23 @@ const data: GetProp<ConversationsProps, 'data'> = [
     ),
     icon: <AlipayCircleOutlined />,
   },
-  // 长 label 示例
+  // Auto ellipsis
   {
-    key: 'demo4',
+    key: 'item3',
     label: 'In Docker, use 🐑 Ollama and initialize',
     icon: <DockerOutlined />,
   },
-  // 禁用示例
+  // Disabled
   {
-    key: 'demo5',
+    key: 'item4',
     label: 'Expired, please go to the recycle bin to check',
     disabled: true,
   },
 ];
 
 const App = () => (
-  <Card style={{ width: 320 }}>
-    <Conversations data={data} defaultActiveKey="demo1" />
+  <Card style={{ width: 320 }} size="small">
+    <Conversations data={data} defaultActiveKey="item1" />
   </Card>
 );
 
