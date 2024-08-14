@@ -364,7 +364,7 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
     >
       <li>
         <div
-          class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-right ant-divider-plain"
+          class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
           role="separator"
         >
           <span
@@ -506,7 +506,7 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
       </li>
       <li>
         <div
-          class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-right ant-divider-plain"
+          class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
           role="separator"
         >
           <span
@@ -626,7 +626,7 @@ exports[`renders components/conversations/demo/group-sort.tsx extend context cor
     >
       <li>
         <div
-          class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-right ant-divider-plain"
+          class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
           role="separator"
         >
           <span
@@ -844,7 +844,7 @@ exports[`renders components/conversations/demo/group-sort.tsx extend context cor
       </li>
       <li>
         <div
-          class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-right ant-divider-plain"
+          class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
           role="separator"
         >
           <span

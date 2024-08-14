@@ -30,7 +30,7 @@ exports[`Conversations Component Conversations component work 1`] = `
       class="ant-typography ant-typography-ellipsis ant-conversations-label"
     >
       <div>
-        Getting Started: 
+        Getting Started:
         <a
           href="https://ant-design.antgroup.com/index-cn"
           rel="noreferrer"
@@ -94,7 +94,7 @@ exports[`Conversations Component rtl render component should be rendered correct
       class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-conversations-label"
     >
       <div>
-        Getting Started: 
+        Getting Started:
         <a
           href="https://ant-design.antgroup.com/index-cn"
           rel="noreferrer"

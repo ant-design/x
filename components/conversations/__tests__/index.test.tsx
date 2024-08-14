@@ -16,7 +16,14 @@ const data: Conversation[] = [
   },
   {
     key: 'demo2',
-    label: <div>Getting Started: <a target="_blank" href='https://ant-design.antgroup.com/index-cn' rel="noreferrer">Ant Design !</a></div>,
+    label: (
+      <div>
+        Getting Started:{' '}
+        <a target="_blank" href="https://ant-design.antgroup.com/index-cn" rel="noreferrer">
+          Ant Design !
+        </a>
+      </div>
+    ),
     timestamp: 794620900,
   },
   {
@@ -68,11 +75,11 @@ describe('Conversations Component', () => {
     const onActiveChange = jest.fn();
     const { getByText } = render(<Conversations data={data} onActiveChange={onActiveChange} />);
     fireEvent.click(getByText('What is Ant Design X ?'));
-    expect(onActiveChange).toHaveBeenCalledWith('demo1', undefined);
+    expect(onActiveChange).toHaveBeenCalledWith('demo1');
     fireEvent.click(getByText('In Docker, use 🐑 Ollama and initialize'));
-    expect(onActiveChange).toHaveBeenCalledWith('demo4', 'demo1');
+    expect(onActiveChange).toHaveBeenCalledWith('demo4');
     fireEvent.click(getByText('Expired, please go to the recycle bin to check'));
-    expect(onActiveChange).toHaveBeenCalledWith('demo4', 'demo1');
+    expect(onActiveChange).toHaveBeenCalledWith('demo4');
   });
 
   it('should handle menu function', () => {
@@ -94,7 +101,8 @@ describe('Conversations Component', () => {
         data={[
           {
             key: 'demo5',
-            label: 'Looooooooooooooooooooooooooonnnnnnnnnnnnnnnnnnnnnnnnnnnnngggggggggggggggggggggg',
+            label:
+              'Looooooooooooooooooooooooooonnnnnnnnnnnnnnnnnnnnnnnnnnnnngggggggggggggggggggggg',
             timestamp: 794621200,
           },
         ]}
@@ -116,7 +124,9 @@ describe('Conversations Component', () => {
   });
 
   it('should use custom group title component', () => {
-    const { getByText } = render(<Conversations data={data} groupable={{ title: (group) => <div>{group}</div> }} />);
+    const { getByText } = render(
+      <Conversations data={data} groupable={{ title: (group) => <div>{group}</div> }} />,
+    );
     expect(getByText('pinned')).toBeInTheDocument();
   });
 

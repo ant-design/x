@@ -12,6 +12,7 @@ import useGroupable from './hooks/useGroupable';
 import useStyle from './style';
 
 import type { Conversation, Groupable } from './interface';
+import pickAttrs from 'rc-util/lib/pickAttrs';
 
 /**
  * @desc 会话列表组件参数
@@ -92,8 +93,14 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
     classNames = {},
     groupable,
     className,
-    ...htmlULProps
+    ...restProps
   } = props;
+
+  const domProps = pickAttrs(restProps, {
+    attr: true,
+    aria: true,
+    data: true,
+  });
 
   // ============================ ActiveKey ============================
   const [mergedActiveKey, setMergedActiveKey] = useMergedState<ConversationsProps['activeKey']>(
@@ -129,7 +136,7 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
 
   // ============================ Render ============================
   return wrapCSSVar(
-    <ul {...htmlULProps} className={mergedCls}>
+    <ul {...domProps} className={mergedCls}>
       {groupList.map((groupInfo, groupIndex) => {
         const convItems = groupInfo.data.map((convInfo: Conversation, convIndex: number) => (
           <ConversationsItem
