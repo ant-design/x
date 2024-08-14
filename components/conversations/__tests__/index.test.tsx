@@ -2,11 +2,11 @@ import React from 'react';
 import Conversations from '../index';
 import { render, fireEvent } from '../../../tests/utils';
 
-import type { ConversationProps } from '../index';
+import type { Conversation } from '../index';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
 
-const data: ConversationProps[] = [
+const data: Conversation[] = [
   {
     key: 'demo1',
     label: 'What is Ant Design X ?',

@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Card } from 'antd';
-import { Conversations } from '@ant-design/x';
-import type { ConversationProps } from '@ant-design/x';
+import { Card, type GetProp } from 'antd';
+import { Conversations, type ConversationsProps } from '@ant-design/x';
 import { GithubOutlined, CarOutlined } from '@ant-design/icons';
 
-const data: ConversationProps[] = [
+const data: GetProp<ConversationsProps, 'data'> = [
   // 基础示例
   {
     key: 'demo1',
@@ -37,7 +36,7 @@ const App = () => {
         data={data}
       />
     </Card>
-  )
-}
+  );
+};
 
 export default App;

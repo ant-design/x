@@ -11,7 +11,7 @@ import useGroupable from './hooks/useGroupable';
 
 import useStyle from './style';
 
-import type { ConversationProps, Groupable } from './interface';
+import type { Conversation, Groupable } from './interface';
 
 /**
  * @desc 会话列表组件参数
@@ -22,35 +22,35 @@ export interface ConversationsProps extends React.HTMLAttributes<HTMLUListElemen
    * @desc 会话列表数据源
    * @descEN Data source for the conversation list
    */
-  data?: ConversationProps[];
+  data?: Conversation[];
 
   /**
    * @desc 当前选中的值
    * @descEN Currently selected value
    */
-  activeKey?: ConversationProps['key'];
+  activeKey?: Conversation['key'];
 
   /**
    * @desc 默认选中值
    * @descEN Default selected value
    */
-  defaultActiveKey?: ConversationProps['key'];
+  defaultActiveKey?: Conversation['key'];
 
   /**
    * @desc 选中变更回调
    * @descEN Callback for selection change
    */
-  onActiveChange?: (value?: ConversationProps['key'], preValue?: ConversationProps['key']) => void;
+  onActiveChange?: (value?: Conversation['key'], preValue?: Conversation['key']) => void;
 
   /**
    * @desc 会话操作菜单
    * @descEN Operation menu for conversations
    */
-  menu?: MenuProps | ((value: ConversationProps) => MenuProps);
+  menu?: MenuProps | ((value: Conversation) => MenuProps);
 
   /**
-   * @desc 是否支持分组, 开启后默认按 {@link ConversationProps.group} 字段分组
-   * @descEN If grouping is supported, it defaults to the {@link ConversationProps.group} field
+   * @desc 是否支持分组, 开启后默认按 {@link Conversation.group} 字段分组
+   * @descEN If grouping is supported, it defaults to the {@link Conversation.group} field
    */
   groupable?: boolean | Groupable;
 
@@ -123,7 +123,7 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
   return wrapCSSVar(
     <ul {...htmlULProps} className={mergedCls}>
       {groupList.map((groupInfo, groupIndex) => {
-        const convItems = groupInfo.data.map((convInfo: ConversationProps, convIndex: number) => (
+        const convItems = groupInfo.data.map((convInfo: Conversation, convIndex: number) => (
           <ConversationsItem
             key={convInfo.key || `key-${convIndex}`}
             info={convInfo}
@@ -156,6 +156,6 @@ if (process.env.NODE_ENV !== 'production') {
   Conversations.displayName = 'Conversations';
 }
 
-export type { ConversationsProps, ConversationProps };
+export type { Conversation };
 
 export default Conversations;

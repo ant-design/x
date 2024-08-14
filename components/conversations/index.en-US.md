@@ -32,16 +32,16 @@ Common props ref：[Common props](/docs/react/common-props)
 
 | Property           | Description                  | Type                                                                                          | Default | Version |
 |--------------------|------------------------------|-----------------------------------------------------------------------------------------------|---------|---------|
-| data               | Data source for conversation list | `ConversationProps`[]                                                                         | -       | -       |
+| data               | Data source for conversation list | `Conversation`[]                                                                         | -       | -       |
 | activeKey          | Currently selected value     | string                                                                    | -       | -       |
 | defaultActiveKey   | Default selected value       | string                                                                    | -       | -       |
 | onActiveChange     | Callback for selection change | (value?: string, preValue?: string) => void              | -       | -       |
-| menu               | Operation menu for conversations | MenuProps \| ((value: `ConversationProps`) => MenuProps)                               | -       | -       |
-| groupable          | If grouping is supported, it defaults to the `ConversationProps.group` field | boolean \| GroupableProps | -       | -       |
+| menu               | Operation menu for conversations | MenuProps \| ((value: `Conversation`) => MenuProps)                               | -       | -       |
+| groupable          | If grouping is supported, it defaults to the `Conversation.group` field | boolean \| GroupableProps | -       | -       |
 | styles             | Semantic structure styles    | Record<'item', React.CSSProperties>                                                  | -       | -       |
 | classNames         | Semantic structure class names | Record<'item', string>                                                             | -       | -       |
 
-### ConversationProps
+### Conversation
 
 | Property  | Description                | Type              | Default | Version |
 |-----------|----------------------------|-------------------|---------|---------|

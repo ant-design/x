@@ -1,10 +1,10 @@
 import React from 'react';
-import { Card } from 'antd';
-import type { ConversationProps } from '@ant-design/x';
+import { Card, type GetProp } from 'antd';
+import type { ConversationsProps } from '@ant-design/x';
 import { Conversations } from '@ant-design/x';
 import { GithubOutlined, AlipayCircleOutlined, DockerOutlined } from '@ant-design/icons';
 
-const data: ConversationProps[] = [
+const data: GetProp<ConversationsProps, 'data'> = [
   {
     key: 'demo1',
     label: 'What is Ant Design X ?',
@@ -13,7 +13,14 @@ const data: ConversationProps[] = [
   },
   {
     key: 'demo2',
-    label: <div>Getting Started: <a target="_blank" href='https://ant-design.antgroup.com/index-cn' rel="noreferrer">Ant Design !</a></div>,
+    label: (
+      <div>
+        Getting Started:{' '}
+        <a target="_blank" href="https://ant-design.antgroup.com/index-cn" rel="noreferrer">
+          Ant Design !
+        </a>
+      </div>
+    ),
     icon: <AlipayCircleOutlined />,
     group: 'Pinned',
   },

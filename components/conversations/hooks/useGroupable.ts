@@ -1,5 +1,5 @@
 import React from 'react';
-import type { ConversationsProps, ConversationProps, Groupable } from '../interface';
+import type { ConversationsProps, Conversation, Groupable } from '../interface';
 
 /**
  * 🔥 Only for handling ungrouped data. Do not use it for any other purpose! 🔥
@@ -7,21 +7,21 @@ import type { ConversationsProps, ConversationProps, Groupable } from '../interf
 const __UNGROUPED = '__ungrouped';
 
 type GroupList = {
-  data: ConversationProps[];
+  data: Conversation[];
   name?: string;
   title?: Groupable['title'];
 }[];
 
-type GroupMap = Record<string, ConversationProps[]>;
+type GroupMap = Record<string, Conversation[]>;
 
 type UseGroupable = (
   groupable?: ConversationsProps['groupable'],
-  data?: ConversationProps[],
+  data?: Conversation[],
 ) => [GroupList, boolean];
 
 const useGroupable: UseGroupable = (
   groupable?: ConversationsProps['groupable'],
-  data: ConversationProps[] = [],
+  data: Conversation[] = [],
 ) => {
   const [
     enableGroup,

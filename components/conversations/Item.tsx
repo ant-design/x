@@ -5,15 +5,15 @@ import { MoreOutlined } from '@ant-design/icons';
 
 import type { MenuProps } from 'antd';
 import type { DirectionType } from 'antd/es/config-provider';
-import type { ConversationProps } from './interface';
+import type { Conversation } from './interface';
 
 export interface ConversationsItemProps extends Omit<React.HTMLAttributes<HTMLLIElement>, 'onClick'> {
-  info: ConversationProps;
+  info: Conversation;
   prefixCls?: string;
   direction?: DirectionType;
   menu?: MenuProps;
   active?: boolean;
-  onClick?: (info: ConversationProps) => void;
+  onClick?: (info: Conversation) => void;
 }
 
 const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {

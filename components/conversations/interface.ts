@@ -8,7 +8,7 @@ type GroupType = string;
  * @desc 会话数据
  * @descEN Conversation data
  */
-export interface ConversationProps extends AnyObject {
+export interface Conversation extends AnyObject {
   /**
    * @desc 唯一标识
    * @descEN Unique identifier
