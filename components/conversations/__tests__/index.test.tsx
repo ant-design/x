@@ -6,7 +6,7 @@ import type { Conversation } from '../index';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
 
-const data: Conversation[] = [
+const items: Conversation[] = [
   {
     key: 'demo1',
     label: 'What is Ant Design X ?',
@@ -42,7 +42,7 @@ const data: Conversation[] = [
 describe('Conversations Component', () => {
   mountTest(() => <Conversations />);
 
-  rtlTest(() => <Conversations data={data} />);
+  rtlTest(() => <Conversations items={items} />);
 
   beforeAll(() => {
     jest.useFakeTimers();
@@ -53,27 +53,27 @@ describe('Conversations Component', () => {
   });
 
   it('Conversations component work', () => {
-    const { container } = render(<Conversations data={data} />);
+    const { container } = render(<Conversations items={items} />);
     const element = container.querySelector<HTMLUListElement>('.ant-conversations');
     expect(element).toBeTruthy();
     expect(element).toMatchSnapshot();
   });
 
   it('should handle defaultActiveKey', () => {
-    const { getByText } = render(<Conversations data={data} defaultActiveKey="demo1" />);
+    const { getByText } = render(<Conversations items={items} defaultActiveKey="demo1" />);
     const activeItem = getByText('What is Ant Design X ?');
     expect(activeItem.parentNode).toHaveClass('ant-conversations-item-active');
   });
 
   it('should handle activeKey', () => {
-    const { getByText } = render(<Conversations data={data} activeKey="demo1" />);
+    const { getByText } = render(<Conversations items={items} activeKey="demo1" />);
     const activeItem = getByText('What is Ant Design X ?');
     expect(activeItem.parentNode).toHaveClass('ant-conversations-item-active');
   });
 
   it('should trigger onActiveChange', () => {
     const onActiveChange = jest.fn();
-    const { getByText } = render(<Conversations data={data} onActiveChange={onActiveChange} />);
+    const { getByText } = render(<Conversations items={items} onActiveChange={onActiveChange} />);
     fireEvent.click(getByText('What is Ant Design X ?'));
     expect(onActiveChange).toHaveBeenCalledWith('demo1');
     fireEvent.click(getByText('In Docker, use 🐑 Ollama and initialize'));
@@ -98,7 +98,7 @@ describe('Conversations Component', () => {
     });
     const { getByText, container } = render(
       <Conversations
-        data={[
+        items={[
           {
             key: 'demo5',
             label:
@@ -119,25 +119,25 @@ describe('Conversations Component', () => {
   });
 
   it('should group items when groupable is true', () => {
-    const { getByText } = render(<Conversations data={data} groupable />);
+    const { getByText } = render(<Conversations items={items} groupable />);
     expect(getByText('pinned')).toBeInTheDocument();
   });
 
   it('should use custom group title component', () => {
     const { getByText } = render(
-      <Conversations data={data} groupable={{ title: (group) => <div>{group}</div> }} />,
+      <Conversations items={items} groupable={{ title: (group) => <div>{group}</div> }} />,
     );
     expect(getByText('pinned')).toBeInTheDocument();
   });
 
   it('should sort groups when groupable.sort is provided', () => {
     const sort = jest.fn().mockReturnValue(0);
-    render(<Conversations data={data} groupable={{ sort }} />);
+    render(<Conversations items={items} groupable={{ sort }} />);
     expect(sort).toHaveBeenCalled();
   });
 
   it('should not group items when groupable is false', () => {
-    const { queryByText } = render(<Conversations data={data} groupable={false} />);
+    const { queryByText } = render(<Conversations items={items} groupable={false} />);
     expect(queryByText('pinned')).not.toBeInTheDocument();
   });
 });
