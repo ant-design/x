@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, type GetProp } from 'antd';
+import { Card, Space, type GetProp } from 'antd';
 import type { ConversationsProps } from '@ant-design/x';
 import { Conversations } from '@ant-design/x';
 import { GithubOutlined, AlipayCircleOutlined, DockerOutlined } from '@ant-design/icons';
@@ -39,7 +39,7 @@ const data: GetProp<ConversationsProps, 'data'> = [
 ];
 
 const App = () => (
-  <Card style={{ width: 320 }}>
+  <Card style={{ width: 320 }} size="small">
     <Conversations
       groupable={{
         sort(a, b) {
@@ -47,6 +47,14 @@ const App = () => (
 
           return a === 'Pinned' ? -1 : 1;
         },
+        title: (group, { components: { GroupTitle } }) =>
+          group ? (
+            <GroupTitle>
+              <Space>🔥{group}</Space>
+            </GroupTitle>
+          ) : (
+            <GroupTitle />
+          ),
       }}
       defaultActiveKey="demo1"
       data={data}

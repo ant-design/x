@@ -37,7 +37,7 @@ const data: GetProp<ConversationsProps, 'data'> = [
 ];
 
 const App = () => (
-  <Card style={{ width: 320 }}>
+  <Card style={{ width: 320 }} size="small">
     <Conversations groupable defaultActiveKey="demo1" data={data} />
   </Card>
 );

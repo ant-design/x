@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import type { MenuProps } from 'antd';
 
 import ConversationsItem from './Item';
-import GroupTitle from './GroupTitle';
+import GroupTitle, { GroupTitleContext } from './GroupTitle';
 
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import useConfigContext from '../config-provider/useConfigContext';
@@ -137,16 +137,21 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
           />
         ));
 
-        return enableGroup ? (
-          <li key={groupInfo.name || `key-${groupIndex}`}>
-            {groupInfo.title?.(groupInfo.name!, { components: { GroupTitle } }) || (
-              <GroupTitle group={groupInfo.name} direction={direction} key={groupInfo.name} />
-            )}
-            <ul className={`${prefixCls}-list`}>{convItems}</ul>
-          </li>
-        ) : (
-          convItems
-        );
+        // With group to show the title
+        if (enableGroup) {
+          return (
+            <li key={groupInfo.name || `key-${groupIndex}`}>
+              <GroupTitleContext.Provider value={{ direction }}>
+                {groupInfo.title?.(groupInfo.name!, { components: { GroupTitle } }) || (
+                  <GroupTitle key={groupInfo.name}>{groupInfo.name}</GroupTitle>
+                )}
+              </GroupTitleContext.Provider>
+              <ul className={`${prefixCls}-list`}>{convItems}</ul>
+            </li>
+          );
+        }
+
+        return convItems;
       })}
     </ul>,
   );

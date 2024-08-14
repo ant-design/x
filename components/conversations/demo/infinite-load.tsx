@@ -43,6 +43,7 @@ const App: React.FC = () => {
         width: 320,
         overflow: 'auto',
       }}
+      size="small"
     >
       <InfiniteScroll
         dataLength={data.length}
