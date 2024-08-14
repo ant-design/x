@@ -1,86 +1,52 @@
 import React from 'react';
 import { Conversations } from '@ant-design/x';
 import type { ConversationsProps } from '@ant-design/x';
-import {
-  EditOutlined,
-  DeleteOutlined,
-  GithubOutlined,
-  CarOutlined,
-  AlipayCircleOutlined,
-} from '@ant-design/icons';
-import { message, Card, type GetProp } from 'antd';
+import { EditOutlined, DeleteOutlined, StopOutlined } from '@ant-design/icons';
+import { Card, type GetProp, App } from 'antd';
 
-const dataSource: GetProp<ConversationsProps, 'data'> = [
-  // 基础示例
-  {
-    key: 'demo1',
-    label: 'What is Ant Design X ?',
-    icon: <GithubOutlined />,
-  },
-  // 自定义 label 示例
-  {
-    key: 'demo2',
-    label: (
-      <div>
-        Getting Started:{' '}
-        <a target="_blank" href="https://ant-design.antgroup.com/index-cn" rel="noreferrer">
-          Ant Design !
-        </a>
-      </div>
-    ),
-    icon: <AlipayCircleOutlined />,
-  },
-  // 超长 label 示例
-  {
-    key: 'demo3',
-    label: 'Tour Xinjiang north and south big circle travel plan !',
-    icon: <CarOutlined />,
-  },
-  // 禁用示例
-  {
-    key: 'demo5',
-    label: 'Expired, please go to the recycle bin to check',
-    disabled: true,
-  },
-];
+const data: GetProp<ConversationsProps, 'data'> = Array.from({ length: 4 }).map((_, index) => ({
+  key: `item${index + 1}`,
+  label: `Conversation Item ${index + 1}`,
+  disabled: index === 3,
+}));
 
-const App = () => {
-  const [data, setData] = React.useState(dataSource);
+const Demo = () => {
+  const { message } = App.useApp();
 
-  const menuConfig: ConversationsProps['menu'] = (convInfo) => ({
+  const menuConfig: ConversationsProps['menu'] = (conversation) => ({
     items: [
       {
-        label: '重命名',
-        key: 'mod',
+        label: 'Operation 1',
+        key: 'operation1',
         icon: <EditOutlined />,
-        disabled: typeof convInfo.label !== 'string',
       },
       {
-        label: '删除',
-        key: 'delete',
+        label: 'Operation 2',
+        key: 'operation2',
+        icon: <StopOutlined />,
+        disabled: true,
+      },
+      {
+        label: 'Operation 3',
+        key: 'operation3',
         icon: <DeleteOutlined />,
         danger: true,
       },
     ],
     onClick: (menuInfo) => {
-      switch (menuInfo.key) {
-        case 'delete':
-          setData(data.filter((item) => convInfo.key !== item.key));
-          break;
-        case 'mod':
-          message.info(`${menuInfo.key} ${convInfo.key}`);
-          break;
-        default:
-          break;
-      }
+      message.info(`Click ${conversation.key} - ${menuInfo.key}`);
     },
   });
 
   return (
-    <Card style={{ width: 320 }}>
+    <Card style={{ width: 320 }} size="small">
       <Conversations menu={menuConfig} defaultActiveKey="demo3" data={data} />
     </Card>
   );
 };
 
-export default App;
+export default () => (
+  <App>
+    <Demo />
+  </App>
+);

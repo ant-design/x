@@ -1,41 +1,38 @@
 import React, { useState } from 'react';
-import { Card, type GetProp } from 'antd';
+import { Card, type GetProp, Flex, Button } from 'antd';
 import { Conversations, type ConversationsProps } from '@ant-design/x';
-import { GithubOutlined, CarOutlined } from '@ant-design/icons';
 
-const data: GetProp<ConversationsProps, 'data'> = [
-  // 基础示例
-  {
-    key: 'demo1',
-    label: 'What is Ant Design X ?',
-    icon: <GithubOutlined />,
-  },
-  // 超长 label 示例
-  {
-    key: 'demo3',
-    label: 'Tour Xinjiang north and south big circle travel plan !',
-    icon: <CarOutlined />,
-  },
-  // 禁用示例
-  {
-    key: 'demo5',
-    label: 'Expired, please go to the recycle bin to check',
-    disabled: true,
-  },
-];
+const data: GetProp<ConversationsProps, 'data'> = Array.from({ length: 3 }).map((_, index) => ({
+  key: `item${index + 1}`,
+  label: `Conversation Item ${index + 1}`,
+}));
 
 const App = () => {
-  const [activeKey, setActiveKey] = useState<string>();
+  const [activeKey, setActiveKey] = useState<string>('item1');
 
   return (
-    <Card style={{ width: 320 }}>
-      <Conversations
-        defaultActiveKey="demo3"
-        activeKey={activeKey}
-        onActiveChange={(v) => setActiveKey(v)}
-        data={data}
-      />
-    </Card>
+    <Flex vertical gap="small" align="flex-start">
+      <Card style={{ width: 320 }} size="small">
+        <Conversations activeKey={activeKey} onActiveChange={(v) => setActiveKey(v)} data={data} />
+      </Card>
+
+      <Flex gap="small">
+        <Button
+          onClick={() => {
+            setActiveKey('item1');
+          }}
+        >
+          Active First
+        </Button>
+        <Button
+          onClick={() => {
+            setActiveKey('item3');
+          }}
+        >
+          Active Last
+        </Button>
+      </Flex>
+    </Flex>
   );
 };
 

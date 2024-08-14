@@ -40,7 +40,7 @@ export interface ConversationsProps extends React.HTMLAttributes<HTMLUListElemen
    * @desc 选中变更回调
    * @descEN Callback for selection change
    */
-  onActiveChange?: (value?: Conversation['key'], preValue?: Conversation['key']) => void;
+  onActiveChange?: (value: Conversation['key'], preValue?: Conversation['key']) => void;
 
   /**
    * @desc 会话操作菜单
