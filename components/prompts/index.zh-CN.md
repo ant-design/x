@@ -19,9 +19,7 @@ Prompts 组件用于显示一组与当前上下文相关的预定义的问题或
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">基本</code>
 <code src="./demo/disabled.tsx">不可用状态</code>
-<code src="./demo/onclick.tsx">点击事件</code>
 <code src="./demo/flex-vertical.tsx">纵向展示</code>
-<code src="./demo/with-scroll.tsx">横向滚动</code>
 <code src="./demo/flex-wrap.tsx">可换行</code>
 
 ## API
@@ -40,7 +38,7 @@ Prompts 组件用于显示一组与当前上下文相关的预定义的问题或
 | title | 显示在提示列表顶部的标题。 | React.ReactNode | - | - |
 | vertical | 设置为 `true` 时, 提示列表将垂直排列。 | boolean | `false` | - |
 | wrap | 设置为 `true` 时, 提示列表将自动换行。 | boolean | `false` | - |
-| onClick | 提示项被点击时的回调函数。 | (event: React.MouseEvent<HTMLElement, MouseEvent>, info: { data: PromptProps }) => void | - | - |
+| onItemClick | 提示项被点击时的回调函数。 | (info: { data: PromptProps }) => void | - | - |
 
 ### PromptProps
 

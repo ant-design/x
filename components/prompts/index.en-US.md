@@ -18,9 +18,7 @@ The Prompts component is used to display a predefined set of questions or sugges
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">Basic</code>
 <code src="./demo/disabled.tsx">Disabled</code>
-<code src="./demo/onclick.tsx">Click</code>
 <code src="./demo/flex-vertical.tsx">Vertical</code>
-<code src="./demo/with-scroll.tsx">With Scroll</code>
 <code src="./demo/flex-wrap.tsx">Wrap</code>
 
 ## API
@@ -37,7 +35,7 @@ The Prompts component is used to display a predefined set of questions or sugges
 | title | Title displayed at the top of the prompt list. | React.ReactNode | - | - |
 | vertical | When set to `true`, the Prompts will be arranged vertically. | boolean | `false` | - |
 | wrap | When set to `true`, the Prompts will automatically wrap. | boolean | `false` | - |
-| onClick | Callback function when a prompt item is clicked. | (event: React.MouseEvent<HTMLElement, MouseEvent>, info: { data: PromptProps }) => void | - | - |
+| onItemClick | Callback function when a prompt item is clicked. | (info: { data: PromptProps }) => void | - | - |
 
 ### PromptProps
 
