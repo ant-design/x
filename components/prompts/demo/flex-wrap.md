@@ -5,4 +5,3 @@
 ## en-US
 
 Use the `wrap` attribute to control the layout of the Prompts.
-

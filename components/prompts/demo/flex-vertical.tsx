@@ -6,25 +6,25 @@ import type { PromptsProps } from '@ant-design/x';
 
 const items: PromptsProps['items'] = [
   {
-    key: "6",
+    key: '6',
     icon: <CoffeeOutlined style={{ color: '#964B00' }} />,
-    description: "How to rest effectively after long hours of work?",
+    description: 'How to rest effectively after long hours of work?',
     disabled: false,
   },
   {
-    key: "7",
+    key: '7',
     icon: <SmileOutlined style={{ color: '#FAAD14' }} />,
-    description: "What are the secrets to maintaining a positive mindset?",
+    description: 'What are the secrets to maintaining a positive mindset?',
     disabled: false,
   },
   {
-    key: "8",
+    key: '8',
     icon: <FireOutlined style={{ color: '#FF4D4F' }} />,
-    description: "How to stay calm under immense pressure?",
+    description: 'How to stay calm under immense pressure?',
     disabled: false,
   },
 ];
 
-const App = () => (<Prompts title="🤔 You might also want to ask:" items={items} vertical />);
+const App = () => <Prompts title="🤔 You might also want to ask:" items={items} vertical />;
 
 export default App;

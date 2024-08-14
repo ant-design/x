@@ -5,4 +5,3 @@
 ## en-US
 
 To mark a prompt as disabled, add the `disabled` property to the prompt item.
-
