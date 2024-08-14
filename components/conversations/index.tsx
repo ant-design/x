@@ -23,7 +23,7 @@ export interface ConversationsProps extends React.HTMLAttributes<HTMLUListElemen
    * @desc 会话列表数据源
    * @descEN Data source for the conversation list
    */
-  data?: Conversation[];
+  items?: Conversation[];
 
   /**
    * @desc 当前选中的值
@@ -84,7 +84,7 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
   const {
     prefixCls: customizePrefixCls,
     rootClassName,
-    data,
+    items,
     activeKey,
     defaultActiveKey,
     onActiveChange,
@@ -111,7 +111,7 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
   );
 
   // ============================ Groupable ============================
-  const [groupList, enableGroup] = useGroupable(groupable, data);
+  const [groupList, enableGroup] = useGroupable(groupable, items);
 
   // ============================ Prefix ============================
   const { getPrefixCls, direction } = useConfigContext();

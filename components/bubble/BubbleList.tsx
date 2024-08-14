@@ -31,7 +31,7 @@ export type RolesType = Record<string, RoleType> | ((bubbleDataP: BubbleDataType
 export interface BubbleListProps extends React.HTMLAttributes<HTMLDivElement> {
   prefixCls?: string;
   rootClassName?: string;
-  data?: BubbleDataType[];
+  items?: BubbleDataType[];
   autoScroll?: boolean;
   roles?: RolesType;
 }
@@ -41,7 +41,7 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
     prefixCls: customizePrefixCls,
     rootClassName,
     className,
-    data,
+    items,
     autoScroll = true,
     roles,
     ...restProps
@@ -65,7 +65,7 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
 
   // ============================= Data =============================
-  const mergedData = useListData(data, roles);
+  const mergedData = useListData(items, roles);
 
   // ============================ Scroll ============================
   // Is current scrollTop at the end. User scroll will make this false.

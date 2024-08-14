@@ -3,7 +3,7 @@ import { Card, type GetProp } from 'antd';
 import { Conversations, type ConversationsProps } from '@ant-design/x';
 import { GithubOutlined, AlipayCircleOutlined, DockerOutlined } from '@ant-design/icons';
 
-const data: GetProp<ConversationsProps, 'data'> = [
+const items: GetProp<ConversationsProps, 'items'> = [
   {
     key: 'demo1',
     label: 'What is Ant Design X ?',
@@ -38,7 +38,7 @@ const data: GetProp<ConversationsProps, 'data'> = [
 
 const App = () => (
   <Card style={{ width: 320 }} size="small">
-    <Conversations groupable defaultActiveKey="demo1" data={data} />
+    <Conversations groupable defaultActiveKey="demo1" items={items} />
   </Card>
 );
 

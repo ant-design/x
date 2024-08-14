@@ -45,8 +45,8 @@ Common props ref：[Common props](/docs/react/common-props)
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | autoScroll | When the content is updated, scroll to the latest position automatically. If the user scrolls, the automatic scrolling will be paused. | boolean | true |  |
-| data | Bubble data list | (BubbleProps & { key?: string \| number, role?: string })[] | - |  |
-| roles | Set the default properties of the bubble. The `role` in `data` will be automatically matched. | Record<string, BubbleProps> \| (bubble) => BubbleProps | - |  |
+| items | Bubble items list | (BubbleProps & { key?: string \| number, role?: string })[] | - |  |
+| roles | Set the default properties of the bubble. The `role` in `items` will be automatically matched. | Record<string, BubbleProps> \| (bubble) => BubbleProps | - |  |
 
 ## Semantic DOM
 

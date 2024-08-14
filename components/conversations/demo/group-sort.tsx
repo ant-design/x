@@ -4,7 +4,7 @@ import type { ConversationsProps } from '@ant-design/x';
 import { Conversations } from '@ant-design/x';
 import { GithubOutlined, AlipayCircleOutlined, DockerOutlined } from '@ant-design/icons';
 
-const data: GetProp<ConversationsProps, 'data'> = [
+const items: GetProp<ConversationsProps, 'items'> = [
   {
     key: 'demo1',
     label: 'What is Ant Design X ?',
@@ -57,7 +57,7 @@ const App = () => (
           ),
       }}
       defaultActiveKey="demo1"
-      data={data}
+      items={items}
     />
   </Card>
 );

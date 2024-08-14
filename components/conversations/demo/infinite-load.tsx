@@ -6,7 +6,7 @@ import { RedoOutlined } from '@ant-design/icons';
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<GetProp<ConversationsProps, 'data'>>([]);
+  const [data, setData] = useState<GetProp<ConversationsProps, 'items'>>([]);
 
   const loadMoreData = () => {
     if (loading) {
@@ -58,7 +58,7 @@ const App: React.FC = () => {
         scrollableTarget="scrollableDiv"
         style={{ width: 270 }}
       >
-        <Conversations data={data} defaultActiveKey="demo1" groupable />
+        <Conversations items={data} defaultActiveKey="demo1" groupable />
       </InfiniteScroll>
     </Card>
   );
