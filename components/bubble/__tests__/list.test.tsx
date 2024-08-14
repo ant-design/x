@@ -2,10 +2,12 @@ import React from 'react';
 
 import Bubble from '..';
 import { fireEvent, render } from '../../../tests/utils';
+import mountTest from '../../../tests/shared/mountTest';
 import { spyElementPrototypes } from 'rc-util/lib/test/domHook';
 import type { BubbleListRef } from '../BubbleList';
 
 describe('Bubble.List', () => {
+  mountTest(() => <Bubble.List />);
   beforeAll(() => {
     jest.useFakeTimers();
   });

@@ -129,7 +129,9 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
   const onConversationItemClick: ConversationsItemProps['onClick'] = (info) => {
     setMergedActiveKey(info.key);
 
-    onActiveChange?.(info.key);
+    if (onActiveChange) {
+      onActiveChange(info.key);
+    }
   };
 
   // ============================ Render ============================

@@ -55,7 +55,11 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
     }
   };
 
-  const onOpenChange = (open: boolean) => open && setOpened(!open);
+  const onOpenChange = (open: boolean) => {
+    if (open) {
+      setOpened(!open);
+    }
+  };
 
   // ============================ Render ============================
   return (
