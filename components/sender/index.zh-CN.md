@@ -6,7 +6,6 @@ subtitle: 输入框
 description: 用于聊天的输入框组件。
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*SMzgSJZE_AwAAAAAAAAAAAAADrJ8AQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*8yArQ43EGccAAAAAAAAAAAAADrJ8AQ/original
-tag: 5.10.0
 ---
 
 ## 何时使用

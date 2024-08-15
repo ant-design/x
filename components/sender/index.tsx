@@ -1,49 +1,102 @@
-import { Button, Input, Space } from 'antd';
-import type { ButtonProps } from 'antd';
+import { Input, Space } from 'antd';
 import type { TextAreaProps } from 'antd/lib/input/TextArea';
 import classnames from 'classnames';
 import { ClearOutlined, SendOutlined } from '@ant-design/icons';
 
 import useStyle from './style';
-import React, { useRef } from 'react';
-import type { GetComponent, SenderProps } from './interface';
+import React from 'react';
+import type { CustomizeComponent, EnterType } from './interface';
 import useConfigContext from '../config-provider/useConfigContext';
 import { useMergedState } from 'rc-util';
 import getValue from 'rc-util/lib/utils/get';
 import StopLoadingIcon from './StopLoading';
+import ActionButton from './ActionButton';
 
-const Sender: React.FC<Readonly<SenderProps>> = (props) => {
+export interface SenderComponents {
+  actions: {
+    wrapper?: CustomizeComponent;
+    clear?: CustomizeComponent;
+    send?: CustomizeComponent;
+    loading?: CustomizeComponent;
+  };
+  input?: CustomizeComponent<TextAreaProps>;
+}
+
+export interface SenderProps {
+  prefixCls?: string;
+  defaultValue?: string;
+  value?: string;
+  loading?: boolean;
+  enterType?: EnterType;
+  disabled?: boolean;
+  onSubmit?: (message: string) => boolean;
+  onChange?: (value: string) => void;
+  onCancel?: VoidFunction;
+  components?: SenderComponents;
+  styles?: {
+    input?: React.CSSProperties;
+    actions?: React.CSSProperties;
+  };
+  rootClassName?: string;
+  className?: {
+    input?: string;
+    actions?: string;
+  };
+  style?: React.CSSProperties;
+}
+
+function getComponent<T>(
+  components: SenderComponents | undefined,
+  path: string[],
+  defaultComponent: CustomizeComponent<T>,
+): CustomizeComponent<T> {
+  return getValue(components, path) || defaultComponent;
+}
+
+const Sender: React.FC<SenderProps> = (props) => {
   const {
     prefixCls: customizePrefixCls,
     styles,
     className,
     rootClassName,
     style,
+    defaultValue,
     value,
     enterType = 'enter',
     onSubmit,
     loading: outLoading,
     components,
     onCancel,
-    onChange: outOnChange,
+    onChange,
     ...rest
   } = props;
+
+  // ============================= MISC =============================
   const { direction, getPrefixCls } = useConfigContext();
   const prefixCls = getPrefixCls('sender', customizePrefixCls);
-  const isChineseInput = useRef(false);
+
+  // ============================ Styles ============================
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
   const mergedCls = classnames(className, rootClassName, prefixCls, hashId, cssVarCls, {
     [`${prefixCls}-rtl`]: direction === 'rtl',
   });
-  const [message, setMessage] = useMergedState('', {
+
+  const actionBtnCls = `${prefixCls}-actions-btn`;
+
+  // ============================ Value =============================
+  const [innerValue, setInnerValue] = useMergedState(defaultValue || '', {
     value,
-    onChange: (val) => {
-      if (isChineseInput! && outOnChange) {
-        outOnChange(val);
-      }
-    },
   });
 
+  const triggerValueChange = (nextValue: string) => {
+    setInnerValue(nextValue);
+
+    if (onChange) {
+      onChange(nextValue);
+    }
+  };
+
+  // =========================== Loading ============================
   const [loading, setLoading] = useMergedState<boolean>(false, {
     value: outLoading,
     onChange: (flag) => {
@@ -53,31 +106,35 @@ const Sender: React.FC<Readonly<SenderProps>> = (props) => {
     },
   });
 
-  const send = () => {
+  // ========================== Components ==========================
+  const InputTextArea = getComponent(components, ['input'], Input.TextArea);
+  const ActionsWrapper = getComponent(components, ['actions', 'wrapper'], Space);
+  const SenderButtonComponent = getComponent(components, ['actions', 'send'], ActionButton);
+  const ClearButtonComponent = getComponent(components, ['actions', 'clear'], ActionButton);
+  const LoadingButtonComponent = getComponent(components, ['actions', 'loading'], ActionButton);
+
+  // ============================ Events ============================
+  const triggerSend = () => {
     setLoading(true);
     if (onSubmit) {
-      onSubmit(message);
+      onSubmit(innerValue);
     }
-    setMessage('');
+    triggerValueChange('');
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (loading || isChineseInput.current) {
-      return;
-    }
-
-    // 根据 enterType 判断是否触发 send
+  const onKeyPress = (e: React.KeyboardEvent) => {
+    // Check for `enterType` to submit
     switch (enterType) {
       case 'enter':
         if (e.key === 'Enter' && !e.shiftKey) {
           e.preventDefault();
-          send();
+          triggerSend();
         }
         break;
       case 'shiftEnter':
         if (e.key === 'Enter' && e.shiftKey) {
           e.preventDefault();
-          send();
+          triggerSend();
         }
         break;
       case false:
@@ -87,79 +144,49 @@ const Sender: React.FC<Readonly<SenderProps>> = (props) => {
     }
   };
 
-  const defaultInputTextAreaProps: TextAreaProps = {
-    style: styles?.input,
-    className: classnames(`${prefixCls}-inputarea`, className?.input),
-    autoSize: { maxRows: 8 },
-    value: message,
-    onChange: (e) => {
-      setMessage(e.target.value);
-    },
-    onCompositionStart: () => {
-      isChineseInput.current = true;
-    },
-    onCompositionEnd: (e) => {
-      isChineseInput.current = false;
-      setMessage((e.target as EventTarget & HTMLTextAreaElement)?.value);
-    },
-    onPressEnter: handleKeyPress,
-    ...rest,
-  };
-
-  const getComponent = React.useCallback<GetComponent>(
-    (path, defaultComponent) => getValue(components, path) || defaultComponent,
-    [components],
-  );
-
-  const ActionsConfig = (config: ButtonProps) => ({
-    type: 'text',
-    className: `${prefixCls}-actions-btn`,
-    ...config,
-  });
-
-  const SendConfig = ActionsConfig({
-    onClick: send,
-    icon: <SendOutlined />,
-  });
-
-  const ClearConfig = ActionsConfig({
-    onClick: () => {
-      setMessage('');
-    },
-    icon: <ClearOutlined />,
-  });
-
-  const LoadingConfig = ActionsConfig({
-    onClick: () => {
-      setLoading(false);
-    },
-    icon: <StopLoadingIcon />,
-  });
-
-  const ActionsList = () => {
-    const ActionsWapper = getComponent(['actions', 'wrapper'], Space);
-    const SenderButtonComponent = getComponent(['actions', 'send'], Button);
-    const ClearButtonComponent = getComponent(['actions', 'clear'], Button);
-    const LoadingButtonComponent = getComponent(['actions', 'loading'], Button);
-
-    return (
-      <ActionsWapper className={`${prefixCls}-actions-list`}>
-        <ClearButtonComponent {...ClearConfig} />
-        {loading ? (
-          <LoadingButtonComponent {...LoadingConfig} />
-        ) : (
-          <SenderButtonComponent {...SendConfig} />
-        )}
-      </ActionsWapper>
-    );
-  };
-
-  const InputTextArea = getComponent(['input'], Input.TextArea);
-
+  // ============================ Render ============================
   return wrapCSSVar(
     <div className={mergedCls} style={style}>
-      <InputTextArea {...defaultInputTextAreaProps} />
-      <ActionsList />
+      <InputTextArea
+        style={styles?.input}
+        className={classnames(`${prefixCls}-inputarea`, className?.input)}
+        autoSize={{ maxRows: 8 }}
+        value={innerValue}
+        onChange={(e) => {
+          triggerValueChange((e.target as HTMLTextAreaElement).value);
+        }}
+        onPressEnter={onKeyPress}
+        {...rest}
+      />
+
+      {/* Action List */}
+      <ActionsWrapper className={`${prefixCls}-actions-list`}>
+        {/* Clear */}
+        <ClearButtonComponent
+          className={actionBtnCls}
+          onClick={() => {
+            triggerValueChange('');
+          }}
+          icon={<ClearOutlined />}
+        />
+
+        {/* Loading or Send */}
+        {loading ? (
+          <LoadingButtonComponent
+            className={actionBtnCls}
+            onClick={() => {
+              setLoading(false);
+            }}
+            icon={<StopLoadingIcon />}
+          />
+        ) : (
+          <SenderButtonComponent
+            className={actionBtnCls}
+            onClick={triggerSend}
+            icon={<SendOutlined />}
+          />
+        )}
+      </ActionsWrapper>
     </div>,
   );
 };
