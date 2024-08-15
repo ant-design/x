@@ -43,11 +43,9 @@ module.exports = {
         '@typescript-eslint/no-unused-vars': [2, { args: 'none' }],
         'no-unused-expressions': 'off',
         '@typescript-eslint/no-unused-expressions': 2,
-        '@typescript-eslint/consistent-type-imports': [
-          2,
-          { disallowTypeAnnotations: false },
-        ],
+        '@typescript-eslint/consistent-type-imports': [2, { disallowTypeAnnotations: false }],
         'import/consistent-type-specifier-style': 0,
+        'default-case': 0,
       },
     },
     {
@@ -117,12 +115,7 @@ module.exports = {
       },
     },
     {
-      files: [
-        '.dumi/**/*.ts',
-        '.dumi/**/*.tsx',
-        '.dumi/**/*.js',
-        '.dumi/**/*.jsx',
-      ],
+      files: ['.dumi/**/*.ts', '.dumi/**/*.tsx', '.dumi/**/*.js', '.dumi/**/*.jsx'],
       rules: {
         'import/no-extraneous-dependencies': 0,
         'no-console': 0,
@@ -145,13 +138,7 @@ module.exports = {
       },
     },
     {
-      files: [
-        '**/*.test.ts',
-        '**/*.test.tsx',
-        '**/*.spec.ts',
-        '**/*.spec.tsx',
-        '**/tests/**',
-      ],
+      files: ['**/*.test.ts', '**/*.test.tsx', '**/*.spec.ts', '**/*.spec.tsx', '**/tests/**'],
       rules: {
         'compat/compat': 0,
         'import/no-extraneous-dependencies': 0,
@@ -163,10 +150,7 @@ module.exports = {
     'react/prop-types': 0,
     'react/forbid-prop-types': 0,
     'react/jsx-indent': 0,
-    'react/jsx-wrap-multilines': [
-      'error',
-      { declaration: false, assignment: false },
-    ],
+    'react/jsx-wrap-multilines': ['error', { declaration: false, assignment: false }],
     'react/jsx-filename-extension': 0,
     'react/state-in-constructor': 0,
     'react/jsx-props-no-spreading': 0,

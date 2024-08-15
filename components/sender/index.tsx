@@ -143,9 +143,6 @@ const Sender: React.FC<SenderProps> = (props) => {
           triggerSend();
         }
         break;
-
-      default:
-      // Do nothing
     }
 
     if (onKeyPress) {
