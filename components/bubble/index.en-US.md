@@ -21,6 +21,7 @@ Often used when chatting.
 <code src="./demo/loading.tsx">Loading</code>
 <code src="./demo/typing.tsx">Typing effect</code>
 <code src="./demo/markdown.tsx">Content render</code>
+<code src="./demo/list.tsx">Bubble List</code>
 
 ## API
 
@@ -28,16 +29,24 @@ Common props ref：[Common props](/docs/react/common-props)
 
 ### Bubble
 
-| Property      | Description                     | Type                                                | Default | Version |
-| ------------- | ------------------------------- | --------------------------------------------------- | ------- | ------- |
-| avatar        | Avatar component                | `React.ReactNode`                                   | -       |         |
-| classNames    | Semantic DOM class              | [Record<SemanticDOM, string>](#semantic-dom)        | -       |         |
-| styles        | Semantic DOM style              | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | -       |         |
-| placement     | Direction of Message            | `start \| end`                                      | `start` |         |
-| loading       | Loading state of Message        | `boolean`                                           | -       |         |
-| typing        | Show message with typing motion | `boolean \| { step?: number, interval?: number }`   | `false` |         |
-| content       | Content of bubble               | `string`                                            | -       |         |
-| messageRender | Display customized content      | `(content?: string) => ReactNode`                   | -       |         |
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| avatar | Avatar component | React.ReactNode | - |  |
+| classNames | Semantic DOM class | [Record<SemanticDOM, string>](#semantic-dom) | - |  |
+| styles | Semantic DOM style | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - |  |
+| placement | Direction of Message | `start` \| `end` | `start` |  |
+| loading | Loading state of Message | boolean | - |  |
+| typing | Show message with typing motion | boolean \| { step?: number, interval?: number } | false |  |
+| content | Content of bubble | string | - |  |
+| messageRender | Display customized content | (content?: string) => ReactNode | - |  |
+
+### Bubble.List
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| autoScroll | When the content is updated, scroll to the latest position automatically. If the user scrolls, the automatic scrolling will be paused. | boolean | true |  |
+| items | Bubble items list | (BubbleProps & { key?: string \| number, role?: string })[] | - |  |
+| roles | Set the default properties of the bubble. The `role` in `items` will be automatically matched. | Record<string, BubbleProps> \| (bubble) => BubbleProps | - |  |
 
 ## Semantic DOM
 

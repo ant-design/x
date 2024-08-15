@@ -14,7 +14,7 @@ const text = `
 Link: [Ant Design X](https://x.ant.design)
 `.trim();
 
-const contentRender: BubbleProps['messageRender'] = (content) => (
+const renderMarkdown: BubbleProps['messageRender'] = (content) => (
   <Typography>
     <div dangerouslySetInnerHTML={{ __html: md.render(content) }} />
   </Typography>
@@ -41,7 +41,7 @@ const App = () => {
       <Bubble
         typing
         content={text}
-        messageRender={contentRender}
+        messageRender={renderMarkdown}
         avatar={{ icon: <UserOutlined /> }}
       />
     </div>

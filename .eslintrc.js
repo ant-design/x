@@ -47,7 +47,7 @@ module.exports = {
           2,
           { disallowTypeAnnotations: false },
         ],
-        'import/consistent-type-specifier-style': 2,
+        'import/consistent-type-specifier-style': 0,
       },
     },
     {

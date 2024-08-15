@@ -6,7 +6,7 @@ export interface TypingOption {
    */
   step?: number;
   /**
-   * @default 100
+   * @default 50
    */
   interval?: number;
 }

@@ -3,6 +3,9 @@
 exports[`antd dist files exports modules correctly 1`] = `
 [
   "Bubble",
+  "Conversations",
+  "Prompts",
+  "Sender",
   "version",
 ]
 `;

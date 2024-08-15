@@ -104,4 +104,14 @@ describe('bubble', () => {
     expect(avatarElement).toHaveStyle({ color: 'red' });
     expect(contentElement).toHaveStyle({ color: 'blue' });
   });
+
+  it('reset content if changed', async () => {
+    const { container, rerender } = render(<Bubble content="little" typing />);
+    await waitFakeTimer();
+
+    rerender(<Bubble content="bamboo" typing />);
+    expect(container.querySelector<HTMLDivElement>('.ant-bubble-content')!.textContent).toEqual(
+      'b',
+    );
+  });
 });
