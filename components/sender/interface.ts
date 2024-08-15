@@ -1,4 +1,4 @@
-export type EnterType = 'enter' | 'shiftEnter' | string | false;
+export type SubmitType = 'enter' | 'shiftEnter' | false;
 
 type Component<P> =
   | React.ComponentType<P>

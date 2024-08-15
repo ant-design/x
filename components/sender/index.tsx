@@ -1,35 +1,43 @@
-import { Input, Space } from 'antd';
-import type { TextAreaProps } from 'antd/lib/input/TextArea';
+import { type ButtonProps, Input, Space, type GetProps } from 'antd';
 import classnames from 'classnames';
-import { ClearOutlined, SendOutlined } from '@ant-design/icons';
 
 import useStyle from './style';
 import React from 'react';
-import type { CustomizeComponent, EnterType } from './interface';
+import type { CustomizeComponent, SubmitType } from './interface';
 import useConfigContext from '../config-provider/useConfigContext';
 import { useMergedState } from 'rc-util';
 import getValue from 'rc-util/lib/utils/get';
-import StopLoadingIcon from './StopLoading';
-import ActionButton from './ActionButton';
+import { ActionButtonContext } from './components/ActionButton';
+import pickAttrs from 'rc-util/lib/pickAttrs';
+import ClearButton from './components/ClearButton';
+import LoadingButton from './components/LoadingButton';
+import SendButton from './components/SendButton';
+
+type TextareaProps = GetProps<typeof Input.TextArea>;
 
 export interface SenderComponents {
-  actions: {
-    wrapper?: CustomizeComponent;
-    clear?: CustomizeComponent;
-    send?: CustomizeComponent;
-    loading?: CustomizeComponent;
-  };
-  input?: CustomizeComponent<TextAreaProps>;
+  input?: CustomizeComponent<TextareaProps>;
 }
 
-export interface SenderProps {
+export type ActionsRender = (
+  ori: React.ReactNode,
+  info: {
+    components: {
+      SendButton: React.ComponentType<ButtonProps>;
+      ClearButton: React.ComponentType<ButtonProps>;
+      LoadingButton: React.ComponentType<ButtonProps>;
+    };
+  },
+) => React.ReactNode;
+
+export interface SenderProps extends Pick<TextareaProps, 'placeholder' | 'onKeyPress'> {
   prefixCls?: string;
   defaultValue?: string;
   value?: string;
   loading?: boolean;
-  enterType?: EnterType;
+  submitType?: SubmitType;
   disabled?: boolean;
-  onSubmit?: (message: string) => boolean;
+  onSubmit?: (message: string) => void;
   onChange?: (value: string) => void;
   onCancel?: VoidFunction;
   components?: SenderComponents;
@@ -43,6 +51,7 @@ export interface SenderProps {
     actions?: string;
   };
   style?: React.CSSProperties;
+  actions?: React.ReactNode | ActionsRender;
 }
 
 function getComponent<T>(
@@ -62,18 +71,26 @@ const Sender: React.FC<SenderProps> = (props) => {
     style,
     defaultValue,
     value,
-    enterType = 'enter',
+    submitType = 'enter',
     onSubmit,
-    loading: outLoading,
+    loading,
     components,
     onCancel,
     onChange,
+    actions,
+    onKeyPress,
     ...rest
   } = props;
 
   // ============================= MISC =============================
   const { direction, getPrefixCls } = useConfigContext();
   const prefixCls = getPrefixCls('sender', customizePrefixCls);
+
+  const domProps = pickAttrs(rest, {
+    attr: true,
+    aria: true,
+    data: true,
+  });
 
   // ============================ Styles ============================
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
@@ -96,97 +113,102 @@ const Sender: React.FC<SenderProps> = (props) => {
     }
   };
 
-  // =========================== Loading ============================
-  const [loading, setLoading] = useMergedState<boolean>(false, {
-    value: outLoading,
-    onChange: (flag) => {
-      if (!flag && onCancel) {
-        onCancel();
-      }
-    },
-  });
-
   // ========================== Components ==========================
   const InputTextArea = getComponent(components, ['input'], Input.TextArea);
-  const ActionsWrapper = getComponent(components, ['actions', 'wrapper'], Space);
-  const SenderButtonComponent = getComponent(components, ['actions', 'send'], ActionButton);
-  const ClearButtonComponent = getComponent(components, ['actions', 'clear'], ActionButton);
-  const LoadingButtonComponent = getComponent(components, ['actions', 'loading'], ActionButton);
 
   // ============================ Events ============================
   const triggerSend = () => {
-    setLoading(true);
-    if (onSubmit) {
+    if (innerValue && onSubmit) {
       onSubmit(innerValue);
     }
+  };
+
+  const triggerClear = () => {
     triggerValueChange('');
   };
 
-  const onKeyPress = (e: React.KeyboardEvent) => {
-    // Check for `enterType` to submit
-    switch (enterType) {
+  const onInternalKeyPress: TextareaProps['onKeyPress'] = (e) => {
+    // Check for `submitType` to submit
+    switch (submitType) {
       case 'enter':
         if (e.key === 'Enter' && !e.shiftKey) {
           e.preventDefault();
           triggerSend();
         }
         break;
+
       case 'shiftEnter':
         if (e.key === 'Enter' && e.shiftKey) {
           e.preventDefault();
           triggerSend();
         }
         break;
-      case false:
-        break;
+
       default:
-        break;
+      // Do nothing
+    }
+
+    if (onKeyPress) {
+      onKeyPress(e);
     }
   };
+
+  // ============================ Action ============================
+  let actionNode: React.ReactNode = (
+    <Space>
+      {/* Clear */}
+      <ClearButton />
+
+      {/* Loading or Send */}
+      {loading ? <LoadingButton /> : <SendButton />}
+    </Space>
+  );
+
+  // Custom actions
+  if (typeof actions === 'function') {
+    actionNode = actions(actionNode, {
+      components: {
+        SendButton,
+        ClearButton,
+        LoadingButton,
+      },
+    });
+  } else if (actions) {
+    actionNode = actions;
+  }
 
   // ============================ Render ============================
   return wrapCSSVar(
     <div className={mergedCls} style={style}>
       <InputTextArea
+        {...domProps}
         style={styles?.input}
-        className={classnames(`${prefixCls}-inputarea`, className?.input)}
+        className={classnames(`${prefixCls}-input`, className?.input)}
         autoSize={{ maxRows: 8 }}
         value={innerValue}
         onChange={(e) => {
           triggerValueChange((e.target as HTMLTextAreaElement).value);
         }}
-        onPressEnter={onKeyPress}
-        {...rest}
+        onPressEnter={onInternalKeyPress}
+        readOnly={loading}
       />
 
       {/* Action List */}
-      <ActionsWrapper className={`${prefixCls}-actions-list`}>
-        {/* Clear */}
-        <ClearButtonComponent
-          className={actionBtnCls}
-          onClick={() => {
-            triggerValueChange('');
+      <div className={`${prefixCls}-actions-list`}>
+        <ActionButtonContext.Provider
+          value={{
+            prefixCls: actionBtnCls,
+            onSend: triggerSend,
+            onSendDisabled: !innerValue,
+            onClear: triggerClear,
+            onClearDisabled: !innerValue,
+            onCancel,
+            onCancelDisabled: !loading,
           }}
-          icon={<ClearOutlined />}
-        />
-
-        {/* Loading or Send */}
-        {loading ? (
-          <LoadingButtonComponent
-            className={actionBtnCls}
-            onClick={() => {
-              setLoading(false);
-            }}
-            icon={<StopLoadingIcon />}
-          />
-        ) : (
-          <SenderButtonComponent
-            className={actionBtnCls}
-            onClick={triggerSend}
-            icon={<SendOutlined />}
-          />
-        )}
-      </ActionsWrapper>
+        >
+          {actionNode}
+        </ActionButtonContext.Provider>
+      </div>
     </div>,
   );
 };

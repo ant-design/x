@@ -1,61 +1,61 @@
 import React from 'react';
 import { Sender } from '@ant-design/x';
-import { Button, Spin } from 'antd';
-import { DeleteFilled, OpenAIOutlined } from '@ant-design/icons';
+import { App, Space, Spin, Typography } from 'antd';
+import { OpenAIOutlined } from '@ant-design/icons';
 
-const App: React.FC = () => {
+const Demo: React.FC = () => {
   const [loading, setLoading] = React.useState(false);
   const [value, setValue] = React.useState<string>('');
-  const openailink = (
-    <Button
-      type="dashed"
-      onClick={() => {
-        setLoading(true);
-        setValue('');
-      }}
-      icon={<OpenAIOutlined />}
-    />
-  );
-  const ClearMessage = (
-    <Button
-      type="dashed"
-      onClick={() => {
-        setValue('');
-      }}
-      icon={<DeleteFilled />}
-    />
-  );
-  const LoadingSpin = (
-    <Button
-      type="dashed"
-      icon={<Spin />}
-      onClick={() => {
+
+  const { message } = App.useApp();
+
+  React.useEffect(() => {
+    if (loading) {
+      const timer = setTimeout(() => {
         setLoading(false);
-      }}
-    />
-  );
+        setValue('');
+        message.success('Send message successfully!');
+      }, 2000);
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [loading]);
+
   return (
     <Sender
+      submitType="shiftEnter"
       value={value}
-      onChange={setValue}
       loading={loading}
-      onSubmit={(message) => {
-        console.log('submit', message);
+      onChange={setValue}
+      onSubmit={() => {
         setLoading(true);
-        return true;
       }}
       onCancel={() => {
         setLoading(false);
       }}
-      components={{
-        actions: {
-          send: () => openailink,
-          clear: () => ClearMessage,
-          loading: () => LoadingSpin,
-        },
+      actions={(_, info) => {
+        const { SendButton, LoadingButton } = info.components;
+
+        return (
+          <Space size="small">
+            <Typography.Text type="secondary">
+              <small>`Shift + Enter` to submit</small>
+            </Typography.Text>
+            {loading ? (
+              <LoadingButton type="default" icon={<Spin size="small" />} disabled />
+            ) : (
+              <SendButton type="primary" icon={<OpenAIOutlined />} disabled={false} />
+            )}
+          </Space>
+        );
       }}
     />
   );
 };
 
-export default App;
+export default () => (
+  <App>
+    <Demo />
+  </App>
+);

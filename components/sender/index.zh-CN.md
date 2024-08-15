@@ -15,14 +15,10 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*8yArQ43EGccAAA
 ## 代码演示
 
 <!-- prettier-ignore -->
-<code src="./demo/basic.tsx">Basic</code>
-<code src="./demo/loading.tsx">加载中</code>
-<code src="./demo/actions.tsx">按钮配置</code>
-<code src="./demo/enterType.tsx">输入模式</code>
-<code src="./demo/controlled.tsx">受控模式</code>
-<code src="./demo/rtl.tsx">从右到左布局</code>
+<code src="./demo/basic.tsx">基本用法</code>
+<code src="./demo/submitType.tsx">提交模式</code>
+<code src="./demo/actions.tsx">自定义按钮</code>
 
 ## API
 
 ## Design Token
-

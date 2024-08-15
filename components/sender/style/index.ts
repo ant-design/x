@@ -12,15 +12,7 @@ interface SenderToken extends FullToken<'Sender'> {
 }
 
 const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
-  const {
-    componentCls,
-    paddingXS,
-    paddingXXS,
-    colorTextTertiary,
-    colorTextSecondary,
-    zIndexPopupBase,
-    boxShadowSecondary,
-  } = token;
+  const { componentCls, paddingXS, paddingXXS, boxShadowSecondary } = token;
   return {
     [componentCls]: {
       position: 'relative',
@@ -31,31 +23,23 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
         direction: 'rtl',
 
         [`& ${componentCls}-actions-list`]: {
-          left: '8px',
+          left: paddingXXS,
           right: 'auto',
         },
       },
 
       [`& ${componentCls}-actions-list`]: {
-        borderRadius: '8px',
         position: 'absolute',
-        zIndex: zIndexPopupBase + 1000,
-        right: '8px',
+        zIndex: 1,
+        right: paddingXXS,
         bottom: `${paddingXS - paddingXXS}px`,
       },
 
-      [`& ${componentCls}-actions-btn`]: {
-        color: colorTextTertiary,
-        [`&:hover`]: {
-          color: colorTextSecondary,
-        },
-      },
-      [`& ${componentCls}-inputarea`]: {
+      [`& ${componentCls}-actions-btn`]: {},
+      [`& ${componentCls}-input`]: {
         position: 'sticky',
-        zIndex: zIndexPopupBase,
         fontSize: token.fontSize,
         bottom: 0,
-        borderRadius: '8px',
         boxShadow: boxShadowSecondary,
         paddingTop: paddingXS,
         paddingBottom: paddingXS,
