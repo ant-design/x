@@ -21,17 +21,12 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
 
       [`&${componentCls}-rtl`]: {
         direction: 'rtl',
-
-        [`& ${componentCls}-actions-list`]: {
-          left: paddingXXS,
-          right: 'auto',
-        },
       },
 
       [`& ${componentCls}-actions-list`]: {
         position: 'absolute',
         zIndex: 1,
-        right: paddingXXS,
+        insetInlineEnd: paddingXXS,
         bottom: `${paddingXS - paddingXXS}px`,
       },
 
