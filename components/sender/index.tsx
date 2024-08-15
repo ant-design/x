@@ -46,11 +46,12 @@ export interface SenderProps extends Pick<TextareaProps, 'placeholder' | 'onKeyP
     actions?: React.CSSProperties;
   };
   rootClassName?: string;
-  className?: {
+  classNames?: {
     input?: string;
     actions?: string;
   };
   style?: React.CSSProperties;
+  className?: string;
   actions?: React.ReactNode | ActionsRender;
 }
 
@@ -65,7 +66,8 @@ function getComponent<T>(
 const Sender: React.FC<SenderProps> = (props) => {
   const {
     prefixCls: customizePrefixCls,
-    styles,
+    styles = {},
+    classNames = {},
     className,
     rootClassName,
     style,
@@ -179,8 +181,8 @@ const Sender: React.FC<SenderProps> = (props) => {
     <div className={mergedCls} style={style}>
       <InputTextArea
         {...domProps}
-        style={styles?.input}
-        className={classnames(`${prefixCls}-input`, className?.input)}
+        style={styles.input}
+        className={classnames(`${prefixCls}-input`, classNames.input)}
         autoSize={{ maxRows: 8 }}
         value={innerValue}
         onChange={(e) => {
@@ -191,7 +193,10 @@ const Sender: React.FC<SenderProps> = (props) => {
       />
 
       {/* Action List */}
-      <div className={`${prefixCls}-actions-list`}>
+      <div
+        className={classnames(`${prefixCls}-actions-list`, classNames.actions)}
+        style={styles.actions}
+      >
         <ActionButtonContext.Provider
           value={{
             prefixCls: actionBtnCls,

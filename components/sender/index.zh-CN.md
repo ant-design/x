@@ -21,4 +21,30 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*8yArQ43EGccAAA
 
 ## API
 
-## Design Token
+通用属性参考：[通用属性](/docs/react/common-props)
+
+### SenderProps
+
+| 属性 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| actions | 自定义按钮 | ReactNode \| (oriNode, info: { components }) => ReactNode | - | - |
+| classNames | 样式类名 | [见下](#semantic-dom) | - | - |
+| components | 自定义组件 | Record<'input', ComponentType> | - | - |
+| defaultValue | 输入框默认值 | string | - | - |
+| disabled | 是否禁用 | boolean | false | - |
+| loading | 是否加载中 | boolean | false | - |
+| rootClassName | 根元素样式类 | string | - | - |
+| styles | 语义化定义样式 | [见下](#semantic-dom) | - | - |
+| submitType | 提交模式 | SubmitType | `enter` \| `shiftEnter` | - |
+| value | 输入框值 | string | - | - |
+| onSubmit | 点击发送按钮的回调 | (message: string) => void | - | - |
+| onChange | 输入框值改变的回调 | (value: string) => void | - | - |
+| onCancel | 点击取消按钮的回调 | () => void | - | - |
+
+## Semantic DOM
+
+<code src="./demo/_semantic.tsx" simplify="true"></code>
+
+## 主题变量（Design Token）
+
+<ComponentTokenTable component="Sender"></ComponentTokenTable>
