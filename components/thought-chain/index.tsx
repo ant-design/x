@@ -1,5 +1,5 @@
 import React from 'react';
-import { Collapse, Steps } from 'antd';
+import { Avatar, Collapse, Typography } from 'antd';
 import classnames from 'classnames';
 
 import pickAttrs from 'rc-util/lib/pickAttrs';
@@ -42,6 +42,12 @@ interface ThoughtChainItem {
   icon?: React.ReactNode;
 
   /**
+   * @desc 思维节点额外内容
+   * @descEN Thought chain item extra content
+   */
+  extra?: React.ReactNode;
+
+  /**
    * @desc 思维节点子元素
    * @descEN Thought chain item children
    */
@@ -54,18 +60,6 @@ export interface ThoughtChainProps extends Omit<React.HTMLAttributes<HTMLDivElem
    * @descEN chain items
    */
   items?: ThoughtChainItem[];
-
-  /**
-   * @desc 思维链标题
-   * @descEN Thought chain title
-   */
-  title?: React.ReactNode;
-
-  /**
-   * @desc 思维链标题扩展
-   * @descEN Thought chain extra
-   */
-  extra?: React.ReactNode;
 
   /**
    * @desc 当前展开的节点
@@ -98,9 +92,6 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
     rootClassName,
     className,
     items,
-    style,
-    title,
-    extra,
     onExpand,
     expandedKeys,
     ...restProps
@@ -110,6 +101,13 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
     attr: true,
     aria: true,
     data: true,
+  });
+
+  // ============================ ExpandedKeys ============================
+  const [mergedExpandedKey, setMergedExpandedKey] = useMergedState<
+    ThoughtChainProps['expandedKeys']
+  >([], {
+    value: expandedKeys,
   });
 
   // ============================ Prefix ============================
@@ -126,29 +124,43 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
 
   return wrapCSSVar(
     <div {...domProps} className={mergedCls}>
-      <Steps
-        current={items?.length}
-        direction="vertical"
-        items={items?.map((item) => ({
-          title: (
-            <Collapse
-              style={{ padding: 0 }}
-              expandIcon={() => null}
-              ghost
-              items={[
-                {
-                  key: item.key,
-                  label: item.title,
-                  headerClass: `${prefixCls}-item-title`,
-                  children: item.children,
-                },
-              ]}
-            />
-          ),
-          description: item.description,
-          className: `${prefixCls}-item`,
-        }))}
-      />
+      {items?.map((item) => (
+        <div key={item.key} className={`${prefixCls}-item`}>
+          <div
+            className={`${prefixCls}-item-header`}
+            onClick={() => setMergedExpandedKey((pre) => [...pre, item.key])}
+          >
+            {item.icon && <Avatar icon={item.icon} className={`${prefixCls}-item-icon`} />}
+            <Typography.Text
+              strong
+              ellipsis={{ tooltip: true }}
+              className={`${prefixCls}-item-title`}
+            >
+              {item.title}
+            </Typography.Text>
+            <Typography.Text type="secondary" className={`${prefixCls}-item-desc`}>
+              {item.description}
+            </Typography.Text>
+            {item.extra && <div className={`${prefixCls}-item-extra`}>{item.extra}</div>}
+          </div>
+          {item.children && (
+            <div className={`${prefixCls}-item-content`}>
+              <Collapse
+                ghost
+                activeKey={mergedExpandedKey}
+                items={[
+                  {
+                    showArrow: false,
+                    headerClass: `${prefixCls}-item-content-header`,
+                    key: item.key,
+                    children: item.children,
+                  },
+                ]}
+              />
+            </div>
+          )}
+        </div>
+      ))}
     </div>,
   );
 };
