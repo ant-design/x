@@ -83,13 +83,10 @@ pnpm add @ant-design/x
 
 ```tsx
 import React from 'react';
-import { Button, DatePicker } from '@ant-design/x';
+import { Bubble } from '@ant-design/x';
 
 const App = () => (
-  <>
-    <Button type="primary">PRESS ME</Button>
-    <DatePicker />
-  </>
+  <Bubble />
 );
 
 export default App;
