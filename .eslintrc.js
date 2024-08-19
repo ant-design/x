@@ -1,13 +1,5 @@
 module.exports = {
-  extends: [
-    'airbnb',
-    'prettier',
-    'plugin:compat/recommended',
-    'plugin:jest/recommended',
-    'plugin:react/recommended',
-    'plugin:import/typescript',
-    'plugin:markdown/recommended-legacy',
-  ],
+  extends: [require.resolve('@umijs/fabric/dist/eslint')],
   env: {
     browser: true,
     node: true,
@@ -161,30 +153,12 @@ module.exports = {
     'react/static-property-placement': 0,
     'react/jsx-no-bind': 0, // Should not check test file
     'react/no-find-dom-node': 0,
-    'react/no-unused-prop-types': 0,
     'react/default-props-match-prop-types': 0,
     'react-hooks/rules-of-hooks': 2, // Checks rules of Hooks
     'react/function-component-definition': 0,
     'react/no-unused-class-component-methods': 0,
     'import/extensions': 0,
-    'import/no-cycle': 2,
     'lodash/import-scope': 2,
-    'import/no-extraneous-dependencies': [
-      'error',
-      {
-        devDependencies: [
-          'site/**',
-          'tests/**',
-          'scripts/**',
-          'scripts/*.ts',
-          '**/*.test.js',
-          '**/__tests__/*',
-          '*.config.js',
-          '**/*.md',
-        ],
-      },
-    ],
-    'jsx-a11y/no-static-element-interactions': 0,
     'jsx-a11y/anchor-has-content': 0,
     'jsx-a11y/click-events-have-key-events': 0,
     'jsx-a11y/anchor-is-valid': 0,
