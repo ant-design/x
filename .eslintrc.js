@@ -140,4 +140,8 @@ module.exports = {
   globals: {
     gtag: true,
   },
+  rules: {
+    '@typescript-eslint/no-parameter-properties': 'off',
+    '@typescript-eslint/switch-exhaustiveness-check': 'off',
+  },
 };
