@@ -24,7 +24,6 @@ demo:
 
 通用属性参考：[通用属性](/docs/react/common-props)
 
-
 ## 主题变量（Design Token）
 
 <ComponentTokenTable component="ThoughtChain"></ComponentTokenTable>

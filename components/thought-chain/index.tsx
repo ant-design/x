@@ -8,7 +8,7 @@ import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import useConfigContext from '../config-provider/useConfigContext';
 import useStyle from './style';
 
-type ThoughtChainItemStatus = 'finish' | 'process';
+import type { THOUGHT_CHAIN_ITEM_STATUS } from './style';
 
 interface ThoughtChainItem {
   /**
@@ -16,6 +16,12 @@ interface ThoughtChainItem {
    * @descEN Unique identifier
    */
   key: string;
+
+  /**
+   * @desc 思维节点图标
+   * @descEN Thought chain item icon
+   */
+  icon?: React.ReactNode;
 
   /**
    * @desc 思维节点标题
@@ -30,28 +36,28 @@ interface ThoughtChainItem {
   description?: React.ReactNode;
 
   /**
-   * @desc 思维节点状态
-   * @descEN Thought chain item status
-   */
-  status?: ThoughtChainItemStatus;
-
-  /**
-   * @desc 思维节点图标
-   * @descEN Thought chain item icon
-   */
-  icon?: React.ReactNode;
-
-  /**
    * @desc 思维节点额外内容
    * @descEN Thought chain item extra content
    */
   extra?: React.ReactNode;
 
   /**
-   * @desc 思维节点子元素
-   * @descEN Thought chain item children
+   * @desc 思维节点内容
+   * @descEN Thought chain item content
    */
-  children?: React.ReactNode;
+  content?: React.ReactNode;
+
+  /**
+   * @desc 思维节点脚注
+   * @descEN Thought chain item footer
+   */
+  footer?: React.ReactNode;
+
+  /**
+   * @desc 思维节点状态
+   * @descEN Thought chain item status
+   */
+  status?: `${THOUGHT_CHAIN_ITEM_STATUS}`;
 }
 
 export interface ThoughtChainProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
@@ -138,13 +144,19 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
 
   return wrapCSSVar(
     <div {...domProps} className={mergedCls}>
-      {items?.map((item) => {
-        const { key, icon, title, description, extra } = item;
+      {items?.map((item, index) => {
+        const { key, icon, title, description, extra, status = 'default', content, footer } = item;
+        const { status: nextItemStatus = 'default' } = items[index + 1] || {};
 
         return (
           <div
             key={key}
-            className={classnames(`${prefixCls}-item`, classNames.item)}
+            className={classnames(
+              `${prefixCls}-item`,
+              `${prefixCls}-item-${status}${nextItemStatus ? `-${nextItemStatus}` : ''}`,
+              { [`${prefixCls}-item-collapsible`]: React.isValidElement(content) },
+              classNames.item,
+            )}
             style={styles.item}
           >
             {/* Header */}
@@ -153,25 +165,41 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
               style={styles.itemHeader}
             >
               {icon && <Avatar icon={icon} className={`${prefixCls}-item-icon`} />}
-              {title && <Typography.Text
-                className={`${prefixCls}-item-title`}
-                strong
-                ellipsis={{ tooltip: true }}
-              >
-                {title}
-              </Typography.Text>}
-              {description && <Typography.Text className={`${prefixCls}-item-desc`} type="secondary" ellipsis={{ tooltip: true }}>
-                {description}
-              </Typography.Text>}
+              {title && (
+                <Typography.Text
+                  className={`${prefixCls}-item-title`}
+                  strong
+                  ellipsis={{ tooltip: true }}
+                >
+                  {title}
+                </Typography.Text>
+              )}
+              {description && (
+                <Typography.Text
+                  className={`${prefixCls}-item-desc`}
+                  type="secondary"
+                  ellipsis={{ tooltip: true }}
+                >
+                  {description}
+                </Typography.Text>
+              )}
               {extra && <div className={`${prefixCls}-item-extra`}>{extra}</div>}
             </div>
             {/* Content */}
-            {item.children && <div
-              className={classnames(`${prefixCls}-item-content`, classNames.itemContent)}
-              style={styles.itemContent}
-            >
-              {item.children}
-            </div>}
+            {content && (
+              <div
+                className={classnames(`${prefixCls}-item-content`, classNames.itemContent)}
+                style={styles.itemContent}
+              >
+                <div className={`${prefixCls}-item-content-box`}>{content}</div>
+              </div>
+            )}
+            {/* Footer */}
+            {footer && (
+              <div className={`${prefixCls}-item-footer`}>
+                <div className={`${prefixCls}-item-footer-box`}>{footer}</div>
+              </div>
+            )}
           </div>
         );
       })}
