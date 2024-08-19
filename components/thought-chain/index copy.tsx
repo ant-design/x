@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Typography } from 'antd';
+import { Avatar, Collapse, Typography } from 'antd';
 import classnames from 'classnames';
 
 import pickAttrs from 'rc-util/lib/pickAttrs';
@@ -84,18 +84,6 @@ export interface ThoughtChainProps extends Omit<React.HTMLAttributes<HTMLDivElem
    * @descEN Custom class name
    */
   rootClassName?: string;
-
-  /**
-   * @desc 语义化结构 style
-   * @descEN Semantic structure styles
-   */
-  styles?: Partial<Record<'item' | 'itemHeader' | 'itemContent', React.CSSProperties>>;
-
-  /**
-   * @desc 语义化结构 className
-   * @descEN Semantic structure class names
-   */
-  classNames?: Partial<Record<'item' | 'itemHeader' | 'itemContent', string>>;
 }
 
 const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
@@ -105,8 +93,6 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
     className,
     items,
     onExpand,
-    styles = {},
-    classNames = {},
     expandedKeys,
     ...restProps
   } = props;
@@ -138,43 +124,42 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
 
   return wrapCSSVar(
     <div {...domProps} className={mergedCls}>
-      {items?.map((item) => {
-        const { key, icon, title, description, extra } = item;
-
-        return (
+      {/* {items?.map((item) => (
+        <div key={item.key} className={`${prefixCls}-item`}>
           <div
-            key={key}
-            className={classnames(`${prefixCls}-item`, classNames.item)}
-            style={styles.item}
+            className={`${prefixCls}-item-header`}
+            onClick={() => setMergedExpandedKey((pre) => [...pre, item.key])}
           >
-            {/* Header */}
-            <div
-              className={classnames(`${prefixCls}-item-header`, classNames.itemHeader)}
-              style={styles.itemHeader}
+            {item.icon && <Avatar icon={item.icon} className={`${prefixCls}-item-icon`} />}
+            <Typography.Text
+              strong
+              ellipsis={{ tooltip: true }}
+              className={`${prefixCls}-item-title`}
             >
-              {icon && <Avatar icon={icon} className={`${prefixCls}-item-icon`} />}
-              {title && <Typography.Text
-                className={`${prefixCls}-item-title`}
-                strong
-                ellipsis={{ tooltip: true }}
-              >
-                {title}
-              </Typography.Text>}
-              {description && <Typography.Text className={`${prefixCls}-item-desc`} type="secondary" ellipsis={{ tooltip: true }}>
-                {description}
-              </Typography.Text>}
-              {extra && <div className={`${prefixCls}-item-extra`}>{extra}</div>}
-            </div>
-            {/* Content */}
-            {item.children && <div
-              className={classnames(`${prefixCls}-item-content`, classNames.itemContent)}
-              style={styles.itemContent}
-            >
-              {item.children}
-            </div>}
+              {item.title}
+            </Typography.Text>
+            <Typography.Text type="secondary" className={`${prefixCls}-item-desc`}>
+              {item.description}
+            </Typography.Text>
+            {item.extra && <div className={`${prefixCls}-item-extra`}>{item.extra}</div>}
           </div>
-        );
-      })}
+          {item.children && (
+            <div className={`${prefixCls}-item-content`}>
+              <Collapse
+                ghost
+                activeKey={mergedExpandedKey}
+                onChange={(keys) => setMergedExpandedKey(keys)}
+                items={items?.map((item) => ({
+                  showArrow: false,
+                  headerClass: `${prefixCls}-item-content-header`,
+                  key: item.key,
+                  children: item.children,
+                }))}
+              />
+            </div>
+          )}
+        </div>
+      ))} */}
     </div>,
   );
 };

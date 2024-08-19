@@ -1,116 +1,144 @@
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
+import { Keyframes } from '@ant-design/cssinjs';
+import type { CSSObject } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 
-export interface ComponentToken {}
+export interface ComponentToken {
+  itemHeaderSize: number;
+}
 
-export interface ThoughtChainToken extends FullToken<'ThoughtChain'> {}
+export interface ThoughtChainToken extends FullToken<'ThoughtChain'> {
+  itemIconFontSize: number;
+}
 
-const genThoughtChainStyle: GenerateStyle<ThoughtChainToken> = (token) => {
-  const { componentCls, calc, antCls } = token;
+export enum THOUGHT_CHAIN_ITEM_STATUS {
+  PENDING = 'pending',
+  SUCCESS = 'success',
+  ERROR = 'error',
+}
 
-  const beforePseudo = {
-    content: '""',
-    backgroundColor: token.colorBorder,
-    width: token.lineWidth,
-    display: 'block',
-    position: 'absolute',
-    left: 0,
-    bottom: 0,
-    top: 0,
-  };
+const genThoughtChainItemStatusStyle: GenerateStyle<ThoughtChainToken, CSSObject> = (
+  token: ThoughtChainToken,
+) => {
+  const { componentCls } = token;
 
   return {
-    [componentCls]: {
+    [`& ${componentCls}-item`]: {},
+  };
+};
+
+const genBeforePseudoStyle: GenerateStyle<ThoughtChainToken, CSSObject> = (
+  token: ThoughtChainToken,
+) => {
+  const { calc } = token;
+
+  return {
+    position: 'relative',
+
+    '&::before': {
+      content: '""',
+      backgroundColor: token.colorBorder,
+      width: calc(token.lineWidth).mul(2).equal(),
+      display: 'block',
+      position: 'absolute',
+      left: calc(token.itemHeaderSize).div(2).sub(token.lineWidth).equal(),
+      top: '100%',
+      bottom: calc(token.padding).mul(-1).equal(),
+    },
+  };
+};
+
+const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken, CSSObject> = (
+  token: ThoughtChainToken,
+) => {
+  const { componentCls, calc } = token;
+  const itemCls = `${componentCls}-item`;
+
+  return {
+    [itemCls]: {
       display: 'flex',
+      gap: token.padding,
       flexDirection: 'column',
-      maxWidth: '100%',
-      [`&${componentCls}-rtl`]: {
-        direction: 'rtl',
+      marginLeft: calc(token.itemHeaderSize).mul(-1).equal(),
 
-        [`& ${componentCls}-item`]: {
-          marginRight: token.margin,
-          marginLeft: 0,
+      [`& ${itemCls}-header`]: {
+        display: 'flex',
+        gap: token.padding,
+        alignItems: 'center',
+        height: token.itemHeaderSize,
+        ...genBeforePseudoStyle(token),
 
-          '&::before': {
-            right: 0,
-            left: 'none',
-          },
-          [`& ${componentCls}-item-header`]: {
-            marginRight: calc(token.margin).mul(-1).equal(),
-
-            '&::before': {
-              right: token.margin,
-              left: 'none',
-            },
-          },
+        [`& ${itemCls}-icon`]: {
+          fontSize: token.itemIconFontSize,
+          
+          maxHeight: token.itemHeaderSize,
+          minWidth: token.itemHeaderSize,
         },
-      },
-      ' > :last-child': {
-        paddingBottom: `0 !important`,
-      },
-      [`& ${componentCls}-item`]: {
-        position: 'relative',
-        paddingBottom: token.padding,
-        marginLeft: token.margin,
-
-        '&::before': beforePseudo,
-
-        [`& ${componentCls}-item-header`]: {
-          position: 'relative',
-          padding: 0,
-          marginLeft: calc(token.margin).mul(-1).equal(),
+        [`& ${itemCls}-title`]: {},
+        [`& ${itemCls}-desc`]: {},
+        [`& ${itemCls}-extra`]: {
+          flex: 1,
           display: 'flex',
-          gap: token.margin,
-          alignItems: 'center',
-          cursor: 'pointer',
-
-          '&::before': {
-            ...beforePseudo,
-            backgroundColor: token.colorBorderBg,
-            left: token.margin,
-          },
-
-          [`& ${componentCls}-item-icon`]: {},
-          [`& ${componentCls}-item-title`]: {
-            position: 'relative',
-            fontSize: token.fontSizeLG,
-          },
-          [`& ${componentCls}-item-desc`]: {},
-          [`& ${componentCls}-item-extra`]: {
-            display: 'flex',
-            flex: 1,
-            justifyContent: 'flex-end',
-          },
+          justifyContent: 'flex-end',
+          minWidth: token.itemHeaderSize,
         },
-        [`& ${componentCls}-item-content`]: {
-          position: 'relative',
-          overflow: 'hidden',
-          marginTop: token.margin,
-          marginLeft: calc(token.margin).mul(-1).equal(),
-
-          [`${antCls}-collapse-header,${antCls}-collapse-content-box`]: {
-            padding: 0,
-            position: 'relative',
-          },
-
-          '&::before': {
-            ...beforePseudo,
-            backgroundColor: token.colorBorderBg,
-            left: token.margin,
-          },
-        },
+      },
+      [`& ${itemCls}-content`]: {
+        ...genBeforePseudoStyle(token),
       },
     },
   };
 };
 
-export const prepareComponentToken: GetDefaultToken<'ThoughtChain'> = () => ({});
+const genThoughtChainStyle: GenerateStyle<ThoughtChainToken> = (token) => {
+  const { componentCls, calc } = token;
+
+  return {
+    [componentCls]: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: token.padding,
+      paddingLeft: token.itemHeaderSize,
+
+      [`&${componentCls}-rtl`]: {
+        direction: 'rtl',
+        paddingRight: token.itemHeaderSize,
+
+        [`& ${componentCls}-item`]: {
+          marginRight: calc(token.itemHeaderSize).mul(-1).equal(),
+
+          [`& ${componentCls}-item-header`]: {
+            '&::before': {
+              right: calc(token.itemHeaderSize).div(2).equal(),
+              left: 'none',
+            },
+          },
+          [`& ${componentCls}-item-content`]: {
+            '&::before': {
+              right: calc(token.itemHeaderSize).div(2).equal(),
+              left: 'none',
+            },
+          },
+        },
+      },
+
+      ...genThoughtChainItemStyle(token),
+      ...genThoughtChainItemStatusStyle(token),
+    },
+  };
+};
+
+export const prepareComponentToken: GetDefaultToken<'ThoughtChain'> = (token) => ({
+  itemHeaderSize: token.controlHeight,
+});
 
 export default genStyleHooks(
   'ThoughtChain',
   (token) => {
-    const compToken = mergeToken<ThoughtChainToken>(token, {});
+    const compToken = mergeToken<ThoughtChainToken>(token, {
+      itemIconFontSize: token.calc(token.fontSizeLG).add(token.fontSizeXL).div(2).equal() as number,
+    });
     return genThoughtChainStyle(compToken);
   },
   prepareComponentToken,
