@@ -106,49 +106,40 @@ export default App;
 
 ## 🔗 链接
 
-- [首页](https://ant.design/)
-- [所有组件](https://ant.design/components/overview-cn)
-- [Ant Design Pro](http://pro.ant.design/)
+- [首页](https://x.ant.design/)
+- [所有组件](https://x.ant.design/components/overview-cn)
 - [更新日志](CHANGELOG.zh-CN.md)
-- [React 底层基础组件](http://react-component.github.io/)
-- [移动端组件](http://mobile.ant.design)
-- [小程序组件](http://mini.ant.design)
 - [页面级组件](https://procomponents.ant.design)
 - [Ant Design 图表](https://charts.ant.design)
-- [Ant Design 图标](https://github.com/ant-design/ant-design-icons)
-- [Ant Design 色彩](https://github.com/ant-design/ant-design-colors)
-- [首页模板集](https://landing.ant.design)
-- [动效](https://motion.ant.design)
-- [脚手架市场](http://scaffold.ant.design)
 - [设计规范速查手册](https://github.com/ant-design/ant-design/wiki/Ant-Design-%E8%AE%BE%E8%AE%A1%E5%9F%BA%E7%A1%80%E7%AE%80%E7%89%88)
 - [开发者说明](https://github.com/ant-design/ant-design/wiki/Development)
 - [版本发布规则](https://github.com/ant-design/ant-design/wiki/%E8%BD%AE%E5%80%BC%E8%A7%84%E5%88%99%E5%92%8C%E7%89%88%E6%9C%AC%E5%8F%91%E5%B8%83%E6%B5%81%E7%A8%8B)
-- [常见问题](https://ant.design/docs/react/faq-cn)
+- [常见问题](https://x.ant.design/docs/react/faq-cn)
 - [CodeSandbox 模板](https://u.ant.design/codesandbox-repro) for bug reports
-- [定制主题](https://ant.design/docs/react/customize-theme-cn)
-- [国际化](https://ant.design/docs/react/i18n-cn)
+- [定制主题](https://x.ant.design/docs/react/customize-theme-cn)
+- [国际化](https://x.ant.design/docs/react/i18n-cn)
 - [成为社区协作成员](https://github.com/ant-design/ant-design/wiki/Collaborators#how-to-apply-for-being-a-collaborator)
 
 ## ⌨️ 本地开发
 
 你可以使用 Gitpod 进行在线开发：
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/ant-design/ant-design)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/ant-design/x)
 
 或者使用 opensumi.run 进行在线开发：
 
-[![opensumi.run](https://custom-icon-badges.demolab.com/badge/opensumi-run-blue.svg?logo=opensumi)](https://opensumi.run/ide/ant-design/ant-design)
+[![opensumi.run](https://custom-icon-badges.demolab.com/badge/opensumi-run-blue.svg?logo=opensumi)](https://opensumi.run/ide/ant-design/x)
 
 或者克隆到本地开发:
 
 ```bash
-$ git clone git@github.com:ant-design/ant-design.git
+$ git clone git@github.com:ant-design/x.git
 $ cd ant-design
 $ npm install
 $ npm start
 ```
 
-打开浏览器访问 http://127.0.0.1:8001 ，更多[本地开发文档](https://github.com/ant-design/ant-design/wiki/Development)。
+打开浏览器访问 http://127.0.0.1:8001 ，更多[本地开发文档](https://github.com/ant-design/x/wiki/Development)。
 
 ## 🤝 参与共建 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
@@ -197,7 +188,7 @@ $ npm start
 
 通过 Stack Overflow 或者 Segment Fault 提问时，建议加上 `antd` 标签。
 
-1. [GitHub Discussions](https://github.com/ant-design/ant-design/discussions)
+1. [GitHub Discussions](https://github.com/ant-design/x/discussions)
 2. [Stack Overflow](http://stackoverflow.com/questions/tagged/antd)（英文）
 3. [Segment Fault](https://segmentfault.com/t/antd)（中文）
 
