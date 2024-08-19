@@ -2,9 +2,9 @@
 
 <img height="180" src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*1SDwSrOnSakAAAAAAAAAAAAADgCCAQ/original">
 
-<h1>Ant Design</h1>
+<h1>Ant Design X</h1>
 
-An enterprise-class UI design language and React UI library.
+Crafting AI-driven interfaces with React, seamlessly integrating smart chat components and API services at your fingertips.
 
 [![CI status][github-action-image]][github-action-url]
 [![codecov][codecov-image]][codecov-url]
@@ -25,24 +25,24 @@ An enterprise-class UI design language and React UI library.
 
 ![](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-[npm-image]: http://img.shields.io/npm/v/antd.svg?style=flat-square
-[npm-url]: http://npmjs.org/package/antd
+[npm-image]: http://img.shields.io/npm/v/@ant-design/x.svg?style=flat-square
+[npm-url]: http://npmjs.org/package/@ant-design/x
 [github-action-image]: https://github.com/ant-design/x/workflows/%E2%9C%85%20test/badge.svg
 [github-action-url]: https://github.com/ant-design/x/actions?query=workflow%3A%22%E2%9C%85+test%22
 [codecov-image]: https://img.shields.io/codecov/c/github/ant-design/x/master.svg?style=flat-square
 [codecov-url]: https://codecov.io/gh/ant-design/x/branch/master
-[download-image]: https://img.shields.io/npm/dm/antd.svg?style=flat-square
-[download-url]: https://npmjs.org/package/antd
+[download-image]: https://img.shields.io/npm/dm/@ant-design/x.svg?style=flat-square
+[download-url]: https://npmjs.org/package/@ant-design/x
 [fossa-image]: https://app.fossa.io/api/projects/git%2Bgithub.com%2Fant-design%2Fant-design.svg?type=shield
 [fossa-url]: https://app.fossa.io/projects/git%2Bgithub.com%2Fant-design%2Fant-design?ref=badge_shield
 [help-wanted-image]: https://flat.badgen.net/github/label-issues/ant-design/x/help%20wanted/open
 [help-wanted-url]: https://github.com/ant-design/x/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22
 [twitter-image]: https://img.shields.io/twitter/follow/AntDesignUI.svg?label=Ant%20Design
 [twitter-url]: https://twitter.com/AntDesignUI
-[bundlesize-js-image]: https://img.badgesize.io/https:/unpkg.com/antd/dist/antd.min.js?label=antd.min.js&compression=gzip&style=flat-square
-[unpkg-js-url]: https://unpkg.com/browse/antd/dist/antd.min.js
-[bundlephobia-image]: https://badgen.net/bundlephobia/minzip/antd?style=flat-square
-[bundlephobia-url]: https://bundlephobia.com/package/antd
+[bundlesize-js-image]: https://img.badgesize.io/https:/unpkg.com/@ant-design/x/dist/antd-x.min.js?label=antd-x.min.js&compression=gzip&style=flat-square
+[unpkg-js-url]: https://unpkg.com/browse/@ant-design/x/dist/antd-x.min.js
+[bundlephobia-image]: https://badgen.net/bundlephobia/minzip/@ant-design/x?style=flat-square
+[bundlephobia-url]: https://bundlephobia.com/package/@ant-design/x
 [issues-helper-image]: https://img.shields.io/badge/using-actions--cool-blue?style=flat-square
 [issues-helper-url]: https://github.com/actions-cool
 [renovate-image]: https://img.shields.io/badge/renovate-enabled-brightgreen.svg?style=flat-square
@@ -56,7 +56,7 @@ An enterprise-class UI design language and React UI library.
 
 ## ✨ Features
 
-- 🌈 Enterprise-class UI designed for web applications.
+- 🌈 Crafting AI-driven interfaces with React, seamlessly integrating smart chat components and API services at your fingertips.
 - 📦 A set of high-quality React components out of the box.
 - 🛡 Written in TypeScript with predictable static types.
 - ⚙️ Whole package of design resources and development tools.
@@ -76,34 +76,34 @@ An enterprise-class UI design language and React UI library.
 ## 📦 Install
 
 ```bash
-npm install antd
+npm install @ant-design/x --save
 ```
 
 ```bash
-yarn add antd
+yarn add @ant-design/x
 ```
 
 ```bash
-pnpm add antd
+pnpm add @ant-design/x
 ```
 
 ## 🔨 Usage
 
 ```tsx
-import { Button, DatePicker } from 'antd';
+import React from 'react';
+import { Bubble } from '@ant-design/x';
 
-export default () => (
-  <>
-    <Button type="primary">PRESS ME</Button>
-    <DatePicker placeholder="select date" />
-  </>
+const App = () => (
+  <Bubble />
 );
+
+export default App;
 ```
 
 ## 🔗 Links
 
-- [Home page](https://ant.design/)
-- [Components Overview](https://ant.design/components/overview)
+- [Home page](https://x.ant.design/)
+- [Components Overview](https://x.ant.design/components/overview)
 - [Ant Design Pro](http://pro.ant.design/)
 - [Change Log](CHANGELOG.en-US.md)
 - [rc-components](http://react-component.github.io/)
@@ -118,9 +118,9 @@ export default () => (
 - [Scaffold Market](http://scaffold.ant.design)
 - [Developer Instruction](https://github.com/ant-design/x/wiki/Development)
 - [Versioning Release Note](https://github.com/ant-design/x/wiki/%E8%BD%AE%E5%80%BC%E8%A7%84%E5%88%99%E5%92%8C%E7%89%88%E6%9C%AC%E5%8F%91%E5%B8%83%E6%B5%81%E7%A8%8B)
-- [FAQ](https://ant.design/docs/react/faq)
+- [FAQ](https://x.ant.design/docs/react/faq)
 - [CodeSandbox Template](https://u.ant.design/codesandbox-repro) for bug reports
-- [Customize Theme](https://ant.design/docs/react/customize-theme)
+- [Customize Theme](https://x.ant.design/docs/react/customize-theme)
 - [How to Apply for Being A Collaborator](https://github.com/ant-design/x/wiki/Collaborators#how-to-apply-for-being-a-collaborator)
 
 ## ⌨️ Development
