@@ -164,7 +164,7 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
               className={classnames(`${prefixCls}-item-header`, classNames.itemHeader)}
               style={styles.itemHeader}
             >
-              {icon && <Avatar icon={icon} className={`${prefixCls}-item-icon`} />}
+              <Avatar icon={icon || index + 1} className={`${prefixCls}-item-icon`} />
               {title && (
                 <Typography.Text
                   className={`${prefixCls}-item-title`}
@@ -186,20 +186,20 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
               {extra && <div className={`${prefixCls}-item-extra`}>{extra}</div>}
             </div>
             {/* Content */}
-            {content && (
+            {/* {content && (
               <div
                 className={classnames(`${prefixCls}-item-content`, classNames.itemContent)}
                 style={styles.itemContent}
               >
                 <div className={`${prefixCls}-item-content-box`}>{content}</div>
               </div>
-            )}
+            )} */}
             {/* Footer */}
-            {footer && (
+            {/* {footer && (
               <div className={`${prefixCls}-item-footer`}>
                 <div className={`${prefixCls}-item-footer-box`}>{footer}</div>
               </div>
-            )}
+            )} */}
           </div>
         );
       })}
