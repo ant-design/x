@@ -18,7 +18,7 @@ demo:
 ## 代码演示
 
 <!-- prettier-ignore -->
-<code src="./demo/basic.tsx">基本</code>
+<code src="./demo/basic.tsx" background="grey">基本</code>
 
 ## API
 

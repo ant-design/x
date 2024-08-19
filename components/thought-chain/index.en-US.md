@@ -17,7 +17,7 @@ demo:
 ## Examples
 
 <!-- prettier-ignore -->
-<code src="./demo/basic.tsx">Basic</code>
+<code src="./demo/basic.tsx" background="grey">Basic</code>
 
 ## API
 
