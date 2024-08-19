@@ -5,11 +5,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { EsbuildPlugin } = require('esbuild-loader');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 const DuplicatePackageCheckerPlugin = require('@madccc/duplicate-package-checker-webpack-plugin');
-const browserslist = require('browserslist');
-const browserslistToEsbuild = require('browserslist-to-esbuild');
 const path = require('path');
-
-const targets = browserslistToEsbuild(browserslist());
 
 function addLocales(webpackConfig) {
   let packageName = 'antd-with-locales';
@@ -56,7 +52,7 @@ if (process.env.RUN_ENV === 'PRODUCTION') {
     // use esbuild
     if (process.env.ESBUILD || process.env.CSB_REPO) {
       config.optimization.minimizer[0] = new EsbuildPlugin({
-        target: targets,
+        target: 'es2020',
         css: true,
       });
     }
