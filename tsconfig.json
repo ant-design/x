@@ -8,6 +8,7 @@
       "@ant-design/x/lib/*": ["components/*"],
       "@ant-design/x/locale/*": ["components/locale/*"]
     },
+    "declaration": true,
     "strict": true,
     "strictNullChecks": true,
     "module": "esnext",
