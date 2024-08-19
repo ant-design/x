@@ -182,6 +182,8 @@
     "antd-style": "^3.6.2",
     "antd-token-previewer": "^2.0.8",
     "axios": "^1.6.8",
+    "browserslist": "^4.23.3",
+    "browserslist-to-esbuild": "^2.1.1",
     "chalk": "^4.1.2",
     "cheerio": "1.0.0-rc.12",
     "circular-dependency-plugin": "^5.2.2",
