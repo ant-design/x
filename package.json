@@ -34,7 +34,7 @@
     "*.css"
   ],
   "main": "lib/index.js",
-  "unpkg": "dist/antd.min.js",
+  "unpkg": "dist/antd-x.min.js",
   "module": "es/index.js",
   "typings": "es/index.d.ts",
   "files": [
@@ -304,7 +304,7 @@
   },
   "size-limit": [
     {
-      "path": "./dist/antd.min.js",
+      "path": "./dist/antd-x.min.js",
       "limit": "350 KiB"
     },
     {
