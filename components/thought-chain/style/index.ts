@@ -15,7 +15,6 @@ export enum THOUGHT_CHAIN_ITEM_STATUS {
   PENDING = 'pending',
   SUCCESS = 'success',
   ERROR = 'error',
-  DEFAULT = 'default',
 }
 
 const genThoughtChainItemStatusStyle = (token: ThoughtChainToken): CSSObject => {
@@ -23,10 +22,9 @@ const genThoughtChainItemStatusStyle = (token: ThoughtChainToken): CSSObject => 
   const itemCls = `${componentCls}-item`;
 
   const colors = {
-    [THOUGHT_CHAIN_ITEM_STATUS.PENDING]: token.colorWarningText,
+    [THOUGHT_CHAIN_ITEM_STATUS.PENDING]: token.colorPrimaryText,
     [THOUGHT_CHAIN_ITEM_STATUS.SUCCESS]: token.colorSuccessText,
     [THOUGHT_CHAIN_ITEM_STATUS.ERROR]: token.colorErrorText,
-    [THOUGHT_CHAIN_ITEM_STATUS.DEFAULT]: token.colorPrimaryText,
   };
 
   const statuses = Object.keys(colors) as Array<keyof typeof colors>;

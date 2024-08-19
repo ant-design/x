@@ -6,9 +6,7 @@ import pickAttrs from 'rc-util/lib/pickAttrs';
 
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import useConfigContext from '../config-provider/useConfigContext';
-import useStyle from './style';
-
-import type { THOUGHT_CHAIN_ITEM_STATUS } from './style';
+import useStyle, { THOUGHT_CHAIN_ITEM_STATUS } from './style';
 
 interface ThoughtChainItem {
   /**
@@ -145,8 +143,18 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
   return wrapCSSVar(
     <div {...domProps} className={mergedCls}>
       {items?.map((item, index) => {
-        const { key, icon, title, description, extra, status = 'default', content, footer } = item;
-        const { status: nextItemStatus = 'default' } = items[index + 1] || {};
+        const {
+          key,
+          icon,
+          title,
+          description,
+          extra,
+          status = THOUGHT_CHAIN_ITEM_STATUS.PENDING,
+          content,
+          footer,
+        } = item;
+        const { status: nextItemStatus = THOUGHT_CHAIN_ITEM_STATUS.PENDING } =
+          items[index + 1] || {};
 
         return (
           <div
@@ -186,20 +194,20 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
               {extra && <div className={`${prefixCls}-item-extra`}>{extra}</div>}
             </div>
             {/* Content */}
-            {/* {content && (
+            {content && (
               <div
                 className={classnames(`${prefixCls}-item-content`, classNames.itemContent)}
                 style={styles.itemContent}
               >
                 <div className={`${prefixCls}-item-content-box`}>{content}</div>
               </div>
-            )} */}
+            )}
             {/* Footer */}
-            {/* {footer && (
+            {footer && (
               <div className={`${prefixCls}-item-footer`}>
                 <div className={`${prefixCls}-item-footer-box`}>{footer}</div>
               </div>
-            )} */}
+            )}
           </div>
         );
       })}
