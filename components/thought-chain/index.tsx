@@ -1,6 +1,9 @@
 import React from 'react';
 import { Avatar, Typography } from 'antd';
 import classnames from 'classnames';
+import CSSMotion from 'rc-motion';
+import type { CSSMotionProps } from 'rc-motion';
+import initCollapseMotion from '../_util/motion';
 
 import pickAttrs from 'rc-util/lib/pickAttrs';
 
@@ -131,7 +134,15 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
   // ============================ Prefix ============================
   const { getPrefixCls, direction } = useConfigContext();
 
+  const rootPrefixCls = getPrefixCls();
+
   const prefixCls = getPrefixCls('thought-chain', customizePrefixCls);
+
+  const openMotion: CSSMotionProps = {
+    ...initCollapseMotion(rootPrefixCls),
+    motionAppear: false,
+    leavedClassName: `${prefixCls}-content-hidden`,
+  };
 
   // ============================ Style ============================
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
@@ -171,6 +182,14 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
             <div
               className={classnames(`${prefixCls}-item-header`, classNames.itemHeader)}
               style={styles.itemHeader}
+              onClick={() => {
+                setMergedExpandedKey((pre) => {
+                  if (pre?.find((curKey) => curKey === key)) {
+                    return pre?.filter((curKey => curKey !== key));
+                  }
+                  return [...(pre || []), key];
+                });
+              }}
             >
               <Avatar icon={icon || index + 1} className={`${prefixCls}-item-icon`} />
               {title && (
@@ -195,12 +214,24 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
             </div>
             {/* Content */}
             {content && (
-              <div
-                className={classnames(`${prefixCls}-item-content`, classNames.itemContent)}
-                style={styles.itemContent}
+              <CSSMotion
+                {...openMotion}
+                visible={!!mergedExpandedKey?.find((curKey) => curKey === key)}
               >
-                <div className={`${prefixCls}-item-content-box`}>{content}</div>
-              </div>
+                {({ className: motionClassName, style }, motionRef) => (
+                  <div
+                    ref={motionRef}
+                    className={classnames(
+                      `${prefixCls}-item-content`,
+                      motionClassName,
+                      classNames.itemContent,
+                    )}
+                    style={style}
+                  >
+                    <div className={`${prefixCls}-item-content-box`}>{content}</div>
+                  </div>
+                )}
+              </CSSMotion>
             )}
             {/* Footer */}
             {footer && (
