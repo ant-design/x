@@ -16,4 +16,10 @@ export default defineConfig({
       chrome: 80,
     },
   },
+  umd: {
+    entry: 'components/index.ts',
+    name: 'antdx',
+    output: 'dist/',
+    sourcemap: true,
+  },
 });
