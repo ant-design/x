@@ -21,8 +21,8 @@
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "noImplicitAny": true,
-    "target": "es6",
-    "lib": ["dom", "es2017"],
+    "target": "es2020",
+    "lib": ["dom", "es2020"],
     "skipLibCheck": true,
     "stripInternal": true,
     "resolvePackageJsonExports": true
