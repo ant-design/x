@@ -33,16 +33,16 @@ function baseText(doInject: boolean, component: string, options: Options = {}) {
   );
   files.forEach((file) => {
     // to compatible windows path
-    file = file.split(path.sep).join('/');
+    const mergedFile = file.split(path.sep).join('/');
     const testMethod =
       options.skip === true ||
-      (Array.isArray(options.skip) && options.skip.some((c) => file.includes(c)))
+      (Array.isArray(options.skip) && options.skip.some((c) => mergedFile.includes(c)))
         ? test.skip
         : test;
 
     // function doTest(name: string, openTrigger = false) {
     testMethod(
-      doInject ? `renders ${file} extend context correctly` : `renders ${file} correctly`,
+      doInject ? `renders ${mergedFile} extend context correctly` : `renders ${mergedFile} correctly`,
       () => {
         resetWarned();
 
@@ -51,7 +51,7 @@ function baseText(doInject: boolean, component: string, options: Options = {}) {
         Date.now = jest.fn(() => new Date('2016-11-22').getTime());
         jest.useFakeTimers().setSystemTime(new Date('2016-11-22'));
 
-        let Demo = require(`../../${file}`).default; // eslint-disable-line global-require
+        let Demo = require(`../../${mergedFile}`).default; // eslint-disable-line global-require
         // Inject Trigger status unless skipped
         Demo = typeof Demo === 'function' ? <Demo /> : Demo;
         if (doInject) {

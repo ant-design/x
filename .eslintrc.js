@@ -1,6 +1,6 @@
 module.exports = {
   extends: [require.resolve('@umijs/fabric/dist/eslint')],
-  ignorePatterns: ['.eslintrc.js', 'scripts/'],
+  ignorePatterns: ['.eslintrc.js', 'scripts/', 'typings/'],
   env: {
     browser: true,
     node: true,
