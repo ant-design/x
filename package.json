@@ -119,6 +119,7 @@
     "@babel/runtime": "^7.24.8",
     "@ctrl/tinycolor": "^4.1.0",
     "classnames": "^2.5.1",
+    "rc-motion": "^2.9.2",
     "rc-util": "^5.43.0"
   },
   "devDependencies": {

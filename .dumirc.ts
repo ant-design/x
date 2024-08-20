@@ -19,7 +19,7 @@ export default defineConfig({
   crossorigin: {},
   outputPath: '_site',
   favicons: [
-    'https://gw.alipayobjects.com/zos/rmsportal/rlpTLlbMzTNYuZGGCVYM.png',
+    'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*1SDwSrOnSakAAAAAAAAAAAAADgCCAQ/original',
   ],
   resolve: {
     docDirs: [{ type: 'doc', dir: 'docs' }],
