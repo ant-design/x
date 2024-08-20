@@ -1,6 +1,6 @@
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
-import type { CSSObject } from '@ant-design/cssinjs';
+import { unit, type CSSObject } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genCollapseMotion } from 'antd/es/style/motion';
 
@@ -13,8 +13,17 @@ export interface ThoughtChainToken extends FullToken<'ThoughtChain'> {
 }
 
 export enum THOUGHT_CHAIN_ITEM_STATUS {
+  /**
+   * @desc 等待状态
+   */
   PENDING = 'pending',
+  /**
+   * @desc 成功状态
+   */
   SUCCESS = 'success',
+  /**
+   * @desc 错误状态
+   */
   ERROR = 'error',
 }
 
@@ -32,29 +41,29 @@ const genThoughtChainItemStatusStyle: GenerateThoughtChainItemStyle = (token) =>
 
   const statuses = Object.keys(colors) as Array<keyof typeof colors>;
 
-  const styles: Record<string, CSSObject> = {};
+  return statuses.reduce((acc, status) => {
+    const statusColor = colors[status];
 
-  statuses.forEach((status) => {
     statuses.forEach((nextStatus) => {
       const itemStatusCls = `& ${itemCls}-${status}-${nextStatus}`;
       const lastBeforePseudoStyle =
         status === nextStatus
           ? {}
           : {
-              backgroundColor: 'none',
-              backgroundImage: `linear-gradient(${colors[status]}, ${colors[nextStatus]})`,
+              backgroundColor: 'none !important',
+              backgroundImage: `linear-gradient(${statusColor}, ${colors[nextStatus]})`,
             };
 
-      styles[itemStatusCls] = {
+      acc[itemStatusCls] = {
         [`& ${itemCls}-icon, & > *::before`]: {
-          backgroundColor: colors[status],
+          backgroundColor: `${statusColor} !important`,
         },
         [`& > :last-child::before`]: lastBeforePseudoStyle,
       };
     });
-  });
 
-  return styles;
+    return acc;
+  }, {} as CSSObject);
 };
 
 const genThoughtChainItemBeforePseudoStyle: GenerateThoughtChainItemStyle = (token) => {
@@ -67,6 +76,7 @@ const genThoughtChainItemBeforePseudoStyle: GenerateThoughtChainItemStyle = (tok
     display: 'block',
     position: 'absolute',
     right: 'none',
+    backgroundColor: token.colorTextPlaceholder,
   };
 
   return {
@@ -97,6 +107,12 @@ const genThoughtChainItemBeforePseudoStyle: GenerateThoughtChainItemStyle = (tok
         bottom: `${token.calc(token.paddingXL).mul(-1).equal()} !important`,
       },
     },
+    [`& > :last-child`]: {
+      [`& > :last-child::before`]: {
+        // last item's last before pseudo should be hidden
+        display: 'none',
+      },
+    },
   } as CSSObject;
 };
 
@@ -122,27 +138,38 @@ const genThoughtChainItemStyle: GenerateThoughtChainItemStyle = (token) => {
         height: token.itemHeaderSize,
 
         [`& ${itemCls}-icon`]: {
-          fontSize: token.itemIconFontSize,
-          maxHeight: token.itemHeaderSize,
+          width: token.itemHeaderSize,
           minWidth: token.itemHeaderSize,
+          fontSize: token.itemIconFontSize,
         },
         [`& ${itemCls}-extra`]: {
           flex: 1,
           display: 'flex',
           justifyContent: 'flex-end',
-          minWidth: token.itemHeaderSize,
         },
         [`& ${itemCls}-title`]: {},
-        [`& ${itemCls}-desc`]: {},
+        [`& ${itemCls}-desc`]: {
+          fontSize: token.fontSizeSM,
+        },
       },
       [`& ${itemCls}-content`]: {
         [`& ${itemCls}-content-hidden`]: {
           display: 'none',
         },
-        [`& ${itemCls}-content-box`]: {},
+        [`& ${itemCls}-content-box`]: {
+          padding: token.padding,
+          display: 'inline-block',
+          maxWidth: `calc(100% - ${token.itemHeaderSize})`,
+          borderRadius: token.borderRadiusLG,
+          backgroundColor: token.colorBgContainer,
+          border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorderSecondary}`,
+        },
       },
       [`& ${itemCls}-footer`]: {
-        [`& ${itemCls}-footer-box`]: {},
+        [`& ${itemCls}-footer-box`]: {
+          maxWidth: '100%',
+          display: 'inline-block',
+        },
       },
     },
   };

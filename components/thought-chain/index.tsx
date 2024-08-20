@@ -9,7 +9,9 @@ import pickAttrs from 'rc-util/lib/pickAttrs';
 
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import useConfigContext from '../config-provider/useConfigContext';
-import useStyle, { THOUGHT_CHAIN_ITEM_STATUS } from './style';
+import useStyle from './style';
+
+import type { THOUGHT_CHAIN_ITEM_STATUS } from './style';
 
 interface ThoughtChainItem {
   /**
@@ -138,7 +140,8 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
 
   const prefixCls = getPrefixCls('thought-chain', customizePrefixCls);
 
-  const openMotion: CSSMotionProps = {
+  // ============================ Motion ============================
+  const collapseMotion: CSSMotionProps = {
     ...initCollapseMotion(rootPrefixCls),
     motionAppear: false,
     leavedClassName: `${prefixCls}-content-hidden`,
@@ -151,29 +154,24 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
     [`${prefixCls}-rtl`]: direction === 'rtl',
   });
 
+  // ============================ Render ============================
   return wrapCSSVar(
     <div {...domProps} className={mergedCls}>
       {items?.map((item, index) => {
-        const {
-          key,
-          icon,
-          title,
-          description,
-          extra,
-          status = THOUGHT_CHAIN_ITEM_STATUS.PENDING,
-          content,
-          footer,
-        } = item;
-        const { status: nextItemStatus = THOUGHT_CHAIN_ITEM_STATUS.PENDING } =
-          items[index + 1] || {};
+        const { key, icon, title, description, extra, status, content, footer } = item;
+
+        const nextItemStatus = items[index + 1]?.status || status;
 
         return (
           <div
             key={key}
             className={classnames(
               `${prefixCls}-item`,
-              `${prefixCls}-item-${status}${nextItemStatus ? `-${nextItemStatus}` : ''}`,
-              { [`${prefixCls}-item-collapsible`]: React.isValidElement(content) },
+              {
+                [`${prefixCls}-item-${status}${nextItemStatus ? `-${nextItemStatus}` : ''}`]:
+                  status,
+              },
+              { [`${prefixCls}-item-collapsible`]: !!content },
               classNames.item,
             )}
             style={styles.item}
@@ -185,7 +183,7 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
               onClick={() => {
                 setMergedExpandedKey((pre) => {
                   if (pre?.find((curKey) => curKey === key)) {
-                    return pre?.filter((curKey => curKey !== key));
+                    return pre?.filter((curKey) => curKey !== key);
                   }
                   return [...(pre || []), key];
                 });
@@ -194,9 +192,9 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
               <Avatar icon={icon || index + 1} className={`${prefixCls}-item-icon`} />
               {title && (
                 <Typography.Text
-                  className={`${prefixCls}-item-title`}
                   strong
-                  ellipsis={{ tooltip: true }}
+                  ellipsis
+                  className={`${prefixCls}-item-title`}
                 >
                   {title}
                 </Typography.Text>
@@ -204,8 +202,8 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
               {description && (
                 <Typography.Text
                   className={`${prefixCls}-item-desc`}
+                  ellipsis
                   type="secondary"
-                  ellipsis={{ tooltip: true }}
                 >
                   {description}
                 </Typography.Text>
@@ -215,7 +213,7 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
             {/* Content */}
             {content && (
               <CSSMotion
-                {...openMotion}
+                {...collapseMotion}
                 visible={!!mergedExpandedKey?.find((curKey) => curKey === key)}
               >
                 {({ className: motionClassName, style }, motionRef) => (
