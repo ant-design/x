@@ -67,7 +67,7 @@ jobs:
 
     needs: setup
   
-  build:
+  compile:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -85,8 +85,8 @@ jobs:
           path: node_modules
           key: node_modules-${{ hashFiles('**/package-temp-dir/package-lock.json') }}
 
-      - name: build
-        run: npm run build
+      - name: compile
+        run: npm run compile
 
       - name: dekko
         run: npm run test:dekko
