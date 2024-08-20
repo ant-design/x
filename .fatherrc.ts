@@ -21,5 +21,11 @@ export default defineConfig({
     name: 'antdx',
     output: 'dist/',
     sourcemap: true,
+    externals: {
+      react: 'React',
+      'react-dom': 'ReactDOM',
+      '@ant-design/cssinjs': 'antdCssinjs',
+      antd: 'antd',
+    },
   },
 });
