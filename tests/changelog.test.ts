@@ -1,4 +1,4 @@
-/* eslint-disable import/no-dynamic-require, global-require */
+/* eslint-disable global-require */
 import path from 'path';
 
 const testDist = process.env.LIB_DIR === 'dist' || process.env.CHANGELOG_TEST;

@@ -51,7 +51,7 @@ function baseText(doInject: boolean, component: string, options: Options = {}) {
         Date.now = jest.fn(() => new Date('2016-11-22').getTime());
         jest.useFakeTimers().setSystemTime(new Date('2016-11-22'));
 
-        let Demo = require(`../../${file}`).default; // eslint-disable-line global-require, import/no-dynamic-require
+        let Demo = require(`../../${file}`).default; // eslint-disable-line global-require
         // Inject Trigger status unless skipped
         Demo = typeof Demo === 'function' ? <Demo /> : Demo;
         if (doInject) {
@@ -117,7 +117,7 @@ export default function demoTest(component: string, options: Options = {}) {
     const kebabName = kebabCase(component);
 
     // Path should exist
-    // eslint-disable-next-line global-require, import/no-dynamic-require
+    // eslint-disable-next-line global-require
     const { default: Component } = require(`../../components/${kebabName}`);
 
     if (options.nameCheckPathOnly !== true) {
