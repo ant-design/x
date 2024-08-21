@@ -97,6 +97,7 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
           enableCollapse,
           collapseMotion,
           expandedKeys,
+          direction,
         }}
       >
         {items?.map((item, index) => (

@@ -1,10 +1,11 @@
 import React from 'react';
 import classnames from 'classnames';
 import { Avatar, Typography } from 'antd';
-import { RightOutlined } from '@ant-design/icons';
+import { RightOutlined, LeftOutlined } from '@ant-design/icons';
 import CSSMotion from 'rc-motion';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 
+import type { ConfigProviderProps, GetProp } from 'antd';
 import type { CSSMotionProps } from 'rc-motion';
 
 export enum THOUGHT_CHAIN_ITEM_STATUS {
@@ -89,6 +90,7 @@ export const ThoughtChainNodeContext = React.createContext<{
   collapseMotion?: CSSMotionProps;
   enableCollapse?: boolean;
   expandedKeys?: string[];
+  direction?: GetProp<ConfigProviderProps, 'direction'>;
 }>(null!);
 
 interface ThoughtChainNodeProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick'> {
@@ -107,7 +109,7 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
   });
 
   // ================= ThoughtChainNodeContext ====================
-  const { prefixCls, collapseMotion, enableCollapse, expandedKeys } =
+  const { prefixCls, collapseMotion, enableCollapse, expandedKeys, direction } =
     React.useContext(ThoughtChainNodeContext);
 
   // ============================ Info ============================
@@ -165,9 +167,19 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
         >
           {/* Title */}
           <Typography.Text strong ellipsis={{ tooltip: true }} className={`${itemCls}-title`}>
-            {enableCollapse && content && (
-              <RightOutlined className={`${itemCls}-collapse-icon`} rotate={contentOpen ? 90 : 0} />
-            )}
+            {enableCollapse &&
+              content &&
+              (direction === 'rtl' ? (
+                <LeftOutlined
+                  className={`${itemCls}-collapse-icon`}
+                  rotate={contentOpen ? -90 : 0}
+                />
+              ) : (
+                <RightOutlined
+                  className={`${itemCls}-collapse-icon`}
+                  rotate={contentOpen ? 90 : 0}
+                />
+              ))}
             {title}
           </Typography.Text>
           {/* Description */}

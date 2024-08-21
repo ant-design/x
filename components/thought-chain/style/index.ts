@@ -175,8 +175,7 @@ const genThoughtChainItemStyle: GenerateThoughtChainItemStyle = (token) => {
 };
 
 const genThoughtChainStyle: GenerateStyle<ThoughtChainToken> = (token) => {
-  const { componentCls, calc } = token;
-  const itemCls = `${componentCls}-item`;
+  const { componentCls } = token;
 
   return {
     [componentCls]: {
@@ -191,19 +190,6 @@ const genThoughtChainStyle: GenerateStyle<ThoughtChainToken> = (token) => {
 
       [`&${componentCls}-rtl`]: {
         direction: 'rtl',
-
-        [`& ${itemCls}`]: {
-          [`& ${itemCls}-header, & ${itemCls}-content`]: {
-            '&::before': {
-              insetInlineEnd: calc(token.itemHeaderSize).div(2).equal(),
-              insetInlineStart: 'none',
-            },
-          },
-          [`& ${itemCls}-footer::before`]: {
-            insetInlineEnd: calc(token.itemHeaderSize).div(-2).equal(),
-            insetInlineStart: 'none',
-          },
-        },
       },
     },
   };
