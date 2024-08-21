@@ -1,8 +1,10 @@
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
+import { genCollapseMotion } from '../../style/motion';
+import { THOUGHT_CHAIN_ITEM_STATUS } from '../Item';
+
 import { unit, type CSSObject } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
-import { genCollapseMotion } from 'antd/es/style/motion';
 
 export interface ComponentToken {
   itemHeaderSize: number;
@@ -10,21 +12,6 @@ export interface ComponentToken {
 
 export interface ThoughtChainToken extends FullToken<'ThoughtChain'> {
   itemIconFontSize: number;
-}
-
-export enum THOUGHT_CHAIN_ITEM_STATUS {
-  /**
-   * @desc 等待状态
-   */
-  PENDING = 'pending',
-  /**
-   * @desc 成功状态
-   */
-  SUCCESS = 'success',
-  /**
-   * @desc 错误状态
-   */
-  ERROR = 'error',
 }
 
 type GenerateThoughtChainItemStyle = GenerateStyle<ThoughtChainToken, CSSObject>;
@@ -58,7 +45,7 @@ const genThoughtChainItemStatusStyle: GenerateThoughtChainItemStyle = (token) =>
         [`& ${itemCls}-icon, & > *::before`]: {
           backgroundColor: `${statusColor} !important`,
         },
-        [`& > :last-child::before`]: lastBeforePseudoStyle,
+        '& > :last-child::before': lastBeforePseudoStyle,
       };
     });
 

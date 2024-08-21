@@ -34,7 +34,7 @@ const items: ThoughtChainProps['items'] = [
 ];
 
 export default () => (
-  <Card style={{width: 500 }}>
+  <Card style={{ width: 500 }}>
     <ThoughtChain items={items} />
   </Card>
 );

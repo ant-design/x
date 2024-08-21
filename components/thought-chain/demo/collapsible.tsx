@@ -46,6 +46,6 @@ const items: ThoughtChainProps['items'] = [
 
 export default () => (
   <Card style={{ width: 500 }}>
-    <ThoughtChain items={items} />
+    <ThoughtChain items={items} collapsible />
   </Card>
 );
