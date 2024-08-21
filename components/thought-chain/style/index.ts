@@ -62,7 +62,7 @@ const genThoughtChainItemBeforePseudoStyle: GenerateThoughtChainItemStyle = (tok
     width: calc(token.lineWidth).mul(2).equal(),
     display: 'block',
     position: 'absolute',
-    right: 'none',
+    insetInlineEnd: 'none',
     backgroundColor: token.colorTextPlaceholder,
   };
 
@@ -76,11 +76,11 @@ const genThoughtChainItemBeforePseudoStyle: GenerateThoughtChainItemStyle = (tok
         position: 'relative',
       },
       [`& ${itemCls}-header, & ${itemCls}-content`]: {
-        marginLeft: calc(token.itemHeaderSize).mul(-1).equal(),
+        marginInlineStart: calc(token.itemHeaderSize).mul(-1).equal(),
 
         '&::before': {
           ...beforePseudoBaseStyle,
-          left: calc(token.itemHeaderSize).div(2).sub(token.lineWidth).equal(),
+          insetInlineStart: calc(token.itemHeaderSize).div(2).sub(token.lineWidth).equal(),
           // flex-gap of the ThoughtChainItem
           bottom: token.calc(token.padding).mul(-1).equal(),
         },
@@ -93,7 +93,7 @@ const genThoughtChainItemBeforePseudoStyle: GenerateThoughtChainItemStyle = (tok
       },
       [`& ${itemCls}-footer::before`]: {
         ...beforePseudoBaseStyle,
-        left: calc(token.itemHeaderSize).div(-2).sub(token.lineWidth).equal(),
+        insetInlineStart: calc(token.itemHeaderSize).div(-2).sub(token.lineWidth).equal(),
         top: 0,
       },
       '& > :last-child::before': {
@@ -143,7 +143,7 @@ const genThoughtChainItemStyle: GenerateThoughtChainItemStyle = (token) => {
             maxHeight: token.itemHeaderSize,
 
             [`& ${itemCls}-collapse-icon`]: {
-              marginRight: token.marginXS,
+              marginInlineEnd: token.marginXS,
             },
           },
           [`& ${itemCls}-desc`]: {
@@ -183,7 +183,7 @@ const genThoughtChainStyle: GenerateStyle<ThoughtChainToken> = (token) => {
       display: 'flex',
       flexDirection: 'column',
       gap: token.marginXL,
-      paddingLeft: token.itemHeaderSize,
+      paddingInlineStart: token.itemHeaderSize,
 
       ...genThoughtChainItemStyle(token),
       ...genThoughtChainItemStatusStyle(token),
@@ -191,27 +191,17 @@ const genThoughtChainStyle: GenerateStyle<ThoughtChainToken> = (token) => {
 
       [`&${componentCls}-rtl`]: {
         direction: 'rtl',
-        paddingRight: token.itemHeaderSize,
 
         [`& ${itemCls}`]: {
           [`& ${itemCls}-header, & ${itemCls}-content`]: {
-            marginRight: calc(token.itemHeaderSize).mul(-1).equal(),
-
             '&::before': {
-              right: calc(token.itemHeaderSize).div(2).equal(),
-              left: 'none',
+              insetInlineEnd: calc(token.itemHeaderSize).div(2).equal(),
+              insetInlineStart: 'none',
             },
           },
           [`& ${itemCls}-footer::before`]: {
-            right: calc(token.itemHeaderSize).div(-2).equal(),
-            left: 'none',
-          },
-
-          [`& ${itemCls}-title`]: {
-
-            [`& ${itemCls}-collapse-icon`]: {
-              marginLeft: token.marginXS,
-            },
+            insetInlineEnd: calc(token.itemHeaderSize).div(-2).equal(),
+            insetInlineStart: 'none',
           },
         },
       },
