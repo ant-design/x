@@ -23,7 +23,6 @@ demo:
 <code src="./demo/customization.tsx" background="grey">Item Customization</code>
 <code src="./demo/nested.tsx" background="grey">Nested use</code>
 
-
 ## API
 
 Common props ref：[Common props](/docs/react/common-props)

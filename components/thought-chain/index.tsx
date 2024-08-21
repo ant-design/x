@@ -116,7 +116,6 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
   );
 };
 
-
 if (process.env.NODE_ENV !== 'production') {
   ThoughtChain.displayName = 'ThoughtChain';
 }

@@ -100,9 +100,6 @@ const genThoughtChainItemBeforePseudoStyle: GenerateThoughtChainItemStyle = (tok
         // flex-gap of the ThoughtChain
         bottom: `${token.calc(token.paddingXL).mul(-1).equal()} !important`,
       },
-      // '& > :last-child': {
-      //   marginBottom: token.marginXL,
-      // },
     },
   } as CSSObject;
 };
