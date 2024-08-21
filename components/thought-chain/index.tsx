@@ -3,9 +3,10 @@ import classnames from 'classnames';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 
 import useCollapsible from './hooks/useCollapsible';
-import ThoughtChainNode, { ThoughtChainNodeContext } from './Item';
 import useConfigContext from '../config-provider/useConfigContext';
 import useStyle from './style';
+
+import ThoughtChainNode, { ThoughtChainNodeContext } from './Item';
 
 import type { ThoughtChainItem } from './Item';
 import type { Collapsible } from './hooks/useCollapsible';

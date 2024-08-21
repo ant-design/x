@@ -4,8 +4,6 @@ import type { ThoughtChainProps, ThoughtChainItem } from '@ant-design/x';
 
 import {
   CheckCircleOutlined,
-  CloseCircleOutlined,
-  HourglassOutlined,
   MoreOutlined,
 } from '@ant-design/icons';
 

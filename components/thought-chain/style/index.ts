@@ -206,6 +206,13 @@ const genThoughtChainStyle: GenerateStyle<ThoughtChainToken> = (token) => {
             right: calc(token.itemHeaderSize).div(-2).equal(),
             left: 'none',
           },
+
+          [`& ${itemCls}-title`]: {
+
+            [`& ${itemCls}-collapse-icon`]: {
+              marginLeft: token.marginXS,
+            },
+          },
         },
       },
     },
