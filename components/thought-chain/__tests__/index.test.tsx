@@ -73,7 +73,9 @@ describe('ThoughtChain Component', () => {
       );
     };
     const { container } = render(<App />);
-    const element = container.querySelectorAll<HTMLDivElement>('.ant-thought-chain-item-header-box')[0];
+    const element = container.querySelectorAll<HTMLDivElement>(
+      '.ant-thought-chain-item-header-box',
+    )[0];
     fireEvent.click(element as Element);
     expect(onExpand).toHaveBeenCalledWith(['test1']);
     fireEvent.click(element as Element);

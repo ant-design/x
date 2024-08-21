@@ -2,10 +2,7 @@ import React from 'react';
 import { ThoughtChain } from '@ant-design/x';
 import type { ThoughtChainProps, ThoughtChainItem } from '@ant-design/x';
 
-import {
-  CheckCircleOutlined,
-  MoreOutlined,
-} from '@ant-design/icons';
+import { CheckCircleOutlined, MoreOutlined } from '@ant-design/icons';
 
 import { Card, Typography, Button } from 'antd';
 
