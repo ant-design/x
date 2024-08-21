@@ -7,54 +7,52 @@ import { MoreOutlined } from '@ant-design/icons';
 
 const items: ThoughtChainProps['items'] = [
   {
-    key: 'ThoughtChainItem1',
-    title: 'Thought Chain Item Title',
+    title: '1 - Thought Chain Item',
     description: 'description',
     extra: <Button type="text" icon={<MoreOutlined />} />,
+    footer: (
+      <Button block type="text">
+        1 - Thought Chain Item Footer
+      </Button>
+    ),
     content: (
       <ThoughtChain
         items={[
           {
-            key: 'ThoughtChainItem 1-1',
-            title: 'Thought Chain Item Title',
+            title: '1-1 Thought Chain Item',
             description: 'description',
+            extra: <Button type="text" icon={<MoreOutlined />} />,
           },
           {
-            key: 'ThoughtChainItem 1-2',
-            title: 'Thought Chain Item Title',
+            title: '1-2 Thought Chain Item',
             description: 'description',
-          },
-          {
-            key: 'ThoughtChainItem 1-3',
-            title: 'Thought Chain Item Title',
-            description: 'description',
+            extra: <Button type="text" icon={<MoreOutlined />} />,
           },
         ]}
       />
     ),
   },
   {
-    key: 'ThoughtChainItem2',
-    title: 'Thought Chain Item Title',
+    title: '2 - Thought Chain Item',
     description: 'description',
     extra: <Button type="text" icon={<MoreOutlined />} />,
+    footer: (
+      <Button block type="text">
+        2 - Thought Chain Item Footer
+      </Button>
+    ),
     content: (
       <ThoughtChain
         items={[
           {
-            key: 'ThoughtChainItem 2-1',
-            title: 'Thought Chain Item Title',
+            title: '2-1 Thought Chain Item',
             description: 'description',
+            extra: <Button type="text" icon={<MoreOutlined />} />,
           },
           {
-            key: 'ThoughtChainItem 2-2',
-            title: 'Thought Chain Item Title',
+            title: '2-2 Thought Chain Item',
             description: 'description',
-          },
-          {
-            key: 'ThoughtChainItem 2-3',
-            title: 'Thought Chain Item Title',
-            description: 'description',
+            extra: <Button type="text" icon={<MoreOutlined />} />,
           },
         ]}
       />
@@ -63,7 +61,7 @@ const items: ThoughtChainProps['items'] = [
 ];
 
 export default () => (
-  <Card style={{ width: 500 }}>
+  <Card style={{ width: '100%' }}>
     <ThoughtChain items={items} collapsible />
   </Card>
 );

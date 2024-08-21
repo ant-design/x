@@ -19,8 +19,8 @@ demo:
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" background="grey">基本</code>
-<code src="./demo/collapsible.tsx" background="grey">可折叠的</code>
 <code src="./demo/status.tsx" background="grey">节点状态</code>
+<code src="./demo/collapsible.tsx" background="grey">可折叠的</code>
 <code src="./demo/customization.tsx" background="grey">客制化</code>
 <code src="./demo/nested.tsx" background="grey">嵌套使用</code>
 

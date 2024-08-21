@@ -67,6 +67,10 @@ const genThoughtChainItemBeforePseudoStyle: GenerateThoughtChainItemStyle = (tok
   };
 
   return {
+    '& > :last-child > :last-child::before': {
+      // last item's last before pseudo should be hidden
+      display: 'none !important',
+    },
     [`& > ${itemCls}`]: {
       [`& ${itemCls}-header, & ${itemCls}-content, & ${itemCls}-footer`]: {
         position: 'relative',
@@ -77,28 +81,28 @@ const genThoughtChainItemBeforePseudoStyle: GenerateThoughtChainItemStyle = (tok
         '&::before': {
           ...beforePseudoBaseStyle,
           left: calc(token.itemHeaderSize).div(2).sub(token.lineWidth).equal(),
-          top: '100%',
           // flex-gap of the ThoughtChainItem
-          bottom: calc(token.padding).mul(-1).equal(),
+          bottom: token.calc(token.padding).mul(-1).equal(),
         },
       },
-      [`& ${itemCls}-footer`]: {
-        '&::before': {
-          ...beforePseudoBaseStyle,
-          left: calc(token.itemHeaderSize).div(-2).sub(token.lineWidth).equal(),
-          top: 0,
-        },
+      [`& ${itemCls}-header::before`]: {
+        top: token.itemHeaderSize,
       },
-      [`& > :last-child::before`]: {
+      [`& ${itemCls}-content::before`]: {
+        top: '100%',
+      },
+      [`& ${itemCls}-footer::before`]: {
+        ...beforePseudoBaseStyle,
+        left: calc(token.itemHeaderSize).div(-2).sub(token.lineWidth).equal(),
+        top: 0,
+      },
+      '& > :last-child::before': {
         // flex-gap of the ThoughtChain
         bottom: `${token.calc(token.paddingXL).mul(-1).equal()} !important`,
       },
-    },
-    [`& > :last-child`]: {
-      [`& > :last-child::before`]: {
-        // last item's last before pseudo should be hidden
-        display: 'none',
-      },
+      // '& > :last-child': {
+      //   marginBottom: token.marginXL,
+      // },
     },
   } as CSSObject;
 };
@@ -113,30 +117,41 @@ const genThoughtChainItemStyle: GenerateThoughtChainItemStyle = (token) => {
       gap: token.padding,
       flexDirection: 'column',
 
-      [`&${itemCls}-collapsible`]: {
-        [`& ${itemCls}-header`]: {
-          cursor: 'pointer',
-        },
+      [`& ${itemCls}-collapsible`]: {
+        cursor: 'pointer',
       },
       [`& ${itemCls}-header`]: {
         display: 'flex',
         gap: token.padding,
-        alignItems: 'center',
-        height: token.itemHeaderSize,
+        alignItems: 'flex-start',
 
         [`& ${itemCls}-icon`]: {
-          width: token.itemHeaderSize,
+          maxHeight: token.itemHeaderSize,
           minWidth: token.itemHeaderSize,
           fontSize: token.itemIconFontSize,
         },
         [`& ${itemCls}-extra`]: {
+          height: token.itemHeaderSize,
+          maxHeight: token.itemHeaderSize,
+        },
+        [`& ${itemCls}-header-box`]: {
           flex: 1,
           display: 'flex',
-          justifyContent: 'flex-end',
-        },
-        [`& ${itemCls}-title`]: {},
-        [`& ${itemCls}-desc`]: {
-          fontSize: token.fontSizeSM,
+          flexDirection: 'column',
+          overflow: 'hidden',
+
+          [`& ${itemCls}-title`]: {
+            height: token.itemHeaderSize,
+            lineHeight: token.itemHeaderSize,
+            maxHeight: token.itemHeaderSize,
+
+            [`& ${itemCls}-collapse-icon`]: {
+              marginRight: token.marginXS,
+            },
+          },
+          [`& ${itemCls}-desc`]: {
+            fontSize: token.fontSizeSM,
+          },
         },
       },
       [`& ${itemCls}-content`]: {
@@ -170,7 +185,7 @@ const genThoughtChainStyle: GenerateStyle<ThoughtChainToken> = (token) => {
     [componentCls]: {
       display: 'flex',
       flexDirection: 'column',
-      gap: token.paddingXL,
+      gap: token.marginXL,
       paddingLeft: token.itemHeaderSize,
 
       ...genThoughtChainItemStyle(token),
@@ -190,11 +205,9 @@ const genThoughtChainStyle: GenerateStyle<ThoughtChainToken> = (token) => {
               left: 'none',
             },
           },
-          [`& ${itemCls}-footer`]: {
-            '&::before': {
-              right: calc(token.itemHeaderSize).div(-2).equal(),
-              left: 'none',
-            },
+          [`& ${itemCls}-footer::before`]: {
+            right: calc(token.itemHeaderSize).div(-2).equal(),
+            left: 'none',
           },
         },
       },

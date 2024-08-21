@@ -7,26 +7,22 @@ import { MoreOutlined } from '@ant-design/icons';
 
 const items: ThoughtChainProps['items'] = [
   {
-    key: 'ThoughtChainItem1',
     title: 'Thought Chain Item Title',
     description: 'description',
     extra: <Button type="text" icon={<MoreOutlined />} />,
   },
   {
-    key: 'ThoughtChainItem2',
     title: 'Thought Chain Item Title',
     description: 'description',
     extra: <Button type="text" icon={<MoreOutlined />} />,
   },
   {
-    key: 'ThoughtChainItem3',
     title: 'Thought Chain Item Title',
     description: 'description',
     extra: <Button type="text" icon={<MoreOutlined />} />,
   },
 
   {
-    key: 'ThoughtChainItem4',
     title: 'Thought Chain Item Title',
     description: 'description',
     extra: <Button type="text" icon={<MoreOutlined />} />,

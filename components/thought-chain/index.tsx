@@ -95,6 +95,7 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
           prefixCls,
           enableCollapse,
           collapseMotion,
+          expandedKeys,
         }}
       >
         {items?.map((item, index) => (
@@ -106,7 +107,6 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
               ...item,
               icon: item.icon || index + 1,
             }}
-            open={expandedKeys.some((key) => key === item.key)}
             onClick={onItemExpand}
             nextStatus={items[index + 1]?.status || item.status}
           />
@@ -115,5 +115,12 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
     </div>,
   );
 };
+
+
+if (process.env.NODE_ENV !== 'production') {
+  ThoughtChain.displayName = 'ThoughtChain';
+}
+
+export type { ThoughtChainItem };
 
 export default ThoughtChain;
