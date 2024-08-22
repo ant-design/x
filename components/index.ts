@@ -6,3 +6,5 @@ export type { ConversationsProps } from './conversations';
 export { default as Prompts } from './prompts';
 export type { PromptsProps, PromptProps } from './prompts';
 export { default as version } from './version';
+export { default as Suggestions } from './suggestion';
+export type { SuggestionsProps, Suggestion } from './suggestion';
