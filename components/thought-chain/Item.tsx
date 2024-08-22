@@ -166,7 +166,13 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
           })}
         >
           {/* Title */}
-          <Typography.Text strong ellipsis={{ tooltip: true }} className={`${itemCls}-title`}>
+          <Typography.Text
+            strong
+            ellipsis={{
+              tooltip: { placement: direction === 'rtl' ? 'topRight' : 'topLeft', title },
+            }}
+            className={`${itemCls}-title`}
+          >
             {enableCollapse &&
               content &&
               (direction === 'rtl' ? (
@@ -186,7 +192,12 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
           {description && (
             <Typography.Text
               className={`${itemCls}-desc`}
-              ellipsis={{ tooltip: true }}
+              ellipsis={{
+                tooltip: {
+                  placement: direction === 'rtl' ? 'topRight' : 'topLeft',
+                  title: description,
+                },
+              }}
               type="secondary"
             >
               {description}
