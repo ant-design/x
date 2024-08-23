@@ -19,8 +19,12 @@ export default defineConfig({
   umd: {
     entry: 'components/index.ts',
     name: 'antdx',
-    output: 'dist/',
+    output: {
+      path: 'dist/',
+      filename: 'antdx',
+    },
     sourcemap: true,
+    generateUnminified: true,
     externals: {
       react: 'React',
       'react-dom': 'ReactDOM',
