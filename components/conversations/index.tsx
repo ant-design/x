@@ -6,7 +6,7 @@ import ConversationsItem, { type ConversationsItemProps } from './Item';
 import GroupTitle, { GroupTitleContext } from './GroupTitle';
 
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
-import useConfigContext from '../config-provider/useConfigContext';
+import { useConfigContext } from '../config-provider';
 import useGroupable from './hooks/useGroupable';
 
 import useStyle from './style';

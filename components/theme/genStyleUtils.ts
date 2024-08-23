@@ -1,7 +1,7 @@
 import { genStyleUtils } from '@ant-design/cssinjs-utils';
 
 import useAntdToken from 'antd/lib/theme/useToken';
-import useConfigContext from '../config-provider/useConfigContext';
+import { useConfigContext } from '../config-provider';
 
 import type { AliasToken, SeedToken } from 'antd/es/theme/internal';
 import type { ComponentTokenMap } from './components';
