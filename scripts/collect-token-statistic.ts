@@ -5,10 +5,9 @@ import cliProgress from 'cli-progress';
 import fs from 'fs-extra';
 import ReactDOMServer from 'react-dom/server';
 
-import seedToken from 'antd/lib/theme/themes/seed';
+import { theme } from 'antd';
+import { statistic } from '@ant-design/cssinjs-utils';
 import { generateCssinjs, styleFiles } from './generate-cssinjs';
-
-import { DesignTokenContext, statistic } from 'antd/lib/theme/internal';
 
 console.log(`🪄 Collecting token statistics...`);
 
@@ -30,10 +29,10 @@ bar.start(styleFiles.length, 0);
     render(Component: any) {
       ReactDOMServer.renderToString(React.createElement(Component));
       // Render wireframe
-      const wireframeToken = { ...seedToken, wireframe: true };
+      const wireframeToken = { ...theme.defaultConfig.token, wireframe: true };
       ReactDOMServer.renderToString(
         React.createElement(
-          DesignTokenContext.Provider,
+          theme.DesignTokenContext.Provider,
           {
             value: {
               token: wireframeToken,

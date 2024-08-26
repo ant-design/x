@@ -179,7 +179,7 @@
     "@typescript-eslint/parser": "^7.8.0",
     "adm-zip": "^0.5.12",
     "ali-oss": "^6.20.0",
-    "antd": "^5.18.0",
+    "antd": "^5.20.3",
     "antd-style": "^3.6.2",
     "antd-token-previewer": "^2.0.8",
     "axios": "^1.6.8",

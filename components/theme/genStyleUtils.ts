@@ -1,9 +1,9 @@
 import { genStyleUtils } from '@ant-design/cssinjs-utils';
 
-import useAntdToken from 'antd/lib/theme/useToken';
+import useToken from './useToken';
 import useConfigContext from '../config-provider/useConfigContext';
 
-import type { AliasToken, SeedToken } from 'antd/es/theme/internal';
+import type { AliasToken, SeedToken } from './cssinjs-utils';
 import type { ComponentTokenMap } from './components';
 
 export const { genStyleHooks, genComponentStyleHook, genSubStyleComponent } = genStyleUtils<
@@ -18,10 +18,7 @@ export const { genStyleHooks, genComponentStyleHook, genSubStyleComponent } = ge
       rootPrefixCls: getPrefixCls(),
     };
   },
-  useToken: () => {
-    const [theme, token, hashId, realToken, cssVar] = useAntdToken();
-    return { theme, token, hashId, realToken, cssVar };
-  },
+  useToken,
   useCSP: () => {
     const { csp } = useConfigContext();
     return csp ?? {};
