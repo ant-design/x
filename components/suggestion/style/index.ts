@@ -12,7 +12,16 @@ interface SuggestionToken extends FullToken<'Suggestion'> {
 }
 
 const genSuggestionStyle: GenerateStyle<SuggestionToken> = (token) => {
-  const { componentCls, paddingXS, paddingXXS, boxShadowSecondary } = token;
+  const {
+    componentCls,
+    paddingXS,
+    paddingXXS,
+    boxShadowSecondary,
+    borderRadius,
+    colorInfoBg,
+    fontSize,
+    controlHeight,
+  } = token;
   return {
     [componentCls]: {
       position: 'relative',
@@ -22,22 +31,30 @@ const genSuggestionStyle: GenerateStyle<SuggestionToken> = (token) => {
       [`&${componentCls}-rtl`]: {
         direction: 'rtl',
       },
+    },
 
-      [`& ${componentCls}-actions-list`]: {
-        position: 'absolute',
-        zIndex: 1,
-        insetInlineEnd: paddingXXS,
-        bottom: `${paddingXS - paddingXXS}px`,
-      },
+    [`${componentCls}-input`]: {
+      width: '100%',
+    },
 
-      [`& ${componentCls}-actions-btn`]: {},
-      [`& ${componentCls}-input`]: {
-        position: 'sticky',
-        fontSize: token.fontSize,
-        bottom: 0,
-        boxShadow: boxShadowSecondary,
-        paddingTop: paddingXS,
-        paddingBottom: paddingXS,
+    [`${componentCls}-container`]: {
+      [`${componentCls}-item`]: {
+        borderRadius,
+        cursor: 'pointer',
+        padding: paddingXS,
+        background: 'transparent',
+
+        [`&-active`]: {
+          background: colorInfoBg,
+        },
+
+        [`&-item-icon`]: {
+          width: controlHeight,
+        },
+        [`&-item-label`]: {
+          width: controlHeight,
+          fontSize,
+        },
       },
     },
   };

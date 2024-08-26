@@ -1,14 +1,15 @@
-import { AutoComplete, AutoCompleteProps, Input } from 'antd';
+import { Input, Popover } from 'antd';
 import classnames from 'classnames';
-
 import useStyle from './style';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import useConfigContext from '../config-provider/useConfigContext';
+import type { TooltipProps, InputProps } from 'antd';
 
 export type Suggestion = {
   id: string;
   label: React.ReactNode;
   icon?: React.ReactNode;
+  className?: string;
   onClick?: () => void;
   value: string;
   extra?: React.ReactNode;
@@ -26,24 +27,24 @@ export type SuggestionsProps = {
   style?: React.CSSProperties;
 };
 
-const { Option } = AutoComplete;
-
-const Suggestions: React.FC<SuggestionsProps & Pick<AutoCompleteProps, 'placement'>> = (props) => {
+const Suggestions: React.FC<
+  SuggestionsProps & Pick<InputProps, 'placeholder'> & Pick<TooltipProps, 'placement'>
+> = (props) => {
   const {
     prefixCls: customizePrefixCls,
     className,
     rootClassName,
     suggestions,
     placement = 'topLeft',
+    placeholder,
     triggerCharacter = '/',
     style,
     children,
-    ...rest
   } = props;
 
   // ============================= MISC =============================
   const { direction, getPrefixCls } = useConfigContext();
-  const prefixCls = getPrefixCls('Suggestion', customizePrefixCls);
+  const prefixCls = getPrefixCls('suggestions', customizePrefixCls);
 
   // ============================ Styles ============================
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
@@ -54,6 +55,8 @@ const Suggestions: React.FC<SuggestionsProps & Pick<AutoCompleteProps, 'placemen
   const [inputValue, setInputValue] = useState('');
   const [options, setOptions] = useState<Suggestion[]>([]);
   const [visible, setVisible] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
+  const inputRef = useRef<any>(null);
 
   const handleSearch = (searchText: string) => {
     if (searchText.startsWith(triggerCharacter)) {
@@ -68,9 +71,8 @@ const Suggestions: React.FC<SuggestionsProps & Pick<AutoCompleteProps, 'placemen
     setInputValue(searchText);
   };
 
-  const handleSelect = (value: string, option: any) => {
+  const handleSelect = (value: string) => {
     const selectedSuggestion = suggestions.find((item) => item.value === value);
-    console.log("selectedSuggestion",selectedSuggestion);
 
     if (selectedSuggestion && selectedSuggestion.onClick) {
       selectedSuggestion.onClick();
@@ -79,35 +81,75 @@ const Suggestions: React.FC<SuggestionsProps & Pick<AutoCompleteProps, 'placemen
     setVisible(false);
   };
 
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'ArrowDown') {
+        setActiveIndex((prevIndex) => (prevIndex + 1) % options.length);
+      } else if (event.key === 'ArrowUp') {
+        setActiveIndex((prevIndex) => (prevIndex - 1 + options.length) % options.length);
+      } else if (event.key === 'Enter' && activeIndex >= 0) {
+        handleSelect(options[activeIndex].value);
+      }
+    },
+    [options, activeIndex],
+  );
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.oninput = (e: any) => handleSearch(e.target.value);
+      inputRef.current.onkeydown = handleKeyDown;
+    }
+  }, [children, handleKeyDown]);
+
   // ============================ Render ============================
+  const content = (
+    <div className={classnames(`${prefixCls}-container`, hashId)}>
+      {options.map((item, index) => (
+        <div
+          key={item.id}
+          onMouseDown={() => handleSelect(item.value)}
+          onMouseEnter={() => setActiveIndex(index)}
+          className={classnames(
+            `${prefixCls}-item`,
+            item.className,
+            index === activeIndex && `${prefixCls}-item-active`,
+          )}
+        >
+          {item.icon && (
+            <div className={classnames(`${prefixCls}-suggestion-icon`)}>{item.icon}</div>
+          )}
+          <div className={classnames(`${prefixCls}-suggestion-label`)}>{item.label}</div>
+          {item.extra && (
+            <div className={classnames(`${prefixCls}-suggestion-extra`)}>{item.extra}</div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+
   return wrapCSSVar(
     <div className={mergedCls} style={style}>
-      <AutoComplete
-        value={inputValue}
+      <Popover
+        content={content}
         // open={visible}
-        open={true}
+        open
         placement={placement}
-        options={options.map((item) => ({
-          value: item.value,
-          label: (
-            <div>
-              {item.icon && <span>{item.icon}</span>}
-              {item.label}
-              {item.extra && <span>{item.extra}</span>}
-            </div>
-          ),
-        }))}
-        
-        onSearch={handleSearch}
-        onSelect={handleSelect}
+        arrow={false}
+        overlayStyle={{
+          width: inputRef.current?.clientWidth,
+        }}
       >
-        {children || (
-          <Input
-            placeholder="输入 '/' 触发快捷指令"
-            onChange={(e) => handleSearch(e.target.value)}
-          />
-        )}
-      </AutoComplete>
+        <div ref={inputRef} className={classnames(`${prefixCls}-input`)}>
+          {children || (
+            <Input
+              placeholder={placeholder}
+              value={inputValue}
+              onChange={(e) => handleSearch(e.target.value)}
+              onKeyDown={handleKeyDown}
+            />
+          )}
+        </div>
+      </Popover>
     </div>,
   );
 };
