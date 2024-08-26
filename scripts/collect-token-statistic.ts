@@ -32,7 +32,7 @@ bar.start(styleFiles.length, 0);
       const wireframeToken = { ...theme.defaultConfig.token, wireframe: true };
       ReactDOMServer.renderToString(
         React.createElement(
-          theme.DesignTokenContext.Provider,
+          theme._internalContext.Provider,
           {
             value: {
               token: wireframeToken,
