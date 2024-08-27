@@ -21,6 +21,5 @@ $('lib/*')
   .hasFile('index.js')
   .hasFile('index.d.ts');
 
-
 // eslint-disable-next-line no-console
 console.log(chalk.green('✨ `lib` directory is valid.'));
