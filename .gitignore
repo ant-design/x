@@ -41,3 +41,7 @@ package-lock.json
 .node
 _site/
 server/
+
+# Docs templates
+components/version/token.json
+components/version/token-meta.json

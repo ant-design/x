@@ -1,6 +1,6 @@
 import { genStyleUtils } from '@ant-design/cssinjs-utils';
 
-import useToken from './useToken';
+import { useInternalToken } from './useToken';
 import useConfigContext from '../config-provider/useConfigContext';
 
 import type { AliasToken, SeedToken } from './cssinjs-utils';
@@ -18,7 +18,10 @@ export const { genStyleHooks, genComponentStyleHook, genSubStyleComponent } = ge
       rootPrefixCls: getPrefixCls(),
     };
   },
-  useToken,
+  useToken: () => {
+    const [theme, realToken, hashId, token, cssVar] = useInternalToken();
+    return { theme, realToken, hashId, token, cssVar };
+  },
   useCSP: () => {
     const { csp } = useConfigContext();
     return csp ?? {};
