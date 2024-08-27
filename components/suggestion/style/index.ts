@@ -15,17 +15,16 @@ const genSuggestionStyle: GenerateStyle<SuggestionToken> = (token) => {
   const {
     componentCls,
     paddingXS,
-    paddingXXS,
-    boxShadowSecondary,
     borderRadius,
     colorInfoBg,
+    paddingContentHorizontal,
+    fontWeightStrong,
+    fontSizeIcon,
     fontSize,
-    controlHeight,
   } = token;
   return {
     [componentCls]: {
       position: 'relative',
-      display: 'flex',
       width: '100%',
 
       [`&${componentCls}-rtl`]: {
@@ -43,17 +42,26 @@ const genSuggestionStyle: GenerateStyle<SuggestionToken> = (token) => {
         cursor: 'pointer',
         padding: paddingXS,
         background: 'transparent',
+        display: 'flex',
+        gap: paddingContentHorizontal / 2,
+        flexDirection: 'row',
+
+        [`&-icon`]: {
+          width: fontSizeIcon,
+        },
+        [`&-label`]: {
+          flex: 1,
+          fontSize,
+        },
+        [`&-extra`]: {
+          justifyContent: 'flex-end',
+        },
 
         [`&-active`]: {
           background: colorInfoBg,
-        },
-
-        [`&-item-icon`]: {
-          width: controlHeight,
-        },
-        [`&-item-label`]: {
-          width: controlHeight,
-          fontSize,
+          [`${componentCls}-item-label`]: {
+            fontWeight: fontWeightStrong,
+          },
         },
       },
     },

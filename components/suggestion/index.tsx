@@ -4,6 +4,7 @@ import useStyle from './style';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import useConfigContext from '../config-provider/useConfigContext';
 import type { TooltipProps, InputProps } from 'antd';
+import { useMergedState } from 'rc-util';
 
 export type Suggestion = {
   id: string;
@@ -22,6 +23,8 @@ export type SuggestionsProps = {
   children?: React.ReactNode;
   title?: React.ReactNode;
   extra?: React.ReactNode;
+  onChange?: (value: string) => void;
+  value?: string;
   className?: string;
   rootClassName?: string;
   style?: React.CSSProperties;
@@ -36,6 +39,8 @@ const Suggestions: React.FC<
     rootClassName,
     suggestions,
     placement = 'topLeft',
+    value: outValue,
+    onChange: outOnChange,
     placeholder,
     triggerCharacter = '/',
     style,
@@ -52,10 +57,13 @@ const Suggestions: React.FC<
     [`${prefixCls}-rtl`]: direction === 'rtl',
   });
 
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useMergedState('', {
+    value: outValue,
+    onChange: outOnChange,
+  });
   const [options, setOptions] = useState<Suggestion[]>([]);
   const [visible, setVisible] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(-1);
+  const [activeIndex, setActiveIndex] = useState(0);
   const inputRef = useRef<any>(null);
 
   const handleSearch = (searchText: string) => {
@@ -64,7 +72,9 @@ const Suggestions: React.FC<
       const filteredSuggestions = suggestions.filter((item) =>
         item.value.toLowerCase().includes(searchText.slice(1).toLowerCase()),
       );
-      setOptions(filteredSuggestions);
+      if (filteredSuggestions?.length > 0) {
+        setOptions(filteredSuggestions);
+      } else setVisible(false);
     } else {
       setVisible(false);
     }
@@ -73,19 +83,20 @@ const Suggestions: React.FC<
 
   const handleSelect = (value: string) => {
     const selectedSuggestion = suggestions.find((item) => item.value === value);
-
     if (selectedSuggestion && selectedSuggestion.onClick) {
       selectedSuggestion.onClick();
     }
-    setInputValue('');
+    setInputValue(value);
     setVisible(false);
   };
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
       if (event.key === 'ArrowDown') {
+        event.preventDefault();
         setActiveIndex((prevIndex) => (prevIndex + 1) % options.length);
       } else if (event.key === 'ArrowUp') {
+        event.preventDefault();
         setActiveIndex((prevIndex) => (prevIndex - 1 + options.length) % options.length);
       } else if (event.key === 'Enter' && activeIndex >= 0) {
         handleSelect(options[activeIndex].value);
@@ -108,6 +119,7 @@ const Suggestions: React.FC<
         <div
           key={item.id}
           onMouseDown={() => handleSelect(item.value)}
+          onClick={()=>item?.onClick && item?.onClick()}
           onMouseEnter={() => setActiveIndex(index)}
           className={classnames(
             `${prefixCls}-item`,
@@ -115,13 +127,9 @@ const Suggestions: React.FC<
             index === activeIndex && `${prefixCls}-item-active`,
           )}
         >
-          {item.icon && (
-            <div className={classnames(`${prefixCls}-suggestion-icon`)}>{item.icon}</div>
-          )}
-          <div className={classnames(`${prefixCls}-suggestion-label`)}>{item.label}</div>
-          {item.extra && (
-            <div className={classnames(`${prefixCls}-suggestion-extra`)}>{item.extra}</div>
-          )}
+          {item.icon && <div className={classnames(`${prefixCls}-item-icon`)}>{item.icon}</div>}
+          <div className={classnames(`${prefixCls}-item-label`)}>{item.label}</div>
+          {item.extra && <div className={classnames(`${prefixCls}-item-extra`)}>{item.extra}</div>}
         </div>
       ))}
     </div>
@@ -131,8 +139,7 @@ const Suggestions: React.FC<
     <div className={mergedCls} style={style}>
       <Popover
         content={content}
-        // open={visible}
-        open
+        open={visible}
         placement={placement}
         arrow={false}
         overlayStyle={{
@@ -140,14 +147,7 @@ const Suggestions: React.FC<
         }}
       >
         <div ref={inputRef} className={classnames(`${prefixCls}-input`)}>
-          {children || (
-            <Input
-              placeholder={placeholder}
-              value={inputValue}
-              onChange={(e) => handleSearch(e.target.value)}
-              onKeyDown={handleKeyDown}
-            />
-          )}
+          {children || <Input placeholder={placeholder} value={inputValue} />}
         </div>
       </Popover>
     </div>,
