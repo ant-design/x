@@ -17,6 +17,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*8yArQ43EGccAAA
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">基本用法</code>
 <code src="./demo/withSender.tsx">配合发送组件</code>
+<code src="./demo/trigger.tsx">修改触发字符</code>
 
 
 ## API
