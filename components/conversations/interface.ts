@@ -46,7 +46,7 @@ export interface Conversation extends AnyObject {
   disabled?: boolean;
 }
 
-export type GroupSorter = Parameters<Array<GroupType>['sort']>[0];
+export type GroupSorter = Parameters<GroupType[]['sort']>[0];
 
 export type GroupTitleRenderComponents = {
   components: {

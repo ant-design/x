@@ -1,7 +1,7 @@
 import { genStyleUtils } from '@ant-design/cssinjs-utils';
 
 import { useInternalToken } from './useToken';
-import useConfigContext from '../config-provider/useConfigContext';
+import { useConfigContext } from '../config-provider';
 
 import type { AliasToken, SeedToken } from './cssinjs-utils';
 import type { ComponentTokenMap } from './components';

@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import { Button, Typography } from 'antd';
 
-import useConfigContext from '../config-provider/useConfigContext';
+import { useConfigContext } from '../config-provider';
 
 import useStyle from './style';
 

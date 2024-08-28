@@ -7,7 +7,7 @@ import useStyle from './style';
 import useTypedEffect from './hooks/useTypedEffect';
 import { Avatar } from 'antd';
 import useTypingConfig from './hooks/useTypingConfig';
-import useConfigContext from '../config-provider/useConfigContext';
+import { useConfigContext } from '../config-provider';
 
 export interface BubbleRef {
   nativeElement: HTMLElement;

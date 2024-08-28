@@ -1,4 +1,4 @@
-/* eslint-disable global-require, import/no-dynamic-require, jest/no-export */
+/* eslint-disable global-require, jest/no-export */
 import React from 'react';
 
 import { ConfigProvider } from 'antd';

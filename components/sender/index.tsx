@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import useStyle from './style';
 import React from 'react';
 import type { CustomizeComponent, SubmitType } from './interface';
-import useConfigContext from '../config-provider/useConfigContext';
+import { useConfigContext } from '../config-provider';
 import { useMergedState } from 'rc-util';
 import getValue from 'rc-util/lib/utils/get';
 import { ActionButtonContext } from './components/ActionButton';

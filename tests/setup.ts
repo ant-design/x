@@ -1,4 +1,4 @@
-/* eslint-disable no-console, import/prefer-default-export */
+/* eslint-disable no-console */
 import util from 'util';
 import type { DOMWindow } from 'jsdom';
 

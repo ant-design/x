@@ -1,6 +1,6 @@
 import * as React from 'react';
 import pickAttrs from 'rc-util/lib/pickAttrs';
-import useConfigContext from '../config-provider/useConfigContext';
+import { useConfigContext } from '../config-provider';
 import classNames from 'classnames';
 import type { BubbleProps } from './interface';
 import Bubble, { BubbleContext } from './Bubble';
