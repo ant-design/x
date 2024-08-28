@@ -187,7 +187,7 @@
     "browserslist": "^4.23.3",
     "browserslist-to-esbuild": "^2.1.1",
     "chalk": "^4.1.2",
-    "cheerio": "1.0.0-rc.12",
+    "cheerio": "1.0.0",
     "circular-dependency-plugin": "^5.2.2",
     "cli-progress": "^3.12.0",
     "cross-env": "^7.0.3",
