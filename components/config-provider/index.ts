@@ -1,2 +1,5 @@
-// eslint-disable-next-line import/prefer-default-export
+import useConfigContext from './useConfigContext';
+
 export const defaultPrefixCls = 'ant';
+
+export { useConfigContext };

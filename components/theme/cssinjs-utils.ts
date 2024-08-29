@@ -11,6 +11,8 @@ import type { AliasToken } from 'antd/es/theme/internal';
 import type { AnyObject } from '../_util/type';
 import type { ComponentTokenMap } from './components';
 
+export type { AliasToken, SeedToken } from 'antd/es/theme/internal';
+
 /** Final token which contains the components level override */
 export type GlobalToken = GlobalTokenTypeUtil<ComponentTokenMap, AliasToken>;
 export type OverrideToken = OverrideTokenTypeUtil<ComponentTokenMap, AliasToken>;

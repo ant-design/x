@@ -24,7 +24,7 @@ jobs:
           key: lock-${{ github.sha }}
 
       - name: create package-lock.json
-        run: npm i --package-lock-only --ignore-scripts
+        run: npm i --package-lock-only --ignore-scripts --legacy-peer-deps
 
       - name: hack for singe file
         run: |
@@ -42,7 +42,7 @@ jobs:
 
       - name: install
         if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
-        run: npm i
+        run: npm i --legacy-peer-deps
   
   lint:
     runs-on: ubuntu-latest
@@ -87,6 +87,9 @@ jobs:
 
       - name: compile
         run: npm run compile
+
+      - name: dekko
+        run: npm run test:dekko
 
     needs: setup
   

@@ -1,9 +1,9 @@
 import React, { memo } from 'react';
-import useAntdToken from 'antd/lib/theme/useToken';
+import useToken from '../theme/useToken';
 
 const StopLoadingIcon = memo(() => {
   // eslint-disable-next-line
-  const [_, token] = useAntdToken();
+  const { token } = useToken();
   return (
     <svg
       color="currentColor"
