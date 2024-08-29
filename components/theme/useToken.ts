@@ -95,7 +95,7 @@ export function useInternalToken(): [
   const cssVar = React.useMemo(
     () => ({
       prefix: (typeof rootCssVar === 'object' && rootCssVar.prefix) || defaultPrefixCls,
-      key: (typeof rootCssVar === 'object' && rootCssVar.key) || '1',
+      key: (typeof rootCssVar === 'object' && rootCssVar.key) || '',
       unitless,
       ignore,
       preserve,
