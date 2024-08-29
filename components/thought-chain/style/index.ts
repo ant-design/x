@@ -26,7 +26,7 @@ const genThoughtChainItemStatusStyle: GenerateThoughtChainItemStyle = (token) =>
     [THOUGHT_CHAIN_ITEM_STATUS.ERROR]: token.colorErrorText,
   };
 
-  const statuses = Object.keys(colors) as Array<keyof typeof colors>;
+  const statuses = Object.keys(colors) as (keyof typeof colors)[];
 
   return statuses.reduce((acc, status) => {
     const statusColor = colors[status];
