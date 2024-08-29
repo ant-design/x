@@ -5,7 +5,7 @@ import { Card, Button } from 'antd';
 
 const mockServerResponseData: ThoughtChainItem[] = [
   { title: 'Thought Chain Item - 1', status: 'success', description: 'status: success' },
-  { title: 'Thought Chain Item - 1', status: 'error', description: 'status: error' },
+  { title: 'Thought Chain Item - 2', status: 'error', description: 'status: error' },
 ];
 
 const delay = (ms: number) => {
