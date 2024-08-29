@@ -31,12 +31,4 @@ const SelectPlacements = ['bottomLeft', 'bottomRight', 'topLeft', 'topRight'] as
 
 export type SelectCommonPlacement = (typeof SelectPlacements)[number];
 
-const getTransitionName = (rootPrefixCls: string, motion: string, transitionName?: string) => {
-  if (transitionName !== undefined) {
-    return transitionName;
-  }
-  return `${rootPrefixCls}-${motion}`;
-};
-
-export { getTransitionName };
 export default initCollapseMotion;
