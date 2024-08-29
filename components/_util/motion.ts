@@ -26,9 +26,4 @@ const initCollapseMotion = (rootCls = defaultPrefixCls): CSSMotionProps => ({
   motionDeadline: 500,
 });
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const SelectPlacements = ['bottomLeft', 'bottomRight', 'topLeft', 'topRight'] as const;
-
-export type SelectCommonPlacement = (typeof SelectPlacements)[number];
-
 export default initCollapseMotion;
