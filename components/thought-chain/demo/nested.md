@@ -1,7 +1,7 @@
 ## zh-CN
 
-嵌套使用
+ThoughtChain 组件支持嵌套使用
 
 ## en-US
 
-Nested usage.
+The ThoughtChain component supports nested usage.
