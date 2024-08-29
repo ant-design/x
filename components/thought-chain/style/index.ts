@@ -165,10 +165,7 @@ const genThoughtChainItemStyle: GenerateThoughtChainItemStyle = (token) => {
         },
       },
       [`& ${itemCls}-footer`]: {
-        [`& ${itemCls}-footer-box`]: {
-          maxWidth: '100%',
-          display: 'inline-block',
-        },
+        display: 'inline-flex',
       },
     },
   };

@@ -224,7 +224,7 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
       {/* Footer */}
       {footer && (
         <div className={`${itemCls}-footer`}>
-          <div className={`${itemCls}-footer-box`}>{footer}</div>
+          {footer}
         </div>
       )}
     </div>
