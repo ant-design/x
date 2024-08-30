@@ -30,27 +30,27 @@ demo:
 
 ### ThoughtChainProps
 
-| 属性          | 说明             | 类型                                | 默认值 | 版本 |
-| ------------- | ---------------- | ----------------------------------- | ------ | ---- |
-| items         | 思维节点集合     | ThoughtChainItem[]                  | -      | -    |
-| collapsible   | 是否可折叠       | boolean \| CollapsibleOptions       | -      | -    |
-| styles        | 语义化结构的样式 | Record<'item' \| 'itemHeader' \| 'itemContent' \| 'itemFooter', React.CSSProperties> | -      | -    |
-| classNames    | 语义化结构的类名 | Record<'item' \| 'itemHeader' \| 'itemContent' \| 'itemFooter', string>              | -      | -    |
-| prefixCls     | 自定义前缀       | string                              | -      | -    |
-| rootClassName | 自定义根类名     | string                              | -      | -    |
+| 属性 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| items | 思维节点集合 | ThoughtChainItem[] | - | - |
+| collapsible | 是否可折叠 | boolean \| CollapsibleOptions | - | - |
+| styles | 语义化结构的样式 | Record<'item' \| 'itemHeader' \| 'itemContent' \| 'itemFooter', React.CSSProperties> | - | - |
+| classNames | 语义化结构的类名 | Record<'item' \| 'itemHeader' \| 'itemContent' \| 'itemFooter', string> | - | - |
+| prefixCls | 自定义前缀 | string | - | - |
+| rootClassName | 自定义根类名 | string | - | - |
 
 ### ThoughtChainItem
 
-| 属性 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- |
-| key | 思维节点唯一标识符 | string | - | - |
-| icon | 思维节点图标 | React.ReactNode | - | - |
-| title | 思维节点标题 | React.ReactNode | - | - |
-| description | 思维节点描述 | React.ReactNode | - | - |
-| extra | 思维节点额外内容 | React.ReactNode | - | - |
-| content | 思维节点内容 | React.ReactNode | - | - |
-| footer | 思维节点脚注 | React.ReactNode | - | - |
-| status | 思维节点状态 | 'pending' \| 'success' \| 'error' | - | - |
+| 属性        | 说明               | 类型                              | 默认值 | 版本 |
+| ----------- | ------------------ | --------------------------------- | ------ | ---- |
+| key         | 思维节点唯一标识符 | string                            | -      | -    |
+| icon        | 思维节点图标       | React.ReactNode                   | -      | -    |
+| title       | 思维节点标题       | React.ReactNode                   | -      | -    |
+| description | 思维节点描述       | React.ReactNode                   | -      | -    |
+| extra       | 思维节点额外内容   | React.ReactNode                   | -      | -    |
+| content     | 思维节点内容       | React.ReactNode                   | -      | -    |
+| footer      | 思维节点脚注       | React.ReactNode                   | -      | -    |
+| status      | 思维节点状态       | 'pending' \| 'success' \| 'error' | -      | -    |
 
 ### CollapsibleOptions
 
