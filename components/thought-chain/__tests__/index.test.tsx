@@ -4,6 +4,7 @@ import { render, fireEvent } from '../../../tests/utils';
 
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
+import themeTest from '../../../tests/shared/themeTest';
 import { CheckCircleOutlined } from '@ant-design/icons';
 
 import type { ThoughtChainItem } from '../index';
@@ -39,6 +40,8 @@ describe('ThoughtChain Component', () => {
   mountTest(() => <ThoughtChain />);
 
   rtlTest(() => <ThoughtChain items={items} collapsible />);
+
+  themeTest(() => <ThoughtChain items={items} collapsible />);
 
   beforeAll(() => {
     jest.useFakeTimers();

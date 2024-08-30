@@ -766,18 +766,14 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
         <div
           class="ant-thought-chain-item-footer"
         >
-          <div
-            class="ant-thought-chain-item-footer-box"
+          <button
+            class="ant-btn ant-btn-default ant-btn-block"
+            type="button"
           >
-            <button
-              class="ant-btn ant-btn-default ant-btn-block"
-              type="button"
-            >
-              <span>
-                Thought Chain Item Footer
-              </span>
-            </button>
-          </div>
+            <span>
+              Thought Chain Item Footer
+            </span>
+          </button>
         </div>
       </div>
       <div
@@ -931,18 +927,14 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
         <div
           class="ant-thought-chain-item-footer"
         >
-          <div
-            class="ant-thought-chain-item-footer-box"
+          <button
+            class="ant-btn ant-btn-default ant-btn-block"
+            type="button"
           >
-            <button
-              class="ant-btn ant-btn-default ant-btn-block"
-              type="button"
-            >
-              <span>
-                Thought Chain Item Footer
-              </span>
-            </button>
-          </div>
+            <span>
+              Thought Chain Item Footer
+            </span>
+          </button>
         </div>
       </div>
       <div
@@ -1096,18 +1088,14 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
         <div
           class="ant-thought-chain-item-footer"
         >
-          <div
-            class="ant-thought-chain-item-footer-box"
+          <button
+            class="ant-btn ant-btn-default ant-btn-block"
+            type="button"
           >
-            <button
-              class="ant-btn ant-btn-default ant-btn-block"
-              type="button"
-            >
-              <span>
-                Thought Chain Item Footer
-              </span>
-            </button>
-          </div>
+            <span>
+              Thought Chain Item Footer
+            </span>
+          </button>
         </div>
       </div>
     </div>
@@ -1248,18 +1236,14 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
         <div
           class="ant-thought-chain-item-footer"
         >
-          <div
-            class="ant-thought-chain-item-footer-box"
+          <button
+            class="ant-btn ant-btn-text ant-btn-block"
+            type="button"
           >
-            <button
-              class="ant-btn ant-btn-text ant-btn-block"
-              type="button"
-            >
-              <span>
-                1 - Thought Chain Item Footer
-              </span>
-            </button>
-          </div>
+            <span>
+              1 - Thought Chain Item Footer
+            </span>
+          </button>
         </div>
       </div>
       <div
@@ -1382,18 +1366,14 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
         <div
           class="ant-thought-chain-item-footer"
         >
-          <div
-            class="ant-thought-chain-item-footer-box"
+          <button
+            class="ant-btn ant-btn-text ant-btn-block"
+            type="button"
           >
-            <button
-              class="ant-btn ant-btn-text ant-btn-block"
-              type="button"
-            >
-              <span>
-                2 - Thought Chain Item Footer
-              </span>
-            </button>
-          </div>
+            <span>
+              2 - Thought Chain Item Footer
+            </span>
+          </button>
         </div>
       </div>
     </div>
@@ -1411,6 +1391,15 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
   <div
     class="ant-card-body"
   >
+    <button
+      class="ant-btn ant-btn-default"
+      style="margin-bottom: 16px;"
+      type="button"
+    >
+      <span>
+        Run Next
+      </span>
+    </button>
     <div
       class="ant-thought-chain"
     >
@@ -1432,7 +1421,7 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
-                Success - Thought Chain Item
+                Thought Chain Item - 1
               </strong>
             </span>
             <div
@@ -1450,7 +1439,31 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
                   class="ant-tooltip-inner"
                   role="tooltip"
                 >
-                  Success - Thought Chain Item
+                  Thought Chain Item - 1
+                </div>
+              </div>
+            </div>
+            <span
+              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
+            >
+              status: success
+            </span>
+            <div
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
+              style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; box-sizing: border-box;"
+            >
+              <div
+                class="ant-tooltip-arrow"
+                style="position: absolute;"
+              />
+              <div
+                class="ant-tooltip-content"
+              >
+                <div
+                  class="ant-tooltip-inner"
+                  role="tooltip"
+                >
+                  status: success
                 </div>
               </div>
             </div>
@@ -1458,7 +1471,7 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
         </div>
       </div>
       <div
-        class="ant-thought-chain-item ant-thought-chain-item-error-pending"
+        class="ant-thought-chain-item ant-thought-chain-item-error-error"
       >
         <div
           class="ant-thought-chain-item-header"
@@ -1475,7 +1488,7 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
-                Error - Thought Chain Item
+                Thought Chain Item - 2
               </strong>
             </span>
             <div
@@ -1493,33 +1506,14 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
                   class="ant-tooltip-inner"
                   role="tooltip"
                 >
-                  Error - Thought Chain Item
+                  Thought Chain Item - 2
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="ant-thought-chain-item ant-thought-chain-item-pending-pending"
-      >
-        <div
-          class="ant-thought-chain-item-header"
-        >
-          <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
-          >
-            3
-          </span>
-          <div
-            class="ant-thought-chain-item-header-box"
-          >
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
-              <strong>
-                Pending - Thought Chain Item
-              </strong>
+              status: error
             </span>
             <div
               class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
@@ -1536,7 +1530,7 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
                   class="ant-tooltip-inner"
                   role="tooltip"
                 >
-                  Pending - Thought Chain Item
+                  status: error
                 </div>
               </div>
             </div>
