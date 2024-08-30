@@ -167,7 +167,7 @@ const genThoughtChainItemStyle: GenerateThoughtChainItemStyle = (token) => {
         display: 'inline-flex',
       },
       '& > :last-child': {
-        marginBottom: 0,
+        marginBottom: '0 !important',
       },
     },
   };

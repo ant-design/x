@@ -60,6 +60,10 @@ Common props ref：[Common props](/docs/react/common-props)
 | expandedKeys | Current expanded keys | string[] | None | - |
 | onExpand | Callback function when expanded keys change | (expandedKeys: string[]) => void | None | - |
 
+## Semantic DOM
+
+<code src="./demo/_semantic.tsx" simplify="true"></code>
+
 ## Design Token
 
 <ComponentTokenTable component="ThoughtChain"></ComponentTokenTable>

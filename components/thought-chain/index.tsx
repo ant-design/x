@@ -11,6 +11,8 @@ import ThoughtChainNode, { ThoughtChainNodeContext } from './Item';
 import type { ThoughtChainItem } from './Item';
 import type { Collapsible } from './hooks/useCollapsible';
 
+export type SemanticType = 'item' | 'itemHeader' | 'itemContent' | 'itemFooter';
+
 export interface ThoughtChainProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
   /**
    * @desc 思维节点集合
@@ -28,13 +30,13 @@ export interface ThoughtChainProps extends Omit<React.HTMLAttributes<HTMLDivElem
    * @desc 语义化结构 style
    * @descEN Semantic structure styles
    */
-  styles?: Partial<Record<'item', React.CSSProperties>>;
+  styles?: Partial<Record<SemanticType, React.CSSProperties>>;
 
   /**
    * @desc 语义化结构 className
    * @descEN Semantic structure class names
    */
-  classNames?: Partial<Record<'item', string>>;
+  classNames?: Partial<Record<SemanticType, string>>;
 
   /**
    * @desc 自定义前缀
@@ -98,6 +100,8 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
           collapseMotion,
           expandedKeys,
           direction,
+          classNames,
+          styles,
         }}
       >
         {items?.map((item, index) => (

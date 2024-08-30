@@ -61,6 +61,10 @@ demo:
 | expandedKeys | 当前展开的节点         | string[]                         | -      | -    |
 | onExpand     | 展开节点变化的回调函数 | (expandedKeys: string[]) => void | -      | -    |
 
+## Semantic DOM
+
+<code src="./demo/_semantic.tsx" simplify="true"></code>
+
 ## 主题变量（Design Token）
 
 <ComponentTokenTable component="ThoughtChain"></ComponentTokenTable>

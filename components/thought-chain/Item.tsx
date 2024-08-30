@@ -7,6 +7,7 @@ import pickAttrs from 'rc-util/lib/pickAttrs';
 
 import type { ConfigProviderProps, GetProp } from 'antd';
 import type { CSSMotionProps } from 'rc-motion';
+import type { ThoughtChainProps } from './';
 
 export enum THOUGHT_CHAIN_ITEM_STATUS {
   /**
@@ -71,18 +72,6 @@ export interface ThoughtChainItem {
    * @descEN Thought chain item status
    */
   status?: `${THOUGHT_CHAIN_ITEM_STATUS}`;
-
-  /**
-   * @desc 语义化结构 style
-   * @descEN Semantic structure styles
-   */
-  styles?: Partial<Record<'header' | 'content' | 'footer', React.CSSProperties>>;
-
-  /**
-   * @desc 语义化结构 className
-   * @descEN Semantic structure class names
-   */
-  classNames?: Partial<Record<'header' | 'content' | 'footer', string>>;
 }
 
 export const ThoughtChainNodeContext = React.createContext<{
@@ -91,6 +80,8 @@ export const ThoughtChainNodeContext = React.createContext<{
   enableCollapse?: boolean;
   expandedKeys?: string[];
   direction?: GetProp<ConfigProviderProps, 'direction'>;
+  styles?: ThoughtChainProps['styles'];
+  classNames?: ThoughtChainProps['classNames'];
 }>(null!);
 
 interface ThoughtChainNodeProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick'> {
@@ -109,16 +100,22 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
   });
 
   // ================= ThoughtChainNodeContext ====================
-  const { prefixCls, collapseMotion, enableCollapse, expandedKeys, direction } =
-    React.useContext(ThoughtChainNodeContext);
+  const {
+    prefixCls,
+    collapseMotion,
+    enableCollapse,
+    expandedKeys,
+    direction,
+    classNames = {},
+    styles = {},
+  } = React.useContext(ThoughtChainNodeContext);
 
   // ============================ Info ============================
   const id = React.useId();
 
   const {
     key = id,
-    classNames = {},
-    styles = {},
+
     icon,
     title,
     extra,
@@ -153,8 +150,8 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
     >
       {/* Header */}
       <div
-        className={classnames(`${itemCls}-header`, classNames.header)}
-        style={styles.header}
+        className={classnames(`${itemCls}-header`, classNames.itemHeader)}
+        style={styles.itemHeader}
         onClick={onThoughtChainNodeClick}
       >
         {/* Avatar */}
@@ -216,13 +213,25 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
               ref={motionRef}
               style={style}
             >
-              <div className={classnames(contentBoxCls, classNames.content)}>{content}</div>
+              <div
+                className={classnames(contentBoxCls, classNames.itemContent)}
+                style={styles.itemContent}
+              >
+                {content}
+              </div>
             </div>
           )}
         </CSSMotion>
       )}
       {/* Footer */}
-      {footer && <div className={`${itemCls}-footer`}>{footer}</div>}
+      {footer && (
+        <div
+          className={classnames(`${itemCls}-footer`, classNames.itemFooter)}
+          style={styles.itemFooter}
+        >
+          {footer}
+        </div>
+      )}
     </div>
   );
 };
