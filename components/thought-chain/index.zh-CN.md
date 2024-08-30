@@ -34,8 +34,8 @@ demo:
 | ------------- | ---------------- | ----------------------------------- | ------ | ---- |
 | items         | 思维节点集合     | ThoughtChainItem[]                  | -      | -    |
 | collapsible   | 是否可折叠       | boolean \| CollapsibleOptions       | -      | -    |
-| styles        | 语义化结构的样式 | Record<'item', React.CSSProperties> | -      | -    |
-| classNames    | 语义化结构的类名 | Record<'item', string>              | -      | -    |
+| styles        | 语义化结构的样式 | Record<'item' \| 'itemHeader' \| 'itemContent' \| 'itemFooter', React.CSSProperties> | -      | -    |
+| classNames    | 语义化结构的类名 | Record<'item' \| 'itemHeader' \| 'itemContent' \| 'itemFooter', string>              | -      | -    |
 | prefixCls     | 自定义前缀       | string                              | -      | -    |
 | rootClassName | 自定义根类名     | string                              | -      | -    |
 
@@ -51,8 +51,6 @@ demo:
 | content | 思维节点内容 | React.ReactNode | - | - |
 | footer | 思维节点脚注 | React.ReactNode | - | - |
 | status | 思维节点状态 | 'pending' \| 'success' \| 'error' | - | - |
-| styles | 语义化结构的样式 | Record<'header' \| 'content' \| 'footer', React.CSSProperties> | - | - |
-| classNames | 语义化结构的类名 | Record<'header' \| 'content' \| 'footer', string> | - | - |
 
 ### CollapsibleOptions
 

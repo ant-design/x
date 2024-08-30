@@ -33,8 +33,8 @@ Common props ref：[Common props](/docs/react/common-props)
 | --- | --- | --- | --- | --- |
 | items | Chain items | ThoughtChainItem[] | None | - |
 | collapsible | Whether collapsible | boolean \| CollapsibleOptions | None | - |
-| styles | Styles for semantic structure | Record<'item', React.CSSProperties> | None | - |
-| classNames | Class names for semantic structure | Record<'item', string> | None | - |
+| styles | Styles for semantic structure | Record<'item' \| 'itemHeader' \| 'itemContent' \| 'itemFooter', React.CSSProperties> | None | - |
+| classNames | Class names for semantic structure | Record<'item' \| 'itemHeader' \| 'itemContent' \| 'itemFooter', string> | None | - |
 | prefixCls | Custom prefix | string | None | - |
 | rootClassName | Custom root class name | string | None | - |
 
@@ -50,8 +50,6 @@ Common props ref：[Common props](/docs/react/common-props)
 | content | Thought chain item content | React.ReactNode | None | - |
 | footer | Thought chain item footer | React.ReactNode | None | - |
 | status | Thought chain item status | 'pending' \| 'success' \| 'error' | None | - |
-| styles | Styles for semantic structure | Record<'header' \| 'content' \| 'footer', React.CSSProperties> | None | - |
-| classNames | Class names for semantic structure | Record<'header' \| 'content' \| 'footer', string> | None | - |
 
 ### CollapsibleOptions
 
