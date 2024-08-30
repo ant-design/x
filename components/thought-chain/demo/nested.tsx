@@ -10,11 +10,7 @@ const items: ThoughtChainProps['items'] = [
     title: '1 - Thought Chain Item',
     description: 'description',
     extra: <Button type="text" icon={<MoreOutlined />} />,
-    footer: (
-      <Button block type="text">
-        1 - Thought Chain Item Footer
-      </Button>
-    ),
+    footer: <Button>1 - Thought Chain Item Footer</Button>,
     content: (
       <ThoughtChain
         items={[
@@ -36,11 +32,7 @@ const items: ThoughtChainProps['items'] = [
     title: '2 - Thought Chain Item',
     description: 'description',
     extra: <Button type="text" icon={<MoreOutlined />} />,
-    footer: (
-      <Button block type="text">
-        2 - Thought Chain Item Footer
-      </Button>
-    ),
+    footer: <Button>2 - Thought Chain Item Footer</Button>,
     content: (
       <ThoughtChain
         items={[
@@ -61,7 +53,7 @@ const items: ThoughtChainProps['items'] = [
 ];
 
 export default () => (
-  <Card style={{ width: '100%' }}>
+  <Card style={{ width: 500 }}>
     <ThoughtChain items={items} collapsible />
   </Card>
 );
