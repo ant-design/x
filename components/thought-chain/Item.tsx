@@ -127,7 +127,6 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
 
   // ============================ Style ============================
   const itemCls = `${prefixCls}-item`;
-  const contentBoxCls = `${itemCls}-content-box`;
 
   // ============================ Event ============================
   const onThoughtChainNodeClick = () => onClick?.(key);
@@ -214,7 +213,7 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
               style={style}
             >
               <div
-                className={classnames(contentBoxCls, classNames.itemContent)}
+                className={classnames(`${itemCls}-content-box`, classNames.itemContent)}
                 style={styles.itemContent}
               >
                 {content}

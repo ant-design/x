@@ -73,7 +73,10 @@ const genThoughtChainItemBeforePseudoStyle: GenerateThoughtChainItemStyle = (tok
     [`& > ${itemCls}`]: {
       [`& ${itemCls}-header, & ${itemCls}-content, & ${itemCls}-footer`]: {
         position: 'relative',
-        marginBottom: token.margin,
+
+        '&::before': {
+          bottom: `${token.calc(token.padding).mul(-1).equal()} !important`,
+        },
       },
       [`& ${itemCls}-header, & ${itemCls}-content`]: {
         marginInlineStart: calc(token.itemIconSize).mul(-1).equal(),
@@ -81,8 +84,6 @@ const genThoughtChainItemBeforePseudoStyle: GenerateThoughtChainItemStyle = (tok
         '&::before': {
           ...beforePseudoBaseStyle,
           insetInlineStart: calc(token.itemIconSize).div(2).sub(token.lineWidth).equal(),
-          // flex-gap of the ThoughtChainItem
-          bottom: token.calc(token.padding).mul(-1).equal(),
         },
       },
       [`& ${itemCls}-header::before`]: {
@@ -93,12 +94,8 @@ const genThoughtChainItemBeforePseudoStyle: GenerateThoughtChainItemStyle = (tok
       },
       [`& ${itemCls}-footer::before`]: {
         ...beforePseudoBaseStyle,
-        insetInlineStart: calc(token.itemIconSize).div(-2).sub(token.lineWidth).equal(),
         top: 0,
-      },
-      '& > :last-child::before': {
-        // flex-gap of the ThoughtChain
-        bottom: `${token.calc(token.paddingXL).mul(-1).equal()} !important`,
+        insetInlineStart: calc(token.itemIconSize).div(-2).sub(token.lineWidth).equal(),
       },
     },
   } as CSSObject;
@@ -118,6 +115,7 @@ const genThoughtChainItemStyle: GenerateThoughtChainItemStyle = (token) => {
       },
       [`& ${itemCls}-header`]: {
         display: 'flex',
+        paddingBottom: token.padding,
         gap: token.padding,
         alignItems: 'flex-start',
 
@@ -164,10 +162,8 @@ const genThoughtChainItemStyle: GenerateThoughtChainItemStyle = (token) => {
         },
       },
       [`& ${itemCls}-footer`]: {
+        paddingTop: token.padding,
         display: 'inline-flex',
-      },
-      '& > :last-child': {
-        marginBottom: '0 !important',
       },
     },
   };
@@ -180,7 +176,7 @@ const genThoughtChainStyle: GenerateStyle<ThoughtChainToken> = (token) => {
     [componentCls]: {
       display: 'flex',
       flexDirection: 'column',
-      gap: token.marginXL,
+      gap: token.margin,
       paddingInlineStart: token.itemIconSize,
 
       ...genThoughtChainItemStyle(token),
