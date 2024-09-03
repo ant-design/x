@@ -29,8 +29,8 @@ Crafting AI-driven interfaces with React, seamlessly integrating smart chat comp
 [npm-url]: http://npmjs.org/package/@ant-design/x
 [github-action-image]: https://github.com/ant-design/x/workflows/%E2%9C%85%20test/badge.svg
 [github-action-url]: https://github.com/ant-design/x/actions?query=workflow%3A%22%E2%9C%85+test%22
-[codecov-image]: https://img.shields.io/codecov/c/github/ant-design/x/master.svg?style=flat-square
-[codecov-url]: https://codecov.io/gh/ant-design/x/branch/master
+[codecov-image]: https://img.shields.io/codecov/c/github/ant-design/x/main.svg?style=flat-square
+[codecov-url]: https://codecov.io/gh/ant-design/x/branch/main
 [download-image]: https://img.shields.io/npm/dm/@ant-design/x.svg?style=flat-square
 [download-url]: https://npmjs.org/package/@ant-design/x
 [fossa-image]: https://app.fossa.io/api/projects/git%2Bgithub.com%2Fant-design%2Fant-design.svg?type=shield

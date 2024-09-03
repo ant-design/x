@@ -38,8 +38,8 @@ async function checkBranch({ current }: StatusResult) {
     version.includes('-experimental.')
   ) {
     spinner.info(chalk.cyan('😃 Alpha version. Skip branch check.'));
-  } else if (current !== 'master') {
-    spinner.fail(chalk.red('🤔 You are not in the master branch!'));
+  } else if (current !== 'main') {
+    spinner.fail(chalk.red('🤔 You are not in the main branch!'));
     exitProcess();
   }
   spinner.succeed('分支检查通过');
@@ -59,7 +59,7 @@ async function checkCommit({ files }: StatusResult) {
 
 async function checkRemote() {
   spinner.start('正在检查远程分支');
-  const { remote } = await git.fetch('origin', 'master');
+  const { remote } = await git.fetch('origin', 'main');
   if (!remote?.includes('ant-design/x')) {
     const { value } = await git.getConfig('remote.origin.url');
     if (!value?.includes('ant-design/x')) {
