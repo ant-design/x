@@ -18,7 +18,7 @@ export type Suggestion = {
 
 export type SuggestionsProps = {
   prefixCls?: string;
-  suggestions: Suggestion[];
+  items: Suggestion[];
   triggerCharacter?: string;
   children?: React.ReactNode;
   title?: React.ReactNode;
@@ -37,7 +37,7 @@ const Suggestions: React.FC<
     prefixCls: customizePrefixCls,
     className,
     rootClassName,
-    suggestions,
+    items,
     placement = 'topLeft',
     value: outValue,
     onChange: outOnChange,
@@ -61,7 +61,6 @@ const Suggestions: React.FC<
     value: outValue,
     onChange: outOnChange,
   });
-  const [options, setOptions] = useState<Suggestion[]>([]);
   const [visible, setVisible] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const inputRef = useRef<any>(null);
@@ -69,12 +68,6 @@ const Suggestions: React.FC<
   const handleSearch = (searchText: string) => {
     if (searchText.startsWith(triggerCharacter)) {
       setVisible(true);
-      const filteredSuggestions = suggestions.filter((item) =>
-        item.value.toLowerCase().includes(searchText.slice(1).toLowerCase()),
-      );
-      if (filteredSuggestions?.length > 0) {
-        setOptions(filteredSuggestions);
-      } else setVisible(false);
     } else {
       setVisible(false);
     }
@@ -82,7 +75,7 @@ const Suggestions: React.FC<
   };
 
   const handleSelect = (value: string) => {
-    const selectedSuggestion = suggestions.find((item) => item.value === value);
+    const selectedSuggestion = items.find((item) => item.value === value);
     if (selectedSuggestion && selectedSuggestion.onClick) {
       selectedSuggestion.onClick();
     }
@@ -94,15 +87,16 @@ const Suggestions: React.FC<
     (event: React.KeyboardEvent<HTMLInputElement>) => {
       if (event.key === 'ArrowDown') {
         event.preventDefault();
-        setActiveIndex((prevIndex) => (prevIndex + 1) % options.length);
+        setActiveIndex((prevIndex) => (prevIndex + 1) % items.length);
       } else if (event.key === 'ArrowUp') {
         event.preventDefault();
-        setActiveIndex((prevIndex) => (prevIndex - 1 + options.length) % options.length);
+        setActiveIndex((prevIndex) => (prevIndex - 1 + items.length) % items.length);
       } else if (event.key === 'Enter' && activeIndex >= 0) {
-        handleSelect(options[activeIndex].value);
+        event.preventDefault();
+        handleSelect(items[activeIndex].value);
       }
     },
-    [options, activeIndex],
+    [items, activeIndex],
   );
 
   useEffect(() => {
@@ -115,11 +109,11 @@ const Suggestions: React.FC<
   // ============================ Render ============================
   const content = (
     <div className={classnames(`${prefixCls}-container`, hashId)}>
-      {options.map((item, index) => (
+      {items.map((item, index) => (
         <div
           key={item.id}
           onMouseDown={() => handleSelect(item.value)}
-          onClick={()=>item?.onClick && item?.onClick()}
+          onClick={() => item?.onClick && item?.onClick()}
           onMouseEnter={() => setActiveIndex(index)}
           className={classnames(
             `${prefixCls}-item`,
@@ -147,7 +141,11 @@ const Suggestions: React.FC<
         }}
       >
         <div ref={inputRef} className={classnames(`${prefixCls}-input`)}>
-          {children || <Input placeholder={placeholder} value={inputValue} />}
+          {React.cloneElement((children || <Input />) as React.ReactElement, {
+            value: inputValue,
+            onChange: setInputValue,
+            placeholder,
+          })}
         </div>
       </Popover>
     </div>,

@@ -2,7 +2,7 @@ import React from 'react';
 import { Suggestions } from '@ant-design/x';
 import type { GetProp } from 'antd';
 
-type Suggestion = GetProp<typeof Suggestions, 'suggestions'>[number];
+type Suggestion = GetProp<typeof Suggestions, 'items'>[number];
 
 const suggestions: Suggestion[] = [
   { id: '1', label: '写一篇报告，关于：', value: '写一篇报告，关于：' },
@@ -12,7 +12,7 @@ const suggestions: Suggestion[] = [
 
 const Demo: React.FC = () => (
   <Suggestions
-    suggestions={suggestions}
+    items={suggestions}
     triggerCharacter="&"
     placeholder="use & to get more suggestions!"
   />

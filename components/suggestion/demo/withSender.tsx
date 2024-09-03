@@ -4,7 +4,7 @@ import type { GetProp } from 'antd';
 
 import { OpenAIFilled } from '@ant-design/icons';
 
-type Suggestion = GetProp<typeof Suggestions, 'suggestions'>[number];
+type Suggestion = GetProp<typeof Suggestions, 'items'>[number];
 
 const suggestions: Suggestion[] = [
   { id: '1', label: '写一篇报告，关于：', value: '写一篇报告，关于：', icon: <OpenAIFilled /> },
@@ -15,8 +15,17 @@ const suggestions: Suggestion[] = [
 const Demo: React.FC = () => {
   const [value, setValue] = useState<string>('');
   return (
-    <Suggestions suggestions={suggestions} onChange={setValue}>
-      <Sender value={value} onChange={setValue} />
+    <Suggestions items={suggestions} onChange={setValue} value={value}>
+      <Sender
+        onCancel={() => {
+          setValue('');
+          console.log('cancel');
+        }}
+        onSubmit={(v) => {
+          setValue('');
+          console.log('submit:', v);
+        }}
+      />
     </Suggestions>
   );
 };
