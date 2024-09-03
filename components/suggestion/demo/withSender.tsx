@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { Sender, Suggestions, type Suggestion } from '@ant-design/x';
-import { App } from 'antd';
+import { Sender, Suggestions } from '@ant-design/x';
+import type { GetProp } from 'antd';
+
 import { OpenAIFilled } from '@ant-design/icons';
+
+type Suggestion = GetProp<typeof Suggestions, 'suggestions'>[number];
 
 const suggestions: Suggestion[] = [
   { id: '1', label: '写一篇报告，关于：', value: '写一篇报告，关于：', icon: <OpenAIFilled /> },
@@ -18,8 +21,4 @@ const Demo: React.FC = () => {
   );
 };
 
-export default () => (
-  <App>
-    <Demo />
-  </App>
-);
+export default Demo;

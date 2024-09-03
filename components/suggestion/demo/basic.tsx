@@ -1,6 +1,8 @@
 import React from 'react';
-import { Suggestions, type Suggestion } from '@ant-design/x';
-import { App } from 'antd';
+import { Suggestions } from '@ant-design/x';
+import type { GetProp } from 'antd';
+
+type Suggestion = GetProp<typeof Suggestions, 'suggestions'>[number];
 
 const suggestions: Suggestion[] = [
   { id: '1', label: '写一篇报告，关于：', value: '写一篇报告，关于：' },
@@ -10,8 +12,4 @@ const suggestions: Suggestion[] = [
 
 const Demo: React.FC = () => <Suggestions suggestions={suggestions} />;
 
-export default () => (
-  <App>
-    <Demo />
-  </App>
-);
+export default Demo;
