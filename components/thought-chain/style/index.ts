@@ -46,10 +46,6 @@ const genThoughtChainItemStatusStyle: GenerateThoughtChainItemStyle = (token) =>
         },
         '& > :last-child::before': lastBeforePseudoStyle,
       };
-
-      acc['& > :last-child > :last-child::before'] = {
-        maskImage: `linear-gradient(to bottom, ${statusColor} 2%, transparent 98%)`,
-      };
     });
 
     return acc;
@@ -70,6 +66,17 @@ const genThoughtChainItemBeforePseudoStyle: GenerateThoughtChainItemStyle = (tok
   };
 
   return {
+    '& > :last-child > :last-child': {
+      '&::before': {
+        display: 'none !important',
+      },
+      [`&${itemCls}-footer`]: {
+        '&::before': {
+          display: 'block !important',
+          bottom: 0,
+        },
+      },
+    },
     [`& > ${itemCls}`]: {
       [`& ${itemCls}-header, & ${itemCls}-content, & ${itemCls}-footer`]: {
         position: 'relative',
