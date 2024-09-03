@@ -46,6 +46,10 @@ const genThoughtChainItemStatusStyle: GenerateThoughtChainItemStyle = (token) =>
         },
         '& > :last-child::before': lastBeforePseudoStyle,
       };
+
+      acc['& > :last-child > :last-child::before'] = {
+        maskImage: `linear-gradient(to bottom, ${statusColor} 2%, transparent 98%)`,
+      };
     });
 
     return acc;
@@ -66,16 +70,12 @@ const genThoughtChainItemBeforePseudoStyle: GenerateThoughtChainItemStyle = (tok
   };
 
   return {
-    '& > :last-child > :last-child::before': {
-      // last item's last before pseudo should be hidden
-      display: 'none !important',
-    },
     [`& > ${itemCls}`]: {
       [`& ${itemCls}-header, & ${itemCls}-content, & ${itemCls}-footer`]: {
         position: 'relative',
 
         '&::before': {
-          bottom: `${token.calc(token.padding).mul(-1).equal()} !important`,
+          bottom: `${token.calc(token.padding).mul(-1).equal()}`,
         },
       },
       [`& ${itemCls}-header, & ${itemCls}-content`]: {
@@ -88,6 +88,7 @@ const genThoughtChainItemBeforePseudoStyle: GenerateThoughtChainItemStyle = (tok
       },
       [`& ${itemCls}-header::before`]: {
         top: token.itemIconSize,
+        bottom: `${token.calc(token.padding).mul(-2).equal()}`,
       },
       [`& ${itemCls}-content::before`]: {
         top: '100%',
@@ -115,7 +116,7 @@ const genThoughtChainItemStyle: GenerateThoughtChainItemStyle = (token) => {
       },
       [`& ${itemCls}-header`]: {
         display: 'flex',
-        paddingBottom: token.padding,
+        marginBottom: token.margin,
         gap: token.padding,
         alignItems: 'flex-start',
 
@@ -162,7 +163,7 @@ const genThoughtChainItemStyle: GenerateThoughtChainItemStyle = (token) => {
         },
       },
       [`& ${itemCls}-footer`]: {
-        paddingTop: token.padding,
+        marginTop: token.margin,
         display: 'inline-flex',
       },
     },
