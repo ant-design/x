@@ -52,7 +52,7 @@ if (process.env.RUN_ENV === 'PRODUCTION') {
     // use esbuild
     if (process.env.ESBUILD || process.env.CSB_REPO) {
       config.optimization.minimizer[0] = new EsbuildPlugin({
-        target: 'es2015',
+        target: 'es2020',
         css: true,
       });
     }

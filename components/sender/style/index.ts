@@ -12,7 +12,7 @@ interface SenderToken extends FullToken<'Sender'> {
 }
 
 const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
-  const { componentCls, paddingXS, paddingXXS, boxShadowSecondary } = token;
+  const { componentCls, paddingXS, paddingXXS, boxShadowSecondary, calc } = token;
   return {
     [componentCls]: {
       position: 'relative',
@@ -27,7 +27,7 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
         position: 'absolute',
         zIndex: 1,
         insetInlineEnd: paddingXXS,
-        bottom: `${paddingXS - paddingXXS}px`,
+        bottom: calc(paddingXS).sub(paddingXXS).equal(),
       },
 
       [`& ${componentCls}-actions-btn`]: {},

@@ -8,7 +8,7 @@ exports[`Sender Component loading state 1`] = `
     <textarea
       class="ant-input ant-input-outlined ant-sender-input"
       readonly=""
-      style="resize: none; height: -110px; max-height: -110px;"
+      style="resize: none; height: -54px; max-height: -54px;"
     />
     <div
       class="ant-sender-actions-list"
@@ -122,7 +122,7 @@ exports[`Sender Component rtl render component should be rendered correctly in R
 >
   <textarea
     class="ant-input ant-input-outlined ant-sender-input"
-    style="resize: none; height: -110px; max-height: -110px;"
+    style="resize: none; height: -54px; max-height: -54px;"
   />
   <div
     class="ant-sender-actions-list"
