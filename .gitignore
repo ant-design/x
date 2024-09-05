@@ -45,5 +45,7 @@ server/
 # Docs templates
 components/version/token-meta.json
 components/version/token.json
+components/version/version.ts
+components/version/version.tsx
 report.html
 dist/
