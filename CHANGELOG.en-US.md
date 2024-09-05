@@ -28,7 +28,7 @@ tag: vVERSION
 - 🔥 New Component Sender. [#46](https://github.com/ant-design/x/pull/46) [@ONLY-yours](https://github.com/ONLY-yours)
 - 🔥 New Component ThoughtChain. [#86](https://github.com/ant-design/x/pull/86) [@YumoImer](https://github.com/YumoImer)
 - 📦 Use `father` to build. [#84](https://github.com/ant-design/x/pull/84) [@zombieJ](https://github.com/zombieJ)
-- 💄 ThemeContext instances being inconsistent when using `antd` es or lib package. [#88](https://github.com/ant-design/x/pull/88) [@YumoImer](https://github.com/YumoImer)
+- 🛠 Fix ThemeContext instances being inconsistent when using `antd` es or lib package. [#88](https://github.com/ant-design/x/pull/88) [@YumoImer](https://github.com/YumoImer)
 - 🛠 Refactor: API Naming Conventions [#73](https://github.com/ant-design/x/pull/73) [@zombieJ](https://github.com/zombieJ)
 - 🛠 MISC: CI, Github Actions, Publish
   - 🛠 [#59](https://github.com/ant-design/x/pull/59) [@zombieJ](https://github.com/zombieJ)

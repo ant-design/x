@@ -27,7 +27,7 @@ tag: vVERSION
 - 🔥 新组件 Sender. [#46](https://github.com/ant-design/x/pull/46) [@ONLY-yours](https://github.com/ONLY-yours)
 - 🔥 新组件 ThoughtChain. [#86](https://github.com/ant-design/x/pull/86) [@YumoImer](https://github.com/YumoImer)
 - 📦 使用 `father` 构建. [#84](https://github.com/ant-design/x/pull/84) [@zombieJ](https://github.com/zombieJ)
-- 💄 解决使用 `antd` 的 es 或 lib 包时 ThemeContext 实例不一致的问题. [#88](https://github.com/ant-design/x/pull/88) [@YumoImer](https://github.com/YumoImer)
+- 🛠 修复使用 `antd` 的 es 或 lib 包时 ThemeContext 实例不一致的问题. [#88](https://github.com/ant-design/x/pull/88) [@YumoImer](https://github.com/YumoImer)
 - 🛠 重构：API 命名规范 [#73](https://github.com/ant-design/x/pull/73) [@zombieJ](https://github.com/zombieJ)
 - 🛠 杂项：CI、Github Actions、发布
   - 🛠 [#59](https://github.com/ant-design/x/pull/59) [@zombieJ](https://github.com/zombieJ)
