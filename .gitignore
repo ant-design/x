@@ -47,5 +47,7 @@ components/version/token-meta.json
 components/version/token.json
 components/version/version.ts
 components/version/version.tsx
+.dumi/preset/components-changelog*
+.dumi/preset/misc-changelog.json
 report.html
 dist/
