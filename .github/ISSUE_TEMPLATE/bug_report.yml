@@ -33,13 +33,11 @@ body:
     attributes:
       label: Context
       description: What are you trying to accomplish? Providing context helps us come up with a solution that is more useful in the real world.
-  - type: dropdown
+  - type: input
     id: version
     attributes:
       label: Version
       description: What version of @ant-design/x version?
-      options:
-        - 1.0.0
     validations:
       required: true
   - type: dropdown
