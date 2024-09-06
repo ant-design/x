@@ -1,0 +1,19 @@
+name: Feature request 💄
+description: Suggest a new idea for @ant-design/x
+labels: ['feature request']
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for contributing by creating an issue! ❤️ Please provide a searchable summary of the issue in the title above ⬆️.
+  - type: textarea
+    attributes:
+      label: Summary
+      description: Describe how it should work.
+  - type: textarea
+    attributes:
+      label: What does the proposed API look like?
+      description: Describe how you propose to solve the problem and provide code samples of how the API would work once implemented. Note that you can use Markdown to format your code blocks.
+  - type: textarea
+    attributes:
+      label: Motivation
+      description: What are you trying to accomplish? Providing context helps us come up with a solution that is more useful in the real world.
