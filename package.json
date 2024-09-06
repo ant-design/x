@@ -4,15 +4,11 @@
   "description": "Crafting AI-driven interfaces with React, seamlessly integrating smart chat components and API services at your fingertips.",
   "keywords": [
     "AI",
+    "Copilot",
     "ant",
-    "component",
     "components",
-    "design",
     "framework",
-    "frontend",
-    "react",
-    "react-component",
-    "ui"
+    "react"
   ],
   "homepage": "https://x.ant.design",
   "bugs": {
@@ -27,12 +23,7 @@
     "url": "https://opencollective.com/ant-design"
   },
   "license": "MIT",
-  "contributors": [
-    "ant"
-  ],
-  "sideEffects": [
-    "*.css"
-  ],
+  "sideEffects": false,
   "main": "lib/index.js",
   "module": "es/index.js",
   "typings": "es/index.d.ts",
@@ -84,7 +75,7 @@
     "prestart": "npm run version && npm run token:statistic && npm run token:meta && npm run lint:changelog",
     "start": "tsx ./scripts/set-node-options.ts cross-env PORT=8001 dumi dev",
     "pretest": "npm run version",
-    "test": "jest --config .jest.js --no-cache",
+    "test": "jest --config .jest.js --no-cache --collect-coverage",
     "test:all": "sh -e ./scripts/test-all.sh",
     "test:dekko": "node ./tests/dekko/index.test.js",
     "test:image": "jest --config .jest.image.js --no-cache -i -u --forceExit",
@@ -103,12 +94,7 @@
     "*.{ts,tsx,js,jsx}": "biome format --write",
     "*.{json,less,md}": "prettier --ignore-unknown --write"
   },
-  "browserslist": [
-    "> 0.5%",
-    "last 2 versions",
-    "Firefox ESR",
-    "not dead"
-  ],
+  "browserslist": ["defaults"],
   "dependencies": {
     "@ant-design/colors": "^7.1.0",
     "@ant-design/cssinjs": "^1.21.0",
@@ -300,8 +286,8 @@
   },
   "peerDependencies": {
     "antd": ">=5.0.0",
-    "react": ">=16.9.0",
-    "react-dom": ">=16.9.0"
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -315,9 +301,5 @@
       "path": "./dist/antd-with-locales.min.js",
       "limit": "400 KiB"
     }
-  ],
-  "title": "Ant Design",
-  "tnpm": {
-    "mode": "npm"
-  }
+  ]
 }
