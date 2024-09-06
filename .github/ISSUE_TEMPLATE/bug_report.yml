@@ -4,7 +4,7 @@ labels: ['bug']
 body:
   - type: markdown
     attributes:
-      value: 感谢贡献！❤️ 请在上方标题中提供一个可搜索的议题摘要 ⬆️。
+      value: 感谢您的贡献！❤️ 请在上方写一个易于搜索的标题 ⬆️。
     validations:
       required: true
   - type: textarea

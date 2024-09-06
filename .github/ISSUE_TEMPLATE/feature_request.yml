@@ -4,7 +4,7 @@ labels: ['feature request']
 body:
   - type: markdown
     attributes:
-      value: 感谢您通过创建议题做出贡献！❤️ 请在上方标题中提供一个可搜索的议题摘要 ⬆️。
+      value: 感谢您的贡献！❤️ 请在上方写一个易于搜索的标题 ⬆️。
   - type: textarea
     attributes:
       label: 需求动机
