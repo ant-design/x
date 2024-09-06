@@ -11,7 +11,8 @@
 [![NPM version][npm-image]][npm-url]
 [![NPM downloads][download-image]][download-url]
 
-[Changelog](./CHANGELOG.en-US.md) · [报告问题][github-issues-url] · [特性需求][github-issues-url] · English · [中文](./README-zh_CN.md)
+[Changelog](./CHANGELOG.zh-US.md) · [Report Bug][github-issues-bug-report] · [Request Feature][github-issues-feature-request] · English · [中文](./README-zh_CN.md)
+[更新日志](./CHANGELOG.zh-CN.md) · [报告问题][github-issues-bug-report] · [特性需求][github-issues-feature-request] · [English](./README.md) · 中文
 
 [npm-image]: http://img.shields.io/npm/v/@ant-design/x.svg?style=flat-square
 [npm-url]: http://npmjs.org/package/@ant-design/x
@@ -37,7 +38,8 @@
 [renovate-dashboard-url]: https://github.com/ant-design/x/issues/32498
 [dumi-image]: https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square
 [dumi-url]: https://github.com/umijs/dumi
-[github-issues-url]: https://github.com/ant-design/x/issues/new
+[github-issues-bug-report]: https://github.com/ant-design/x/issues/new?template=bug-report.yml
+[github-issues-feature-request]: https://github.com/ant-design/x/issues/new?template=bug-feature-request.yml
 </div>
 
 [![](https://user-images.githubusercontent.com/507615/209472919-6f7e8561-be8c-4b0b-9976-eb3c692aa20a.png)](https://ant.design)
