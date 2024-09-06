@@ -11,6 +11,8 @@ Crafting AI-driven interfaces with React, seamlessly integrating smart chat comp
 [![NPM version][npm-image]][npm-url]
 [![NPM downloads][download-image]][download-url]
 
+[Changelog](./CHANGELOG.en-US.md) · [Report Bug][github-issues-url] · [Request Feature][github-issues-url] · English · [中文](./README-zh_CN.md)
+
 [npm-image]: http://img.shields.io/npm/v/@ant-design/x.svg?style=flat-square
 [npm-url]: http://npmjs.org/package/@ant-design/x
 [github-action-image]: https://github.com/ant-design/x/actions/workflows/main.yml/badge.svg
@@ -35,6 +37,7 @@ Crafting AI-driven interfaces with React, seamlessly integrating smart chat comp
 [renovate-dashboard-url]: https://github.com/ant-design/x/issues/32498
 [dumi-image]: https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square
 [dumi-url]: https://github.com/umijs/dumi
+[github-issues-url]: https://github.com/ant-design/x/issues/new
 </div>
 
 [![](https://user-images.githubusercontent.com/507615/209472919-6f7e8561-be8c-4b0b-9976-eb3c692aa20a.png)](https://ant.design)
