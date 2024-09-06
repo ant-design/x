@@ -1,19 +1,15 @@
-name: Feature request 💄
-description: Suggest a new idea for @ant-design/x
+name: 功能请求 💄
+description: 我想给 @ant-design/x 加个新功能
 labels: ['feature request']
 body:
   - type: markdown
     attributes:
-      value: Thanks for contributing by creating an issue! ❤️ Please provide a searchable summary of the issue in the title above ⬆️.
+      value: 感谢您通过创建议题做出贡献！❤️ 请在上方标题中提供一个可搜索的议题摘要 ⬆️。
   - type: textarea
     attributes:
-      label: Summary
-      description: Describe how it should work.
+      label: 需求动机
+      description: 要解决什么问题？提供背景有助于我们提出在现实世界中更有用的解决方案。
   - type: textarea
     attributes:
-      label: What does the proposed API look like?
-      description: Describe how you propose to solve the problem and provide code samples of how the API would work once implemented. Note that you can use Markdown to format your code blocks.
-  - type: textarea
-    attributes:
-      label: Motivation
-      description: What are you trying to accomplish? Providing context helps us come up with a solution that is more useful in the real world.
+      label: 提议的 API 是什么样的？
+      description: 描述您希望用什么样的 API 来解决这个问题，可以写一个具体的 markdown 代码块示例。
