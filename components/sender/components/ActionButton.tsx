@@ -28,10 +28,10 @@ export default function ActionButton(props: ActionButtonProps) {
   return (
     <Button
       type="text"
-      className={classNames(context.prefixCls, className)}
       onClick={onClick}
       disabled={disabled}
       {...restProps}
+      className={classNames(context.prefixCls, className)}
     />
   );
 }
