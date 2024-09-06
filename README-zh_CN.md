@@ -18,7 +18,7 @@
 [npm-url]: http://npmjs.org/package/@ant-design/x
 [github-action-image]: https://github.com/ant-design/x/actions/workflows/main.yml/badge.svg
 [github-action-url]: https://github.com/ant-design/x/actions/workflows/main.yml
-codecov-image]: https://codecov.io/gh/ant-design/x/graph/badge.svg?token=wrCCsyTmdi
+[codecov-image]: https://codecov.io/gh/ant-design/x/graph/badge.svg?token=wrCCsyTmdi
 [codecov-url]: https://codecov.io/gh/ant-design/x
 [download-image]: https://img.shields.io/npm/dm/@ant-design/x.svg?style=flat-square
 [download-url]: https://npmjs.org/package/@ant-design/x
