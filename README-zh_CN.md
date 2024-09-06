@@ -40,8 +40,6 @@
 [github-issues-url]: https://github.com/ant-design/x/issues/new
 </div>
 
-[![](https://user-images.githubusercontent.com/507615/209472919-6f7e8561-be8c-4b0b-9976-eb3c692aa20a.png)](https://ant.design)
-
 ## 📦 安装
 
 ```bash
