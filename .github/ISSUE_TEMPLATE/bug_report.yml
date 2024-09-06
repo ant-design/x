@@ -1,6 +1,6 @@
 name: 错误报告 🐛
 description: 提交一个 @ant-design/x 的 bug
-labels: ['Bug']
+labels: ['bug']
 body:
   - type: markdown
     attributes:
