@@ -1,23 +1,38 @@
-name: Bug Report
-description: File a bug report.
-title: "[Bug]: "
-labels: ["bug"]
-assignees:
-  - octocat
+name: Bug report 🐛
+description: Create a bug report for @ant-design/x
+labels: ['Bug']
 body:
   - type: markdown
     attributes:
-      value: |
-        Thanks for taking the time to fill out this bug report!
-  - type: textarea
-    id: what-happened
-    attributes:
-      label: What happened?
-      description: Also tell us, what did you expect to happen?
-      placeholder: Tell us what you see!
-      value: "A bug happened!"
+      value: Thanks for contributing by creating an issue! ❤️ Please provide a searchable summary of the issue in the title above ⬆️.
     validations:
       required: true
+  - type: textarea
+    attributes:
+      label: Steps to reproduce
+      description: |
+        **⚠️ Issues that we can't reproduce can't be fixed.**
+
+        Please provide a link to a live example and an unambiguous set of steps to reproduce this bug. See our [documentation](https://github.com/ant-design/ant-design/wiki/%E4%BB%80%E4%B9%88%E6%98%AF%E6%9C%80%E5%B0%8F%E5%8C%96%E9%87%8D%E7%8E%B0%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%98%AF%E5%BF%85%E9%9C%80%E7%9A%84%EF%BC%9F) on how to build a reproduction case.
+      value: |
+        Link to live example: (required)
+
+        Steps:
+        1.
+        2.
+        3.
+  - type: textarea
+    attributes:
+      label: Current behavior
+      description: Describe what happens instead of the expected behavior.
+  - type: textarea
+    attributes:
+      label: Expected behavior
+      description: Describe what should happen.
+  - type: textarea
+    attributes:
+      label: Context
+      description: What are you trying to accomplish? Providing context helps us come up with a solution that is more useful in the real world.
   - type: dropdown
     id: version
     attributes:
@@ -35,17 +50,3 @@ body:
         - Chrome
         - Safari
         - Microsoft Edge
-  - type: textarea
-    id: logs
-    attributes:
-      label: Relevant log output
-      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
-      render: shell
-  - type: checkboxes
-    id: terms
-    attributes:
-      label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com). 
-      options:
-        - label: I agree to follow this project's Code of Conduct
-          required: true
