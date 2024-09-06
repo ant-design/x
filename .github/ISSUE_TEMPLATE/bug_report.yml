@@ -38,6 +38,8 @@ body:
     attributes:
       label: Version
       description: What version of @ant-design/x version?
+      options:
+        - 1.0.0
     validations:
       required: true
   - type: dropdown
