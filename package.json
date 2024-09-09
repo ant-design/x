@@ -161,7 +161,7 @@
     "@types/throttle-debounce": "^5.0.2",
     "@types/warning": "^3.0.3",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
-    "@typescript-eslint/parser": "^7.18.0",
+    "@typescript-eslint/parser": "^8.5.0",
     "@umijs/fabric": "^4.0.1",
     "adm-zip": "^0.5.16",
     "ali-oss": "^6.21.0",
