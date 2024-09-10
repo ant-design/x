@@ -24,7 +24,6 @@ export default function ActionButton(props: ActionButtonProps) {
 
   const onClick = context[action];
   const disabled = context[`${action}Disabled`];
-
   return (
     <Button
       type="text"
