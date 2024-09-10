@@ -19,7 +19,7 @@ export interface ActionButtonProps extends ButtonProps {
 }
 
 export default function ActionButton(props: ActionButtonProps) {
-  const { className, action, ...restProps } = props;
+  const { className, action, onClick: outClick, ...restProps } = props;
   const context = React.useContext(ActionButtonContext);
 
   const onClick = context[action];
@@ -28,9 +28,16 @@ export default function ActionButton(props: ActionButtonProps) {
   return (
     <Button
       type="text"
-      onClick={onClick}
       disabled={disabled}
       {...restProps}
+      onClick={(e) => {
+        if (onClick) {
+          onClick();
+        }
+        if (outClick) {
+          outClick(e);
+        }
+      }}
       className={classNames(context.prefixCls, className)}
     />
   );
