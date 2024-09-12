@@ -17,11 +17,12 @@ const genSuggestionStyle: GenerateStyle<SuggestionToken> = (token) => {
     paddingXS,
     borderRadius,
     colorInfoBg,
-    paddingContentHorizontal,
+    paddingContentHorizontalSM,
     fontWeightStrong,
     fontSizeIcon,
     fontSize,
   } = token;
+  
   return {
     [componentCls]: {
       position: 'relative',
@@ -43,7 +44,7 @@ const genSuggestionStyle: GenerateStyle<SuggestionToken> = (token) => {
         padding: paddingXS,
         background: 'transparent',
         display: 'flex',
-        gap: paddingContentHorizontal / 2,
+        gap: paddingContentHorizontalSM,
         flexDirection: 'row',
 
         [`&-icon`]: {

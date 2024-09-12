@@ -23,11 +23,36 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*8yArQ43EGccAAA
 
 Common props ref：[Common props](/docs/react/common-props)
 
-### SuggestionProps
+### suggestionProps
 
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| prefixCls | Custom prefix for the component class name | string | - | - |
+| items | List of suggestion | Suggestion[] | - | - |
+| triggerCharacter | Character to trigger the suggestion display | string | '/' | - |
+| children | Custom input box | ReactNode | - | - |
+| title | Title of the popover | ReactNode | - | - |
+| extra | Extra content | ReactNode | - | - |
+| onChange | Callback when the input value changes | (value: string) => void | - | - |
+| value | Input box value | string | - | - |
+| className | Component class name | string | - | - |
+| rootClassName | Root element class name | string | - | - |
+| style | Component style | React.CSSProperties | - | - |
+| placeholder | Input box placeholder | string | - | - |
+| placement | Popover placement | TooltipProps['placement'] | 'topLeft' | - |
 
-## Semantic DOM
+### Suggestion
 
-## Design Token
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| id | Unique identifier for the suggestion | string | - | - |
+| label | Content to display for the suggestion | ReactNode | - | - |
+| icon | Icon for the suggestion | ReactNode | - | - |
+| className | Class name for the suggestion item | string | - | - |
+| onClick | Callback when the suggestion item is clicked | () => void | - | - |
+| value | Value of the suggestion item | string | - | - |
+| extra | Extra content for the suggestion item | ReactNode | - | - |
 
-<ComponentTokenTable component="Suggestion"></ComponentTokenTable>
+## Theme Variables (Design Token)
+
+<ComponentTokenTable component="suggestion"></ComponentTokenTable>

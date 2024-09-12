@@ -6,7 +6,7 @@ import useConfigContext from '../config-provider/useConfigContext';
 import type { TooltipProps, InputProps } from 'antd';
 import { useMergedState } from 'rc-util';
 
-export type Suggestion = {
+export type SuggestionItem = {
   id: string;
   label: React.ReactNode;
   icon?: React.ReactNode;
@@ -16,9 +16,9 @@ export type Suggestion = {
   extra?: React.ReactNode;
 };
 
-export type SuggestionsProps = {
+export type SuggestionProps = {
   prefixCls?: string;
-  items: Suggestion[];
+  items: SuggestionItem[];
   triggerCharacter?: string;
   children?: React.ReactNode;
   title?: React.ReactNode;
@@ -30,8 +30,8 @@ export type SuggestionsProps = {
   style?: React.CSSProperties;
 };
 
-const Suggestions: React.FC<
-  SuggestionsProps & Pick<InputProps, 'placeholder'> & Pick<TooltipProps, 'placement'>
+const Suggestion: React.FC<
+  SuggestionProps & Pick<InputProps, 'placeholder'> & Pick<TooltipProps, 'placement'>
 > = (props) => {
   const {
     prefixCls: customizePrefixCls,
@@ -49,7 +49,7 @@ const Suggestions: React.FC<
 
   // ============================= MISC =============================
   const { direction, getPrefixCls } = useConfigContext();
-  const prefixCls = getPrefixCls('suggestions', customizePrefixCls);
+  const prefixCls = getPrefixCls('suggestion', customizePrefixCls);
 
   // ============================ Styles ============================
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
@@ -64,7 +64,6 @@ const Suggestions: React.FC<
   const [visible, setVisible] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const inputRef = useRef<any>(null);
-
   const handleSearch = (searchText: string) => {
     if (searchText.startsWith(triggerCharacter)) {
       setVisible(true);
@@ -141,11 +140,21 @@ const Suggestions: React.FC<
         }}
       >
         <div ref={inputRef} className={classnames(`${prefixCls}-input`)}>
-          {React.cloneElement((children || <Input />) as React.ReactElement, {
-            value: inputValue,
-            onChange: setInputValue,
-            placeholder,
-          })}
+          {children ? (
+            React.cloneElement(children as React.ReactElement, {
+              value: inputValue,
+              onChange: setInputValue,
+              placeholder,
+            })
+          ) : (
+            <Input
+              placeholder={placeholder}
+              value={inputValue}
+              onChange={(e) => {
+                setInputValue(e.target.value);
+              }}
+            />
+          )}
         </div>
       </Popover>
     </div>,
@@ -153,7 +162,7 @@ const Suggestions: React.FC<
 };
 
 if (process.env.NODE_ENV !== 'production') {
-  Suggestions.displayName = 'Suggestions';
+  Suggestion.displayName = 'Suggestion';
 }
 
-export default Suggestions;
+export default Suggestion;

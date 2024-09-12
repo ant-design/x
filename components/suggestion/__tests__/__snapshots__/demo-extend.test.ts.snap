@@ -1,0 +1,331 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders components/suggestion/demo/basic.tsx extend context correctly 1`] = `
+<div
+  class="ant-suggestion"
+>
+  <div
+    class="ant-suggestion-input"
+  >
+    <input
+      class="ant-input ant-input-outlined"
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    class="ant-popover ant-zoom-big-appear ant-zoom-big-appear-prepare ant-zoom-big ant-popover-placement-topLeft"
+    style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; box-sizing: border-box;"
+  >
+    <div
+      class="ant-popover-content"
+    >
+      <div
+        class="ant-popover-inner"
+        role="tooltip"
+      >
+        <div
+          class="ant-popover-inner-content"
+        >
+          <div
+            class="ant-suggestion-container"
+          >
+            <div
+              class="ant-suggestion-item ant-suggestion-item-active"
+            >
+              <div
+                class="ant-suggestion-item-label"
+              >
+                写一篇报告，关于：
+              </div>
+            </div>
+            <div
+              class="ant-suggestion-item"
+            >
+              <div
+                class="ant-suggestion-item-label"
+              >
+                画一幅画：
+              </div>
+            </div>
+            <div
+              class="ant-suggestion-item"
+            >
+              <div
+                class="ant-suggestion-item-label"
+              >
+                查一个知识：
+              </div>
+              <div
+                class="ant-suggestion-item-extra"
+              >
+                <div>
+                  ExtraLink
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders components/suggestion/demo/basic.tsx extend context correctly 2`] = `[]`;
+
+exports[`renders components/suggestion/demo/trigger.tsx extend context correctly 1`] = `
+<div
+  class="ant-suggestion"
+>
+  <div
+    class="ant-suggestion-input"
+  >
+    <input
+      class="ant-input ant-input-outlined"
+      placeholder="use & to get more suggestions!"
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    class="ant-popover ant-zoom-big-appear ant-zoom-big-appear-prepare ant-zoom-big ant-popover-placement-topLeft"
+    style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; box-sizing: border-box;"
+  >
+    <div
+      class="ant-popover-content"
+    >
+      <div
+        class="ant-popover-inner"
+        role="tooltip"
+      >
+        <div
+          class="ant-popover-inner-content"
+        >
+          <div
+            class="ant-suggestion-container"
+          >
+            <div
+              class="ant-suggestion-item ant-suggestion-item-active"
+            >
+              <div
+                class="ant-suggestion-item-label"
+              >
+                写一篇报告，关于：
+              </div>
+            </div>
+            <div
+              class="ant-suggestion-item"
+            >
+              <div
+                class="ant-suggestion-item-label"
+              >
+                画一幅画：
+              </div>
+            </div>
+            <div
+              class="ant-suggestion-item"
+            >
+              <div
+                class="ant-suggestion-item-label"
+              >
+                查一个知识：
+              </div>
+              <div
+                class="ant-suggestion-item-extra"
+              >
+                <div>
+                  ExtraLink
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders components/suggestion/demo/trigger.tsx extend context correctly 2`] = `[]`;
+
+exports[`renders components/suggestion/demo/withSender.tsx extend context correctly 1`] = `
+<div
+  class="ant-suggestion"
+>
+  <div
+    class="ant-suggestion-input"
+  >
+    <div
+      class="ant-sender"
+    >
+      <textarea
+        class="ant-input ant-input-outlined ant-sender-input"
+        style="resize: none; height: -54px; max-height: -54px;"
+      />
+      <div
+        class="ant-sender-actions-list"
+      >
+        <div
+          class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
+        >
+          <div
+            class="ant-space-item"
+          >
+            <button
+              class="ant-btn ant-btn-text ant-btn-icon-only ant-sender-actions-btn"
+              disabled=""
+              type="button"
+            >
+              <span
+                class="ant-btn-icon"
+              >
+                <span
+                  aria-label="clear"
+                  class="anticon anticon-clear"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="clear"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <defs>
+                      <style />
+                    </defs>
+                    <path
+                      d="M899.1 869.6l-53-305.6H864c14.4 0 26-11.6 26-26V346c0-14.4-11.6-26-26-26H618V138c0-14.4-11.6-26-26-26H432c-14.4 0-26 11.6-26 26v182H160c-14.4 0-26 11.6-26 26v192c0 14.4 11.6 26 26 26h17.9l-53 305.6a25.95 25.95 0 0025.6 30.4h723c1.5 0 3-.1 4.4-.4a25.88 25.88 0 0021.2-30zM204 390h272V182h72v208h272v104H204V390zm468 440V674c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v156H416V674c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v156H202.8l45.1-260H776l45.1 260H672z"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </button>
+          </div>
+          <div
+            class="ant-space-item"
+          >
+            <button
+              class="ant-btn ant-btn-text ant-btn-icon-only ant-sender-actions-btn"
+              disabled=""
+              type="button"
+            >
+              <span
+                class="ant-btn-icon"
+              >
+                <span
+                  aria-label="send"
+                  class="anticon anticon-send"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="send"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <defs>
+                      <style />
+                    </defs>
+                    <path
+                      d="M931.4 498.9L94.9 79.5c-3.4-1.7-7.3-2.1-11-1.2a15.99 15.99 0 00-11.7 19.3l86.2 352.2c1.3 5.3 5.2 9.6 10.4 11.3l147.7 50.7-147.6 50.7c-5.2 1.8-9.1 6-10.3 11.3L72.2 926.5c-.9 3.7-.5 7.6 1.2 10.9 3.9 7.9 13.5 11.1 21.5 7.2l836.5-417c3.1-1.5 5.6-4.1 7.2-7.1 3.9-8 .7-17.6-7.2-21.6zM170.8 826.3l50.3-205.6 295.2-101.3c2.3-.8 4.2-2.6 5-5 1.4-4.2-.8-8.7-5-10.2L221.1 403 171 198.2l628 314.9-628.2 313.2z"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-popover ant-zoom-big-appear ant-zoom-big-appear-prepare ant-zoom-big ant-popover-placement-topLeft"
+    style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; box-sizing: border-box;"
+  >
+    <div
+      class="ant-popover-content"
+    >
+      <div
+        class="ant-popover-inner"
+        role="tooltip"
+      >
+        <div
+          class="ant-popover-inner-content"
+        >
+          <div
+            class="ant-suggestion-container"
+          >
+            <div
+              class="ant-suggestion-item ant-suggestion-item-active"
+            >
+              <div
+                class="ant-suggestion-item-icon"
+              >
+                <span
+                  aria-label="open-a-i"
+                  class="anticon anticon-open-a-i"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="open-a-i"
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M475.6 112c-74.03 0-139.72 42.38-172.92 104.58v237.28l92.27 56.48 3.38-235.7 189-127.45A194.33 194.33 0 00475.6 112m202.9 62.25c-13.17 0-26.05 1.76-38.8 4.36L453.2 304.36l-1.37 96.15 186.58-125.25 231.22 137.28a195.5 195.5 0 004.87-42.33c0-108.04-87.93-195.96-195.99-195.96M247.34 266C167.34 290.7 109 365.22 109 453.2c0 27.92 5.9 54.83 16.79 79.36l245.48 139.77 90.58-56.12-214.5-131.38zm392.88 74.67l-72.7 48.85L771.5 517.58 797.3 753C867.41 723.11 916 653.97 916 573.1c0-27.55-5.86-54.12-16.57-78.53zm-123 82.6l-66.36 44.56-1.05 76.12 64.7 39.66 69.54-43.04-1.84-76.48zm121.2 76.12l5.87 248.34L443 866.9A195.65 195.65 0 00567.84 912c79.22 0 147.8-46.52 178.62-114.99L719.4 550.22zm-52.86 105.3L372.43 736.68 169.56 621.15a195.35 195.35 0 00-5.22 44.16c0 102.94 79.84 187.41 180.81 195.18L588.2 716.6z"
+                    />
+                  </svg>
+                </span>
+              </div>
+              <div
+                class="ant-suggestion-item-label"
+              >
+                写一篇报告，关于：
+              </div>
+            </div>
+            <div
+              class="ant-suggestion-item"
+            >
+              <div
+                class="ant-suggestion-item-label"
+              >
+                画一幅画：
+              </div>
+            </div>
+            <div
+              class="ant-suggestion-item"
+            >
+              <div
+                class="ant-suggestion-item-label"
+              >
+                查一个知识：
+              </div>
+              <div
+                class="ant-suggestion-item-extra"
+              >
+                <div>
+                  ExtraLink
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders components/suggestion/demo/withSender.tsx extend context correctly 2`] = `[]`;
