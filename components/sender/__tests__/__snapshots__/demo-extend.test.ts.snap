@@ -33,7 +33,6 @@ exports[`renders components/sender/demo/actions.tsx extend context correctly 1`]
         >
           <button
             class="ant-btn ant-btn-primary ant-btn-icon-only ant-sender-actions-btn"
-            disabled=""
             type="button"
           >
             <span

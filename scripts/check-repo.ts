@@ -18,8 +18,8 @@ function exitProcess(code = 1) {
 
 async function checkVersion() {
   spinner.start('正在检查当前版本是否已经存在');
-  const { versions } = await fetch('http://registry.npmjs.org/@ant-design/x').then((res: Response) =>
-    res.json(),
+  const { versions } = await fetch('http://registry.npmjs.org/@ant-design/x').then(
+    (res: Response) => res.json(),
   );
   if (version in versions) {
     spinner.fail(chalk.yellow('😈 Current version already exists. Forget update package.json?'));
@@ -38,8 +38,8 @@ async function checkBranch({ current }: StatusResult) {
     version.includes('-experimental.')
   ) {
     spinner.info(chalk.cyan('😃 Alpha version. Skip branch check.'));
-  } else if (current !== 'master') {
-    spinner.fail(chalk.red('🤔 You are not in the master branch!'));
+  } else if (current !== 'main') {
+    spinner.fail(chalk.red('🤔 You are not in the main branch!'));
     exitProcess();
   }
   spinner.succeed('分支检查通过');
@@ -59,31 +59,15 @@ async function checkCommit({ files }: StatusResult) {
 
 async function checkRemote() {
   spinner.start('正在检查远程分支');
-  const { remote } = await git.fetch('origin', 'master');
+  const { remote } = await git.fetch('origin', 'main');
   if (!remote?.includes('ant-design/x')) {
     const { value } = await git.getConfig('remote.origin.url');
     if (!value?.includes('ant-design/x')) {
-      spinner.fail(
-        chalk.red('🧐 Your remote origin is not ant-design/x, did you fork it?'),
-      );
+      spinner.fail(chalk.red('🧐 Your remote origin is not ant-design/x, did you fork it?'));
       exitProcess();
     }
   }
   spinner.succeed('远程分支检查通过');
-}
-
-async function checkToken() {
-  if (!process.env.GITHUB_ACCESS_TOKEN) {
-    console.log(
-      spinner.fail(
-        chalk.red(
-          '🚨 请先设置 GITHUB_ACCESS_TOKEN 环境变量到本地，请不要泄露给任何在线页面: https://octokit.github.io/rest.js/v20#authentication',
-        ),
-      ),
-    );
-    exitProcess();
-  }
-  spinner.succeed('GITHUB_ACCESS_TOKEN 检查通过');
 }
 
 export default async function checkRepo() {
@@ -92,5 +76,4 @@ export default async function checkRepo() {
   await checkBranch(status);
   await checkCommit(status);
   await checkRemote();
-  await checkToken();
 }

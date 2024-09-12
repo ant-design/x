@@ -28,6 +28,36 @@ describe('Sender Component', () => {
     expect(container.querySelector('.bamboo')).toBeTruthy();
   });
 
+  it('custom action button', () => {
+    const onSubmit = jest.fn();
+    const { container, getByText } = render(
+      <Sender
+        actions={(_, info) => {
+          const { SendButton, ClearButton } = info.components;
+          return (
+            <div className="bamboo">
+              <SendButton onClick={onSubmit} disabled={false}>
+                SendPrompt
+              </SendButton>
+              <ClearButton disabled />
+            </div>
+          );
+        }}
+      />,
+    );
+
+    // check children render
+    const sendButton = getByText('SendPrompt');
+    expect(sendButton).toBeInTheDocument();
+
+    const clearButton = container.querySelector('.bamboo button[disabled]');
+    expect(clearButton).toBeInTheDocument();
+
+    // check custom onClick
+    fireEvent.click(sendButton);
+    expect(onSubmit).toHaveBeenCalled();
+  });
+
   it('onSubmit', () => {
     const onSubmit = jest.fn();
     const { container } = render(<Sender value="bamboo" onSubmit={onSubmit} />);

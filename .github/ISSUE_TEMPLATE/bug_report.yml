@@ -1,0 +1,53 @@
+name: 错误报告 🐛
+description: 提交一个 @ant-design/x 的 bug
+labels: ['bug']
+body:
+  - type: markdown
+    attributes:
+      value: 感谢您的贡献！❤️ 请在上方写一个易于搜索的标题 ⬆️。
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 重现步骤
+      description: |
+        **⚠️ 我们无法重现的问题是无法修复的。**
+
+        请提供一个在线示例的链接和一组明确的步骤来重现这个错误。请参阅我们的[文档](https://github.com/ant-design/ant-design/wiki/%E4%BB%80%E4%B9%88%E6%98%AF%E6%9C%80%E5%B0%8F%E5%8C%96%E9%87%8D%E7%8E%B0%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%98%AF%E5%BF%85%E9%9C%80%E7%9A%84%EF%BC%9F)了解如何构建重现案例。
+      value: |
+        在线示例链接：（必填）
+
+        步骤：
+        1.
+        2.
+        3.
+  - type: textarea
+    attributes:
+      label: 当前行为
+      description: 描述实际发生的情况，而不是预期行为。
+  - type: textarea
+    attributes:
+      label: 预期行为
+      description: 描述应该发生的情况。
+  - type: textarea
+    attributes:
+      label: 上下文
+      description: 您想要完成什么？提供背景有助于我们提出在现实世界中更有用的解决方案。
+  - type: input
+    id: version
+    attributes:
+      label: 版本
+      description: 使用的 @ant-design/x 版本是多少？
+    validations:
+      required: true
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: 您在哪些浏览器上遇到了这个问题？
+      multiple: true
+      options:
+        - Firefox
+        - Chrome
+        - Safari
+        - Microsoft Edge
+        - 其他
