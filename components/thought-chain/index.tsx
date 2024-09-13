@@ -49,6 +49,8 @@ export interface ThoughtChainProps extends Omit<React.HTMLAttributes<HTMLDivElem
    * @descEN Custom class name
    */
   rootClassName?: string;
+
+  size?: 'default' |'small' | 'large';
 }
 
 const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
@@ -56,6 +58,7 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
     prefixCls: customizePrefixCls,
     rootClassName,
     className,
+    size='default',
     items,
     collapsible,
     styles = {},
@@ -88,6 +91,8 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
 
   const mergedCls = classnames(className, rootClassName, prefixCls, hashId, cssVarCls, {
     [`${prefixCls}-rtl`]: direction === 'rtl',
+    [`${prefixCls}-sm`]: size === 'small',
+    [`${prefixCls}-lg`]: size === 'large',
   });
 
   // ============================ Render ============================
@@ -108,6 +113,7 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
           <ThoughtChainNode
             key={item.key || `key_${index}`}
             className={classNames.item}
+            size={size}
             style={styles.item}
             info={{
               ...item,

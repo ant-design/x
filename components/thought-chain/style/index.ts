@@ -178,7 +178,8 @@ const genThoughtChainItemStyle: GenerateThoughtChainItemStyle = (token) => {
 };
 
 const genThoughtChainStyle: GenerateStyle<ThoughtChainToken> = (token) => {
-  const { componentCls } = token;
+  const { componentCls, calc } = token;
+  const itemCls = `${componentCls}-item`;
 
   return {
     [componentCls]: {
@@ -193,6 +194,79 @@ const genThoughtChainStyle: GenerateStyle<ThoughtChainToken> = (token) => {
 
       [`&${componentCls}-rtl`]: {
         direction: 'rtl',
+      },
+
+      // small
+      [`&${componentCls}-sm`]: {
+        gap: calc(token.marginSM).div(2).equal(),
+        [`& ${itemCls}-header`]: {
+          marginBottom: token.marginSM,
+          gap: token.paddingSM,
+          [`& ${itemCls}-icon`]: {
+            height: calc(token.itemIconSize).sub(2).equal(),
+            width: calc(token.itemIconSize).sub(2).equal(),
+            fontSize: calc(token.itemIconFontSize).sub(2).equal(),
+          },
+          [`& ${itemCls}-header-box`]: {
+            [`& ${itemCls}-title`]: {
+              height: calc(token.itemIconSize).sub(2).equal(),
+              lineHeight: calc(token.itemIconSize).sub(2).equal(),
+              maxHeight: calc(token.itemIconSize).sub(2).equal(),
+              fontSize: calc(token.fontSize).sub(2).equal(),
+              [`& ${itemCls}-collapse-icon`]: {
+                marginInlineEnd: calc(token.marginXS).sub(2).equal(),
+              },
+            },
+            [`& ${itemCls}-desc`]: {
+              fontSize: calc(token.fontSizeSM).sub(2).equal(),
+            },
+          },
+        },
+        [`& > ${itemCls}`]: {
+          [`& ${itemCls}-header::before`]: {
+            top: calc(token.itemIconSize).sub(2).equal(),
+            bottom: calc(`${token.calc(token.padding).mul(-2).equal()}`)
+              .add(14)
+              .equal(),
+          },
+        },
+      },
+
+
+      // large
+      [`&${componentCls}-lg`]: {
+        gap: token.marginLG,
+        [`& ${itemCls}-header`]: {
+          marginBottom: token.marginLG,
+          gap: token.paddingLG,
+          [`& ${itemCls}-icon`]: {
+            height: calc(token.itemIconSize).add(2).equal(),
+            width: calc(token.itemIconSize).add(2).equal(),
+            fontSize: calc(token.itemIconFontSize).add(2).equal(),
+          },
+          [`& ${itemCls}-header-box`]: {
+            [`& ${itemCls}-title`]: {
+              height: calc(token.itemIconSize).add(2).equal(),
+              lineHeight: calc(token.itemIconSize).add(2).equal(),
+              maxHeight: calc(token.itemIconSize).add(2).equal(),
+              fontSize: token.fontSizeLG,
+              [`& ${itemCls}-collapse-icon`]: {
+                marginInlineEnd: token.marginLG
+              },
+            },
+            [`& ${itemCls}-desc`]: {
+              fontSize: token.fontSize
+            },
+          },
+        },
+        [`& > ${itemCls}`]: {
+          [`& ${itemCls}-header::before`]: {
+            top: calc(token.itemIconSize).add(2).equal(),
+            bottom: calc(`${token.paddingLG}`)
+              .mul(-2)
+              .equal(),
+          },
+        },
       },
     },
   };

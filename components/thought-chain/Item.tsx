@@ -88,10 +88,11 @@ interface ThoughtChainNodeProps extends Omit<React.HTMLAttributes<HTMLDivElement
   info?: ThoughtChainItem;
   nextStatus?: ThoughtChainItem['status'];
   onClick?: (key: string) => void;
+  size?: ThoughtChainProps['size'];
 }
 
 const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
-  const { info = {}, nextStatus, onClick, ...restProps } = props;
+  const { info = {}, nextStatus, size, onClick, ...restProps } = props;
 
   const domProps = pickAttrs(restProps, {
     attr: true,
@@ -115,7 +116,6 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
 
   const {
     key = id,
-
     icon,
     title,
     extra,
@@ -154,7 +154,7 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
         onClick={onThoughtChainNodeClick}
       >
         {/* Avatar */}
-        <Avatar icon={icon} className={`${itemCls}-icon`} />
+        <Avatar icon={icon} className={`${itemCls}-icon`} size={size} />
         {/* Header */}
         <div
           className={classnames(`${itemCls}-header-box`, {
