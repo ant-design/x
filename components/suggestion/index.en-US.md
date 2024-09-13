@@ -15,8 +15,8 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*8yArQ43EGccAAA
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">Basic</code>
-<code src="./demo/withSender.tsx">with Sender</code>
-<code src="./demo/trigger.tsx">trigger character</code>
+<!-- <code src="./demo/withSender.tsx">with Sender</code>
+<code src="./demo/trigger.tsx">trigger character</code> -->
 
 
 ## API
