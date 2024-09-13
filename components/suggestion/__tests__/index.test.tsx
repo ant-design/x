@@ -90,6 +90,7 @@ describe('Sender Component', () => {
     });
 
     it('cancel', () => {
+      const onOpenChange = jest.fn();
       const items = [
         { label: 'Suggestion 1', value: 'suggestion1' },
         {
@@ -98,9 +99,10 @@ describe('Sender Component', () => {
           children: [{ label: 'Suggestion 3', value: 'suggestion3' }],
         },
       ];
-      const { container } = render(<MockSuggestion items={items} />);
+      const { container } = render(<MockSuggestion items={items} onOpenChange={onOpenChange} />);
 
       fireEvent.keyDown(container.querySelector('input')!, { key: '/' });
+      expect(onOpenChange).toHaveBeenCalledWith(true);
 
       fireEvent.keyDown(container.querySelector('input')!, { key: 'ArrowUp' });
       fireEvent.keyDown(container.querySelector('input')!, { key: 'ArrowRight' });
@@ -113,9 +115,9 @@ describe('Sender Component', () => {
       );
       expect(document.querySelector('.ant-select-dropdown-hidden')).toBeFalsy();
 
+      onOpenChange.mockReset();
       fireEvent.keyDown(container.querySelector('input')!, { key: 'Escape' });
-      console.log(document.body.innerHTML);
-      expect(document.querySelector('.ant-select-dropdown-hidden')).toBeTruthy();
+      expect(onOpenChange).toHaveBeenCalledWith(false);
     });
   });
 });
