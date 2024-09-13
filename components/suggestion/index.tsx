@@ -45,6 +45,7 @@ export interface SuggestionProps<T = any> {
   onOpenChange?: (open: boolean) => void;
   items: SuggestionItem[] | ((info?: T) => SuggestionItem[]);
   onSelect?: (value: string) => void;
+  block?: boolean;
 }
 
 // React.FC<
@@ -68,6 +69,7 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
     onOpenChange,
     items,
     onSelect,
+    block,
   } = props;
 
   // ============================= MISC =============================
@@ -216,8 +218,11 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
         }
       }}
       optionRender={optionRender}
-      rootClassName={classnames(className, rootClassName, prefixCls, hashId, cssVarCls)}
+      rootClassName={classnames(className, rootClassName, prefixCls, hashId, cssVarCls, {
+        [`${prefixCls}-block`]: block,
+      })}
       onChange={onInternalChange}
+      dropdownMatchSelectWidth={block}
     >
       <div>{childNode}</div>
     </Cascader>,

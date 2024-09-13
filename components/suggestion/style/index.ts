@@ -9,14 +9,23 @@ export interface ComponentToken {
 interface SuggestionToken extends FullToken<'Suggestion'> {}
 
 const genSuggestionStyle: GenerateStyle<SuggestionToken> = (token) => {
-  const { componentCls } = token;
+  const { componentCls, antCls } = token;
 
   return {
     [componentCls]: {
-      // Cascader
+      [`${antCls}-cascader-menu`]: {
+        height: 'auto',
+      },
+
       [`${componentCls}-item`]: {
         '&-extra': {
           marginInlineStart: token.padding,
+        },
+      },
+
+      [`&${componentCls}-block`]: {
+        [`${componentCls}-item-extra`]: {
+          marginInlineStart: 'auto',
         },
       },
     },
