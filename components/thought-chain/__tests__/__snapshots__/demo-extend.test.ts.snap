@@ -1383,6 +1383,483 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
 
 exports[`renders components/thought-chain/demo/nested.tsx extend context correctly 2`] = `[]`;
 
+exports[`renders components/thought-chain/demo/size.tsx extend context correctly 1`] = `
+<div
+  class="ant-card ant-card-bordered"
+  style="width: 500px;"
+>
+  <div
+    class="ant-card-body"
+  >
+    <div
+      class="ant-space ant-space-vertical ant-space-gap-row-small ant-space-gap-col-small"
+    >
+      <div
+        class="ant-space-item"
+      >
+        <div
+          class="ant-segmented"
+        >
+          <div
+            class="ant-segmented-group"
+          >
+            <label
+              class="ant-segmented-item"
+            >
+              <input
+                class="ant-segmented-item-input"
+                type="radio"
+              />
+              <div
+                class="ant-segmented-item-label"
+                title="Small"
+              >
+                Small
+              </div>
+            </label>
+            <label
+              class="ant-segmented-item ant-segmented-item-selected"
+            >
+              <input
+                checked=""
+                class="ant-segmented-item-input"
+                type="radio"
+              />
+              <div
+                class="ant-segmented-item-label"
+                title="default"
+              >
+                default
+              </div>
+            </label>
+            <label
+              class="ant-segmented-item"
+            >
+              <input
+                class="ant-segmented-item-input"
+                type="radio"
+              />
+              <div
+                class="ant-segmented-item-label"
+                title="Large"
+              >
+                Large
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ant-space-item"
+      >
+        <div
+          class="ant-thought-chain"
+        >
+          <div
+            class="ant-thought-chain-item"
+          >
+            <div
+              class="ant-thought-chain-item-header"
+            >
+              <span
+                class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
+              >
+                1
+              </span>
+              <div
+                class="ant-thought-chain-item-header-box"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+                >
+                  <strong>
+                    Thought Chain Item Title
+                  </strong>
+                </span>
+                <div
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
+                  style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; box-sizing: border-box;"
+                >
+                  <div
+                    class="ant-tooltip-arrow"
+                    style="position: absolute;"
+                  />
+                  <div
+                    class="ant-tooltip-content"
+                  >
+                    <div
+                      class="ant-tooltip-inner"
+                      role="tooltip"
+                    >
+                      Thought Chain Item Title
+                    </div>
+                  </div>
+                </div>
+                <span
+                  class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
+                >
+                  description
+                </span>
+                <div
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
+                  style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; box-sizing: border-box;"
+                >
+                  <div
+                    class="ant-tooltip-arrow"
+                    style="position: absolute;"
+                  />
+                  <div
+                    class="ant-tooltip-content"
+                  >
+                    <div
+                      class="ant-tooltip-inner"
+                      role="tooltip"
+                    >
+                      description
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="ant-thought-chain-item-extra"
+              >
+                <button
+                  class="ant-btn ant-btn-text ant-btn-icon-only"
+                  type="button"
+                >
+                  <span
+                    class="ant-btn-icon"
+                  >
+                    <span
+                      aria-label="more"
+                      class="anticon anticon-more"
+                      role="img"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        data-icon="more"
+                        fill="currentColor"
+                        focusable="false"
+                        height="1em"
+                        viewBox="64 64 896 896"
+                        width="1em"
+                      >
+                        <path
+                          d="M456 231a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0z"
+                        />
+                      </svg>
+                    </span>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-thought-chain-item"
+          >
+            <div
+              class="ant-thought-chain-item-header"
+            >
+              <span
+                class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
+              >
+                2
+              </span>
+              <div
+                class="ant-thought-chain-item-header-box"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+                >
+                  <strong>
+                    Thought Chain Item Title
+                  </strong>
+                </span>
+                <div
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
+                  style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; box-sizing: border-box;"
+                >
+                  <div
+                    class="ant-tooltip-arrow"
+                    style="position: absolute;"
+                  />
+                  <div
+                    class="ant-tooltip-content"
+                  >
+                    <div
+                      class="ant-tooltip-inner"
+                      role="tooltip"
+                    >
+                      Thought Chain Item Title
+                    </div>
+                  </div>
+                </div>
+                <span
+                  class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
+                >
+                  description
+                </span>
+                <div
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
+                  style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; box-sizing: border-box;"
+                >
+                  <div
+                    class="ant-tooltip-arrow"
+                    style="position: absolute;"
+                  />
+                  <div
+                    class="ant-tooltip-content"
+                  >
+                    <div
+                      class="ant-tooltip-inner"
+                      role="tooltip"
+                    >
+                      description
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="ant-thought-chain-item-extra"
+              >
+                <button
+                  class="ant-btn ant-btn-text ant-btn-icon-only"
+                  type="button"
+                >
+                  <span
+                    class="ant-btn-icon"
+                  >
+                    <span
+                      aria-label="more"
+                      class="anticon anticon-more"
+                      role="img"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        data-icon="more"
+                        fill="currentColor"
+                        focusable="false"
+                        height="1em"
+                        viewBox="64 64 896 896"
+                        width="1em"
+                      >
+                        <path
+                          d="M456 231a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0z"
+                        />
+                      </svg>
+                    </span>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-thought-chain-item"
+          >
+            <div
+              class="ant-thought-chain-item-header"
+            >
+              <span
+                class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
+              >
+                3
+              </span>
+              <div
+                class="ant-thought-chain-item-header-box"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+                >
+                  <strong>
+                    Thought Chain Item Title
+                  </strong>
+                </span>
+                <div
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
+                  style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; box-sizing: border-box;"
+                >
+                  <div
+                    class="ant-tooltip-arrow"
+                    style="position: absolute;"
+                  />
+                  <div
+                    class="ant-tooltip-content"
+                  >
+                    <div
+                      class="ant-tooltip-inner"
+                      role="tooltip"
+                    >
+                      Thought Chain Item Title
+                    </div>
+                  </div>
+                </div>
+                <span
+                  class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
+                >
+                  description
+                </span>
+                <div
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
+                  style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; box-sizing: border-box;"
+                >
+                  <div
+                    class="ant-tooltip-arrow"
+                    style="position: absolute;"
+                  />
+                  <div
+                    class="ant-tooltip-content"
+                  >
+                    <div
+                      class="ant-tooltip-inner"
+                      role="tooltip"
+                    >
+                      description
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="ant-thought-chain-item-extra"
+              >
+                <button
+                  class="ant-btn ant-btn-text ant-btn-icon-only"
+                  type="button"
+                >
+                  <span
+                    class="ant-btn-icon"
+                  >
+                    <span
+                      aria-label="more"
+                      class="anticon anticon-more"
+                      role="img"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        data-icon="more"
+                        fill="currentColor"
+                        focusable="false"
+                        height="1em"
+                        viewBox="64 64 896 896"
+                        width="1em"
+                      >
+                        <path
+                          d="M456 231a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0z"
+                        />
+                      </svg>
+                    </span>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-thought-chain-item"
+          >
+            <div
+              class="ant-thought-chain-item-header"
+            >
+              <span
+                class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
+              >
+                4
+              </span>
+              <div
+                class="ant-thought-chain-item-header-box"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+                >
+                  <strong>
+                    Thought Chain Item Title
+                  </strong>
+                </span>
+                <div
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
+                  style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; box-sizing: border-box;"
+                >
+                  <div
+                    class="ant-tooltip-arrow"
+                    style="position: absolute;"
+                  />
+                  <div
+                    class="ant-tooltip-content"
+                  >
+                    <div
+                      class="ant-tooltip-inner"
+                      role="tooltip"
+                    >
+                      Thought Chain Item Title
+                    </div>
+                  </div>
+                </div>
+                <span
+                  class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
+                >
+                  description
+                </span>
+                <div
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
+                  style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; box-sizing: border-box;"
+                >
+                  <div
+                    class="ant-tooltip-arrow"
+                    style="position: absolute;"
+                  />
+                  <div
+                    class="ant-tooltip-content"
+                  >
+                    <div
+                      class="ant-tooltip-inner"
+                      role="tooltip"
+                    >
+                      description
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="ant-thought-chain-item-extra"
+              >
+                <button
+                  class="ant-btn ant-btn-text ant-btn-icon-only"
+                  type="button"
+                >
+                  <span
+                    class="ant-btn-icon"
+                  >
+                    <span
+                      aria-label="more"
+                      class="anticon anticon-more"
+                      role="img"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        data-icon="more"
+                        fill="currentColor"
+                        focusable="false"
+                        height="1em"
+                        viewBox="64 64 896 896"
+                        width="1em"
+                      >
+                        <path
+                          d="M456 231a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0z"
+                        />
+                      </svg>
+                    </span>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders components/thought-chain/demo/size.tsx extend context correctly 2`] = `[]`;
+
 exports[`renders components/thought-chain/demo/status.tsx extend context correctly 1`] = `
 <div
   class="ant-card ant-card-bordered"
