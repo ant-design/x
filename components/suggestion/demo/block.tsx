@@ -5,12 +5,12 @@ import type { GetProp } from 'antd';
 type SuggestionItems = Exclude<GetProp<typeof Suggestion, 'items'>, Function>;
 
 const suggestions: SuggestionItems = [
-  { label: '写一篇报告，关于：', value: 'report' },
-  { label: '画一幅画：', value: 'draw' },
+  { label: 'Write a report', value: 'report' },
+  { label: 'Draw a picture', value: 'draw' },
   {
-    label: '查一个知识……',
+    label: 'Check some knowledge',
     value: 'knowledge',
-    extra: 'Ctrl + K',
+    extra: 'Extra Info',
   },
 ];
 

@@ -17,9 +17,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*8yArQ43EGccAAA
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">基本用法</code>
 <code src="./demo/block.tsx">整行宽度</code>
-
-<!-- <code src="./demo/withSender.tsx">配合发送组件</code>
-<code src="./demo/trigger.tsx">修改触发字符</code> -->
+<code src="./demo/trigger.tsx">自定义</code>
 
 ## API
 
@@ -27,34 +25,26 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*8yArQ43EGccAAA
 
 ### SuggestionsProps
 
-| 属性             | 说明               | 类型                      | 默认值    | 版本 |
-| ---------------- | ------------------ | ------------------------- | --------- | ---- |
-| prefixCls        | 自定义样式前缀     | string                    | -         | -    |
-| items            | 建议项列表         | Suggestion[]              | -         | -    |
-| triggerCharacter | 触发建议显示的字符 | string                    | '/'       | -    |
-| children         | 自定义输入框       | ReactNode                 | -         | -    |
-| title            | 弹出层标题         | ReactNode                 | -         | -    |
-| extra            | 额外内容           | ReactNode                 | -         | -    |
-| onChange         | 输入框值改变的回调 | (value: string) => void   | -         | -    |
-| value            | 输入框值           | string                    | -         | -    |
-| className        | 组件样式类名       | string                    | -         | -    |
-| rootClassName    | 根元素样式类名     | string                    | -         | -    |
-| style            | 组件样式           | React.CSSProperties       | -         | -    |
-| placeholder      | 输入框占位符       | string                    | -         | -    |
-| placement        | 弹出层位置         | TooltipProps['placement'] | 'topLeft' | -    |
+| 属性 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| block | 是否整行宽度 | boolean | false | - |
+| children | 自定义输入框 | ({ onTrigger, onKeyDown }) => ReactElement | - | - |
+| items | 建议项列表 | SuggestionItem[] \| ((info: T) => SuggestionItem[]) | - | - |
+| open | 受控打开面板 | boolean | - | - |
+| rootClassName | 根元素样式类名 | string | - | - |
+| onSelect | 选中建议项回调 | (value: string) => void | - | - |
+| onOpenChange | 面板打开状态变化回调 | (open: boolean) => void | - | - |
 
-### Suggestion
+### SuggestionItem
 
-| 属性      | 说明           | 类型       | 默认值 | 版本 |
-| --------- | -------------- | ---------- | ------ | ---- |
-| id        | 建议项唯一标识 | string     | -      | -    |
-| label     | 建议项显示内容 | ReactNode  | -      | -    |
-| icon      | 建议项图标     | ReactNode  | -      | -    |
-| className | 建议项样式类名 | string     | -      | -    |
-| onClick   | 建议项点击回调 | () => void | -      | -    |
-| value     | 建议项值       | string     | -      | -    |
-| extra     | 建议项额外内容 | ReactNode  | -      | -    |
+| 属性      | 说明           | 类型             | 默认值 | 版本 |
+| --------- | -------------- | ---------------- | ------ | ---- |
+| children  | 子项目         | SuggestionItem[] | -      | -    |
+| extra     | 建议项额外内容 | ReactNode        | -      | -    |
+| icon      | 建议项图标     | ReactNode        | -      | -    |
+| label     | 建议项显示内容 | ReactNode        | -      | -    |
+| value     | 建议项值       | string           | -      | -    |
 
 ## 主题变量（Design Token）
 
-<ComponentTokenTable component="Suggestions"></ComponentTokenTable>
+<ComponentTokenTable component="Suggestion"></ComponentTokenTable>

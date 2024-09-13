@@ -2,16 +2,6 @@
 
 exports[`Sender Component rtl render component should be rendered correctly in RTL direction 1`] = `
 <div
-  class="ant-suggestion ant-suggestion-rtl"
->
-  <div
-    class="ant-suggestion-input"
-  >
-    <input
-      class="ant-input ant-input-rtl ant-input-outlined"
-      type="text"
-      value=""
-    />
-  </div>
-</div>
+  class="ant-suggestion ant-suggestion-wrapper"
+/>
 `;

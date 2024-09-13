@@ -2,7 +2,7 @@ import React from 'react';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
 import { fireEvent, render, screen } from '@testing-library/react';
-import Suggestion from '../index';
+import Suggestion, { type SuggestionProps } from '../index';
 
 describe('Sender Component', () => {
   mountTest(() => <Suggestion items={[]} />);
@@ -17,50 +17,105 @@ describe('Sender Component', () => {
     jest.useRealTimers();
   });
 
-  it('should render input element', () => {
-    const {container} =  render(<Suggestion items={[]} />);
-    const inputElement = container.querySelector('.ant-input') as HTMLInputElement; // Assuming no placeholder
-    expect(inputElement).toBeInTheDocument();
-  });
+  const MockSuggestion = (props: SuggestionProps) => (
+    <Suggestion {...props}>
+      {({ onTrigger, onKeyDown }) => (
+        <input
+          onKeyDown={(e) => {
+            if (e.key === '/') {
+              onTrigger();
+            }
+            onKeyDown(e);
+          }}
+        />
+      )}
+    </Suggestion>
+  );
 
   it('should display Suggestion when trigger character is typed', () => {
     const items = [
-      { id: '1', label: 'Suggestion 1', value: 'suggestion1' },
-      { id: '2', label: 'Suggestion 2', value: 'suggestion2' },
+      { label: 'Suggestion 1', value: 'suggestion1' },
+      { label: 'Suggestion 2', value: 'suggestion2' },
     ];
-   const {container} = render(<Suggestion items={items} triggerCharacter="&" />);
+    const { container } = render(<MockSuggestion items={items} />);
 
-    const inputElement = container.querySelector('.ant-input') as HTMLInputElement;
-    fireEvent.input(inputElement, { target: { value: '&' } });
+    fireEvent.keyDown(container.querySelector('input')!, { key: '/' });
 
     expect(screen.getByText('Suggestion 1')).toBeInTheDocument();
     expect(screen.getByText('Suggestion 2')).toBeInTheDocument();
   });
 
-  it('should call onClick of suggestion item when clicked', () => {
-    const onClickMock = jest.fn();
-    const items = [{ id: '1', label: 'Suggestion 1', value: 'suggestion1', onClick: onClickMock }];
-    const { container } = render(<Suggestion items={items} triggerCharacter="&" />);
+  it('trigger onSelect', () => {
+    const onSelect = jest.fn();
+    const items = [{ label: 'Suggestion 1', value: 'suggestion1' }];
+    const { container } = render(<MockSuggestion items={items} onSelect={onSelect} />);
 
-    const inputElement = container.querySelector('.ant-input') as HTMLInputElement;
-    fireEvent.input(inputElement, { target: { value: '&' } });
+    fireEvent.keyDown(container.querySelector('input')!, { key: '/' });
 
     const suggestionItem = screen.getByText('Suggestion 1');
-    fireEvent.mouseDown(suggestionItem);
+    fireEvent.click(suggestionItem);
 
-    expect(onClickMock).toHaveBeenCalled();
+    expect(onSelect).toHaveBeenCalledWith('suggestion1');
   });
 
-  it('should update input value when suggestion is selected', () => {
-    const items = [{ id: '1', label: 'Suggestion 1', value: 'suggestion1' }];
-    const { container } = render(<Suggestion items={items} triggerCharacter="&" />);
+  it('open controlled', () => {
+    const items = [
+      { label: 'Suggestion 1', value: 'suggestion1', icon: <div className="bamboo" /> },
+    ];
+    render(<MockSuggestion items={items} open />);
 
-    const inputElement = container.querySelector('.ant-input') as HTMLInputElement;
-    fireEvent.input(inputElement, { target: { value: '&' } });
+    expect(document.querySelector('.bamboo')).toBeTruthy();
+  });
 
-    const suggestionItem = screen.getByText('Suggestion 1');
-    fireEvent.mouseDown(suggestionItem);
+  describe('arrow', () => {
+    it('select', () => {
+      const onSelect = jest.fn();
+      const items = [
+        { label: 'Suggestion 1', value: 'suggestion1' },
+        {
+          label: 'Suggestion 2',
+          value: 'suggestion2',
+          children: [{ label: 'Suggestion 3', value: 'suggestion3' }],
+        },
+      ];
+      const { container } = render(<MockSuggestion items={items} onSelect={onSelect} />);
 
-    expect(inputElement.value).toBe('suggestion1');
+      fireEvent.keyDown(container.querySelector('input')!, { key: '/' });
+
+      fireEvent.keyDown(container.querySelector('input')!, { key: 'ArrowDown' });
+      fireEvent.keyDown(container.querySelector('input')!, { key: 'ArrowRight' });
+      fireEvent.keyDown(container.querySelector('input')!, { key: 'Enter' });
+
+      expect(onSelect).toHaveBeenCalledWith('suggestion3');
+    });
+
+    it('cancel', () => {
+      const items = [
+        { label: 'Suggestion 1', value: 'suggestion1' },
+        {
+          label: 'Suggestion 2',
+          value: 'suggestion2',
+          children: [{ label: 'Suggestion 3', value: 'suggestion3' }],
+        },
+      ];
+      const { container } = render(<MockSuggestion items={items} />);
+
+      fireEvent.keyDown(container.querySelector('input')!, { key: '/' });
+
+      fireEvent.keyDown(container.querySelector('input')!, { key: 'ArrowUp' });
+      fireEvent.keyDown(container.querySelector('input')!, { key: 'ArrowRight' });
+      fireEvent.keyDown(container.querySelector('input')!, { key: 'ArrowLeft' });
+
+      // Only one .ant-cascader-menu-item-active
+      expect(document.querySelectorAll('.ant-cascader-menu-item-active')).toHaveLength(1);
+      expect(document.querySelector('.ant-cascader-menu-item-active')!.textContent).toBe(
+        'Suggestion 2',
+      );
+      expect(document.querySelector('.ant-select-dropdown-hidden')).toBeFalsy();
+
+      fireEvent.keyDown(container.querySelector('input')!, { key: 'Escape' });
+      console.log(document.body.innerHTML);
+      expect(document.querySelector('.ant-select-dropdown-hidden')).toBeTruthy();
+    });
   });
 });

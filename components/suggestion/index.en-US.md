@@ -16,9 +16,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*8yArQ43EGccAAA
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">Basic</code>
 <code src="./demo/block.tsx">Block</code>
-<!-- 
-<code src="./demo/trigger.tsx">trigger character</code> -->
-
+<code src="./demo/trigger.tsx">Customize</code>
 
 ## API
 
@@ -28,31 +26,23 @@ Common props ref：[Common props](/docs/react/common-props)
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| prefixCls | Custom prefix for the component class name | string | - | - |
-| items | List of suggestion | Suggestion[] | - | - |
-| triggerCharacter | Character to trigger the suggestion display | string | '/' | - |
-| children | Custom input box | ReactNode | - | - |
-| title | Title of the popover | ReactNode | - | - |
-| extra | Extra content | ReactNode | - | - |
-| onChange | Callback when the input value changes | (value: string) => void | - | - |
-| value | Input box value | string | - | - |
-| className | Component class name | string | - | - |
+| block | Take up the full width | boolean | false | - |
+| children | Custom input box | ({ onTrigger, onKeyDown }) => ReactElement | - | - |
+| items | Suggestion list | SuggestionItem[] \| ((info: T) => SuggestionItem[]) | - | - |
+| open | Controlled open panel | boolean | - | - |
 | rootClassName | Root element class name | string | - | - |
-| style | Component style | React.CSSProperties | - | - |
-| placeholder | Input box placeholder | string | - | - |
-| placement | Popover placement | TooltipProps['placement'] | 'topLeft' | - |
+| onSelect | Callback when the suggestion item is selected | (value: string) => void | - | - |
+| onOpenChange | Callback when the panel open state changes | (open: boolean) => void | - | - |
 
-### Suggestion
+### SuggestionItem
 
-| Property | Description | Type | Default | Version |
-| --- | --- | --- | --- | --- |
-| id | Unique identifier for the suggestion | string | - | - |
-| label | Content to display for the suggestion | ReactNode | - | - |
-| icon | Icon for the suggestion | ReactNode | - | - |
-| className | Class name for the suggestion item | string | - | - |
-| onClick | Callback when the suggestion item is clicked | () => void | - | - |
-| value | Value of the suggestion item | string | - | - |
-| extra | Extra content for the suggestion item | ReactNode | - | - |
+| Property | Description                           | Type             | Default | Version |
+| -------- | ------------------------------------- | ---------------- | ------- | ------- |
+| children | Child item for the suggestion item    | SuggestionItem[] | -       | -       |
+| extra    | Extra content for the suggestion item | ReactNode        | -       | -       |
+| icon     | Icon for the suggestion               | ReactNode        | -       | -       |
+| label    | Content to display for the suggestion | ReactNode        | -       | -       |
+| value    | Value of the suggestion item          | string           | -       | -       |
 
 ## Theme Variables (Design Token)
 

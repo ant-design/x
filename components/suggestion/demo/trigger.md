@@ -1,7 +1,7 @@
 ## zh-CN
 
-基础用法，受控进行状态管理。
+根据输入动态展示建议项的多标签示例。
 
 ## en-US
 
-Basic usage. State management in controlled.
+Dynamically display suggestions with multiple tags based on input.

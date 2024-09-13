@@ -18,6 +18,10 @@ const genSuggestionStyle: GenerateStyle<SuggestionToken> = (token) => {
       },
 
       [`${componentCls}-item`]: {
+        '&-icon': {
+          marginInlineEnd: token.paddingXXS,
+        },
+
         '&-extra': {
           marginInlineStart: token.padding,
         },

@@ -1,21 +1,50 @@
 import React from 'react';
 import { Suggestion } from '@ant-design/x';
-import type { GetProp } from 'antd';
+import { Select } from 'antd';
 
-type SuggestionProps = GetProp<typeof Suggestion, 'items'>[number];
+let uuid = 0;
 
-const suggestions: SuggestionProps[] = [
-  { id: '1', label: '写一篇报告，关于：', value: '写一篇报告，关于：' },
-  { id: '2', label: '画一幅画：', value: '画一幅画：' },
-  { id: '3', label: '查一个知识：', value: '查一个知识：', extra: <div>ExtraLink</div> },
-];
+const Demo: React.FC = () => {
+  const [tags, setTags] = React.useState<string[]>([]);
+  const [value, setValue] = React.useState('');
 
-const Demo: React.FC = () => (
-  <Suggestion
-    items={suggestions}
-    triggerCharacter="&"
-    placeholder="use & to get more suggestions!"
-  />
-);
+  return (
+    <Suggestion<string>
+      items={(info) => [{ label: `Trigger by '${info}'`, value: String(info) }]}
+      onSelect={(info) => {
+        uuid += 1;
+        setTags([...tags, `Cell_${uuid}`]);
+        setValue(value.replace(info, ''));
+      }}
+    >
+      {({ onTrigger, onKeyDown }) => {
+        return (
+          <Select
+            value={tags}
+            style={{ width: '100%' }}
+            mode="tags"
+            open={false}
+            searchValue={value}
+            onChange={(nextTags) => {
+              if (nextTags.length < tags.length) {
+                setTags(nextTags);
+              }
+            }}
+            onSearch={(nextVal) => {
+              setValue(nextVal);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === '/' || e.key === '#') {
+                onTrigger(e.key);
+              }
+              onKeyDown(e);
+            }}
+            placeholder="可任意输入 / 与 # 多次获取建议"
+          />
+        );
+      }}
+    </Suggestion>
+  );
+};
 
 export default Demo;
