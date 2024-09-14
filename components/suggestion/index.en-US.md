@@ -34,6 +34,14 @@ Common props ref：[Common props](/docs/react/common-props)
 | onSelect | Callback when the suggestion item is selected | (value: string) => void | - | - |
 | onOpenChange | Callback when the panel open state changes | (open: boolean) => void | - | - |
 
+#### onTrigger
+
+```typescript | pure
+type onTrigger<T> = (info: T | false) => void;
+```
+
+Suggestion accepts generics to customize the parameter type passed to `items` renderProps. When `false` is passed, the suggestion panel is closed.
+
 ### SuggestionItem
 
 | Property | Description                           | Type             | Default | Version |

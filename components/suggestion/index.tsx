@@ -19,7 +19,7 @@ export type SuggestionItem = {
 };
 
 export interface RenderChildrenProps<T> {
-  onTrigger: (info?: T) => void;
+  onTrigger: (info?: T | false) => void;
   onKeyDown: (e: React.KeyboardEvent) => void;
 }
 
@@ -77,8 +77,12 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
   };
 
   const onTrigger: RenderChildrenProps<T>['onTrigger'] = useEvent((nextInfo) => {
-    setInfo(nextInfo);
-    triggerOpen(true);
+    if (nextInfo === false) {
+      triggerOpen(false);
+    } else {
+      setInfo(nextInfo);
+      triggerOpen(true);
+    }
   });
 
   const onClose = () => {

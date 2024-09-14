@@ -24,6 +24,8 @@ describe('Sender Component', () => {
           onKeyDown={(e) => {
             if (e.key === '/') {
               onTrigger();
+            } else if (e.key === 'Delete') {
+              onTrigger(false);
             }
             onKeyDown(e);
           }}
@@ -56,6 +58,23 @@ describe('Sender Component', () => {
     fireEvent.click(suggestionItem);
 
     expect(onSelect).toHaveBeenCalledWith('suggestion1');
+  });
+
+  it('onTrigger support false to close', () => {
+    const onOpenChange = jest.fn();
+    const items = [
+      { label: 'Suggestion 1', value: 'suggestion1', icon: <div className="bamboo" /> },
+    ];
+    const { container } = render(<MockSuggestion items={items} onOpenChange={onOpenChange} />);
+
+    // Open
+    fireEvent.keyDown(container.querySelector('input')!, { key: '/' });
+    expect(onOpenChange).toHaveBeenCalledWith(true);
+
+    // Close
+    onOpenChange.mockReset();
+    fireEvent.keyDown(container.querySelector('input')!, { key: 'Delete' });
+    expect(onOpenChange).toHaveBeenCalledWith(false);
   });
 
   it('open controlled', () => {

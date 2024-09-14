@@ -35,15 +35,23 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*8yArQ43EGccAAA
 | onSelect | 选中建议项回调 | (value: string) => void | - | - |
 | onOpenChange | 面板打开状态变化回调 | (open: boolean) => void | - | - |
 
+#### onTrigger
+
+```typescript | pure
+type onTrigger<T> = (info: T | false) => void;
+```
+
+Suggestion 接受泛型以自定义传递给 `items` renderProps 的参数类型，当传递 `false` 时，则关闭建议面板。
+
 ### SuggestionItem
 
-| 属性      | 说明           | 类型             | 默认值 | 版本 |
-| --------- | -------------- | ---------------- | ------ | ---- |
-| children  | 子项目         | SuggestionItem[] | -      | -    |
-| extra     | 建议项额外内容 | ReactNode        | -      | -    |
-| icon      | 建议项图标     | ReactNode        | -      | -    |
-| label     | 建议项显示内容 | ReactNode        | -      | -    |
-| value     | 建议项值       | string           | -      | -    |
+| 属性     | 说明           | 类型             | 默认值 | 版本 |
+| -------- | -------------- | ---------------- | ------ | ---- |
+| children | 子项目         | SuggestionItem[] | -      | -    |
+| extra    | 建议项额外内容 | ReactNode        | -      | -    |
+| icon     | 建议项图标     | ReactNode        | -      | -    |
+| label    | 建议项显示内容 | ReactNode        | -      | -    |
+| value    | 建议项值       | string           | -      | -    |
 
 ## 主题变量（Design Token）
 

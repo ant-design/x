@@ -42,6 +42,8 @@ const Demo: React.FC = () => {
             onChange={(nextVal) => {
               if (nextVal === '/') {
                 onTrigger();
+              } else if (!nextVal) {
+                onTrigger(false);
               }
               setValue(nextVal);
             }}
