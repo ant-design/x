@@ -27,6 +27,8 @@ es
 coverage
 yarn.lock
 package-lock.json
+pnpm-lock.yaml
+bun.lockb
 
 # dumi
 .umi
