@@ -13,7 +13,7 @@ const genSuggestionStyle: GenerateStyle<SuggestionToken> = (token) => {
 
   return {
     [componentCls]: {
-      [`${antCls}-cascader-menu`]: {
+      [`${antCls}-cascader-menus ${antCls}-cascader-menu`]: {
         height: 'auto',
       },
 
