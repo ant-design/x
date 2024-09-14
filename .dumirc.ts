@@ -1,6 +1,7 @@
 import path from 'path';
 import { defineConfig } from 'dumi';
 import * as fs from 'fs-extra';
+import os from 'node:os';
 
 import rehypeAntd from './.dumi/rehypeAntd';
 import remarkAntd from './.dumi/remarkAntd';
@@ -8,19 +9,24 @@ import { version } from './package.json';
 
 export default defineConfig({
   plugins: ['dumi-plugin-color-chunk'],
+  manifest: {},
   conventionRoutes: {
     // to avoid generate routes for .dumi/pages/index/components/xx
     exclude: [/index\/components\//],
   },
-  ssr: process.env.NODE_ENV === 'production' ? { builder: 'mako' } : false,
+  ssr:
+    process.env.NODE_ENV === 'production'
+      ? {
+          builder: 'mako',
+        }
+      : false,
   hash: true,
   mfsu: false,
-  mako: {},
+  mako: ['Darwin', 'Linux'].includes(os.type()) ? {} : false,
   crossorigin: {},
+  runtimePublicPath: {},
   outputPath: '_site',
-  favicons: [
-    'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*1SDwSrOnSakAAAAAAAAAAAAADgCCAQ/original',
-  ],
+  favicons: ['https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*1SDwSrOnSakAAAAAAAAAAAAADgCCAQ/original'],
   resolve: {
     docDirs: [{ type: 'doc', dir: 'docs' }],
     atomDirs: [{ type: 'component', dir: 'components' }],
@@ -42,69 +48,77 @@ export default defineConfig({
   },
   extraRehypePlugins: [rehypeAntd],
   extraRemarkPlugins: [remarkAntd],
-  metas: [{ name: 'theme-color', content: '#1677ff' }],
+  metas: [
+    { name: 'theme-color', content: '#1677ff' },
+    { name: 'build-time', content: Date.now().toString() },
+    // https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables
+    { name: 'build-hash', content: process.env.GITHUB_SHA ?? 'unknown' },
+  ],
   analytics: {
-    ga_v2: 'UA-72788897-1',
+    ga_v2: 'G-5CDH4LN3Z8',
   },
-  analyze: {
-    analyzerPort: 'auto',
-  },
+  analyze:
+    process.env.NODE_ENV === 'production'
+      ? false
+      : {
+          analyzerPort: 'auto',
+        },
   links: [
     {
       rel: 'prefetch',
       as: 'font',
       href: '//at.alicdn.com/t/webfont_6e11e43nfj.woff2',
       type: 'font/woff2',
-      crossorigin: true,
+      crossorigin: 'anonymous',
     },
     {
       rel: 'prefetch',
       as: 'font',
       href: '//at.alicdn.com/t/webfont_6e11e43nfj.woff',
       type: 'font/woff',
-      crossorigin: true,
+      crossorigin: 'anonymous',
     },
     {
       rel: 'prefetch',
       as: 'font',
       href: '//at.alicdn.com/t/webfont_6e11e43nfj.ttf',
       type: 'font/ttf',
-      crossorigin: true,
+      crossorigin: 'anonymous',
     },
     {
       rel: 'prefetch',
       as: 'font',
       href: '//at.alicdn.com/t/webfont_exesdog9toj.woff2',
       type: 'font/woff2',
-      crossorigin: true,
+      crossorigin: 'anonymous',
     },
     {
       rel: 'prefetch',
       as: 'font',
       href: '//at.alicdn.com/t/webfont_exesdog9toj.woff',
       type: 'font/woff',
-      crossorigin: true,
+      crossorigin: 'anonymous',
     },
     {
       rel: 'prefetch',
       as: 'font',
       href: '//at.alicdn.com/t/webfont_exesdog9toj.ttf',
       type: 'font/ttf',
-      crossorigin: true,
+      crossorigin: 'anonymous',
     },
     {
       rel: 'preload',
       as: 'font',
       href: '//at.alicdn.com/wf/webfont/exMpJIukiCms/Gsw2PSKrftc1yNWMNlXgw.woff2',
       type: 'font/woff2',
-      crossorigin: true,
+      crossorigin: 'anonymous',
     },
     {
       rel: 'preload',
       as: 'font',
       href: '//at.alicdn.com/wf/webfont/exMpJIukiCms/vtu73by4O2gEBcvBuLgeu.woff',
       type: 'font/woff2',
-      crossorigin: true,
+      crossorigin: 'anonymous',
     },
   ],
   headScripts: [
@@ -164,11 +178,5 @@ export default defineConfig({
       document.documentElement.className += isZhCN(pathname) ? 'zh-cn' : 'en-us';
     })();
     `,
-  ],
-  scripts: [
-    {
-      async: true,
-      content: fs.readFileSync(path.join(__dirname, '.dumi', 'mirror-modal.js')).toString(),
-    },
   ],
 });
