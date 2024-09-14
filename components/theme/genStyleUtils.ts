@@ -26,4 +26,8 @@ export const { genStyleHooks, genComponentStyleHook, genSubStyleComponent } = ge
     const { csp } = useConfigContext();
     return csp ?? {};
   },
+  layer: {
+    name: 'antdx',
+    dependencies: ['antd'],
+  },
 });
