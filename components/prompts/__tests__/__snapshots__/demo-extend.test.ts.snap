@@ -27,7 +27,7 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] 
               aria-label="bulb"
               class="anticon anticon-bulb"
               role="img"
-              style="color: rgb(255, 215, 0);"
+              style="color: #FFD700;"
             >
               <svg
                 aria-hidden="true"
@@ -74,7 +74,7 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] 
               aria-label="info-circle"
               class="anticon anticon-info-circle"
               role="img"
-              style="color: rgb(24, 144, 255);"
+              style="color: #1890FF;"
             >
               <svg
                 aria-hidden="true"
@@ -124,7 +124,7 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] 
               aria-label="rocket"
               class="anticon anticon-rocket"
               role="img"
-              style="color: rgb(114, 46, 209);"
+              style="color: #722ED1;"
             >
               <svg
                 aria-hidden="true"
@@ -171,7 +171,7 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] 
               aria-label="smile"
               class="anticon anticon-smile"
               role="img"
-              style="color: rgb(82, 196, 26);"
+              style="color: #52C41A;"
             >
               <svg
                 aria-hidden="true"
@@ -218,7 +218,7 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] 
               aria-label="warning"
               class="anticon anticon-warning"
               role="img"
-              style="color: rgb(255, 77, 79);"
+              style="color: #FF4D4F;"
             >
               <svg
                 aria-hidden="true"
@@ -285,7 +285,7 @@ exports[`renders components/prompts/demo/disabled.tsx extend context correctly 1
             aria-label="check-circle"
             class="anticon anticon-check-circle"
             role="img"
-            style="color: rgb(82, 196, 26);"
+            style="color: #52C41A;"
           >
             <svg
               aria-hidden="true"
@@ -335,7 +335,7 @@ exports[`renders components/prompts/demo/disabled.tsx extend context correctly 1
             aria-label="coffee"
             class="anticon anticon-coffee"
             role="img"
-            style="color: rgb(150, 75, 0);"
+            style="color: #964B00;"
           >
             <svg
               aria-hidden="true"
@@ -400,7 +400,7 @@ exports[`renders components/prompts/demo/flex-vertical.tsx extend context correc
             aria-label="coffee"
             class="anticon anticon-coffee"
             role="img"
-            style="color: rgb(150, 75, 0);"
+            style="color: #964B00;"
           >
             <svg
               aria-hidden="true"
@@ -440,7 +440,7 @@ exports[`renders components/prompts/demo/flex-vertical.tsx extend context correc
             aria-label="smile"
             class="anticon anticon-smile"
             role="img"
-            style="color: rgb(250, 173, 20);"
+            style="color: #FAAD14;"
           >
             <svg
               aria-hidden="true"
@@ -480,7 +480,7 @@ exports[`renders components/prompts/demo/flex-vertical.tsx extend context correc
             aria-label="fire"
             class="anticon anticon-fire"
             role="img"
-            style="color: rgb(255, 77, 79);"
+            style="color: #FF4D4F;"
           >
             <svg
               aria-hidden="true"
@@ -538,7 +538,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
             aria-label="bulb"
             class="anticon anticon-bulb"
             role="img"
-            style="color: rgb(255, 215, 0);"
+            style="color: #FFD700;"
           >
             <svg
               aria-hidden="true"
@@ -578,7 +578,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
             aria-label="info-circle"
             class="anticon anticon-info-circle"
             role="img"
-            style="color: rgb(24, 144, 255);"
+            style="color: #1890FF;"
           >
             <svg
               aria-hidden="true"
@@ -621,7 +621,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
             aria-label="warning"
             class="anticon anticon-warning"
             role="img"
-            style="color: rgb(255, 77, 79);"
+            style="color: #FF4D4F;"
           >
             <svg
               aria-hidden="true"
@@ -661,7 +661,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
             aria-label="rocket"
             class="anticon anticon-rocket"
             role="img"
-            style="color: rgb(114, 46, 209);"
+            style="color: #722ED1;"
           >
             <svg
               aria-hidden="true"
@@ -701,7 +701,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
             aria-label="check-circle"
             class="anticon anticon-check-circle"
             role="img"
-            style="color: rgb(82, 196, 26);"
+            style="color: #52C41A;"
           >
             <svg
               aria-hidden="true"
@@ -744,7 +744,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
             aria-label="coffee"
             class="anticon anticon-coffee"
             role="img"
-            style="color: rgb(150, 75, 0);"
+            style="color: #964B00;"
           >
             <svg
               aria-hidden="true"
@@ -784,7 +784,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
             aria-label="smile"
             class="anticon anticon-smile"
             role="img"
-            style="color: rgb(250, 173, 20);"
+            style="color: #FAAD14;"
           >
             <svg
               aria-hidden="true"
@@ -824,7 +824,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
             aria-label="fire"
             class="anticon anticon-fire"
             role="img"
-            style="color: rgb(255, 77, 79);"
+            style="color: #FF4D4F;"
           >
             <svg
               aria-hidden="true"
