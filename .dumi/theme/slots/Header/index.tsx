@@ -1,4 +1,3 @@
-import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { GithubOutlined, MenuOutlined } from '@ant-design/icons';
 import { Alert, Col, ConfigProvider, Popover, Row, Select } from 'antd';
 import { createStyles } from 'antd-style';
@@ -6,18 +5,19 @@ import classNames from 'classnames';
 import dayjs from 'dayjs';
 import { useLocation, useSiteData } from 'dumi';
 import DumiSearchBar from 'dumi/theme-default/slots/SearchBar';
+import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
 import useLocale from '../../../hooks/useLocale';
-import DirectionIcon from '../../common/DirectionIcon';
+import DirectionIcon from '../../icons/DirectionIcon';
 import { ANT_DESIGN_NOT_SHOW_BANNER } from '../../layouts/GlobalLayout';
 import * as utils from '../../utils';
 import { getThemeConfig } from '../../utils';
 import type { SiteContextProps } from '../SiteContext';
 import SiteContext from '../SiteContext';
-import type { SharedProps } from './interface';
 import Logo from './Logo';
 import Navigation from './Navigation';
 import SwitchBtn from './SwitchBtn';
+import type { SharedProps } from './interface';
 
 const RESPONSIVE_XS = 1120;
 const RESPONSIVE_SM = 1200;
@@ -91,12 +91,15 @@ const useStyle = createStyles(({ token, css }) => {
         }
 
         .dumi-default-search-popover {
-          inset-inline-start: 11px;
+          inset-inline-start: ${token.paddingSM}px;
           inset-inline-end: unset;
-
           &::before {
             inset-inline-start: 100px;
             inset-inline-end: unset;
+          }
+          & > section {
+            scrollbar-width: thin;
+            scrollbar-color: unset;
           }
         }
       }
@@ -329,7 +332,7 @@ const Header: React.FC = () => {
     />,
     <a
       key="github"
-      href="https://github.com/ant-design/x"
+      href="https://github.com/ant-design/ant-design"
       target="_blank"
       rel="noreferrer"
     >

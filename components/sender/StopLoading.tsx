@@ -1,9 +1,8 @@
 import React, { memo } from 'react';
-import useAntdToken from 'antd/lib/theme/useToken';
+import useToken from '../theme/useToken';
 
 const StopLoadingIcon = memo(() => {
-  // eslint-disable-next-line
-  const [_, token] = useAntdToken();
+  const { token } = useToken();
   return (
     <svg
       color="currentColor"
@@ -13,6 +12,7 @@ const StopLoadingIcon = memo(() => {
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
+      <title>Stop Loading Icon</title>
       <g fill="none">
         <circle cx="512" cy="512" fill="none" r="426" stroke={token.colorBgBase} strokeWidth="72" />
         <rect fill="currentColor" height="252" rx="24" ry="24" width="252" x="386" y="386" />

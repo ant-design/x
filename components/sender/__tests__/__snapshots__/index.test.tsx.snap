@@ -3,116 +3,55 @@
 exports[`Sender Component loading state 1`] = `
 <DocumentFragment>
   <div
-    class="ant-sender"
+  class="ant-sender"
+>
+  <textarea
+    class="ant-input ant-input-outlined ant-sender-input"
+    readonly=""
+    style="resize: none; height: -54px; max-height: -54px;"
+  />
+  <div
+    class="ant-sender-actions-list"
   >
-    <textarea
-      class="ant-input ant-input-outlined ant-sender-input"
-      readonly=""
-      style="resize: none; height: -110px; max-height: -110px;"
-    />
     <div
-      class="ant-sender-actions-list"
+      class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
     >
       <div
-        class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
+        class="ant-space-item"
       >
-        <div
-          class="ant-space-item"
+        <button
+          class="ant-btn ant-btn-text ant-btn-icon-only ant-sender-actions-btn"
+          disabled=""
+          type="button"
         >
-          <button
-            class="ant-btn ant-btn-text ant-btn-icon-only ant-sender-actions-btn"
-            disabled=""
-            type="button"
+          <span
+            class="ant-btn-icon"
           >
             <span
-              class="ant-btn-icon"
-            >
-              <span
-                aria-label="clear"
-                class="anticon anticon-clear"
-                role="img"
-              >
-                <svg
-                  aria-hidden="true"
-                  data-icon="clear"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
-                >
-                  <defs>
-                    <style />
-                  </defs>
-                  <path
-                    d="M899.1 869.6l-53-305.6H864c14.4 0 26-11.6 26-26V346c0-14.4-11.6-26-26-26H618V138c0-14.4-11.6-26-26-26H432c-14.4 0-26 11.6-26 26v182H160c-14.4 0-26 11.6-26 26v192c0 14.4 11.6 26 26 26h17.9l-53 305.6a25.95 25.95 0 0025.6 30.4h723c1.5 0 3-.1 4.4-.4a25.88 25.88 0 0021.2-30zM204 390h272V182h72v208h272v104H204V390zm468 440V674c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v156H416V674c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v156H202.8l45.1-260H776l45.1 260H672z"
-                  />
-                </svg>
-              </span>
-            </span>
-          </button>
-        </div>
-        <div
-          class="ant-space-item"
-        >
-          <button
-            class="ant-btn ant-btn-text ant-btn-icon-only ant-sender-actions-btn"
-            type="button"
-          >
-            <span
-              class="ant-btn-icon"
+              aria-label="clear"
+              class="anticon anticon-clear"
+              role="img"
             >
               <svg
-                color="currentColor"
-                height="16"
-                viewBox="0 0 1024 1024"
-                width="16"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
+                aria-hidden="true"
+                data-icon="clear"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
               >
-                <g
-                  fill="none"
-                >
-                  <circle
-                    cx="512"
-                    cy="512"
-                    fill="none"
-                    r="426"
-                    stroke="#fff"
-                    stroke-width="72"
-                  />
-                  <rect
-                    fill="currentColor"
-                    height="252"
-                    rx="24"
-                    ry="24"
-                    width="252"
-                    x="386"
-                    y="386"
-                  />
-                  <path
-                    d="M938.667 512C938.667 276.359 747.64 85.333 512 85.333"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-width="73"
-                  >
-                    <animatetransform
-                      attributeName="transform"
-                      dur="1s"
-                      from="0 512 512"
-                      repeatCount="indefinite"
-                      to="360 512 512"
-                      type="rotate"
-                    />
-                  </path>
-                </g>
+                <defs>
+                  <style />
+                </defs>
               </svg>
             </span>
-          </button>
-        </div>
+          </span>
+        </button>
       </div>
     </div>
   </div>
+</div>
 </DocumentFragment>
 `;
 
@@ -122,7 +61,7 @@ exports[`Sender Component rtl render component should be rendered correctly in R
 >
   <textarea
     class="ant-input ant-input-outlined ant-sender-input"
-    style="resize: none; height: -110px; max-height: -110px;"
+    style="resize: none; height: -54px; max-height: -54px;"
   />
   <div
     class="ant-sender-actions-list"

@@ -1,7 +1,7 @@
 import { Keyframes, unit } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
-import { genStyleHooks } from '../../theme/genStyleUtils';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
+import { genStyleHooks } from '../../theme/genStyleUtils';
 import genBubbleListStyle from './list';
 
 const loadingMove = new Keyframes('loadingMove', {
@@ -34,9 +34,8 @@ const cursorBlink = new Keyframes('cursorBlink', {
   },
 });
 
-export interface ComponentToken {
-  //
-}
+// biome-ignore lint/suspicious/noEmptyInterface: ComponentToken need to be empty by default
+export interface ComponentToken {}
 
 export interface BubbleToken extends FullToken<'Bubble'> {
   bubbleContentMaxWidth: number | string;

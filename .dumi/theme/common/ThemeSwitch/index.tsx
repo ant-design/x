@@ -1,10 +1,9 @@
-import React from 'react';
 import { BgColorsOutlined } from '@ant-design/icons';
 import { FloatButton } from 'antd';
 import { useTheme } from 'antd-style';
 import { CompactTheme, DarkTheme } from 'antd-token-previewer/es/icons';
-// import { Motion } from 'antd-token-previewer/es/icons';
 import { FormattedMessage, Link, useLocation } from 'dumi';
+import React from 'react';
 
 import { getLocalizedPathname, isZhCN } from '../../utils';
 import ThemeIcon from './ThemeIcon';

@@ -1,18 +1,17 @@
 import { unit } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
-import { genStyleHooks } from '../../theme/genStyleUtils';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
+import { genStyleHooks } from '../../theme/genStyleUtils';
 
-export interface ComponentToken {
-  //
-}
+// biome-ignore lint/suspicious/noEmptyInterface: ComponentToken need to be empty by default
+export interface ComponentToken {}
 
 interface SenderToken extends FullToken<'Sender'> {
   SenderContentMaxWidth: number | string;
 }
 
 const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
-  const { componentCls, paddingXS, paddingXXS, boxShadowSecondary } = token;
+  const { componentCls, paddingXS, paddingXXS, boxShadowSecondary, calc } = token;
   return {
     [componentCls]: {
       position: 'relative',
@@ -27,7 +26,7 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
         position: 'absolute',
         zIndex: 1,
         insetInlineEnd: paddingXXS,
-        bottom: `${paddingXS - paddingXXS}px`,
+        bottom: calc(paddingXS).sub(paddingXXS).equal(),
       },
 
       [`& ${componentCls}-actions-btn`]: {},

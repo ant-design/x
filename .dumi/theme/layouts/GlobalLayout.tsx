@@ -1,28 +1,23 @@
-import React, { Suspense, useCallback, useEffect } from 'react';
 import {
+  NaNLinter,
+  StyleProvider,
   createCache,
   extractStyle,
   legacyNotSelectorLinter,
-  NaNLinter,
   parentSelectorLinter,
-  StyleProvider,
 } from '@ant-design/cssinjs';
 import { getSandpackCssText } from '@codesandbox/sandpack-react';
-import { theme as antdTheme, App } from 'antd';
+import { App, theme as antdTheme } from 'antd';
 import type { MappingAlgorithm } from 'antd';
 import type { DirectionType, ThemeConfig } from 'antd/es/config-provider';
-import {
-  createSearchParams,
-  useOutlet,
-  useSearchParams,
-  useServerInsertedHTML,
-} from 'dumi';
+import { createSearchParams, useOutlet, useSearchParams, useServerInsertedHTML } from 'dumi';
+import React, { Suspense, useCallback, useEffect } from 'react';
 
 import { DarkContext } from '../../hooks/useDark';
 import useLayoutState from '../../hooks/useLayoutState';
 import useLocation from '../../hooks/useLocation';
-import type { ThemeName } from '../common/ThemeSwitch';
 import SiteThemeProvider from '../SiteThemeProvider';
+import type { ThemeName } from '../common/ThemeSwitch';
 import type { SiteContextProps } from '../slots/SiteContext';
 import SiteContext from '../slots/SiteContext';
 
@@ -56,15 +51,13 @@ const GlobalLayout: React.FC = () => {
   const outlet = useOutlet();
   const { pathname } = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [
-    { theme = [], direction, isMobile, bannerVisible = false },
-    setSiteState,
-  ] = useLayoutState<SiteState>({
-    isMobile: false,
-    direction: 'ltr',
-    theme: [],
-    bannerVisible: false,
-  });
+  const [{ theme = [], direction, isMobile, bannerVisible = false }, setSiteState] =
+    useLayoutState<SiteState>({
+      isMobile: false,
+      direction: 'ltr',
+      theme: [],
+      bannerVisible: false,
+    });
 
   const updateSiteConfig = useCallback(
     (props: SiteState) => {
@@ -74,30 +67,25 @@ const GlobalLayout: React.FC = () => {
       const oldSearchStr = searchParams.toString();
 
       let nextSearchParams: URLSearchParams = searchParams;
-      (Object.entries(props) as Entries<SiteContextProps>).forEach(
-        ([key, value]) => {
-          if (key === 'direction') {
-            if (value === 'rtl') {
-              nextSearchParams.set('direction', 'rtl');
-            } else {
-              nextSearchParams.delete('direction');
-            }
+      (Object.entries(props) as Entries<SiteContextProps>).forEach(([key, value]) => {
+        if (key === 'direction') {
+          if (value === 'rtl') {
+            nextSearchParams.set('direction', 'rtl');
+          } else {
+            nextSearchParams.delete('direction');
           }
-          if (key === 'theme') {
-            nextSearchParams = createSearchParams({
-              ...nextSearchParams,
-              theme: value.filter((t) => t !== 'light'),
-            });
+        }
+        if (key === 'theme') {
+          nextSearchParams = createSearchParams({
+            ...nextSearchParams,
+            theme: value.filter((t) => t !== 'light'),
+          });
 
-            document
-              .querySelector('html')
-              ?.setAttribute(
-                'data-prefers-color',
-                value.includes('dark') ? 'dark' : 'light',
-              );
-          }
-        },
-      );
+          document
+            .querySelector('html')
+            ?.setAttribute('data-prefers-color', value.includes('dark') ? 'dark' : 'light');
+        }
+      });
 
       if (nextSearchParams.toString() !== oldSearchStr) {
         setSearchParams(nextSearchParams);
@@ -167,6 +155,7 @@ const GlobalLayout: React.FC = () => {
     return (
       <style
         data-type="antd-cssinjs"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: used in cssinjs
         dangerouslySetInnerHTML={{ __html: styleText }}
       />
     );
@@ -182,6 +171,7 @@ const GlobalLayout: React.FC = () => {
         data-type="antd-css-var"
         data-rc-order="prepend"
         data-rc-priority="-9999"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: used in cssinjs
         dangerouslySetInnerHTML={{ __html: styleText }}
       />
     );
@@ -191,6 +181,7 @@ const GlobalLayout: React.FC = () => {
     <style
       data-sandpack="true"
       id="sandpack"
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: used in cssinjs
       dangerouslySetInnerHTML={{ __html: getSandpackCssText() }}
     />
   ));

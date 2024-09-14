@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
+
 import Palette from './Palette';
 
 const colors = [

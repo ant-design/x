@@ -1,20 +1,10 @@
-import React, { memo, useContext, useMemo, useRef, useState } from 'react';
-import type { CSSProperties } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
-import {
-  Affix,
-  Card,
-  Col,
-  Divider,
-  Flex,
-  Input,
-  Row,
-  Tag,
-  Typography,
-} from 'antd';
+import { Affix, Card, Col, Divider, Flex, Input, Row, Tag, Typography } from 'antd';
 import { createStyles, useTheme } from 'antd-style';
 import { useIntl, useLocation, useSidebarData } from 'dumi';
 import debounce from 'lodash/debounce';
+import React, { memo, useContext, useMemo, useRef, useState } from 'react';
+import type { CSSProperties } from 'react';
 import scrollIntoView from 'scroll-into-view-if-needed';
 
 import Link from '../../common/Link';
@@ -102,8 +92,7 @@ const Overview: React.FC = () => {
   const { borderRadius, colorBgContainer, fontSizeXL, anchorTop } = token;
 
   const affixedStyle: CSSProperties = {
-    boxShadow:
-      'rgba(50, 50, 93, 0.25) 0 6px 12px -2px, rgba(0, 0, 0, 0.3) 0 3px 7px -3px',
+    boxShadow: 'rgba(50, 50, 93, 0.25) 0 6px 12px -2px, rgba(0, 0, 0, 0.3) 0 3px 7px -3px',
     padding: 8,
     margin: -8,
     borderRadius,
@@ -125,9 +114,7 @@ const Overview: React.FC = () => {
 
   const onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (event) => {
     if (event.keyCode === 13 && search.trim().length) {
-      sectionRef.current
-        ?.querySelector<HTMLElement>(`.${styles.componentsOverviewCard}`)
-        ?.click();
+      sectionRef.current?.querySelector<HTMLElement>(`.${styles.componentsOverviewCard}`)?.click();
     }
   };
 
@@ -144,16 +131,22 @@ const Overview: React.FC = () => {
             coverDark: child.frontmatter?.coverDark,
             link: child.link,
           })),
-        })),
+        }))
+        .concat([
+          {
+            title: locale === 'zh-CN' ? '重型组件' : 'Others',
+            children:
+              locale === 'zh-CN'
+                ? proComponentsList
+                : proComponentsList.map((component) => ({ ...component, subtitle: '' })),
+          },
+        ]),
     [data, locale],
   );
   return (
     <section className="markdown" ref={sectionRef}>
       <Divider />
-      <Affix
-        offsetTop={anchorTop}
-        onChange={(affixed) => setSearchBarAffixed(!!affixed)}
-      >
+      <Affix offsetTop={anchorTop} onChange={(affixed) => setSearchBarAffixed(!!affixed)}>
         <div
           className={styles.componentsOverviewAffix}
           style={searchBarAffixed ? affixedStyle : {}}
@@ -161,9 +154,7 @@ const Overview: React.FC = () => {
           <Input
             autoFocus
             value={search}
-            placeholder={formatMessage({
-              id: 'app.components.overview.search',
-            })}
+            placeholder={formatMessage({ id: 'app.components.overview.search' })}
             className={styles.componentsOverviewSearch}
             onChange={(e) => {
               setSearch(e.target.value);
@@ -194,19 +185,12 @@ const Overview: React.FC = () => {
             const components = group?.children?.filter(
               (component) =>
                 !search.trim() ||
-                component?.title
-                  ?.toLowerCase()
-                  ?.includes(search.trim().toLowerCase()) ||
-                (component?.subtitle || '')
-                  .toLowerCase()
-                  .includes(search.trim().toLowerCase()),
+                component?.title?.toLowerCase()?.includes(search.trim().toLowerCase()) ||
+                (component?.subtitle || '').toLowerCase().includes(search.trim().toLowerCase()),
             );
             return components?.length ? (
               <div key={group?.title}>
-                <Title
-                  level={2}
-                  className={styles.componentsOverviewGroupTitle}
-                >
+                <Title level={2} className={styles.componentsOverviewGroupTitle}>
                   <Flex gap="small" align="center">
                     <span style={{ fontSize: 24 }}>{group?.title}</span>
                     <Tag style={{ display: 'block' }}>{components.length}</Tag>
@@ -214,46 +198,59 @@ const Overview: React.FC = () => {
                 </Title>
                 <Row gutter={[24, 24]}>
                   {components.map((component) => {
+                    let url = component.link;
                     /** 是否是外链 */
-                    const isExternalLink = component.link.startsWith('http');
-                    let url = `${component.link}`;
+                    const isExternalLink = url.startsWith('http');
 
                     if (!isExternalLink) {
                       url += urlSearch;
                     }
 
-                    return (
-                      <Col xs={24} sm={12} lg={8} xl={6} key={component?.title}>
-                        <Link to={url}>
-                          <Card
-                            onClick={() => onClickCard(url)}
-                            styles={{
-                              body: {
-                                backgroundRepeat: 'no-repeat',
-                                backgroundPosition: 'bottom right',
-                                backgroundImage: `url(${component?.tag || ''})`,
-                              },
-                            }}
-                            size="small"
-                            className={styles.componentsOverviewCard}
-                            title={
-                              <div className={styles.componentsOverviewTitle}>
-                                {component?.title} {component.subtitle}
-                              </div>
+                    const cardContent = (
+                      <Card
+                        key={component.title}
+                        onClick={() => onClickCard(url)}
+                        styles={{
+                          body: {
+                            backgroundRepeat: 'no-repeat',
+                            backgroundPosition: 'bottom right',
+                            backgroundImage: `url(${component.tag || ''})`,
+                          },
+                        }}
+                        size="small"
+                        className={styles.componentsOverviewCard}
+                        title={
+                          <div className={styles.componentsOverviewTitle}>
+                            {component.title} {component.subtitle}
+                          </div>
+                        }
+                      >
+                        <div className={styles.componentsOverviewImg}>
+                          <img
+                            src={
+                              theme.includes('dark') && component.coverDark
+                                ? component.coverDark
+                                : component.cover
                             }
-                          >
-                            <div className={styles.componentsOverviewImg}>
-                              <img
-                                src={
-                                  theme.includes('dark') && component.coverDark
-                                    ? component.coverDark
-                                    : component.cover
-                                }
-                                alt={component?.title}
-                              />
-                            </div>
-                          </Card>
-                        </Link>
+                            alt={component.title}
+                          />
+                        </div>
+                      </Card>
+                    );
+
+                    const linkContent = isExternalLink ? (
+                      <a href={url} key={component.title}>
+                        {cardContent}
+                      </a>
+                    ) : (
+                      <Link to={url} prefetch key={component.title}>
+                        {cardContent}
+                      </Link>
+                    );
+
+                    return (
+                      <Col xs={24} sm={12} lg={8} xl={6} key={component.title}>
+                        {linkContent}
                       </Col>
                     );
                   })}

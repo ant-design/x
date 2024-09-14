@@ -9,7 +9,7 @@ exports[`renders components/sender/demo/actions.tsx extend context correctly 1`]
   >
     <textarea
       class="ant-input ant-input-outlined ant-sender-input"
-      style="resize: none; height: -110px; max-height: -110px;"
+      style="resize: none; height: -54px; max-height: -54px;"
     />
     <div
       class="ant-sender-actions-list"
@@ -33,7 +33,6 @@ exports[`renders components/sender/demo/actions.tsx extend context correctly 1`]
         >
           <button
             class="ant-btn ant-btn-primary ant-btn-icon-only ant-sender-actions-btn"
-            disabled=""
             type="button"
           >
             <span
@@ -79,7 +78,7 @@ exports[`renders components/sender/demo/basic.tsx extend context correctly 1`] =
   >
     <textarea
       class="ant-input ant-input-outlined ant-sender-input"
-      style="resize: none; height: -110px; max-height: -110px;"
+      style="resize: none; height: -54px; max-height: -54px;"
     >
       Hello? this is X!
     </textarea>
@@ -177,7 +176,7 @@ exports[`renders components/sender/demo/submitType.tsx extend context correctly 
     <textarea
       class="ant-input ant-input-outlined ant-sender-input"
       placeholder="Press Shift + Enter to send message"
-      style="resize: none; height: -110px; max-height: -110px;"
+      style="resize: none; height: -54px; max-height: -54px;"
     />
     <div
       class="ant-sender-actions-list"

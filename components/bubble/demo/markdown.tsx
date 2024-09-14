@@ -1,10 +1,10 @@
-/* eslint-disable react/no-danger */
-import React from 'react';
 import { UserOutlined } from '@ant-design/icons';
-import markdownit from 'markdown-it';
 import { Bubble } from '@ant-design/x';
 import type { BubbleProps } from '@ant-design/x';
 import { Typography } from 'antd';
+import markdownit from 'markdown-it';
+/* eslint-disable react/no-danger */
+import React from 'react';
 
 const md = markdownit({ html: true, breaks: true });
 
@@ -16,6 +16,7 @@ Link: [Ant Design X](https://x.ant.design)
 
 const renderMarkdown: BubbleProps['messageRender'] = (content) => (
   <Typography>
+    {/* biome-ignore lint/security/noDangerouslySetInnerHtml: used in demo */}
     <div dangerouslySetInnerHTML={{ __html: md.render(content) }} />
   </Typography>
 );

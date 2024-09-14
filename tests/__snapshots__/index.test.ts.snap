@@ -6,6 +6,8 @@ exports[`antd dist files exports modules correctly 1`] = `
   "Conversations",
   "Prompts",
   "Sender",
+  "Suggestion",
+  "ThoughtChain",
   "version",
 ]
 `;

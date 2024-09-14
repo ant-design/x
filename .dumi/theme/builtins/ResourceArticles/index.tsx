@@ -1,16 +1,12 @@
-/* eslint-disable react/no-array-index-key */
-import * as React from 'react';
 import { Avatar, Divider, Empty, Skeleton, Tabs } from 'antd';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
 import { FormattedMessage } from 'dumi';
+/* eslint-disable react/no-array-index-key */
+import * as React from 'react';
 
 import useLocale from '../../../hooks/useLocale';
-import type {
-  Article,
-  Authors,
-  SiteData,
-} from '../../../pages/index/components/util';
+import type { Article, Authors, SiteData } from '../../../pages/index/components/util';
 import { useSiteData } from '../../../pages/index/components/util';
 
 const useStyle = createStyles(({ token, css }) => {
@@ -68,11 +64,7 @@ interface ArticleListProps {
   authors: Authors;
 }
 
-const ArticleList: React.FC<ArticleListProps> = ({
-  name,
-  data = [],
-  authors = [],
-}) => {
+const ArticleList: React.FC<ArticleListProps> = ({ name, data = [], authors = [] }) => {
   const { styles } = useStyle();
   return (
     <td>
@@ -113,17 +105,12 @@ const Articles: React.FC<{ data: Partial<SiteData> }> = ({ data }) => {
     articles[lang]?.forEach((article) => {
       const year = dayjs(article.date).year();
       yearData[year] = yearData[year] || {};
-      yearData[year][article.type] = [
-        ...(yearData[year][article.type] || []),
-        article,
-      ];
+      yearData[year][article.type] = [...(yearData[year][article.type] || []), article];
     });
     return yearData;
   }, [articles]);
 
-  const yearList = Object.keys(mergedData).sort(
-    (a, b) => Number(b) - Number(a),
-  );
+  const yearList = Object.keys(mergedData).sort((a, b) => Number(b) - Number(a));
 
   if (yearList.length === 0) {
     return null;
@@ -140,6 +127,11 @@ const Articles: React.FC<{ data: Partial<SiteData> }> = ({ data }) => {
           <table>
             <tbody>
               <tr>
+                <ArticleList
+                  name={<FormattedMessage id="app.docs.resource.design" />}
+                  data={mergedData[year].design}
+                  authors={authors}
+                />
                 <ArticleList
                   name={<FormattedMessage id="app.docs.resource.develop" />}
                   data={mergedData[year].develop}

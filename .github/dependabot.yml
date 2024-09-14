@@ -1,30 +1,39 @@
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/about-dependabot-version-updates
+
 version: 2
 updates:
-- package-ecosystem: npm
-  directory: "/"
-  schedule:
-    interval: daily
-    time: "21:00"
-  open-pull-requests-limit: 10
-  ignore:
-  - dependency-name: np
-    versions:
-    - 7.2.0
-    - 7.3.0
-    - 7.4.0
-  - dependency-name: "@types/react-dom"
-    versions:
-    - 17.0.0
-    - 17.0.1
-    - 17.0.2
-  - dependency-name: "@types/react"
-    versions:
-    - 17.0.0
-    - 17.0.1
-    - 17.0.2
-    - 17.0.3
-  - dependency-name: typescript
-    versions:
-    - 4.1.3
-    - 4.1.4
-    - 4.1.5
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    groups:
+      rc-component-patch:
+        dependency-type: "production"
+        patterns:
+        - "rc-*"
+        - "@rc-component*"
+        update-types: ["patch"]
+      dependencies:
+        dependency-type: "production"
+        exclude-patterns:
+        - "rc-*"
+        - "@rc-component*"
+        update-types: ["major", "minor"]
+      dev-dependencies:
+        dependency-type: "development"
+        update-types: ["major"]
+    ignore:
+      - dependency-name: "@ant-design/cssinjs"
+      - dependency-name: "dayjs"
+        versions: ["1.x"]
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    labels:
+      - "github-actions"
+      - "dependencies"
+      - "skip-verify-files"

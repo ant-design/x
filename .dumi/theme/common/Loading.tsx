@@ -1,6 +1,6 @@
-import React from 'react';
 import { Flex, Skeleton, Spin } from 'antd';
 import { useLocation } from 'dumi';
+import React from 'react';
 
 const Loading: React.FC = () => {
   const { pathname } = useLocation();

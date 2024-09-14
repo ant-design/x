@@ -1,4 +1,3 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
 import { LinkOutlined, ThunderboltOutlined, UpOutlined } from '@ant-design/icons';
 import type { Project } from '@stackblitz/sdk';
 import stackblitzSdk from '@stackblitz/sdk';
@@ -7,16 +6,17 @@ import { createStyles, css } from 'antd-style';
 import classNames from 'classnames';
 import { FormattedMessage, useLiveDemo, useSiteData } from 'dumi';
 import LZString from 'lz-string';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 
 import useLocation from '../../../hooks/useLocation';
 import BrowserFrame from '../../common/BrowserFrame';
 import ClientOnly from '../../common/ClientOnly';
-import CodePenIcon from '../../common/CodePenIcon';
 import CodePreview from '../../common/CodePreview';
-import CodeSandboxIcon from '../../common/CodeSandboxIcon';
 import EditButton from '../../common/EditButton';
-import ExternalLinkIcon from '../../common/ExternalLinkIcon';
-import RiddleIcon from '../../common/RiddleIcon';
+import CodePenIcon from '../../icons/CodePenIcon';
+import CodeSandboxIcon from '../../icons/CodeSandboxIcon';
+import ExternalLinkIcon from '../../icons/ExternalLinkIcon';
+import RiddleIcon from '../../icons/RiddleIcon';
 import DemoContext from '../../slots/DemoContext';
 import type { SiteContextProps } from '../../slots/SiteContext';
 import SiteContext from '../../slots/SiteContext';
@@ -308,7 +308,9 @@ ${parsedSourceCode}
     .trim()
     .replace(new RegExp(`#${asset.id}\\s*`, 'g'), '')
     .replace('</style>', '')
-    .replace('<style>', '');
+    .replace('<style>', '')
+    .replace('```css', '')
+    .replace('```', '');
 
   const indexJsContent = `import React from 'react';
 import { createRoot } from 'react-dom/client';
@@ -401,6 +403,7 @@ createRoot(document.getElementById('container')).render(<Demo />);
           {description && (
             <div
               className="code-box-description"
+              // biome-ignore lint/security/noDangerouslySetInnerHtml: it's for markdown
               dangerouslySetInnerHTML={{ __html: description }}
             />
           )}

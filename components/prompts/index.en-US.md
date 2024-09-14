@@ -2,7 +2,7 @@
 category: Components
 group: Data Display
 title: Prompts
-description: Display a predefined set of questions or suggestions.
+description: Display a predefined set of questions or suggestion.
 cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*1ysXSqEnAckAAAAAAAAAAAAADgCCAQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*EkYUTotf-eYAAAAAAAAAAAAADgCCAQ/original
 demo:
@@ -11,7 +11,7 @@ demo:
 
 ## When To Use
 
-The Prompts component is used to display a predefined set of questions or suggestions that are relevant to the current context.
+The Prompts component is used to display a predefined set of questions or suggestion that are relevant to the current context.
 
 ## Examples
 

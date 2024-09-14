@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {
   BellOutlined,
   FolderOutlined,
@@ -17,14 +16,15 @@ import {
   Layout,
   Menu,
   Radio,
-  theme,
   Typography,
+  theme,
 } from 'antd';
 import { createStyles } from 'antd-style';
 import type { Color } from 'antd/es/color-picker';
 import { generateColor } from 'antd/es/color-picker/util';
 import classNames from 'classnames';
 import { useLocation } from 'dumi';
+import * as React from 'react';
 
 import useDark from '../../../../hooks/useDark';
 import useLocale from '../../../../hooks/useLocale';
@@ -35,16 +35,11 @@ import Group from '../Group';
 import { getCarouselStyle } from '../util';
 import BackgroundImage from './BackgroundImage';
 import ColorPicker from './ColorPicker';
-import {
-  DEFAULT_COLOR,
-  getAvatarURL,
-  getClosetColor,
-  PINK_COLOR,
-} from './colorUtil';
 import MobileCarousel from './MobileCarousel';
 import RadiusPicker from './RadiusPicker';
 import type { THEME } from './ThemePicker';
 import ThemePicker from './ThemePicker';
+import { DEFAULT_COLOR, PINK_COLOR, getAvatarURL, getClosetColor } from './colorUtil';
 
 const { Header, Content, Sider } = Layout;
 
@@ -76,8 +71,7 @@ const locales = {
   },
   en: {
     themeTitle: 'Flexible theme customization',
-    themeDesc:
-      'Ant Design 5.0 enable extendable algorithm, make custom theme easier',
+    themeDesc: 'Ant Design 5.0 enable extendable algorithm, make custom theme easier',
 
     customizeTheme: 'Customize Theme',
     myTheme: 'My Theme',
@@ -330,8 +324,7 @@ function rgbToColorMatrix(color: string) {
 
   const invertValue = normalize(r) * 100;
   const sepiaValue = 100;
-  const saturateValue =
-    Math.max(normalize(r), normalize(g), normalize(b)) * 10000;
+  const saturateValue = Math.max(normalize(r), normalize(g), normalize(b)) * 10000;
   const hueRotateValue =
     ((Math.atan2(
       Math.sqrt(3) * (normalize(g) - normalize(b)),
@@ -367,10 +360,7 @@ const Theme: React.FC = () => {
   const [form] = Form.useForm();
   const { isMobile } = React.useContext(SiteContext);
   const colorPrimaryValue = React.useMemo(
-    () =>
-      typeof colorPrimary === 'string'
-        ? colorPrimary
-        : colorPrimary.toHexString(),
+    () => (typeof colorPrimary === 'string' ? colorPrimary : colorPrimary.toHexString()),
     [colorPrimary],
   );
 
@@ -400,10 +390,7 @@ const Theme: React.FC = () => {
   const isRootDark = useDark();
 
   React.useEffect(() => {
-    onThemeChange(
-      {},
-      { ...themeData, themeType: isRootDark ? 'dark' : 'default' },
-    );
+    onThemeChange({}, { ...themeData, themeType: isRootDark ? 'dark' : 'default' });
   }, [isRootDark]);
 
   // ================================ Tokens ================================
@@ -463,19 +450,14 @@ const Theme: React.FC = () => {
       <TokenChecker />
       <div
         className={classNames(styles.demo, {
-          [styles.otherDemo]:
-            isLight && closestColor !== DEFAULT_COLOR && styles.otherDemo,
+          [styles.otherDemo]: isLight && closestColor !== DEFAULT_COLOR && styles.otherDemo,
           [styles.darkDemo]: !isLight,
         })}
         style={{ borderRadius: themeData.borderRadius }}
       >
         <Layout className={styles.transBg}>
           <Header
-            className={classNames(
-              styles.header,
-              styles.transBg,
-              !isLight && styles.headerDark,
-            )}
+            className={classNames(styles.header, styles.transBg, !isLight && styles.headerDark)}
           >
             {/* Logo */}
             <div className={styles.logo}>
@@ -484,9 +466,7 @@ const Theme: React.FC = () => {
                   src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*1SDwSrOnSakAAAAAAAAAAAAADgCCAQ/original"
                   style={{
                     filter:
-                      closestColor === DEFAULT_COLOR
-                        ? undefined
-                        : rgbToColorMatrix(logoColor),
+                      closestColor === DEFAULT_COLOR ? undefined : rgbToColorMatrix(logoColor),
                   }}
                   alt=""
                 />
@@ -519,10 +499,7 @@ const Theme: React.FC = () => {
                 expandIcon={false}
               />
             </Sider>
-            <Layout
-              className={styles.transBg}
-              style={{ padding: '0 24px 24px' }}
-            >
+            <Layout className={styles.transBg} style={{ padding: '0 24px 24px' }}>
               <Breadcrumb
                 style={{ margin: '16px 0' }}
                 items={[
@@ -532,28 +509,16 @@ const Theme: React.FC = () => {
                 ]}
               />
               <Content>
-                <Typography.Title level={2}>
-                  {locale.customizeTheme}
-                </Typography.Title>
+                <Typography.Title level={2}>{locale.customizeTheme}</Typography.Title>
                 <Card
                   title={locale.myTheme}
                   extra={
                     <Flex gap="small">
-                      <Link
-                        to={getLocalizedPathname(
-                          '/theme-editor',
-                          isZhCN,
-                          search,
-                        )}
-                      >
+                      <Link to={getLocalizedPathname('/theme-editor', isZhCN, search)}>
                         <Button type="default">{locale.toDef}</Button>
                       </Link>
                       <Link
-                        to={getLocalizedPathname(
-                          '/docs/react/customize-theme',
-                          isZhCN,
-                          search,
-                        )}
+                        to={getLocalizedPathname('/docs/react/customize-theme', isZhCN, search)}
                       >
                         <Button type="primary">{locale.toUse}</Button>
                       </Link>
@@ -571,23 +536,13 @@ const Theme: React.FC = () => {
                     <Form.Item label={locale.titleTheme} name="themeType">
                       <ThemePicker />
                     </Form.Item>
-                    <Form.Item
-                      label={locale.titlePrimaryColor}
-                      name="colorPrimary"
-                    >
+                    <Form.Item label={locale.titlePrimaryColor} name="colorPrimary">
                       <ColorPicker />
                     </Form.Item>
-                    <Form.Item
-                      label={locale.titleBorderRadius}
-                      name="borderRadius"
-                    >
+                    <Form.Item label={locale.titleBorderRadius} name="borderRadius">
                       <RadiusPicker />
                     </Form.Item>
-                    <Form.Item
-                      label={locale.titleCompact}
-                      name="compact"
-                      htmlFor="compact_default"
-                    >
+                    <Form.Item label={locale.titleCompact} name="compact" htmlFor="compact_default">
                       <Radio.Group
                         options={[
                           {
@@ -610,11 +565,7 @@ const Theme: React.FC = () => {
   );
 
   return isMobile ? (
-    <MobileCarousel
-      title={locale.themeTitle}
-      description={locale.themeDesc}
-      id="flexible"
-    />
+    <MobileCarousel title={locale.themeTitle} description={locale.themeDesc} id="flexible" />
   ) : (
     <Group
       title={locale.themeTitle}
@@ -629,9 +580,7 @@ const Theme: React.FC = () => {
           <div
             className={classNames(
               styles.motion,
-              isLight && closestColor === DEFAULT_COLOR
-                ? styles.op1
-                : styles.op0,
+              isLight && closestColor === DEFAULT_COLOR ? styles.op1 : styles.op0,
             )}
           >
             {/* Image Left Top */}

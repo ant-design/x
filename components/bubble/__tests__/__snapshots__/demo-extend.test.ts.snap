@@ -12,7 +12,7 @@ exports[`renders components/bubble/demo/avatar-and-placement.tsx extend context 
     >
       <span
         class="ant-avatar ant-avatar-circle ant-avatar-icon"
-        style="color: rgb(245, 106, 0); background-color: rgb(253, 227, 207);"
+        style="color: #f56a00; background-color: #fde3cf;"
       >
         <span
           aria-label="user"
@@ -71,7 +71,7 @@ exports[`renders components/bubble/demo/avatar-and-placement.tsx extend context 
     >
       <span
         class="ant-avatar ant-avatar-circle ant-avatar-icon"
-        style="color: rgb(255, 255, 255); background-color: rgb(135, 208, 104);"
+        style="color: #fff; background-color: #87d068;"
       >
         <span
           aria-label="user"
@@ -179,7 +179,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
       >
         <span
           class="ant-avatar ant-avatar-circle ant-avatar-icon"
-          style="background: rgb(135, 208, 104);"
+          style="background: #87d068;"
         >
           <span
             aria-label="user"
@@ -218,7 +218,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
       >
         <span
           class="ant-avatar ant-avatar-circle ant-avatar-icon"
-          style="background: rgb(253, 227, 207);"
+          style="background: #fde3cf;"
         >
           <span
             aria-label="user"
@@ -256,7 +256,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
       >
         <span
           class="ant-avatar ant-avatar-circle ant-avatar-icon"
-          style="background: rgb(135, 208, 104);"
+          style="background: #87d068;"
         >
           <span
             aria-label="user"

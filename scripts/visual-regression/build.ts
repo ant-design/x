@@ -298,7 +298,7 @@ ${fullReport}
 }
 
 async function boot() {
-  const { prId, baseRef: targetBranch = 'master', currentRef } = await parseArgs();
+  const { prId, baseRef: targetBranch = 'main', currentRef } = await parseArgs();
 
   const baseImgSourceDir = path.resolve(ROOT_DIR, `./imageSnapshots-${targetBranch}`);
 

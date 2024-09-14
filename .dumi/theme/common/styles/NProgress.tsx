@@ -1,6 +1,6 @@
-import { css, Global } from '@emotion/react';
-import React from 'react';
+import { Global, css } from '@emotion/react';
 import { useTheme } from 'antd-style';
+import React from 'react';
 
 export default () => {
   const token = useTheme();
@@ -13,7 +13,9 @@ export default () => {
           }
 
           .peg {
-            box-shadow: 0 0 10px ${token.colorPrimary}, 0 0 5px ${token.colorPrimary};
+            box-shadow:
+              0 0 10px ${token.colorPrimary},
+              0 0 5px ${token.colorPrimary};
           }
 
           .spinner-icon {

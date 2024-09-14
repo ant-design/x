@@ -40,6 +40,7 @@ export interface SenderProps extends Pick<TextareaProps, 'placeholder' | 'onKeyP
   onSubmit?: (message: string) => void;
   onChange?: (value: string) => void;
   onCancel?: VoidFunction;
+  onKeyDown?: React.KeyboardEventHandler<any>;
   components?: SenderComponents;
   styles?: {
     input?: React.CSSProperties;
@@ -81,6 +82,7 @@ const Sender: React.FC<SenderProps> = (props) => {
     onChange,
     actions,
     onKeyPress,
+    onKeyDown,
     ...rest
   } = props;
 
@@ -189,6 +191,7 @@ const Sender: React.FC<SenderProps> = (props) => {
           triggerValueChange((e.target as HTMLTextAreaElement).value);
         }}
         onPressEnter={onInternalKeyPress}
+        onKeyDown={onKeyDown}
         readOnly={loading}
       />
 

@@ -1,4 +1,3 @@
-import React, { useContext } from 'react';
 import {
   AntDesignOutlined,
   BgColorsOutlined,
@@ -10,6 +9,7 @@ import {
   MessageOutlined,
   QuestionCircleOutlined,
   TwitterOutlined,
+  UsergroupAddOutlined,
   ZhihuOutlined,
 } from '@ant-design/icons';
 import { TinyColor } from '@ctrl/tinycolor';
@@ -18,6 +18,7 @@ import getAlphaColor from 'antd/es/theme/util/getAlphaColor';
 import { FormattedMessage, Link } from 'dumi';
 import RcFooter from 'rc-footer';
 import type { FooterColumn } from 'rc-footer/lib/column';
+import React, { useContext } from 'react';
 
 import useLocale from '../../../hooks/useLocale';
 import useLocation from '../../../hooks/useLocation';
@@ -102,9 +103,7 @@ const Footer: React.FC = () => {
       items: [
         {
           title: 'Ant Design Charts',
-          url: isZhCN
-            ? 'https://ant-design-charts.antgroup.com'
-            : 'https://charts.ant.design',
+          url: isZhCN ? 'https://ant-design-charts.antgroup.com' : 'https://charts.ant.design',
           openExternal: true,
         },
         {
@@ -119,16 +118,12 @@ const Footer: React.FC = () => {
         },
         {
           title: 'Ant Design Mobile',
-          url: isZhCN
-            ? 'https://ant-design-mobile.antgroup.com/zh'
-            : 'https://mobile.ant.design',
+          url: isZhCN ? 'https://ant-design-mobile.antgroup.com/zh' : 'https://mobile.ant.design',
           openExternal: true,
         },
         {
           title: 'Ant Design Mini',
-          url: isZhCN
-            ? 'https://ant-design-mini.antgroup.com/'
-            : 'https://mini.ant.design',
+          url: isZhCN ? 'https://ant-design-mini.antgroup.com/' : 'https://mini.ant.design',
           openExternal: true,
         },
         {
@@ -207,7 +202,7 @@ const Footer: React.FC = () => {
               src="https://gw.alipayobjects.com/zos/rmsportal/XuVpGqBFxXplzvLjJBZB.svg"
               width={16}
               height={16}
-              alt="yuque"
+              alt="yuque logo"
             />
           ),
           title: <FormattedMessage id="app.footer.yuque.repo" />,
@@ -232,7 +227,7 @@ const Footer: React.FC = () => {
               src="https://gw.alipayobjects.com/zos/rmsportal/mZBWtboYbnMkTBaRIuWQ.png"
               width={16}
               height={16}
-              alt="seeconf"
+              alt="seeconf logo"
             />
           ),
           title: 'SEE Conf',
@@ -242,6 +237,18 @@ const Footer: React.FC = () => {
         },
       ],
     };
+
+    if (isZhCN) {
+      col2.items.push({
+        icon: <UsergroupAddOutlined />,
+        title: <FormattedMessage id="app.footer.work_with_us" />,
+        url: getLink('/docs/resources', {
+          cn: '加入我们',
+          en: 'JoinUs',
+        }),
+        LinkComponent: Link,
+      } as unknown as (typeof col2)['items'][number]);
+    }
 
     const col3 = {
       title: <FormattedMessage id="app.footer.help" />,
@@ -303,7 +310,7 @@ const Footer: React.FC = () => {
           src="https://gw.alipayobjects.com/zos/rmsportal/nBVXkrFdWHxbZlmMbsaH.svg"
           width={22}
           height={22}
-          alt="Ant XTech"
+          alt="Ant XTech logo"
         />
       ),
       title: <FormattedMessage id="app.footer.more-product" />,
@@ -314,7 +321,7 @@ const Footer: React.FC = () => {
               src="https://gw.alipayobjects.com/zos/rmsportal/XuVpGqBFxXplzvLjJBZB.svg"
               width={16}
               height={16}
-              alt="yuque"
+              alt="yuque logo"
             />
           ),
           title: <FormattedMessage id="app.footer.yuque" />,
@@ -328,7 +335,7 @@ const Footer: React.FC = () => {
               src="https://gw.alipayobjects.com/zos/antfincdn/nc7Fc0XBg5/8a6844f5-a6ed-4630-9177-4fa5d0b7dd47.png"
               width={16}
               height={16}
-              alt="AntV"
+              alt="AntV logo"
             />
           ),
           title: 'AntV',
@@ -337,14 +344,7 @@ const Footer: React.FC = () => {
           openExternal: true,
         },
         {
-          icon: (
-            <img
-              src="https://www.eggjs.org/logo.svg"
-              alt="Egg"
-              width={16}
-              height={16}
-            />
-          ),
+          icon: <img src="https://www.eggjs.org/logo.svg" alt="Egg logo" width={16} height={16} />,
           title: 'Egg',
           url: 'https://eggjs.org',
           description: <FormattedMessage id="app.footer.egg.slogan" />,
@@ -356,7 +356,7 @@ const Footer: React.FC = () => {
               src="https://gw.alipayobjects.com/zos/rmsportal/DMDOlAUhmktLyEODCMBR.ico"
               width={16}
               height={16}
-              alt="kitchen"
+              alt="Kitchen logo"
             />
           ),
           title: 'Kitchen',
@@ -370,7 +370,7 @@ const Footer: React.FC = () => {
               src="https://mdn.alipayobjects.com/huamei_j9rjmc/afts/img/A*3ittT5OEo2gAAAAAAAAAAAAADvGmAQ/original"
               width={16}
               height={16}
-              alt="Galacean"
+              alt="Galacean logo"
             />
           ),
           title: <FormattedMessage id="app.footer.galacean" />,
@@ -384,7 +384,7 @@ const Footer: React.FC = () => {
               src="https://gw.alipayobjects.com/zos/rmsportal/nBVXkrFdWHxbZlmMbsaH.svg"
               width={16}
               height={16}
-              alt="xtech"
+              alt="xtech logo"
             />
           ),
           title: <FormattedMessage id="app.footer.xtech" />,
