@@ -3,7 +3,8 @@
     (navigator.languages.includes('zh') || navigator.languages.includes('zh-CN')) &&
     /-cn\/?$/.test(window.location.pathname) &&
     !['ant-design.gitee.io', 'ant-design.antgroup.com'].includes(window.location.hostname) &&
-    !window.location.host.includes('surge')
+    !window.location.host.includes('surge') &&
+    window.location.hostname !== 'localhost'
   ) {
     const ANTD_DOT_NOT_SHOW_MIRROR_MODAL = 'ANT_DESIGN_DO_NOT_OPEN_MIRROR_MODAL';
 
@@ -49,8 +50,8 @@
   .mirror-modal-dialog {
     position: fixed;
     top: 120px;
-    left: 0;
-    right: 0;
+    inset-inline-start: 0;
+    inset-inline-end: 0;
     margin: 0 auto;
     width: 420px;
     display: flex;

@@ -1,9 +1,9 @@
-import React from 'react';
 import { EditOutlined, GithubOutlined } from '@ant-design/icons';
 import type { GetProp } from 'antd';
-import { Descriptions, theme, Tooltip, Typography } from 'antd';
+import { Descriptions, Tooltip, Typography, theme } from 'antd';
 import { createStyles, css } from 'antd-style';
 import kebabCase from 'lodash/kebabCase';
+import React from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
 import useLocale from '../../../hooks/useLocale';
@@ -29,7 +29,7 @@ const locales = {
   },
 };
 
-const branchUrl = 'https://github.com/ant-design/x/edit/master/';
+const branchUrl = 'https://github.com/ant-design/ant-design/edit/master/';
 
 function isVersionNumber(value?: string) {
   return value && /^\d+\.\d+\.\d+$/.test(value);
@@ -104,7 +104,7 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
     if (String(source) === 'true') {
       const kebabComponent = kebabCase(component);
       return [
-        `https://github.com/ant-design/x/blob/master/components/${kebabComponent}`,
+        `https://github.com/ant-design/ant-design/blob/master/components/${kebabComponent}`,
         `components/${kebabComponent}`,
       ];
     }
@@ -116,17 +116,26 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
     return [source, source];
   }, [component, source]);
 
+  const transformComponentName = (componentName: string) => {
+    if (componentName === 'Notifiction' || componentName === 'Message') {
+      return componentName.toLowerCase();
+    }
+    return componentName;
+  };
+
   // ======================== Render ========================
   const importList = [
     <span key="import" className={styles.import}>
       import
     </span>,
-    <span key="component" className={styles.component}>{`{ ${component} }`}</span>,
+    <span key="component" className={styles.component}>{`{ ${transformComponentName(
+      component,
+    )} }`}</span>,
     <span key="from" className={styles.from}>
       from
     </span>,
     <span key="antd" className={styles.antd}>
-      {`"@ant-design/x"`}
+      {`"antd"`}
     </span>,
     <span key="semicolon" className={styles.semicolon}>
       ;
@@ -139,7 +148,7 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
       colon={false}
       column={1}
       style={{ marginTop: token.margin }}
-      labelStyle={{ paddingInlineEnd: token.padding, width: 54 }}
+      labelStyle={{ paddingInlineEnd: token.padding, width: 56 }}
       items={
         [
           {

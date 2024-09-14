@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react';
 import G6 from '@antv/g6';
 import { createStyles, css } from 'antd-style';
 import { useRouteMeta } from 'dumi';
+import React, { useEffect, useRef } from 'react';
 
 G6.registerNode('behavior-start-node', {
   draw: (cfg, group) => {
@@ -227,14 +227,14 @@ const useStyle = createStyles(({ token }) => ({
   title: css`
     position: absolute;
     top: 20px;
-    left: 20px;
+    inset-inline-start: 20px;
     font-size: ${token.fontSizeLG}px;
   `,
   tips: css`
     display: flex;
     position: absolute;
     bottom: 20px;
-    right: 20px;
+    inset-inline-end: 20px;
   `,
   mvp: css`
     margin-inline-end: ${token.marginMD}px;

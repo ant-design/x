@@ -10,7 +10,7 @@ export default defineConfig({
   plugins: ['dumi-plugin-color-chunk'],
   conventionRoutes: {
     // to avoid generate routes for .dumi/pages/index/components/xx
-    exclude: [new RegExp('index/components/')],
+    exclude: [/index\/components\//],
   },
   ssr: process.env.NODE_ENV === 'production' ? { builder: 'mako' } : false,
   hash: true,
@@ -168,9 +168,7 @@ export default defineConfig({
   scripts: [
     {
       async: true,
-      content: fs
-        .readFileSync(path.join(__dirname, '.dumi', 'mirror-modal.js'))
-        .toString(),
+      content: fs.readFileSync(path.join(__dirname, '.dumi', 'mirror-modal.js')).toString(),
     },
   ],
 });

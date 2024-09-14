@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { useState } from 'react';
 import { Carousel, Typography } from 'antd';
 import { createStyles, css, useTheme } from 'antd-style';
+import * as React from 'react';
+import { useState } from 'react';
 
 import { getCarouselStyle } from '../util';
 
@@ -113,7 +113,7 @@ const MobileCarousel: React.FC<MobileCarouselProps> = (props) => {
       <Carousel className={styles.carousel} afterChange={setCurrentSlider}>
         {mobileImageConfigList.map((item, index) => (
           <div key={index}>
-            <img src={item.imageSrc} className={styles.img} alt="" />
+            <img draggable={false} src={item.imageSrc} className={styles.img} alt="carousel" />
           </div>
         ))}
       </Carousel>

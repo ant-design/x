@@ -1,7 +1,9 @@
 import { HomeOutlined } from '@ant-design/icons';
-import { Link, useLocation } from 'dumi';
-import React, { useEffect } from 'react';
 import { Button, Result } from 'antd';
+import { useLocation } from 'dumi';
+import React, { useEffect } from 'react';
+
+import Link from '../../theme/common/Link';
 import * as utils from '../../theme/utils';
 
 export interface NotFoundProps {
@@ -12,6 +14,8 @@ export interface NotFoundProps {
 }
 
 const DIRECT_MAP: Record<string, string> = {
+  'docs/spec/download': 'docs/resources',
+  'docs/spec/work-with-us': 'docs/resources',
 };
 
 const NotFoundPage: React.FC<NotFoundProps> = ({ router }) => {

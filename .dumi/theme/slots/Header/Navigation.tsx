@@ -1,9 +1,9 @@
-import * as React from 'react';
 import { MenuOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import { createStyles, css } from 'antd-style';
 import { FormattedMessage, useFullSidebarData, useLocation } from 'dumi';
+import * as React from 'react';
 
 import useLocale from '../../../hooks/useLocale';
 import Link from '../../common/Link';
@@ -13,12 +13,14 @@ import type { SharedProps } from './interface';
 // ============================= Theme =============================
 const locales = {
   cn: {
+    design: '设计',
     development: '研发',
     components: '组件',
     resources: '资源',
     blog: '博客',
   },
   en: {
+    design: 'Design',
     development: 'Development',
     components: 'Components',
     resources: 'Resources',
@@ -28,16 +30,7 @@ const locales = {
 
 // ============================= Style =============================
 const useStyle = createStyles(({ token }) => {
-  const {
-    antCls,
-    iconCls,
-    fontFamily,
-    fontSize,
-    headerHeight,
-    menuItemBorder,
-    colorPrimary,
-    colorText,
-  } = token;
+  const { antCls, iconCls, fontFamily, fontSize, headerHeight, colorPrimary } = token;
 
   return {
     nav: css`
@@ -55,25 +48,6 @@ const useStyle = createStyles(({ token }) => {
           padding-inline-end: ${token.paddingSM}px;
           padding-inline-start: ${token.paddingSM}px;
           line-height: ${headerHeight}px;
-
-          &::after {
-            top: 0;
-            right: 12px;
-            bottom: auto;
-            left: 12px;
-            border-width: ${menuItemBorder}px;
-          }
-
-          a {
-            color: ${colorText};
-          }
-
-          a:before {
-            position: absolute;
-            inset: 0;
-            background-color: transparent;
-            content: '';
-          }
         }
 
         & ${antCls}-menu-submenu-title ${iconCls} {
@@ -103,14 +77,7 @@ export interface NavigationProps extends SharedProps {
 }
 
 const HeaderNavigation: React.FC<NavigationProps> = (props) => {
-  const {
-    isZhCN,
-    isMobile,
-    responsive,
-    directionText,
-    onLangChange,
-    onDirectionChange,
-  } = props;
+  const { isZhCN, isMobile, responsive, directionText, onLangChange, onDirectionChange } = props;
   const { pathname, search } = useLocation();
   const [locale] = useLocale(locales);
 
@@ -125,6 +92,8 @@ const HeaderNavigation: React.FC<NavigationProps> = (props) => {
   let activeMenuItem = module || 'home';
   if (pathname.startsWith('/changelog')) {
     activeMenuItem = 'docs/react';
+  } else if (pathname.startsWith('/docs/resources')) {
+    activeMenuItem = 'docs/resources';
   }
 
   let additional: MenuProps['items'] = [];
@@ -133,7 +102,7 @@ const HeaderNavigation: React.FC<NavigationProps> = (props) => {
     {
       label: (
         <a
-          href="https://github.com/ant-design/x"
+          href="https://github.com/ant-design/ant-design"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -169,13 +138,15 @@ const HeaderNavigation: React.FC<NavigationProps> = (props) => {
   const items: MenuProps['items'] = [
     {
       label: (
-        <Link
-          to={utils.getLocalizedPathname(
-            '/docs/react/introduce',
-            isZhCN,
-            search,
-          )}
-        >
+        <Link to={utils.getLocalizedPathname('/docs/spec/introduce', isZhCN, search)}>
+          {locale.design}
+        </Link>
+      ),
+      key: 'docs/spec',
+    },
+    {
+      label: (
+        <Link to={utils.getLocalizedPathname('/docs/react/introduce', isZhCN, search)}>
           {locale.development}
         </Link>
       ),
@@ -183,13 +154,7 @@ const HeaderNavigation: React.FC<NavigationProps> = (props) => {
     },
     {
       label: (
-        <Link
-          to={utils.getLocalizedPathname(
-            '/components/overview/',
-            isZhCN,
-            search,
-          )}
-        >
+        <Link to={utils.getLocalizedPathname('/components/overview/', isZhCN, search)}>
           {locale.components}
         </Link>
       ),
@@ -200,9 +165,8 @@ const HeaderNavigation: React.FC<NavigationProps> = (props) => {
           label: (
             <Link
               to={utils.getLocalizedPathname(
-                blogList.sort((a, b) =>
-                  a.frontmatter?.date > b.frontmatter?.date ? -1 : 1,
-                )[0].link,
+                blogList.sort((a, b) => (a.frontmatter?.date > b.frontmatter?.date ? -1 : 1))[0]
+                  .link,
                 isZhCN,
                 search,
               )}
@@ -213,15 +177,19 @@ const HeaderNavigation: React.FC<NavigationProps> = (props) => {
           key: 'docs/blog',
         }
       : null,
+    {
+      label: (
+        <Link to={utils.getLocalizedPathname('/docs/resources', isZhCN, search)}>
+          {locale.resources}
+        </Link>
+      ),
+      key: 'docs/resources',
+    },
     isZhCN
       ? {
           key: 'mirror',
           label: (
-            <a
-              href="https://ant-design.antgroup.com"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href="https://ant-design.antgroup.com" target="_blank" rel="noreferrer">
               国内镜像
             </a>
           ),

@@ -1,12 +1,12 @@
-import React from 'react';
 import { PauseCircleFilled, PlayCircleFilled } from '@ant-design/icons';
 import { createStyles, css } from 'antd-style';
 import classNames from 'classnames';
+import React from 'react';
 
 const useStyles = createStyles(({ cx, token }) => {
   const play = css`
     position: absolute;
-    right: ${token.paddingLG}px;
+    inset-inline-end: ${token.paddingLG}px;
     bottom: ${token.paddingLG}px;
     font-size: 64px;
     display: flex;

@@ -1,11 +1,12 @@
 import { mergeToken } from '@ant-design/cssinjs-utils';
-import { genStyleHooks } from '../../theme/genStyleUtils';
 import { genCollapseMotion } from '../../style/motion';
+import { genStyleHooks } from '../../theme/genStyleUtils';
 import { THOUGHT_CHAIN_ITEM_STATUS } from '../Item';
 
-import { unit, type CSSObject } from '@ant-design/cssinjs';
+import { type CSSObject, unit } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/cssinjs-utils';
 
+// biome-ignore lint/suspicious/noEmptyInterface: ComponentToken need to be empty by default
 export interface ComponentToken {}
 
 export interface ThoughtChainToken extends FullToken<'ThoughtChain'> {

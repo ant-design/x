@@ -1,70 +1,68 @@
-import React from 'react';
-import { Col, ConfigProvider, Flex, Row, Tag, theme, Typography } from 'antd';
+import { Col, ConfigProvider, Flex, Row, Tag, Typography, theme } from 'antd';
 import { createStyles, css } from 'antd-style';
 import classnames from 'classnames';
+import React from 'react';
 
 const MARK_BORDER_SIZE = 2;
 
-const useStyle = createStyles(
-  ({ token }, markPos: [number, number, number, number]) => ({
-    container: css`
-      position: relative;
-    `,
-    colWrap: css`
-      border-right: 1px solid ${token.colorBorderSecondary};
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: ${token.paddingMD}px;
-      overflow: hidden;
-    `,
-    listWrap: css`
-      display: flex;
-      flex-direction: column;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-    `,
-    listItem: css`
-      cursor: pointer;
-      padding: ${token.paddingSM}px;
-      transition: background-color ${token.motionDurationFast} ease;
-      &:hover {
-        background-color: ${token.controlItemBgHover};
-      }
-      &:not(:first-of-type) {
-        border-top: 1px solid ${token.colorBorderSecondary};
-      }
-    `,
-    marker: css`
-      position: absolute;
-      border: ${MARK_BORDER_SIZE}px solid ${token.colorWarning};
-      box-sizing: border-box;
-      z-index: 999999;
-      box-shadow: 0 0 0 1px #fff;
-      pointer-events: none;
-      left: ${markPos[0] - MARK_BORDER_SIZE}px;
-      top: ${markPos[1] - MARK_BORDER_SIZE}px;
-      width: ${markPos[2] + MARK_BORDER_SIZE * 2}px;
-      height: ${markPos[3] + MARK_BORDER_SIZE * 2}px;
-    `,
-    markerActive: css`
-      opacity: 1;
-    `,
-    markerNotActive: css`
-      opacity: 0;
-    `,
-    markerMotion: css`
-      transition:
-        opacity ${token.motionDurationSlow} ease,
-        all ${token.motionDurationSlow} ease;
-    `,
-    markerNotMotion: css`
-      transition: opacity ${token.motionDurationSlow} ease;
-    `,
-  }),
-);
+const useStyle = createStyles(({ token }, markPos: [number, number, number, number]) => ({
+  container: css`
+    position: relative;
+  `,
+  colWrap: css`
+    border-right: 1px solid ${token.colorBorderSecondary};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: ${token.paddingMD}px;
+    overflow: hidden;
+  `,
+  listWrap: css`
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  `,
+  listItem: css`
+    cursor: pointer;
+    padding: ${token.paddingSM}px;
+    transition: background-color ${token.motionDurationFast} ease;
+    &:hover {
+      background-color: ${token.controlItemBgHover};
+    }
+    &:not(:first-of-type) {
+      border-top: 1px solid ${token.colorBorderSecondary};
+    }
+  `,
+  marker: css`
+    position: absolute;
+    border: ${MARK_BORDER_SIZE}px solid ${token.colorWarning};
+    box-sizing: border-box;
+    z-index: 999999;
+    box-shadow: 0 0 0 1px #fff;
+    pointer-events: none;
+    inset-inline-start: ${markPos[0] - MARK_BORDER_SIZE}px;
+    top: ${markPos[1] - MARK_BORDER_SIZE}px;
+    width: ${markPos[2] + MARK_BORDER_SIZE * 2}px;
+    height: ${markPos[3] + MARK_BORDER_SIZE * 2}px;
+  `,
+  markerActive: css`
+    opacity: 1;
+  `,
+  markerNotActive: css`
+    opacity: 0;
+  `,
+  markerMotion: css`
+    transition:
+      opacity ${token.motionDurationSlow} ease,
+      all ${token.motionDurationSlow} ease;
+  `,
+  markerNotMotion: css`
+    transition: opacity ${token.motionDurationSlow} ease;
+  `,
+}));
 
 export interface SemanticPreviewProps {
   semantics: { name: string; desc: string; version?: string }[];
@@ -103,18 +101,14 @@ const SemanticPreview: React.FC<SemanticPreviewProps> = (props) => {
 
   const [positionMotion, setPositionMotion] = React.useState<boolean>(false);
   const [hoverSemantic, setHoverSemantic] = React.useState<string | null>(null);
-  const [markPos, setMarkPos] = React.useState<
-    [number, number, number, number]
-  >([0, 0, 0, 0]);
+  const [markPos, setMarkPos] = React.useState<[number, number, number, number]>([0, 0, 0, 0]);
 
   const { styles } = useStyle(markPos);
 
   React.useEffect(() => {
     if (hoverSemantic) {
       const targetClassName = getMarkClassName(hoverSemantic);
-      const targetElement = containerRef.current?.querySelector<HTMLElement>(
-        `.${targetClassName}`,
-      );
+      const targetElement = containerRef.current?.querySelector<HTMLElement>(`.${targetClassName}`);
       const containerRect = containerRef.current?.getBoundingClientRect();
       const targetRect = targetElement?.getBoundingClientRect();
       setMarkPos([
@@ -143,9 +137,7 @@ const SemanticPreview: React.FC<SemanticPreviewProps> = (props) => {
     <div className={classnames(styles.container)} ref={containerRef}>
       <Row style={{ minHeight: height }}>
         <Col span={16} className={classnames(styles.colWrap)}>
-          <ConfigProvider theme={{ token: { motion: false } }}>
-            {cloneNode}
-          </ConfigProvider>
+          <ConfigProvider theme={{ token: { motion: false } }}>{cloneNode}</ConfigProvider>
         </Col>
         <Col span={8}>
           <ul className={classnames(styles.listWrap)}>
@@ -161,13 +153,9 @@ const SemanticPreview: React.FC<SemanticPreviewProps> = (props) => {
                     <Typography.Title level={5} style={{ margin: 0 }}>
                       {semantic.name}
                     </Typography.Title>
-                    {semantic.version && (
-                      <Tag color="blue">{semantic.version}</Tag>
-                    )}
+                    {semantic.version && <Tag color="blue">{semantic.version}</Tag>}
                   </Flex>
-                  <Typography.Paragraph
-                    style={{ margin: 0, fontSize: token.fontSizeSM }}
-                  >
+                  <Typography.Paragraph style={{ margin: 0, fontSize: token.fontSizeSM }}>
                     {semantic.desc}
                   </Typography.Paragraph>
                 </Flex>

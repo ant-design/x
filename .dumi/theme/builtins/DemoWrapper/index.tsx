@@ -1,4 +1,3 @@
-import React, { useContext } from 'react';
 import {
   BugFilled,
   BugOutlined,
@@ -10,6 +9,7 @@ import {
 import { ConfigProvider, Tooltip } from 'antd';
 import classNames from 'classnames';
 import { DumiDemoGrid, FormattedMessage } from 'dumi';
+import React, { useContext } from 'react';
 
 import useLayoutState from '../../../hooks/useLayoutState';
 import useLocale from '../../../hooks/useLocale';
@@ -51,32 +51,27 @@ const DemoWrapper: typeof DumiDemoGrid = ({ items }) => {
 
   const demos = React.useMemo(
     () =>
-      items.reduce(
-        (acc, item) => {
-          const { previewerProps } = item;
-          const { debug } = previewerProps;
-
-          if (debug && !showDebug) {
-            return acc;
-          }
-
-          return acc.concat({
-            ...item,
-            previewerProps: {
-              ...previewerProps,
-              expand: expandAll,
-              // always override debug property, because dumi will hide debug demo in production
-              debug: false,
-              /**
-               * antd extra marker for the original debug
-               * @see https://github.com/ant-design/ant-design/pull/40130#issuecomment-1380208762
-               */
-              originDebug: debug,
-            },
-          });
-        },
-        [] as typeof items,
-      ),
+      items.reduce<typeof items>((acc, item) => {
+        const { previewerProps } = item;
+        const { debug } = previewerProps;
+        if (debug && !showDebug) {
+          return acc;
+        }
+        return acc.concat({
+          ...item,
+          previewerProps: {
+            ...previewerProps,
+            expand: expandAll,
+            // always override debug property, because dumi will hide debug demo in production
+            debug: false,
+            /**
+             * antd extra marker for the original debug
+             * @see https://github.com/ant-design/ant-design/pull/40130#issuecomment-1380208762
+             */
+            originDebug: debug,
+          },
+        });
+      }, []),
     [expandAll, showDebug],
   );
 

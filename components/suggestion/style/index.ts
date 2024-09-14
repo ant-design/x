@@ -1,10 +1,9 @@
 import { mergeToken } from '@ant-design/cssinjs-utils';
-import { genStyleHooks } from '../../theme/genStyleUtils';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
+import { genStyleHooks } from '../../theme/genStyleUtils';
 
-export interface ComponentToken {
-  //
-}
+// biome-ignore lint/suspicious/noEmptyInterface: ComponentToken need to be empty by default
+export interface ComponentToken {}
 
 interface SuggestionToken extends FullToken<'Suggestion'> {}
 

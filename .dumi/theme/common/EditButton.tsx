@@ -1,9 +1,9 @@
-import React from 'react';
 import { EditOutlined } from '@ant-design/icons';
 import { Tooltip } from 'antd';
 import { createStyles } from 'antd-style';
+import React from 'react';
 
-const branchUrl = 'https://github.com/ant-design/x/edit/master/';
+const branchUrl = 'https://github.com/ant-design/ant-design/edit/master/';
 
 export interface EditButtonProps {
   title: React.ReactNode;

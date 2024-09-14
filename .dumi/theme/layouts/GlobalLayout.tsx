@@ -1,28 +1,24 @@
-import React, { Suspense, useCallback, useEffect } from 'react';
 import {
+  NaNLinter,
+  StyleProvider,
   createCache,
   extractStyle,
   legacyNotSelectorLinter,
-  NaNLinter,
   parentSelectorLinter,
-  StyleProvider,
 } from '@ant-design/cssinjs';
+import { HappyProvider } from '@ant-design/happy-work-theme';
 import { getSandpackCssText } from '@codesandbox/sandpack-react';
-import { theme as antdTheme, App } from 'antd';
+import { App, theme as antdTheme } from 'antd';
 import type { MappingAlgorithm } from 'antd';
 import type { DirectionType, ThemeConfig } from 'antd/es/config-provider';
-import {
-  createSearchParams,
-  useOutlet,
-  useSearchParams,
-  useServerInsertedHTML,
-} from 'dumi';
+import { createSearchParams, useOutlet, useSearchParams, useServerInsertedHTML } from 'dumi';
+import React, { Suspense, useCallback, useEffect } from 'react';
 
 import { DarkContext } from '../../hooks/useDark';
 import useLayoutState from '../../hooks/useLayoutState';
 import useLocation from '../../hooks/useLocation';
-import type { ThemeName } from '../common/ThemeSwitch';
 import SiteThemeProvider from '../SiteThemeProvider';
+import type { ThemeName } from '../common/ThemeSwitch';
 import type { SiteContextProps } from '../slots/SiteContext';
 import SiteContext from '../slots/SiteContext';
 
@@ -38,6 +34,16 @@ export const ANT_DESIGN_NOT_SHOW_BANNER = 'ANT_DESIGN_NOT_SHOW_BANNER';
 // if (typeof global !== 'undefined') {
 //   (global as any).styleCache = styleCache;
 // }
+
+// Compatible with old anchors
+if (typeof window !== 'undefined') {
+  const hashId = location.hash.slice(1);
+  if (hashId.startsWith('components-')) {
+    if (!document.querySelector(`#${hashId}`)) {
+      location.hash = `#${hashId.replace(/^components-/, '')}`;
+    }
+  }
+}
 
 const getAlgorithm = (themes: ThemeName[] = []) =>
   themes
@@ -56,15 +62,13 @@ const GlobalLayout: React.FC = () => {
   const outlet = useOutlet();
   const { pathname } = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [
-    { theme = [], direction, isMobile, bannerVisible = false },
-    setSiteState,
-  ] = useLayoutState<SiteState>({
-    isMobile: false,
-    direction: 'ltr',
-    theme: [],
-    bannerVisible: false,
-  });
+  const [{ theme = [], direction, isMobile, bannerVisible = false }, setSiteState] =
+    useLayoutState<SiteState>({
+      isMobile: false,
+      direction: 'ltr',
+      theme: [],
+      bannerVisible: false,
+    });
 
   const updateSiteConfig = useCallback(
     (props: SiteState) => {
@@ -74,30 +78,25 @@ const GlobalLayout: React.FC = () => {
       const oldSearchStr = searchParams.toString();
 
       let nextSearchParams: URLSearchParams = searchParams;
-      (Object.entries(props) as Entries<SiteContextProps>).forEach(
-        ([key, value]) => {
-          if (key === 'direction') {
-            if (value === 'rtl') {
-              nextSearchParams.set('direction', 'rtl');
-            } else {
-              nextSearchParams.delete('direction');
-            }
+      (Object.entries(props) as Entries<SiteContextProps>).forEach(([key, value]) => {
+        if (key === 'direction') {
+          if (value === 'rtl') {
+            nextSearchParams.set('direction', 'rtl');
+          } else {
+            nextSearchParams.delete('direction');
           }
-          if (key === 'theme') {
-            nextSearchParams = createSearchParams({
-              ...nextSearchParams,
-              theme: value.filter((t) => t !== 'light'),
-            });
+        }
+        if (key === 'theme') {
+          nextSearchParams = createSearchParams({
+            ...nextSearchParams,
+            theme: value.filter((t) => t !== 'light'),
+          });
 
-            document
-              .querySelector('html')
-              ?.setAttribute(
-                'data-prefers-color',
-                value.includes('dark') ? 'dark' : 'light',
-              );
-          }
-        },
-      );
+          document
+            .querySelector('html')
+            ?.setAttribute('data-prefers-color', value.includes('dark') ? 'dark' : 'light');
+        }
+      });
 
       if (nextSearchParams.toString() !== oldSearchStr) {
         setSearchParams(nextSearchParams);
@@ -164,12 +163,8 @@ const GlobalLayout: React.FC = () => {
       plain: true,
       types: 'style',
     });
-    return (
-      <style
-        data-type="antd-cssinjs"
-        dangerouslySetInnerHTML={{ __html: styleText }}
-      />
-    );
+    // biome-ignore lint/security/noDangerouslySetInnerHtml: only used in .dumi
+    return <style data-type="antd-cssinjs" dangerouslySetInnerHTML={{ __html: styleText }} />;
   });
 
   useServerInsertedHTML(() => {
@@ -182,6 +177,7 @@ const GlobalLayout: React.FC = () => {
         data-type="antd-css-var"
         data-rc-order="prepend"
         data-rc-priority="-9999"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: only used in .dumi
         dangerouslySetInnerHTML={{ __html: styleText }}
       />
     );
@@ -191,6 +187,7 @@ const GlobalLayout: React.FC = () => {
     <style
       data-sandpack="true"
       id="sandpack"
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: only used in .dumi
       dangerouslySetInnerHTML={{ __html: getSandpackCssText() }}
     />
   ));
@@ -222,7 +219,9 @@ const GlobalLayout: React.FC = () => {
         linters={[legacyNotSelectorLinter, parentSelectorLinter, NaNLinter]}
       >
         <SiteContext.Provider value={siteContextValue}>
-          <SiteThemeProvider theme={themeConfig}>{content}</SiteThemeProvider>
+          <SiteThemeProvider theme={themeConfig}>
+            <HappyProvider disabled={!theme.includes('happy-work')}>{content}</HappyProvider>
+          </SiteThemeProvider>
         </SiteContext.Provider>
       </StyleProvider>
     </DarkContext.Provider>

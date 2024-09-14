@@ -1,10 +1,10 @@
-import type { ComponentProps } from 'react';
-import React, { useContext, useEffect, useMemo } from 'react';
 import { Button, Tabs, Typography } from 'antd';
 import { createStyles } from 'antd-style';
 import toReactElement from 'jsonml-to-react-element';
 import JsonML from 'jsonml.js/lib/utils';
 import Prism from 'prismjs';
+import type { ComponentProps } from 'react';
+import React, { useContext, useEffect, useMemo } from 'react';
 
 import DemoContext from '../slots/DemoContext';
 import LiveCode from './LiveCode';
@@ -40,9 +40,9 @@ const useStyle = createStyles(({ token, css }) => {
           display: block;
           position: absolute;
           top: -5px;
-          left: -9px;
+          inset-inline-start: -9px;
           bottom: -5px;
-          right: -9px;
+          inset-inline-end: -9px;
         }
       }
       ${antCls}-typography-copy:not(${antCls}-typography-copy-success) {
@@ -79,6 +79,7 @@ function toReactComponent(jsonML: any[]) {
         const attr = JsonML.getAttributes(node);
         return (
           <pre key={index} className={`language-${attr.lang}`}>
+            {/* biome-ignore lint/security/noDangerouslySetInnerHtml: it's for markdown */}
             <code dangerouslySetInnerHTML={{ __html: attr.highlighted }} />
           </pre>
         );
