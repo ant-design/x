@@ -17,7 +17,6 @@ import SiteContext from '../../slots/SiteContext';
 import '../../static/style';
 
 import IndexLayout from '../IndexLayout';
-import ResourceLayout from '../ResourceLayout';
 import SidebarLayout from '../SidebarLayout';
 
 const locales = {
@@ -81,9 +80,6 @@ const DocLayout: React.FC = () => {
           {outlet}
         </IndexLayout>
       );
-    }
-    if (pathname.startsWith('/docs/resource')) {
-      return <ResourceLayout>{outlet}</ResourceLayout>;
     }
     if (pathname.startsWith('/theme-editor')) {
       return outlet;

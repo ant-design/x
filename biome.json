@@ -8,6 +8,7 @@
       "lib/**/*",
       "_site/**/*",
       "node_modules",
+      "coverage",
       "package.json"
     ]
   },

@@ -1,7 +1,6 @@
+import os from 'node:os';
 import path from 'path';
 import { defineConfig } from 'dumi';
-import * as fs from 'fs-extra';
-import os from 'node:os';
 
 import rehypeAntd from './.dumi/rehypeAntd';
 import remarkAntd from './.dumi/remarkAntd';
@@ -26,7 +25,9 @@ export default defineConfig({
   crossorigin: {},
   runtimePublicPath: {},
   outputPath: '_site',
-  favicons: ['https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*1SDwSrOnSakAAAAAAAAAAAAADgCCAQ/original'],
+  favicons: [
+    'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*1SDwSrOnSakAAAAAAAAAAAAADgCCAQ/original',
+  ],
   resolve: {
     docDirs: [{ type: 'doc', dir: 'docs' }],
     atomDirs: [{ type: 'component', dir: 'components' }],

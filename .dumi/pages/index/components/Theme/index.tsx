@@ -1,4 +1,3 @@
-import { defaultAlgorithm, defaultTheme } from '@ant-design/compatible';
 import {
   BellOutlined,
   FolderOutlined,
@@ -6,9 +5,10 @@ import {
   QuestionCircleOutlined,
 } from '@ant-design/icons';
 import { TinyColor } from '@ctrl/tinycolor';
-import type { ColorPickerProps, GetProp, MenuProps, ThemeConfig } from 'antd';
+import type { MenuProps, ThemeConfig } from 'antd';
 import {
   Breadcrumb,
+  Button,
   Card,
   ConfigProvider,
   Flex,
@@ -20,6 +20,7 @@ import {
   theme,
 } from 'antd';
 import { createStyles } from 'antd-style';
+import type { Color } from 'antd/es/color-picker';
 import { generateColor } from 'antd/es/color-picker/util';
 import classNames from 'classnames';
 import { useLocation } from 'dumi';
@@ -27,7 +28,7 @@ import * as React from 'react';
 
 import useDark from '../../../../hooks/useDark';
 import useLocale from '../../../../hooks/useLocale';
-import LinkButton from '../../../../theme/common/LinkButton';
+import Link from '../../../../theme/common/Link';
 import SiteContext from '../../../../theme/slots/SiteContext';
 import { getLocalizedPathname } from '../../../../theme/utils';
 import Group from '../Group';
@@ -39,8 +40,6 @@ import RadiusPicker from './RadiusPicker';
 import type { THEME } from './ThemePicker';
 import ThemePicker from './ThemePicker';
 import { DEFAULT_COLOR, PINK_COLOR, getAvatarURL, getClosetColor } from './colorUtil';
-
-type Color = Extract<GetProp<ColorPickerProps, 'value'>, string | { cleared: any }>;
 
 const { Header, Content, Sider } = Layout;
 
@@ -195,23 +194,23 @@ const useStyle = createStyles(({ token, css, cx }) => {
       position: absolute;
     `,
     leftTopImagePos: css`
-      inset-inline-start: 0;
+      left: 0;
       top: -100px;
       height: 500px;
     `,
     rightBottomPos: css`
-      inset-inline-end: 0;
+      right: 0;
       bottom: -100px;
       height: 287px;
     `,
     leftTopImage: css`
-      inset-inline-start: 50%;
+      left: 50%;
       transform: translate3d(-900px, 0, 0);
       top: -100px;
       height: 500px;
     `,
     rightBottomImage: css`
-      inset-inline-end: 50%;
+      right: 50%;
       transform: translate3d(750px, 0, 0);
       bottom: -100px;
       height: 287px;
@@ -265,7 +264,7 @@ const sideMenuItems: MenuProps['items'] = [
 
 // ============================= Theme =============================
 
-function getTitleColor(colorPrimary: Color, isLight?: boolean) {
+function getTitleColor(colorPrimary: string | Color, isLight?: boolean) {
   if (!isLight) {
     return '#FFF';
   }
@@ -290,7 +289,7 @@ function getTitleColor(colorPrimary: Color, isLight?: boolean) {
 
 interface ThemeData {
   themeType: THEME;
-  colorPrimary: Color;
+  colorPrimary: string | Color;
   borderRadius: number;
   compact: 'default' | 'compact';
 }
@@ -314,9 +313,6 @@ const ThemesInfo: Record<THEME, Partial<ThemeData>> = {
   comic: {
     colorPrimary: PINK_COLOR,
     borderRadius: 16,
-  },
-  v4: {
-    ...defaultTheme.token,
   },
 };
 
@@ -352,7 +348,10 @@ const Theme: React.FC = () => {
 
   const onThemeChange = (_: Partial<ThemeData>, nextThemeData: ThemeData) => {
     React.startTransition(() => {
-      setThemeData({ ...ThemesInfo[nextThemeData.themeType], ...nextThemeData });
+      setThemeData({
+        ...ThemesInfo[nextThemeData.themeType],
+        ...nextThemeData,
+      });
     });
   };
 
@@ -371,10 +370,6 @@ const Theme: React.FC = () => {
 
     if (compact === 'compact') {
       algorithms.push(theme.compactAlgorithm);
-    }
-
-    if (themeType === 'v4') {
-      algorithms.push(defaultAlgorithm);
     }
 
     return algorithms;
@@ -444,7 +439,6 @@ const Theme: React.FC = () => {
               activeBarBorderWidth: 0,
             }
           : {},
-        ...(themeType === 'v4' ? defaultTheme.components : {}),
       },
     }),
     [themeToken, colorPrimaryValue, algorithmFn, themeType],
@@ -469,21 +463,23 @@ const Theme: React.FC = () => {
             <div className={styles.logo}>
               <div className={styles.logoImg}>
                 <img
-                  src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
+                  src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*1SDwSrOnSakAAAAAAAAAAAAADgCCAQ/original"
                   style={{
                     filter:
                       closestColor === DEFAULT_COLOR ? undefined : rgbToColorMatrix(logoColor),
                   }}
-                  alt="antd logo"
+                  alt=""
                 />
               </div>
-              <h1>Ant Design 5.0</h1>
+              <h1>Ant Design X</h1>
             </div>
             <Flex className={styles.menu} gap="middle">
               <BellOutlined />
               <QuestionCircleOutlined />
               <div
-                className={classNames(styles.avatar, { [styles.avatarDark]: themeType === 'dark' })}
+                className={classNames(styles.avatar, {
+                  [styles.avatarDark]: themeType === 'dark',
+                })}
                 style={{
                   backgroundColor: avatarColor,
                   backgroundImage: `url(${getAvatarURL(closestColor)})`,
@@ -518,15 +514,14 @@ const Theme: React.FC = () => {
                   title={locale.myTheme}
                   extra={
                     <Flex gap="small">
-                      <LinkButton to={getLocalizedPathname('/theme-editor', isZhCN, search)}>
-                        {locale.toDef}
-                      </LinkButton>
-                      <LinkButton
-                        type="primary"
+                      <Link to={getLocalizedPathname('/theme-editor', isZhCN, search)}>
+                        <Button type="default">{locale.toDef}</Button>
+                      </Link>
+                      <Link
                         to={getLocalizedPathname('/docs/react/customize-theme', isZhCN, search)}
                       >
-                        {locale.toUse}
-                      </LinkButton>
+                        <Button type="primary">{locale.toUse}</Button>
+                      </Link>
                     </Flex>
                   }
                 >
@@ -550,7 +545,11 @@ const Theme: React.FC = () => {
                     <Form.Item label={locale.titleCompact} name="compact" htmlFor="compact_default">
                       <Radio.Group
                         options={[
-                          { label: locale.default, value: 'default', id: 'compact_default' },
+                          {
+                            label: locale.default,
+                            value: 'default',
+                            id: 'compact_default',
+                          },
                           { label: locale.compact, value: 'compact' },
                         ]}
                       />
