@@ -53,6 +53,7 @@
       },
       "a11y": {
         "noAriaHiddenOnFocusable": "off",
+        "useSemanticElements": "off",
         "useKeyWithClickEvents": "off"
       }
     }
