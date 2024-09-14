@@ -40,7 +40,7 @@ export interface SenderProps extends Pick<TextareaProps, 'placeholder' | 'onKeyP
   onSubmit?: (message: string) => void;
   onChange?: (value: string) => void;
   onCancel?: VoidFunction;
-  onKeyDown?: React.KeyboardEventHandler<HTMLTextAreaElement>;
+  onKeyDown?: React.KeyboardEventHandler<any>;
   components?: SenderComponents;
   styles?: {
     input?: React.CSSProperties;
