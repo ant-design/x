@@ -44,7 +44,7 @@ const main = async () => {
   const app = await (Application as any).bootstrap(
     {
       // typedoc options here
-      entryPoints: ['components/theme/interface/index.ts', 'components/*/style/index.{ts,tsx}'],
+      entryPoints: ['components/*/style/index.{ts,tsx}'],
       skipErrorChecking: true,
     },
     [new TSConfigReader(), new TypeDocReader()],
