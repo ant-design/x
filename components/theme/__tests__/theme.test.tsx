@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Bubble from '../../bubble';
-import { render, waitFakeTimer } from '../../../tests/utils';
+import { render } from '../../../tests/utils';
 import { createCache, StyleProvider } from '@ant-design/cssinjs';
 
 describe('bubble', () => {
