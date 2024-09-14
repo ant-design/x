@@ -52,7 +52,8 @@ export interface LogoProps {
   location: any;
 }
 
-const logoSrc = 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg';
+const logoSrc =
+  'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*1SDwSrOnSakAAAAAAAAAAAAADgCCAQ/original';
 
 const Logo: React.FC<LogoProps> = ({ isZhCN }) => {
   const { search } = useLocation();
@@ -61,7 +62,7 @@ const Logo: React.FC<LogoProps> = ({ isZhCN }) => {
     <h1>
       <Link to={utils.getLocalizedPathname('/', isZhCN, search)} className={styles.logo}>
         <img src={logoSrc} draggable={false} alt="logo" />
-        <span className={styles.title}>Ant Design</span>
+        <span className={styles.title}>Ant Design X</span>
       </Link>
     </h1>
   );
