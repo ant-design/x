@@ -2,14 +2,7 @@
   "name": "@ant-design/x",
   "version": "1.0.0-alpha.0",
   "description": "Crafting AI-driven interfaces with React, seamlessly integrating smart chat components and API services at your fingertips.",
-  "keywords": [
-    "AI",
-    "Copilot",
-    "ant",
-    "components",
-    "framework",
-    "react"
-  ],
+  "keywords": ["AI", "Copilot", "ant", "components", "framework", "react"],
   "homepage": "https://x.ant.design",
   "bugs": {
     "url": "https://github.com/ant-design/x/issues"
@@ -27,13 +20,7 @@
   "main": "lib/index.js",
   "module": "es/index.js",
   "typings": "es/index.d.ts",
-  "files": [
-    "dist",
-    "es",
-    "lib",
-    "locale",
-    "BUG_VERSIONS.json"
-  ],
+  "files": ["dist", "es", "lib", "locale", "BUG_VERSIONS.json"],
   "scripts": {
     "api-collection": "antd-tools run api-collection",
     "authors": "tsx scripts/generate-authors.ts",
@@ -58,7 +45,7 @@
     "lint:md": "remark . -f -q",
     "lint:script": "biome lint",
     "lint:style": "tsx scripts/check-cssinjs.tsx",
-    "prepare": "is-ci || husky && dumi setup",
+    "prepare": "husky",
     "prepublishOnly": "tsx ./scripts/pre-publish.ts",
     "prettier": "prettier -c --write **/* --cache",
     "pub": "echo 'Please use `npm publish` instead.'",
