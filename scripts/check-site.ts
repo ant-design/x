@@ -24,8 +24,7 @@ describe('site test', () => {
       async (res) => {
         const html: string = await res.text();
         const $ = load(html, {
-          decodeEntities: false,
-          recognizeSelfClosing: true,
+          xml: true,
         });
         return { status: res.status, $ };
       },
