@@ -1,13 +1,13 @@
-import React from 'react';
 import classnames from 'classnames';
+import React from 'react';
 
+import { Avatar } from 'antd';
+import { useConfigContext } from '../config-provider';
+import useTypedEffect from './hooks/useTypedEffect';
+import useTypingConfig from './hooks/useTypingConfig';
 import type { BubbleProps } from './interface';
 import Loading from './loading';
 import useStyle from './style';
-import useTypedEffect from './hooks/useTypedEffect';
-import { Avatar } from 'antd';
-import useTypingConfig from './hooks/useTypingConfig';
-import { useConfigContext } from '../config-provider';
 
 export interface BubbleRef {
   nativeElement: HTMLElement;
@@ -85,8 +85,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
   const avatarNode = React.isValidElement(avatar) ? avatar : <Avatar {...avatar} />;
 
   // =========================== Content ============================
-  const mergedContent =
-    messageRender && typeof typedContent === 'string' ? messageRender(typedContent) : typedContent;
+  const mergedContent = messageRender ? messageRender(typedContent as any) : typedContent;
 
   // ============================ Render ============================
   return wrapCSSVar(
@@ -110,7 +109,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
           classNames?.content,
         )}
       >
-        {loading ? <Loading prefixCls={prefixCls} /> : mergedContent}
+        {loading ? <Loading prefixCls={prefixCls} /> : (mergedContent as React.ReactNode)}
       </div>
     </div>,
   );

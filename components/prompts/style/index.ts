@@ -26,6 +26,9 @@ const genPromptsStyle: GenerateStyle<PromptsToken> = (token) => {
         '&::-webkit-scrollbar': {
           display: 'none',
         },
+        listStyle: 'none',
+        paddingInlineStart: 0,
+        marginBlock: 0,
 
         '&-wrap': {
           flexWrap: 'wrap',

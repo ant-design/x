@@ -1,38 +1,63 @@
-import React from 'react';
-import { Bubble, Sender, useXAgent } from '@ant-design/x';
+import { SmileOutlined, UserOutlined } from '@ant-design/icons';
+import { Bubble, Prompts, Sender, useXAgent } from '@ant-design/x';
 import { Flex, type GetProp } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import React from 'react';
 
 const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000));
 
 const roles: GetProp<typeof Bubble.List, 'roles'> = {
+  user: {
+    placement: 'end',
+    avatar: { icon: <UserOutlined />, style: { background: '#87d068' } },
+  },
   ai: {
     placement: 'start',
     avatar: { icon: <UserOutlined />, style: { background: '#fde3cf' } },
     typing: { step: 5, interval: 20 },
   },
-  user: {
-    placement: 'end',
-    avatar: { icon: <UserOutlined />, style: { background: '#87d068' } },
+  suggestion: {
+    placement: 'start',
+    avatar: { icon: <UserOutlined />, style: { visibility: 'hidden' } },
+    variant: 'borderless',
+    messageRender: (content) => (
+      <Prompts
+        vertical
+        items={(content as any as string[]).map((text) => ({
+          key: text,
+          icon: <SmileOutlined style={{ color: '#FAAD14' }} />,
+          description: text,
+        }))}
+      />
+    ),
   },
+};
+
+type Message = {
+  role: 'ai' | 'user' | 'suggestion';
+  content: string | string[];
 };
 
 const App = () => {
   const [content, setContent] = React.useState('');
 
-  const { onRequest, messages, requesting } = useXAgent<{
-    role: 'ai' | 'user';
-    content: string;
-  }>({
-    request: async ({ content }) => {
+  const { onRequest, messages, requesting } = useXAgent<Message>({
+    request: async (info) => {
+      const content = info.content as string;
+
       await sleep();
 
-      return [
+      const result: Message[] = [
         {
           role: 'ai',
-          content: `You said: ${content}`,
+          content: `Do you want?`,
+        },
+        {
+          role: 'suggestion',
+          content: [`Look at: ${content}`, `Search: ${content}`, `Try: ${content}`],
         },
       ];
+
+      return result;
     },
     requestPlaceholder: {
       role: 'ai',

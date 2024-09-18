@@ -1,13 +1,13 @@
-import * as React from 'react';
-import pickAttrs from 'rc-util/lib/pickAttrs';
-import { useConfigContext } from '../config-provider';
 import classNames from 'classnames';
-import type { BubbleProps } from './interface';
+import { useEvent } from 'rc-util';
+import pickAttrs from 'rc-util/lib/pickAttrs';
+import * as React from 'react';
+import { useConfigContext } from '../config-provider';
 import Bubble, { BubbleContext } from './Bubble';
 import type { BubbleRef } from './Bubble';
-import useStyle from './style';
-import { useEvent } from 'rc-util';
 import useListData from './hooks/useListData';
+import type { BubbleProps } from './interface';
+import useStyle from './style';
 
 export interface BubbleListRef {
   nativeElement: HTMLDivElement;
@@ -19,18 +19,10 @@ export interface BubbleListRef {
   }) => void;
 }
 
-export type BubbleListItemBubbleType = BubbleProps & {
+export type BubbleDataType = BubbleProps & {
   key?: string | number;
   role?: string;
 };
-
-export type BubbleListItemCustomType = {
-  key?: string | number;
-  role?: string;
-  custom: any;
-};
-
-export type BubbleDataType = BubbleListItemBubbleType | BubbleListItemCustomType;
 
 export type RoleType = Partial<Omit<BubbleProps, 'content'>>;
 
@@ -42,12 +34,6 @@ export interface BubbleListProps extends React.HTMLAttributes<HTMLDivElement> {
   items?: BubbleDataType[];
   autoScroll?: boolean;
   roles?: RolesType;
-  contentRender?: (
-    content: React.ReactNode,
-    info: {
-      data: any;
-    },
-  ) => React.ReactNode;
 }
 
 const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps> = (props, ref) => {

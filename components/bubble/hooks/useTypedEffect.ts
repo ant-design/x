@@ -1,5 +1,5 @@
-import * as React from 'react';
 import useLayoutEffect from 'rc-util/lib/hooks/useLayoutEffect';
+import * as React from 'react';
 
 function isString(str: any): str is string {
   return typeof str === 'string';
@@ -10,12 +10,12 @@ function isString(str: any): str is string {
  * Or return content directly.
  */
 const useTypedEffect = (
-  content: React.ReactNode,
+  content: React.ReactNode | object,
   typingEnabled: boolean,
   typingStep: number,
   typingInterval: number,
-): [typedContent: React.ReactNode, isTyping: boolean] => {
-  const [prevContent, setPrevContent] = React.useState<React.ReactNode>('');
+): [typedContent: React.ReactNode | object, isTyping: boolean] => {
+  const [prevContent, setPrevContent] = React.useState<React.ReactNode | object>('');
   const [typingIndex, setTypingIndex] = React.useState<number>(1);
 
   const mergedTypingEnabled = typingEnabled && isString(content);
