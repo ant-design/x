@@ -1,8 +1,8 @@
 ---
 category: Components
-group: Data Display
-title: Bubble
-description: A bubble component for chat.
+group: Runtime
+title: useXAgent
+description: Use agent hook for data management.
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*HjY3QKszqFEAAAAAAAAAAAAADrJ8AQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*G8njQogkGwAAAAAAAAAAAAAADrJ8AQ/original
 demo:
@@ -11,19 +11,13 @@ demo:
 
 ## When To Use
 
-Often used when chatting.
+Use with Bubble.List and Sender to quickly build a conversational LUI.
 
 ## Examples
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">Basic</code>
-<code src="./demo/avatar-and-placement.tsx">Placement and avatar</code>
-<code src="./demo/loading.tsx">Loading</code>
-<code src="./demo/typing.tsx">Typing effect</code>
-<code src="./demo/markdown.tsx">Content render</code>
-<code src="./demo/variant.tsx">Variant</code>
-<code src="./demo/list.tsx">Bubble List</code>
-<code src="./demo/list-custom.tsx">Custom List Content</code>
+<code src="./demo/suggestions.tsx">Multiple Suggestion</code>
 
 ## API
 
@@ -35,12 +29,11 @@ Common props ref：[Common props](/docs/react/common-props)
 | --- | --- | --- | --- | --- |
 | avatar | Avatar component | React.ReactNode | - |  |
 | classNames | Semantic DOM class | [Record<SemanticDOM, string>](#semantic-dom) | - |  |
-| content | Content of bubble | string | - |  |
-| loading | Loading state of Message | boolean | - |  |
-| placement | Direction of Message | `start` \| `end` | `start` |  |
 | styles | Semantic DOM style | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - |  |
+| placement | Direction of Message | `start` \| `end` | `start` |  |
+| loading | Loading state of Message | boolean | - |  |
 | typing | Show message with typing motion | boolean \| { step?: number, interval?: number } | false |  |
-| variant | Style variant | `filled` \| `borderless` | `filled` |  |
+| content | Content of bubble | string | - |  |
 | messageRender | Display customized content | (content?: string) => ReactNode | - |  |
 
 ### Bubble.List

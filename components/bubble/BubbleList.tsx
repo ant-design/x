@@ -19,10 +19,18 @@ export interface BubbleListRef {
   }) => void;
 }
 
-export type BubbleDataType = BubbleProps & {
+export type BubbleListItemBubbleType = BubbleProps & {
   key?: string | number;
   role?: string;
 };
+
+export type BubbleListItemCustomType = {
+  key?: string | number;
+  role?: string;
+  custom: any;
+};
+
+export type BubbleDataType = BubbleListItemBubbleType | BubbleListItemCustomType;
 
 export type RoleType = Partial<Omit<BubbleProps, 'content'>>;
 
@@ -34,6 +42,12 @@ export interface BubbleListProps extends React.HTMLAttributes<HTMLDivElement> {
   items?: BubbleDataType[];
   autoScroll?: boolean;
   roles?: RolesType;
+  contentRender?: (
+    content: React.ReactNode,
+    info: {
+      data: any;
+    },
+  ) => React.ReactNode;
 }
 
 const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps> = (props, ref) => {

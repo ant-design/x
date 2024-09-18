@@ -1,9 +1,8 @@
 ---
 category: Components
-group: 数据展示
-title: Bubble
-subtitle: 聊天气泡
-description: 用于聊天的气泡组件。
+group: 运行时
+title: useXAgent
+description: 使用 Agent hook 进行数据管理。
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*HjY3QKszqFEAAAAAAAAAAAAADrJ8AQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*G8njQogkGwAAAAAAAAAAAAAADrJ8AQ/original
 demo:
@@ -12,19 +11,13 @@ demo:
 
 ## 何时使用
 
-常用于聊天的时候。
+配合 Bubble.List 与 Sender 使用快速搭建对话式 LUI。
 
 ## 代码演示
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">基本</code>
-<code src="./demo/avatar-and-placement.tsx">支持位置和头像</code>
-<code src="./demo/loading.tsx">加载中</code>
-<code src="./demo/typing.tsx">打字效果</code>
-<code src="./demo/markdown.tsx">自定义渲染</code>
-<code src="./demo/variant.tsx">变体</code>
-<code src="./demo/list.tsx">气泡列表</code>
-<code src="./demo/list-custom.tsx">自定义列表内容</code>
+<code src="./demo/suggestions.tsx">多项建议</code>
 
 ## API
 
@@ -36,12 +29,11 @@ demo:
 | --- | --- | --- | --- | --- |
 | avatar | 展示头像 | React.ReactNode | - |  |
 | classNames | 语义化结构 class | [Record<SemanticDOM, string>](#semantic-dom) | - |  |
-| content | 聊天内容 | string | - |  |
-| loading | 聊天内容加载状态 | boolean | - |  |
-| placement | 信息位置 | `start` \| `end` | `start` |  |
 | styles | 语义化结构 style | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - |  |
+| placement | 信息位置 | `start` \| `end` | `start` |  |
+| loading | 聊天内容加载状态 | boolean | - |  |
 | typing | 设置聊天内容打字动画 | boolean \| { step?: number, interval?: number } | false |  |
-| variant | 气泡样式变体 | `filled` \| `borderless` | `filled` |  |
+| content | 聊天内容 | string | - |  |
 | messageRender | 自定义渲染内容 | (content?: string) => ReactNode | - |  |
 
 ### Bubble.List

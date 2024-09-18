@@ -33,6 +33,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     typing,
     content = '',
     messageRender,
+    variant = 'filled',
     ...otherHtmlProps
   } = props;
 
@@ -84,7 +85,8 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
   const avatarNode = React.isValidElement(avatar) ? avatar : <Avatar {...avatar} />;
 
   // =========================== Content ============================
-  const mergedContent = messageRender ? messageRender(typedContent) : typedContent;
+  const mergedContent =
+    messageRender && typeof typedContent === 'string' ? messageRender(typedContent) : typedContent;
 
   // ============================ Render ============================
   return wrapCSSVar(
@@ -102,7 +104,11 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
       {/* Content */}
       <div
         style={styles?.content}
-        className={classnames(`${prefixCls}-content`, classNames?.content)}
+        className={classnames(
+          `${prefixCls}-content`,
+          `${prefixCls}-content-${variant}`,
+          classNames?.content,
+        )}
       >
         {loading ? <Loading prefixCls={prefixCls} /> : mergedContent}
       </div>

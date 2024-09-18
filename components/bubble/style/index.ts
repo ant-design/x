@@ -75,15 +75,23 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
       [`& ${componentCls}-content`]: {
         position: 'relative',
         boxSizing: 'border-box',
-        padding: `${unit(paddingSM)} ${unit(padding)}`,
+
         color: colorText,
         fontSize: token.fontSize,
         lineHeight: token.lineHeight,
         minHeight: calc(paddingSM).mul(2).add(calc(lineHeight).mul(fontSize)).equal(),
         maxWidth: token.bubbleContentMaxWidth,
-        backgroundColor: token.colorInfoBg,
-        borderRadius: token.borderRadiusLG,
-        boxShadow: token.boxShadowTertiary,
+
+        wordBreak: 'break-word',
+
+        // Variant
+        '&-filled': {
+          padding: `${unit(paddingSM)} ${unit(padding)}`,
+          backgroundColor: token.colorInfoBg,
+          borderRadius: token.borderRadiusLG,
+          boxShadow: token.boxShadowTertiary,
+        },
+
         [`& ${componentCls}-dot`]: {
           position: 'relative',
           height: '100%',

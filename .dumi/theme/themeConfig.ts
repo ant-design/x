@@ -23,7 +23,8 @@ export default {
     'Data Display': 4,
     Feedback: 5,
     Other: 6,
-    Deprecated: 7,
+    Runtime: 7,
+    Deprecated: 8,
 
     组件总览: -1,
     通用: 0,
@@ -33,6 +34,7 @@ export default {
     数据展示: 4,
     反馈: 5,
     其他: 6,
+    运行时: 8,
     废弃: 7,
 
     // Design

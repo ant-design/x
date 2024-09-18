@@ -11,7 +11,7 @@ export interface TypingOption {
   interval?: number;
 }
 
-export interface BubbleProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface BubbleProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'content'> {
   prefixCls?: string;
   rootClassName?: string;
   classNames?: {
@@ -26,6 +26,7 @@ export interface BubbleProps extends React.HTMLAttributes<HTMLDivElement> {
   placement?: 'start' | 'end';
   loading?: boolean;
   typing?: boolean | TypingOption;
-  content: string;
+  content?: React.ReactNode;
   messageRender?: (content: string) => React.ReactNode;
+  variant?: 'filled' | 'borderless';
 }
