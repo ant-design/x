@@ -1,13 +1,14 @@
-import React from 'react';
 import classnames from 'classnames';
 import pickAttrs from 'rc-util/lib/pickAttrs';
+import React from 'react';
 
-import useCollapsible from './hooks/useCollapsible';
 import useConfigContext from '../config-provider/useConfigContext';
+import useCollapsible from './hooks/useCollapsible';
 import useStyle from './style';
 
 import ThoughtChainNode, { ThoughtChainNodeContext } from './Item';
 
+import type { ConfigProviderProps } from 'antd';
 import type { ThoughtChainItem } from './Item';
 import type { Collapsible } from './hooks/useCollapsible';
 
@@ -25,6 +26,12 @@ export interface ThoughtChainProps extends Omit<React.HTMLAttributes<HTMLDivElem
    * @descEN Whether collapsible
    */
   collapsible?: Collapsible;
+
+  /**
+   * @desc 组件大小
+   * @descEN Component size
+   */
+  size?: ConfigProviderProps['componentSize'];
 
   /**
    * @desc 语义化结构 style
@@ -60,6 +67,7 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
     collapsible,
     styles = {},
     classNames = {},
+    size = 'middle',
     ...restProps
   } = props;
 
@@ -86,9 +94,17 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
   // ============================ Style ============================
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
 
-  const mergedCls = classnames(className, rootClassName, prefixCls, hashId, cssVarCls, {
-    [`${prefixCls}-rtl`]: direction === 'rtl',
-  });
+  const mergedCls = classnames(
+    className,
+    rootClassName,
+    prefixCls,
+    hashId,
+    cssVarCls,
+    {
+      [`${prefixCls}-rtl`]: direction === 'rtl',
+    },
+    `${prefixCls}-${size}`,
+  );
 
   // ============================ Render ============================
   return wrapCSSVar(

@@ -2,7 +2,7 @@
 
 exports[`ThoughtChain Component ThoughtChain component work 1`] = `
 <div
-  class="ant-thought-chain"
+  class="ant-thought-chain ant-thought-chain-middle"
 >
   <div
     class="ant-thought-chain-item ant-thought-chain-item-success-error"
@@ -246,7 +246,7 @@ exports[`ThoughtChain Component ThoughtChain component work 1`] = `
 
 exports[`ThoughtChain Component rtl render component should be rendered correctly in RTL direction 1`] = `
 <div
-  class="ant-thought-chain ant-thought-chain-rtl"
+  class="ant-thought-chain ant-thought-chain-rtl ant-thought-chain-middle"
 >
   <div
     class="ant-thought-chain-item ant-thought-chain-item-success-error"
@@ -490,7 +490,7 @@ exports[`ThoughtChain Component rtl render component should be rendered correctl
 
 exports[`ThoughtChain Component test theme component should be rendered correctly when configuring the theme.components 1`] = `
 <div
-  class="ant-thought-chain"
+  class="ant-thought-chain ant-thought-chain-middle"
 >
   <div
     class="ant-thought-chain-item ant-thought-chain-item-success-error"

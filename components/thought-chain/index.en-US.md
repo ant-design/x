@@ -18,6 +18,7 @@ demo:
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" background="grey">Basic</code>
+<code src="./demo/size.tsx" background="grey">Size</code>
 <code src="./demo/status.tsx" background="grey">Item Status</code>
 <code src="./demo/collapsible.tsx" background="grey">Collapsible</code>
 <code src="./demo/customization.tsx" background="grey">Item Customization</code>
@@ -31,25 +32,26 @@ Common props ref：[Common props](/docs/react/common-props)
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| items | Chain items | ThoughtChainItem[] | None | - |
 | collapsible | Whether collapsible | boolean \| CollapsibleOptions | None | - |
-| styles | Styles for semantic structure | Record<'item' \| 'itemHeader' \| 'itemContent' \| 'itemFooter', React.CSSProperties> | None | - |
 | classNames | Class names for semantic structure | Record<'item' \| 'itemHeader' \| 'itemContent' \| 'itemFooter', string> | None | - |
+| items | Chain items | ThoughtChainItem[] | None | - |
 | prefixCls | Custom prefix | string | None | - |
 | rootClassName | Custom root class name | string | None | - |
+| size | Size | 'large' \| 'middle' \| 'small' | 'middle' | - |
+| styles | Styles for semantic structure | Record<'item' \| 'itemHeader' \| 'itemContent' \| 'itemFooter', React.CSSProperties> | None | - |
 
 ### ThoughtChainItem
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| key | Unique identifier | string | None | - |
-| icon | Thought chain item icon | React.ReactNode | None | - |
-| title | Thought chain item title | React.ReactNode | None | - |
+| content | Thought chain item content | React.ReactNode | None | - |
 | description | Thought chain item description | React.ReactNode | None | - |
 | extra | Thought chain item extra content | React.ReactNode | None | - |
-| content | Thought chain item content | React.ReactNode | None | - |
 | footer | Thought chain item footer | React.ReactNode | None | - |
+| icon | Thought chain item icon | React.ReactNode | None | - |
+| key | Unique identifier | string | None | - |
 | status | Thought chain item status | 'pending' \| 'success' \| 'error' | None | - |
+| title | Thought chain item title | React.ReactNode | None | - |
 
 ### CollapsibleOptions
 
