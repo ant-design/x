@@ -43,6 +43,7 @@ demo:
 | typing | 设置聊天内容打字动画 | boolean \| { step?: number, interval?: number } | false |  |
 | variant | 气泡样式变体 | `filled` \| `borderless` | `filled` |  |
 | messageRender | 自定义渲染内容 | (content?: string) => ReactNode | - |  |
+| onTypingComplete | 打字效果完成时的回调，如果没有设置 typing 将在渲染时立刻触发 | () => void | - |  |
 
 ### Bubble.List
 

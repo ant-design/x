@@ -23,10 +23,12 @@ const useTypedEffect = (
   // Reset typing index when content changed
   useLayoutEffect(() => {
     setPrevContent(content);
-    if (isString(content) && isString(prevContent) && content.indexOf(prevContent) !== 0) {
+    if (!mergedTypingEnabled && isString(content)) {
+      setTypingIndex(content.length);
+    } else if (isString(content) && isString(prevContent) && content.indexOf(prevContent) !== 0) {
       setTypingIndex(1);
     }
-  }, [content, typingEnabled]);
+  }, [content]);
 
   // Start typing
   React.useEffect(() => {

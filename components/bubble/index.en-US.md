@@ -42,6 +42,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | typing | Show message with typing motion | boolean \| { step?: number, interval?: number } | false |  |
 | variant | Style variant | `filled` \| `borderless` | `filled` |  |
 | messageRender | Display customized content | (content?: string) => ReactNode | - |  |
+| onTypingComplete | Callback when typing effect is completed. If typing is not set, it will be triggered immediately when rendering. | () => void | - |  |
 
 ### Bubble.List
 

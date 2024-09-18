@@ -34,6 +34,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     content = '',
     messageRender,
     variant = 'filled',
+    onTypingComplete,
     ...otherHtmlProps
   } = props;
 
@@ -64,6 +65,12 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
   React.useEffect(() => {
     onUpdate?.();
   }, [typedContent]);
+
+  React.useEffect(() => {
+    if (!isTyping && onTypingComplete) {
+      onTypingComplete();
+    }
+  }, [isTyping]);
 
   // ============================ Styles ============================
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
