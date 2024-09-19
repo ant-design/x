@@ -13,7 +13,9 @@ import React from 'react';
 import {
   AlipayCircleOutlined,
   BulbOutlined,
+  CheckCircleOutlined,
   GithubOutlined,
+  LoadingOutlined,
   SmileOutlined,
   UserOutlined,
 } from '@ant-design/icons';
@@ -67,6 +69,11 @@ export default () => {
                     key: '2',
                     content: 'Hello World!',
                   },
+                  {
+                    key: '2',
+                    content: '',
+                    loading: true,
+                  },
                 ]}
               />
               <Prompts
@@ -103,8 +110,32 @@ export default () => {
                 }}
               </Suggestion>
             </Flex>
+            <Divider type="vertical" style={{ height: '100%' }} />
+            <ThoughtChain
+              style={{ width: 200 }}
+              items={[
+                {
+                  title: 'Hello Ant Design X!',
+                  status: 'success',
+                  description: 'status: success',
+                  icon: <CheckCircleOutlined />,
+                  content: 'Ant Design X help you build AI chat/platform app as ready-to-use 📦.',
+                },
+                {
+                  title: 'Hello World!',
+                  status: 'success',
+                  description: 'status: success',
+                  icon: <CheckCircleOutlined />,
+                },
+                {
+                  title: 'Pending...',
+                  status: 'pending',
+                  description: 'status: pending',
+                  icon: <LoadingOutlined />,
+                },
+              ]}
+            />
           </Flex>
-          <ThoughtChain />
         </XProvider>
       </Card>
     </>
