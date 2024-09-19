@@ -64,7 +64,7 @@ const useStyle = createStyles(({ token }) => ({
     color: ${token.magenta8};
     margin-inline-end: 0.5em;
   `,
-  antd: css`
+  antdx: css`
     color: ${token.green8};
   `,
   semicolon: css`
@@ -134,8 +134,8 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
     <span key="from" className={styles.from}>
       from
     </span>,
-    <span key="antd" className={styles.antd}>
-      {`"antd"`}
+    <span key="@ant-design/x" className={styles.antdx}>
+      {`"@ant-design/x"`}
     </span>,
     <span key="semicolon" className={styles.semicolon}>
       ;
@@ -154,7 +154,10 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
           {
             label: locale.import,
             children: (
-              <CopyToClipboard text={`import { ${component} } from "antd";`} onCopy={onCopy}>
+              <CopyToClipboard
+                text={`import { ${component} } from "@ant-design/x";`}
+                onCopy={onCopy}
+              >
                 <Tooltip
                   placement="right"
                   title={copied ? locale.copied : locale.copy}
