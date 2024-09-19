@@ -5,7 +5,7 @@ exports[`bubble Bubble component work 1`] = `
   class="ant-bubble ant-bubble-start"
 >
   <div
-    class="ant-bubble-content"
+    class="ant-bubble-content ant-bubble-content-filled"
   >
     test
   </div>
@@ -17,7 +17,7 @@ exports[`bubble rtl render component should be rendered correctly in RTL directi
   class="ant-bubble ant-bubble-start ant-bubble-rtl"
 >
   <div
-    class="ant-bubble-content"
+    class="ant-bubble-content ant-bubble-content-filled"
   >
     test
   </div>
