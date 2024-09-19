@@ -1,5 +1,6 @@
 import { useEvent } from 'rc-util';
 import React from 'react';
+import useSyncState from './useSyncState';
 
 export type SimpleType = string | number | boolean | object;
 
@@ -83,7 +84,9 @@ export default function useXAgent<Message extends SimpleType>(config: XAgentConf
   const { defaultMessages, request, requestFallback, requestPlaceholder } = config;
 
   const [requesting, setRequesting] = React.useState(false);
-  const [messages, setMessages] = React.useState<MessageInfo<Message>[]>(defaultMessages || []);
+  const [messages, setMessages, getMessages] = useSyncState<MessageInfo<Message>[]>(
+    defaultMessages || [],
+  );
 
   const idRef = React.useRef(0);
 
@@ -103,7 +106,7 @@ export default function useXAgent<Message extends SimpleType>(config: XAgentConf
     let loadingMsgId: number | string | null = null;
 
     setMessages((ori) => {
-      const nextMessages = [...ori, createMessage(message, 'local')];
+      let nextMessages = [...ori, createMessage(message, 'local')];
 
       if (requestPlaceholder) {
         const requestPlaceholderMessage =
@@ -114,11 +117,12 @@ export default function useXAgent<Message extends SimpleType>(config: XAgentConf
         const loadingMsg = createMessage(requestPlaceholderMessage, 'loading');
         loadingMsgId = loadingMsg.id;
 
-        nextMessages.push(loadingMsg);
+        nextMessages = [...nextMessages, loadingMsg];
       }
 
       return nextMessages;
     });
+
     setRequesting(true);
 
     request(message, { messages })
@@ -137,7 +141,7 @@ export default function useXAgent<Message extends SimpleType>(config: XAgentConf
         if (requestFallback) {
           const fallbackResult =
             typeof requestFallback === 'function'
-              ? await requestFallback(message, { error, messages })
+              ? await requestFallback(message, { error, messages: getMessages() })
               : requestFallback;
 
           setMessages((ori) => [

@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import path from 'path';
-import * as React from 'react';
-import { createCache, StyleProvider } from '@ant-design/cssinjs';
+import { StyleProvider, createCache } from '@ant-design/cssinjs';
 import { ConfigProvider } from 'antd';
 import { globSync } from 'glob';
 import kebabCase from 'lodash/kebabCase';
+import * as React from 'react';
 import { renderToString } from 'react-dom/server';
 
 import { resetWarned } from '../../components/_util/warning';
@@ -42,7 +42,9 @@ function baseText(doInject: boolean, component: string, options: Options = {}) {
 
     // function doTest(name: string, openTrigger = false) {
     testMethod(
-      doInject ? `renders ${mergedFile} extend context correctly` : `renders ${mergedFile} correctly`,
+      doInject
+        ? `renders ${mergedFile} extend context correctly`
+        : `renders ${mergedFile} correctly`,
       () => {
         resetWarned();
 
@@ -113,21 +115,24 @@ export default function demoTest(component: string, options: Options = {}) {
 
   // Test component name is match the kebab-case
   const testName = test;
-  testName('component name is match the kebab-case', () => {
-    const kebabName = kebabCase(component);
 
-    // Path should exist
-    // eslint-disable-next-line global-require
-    const { default: Component } = require(`../../components/${kebabName}`);
+  if (!component.startsWith('use')) {
+    testName('component name is match the kebab-case', () => {
+      const kebabName = kebabCase(component);
 
-    if (options.nameCheckPathOnly !== true) {
-      expect(kebabCase(Component.displayName || '')).toEqual(kebabName);
-    }
-  });
+      // Path should exist
+      // eslint-disable-next-line global-require
+      const { default: Component } = require(`../../components/${kebabName}`);
 
-  if (options?.testRootProps !== false) {
-    rootPropsTest(component, null!, {
-      props: options?.testRootProps,
+      if (options.nameCheckPathOnly !== true) {
+        expect(kebabCase(Component.displayName || '')).toEqual(kebabName);
+      }
     });
+
+    if (options?.testRootProps !== false) {
+      rootPropsTest(component, null!, {
+        props: options?.testRootProps,
+      });
+    }
   }
 }
