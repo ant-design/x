@@ -9,6 +9,6 @@ export { default as ThoughtChain } from './thought-chain';
 export type { ThoughtChainProps, ThoughtChainItem } from './thought-chain';
 export { default as Suggestion } from './suggestion';
 export type { SuggestionProps } from './suggestion';
-export { default as XConfigProvider } from './x-config-provider';
-export type { XConfigProviderProps } from './x-config-provider';
+export { default as XProvider } from './x-provider';
+export type { XProviderProps } from './x-provider';
 export { default as version } from './version';

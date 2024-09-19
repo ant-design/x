@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
 
-import { useXConfig } from '../x-config-provider';
+import { useXProvider } from '../x-provider';
 import useCollapsible from './hooks/useCollapsible';
 import useStyle from './style';
 
@@ -80,7 +80,7 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
   });
 
   // ============================ Prefix ============================
-  const { getPrefixCls, direction, thoughtChain } = useXConfig();
+  const { getPrefixCls, direction, thoughtChain } = useXProvider();
 
   const rootPrefixCls = getPrefixCls();
 

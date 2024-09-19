@@ -10,7 +10,7 @@ import type { HTTPRequest } from 'puppeteer';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
-import { XConfigProvider } from '@ant-design/x';
+import { XProvider } from '@ant-design/x';
 import { App, theme } from 'antd';
 import { fillWindowEnv } from '../setup';
 import { render } from '../utils';
@@ -228,7 +228,7 @@ export default function imageTest(
         }}
         key={key}
       >
-        <XConfigProvider theme={{ algorithm }}>{component}</XConfigProvider>
+        <XProvider theme={{ algorithm }}>{component}</XProvider>
       </div>,
     );
     test(
@@ -241,7 +241,7 @@ export default function imageTest(
         }}
         key={key}
       >
-        <XConfigProvider theme={{ algorithm, cssVar: true }}>{component}</XConfigProvider>
+        <XProvider theme={{ algorithm, cssVar: true }}>{component}</XProvider>
       </div>,
     );
   });

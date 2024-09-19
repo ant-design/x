@@ -20,9 +20,9 @@ hash 是 Ant Design 5.0 以来的特性之一，其功能是为每一份主题�
 但是启用了 CSS 变量之后，相同 antd 版本下的组件样式将不会随着 token 变化而改变 —— 因为我们用 CSS 变量填充了样式中的动态部分。所以如果你的应用中只存在一个版本的 antd，你可以选择关闭 hash 来进一步减小样式体积：
 
 ```tsx
-<XConfigProvider theme={{ cssVar: true, hashed: false }}>
+<XProvider theme={{ cssVar: true, hashed: false }}>
   <App />
-</XConfigProvider>
+</XProvider>
 ```
 
 同时我们非常推荐使用 `extractStyle` 来抽取静态样式，这样会为应用性能带来一定量的提升。

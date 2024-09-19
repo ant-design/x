@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { useEvent, useMergedState } from 'rc-util';
 import React, { useState } from 'react';
 import mergeStyles from '../_util/merge-styles';
-import { useXConfig } from '../x-config-provider';
+import { useXProvider } from '../x-provider';
 import useStyle from './style';
 import useActive from './useActive';
 
@@ -57,7 +57,7 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
   } = props;
 
   // ============================= MISC =============================
-  const { direction, getPrefixCls, suggestion } = useXConfig();
+  const { direction, getPrefixCls, suggestion } = useXProvider();
   const prefixCls = getPrefixCls('suggestion', customizePrefixCls);
   const itemCls = `${prefixCls}-item`;
 

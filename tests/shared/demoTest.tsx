@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import path from 'path';
 import { StyleProvider, createCache } from '@ant-design/cssinjs';
-import { XConfigProvider } from '@ant-design/x';
+import { XProvider } from '@ant-design/x';
 import { globSync } from 'glob';
 import kebabCase from 'lodash/kebabCase';
 import * as React from 'react';
@@ -66,9 +66,9 @@ function baseText(doInject: boolean, component: string, options: Options = {}) {
 
         // Inject cssinjs cache to avoid create <style /> element
         Demo = (
-          <XConfigProvider theme={{ hashed: false }}>
+          <XProvider theme={{ hashed: false }}>
             <StyleProvider cache={createCache()}>{Demo}</StyleProvider>
-          </XConfigProvider>
+          </XProvider>
         );
 
         // Demo Test also include `dist` test which is already uglified.

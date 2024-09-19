@@ -7,7 +7,7 @@ import ConversationsItem, { type ConversationsItemProps } from './Item';
 
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import mergeStyles from '../_util/merge-styles';
-import { useXConfig } from '../x-config-provider';
+import { useXProvider } from '../x-provider';
 import useGroupable from './hooks/useGroupable';
 
 import useStyle from './style';
@@ -116,7 +116,7 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
   const [groupList, enableGroup] = useGroupable(groupable, items);
 
   // ============================ Prefix ============================
-  const { getPrefixCls, direction, conversations } = useXConfig();
+  const { getPrefixCls, direction, conversations } = useXProvider();
 
   const prefixCls = getPrefixCls('conversations', customizePrefixCls);
 

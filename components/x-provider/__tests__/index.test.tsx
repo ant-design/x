@@ -1,15 +1,15 @@
 import React from 'react';
 import { Bubble } from '../../index';
-import XConfigProvider from '../index';
+import XProvider from '../index';
 
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
 import themeTest from '../../../tests/shared/themeTest';
 import { render } from '../../../tests/utils';
 
-import type { XConfigProviderProps } from '../index';
+import type { XProviderProps } from '../index';
 
-const xConfigProviderProps: XConfigProviderProps = {
+const xProviderProps: XProviderProps = {
   bubble: {
     className: 'test-bubble',
   },
@@ -31,11 +31,11 @@ const xConfigProviderProps: XConfigProviderProps = {
 };
 
 describe('ThoughtChain Component', () => {
-  mountTest(() => <XConfigProvider {...xConfigProviderProps} />);
+  mountTest(() => <XProvider {...xProviderProps} />);
 
-  rtlTest(() => <XConfigProvider {...xConfigProviderProps} />);
+  rtlTest(() => <XProvider {...xProviderProps} />);
 
-  themeTest(() => <XConfigProvider {...xConfigProviderProps} />);
+  themeTest(() => <XProvider {...xProviderProps} />);
 
   beforeAll(() => {
     jest.useFakeTimers();
@@ -47,9 +47,9 @@ describe('ThoughtChain Component', () => {
 
   it('bubble.className', () => {
     const { container } = render(
-      <XConfigProvider {...xConfigProviderProps}>
+      <XProvider {...xProviderProps}>
         <Bubble content="test" />
-      </XConfigProvider>,
+      </XProvider>,
     );
     const element = container.querySelector('.test-bubble');
     expect(element).toBeTruthy();

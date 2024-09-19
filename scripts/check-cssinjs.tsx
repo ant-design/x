@@ -10,7 +10,7 @@ import chalk from 'chalk';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
-import { XConfigProvider } from '../components';
+import { XProvider } from '../components';
 import { generateCssinjs } from './generate-cssinjs';
 
 console.log(chalk.green(`🔥 Checking CSS-in-JS...`));
@@ -32,9 +32,9 @@ async function checkCSSVar() {
     render(Component: any) {
       ReactDOMServer.renderToString(
         <StyleProvider linters={[NaNLinter]}>
-          <XConfigProvider theme={{ cssVar: true, hashed: false }}>
+          <XProvider theme={{ cssVar: true, hashed: false }}>
             <Component />
-          </XConfigProvider>
+          </XProvider>
         </StyleProvider>,
       );
     },

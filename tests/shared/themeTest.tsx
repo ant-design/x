@@ -1,5 +1,5 @@
 import React from 'react';
-import { XConfigProvider } from '../../components';
+import { XProvider } from '../../components';
 
 import { render } from '../utils';
 
@@ -17,9 +17,9 @@ const themeTest = (Component: React.ComponentType) => {
   describe('test theme', () => {
     it('component should be rendered correctly when configuring the theme.components', () => {
       const { container } = render(
-        <XConfigProvider theme={themeOptions}>
+        <XProvider theme={themeOptions}>
           <Component />
-        </XConfigProvider>,
+        </XProvider>,
       );
       expect(container.firstChild).toMatchSnapshot();
     });

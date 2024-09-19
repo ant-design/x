@@ -14,7 +14,7 @@ type ComponentStyleConfig<
   PickType extends keyof CompProps = any,
 > = AntdComponentStyleConfig & Pick<CompProps, PickType>;
 
-export interface XConfigProviderProps {
+export interface XProviderProps {
   bubble?: ComponentStyleConfig<BubbleProps, 'classNames' | 'styles'>;
   conversations?: ComponentStyleConfig<ConversationsProps, 'classNames' | 'styles'>;
   prompts?: ComponentStyleConfig<PromptsProps, 'styles' | 'classNames'>;
@@ -23,6 +23,6 @@ export interface XConfigProviderProps {
   thoughtChain?: ComponentStyleConfig<ThoughtChainProps, 'styles' | 'classNames'>;
 }
 
-const XConfigContext = React.createContext<XConfigProviderProps>({});
+const XProviderContext = React.createContext<XProviderProps>({});
 
-export default XConfigContext;
+export default XProviderContext;

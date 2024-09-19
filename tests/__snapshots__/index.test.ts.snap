@@ -8,7 +8,7 @@ exports[`antd dist files exports modules correctly 1`] = `
   "Sender",
   "Suggestion",
   "ThoughtChain",
-  "XConfigProvider",
+  "XProvider",
   "version",
 ]
 `;

@@ -69,16 +69,16 @@ export default App;
 
 ### 自定义主题
 
-参考 [配置主题](https://ant-design.antgroup.com/docs/react/customize-theme-cn)，通过 XConfigProvider 进行主题配置：
+参考 [配置主题](https://ant-design.antgroup.com/docs/react/customize-theme-cn)，通过 XProvider 进行主题配置：
 
 ```tsx
 import React from 'react';
-import { XConfigProvider } from '@ant-design/x';
+import { XProvider } from '@ant-design/x';
 
 const App: React.FC = () => (
-  <XConfigProvider theme={{ token: { colorPrimary: '#00b96b' } }}>
+  <XProvider theme={{ token: { colorPrimary: '#00b96b' } }}>
     <MyApp />
-  </XConfigProvider>
+  </XProvider>
 );
 
 export default App;

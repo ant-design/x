@@ -69,16 +69,16 @@ Now, you should see the `Bubble` component from `@ant-design/x` on the page. You
 
 ### Custom Theme
 
-Refer to [Customize Theme](https://ant-design.antgroup.com/docs/react/customize-theme-cn) and use `XConfigProvider` for theme configuration:
+Refer to [Customize Theme](https://ant-design.antgroup.com/docs/react/customize-theme-cn) and use `XProvider` for theme configuration:
 
 ```tsx
 import React from 'react';
-import { XConfigProvider } from '@ant-design/x';
+import { XProvider } from '@ant-design/x';
 
 const App: React.FC = () => (
-  <XConfigProvider theme={{ token: { colorPrimary: '#00b96b' } }}>
+  <XProvider theme={{ token: { colorPrimary: '#00b96b' } }}>
     <MyApp />
-  </XConfigProvider>
+  </XProvider>
 );
 
 export default App;

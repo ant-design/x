@@ -1,7 +1,7 @@
 ---
 category: Components
 group: Other
-title: XConfigProvider
+title: XProvider
 description: Provide a uniform configuration support for x components.
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*NVKORa7BCVwAAAAAAAAAAAAADrJ8AQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*YC4ERpGAddoAAAAAAAAAAAAADrJ8AQ/originaloriginal
@@ -11,21 +11,21 @@ demo:
 
 ## Use
 
-The `XConfigProvider` extends the `ConfigProvider` from `antd` and provides global configuration for components in `@ant-design/x`.
+The `XProvider` extends the `ConfigProvider` from `antd` and provides global configuration for components in `@ant-design/x`.
 
 If you are already using `ConfigProvider` from `antd`, please make the following changes to your code:
 
 ```tsx
 - import { ConfigProvider } from 'antd';
-+ import { XConfigProvider } from '@ant-design/x';
++ import { XProvider } from '@ant-design/x';
 
 - <ConfigProvider>
 - // ...
 - </ConfigProvider>
 
-+ <XConfigProvider>
++ <XProvider>
 + // ...
-+ </XConfigProvider>
++ </XProvider>
 ```
 
 ## Examples

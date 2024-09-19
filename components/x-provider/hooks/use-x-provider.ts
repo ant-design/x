@@ -5,7 +5,7 @@ import XConfigContext from '../context';
 
 export const defaultPrefixCls = 'ant';
 
-function useXConfig() {
+function useXProvider() {
   const { getPrefixCls, direction, csp, iconPrefixCls } = React.useContext(
     ConfigProvider.ConfigContext,
   );
@@ -21,4 +21,4 @@ function useXConfig() {
   };
 }
 
-export default useXConfig;
+export default useXProvider;

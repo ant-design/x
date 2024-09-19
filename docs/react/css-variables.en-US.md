@@ -20,9 +20,9 @@ Hash is one of the features since Ant Design 5.0. Its function is to calculate a
 However, after enabling CSS variables, the component styles of the same antd version will not change with the token —— because we use CSS variables to fill in the dynamic parts of the styles. So if there is only one version of antd in your application, you can choose to disable hash to further reduce the total size of the styles:
 
 ```tsx
-<XConfigProvider theme={{ cssVar: true, hashed: false }}>
+<XProvider theme={{ cssVar: true, hashed: false }}>
   <App />
-</XConfigProvider>
+</XProvider>
 ```
 
 By the way, we strongly recommend using `extractStyle` to extract static styles, which will bring a certain amount of performance improvement to the application.

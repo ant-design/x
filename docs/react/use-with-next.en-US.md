@@ -164,15 +164,15 @@ export default theme;
 
 ```tsx
 import React from 'react';
-import { XConfigProvider } from '@ant-design/x';
+import { XProvider } from '@ant-design/x';
 import type { AppProps } from 'next/app';
 
 import theme from './theme/themeConfig';
 
 const App = ({ Component, pageProps }: AppProps) => (
-  <XConfigProvider theme={theme}>
+  <XProvider theme={theme}>
     <Component {...pageProps} />
-  </XConfigProvider>
+  </XProvider>
 );
 
 export default App;

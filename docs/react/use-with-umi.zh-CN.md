@@ -133,7 +133,7 @@ export default defineConfig({
 ```tsx
 import React from 'react';
 import {
-  XConfigProvider,
+  XProvider,
   Bubble,
   Sender,
   Conversations,
@@ -167,7 +167,7 @@ export default () => {
         </Radio.Group>
       </Flex>
       <Card>
-        <XConfigProvider direction={direction}>
+        <XProvider direction={direction}>
           <Flex style={{ height: 500 }} gap={12}>
             <Conversations
               style={{ width: 200 }}
@@ -238,7 +238,7 @@ export default () => {
             </Flex>
           </Flex>
           <ThoughtChain />
-        </XConfigProvider>
+        </XProvider>
       </Card>
     </>
   );

@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import React from 'react';
 
 import mergeStyles from '../_util/merge-styles';
-import { useXConfig } from '../x-config-provider';
+import { useXProvider } from '../x-provider';
 
 import useStyle from './style';
 
@@ -85,7 +85,7 @@ const Prompts: React.FC<PromptsProps> = (props) => {
   } = props;
 
   // ============================ PrefixCls ============================
-  const { getPrefixCls, direction, prompts } = useXConfig();
+  const { getPrefixCls, direction, prompts } = useXProvider();
 
   const prefixCls = getPrefixCls('prompts', customizePrefixCls);
 

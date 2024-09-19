@@ -60,12 +60,12 @@ Refer to [Customizing Theme](/docs/react/customize-theme) for theme configuratio
 
 ```tsx
 import React from 'react';
-import { XConfigProvider } from '@ant-design/x';
+import { XProvider } from '@ant-design/x';
 
 const App: React.FC = () => (
-  <XConfigProvider theme={{ token: { colorPrimary: '#00b96b' } }}>
+  <XProvider theme={{ token: { colorPrimary: '#00b96b' } }}>
     <MyApp />
-  </XConfigProvider>
+  </XProvider>
 );
 
 export default App;

@@ -6,7 +6,7 @@ import pickAttrs from 'rc-util/lib/pickAttrs';
 import getValue from 'rc-util/lib/utils/get';
 import React from 'react';
 import mergeStyles from '../_util/merge-styles';
-import { useXConfig } from '../x-config-provider';
+import { useXProvider } from '../x-provider';
 import { ActionButtonContext } from './components/ActionButton';
 import ClearButton from './components/ClearButton';
 import LoadingButton from './components/LoadingButton';
@@ -88,7 +88,7 @@ const Sender: React.FC<SenderProps> = (props) => {
   } = props;
 
   // ============================= MISC =============================
-  const { direction, getPrefixCls, sender } = useXConfig();
+  const { direction, getPrefixCls, sender } = useXProvider();
   const prefixCls = getPrefixCls('sender', customizePrefixCls);
 
   const domProps = pickAttrs(rest, {

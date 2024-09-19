@@ -5,7 +5,7 @@ import formatToken from 'antd/es/theme/util/alias';
 import React from 'react';
 
 import version from '../version';
-import { defaultPrefixCls } from '../x-config-provider';
+import { defaultPrefixCls } from '../x-provider';
 
 import type { Theme } from '@ant-design/cssinjs';
 import type { DesignTokenProviderProps } from 'antd/es/theme/context';

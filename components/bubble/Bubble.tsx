@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Avatar } from 'antd';
 import mergeStyles from '../_util/merge-styles';
-import { useXConfig } from '../x-config-provider';
+import { useXProvider } from '../x-provider';
 import useTypedEffect from './hooks/useTypedEffect';
 import useTypingConfig from './hooks/useTypingConfig';
 import type { BubbleProps } from './interface';
@@ -47,7 +47,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
   }));
 
   // ============================ Prefix ============================
-  const { direction, getPrefixCls, bubble } = useXConfig();
+  const { direction, getPrefixCls, bubble } = useXProvider();
 
   const prefixCls = getPrefixCls('bubble', customizePrefixCls);
 

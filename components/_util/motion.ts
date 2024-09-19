@@ -1,6 +1,6 @@
 import type { CSSMotionProps, MotionEndEventHandler, MotionEventHandler } from 'rc-motion';
 import type { MotionEvent } from 'rc-motion/lib/interface';
-import { defaultPrefixCls } from '../x-config-provider';
+import { defaultPrefixCls } from '../x-provider';
 
 // ================== Collapse Motion ==================
 const getCollapsedHeight: MotionEventHandler = () => ({ height: 0, opacity: 0 });

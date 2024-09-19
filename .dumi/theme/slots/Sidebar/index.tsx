@@ -1,4 +1,4 @@
-import { XConfigProvider } from '@ant-design/x';
+import { XProvider } from '@ant-design/x';
 import { Col, Menu } from 'antd';
 import { createStyles, useTheme } from 'antd-style';
 import { useSidebarData } from 'dumi';
@@ -122,7 +122,7 @@ const Sidebar: React.FC = () => {
   const { colorBgContainer } = useTheme();
 
   const menuChild = (
-    <XConfigProvider
+    <XProvider
       theme={{ components: { Menu: { itemBg: colorBgContainer, darkItemBg: colorBgContainer } } }}
     >
       <Menu
@@ -134,7 +134,7 @@ const Sidebar: React.FC = () => {
         selectedKeys={[selectedKey]}
         defaultOpenKeys={sidebarData?.map<string>(({ title }) => title!).filter(Boolean)}
       />
-    </XConfigProvider>
+    </XProvider>
   );
 
   return isMobile ? (

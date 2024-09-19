@@ -5,7 +5,7 @@ import {
   Sender,
   Suggestion,
   ThoughtChain,
-  XConfigProvider,
+  XProvider,
 } from '@ant-design/x';
 import { Card, Divider, Flex, Radio, Typography } from 'antd';
 import React from 'react';
@@ -34,7 +34,7 @@ export default () => {
         </Radio.Group>
       </Flex>
       <Card>
-        <XConfigProvider direction={direction}>
+        <XProvider direction={direction}>
           <Flex style={{ height: 500 }} gap={12}>
             <Conversations
               style={{ width: 200 }}
@@ -105,7 +105,7 @@ export default () => {
             </Flex>
           </Flex>
           <ThoughtChain />
-        </XConfigProvider>
+        </XProvider>
       </Card>
     </>
   );
