@@ -2,6 +2,7 @@
 category: Components
 group: 运行时
 title: useXAgent
+subtitle: 数据管理
 description: 使用 Agent hook 进行数据管理。
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*HjY3QKszqFEAAAAAAAAAAAAADrJ8AQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*G8njQogkGwAAAAAAAAAAAAAADrJ8AQ/original
@@ -21,33 +22,43 @@ demo:
 
 ## API
 
-通用属性参考：[通用属性](/docs/react/common-props)
+```tsx | pure
+type useXAgent<Message> = (config: XAgentConfig<Message>) => XAgentConfigReturnType;
 
-### Bubble
+type MessageStatus = 'local' | 'loading' | 'success' | 'error';
+
+type MessageInfo<Message> = {
+  id: number | string;
+  message: Message;
+  status: MessageStatus;
+};
+
+type RequestResultObject<Message> = {
+  message: Message | Message[];
+  status: MessageStatus;
+};
+
+type RequestResult<Message> =
+  | Message
+  | Message[]
+  | RequestResultObject<Message>
+  | RequestResultObject<Message>[];
+```
+
+### XAgentConfig
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| avatar | 展示头像 | React.ReactNode | - |  |
-| classNames | 语义化结构 class | [Record<SemanticDOM, string>](#semantic-dom) | - |  |
-| styles | 语义化结构 style | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - |  |
-| placement | 信息位置 | `start` \| `end` | `start` |  |
-| loading | 聊天内容加载状态 | boolean | - |  |
-| typing | 设置聊天内容打字动画 | boolean \| { step?: number, interval?: number } | false |  |
-| content | 聊天内容 | string | - |  |
-| messageRender | 自定义渲染内容 | (content?: string) => ReactNode | - |  |
+| defaultMessages | 默认展示信息 | MessageInfo[] | - |  |
+| request | 用户发起对话时请求方法，支持返回多个不同状态的 Message | (msg: Message, info: { messages: MessageInfo[] }) => Promise\<RequestResult> | - |  |
+| requestFallback | 请求失败的兜底信息，不提供则不会展示 | RequestResult \| (msg: Message, info: { error: Error, messages: MessageInfo[] }) => Message | - |  |
+| requestPlaceholder | 请求中的占位信息，不提供则不会展示 | Message \| (msg: Message, info: { messages: MessageInfo[] }) => Message | - |  |
 
-### Bubble.List
+### XAgentConfigReturnType
 
-| 属性 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- |
-| autoScroll | 当内容更新时，自动滚动到最新位置。如果用户滚动，则会暂停自动滚动。 | boolean | true |  |
-| items | 气泡数据列表 | (BubbleProps & { key?: string \| number, role?: string })[] | - |  |
-| roles | 设置气泡默认属性，`items` 中的 `role` 会进行自动对应 | Record<string, BubbleProps> \| (bubble) => BubbleProps | - |  |
-
-## Semantic DOM
-
-<code src="./demo/_semantic.tsx" simplify="true"></code>
-
-## 主题变量（Design Token）
-
-<ComponentTokenTable component="Bubble"></ComponentTokenTable>
+| 属性        | 说明                            | 类型                              | 版本 |
+| ----------- | ------------------------------- | --------------------------------- | ---- |
+| messages    | 当前管理的内容                  | Message[]                         |      |
+| requesting  | 是否正在请求                    | boolean                           |      |
+| onRequest   | 添加一条 Message，并且触发请求  | (message: Message) => void        |      |
+| setMessages | 直接修改 messages，不会触发请求 | (messages: MessageInfo[]) => void |      |

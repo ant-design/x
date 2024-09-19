@@ -21,33 +21,43 @@ Use with Bubble.List and Sender to quickly build a conversational LUI.
 
 ## API
 
-Common props ref：[Common props](/docs/react/common-props)
+```tsx | pure
+type useXAgent<Message> = (config: XAgentConfig<Message>) => XAgentConfigReturnType;
 
-### Bubble
+type MessageStatus = 'local' | 'loading' | 'success' | 'error';
+
+type MessageInfo<Message> = {
+  id: number | string;
+  message: Message;
+  status: MessageStatus;
+};
+
+type RequestResultObject<Message> = {
+  message: Message | Message[];
+  status: MessageStatus;
+};
+
+type RequestResult<Message> =
+  | Message
+  | Message[]
+  | RequestResultObject<Message>
+  | RequestResultObject<Message>[];
+```
+
+### XAgentConfig
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| avatar | Avatar component | React.ReactNode | - |  |
-| classNames | Semantic DOM class | [Record<SemanticDOM, string>](#semantic-dom) | - |  |
-| styles | Semantic DOM style | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - |  |
-| placement | Direction of Message | `start` \| `end` | `start` |  |
-| loading | Loading state of Message | boolean | - |  |
-| typing | Show message with typing motion | boolean \| { step?: number, interval?: number } | false |  |
-| content | Content of bubble | string | - |  |
-| messageRender | Display customized content | (content?: string) => ReactNode | - |  |
+| defaultMessages | default messages | MessageInfo[] | - |  |
+| request | Trigger when user initiates a conversation. Supports returning multiple messages with different statuses. | (msg: Message, info: { messages: MessageInfo[] }) => Promise\<RequestResult> | - |  |
+| requestFallback | Request failed fallback information, not provided will not be displayed | RequestResult \| (msg: Message, info: { error: Error, messages: MessageInfo[] }) => Message | - |  |
+| requestPlaceholder | Request placeholder information, not provided will not be displayed | Message \| (msg: Message, info: { messages: MessageInfo[] }) => Message | - |  |
 
-### Bubble.List
+### XAgentConfigReturnType
 
-| Property | Description | Type | Default | Version |
-| --- | --- | --- | --- | --- |
-| autoScroll | When the content is updated, scroll to the latest position automatically. If the user scrolls, the automatic scrolling will be paused. | boolean | true |  |
-| items | Bubble items list | (BubbleProps & { key?: string \| number, role?: string })[] | - |  |
-| roles | Set the default properties of the bubble. The `role` in `items` will be automatically matched. | Record<string, BubbleProps> \| (bubble) => BubbleProps | - |  |
-
-## Semantic DOM
-
-<code src="./demo/_semantic.tsx" simplify="true"></code>
-
-## Design Token
-
-<ComponentTokenTable component="Bubble"></ComponentTokenTable>
+| Property | Description | Type | Version |
+| --- | --- | --- | --- |
+| messages | Current managed messages content | Message[] |  |
+| requesting | Whether a request is in progress | boolean |  |
+| onRequest | Add a message and trigger a request | (message: Message) => void |  |
+| setMessages | Modify messages directly without triggering requests | (messages: MessageInfo[]) => void |  |

@@ -5,7 +5,9 @@ export type SimpleType = string | number | boolean | object;
 
 export type MessageStatus = 'local' | 'loading' | 'success' | 'error';
 
-export interface Config<Message> {
+export interface XAgentConfig<Message> {
+  defaultMessages?: MessageInfo<Message>[];
+
   request: (
     message: Message,
     info: {
@@ -29,7 +31,7 @@ export interface Config<Message> {
 }
 
 export interface MessageInfo<Message> {
-  id: number;
+  id: number | string;
   message: Message;
   status: MessageStatus;
 }
@@ -77,16 +79,17 @@ function formatMessageResult<Message>(
   }, [] as StandardRequestResult<Message>[]);
 }
 
-export default function useXAgent<Message extends SimpleType>(config: Config<Message>) {
-  const { request, requestFallback, requestPlaceholder } = config;
+export default function useXAgent<Message extends SimpleType>(config: XAgentConfig<Message>) {
+  const { defaultMessages, request, requestFallback, requestPlaceholder } = config;
 
   const [requesting, setRequesting] = React.useState(false);
-  const [messages, setMessages] = React.useState<MessageInfo<Message>[]>([]);
+  const [messages, setMessages] = React.useState<MessageInfo<Message>[]>(defaultMessages || []);
+
   const idRef = React.useRef(0);
 
   const createMessage = (message: Message, status: MessageStatus) => {
     const msg: MessageInfo<Message> = {
-      id: idRef.current,
+      id: `msg_${idRef.current}`,
       message,
       status,
     };
@@ -97,7 +100,7 @@ export default function useXAgent<Message extends SimpleType>(config: Config<Mes
   };
 
   const onRequest = useEvent((message: Message) => {
-    let loadingMsgId: number | null = null;
+    let loadingMsgId: number | string | null = null;
 
     setMessages((ori) => {
       const nextMessages = [...ori, createMessage(message, 'local')];
@@ -156,5 +159,6 @@ export default function useXAgent<Message extends SimpleType>(config: Config<Mes
     onRequest,
     messages,
     requesting,
+    setMessages,
   } as const;
 }

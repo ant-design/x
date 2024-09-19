@@ -66,9 +66,17 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     onUpdate?.();
   }, [typedContent]);
 
+  const triggerTypingCompleteRef = React.useRef(false);
   React.useEffect(() => {
-    if (!isTyping && !loading && onTypingComplete) {
-      onTypingComplete();
+    if (!isTyping && !loading) {
+      // StrictMode will trigger this twice,
+      // So we need a flag to avoid that
+      if (!triggerTypingCompleteRef.current) {
+        triggerTypingCompleteRef.current = true;
+        onTypingComplete?.();
+      }
+    } else {
+      triggerTypingCompleteRef.current = false;
     }
   }, [isTyping, loading]);
 

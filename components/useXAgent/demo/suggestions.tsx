@@ -41,6 +41,17 @@ const App = () => {
   const [content, setContent] = React.useState('');
 
   const { onRequest, messages, requesting } = useXAgent<Message>({
+    defaultMessages: [
+      {
+        id: 'init',
+        message: {
+          role: 'ai',
+          content: 'Hello, what can I do for you?',
+        },
+        status: 'success',
+      },
+    ],
+
     request: async (info) => {
       const content = info.content as string;
 
