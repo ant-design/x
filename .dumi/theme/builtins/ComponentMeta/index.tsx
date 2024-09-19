@@ -104,7 +104,7 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
     if (String(source) === 'true') {
       const kebabComponent = kebabCase(component);
       return [
-        `https://github.com/ant-design/ant-design/blob/master/components/${kebabComponent}`,
+        `https://github.com/ant-design/x/blob/main/components/${kebabComponent}`,
         `components/${kebabComponent}`,
       ];
     }
