@@ -6,13 +6,9 @@
 
 打造 AI 驱动界面，一键接入智能对话组件与 API 服务。
 
-[![CI status][github-action-image]][github-action-url]
-[![codecov][codecov-image]][codecov-url]
-[![NPM version][npm-image]][npm-url]
-[![NPM downloads][download-image]][download-url]
+[![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] [![NPM version][npm-image]][npm-url] [![NPM downloads][download-image]][download-url]
 
-[Changelog](./CHANGELOG.zh-US.md) · [Report Bug][github-issues-bug-report] · [Request Feature][github-issues-feature-request] · English · [中文](./README-zh_CN.md)
-[更新日志](./CHANGELOG.zh-CN.md) · [报告问题][github-issues-bug-report] · [特性需求][github-issues-feature-request] · [English](./README.md) · 中文
+[Changelog](./CHANGELOG.zh-US.md) · [Report Bug][github-issues-bug-report] · [Request Feature][github-issues-feature-request] · English · [中文](./README-zh_CN.md) [更新日志](./CHANGELOG.zh-CN.md) · [报告问题][github-issues-bug-report] · [特性需求][github-issues-feature-request] · [English](./README.md) · 中文
 
 [npm-image]: http://img.shields.io/npm/v/@ant-design/x.svg?style=flat-square
 [npm-url]: http://npmjs.org/package/@ant-design/x
@@ -28,8 +24,8 @@
 [help-wanted-url]: https://github.com/ant-design/x/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22
 [twitter-image]: https://img.shields.io/twitter/follow/AntDesignUI.svg?label=Ant%20Design
 [twitter-url]: https://twitter.com/AntDesignUI
-[bundlesize-js-image]: https://img.badgesize.io/https:/unpkg.com/@ant-design/x/dist/antd-x.min.js?label=antd-x.min.js&compression=gzip&style=flat-square
-[unpkg-js-url]: https://unpkg.com/browse/@ant-design/x/dist/antd-x.min.js
+[bundlesize-js-image]: https://img.badgesize.io/https:/unpkg.com/@ant-design/x/dist/antdx.min.js?label=antdx.min.js&compression=gzip&style=flat-square
+[unpkg-js-url]: https://unpkg.com/browse/@ant-design/x/dist/antdx.min.js
 [bundlephobia-image]: https://badgen.net/bundlephobia/minzip/@ant-design/x?style=flat-square
 [bundlephobia-url]: https://bundlephobia.com/package/@ant-design/x
 [issues-helper-image]: https://img.shields.io/badge/using-actions--cool-blue?style=flat-square
@@ -40,6 +36,7 @@
 [dumi-url]: https://github.com/umijs/dumi
 [github-issues-bug-report]: https://github.com/ant-design/x/issues/new?template=bug-report.yml
 [github-issues-feature-request]: https://github.com/ant-design/x/issues/new?template=bug-feature-request.yml
+
 </div>
 
 ## 📦 安装
@@ -62,9 +59,7 @@ pnpm add @ant-design/x
 import React from 'react';
 import { Bubble } from '@ant-design/x';
 
-const App = () => (
-  <Bubble />
-);
+const App = () => <Bubble />;
 
 export default App;
 ```

@@ -5,11 +5,11 @@ order: 4
 title: 在 Umi 中使用
 ---
 
-在真实项目开发中，除了 Ant Design 这样的 UI 库，你可能会还会需要构建工具、路由方案、CSS 方案、数据流方案、请求库和请求方案、国际化方案、权限方案、Icons 方案等等，才能完成一个完整的项目。我们基于业务场景，推出了基于 React 的企业级应用框架 [Umi](https://umijs.org/)，推荐你在项目中使用。
+在真实项目开发中，除了 Ant Design X 这样的 UI 库，你可能会还会需要构建工具、路由方案、CSS 方案、数据流方案、请求库和请求方案、国际化方案、权限方案、Icons 方案等等，才能完成一个完整的项目。我们基于业务场景，推出了基于 React 的企业级应用框架 [Umi](https://umijs.org/)，推荐你在项目中使用。
 
 Umi，中文发音为「乌米」，是可扩展的企业级前端应用框架，也是蚂蚁集团的底层前端框架，已直接或间接地服务了 10000+ 应用。Umi 以路由为基础，同时支持配置式路由和约定式路由，保证路由的功能完备，并以此进行功能扩展。然后配以生命周期完善的插件体系，覆盖从源码到构建产物的每个生命周期，支持各种功能扩展和业务需求。
 
-本文会引导你使用 Umi、Ant Design 和 [Ant Design Pro](https://pro.ant.design/) 从 0 开始创建一个简单应用。
+本文会引导你使用 Umi、Ant Design X 从 0 开始创建一个简单应用。
 
 ## 初始化项目
 
@@ -56,10 +56,10 @@ $ pnpm create umi
 
 ```bash
 $ pnpm i @umijs/plugins -D
-$ pnpm i antd axios @ant-design/pro-layout -S
+$ pnpm i @ant-design/x -S
 ```
 
-其中 `@umijs/plugins` 是 Umi 的官方插件集，包含了 valtio、react-query、styled-components、locale、access、qiankun 等大量插件，可让用户通过配置的方式一键开启和使用；`antd` 就不用介绍了；`axios` 是请求库；`@ant-design/pro-layout` 是用于生成中后台布局的组件。（这里将运行时依赖和编译时依赖分别保存到 dependencies 和 devDependencies，是目前社区推荐的方式）
+其中 `@umijs/plugins` 是 Umi 的官方插件集，包含了 valtio、react-query、styled-components、locale、access、qiankun 等大量插件，可让用户通过配置的方式一键开启和使用；
 
 完成后，执行以下命令启动项目。
 
@@ -132,209 +132,118 @@ export default defineConfig({
 
 ```tsx
 import React from 'react';
-import { Button, Popconfirm, Table } from 'antd';
-import type { TableProps } from 'antd';
+import {
+  XConfigProvider,
+  Bubble,
+  Sender,
+  Conversations,
+  Prompts,
+  Suggestion,
+  ThoughtChain,
+} from '@ant-design/x';
+import { Flex, Divider, Radio, Card, Typography } from 'antd';
 
-interface DataType {
-  id: string;
-  name: string;
-}
+import type { ConfigProviderProps, GetProp } from 'antd';
+import {
+  AlipayCircleOutlined,
+  BulbOutlined,
+  GithubOutlined,
+  SmileOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
 
-const ProductList: React.FC<{ products: DataType[]; onDelete: (id: string) => void }> = ({
-  onDelete,
-  products,
-}) => {
-  const columns: TableProps<DataType>['columns'] = [
-    {
-      title: 'Name',
-      dataIndex: 'name',
-    },
-    {
-      title: 'Actions',
-      render(text, record) {
-        return (
-          <Popconfirm title="Delete?" onConfirm={() => onDelete(record.id)}>
-            <Button>Delete</Button>
-          </Popconfirm>
-        );
-      },
-    },
-  ];
-  return <Table rowKey="id" dataSource={products} columns={columns} />;
-};
+export default () => {
+  const [value, setValue] = React.useState('');
+  const [direction, setDirection] =
+    React.useState<GetProp<ConfigProviderProps, 'direction'>>('ltr');
 
-export default ProductList;
-```
-
-## 准备 Mock 数据
-
-假设我们已经和后端约定好了 API 接口，那现在就可以使用 Mock 数据来在本地模拟出 API 应该返回的数据，这样一来前后端开发就可以同时进行，不会因为后端 API 还在开发而导致前端的工作被阻塞。Umi 提供了开箱即用的 [Mock 功能](https://umijs.org/docs/guides/mock)，能够用方便简单的方式来完成 Mock 数据的设置。
-
-在根目录下新建 `mock/products.ts` 文件，内容如下。
-
-```ts
-import { defineMock } from 'umi';
-
-type Product = {
-  id: string;
-  name: string;
-};
-
-let products: Product[] = [
-  { id: '1', name: 'Umi' },
-  { id: '2', name: 'Ant Design' },
-  { id: '3', name: 'Ant Design Pro' },
-  { id: '4', name: 'Dva' },
-];
-
-export default defineMock({
-  'GET /api/products': (_, res) => {
-    res.send({
-      status: 'ok',
-      data: products,
-    });
-  },
-  'DELETE /api/products/:id': (req, res) => {
-    products = products.filter((item) => item.id !== req.params.id);
-    res.send({ status: 'ok' });
-  },
-});
-```
-
-然后访问 http://localhost:8000/api/products ，就能看到接口响应结果了。
-
-## 完成 products 页
-
-完成了 UI 组件和 Mock 数据，是时候把他们结合到一起了。这里需要用到请求方案，我们在这里的选择是 react-query（如果你想说 @tanstack/react-query，没错，他们是同一个库，@tanstack/react-query 是 react-query 改名后的包）。所以在开始之前，需要修改配置启用一键启用 [Umi 的 react-query 插件](https://umijs.org/docs/max/react-query)。
-
-先编辑 `.umirc.ts`，由于有探测到不能热更的配置项变更，配置文件保存后 umi dev 的 server 会自动重启。
-
-```diff
-import { defineConfig } from "umi";
-
-export default defineConfig({
-+  plugins: ['@umijs/plugins/dist/react-query'],
-+  reactQuery: {},
-  routes: [
-    { path: "/", component: "index" },
-    { path: "/docs", component: "docs" },
-    { path: "/products", component: "products" },
-  ],
-  npmClient: 'pnpm',
-});
-```
-
-再编辑 `src/pages/products.tsx`，内容如下。
-
-```tsx
-import React from 'react';
-import axios from 'axios';
-import { useMutation, useQuery, useQueryClient } from 'umi';
-
-import styles from './products.less';
-import ProductList from '@/components/ProductList';
-
-export default function Page() {
-  const queryClient = useQueryClient();
-  const productsQuery = useQuery(['products'], {
-    queryFn() {
-      return axios.get('/api/products').then((res) => res.data);
-    },
-  });
-  const productsDeleteMutation = useMutation({
-    mutationFn(id: string) {
-      return axios.delete(`/api/products/${id}`);
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ['products'] });
-    },
-  });
-  if (productsQuery.isLoading) return null;
   return (
-    <div>
-      <h1 className={styles.title}>Page products</h1>
-      <ProductList
-        products={productsQuery.data.data}
-        onDelete={(id) => {
-          productsDeleteMutation.mutate(id);
-        }}
-      />
-    </div>
+    <>
+      <Flex gap={12} style={{ marginBottom: 16 }} align="center">
+        <Typography.Text>Direction:</Typography.Text>
+        <Radio.Group value={direction} onChange={(e) => setDirection(e.target.value)}>
+          <Radio.Button value="ltr">LTR</Radio.Button>
+          <Radio.Button value="rtl">RTL</Radio.Button>
+        </Radio.Group>
+      </Flex>
+      <Card>
+        <XConfigProvider direction={direction}>
+          <Flex style={{ height: 500 }} gap={12}>
+            <Conversations
+              style={{ width: 200 }}
+              defaultActiveKey="1"
+              items={[
+                {
+                  key: '1',
+                  label: 'Conversation - 1',
+                  icon: <GithubOutlined />,
+                },
+                {
+                  key: '2',
+                  label: 'Conversation - 2',
+                  icon: <AlipayCircleOutlined />,
+                },
+              ]}
+            />
+            <Divider type="vertical" style={{ height: '100%' }} />
+            <Flex vertical style={{ flex: 1 }} gap={8}>
+              <Bubble.List
+                style={{ flex: 1 }}
+                items={[
+                  {
+                    key: '1',
+                    placement: 'end',
+                    content: 'Hello Ant Design X!',
+                    avatar: { icon: <UserOutlined /> },
+                  },
+                  {
+                    key: '2',
+                    content: 'Hello World!',
+                  },
+                ]}
+              />
+              <Prompts
+                items={[
+                  {
+                    key: '1',
+                    icon: <BulbOutlined style={{ color: '#FFD700' }} />,
+                    label: 'Ignite Your Creativity',
+                  },
+                  {
+                    key: '2',
+                    icon: <SmileOutlined style={{ color: '#52C41A' }} />,
+                    label: 'Tell me a Joke',
+                  },
+                ]}
+              />
+              <Suggestion items={[{ label: 'Write a report', value: 'report' }]}>
+                {({ onTrigger, onKeyDown }) => {
+                  return (
+                    <Sender
+                      value={value}
+                      onChange={(nextVal) => {
+                        if (nextVal === '/') {
+                          onTrigger();
+                        } else if (!nextVal) {
+                          onTrigger(false);
+                        }
+                        setValue(nextVal);
+                      }}
+                      onKeyDown={onKeyDown}
+                      placeholder='Type "/" to trigger suggestion'
+                    />
+                  );
+                }}
+              </Suggestion>
+            </Flex>
+          </Flex>
+          <ThoughtChain />
+        </XConfigProvider>
+      </Card>
+    </>
   );
-}
+};
 ```
-
-这里，我们通过 `useQuery()` 拉取来自 `/api/products` 的数据，然后在 `onDelete` 事件里通过 `useMutation()` 提交 DELETE 请求到 `/api/products/${id}` 进行删除操作。关于 react-query 的详细使用，可参考 [Umi 插件之 React Query](https://umijs.org/docs/max/react-query) 和 [React Query 官网](https://tanstack.com/query/)。
-
-保存后，你应该会看到如下界面。
-
-![](https://img.alicdn.com/imgextra/i1/O1CN014Sq3Uq1IceoHSfGrR_!!6000000000914-1-tps-550-411.gif)
-
-## ProLayout
-
-一个标准的中后台页面，一般都需要一个布局，这个布局很多时候都是高度雷同的，[ProLayout](https://procomponents.ant.design/components/layout/) 封装了常用的菜单、面包屑、页头等功能，提供了一个不依赖的框架且开箱即用的高级布局组件。并且支持  `side`, `mix`, `top`  三种模式，更是内置了菜单选中、菜单生成面包屑、自动设置页面标题的逻辑。
-
-先修改配置，为每个路由新增 name 字段，用于给 ProLayout 做菜单渲染使用。
-
-```diff
-import { defineConfig } from "umi";
-
-export default defineConfig({
-  routes: [
--    { path: "/", component: "index" },
-+    { path: "/", component: "index", name: "home" },
--    { path: "/docs", component: "docs" },
-+    { path: "/docs", component: "docs", name: "docs" },
--    { path: "/products", component: "products" },
-+    { path: "/products", component: "products", name: "products" },
-  ],
-  plugins: ["@umijs/plugins/dist/react-query"],
-  reactQuery: {},
-  npmClient: "pnpm",
-});
-```
-
-编辑 `src/layouts/index.tsx`，内容如下。
-
-```tsx
-import { ProLayout } from '@ant-design/pro-layout';
-import { Link, Outlet, useAppData, useLocation } from 'umi';
-
-export default function Layout() {
-  const { clientRoutes } = useAppData();
-  const location = useLocation();
-  return (
-    <ProLayout
-      route={clientRoutes[0]}
-      location={location}
-      title="Umi x Ant Design"
-      menuItemRender={(menuItemProps, defaultDom) => {
-        if (menuItemProps.isUrl || menuItemProps.children) {
-          return defaultDom;
-        }
-        if (menuItemProps.path && location.pathname !== menuItemProps.path) {
-          return (
-            <Link to={menuItemProps.path} target={menuItemProps.target}>
-              {defaultDom}
-            </Link>
-          );
-        }
-        return defaultDom;
-      }}
-    >
-      <Outlet />
-    </ProLayout>
-  );
-}
-```
-
-这里先用 Umi 的 `useAppData` 拿到全局客户端路由 `clientRoutes`，这是一份嵌套结构的路由表，我们把 `clientRoutes[0]` 传给 ProLayout；再通过 `useLocation()` 拿到 location 信息，也传给 ProLayout 来决定哪个菜单应该高亮；同时我们希望点击菜单时做路由跳转，需要定制 ProLayout 的 `menuItemRender` 方法。
-
-聪明的你可能已经发现 `src/layouts/index.less` 已经不再被引用了。为了保持项目文件的整洁，可以选择将其删除。
-
-此时浏览器会自动刷新，如果顺利，你会看到如下界面。
-
-![](https://img.alicdn.com/imgextra/i2/O1CN01jLPfng1WljHFhj3mc_!!6000000002829-2-tps-1670-934.png)
 
 ## 构建应用
 

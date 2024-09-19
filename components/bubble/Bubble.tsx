@@ -1,13 +1,14 @@
-import React from 'react';
 import classnames from 'classnames';
+import React from 'react';
 
+import { Avatar } from 'antd';
+import mergeStyles from '../_util/merge-styles';
+import { useXConfig } from '../x-config-provider';
+import useTypedEffect from './hooks/useTypedEffect';
+import useTypingConfig from './hooks/useTypingConfig';
 import type { BubbleProps } from './interface';
 import Loading from './loading';
 import useStyle from './style';
-import useTypedEffect from './hooks/useTypedEffect';
-import { Avatar } from 'antd';
-import useTypingConfig from './hooks/useTypingConfig';
-import { useConfigContext } from '../config-provider';
 
 export interface BubbleRef {
   nativeElement: HTMLElement;
@@ -46,7 +47,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
   }));
 
   // ============================ Prefix ============================
-  const { direction, getPrefixCls } = useConfigContext();
+  const { direction, getPrefixCls, bubble } = useXConfig();
 
   const prefixCls = getPrefixCls('bubble', customizePrefixCls);
 
@@ -73,6 +74,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     prefixCls,
     hashId,
     cssVarCls,
+    bubble?.className,
     `${prefixCls}-${placement}`,
     {
       [`${prefixCls}-rtl`]: direction === 'rtl',
@@ -88,12 +90,21 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
 
   // ============================ Render ============================
   return wrapCSSVar(
-    <div style={style} className={mergedCls} {...otherHtmlProps} ref={divRef}>
+    <div
+      style={mergeStyles(style, bubble?.style)}
+      className={mergedCls}
+      {...otherHtmlProps}
+      ref={divRef}
+    >
       {/* Avatar */}
       {avatar && (
         <div
-          style={styles?.avatar}
-          className={classnames(`${prefixCls}-avatar`, classNames?.avatar)}
+          style={mergeStyles(styles?.avatar, bubble?.styles?.avatar)}
+          className={classnames(
+            `${prefixCls}-avatar`,
+            classNames?.avatar,
+            bubble?.classNames?.avatar,
+          )}
         >
           {avatarNode}
         </div>
@@ -101,8 +112,12 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
 
       {/* Content */}
       <div
-        style={styles?.content}
-        className={classnames(`${prefixCls}-content`, classNames?.content)}
+        style={mergeStyles(styles?.content, bubble?.styles?.content)}
+        className={classnames(
+          `${prefixCls}-content`,
+          classNames?.content,
+          bubble?.classNames?.content,
+        )}
       >
         {loading ? <Loading prefixCls={prefixCls} /> : mergedContent}
       </div>

@@ -1,16 +1,16 @@
-/* eslint-disable no-console */
-import React from 'react';
 import {
+  NaNLinter,
+  StyleProvider,
   legacyNotSelectorLinter,
   logicalPropertiesLinter,
-  NaNLinter,
   parentSelectorLinter,
-  StyleProvider,
 } from '@ant-design/cssinjs';
 import chalk from 'chalk';
+/* eslint-disable no-console */
+import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
-import { ConfigProvider } from 'antd';
+import { XConfigProvider } from '../components';
 import { generateCssinjs } from './generate-cssinjs';
 
 console.log(chalk.green(`🔥 Checking CSS-in-JS...`));
@@ -32,9 +32,9 @@ async function checkCSSVar() {
     render(Component: any) {
       ReactDOMServer.renderToString(
         <StyleProvider linters={[NaNLinter]}>
-          <ConfigProvider theme={{ cssVar: true, hashed: false }}>
+          <XConfigProvider theme={{ cssVar: true, hashed: false }}>
             <Component />
-          </ConfigProvider>
+          </XConfigProvider>
         </StyleProvider>,
       );
     },

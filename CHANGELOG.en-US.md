@@ -16,6 +16,36 @@ tag: vVERSION
 
 ---
 
+## 1.0.0-alpha.1
+
+`2024-09-10`
+
+### 🚀 Features
+
+- 🔥 feat: Suggestion 建议组件 by [@ONLY-yours](https://github.com/ONLY-yours) in [#87](https://github.com/ant-design/x/pull/87)
+
+### 🐛 Fixes
+
+- 🐛 fix: change the Sender restProps type by [@ONLY-yours](https://github.com/ONLY-yours) in [#101](https://github.com/ant-design/x/pull/101)
+- 🛠 fix: bun install by [@afc163](https://github.com/afc163) in [#111](https://github.com/ant-design/x/pull/111)
+
+### 🛠 Refactors
+
+- 🛠 chore: add layer support by [@zombieJ](https://github.com/zombieJ) in [#118](https://github.com/ant-design/x/pull/118)
+- 🛠 chore: speed up workflows by [@afc163](https://github.com/afc163) in [#119](https://github.com/ant-design/x/pull/119)
+- 🛠 chore(deps-dev): bump the dev-dependencies group with 5 updates by [@dependabot](https://github.com/dependabot) in [#120](https://github.com/ant-design/x/pull/120)
+- 🛠 chore: clean up README.md by [@afc163](https://github.com/afc163) in [#102](https://github.com/ant-design/x/pull/102)
+- 🛠 chore: add issue templates by [@afc163](https://github.com/afc163) in [#103](https://github.com/ant-design/x/pull/103)
+- 🛠 chore: add bun.lockb by [@afc163](https://github.com/afc163) in [#108](https://github.com/ant-design/x/pull/108)
+- 🛠 chore: Delete index-style-only.js by [@afc163](https://github.com/afc163) in [#106](https://github.com/ant-design/x/pull/106)
+- 🛠 chore: Update main.yml by [@afc163](https://github.com/afc163) in [#105](https://github.com/ant-design/x/pull/105)
+- 🛠 chore: Update package.json by [@afc163](https://github.com/afc163) in [#110](https://github.com/ant-design/x/pull/110)
+
+### 📖 Documentation
+
+- 📖 docs: Update README.md by [@afc163](https://github.com/afc163) in [#104](https://github.com/ant-design/x/pull/104)
+- 📖 docs: Update codecov badge by [@afc163](https://github.com/afc163) in [#112](https://github.com/ant-design/x/pull/112)
+
 ## 1.0.0-alpha.0
 
 `2024-09-05`

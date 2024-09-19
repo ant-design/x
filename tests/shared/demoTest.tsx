@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import path from 'path';
-import * as React from 'react';
-import { createCache, StyleProvider } from '@ant-design/cssinjs';
-import { ConfigProvider } from 'antd';
+import { StyleProvider, createCache } from '@ant-design/cssinjs';
+import { XConfigProvider } from '@ant-design/x';
 import { globSync } from 'glob';
 import kebabCase from 'lodash/kebabCase';
+import * as React from 'react';
 import { renderToString } from 'react-dom/server';
 
 import { resetWarned } from '../../components/_util/warning';
@@ -42,7 +42,9 @@ function baseText(doInject: boolean, component: string, options: Options = {}) {
 
     // function doTest(name: string, openTrigger = false) {
     testMethod(
-      doInject ? `renders ${mergedFile} extend context correctly` : `renders ${mergedFile} correctly`,
+      doInject
+        ? `renders ${mergedFile} extend context correctly`
+        : `renders ${mergedFile} correctly`,
       () => {
         resetWarned();
 
@@ -64,9 +66,9 @@ function baseText(doInject: boolean, component: string, options: Options = {}) {
 
         // Inject cssinjs cache to avoid create <style /> element
         Demo = (
-          <ConfigProvider theme={{ hashed: false }}>
+          <XConfigProvider theme={{ hashed: false }}>
             <StyleProvider cache={createCache()}>{Demo}</StyleProvider>
-          </ConfigProvider>
+          </XConfigProvider>
         );
 
         // Demo Test also include `dist` test which is already uglified.

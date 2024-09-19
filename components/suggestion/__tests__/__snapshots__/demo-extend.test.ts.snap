@@ -3,27 +3,27 @@
 exports[`renders components/suggestion/demo/basic.tsx extend context correctly 1`] = `
 Array [
   <div
-    class="ant-suggestion ant-suggestion-wrapper"
+    class="ant-suggestion ant-suggestion-wrapper css-var-rb"
   >
     <div
-      class="ant-sender"
+      class="ant-sender css-var-rb"
     >
       <textarea
-        class="ant-input ant-input-outlined ant-sender-input"
+        class="ant-input ant-input-outlined css-var-rb ant-input-css-var ant-sender-input"
         placeholder="输入 / 获取建议"
-        style="resize: none; height: -54px; max-height: -54px;"
+        style="resize: none; height: -110px; max-height: -110px;"
       />
       <div
         class="ant-sender-actions-list"
       >
         <div
-          class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
+          class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-rb"
         >
           <div
             class="ant-space-item"
           >
             <button
-              class="ant-btn ant-btn-text ant-btn-icon-only ant-sender-actions-btn"
+              class="ant-btn css-var-rb ant-btn-text ant-btn-icon-only ant-sender-actions-btn"
               disabled=""
               type="button"
             >
@@ -59,7 +59,7 @@ Array [
             class="ant-space-item"
           >
             <button
-              class="ant-btn ant-btn-text ant-btn-icon-only ant-sender-actions-btn"
+              class="ant-btn css-var-rb ant-btn-text ant-btn-icon-only ant-sender-actions-btn"
               disabled=""
               type="button"
             >
@@ -96,7 +96,7 @@ Array [
     </div>
   </div>,
   <div
-    class="ant-select-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up ant-cascader-dropdown ant-suggestion ant-select-dropdown-placement-topLeft"
+    class="ant-select-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up ant-cascader-dropdown ant-suggestion css-var-rb ant-select-css-var ant-cascader-css-var css-var-rb ant-select-dropdown-placement-topLeft"
     style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; min-width: auto;"
   >
     <div>
@@ -118,7 +118,7 @@ Array [
               class="ant-cascader-menu-item-content"
             >
               <div
-                class="ant-suggestion-item ant-flex"
+                class="ant-suggestion-item ant-flex css-var-rb"
               >
                 Write a report
               </div>
@@ -135,7 +135,7 @@ Array [
               class="ant-cascader-menu-item-content"
             >
               <div
-                class="ant-suggestion-item ant-flex"
+                class="ant-suggestion-item ant-flex css-var-rb"
               >
                 Draw a picture
               </div>
@@ -152,7 +152,7 @@ Array [
               class="ant-cascader-menu-item-content"
             >
               <div
-                class="ant-suggestion-item ant-flex"
+                class="ant-suggestion-item ant-flex css-var-rb"
               >
                 <div
                   class="ant-suggestion-item-icon"
@@ -217,27 +217,27 @@ exports[`renders components/suggestion/demo/basic.tsx extend context correctly 2
 exports[`renders components/suggestion/demo/block.tsx extend context correctly 1`] = `
 Array [
   <div
-    class="ant-suggestion ant-suggestion-wrapper"
+    class="ant-suggestion ant-suggestion-wrapper css-var-r7"
   >
     <div
-      class="ant-sender"
+      class="ant-sender css-var-r7"
     >
       <textarea
-        class="ant-input ant-input-outlined ant-sender-input"
+        class="ant-input ant-input-outlined css-var-r7 ant-input-css-var ant-sender-input"
         placeholder="输入 / 获取建议"
-        style="resize: none; height: -54px; max-height: -54px;"
+        style="resize: none; height: -110px; max-height: -110px;"
       />
       <div
         class="ant-sender-actions-list"
       >
         <div
-          class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
+          class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-r7"
         >
           <div
             class="ant-space-item"
           >
             <button
-              class="ant-btn ant-btn-text ant-btn-icon-only ant-sender-actions-btn"
+              class="ant-btn css-var-r7 ant-btn-text ant-btn-icon-only ant-sender-actions-btn"
               disabled=""
               type="button"
             >
@@ -273,7 +273,7 @@ Array [
             class="ant-space-item"
           >
             <button
-              class="ant-btn ant-btn-text ant-btn-icon-only ant-sender-actions-btn"
+              class="ant-btn css-var-r7 ant-btn-text ant-btn-icon-only ant-sender-actions-btn"
               disabled=""
               type="button"
             >
@@ -310,7 +310,7 @@ Array [
     </div>
   </div>,
   <div
-    class="ant-select-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up ant-cascader-dropdown ant-suggestion ant-suggestion-block ant-select-dropdown-placement-topLeft"
+    class="ant-select-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up ant-cascader-dropdown ant-suggestion css-var-r7 ant-suggestion-block ant-select-css-var ant-cascader-css-var css-var-r7 ant-select-dropdown-placement-topLeft"
     style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; min-width: auto;"
   >
     <div>
@@ -332,7 +332,7 @@ Array [
               class="ant-cascader-menu-item-content"
             >
               <div
-                class="ant-suggestion-item ant-flex"
+                class="ant-suggestion-item ant-flex css-var-r7"
               >
                 Write a report
               </div>
@@ -349,7 +349,7 @@ Array [
               class="ant-cascader-menu-item-content"
             >
               <div
-                class="ant-suggestion-item ant-flex"
+                class="ant-suggestion-item ant-flex css-var-r7"
               >
                 Draw a picture
               </div>
@@ -366,7 +366,7 @@ Array [
               class="ant-cascader-menu-item-content"
             >
               <div
-                class="ant-suggestion-item ant-flex"
+                class="ant-suggestion-item ant-flex css-var-r7"
               >
                 Check some knowledge
                 <div
@@ -389,10 +389,10 @@ exports[`renders components/suggestion/demo/block.tsx extend context correctly 2
 exports[`renders components/suggestion/demo/trigger.tsx extend context correctly 1`] = `
 Array [
   <div
-    class="ant-suggestion ant-suggestion-wrapper"
+    class="ant-suggestion ant-suggestion-wrapper css-var-r1"
   >
     <div
-      class="ant-select ant-select-outlined ant-select-multiple ant-select-show-arrow ant-select-show-search"
+      class="ant-select ant-select-outlined css-var-r1 ant-select-css-var ant-select-multiple ant-select-show-arrow ant-select-show-search"
       style="width: 100%;"
     >
       <div
@@ -437,7 +437,7 @@ Array [
         </span>
       </div>
       <div
-        class="ant-select-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up ant-select-dropdown-empty ant-select-dropdown-placement-bottomLeft"
+        class="ant-select-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-r1 ant-select-css-var ant-select-dropdown-empty ant-select-dropdown-placement-bottomLeft"
         style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
       >
         <div>
@@ -447,7 +447,7 @@ Array [
             role="listbox"
           >
             <div
-              class="ant-empty ant-empty-normal ant-empty-small"
+              class="css-var-r1 ant-empty ant-empty-normal ant-empty-small"
             >
               <div
                 class="ant-empty-image"
@@ -526,7 +526,7 @@ Array [
     </div>
   </div>,
   <div
-    class="ant-select-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up ant-cascader-dropdown ant-suggestion ant-select-dropdown-placement-topLeft"
+    class="ant-select-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up ant-cascader-dropdown ant-suggestion css-var-r1 ant-select-css-var ant-cascader-css-var css-var-r1 ant-select-dropdown-placement-topLeft"
     style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; min-width: auto;"
   >
     <div>
@@ -548,7 +548,7 @@ Array [
               class="ant-cascader-menu-item-content"
             >
               <div
-                class="ant-suggestion-item ant-flex"
+                class="ant-suggestion-item ant-flex css-var-r1"
               >
                 Trigger by 'undefined'
               </div>

@@ -20,16 +20,14 @@ describe('site test', () => {
   let server: http.Server | https.Server;
   const port = 3000;
   const render = async (path: string) => {
-    const resp = await fetch(`http://127.0.0.1:${port}${path}`).then(
-      async (res) => {
-        const html: string = await res.text();
-        const $ = load(html, {
-          decodeEntities: false,
-          recognizeSelfClosing: true,
-        });
-        return { status: res.status, $ };
-      },
-    );
+    const resp = await fetch(`http://127.0.0.1:${port}${path}`).then(async (res) => {
+      const html: string = await res.text();
+      const $ = load(html, {
+        decodeEntities: false,
+        recognizeSelfClosing: true,
+      });
+      return { status: res.status, $ };
+    });
     return resp;
   };
 
@@ -41,9 +39,7 @@ describe('site test', () => {
   const expectComponent = async (component: string) => {
     const { status, $ } = await render(`/${component}/`);
     expect(status).toBe(200);
-    expect($('h1').text().toLowerCase()).toMatch(
-      handleComponentName(component),
-    );
+    expect($('h1').text().toLowerCase()).toMatch(handleComponentName(component));
 
     /**
      * 断言组件的 api table 数量是否符合预期。
@@ -77,9 +73,7 @@ describe('site test', () => {
 
   it('Basic Pages zh', async () => {
     const { status, $ } = await render('/index-cn');
-    expect($('title').text()).toEqual(
-      `Ant Design - 一套企业级 UI 设计语言和 React 组件库`,
-    );
+    expect($('title').text()).toEqual(`Ant Design - 一套企业级 UI 设计语言和 React 组件库`);
     expect(status).toBe(200);
   });
 

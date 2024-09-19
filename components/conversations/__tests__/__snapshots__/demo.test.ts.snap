@@ -2,14 +2,14 @@
 
 exports[`renders components/conversations/demo/basic.tsx correctly 1`] = `
 <div
-  class="ant-card ant-card-bordered ant-card-small"
+  class="ant-card ant-card-bordered ant-card-small css-var-R0"
   style="width:320px"
 >
   <div
     class="ant-card-body"
   >
     <ul
-      class="ant-conversations"
+      class="ant-conversations css-var-R0"
     >
       <li
         class="ant-conversations-item ant-conversations-item-active"
@@ -38,7 +38,7 @@ exports[`renders components/conversations/demo/basic.tsx correctly 1`] = `
           </span>
         </div>
         <span
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label css-var-R0"
         >
           What is Ant Design X?
         </span>
@@ -71,7 +71,7 @@ exports[`renders components/conversations/demo/basic.tsx correctly 1`] = `
           </span>
         </div>
         <span
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label css-var-R0"
         >
           <div>
             Getting Started:
@@ -114,7 +114,7 @@ exports[`renders components/conversations/demo/basic.tsx correctly 1`] = `
           </span>
         </div>
         <span
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label css-var-R0"
         >
           In Docker, use 🐑 Ollama and initialize
         </span>
@@ -123,7 +123,7 @@ exports[`renders components/conversations/demo/basic.tsx correctly 1`] = `
         class="ant-conversations-item ant-conversations-item-disabled"
       >
         <span
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label css-var-R0"
         >
           Expired, please go to the recycle bin to check
         </span>
@@ -135,23 +135,23 @@ exports[`renders components/conversations/demo/basic.tsx correctly 1`] = `
 
 exports[`renders components/conversations/demo/controlled-mode.tsx correctly 1`] = `
 <div
-  class="ant-flex ant-flex-align-flex-start ant-flex-gap-small ant-flex-vertical"
+  class="ant-flex css-var-R0 ant-flex-align-flex-start ant-flex-gap-small ant-flex-vertical"
 >
   <div
-    class="ant-card ant-card-bordered ant-card-small"
+    class="ant-card ant-card-bordered ant-card-small css-var-R0"
     style="width:320px"
   >
     <div
       class="ant-card-body"
     >
       <ul
-        class="ant-conversations"
+        class="ant-conversations css-var-R0"
       >
         <li
           class="ant-conversations-item ant-conversations-item-active"
         >
           <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label css-var-R0"
           >
             Conversation Item 1
           </span>
@@ -160,7 +160,7 @@ exports[`renders components/conversations/demo/controlled-mode.tsx correctly 1`]
           class="ant-conversations-item"
         >
           <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label css-var-R0"
           >
             Conversation Item 2
           </span>
@@ -169,7 +169,7 @@ exports[`renders components/conversations/demo/controlled-mode.tsx correctly 1`]
           class="ant-conversations-item"
         >
           <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label css-var-R0"
           >
             Conversation Item 3
           </span>
@@ -178,10 +178,10 @@ exports[`renders components/conversations/demo/controlled-mode.tsx correctly 1`]
     </div>
   </div>
   <div
-    class="ant-flex ant-flex-gap-small"
+    class="ant-flex css-var-R0 ant-flex-gap-small"
   >
     <button
-      class="ant-btn ant-btn-default"
+      class="ant-btn css-var-R0 ant-btn-default"
       type="button"
     >
       <span>
@@ -189,7 +189,7 @@ exports[`renders components/conversations/demo/controlled-mode.tsx correctly 1`]
       </span>
     </button>
     <button
-      class="ant-btn ant-btn-default"
+      class="ant-btn css-var-R0 ant-btn-default"
       type="button"
     >
       <span>
@@ -202,25 +202,25 @@ exports[`renders components/conversations/demo/controlled-mode.tsx correctly 1`]
 
 exports[`renders components/conversations/demo/group.tsx correctly 1`] = `
 <div
-  class="ant-card ant-card-bordered ant-card-small"
+  class="ant-card ant-card-bordered ant-card-small css-var-R0"
   style="width:320px"
 >
   <div
     class="ant-card-body"
   >
     <ul
-      class="ant-conversations"
+      class="ant-conversations css-var-R0"
     >
       <li>
         <div
-          class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
+          class="ant-divider css-var-R0 ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
           role="separator"
         >
           <span
             class="ant-divider-inner-text"
           >
             <span
-              class="ant-typography ant-typography-secondary"
+              class="ant-typography ant-typography-secondary css-var-R0"
             >
               Group1
             </span>
@@ -256,7 +256,7 @@ exports[`renders components/conversations/demo/group.tsx correctly 1`] = `
               </span>
             </div>
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label css-var-R0"
             >
               What is Ant Design X ?
             </span>
@@ -289,7 +289,7 @@ exports[`renders components/conversations/demo/group.tsx correctly 1`] = `
               </span>
             </div>
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label css-var-R0"
             >
               <div>
                 Getting Started:
@@ -308,14 +308,14 @@ exports[`renders components/conversations/demo/group.tsx correctly 1`] = `
       </li>
       <li>
         <div
-          class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
+          class="ant-divider css-var-R0 ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
           role="separator"
         >
           <span
             class="ant-divider-inner-text"
           >
             <span
-              class="ant-typography ant-typography-secondary"
+              class="ant-typography ant-typography-secondary css-var-R0"
             >
               Group2
             </span>
@@ -352,7 +352,7 @@ exports[`renders components/conversations/demo/group.tsx correctly 1`] = `
               </span>
             </div>
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label css-var-R0"
             >
               In Docker, use 🐑 Ollama and initialize
             </span>
@@ -361,7 +361,7 @@ exports[`renders components/conversations/demo/group.tsx correctly 1`] = `
             class="ant-conversations-item"
           >
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label css-var-R0"
             >
               Expired, please go to the recycle bin to check
             </span>
@@ -375,28 +375,28 @@ exports[`renders components/conversations/demo/group.tsx correctly 1`] = `
 
 exports[`renders components/conversations/demo/group-sort.tsx correctly 1`] = `
 <div
-  class="ant-card ant-card-bordered ant-card-small"
+  class="ant-card ant-card-bordered ant-card-small css-var-R0"
   style="width:320px"
 >
   <div
     class="ant-card-body"
   >
     <ul
-      class="ant-conversations"
+      class="ant-conversations css-var-R0"
     >
       <li>
         <div
-          class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
+          class="ant-divider css-var-R0 ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
           role="separator"
         >
           <span
             class="ant-divider-inner-text"
           >
             <span
-              class="ant-typography ant-typography-secondary"
+              class="ant-typography ant-typography-secondary css-var-R0"
             >
               <div
-                class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
+                class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-R0"
               >
                 <div
                   class="ant-space-item"
@@ -442,7 +442,7 @@ exports[`renders components/conversations/demo/group-sort.tsx correctly 1`] = `
               </span>
             </div>
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label css-var-R0"
             >
               What is Ant Design X ?
             </span>
@@ -475,7 +475,7 @@ exports[`renders components/conversations/demo/group-sort.tsx correctly 1`] = `
               </span>
             </div>
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label css-var-R0"
             >
               <div>
                 Getting Started:
@@ -494,7 +494,7 @@ exports[`renders components/conversations/demo/group-sort.tsx correctly 1`] = `
       </li>
       <li>
         <div
-          class="ant-divider ant-divider-horizontal ant-divider-plain"
+          class="ant-divider css-var-R0 ant-divider-horizontal ant-divider-plain"
           role="separator"
         />
         <ul
@@ -528,7 +528,7 @@ exports[`renders components/conversations/demo/group-sort.tsx correctly 1`] = `
               </span>
             </div>
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label css-var-R0"
             >
               In Docker, use 🐑 Ollama and initialize
             </span>
@@ -537,17 +537,17 @@ exports[`renders components/conversations/demo/group-sort.tsx correctly 1`] = `
       </li>
       <li>
         <div
-          class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
+          class="ant-divider css-var-R0 ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
           role="separator"
         >
           <span
             class="ant-divider-inner-text"
           >
             <span
-              class="ant-typography ant-typography-secondary"
+              class="ant-typography ant-typography-secondary css-var-R0"
             >
               <div
-                class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
+                class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-R0"
               >
                 <div
                   class="ant-space-item"
@@ -570,7 +570,7 @@ exports[`renders components/conversations/demo/group-sort.tsx correctly 1`] = `
             class="ant-conversations-item ant-conversations-item-disabled"
           >
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label css-var-R0"
             >
               Expired, please go to the recycle bin to check
             </span>
@@ -584,7 +584,7 @@ exports[`renders components/conversations/demo/group-sort.tsx correctly 1`] = `
 
 exports[`renders components/conversations/demo/infinite-load.tsx correctly 1`] = `
 <div
-  class="ant-card ant-card-bordered ant-card-small"
+  class="ant-card ant-card-bordered ant-card-small css-var-R0"
   id="scrollableDiv"
   style="height:600px;width:320px;overflow:auto"
 >
@@ -599,7 +599,7 @@ exports[`renders components/conversations/demo/infinite-load.tsx correctly 1`] =
         style="height:auto;overflow:auto;-webkit-overflow-scrolling:touch;width:270px"
       >
         <ul
-          class="ant-conversations"
+          class="ant-conversations css-var-R0"
         />
         <div
           style="text-align:center"
@@ -607,7 +607,7 @@ exports[`renders components/conversations/demo/infinite-load.tsx correctly 1`] =
           <div
             aria-busy="true"
             aria-live="polite"
-            class="ant-spin ant-spin-sm ant-spin-spinning"
+            class="ant-spin ant-spin-sm ant-spin-spinning css-var-R0"
           >
             <span
               aria-label="redo"
@@ -638,23 +638,23 @@ exports[`renders components/conversations/demo/infinite-load.tsx correctly 1`] =
 
 exports[`renders components/conversations/demo/with-menu.tsx correctly 1`] = `
 <div
-  class="ant-app"
+  class="ant-app css-var-R0"
 >
   <div
-    class="ant-card ant-card-bordered ant-card-small"
+    class="ant-card ant-card-bordered ant-card-small css-var-R0"
     style="width:320px"
   >
     <div
       class="ant-card-body"
     >
       <ul
-        class="ant-conversations"
+        class="ant-conversations css-var-R0"
       >
         <li
           class="ant-conversations-item"
         >
           <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label css-var-R0"
           >
             Conversation Item 1
           </span>
@@ -683,7 +683,7 @@ exports[`renders components/conversations/demo/with-menu.tsx correctly 1`] = `
           class="ant-conversations-item"
         >
           <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label css-var-R0"
           >
             Conversation Item 2
           </span>
@@ -712,7 +712,7 @@ exports[`renders components/conversations/demo/with-menu.tsx correctly 1`] = `
           class="ant-conversations-item"
         >
           <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label css-var-R0"
           >
             Conversation Item 3
           </span>
@@ -741,7 +741,7 @@ exports[`renders components/conversations/demo/with-menu.tsx correctly 1`] = `
           class="ant-conversations-item ant-conversations-item-disabled"
         >
           <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label css-var-R0"
           >
             Conversation Item 4
           </span>

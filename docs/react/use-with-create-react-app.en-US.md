@@ -5,30 +5,30 @@ order: 1
 title: Usage with create-react-app
 ---
 
-[create-react-app](https://create-react-app.dev/) is one of the best React application development tools, This article will try to use `create-react-app` to create a `TypeScript` project, and introduce antd.
+[create-react-app](https://create-react-app.dev/) is one of the best tools for developing React applications. In this guide, we'll use `create-react-app` to create a `TypeScript` project and introduce `@ant-design/x`.
 
-> We build `antd` based on latest stable version of TypeScript (`>=5.0.0`), please make sure your project dependency matches it.
+> `@ant-design/x` is based on the latest stable version of TypeScript (`>=5.0.0`), so make sure your project uses a compatible version.
 
-## Install and Initialization
+## Installation and Initialization
 
-Before all start, you may need install [yarn](https://github.com/yarnpkg/yarn/) or [pnpm](https://pnpm.io/) or [bun](https://bun.sh/).
+Before starting, you might need to install [yarn](https://github.com/yarnpkg/yarn/), [pnpm](https://pnpm.io/), or [bun](https://bun.sh/).
 
-<InstallDependencies npm='$ npx create-react-app antd-demo --template typescript' yarn='$ yarn create react-app antd-demo --template typescript' pnpm='$ pnpm create react-app antd-demo --template typescript' bun='$ bun create react-app antd-demo --template typescript'></InstallDependencies>
+<InstallDependencies npm='$ npx create-react-app antdx-demo --template typescript' yarn='$ yarn create react-app antdx-demo --template typescript' pnpm='$ pnpm create react-app antdx-demo --template typescript' bun='$ bun create react-app antdx-demo --template typescript'></InstallDependencies>
 
-The tool will create and initialize environment and dependencies automatically, please try config your proxy setting or use another npm registry if any network errors happen during it.
+The tool will automatically initialize a project scaffold and install the necessary dependencies for a React project. If you encounter network issues during this process, try configuring a proxy or using a different npm registry.
 
-Then we go inside project and start it.
+Next, navigate into the project and start it.
 
 ```bash
-$ cd antd-demo
+$ cd antdx-demo
 $ npm run start
 ```
 
-Open the browser at http://localhost:3000/. It renders a header saying `Welcome to React` on the page.
+Your browser will open at http://localhost:3000/, and you should see a "Welcome to React" message if everything was successful.
 
-## Import antd
+## Importing @ant-design/x
 
-Below is the default directory structure.
+Here's the default directory structure created by create-react-app.
 
 ```
 ├── README.md
@@ -46,48 +46,44 @@ Below is the default directory structure.
 └── yarn.lock
 ```
 
-Now we install `antd` from yarn or npm or pnpm.
+Now, install and import `@ant-design/x` using yarn, npm, pnpm, or bun.
 
-<InstallDependencies npm='$ npm install antd --save' yarn='$ yarn add antd' pnpm='$ pnpm install antd --save' bun='$ bun add antd'></InstallDependencies>
+<InstallDependencies npm='$ npm install @ant-design/x --save' yarn='$ yarn add @ant-design/x' pnpm='$ pnpm install @ant-design/x --save' bun='$ bun add @ant-design/x'></InstallDependencies>
 
-Modify `src/App.js`, import Button component from `antd`.
+Modify `src/App.js` to include the `Bubble` component from `@ant-design/x`.
 
 ```tsx
 import React from 'react';
-import { Button } from 'antd';
+import { Bubble } from '@ant-design/x';
 
 const App: React.FC = () => (
   <div className="App">
-    <Button type="primary">Button</Button>
+    <Bubble content="Hello world!" />
   </div>
 );
 
 export default App;
 ```
 
-OK, you should now see a blue primary button displayed on the page. Next you can choose any components of `antd` to develop your application. Visit other workflows of `create-react-app` at its [User Guide](https://create-react-app.dev/docs/getting-started).
+Now, you should see the `Bubble` component from `@ant-design/x` on the page. You can continue building your application using other components. For more development processes, refer to the official [create-react-app documentation](https://create-react-app.dev/docs/getting-started).
 
-### Customize Theme
+### Custom Theme
 
-Ref to the [Customize Theme documentation](/docs/react/customize-theme). Modify theme with ConfigProvider:
+Refer to [Customize Theme](https://ant-design.antgroup.com/docs/react/customize-theme-cn) and use `XConfigProvider` for theme configuration:
 
 ```tsx
 import React from 'react';
-import { ConfigProvider } from 'antd';
+import { XConfigProvider } from '@ant-design/x';
 
 const App: React.FC = () => (
-  <ConfigProvider theme={{ token: { colorPrimary: '#00b96b' } }}>
+  <XConfigProvider theme={{ token: { colorPrimary: '#00b96b' } }}>
     <MyApp />
-  </ConfigProvider>
+  </XConfigProvider>
 );
 
 export default App;
 ```
 
-`antd` is written in TypeScript with complete definitions, try out and enjoy the property suggestion and typing check.
+`@ant-design/x` is written in TypeScript and provides complete type definitions, allowing you to enjoy component property suggestions and definition checks.
 
-![](https://gw.alipayobjects.com/zos/antfincdn/26L5vPoLug/8d7da796-175e-40af-8eea-e7031ba09f9f.png)
-
-> Don't install `@types/antd`.
-
-We are successfully running antd components now, go build your own application!
+Now that we've successfully run the `@ant-design/x` component, start building your application!

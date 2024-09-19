@@ -90,7 +90,7 @@ async function printLog() {
       type: 'list',
       name: 'toVersion',
       message: `🔀 Please choose branch to compare with ${chalk.magenta(fromVersion)}:`,
-      choices: ['master', '4.x-stable', '3.x-stable', 'feature', 'custom input ⌨️'],
+      choices: ['main', 'feature', 'custom input ⌨️'],
     },
   ]);
 

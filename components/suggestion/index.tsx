@@ -1,10 +1,11 @@
 import { Cascader, Flex } from 'antd';
-import classnames from 'classnames';
-import useStyle from './style';
-import React, { useState } from 'react';
-import useConfigContext from '../config-provider/useConfigContext';
 import type { CascaderProps } from 'antd';
+import classnames from 'classnames';
 import { useEvent, useMergedState } from 'rc-util';
+import React, { useState } from 'react';
+import mergeStyles from '../_util/merge-styles';
+import { useXConfig } from '../x-config-provider';
+import useStyle from './style';
 import useActive from './useActive';
 
 export type SuggestionItem = {
@@ -56,7 +57,7 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
   } = props;
 
   // ============================= MISC =============================
-  const { direction, getPrefixCls } = useConfigContext();
+  const { direction, getPrefixCls, suggestion } = useXConfig();
   const prefixCls = getPrefixCls('suggestion', customizePrefixCls);
   const itemCls = `${prefixCls}-item`;
 
@@ -143,11 +144,12 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
           rootClassName,
           className,
           prefixCls,
+          suggestion?.className,
           `${prefixCls}-wrapper`,
           hashId,
           cssVarCls,
         )}
-        style={style}
+        style={mergeStyles(style, suggestion?.style)}
       >
         {childNode}
       </div>

@@ -1,10 +1,10 @@
 import { genStyleUtils } from '@ant-design/cssinjs-utils';
 
+import { useXConfig } from '../x-config-provider';
 import { useInternalToken } from './useToken';
-import { useConfigContext } from '../config-provider';
 
-import type { AliasToken, SeedToken } from './cssinjs-utils';
 import type { ComponentTokenMap } from './components';
+import type { AliasToken, SeedToken } from './cssinjs-utils';
 
 export const { genStyleHooks, genComponentStyleHook, genSubStyleComponent } = genStyleUtils<
   ComponentTokenMap,
@@ -12,7 +12,7 @@ export const { genStyleHooks, genComponentStyleHook, genSubStyleComponent } = ge
   SeedToken
 >({
   usePrefix: () => {
-    const { getPrefixCls, iconPrefixCls } = useConfigContext();
+    const { getPrefixCls, iconPrefixCls } = useXConfig();
     return {
       iconPrefixCls,
       rootPrefixCls: getPrefixCls(),
@@ -23,7 +23,7 @@ export const { genStyleHooks, genComponentStyleHook, genSubStyleComponent } = ge
     return { theme, realToken, hashId, token, cssVar };
   },
   useCSP: () => {
-    const { csp } = useConfigContext();
+    const { csp } = useXConfig();
     return csp ?? {};
   },
   layer: {

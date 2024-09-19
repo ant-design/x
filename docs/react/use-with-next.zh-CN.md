@@ -6,53 +6,53 @@ title: 在 Next.js 中使用
 tag: Updated
 ---
 
-[Next.js](https://nextjs.org/) 是目前世界上最流行的 React 服务端同构框架，本文会尝试在 Next.js 创建的工程中使用 `antd` 组件。
+[Next.js](https://nextjs.org/) 是目前世界上最流行的 React 服务端同构框架，本文会尝试在 Next.js 创建的工程中使用 `@ant-design/x` 组件。
 
 ## 安装和初始化
 
 在开始之前，你可能需要安装 [yarn](https://github.com/yarnpkg/yarn/) 或者 [pnpm](https://pnpm.io/zh/) 或者 [bun](https://bun.sh/)。
 
-<InstallDependencies npm='$ npx create-next-app antd-demo' yarn='$ yarn create next-app antd-demo' pnpm='$ pnpm create next-app antd-demo' bun='$ bun create next-app antd-demo'></InstallDependencies>
+<InstallDependencies npm='$ npx create-next-app antdx-demo' yarn='$ yarn create next-app antdx-demo' pnpm='$ pnpm create next-app antdx-demo' bun='$ bun create next-app antdx-demo'></InstallDependencies>
 
 工具会自动初始化一个脚手架并安装项目的各种必要依赖，在安装过程中，有一些配置项需要自行选择，如果在过程中出现网络问题，请尝试配置代理，或使用其他 npm registry，例如，你可以切换到淘宝镜像源：`npm config set registry https://registry.npmmirror.com`。
 
 初始化完成后，我们进入项目并启动。
 
 ```bash
-$ cd antd-demo
+$ cd antdx-demo
 $ npm run dev
 ```
 
 此时使用浏览器访问 http://localhost:3000/ ，看到 NEXT 的 logo 就算成功了。
 
-## 引入 antd
+## 引入 @ant-design/x
 
-现在从 yarn 或 npm 或 pnpm 或 bun 安装并引入 antd。
+现在从 yarn 或 npm 或 pnpm 或 bun 安装并引入 @ant-design/x。
 
-<InstallDependencies npm='$ npm install antd --save' yarn='$ yarn add antd' pnpm='$ pnpm install antd --save' bun='$ bun add antd'></InstallDependencies>
+<InstallDependencies npm='$ npm install @ant-design/x --save' yarn='$ yarn add @ant-design/x' pnpm='$ pnpm install @ant-design/x --save' bun='$ bun add @ant-design/x'></InstallDependencies>
 
-修改 `src/app/page.tsx`，引入 antd 的按钮组件。
+修改 `src/app/page.tsx`，引入 @ant-design/x 的气泡组件。
 
 ```tsx
 import React from 'react';
-import { Button } from 'antd';
+import { Bubble } from '@ant-design/x';
 
 const Home = () => (
   <div className="App">
-    <Button type="primary">Button</Button>
+    <Bubble content="Hello world!" />
   </div>
 );
 
 export default Home;
 ```
 
-好了，现在你应该能看到页面上已经有了 `antd` 的蓝色按钮组件，接下来就可以继续选用其他组件开发应用了。其他开发流程你可以参考 Next.js 的[官方文档](https://nextjs.org/)。
+好了，现在你应该能看到页面上已经有了 `@ant-design/x` 的气泡组件，接下来就可以继续选用其他组件开发应用了。其他开发流程你可以参考 Next.js 的[官方文档](https://nextjs.org/)。
 
-细心的朋友可以发现这时引入的 antd 组件在首屏并没有样式，下面就需要根据 Next.js 的模式来选择不同的 SSR 样式处理方式。
+细心的朋友可以发现这时引入的 @ant-design/x 组件在首屏并没有样式，下面就需要根据 Next.js 的模式来选择不同的 SSR 样式处理方式。
 
 ## 使用 App Router <Badge>Updated</Badge>
 
-如果你在 Next.js 当中使用了 App Router, 并使用 antd 作为页面组件库，为了让 antd 组件库在你的 Next.js 应用中能够更好的工作，提供更好的用户体验，你可以尝试使用下面的方式将 antd 首屏样式按需抽离并植入到 HTML 中，以避免页面闪动的情况。
+如果你在 Next.js 当中使用了 App Router, 并使用 @ant-design/x 作为页面组件库，为了让 @ant-design/x 组件库在你的 Next.js 应用中能够更好的工作，提供更好的用户体验，你可以尝试使用下面的方式将 @ant-design/x 首屏样式按需抽离并植入到 HTML 中，以避免页面闪动的情况。
 
 1. 安装 `@ant-design/nextjs-registry`
 
@@ -84,13 +84,13 @@ export default RootLayout;
 
 ## 使用 Pages Router
 
-如果你在 Next.js 当中使用了 Pages Router, 并使用 antd 作为页面组件库，为了让 antd 组件库在你的 Next.js 应用中能够更好的工作，提供更好的用户体验，你可以尝试使用下面的方式将 antd 首屏样式按需抽离并植入到 HTML 中，以避免页面闪动的情况。
+如果你在 Next.js 当中使用了 Pages Router, 并使用 @ant-design/x 作为页面组件库，为了让 @ant-design/x 组件库在你的 Next.js 应用中能够更好的工作，提供更好的用户体验，你可以尝试使用下面的方式将 @ant-design/x 首屏样式按需抽离并植入到 HTML 中，以避免页面闪动的情况。
 
 1. 安装 `@ant-design/cssinjs`
 
 > 开发者注意事项：
 >
-> 请注意，安装 `@ant-design/cssinjs` 时必须确保版本号跟 `antd` 本地的 `node_modules` 中的 `@ant-design/cssinjs` 版本保持一致，否则会出现多个 React 实例，导致无法正确的读取 ctx。（Tips: 你可以通过 `npm ls @ant-design/cssinjs` 命令查看本地版本）
+> 请注意，安装 `@ant-design/cssinjs` 时必须确保版本号跟 `@ant-design/x` 本地的 `node_modules` 中的 `@ant-design/cssinjs` 版本保持一致，否则会出现多个 React 实例，导致无法正确的读取 ctx。（Tips: 你可以通过 `npm ls @ant-design/cssinjs` 命令查看本地版本）
 >
 > <img width="514" alt="image" src="https://github.com/ant-design/ant-design/assets/49217418/aad6e9e2-62cc-4c89-a0b6-38c592e3c648">
 
@@ -162,29 +162,29 @@ export default theme;
 
 ```tsx
 import React from 'react';
-import { ConfigProvider } from 'antd';
+import { XConfigProvider } from '@ant-design/x';
 import type { AppProps } from 'next/app';
 
 import theme from './theme/themeConfig';
 
 const App = ({ Component, pageProps }: AppProps) => (
-  <ConfigProvider theme={theme}>
+  <XConfigProvider theme={theme}>
     <Component {...pageProps} />
-  </ConfigProvider>
+  </XConfigProvider>
 );
 
 export default App;
 ```
 
-5. 在页面中使用 antd
+5. 在页面中使用 @ant-design/x
 
 ```tsx
 import React from 'react';
-import { Button } from 'antd';
+import { Bubble } from '@ant-design/x';
 
 const Home = () => (
   <div className="App">
-    <Button type="primary">Button</Button>
+    <Bubble content="Hello world!" />
   </div>
 );
 

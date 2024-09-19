@@ -6,7 +6,8 @@ import {
   ExperimentFilled,
   ExperimentOutlined,
 } from '@ant-design/icons';
-import { ConfigProvider, Tooltip } from 'antd';
+import { XConfigProvider } from '@ant-design/x';
+import { Tooltip } from 'antd';
 import classNames from 'classnames';
 import { DumiDemoGrid, FormattedMessage } from 'dumi';
 import React, { useContext } from 'react';
@@ -108,9 +109,9 @@ const DemoWrapper: typeof DumiDemoGrid = ({ items }) => {
           )}
         </Tooltip>
       </span>
-      <ConfigProvider theme={{ cssVar: enableCssVar, hashed: !enableCssVar }}>
+      <XConfigProvider theme={{ cssVar: enableCssVar, hashed: !enableCssVar }}>
         <DumiDemoGrid items={demos} />
-      </ConfigProvider>
+      </XConfigProvider>
     </div>
   );
 };
