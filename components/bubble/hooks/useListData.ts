@@ -2,6 +2,8 @@ import * as React from 'react';
 import type { BubbleDataType, BubbleListProps } from '../BubbleList';
 import type { BubbleProps } from '../interface';
 
+export type ListItemType = ReturnType<typeof useListData>[number];
+
 export default function useListData(
   items: BubbleListProps['items'],
   roles?: BubbleListProps['roles'],

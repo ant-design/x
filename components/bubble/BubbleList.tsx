@@ -8,6 +8,7 @@ import type { BubbleRef } from './Bubble';
 import useListData from './hooks/useListData';
 import type { BubbleProps } from './interface';
 import useStyle from './style';
+import useDisplayData from './hooks/useDisplayData';
 
 export interface BubbleListRef {
   nativeElement: HTMLDivElement;
@@ -77,19 +78,7 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   // ============================= Data =============================
   const mergedData = useListData(items, roles);
 
-  // ========================= Display Data =========================
-  const [displayIndex, setDisplayIndex] = React.useState(mergedData.length - 1);
-
-  const displayData = React.useMemo(() => {
-    return mergedData.slice(0, displayIndex + 1);
-  }, [displayIndex, mergedData]);
-
-  const onInternalTypingComplete = (key: string | number) => {
-    const index = displayData.findIndex((dataItem) => dataItem.key === key);
-    if (index === displayData.length - 1) {
-      setDisplayIndex((c) => c + 1);
-    }
-  };
+  const [displayData, onTypingComplete] = useDisplayData(mergedData);
 
   // ============================ Scroll ============================
   // Is current scrollTop at the end. User scroll will make this false.
@@ -202,7 +191,7 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
             typing={initialized ? bubble.typing : false}
             onTypingComplete={() => {
               bubble.onTypingComplete?.();
-              onInternalTypingComplete(key);
+              onTypingComplete(key);
             }}
           />
         ))}
