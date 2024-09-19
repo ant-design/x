@@ -49,9 +49,7 @@ describe('useXAgent', () => {
       <Demo
         defaultMessages={[
           {
-            id: 'default',
             message: 'default',
-            status: 'success',
           },
         ]}
       />,
@@ -59,9 +57,9 @@ describe('useXAgent', () => {
 
     expect(getMessages(container)).toEqual([
       {
-        id: 'default',
+        id: 'default_0',
         message: 'default',
-        status: 'success',
+        status: 'local',
       },
     ]);
   });

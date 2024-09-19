@@ -7,7 +7,7 @@ export type SimpleType = string | number | boolean | object;
 export type MessageStatus = 'local' | 'loading' | 'success' | 'error';
 
 export interface XAgentConfig<Message> {
-  defaultMessages?: MessageInfo<Message>[];
+  defaultMessages?: DefaultMessageInfo<Message>[];
 
   request: (
     message: Message,
@@ -36,6 +36,9 @@ export interface MessageInfo<Message> {
   message: Message;
   status: MessageStatus;
 }
+
+export type DefaultMessageInfo<Message> = Pick<MessageInfo<Message>, 'message'> &
+  Partial<Omit<MessageInfo<Message>, 'message'>>;
 
 export type RequestResultObject<Message> = {
   message: Message | Message[];
@@ -84,8 +87,12 @@ export default function useXAgent<Message extends SimpleType>(config: XAgentConf
   const { defaultMessages, request, requestFallback, requestPlaceholder } = config;
 
   const [requesting, setRequesting] = React.useState(false);
-  const [messages, setMessages, getMessages] = useSyncState<MessageInfo<Message>[]>(
-    defaultMessages || [],
+  const [messages, setMessages, getMessages] = useSyncState<MessageInfo<Message>[]>(() =>
+    (defaultMessages || []).map((info, index) => ({
+      id: `default_${index}`,
+      status: 'local',
+      ...info,
+    })),
   );
 
   const idRef = React.useRef(0);

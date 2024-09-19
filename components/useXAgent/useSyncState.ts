@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function useSyncState<T>(defaultValue: T) {
+export default function useSyncState<T>(defaultValue: T | (() => T)) {
   const [state, setState] = React.useState(defaultValue);
 
   const stateRef = React.useRef(state);
