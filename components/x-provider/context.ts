@@ -10,7 +10,7 @@ import type { SenderProps } from '../sender';
 import type { SuggestionProps } from '../suggestion';
 import type { ThoughtChainProps } from '../thought-chain';
 
-interface DefaultXComponentConfig {
+export interface DefaultXComponentConfig {
   classNames: Record<string, string>;
   styles: Record<string, React.CSSProperties>;
   className: string;
@@ -29,9 +29,7 @@ type DefaultPickType = keyof DefaultXComponentConfig;
 type ComponentStyleConfig<
   CompProps extends AnyObject,
   PickType extends keyof CompProps = DefaultPickType,
-> = AntdComponentStyleConfig &
-  Pick<CompProps, PickType> &
-  Required<Pick<CompProps, DefaultPickType>>;
+> = AntdComponentStyleConfig & Pick<CompProps, PickType | DefaultPickType>;
 
 export interface XComponentsConfig {
   bubble?: ComponentStyleConfig<BubbleProps>;
