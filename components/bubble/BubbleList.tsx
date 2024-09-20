@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { useEvent } from 'rc-util';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import * as React from 'react';
-import { useXProvider } from '../x-provider';
+import { useXProviderContext } from '../x-provider';
 import Bubble, { BubbleContext } from './Bubble';
 import type { BubbleRef } from './Bubble';
 import useListData from './hooks/useListData';
@@ -57,7 +57,7 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   const bubbleRefs = React.useRef<Record<string, BubbleRef>>({});
 
   // ============================ Prefix ============================
-  const { getPrefixCls } = useXProvider();
+  const { getPrefixCls } = useXProviderContext();
 
   const prefixCls = getPrefixCls('bubble', customizePrefixCls);
   const listPrefixCls = `${prefixCls}-list`;

@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
 
-import { useXProvider } from '../x-provider';
+import { useXProviderContext } from '../x-provider';
 import useCollapsible from './hooks/useCollapsible';
 import useStyle from './style';
 
@@ -80,14 +80,14 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
   });
 
   // ============================ Prefix ============================
-  const { getPrefixCls, direction } = useXProvider();
+  const { getPrefixCls, direction } = useXProviderContext();
 
   const rootPrefixCls = getPrefixCls();
 
   const prefixCls = getPrefixCls('thought-chain', customizePrefixCls);
 
   // ===================== Component Config =========================
-  const compConfig = useXComponentConfig('thoughtChain');
+  const contextConfig = useXComponentConfig('thoughtChain');
 
   // ============================ UseCollapsible ============================
   const [enableCollapse, expandedKeys, onItemExpand, collapseMotion] = useCollapsible(
@@ -103,7 +103,7 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
     className,
     rootClassName,
     prefixCls,
-    compConfig.className,
+    contextConfig.className,
     hashId,
     cssVarCls,
     {
@@ -114,7 +114,7 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
 
   // ============================ Render ============================
   return wrapCSSVar(
-    <div {...domProps} className={mergedCls} style={{ ...compConfig.style, ...style }}>
+    <div {...domProps} className={mergedCls} style={{ ...contextConfig.style, ...style }}>
       <ThoughtChainNodeContext.Provider
         value={{
           prefixCls,
@@ -123,22 +123,22 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
           expandedKeys,
           direction,
           classNames: {
-            itemHeader: classnames(compConfig.classNames?.itemHeader, classNames.itemHeader),
-            itemContent: classnames(compConfig.classNames?.itemContent, classNames.itemContent),
-            itemFooter: classnames(compConfig.classNames?.itemFooter, classNames.itemFooter),
+            itemHeader: classnames(contextConfig.classNames.itemHeader, classNames.itemHeader),
+            itemContent: classnames(contextConfig.classNames.itemContent, classNames.itemContent),
+            itemFooter: classnames(contextConfig.classNames.itemFooter, classNames.itemFooter),
           },
           styles: {
-            itemHeader: { ...compConfig.styles?.itemHeader, ...styles.itemHeader },
-            itemContent: { ...compConfig.styles?.itemContent, ...styles.itemContent },
-            itemFooter: { ...compConfig.styles?.itemFooter, ...styles.itemFooter },
+            itemHeader: { ...contextConfig.styles.itemHeader, ...styles.itemHeader },
+            itemContent: { ...contextConfig.styles.itemContent, ...styles.itemContent },
+            itemFooter: { ...contextConfig.styles.itemFooter, ...styles.itemFooter },
           },
         }}
       >
         {items?.map((item, index) => (
           <ThoughtChainNode
             key={item.key || `key_${index}`}
-            className={classnames(compConfig.classNames?.item, classNames.item)}
-            style={{ ...compConfig.styles?.item, ...styles.item }}
+            className={classnames(contextConfig.classNames.item, classNames.item)}
+            style={{ ...contextConfig.styles.item, ...styles.item }}
             info={{
               ...item,
               icon: item.icon || index + 1,

@@ -6,7 +6,7 @@ import pickAttrs from 'rc-util/lib/pickAttrs';
 import getValue from 'rc-util/lib/utils/get';
 import React from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
-import { useXProvider } from '../x-provider';
+import { useXProviderContext } from '../x-provider';
 import { ActionButtonContext } from './components/ActionButton';
 import ClearButton from './components/ClearButton';
 import LoadingButton from './components/LoadingButton';
@@ -88,7 +88,7 @@ const Sender: React.FC<SenderProps> = (props) => {
   } = props;
 
   // ============================= MISC =============================
-  const { direction, getPrefixCls } = useXProvider();
+  const { direction, getPrefixCls } = useXProviderContext();
   const prefixCls = getPrefixCls('sender', customizePrefixCls);
 
   const domProps = pickAttrs(rest, {
@@ -98,13 +98,13 @@ const Sender: React.FC<SenderProps> = (props) => {
   });
 
   // ===================== Component Config =========================
-  const compConfig = useXComponentConfig('sender');
+  const contextConfig = useXComponentConfig('sender');
 
   // ============================ Styles ============================
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
   const mergedCls = classnames(
     prefixCls,
-    compConfig.className,
+    contextConfig.className,
     className,
     rootClassName,
     hashId,
@@ -192,11 +192,15 @@ const Sender: React.FC<SenderProps> = (props) => {
 
   // ============================ Render ============================
   return wrapCSSVar(
-    <div className={mergedCls} style={{ ...compConfig.style, ...style }}>
+    <div className={mergedCls} style={{ ...contextConfig.style, ...style }}>
       <InputTextArea
         {...domProps}
-        style={{ ...compConfig.styles?.input, ...styles.input }}
-        className={classnames(`${prefixCls}-input`, compConfig.classNames?.input, classNames.input)}
+        style={{ ...contextConfig.styles.input, ...styles.input }}
+        className={classnames(
+          `${prefixCls}-input`,
+          contextConfig.classNames.input,
+          classNames.input,
+        )}
         autoSize={{ maxRows: 8 }}
         value={innerValue}
         onChange={(e) => {
@@ -211,10 +215,10 @@ const Sender: React.FC<SenderProps> = (props) => {
       <div
         className={classnames(
           `${prefixCls}-actions-list`,
-          compConfig.classNames?.actions,
+          contextConfig.classNames.actions,
           classNames.actions,
         )}
-        style={{ ...compConfig.styles?.actions, ...styles.actions }}
+        style={{ ...contextConfig.styles.actions, ...styles.actions }}
       >
         <ActionButtonContext.Provider
           value={{

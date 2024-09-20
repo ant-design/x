@@ -1,6 +1,6 @@
 import { genStyleUtils } from '@ant-design/cssinjs-utils';
 
-import { useXProvider } from '../x-provider';
+import { useXProviderContext } from '../x-provider';
 import { useInternalToken } from './useToken';
 
 import type { ComponentTokenMap } from './components';
@@ -12,7 +12,7 @@ export const { genStyleHooks, genComponentStyleHook, genSubStyleComponent } = ge
   SeedToken
 >({
   usePrefix: () => {
-    const { getPrefixCls, iconPrefixCls } = useXProvider();
+    const { getPrefixCls, iconPrefixCls } = useXProviderContext();
     return {
       iconPrefixCls,
       rootPrefixCls: getPrefixCls(),
@@ -23,7 +23,7 @@ export const { genStyleHooks, genComponentStyleHook, genSubStyleComponent } = ge
     return { theme, realToken, hashId, token, cssVar };
   },
   useCSP: () => {
-    const { csp } = useXProvider();
+    const { csp } = useXProviderContext();
     return csp ?? {};
   },
   layer: {

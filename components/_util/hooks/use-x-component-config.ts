@@ -1,5 +1,5 @@
 import React from 'react';
-import XProviderContext from '../../x-provider/context';
+import XProviderContext, { defaultXComponentConfig } from '../../x-provider/context';
 
 import type { XComponentsConfig } from '../../x-provider/context';
 
@@ -8,7 +8,13 @@ const useXComponentConfig = <C extends keyof XComponentsConfig>(
 ): Required<XComponentsConfig>[C] => {
   const xProviderContext = React.useContext(XProviderContext);
 
-  return xProviderContext[component] || {};
+  return React.useMemo(
+    () => ({
+      ...defaultXComponentConfig,
+      ...xProviderContext[component],
+    }),
+    [xProviderContext[component]],
+  );
 };
 
 export default useXComponentConfig;

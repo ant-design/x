@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Avatar } from 'antd';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
-import { useXProvider } from '../x-provider';
+import { useXProviderContext } from '../x-provider';
 import useTypedEffect from './hooks/useTypedEffect';
 import useTypingConfig from './hooks/useTypingConfig';
 import type { BubbleProps } from './interface';
@@ -47,12 +47,12 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
   }));
 
   // ============================ Prefix ============================
-  const { direction, getPrefixCls } = useXProvider();
+  const { direction, getPrefixCls } = useXProviderContext();
 
   const prefixCls = getPrefixCls('bubble', customizePrefixCls);
 
   // ===================== Component Config =========================
-  const compConfig = useXComponentConfig('bubble');
+  const contextConfig = useXComponentConfig('bubble');
 
   // ============================ Typing ============================
   const [typingEnabled, typingStep, typingInterval] = useTypingConfig(typing);
@@ -74,7 +74,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
   const mergedCls = classnames(
     prefixCls,
     rootClassName,
-    compConfig.className,
+    contextConfig.className,
     className,
     hashId,
     cssVarCls,
@@ -95,7 +95,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
   return wrapCSSVar(
     <div
       style={{
-        ...compConfig.style,
+        ...contextConfig.style,
         ...style,
       }}
       className={mergedCls}
@@ -106,12 +106,12 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
       {avatar && (
         <div
           style={{
-            ...compConfig.styles?.avatar,
+            ...contextConfig.styles.avatar,
             ...styles.avatar,
           }}
           className={classnames(
             `${prefixCls}-avatar`,
-            compConfig.classNames?.avatar,
+            contextConfig.classNames.avatar,
             classNames.avatar,
           )}
         >
@@ -122,12 +122,12 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
       {/* Content */}
       <div
         style={{
-          ...compConfig.styles?.content,
+          ...contextConfig.styles.content,
           ...styles.content,
         }}
         className={classnames(
           `${prefixCls}-content`,
-          compConfig.classNames?.content,
+          contextConfig.classNames.content,
           classNames.content,
         )}
       >

@@ -2,7 +2,7 @@ import { ConfigProvider as AntdConfigProvider } from 'antd';
 import React from 'react';
 
 import XProviderContext from './context';
-import useXProvider, { defaultPrefixCls } from './hooks/use-x-provider';
+import useXProviderContext, { defaultPrefixCls } from './hooks/use-x-provider';
 
 import type { ConfigProviderProps as AntdConfigProviderProps } from 'antd/es/config-provider';
 import type { XProviderProps } from './context';
@@ -33,7 +33,7 @@ const XProvider: React.FC<XProviderProps & AntdConfigProviderProps> = (props) =>
   );
 };
 
-export { useXProvider, defaultPrefixCls };
+export { useXProviderContext, defaultPrefixCls };
 
 export type { XProviderProps };
 

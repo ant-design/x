@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { useEvent, useMergedState } from 'rc-util';
 import React, { useState } from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
-import { useXProvider } from '../x-provider';
+import { useXProviderContext } from '../x-provider';
 import useStyle from './style';
 import useActive from './useActive';
 
@@ -35,6 +35,8 @@ export interface SuggestionProps<T = any> {
   items: SuggestionItem[] | ((info?: T) => SuggestionItem[]);
   onSelect?: (value: string) => void;
   block?: boolean;
+  styles?: Partial<Record<string, React.CSSProperties>>;
+  classNames?: Partial<Record<string, string>>;
 }
 
 function Suggestion<T = any>(props: SuggestionProps<T>) {
@@ -52,14 +54,14 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
   } = props;
 
   // ============================= MISC =============================
-  const { direction, getPrefixCls } = useXProvider();
+  const { direction, getPrefixCls } = useXProviderContext();
   const prefixCls = getPrefixCls('suggestion', customizePrefixCls);
   const itemCls = `${prefixCls}-item`;
 
   const isRTL = direction === 'rtl';
 
   // ===================== Component Config =========================
-  const compConfig = useXComponentConfig('suggestion');
+  const contextConfig = useXComponentConfig('suggestion');
 
   // ============================ Styles ============================
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
@@ -140,7 +142,7 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
       <div
         className={classnames(
           prefixCls,
-          compConfig.className,
+          contextConfig.className,
           rootClassName,
           className,
           `${prefixCls}-wrapper`,
@@ -148,7 +150,7 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
           cssVarCls,
         )}
         style={{
-          ...compConfig.style,
+          ...contextConfig.style,
           ...style,
         }}
       >
