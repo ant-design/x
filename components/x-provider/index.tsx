@@ -2,7 +2,7 @@ import { ConfigProvider as AntdConfigProvider } from 'antd';
 import React from 'react';
 
 import XProviderContext from './context';
-import useXProviderContext, { defaultPrefixCls } from './hooks/use-x-provider';
+import useXProviderContext, { defaultPrefixCls } from './hooks/use-x-provider-context';
 
 import type { ConfigProviderProps as AntdConfigProviderProps } from 'antd/es/config-provider';
 import type { XProviderProps } from './context';
