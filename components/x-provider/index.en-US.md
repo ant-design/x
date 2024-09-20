@@ -35,4 +35,15 @@ If you are already using `ConfigProvider` from `antd`, please make the following
 
 ## API
 
-Props ref：[Antd ConfigProvider](https://ant-design.antgroup.com/components/config-provider-cn#api)
+`XProvider` fully extends `antd`'s `ConfigProvider`. Props ref：[Antd ConfigProvider](https://ant-design.antgroup.com/components/config-provider-cn#api)
+
+### Component Config
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| bubble | Global configuration for the Bubble component | 'classNames' \| 'styles' \| 'className' \| 'style' | - |  |
+| conversations | Global configuration for the Conversations component | 'classNames' \| 'styles' \| 'className' \| 'style' | - |  |
+| prompts | Global configuration for the Prompts component | 'classNames' \| 'styles' \| 'className' \| 'style' | - |  |
+| sender | Global configuration for the Sender component | 'classNames' \| 'styles' \| 'className' \| 'style' | - |  |
+| suggestion | Global configuration for the Suggestion component | 'className' \| 'style' | - |  |
+| thoughtChain | Global configuration for the ThoughtChain component | 'classNames' \| 'styles' \| 'className' \| 'style' | - |  |
