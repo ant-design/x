@@ -1,7 +1,7 @@
 import { ConfigProvider } from 'antd';
 import React from 'react';
 
-import XConfigContext from '../context';
+import XProviderContext from '../context';
 
 export const defaultPrefixCls = 'ant';
 
@@ -10,14 +10,14 @@ function useXProvider() {
     ConfigProvider.ConfigContext,
   );
 
-  const xContext = React.useContext(XConfigContext);
+  const xProviderContext = React.useContext(XProviderContext);
 
   return {
     getPrefixCls,
     direction,
     csp,
     iconPrefixCls,
-    ...xContext,
+    ...xProviderContext,
   };
 }
 

@@ -3,7 +3,7 @@ import type { CascaderProps } from 'antd';
 import classnames from 'classnames';
 import { useEvent, useMergedState } from 'rc-util';
 import React, { useState } from 'react';
-import mergeStyles from '../_util/merge-styles';
+import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProvider } from '../x-provider';
 import useStyle from './style';
 import useActive from './useActive';
@@ -37,17 +37,12 @@ export interface SuggestionProps<T = any> {
   block?: boolean;
 }
 
-// React.FC<
-//   SuggestionProps & Pick<InputProps, 'placeholder'> & Pick<TooltipProps, 'placement'>
-// >
-
 function Suggestion<T = any>(props: SuggestionProps<T>) {
   const {
     prefixCls: customizePrefixCls,
     className,
     rootClassName,
     style,
-
     children,
     open,
     onOpenChange,
@@ -57,11 +52,14 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
   } = props;
 
   // ============================= MISC =============================
-  const { direction, getPrefixCls, suggestion } = useXProvider();
+  const { direction, getPrefixCls } = useXProvider();
   const prefixCls = getPrefixCls('suggestion', customizePrefixCls);
   const itemCls = `${prefixCls}-item`;
 
   const isRTL = direction === 'rtl';
+
+  // ===================== Component Config =========================
+  const compConfig = useXComponentConfig('suggestion');
 
   // ============================ Styles ============================
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
@@ -141,15 +139,18 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
     >
       <div
         className={classnames(
+          prefixCls,
+          compConfig.className,
           rootClassName,
           className,
-          prefixCls,
-          suggestion?.className,
           `${prefixCls}-wrapper`,
           hashId,
           cssVarCls,
         )}
-        style={mergeStyles(style, suggestion?.style)}
+        style={{
+          ...compConfig.style,
+          ...style,
+        }}
       >
         {childNode}
       </div>

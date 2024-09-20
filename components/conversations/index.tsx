@@ -6,7 +6,7 @@ import GroupTitle, { GroupTitleContext } from './GroupTitle';
 import ConversationsItem, { type ConversationsItemProps } from './Item';
 
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
-import mergeStyles from '../_util/merge-styles';
+import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProvider } from '../x-provider';
 import useGroupable from './hooks/useGroupable';
 
@@ -116,20 +116,23 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
   const [groupList, enableGroup] = useGroupable(groupable, items);
 
   // ============================ Prefix ============================
-  const { getPrefixCls, direction, conversations } = useXProvider();
+  const { getPrefixCls, direction } = useXProvider();
 
   const prefixCls = getPrefixCls('conversations', customizePrefixCls);
+
+  // ===================== Component Config =========================
+  const compConfig = useXComponentConfig('conversations');
 
   // ============================ Style ============================
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
 
   const mergedCls = classnames(
+    prefixCls,
+    compConfig.className,
     className,
     rootClassName,
-    prefixCls,
     hashId,
     cssVarCls,
-    conversations?.className,
     {
       [`${prefixCls}-rtl`]: direction === 'rtl',
     },
@@ -146,7 +149,14 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
 
   // ============================ Render ============================
   return wrapCSSVar(
-    <ul {...domProps} style={mergeStyles(style, conversations?.style)} className={mergedCls}>
+    <ul
+      {...domProps}
+      style={{
+        ...compConfig.style,
+        ...style,
+      }}
+      className={mergedCls}
+    >
       {groupList.map((groupInfo, groupIndex) => {
         const convItems = groupInfo.data.map((convInfo: Conversation, convIndex: number) => (
           <ConversationsItem
@@ -154,8 +164,8 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
             info={convInfo}
             prefixCls={prefixCls}
             direction={direction}
-            className={classnames(classNames.item, conversations?.classNames?.item)}
-            style={mergeStyles(styles.item, conversations?.styles?.item)}
+            className={classnames(classNames.item, compConfig.classNames?.item)}
+            style={{ ...compConfig.styles?.item, ...styles.item }}
             menu={typeof menu === 'function' ? menu(convInfo) : menu}
             active={mergedActiveKey === convInfo.key}
             onClick={onConversationItemClick}

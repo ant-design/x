@@ -14,13 +14,17 @@ type ComponentStyleConfig<
   PickType extends keyof CompProps = any,
 > = AntdComponentStyleConfig & Pick<CompProps, PickType>;
 
-export interface XProviderProps {
+export interface XComponentsConfig {
   bubble?: ComponentStyleConfig<BubbleProps, 'classNames' | 'styles'>;
   conversations?: ComponentStyleConfig<ConversationsProps, 'classNames' | 'styles'>;
   prompts?: ComponentStyleConfig<PromptsProps, 'styles' | 'classNames'>;
   sender?: ComponentStyleConfig<SenderProps, 'styles' | 'classNames'>;
   suggestion?: ComponentStyleConfig<SuggestionProps>;
   thoughtChain?: ComponentStyleConfig<ThoughtChainProps, 'styles' | 'classNames'>;
+}
+
+export interface XProviderProps extends XComponentsConfig {
+  // Non-component config props
 }
 
 const XProviderContext = React.createContext<XProviderProps>({});

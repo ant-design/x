@@ -2,7 +2,7 @@ import { Button, Typography } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
 
-import mergeStyles from '../_util/merge-styles';
+import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProvider } from '../x-provider';
 
 import useStyle from './style';
@@ -85,20 +85,23 @@ const Prompts: React.FC<PromptsProps> = (props) => {
   } = props;
 
   // ============================ PrefixCls ============================
-  const { getPrefixCls, direction, prompts } = useXProvider();
+  const { getPrefixCls, direction } = useXProvider();
 
   const prefixCls = getPrefixCls('prompts', customizePrefixCls);
+
+  // ===================== Component Config =========================
+  const compConfig = useXComponentConfig('prompts');
 
   // ============================ Style ============================
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
 
   const mergedCls = classnames(
+    prefixCls,
+    compConfig.className,
     className,
     rootClassName,
-    prefixCls,
     hashId,
     cssVarCls,
-    prompts?.className,
     {
       [`${prefixCls}-rtl`]: direction === 'rtl',
     },
@@ -106,38 +109,42 @@ const Prompts: React.FC<PromptsProps> = (props) => {
 
   const mergedListCls = classnames(
     `${prefixCls}-list`,
+    compConfig.classNames?.list,
     classNames.list,
-    prompts?.classNames?.list,
     { [`${prefixCls}-list-wrap`]: wrap },
     { [`${prefixCls}-list-vertical`]: vertical },
   );
 
   // ============================ Render ============================
   return wrapCSSVar(
-    <div {...htmlProps} className={mergedCls} style={mergeStyles(style, prompts?.style)}>
+    <div {...htmlProps} className={mergedCls} style={{ ...style, ...compConfig.style }}>
       {/* Title */}
       {title && (
         <Typography.Title
           level={5}
-          className={classnames(`${prefixCls}-title`, classNames.title, prompts?.classNames?.title)}
-          style={mergeStyles(styles.title, prompts?.styles?.title)}
+          className={classnames(
+            `${prefixCls}-title`,
+            compConfig.classNames?.title,
+            classNames.title,
+          )}
+          style={{ ...compConfig.styles?.title, ...styles.title }}
         >
           {title}
         </Typography.Title>
       )}
       {/* Prompt List */}
-      <ul className={mergedListCls} style={mergeStyles(styles?.list, prompts?.styles?.list)}>
+      <ul className={mergedListCls} style={{ ...compConfig.styles?.list, ...styles.list }}>
         {items?.map((info, index) => (
           <li key={info.key || `key_${index}`}>
             {/* Prompt Item */}
             <Button
               type={info.disabled ? 'default' : 'text'}
-              style={mergeStyles(styles.item, prompts?.styles?.item)}
+              style={{ ...compConfig.styles?.item, ...styles.item }}
               disabled={info.disabled}
               className={classnames(
                 `${prefixCls}-item`,
+                compConfig.classNames?.item,
                 classNames.item,
-                prompts?.classNames?.item,
               )}
               onClick={() => onItemClick?.({ data: info })}
             >
@@ -147,10 +154,10 @@ const Prompts: React.FC<PromptsProps> = (props) => {
               <div
                 className={classnames(
                   `${prefixCls}-content`,
+                  compConfig.classNames?.itemContent,
                   classNames.itemContent,
-                  prompts?.classNames?.itemContent,
                 )}
-                style={mergeStyles(styles.itemContent, prompts?.styles?.itemContent)}
+                style={{ ...compConfig.styles?.itemContent, ...styles.itemContent }}
               >
                 {/* Label */}
                 {info.label && (

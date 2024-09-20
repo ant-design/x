@@ -11,21 +11,23 @@ const XProvider: React.FC<XProviderProps & AntdConfigProviderProps> = (props) =>
   const { bubble, conversations, prompts, sender, suggestion, thoughtChain, ...antdConfProps } =
     props;
 
+  const xProviderProps = React.useMemo(() => {
+    return {
+      bubble,
+      conversations,
+      prompts,
+      sender,
+      suggestion,
+      thoughtChain,
+    };
+  }, [bubble, conversations, prompts, sender, suggestion, thoughtChain]);
+
   return (
-    <XProviderContext.Provider
-      value={{
-        bubble,
-        conversations,
-        prompts,
-        sender,
-        suggestion,
-        thoughtChain,
-      }}
-    >
+    <XProviderContext.Provider value={xProviderProps}>
       <AntdConfigProvider
         {...antdConfProps}
         // antdx enable cssVar by default, and antd v6 will enable cssVar by default
-        theme={{ ...(antdConfProps?.theme || {}), cssVar: true }}
+        theme={{ cssVar: true, ...antdConfProps?.theme }}
       />
     </XProviderContext.Provider>
   );
