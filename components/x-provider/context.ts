@@ -1,7 +1,5 @@
 import React from 'react';
 
-import type { ComponentStyleConfig as AntdComponentStyleConfig } from 'antd/es/config-provider/context';
-
 import type { AnyObject } from '../_util/type';
 import type { BubbleProps } from '../bubble';
 import type { ConversationsProps } from '../conversations';
@@ -10,26 +8,19 @@ import type { SenderProps } from '../sender';
 import type { SuggestionProps } from '../suggestion';
 import type { ThoughtChainProps } from '../thought-chain';
 
-export interface DefaultXComponentConfig {
+export interface XComponentStyleConfig {
   classNames: Record<string, string>;
   styles: Record<string, React.CSSProperties>;
   className: string;
   style: React.CSSProperties;
 }
 
-export const defaultXComponentConfig: DefaultXComponentConfig = {
-  classNames: {},
-  styles: {},
-  className: '',
-  style: {},
-};
-
-type DefaultPickType = keyof DefaultXComponentConfig;
+type DefaultPickType = keyof XComponentStyleConfig;
 
 type ComponentStyleConfig<
   CompProps extends AnyObject,
   PickType extends keyof CompProps = DefaultPickType,
-> = AntdComponentStyleConfig & Pick<CompProps, PickType | DefaultPickType>;
+> = Pick<CompProps, PickType | DefaultPickType>;
 
 export interface XComponentsConfig {
   bubble?: ComponentStyleConfig<BubbleProps>;
