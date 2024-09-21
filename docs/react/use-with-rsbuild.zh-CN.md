@@ -6,7 +6,7 @@ title: 在 Rsbuild 中使用
 tag: New
 ---
 
-[Rsbuild](https://rsbuild.dev/zh) 由 Rspack 驱动的构建工具，本文会尝试使用 `Rsbuild` 创建一个项目，并引入 antd。
+[Rsbuild](https://rsbuild.dev/zh) 由 Rspack 驱动的构建工具，本文会尝试使用 `Rsbuild` 创建一个项目，并引入 @ant-design/x。
 
 ## 安装和初始化
 
@@ -27,28 +27,28 @@ $ npm run dev
 
 此时访问浏览器 http://localhost:3000，看到 `Rsbuild with React` 的界面就算成功了。
 
-## 引入 antd
+## 引入 @ant-design/x
 
-现在从 yarn 或 npm 或 pnpm 或 bun 安装并引入 antd。
+现在从 yarn 或 npm 或 pnpm 或 bun 安装并引入 @ant-design/x。
 
-<InstallDependencies npm='$ npm install antd --save' yarn='$ yarn add antd' pnpm='$ pnpm install antd --save' bun='$ bun add antd'></InstallDependencies>
+<InstallDependencies npm='$ npm install @ant-design/x --save' yarn='$ yarn add @ant-design/x' pnpm='$ pnpm install @ant-design/x --save' bun='$ bun add @ant-design/x'></InstallDependencies>
 
-修改 `src/App.tsx`，引入 antd 的 Button 组件。
+修改 `src/App.tsx`，引入 @ant-design/x 的 Bubble 组件。
 
 ```tsx
 import React from 'react';
-import { Button } from 'antd';
+import { Bubble } from '@ant-design/x';
 
 const App: React.FC = () => (
   <div className="App">
-    <Button type="primary">Button</Button>
+    <Bubble content="Hello world!" />
   </div>
 );
 
 export default App;
 ```
 
-好了，现在你应该能看到页面上已经有了 antd 的蓝色按钮组件，接下来就可以继续选用其他组件开发应用了。其它开发流程你可以参考 Rsbuild 的[官方文档](https://rsbuild.dev/zh)。
+好了，现在你应该能看到页面上已经有了 @ant-design/x 的气泡组件，接下来就可以继续选用其他组件开发应用了。其它开发流程你可以参考 Rsbuild 的[官方文档](https://rsbuild.dev/zh)。
 
 ### 自定义主题
 
@@ -56,15 +56,15 @@ export default App;
 
 ```tsx
 import React from 'react';
-import { ConfigProvider } from 'antd';
+import { XProvider } from '@ant-design/x';
 
 const App: React.FC = () => (
-  <ConfigProvider theme={{ token: { colorPrimary: '#00b96b' } }}>
+  <XProvider theme={{ token: { colorPrimary: '#00b96b' } }}>
     <MyApp />
-  </ConfigProvider>
+  </XProvider>
 );
 
 export default App;
 ```
 
-我们现在已经把 antd 组件成功使用 Rsbuild 运行起来了，开始开发你的应用吧！
+我们现在已经把 @ant-design/x 组件成功使用 Rsbuild 运行起来了，开始开发你的应用吧！

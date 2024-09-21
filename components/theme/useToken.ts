@@ -1,15 +1,15 @@
-import React from 'react';
+import { createTheme, useCacheToken } from '@ant-design/cssinjs';
 import { theme as antdTheme } from 'antd';
-import { useCacheToken, createTheme } from '@ant-design/cssinjs';
-import { unitless, ignore } from 'antd/es/theme/useToken';
+import { ignore, unitless } from 'antd/es/theme/useToken';
 import formatToken from 'antd/es/theme/util/alias';
+import React from 'react';
 
-import { defaultPrefixCls } from '../config-provider';
 import version from '../version';
+import { defaultPrefixCls } from '../x-provider';
 
 import type { Theme } from '@ant-design/cssinjs';
 import type { DesignTokenProviderProps } from 'antd/es/theme/context';
-import type { GlobalToken, SeedToken, AliasToken } from './cssinjs-utils';
+import type { AliasToken, GlobalToken, SeedToken } from './cssinjs-utils';
 
 const defaultTheme: Theme<SeedToken, AliasToken> = createTheme(antdTheme.defaultAlgorithm);
 

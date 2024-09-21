@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 
 import 'dayjs/locale/zh-cn';
 
-import ConfigProvider from 'antd/es/config-provider';
+import { XProvider } from '@ant-design/x';
 import zhCN from 'antd/es/locale/zh_CN';
 import { Helmet, useOutlet, useSiteData } from 'dumi';
 import React, { useContext, useEffect, useLayoutEffect, useRef } from 'react';
@@ -106,11 +106,11 @@ const DocLayout: React.FC = () => {
           content="https://gw.alipayobjects.com/zos/rmsportal/rlpTLlbMzTNYuZGGCVYM.png"
         />
       </Helmet>
-      <ConfigProvider direction={direction} locale={lang === 'cn' ? zhCN : undefined}>
+      <XProvider direction={direction} locale={lang === 'cn' ? zhCN : undefined}>
         <GlobalStyles />
         <Header />
         {content}
-      </ConfigProvider>
+      </XProvider>
     </>
   );
 };

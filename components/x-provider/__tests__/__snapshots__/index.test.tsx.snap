@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ThoughtChain Component rtl render component should be rendered correctly in RTL direction 1`] = `null`;
+
+exports[`ThoughtChain Component test theme component should be rendered correctly when configuring the theme.components 1`] = `null`;

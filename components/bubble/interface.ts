@@ -11,17 +11,13 @@ export interface TypingOption {
   interval?: number;
 }
 
+type SemanticType = 'avatar' | 'content';
+
 export interface BubbleProps extends React.HTMLAttributes<HTMLDivElement> {
   prefixCls?: string;
   rootClassName?: string;
-  classNames?: {
-    avatar?: string;
-    content?: string;
-  };
-  styles?: {
-    avatar?: React.CSSProperties;
-    content?: React.CSSProperties;
-  };
+  styles?: Partial<Record<SemanticType, React.CSSProperties>>;
+  classNames?: Partial<Record<SemanticType, string>>;
   avatar?: AvatarProps | React.ReactElement;
   placement?: 'start' | 'end';
   loading?: boolean;

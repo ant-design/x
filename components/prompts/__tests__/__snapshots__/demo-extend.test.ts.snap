@@ -2,13 +2,13 @@
 
 exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] = `
 <div
-  class="ant-app"
+  class="ant-app css-var-r7"
 >
   <div
-    class="ant-prompts"
+    class="ant-prompts css-var-r7"
   >
     <h5
-      class="ant-typography ant-prompts-title"
+      class="ant-typography ant-prompts-title css-var-r7"
     >
       ✨ Inspirational Sparks and Marvelous Tips
     </h5>
@@ -17,7 +17,7 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] 
     >
       <li>
         <button
-          class="ant-btn ant-btn-text ant-prompts-item"
+          class="ant-btn css-var-r7 ant-btn-text ant-prompts-item"
           type="button"
         >
           <div
@@ -48,14 +48,14 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] 
             class="ant-prompts-content"
           >
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label css-var-r7"
             >
               <strong>
                 Ignite Your Creativity
               </strong>
             </span>
             <span
-              class="ant-typography ant-typography-secondary ant-prompts-desc"
+              class="ant-typography ant-typography-secondary ant-prompts-desc css-var-r7"
             >
               Got any sparks for a new project?
             </span>
@@ -64,7 +64,7 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] 
       </li>
       <li>
         <button
-          class="ant-btn ant-btn-text ant-prompts-item"
+          class="ant-btn css-var-r7 ant-btn-text ant-prompts-item"
           type="button"
         >
           <div
@@ -98,14 +98,14 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] 
             class="ant-prompts-content"
           >
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label css-var-r7"
             >
               <strong>
                 Uncover Background Info
               </strong>
             </span>
             <span
-              class="ant-typography ant-typography-secondary ant-prompts-desc"
+              class="ant-typography ant-typography-secondary ant-prompts-desc css-var-r7"
             >
               Help me understand the background of this topic.
             </span>
@@ -114,7 +114,7 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] 
       </li>
       <li>
         <button
-          class="ant-btn ant-btn-text ant-prompts-item"
+          class="ant-btn css-var-r7 ant-btn-text ant-prompts-item"
           type="button"
         >
           <div
@@ -145,14 +145,14 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] 
             class="ant-prompts-content"
           >
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label css-var-r7"
             >
               <strong>
                 Efficiency Boost Battle
               </strong>
             </span>
             <span
-              class="ant-typography ant-typography-secondary ant-prompts-desc"
+              class="ant-typography ant-typography-secondary ant-prompts-desc css-var-r7"
             >
               How can I work faster and better?
             </span>
@@ -161,7 +161,7 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] 
       </li>
       <li>
         <button
-          class="ant-btn ant-btn-text ant-prompts-item"
+          class="ant-btn css-var-r7 ant-btn-text ant-prompts-item"
           type="button"
         >
           <div
@@ -192,14 +192,14 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] 
             class="ant-prompts-content"
           >
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label css-var-r7"
             >
               <strong>
                 Tell me a Joke
               </strong>
             </span>
             <span
-              class="ant-typography ant-typography-secondary ant-prompts-desc"
+              class="ant-typography ant-typography-secondary ant-prompts-desc css-var-r7"
             >
               Why do not ants get sick? Because they have tiny ant-bodies!
             </span>
@@ -208,7 +208,7 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] 
       </li>
       <li>
         <button
-          class="ant-btn ant-btn-text ant-prompts-item"
+          class="ant-btn css-var-r7 ant-btn-text ant-prompts-item"
           type="button"
         >
           <div
@@ -239,14 +239,14 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] 
             class="ant-prompts-content"
           >
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label css-var-r7"
             >
               <strong>
                 Common Issue Solutions
               </strong>
             </span>
             <span
-              class="ant-typography ant-typography-secondary ant-prompts-desc"
+              class="ant-typography ant-typography-secondary ant-prompts-desc css-var-r7"
             >
               How to solve common issues? Share some tips!
             </span>
@@ -262,10 +262,10 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 2`] 
 
 exports[`renders components/prompts/demo/disabled.tsx extend context correctly 1`] = `
 <div
-  class="ant-prompts"
+  class="ant-prompts css-var-r5"
 >
   <h5
-    class="ant-typography ant-prompts-title"
+    class="ant-typography ant-prompts-title css-var-r5"
   >
     ☕️ It's time to relax!
   </h5>
@@ -274,7 +274,7 @@ exports[`renders components/prompts/demo/disabled.tsx extend context correctly 1
   >
     <li>
       <button
-        class="ant-btn ant-btn-default ant-prompts-item"
+        class="ant-btn css-var-r5 ant-btn-default ant-prompts-item"
         disabled=""
         type="button"
       >
@@ -309,14 +309,14 @@ exports[`renders components/prompts/demo/disabled.tsx extend context correctly 1
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-typography-disabled ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
+            class="ant-typography ant-typography-disabled ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label css-var-r5"
           >
             <strong>
               Task Completion Secrets
             </strong>
           </span>
           <span
-            class="ant-typography ant-typography-secondary ant-typography-disabled ant-prompts-desc"
+            class="ant-typography ant-typography-secondary ant-typography-disabled ant-prompts-desc css-var-r5"
           >
             What are some tricks for getting tasks done?
           </span>
@@ -325,7 +325,7 @@ exports[`renders components/prompts/demo/disabled.tsx extend context correctly 1
     </li>
     <li>
       <button
-        class="ant-btn ant-btn-text ant-prompts-item"
+        class="ant-btn css-var-r5 ant-btn-text ant-prompts-item"
         type="button"
       >
         <div
@@ -356,14 +356,14 @@ exports[`renders components/prompts/demo/disabled.tsx extend context correctly 1
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label"
+            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-prompts-label css-var-r5"
           >
             <strong>
               Time for a Coffee Break
             </strong>
           </span>
           <span
-            class="ant-typography ant-typography-secondary ant-prompts-desc"
+            class="ant-typography ant-typography-secondary ant-prompts-desc css-var-r5"
           >
             How to rest effectively after long hours of work?
           </span>
@@ -378,10 +378,10 @@ exports[`renders components/prompts/demo/disabled.tsx extend context correctly 2
 
 exports[`renders components/prompts/demo/flex-vertical.tsx extend context correctly 1`] = `
 <div
-  class="ant-prompts"
+  class="ant-prompts css-var-r3"
 >
   <h5
-    class="ant-typography ant-prompts-title"
+    class="ant-typography ant-prompts-title css-var-r3"
   >
     🤔 You might also want to ask:
   </h5>
@@ -390,7 +390,7 @@ exports[`renders components/prompts/demo/flex-vertical.tsx extend context correc
   >
     <li>
       <button
-        class="ant-btn ant-btn-text ant-prompts-item"
+        class="ant-btn css-var-r3 ant-btn-text ant-prompts-item"
         type="button"
       >
         <div
@@ -421,7 +421,7 @@ exports[`renders components/prompts/demo/flex-vertical.tsx extend context correc
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-prompts-desc"
+            class="ant-typography ant-prompts-desc css-var-r3"
           >
             How to rest effectively after long hours of work?
           </span>
@@ -430,7 +430,7 @@ exports[`renders components/prompts/demo/flex-vertical.tsx extend context correc
     </li>
     <li>
       <button
-        class="ant-btn ant-btn-text ant-prompts-item"
+        class="ant-btn css-var-r3 ant-btn-text ant-prompts-item"
         type="button"
       >
         <div
@@ -461,7 +461,7 @@ exports[`renders components/prompts/demo/flex-vertical.tsx extend context correc
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-prompts-desc"
+            class="ant-typography ant-prompts-desc css-var-r3"
           >
             What are the secrets to maintaining a positive mindset?
           </span>
@@ -470,7 +470,7 @@ exports[`renders components/prompts/demo/flex-vertical.tsx extend context correc
     </li>
     <li>
       <button
-        class="ant-btn ant-btn-text ant-prompts-item"
+        class="ant-btn css-var-r3 ant-btn-text ant-prompts-item"
         type="button"
       >
         <div
@@ -501,7 +501,7 @@ exports[`renders components/prompts/demo/flex-vertical.tsx extend context correc
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-prompts-desc"
+            class="ant-typography ant-prompts-desc css-var-r3"
           >
             How to stay calm under immense pressure?
           </span>
@@ -516,10 +516,10 @@ exports[`renders components/prompts/demo/flex-vertical.tsx extend context correc
 
 exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 1`] = `
 <div
-  class="ant-prompts"
+  class="ant-prompts css-var-r1"
 >
   <h5
-    class="ant-typography ant-prompts-title"
+    class="ant-typography ant-prompts-title css-var-r1"
   >
     ✨ Inspirational Sparks and Marvelous Tips
   </h5>
@@ -528,7 +528,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
   >
     <li>
       <button
-        class="ant-btn ant-btn-text ant-prompts-item"
+        class="ant-btn css-var-r1 ant-btn-text ant-prompts-item"
         type="button"
       >
         <div
@@ -559,7 +559,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-prompts-desc"
+            class="ant-typography ant-prompts-desc css-var-r1"
           >
             Got any sparks for a new project?
           </span>
@@ -568,7 +568,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
     </li>
     <li>
       <button
-        class="ant-btn ant-btn-text ant-prompts-item"
+        class="ant-btn css-var-r1 ant-btn-text ant-prompts-item"
         type="button"
       >
         <div
@@ -602,7 +602,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-prompts-desc"
+            class="ant-typography ant-prompts-desc css-var-r1"
           >
             Help me understand the background of this topic.
           </span>
@@ -611,7 +611,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
     </li>
     <li>
       <button
-        class="ant-btn ant-btn-text ant-prompts-item"
+        class="ant-btn css-var-r1 ant-btn-text ant-prompts-item"
         type="button"
       >
         <div
@@ -642,7 +642,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-prompts-desc"
+            class="ant-typography ant-prompts-desc css-var-r1"
           >
             How to solve common issues? Share some tips!
           </span>
@@ -651,7 +651,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
     </li>
     <li>
       <button
-        class="ant-btn ant-btn-text ant-prompts-item"
+        class="ant-btn css-var-r1 ant-btn-text ant-prompts-item"
         type="button"
       >
         <div
@@ -682,7 +682,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-prompts-desc"
+            class="ant-typography ant-prompts-desc css-var-r1"
           >
             How can I work faster and better?
           </span>
@@ -691,7 +691,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
     </li>
     <li>
       <button
-        class="ant-btn ant-btn-text ant-prompts-item"
+        class="ant-btn css-var-r1 ant-btn-text ant-prompts-item"
         type="button"
       >
         <div
@@ -725,7 +725,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-prompts-desc"
+            class="ant-typography ant-prompts-desc css-var-r1"
           >
             What are some tricks for getting tasks done?
           </span>
@@ -734,7 +734,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
     </li>
     <li>
       <button
-        class="ant-btn ant-btn-text ant-prompts-item"
+        class="ant-btn css-var-r1 ant-btn-text ant-prompts-item"
         type="button"
       >
         <div
@@ -765,7 +765,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-prompts-desc"
+            class="ant-typography ant-prompts-desc css-var-r1"
           >
             How to rest effectively after long hours of work?
           </span>
@@ -774,7 +774,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
     </li>
     <li>
       <button
-        class="ant-btn ant-btn-text ant-prompts-item"
+        class="ant-btn css-var-r1 ant-btn-text ant-prompts-item"
         type="button"
       >
         <div
@@ -805,7 +805,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-prompts-desc"
+            class="ant-typography ant-prompts-desc css-var-r1"
           >
             What are the secrets to maintaining a positive mindset?
           </span>
@@ -814,7 +814,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
     </li>
     <li>
       <button
-        class="ant-btn ant-btn-text ant-prompts-item"
+        class="ant-btn css-var-r1 ant-btn-text ant-prompts-item"
         type="button"
       >
         <div
@@ -845,7 +845,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
           class="ant-prompts-content"
         >
           <span
-            class="ant-typography ant-prompts-desc"
+            class="ant-typography ant-prompts-desc css-var-r1"
           >
             How to stay calm under immense pressure?
           </span>

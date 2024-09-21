@@ -1,5 +1,6 @@
 import { LinkOutlined, QuestionCircleOutlined, RightOutlined } from '@ant-design/icons';
-import { ConfigProvider, Popover, Table, Typography } from 'antd';
+import { XProvider } from '@ant-design/x';
+import { Popover, Table, Typography } from 'antd';
 import { createStyles, css, useTheme } from 'antd-style';
 import { getDesignToken } from 'antd-token-previewer';
 import tokenMeta from 'antd/es/version/token-meta.json';
@@ -127,7 +128,7 @@ const SubTokenTable: React.FC<SubTokenTableProps> = (props) => {
     .filter(Boolean);
 
   const code = component
-    ? `<ConfigProvider
+    ? `<XProvider
   theme={{
     components: {
       ${component}: {
@@ -137,8 +138,8 @@ const SubTokenTable: React.FC<SubTokenTableProps> = (props) => {
   }}
 >
   ...
-</ConfigProvider>`
-    : `<ConfigProvider
+</XProvider>`
+    : `<XProvider
   theme={{
     token: {
       /* ${comment?.globalComment} */
@@ -146,7 +147,7 @@ const SubTokenTable: React.FC<SubTokenTableProps> = (props) => {
   }}
 >
   ...
-</ConfigProvider>`;
+</XProvider>`;
 
   return (
     <>
@@ -176,7 +177,7 @@ const SubTokenTable: React.FC<SubTokenTableProps> = (props) => {
         </h3>
       </div>
       {open && (
-        <ConfigProvider theme={{ token: { borderRadius: 0 } }}>
+        <XProvider theme={{ token: { borderRadius: 0 } }}>
           <Table
             size="middle"
             columns={columns}
@@ -186,7 +187,7 @@ const SubTokenTable: React.FC<SubTokenTableProps> = (props) => {
             pagination={false}
             rowKey={(record) => record.name}
           />
-        </ConfigProvider>
+        </XProvider>
       )}
     </>
   );

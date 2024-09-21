@@ -1,10 +1,11 @@
 import { Cascader, Flex } from 'antd';
-import classnames from 'classnames';
-import useStyle from './style';
-import React, { useState } from 'react';
-import useConfigContext from '../config-provider/useConfigContext';
 import type { CascaderProps } from 'antd';
+import classnames from 'classnames';
 import { useEvent, useMergedState } from 'rc-util';
+import React, { useState } from 'react';
+import useXComponentConfig from '../_util/hooks/use-x-component-config';
+import { useXProviderContext } from '../x-provider';
+import useStyle from './style';
 import useActive from './useActive';
 
 export type SuggestionItem = {
@@ -34,11 +35,9 @@ export interface SuggestionProps<T = any> {
   items: SuggestionItem[] | ((info?: T) => SuggestionItem[]);
   onSelect?: (value: string) => void;
   block?: boolean;
+  styles?: Partial<Record<string, React.CSSProperties>>;
+  classNames?: Partial<Record<string, string>>;
 }
-
-// React.FC<
-//   SuggestionProps & Pick<InputProps, 'placeholder'> & Pick<TooltipProps, 'placement'>
-// >
 
 function Suggestion<T = any>(props: SuggestionProps<T>) {
   const {
@@ -46,7 +45,6 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
     className,
     rootClassName,
     style,
-
     children,
     open,
     onOpenChange,
@@ -56,11 +54,14 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
   } = props;
 
   // ============================= MISC =============================
-  const { direction, getPrefixCls } = useConfigContext();
+  const { direction, getPrefixCls } = useXProviderContext();
   const prefixCls = getPrefixCls('suggestion', customizePrefixCls);
   const itemCls = `${prefixCls}-item`;
 
   const isRTL = direction === 'rtl';
+
+  // ===================== Component Config =========================
+  const contextConfig = useXComponentConfig('suggestion');
 
   // ============================ Styles ============================
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
@@ -140,14 +141,18 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
     >
       <div
         className={classnames(
+          prefixCls,
+          contextConfig.className,
           rootClassName,
           className,
-          prefixCls,
           `${prefixCls}-wrapper`,
           hashId,
           cssVarCls,
         )}
-        style={style}
+        style={{
+          ...contextConfig.style,
+          ...style,
+        }}
       >
         {childNode}
       </div>

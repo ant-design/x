@@ -1,7 +1,7 @@
-import React from 'react';
 import dayjs from 'dayjs';
-import { ConfigProvider } from 'antd';
 import MockDate from 'mockdate';
+import React from 'react';
+import { XProvider } from '../../components';
 import { render } from '../utils';
 
 const rtlTest = (Component: React.ComponentType, mockDate = false) => {
@@ -11,9 +11,9 @@ const rtlTest = (Component: React.ComponentType, mockDate = false) => {
         MockDate.set(dayjs('2000-09-28').valueOf());
       }
       const { container } = render(
-        <ConfigProvider direction="rtl">
+        <XProvider direction="rtl">
           <Component />
-        </ConfigProvider>,
+        </XProvider>,
       );
       expect(container.firstChild).toMatchSnapshot();
       if (mockDate) {

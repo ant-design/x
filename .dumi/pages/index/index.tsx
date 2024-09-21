@@ -1,4 +1,3 @@
-import { ConfigProvider, theme } from 'antd';
 import { createStyles, css } from 'antd-style';
 import React, { Suspense } from 'react';
 
@@ -8,9 +7,7 @@ import BannerRecommends from './components/BannerRecommends';
 import Group from './components/Group';
 import PreviewBanner from './components/PreviewBanner';
 
-const ComponentsList = React.lazy(() => import('./components/ComponentsList'));
 const DesignFramework = React.lazy(() => import('./components/DesignFramework'));
-const Theme = React.lazy(() => import('./components/Theme'));
 
 const useStyle = createStyles(() => ({
   image: css`
@@ -39,7 +36,6 @@ const locales = {
 const Homepage: React.FC = () => {
   const [locale] = useLocale(locales);
   const { styles } = useStyle();
-  const { token } = theme.useToken();
 
   const isRootDark = useDark();
 
@@ -50,30 +46,6 @@ const Homepage: React.FC = () => {
       </PreviewBanner>
 
       <div>
-        {/* 定制主题 */}
-        <ConfigProvider
-          theme={{
-            algorithm: theme.defaultAlgorithm,
-          }}
-        >
-          <Suspense fallback={null}>
-            <Theme />
-          </Suspense>
-        </ConfigProvider>
-
-        {/* 组件列表 */}
-        <Group
-          background={token.colorBgElevated}
-          collapse
-          title={locale.assetsTitle}
-          description={locale.assetsDesc}
-          id="design"
-        >
-          <Suspense fallback={null}>
-            <ComponentsList />
-          </Suspense>
-        </Group>
-
         {/* 设计语言 */}
         <Group
           title={locale.designTitle}

@@ -4,14 +4,49 @@ import { genStyleHooks } from '../../theme/genStyleUtils';
 import { THOUGHT_CHAIN_ITEM_STATUS } from '../Item';
 
 import { type CSSObject, unit } from '@ant-design/cssinjs';
+import type { ConfigProviderProps } from 'antd';
 import type { FullToken, GenerateStyle } from '../../theme/cssinjs-utils';
 
 // biome-ignore lint/suspicious/noEmptyInterface: ComponentToken need to be empty by default
 export interface ComponentToken {}
 
 export interface ThoughtChainToken extends FullToken<'ThoughtChain'> {
-  itemIconFontSize: number;
-  itemIconSize: number;
+  /**
+   * @desc default size for item font size
+   */
+  itemFontSize: number;
+  /**
+   * @desc default size for item
+   */
+  itemSize: number;
+  /**
+   * @desc gap between items
+   */
+  itemGap: number;
+  /**
+   * @desc large size for item font size
+   */
+  itemFontSizeLG: number;
+  /**
+   * @desc large size for item
+   */
+  itemSizeLG: number;
+  /**
+   * @desc large gap between items
+   */
+  itemGapLG: number;
+  /**
+   * @desc small size for item font size
+   */
+  itemFontSizeSM: number;
+  /**
+   * @desc small size for item
+   */
+  itemSizeSM: number;
+  /**
+   * @desc small gap between items
+   */
+  itemGapSM: number;
 }
 
 type GenerateThoughtChainItemStyle = GenerateStyle<ThoughtChainToken, CSSObject>;
@@ -83,20 +118,20 @@ const genThoughtChainItemBeforePseudoStyle: GenerateThoughtChainItemStyle = (tok
         position: 'relative',
 
         '&::before': {
-          bottom: `${token.calc(token.padding).mul(-1).equal()}`,
+          bottom: `${token.calc(token.itemGap).mul(-1).equal()}`,
         },
       },
       [`& ${itemCls}-header, & ${itemCls}-content`]: {
-        marginInlineStart: calc(token.itemIconSize).mul(-1).equal(),
+        marginInlineStart: calc(token.itemSize).mul(-1).equal(),
 
         '&::before': {
           ...beforePseudoBaseStyle,
-          insetInlineStart: calc(token.itemIconSize).div(2).sub(token.lineWidth).equal(),
+          insetInlineStart: calc(token.itemSize).div(2).sub(token.lineWidth).equal(),
         },
       },
       [`& ${itemCls}-header::before`]: {
-        top: token.itemIconSize,
-        bottom: `${token.calc(token.padding).mul(-2).equal()}`,
+        top: token.itemSize,
+        bottom: `${token.calc(token.itemGap).mul(-2).equal()}`,
       },
       [`& ${itemCls}-content::before`]: {
         top: '100%',
@@ -104,7 +139,7 @@ const genThoughtChainItemBeforePseudoStyle: GenerateThoughtChainItemStyle = (tok
       [`& ${itemCls}-footer::before`]: {
         ...beforePseudoBaseStyle,
         top: 0,
-        insetInlineStart: calc(token.itemIconSize).div(-2).sub(token.lineWidth).equal(),
+        insetInlineStart: calc(token.itemSize).div(-2).sub(token.lineWidth).equal(),
       },
     },
   } as CSSObject;
@@ -124,18 +159,18 @@ const genThoughtChainItemStyle: GenerateThoughtChainItemStyle = (token) => {
       },
       [`& ${itemCls}-header`]: {
         display: 'flex',
-        marginBottom: token.margin,
-        gap: token.padding,
+        marginBottom: token.itemGap,
+        gap: token.itemGap,
         alignItems: 'flex-start',
 
         [`& ${itemCls}-icon`]: {
-          height: token.itemIconSize,
-          width: token.itemIconSize,
-          fontSize: token.itemIconFontSize,
+          height: token.itemSize,
+          width: token.itemSize,
+          fontSize: token.itemFontSize,
         },
         [`& ${itemCls}-extra`]: {
-          height: token.itemIconSize,
-          maxHeight: token.itemIconSize,
+          height: token.itemSize,
+          maxHeight: token.itemSize,
         },
         [`& ${itemCls}-header-box`]: {
           flex: 1,
@@ -144,16 +179,17 @@ const genThoughtChainItemStyle: GenerateThoughtChainItemStyle = (token) => {
           overflow: 'hidden',
 
           [`& ${itemCls}-title`]: {
-            height: token.itemIconSize,
-            lineHeight: token.itemIconSize,
-            maxHeight: token.itemIconSize,
+            height: token.itemSize,
+            lineHeight: token.itemSize,
+            maxHeight: token.itemSize,
+            fontSize: token.itemFontSize,
 
             [`& ${itemCls}-collapse-icon`]: {
               marginInlineEnd: token.marginXS,
             },
           },
           [`& ${itemCls}-desc`]: {
-            fontSize: token.fontSizeSM,
+            fontSize: token.itemFontSize,
           },
         },
       },
@@ -162,18 +198,59 @@ const genThoughtChainItemStyle: GenerateThoughtChainItemStyle = (token) => {
           display: 'none',
         },
         [`& ${itemCls}-content-box`]: {
-          padding: token.padding,
+          padding: token.itemGap,
           display: 'inline-block',
-          maxWidth: `calc(100% - ${token.itemIconSize})`,
+          maxWidth: `calc(100% - ${token.itemSize})`,
           borderRadius: token.borderRadiusLG,
           backgroundColor: token.colorBgContainer,
           border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorderSecondary}`,
         },
       },
       [`& ${itemCls}-footer`]: {
-        marginTop: token.margin,
+        marginTop: token.itemGap,
         display: 'inline-flex',
       },
+    },
+  };
+};
+
+const genThoughtChainSizeStyle = (
+  token: ThoughtChainToken,
+  size: ConfigProviderProps['componentSize'] = 'middle',
+) => {
+  const { componentCls } = token;
+
+  const sizeTokens = {
+    large: {
+      itemSize: token.itemSizeLG,
+      itemGap: token.itemGapLG,
+      itemFontSize: token.itemFontSizeLG,
+    },
+    middle: {
+      itemSize: token.itemSize,
+      itemGap: token.itemGap,
+      itemFontSize: token.itemFontSize,
+    },
+    small: {
+      itemSize: token.itemSizeSM,
+      itemGap: token.itemGapSM,
+      itemFontSize: token.itemFontSizeSM,
+    },
+  }[size];
+
+  return {
+    [`&${componentCls}-${size}`]: {
+      paddingInlineStart: sizeTokens.itemSize,
+      gap: sizeTokens.itemGap,
+
+      ...genThoughtChainItemStyle({
+        ...token,
+        ...sizeTokens,
+      }),
+      ...genThoughtChainItemBeforePseudoStyle({
+        ...token,
+        ...sizeTokens,
+      }),
     },
   };
 };
@@ -185,12 +262,11 @@ const genThoughtChainStyle: GenerateStyle<ThoughtChainToken> = (token) => {
     [componentCls]: {
       display: 'flex',
       flexDirection: 'column',
-      gap: token.margin,
-      paddingInlineStart: token.itemIconSize,
 
-      ...genThoughtChainItemStyle(token),
       ...genThoughtChainItemStatusStyle(token),
-      ...genThoughtChainItemBeforePseudoStyle(token),
+      ...genThoughtChainSizeStyle(token),
+      ...genThoughtChainSizeStyle(token, 'large'),
+      ...genThoughtChainSizeStyle(token, 'small'),
 
       [`&${componentCls}-rtl`]: {
         direction: 'rtl',
@@ -201,12 +277,22 @@ const genThoughtChainStyle: GenerateStyle<ThoughtChainToken> = (token) => {
 
 export default genStyleHooks('ThoughtChain', (token) => {
   const compToken = mergeToken<ThoughtChainToken>(token, {
-    itemIconFontSize: token.fontSizeLG,
-    itemIconSize: token
-      .calc(token.controlHeightSM)
-      .add(token.controlHeight)
+    // small size tokens
+    itemFontSizeSM: token.fontSizeSM,
+    itemSizeSM: token
+      .calc(token.controlHeightXS)
+      .add(token.controlHeightSM)
       .div(2)
       .equal() as number,
+    itemGapSM: token.marginSM,
+    // default size tokens
+    itemFontSize: token.fontSize,
+    itemSize: token.calc(token.controlHeightSM).add(token.controlHeight).div(2).equal() as number,
+    itemGap: token.margin,
+    // large size tokens
+    itemFontSizeLG: token.fontSizeLG,
+    itemSizeLG: token.calc(token.controlHeight).add(token.controlHeightLG).div(2).equal() as number,
+    itemGapLG: token.marginLG,
   });
   return [genThoughtChainStyle(compToken), genCollapseMotion(compToken)];
 });

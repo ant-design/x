@@ -6,53 +6,57 @@ title: Usage with Next.js
 tag: Updated
 ---
 
-[Next.js](https://nextjs.org/) is currently the most popular React server-side isomorphic framework in the world. This article will try to use `antd` components in projects created by Next.js.
+Here’s the translation of your guide on using `@ant-design/x` with Next.js:
 
-## Install and Initialization
+---
 
-Before all start, you may need install [yarn](https://github.com/yarnpkg/yarn/) or [pnpm](https://pnpm.io/) or [bun](https://bun.sh/).
+[Next.js](https://nextjs.org/) is currently one of the most popular React server-side rendering frameworks. This article will guide you on how to use `@ant-design/x` components in a Next.js project.
 
-<InstallDependencies npm='$ npx create-next-app antd-demo' yarn='$ yarn create next-app antd-demo' pnpm='$ pnpm create next-app antd-demo' bun='$ bun create next-app antd-demo'></InstallDependencies>
+## Installation and Initialization
 
-The tool will create and initialize environment and dependencies automatically, please try config your proxy setting, or use another npm registry if any network errors happen during it.
+Before you start, you might need to install [yarn](https://github.com/yarnpkg/yarn/), [pnpm](https://pnpm.io/zh/), or [bun](https://bun.sh/).
 
-After the initialization is complete, we enter the project and start.
+<InstallDependencies npm='$ npx create-next-app antdx-demo' yarn='$ yarn create next-app antdx-demo' pnpm='$ pnpm create next-app antdx-demo' bun='$ bun create next-app antdx-demo'></InstallDependencies>
+
+The tool will automatically initialize a scaffold and install various necessary dependencies. During the installation process, you may need to choose some configuration options. If you encounter network issues, try configuring a proxy or using another npm registry, such as switching to the Taobao mirror: `npm config set registry https://registry.npmmirror.com`.
+
+Once the initialization is complete, navigate to the project directory and start the development server.
 
 ```bash
-$ cd antd-demo
+$ cd antdx-demo
 $ npm run dev
 ```
 
-Open the browser at http://localhost:3000/. if you see the NEXT logo, it is considered a success.
+Visit http://localhost:3000/ in your browser, and seeing the Next.js logo means the setup is successful.
 
-## Import antd
+## Importing @ant-design/x
 
-Now we install `antd` from yarn or npm or pnpm or bun.
+Now, install and import `@ant-design/x` from yarn, npm, pnpm, or bun.
 
-<InstallDependencies npm='$ npm install antd --save' yarn='$ yarn add antd' pnpm='$ pnpm install antd --save' bun='$ bun add antd'></InstallDependencies>
+<InstallDependencies npm='$ npm install @ant-design/x --save' yarn='$ yarn add @ant-design/x' pnpm='$ pnpm install @ant-design/x --save' bun='$ bun add @ant-design/x'></InstallDependencies>
 
-Modify `src/app/page.tsx`, import Button component from `antd`.
+Modify `src/app/page.tsx` to import the Bubble component from `@ant-design/x`.
 
 ```tsx
 import React from 'react';
-import { Button } from 'antd';
+import { Bubble } from '@ant-design/x';
 
 const Home = () => (
   <div className="App">
-    <Button type="primary">Button</Button>
+    <Bubble content="Hello world!" />
   </div>
 );
 
 export default Home;
 ```
 
-OK, you should now see a blue primary button displayed on the page. Next you can choose any components of `antd` to develop your application. Visit other workflows of `Next.js` at its [User Guide](https://nextjs.org/).
+You should now see the Bubble component from `@ant-design/x` on your page. You can proceed to use other components to develop your application. For other development processes, you can refer to the [official Next.js documentation](https://nextjs.org/).
 
-You could find that components of antd do not have styles in the first screen. Next, you need to choose different SSR style processing methods according to the mode of Next.js.
+You may notice that the `@ant-design/x` component does not have styles on the first screen. Below, we'll address how to handle SSR (Server-Side Rendering) styles for Next.js.
 
 ## Using App Router <Badge>Updated</Badge>
 
-If you are using the App Router in Next.js and using antd as your component library, to make the antd component library work better in your Next.js application and provide a better user experience, you can try using the following method to extract and inject antd's first-screen styles into HTML to avoid page flicker.
+If you are using the App Router in Next.js and `@ant-design/x` as your component library, you can improve user experience by extracting and injecting `@ant-design/x`'s initial styles into HTML to avoid page flashes.
 
 1. Install `@ant-design/nextjs-registry`
 
@@ -77,26 +81,24 @@ export default RootLayout;
 
 <!-- prettier-ignore -->
 :::warning
-Next.js App Router currently not support using sub-components via `.` like `<Select.Option />` and `<Typography.Text />`. Importing them from path would solve this problem.
+Note: The Next.js App Router does not currently support importing child components directly using `.` (e.g., `<Select.Option />`, `<Typography.Text />`). To avoid errors, import these child components from their respective paths.
 :::
 
-For more detailed information, please refer to [with-nextjs-app-router-inline-style](https://github.com/ant-design/ant-design-examples/tree/main/examples/with-nextjs-app-router-inline-style)。
+For more details, refer to [with-nextjs-app-router-inline-style](https://github.com/ant-design/ant-design-examples/tree/main/examples/with-nextjs-app-router-inline-style).
 
 ## Using Pages Router
 
-If you are using the Pages Router in Next.js and using antd as your component library, to make the antd component library work better in your Next.js application and provide a better user experience, you can try using the following method to extract and inject antd's first-screen styles into HTML to avoid page flicker.
+If you are using the Pages Router in Next.js and `@ant-design/x` as your component library, you can improve user experience by extracting and injecting `@ant-design/x`'s initial styles into HTML to avoid page flashes.
 
 1. Install `@ant-design/cssinjs`
 
-> Notes for developers
+> Developer Note:
 >
-> Please note that when you install `@ant-design/cssinjs`, you must ensure that the version is consistent with the version of `@ant-design/cssinjs` in local `node_modules` of `antd`, otherwise, multiple React instances will appear, resulting in ctx being unable to be read correctly. (Tips: you can use `npm ls @ant-design/cssinjs` command to view the local version)
->
-> <img width="514" alt="image" src="https://github.com/ant-design/ant-design/assets/49217418/aad6e9e2-62cc-4c89-a0b6-38c592e3c648">
+> Ensure that the version of `@ant-design/cssinjs` installed matches the version in `@ant-design/x`'s local `node_modules`, to avoid issues with multiple React instances. (Tip: You can check the local version with `npm ls @ant-design/cssinjs`.)
 
 <InstallDependencies npm='$ npm install @ant-design/cssinjs --save' yarn='$ yarn add @ant-design/cssinjs' pnpm='$ pnpm install @ant-design/cssinjs --save' bun='$ bun add @ant-design/cssinjs'></InstallDependencies>
 
-2. Rewrite `pages/_document.tsx`
+2. Modify `pages/_document.tsx`
 
 ```tsx
 import React from 'react';
@@ -142,7 +144,7 @@ MyDocument.getInitialProps = async (ctx: DocumentContext) => {
 export default MyDocument;
 ```
 
-3. Supports custom themes
+3. Support for Custom Themes
 
 ```ts
 // theme/themeConfig.ts
@@ -158,37 +160,37 @@ const theme: ThemeConfig = {
 export default theme;
 ```
 
-4. Rewrite `pages/_app.tsx`
+4. Modify `pages/_app.tsx`
 
 ```tsx
 import React from 'react';
-import { ConfigProvider } from 'antd';
+import { XProvider } from '@ant-design/x';
 import type { AppProps } from 'next/app';
 
 import theme from './theme/themeConfig';
 
 const App = ({ Component, pageProps }: AppProps) => (
-  <ConfigProvider theme={theme}>
+  <XProvider theme={theme}>
     <Component {...pageProps} />
-  </ConfigProvider>
+  </XProvider>
 );
 
 export default App;
 ```
 
-5. Use antd in page component
+5. Use `@ant-design/x` in your pages
 
 ```tsx
 import React from 'react';
-import { Button } from 'antd';
+import { Bubble } from '@ant-design/x';
 
 const Home = () => (
   <div className="App">
-    <Button type="primary">Button</Button>
+    <Bubble content="Hello world!" />
   </div>
 );
 
 export default Home;
 ```
 
-For more detailed information, please refer to [with-nextjs-inline-style](https://github.com/ant-design/ant-design-examples/tree/main/examples/with-nextjs-inline-style).
+For more details, refer to [with-nextjs-inline-style](https://github.com/ant-design/ant-design-examples/tree/main/examples/with-nextjs-inline-style).

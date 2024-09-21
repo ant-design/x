@@ -1,5 +1,6 @@
 import { GithubOutlined, MenuOutlined } from '@ant-design/icons';
-import { Alert, Col, ConfigProvider, Popover, Row, Select } from 'antd';
+import { XProvider } from '@ant-design/x';
+import { Alert, Col, Popover, Row, Select } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
@@ -369,7 +370,7 @@ const Header: React.FC = () => {
         </Popover>
       )}
       {isZhCN && bannerVisible && (
-        <ConfigProvider
+        <XProvider
           theme={{
             token: {
               colorInfoBg: 'linear-gradient(90deg, #84fab0, #8fd3f4)',
@@ -404,7 +405,7 @@ const Header: React.FC = () => {
             showIcon={false}
             onClose={onBannerClose}
           />
-        </ConfigProvider>
+        </XProvider>
       )}
       <Row style={{ flexFlow: 'nowrap', height: 64 }}>
         <Col {...colProps[0]}>

@@ -2,6 +2,6 @@
 
 exports[`Sender Component rtl render component should be rendered correctly in RTL direction 1`] = `
 <div
-  class="ant-suggestion ant-suggestion-wrapper"
+  class="ant-suggestion ant-suggestion-wrapper css-var-r3"
 />
 `;

@@ -15,6 +15,36 @@ tag: vVERSION
 
 ---
 
+## 1.0.0-alpha.1
+
+`2024-09-10`
+
+### 🚀 新特性
+
+- 🔥 新增：`Suggestion` 建议组件，由 [@ONLY-yours](https://github.com/ONLY-yours) 完成 [#87](https://github.com/ant-design/x/pull/87)
+
+### 🐛 修复
+
+- 🐛 修复：更改 `Sender` 的 `restProps` 类型，由 [@ONLY-yours](https://github.com/ONLY-yours) 完成 [#101](https://github.com/ant-design/x/pull/101)
+- 🛠 修复：`bun install` 问题，由 [@afc163](https://github.com/afc163) 完成 [#111](https://github.com/ant-design/x/pull/111)
+
+### 🛠 重构
+
+- 🛠 重构：添加层级支持，由 [@zombieJ](https://github.com/zombieJ) 完成 [#118](https://github.com/ant-design/x/pull/118)
+- 🛠 重构：加速工作流，由 [@afc163](https://github.com/afc163) 完成 [#119](https://github.com/ant-design/x/pull/119)
+- 🛠 重构：升级开发依赖的 5 个更新，由 [@dependabot](https://github.com/dependabot) 完成 [#120](https://github.com/ant-design/x/pull/120)
+- 🛠 重构：清理 `README.md`，由 [@afc163](https://github.com/afc163) 完成 [#102](https://github.com/ant-design/x/pull/102)
+- 🛠 重构：添加 issue 模板，由 [@afc163](https://github.com/afc163) 完成 [#103](https://github.com/ant-design/x/pull/103)
+- 🛠 重构：添加 `bun.lockb`，由 [@afc163](https://github.com/afc163) 完成 [#108](https://github.com/ant-design/x/pull/108)
+- 🛠 删除 `index-style-only.js`，由 [@afc163](https://github.com/afc163) 完成 [#106](https://github.com/ant-design/x/pull/106)
+- 🛠 重构：更新 `main.yml`，由 [@afc163](https://github.com/afc163) 完成 [#105](https://github.com/ant-design/x/pull/105)
+- 🛠 重构：更新 `package.json`，由 [@afc163](https://github.com/afc163) 完成 [#110](https://github.com/ant-design/x/pull/110)
+
+### 📖 文档
+
+- 📖 文档：更新 `README.md`，由 [@afc163](https://github.com/afc163) 完成 [#104](https://github.com/ant-design/x/pull/104)
+- 📖 文档：更新 `codecov` 徽章，由 [@afc163](https://github.com/afc163) 完成 [#112](https://github.com/ant-design/x/pull/112)
+
 ## 1.0.0-alpha.0
 
 `2024-09-05`
