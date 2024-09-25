@@ -23,26 +23,36 @@ export interface XAgentConfigCustom<Message> {
 export type XAgentConfig<Message> = XAgentConfigPreset | XAgentConfigCustom<Message>;
 export type MergedXAgentConfig<Message> = Partial<XAgentConfigPreset> & XAgentConfigCustom<Message>;
 
+let uuid = 0;
+
 /** This is a wrap class to avoid developer can get too much on origin object */
 export class XAgent<Message> {
   config: MergedXAgentConfig<Message>;
+
+  private requestingMap: Record<number, boolean> = {};
 
   constructor(config: MergedXAgentConfig<Message>) {
     this.config = config;
   }
 
-  public request = (
+  private finishRequest(id: number) {
+    delete this.requestingMap[id];
+  }
+
+  public request(
     info: { message: Message; messages: Message[] },
     callbacks: {
       onUpdate: (message: Message) => void;
       onSuccess: (message: Message) => void;
       onError: (error: Error) => void;
     },
-  ) => {
+  ) {
     const { request, baseURL, key, model } = this.config;
     const { onUpdate, onSuccess, onError } = callbacks;
 
-    let finished = false;
+    const id = uuid;
+    uuid += 1;
+    this.requestingMap[id] = true;
 
     request({
       baseURL,
@@ -52,25 +62,29 @@ export class XAgent<Message> {
 
       // Status should be unique.
       // One get success or error should not get more message
-      onUpdate(message) {
-        if (!finished) {
+      onUpdate: (message) => {
+        if (this.requestingMap[id]) {
           onUpdate(message);
         }
       },
-      onSuccess(message) {
-        if (!finished) {
-          finished = true;
+      onSuccess: (message) => {
+        if (this.requestingMap[id]) {
           onSuccess(message);
+          this.finishRequest(id);
         }
       },
-      onError(error) {
-        if (!finished) {
-          finished = true;
+      onError: (error) => {
+        if (this.requestingMap[id]) {
           onError(error);
+          this.finishRequest(id);
         }
       },
     });
-  };
+  }
+
+  public isRequesting() {
+    return Object.keys(this.requestingMap).length > 0;
+  }
 }
 
 export default function useXAgent<Message>(config: XAgentConfig<Message>) {
