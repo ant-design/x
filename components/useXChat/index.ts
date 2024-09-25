@@ -1,6 +1,5 @@
 import { useEvent } from 'rc-util';
 import React from 'react';
-import { BubbleDataType } from '../bubble/BubbleList';
 import { XAgent } from '../useXAgent';
 import useSyncState from './useSyncState';
 
@@ -31,12 +30,6 @@ export interface XChatConfig<
   /** Convert agent message to bubble usage message type */
   parser?: (message: AgentMessage) => BubbleMessage | BubbleMessage[];
 
-  // request: (
-  //   message: Message,
-  //   info: {
-  //     messages: MessageInfo<Message>[];
-  //   },
-  // ) => Promise<RequestResult<Message>>;
   requestPlaceholder?: AgentMessage | RequestPlaceholderFn<AgentMessage>;
   requestFallback?: AgentMessage | RequestFallbackFn<AgentMessage>;
 }
@@ -72,24 +65,6 @@ export type StandardRequestResult<Message extends SimpleType> = Omit<
 function toArray<T>(item: T | T[]): T[] {
   return Array.isArray(item) ? item : [item];
 }
-
-// function formatMessageResult<Message>(result: ReturnMessage<Message>): MessageInfo<Message>[] {
-//   return toArray(result).reduce((acc, item) => {
-//     if (item && typeof item === 'object' && 'message' in item && 'status' in item) {
-//       const messages = toArray(item.message);
-//       const msgResults: StandardRequestResult<Message>[] = messages.map((message) => ({
-//         ...item,
-//         message,
-//       }));
-//       return [...acc, ...msgResults];
-//     }
-
-//     const msgResult: StandardRequestResult<Message> = {
-//       message: item,
-//     };
-//     return [...acc, msgResult];
-//   }, [] as StandardRequestResult<Message>[]);
-// }
 
 export default function useXChat<
   AgentMessage extends SimpleType = string,
@@ -257,46 +232,12 @@ export default function useXChat<
         },
       },
     );
-
-    // request(message, { messages })
-    //   .then((result) => {
-    //     const msgResults = formatMessageResult(result);
-    //     setMessages((ori) => {
-    //       const oriWithoutPending = ori.filter((info) => info.id !== loadingMsgId);
-
-    //       return [
-    //         ...oriWithoutPending,
-    //         ...msgResults.map((item) => createMessage(item.message, item.status || 'success')),
-    //       ];
-    //     });
-    //   })
-    //   .catch(async (error) => {
-    //     if (requestFallback) {
-    //       const fallbackResult =
-    //         typeof requestFallback === 'function'
-    //           ? await requestFallback(message, { error, messages: getMessages() })
-    //           : requestFallback;
-
-    //       setMessages((ori) => [
-    //         ...ori.filter((info) => info.id !== loadingMsgId),
-    //         ...formatMessageResult(fallbackResult).map((item) =>
-    //           createMessage(item.message, item.status || 'error'),
-    //         ),
-    //       ]);
-    //     }
-    //   })
-    //   .finally(() => {
-    //     setRequesting(false);
-    //   });
-
-    // idRef.current += 1;
   });
 
   return {
     onRequest,
     messages,
     parsedMessages,
-    // requesting,
     setMessages,
   } as const;
 }

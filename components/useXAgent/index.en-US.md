@@ -1,7 +1,7 @@
 ---
 category: Components
 group: Runtime
-title: useXChat
+title: useXAgent
 description: Work with agent hook for data management.
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*HjY3QKszqFEAAAAAAAAAAAAADrJ8AQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*G8njQogkGwAAAAAAAAAAAAAADrJ8AQ/original

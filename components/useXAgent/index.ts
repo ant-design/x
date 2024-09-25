@@ -9,7 +9,7 @@ export type RequestFn<Message = any> = (
     onSuccess: (message: Message) => void;
     onError: (error: Error) => void;
   } & Partial<XAgentConfigPreset>,
-) => void | Promise<Message>;
+) => void;
 
 export interface XAgentConfigPreset {
   baseURL: string;
@@ -26,7 +26,7 @@ export type MergedXAgentConfig<Message> = Partial<XAgentConfigPreset> & XAgentCo
 let uuid = 0;
 
 /** This is a wrap class to avoid developer can get too much on origin object */
-export class XAgent<Message> {
+export class XAgent<Message = string> {
   config: MergedXAgentConfig<Message>;
 
   private requestingMap: Record<number, boolean> = {};
@@ -87,7 +87,7 @@ export class XAgent<Message> {
   }
 }
 
-export default function useXAgent<Message>(config: XAgentConfig<Message>) {
+export default function useXAgent<Message = string>(config: XAgentConfig<Message>) {
   return React.useMemo(() => {
     let customConfig: MergedXAgentConfig<Message>;
 

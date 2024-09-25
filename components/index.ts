@@ -10,4 +10,5 @@ export type { ThoughtChainProps, ThoughtChainItem } from './thought-chain';
 export { default as Suggestion } from './suggestion';
 export type { SuggestionProps } from './suggestion';
 export { default as useXChat } from './useXChat';
+export { default as useXAgent } from './useXAgent';
 export { default as version } from './version';

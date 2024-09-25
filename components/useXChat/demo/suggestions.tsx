@@ -1,5 +1,5 @@
 import { SmileOutlined, UserOutlined } from '@ant-design/icons';
-import { Bubble, Prompts, Sender, useXChat } from '@ant-design/x';
+import { Bubble, Prompts, Sender, useXAgent, useXChat } from '@ant-design/x';
 import { Flex, type GetProp } from 'antd';
 import React from 'react';
 
@@ -10,7 +10,7 @@ const roles: GetProp<typeof Bubble.List, 'roles'> = {
     placement: 'end',
     avatar: { icon: <UserOutlined />, style: { background: '#87d068' } },
   },
-  ai: {
+  text: {
     placement: 'start',
     avatar: { icon: <UserOutlined />, style: { background: '#fde3cf' } },
     typing: true,
@@ -32,47 +32,86 @@ const roles: GetProp<typeof Bubble.List, 'roles'> = {
   },
 };
 
-type Message = {
-  role: 'ai' | 'user' | 'suggestion';
-  content: string | string[];
+type AgentUserMessage = {
+  type: 'user';
+  content: string;
+};
+
+type AgentAIMessage = {
+  type: 'ai';
+  content?: string;
+  list?: (
+    | {
+        type: 'text';
+        content: string;
+      }
+    | {
+        type: 'suggestion';
+        content: string[];
+      }
+  )[];
+};
+
+type AgentMessage = AgentUserMessage | AgentAIMessage;
+
+type BubbleMessage = {
+  role: string;
 };
 
 const App = () => {
   const [content, setContent] = React.useState('');
 
-  const { onRequest, messages, requesting } = useXChat<Message>({
+  // Agent for request
+  const agent = useXAgent<AgentMessage>({
+    request: async ({ message, onSuccess }) => {
+      await sleep();
+
+      const { content } = message;
+
+      onSuccess({
+        type: 'ai',
+        list: [
+          {
+            type: 'text',
+            content: `Do you want?`,
+          },
+          {
+            type: 'suggestion',
+            content: [`Look at: ${content}`, `Search: ${content}`, `Try: ${content}`],
+          },
+        ],
+      });
+    },
+  });
+
+  // Chat messages
+  const { onRequest, parsedMessages } = useXChat<AgentMessage, BubbleMessage>({
+    agent,
+
     defaultMessages: [
       {
         id: 'init',
         message: {
-          role: 'ai',
+          type: 'ai',
           content: 'Hello, what can I do for you?',
         },
         status: 'success',
       },
     ],
 
-    request: async (info) => {
-      const content = info.content as string;
-
-      await sleep();
-
-      const result: Message[] = [
-        {
-          role: 'ai',
-          content: `Do you want?`,
-        },
-        {
-          role: 'suggestion',
-          content: [`Look at: ${content}`, `Search: ${content}`, `Try: ${content}`],
-        },
-      ];
-
-      return result;
-    },
     requestPlaceholder: {
-      role: 'ai',
+      type: 'ai',
       content: 'Waiting...',
+    },
+
+    // Convert AgentMessage to BubbleMessage
+    parser: (agentMessages) => {
+      const list = agentMessages.content ? [agentMessages] : (agentMessages as AgentAIMessage).list;
+
+      return (list || []).map((msg) => ({
+        role: msg.type,
+        content: msg.content,
+      }));
     },
   });
 
@@ -81,19 +120,19 @@ const App = () => {
       <Bubble.List
         roles={roles}
         style={{ height: 300 }}
-        items={messages.map(({ id, message, status }) => ({
+        items={parsedMessages.map(({ id, message, status }) => ({
           key: id,
           loading: status === 'loading',
           ...message,
         }))}
       />
       <Sender
-        loading={requesting}
+        loading={agent.isRequesting()}
         value={content}
         onChange={setContent}
         onSubmit={(nextContent) => {
           onRequest({
-            role: 'user',
+            type: 'user',
             content: nextContent,
           });
           setContent('');

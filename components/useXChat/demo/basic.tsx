@@ -1,5 +1,5 @@
 import { UserOutlined } from '@ant-design/icons';
-import { Bubble, Sender, useXChat } from '@ant-design/x';
+import { Bubble, Sender, useXAgent, useXChat } from '@ant-design/x';
 import { Flex, type GetProp } from 'antd';
 import React from 'react';
 
@@ -14,7 +14,7 @@ const roles: GetProp<typeof Bubble.List, 'roles'> = {
       maxWidth: 600,
     },
   },
-  user: {
+  local: {
     placement: 'end',
     avatar: { icon: <UserOutlined />, style: { background: '#87d068' } },
   },
@@ -25,32 +25,26 @@ let mockSuccess = false;
 const App = () => {
   const [content, setContent] = React.useState('');
 
-  const { onRequest, messages, requesting } = useXChat<{
-    role: 'ai' | 'user';
-    content: string;
-  }>({
-    request: async ({ content }) => {
+  // Agent for request
+  const agent = useXAgent({
+    request: async ({ message, onSuccess, onError }) => {
       await sleep();
 
       mockSuccess = !mockSuccess;
 
-      if (!mockSuccess) {
-        throw new Error('Mock request failed');
+      if (mockSuccess) {
+        onSuccess(`Mock success return. You said: ${message}`);
       }
 
-      return {
-        role: 'ai',
-        content: `Mock success. You said: ${content}`,
-      };
+      onError(new Error('Mock request failed'));
     },
-    requestPlaceholder: {
-      role: 'ai',
-      content: 'Waiting...',
-    },
-    requestFallback: {
-      role: 'ai',
-      content: 'Mock failed. Please try again later.',
-    },
+  });
+
+  // Chat messages
+  const { onRequest, messages } = useXChat({
+    agent,
+    requestPlaceholder: 'Waiting...',
+    requestFallback: 'Mock failed return. Please try again later.',
   });
 
   return (
@@ -61,18 +55,16 @@ const App = () => {
         items={messages.map(({ id, message, status }) => ({
           key: id,
           loading: status === 'loading',
-          ...message,
+          role: status === 'local' ? 'local' : 'ai',
+          content: message,
         }))}
       />
       <Sender
-        loading={requesting}
+        loading={agent.isRequesting()}
         value={content}
         onChange={setContent}
         onSubmit={(nextContent) => {
-          onRequest({
-            role: 'user',
-            content: nextContent,
-          });
+          onRequest(nextContent);
           setContent('');
         }}
       />

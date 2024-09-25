@@ -1,7 +1,7 @@
 ---
 category: Components
 group: 运行时
-title: useXChat
+title: useXAgent
 subtitle: 数据管理
 description: 配合 Agent hook 进行对话数据管理。
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*HjY3QKszqFEAAAAAAAAAAAAADrJ8AQ/original
