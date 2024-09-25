@@ -62,7 +62,7 @@ const App = () => {
   const [content, setContent] = React.useState('');
 
   // Agent for request
-  const agent = useXAgent<AgentMessage>({
+  const [agent] = useXAgent<AgentMessage>({
     request: async ({ message, onSuccess }) => {
       await sleep();
 

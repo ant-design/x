@@ -26,7 +26,7 @@ const App = () => {
   const [content, setContent] = React.useState('');
 
   // Agent for request
-  const agent = useXAgent({
+  const [agent] = useXAgent({
     request: async ({ message, onSuccess, onError }) => {
       await sleep();
 

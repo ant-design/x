@@ -103,6 +103,6 @@ export default function useXAgent<Message = string>(config: XAgentConfig<Message
       }
     }
 
-    return new XAgent<Message>(customConfig);
+    return [new XAgent<Message>(customConfig)] as const;
   }, []);
 }
