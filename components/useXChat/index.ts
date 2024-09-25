@@ -159,10 +159,8 @@ export default function useXChat<
       return nextMessages;
     });
 
-    // setRequesting(true);
-
     // Request
-    const updatingMsgId: number | string | null = null;
+    let updatingMsgId: number | string | null = null;
     const updateMessage = (message: AgentMessage, status: MessageStatus) => {
       let msg = getMessages().find((info) => info.id === updatingMsgId);
 
@@ -173,6 +171,7 @@ export default function useXChat<
           const oriWithoutPending = ori.filter((info) => info.id !== loadingMsgId);
           return [...oriWithoutPending, msg!];
         });
+        updatingMsgId = msg.id;
       } else {
         // Update directly
         setMessages((ori) => {

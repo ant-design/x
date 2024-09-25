@@ -17,6 +17,7 @@ Use with Bubble.List and Sender to quickly build a conversational LUI.
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">Basic</code>
+<code src="./demo/stream.tsx">Streaming</code>
 <code src="./demo/suggestions.tsx">Multiple Suggestion</code>
 
 ## API

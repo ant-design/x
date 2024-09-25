@@ -18,6 +18,7 @@ demo:
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">基本</code>
+<code src="./demo/stream.tsx">流式输出</code>
 <code src="./demo/suggestions.tsx">多项建议</code>
 
 ## API
