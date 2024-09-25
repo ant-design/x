@@ -1,20 +1,23 @@
 import { useEvent } from 'rc-util';
 import React from 'react';
+import { XAgent } from '../useXAgent';
 import useSyncState from './useSyncState';
 
 export type SimpleType = string | number | boolean | object;
 
 export type MessageStatus = 'local' | 'loading' | 'success' | 'error';
 
-export interface XAgentConfig<Message> {
+export interface XChatConfig<Message> {
+  agent: XAgent<Message>;
+
   defaultMessages?: DefaultMessageInfo<Message>[];
 
-  request: (
-    message: Message,
-    info: {
-      messages: MessageInfo<Message>[];
-    },
-  ) => Promise<RequestResult<Message>>;
+  // request: (
+  //   message: Message,
+  //   info: {
+  //     messages: MessageInfo<Message>[];
+  //   },
+  // ) => Promise<RequestResult<Message>>;
   requestPlaceholder?:
     | Message
     | ((
@@ -83,8 +86,8 @@ function formatMessageResult<Message>(
   }, [] as StandardRequestResult<Message>[]);
 }
 
-export default function useXChat<Message extends SimpleType>(config: XAgentConfig<Message>) {
-  const { defaultMessages, request, requestFallback, requestPlaceholder } = config;
+export default function useXChat<Message extends SimpleType>(config: XChatConfig<Message>) {
+  const { defaultMessages, agent, requestFallback, requestPlaceholder } = config;
 
   const [requesting, setRequesting] = React.useState(false);
   const [messages, setMessages, getMessages] = useSyncState<MessageInfo<Message>[]>(() =>
@@ -112,6 +115,7 @@ export default function useXChat<Message extends SimpleType>(config: XAgentConfi
   const onRequest = useEvent((message: Message) => {
     let loadingMsgId: number | string | null = null;
 
+    // Add placeholder message
     setMessages((ori) => {
       let nextMessages = [...ori, createMessage(message, 'local')];
 
@@ -132,36 +136,105 @@ export default function useXChat<Message extends SimpleType>(config: XAgentConfi
 
     setRequesting(true);
 
-    request(message, { messages })
-      .then((result) => {
-        const msgResults = formatMessageResult(result);
+    // Request
+    const updatingMsgId: number | string | null = null;
+    const updateMessage = (message: Message, status: MessageStatus) => {
+      let msg = getMessages().find((info) => info.id === updatingMsgId);
+
+      if (!msg) {
+        // Create if not exist
+        msg = createMessage(message, status);
         setMessages((ori) => {
           const oriWithoutPending = ori.filter((info) => info.id !== loadingMsgId);
-
-          return [
-            ...oriWithoutPending,
-            ...msgResults.map((item) => createMessage(item.message, item.status || 'success')),
-          ];
+          return [...oriWithoutPending, msg!];
         });
-      })
-      .catch(async (error) => {
-        if (requestFallback) {
-          const fallbackResult =
-            typeof requestFallback === 'function'
-              ? await requestFallback(message, { error, messages: getMessages() })
-              : requestFallback;
+      } else {
+        // Update directly
+        setMessages((ori) => {
+          return ori.map((info) => {
+            if (info.id === updatingMsgId) {
+              return {
+                ...info,
+                message,
+                status,
+              };
+            }
+            return info;
+          });
+        });
+      }
 
-          setMessages((ori) => [
-            ...ori.filter((info) => info.id !== loadingMsgId),
-            ...formatMessageResult(fallbackResult).map((item) =>
-              createMessage(item.message, item.status || 'error'),
-            ),
-          ]);
-        }
-      })
-      .finally(() => {
-        setRequesting(false);
-      });
+      return msg;
+    };
+
+    agent.request(
+      {
+        message,
+        messages: messages
+          .filter((info) => info.status !== 'loading' && info.status !== 'error')
+          .map((info) => info.message),
+      },
+      {
+        onUpdate: (message) => {
+          updateMessage(message, 'loading');
+        },
+        onSuccess: (message) => {
+          updateMessage(message, 'success');
+        },
+        onError: async (error: Error) => {
+          if (requestFallback) {
+            // Update as error
+            const fallbackResult =
+              typeof requestFallback === 'function'
+                ? await requestFallback(message, { error, messages: getMessages() })
+                : requestFallback;
+
+            setMessages((ori) => [
+              ...ori.filter((info) => info.id !== loadingMsgId),
+              ...formatMessageResult(fallbackResult).map((item) =>
+                createMessage(item.message, item.status || 'error'),
+              ),
+            ]);
+          } else {
+            // Remove directly
+            setMessages((ori) => {
+              return ori.filter((info) => info.id !== loadingMsgId);
+            });
+          }
+        },
+      },
+    );
+
+    // request(message, { messages })
+    //   .then((result) => {
+    //     const msgResults = formatMessageResult(result);
+    //     setMessages((ori) => {
+    //       const oriWithoutPending = ori.filter((info) => info.id !== loadingMsgId);
+
+    //       return [
+    //         ...oriWithoutPending,
+    //         ...msgResults.map((item) => createMessage(item.message, item.status || 'success')),
+    //       ];
+    //     });
+    //   })
+    //   .catch(async (error) => {
+    //     if (requestFallback) {
+    //       const fallbackResult =
+    //         typeof requestFallback === 'function'
+    //           ? await requestFallback(message, { error, messages: getMessages() })
+    //           : requestFallback;
+
+    //       setMessages((ori) => [
+    //         ...ori.filter((info) => info.id !== loadingMsgId),
+    //         ...formatMessageResult(fallbackResult).map((item) =>
+    //           createMessage(item.message, item.status || 'error'),
+    //         ),
+    //       ]);
+    //     }
+    //   })
+    //   .finally(() => {
+    //     setRequesting(false);
+    //   });
 
     idRef.current += 1;
   });

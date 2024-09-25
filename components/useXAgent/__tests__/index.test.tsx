@@ -1,6 +1,6 @@
 import React from 'react';
 import { fireEvent, render, waitFakeTimer } from '../../../tests/utils';
-import { MessageStatus, SimpleType, XChatConfig } from '../index';
+import { MessageStatus, SimpleType, XAgentConfig } from '../index';
 import useXChat from '../index';
 
 describe('useXChat', () => {
@@ -15,7 +15,7 @@ describe('useXChat', () => {
     jest.useRealTimers();
   });
 
-  function Demo<Message extends SimpleType = string>(config: Partial<XChatConfig<Message>>) {
+  function Demo<Message extends SimpleType = string>(config: Partial<XAgentConfig<Message>>) {
     const { messages, onRequest } = useXChat<Message>({
       request: requestNeverEnd,
       ...config,

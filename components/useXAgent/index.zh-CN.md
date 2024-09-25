@@ -45,7 +45,7 @@ type RequestResult<Message> =
   | RequestResultObject<Message>[];
 ```
 
-### XChatConfig
+### XAgentConfig
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
@@ -54,7 +54,7 @@ type RequestResult<Message> =
 | requestFallback | 请求失败的兜底信息，不提供则不会展示 | RequestResult \| (msg: Message, info: { error: Error, messages: MessageInfo[] }) => Message | - |  |
 | requestPlaceholder | 请求中的占位信息，不提供则不会展示 | Message \| (msg: Message, info: { messages: MessageInfo[] }) => Message | - |  |
 
-### XChatConfigReturnType
+### XAgentConfigReturnType
 
 | 属性        | 说明                            | 类型                              | 版本 |
 | ----------- | ------------------------------- | --------------------------------- | ---- |

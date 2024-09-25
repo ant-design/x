@@ -22,7 +22,7 @@ Use with Bubble.List and Sender to quickly build a conversational LUI.
 ## API
 
 ```tsx | pure
-type useXChat<Message> = (config: XChatConfig<Message>) => XChatConfigReturnType;
+type useXChat<Message> = (config: XAgentConfig<Message>) => XAgentConfigReturnType;
 
 type MessageStatus = 'local' | 'loading' | 'success' | 'error';
 
@@ -44,7 +44,7 @@ type RequestResult<Message> =
   | RequestResultObject<Message>[];
 ```
 
-### XChatConfig
+### XAgentConfig
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
@@ -53,7 +53,7 @@ type RequestResult<Message> =
 | requestFallback | Request failed fallback information, not provided will not be displayed | RequestResult \| (msg: Message, info: { error: Error, messages: MessageInfo[] }) => Message | - |  |
 | requestPlaceholder | Request placeholder information, not provided will not be displayed | Message \| (msg: Message, info: { messages: MessageInfo[] }) => Message | - |  |
 
-### XChatConfigReturnType
+### XAgentConfigReturnType
 
 | Property | Description | Type | Version |
 | --- | --- | --- | --- |
