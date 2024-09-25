@@ -1,7 +1,7 @@
 ---
 category: Components
 group: Runtime
-title: useXAgent
+title: useXChat
 description: Use agent hook for data management.
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*HjY3QKszqFEAAAAAAAAAAAAADrJ8AQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*G8njQogkGwAAAAAAAAAAAAAADrJ8AQ/original
@@ -22,7 +22,7 @@ Use with Bubble.List and Sender to quickly build a conversational LUI.
 ## API
 
 ```tsx | pure
-type useXAgent<Message> = (config: XAgentConfig<Message>) => XAgentConfigReturnType;
+type useXChat<Message> = (config: XAgentConfig<Message>) => XAgentConfigReturnType;
 
 type MessageStatus = 'local' | 'loading' | 'success' | 'error';
 

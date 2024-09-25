@@ -83,7 +83,7 @@ function formatMessageResult<Message>(
   }, [] as StandardRequestResult<Message>[]);
 }
 
-export default function useXAgent<Message extends SimpleType>(config: XAgentConfig<Message>) {
+export default function useXChat<Message extends SimpleType>(config: XAgentConfig<Message>) {
   const { defaultMessages, request, requestFallback, requestPlaceholder } = config;
 
   const [requesting, setRequesting] = React.useState(false);

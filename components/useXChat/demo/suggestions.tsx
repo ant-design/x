@@ -1,5 +1,5 @@
 import { SmileOutlined, UserOutlined } from '@ant-design/icons';
-import { Bubble, Prompts, Sender, useXAgent } from '@ant-design/x';
+import { Bubble, Prompts, Sender, useXChat } from '@ant-design/x';
 import { Flex, type GetProp } from 'antd';
 import React from 'react';
 
@@ -40,7 +40,7 @@ type Message = {
 const App = () => {
   const [content, setContent] = React.useState('');
 
-  const { onRequest, messages, requesting } = useXAgent<Message>({
+  const { onRequest, messages, requesting } = useXChat<Message>({
     defaultMessages: [
       {
         id: 'init',

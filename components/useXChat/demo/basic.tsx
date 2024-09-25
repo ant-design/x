@@ -1,7 +1,7 @@
-import React from 'react';
-import { Bubble, Sender, useXAgent } from '@ant-design/x';
-import { Flex, type GetProp } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
+import { Bubble, Sender, useXChat } from '@ant-design/x';
+import { Flex, type GetProp } from 'antd';
+import React from 'react';
 
 const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000));
 
@@ -25,7 +25,7 @@ let mockSuccess = false;
 const App = () => {
   const [content, setContent] = React.useState('');
 
-  const { onRequest, messages, requesting } = useXAgent<{
+  const { onRequest, messages, requesting } = useXChat<{
     role: 'ai' | 'user';
     content: string;
   }>({

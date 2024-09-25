@@ -1,9 +1,9 @@
 import React from 'react';
 import { fireEvent, render, waitFakeTimer } from '../../../tests/utils';
 import { MessageStatus, SimpleType, XAgentConfig } from '../index';
-import useXAgent from '../index';
+import useXChat from '../index';
 
-describe('useXAgent', () => {
+describe('useXChat', () => {
   const requestNeverEnd = jest.fn(() => new Promise<any>(() => {}));
 
   beforeAll(() => {
@@ -16,7 +16,7 @@ describe('useXAgent', () => {
   });
 
   function Demo<Message extends SimpleType = string>(config: Partial<XAgentConfig<Message>>) {
-    const { messages, onRequest } = useXAgent<Message>({
+    const { messages, onRequest } = useXChat<Message>({
       request: requestNeverEnd,
       ...config,
     });

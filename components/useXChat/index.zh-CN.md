@@ -1,7 +1,7 @@
 ---
 category: Components
 group: 运行时
-title: useXAgent
+title: useXChat
 subtitle: 数据管理
 description: 使用 Agent hook 进行数据管理。
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*HjY3QKszqFEAAAAAAAAAAAAADrJ8AQ/original
@@ -23,7 +23,7 @@ demo:
 ## API
 
 ```tsx | pure
-type useXAgent<Message> = (config: XAgentConfig<Message>) => XAgentConfigReturnType;
+type useXChat<Message> = (config: XAgentConfig<Message>) => XAgentConfigReturnType;
 
 type MessageStatus = 'local' | 'loading' | 'success' | 'error';
 

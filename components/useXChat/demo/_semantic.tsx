@@ -1,9 +1,9 @@
-import React from 'react';
 import { UserOutlined } from '@ant-design/icons';
+import { Bubble } from '@ant-design/x';
 import { Avatar } from 'antd';
+import React from 'react';
 import SemanticPreview from '../../../.dumi/components/SemanticPreview';
 import useLocale from '../../../.dumi/hooks/useLocale';
-import { Bubble } from '@ant-design/x';
 
 const locales = {
   cn: {
