@@ -1,17 +1,18 @@
-import { type ButtonProps, Input, Space, type GetProps } from 'antd';
+import { type ButtonProps, type GetProps, Input, Space } from 'antd';
 import classnames from 'classnames';
 
-import useStyle from './style';
-import React from 'react';
-import type { CustomizeComponent, SubmitType } from './interface';
-import { useConfigContext } from '../config-provider';
 import { useMergedState } from 'rc-util';
-import getValue from 'rc-util/lib/utils/get';
-import { ActionButtonContext } from './components/ActionButton';
 import pickAttrs from 'rc-util/lib/pickAttrs';
+import getValue from 'rc-util/lib/utils/get';
+import React from 'react';
+import useXComponentConfig from '../_util/hooks/use-x-component-config';
+import { useXProviderContext } from '../x-provider';
+import { ActionButtonContext } from './components/ActionButton';
 import ClearButton from './components/ClearButton';
 import LoadingButton from './components/LoadingButton';
 import SendButton from './components/SendButton';
+import type { CustomizeComponent, SubmitType } from './interface';
+import useStyle from './style';
 
 type TextareaProps = GetProps<typeof Input.TextArea>;
 
@@ -87,7 +88,7 @@ const Sender: React.FC<SenderProps> = (props) => {
   } = props;
 
   // ============================= MISC =============================
-  const { direction, getPrefixCls } = useConfigContext();
+  const { direction, getPrefixCls } = useXProviderContext();
   const prefixCls = getPrefixCls('sender', customizePrefixCls);
 
   const domProps = pickAttrs(rest, {
@@ -96,11 +97,22 @@ const Sender: React.FC<SenderProps> = (props) => {
     data: true,
   });
 
+  // ===================== Component Config =========================
+  const contextConfig = useXComponentConfig('sender');
+
   // ============================ Styles ============================
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
-  const mergedCls = classnames(className, rootClassName, prefixCls, hashId, cssVarCls, {
-    [`${prefixCls}-rtl`]: direction === 'rtl',
-  });
+  const mergedCls = classnames(
+    prefixCls,
+    contextConfig.className,
+    className,
+    rootClassName,
+    hashId,
+    cssVarCls,
+    {
+      [`${prefixCls}-rtl`]: direction === 'rtl',
+    },
+  );
 
   const actionBtnCls = `${prefixCls}-actions-btn`;
 
@@ -180,11 +192,15 @@ const Sender: React.FC<SenderProps> = (props) => {
 
   // ============================ Render ============================
   return wrapCSSVar(
-    <div className={mergedCls} style={style}>
+    <div className={mergedCls} style={{ ...contextConfig.style, ...style }}>
       <InputTextArea
         {...domProps}
-        style={styles.input}
-        className={classnames(`${prefixCls}-input`, classNames.input)}
+        style={{ ...contextConfig.styles.input, ...styles.input }}
+        className={classnames(
+          `${prefixCls}-input`,
+          contextConfig.classNames.input,
+          classNames.input,
+        )}
         autoSize={{ maxRows: 8 }}
         value={innerValue}
         onChange={(e) => {
@@ -197,8 +213,12 @@ const Sender: React.FC<SenderProps> = (props) => {
 
       {/* Action List */}
       <div
-        className={classnames(`${prefixCls}-actions-list`, classNames.actions)}
-        style={styles.actions}
+        className={classnames(
+          `${prefixCls}-actions-list`,
+          contextConfig.classNames.actions,
+          classNames.actions,
+        )}
+        style={{ ...contextConfig.styles.actions, ...styles.actions }}
       >
         <ActionButtonContext.Provider
           value={{

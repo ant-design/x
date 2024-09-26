@@ -2,13 +2,13 @@ import classNames from 'classnames';
 import { useEvent } from 'rc-util';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import * as React from 'react';
-import { useConfigContext } from '../config-provider';
+import { useXProviderContext } from '../x-provider';
 import Bubble, { BubbleContext } from './Bubble';
 import type { BubbleRef } from './Bubble';
+import useDisplayData from './hooks/useDisplayData';
 import useListData from './hooks/useListData';
 import type { BubbleProps } from './interface';
 import useStyle from './style';
-import useDisplayData from './hooks/useDisplayData';
 
 export interface BubbleListRef {
   nativeElement: HTMLDivElement;
@@ -58,7 +58,7 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   const bubbleRefs = React.useRef<Record<string, BubbleRef>>({});
 
   // ============================ Prefix ============================
-  const { getPrefixCls } = useConfigContext();
+  const { getPrefixCls } = useXProviderContext();
 
   const prefixCls = getPrefixCls('bubble', customizePrefixCls);
   const listPrefixCls = `${prefixCls}-list`;

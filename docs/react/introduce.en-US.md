@@ -3,7 +3,7 @@ order: 0
 title: Ant Design X of React
 ---
 
-Following the Ant Design specification, we developed a React UI library `antd` that contains a set of high quality components and demos for building rich, interactive user interfaces.
+Following the Ant Design specification, we developed a React UI library `@ant-design/x` that Crafting AI-driven interfaces with React, seamlessly integrating smart chat components and API services at your fingertips.
 
 <div class="pic-plus">
   <img width="150" src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*1SDwSrOnSakAAAAAAAAAAAAADgCCAQ/original" />
@@ -34,13 +34,11 @@ Following the Ant Design specification, we developed a React UI library `antd` t
 
 Polyfills are needed for IE browsers. We recommend [@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env) for it. You can set `targets` config if you are using [umi](http://umijs.org/).
 
-> Dropped support of IE8 after `antd@2.0`. Dropped support of React 15 and IE9/10 after `antd@4.0`. Dropped support of IE after `antd@5.0`.
-
 ## Version
 
-- Stable: [![npm package](https://img.shields.io/npm/v/antd.svg?style=flat-square)](https://www.npmjs.org/package/antd)
+- Stable: [![npm package](https://img.shields.io/npm/v/@ant-design/x.svg?style=flat-square)](https://www.npmjs.com/package/@ant-design/x)
 
-You can subscribe to this feed for new version notifications: https://github.com/ant-design/ant-design/releases.atom
+You can subscribe to this feed for new version notifications: https://github.com/ant-design/x/releases.atom
 
 ## Installation
 
@@ -48,7 +46,7 @@ You can subscribe to this feed for new version notifications: https://github.com
 
 **We recommend using [npm](https://www.npmjs.com/) or [yarn](https://github.com/yarnpkg/yarn/) or [pnpm](https://pnpm.io/) or [bun](https://bun.sh/) to install**, it not only makes development easier, but also allow you to take advantage of the rich ecosystem of Javascript packages and tooling.
 
-<InstallDependencies npm='$ npm install antd --save' yarn='$ yarn add antd' pnpm='$ pnpm install antd --save' bun='$ bun add antd'></InstallDependencies>
+<InstallDependencies npm='$ npm install @ant-design/x --save' yarn='$ yarn add antd' pnpm='$ pnpm install antd --save' bun='$ bun add antd'></InstallDependencies>
 
 If you are in a bad network environment, you can try other registries and tools like [cnpm](https://github.com/cnpm/cnpm).
 
@@ -56,20 +54,20 @@ If you are in a bad network environment, you can try other registries and tools 
 
 Add `script` and `link` tags in your browser and use the global variable `antd`.
 
-We provide `antd.js` and `antd.min.js` `reset.css` under [dist](https://unpkg.com/browse/antd@5.0.0/dist/) folder in antd's npm package. You can also download these files directly from [![CDNJS](https://img.shields.io/cdnjs/v/antd.svg?style=flat-square)](https://cdnjs.com/libraries/antd), [![](https://data.jsdelivr.com/v1/package/npm/antd/badge)](https://www.jsdelivr.com/package/npm/antd) or [unpkg](https://unpkg.com/antd/dist).
+We provide `antdx.js`, `antdx.min.js`, and `antdx.min.js.map` in the `dist` directory of the npm package. You can also download them via [![CDNJS](https://img.shields.io/cdnjs/v/@ant-design/x.svg?style=flat-square)](https://cdnjs.com/libraries/@ant-design), [![](https://data.jsdelivr.com/v1/package/npm/@ant-design/x/badge)](https://www.jsdelivr.com/package/npm/@ant-design/x), or [UNPKG](https://unpkg.com/@ant-design/x/dist/).
 
 > **We strongly discourage loading the entire files** this will add bloat to your application and make it more difficult to receive bugfixes and updates. Antd is intended to be used in conjunction with a build tool, such as [webpack](https://webpack.github.io/), which will make it easy to import only the parts of antd that you are using.
 
-> Note: You should import `react`、`react-dom`、`dayjs` before using `antd.js`.
+> Note: You should import `react`、`react-dom`、`dayjs` before using `antdx.js`.
 
 ## Usage
 
 ```jsx
 import React from 'react';
-import { DatePicker } from 'antd';
+import { Bubble } from '@ant-design/x';
 
 const App = () => {
-  return <DatePicker />;
+  return <Bubble content="Hello World!" />;
 };
 
 export default App;
@@ -77,11 +75,11 @@ export default App;
 
 ### Use modularized antd
 
-`antd` supports ES modules tree shaking by default.
+`@ant-design/x` supports ES modules tree shaking by default.
 
 ### TypeScript
 
-`antd` provides a built-in ts definition, don't install `@types/antd`.
+`@ant-design/x` provides a built-in ts definition.
 
 ## Links
 
@@ -110,11 +108,11 @@ export default App;
 
 ## Non-React Implementations
 
-React is used to encapsulate a library of components which embody our design language. We welcome the community to implement our design system [in other front-end frameworks](/docs/spec/introduce#front-end-implementation) of their choice.
+Welcome to contribute!
 
-## Companies using antd
+## Companies using antdx
 
-Ant Design is widely used for building enterprise-level websites both domestically and internationally. You can refer to wappalyzer for reference data. If your company or product uses Ant Design, let us know [here](https://github.com/ant-design/ant-design/issues/477)!
+Ant Design X is widely used in AI-driven user interfaces within Ant Group. If your company and products use Ant Design X, feel free to leave a comment [here](https://github.com/ant-design/x/issues/126).
 
 ## Contributing
 
@@ -126,6 +124,9 @@ If you'd like to help us improve antd, just create a [Pull Request](https://gith
 
 ## Need Help?
 
-For questions on how to use antd, please post questions to [GitHub Discussions](https://github.com/ant-design/ant-design/discussions) using the `Q&A` tag or [<img alt="Stack Overflow" src="https://cdn.sstatic.net/Sites/stackoverflow/company/img/logos/so/so-logo.svg?v=2bb144720a66" width="140" />](http://stackoverflow.com/questions/tagged/antd) using the `antd` tag.
+If you encounter any issues while using Ant Design X, you can seek help through the following channels. We also encourage experienced users to assist newcomers via these platforms.
 
-As always, we encourage experienced users to help those who are not familiar with `antd`!
+When asking questions on GitHub Discussions, it's recommended to use the `Q&A` tag.
+
+1. [GitHub Discussions](https://github.com/ant-design/x/discussions)
+2. [GitHub Issues](https://github.com/ant-design/x/issues)

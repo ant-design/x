@@ -2,7 +2,7 @@
 
 exports[`ThoughtChain Component ThoughtChain component work 1`] = `
 <div
-  class="ant-thought-chain"
+  class="ant-thought-chain ant-thought-chain-middle"
 >
   <div
     class="ant-thought-chain-item ant-thought-chain-item-success-error"
@@ -246,7 +246,7 @@ exports[`ThoughtChain Component ThoughtChain component work 1`] = `
 
 exports[`ThoughtChain Component rtl render component should be rendered correctly in RTL direction 1`] = `
 <div
-  class="ant-thought-chain ant-thought-chain-rtl"
+  class="ant-thought-chain css-var-r1 ant-thought-chain-rtl ant-thought-chain-middle"
 >
   <div
     class="ant-thought-chain-item ant-thought-chain-item-success-error"
@@ -255,7 +255,7 @@ exports[`ThoughtChain Component rtl render component should be rendered correctl
       class="ant-thought-chain-item-header"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
+        class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-r1 ant-avatar-css-var ant-thought-chain-item-icon"
       >
         <span
           aria-label="check-circle"
@@ -284,7 +284,7 @@ exports[`ThoughtChain Component rtl render component should be rendered correctl
         class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
       >
         <span
-          class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+          class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title css-var-r1"
         >
           <strong>
             <span
@@ -310,7 +310,7 @@ exports[`ThoughtChain Component rtl render component should be rendered correctl
           </strong>
         </span>
         <span
-          class="ant-typography ant-typography-rtl ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
+          class="ant-typography ant-typography-rtl ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc css-var-r1"
         >
           description
         </span>
@@ -334,7 +334,7 @@ exports[`ThoughtChain Component rtl render component should be rendered correctl
       class="ant-thought-chain-item-header"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
+        class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-r1 ant-avatar-css-var ant-thought-chain-item-icon"
       >
         <span
           aria-label="check-circle"
@@ -363,7 +363,7 @@ exports[`ThoughtChain Component rtl render component should be rendered correctl
         class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
       >
         <span
-          class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+          class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title css-var-r1"
         >
           <strong>
             <span
@@ -389,7 +389,7 @@ exports[`ThoughtChain Component rtl render component should be rendered correctl
           </strong>
         </span>
         <span
-          class="ant-typography ant-typography-rtl ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
+          class="ant-typography ant-typography-rtl ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc css-var-r1"
         >
           description
         </span>
@@ -413,7 +413,7 @@ exports[`ThoughtChain Component rtl render component should be rendered correctl
       class="ant-thought-chain-item-header"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
+        class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-r1 ant-avatar-css-var ant-thought-chain-item-icon"
       >
         <span
           aria-label="check-circle"
@@ -442,7 +442,7 @@ exports[`ThoughtChain Component rtl render component should be rendered correctl
         class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
       >
         <span
-          class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+          class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title css-var-r1"
         >
           <strong>
             <span
@@ -468,7 +468,7 @@ exports[`ThoughtChain Component rtl render component should be rendered correctl
           </strong>
         </span>
         <span
-          class="ant-typography ant-typography-rtl ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
+          class="ant-typography ant-typography-rtl ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc css-var-r1"
         >
           description
         </span>
@@ -490,7 +490,7 @@ exports[`ThoughtChain Component rtl render component should be rendered correctl
 
 exports[`ThoughtChain Component test theme component should be rendered correctly when configuring the theme.components 1`] = `
 <div
-  class="ant-thought-chain"
+  class="ant-thought-chain css-var-rl ant-thought-chain-middle"
 >
   <div
     class="ant-thought-chain-item ant-thought-chain-item-success-error"
@@ -499,7 +499,7 @@ exports[`ThoughtChain Component test theme component should be rendered correctl
       class="ant-thought-chain-item-header"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
+        class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-rl ant-avatar-css-var ant-thought-chain-item-icon"
       >
         <span
           aria-label="check-circle"
@@ -528,7 +528,7 @@ exports[`ThoughtChain Component test theme component should be rendered correctl
         class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
       >
         <span
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title css-var-rl"
         >
           <strong>
             <span
@@ -554,7 +554,7 @@ exports[`ThoughtChain Component test theme component should be rendered correctl
           </strong>
         </span>
         <span
-          class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
+          class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc css-var-rl"
         >
           description
         </span>
@@ -578,7 +578,7 @@ exports[`ThoughtChain Component test theme component should be rendered correctl
       class="ant-thought-chain-item-header"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
+        class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-rl ant-avatar-css-var ant-thought-chain-item-icon"
       >
         <span
           aria-label="check-circle"
@@ -607,7 +607,7 @@ exports[`ThoughtChain Component test theme component should be rendered correctl
         class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
       >
         <span
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title css-var-rl"
         >
           <strong>
             <span
@@ -633,7 +633,7 @@ exports[`ThoughtChain Component test theme component should be rendered correctl
           </strong>
         </span>
         <span
-          class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
+          class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc css-var-rl"
         >
           description
         </span>
@@ -657,7 +657,7 @@ exports[`ThoughtChain Component test theme component should be rendered correctl
       class="ant-thought-chain-item-header"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
+        class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-rl ant-avatar-css-var ant-thought-chain-item-icon"
       >
         <span
           aria-label="check-circle"
@@ -686,7 +686,7 @@ exports[`ThoughtChain Component test theme component should be rendered correctl
         class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
       >
         <span
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title css-var-rl"
         >
           <strong>
             <span
@@ -712,7 +712,7 @@ exports[`ThoughtChain Component test theme component should be rendered correctl
           </strong>
         </span>
         <span
-          class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
+          class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc css-var-rl"
         >
           description
         </span>

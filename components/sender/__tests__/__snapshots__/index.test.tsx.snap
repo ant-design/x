@@ -57,23 +57,23 @@ exports[`Sender Component loading state 1`] = `
 
 exports[`Sender Component rtl render component should be rendered correctly in RTL direction 1`] = `
 <div
-  class="ant-sender ant-sender-rtl"
+  class="ant-sender css-var-r1 ant-sender-rtl"
 >
   <textarea
-    class="ant-input ant-input-outlined ant-sender-input"
-    style="resize: none; height: -54px; max-height: -54px;"
+    class="ant-input ant-input-outlined css-var-r1 ant-input-css-var ant-sender-input"
+    style="resize: none; height: -110px; max-height: -110px;"
   />
   <div
     class="ant-sender-actions-list"
   >
     <div
-      class="ant-space ant-space-horizontal ant-space-rtl ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
+      class="ant-space ant-space-horizontal ant-space-rtl ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-r1"
     >
       <div
         class="ant-space-item"
       >
         <button
-          class="ant-btn ant-btn-text ant-btn-icon-only ant-btn-rtl ant-sender-actions-btn"
+          class="ant-btn css-var-r1 ant-btn-text ant-btn-icon-only ant-btn-rtl ant-sender-actions-btn"
           disabled=""
           type="button"
         >
@@ -109,7 +109,7 @@ exports[`Sender Component rtl render component should be rendered correctly in R
         class="ant-space-item"
       >
         <button
-          class="ant-btn ant-btn-text ant-btn-icon-only ant-btn-rtl ant-sender-actions-btn"
+          class="ant-btn css-var-r1 ant-btn-text ant-btn-icon-only ant-btn-rtl ant-sender-actions-btn"
           disabled=""
           type="button"
         >

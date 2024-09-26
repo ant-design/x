@@ -1,18 +1,19 @@
-import React from 'react';
-import classnames from 'classnames';
 import type { MenuProps } from 'antd';
+import classnames from 'classnames';
+import React from 'react';
 
-import ConversationsItem, { type ConversationsItemProps } from './Item';
 import GroupTitle, { GroupTitleContext } from './GroupTitle';
+import ConversationsItem, { type ConversationsItemProps } from './Item';
 
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
-import { useConfigContext } from '../config-provider';
+import useXComponentConfig from '../_util/hooks/use-x-component-config';
+import { useXProviderContext } from '../x-provider';
 import useGroupable from './hooks/useGroupable';
 
 import useStyle from './style';
 
-import type { Conversation, Groupable } from './interface';
 import pickAttrs from 'rc-util/lib/pickAttrs';
+import type { Conversation, Groupable } from './interface';
 
 /**
  * @desc 会话列表组件参数
@@ -93,6 +94,7 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
     classNames = {},
     groupable,
     className,
+    style,
     ...restProps
   } = props;
 
@@ -114,16 +116,27 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
   const [groupList, enableGroup] = useGroupable(groupable, items);
 
   // ============================ Prefix ============================
-  const { getPrefixCls, direction } = useConfigContext();
+  const { getPrefixCls, direction } = useXProviderContext();
 
   const prefixCls = getPrefixCls('conversations', customizePrefixCls);
+
+  // ===================== Component Config =========================
+  const contextConfig = useXComponentConfig('conversations');
 
   // ============================ Style ============================
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
 
-  const mergedCls = classnames(className, rootClassName, prefixCls, hashId, cssVarCls, {
-    [`${prefixCls}-rtl`]: direction === 'rtl',
-  });
+  const mergedCls = classnames(
+    prefixCls,
+    contextConfig.className,
+    className,
+    rootClassName,
+    hashId,
+    cssVarCls,
+    {
+      [`${prefixCls}-rtl`]: direction === 'rtl',
+    },
+  );
 
   // ============================ Events ============================
   const onConversationItemClick: ConversationsItemProps['onClick'] = (info) => {
@@ -136,7 +149,14 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
 
   // ============================ Render ============================
   return wrapCSSVar(
-    <ul {...domProps} className={mergedCls}>
+    <ul
+      {...domProps}
+      style={{
+        ...contextConfig.style,
+        ...style,
+      }}
+      className={mergedCls}
+    >
       {groupList.map((groupInfo, groupIndex) => {
         const convItems = groupInfo.data.map((convInfo: Conversation, convIndex: number) => (
           <ConversationsItem
@@ -144,8 +164,8 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
             info={convInfo}
             prefixCls={prefixCls}
             direction={direction}
-            className={classNames.item}
-            style={styles.item}
+            className={classnames(classNames.item, contextConfig.classNames.item)}
+            style={{ ...contextConfig.styles.item, ...styles.item }}
             menu={typeof menu === 'function' ? menu(convInfo) : menu}
             active={mergedActiveKey === convInfo.key}
             onClick={onConversationItemClick}

@@ -13,10 +13,7 @@ const roles: GetProp<typeof Bubble.List, 'roles'> = {
     placement: 'start',
     avatar: { icon: <UserOutlined />, style: { visibility: 'hidden' } },
     variant: 'borderless',
-    messageRender: (items) => {
-      console.log('>>>>', items);
-      return <Prompts vertical items={items as any} />;
-    },
+    messageRender: (items) => <Prompts vertical items={items as any} />,
   },
 };
 

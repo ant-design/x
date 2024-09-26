@@ -1,8 +1,9 @@
-import React from 'react';
-import classnames from 'classnames';
 import { Button, Typography } from 'antd';
+import classnames from 'classnames';
+import React from 'react';
 
-import { useConfigContext } from '../config-provider';
+import useXComponentConfig from '../_util/hooks/use-x-component-config';
+import { useXProviderContext } from '../x-provider';
 
 import useStyle from './style';
 
@@ -84,19 +85,31 @@ const Prompts: React.FC<PromptsProps> = (props) => {
   } = props;
 
   // ============================ PrefixCls ============================
-  const { getPrefixCls, direction } = useConfigContext();
+  const { getPrefixCls, direction } = useXProviderContext();
 
   const prefixCls = getPrefixCls('prompts', customizePrefixCls);
+
+  // ===================== Component Config =========================
+  const contextConfig = useXComponentConfig('prompts');
 
   // ============================ Style ============================
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
 
-  const mergedCls = classnames(className, rootClassName, prefixCls, hashId, cssVarCls, {
-    [`${prefixCls}-rtl`]: direction === 'rtl',
-  });
+  const mergedCls = classnames(
+    prefixCls,
+    contextConfig.className,
+    className,
+    rootClassName,
+    hashId,
+    cssVarCls,
+    {
+      [`${prefixCls}-rtl`]: direction === 'rtl',
+    },
+  );
 
   const mergedListCls = classnames(
     `${prefixCls}-list`,
+    contextConfig.classNames.list,
     classNames.list,
     { [`${prefixCls}-list-wrap`]: wrap },
     { [`${prefixCls}-list-vertical`]: vertical },
@@ -104,35 +117,47 @@ const Prompts: React.FC<PromptsProps> = (props) => {
 
   // ============================ Render ============================
   return wrapCSSVar(
-    <div {...htmlProps} className={mergedCls} style={style}>
+    <div {...htmlProps} className={mergedCls} style={{ ...style, ...contextConfig.style }}>
       {/* Title */}
       {title && (
         <Typography.Title
           level={5}
-          className={classnames(`${prefixCls}-title`, classNames.title)}
-          style={styles.title}
+          className={classnames(
+            `${prefixCls}-title`,
+            contextConfig.classNames.title,
+            classNames.title,
+          )}
+          style={{ ...contextConfig.styles.title, ...styles.title }}
         >
           {title}
         </Typography.Title>
       )}
       {/* Prompt List */}
-      <ul className={mergedListCls} style={styles.list}>
+      <ul className={mergedListCls} style={{ ...contextConfig.styles.list, ...styles.list }}>
         {items?.map((info, index) => (
           <li key={info.key || `key_${index}`}>
             {/* Prompt Item */}
             <Button
               type={info.disabled ? 'default' : 'text'}
-              style={styles.item}
+              style={{ ...contextConfig.styles.item, ...styles.item }}
               disabled={info.disabled}
-              className={classnames(`${prefixCls}-item`, classNames.item)}
+              className={classnames(
+                `${prefixCls}-item`,
+                contextConfig.classNames.item,
+                classNames.item,
+              )}
               onClick={() => onItemClick?.({ data: info })}
             >
               {/* Icon */}
               {info.icon && <div className={`${prefixCls}-icon`}>{info.icon}</div>}
               {/* Content */}
               <div
-                className={classnames(`${prefixCls}-content`, classNames.itemContent)}
-                style={styles.itemContent}
+                className={classnames(
+                  `${prefixCls}-content`,
+                  contextConfig.classNames.itemContent,
+                  classNames.itemContent,
+                )}
+                style={{ ...contextConfig.styles.itemContent, ...styles.itemContent }}
               >
                 {/* Label */}
                 {info.label && (

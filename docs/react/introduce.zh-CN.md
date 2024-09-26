@@ -3,7 +3,7 @@ order: 0
 title: Ant Design X of React
 ---
 
-`antd` 是基于 Ant Design 设计体系的 React UI 组件库，主要用于研发企业级中后台产品。
+`@ant-design/x` 是遵循 Ant Design 设计体系的一个 React UI 库，用于构建由 AI 驱动的界面，一键接入智能对话组件与 API 服务。
 
 <div class="pic-plus">
   <img width="150" src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*1SDwSrOnSakAAAAAAAAAAAAADgCCAQ/original"/>
@@ -34,13 +34,11 @@ title: Ant Design X of React
 
 对于 IE 系列浏览器，需要提供相应的 Polyfill 支持，建议使用 [@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env) 来解决浏览器兼容问题。如果你在使用 [umi](http://umijs.org/)，可以直接使用 [targets](https://umijs.org/zh/config/#targets) 配置。
 
-> `antd@2.0` 之后不再支持 IE8。 `antd@4.0` 之后不再支持 React 15 和 IE9/10。 `antd@5.0` 之后不再支持 IE。
-
 ## 版本
 
-- 稳定版：[![npm package](https://img.shields.io/npm/v/antd.svg?style=flat-square)](https://www.npmjs.org/package/antd)
+- 稳定版： [![npm package](https://img.shields.io/npm/v/@ant-design/x.svg?style=flat-square)](https://www.npmjs.com/package/@ant-design/x)
 
-你可以订阅：https://github.com/ant-design/ant-design/releases.atom 来获得版本发布的通知。
+你可以订阅：https://github.com/ant-design/x/releases.atom 来获得版本发布的通知。
 
 ## 安装
 
@@ -48,28 +46,28 @@ title: Ant Design X of React
 
 **我们推荐使用 [npm](https://www.npmjs.com/) 或 [yarn](https://github.com/yarnpkg/yarn/) 或 [pnpm](https://pnpm.io/zh/) 或 [bun](https://bun.sh/) 的方式进行开发**，不仅可在开发环境轻松调试，也可放心地在生产环境打包部署使用，享受整个生态圈和工具链带来的诸多好处。
 
-<InstallDependencies npm='$ npm install antd --save' yarn='$ yarn add antd' pnpm='$ pnpm install antd --save' bun='$ bun add antd'></InstallDependencies>
+<InstallDependencies npm='$ npm install @ant-design/x --save' yarn='$ yarn add antd' pnpm='$ pnpm install antd --save' bun='$ bun add antd'></InstallDependencies>
 
 如果你的网络环境不佳，推荐使用 [cnpm](https://github.com/cnpm/cnpm)。
 
 ### 浏览器引入
 
-在浏览器中使用 `script` 和 `link` 标签直接引入文件，并使用全局变量 `antd`。
+在浏览器中使用 `script` 和 `link` 标签直接引入文件，并使用全局变量 `antdx`。
 
-我们在 npm 发布包内的 dist 目录下提供了 `antd.js`、`antd.min.js` 和 `reset.css`。你也可以通过 [![CDNJS](https://img.shields.io/cdnjs/v/antd.svg?style=flat-square)](https://cdnjs.com/libraries/antd)，[![](https://data.jsdelivr.com/v1/package/npm/antd/badge)](https://www.jsdelivr.com/package/npm/antd) 或 [UNPKG](https://unpkg.com/antd/dist/) 进行下载。
+我们在 npm 发布包内的 dist 目录下提供了 `antdx.js`、`antdx.min.js` 和 `antdx.min.js.map`。你也可以通过 [![CDNJS](https://img.shields.io/cdnjs/v/@ant-design/x.svg?style=flat-square)](https://cdnjs.com/libraries/@ant-design)，[![](https://data.jsdelivr.com/v1/package/npm/@ant-design/x/badge)](https://www.jsdelivr.com/package/npm/@ant-design/x) 或 [UNPKG](https://unpkg.com/@ant-design/x/dist/) 进行下载。
 
 > **强烈不推荐使用已构建文件**，这样无法按需加载，而且难以获得底层依赖模块的 bug 快速修复支持。
 
-> 注意：`antd.js` 和 `antd.min.js` 依赖 `react`、`react-dom`、`dayjs`，请确保提前引入这些文件。
+> 注意：`antdx.js` 和 `antdx.min.js` 依赖 `react`、`react-dom`、`dayjs`，请确保提前引入这些文件。
 
 ## 示例
 
 ```jsx
 import React from 'react';
-import { DatePicker } from 'antd';
+import { Bubble } from '@ant-design/x';
 
 const App = () => {
-  return <DatePicker />;
+  return <Bubble content="Hello World!" />;
 };
 
 export default App;
@@ -77,11 +75,11 @@ export default App;
 
 ### 按需加载
 
-`antd` 默认支持基于 ES modules 的 tree shaking。
+`@ant-design/x` 默认支持基于 ES modules 的 tree shaking。
 
 ### TypeScript
 
-`antd` 使用 TypeScript 进行书写并提供了完整的定义文件（不要引用 `@types/antd`）。
+`@ant-design/x` 使用 TypeScript 进行书写并提供了完整的定义文件。
 
 ## 链接
 
@@ -111,11 +109,11 @@ export default App;
 
 ## 非 React 的实现
 
-我们采用 React 封装了一套 Ant Design 的组件库，其他语言的 UI 实现可以参考[此处](/docs/spec/introduce-cn#%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0)。
+欢迎参与贡献！
 
 ## 谁在使用
 
-Ant Design 广泛用于国内外的企业级网站搭建，可以查看 [wappalyzer](https://www.wappalyzer.com/technologies/ui-frameworks/ant-design) 作为参考数据。如果你的公司和产品使用了 Ant Design，欢迎到 [这里](https://github.com/ant-design/ant-design/issues/477) 留言。
+Ant Design X 广泛用于蚂蚁集团内由 AI 驱动的用户交互界面。如果你的公司和产品使用了 Ant Design X，欢迎到 [这里](https://github.com/ant-design/x/issues/126) 留言。
 
 ## 如何贡献
 
@@ -129,8 +127,5 @@ Ant Design 广泛用于国内外的企业级网站搭建，可以查看 [wappaly
 
 通过 GitHub Discussions 提问时，建议使用 `Q&A` 标签。
 
-通过 Stack Overflow 或者 Segment Fault 提问时，建议加上 `antd` 标签。
-
-1. [GitHub Discussions](https://github.com/ant-design/ant-design/discussions)
-2. [<img alt="Stack Overflow" src="https://cdn.sstatic.net/Sites/stackoverflow/company/img/logos/so/so-logo.svg?v=2bb144720a66" width="140" />](http://stackoverflow.com/questions/tagged/antd) (English)
-3. [<img alt="Segment Fault" src="https://gw.alipayobjects.com/zos/rmsportal/hfYFfCvHTQTUKntlJbMF.svg" width="100" />](https://segmentfault.com/t/antd)（中文）
+1. [GitHub Discussions](https://github.com/ant-design/x/discussions)
+2. [GitHub Issues](https://github.com/ant-design/x/issues)

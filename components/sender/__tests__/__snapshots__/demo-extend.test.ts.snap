@@ -2,26 +2,26 @@
 
 exports[`renders components/sender/demo/actions.tsx extend context correctly 1`] = `
 <div
-  class="ant-app"
+  class="ant-app css-var-r5"
 >
   <div
-    class="ant-sender"
+    class="ant-sender css-var-r5"
   >
     <textarea
-      class="ant-input ant-input-outlined ant-sender-input"
-      style="resize: none; height: -54px; max-height: -54px;"
+      class="ant-input ant-input-outlined css-var-r5 ant-input-css-var ant-sender-input"
+      style="resize: none; height: -110px; max-height: -110px;"
     />
     <div
       class="ant-sender-actions-list"
     >
       <div
-        class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
+        class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-r5"
       >
         <div
           class="ant-space-item"
         >
           <span
-            class="ant-typography ant-typography-secondary"
+            class="ant-typography ant-typography-secondary css-var-r5"
           >
             <small>
               \`Shift + Enter\` to submit
@@ -32,7 +32,7 @@ exports[`renders components/sender/demo/actions.tsx extend context correctly 1`]
           class="ant-space-item"
         >
           <button
-            class="ant-btn ant-btn-primary ant-btn-icon-only ant-sender-actions-btn"
+            class="ant-btn css-var-r5 ant-btn-primary ant-btn-icon-only ant-sender-actions-btn"
             type="button"
           >
             <span
@@ -71,14 +71,14 @@ exports[`renders components/sender/demo/actions.tsx extend context correctly 2`]
 
 exports[`renders components/sender/demo/basic.tsx extend context correctly 1`] = `
 <div
-  class="ant-app"
+  class="ant-app css-var-r3"
 >
   <div
-    class="ant-sender"
+    class="ant-sender css-var-r3"
   >
     <textarea
-      class="ant-input ant-input-outlined ant-sender-input"
-      style="resize: none; height: -54px; max-height: -54px;"
+      class="ant-input ant-input-outlined css-var-r3 ant-input-css-var ant-sender-input"
+      style="resize: none; height: -110px; max-height: -110px;"
     >
       Hello? this is X!
     </textarea>
@@ -86,13 +86,13 @@ exports[`renders components/sender/demo/basic.tsx extend context correctly 1`] =
       class="ant-sender-actions-list"
     >
       <div
-        class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
+        class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-r3"
       >
         <div
           class="ant-space-item"
         >
           <button
-            class="ant-btn ant-btn-text ant-btn-icon-only ant-sender-actions-btn"
+            class="ant-btn css-var-r3 ant-btn-text ant-btn-icon-only ant-sender-actions-btn"
             type="button"
           >
             <span
@@ -127,7 +127,7 @@ exports[`renders components/sender/demo/basic.tsx extend context correctly 1`] =
           class="ant-space-item"
         >
           <button
-            class="ant-btn ant-btn-text ant-btn-icon-only ant-sender-actions-btn"
+            class="ant-btn css-var-r3 ant-btn-text ant-btn-icon-only ant-sender-actions-btn"
             type="button"
           >
             <span
@@ -168,27 +168,27 @@ exports[`renders components/sender/demo/basic.tsx extend context correctly 2`] =
 
 exports[`renders components/sender/demo/submitType.tsx extend context correctly 1`] = `
 <div
-  class="ant-app"
+  class="ant-app css-var-r1"
 >
   <div
-    class="ant-sender"
+    class="ant-sender css-var-r1"
   >
     <textarea
-      class="ant-input ant-input-outlined ant-sender-input"
+      class="ant-input ant-input-outlined css-var-r1 ant-input-css-var ant-sender-input"
       placeholder="Press Shift + Enter to send message"
-      style="resize: none; height: -54px; max-height: -54px;"
+      style="resize: none; height: -110px; max-height: -110px;"
     />
     <div
       class="ant-sender-actions-list"
     >
       <div
-        class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
+        class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-r1"
       >
         <div
           class="ant-space-item"
         >
           <button
-            class="ant-btn ant-btn-text ant-btn-icon-only ant-sender-actions-btn"
+            class="ant-btn css-var-r1 ant-btn-text ant-btn-icon-only ant-sender-actions-btn"
             disabled=""
             type="button"
           >
@@ -224,7 +224,7 @@ exports[`renders components/sender/demo/submitType.tsx extend context correctly 
           class="ant-space-item"
         >
           <button
-            class="ant-btn ant-btn-text ant-btn-icon-only ant-sender-actions-btn"
+            class="ant-btn css-var-r1 ant-btn-text ant-btn-icon-only ant-sender-actions-btn"
             disabled=""
             type="button"
           >

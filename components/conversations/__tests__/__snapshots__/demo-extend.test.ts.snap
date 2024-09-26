@@ -2,14 +2,14 @@
 
 exports[`renders components/conversations/demo/basic.tsx extend context correctly 1`] = `
 <div
-  class="ant-card ant-card-bordered ant-card-small"
+  class="ant-card ant-card-bordered ant-card-small css-var-r21"
   style="width: 320px;"
 >
   <div
     class="ant-card-body"
   >
     <ul
-      class="ant-conversations"
+      class="ant-conversations css-var-r21"
     >
       <li
         class="ant-conversations-item ant-conversations-item-active"
@@ -39,13 +39,13 @@ exports[`renders components/conversations/demo/basic.tsx extend context correctl
         </div>
         <span
           aria-label="What is Ant Design X?"
-          class="ant-typography ant-typography-ellipsis ant-conversations-label"
+          class="ant-typography ant-typography-ellipsis ant-conversations-label css-var-r21"
         >
           What is Ant Design X?
         </span>
       </li>
       <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
+        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r21 ant-tooltip-placement-right"
         style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
       >
         <div
@@ -91,7 +91,7 @@ exports[`renders components/conversations/demo/basic.tsx extend context correctl
           </span>
         </div>
         <span
-          class="ant-typography ant-typography-ellipsis ant-conversations-label"
+          class="ant-typography ant-typography-ellipsis ant-conversations-label css-var-r21"
         >
           <div>
             Getting Started: 
@@ -106,7 +106,7 @@ exports[`renders components/conversations/demo/basic.tsx extend context correctl
         </span>
       </li>
       <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
+        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r21 ant-tooltip-placement-right"
         style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
       >
         <div
@@ -162,13 +162,13 @@ exports[`renders components/conversations/demo/basic.tsx extend context correctl
         </div>
         <span
           aria-label="In Docker, use 🐑 Ollama and initialize"
-          class="ant-typography ant-typography-ellipsis ant-conversations-label"
+          class="ant-typography ant-typography-ellipsis ant-conversations-label css-var-r21"
         >
           In Docker, use 🐑 Ollama and initialize
         </span>
       </li>
       <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
+        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r21 ant-tooltip-placement-right"
         style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
       >
         <div
@@ -191,13 +191,13 @@ exports[`renders components/conversations/demo/basic.tsx extend context correctl
       >
         <span
           aria-label="Expired, please go to the recycle bin to check"
-          class="ant-typography ant-typography-ellipsis ant-conversations-label"
+          class="ant-typography ant-typography-ellipsis ant-conversations-label css-var-r21"
         >
           Expired, please go to the recycle bin to check
         </span>
       </li>
       <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
+        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r21 ant-tooltip-placement-right"
         style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
       >
         <div
@@ -224,30 +224,30 @@ exports[`renders components/conversations/demo/basic.tsx extend context correctl
 
 exports[`renders components/conversations/demo/controlled-mode.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex ant-flex-align-flex-start ant-flex-gap-small ant-flex-vertical"
+  class="ant-flex css-var-r1p ant-flex-align-flex-start ant-flex-gap-small ant-flex-vertical"
 >
   <div
-    class="ant-card ant-card-bordered ant-card-small"
+    class="ant-card ant-card-bordered ant-card-small css-var-r1p"
     style="width: 320px;"
   >
     <div
       class="ant-card-body"
     >
       <ul
-        class="ant-conversations"
+        class="ant-conversations css-var-r1p"
       >
         <li
           class="ant-conversations-item ant-conversations-item-active"
         >
           <span
             aria-label="Conversation Item 1"
-            class="ant-typography ant-typography-ellipsis ant-conversations-label"
+            class="ant-typography ant-typography-ellipsis ant-conversations-label css-var-r1p"
           >
             Conversation Item 1
           </span>
         </li>
         <div
-          class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
+          class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r1p ant-tooltip-placement-right"
           style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
         >
           <div
@@ -270,13 +270,13 @@ exports[`renders components/conversations/demo/controlled-mode.tsx extend contex
         >
           <span
             aria-label="Conversation Item 2"
-            class="ant-typography ant-typography-ellipsis ant-conversations-label"
+            class="ant-typography ant-typography-ellipsis ant-conversations-label css-var-r1p"
           >
             Conversation Item 2
           </span>
         </li>
         <div
-          class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
+          class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r1p ant-tooltip-placement-right"
           style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
         >
           <div
@@ -299,13 +299,13 @@ exports[`renders components/conversations/demo/controlled-mode.tsx extend contex
         >
           <span
             aria-label="Conversation Item 3"
-            class="ant-typography ant-typography-ellipsis ant-conversations-label"
+            class="ant-typography ant-typography-ellipsis ant-conversations-label css-var-r1p"
           >
             Conversation Item 3
           </span>
         </li>
         <div
-          class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
+          class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r1p ant-tooltip-placement-right"
           style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
         >
           <div
@@ -327,10 +327,10 @@ exports[`renders components/conversations/demo/controlled-mode.tsx extend contex
     </div>
   </div>
   <div
-    class="ant-flex ant-flex-gap-small"
+    class="ant-flex css-var-r1p ant-flex-gap-small"
   >
     <button
-      class="ant-btn ant-btn-default"
+      class="ant-btn css-var-r1p ant-btn-default"
       type="button"
     >
       <span>
@@ -338,7 +338,7 @@ exports[`renders components/conversations/demo/controlled-mode.tsx extend contex
       </span>
     </button>
     <button
-      class="ant-btn ant-btn-default"
+      class="ant-btn css-var-r1p ant-btn-default"
       type="button"
     >
       <span>
@@ -353,25 +353,25 @@ exports[`renders components/conversations/demo/controlled-mode.tsx extend contex
 
 exports[`renders components/conversations/demo/group.tsx extend context correctly 1`] = `
 <div
-  class="ant-card ant-card-bordered ant-card-small"
+  class="ant-card ant-card-bordered ant-card-small css-var-r15"
   style="width: 320px;"
 >
   <div
     class="ant-card-body"
   >
     <ul
-      class="ant-conversations"
+      class="ant-conversations css-var-r15"
     >
       <li>
         <div
-          class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
+          class="ant-divider css-var-r15 ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
           role="separator"
         >
           <span
             class="ant-divider-inner-text"
           >
             <span
-              class="ant-typography ant-typography-secondary"
+              class="ant-typography ant-typography-secondary css-var-r15"
             >
               Group1
             </span>
@@ -408,13 +408,13 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
             </div>
             <span
               aria-label="What is Ant Design X ?"
-              class="ant-typography ant-typography-ellipsis ant-conversations-label"
+              class="ant-typography ant-typography-ellipsis ant-conversations-label css-var-r15"
             >
               What is Ant Design X ?
             </span>
           </li>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r15 ant-tooltip-placement-right"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
@@ -460,7 +460,7 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
               </span>
             </div>
             <span
-              class="ant-typography ant-typography-ellipsis ant-conversations-label"
+              class="ant-typography ant-typography-ellipsis ant-conversations-label css-var-r15"
             >
               <div>
                 Getting Started: 
@@ -475,7 +475,7 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
             </span>
           </li>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r15 ant-tooltip-placement-right"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
@@ -506,14 +506,14 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
       </li>
       <li>
         <div
-          class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
+          class="ant-divider css-var-r15 ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
           role="separator"
         >
           <span
             class="ant-divider-inner-text"
           >
             <span
-              class="ant-typography ant-typography-secondary"
+              class="ant-typography ant-typography-secondary css-var-r15"
             >
               Group2
             </span>
@@ -551,13 +551,13 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
             </div>
             <span
               aria-label="In Docker, use 🐑 Ollama and initialize"
-              class="ant-typography ant-typography-ellipsis ant-conversations-label"
+              class="ant-typography ant-typography-ellipsis ant-conversations-label css-var-r15"
             >
               In Docker, use 🐑 Ollama and initialize
             </span>
           </li>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r15 ant-tooltip-placement-right"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
@@ -580,13 +580,13 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
           >
             <span
               aria-label="Expired, please go to the recycle bin to check"
-              class="ant-typography ant-typography-ellipsis ant-conversations-label"
+              class="ant-typography ant-typography-ellipsis ant-conversations-label css-var-r15"
             >
               Expired, please go to the recycle bin to check
             </span>
           </li>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r15 ant-tooltip-placement-right"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
@@ -615,28 +615,28 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
 
 exports[`renders components/conversations/demo/group-sort.tsx extend context correctly 1`] = `
 <div
-  class="ant-card ant-card-bordered ant-card-small"
+  class="ant-card ant-card-bordered ant-card-small css-var-r1f"
   style="width: 320px;"
 >
   <div
     class="ant-card-body"
   >
     <ul
-      class="ant-conversations"
+      class="ant-conversations css-var-r1f"
     >
       <li>
         <div
-          class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
+          class="ant-divider css-var-r1f ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
           role="separator"
         >
           <span
             class="ant-divider-inner-text"
           >
             <span
-              class="ant-typography ant-typography-secondary"
+              class="ant-typography ant-typography-secondary css-var-r1f"
             >
               <div
-                class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
+                class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-r1f"
               >
                 <div
                   class="ant-space-item"
@@ -683,13 +683,13 @@ exports[`renders components/conversations/demo/group-sort.tsx extend context cor
             </div>
             <span
               aria-label="What is Ant Design X ?"
-              class="ant-typography ant-typography-ellipsis ant-conversations-label"
+              class="ant-typography ant-typography-ellipsis ant-conversations-label css-var-r1f"
             >
               What is Ant Design X ?
             </span>
           </li>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r1f ant-tooltip-placement-right"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
@@ -735,7 +735,7 @@ exports[`renders components/conversations/demo/group-sort.tsx extend context cor
               </span>
             </div>
             <span
-              class="ant-typography ant-typography-ellipsis ant-conversations-label"
+              class="ant-typography ant-typography-ellipsis ant-conversations-label css-var-r1f"
             >
               <div>
                 Getting Started: 
@@ -750,7 +750,7 @@ exports[`renders components/conversations/demo/group-sort.tsx extend context cor
             </span>
           </li>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r1f ant-tooltip-placement-right"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
@@ -781,7 +781,7 @@ exports[`renders components/conversations/demo/group-sort.tsx extend context cor
       </li>
       <li>
         <div
-          class="ant-divider ant-divider-horizontal ant-divider-plain"
+          class="ant-divider css-var-r1f ant-divider-horizontal ant-divider-plain"
           role="separator"
         />
         <ul
@@ -816,13 +816,13 @@ exports[`renders components/conversations/demo/group-sort.tsx extend context cor
             </div>
             <span
               aria-label="In Docker, use 🐑 Ollama and initialize"
-              class="ant-typography ant-typography-ellipsis ant-conversations-label"
+              class="ant-typography ant-typography-ellipsis ant-conversations-label css-var-r1f"
             >
               In Docker, use 🐑 Ollama and initialize
             </span>
           </li>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r1f ant-tooltip-placement-right"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
@@ -844,17 +844,17 @@ exports[`renders components/conversations/demo/group-sort.tsx extend context cor
       </li>
       <li>
         <div
-          class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
+          class="ant-divider css-var-r1f ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
           role="separator"
         >
           <span
             class="ant-divider-inner-text"
           >
             <span
-              class="ant-typography ant-typography-secondary"
+              class="ant-typography ant-typography-secondary css-var-r1f"
             >
               <div
-                class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
+                class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-r1f"
               >
                 <div
                   class="ant-space-item"
@@ -878,13 +878,13 @@ exports[`renders components/conversations/demo/group-sort.tsx extend context cor
           >
             <span
               aria-label="Expired, please go to the recycle bin to check"
-              class="ant-typography ant-typography-ellipsis ant-conversations-label"
+              class="ant-typography ant-typography-ellipsis ant-conversations-label css-var-r1f"
             >
               Expired, please go to the recycle bin to check
             </span>
           </li>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r1f ant-tooltip-placement-right"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
@@ -913,7 +913,7 @@ exports[`renders components/conversations/demo/group-sort.tsx extend context cor
 
 exports[`renders components/conversations/demo/infinite-load.tsx extend context correctly 1`] = `
 <div
-  class="ant-card ant-card-bordered ant-card-small"
+  class="ant-card ant-card-bordered ant-card-small css-var-r13"
   id="scrollableDiv"
   style="height: 600px; width: 320px; overflow: auto;"
 >
@@ -928,7 +928,7 @@ exports[`renders components/conversations/demo/infinite-load.tsx extend context 
         style="height: auto; overflow: auto; width: 270px;"
       >
         <ul
-          class="ant-conversations"
+          class="ant-conversations css-var-r13"
         />
         <div
           style="text-align: center;"
@@ -936,7 +936,7 @@ exports[`renders components/conversations/demo/infinite-load.tsx extend context 
           <div
             aria-busy="true"
             aria-live="polite"
-            class="ant-spin ant-spin-sm ant-spin-spinning"
+            class="ant-spin ant-spin-sm ant-spin-spinning css-var-r13"
           >
             <span
               aria-label="redo"
@@ -969,24 +969,24 @@ exports[`renders components/conversations/demo/infinite-load.tsx extend context 
 
 exports[`renders components/conversations/demo/with-menu.tsx extend context correctly 1`] = `
 <div
-  class="ant-app"
+  class="ant-app css-var-r1"
 >
   <div
-    class="ant-card ant-card-bordered ant-card-small"
+    class="ant-card ant-card-bordered ant-card-small css-var-r1"
     style="width: 320px;"
   >
     <div
       class="ant-card-body"
     >
       <ul
-        class="ant-conversations"
+        class="ant-conversations css-var-r1"
       >
         <li
           class="ant-conversations-item"
         >
           <span
             aria-label="Conversation Item 1"
-            class="ant-typography ant-typography-ellipsis ant-conversations-label"
+            class="ant-typography ant-typography-ellipsis ant-conversations-label css-var-r1"
           >
             Conversation Item 1
           </span>
@@ -1011,11 +1011,11 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
             </svg>
           </span>
           <div
-            class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up ant-dropdown-placement-bottomRight"
+            class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-r1 ant-dropdown-css-var ant-dropdown-placement-bottomRight"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1150;"
           >
             <ul
-              class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light"
+              class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-r1 ant-dropdown-css-var css-var-r1 ant-dropdown-menu-css-var"
               data-menu-list="true"
               role="menu"
               tabindex="0"
@@ -1052,7 +1052,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
                 </span>
               </li>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip css-var-r1 ant-tooltip-placement-right"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
               >
                 <div
@@ -1100,7 +1100,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
                 </span>
               </li>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip css-var-r1 ant-tooltip-placement-right"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
               >
                 <div
@@ -1148,7 +1148,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
                 </span>
               </li>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip css-var-r1 ant-tooltip-placement-right"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
               >
                 <div
@@ -1172,7 +1172,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
           </div>
         </li>
         <div
-          class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
+          class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r1 ant-tooltip-placement-right"
           style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
         >
           <div
@@ -1195,7 +1195,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
         >
           <span
             aria-label="Conversation Item 2"
-            class="ant-typography ant-typography-ellipsis ant-conversations-label"
+            class="ant-typography ant-typography-ellipsis ant-conversations-label css-var-r1"
           >
             Conversation Item 2
           </span>
@@ -1220,11 +1220,11 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
             </svg>
           </span>
           <div
-            class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up ant-dropdown-placement-bottomRight"
+            class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-r1 ant-dropdown-css-var ant-dropdown-placement-bottomRight"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1150;"
           >
             <ul
-              class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light"
+              class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-r1 ant-dropdown-css-var css-var-r1 ant-dropdown-menu-css-var"
               data-menu-list="true"
               role="menu"
               tabindex="0"
@@ -1261,7 +1261,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
                 </span>
               </li>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip css-var-r1 ant-tooltip-placement-right"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
               >
                 <div
@@ -1309,7 +1309,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
                 </span>
               </li>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip css-var-r1 ant-tooltip-placement-right"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
               >
                 <div
@@ -1357,7 +1357,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
                 </span>
               </li>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip css-var-r1 ant-tooltip-placement-right"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
               >
                 <div
@@ -1381,7 +1381,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
           </div>
         </li>
         <div
-          class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
+          class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r1 ant-tooltip-placement-right"
           style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
         >
           <div
@@ -1404,7 +1404,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
         >
           <span
             aria-label="Conversation Item 3"
-            class="ant-typography ant-typography-ellipsis ant-conversations-label"
+            class="ant-typography ant-typography-ellipsis ant-conversations-label css-var-r1"
           >
             Conversation Item 3
           </span>
@@ -1429,11 +1429,11 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
             </svg>
           </span>
           <div
-            class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up ant-dropdown-placement-bottomRight"
+            class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-r1 ant-dropdown-css-var ant-dropdown-placement-bottomRight"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1150;"
           >
             <ul
-              class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light"
+              class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-r1 ant-dropdown-css-var css-var-r1 ant-dropdown-menu-css-var"
               data-menu-list="true"
               role="menu"
               tabindex="0"
@@ -1470,7 +1470,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
                 </span>
               </li>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip css-var-r1 ant-tooltip-placement-right"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
               >
                 <div
@@ -1518,7 +1518,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
                 </span>
               </li>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip css-var-r1 ant-tooltip-placement-right"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
               >
                 <div
@@ -1566,7 +1566,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
                 </span>
               </li>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip css-var-r1 ant-tooltip-placement-right"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
               >
                 <div
@@ -1590,7 +1590,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
           </div>
         </li>
         <div
-          class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
+          class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r1 ant-tooltip-placement-right"
           style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
         >
           <div
@@ -1613,13 +1613,13 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
         >
           <span
             aria-label="Conversation Item 4"
-            class="ant-typography ant-typography-ellipsis ant-conversations-label"
+            class="ant-typography ant-typography-ellipsis ant-conversations-label css-var-r1"
           >
             Conversation Item 4
           </span>
         </li>
         <div
-          class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
+          class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r1 ant-tooltip-placement-right"
           style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
         >
           <div

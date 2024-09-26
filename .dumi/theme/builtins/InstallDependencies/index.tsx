@@ -1,4 +1,5 @@
-import { ConfigProvider, Tabs } from 'antd';
+import { XProvider } from '@ant-design/x';
+import { Tabs } from 'antd';
 import SourceCode from 'dumi/theme-default/builtins/SourceCode';
 import type { Tab } from 'rc-tabs/lib/interface';
 import React from 'react';
@@ -45,9 +46,9 @@ const InstallDependencies: React.FC<InstallProps> = (props) => {
   ].filter((item) => item.children);
 
   return (
-    <ConfigProvider theme={{ components: { Tabs: { horizontalMargin: '0' } } }}>
+    <XProvider theme={{ components: { Tabs: { horizontalMargin: '0' } } }}>
       <Tabs className="markdown" size="small" defaultActiveKey="npm" items={items} />
-    </ConfigProvider>
+    </XProvider>
   );
 };
 

@@ -6,65 +6,69 @@ title: Usage with Rsbuild
 tag: New
 ---
 
-[Rsbuild](https://rsbuild.dev) is a build tool driven by Rspack. This article will try to use `Rsbuild` to create a project and import antd.
+Here’s the translation of your guide on using `@ant-design/x` with Rsbuild:
 
-## Install and Initialization
+---
 
-Before all start, you may need install [yarn](https://github.com/yarnpkg/yarn) or [pnpm](https://pnpm.io) or [bun](https://bun.sh).
+[Rsbuild](https://rsbuild.dev/zh) is a build tool powered by Rspack. This article will guide you on how to create a project using Rsbuild and integrate `@ant-design/x`.
+
+## Installation and Initialization
+
+Before you start, you might need to install [yarn](https://github.com/yarnpkg/yarn), [pnpm](https://pnpm.io/zh), or [bun](https://bun.sh).
 
 <InstallDependencies npm='$ npm create rsbuild' yarn='$ yarn create rsbuild' pnpm='$ pnpm create rsbuild' bun='$ bun create rsbuild'></InstallDependencies>
 
-During the initialization process, `create-rsbuild` provides a series of templates for us to choose, We need choose the `React` template.
+During initialization, `create-rsbuild` provides a range of templates to choose from. Here, we’ll select the `React` template.
 
-The tool will create and initialize environment and dependencies automatically, please try config your proxy setting or use another npm registry if any network errors happen during it.
+The tool will automatically initialize a scaffold and install necessary dependencies for a React project. If you encounter network issues during the process, try configuring a proxy or using another npm registry.
 
-Then we go inside project and start it.
+Next, navigate to the project directory and start the development server.
 
 ```bash
 $ cd demo
 $ npm run dev
 ```
 
-Open the browser at http://localhost:3000. It renders a title saying `Rsbuild with React` on the page, which is considered successful.
+Visit http://localhost:3000 in your browser, and seeing the `Rsbuild with React` interface means the setup is successful.
 
-## Import antd
+## Importing @ant-design/x
 
-Now we install `antd` from yarn or npm or pnpm or bun.
+Now, install and import `@ant-design/x` using yarn, npm, pnpm, or bun.
 
-<InstallDependencies npm='$ npm install antd --save' yarn='$ yarn add antd' pnpm='$ pnpm install antd --save' bun='$ bun add antd'></InstallDependencies>
+<InstallDependencies npm='$ npm install @ant-design/x --save' yarn='$ yarn add @ant-design/x' pnpm='$ pnpm install @ant-design/x --save' bun='$ bun add @ant-design/x'></InstallDependencies>
 
-Modify `src/App.tsx`, import Button component from `antd`.
+Modify `src/App.tsx` to import the Bubble component from `@ant-design/x`.
 
 ```tsx
 import React from 'react';
-import { Button } from 'antd';
+import { Bubble } from '@ant-design/x';
 
 const App: React.FC = () => (
   <div className="App">
-    <Button type="primary">Button</Button>
+    <Bubble content="Hello world!" />
   </div>
 );
 
 export default App;
 ```
 
-OK, you should now see a blue primary button displayed on the page. Next you can choose any components of `antd` to develop your application. Visit other workflows of `Rsbuild` at its [Official documentation](https://rsbuild.dev).
+You should now see the Bubble component from `@ant-design/x` on your page. You can proceed to use other components to develop your application. For other development processes, refer to the [official Rsbuild documentation](https://rsbuild.dev/zh).
 
-### Customize Theme
+### Customizing Theme
 
-Ref to the [Customize Theme documentation](/docs/react/customize-theme). Modify theme with ConfigProvider:
+Refer to [Customizing Theme](/docs/react/customize-theme) for theme configuration through `ConfigProvider`:
 
 ```tsx
 import React from 'react';
-import { ConfigProvider } from 'antd';
+import { XProvider } from '@ant-design/x';
 
 const App: React.FC = () => (
-  <ConfigProvider theme={{ token: { colorPrimary: '#00b96b' } }}>
+  <XProvider theme={{ token: { colorPrimary: '#00b96b' } }}>
     <MyApp />
-  </ConfigProvider>
+  </XProvider>
 );
 
 export default App;
 ```
 
-We are successfully running the antd components using Rsbuild now, let’s start build your own application!
+You have successfully integrated `@ant-design/x` components using Rsbuild. Start developing your application!

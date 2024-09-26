@@ -1,7 +1,8 @@
 /* eslint-disable global-require, jest/no-export */
 import React from 'react';
 
-import { ConfigProvider } from 'antd';
+import { XProvider } from '../../components';
+
 import { render, waitFakeTimer } from '../utils';
 import { TriggerMockContext } from './demoTestContext';
 
@@ -83,9 +84,7 @@ export default function rootPropsTest(
         return (
           <TriggerMockContext.Provider value={triggerContext}>
             <div id="holder" className="holder" ref={holderRef}>
-              {show && (
-                <ConfigProvider getPopupContainer={() => holderRef.current!}>{node}</ConfigProvider>
-              )}
+              {show && <XProvider getPopupContainer={() => holderRef.current!}>{node}</XProvider>}
             </div>
           </TriggerMockContext.Provider>
         );
