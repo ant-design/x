@@ -2,8 +2,8 @@
 category: Components
 group: 运行时
 title: useXAgent
-subtitle: 数据管理
-description: 配合 Agent hook 进行对话数据管理。
+subtitle: 模型调度
+description: 用于模型调度的 Agent 钩子。
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*HjY3QKszqFEAAAAAAAAAAAAADrJ8AQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*G8njQogkGwAAAAAAAAAAAAAADrJ8AQ/original
 demo:
@@ -12,53 +12,67 @@ demo:
 
 ## 何时使用
 
-配合 Bubble.List 与 Sender 使用快速搭建对话式 LUI。
+与后端模型进行交互，提供抽象数据流。
 
 ## 代码演示
 
 <!-- prettier-ignore -->
-<code src="./demo/basic.tsx">基本</code>
-<code src="./demo/suggestions.tsx">多项建议</code>
+<code src="./demo/preset.tsx" debug>预设请求</code>
+<code src="./demo/custom.tsx">自定义请求</code>
 
 ## API
 
 ```tsx | pure
-type useXChat<Message> = (config: XChatConfig<Message>) => XChatConfigReturnType;
-
-type MessageStatus = 'local' | 'loading' | 'success' | 'error';
-
-type MessageInfo<Message> = {
-  id: number | string;
-  message: Message;
-  status: MessageStatus;
-};
-
-type RequestResultObject<Message> = {
-  message: Message | Message[];
-  status: MessageStatus;
-};
-
-type RequestResult<Message> =
-  | Message
-  | Message[]
-  | RequestResultObject<Message>
-  | RequestResultObject<Message>[];
+type useXAgent<AgentMessage> = (
+  config: XAgentConfigPreset | XAgentConfigCustom<AgentMessage>,
+) => [Agent];
 ```
 
-### XAgentConfig
+### XAgentConfigPreset
 
-| 属性 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- |
-| defaultMessages | 默认展示信息 | MessageInfo[] | - |  |
-| request | 用户发起对话时请求方法，支持返回多个不同状态的 Message | (msg: Message, info: { messages: MessageInfo[] }) => Promise\<RequestResult> | - |  |
-| requestFallback | 请求失败的兜底信息，不提供则不会展示 | RequestResult \| (msg: Message, info: { error: Error, messages: MessageInfo[] }) => Message | - |  |
-| requestPlaceholder | 请求中的占位信息，不提供则不会展示 | Message \| (msg: Message, info: { messages: MessageInfo[] }) => Message | - |  |
+使用预设协议进行请求，尚未实现协议。
 
-### XAgentConfigReturnType
+| 属性    | 说明           | 类型   | 默认值 | 版本 |
+| ------- | -------------- | ------ | ------ | ---- |
+| baseURL | 请求服务端地址 | string | -      |      |
+| key     | 请求秘钥       | string | -      |      |
+| model   | 协议模型       | `TODO` | -      |      |
 
-| 属性        | 说明                            | 类型                              | 版本 |
-| ----------- | ------------------------------- | --------------------------------- | ---- |
-| messages    | 当前管理的内容                  | Message[]                         |      |
-| requesting  | 是否正在请求                    | boolean                           |      |
-| onRequest   | 添加一条 Message，并且触发请求  | (message: Message) => void        |      |
-| setMessages | 直接修改 messages，不会触发请求 | (messages: MessageInfo[]) => void |      |
+### XAgentConfigCustom
+
+自定义请求协议。
+
+| 属性    | 说明                         | 类型      | 默认值 | 版本 |
+| ------- | ---------------------------- | --------- | ------ | ---- |
+| request | 配置自定义请求，支持流式更新 | RequestFn |        |      |
+
+#### RequestFn
+
+```tsx | pure
+type RequestFn<AgentMessage> = (
+  info: { message: AgentMessage; messages: AgentMessage[] },
+  callbacks: {
+    onUpdate: (message: AgentMessage) => void;
+    onSuccess: (message: AgentMessage) => void;
+    onError: (error: Error) => void;
+  },
+) => void;
+```
+
+### Agent
+
+| 属性         | 说明                        | 类型           | 版本 |
+| ------------ | --------------------------- | -------------- | ---- |
+| request      | 调用 `useXAgent` 配置的请求 | AgentRequestFn |      |
+| isRequesting | 是否正在请求                | () => boolean  |      |
+
+```tsx | pure
+type AgentRequestFn<AgentMessage> = (
+  info: { message: AgentMessage; messages?: AgentMessage[] },
+  callbacks: {
+    onUpdate: (message: AgentMessage) => void;
+    onSuccess: (message: AgentMessage) => void;
+    onError: (error: Error) => void;
+  },
+) => void;
+```

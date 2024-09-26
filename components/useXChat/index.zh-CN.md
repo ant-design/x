@@ -12,7 +12,7 @@ demo:
 
 ## 何时使用
 
-配合 Bubble.List 与 Sender 使用快速搭建对话式 LUI。
+通过 Agent 进行会话数据管理，并产出供页面渲染使用的数据。
 
 ## 代码演示
 
@@ -24,42 +24,26 @@ demo:
 ## API
 
 ```tsx | pure
-type useXChat<Message> = (config: XChatConfig<Message>) => XChatConfigReturnType;
-
-type MessageStatus = 'local' | 'loading' | 'success' | 'error';
-
-type MessageInfo<Message> = {
-  id: number | string;
-  message: Message;
-  status: MessageStatus;
-};
-
-type RequestResultObject<Message> = {
-  message: Message | Message[];
-  status: MessageStatus;
-};
-
-type RequestResult<Message> =
-  | Message
-  | Message[]
-  | RequestResultObject<Message>
-  | RequestResultObject<Message>[];
+type useXChat<AgentMessage, ParsedMessage = AgentMessage> = (
+  config: XChatConfig<AgentMessage, ParsedMessage>,
+) => XChatConfigReturnType;
 ```
 
 ### XChatConfig
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| defaultMessages | 默认展示信息 | MessageInfo[] | - |  |
-| request | 用户发起对话时请求方法，支持返回多个不同状态的 Message | (msg: Message, info: { messages: MessageInfo[] }) => Promise\<RequestResult> | - |  |
-| requestFallback | 请求失败的兜底信息，不提供则不会展示 | RequestResult \| (msg: Message, info: { error: Error, messages: MessageInfo[] }) => Message | - |  |
-| requestPlaceholder | 请求中的占位信息，不提供则不会展示 | Message \| (msg: Message, info: { messages: MessageInfo[] }) => Message | - |  |
+| agent | 由 useXAgent 生成的代理器 | XAgent | - |  |
+| defaultMessages | 默认展示信息 | { status, message }[] | - |  |
+| parser | 将 AgentMessage 转换成消费使用的 ParsedMessage，不设置时则直接消费 AgentMessage。支持将一条 AgentMessage 转换成多条 ParsedMessage | (message: AgentMessage) => BubbleMessage \| BubbleMessage[] | - |  |
+| requestFallback | 请求失败的兜底信息，不提供则不会展示 | AgentMessage \| () => AgentMessage | - |  |
+| requestPlaceholder | 请求中的占位信息，不提供则不会展示 | AgentMessage \| () => AgentMessage | - |  |
 
 ### XChatConfigReturnType
 
-| 属性        | 说明                            | 类型                              | 版本 |
-| ----------- | ------------------------------- | --------------------------------- | ---- |
-| messages    | 当前管理的内容                  | Message[]                         |      |
-| requesting  | 是否正在请求                    | boolean                           |      |
-| onRequest   | 添加一条 Message，并且触发请求  | (message: Message) => void        |      |
-| setMessages | 直接修改 messages，不会触发请求 | (messages: MessageInfo[]) => void |      |
+| 属性 | 说明 | 类型 | 版本 |
+| --- | --- | --- | --- |
+| messages | 当前管理的内容 | AgentMessages[] |  |
+| parsedMessages | 经过 `parser` 转译过的内容 | ParsedMessages[] |  |
+| onRequest | 添加一条 Message，并且触发请求 | (message) => void |  |
+| setMessages | 直接修改 messages，不会触发请求 | (messages: { message, status }[]) => void |  |

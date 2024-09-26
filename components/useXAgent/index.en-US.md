@@ -2,7 +2,7 @@
 category: Components
 group: Runtime
 title: useXAgent
-description: Work with agent hook for data management.
+description: Used for model scheduling with Agent hooks.
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*HjY3QKszqFEAAAAAAAAAAAAADrJ8AQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*G8njQogkGwAAAAAAAAAAAAAADrJ8AQ/original
 demo:
@@ -11,53 +11,67 @@ demo:
 
 ## When To Use
 
-Use with Bubble.List and Sender to quickly build a conversational LUI.
+Connect with the backend model to provide an abstract data flow.
 
 ## Examples
 
 <!-- prettier-ignore -->
-<code src="./demo/basic.tsx">Basic</code>
-<code src="./demo/suggestions.tsx">Multiple Suggestion</code>
+<code src="./demo/preset.tsx" debug>Preset Request</code>
+<code src="./demo/custom.tsx">Custom Request</code>
 
 ## API
 
 ```tsx | pure
-type useXChat<Message> = (config: XAgentConfig<Message>) => XAgentConfigReturnType;
-
-type MessageStatus = 'local' | 'loading' | 'success' | 'error';
-
-type MessageInfo<Message> = {
-  id: number | string;
-  message: Message;
-  status: MessageStatus;
-};
-
-type RequestResultObject<Message> = {
-  message: Message | Message[];
-  status: MessageStatus;
-};
-
-type RequestResult<Message> =
-  | Message
-  | Message[]
-  | RequestResultObject<Message>
-  | RequestResultObject<Message>[];
+type useXAgent<AgentMessage> = (
+  config: XAgentConfigPreset | XAgentConfigCustom<AgentMessage>,
+) => [Agent];
 ```
 
-### XAgentConfig
+### XAgentConfigPreset
 
-| Property | Description | Type | Default | Version |
-| --- | --- | --- | --- | --- |
-| defaultMessages | default messages | MessageInfo[] | - |  |
-| request | Trigger when user initiates a conversation. Supports returning multiple messages with different statuses. | (msg: Message, info: { messages: MessageInfo[] }) => Promise\<RequestResult> | - |  |
-| requestFallback | Request failed fallback information, not provided will not be displayed | RequestResult \| (msg: Message, info: { error: Error, messages: MessageInfo[] }) => Message | - |  |
-| requestPlaceholder | Request placeholder information, not provided will not be displayed | Message \| (msg: Message, info: { messages: MessageInfo[] }) => Message | - |  |
+Use preset protocol for request, protocol is not implemented yet.
 
-### XAgentConfigReturnType
+| Property | Description                | Type   | Default | Version |
+| -------- | -------------------------- | ------ | ------- | ------- |
+| baseURL  | Request for server address | string | -       |         |
+| key      | Request key                | string | -       |         |
+| model    | Preset protocol model      | `TODO` | -       |         |
 
-| Property | Description | Type | Version |
-| --- | --- | --- | --- |
-| messages | Current managed messages content | Message[] |  |
-| requesting | Whether a request is in progress | boolean |  |
-| onRequest | Add a message and trigger a request | (message: Message) => void |  |
-| setMessages | Modify messages directly without triggering requests | (messages: MessageInfo[]) => void |  |
+### XAgentConfigCustom
+
+Custom request protocol.
+
+| Property | Description                                     | Type      | Default | Version |
+| -------- | ----------------------------------------------- | --------- | ------- | ------- |
+| request  | Config custom request, support streaming update | RequestFn |         |         |
+
+#### RequestFn
+
+```tsx | pure
+type RequestFn<AgentMessage> = (
+  info: { message: AgentMessage; messages: AgentMessage[] },
+  callbacks: {
+    onUpdate: (message: AgentMessage) => void;
+    onSuccess: (message: AgentMessage) => void;
+    onError: (error: Error) => void;
+  },
+) => void;
+```
+
+### Agent
+
+| Property     | Description                                | Type           | Version |
+| ------------ | ------------------------------------------ | -------------- | ------- |
+| request      | Call the configured request of `useXAgent` | AgentRequestFn |         |
+| isRequesting | Check if it is requesting                  | () => boolean  |         |
+
+```tsx | pure
+type AgentRequestFn<AgentMessage> = (
+  info: { message: AgentMessage; messages?: AgentMessage[] },
+  callbacks: {
+    onUpdate: (message: AgentMessage) => void;
+    onSuccess: (message: AgentMessage) => void;
+    onError: (error: Error) => void;
+  },
+) => void;
+```

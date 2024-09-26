@@ -7,8 +7,6 @@ export type SimpleType = string | number | boolean | object;
 
 export type MessageStatus = 'local' | 'loading' | 'success' | 'error';
 
-// export type ReturnMessage<Message> = Message | DefaultMessageInfo<Message>;
-
 type RequestPlaceholderFn<Message extends SimpleType> = (
   message: Message,
   info: { messages: Message[] },

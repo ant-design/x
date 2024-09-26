@@ -119,7 +119,7 @@ const App = () => {
     <Flex vertical gap="middle">
       <Bubble.List
         roles={roles}
-        style={{ height: 300 }}
+        style={{ maxHeight: 300 }}
         items={parsedMessages.map(({ id, message, status }) => ({
           key: id,
           loading: status === 'loading',

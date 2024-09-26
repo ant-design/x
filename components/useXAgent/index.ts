@@ -5,16 +5,18 @@ export type RequestFn<Message = any> = (
   info: {
     message: Message;
     messages: Message[];
+  } & Partial<XAgentConfigPreset>,
+  callbacks: {
     onUpdate: (message: Message) => void;
     onSuccess: (message: Message) => void;
     onError: (error: Error) => void;
-  } & Partial<XAgentConfigPreset>,
+  },
 ) => void;
 
 export interface XAgentConfigPreset {
   baseURL: string;
   key: string;
-  model: 'gpt-3.5-turbo'; // Only provide preset model not string type
+  model: 'todo'; // Only provide preset model not string type
 }
 export interface XAgentConfigCustom<Message> {
   request: RequestFn<Message>;
@@ -40,7 +42,7 @@ export class XAgent<Message = string> {
   }
 
   public request(
-    info: { message: Message; messages: Message[] },
+    info: { message: Message; messages?: Message[] },
     callbacks: {
       onUpdate: (message: Message) => void;
       onSuccess: (message: Message) => void;
@@ -54,32 +56,36 @@ export class XAgent<Message = string> {
     uuid += 1;
     this.requestingMap[id] = true;
 
-    request({
-      baseURL,
-      key,
-      model,
-      ...info,
-
-      // Status should be unique.
-      // One get success or error should not get more message
-      onUpdate: (message) => {
-        if (this.requestingMap[id]) {
-          onUpdate(message);
-        }
+    request(
+      {
+        baseURL,
+        key,
+        model,
+        ...info,
+        messages: info.messages || [],
       },
-      onSuccess: (message) => {
-        if (this.requestingMap[id]) {
-          onSuccess(message);
-          this.finishRequest(id);
-        }
+      {
+        // Status should be unique.
+        // One get success or error should not get more message
+        onUpdate: (message) => {
+          if (this.requestingMap[id]) {
+            onUpdate(message);
+          }
+        },
+        onSuccess: (message) => {
+          if (this.requestingMap[id]) {
+            onSuccess(message);
+            this.finishRequest(id);
+          }
+        },
+        onError: (error) => {
+          if (this.requestingMap[id]) {
+            onError(error);
+            this.finishRequest(id);
+          }
+        },
       },
-      onError: (error) => {
-        if (this.requestingMap[id]) {
-          onError(error);
-          this.finishRequest(id);
-        }
-      },
-    });
+    );
   }
 
   public isRequesting() {
@@ -95,7 +101,7 @@ export default function useXAgent<Message = string>(config: XAgentConfig<Message
       customConfig = config;
     } else {
       switch (config.model) {
-        case 'gpt-3.5-turbo':
+        case 'todo':
           customConfig = {
             ...config,
             request: request_GPT_3_5_Turbo,
