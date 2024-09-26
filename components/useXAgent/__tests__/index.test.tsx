@@ -1,13 +1,10 @@
 import React from 'react';
 import { fireEvent, render, waitFakeTimer } from '../../../tests/utils';
-import { MessageStatus, SimpleType, XAgentConfig } from '../index';
-import useXChat from '../index';
+import { MessageStatus, SimpleType, XAgent, XAgentConfig } from '../index';
+import useXAgent from '../index';
 
-describe('useXChat', () => {
-  const requestNeverEnd = jest.fn(() => new Promise<any>(() => {}));
-
+describe('useXAgent', () => {
   beforeAll(() => {
-    requestNeverEnd.mockClear();
     jest.useFakeTimers();
   });
 
@@ -15,154 +12,94 @@ describe('useXChat', () => {
     jest.useRealTimers();
   });
 
-  function Demo<Message extends SimpleType = string>(config: Partial<XAgentConfig<Message>>) {
-    const { messages, onRequest } = useXChat<Message>({
-      request: requestNeverEnd,
-      ...config,
-    });
-    return (
-      <>
-        <pre>{JSON.stringify(messages)}</pre>
-        <input
-          onChange={(e) => {
-            onRequest(e.target.value as Message);
-          }}
-        />
-      </>
-    );
-  }
+  describe('custom', () => {
+    const request = jest.fn();
 
-  function getMessages(container: HTMLElement) {
-    return JSON.parse(container.querySelector('pre')!.textContent!);
-  }
-
-  function expectMessage<T = string>(message: T, status?: MessageStatus) {
-    const obj: any = { message };
-    if (status) {
-      obj.status = status;
-    }
-    return expect.objectContaining(obj);
-  }
-
-  it('defaultMessages', () => {
-    const { container } = render(
-      <Demo
-        defaultMessages={[
-          {
-            message: 'default',
-          },
-        ]}
-      />,
-    );
-
-    expect(getMessages(container)).toEqual([
-      {
-        id: 'default_0',
-        message: 'default',
-        status: 'local',
-      },
-    ]);
-  });
-
-  describe('requestPlaceholder', () => {
-    it('static', () => {
-      const { container } = render(<Demo request={requestNeverEnd} requestPlaceholder="bamboo" />);
-
-      fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
-
-      expect(requestNeverEnd).toHaveBeenCalledWith('little', { messages: [] });
-
-      expect(getMessages(container)).toEqual([
-        expectMessage('little', 'local'),
-        expectMessage('bamboo', 'loading'),
-      ]);
-    });
-
-    it('callback', () => {
-      const requestPlaceholder = jest.fn(() => 'light');
-      const { container } = render(
-        <Demo request={requestNeverEnd} requestPlaceholder={requestPlaceholder} />,
-      );
-
-      fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
-
-      expect(requestNeverEnd).toHaveBeenCalledWith('little', { messages: [] });
-      expect(requestPlaceholder).toHaveBeenCalledWith('little', {
-        messages: [expectMessage('little')],
+    const Demo = React.forwardRef((_, ref: React.Ref<XAgent>) => {
+      const [agent] = useXAgent({
+        request,
       });
 
-      expect(getMessages(container)).toEqual([
-        expectMessage('little', 'local'),
-        expectMessage('light', 'loading'),
-      ]);
-    });
-  });
+      React.useImperativeHandle(ref, () => agent, [agent]);
 
-  describe('requestFallback', () => {
-    const requestFailed = jest.fn(() => Promise.reject(new Error('failed')));
-
-    it('static', async () => {
-      const { container } = render(<Demo request={requestFailed} requestFallback="bamboo" />);
-
-      fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
-
-      await waitFakeTimer();
-
-      expect(getMessages(container)).toEqual([
-        expectMessage('little', 'local'),
-        expectMessage('bamboo', 'error'),
-      ]);
+      return null;
     });
 
-    it('callback', async () => {
-      const requestFallback = jest.fn(() =>
-        // Force to success
-        Promise.resolve({
-          message: 'light',
-          status: 'success',
-        } as const),
-      );
-      const { container } = render(
-        <Demo request={requestFailed} requestFallback={requestFallback} />,
-      );
+    it('continue update', () => {
+      const agentRef = React.createRef<XAgent>();
+      render(<Demo ref={agentRef} />);
 
-      fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
-
-      await waitFakeTimer();
-
-      expect(requestFallback).toHaveBeenCalledWith('little', {
-        error: new Error('failed'),
-        messages: [expectMessage('little')],
+      // Mock request
+      request.mockImplementation((_, { onUpdate, onSuccess }) => {
+        onUpdate('bamboo');
+        onUpdate('little');
+        onSuccess('light');
+        onUpdate('tiny');
+        onSuccess('apple');
       });
 
-      expect(getMessages(container)).toEqual([
-        expectMessage('little', 'local'),
-        expectMessage('light', 'success'),
-      ]);
+      // Trigger
+      const onUpdate = jest.fn();
+      const onSuccess = jest.fn();
+      const onError = jest.fn();
+
+      agentRef.current?.request({} as any, {
+        onUpdate,
+        onSuccess,
+        onError,
+      });
+
+      // Test
+      expect(onUpdate).toHaveBeenCalledTimes(2);
+      expect(onSuccess).toHaveBeenCalledTimes(1);
+      expect(onError).toHaveBeenCalledTimes(0);
     });
-  });
 
-  it('multiple return messages', async () => {
-    const request = jest.fn(() =>
-      Promise.resolve([
-        'cute',
-        {
-          message: ['little', 'bamboo'],
-          status: 'loading',
-        },
-      ]),
-    );
+    it('error', () => {
+      const agentRef = React.createRef<XAgent>();
+      render(<Demo ref={agentRef} />);
 
-    const { container } = render(<Demo request={request} />);
+      // Mock request
+      request.mockImplementation((_, { onError, onSuccess }) => {
+        onError(new Error('noop'));
+        onSuccess('light');
+      });
 
-    fireEvent.change(container.querySelector('input')!, { target: { value: 'light' } });
-    await waitFakeTimer();
+      // Trigger
+      const onUpdate = jest.fn();
+      const onSuccess = jest.fn();
+      const onError = jest.fn();
 
-    expect(getMessages(container)).toEqual([
-      expectMessage('light', 'local'),
-      expectMessage('cute', 'success'),
-      expectMessage('little', 'loading'),
-      expectMessage('bamboo', 'loading'),
-    ]);
+      agentRef.current?.request({} as any, {
+        onUpdate,
+        onSuccess,
+        onError,
+      });
+
+      // Test
+      expect(onUpdate).toHaveBeenCalledTimes(0);
+      expect(onSuccess).toHaveBeenCalledTimes(0);
+      expect(onError).toHaveBeenCalledTimes(1);
+    });
+
+    it('requesting', () => {
+      const agentRef = React.createRef<XAgent>();
+      render(<Demo ref={agentRef} />);
+
+      // Mock request
+      request.mockImplementation((_, { onUpdate, onSuccess }) => {
+        onUpdate('bamboo');
+        expect(agentRef.current?.isRequesting()).toBeTruthy();
+
+        onSuccess('light');
+        expect(agentRef.current?.isRequesting()).toBeFalsy();
+      });
+
+      agentRef.current?.request({} as any, {
+        onUpdate: () => {},
+        onSuccess: () => {},
+        onError: () => {},
+      });
+    });
   });
 });
