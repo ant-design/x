@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render, sleep, waitFakeTimer } from '../../../tests/utils';
+import { fireEvent, render, waitFakeTimer } from '../../../tests/utils';
 import useXAgent, { RequestFn } from '../../useXAgent';
 import { MessageStatus, SimpleType, XChatConfig } from '../index';
 import useXChat from '../index';

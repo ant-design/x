@@ -27,7 +27,7 @@ const App = () => {
 
   // Agent for request
   const [agent] = useXAgent({
-    request: async ({ message, onSuccess, onError }) => {
+    request: async ({ message }, { onSuccess, onError }) => {
       await sleep();
 
       mockSuccess = !mockSuccess;

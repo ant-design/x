@@ -19,7 +19,7 @@ const App = () => {
 
   // Agent for request
   const [agent] = useXAgent({
-    request: async ({ message, onSuccess, onUpdate }) => {
+    request: async ({ message }, { onSuccess, onUpdate }) => {
       const fullContent = `Streaming output instead of Bubble typing effect. You typed: ${message}`;
       let currentContent = '';
 

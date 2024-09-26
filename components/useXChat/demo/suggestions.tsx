@@ -63,7 +63,7 @@ const App = () => {
 
   // Agent for request
   const [agent] = useXAgent<AgentMessage>({
-    request: async ({ message, onSuccess }) => {
+    request: async ({ message }, { onSuccess }) => {
       await sleep();
 
       const { content } = message;

@@ -12,7 +12,7 @@ const App = () => {
   };
 
   const [agent] = useXAgent({
-    request: ({ message, onUpdate, onSuccess }) => {
+    request: ({ message }, { onUpdate, onSuccess }) => {
       let times = 0;
 
       const id = setInterval(() => {
