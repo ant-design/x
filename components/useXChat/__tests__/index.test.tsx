@@ -1,10 +1,11 @@
 import React from 'react';
-import { fireEvent, render, waitFakeTimer } from '../../../tests/utils';
+import { fireEvent, render, sleep, waitFakeTimer } from '../../../tests/utils';
+import useXAgent, { RequestFn } from '../../useXAgent';
 import { MessageStatus, SimpleType, XChatConfig } from '../index';
 import useXChat from '../index';
 
 describe('useXChat', () => {
-  const requestNeverEnd = jest.fn(() => new Promise<any>(() => {}));
+  const requestNeverEnd = jest.fn(() => {});
 
   beforeAll(() => {
     requestNeverEnd.mockClear();
@@ -12,17 +13,25 @@ describe('useXChat', () => {
   });
 
   afterAll(() => {
+    jest.clearAllTimers();
     jest.useRealTimers();
   });
 
-  function Demo<Message extends SimpleType = string>(config: Partial<XChatConfig<Message>>) {
-    const { messages, onRequest } = useXChat<Message>({
-      request: requestNeverEnd,
-      ...config,
+  function Demo<Message extends SimpleType = string>({
+    request,
+    ...config
+  }: Partial<XChatConfig<Message>> & {
+    request?: RequestFn<Message>;
+  }) {
+    const [agent] = useXAgent<Message>({
+      request: request || requestNeverEnd,
     });
+
+    const { parsedMessages, onRequest } = useXChat<Message>({ agent, ...config });
+
     return (
       <>
-        <pre>{JSON.stringify(messages)}</pre>
+        <pre>{JSON.stringify(parsedMessages)}</pre>
         <input
           onChange={(e) => {
             onRequest(e.target.value as Message);
@@ -66,11 +75,17 @@ describe('useXChat', () => {
 
   describe('requestPlaceholder', () => {
     it('static', () => {
-      const { container } = render(<Demo request={requestNeverEnd} requestPlaceholder="bamboo" />);
+      const { container } = render(<Demo requestPlaceholder="bamboo" />);
 
       fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
 
-      expect(requestNeverEnd).toHaveBeenCalledWith('little', { messages: [] });
+      expect(requestNeverEnd).toHaveBeenCalledWith(
+        expect.objectContaining({
+          message: 'little',
+          messages: [],
+        }),
+        expect.anything(),
+      );
 
       expect(getMessages(container)).toEqual([
         expectMessage('little', 'local'),
@@ -86,9 +101,15 @@ describe('useXChat', () => {
 
       fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
 
-      expect(requestNeverEnd).toHaveBeenCalledWith('little', { messages: [] });
+      expect(requestNeverEnd).toHaveBeenCalledWith(
+        expect.objectContaining({
+          message: 'little',
+          messages: [],
+        }),
+        expect.anything(),
+      );
       expect(requestPlaceholder).toHaveBeenCalledWith('little', {
-        messages: [expectMessage('little')],
+        messages: ['little'],
       });
 
       expect(getMessages(container)).toEqual([
@@ -99,7 +120,11 @@ describe('useXChat', () => {
   });
 
   describe('requestFallback', () => {
-    const requestFailed = jest.fn(() => Promise.reject(new Error('failed')));
+    const requestFailed = jest.fn(async (_, { onError }) => {
+      setTimeout(() => {
+        onError(new Error('failed'));
+      }, 100);
+    });
 
     it('static', async () => {
       const { container } = render(<Demo request={requestFailed} requestFallback="bamboo" />);
@@ -115,13 +140,7 @@ describe('useXChat', () => {
     });
 
     it('callback', async () => {
-      const requestFallback = jest.fn(() =>
-        // Force to success
-        Promise.resolve({
-          message: 'light',
-          status: 'success',
-        } as const),
-      );
+      const requestFallback = jest.fn(async () => 'light');
       const { container } = render(
         <Demo request={requestFailed} requestFallback={requestFallback} />,
       );
@@ -132,37 +151,70 @@ describe('useXChat', () => {
 
       expect(requestFallback).toHaveBeenCalledWith('little', {
         error: new Error('failed'),
-        messages: [expectMessage('little')],
+        messages: ['little'],
       });
 
       expect(getMessages(container)).toEqual([
         expectMessage('little', 'local'),
-        expectMessage('light', 'success'),
+        expectMessage('light', 'error'),
       ]);
+    });
+
+    it('without fallback', async () => {
+      const request = jest.fn((_, { onUpdate, onError }) => {
+        onUpdate('bamboo');
+
+        setTimeout(() => {
+          onError(new Error('error'));
+        }, 100);
+      });
+      const { container } = render(<Demo request={request} />);
+
+      fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
+      expect(getMessages(container)).toEqual([
+        expectMessage('little', 'local'),
+        expectMessage('bamboo', 'loading'),
+      ]);
+
+      await waitFakeTimer();
+      expect(getMessages(container)).toEqual([expectMessage('little', 'local')]);
     });
   });
 
-  it('multiple return messages', async () => {
-    const request = jest.fn(() =>
-      Promise.resolve([
-        'cute',
-        {
-          message: ['little', 'bamboo'],
-          status: 'loading',
-        },
-      ]),
-    );
-
-    const { container } = render(<Demo request={request} />);
+  it('parser return multiple messages', async () => {
+    const { container } = render(<Demo parser={(msg) => [`0_${msg}`, `1_${msg}`]} />);
 
     fireEvent.change(container.querySelector('input')!, { target: { value: 'light' } });
     await waitFakeTimer();
 
+    console.log(container.innerHTML);
+
     expect(getMessages(container)).toEqual([
-      expectMessage('light', 'local'),
-      expectMessage('cute', 'success'),
-      expectMessage('little', 'loading'),
+      expectMessage('0_light', 'local'),
+      expectMessage('1_light', 'local'),
+    ]);
+  });
+
+  it('update to success', async () => {
+    const request = jest.fn((_, { onUpdate, onSuccess }) => {
+      onUpdate('bamboo');
+
+      setTimeout(() => {
+        onSuccess('light');
+      }, 100);
+    });
+    const { container } = render(<Demo request={request} />);
+
+    fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
+    expect(getMessages(container)).toEqual([
+      expectMessage('little', 'local'),
       expectMessage('bamboo', 'loading'),
+    ]);
+
+    await waitFakeTimer();
+    expect(getMessages(container)).toEqual([
+      expectMessage('little', 'local'),
+      expectMessage('light', 'success'),
     ]);
   });
 });

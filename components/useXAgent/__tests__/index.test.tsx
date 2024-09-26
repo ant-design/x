@@ -1,6 +1,6 @@
 import React from 'react';
-import { fireEvent, render, waitFakeTimer } from '../../../tests/utils';
-import { MessageStatus, SimpleType, XAgent, XAgentConfig } from '../index';
+import { render } from '../../../tests/utils';
+import { XAgent } from '../index';
 import useXAgent from '../index';
 
 describe('useXAgent', () => {

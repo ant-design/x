@@ -70,8 +70,6 @@ export default function useXChat<
 >(config: XChatConfig<AgentMessage, ParsedMessage>) {
   const { defaultMessages, agent, requestFallback, requestPlaceholder, parser } = config;
 
-  // const [requesting, setRequesting] = React.useState(false);
-
   // ========================= Agent Messages =========================
   const idRef = React.useRef(0);
 
@@ -217,13 +215,13 @@ export default function useXChat<
             }
 
             setMessages((ori) => [
-              ...ori.filter((info) => info.id !== loadingMsgId),
+              ...ori.filter((info) => info.id !== loadingMsgId && info.id !== updatingMsgId),
               createMessage(fallbackMsg, 'error'),
             ]);
           } else {
             // Remove directly
             setMessages((ori) => {
-              return ori.filter((info) => info.id !== loadingMsgId);
+              return ori.filter((info) => info.id !== loadingMsgId && info.id !== updatingMsgId);
             });
           }
         },
