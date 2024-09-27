@@ -19,7 +19,12 @@ const componentNames = globSync(
 const camelComponentNames = componentNames.map((componentName) =>
   componentName
     .split('-')
-    .map((cell) => (cell.length <= 2 ? cell.toUpperCase() : cell[0].toUpperCase() + cell.slice(1)))
+    .map((cell) => {
+      // Runtime Hook
+      if (cell.startsWith('use')) return cell;
+      // Components
+      return cell.length <= 2 ? cell.toUpperCase() : cell[0].toUpperCase() + cell.slice(1);
+    })
     .join(''),
 );
 
@@ -32,6 +37,8 @@ const componentNameMap: Record<string, (string | RegExp)[]> = {};
 camelComponentNames.forEach((name) => {
   componentNameMap[name] = [...fillComponentKey(name), 'Global:'];
 });
+
+console.log(componentNameMap, camelComponentNames, componentNames, 'componentNameMap');
 
 // Collect misc. When ComponentName not match will fallback to misc
 const miscKeys = [
