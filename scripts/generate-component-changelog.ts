@@ -38,8 +38,6 @@ camelComponentNames.forEach((name) => {
   componentNameMap[name] = [...fillComponentKey(name), 'Global:'];
 });
 
-console.log(componentNameMap, camelComponentNames, componentNames, 'componentNameMap');
-
 // Collect misc. When ComponentName not match will fallback to misc
 const miscKeys = [
   'ComponentToken',
