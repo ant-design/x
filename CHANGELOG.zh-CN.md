@@ -15,6 +15,17 @@ tag: vVERSION
 
 ---
 
+## 1.0.0-alpha.2
+
+`2024-09-27`
+
+- 🔥 新增 `XProvider` 全局化配置组件，由 [@YumoImer](https://github.com/YumoImer) 完成 [#127](https://github.com/ant-design/x/pull/127)
+- 🔥 新增 运行时钩子 `useXChat` 数据管理，由 [@zombieJ](https://github.com/zombieJ) 完成 [#125](https://github.com/ant-design/x/pull/125)
+- 🔥 新增 运行时钩子 `useXAgent` 模型调度，由 [@zombieJ](https://github.com/zombieJ) 完成 [#125](https://github.com/ant-design/x/pull/125)
+- 🆕 `ThoughtChain` 思维链组件支持 `size` 属性，由 [@YumoImer](https://github.com/YumoImer) 完成 [#123](https://github.com/ant-design/x/pull/123)
+- 🛠 更新 `.lintstagedrc.json`, 由 [@afc163](https://github.com/afc163) 完成 [#128](https://github.com/ant-design/x/pull/128)
+- 🛠 更新依赖 `cheerio` 至 `v1.0.0`, 由 [@afc163](https://github.com/afc163) 完成 [#121](https://github.com/ant-design/x/pull/121)
+
 ## 1.0.0-alpha.1
 
 `2024-09-10`
