@@ -4,7 +4,7 @@
 
 <h1>Ant Design X</h1>
 
-打造 AI 驱动界面，一键接入智能对话组件与 API 服务。
+构建 Copilot 应用的好搭档。
 
 [![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] [![NPM version][npm-image]][npm-url] [![NPM downloads][download-image]][download-url]
 
