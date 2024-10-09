@@ -23,7 +23,7 @@ Array [
             class="ant-space-item"
           >
             <button
-              class="ant-btn css-var-rb ant-btn-text ant-btn-icon-only ant-sender-actions-btn"
+              class="ant-btn css-var-rb ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn"
               disabled=""
               type="button"
             >
@@ -59,7 +59,7 @@ Array [
             class="ant-space-item"
           >
             <button
-              class="ant-btn css-var-rb ant-btn-text ant-btn-icon-only ant-sender-actions-btn"
+              class="ant-btn css-var-rb ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn"
               disabled=""
               type="button"
             >
@@ -237,7 +237,7 @@ Array [
             class="ant-space-item"
           >
             <button
-              class="ant-btn css-var-r7 ant-btn-text ant-btn-icon-only ant-sender-actions-btn"
+              class="ant-btn css-var-r7 ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn"
               disabled=""
               type="button"
             >
@@ -273,7 +273,7 @@ Array [
             class="ant-space-item"
           >
             <button
-              class="ant-btn css-var-r7 ant-btn-text ant-btn-icon-only ant-sender-actions-btn"
+              class="ant-btn css-var-r7 ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn"
               disabled=""
               type="button"
             >
