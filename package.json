@@ -2,14 +2,7 @@
   "name": "@ant-design/x",
   "version": "1.0.0-alpha.2",
   "description": "Crafting AI-driven interfaces with React, seamlessly integrating smart chat components and API services at your fingertips.",
-  "keywords": [
-    "AI",
-    "Copilot",
-    "ant",
-    "components",
-    "framework",
-    "react"
-  ],
+  "keywords": ["AI", "Copilot", "ant", "components", "framework", "react"],
   "homepage": "https://x.ant.design",
   "bugs": {
     "url": "https://github.com/ant-design/x/issues"
@@ -27,13 +20,7 @@
   "main": "lib/index.js",
   "module": "es/index.js",
   "typings": "es/index.d.ts",
-  "files": [
-    "dist",
-    "es",
-    "lib",
-    "locale",
-    "BUG_VERSIONS.json"
-  ],
+  "files": ["dist", "es", "lib", "locale", "BUG_VERSIONS.json"],
   "scripts": {
     "api-collection": "antd-tools run api-collection",
     "authors": "tsx scripts/generate-authors.ts",
@@ -81,9 +68,7 @@
     "tsc": "tsc --noEmit",
     "version": "tsx scripts/generate-version.ts"
   },
-  "browserslist": [
-    "defaults"
-  ],
+  "browserslist": ["defaults"],
   "dependencies": {
     "@ant-design/colors": "^7.1.0",
     "@ant-design/cssinjs": "^1.21.1",
@@ -153,7 +138,7 @@
     "@umijs/fabric": "^4.0.1",
     "adm-zip": "^0.5.16",
     "ali-oss": "^6.21.0",
-    "antd": "^5.21.2",
+    "antd": "^5.20.6",
     "antd-style": "^3.6.3",
     "antd-token-previewer": "^2.0.8",
     "axios": "^1.7.7",
