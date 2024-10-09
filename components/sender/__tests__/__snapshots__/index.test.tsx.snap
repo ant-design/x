@@ -20,7 +20,7 @@ exports[`Sender Component loading state 1`] = `
         class="ant-space-item"
       >
         <button
-          class="ant-btn ant-btn-text ant-btn-icon-only ant-sender-actions-btn"
+          class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn"
           disabled=""
           type="button"
         >
@@ -73,7 +73,7 @@ exports[`Sender Component rtl render component should be rendered correctly in R
         class="ant-space-item"
       >
         <button
-          class="ant-btn css-var-r1 ant-btn-text ant-btn-icon-only ant-btn-rtl ant-sender-actions-btn"
+          class="ant-btn css-var-r1 ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only ant-btn-rtl ant-sender-actions-btn"
           disabled=""
           type="button"
         >
@@ -109,7 +109,7 @@ exports[`Sender Component rtl render component should be rendered correctly in R
         class="ant-space-item"
       >
         <button
-          class="ant-btn css-var-r1 ant-btn-text ant-btn-icon-only ant-btn-rtl ant-sender-actions-btn"
+          class="ant-btn css-var-r1 ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only ant-btn-rtl ant-sender-actions-btn"
           disabled=""
           type="button"
         >

@@ -330,7 +330,7 @@ exports[`renders components/conversations/demo/controlled-mode.tsx extend contex
     class="ant-flex css-var-r1p ant-flex-gap-small"
   >
     <button
-      class="ant-btn css-var-r1p ant-btn-default"
+      class="ant-btn css-var-r1p ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -338,7 +338,7 @@ exports[`renders components/conversations/demo/controlled-mode.tsx extend contex
       </span>
     </button>
     <button
-      class="ant-btn css-var-r1p ant-btn-default"
+      class="ant-btn css-var-r1p ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
