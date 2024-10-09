@@ -1,6 +1,3 @@
-const chineseMirror =
-  typeof location !== 'undefined' && location.hostname.includes('.antgroup.com');
-
 export default {
   categoryOrder: {
     'Ant Design': 0,
@@ -23,7 +20,8 @@ export default {
     'Data Display': 4,
     Feedback: 5,
     Other: 6,
-    Deprecated: 7,
+    Runtime: 7,
+    Deprecated: 8,
 
     组件总览: -1,
     通用: 0,
@@ -34,6 +32,7 @@ export default {
     反馈: 5,
     其他: 6,
     废弃: 7,
+    运行时: 8,
 
     // Design
     原则: 1,
@@ -45,14 +44,5 @@ export default {
     模板文档: 3,
     'Template Document': 3,
   },
-  docVersions: {
-    '4.x': chineseMirror ? 'https://4x-ant-design.antgroup.com' : 'https://4x.ant.design',
-    '3.x': 'https://3x.ant.design',
-    '2.x': 'https://2x.ant.design',
-    '1.x': 'https://1x.ant.design',
-    '0.12.x': 'https://012x.ant.design',
-    '0.11.x': 'https://011x.ant.design',
-    '0.10.x': 'https://010x.ant.design',
-    '0.9.x': 'https://09x.ant.design',
-  },
+  docVersions: {},
 };
