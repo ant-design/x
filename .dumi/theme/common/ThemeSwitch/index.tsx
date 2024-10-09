@@ -5,7 +5,6 @@ import { CompactTheme, DarkTheme } from 'antd-token-previewer/es/icons';
 import { FormattedMessage, useLocation } from 'dumi';
 import React from 'react';
 
-import useThemeAnimation from '../../../hooks/useThemeAnimation';
 import { getLocalizedPathname, isZhCN } from '../../utils';
 import Link from '../Link';
 import ThemeIcon from './ThemeIcon';
@@ -23,8 +22,6 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = (props) => {
 
   // const isMotionOff = value.includes('motion-off');
   const isDark = value.includes('dark');
-
-  const toggleAnimationTheme = useThemeAnimation();
 
   return (
     <FloatButton.Group
@@ -45,10 +42,7 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = (props) => {
       <FloatButton
         icon={<DarkTheme />}
         type={isDark ? 'primary' : 'default'}
-        onClick={(e) => {
-          // Toggle animation when switch theme
-          toggleAnimationTheme(e, isDark);
-
+        onClick={() => {
           if (isDark) {
             onChange(value.filter((theme) => theme !== 'dark'));
           } else {
