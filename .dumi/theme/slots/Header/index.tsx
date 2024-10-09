@@ -330,12 +330,7 @@ const Header: React.FC = () => {
       pure
       aria-label="RTL Switch Button"
     />,
-    <a
-      key="github"
-      href="https://github.com/ant-design/ant-design"
-      target="_blank"
-      rel="noreferrer"
-    >
+    <a key="github" href="https://github.com/ant-design/x" target="_blank" rel="noreferrer">
       <SwitchBtn value={1} label1={<GithubOutlined />} tooltip1="Github" label2={null} pure />
     </a>,
   ];

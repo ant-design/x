@@ -32,7 +32,7 @@ const locales = {
   },
 };
 
-const branchUrl = 'https://github.com/ant-design/ant-design/edit/master/';
+const branchUrl = 'https://github.com/ant-design/x/edit/master/';
 
 function isVersionNumber(value?: string) {
   return value && /^\d+\.\d+\.\d+$/.test(value);
@@ -67,7 +67,7 @@ const useStyle = createStyles(({ token }) => ({
     color: ${token.magenta8};
     margin-inline-end: 0.5em;
   `,
-  antd: css`
+  antdx: css`
     color: ${token.green8};
   `,
   semicolon: css`
@@ -107,7 +107,7 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
     if (String(source) === 'true') {
       const kebabComponent = kebabCase(component);
       return [
-        `https://github.com/ant-design/ant-design/blob/master/components/${kebabComponent}`,
+        `https://github.com/ant-design/x/blob/master/components/${kebabComponent}`,
         `components/${kebabComponent}`,
       ];
     }
@@ -137,8 +137,8 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
     <span key="from" className={styles.from}>
       from
     </span>,
-    <span key="antd" className={styles.antd}>
-      {`"antd"`}
+    <span key="@ant-design/x" className={styles.antdx}>
+      {`"@ant-design/x"`}
     </span>,
     <span key="semicolon" className={styles.semicolon}>
       ;
@@ -157,7 +157,10 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
           {
             label: locale.import,
             children: (
-              <CopyToClipboard text={`import { ${component} } from "antd";`} onCopy={onCopy}>
+              <CopyToClipboard
+                text={`import { ${component} } from "@ant-design/x";`}
+                onCopy={onCopy}
+              >
                 <Tooltip
                   placement="right"
                   title={copied ? locale.copied : locale.copy}

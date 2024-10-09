@@ -460,7 +460,7 @@ const Theme: React.FC = () => {
             <div className={styles.logo}>
               <div className={styles.logoImg}>
                 <img
-                  src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
+                  src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*1SDwSrOnSakAAAAAAAAAAAAADgCCAQ/original"
                   style={{
                     filter:
                       closestColor === DEFAULT_COLOR ? undefined : rgbToColorMatrix(logoColor),

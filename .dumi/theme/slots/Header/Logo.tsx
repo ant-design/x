@@ -52,7 +52,8 @@ export interface LogoProps {
   location: any;
 }
 
-const logoSrc = 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg';
+const logoSrc =
+  'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*1SDwSrOnSakAAAAAAAAAAAAADgCCAQ/original';
 
 const Logo: React.FC<LogoProps> = ({ isZhCN }) => {
   const { search } = useLocation();

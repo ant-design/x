@@ -64,7 +64,7 @@ const DemoWrapper: typeof DumiDemoGrid = ({ items }) => {
             debug: false,
             /**
              * antd extra marker for the original debug
-             * @see https://github.com/ant-design/ant-design/pull/40130#issuecomment-1380208762
+             * @see https://github.com/ant-design/x/pull/40130#issuecomment-1380208762
              */
             originDebug: debug,
           },
