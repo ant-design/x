@@ -1,12 +1,13 @@
-import { EditOutlined, GithubOutlined } from '@ant-design/icons';
+import { EditOutlined, GithubOutlined, HistoryOutlined } from '@ant-design/icons';
 import type { GetProp } from 'antd';
-import { Descriptions, Tooltip, Typography, theme } from 'antd';
+import { Descriptions, Space, Tooltip, Typography, theme } from 'antd';
 import { createStyles, css } from 'antd-style';
 import kebabCase from 'lodash/kebabCase';
 import React from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
 import useLocale from '../../../hooks/useLocale';
+import ComponentChangelog from '../../common/ComponentChangelog';
 
 const locales = {
   cn: {
@@ -16,6 +17,7 @@ const locales = {
     source: '源码',
     docs: '文档',
     edit: '编辑此页',
+    changelog: '更新日志',
     version: '版本',
   },
   en: {
@@ -25,11 +27,12 @@ const locales = {
     source: 'Source',
     docs: 'Docs',
     edit: 'Edit this page',
+    changelog: 'Changelog',
     version: 'Version',
   },
 };
 
-const branchUrl = 'https://github.com/ant-design/x/edit/main/';
+const branchUrl = 'https://github.com/ant-design/ant-design/edit/master/';
 
 function isVersionNumber(value?: string) {
   return value && /^\d+\.\d+\.\d+$/.test(value);
@@ -64,7 +67,7 @@ const useStyle = createStyles(({ token }) => ({
     color: ${token.magenta8};
     margin-inline-end: 0.5em;
   `,
-  antdx: css`
+  antd: css`
     color: ${token.green8};
   `,
   semicolon: css`
@@ -104,7 +107,7 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
     if (String(source) === 'true') {
       const kebabComponent = kebabCase(component);
       return [
-        `https://github.com/ant-design/x/blob/main/components/${kebabComponent}`,
+        `https://github.com/ant-design/ant-design/blob/master/components/${kebabComponent}`,
         `components/${kebabComponent}`,
       ];
     }
@@ -134,8 +137,8 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
     <span key="from" className={styles.from}>
       from
     </span>,
-    <span key="@ant-design/x" className={styles.antdx}>
-      {`"@ant-design/x"`}
+    <span key="antd" className={styles.antd}>
+      {`"antd"`}
     </span>,
     <span key="semicolon" className={styles.semicolon}>
       ;
@@ -154,10 +157,7 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
           {
             label: locale.import,
             children: (
-              <CopyToClipboard
-                text={`import { ${component} } from "@ant-design/x";`}
-                onCopy={onCopy}
-              >
+              <CopyToClipboard text={`import { ${component} } from "antd";`} onCopy={onCopy}>
                 <Tooltip
                   placement="right"
                   title={copied ? locale.copied : locale.copy}
@@ -182,14 +182,22 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
           filename && {
             label: locale.docs,
             children: (
-              <Typography.Link
-                className={styles.code}
-                href={`${branchUrl}${filename}`}
-                target="_blank"
-              >
-                <EditOutlined style={{ marginInlineEnd: 4 }} />
-                <span>{locale.edit}</span>
-              </Typography.Link>
+              <Space size="middle">
+                <Typography.Link
+                  className={styles.code}
+                  href={`${branchUrl}${filename}`}
+                  target="_blank"
+                >
+                  <EditOutlined style={{ marginInlineEnd: 4 }} />
+                  <span>{locale.edit}</span>
+                </Typography.Link>
+                <ComponentChangelog>
+                  <Typography.Link className={styles.code}>
+                    <HistoryOutlined style={{ marginInlineEnd: 4 }} />
+                    <span>{locale.changelog}</span>
+                  </Typography.Link>
+                </ComponentChangelog>
+              </Space>
             ),
           },
           isVersionNumber(version) && {

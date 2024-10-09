@@ -6,8 +6,7 @@ import {
   ExperimentFilled,
   ExperimentOutlined,
 } from '@ant-design/icons';
-import { XProvider } from '@ant-design/x';
-import { Tooltip } from 'antd';
+import { ConfigProvider, Tooltip } from 'antd';
 import classNames from 'classnames';
 import { DumiDemoGrid, FormattedMessage } from 'dumi';
 import React, { useContext } from 'react';
@@ -52,16 +51,13 @@ const DemoWrapper: typeof DumiDemoGrid = ({ items }) => {
 
   const demos = React.useMemo(
     () =>
-      items.reduce<typeof items>((acc, item) => {
+      items.map((item: any) => {
         const { previewerProps } = item;
         const { debug } = previewerProps;
-        if (debug && !showDebug) {
-          return acc;
-        }
-        return acc.concat({
+        return {
           ...item,
           previewerProps: {
-            ...previewerProps,
+            ...item.previewerProps,
             expand: expandAll,
             // always override debug property, because dumi will hide debug demo in production
             debug: false,
@@ -71,13 +67,17 @@ const DemoWrapper: typeof DumiDemoGrid = ({ items }) => {
              */
             originDebug: debug,
           },
-        });
-      }, []),
+        };
+      }),
     [expandAll, showDebug],
   );
 
   return (
-    <div className="demo-wrapper">
+    <div
+      className={classNames('demo-wrapper', {
+        'demo-wrapper-show-debug': showDebug,
+      })}
+    >
       <span className="all-code-box-controls">
         <Tooltip
           title={
@@ -109,9 +109,9 @@ const DemoWrapper: typeof DumiDemoGrid = ({ items }) => {
           )}
         </Tooltip>
       </span>
-      <XProvider theme={{ cssVar: enableCssVar, hashed: !enableCssVar }}>
+      <ConfigProvider theme={{ cssVar: enableCssVar, hashed: !enableCssVar }}>
         <DumiDemoGrid items={demos} />
-      </XProvider>
+      </ConfigProvider>
     </div>
   );
 };

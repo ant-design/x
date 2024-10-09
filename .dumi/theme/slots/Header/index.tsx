@@ -1,6 +1,5 @@
 import { GithubOutlined, MenuOutlined } from '@ant-design/icons';
-import { XProvider } from '@ant-design/x';
-import { Alert, Col, Popover, Row, Select } from 'antd';
+import { Alert, Col, ConfigProvider, Popover, Row, Select } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
@@ -211,7 +210,6 @@ const Header: React.FC = () => {
     };
   }, []);
 
-  // eslint-disable-next-line class-methods-use-this
   const handleVersionChange = useCallback((url: string) => {
     const currentUrl = window.location.href;
     const currentPathname = window.location.pathname;
@@ -370,7 +368,7 @@ const Header: React.FC = () => {
         </Popover>
       )}
       {isZhCN && bannerVisible && (
-        <XProvider
+        <ConfigProvider
           theme={{
             token: {
               colorInfoBg: 'linear-gradient(90deg, #84fab0, #8fd3f4)',
@@ -405,7 +403,7 @@ const Header: React.FC = () => {
             showIcon={false}
             onClose={onBannerClose}
           />
-        </XProvider>
+        </ConfigProvider>
       )}
       <Row style={{ flexFlow: 'nowrap', height: 64 }}>
         <Col {...colProps[0]}>

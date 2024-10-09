@@ -1,5 +1,4 @@
-import { XProvider } from '@ant-design/x';
-import { Col, Flex, Row, Tag, Typography, theme } from 'antd';
+import { Col, ConfigProvider, Flex, Row, Tag, Typography, theme } from 'antd';
 import { createStyles, css } from 'antd-style';
 import classnames from 'classnames';
 import React from 'react';
@@ -138,7 +137,7 @@ const SemanticPreview: React.FC<SemanticPreviewProps> = (props) => {
     <div className={classnames(styles.container)} ref={containerRef}>
       <Row style={{ minHeight: height }}>
         <Col span={16} className={classnames(styles.colWrap)}>
-          <XProvider theme={{ token: { motion: false } }}>{cloneNode}</XProvider>
+          <ConfigProvider theme={{ token: { motion: false } }}>{cloneNode}</ConfigProvider>
         </Col>
         <Col span={8}>
           <ul className={classnames(styles.listWrap)}>

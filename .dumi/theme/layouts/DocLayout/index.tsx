@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 
 import 'dayjs/locale/zh-cn';
 
-import { XProvider } from '@ant-design/x';
+import ConfigProvider from 'antd/es/config-provider';
 import zhCN from 'antd/es/locale/zh_CN';
 import { Helmet, useOutlet, useSiteData } from 'dumi';
 import React, { useContext, useEffect, useLayoutEffect, useRef } from 'react';
@@ -17,6 +17,7 @@ import SiteContext from '../../slots/SiteContext';
 import '../../static/style';
 
 import IndexLayout from '../IndexLayout';
+import ResourceLayout from '../ResourceLayout';
 import SidebarLayout from '../SidebarLayout';
 
 const locales = {
@@ -81,6 +82,9 @@ const DocLayout: React.FC = () => {
         </IndexLayout>
       );
     }
+    if (pathname.startsWith('/docs/resource')) {
+      return <ResourceLayout>{outlet}</ResourceLayout>;
+    }
     if (pathname.startsWith('/theme-editor')) {
       return outlet;
     }
@@ -106,11 +110,11 @@ const DocLayout: React.FC = () => {
           content="https://gw.alipayobjects.com/zos/rmsportal/rlpTLlbMzTNYuZGGCVYM.png"
         />
       </Helmet>
-      <XProvider direction={direction} locale={lang === 'cn' ? zhCN : undefined}>
+      <ConfigProvider direction={direction} locale={lang === 'cn' ? zhCN : undefined}>
         <GlobalStyles />
         <Header />
         {content}
-      </XProvider>
+      </ConfigProvider>
     </>
   );
 };
