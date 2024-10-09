@@ -18,7 +18,10 @@ const genPromptsStyle: GenerateStyle<PromptsToken> = (token) => {
       [`&${componentCls}-rtl`]: {
         direction: 'rtl',
       },
-      [`& ${componentCls}-title`]: {},
+      [`& ${componentCls}-title`]: {
+        marginBlockStart: 0,
+      },
+
       [`& ${componentCls}-list`]: {
         display: 'flex',
         gap: token.paddingSM,

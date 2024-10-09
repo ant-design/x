@@ -24,6 +24,6 @@ export interface BubbleProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 
   typing?: boolean | TypingOption;
   content?: React.ReactNode | object;
   messageRender?: (content: string) => React.ReactNode;
-  variant?: 'filled' | 'borderless';
+  variant?: 'filled' | 'borderless' | 'outlined' | 'shadow';
   onTypingComplete?: VoidFunction;
 }

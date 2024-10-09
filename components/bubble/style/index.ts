@@ -3,6 +3,7 @@ import { mergeToken } from '@ant-design/cssinjs-utils';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
 import genBubbleListStyle from './list';
+import genVariantStyle from './variant';
 
 const loadingMove = new Keyframes('loadingMove', {
   '0%': {
@@ -42,8 +43,7 @@ export interface BubbleToken extends FullToken<'Bubble'> {
 }
 
 const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
-  const { componentCls, fontSize, lineHeight, paddingSM, padding, paddingXS, colorText, calc } =
-    token;
+  const { componentCls, fontSize, lineHeight, paddingSM, paddingXS, colorText, calc } = token;
   return {
     [componentCls]: {
       display: 'flex',
@@ -83,14 +83,6 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
         maxWidth: token.bubbleContentMaxWidth,
 
         wordBreak: 'break-word',
-
-        // Variant
-        '&-filled': {
-          padding: `${unit(paddingSM)} ${unit(padding)}`,
-          backgroundColor: token.colorInfoBg,
-          borderRadius: token.borderRadiusLG,
-          boxShadow: token.boxShadowTertiary,
-        },
 
         [`& ${componentCls}-dot`]: {
           position: 'relative',
@@ -133,7 +125,11 @@ export default genStyleHooks<'Bubble'>(
     const bubbleToken = mergeToken<BubbleToken>(token, {
       bubbleContentMaxWidth: `calc(100% - ${unit(calc(paddingXS).add(32).equal())})`,
     });
-    return [genBubbleStyle(bubbleToken), genBubbleListStyle(bubbleToken)];
+    return [
+      genBubbleStyle(bubbleToken),
+      genBubbleListStyle(bubbleToken),
+      genVariantStyle(bubbleToken),
+    ];
   },
   prepareComponentToken,
 );
