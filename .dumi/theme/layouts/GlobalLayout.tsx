@@ -6,7 +6,6 @@ import {
   legacyNotSelectorLinter,
   parentSelectorLinter,
 } from '@ant-design/cssinjs';
-import { HappyProvider } from '@ant-design/happy-work-theme';
 import { getSandpackCssText } from '@codesandbox/sandpack-react';
 import { App, theme as antdTheme } from 'antd';
 import type { MappingAlgorithm } from 'antd';
@@ -34,16 +33,6 @@ export const ANT_DESIGN_NOT_SHOW_BANNER = 'ANT_DESIGN_NOT_SHOW_BANNER';
 // if (typeof global !== 'undefined') {
 //   (global as any).styleCache = styleCache;
 // }
-
-// Compatible with old anchors
-if (typeof window !== 'undefined') {
-  const hashId = location.hash.slice(1);
-  if (hashId.startsWith('components-')) {
-    if (!document.querySelector(`#${hashId}`)) {
-      location.hash = `#${hashId.replace(/^components-/, '')}`;
-    }
-  }
-}
 
 const getAlgorithm = (themes: ThemeName[] = []) =>
   themes
@@ -219,9 +208,7 @@ const GlobalLayout: React.FC = () => {
         linters={[legacyNotSelectorLinter, parentSelectorLinter, NaNLinter]}
       >
         <SiteContext.Provider value={siteContextValue}>
-          <SiteThemeProvider theme={themeConfig}>
-            <HappyProvider disabled={!theme.includes('happy-work')}>{content}</HappyProvider>
-          </SiteThemeProvider>
+          <SiteThemeProvider theme={themeConfig}>{content}</SiteThemeProvider>
         </SiteContext.Provider>
       </StyleProvider>
     </DarkContext.Provider>
