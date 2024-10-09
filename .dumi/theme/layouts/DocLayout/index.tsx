@@ -21,13 +21,12 @@ import SidebarLayout from '../SidebarLayout';
 
 const locales = {
   cn: {
-    title: 'Ant Design - 一套企业级 UI 设计语言和 React 组件库',
-    description: '基于 Ant Design 设计体系的 React UI 组件库，用于研发企业级中后台产品。',
+    title: 'Ant Design X',
+    description: '构建 Copilot 应用的好搭档',
   },
   en: {
-    title: "Ant Design - The world's second most popular React UI framework",
-    description:
-      'An enterprise-class UI design language and React UI library with a set of high-quality React components, one of best React UI library for enterprises',
+    title: 'Ant Design X',
+    description: 'The ready-made partner for building Copilot applications.',
   },
 };
 

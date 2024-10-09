@@ -101,11 +101,7 @@ const HeaderNavigation: React.FC<NavigationProps> = (props) => {
   const additionalItems: MenuProps['items'] = [
     {
       label: (
-        <a
-          href="https://github.com/ant-design/ant-design"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href="https://github.com/ant-design/x" target="_blank" rel="noopener noreferrer">
           GitHub
         </a>
       ),
@@ -177,24 +173,6 @@ const HeaderNavigation: React.FC<NavigationProps> = (props) => {
           key: 'docs/blog',
         }
       : null,
-    {
-      label: (
-        <Link to={utils.getLocalizedPathname('/docs/resources', isZhCN, search)}>
-          {locale.resources}
-        </Link>
-      ),
-      key: 'docs/resources',
-    },
-    // isZhCN
-    //   ? {
-    //       key: 'mirror',
-    //       label: (
-    //         <a href="https://ant-design.antgroup.com" target="_blank" rel="noreferrer">
-    //           国内镜像
-    //         </a>
-    //       ),
-    //     }
-    //   : null,
     ...(additional ?? []),
   ].filter(Boolean);
 

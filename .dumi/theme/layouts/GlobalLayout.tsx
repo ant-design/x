@@ -152,13 +152,8 @@ const GlobalLayout: React.FC = () => {
       plain: true,
       types: 'style',
     });
-    return (
-      <style
-        data-type="antd-cssinjs"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: used in cssinjs
-        dangerouslySetInnerHTML={{ __html: styleText }}
-      />
-    );
+    // biome-ignore lint/security/noDangerouslySetInnerHtml: only used in .dumi
+    return <style data-type="antd-cssinjs" dangerouslySetInnerHTML={{ __html: styleText }} />;
   });
 
   useServerInsertedHTML(() => {
@@ -171,7 +166,7 @@ const GlobalLayout: React.FC = () => {
         data-type="antd-css-var"
         data-rc-order="prepend"
         data-rc-priority="-9999"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: used in cssinjs
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: only used in .dumi
         dangerouslySetInnerHTML={{ __html: styleText }}
       />
     );
@@ -181,7 +176,7 @@ const GlobalLayout: React.FC = () => {
     <style
       data-sandpack="true"
       id="sandpack"
-      // biome-ignore lint/security/noDangerouslySetInnerHtml: used in cssinjs
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: only used in .dumi
       dangerouslySetInnerHTML={{ __html: getSandpackCssText() }}
     />
   ));

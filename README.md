@@ -4,7 +4,7 @@
 
 <h1>Ant Design X</h1>
 
-Crafting AI-driven interfaces with React, seamlessly integrating smart chat components and API services at your fingertips.
+The ready-made partner for building Copilot applications.
 
 [![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] [![NPM version][npm-image]][npm-url] [![NPM downloads][download-image]][download-url]
 

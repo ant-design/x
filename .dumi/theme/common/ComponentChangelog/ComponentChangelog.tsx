@@ -1,19 +1,26 @@
-import { BugOutlined, HistoryOutlined } from '@ant-design/icons';
-import { Button, Drawer, Grid, Popover, Timeline, Typography } from 'antd';
+import { BugOutlined } from '@ant-design/icons';
+import { Drawer, Grid, Popover, Timeline, Typography } from 'antd';
 import type { TimelineItemProps } from 'antd';
 import { createStyles } from 'antd-style';
-/* eslint-disable global-require, import/no-unresolved */
-import React from 'react';
+import React, { cloneElement, isValidElement } from 'react';
 import semver from 'semver';
 
 import deprecatedVersions from '../../../../BUG_VERSIONS.json';
 import useFetch from '../../../hooks/useFetch';
 import useLocale from '../../../hooks/useLocale';
+import useLocation from '../../../hooks/useLocation';
 import Link from '../Link';
 
 interface MatchDeprecatedResult {
   match?: string;
   reason: string[];
+}
+
+interface ChangelogInfo {
+  version: string;
+  changelog: string;
+  refs: string[];
+  releaseDate: string;
 }
 
 function matchDeprecated(v: string): MatchDeprecatedResult {
@@ -70,7 +77,7 @@ const useStyle = createStyles(({ token, css }) => ({
 }));
 
 export interface ComponentChangelogProps {
-  pathname: string;
+  children?: React.ReactNode;
 }
 
 const locales = {
@@ -90,29 +97,37 @@ const locales = {
   },
 };
 
-const ParseChangelog: React.FC<{ changelog: string; refs: string[]; styles: any }> = (props) => {
-  const { changelog = '', refs = [], styles } = props;
+const ParseChangelog: React.FC<{ changelog: string }> = (props) => {
+  const { changelog = '' } = props;
 
   const parsedChangelog = React.useMemo(() => {
     const nodes: React.ReactNode[] = [];
 
     let isQuota = false;
+    let isBold = false;
     let lastStr = '';
 
     for (let i = 0; i < changelog.length; i += 1) {
       const char = changelog[i];
 
-      if (char !== '`') {
+      if (char !== '`' && char !== '*') {
         lastStr += char;
       } else {
         let node: React.ReactNode = lastStr;
         if (isQuota) {
           node = <code>{node}</code>;
+        } else if (isBold) {
+          node = <strong>{node}</strong>;
         }
 
         nodes.push(node);
         lastStr = '';
-        isQuota = !isQuota;
+        if (char === '`') {
+          isQuota = !isQuota;
+        } else if (char === '*' && changelog[i + 1] === '*') {
+          isBold = !isBold;
+          i += 1; // Skip the next '*'
+        }
       }
     }
 
@@ -125,21 +140,48 @@ const ParseChangelog: React.FC<{ changelog: string; refs: string[]; styles: any 
     <>
       {/* Changelog */}
       <span>{parsedChangelog}</span>
-      {/* Refs */}
-      {refs?.map((ref) => (
-        <a className={styles.linkRef} key={ref} href={ref} target="_blank" rel="noreferrer">
-          #{ref.match(/^.*\/(\d+)$/)?.[1]}
-        </a>
-      ))}
     </>
   );
 };
 
-interface ChangelogInfo {
-  version: string;
-  changelog: string;
-  refs: string[];
-}
+const RenderChangelogList: React.FC<{ changelogList: ChangelogInfo[]; styles: any }> = ({
+  changelogList,
+  styles,
+}) => {
+  const elements = [];
+  for (let i = 0; i < changelogList.length; i += 1) {
+    const { refs, changelog } = changelogList[i];
+    // Check if the next line is an image link and append it to the current line
+    if (i + 1 < changelogList.length && changelogList[i + 1].changelog.trim().startsWith('<img')) {
+      const imgDom = new DOMParser().parseFromString(changelogList[i + 1].changelog, 'text/html');
+      const imgElement = imgDom.querySelector('img');
+      elements.push(
+        <li key={i}>
+          <ParseChangelog changelog={changelog} />
+          {refs?.map((ref) => (
+            <a className={styles.linkRef} key={ref} href={ref} target="_blank" rel="noreferrer">
+              #{ref.match(/^.*\/(\d+)$/)?.[1]}
+            </a>
+          ))}
+          <br />
+          <img
+            src={imgElement?.getAttribute('src') || ''}
+            alt={imgElement?.getAttribute('alt') || ''}
+            width={imgElement?.getAttribute('width') || ''}
+          />
+        </li>,
+      );
+      i += 1; // Skip the next line
+    } else {
+      elements.push(
+        <li key={i}>
+          <ParseChangelog changelog={changelog} />
+        </li>,
+      );
+    }
+  }
+  return <ul>{elements}</ul>;
+};
 
 const useChangelog = (componentPath: string, lang: 'cn' | 'en'): ChangelogInfo[] => {
   const logFileName = `components-changelog-${lang}.json`;
@@ -158,9 +200,10 @@ const useChangelog = (componentPath: string, lang: 'cn' | 'en'): ChangelogInfo[]
 };
 
 const ComponentChangelog: React.FC<ComponentChangelogProps> = (props) => {
-  const { pathname = '' } = props;
+  const { children } = props;
   const [locale, lang] = useLocale(locales);
   const [show, setShow] = React.useState(false);
+  const { pathname } = useLocation();
 
   const { styles } = useStyle();
 
@@ -211,13 +254,8 @@ const ComponentChangelog: React.FC<ComponentChangelogProps> = (props) => {
                 </Popover>
               )}
             </Typography.Title>
-            <ul>
-              {changelogList.map<React.ReactNode>((info, index) => (
-                <li key={index}>
-                  <ParseChangelog {...info} styles={styles} />
-                </li>
-              ))}
-            </ul>
+            {changelogList[0].releaseDate}
+            <RenderChangelogList changelogList={changelogList} styles={styles} />
           </Typography>
         ),
       };
@@ -227,15 +265,16 @@ const ComponentChangelog: React.FC<ComponentChangelogProps> = (props) => {
   const screens = Grid.useBreakpoint();
   const width = screens.md ? '48vw' : '90vw';
 
-  if (!list || !list.length) {
+  if (!pathname.startsWith('/components/') || !list || !list.length) {
     return null;
   }
 
   return (
     <>
-      <Button icon={<HistoryOutlined />} onClick={() => setShow(true)}>
-        {locale.changelog}
-      </Button>
+      {isValidElement(children) &&
+        cloneElement(children as React.ReactElement, {
+          onClick: () => setShow(true),
+        })}
       <Drawer
         destroyOnClose
         className={styles.drawerContent}
