@@ -468,7 +468,7 @@ const Theme: React.FC = () => {
                   alt="antd logo"
                 />
               </div>
-              <h1>Ant Design 5.0</h1>
+              <h1>Ant Design X</h1>
             </div>
             <Flex className={styles.menu} gap="middle">
               <BellOutlined />
