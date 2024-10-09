@@ -43,8 +43,7 @@ export interface BubbleToken extends FullToken<'Bubble'> {
 }
 
 const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
-  const { componentCls, fontSize, lineHeight, paddingSM, padding, paddingXS, colorText, calc } =
-    token;
+  const { componentCls, fontSize, lineHeight, paddingSM, paddingXS, colorText, calc } = token;
   return {
     [componentCls]: {
       display: 'flex',
