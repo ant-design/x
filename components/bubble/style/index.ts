@@ -2,8 +2,8 @@ import { Keyframes, unit } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
+import { genVariantStyle } from './content';
 import genBubbleListStyle from './list';
-import genVariantStyle from './variant';
 
 const loadingMove = new Keyframes('loadingMove', {
   '0%': {

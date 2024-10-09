@@ -22,6 +22,7 @@ Often used when chatting.
 <code src="./demo/typing.tsx">Typing effect</code>
 <code src="./demo/markdown.tsx">Content render</code>
 <code src="./demo/variant.tsx">Variant</code>
+<code src="./demo/shape.tsx">Shape</code>
 <code src="./demo/list.tsx">Bubble List</code>
 <code src="./demo/list-custom.tsx">Custom List Content</code>
 
@@ -38,6 +39,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | content | Content of bubble | string | - |  |
 | loading | Loading state of Message | boolean | - |  |
 | placement | Direction of Message | `start` \| `end` | `start` |  |
+| shape | Shape of bubble | `round` \| `corner` | - |  |
 | styles | Semantic DOM style | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - |  |
 | typing | Show message with typing motion | boolean \| { step?: number, interval?: number } | false |  |
 | variant | Style variant | `filled` \| `borderless` | `filled` |  |

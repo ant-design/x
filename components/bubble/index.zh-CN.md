@@ -23,6 +23,7 @@ demo:
 <code src="./demo/typing.tsx">打字效果</code>
 <code src="./demo/markdown.tsx">自定义渲染</code>
 <code src="./demo/variant.tsx">变体</code>
+<code src="./demo/shape.tsx">形状</code>
 <code src="./demo/list.tsx">气泡列表</code>
 <code src="./demo/list-custom.tsx">自定义列表内容</code>
 
@@ -39,6 +40,7 @@ demo:
 | content | 聊天内容 | string | - |  |
 | loading | 聊天内容加载状态 | boolean | - |  |
 | placement | 信息位置 | `start` \| `end` | `start` |  |
+| shape | 气泡形状 | `round` \| `corner` | - |  |
 | styles | 语义化结构 style | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - |  |
 | typing | 设置聊天内容打字动画 | boolean \| { step?: number, interval?: number } | false |  |
 | variant | 气泡样式变体 | `filled` \| `borderless` | `filled` |  |

@@ -2,7 +2,7 @@ import { unit } from '@ant-design/cssinjs';
 import type { BubbleToken } from '.';
 import type { GenerateStyle } from '../../theme/cssinjs-utils';
 
-const genVariantStyle: GenerateStyle<BubbleToken> = (token) => {
+export const genVariantStyle: GenerateStyle<BubbleToken> = (token) => {
   const { componentCls, paddingSM, padding } = token;
   return {
     [componentCls]: {
@@ -32,4 +32,17 @@ const genVariantStyle: GenerateStyle<BubbleToken> = (token) => {
   };
 };
 
-export default genVariantStyle;
+export const genShapeStyle: GenerateStyle<BubbleToken> = (token) => {
+  const { componentCls } = token;
+  return {
+    [componentCls]: {
+      [`${componentCls}-content`]: {
+        // round:
+        '&-round': {},
+
+        // Corner:
+        '&-corner': {},
+      },
+    },
+  };
+};

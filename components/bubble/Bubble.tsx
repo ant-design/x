@@ -35,6 +35,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     content = '',
     messageRender,
     variant = 'filled',
+    shape,
     onTypingComplete,
     ...otherHtmlProps
   } = props;
@@ -144,6 +145,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
         className={classnames(
           `${prefixCls}-content`,
           `${prefixCls}-content-${variant}`,
+          shape && `${prefixCls}-content-${shape}`,
           contextConfig.classNames.content,
           classNames.content,
         )}
