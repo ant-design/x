@@ -2,7 +2,7 @@ import { Keyframes, unit } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
-import { genVariantStyle } from './content';
+import { genShapeStyle, genVariantStyle } from './content';
 import genBubbleListStyle from './list';
 
 const loadingMove = new Keyframes('loadingMove', {
@@ -129,6 +129,7 @@ export default genStyleHooks<'Bubble'>(
       genBubbleStyle(bubbleToken),
       genBubbleListStyle(bubbleToken),
       genVariantStyle(bubbleToken),
+      genShapeStyle(bubbleToken),
     ];
   },
   prepareComponentToken,

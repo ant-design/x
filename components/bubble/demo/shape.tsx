@@ -1,31 +1,22 @@
-import { CoffeeOutlined, FireOutlined, SmileOutlined, UserOutlined } from '@ant-design/icons';
-import { Bubble, Prompts, PromptsProps } from '@ant-design/x';
+import { Bubble, type BubbleProps } from '@ant-design/x';
 import { Flex } from 'antd';
 import React from 'react';
 
-const items: PromptsProps['items'] = [
-  {
-    key: '6',
-    icon: <CoffeeOutlined style={{ color: '#964B00' }} />,
-    description: 'How to rest effectively after long hours of work?',
-  },
-  {
-    key: '7',
-    icon: <SmileOutlined style={{ color: '#FAAD14' }} />,
-    description: 'What are the secrets to maintaining a positive mindset?',
-  },
-  {
-    key: '8',
-    icon: <FireOutlined style={{ color: '#FF4D4F' }} />,
-    description: 'How to stay calm under immense pressure?',
-  },
-];
+const sharedLongTextProps: BubbleProps = {
+  placement: 'end',
+  content:
+    'This is a long text message to show the multiline view of the bubble component. '.repeat(3),
+  styles: { content: { maxWidth: 500 } },
+};
 
 const App = () => (
-  <Flex vertical gap="middle">
-    <Bubble avatar={{ icon: <UserOutlined /> }} content="shape: default" />
-    <Bubble avatar={{ icon: <UserOutlined /> }} content="shape: round" shape="round" />
-    <Bubble avatar={{ icon: <UserOutlined /> }} content="shape: corner" shape="corner" />
+  <Flex gap="middle" vertical>
+    <Bubble content="shape: default" />
+    <Bubble {...sharedLongTextProps} />
+    <Bubble content="shape: round" shape="round" />
+    <Bubble {...sharedLongTextProps} shape="round" />
+    <Bubble content="shape: corner" shape="corner" />
+    <Bubble {...sharedLongTextProps} shape="corner" />
   </Flex>
 );
 
