@@ -32,7 +32,7 @@ const locales = {
   },
 };
 
-const branchUrl = 'https://github.com/ant-design/x/edit/master/';
+const branchUrl = 'https://github.com/ant-design/x/edit/main/';
 
 function isVersionNumber(value?: string) {
   return value && /^\d+\.\d+\.\d+$/.test(value);
@@ -107,7 +107,7 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
     if (String(source) === 'true') {
       const kebabComponent = kebabCase(component);
       return [
-        `https://github.com/ant-design/x/blob/master/components/${kebabComponent}`,
+        `https://github.com/ant-design/x/blob/main/components/${kebabComponent}`,
         `components/${kebabComponent}`,
       ];
     }
