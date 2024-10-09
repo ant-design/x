@@ -1,4 +1,5 @@
-import { ConfigProvider, Flex, Typography } from 'antd';
+import { XProvider } from '@ant-design/x';
+import { Flex, Typography } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
 import { useLocation } from 'dumi';
@@ -27,7 +28,7 @@ const locales = {
 };
 
 const useStyle = () => {
-  const { direction } = React.useContext(ConfigProvider.ConfigContext);
+  const { direction } = React.useContext(XProvider.ConfigContext);
   const { isMobile } = React.useContext(SiteContext);
   const isRTL = direction === 'rtl';
   return createStyles(({ token, css, cx }) => {

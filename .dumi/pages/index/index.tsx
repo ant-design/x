@@ -1,4 +1,5 @@
-import { ConfigProvider, theme } from 'antd';
+import { XProvider } from '@ant-design/x';
+import { theme } from 'antd';
 import { createStyles, css } from 'antd-style';
 import React, { Suspense } from 'react';
 
@@ -51,7 +52,7 @@ const Homepage: React.FC = () => {
 
       <div>
         {/* 定制主题 */}
-        <ConfigProvider
+        <XProvider
           theme={{
             algorithm: theme.defaultAlgorithm,
           }}
@@ -59,7 +60,7 @@ const Homepage: React.FC = () => {
           <Suspense fallback={null}>
             <Theme />
           </Suspense>
-        </ConfigProvider>
+        </XProvider>
 
         {/* 组件列表 */}
         <Group

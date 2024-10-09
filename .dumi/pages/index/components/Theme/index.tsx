@@ -5,20 +5,10 @@ import {
   HomeOutlined,
   QuestionCircleOutlined,
 } from '@ant-design/icons';
+import { XProvider } from '@ant-design/x';
 import { TinyColor } from '@ctrl/tinycolor';
 import type { ColorPickerProps, GetProp, MenuProps, ThemeConfig } from 'antd';
-import {
-  Breadcrumb,
-  Card,
-  ConfigProvider,
-  Flex,
-  Form,
-  Layout,
-  Menu,
-  Radio,
-  Typography,
-  theme,
-} from 'antd';
+import { Breadcrumb, Card, Flex, Form, Layout, Menu, Radio, Typography, theme } from 'antd';
 import { createStyles } from 'antd-style';
 import { generateColor } from 'antd/es/color-picker/util';
 import classNames from 'classnames';
@@ -453,7 +443,7 @@ const Theme: React.FC = () => {
 
   // ================================ Render ================================
   const themeNode = (
-    <ConfigProvider theme={memoTheme}>
+    <XProvider theme={memoTheme}>
       <TokenChecker />
       <div
         className={classNames(styles.demo, {
@@ -563,7 +553,7 @@ const Theme: React.FC = () => {
           </Layout>
         </Layout>
       </div>
-    </ConfigProvider>
+    </XProvider>
   );
 
   return isMobile ? (

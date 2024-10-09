@@ -1,4 +1,5 @@
-import { ConfigProvider, Layout, Typography } from 'antd';
+import { XProvider } from '@ant-design/x';
+import { Layout, Typography } from 'antd';
 import { createStyles } from 'antd-style';
 import { FormattedMessage, useRouteMeta } from 'dumi';
 import type { PropsWithChildren } from 'react';
@@ -117,7 +118,7 @@ const ResourceLayout: React.FC<ResourceLayoutProps> = ({ children }) => {
   );
 
   if (!isRootDark) {
-    return <ConfigProvider theme={{ token: { colorBgLayout: '#fff' } }}>{node}</ConfigProvider>;
+    return <XProvider theme={{ token: { colorBgLayout: '#fff' } }}>{node}</XProvider>;
   }
 
   return node;

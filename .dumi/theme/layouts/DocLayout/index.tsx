@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 
 import 'dayjs/locale/zh-cn';
 
-import ConfigProvider from 'antd/es/config-provider';
+import { ConfigProvider } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';
 import { Helmet, useOutlet, useSiteData } from 'dumi';
 import React, { useContext, useEffect, useLayoutEffect, useRef } from 'react';
