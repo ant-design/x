@@ -3,6 +3,7 @@ import { mergeToken } from '@ant-design/cssinjs-utils';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
 import genBubbleListStyle from './list';
+import genVariantStyle from './variant';
 
 const loadingMove = new Keyframes('loadingMove', {
   '0%': {
@@ -84,14 +85,6 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
 
         wordBreak: 'break-word',
 
-        // Variant
-        '&-filled': {
-          padding: `${unit(paddingSM)} ${unit(padding)}`,
-          backgroundColor: token.colorInfoBg,
-          borderRadius: token.borderRadiusLG,
-          boxShadow: token.boxShadowTertiary,
-        },
-
         [`& ${componentCls}-dot`]: {
           position: 'relative',
           height: '100%',
@@ -133,7 +126,11 @@ export default genStyleHooks<'Bubble'>(
     const bubbleToken = mergeToken<BubbleToken>(token, {
       bubbleContentMaxWidth: `calc(100% - ${unit(calc(paddingXS).add(32).equal())})`,
     });
-    return [genBubbleStyle(bubbleToken), genBubbleListStyle(bubbleToken)];
+    return [
+      genBubbleStyle(bubbleToken),
+      genBubbleListStyle(bubbleToken),
+      genVariantStyle(bubbleToken),
+    ];
   },
   prepareComponentToken,
 );
