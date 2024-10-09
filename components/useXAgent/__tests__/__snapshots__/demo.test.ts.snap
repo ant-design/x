@@ -44,7 +44,7 @@ Array [
       </div>
     </div>
     <button
-      class="ant-btn css-var-R0 ant-btn-primary"
+      class="ant-btn css-var-R0 ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
       type="submit"
     >
       <span>

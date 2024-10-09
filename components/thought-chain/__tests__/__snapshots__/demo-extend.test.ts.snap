@@ -80,7 +80,7 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
             class="ant-thought-chain-item-extra"
           >
             <button
-              class="ant-btn css-var-r2p ant-btn-text ant-btn-icon-only"
+              class="ant-btn css-var-r2p ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               type="button"
             >
               <span
@@ -179,7 +179,7 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
             class="ant-thought-chain-item-extra"
           >
             <button
-              class="ant-btn css-var-r2p ant-btn-text ant-btn-icon-only"
+              class="ant-btn css-var-r2p ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               type="button"
             >
               <span
@@ -278,7 +278,7 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
             class="ant-thought-chain-item-extra"
           >
             <button
-              class="ant-btn css-var-r2p ant-btn-text ant-btn-icon-only"
+              class="ant-btn css-var-r2p ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               type="button"
             >
               <span
@@ -377,7 +377,7 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
             class="ant-thought-chain-item-extra"
           >
             <button
-              class="ant-btn css-var-r2p ant-btn-text ant-btn-icon-only"
+              class="ant-btn css-var-r2p ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               type="button"
             >
               <span
@@ -705,7 +705,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
             class="ant-thought-chain-item-extra"
           >
             <button
-              class="ant-btn css-var-r1n ant-btn-text ant-btn-icon-only"
+              class="ant-btn css-var-r1n ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               type="button"
             >
               <span
@@ -767,7 +767,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
           class="ant-thought-chain-item-footer"
         >
           <button
-            class="ant-btn css-var-r1n ant-btn-default ant-btn-block"
+            class="ant-btn css-var-r1n ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-block"
             type="button"
           >
             <span>
@@ -866,7 +866,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
             class="ant-thought-chain-item-extra"
           >
             <button
-              class="ant-btn css-var-r1n ant-btn-text ant-btn-icon-only"
+              class="ant-btn css-var-r1n ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               type="button"
             >
               <span
@@ -928,7 +928,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
           class="ant-thought-chain-item-footer"
         >
           <button
-            class="ant-btn css-var-r1n ant-btn-default ant-btn-block"
+            class="ant-btn css-var-r1n ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-block"
             type="button"
           >
             <span>
@@ -1027,7 +1027,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
             class="ant-thought-chain-item-extra"
           >
             <button
-              class="ant-btn css-var-r1n ant-btn-text ant-btn-icon-only"
+              class="ant-btn css-var-r1n ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               type="button"
             >
               <span
@@ -1089,7 +1089,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
           class="ant-thought-chain-item-footer"
         >
           <button
-            class="ant-btn css-var-r1n ant-btn-default ant-btn-block"
+            class="ant-btn css-var-r1n ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-block"
             type="button"
           >
             <span>
@@ -1204,7 +1204,7 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
             class="ant-thought-chain-item-extra"
           >
             <button
-              class="ant-btn css-var-r19 ant-btn-text ant-btn-icon-only"
+              class="ant-btn css-var-r19 ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               type="button"
             >
               <span
@@ -1237,7 +1237,7 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
           class="ant-thought-chain-item-footer"
         >
           <button
-            class="ant-btn css-var-r19 ant-btn-default"
+            class="ant-btn css-var-r19 ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
             type="button"
           >
             <span>
@@ -1334,7 +1334,7 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
             class="ant-thought-chain-item-extra"
           >
             <button
-              class="ant-btn css-var-r19 ant-btn-text ant-btn-icon-only"
+              class="ant-btn css-var-r19 ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               type="button"
             >
               <span
@@ -1367,7 +1367,7 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
           class="ant-thought-chain-item-footer"
         >
           <button
-            class="ant-btn css-var-r19 ant-btn-default"
+            class="ant-btn css-var-r19 ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
             type="button"
           >
             <span>
@@ -1525,7 +1525,7 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
             class="ant-thought-chain-item-extra"
           >
             <button
-              class="ant-btn css-var-rf ant-btn-text ant-btn-icon-only"
+              class="ant-btn css-var-rf ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               type="button"
             >
               <span
@@ -1624,7 +1624,7 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
             class="ant-thought-chain-item-extra"
           >
             <button
-              class="ant-btn css-var-rf ant-btn-text ant-btn-icon-only"
+              class="ant-btn css-var-rf ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               type="button"
             >
               <span
@@ -1723,7 +1723,7 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
             class="ant-thought-chain-item-extra"
           >
             <button
-              class="ant-btn css-var-rf ant-btn-text ant-btn-icon-only"
+              class="ant-btn css-var-rf ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               type="button"
             >
               <span
@@ -1822,7 +1822,7 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
             class="ant-thought-chain-item-extra"
           >
             <button
-              class="ant-btn css-var-rf ant-btn-text ant-btn-icon-only"
+              class="ant-btn css-var-rf ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               type="button"
             >
               <span
@@ -1868,7 +1868,7 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
     class="ant-card-body"
   >
     <button
-      class="ant-btn css-var-r1 ant-btn-default"
+      class="ant-btn css-var-r1 ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       style="margin-bottom: 16px;"
       type="button"
     >
