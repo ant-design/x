@@ -173,14 +173,6 @@ const HeaderNavigation: React.FC<NavigationProps> = (props) => {
           key: 'docs/blog',
         }
       : null,
-    {
-      label: (
-        <Link to={utils.getLocalizedPathname('/docs/resources', isZhCN, search)}>
-          {locale.resources}
-        </Link>
-      ),
-      key: 'docs/resources',
-    },
     ...(additional ?? []),
   ].filter(Boolean);
 
