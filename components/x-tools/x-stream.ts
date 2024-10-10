@@ -18,7 +18,7 @@ function splitStream(separator: string | RegExp = DEFAULT_SEPARATOR) {
   // Buffer to store incomplete data chunks between transformations
   let buffer = '';
 
-  return new TransformStream({
+  return new TransformStream<string, string>({
     transform(chunk, controller) {
       buffer += chunk;
 
@@ -43,7 +43,7 @@ function splitStream(separator: string | RegExp = DEFAULT_SEPARATOR) {
   });
 }
 
-interface XStreamOptions {
+interface XStreamOptions<T> {
   /**
    * @description Readable stream of binary data
    * @link https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream
@@ -51,10 +51,10 @@ interface XStreamOptions {
   readableStream: ReadableStream<Uint8Array>;
 
   /**
-   * @description Transformer pipe to transform stream
+   * @description Support customizable transformStream to transform streams
    * @link https://developer.mozilla.org/zh-CN/docs/Web/API/TransformStream
    */
-  transformPipe?: TransformStream[];
+  transformStream?: TransformStream<string, T>;
 
   /**
    * @description Split a string
@@ -67,30 +67,27 @@ interface XStreamOptions {
  * @description Transform binary stream to string
  * @warning The `xStream` only support the `utf-8` encoding. More encoding support maybe in the future.
  */
-async function* xStream(options: XStreamOptions) {
-  const { readableStream, separator, transformPipe = [] } = options;
+async function* xStream<T = string>(options: XStreamOptions<T>) {
+  const { readableStream, separator, transformStream = new TransformStream<string, T>() } = options;
 
   if (!(readableStream instanceof ReadableStream)) {
-    throw new Error('The reader must be an instance of ReadableStream.');
+    throw new Error('The options.readableStream must be an instance of ReadableStream.');
+  }
+
+  if (!(transformStream instanceof TransformStream)) {
+    throw new Error('The options.transformStream must be an instance of TransformStream.');
   }
 
   // Default encoding is `utf-8`
   const decoderStream = new TextDecoderStream();
 
-  let stream = readableStream
-    // Decode: binary data -> string data
+  const stream = readableStream
+    // 1. Decode: [ binary data -> string data ]
     .pipeThrough(decoderStream)
-    // Split string data by separator
-    .pipeThrough(splitStream(separator));
-
-  for (const transformStream of transformPipe) {
-    if (!(transformStream instanceof TransformStream)) {
-      throw new Error('The transformPipe must be an Array of TransformStream instance.');
-    }
-
-    // Set custom transform pipe
-    stream = stream.pipeThrough(transformStream);
-  }
+    // 2. Split by separator: [ string data -> string data ]
+    .pipeThrough(splitStream(separator))
+    // 3. Customizable transformer: [ string data -> T ]
+    .pipeThrough(transformStream);
 
   const reader = stream.getReader();
 
