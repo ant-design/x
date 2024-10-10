@@ -10,7 +10,10 @@ export const genVariantStyle: GenerateStyle<BubbleToken> = (token) => {
         // Shared: filled, outlined, shadow
         '&-filled,&-outlined,&-shadow': {
           padding: `${unit(paddingSM)} ${unit(padding)}`,
-          borderRadius: calc(token.borderRadiusLG).add(token.borderRadiusSM).equal(),
+          borderRadius: {
+            _skip_check_: true,
+            value: calc(token.borderRadiusLG).add(token.borderRadiusSM).equal(),
+          },
         },
 
         // Filled:
@@ -44,7 +47,10 @@ export const genShapeStyle: GenerateStyle<BubbleToken> = (token) => {
       [contentCls]: {
         // round:
         '&-round': {
-          borderRadius: halfRadius,
+          borderRadius: {
+            _skip_check_: true,
+            value: halfRadius,
+          },
           paddingInline: calc(padding).mul(1.25).equal(),
         },
       },
