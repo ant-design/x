@@ -139,6 +139,10 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
               contextConfig.classNames.header,
               classNames.header,
             )}
+            style={{
+              ...contextConfig.styles.header,
+              ...styles.header,
+            }}
           >
             {header}
           </div>
@@ -151,6 +155,10 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
               contextConfig.classNames.footer,
               classNames.footer,
             )}
+            style={{
+              ...contextConfig.styles.footer,
+              ...styles.footer,
+            }}
           >
             {footer}
           </div>
