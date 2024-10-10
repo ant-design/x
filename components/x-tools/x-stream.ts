@@ -1,7 +1,7 @@
 /**
  * default separator for {@link splitStream}
  */
-const DEFAULT_SEPARATOR = '\n';
+const DEFAULT_SEPARATOR = '\n\n';
 
 /**
  * Check if a string is not empty or only contains whitespace characters
@@ -57,8 +57,12 @@ interface XStreamOptions<T> {
   transformStream?: TransformStream<string, T>;
 
   /**
-   * @description Split a string
-   * @default '\n'
+   * @description Used to separate a stream while reading, utilizing a specific delimiter.
+   * When handling responses with `Content-Type: text/event-stream`, the following standard practices are commonly observed:
+   * - Double newline characters (`\n\n`) are used to separate individual events.
+   * - Single newline characters (`\n`) are employed to separate key-value pairs within an event.
+   * @link https://developer.mozilla.org/en-US/docs/Web/API/EventSource
+   * @default '\n\n'
    */
   separator?: string | RegExp;
 }
