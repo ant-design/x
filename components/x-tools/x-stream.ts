@@ -21,7 +21,11 @@ function splitStream(separator: string | RegExp = DEFAULT_SEPARATOR) {
       const parts = buffer.split(separator);
 
       // Enqueue all complete parts except for the last incomplete one
-      parts.slice(0, -1).forEach((part) => controller.enqueue(part));
+      parts.slice(0, -1).forEach((part) => {
+        // Skip empty parts
+        if (part === '') return;
+        controller.enqueue(part);
+      });
 
       // Save the last incomplete part back to the buffer for the next chunk
       buffer = parts[parts.length - 1];
