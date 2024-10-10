@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { BugOutlined, CodeOutlined, ExperimentOutlined } from '@ant-design/icons';
-import { ConfigProvider, Tooltip, Button } from 'antd';
+import { XProvider } from '@ant-design/x';
+import { Tooltip, Button } from 'antd';
 import classNames from 'classnames';
 import { DumiDemoGrid, FormattedMessage } from 'dumi';
 
@@ -104,9 +105,9 @@ const DemoWrapper: typeof DumiDemoGrid = ({ items }) => {
           />
         </Tooltip>
       </span>
-      <ConfigProvider theme={{ cssVar: enableCssVar, hashed: !enableCssVar }}>
+      <XProvider theme={{ cssVar: enableCssVar, hashed: !enableCssVar }}>
         <DumiDemoGrid items={demos} />
-      </ConfigProvider>
+      </XProvider>
     </div>
   );
 };
