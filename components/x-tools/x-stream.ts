@@ -4,6 +4,11 @@
 const DEFAULT_SEPARATOR = '\n';
 
 /**
+ * Check if a string is not empty or only contains whitespace characters
+ */
+const isValidString = (str: string) => (str ?? '').trim() !== '';
+
+/**
  * A TransformStream that caches incomplete data between transformations
  * using a closure. It splits incoming chunks based on the specified separator
  * and enqueues complete segments while retaining any incomplete data for
@@ -23,8 +28,9 @@ function splitStream(separator: string | RegExp = DEFAULT_SEPARATOR) {
       // Enqueue all complete parts except for the last incomplete one
       parts.slice(0, -1).forEach((part) => {
         // Skip empty parts
-        if (part === '') return;
-        controller.enqueue(part);
+        if (isValidString(part)) {
+          controller.enqueue(part);
+        }
       });
 
       // Save the last incomplete part back to the buffer for the next chunk
@@ -32,7 +38,7 @@ function splitStream(separator: string | RegExp = DEFAULT_SEPARATOR) {
     },
     flush(controller) {
       // If there's any remaining data in the buffer, enqueue it as the final part
-      if (buffer) controller.enqueue(buffer);
+      if (isValidString(buffer)) controller.enqueue(buffer);
     },
   });
 }
