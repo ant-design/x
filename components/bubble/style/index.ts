@@ -43,11 +43,11 @@ export interface BubbleToken extends FullToken<'Bubble'> {
 }
 
 const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
-  const { componentCls, fontSize, lineHeight, paddingSM, paddingXS, colorText, calc } = token;
+  const { componentCls, fontSize, lineHeight, paddingSM, colorText, calc } = token;
   return {
     [componentCls]: {
       display: 'flex',
-      columnGap: paddingXS,
+      columnGap: paddingSM,
       maxWidth: '100%',
       [`&${componentCls}-end`]: {
         justifyContent: 'end',
@@ -67,11 +67,37 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
         animationIterationCount: 'infinite',
         animationTimingFunction: 'linear',
       },
+
+      // ============================ Avatar =============================
       [`& ${componentCls}-avatar`]: {
         display: 'inline-flex',
         justifyContent: 'center',
         alignSelf: 'flex-start',
       },
+
+      // ======================== Header & Footer ========================
+      [`& ${componentCls}-header, & ${componentCls}-footer`]: {
+        fontSize: fontSize,
+        lineHeight: lineHeight,
+        color: token.colorText,
+      },
+
+      [`& ${componentCls}-header`]: {
+        marginBottom: token.paddingXXS,
+      },
+
+      [`& ${componentCls}-footer`]: {
+        marginTop: paddingSM,
+      },
+
+      // =========================== Content =============================
+      [`& ${componentCls}-content-wrapper`]: {
+        flex: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+      },
+
       [`& ${componentCls}-content`]: {
         position: 'relative',
         boxSizing: 'border-box',

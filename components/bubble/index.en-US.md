@@ -18,6 +18,7 @@ Often used when chatting.
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">Basic</code>
 <code src="./demo/avatar-and-placement.tsx">Placement and avatar</code>
+<code src="./demo/header-and-footer.tsx">Header and footer</code>
 <code src="./demo/loading.tsx">Loading</code>
 <code src="./demo/typing.tsx">Typing effect</code>
 <code src="./demo/markdown.tsx">Content render</code>
@@ -37,6 +38,8 @@ Common props ref：[Common props](/docs/react/common-props)
 | avatar | Avatar component | React.ReactNode | - |  |
 | classNames | Semantic DOM class | [Record<SemanticDOM, string>](#semantic-dom) | - |  |
 | content | Content of bubble | string | - |  |
+| footer | Footer content | React.ReactNode | - |  |
+| header | Header content | React.ReactNode | - |  |
 | loading | Loading state of Message | boolean | - |  |
 | placement | Direction of Message | `start` \| `end` | `start` |  |
 | shape | Shape of bubble | `round` \| `corner` | - |  |

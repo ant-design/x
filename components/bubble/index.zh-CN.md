@@ -19,6 +19,7 @@ demo:
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">基本</code>
 <code src="./demo/avatar-and-placement.tsx">支持位置和头像</code>
+<code src="./demo/header-and-footer.tsx">头和尾</code>
 <code src="./demo/loading.tsx">加载中</code>
 <code src="./demo/typing.tsx">打字效果</code>
 <code src="./demo/markdown.tsx">自定义渲染</code>
@@ -38,6 +39,8 @@ demo:
 | avatar | 展示头像 | React.ReactNode | - |  |
 | classNames | 语义化结构 class | [Record<SemanticDOM, string>](#semantic-dom) | - |  |
 | content | 聊天内容 | string | - |  |
+| footer | 底部内容 | React.ReactNode | - |  |
+| header | 头部内容 | React.ReactNode | - |  |
 | loading | 聊天内容加载状态 | boolean | - |  |
 | placement | 信息位置 | `start` \| `end` | `start` |  |
 | shape | 气泡形状 | `round` \| `corner` | - |  |
