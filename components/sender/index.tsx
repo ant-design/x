@@ -1,4 +1,4 @@
-import { type ButtonProps, Flex, type GetProps, Input, Space } from 'antd';
+import { type ButtonProps, Flex, type GetProps, Input } from 'antd';
 import classnames from 'classnames';
 
 import { useMergedState } from 'rc-util';
