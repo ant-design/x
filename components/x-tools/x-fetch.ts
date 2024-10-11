@@ -12,7 +12,18 @@ function processRequestInit(requestInit: RequestInit = {}): RequestInit {
   };
 }
 
-interface XFetchOptions extends RequestInit {
+export interface XFetchMiddlewares {
+  onRequest?: (
+    request: Request,
+    info: {
+      baseURL: string;
+      init?: RequestInit;
+    },
+  ) => Promise<Request>;
+  onResponse?: (response: Response) => Promise<Response>;
+}
+
+export interface XFetchOptions extends RequestInit {
   /**
    * @description A typeof fetch function
    * @default globalThis.fetch
@@ -21,16 +32,13 @@ interface XFetchOptions extends RequestInit {
   /**
    * @description Middleware for request and response
    */
-  middleware?: {
-    onRequest?: (request: Request) => Promise<Request>;
-    onResponse?: (response: Response) => Promise<Response>;
-  };
+  middlewares?: XFetchMiddlewares;
 }
 
-type XFetch = (baseURL: string, options?: XFetchOptions) => Promise<Response>;
+type XFetch = (baseURL: string, init?: XFetchOptions) => Promise<Response>;
 
 const xFetch: XFetch = async (baseURL, options = {}) => {
-  const { fetch: fetchFn = globalThis.fetch, middleware = {}, ...requestInit } = options;
+  const { fetch: fetchFn = globalThis.fetch, middlewares = {}, ...requestInit } = options;
 
   if (typeof fetchFn !== 'function') {
     throw new Error('The options.fetch must be a typeof fetch function!');
@@ -42,8 +50,11 @@ const xFetch: XFetch = async (baseURL, options = {}) => {
   let request = new Request(baseURL, processedRequestInit);
 
   /** ---------------------- request middleware ---------------------- */
-  if (typeof middleware.onRequest === 'function') {
-    const modifiedRequest = await middleware.onRequest(request);
+  if (typeof middlewares.onRequest === 'function') {
+    const modifiedRequest = await middlewares.onRequest(request, {
+      baseURL,
+      init: processedRequestInit,
+    });
 
     if (!(modifiedRequest instanceof Request)) {
       throw new Error('The options.onRequest must return a Request instance!');
@@ -56,8 +67,8 @@ const xFetch: XFetch = async (baseURL, options = {}) => {
   let response = await fetchFn(request);
 
   /** ---------------------- response middleware ---------------------- */
-  if (typeof middleware.onResponse === 'function') {
-    const modifiedResponse = await middleware.onResponse(response);
+  if (typeof middlewares.onResponse === 'function') {
+    const modifiedResponse = await middlewares.onResponse(response);
 
     if (!(modifiedResponse instanceof Response)) {
       throw new Error('The options.onResponse must return a Response instance!');
