@@ -10,6 +10,7 @@ export interface ActionButtonContextProps {
   onClearDisabled?: boolean;
   onCancel?: VoidFunction;
   onCancelDisabled?: boolean;
+  disabled?: boolean;
 }
 
 export const ActionButtonContext = React.createContext<ActionButtonContextProps>(null!);
@@ -21,11 +22,10 @@ export interface ActionButtonProps extends ButtonProps {
 export default function ActionButton(props: ActionButtonProps) {
   const { className, action, onClick: outClick, ...restProps } = props;
   const context = React.useContext(ActionButtonContext);
-  const { prefixCls } = context;
+  const { prefixCls, disabled: rootDisabled } = context;
 
   const onClick = context[action];
-  const disabled = context[`${action}Disabled`];
-  const mergedDisabled = restProps.disabled ?? disabled;
+  const mergedDisabled = rootDisabled ?? restProps.disabled ?? context[`${action}Disabled`];
 
   return (
     <Button

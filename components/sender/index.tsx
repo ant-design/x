@@ -230,6 +230,7 @@ const Sender: React.FC<SenderProps> = (props) => {
             onClearDisabled: !innerValue,
             onCancel,
             onCancelDisabled: !loading,
+            disabled,
           }}
         >
           {actionNode}

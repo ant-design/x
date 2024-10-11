@@ -11,10 +11,7 @@ interface SenderToken extends FullToken<'Sender'> {
 }
 
 const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
-  const { componentCls, padding, paddingSM, paddingXS, paddingXXS, boxShadowSecondary, calc } =
-    token;
-
-  const senderPaddingBlock = calc(paddingSM).sub(token.lineWidth).equal();
+  const { componentCls, padding, paddingSM, paddingXS, lineWidth, lineWidthBold, calc } = token;
 
   return {
     [componentCls]: {
@@ -22,24 +19,48 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
       display: 'flex',
       gap: paddingXS,
       width: '100%',
-      borderWidth: token.lineWidth,
-      borderStyle: 'solid',
-      borderColor: token.colorBorder,
-      borderRadius: calc(token.borderRadius).mul(2).equal(),
-      paddingBlock: senderPaddingBlock,
+
+      paddingBlock: paddingSM,
       paddingInlineStart: padding,
       paddingInlineEnd: paddingSM,
       boxSizing: 'border-box',
       alignItems: 'flex-end',
       boxShadow: `${token.boxShadowTertiary}`,
-      transition: `all ${token.motionDurationSlow}`,
+      transition: `background ${token.motionDurationSlow}`,
 
+      // Border
+      borderRadius: calc(token.borderRadius).mul(2).equal(),
+      borderColor: token.colorBorder,
+      borderWidth: 0,
+      borderStyle: 'solid',
+
+      // Border
+      '&:after': {
+        content: '""',
+        position: 'absolute',
+        inset: 0,
+        pointerEvents: 'none',
+        transition: `border-color ${token.motionDurationSlow}`,
+
+        borderRadius: 'inherit',
+        borderStyle: 'inherit',
+        borderColor: 'inherit',
+        borderWidth: lineWidth,
+      },
+
+      // Focus
       '&:focus-within': {
         boxShadow: `${token.boxShadowSecondary}`,
         borderColor: token.colorPrimary,
+
+        '&:after': {
+          borderWidth: lineWidthBold,
+        },
       },
 
-      '&-disabled': {},
+      '&-disabled': {
+        background: token.colorBgContainerDisabled,
+      },
 
       // ============================== RTL ==============================
       [`&${componentCls}-rtl`]: {

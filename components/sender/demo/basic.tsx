@@ -39,7 +39,7 @@ const Demo: React.FC = () => {
           message.error('Cancel sending!');
         }}
       />
-      <Sender disabled value="Disabled Sender" />
+      <Sender disabled value="Sender is disabled" />
     </Flex>
   );
 };
