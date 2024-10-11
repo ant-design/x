@@ -11,32 +11,60 @@ interface SenderToken extends FullToken<'Sender'> {
 }
 
 const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
-  const { componentCls, paddingXS, paddingXXS, boxShadowSecondary, calc } = token;
+  const { componentCls, padding, paddingSM, paddingXS, paddingXXS, boxShadowSecondary, calc } =
+    token;
+
+  const senderPaddingBlock = calc(paddingSM).sub(token.lineWidth).equal();
+
   return {
     [componentCls]: {
       position: 'relative',
       display: 'flex',
+      gap: paddingXS,
       width: '100%',
+      borderWidth: token.lineWidth,
+      borderStyle: 'solid',
+      borderColor: token.colorBorder,
+      borderRadius: calc(token.borderRadius).mul(2).equal(),
+      paddingBlock: senderPaddingBlock,
+      paddingInlineStart: padding,
+      paddingInlineEnd: paddingSM,
+      boxSizing: 'border-box',
+      alignItems: 'flex-end',
+      boxShadow: `${token.boxShadowTertiary}`,
+      transition: `all ${token.motionDurationSlow}`,
 
+      '&:focus-within': {
+        boxShadow: `${token.boxShadowSecondary}`,
+        borderColor: token.colorPrimary,
+      },
+
+      '&-disabled': {},
+
+      // ============================== RTL ==============================
       [`&${componentCls}-rtl`]: {
         direction: 'rtl',
       },
 
-      [`& ${componentCls}-actions-list`]: {
-        position: 'absolute',
-        zIndex: 1,
-        insetInlineEnd: paddingXXS,
-        bottom: calc(paddingXS).sub(paddingXXS).equal(),
+      // ============================= Input =============================
+      [`& ${componentCls}-input`]: {
+        padding: 0,
+        borderRadius: 0,
+        flex: 'auto',
+        alignSelf: 'center',
+        minHeight: 'auto',
       },
 
-      [`& ${componentCls}-actions-btn`]: {},
-      [`& ${componentCls}-input`]: {
-        position: 'sticky',
-        fontSize: token.fontSize,
-        bottom: 0,
-        boxShadow: boxShadowSecondary,
-        paddingTop: paddingXS,
-        paddingBottom: paddingXS,
+      // ============================ Actions ============================
+      [`& ${componentCls}-actions-list`]: {
+        flex: 'none',
+      },
+
+      [`& ${componentCls}-actions-btn`]: {
+        '&-disabled': {
+          pointerEvents: 'none',
+          opacity: 0.45,
+        },
       },
     },
   };

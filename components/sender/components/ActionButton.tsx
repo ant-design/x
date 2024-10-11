@@ -21,13 +21,15 @@ export interface ActionButtonProps extends ButtonProps {
 export default function ActionButton(props: ActionButtonProps) {
   const { className, action, onClick: outClick, ...restProps } = props;
   const context = React.useContext(ActionButtonContext);
+  const { prefixCls } = context;
 
   const onClick = context[action];
   const disabled = context[`${action}Disabled`];
+  const mergedDisabled = restProps.disabled ?? disabled;
+
   return (
     <Button
       type="text"
-      disabled={disabled}
       {...restProps}
       onClick={(e) => {
         if (onClick) {
@@ -37,7 +39,9 @@ export default function ActionButton(props: ActionButtonProps) {
           outClick(e);
         }
       }}
-      className={classNames(context.prefixCls, className)}
+      className={classNames(prefixCls, className, {
+        [`${prefixCls}-disabled`]: mergedDisabled,
+      })}
     />
   );
 }

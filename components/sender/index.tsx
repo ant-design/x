@@ -84,6 +84,7 @@ const Sender: React.FC<SenderProps> = (props) => {
     actions,
     onKeyPress,
     onKeyDown,
+    disabled,
     ...rest
   } = props;
 
@@ -111,6 +112,7 @@ const Sender: React.FC<SenderProps> = (props) => {
     cssVarCls,
     {
       [`${prefixCls}-rtl`]: direction === 'rtl',
+      [`${prefixCls}-disabled`]: disabled,
     },
   );
 
@@ -169,9 +171,6 @@ const Sender: React.FC<SenderProps> = (props) => {
   // ============================ Action ============================
   let actionNode: React.ReactNode = (
     <Space>
-      {/* Clear */}
-      <ClearButton />
-
       {/* Loading or Send */}
       {loading ? <LoadingButton /> : <SendButton />}
     </Space>
@@ -195,6 +194,7 @@ const Sender: React.FC<SenderProps> = (props) => {
     <div className={mergedCls} style={{ ...contextConfig.style, ...style }}>
       <InputTextArea
         {...domProps}
+        disabled={disabled}
         style={{ ...contextConfig.styles.input, ...styles.input }}
         className={classnames(
           `${prefixCls}-input`,
@@ -209,6 +209,7 @@ const Sender: React.FC<SenderProps> = (props) => {
         onPressEnter={onInternalKeyPress}
         onKeyDown={onKeyDown}
         readOnly={loading}
+        variant="borderless"
       />
 
       {/* Action List */}
