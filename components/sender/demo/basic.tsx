@@ -22,7 +22,7 @@ const Demo: React.FC = () => {
   }, [loading]);
 
   return (
-    <Flex vertical gap="middle" style={{ padding: 16 }}>
+    <Flex vertical gap="middle">
       <Sender
         loading={loading}
         value={value}

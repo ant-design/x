@@ -21,7 +21,7 @@ const StopLoadingIcon = memo((props: { className?: string }) => {
         r="450"
         stroke="currentColor"
         strokeWidth="100"
-        opacity="0.3"
+        opacity="0.45"
       />
 
       <circle

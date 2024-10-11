@@ -3,7 +3,7 @@ import type { ButtonProps } from 'antd';
 import * as React from 'react';
 import ActionButton from './ActionButton';
 
-export default function SendButton(props: ButtonProps) {
+export function SendButton(props: ButtonProps, ref: React.Ref<HTMLButtonElement>) {
   return (
     <ActionButton
       icon={<ArrowUpOutlined />}
@@ -11,6 +11,9 @@ export default function SendButton(props: ButtonProps) {
       shape="circle"
       {...props}
       action="onSend"
+      ref={ref}
     />
   );
 }
+
+export default React.forwardRef(SendButton);

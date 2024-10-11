@@ -79,6 +79,7 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
       // ============================ Actions ============================
       [`& ${componentCls}-actions-list`]: {
         flex: 'none',
+        display: 'flex',
 
         '&-presets': {
           gap: token.paddingXS,
@@ -87,7 +88,6 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
 
       [`& ${componentCls}-actions-btn`]: {
         '&-disabled': {
-          pointerEvents: 'none',
           opacity: 0.45,
         },
 

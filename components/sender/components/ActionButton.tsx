@@ -19,7 +19,7 @@ export interface ActionButtonProps extends ButtonProps {
   action: 'onSend' | 'onClear' | 'onCancel';
 }
 
-export default function ActionButton(props: ActionButtonProps) {
+export function ActionButton(props: ActionButtonProps, ref: React.Ref<HTMLButtonElement>) {
   const { className, action, onClick: outClick, ...restProps } = props;
   const context = React.useContext(ActionButtonContext);
   const { prefixCls, disabled: rootDisabled } = context;
@@ -31,12 +31,15 @@ export default function ActionButton(props: ActionButtonProps) {
     <Button
       type="text"
       {...restProps}
+      ref={ref}
       onClick={(e) => {
-        if (onClick) {
-          onClick();
-        }
-        if (outClick) {
-          outClick(e);
+        if (!mergedDisabled) {
+          if (onClick) {
+            onClick();
+          }
+          if (outClick) {
+            outClick(e);
+          }
         }
       }}
       className={classNames(prefixCls, className, {
@@ -45,3 +48,5 @@ export default function ActionButton(props: ActionButtonProps) {
     />
   );
 }
+
+export default React.forwardRef(ActionButton);

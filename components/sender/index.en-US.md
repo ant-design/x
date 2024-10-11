@@ -17,6 +17,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*8yArQ43EGccAAA
 <code src="./demo/basic.tsx">Basic</code>
 <code src="./demo/submitType.tsx">Submit type</code>
 <code src="./demo/actions.tsx">Custom actions</code>
+<code src="./demo/send-style.tsx">Adjust style</code>
 
 ## API
 

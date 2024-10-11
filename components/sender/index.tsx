@@ -156,18 +156,31 @@ const Sender: React.FC<SenderProps> = (props) => {
     triggerValueChange('');
   };
 
+  // ============================ Submit ============================
+  const isCompositionRef = React.useRef(false);
+
+  const onInternalCompositionStart = () => {
+    isCompositionRef.current = true;
+  };
+
+  const onInternalCompositionEnd = () => {
+    isCompositionRef.current = false;
+  };
+
   const onInternalKeyPress: TextareaProps['onKeyPress'] = (e) => {
+    const canSubmit = e.key === 'Enter' && !isCompositionRef.current;
+
     // Check for `submitType` to submit
     switch (submitType) {
       case 'enter':
-        if (e.key === 'Enter' && !e.shiftKey) {
+        if (canSubmit && !e.shiftKey) {
           e.preventDefault();
           triggerSend();
         }
         break;
 
       case 'shiftEnter':
-        if (e.key === 'Enter' && e.shiftKey) {
+        if (canSubmit && e.shiftKey) {
           e.preventDefault();
           triggerSend();
         }
@@ -231,6 +244,8 @@ const Sender: React.FC<SenderProps> = (props) => {
           triggerValueChange((e.target as HTMLTextAreaElement).value);
         }}
         onPressEnter={onInternalKeyPress}
+        onCompositionStart={onInternalCompositionStart}
+        onCompositionEnd={onInternalCompositionEnd}
         onKeyDown={onKeyDown}
         readOnly={loading}
         variant="borderless"
