@@ -29,7 +29,10 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
       transition: `background ${token.motionDurationSlow}`,
 
       // Border
-      borderRadius: calc(token.borderRadius).mul(2).equal(),
+      borderRadius: {
+        _skip_check_: true,
+        value: calc(token.borderRadius).mul(2).equal(),
+      },
       borderColor: token.colorBorder,
       borderWidth: 0,
       borderStyle: 'solid',
@@ -42,7 +45,10 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
         pointerEvents: 'none',
         transition: `border-color ${token.motionDurationSlow}`,
 
-        borderRadius: 'inherit',
+        borderRadius: {
+          _skip_check_: true,
+          value: 'inherit',
+        },
         borderStyle: 'inherit',
         borderColor: 'inherit',
         borderWidth: lineWidth,
