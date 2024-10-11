@@ -79,12 +79,26 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
       // ============================ Actions ============================
       [`& ${componentCls}-actions-list`]: {
         flex: 'none',
+
+        '&-presets': {
+          gap: token.paddingXS,
+        },
       },
 
       [`& ${componentCls}-actions-btn`]: {
         '&-disabled': {
           pointerEvents: 'none',
           opacity: 0.45,
+        },
+
+        '&-loading-button': {
+          padding: 0,
+          border: 0,
+        },
+
+        '&-loading-icon': {
+          height: token.controlHeight,
+          width: token.controlHeight,
         },
       },
     },

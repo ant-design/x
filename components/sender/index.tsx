@@ -1,4 +1,4 @@
-import { type ButtonProps, type GetProps, Input, Space } from 'antd';
+import { type ButtonProps, Flex, type GetProps, Input, Space } from 'antd';
 import classnames from 'classnames';
 
 import { useMergedState } from 'rc-util';
@@ -92,14 +92,13 @@ const Sender: React.FC<SenderProps> = (props) => {
   const { direction, getPrefixCls } = useXProviderContext();
   const prefixCls = getPrefixCls('sender', customizePrefixCls);
 
-  const domProps = pickAttrs(rest, {
-    attr: true,
-    aria: true,
-    data: true,
-  });
+  // ============================= Refs =============================
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const inputRef = React.useRef<HTMLTextAreaElement>(null);
 
   // ===================== Component Config =========================
   const contextConfig = useXComponentConfig('sender');
+  const inputCls = `${prefixCls}-input`;
 
   // ============================ Styles ============================
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
@@ -117,6 +116,7 @@ const Sender: React.FC<SenderProps> = (props) => {
   );
 
   const actionBtnCls = `${prefixCls}-actions-btn`;
+  const actionListCls = `${prefixCls}-actions-list`;
 
   // ============================ Value =============================
   const [innerValue, setInnerValue] = useMergedState(defaultValue || '', {
@@ -133,6 +133,17 @@ const Sender: React.FC<SenderProps> = (props) => {
 
   // ========================== Components ==========================
   const InputTextArea = getComponent(components, ['input'], Input.TextArea);
+
+  const domProps = pickAttrs(rest, {
+    attr: true,
+    aria: true,
+    data: true,
+  });
+
+  const inputProps: typeof domProps = {
+    ...domProps,
+    ref: inputRef,
+  };
 
   // ============================ Events ============================
   const triggerSend = () => {
@@ -168,12 +179,24 @@ const Sender: React.FC<SenderProps> = (props) => {
     }
   };
 
+  // ============================ Focus =============================
+  const onInternalMouseDown: React.MouseEventHandler<HTMLDivElement> = (e) => {
+    // If input focused but click on the container,
+    // input will lose focus.
+    // We call `preventDefault` to prevent this behavior
+    if (e.target !== containerRef.current?.querySelector(`.${inputCls}`)) {
+      e.preventDefault();
+    }
+
+    inputRef.current?.focus();
+  };
+
   // ============================ Action ============================
   let actionNode: React.ReactNode = (
-    <Space>
+    <Flex className={`${actionListCls}-presets`}>
       {/* Loading or Send */}
       {loading ? <LoadingButton /> : <SendButton />}
-    </Space>
+    </Flex>
   );
 
   // Custom actions
@@ -191,16 +214,17 @@ const Sender: React.FC<SenderProps> = (props) => {
 
   // ============================ Render ============================
   return wrapCSSVar(
-    <div className={mergedCls} style={{ ...contextConfig.style, ...style }}>
+    <div
+      ref={containerRef}
+      className={mergedCls}
+      style={{ ...contextConfig.style, ...style }}
+      onMouseDown={onInternalMouseDown}
+    >
       <InputTextArea
-        {...domProps}
+        {...inputProps}
         disabled={disabled}
         style={{ ...contextConfig.styles.input, ...styles.input }}
-        className={classnames(
-          `${prefixCls}-input`,
-          contextConfig.classNames.input,
-          classNames.input,
-        )}
+        className={classnames(inputCls, contextConfig.classNames.input, classNames.input)}
         autoSize={{ maxRows: 8 }}
         value={innerValue}
         onChange={(e) => {
@@ -214,11 +238,7 @@ const Sender: React.FC<SenderProps> = (props) => {
 
       {/* Action List */}
       <div
-        className={classnames(
-          `${prefixCls}-actions-list`,
-          contextConfig.classNames.actions,
-          classNames.actions,
-        )}
+        className={classnames(actionListCls, contextConfig.classNames.actions, classNames.actions)}
         style={{ ...contextConfig.styles.actions, ...styles.actions }}
       >
         <ActionButtonContext.Provider
