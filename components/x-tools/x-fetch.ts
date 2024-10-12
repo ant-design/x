@@ -1,17 +1,3 @@
-const DEFAULT_HEADERS = {
-  'Content-Type': 'application/json',
-};
-
-function processRequestInit(requestInit: RequestInit = {}): RequestInit {
-  return {
-    ...requestInit,
-    headers: {
-      ...DEFAULT_HEADERS,
-      ...requestInit.headers,
-    },
-  };
-}
-
 export interface XFetchMiddlewares {
   onRequest?: (
     request: Request,
@@ -35,7 +21,7 @@ export interface XFetchOptions extends RequestInit {
   middlewares?: XFetchMiddlewares;
 }
 
-type XFetch = (baseURL: string, init?: XFetchOptions) => Promise<Response>;
+type XFetch = (baseURL: string, options?: XFetchOptions) => Promise<Response>;
 
 const xFetch: XFetch = async (baseURL, options = {}) => {
   const { fetch: fetchFn = globalThis.fetch, middlewares = {}, ...requestInit } = options;
@@ -45,15 +31,13 @@ const xFetch: XFetch = async (baseURL, options = {}) => {
   }
 
   /** ---------------------- request init ---------------------- */
-  const processedRequestInit = processRequestInit(requestInit);
-
-  let request = new Request(baseURL, processedRequestInit);
+  let request = new Request(baseURL, requestInit);
 
   /** ---------------------- request middleware ---------------------- */
   if (typeof middlewares.onRequest === 'function') {
     const modifiedRequest = await middlewares.onRequest(request, {
       baseURL,
-      init: processedRequestInit,
+      init: requestInit,
     });
 
     if (!(modifiedRequest instanceof Request)) {

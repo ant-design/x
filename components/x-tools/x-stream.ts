@@ -115,7 +115,7 @@ function splitEvent(separator?: string | RegExp | boolean) {
   });
 }
 
-interface XStreamOptions<T> {
+export interface XStreamOptions<T> {
   /**
    * @description Readable stream of binary data
    * @link https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream
