@@ -10,13 +10,15 @@ export interface ActionButtonContextProps {
   onClearDisabled?: boolean;
   onCancel?: VoidFunction;
   onCancelDisabled?: boolean;
+  onSpeech?: VoidFunction;
+  onSpeechDisabled?: boolean;
   disabled?: boolean;
 }
 
 export const ActionButtonContext = React.createContext<ActionButtonContextProps>(null!);
 
 export interface ActionButtonProps extends ButtonProps {
-  action: 'onSend' | 'onClear' | 'onCancel';
+  action: 'onSend' | 'onClear' | 'onCancel' | 'onSpeech';
 }
 
 export function ActionButton(props: ActionButtonProps, ref: React.Ref<HTMLButtonElement>) {

@@ -17,6 +17,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*8yArQ43EGccAAA
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">基本用法</code>
 <code src="./demo/submitType.tsx">提交模式</code>
+<code src="./demo/speech.tsx">语音输入</code>
 <code src="./demo/actions.tsx">自定义按钮</code>
 <code src="./demo/send-style.tsx">调整样式</code>
 
@@ -29,6 +30,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*8yArQ43EGccAAA
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
 | actions | 自定义按钮 | ReactNode \| (oriNode, info: { components }) => ReactNode | - | - |
+| allowSpeech | 是否允许语音输入 | boolean | false | - |
 | classNames | 样式类名 | [见下](#semantic-dom) | - | - |
 | components | 自定义组件 | Record<'input', ComponentType> | - | - |
 | defaultValue | 输入框默认值 | string | - | - |
