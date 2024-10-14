@@ -1,5 +1,6 @@
 import { CoffeeOutlined, FireOutlined, SmileOutlined, UserOutlined } from '@ant-design/icons';
 import { Bubble, Prompts, PromptsProps } from '@ant-design/x';
+import { Flex } from 'antd';
 import React from 'react';
 
 const items: PromptsProps['items'] = [
@@ -21,11 +22,16 @@ const items: PromptsProps['items'] = [
 ];
 
 const App = () => (
-  <Bubble
-    variant="borderless"
-    avatar={{ icon: <UserOutlined /> }}
-    content={<Prompts items={items} vertical />}
-  />
+  <Flex vertical gap="middle">
+    <Bubble variant="filled" avatar={{ icon: <UserOutlined /> }} content="variant: filled" />
+    <Bubble variant="outlined" avatar={{ icon: <UserOutlined /> }} content="variant: outlined" />
+    <Bubble variant="shadow" avatar={{ icon: <UserOutlined /> }} content="variant: shadow" />
+    <Bubble
+      variant="borderless"
+      avatar={{ icon: <UserOutlined /> }}
+      content={<Prompts title="variant: borderless to customize" items={items} vertical />}
+    />
+  </Flex>
 );
 
 export default App;

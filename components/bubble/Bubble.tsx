@@ -35,7 +35,10 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     content = '',
     messageRender,
     variant = 'filled',
+    shape,
     onTypingComplete,
+    header,
+    footer,
     ...otherHtmlProps
   } = props;
 
@@ -108,6 +111,62 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
   const mergedContent = messageRender ? messageRender(typedContent as any) : typedContent;
 
   // ============================ Render ============================
+  let fullContent: React.ReactNode = (
+    <div
+      style={{
+        ...contextConfig.styles.content,
+        ...styles.content,
+      }}
+      className={classnames(
+        `${prefixCls}-content`,
+        `${prefixCls}-content-${variant}`,
+        shape && `${prefixCls}-content-${shape}`,
+        contextConfig.classNames.content,
+        classNames.content,
+      )}
+    >
+      {loading ? <Loading prefixCls={prefixCls} /> : (mergedContent as React.ReactNode)}
+    </div>
+  );
+
+  if (header || footer) {
+    fullContent = (
+      <div className={`${prefixCls}-content-wrapper`}>
+        {header && (
+          <div
+            className={classnames(
+              `${prefixCls}-header`,
+              contextConfig.classNames.header,
+              classNames.header,
+            )}
+            style={{
+              ...contextConfig.styles.header,
+              ...styles.header,
+            }}
+          >
+            {header}
+          </div>
+        )}
+        {fullContent}
+        {footer && (
+          <div
+            className={classnames(
+              `${prefixCls}-footer`,
+              contextConfig.classNames.footer,
+              classNames.footer,
+            )}
+            style={{
+              ...contextConfig.styles.footer,
+              ...styles.footer,
+            }}
+          >
+            {footer}
+          </div>
+        )}
+      </div>
+    );
+  }
+
   return wrapCSSVar(
     <div
       style={{
@@ -136,20 +195,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
       )}
 
       {/* Content */}
-      <div
-        style={{
-          ...contextConfig.styles.content,
-          ...styles.content,
-        }}
-        className={classnames(
-          `${prefixCls}-content`,
-          `${prefixCls}-content-${variant}`,
-          contextConfig.classNames.content,
-          classNames.content,
-        )}
-      >
-        {loading ? <Loading prefixCls={prefixCls} /> : (mergedContent as React.ReactNode)}
-      </div>
+      {fullContent}
     </div>,
   );
 };

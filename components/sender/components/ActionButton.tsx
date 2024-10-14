@@ -10,6 +10,7 @@ export interface ActionButtonContextProps {
   onClearDisabled?: boolean;
   onCancel?: VoidFunction;
   onCancelDisabled?: boolean;
+  disabled?: boolean;
 }
 
 export const ActionButtonContext = React.createContext<ActionButtonContextProps>(null!);
@@ -18,26 +19,34 @@ export interface ActionButtonProps extends ButtonProps {
   action: 'onSend' | 'onClear' | 'onCancel';
 }
 
-export default function ActionButton(props: ActionButtonProps) {
+export function ActionButton(props: ActionButtonProps, ref: React.Ref<HTMLButtonElement>) {
   const { className, action, onClick: outClick, ...restProps } = props;
   const context = React.useContext(ActionButtonContext);
+  const { prefixCls, disabled: rootDisabled } = context;
 
   const onClick = context[action];
-  const disabled = context[`${action}Disabled`];
+  const mergedDisabled = rootDisabled ?? restProps.disabled ?? context[`${action}Disabled`];
+
   return (
     <Button
       type="text"
-      disabled={disabled}
       {...restProps}
+      ref={ref}
       onClick={(e) => {
-        if (onClick) {
-          onClick();
-        }
-        if (outClick) {
-          outClick(e);
+        if (!mergedDisabled) {
+          if (onClick) {
+            onClick();
+          }
+          if (outClick) {
+            outClick(e);
+          }
         }
       }}
-      className={classNames(context.prefixCls, className)}
+      className={classNames(prefixCls, className, {
+        [`${prefixCls}-disabled`]: mergedDisabled,
+      })}
     />
   );
 }
+
+export default React.forwardRef(ActionButton);

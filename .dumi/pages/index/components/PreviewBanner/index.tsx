@@ -14,13 +14,12 @@ const ComponentsBlock = React.lazy(() => import('./ComponentsBlock'));
 
 const locales = {
   cn: {
-    slogan: '助力设计开发者「更灵活」地搭建出「更美」的产品，让用户「快乐工作」～',
+    slogan: '构建 Copilot 应用的好搭档',
     start: '开始使用',
     designLanguage: '设计语言',
   },
   en: {
-    slogan:
-      'Help designers/developers building beautiful products more flexible and working with happiness',
+    slogan: 'The ready-made partner for building Copilot applications',
     start: 'Getting Started',
     designLanguage: 'Design Language',
   },

@@ -137,7 +137,7 @@ const ColumnCard: React.FC<Props> = ({ zhihuLink, yuqueLink, juejinLink }) => {
           <Divider />
           <div className={cardBody}>
             <div className={leftCard}>
-              <img draggable={false} src={ANTD_IMG_URL} alt="antd" />
+              <img draggable={false} src={ANTD_IMG_URL} alt="@ant-design/x" />
               <div>
                 <p className={title}>Ant Design</p>
                 <div className={subTitle}>
@@ -171,7 +171,7 @@ const ColumnCard: React.FC<Props> = ({ zhihuLink, yuqueLink, juejinLink }) => {
           <Divider />
           <div className={cardBody}>
             <div className={leftCard}>
-              <img draggable={false} src={ANTD_IMG_URL} alt="antd" />
+              <img draggable={false} src={ANTD_IMG_URL} alt="@ant-design/x" />
               <div>
                 <p className={title}>Ant Design</p>
                 <div className={subTitle}>
@@ -205,7 +205,7 @@ const ColumnCard: React.FC<Props> = ({ zhihuLink, yuqueLink, juejinLink }) => {
           <Divider />
           <div className={cardBody}>
             <div className={leftCard}>
-              <img draggable={false} src={ANTD_IMG_URL} alt="antd" />
+              <img draggable={false} src={ANTD_IMG_URL} alt="@ant-design/x" />
               <div>
                 <p className={title}>Ant Design</p>
                 <div className={subTitle}>

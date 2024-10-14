@@ -15,6 +15,15 @@ tag: vVERSION
 
 ---
 
+## 1.0.0-alpha.3
+
+`2024-10-10`
+
+- Bubble
+  - 🆕 Bubble 新增 `variant` 变体支持，由 [@zombieJ](https://github.com/zombieJ) 完成 [#140](https://github.com/ant-design/x/pull/140)
+  - 🆕 Bubble 新增 `shape` 形状支持，由 [@zombieJ](https://github.com/zombieJ) 完成 [#144](https://github.com/ant-design/x/pull/144)
+  - 🆕 Bubble 新增 `header` 和 `footer` 支持自定义头部与底部内容并添加对应语义化 `className`，由 [@zombieJ](https://github.com/zombieJ) 完成 [#147](https://github.com/ant-design/x/pull/147)
+
 ## 1.0.0-alpha.2
 
 `2024-09-27`

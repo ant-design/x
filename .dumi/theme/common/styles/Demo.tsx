@@ -1,6 +1,6 @@
-import { Global, css } from '@emotion/react';
-import { useTheme } from 'antd-style';
 import React from 'react';
+import { css, Global } from '@emotion/react';
+import { useTheme } from 'antd-style';
 
 const GlobalDemoStyles: React.FC = () => {
   const token = useTheme();
@@ -69,18 +69,6 @@ const GlobalDemoStyles: React.FC = () => {
 
           &:target {
             border: 1px solid ${token.colorPrimary};
-          }
-
-          &-expand-trigger {
-            position: relative;
-            color: #3b4357;
-            font-size: ${token.fontSizeXL}px;
-            cursor: pointer;
-            opacity: 0.75;
-            transition: all ${token.motionDurationSlow};
-            &:hover {
-              opacity: 1;
-            }
           }
 
           &-title {
@@ -336,6 +324,7 @@ const GlobalDemoStyles: React.FC = () => {
 
           &-debug {
             border-color: ${token.purple3};
+            display: none;
           }
 
           &-debug &-title a {
@@ -345,6 +334,10 @@ const GlobalDemoStyles: React.FC = () => {
 
         .demo-wrapper {
           position: relative;
+
+          &-show-debug .code-box-debug {
+            display: block;
+          }
         }
 
         .all-code-box-controls {
@@ -353,7 +346,18 @@ const GlobalDemoStyles: React.FC = () => {
           inset-inline-end: 0;
           display: flex;
           align-items: center;
-          column-gap: ${token.marginSM}px;
+          column-gap: ${token.marginXS}px;
+
+          ${antCls}-btn {
+            opacity: 0.6;
+            &.icon-enabled {
+             background: ${token.colorFillSecondary};
+             opacity: 1;
+            ${iconCls} {
+              color: ${token.colorTextBase};
+              font-weight: bold;
+            }
+          }
         }
 
         ${antCls}-row-rtl {

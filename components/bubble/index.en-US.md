@@ -18,10 +18,12 @@ Often used when chatting.
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">Basic</code>
 <code src="./demo/avatar-and-placement.tsx">Placement and avatar</code>
+<code src="./demo/header-and-footer.tsx">Header and footer</code>
 <code src="./demo/loading.tsx">Loading</code>
 <code src="./demo/typing.tsx">Typing effect</code>
 <code src="./demo/markdown.tsx">Content render</code>
 <code src="./demo/variant.tsx">Variant</code>
+<code src="./demo/shape.tsx">Shape</code>
 <code src="./demo/list.tsx">Bubble List</code>
 <code src="./demo/list-custom.tsx">Custom List Content</code>
 
@@ -36,8 +38,11 @@ Common props ref：[Common props](/docs/react/common-props)
 | avatar | Avatar component | React.ReactNode | - |  |
 | classNames | Semantic DOM class | [Record<SemanticDOM, string>](#semantic-dom) | - |  |
 | content | Content of bubble | string | - |  |
+| footer | Footer content | React.ReactNode | - |  |
+| header | Header content | React.ReactNode | - |  |
 | loading | Loading state of Message | boolean | - |  |
 | placement | Direction of Message | `start` \| `end` | `start` |  |
+| shape | Shape of bubble | `round` \| `corner` | - |  |
 | styles | Semantic DOM style | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - |  |
 | typing | Show message with typing motion | boolean \| { step?: number, interval?: number } | false |  |
 | variant | Style variant | `filled` \| `borderless` | `filled` |  |

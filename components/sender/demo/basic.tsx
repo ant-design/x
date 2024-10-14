@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import { Sender } from '@ant-design/x';
-import { App } from 'antd';
+import { App, Flex } from 'antd';
+import React, { useState } from 'react';
 
 const Demo: React.FC = () => {
   const [value, setValue] = useState<string>('Hello? this is X!');
@@ -22,22 +22,26 @@ const Demo: React.FC = () => {
   }, [loading]);
 
   return (
-    <Sender
-      loading={loading}
-      value={value}
-      onChange={(v) => {
-        setValue(v);
-      }}
-      onSubmit={() => {
-        setValue('');
-        setLoading(true);
-        message.info('Send message!');
-      }}
-      onCancel={() => {
-        setLoading(false);
-        message.error('Cancel sending!');
-      }}
-    />
+    <Flex vertical gap="middle">
+      <Sender
+        loading={loading}
+        value={value}
+        onChange={(v) => {
+          setValue(v);
+        }}
+        onSubmit={() => {
+          setValue('');
+          setLoading(true);
+          message.info('Send message!');
+        }}
+        onCancel={() => {
+          setLoading(false);
+          message.error('Cancel sending!');
+        }}
+      />
+      <Sender value="Force as loading" loading />
+      <Sender disabled value="Set to disabled" />
+    </Flex>
   );
 };
 

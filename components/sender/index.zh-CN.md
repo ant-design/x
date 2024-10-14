@@ -18,6 +18,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*8yArQ43EGccAAA
 <code src="./demo/basic.tsx">基本用法</code>
 <code src="./demo/submitType.tsx">提交模式</code>
 <code src="./demo/actions.tsx">自定义按钮</code>
+<code src="./demo/send-style.tsx">调整样式</code>
 
 ## API
 

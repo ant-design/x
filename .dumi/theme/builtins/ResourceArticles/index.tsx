@@ -2,7 +2,6 @@ import { Avatar, Divider, Empty, Skeleton, Tabs } from 'antd';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
 import { FormattedMessage } from 'dumi';
-/* eslint-disable react/no-array-index-key */
 import * as React from 'react';
 
 import useLocale from '../../../hooks/useLocale';

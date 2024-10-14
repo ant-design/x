@@ -1,6 +1,6 @@
 {
   "name": "@ant-design/x",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "description": "Crafting AI-driven interfaces with React, seamlessly integrating smart chat components and API services at your fingertips.",
   "keywords": ["AI", "Copilot", "ant", "components", "framework", "react"],
   "homepage": "https://x.ant.design",
@@ -84,6 +84,7 @@
     "@ant-design/tools": "^18.0.2",
     "@biomejs/biome": "^1.9.0",
     "@codesandbox/sandpack-react": "^2.19.8",
+    "@emotion/server": "^11.11.0",
     "@happy-dom/jest-environment": "^15.7.4",
     "@ianvs/prettier-plugin-sort-imports": "^4.3.1",
     "@madccc/duplicate-package-checker-webpack-plugin": "^1.0.0",

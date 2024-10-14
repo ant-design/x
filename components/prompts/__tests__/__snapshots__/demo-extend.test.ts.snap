@@ -17,7 +17,7 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] 
     >
       <li>
         <button
-          class="ant-btn css-var-r7 ant-btn-text ant-prompts-item"
+          class="ant-btn css-var-r7 ant-btn-text ant-btn-color-default ant-btn-variant-text ant-prompts-item"
           type="button"
         >
           <div
@@ -64,7 +64,7 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] 
       </li>
       <li>
         <button
-          class="ant-btn css-var-r7 ant-btn-text ant-prompts-item"
+          class="ant-btn css-var-r7 ant-btn-text ant-btn-color-default ant-btn-variant-text ant-prompts-item"
           type="button"
         >
           <div
@@ -114,7 +114,7 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] 
       </li>
       <li>
         <button
-          class="ant-btn css-var-r7 ant-btn-text ant-prompts-item"
+          class="ant-btn css-var-r7 ant-btn-text ant-btn-color-default ant-btn-variant-text ant-prompts-item"
           type="button"
         >
           <div
@@ -161,7 +161,7 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] 
       </li>
       <li>
         <button
-          class="ant-btn css-var-r7 ant-btn-text ant-prompts-item"
+          class="ant-btn css-var-r7 ant-btn-text ant-btn-color-default ant-btn-variant-text ant-prompts-item"
           type="button"
         >
           <div
@@ -208,7 +208,7 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] 
       </li>
       <li>
         <button
-          class="ant-btn css-var-r7 ant-btn-text ant-prompts-item"
+          class="ant-btn css-var-r7 ant-btn-text ant-btn-color-default ant-btn-variant-text ant-prompts-item"
           type="button"
         >
           <div
@@ -274,7 +274,7 @@ exports[`renders components/prompts/demo/disabled.tsx extend context correctly 1
   >
     <li>
       <button
-        class="ant-btn css-var-r5 ant-btn-default ant-prompts-item"
+        class="ant-btn css-var-r5 ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-prompts-item"
         disabled=""
         type="button"
       >
@@ -325,7 +325,7 @@ exports[`renders components/prompts/demo/disabled.tsx extend context correctly 1
     </li>
     <li>
       <button
-        class="ant-btn css-var-r5 ant-btn-text ant-prompts-item"
+        class="ant-btn css-var-r5 ant-btn-text ant-btn-color-default ant-btn-variant-text ant-prompts-item"
         type="button"
       >
         <div
@@ -390,7 +390,7 @@ exports[`renders components/prompts/demo/flex-vertical.tsx extend context correc
   >
     <li>
       <button
-        class="ant-btn css-var-r3 ant-btn-text ant-prompts-item"
+        class="ant-btn css-var-r3 ant-btn-text ant-btn-color-default ant-btn-variant-text ant-prompts-item"
         type="button"
       >
         <div
@@ -430,7 +430,7 @@ exports[`renders components/prompts/demo/flex-vertical.tsx extend context correc
     </li>
     <li>
       <button
-        class="ant-btn css-var-r3 ant-btn-text ant-prompts-item"
+        class="ant-btn css-var-r3 ant-btn-text ant-btn-color-default ant-btn-variant-text ant-prompts-item"
         type="button"
       >
         <div
@@ -470,7 +470,7 @@ exports[`renders components/prompts/demo/flex-vertical.tsx extend context correc
     </li>
     <li>
       <button
-        class="ant-btn css-var-r3 ant-btn-text ant-prompts-item"
+        class="ant-btn css-var-r3 ant-btn-text ant-btn-color-default ant-btn-variant-text ant-prompts-item"
         type="button"
       >
         <div
@@ -528,7 +528,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
   >
     <li>
       <button
-        class="ant-btn css-var-r1 ant-btn-text ant-prompts-item"
+        class="ant-btn css-var-r1 ant-btn-text ant-btn-color-default ant-btn-variant-text ant-prompts-item"
         type="button"
       >
         <div
@@ -568,7 +568,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
     </li>
     <li>
       <button
-        class="ant-btn css-var-r1 ant-btn-text ant-prompts-item"
+        class="ant-btn css-var-r1 ant-btn-text ant-btn-color-default ant-btn-variant-text ant-prompts-item"
         type="button"
       >
         <div
@@ -611,7 +611,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
     </li>
     <li>
       <button
-        class="ant-btn css-var-r1 ant-btn-text ant-prompts-item"
+        class="ant-btn css-var-r1 ant-btn-text ant-btn-color-default ant-btn-variant-text ant-prompts-item"
         type="button"
       >
         <div
@@ -651,7 +651,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
     </li>
     <li>
       <button
-        class="ant-btn css-var-r1 ant-btn-text ant-prompts-item"
+        class="ant-btn css-var-r1 ant-btn-text ant-btn-color-default ant-btn-variant-text ant-prompts-item"
         type="button"
       >
         <div
@@ -691,7 +691,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
     </li>
     <li>
       <button
-        class="ant-btn css-var-r1 ant-btn-text ant-prompts-item"
+        class="ant-btn css-var-r1 ant-btn-text ant-btn-color-default ant-btn-variant-text ant-prompts-item"
         type="button"
       >
         <div
@@ -734,7 +734,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
     </li>
     <li>
       <button
-        class="ant-btn css-var-r1 ant-btn-text ant-prompts-item"
+        class="ant-btn css-var-r1 ant-btn-text ant-btn-color-default ant-btn-variant-text ant-prompts-item"
         type="button"
       >
         <div
@@ -774,7 +774,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
     </li>
     <li>
       <button
-        class="ant-btn css-var-r1 ant-btn-text ant-prompts-item"
+        class="ant-btn css-var-r1 ant-btn-text ant-btn-color-default ant-btn-variant-text ant-prompts-item"
         type="button"
       >
         <div
@@ -814,7 +814,7 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
     </li>
     <li>
       <button
-        class="ant-btn css-var-r1 ant-btn-text ant-prompts-item"
+        class="ant-btn css-var-r1 ant-btn-text ant-btn-color-default ant-btn-variant-text ant-prompts-item"
         type="button"
       >
         <div

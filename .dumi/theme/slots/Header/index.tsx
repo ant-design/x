@@ -211,7 +211,6 @@ const Header: React.FC = () => {
     };
   }, []);
 
-  // eslint-disable-next-line class-methods-use-this
   const handleVersionChange = useCallback((url: string) => {
     const currentUrl = window.location.href;
     const currentPathname = window.location.pathname;
@@ -331,12 +330,7 @@ const Header: React.FC = () => {
       pure
       aria-label="RTL Switch Button"
     />,
-    <a
-      key="github"
-      href="https://github.com/ant-design/ant-design"
-      target="_blank"
-      rel="noreferrer"
-    >
+    <a key="github" href="https://github.com/ant-design/x" target="_blank" rel="noreferrer">
       <SwitchBtn value={1} label1={<GithubOutlined />} tooltip1="Github" label2={null} pure />
     </a>,
   ];

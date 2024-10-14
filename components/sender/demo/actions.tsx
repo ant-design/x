@@ -1,7 +1,7 @@
-import React from 'react';
+import { OpenAIOutlined } from '@ant-design/icons';
 import { Sender } from '@ant-design/x';
 import { App, Space, Spin, Typography } from 'antd';
-import { OpenAIOutlined } from '@ant-design/icons';
+import React from 'react';
 
 const Demo: React.FC = () => {
   const [loading, setLoading] = React.useState(false);
@@ -35,13 +35,14 @@ const Demo: React.FC = () => {
         setLoading(false);
       }}
       actions={(_, info) => {
-        const { SendButton, LoadingButton } = info.components;
+        const { SendButton, LoadingButton, ClearButton } = info.components;
 
         return (
           <Space size="small">
             <Typography.Text type="secondary">
               <small>`Shift + Enter` to submit</small>
             </Typography.Text>
+            <ClearButton />
             {loading ? (
               <LoadingButton type="default" icon={<Spin size="small" />} disabled />
             ) : (

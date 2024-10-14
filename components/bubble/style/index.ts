@@ -2,6 +2,7 @@ import { Keyframes, unit } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
+import { genShapeStyle, genVariantStyle } from './content';
 import genBubbleListStyle from './list';
 
 const loadingMove = new Keyframes('loadingMove', {
@@ -42,12 +43,11 @@ export interface BubbleToken extends FullToken<'Bubble'> {
 }
 
 const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
-  const { componentCls, fontSize, lineHeight, paddingSM, padding, paddingXS, colorText, calc } =
-    token;
+  const { componentCls, fontSize, lineHeight, paddingSM, colorText, calc } = token;
   return {
     [componentCls]: {
       display: 'flex',
-      columnGap: paddingXS,
+      columnGap: paddingSM,
       maxWidth: '100%',
       [`&${componentCls}-end`]: {
         justifyContent: 'end',
@@ -67,11 +67,37 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
         animationIterationCount: 'infinite',
         animationTimingFunction: 'linear',
       },
+
+      // ============================ Avatar =============================
       [`& ${componentCls}-avatar`]: {
         display: 'inline-flex',
         justifyContent: 'center',
         alignSelf: 'flex-start',
       },
+
+      // ======================== Header & Footer ========================
+      [`& ${componentCls}-header, & ${componentCls}-footer`]: {
+        fontSize: fontSize,
+        lineHeight: lineHeight,
+        color: token.colorText,
+      },
+
+      [`& ${componentCls}-header`]: {
+        marginBottom: token.paddingXXS,
+      },
+
+      [`& ${componentCls}-footer`]: {
+        marginTop: paddingSM,
+      },
+
+      // =========================== Content =============================
+      [`& ${componentCls}-content-wrapper`]: {
+        flex: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+      },
+
       [`& ${componentCls}-content`]: {
         position: 'relative',
         boxSizing: 'border-box',
@@ -83,14 +109,6 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
         maxWidth: token.bubbleContentMaxWidth,
 
         wordBreak: 'break-word',
-
-        // Variant
-        '&-filled': {
-          padding: `${unit(paddingSM)} ${unit(padding)}`,
-          backgroundColor: token.colorInfoBg,
-          borderRadius: token.borderRadiusLG,
-          boxShadow: token.boxShadowTertiary,
-        },
 
         [`& ${componentCls}-dot`]: {
           position: 'relative',
@@ -133,7 +151,12 @@ export default genStyleHooks<'Bubble'>(
     const bubbleToken = mergeToken<BubbleToken>(token, {
       bubbleContentMaxWidth: `calc(100% - ${unit(calc(paddingXS).add(32).equal())})`,
     });
-    return [genBubbleStyle(bubbleToken), genBubbleListStyle(bubbleToken)];
+    return [
+      genBubbleStyle(bubbleToken),
+      genBubbleListStyle(bubbleToken),
+      genVariantStyle(bubbleToken),
+      genShapeStyle(bubbleToken),
+    ];
   },
   prepareComponentToken,
 );

@@ -4,14 +4,14 @@
 
 <h1>Ant Design X</h1>
 
-打造 AI 驱动界面，一键接入智能对话组件与 API 服务。
+构建 Copilot 应用的好搭档。
 
 [![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] [![NPM version][npm-image]][npm-url] [![NPM downloads][download-image]][download-url]
 
 [Changelog](./CHANGELOG.zh-US.md) · [Report Bug][github-issues-bug-report] · [Request Feature][github-issues-feature-request] · English · [中文](./README-zh_CN.md) [更新日志](./CHANGELOG.zh-CN.md) · [报告问题][github-issues-bug-report] · [特性需求][github-issues-feature-request] · [English](./README.md) · 中文
 
-[npm-image]: http://img.shields.io/npm/v/@ant-design/x.svg?style=flat-square
-[npm-url]: http://npmjs.org/package/@ant-design/x
+[npm-image]: https://img.shields.io/npm/v/@ant-design/x.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/@ant-design/x
 [github-action-image]: https://github.com/ant-design/x/actions/workflows/main.yml/badge.svg
 [github-action-url]: https://github.com/ant-design/x/actions/workflows/main.yml
 [codecov-image]: https://codecov.io/gh/ant-design/x/graph/badge.svg?token=wrCCsyTmdi

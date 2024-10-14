@@ -1,9 +1,9 @@
 import React from 'react';
 
+import { fireEvent, render } from '@testing-library/react';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
 import Sender from '../index';
-import { fireEvent, render } from '@testing-library/react';
 
 describe('Sender Component', () => {
   mountTest(() => <Sender />);
@@ -61,20 +61,25 @@ describe('Sender Component', () => {
   it('onSubmit', () => {
     const onSubmit = jest.fn();
     const { container } = render(<Sender value="bamboo" onSubmit={onSubmit} />);
-    fireEvent.click(container.querySelectorAll('button')[1]);
+    fireEvent.click(container.querySelector('button')!);
     expect(onSubmit).toHaveBeenCalledWith('bamboo');
   });
 
   it('onCancel', () => {
     const onCancel = jest.fn();
     const { container } = render(<Sender loading onCancel={onCancel} />);
-    fireEvent.click(container.querySelectorAll('button')[1]);
+    fireEvent.click(container.querySelector('button')!);
     expect(onCancel).toHaveBeenCalled();
   });
 
   it('onClear', () => {
     const onChange = jest.fn();
-    const { container } = render(<Sender onChange={onChange} />);
+    const { container } = render(
+      <Sender
+        onChange={onChange}
+        actions={(_, { components: { ClearButton } }) => <ClearButton />}
+      />,
+    );
 
     fireEvent.change(container.querySelector('textarea')!, { target: { value: 'bamboo' } });
     expect(onChange).toHaveBeenCalledWith('bamboo');

@@ -1,8 +1,19 @@
+import { ArrowUpOutlined } from '@ant-design/icons';
+import type { ButtonProps } from 'antd';
 import * as React from 'react';
 import ActionButton from './ActionButton';
-import { SendOutlined } from '@ant-design/icons';
-import type { ButtonProps } from 'antd';
 
-export default function SendButton(props: ButtonProps) {
-  return <ActionButton icon={<SendOutlined />} {...props} action="onSend" />;
+export function SendButton(props: ButtonProps, ref: React.Ref<HTMLButtonElement>) {
+  return (
+    <ActionButton
+      icon={<ArrowUpOutlined />}
+      type="primary"
+      shape="circle"
+      {...props}
+      action="onSend"
+      ref={ref}
+    />
+  );
 }
+
+export default React.forwardRef(SendButton);
