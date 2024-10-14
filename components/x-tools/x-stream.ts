@@ -102,6 +102,8 @@ function splitEvent(separator?: string | RegExp | boolean) {
             // Extract the key from the beginning of the kvPair up to the separator
             const key = kvPair.slice(0, separatorIndex);
 
+            if (!isValidString(key)) return acc;
+
             // Extract the value from the kvPair after the separator
             const value = kvPair.slice(separatorIndex + 1);
 

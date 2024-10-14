@@ -7,7 +7,7 @@ export default function useXAgent<Message = string>(
   baseURL: string,
   options?: XAgentOptions<Message>,
 ) {
-  const agent = React.useMemo(() => new XAgent<Message>(baseURL, options), [baseURL, options]);
+  const agent = React.useMemo(() => new XAgent<Message>(baseURL, options), []);
 
   const loading = React.useSyncExternalStore(
     (callback) => {

@@ -31,6 +31,18 @@ export interface XAgentOptions<T> {
   model?: string;
 
   /**
+   * @warning 🔥🔥 Its dangerously!
+   *
+   * Enabling the dangerouslyApiKey option can be dangerous because it exposes
+   * your secret API credentials in the client-side code. Web browsers are inherently
+   * less secure than server environments, any user with access to the browser can
+   * potentially inspect, extract, and misuse these credentials. This could lead to
+   * unauthorized access using your credentials and potentially compromise sensitive
+   * data or functionality.
+   */
+  dangerouslyApiKey?: string;
+
+  /**
    * @description Config for {@link XFetchOptions}
    */
   fetchOptions?: XFetchOptions;
@@ -73,9 +85,12 @@ export default class XAgent<T> extends EventTarget implements XAgentOptions<T> {
   readonly fetchOptions;
   readonly streamOptions;
 
+  protected _dangerouslyApiKey;
+
   constructor(baseURL: string, options?: XAgentOptions<T>) {
     super();
     this.baseURL = baseURL;
+    this._dangerouslyApiKey = options?.dangerouslyApiKey;
     this.model = options?.model;
     this.fetchOptions = options?.fetchOptions;
     this.streamOptions = options?.streamOptions;
@@ -134,6 +149,9 @@ export default class XAgent<T> extends EventTarget implements XAgentOptions<T> {
         ...this.fetchOptions,
         headers: {
           ...DEFAULT_HEADERS,
+          ...(this._dangerouslyApiKey && {
+            Authorization: this._dangerouslyApiKey,
+          }),
           ...this.fetchOptions?.headers,
         },
       });
