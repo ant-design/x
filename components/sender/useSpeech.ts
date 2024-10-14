@@ -8,7 +8,7 @@ if (!SpeechRecognition && typeof window !== 'undefined') {
   SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
 }
 
-export default function useSpeech() {
+export default function useSpeech(onSpeech: (transcript: string) => void) {
   // ======================== Speech Permission ========================
   const [permissionState, setPermissionState] = React.useState<PermissionState | null>(null);
 
@@ -59,7 +59,7 @@ export default function useSpeech() {
 
       recognition.onresult = (event: SpeechRecognitionResult) => {
         const transcript = (event as any).results?.[0]?.[0]?.transcript;
-        console.log('Speech Recognition Result:', transcript);
+        onSpeech(transcript);
       };
 
       recognitionRef.current = recognition;
@@ -78,5 +78,5 @@ export default function useSpeech() {
     }
   });
 
-  return [mergedAllowSpeech, triggerSpeech] as const;
+  return [mergedAllowSpeech, triggerSpeech, recording] as const;
 }

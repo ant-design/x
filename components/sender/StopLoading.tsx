@@ -11,7 +11,7 @@ const StopLoadingIcon = memo((props: { className?: string }) => {
       xmlnsXlink="http://www.w3.org/1999/xlink"
       className={className}
     >
-      <title>Stop Loading Icon</title>
+      <title>Stop Loading</title>
       <rect fill="currentColor" height="250" rx="24" ry="24" width="250" x="375" y="375" />
 
       <circle

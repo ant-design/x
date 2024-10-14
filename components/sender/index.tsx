@@ -100,9 +100,6 @@ const Sender: React.FC<SenderProps> = (props) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const inputRef = React.useRef<HTMLTextAreaElement>(null);
 
-  // ============================ Speech ============================
-  const [speechPermission, triggerSpeech] = useSpeech();
-
   // ======================= Component Config =======================
   const contextConfig = useXComponentConfig('sender');
   const inputCls = `${prefixCls}-input`;
@@ -137,6 +134,9 @@ const Sender: React.FC<SenderProps> = (props) => {
       onChange(nextValue);
     }
   };
+
+  // ============================ Speech ============================
+  const [speechPermission, triggerSpeech, speechRecording] = useSpeech(triggerValueChange);
 
   // ========================== Components ==========================
   const InputTextArea = getComponent(components, ['input'], Input.TextArea);
@@ -275,6 +275,7 @@ const Sender: React.FC<SenderProps> = (props) => {
             onCancelDisabled: !loading,
             onSpeech: triggerSpeech,
             onSpeechDisabled: !speechPermission,
+            speechRecording,
             disabled,
           }}
         >

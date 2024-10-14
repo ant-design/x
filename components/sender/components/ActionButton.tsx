@@ -12,6 +12,7 @@ export interface ActionButtonContextProps {
   onCancelDisabled?: boolean;
   onSpeech?: VoidFunction;
   onSpeechDisabled?: boolean;
+  speechRecording?: boolean;
   disabled?: boolean;
 }
 
