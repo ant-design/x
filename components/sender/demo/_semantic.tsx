@@ -1,6 +1,6 @@
 import { SmileOutlined } from '@ant-design/icons';
 import { Sender } from '@ant-design/x';
-import { Button, Flex } from 'antd';
+import { Button, Divider, Flex } from 'antd';
 import React from 'react';
 import SemanticPreview from '../../../.dumi/components/SemanticPreview';
 import useLocale from '../../../.dumi/hooks/useLocale';
@@ -18,10 +18,24 @@ const locales = {
   },
 };
 
+const headerLocales = {
+  cn: {
+    header: '头部',
+    content: '内容',
+  },
+  en: {
+    header: 'Header',
+    content: 'Content',
+  },
+};
+
 const App: React.FC = () => {
   const [locale] = useLocale(locales);
+  const [headerLocale] = useLocale(headerLocales);
+
   return (
-    <Flex vertical gap="middle">
+    <Flex vertical>
+      {/* Basic */}
       <SemanticPreview
         semantics={[
           { name: 'prefix', desc: locale.prefix },
@@ -30,6 +44,26 @@ const App: React.FC = () => {
         ]}
       >
         <Sender prefix={<Button type="text" icon={<SmileOutlined />} />} />
+      </SemanticPreview>
+
+      <Divider style={{ margin: 0, padding: 0 }} />
+
+      {/* With Header */}
+      <SemanticPreview
+        semantics={[
+          { name: 'header', desc: headerLocale.header },
+          { name: 'content', desc: headerLocale.content },
+        ]}
+      >
+        {(injectProps) => (
+          <Sender
+            header={
+              <Sender.Header open title="Header" {...injectProps}>
+                Content
+              </Sender.Header>
+            }
+          />
+        )}
       </SemanticPreview>
     </Flex>
   );

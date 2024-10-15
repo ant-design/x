@@ -10,6 +10,8 @@ export interface SendHeaderContextProps {
 
 export const SendHeaderContext = React.createContext<SendHeaderContextProps>({} as any);
 
+export type SemanticType = 'header' | 'content';
+
 export interface SenderHeaderProps {
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
@@ -17,6 +19,8 @@ export interface SenderHeaderProps {
   children?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
+  classNames?: Partial<Record<SemanticType, string>>;
+  styles?: Partial<Record<SemanticType, React.CSSProperties>>;
 }
 
 const collapseHeight: MotionEventHandler = () => ({
@@ -27,7 +31,16 @@ const expandedHeight: MotionEventHandler = (ele) => ({
 });
 
 export default function SenderHeader(props: SenderHeaderProps) {
-  const { title, onOpenChange, open, children, className, style } = props;
+  const {
+    title,
+    onOpenChange,
+    open,
+    children,
+    className,
+    style,
+    classNames: classes = {},
+    styles = {},
+  } = props;
 
   const { prefixCls } = React.useContext(SendHeaderContext);
 
@@ -60,8 +73,11 @@ export default function SenderHeader(props: SenderHeaderProps) {
                 // We follow antd naming standard here.
                 // So the header part is use `-header` suffix.
                 // Though its little bit weird for double `-header`.
-                `${headerCls}-header`
+                classNames(`${headerCls}-header`, classes.header)
               }
+              style={{
+                ...styles.header,
+              }}
             >
               <div className={`${headerCls}-title`}>{title}</div>
               <div className={`${headerCls}-close`}>
@@ -77,7 +93,16 @@ export default function SenderHeader(props: SenderHeaderProps) {
             </div>
 
             {/* Content */}
-            {children && <div className={`${headerCls}-content`}>{children}</div>}
+            {children && (
+              <div
+                className={classNames(`${headerCls}-content`, classes.content)}
+                style={{
+                  ...styles.content,
+                }}
+              >
+                {children}
+              </div>
+            )}
           </div>
         );
       }}

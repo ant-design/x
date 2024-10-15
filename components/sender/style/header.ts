@@ -28,6 +28,11 @@ const genSenderHeaderStyle: GenerateStyle<SenderToken> = (token) => {
           },
         },
 
+        // ======================= Content ========================
+        '&-content': {
+          padding: token.padding,
+        },
+
         // ======================== Motion ========================
         '&-motion': {
           transition: ['height', 'border']
