@@ -1,6 +1,8 @@
 ---
 category: Components
-group: 数据展示
+group:
+  title: 用户界面
+  order: 0
 title: Sender
 subtitle: 输入框
 description: 用于聊天的输入框组件。

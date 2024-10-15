@@ -1,6 +1,8 @@
 ---
 category: Components
-group: 数据展示
+group:
+  title: 用户界面
+  order: 0
 title: Suggestion
 subtitle: 提示
 description: 用于给予用户快捷提示的组件

@@ -1,6 +1,8 @@
 ---
 category: Components
-group: Runtime
+group:
+  title: Runtime
+  order: 1
 title: useXAgent
 description: Used for model scheduling with Agent hooks.
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*HjY3QKszqFEAAAAAAAAAAAAADrJ8AQ/original

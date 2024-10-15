@@ -1,6 +1,8 @@
 ---
 category: Components
-group: 其他
+group:
+  title: 其他
+  order: 3
 title: XProvider
 subtitle: 全局化配置
 description: 为组件提供统一的全局化配置。

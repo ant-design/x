@@ -1,6 +1,6 @@
 ---
 category: Components
-title: Components Overview
+title: Overview
 showImport: false
 ---
 

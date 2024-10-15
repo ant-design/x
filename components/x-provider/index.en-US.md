@@ -1,6 +1,8 @@
 ---
 category: Components
-group: Other
+group:
+  title: Other
+  order: 3
 title: XProvider
 description: Provide a uniform configuration support for x components.
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*NVKORa7BCVwAAAAAAAAAAAAADrJ8AQ/original

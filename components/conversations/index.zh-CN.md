@@ -1,6 +1,8 @@
 ---
 category: Components
-group: 数据展示
+group:
+  title: 用户界面
+  order: 0
 title: Conversations
 subtitle: 会话列表
 description: 用于管理、查看会话列表
