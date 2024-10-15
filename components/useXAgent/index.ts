@@ -1,5 +1,5 @@
 import React from 'react';
-import { createXRequest } from '../x-tools/x-request';
+import { createXRequest } from '../x-request';
 
 export type RequestFn<Message> = (
   info: {

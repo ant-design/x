@@ -1,8 +1,8 @@
+import xStream from '../x-stream';
 import xFetch from './x-fetch';
-import xStream from './x-stream';
 
+import type { XStreamOptions } from '../x-stream';
 import type { XFetchOptions } from './x-fetch';
-import type { XStreamOptions } from './x-stream';
 
 import type { AnyObject } from '../_util/type';
 
