@@ -5,6 +5,5 @@
   },
   "codeSplitting": {
     "strategy": "auto"
-  },
-  "moduleIdStrategy": "hashed"
+  }
 }

@@ -2,11 +2,12 @@ import { unit } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
+import genSenderHeaderStyle from './header';
 
 // biome-ignore lint/suspicious/noEmptyInterface: ComponentToken need to be empty by default
 export interface ComponentToken {}
 
-interface SenderToken extends FullToken<'Sender'> {
+export interface SenderToken extends FullToken<'Sender'> {
   SenderContentMaxWidth: number | string;
 }
 
@@ -16,15 +17,9 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
   return {
     [componentCls]: {
       position: 'relative',
-      display: 'flex',
-      gap: paddingXS,
       width: '100%',
 
-      paddingBlock: paddingSM,
-      paddingInlineStart: padding,
-      paddingInlineEnd: paddingSM,
       boxSizing: 'border-box',
-      alignItems: 'flex-end',
       boxShadow: `${token.boxShadowTertiary}`,
       transition: `background ${token.motionDurationSlow}`,
 
@@ -73,8 +68,26 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
         direction: 'rtl',
       },
 
+      // ============================ Content ============================
+      [`${componentCls}-content`]: {
+        display: 'flex',
+        gap: paddingXS,
+        width: '100%',
+
+        paddingBlock: paddingSM,
+        paddingInlineStart: padding,
+        paddingInlineEnd: paddingSM,
+        boxSizing: 'border-box',
+        alignItems: 'flex-end',
+      },
+
+      // ============================ Prefix =============================
+      [`${componentCls}-prefix`]: {
+        flex: 'none',
+      },
+
       // ============================= Input =============================
-      [`& ${componentCls}-input`]: {
+      [`${componentCls}-input`]: {
         padding: 0,
         borderRadius: 0,
         flex: 'auto',
@@ -83,7 +96,7 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
       },
 
       // ============================ Actions ============================
-      [`& ${componentCls}-actions-list`]: {
+      [`${componentCls}-actions-list`]: {
         flex: 'none',
         display: 'flex',
 
@@ -92,7 +105,7 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
         },
       },
 
-      [`& ${componentCls}-actions-btn`]: {
+      [`${componentCls}-actions-btn`]: {
         '&-disabled': {
           opacity: 0.45,
         },
@@ -126,7 +139,7 @@ export default genStyleHooks<'Sender'>(
     const SenderToken = mergeToken<SenderToken>(token, {
       SenderContentMaxWidth: `calc(100% - ${unit(calc(paddingXS).add(32).equal())})`,
     });
-    return genSenderStyle(SenderToken);
+    return [genSenderStyle(SenderToken), genSenderHeaderStyle(SenderToken)];
   },
   prepareComponentToken,
 );
