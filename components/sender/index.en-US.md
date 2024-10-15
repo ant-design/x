@@ -36,6 +36,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | defaultValue | Default value of input | string | - | - |
 | disabled | Whether to disable | boolean | false | - |
 | loading | Whether it is loading | boolean | false | - |
+| header | Header panel | ReactNode | - | - |
 | prefix | Prefix content | ReactNode | - | - |
 | rootClassName | Root element class name | string | - | - |
 | styles | Semantic DOM style | [See below](#semantic-dom) | - | - |
