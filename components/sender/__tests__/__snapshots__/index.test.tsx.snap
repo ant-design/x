@@ -28,7 +28,7 @@ exports[`Sender Component loading state 1`] = `
           xmlns:xlink="http://www.w3.org/1999/xlink"
         >
           <title>
-            Stop Loading Icon
+            Stop Loading
           </title>
           <rect
             fill="currentColor"
