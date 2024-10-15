@@ -1,6 +1,8 @@
 ---
 category: Components
-group: Data Display
+group:
+  title: UI
+  order: 0
 title: Sender
 description: A input component for chat.
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*SMzgSJZE_AwAAAAAAAAAAAAADrJ8AQ/original
@@ -16,6 +18,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*8yArQ43EGccAAA
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">Basic</code>
 <code src="./demo/submitType.tsx">Submit type</code>
+<code src="./demo/speech.tsx">Speech input</code>
 <code src="./demo/actions.tsx">Custom actions</code>
 <code src="./demo/send-style.tsx">Adjust style</code>
 
@@ -28,6 +31,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | actions | Custom actions | ReactNode \| (oriNode, info: { components }) => ReactNode | - | - |
+| allowSpeech | Whether to allow speech input | boolean | false | - |
 | classNames | Class name | [See below](#semantic-dom) | - | - |
 | components | Custom components | Record<'input', ComponentType> | - | - |
 | defaultValue | Default value of input | string | - | - |

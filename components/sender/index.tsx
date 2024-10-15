@@ -11,8 +11,10 @@ import { ActionButtonContext } from './components/ActionButton';
 import ClearButton from './components/ClearButton';
 import LoadingButton from './components/LoadingButton';
 import SendButton from './components/SendButton';
+import SpeechButton from './components/SpeechButton';
 import type { CustomizeComponent, SubmitType } from './interface';
 import useStyle from './style';
+import useSpeech from './useSpeech';
 
 type TextareaProps = GetProps<typeof Input.TextArea>;
 
@@ -55,6 +57,7 @@ export interface SenderProps extends Pick<TextareaProps, 'placeholder' | 'onKeyP
   style?: React.CSSProperties;
   className?: string;
   actions?: React.ReactNode | ActionsRender;
+  allowSpeech?: boolean;
 }
 
 function getComponent<T>(
@@ -85,6 +88,7 @@ const Sender: React.FC<SenderProps> = (props) => {
     onKeyPress,
     onKeyDown,
     disabled,
+    allowSpeech,
     ...rest
   } = props;
 
@@ -96,7 +100,7 @@ const Sender: React.FC<SenderProps> = (props) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const inputRef = React.useRef<HTMLTextAreaElement>(null);
 
-  // ===================== Component Config =========================
+  // ======================= Component Config =======================
   const contextConfig = useXComponentConfig('sender');
   const inputCls = `${prefixCls}-input`;
 
@@ -130,6 +134,11 @@ const Sender: React.FC<SenderProps> = (props) => {
       onChange(nextValue);
     }
   };
+
+  // ============================ Speech ============================
+  const [speechPermission, triggerSpeech, speechRecording] = useSpeech((transcript) => {
+    triggerValueChange(`${innerValue} ${transcript}`);
+  });
 
   // ========================== Components ==========================
   const InputTextArea = getComponent(components, ['input'], Input.TextArea);
@@ -207,6 +216,7 @@ const Sender: React.FC<SenderProps> = (props) => {
   // ============================ Action ============================
   let actionNode: React.ReactNode = (
     <Flex className={`${actionListCls}-presets`}>
+      {allowSpeech && <SpeechButton />}
       {/* Loading or Send */}
       {loading ? <LoadingButton /> : <SendButton />}
     </Flex>
@@ -265,6 +275,9 @@ const Sender: React.FC<SenderProps> = (props) => {
             onClearDisabled: !innerValue,
             onCancel,
             onCancelDisabled: !loading,
+            onSpeech: triggerSpeech,
+            onSpeechDisabled: !speechPermission,
+            speechRecording,
             disabled,
           }}
         >

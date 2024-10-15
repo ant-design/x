@@ -1,6 +1,8 @@
 ---
 category: Components
-group: Data Display
+group:
+  title: UI
+  order: 0
 title: Suggestion
 description: A suggestion component for chat.
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*SMzgSJZE_AwAAAAAAAAAAAAADrJ8AQ/original

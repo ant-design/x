@@ -105,6 +105,12 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
         '&-loading-icon': {
           height: token.controlHeight,
           width: token.controlHeight,
+          verticalAlign: 'top',
+        },
+        '&-recording-icon': {
+          height: '1.2em',
+          width: '1.2em',
+          verticalAlign: 'top',
         },
       },
     },

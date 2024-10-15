@@ -1,6 +1,8 @@
 ---
 category: Components
-group: 数据展示
+group:
+  title: 用户界面
+  order: 0
 title: Bubble
 subtitle: 聊天气泡
 description: 用于聊天的气泡组件。

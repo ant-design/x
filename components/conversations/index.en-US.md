@@ -1,6 +1,8 @@
 ---
 category: Components
-group: Data Display
+group:
+  title: UI
+  order: 0
 title: Conversations
 description: Used to manage and view the conversation list
 cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*PRjsQpR3rCwAAAAAAAAAAAAADgCCAQ/original

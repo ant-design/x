@@ -1,6 +1,8 @@
 ---
 category: Components
-group: 运行时
+group:
+  title: 运行时
+  order: 1
 title: useXChat
 subtitle: 数据管理
 description: 配合 Agent hook 进行对话数据管理。

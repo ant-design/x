@@ -1,6 +1,8 @@
 ---
 category: Components
-group: 运行时
+group:
+  title: 运行时
+  order: 1
 title: useXAgent
 subtitle: 模型调度
 description: 用于模型调度的 Agent 钩子。

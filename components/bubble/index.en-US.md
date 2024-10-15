@@ -1,6 +1,8 @@
 ---
 category: Components
-group: Data Display
+group:
+  title: UI
+  order: 0
 title: Bubble
 description: A bubble component for chat.
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*HjY3QKszqFEAAAAAAAAAAAAADrJ8AQ/original

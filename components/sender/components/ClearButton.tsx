@@ -3,7 +3,7 @@ import type { ButtonProps } from 'antd';
 import * as React from 'react';
 import ActionButton from './ActionButton';
 
-export function ClearButton(props: ButtonProps, ref: React.Ref<HTMLButtonElement>) {
+function ClearButton(props: ButtonProps, ref: React.Ref<HTMLButtonElement>) {
   return <ActionButton icon={<ClearOutlined />} {...props} action="onClear" ref={ref} />;
 }
 

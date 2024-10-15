@@ -4,7 +4,7 @@ import * as React from 'react';
 import StopLoadingIcon from '../StopLoading';
 import ActionButton, { ActionButtonContext } from './ActionButton';
 
-export function LoadingButton(props: ButtonProps, ref: React.Ref<HTMLButtonElement>) {
+function LoadingButton(props: ButtonProps, ref: React.Ref<HTMLButtonElement>) {
   const { prefixCls } = React.useContext(ActionButtonContext);
   const { className } = props;
 

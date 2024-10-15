@@ -1,6 +1,8 @@
 ---
 category: Components
-group: 数据展示
+group:
+  title: 用户界面
+  order: 0
 title: Prompts
 subtitle: 提示集
 description: 用于显示一组与当前上下文相关的预定义的问题或建议。

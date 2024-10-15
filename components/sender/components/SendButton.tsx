@@ -3,7 +3,7 @@ import type { ButtonProps } from 'antd';
 import * as React from 'react';
 import ActionButton from './ActionButton';
 
-export function SendButton(props: ButtonProps, ref: React.Ref<HTMLButtonElement>) {
+function SendButton(props: ButtonProps, ref: React.Ref<HTMLButtonElement>) {
   return (
     <ActionButton
       icon={<ArrowUpOutlined />}

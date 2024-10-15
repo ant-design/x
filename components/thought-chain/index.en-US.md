@@ -1,6 +1,8 @@
 ---
 category: Components
-group: Data Display
+group:
+  title: UI
+  order: 0
 title: ThoughtChain
 description: The ThoughtChain component is used to visualize and track the call chain of Actions and Tools invoked by an Agent.
 cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*PRjsQpR3rCwAAAAAAAAAAAAADgCCAQ/original
