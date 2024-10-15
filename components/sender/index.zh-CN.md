@@ -37,6 +37,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*8yArQ43EGccAAA
 | defaultValue | 输入框默认值 | string | - | - |
 | disabled | 是否禁用 | boolean | false | - |
 | loading | 是否加载中 | boolean | false | - |
+| prefix | 前缀内容 | ReactNode | - | - |
 | rootClassName | 根元素样式类 | string | - | - |
 | styles | 语义化定义样式 | [见下](#semantic-dom) | - | - |
 | submitType | 提交模式 | SubmitType | `enter` \| `shiftEnter` | - |
@@ -44,6 +45,15 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*8yArQ43EGccAAA
 | onSubmit | 点击发送按钮的回调 | (message: string) => void | - | - |
 | onChange | 输入框值改变的回调 | (value: string) => void | - | - |
 | onCancel | 点击取消按钮的回调 | () => void | - | - |
+
+### Sender.Header
+
+| 属性         | 说明               | 类型                    | 默认值 | 版本 |
+| ------------ | ------------------ | ----------------------- | ------ | ---- |
+| children     | 面板内容           | ReactNode               | -      | -    |
+| open         | 是否展开           | boolean                 | -      | -    |
+| title        | 标题               | ReactNode               | -      | -    |
+| onOpenChange | 展开状态改变的回调 | (open: boolean) => void | -      | -    |
 
 ## Semantic DOM
 

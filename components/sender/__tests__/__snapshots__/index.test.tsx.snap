@@ -5,69 +5,73 @@ exports[`Sender Component loading state 1`] = `
   <div
   class="ant-sender"
 >
-  <textarea
-    class="ant-input ant-input-borderless ant-sender-input"
-    readonly=""
-    style="overflow-y: hidden; resize: none;"
-  />
   <div
-    class="ant-sender-actions-list"
+    class="ant-sender-content"
   >
+    <textarea
+      class="ant-input ant-input-borderless ant-sender-input"
+      readonly=""
+      style="overflow-y: hidden; resize: none;"
+    />
     <div
-      class="ant-sender-actions-list-presets ant-flex"
+      class="ant-sender-actions-list"
     >
-      <button
-        class="ant-btn ant-btn-circle ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-sender-actions-btn ant-sender-actions-btn-loading-button"
-        type="button"
+      <div
+        class="ant-sender-actions-list-presets ant-flex"
       >
-        <svg
-          class="ant-sender-actions-btn-loading-icon"
-          color="currentColor"
-          viewBox="0 0 1000 1000"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
+        <button
+          class="ant-btn ant-btn-circle ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-sender-actions-btn ant-sender-actions-btn-loading-button"
+          type="button"
         >
-          <title>
-            Stop Loading
-          </title>
-          <rect
-            fill="currentColor"
-            height="250"
-            rx="24"
-            ry="24"
-            width="250"
-            x="375"
-            y="375"
-          />
-          <circle
-            cx="500"
-            cy="500"
-            fill="none"
-            opacity="0.45"
-            r="450"
-            stroke="currentColor"
-            stroke-width="100"
-          />
-          <circle
-            cx="500"
-            cy="500"
-            fill="none"
-            r="450"
-            stroke="currentColor"
-            stroke-dasharray="600 9999999"
-            stroke-width="100"
+          <svg
+            class="ant-sender-actions-btn-loading-icon"
+            color="currentColor"
+            viewBox="0 0 1000 1000"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
           >
-            <animatetransform
-              attributeName="transform"
-              dur="1s"
-              from="0 500 500"
-              repeatCount="indefinite"
-              to="360 500 500"
-              type="rotate"
+            <title>
+              Stop Loading
+            </title>
+            <rect
+              fill="currentColor"
+              height="250"
+              rx="24"
+              ry="24"
+              width="250"
+              x="375"
+              y="375"
             />
-          </circle>
-        </svg>
-      </button>
+            <circle
+              cx="500"
+              cy="500"
+              fill="none"
+              opacity="0.45"
+              r="450"
+              stroke="currentColor"
+              stroke-width="100"
+            />
+            <circle
+              cx="500"
+              cy="500"
+              fill="none"
+              r="450"
+              stroke="currentColor"
+              stroke-dasharray="600 9999999"
+              stroke-width="100"
+            >
+              <animatetransform
+                attributeName="transform"
+                dur="1s"
+                from="0 500 500"
+                repeatCount="indefinite"
+                to="360 500 500"
+                type="rotate"
+              />
+            </circle>
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -78,44 +82,48 @@ exports[`Sender Component rtl render component should be rendered correctly in R
 <div
   class="ant-sender css-var-r1 ant-sender-rtl"
 >
-  <textarea
-    class="ant-input ant-input-borderless css-var-r1 ant-input-css-var ant-sender-input"
-    style="overflow-y: hidden; resize: none;"
-  />
   <div
-    class="ant-sender-actions-list"
+    class="ant-sender-content"
   >
+    <textarea
+      class="ant-input ant-input-borderless css-var-r1 ant-input-css-var ant-sender-input"
+      style="overflow-y: hidden; resize: none;"
+    />
     <div
-      class="ant-sender-actions-list-presets ant-flex css-var-r1 ant-flex-rtl"
+      class="ant-sender-actions-list"
     >
-      <button
-        class="ant-btn css-var-r1 ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-btn-rtl ant-sender-actions-btn ant-sender-actions-btn-disabled"
-        type="button"
+      <div
+        class="ant-sender-actions-list-presets ant-flex css-var-r1 ant-flex-rtl"
       >
-        <span
-          class="ant-btn-icon"
+        <button
+          class="ant-btn css-var-r1 ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-btn-rtl ant-sender-actions-btn ant-sender-actions-btn-disabled"
+          type="button"
         >
           <span
-            aria-label="arrow-up"
-            class="anticon anticon-arrow-up"
-            role="img"
+            class="ant-btn-icon"
           >
-            <svg
-              aria-hidden="true"
-              data-icon="arrow-up"
-              fill="currentColor"
-              focusable="false"
-              height="1em"
-              viewBox="64 64 896 896"
-              width="1em"
+            <span
+              aria-label="arrow-up"
+              class="anticon anticon-arrow-up"
+              role="img"
             >
-              <path
-                d="M868 545.5L536.1 163a31.96 31.96 0 00-48.3 0L156 545.5a7.97 7.97 0 006 13.2h81c4.6 0 9-2 12.1-5.5L474 300.9V864c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V300.9l218.9 252.3c3 3.5 7.4 5.5 12.1 5.5h81c6.8 0 10.5-8 6-13.2z"
-              />
-            </svg>
+              <svg
+                aria-hidden="true"
+                data-icon="arrow-up"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M868 545.5L536.1 163a31.96 31.96 0 00-48.3 0L156 545.5a7.97 7.97 0 006 13.2h81c4.6 0 9-2 12.1-5.5L474 300.9V864c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V300.9l218.9 252.3c3 3.5 7.4 5.5 12.1 5.5h81c6.8 0 10.5-8 6-13.2z"
+                />
+              </svg>
+            </span>
           </span>
-        </span>
-      </button>
+        </button>
+      </div>
     </div>
   </div>
 </div>

@@ -47,11 +47,13 @@ export interface SenderProps extends Pick<TextareaProps, 'placeholder' | 'onKeyP
   onKeyDown?: React.KeyboardEventHandler<any>;
   components?: SenderComponents;
   styles?: {
+    prefix?: React.CSSProperties;
     input?: React.CSSProperties;
     actions?: React.CSSProperties;
   };
   rootClassName?: string;
   classNames?: {
+    prefix?: string;
     input?: string;
     actions?: string;
   };
@@ -257,7 +259,18 @@ const Sender: React.FC<SenderProps> & {
 
       <div className={`${prefixCls}-content`}>
         {/* Prefix */}
-        {prefix && <div className={`${prefixCls}-prefix`}>{prefix}</div>}
+        {prefix && (
+          <div
+            className={classnames(
+              `${prefixCls}-prefix`,
+              contextConfig.classNames.prefix,
+              classNames.prefix,
+            )}
+            style={{ ...contextConfig.styles.prefix, ...styles.prefix }}
+          >
+            {prefix}
+          </div>
+        )}
 
         {/* Input */}
         <InputTextArea

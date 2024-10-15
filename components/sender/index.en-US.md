@@ -36,6 +36,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | defaultValue | Default value of input | string | - | - |
 | disabled | Whether to disable | boolean | false | - |
 | loading | Whether it is loading | boolean | false | - |
+| prefix | Prefix content | ReactNode | - | - |
 | rootClassName | Root element class name | string | - | - |
 | styles | Semantic DOM style | [See below](#semantic-dom) | - | - |
 | submitType | Submit type | SubmitType | `enter` \| `shiftEnter` | - |
@@ -43,6 +44,15 @@ Common props ref：[Common props](/docs/react/common-props)
 | onSubmit | Callback when click send button | (message: string) => void | - | - |
 | onChange | Callback when input value changes | (value: string) => void | - | - |
 | onCancel | Callback when click cancel button | () => void | - | - |
+
+### Sender.Header
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| children | Panel content | ReactNode | - | - |
+| open | Whether to expand | boolean | - | - |
+| title | Title content | ReactNode | - | - |
+| onOpenChange | Callback when the expansion state changes | (open: boolean) => void | - | - |
 
 ## Semantic DOM
 

@@ -35,7 +35,7 @@ const genSenderHeaderStyle: GenerateStyle<SenderToken> = (token) => {
             .join(','),
           overflow: 'hidden',
 
-          '&-enter-prepare, &-enter-start, &-leave-active': {
+          '&-enter-start, &-leave-active': {
             borderBottomColor: 'transparent',
           },
 
