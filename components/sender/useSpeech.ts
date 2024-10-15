@@ -9,6 +9,8 @@ if (!SpeechRecognition && typeof window !== 'undefined') {
 }
 
 export default function useSpeech(onSpeech: (transcript: string) => void) {
+  const onEventSpeech = useEvent(onSpeech);
+
   // ======================== Speech Permission ========================
   const [permissionState, setPermissionState] = React.useState<PermissionState | null>(null);
 
@@ -59,7 +61,7 @@ export default function useSpeech(onSpeech: (transcript: string) => void) {
 
       recognition.onresult = (event: SpeechRecognitionResult) => {
         const transcript = (event as any).results?.[0]?.[0]?.transcript;
-        onSpeech(transcript);
+        onEventSpeech(transcript);
       };
 
       recognitionRef.current = recognition;

@@ -136,7 +136,9 @@ const Sender: React.FC<SenderProps> = (props) => {
   };
 
   // ============================ Speech ============================
-  const [speechPermission, triggerSpeech, speechRecording] = useSpeech(triggerValueChange);
+  const [speechPermission, triggerSpeech, speechRecording] = useSpeech((transcript) => {
+    triggerValueChange(`${innerValue} ${transcript}`);
+  });
 
   // ========================== Components ==========================
   const InputTextArea = getComponent(components, ['input'], Input.TextArea);
