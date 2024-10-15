@@ -1,9 +1,9 @@
 import React from 'react';
 import { createXRequest } from '../x-tools/x-request';
 
-export type RequestFn<Message = any> = (
+export type RequestFn<Message> = (
   info: {
-    messages?: Message[];
+    messages: Message[];
   } & Partial<XAgentConfigPreset>,
   callbacks: {
     onUpdate: (message: Message) => void;
@@ -15,7 +15,7 @@ export type RequestFn<Message = any> = (
 export interface XAgentConfigPreset {
   baseURL: string;
   key: string;
-  model: 'todo'; // Only provide preset model not string type
+  model: string;
 }
 export interface XAgentConfigCustom<Message> {
   request: RequestFn<Message>;
@@ -26,7 +26,7 @@ export type XAgentConfig<Message> = Partial<XAgentConfigPreset> & XAgentConfigCu
 let uuid = 0;
 
 /** This is a wrap class to avoid developer can get too much on origin object */
-export class XAgent<Message> {
+export class XAgent<Message = string> {
   config: XAgentConfig<Message>;
 
   private requestingMap: Record<number, boolean> = {};
@@ -39,14 +39,7 @@ export class XAgent<Message> {
     delete this.requestingMap[id];
   }
 
-  public request(
-    info: { message: Message; messages?: Message[] },
-    callbacks: {
-      onUpdate: (message: Message) => void;
-      onSuccess: (message: Message) => void;
-      onError: (error: Error) => void;
-    },
-  ) {
+  public request: RequestFn<Message> = (info, callbacks) => {
     const { request } = this.config;
     const { onUpdate, onSuccess, onError } = callbacks;
 
@@ -75,7 +68,7 @@ export class XAgent<Message> {
         }
       },
     });
-  }
+  };
 
   public isRequesting() {
     return Object.keys(this.requestingMap).length > 0;

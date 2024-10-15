@@ -36,7 +36,7 @@ type useXAgent<AgentMessage> = (
 | ------- | -------------- | ------ | ------ | ---- |
 | baseURL | 请求服务端地址 | string | -      |      |
 | key     | 请求秘钥       | string | -      |      |
-| model   | 协议模型       | `TODO` | -      |      |
+| model   | 协议模型       | string | -      |      |
 
 ### XAgentConfigCustom
 

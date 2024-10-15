@@ -35,7 +35,7 @@ Use preset protocol for request, protocol is not implemented yet.
 | -------- | -------------------------- | ------ | ------- | ------- |
 | baseURL  | Request for server address | string | -       |         |
 | key      | Request key                | string | -       |         |
-| model    | Preset protocol model      | `TODO` | -       |         |
+| model    | Preset protocol model      | string | -       |         |
 
 ### XAgentConfigCustom
 
