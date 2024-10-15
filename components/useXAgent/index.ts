@@ -1,24 +1,102 @@
 import React from 'react';
-import XAgent from '../x-tools/x-agent';
+import { createXRequest } from '../x-tools/x-request';
 
-import type { XAgentOptions } from '../x-tools/x-agent';
+export type RequestFn<Message = any> = (
+  info: {
+    messages?: Message[];
+  } & Partial<XAgentConfigPreset>,
+  callbacks: {
+    onUpdate: (message: Message) => void;
+    onSuccess: (message: Message) => void;
+    onError: (error: Error) => void;
+  },
+) => void;
 
-export default function useXAgent<Message = string>(
-  baseURL: string,
-  options?: XAgentOptions<Message>,
-) {
-  const agent = React.useMemo(() => new XAgent<Message>(baseURL, options), []);
+export interface XAgentConfigPreset {
+  baseURL: string;
+  key: string;
+  model: 'todo'; // Only provide preset model not string type
+}
+export interface XAgentConfigCustom<Message> {
+  request: RequestFn<Message>;
+}
 
-  const loading = React.useSyncExternalStore(
-    (callback) => {
-      agent.on('loading', callback);
-      return () => agent.remove('loading', callback);
+export type XAgentConfig<Message> = Partial<XAgentConfigPreset> & XAgentConfigCustom<Message>;
+
+let uuid = 0;
+
+/** This is a wrap class to avoid developer can get too much on origin object */
+export class XAgent<Message> {
+  config: XAgentConfig<Message>;
+
+  private requestingMap: Record<number, boolean> = {};
+
+  constructor(config: XAgentConfig<Message>) {
+    this.config = config;
+  }
+
+  private finishRequest(id: number) {
+    delete this.requestingMap[id];
+  }
+
+  public request(
+    info: { message: Message; messages?: Message[] },
+    callbacks: {
+      onUpdate: (message: Message) => void;
+      onSuccess: (message: Message) => void;
+      onError: (error: Error) => void;
     },
-    () => agent.loading,
-  );
+  ) {
+    const { request } = this.config;
+    const { onUpdate, onSuccess, onError } = callbacks;
 
-  return [
-    { loading, model: options?.model },
-    { chat: agent.chat, on: agent.on, remove: agent.remove },
-  ] as const;
+    const id = uuid;
+    uuid += 1;
+    this.requestingMap[id] = true;
+
+    request(info, {
+      // Status should be unique.
+      // One get success or error should not get more message
+      onUpdate: (message) => {
+        if (this.requestingMap[id]) {
+          onUpdate(message);
+        }
+      },
+      onSuccess: (message) => {
+        if (this.requestingMap[id]) {
+          onSuccess(message);
+          this.finishRequest(id);
+        }
+      },
+      onError: (error) => {
+        if (this.requestingMap[id]) {
+          onError(error);
+          this.finishRequest(id);
+        }
+      },
+    });
+  }
+
+  public isRequesting() {
+    return Object.keys(this.requestingMap).length > 0;
+  }
+}
+
+export default function useXAgent<Message = string>(config: XAgentConfig<Message>) {
+  const { request, ...restConfig } = config;
+  return React.useMemo(
+    () =>
+      [
+        new XAgent<Message>({
+          request:
+            request ||
+            createXRequest({
+              baseURL: restConfig.baseURL,
+              model: restConfig.model,
+            }),
+          ...restConfig,
+        }),
+      ] as const,
+    [],
+  );
 }
