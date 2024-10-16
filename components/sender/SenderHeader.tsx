@@ -21,6 +21,7 @@ export interface SenderHeaderProps {
   style?: React.CSSProperties;
   classNames?: Partial<Record<SemanticType, string>>;
   styles?: Partial<Record<SemanticType, React.CSSProperties>>;
+  closable?: boolean;
 }
 
 const collapseHeight: MotionEventHandler = () => ({
@@ -40,6 +41,7 @@ export default function SenderHeader(props: SenderHeaderProps) {
     style,
     classNames: classes = {},
     styles = {},
+    closable,
   } = props;
 
   const { prefixCls } = React.useContext(SendHeaderContext);
@@ -68,29 +70,31 @@ export default function SenderHeader(props: SenderHeaderProps) {
             }}
           >
             {/* Header */}
-            <div
-              className={
-                // We follow antd naming standard here.
-                // So the header part is use `-header` suffix.
-                // Though its little bit weird for double `-header`.
-                classNames(`${headerCls}-header`, classes.header)
-              }
-              style={{
-                ...styles.header,
-              }}
-            >
-              <div className={`${headerCls}-title`}>{title}</div>
-              <div className={`${headerCls}-close`}>
-                <Button
-                  type="text"
-                  icon={<CloseOutlined />}
-                  size="small"
-                  onClick={() => {
-                    onOpenChange?.(!open);
-                  }}
-                />
+            {closable !== false && (
+              <div
+                className={
+                  // We follow antd naming standard here.
+                  // So the header part is use `-header` suffix.
+                  // Though its little bit weird for double `-header`.
+                  classNames(`${headerCls}-header`, classes.header)
+                }
+                style={{
+                  ...styles.header,
+                }}
+              >
+                <div className={`${headerCls}-title`}>{title}</div>
+                <div className={`${headerCls}-close`}>
+                  <Button
+                    type="text"
+                    icon={<CloseOutlined />}
+                    size="small"
+                    onClick={() => {
+                      onOpenChange?.(!open);
+                    }}
+                  />
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Content */}
             {children && (

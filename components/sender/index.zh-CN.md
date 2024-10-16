@@ -52,6 +52,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*8yArQ43EGccAAA
 | 属性         | 说明               | 类型                    | 默认值 | 版本 |
 | ------------ | ------------------ | ----------------------- | ------ | ---- |
 | children     | 面板内容           | ReactNode               | -      | -    |
+| closable     | 是否可关闭         | boolean                 | true   | -    |
 | open         | 是否展开           | boolean                 | -      | -    |
 | title        | 标题               | ReactNode               | -      | -    |
 | onOpenChange | 展开状态改变的回调 | (open: boolean) => void | -      | -    |

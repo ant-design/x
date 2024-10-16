@@ -51,6 +51,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | children | Panel content | ReactNode | - | - |
+| closable | Whether to close | boolean | true | - |
 | open | Whether to expand | boolean | - | - |
 | title | Title content | ReactNode | - | - |
 | onOpenChange | Callback when the expansion state changes | (open: boolean) => void | - | - |
