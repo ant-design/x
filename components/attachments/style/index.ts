@@ -20,14 +20,28 @@ const genAttachmentsStyle: GenerateStyle<AttachmentsToken> = (token) => {
       position: 'absolute',
       inset: 0,
       zIndex: token.zIndexPopupBase,
+      boxSizing: 'border-box',
+
+      '&-on-body': {
+        position: 'fixed',
+        inset: 0,
+      },
     },
 
     // ============================== Placeholder ==============================
     [placeholderCls]: {
-      width: '100%',
       height: '100%',
       background: token.colorBgBlur,
       backdropFilter: 'blur(10px)',
+      borderRadius: token.borderRadius,
+      borderWidth: token.lineWidthBold,
+      borderStyle: 'dashed',
+      borderColor: 'transparent',
+      boxSizing: 'border-box',
+
+      [`&${placeholderCls}-drag-in`]: {
+        borderColor: token.colorPrimaryHover,
+      },
 
       [`${placeholderCls}-icon`]: {
         fontSize: token.fontSizeHeading1,

@@ -1,6 +1,6 @@
 import { CloudUploadOutlined } from '@ant-design/icons';
 import { Attachments, type AttachmentsProps } from '@ant-design/x';
-import { App, Button, Flex, Result, Space, Switch, theme } from 'antd';
+import { App, Button, Flex, GetProp, Result, Space, Switch, theme } from 'antd';
 import React from 'react';
 
 const Demo = () => {
@@ -8,12 +8,12 @@ const Demo = () => {
 
   const { token } = theme.useToken();
 
-  const [items, setItems] = React.useState<AttachmentsProps['items']>([]);
+  const [items, setItems] = React.useState<GetProp<AttachmentsProps, 'items'>>([]);
 
   const sharedBorderStyle: React.CSSProperties = {
-    border: `${token.lineWidthBold}px solid ${token.colorBorderSecondary}`,
     borderRadius: token.borderRadius,
     overflow: 'hidden',
+    background: token.colorBgContainer,
   };
 
   const sharedAttachmentProps: AttachmentsProps = {
@@ -26,13 +26,20 @@ const Demo = () => {
   };
 
   return (
-    <Flex vertical gap="middle">
+    <Flex
+      vertical
+      gap="middle"
+      style={{
+        padding: token.padding,
+        background: token.colorBgContainerDisabled,
+      }}
+    >
       <div style={sharedBorderStyle}>
         <Attachments
           {...sharedAttachmentProps}
           placeholder={{
             icon: <CloudUploadOutlined />,
-            title: 'Drag & Drop files here',
+            title: 'Click or Drop files here',
             description: 'Support file type: image, video, audio, document, etc.',
           }}
         />
@@ -50,6 +57,8 @@ const Demo = () => {
           }
         />
       </div>
+
+      {!!items.length && <Button onClick={() => setItems([])}>Reset Files</Button>}
     </Flex>
   );
 };

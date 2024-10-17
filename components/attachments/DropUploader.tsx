@@ -70,9 +70,13 @@ export default function DropUploader(props: DropUploaderProps) {
     return null;
   }
 
+  const areaCls = `${prefixCls}-drop-area`;
+
   return createPortal(
     <div
-      className={classnames(`${prefixCls}-drop-area`, className)}
+      className={classnames(areaCls, className, {
+        [`${areaCls}-on-body`]: container.tagName === 'BODY',
+      })}
       style={{
         display: showArea ? 'block' : 'none',
       }}

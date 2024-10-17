@@ -22,6 +22,26 @@ export default function Placeholder(props: PlaceholderProps) {
 
   const placeholderConfig = (placeholder || {}) as PlaceholderConfig;
 
+  // ============================= Drag =============================
+  const [dragIn, setDragIn] = React.useState(false);
+
+  const onDragEnter = () => {
+    setDragIn(true);
+  };
+
+  const onDragLeave = (e: React.DragEvent) => {
+    // Leave the div should end
+    if ((e.currentTarget as HTMLElement).contains(e.relatedTarget as HTMLElement)) {
+      return;
+    }
+    setDragIn(false);
+  };
+
+  const onDrop = () => {
+    setDragIn(false);
+  };
+
+  // ============================ Render ============================
   const node = React.isValidElement(placeholder) ? (
     placeholder
   ) : (
@@ -39,7 +59,14 @@ export default function Placeholder(props: PlaceholderProps) {
   );
 
   return (
-    <div className={classNames(placeholderCls, className)}>
+    <div
+      className={classNames(placeholderCls, className, {
+        [`${placeholderCls}-drag-in`]: dragIn,
+      })}
+      onDragEnter={onDragEnter}
+      onDragLeave={onDragLeave}
+      onDrop={onDrop}
+    >
       <Upload.Dragger
         showUploadList={false}
         {...upload}
