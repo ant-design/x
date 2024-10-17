@@ -20,6 +20,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*8yArQ43EGccAAA
 <code src="./demo/submitType.tsx">Submit type</code>
 <code src="./demo/speech.tsx">Speech input</code>
 <code src="./demo/actions.tsx">Custom actions</code>
+<code src="./demo/header.tsx">Header panel</code>
 <code src="./demo/send-style.tsx">Adjust style</code>
 
 ## API
@@ -37,6 +38,8 @@ Common props ref：[Common props](/docs/react/common-props)
 | defaultValue | Default value of input | string | - | - |
 | disabled | Whether to disable | boolean | false | - |
 | loading | Whether it is loading | boolean | false | - |
+| header | Header panel | ReactNode | - | - |
+| prefix | Prefix content | ReactNode | - | - |
 | rootClassName | Root element class name | string | - | - |
 | styles | Semantic DOM style | [See below](#semantic-dom) | - | - |
 | submitType | Submit type | SubmitType | `enter` \| `shiftEnter` | - |
@@ -44,6 +47,16 @@ Common props ref：[Common props](/docs/react/common-props)
 | onSubmit | Callback when click send button | (message: string) => void | - | - |
 | onChange | Callback when input value changes | (value: string) => void | - | - |
 | onCancel | Callback when click cancel button | () => void | - | - |
+
+### Sender.Header
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| children | Panel content | ReactNode | - | - |
+| closable | Whether to close | boolean | true | - |
+| open | Whether to expand | boolean | - | - |
+| title | Title content | ReactNode | - | - |
+| onOpenChange | Callback when the expansion state changes | (open: boolean) => void | - | - |
 
 ## Semantic DOM
 

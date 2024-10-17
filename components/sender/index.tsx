@@ -7,6 +7,7 @@ import getValue from 'rc-util/lib/utils/get';
 import React from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
+import SenderHeader, { SendHeaderContext } from './SenderHeader';
 import { ActionButtonContext } from './components/ActionButton';
 import ClearButton from './components/ClearButton';
 import LoadingButton from './components/LoadingButton';
@@ -46,11 +47,13 @@ export interface SenderProps extends Pick<TextareaProps, 'placeholder' | 'onKeyP
   onKeyDown?: React.KeyboardEventHandler<any>;
   components?: SenderComponents;
   styles?: {
+    prefix?: React.CSSProperties;
     input?: React.CSSProperties;
     actions?: React.CSSProperties;
   };
   rootClassName?: string;
   classNames?: {
+    prefix?: string;
     input?: string;
     actions?: string;
   };
@@ -58,6 +61,8 @@ export interface SenderProps extends Pick<TextareaProps, 'placeholder' | 'onKeyP
   className?: string;
   actions?: React.ReactNode | ActionsRender;
   allowSpeech?: boolean;
+  prefix?: React.ReactNode;
+  header?: React.ReactNode;
 }
 
 function getComponent<T>(
@@ -68,7 +73,9 @@ function getComponent<T>(
   return getValue(components, path) || defaultComponent;
 }
 
-const Sender: React.FC<SenderProps> = (props) => {
+const Sender: React.FC<SenderProps> & {
+  Header: typeof SenderHeader;
+} = (props) => {
   const {
     prefixCls: customizePrefixCls,
     styles = {},
@@ -89,6 +96,8 @@ const Sender: React.FC<SenderProps> = (props) => {
     onKeyDown,
     disabled,
     allowSpeech,
+    prefix,
+    header,
     ...rest
   } = props;
 
@@ -243,46 +252,72 @@ const Sender: React.FC<SenderProps> = (props) => {
       style={{ ...contextConfig.style, ...style }}
       onMouseDown={onInternalMouseDown}
     >
-      <InputTextArea
-        {...inputProps}
-        disabled={disabled}
-        style={{ ...contextConfig.styles.input, ...styles.input }}
-        className={classnames(inputCls, contextConfig.classNames.input, classNames.input)}
-        autoSize={{ maxRows: 8 }}
-        value={innerValue}
-        onChange={(e) => {
-          triggerValueChange((e.target as HTMLTextAreaElement).value);
-        }}
-        onPressEnter={onInternalKeyPress}
-        onCompositionStart={onInternalCompositionStart}
-        onCompositionEnd={onInternalCompositionEnd}
-        onKeyDown={onKeyDown}
-        readOnly={loading}
-        variant="borderless"
-      />
+      {/* Header */}
+      {header && (
+        <SendHeaderContext.Provider value={{ prefixCls }}>{header}</SendHeaderContext.Provider>
+      )}
 
-      {/* Action List */}
-      <div
-        className={classnames(actionListCls, contextConfig.classNames.actions, classNames.actions)}
-        style={{ ...contextConfig.styles.actions, ...styles.actions }}
-      >
-        <ActionButtonContext.Provider
-          value={{
-            prefixCls: actionBtnCls,
-            onSend: triggerSend,
-            onSendDisabled: !innerValue,
-            onClear: triggerClear,
-            onClearDisabled: !innerValue,
-            onCancel,
-            onCancelDisabled: !loading,
-            onSpeech: triggerSpeech,
-            onSpeechDisabled: !speechPermission,
-            speechRecording,
-            disabled,
+      <div className={`${prefixCls}-content`}>
+        {/* Prefix */}
+        {prefix && (
+          <div
+            className={classnames(
+              `${prefixCls}-prefix`,
+              contextConfig.classNames.prefix,
+              classNames.prefix,
+            )}
+            style={{ ...contextConfig.styles.prefix, ...styles.prefix }}
+          >
+            {prefix}
+          </div>
+        )}
+
+        {/* Input */}
+        <InputTextArea
+          {...inputProps}
+          disabled={disabled}
+          style={{ ...contextConfig.styles.input, ...styles.input }}
+          className={classnames(inputCls, contextConfig.classNames.input, classNames.input)}
+          autoSize={{ maxRows: 8 }}
+          value={innerValue}
+          onChange={(e) => {
+            triggerValueChange((e.target as HTMLTextAreaElement).value);
           }}
+          onPressEnter={onInternalKeyPress}
+          onCompositionStart={onInternalCompositionStart}
+          onCompositionEnd={onInternalCompositionEnd}
+          onKeyDown={onKeyDown}
+          readOnly={loading}
+          variant="borderless"
+        />
+
+        {/* Action List */}
+        <div
+          className={classnames(
+            actionListCls,
+            contextConfig.classNames.actions,
+            classNames.actions,
+          )}
+          style={{ ...contextConfig.styles.actions, ...styles.actions }}
         >
-          {actionNode}
-        </ActionButtonContext.Provider>
+          <ActionButtonContext.Provider
+            value={{
+              prefixCls: actionBtnCls,
+              onSend: triggerSend,
+              onSendDisabled: !innerValue,
+              onClear: triggerClear,
+              onClearDisabled: !innerValue,
+              onCancel,
+              onCancelDisabled: !loading,
+              onSpeech: triggerSpeech,
+              onSpeechDisabled: !speechPermission,
+              speechRecording,
+              disabled,
+            }}
+          >
+            {actionNode}
+          </ActionButtonContext.Provider>
+        </div>
       </div>
     </div>,
   );
@@ -291,5 +326,7 @@ const Sender: React.FC<SenderProps> = (props) => {
 if (process.env.NODE_ENV !== 'production') {
   Sender.displayName = 'Sender';
 }
+
+Sender.Header = SenderHeader;
 
 export default Sender;
