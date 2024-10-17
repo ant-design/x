@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Attachment, { type PromptsProps } from '..';
+import Attachments, { type PromptsProps } from '..';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
 import { fireEvent, render } from '../../../tests/utils';
@@ -33,8 +33,8 @@ const mockProps: PromptsProps = {
 };
 
 describe('bubble', () => {
-  mountTest(() => <Attachment />);
-  rtlTest(() => <Attachment />);
+  mountTest(() => <Attachments />);
+  rtlTest(() => <Attachments />);
   beforeAll(() => {
     jest.useFakeTimers();
   });
@@ -44,19 +44,19 @@ describe('bubble', () => {
   });
 
   it('should render the title', () => {
-    const { getByText } = render(<Attachment title={mockProps.title} />);
+    const { getByText } = render(<Attachments title={mockProps.title} />);
     const titleElement = getByText(/test title/i);
     expect(titleElement).toBeInTheDocument();
   });
 
   it('should render the correct number of buttons', () => {
-    const { getAllByRole } = render(<Attachment items={mockProps.items} />);
+    const { getAllByRole } = render(<Attachments items={mockProps.items} />);
     const buttons = getAllByRole('button');
     expect(buttons).toHaveLength(mockData.length);
   });
 
   it('should render the labels and descriptions', () => {
-    const { getByText } = render(<Attachment {...mockProps} />);
+    const { getByText } = render(<Attachments {...mockProps} />);
     mockData.forEach((item) => {
       const label = getByText(item.label as string);
       const description = getByText(item.description as string);
@@ -66,20 +66,20 @@ describe('bubble', () => {
   });
 
   it('should call onItemClick when a button is clicked', () => {
-    const { getByText } = render(<Attachment {...mockProps} />);
+    const { getByText } = render(<Attachments {...mockProps} />);
     const button = getByText(/label 1/i);
     fireEvent.click(button);
     expect(mockProps.onItemClick).toHaveBeenCalledWith({ data: mockData[0] });
   });
 
   it('should disable buttons correctly', () => {
-    const { getByText } = render(<Attachment items={mockProps.items} />);
+    const { getByText } = render(<Attachments items={mockProps.items} />);
     const disabledButton = getByText(/label 2/i).closest('button');
     expect(disabledButton).toBeDisabled();
   });
 
   it('should render icons', () => {
-    const { getByText } = render(<Attachment items={mockProps.items} />);
+    const { getByText } = render(<Attachments items={mockProps.items} />);
     mockData.forEach((item) => {
       if (item.icon) {
         const icon = getByText(`Icon ${item.key}`);

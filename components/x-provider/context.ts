@@ -1,6 +1,7 @@
 import React from 'react';
 
 import type { AnyObject } from '../_util/type';
+import { AttachmentsProps } from '../attachments';
 import type { BubbleProps } from '../bubble';
 import type { ConversationsProps } from '../conversations';
 import type { PromptsProps } from '../prompts';
@@ -29,6 +30,7 @@ export interface XComponentsConfig {
   sender?: ComponentStyleConfig<SenderProps>;
   suggestion?: ComponentStyleConfig<SuggestionProps>;
   thoughtChain?: ComponentStyleConfig<ThoughtChainProps>;
+  attachments?: ComponentStyleConfig<AttachmentsProps>;
 }
 
 export interface XProviderProps extends XComponentsConfig {
