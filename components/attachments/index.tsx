@@ -27,7 +27,7 @@ export interface AttachmentsProps extends Omit<UploadProps, 'fileList'> {
   children?: React.ReactElement;
 
   // ============= placeholder =============
-  placeholder?: Pick<PlaceholderProps, 'icon' | 'title' | 'description'>;
+  placeholder?: PlaceholderProps['placeholder'];
 }
 
 const Attachments: React.FC<AttachmentsProps> = (props) => {
@@ -72,7 +72,7 @@ const Attachments: React.FC<AttachmentsProps> = (props) => {
 
   // ============================ Render ============================
   if (children) {
-    return (
+    return wrapCSSVar(
       <>
         <SilentUploader upload={mergedUploadProps}>{children}</SilentUploader>
         <DropUploader
@@ -81,17 +81,24 @@ const Attachments: React.FC<AttachmentsProps> = (props) => {
           className={cssinjsCls}
         >
           <PlaceholderUploader
-            {...placeholder}
+            placeholder={placeholder}
             upload={mergedUploadProps}
             prefixCls={prefixCls}
             className={cssinjsCls}
           />
         </DropUploader>
-      </>
+      </>,
     );
   }
 
-  return wrapCSSVar(<div>2333</div>);
+  return wrapCSSVar(
+    <PlaceholderUploader
+      placeholder={placeholder}
+      upload={mergedUploadProps}
+      prefixCls={prefixCls}
+      className={cssinjsCls}
+    />,
+  );
 };
 
 if (process.env.NODE_ENV !== 'production') {

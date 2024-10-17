@@ -19,6 +19,7 @@ The Prompts component is used to display a predefined set of questions or sugges
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">Basic</code>
+<code src="./demo/placeholder.tsx">Placeholder</code>
 
 ## API
 

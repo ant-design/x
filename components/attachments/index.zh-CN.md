@@ -20,6 +20,7 @@ Attachment 组件用于需要展示一组附件信息集合的场景。
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">基本</code>
+<code src="./demo/placeholder.tsx">占位信息</code>
 
 ## API
 
