@@ -16,6 +16,18 @@ tag: vVERSION
 
 ---
 
+## 1.0.0-alpha.4
+
+`2024-10-17`
+
+- Sender
+  - 🆕 Sender support `speech`, by [@zombieJ](https://github.com/zombieJ) [#154](https://github.com/ant-design/x/pull/154)
+  - 🆕 Sender support Sender.Header, by [@zombieJ](https://github.com/zombieJ) [#156](https://github.com/ant-design/x/pull/156)
+  - 🆕 Sender style adjust, by [@zombieJ](https://github.com/zombieJ) [#151](https://github.com/ant-design/x/pull/151)
+- 📖 update group config for Components category, by [@YumoImer](https://github.com/YumoImer) [#155](https://github.com/ant-design/x/pull/155)
+- 📖 tweak demo toggle button style , by [@afc163](https://github.com/afc163) [#146](https://github.com/ant-design/x/pull/146)
+- 📖 Update README.md, by [@afc163](https://github.com/afc163) [#142](https://github.com/ant-design/x/pull/142)
+
 ## 1.0.0-alpha.3
 
 `2024-10-10`

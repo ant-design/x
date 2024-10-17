@@ -15,6 +15,18 @@ tag: vVERSION
 
 ---
 
+## 1.0.0-alpha.4
+
+`2024-10-17`
+
+- Sender
+  - 🆕 Sender 支持 `speech` 语音功能，由 [@zombieJ](https://github.com/zombieJ) [#154](https://github.com/ant-design/x/pull/154)
+  - 🆕 Sender 支持 `Sender.Header`，由 [@zombieJ](https://github.com/zombieJ) [#156](https://github.com/ant-design/x/pull/156)
+  - 🆕 Sender 样式调整，由 [@zombieJ](https://github.com/zombieJ) [#151](https://github.com/ant-design/x/pull/151)
+- 📖 更新文档页面下的组配置，由 [@YumoImer](https://github.com/YumoImer) [#155](https://github.com/ant-design/x/pull/155)
+- 📖 调整示例切换按钮样式，由 [@afc163](https://github.com/afc163) [#146](https://github.com/ant-design/x/pull/146)
+- 📖 更新 README.md，由 [@afc163](https://github.com/afc163) [#142](https://github.com/ant-design/x/pull/142)
+
 ## 1.0.0-alpha.3
 
 `2024-10-10`
