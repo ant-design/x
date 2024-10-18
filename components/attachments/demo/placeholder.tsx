@@ -3,12 +3,35 @@ import { Attachments, type AttachmentsProps } from '@ant-design/x';
 import { App, Button, Flex, GetProp, Result, Space, Switch, theme } from 'antd';
 import React from 'react';
 
+const presetFiles: AttachmentsProps['items'] = [
+  {
+    uid: '1',
+    name: 'xxx.png',
+    status: 'uploading',
+    url: 'http://www.baidu.com/xxx.png',
+    percent: 33,
+  },
+  {
+    uid: '2',
+    name: 'yyy.png',
+    status: 'done',
+    url: 'http://www.baidu.com/yyy.png',
+  },
+  {
+    uid: '3',
+    name: 'zzz.png',
+    status: 'error',
+    response: 'Server Error 500', // custom error message to show
+    url: 'http://www.baidu.com/zzz.png',
+  },
+];
+
 const Demo = () => {
   const { message } = App.useApp();
 
   const { token } = theme.useToken();
 
-  const [items, setItems] = React.useState<GetProp<AttachmentsProps, 'items'>>([]);
+  const [items, setItems] = React.useState<GetProp<AttachmentsProps, 'items'>>(presetFiles);
 
   const sharedBorderStyle: React.CSSProperties = {
     borderRadius: token.borderRadius,
@@ -58,7 +81,19 @@ const Demo = () => {
         />
       </div>
 
-      {!!items.length && <Button onClick={() => setItems([])}>Reset Files</Button>}
+      <Flex gap="middle">
+        <Button
+          style={{ flex: '1 1 50%' }}
+          disabled={!!items.length}
+          type="primary"
+          onClick={() => setItems(presetFiles)}
+        >
+          Fill Files
+        </Button>
+        <Button style={{ flex: '1 1 50%' }} disabled={!items.length} onClick={() => setItems([])}>
+          Reset Files
+        </Button>
+      </Flex>
     </Flex>
   );
 };
