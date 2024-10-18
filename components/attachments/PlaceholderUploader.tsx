@@ -11,12 +11,11 @@ export interface PlaceholderConfig {
 export interface PlaceholderProps {
   prefixCls: string;
   placeholder?: PlaceholderConfig | React.ReactElement;
-  className: string;
   upload?: UploadProps;
 }
 
 export default function Placeholder(props: PlaceholderProps) {
-  const { prefixCls, placeholder = {}, className, upload } = props;
+  const { prefixCls, placeholder = {}, upload } = props;
 
   const placeholderCls = `${prefixCls}-placeholder`;
 
@@ -60,7 +59,7 @@ export default function Placeholder(props: PlaceholderProps) {
 
   return (
     <div
-      className={classNames(placeholderCls, className, {
+      className={classNames(placeholderCls, {
         [`${placeholderCls}-drag-in`]: dragIn,
       })}
       onDragEnter={onDragEnter}

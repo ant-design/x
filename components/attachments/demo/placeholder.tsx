@@ -6,20 +6,21 @@ import React from 'react';
 const presetFiles: AttachmentsProps['items'] = [
   {
     uid: '1',
-    name: 'xxx.png',
+    name: 'uploading file.xlsx',
     status: 'uploading',
     url: 'http://www.baidu.com/xxx.png',
     percent: 33,
   },
   {
     uid: '2',
-    name: 'yyy.png',
+    name: 'uploaded file.docx',
     status: 'done',
+    size: 123456,
     url: 'http://www.baidu.com/yyy.png',
   },
   {
     uid: '3',
-    name: 'zzz.png',
+    name: 'upload error with long text file name.zip',
     status: 'error',
     response: 'Server Error 500', // custom error message to show
     url: 'http://www.baidu.com/zzz.png',
@@ -42,8 +43,7 @@ const Demo = () => {
   const sharedAttachmentProps: AttachmentsProps = {
     beforeUpload: () => false,
     items,
-    onChange: ({ file, fileList }) => {
-      message.info(`Mock upload: ${file.name}`);
+    onChange: ({ fileList }) => {
       setItems(fileList);
     },
   };

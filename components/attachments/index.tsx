@@ -6,8 +6,9 @@ import React from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 
-import { useMergedState } from 'rc-util';
-import DropUploader from './DropUploader';
+import { useEvent, useMergedState } from 'rc-util';
+import DropArea from './DropArea';
+import FileList from './FileList';
 import PlaceholderUploader, { PlaceholderProps } from './PlaceholderUploader';
 import SilentUploader from './SilentUploader';
 import useStyle from './style';
@@ -61,44 +62,64 @@ const Attachments: React.FC<AttachmentsProps> = (props) => {
     value: items,
   });
 
+  const triggerChange: GetProp<AttachmentsProps, 'onChange'> = useEvent((info) => {
+    setFileList(info.fileList);
+    onChange?.(info);
+  });
+
   const mergedUploadProps: UploadProps = {
     ...uploadProps,
     fileList,
-    onChange: (info) => {
-      setFileList(info.fileList);
-      onChange?.(info);
-    },
+    onChange: triggerChange,
+  };
+
+  const onItemRemove = (item: Attachment) => {
+    const newFileList = fileList.filter((fileItem) => fileItem.uid !== item.uid);
+    triggerChange({
+      file: item,
+      fileList: newFileList,
+    });
   };
 
   // ============================ Render ============================
+  let renderChildren: React.ReactElement;
+
   if (children) {
-    return wrapCSSVar(
+    renderChildren = (
       <>
         <SilentUploader upload={mergedUploadProps}>{children}</SilentUploader>
-        <DropUploader
-          getDropContainer={getDropContainer}
-          prefixCls={prefixCls}
-          className={cssinjsCls}
-        >
+        <DropArea getDropContainer={getDropContainer} prefixCls={prefixCls} className={cssinjsCls}>
           <PlaceholderUploader
             placeholder={placeholder}
             upload={mergedUploadProps}
             prefixCls={prefixCls}
-            className={cssinjsCls}
           />
-        </DropUploader>
-      </>,
+        </DropArea>
+      </>
+    );
+  } else {
+    return (
+      <div
+        className={classnames(prefixCls, className, {
+          [`${prefixCls}-rtl`]: direction === 'rtl',
+        })}
+        style={style}
+        dir={direction || 'ltr'}
+      >
+        {fileList.length ? (
+          <FileList prefixCls={prefixCls} items={fileList} onRemove={onItemRemove} />
+        ) : (
+          <PlaceholderUploader
+            placeholder={placeholder}
+            upload={mergedUploadProps}
+            prefixCls={prefixCls}
+          />
+        )}
+      </div>
     );
   }
 
-  return wrapCSSVar(
-    <PlaceholderUploader
-      placeholder={placeholder}
-      upload={mergedUploadProps}
-      prefixCls={prefixCls}
-      className={cssinjsCls}
-    />,
-  );
+  return wrapCSSVar(renderChildren);
 };
 
 if (process.env.NODE_ENV !== 'production') {

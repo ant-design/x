@@ -9,7 +9,7 @@ export interface DropUploaderProps {
   children?: React.ReactNode;
 }
 
-export default function DropUploader(props: DropUploaderProps) {
+export default function DropArea(props: DropUploaderProps) {
   const { getDropContainer, className, prefixCls, children } = props;
 
   const [container, setContainer] = React.useState<HTMLElement | null | undefined>();
