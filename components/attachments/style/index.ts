@@ -9,7 +9,7 @@ export interface ComponentToken {}
 export interface AttachmentsToken extends FullToken<'Attachments'> {}
 
 const genAttachmentsStyle: GenerateStyle<AttachmentsToken> = (token) => {
-  const { componentCls, calc } = token;
+  const { componentCls, calc, antCls } = token;
 
   const dropAreaCls = `${componentCls}-drop-area`;
   const placeholderCls = `${componentCls}-placeholder`;
@@ -27,6 +27,10 @@ const genAttachmentsStyle: GenerateStyle<AttachmentsToken> = (token) => {
         position: 'fixed',
         inset: 0,
       },
+
+      [placeholderCls]: {
+        padding: 0,
+      },
     },
 
     '&': {
@@ -40,23 +44,35 @@ const genAttachmentsStyle: GenerateStyle<AttachmentsToken> = (token) => {
         borderStyle: 'dashed',
         borderColor: 'transparent',
         boxSizing: 'border-box',
+        padding: token.padding,
+
+        [`${antCls}-upload-wrapper ${antCls}-upload${antCls}-upload-btn`]: {
+          padding: 0,
+        },
 
         [`&${placeholderCls}-drag-in`]: {
           borderColor: token.colorPrimaryHover,
         },
 
+        [`${placeholderCls}-inner`]: {
+          gap: calc(token.paddingXXS).div(2).equal(),
+        },
         [`${placeholderCls}-icon`]: {
-          fontSize: token.fontSizeHeading1,
+          fontSize: token.fontSizeHeading2,
           lineHeight: 1,
         },
         [`${placeholderCls}-title${placeholderCls}-title`]: {
           margin: 0,
+          fontSize: token.fontSize,
+          lineHeight: token.lineHeight,
         },
         [`${placeholderCls}-description`]: {},
       },
     },
 
     [componentCls]: {
+      position: 'relative',
+
       // =============================== File List ===============================
       [fileListCls]: {
         display: 'flex',
@@ -159,6 +175,31 @@ const genAttachmentsStyle: GenerateStyle<AttachmentsToken> = (token) => {
 
             [`${fileListCls}-card-desc`]: {
               color: token.colorError,
+            },
+          },
+
+          // Motion
+          '&-motion': {
+            overflow: 'hidden',
+            transition: ['opacity', 'width', 'margin', 'padding']
+              .map((prop) => `${prop} ${token.motionDurationSlow}`)
+              .join(','),
+
+            [`${fileListCls}-card-remove`]: {
+              display: 'none !important',
+            },
+
+            '&-appear-start': {
+              width: 0,
+              transition: 'none',
+            },
+
+            '&-leave-active': {
+              opacity: 0,
+              width: 0,
+              paddingInline: 0,
+              borderInlineWidth: 0,
+              marginInlineEnd: calc(token.paddingSM).mul(-1).equal(),
             },
           },
         },

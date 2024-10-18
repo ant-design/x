@@ -17,6 +17,8 @@ export interface FileListCardProps {
   prefixCls: string;
   item: Attachment;
   onRemove: (item: Attachment) => void;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 const EMPTY = '\u00A0';
@@ -78,8 +80,8 @@ function getSize(size: number) {
   return `${retSize.toFixed(0)} ${units[unitIndex]}`;
 }
 
-export default function FileListCard(props: FileListCardProps) {
-  const { prefixCls, item, onRemove } = props;
+function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) {
+  const { prefixCls, item, onRemove, className, style } = props;
   const { name, size, percent, status } = item;
   const cardCls = `${prefixCls}-card`;
 
@@ -116,7 +118,11 @@ export default function FileListCard(props: FileListCardProps) {
 
   // ============================= Render =============================
   return (
-    <div className={classNames(cardCls, `${cardCls}-status-${status}`)}>
+    <div
+      className={classNames(cardCls, `${cardCls}-status-${status}`, className)}
+      style={style}
+      ref={ref}
+    >
       <div className={`${cardCls}-icon`} style={{ color: iconColor }}>
         {icon}
       </div>
@@ -144,3 +150,5 @@ export default function FileListCard(props: FileListCardProps) {
     </div>
   );
 }
+
+export default React.forwardRef(FileListCard);

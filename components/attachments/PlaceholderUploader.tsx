@@ -44,7 +44,7 @@ export default function Placeholder(props: PlaceholderProps) {
   const node = React.isValidElement(placeholder) ? (
     placeholder
   ) : (
-    <Flex align="center" justify="center" vertical gap="small">
+    <Flex align="center" justify="center" vertical className={`${placeholderCls}-inner`}>
       <Typography.Text className={`${placeholderCls}-icon`}>
         {placeholderConfig.icon}
       </Typography.Text>

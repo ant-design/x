@@ -76,6 +76,7 @@ const Demo = () => {
               title="Custom Placeholder Node"
               icon={<CloudUploadOutlined />}
               extra={<Button type="primary">Do Upload</Button>}
+              style={{ padding: 0 }}
             />
           }
         />

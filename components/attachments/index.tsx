@@ -52,6 +52,9 @@ const Attachments: React.FC<AttachmentsProps> = (props) => {
   // ===================== Component Config =========================
   const contextConfig = useXComponentConfig('attachments');
 
+  // ============================= Ref =============================
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
   // ============================ Style ============================
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
 
@@ -84,16 +87,20 @@ const Attachments: React.FC<AttachmentsProps> = (props) => {
   // ============================ Render ============================
   let renderChildren: React.ReactElement;
 
+  const placeholderNode = (
+    <PlaceholderUploader
+      placeholder={placeholder}
+      upload={mergedUploadProps}
+      prefixCls={prefixCls}
+    />
+  );
+
   if (children) {
     renderChildren = (
       <>
         <SilentUploader upload={mergedUploadProps}>{children}</SilentUploader>
         <DropArea getDropContainer={getDropContainer} prefixCls={prefixCls} className={cssinjsCls}>
-          <PlaceholderUploader
-            placeholder={placeholder}
-            upload={mergedUploadProps}
-            prefixCls={prefixCls}
-          />
+          {placeholderNode}
         </DropArea>
       </>
     );
@@ -105,15 +112,21 @@ const Attachments: React.FC<AttachmentsProps> = (props) => {
         })}
         style={style}
         dir={direction || 'ltr'}
+        ref={containerRef}
       >
         {fileList.length ? (
-          <FileList prefixCls={prefixCls} items={fileList} onRemove={onItemRemove} />
+          <>
+            <FileList prefixCls={prefixCls} items={fileList} onRemove={onItemRemove} />
+            <DropArea
+              getDropContainer={() => containerRef.current}
+              prefixCls={prefixCls}
+              className={cssinjsCls}
+            >
+              {placeholderNode}
+            </DropArea>
+          </>
         ) : (
-          <PlaceholderUploader
-            placeholder={placeholder}
-            upload={mergedUploadProps}
-            prefixCls={prefixCls}
-          />
+          placeholderNode
         )}
       </div>
     );
