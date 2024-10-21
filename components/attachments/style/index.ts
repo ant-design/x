@@ -1,4 +1,4 @@
-import { unit } from '@ant-design/cssinjs';
+import { CSSObject, unit } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
@@ -8,12 +8,17 @@ export interface ComponentToken {}
 
 export interface AttachmentsToken extends FullToken<'Attachments'> {}
 
+const anyBoxSizing: CSSObject = {
+  '&, *': {
+    boxSizing: 'border-box',
+  },
+};
+
 const genAttachmentsStyle: GenerateStyle<AttachmentsToken> = (token) => {
   const { componentCls, calc, antCls } = token;
 
   const dropAreaCls = `${componentCls}-drop-area`;
   const placeholderCls = `${componentCls}-placeholder`;
-  const fileListCls = `${componentCls}-list`;
 
   return {
     // ============================== Full Screen ==============================
@@ -21,7 +26,7 @@ const genAttachmentsStyle: GenerateStyle<AttachmentsToken> = (token) => {
       position: 'absolute',
       inset: 0,
       zIndex: token.zIndexPopupBase,
-      boxSizing: 'border-box',
+      ...anyBoxSizing,
 
       '&-on-body': {
         position: 'fixed',
@@ -43,8 +48,8 @@ const genAttachmentsStyle: GenerateStyle<AttachmentsToken> = (token) => {
         borderWidth: token.lineWidthBold,
         borderStyle: 'dashed',
         borderColor: 'transparent',
-        boxSizing: 'border-box',
         padding: token.padding,
+        ...anyBoxSizing,
 
         [`${antCls}-upload-wrapper ${antCls}-upload${antCls}-upload-btn`]: {
           padding: 0,
@@ -69,9 +74,26 @@ const genAttachmentsStyle: GenerateStyle<AttachmentsToken> = (token) => {
         [`${placeholderCls}-description`]: {},
       },
     },
+  };
+};
 
+const genFileListStyle: GenerateStyle<AttachmentsToken> = (token) => {
+  const { componentCls, calc } = token;
+
+  const fileListCls = `${componentCls}-list`;
+  const cardCls = `${fileListCls}-card`;
+
+  const cardHeight = calc(token.fontSize)
+    .mul(token.lineHeight)
+    .mul(2)
+    .add(token.paddingSM)
+    .add(token.paddingSM)
+    .equal();
+
+  return {
     [componentCls]: {
       position: 'relative',
+      ...anyBoxSizing,
 
       // =============================== File List ===============================
       [fileListCls]: {
@@ -84,44 +106,22 @@ const genAttachmentsStyle: GenerateStyle<AttachmentsToken> = (token) => {
         paddingBlock: token.paddingSM,
         paddingInline: token.padding,
 
-        '&-card': {
-          padding: calc(token.paddingSM).sub(token.lineWidth).equal(),
-          paddingInlineStart: calc(token.padding).add(token.lineWidth).equal(),
+        [cardCls]: {
           borderRadius: token.borderRadius,
+          position: 'relative',
           background: token.colorFillContent,
           borderWidth: token.lineWidth,
           borderStyle: 'solid',
           borderColor: 'transparent',
-          display: 'flex',
-          flexWrap: 'nowrap',
-          gap: token.paddingXS,
-          alignItems: 'flex-start',
-          width: 236,
-          position: 'relative',
 
-          // Icon
-          '&-icon': {
-            fontSize: calc(token.fontSizeLG).mul(2).equal(),
-            lineHeight: 1,
-            paddingTop: calc(token.paddingXXS).mul(1.5).equal(),
-            flex: 'none',
-          },
-
-          // Content
-          '&-content': {
-            flex: 'auto',
-            minWidth: 0,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'stretch',
-          },
-
-          '&-name, &-desc': {
+          // =============================== Desc ================================
+          [`${cardCls}-name,${cardCls}-desc`]: {
             display: 'flex',
             flexWrap: 'nowrap',
+            maxWidth: '100%',
           },
 
-          '&-ellipsis-prefix': {
+          [`${cardCls}-ellipsis-prefix`]: {
             flex: '0 1 auto',
             minWidth: 0,
             overflow: 'hidden',
@@ -129,15 +129,88 @@ const genAttachmentsStyle: GenerateStyle<AttachmentsToken> = (token) => {
             whiteSpace: 'nowrap',
           },
 
-          '&-ellipsis-suffix': {
+          [`${cardCls}-ellipsis-suffix`]: {
             flex: 'none',
           },
 
-          '&-desc': {
-            color: token.colorTextTertiary,
+          // ============================= Overview ==============================
+          '&-type-overview': {
+            padding: calc(token.paddingSM).sub(token.lineWidth).equal(),
+            paddingInlineStart: calc(token.padding).add(token.lineWidth).equal(),
+            display: 'flex',
+            flexWrap: 'nowrap',
+            gap: token.paddingXS,
+            alignItems: 'flex-start',
+            width: 236,
+
+            // Icon
+            [`${cardCls}-icon`]: {
+              fontSize: calc(token.fontSizeLG).mul(2).equal(),
+              lineHeight: 1,
+              paddingTop: calc(token.paddingXXS).mul(1.5).equal(),
+              flex: 'none',
+            },
+
+            // Content
+            [`${cardCls}-content`]: {
+              flex: 'auto',
+              minWidth: 0,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'stretch',
+            },
+
+            [`${cardCls}-desc`]: {
+              color: token.colorTextTertiary,
+            },
           },
 
-          // Remove
+          // ============================== Preview ==============================
+          '&-type-preview': {
+            width: cardHeight,
+            height: cardHeight,
+            lineHeight: 1,
+
+            [`&:not(${fileListCls}-card-status-error)`]: {
+              border: 0,
+            },
+
+            // Img
+            img: {
+              width: '100%',
+              height: '100%',
+              verticalAlign: 'top',
+              objectFit: 'cover',
+              borderRadius: 'inherit',
+            },
+
+            // Mask
+            [`${cardCls}-img-mask`]: {
+              position: 'absolute',
+              inset: 0,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              background: `rgba(0, 0, 0, ${token.opacityLoading})`,
+              borderRadius: 'inherit',
+            },
+
+            // Error
+            [`&${fileListCls}-card-status-error`]: {
+              [`img, ${cardCls}-img-mask`]: {
+                borderRadius: calc(token.borderRadius).sub(token.lineWidth).equal(),
+              },
+
+              [`${cardCls}-desc`]: {
+                paddingInline: token.paddingXXS,
+              },
+            },
+
+            // Progress
+            [`${cardCls}-progress`]: {},
+          },
+
+          // ============================ Remove Icon ============================
           '&-remove': {
             position: 'absolute',
             top: 0,
@@ -169,7 +242,7 @@ const genAttachmentsStyle: GenerateStyle<AttachmentsToken> = (token) => {
             display: 'block',
           },
 
-          // Status
+          // ============================== Status ===============================
           '&-status-error': {
             borderColor: token.colorError,
 
@@ -178,7 +251,7 @@ const genAttachmentsStyle: GenerateStyle<AttachmentsToken> = (token) => {
             },
           },
 
-          // Motion
+          // ============================== Motion ===============================
           '&-motion': {
             overflow: 'hidden',
             transition: ['opacity', 'width', 'margin', 'padding']
@@ -214,7 +287,7 @@ export default genStyleHooks(
   'Attachments',
   (token) => {
     const compToken = mergeToken<AttachmentsToken>(token, {});
-    return genAttachmentsStyle(compToken);
+    return [genAttachmentsStyle(compToken), genFileListStyle(compToken)];
   },
   prepareComponentToken,
 );

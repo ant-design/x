@@ -31,7 +31,6 @@ export default function DropArea(props: DropUploaderProps) {
     if (container) {
       const onDragEnter = (e: DragEvent) => {
         setShowArea(true);
-        console.log('enter');
       };
 
       // Should prevent default to make drop event work
@@ -42,14 +41,11 @@ export default function DropArea(props: DropUploaderProps) {
       const onDragLeave = (e: DragEvent) => {
         if (!e.relatedTarget) {
           setShowArea(false);
-          console.log('leave');
         }
       };
       const onDrop = (e: DragEvent) => {
         setShowArea(false);
         e.preventDefault();
-
-        console.log('drop', e.defaultPrevented);
       };
 
       document.addEventListener('dragenter', onDragEnter);

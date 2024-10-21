@@ -9,7 +9,7 @@ const presetFiles: AttachmentsProps['items'] = [
     name: 'uploading file.xlsx',
     status: 'uploading',
     url: 'http://www.baidu.com/xxx.png',
-    percent: 33,
+    percent: 93,
   },
   {
     uid: '2',
@@ -24,6 +24,30 @@ const presetFiles: AttachmentsProps['items'] = [
     status: 'error',
     response: 'Server Error 500', // custom error message to show
     url: 'http://www.baidu.com/zzz.png',
+  },
+  {
+    uid: '4',
+    name: 'image uploading preview.png',
+    status: 'uploading',
+    percent: 33,
+    thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+    url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+  },
+  {
+    uid: '5',
+    name: 'image done preview.png',
+    status: 'done',
+    size: 123456,
+    thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+    url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+  },
+  {
+    uid: '6',
+    name: 'image error preview.png',
+    status: 'error',
+    response: 'Server Error 500', // custom error message to show
+    thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+    url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
   },
 ];
 
@@ -44,6 +68,7 @@ const Demo = () => {
     beforeUpload: () => false,
     items,
     onChange: ({ fileList }) => {
+      console.log('onChange:', fileList);
       setItems(fileList);
     },
   };

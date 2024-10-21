@@ -12,6 +12,8 @@ import {
 import classNames from 'classnames';
 import React from 'react';
 import type { Attachment } from '..';
+import { isImageFileType, previewImage } from '../util';
+import Progress from './Progress';
 
 export interface FileListCardProps {
   prefixCls: string;
@@ -24,6 +26,8 @@ export interface FileListCardProps {
 const EMPTY = '\u00A0';
 
 const DEFAULT_ICON_COLOR = '#8c8c8c';
+
+const IMG_EXTS = ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp', 'svg'];
 
 const PRESET_FILE_ICONS: {
   ext: string[];
@@ -38,7 +42,7 @@ const PRESET_FILE_ICONS: {
   {
     icon: <FileImageFilled />,
     color: DEFAULT_ICON_COLOR,
-    ext: ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp', 'svg'],
+    ext: IMG_EXTS,
   },
   {
     icon: <FileMarkdownFilled />,
@@ -67,6 +71,10 @@ const PRESET_FILE_ICONS: {
   },
 ];
 
+function matchExt(suffix: string, ext: string[]) {
+  return ext.some((e) => suffix.toLowerCase() === `.${e}`);
+}
+
 function getSize(size: number) {
   let retSize = size;
   const units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB'];
@@ -92,6 +100,8 @@ function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) 
     return match ? [match[1], nameStr.slice(match[1].length)] : [nameStr, ''];
   }, [name]);
 
+  const isImg = React.useMemo(() => matchExt(nameSuffix, IMG_EXTS), [nameSuffix]);
+
   // ============================== Desc ==============================
   const desc = React.useMemo(() => {
     if (status === 'uploading') {
@@ -108,7 +118,7 @@ function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) 
   // ============================== Icon ==============================
   const [icon, iconColor] = React.useMemo(() => {
     for (const { ext, icon, color } of PRESET_FILE_ICONS) {
-      if (ext.some((e) => nameSuffix.toLowerCase() === `.${e}`)) {
+      if (matchExt(nameSuffix, ext)) {
         return [icon, color];
       }
     }
@@ -116,26 +126,83 @@ function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) 
     return [<FileTextFilled key="defaultIcon" />, DEFAULT_ICON_COLOR];
   }, [nameSuffix]);
 
+  // ========================== ImagePreview ==========================
+  const [previewImg, setPreviewImg] = React.useState<string>();
+
+  React.useEffect(() => {
+    if (item.originFileObj) {
+      let synced = true;
+      previewImage(item.originFileObj).then((url) => {
+        if (synced) {
+          setPreviewImg(url);
+        }
+      });
+
+      return () => {
+        synced = false;
+      };
+    }
+    setPreviewImg(undefined);
+  }, [item.originFileObj]);
+
   // ============================= Render =============================
+  let content: React.ReactNode = null;
+
+  if (isImg) {
+    // Preview Image style
+    content = (
+      <>
+        <img alt="preview" src={item.thumbUrl || item.url || previewImg} />
+
+        {status !== 'done' && (
+          <div className={`${cardCls}-img-mask`}>
+            {status === 'uploading' && percent !== undefined && (
+              <Progress percent={percent} prefixCls={cardCls} />
+            )}
+            {status === 'error' && (
+              <div className={`${cardCls}-desc`}>
+                <div className={`${cardCls}-ellipsis-prefix`}>{desc}</div>
+              </div>
+            )}
+          </div>
+        )}
+      </>
+    );
+  } else {
+    // Preview Card style
+    content = (
+      <>
+        <div className={`${cardCls}-icon`} style={{ color: iconColor }}>
+          {icon}
+        </div>
+        <div className={`${cardCls}-content`}>
+          <div className={`${cardCls}-name`}>
+            <div className={`${cardCls}-ellipsis-prefix`}>{namePrefix ?? EMPTY}</div>
+            <div className={`${cardCls}-ellipsis-suffix`}>{nameSuffix}</div>
+          </div>
+          <div className={`${cardCls}-desc`}>
+            <div className={`${cardCls}-ellipsis-prefix`}>{desc}</div>
+          </div>
+        </div>
+      </>
+    );
+  }
+
   return (
     <div
-      className={classNames(cardCls, `${cardCls}-status-${status}`, className)}
+      className={classNames(
+        cardCls,
+        {
+          [`${cardCls}-status-${status}`]: status,
+          [`${cardCls}-type-preview`]: isImg,
+          [`${cardCls}-type-overview`]: !isImg,
+        },
+        className,
+      )}
       style={style}
       ref={ref}
     >
-      <div className={`${cardCls}-icon`} style={{ color: iconColor }}>
-        {icon}
-      </div>
-      <div className={`${cardCls}-content`}>
-        <div className={`${cardCls}-name`}>
-          <div className={`${cardCls}-ellipsis-prefix`}>{namePrefix ?? EMPTY}</div>
-          <div className={`${cardCls}-ellipsis-suffix`}>{nameSuffix}</div>
-        </div>
-        <div className={`${cardCls}-desc`}>
-          <div className={`${cardCls}-ellipsis-prefix`}>{desc}</div>
-          {/* <div className={`${cardCls}-ellipsis-suffix`} /> */}
-        </div>
-      </div>
+      {content}
 
       {/* Remove Icon */}
       <button
