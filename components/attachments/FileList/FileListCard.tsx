@@ -90,7 +90,7 @@ function getSize(size: number) {
 
 function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) {
   const { prefixCls, item, onRemove, className, style } = props;
-  const { name, size, percent, status } = item;
+  const { name, size, percent, status = 'done' } = item;
   const cardCls = `${prefixCls}-card`;
 
   // ============================== Name ==============================
