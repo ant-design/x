@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import util from 'util';
 import type { DOMWindow } from 'jsdom';
+import { setupStreamsPolyfill } from './setup-streams';
 
 const originConsoleErr = console.error;
 
@@ -55,6 +56,8 @@ export function fillWindowEnv(window: Window | DOMWindow) {
     writable: true,
     value: util.TextDecoder,
   });
+
+  setupStreamsPolyfill(win);
 }
 
 /* eslint-disable global-require */

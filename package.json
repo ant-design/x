@@ -2,7 +2,14 @@
   "name": "@ant-design/x",
   "version": "1.0.0-alpha.4",
   "description": "Crafting AI-driven interfaces with React, seamlessly integrating smart chat components and API services at your fingertips.",
-  "keywords": ["AI", "Copilot", "ant", "components", "framework", "react"],
+  "keywords": [
+    "AI",
+    "Copilot",
+    "ant",
+    "components",
+    "framework",
+    "react"
+  ],
   "homepage": "https://x.ant.design",
   "bugs": {
     "url": "https://github.com/ant-design/x/issues"
@@ -20,7 +27,13 @@
   "main": "lib/index.js",
   "module": "es/index.js",
   "typings": "es/index.d.ts",
-  "files": ["dist", "es", "lib", "locale", "BUG_VERSIONS.json"],
+  "files": [
+    "dist",
+    "es",
+    "lib",
+    "locale",
+    "BUG_VERSIONS.json"
+  ],
   "scripts": {
     "api-collection": "antd-tools run api-collection",
     "authors": "tsx scripts/generate-authors.ts",
@@ -68,7 +81,9 @@
     "tsc": "tsc --noEmit",
     "version": "tsx scripts/generate-version.ts"
   },
-  "browserslist": ["defaults"],
+  "browserslist": [
+    "defaults"
+  ],
   "dependencies": {
     "@ant-design/colors": "^7.1.0",
     "@ant-design/cssinjs": "^1.21.1",
@@ -241,6 +256,7 @@
     "typescript": "~5.6.2",
     "vanilla-jsoneditor": "^0.23.8",
     "vanilla-tilt": "^1.8.1",
+    "web-streams-polyfill": "^4.0.0",
     "webpack": "^5.94.0",
     "webpack-bundle-analyzer": "^4.10.2"
   },
