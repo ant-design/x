@@ -93,6 +93,7 @@ const genFileListStyle: GenerateStyle<AttachmentsToken> = (token) => {
   return {
     [componentCls]: {
       position: 'relative',
+      width: '100%',
       ...anyBoxSizing,
 
       // =============================== File List ===============================
@@ -105,6 +106,20 @@ const genFileListStyle: GenerateStyle<AttachmentsToken> = (token) => {
         color: token.colorText,
         paddingBlock: token.paddingSM,
         paddingInline: token.padding,
+        width: '100%',
+
+        // Scroll
+        '&-overflow-scrollX': {
+          overflowX: 'auto',
+          overflowY: 'hidden',
+          flexWrap: 'nowrap',
+        },
+
+        '&-overflow-scrollY': {
+          overflowX: 'hidden',
+          overflowY: 'auto',
+          maxHeight: calc(cardHeight).mul(3).equal(),
+        },
 
         [cardCls]: {
           borderRadius: token.borderRadius,
@@ -113,6 +128,7 @@ const genFileListStyle: GenerateStyle<AttachmentsToken> = (token) => {
           borderWidth: token.lineWidth,
           borderStyle: 'solid',
           borderColor: 'transparent',
+          flex: 'none',
 
           // =============================== Desc ================================
           [`${cardCls}-name,${cardCls}-desc`]: {

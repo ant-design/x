@@ -1,4 +1,3 @@
-import { Button, Typography } from 'antd';
 import type { GetProp, UploadProps } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
@@ -8,7 +7,7 @@ import { useXProviderContext } from '../x-provider';
 
 import { useEvent, useMergedState } from 'rc-util';
 import DropArea from './DropArea';
-import FileList from './FileList';
+import FileList, { type FileListProps } from './FileList';
 import PlaceholderUploader, { PlaceholderProps } from './PlaceholderUploader';
 import SilentUploader from './SilentUploader';
 import useStyle from './style';
@@ -22,13 +21,17 @@ export interface AttachmentsProps extends Omit<UploadProps, 'fileList'> {
   style?: React.CSSProperties;
   className?: string;
 
-  getDropContainer?: null | (() => HTMLElement | null | undefined);
-
-  items?: Attachment[];
   children?: React.ReactElement;
+
+  disabled?: boolean;
 
   // ============= placeholder =============
   placeholder?: PlaceholderProps['placeholder'];
+  getDropContainer?: null | (() => HTMLElement | null | undefined);
+
+  // ============== File List ==============
+  items?: Attachment[];
+  overflow?: FileListProps['overflow'];
 }
 
 const Attachments: React.FC<AttachmentsProps> = (props) => {
@@ -41,6 +44,8 @@ const Attachments: React.FC<AttachmentsProps> = (props) => {
     getDropContainer,
     placeholder,
     onChange,
+    overflow,
+    disabled,
     ...uploadProps
   } = props;
 
@@ -116,7 +121,13 @@ const Attachments: React.FC<AttachmentsProps> = (props) => {
       >
         {fileList.length ? (
           <>
-            <FileList prefixCls={prefixCls} items={fileList} onRemove={onItemRemove} />
+            <FileList
+              disabled={disabled}
+              prefixCls={prefixCls}
+              items={fileList}
+              onRemove={onItemRemove}
+              overflow={overflow}
+            />
             <DropArea
               getDropContainer={() => containerRef.current}
               prefixCls={prefixCls}

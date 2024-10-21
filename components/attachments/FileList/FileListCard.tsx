@@ -12,7 +12,7 @@ import {
 import classNames from 'classnames';
 import React from 'react';
 import type { Attachment } from '..';
-import { isImageFileType, previewImage } from '../util';
+import { previewImage } from '../util';
 import Progress from './Progress';
 
 export interface FileListCardProps {
@@ -21,6 +21,7 @@ export interface FileListCardProps {
   onRemove: (item: Attachment) => void;
   className?: string;
   style?: React.CSSProperties;
+  disabled?: boolean;
 }
 
 const EMPTY = '\u00A0';
@@ -89,7 +90,7 @@ function getSize(size: number) {
 }
 
 function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) {
-  const { prefixCls, item, onRemove, className, style } = props;
+  const { prefixCls, item, onRemove, className, style, disabled } = props;
   const { name, size, percent, status = 'done' } = item;
   const cardCls = `${prefixCls}-card`;
 
@@ -205,15 +206,17 @@ function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) 
       {content}
 
       {/* Remove Icon */}
-      <button
-        type="button"
-        className={`${cardCls}-remove`}
-        onClick={() => {
-          onRemove(item);
-        }}
-      >
-        <CloseCircleFilled />
-      </button>
+      {!disabled && (
+        <button
+          type="button"
+          className={`${cardCls}-remove`}
+          onClick={() => {
+            onRemove(item);
+          }}
+        >
+          <CloseCircleFilled />
+        </button>
+      )}
     </div>
   );
 }

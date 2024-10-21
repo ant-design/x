@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { CSSMotionList } from 'rc-motion';
 import React from 'react';
 import type { Attachment } from '..';
@@ -7,10 +8,12 @@ export interface FileListProps {
   prefixCls: string;
   items: Attachment[];
   onRemove: (item: Attachment) => void;
+  overflow?: 'scrollX' | 'scrollY' | 'wrap';
+  disabled?: boolean;
 }
 
 export default function FileList(props: FileListProps) {
-  const { prefixCls, items, onRemove } = props;
+  const { prefixCls, items, onRemove, overflow, disabled } = props;
 
   const listCls = `${prefixCls}-list`;
 
@@ -24,7 +27,11 @@ export default function FileList(props: FileListProps) {
   }, []);
 
   return (
-    <div className={listCls}>
+    <div
+      className={classNames(listCls, {
+        [`${listCls}-overflow-${props.overflow}`]: overflow,
+      })}
+    >
       <CSSMotionList
         keys={items.map((item) => ({
           key: item.uid,
@@ -45,6 +52,7 @@ export default function FileList(props: FileListProps) {
               onRemove={onRemove}
               className={motionCls}
               style={motionStyle}
+              disabled={disabled}
             />
           );
         }}
