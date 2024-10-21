@@ -9,7 +9,7 @@ import {
 /**
  * https://github.com/oven-sh/bun/issues/5648
  *
- * @description Polyfill for TextDecoderStream.
+ * @description Polyfill for TextDecoderStream
  *
  * Copyright 2016 Google Inc.
  *
