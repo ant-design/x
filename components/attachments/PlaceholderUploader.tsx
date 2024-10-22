@@ -1,6 +1,7 @@
 import { Flex, Typography, Upload, type UploadProps } from 'antd';
 import classNames from 'classnames';
 import React from 'react';
+import { AttachmentContext } from './context';
 
 export interface PlaceholderConfig {
   icon?: React.ReactNode;
@@ -20,6 +21,8 @@ export default function Placeholder(props: PlaceholderProps) {
   const placeholderCls = `${prefixCls}-placeholder`;
 
   const placeholderConfig = (placeholder || {}) as PlaceholderConfig;
+
+  const { disabled } = React.useContext(AttachmentContext);
 
   // ============================= Drag =============================
   const [dragIn, setDragIn] = React.useState(false);
@@ -61,10 +64,12 @@ export default function Placeholder(props: PlaceholderProps) {
     <div
       className={classNames(placeholderCls, {
         [`${placeholderCls}-drag-in`]: dragIn,
+        [`${placeholderCls}-disabled`]: disabled,
       })}
       onDragEnter={onDragEnter}
       onDragLeave={onDragLeave}
       onDrop={onDrop}
+      aria-hidden={disabled}
     >
       <Upload.Dragger
         showUploadList={false}

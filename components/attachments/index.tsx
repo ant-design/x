@@ -1,4 +1,4 @@
-import type { GetProp, UploadProps } from 'antd';
+import { type GetProp, type UploadProps } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
 
@@ -10,6 +10,7 @@ import DropArea from './DropArea';
 import FileList, { type FileListProps } from './FileList';
 import PlaceholderUploader, { PlaceholderProps } from './PlaceholderUploader';
 import SilentUploader from './SilentUploader';
+import { AttachmentContext } from './context';
 import useStyle from './style';
 
 export type SemanticType = 'list' | 'item' | 'itemContent' | 'title';
@@ -110,40 +111,52 @@ const Attachments: React.FC<AttachmentsProps> = (props) => {
       </>
     );
   } else {
-    return (
+    renderChildren = (
       <div
-        className={classnames(prefixCls, className, {
-          [`${prefixCls}-rtl`]: direction === 'rtl',
-        })}
+        className={classnames(
+          prefixCls,
+          cssinjsCls,
+          {
+            [`${prefixCls}-rtl`]: direction === 'rtl',
+          },
+          className,
+        )}
         style={style}
         dir={direction || 'ltr'}
         ref={containerRef}
       >
         {fileList.length ? (
-          <>
-            <FileList
-              disabled={disabled}
-              prefixCls={prefixCls}
-              items={fileList}
-              onRemove={onItemRemove}
-              overflow={overflow}
-            />
-            <DropArea
-              getDropContainer={() => containerRef.current}
-              prefixCls={prefixCls}
-              className={cssinjsCls}
-            >
-              {placeholderNode}
-            </DropArea>
-          </>
+          <FileList
+            prefixCls={prefixCls}
+            items={fileList}
+            onRemove={onItemRemove}
+            overflow={overflow}
+            upload={mergedUploadProps}
+          />
         ) : (
           placeholderNode
         )}
+
+        <DropArea
+          getDropContainer={getDropContainer || (() => containerRef.current)}
+          prefixCls={prefixCls}
+          className={cssinjsCls}
+        >
+          {placeholderNode}
+        </DropArea>
       </div>
     );
   }
 
-  return wrapCSSVar(renderChildren);
+  return wrapCSSVar(
+    <AttachmentContext.Provider
+      value={{
+        disabled,
+      }}
+    >
+      {renderChildren}
+    </AttachmentContext.Provider>,
+  );
 };
 
 if (process.env.NODE_ENV !== 'production') {

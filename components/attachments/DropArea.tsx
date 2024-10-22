@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import React from 'react';
 import { createPortal } from 'react-dom';
+import { AttachmentContext } from './context';
 
 export interface DropUploaderProps {
   prefixCls: string;
@@ -11,6 +12,7 @@ export interface DropUploaderProps {
 
 export default function DropArea(props: DropUploaderProps) {
   const { getDropContainer, className, prefixCls, children } = props;
+  const { disabled } = React.useContext(AttachmentContext);
 
   const [container, setContainer] = React.useState<HTMLElement | null | undefined>();
   const [showArea, setShowArea] = React.useState<boolean | null>(null);
@@ -62,7 +64,7 @@ export default function DropArea(props: DropUploaderProps) {
   }, [!!container]);
 
   // ============================ Render ============================
-  if (!getDropContainer || !container || showArea === null) {
+  if (!getDropContainer || !container || showArea === null || disabled) {
     return null;
   }
 
