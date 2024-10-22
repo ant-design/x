@@ -63,8 +63,11 @@ export default function DropArea(props: DropUploaderProps) {
     }
   }, [!!container]);
 
+  // =========================== Visible ============================
+  const showDropdown = getDropContainer && container && showArea !== null && !disabled;
+
   // ============================ Render ============================
-  if (!getDropContainer || !container || showArea === null || disabled) {
+  if (!showDropdown) {
     return null;
   }
 

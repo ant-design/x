@@ -8,7 +8,7 @@ import { useXProviderContext } from '../x-provider';
 import { useEvent, useMergedState } from 'rc-util';
 import DropArea from './DropArea';
 import FileList, { type FileListProps } from './FileList';
-import PlaceholderUploader, { PlaceholderProps } from './PlaceholderUploader';
+import PlaceholderUploader, { PlaceholderProps, PlaceholderType } from './PlaceholderUploader';
 import SilentUploader from './SilentUploader';
 import { AttachmentContext } from './context';
 import useStyle from './style';
@@ -27,7 +27,7 @@ export interface AttachmentsProps extends Omit<UploadProps, 'fileList'> {
   disabled?: boolean;
 
   // ============= placeholder =============
-  placeholder?: PlaceholderProps['placeholder'];
+  placeholder?: PlaceholderType | ((type: 'inline' | 'drop') => PlaceholderType);
   getDropContainer?: null | (() => HTMLElement | null | undefined);
 
   // ============== File List ==============
@@ -93,24 +93,30 @@ const Attachments: React.FC<AttachmentsProps> = (props) => {
   // ============================ Render ============================
   let renderChildren: React.ReactElement;
 
-  const placeholderNode = (
-    <PlaceholderUploader
-      placeholder={placeholder}
-      upload={mergedUploadProps}
-      prefixCls={prefixCls}
-    />
-  );
+  const getPlaceholderNode = (type: 'inline' | 'drop') => {
+    const placeholderContent = typeof placeholder === 'function' ? placeholder(type) : placeholder;
+
+    return (
+      <PlaceholderUploader
+        placeholder={placeholderContent}
+        upload={mergedUploadProps}
+        prefixCls={prefixCls}
+      />
+    );
+  };
 
   if (children) {
     renderChildren = (
       <>
         <SilentUploader upload={mergedUploadProps}>{children}</SilentUploader>
         <DropArea getDropContainer={getDropContainer} prefixCls={prefixCls} className={cssinjsCls}>
-          {placeholderNode}
+          {getPlaceholderNode('drop')}
         </DropArea>
       </>
     );
   } else {
+    const hasFileList = fileList.length > 0;
+
     renderChildren = (
       <div
         className={classnames(
@@ -125,7 +131,7 @@ const Attachments: React.FC<AttachmentsProps> = (props) => {
         dir={direction || 'ltr'}
         ref={containerRef}
       >
-        {fileList.length ? (
+        {hasFileList ? (
           <FileList
             prefixCls={prefixCls}
             items={fileList}
@@ -134,7 +140,7 @@ const Attachments: React.FC<AttachmentsProps> = (props) => {
             upload={mergedUploadProps}
           />
         ) : (
-          placeholderNode
+          getPlaceholderNode('inline')
         )}
 
         <DropArea
@@ -142,7 +148,7 @@ const Attachments: React.FC<AttachmentsProps> = (props) => {
           prefixCls={prefixCls}
           className={cssinjsCls}
         >
-          {placeholderNode}
+          {getPlaceholderNode('drop')}
         </DropArea>
       </div>
     );

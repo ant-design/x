@@ -36,6 +36,12 @@ const genAttachmentsStyle: GenerateStyle<AttachmentsToken> = (token) => {
         inset: 0,
       },
 
+      '&-hide-placement': {
+        [`${placeholderCls}-inner`]: {
+          display: 'none',
+        },
+      },
+
       [placeholderCls]: {
         padding: 0,
       },

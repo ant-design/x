@@ -9,13 +9,15 @@ export interface PlaceholderConfig {
   description?: React.ReactNode;
 }
 
+export type PlaceholderType = PlaceholderConfig | React.ReactElement;
+
 export interface PlaceholderProps {
   prefixCls: string;
-  placeholder?: PlaceholderConfig | React.ReactElement;
+  placeholder?: PlaceholderType;
   upload?: UploadProps;
 }
 
-export default function Placeholder(props: PlaceholderProps) {
+function Placeholder(props: PlaceholderProps, ref: React.Ref<HTMLDivElement>) {
   const { prefixCls, placeholder = {}, upload } = props;
 
   const placeholderCls = `${prefixCls}-placeholder`;
@@ -70,6 +72,7 @@ export default function Placeholder(props: PlaceholderProps) {
       onDragLeave={onDragLeave}
       onDrop={onDrop}
       aria-hidden={disabled}
+      ref={ref}
     >
       <Upload.Dragger
         showUploadList={false}
@@ -81,3 +84,5 @@ export default function Placeholder(props: PlaceholderProps) {
     </div>
   );
 }
+
+export default React.forwardRef(Placeholder);

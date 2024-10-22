@@ -23,11 +23,17 @@ const Demo = () => {
       <Attachments
         // Mock not real upload file
         beforeUpload={() => false}
-        placeholder={{
-          icon: <CloudUploadOutlined />,
-          title: 'Upload files',
-          description: 'Click or drag files to this area to upload',
-        }}
+        placeholder={(type) =>
+          type === 'drop'
+            ? {
+                title: 'Drop file here',
+              }
+            : {
+                icon: <CloudUploadOutlined />,
+                title: 'Upload files',
+                description: 'Click or drag files to this area to upload',
+              }
+        }
         getDropContainer={() => senderRef.current}
       />
     </Sender.Header>
