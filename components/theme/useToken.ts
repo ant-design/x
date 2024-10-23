@@ -5,7 +5,6 @@ import formatToken from 'antd/es/theme/util/alias';
 import React from 'react';
 
 import version from '../version';
-import { defaultPrefixCls } from '../x-provider';
 
 import type { Theme } from '@ant-design/cssinjs';
 import type { DesignTokenProviderProps } from 'antd/es/theme/context';
@@ -89,19 +88,8 @@ export function useInternalToken(): [
     hashed,
     theme = defaultTheme,
     override,
-    cssVar: rootCssVar,
+    cssVar,
   } = React.useContext(antdTheme._internalContext);
-
-  const cssVar = React.useMemo(
-    () => ({
-      prefix: (typeof rootCssVar === 'object' && rootCssVar.prefix) || defaultPrefixCls,
-      key: (typeof rootCssVar === 'object' && rootCssVar.key) || '',
-      unitless,
-      ignore,
-      preserve,
-    }),
-    [rootCssVar],
-  );
 
   const [token, hashId, realToken] = useCacheToken<GlobalToken, SeedToken>(
     theme,
@@ -110,7 +98,13 @@ export function useInternalToken(): [
       salt: `${version}-${hashed || ''}`,
       override,
       getComputedToken,
-      cssVar,
+      cssVar: cssVar && {
+        prefix: cssVar.prefix,
+        key: cssVar.key,
+        unitless,
+        ignore,
+        preserve,
+      },
     },
   );
   return [theme as Theme<SeedToken, AliasToken>, realToken, hashed ? hashId : '', token, cssVar];

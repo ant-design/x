@@ -76,18 +76,18 @@ exports[`Conversations Component Conversations component work 1`] = `
 
 exports[`Conversations Component rtl render component should be rendered correctly in RTL direction 1`] = `
 <ul
-  class="ant-conversations css-var-r1 ant-conversations-rtl"
+  class="ant-conversations ant-conversations-rtl"
 >
   <li>
     <div
-      class="ant-divider css-var-r1 ant-divider-horizontal ant-divider-with-text ant-divider-with-text-right ant-divider-plain ant-divider-rtl"
+      class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-right ant-divider-plain ant-divider-rtl"
       role="separator"
     >
       <span
         class="ant-divider-inner-text"
       >
         <span
-          class="ant-typography ant-typography-rtl ant-typography-secondary css-var-r1"
+          class="ant-typography ant-typography-rtl ant-typography-secondary"
         >
           pinned
         </span>
@@ -110,7 +110,7 @@ exports[`Conversations Component rtl render component should be rendered correct
         </div>
         <span
           aria-label="What is Ant Design X ?"
-          class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-conversations-label css-var-r1"
+          class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-conversations-label"
         >
           What is Ant Design X ?
         </span>
@@ -139,7 +139,7 @@ exports[`Conversations Component rtl render component should be rendered correct
   </li>
   <li>
     <div
-      class="ant-divider css-var-r1 ant-divider-horizontal ant-divider-plain ant-divider-rtl"
+      class="ant-divider ant-divider-horizontal ant-divider-plain ant-divider-rtl"
       role="separator"
     />
     <ul
@@ -149,7 +149,7 @@ exports[`Conversations Component rtl render component should be rendered correct
         class="ant-conversations-item"
       >
         <span
-          class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-conversations-label css-var-r1"
+          class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-conversations-label"
         >
           <div>
             Getting Started:
@@ -188,7 +188,7 @@ exports[`Conversations Component rtl render component should be rendered correct
       >
         <span
           aria-label="In Docker, use 🐑 Ollama and initialize"
-          class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-conversations-label css-var-r1"
+          class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-conversations-label"
         >
           In Docker, use 🐑 Ollama and initialize
         </span>
@@ -218,7 +218,7 @@ exports[`Conversations Component rtl render component should be rendered correct
       >
         <span
           aria-label="Expired, please go to the recycle bin to check"
-          class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-conversations-label css-var-r1"
+          class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-conversations-label"
         >
           Expired, please go to the recycle bin to check
         </span>
@@ -228,7 +228,7 @@ exports[`Conversations Component rtl render component should be rendered correct
       >
         <span
           aria-label="No key"
-          class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-conversations-label css-var-r1"
+          class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-conversations-label"
         >
           No key
         </span>

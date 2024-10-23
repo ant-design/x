@@ -8,8 +8,18 @@ import type { ConfigProviderProps as AntdConfigProviderProps } from 'antd/es/con
 import type { XProviderProps } from './context';
 
 const XProvider: React.FC<XProviderProps & AntdConfigProviderProps> = (props) => {
-  const { bubble, conversations, prompts, sender, suggestion, thoughtChain, ...antdConfProps } =
-    props;
+  const {
+    bubble,
+    conversations,
+    prompts,
+    sender,
+    suggestion,
+    thoughtChain,
+    theme,
+    ...antdConfProps
+  } = props;
+
+  const { theme: parentTheme } = useXProviderContext();
 
   const xProviderProps = React.useMemo(() => {
     return {
@@ -22,12 +32,25 @@ const XProvider: React.FC<XProviderProps & AntdConfigProviderProps> = (props) =>
     };
   }, [bubble, conversations, prompts, sender, suggestion, thoughtChain]);
 
+  const mergedTheme = React.useMemo(() => {
+    const concatTheme = {
+      ...parentTheme,
+      ...theme,
+    };
+
+    return concatTheme;
+  }, [parentTheme, theme]);
+
   return (
     <XProviderContext.Provider value={xProviderProps}>
       <AntdConfigProvider
         {...antdConfProps}
-        // antdx enable cssVar by default, and antd v6 will enable cssVar by default
-        theme={{ cssVar: true, ...antdConfProps?.theme }}
+        // Note:  we can not set `cssVar` by default.
+        //        Since when developer not wrap with XProvider,
+        //        the generate css is still using css var but no css var injected.
+        // Origin comment: antdx enable cssVar by default, and antd v6 will enable cssVar by default
+        // theme={{ cssVar: true, ...antdConfProps?.theme }}
+        theme={mergedTheme}
       />
     </XProviderContext.Provider>
   );
