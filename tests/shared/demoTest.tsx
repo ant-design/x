@@ -27,7 +27,7 @@ export type Options = {
   nameCheckPathOnly?: boolean;
 };
 
-function baseText(doInject: boolean, component: string, options: Options = {}) {
+export function baseText(doInject: boolean, component: string, options: Options = {}) {
   const files = globSync(`./components/${component}/demo/*.tsx`).filter(
     (file) => !file.includes('_semantic'),
   );

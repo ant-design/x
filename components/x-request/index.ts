@@ -1,17 +1,16 @@
 import xStream from '../x-stream';
 import xFetch from './x-fetch';
 
-import type { XStreamOptions } from '../x-stream';
+import type { SSEOutput, XStreamOptions } from '../x-stream';
 import type { XFetchOptions } from './x-fetch';
 
 import type { AnyObject } from '../_util/type';
 
-const DEFAULT_HEADERS = {
-  'Content-Type': 'application/json',
-};
-
-export interface CreateXRequestOptions<T> {
-  baseURL?: string;
+export interface XRequestBaseOptions {
+  /**
+   * @description Base URL, e.g., 'https://api.example.com/v1/chat'
+   */
+  baseURL: string;
 
   /**
    * @description Model name, e.g., 'gpt-3.5-turbo'
@@ -29,32 +28,34 @@ export interface CreateXRequestOptions<T> {
    * data or functionality.
    */
   dangerouslyApiKey?: string;
+}
 
+interface XRequestCustomOptions {
   /**
-   * @description Config for {@link XFetchOptions}
+   * @description Custom fetch
    */
-  fetchOptions?: XFetchOptions;
+  fetch?: XFetchOptions['fetch'];
+}
 
-  /**
-   * @description Config for {@link XStreamOptions}
-   */
-  streamOptions?: XStreamOptions<T>;
+export type XRequestOptions = XRequestBaseOptions & XRequestCustomOptions;
+
+type XRequestMessageContent = string | AnyObject;
+
+interface XRequestMessage extends AnyObject {
+  role?: string;
+  content?: XRequestMessageContent;
 }
 
 /**
  * Compatible with the parameters of OpenAI's chat.completions.create,
  * with plans to support more parameters and adapters in the future
  */
-export interface XRequestParams extends AnyObject {
+export interface XRequestParams {
   /**
-   * @description {@link XAgentOptions.model}
+   * @description Model name, e.g., 'gpt-3.5-turbo'
+   * @default XRequestOptions.model
    */
   model?: string;
-
-  messages: {
-    role?: 'system' | 'user' | 'assistant' | 'tool';
-    content?: string | AnyObject;
-  }[];
 
   /**
    * @description Indicates whether to use streaming for the response
@@ -62,63 +63,125 @@ export interface XRequestParams extends AnyObject {
   stream?: boolean;
 
   /**
-   * @description Multi-modal input image content, support URL and base64
+   * @description The messages to be sent to the model
    */
-  image_url?: string;
+  messages?: XRequestMessage[];
 }
 
-export interface XRequestCallbacks<T> {
-  onSuccess?: (message: T) => void;
-  onError?: (error: Error) => void;
-  onUpdate?: (message: T) => void;
+export interface XRequestCallbacks<Output> {
+  /**
+   * @description Callback when the request is successful
+   */
+  onSuccess: (chunks: Output[]) => void;
+
+  /**
+   * @description Callback when the request fails
+   */
+  onError: (error: Error) => void;
+
+  /**
+   * @description Callback when the request is updated
+   */
+  onUpdate: (chunk: Output) => void;
 }
 
-export type XRequest<T> = (params: XRequestParams, callbacks: XRequestCallbacks<T>) => void;
+export type XRequestFunction<Input = AnyObject, Output = SSEOutput> = (
+  params: XRequestParams & Input,
+  callbacks: XRequestCallbacks<Output>,
+  transformStream?: XStreamOptions<Output>['transformStream'],
+) => Promise<void>;
 
-export function createXRequest<T>(options: CreateXRequestOptions<T>): XRequest<T> {
-  const { baseURL, model, dangerouslyApiKey, fetchOptions, streamOptions } = options;
+class XRequest {
+  readonly baseURL;
+  readonly model;
 
-  return async (params, callbacks) => {
-    const { onSuccess, onError, onUpdate } = callbacks;
+  private defaultHeaders;
+  private customOptions;
+
+  private static instanceBuffer: Map<string, XRequest> = new Map();
+
+  private constructor(options: XRequestOptions) {
+    const { baseURL, model, dangerouslyApiKey, ...customOptions } = options;
+
+    this.baseURL = options.baseURL;
+    this.model = options.model;
+    this.defaultHeaders = {
+      'Content-Type': 'application/json',
+      ...(options.dangerouslyApiKey && {
+        Authorization: options.dangerouslyApiKey,
+      }),
+    };
+    this.customOptions = customOptions;
+  }
+
+  public static init(options: XRequestOptions): XRequest {
+    const id = options.baseURL;
+
+    if (!id || typeof id !== 'string') throw new Error('The baseURL is not valid!');
+
+    if (!XRequest.instanceBuffer.has(id)) {
+      XRequest.instanceBuffer.set(id, new XRequest(options));
+    }
+
+    return XRequest.instanceBuffer.get(id) as XRequest;
+  }
+
+  public create = async <Input = AnyObject, Output = SSEOutput>(
+    params: XRequestParams & Input,
+    callbacks?: XRequestCallbacks<Output>,
+    transformStream?: XStreamOptions<Output>['transformStream'],
+  ) => {
+    const { onSuccess, onError, onUpdate } = callbacks || {};
+
+    const requestInit = {
+      method: 'POST',
+      body: JSON.stringify({
+        model: this.model,
+        ...params,
+      }),
+      headers: this.defaultHeaders,
+    };
+
     try {
-      if (!baseURL) throw new Error('options.baseURL is required!');
-
-      const res = await xFetch(baseURL, {
-        method: 'POST',
-        body: JSON.stringify({
-          model,
-          ...params,
-        }),
-        ...fetchOptions,
-        headers: {
-          ...DEFAULT_HEADERS,
-          ...(dangerouslyApiKey && {
-            Authorization: dangerouslyApiKey,
-          }),
-          ...fetchOptions?.headers,
-        },
+      const response = await xFetch(this.baseURL, {
+        fetch: this.customOptions.fetch,
+        ...requestInit,
       });
 
-      const isStream = res.headers.get('Content-Type')?.includes('stream');
+      const contentType = response.headers.get('content-type') || '';
 
-      let message: T;
+      const chunks: Output[] = [];
 
-      if (isStream) {
+      if (contentType.includes('text/event-stream')) {
         for await (const chunk of xStream({
-          readableStream: res.body!,
-          transformStream: streamOptions?.transformStream,
+          readableStream: response.body!,
+          transformStream,
         })) {
+          chunks.push(chunk);
+
           onUpdate?.(chunk);
-          message = chunk;
         }
+      } else if (contentType.includes('application/json')) {
+        const chunk: Output = await response.json();
+
+        chunks.push(chunk);
+
+        onUpdate?.(chunk);
       } else {
-        message = await res.json();
-        onUpdate?.(message);
+        throw new Error(`The response content-type: ${contentType} is not support!`);
       }
 
-      onSuccess?.(message!);
+      onSuccess?.(chunks);
     } catch (error) {
-      onError?.(error instanceof Error ? error : new Error('Unknown error!'));
+      const err = error instanceof Error ? error : new Error('Unknown error!');
+
+      onError?.(err);
+
+      throw err;
     }
   };
 }
+
+const xRequest = XRequest.init;
+
+export default xRequest;

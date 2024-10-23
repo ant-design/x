@@ -1,10 +1,14 @@
 import React from 'react';
-import { createXRequest } from '../x-request';
+import xRequest from '../x-request';
+
+import { AnyObject } from '../_util/type';
+
+interface RequestFnInfo<Message> extends Partial<XAgentConfigPreset>, AnyObject {
+  messages?: Message[];
+}
 
 export type RequestFn<Message> = (
-  info: {
-    messages: Message[];
-  } & Partial<XAgentConfigPreset>,
+  info: RequestFnInfo<Message>,
   callbacks: {
     onUpdate: (message: Message) => void;
     onSuccess: (message: Message) => void;
@@ -16,9 +20,10 @@ export interface XAgentConfigPreset {
   baseURL: string;
   key: string;
   model: string;
+  dangerouslyApiKey: string;
 }
 export interface XAgentConfigCustom<Message> {
-  request: RequestFn<Message>;
+  request?: RequestFn<Message>;
 }
 
 export type XAgentConfig<Message> = Partial<XAgentConfigPreset> & XAgentConfigCustom<Message>;
@@ -47,7 +52,7 @@ export class XAgent<Message = string> {
     uuid += 1;
     this.requestingMap[id] = true;
 
-    request(info, {
+    request?.(info, {
       // Status should be unique.
       // One get success or error should not get more message
       onUpdate: (message) => {
@@ -82,11 +87,11 @@ export default function useXAgent<Message = string>(config: XAgentConfig<Message
       [
         new XAgent<Message>({
           request:
-            request ||
-            createXRequest({
-              baseURL: restConfig.baseURL,
+            request! ||
+            xRequest({
+              baseURL: restConfig.baseURL!,
               model: restConfig.model,
-            }),
+            }).create,
           ...restConfig,
         }),
       ] as const,

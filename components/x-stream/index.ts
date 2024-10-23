@@ -3,17 +3,15 @@
  */
 const DEFAULT_STREAM_SEPARATOR = '\n\n';
 /**
- * @description Default separator for event stream chunk
+ * @description Default separator for {@link splitPart}
  * @example "event: delta\ndata: {\"key\": \"value\"}"
  */
-const DEFAULT_EVENT_SEPARATOR = '\n';
+const DEFAULT_PART_SEPARATOR = '\n';
 /**
- * @description Default separator for key value, A colon (`:`) is used to separate keys from values.
+ * @description Default separator for key value, A colon (`:`) is used to separate keys from values
  * @example "event: delta"
  */
 const DEFAULT_KV_SEPARATOR = ':';
-
-type XStreamAwaitedReturn = Record<string, string>;
 
 /**
  * Check if a string is not empty or only contains whitespace characters
@@ -21,37 +19,27 @@ type XStreamAwaitedReturn = Record<string, string>;
 const isValidString = (str: string) => (str ?? '').trim() !== '';
 
 /**
- * Process the separator value to return the correct separator string
+ * @description A TransformStream inst that splits a stream into parts based on {@link DEFAULT_STREAM_SEPARATOR}
+ * @example
+ *
+ * `event: delta
+ * data: { content: 'hello' }
+ *
+ * event: delta
+ * data: { key: 'world!' }
+ *
+ * `
  */
-const processSeparator = (separator?: string | RegExp | boolean, defaultSeparator?: string) => {
-  if (typeof separator === 'boolean') {
-    return separator ? defaultSeparator : '';
-  }
-
-  return separator;
-};
-
-/**
- * A TransformStream that caches incomplete data between transformations
- * using a closure. It splits incoming chunks based on the specified separator
- * and enqueues complete segments while retaining any incomplete data for
- * processing with subsequent chunks.
- */
-function splitStream(separator?: string | RegExp | boolean) {
+function splitStream() {
   // Buffer to store incomplete data chunks between transformations
   let buffer = '';
 
-  const streamSeparator = processSeparator(separator, DEFAULT_STREAM_SEPARATOR);
-
   return new TransformStream<string, string>({
-    transform(chunk, controller) {
-      // If the separator is not set or set false, enqueue the chunk as is
-      if (!streamSeparator) return controller.enqueue(chunk);
-
-      buffer += chunk;
+    transform(streamChunk, controller) {
+      buffer += streamChunk;
 
       // Split the buffer based on the separator
-      const parts = buffer.split(streamSeparator);
+      const parts = buffer.split(DEFAULT_STREAM_SEPARATOR);
 
       // Enqueue all complete parts except for the last incomplete one
       parts.slice(0, -1).forEach((part) => {
@@ -66,58 +54,70 @@ function splitStream(separator?: string | RegExp | boolean) {
     },
     flush(controller) {
       // If there's any remaining data in the buffer, enqueue it as the final part
-      if (isValidString(buffer)) controller.enqueue(buffer);
-    },
-  });
-}
-
-/**
- * A TransformStream that splits incoming chunks based on the specified
- * event separator and transforms them into key-value pairs. The stream
- * expects each chunk to be a string formatted as "key:value" pairs separated
- * by the event separator. It outputs a record (object) containing all parsed
- * key-value pairs from each chunk.
- */
-function splitEvent(separator?: string | RegExp | boolean) {
-  const eventSeparator = processSeparator(separator, DEFAULT_EVENT_SEPARATOR);
-
-  return new TransformStream<string, XStreamAwaitedReturn>({
-    transform(chunk, controller) {
-      if (typeof chunk === 'string') {
-        // if the separator is not set or set false, enqueue the chunk as `{ chunk: chunk }`
-        if (!eventSeparator) return controller.enqueue({ chunk });
-
-        // Split the chunk into key-value pairs using the eventSeparator
-        const kvPairs = chunk.split(eventSeparator);
-
-        // Reduce the key-value pairs into a single object and enqueue
-        controller.enqueue(
-          kvPairs.reduce((acc, kvPair) => {
-            // Find the index of the default key-value separator in the kvPair
-            const separatorIndex = kvPair.indexOf(DEFAULT_KV_SEPARATOR);
-
-            // If the separator is not found, skip this pair
-            if (separatorIndex === -1) return acc;
-
-            // Extract the key from the beginning of the kvPair up to the separator
-            const key = kvPair.slice(0, separatorIndex);
-
-            if (!isValidString(key)) return acc;
-
-            // Extract the value from the kvPair after the separator
-            const value = kvPair.slice(separatorIndex + 1);
-
-            return { ...acc, [key]: value };
-          }, {}),
-        );
-      } else {
-        throw new Error('The chunk must be a string!');
+      if (isValidString(buffer)) {
+        controller.enqueue(buffer);
       }
     },
   });
 }
 
-export interface XStreamOptions<T> {
+/**
+ * @example
+ * const sseObject = {
+ *    event: 'delta',
+ *    data: '{ key: "world!" }',
+ * };
+ */
+export type SSEOutput = Record<string, any>;
+
+/**
+ * @description A TransformStream inst that transforms a part string into {@link SSEOutput}
+ * @example part string
+ *
+ * "event: delta\ndata: { key: 'world!' }\n"
+ *
+ * @link https://developer.mozilla.org/en-US/docs/Web/API/EventSource
+ *
+ * When handling responses with `Content-Type: text/event-stream`, the following standard practices are commonly observed:
+ * - Double newline characters (`\n\n`) are used to separate individual events.
+ * - Single newline characters (`\n`) are employed to separate line within an event.
+ */
+function splitPart() {
+  return new TransformStream<string, SSEOutput>({
+    transform(partChunk, controller) {
+      // Split the chunk into key-value pairs using the partSeparator
+      const lines = partChunk.split(DEFAULT_PART_SEPARATOR);
+
+      const sseEvent = lines.reduce<SSEOutput>((acc, line) => {
+        const separatorIndex = line.indexOf(DEFAULT_KV_SEPARATOR);
+
+        if (separatorIndex === -1) {
+          throw new Error(
+            `The key-value separator "${DEFAULT_KV_SEPARATOR}" is not found in the sse line chunk!`,
+          );
+        }
+
+        // Extract the key from the beginning of the line up to the separator
+        const key = line.slice(0, separatorIndex);
+
+        // The colon is used for comment lines, skip directly
+        if (!isValidString(key)) return acc;
+
+        // Extract the value from the line after the separator
+        const value = line.slice(separatorIndex + 1);
+
+        return { ...acc, [key]: value };
+      }, {});
+
+      if (Object.keys(sseEvent).length === 0) return;
+
+      // Reduce the key-value pairs into a single object and enqueue
+      controller.enqueue(sseEvent);
+    },
+  });
+}
+
+export interface XStreamOptions<Output> {
   /**
    * @description Readable stream of binary data
    * @link https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream
@@ -126,67 +126,42 @@ export interface XStreamOptions<T> {
 
   /**
    * @description Support customizable transformStream to transform streams
+   * @default sseTransformStream
    * @link https://developer.mozilla.org/en-US/docs/Web/API/TransformStream
    */
-  transformStream?: TransformStream<XStreamAwaitedReturn, T>;
-
-  /**
-   * @description Used to separate a stream while reading, utilizing a specific delimiter.
-   *
-   * When handling responses with `Content-Type: text/event-stream`, the following standard practices are commonly observed:
-   * - Double newline characters (`\n\n`) are used to separate individual events.
-   * - Single newline characters (`\n`) are employed to separate key-value pairs within an event.
-   *
-   * @link https://developer.mozilla.org/en-US/docs/Web/API/EventSource
-   */
-  separators?: {
-    /**
-     * @default '\n\n'
-     */
-    stream?: string | RegExp | boolean;
-    /**
-     * @default '\n'
-     */
-    event?: string | RegExp | boolean;
-  };
+  transformStream?: TransformStream<string, Output>;
 }
 
 /**
- * @description Transform binary stream to string
+ * @description Transform Uint8Array binary stream to {@link SSEOutput} by default
  * @warning The `xStream` only support the `utf-8` encoding. More encoding support maybe in the future.
  */
-async function* xStream<T = XStreamAwaitedReturn>(options: XStreamOptions<T>) {
-  const {
-    readableStream,
-    separators = {
-      stream: true,
-      event: true,
-    },
-    transformStream = new TransformStream<XStreamAwaitedReturn, T>(),
-  } = options;
+async function* xStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
+  const { readableStream, transformStream } = options;
 
   if (!(readableStream instanceof ReadableStream)) {
     throw new Error('The options.readableStream must be an instance of ReadableStream.');
   }
 
-  if (!(transformStream instanceof TransformStream)) {
-    throw new Error('The options.transformStream must be an instance of TransformStream.');
-  }
-
   // Default encoding is `utf-8`
   const decoderStream = new TextDecoderStream();
 
-  const stream = readableStream
-    // 1. Decode: [ binary data -> string data ]
-    .pipeThrough(decoderStream)
-    // 2. Split by stream separator: [ string data -> string data ]
-    .pipeThrough(splitStream(separators.stream))
-    // 3. Split by event separator: [ string data -> Record<string, string> data ]
-    .pipeThrough(splitEvent(separators.event))
-    // 4. Customizable transformer: [ Record<string, string> data -> T ]
-    .pipeThrough(transformStream);
+  const stream = transformStream
+    ? /**
+       * Uint8Array binary -> string -> Output
+       */
+      readableStream
+        .pipeThrough(decoderStream)
+        .pipeThrough(transformStream)
+    : /**
+       * Uint8Array binary -> string -> SSE part string -> Default Output {@link SSEOutput}
+       */
+      readableStream
+        .pipeThrough(decoderStream)
+        .pipeThrough(splitStream())
+        .pipeThrough(splitPart());
 
-  const reader = stream.getReader();
+  const reader = stream.getReader() as ReadableStreamDefaultReader<Output>;
 
   while (reader instanceof ReadableStreamDefaultReader) {
     const { value, done } = await reader.read();

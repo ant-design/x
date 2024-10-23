@@ -1,3 +1,3 @@
-import demoTest from '../../../tests/shared/demoTest';
+import { baseText } from '../../../tests/shared/demoTest';
 
-demoTest('x-stream');
+baseText(false, 'x-stream');

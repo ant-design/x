@@ -12,5 +12,7 @@ exports[`antd dist files exports modules correctly 1`] = `
   "useXAgent",
   "useXChat",
   "version",
+  "xRequest",
+  "xStream",
 ]
 `;

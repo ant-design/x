@@ -1,11 +1,5 @@
 export interface XFetchMiddlewares {
-  onRequest?: (
-    request: Request,
-    info: {
-      baseURL: string;
-      init?: RequestInit;
-    },
-  ) => Promise<Request>;
+  onRequest?: (...ags: Parameters<typeof fetch>) => Promise<Parameters<typeof fetch>>;
   onResponse?: (response: Response) => Promise<Response>;
 }
 
@@ -21,7 +15,10 @@ export interface XFetchOptions extends RequestInit {
   middlewares?: XFetchMiddlewares;
 }
 
-type XFetch = (baseURL: string, options?: XFetchOptions) => Promise<Response>;
+export type XFetch = (
+  baseURL: Parameters<typeof fetch>[0],
+  options?: XFetchOptions,
+) => Promise<Response>;
 
 const xFetch: XFetch = async (baseURL, options = {}) => {
   const { fetch: fetchFn = globalThis.fetch, middlewares = {}, ...requestInit } = options;
@@ -31,24 +28,17 @@ const xFetch: XFetch = async (baseURL, options = {}) => {
   }
 
   /** ---------------------- request init ---------------------- */
-  let request = new Request(baseURL, requestInit);
+  let fetchArgs: Parameters<typeof fetch> = [baseURL, requestInit];
 
   /** ---------------------- request middleware ---------------------- */
   if (typeof middlewares.onRequest === 'function') {
-    const modifiedRequest = await middlewares.onRequest(request, {
-      baseURL,
-      init: requestInit,
-    });
+    const modifiedFetchArgs = await middlewares.onRequest(...fetchArgs);
 
-    if (!(modifiedRequest instanceof Request)) {
-      throw new Error('The options.onRequest must return a Request instance!');
-    }
-
-    request = modifiedRequest;
+    fetchArgs = modifiedFetchArgs;
   }
 
   /** ---------------------- fetch ---------------------- */
-  let response = await fetchFn(request);
+  let response = await fetchFn(...fetchArgs);
 
   /** ---------------------- response middleware ---------------------- */
   if (typeof middlewares.onResponse === 'function') {
