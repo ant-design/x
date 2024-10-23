@@ -1,5 +1,6 @@
 import { createTheme, useCacheToken } from '@ant-design/cssinjs';
 import { theme as antdTheme } from 'antd';
+import { ignore, unitless } from 'antd/es/theme/useToken';
 import formatToken from 'antd/es/theme/util/alias';
 import React from 'react';
 
@@ -10,6 +11,28 @@ import type { DesignTokenProviderProps } from 'antd/es/theme/context';
 import type { AliasToken, GlobalToken, SeedToken } from './cssinjs-utils';
 
 const defaultTheme: Theme<SeedToken, AliasToken> = createTheme(antdTheme.defaultAlgorithm);
+
+const preserve: {
+  [key in keyof AliasToken]?: boolean;
+} = {
+  screenXS: true,
+  screenXSMin: true,
+  screenXSMax: true,
+  screenSM: true,
+  screenSMMin: true,
+  screenSMMax: true,
+  screenMD: true,
+  screenMDMin: true,
+  screenMDMax: true,
+  screenLG: true,
+  screenLGMin: true,
+  screenLGMax: true,
+  screenXL: true,
+  screenXLMin: true,
+  screenXLMax: true,
+  screenXXL: true,
+  screenXXLMin: true,
+};
 
 export const getComputedToken = (
   originToken: SeedToken,
@@ -75,7 +98,13 @@ export function useInternalToken(): [
       salt: `${version}-${hashed || ''}`,
       override,
       getComputedToken,
-      cssVar,
+      cssVar: cssVar && {
+        prefix: cssVar.prefix,
+        key: cssVar.key,
+        unitless,
+        ignore,
+        preserve,
+      },
     },
   );
   return [theme as Theme<SeedToken, AliasToken>, realToken, hashed ? hashId : '', token, cssVar];

@@ -3,6 +3,7 @@ import { genStyleUtils } from '@ant-design/cssinjs-utils';
 import { useXProviderContext } from '../x-provider';
 import { useInternalToken } from './useToken';
 
+import { unitless } from 'antd/es/theme/useToken';
 import type { ComponentTokenMap } from './components';
 import type { AliasToken, SeedToken } from './cssinjs-utils';
 
