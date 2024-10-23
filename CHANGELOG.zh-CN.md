@@ -15,6 +15,13 @@ tag: vVERSION
 
 ---
 
+## 1.0.0-alpha.5
+
+`2024-10-23`
+
+- 🆕 Bubble 支持 `loadingRender` 以自定义加载状态。[#165](https://github.com/ant-design/x/pull/165)
+- 🐛 修复不包裹 XProvider 时，组件样式丢失的问题。[#163](https://github.com/ant-design/x/pull/163)
+
 ## 1.0.0-alpha.4
 
 `2024-10-17`

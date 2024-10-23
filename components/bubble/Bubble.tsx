@@ -31,6 +31,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     avatar,
     placement = 'start',
     loading = false,
+    loadingRender,
     typing,
     content = '',
     messageRender,
@@ -111,6 +112,13 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
   const mergedContent = messageRender ? messageRender(typedContent as any) : typedContent;
 
   // ============================ Render ============================
+  let contentNode: React.ReactNode;
+  if (loading) {
+    contentNode = loadingRender ? loadingRender() : <Loading prefixCls={prefixCls} />;
+  } else {
+    contentNode = mergedContent as React.ReactNode;
+  }
+
   let fullContent: React.ReactNode = (
     <div
       style={{
@@ -125,7 +133,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
         classNames.content,
       )}
     >
-      {loading ? <Loading prefixCls={prefixCls} /> : (mergedContent as React.ReactNode)}
+      {contentNode}
     </div>
   );
 

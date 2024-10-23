@@ -24,6 +24,7 @@ export default defineConfig({
       filename: 'antdx',
     },
     sourcemap: true,
+    generateUnminified: true,
     externals: {
       react: 'React',
       'react-dom': 'ReactDOM',

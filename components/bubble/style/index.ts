@@ -38,9 +38,7 @@ const cursorBlink = new Keyframes('cursorBlink', {
 // biome-ignore lint/suspicious/noEmptyInterface: ComponentToken need to be empty by default
 export interface ComponentToken {}
 
-export interface BubbleToken extends FullToken<'Bubble'> {
-  bubbleContentMaxWidth: number | string;
-}
+export interface BubbleToken extends FullToken<'Bubble'> {}
 
 const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
   const { componentCls, fontSize, lineHeight, paddingSM, colorText, calc } = token;
@@ -106,7 +104,6 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
         fontSize: token.fontSize,
         lineHeight: token.lineHeight,
         minHeight: calc(paddingSM).mul(2).add(calc(lineHeight).mul(fontSize)).equal(),
-        maxWidth: token.bubbleContentMaxWidth,
 
         wordBreak: 'break-word',
 
@@ -147,10 +144,7 @@ export const prepareComponentToken: GetDefaultToken<'Bubble'> = () => ({});
 export default genStyleHooks<'Bubble'>(
   'Bubble',
   (token) => {
-    const { paddingXS, calc } = token;
-    const bubbleToken = mergeToken<BubbleToken>(token, {
-      bubbleContentMaxWidth: `calc(100% - ${unit(calc(paddingXS).add(32).equal())})`,
-    });
+    const bubbleToken = mergeToken<BubbleToken>(token, {});
     return [
       genBubbleStyle(bubbleToken),
       genBubbleListStyle(bubbleToken),
