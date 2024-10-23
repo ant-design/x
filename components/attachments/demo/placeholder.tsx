@@ -1,6 +1,6 @@
 import { CloudUploadOutlined } from '@ant-design/icons';
 import { Attachments, type AttachmentsProps } from '@ant-design/x';
-import { App, Button, Flex, GetProp, Result, Space, Switch, theme } from 'antd';
+import { App, Button, Flex, GetProp, Result, theme } from 'antd';
 import React from 'react';
 
 const presetFiles: AttachmentsProps['items'] = [
@@ -51,6 +51,19 @@ const presetFiles: AttachmentsProps['items'] = [
   },
 ];
 
+type ExtractFunc<T> = T extends (...args: any) => any ? T : never;
+
+const getPlaceholderFn = (
+  inlinePlaceholder: ReturnType<ExtractFunc<AttachmentsProps['placeholder']>>,
+) => {
+  return (type: 'inline' | 'drop') =>
+    type === 'drop'
+      ? {
+          title: 'Drop file here',
+        }
+      : inlinePlaceholder;
+};
+
 const Demo = () => {
   const { message } = App.useApp();
 
@@ -85,25 +98,25 @@ const Demo = () => {
       <div style={sharedBorderStyle}>
         <Attachments
           {...sharedAttachmentProps}
-          placeholder={{
+          placeholder={getPlaceholderFn({
             icon: <CloudUploadOutlined />,
             title: 'Click or Drop files here',
             description: 'Support file type: image, video, audio, document, etc.',
-          }}
+          })}
         />
       </div>
 
       <div style={sharedBorderStyle}>
         <Attachments
           {...sharedAttachmentProps}
-          placeholder={
+          placeholder={getPlaceholderFn(
             <Result
               title="Custom Placeholder Node"
               icon={<CloudUploadOutlined />}
               extra={<Button type="primary">Do Upload</Button>}
               style={{ padding: 0 }}
-            />
-          }
+            />,
+          )}
         />
       </div>
 
