@@ -19,7 +19,7 @@ describe('xStream', () => {
   });
 
   it('make compatible with incomplete SSE data. ', async () => {
-    const sseChunks = [];
+    const sseChunks: string[] = [];
 
     sseChunks.push('event: message\ndata:1\n\nevent: end\n');
     sseChunks.push('data:2\n\n');

@@ -6,7 +6,7 @@ import React from 'react';
 const contentChunks = ['He', 'llo', ', w', 'or', 'ld!'];
 
 function mockReadableStream() {
-  const sseChunks = [];
+  const sseChunks: string[] = [];
 
   for (let i = 0; i < contentChunks.length; i++) {
     const sseEventPart = `event: message\ndata: {"id":"${i}","content":"${contentChunks[i]}"}\n\n`;
