@@ -134,9 +134,9 @@ export interface XStreamOptions<Output> {
 
 /**
  * @description Transform Uint8Array binary stream to {@link SSEOutput} by default
- * @warning The `xStream` only support the `utf-8` encoding. More encoding support maybe in the future.
+ * @warning The `XStream` only support the `utf-8` encoding. More encoding support maybe in the future.
  */
-async function* xStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
+async function* XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
   const { readableStream, transformStream } = options;
 
   if (!(readableStream instanceof ReadableStream)) {
@@ -175,4 +175,4 @@ async function* xStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
   }
 }
 
-export default xStream;
+export default XStream;

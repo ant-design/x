@@ -1,4 +1,4 @@
-import xStream from '../x-stream';
+import XStream from '../x-stream';
 import xFetch from './x-fetch';
 
 import type { SSEOutput, XStreamOptions } from '../x-stream';
@@ -91,14 +91,14 @@ export type XRequestFunction<Input = AnyObject, Output = SSEOutput> = (
   transformStream?: XStreamOptions<Output>['transformStream'],
 ) => Promise<void>;
 
-class XRequest {
+class XRequestClass {
   readonly baseURL;
   readonly model;
 
   private defaultHeaders;
   private customOptions;
 
-  private static instanceBuffer: Map<string, XRequest> = new Map();
+  private static instanceBuffer: Map<string, XRequestClass> = new Map();
 
   private constructor(options: XRequestOptions) {
     const { baseURL, model, dangerouslyApiKey, ...customOptions } = options;
@@ -114,16 +114,16 @@ class XRequest {
     this.customOptions = customOptions;
   }
 
-  public static init(options: XRequestOptions): XRequest {
+  public static init(options: XRequestOptions): XRequestClass {
     const id = options.baseURL;
 
     if (!id || typeof id !== 'string') throw new Error('The baseURL is not valid!');
 
-    if (!XRequest.instanceBuffer.has(id)) {
-      XRequest.instanceBuffer.set(id, new XRequest(options));
+    if (!XRequestClass.instanceBuffer.has(id)) {
+      XRequestClass.instanceBuffer.set(id, new XRequestClass(options));
     }
 
-    return XRequest.instanceBuffer.get(id) as XRequest;
+    return XRequestClass.instanceBuffer.get(id) as XRequestClass;
   }
 
   public create = async <Input = AnyObject, Output = SSEOutput>(
@@ -153,7 +153,7 @@ class XRequest {
       const chunks: Output[] = [];
 
       if (contentType.includes('text/event-stream')) {
-        for await (const chunk of xStream({
+        for await (const chunk of XStream({
           readableStream: response.body!,
           transformStream,
         })) {
@@ -182,6 +182,6 @@ class XRequest {
   };
 }
 
-const xRequest = XRequest.init;
+const XRequest = XRequestClass.init;
 
-export default xRequest;
+export default XRequest;

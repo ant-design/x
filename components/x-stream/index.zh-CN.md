@@ -3,7 +3,7 @@ category: Components
 group:
   title: 工具
   order: 2
-title: xStream
+title: XStream
 subtitle: 流
 order: 1
 description: 转换可读数据流
@@ -21,14 +21,13 @@ demo:
 常见的 `ReadableStream` 实例，如 `await fetch(...).body` 使用示例:
 
 ```js
-import { xStream } from '@ant-design/x';
+import { XStream } from '@ant-design/x';
 
 async function request() {
-  const response =
-    await fetch();
-    // .....
+  const response = await fetch();
+  // .....
 
-  for await (const chunk of xStream({
+  for await (const chunk of XStream({
     readableStream: response.body,
   })) {
     console.log(chunk);

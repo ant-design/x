@@ -3,7 +3,7 @@ category: Components
 group:
   title: Tool
   order: 2
-title: xStream
+title: XStream
 order: 1
 description: Transform binary stream
 demo:
@@ -20,14 +20,13 @@ demo:
 Common `ReadableStream` instances, such as `await fetch(...).body`, usage example:
 
 ```js
-import { xStream } from '@ant-design/x';
+import { XStream } from '@ant-design/x';
 
 async function request() {
-  const response =
-    await fetch();
-    // .....
+  const response = await fetch();
+  // .....
 
-  for await (const chunk of xStream({
+  for await (const chunk of XStream({
     readableStream: response.body,
   })) {
     console.log(chunk);

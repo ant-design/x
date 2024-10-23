@@ -3,7 +3,7 @@ category: Components
 group:
   title: Tool
   order: 2
-title: xRequest
+title: XRequest
 order: 2
 description:
 demo:

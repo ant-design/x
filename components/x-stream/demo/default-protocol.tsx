@@ -1,5 +1,5 @@
 import { TagsOutlined } from '@ant-design/icons';
-import { Bubble, ThoughtChain, xStream } from '@ant-design/x';
+import { Bubble, ThoughtChain, XStream } from '@ant-design/x';
 import { Button, Splitter } from 'antd';
 import React from 'react';
 
@@ -30,7 +30,7 @@ const App = () => {
 
   async function readStream() {
     // 🌟 Read the stream
-    for await (const chunk of xStream({
+    for await (const chunk of XStream({
       readableStream: mockReadableStream(),
     })) {
       console.log(chunk);

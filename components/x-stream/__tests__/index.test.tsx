@@ -1,6 +1,6 @@
-import xStream from '../index';
+import XStream from '../index';
 
-describe('xStream', () => {
+describe('XStream', () => {
   it('transforms binary stream to SSE events', async () => {
     const textEncoder = new TextEncoder();
     const readableStream = new ReadableStream({
@@ -11,7 +11,7 @@ describe('xStream', () => {
     });
 
     const result: any[] = [];
-    for await (const value of xStream({ readableStream })) {
+    for await (const value of XStream({ readableStream })) {
       result.push(value);
     }
 
@@ -35,7 +35,7 @@ describe('xStream', () => {
     });
 
     const result: any[] = [];
-    for await (const value of xStream({ readableStream })) {
+    for await (const value of XStream({ readableStream })) {
       result.push(value);
     }
 
@@ -62,7 +62,7 @@ describe('xStream', () => {
     });
 
     const result: any[] = [];
-    for await (const value of xStream({ readableStream, transformStream: customTransform })) {
+    for await (const value of XStream({ readableStream, transformStream: customTransform })) {
       result.push(value);
     }
 
@@ -73,7 +73,7 @@ describe('xStream', () => {
     await expect(
       (async () => {
         const result: any[] = [];
-        for await (const value of xStream({ readableStream: {} as any })) {
+        for await (const value of XStream({ readableStream: {} as any })) {
           result.push(value);
         }
       })(),
@@ -84,7 +84,7 @@ describe('xStream', () => {
     await expect(
       (async () => {
         const result: any[] = [];
-        for await (const value of xStream({
+        for await (const value of XStream({
           readableStream: new ReadableStream({
             async start(controller) {
               controller.enqueue(new TextEncoder().encode('event: message\n\nincomplete'));

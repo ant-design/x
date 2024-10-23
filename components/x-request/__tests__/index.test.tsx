@@ -1,4 +1,4 @@
-import xRequest from '../index';
+import XRequest from '../index';
 import xFetch from '../x-fetch';
 
 jest.mock('../x-fetch', () => jest.fn());
@@ -25,14 +25,14 @@ describe('XRequest Class', () => {
   });
 
   test('should initialize with valid options', () => {
-    const request = xRequest({ baseURL, model });
+    const request = XRequest({ baseURL, model });
 
     expect(request.baseURL).toBe(baseURL);
     expect(request.model).toBe(model);
   });
 
   test('should throw error on invalid baseURL', () => {
-    expect(() => xRequest({ baseURL: '', model })).toThrow('The baseURL is not valid!');
+    expect(() => XRequest({ baseURL: '', model })).toThrow('The baseURL is not valid!');
   });
 
   test('should create request and handle successful JSON response', async () => {
@@ -53,7 +53,7 @@ describe('XRequest Class', () => {
       json: jest.fn().mockResolvedValueOnce({ response: 'Hi there!' }),
     });
 
-    const request = xRequest({ baseURL, model });
+    const request = XRequest({ baseURL, model });
     await request.create(params, { onSuccess, onError, onUpdate });
 
     expect(onSuccess).toHaveBeenCalledWith([{ response: 'Hi there!' }]);
@@ -75,7 +75,7 @@ describe('XRequest Class', () => {
       body: mockReadableStream(),
     });
 
-    const request = xRequest({ baseURL, model });
+    const request = XRequest({ baseURL, model });
     await request.create(params, { onSuccess, onError, onUpdate });
 
     const sseEvent = { event: 'message', data: '{"id":"0","content":"He"}' };
@@ -94,7 +94,7 @@ describe('XRequest Class', () => {
     const mockedXFetch = xFetch as jest.Mock;
     mockedXFetch.mockRejectedValueOnce(new Error('Fetch failed'));
 
-    const request = xRequest({ baseURL, model });
+    const request = XRequest({ baseURL, model });
     await request.create(params, { onSuccess, onError, onUpdate }).catch(() => {});
 
     expect(onSuccess).not.toHaveBeenCalled();
@@ -114,7 +114,7 @@ describe('XRequest Class', () => {
       },
     });
 
-    const request = xRequest({ baseURL, model });
+    const request = XRequest({ baseURL, model });
     await request.create(params, { onSuccess, onError, onUpdate }).catch(() => {});
 
     expect(onSuccess).not.toHaveBeenCalled();

@@ -1,5 +1,5 @@
 import React from 'react';
-import xRequest from '../x-request';
+import XRequest from '../x-request';
 
 import { AnyObject } from '../_util/type';
 
@@ -88,7 +88,7 @@ export default function useXAgent<Message = string>(config: XAgentConfig<Message
         new XAgent<Message>({
           request:
             request! ||
-            xRequest({
+            XRequest({
               baseURL: restConfig.baseURL!,
               model: restConfig.model,
             }).create,

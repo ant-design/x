@@ -1,5 +1,5 @@
 import { LoadingOutlined, TagsOutlined } from '@ant-design/icons';
-import { ThoughtChain, xRequest } from '@ant-design/x';
+import { ThoughtChain, XRequest } from '@ant-design/x';
 import { Button, Descriptions, Splitter } from 'antd';
 import React from 'react';
 
@@ -13,7 +13,7 @@ const PATH = '/chat';
 const MODEL = 'gpt-3.5-turbo';
 // const API_KEY = '';
 
-const exampleRequest = xRequest({
+const exampleRequest = XRequest({
   baseURL: BASE_URL + PATH,
   model: MODEL,
 

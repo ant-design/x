@@ -15,12 +15,12 @@ export interface XFetchOptions extends RequestInit {
   middlewares?: XFetchMiddlewares;
 }
 
-export type XFetch = (
+export type XFetchType = (
   baseURL: Parameters<typeof fetch>[0],
   options?: XFetchOptions,
 ) => Promise<Response>;
 
-const xFetch: XFetch = async (baseURL, options = {}) => {
+const XFetch: XFetchType = async (baseURL, options = {}) => {
   const { fetch: fetchFn = globalThis.fetch, middlewares = {}, ...requestInit } = options;
 
   if (typeof fetchFn !== 'function') {
@@ -64,4 +64,4 @@ const xFetch: XFetch = async (baseURL, options = {}) => {
   return response;
 };
 
-export default xFetch;
+export default XFetch;
