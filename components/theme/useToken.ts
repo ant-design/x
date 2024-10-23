@@ -1,39 +1,15 @@
 import { createTheme, useCacheToken } from '@ant-design/cssinjs';
 import { theme as antdTheme } from 'antd';
-import { ignore, unitless } from 'antd/es/theme/useToken';
 import formatToken from 'antd/es/theme/util/alias';
 import React from 'react';
 
 import version from '../version';
-import { defaultPrefixCls } from '../x-provider';
 
 import type { Theme } from '@ant-design/cssinjs';
 import type { DesignTokenProviderProps } from 'antd/es/theme/context';
 import type { AliasToken, GlobalToken, SeedToken } from './cssinjs-utils';
 
 const defaultTheme: Theme<SeedToken, AliasToken> = createTheme(antdTheme.defaultAlgorithm);
-
-const preserve: {
-  [key in keyof AliasToken]?: boolean;
-} = {
-  screenXS: true,
-  screenXSMin: true,
-  screenXSMax: true,
-  screenSM: true,
-  screenSMMin: true,
-  screenSMMax: true,
-  screenMD: true,
-  screenMDMin: true,
-  screenMDMax: true,
-  screenLG: true,
-  screenLGMin: true,
-  screenLGMax: true,
-  screenXL: true,
-  screenXLMin: true,
-  screenXLMax: true,
-  screenXXL: true,
-  screenXXLMin: true,
-};
 
 export const getComputedToken = (
   originToken: SeedToken,
@@ -89,19 +65,8 @@ export function useInternalToken(): [
     hashed,
     theme = defaultTheme,
     override,
-    cssVar: rootCssVar,
+    cssVar,
   } = React.useContext(antdTheme._internalContext);
-
-  const cssVar = React.useMemo(
-    () => ({
-      prefix: (typeof rootCssVar === 'object' && rootCssVar.prefix) || defaultPrefixCls,
-      key: (typeof rootCssVar === 'object' && rootCssVar.key) || '',
-      unitless,
-      ignore,
-      preserve,
-    }),
-    [rootCssVar],
-  );
 
   const [token, hashId, realToken] = useCacheToken<GlobalToken, SeedToken>(
     theme,

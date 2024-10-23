@@ -30,7 +30,7 @@ const xProviderProps: XProviderProps = {
   },
 };
 
-describe('ThoughtChain Component', () => {
+describe('XProvider Component', () => {
   mountTest(() => <XProvider {...xProviderProps} />);
 
   rtlTest(() => <XProvider {...xProviderProps} />);
