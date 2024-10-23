@@ -55,7 +55,7 @@ const GlobalLayout: React.FC = () => {
     useLayoutState<SiteState>({
       isMobile: false,
       direction: 'ltr',
-      theme: [],
+      theme: ['dark'],
       bannerVisible: false,
     });
 
@@ -105,9 +105,8 @@ const GlobalLayout: React.FC = () => {
     //   localStorage && localStorage.getItem(ANT_DESIGN_NOT_SHOW_BANNER);
     // const storedBannerVisible =
     //   storedBannerVisibleLastTime && dayjs().diff(dayjs(storedBannerVisibleLastTime), 'day') >= 1;
-
     setSiteState({
-      theme: _theme,
+      theme: _theme.length ? _theme : ['dark'],
       direction: _direction === 'rtl' ? 'rtl' : 'ltr',
       // bannerVisible: storedBannerVisibleLastTime ? !!storedBannerVisible : true,
     });
