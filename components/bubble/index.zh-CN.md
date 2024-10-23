@@ -28,6 +28,7 @@ demo:
 <code src="./demo/variant.tsx">变体</code>
 <code src="./demo/shape.tsx">形状</code>
 <code src="./demo/list.tsx">气泡列表</code>
+<code src="./demo/bubble-custom.tsx">语义化自定义</code>
 <code src="./demo/list-custom.tsx">自定义列表内容</code>
 
 ## API

@@ -27,6 +27,7 @@ Often used when chatting.
 <code src="./demo/variant.tsx">Variant</code>
 <code src="./demo/shape.tsx">Shape</code>
 <code src="./demo/list.tsx">Bubble List</code>
+<code src="./demo/bubble-custom.tsx">Semantic Custom</code>
 <code src="./demo/list-custom.tsx">Custom List Content</code>
 
 ## API
