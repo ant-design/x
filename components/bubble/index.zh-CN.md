@@ -28,6 +28,7 @@ demo:
 <code src="./demo/variant.tsx">变体</code>
 <code src="./demo/shape.tsx">形状</code>
 <code src="./demo/list.tsx">气泡列表</code>
+<code src="./demo/bubble-custom.tsx">语义化自定义</code>
 <code src="./demo/list-custom.tsx">自定义列表内容</code>
 
 ## API
@@ -49,6 +50,7 @@ demo:
 | styles | 语义化结构 style | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - |  |
 | typing | 设置聊天内容打字动画 | boolean \| { step?: number, interval?: number } | false |  |
 | variant | 气泡样式变体 | `filled` \| `borderless` | `filled` |  |
+| loadingRender | 自定义渲染加载态内容 | () => ReactNode | - |  |
 | messageRender | 自定义渲染内容 | (content?: string) => ReactNode | - |  |
 | onTypingComplete | 打字效果完成时的回调，如果没有设置 typing 将在渲染时立刻触发 | () => void | - |  |
 
