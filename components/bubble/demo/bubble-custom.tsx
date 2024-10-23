@@ -1,6 +1,6 @@
 import { FrownOutlined, SmileOutlined, SyncOutlined, UserOutlined } from '@ant-design/icons';
 import { Bubble } from '@ant-design/x';
-import { Button, Flex } from 'antd';
+import { Button, Flex, Space, Spin } from 'antd';
 import type { GetProp, GetRef } from 'antd';
 import React from 'react';
 
@@ -18,6 +18,12 @@ const roles: GetProp<typeof Bubble.List, 'roles'> = {
         width: '100%',
       },
     },
+    loadingRender: () => (
+      <Space>
+        <Spin size="small" />
+        Custom loading...
+      </Space>
+    ),
   },
   user: {
     placement: 'end',
