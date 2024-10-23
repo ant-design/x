@@ -80,23 +80,23 @@ exports[`Sender Component loading state 1`] = `
 
 exports[`Sender Component rtl render component should be rendered correctly in RTL direction 1`] = `
 <div
-  class="ant-sender css-var-r1 ant-sender-rtl"
+  class="ant-sender ant-sender-rtl"
 >
   <div
     class="ant-sender-content"
   >
     <textarea
-      class="ant-input ant-input-borderless css-var-r1 ant-input-css-var ant-sender-input"
+      class="ant-input ant-input-borderless ant-sender-input"
       style="overflow-y: hidden; resize: none;"
     />
     <div
       class="ant-sender-actions-list"
     >
       <div
-        class="ant-sender-actions-list-presets ant-flex css-var-r1 ant-flex-rtl"
+        class="ant-sender-actions-list-presets ant-flex ant-flex-rtl"
       >
         <button
-          class="ant-btn css-var-r1 ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-btn-rtl ant-sender-actions-btn ant-sender-actions-btn-disabled"
+          class="ant-btn ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-btn-rtl ant-sender-actions-btn ant-sender-actions-btn-disabled"
           type="button"
         >
           <span

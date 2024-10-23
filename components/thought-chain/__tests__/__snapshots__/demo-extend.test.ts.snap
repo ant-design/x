@@ -2,14 +2,14 @@
 
 exports[`renders components/thought-chain/demo/basic.tsx extend context correctly 1`] = `
 <div
-  class="ant-card ant-card-bordered css-var-r2p"
+  class="ant-card ant-card-bordered"
   style="width: 500px;"
 >
   <div
     class="ant-card-body"
   >
     <div
-      class="ant-thought-chain css-var-r2p ant-thought-chain-middle"
+      class="ant-thought-chain ant-thought-chain-middle"
     >
       <div
         class="ant-thought-chain-item"
@@ -18,7 +18,7 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
           class="ant-thought-chain-item-header"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-r2p ant-avatar-css-var ant-thought-chain-item-icon"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
           >
             1
           </span>
@@ -26,14 +26,14 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
             class="ant-thought-chain-item-header-box"
           >
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title css-var-r2p"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
                 Thought Chain Item Title
               </strong>
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r2p ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -52,12 +52,12 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
               </div>
             </div>
             <span
-              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc css-var-r2p"
+              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r2p ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -80,7 +80,7 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
             class="ant-thought-chain-item-extra"
           >
             <button
-              class="ant-btn css-var-r2p ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+              class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               type="button"
             >
               <span
@@ -117,7 +117,7 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
           class="ant-thought-chain-item-header"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-r2p ant-avatar-css-var ant-thought-chain-item-icon"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
           >
             2
           </span>
@@ -125,14 +125,14 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
             class="ant-thought-chain-item-header-box"
           >
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title css-var-r2p"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
                 Thought Chain Item Title
               </strong>
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r2p ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -151,12 +151,12 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
               </div>
             </div>
             <span
-              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc css-var-r2p"
+              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r2p ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -179,7 +179,7 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
             class="ant-thought-chain-item-extra"
           >
             <button
-              class="ant-btn css-var-r2p ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+              class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               type="button"
             >
               <span
@@ -216,7 +216,7 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
           class="ant-thought-chain-item-header"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-r2p ant-avatar-css-var ant-thought-chain-item-icon"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
           >
             3
           </span>
@@ -224,14 +224,14 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
             class="ant-thought-chain-item-header-box"
           >
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title css-var-r2p"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
                 Thought Chain Item Title
               </strong>
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r2p ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -250,12 +250,12 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
               </div>
             </div>
             <span
-              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc css-var-r2p"
+              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r2p ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -278,7 +278,7 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
             class="ant-thought-chain-item-extra"
           >
             <button
-              class="ant-btn css-var-r2p ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+              class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               type="button"
             >
               <span
@@ -315,7 +315,7 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
           class="ant-thought-chain-item-header"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-r2p ant-avatar-css-var ant-thought-chain-item-icon"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
           >
             4
           </span>
@@ -323,14 +323,14 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
             class="ant-thought-chain-item-header-box"
           >
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title css-var-r2p"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
                 Thought Chain Item Title
               </strong>
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r2p ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -349,12 +349,12 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
               </div>
             </div>
             <span
-              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc css-var-r2p"
+              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r2p ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -377,7 +377,7 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
             class="ant-thought-chain-item-extra"
           >
             <button
-              class="ant-btn css-var-r2p ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+              class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               type="button"
             >
               <span
@@ -416,14 +416,14 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
 
 exports[`renders components/thought-chain/demo/collapsible.tsx extend context correctly 1`] = `
 <div
-  class="ant-card ant-card-bordered css-var-r2b"
+  class="ant-card ant-card-bordered"
   style="width: 500px;"
 >
   <div
     class="ant-card-body"
   >
     <div
-      class="ant-thought-chain css-var-r2b ant-thought-chain-middle"
+      class="ant-thought-chain ant-thought-chain-middle"
     >
       <div
         class="ant-thought-chain-item"
@@ -432,7 +432,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
           class="ant-thought-chain-item-header"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-r2b ant-avatar-css-var ant-thought-chain-item-icon"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
           >
             1
           </span>
@@ -440,7 +440,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
             class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
           >
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title css-var-r2b"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
                 <span
@@ -466,7 +466,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
               </strong>
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r2b ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -485,12 +485,12 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
               </div>
             </div>
             <span
-              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc css-var-r2b"
+              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               Collapsible
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r2b ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -518,7 +518,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
           class="ant-thought-chain-item-header"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-r2b ant-avatar-css-var ant-thought-chain-item-icon"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
           >
             2
           </span>
@@ -526,7 +526,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
             class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
           >
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title css-var-r2b"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
                 <span
@@ -552,7 +552,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
               </strong>
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r2b ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -571,12 +571,12 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
               </div>
             </div>
             <span
-              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc css-var-r2b"
+              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               Collapsible
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r2b ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -606,14 +606,14 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
 
 exports[`renders components/thought-chain/demo/customization.tsx extend context correctly 1`] = `
 <div
-  class="ant-card ant-card-bordered css-var-r1n"
+  class="ant-card ant-card-bordered"
   style="width: 500px;"
 >
   <div
     class="ant-card-body"
   >
     <div
-      class="ant-thought-chain css-var-r1n ant-thought-chain-middle"
+      class="ant-thought-chain ant-thought-chain-middle"
     >
       <div
         class="ant-thought-chain-item ant-thought-chain-item-success-error"
@@ -622,7 +622,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
           class="ant-thought-chain-item-header"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-r1n ant-avatar-css-var ant-thought-chain-item-icon"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
           >
             <span
               aria-label="check-circle"
@@ -651,14 +651,14 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
             class="ant-thought-chain-item-header-box"
           >
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title css-var-r1n"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
                 Thought Chain Item Title
               </strong>
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r1n ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -677,12 +677,12 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
               </div>
             </div>
             <span
-              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc css-var-r1n"
+              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r1n ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -705,7 +705,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
             class="ant-thought-chain-item-extra"
           >
             <button
-              class="ant-btn css-var-r1n ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+              class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               type="button"
             >
               <span
@@ -741,19 +741,19 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
             class="ant-thought-chain-item-content-box"
           >
             <article
-              class="ant-typography css-var-r1n"
+              class="ant-typography"
             >
               <div
-                class="ant-typography css-var-r1n"
+                class="ant-typography"
               >
                 In the process of internal desktop applications development, many different design specs and implementations would be involved, which might cause designers and developers difficulties and duplication and reduce the efficiency of development.
               </div>
               <div
-                class="ant-typography css-var-r1n"
+                class="ant-typography"
               >
                 After massive project practice and summaries, Ant Design, a design language for background applications, is refined by Ant UED Team, which aims to 
                 <span
-                  class="ant-typography css-var-r1n"
+                  class="ant-typography"
                 >
                   <strong>
                     uniform the user interface specs for internal background projects, lower the unnecessary cost of design differences and implementation and liberate the resources of design and front-end development
@@ -767,7 +767,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
           class="ant-thought-chain-item-footer"
         >
           <button
-            class="ant-btn css-var-r1n ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-block"
+            class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-block"
             type="button"
           >
             <span>
@@ -783,7 +783,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
           class="ant-thought-chain-item-header"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-r1n ant-avatar-css-var ant-thought-chain-item-icon"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
           >
             <span
               aria-label="check-circle"
@@ -812,14 +812,14 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
             class="ant-thought-chain-item-header-box"
           >
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title css-var-r1n"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
                 Thought Chain Item Title
               </strong>
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r1n ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -838,12 +838,12 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
               </div>
             </div>
             <span
-              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc css-var-r1n"
+              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r1n ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -866,7 +866,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
             class="ant-thought-chain-item-extra"
           >
             <button
-              class="ant-btn css-var-r1n ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+              class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               type="button"
             >
               <span
@@ -902,19 +902,19 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
             class="ant-thought-chain-item-content-box"
           >
             <article
-              class="ant-typography css-var-r1n"
+              class="ant-typography"
             >
               <div
-                class="ant-typography css-var-r1n"
+                class="ant-typography"
               >
                 In the process of internal desktop applications development, many different design specs and implementations would be involved, which might cause designers and developers difficulties and duplication and reduce the efficiency of development.
               </div>
               <div
-                class="ant-typography css-var-r1n"
+                class="ant-typography"
               >
                 After massive project practice and summaries, Ant Design, a design language for background applications, is refined by Ant UED Team, which aims to 
                 <span
-                  class="ant-typography css-var-r1n"
+                  class="ant-typography"
                 >
                   <strong>
                     uniform the user interface specs for internal background projects, lower the unnecessary cost of design differences and implementation and liberate the resources of design and front-end development
@@ -928,7 +928,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
           class="ant-thought-chain-item-footer"
         >
           <button
-            class="ant-btn css-var-r1n ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-block"
+            class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-block"
             type="button"
           >
             <span>
@@ -944,7 +944,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
           class="ant-thought-chain-item-header"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-r1n ant-avatar-css-var ant-thought-chain-item-icon"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
           >
             <span
               aria-label="check-circle"
@@ -973,14 +973,14 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
             class="ant-thought-chain-item-header-box"
           >
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title css-var-r1n"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
                 Thought Chain Item Title
               </strong>
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r1n ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -999,12 +999,12 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
               </div>
             </div>
             <span
-              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc css-var-r1n"
+              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r1n ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -1027,7 +1027,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
             class="ant-thought-chain-item-extra"
           >
             <button
-              class="ant-btn css-var-r1n ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+              class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               type="button"
             >
               <span
@@ -1063,19 +1063,19 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
             class="ant-thought-chain-item-content-box"
           >
             <article
-              class="ant-typography css-var-r1n"
+              class="ant-typography"
             >
               <div
-                class="ant-typography css-var-r1n"
+                class="ant-typography"
               >
                 In the process of internal desktop applications development, many different design specs and implementations would be involved, which might cause designers and developers difficulties and duplication and reduce the efficiency of development.
               </div>
               <div
-                class="ant-typography css-var-r1n"
+                class="ant-typography"
               >
                 After massive project practice and summaries, Ant Design, a design language for background applications, is refined by Ant UED Team, which aims to 
                 <span
-                  class="ant-typography css-var-r1n"
+                  class="ant-typography"
                 >
                   <strong>
                     uniform the user interface specs for internal background projects, lower the unnecessary cost of design differences and implementation and liberate the resources of design and front-end development
@@ -1089,7 +1089,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
           class="ant-thought-chain-item-footer"
         >
           <button
-            class="ant-btn css-var-r1n ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-block"
+            class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-block"
             type="button"
           >
             <span>
@@ -1107,14 +1107,14 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
 
 exports[`renders components/thought-chain/demo/nested.tsx extend context correctly 1`] = `
 <div
-  class="ant-card ant-card-bordered css-var-r19"
+  class="ant-card ant-card-bordered"
   style="width: 500px;"
 >
   <div
     class="ant-card-body"
   >
     <div
-      class="ant-thought-chain css-var-r19 ant-thought-chain-middle"
+      class="ant-thought-chain ant-thought-chain-middle"
     >
       <div
         class="ant-thought-chain-item"
@@ -1123,7 +1123,7 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
           class="ant-thought-chain-item-header"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-r19 ant-avatar-css-var ant-thought-chain-item-icon"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
           >
             1
           </span>
@@ -1131,7 +1131,7 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
             class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
           >
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title css-var-r19"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
                 <span
@@ -1157,7 +1157,7 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
               </strong>
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r19 ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -1176,12 +1176,12 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
               </div>
             </div>
             <span
-              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc css-var-r19"
+              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r19 ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -1204,7 +1204,7 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
             class="ant-thought-chain-item-extra"
           >
             <button
-              class="ant-btn css-var-r19 ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+              class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               type="button"
             >
               <span
@@ -1237,7 +1237,7 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
           class="ant-thought-chain-item-footer"
         >
           <button
-            class="ant-btn css-var-r19 ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+            class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
             type="button"
           >
             <span>
@@ -1253,7 +1253,7 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
           class="ant-thought-chain-item-header"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-r19 ant-avatar-css-var ant-thought-chain-item-icon"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
           >
             2
           </span>
@@ -1261,7 +1261,7 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
             class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
           >
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title css-var-r19"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
                 <span
@@ -1287,7 +1287,7 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
               </strong>
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r19 ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -1306,12 +1306,12 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
               </div>
             </div>
             <span
-              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc css-var-r19"
+              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r19 ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -1334,7 +1334,7 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
             class="ant-thought-chain-item-extra"
           >
             <button
-              class="ant-btn css-var-r19 ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+              class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               type="button"
             >
               <span
@@ -1367,7 +1367,7 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
           class="ant-thought-chain-item-footer"
         >
           <button
-            class="ant-btn css-var-r19 ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+            class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
             type="button"
           >
             <span>
@@ -1385,18 +1385,18 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
 
 exports[`renders components/thought-chain/demo/size.tsx extend context correctly 1`] = `
 <div
-  class="ant-card ant-card-bordered css-var-rf"
+  class="ant-card ant-card-bordered"
   style="width: 500px;"
 >
   <div
     class="ant-card-body"
   >
     <div
-      class="ant-radio-group ant-radio-group-outline css-var-rf ant-radio-css-var"
+      class="ant-radio-group ant-radio-group-outline"
       style="margin-bottom: 16px;"
     >
       <label
-        class="ant-radio-button-wrapper css-var-rf ant-radio-css-var"
+        class="ant-radio-button-wrapper"
       >
         <span
           class="ant-radio-button"
@@ -1415,7 +1415,7 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
         </span>
       </label>
       <label
-        class="ant-radio-button-wrapper ant-radio-button-wrapper-checked css-var-rf ant-radio-css-var"
+        class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"
       >
         <span
           class="ant-radio-button ant-radio-button-checked"
@@ -1434,7 +1434,7 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
         </span>
       </label>
       <label
-        class="ant-radio-button-wrapper css-var-rf ant-radio-css-var"
+        class="ant-radio-button-wrapper"
       >
         <span
           class="ant-radio-button"
@@ -1454,7 +1454,7 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
       </label>
     </div>
     <div
-      class="ant-thought-chain css-var-rf ant-thought-chain-middle"
+      class="ant-thought-chain ant-thought-chain-middle"
     >
       <div
         class="ant-thought-chain-item"
@@ -1463,7 +1463,7 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
           class="ant-thought-chain-item-header"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-rf ant-avatar-css-var ant-thought-chain-item-icon"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
           >
             1
           </span>
@@ -1471,14 +1471,14 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
             class="ant-thought-chain-item-header-box"
           >
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title css-var-rf"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
                 Thought Chain Item Title
               </strong>
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-rf ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -1497,12 +1497,12 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
               </div>
             </div>
             <span
-              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc css-var-rf"
+              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-rf ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -1525,7 +1525,7 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
             class="ant-thought-chain-item-extra"
           >
             <button
-              class="ant-btn css-var-rf ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+              class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               type="button"
             >
               <span
@@ -1562,7 +1562,7 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
           class="ant-thought-chain-item-header"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-rf ant-avatar-css-var ant-thought-chain-item-icon"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
           >
             2
           </span>
@@ -1570,14 +1570,14 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
             class="ant-thought-chain-item-header-box"
           >
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title css-var-rf"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
                 Thought Chain Item Title
               </strong>
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-rf ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -1596,12 +1596,12 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
               </div>
             </div>
             <span
-              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc css-var-rf"
+              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-rf ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -1624,7 +1624,7 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
             class="ant-thought-chain-item-extra"
           >
             <button
-              class="ant-btn css-var-rf ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+              class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               type="button"
             >
               <span
@@ -1661,7 +1661,7 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
           class="ant-thought-chain-item-header"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-rf ant-avatar-css-var ant-thought-chain-item-icon"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
           >
             3
           </span>
@@ -1669,14 +1669,14 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
             class="ant-thought-chain-item-header-box"
           >
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title css-var-rf"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
                 Thought Chain Item Title
               </strong>
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-rf ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -1695,12 +1695,12 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
               </div>
             </div>
             <span
-              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc css-var-rf"
+              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-rf ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -1723,7 +1723,7 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
             class="ant-thought-chain-item-extra"
           >
             <button
-              class="ant-btn css-var-rf ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+              class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               type="button"
             >
               <span
@@ -1760,7 +1760,7 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
           class="ant-thought-chain-item-header"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-rf ant-avatar-css-var ant-thought-chain-item-icon"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
           >
             4
           </span>
@@ -1768,14 +1768,14 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
             class="ant-thought-chain-item-header-box"
           >
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title css-var-rf"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
                 Thought Chain Item Title
               </strong>
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-rf ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -1794,12 +1794,12 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
               </div>
             </div>
             <span
-              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc css-var-rf"
+              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-rf ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -1822,7 +1822,7 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
             class="ant-thought-chain-item-extra"
           >
             <button
-              class="ant-btn css-var-rf ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+              class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               type="button"
             >
               <span
@@ -1861,14 +1861,14 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
 
 exports[`renders components/thought-chain/demo/status.tsx extend context correctly 1`] = `
 <div
-  class="ant-card ant-card-bordered css-var-r1"
+  class="ant-card ant-card-bordered"
   style="width: 500px;"
 >
   <div
     class="ant-card-body"
   >
     <button
-      class="ant-btn css-var-r1 ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       style="margin-bottom: 16px;"
       type="button"
     >
@@ -1877,7 +1877,7 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
       </span>
     </button>
     <div
-      class="ant-thought-chain css-var-r1 ant-thought-chain-middle"
+      class="ant-thought-chain ant-thought-chain-middle"
     >
       <div
         class="ant-thought-chain-item ant-thought-chain-item-success-error"
@@ -1886,7 +1886,7 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
           class="ant-thought-chain-item-header"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-r1 ant-avatar-css-var ant-thought-chain-item-icon"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
           >
             <span
               aria-label="check-circle"
@@ -1915,14 +1915,14 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
             class="ant-thought-chain-item-header-box"
           >
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title css-var-r1"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
                 Thought Chain Item - 1
               </strong>
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r1 ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -1941,12 +1941,12 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
               </div>
             </div>
             <span
-              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc css-var-r1"
+              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               status: success
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r1 ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -1974,7 +1974,7 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
           class="ant-thought-chain-item-header"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-r1 ant-avatar-css-var ant-thought-chain-item-icon"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
           >
             <span
               aria-label="info-circle"
@@ -2003,14 +2003,14 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
             class="ant-thought-chain-item-header-box"
           >
             <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title css-var-r1"
+              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
                 Thought Chain Item - 2
               </strong>
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r1 ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -2029,12 +2029,12 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
               </div>
             </div>
             <span
-              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc css-var-r1"
+              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               status: error
             </span>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-r1 ant-tooltip-placement-topLeft"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
