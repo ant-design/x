@@ -1,9 +1,9 @@
 import { LeftOutlined, PlusOutlined, RightOutlined } from '@ant-design/icons';
 import { Button, type UploadProps } from 'antd';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import { CSSMotionList } from 'rc-motion';
 import React from 'react';
-import type { Attachment } from '..';
+import type { Attachment, AttachmentsProps } from '..';
 import SilentUploader from '../SilentUploader';
 import { AttachmentContext } from '../context';
 import FileListCard from './FileListCard';
@@ -14,10 +14,26 @@ export interface FileListProps {
   onRemove: (item: Attachment) => void;
   overflow?: 'scrollX' | 'scrollY' | 'wrap';
   upload: UploadProps;
+
+  // Semantic
+  listClassName?: string;
+  listStyle?: React.CSSProperties;
+  itemClassName?: string;
+  itemStyle?: React.CSSProperties;
 }
 
 export default function FileList(props: FileListProps) {
-  const { prefixCls, items, onRemove, overflow, upload } = props;
+  const {
+    prefixCls,
+    items,
+    onRemove,
+    overflow,
+    upload,
+    listClassName,
+    listStyle,
+    itemClassName,
+    itemStyle,
+  } = props;
 
   const listCls = `${prefixCls}-list`;
 
@@ -82,13 +98,18 @@ export default function FileList(props: FileListProps) {
   // ================================= Render =================================
   return (
     <div
-      className={classNames(listCls, {
-        [`${listCls}-overflow-${props.overflow}`]: overflow,
-        [`${listCls}-overflow-ping-start`]: pingStart,
-        [`${listCls}-overflow-ping-end`]: pingEnd,
-      })}
+      className={classnames(
+        listCls,
+        {
+          [`${listCls}-overflow-${props.overflow}`]: overflow,
+          [`${listCls}-overflow-ping-start`]: pingStart,
+          [`${listCls}-overflow-ping-end`]: pingEnd,
+        },
+        listClassName,
+      )}
       ref={containerRef}
       onScroll={checkPing}
+      style={listStyle}
     >
       <CSSMotionList
         keys={items.map((item) => ({
@@ -108,8 +129,11 @@ export default function FileList(props: FileListProps) {
               prefixCls={listCls}
               item={item}
               onRemove={onRemove}
-              className={motionCls}
-              style={motionStyle}
+              className={classnames(motionCls, itemClassName)}
+              style={{
+                ...motionStyle,
+                ...itemStyle,
+              }}
             />
           );
         }}

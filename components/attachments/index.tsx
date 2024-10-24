@@ -5,7 +5,6 @@ import React from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 
-import classNames from 'classnames';
 import { useEvent, useMergedState } from 'rc-util';
 import DropArea from './DropArea';
 import FileList, { type FileListProps } from './FileList';
@@ -14,7 +13,7 @@ import SilentUploader from './SilentUploader';
 import { AttachmentContext } from './context';
 import useStyle from './style';
 
-export type SemanticType = 'list' | 'item' | 'itemContent' | 'title';
+export type SemanticType = 'list' | 'item' | 'placeholder';
 
 export type Attachment = GetProp<UploadProps, 'fileList'>[number];
 
@@ -23,8 +22,12 @@ export interface AttachmentsProps extends Omit<UploadProps, 'fileList'> {
 
   rootClassName?: string;
   rootStyle?: React.CSSProperties;
+
   style?: React.CSSProperties;
   className?: string;
+
+  classNames?: Partial<Record<SemanticType, string>>;
+  styles?: Partial<Record<SemanticType, React.CSSProperties>>;
 
   children?: React.ReactElement;
 
@@ -53,6 +56,8 @@ const Attachments: React.FC<AttachmentsProps> = (props) => {
     onChange,
     overflow,
     disabled,
+    classNames = {},
+    styles = {},
     ...uploadProps
   } = props;
 
@@ -63,6 +68,8 @@ const Attachments: React.FC<AttachmentsProps> = (props) => {
 
   // ===================== Component Config =========================
   const contextConfig = useXComponentConfig('attachments');
+
+  const { classNames: contextClassNames, styles: contextStyles } = contextConfig;
 
   // ============================= Ref =============================
   const containerRef = React.useRef<HTMLDivElement>(null);
@@ -107,6 +114,11 @@ const Attachments: React.FC<AttachmentsProps> = (props) => {
         placeholder={placeholderContent}
         upload={mergedUploadProps}
         prefixCls={prefixCls}
+        className={classnames(contextClassNames.placeholder, classNames.placeholder)}
+        style={{
+          ...contextStyles.placeholder,
+          ...styles.placeholder,
+        }}
       />
     );
   };
@@ -120,7 +132,7 @@ const Attachments: React.FC<AttachmentsProps> = (props) => {
         <DropArea
           getDropContainer={getDropContainer}
           prefixCls={prefixCls}
-          className={classNames(cssinjsCls, rootClassName)}
+          className={classnames(cssinjsCls, rootClassName)}
         >
           {getPlaceholderNode('drop')}
         </DropArea>
@@ -154,6 +166,16 @@ const Attachments: React.FC<AttachmentsProps> = (props) => {
             onRemove={onItemRemove}
             overflow={overflow}
             upload={mergedUploadProps}
+            listClassName={classnames(contextClassNames.list, classNames.list)}
+            listStyle={{
+              ...contextStyles.list,
+              ...styles.list,
+            }}
+            itemClassName={classnames(contextClassNames.item, classNames.item)}
+            itemStyle={{
+              ...contextStyles.item,
+              ...styles.item,
+            }}
           />
         ) : (
           getPlaceholderNode('inline')

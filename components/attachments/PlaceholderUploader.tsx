@@ -15,10 +15,12 @@ export interface PlaceholderProps {
   prefixCls: string;
   placeholder?: PlaceholderType;
   upload?: UploadProps;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 function Placeholder(props: PlaceholderProps, ref: React.Ref<HTMLDivElement>) {
-  const { prefixCls, placeholder = {}, upload } = props;
+  const { prefixCls, placeholder = {}, upload, className, style } = props;
 
   const placeholderCls = `${prefixCls}-placeholder`;
 
@@ -63,15 +65,20 @@ function Placeholder(props: PlaceholderProps, ref: React.Ref<HTMLDivElement>) {
 
   return (
     <div
-      className={classNames(placeholderCls, {
-        [`${placeholderCls}-drag-in`]: dragIn,
-        [`${placeholderCls}-disabled`]: disabled,
-      })}
+      className={classNames(
+        placeholderCls,
+        {
+          [`${placeholderCls}-drag-in`]: dragIn,
+          [`${placeholderCls}-disabled`]: disabled,
+        },
+        className,
+      )}
       onDragEnter={onDragEnter}
       onDragLeave={onDragLeave}
       onDrop={onDrop}
       aria-hidden={disabled}
       ref={ref}
+      style={style}
     >
       <Upload.Dragger
         showUploadList={false}

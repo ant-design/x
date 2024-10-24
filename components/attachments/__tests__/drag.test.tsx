@@ -1,9 +1,7 @@
 import React from 'react';
 
 import Attachments, { type AttachmentsProps } from '..';
-import mountTest from '../../../tests/shared/mountTest';
-import rtlTest from '../../../tests/shared/rtlTest';
-import { fireEvent, render, waitFakeTimer } from '../../../tests/utils';
+import { fireEvent, render } from '../../../tests/utils';
 
 describe('attachments.drag', () => {
   beforeAll(() => {

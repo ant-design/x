@@ -1,6 +1,6 @@
 import { CloudUploadOutlined } from '@ant-design/icons';
 import { Attachments, type AttachmentsProps } from '@ant-design/x';
-import { App, Button, Flex, GetProp, Result, theme } from 'antd';
+import { Button, Flex, GetProp, Result, theme } from 'antd';
 import React from 'react';
 
 const presetFiles: AttachmentsProps['items'] = [
@@ -65,8 +65,6 @@ const getPlaceholderFn = (
 };
 
 const Demo = () => {
-  const { message } = App.useApp();
-
   const { token } = theme.useToken();
 
   const [items, setItems] = React.useState<GetProp<AttachmentsProps, 'items'>>(presetFiles);
@@ -137,8 +135,4 @@ const Demo = () => {
   );
 };
 
-export default () => (
-  <App>
-    <Demo />
-  </App>
-);
+export default Demo;

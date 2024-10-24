@@ -1,56 +1,57 @@
-import { BulbOutlined, InfoCircleOutlined, RocketOutlined } from '@ant-design/icons';
-import { Prompts, type PromptsProps } from '@ant-design/x';
+import { CloudUploadOutlined } from '@ant-design/icons';
+import { Attachments, type AttachmentsProps } from '@ant-design/x';
+import { Divider, Flex } from 'antd';
 import React from 'react';
 import SemanticPreview from '../../../.dumi/components/SemanticPreview';
 import useLocale from '../../../.dumi/hooks/useLocale';
 
-const locales = {
-  cn: { title: '标题容器', list: '列表容器', item: '列表项', itemContent: '列表项内容' },
+const placeholderLocales = {
+  cn: { placeholder: '占位符' },
   en: {
-    title: 'Title container',
+    placeholder: 'Placeholder',
+  },
+};
+const withItemLocales = {
+  cn: { list: '列表容器', item: '列表项' },
+  en: {
     list: 'List container',
     item: 'List item',
-    itemContent: 'List item content',
   },
 };
 
-const items: PromptsProps['items'] = [
-  {
-    key: '1',
-    icon: <BulbOutlined style={{ color: '#FFD700' }} />,
-    label: 'Ignite Your Creativity',
-    description: 'Got any sparks for a new project?',
-    disabled: false,
-  },
-  {
-    key: '2',
-    icon: <InfoCircleOutlined style={{ color: '#1890FF' }} />,
-    label: 'Uncover Background Info',
-    description: 'Help me understand the background of this topic.',
-    disabled: false,
-  },
-  {
-    key: '3',
-    icon: <RocketOutlined style={{ color: '#722ED1' }} />,
-    label: 'Efficiency Boost Battle',
-    description: 'How can I work faster and better?',
-    disabled: false,
-  },
-];
+const items: AttachmentsProps['items'] = Array.from({ length: 3 }).map((_, index) => ({
+  uid: String(index),
+  name: `file-${index}.jpg`,
+  status: 'done',
+  thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+  url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+}));
 
 const App: React.FC = () => {
-  const [locale] = useLocale(locales);
+  const [placeholderLocale] = useLocale(placeholderLocales);
+  const [withItemLocale] = useLocale(withItemLocales);
+
   return (
-    <SemanticPreview
-      semantics={[
-        { name: 'title', desc: locale.title },
-        { name: 'list', desc: locale.list },
-        { name: 'item', desc: locale.item },
-        { name: 'itemContent', desc: locale.itemContent },
-      ]}
-    >
-      <Prompts title="✨ Inspirational Sparks and Marvelous Tips" items={items} />
-    </SemanticPreview>
+    <Flex vertical>
+      <SemanticPreview semantics={[{ name: 'placeholder', desc: placeholderLocale.placeholder }]}>
+        <Attachments
+          placeholder={{
+            icon: <CloudUploadOutlined />,
+            title: 'Upload File',
+            description: 'Drag or click to upload file.',
+          }}
+        />
+      </SemanticPreview>
+      <Divider style={{ margin: 0, padding: 0 }} />
+      <SemanticPreview
+        semantics={[
+          { name: 'list', desc: withItemLocale.list },
+          { name: 'item', desc: withItemLocale.item },
+        ]}
+      >
+        <Attachments items={items} />
+      </SemanticPreview>
+    </Flex>
   );
 };
 
