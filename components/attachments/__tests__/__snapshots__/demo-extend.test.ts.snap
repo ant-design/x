@@ -1222,7 +1222,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               type="file"
             />
             <button
-              class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-attachment-list-upload-btn"
+              class="ant-btn ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
               type="button"
             >
               <span
@@ -1703,7 +1703,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
                 type="file"
               />
               <button
-                class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-attachment-list-upload-btn"
+                class="ant-btn ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
                 type="button"
               >
                 <span
@@ -2175,7 +2175,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
                 type="file"
               />
               <button
-                class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-attachment-list-upload-btn"
+                class="ant-btn ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
                 type="button"
               >
                 <span

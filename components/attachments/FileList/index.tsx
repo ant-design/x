@@ -140,7 +140,7 @@ export default function FileList(props: FileListProps) {
       </CSSMotionList>
       {!disabled && (
         <SilentUploader upload={upload}>
-          <Button className={`${listCls}-upload-btn`}>
+          <Button className={`${listCls}-upload-btn`} type="dashed">
             <PlusOutlined className={`${listCls}-upload-btn-icon`} />
           </Button>
         </SilentUploader>
