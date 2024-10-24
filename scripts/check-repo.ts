@@ -18,9 +18,16 @@ function exitProcess(code = 1) {
 
 async function checkVersion() {
   spinner.start('正在检查当前版本是否已经存在');
-  const { versions } = await fetch('http://registry.npmjs.org/@ant-design/x').then(
-    (res: Response) => res.json(),
-  );
+
+  const raceUrl = [
+    'http://registry.npmjs.org/@ant-design/x',
+    'https://registry.npmmirror.com/@ant-design/x',
+  ];
+
+  // any of the urls return the data will be fine
+  const promises = raceUrl.map((url) => fetch(url).then((res) => res.json()));
+  const { versions } = await Promise.race(promises);
+
   if (version in versions) {
     spinner.fail(chalk.yellow('😈 Current version already exists. Forget update package.json?'));
     spinner.info(`${chalk.cyan(' => Current:')}: version`);

@@ -16,6 +16,13 @@ tag: vVERSION
 
 ---
 
+## 1.0.0-alpha.5
+
+`2024-10-23`
+
+- 🆕 Bubble support `loadingRender` to customize loading content. [#165](https://github.com/ant-design/x/pull/165)
+- 🐛 Fix components missing style when without XProvider. [#163](https://github.com/ant-design/x/pull/163)
+
 ## 1.0.0-alpha.4
 
 `2024-10-17`
