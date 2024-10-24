@@ -35,10 +35,9 @@ function Placeholder(props: PlaceholderProps, ref: React.Ref<HTMLDivElement>) {
 
   const onDragLeave = (e: React.DragEvent) => {
     // Leave the div should end
-    if ((e.currentTarget as HTMLElement).contains(e.relatedTarget as HTMLElement)) {
-      return;
+    if (!(e.currentTarget as HTMLElement).contains(e.relatedTarget as HTMLElement)) {
+      setDragIn(false);
     }
-    setDragIn(false);
   };
 
   const onDrop = () => {

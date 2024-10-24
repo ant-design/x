@@ -29,7 +29,7 @@ export default function DropArea(props: DropUploaderProps) {
   React.useEffect(() => {
     // Add global drop event
     if (container) {
-      const onDragEnter = (e: DragEvent) => {
+      const onDragEnter = () => {
         setShowArea(true);
       };
 
@@ -62,7 +62,7 @@ export default function DropArea(props: DropUploaderProps) {
   }, [!!container]);
 
   // =========================== Visible ============================
-  const showDropdown = getDropContainer && container && showArea !== null && !disabled;
+  const showDropdown = getDropContainer && container && showArea && !disabled;
 
   // ============================ Render ============================
   if (!showDropdown) {
@@ -76,9 +76,6 @@ export default function DropArea(props: DropUploaderProps) {
       className={classnames(areaCls, className, {
         [`${areaCls}-on-body`]: container.tagName === 'BODY',
       })}
-      style={{
-        display: showArea ? 'block' : 'none',
-      }}
     >
       {children}
     </div>,
