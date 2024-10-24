@@ -6,7 +6,7 @@ title: Ant Design X of React
 `@ant-design/x` 是遵循 Ant Design 设计体系的一个 React UI 库，用于构建由 AI 驱动的界面，一键接入智能对话组件与 API 服务。
 
 <div class="pic-plus">
-  <img width="150" src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*1SDwSrOnSakAAAAAAAAAAAAADgCCAQ/original"/>
+  <img width="150" src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*eco6RrQhxbMAAAAAAAAAAAAADgCCAQ/original"/>
   <span>+</span>
   <img width="160" src="https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg"/>
 </div>

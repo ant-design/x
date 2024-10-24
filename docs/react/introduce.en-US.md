@@ -6,7 +6,7 @@ title: Ant Design X of React
 Following the Ant Design specification, we developed a React UI library `@ant-design/x` that Crafting AI-driven interfaces with React, seamlessly integrating smart chat components and API services at your fingertips.
 
 <div class="pic-plus">
-  <img width="150" src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*1SDwSrOnSakAAAAAAAAAAAAADgCCAQ/original" />
+  <img width="150" src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*eco6RrQhxbMAAAAAAAAAAAAADgCCAQ/original" />
   <span>+</span>
   <img width="160" src="https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg" />
 </div>

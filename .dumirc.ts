@@ -26,7 +26,7 @@ export default defineConfig({
   runtimePublicPath: {},
   outputPath: '_site',
   favicons: [
-    'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*1SDwSrOnSakAAAAAAAAAAAAADgCCAQ/original',
+    'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*eco6RrQhxbMAAAAAAAAAAAAADgCCAQ/original',
   ],
   resolve: {
     docDirs: [{ type: 'doc', dir: 'docs' }],
