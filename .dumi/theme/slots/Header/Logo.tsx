@@ -11,13 +11,13 @@ const useStyle = createStyles(({ token, css }) => {
   return {
     logo: css`
       height: ${headerHeight}px;
-      padding-inline-start: 40px;
+      line-height: ${headerHeight}px;
+      padding-inline-start: ${token.paddingXL}px;
       overflow: hidden;
       color: ${colorTextHeading};
       font-weight: bold;
-      font-size: 18px;
-      font-family: AlibabaPuHuiTi, ${fontFamily}, sans-serif;
-      line-height: ${headerHeight}px;
+      font-size: 24px;
+      font-family: PingFangSC-Semibold, ${fontFamily}, sans-serif;
       letter-spacing: -0.18px;
       white-space: nowrap;
       text-decoration: none;
@@ -30,8 +30,8 @@ const useStyle = createStyles(({ token, css }) => {
       }
 
       img {
-        width: 32px;
-        height: 32px;
+        width: 40px;
+        height: 40px;
         display: inline-block;
         vertical-align: middle;
       }
@@ -53,7 +53,7 @@ export interface LogoProps {
 }
 
 const logoSrc =
-  'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*1SDwSrOnSakAAAAAAAAAAAAADgCCAQ/original';
+  'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*eco6RrQhxbMAAAAAAAAAAAAADgCCAQ/original';
 
 const Logo: React.FC<LogoProps> = ({ isZhCN }) => {
   const { search } = useLocation();
