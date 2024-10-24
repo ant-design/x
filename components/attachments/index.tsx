@@ -5,10 +5,11 @@ import React from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 
+import classNames from 'classnames';
 import { useEvent, useMergedState } from 'rc-util';
 import DropArea from './DropArea';
 import FileList, { type FileListProps } from './FileList';
-import PlaceholderUploader, { PlaceholderProps, PlaceholderType } from './PlaceholderUploader';
+import PlaceholderUploader, { PlaceholderType } from './PlaceholderUploader';
 import SilentUploader from './SilentUploader';
 import { AttachmentContext } from './context';
 import useStyle from './style';
@@ -19,6 +20,9 @@ export type Attachment = GetProp<UploadProps, 'fileList'>[number];
 
 export interface AttachmentsProps extends Omit<UploadProps, 'fileList'> {
   prefixCls?: string;
+
+  rootClassName?: string;
+  rootStyle?: React.CSSProperties;
   style?: React.CSSProperties;
   className?: string;
 
@@ -38,6 +42,8 @@ export interface AttachmentsProps extends Omit<UploadProps, 'fileList'> {
 const Attachments: React.FC<AttachmentsProps> = (props) => {
   const {
     prefixCls: customizePrefixCls,
+    rootClassName,
+    rootStyle,
     className,
     style,
     items,
@@ -108,8 +114,14 @@ const Attachments: React.FC<AttachmentsProps> = (props) => {
   if (children) {
     renderChildren = (
       <>
-        <SilentUploader upload={mergedUploadProps}>{children}</SilentUploader>
-        <DropArea getDropContainer={getDropContainer} prefixCls={prefixCls} className={cssinjsCls}>
+        <SilentUploader upload={mergedUploadProps} rootClassName={rootClassName}>
+          {children}
+        </SilentUploader>
+        <DropArea
+          getDropContainer={getDropContainer}
+          prefixCls={prefixCls}
+          className={classNames(cssinjsCls, rootClassName)}
+        >
           {getPlaceholderNode('drop')}
         </DropArea>
       </>
@@ -126,8 +138,12 @@ const Attachments: React.FC<AttachmentsProps> = (props) => {
             [`${prefixCls}-rtl`]: direction === 'rtl',
           },
           className,
+          rootClassName,
         )}
-        style={style}
+        style={{
+          ...rootStyle,
+          ...style,
+        }}
         dir={direction || 'ltr'}
         ref={containerRef}
       >

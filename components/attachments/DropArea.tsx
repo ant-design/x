@@ -17,8 +17,6 @@ export default function DropArea(props: DropUploaderProps) {
   const [container, setContainer] = React.useState<HTMLElement | null | undefined>();
   const [showArea, setShowArea] = React.useState<boolean | null>(null);
 
-  // ============================= MISC =============================
-
   // ========================== Container ===========================
   React.useEffect(() => {
     const nextContainer = getDropContainer?.();

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders components/attachments/demo/basic.tsx extend context correctly 1`] = `
+exports[`renders components/attachments/demo/basic.tsx correctly 1`] = `
 <div
   class="ant-app"
 >
@@ -50,7 +50,7 @@ exports[`renders components/attachments/demo/basic.tsx extend context correctly 
             <input
               accept=""
               name="file"
-              style="display: none;"
+              style="display:none"
               type="file"
             />
             <button
@@ -92,9 +92,7 @@ exports[`renders components/attachments/demo/basic.tsx extend context correctly 
 </div>
 `;
 
-exports[`renders components/attachments/demo/basic.tsx extend context correctly 2`] = `[]`;
-
-exports[`renders components/attachments/demo/overflow.tsx extend context correctly 1`] = `
+exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
 <div
   class="ant-flex ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
@@ -105,7 +103,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
       aria-label="segmented control"
       class="ant-segmented"
       role="listbox"
-      style="margin-inline-end: auto;"
+      style="margin-inline-end:auto"
     >
       <div
         class="ant-segmented-group"
@@ -114,6 +112,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
           class="ant-segmented-item ant-segmented-item-selected"
         >
           <input
+            checked=""
             class="ant-segmented-item-input"
             type="radio"
           />
@@ -1218,7 +1217,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             <input
               accept=""
               name="file"
-              style="display: none;"
+              style="display:none"
               type="file"
             />
             <button
@@ -1256,18 +1255,16 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
 </div>
 `;
 
-exports[`renders components/attachments/demo/overflow.tsx extend context correctly 2`] = `[]`;
-
-exports[`renders components/attachments/demo/placeholder.tsx extend context correctly 1`] = `
+exports[`renders components/attachments/demo/placeholder.tsx correctly 1`] = `
 <div
   class="ant-app"
 >
   <div
     class="ant-flex ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
-    style="padding: 16px; background: rgba(0, 0, 0, 0.04);"
+    style="padding:16px;background:rgba(0, 0, 0, 0.04)"
   >
     <div
-      style="border-radius: 6px; overflow: hidden; background: #ffffff;"
+      style="border-radius:6px;overflow:hidden;background:#ffffff"
     >
       <div
         class="ant-attachment"
@@ -1281,7 +1278,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
           >
             <div
               class="ant-attachment-list-card-icon"
-              style="color: #22b35e;"
+              style="color:#22b35e"
             >
               <span
                 aria-label="file-excel"
@@ -1361,7 +1358,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
           >
             <div
               class="ant-attachment-list-card-icon"
-              style="color: #1677ff;"
+              style="color:#1677ff"
             >
               <span
                 aria-label="file-word"
@@ -1441,7 +1438,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
           >
             <div
               class="ant-attachment-list-card-icon"
-              style="color: #fab714;"
+              style="color:#fab714"
             >
               <span
                 aria-label="file-zip"
@@ -1535,7 +1532,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
               >
                 <div
                   class="ant-progress-inner"
-                  style="width: 60px; height: 60px; font-size: 15px;"
+                  style="width:60px;height:60px;font-size:15px"
                 >
                   <svg
                     class="ant-progress-circle"
@@ -1550,7 +1547,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
                       stroke="rgba(255, 255, 255, 0.3)"
                       stroke-linecap="round"
                       stroke-width="6"
-                      style="stroke: rgba(255, 255, 255, 0.3); stroke-dasharray: 295.3097094374406px 295.3097094374406; stroke-dashoffset: 0; transform: rotate(-90deg); transform-origin: 50px 50px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s; fill-opacity: 0;"
+                      style="stroke:rgba(255, 255, 255, 0.3);stroke-dasharray:295.3097094374406px 295.3097094374406;stroke-dashoffset:0;transform:rotate(-90deg);transform-origin:50px 50px;transition:stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;fill-opacity:0"
                     />
                     <circle
                       class="ant-progress-circle-path"
@@ -1560,7 +1557,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
                       r="47"
                       stroke-linecap="round"
                       stroke-width="6"
-                      style="stroke: #FFF; stroke-dasharray: 295.3097094374406px 295.3097094374406; stroke-dashoffset: 200.8575053230852; transform: rotate(-90deg); transform-origin: 50px 50px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s; fill-opacity: 0; transition-duration: 0s, 0s;"
+                      style="stroke:#FFF;stroke-dasharray:295.3097094374406px 295.3097094374406;stroke-dashoffset:200.8575053230852;transform:rotate(-90deg);transform-origin:50px 50px;transition:stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;fill-opacity:0"
                     />
                     <circle
                       class="ant-progress-circle-path"
@@ -1570,16 +1567,18 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
                       r="47"
                       stroke-linecap="round"
                       stroke-width="6"
-                      style="stroke: #52C41A; stroke-dasharray: 295.3097094374406px 295.3097094374406; stroke-dashoffset: 295.2997094374406; transform: rotate(-90deg); transform-origin: 50px 50px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s; fill-opacity: 0; transition-duration: 0s, 0s;"
+                      style="stroke:#52C41A;stroke-dasharray:295.3097094374406px 295.3097094374406;stroke-dashoffset:295.2997094374406;transform:rotate(-90deg);transform-origin:50px 50px;transition:stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;fill-opacity:0"
                     />
                   </svg>
                   <span
                     class="ant-progress-text"
                   >
                     <span
-                      style="color: #FFF;"
+                      style="color:#FFF"
                     >
-                      33%
+                      33
+                      <!-- -->
+                      %
                     </span>
                   </span>
                 </div>
@@ -1702,7 +1701,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
                 <input
                   accept=""
                   name="file"
-                  style="display: none;"
+                  style="display:none"
                   type="file"
                 />
                 <button
@@ -1739,7 +1738,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
       </div>
     </div>
     <div
-      style="border-radius: 6px; overflow: hidden; background: #ffffff;"
+      style="border-radius:6px;overflow:hidden;background:#ffffff"
     >
       <div
         class="ant-attachment"
@@ -1753,7 +1752,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
           >
             <div
               class="ant-attachment-list-card-icon"
-              style="color: #22b35e;"
+              style="color:#22b35e"
             >
               <span
                 aria-label="file-excel"
@@ -1833,7 +1832,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
           >
             <div
               class="ant-attachment-list-card-icon"
-              style="color: #1677ff;"
+              style="color:#1677ff"
             >
               <span
                 aria-label="file-word"
@@ -1913,7 +1912,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
           >
             <div
               class="ant-attachment-list-card-icon"
-              style="color: #fab714;"
+              style="color:#fab714"
             >
               <span
                 aria-label="file-zip"
@@ -2007,7 +2006,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
               >
                 <div
                   class="ant-progress-inner"
-                  style="width: 60px; height: 60px; font-size: 15px;"
+                  style="width:60px;height:60px;font-size:15px"
                 >
                   <svg
                     class="ant-progress-circle"
@@ -2022,7 +2021,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
                       stroke="rgba(255, 255, 255, 0.3)"
                       stroke-linecap="round"
                       stroke-width="6"
-                      style="stroke: rgba(255, 255, 255, 0.3); stroke-dasharray: 295.3097094374406px 295.3097094374406; stroke-dashoffset: 0; transform: rotate(-90deg); transform-origin: 50px 50px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s; fill-opacity: 0;"
+                      style="stroke:rgba(255, 255, 255, 0.3);stroke-dasharray:295.3097094374406px 295.3097094374406;stroke-dashoffset:0;transform:rotate(-90deg);transform-origin:50px 50px;transition:stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;fill-opacity:0"
                     />
                     <circle
                       class="ant-progress-circle-path"
@@ -2032,7 +2031,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
                       r="47"
                       stroke-linecap="round"
                       stroke-width="6"
-                      style="stroke: #FFF; stroke-dasharray: 295.3097094374406px 295.3097094374406; stroke-dashoffset: 200.8575053230852; transform: rotate(-90deg); transform-origin: 50px 50px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s; fill-opacity: 0; transition-duration: 0s, 0s;"
+                      style="stroke:#FFF;stroke-dasharray:295.3097094374406px 295.3097094374406;stroke-dashoffset:200.8575053230852;transform:rotate(-90deg);transform-origin:50px 50px;transition:stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;fill-opacity:0"
                     />
                     <circle
                       class="ant-progress-circle-path"
@@ -2042,16 +2041,18 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
                       r="47"
                       stroke-linecap="round"
                       stroke-width="6"
-                      style="stroke: #52C41A; stroke-dasharray: 295.3097094374406px 295.3097094374406; stroke-dashoffset: 295.2997094374406; transform: rotate(-90deg); transform-origin: 50px 50px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s; fill-opacity: 0; transition-duration: 0s, 0s;"
+                      style="stroke:#52C41A;stroke-dasharray:295.3097094374406px 295.3097094374406;stroke-dashoffset:295.2997094374406;transform:rotate(-90deg);transform-origin:50px 50px;transition:stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;fill-opacity:0"
                     />
                   </svg>
                   <span
                     class="ant-progress-text"
                   >
                     <span
-                      style="color: #FFF;"
+                      style="color:#FFF"
                     >
-                      33%
+                      33
+                      <!-- -->
+                      %
                     </span>
                   </span>
                 </div>
@@ -2174,7 +2175,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
                 <input
                   accept=""
                   name="file"
-                  style="display: none;"
+                  style="display:none"
                   type="file"
                 />
                 <button
@@ -2216,7 +2217,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
       <button
         class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
         disabled=""
-        style="flex-grow: 1; flex-shrink: 1; flex-basis: 50%;"
+        style="flex:1 1 50%"
         type="button"
       >
         <span>
@@ -2225,7 +2226,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
       </button>
       <button
         class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
-        style="flex-grow: 1; flex-shrink: 1; flex-basis: 50%;"
+        style="flex:1 1 50%"
         type="button"
       >
         <span>
@@ -2237,21 +2238,19 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
 </div>
 `;
 
-exports[`renders components/attachments/demo/placeholder.tsx extend context correctly 2`] = `[]`;
-
-exports[`renders components/attachments/demo/with-sender.tsx extend context correctly 1`] = `
+exports[`renders components/attachments/demo/with-sender.tsx correctly 1`] = `
 <div
   class="ant-app"
 >
   <div
     class="ant-flex ant-flex-align-flex-end"
-    style="min-height: 250px;"
+    style="min-height:250px"
   >
     <div
       class="ant-sender"
     >
       <div
-        class="ant-sender-header ant-sender-header-motion-appear ant-sender-header-motion-appear-start ant-sender-header-motion"
+        class="ant-sender-header"
       >
         <div
           class="ant-sender-header-header"
@@ -2297,7 +2296,7 @@ exports[`renders components/attachments/demo/with-sender.tsx extend context corr
         </div>
         <div
           class="ant-sender-header-content"
-          style="padding: 0px;"
+          style="padding:0"
         >
           <div
             class="ant-attachment"
@@ -2311,7 +2310,7 @@ exports[`renders components/attachments/demo/with-sender.tsx extend context corr
               >
                 <div
                   class="ant-upload ant-upload-drag"
-                  style="padding: 0px; border: 0px; background: transparent;"
+                  style="padding:0;border:0;background:transparent"
                 >
                   <span
                     class="ant-upload ant-upload-btn"
@@ -2321,7 +2320,7 @@ exports[`renders components/attachments/demo/with-sender.tsx extend context corr
                     <input
                       accept=""
                       name="file"
-                      style="display: none;"
+                      style="display:none"
                       type="file"
                     />
                     <div
@@ -2412,7 +2411,6 @@ exports[`renders components/attachments/demo/with-sender.tsx extend context corr
         </div>
         <textarea
           class="ant-input ant-input-borderless ant-sender-input"
-          style="overflow-y: hidden; resize: none;"
         />
         <div
           class="ant-sender-actions-list"
@@ -2454,10 +2452,4 @@ exports[`renders components/attachments/demo/with-sender.tsx extend context corr
     </div>
   </div>
 </div>
-`;
-
-exports[`renders components/attachments/demo/with-sender.tsx extend context correctly 2`] = `
-[
-  "Warning: \`NaN\` is an invalid value for the \`%s\` css style property.%s",
-]
 `;
