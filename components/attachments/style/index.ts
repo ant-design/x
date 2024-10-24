@@ -1,4 +1,4 @@
-import { CSSObject, unit } from '@ant-design/cssinjs';
+import { CSSObject } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import { FastColor } from '@ant-design/fast-color';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';

@@ -18,7 +18,7 @@ describe('attachments.drag', () => {
 
   it('drag and drop', async () => {
     const onChange = jest.fn();
-    const { container } = render(
+    render(
       renderAttachments({
         onChange,
         children: <div />,

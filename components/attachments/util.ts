@@ -26,15 +26,6 @@ export function previewImage(file: File | Blob): Promise<string> {
       document.body.appendChild<HTMLCanvasElement>(canvas);
       const ctx = canvas.getContext('2d');
 
-      let drawWidth = MEASURE_SIZE_WIDTH;
-      let drawHeight = MEASURE_SIZE_HEIGHT;
-
-      if (width > height) {
-        drawHeight = height * (MEASURE_SIZE_WIDTH / width);
-      } else {
-        drawWidth = width * (MEASURE_SIZE_HEIGHT / height);
-      }
-
       ctx!.drawImage(img, 0, 0, MEASURE_SIZE_WIDTH, MEASURE_SIZE_HEIGHT);
       const dataURL = canvas.toDataURL();
       document.body.removeChild(canvas);

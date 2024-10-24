@@ -3,7 +3,7 @@ import { Button, type UploadProps } from 'antd';
 import classnames from 'classnames';
 import { CSSMotionList } from 'rc-motion';
 import React from 'react';
-import type { Attachment, AttachmentsProps } from '..';
+import type { Attachment } from '..';
 import SilentUploader from '../SilentUploader';
 import { AttachmentContext } from '../context';
 import FileListCard from './FileListCard';
