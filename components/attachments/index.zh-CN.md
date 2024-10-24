@@ -26,31 +26,31 @@ Attachment 组件用于需要展示一组附件信息集合的场景。
 
 ## API
 
-通用属性参考：[通用属性](/docs/react/common-props)
+通用属性参考：[通用属性](/docs/react/common-props)。
 
-### PromptsProps
+### AttachmentProps
+
+继承 antd [Upload](https://ant.design/components/upload) 属性。
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| classNames | 自定义样式类名，用于各个提示项的不同部分。 | Record<'list' \| 'item' \| 'content' \| 'title', string> | - | - |
-| items | 包含多个提示项的列表。 | PromptProps[] | - | - |
-| prefixCls | 样式类名的前缀。 | string | - | - |
-| rootClassName | 根节点的样式类名。 | string | - | - |
-| styles | 自定义样式，用于各个提示项的不同部分。 | Record<'list' \| 'item' \| 'content' \| 'title', React.CSSProperties> | - | - |
-| title | 显示在提示列表顶部的标题。 | React.ReactNode | - | - |
-| vertical | 设置为 `true` 时, 提示列表将垂直排列。 | boolean | `false` | - |
-| wrap | 设置为 `true` 时, 提示列表将自动换行。 | boolean | `false` | - |
-| onItemClick | 提示项被点击时的回调函数。 | (info: { data: PromptProps }) => void | - | - |
+| classNames | 自定义样式类名，[见下](#semantic-dom) | Record<string, string> | - | - |
+| disabled | 是否禁用 | boolean | false | - |
+| getDropContainer | 设置拖拽时，可以释放文件的区域 | () => HTMLElement | - | - |
+| items | 附件列表，同 Upload `fileList` | Attachment[] | - | - |
+| overflow | 文件列表超出时样式 | 'wrap' \| 'scrollX' \| 'scrollY' | - | - |
+| placeholder | 没有文件时的占位信息 | PlaceholderType \| ((type: 'inline' \| 'drop') => PlaceholderType) | - | - |
+| rootClassName | 根节点的样式类名 | string | - | - |
+| rootStyle | 根节点的样式对象 | React.CSSProperties | - | - |
+| styles | 自定义样式对象，[见下](#semantic-dom) | Record<string, React.CSSProperties> | - | - |
 
-### PromptProps
-
-| 属性        | 说明                           | 类型            | 默认值  | 版本 |
-| ----------- | ------------------------------ | --------------- | ------- | ---- |
-| description | 提示描述提供额外的信息。       | React.ReactNode | -       | -    |
-| disabled    | 设置为 `true` 时禁用点击事件。 | boolean         | `false` | -    |
-| icon        | 提示图标显示在提示项的左侧。   | React.ReactNode | -       | -    |
-| key         | 唯一标识用于区分每个提示项。   | string          | -       | -    |
-| label       | 提示标签显示提示的主要内容。   | React.ReactNode | -       | -    |
+```tsx | pure
+interface PlaceholderType {
+  icon?: React.ReactNode;
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+}
+```
 
 ## Semantic DOM
 

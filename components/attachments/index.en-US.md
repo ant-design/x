@@ -25,29 +25,29 @@ The Prompts component is used to display a predefined set of questions or sugges
 
 ## API
 
-### PromptsProps
+### AttachmentProps
+
+For more properties, see [Upload](https://ant.design/components/upload).
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| classNames | Custom style class names for different parts of each prompt item. | Record<'list' \| 'item' \| 'content' \| 'title', string> | - | - |
-| items | List containing multiple prompt items. | PromptProps[] | - | - |
-| prefixCls | Prefix for style class names. | string | - | - |
-| rootClassName | Style class name for the root node. | string | - | - |
-| styles | Custom styles for different parts of each prompt item. | Record<'list' \| 'item' \| 'content' \| 'title', React.CSSProperties> | - | - |
-| title | Title displayed at the top of the prompt list. | React.ReactNode | - | - |
-| vertical | When set to `true`, the Prompts will be arranged vertically. | boolean | `false` | - |
-| wrap | When set to `true`, the Prompts will automatically wrap. | boolean | `false` | - |
-| onItemClick | Callback function when a prompt item is clicked. | (info: { data: PromptProps }) => void | - | - |
+| classNames | Custom class names, [see below](#semantic-dom) | Record<string, string> | - | - |
+| disabled | Whether to disable | boolean | false | - |
+| getDropContainer | Config the area where files can be dropped | () => HTMLElement | - | - |
+| items | Attachment list, same as Upload `fileList` | Attachment[] | - | - |
+| overflow | Behavior when the file list overflows | 'wrap' \| 'scrollX' \| 'scrollY' | - | - |
+| placeholder | Placeholder information when there is no file | PlaceholderType \| ((type: 'inline' \| 'drop') => PlaceholderType) | - | - |
+| rootClassName | Root node className | React.CSSProperties | - | - |
+| rootStyle | Root node style object | React.CSSProperties | - | - |
+| styles | Custom style object, [see below](#semantic-dom) | Record<string, React.CSSProperties> | - | - |
 
-### PromptProps
-
-| Property | Description | Type | Default | Version |
-| --- | --- | --- | --- | --- |
-| description | Prompt description providing additional information. | React.ReactNode | - | - |
-| disabled | When set to `true`, click events are disabled. | boolean | `false` | - |
-| icon | Prompt icon displayed on the left side of the prompt item. | React.ReactNode | - | - |
-| key | Unique identifier used to distinguish each prompt item. | string | - | - |
-| label | Prompt label displaying the main content of the prompt. | React.ReactNode | - | - |
+```tsx | pure
+interface PlaceholderType {
+  icon?: React.ReactNode;
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+}
+```
 
 ## Semantic DOM
 
