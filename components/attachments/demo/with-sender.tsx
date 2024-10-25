@@ -1,6 +1,6 @@
 import { CloudUploadOutlined, LinkOutlined } from '@ant-design/icons';
 import { Attachments, AttachmentsProps, Sender } from '@ant-design/x';
-import { App, Button, Flex, type GetProp, Typography } from 'antd';
+import { App, Badge, Button, Flex, type GetProp, Typography } from 'antd';
 import React from 'react';
 
 const Demo = () => {
@@ -49,7 +49,11 @@ const Demo = () => {
       <Sender
         ref={senderRef}
         header={senderHeader}
-        prefix={<Button onClick={() => setOpen(!open)} type="text" icon={<LinkOutlined />} />}
+        prefix={
+          <Badge dot={items.length > 0 && !open}>
+            <Button onClick={() => setOpen(!open)} icon={<LinkOutlined />} />
+          </Badge>
+        }
         value={text}
         onChange={setText}
         onSubmit={() => {
