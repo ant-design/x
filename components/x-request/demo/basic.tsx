@@ -1,5 +1,5 @@
 import { LoadingOutlined, TagsOutlined } from '@ant-design/icons';
-import { ThoughtChain, useXAgent } from '@ant-design/x';
+import { ThoughtChain, XRequest } from '@ant-design/x';
 import { Button, Descriptions, Splitter } from 'antd';
 import React from 'react';
 
@@ -11,28 +11,24 @@ import type { ThoughtChainItem } from '@ant-design/x';
 const BASE_URL = 'https://api.example.com';
 const PATH = '/chat';
 const MODEL = 'gpt-3.5-turbo';
-/** 🔥🔥 Its dangerously! */
 // const API_KEY = '';
 
-interface YourMessageType {
-  role: string;
-  content: string;
-}
+const exampleRequest = XRequest({
+  baseURL: BASE_URL + PATH,
+  model: MODEL,
+
+  /** 🔥🔥 Its dangerously! */
+  // dangerouslyApiKey: API_KEY
+});
 
 const App = () => {
   const [status, setStatus] = React.useState<ThoughtChainItem['status']>();
   const [lines, setLines] = React.useState<any[]>([]);
 
-  const [agent] = useXAgent<YourMessageType>({
-    baseURL: BASE_URL + PATH,
-    model: MODEL,
-    // dangerouslyApiKey: API_KEY
-  });
-
   async function request() {
     setStatus('pending');
 
-    agent.request(
+    await exampleRequest.create(
       {
         messages: [{ role: 'user', content: 'hello, who are u?' }],
         stream: true,
@@ -58,7 +54,8 @@ const App = () => {
     <Splitter>
       <Splitter.Panel>
         <Button type="primary" disabled={status === 'pending'} onClick={request}>
-          Agent Request
+          Request - {BASE_URL}
+          {PATH}
         </Button>
       </Splitter.Panel>
       <Splitter.Panel>
@@ -66,12 +63,12 @@ const App = () => {
           style={{ marginLeft: 16 }}
           items={[
             {
-              title: 'Agent Request Log',
+              title: 'Request Log',
               status: status,
               icon: status === 'pending' ? <LoadingOutlined /> : <TagsOutlined />,
               description:
                 status === 'error' &&
-                agent.config.baseURL === BASE_URL + PATH &&
+                exampleRequest.baseURL === BASE_URL + PATH &&
                 'Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.',
               content: (
                 <Descriptions column={1}>

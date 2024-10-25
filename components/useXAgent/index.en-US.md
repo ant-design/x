@@ -18,7 +18,7 @@ Connect with the backend model to provide an abstract data flow.
 ## Examples
 
 <!-- prettier-ignore -->
-<code src="./demo/preset.tsx" debug>Preset Request</code>
+<code src="./demo/preset.tsx">Preset Request</code>
 <code src="./demo/custom.tsx">Custom Request</code>
 
 ## API
@@ -33,11 +33,12 @@ type useXAgent<AgentMessage> = (
 
 Use preset protocol for request, protocol is not implemented yet.
 
-| Property | Description                | Type   | Default | Version |
-| -------- | -------------------------- | ------ | ------- | ------- |
-| baseURL  | Request for server address | string | -       |         |
-| key      | Request key                | string | -       |         |
-| model    | Preset protocol model      | `TODO` | -       |         |
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| baseURL | Request for server address | string | - |  |
+| key | Request key | string | - |  |
+| model | Preset protocol model | string | - |  |
+| dangerouslyApiKey | Enabling this option can be dangerous, exposing secret API credentials | string | - | - |
 
 ### XAgentConfigCustom
 
@@ -50,11 +51,15 @@ Custom request protocol.
 #### RequestFn
 
 ```tsx | pure
-type RequestFn<AgentMessage> = (
-  info: { message: AgentMessage; messages: AgentMessage[] },
+interface RequestFnInfo<Message> extends Partial<XAgentConfigPreset>, AnyObject {
+  messages?: Message[];
+}
+
+type RequestFn<Message> = (
+  info: RequestFnInfo<Message>,
   callbacks: {
-    onUpdate: (message: AgentMessage) => void;
-    onSuccess: (message: AgentMessage) => void;
+    onUpdate: (message: Message) => void;
+    onSuccess: (message: Message) => void;
     onError: (error: Error) => void;
   },
 ) => void;
@@ -68,8 +73,12 @@ type RequestFn<AgentMessage> = (
 | isRequesting | Check if it is requesting                  | () => boolean  |         |
 
 ```tsx | pure
+interface AgentRequestFnInfo<Message> extends Partial<XAgentConfigPreset>, AnyObject {
+  messages?: Message[];
+}
+
 type AgentRequestFn<AgentMessage> = (
-  info: { message: AgentMessage; messages?: AgentMessage[] },
+  info: AgentRequestFnInfo<Message>,
   callbacks: {
     onUpdate: (message: AgentMessage) => void;
     onSuccess: (message: AgentMessage) => void;
