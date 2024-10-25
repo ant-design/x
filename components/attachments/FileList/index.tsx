@@ -57,18 +57,18 @@ export default function FileList(props: FileListProps) {
   const checkPing = () => {
     const containerEle = containerRef.current;
 
-    if (containerEle) {
-      if (overflow === 'scrollX') {
-        setPingStart(containerEle.scrollLeft !== 0);
-        setPingEnd(
-          containerEle.scrollWidth - containerEle.clientWidth !== Math.abs(containerEle.scrollLeft),
-        );
-      } else if (overflow === 'scrollY') {
-        setPingStart(containerEle.scrollTop !== 0);
-        setPingEnd(
-          containerEle.scrollHeight - containerEle.clientHeight !== containerEle.scrollTop,
-        );
-      }
+    if (!containerEle) {
+      return;
+    }
+
+    if (overflow === 'scrollX') {
+      setPingStart(containerEle.scrollLeft !== 0);
+      setPingEnd(
+        containerEle.scrollWidth - containerEle.clientWidth !== Math.abs(containerEle.scrollLeft),
+      );
+    } else if (overflow === 'scrollY') {
+      setPingStart(containerEle.scrollTop !== 0);
+      setPingEnd(containerEle.scrollHeight - containerEle.clientHeight !== containerEle.scrollTop);
     }
   };
 
