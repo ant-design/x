@@ -67,7 +67,7 @@ const getPlaceholderFn = (
 const Demo = () => {
   const { token } = theme.useToken();
 
-  const [items, setItems] = React.useState<GetProp<AttachmentsProps, 'items'>>(presetFiles);
+  const [items, setItems] = React.useState<GetProp<AttachmentsProps, 'items'>>([]);
 
   const sharedBorderStyle: React.CSSProperties = {
     borderRadius: token.borderRadius,
