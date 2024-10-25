@@ -16,6 +16,14 @@ tag: vVERSION
 
 ---
 
+## 1.0.0-alpha.6
+
+`2024-10-25`
+
+- 🔥 New Component `Attachments`, by [@zombieJ](https://github.com/zombieJ) [#168](https://github.com/ant-design/x/pull/168)
+- 🔥 New Tools `XStream`, by [@YumoImer](https://github.com/YumoImer) [#138](https://github.com/ant-design/x/pull/138)
+- 🔥 New Tools `XRequest`, by [@YumoImer](https://github.com/YumoImer) [#138](https://github.com/ant-design/x/pull/138)
+
 ## 1.0.0-alpha.5
 
 `2024-10-23`
