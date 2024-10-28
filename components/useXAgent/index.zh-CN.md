@@ -19,7 +19,7 @@ demo:
 ## 代码演示
 
 <!-- prettier-ignore -->
-<code src="./demo/preset.tsx" debug>预设请求</code>
+<code src="./demo/preset.tsx">预设请求</code>
 <code src="./demo/custom.tsx">自定义请求</code>
 
 ## API
@@ -34,11 +34,12 @@ type useXAgent<AgentMessage> = (
 
 使用预设协议进行请求，尚未实现协议。
 
-| 属性    | 说明           | 类型   | 默认值 | 版本 |
-| ------- | -------------- | ------ | ------ | ---- |
-| baseURL | 请求服务端地址 | string | -      |      |
-| key     | 请求秘钥       | string | -      |      |
-| model   | 协议模型       | `TODO` | -      |      |
+| 属性 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| baseURL | 请求服务端地址 | string | - |  |
+| key | 请求秘钥 | string | - |  |
+| model | 协议模型 | string | - |  |
+| dangerouslyApiKey | **启用此选项可能存在风险，会暴露您的秘密 API 凭证!** | string | - | - |
 
 ### XAgentConfigCustom
 
@@ -51,11 +52,15 @@ type useXAgent<AgentMessage> = (
 #### RequestFn
 
 ```tsx | pure
-type RequestFn<AgentMessage> = (
-  info: { message: AgentMessage; messages: AgentMessage[] },
+interface RequestFnInfo<Message> extends Partial<XAgentConfigPreset>, AnyObject {
+  messages?: Message[];
+}
+
+export type RequestFn<Message> = (
+  info: RequestFnInfo<Message>,
   callbacks: {
-    onUpdate: (message: AgentMessage) => void;
-    onSuccess: (message: AgentMessage) => void;
+    onUpdate: (message: Message) => void;
+    onSuccess: (message: Message) => void;
     onError: (error: Error) => void;
   },
 ) => void;
@@ -69,8 +74,12 @@ type RequestFn<AgentMessage> = (
 | isRequesting | 是否正在请求                | () => boolean  |      |
 
 ```tsx | pure
+interface AgentRequestFnInfo<Message> extends Partial<XAgentConfigPreset>, AnyObject {
+  messages?: Message[];
+}
+
 type AgentRequestFn<AgentMessage> = (
-  info: { message: AgentMessage; messages?: AgentMessage[] },
+  info: AgentRequestFnInfo<Message>,
   callbacks: {
     onUpdate: (message: AgentMessage) => void;
     onSuccess: (message: AgentMessage) => void;

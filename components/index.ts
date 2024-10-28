@@ -1,3 +1,5 @@
+export { default as Attachments } from './attachments';
+export type { AttachmentsProps } from './attachments';
 export { default as Sender } from './sender';
 export { default as Bubble } from './bubble';
 export type { BubbleProps } from './bubble';
@@ -13,4 +15,7 @@ export { default as XProvider } from './x-provider';
 export type { XProviderProps } from './x-provider';
 export { default as useXChat } from './useXChat';
 export { default as useXAgent } from './useXAgent';
+export { default as XStream } from './x-stream';
+export type { XStreamOptions } from './x-stream';
+export { default as XRequest } from './x-request';
 export { default as version } from './version';

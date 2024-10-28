@@ -2,6 +2,7 @@
 
 exports[`antd dist files exports modules correctly 1`] = `
 [
+  "Attachments",
   "Bubble",
   "Conversations",
   "Prompts",
@@ -9,6 +10,8 @@ exports[`antd dist files exports modules correctly 1`] = `
   "Suggestion",
   "ThoughtChain",
   "XProvider",
+  "XRequest",
+  "XStream",
   "useXAgent",
   "useXChat",
   "version",

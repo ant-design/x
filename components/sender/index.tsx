@@ -1,7 +1,7 @@
 import { type ButtonProps, Flex, type GetProps, Input } from 'antd';
 import classnames from 'classnames';
 
-import { useMergedState } from 'rc-util';
+import { useComposeRef, useMergedState } from 'rc-util';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import getValue from 'rc-util/lib/utils/get';
 import React from 'react';
@@ -73,9 +73,7 @@ function getComponent<T>(
   return getValue(components, path) || defaultComponent;
 }
 
-const Sender: React.FC<SenderProps> & {
-  Header: typeof SenderHeader;
-} = (props) => {
+function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
   const {
     prefixCls: customizePrefixCls,
     styles = {},
@@ -108,6 +106,8 @@ const Sender: React.FC<SenderProps> & {
   // ============================= Refs =============================
   const containerRef = React.useRef<HTMLDivElement>(null);
   const inputRef = React.useRef<HTMLTextAreaElement>(null);
+
+  const mergedContainerRef = useComposeRef(ref, containerRef);
 
   // ======================= Component Config =======================
   const contextConfig = useXComponentConfig('sender');
@@ -247,7 +247,7 @@ const Sender: React.FC<SenderProps> & {
   // ============================ Render ============================
   return wrapCSSVar(
     <div
-      ref={containerRef}
+      ref={mergedContainerRef}
       className={mergedCls}
       style={{ ...contextConfig.style, ...style }}
       onMouseDown={onInternalMouseDown}
@@ -321,12 +321,18 @@ const Sender: React.FC<SenderProps> & {
       </div>
     </div>,
   );
+}
+
+const ForwardSender = React.forwardRef(Sender) as React.ForwardRefExoticComponent<
+  SenderProps & React.RefAttributes<HTMLDivElement>
+> & {
+  Header: typeof SenderHeader;
 };
 
 if (process.env.NODE_ENV !== 'production') {
-  Sender.displayName = 'Sender';
+  ForwardSender.displayName = 'Sender';
 }
 
-Sender.Header = SenderHeader;
+ForwardSender.Header = SenderHeader;
 
-export default Sender;
+export default ForwardSender;

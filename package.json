@@ -1,6 +1,6 @@
 {
   "name": "@ant-design/x",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.6",
   "description": "Crafting AI-driven interfaces with React, seamlessly integrating smart chat components and API services at your fingertips.",
   "keywords": [
     "AI",
@@ -88,6 +88,7 @@
     "@ant-design/colors": "^7.1.0",
     "@ant-design/cssinjs": "^1.21.1",
     "@ant-design/cssinjs-utils": "^1.1.0",
+    "@ant-design/fast-color": "^2.0.6",
     "@ant-design/icons": "^5.4.0",
     "@babel/runtime": "^7.25.6",
     "@ctrl/tinycolor": "^4.1.0",

@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`attachments rtl render component should be rendered correctly in RTL direction 1`] = `
+<div
+  class="ant-attachment ant-attachment-rtl"
+  dir="rtl"
+>
+  <div
+    class="ant-attachment-placeholder"
+  >
+    <span
+      class="ant-upload-wrapper ant-upload-rtl"
+    >
+      <div
+        class="ant-upload ant-upload-drag ant-upload-rtl"
+        style="padding: 0px; border: 0px; background: transparent;"
+      >
+        <span
+          class="ant-upload ant-upload-btn"
+          role="button"
+          tabindex="0"
+        >
+          <input
+            accept=""
+            name="file"
+            style="display: none;"
+            type="file"
+          />
+          <div
+            class="ant-upload-drag-container"
+          >
+            <div
+              class="ant-attachment-placeholder-inner ant-flex ant-flex-align-center ant-flex-justify-center ant-flex-rtl ant-flex-vertical"
+            >
+              <span
+                class="ant-typography ant-typography-rtl ant-attachment-placeholder-icon"
+              />
+              <h5
+                class="ant-typography ant-typography-rtl ant-attachment-placeholder-title"
+              />
+              <span
+                class="ant-typography ant-typography-rtl ant-typography-secondary ant-attachment-placeholder-description"
+              />
+            </div>
+          </div>
+        </span>
+      </div>
+    </span>
+  </div>
+</div>
+`;
