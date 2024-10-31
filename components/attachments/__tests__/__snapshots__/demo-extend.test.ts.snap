@@ -1384,6 +1384,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
     >
       <div
         class="ant-attachment-list"
+        style="display: none;"
       >
         <span
           class="ant-upload-wrapper"
@@ -1511,6 +1512,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
     >
       <div
         class="ant-attachment-list"
+        style="display: none;"
       >
         <span
           class="ant-upload-wrapper"
@@ -1731,6 +1733,7 @@ exports[`renders components/attachments/demo/with-sender.tsx extend context corr
           >
             <div
               class="ant-attachment-list"
+              style="display: none;"
             >
               <span
                 class="ant-upload-wrapper"
