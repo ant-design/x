@@ -16,6 +16,12 @@ tag: vVERSION
 
 ---
 
+## 1.0.0-alpha.7
+
+`2024-10-31`
+
+- 🐛 Fix Attachments first upload could not trigger the upload request, by [@YumoImer](https://github.com/YumoImer) [#172](https://github.com/ant-design/x/pull/172)
+
 ## 1.0.0-alpha.6
 
 `2024-10-25`
