@@ -15,13 +15,19 @@ tag: vVERSION
 
 ---
 
+## 1.0.0-alpha.7
+
+`2024-10-31`
+
+- 🐛 修复 Attachments 组件第一次上传时无法触发上传请求的问题, 由 [@YumoImer](https://github.com/YumoImer) [#172](https://github.com/ant-design/x/pull/172)
+
 ## 1.0.0-alpha.6
 
 `2024-10-25`
 
-- 🔥 新组件 附件 - `Attachments`, by [@zombieJ](https://github.com/zombieJ) [#168](https://github.com/ant-design/x/pull/168)
-- 🔥 新工具 流 - `XStream`, by [@YumoImer](https://github.com/YumoImer) [#138](https://github.com/ant-design/x/pull/138)
-- 🔥 新工具 请求 - `XRequest`, by [@YumoImer](https://github.com/YumoImer) [#138](https://github.com/ant-design/x/pull/138)
+- 🔥 新组件 附件 - `Attachments`, 由 [@zombieJ](https://github.com/zombieJ) [#168](https://github.com/ant-design/x/pull/168)
+- 🔥 新工具 流 - `XStream`, 由 [@YumoImer](https://github.com/YumoImer) [#138](https://github.com/ant-design/x/pull/138)
+- 🔥 新工具 请求 - `XRequest`, 由 [@YumoImer](https://github.com/YumoImer) [#138](https://github.com/ant-design/x/pull/138)
 
 ## 1.0.0-alpha.5
 

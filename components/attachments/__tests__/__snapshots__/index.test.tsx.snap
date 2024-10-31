@@ -6,6 +6,56 @@ exports[`attachments rtl render component should be rendered correctly in RTL di
   dir="rtl"
 >
   <div
+    class="ant-attachment-list"
+    style="display: none;"
+  >
+    <span
+      class="ant-upload-wrapper ant-upload-rtl"
+    >
+      <div
+        class="ant-upload ant-upload-select"
+      >
+        <span
+          class="ant-upload"
+        >
+          <input
+            accept=""
+            name="file"
+            style="display: none;"
+            type="file"
+          />
+          <button
+            class="ant-btn ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-btn-rtl ant-attachment-list-upload-btn"
+            type="button"
+          >
+            <span
+              aria-label="plus"
+              class="anticon anticon-plus ant-attachment-list-upload-btn-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="plus"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
+                />
+                <path
+                  d="M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+                />
+              </svg>
+            </span>
+          </button>
+        </span>
+      </div>
+    </span>
+  </div>
+  <div
     class="ant-attachment-placeholder"
   >
     <span

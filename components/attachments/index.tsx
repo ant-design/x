@@ -8,7 +8,10 @@ import { useXProviderContext } from '../x-provider';
 import { useEvent, useMergedState } from 'rc-util';
 import DropArea from './DropArea';
 import FileList, { type FileListProps } from './FileList';
-import PlaceholderUploader, { PlaceholderType } from './PlaceholderUploader';
+import PlaceholderUploader, {
+  type PlaceholderProps,
+  type PlaceholderType,
+} from './PlaceholderUploader';
 import SilentUploader from './SilentUploader';
 import { AttachmentContext } from './context';
 import useStyle from './style';
@@ -106,7 +109,7 @@ const Attachments: React.FC<AttachmentsProps> = (props) => {
   // ============================ Render ============================
   let renderChildren: React.ReactElement;
 
-  const getPlaceholderNode = (type: 'inline' | 'drop') => {
+  const getPlaceholderNode = (type: 'inline' | 'drop', props?: Pick<PlaceholderProps, 'style'>) => {
     const placeholderContent = typeof placeholder === 'function' ? placeholder(type) : placeholder;
 
     return (
@@ -118,6 +121,7 @@ const Attachments: React.FC<AttachmentsProps> = (props) => {
         style={{
           ...contextStyles.placeholder,
           ...styles.placeholder,
+          ...props?.style,
         }}
       />
     );
@@ -159,28 +163,25 @@ const Attachments: React.FC<AttachmentsProps> = (props) => {
         dir={direction || 'ltr'}
         ref={containerRef}
       >
-        {hasFileList ? (
-          <FileList
-            prefixCls={prefixCls}
-            items={fileList}
-            onRemove={onItemRemove}
-            overflow={overflow}
-            upload={mergedUploadProps}
-            listClassName={classnames(contextClassNames.list, classNames.list)}
-            listStyle={{
-              ...contextStyles.list,
-              ...styles.list,
-            }}
-            itemClassName={classnames(contextClassNames.item, classNames.item)}
-            itemStyle={{
-              ...contextStyles.item,
-              ...styles.item,
-            }}
-          />
-        ) : (
-          getPlaceholderNode('inline')
-        )}
-
+        <FileList
+          prefixCls={prefixCls}
+          items={fileList}
+          onRemove={onItemRemove}
+          overflow={overflow}
+          upload={mergedUploadProps}
+          listClassName={classnames(contextClassNames.list, classNames.list)}
+          listStyle={{
+            ...contextStyles.list,
+            ...styles.list,
+            ...(!hasFileList && { display: 'none' }),
+          }}
+          itemClassName={classnames(contextClassNames.item, classNames.item)}
+          itemStyle={{
+            ...contextStyles.item,
+            ...styles.item,
+          }}
+        />
+        {getPlaceholderNode('inline', hasFileList ? { style: { display: 'none' } } : {})}
         <DropArea
           getDropContainer={getDropContainer || (() => containerRef.current)}
           prefixCls={prefixCls}
