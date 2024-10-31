@@ -173,7 +173,7 @@ const Attachments: React.FC<AttachmentsProps> = (props) => {
           listStyle={{
             ...contextStyles.list,
             ...styles.list,
-            ...(!hasFileList && { style: { display: 'none' } }),
+            ...(!hasFileList && { display: 'none' }),
           }}
           itemClassName={classnames(contextClassNames.item, classNames.item)}
           itemStyle={{
