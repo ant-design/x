@@ -211,7 +211,7 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
   };
 
   // ============================ Focus =============================
-  const onInternalMouseDown: React.MouseEventHandler<HTMLDivElement> = (e) => {
+  const onContentMouseDown: React.MouseEventHandler<HTMLDivElement> = (e) => {
     // If input focused but click on the container,
     // input will lose focus.
     // We call `preventDefault` to prevent this behavior
@@ -250,14 +250,13 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
       ref={mergedContainerRef}
       className={mergedCls}
       style={{ ...contextConfig.style, ...style }}
-      onMouseDown={onInternalMouseDown}
     >
       {/* Header */}
       {header && (
         <SendHeaderContext.Provider value={{ prefixCls }}>{header}</SendHeaderContext.Provider>
       )}
 
-      <div className={`${prefixCls}-content`}>
+      <div className={`${prefixCls}-content`} onMouseDown={onContentMouseDown}>
         {/* Prefix */}
         {prefix && (
           <div
