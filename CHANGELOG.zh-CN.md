@@ -15,6 +15,13 @@ tag: vVERSION
 
 ---
 
+## 1.0.0-alpha.9
+
+`2024-11-01`
+
+- 🐛 修复 Attachments 组件内的代码逻辑问题, by [@YumoImer](https://github.com/YumoImer) [#174](https://github.com/ant-design/x/pull/174)
+- 🐛 修复 Sender.Header 内不可以聚焦的问题, by [@zombieJ](https://github.com/zombieJ) [#175](https://github.com/ant-design/x/pull/175)
+
 ## 1.0.0-alpha.7
 
 `2024-10-31`
