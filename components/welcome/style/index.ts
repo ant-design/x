@@ -57,7 +57,7 @@ const genVariantStyle: GenerateStyle<WelcomeToken> = (token) => {
       '&-filled': {
         paddingInline: token.padding,
         paddingBlock: token.paddingSM,
-        backgroundImage: `linear-gradient(97deg, #f2f9fe 0%, #f7f3ff 100%)`,
+        background: token.colorFillContent,
         borderRadius: calc(token.borderRadiusLG).add(token.borderRadiusSM).equal(),
       },
 

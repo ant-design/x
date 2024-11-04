@@ -1,5 +1,90 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`renders components/welcome/demo/background.tsx extend context correctly 1`] = `
+<div
+  class="ant-flex ant-flex-align-stretch ant-flex-vertical"
+>
+  <div
+    class="ant-card ant-card-bordered"
+    style="border-radius: 0px;"
+  >
+    <div
+      class="ant-card-body"
+    >
+      <div
+        class="ant-welcome ant-welcome-filled ant-flex"
+        style="background-image: linear-gradient(97deg, #f2f9fe 0%, #f7f3ff 100%);"
+      >
+        <div
+          class="ant-welcome-icon"
+        >
+          <img
+            alt="icon"
+            src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*7iaeT54QpcQAAAAAAAAAAAAADgCCAQ/original"
+          />
+        </div>
+        <div
+          class="ant-welcome-content-wrapper ant-flex ant-flex-align-stretch ant-flex-vertical"
+        >
+          <h4
+            class="ant-typography ant-welcome-title"
+          >
+            Hello, I'm Ant Design X
+          </h4>
+          <span
+            class="ant-typography ant-welcome-description"
+          >
+            Base on Ant Design, AGI product interface solution, create a better intelligent vision~
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-card ant-card-bordered"
+    style="border-radius: 0px;"
+  >
+    <div
+      class="ant-card-body"
+    >
+      <div
+        class="ant-welcome ant-welcome-filled ant-flex"
+        style="background-image: linear-gradient(97deg, #001529 0%, #000000 100%);"
+      >
+        <div
+          class="ant-welcome-icon"
+        >
+          <img
+            alt="icon"
+            src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*7iaeT54QpcQAAAAAAAAAAAAADgCCAQ/original"
+          />
+        </div>
+        <div
+          class="ant-welcome-content-wrapper ant-flex ant-flex-align-stretch ant-flex-vertical"
+        >
+          <h4
+            class="ant-typography ant-welcome-title"
+          >
+            Hello, I'm Ant Design X
+          </h4>
+          <span
+            class="ant-typography ant-welcome-description"
+          >
+            Base on Ant Design, AGI product interface solution, create a better intelligent vision~
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders components/welcome/demo/background.tsx extend context correctly 2`] = `
+[
+  "Warning: Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.%s",
+]
+`;
+
 exports[`renders components/welcome/demo/basic.tsx extend context correctly 1`] = `
 <div
   class="ant-welcome ant-welcome-filled ant-flex"
@@ -31,7 +116,7 @@ exports[`renders components/welcome/demo/basic.tsx extend context correctly 1`] 
 
 exports[`renders components/welcome/demo/basic.tsx extend context correctly 2`] = `[]`;
 
-exports[`renders components/welcome/demo/extra.tsx extend context correctly 1`] = `
+exports[`renders components/welcome/demo/variant.tsx extend context correctly 1`] = `
 <div
   class="ant-welcome ant-welcome-borderless ant-flex"
 >
@@ -127,29 +212,6 @@ exports[`renders components/welcome/demo/extra.tsx extend context correctly 1`] 
         </div>
       </div>
     </div>
-    <span
-      class="ant-typography ant-welcome-description"
-    >
-      Base on Ant Design, AGI product interface solution, create a better intelligent vision~
-    </span>
-  </div>
-</div>
-`;
-
-exports[`renders components/welcome/demo/extra.tsx extend context correctly 2`] = `[]`;
-
-exports[`renders components/welcome/demo/variant.tsx extend context correctly 1`] = `
-<div
-  class="ant-welcome ant-welcome-borderless ant-flex"
->
-  <div
-    class="ant-welcome-content-wrapper ant-flex ant-flex-align-stretch ant-flex-vertical"
-  >
-    <h4
-      class="ant-typography ant-welcome-title"
-    >
-      👋🏻 Hello, I'm Ant Design X
-    </h4>
     <span
       class="ant-typography ant-welcome-description"
     >

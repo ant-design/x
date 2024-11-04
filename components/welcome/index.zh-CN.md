@@ -21,7 +21,7 @@ demo:
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">基本</code>
 <code src="./demo/variant.tsx">变体</code>
-<code src="./demo/extra.tsx">额外操作</code>
+<code src="./demo/background.tsx">背景定制</code>
 
 ## API
 

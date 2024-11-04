@@ -20,7 +20,7 @@ Use the appropriate welcome recommendation component to effectively reduce the u
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">Basic</code>
 <code src="./demo/variant.tsx">Variant</code>
-<code src="./demo/extra.tsx">Extra</code>
+<code src="./demo/background.tsx">Background</code>
 
 ## API
 
