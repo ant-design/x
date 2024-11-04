@@ -12,7 +12,7 @@ const items: {
   },
   {
     algorithm: theme.darkAlgorithm,
-    background: 'linear-gradient(97deg, #001529 0%, #000000 100%)',
+    background: 'linear-gradient(97deg, rgba(90,196,255,0.12) 0%, rgba(174,136,255,0.12) 100%)',
   },
 ];
 
@@ -30,6 +30,7 @@ const Demo = () => {
             <Welcome
               style={{
                 backgroundImage: background,
+                borderStartStartRadius: 4,
               }}
               icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*7iaeT54QpcQAAAAAAAAAAAAADgCCAQ/original"
               title="Hello, I'm Ant Design X"
