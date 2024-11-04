@@ -62,7 +62,7 @@ export default function DropArea(props: DropUploaderProps) {
   }, [!!container]);
 
   // =========================== Visible ============================
-  const showDropdown = getDropContainer && container && showArea && !disabled;
+  const showDropdown = getDropContainer && container && !disabled;
 
   // ============================ Render ============================
   if (!showDropdown) {
@@ -76,6 +76,7 @@ export default function DropArea(props: DropUploaderProps) {
       className={classnames(areaCls, className, {
         [`${areaCls}-on-body`]: container.tagName === 'BODY',
       })}
+      style={{ display: showArea ? 'block' : 'none' }}
     >
       {children}
     </div>,

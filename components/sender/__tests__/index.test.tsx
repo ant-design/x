@@ -109,4 +109,28 @@ describe('Sender Component', () => {
       expect(onSubmit).toHaveBeenCalledWith('bamboo');
     });
   });
+
+  it('Sender.Header can be focus', () => {
+    const { container } = render(
+      <Sender
+        header={
+          <Sender.Header open>
+            <input className="target" />
+          </Sender.Header>
+        }
+      />,
+    );
+
+    const inputEle = container.querySelector<HTMLInputElement>('.target')!;
+    inputEle.focus();
+    expect(document.activeElement).toEqual(inputEle);
+
+    // Click on the header
+    fireEvent.mouseDown(container.querySelector('.ant-sender-header')!);
+    expect(document.activeElement).toEqual(inputEle);
+
+    // Click on the content
+    fireEvent.mouseDown(container.querySelector('.ant-sender-content')!);
+    expect(document.activeElement).toEqual(container.querySelector('textarea'));
+  });
 });

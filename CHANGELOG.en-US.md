@@ -16,6 +16,19 @@ tag: vVERSION
 
 ---
 
+## 1.0.0-alpha.10
+
+`2024-11-04`
+
+- 🐛 Fix Attachments drop upload could not trigger the upload request, by [@YumoImer](https://github.com/YumoImer) [#178](https://github.com/ant-design/x/pull/178)
+
+## 1.0.0-alpha.9
+
+`2024-11-01`
+
+- 🐛 Fix the logic in the Attachments, by [@YumoImer](https://github.com/YumoImer) [#174](https://github.com/ant-design/x/pull/174)
+- 🐛 Fix Sender.Header can not focus, by [@zombieJ](https://github.com/zombieJ) [#175](https://github.com/ant-design/x/pull/175)
+
 ## 1.0.0-alpha.7
 
 `2024-10-31`
