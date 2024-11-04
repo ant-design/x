@@ -79,11 +79,7 @@ exports[`renders components/welcome/demo/background.tsx extend context correctly
 </div>
 `;
 
-exports[`renders components/welcome/demo/background.tsx extend context correctly 2`] = `
-[
-  "Warning: Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.%s",
-]
-`;
+exports[`renders components/welcome/demo/background.tsx extend context correctly 2`] = `[]`;
 
 exports[`renders components/welcome/demo/basic.tsx extend context correctly 1`] = `
 <div
