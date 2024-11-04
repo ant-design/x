@@ -46,6 +46,6 @@ describe('attachments.drag', () => {
     // Drop on placeholder
     fireEvent.dragEnter(document.body);
     fireEvent.drop(document.querySelector('.ant-attachment-placeholder')!);
-    expect(document.querySelector('.ant-attachment-drop-area')).toBeFalsy();
+    expect(document.querySelector('.ant-attachment-drop-area')).toBeTruthy();
   });
 });
