@@ -48,7 +48,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | shape | Shape of bubble | `round` \| `corner` | - |  |
 | styles | Semantic DOM style | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - |  |
 | typing | Show message with typing motion | boolean \| { step?: number, interval?: number } | false |  |
-| variant | Style variant | `filled` \| `borderless` | `filled` |  |
+| variant | Style variant | `filled` \| `borderless` \| `outlined` \| `shadow` | `filled` |  |
 | loadingRender | Customize loading content | () => ReactNode | - |  |
 | messageRender | Customize display content | (content?: string) => ReactNode | - |  |
 | onTypingComplete | Callback when typing effect is completed. If typing is not set, it will be triggered immediately when rendering. | () => void | - |  |
