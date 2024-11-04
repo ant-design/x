@@ -1,4 +1,3 @@
-import { unit } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
@@ -31,9 +30,18 @@ const genWelcomeStyle: GenerateStyle<WelcomeToken> = (token) => {
       // ==================== Content Wrap ====================
       [`${componentCls}-content-wrapper`]: {
         gap: token.paddingXS,
+        flex: 'auto',
+        minWidth: 0,
+
+        [`${componentCls}-title-wrapper`]: {
+          gap: token.paddingXS,
+        },
 
         [`${componentCls}-title`]: {
           margin: 0,
+        },
+        [`${componentCls}-extra`]: {
+          marginInlineStart: 'auto',
         },
       },
     },

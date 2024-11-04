@@ -9,12 +9,14 @@ import type { XProviderProps } from './context';
 
 const XProvider: React.FC<XProviderProps & AntdConfigProviderProps> = (props) => {
   const {
+    attachments,
     bubble,
     conversations,
     prompts,
     sender,
     suggestion,
     thoughtChain,
+    welcome,
     theme,
     ...antdConfProps
   } = props;
@@ -23,14 +25,16 @@ const XProvider: React.FC<XProviderProps & AntdConfigProviderProps> = (props) =>
 
   const xProviderProps = React.useMemo(() => {
     return {
+      attachments,
       bubble,
       conversations,
       prompts,
       sender,
       suggestion,
       thoughtChain,
+      welcome,
     };
-  }, [bubble, conversations, prompts, sender, suggestion, thoughtChain]);
+  }, [attachments, bubble, conversations, prompts, sender, suggestion, thoughtChain, welcome]);
 
   const mergedTheme = React.useMemo(() => {
     const concatTheme = {

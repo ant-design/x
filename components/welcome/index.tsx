@@ -7,12 +7,18 @@ import { useXProviderContext } from '../x-provider';
 
 import useStyle from './style';
 
+export type SemanticType = 'title' | 'description' | 'icon' | 'extra';
+
 export interface WelcomeProps {
   prefixCls?: string;
   rootClassName?: string;
   className?: string;
   style?: React.CSSProperties;
   variant?: 'filled' | 'borderless';
+
+  // Semantic
+  classNames?: Partial<Record<SemanticType, string>>;
+  styles?: Partial<Record<SemanticType, React.CSSProperties>>;
 
   // Layout
   icon?: React.ReactNode;
@@ -29,6 +35,10 @@ function Welcome(props: WelcomeProps, ref: React.Ref<HTMLDivElement>) {
     style,
     variant = 'filled',
 
+    // Semantic
+    classNames = {},
+    styles = {},
+
     // Layout
     icon,
     title,
@@ -41,7 +51,7 @@ function Welcome(props: WelcomeProps, ref: React.Ref<HTMLDivElement>) {
   const prefixCls = getPrefixCls('welcome', customizePrefixCls);
 
   // ======================= Component Config =======================
-  const contextConfig = useXComponentConfig('sender');
+  const contextConfig = useXComponentConfig('welcome');
 
   // ============================ Styles ============================
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
@@ -56,8 +66,54 @@ function Welcome(props: WelcomeProps, ref: React.Ref<HTMLDivElement>) {
     if (typeof icon === 'string' && icon.startsWith('http')) {
       iconEle = <img src={icon} alt="icon" />;
     }
-    return <div className={`${prefixCls}-icon`}>{iconEle}</div>;
+    return (
+      <div
+        className={classnames(`${prefixCls}-icon`, contextConfig.classNames.icon, classNames.icon)}
+        style={styles.icon}
+      >
+        {iconEle}
+      </div>
+    );
   }, [icon]);
+
+  const titleNode = React.useMemo(() => {
+    if (!title) {
+      return null;
+    }
+
+    return (
+      <Typography.Title
+        level={4}
+        className={classnames(
+          `${prefixCls}-title`,
+          contextConfig.classNames.title,
+          classNames.title,
+        )}
+        style={styles.title}
+      >
+        {title}
+      </Typography.Title>
+    );
+  }, [title]);
+
+  const extraNode = React.useMemo(() => {
+    if (!extra) {
+      return null;
+    }
+
+    return (
+      <div
+        className={classnames(
+          `${prefixCls}-extra`,
+          contextConfig.classNames.extra,
+          classNames.extra,
+        )}
+        style={styles.extra}
+      >
+        {extra}
+      </div>
+    );
+  }, [extra]);
 
   // ============================ Render ============================
   return wrapCSSVar(
@@ -83,15 +139,27 @@ function Welcome(props: WelcomeProps, ref: React.Ref<HTMLDivElement>) {
       {/* Content */}
       <Flex vertical className={`${prefixCls}-content-wrapper`}>
         {/* Title */}
-        {title && (
-          <Typography.Title level={4} className={`${prefixCls}-title`}>
-            {title}
-          </Typography.Title>
+        {extra ? (
+          <Flex align="flex-start" className={`${prefixCls}-title-wrapper`}>
+            {titleNode}
+            {extraNode}
+          </Flex>
+        ) : (
+          titleNode
         )}
 
         {/* Description */}
         {description && (
-          <Typography.Text className={`${prefixCls}-description`}>{description}</Typography.Text>
+          <Typography.Text
+            className={classnames(
+              `${prefixCls}-description`,
+              contextConfig.classNames.description,
+              classNames.description,
+            )}
+            style={styles.description}
+          >
+            {description}
+          </Typography.Text>
         )}
       </Flex>
     </Flex>,

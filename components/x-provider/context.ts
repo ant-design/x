@@ -8,6 +8,7 @@ import type { PromptsProps } from '../prompts';
 import type { SenderProps } from '../sender';
 import type { SuggestionProps } from '../suggestion';
 import type { ThoughtChainProps } from '../thought-chain';
+import type { WelcomeProps } from '../welcome';
 
 export interface XComponentStyleConfig {
   classNames: Record<string, string>;
@@ -31,6 +32,7 @@ export interface XComponentsConfig {
   suggestion?: ComponentStyleConfig<SuggestionProps>;
   thoughtChain?: ComponentStyleConfig<ThoughtChainProps>;
   attachments?: ComponentStyleConfig<AttachmentsProps>;
+  welcome?: ComponentStyleConfig<WelcomeProps>;
 }
 
 export interface XProviderProps extends XComponentsConfig {

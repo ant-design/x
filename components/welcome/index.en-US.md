@@ -20,32 +20,22 @@ Use the appropriate welcome recommendation component to effectively reduce the u
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">Basic</code>
 <code src="./demo/variant.tsx">Variant</code>
+<code src="./demo/extra.tsx">Extra</code>
 
 ## API
 
-### PromptsProps
+### WelcomeProps
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| classNames | Custom style class names for different parts of each prompt item. | Record<'list' \| 'item' \| 'content' \| 'title', string> | - | - |
-| items | List containing multiple prompt items. | PromptProps[] | - | - |
-| prefixCls | Prefix for style class names. | string | - | - |
-| rootClassName | Style class name for the root node. | string | - | - |
-| styles | Custom styles for different parts of each prompt item. | Record<'list' \| 'item' \| 'content' \| 'title', React.CSSProperties> | - | - |
-| title | Title displayed at the top of the prompt list. | React.ReactNode | - | - |
-| vertical | When set to `true`, the Prompts will be arranged vertically. | boolean | `false` | - |
-| wrap | When set to `true`, the Prompts will automatically wrap. | boolean | `false` | - |
-| onItemClick | Callback function when a prompt item is clicked. | (info: { data: PromptProps }) => void | - | - |
-
-### PromptProps
-
-| Property | Description | Type | Default | Version |
-| --- | --- | --- | --- | --- |
-| description | Prompt description providing additional information. | React.ReactNode | - | - |
-| disabled | When set to `true`, click events are disabled. | boolean | `false` | - |
-| icon | Prompt icon displayed on the left side of the prompt item. | React.ReactNode | - | - |
-| key | Unique identifier used to distinguish each prompt item. | string | - | - |
-| label | Prompt label displaying the main content of the prompt. | React.ReactNode | - | - |
+| classNames | Custom style class names for different parts of each prompt item. | Record<'icon' \| 'title' \| 'description' \| 'extra', string> | - | - |
+| description | The description displayed in the prompt list. | React.ReactNode | - | - |
+| extra | The extra operation displayed at the end of the prompt list. | React.ReactNode | - | - |
+| icon | The icon displayed on the front side of the prompt list. | React.ReactNode | - | - |
+| rootClassName | The style class name of the root node. | string | - | - |
+| styles | Custom styles for different parts of each prompt item. | Record<'icon' \| 'title' \| 'description' \| 'extra', React.CSSProperties> | - | - |
+| title | The title displayed at the top of the prompt list. | React.ReactNode | - | - |
+| variant | Variant type. | 'filled' \| 'borderless' | 'filled' | - |
 
 ## Semantic DOM
 
@@ -53,4 +43,4 @@ Use the appropriate welcome recommendation component to effectively reduce the u
 
 ## Design Token
 
-<ComponentTokenTable component="Prompts"></ComponentTokenTable>
+<ComponentTokenTable component="Welcome"></ComponentTokenTable>

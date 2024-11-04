@@ -1,55 +1,42 @@
-import { BulbOutlined, InfoCircleOutlined, RocketOutlined } from '@ant-design/icons';
-import { Prompts, type PromptsProps } from '@ant-design/x';
+import { EllipsisOutlined, ShareAltOutlined } from '@ant-design/icons';
+import { Welcome } from '@ant-design/x';
+import { Button, Space } from 'antd';
 import React from 'react';
 import SemanticPreview from '../../../.dumi/components/SemanticPreview';
 import useLocale from '../../../.dumi/hooks/useLocale';
 
 const locales = {
-  cn: { title: '标题容器', list: '列表容器', item: '列表项', itemContent: '列表项内容' },
+  cn: { title: '标题容器', description: '描述容器', icon: '图标容器', extra: '额外内容' },
   en: {
     title: 'Title container',
-    list: 'List container',
-    item: 'List item',
-    itemContent: 'List item content',
+    description: 'Description container',
+    icon: 'Icon container',
+    extra: 'Extra content',
   },
 };
-
-const items: PromptsProps['items'] = [
-  {
-    key: '1',
-    icon: <BulbOutlined style={{ color: '#FFD700' }} />,
-    label: 'Ignite Your Creativity',
-    description: 'Got any sparks for a new project?',
-    disabled: false,
-  },
-  {
-    key: '2',
-    icon: <InfoCircleOutlined style={{ color: '#1890FF' }} />,
-    label: 'Uncover Background Info',
-    description: 'Help me understand the background of this topic.',
-    disabled: false,
-  },
-  {
-    key: '3',
-    icon: <RocketOutlined style={{ color: '#722ED1' }} />,
-    label: 'Efficiency Boost Battle',
-    description: 'How can I work faster and better?',
-    disabled: false,
-  },
-];
 
 const App: React.FC = () => {
   const [locale] = useLocale(locales);
   return (
     <SemanticPreview
       semantics={[
+        { name: 'icon', desc: locale.icon },
         { name: 'title', desc: locale.title },
-        { name: 'list', desc: locale.list },
-        { name: 'item', desc: locale.item },
-        { name: 'itemContent', desc: locale.itemContent },
+        { name: 'description', desc: locale.description },
+        { name: 'extra', desc: locale.extra },
       ]}
     >
-      <Prompts title="✨ Inspirational Sparks and Marvelous Tips" items={items} />
+      <Welcome
+        icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*7iaeT54QpcQAAAAAAAAAAAAADgCCAQ/original"
+        title="Hello, I'm Ant Design X"
+        description="Base on Ant Design, AGI product interface solution, create a better intelligent vision~"
+        extra={
+          <Space>
+            <Button size="small" icon={<ShareAltOutlined />} />
+            <Button size="small" icon={<EllipsisOutlined />} />
+          </Space>
+        }
+      />
     </SemanticPreview>
   );
 };

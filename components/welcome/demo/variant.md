@@ -1,7 +1,7 @@
 ## zh-CN
 
-基础用法。
+通过 `variant` 属性设置样式变体。
 
 ## en-US
 
-Basic usage.
+Set the style variant through the `variant` property.
