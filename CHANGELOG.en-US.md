@@ -16,6 +16,12 @@ tag: vVERSION
 
 ---
 
+## 1.0.0-alpha.10
+
+`2024-11-04`
+
+- 🐛 Fix Attachments drop upload could not trigger the upload request, by [@YumoImer](https://github.com/YumoImer) [#178](https://github.com/ant-design/x/pull/178)
+
 ## 1.0.0-alpha.9
 
 `2024-11-01`
