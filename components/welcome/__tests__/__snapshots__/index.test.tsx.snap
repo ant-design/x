@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`bubble rtl render component should be rendered correctly in RTL direction 1`] = `
+exports[`welcome rtl render component should be rendered correctly in RTL direction 1`] = `
 <div
-  class="ant-prompts ant-prompts-rtl"
+  class="ant-welcome ant-welcome-filled ant-welcome-rtl ant-flex ant-flex-rtl"
 >
-  <ul
-    class="ant-prompts-list"
+  <div
+    class="ant-welcome-content-wrapper ant-flex ant-flex-align-stretch ant-flex-rtl ant-flex-vertical"
   />
 </div>
 `;
