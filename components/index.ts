@@ -11,6 +11,8 @@ export { default as ThoughtChain } from './thought-chain';
 export type { ThoughtChainProps, ThoughtChainItem } from './thought-chain';
 export { default as Suggestion } from './suggestion';
 export type { SuggestionProps } from './suggestion';
+export { default as Welcome } from './welcome';
+export type { WelcomeProps } from './welcome';
 export { default as XProvider } from './x-provider';
 export type { XProviderProps } from './x-provider';
 export { default as useXChat } from './useXChat';
