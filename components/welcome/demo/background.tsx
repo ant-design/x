@@ -1,6 +1,5 @@
-import { EllipsisOutlined, ShareAltOutlined } from '@ant-design/icons';
 import { Welcome } from '@ant-design/x';
-import { Button, Card, ConfigProvider, Flex, Space, theme } from 'antd';
+import { Card, ConfigProvider, Flex, theme } from 'antd';
 import React from 'react';
 
 const items: {
