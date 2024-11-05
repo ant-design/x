@@ -1,8 +1,5 @@
 import {
   BulbOutlined,
-  CheckCircleOutlined,
-  CoffeeOutlined,
-  FireOutlined,
   InfoCircleOutlined,
   RocketOutlined,
   SmileOutlined,

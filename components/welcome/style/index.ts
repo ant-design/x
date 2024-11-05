@@ -49,7 +49,7 @@ const genWelcomeStyle: GenerateStyle<WelcomeToken> = (token) => {
 };
 
 const genVariantStyle: GenerateStyle<WelcomeToken> = (token) => {
-  const { componentCls, calc } = token;
+  const { componentCls } = token;
 
   return {
     [componentCls]: {
