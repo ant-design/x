@@ -23,6 +23,7 @@ The Prompts component is used to display a predefined set of questions or sugges
 <code src="./demo/flex-vertical.tsx">Vertical</code>
 <code src="./demo/flex-wrap.tsx">Wrap</code>
 <code src="./demo/flex-wrap-fixed.tsx">Responsive Size</code>
+<code src="./demo/nest.tsx">Nest Usage</code>
 
 ## API
 
