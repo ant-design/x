@@ -1,4 +1,4 @@
-import { Button, Typography } from 'antd';
+import { Typography } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
 
@@ -7,9 +7,43 @@ import { useXProviderContext } from '../x-provider';
 
 import useStyle from './style';
 
-import type { PromptProps } from './interface';
+export interface BasePromptItem {
+  /**
+   * @desc 唯一标识用于区分每个提示项。
+   * @descEN Unique identifier used to distinguish each prompt item.
+   */
+  key: string;
 
-export type SemanticType = 'list' | 'item' | 'itemContent' | 'title';
+  /**
+   * @desc 提示图标显示在提示项的左侧。
+   * @descEN Prompt icon displayed on the left side of the prompt item.
+   */
+  icon?: React.ReactNode;
+
+  /**
+   * @desc 提示标签显示提示的主要内容。
+   * @descEN Prompt label displaying the main content of the prompt.
+   */
+  label?: React.ReactNode;
+
+  /**
+   * @desc 提示描述提供额外的信息。
+   * @descEN Prompt description providing additional information.
+   */
+  description?: React.ReactNode;
+
+  /**
+   * @desc 设置为 true 时禁用点击事件。
+   * @descEN When set to true, click events are disabled.
+   */
+  disabled?: boolean;
+}
+
+export interface PromptProps extends BasePromptItem {
+  children?: BasePromptItem[];
+}
+
+export type SemanticType = 'list' | 'item' | 'itemContent' | 'title' | 'subList' | 'subItem';
 
 export interface PromptsProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick' | 'title'> {
@@ -134,40 +168,66 @@ const Prompts: React.FC<PromptsProps> = (props) => {
       )}
       {/* Prompt List */}
       <div className={mergedListCls} style={{ ...contextConfig.styles.list, ...styles.list }}>
-        {items?.map((info, index) => (
-          <Button
-            key={info.key || `key_${index}`}
-            type={info.disabled ? 'default' : 'text'}
-            style={{ ...contextConfig.styles.item, ...styles.item }}
-            disabled={info.disabled}
-            className={classnames(
-              `${prefixCls}-item`,
-              contextConfig.classNames.item,
-              classNames.item,
-              {
-                [`${prefixCls}-item-disabled`]: info.disabled,
-              },
-            )}
-            onClick={() => onItemClick?.({ data: info })}
-          >
-            {/* Icon */}
-            {info.icon && <div className={`${prefixCls}-icon`}>{info.icon}</div>}
-            {/* Content */}
+        {items?.map((info, index) => {
+          const isNest = info.children && info.children.length > 0;
+
+          return (
             <div
+              key={info.key || `key_${index}`}
+              style={{ ...contextConfig.styles.item, ...styles.item }}
               className={classnames(
-                `${prefixCls}-content`,
-                contextConfig.classNames.itemContent,
-                classNames.itemContent,
+                `${prefixCls}-item`,
+                contextConfig.classNames.item,
+                classNames.item,
+                {
+                  [`${prefixCls}-item-disabled`]: info.disabled,
+                  [`${prefixCls}-item-has-nest`]: isNest,
+                },
               )}
-              style={{ ...contextConfig.styles.itemContent, ...styles.itemContent }}
+              onClick={() => {
+                if (!isNest && onItemClick) {
+                  onItemClick({ data: info });
+                }
+              }}
             >
-              {/* Label */}
-              {info.label && <h6 className={`${prefixCls}-label`}>{info.label}</h6>}
-              {/* Description */}
-              {info.description && <p className={`${prefixCls}-desc`}>{info.description}</p>}
+              {/* Icon */}
+              {info.icon && <div className={`${prefixCls}-icon`}>{info.icon}</div>}
+              {/* Content */}
+              <div
+                className={classnames(
+                  `${prefixCls}-content`,
+                  contextConfig.classNames.itemContent,
+                  classNames.itemContent,
+                )}
+                style={{ ...contextConfig.styles.itemContent, ...styles.itemContent }}
+              >
+                {/* Label */}
+                {info.label && <h6 className={`${prefixCls}-label`}>{info.label}</h6>}
+
+                {/* Description */}
+                {info.description && <p className={`${prefixCls}-desc`}>{info.description}</p>}
+
+                {/* Children */}
+                {isNest && (
+                  <Prompts
+                    className={`${prefixCls}-nested`}
+                    items={info.children}
+                    vertical
+                    onItemClick={onItemClick}
+                    classNames={{
+                      list: classNames.subList,
+                      item: classNames.subItem,
+                    }}
+                    styles={{
+                      list: styles.subList,
+                      item: styles.subItem,
+                    }}
+                  />
+                )}
+              </div>
             </div>
-          </Button>
-        ))}
+          );
+        })}
       </div>
     </div>,
   );
@@ -176,7 +236,5 @@ const Prompts: React.FC<PromptsProps> = (props) => {
 if (process.env.NODE_ENV !== 'production') {
   Prompts.displayName = 'Prompts';
 }
-
-export type { PromptProps };
 
 export default Prompts;
