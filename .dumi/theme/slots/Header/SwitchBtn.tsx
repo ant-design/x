@@ -22,8 +22,7 @@ const useStyle = createStyles(({ token, css }) => {
     colorBorder,
     colorBgContainer,
     colorBgTextHover,
-    borderRadius,
-    controlHeight,
+    controlHeightLG,
     motionDurationMid,
   } = token;
 
@@ -32,14 +31,14 @@ const useStyle = createStyles(({ token, css }) => {
       color: ${colorText};
       border-color: ${colorBorder};
       padding: 0 !important;
-      width: ${controlHeight}px;
-      height: ${controlHeight}px;
+      width: ${controlHeightLG}px;
+      height: ${controlHeightLG}px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       border: none;
       background: transparent;
-      border-radius: ${borderRadius}px;
+      border-radius: ${controlHeightLG / 2}px;
       transition: all ${motionDurationMid};
       cursor: pointer;
       .btn-inner {

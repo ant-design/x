@@ -1,189 +1,172 @@
-import { MenuOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import { Menu } from 'antd';
 import { createStyles, css } from 'antd-style';
-import { FormattedMessage, useFullSidebarData, useLocation } from 'dumi';
-import * as React from 'react';
+import classnames from 'classnames';
+import { useFullSidebarData, useLocation } from 'dumi';
+import React from 'react';
 
 import useLocale from '../../../hooks/useLocale';
 import Link from '../../common/Link';
-import * as utils from '../../utils';
+import { getLocalizedPathname } from '../../utils';
+
 import type { SharedProps } from './interface';
 
-// ============================= Theme =============================
 const locales = {
   cn: {
     design: '设计',
     development: '研发',
     components: '组件',
-    resources: '资源',
+    playground: '演示',
     blog: '博客',
+    resources: '资源',
   },
   en: {
     design: 'Design',
     development: 'Development',
     components: 'Components',
-    resources: 'Resources',
+    playground: 'Playground',
     blog: 'Blog',
+    resources: 'Resources',
   },
 };
 
-// ============================= Style =============================
-const useStyle = createStyles(({ token }) => {
-  const { antCls, iconCls, fontFamily, fontSize, headerHeight, colorPrimary } = token;
+const defaultItems = [
+  {
+    path: '/docs/spec/introduce',
+    basePath: '/docs/spec',
+    key: 'design',
+  },
+  {
+    path: '/docs/react/introduce',
+    basePath: '/docs/react',
+    key: 'development',
+  },
+  {
+    path: '/components/overview/',
+    basePath: '/components',
+    key: 'components',
+  },
+  {
+    path: '/playground',
+    basePath: '/playground',
+    key: 'playground',
+  },
+];
 
+const useStyle = createStyles(({ token }) => {
   return {
     nav: css`
-      height: 100%;
-      font-size: ${fontSize}px;
-      font-family: Avenir, ${fontFamily}, sans-serif;
-      border: 0 !important;
+      padding: 0 ${token.paddingLG}px;
+      border-radius: ${token.indexRadius}px;
+      box-sizing: border-box;
 
-      &${antCls}-menu-horizontal {
-        border-bottom: none;
+      display: flex;
+      gap: ${token.paddingLG}px;
+      align-items: center;
 
-        & > ${antCls}-menu-item, & > ${antCls}-menu-submenu {
-          min-width: ${40 + 12 * 2}px;
-          height: ${headerHeight}px;
-          padding-inline-end: ${token.paddingSM}px;
-          padding-inline-start: ${token.paddingSM}px;
-          line-height: ${headerHeight}px;
-        }
+      a {
+        font-size: ${token.fontSizeLG}px;
+        color: ${token.colorTextSecondary};
+      };
 
-        & ${antCls}-menu-submenu-title ${iconCls} {
-          margin: 0;
-        }
-
-        & > ${antCls}-menu-item-selected {
-          a {
-            color: ${colorPrimary};
-          }
-        }
-      }
-
-      & > ${antCls}-menu-item, & > ${antCls}-menu-submenu {
-        text-align: center;
+      a:hover {
+        color: ${token.colorText};
       }
     `,
+    pc: css`
+      height: ${token.headerHeight - token.padding * 2}px;
+      overflow: hidden;
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1000;
+
+      flex-direction: row;
+    `,
+    mobile: css`
+      padding: ${token.headerHeight}px 0 !important;
+
+      flex-direction: column;
+    `,
+    mini: css`
+      flex-direction: row;
+      width: max-content;
+      padding: 0 !important;
+    `,
+    item_active: css`
+    color: ${token.colorText} !important;
+    font-weight: 500;
+  `,
   };
 });
 
-export interface NavigationProps extends SharedProps {
-  isMobile: boolean;
-  responsive: null | 'narrow' | 'crowded';
-  directionText: string;
-  onLangChange: () => void;
-  onDirectionChange: () => void;
+export interface HeaderNavigationProps extends SharedProps {
+  className?: string;
 }
 
-const HeaderNavigation: React.FC<NavigationProps> = (props) => {
-  const { isZhCN, isMobile, responsive, directionText, onLangChange, onDirectionChange } = props;
-  const { pathname, search } = useLocation();
-  const [locale] = useLocale(locales);
-
-  const sidebarData = useFullSidebarData();
-  const blogList = sidebarData['/docs/blog']?.[0]?.children || [];
+const HeaderNavigation: React.FC<HeaderNavigationProps> = (props) => {
+  const { isZhCN, isMobile, isMini } = props;
 
   const { styles } = useStyle();
 
-  const menuMode = isMobile ? 'inline' : 'horizontal';
+  const [locale] = useLocale(locales);
 
-  const module = pathname.split('/').filter(Boolean).slice(0, -1).join('/');
-  let activeMenuItem = module || 'home';
-  if (pathname.startsWith('/changelog')) {
-    activeMenuItem = 'docs/react';
-  } else if (pathname.startsWith('/docs/resources')) {
-    activeMenuItem = 'docs/resources';
-  }
+  const { search, pathname } = useLocation();
 
-  let additional: MenuProps['items'] = [];
+  const [activeKey, setActiveKey] = React.useState<string>();
 
-  const additionalItems: MenuProps['items'] = [
-    {
-      label: (
-        <a href="https://github.com/ant-design/x" target="_blank" rel="noopener noreferrer">
-          GitHub
-        </a>
-      ),
-      key: 'github',
-    },
-    {
-      label: <FormattedMessage id="app.header.lang" />,
-      onClick: onLangChange,
-      key: 'switch-lang',
-    },
-    {
-      label: directionText,
-      onClick: onDirectionChange,
-      key: 'switch-direction',
-    },
-  ];
+  const sidebarData = useFullSidebarData();
 
-  if (isMobile) {
-    additional = additionalItems;
-  } else if (responsive === 'crowded') {
-    additional = [
-      {
-        label: <MenuOutlined />,
-        key: 'additional',
-        children: [...additionalItems],
-      },
-    ];
-  }
+  const blogList = sidebarData['/docs/blog']?.[0]?.children || [];
 
-  const items: MenuProps['items'] = [
-    {
-      label: (
-        <Link to={utils.getLocalizedPathname('/docs/spec/introduce', isZhCN, search)}>
-          {locale.design}
-        </Link>
-      ),
-      key: 'docs/spec',
-    },
-    {
-      label: (
-        <Link to={utils.getLocalizedPathname('/docs/react/introduce', isZhCN, search)}>
-          {locale.development}
-        </Link>
-      ),
-      key: 'docs/react',
-    },
-    {
-      label: (
-        <Link to={utils.getLocalizedPathname('/components/overview/', isZhCN, search)}>
-          {locale.components}
-        </Link>
-      ),
-      key: 'components',
-    },
-    blogList.length
-      ? {
-          label: (
-            <Link
-              to={utils.getLocalizedPathname(
-                blogList.sort((a, b) => (a.frontmatter?.date > b.frontmatter?.date ? -1 : 1))[0]
-                  .link,
-                isZhCN,
-                search,
-              )}
-            >
-              {locale.blog}
-            </Link>
-          ),
-          key: 'docs/blog',
-        }
-      : null,
-    ...(additional ?? []),
-  ].filter(Boolean);
+  const items = React.useMemo(() => {
+    const navItems = [...defaultItems];
+
+    if (blogList.length) {
+      navItems.push({
+        path: blogList.sort((a, b) => (a.frontmatter?.date > b.frontmatter?.date ? -1 : 1))[0].link,
+        basePath: '/docs/blog',
+        key: 'blog',
+      });
+    }
+
+    return navItems;
+  }, [blogList.length]);
+
+  React.useEffect(() => {
+    if (!items.length || !pathname) return;
+
+    const activeIndex = items.findIndex((item) => pathname.includes(item.basePath));
+
+    if (activeIndex === -1) {
+      setActiveKey(undefined);
+    } else {
+      setActiveKey(items[activeIndex].key);
+    }
+  }, [pathname, items.length]);
+
+  const makeHandleActiveKeyChange = (key: string) => () => setActiveKey(key);
 
   return (
-    <Menu
-      mode={menuMode}
-      selectedKeys={[activeMenuItem]}
-      className={styles.nav}
-      disabledOverflow
-      items={items}
-    />
+    <nav
+      className={classnames(
+        styles.nav,
+        isMobile || isMini ? styles.mobile : styles.pc,
+        isMini && styles.mini,
+        props.className,
+      )}
+    >
+      {items.map((item) => (
+        <Link
+          key={item.key}
+          to={getLocalizedPathname(item.path, isZhCN, search)}
+          onClick={makeHandleActiveKeyChange(item.key)}
+          className={activeKey === item.key ? styles.item_active : ''}
+        >
+          {locale[item.key as keyof typeof locale]}
+        </Link>
+      ))}
+    </nav>
   );
 };
 

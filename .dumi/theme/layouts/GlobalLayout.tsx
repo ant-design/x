@@ -8,10 +8,11 @@ import {
 } from '@ant-design/cssinjs';
 import { getSandpackCssText } from '@codesandbox/sandpack-react';
 import { App, theme as antdTheme } from 'antd';
-import type { MappingAlgorithm } from 'antd';
-import type { DirectionType, ThemeConfig } from 'antd/es/config-provider';
 import { createSearchParams, useOutlet, useSearchParams, useServerInsertedHTML } from 'dumi';
 import React, { Suspense, useCallback, useEffect } from 'react';
+
+import type { MappingAlgorithm } from 'antd';
+import type { DirectionType, ThemeConfig } from 'antd/es/config-provider';
 
 import { DarkContext } from '../../hooks/useDark';
 import useLayoutState from '../../hooks/useLayoutState';
@@ -51,13 +52,11 @@ const GlobalLayout: React.FC = () => {
   const outlet = useOutlet();
   const { pathname } = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [{ theme = [], direction, isMobile, bannerVisible = false }, setSiteState] =
-    useLayoutState<SiteState>({
-      isMobile: false,
-      direction: 'ltr',
-      theme: ['dark'],
-      bannerVisible: false,
-    });
+  const [{ theme = [], direction, isMobile }, setSiteState] = useLayoutState<SiteState>({
+    isMobile: false,
+    direction: 'ltr',
+    theme: [],
+  });
 
   const updateSiteConfig = useCallback(
     (props: SiteState) => {
@@ -101,14 +100,10 @@ const GlobalLayout: React.FC = () => {
   useEffect(() => {
     const _theme = searchParams.getAll('theme') as ThemeName[];
     const _direction = searchParams.get('direction') as DirectionType;
-    // const storedBannerVisibleLastTime =
-    //   localStorage && localStorage.getItem(ANT_DESIGN_NOT_SHOW_BANNER);
-    // const storedBannerVisible =
-    //   storedBannerVisibleLastTime && dayjs().diff(dayjs(storedBannerVisibleLastTime), 'day') >= 1;
+
     setSiteState({
-      theme: _theme.length ? _theme : ['dark'],
+      theme: _theme,
       direction: _direction === 'rtl' ? 'rtl' : 'ltr',
-      // bannerVisible: storedBannerVisibleLastTime ? !!storedBannerVisible : true,
     });
     document.documentElement.setAttribute(
       'data-prefers-color',
@@ -129,9 +124,8 @@ const GlobalLayout: React.FC = () => {
       updateSiteConfig,
       theme: theme!,
       isMobile: isMobile!,
-      bannerVisible,
     }),
-    [isMobile, direction, updateSiteConfig, theme, bannerVisible],
+    [isMobile, direction, updateSiteConfig, theme],
   );
 
   const themeConfig = React.useMemo<ThemeConfig>(
