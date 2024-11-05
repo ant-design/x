@@ -133,58 +133,42 @@ const Prompts: React.FC<PromptsProps> = (props) => {
         </Typography.Title>
       )}
       {/* Prompt List */}
-      <ul className={mergedListCls} style={{ ...contextConfig.styles.list, ...styles.list }}>
+      <div className={mergedListCls} style={{ ...contextConfig.styles.list, ...styles.list }}>
         {items?.map((info, index) => (
-          <li key={info.key || `key_${index}`}>
-            {/* Prompt Item */}
-            <Button
-              type={info.disabled ? 'default' : 'text'}
-              style={{ ...contextConfig.styles.item, ...styles.item }}
-              disabled={info.disabled}
+          <Button
+            key={info.key || `key_${index}`}
+            type={info.disabled ? 'default' : 'text'}
+            style={{ ...contextConfig.styles.item, ...styles.item }}
+            disabled={info.disabled}
+            className={classnames(
+              `${prefixCls}-item`,
+              contextConfig.classNames.item,
+              classNames.item,
+              {
+                [`${prefixCls}-item-disabled`]: info.disabled,
+              },
+            )}
+            onClick={() => onItemClick?.({ data: info })}
+          >
+            {/* Icon */}
+            {info.icon && <div className={`${prefixCls}-icon`}>{info.icon}</div>}
+            {/* Content */}
+            <div
               className={classnames(
-                `${prefixCls}-item`,
-                contextConfig.classNames.item,
-                classNames.item,
+                `${prefixCls}-content`,
+                contextConfig.classNames.itemContent,
+                classNames.itemContent,
               )}
-              onClick={() => onItemClick?.({ data: info })}
+              style={{ ...contextConfig.styles.itemContent, ...styles.itemContent }}
             >
-              {/* Icon */}
-              {info.icon && <div className={`${prefixCls}-icon`}>{info.icon}</div>}
-              {/* Content */}
-              <div
-                className={classnames(
-                  `${prefixCls}-content`,
-                  contextConfig.classNames.itemContent,
-                  classNames.itemContent,
-                )}
-                style={{ ...contextConfig.styles.itemContent, ...styles.itemContent }}
-              >
-                {/* Label */}
-                {info.label && (
-                  <Typography.Text
-                    strong
-                    ellipsis
-                    className={`${prefixCls}-label`}
-                    disabled={info.disabled}
-                  >
-                    {info.label}
-                  </Typography.Text>
-                )}
-                {/* Description */}
-                {info.description && (
-                  <Typography.Text
-                    className={`${prefixCls}-desc`}
-                    type={info.label ? 'secondary' : undefined}
-                    disabled={info.disabled}
-                  >
-                    {info.description}
-                  </Typography.Text>
-                )}
-              </div>
-            </Button>
-          </li>
+              {/* Label */}
+              {info.label && <h6 className={`${prefixCls}-label`}>{info.label}</h6>}
+              {/* Description */}
+              {info.description && <p className={`${prefixCls}-desc`}>{info.description}</p>}
+            </div>
+          </Button>
         ))}
-      </ul>
+      </div>
     </div>,
   );
 };

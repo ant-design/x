@@ -3,17 +3,14 @@ import type { BubbleToken } from '.';
 import type { GenerateStyle } from '../../theme/cssinjs-utils';
 
 export const genVariantStyle: GenerateStyle<BubbleToken> = (token) => {
-  const { componentCls, paddingSM, padding, calc } = token;
+  const { componentCls, paddingSM, padding } = token;
   return {
     [componentCls]: {
       [`${componentCls}-content`]: {
         // Shared: filled, outlined, shadow
         '&-filled,&-outlined,&-shadow': {
           padding: `${unit(paddingSM)} ${unit(padding)}`,
-          borderRadius: {
-            _skip_check_: true,
-            value: calc(token.borderRadiusLG).add(token.borderRadiusSM).equal(),
-          },
+          borderRadius: token.borderRadiusLG,
         },
 
         // Filled:

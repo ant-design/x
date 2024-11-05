@@ -20,6 +20,8 @@ const genPromptsStyle: GenerateStyle<PromptsToken> = (token) => {
       },
       [`& ${componentCls}-title`]: {
         marginBlockStart: 0,
+        fontWeight: 'normal',
+        color: token.colorTextTertiary,
       },
 
       [`& ${componentCls}-list`]: {
@@ -32,31 +34,62 @@ const genPromptsStyle: GenerateStyle<PromptsToken> = (token) => {
         listStyle: 'none',
         paddingInlineStart: 0,
         marginBlock: 0,
+        alignItems: 'stretch',
 
         '&-wrap': {
           flexWrap: 'wrap',
         },
         '&-vertical': {
           flexDirection: 'column',
+          alignItems: 'flex-start',
         },
       },
 
       // ========================= item =========================
-      [`& ${componentCls}-item`]: {
+      [`${componentCls}-item`]: {
+        flex: 'none',
         display: 'flex',
-        gap: token.paddingSM,
+        gap: token.paddingXS,
         height: 'auto',
-        padding: token.paddingSM,
+        paddingBlock: token.paddingSM,
+        paddingInline: token.padding,
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
         borderRadius: token.borderRadiusLG,
         border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorderSecondary}`,
 
-        [`& ${componentCls}-content`]: {
-          display: 'inline-flex',
-          gap: token.paddingXS,
+        [`${componentCls}-content`]: {
+          flex: 'auto',
+          minWidth: 0,
+          display: 'flex',
+          gap: token.paddingXXS,
           flexDirection: 'column',
           alignItems: 'flex-start',
+
+          [`${componentCls}-label, ${componentCls}-desc`]: {
+            margin: 0,
+            padding: 0,
+            fontSize: token.fontSize,
+            lineHeight: token.lineHeight,
+            textAlign: 'start',
+            whiteSpace: 'normal',
+          },
+
+          [`${componentCls}-label`]: {
+            color: token.colorTextHeading,
+            fontWeight: 500,
+          },
+
+          [`${componentCls}-label + ${componentCls}-desc`]: {
+            color: token.colorTextTertiary,
+          },
+        },
+
+        // Disabled
+        [`&${componentCls}-item-disabled`]: {
+          [`${componentCls}-label, ${componentCls}-desc`]: {
+            color: token.colorTextTertiary,
+          },
         },
       },
     },

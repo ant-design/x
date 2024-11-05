@@ -23,6 +23,7 @@ Prompts 组件用于显示一组与当前上下文相关的预定义的问题或
 <code src="./demo/disabled.tsx">不可用状态</code>
 <code src="./demo/flex-vertical.tsx">纵向展示</code>
 <code src="./demo/flex-wrap.tsx">可换行</code>
+<code src="./demo/flex-wrap-fixed.tsx">响应式宽度</code>
 
 ## API
 
