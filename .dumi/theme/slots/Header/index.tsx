@@ -31,7 +31,7 @@ const useStyle = createStyles(({ token, css }) => {
       justify-content: space-between;
     `,
     mobile: css`
-      height: ${token.headerHeight - token.padding * 2}px;
+      height: 48px;
       width: calc(100% - ${token.paddingLG * 2}px);
       padding: 0 ${token.paddingLG}px;
       margin: 0 ${token.paddingLG}px;
@@ -98,7 +98,7 @@ const Header: React.FC = () => {
 
   const { styles } = useStyle();
 
-  const { scrollY, scrollDirection } = useScrollY();
+  const { scrollY, scrollYDirection } = useScrollY();
 
   const isMini = scrollY > 800 && !isMobile;
 
@@ -146,7 +146,7 @@ const Header: React.FC = () => {
         isMini && styles.mini,
       )}
       style={{
-        display: (isMobile || isMini) && scrollDirection === 'down' ? 'none' : 'flex',
+        display: scrollY > 1000 && scrollYDirection === 'down' ? 'none' : 'flex',
       }}
     >
       <Logo {...sharedProps} />

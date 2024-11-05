@@ -72,7 +72,7 @@ const useStyle = createStyles(({ token }) => {
       }
     `,
     pc: css`
-      height: ${token.headerHeight - token.padding * 2}px;
+      height: 48px;
       overflow: hidden;
 
       position: absolute;

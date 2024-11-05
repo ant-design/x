@@ -3,7 +3,7 @@ import React from 'react';
 const getSnapshot = () => window.scrollY;
 
 const useScrollY = () => {
-  const [scrollDirection, setScrollDirection] = React.useState<'down' | 'up'>();
+  const [scrollYDirection, setScrollYDirection] = React.useState<'down' | 'up'>();
 
   const subscribe = React.useCallback((callback: () => void) => {
     let ticking = false;
@@ -13,7 +13,7 @@ const useScrollY = () => {
       if (!ticking) {
         requestAnimationFrame(() => {
           callback();
-          setScrollDirection(scrollY > window.scrollY ? 'up' : 'down');
+          setScrollYDirection(scrollY > window.scrollY ? 'up' : 'down');
           scrollY = window.scrollY;
           ticking = false;
         });
@@ -31,7 +31,7 @@ const useScrollY = () => {
 
   return {
     scrollY,
-    scrollDirection,
+    scrollYDirection,
   };
 };
 
