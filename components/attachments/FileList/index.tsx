@@ -126,7 +126,7 @@ export default function FileList(props: FileListProps) {
           return (
             <FileListCard
               key={key}
-              prefixCls={listCls}
+              prefixCls={prefixCls}
               item={item}
               onRemove={onRemove}
               className={classnames(motionCls, itemClassName)}

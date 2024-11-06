@@ -25,7 +25,12 @@ async function checkVersion() {
   ];
 
   // any of the urls return the data will be fine
-  const promises = raceUrl.map((url) => fetch(url).then((res) => res.json()));
+  const promises = raceUrl.map((url) =>
+    fetch(url)
+      .then((res) => res.json())
+      // Ignore the error
+      .catch(() => new Promise(() => {})),
+  );
   const { versions } = await Promise.race(promises);
 
   if (version in versions) {

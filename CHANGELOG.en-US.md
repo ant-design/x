@@ -16,6 +16,14 @@ tag: vVERSION
 
 ---
 
+## 1.0.0-alpha.11
+
+`2024-11-06`
+
+- 🔥 New Component Welcome, by [@zombieJ](https://github.com/zombieJ) [#179](https://github.com/ant-design/x/pull/179)
+- 🔥 Prompts support nest structure, by [@zombieJ](https://github.com/zombieJ) [#181](https://github.com/ant-design/x/pull/181)
+- 🔥 Attachments support Attachments.FileCard component, by [@zombieJ](https://github.com/zombieJ) [#182](https://github.com/ant-design/x/pull/182)
+
 ## 1.0.0-alpha.10
 
 `2024-11-04`

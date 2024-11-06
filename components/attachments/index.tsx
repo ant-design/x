@@ -8,6 +8,7 @@ import { useXProviderContext } from '../x-provider';
 import { useEvent, useMergedState } from 'rc-util';
 import DropArea from './DropArea';
 import FileList, { type FileListProps } from './FileList';
+import FileListCard from './FileList/FileListCard';
 import PlaceholderUploader, {
   type PlaceholderProps,
   type PlaceholderType,
@@ -18,7 +19,9 @@ import useStyle from './style';
 
 export type SemanticType = 'list' | 'item' | 'placeholder';
 
-export type Attachment = GetProp<UploadProps, 'fileList'>[number];
+export type Attachment = GetProp<UploadProps, 'fileList'>[number] & {
+  description?: React.ReactNode;
+};
 
 export interface AttachmentsProps extends Omit<UploadProps, 'fileList'> {
   prefixCls?: string;
@@ -45,7 +48,7 @@ export interface AttachmentsProps extends Omit<UploadProps, 'fileList'> {
   overflow?: FileListProps['overflow'];
 }
 
-const Attachments: React.FC<AttachmentsProps> = (props) => {
+function Attachments(props: AttachmentsProps) {
   const {
     prefixCls: customizePrefixCls,
     rootClassName,
@@ -202,10 +205,12 @@ const Attachments: React.FC<AttachmentsProps> = (props) => {
       {renderChildren}
     </AttachmentContext.Provider>,
   );
-};
+}
 
 if (process.env.NODE_ENV !== 'production') {
   Attachments.displayName = 'Attachments';
 }
+
+Attachments.FileCard = FileListCard;
 
 export default Attachments;

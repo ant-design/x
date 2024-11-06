@@ -16,6 +16,7 @@ const presetFiles: AttachmentsProps['items'] = [
     name: 'uploaded file.docx',
     status: 'done',
     size: 123456,
+    description: 'Customize description',
     url: 'http://www.baidu.com/yyy.png',
   },
   {

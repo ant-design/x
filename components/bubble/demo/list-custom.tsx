@@ -1,6 +1,6 @@
 import { CoffeeOutlined, FireOutlined, SmileOutlined, UserOutlined } from '@ant-design/icons';
-import { Bubble, Prompts } from '@ant-design/x';
-import { GetProp, Typography } from 'antd';
+import { Attachments, Bubble, Prompts } from '@ant-design/x';
+import { Flex, GetProp, Typography } from 'antd';
 import React from 'react';
 
 const roles: GetProp<typeof Bubble.List, 'roles'> = {
@@ -14,6 +14,18 @@ const roles: GetProp<typeof Bubble.List, 'roles'> = {
     avatar: { icon: <UserOutlined />, style: { visibility: 'hidden' } },
     variant: 'borderless',
     messageRender: (items) => <Prompts vertical items={items as any} />,
+  },
+  file: {
+    placement: 'start',
+    avatar: { icon: <UserOutlined />, style: { visibility: 'hidden' } },
+    variant: 'borderless',
+    messageRender: (items: any) => (
+      <Flex vertical gap="middle">
+        {(items as any[]).map((item) => (
+          <Attachments.FileCard key={item.uid} item={item} />
+        ))}
+      </Flex>
+    ),
   },
 };
 
@@ -36,7 +48,7 @@ const App = () => {
           content: <Typography.Text type="danger">ReactNode message</Typography.Text>,
         },
 
-        // Other components
+        // Role: suggestion
         {
           key: 2,
           role: 'suggestion',
@@ -55,6 +67,26 @@ const App = () => {
               key: '8',
               icon: <FireOutlined style={{ color: '#FF4D4F' }} />,
               description: 'How to stay calm under immense pressure?',
+            },
+          ],
+        },
+        // Role: file
+        {
+          key: 3,
+          role: 'file',
+          content: [
+            {
+              uid: '1',
+              name: 'excel-file.xlsx',
+              size: 111111,
+              description: 'Checking the data',
+            },
+            {
+              uid: '2',
+              name: 'word-file.docx',
+              size: 222222,
+              status: 'uploading',
+              percent: 23,
             },
           ],
         },

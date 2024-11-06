@@ -3,9 +3,9 @@ import React from 'react';
 import Prompts, { type PromptsProps } from '..';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
-import { render, fireEvent } from '../../../tests/utils';
+import { fireEvent, render } from '../../../tests/utils';
 
-import type { PromptProps } from '../interface';
+import type { PromptProps } from '..';
 
 // Mock data
 const mockData: PromptProps[] = [
@@ -32,7 +32,7 @@ const mockProps: PromptsProps = {
   prefixCls: 'custom',
 };
 
-describe('bubble', () => {
+describe('prompts', () => {
   mountTest(() => <Prompts />);
   rtlTest(() => <Prompts />);
   beforeAll(() => {
@@ -49,10 +49,9 @@ describe('bubble', () => {
     expect(titleElement).toBeInTheDocument();
   });
 
-  it('should render the correct number of buttons', () => {
-    const { getAllByRole } = render(<Prompts items={mockProps.items} />);
-    const buttons = getAllByRole('button');
-    expect(buttons).toHaveLength(mockData.length);
+  it('should render the correct number of items', () => {
+    const { container } = render(<Prompts items={mockProps.items} />);
+    expect(container.querySelectorAll('.ant-prompts-item')).toHaveLength(mockData.length);
   });
 
   it('should render the labels and descriptions', () => {
@@ -73,9 +72,8 @@ describe('bubble', () => {
   });
 
   it('should disable buttons correctly', () => {
-    const { getByText } = render(<Prompts items={mockProps.items} />);
-    const disabledButton = getByText(/label 2/i).closest('button');
-    expect(disabledButton).toBeDisabled();
+    const { container } = render(<Prompts items={mockProps.items} />);
+    expect(container.querySelector('.ant-prompts-item-disabled')).toBeTruthy();
   });
 
   it('should render icons', () => {

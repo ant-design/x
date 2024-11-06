@@ -22,6 +22,7 @@ The Prompts component is used to display a predefined set of questions or sugges
 <code src="./demo/placeholder.tsx">Placeholder</code>
 <code src="./demo/overflow.tsx">Overflow</code>
 <code src="./demo/with-sender.tsx">Combination</code>
+<code src="./demo/files.tsx">File Card</code>
 
 ## API
 

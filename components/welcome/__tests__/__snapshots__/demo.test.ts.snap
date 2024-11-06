@@ -13,7 +13,7 @@ exports[`renders components/welcome/demo/background.tsx correctly 1`] = `
     >
       <div
         class="ant-welcome ant-welcome-filled ant-flex"
-        style="background-image:linear-gradient(97deg, #f2f9fe 0%, #f7f3ff 100%)"
+        style="background-image:linear-gradient(97deg, #f2f9fe 0%, #f7f3ff 100%);border-start-start-radius:4px"
       >
         <div
           class="ant-welcome-icon"
@@ -49,7 +49,7 @@ exports[`renders components/welcome/demo/background.tsx correctly 1`] = `
     >
       <div
         class="ant-welcome ant-welcome-filled ant-flex"
-        style="background-image:linear-gradient(97deg, #001529 0%, #000000 100%)"
+        style="background-image:linear-gradient(97deg, rgba(90,196,255,0.12) 0%, rgba(174,136,255,0.12) 100%);border-start-start-radius:4px"
       >
         <div
           class="ant-welcome-icon"

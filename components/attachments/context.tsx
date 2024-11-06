@@ -4,4 +4,4 @@ export interface AttachmentContextProps {
   disabled?: boolean;
 }
 
-export const AttachmentContext = React.createContext<AttachmentContextProps>({});
+export const AttachmentContext = React.createContext<AttachmentContextProps>(null!);

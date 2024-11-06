@@ -49,7 +49,7 @@ const genWelcomeStyle: GenerateStyle<WelcomeToken> = (token) => {
 };
 
 const genVariantStyle: GenerateStyle<WelcomeToken> = (token) => {
-  const { componentCls, calc } = token;
+  const { componentCls } = token;
 
   return {
     [componentCls]: {
@@ -58,7 +58,7 @@ const genVariantStyle: GenerateStyle<WelcomeToken> = (token) => {
         paddingInline: token.padding,
         paddingBlock: token.paddingSM,
         background: token.colorFillContent,
-        borderRadius: calc(token.borderRadiusLG).add(token.borderRadiusSM).equal(),
+        borderRadius: token.borderRadiusLG,
       },
 
       // ====================== Borderless ======================

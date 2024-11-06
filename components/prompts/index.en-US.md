@@ -22,6 +22,8 @@ The Prompts component is used to display a predefined set of questions or sugges
 <code src="./demo/disabled.tsx">Disabled</code>
 <code src="./demo/flex-vertical.tsx">Vertical</code>
 <code src="./demo/flex-wrap.tsx">Wrap</code>
+<code src="./demo/flex-wrap-fixed.tsx">Responsive Size</code>
+<code src="./demo/nest.tsx">Nest Usage</code>
 
 ## API
 
@@ -29,20 +31,27 @@ The Prompts component is used to display a predefined set of questions or sugges
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| classNames | Custom style class names for different parts of each prompt item. | Record<'list' \| 'item' \| 'content' \| 'title', string> | - | - |
+| classNames | Custom style class names for different parts of each prompt item. | Record<SemanticType, string> | - | - |
 | items | List containing multiple prompt items. | PromptProps[] | - | - |
 | prefixCls | Prefix for style class names. | string | - | - |
 | rootClassName | Style class name for the root node. | string | - | - |
-| styles | Custom styles for different parts of each prompt item. | Record<'list' \| 'item' \| 'content' \| 'title', React.CSSProperties> | - | - |
+| styles | Custom styles for different parts of each prompt item. | Record<SemanticType, React.CSSProperties> | - | - |
 | title | Title displayed at the top of the prompt list. | React.ReactNode | - | - |
 | vertical | When set to `true`, the Prompts will be arranged vertically. | boolean | `false` | - |
 | wrap | When set to `true`, the Prompts will automatically wrap. | boolean | `false` | - |
 | onItemClick | Callback function when a prompt item is clicked. | (info: { data: PromptProps }) => void | - | - |
 
+#### SemanticType
+
+```typescript | pure
+type SemanticType = 'list' | 'item' | 'content' | 'title' | 'subList' | 'subItem';
+```
+
 ### PromptProps
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
+| children | Nested child prompt items. | PromptProps[] | - | - |
 | description | Prompt description providing additional information. | React.ReactNode | - | - |
 | disabled | When set to `true`, click events are disabled. | boolean | `false` | - |
 | icon | Prompt icon displayed on the left side of the prompt item. | React.ReactNode | - | - |
