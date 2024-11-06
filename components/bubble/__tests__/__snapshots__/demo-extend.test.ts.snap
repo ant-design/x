@@ -916,6 +916,157 @@ exports[`renders components/bubble/demo/list-custom.tsx extend context correctly
       </div>
     </div>
   </div>
+  <div
+    class="ant-bubble ant-bubble-start"
+    role="file"
+  >
+    <div
+      class="ant-bubble-avatar"
+    >
+      <span
+        class="ant-avatar ant-avatar-circle ant-avatar-icon"
+        style="visibility: hidden;"
+      >
+        <span
+          aria-label="user"
+          class="anticon anticon-user"
+          role="img"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="user"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+            />
+          </svg>
+        </span>
+      </span>
+    </div>
+    <div
+      class="ant-bubble-content ant-bubble-content-borderless"
+    >
+      <div
+        class="ant-flex ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+      >
+        <div
+          class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
+        >
+          <div
+            class="ant-attachment-list-card-icon"
+            style="color: #22b35e;"
+          >
+            <span
+              aria-label="file-excel"
+              class="anticon anticon-file-excel"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="file-excel"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M854.6 288.7c6 6 9.4 14.1 9.4 22.6V928c0 17.7-14.3 32-32 32H192c-17.7 0-32-14.3-32-32V96c0-17.7 14.3-32 32-32h424.7c8.5 0 16.7 3.4 22.7 9.4l215.2 215.3zM790.2 326L602 137.8V326h188.2zM575.34 477.84l-61.22 102.3L452.3 477.8a12 12 0 00-10.27-5.79h-38.44a12 12 0 00-6.4 1.85 12 12 0 00-3.75 16.56l82.34 130.42-83.45 132.78a12 12 0 00-1.84 6.39 12 12 0 0012 12h34.46a12 12 0 0010.21-5.7l62.7-101.47 62.3 101.45a12 12 0 0010.23 5.72h37.48a12 12 0 006.48-1.9 12 12 0 003.62-16.58l-83.83-130.55 85.3-132.47a12 12 0 001.9-6.5 12 12 0 00-12-12h-35.7a12 12 0 00-10.29 5.84z"
+                />
+              </svg>
+            </span>
+          </div>
+          <div
+            class="ant-attachment-list-card-content"
+          >
+            <div
+              class="ant-attachment-list-card-name"
+            >
+              <div
+                class="ant-attachment-list-card-ellipsis-prefix"
+              >
+                excel-file
+              </div>
+              <div
+                class="ant-attachment-list-card-ellipsis-suffix"
+              >
+                .xlsx
+              </div>
+            </div>
+            <div
+              class="ant-attachment-list-card-desc"
+            >
+              <div
+                class="ant-attachment-list-card-ellipsis-prefix"
+              >
+                Checking the data
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-attachment-list-card ant-attachment-list-card-status-uploading ant-attachment-list-card-type-overview"
+        >
+          <div
+            class="ant-attachment-list-card-icon"
+            style="color: #1677ff;"
+          >
+            <span
+              aria-label="file-word"
+              class="anticon anticon-file-word"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="file-word"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M854.6 288.7c6 6 9.4 14.1 9.4 22.6V928c0 17.7-14.3 32-32 32H192c-17.7 0-32-14.3-32-32V96c0-17.7 14.3-32 32-32h424.7c8.5 0 16.7 3.4 22.7 9.4l215.2 215.3zM790.2 326L602 137.8V326h188.2zM512 566.1l52.81 197a12 12 0 0011.6 8.9h31.77a12 12 0 0011.6-8.88l74.37-276a12 12 0 00.4-3.12 12 12 0 00-12-12h-35.57a12 12 0 00-11.7 9.31l-45.78 199.1-49.76-199.32A12 12 0 00528.1 472h-32.2a12 12 0 00-11.64 9.1L434.6 680.01 388.5 481.3a12 12 0 00-11.68-9.29h-35.39a12 12 0 00-3.11.41 12 12 0 00-8.47 14.7l74.17 276A12 12 0 00415.6 772h31.99a12 12 0 0011.59-8.9l52.81-197z"
+                />
+              </svg>
+            </span>
+          </div>
+          <div
+            class="ant-attachment-list-card-content"
+          >
+            <div
+              class="ant-attachment-list-card-name"
+            >
+              <div
+                class="ant-attachment-list-card-ellipsis-prefix"
+              >
+                word-file
+              </div>
+              <div
+                class="ant-attachment-list-card-ellipsis-suffix"
+              >
+                .docx
+              </div>
+            </div>
+            <div
+              class="ant-attachment-list-card-desc"
+            >
+              <div
+                class="ant-attachment-list-card-ellipsis-prefix"
+              >
+                23%
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 `;
 
