@@ -1,5 +1,6 @@
 import {
   CloseCircleFilled,
+  CustomerServiceOutlined,
   FileExcelFilled,
   FileImageFilled,
   FileMarkdownFilled,
@@ -8,18 +9,21 @@ import {
   FileTextFilled,
   FileWordFilled,
   FileZipFilled,
+  VideoCameraOutlined,
 } from '@ant-design/icons';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import React from 'react';
 import type { Attachment } from '..';
+import { useXProviderContext } from '../../x-provider';
 import { AttachmentContext } from '../context';
+import useStyle from '../style';
 import { previewImage } from '../util';
 import Progress from './Progress';
 
 export interface FileListCardProps {
-  prefixCls: string;
+  prefixCls?: string;
   item: Attachment;
-  onRemove: (item: Attachment) => void;
+  onRemove?: (item: Attachment) => void;
   className?: string;
   style?: React.CSSProperties;
 }
@@ -70,6 +74,16 @@ const PRESET_FILE_ICONS: {
     color: '#fab714',
     ext: ['zip', 'rar', '7z', 'tar', 'gz'],
   },
+  {
+    icon: <VideoCameraOutlined />,
+    color: '#ff4d4f',
+    ext: ['mp4', 'avi', 'mov', 'wmv', 'flv', 'mkv'],
+  },
+  {
+    icon: <CustomerServiceOutlined />,
+    color: '#8c8c8c',
+    ext: ['mp3', 'wav', 'flac', 'ape', 'aac', 'ogg'],
+  },
 ];
 
 function matchExt(suffix: string, ext: string[]) {
@@ -90,11 +104,20 @@ function getSize(size: number) {
 }
 
 function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) {
-  const { prefixCls, item, onRemove, className, style } = props;
-  const { disabled } = React.useContext(AttachmentContext);
+  const { prefixCls: customizePrefixCls, item, onRemove, className, style } = props;
+  const context = React.useContext(AttachmentContext);
+  const { disabled } = context || {};
 
-  const { name, size, percent, status = 'done' } = item;
-  const cardCls = `${prefixCls}-card`;
+  const { name, size, percent, status = 'done', description } = item;
+
+  // ============================= Prefix =============================
+  const { getPrefixCls } = useXProviderContext();
+
+  const prefixCls = getPrefixCls('attachment', customizePrefixCls);
+  const cardCls = `${prefixCls}-list-card`;
+
+  // ============================= Style ==============================
+  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
 
   // ============================== Name ==============================
   const [namePrefix, nameSuffix] = React.useMemo(() => {
@@ -107,6 +130,10 @@ function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) 
 
   // ============================== Desc ==============================
   const desc = React.useMemo(() => {
+    if (description) {
+      return description;
+    }
+
     if (status === 'uploading') {
       return `${percent || 0}%`;
     }
@@ -150,8 +177,10 @@ function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) 
 
   // ============================= Render =============================
   let content: React.ReactNode = null;
+  const previewUrl = item.thumbUrl || item.url || previewImg;
+  const isImgPreview = isImg && previewUrl;
 
-  if (isImg) {
+  if (isImgPreview) {
     // Preview Image style
     content = (
       <>
@@ -191,16 +220,18 @@ function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) 
     );
   }
 
-  return (
+  return wrapCSSVar(
     <div
-      className={classNames(
+      className={classnames(
         cardCls,
         {
           [`${cardCls}-status-${status}`]: status,
-          [`${cardCls}-type-preview`]: isImg,
-          [`${cardCls}-type-overview`]: !isImg,
+          [`${cardCls}-type-preview`]: isImgPreview,
+          [`${cardCls}-type-overview`]: !isImgPreview,
         },
         className,
+        hashId,
+        cssVarCls,
       )}
       style={style}
       ref={ref}
@@ -208,7 +239,7 @@ function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) 
       {content}
 
       {/* Remove Icon */}
-      {!disabled && (
+      {!disabled && onRemove && (
         <button
           type="button"
           className={`${cardCls}-remove`}
@@ -219,7 +250,7 @@ function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) 
           <CloseCircleFilled />
         </button>
       )}
-    </div>
+    </div>,
   );
 }
 
