@@ -96,7 +96,6 @@ const genFileListStyle: GenerateStyle<AttachmentsToken> = (token) => {
   const { componentCls, calc } = token;
 
   const fileListCls = `${componentCls}-list`;
-  const cardCls = `${fileListCls}-card`;
 
   const cardHeight = calc(token.fontSize)
     .mul(token.lineHeight)

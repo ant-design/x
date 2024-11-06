@@ -1,6 +1,5 @@
-import { CloudUploadOutlined, LinkOutlined } from '@ant-design/icons';
 import { Attachments } from '@ant-design/x';
-import { App, Button, Flex, Switch } from 'antd';
+import { App, Flex } from 'antd';
 import React from 'react';
 
 const Demo = () => {
