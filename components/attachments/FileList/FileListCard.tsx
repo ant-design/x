@@ -1,6 +1,5 @@
 import {
   CloseCircleFilled,
-  CustomerServiceOutlined,
   FileExcelFilled,
   FileImageFilled,
   FileMarkdownFilled,
@@ -9,7 +8,6 @@ import {
   FileTextFilled,
   FileWordFilled,
   FileZipFilled,
-  VideoCameraOutlined,
 } from '@ant-design/icons';
 import classnames from 'classnames';
 import React from 'react';
