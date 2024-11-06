@@ -1,0 +1,280 @@
+import { createStyles } from 'antd-style';
+import classnames from 'classnames';
+import { Link, useLocation } from 'dumi';
+import lottie from 'lottie-web';
+import React from 'react';
+
+import useLocale from '../../../hooks/useLocale';
+import { getLocalizedPathname, isZhCN } from '../../../theme/utils';
+import SiteContext from './SiteContext';
+
+import type { SiteContextProps } from './SiteContext';
+
+const locales = {
+  cn: {
+    slogan: 'AI 体验新秩序',
+    desc: '基于 Ant Design 的 AGI 界面解决方案，创造更美好的智能视界',
+    start: '开始使用',
+    design: '设计语言',
+  },
+  en: {
+    slogan: 'New AI Experience',
+    desc: 'An AGI design solution based on Ant Design, creating a better intelligent world',
+    start: 'Get Started',
+    design: 'Get Design',
+  },
+};
+
+const useStyle = createStyles(({ token, css }) => {
+  const bannerMargin = token.paddingSM * 10;
+  const minBannerWidth = token.mobileMaxWidth - token.padding * 2;
+
+  return {
+    content: css`
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      font-family: AlibabaPuHuiTiB, ${token.fontFamily}, sans-serif;
+    `,
+    background: css`
+      width: 100%;
+      height: 110vh;
+      position: absolute;
+    `,
+    banner: css`
+      width: 100%;
+      height: 100vh;
+      max-width: ${token.pcMaxWidth - bannerMargin * 2}px !important;
+      box-sizing: border-box;
+      position: relative;
+      margin: 0 ${bannerMargin}px;
+
+      @media only screen and (max-width: ${token.mobileMaxWidth}px) {
+        margin: 0 ${token.marginLG}px;
+      }
+    `,
+    title: css`
+      max-width: ${minBannerWidth}px;
+      max-height: calc(100vh - ${token.headerHeight * 2}px);
+      position: absolute;
+      top: 50%;
+      inset-inline-start: 0;
+      transform: translateY(-50%);
+      z-index: 1;
+
+      @media only screen and (max-width: ${token.mobileMaxWidth}px) {
+        bottom: 0;
+        top: auto;
+      }
+    `,
+    lottie: css`
+      position: absolute;
+      top: 50%;
+      inset-inline-end: 0;
+      transform: translate(${bannerMargin}px, -40%);
+      z-index: 0;
+
+      @media only screen and (max-width: ${token.mobileMaxWidth}px) {
+        display: none;
+      }
+    `,
+    lottie_rtl: css`
+      transform: translate(-30%, -40%) !important;
+    `,
+    name: css`
+      font-size: 80px !important;
+      color: ${token.colorText};
+      font-weight: bold;
+      margin-bottom: ${token.marginLG}px !important;
+
+      @media only screen and (max-width: ${token.mobileMaxWidth}px) {
+        font-size: 54px !important;
+      }
+    `,
+    desc: css`
+      font-size: 18px;
+      font-weight: 400;
+      color: ${token.colorText};
+      opacity: 0.65;
+      margin-bottom: ${token.marginLG * 2}px;
+    `,
+    iAlphabet: css`
+      position: relative;
+      font-size: 60px;
+      display: inline-block;
+
+      @media only screen and (max-width: ${token.mobileMaxWidth}px) {
+        transform: scale(0.7);
+        top: 6px;
+      }
+    `,
+    iAlphabetStar: css`
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 22px;
+      height: 22px;
+      background: no-repeat center url('https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*RMOpRLHgA9wAAAAAAAAAAAAADgCCAQ/original');
+      background-size: cover;
+
+      &::before {
+        content: '';
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        border-radius: inherit;
+        position: absolute;
+        pointer-events: none;
+        background: radial-gradient(circle, #fe8aff 0%, #fe8aff00 100%);
+        filter: blur(12px);
+      };
+    `,
+    btnContent: css`
+      display: flex;
+      gap: ${token.paddingLG}px;
+      flex-wrap: wrap;
+    `,
+    btn: css`
+      height: 56px;
+      border: none;
+      border-radius: 40px;
+      padding: 0 40px;
+      display: inline-block;
+      font-size: 18px;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: ${token.boxShadow};
+    `,
+    startBtn: css`
+      background-image: linear-gradient(90deg, #c7deff 0%, #ffffffd9 76%);
+      color: #14204c;
+    `,
+    designBtn: css`
+      background: #ffffff1a;
+      backdrop-filter: blur(40px);
+  `,
+  };
+});
+
+const MainBanner: React.FC = () => {
+  const [locale] = useLocale(locales);
+
+  const { pathname, search } = useLocation();
+
+  const { direction } = React.useContext<SiteContextProps>(SiteContext);
+
+  const id = React.useId();
+
+  const { styles } = useStyle();
+
+  React.useEffect(() => {
+    const animation = lottie.loadAnimation({
+      container: document.getElementById(`main-banner-bg-${id}`) as Element,
+      renderer: 'canvas',
+      loop: false,
+      autoplay: false,
+      rendererSettings: {
+        preserveAspectRatio: 'xMidYMid slice',
+      },
+      path: 'https://mdn.alipayobjects.com/huamei_k0vkmw/afts/file/A*Zd4ZQKnIfi4AAAAAAAAAAAAADsR-AQ',
+    });
+
+    let isReverse = false;
+
+    function playAnimation() {
+      if (isReverse) {
+        animation.setDirection(-1);
+        animation.goToAndPlay(animation.totalFrames - 1, true);
+      } else {
+        animation.setDirection(1);
+        animation.goToAndPlay(0, true);
+      }
+      isReverse = !isReverse;
+    }
+
+    animation.addEventListener('complete', playAnimation);
+
+    playAnimation();
+
+    return () => {
+      animation.destroy();
+    };
+  }, []);
+
+  React.useEffect(() => {
+    const animation = lottie.loadAnimation({
+      container: document.getElementById(`main-banner-ip-${id}`) as Element,
+      renderer: 'svg',
+      loop: false,
+      autoplay: true,
+      rendererSettings: {
+        preserveAspectRatio: 'xMidYMid meet',
+      },
+      path: 'https://mdn.alipayobjects.com/huamei_k0vkmw/afts/file/A*9a6-RaC0zzYAAAAAAAAAAAAADsR-AQ',
+    });
+
+    let reverseFrameInterval: NodeJS.Timeout;
+
+    animation.addEventListener('complete', () => {
+      let currentFrame = animation.totalFrames;
+      const reverseFrames = 30;
+
+      reverseFrameInterval = setInterval(() => {
+        currentFrame--;
+        animation.goToAndStop(currentFrame, true);
+
+        if (currentFrame <= animation.totalFrames - reverseFrames) {
+          clearInterval(reverseFrameInterval);
+          animation.play();
+        }
+      }, 1000 / 30);
+    });
+
+    return () => {
+      animation.destroy();
+      window.clearInterval(reverseFrameInterval);
+    };
+  }, []);
+
+  return (
+    <div className={styles.content}>
+      <div id={`main-banner-bg-${id}`} className={styles.background} />
+      <div className={styles.banner}>
+        <div className={styles.title}>
+          <h1 className={styles.name}>
+            Ant Des
+            <span className={styles.iAlphabet}>
+              I<span className={styles.iAlphabetStar} />
+            </span>
+            gn X
+          </h1>
+          <h1 className={styles.name}>{locale.slogan}</h1>
+          <h5 className={styles.desc}>{locale.desc}</h5>
+
+          <div className={styles.btnContent}>
+            <Link to={getLocalizedPathname('components/overview', isZhCN(pathname), search)}>
+              <button type="button" className={classnames(styles.btn, styles.startBtn)}>
+                {locale.start}
+              </button>
+            </Link>
+            <Link to={getLocalizedPathname('/docs/spec/introduce', isZhCN(pathname), search)}>
+              <button type="button" className={classnames(styles.btn, styles.designBtn)}>
+                {locale.design}
+              </button>
+            </Link>
+          </div>
+        </div>
+        <div
+          id={`main-banner-ip-${id}`}
+          className={classnames(styles.lottie, direction === 'rtl' && styles.lottie_rtl)}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default MainBanner;
