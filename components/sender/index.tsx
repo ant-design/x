@@ -45,6 +45,8 @@ export interface SenderProps extends Pick<TextareaProps, 'placeholder' | 'onKeyP
   onChange?: (value: string) => void;
   onCancel?: VoidFunction;
   onKeyDown?: React.KeyboardEventHandler<any>;
+  onPaste?: React.ClipboardEventHandler<HTMLElement>;
+  onPasteFile?: (file: File) => void;
   components?: SenderComponents;
   styles?: {
     prefix?: React.CSSProperties;
@@ -96,6 +98,8 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
     allowSpeech,
     prefix,
     header,
+    onPaste,
+    onPasteFile,
     ...rest
   } = props;
 
@@ -210,6 +214,18 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
     }
   };
 
+  // ============================ Paste =============================
+  const onInternalPaste: React.ClipboardEventHandler<HTMLElement> = (e) => {
+    // Get file
+    const file = e.clipboardData?.files[0];
+    if (file && onPasteFile) {
+      onPasteFile(file);
+      e.preventDefault();
+    }
+
+    onPaste?.(e);
+  };
+
   // ============================ Focus =============================
   const onContentMouseDown: React.MouseEventHandler<HTMLDivElement> = (e) => {
     // If input focused but click on the container,
@@ -286,6 +302,7 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
           onCompositionStart={onInternalCompositionStart}
           onCompositionEnd={onInternalCompositionEnd}
           onKeyDown={onKeyDown}
+          onPaste={onInternalPaste}
           readOnly={loading}
           variant="borderless"
         />

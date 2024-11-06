@@ -1,4 +1,4 @@
-import { type GetProp, type UploadProps } from 'antd';
+import { type GetProp, GetRef, Upload, type UploadProps } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
 
@@ -48,7 +48,12 @@ export interface AttachmentsProps extends Omit<UploadProps, 'fileList'> {
   overflow?: FileListProps['overflow'];
 }
 
-function Attachments(props: AttachmentsProps) {
+export interface AttachmentsRef {
+  nativeElement: HTMLDivElement | null;
+  upload: (file: File) => void;
+}
+
+function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
   const {
     prefixCls: customizePrefixCls,
     rootClassName,
@@ -79,6 +84,25 @@ function Attachments(props: AttachmentsProps) {
 
   // ============================= Ref =============================
   const containerRef = React.useRef<HTMLDivElement>(null);
+
+  const uploadRef = React.useRef<GetRef<typeof Upload>>(null);
+
+  React.useImperativeHandle(ref, () => ({
+    nativeElement: containerRef.current,
+    upload: (file) => {
+      const fileInput =
+        uploadRef.current?.nativeElement?.querySelector<HTMLInputElement>('input[type="file"]');
+
+      // Trigger native change event
+      if (fileInput) {
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(file);
+        fileInput.files = dataTransfer.files;
+
+        fileInput.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+    },
+  }));
 
   // ============================ Style ============================
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
@@ -112,7 +136,11 @@ function Attachments(props: AttachmentsProps) {
   // ============================ Render ============================
   let renderChildren: React.ReactElement;
 
-  const getPlaceholderNode = (type: 'inline' | 'drop', props?: Pick<PlaceholderProps, 'style'>) => {
+  const getPlaceholderNode = (
+    type: 'inline' | 'drop',
+    props?: Pick<PlaceholderProps, 'style'>,
+    ref?: React.RefObject<GetRef<typeof Upload>>,
+  ) => {
     const placeholderContent = typeof placeholder === 'function' ? placeholder(type) : placeholder;
 
     return (
@@ -126,6 +154,7 @@ function Attachments(props: AttachmentsProps) {
           ...styles.placeholder,
           ...props?.style,
         }}
+        ref={ref}
       />
     );
   };
@@ -133,7 +162,7 @@ function Attachments(props: AttachmentsProps) {
   if (children) {
     renderChildren = (
       <>
-        <SilentUploader upload={mergedUploadProps} rootClassName={rootClassName}>
+        <SilentUploader upload={mergedUploadProps} rootClassName={rootClassName} ref={uploadRef}>
           {children}
         </SilentUploader>
         <DropArea
@@ -184,7 +213,7 @@ function Attachments(props: AttachmentsProps) {
             ...styles.item,
           }}
         />
-        {getPlaceholderNode('inline', hasFileList ? { style: { display: 'none' } } : {})}
+        {getPlaceholderNode('inline', hasFileList ? { style: { display: 'none' } } : {}, uploadRef)}
         <DropArea
           getDropContainer={getDropContainer || (() => containerRef.current)}
           prefixCls={prefixCls}
@@ -207,10 +236,16 @@ function Attachments(props: AttachmentsProps) {
   );
 }
 
+const ForwardAttachments = React.forwardRef(Attachments) as React.ForwardRefExoticComponent<
+  AttachmentsProps & React.RefAttributes<AttachmentsRef>
+> & {
+  FileCard: typeof FileListCard;
+};
+
 if (process.env.NODE_ENV !== 'production') {
-  Attachments.displayName = 'Attachments';
+  ForwardAttachments.displayName = 'Attachments';
 }
 
-Attachments.FileCard = FileListCard;
+ForwardAttachments.FileCard = FileListCard;
 
-export default Attachments;
+export default ForwardAttachments;

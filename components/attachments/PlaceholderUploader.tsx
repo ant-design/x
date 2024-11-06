@@ -1,4 +1,4 @@
-import { Flex, Typography, Upload, type UploadProps } from 'antd';
+import { Flex, GetRef, Typography, Upload, type UploadProps } from 'antd';
 import classNames from 'classnames';
 import React from 'react';
 import { AttachmentContext } from './context';
@@ -19,7 +19,7 @@ export interface PlaceholderProps {
   style?: React.CSSProperties;
 }
 
-function Placeholder(props: PlaceholderProps, ref: React.Ref<HTMLDivElement>) {
+function Placeholder(props: PlaceholderProps, ref: React.Ref<GetRef<typeof Upload>>) {
   const { prefixCls, placeholder = {}, upload, className, style } = props;
 
   const placeholderCls = `${prefixCls}-placeholder`;
@@ -77,12 +77,12 @@ function Placeholder(props: PlaceholderProps, ref: React.Ref<HTMLDivElement>) {
       onDragLeave={onDragLeave}
       onDrop={onDrop}
       aria-hidden={disabled}
-      ref={ref}
       style={style}
     >
       <Upload.Dragger
         showUploadList={false}
         {...upload}
+        ref={ref}
         style={{ padding: 0, border: 0, background: 'transparent' }}
       >
         {node}
