@@ -18,7 +18,9 @@ import { useXProviderContext } from '../../x-provider';
 import { AttachmentContext } from '../context';
 import useStyle from '../style';
 import { previewImage } from '../util';
+import AudioIcon from './AudioIcon';
 import Progress from './Progress';
+import VideoIcon from './VideoIcon';
 
 export interface FileListCardProps {
   prefixCls?: string;
@@ -75,12 +77,12 @@ const PRESET_FILE_ICONS: {
     ext: ['zip', 'rar', '7z', 'tar', 'gz'],
   },
   {
-    icon: <VideoCameraOutlined />,
+    icon: <VideoIcon />,
     color: '#ff4d4f',
     ext: ['mp4', 'avi', 'mov', 'wmv', 'flv', 'mkv'],
   },
   {
-    icon: <CustomerServiceOutlined />,
+    icon: <AudioIcon />,
     color: '#8c8c8c',
     ext: ['mp3', 'wav', 'flac', 'ape', 'aac', 'ogg'],
   },
