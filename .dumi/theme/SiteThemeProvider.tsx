@@ -19,6 +19,8 @@ interface NewToken {
   contentMarginTop: number;
   anchorTop: number;
   indexRadius: number;
+  pcMaxWidth: number;
+  pcMinWidth: number;
 }
 
 // 通过给 antd-style 扩展 CustomToken 对象类型定义，可以为 useTheme 中增加相应的 token 对象
@@ -29,6 +31,8 @@ declare module 'antd-style' {
 const headerHeight = 80;
 const bannerHeight = 38;
 const indexRadius = 24;
+const pcMaxWidth = 1560;
+const pcMinWidth = 1360;
 
 const SiteThemeProvider: React.FC<ThemeProviderProps<any>> = ({ children, theme, ...rest }) => {
   const { getPrefixCls, iconPrefixCls } = useContext(ConfigProvider.ConfigContext);
@@ -47,6 +51,8 @@ const SiteThemeProvider: React.FC<ThemeProviderProps<any>> = ({ children, theme,
         headerHeight,
         bannerHeight,
         indexRadius,
+        pcMaxWidth,
+        pcMinWidth,
         menuItemBorder: 2,
         mobileMaxWidth: 767.99,
         siteMarkdownCodeBg: token.colorFillTertiary,

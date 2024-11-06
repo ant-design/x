@@ -77,11 +77,18 @@ const useStyle = createStyles(({ token }) => {
 
       position: absolute;
       top: 50%;
-      left: 50%;
+      inset-inline-start: 50%;
       transform: translate(-50%, -50%);
       z-index: 1000;
 
       flex-direction: row;
+    `,
+    pc_rtl: css`
+      transform: translate(50%, -50%);
+
+      @media only screen and (max-width: ${token.mobileMaxWidth}px) {
+        transform: translate(0, 0);
+      }
     `,
     mobile: css`
       padding: ${token.headerHeight}px 0 !important;
@@ -105,7 +112,7 @@ export interface HeaderNavigationProps extends SharedProps {
 }
 
 const HeaderNavigation: React.FC<HeaderNavigationProps> = (props) => {
-  const { isZhCN, isMobile, isMini } = props;
+  const { isZhCN, isMobile, isMini, isRTL, className } = props;
 
   const { styles } = useStyle();
 
@@ -153,7 +160,8 @@ const HeaderNavigation: React.FC<HeaderNavigationProps> = (props) => {
         styles.nav,
         isMobile || isMini ? styles.mobile : styles.pc,
         isMini && styles.mini,
-        props.className,
+        !isMobile && !isMini && isRTL && styles.pc_rtl,
+        className,
       )}
     >
       {items.map((item) => (

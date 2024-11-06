@@ -1,6 +1,6 @@
+import { Helmet } from 'dumi';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
-import { Helmet } from 'dumi';
 
 import Footer from '../../slots/Footer';
 
@@ -18,7 +18,7 @@ const IndexLayout: React.FC<PropsWithChildren<IndexLayoutProps>> = (props) => {
         <meta property="og:title" content={title} />
         {desc && <meta name="description" content={desc} />}
       </Helmet>
-      <div style={{ minHeight: '100vh' }}>{children}</div>
+      {children}
       <Footer />
     </>
   );

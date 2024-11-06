@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import React from 'react';
 
 import useLocale from '../../../hooks/useLocale';
+import useScrollY from '../../../hooks/useScrollY';
 import SiteContext from '../SiteContext';
 
 import HeaderActions from './Actions';
@@ -13,7 +14,6 @@ import Navigation from './Navigation';
 
 import type { SiteContextProps } from '../SiteContext';
 import type { SharedProps } from './interface';
-import useScrollY from './useScrollY';
 
 const useStyle = createStyles(({ token, css }) => {
   return {
@@ -45,11 +45,12 @@ const useStyle = createStyles(({ token, css }) => {
       width: min-content !important;
       margin: 0 !important;
       gap: ${token.paddingLG}px;
-
-      left: 50%;
-      transform: translate(-50%, 0);
+      inset-inline-end: 50%;
+      transform: translateX(50%);
     `,
-
+    mini_rtl: css`
+      inset-inline-start: 50%;
+    `,
     background: css`
       position: auto;
       background-image: linear-gradient(117deg, #ffffff1a 17%, #ffffff0d 51%);
@@ -67,9 +68,10 @@ const useStyle = createStyles(({ token, css }) => {
         border-radius: inherit;
 
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        top: 0;
+        bottom: 0;
+        inset-inline-start: 0;
+        inset-inline-end: 0;
 
         pointer-events: none;
       };
@@ -144,9 +146,10 @@ const Header: React.FC = () => {
         (isMobile || isMini) && styles.background,
         (isMobile || isMini) && styles.mobile,
         isMini && styles.mini,
+        isMini && direction === 'rtl' && styles.mini_rtl,
       )}
       style={{
-        display: scrollY > 1000 && scrollYDirection === 'down' ? 'none' : 'flex',
+        display: scrollY > 900 && scrollYDirection === 'down' ? 'none' : 'flex',
       }}
     >
       <Logo {...sharedProps} />
