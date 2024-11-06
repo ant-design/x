@@ -15,6 +15,14 @@ tag: vVERSION
 
 ---
 
+## 1.0.0-alpha.11
+
+`2024-11-06`
+
+- 🔥 新组件 欢迎 - Welcome, 由 [@zombieJ](https://github.com/zombieJ) [#179](https://github.com/ant-design/x/pull/179)
+- 🔥 Prompts 支持嵌套层级展示, 由 [@zombieJ](https://github.com/zombieJ) [#181](https://github.com/ant-design/x/pull/181)
+- 🔥 Attachments 支持 Attachments.FileCard 子组件, 由 [@zombieJ](https://github.com/zombieJ) [#182](https://github.com/ant-design/x/pull/182)
+
 ## 1.0.0-alpha.10
 
 `2024-11-04`
