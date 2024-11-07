@@ -15,7 +15,7 @@ import SendButton from './components/SendButton';
 import SpeechButton from './components/SpeechButton';
 import type { CustomizeComponent, SubmitType } from './interface';
 import useStyle from './style';
-import useSpeech from './useSpeech';
+import useSpeech, { type AllowSpeech } from './useSpeech';
 
 type TextareaProps = GetProps<typeof Input.TextArea>;
 
@@ -62,12 +62,7 @@ export interface SenderProps extends Pick<TextareaProps, 'placeholder' | 'onKeyP
   style?: React.CSSProperties;
   className?: string;
   actions?: React.ReactNode | ActionsRender;
-  allowSpeech?:
-    | boolean
-    | {
-        recording?: boolean;
-        onRecordingChange?: (recording: boolean) => void;
-      };
+  allowSpeech?: AllowSpeech;
   prefix?: React.ReactNode;
   header?: React.ReactNode;
 }
@@ -156,7 +151,7 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
   // ============================ Speech ============================
   const [speechPermission, triggerSpeech, speechRecording] = useSpeech((transcript) => {
     triggerValueChange(`${innerValue} ${transcript}`);
-  });
+  }, allowSpeech);
 
   // ========================== Components ==========================
   const InputTextArea = getComponent(components, ['input'], Input.TextArea);
@@ -302,6 +297,7 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
           value={innerValue}
           onChange={(e) => {
             triggerValueChange((e.target as HTMLTextAreaElement).value);
+            triggerSpeech(true);
           }}
           onPressEnter={onInternalKeyPress}
           onCompositionStart={onInternalCompositionStart}
@@ -330,7 +326,7 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
               onClearDisabled: !innerValue,
               onCancel,
               onCancelDisabled: !loading,
-              onSpeech: triggerSpeech,
+              onSpeech: () => triggerSpeech(false),
               onSpeechDisabled: !speechPermission,
               speechRecording,
               disabled,

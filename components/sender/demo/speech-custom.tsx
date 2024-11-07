@@ -12,6 +12,7 @@ const Demo: React.FC = () => {
         message.success('Send message successfully!');
       }}
       allowSpeech={{
+        // When setting `recording`, the built-in speech recognition feature will be disabled
         recording,
         onRecordingChange: (nextRecording) => {
           message.info(`Mock Customize Recording: ${nextRecording}`);
