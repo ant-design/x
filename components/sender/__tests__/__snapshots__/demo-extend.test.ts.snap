@@ -392,6 +392,172 @@ exports[`renders components/sender/demo/header.tsx extend context correctly 1`] 
 
 exports[`renders components/sender/demo/header.tsx extend context correctly 2`] = `[]`;
 
+exports[`renders components/sender/demo/header-fixed.tsx extend context correctly 1`] = `
+<div
+  class="ant-app"
+>
+  <div
+    class="ant-flex ant-flex-align-flex-start ant-flex-gap-middle ant-flex-vertical"
+  >
+    <button
+      aria-checked="true"
+      class="ant-switch ant-switch-checked"
+      role="switch"
+      type="button"
+    >
+      <div
+        class="ant-switch-handle"
+      />
+      <span
+        class="ant-switch-inner"
+      >
+        <span
+          class="ant-switch-inner-checked"
+        >
+          With Reference
+        </span>
+        <span
+          class="ant-switch-inner-unchecked"
+        >
+          With Reference
+        </span>
+      </span>
+    </button>
+    <div
+      class="ant-sender"
+    >
+      <div
+        class="ant-sender-header ant-sender-header-motion-appear ant-sender-header-motion-appear-start ant-sender-header-motion"
+      >
+        <div
+          class="ant-sender-header-header"
+        >
+          <div
+            class="ant-sender-header-title"
+          >
+            <div
+              class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
+            >
+              <div
+                class="ant-space-item"
+              >
+                <span
+                  aria-label="enter"
+                  class="anticon anticon-enter"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="enter"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M864 170h-60c-4.4 0-8 3.6-8 8v518H310v-73c0-6.7-7.8-10.5-13-6.3l-141.9 112a8 8 0 000 12.6l141.9 112c5.3 4.2 13 .4 13-6.3v-75h498c35.3 0 64-28.7 64-64V178c0-4.4-3.6-8-8-8z"
+                    />
+                  </svg>
+                </span>
+              </div>
+              <div
+                class="ant-space-item"
+              >
+                <span
+                  class="ant-typography ant-typography-secondary"
+                >
+                  "Tell more about Ant Design X"
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-sender-header-close"
+          >
+            <button
+              class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+              type="button"
+            >
+              <span
+                class="ant-btn-icon"
+              >
+                <span
+                  aria-label="close"
+                  class="anticon anticon-close"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="close"
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ant-sender-content"
+      >
+        <textarea
+          class="ant-input ant-input-borderless ant-sender-input"
+          style="overflow-y: hidden; resize: none;"
+        />
+        <div
+          class="ant-sender-actions-list"
+        >
+          <div
+            class="ant-sender-actions-list-presets ant-flex"
+          >
+            <button
+              class="ant-btn ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              type="button"
+            >
+              <span
+                class="ant-btn-icon"
+              >
+                <span
+                  aria-label="arrow-up"
+                  class="anticon anticon-arrow-up"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="arrow-up"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M868 545.5L536.1 163a31.96 31.96 0 00-48.3 0L156 545.5a7.97 7.97 0 006 13.2h81c4.6 0 9-2 12.1-5.5L474 300.9V864c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V300.9l218.9 252.3c3 3.5 7.4 5.5 12.1 5.5h81c6.8 0 10.5-8 6-13.2z"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders components/sender/demo/header-fixed.tsx extend context correctly 2`] = `[]`;
+
 exports[`renders components/sender/demo/paste-image.tsx extend context correctly 1`] = `
 <div
   class="ant-app"

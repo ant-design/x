@@ -73,7 +73,7 @@ export default function SenderHeader(props: SenderHeaderProps) {
             }}
           >
             {/* Header */}
-            {closable !== false && (
+            {(closable !== false || title) && (
               <div
                 className={
                   // We follow antd naming standard here.
@@ -86,16 +86,18 @@ export default function SenderHeader(props: SenderHeaderProps) {
                 }}
               >
                 <div className={`${headerCls}-title`}>{title}</div>
-                <div className={`${headerCls}-close`}>
-                  <Button
-                    type="text"
-                    icon={<CloseOutlined />}
-                    size="small"
-                    onClick={() => {
-                      onOpenChange?.(!open);
-                    }}
-                  />
-                </div>
+                {closable !== false && (
+                  <div className={`${headerCls}-close`}>
+                    <Button
+                      type="text"
+                      icon={<CloseOutlined />}
+                      size="small"
+                      onClick={() => {
+                        onOpenChange?.(!open);
+                      }}
+                    />
+                  </div>
+                )}
               </div>
             )}
 

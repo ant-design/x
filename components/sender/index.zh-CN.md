@@ -23,6 +23,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*8yArQ43EGccAAA
 <code src="./demo/speech-custom.tsx">自定义语音输入</code>
 <code src="./demo/actions.tsx">自定义按钮</code>
 <code src="./demo/header.tsx">展开面板</code>
+<code src="./demo/header-fixed.tsx">引用</code>
 <code src="./demo/send-style.tsx">调整样式</code>
 <code src="./demo/paste-image.tsx">黏贴图片</code>
 
