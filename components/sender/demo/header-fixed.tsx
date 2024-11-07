@@ -1,6 +1,6 @@
-import { CloudUploadOutlined, EnterOutlined, LinkOutlined } from '@ant-design/icons';
+import { EnterOutlined } from '@ant-design/icons';
 import { Sender } from '@ant-design/x';
-import { App, Button, Flex, Space, Switch, Typography, theme } from 'antd';
+import { App, Flex, Space, Switch, Typography } from 'antd';
 import React from 'react';
 
 const Demo: React.FC = () => {
