@@ -62,7 +62,12 @@ export interface SenderProps extends Pick<TextareaProps, 'placeholder' | 'onKeyP
   style?: React.CSSProperties;
   className?: string;
   actions?: React.ReactNode | ActionsRender;
-  allowSpeech?: boolean;
+  allowSpeech?:
+    | boolean
+    | {
+        recording?: boolean;
+        onRecordingChange?: (recording: boolean) => void;
+      };
   prefix?: React.ReactNode;
   header?: React.ReactNode;
 }
