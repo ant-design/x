@@ -50,6 +50,13 @@ interface PlaceholderType {
 }
 ```
 
+### AttachmentsRef
+
+| Property      | Description            | Type                 | Version |
+| ------------- | ---------------------- | -------------------- | ------- |
+| nativeElement | Get the native node    | HTMLElement          | -       |
+| upload        | Manually upload a file | (file: File) => void | -       |
+
 ## Semantic DOM
 
 <code src="./demo/_semantic.tsx" simplify="true"></code>

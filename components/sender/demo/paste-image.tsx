@@ -1,9 +1,10 @@
-import { CloudUploadOutlined } from '@ant-design/icons';
+import { CloudUploadOutlined, LinkOutlined } from '@ant-design/icons';
 import { Attachments, AttachmentsProps, Sender } from '@ant-design/x';
-import { App, type GetProp, type GetRef } from 'antd';
+import { App, Button, Flex, type GetProp, type GetRef } from 'antd';
 import React from 'react';
 
 const Demo = () => {
+  const [open, setOpen] = React.useState(false);
   const [items, setItems] = React.useState<GetProp<AttachmentsProps, 'items'>>([]);
   const [text, setText] = React.useState('');
 
@@ -19,7 +20,9 @@ const Demo = () => {
           padding: 0,
         },
       }}
-      closable={false}
+      open={open}
+      onOpenChange={setOpen}
+      forceRender
     >
       <Attachments
         ref={attachmentsRef}
@@ -44,17 +47,31 @@ const Demo = () => {
   );
 
   return (
-    <Sender
-      ref={senderRef}
-      header={senderHeader}
-      value={text}
-      onChange={setText}
-      onPasteFile={(file) => attachmentsRef.current?.upload(file)}
-      onSubmit={() => {
-        setItems([]);
-        setText('');
-      }}
-    />
+    <Flex style={{ height: 220 }} align="end">
+      <Sender
+        ref={senderRef}
+        header={senderHeader}
+        prefix={
+          <Button
+            type="text"
+            icon={<LinkOutlined />}
+            onClick={() => {
+              setOpen(!open);
+            }}
+          />
+        }
+        value={text}
+        onChange={setText}
+        onPasteFile={(file) => {
+          attachmentsRef.current?.upload(file);
+          setOpen(true);
+        }}
+        onSubmit={() => {
+          setItems([]);
+          setText('');
+        }}
+      />
+    </Flex>
   );
 };
 

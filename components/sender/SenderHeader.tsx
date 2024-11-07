@@ -13,6 +13,7 @@ export const SendHeaderContext = React.createContext<SendHeaderContextProps>({} 
 export type SemanticType = 'header' | 'content';
 
 export interface SenderHeaderProps {
+  forceRender?: boolean;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   title?: React.ReactNode;
@@ -42,6 +43,7 @@ export default function SenderHeader(props: SenderHeaderProps) {
     classNames: classes = {},
     styles = {},
     closable,
+    forceRender,
   } = props;
 
   const { prefixCls } = React.useContext(SendHeaderContext);
@@ -59,6 +61,7 @@ export default function SenderHeader(props: SenderHeaderProps) {
       onLeaveStart={expandedHeight}
       onLeaveActive={collapseHeight}
       visible={open}
+      forceRender={forceRender}
     >
       {({ className: motionClassName, style: motionStyle }) => {
         return (
