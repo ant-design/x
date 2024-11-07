@@ -34,7 +34,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | actions | Custom actions | ReactNode \| (oriNode, info: { components }) => ReactNode | - | - |
-| allowSpeech | Whether to allow speech input | boolean | false | - |
+| allowSpeech | Whether to allow speech input | boolean \| SpeechConfig | false | - |
 | classNames | Class name | [See below](#semantic-dom) | - | - |
 | components | Custom components | Record<'input', ComponentType> | - | - |
 | defaultValue | Default value of input | string | - | - |
@@ -49,6 +49,15 @@ Common props ref：[Common props](/docs/react/common-props)
 | onSubmit | Callback when click send button | (message: string) => void | - | - |
 | onChange | Callback when input value changes | (value: string) => void | - | - |
 | onCancel | Callback when click cancel button | () => void | - | - |
+
+```typescript | pure
+type SpeechConfig = {
+  // When setting `recording`, the built-in speech input function will be disabled.
+  // It is up to the developer to implement the third-party speech input function.
+  recording?: boolean;
+  onRecordingChange?: (recording: boolean) => void;
+};
+```
 
 ### Sender.Header
 

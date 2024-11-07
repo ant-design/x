@@ -35,7 +35,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*8yArQ43EGccAAA
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
 | actions | 自定义按钮 | ReactNode \| (oriNode, info: { components }) => ReactNode | - | - |
-| allowSpeech | 是否允许语音输入 | boolean | false | - |
+| allowSpeech | 是否允许语音输入 | boolean \| SpeechConfig | false | - |
 | classNames | 样式类名 | [见下](#semantic-dom) | - | - |
 | components | 自定义组件 | Record<'input', ComponentType> | - | - |
 | defaultValue | 输入框默认值 | string | - | - |
@@ -50,6 +50,15 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*8yArQ43EGccAAA
 | onSubmit | 点击发送按钮的回调 | (message: string) => void | - | - |
 | onChange | 输入框值改变的回调 | (value: string) => void | - | - |
 | onCancel | 点击取消按钮的回调 | () => void | - | - |
+
+```typescript | pure
+type SpeechConfig = {
+  // 当设置 `recording` 时，内置的语音输入功能将会被禁用。
+  // 交由开发者实现三方语音输入的功能。
+  recording?: boolean;
+  onRecordingChange?: (recording: boolean) => void;
+};
+```
 
 ### Sender.Header
 
