@@ -120,7 +120,7 @@ const genFileCardStyle: GenerateStyle<AttachmentsToken> = (token) => {
       },
 
       // ============================ Remove Icon ============================
-      '&-remove': {
+      [`${cardCls}-remove`]: {
         position: 'absolute',
         top: 0,
         insetInlineEnd: 0,
