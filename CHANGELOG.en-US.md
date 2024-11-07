@@ -16,6 +16,13 @@ tag: vVERSION
 
 ---
 
+## 1.0.0-alpha.12
+
+`2024-11-07`
+
+- 🔥 Sender support `onPasteFile` and Attachments support `ref.upload` for manual uploading, by [@zombieJ](https://github.com/zombieJ) [#184](https://github.com/ant-design/x/pull/184)
+- 🔥 Sender `allowSpeech` support using third-part SDK, by [@zombieJ](https://github.com/zombieJ) [#187](https://github.com/ant-design/x/pull/187)
+
 ## 1.0.0-alpha.11
 
 `2024-11-06`
