@@ -43,6 +43,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*8yArQ43EGccAAA
 | loading | 是否加载中 | boolean | false | - |
 | header | 头部面板 | ReactNode | - | - |
 | prefix | 前缀内容 | ReactNode | - | - |
+| readOnly | 是否让输入框只读 | boolean | false | - |
 | rootClassName | 根元素样式类 | string | - | - |
 | styles | 语义化定义样式 | [见下](#semantic-dom) | - | - |
 | submitType | 提交模式 | SubmitType | `enter` \| `shiftEnter` | - |

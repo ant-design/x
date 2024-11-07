@@ -39,6 +39,7 @@ export interface SenderProps extends Pick<TextareaProps, 'placeholder' | 'onKeyP
   defaultValue?: string;
   value?: string;
   loading?: boolean;
+  readOnly?: boolean;
   submitType?: SubmitType;
   disabled?: boolean;
   onSubmit?: (message: string) => void;
@@ -85,6 +86,7 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
     style,
     defaultValue,
     value,
+    readOnly,
     submitType = 'enter',
     onSubmit,
     loading,
@@ -169,7 +171,7 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
 
   // ============================ Events ============================
   const triggerSend = () => {
-    if (innerValue && onSubmit) {
+    if (innerValue && onSubmit && !loading) {
       onSubmit(innerValue);
     }
   };
@@ -304,8 +306,8 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
           onCompositionEnd={onInternalCompositionEnd}
           onKeyDown={onKeyDown}
           onPaste={onInternalPaste}
-          readOnly={loading}
           variant="borderless"
+          readOnly={readOnly}
         />
 
         {/* Action List */}
