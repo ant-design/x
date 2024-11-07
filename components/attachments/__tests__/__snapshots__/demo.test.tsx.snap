@@ -643,12 +643,59 @@ exports[`renders components/attachments/demo/files.tsx correctly 1`] = `
       </div>
     </div>
     <div
-      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
     >
-      <img
-        alt="preview"
-        src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-      />
+      <div
+        class="ant-attachment-list-card-icon"
+        style="color:#8c8c8c"
+      >
+        <span
+          aria-label="file-image"
+          class="anticon anticon-file-image"
+          role="img"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="file-image"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+            />
+          </svg>
+        </span>
+      </div>
+      <div
+        class="ant-attachment-list-card-content"
+      >
+        <div
+          class="ant-attachment-list-card-name"
+        >
+          <div
+            class="ant-attachment-list-card-ellipsis-prefix"
+          >
+            image-file
+          </div>
+          <div
+            class="ant-attachment-list-card-ellipsis-suffix"
+          >
+            .png
+          </div>
+        </div>
+        <div
+          class="ant-attachment-list-card-desc"
+        >
+          <div
+            class="ant-attachment-list-card-ellipsis-prefix"
+          >
+            121 KB
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -778,12 +825,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
       class="ant-attachment-list ant-attachment-list-overflow-wrap"
     >
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-0
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -811,12 +904,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-1
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -844,12 +983,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-2
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -877,12 +1062,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-3
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -910,12 +1141,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-4
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -943,12 +1220,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-5
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -976,12 +1299,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-6
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -1009,12 +1378,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-7
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -1042,12 +1457,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-8
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -1075,12 +1536,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-9
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -1108,12 +1615,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-10
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -1141,12 +1694,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-11
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -1174,12 +1773,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-12
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -1207,12 +1852,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-13
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -1240,12 +1931,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-14
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -1273,12 +2010,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-15
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -1306,12 +2089,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-16
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -1339,12 +2168,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-17
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -1372,12 +2247,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-18
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -1405,12 +2326,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-19
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -1438,12 +2405,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-20
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -1471,12 +2484,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-21
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -1504,12 +2563,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-22
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -1537,12 +2642,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-23
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -1570,12 +2721,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-24
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -1603,12 +2800,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-25
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -1636,12 +2879,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-26
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -1669,12 +2958,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-27
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -1702,12 +3037,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-28
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
@@ -1735,12 +3116,58 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
       >
-        <img
-          alt="preview"
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        />
+        <div
+          class="ant-attachment-list-card-icon"
+          style="color:#8c8c8c"
+        >
+          <span
+            aria-label="file-image"
+            class="anticon anticon-file-image"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="file-image"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-attachment-list-card-content"
+        >
+          <div
+            class="ant-attachment-list-card-name"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+              file-29
+            </div>
+            <div
+              class="ant-attachment-list-card-ellipsis-suffix"
+            >
+              .jpg
+            </div>
+          </div>
+          <div
+            class="ant-attachment-list-card-desc"
+          >
+            <div
+              class="ant-attachment-list-card-ellipsis-prefix"
+            >
+            </div>
+          </div>
+        </div>
         <button
           class="ant-attachment-list-card-remove"
           type="button"
