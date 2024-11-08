@@ -3,6 +3,7 @@ import lottie from 'lottie-web';
 import React from 'react';
 
 import useLocale from '../../../hooks/useLocale';
+import Container from './Container';
 
 const locales = {
   cn: {
@@ -17,14 +18,12 @@ const locales = {
 
 const useStyle = createStyles(({ token, css }) => {
   return {
-    content: css`
-      width: 100%;
-      max-width: ${token.pcMaxWidth}px;
-      margin: 0 auto;
+    banner: css`
       height: 500px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      gap: ${token.margin}px;
       align-items: center;
       text-align: center;
       font-family: AlibabaPuHuiTiB, ${token.fontFamily}, sans-serif;
@@ -73,11 +72,11 @@ const DesignBanner: React.FC = () => {
   }, []);
 
   return (
-    <div className={styles.content}>
+    <Container className={styles.banner}>
       <h2 className={styles.title}>{locale.title}</h2>
       <p className={styles.desc}>{locale.desc}</p>
       <div id={`design-guide-${id}`} className={styles.lottie} />
-    </div>
+    </Container>
   );
 };
 

@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import { Link, useLocation } from 'dumi';
 import lottie from 'lottie-web';
 import React from 'react';
+import Container from './Container';
 
 import useLocale from '../../../hooks/useLocale';
 import { getLocalizedPathname, isZhCN } from '../../../theme/utils';
@@ -26,11 +27,10 @@ const locales = {
 };
 
 const useStyle = createStyles(({ token, css }) => {
-  const bannerMargin = token.paddingSM * 10;
   const minBannerWidth = token.mobileMaxWidth - token.padding * 2;
 
   return {
-    content: css`
+    banner: css`
       width: 100vw;
       height: 100vh;
       display: flex;
@@ -44,37 +44,24 @@ const useStyle = createStyles(({ token, css }) => {
       height: 110vh;
       position: absolute;
     `,
-    banner: css`
-      width: 100%;
-      height: 100vh;
-      max-width: ${token.pcMaxWidth - bannerMargin * 2}px !important;
-      box-sizing: border-box;
+    content: css`
+      height: 100%;
+      max-height: calc(100vh - ${token.headerHeight * 2}px);
       position: relative;
-      margin: 0 ${bannerMargin}px;
-
-      @media only screen and (max-width: ${token.mobileMaxWidth}px) {
-        margin: 0 ${token.marginLG}px;
-      }
     `,
     title: css`
       max-width: ${minBannerWidth}px;
-      max-height: calc(100vh - ${token.headerHeight * 2}px);
       position: absolute;
       top: 50%;
       inset-inline-start: 0;
       transform: translateY(-50%);
       z-index: 1;
-
-      @media only screen and (max-width: ${token.mobileMaxWidth}px) {
-        bottom: 0;
-        top: auto;
-      }
     `,
     lottie: css`
       position: absolute;
       top: 50%;
       inset-inline-end: 0;
-      transform: translate(${bannerMargin}px, -40%);
+      transform: translate(${token.pcContainerXMargin}px, -40%);
       z-index: 0;
 
       @media only screen and (max-width: ${token.mobileMaxWidth}px) {
@@ -82,7 +69,7 @@ const useStyle = createStyles(({ token, css }) => {
       }
     `,
     lottie_rtl: css`
-      transform: translate(-30%, -40%) !important;
+      transform: translate(${token.pcContainerXMargin * -2}px, -40%) !important;
     `,
     name: css`
       font-size: 80px !important;
@@ -241,9 +228,9 @@ const MainBanner: React.FC = () => {
   }, []);
 
   return (
-    <div className={styles.content}>
+    <section className={styles.banner}>
       <div id={`main-banner-bg-${id}`} className={styles.background} />
-      <div className={styles.banner}>
+      <Container className={styles.content}>
         <div className={styles.title}>
           <h1 className={styles.name}>
             Ant Des
@@ -272,8 +259,8 @@ const MainBanner: React.FC = () => {
           id={`main-banner-ip-${id}`}
           className={classnames(styles.lottie, direction === 'rtl' && styles.lottie_rtl)}
         />
-      </div>
-    </div>
+      </Container>
+    </section>
   );
 };
 
