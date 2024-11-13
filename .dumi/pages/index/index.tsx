@@ -13,7 +13,6 @@ const useStyle = createStyles(({ token, css }) => {
       backdrop-filter: blur(40px);
       display: flex;
       flex-direction: column;
-      gap: ${token.pcContainerXMargin}px;
       padding: ${token.pcContainerXMargin}px 0;
     `,
   };
