@@ -322,42 +322,46 @@ Array [
       <div
         class="ant-select-selector"
       >
-        <div
-          class="ant-select-selection-overflow"
+        <span
+          class="ant-select-selection-wrap"
         >
           <div
-            class="ant-select-selection-overflow-item ant-select-selection-overflow-item-suffix"
-            style="opacity: 1;"
+            class="ant-select-selection-overflow"
           >
             <div
-              class="ant-select-selection-search"
-              style="width: 0px;"
+              class="ant-select-selection-overflow-item ant-select-selection-overflow-item-suffix"
+              style="opacity: 1;"
             >
-              <input
-                aria-autocomplete="list"
-                aria-controls="rc_select_TEST_OR_SSR_list"
-                aria-expanded="false"
-                aria-haspopup="listbox"
-                aria-owns="rc_select_TEST_OR_SSR_list"
-                autocomplete="off"
-                class="ant-select-selection-search-input"
-                id="rc_select_TEST_OR_SSR"
-                role="combobox"
-                type="search"
-                value=""
-              />
-              <span
-                aria-hidden="true"
-                class="ant-select-selection-search-mirror"
+              <div
+                class="ant-select-selection-search"
+                style="width: 0px;"
               >
-              </span>
+                <input
+                  aria-autocomplete="list"
+                  aria-controls="rc_select_TEST_OR_SSR_list"
+                  aria-expanded="false"
+                  aria-haspopup="listbox"
+                  aria-owns="rc_select_TEST_OR_SSR_list"
+                  autocomplete="off"
+                  class="ant-select-selection-search-input"
+                  id="rc_select_TEST_OR_SSR"
+                  role="combobox"
+                  type="search"
+                  value=""
+                />
+                <span
+                  aria-hidden="true"
+                  class="ant-select-selection-search-mirror"
+                >
+                </span>
+              </div>
             </div>
           </div>
-        </div>
-        <span
-          class="ant-select-selection-placeholder"
-        >
-          可任意输入 / 与 # 多次获取建议
+          <span
+            class="ant-select-selection-placeholder"
+          >
+            可任意输入 / 与 # 多次获取建议
+          </span>
         </span>
       </div>
       <div
