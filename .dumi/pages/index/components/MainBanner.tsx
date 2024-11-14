@@ -72,9 +72,9 @@ const useStyle = createStyles(({ token, css }) => {
     `,
     name: css`
       font-size: 80px !important;
+      line-height: 1.2;
       color: ${token.colorText};
       font-weight: bold;
-      margin-bottom: ${token.marginLG}px !important;
 
       @media only screen and (max-width: ${token.mobileMaxWidth}px) {
         font-size: 54px !important;
@@ -86,7 +86,7 @@ const useStyle = createStyles(({ token, css }) => {
       max-width: 500px;
       color: ${token.colorText};
       opacity: 0.65;
-      margin-bottom: ${token.marginLG * 2}px;
+      margin: ${token.marginLG}px 0 ${token.marginLG * 2}px 0;
     `,
     iAlphabet: css`
       position: relative;
@@ -102,7 +102,7 @@ const useStyle = createStyles(({ token, css }) => {
       position: absolute;
       top: 0;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate(-50%, -50%);
       width: 22px;
       height: 22px;
       background: no-repeat center url('https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*RMOpRLHgA9wAAAAAAAAAAAAADgCCAQ/original');
@@ -136,7 +136,7 @@ const useStyle = createStyles(({ token, css }) => {
       box-shadow: ${token.boxShadow};
     `,
     startBtn: css`
-      background-image: linear-gradient(90deg, #c7deff 0%, #ffffffd9 76%);
+      background: linear-gradient(90deg, #c7deff 0%, #ffffffd9 76%);
       color: #14204c;
     `,
     designBtn: css`

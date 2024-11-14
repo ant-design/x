@@ -11,7 +11,7 @@ import SceneBanner from './components/SceneBanner';
 const useStyle = createStyles(({ token, css }) => {
   return {
     design: css`
-      background-image: linear-gradient(180deg, #1e2226e6 0%, #1c2024 38%, #16191c 100%);
+      background: linear-gradient(180deg, #1e2226e6 0%, #1c2024 38%, #16191c 100%);
       border-radius: 40px 40px 0 0;
       backdrop-filter: blur(40px);
 
@@ -21,7 +21,7 @@ const useStyle = createStyles(({ token, css }) => {
       padding: ${token.pcContainerMargin}px 0;
     `,
     introduction: css`
-      background-image: linear-gradient(180deg, #1e2226 0%, #16191c 100%);
+      background: linear-gradient(180deg, #1e2226 0%, #16191c 100%);
       border-radius: 40px 40px 0 0;
 
       display: flex;

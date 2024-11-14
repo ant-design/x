@@ -53,7 +53,7 @@ const useStyle = createStyles(({ token, css }) => {
     `,
     background: css`
       position: auto;
-      background-image: linear-gradient(117deg, #ffffff1a 17%, #ffffff0d 51%);
+      background: linear-gradient(117deg, #ffffff1a 17%, #ffffff0d 51%);
       backdrop-filter: blur(40px);
 
       pointer-events: auto;

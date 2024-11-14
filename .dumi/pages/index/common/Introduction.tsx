@@ -24,7 +24,7 @@ const useStyle = createStyles(({ token, css }) => {
       position: relative;
       cursor: pointer;
 
-      & :hover::before {
+      & :hover::after {
         content: '';
         position: absolute;
         top: 0;
@@ -38,8 +38,7 @@ const useStyle = createStyles(({ token, css }) => {
         mask-composite: exclude;
       }
     `,
-    item_image: css`
-      
+    item_header: css`
     `,
     item_content: css`
       display: flex;
@@ -103,7 +102,7 @@ export interface IntroductionItem {
   startColor?: string;
   endColor?: string;
   icon?: string;
-  image?: string;
+  header?: React.ReactNode;
 }
 
 interface IntroductionProps extends ContainerProps {
@@ -124,7 +123,7 @@ const Introduction: React.FC<IntroductionProps> = (props) => {
       >
         {props.items.map((item) => (
           <div className={styles.item} key={`${item.title}`}>
-            {item.image && <div className={styles.item_image}>{item.image}</div>}
+            {item.header && <div className={styles.item_header}>{item.header}</div>}
             <div className={styles.item_content}>
               {item.icon && <img className={styles.item_icon} src={item.icon} alt={item.icon} />}
               <div>

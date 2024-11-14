@@ -76,7 +76,7 @@ const useStyle = () => {
 
   return createStyles(({ token, css }) => ({
     container: css`
-      background-image: radial-gradient(ellipse 0px 699px at 699px 699px, #5bc6e4 0%, #5bc6e400 100%);
+      background: radial-gradient(ellipse 0px 699px at 699px 699px, #5bc6e4 0%, #5bc6e400 100%);
     `,
     card: css`
       padding: ${token.paddingSM}px;
