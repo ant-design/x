@@ -381,6 +381,436 @@ exports[`renders components/sender/demo/header.tsx correctly 1`] = `
 </div>
 `;
 
+exports[`renders components/sender/demo/header-fixed.tsx correctly 1`] = `
+<div
+  class="ant-app"
+>
+  <div
+    class="ant-flex ant-flex-align-flex-start ant-flex-gap-middle ant-flex-vertical"
+  >
+    <button
+      aria-checked="true"
+      class="ant-switch ant-switch-checked"
+      role="switch"
+      type="button"
+    >
+      <div
+        class="ant-switch-handle"
+      />
+      <span
+        class="ant-switch-inner"
+      >
+        <span
+          class="ant-switch-inner-checked"
+        >
+          With Reference
+        </span>
+        <span
+          class="ant-switch-inner-unchecked"
+        >
+          With Reference
+        </span>
+      </span>
+    </button>
+    <div
+      class="ant-sender"
+    >
+      <div
+        class="ant-sender-header"
+      >
+        <div
+          class="ant-sender-header-header"
+        >
+          <div
+            class="ant-sender-header-title"
+          >
+            <div
+              class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
+            >
+              <div
+                class="ant-space-item"
+              >
+                <span
+                  aria-label="enter"
+                  class="anticon anticon-enter"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="enter"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M864 170h-60c-4.4 0-8 3.6-8 8v518H310v-73c0-6.7-7.8-10.5-13-6.3l-141.9 112a8 8 0 000 12.6l141.9 112c5.3 4.2 13 .4 13-6.3v-75h498c35.3 0 64-28.7 64-64V178c0-4.4-3.6-8-8-8z"
+                    />
+                  </svg>
+                </span>
+              </div>
+              <div
+                class="ant-space-item"
+              >
+                <span
+                  class="ant-typography ant-typography-secondary"
+                >
+                  "Tell more about Ant Design X"
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-sender-header-close"
+          >
+            <button
+              class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+              type="button"
+            >
+              <span
+                class="ant-btn-icon"
+              >
+                <span
+                  aria-label="close"
+                  class="anticon anticon-close"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="close"
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ant-sender-content"
+      >
+        <textarea
+          class="ant-input ant-input-borderless ant-sender-input"
+        />
+        <div
+          class="ant-sender-actions-list"
+        >
+          <div
+            class="ant-sender-actions-list-presets ant-flex"
+          >
+            <button
+              class="ant-btn ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              type="button"
+            >
+              <span
+                class="ant-btn-icon"
+              >
+                <span
+                  aria-label="arrow-up"
+                  class="anticon anticon-arrow-up"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="arrow-up"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M868 545.5L536.1 163a31.96 31.96 0 00-48.3 0L156 545.5a7.97 7.97 0 006 13.2h81c4.6 0 9-2 12.1-5.5L474 300.9V864c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V300.9l218.9 252.3c3 3.5 7.4 5.5 12.1 5.5h81c6.8 0 10.5-8 6-13.2z"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders components/sender/demo/paste-image.tsx correctly 1`] = `
+<div
+  class="ant-app"
+>
+  <div
+    class="ant-flex ant-flex-align-end"
+    style="height:220px"
+  >
+    <div
+      class="ant-sender"
+    >
+      <div
+        class="ant-sender-header"
+        style="display:none"
+      >
+        <div
+          class="ant-sender-header-header"
+        >
+          <div
+            class="ant-sender-header-title"
+          >
+            Attachments
+          </div>
+          <div
+            class="ant-sender-header-close"
+          >
+            <button
+              class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+              type="button"
+            >
+              <span
+                class="ant-btn-icon"
+              >
+                <span
+                  aria-label="close"
+                  class="anticon anticon-close"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="close"
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </button>
+          </div>
+        </div>
+        <div
+          class="ant-sender-header-content"
+          style="padding:0"
+        >
+          <div
+            class="ant-attachment"
+            dir="ltr"
+          >
+            <div
+              class="ant-attachment-list"
+              style="display:none"
+            >
+              <span
+                class="ant-upload-wrapper"
+              >
+                <div
+                  class="ant-upload ant-upload-select"
+                >
+                  <span
+                    class="ant-upload"
+                  >
+                    <input
+                      accept=""
+                      name="file"
+                      style="display:none"
+                      type="file"
+                    />
+                    <button
+                      class="ant-btn ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
+                      type="button"
+                    >
+                      <span
+                        aria-label="plus"
+                        class="anticon anticon-plus ant-attachment-list-upload-btn-icon"
+                        role="img"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          data-icon="plus"
+                          fill="currentColor"
+                          focusable="false"
+                          height="1em"
+                          viewBox="64 64 896 896"
+                          width="1em"
+                        >
+                          <path
+                            d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
+                          />
+                          <path
+                            d="M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+                          />
+                        </svg>
+                      </span>
+                    </button>
+                  </span>
+                </div>
+              </span>
+            </div>
+            <div
+              class="ant-attachment-placeholder"
+            >
+              <span
+                class="ant-upload-wrapper"
+              >
+                <div
+                  class="ant-upload ant-upload-drag"
+                  style="padding:0;border:0;background:transparent"
+                >
+                  <span
+                    class="ant-upload ant-upload-btn"
+                    role="button"
+                    tabindex="0"
+                  >
+                    <input
+                      accept=""
+                      name="file"
+                      style="display:none"
+                      type="file"
+                    />
+                    <div
+                      class="ant-upload-drag-container"
+                    >
+                      <div
+                        class="ant-attachment-placeholder-inner ant-flex ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
+                      >
+                        <span
+                          class="ant-typography ant-attachment-placeholder-icon"
+                        >
+                          <span
+                            aria-label="cloud-upload"
+                            class="anticon anticon-cloud-upload"
+                            role="img"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              data-icon="cloud-upload"
+                              fill="currentColor"
+                              focusable="false"
+                              height="1em"
+                              viewBox="64 64 896 896"
+                              width="1em"
+                            >
+                              <path
+                                d="M518.3 459a8 8 0 00-12.6 0l-112 141.7a7.98 7.98 0 006.3 12.9h73.9V856c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V613.7H624c6.7 0 10.4-7.7 6.3-12.9L518.3 459z"
+                              />
+                              <path
+                                d="M811.4 366.7C765.6 245.9 648.9 160 512.2 160S258.8 245.8 213 366.6C127.3 389.1 64 467.2 64 560c0 110.5 89.5 200 199.9 200H304c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8h-40.1c-33.7 0-65.4-13.4-89-37.7-23.5-24.2-36-56.8-34.9-90.6.9-26.4 9.9-51.2 26.2-72.1 16.7-21.3 40.1-36.8 66.1-43.7l37.9-9.9 13.9-36.6c8.6-22.8 20.6-44.1 35.7-63.4a245.6 245.6 0 0152.4-49.9c41.1-28.9 89.5-44.2 140-44.2s98.9 15.3 140 44.2c19.9 14 37.5 30.8 52.4 49.9 15.1 19.3 27.1 40.7 35.7 63.4l13.8 36.5 37.8 10C846.1 454.5 884 503.8 884 560c0 33.1-12.9 64.3-36.3 87.7a123.07 123.07 0 01-87.6 36.3H720c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h40.1C870.5 760 960 670.5 960 560c0-92.7-63.1-170.7-148.6-193.3z"
+                              />
+                            </svg>
+                          </span>
+                        </span>
+                        <h5
+                          class="ant-typography ant-attachment-placeholder-title"
+                        >
+                          Upload files
+                        </h5>
+                        <span
+                          class="ant-typography ant-typography-secondary ant-attachment-placeholder-description"
+                        >
+                          Click or drag files to this area to upload
+                        </span>
+                      </div>
+                    </div>
+                  </span>
+                </div>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ant-sender-content"
+      >
+        <div
+          class="ant-sender-prefix"
+        >
+          <button
+            class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+            type="button"
+          >
+            <span
+              class="ant-btn-icon"
+            >
+              <span
+                aria-label="link"
+                class="anticon anticon-link"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="link"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M574 665.4a8.03 8.03 0 00-11.3 0L446.5 781.6c-53.8 53.8-144.6 59.5-204 0-59.5-59.5-53.8-150.2 0-204l116.2-116.2c3.1-3.1 3.1-8.2 0-11.3l-39.8-39.8a8.03 8.03 0 00-11.3 0L191.4 526.5c-84.6 84.6-84.6 221.5 0 306s221.5 84.6 306 0l116.2-116.2c3.1-3.1 3.1-8.2 0-11.3L574 665.4zm258.6-474c-84.6-84.6-221.5-84.6-306 0L410.3 307.6a8.03 8.03 0 000 11.3l39.7 39.7c3.1 3.1 8.2 3.1 11.3 0l116.2-116.2c53.8-53.8 144.6-59.5 204 0 59.5 59.5 53.8 150.2 0 204L665.3 562.6a8.03 8.03 0 000 11.3l39.8 39.8c3.1 3.1 8.2 3.1 11.3 0l116.2-116.2c84.5-84.6 84.5-221.5 0-306.1zM610.1 372.3a8.03 8.03 0 00-11.3 0L372.3 598.7a8.03 8.03 0 000 11.3l39.6 39.6c3.1 3.1 8.2 3.1 11.3 0l226.4-226.4c3.1-3.1 3.1-8.2 0-11.3l-39.5-39.6z"
+                  />
+                </svg>
+              </span>
+            </span>
+          </button>
+        </div>
+        <textarea
+          class="ant-input ant-input-borderless ant-sender-input"
+        />
+        <div
+          class="ant-sender-actions-list"
+        >
+          <div
+            class="ant-sender-actions-list-presets ant-flex"
+          >
+            <button
+              class="ant-btn ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              type="button"
+            >
+              <span
+                class="ant-btn-icon"
+              >
+                <span
+                  aria-label="arrow-up"
+                  class="anticon anticon-arrow-up"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="arrow-up"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M868 545.5L536.1 163a31.96 31.96 0 00-48.3 0L156 545.5a7.97 7.97 0 006 13.2h81c4.6 0 9-2 12.1-5.5L474 300.9V864c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V300.9l218.9 252.3c3 3.5 7.4 5.5 12.1 5.5h81c6.8 0 10.5-8 6-13.2z"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`renders components/sender/demo/send-style.tsx correctly 1`] = `
 <div
   class="ant-app"
@@ -535,6 +965,94 @@ exports[`renders components/sender/demo/send-style.tsx correctly 1`] = `
 `;
 
 exports[`renders components/sender/demo/speech.tsx correctly 1`] = `
+<div
+  class="ant-app"
+>
+  <div
+    class="ant-sender"
+  >
+    <div
+      class="ant-sender-content"
+    >
+      <textarea
+        class="ant-input ant-input-borderless ant-sender-input"
+      />
+      <div
+        class="ant-sender-actions-list"
+      >
+        <div
+          class="ant-sender-actions-list-presets ant-flex"
+        >
+          <button
+            class="ant-btn ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+            type="button"
+          >
+            <span
+              class="ant-btn-icon"
+            >
+              <span
+                aria-label="audio-muted"
+                class="anticon anticon-audio-muted"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="audio-muted"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <defs>
+                    <style />
+                  </defs>
+                  <path
+                    d="M682 455V311l-76 76v68c-.1 50.7-42 92.1-94 92a95.8 95.8 0 01-52-15l-54 55c29.1 22.4 65.9 36 106 36 93.8 0 170-75.1 170-168z"
+                  />
+                  <path
+                    d="M833 446h-60c-4.4 0-8 3.6-8 8 0 140.3-113.7 254-254 254-63 0-120.7-23-165-61l-54 54a334.01 334.01 0 00179 81v102H326c-13.9 0-24.9 14.3-25 32v36c.1 4.4 2.9 8 6 8h408c3.2 0 6-3.6 6-8v-36c0-17.7-11-32-25-32H547V782c165.3-17.9 294-157.9 294-328 0-4.4-3.6-8-8-8zm13.1-377.7l-43.5-41.9a8 8 0 00-11.2.1l-129 129C634.3 101.2 577 64 511 64c-93.9 0-170 75.3-170 168v224c0 6.7.4 13.3 1.2 19.8l-68 68A252.33 252.33 0 01258 454c-.2-4.4-3.8-8-8-8h-60c-4.4 0-8 3.6-8 8 0 53 12.5 103 34.6 147.4l-137 137a8.03 8.03 0 000 11.3l42.7 42.7c3.1 3.1 8.2 3.1 11.3 0L846.2 79.8l.1-.1c3.1-3.2 3-8.3-.2-11.4zM417 401V232c0-50.6 41.9-92 94-92 46 0 84.1 32.3 92.3 74.7L417 401z"
+                  />
+                </svg>
+              </span>
+            </span>
+          </button>
+          <button
+            class="ant-btn ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+            type="button"
+          >
+            <span
+              class="ant-btn-icon"
+            >
+              <span
+                aria-label="arrow-up"
+                class="anticon anticon-arrow-up"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="arrow-up"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M868 545.5L536.1 163a31.96 31.96 0 00-48.3 0L156 545.5a7.97 7.97 0 006 13.2h81c4.6 0 9-2 12.1-5.5L474 300.9V864c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V300.9l218.9 252.3c3 3.5 7.4 5.5 12.1 5.5h81c6.8 0 10.5-8 6-13.2z"
+                  />
+                </svg>
+              </span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders components/sender/demo/speech-custom.tsx correctly 1`] = `
 <div
   class="ant-app"
 >

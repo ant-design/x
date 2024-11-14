@@ -10,7 +10,6 @@ exports[`Sender Component loading state 1`] = `
   >
     <textarea
       class="ant-input ant-input-borderless ant-sender-input"
-      readonly=""
       style="overflow-y: hidden; resize: none;"
     />
     <div

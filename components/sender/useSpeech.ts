@@ -1,4 +1,4 @@
-import { useEvent } from 'rc-util';
+import { useEvent, useMergedState } from 'rc-util';
 import React from 'react';
 
 // Ensure that the SpeechRecognition API is available in the browser
@@ -8,8 +8,32 @@ if (!SpeechRecognition && typeof window !== 'undefined') {
   SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
 }
 
-export default function useSpeech(onSpeech: (transcript: string) => void) {
+export type ControlledSpeechConfig = {
+  recording?: boolean;
+  onRecordingChange: (recording: boolean) => void;
+};
+
+export type AllowSpeech = boolean | ControlledSpeechConfig;
+
+export default function useSpeech(
+  onSpeech: (transcript: string) => void,
+  allowSpeech?: AllowSpeech,
+) {
   const onEventSpeech = useEvent(onSpeech);
+
+  // ========================== Speech Config ==========================
+  const [controlledRecording, onControlledRecordingChange, speechInControlled] =
+    React.useMemo(() => {
+      if (typeof allowSpeech === 'object') {
+        return [
+          allowSpeech.recording,
+          allowSpeech.onRecordingChange,
+          typeof allowSpeech.recording === 'boolean',
+        ] as const;
+      }
+
+      return [undefined, undefined, false] as const;
+    }, [allowSpeech]);
 
   // ======================== Speech Permission ========================
   const [permissionState, setPermissionState] = React.useState<PermissionState | null>(null);
@@ -45,7 +69,11 @@ export default function useSpeech(onSpeech: (transcript: string) => void) {
 
   // ========================== Speech Events ==========================
   const recognitionRef = React.useRef<any | null>(null);
-  const [recording, setRecording] = React.useState(false);
+  const [recording, setRecording] = useMergedState(false, {
+    value: controlledRecording,
+  });
+
+  const forceBreakRef = React.useRef(false);
 
   const ensureRecognition = () => {
     if (mergedAllowSpeech && !recognitionRef.current) {
@@ -60,22 +88,40 @@ export default function useSpeech(onSpeech: (transcript: string) => void) {
       };
 
       recognition.onresult = (event: SpeechRecognitionResult) => {
-        const transcript = (event as any).results?.[0]?.[0]?.transcript;
-        onEventSpeech(transcript);
+        if (!forceBreakRef.current) {
+          const transcript = (event as any).results?.[0]?.[0]?.transcript;
+          onEventSpeech(transcript);
+        }
+
+        forceBreakRef.current = false;
       };
 
       recognitionRef.current = recognition;
     }
   };
 
-  const triggerSpeech = useEvent(() => {
-    ensureRecognition();
+  const triggerSpeech = useEvent((forceBreak: boolean) => {
+    // Ignore if `forceBreak` but is not recording
+    if (forceBreak && !recording) {
+      return;
+    }
 
-    if (recognitionRef.current) {
-      if (recording) {
-        recognitionRef.current.stop();
-      } else {
-        recognitionRef.current.start();
+    forceBreakRef.current = forceBreak;
+
+    if (speechInControlled) {
+      // If in controlled mode, do nothing
+      onControlledRecordingChange?.(!recording);
+    } else {
+      ensureRecognition();
+
+      if (recognitionRef.current) {
+        if (recording) {
+          recognitionRef.current.stop();
+          onControlledRecordingChange?.(false);
+        } else {
+          recognitionRef.current.start();
+          onControlledRecordingChange?.(true);
+        }
       }
     }
   });

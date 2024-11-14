@@ -15,7 +15,7 @@ import SendButton from './components/SendButton';
 import SpeechButton from './components/SpeechButton';
 import type { CustomizeComponent, SubmitType } from './interface';
 import useStyle from './style';
-import useSpeech from './useSpeech';
+import useSpeech, { type AllowSpeech } from './useSpeech';
 
 type TextareaProps = GetProps<typeof Input.TextArea>;
 
@@ -39,12 +39,15 @@ export interface SenderProps extends Pick<TextareaProps, 'placeholder' | 'onKeyP
   defaultValue?: string;
   value?: string;
   loading?: boolean;
+  readOnly?: boolean;
   submitType?: SubmitType;
   disabled?: boolean;
   onSubmit?: (message: string) => void;
   onChange?: (value: string) => void;
   onCancel?: VoidFunction;
   onKeyDown?: React.KeyboardEventHandler<any>;
+  onPaste?: React.ClipboardEventHandler<HTMLElement>;
+  onPasteFile?: (file: File) => void;
   components?: SenderComponents;
   styles?: {
     prefix?: React.CSSProperties;
@@ -60,7 +63,7 @@ export interface SenderProps extends Pick<TextareaProps, 'placeholder' | 'onKeyP
   style?: React.CSSProperties;
   className?: string;
   actions?: React.ReactNode | ActionsRender;
-  allowSpeech?: boolean;
+  allowSpeech?: AllowSpeech;
   prefix?: React.ReactNode;
   header?: React.ReactNode;
 }
@@ -83,6 +86,7 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
     style,
     defaultValue,
     value,
+    readOnly,
     submitType = 'enter',
     onSubmit,
     loading,
@@ -96,6 +100,8 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
     allowSpeech,
     prefix,
     header,
+    onPaste,
+    onPasteFile,
     ...rest
   } = props;
 
@@ -147,7 +153,7 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
   // ============================ Speech ============================
   const [speechPermission, triggerSpeech, speechRecording] = useSpeech((transcript) => {
     triggerValueChange(`${innerValue} ${transcript}`);
-  });
+  }, allowSpeech);
 
   // ========================== Components ==========================
   const InputTextArea = getComponent(components, ['input'], Input.TextArea);
@@ -165,7 +171,7 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
 
   // ============================ Events ============================
   const triggerSend = () => {
-    if (innerValue && onSubmit) {
+    if (innerValue && onSubmit && !loading) {
       onSubmit(innerValue);
     }
   };
@@ -208,6 +214,18 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
     if (onKeyPress) {
       onKeyPress(e);
     }
+  };
+
+  // ============================ Paste =============================
+  const onInternalPaste: React.ClipboardEventHandler<HTMLElement> = (e) => {
+    // Get file
+    const file = e.clipboardData?.files[0];
+    if (file && onPasteFile) {
+      onPasteFile(file);
+      e.preventDefault();
+    }
+
+    onPaste?.(e);
   };
 
   // ============================ Focus =============================
@@ -281,13 +299,15 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
           value={innerValue}
           onChange={(e) => {
             triggerValueChange((e.target as HTMLTextAreaElement).value);
+            triggerSpeech(true);
           }}
           onPressEnter={onInternalKeyPress}
           onCompositionStart={onInternalCompositionStart}
           onCompositionEnd={onInternalCompositionEnd}
           onKeyDown={onKeyDown}
-          readOnly={loading}
+          onPaste={onInternalPaste}
           variant="borderless"
+          readOnly={readOnly}
         />
 
         {/* Action List */}
@@ -308,7 +328,7 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
               onClearDisabled: !innerValue,
               onCancel,
               onCancelDisabled: !loading,
-              onSpeech: triggerSpeech,
+              onSpeech: () => triggerSpeech(false),
               onSpeechDisabled: !speechPermission,
               speechRecording,
               disabled,

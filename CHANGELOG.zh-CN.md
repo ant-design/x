@@ -15,6 +15,13 @@ tag: vVERSION
 
 ---
 
+## 1.0.0-alpha.12
+
+`2024-11-07`
+
+- 🔥 Sender 支持 `onPasteFile` 事件与 Attachments 支持 `ref.upload` 手动上传文件, 由 [@zombieJ](https://github.com/zombieJ) [#184](https://github.com/ant-design/x/pull/184)
+- 🔥 Sender `allowSpeech` 支持受控使用三方语音 SDK, 由 [@zombieJ](https://github.com/zombieJ) [#187](https://github.com/ant-design/x/pull/187)
+
 ## 1.0.0-alpha.11
 
 `2024-11-06`

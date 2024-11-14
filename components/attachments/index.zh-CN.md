@@ -53,6 +53,13 @@ interface PlaceholderType {
 }
 ```
 
+### AttachmentsRef
+
+| 属性          | 说明             | 类型                 | 版本 |
+| ------------- | ---------------- | -------------------- | ---- |
+| nativeElement | 获取原生节点     | HTMLElement          | -    |
+| upload        | 手工调用上传文件 | (file: File) => void | -    |
+
 ## Semantic DOM
 
 <code src="./demo/_semantic.tsx" simplify="true"></code>

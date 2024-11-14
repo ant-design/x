@@ -39,7 +39,7 @@ const Demo: React.FC = () => {
           message.error('Cancel sending!');
         }}
       />
-      <Sender value="Force as loading" loading />
+      <Sender value="Force as loading" loading readOnly />
       <Sender disabled value="Set to disabled" />
     </Flex>
   );

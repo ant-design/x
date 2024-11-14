@@ -178,13 +178,13 @@ function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) 
   // ============================= Render =============================
   let content: React.ReactNode = null;
   const previewUrl = item.thumbUrl || item.url || previewImg;
-  const isImgPreview = isImg && previewUrl;
+  const isImgPreview = isImg && item.originFileObj;
 
   if (isImgPreview) {
     // Preview Image style
     content = (
       <>
-        <img alt="preview" src={item.thumbUrl || item.url || previewImg} />
+        <img alt="preview" src={previewUrl} />
 
         {status !== 'done' && (
           <div className={`${cardCls}-img-mask`}>

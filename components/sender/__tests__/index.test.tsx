@@ -133,4 +133,9 @@ describe('Sender Component', () => {
     fireEvent.mouseDown(container.querySelector('.ant-sender-content')!);
     expect(document.activeElement).toEqual(container.querySelector('textarea'));
   });
+
+  it('readOnly', () => {
+    const { container } = render(<Sender readOnly />);
+    expect(container.querySelector('textarea')).toHaveAttribute('readonly');
+  });
 });
