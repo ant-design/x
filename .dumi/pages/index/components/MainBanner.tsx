@@ -3,24 +3,23 @@ import classnames from 'classnames';
 import { Link, useLocation } from 'dumi';
 import lottie from 'lottie-web';
 import React from 'react';
-import Container from './Container';
 
 import useLocale from '../../../hooks/useLocale';
 import { getLocalizedPathname, isZhCN } from '../../../theme/utils';
+import Container from '../common/Container';
 import SiteContext from './SiteContext';
-
 import type { SiteContextProps } from './SiteContext';
 
 const locales = {
   cn: {
     slogan: 'AI 体验新秩序',
-    desc: '基于 Ant Design 的 AGI 界面解决方案，创造更美好的智能视界',
+    desc: 'Ant Design 团队匠心星现 RICH 设计范式 , 打造卓越 AI 界面解决方案 , 引领智能新体验',
     start: '开始使用',
     design: '设计语言',
   },
   en: {
     slogan: 'New AI Experience',
-    desc: 'An AGI design solution based on Ant Design, creating a better intelligent world',
+    desc: 'Crafted by the Ant Design team, RICH Design Paradigm introduces an exceptional AI interface solution, setting a new standard for intelligent user experiences',
     start: 'Get Started',
     design: 'Get Design',
   },
@@ -44,7 +43,7 @@ const useStyle = createStyles(({ token, css }) => {
       height: 110vh;
       position: absolute;
     `,
-    content: css`
+    container: css`
       height: 100%;
       max-height: calc(100vh - ${token.headerHeight * 2}px);
       position: relative;
@@ -61,7 +60,7 @@ const useStyle = createStyles(({ token, css }) => {
       position: absolute;
       top: 50%;
       inset-inline-end: 0;
-      transform: translate(${token.pcContainerXMargin}px, -40%);
+      transform: translate(${token.pcContainerMargin}px, -40%);
       z-index: 0;
 
       @media only screen and (max-width: ${token.mobileMaxWidth}px) {
@@ -69,7 +68,7 @@ const useStyle = createStyles(({ token, css }) => {
       }
     `,
     lottie_rtl: css`
-      transform: translate(${token.pcContainerXMargin * -2}px, -40%) !important;
+      transform: translate(${token.pcContainerMargin * -2}px, -40%) !important;
     `,
     name: css`
       font-size: 80px !important;
@@ -82,8 +81,9 @@ const useStyle = createStyles(({ token, css }) => {
       }
     `,
     desc: css`
-      font-size: 18px;
+      font-size: ${token.fontSizeHeading5}px;
       font-weight: 400;
+      max-width: 500px;
       color: ${token.colorText};
       opacity: 0.65;
       margin-bottom: ${token.marginLG * 2}px;
@@ -115,12 +115,11 @@ const useStyle = createStyles(({ token, css }) => {
         box-sizing: border-box;
         border-radius: inherit;
         position: absolute;
-        pointer-events: none;
         background: radial-gradient(circle, #fe8aff 0%, #fe8aff00 100%);
         filter: blur(12px);
       };
     `,
-    btnContent: css`
+    content: css`
       display: flex;
       gap: ${token.paddingLG}px;
       flex-wrap: wrap;
@@ -230,7 +229,7 @@ const MainBanner: React.FC = () => {
   return (
     <section className={styles.banner}>
       <div id={`main-banner-bg-${id}`} className={styles.background} />
-      <Container className={styles.content}>
+      <Container className={styles.container}>
         <div className={styles.title}>
           <h1 className={styles.name}>
             Ant Des
@@ -242,7 +241,7 @@ const MainBanner: React.FC = () => {
           <h1 className={styles.name}>{locale.slogan}</h1>
           <h5 className={styles.desc}>{locale.desc}</h5>
 
-          <div className={styles.btnContent}>
+          <div className={styles.content}>
             <Link to={getLocalizedPathname('components/overview', isZhCN(pathname), search)}>
               <button type="button" className={classnames(styles.btn, styles.startBtn)}>
                 {locale.start}

@@ -3,6 +3,8 @@ import { createStyles, useTheme } from 'antd-style';
 import { useLocation } from 'dumi';
 import React, { useContext } from 'react';
 
+import Container from '../common/Container';
+
 import useDark from '../../../hooks/useDark';
 import useLocale from '../../../hooks/useLocale';
 import Link from '../../../theme/common/Link';
@@ -30,6 +32,9 @@ const SECONDARY_LIST = [
 
 const locales = {
   cn: {
+    title: 'AI 设计语言与研发框架',
+    desc: '配套生态 , 让你快速搭建网站应用',
+
     values: '设计价值观',
     valuesDesc: '确定性、意义感、生长性、自然',
     guide: '设计指引',
@@ -46,6 +51,9 @@ const locales = {
     kitchenDesc: '一款为设计者提升工作效率的 Sketch 工具集',
   },
   en: {
+    title: 'Design & Framework',
+    desc: 'An ecosystem for rapid web app development',
+
     values: 'Design values',
     valuesDesc: 'Certainty, Meaningfulness, Growth, Naturalness',
     guide: 'Design guide',
@@ -67,10 +75,12 @@ const useStyle = () => {
   const isRootDark = useDark();
 
   return createStyles(({ token, css }) => ({
+    container: css`
+      background-image: radial-gradient(ellipse 0px 699px at 699px 699px, #5bc6e4 0%, #5bc6e400 100%);
+    `,
     card: css`
       padding: ${token.paddingSM}px;
       border-radius: ${token.borderRadius * 2}px;
-      background: ${isRootDark ? 'rgba(0, 0, 0, 0.45)' : token.colorBgElevated};
       box-shadow:
         0 1px 2px rgba(0, 0, 0, 0.03),
         0 1px 6px -1px rgba(0, 0, 0, 0.02),
@@ -125,16 +135,46 @@ const DesignFramework: React.FC = () => {
   ];
 
   return (
-    <Row gutter={[token.marginXL, token.marginXL]}>
-      {MAINLY_LIST.map(({ img, key, path }, index) => {
-        const title = locale[key as keyof typeof locale];
-        const desc = locale[`${key}Desc` as keyof typeof locale];
+    <Container className={styles.container} title={locale.title} desc={locale.desc}>
+      <Row gutter={[token.marginXL, token.marginXL]}>
+        {MAINLY_LIST.map(({ img, key, path }, index) => {
+          const title = locale[key as keyof typeof locale];
+          const desc = locale[`${key}Desc` as keyof typeof locale];
 
-        return (
-          <Col key={index} span={colSpan}>
-            <Link to={path}>
-              <div className={styles.card}>
-                <img draggable={false} alt={title} src={img} />
+          return (
+            <Col key={index} span={colSpan}>
+              <Link to={path}>
+                <div className={styles.card}>
+                  <img draggable={false} alt={title} src={img} />
+
+                  <Typography.Title
+                    level={4}
+                    style={{ marginTop: token.margin, marginBottom: token.marginXS }}
+                  >
+                    {title}
+                  </Typography.Title>
+                  <Typography.Paragraph type="secondary" style={{ margin: 0 }}>
+                    {desc}
+                  </Typography.Paragraph>
+                </div>
+              </Link>
+            </Col>
+          );
+        })}
+
+        {SECONDARY_LIST.map(({ img, key, url, imgScale = 1 }, index) => {
+          const title = locale[key as keyof typeof locale];
+          const desc = locale[`${key}Desc` as keyof typeof locale];
+
+          return (
+            <Col key={index} span={colSpan}>
+              <a className={styles.cardMini} target="_blank" href={url} rel="noreferrer">
+                <img
+                  draggable={false}
+                  alt={title}
+                  src={img}
+                  style={{ transform: `scale(${imgScale})` }}
+                />
 
                 <Typography.Title
                   level={4}
@@ -145,40 +185,12 @@ const DesignFramework: React.FC = () => {
                 <Typography.Paragraph type="secondary" style={{ margin: 0 }}>
                   {desc}
                 </Typography.Paragraph>
-              </div>
-            </Link>
-          </Col>
-        );
-      })}
-
-      {SECONDARY_LIST.map(({ img, key, url, imgScale = 1 }, index) => {
-        const title = locale[key as keyof typeof locale];
-        const desc = locale[`${key}Desc` as keyof typeof locale];
-
-        return (
-          <Col key={index} span={colSpan}>
-            <a className={styles.cardMini} target="_blank" href={url} rel="noreferrer">
-              <img
-                draggable={false}
-                alt={title}
-                src={img}
-                style={{ transform: `scale(${imgScale})` }}
-              />
-
-              <Typography.Title
-                level={4}
-                style={{ marginTop: token.margin, marginBottom: token.marginXS }}
-              >
-                {title}
-              </Typography.Title>
-              <Typography.Paragraph type="secondary" style={{ margin: 0 }}>
-                {desc}
-              </Typography.Paragraph>
-            </a>
-          </Col>
-        );
-      })}
-    </Row>
+              </a>
+            </Col>
+          );
+        })}
+      </Row>
+    </Container>
   );
 };
 

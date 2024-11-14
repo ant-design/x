@@ -7,32 +7,46 @@ const useStyle = createStyles(({ token, css }) => {
     container: css`
       width: 100%;
       margin: 0 auto;
-      max-width: ${token.pcMaxWidth - token.pcContainerXMargin * 2}px;
+      max-width: ${token.pcMaxWidth - token.pcContainerMargin * 2}px;
 
       @media only screen and (max-width: ${token.pcMaxWidth}px) {
-        max-width: calc(100vw - ${token.pcContainerXMargin * 2}px);
+        max-width: calc(100vw - ${token.pcContainerMargin * 2}px);
       }
 
       @media only screen and (max-width: ${token.mobileMaxWidth}px) {
         max-width: calc(100vw - ${token.marginLG * 2}px);
       }
     `,
+    title: css`
+      font-size: 48px;
+      color: ${token.colorText};
+      text-align: center;
+      padding-bottom: ${token.padding}px;
+    `,
+    desc: css`
+      color: ${token.colorTextSecondary};
+      max-width: 880px !important;
+      margin: 0 auto;
+      text-align: center;
+      padding-bottom: ${token.padding}px;
+    `,
   };
 });
 
-interface ContainerProps {
+export interface ContainerProps {
   children?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
+  title?: React.ReactNode;
+  desc?: React.ReactNode;
 }
 
-/**
- * @descriptionEN Container for center layout on the homepage, controlling the maximum width under various screen widths
- */
 const Container: React.FC<ContainerProps> = (props) => {
   const { styles } = useStyle();
   return (
     <div className={classnames(styles.container, props.className)} style={props.style}>
+      {props.title && <h2 className={styles.title}>{props.title}</h2>}
+      {props.desc && <p className={styles.desc}>{props.desc}</p>}
       {props.children}
     </div>
   );

@@ -4,12 +4,16 @@ import lottie from 'lottie-web';
 import React from 'react';
 import useLocale from '../../../hooks/useLocale';
 
-import Container from './Container';
+import Container from '../common/Container';
+import { DESIGN_STAGE_COLOR } from '../constants/color';
 
 const comma = '\u00A0,\u00A0\u00A0\u00A0';
 
 const locales = {
   cn: {
+    title: 'AI 界面解决方案',
+    desc: '基于 RICH , 延续热悉的 Ant Design 设计语言 , 全新 AGI 混合界面 (Hybrid-UI) 解决方案 , 完美融合 GUI 和自然会话交互 。 从唤醒到表达 , 从过程到反馈 , 合适的组件恰当的呈现在所有的人机互动过程中',
+
     awaken: '唤醒',
     awaken_title: `轻松唤醒${comma}即刻吸引`,
     awaken_desc: '可以让首次接触的用户快速理解AI能做什么, 告知用户AI可实现的意图范围, 降低用户成本',
@@ -31,6 +35,9 @@ const locales = {
     feedback_action: '从反馈开始',
   },
   en: {
+    title: 'AI Interface Solution',
+    desc: 'Based on RICH, this solution extends the familiar Ant Design language to present an innovative AGI Hybrid-UI interface solution. It seamlessly merges GUI and natural conversational interaction, delivering the right components at the right moments throughout all stages of human-machine interaction—from initiation to expression, process to feedback',
+
     awaken: 'Awaken',
     awaken_title: `Effortlessly Awaken${comma}Instantly Engage`,
     awaken_desc:
@@ -59,27 +66,30 @@ const locales = {
 
 const useStyle = createStyles(({ token, css }) => {
   return {
-    guide: css`
-      padding-top: ${token.pcContainerXMargin * 2}px;
+    container: css`
+    `,
+    content: css`
       display: flex;
+      justify-content: space-between;
       font-family: AlibabaPuHuiTiB, ${token.fontFamily}, sans-serif;
+      padding-top: ${token.pcContainerMargin}px;
     `,
     chain: css`
-      flex: 1;
       display: flex;
       flex-direction: column;
-      max-width: 100%;
+      width: 100%;
+      max-width: 540px;
     `,
     lottie: css`
       position: relative;
       top: 0;
       right: 0;
-      max-width: 540px;
+      width: 540px;
       z-index: 100;
 
       & :first-child {
         position: sticky;
-        top: ${token.pcContainerXMargin}px;
+        top: ${token.pcContainerMargin}px;
       }
 
       @media only screen and (max-width: ${token.mobileMaxWidth}px) {
@@ -89,16 +99,16 @@ const useStyle = createStyles(({ token, css }) => {
 
     chain_item: css`
       display: flex;
+      gap: ${token.paddingLG}px;
       color: #ffffff;
-      max-width: ${token.mobileMaxWidth - token.margin * 2}px;
     `,
     chain_item_content: css`
-      margin: 0 ${token.paddingLG}px;
-      max-width: 100%;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
       gap: ${token.paddingLG}px;
+      overflow: hidden;
+      
     `,
     chain_item_line: css`
       height: 500px;
@@ -144,7 +154,6 @@ const useStyle = createStyles(({ token, css }) => {
         inset-inline-start: 0;
         inset-inline-end: 0;
 
-        pointer-events: none;
         padding: ${token.lineWidth}px;
         background: linear-gradient(180deg, #ffffff26 0%, #ffffff00 100%);
         mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -165,8 +174,8 @@ const DesignGuide: React.FC = () => {
       title: locale.awaken_title,
       desc: locale.awaken_desc,
       action: locale.awaken_action,
-      startColor: '#6fb3e2',
-      endColor: '#6c57ff',
+      startColor: DESIGN_STAGE_COLOR.AWAKE.START,
+      endColor: DESIGN_STAGE_COLOR.AWAKE.END,
     },
     {
       icon: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*3XXESYNxPNkAAAAAAAAAAAAADgCCAQ/original',
@@ -174,8 +183,8 @@ const DesignGuide: React.FC = () => {
       title: locale.express_title,
       desc: locale.express_desc,
       action: locale.express_action,
-      startColor: '#6dd6f5',
-      endColor: '#108c44',
+      startColor: DESIGN_STAGE_COLOR.EXPRESS.START,
+      endColor: DESIGN_STAGE_COLOR.EXPRESS.END,
     },
     {
       icon: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*pX3DR5MaxE8AAAAAAAAAAAAADgCCAQ/original',
@@ -183,8 +192,8 @@ const DesignGuide: React.FC = () => {
       title: locale.confirm_title,
       desc: locale.confirm_desc,
       action: locale.confirm_action,
-      startColor: '#6c37e8',
-      endColor: '#ba2cb8',
+      startColor: DESIGN_STAGE_COLOR.CONFIRM.START,
+      endColor: DESIGN_STAGE_COLOR.CONFIRM.END,
     },
     {
       icon: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*jVNbRLytvWMAAAAAAAAAAAAADgCCAQ/original',
@@ -192,8 +201,8 @@ const DesignGuide: React.FC = () => {
       title: locale.feedback_title,
       desc: locale.feedback_desc,
       action: locale.feedback_action,
-      startColor: '#f7c348',
-      endColor: '#f75972',
+      startColor: DESIGN_STAGE_COLOR.FEEDBACK.START,
+      endColor: DESIGN_STAGE_COLOR.FEEDBACK.END,
     },
   ];
 
@@ -218,7 +227,7 @@ const DesignGuide: React.FC = () => {
       [120, 157],
     ];
 
-    const triggerPoints = [400, 800, 1400, 1900].map((i) => i + window.innerHeight);
+    const triggerPoints = [600, 1200, 1600, 2100].map((i) => i + window.innerHeight);
 
     let currentSegment = -1;
     let hasPlayedFirstSegment = false;
@@ -259,57 +268,61 @@ const DesignGuide: React.FC = () => {
   }, []);
 
   return (
-    <Container className={styles.guide}>
-      <div className={styles.chain}>
-        {items.map((item, index) => {
-          const titleParts = item.title.split(item.label);
+    <Container className={styles.container} title={locale.title} desc={locale.desc}>
+      <div className={styles.content}>
+        <div className={styles.chain}>
+          {items.map((item, index) => {
+            const titleParts = item.title.split(item.label);
 
-          return (
-            <div className={styles.chain_item} key={item.label}>
-              <div>
+            return (
+              <div className={styles.chain_item} key={item.label}>
                 <div>
-                  <img alt="icon" src={item.icon} />
+                  <div>
+                    <img alt="icon" src={item.icon} />
+                  </div>
+                  <div
+                    className={styles.chain_item_line}
+                    style={
+                      index === items.length - 1
+                        ? {}
+                        : {
+                            backgroundImage: `linear-gradient(180deg, ${item.startColor}00 0%, ${item.startColor} 25%, ${item.endColor} 75%, ${item.endColor}00 100%)`,
+                          }
+                    }
+                  />
                 </div>
-                <div
-                  className={styles.chain_item_line}
-                  style={
-                    index === items.length - 1
-                      ? {}
-                      : {
-                          backgroundImage: `linear-gradient(180deg, ${item.startColor}00 0%, ${item.startColor} 25%, ${item.endColor} 75%, ${item.endColor}00 100%)`,
-                        }
-                  }
-                />
-              </div>
-              <div className={styles.chain_item_content}>
-                <div className={styles.chain_item_label}>
-                  <span style={{ paddingInlineEnd: 10 }}>{index + 1}.</span>
-                  {item.label}
-                </div>
-                <div className={styles.chain_item_title}>
-                  {titleParts[0]}
-                  <span
-                    style={{
-                      background: `linear-gradient(127deg, ${item.startColor} 23%, ${item.endColor} 100%)`,
-                      WebkitBackgroundClip: 'text',
-                      color: 'transparent',
-                    }}
-                  >
+                <div className={styles.chain_item_content}>
+                  <div className={styles.chain_item_label}>
+                    <span style={{ paddingInlineEnd: 10 }}>{index + 1}.</span>
                     {item.label}
-                  </span>
-                  {titleParts[1]}
+                  </div>
+                  <div className={styles.chain_item_title}>
+                    <span>{titleParts[0]}</span>
+                    <span
+                      style={{
+                        background: `linear-gradient(127deg, ${item.startColor} 23%, ${item.endColor} 100%)`,
+                        WebkitBackgroundClip: 'text',
+                        color: 'transparent',
+                      }}
+                    >
+                      {item.label}
+                    </span>
+                    <span style={{ maxWidth: '100%', display: 'inline-block' }}>
+                      {titleParts[1]}
+                    </span>
+                  </div>
+                  <div className={styles.chain_item_desc}>{item.desc}</div>
+                  <Button className={styles.chain_item_action} type="text" size="large">
+                    {item.action}
+                  </Button>
                 </div>
-                <div className={styles.chain_item_desc}>{item.desc}</div>
-                <Button className={styles.chain_item_action} type="text" size="large">
-                  {item.action}
-                </Button>
               </div>
-            </div>
-          );
-        })}
-      </div>
-      <div className={styles.lottie}>
-        <div id={`guide-chain-${id}`} />
+            );
+          })}
+        </div>
+        <div className={styles.lottie}>
+          <div id={`guide-chain-${id}`} />
+        </div>
       </div>
     </Container>
   );

@@ -20,7 +20,7 @@ interface NewToken {
   anchorTop: number;
   indexRadius: number;
   pcMaxWidth: number;
-  pcContainerXMargin: number;
+  pcContainerMargin: number;
 }
 
 // 通过给 antd-style 扩展 CustomToken 对象类型定义，可以为 useTheme 中增加相应的 token 对象
@@ -51,7 +51,7 @@ const SiteThemeProvider: React.FC<ThemeProviderProps<any>> = ({ children, theme,
         bannerHeight,
         indexRadius,
         pcMaxWidth,
-        pcContainerXMargin: token.marginSM * 10,
+        pcContainerMargin: token.marginSM * 10,
         menuItemBorder: 2,
         mobileMaxWidth: 767.99,
         siteMarkdownCodeBg: token.colorFillTertiary,
