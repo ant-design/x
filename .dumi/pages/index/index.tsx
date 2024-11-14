@@ -6,7 +6,7 @@ import DesignBanner from './components/DesignBanner';
 import DesignFramework from './components/DesignFramework';
 import DesignGuide from './components/DesignGuide';
 import MainBanner from './components/MainBanner';
-import SceneBanner from './components/SceneBanner';
+import SceneIntroduction from './components/SceneIntroduction';
 
 const useStyle = createStyles(({ token, css }) => {
   return {
@@ -45,7 +45,7 @@ const Homepage: React.FC = () => {
         <DesignGuide />
       </section>
       <section className={styles.introduction}>
-        <SceneBanner />
+        <SceneIntroduction />
         <CompIntroduction />
       </section>
       <section className={styles.design}>

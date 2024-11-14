@@ -3,8 +3,11 @@ import { createStyles } from 'antd-style';
 import classnames from 'classnames';
 import React from 'react';
 
-import useLocale from '../../../hooks/useLocale';
-import Container from '../common/Container';
+import useLocale from '../../../../hooks/useLocale';
+import Container from '../../common/Container';
+import AssistantScene from './Assistant';
+import Independent from './Independent';
+import NestScene from './Nest';
 
 const locales = {
   cn: {
@@ -48,28 +51,29 @@ const useStyle = createStyles(({ token, css }) => {
     `,
     content: css`
       display: flex;
+      justify-content: space-between;
+      gap: ${token.paddingXL}px;
       width: 100%;
-      margin-top: ${token.margin}px;
+      margin-top: ${token.pcContainerMargin / 2}px;
     `,
     tab: css`
-      min-width: 280px;
+      width: 280px;
       display: flex;
       flex-direction: column;
       gap: ${token.margin}px;
     `,
     tab_content: css`
-      position: relative;
-      width: 100%;
+      width: 886px;
       height: 600px;
-      border-radius: 28px;
-      overflow: hidden;
+      box-sizing: border-box;
+      background-image: url(https://mdn.alipayobjects.com/huamei_k0vkmw/afts/img/A*GpgKSLKfXhYAAAAAAAAAAAAADsR-AQ/original);
+      background-repeat: no-repeat;
     `,
     item: css`
       position: relative;
       border-radius: 20px;
       height: 86px;
       padding: ${token.padding}px;
-      overflow: hidden;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
@@ -126,28 +130,34 @@ const SceneBanner: React.FC = () => {
       key: 'independent',
       title: locale.independent_title,
       desc: locale.independent_desc,
+      content: <Independent />,
     },
     {
       key: 'assistant',
       title: locale.assistant_title,
       desc: locale.assistant_desc,
+      content: <AssistantScene />,
     },
     {
       key: 'nest',
       title: locale.nest_title,
       desc: locale.nest_desc,
+      content: <NestScene />,
     },
     {
       key: 'app',
       title: locale.app_title,
       desc: locale.app_desc,
       disabled: true,
+      content: null,
     },
   ];
 
   const [active, setActive] = React.useState<string>(tabItems[0].key);
 
   const genHandleActive = (key: string) => () => setActive(key);
+
+  const activeContent = tabItems.find((item) => item.key === active)?.content;
 
   return (
     <Container className={styles.container} title={locale.title} desc={locale.desc}>
@@ -170,7 +180,7 @@ const SceneBanner: React.FC = () => {
             </Button>
           ))}
         </div>
-        <div className={styles.tab_content} />
+        {!!activeContent && <div className={styles.tab_content}>{activeContent}</div>}
       </div>
     </Container>
   );

@@ -2,6 +2,7 @@ import { createStyles } from 'antd-style';
 import React from 'react';
 
 import Container, { type ContainerProps } from './Container';
+import CustomizationProvider from './CustomizationProvider';
 
 const useStyle = createStyles(({ token, css }) => {
   const introRadius = 24;
@@ -123,7 +124,11 @@ const Introduction: React.FC<IntroductionProps> = (props) => {
       >
         {props.items.map((item) => (
           <div className={styles.item} key={`${item.title}`}>
-            {item.header && <div className={styles.item_header}>{item.header}</div>}
+            {item.header && (
+              <div className={styles.item_header}>
+                <CustomizationProvider>{item.header}</CustomizationProvider>
+              </div>
+            )}
             <div className={styles.item_content}>
               {item.icon && <img className={styles.item_icon} src={item.icon} alt={item.icon} />}
               <div>

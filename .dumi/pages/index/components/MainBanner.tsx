@@ -72,7 +72,7 @@ const useStyle = createStyles(({ token, css }) => {
     `,
     name: css`
       font-size: 80px !important;
-      line-height: 1.2;
+      line-height: 1.3;
       color: ${token.colorText};
       font-weight: bold;
 
