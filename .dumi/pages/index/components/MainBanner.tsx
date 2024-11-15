@@ -13,13 +13,13 @@ import type { SiteContextProps } from './SiteContext';
 const locales = {
   cn: {
     slogan: 'AI 体验新秩序',
-    desc: 'Ant Design 团队匠心星现 RICH 设计范式 , 打造卓越 AI 界面解决方案 , 引领智能新体验',
+    desc: 'Ant Design 团队匠心呈现 RICH 设计范式，打造卓越 AI 界面解决方案，引领智能新体验。',
     start: '开始使用',
     design: '设计语言',
   },
   en: {
     slogan: 'New AI Experience',
-    desc: 'Crafted by the Ant Design team, RICH Design Paradigm introduces an exceptional AI interface solution, setting a new standard for intelligent user experiences',
+    desc: 'The Ant Design team presents the RICH paradigm, crafting superior AI interface solutions and pioneering intelligent experiences.',
     start: 'Get Started',
     design: 'Get Design',
   },

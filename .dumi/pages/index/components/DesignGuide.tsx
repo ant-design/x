@@ -12,7 +12,7 @@ const comma = '\u00A0,\u00A0\u00A0\u00A0';
 const locales = {
   cn: {
     title: 'AI 界面解决方案',
-    desc: '基于 RICH , 延续热悉的 Ant Design 设计语言 , 全新 AGI 混合界面 (Hybrid-UI) 解决方案 , 完美融合 GUI 和自然会话交互 。 从唤醒到表达 , 从过程到反馈 , 合适的组件恰当的呈现在所有的人机互动过程中',
+    desc: '基于RICH，延续熟悉的 Ant Design 设计语言，全新 AGI 混合界面（Hybrid-UI）解决方案，完美融合 GUI 和自然会话交互。从唤醒到表达，从过程到反馈，合适的组件恰当的呈现在所有的人机互动过程中。',
 
     awaken: '唤醒',
     awaken_title: `轻松唤醒${comma}即刻吸引`,
@@ -36,7 +36,7 @@ const locales = {
   },
   en: {
     title: 'AI Interface Solution',
-    desc: 'Based on RICH, this solution extends the familiar Ant Design language to present an innovative AGI Hybrid-UI interface solution. It seamlessly merges GUI and natural conversational interaction, delivering the right components at the right moments throughout all stages of human-machine interaction—from initiation to expression, process to feedback',
+    desc: 'Building on the RICH paradigm and Ant Design language, the AGI Hybrid-UI solution blends GUI with natural conversation, presenting optimal components at each stage of human-computer interaction.',
 
     awaken: 'Awaken',
     awaken_title: `Effortlessly Awaken${comma}Instantly Engage`,

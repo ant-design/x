@@ -8,11 +8,11 @@ import Container from '../common/Container';
 const locales = {
   cn: {
     title: 'AI 设计范式 - RICH',
-    desc: '我们致力于构建 All 设计理论 , 并在蚂蚁内部的海量 AI 产品中实践 、迭代 。在此过程中 , RICH 设计范式应运而生: 角色 (Role) 、意图 (Intention) 、会话 (Conversation) 和混合界面 (Hybrid UI) ',
+    desc: '我们致力于构建 AI 设计理论，并在蚂蚁内部海量 AI 产品中实践、迭代。在此过程中，RICH 设计范式应运而生：角色（Role）、意图（Intention）、会话（Conversation）和混合界面（Hybrid UI） ',
   },
   en: {
     title: 'AI Design Paradigm - RICH',
-    desc: 'We are committed to building a comprehensive design theory, tested and iterated within Ant Group’s extensive AI products. Through this process, the RICH design paradigm has emerged: Role, Intention, Conversation, and Hybrid UI.',
+    desc: "We focus on developing AI design theory, iterating it across Ant Group's AI products, leading to the RICH design paradigm: Role, Intention, Conversation, and Hybrid UI.",
   },
 };
 
