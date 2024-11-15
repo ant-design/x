@@ -42,6 +42,7 @@ const useStyle = createStyles(({ token, css }) => {
       width: 100%;
       height: 110vh;
       position: absolute;
+      filter: blur(50px);
     `,
     container: css`
       height: 100%;
@@ -55,8 +56,6 @@ const useStyle = createStyles(({ token, css }) => {
       inset-inline-start: 0;
       transform: translateY(-50%);
       z-index: 1;
-
-
     `,
     lottie: css`
       position: absolute;
@@ -169,7 +168,7 @@ const MainBanner: React.FC = () => {
       rendererSettings: {
         preserveAspectRatio: 'xMidYMid slice',
       },
-      path: 'https://mdn.alipayobjects.com/huamei_k0vkmw/afts/file/A*Zd4ZQKnIfi4AAAAAAAAAAAAADsR-AQ',
+      path: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*3QcuQpaOguQAAAAAAAAAAAAADgCCAQ',
     });
 
     let isReverse = false;
@@ -203,7 +202,7 @@ const MainBanner: React.FC = () => {
       rendererSettings: {
         preserveAspectRatio: 'xMidYMid meet',
       },
-      path: 'https://mdn.alipayobjects.com/huamei_k0vkmw/afts/file/A*9a6-RaC0zzYAAAAAAAAAAAAADsR-AQ',
+      path: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*vhF2TLUKM5YAAAAAAAAAAAAADgCCAQ',
     });
 
     let reverseFrameInterval: NodeJS.Timeout;
