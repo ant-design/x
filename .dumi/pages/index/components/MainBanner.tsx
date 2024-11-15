@@ -196,7 +196,7 @@ const MainBanner: React.FC = () => {
       isReverse = !isReverse;
     }
 
-    bgAnimation.addEventListener('complete', playAnimation);
+    bgAnimation.addEventListener('data_ready', playAnimation);
 
     playAnimation();
 
@@ -210,7 +210,7 @@ const MainBanner: React.FC = () => {
 
     let reverseFrameInterval: NodeJS.Timeout;
 
-    ipAnimation.addEventListener('complete', () => {
+    ipAnimation.addEventListener('data_ready', () => {
       let currentFrame = ipAnimation.totalFrames;
       const reverseFrames = 30;
 

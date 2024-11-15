@@ -280,7 +280,7 @@ const DesignGuide: React.FC = () => {
               <div className={styles.chain_item} key={item.label}>
                 <div>
                   <div>
-                    <img alt="icon" src={item.icon} />
+                    <img alt="icon" src={item.icon} loading="lazy" />
                   </div>
                   <div
                     className={styles.chain_item_line}

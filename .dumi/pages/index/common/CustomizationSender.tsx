@@ -13,6 +13,7 @@ const CustomizationSender: React.FC<SenderProps> = (props) => {
             icon={
               <img
                 alt="send"
+                loading="lazy"
                 src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*4e5sTY9lU3sAAAAAAAAAAAAADgCCAQ/original"
               />
             }
