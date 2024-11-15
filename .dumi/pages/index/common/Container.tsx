@@ -8,6 +8,7 @@ const useStyle = createStyles(({ token, css }) => {
       width: 100%;
       margin: 0 auto;
       max-width: ${token.pcMaxWidth - token.pcContainerMargin * 2}px;
+      font-family: AlibabaPuHuiTi, ${token.fontFamily}, sans-serif;
 
       @media only screen and (max-width: ${token.pcMaxWidth}px) {
         max-width: calc(100vw - ${token.pcContainerMargin * 2}px);

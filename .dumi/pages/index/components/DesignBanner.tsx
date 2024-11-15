@@ -16,20 +16,11 @@ const locales = {
   },
 };
 
-const useStyle = createStyles(({ token, css }) => {
+const useStyle = createStyles(({ css }) => {
   return {
     container: css`
       height: 500px;
       overflow: hidden;
-      font-family: AlibabaPuHuiTiB, ${token.fontFamily}, sans-serif;
-    `,
-    title: css`
-      font-size: 48px;
-      color: ${token.colorText};
-    `,
-    desc: css`
-      color: ${token.colorTextSecondary};
-      max-width: 880px !important;
     `,
     lottie: css`
       width: 100%;

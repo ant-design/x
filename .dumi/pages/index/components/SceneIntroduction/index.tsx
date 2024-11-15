@@ -47,7 +47,6 @@ const locales = {
 const useStyle = createStyles(({ token, css }) => {
   return {
     container: css`
-      font-family: AlibabaPuHuiTiB, ${token.fontFamily}, sans-serif;
     `,
     content: css`
       display: flex;

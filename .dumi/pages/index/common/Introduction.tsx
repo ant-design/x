@@ -9,7 +9,6 @@ const useStyle = createStyles(({ token, css }) => {
   return {
     container: css`
       overflow: hidden;
-      font-family: AlibabaPuHuiTiB, ${token.fontFamily}, sans-serif;
     `,
     content: css`
       display: grid;

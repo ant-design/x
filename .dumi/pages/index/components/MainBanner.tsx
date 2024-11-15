@@ -36,7 +36,7 @@ const useStyle = createStyles(({ token, css }) => {
       justify-content: center;
       align-items: center;
       position: relative;
-      font-family: AlibabaPuHuiTiB, ${token.fontFamily}, sans-serif;
+      font-family: AlibabaPuHuiTi, ${token.fontFamily}, sans-serif;
     `,
     background: css`
       width: 100%;
@@ -55,6 +55,8 @@ const useStyle = createStyles(({ token, css }) => {
       inset-inline-start: 0;
       transform: translateY(-50%);
       z-index: 1;
+
+
     `,
     lottie: css`
       position: absolute;
@@ -87,6 +89,7 @@ const useStyle = createStyles(({ token, css }) => {
       color: ${token.colorText};
       opacity: 0.65;
       margin: ${token.marginLG}px 0 ${token.marginLG * 2}px 0;
+      
     `,
     iAlphabet: css`
       position: relative;

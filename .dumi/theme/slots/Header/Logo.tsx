@@ -8,7 +8,7 @@ import * as utils from '../../utils';
 import { SharedProps } from './interface';
 
 const useStyle = createStyles(({ token, css }) => {
-  const { headerHeight, colorTextHeading, fontFamily, mobileMaxWidth } = token;
+  const { headerHeight, colorTextHeading, mobileMaxWidth } = token;
 
   return {
     logo: css`
@@ -17,9 +17,9 @@ const useStyle = createStyles(({ token, css }) => {
       padding-inline-start: ${token.paddingXL}px;
       overflow: hidden;
       color: ${colorTextHeading};
-      font-weight: bold;
+      font-weight: normal;
       font-size: 24px;
-      font-family: PingFangSC-Semibold, ${fontFamily}, sans-serif;
+      font-family: AlibabaPuHuiTi, ${token.fontFamily}, sans-serif;
       letter-spacing: -0.18px;
       white-space: nowrap;
       text-decoration: none;

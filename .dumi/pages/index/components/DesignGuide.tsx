@@ -71,7 +71,6 @@ const useStyle = createStyles(({ token, css }) => {
     content: css`
       display: flex;
       justify-content: space-between;
-      font-family: AlibabaPuHuiTiB, ${token.fontFamily}, sans-serif;
       padding-top: ${token.pcContainerMargin}px;
     `,
     chain: css`
