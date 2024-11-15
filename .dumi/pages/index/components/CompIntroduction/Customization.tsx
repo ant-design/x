@@ -5,9 +5,8 @@ import React from 'react';
 import { DeleteOutlined, EditOutlined, EnterOutlined } from '@ant-design/icons';
 import type { BubbleProps, ConversationsProps, PromptsProps, WelcomeProps } from '@ant-design/x';
 import useLocale from '../../../../hooks/useLocale';
-import { useCustomizationBgStyle } from '../../common/CustomizationProvider';
-import { CustomizationSender } from '../../common/CustomizationSender';
-import { LOCALES } from '../../constants/locales';
+import { LOCALES, useCustomizationBgStyle } from '../../common/CustomizationProvider';
+import CustomizationSender from '../../common/CustomizationSender';
 
 const useStyle = createStyles(({ token, css }) => {
   return {

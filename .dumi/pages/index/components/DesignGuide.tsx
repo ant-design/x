@@ -5,7 +5,7 @@ import React from 'react';
 import useLocale from '../../../hooks/useLocale';
 
 import Container from '../common/Container';
-import { DESIGN_STAGE_COLOR } from '../constants/color';
+import { DESIGN_STAGE_COLOR } from '../common/CustomizationProvider';
 
 const comma = '\u00A0,\u00A0\u00A0\u00A0';
 

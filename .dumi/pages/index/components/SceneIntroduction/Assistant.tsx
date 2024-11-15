@@ -2,12 +2,14 @@ import { Bubble, Prompts, Welcome, useXAgent, useXChat } from '@ant-design/x';
 import { createStyles } from 'antd-style';
 import React from 'react';
 import useLocale from '../../../../hooks/useLocale';
-import CustomizationProvider, { useCustomizationBgStyle } from '../../common/CustomizationProvider';
-import { CustomizationSender } from '../../common/CustomizationSender';
+import CustomizationProvider, {
+  useCustomizationBgStyle,
+  LOCALES,
+} from '../../common/CustomizationProvider';
+import CustomizationSender from '../../common/CustomizationSender';
 
 import { BubbleDataType } from '@ant-design/x/es/bubble/BubbleList';
 import { Flex, type GetProp, Skeleton } from 'antd';
-import { LOCALES } from '../../constants/locales';
 
 const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000));
 

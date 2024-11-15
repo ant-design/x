@@ -2,6 +2,8 @@ import React from 'react';
 
 const getSnapshot = () => window.scrollY;
 
+const getServerSnapshot = () => 0;
+
 const useScrollY = () => {
   const [scrollYDirection, setScrollYDirection] = React.useState<'down' | 'up'>();
 
@@ -27,7 +29,7 @@ const useScrollY = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollY = React.useSyncExternalStore<number>(subscribe, getSnapshot);
+  const scrollY = React.useSyncExternalStore<number>(subscribe, getSnapshot, getServerSnapshot);
 
   return {
     scrollY,

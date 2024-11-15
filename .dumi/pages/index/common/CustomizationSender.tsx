@@ -2,7 +2,7 @@ import { Sender, type SenderProps } from '@ant-design/x';
 import { Button } from 'antd';
 import React from 'react';
 
-export const CustomizationSender: React.FC<SenderProps> = (props) => {
+const CustomizationSender: React.FC<SenderProps> = (props) => {
   return (
     <Sender
       actions={() => {
@@ -23,3 +23,5 @@ export const CustomizationSender: React.FC<SenderProps> = (props) => {
     />
   );
 };
+
+export default CustomizationSender;

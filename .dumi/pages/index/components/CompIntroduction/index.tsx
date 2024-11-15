@@ -3,8 +3,8 @@ import { createStyles } from 'antd-style';
 import React from 'react';
 
 import useLocale from '../../../../hooks/useLocale';
+import { DESIGN_STAGE_COLOR } from '../../common/CustomizationProvider';
 import Introduction, { type IntroductionItem } from '../../common/Introduction';
-import { DESIGN_STAGE_COLOR } from '../../constants/color';
 import SiteContext from '../SiteContext';
 import {
   CustomConversations,

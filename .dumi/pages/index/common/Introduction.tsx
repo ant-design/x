@@ -108,7 +108,7 @@ export interface IntroductionItem {
 
 interface IntroductionProps extends ContainerProps {
   column?: number;
-  items: IntroductionItem[];
+  items?: IntroductionItem[];
 }
 
 const Introduction: React.FC<IntroductionProps> = (props) => {
@@ -119,10 +119,10 @@ const Introduction: React.FC<IntroductionProps> = (props) => {
       <div
         className={styles.content}
         style={{
-          gridTemplateColumns: `repeat(${props.column || props.items.length}, 1fr)`,
+          gridTemplateColumns: `repeat(${props.column || props.items?.length}, 1fr)`,
         }}
       >
-        {props.items.map((item) => (
+        {props.items?.map((item) => (
           <div className={styles.item} key={`${item.title}`}>
             {item.header && (
               <div className={styles.item_header}>
