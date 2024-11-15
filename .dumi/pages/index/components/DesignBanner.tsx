@@ -1,8 +1,8 @@
 import { createStyles } from 'antd-style';
-import lottie from 'lottie-web';
 import React from 'react';
 
 import useLocale from '../../../hooks/useLocale';
+import useLottie from '../../../hooks/useLottie';
 import Container from '../common/Container';
 
 const locales = {
@@ -35,31 +35,16 @@ const DesignBanner: React.FC = () => {
 
   const { styles } = useStyle();
 
-  const id = React.useId();
-
-  React.useEffect(() => {
-    const animation = lottie.loadAnimation({
-      container: document.getElementById(`design-guide-${id}`) as Element,
-      renderer: 'svg',
-      loop: false,
-      autoplay: false,
-      path: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*6J33TJUtOVsAAAAAAAAAAAAADgCCAQ',
-    });
-
-    window.addEventListener('scroll', () => {
-      if (animation.isLoaded && window.scrollY > 600) {
-        animation.play();
-      }
-    });
-
-    return () => {
-      animation.destroy();
-    };
-  }, []);
+  const [lottieRef] = useLottie({
+    renderer: 'svg',
+    loop: false,
+    autoplay: true,
+    path: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*6J33TJUtOVsAAAAAAAAAAAAADgCCAQ',
+  });
 
   return (
     <Container className={styles.container} title={locale.title} desc={locale.desc}>
-      <div id={`design-guide-${id}`} className={styles.lottie} />
+      <div ref={lottieRef} className={styles.lottie} />
     </Container>
   );
 };

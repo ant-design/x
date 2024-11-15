@@ -1,10 +1,10 @@
 import { createStyles } from 'antd-style';
 import classnames from 'classnames';
 import { Link, useLocation } from 'dumi';
-import lottie from 'lottie-web';
 import React from 'react';
 
 import useLocale from '../../../hooks/useLocale';
+import useLottie from '../../../hooks/useLottie';
 import { getLocalizedPathname, isZhCN } from '../../../theme/utils';
 import Container from '../common/Container';
 import SiteContext from './SiteContext';
@@ -153,84 +153,87 @@ const MainBanner: React.FC = () => {
 
   const { pathname, search } = useLocation();
 
-  const { direction } = React.useContext<SiteContextProps>(SiteContext);
-
-  const id = React.useId();
+  const { direction, isMobile } = React.useContext<SiteContextProps>(SiteContext);
 
   const { styles } = useStyle();
 
+  const [bgLottieRef, bgAnimation] = useLottie({
+    renderer: 'canvas',
+    loop: false,
+    autoplay: false,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+    path: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*3QcuQpaOguQAAAAAAAAAAAAADgCCAQ',
+  });
+
+  const [ipLottieRef, ipAnimation] = useLottie({
+    renderer: 'svg',
+    loop: false,
+    autoplay: true,
+    disabled: isMobile,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid meet',
+    },
+    path: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*vhF2TLUKM5YAAAAAAAAAAAAADgCCAQ',
+  });
+
   React.useEffect(() => {
-    const animation = lottie.loadAnimation({
-      container: document.getElementById(`main-banner-bg-${id}`) as Element,
-      renderer: 'canvas',
-      loop: false,
-      autoplay: false,
-      rendererSettings: {
-        preserveAspectRatio: 'xMidYMid slice',
-      },
-      path: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*3QcuQpaOguQAAAAAAAAAAAAADgCCAQ',
-    });
+    if (!bgAnimation) return;
 
     let isReverse = false;
 
     function playAnimation() {
+      if (!bgAnimation) return;
+
       if (isReverse) {
-        animation.setDirection(-1);
-        animation.goToAndPlay(animation.totalFrames - 1, true);
+        bgAnimation.setDirection(-1);
+        bgAnimation.goToAndPlay(bgAnimation.totalFrames - 1, true);
       } else {
-        animation.setDirection(1);
-        animation.goToAndPlay(0, true);
+        bgAnimation.setDirection(1);
+        bgAnimation.goToAndPlay(0, true);
       }
       isReverse = !isReverse;
     }
 
-    animation.addEventListener('complete', playAnimation);
+    bgAnimation.addEventListener('complete', playAnimation);
 
     playAnimation();
 
     return () => {
-      animation.destroy();
+      bgAnimation.destroy();
     };
-  }, []);
+  }, [!!bgAnimation]);
 
   React.useEffect(() => {
-    const animation = lottie.loadAnimation({
-      container: document.getElementById(`main-banner-ip-${id}`) as Element,
-      renderer: 'svg',
-      loop: false,
-      autoplay: true,
-      rendererSettings: {
-        preserveAspectRatio: 'xMidYMid meet',
-      },
-      path: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*vhF2TLUKM5YAAAAAAAAAAAAADgCCAQ',
-    });
+    if (!ipAnimation) return;
 
     let reverseFrameInterval: NodeJS.Timeout;
 
-    animation.addEventListener('complete', () => {
-      let currentFrame = animation.totalFrames;
+    ipAnimation.addEventListener('complete', () => {
+      let currentFrame = ipAnimation.totalFrames;
       const reverseFrames = 30;
 
       reverseFrameInterval = setInterval(() => {
         currentFrame--;
-        animation.goToAndStop(currentFrame, true);
+        ipAnimation.goToAndStop(currentFrame, true);
 
-        if (currentFrame <= animation.totalFrames - reverseFrames) {
+        if (currentFrame <= ipAnimation.totalFrames - reverseFrames) {
           clearInterval(reverseFrameInterval);
-          animation.play();
+          ipAnimation.play();
         }
       }, 1000 / 30);
     });
 
     return () => {
-      animation.destroy();
+      ipAnimation.destroy();
       window.clearInterval(reverseFrameInterval);
     };
-  }, []);
+  }, [!!ipAnimation]);
 
   return (
     <section className={styles.banner}>
-      <div id={`main-banner-bg-${id}`} className={styles.background} />
+      <div ref={bgLottieRef} className={styles.background} />
       <Container className={styles.container}>
         <div className={styles.title}>
           <h1 className={styles.name}>
@@ -257,7 +260,7 @@ const MainBanner: React.FC = () => {
           </div>
         </div>
         <div
-          id={`main-banner-ip-${id}`}
+          ref={ipLottieRef}
           className={classnames(styles.lottie, direction === 'rtl' && styles.lottie_rtl)}
         />
       </Container>

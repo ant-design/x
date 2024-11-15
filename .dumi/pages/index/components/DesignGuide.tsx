@@ -1,11 +1,12 @@
 import { Button } from 'antd';
 import { createStyles } from 'antd-style';
-import lottie from 'lottie-web';
 import React from 'react';
 import useLocale from '../../../hooks/useLocale';
 
+import useLottie from '../../../hooks/useLottie';
 import Container from '../common/Container';
 import { DESIGN_STAGE_COLOR } from '../common/CustomizationProvider';
+import SiteContext from './SiteContext';
 
 const comma = '\u00A0,\u00A0\u00A0\u00A0';
 
@@ -166,58 +167,21 @@ const DesignGuide: React.FC = () => {
   const [locale] = useLocale(locales);
   const { styles } = useStyle();
 
-  const items = [
-    {
-      icon: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*NBliSL6_YIsAAAAAAAAAAAAADgCCAQ/original',
-      label: locale.awaken,
-      title: locale.awaken_title,
-      desc: locale.awaken_desc,
-      action: locale.awaken_action,
-      startColor: DESIGN_STAGE_COLOR.AWAKE.START,
-      endColor: DESIGN_STAGE_COLOR.AWAKE.END,
-    },
-    {
-      icon: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*3XXESYNxPNkAAAAAAAAAAAAADgCCAQ/original',
-      label: locale.express,
-      title: locale.express_title,
-      desc: locale.express_desc,
-      action: locale.express_action,
-      startColor: DESIGN_STAGE_COLOR.EXPRESS.START,
-      endColor: DESIGN_STAGE_COLOR.EXPRESS.END,
-    },
-    {
-      icon: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*pX3DR5MaxE8AAAAAAAAAAAAADgCCAQ/original',
-      label: locale.confirm,
-      title: locale.confirm_title,
-      desc: locale.confirm_desc,
-      action: locale.confirm_action,
-      startColor: DESIGN_STAGE_COLOR.CONFIRM.START,
-      endColor: DESIGN_STAGE_COLOR.CONFIRM.END,
-    },
-    {
-      icon: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*jVNbRLytvWMAAAAAAAAAAAAADgCCAQ/original',
-      label: locale.feedback,
-      title: locale.feedback_title,
-      desc: locale.feedback_desc,
-      action: locale.feedback_action,
-      startColor: DESIGN_STAGE_COLOR.FEEDBACK.START,
-      endColor: DESIGN_STAGE_COLOR.FEEDBACK.END,
-    },
-  ];
+  const { isMobile } = React.useContext(SiteContext);
 
-  const id = React.useId();
+  const [lottieRef, animation] = useLottie({
+    renderer: 'svg',
+    loop: false,
+    autoplay: false,
+    disabled: isMobile,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+    path: 'https://mdn.alipayobjects.com/huamei_k0vkmw/afts/file/A*OfRbQKvPpWcAAAAAAAAAAAAADsR-AQ',
+  });
 
   React.useEffect(() => {
-    const animation = lottie.loadAnimation({
-      container: document.getElementById(`guide-chain-${id}`) as Element,
-      renderer: 'svg',
-      loop: false,
-      autoplay: false,
-      rendererSettings: {
-        preserveAspectRatio: 'xMidYMid slice',
-      },
-      path: 'https://mdn.alipayobjects.com/huamei_k0vkmw/afts/file/A*OfRbQKvPpWcAAAAAAAAAAAAADsR-AQ',
-    });
+    if (!animation) return;
 
     const segments: [number, number][] = [
       [0, 20],
@@ -264,7 +228,46 @@ const DesignGuide: React.FC = () => {
     return () => {
       animation.destroy();
     };
-  }, []);
+  }, [animation]);
+
+  const items = [
+    {
+      icon: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*NBliSL6_YIsAAAAAAAAAAAAADgCCAQ/original',
+      label: locale.awaken,
+      title: locale.awaken_title,
+      desc: locale.awaken_desc,
+      action: locale.awaken_action,
+      startColor: DESIGN_STAGE_COLOR.AWAKE.START,
+      endColor: DESIGN_STAGE_COLOR.AWAKE.END,
+    },
+    {
+      icon: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*3XXESYNxPNkAAAAAAAAAAAAADgCCAQ/original',
+      label: locale.express,
+      title: locale.express_title,
+      desc: locale.express_desc,
+      action: locale.express_action,
+      startColor: DESIGN_STAGE_COLOR.EXPRESS.START,
+      endColor: DESIGN_STAGE_COLOR.EXPRESS.END,
+    },
+    {
+      icon: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*pX3DR5MaxE8AAAAAAAAAAAAADgCCAQ/original',
+      label: locale.confirm,
+      title: locale.confirm_title,
+      desc: locale.confirm_desc,
+      action: locale.confirm_action,
+      startColor: DESIGN_STAGE_COLOR.CONFIRM.START,
+      endColor: DESIGN_STAGE_COLOR.CONFIRM.END,
+    },
+    {
+      icon: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*jVNbRLytvWMAAAAAAAAAAAAADgCCAQ/original',
+      label: locale.feedback,
+      title: locale.feedback_title,
+      desc: locale.feedback_desc,
+      action: locale.feedback_action,
+      startColor: DESIGN_STAGE_COLOR.FEEDBACK.START,
+      endColor: DESIGN_STAGE_COLOR.FEEDBACK.END,
+    },
+  ];
 
   return (
     <Container className={styles.container} title={locale.title} desc={locale.desc}>
@@ -320,7 +323,7 @@ const DesignGuide: React.FC = () => {
           })}
         </div>
         <div className={styles.lottie}>
-          <div id={`guide-chain-${id}`} />
+          <div ref={lottieRef} />
         </div>
       </div>
     </Container>
