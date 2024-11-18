@@ -2,13 +2,11 @@ import { Bubble, Prompts, Welcome, useXAgent, useXChat } from '@ant-design/x';
 import { createStyles } from 'antd-style';
 import React from 'react';
 import useLocale from '../../../../hooks/useLocale';
-import CustomizationProvider, {
-  useCustomizationBgStyle,
-  LOCALES,
-} from '../../common/CustomizationProvider';
+import CustomizationProvider, { LOCALES } from '../../common/CustomizationProvider';
 import CustomizationSender from '../../common/CustomizationSender';
 
-import { Flex, type GetProp, Tag } from 'antd';
+import { BubbleDataType } from '@ant-design/x/es/bubble/BubbleList';
+import { type GetProp, Tag } from 'antd';
 
 const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000));
 
@@ -30,6 +28,7 @@ const roles: GetProp<typeof Bubble.List, 'roles'> = {
     styles: {
       content: {
         borderRadius: 16,
+        background: '#3877FF',
       },
     },
   },
@@ -45,16 +44,76 @@ const useStyle = createStyles(({ token, css }) => {
       flex-direction: column;
       gap: ${token.padding}px;
       height: 100%;
-      padding: ${token.paddingXL}px;
+      padding: ${token.paddingXL}px ${token.paddingLG * 2}px;
    `,
     bubble_list: css`
       flex: 1;
     `,
-    prompts: css`
+    placeholder_bubble: css`
+      .ant-welcome {
+        padding: 0;
+        margin-bottom: ${token.marginSM}px;
+      }
+
+      .ant-welcome-title {
+        font-size: 16px !important;
+        font-weight: 500 !important;
+        opacity: 0.9;
+      }
+
+      .ant-welcome-description {
+        font-size: 12px;
+        opacity: 0.65;
+      }
+
+      .ant-welcome-icon {
+        img {
+          transform: scale(1.2);
+          margin-inline-end: 10px;
+        }
+      }
+
+      .ant-bubble-content {
+        overflow: hidden;
+        background: linear-gradient(135deg, #ffffff26 14%, #ffffff0d 59%) !important;
+        width: 100%;
+        border-radius: 16px;
+        padding: 24px;
+      }
+
+      .ant-prompts-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
+
       .ant-tag {
         background: linear-gradient(45deg, #ffffff33 0%, #ffffff00 100%);
         border: 1px solid #ffffff4d;
         border-radius: 4px;
+        margin: 0;
+        width: 18px;
+        height: 18px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .ant-prompts {
+        padding: 0;
+      }
+
+      .ant-prompts-desc {
+        line-height: 2 !important;
+      }
+
+      .ant-prompts-item {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 16px;
+        border: none;
+        flex: 1;
+        height: 100%;
       }
     `,
   };
@@ -63,10 +122,6 @@ const useStyle = createStyles(({ token, css }) => {
 const IndependentScene: React.FC = () => {
   const { styles } = useStyle();
   const [locale] = useLocale(LOCALES);
-
-  const {
-    styles: { background },
-  } = useCustomizationBgStyle();
 
   const [content, setContent] = React.useState('');
 
@@ -91,43 +146,25 @@ const IndependentScene: React.FC = () => {
     requestFallback: 'Mock failed return. Please try again later.',
   });
 
-  const placeholderMessage = {
+  const placeholderMessage: BubbleDataType = {
     key: 'placeholder',
-    classNames: {
-      content: background,
-    },
-    styles: {
-      content: {
-        width: '100%',
-        borderRadius: 16,
-        padding: 24,
-      },
-    },
+    variant: 'borderless',
+    className: styles.placeholder_bubble,
     content: (
-      <Flex vertical gap={16}>
+      <div>
         <Welcome
           icon={
             <img
               src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*7iaeT54QpcQAAAAAAAAAAAAADgCCAQ/original"
               alt="Ant Design X"
-              style={{
-                transform: 'scale(1.2)',
-                marginInlineEnd: 10,
-              }}
             />
           }
-          title={<div style={{ fontSize: 16 }}>{locale.greeting}</div>}
+          title={locale.greeting}
           description={locale.description}
           variant="borderless"
-          styles={{
-            description: {
-              fontSize: 14,
-            },
-          }}
         />
         <Prompts
           title={locale.help_text}
-          className={styles.prompts}
           onItemClick={(item) => {
             onRequest(item.data.description as string);
           }}
@@ -135,15 +172,6 @@ const IndependentScene: React.FC = () => {
             subItem: {
               background: 'none',
               padding: '4px 0',
-            },
-            list: {
-              width: '100%',
-            },
-            item: {
-              background: 'rgba(255, 255, 255, 0.05)',
-              padding: 16,
-              border: 'none',
-              width: '50%',
             },
           }}
           items={[
@@ -153,39 +181,23 @@ const IndependentScene: React.FC = () => {
               children: [
                 {
                   key: '1-1',
-                  description: (
-                    <span>
-                      <Tag>1</Tag>
-                      {locale.question1}
-                    </span>
-                  ),
+                  icon: <Tag>1</Tag>,
+                  description: locale.question1,
                 },
                 {
                   key: '1-2',
-                  description: (
-                    <span>
-                      <Tag>2</Tag>
-                      {locale.question2}
-                    </span>
-                  ),
+                  icon: <Tag>2</Tag>,
+                  description: locale.question2,
                 },
                 {
                   key: '1-3',
-                  description: (
-                    <span>
-                      <Tag>3</Tag>
-                      {locale.question3}
-                    </span>
-                  ),
+                  icon: <Tag>3</Tag>,
+                  description: locale.question3,
                 },
                 {
                   key: '1-4',
-                  description: (
-                    <span>
-                      <Tag>4</Tag>
-                      {locale.question4}
-                    </span>
-                  ),
+                  icon: <Tag>4</Tag>,
+                  description: locale.question4,
                 },
               ],
             },
@@ -195,45 +207,29 @@ const IndependentScene: React.FC = () => {
               children: [
                 {
                   key: '2-1',
-                  description: (
-                    <span>
-                      <Tag>1</Tag>
-                      {locale.empathy}
-                    </span>
-                  ),
+                  icon: <Tag>1</Tag>,
+                  description: locale.empathy,
                 },
                 {
                   key: '2-2',
-                  description: (
-                    <span>
-                      <Tag>2</Tag>
-                      {locale.persona}
-                    </span>
-                  ),
+                  icon: <Tag>2</Tag>,
+                  description: locale.persona,
                 },
                 {
                   key: '2-3',
-                  description: (
-                    <span>
-                      <Tag>3</Tag>
-                      {locale.conversation}
-                    </span>
-                  ),
+                  icon: <Tag>3</Tag>,
+                  description: locale.conversation,
                 },
                 {
                   key: '2-4',
-                  description: (
-                    <span>
-                      <Tag>4</Tag>
-                      {locale.interface}
-                    </span>
-                  ),
+                  icon: <Tag>4</Tag>,
+                  description: locale.interface,
                 },
               ],
             },
           ]}
         />
-      </Flex>
+      </div>
     ),
   };
 

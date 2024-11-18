@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import { Link, useLocation } from 'dumi';
 import React from 'react';
 
+import { Button } from 'antd';
 import useLocale from '../../../hooks/useLocale';
 import useLottie from '../../../hooks/useLottie';
 import { getLocalizedPathname, isZhCN } from '../../../theme/utils';
@@ -31,7 +32,7 @@ const useStyle = createStyles(({ token, css }) => {
   return {
     banner: css`
       width: 100vw;
-      height: 100vh;
+      height: calc(100vh - 160px);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -40,9 +41,10 @@ const useStyle = createStyles(({ token, css }) => {
     `,
     background: css`
       width: 100%;
-      height: 110vh;
+      height: 100vh;
       position: absolute;
       filter: blur(50px);
+      background: linear-gradient(135deg, #ffffff26 14%, #ffffff0d 59%);
     `,
     container: css`
       height: 100%;
@@ -136,14 +138,53 @@ const useStyle = createStyles(({ token, css }) => {
       cursor: pointer;
       font-weight: 600;
       box-shadow: ${token.boxShadow};
+      position: relative;
     `,
     startBtn: css`
       background: linear-gradient(90deg, #c7deff 0%, #ffffffd9 76%);
       color: #14204c;
+      position: relative;
+
+      ::after {
+        content: '';
+        position: absolute;
+        border-radius: 40px;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.5);
+        opacity: 0;
+        z-index: -1;
+        transition: opacity 0.2s;
+      }
+
+      :hover::after {
+        opacity: 1;
+      }
     `,
     designBtn: css`
       background: #ffffff1a;
       backdrop-filter: blur(40px);
+
+      &::after {
+        content: '';
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        border-radius: inherit;
+
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        inset-inline-start: 0;
+        inset-inline-end: 0;
+
+        padding: ${token.lineWidth}px;
+        background: linear-gradient(180deg, #ffffff26 0%, #ffffff00 100%);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+      };
   `,
   };
 });
@@ -253,9 +294,9 @@ const MainBanner: React.FC = () => {
               </button>
             </Link>
             <Link to={getLocalizedPathname('/docs/spec/introduce', isZhCN(pathname), search)}>
-              <button type="button" className={classnames(styles.btn, styles.designBtn)}>
+              <Button type="text" className={classnames(styles.btn, styles.designBtn)}>
                 {locale.design}
-              </button>
+              </Button>
             </Link>
           </div>
         </div>

@@ -1,6 +1,5 @@
 import { XProvider } from '@ant-design/x';
 import { createStyles } from 'antd-style';
-import classnames from 'classnames';
 import React from 'react';
 
 export const useCustomizationBgStyle = createStyles(({ token, css }) => {
@@ -8,6 +7,7 @@ export const useCustomizationBgStyle = createStyles(({ token, css }) => {
     background: css`
       background: linear-gradient(135deg, #ffffff26 14%, #ffffff0d 59%) !important;
       overflow: hidden;
+      position: auto;
 
       &::after {
         content: '';
@@ -92,8 +92,8 @@ export const DESIGN_STAGE_COLOR = {
     END: '#108c44',
   },
   CONFIRM: {
-    START: '#48d0b6',
-    END: '#acf75b',
+    START: '#ba2cb8',
+    END: '#6c37e8',
   },
   FEEDBACK: {
     START: '#f7c348',
@@ -116,6 +116,7 @@ const useStyle = createStyles(({ token, css }) => {
       position: relative;
       box-sizing: border-box;
       border-radius: ${borderRadius}px;
+      padding: 18px;
 
       .ant-welcome-title {
         font-size: ${token.fontSize}px;
@@ -147,6 +148,13 @@ const useStyle = createStyles(({ token, css }) => {
     `,
     sender: css`
       border-radius: ${borderRadius * 2}px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+
+      .ant-sender-content {
+        padding: 0px ${token.paddingSM}px;
+      }
     `,
     conversations: css`
       padding: ${token.padding}px;
@@ -163,26 +171,23 @@ const useStyle = createStyles(({ token, css }) => {
 
 const CustomizationProvider: React.FC<{ children: React.ReactNode }> = (props) => {
   const { styles } = useStyle();
-  const {
-    styles: { background },
-  } = useCustomizationBgStyle();
 
   return (
     <XProvider
       conversations={{
-        className: classnames(styles.conversations, background),
+        className: styles.conversations,
       }}
       sender={{
-        className: classnames(styles.sender, background),
+        className: styles.sender,
       }}
       prompts={{
-        className: classnames(styles.prompts),
+        className: styles.prompts,
       }}
       welcome={{
-        className: classnames(styles.welcome),
+        className: styles.welcome,
       }}
       suggestion={{
-        className: classnames(styles.suggestion),
+        className: styles.suggestion,
       }}
     >
       {props.children}

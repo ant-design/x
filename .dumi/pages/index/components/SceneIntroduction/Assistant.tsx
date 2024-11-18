@@ -2,10 +2,7 @@ import { Bubble, Prompts, Welcome, useXAgent, useXChat } from '@ant-design/x';
 import { createStyles } from 'antd-style';
 import React from 'react';
 import useLocale from '../../../../hooks/useLocale';
-import CustomizationProvider, {
-  useCustomizationBgStyle,
-  LOCALES,
-} from '../../common/CustomizationProvider';
+import CustomizationProvider, { LOCALES } from '../../common/CustomizationProvider';
 import CustomizationSender from '../../common/CustomizationSender';
 
 import { BubbleDataType } from '@ant-design/x/es/bubble/BubbleList';
@@ -31,6 +28,7 @@ const roles: GetProp<typeof Bubble.List, 'roles'> = {
     styles: {
       content: {
         borderRadius: 16,
+        background: '#3877FF',
       },
     },
   },
@@ -42,10 +40,10 @@ const useStyle = createStyles(({ token, css }) => {
   return {
     container: css`
       display: flex;
-      padding: ${token.paddingXL}px ${token.padding}px;
+      padding: ${token.paddingXL}px ${token.paddingMD}px;
       box-sizing: border-box;
       flex-direction: column;
-      gap: ${token.padding}px;
+      gap: ${token.paddingSM}px;
       height: 100%;
       width: 350px;
       background: #0000001a;
@@ -60,11 +58,52 @@ const useStyle = createStyles(({ token, css }) => {
     bubble_list: css`
       flex: 1;
     `,
-    prompts: css`
-      .ant-tag {
-        background: linear-gradient(45deg, #ffffff33 0%, #ffffff00 100%);
-        border: 1px solid #ffffff4d;
-        border-radius: 4px;
+    placeholder_bubble: css`
+      .ant-welcome {
+        padding: 0;
+      }
+
+      .ant-welcome-title {
+        font-size: 16px !important;
+        font-weight: 500 !important;
+        opacity: 0.9;
+      }
+
+      .ant-welcome-description {
+        font-size: 12px;
+        opacity: 0.65;
+      }
+
+      .ant-welcome-icon {
+        img {
+          transform: scale(1.2);
+          margin-inline-end: 10px;
+        }
+      }
+
+      .ant-bubble-content {
+        overflow: hidden;
+        background: linear-gradient(135deg, #ffffff26 14%, #ffffff0d 59%) !important;
+        width: 100%;
+        border-radius: 16px;
+        padding: 24px;
+      }
+
+      .ant-prompts {
+        padding: 0;
+      }
+
+      .ant-prompts-item {
+        background: rgba(255, 255, 255, 0.05);
+        box-sizing: border-box;
+        padding: 8px 16px;
+        font-size: 12px;
+        height: 36px;
+        line-height: 36px;
+        border: none;
+        flex: 1;
+
+        
       }
     `,
   };
@@ -73,10 +112,6 @@ const useStyle = createStyles(({ token, css }) => {
 const AssistantScene: React.FC = () => {
   const { styles } = useStyle();
   const [locale] = useLocale(LOCALES);
-
-  const {
-    styles: { background },
-  } = useCustomizationBgStyle();
 
   const [content, setContent] = React.useState('');
 
@@ -104,48 +139,27 @@ const AssistantScene: React.FC = () => {
   const placeholderMessage: BubbleDataType = {
     key: 'placeholder',
     variant: 'borderless',
+    className: styles.placeholder_bubble,
     content: (
       <Welcome
         icon={
           <img
             src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*7iaeT54QpcQAAAAAAAAAAAAADgCCAQ/original"
             alt="Ant Design X"
-            style={{
-              transform: 'scale(1.2)',
-              marginInlineEnd: 10,
-            }}
           />
         }
-        className={background}
-        title={<div style={{ fontSize: 16 }}>{locale.greeting_short}</div>}
+        variant="borderless"
+        title={locale.greeting_short}
         description={locale.description_short}
-        styles={{
-          description: {
-            fontSize: 14,
-          },
-        }}
       />
     ),
     footer: (
       <Prompts
         title={locale.help_text}
-        className={styles.prompts}
         onItemClick={(item) => {
           onRequest(item.data.description as string);
         }}
         vertical
-        styles={{
-          subItem: {
-            background: 'none',
-            padding: '4px 0',
-          },
-          list: {
-            width: '100%',
-          },
-          item: {
-            background: 'rgba(255, 255, 255, 0.05)',
-          },
-        }}
         items={[
           {
             key: '1-1',

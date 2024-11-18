@@ -31,7 +31,6 @@ export const CustomizationWelcome: React.FC<WelcomeProps> = (props) => {
   return (
     <Welcome
       style={{
-        height: 84,
         width: 290,
       }}
       icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*7iaeT54QpcQAAAAAAAAAAAAADgCCAQ/original"

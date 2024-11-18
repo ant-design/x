@@ -18,7 +18,7 @@ const useStyle = createStyles(({ token, css }) => {
       overflow: hidden;
       color: ${colorTextHeading};
       font-weight: normal;
-      font-size: 24px;
+      font-size: 20px;
       font-family: AlibabaPuHuiTi, ${token.fontFamily}, sans-serif;
       letter-spacing: -0.18px;
       white-space: nowrap;
@@ -32,8 +32,8 @@ const useStyle = createStyles(({ token, css }) => {
       }
 
       img {
-        width: 40px;
-        height: 40px;
+        width: 32px;
+        height: 32px;
         display: inline-block;
         vertical-align: middle;
       }
@@ -50,6 +50,7 @@ const useStyle = createStyles(({ token, css }) => {
       padding-inline-start: 0px !important;
       font-size: 16px !important;
       color: ${colorTextHeading} !important;
+      column-gap: 4px;
 
       img {
         width: 24px !important;

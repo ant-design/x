@@ -47,6 +47,12 @@ const locales = {
 const useStyle = createStyles(({ token, css }) => {
   return {
     container: css`
+      position: relative;
+    `,
+    content_bg: css`
+      position: absolute;
+      top: -200px;
+      right: -150px;
     `,
     content: css`
       display: flex;
@@ -65,8 +71,9 @@ const useStyle = createStyles(({ token, css }) => {
       width: 886px;
       height: 600px;
       box-sizing: border-box;
-      background-image: url(https://mdn.alipayobjects.com/huamei_k0vkmw/afts/img/A*GpgKSLKfXhYAAAAAAAAAAAAADsR-AQ/original);
+      background-image: url(https://mdn.alipayobjects.com/huamei_k0vkmw/afts/img/A*9lNZQrgQIikAAAAAAAAAAAAADsR-AQ/original);
       background-repeat: no-repeat;
+      z-index: 2;
     `,
     item: css`
       position: relative;
@@ -75,9 +82,11 @@ const useStyle = createStyles(({ token, css }) => {
       padding: ${token.padding}px;
       box-sizing: border-box;
       display: flex;
+      gap: 4px;
       flex-direction: column;
       align-items: flex-start;
       cursor: pointer;
+      border: none !important;
     `,
     'item-disabled': css`
       h3,p {
@@ -160,6 +169,11 @@ const SceneBanner: React.FC = () => {
 
   return (
     <Container className={styles.container} title={locale.title} desc={locale.desc}>
+      <img
+        className={styles.content_bg}
+        src="https://mdn.alipayobjects.com/huamei_k0vkmw/afts/img/A*aSLTSr53DPAAAAAAAAAAAAAADsR-AQ/original"
+        alt="bg"
+      />
       <div className={styles.content}>
         <div className={styles.tab}>
           {tabItems.map((item) => (

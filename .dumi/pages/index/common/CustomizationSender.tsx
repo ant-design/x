@@ -1,14 +1,33 @@
 import { Sender, type SenderProps } from '@ant-design/x';
 import { Button } from 'antd';
+import { createStyles } from 'antd-style';
 import React from 'react';
 
+export const useStyle = createStyles(({ css }) => {
+  return {
+    sender: css`
+      background: linear-gradient(135deg, #ffffff26 14%, #ffffff0d 59%);
+      position: relative;
+      border: none;
+      cursor: pointer;
+
+      :hover {
+        opacity: 0.85;
+      }
+    `,
+  };
+});
+
 const CustomizationSender: React.FC<SenderProps> = (props) => {
+  const { styles } = useStyle();
   return (
     <Sender
+      className={styles.sender}
       actions={() => {
         return (
           <Button
             type="text"
+            style={{ padding: 0 }}
             onClick={() => props?.onSubmit?.(props.value!)}
             icon={
               <img

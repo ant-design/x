@@ -20,7 +20,7 @@ const useStyle = createStyles(({ token, css }) => {
     `,
     title: css`
       font-size: 48px;
-      color: ${token.colorText};
+      color: #fff;
       text-align: center;
       padding-bottom: ${token.padding}px;
     `,

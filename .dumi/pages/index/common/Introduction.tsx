@@ -69,11 +69,11 @@ const useStyle = createStyles(({ token, css }) => {
     item_tag: css`
       border-radius: 4px;
       color: transparent;
-      height: 20px;
-      line-height: 20px;
+      height: 24px;
+      line-height: 24px;
       box-sizing: border-box;
       font-size: ${token.fontSizeSM}px;
-      padding: 0 4px;
+      padding: 0 8px;
       position: relative;
       overflow: hidden;
 

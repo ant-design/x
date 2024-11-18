@@ -3,6 +3,7 @@ import { createStyles } from 'antd-style';
 import React from 'react';
 import useLocale from '../../../hooks/useLocale';
 
+import classnames from 'classnames';
 import useLottie from '../../../hooks/useLottie';
 import Container from '../common/Container';
 import { DESIGN_STAGE_COLOR } from '../common/CustomizationProvider';
@@ -111,7 +112,7 @@ const useStyle = createStyles(({ token, css }) => {
       
     `,
     chain_item_line: css`
-      height: 500px;
+      height: 510px;
       width: 4px;
       margin: 0 auto;
     `,
@@ -139,7 +140,8 @@ const useStyle = createStyles(({ token, css }) => {
       overflow: hidden;
       font-size: ${token.fontSizeHeading5}px;
       font-weight: bold;
-      opacity: 0.75;
+      opacity: 0.9;
+      border: none !important;
 
       &::after {
         content: '';
@@ -159,6 +161,16 @@ const useStyle = createStyles(({ token, css }) => {
         mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         mask-composite: exclude;
       };
+    `,
+
+    chain_item_icon: css`
+      width: 40px;
+      height: 40px;
+      position: relative;
+
+      img {
+        position: absolute;
+      }
     `,
   };
 });
@@ -279,8 +291,14 @@ const DesignGuide: React.FC = () => {
             return (
               <div className={styles.chain_item} key={item.label}>
                 <div>
-                  <div>
+                  <div className={classnames(styles.chain_item_icon)}>
                     <img alt="icon" src={item.icon} loading="lazy" />
+                    <img
+                      alt="icon"
+                      src={item.icon}
+                      loading="lazy"
+                      style={{ filter: 'blur(18px)' }}
+                    />
                   </div>
                   <div
                     className={styles.chain_item_line}

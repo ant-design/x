@@ -86,7 +86,8 @@ const useStyle = createStyles(({ css }) => {
 
 const CompIntroduction: React.FC = () => {
   const { styles } = useStyle();
-  const [locale] = useLocale(locales);
+  const [locale, lang] = useLocale(locales);
+  const isZhCN = lang === 'cn';
   const { isMobile } = React.useContext(SiteContext);
 
   const items: IntroductionItem[] = [
@@ -122,7 +123,16 @@ const CompIntroduction: React.FC = () => {
       endColor: DESIGN_STAGE_COLOR.EXPRESS.END,
       header: (
         <div className={styles.header}>
-          <CustomizationSuggestion />
+          <img
+            loading="lazy"
+            alt="thumbnails"
+            style={{ width: 290 }}
+            src={
+              isZhCN
+                ? 'https://mdn.alipayobjects.com/huamei_k0vkmw/afts/img/A*-c6EQ7U4-4oAAAAAAAAAAAAADsR-AQ/fmt.avif'
+                : 'https://mdn.alipayobjects.com/huamei_k0vkmw/afts/img/A*SUJFTbqovJsAAAAAAAAAAAAADsR-AQ/fmt.avif'
+            }
+          />
         </div>
       ),
     },
@@ -134,7 +144,16 @@ const CompIntroduction: React.FC = () => {
       endColor: DESIGN_STAGE_COLOR.CONFIRM.END,
       header: (
         <div className={styles.header}>
-          <Bubble loading content="Loading..." />
+          <img
+            loading="lazy"
+            alt="thumbnails"
+            style={{ width: 173 }}
+            src={
+              isZhCN
+                ? 'https://mdn.alipayobjects.com/huamei_k0vkmw/afts/img/A*vvcEQ58Ppg0AAAAAAAAAAAAADsR-AQ/fmt.avif'
+                : 'https://mdn.alipayobjects.com/huamei_k0vkmw/afts/img/A*IRwXRoPzVREAAAAAAAAAAAAADsR-AQ/fmt.avif'
+            }
+          />
         </div>
       ),
     },
@@ -158,7 +177,16 @@ const CompIntroduction: React.FC = () => {
       endColor: DESIGN_STAGE_COLOR.COMMON.END,
       header: (
         <div className={styles.header}>
-          <CustomConversations />
+          <img
+            loading="lazy"
+            alt="thumbnails"
+            style={{ width: 290 }}
+            src={
+              isZhCN
+                ? 'https://mdn.alipayobjects.com/huamei_k0vkmw/afts/img/A*7nVeT7Qg-QoAAAAAAAAAAAAADsR-AQ/fmt.avif'
+                : 'https://mdn.alipayobjects.com/huamei_k0vkmw/afts/img/A*7nVeT7Qg-QoAAAAAAAAAAAAADsR-AQ/fmt.avif'
+            }
+          />
         </div>
       ),
     },
