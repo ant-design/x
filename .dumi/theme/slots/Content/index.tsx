@@ -52,7 +52,10 @@ const Content: React.FC<React.PropsWithChildren> = ({ children }) => {
         <InViewSuspense fallback={null}>
           <DocAnchor showDebug={showDebug} debugDemos={debugDemos} />
         </InViewSuspense>
-        <article className={classNames(styles.articleWrapper, { rtl: isRTL })}>
+        <article
+          className={classNames(styles.articleWrapper, { rtl: isRTL })}
+          style={{ padding: pathname.startsWith('/docs/playground') ? 24 : undefined }}
+        >
           {meta.frontmatter?.title ? (
             <Flex justify="space-between">
               <Typography.Title style={{ fontSize: 32, position: 'relative' }}>

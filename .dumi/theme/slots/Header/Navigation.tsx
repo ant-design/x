@@ -45,7 +45,7 @@ const defaultItems = [
     key: 'components',
   },
   {
-    path: '/playground',
+    path: '/docs/playground/independent',
     basePath: '/playground',
     key: 'playground',
   },
