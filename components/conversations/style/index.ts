@@ -15,6 +15,7 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
       display: 'flex',
       gap: token.paddingXS,
       flexDirection: 'column',
+      overflowY: 'auto',
       [`&${componentCls}-rtl`]: {
         direction: 'rtl',
       },
