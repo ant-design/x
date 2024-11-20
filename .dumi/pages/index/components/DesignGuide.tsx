@@ -4,7 +4,9 @@ import React from 'react';
 import useLocale from '../../../hooks/useLocale';
 
 import classnames from 'classnames';
+import { useLocation, useNavigate } from 'dumi';
 import useLottie from '../../../hooks/useLottie';
+import { getLocalizedPathname, isZhCN } from '../../../theme/utils';
 import Container from '../common/Container';
 import { DESIGN_STAGE_COLOR } from '../common/CustomizationProvider';
 import SiteContext from './SiteContext';
@@ -178,6 +180,8 @@ const useStyle = createStyles(({ token, css }) => {
 const DesignGuide: React.FC = () => {
   const [locale] = useLocale(locales);
   const { styles } = useStyle();
+  const { pathname, search } = useLocation();
+  const navigate = useNavigate();
 
   const { isMobile } = React.useContext(SiteContext);
 
@@ -251,6 +255,7 @@ const DesignGuide: React.FC = () => {
       action: locale.awaken_action,
       startColor: DESIGN_STAGE_COLOR.AWAKE.START,
       endColor: DESIGN_STAGE_COLOR.AWAKE.END,
+      path: 'components/welcome',
     },
     {
       icon: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*3XXESYNxPNkAAAAAAAAAAAAADgCCAQ/original',
@@ -260,6 +265,7 @@ const DesignGuide: React.FC = () => {
       action: locale.express_action,
       startColor: DESIGN_STAGE_COLOR.EXPRESS.START,
       endColor: DESIGN_STAGE_COLOR.EXPRESS.END,
+      path: 'components/attachments',
     },
     {
       icon: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*pX3DR5MaxE8AAAAAAAAAAAAADgCCAQ/original',
@@ -269,6 +275,7 @@ const DesignGuide: React.FC = () => {
       action: locale.confirm_action,
       startColor: DESIGN_STAGE_COLOR.CONFIRM.START,
       endColor: DESIGN_STAGE_COLOR.CONFIRM.END,
+      path: 'components/thought-chain',
     },
     {
       icon: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*jVNbRLytvWMAAAAAAAAAAAAADgCCAQ/original',
@@ -278,6 +285,7 @@ const DesignGuide: React.FC = () => {
       action: locale.feedback_action,
       startColor: DESIGN_STAGE_COLOR.FEEDBACK.START,
       endColor: DESIGN_STAGE_COLOR.FEEDBACK.END,
+      path: 'components/bubble',
     },
   ];
 
@@ -332,7 +340,14 @@ const DesignGuide: React.FC = () => {
                     </span>
                   </div>
                   <div className={styles.chain_item_desc}>{item.desc}</div>
-                  <Button className={styles.chain_item_action} type="text" size="large">
+                  <Button
+                    className={styles.chain_item_action}
+                    type="text"
+                    size="large"
+                    onClick={() =>
+                      navigate(getLocalizedPathname(item.path, isZhCN(pathname), search))
+                    }
+                  >
                     {item.action}
                   </Button>
                 </div>

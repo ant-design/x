@@ -1,6 +1,9 @@
 import { createStyles } from 'antd-style';
 import React from 'react';
 
+import { useLocation, useNavigate } from 'dumi';
+import { getLocalizedPathname, isZhCN } from '../../../theme/utils';
+
 import useLocale from '../../../hooks/useLocale';
 import useLottie from '../../../hooks/useLottie';
 import Container from '../common/Container';
@@ -21,6 +24,8 @@ const useStyle = createStyles(({ css }) => {
     container: css`
       height: 500px;
       overflow: hidden;
+
+      cursor: pointer;
     `,
     lottie: css`
       width: 100%;
@@ -33,6 +38,9 @@ const useStyle = createStyles(({ css }) => {
 const DesignBanner: React.FC = () => {
   const [locale] = useLocale(locales);
 
+  const { pathname, search } = useLocation();
+  const navigate = useNavigate();
+
   const { styles } = useStyle();
 
   const [lottieRef] = useLottie({
@@ -43,7 +51,14 @@ const DesignBanner: React.FC = () => {
   });
 
   return (
-    <Container className={styles.container} title={locale.title} desc={locale.desc}>
+    <Container
+      className={styles.container}
+      title={locale.title}
+      desc={locale.desc}
+      onClick={() =>
+        navigate(getLocalizedPathname('docs/spec/introduce', isZhCN(pathname), search))
+      }
+    >
       <div ref={lottieRef} className={styles.lottie} />
     </Container>
   );

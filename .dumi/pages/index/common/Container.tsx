@@ -34,10 +34,8 @@ const useStyle = createStyles(({ token, css }) => {
   };
 });
 
-export interface ContainerProps {
+export interface ContainerProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
   children?: React.ReactNode;
-  className?: string;
-  style?: React.CSSProperties;
   title?: React.ReactNode;
   desc?: React.ReactNode;
 }
@@ -45,7 +43,11 @@ export interface ContainerProps {
 const Container: React.FC<ContainerProps> = (props) => {
   const { styles } = useStyle();
   return (
-    <div className={classnames(styles.container, props.className)} style={props.style}>
+    <div
+      className={classnames(styles.container, props.className)}
+      style={props.style}
+      onClick={props.onClick}
+    >
       {props.title && <h2 className={styles.title}>{props.title}</h2>}
       {props.desc && <p className={styles.desc}>{props.desc}</p>}
       {props.children}
