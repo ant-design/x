@@ -1,7 +1,6 @@
 import { BgColorsOutlined } from '@ant-design/icons';
 import { FloatButton } from 'antd';
 import { CompactTheme, DarkTheme } from 'antd-token-previewer/es/icons';
-// import { Motion } from 'antd-token-previewer/es/icons';
 import { FormattedMessage, useLocation } from 'dumi';
 import React from 'react';
 
@@ -20,8 +19,9 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = (props) => {
   const { value = ['light'], onChange } = props;
   const { pathname, search } = useLocation();
 
-  // const isMotionOff = value.includes('motion-off');
   const isDark = value.includes('dark');
+
+  if (pathname.startsWith('/index')) return null;
 
   return (
     <FloatButton.Group

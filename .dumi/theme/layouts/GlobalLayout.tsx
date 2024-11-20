@@ -130,12 +130,13 @@ const GlobalLayout: React.FC = () => {
 
   const themeConfig = React.useMemo<ThemeConfig>(
     () => ({
-      algorithm: getAlgorithm(theme),
+      // index page should always use dark theme
+      algorithm: pathname.startsWith('/index') ? getAlgorithm(['dark']) : getAlgorithm(theme),
       token: { motion: !theme.includes('motion-off') },
       cssVar: true,
       hashed: false,
     }),
-    [theme],
+    [theme, pathname],
   );
 
   const [styleCache] = React.useState(() => createCache());
