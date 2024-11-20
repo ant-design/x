@@ -150,8 +150,8 @@ const CompIntroduction: React.FC = () => {
             style={{ width: 173 }}
             src={
               isZhCN
-                ? 'https://mdn.alipayobjects.com/huamei_k0vkmw/afts/img/A*vvcEQ58Ppg0AAAAAAAAAAAAADsR-AQ/fmt.avif'
-                : 'https://mdn.alipayobjects.com/huamei_k0vkmw/afts/img/A*IRwXRoPzVREAAAAAAAAAAAAADsR-AQ/fmt.avif'
+                ? 'https://mdn.alipayobjects.com/huamei_k0vkmw/afts/img/A*WxlPTYGnviYAAAAAAAAAAAAADsR-AQ/fmt.avif'
+                : 'https://mdn.alipayobjects.com/huamei_k0vkmw/afts/img/A*EDPdR54UBncAAAAAAAAAAAAADsR-AQ/fmt.avif'
             }
           />
         </div>
