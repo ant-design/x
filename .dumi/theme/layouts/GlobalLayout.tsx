@@ -131,7 +131,10 @@ const GlobalLayout: React.FC = () => {
   const themeConfig = React.useMemo<ThemeConfig>(
     () => ({
       // index page should always use dark theme
-      algorithm: pathname.startsWith('/index') ? getAlgorithm(['dark']) : getAlgorithm(theme),
+      algorithm:
+        pathname.startsWith('/index') || pathname === ''
+          ? getAlgorithm(['dark'])
+          : getAlgorithm(theme),
       token: { motion: !theme.includes('motion-off') },
       cssVar: true,
       hashed: false,
