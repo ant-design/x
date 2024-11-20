@@ -1,12 +1,13 @@
 ---
 category: Components
 group:
-  title: UI
-  order: 0
+  title: Wake
+  order: 1
 title: Prompts
+order: 1
 description: Display a predefined set of questions or suggestion.
-cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*1ysXSqEnAckAAAAAAAAAAAAADgCCAQ/original
-coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*EkYUTotf-eYAAAAAAAAAAAAADgCCAQ/original
+cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*UfhXRamlAf0AAAAAAAAAAAAADgCCAQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*3CN5RLKP0X4AAAAAAAAAAAAADgCCAQ/original
 demo:
   cols: 1
 ---

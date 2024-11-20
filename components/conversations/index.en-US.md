@@ -1,12 +1,12 @@
 ---
 category: Components
 group:
-  title: UI
+  title: Common
   order: 0
 title: Conversations
 description: Used to manage and view the conversation list
-cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*PRjsQpR3rCwAAAAAAAAAAAAADgCCAQ/original
-coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*yMOdSIMsA8UAAAAAAAAAAAAADgCCAQ/original
+cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*Oj-bTbVXtpQAAAAAAAAAAAAADgCCAQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*qwdtSKWXeikAAAAAAAAAAAAADgCCAQ/original
 demo:
   cols: 1
 ---

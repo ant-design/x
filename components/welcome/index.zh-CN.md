@@ -1,13 +1,14 @@
 ---
 category: Components
 group:
-  title: 用户界面
-  order: 0
+  title: 唤醒
+  order: 1
 title: Welcome
 subtitle: 欢迎
+order: 0
 description: 清晰传达给用户可实现的意图范围和预期功能。
-cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*1ysXSqEnAckAAAAAAAAAAAAADgCCAQ/original
-coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*EkYUTotf-eYAAAAAAAAAAAAADgCCAQ/original
+cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*sSjhQ6q2-Z0AAAAAAAAAAAAADgCCAQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*-gLqQpan1NAAAAAAAAAAAAAADgCCAQ/original
 demo:
   cols: 1
 ---

@@ -10,7 +10,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
 import Link from '../../common/Link';
 import SiteContext from '../../slots/SiteContext';
 import type { Component } from './ProComponentsList';
-import proComponentsList from './ProComponentsList';
+// import proComponentsList from './ProComponentsList';
 
 const useStyle = createStyles(({ token, css }) => ({
   componentsOverviewGroupTitle: css`
@@ -131,16 +131,16 @@ const Overview: React.FC = () => {
             coverDark: child.frontmatter?.coverDark,
             link: child.link,
           })),
-        }))
-        .concat([
-          {
-            title: locale === 'zh-CN' ? '重型组件' : 'Others',
-            children:
-              locale === 'zh-CN'
-                ? proComponentsList
-                : proComponentsList.map((component) => ({ ...component, subtitle: '' })),
-          },
-        ]),
+        })),
+    // .concat([
+    //   {
+    //     title: locale === 'zh-CN' ? '重型组件' : 'Others',
+    //     children:
+    //       locale === 'zh-CN'
+    //         ? proComponentsList
+    //         : proComponentsList.map((component) => ({ ...component, subtitle: '' })),
+    //   },
+    // ])
     [data, locale],
   );
   return (

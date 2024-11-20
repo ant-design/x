@@ -2,13 +2,15 @@
 category: Components
 group:
   title: 工具
-  order: 2
+  order: 5
 title: XStream
 subtitle: 流
 order: 1
 description: 转换可读数据流
 demo:
   cols: 1
+cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*OD9kTJOmGdsAAAAAAAAAAAAADgCCAQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*PxJISo5t2YgAAAAAAAAAAAAADgCCAQ/original
 ---
 
 ## When To Use
