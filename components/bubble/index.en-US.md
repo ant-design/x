@@ -1,7 +1,7 @@
 ---
 category: Components
 group:
-  title: UI
+  title: Common
   order: 0
 title: Bubble
 description: A bubble component for chat.

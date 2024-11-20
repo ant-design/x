@@ -1,9 +1,10 @@
 ---
 category: Components
 group:
-  title: 其他
-  order: 3
+  title: 工具
+  order: 5
 title: XProvider
+order: 999
 subtitle: 全局化配置
 description: 为组件提供统一的全局化配置。
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*NVKORa7BCVwAAAAAAAAAAAAADrJ8AQ/original

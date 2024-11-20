@@ -2,7 +2,7 @@
 category: Components
 group:
   title: 工具
-  order: 2
+  order: 5
 title: XRequest
 order: 2
 subtitle: 请求

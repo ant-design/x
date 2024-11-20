@@ -1,8 +1,8 @@
 ---
 category: Components
 group:
-  title: 用户界面
-  order: 0
+  title: 确认
+  order: 3
 title: ThoughtChain
 subtitle: 思维链
 description: 思维链组件用于可视化和追踪 Agent 对 Actions 和 Tools 的调用链。

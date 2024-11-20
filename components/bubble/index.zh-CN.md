@@ -1,10 +1,10 @@
 ---
 category: Components
 group:
-  title: 用户界面
+  title: 通用
   order: 0
 title: Bubble
-subtitle: 聊天气泡
+subtitle: 对话气泡
 description: 用于聊天的气泡组件。
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*HjY3QKszqFEAAAAAAAAAAAAADrJ8AQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*G8njQogkGwAAAAAAAAAAAAAADrJ8AQ/original

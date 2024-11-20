@@ -2,7 +2,7 @@
 category: Components
 group:
   title: 工具
-  order: 2
+  order: 5
 title: XStream
 subtitle: 流
 order: 1

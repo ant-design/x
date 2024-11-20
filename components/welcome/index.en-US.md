@@ -1,8 +1,8 @@
 ---
 category: Components
 group:
-  title: UI
-  order: 0
+  title: Wake
+  order: 1
 title: Welcome
 description: Clearly convey the scope of intent and expected functionality to the user.
 cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*1ysXSqEnAckAAAAAAAAAAAAADgCCAQ/original

@@ -1,8 +1,8 @@
 ---
 category: Components
 group:
-  title: UI
-  order: 0
+  title: Express
+  order: 2
 title: Sender
 description: A input component for chat.
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*SMzgSJZE_AwAAAAAAAAAAAAADrJ8AQ/original

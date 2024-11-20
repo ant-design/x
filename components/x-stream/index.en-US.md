@@ -2,7 +2,7 @@
 category: Components
 group:
   title: Tool
-  order: 2
+  order: 5
 title: XStream
 order: 1
 description: Transform binary stream

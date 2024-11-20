@@ -1,8 +1,8 @@
 ---
 category: Components
 group:
-  title: Runtime
-  order: 1
+  title: Tools
+  order: 5
 title: useXChat
 description: Work with agent hook for data management.
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*HjY3QKszqFEAAAAAAAAAAAAADrJ8AQ/original

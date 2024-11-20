@@ -178,7 +178,7 @@ function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) 
   // ============================= Render =============================
   let content: React.ReactNode = null;
   const previewUrl = item.thumbUrl || item.url || previewImg;
-  const isImgPreview = isImg && item.originFileObj;
+  const isImgPreview = isImg && (item.originFileObj || previewUrl);
 
   if (isImgPreview) {
     // Preview Image style

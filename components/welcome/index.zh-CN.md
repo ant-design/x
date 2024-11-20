@@ -1,8 +1,8 @@
 ---
 category: Components
 group:
-  title: 用户界面
-  order: 0
+  title: 唤醒
+  order: 1
 title: Welcome
 subtitle: 欢迎
 description: 清晰传达给用户可实现的意图范围和预期功能。

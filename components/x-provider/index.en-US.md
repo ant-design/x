@@ -1,9 +1,10 @@
 ---
 category: Components
 group:
-  title: Other
-  order: 3
+  title: Tool
+  order: 5
 title: XProvider
+order: 999
 description: Provide a uniform configuration support for x components.
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*NVKORa7BCVwAAAAAAAAAAAAADrJ8AQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*YC4ERpGAddoAAAAAAAAAAAAADrJ8AQ/originaloriginal

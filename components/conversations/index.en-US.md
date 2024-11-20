@@ -1,7 +1,7 @@
 ---
 category: Components
 group:
-  title: UI
+  title: Common
   order: 0
 title: Conversations
 description: Used to manage and view the conversation list

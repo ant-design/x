@@ -1,8 +1,8 @@
 ---
 category: Components
 group:
-  title: Tool
-  order: 2
+  title: Tools
+  order: 5
 title: XRequest
 order: 2
 description:

@@ -1,7 +1,7 @@
 ---
 category: Components
 group:
-  title: 用户界面
+  title: 通用
   order: 0
 title: Conversations
 subtitle: 会话列表
