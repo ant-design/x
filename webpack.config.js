@@ -7,15 +7,6 @@ const CircularDependencyPlugin = require('circular-dependency-plugin');
 const DuplicatePackageCheckerPlugin = require('@madccc/duplicate-package-checker-webpack-plugin');
 const path = require('path');
 
-function addLocales(webpackConfig) {
-  let packageName = 'antd-with-locales';
-  if (webpackConfig.entry['antd.min']) {
-    packageName += '.min';
-  }
-  webpackConfig.entry[packageName] = './index-with-locales.js';
-  webpackConfig.output.filename = '[name].js';
-}
-
 function externalDayjs(config) {
   config.externals.dayjs = {
     root: 'dayjs',
@@ -43,7 +34,6 @@ if (process.env.PRODUCTION_ONLY) {
 
 if (process.env.RUN_ENV === 'PRODUCTION') {
   webpackConfig.forEach((config) => {
-    addLocales(config);
     externalDayjs(config);
     externalCssinjs(config);
 
