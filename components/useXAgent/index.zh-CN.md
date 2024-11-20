@@ -6,8 +6,8 @@ group:
 title: useXAgent
 subtitle: 模型调度
 description: 用于模型调度的 Agent 钩子。
-cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*HjY3QKszqFEAAAAAAAAAAAAADrJ8AQ/original
-coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*G8njQogkGwAAAAAAAAAAAAAADrJ8AQ/original
+cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*IjD1QqSI99MAAAAAAAAAAAAADgCCAQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*riUFS51m3IUAAAAAAAAAAAAADgCCAQ/original
 demo:
   cols: 1
 ---

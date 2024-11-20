@@ -8,6 +8,8 @@ order: 1
 description: Transform binary stream
 demo:
   cols: 1
+cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*OD9kTJOmGdsAAAAAAAAAAAAADgCCAQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*PxJISo5t2YgAAAAAAAAAAAAADgCCAQ/original
 ---
 
 ## When To Use
