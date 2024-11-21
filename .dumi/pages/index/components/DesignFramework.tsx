@@ -109,8 +109,8 @@ const DesignFramework: React.FC = () => {
           <img
             loading="lazy"
             alt="thumbnails"
-            style={{ width: 227 }}
-            src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*AhrTT6K2vU0AAAAAAAAAAAAADgCCAQ/fmt.webp"
+            style={{ width: 261 }}
+            src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*poTnSZrI7-oAAAAAAAAAAAAADgCCAQ/fmt.webp"
           />
         </div>
       ),
@@ -140,8 +140,8 @@ const DesignFramework: React.FC = () => {
           <img
             loading="lazy"
             alt="thumbnails"
-            style={{ width: 261 }}
-            src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*poTnSZrI7-oAAAAAAAAAAAAADgCCAQ/fmt.webp"
+            style={{ width: 227 }}
+            src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*AhrTT6K2vU0AAAAAAAAAAAAADgCCAQ/fmt.webp"
           />
         </div>
       ),
