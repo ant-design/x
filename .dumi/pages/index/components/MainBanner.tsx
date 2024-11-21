@@ -216,7 +216,7 @@ const MainBanner: React.FC = () => {
     rendererSettings: {
       preserveAspectRatio: 'xMidYMid meet',
     },
-    path: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*vhF2TLUKM5YAAAAAAAAAAAAADgCCAQ',
+    path: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*oI6rQbj2NA0AAAAAAAAAAAAADgCCAQ',
   });
 
   React.useEffect(() => {
