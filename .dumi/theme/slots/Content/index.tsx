@@ -52,10 +52,7 @@ const Content: React.FC<React.PropsWithChildren> = ({ children }) => {
         <InViewSuspense fallback={null}>
           <DocAnchor showDebug={showDebug} debugDemos={debugDemos} />
         </InViewSuspense>
-        <article
-          className={classNames(styles.articleWrapper, { rtl: isRTL })}
-          style={{ padding: pathname.startsWith('/docs/playground') ? 24 : undefined }}
-        >
+        <article className={classNames(styles.articleWrapper, { rtl: isRTL })}>
           {meta.frontmatter?.title ? (
             <Flex justify="space-between">
               <Typography.Title style={{ fontSize: 32, position: 'relative' }}>
@@ -97,9 +94,11 @@ const Content: React.FC<React.PropsWithChildren> = ({ children }) => {
               juejinLink={meta.frontmatter.juejin_url}
             />
           </InViewSuspense>
-          <InViewSuspense fallback={<div style={{ height: 50, marginTop: 120 }} />}>
-            <Contributors filename={meta.frontmatter.filename} />
-          </InViewSuspense>
+          <div style={{ marginTop: 120 }}>
+            <InViewSuspense fallback={<div style={{ height: 50 }} />}>
+              <Contributors filename={meta.frontmatter.filename} />
+            </InViewSuspense>
+          </div>
         </article>
         <InViewSuspense fallback={null}>
           <PrevAndNext rtl={isRTL} />
