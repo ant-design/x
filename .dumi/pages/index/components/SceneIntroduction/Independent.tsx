@@ -155,7 +155,7 @@ const IndependentScene: React.FC = () => {
         <Welcome
           icon={
             <img
-              src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*7iaeT54QpcQAAAAAAAAAAAAADgCCAQ/original"
+              src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
               alt="Ant Design X"
             />
           }

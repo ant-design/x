@@ -39,6 +39,8 @@ The ready-made partner for building Copilot applications.
 
 </div>
 
+![demos](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*UAEeSbJfuM8AAAAAAAAAAAAADgCCAQ/fmt.webp)
+
 ## ✨ Features
 
 - 🌈 **Derived from Best Practices of Enterprise-Level AI Products**: Built on the RICH interaction paradigm, delivering an exceptional AI interaction experience.

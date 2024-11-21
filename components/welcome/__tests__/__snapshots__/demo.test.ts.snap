@@ -20,7 +20,7 @@ exports[`renders components/welcome/demo/background.tsx correctly 1`] = `
         >
           <img
             alt="icon"
-            src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*7iaeT54QpcQAAAAAAAAAAAAADgCCAQ/original"
+            src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
           />
         </div>
         <div
@@ -56,7 +56,7 @@ exports[`renders components/welcome/demo/background.tsx correctly 1`] = `
         >
           <img
             alt="icon"
-            src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*7iaeT54QpcQAAAAAAAAAAAAADgCCAQ/original"
+            src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
           />
         </div>
         <div
@@ -88,7 +88,7 @@ exports[`renders components/welcome/demo/basic.tsx correctly 1`] = `
   >
     <img
       alt="icon"
-      src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*7iaeT54QpcQAAAAAAAAAAAAADgCCAQ/original"
+      src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
     />
   </div>
   <div
@@ -117,7 +117,7 @@ exports[`renders components/welcome/demo/variant.tsx correctly 1`] = `
   >
     <img
       alt="icon"
-      src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*7iaeT54QpcQAAAAAAAAAAAAADgCCAQ/original"
+      src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
     />
   </div>
   <div
