@@ -22,6 +22,10 @@ const useStyle = createStyles(({ token, css }) => {
     container: css`
       margin-top: -40px;
     `,
+    framework: css`
+      border-radius: 0;
+      background-image: linear-gradient(90deg, #5a37e6 0%, #0059c9 100%);
+    `,
   };
 });
 
@@ -41,7 +45,7 @@ const Homepage: React.FC = () => {
         <SceneIntroduction />
         <CompIntroduction />
       </section>
-      <section className={classnames(styles.section, styles.container)}>
+      <section className={classnames(styles.section, styles.framework, styles.container)}>
         <DesignFramework />
       </section>
     </main>

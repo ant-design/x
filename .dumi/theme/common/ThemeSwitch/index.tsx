@@ -21,7 +21,7 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = (props) => {
 
   const isDark = value.includes('dark');
 
-  if (pathname.startsWith('/index')) return null;
+  if (pathname.startsWith('/index') || pathname === '') return null;
 
   return (
     <FloatButton.Group

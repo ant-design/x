@@ -92,7 +92,7 @@ const useStyle = createStyles(({ token, css }) => {
       justify-content: start;
       padding: 0 24px;
       box-sizing: border-box;
-      
+
       img {
         width: 24px;
         height: 24px;

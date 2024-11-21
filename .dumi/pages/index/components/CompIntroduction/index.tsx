@@ -1,4 +1,3 @@
-import { Bubble } from '@ant-design/x';
 import { createStyles } from 'antd-style';
 import React from 'react';
 
@@ -6,13 +5,7 @@ import useLocale from '../../../../hooks/useLocale';
 import { DESIGN_STAGE_COLOR } from '../../common/CustomizationProvider';
 import Introduction, { type IntroductionItem } from '../../common/Introduction';
 import SiteContext from '../SiteContext';
-import {
-  CustomConversations,
-  CustomizationBubble,
-  CustomizationPrompts,
-  CustomizationSuggestion,
-  CustomizationWelcome,
-} from './Customization';
+import { CustomizationBubble, CustomizationPrompts, CustomizationWelcome } from './Customization';
 
 const locales = {
   cn: {

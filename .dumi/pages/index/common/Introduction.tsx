@@ -95,19 +95,21 @@ const useStyle = createStyles(({ token, css }) => {
   };
 });
 
-export interface IntroductionItem {
+export interface IntroductionItem extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
   title?: React.ReactNode;
   desc?: React.ReactNode;
   tag?: React.ReactNode;
   startColor?: string;
   endColor?: string;
   icon?: string;
+  url?: string;
   header?: React.ReactNode;
 }
 
 interface IntroductionProps extends ContainerProps {
   column?: number;
   items?: IntroductionItem[];
+  cardStyle?: React.CSSProperties;
 }
 
 const Introduction: React.FC<IntroductionProps> = (props) => {
@@ -122,7 +124,12 @@ const Introduction: React.FC<IntroductionProps> = (props) => {
         }}
       >
         {props.items?.map((item) => (
-          <div className={styles.item} key={`${item.title}`}>
+          <div
+            className={styles.item}
+            key={`${item.title}`}
+            style={props.cardStyle}
+            onClick={item.onClick}
+          >
             {item.header && (
               <div className={styles.item_header}>
                 <CustomizationProvider>{item.header}</CustomizationProvider>
