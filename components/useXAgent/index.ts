@@ -91,6 +91,7 @@ export default function useXAgent<Message = string>(config: XAgentConfig<Message
             XRequest({
               baseURL: restConfig.baseURL!,
               model: restConfig.model,
+              dangerouslyApiKey: restConfig.dangerouslyApiKey,
             }).create,
           ...restConfig,
         }),
