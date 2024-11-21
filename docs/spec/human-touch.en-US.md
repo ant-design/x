@@ -60,4 +60,4 @@ title: 有人情味
 
 通过直观的形象设计与动态效果，增强 AI 的个性与情感传达，使用户在视觉上获得即时的情感共鸣。不仅丰富了交互的维度，还使非语言信息（如表情、动作）成为沟通的重要组成部分，提升互动的真实感与沉浸感。精心设计的视觉表现力能跨越语言限制，有效吸引用户注意，深化与 AI 之间的情感联系。
 
-![](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*
+![](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*hsuNSKkBNycAAAAAAAAAAAAADgCCAQ/fmt.webp)
