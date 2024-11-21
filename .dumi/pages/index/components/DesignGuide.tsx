@@ -114,7 +114,7 @@ const useStyle = createStyles(({ token, css }) => {
       
     `,
     chain_item_line: css`
-      height: 510px;
+      height: 630px;
       width: 4px;
       margin: 0 auto;
     `,
@@ -206,7 +206,7 @@ const DesignGuide: React.FC = () => {
       [120, 157],
     ];
 
-    const triggerPoints = [600, 1200, 1600, 2100].map((i) => i + window.innerHeight);
+    const triggerPoints = [600, 1000, 1600, 2300].map((i) => i + window.innerHeight);
 
     let currentSegment = -1;
     let hasPlayedFirstSegment = false;
