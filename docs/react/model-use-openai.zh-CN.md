@@ -55,4 +55,4 @@ return (
 
 ## 使用 openai API 调用
 
-参考 [接入兼容 OpenAI 的模型推理服务](/docs/react/model-use-compatible-openai-cn)
+参考 [接入兼容 OpenAI 的模型推理服务](/docs/react/model-use-qwen-cn)

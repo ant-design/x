@@ -52,3 +52,7 @@ return (
   </div>
 );
 ```
+
+## use openai API
+
+参考 [Compatible OpenAI](/docs/react/model-use-qwen)
