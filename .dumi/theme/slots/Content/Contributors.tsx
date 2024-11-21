@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
 import ContributorsList from '@qixian.cs/github-contributors-list';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
 import { useIntl } from 'dumi';
+import React, { useContext } from 'react';
 
 import SiteContext from '../SiteContext';
 import ContributorAvatar from './ContributorAvatar';
@@ -54,7 +54,7 @@ const Contributors: React.FC<ContributorsProps> = ({ filename }) => {
       <div className={styles.title}>{formatMessage({ id: 'app.content.contributors' })}</div>
       <ContributorsList
         cache
-        repo="ant-design"
+        repo="x"
         owner="ant-design"
         fileName={filename}
         className={styles.list}
