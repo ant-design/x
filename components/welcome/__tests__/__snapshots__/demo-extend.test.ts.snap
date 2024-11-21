@@ -20,7 +20,7 @@ exports[`renders components/welcome/demo/background.tsx extend context correctly
         >
           <img
             alt="icon"
-            src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*7iaeT54QpcQAAAAAAAAAAAAADgCCAQ/original"
+            src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
           />
         </div>
         <div
@@ -56,7 +56,7 @@ exports[`renders components/welcome/demo/background.tsx extend context correctly
         >
           <img
             alt="icon"
-            src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*7iaeT54QpcQAAAAAAAAAAAAADgCCAQ/original"
+            src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
           />
         </div>
         <div
@@ -90,7 +90,7 @@ exports[`renders components/welcome/demo/basic.tsx extend context correctly 1`] 
   >
     <img
       alt="icon"
-      src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*7iaeT54QpcQAAAAAAAAAAAAADgCCAQ/original"
+      src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
     />
   </div>
   <div
@@ -121,7 +121,7 @@ exports[`renders components/welcome/demo/variant.tsx extend context correctly 1`
   >
     <img
       alt="icon"
-      src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*7iaeT54QpcQAAAAAAAAAAAAADgCCAQ/original"
+      src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
     />
   </div>
   <div

@@ -33,7 +33,7 @@ export const CustomizationWelcome: React.FC<WelcomeProps> = (props) => {
       style={{
         width: 290,
       }}
-      icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*7iaeT54QpcQAAAAAAAAAAAAADgCCAQ/original"
+      icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
       title={locale.greeting_short}
       description={locale.description_short}
       className={background}
