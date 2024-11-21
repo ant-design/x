@@ -47,7 +47,7 @@ const DesignBanner: React.FC = () => {
     renderer: 'svg',
     loop: false,
     autoplay: true,
-    path: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*6J33TJUtOVsAAAAAAAAAAAAADgCCAQ',
+    path: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*HFhMS5HH9twAAAAAAAAAAAAADgCCAQ',
   });
 
   return (
