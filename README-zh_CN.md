@@ -8,7 +8,7 @@
 
 [![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] [![NPM version][npm-image]][npm-url] [![NPM downloads][download-image]][download-url]
 
-[Changelog](./CHANGELOG.zh-US.md) · [Report Bug][github-issues-bug-report] · [Request Feature][github-issues-feature-request] · English · [中文](./README-zh_CN.md)
+[Changelog](./CHANGELOG.zh-US.md) · [Report Bug][github-issues-bug-report] · [Request Feature][github-issues-feature-request] · [English](./README.md) · 中文
 
 [npm-image]: https://img.shields.io/npm/v/@ant-design/x.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/@ant-design/x
