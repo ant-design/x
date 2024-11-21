@@ -33,6 +33,7 @@ const useStyle = createStyles(({ token, css }) => {
     banner: css`
       width: 100vw;
       height: calc(100vh - 160px);
+      min-height: 600px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -50,6 +51,8 @@ const useStyle = createStyles(({ token, css }) => {
       height: 100%;
       max-height: calc(100vh - ${token.headerHeight * 2}px);
       position: relative;
+
+      
     `,
     title: css`
       max-width: ${minBannerWidth}px;
@@ -58,6 +61,14 @@ const useStyle = createStyles(({ token, css }) => {
       inset-inline-start: 0;
       transform: translateY(-50%);
       z-index: 1;
+
+      @media only screen and (max-width: ${token.mobileMaxWidth}px) {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
     `,
     lottie: css`
       position: absolute;
