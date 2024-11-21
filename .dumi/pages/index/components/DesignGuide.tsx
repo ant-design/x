@@ -193,7 +193,7 @@ const DesignGuide: React.FC = () => {
     rendererSettings: {
       preserveAspectRatio: 'xMidYMid slice',
     },
-    path: 'https://mdn.alipayobjects.com/huamei_k0vkmw/afts/file/A*OfRbQKvPpWcAAAAAAAAAAAAADsR-AQ',
+    path: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*OjRsQZWTEcQAAAAAAAAAAAAADgCCAQ',
   });
 
   React.useEffect(() => {

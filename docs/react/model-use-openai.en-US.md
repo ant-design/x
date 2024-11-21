@@ -1,107 +1,54 @@
 ---
 group:
-  title: Advanced
-order: 2
-title: Integrating Services Compatible with OpenAI Models
+  title: Model Integration
+title: OpenAI
+order: 0
 ---
 
-## What is a "Service Compatible with OpenAI Models"?
+Typically, `openai-node` is used in Node.js environments. If you need to use it in a browser environment, you must enable `dangerouslyAllowBrowser`.
 
-It refers to a model inference service whose interface design and usage are consistent with OpenAI's API.
-
-This means developers can use the same code and methods as they would for OpenAI models to interact with these compatible services, significantly reducing integration costs.
-
-Examples of services compatible with OpenAI models:
-
-- [Alibaba Cloud - Tongyi Qianwen](https://help.aliyun.com/zh/dashscope/developer-reference/compatibility-of-openai-with-dashscope?spm=a2c4g.11186623.0.i10)
-
-## Method 1: Using `useXAgent`
-
-This method is **a ready-to-use solution for React environments** provided by Ant Design X.
+## Example of Streaming Requests with `openai-node`
 
 ```tsx
-import { useXAgent } from '@ant-design/x';
+import { useXAgent, useXChat, Sender } from '@ant-design/x';
+import OpenAI from 'openai';
 
-// ... react env
+const client = new OpenAI({
+  apiKey: process.env['OPENAI_API_KEY'],
+  dangerouslyAllowBrowser: true,
+});
+
+// React environment setup
 const [agent] = useXAgent({
-  baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
-  model: 'qwen-plus',
-  // Use cautiously in production!
-  dangerouslyApiKey: 'DASHSCOPE_API_KEY',
+  request: async (info, callbacks) => {
+    const stream = await client.chat.completions.create({
+      model: 'gpt-4o',
+      messages: [{ role: 'user', content: 'Say this is a test' }],
+      stream: true,
+    });
+
+    for await (const chunk of stream) {
+      // Trigger the callback
+      callbacks.onUpdate(chunk.choices[0]?.delta?.content || '');
+    }
+  },
 });
 
-function request() {
-  agent.request(
-    {
-      // Conversation messages
-      messages: [
-        {
-          role: 'user',
-          content: 'Hello',
-        },
-      ],
-      // Enable streaming
-      stream: true,
-    },
-    {
-      // Success callback
-      onSuccess: (sseChunks) => {
-        // Triggered when the request completes
-        // This will contain the parsed sseChunks
-      },
-      onError: (error) => {
-        // Triggered in case of an error
-      },
-      onUpdate: (sse) => {
-        // Triggered during stream updates
-        // This will contain the parsed SSE object
-      },
-    },
-  );
-}
-```
+const {
+  // Used to initiate conversation requests
+  onRequest,
+  // Used to bind the view
+  messages,
+} = useXChat({ agent });
 
-## Method 2: Using `XRequest`
+const items = messages.map((message) => ({
+  content: message,
+}));
 
-This method is **a ready-to-use solution for JavaScript environments** provided by Ant Design X.
-
-```tsx
-import { XRequest } from '@ant-design/x';
-
-const xRequest = XRequest({
-  baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
-  model: 'qwen-plus',
-  // Use cautiously in production!
-  dangerouslyApiKey: 'DASHSCOPE_API_KEY',
-});
-
-function request() {
-  xRequest.create(
-    {
-      // Conversation messages
-      messages: [
-        {
-          role: 'user',
-          content: 'Hello',
-        },
-      ],
-      // Enable streaming
-      stream: true,
-    },
-    {
-      // Success callback
-      onSuccess: (sseChunks) => {
-        // Triggered when the request completes
-        // This will contain the parsed sseChunks
-      },
-      onError: (error) => {
-        // Triggered in case of an error
-      },
-      onUpdate: (sse) => {
-        // Triggered during stream updates
-        // This will contain the parsed SSE object
-      },
-    },
-  );
-}
+return (
+  <div>
+    <Bubble.List items={items} />
+    <Sender onSubmit={onRequest} />
+  </div>
+);
 ```

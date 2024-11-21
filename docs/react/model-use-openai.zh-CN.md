@@ -1,107 +1,58 @@
 ---
 group:
-  title: 进阶
-order: 2
-title: 接入兼容 OpenAI 的模型推理服务
+  title: 模型接入
+title: OpenAI
+order: 0
 ---
 
-## 什么是「兼容 OpenAI 的模型推理服务」？
+通常情况 openai-node 用于 node 环境，如果在浏览器环境使用，需要开启 `dangerouslyAllowBrowser`。
 
-是指在接口设计和使用方式上与 OpenAI 的 API 保持一致的模型推理服务。
-
-这意味着开发者可以使用与调用 OpenAI 模型相同的代码和方法，来调用这些兼容服务，从而减少开发接入成本。
-
-一些兼容 OpenAI 的模型推理服务:
-
-- [阿里云 - 通义千问](https://help.aliyun.com/zh/dashscope/developer-reference/compatibility-of-openai-with-dashscope?spm=a2c4g.11186623.0.i10)
-
-## 方式一: 使用 useXAgent
-
-该方式是 Ant Dssign X 提供的 **在 React 环境下开箱即用的使用方式**。
+## 使用 openai-node 流式调用示例
 
 ```tsx
-import { useXAgent } from '@ant-design/x';
+import { useXAgent, useXChat, Sender } from '@ant-design/x';
+import OpenAI from 'openai';
 
-// ... react env
+const client = new OpenAI({
+  apiKey: process.env['OPENAI_API_KEY'],
+  dangerouslyAllowBrowser: true,
+});
+
+// react env ...
 const [agent] = useXAgent({
-  baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
-  model: 'qwen-plus',
-  // 请谨慎在生产环境使用！
-  dangerouslyApiKey: 'DASHSCOPE_API_KEY',
+  request: async (info, callbacks) => {
+    const stream = await client.chat.completions.create({
+      model: 'gpt-4o',
+      messages: [{ role: 'user', content: 'Say this is a test' }],
+      stream: true,
+    });
+
+    for await (const chunk of stream) {
+      // 调用回调
+      callbacks.onUpdate(chunk.choices[0]?.delta?.content || '');
+    }
+  },
 });
 
-function request() {
-  agent.request(
-    {
-      // 对话消息
-      messages: [
-        {
-          role: 'user',
-          content: 'Hello',
-        },
-      ],
-      // 是否流式渲染
-      stream: true,
-    },
-    {
-      // 成功回调
-      onSuccess: (sseChunks) => {
-        // 在请求完成时触发
-        // 这里将得到已经解析好的 sseChunks
-      },
-      onError: (error) => {
-        // 在请求异常时触发
-      },
-      onUpdate: (sse) => {
-        // 在流更新时触发
-        // 这里将得到已经解析好的 sse 对象
-      },
-    },
-  );
-}
+const {
+  // 用于发起对话请求
+  onRequest,
+  // 用于绑定视图
+  messages,
+} = useXChat({ agent });
+
+const items = messages.map((i) => ({
+  content: message,
+}));
+
+return (
+  <div>
+    <Bubble.List items={items} />
+    <Sender onSubmit={onRequest} />
+  </div>
+);
 ```
 
-## 方式二: 使用 XRequest
+## 使用 openai API 调用
 
-该方式是 Ant Dssign X 提供的 **在 JS 环境下开箱即用的使用方式**。
-
-```tsx
-import { XRequest } from '@ant-design/x';
-
-const xRequest = XRequest({
-  baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
-  model: 'qwen-plus',
-  // 请谨慎在生产环境使用！
-  dangerouslyApiKey: 'DASHSCOPE_API_KEY',
-});
-
-function request() {
-  xRequest.create(
-    {
-      // 对话消息
-      messages: [
-        {
-          role: 'user',
-          content: 'Hello',
-        },
-      ],
-      // 是否流式渲染
-      stream: true,
-    },
-    {
-      // 成功回调
-      onSuccess: (sseChunks) => {
-        // 在请求完成时触发
-        // 这里将得到已经解析好的 sseChunks
-      },
-      onError: (error) => {
-        // 在请求异常时触发
-      },
-      onUpdate: (sse) => {
-        // 在流更新时触发
-        // 这里将得到已经解析好的 sse 对象
-      },
-    },
-  );
-}
-```
+参考 [接入兼容 OpenAI 的模型推理服务](/docs/react/model-use-compatible-openai-cn)
