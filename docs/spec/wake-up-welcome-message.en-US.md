@@ -26,7 +26,7 @@ title: 唤醒｜欢迎提示
 
 > **注：** 欢迎组件通常搭载推荐组件，可适用于不同场景。
 
-![](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*6n0jSYQyAz0AAAAAAAAAAAAADgCCAQ/fmt.webp)
+![](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*_MGXTpIAO8wAAAAAAAAAAAAADgCCAQ/fmt.webp)
 
 ---
 
@@ -76,7 +76,7 @@ title: 唤醒｜欢迎提示
 
 - **特点：** 分组信息展示，信息层次清晰。
 
-![独立式](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*jbGiSbAalWMAAAAAAAAAAAAADgCCAQ/fmt.webp)
+![独立式](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*6-ceTLx-uxAAAAAAAAAAAAAADgCCAQ/fmt.webp)
 
 ---
 
@@ -84,4 +84,4 @@ title: 唤醒｜欢迎提示
 
 - **特点：** 通过视觉吸引与引导文案，增强用户兴趣。
 
-![独立式](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*zXz3SKUcYCkAAAAAAAAAAAAADgCCAQ/fmt.webp)
+![独立式](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*PF-KTrxGfL8AAAAAAAAAAAAADgCCAQ/fmt.webp)
