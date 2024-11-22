@@ -30,7 +30,7 @@ tag: vVERSION
 - 🛡 **Complete TypeScript Support**: Developed with TypeScript, ensuring robust type coverage to improve the development experience and reliability.
 - 🎨 **Advanced Theme Customization**: Supports fine-grained style adjustments to meet diverse use cases and personalization needs.
 
-![demos](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*F_anQ55UdUoAAAAAAAAAAAAADgCCAQ/original)
+![demos](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*UAEeSbJfuM8AAAAAAAAAAAAADgCCAQ/fmt.webp)
 
 ## 1.0.0-alpha.12
 

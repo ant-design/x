@@ -29,7 +29,7 @@ tag: vVERSION
 - 🛡 **TypeScript 全覆盖**：采用 TypeScript 开发，提供完整类型支持，提升开发体验与可靠性
 - 🎨 **深度主题定制能力**：支持细粒度的样式调整，满足各种场景的个性化需求
 
-![demos](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*F_anQ55UdUoAAAAAAAAAAAAADgCCAQ/original)
+![demos](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*UAEeSbJfuM8AAAAAAAAAAAAADgCCAQ/fmt.webp)
 
 ## 1.0.0-alpha.12
 

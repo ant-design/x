@@ -55,4 +55,4 @@ AI 不仅带来了强大的工具功能，也提高了用户对智能体验的�
 - **Sketch 资产：** 提供设计资产包，包括组件和典型模板。[🌟AntDesignX_UI KIT_20241122版.sketch](https://www.yuque.com/attachments/yuque/0/2024/sketch/635293/1732243563729-54cfd0a2-f767-49a6-82ea-fefe168a05ef.sketch)
 - **演示 Demo：** 提供真实样板间体验，包括独立式、助手式、嵌入式。
 
-![典型页面示意](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*F_anQ55UdUoAAAAAAAAAAAAADgCCAQ/original)
+![典型页面示意](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*UAEeSbJfuM8AAAAAAAAAAAAADgCCAQ/fmt.webp)
