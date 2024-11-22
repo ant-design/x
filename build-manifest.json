@@ -1,0 +1,19 @@
+{
+  "assets": {
+    "-async.js": "/c00875de-async.f4099b0b.js",
+    "-async.js.map": "/c00875de-async.f4099b0b.js.map",
+    ".gitkeep.": "/.gitkeep.d41d8cd9.",
+    "common-async.js": "/common-async.86c9fc1f.js",
+    "common-async.js.map": "/common-async.86c9fc1f.js.map",
+    "umi.css": "/umi.ed690379.css",
+    "umi.css.map": "/umi.ed690379.css.map",
+    "umi.js": "/umi.4adb9654.js",
+    "umi.js.map": "/umi.4adb9654.js.map",
+    "vendors_0-async.css": "/vendors_0-async.a54389a5.css",
+    "vendors_0-async.css.map": "/vendors_0-async.a54389a5.css.map",
+    "vendors_0-async.js": "/vendors_0-async.5b22d2fe.js",
+    "vendors_0-async.js.map": "/vendors_0-async.5b22d2fe.js.map",
+    "vendors_1-async.js": "/vendors_1-async.25730fea.js",
+    "vendors_1-async.js.map": "/vendors_1-async.25730fea.js.map"
+  }
+}
