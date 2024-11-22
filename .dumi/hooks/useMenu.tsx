@@ -84,12 +84,12 @@ const useMenu = (options: UseMenuOptions = {}): readonly [MenuProps['items'], st
   const { before, after } = options;
 
   const menuItems = useMemo<MenuProps['items']>(() => {
-    const sidebarItems = [...(sidebarData ?? [])];
+    let sidebarItems = [...(sidebarData ?? [])];
 
-    // 将设计文档未分类的放在最后
+    // 将设计文档未分类的放在最前面
     if (pathname.startsWith('/docs/spec')) {
       const notGrouped = sidebarItems.splice(0, 1);
-      sidebarItems.push(...notGrouped);
+      sidebarItems = [...notGrouped, ...sidebarItems];
     }
 
     // 把 /changelog 拼到开发文档中

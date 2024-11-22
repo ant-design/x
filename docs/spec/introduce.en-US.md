@@ -1,8 +1,5 @@
 ---
-group:
-  title: RICH 设计范式
-  order: 1
-title: 简介
+title: RICH 设计范式简介
 ---
 
 ![](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*DvQ2Q6gYcaAAAAAAAAAAAAAADgCCAQ/fmt.webp)
