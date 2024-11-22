@@ -39,7 +39,7 @@ The ready-made partner for building Copilot applications.
 
 </div>
 
-![demos](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*F_anQ55UdUoAAAAAAAAAAAAADgCCAQ/fmt.webp)
+![demos](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*F_anQ55UdUoAAAAAAAAAAAAADgCCAQ/original)
 
 ## ✨ Features
 

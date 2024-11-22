@@ -13,7 +13,7 @@ Following the Ant Design specification, we developed a React UI library `@ant-de
 
 ---
 
-![](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*F_anQ55UdUoAAAAAAAAAAAAADgCCAQ/fmt.webp)
+![](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*F_anQ55UdUoAAAAAAAAAAAAADgCCAQ/original)
 
 ## ✨ Features
 

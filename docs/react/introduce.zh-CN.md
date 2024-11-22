@@ -13,7 +13,7 @@ title: Ant Design X of React
 
 ---
 
-![](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*F_anQ55UdUoAAAAAAAAAAAAADgCCAQ/fmt.webp)
+![](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*F_anQ55UdUoAAAAAAAAAAAAADgCCAQ/original)
 
 ## ✨ 特性
 
