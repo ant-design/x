@@ -6,7 +6,7 @@
 
 构建 Copilot 应用的好搭档。
 
-[![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] [![NPM version][npm-image]][npm-url] [![NPM downloads][download-image]][download-url]
+[![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] [![NPM version][npm-image]][npm-url] [![NPM downloads][download-image]][download-url] [![][bundlephobia-image]][bundlephobia-url]
 
 [Changelog](./CHANGELOG.zh-US.md) · [Report Bug][github-issues-bug-report] · [Request Feature][github-issues-feature-request] · [English](./README.md) · 中文
 
