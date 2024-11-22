@@ -22,6 +22,8 @@
 [codecov-url]: https://codecov.io/gh/ant-design/x
 [download-image]: https://img.shields.io/npm/dm/@ant-design/x.svg?style=flat-square
 [download-url]: https://npmjs.org/package/@ant-design/x
+[bundlephobia-image]: https://badgen.net/bundlephobia/minzip/@ant-design/x?style=flat-square
+[bundlephobia-url]: https://bundlephobia.com/package/@ant-design/x
 [github-issues-bug-report]: https://github.com/ant-design/x/issues/new?template=bug-report.yml
 [github-issues-feature-request]: https://github.com/ant-design/x/issues/new?template=bug-feature-request.yml
 
