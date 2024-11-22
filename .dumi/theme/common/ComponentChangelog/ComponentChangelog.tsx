@@ -1,5 +1,5 @@
 import { BugOutlined } from '@ant-design/icons';
-import { Drawer, Grid, Popover, Timeline, Typography } from 'antd';
+import { Button, Drawer, Flex, Grid, Popover, Tag, Timeline, Typography } from 'antd';
 import type { TimelineItemProps } from 'antd';
 import { createStyles } from 'antd-style';
 import React, { cloneElement, isValidElement } from 'react';
@@ -35,6 +35,11 @@ function matchDeprecated(v: string): MatchDeprecatedResult {
 }
 
 const useStyle = createStyles(({ token, css }) => ({
+  listWrap: css`
+    > li {
+      line-height: 2;
+    }
+  `,
   linkRef: css`
     margin-inline-start: ${token.marginXS}px;
   `,
@@ -71,14 +76,29 @@ const useStyle = createStyles(({ token, css }) => ({
     position: 'relative',
     [`> ${token.antCls}-drawer-body`]: {
       scrollbarWidth: 'thin',
-      scrollbarColor: 'unset',
+      scrollbarGutter: 'stable',
     },
   },
+  versionWrap: css`
+    margin-bottom: 1em;
+  `,
+  versionTitle: css`
+    height: 28px;
+    line-height: 28px;
+    font-weight: 600;
+    font-size: 20px;
+    margin: 0 !important;
+  `,
+  versionTag: css`
+    user-select: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    &:last-child {
+      margin-inline-end: 0;
+    }
+  `,
 }));
-
-export interface ComponentChangelogProps {
-  children?: React.ReactNode;
-}
 
 const locales = {
   cn: {
@@ -109,8 +129,9 @@ const ParseChangelog: React.FC<{ changelog: string }> = (props) => {
 
     for (let i = 0; i < changelog.length; i += 1) {
       const char = changelog[i];
+      const isDoubleAsterisk = char === '*' && changelog[i + 1] === '*';
 
-      if (char !== '`' && char !== '*') {
+      if (char !== '`' && !isDoubleAsterisk) {
         lastStr += char;
       } else {
         let node: React.ReactNode = lastStr;
@@ -124,7 +145,7 @@ const ParseChangelog: React.FC<{ changelog: string }> = (props) => {
         lastStr = '';
         if (char === '`') {
           isQuota = !isQuota;
-        } else if (char === '*' && changelog[i + 1] === '*') {
+        } else if (isDoubleAsterisk) {
           isBold = !isBold;
           i += 1; // Skip the next '*'
         }
@@ -136,33 +157,36 @@ const ParseChangelog: React.FC<{ changelog: string }> = (props) => {
     return nodes;
   }, [changelog]);
 
+  return <span>{parsedChangelog}</span>;
+};
+
+const RefLinks: React.FC<{ refs: string[] }> = ({ refs }) => {
+  const { styles } = useStyle();
   return (
     <>
-      {/* Changelog */}
-      <span>{parsedChangelog}</span>
+      {refs?.map((ref) => (
+        <a className={styles.linkRef} key={ref} href={ref} target="_blank" rel="noreferrer">
+          #{ref.match(/^.*\/(\d+)$/)?.[1]}
+        </a>
+      ))}
     </>
   );
 };
 
-const RenderChangelogList: React.FC<{ changelogList: ChangelogInfo[]; styles: any }> = ({
-  changelogList,
-  styles,
-}) => {
-  const elements = [];
-  for (let i = 0; i < changelogList.length; i += 1) {
+const RenderChangelogList: React.FC<{ changelogList: ChangelogInfo[] }> = ({ changelogList }) => {
+  const elements: React.ReactNode[] = [];
+  const { styles } = useStyle();
+  const len = changelogList.length;
+  for (let i = 0; i < len; i += 1) {
     const { refs, changelog } = changelogList[i];
     // Check if the next line is an image link and append it to the current line
-    if (i + 1 < changelogList.length && changelogList[i + 1].changelog.trim().startsWith('<img')) {
+    if (i + 1 < len && changelogList[i + 1].changelog.trim().startsWith('<img')) {
       const imgDom = new DOMParser().parseFromString(changelogList[i + 1].changelog, 'text/html');
-      const imgElement = imgDom.querySelector('img');
+      const imgElement = imgDom.querySelector<HTMLImageElement>('img');
       elements.push(
         <li key={i}>
           <ParseChangelog changelog={changelog} />
-          {refs?.map((ref) => (
-            <a className={styles.linkRef} key={ref} href={ref} target="_blank" rel="noreferrer">
-              #{ref.match(/^.*\/(\d+)$/)?.[1]}
-            </a>
-          ))}
+          <RefLinks refs={refs} />
           <br />
           <img
             src={imgElement?.getAttribute('src') || ''}
@@ -176,11 +200,12 @@ const RenderChangelogList: React.FC<{ changelogList: ChangelogInfo[]; styles: an
       elements.push(
         <li key={i}>
           <ParseChangelog changelog={changelog} />
+          <RefLinks refs={refs} />
         </li>,
       );
     }
   }
-  return <ul>{elements}</ul>;
+  return <ul className={styles.listWrap}>{elements}</ul>;
 };
 
 const useChangelog = (componentPath: string, lang: 'cn' | 'en'): ChangelogInfo[] => {
@@ -199,7 +224,7 @@ const useChangelog = (componentPath: string, lang: 'cn' | 'en'): ChangelogInfo[]
   }, [data, componentPath]);
 };
 
-const ComponentChangelog: React.FC<ComponentChangelogProps> = (props) => {
+const ComponentChangelog: React.FC<Readonly<React.PropsWithChildren>> = (props) => {
   const { children } = props;
   const [locale, lang] = useLocale(locales);
   const [show, setShow] = React.useState(false);
@@ -225,37 +250,46 @@ const ComponentChangelog: React.FC<ComponentChangelogProps> = (props) => {
       return {
         children: (
           <Typography>
-            <Typography.Title level={4}>
-              {version}
-              {bugVersionInfo.match && (
-                <Popover
-                  destroyTooltipOnHide
-                  placement="right"
-                  title={<span className={styles.bugReasonTitle}>{locale.bugList}</span>}
-                  content={
-                    <ul className={styles.bugReasonList}>
-                      {bugVersionInfo.reason.map<React.ReactNode>((reason, index) => (
-                        <li key={`reason-${index}`}>
-                          <a type="link" target="_blank" rel="noreferrer" href={reason}>
-                            <BugOutlined />
-                            {reason
-                              ?.replace(/#.*$/, '')
-                              ?.replace(
-                                /^https:\/\/github\.com\/ant-design\/ant-design\/(issues|pull)\//,
-                                '#',
-                              )}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  }
-                >
-                  <BugOutlined className={styles.bug} />
-                </Popover>
-              )}
-            </Typography.Title>
-            {changelogList[0].releaseDate}
-            <RenderChangelogList changelogList={changelogList} styles={styles} />
+            <Flex className={styles.versionWrap} justify="flex-start" align="center" gap="middle">
+              <Button
+                color="default"
+                className={styles.versionTitle}
+                variant="link"
+                href={`/changelog${lang === 'cn' ? '-cn' : ''}/#${version.replace(/\./g, '').replace(/\s.*/g, '-')}`}
+              >
+                {version}
+                {bugVersionInfo.match && (
+                  <Popover
+                    destroyTooltipOnHide
+                    placement="right"
+                    title={<span className={styles.bugReasonTitle}>{locale.bugList}</span>}
+                    content={
+                      <ul className={styles.bugReasonList}>
+                        {bugVersionInfo.reason.map<React.ReactNode>((reason, index) => (
+                          <li key={`reason-${index}`}>
+                            <a type="link" target="_blank" rel="noreferrer" href={reason}>
+                              <BugOutlined />
+                              {reason
+                                ?.replace(/#.*$/, '')
+                                ?.replace(
+                                  /^https:\/\/github\.com\/ant-design\/ant-design\/(issues|pull)\//,
+                                  '#',
+                                )}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    }
+                  >
+                    <BugOutlined className={styles.bug} />
+                  </Popover>
+                )}
+              </Button>
+              <Tag className={styles.versionTag} bordered={false} color="blue">
+                {changelogList[0]?.releaseDate}
+              </Tag>
+            </Flex>
+            <RenderChangelogList changelogList={changelogList} />
           </Typography>
         ),
       };

@@ -68,11 +68,12 @@ const useStyle = createStyles(({ token, css }) => {
       gap: ${token.margin}px;
     `,
     tab_content: css`
-      width: 886px;
+      width: 890px;
       height: 600px;
       box-sizing: border-box;
-      background-image: url(https://mdn.alipayobjects.com/huamei_k0vkmw/afts/img/A*9lNZQrgQIikAAAAAAAAAAAAADsR-AQ/original);
+      background-image: url(https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*RxJMSbQRvTUAAAAAAAAAAAAADgCCAQ/fmt.avif);
       background-repeat: no-repeat;
+      background-size: cover;
       z-index: 2;
     `,
     item: css`
