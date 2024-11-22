@@ -14,7 +14,9 @@ const IndexLayout: React.FC<PropsWithChildren<IndexLayoutProps>> = (props) => {
   return (
     <>
       <Helmet>
-        <title>{title}</title>
+        <title>
+          {title} - {desc}
+        </title>
         <meta property="og:title" content={title} />
         {desc && <meta name="description" content={desc} />}
       </Helmet>
