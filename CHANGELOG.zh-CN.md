@@ -15,6 +15,22 @@ tag: vVERSION
 
 ---
 
+## 1.0.0
+
+`2024-11-22`
+
+🎉 我们非常开心的宣布 [Ant Design X](https://x.ant.design) 1.0.0 版本正式发布啦～
+
+- 🌈 **源自企业级 AI 产品的最佳实践**：基于 RICH 交互范式，提供卓越的 AI 交互体验
+- 🧩 **灵活多样的原子组件**：覆盖绝大部分 AI 对话场景，助力快速构建个性化 AI 交互页面
+- ⚡ **开箱即用的模型对接能力**：轻松对接符合 OpenAI 标准的模型推理服务
+- 🔄 **高效管理对话数据流**：提供好用的数据流管理功能，让开发更高效
+- 📦 **丰富的样板间支持**：提供多种模板，快速启动 LUI 应用开发
+- 🛡 **TypeScript 全覆盖**：采用 TypeScript 开发，提供完整类型支持，提升开发体验与可靠性
+- 🎨 **深度主题定制能力**：支持细粒度的样式调整，满足各种场景的个性化需求
+
+![demos](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*F_anQ55UdUoAAAAAAAAAAAAADgCCAQ/fmt.webp)
+
 ## 1.0.0-alpha.12
 
 `2024-11-07`

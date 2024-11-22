@@ -16,6 +16,22 @@ tag: vVERSION
 
 ---
 
+## 1.0.0
+
+`2024-11-22`
+
+🎉 We are thrilled to announce the official release of [Ant Design X](https://x.ant.design) 1.0.0!
+
+- 🌈 **Derived from Best Practices of Enterprise-Level AI Products**: Built on the RICH interaction paradigm, delivering an exceptional AI interaction experience.
+- 🧩 **Flexible and Diverse Atomic Components**: Covers most AI dialogue scenarios, empowering you to quickly build personalized AI interaction interfaces.
+- ⚡ **Out-of-the-Box Model Integration**: Easily connect with inference services compatible with OpenAI standards.
+- 🔄 **Efficient Management of Conversation Data Flows**: Provides powerful tools for managing data flows, enhancing development efficiency.
+- 📦 **Rich Template Support**: Offers multiple templates for quickly starting LUI application development.
+- 🛡 **Complete TypeScript Support**: Developed with TypeScript, ensuring robust type coverage to improve the development experience and reliability.
+- 🎨 **Advanced Theme Customization**: Supports fine-grained style adjustments to meet diverse use cases and personalization needs.
+
+![demos](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*F_anQ55UdUoAAAAAAAAAAAAADgCCAQ/fmt.webp)
+
 ## 1.0.0-alpha.12
 
 `2024-11-07`
