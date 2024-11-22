@@ -225,7 +225,6 @@ const Independent: React.FC = () => {
   };
 
   const onChange = (nextContent: string) => {
-    if (!nextContent) return;
     setContent(nextContent);
   };
 
