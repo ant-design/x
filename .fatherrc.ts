@@ -1,4 +1,21 @@
+import { codecovWebpackPlugin } from '@codecov/webpack-plugin';
 import { defineConfig } from 'father';
+
+class CodecovWebpackPlugin {
+  private options;
+  constructor(options = {}) {
+    this.options = {
+      enableBundleAnalysis: true,
+      bundleName: 'webpack-bundle',
+      gitService: 'github',
+      disable: false,
+      ...options,
+    };
+  }
+  apply(compiler: any) {
+    return codecovWebpackPlugin(this.options).apply(compiler);
+  }
+}
 
 export default defineConfig({
   plugins: ['@rc-component/father-plugin'],
@@ -30,6 +47,19 @@ export default defineConfig({
       'react-dom': 'ReactDOM',
       '@ant-design/cssinjs': 'antdCssinjs',
       antd: 'antd',
+    },
+    chainWebpack: (memo) => {
+      if (process.env.NODE_ENV === 'production') {
+        memo.plugin('codecov').use(CodecovWebpackPlugin, [
+          {
+            enableBundleAnalysis: true,
+            bundleName: 'antdx',
+            uploadToken: process.env.CODECOV_TOKEN,
+            gitService: 'github',
+          },
+        ]);
+      }
+      return memo;
     },
   },
 });
