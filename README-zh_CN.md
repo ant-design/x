@@ -55,7 +55,7 @@ pnpm add @ant-design/x
 
 在浏览器中使用 `script` 和 `link` 标签直接引入文件，并使用全局变量 `antdx`。
 
-我们在 npm 发布包内的 dist 目录下提供了 `antdx.js`、`antdx.min.js` 和 `antdx.min.js.map`。
+我们在 npm 发布包内的 dist 目录下提供了 `antdx.js`、`antdx.min.js` 和 `antdx.min.js.map`：https://cdn.jsdelivr.net/npm/@ant-design/x@1.0.0/dist/
 
 > **强烈不推荐使用已构建文件**，这样无法按需加载，而且难以获得底层依赖模块的 bug 快速修复支持。
 
