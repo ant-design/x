@@ -27,11 +27,11 @@ jobs:
         env:
           NODE_OPTIONS: --max_old_space_size=4096
 
-      # - name: build dist and bundle analyzer report
-      #   run: bun run dist
-      #   env:
-      #     ANALYZER: 1
-      #     NODE_OPTIONS: --max_old_space_size=4096
+      - name: build dist and bundle analyzer report
+        run: bun run dist
+        env:
+          ANALYZER: 1
+          NODE_OPTIONS: --max_old_space_size=4096
 
       - name: Get version
         id: publish-version
@@ -53,15 +53,15 @@ jobs:
           source-repo: 'git@github.com:ant-design/x.git'
           destination-repo: 'git@gitee.com:ant-design/antd-x.git'
 
-      # - name: Deploy to Surge (with TAG)
-      #   run: |
-      #     export DEPLOY_DOMAIN=ant-design-x-${{ steps.publish-version.outputs.VERSION }}.surge.sh
-      #     cp report.html ./_site
-      #     bunx surge --project ./_site --domain $DEPLOY_DOMAIN --token ${{ secrets.SURGE_TOKEN }}
+      - name: Deploy to Surge (with TAG)
+        run: |
+          export DEPLOY_DOMAIN=ant-design-x-${{ steps.publish-version.outputs.VERSION }}.surge.sh
+          cp report.html ./_site
+          bunx surge --project ./_site --domain $DEPLOY_DOMAIN --token ${{ secrets.SURGE_TOKEN }}
 
-      # - name: Create Commit Comment
-      #   uses: peter-evans/commit-comment@v3
-      #   with:
-      #     body: |
-      #       - Documentation site for this release: https://ant-design-x-${{ steps.publish-version.outputs.VERSION }}.surge.sh
-      #       - Webpack bundle analyzer report page: https://ant-design-x-${{ steps.publish-version.outputs.VERSION }}.surge.sh/report.html
+      - name: Create Commit Comment
+        uses: peter-evans/commit-comment@v3
+        with:
+          body: |
+            - Documentation site for this release: https://ant-design-x-${{ steps.publish-version.outputs.VERSION }}.surge.sh
+            - Webpack bundle analyzer report page: https://ant-design-x-${{ steps.publish-version.outputs.VERSION }}.surge.sh/report.html
