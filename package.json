@@ -91,7 +91,6 @@
     "@ant-design/fast-color": "^2.0.6",
     "@ant-design/icons": "^5.4.0",
     "@babel/runtime": "^7.25.6",
-    "@ctrl/tinycolor": "^4.1.0",
     "classnames": "^2.5.1",
     "rc-motion": "^2.9.2",
     "rc-util": "^5.43.0"
@@ -101,6 +100,7 @@
     "@biomejs/biome": "^1.9.0",
     "@codecov/webpack-plugin": "^1.4.0",
     "@codesandbox/sandpack-react": "^2.19.8",
+    "@ctrl/tinycolor": "^4.1.0",
     "@emotion/react": "^11.13.5",
     "@emotion/server": "^11.11.0",
     "@happy-dom/jest-environment": "^15.7.4",
