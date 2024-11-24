@@ -277,7 +277,7 @@
   },
   "size-limit": [
     {
-      "path": "./dist/antd-x.min.js",
+      "path": "./dist/antdx.min.js",
       "limit": "350 KiB"
     }
   ]
