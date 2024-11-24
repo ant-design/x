@@ -69,7 +69,7 @@ pnpm add @ant-design/x
 
 Add `script` and `link` tags in your browser and use the global variable `antd`.
 
-We provide `antdx.js`, `antdx.min.js`, and `antdx.min.js.map` in the `dist` directory of the npm package.
+We provide `antdx.js`, `antdx.min.js`, and `antdx.min.js.map` in the [dist](https://cdn.jsdelivr.net/npm/@ant-design/x@1.0.0/dist/) directory of the npm package.
 
 ## 🧩 Atomic Components
 
