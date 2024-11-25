@@ -62,6 +62,7 @@ const useStyle = createStyles(({ token, css }) => {
     `,
     conversations: css`
       padding: 0 12px;
+      flex: 1;
       overflow-y: auto;
     `,
     chat: css`

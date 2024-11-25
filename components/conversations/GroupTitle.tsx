@@ -1,6 +1,7 @@
-import React from 'react';
-import { Divider, Typography } from 'antd';
+import { Typography } from 'antd';
 import type { ConfigProviderProps, GetProp } from 'antd';
+import classnames from 'classnames';
+import React from 'react';
 
 export interface GroupTitleProps {
   children?: React.ReactNode;
@@ -9,16 +10,16 @@ export interface GroupTitleProps {
 // User should not care about internal state.
 // Which should pass by context instead.
 export const GroupTitleContext = React.createContext<{
-  direction?: GetProp<ConfigProviderProps, 'direction'>;
+  prefixCls?: GetProp<ConfigProviderProps, 'prefixCls'>;
 }>(null!);
 
 const GroupTitle: React.FC<GroupTitleProps> = ({ children }) => {
-  const { direction } = React.useContext(GroupTitleContext);
+  const { prefixCls } = React.useContext(GroupTitleContext);
 
   return (
-    <Divider orientation={direction === 'rtl' ? 'right' : 'left'} plain>
-      {children && <Typography.Text type="secondary">{children}</Typography.Text>}
-    </Divider>
+    <div className={classnames(`${prefixCls}-group-title`)}>
+      {children && <Typography.Text>{children}</Typography.Text>}
+    </div>
   );
 };
 

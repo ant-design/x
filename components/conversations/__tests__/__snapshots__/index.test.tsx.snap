@@ -80,17 +80,12 @@ exports[`Conversations Component rtl render component should be rendered correct
 >
   <li>
     <div
-      class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-right ant-divider-plain ant-divider-rtl"
-      role="separator"
+      class="ant-conversations-group-title"
     >
       <span
-        class="ant-divider-inner-text"
+        class="ant-typography ant-typography-rtl"
       >
-        <span
-          class="ant-typography ant-typography-rtl ant-typography-secondary"
-        >
-          pinned
-        </span>
+        pinned
       </span>
     </div>
     <ul
@@ -115,14 +110,14 @@ exports[`Conversations Component rtl render component should be rendered correct
           What is Ant Design X ?
         </span>
         <span
-          aria-label="more"
-          class="anticon anticon-more ant-dropdown-trigger ant-dropdown-rtl ant-conversations-menu-icon"
+          aria-label="ellipsis"
+          class="anticon anticon-ellipsis ant-dropdown-trigger ant-dropdown-rtl ant-conversations-menu-icon"
           role="img"
           tabindex="-1"
         >
           <svg
             aria-hidden="true"
-            data-icon="more"
+            data-icon="ellipsis"
             fill="currentColor"
             focusable="false"
             height="1em"
@@ -130,7 +125,7 @@ exports[`Conversations Component rtl render component should be rendered correct
             width="1em"
           >
             <path
-              d="M456 231a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0z"
+              d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
             />
           </svg>
         </span>
@@ -139,8 +134,7 @@ exports[`Conversations Component rtl render component should be rendered correct
   </li>
   <li>
     <div
-      class="ant-divider ant-divider-horizontal ant-divider-plain ant-divider-rtl"
-      role="separator"
+      class="ant-conversations-group-title"
     />
     <ul
       class="ant-conversations-list"
@@ -163,14 +157,14 @@ exports[`Conversations Component rtl render component should be rendered correct
           </div>
         </span>
         <span
-          aria-label="more"
-          class="anticon anticon-more ant-dropdown-trigger ant-dropdown-rtl ant-conversations-menu-icon"
+          aria-label="ellipsis"
+          class="anticon anticon-ellipsis ant-dropdown-trigger ant-dropdown-rtl ant-conversations-menu-icon"
           role="img"
           tabindex="-1"
         >
           <svg
             aria-hidden="true"
-            data-icon="more"
+            data-icon="ellipsis"
             fill="currentColor"
             focusable="false"
             height="1em"
@@ -178,7 +172,7 @@ exports[`Conversations Component rtl render component should be rendered correct
             width="1em"
           >
             <path
-              d="M456 231a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0z"
+              d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
             />
           </svg>
         </span>
@@ -193,14 +187,14 @@ exports[`Conversations Component rtl render component should be rendered correct
           In Docker, use 🐑 Ollama and initialize
         </span>
         <span
-          aria-label="more"
-          class="anticon anticon-more ant-dropdown-trigger ant-dropdown-rtl ant-conversations-menu-icon"
+          aria-label="ellipsis"
+          class="anticon anticon-ellipsis ant-dropdown-trigger ant-dropdown-rtl ant-conversations-menu-icon"
           role="img"
           tabindex="-1"
         >
           <svg
             aria-hidden="true"
-            data-icon="more"
+            data-icon="ellipsis"
             fill="currentColor"
             focusable="false"
             height="1em"
@@ -208,7 +202,7 @@ exports[`Conversations Component rtl render component should be rendered correct
             width="1em"
           >
             <path
-              d="M456 231a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0z"
+              d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
             />
           </svg>
         </span>

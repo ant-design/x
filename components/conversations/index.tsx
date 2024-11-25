@@ -176,7 +176,7 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
         if (enableGroup) {
           return (
             <li key={groupInfo.name || `key-${groupIndex}`}>
-              <GroupTitleContext.Provider value={{ direction }}>
+              <GroupTitleContext.Provider value={{ prefixCls }}>
                 {groupInfo.title?.(groupInfo.name!, { components: { GroupTitle } }) || (
                   <GroupTitle key={groupInfo.name}>{groupInfo.name}</GroupTitle>
                 )}

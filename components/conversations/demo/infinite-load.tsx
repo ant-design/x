@@ -1,12 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { Conversations, type ConversationsProps } from '@ant-design/x';
-import { Avatar, Divider, Spin, Card, type GetProp } from 'antd';
-import InfiniteScroll from 'react-infinite-scroll-component';
 import { RedoOutlined } from '@ant-design/icons';
+import { Conversations, type ConversationsProps } from '@ant-design/x';
+import { Avatar, Divider, type GetProp, Spin, theme } from 'antd';
+import React, { useEffect, useState } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<GetProp<ConversationsProps, 'items'>>([]);
+
+  const { token } = theme.useToken();
+
+  // Customize the style of the container
+  const style = {
+    width: 280,
+    height: 600,
+    background: token.colorBgContainer,
+    borderRadius: token.borderRadius,
+    overflow: 'scroll',
+  };
 
   const loadMoreData = () => {
     if (loading) {
@@ -36,15 +47,7 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <Card
-      id="scrollableDiv"
-      style={{
-        height: 600,
-        width: 320,
-        overflow: 'auto',
-      }}
-      size="small"
-    >
+    <div id="scrollableDiv" style={style}>
       <InfiniteScroll
         dataLength={data.length}
         next={loadMoreData}
@@ -56,11 +59,10 @@ const App: React.FC = () => {
         }
         endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
         scrollableTarget="scrollableDiv"
-        style={{ width: 270 }}
       >
         <Conversations items={data} defaultActiveKey="demo1" groupable />
       </InfiniteScroll>
-    </Card>
+    </div>
   );
 };
 
