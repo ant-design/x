@@ -19,6 +19,9 @@ class CodecovWebpackPlugin {
 
 export default defineConfig({
   plugins: ['@rc-component/father-plugin'],
+  targets: {
+    chrome: 80,
+  },
   esm: {
     input: 'components/',
     ignores: ['**/demo/**', '**/__tests__/**'],
