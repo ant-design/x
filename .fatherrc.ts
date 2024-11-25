@@ -19,22 +19,13 @@ class CodecovWebpackPlugin {
 
 export default defineConfig({
   plugins: ['@rc-component/father-plugin'],
-  targets: {
-    chrome: 80,
-  },
   esm: {
     input: 'components/',
     ignores: ['**/demo/**', '**/__tests__/**'],
-    targets: {
-      chrome: 80,
-    },
   },
   cjs: {
     input: 'components/',
     ignores: ['**/demo/**', '**/__tests__/**'],
-    targets: {
-      chrome: 80,
-    },
   },
   umd: {
     entry: 'components/index.ts',
@@ -42,6 +33,9 @@ export default defineConfig({
     output: {
       path: 'dist/',
       filename: 'antdx',
+    },
+    targets: {
+      chrome: 80,
     },
     sourcemap: true,
     generateUnminified: true,
