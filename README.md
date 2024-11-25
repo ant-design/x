@@ -4,7 +4,7 @@
 
 <h1>Ant Design X</h1>
 
-The ready-made partner for building Copilot applications.
+Craft AI-driven interfaces effortlessly.
 
 [![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] [![NPM version][npm-image]][npm-url] [![NPM downloads][download-image]][download-url] [![][bundlephobia-image]][bundlephobia-url]
 

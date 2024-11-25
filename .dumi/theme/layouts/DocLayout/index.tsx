@@ -22,11 +22,11 @@ import SidebarLayout from '../SidebarLayout';
 const locales = {
   cn: {
     title: 'Ant Design X',
-    description: '构建 Copilot 应用的好搭档',
+    description: '轻松打造 AI 驱动的界面。',
   },
   en: {
     title: 'Ant Design X',
-    description: 'The ready-made partner for building Copilot applications.',
+    description: 'Craft AI-driven interfaces effortlessly.',
   },
 };
 
