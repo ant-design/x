@@ -46,7 +46,7 @@ const Home = () => (
 export default Home;
 ```
 
-好了，现在你应该能看到页面上已经有了 `@ant-design/x` 的气泡组件，接下来就可以继续选用其他组件开发应用了。其他开发流程你可以参考 Next.js 的[官方文档](https://nextjs.org/)。
+好了，现在你应该能看到页面上已经有了 `@ant-design/x` 的气泡组件，接下来就可以继续选用其他组件开发应用了。其他开发流程你可以参考 Next.js 的[官方文档](https://nextjs.org/docs)。
 
 细心的朋友可以发现这时引入的 @ant-design/x 组件在首屏并没有样式，下面就需要根据 Next.js 的模式来选择不同的 SSR 样式处理方式。
 
