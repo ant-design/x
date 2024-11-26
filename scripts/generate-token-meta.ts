@@ -41,11 +41,12 @@ function getTokenList(list?: DeclarationReflection[], source?: string) {
 }
 
 const main = async () => {
-  const app = await (Application as any).bootstrap(
+  const app = await Application.bootstrap(
     {
       // typedoc options here
       entryPoints: ['components/*/style/index.{ts,tsx}'],
       skipErrorChecking: true,
+      logLevel: 'Error',
     },
     [new TSConfigReader(), new TypeDocReader()],
   );
