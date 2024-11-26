@@ -26,6 +26,12 @@ import {
 import { Button, type GetProp, Space } from 'antd';
 import { UploadChangeParam } from 'antd/es/upload';
 
+interface AttachedFile {
+  uid: string;
+  name: string;
+  size: number;
+}
+
 const renderTitle = (icon: React.ReactElement, title: string) => (
   <Space align="start">
     {icon}
@@ -201,7 +207,7 @@ const Independent: React.FC = () => {
 
   const [activeKey, setActiveKey] = React.useState(defaultConversationsItems[0].key);
 
-  const [attachedFileName, setAttachedFileName] = React.useState('');
+  const [attachedFiles, setAttachedFiles] = React.useState<AttachedFile[]>([]);
 
   // ==================== Runtime ====================
   const [agent] = useXAgent({
@@ -290,11 +296,16 @@ const Independent: React.FC = () => {
   );
 
   const handleFileChange = (info: UploadChangeParam) => {
-    const { fileList } = info;
-    if (fileList.length > 0) {
-      setAttachedFileName(fileList[0].name);
-    } else {
-      setAttachedFileName('');
+    const { file } = info;
+    if (file && !file.status) {
+      setAttachedFiles((prevFiles) => [
+        ...prevFiles,
+        {
+          uid: file.uid,
+          name: file.name,
+          size: file.size ?? 0,
+        },
+      ]);
     }
   };
 
@@ -308,25 +319,13 @@ const Independent: React.FC = () => {
       }}
       onChange={handleFileChange}
     >
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div>
         <Button type="text" icon={<PaperClipOutlined />} />
-        {attachedFileName && (
-          <span
-            style={{
-              marginLeft: '8px',
-              padding: '4px 12px',
-              borderRadius: '20px',
-              backgroundColor: '#cbdcfc',
-              border: '1px solid #a0c1e6',
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontWeight: 'bold',
-            }}
-          >
-            {attachedFileName}
-          </span>
-        )}
+        <Space direction="vertical" style={{ marginTop: 8 }}>
+          {attachedFiles.map((file) => (
+            <Attachments.FileCard key={file.uid} item={file} />
+          ))}
+        </Space>
       </div>
     </Attachments>
   );
