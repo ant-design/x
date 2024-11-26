@@ -17,13 +17,14 @@ import {
   EllipsisOutlined,
   FireOutlined,
   HeartOutlined,
-  LinkOutlined,
+  PaperClipOutlined,
   PlusOutlined,
   ReadOutlined,
   ShareAltOutlined,
   SmileOutlined,
 } from '@ant-design/icons';
 import { Button, type GetProp, Space } from 'antd';
+import { UploadChangeParam } from 'antd/es/upload';
 
 const renderTitle = (icon: React.ReactElement, title: string) => (
   <Space align="start">
@@ -200,6 +201,8 @@ const Independent: React.FC = () => {
 
   const [activeKey, setActiveKey] = React.useState(defaultConversationsItems[0].key);
 
+  const [attachedFileName, setAttachedFileName] = React.useState('');
+
   // ==================== Runtime ====================
   const [agent] = useXAgent({
     request: async ({ message }, { onSuccess }) => {
@@ -286,6 +289,15 @@ const Independent: React.FC = () => {
     </Space>
   );
 
+  const handleFileChange = (info: UploadChangeParam) => {
+    const { fileList } = info;
+    if (fileList.length > 0) {
+      setAttachedFileName(fileList[0].name);
+    } else {
+      setAttachedFileName('');
+    }
+  };
+
   const attachmentsNode = (
     <Attachments
       beforeUpload={() => false}
@@ -294,8 +306,28 @@ const Independent: React.FC = () => {
         title: 'Drag & Drop files here',
         description: 'Support file type: image, video, audio, document, etc.',
       }}
+      onChange={handleFileChange}
     >
-      <Button type="text" icon={<LinkOutlined />} />
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Button type="text" icon={<PaperClipOutlined />} />
+        {attachedFileName && (
+          <span
+            style={{
+              marginLeft: '8px',
+              padding: '4px 12px',
+              borderRadius: '20px',
+              backgroundColor: '#cbdcfc',
+              border: '1px solid #a0c1e6',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontWeight: 'bold',
+            }}
+          >
+            {attachedFileName}
+          </span>
+        )}
+      </div>
     </Attachments>
   );
 
