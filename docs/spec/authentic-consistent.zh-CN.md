@@ -78,4 +78,4 @@ title: 真实一致
 - **声音音色**
 - **行为动作**
 
-![](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*0MTlRYAWlCQAAAAAAAAAAAAADgCCAQ/fmt.webp)
+![](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*Ao8DSZhMfIAAAAAAAAAAAAAADgCCAQ/original)
