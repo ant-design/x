@@ -23,7 +23,7 @@ import {
   ShareAltOutlined,
   SmileOutlined,
 } from '@ant-design/icons';
-import { Button, type GetProp, Space } from 'antd';
+import { Badge, Button, type GetProp, Space } from 'antd';
 import { UploadChangeParam } from 'antd/es/upload';
 
 interface AttachedFile {
@@ -201,7 +201,7 @@ const Independent: React.FC = () => {
   const { styles } = useStyle();
 
   // ==================== State ====================
-  const [content, setContent] = React.useState('');
+  const [headerOpen, setHeaderOpen] = React.useState(false);
 
   const [conversationsItems, setConversationsItems] = React.useState(defaultConversationsItems);
 
@@ -230,11 +230,6 @@ const Independent: React.FC = () => {
   const onSubmit = (nextContent: string) => {
     if (!nextContent) return;
     onRequest(nextContent);
-    setContent('');
-  };
-
-  const onChange = (nextContent: string) => {
-    setContent(nextContent);
   };
 
   const onPromptsItemClick: GetProp<typeof Prompts, 'onItemClick'> = (info) => {
@@ -310,24 +305,43 @@ const Independent: React.FC = () => {
   };
 
   const attachmentsNode = (
-    <Attachments
-      beforeUpload={() => false}
-      placeholder={{
-        icon: <CloudUploadOutlined />,
-        title: 'Drag & Drop files here',
-        description: 'Support file type: image, video, audio, document, etc.',
+    <div>
+      <Badge dot={attachedFiles.length > 0 && !headerOpen}>
+        <Button
+          type="text"
+          icon={<PaperClipOutlined />}
+          onClick={() => setHeaderOpen(!headerOpen)}
+        />
+      </Badge>
+    </div>
+  );
+
+  const senderHeader = (
+    <Sender.Header
+      title="Attachments"
+      open={headerOpen}
+      onOpenChange={setHeaderOpen}
+      styles={{
+        content: {
+          padding: 0,
+        },
       }}
-      onChange={handleFileChange}
     >
-      <div>
-        <Button type="text" icon={<PaperClipOutlined />} />
-        <Space direction="vertical" style={{ marginTop: 8 }}>
-          {attachedFiles.map((file) => (
-            <Attachments.FileCard key={file.uid} item={file} />
-          ))}
-        </Space>
-      </div>
-    </Attachments>
+      <Attachments
+        beforeUpload={() => false}
+        items={attachedFiles}
+        onChange={handleFileChange}
+        placeholder={(type) =>
+          type === 'drop'
+            ? { title: 'Drop file here' }
+            : {
+                icon: <CloudUploadOutlined />,
+                title: 'Upload files',
+                description: 'Click or drag files to this area to upload',
+              }
+        }
+      />
+    </Sender.Header>
   );
 
   const logoNode = (
@@ -373,8 +387,7 @@ const Independent: React.FC = () => {
         <Prompts items={senderPromptsItems} onItemClick={onPromptsItemClick} />
         {/* 🌟 输入框 */}
         <Sender
-          value={content}
-          onChange={onChange}
+          header={senderHeader}
           onSubmit={onSubmit}
           prefix={attachmentsNode}
           loading={agent.isRequesting()}
