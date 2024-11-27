@@ -21,6 +21,7 @@ export interface XChatConfig<
   AgentMessage extends SimpleType = string,
   BubbleMessage extends SimpleType = AgentMessage,
 > {
+  /** If the onRequest method is used, the agent parameter is required */
   agent?: XAgent<AgentMessage>;
 
   defaultMessages?: DefaultMessageInfo<AgentMessage>[];
@@ -128,6 +129,9 @@ export default function useXChat<
   const getRequestMessages = () => getFilteredMessages(getMessages());
 
   const onRequest = useEvent((message: AgentMessage) => {
+    if (!agent)
+      throw new Error('If the onRequest method is used, the agent parameter is required!');
+
     let loadingMsgId: number | string | null = null;
 
     // Add placeholder message
@@ -187,7 +191,7 @@ export default function useXChat<
       return msg;
     };
 
-    agent?.request(
+    agent.request(
       {
         message,
         messages: getRequestMessages(),
