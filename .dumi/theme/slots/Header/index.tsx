@@ -109,7 +109,11 @@ const Header: React.FC = () => {
 
   const { scrollY, scrollYDirection } = useScrollY();
 
-  const innerHeight = window?.innerHeight || 1080;
+  let innerHeight = 1080;
+
+  if (typeof window !== 'undefined') {
+    innerHeight = window.innerHeight;
+  }
 
   const isMini = scrollY > innerHeight && !isMobile;
 
