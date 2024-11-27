@@ -1,48 +1,23 @@
-import React from 'react';
-import { Card } from 'antd';
 import { Conversations } from '@ant-design/x';
 import type { ConversationsProps } from '@ant-design/x';
-import { GithubOutlined, AlipayCircleOutlined, DockerOutlined } from '@ant-design/icons';
-import type { GetProp } from 'antd';
+import { type GetProp, theme } from 'antd';
+import React from 'react';
 
-const items: GetProp<ConversationsProps, 'items'> = [
-  // Basic
-  {
-    key: 'item1',
-    label: 'What is Ant Design X?',
-    icon: <GithubOutlined />,
-  },
-  // label as ReactNode
-  {
-    key: 'item2',
-    label: (
-      <div>
-        Getting Started:{' '}
-        <a target="_blank" href="https://ant-design.antgroup.com/index-cn" rel="noreferrer">
-          Ant Design !
-        </a>
-      </div>
-    ),
-    icon: <AlipayCircleOutlined />,
-  },
-  // Auto ellipsis
-  {
-    key: 'item3',
-    label: 'In Docker, use 🐑 Ollama and initialize',
-    icon: <DockerOutlined />,
-  },
-  // Disabled
-  {
-    key: 'item4',
-    label: 'Expired, please go to the recycle bin to check',
-    disabled: true,
-  },
-];
+const items: GetProp<ConversationsProps, 'items'> = Array.from({ length: 4 }).map((_, index) => ({
+  key: `item${index + 1}`,
+  label: `Conversation Item ${index + 1}`,
+  disabled: index === 3,
+}));
 
-const App = () => (
-  <Card style={{ width: 320 }} size="small">
-    <Conversations items={items} defaultActiveKey="item1" />
-  </Card>
-);
+export default () => {
+  const { token } = theme.useToken();
 
-export default App;
+  // Customize the style of the container
+  const style = {
+    width: 256,
+    background: token.colorBgContainer,
+    borderRadius: token.borderRadius,
+  };
+
+  return <Conversations items={items} defaultActiveKey="item1" style={style} />;
+};

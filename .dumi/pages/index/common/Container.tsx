@@ -23,6 +23,10 @@ const useStyle = createStyles(({ token, css }) => {
       color: #fff;
       text-align: center;
       padding-bottom: ${token.padding}px;
+
+      @media only screen and (max-width: ${token.mobileMaxWidth}px) {
+        font-size: ${token.fontSizeHeading1}px;
+      }
     `,
     desc: css`
       color: ${token.colorTextSecondary};

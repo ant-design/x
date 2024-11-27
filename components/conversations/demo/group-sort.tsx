@@ -1,65 +1,52 @@
-import React from 'react';
-import { Card, Space, type GetProp } from 'antd';
+import { CommentOutlined } from '@ant-design/icons';
 import type { ConversationsProps } from '@ant-design/x';
 import { Conversations } from '@ant-design/x';
-import { GithubOutlined, AlipayCircleOutlined, DockerOutlined } from '@ant-design/icons';
+import { type GetProp, Space, theme } from 'antd';
+import React from 'react';
 
-const items: GetProp<ConversationsProps, 'items'> = [
-  {
-    key: 'demo1',
-    label: 'What is Ant Design X ?',
-    icon: <GithubOutlined />,
-    group: 'Pinned',
-  },
-  {
-    key: 'demo2',
-    label: (
-      <div>
-        Getting Started:{' '}
-        <a target="_blank" href="https://ant-design.antgroup.com/index-cn" rel="noreferrer">
-          Ant Design !
-        </a>
-      </div>
-    ),
-    icon: <AlipayCircleOutlined />,
-    group: 'Pinned',
-  },
-  // 默认分组
-  {
-    key: 'demo4',
-    label: 'In Docker, use 🐑 Ollama and initialize',
-    icon: <DockerOutlined />,
-  },
-  {
-    key: 'demo5',
-    label: 'Expired, please go to the recycle bin to check',
-    disabled: true,
-    group: 'Expired',
-  },
-];
+const items: GetProp<ConversationsProps, 'items'> = Array.from({ length: 6 }).map((_, index) => {
+  const timestamp = index <= 3 ? 1732204800000 : 1732204800000 - 60 * 60 * 24;
 
-const App = () => (
-  <Card style={{ width: 320 }} size="small">
-    <Conversations
-      groupable={{
-        sort(a, b) {
-          if (a === b) return 0;
+  return {
+    key: `item${index + 1}`,
+    label: `Conversation ${timestamp + index * 60 * 60}`,
+    timestamp: timestamp + index * 60 * 60,
+    group: index <= 3 ? 'Today' : 'Yesterday',
+  };
+});
 
-          return a === 'Pinned' ? -1 : 1;
-        },
-        title: (group, { components: { GroupTitle } }) =>
-          group ? (
-            <GroupTitle>
-              <Space>🔥{group}</Space>
-            </GroupTitle>
-          ) : (
-            <GroupTitle />
-          ),
-      }}
-      defaultActiveKey="demo1"
-      items={items}
-    />
-  </Card>
-);
+const App = () => {
+  const { token } = theme.useToken();
+
+  // Customize the style of the container
+  const style = {
+    width: 256,
+    background: token.colorBgContainer,
+    borderRadius: token.borderRadius,
+  };
+
+  const groupable: GetProp<typeof Conversations, 'groupable'> = {
+    sort(a, b) {
+      if (a === b) return 0;
+
+      return a === 'Today' ? -1 : 1;
+    },
+    title: (group, { components: { GroupTitle } }) =>
+      group ? (
+        <GroupTitle>
+          <Space>
+            <CommentOutlined />
+            <span>{group}</span>
+          </Space>
+        </GroupTitle>
+      ) : (
+        <GroupTitle />
+      ),
+  };
+
+  return (
+    <Conversations style={style} groupable={groupable} defaultActiveKey="demo1" items={items} />
+  );
+};
 
 export default App;

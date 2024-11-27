@@ -1,45 +1,25 @@
-import React from 'react';
-import { Card, type GetProp } from 'antd';
 import { Conversations, type ConversationsProps } from '@ant-design/x';
-import { GithubOutlined, AlipayCircleOutlined, DockerOutlined } from '@ant-design/icons';
+import { type GetProp, theme } from 'antd';
+import React from 'react';
 
-const items: GetProp<ConversationsProps, 'items'> = [
-  {
-    key: 'demo1',
-    label: 'What is Ant Design X ?',
-    icon: <GithubOutlined />,
-    group: 'Group1',
-  },
-  {
-    key: 'demo2',
-    label: (
-      <div>
-        Getting Started:{' '}
-        <a target="_blank" href="https://ant-design.antgroup.com/index-cn" rel="noreferrer">
-          Ant Design !
-        </a>
-      </div>
-    ),
-    icon: <AlipayCircleOutlined />,
-    group: 'Group1',
-  },
-  {
-    key: 'demo4',
-    label: 'In Docker, use 🐑 Ollama and initialize',
-    icon: <DockerOutlined />,
-    group: 'Group2',
-  },
-  {
-    key: 'demo5',
-    label: 'Expired, please go to the recycle bin to check',
-    group: 'Group2',
-  },
-];
+const items: GetProp<ConversationsProps, 'items'> = Array.from({ length: 4 }).map((_, index) => ({
+  key: `item${index + 1}`,
+  label: `Conversation Item ${index + 1}`,
+  disabled: index === 3,
+  group: index === 3 ? 'Group2' : 'Group1',
+}));
 
-const App = () => (
-  <Card style={{ width: 320 }} size="small">
-    <Conversations groupable defaultActiveKey="demo1" items={items} />
-  </Card>
-);
+const App = () => {
+  const { token } = theme.useToken();
+
+  // Customize the style of the container
+  const style = {
+    width: 256,
+    background: token.colorBgContainer,
+    borderRadius: token.borderRadius,
+  };
+
+  return <Conversations items={items} defaultActiveKey="item1" style={style} groupable />;
+};
 
 export default App;
