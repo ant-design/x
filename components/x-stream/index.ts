@@ -62,13 +62,18 @@ function splitStream() {
 }
 
 /**
+ * @link https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#fields
+ */
+export type SSEFields = 'data' | 'event' | 'id' | 'retry';
+
+/**
  * @example
  * const sseObject = {
  *    event: 'delta',
  *    data: '{ key: "world!" }',
  * };
  */
-export type SSEOutput = Record<string, any>;
+export type SSEOutput = Partial<Record<SSEFields, any>>;
 
 /**
  * @description A TransformStream inst that transforms a part string into {@link SSEOutput}

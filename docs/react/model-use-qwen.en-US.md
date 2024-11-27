@@ -21,8 +21,13 @@ This method is **a ready-to-use solution for React environments** provided by An
 ```tsx
 import { useXAgent } from '@ant-design/x';
 
+interface YourMessageType {
+  role?: string;
+  content?: string;
+}
+
 // ... react env
-const [agent] = useXAgent({
+const [agent] = useXAgent<YourMessageType>({
   baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
   model: 'qwen-plus',
   // Use cautiously in production!

@@ -72,7 +72,7 @@ const useStyle = createStyles(({ token, css }) => {
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      padding: 24px 0;
+      padding: 24px;
       gap: 16px;
     `,
     messages: css`

@@ -21,7 +21,7 @@ export interface XChatConfig<
   AgentMessage extends SimpleType = string,
   BubbleMessage extends SimpleType = AgentMessage,
 > {
-  agent: XAgent<AgentMessage>;
+  agent?: XAgent<AgentMessage>;
 
   defaultMessages?: DefaultMessageInfo<AgentMessage>[];
 
@@ -187,7 +187,7 @@ export default function useXChat<
       return msg;
     };
 
-    agent.request(
+    agent?.request(
       {
         message,
         messages: getRequestMessages(),
