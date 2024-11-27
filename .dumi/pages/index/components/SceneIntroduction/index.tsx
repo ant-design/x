@@ -68,12 +68,23 @@ const useStyle = createStyles(({ token, css }) => {
       margin-top: ${token.pcContainerMargin / 2}px;
     `,
     mobile_content: css`
-      background: #0c0e10cc;
-      border-radius: 24px;
       margin: ${token.marginXXL}px 0;
+
+      h3 {
+        text-align: center;
+        font-size: ${token.fontSizeHeading3}px;
+      }
+
+      p {
+        text-align: center;
+        opacity: 0.65;
+      }
 
       img {
         width: 100%;
+        background: #0c0e10cc;
+        border-radius: 12px;
+        margin-top: ${token.margin}px;
       }
     `,
     tab: css`
@@ -196,11 +207,13 @@ const SceneBanner: React.FC = () => {
         alt="bg"
       />
       {isMobile ? (
-        <Carousel>
+        <Carousel autoplay draggable autoplaySpeed={5000} swipeToSlide>
           {tabItems.map(
             (item) =>
               item.img && (
                 <div className={styles.mobile_content}>
+                  <h3>{item.title}</h3>
+                  <p>{item.desc}</p>
                   <img src={item.img} alt="item.img" loading="lazy" />
                 </div>
               ),

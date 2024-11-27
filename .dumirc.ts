@@ -179,5 +179,6 @@ export default defineConfig({
       document.documentElement.className += isZhCN(pathname) ? 'zh-cn' : 'en-us';
     })();
     `,
+    'https://gw.alipayobjects.com/os/lib/lottie-web/5.12.2/build/player/lottie_svg.min.js',
   ],
 });

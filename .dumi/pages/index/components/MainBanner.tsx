@@ -218,7 +218,7 @@ const MainBanner: React.FC = () => {
   const { styles } = useStyle();
 
   const [bgLottieRef, bgAnimation] = useLottie({
-    renderer: 'canvas',
+    renderer: 'svg',
     loop: false,
     autoplay: false,
     rendererSettings: {

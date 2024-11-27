@@ -109,7 +109,9 @@ const Header: React.FC = () => {
 
   const { scrollY, scrollYDirection } = useScrollY();
 
-  const isMini = scrollY > window.innerHeight && !isMobile;
+  const innerHeight = window?.innerHeight || 1080;
+
+  const isMini = scrollY > innerHeight && !isMobile;
 
   const sharedProps: SharedProps = {
     isZhCN: lang === 'cn',
@@ -150,7 +152,7 @@ const Header: React.FC = () => {
     );
   }
 
-  const isHidden = scrollY > window.innerHeight * 1.5 && scrollYDirection === 'down';
+  const isHidden = scrollY > innerHeight * 1.5 && scrollYDirection === 'down';
 
   return (
     <header
