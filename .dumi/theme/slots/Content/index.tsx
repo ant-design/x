@@ -1,4 +1,4 @@
-import { Col, Flex, Space, Typography } from 'antd';
+import { Col, Flex, Typography } from 'antd';
 import classNames from 'classnames';
 import { FormattedMessage, useRouteMeta } from 'dumi';
 import React, { useContext, useLayoutEffect, useMemo, useState } from 'react';
@@ -54,22 +54,20 @@ const Content: React.FC<React.PropsWithChildren> = ({ children }) => {
         </InViewSuspense>
         <article className={classNames(styles.articleWrapper, { rtl: isRTL })}>
           {meta.frontmatter?.title ? (
-            <Flex justify="space-between">
-              <Typography.Title style={{ fontSize: 32, position: 'relative' }}>
-                <Space>
-                  <span>{meta.frontmatter?.title}</span>
-                  <span>{meta.frontmatter?.subtitle}</span>
-                  {!pathname.startsWith('/components/overview') && (
-                    <InViewSuspense fallback={null}>
-                      <EditButton
-                        title={<FormattedMessage id="app.content.edit-page" />}
-                        filename={meta.frontmatter.filename}
-                      />
-                    </InViewSuspense>
-                  )}
-                </Space>
-              </Typography.Title>
-            </Flex>
+            <Typography.Title style={{ fontSize: 32, position: 'relative' }}>
+              <Flex gap={8} wrap>
+                <span>{meta.frontmatter?.title}</span>
+                <span>{meta.frontmatter?.subtitle}</span>
+                {!pathname.startsWith('/components/overview') && (
+                  <InViewSuspense fallback={null}>
+                    <EditButton
+                      title={<FormattedMessage id="app.content.edit-page" />}
+                      filename={meta.frontmatter.filename}
+                    />
+                  </InViewSuspense>
+                )}
+              </Flex>
+            </Typography.Title>
           ) : null}
           <InViewSuspense fallback={null}>
             <DocMeta />
