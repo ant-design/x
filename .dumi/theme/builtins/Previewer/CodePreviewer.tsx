@@ -374,7 +374,7 @@ createRoot(document.getElementById('container')).render(<Demo />);
 
   const codeBoxDemoStyle: React.CSSProperties = {
     padding: iframe || compact ? 0 : undefined,
-    overflow: iframe || compact ? 'hidden' : undefined,
+    overflow: iframe || compact ? 'hidden' : 'auto',
     backgroundColor: background === 'grey' ? backgroundGrey : undefined,
   };
 

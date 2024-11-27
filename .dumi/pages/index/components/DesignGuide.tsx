@@ -127,6 +127,10 @@ const useStyle = createStyles(({ token, css }) => {
       font-size: ${token.fontSizeHeading1 + 10}px;
       line-height: 56px;
       font-weight: bold;
+
+      @media only screen and (max-width: ${token.mobileMaxWidth}px) {
+        font-size: ${token.fontSizeHeading2}px;
+      }
     `,
     chain_item_desc: css`
       font-size: ${token.fontSizeHeading5}px;

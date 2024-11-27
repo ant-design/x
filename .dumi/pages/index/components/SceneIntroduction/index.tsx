@@ -1,10 +1,11 @@
-import { Button } from 'antd';
+import { Button, Carousel } from 'antd';
 import { createStyles } from 'antd-style';
 import classnames from 'classnames';
 import React from 'react';
 
 import useLocale from '../../../../hooks/useLocale';
 import Container from '../../common/Container';
+import SiteContext from '../SiteContext';
 import AssistantScene from './Assistant';
 import Independent from './Independent';
 import NestScene from './Nest';
@@ -48,11 +49,16 @@ const useStyle = createStyles(({ token, css }) => {
   return {
     container: css`
       position: relative;
+
+      @media screen and (max-width: ${token.mobileMaxWidth}px) {
+        height: 80vh;
+      }
     `,
     content_bg: css`
       position: absolute;
-      top: -200px;
-      right: -150px;
+      top: 0;
+      right: 0;
+      transform: translate(10%, -20%);
     `,
     content: css`
       display: flex;
@@ -60,6 +66,26 @@ const useStyle = createStyles(({ token, css }) => {
       gap: ${token.paddingXL}px;
       width: 100%;
       margin-top: ${token.pcContainerMargin / 2}px;
+    `,
+    mobile_content: css`
+      margin: ${token.marginXXL}px 0;
+
+      h3 {
+        text-align: center;
+        font-size: ${token.fontSizeHeading3}px;
+      }
+
+      p {
+        text-align: center;
+        opacity: 0.65;
+      }
+
+      img {
+        width: 100%;
+        background: #0c0e10cc;
+        border-radius: 12px;
+        margin-top: ${token.margin}px;
+      }
     `,
     tab: css`
       width: 280px;
@@ -134,24 +160,29 @@ const SceneBanner: React.FC = () => {
   const { styles } = useStyle();
   const [locale] = useLocale(locales);
 
+  const { isMobile } = React.useContext(SiteContext);
+
   const tabItems = [
     {
       key: 'independent',
       title: locale.independent_title,
       desc: locale.independent_desc,
       content: <Independent />,
+      img: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*YVjbTqbc7ngAAAAAAAAAAAAADgCCAQ/fmt.avif',
     },
     {
       key: 'assistant',
       title: locale.assistant_title,
       desc: locale.assistant_desc,
       content: <AssistantScene />,
+      img: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*kCojRo0SoAAAAAAAAAAAAAAADgCCAQ/fmt.avif',
     },
     {
       key: 'nest',
       title: locale.nest_title,
       desc: locale.nest_desc,
       content: <NestScene />,
+      img: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*krfsT5zBSuUAAAAAAAAAAAAADgCCAQ/fmt.avif',
     },
     {
       key: 'app',
@@ -175,27 +206,42 @@ const SceneBanner: React.FC = () => {
         src="https://mdn.alipayobjects.com/huamei_k0vkmw/afts/img/A*aSLTSr53DPAAAAAAAAAAAAAADsR-AQ/original"
         alt="bg"
       />
-      <div className={styles.content}>
-        <div className={styles.tab}>
-          {tabItems.map((item) => (
-            <Button
-              key={item.key}
-              disabled={item.disabled}
-              className={classnames(
-                styles.item,
-                active === item.key && styles['item-active'],
-                item.disabled && styles['item-disabled'],
-              )}
-              type="text"
-              onClick={genHandleActive(item.key)}
-            >
-              <h3 className={styles.item_title}>{item.title}</h3>
-              <p className={styles.item_desc}>{item.desc}</p>
-            </Button>
-          ))}
+      {isMobile ? (
+        <Carousel autoplay draggable autoplaySpeed={5000} swipeToSlide>
+          {tabItems.map(
+            (item) =>
+              item.img && (
+                <div className={styles.mobile_content}>
+                  <h3>{item.title}</h3>
+                  <p>{item.desc}</p>
+                  <img src={item.img} alt="item.img" loading="lazy" />
+                </div>
+              ),
+          )}
+        </Carousel>
+      ) : (
+        <div className={styles.content}>
+          <div className={styles.tab}>
+            {tabItems.map((item) => (
+              <Button
+                key={item.key}
+                disabled={item.disabled}
+                className={classnames(
+                  styles.item,
+                  active === item.key && styles['item-active'],
+                  item.disabled && styles['item-disabled'],
+                )}
+                type="text"
+                onClick={genHandleActive(item.key)}
+              >
+                <h3 className={styles.item_title}>{item.title}</h3>
+                <p className={styles.item_desc}>{item.desc}</p>
+              </Button>
+            ))}
+          </div>
+          {!!activeContent && <div className={styles.tab_content}>{activeContent}</div>}
         </div>
-        {!!activeContent && <div className={styles.tab_content}>{activeContent}</div>}
-      </div>
+      )}
     </Container>
   );
 };

@@ -39,6 +39,10 @@ const useStyle = createStyles(({ token, css }) => {
       align-items: center;
       position: relative;
       font-family: AlibabaPuHuiTi, ${token.fontFamily}, sans-serif;
+
+      @media only screen and (max-width: ${token.mobileMaxWidth}px) {
+        height: calc(100vh - ${token.paddingLG}px);
+      }
     `,
     background: css`
       width: 100%;
@@ -51,8 +55,6 @@ const useStyle = createStyles(({ token, css }) => {
       height: 100%;
       max-height: calc(100vh - ${token.headerHeight * 2}px);
       position: relative;
-
-      
     `,
     title: css`
       max-width: ${minBannerWidth}px;
@@ -68,6 +70,8 @@ const useStyle = createStyles(({ token, css }) => {
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        text-align: center;
+        gap: ${token.paddingXS}px;
       }
     `,
     lottie: css`
@@ -150,6 +154,10 @@ const useStyle = createStyles(({ token, css }) => {
       font-weight: 600;
       box-shadow: ${token.boxShadow};
       position: relative;
+
+      @media only screen and (max-width: ${token.mobileMaxWidth}px) {
+        padding: 0 ${token.paddingLG}px;
+      }
     `,
     startBtn: css`
       background: linear-gradient(90deg, #c7deff 0%, #ffffffd9 76%);
@@ -210,7 +218,7 @@ const MainBanner: React.FC = () => {
   const { styles } = useStyle();
 
   const [bgLottieRef, bgAnimation] = useLottie({
-    renderer: 'canvas',
+    renderer: 'svg',
     loop: false,
     autoplay: false,
     rendererSettings: {

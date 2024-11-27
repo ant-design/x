@@ -43,8 +43,9 @@ const useStyle = createStyles(({ token, css }) => {
   return {
     layout: css`
       width: 100%;
+      min-width: 1000px;
       height: 722px;
-      border-radius: 8px;
+      border-radius: ${token.borderRadius}px;
       display: flex;
       background: ${token.colorBgContainer};
       font-family: AlibabaPuHuiTi, ${token.fontFamily}, sans-serif;
@@ -73,7 +74,7 @@ const useStyle = createStyles(({ token, css }) => {
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      padding: 24px 0;
+      padding: ${token.paddingLG}px;
       gap: 16px;
     `,
     messages: css`
