@@ -1,6 +1,6 @@
 import { EditOutlined, GithubOutlined, HistoryOutlined } from '@ant-design/icons';
 import type { GetProp } from 'antd';
-import { Descriptions, Space, Tooltip, Typography, theme } from 'antd';
+import { Descriptions, Flex, Tooltip, Typography, theme } from 'antd';
 import { createStyles, css } from 'antd-style';
 import kebabCase from 'lodash/kebabCase';
 import React from 'react';
@@ -50,6 +50,7 @@ const useStyle = createStyles(({ token }) => ({
     transition: all ${token.motionDurationSlow} !important;
     font-family: ${token.codeFamily};
     color: ${token.colorTextSecondary} !important;
+    white-space: nowrap;
     &:hover {
       background: ${token.controlItemBgHover};
     }
@@ -166,7 +167,7 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
                   title={copied ? locale.copied : locale.copy}
                   onOpenChange={onOpenChange}
                 >
-                  <Typography.Text className={styles.code} onClick={onCopy}>
+                  <Typography.Text className={styles.code} ellipsis onClick={onCopy}>
                     {importList}
                   </Typography.Text>
                 </Tooltip>
@@ -185,7 +186,7 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
           filename && {
             label: locale.docs,
             children: (
-              <Space size="middle">
+              <Flex gap={16}>
                 <Typography.Link
                   className={styles.code}
                   href={`${branchUrl}${filename}`}
@@ -200,7 +201,7 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
                     <span>{locale.changelog}</span>
                   </Typography.Link>
                 </ComponentChangelog>
-              </Space>
+              </Flex>
             ),
           },
           isVersionNumber(version) && {
