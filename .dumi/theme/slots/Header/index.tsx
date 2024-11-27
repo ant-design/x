@@ -2,7 +2,7 @@ import { CloseOutlined, MenuOutlined } from '@ant-design/icons';
 import { Button, Drawer } from 'antd';
 import { createStyles } from 'antd-style';
 import classnames from 'classnames';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import useLocale from '../../../hooks/useLocale';
 import useScrollY from '../../../hooks/useScrollY';
@@ -12,6 +12,7 @@ import HeaderActions from './Actions';
 import Logo from './Logo';
 import Navigation from './Navigation';
 
+import { useLocation } from 'dumi';
 import type { SiteContextProps } from '../SiteContext';
 import type { SharedProps } from './interface';
 
@@ -96,6 +97,8 @@ const useStyle = createStyles(({ token, css }) => {
 const Header: React.FC = () => {
   const [open, setOpen] = React.useState<boolean>(false);
   const [, lang] = useLocale();
+  const { pathname } = useLocation();
+
   const { direction, isMobile } = React.useContext<SiteContextProps>(SiteContext);
 
   const { styles } = useStyle();
@@ -112,6 +115,10 @@ const Header: React.FC = () => {
   };
 
   let content = null;
+
+  useEffect(() => {
+    isMobile && setOpen(false);
+  }, [pathname]);
 
   if (isMobile) {
     content = (
