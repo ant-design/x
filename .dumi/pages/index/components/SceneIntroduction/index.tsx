@@ -49,6 +49,10 @@ const useStyle = createStyles(({ token, css }) => {
   return {
     container: css`
       position: relative;
+
+      @media screen and (max-width: ${token.mobileMaxWidth}px) {
+        height: 80vh;
+      }
     `,
     content_bg: css`
       position: absolute;
@@ -66,7 +70,7 @@ const useStyle = createStyles(({ token, css }) => {
     mobile_content: css`
       background: #0c0e10cc;
       border-radius: 24px;
-      margin: ${token.marginLG}px 0;
+      margin: ${token.marginXXL}px 0;
 
       img {
         width: 100%;

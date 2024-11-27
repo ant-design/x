@@ -106,7 +106,7 @@ const GlobalLayout: React.FC = () => {
     const metaThemeColor = document.querySelector('meta[name="theme-color"]');
 
     if (metaThemeColor) {
-      metaThemeColor.setAttribute('content', isIndexPage ? '#000' : token.colorBgContainer);
+      metaThemeColor.setAttribute('content', isIndexPage ? '#0c0e10cc' : token.colorBgContainer);
     }
   }, [theme.length, isIndexPage]);
 
