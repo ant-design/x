@@ -1,7 +1,7 @@
-import ContributorsList from '@qixian.cs/github-contributors-list';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
 import { useIntl } from 'dumi';
+import ContributorsList from 'github-contributors-lists';
 import React, { useContext } from 'react';
 
 import SiteContext from '../SiteContext';
