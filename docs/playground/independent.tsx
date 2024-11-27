@@ -90,6 +90,7 @@ const useStyle = createStyles(({ token, css }) => {
     placeholder: css`
       flex: 1;
       padding-top: 32px;
+      overflow: scroll;
     `,
     sender: css`
       box-shadow: ${token.boxShadow};
@@ -293,17 +294,13 @@ const Independent: React.FC = () => {
   );
 
   const handleFileChange = (info: UploadChangeParam) => {
-    const { file } = info;
-    if (file && !file.status) {
-      setAttachedFiles((prevFiles) => [
-        ...prevFiles,
-        {
-          uid: file.uid,
-          name: file.name,
-          size: file.size ?? 0,
-        },
-      ]);
-    }
+    setAttachedFiles(
+      info.fileList.map((file) => ({
+        uid: file.uid,
+        name: file.name,
+        size: file.size ?? 0,
+      })),
+    );
   };
 
   const attachmentsNode = (
@@ -384,7 +381,7 @@ const Independent: React.FC = () => {
         {/* 🌟 欢迎占位 */}
         {!items.length && placeholderNode}
         {/* 🌟 消息列表 */}
-        <Bubble.List items={items} roles={roles} className={styles.messages} />
+        {!!items.length && <Bubble.List items={items} roles={roles} className={styles.messages} />}
         {/* 🌟 提示词 */}
         <Prompts items={senderPromptsItems} onItemClick={onPromptsItemClick} />
         {/* 🌟 输入框 */}
