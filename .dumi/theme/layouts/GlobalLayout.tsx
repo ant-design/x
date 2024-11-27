@@ -51,12 +51,17 @@ const getAlgorithm = (themes: ThemeName[] = []) =>
 const GlobalLayout: React.FC = () => {
   const outlet = useOutlet();
   const { pathname } = useLocation();
+  const { token } = antdTheme.useToken();
   const [searchParams, setSearchParams] = useSearchParams();
   const [{ theme = [], direction, isMobile }, setSiteState] = useLayoutState<SiteState>({
     isMobile: false,
     direction: 'ltr',
     theme: [],
   });
+  const isIndexPage = React.useMemo(
+    () => pathname === '' || pathname.startsWith('/index'),
+    [pathname],
+  );
 
   const updateSiteConfig = useCallback(
     (props: SiteState) => {
@@ -98,6 +103,14 @@ const GlobalLayout: React.FC = () => {
   };
 
   useEffect(() => {
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute('content', isIndexPage ? '#000' : token.colorBgContainer);
+    }
+  }, [theme.length, isIndexPage]);
+
+  useEffect(() => {
     const _theme = searchParams.getAll('theme') as ThemeName[];
     const _direction = searchParams.get('direction') as DirectionType;
 
@@ -131,10 +144,7 @@ const GlobalLayout: React.FC = () => {
   const themeConfig = React.useMemo<ThemeConfig>(
     () => ({
       // index page should always use dark theme
-      algorithm:
-        pathname.startsWith('/index') || pathname === ''
-          ? getAlgorithm(['dark'])
-          : getAlgorithm(theme),
+      algorithm: isIndexPage ? getAlgorithm(['dark']) : getAlgorithm(theme),
       token: { motion: !theme.includes('motion-off') },
       cssVar: true,
       hashed: false,
