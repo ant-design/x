@@ -51,7 +51,7 @@ const useStyle = createStyles(({ token, css }) => {
       position: relative;
 
       @media screen and (max-width: ${token.mobileMaxWidth}px) {
-        height: 80vh;
+        height: 100vh;
       }
     `,
     content_bg: css`
@@ -201,11 +201,13 @@ const SceneBanner: React.FC = () => {
 
   return (
     <Container className={styles.container} title={locale.title} desc={locale.desc}>
-      <img
-        className={styles.content_bg}
-        src="https://mdn.alipayobjects.com/huamei_k0vkmw/afts/img/A*aSLTSr53DPAAAAAAAAAAAAAADsR-AQ/original"
-        alt="bg"
-      />
+      {!isMobile && (
+        <img
+          className={styles.content_bg}
+          src="https://mdn.alipayobjects.com/huamei_k0vkmw/afts/img/A*aSLTSr53DPAAAAAAAAAAAAAADsR-AQ/original"
+          alt="bg"
+        />
+      )}
       {isMobile ? (
         <Carousel autoplay draggable autoplaySpeed={5000} swipeToSlide>
           {tabItems.map(
