@@ -1,6 +1,6 @@
 import { EditOutlined, GithubOutlined, HistoryOutlined } from '@ant-design/icons';
 import type { GetProp } from 'antd';
-import { Descriptions, Space, Tooltip, Typography, theme } from 'antd';
+import { Descriptions, Flex, Tooltip, Typography, theme } from 'antd';
 import { createStyles, css } from 'antd-style';
 import kebabCase from 'lodash/kebabCase';
 import React from 'react';
@@ -42,17 +42,27 @@ const useStyle = createStyles(({ token }) => ({
   code: css`
     cursor: pointer;
     position: relative;
-    display: inline-flex;
     align-items: center;
-    column-gap: ${token.paddingXXS}px;
     border-radius: ${token.borderRadiusSM}px;
-    padding-inline: ${token.paddingXXS}px;
+    padding-inline: ${token.paddingXXS}px !important;
     transition: all ${token.motionDurationSlow} !important;
-    font-family: ${token.codeFamily};
     color: ${token.colorTextSecondary} !important;
+
+    > code {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      display: inline-flex;
+      column-gap: ${token.paddingXXS}px;
+      line-height: 1;
+      font-size: 13px;
+      font-family: ${token.codeFamily};
+    }
+  
     &:hover {
       background: ${token.controlItemBgHover};
     }
+
     a&:hover {
       text-decoration: underline !important;
     }
@@ -166,9 +176,9 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
                   title={copied ? locale.copied : locale.copy}
                   onOpenChange={onOpenChange}
                 >
-                  <Typography.Text className={styles.code} onClick={onCopy}>
-                    {importList}
-                  </Typography.Text>
+                  <pre className={styles.code} onClick={onCopy}>
+                    <code>{importList}</code>
+                  </pre>
                 </Tooltip>
               </CopyToClipboard>
             ),
@@ -185,7 +195,7 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
           filename && {
             label: locale.docs,
             children: (
-              <Space size="middle">
+              <Flex gap={16}>
                 <Typography.Link
                   className={styles.code}
                   href={`${branchUrl}${filename}`}
@@ -200,7 +210,7 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
                     <span>{locale.changelog}</span>
                   </Typography.Link>
                 </ComponentChangelog>
-              </Space>
+              </Flex>
             ),
           },
           isVersionNumber(version) && {

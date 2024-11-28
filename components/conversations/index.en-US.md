@@ -19,12 +19,12 @@ demo:
 ## Examples
 
 <!-- prettier-ignore -->
-<code src="./demo/basic.tsx">Basic</code>
-<code src="./demo/with-menu.tsx">Operations</code>
-<code src="./demo/controlled-mode.tsx">Controlled Mode</code>
-<code src="./demo/group.tsx">Group</code>
-<code src="./demo/group-sort.tsx">Group Sort</code>
-<code src="./demo/infinite-load.tsx">Scrolling loaded</code>
+<code src="./demo/basic.tsx" background="grey">Basic</code>
+<code src="./demo/with-menu.tsx" background="grey">Operations</code>
+<code src="./demo/controlled-mode.tsx" background="grey">Controlled Mode</code>
+<code src="./demo/group.tsx" background="grey">Group</code>
+<code src="./demo/group-sort.tsx" background="grey">Group Sort</code>
+<code src="./demo/infinite-load.tsx" background="grey">Scrolling loaded</code>
 
 ## API
 

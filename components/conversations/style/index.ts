@@ -1,3 +1,4 @@
+import { unit } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
@@ -13,35 +14,47 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
   return {
     [componentCls]: {
       display: 'flex',
-      gap: token.paddingXS,
       flexDirection: 'column',
+      gap: token.paddingXXS,
       overflowY: 'auto',
+      padding: token.paddingSM,
+
       [`&${componentCls}-rtl`]: {
         direction: 'rtl',
       },
       // 会话列表
       [`& ${componentCls}-list`]: {
         display: 'flex',
-        gap: token.paddingXS,
+        gap: token.paddingXXS,
         flexDirection: 'column',
+
+        [`& ${componentCls}-item`]: {
+          paddingInlineStart: token.paddingXL,
+        },
+        [`& ${componentCls}-label`]: {
+          color: token.colorTextDescription,
+        },
       },
       // 会话列表项
       [`& ${componentCls}-item`]: {
         display: 'flex',
+        height: token.controlHeightLG,
+        minHeight: token.controlHeightLG,
         gap: token.paddingXS,
+        padding: `0 ${unit(token.paddingXS)}`,
         alignItems: 'center',
-        borderRadius: token.borderRadius,
-        padding: token.paddingSM,
+        borderRadius: token.borderRadiusLG,
         cursor: 'pointer',
+        transition: `all ${token.motionDurationMid} ${token.motionEaseInOut}`,
         // 悬浮样式
         '&:hover': {
           backgroundColor: token.colorBgTextHover,
         },
         // 选中样式
         '&-active': {
-          backgroundColor: token.colorBgTextActive,
-          '&:hover': {
-            backgroundColor: token.colorBgTextActive,
+          backgroundColor: token.colorBgTextHover,
+          [`& ${componentCls}-label, ${componentCls}-menu-icon`]: {
+            color: token.colorText,
           },
         },
         // 禁用样式
@@ -66,12 +79,16 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
       // 会话操作菜单
       [`& ${componentCls}-menu-icon`]: {
         opacity: 0,
-        '&:hover': {
-          color: token.colorIconHover,
-        },
+        fontSize: token.fontSizeXL,
       },
       // 会话图标
-      [`& ${componentCls}-icon`]: {},
+      [`& ${componentCls}-group-title`]: {
+        display: 'flex',
+        alignItems: 'center',
+        height: token.controlHeightLG,
+        minHeight: token.controlHeightLG,
+        padding: `0 ${unit(token.paddingXS)}`,
+      },
     },
   };
 };

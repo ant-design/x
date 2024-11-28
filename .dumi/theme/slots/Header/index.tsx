@@ -2,7 +2,7 @@ import { CloseOutlined, MenuOutlined } from '@ant-design/icons';
 import { Button, Drawer } from 'antd';
 import { createStyles } from 'antd-style';
 import classnames from 'classnames';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import useLocale from '../../../hooks/useLocale';
 import useScrollY from '../../../hooks/useScrollY';
@@ -12,6 +12,7 @@ import HeaderActions from './Actions';
 import Logo from './Logo';
 import Navigation from './Navigation';
 
+import { useLocation } from 'dumi';
 import type { SiteContextProps } from '../SiteContext';
 import type { SharedProps } from './interface';
 
@@ -29,6 +30,7 @@ const useStyle = createStyles(({ token, css }) => {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      transition: padding 0.2s ease-in-out, margin 0.2s ease-in-out, opacity 0.2s ease-in-out;
     `,
     mobile: css`
       height: 48px;
@@ -47,6 +49,9 @@ const useStyle = createStyles(({ token, css }) => {
       gap: ${token.paddingLG}px;
       inset-inline-end: 50%;
       transform: translateX(50%);
+    `,
+    hidden: css`
+      opacity: 0;
     `,
     mini_rtl: css`
       inset-inline-start: 50%;
@@ -96,13 +101,21 @@ const useStyle = createStyles(({ token, css }) => {
 const Header: React.FC = () => {
   const [open, setOpen] = React.useState<boolean>(false);
   const [, lang] = useLocale();
+  const { pathname } = useLocation();
+
   const { direction, isMobile } = React.useContext<SiteContextProps>(SiteContext);
 
   const { styles } = useStyle();
 
   const { scrollY, scrollYDirection } = useScrollY();
 
-  const isMini = scrollY > 800 && !isMobile;
+  let innerHeight = 1080;
+
+  if (typeof window !== 'undefined') {
+    innerHeight = window.innerHeight;
+  }
+
+  const isMini = scrollY > innerHeight && !isMobile;
 
   const sharedProps: SharedProps = {
     isZhCN: lang === 'cn',
@@ -112,6 +125,10 @@ const Header: React.FC = () => {
   };
 
   let content = null;
+
+  useEffect(() => {
+    isMobile && setOpen(false);
+  }, [pathname]);
 
   if (isMobile) {
     content = (
@@ -139,6 +156,8 @@ const Header: React.FC = () => {
     );
   }
 
+  const isHidden = scrollY > innerHeight * 1.5 && scrollYDirection === 'down';
+
   return (
     <header
       className={classnames(
@@ -147,10 +166,8 @@ const Header: React.FC = () => {
         (isMobile || isMini) && styles.mobile,
         isMini && styles.mini,
         isMini && direction === 'rtl' && styles.mini_rtl,
+        isHidden && styles.hidden,
       )}
-      style={{
-        display: scrollY > 900 && scrollYDirection === 'down' ? 'none' : 'flex',
-      }}
     >
       <Logo {...sharedProps} />
       {isMobile && (

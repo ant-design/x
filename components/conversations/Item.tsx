@@ -1,12 +1,12 @@
-import React from 'react';
+import { EllipsisOutlined } from '@ant-design/icons';
+import { Dropdown, Tooltip, Typography } from 'antd';
 import classnames from 'classnames';
-import { Tooltip, Typography, Dropdown } from 'antd';
-import { MoreOutlined } from '@ant-design/icons';
+import React from 'react';
 
 import type { MenuProps } from 'antd';
 import type { DirectionType } from 'antd/es/config-provider';
-import type { Conversation } from './interface';
 import pickAttrs from 'rc-util/lib/pickAttrs';
+import type { Conversation } from './interface';
 
 export interface ConversationsItemProps
   extends Omit<React.HTMLAttributes<HTMLLIElement>, 'onClick'> {
@@ -87,7 +87,7 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
             disabled={disabled}
             onOpenChange={onOpenChange}
           >
-            <MoreOutlined
+            <EllipsisOutlined
               onClick={stopPropagation}
               disabled={disabled}
               className={`${prefixCls}-menu-icon`}

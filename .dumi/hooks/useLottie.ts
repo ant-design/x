@@ -1,4 +1,4 @@
-import lottie, { type AnimationConfig, type AnimationItem } from 'lottie-web';
+import type { AnimationConfig, AnimationItem, LottiePlayer } from 'lottie-web';
 import React from 'react';
 
 interface UseLottieOptions extends Omit<AnimationConfig, 'container' | 'renderer'> {
@@ -22,9 +22,11 @@ const useLottie = (options: UseLottieOptions) => {
 
     let animation: AnimationItem | undefined;
 
+    const lottie: LottiePlayer = (window as any)?.lottie;
+
     if (!animationInstance) {
       if (!lazyLoad || isIntersected) {
-        if (containerRef.current) {
+        if (containerRef.current && lottie) {
           animation = lottie.loadAnimation({
             container: containerRef.current,
             ...stableLottieOptions,

@@ -1,182 +1,85 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders components/conversations/demo/basic.tsx correctly 1`] = `
-<div
-  class="ant-card ant-card-bordered ant-card-small"
-  style="width:320px"
+<ul
+  class="ant-conversations"
+  style="width:256px;background:#ffffff;border-radius:6px"
 >
-  <div
-    class="ant-card-body"
+  <li
+    class="ant-conversations-item ant-conversations-item-active"
   >
-    <ul
-      class="ant-conversations"
+    <span
+      class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
     >
-      <li
-        class="ant-conversations-item ant-conversations-item-active"
-      >
-        <div
-          class="ant-conversations-icon"
-        >
-          <span
-            aria-label="github"
-            class="anticon anticon-github"
-            role="img"
-          >
-            <svg
-              aria-hidden="true"
-              data-icon="github"
-              fill="currentColor"
-              focusable="false"
-              height="1em"
-              viewBox="64 64 896 896"
-              width="1em"
-            >
-              <path
-                d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"
-              />
-            </svg>
-          </span>
-        </div>
-        <span
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
-        >
-          What is Ant Design X?
-        </span>
-      </li>
-      <li
-        class="ant-conversations-item"
-      >
-        <div
-          class="ant-conversations-icon"
-        >
-          <span
-            aria-label="alipay-circle"
-            class="anticon anticon-alipay-circle"
-            role="img"
-          >
-            <svg
-              aria-hidden="true"
-              data-icon="alipay-circle"
-              fill="currentColor"
-              fill-rule="evenodd"
-              focusable="false"
-              height="1em"
-              viewBox="64 64 896 896"
-              width="1em"
-            >
-              <path
-                d="M512 64c247.42 0 448 200.58 448 448S759.42 960 512 960 64 759.42 64 512 264.58 64 512 64m32.5 168c-69.67 0-86.06 16.84-86.72 39.08l-.02 1.43v46.62H291.45c-9.92 0-14.28 23.05-14.27 39.3 0 2.7 2.08 4.93 4.77 4.93h175.81v58.3h-116.5c-9.96 0-14.3 23.76-14.27 39.47a4.77 4.77 0 004.77 4.76h233.45c-4.53 41.06-15.43 77.59-30.72 109.32l-1.22 2.5-.32-.28c-60.24-28.47-120.43-52.57-194.4-52.57l-2.62.01c-84.98 1.11-144.71 56.5-145.91 127.04l-.02 1.22.02 2.13c1.24 70.4 63.56 126.45 148.52 126.45 61.25 0 116.38-16.85 163.46-45.02a138.58 138.58 0 0014.07-7.96 345.6 345.6 0 0050.3-41.16l9.45 6.35 12.46 8.32c57.53 38.26 113.76 72.62 169.86 79.27a142.62 142.62 0 0018.31 1.16c43.02 0 55-52.68 57.39-95.51l.14-2.84c.4-8.46-6.2-15.6-14.65-15.86-75.46-2.37-136.45-22.05-192-46.11l-6.27-2.75c35.15-56.8 56.66-121.81 57.15-186.66l.09-1.08c.4-5.51-4-10.2-9.52-10.2H549.33v-58.3h165.73c9.92 0 14.28-22.12 14.27-39.31a4.85 4.85 0 00-4.78-4.92H549.32v-82.35a4.8 4.8 0 00-4.83-4.78M328 583.85c54.63 0 107.08 22.41 158.1 52.19l5.76 3.4c-103.57 119.84-247.17 95.9-261.72 26.37a66.89 66.89 0 01-1.14-9.83l-.06-2.34.02-.9c.97-40.12 45.33-68.9 99.04-68.9"
-              />
-            </svg>
-          </span>
-        </div>
-        <span
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
-        >
-          <div>
-            Getting Started:
-            <!-- -->
-            <a
-              href="https://ant-design.antgroup.com/index-cn"
-              rel="noreferrer"
-              target="_blank"
-            >
-              Ant Design !
-            </a>
-          </div>
-        </span>
-      </li>
-      <li
-        class="ant-conversations-item"
-      >
-        <div
-          class="ant-conversations-icon"
-        >
-          <span
-            aria-label="docker"
-            class="anticon anticon-docker"
-            role="img"
-          >
-            <svg
-              aria-hidden="true"
-              data-icon="docker"
-              fill="currentColor"
-              fill-rule="evenodd"
-              focusable="false"
-              height="1em"
-              viewBox="64 64 896 896"
-              width="1em"
-            >
-              <path
-                d="M555.88 488.24h-92.62v-82.79h92.62zm0-286.24h-92.62v85.59h92.62zm109.45 203.45H572.7v82.79h92.62zm-218.9-101.02h-92.61v84.18h92.6zm109.45 0h-92.61v84.18h92.6zm388.69 140.3c-19.65-14.02-67.36-18.23-102.44-11.22-4.2-33.67-23.85-63.14-57.53-89.8l-19.65-12.62-12.62 19.64c-25.26 39.29-32.28 103.83-5.62 145.92-12.63 7.02-36.48 15.44-67.35 15.44H67.56c-12.63 71.56 8.42 164.16 61.74 227.3C181.22 801.13 259.8 832 360.83 832c220.3 0 384.48-101.02 460.25-286.24 29.47 0 95.42 0 127.7-63.14 1.4-2.8 9.82-18.24 11.22-23.85zm-717.04-39.28h-92.61v82.79h92.6zm109.45 0h-92.61v82.79h92.6zm109.45 0h-92.61v82.79h92.6zM336.98 304.43h-92.61v84.19h92.6z"
-              />
-            </svg>
-          </span>
-        </div>
-        <span
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
-        >
-          In Docker, use 🐑 Ollama and initialize
-        </span>
-      </li>
-      <li
-        class="ant-conversations-item ant-conversations-item-disabled"
-      >
-        <span
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
-        >
-          Expired, please go to the recycle bin to check
-        </span>
-      </li>
-    </ul>
-  </div>
-</div>
+      Conversation Item 1
+    </span>
+  </li>
+  <li
+    class="ant-conversations-item"
+  >
+    <span
+      class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+    >
+      Conversation Item 2
+    </span>
+  </li>
+  <li
+    class="ant-conversations-item"
+  >
+    <span
+      class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+    >
+      Conversation Item 3
+    </span>
+  </li>
+  <li
+    class="ant-conversations-item ant-conversations-item-disabled"
+  >
+    <span
+      class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+    >
+      Conversation Item 4
+    </span>
+  </li>
+</ul>
 `;
 
 exports[`renders components/conversations/demo/controlled-mode.tsx correctly 1`] = `
 <div
   class="ant-flex ant-flex-align-flex-start ant-flex-gap-small ant-flex-vertical"
 >
-  <div
-    class="ant-card ant-card-bordered ant-card-small"
-    style="width:320px"
+  <ul
+    class="ant-conversations"
+    style="width:256px;background:#ffffff;border-radius:6px"
   >
-    <div
-      class="ant-card-body"
+    <li
+      class="ant-conversations-item ant-conversations-item-active"
     >
-      <ul
-        class="ant-conversations"
+      <span
+        class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
       >
-        <li
-          class="ant-conversations-item ant-conversations-item-active"
-        >
-          <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
-          >
-            Conversation Item 1
-          </span>
-        </li>
-        <li
-          class="ant-conversations-item"
-        >
-          <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
-          >
-            Conversation Item 2
-          </span>
-        </li>
-        <li
-          class="ant-conversations-item"
-        >
-          <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
-          >
-            Conversation Item 3
-          </span>
-        </li>
-      </ul>
-    </div>
-  </div>
+        Conversation Item 1
+      </span>
+    </li>
+    <li
+      class="ant-conversations-item"
+    >
+      <span
+        class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+      >
+        Conversation Item 2
+      </span>
+    </li>
+    <li
+      class="ant-conversations-item"
+    >
+      <span
+        class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+      >
+        Conversation Item 3
+      </span>
+    </li>
+  </ul>
   <div
     class="ant-flex ant-flex-gap-small"
   >
@@ -201,434 +104,297 @@ exports[`renders components/conversations/demo/controlled-mode.tsx correctly 1`]
 `;
 
 exports[`renders components/conversations/demo/group.tsx correctly 1`] = `
-<div
-  class="ant-card ant-card-bordered ant-card-small"
-  style="width:320px"
+<ul
+  class="ant-conversations"
+  style="width:256px;background:#ffffff;border-radius:6px"
 >
-  <div
-    class="ant-card-body"
-  >
-    <ul
-      class="ant-conversations"
+  <li>
+    <div
+      class="ant-conversations-group-title"
     >
-      <li>
-        <div
-          class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
-          role="separator"
+      <span
+        class="ant-typography"
+      >
+        Group1
+      </span>
+    </div>
+    <ul
+      class="ant-conversations-list"
+    >
+      <li
+        class="ant-conversations-item ant-conversations-item-active"
+      >
+        <span
+          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
         >
-          <span
-            class="ant-divider-inner-text"
-          >
-            <span
-              class="ant-typography ant-typography-secondary"
-            >
-              Group1
-            </span>
-          </span>
-        </div>
-        <ul
-          class="ant-conversations-list"
-        >
-          <li
-            class="ant-conversations-item ant-conversations-item-active"
-          >
-            <div
-              class="ant-conversations-icon"
-            >
-              <span
-                aria-label="github"
-                class="anticon anticon-github"
-                role="img"
-              >
-                <svg
-                  aria-hidden="true"
-                  data-icon="github"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
-                >
-                  <path
-                    d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"
-                  />
-                </svg>
-              </span>
-            </div>
-            <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
-            >
-              What is Ant Design X ?
-            </span>
-          </li>
-          <li
-            class="ant-conversations-item"
-          >
-            <div
-              class="ant-conversations-icon"
-            >
-              <span
-                aria-label="alipay-circle"
-                class="anticon anticon-alipay-circle"
-                role="img"
-              >
-                <svg
-                  aria-hidden="true"
-                  data-icon="alipay-circle"
-                  fill="currentColor"
-                  fill-rule="evenodd"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
-                >
-                  <path
-                    d="M512 64c247.42 0 448 200.58 448 448S759.42 960 512 960 64 759.42 64 512 264.58 64 512 64m32.5 168c-69.67 0-86.06 16.84-86.72 39.08l-.02 1.43v46.62H291.45c-9.92 0-14.28 23.05-14.27 39.3 0 2.7 2.08 4.93 4.77 4.93h175.81v58.3h-116.5c-9.96 0-14.3 23.76-14.27 39.47a4.77 4.77 0 004.77 4.76h233.45c-4.53 41.06-15.43 77.59-30.72 109.32l-1.22 2.5-.32-.28c-60.24-28.47-120.43-52.57-194.4-52.57l-2.62.01c-84.98 1.11-144.71 56.5-145.91 127.04l-.02 1.22.02 2.13c1.24 70.4 63.56 126.45 148.52 126.45 61.25 0 116.38-16.85 163.46-45.02a138.58 138.58 0 0014.07-7.96 345.6 345.6 0 0050.3-41.16l9.45 6.35 12.46 8.32c57.53 38.26 113.76 72.62 169.86 79.27a142.62 142.62 0 0018.31 1.16c43.02 0 55-52.68 57.39-95.51l.14-2.84c.4-8.46-6.2-15.6-14.65-15.86-75.46-2.37-136.45-22.05-192-46.11l-6.27-2.75c35.15-56.8 56.66-121.81 57.15-186.66l.09-1.08c.4-5.51-4-10.2-9.52-10.2H549.33v-58.3h165.73c9.92 0 14.28-22.12 14.27-39.31a4.85 4.85 0 00-4.78-4.92H549.32v-82.35a4.8 4.8 0 00-4.83-4.78M328 583.85c54.63 0 107.08 22.41 158.1 52.19l5.76 3.4c-103.57 119.84-247.17 95.9-261.72 26.37a66.89 66.89 0 01-1.14-9.83l-.06-2.34.02-.9c.97-40.12 45.33-68.9 99.04-68.9"
-                  />
-                </svg>
-              </span>
-            </div>
-            <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
-            >
-              <div>
-                Getting Started:
-                <!-- -->
-                <a
-                  href="https://ant-design.antgroup.com/index-cn"
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  Ant Design !
-                </a>
-              </div>
-            </span>
-          </li>
-        </ul>
+          Conversation Item 1
+        </span>
       </li>
-      <li>
-        <div
-          class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
-          role="separator"
+      <li
+        class="ant-conversations-item"
+      >
+        <span
+          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
         >
-          <span
-            class="ant-divider-inner-text"
-          >
-            <span
-              class="ant-typography ant-typography-secondary"
-            >
-              Group2
-            </span>
-          </span>
-        </div>
-        <ul
-          class="ant-conversations-list"
+          Conversation Item 2
+        </span>
+      </li>
+      <li
+        class="ant-conversations-item"
+      >
+        <span
+          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
         >
-          <li
-            class="ant-conversations-item"
-          >
-            <div
-              class="ant-conversations-icon"
-            >
-              <span
-                aria-label="docker"
-                class="anticon anticon-docker"
-                role="img"
-              >
-                <svg
-                  aria-hidden="true"
-                  data-icon="docker"
-                  fill="currentColor"
-                  fill-rule="evenodd"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
-                >
-                  <path
-                    d="M555.88 488.24h-92.62v-82.79h92.62zm0-286.24h-92.62v85.59h92.62zm109.45 203.45H572.7v82.79h92.62zm-218.9-101.02h-92.61v84.18h92.6zm109.45 0h-92.61v84.18h92.6zm388.69 140.3c-19.65-14.02-67.36-18.23-102.44-11.22-4.2-33.67-23.85-63.14-57.53-89.8l-19.65-12.62-12.62 19.64c-25.26 39.29-32.28 103.83-5.62 145.92-12.63 7.02-36.48 15.44-67.35 15.44H67.56c-12.63 71.56 8.42 164.16 61.74 227.3C181.22 801.13 259.8 832 360.83 832c220.3 0 384.48-101.02 460.25-286.24 29.47 0 95.42 0 127.7-63.14 1.4-2.8 9.82-18.24 11.22-23.85zm-717.04-39.28h-92.61v82.79h92.6zm109.45 0h-92.61v82.79h92.6zm109.45 0h-92.61v82.79h92.6zM336.98 304.43h-92.61v84.19h92.6z"
-                  />
-                </svg>
-              </span>
-            </div>
-            <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
-            >
-              In Docker, use 🐑 Ollama and initialize
-            </span>
-          </li>
-          <li
-            class="ant-conversations-item"
-          >
-            <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
-            >
-              Expired, please go to the recycle bin to check
-            </span>
-          </li>
-        </ul>
+          Conversation Item 3
+        </span>
       </li>
     </ul>
-  </div>
-</div>
+  </li>
+  <li>
+    <div
+      class="ant-conversations-group-title"
+    >
+      <span
+        class="ant-typography"
+      >
+        Group2
+      </span>
+    </div>
+    <ul
+      class="ant-conversations-list"
+    >
+      <li
+        class="ant-conversations-item ant-conversations-item-disabled"
+      >
+        <span
+          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+        >
+          Conversation Item 4
+        </span>
+      </li>
+    </ul>
+  </li>
+</ul>
 `;
 
 exports[`renders components/conversations/demo/group-sort.tsx correctly 1`] = `
-<div
-  class="ant-card ant-card-bordered ant-card-small"
-  style="width:320px"
+<ul
+  class="ant-conversations"
+  style="width:256px;background:#ffffff;border-radius:6px"
 >
-  <div
-    class="ant-card-body"
-  >
-    <ul
-      class="ant-conversations"
-    >
-      <li>
-        <div
-          class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
-          role="separator"
-        >
-          <span
-            class="ant-divider-inner-text"
-          >
-            <span
-              class="ant-typography ant-typography-secondary"
-            >
-              <div
-                class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
-              >
-                <div
-                  class="ant-space-item"
-                >
-                  🔥
-                </div>
-                <div
-                  class="ant-space-item"
-                >
-                  Pinned
-                </div>
-              </div>
-            </span>
-          </span>
-        </div>
-        <ul
-          class="ant-conversations-list"
-        >
-          <li
-            class="ant-conversations-item ant-conversations-item-active"
-          >
-            <div
-              class="ant-conversations-icon"
-            >
-              <span
-                aria-label="github"
-                class="anticon anticon-github"
-                role="img"
-              >
-                <svg
-                  aria-hidden="true"
-                  data-icon="github"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
-                >
-                  <path
-                    d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"
-                  />
-                </svg>
-              </span>
-            </div>
-            <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
-            >
-              What is Ant Design X ?
-            </span>
-          </li>
-          <li
-            class="ant-conversations-item"
-          >
-            <div
-              class="ant-conversations-icon"
-            >
-              <span
-                aria-label="alipay-circle"
-                class="anticon anticon-alipay-circle"
-                role="img"
-              >
-                <svg
-                  aria-hidden="true"
-                  data-icon="alipay-circle"
-                  fill="currentColor"
-                  fill-rule="evenodd"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
-                >
-                  <path
-                    d="M512 64c247.42 0 448 200.58 448 448S759.42 960 512 960 64 759.42 64 512 264.58 64 512 64m32.5 168c-69.67 0-86.06 16.84-86.72 39.08l-.02 1.43v46.62H291.45c-9.92 0-14.28 23.05-14.27 39.3 0 2.7 2.08 4.93 4.77 4.93h175.81v58.3h-116.5c-9.96 0-14.3 23.76-14.27 39.47a4.77 4.77 0 004.77 4.76h233.45c-4.53 41.06-15.43 77.59-30.72 109.32l-1.22 2.5-.32-.28c-60.24-28.47-120.43-52.57-194.4-52.57l-2.62.01c-84.98 1.11-144.71 56.5-145.91 127.04l-.02 1.22.02 2.13c1.24 70.4 63.56 126.45 148.52 126.45 61.25 0 116.38-16.85 163.46-45.02a138.58 138.58 0 0014.07-7.96 345.6 345.6 0 0050.3-41.16l9.45 6.35 12.46 8.32c57.53 38.26 113.76 72.62 169.86 79.27a142.62 142.62 0 0018.31 1.16c43.02 0 55-52.68 57.39-95.51l.14-2.84c.4-8.46-6.2-15.6-14.65-15.86-75.46-2.37-136.45-22.05-192-46.11l-6.27-2.75c35.15-56.8 56.66-121.81 57.15-186.66l.09-1.08c.4-5.51-4-10.2-9.52-10.2H549.33v-58.3h165.73c9.92 0 14.28-22.12 14.27-39.31a4.85 4.85 0 00-4.78-4.92H549.32v-82.35a4.8 4.8 0 00-4.83-4.78M328 583.85c54.63 0 107.08 22.41 158.1 52.19l5.76 3.4c-103.57 119.84-247.17 95.9-261.72 26.37a66.89 66.89 0 01-1.14-9.83l-.06-2.34.02-.9c.97-40.12 45.33-68.9 99.04-68.9"
-                  />
-                </svg>
-              </span>
-            </div>
-            <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
-            >
-              <div>
-                Getting Started:
-                <!-- -->
-                <a
-                  href="https://ant-design.antgroup.com/index-cn"
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  Ant Design !
-                </a>
-              </div>
-            </span>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <div
-          class="ant-divider ant-divider-horizontal ant-divider-plain"
-          role="separator"
-        />
-        <ul
-          class="ant-conversations-list"
-        >
-          <li
-            class="ant-conversations-item"
-          >
-            <div
-              class="ant-conversations-icon"
-            >
-              <span
-                aria-label="docker"
-                class="anticon anticon-docker"
-                role="img"
-              >
-                <svg
-                  aria-hidden="true"
-                  data-icon="docker"
-                  fill="currentColor"
-                  fill-rule="evenodd"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
-                >
-                  <path
-                    d="M555.88 488.24h-92.62v-82.79h92.62zm0-286.24h-92.62v85.59h92.62zm109.45 203.45H572.7v82.79h92.62zm-218.9-101.02h-92.61v84.18h92.6zm109.45 0h-92.61v84.18h92.6zm388.69 140.3c-19.65-14.02-67.36-18.23-102.44-11.22-4.2-33.67-23.85-63.14-57.53-89.8l-19.65-12.62-12.62 19.64c-25.26 39.29-32.28 103.83-5.62 145.92-12.63 7.02-36.48 15.44-67.35 15.44H67.56c-12.63 71.56 8.42 164.16 61.74 227.3C181.22 801.13 259.8 832 360.83 832c220.3 0 384.48-101.02 460.25-286.24 29.47 0 95.42 0 127.7-63.14 1.4-2.8 9.82-18.24 11.22-23.85zm-717.04-39.28h-92.61v82.79h92.6zm109.45 0h-92.61v82.79h92.6zm109.45 0h-92.61v82.79h92.6zM336.98 304.43h-92.61v84.19h92.6z"
-                  />
-                </svg>
-              </span>
-            </div>
-            <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
-            >
-              In Docker, use 🐑 Ollama and initialize
-            </span>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <div
-          class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-plain"
-          role="separator"
-        >
-          <span
-            class="ant-divider-inner-text"
-          >
-            <span
-              class="ant-typography ant-typography-secondary"
-            >
-              <div
-                class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
-              >
-                <div
-                  class="ant-space-item"
-                >
-                  🔥
-                </div>
-                <div
-                  class="ant-space-item"
-                >
-                  Expired
-                </div>
-              </div>
-            </span>
-          </span>
-        </div>
-        <ul
-          class="ant-conversations-list"
-        >
-          <li
-            class="ant-conversations-item ant-conversations-item-disabled"
-          >
-            <span
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
-            >
-              Expired, please go to the recycle bin to check
-            </span>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-</div>
-`;
-
-exports[`renders components/conversations/demo/infinite-load.tsx correctly 1`] = `
-<div
-  class="ant-card ant-card-bordered ant-card-small"
-  id="scrollableDiv"
-  style="height:600px;width:320px;overflow:auto"
->
-  <div
-    class="ant-card-body"
-  >
+  <li>
     <div
-      class="infinite-scroll-component__outerdiv"
+      class="ant-conversations-group-title"
     >
-      <div
-        class="infinite-scroll-component "
-        style="height:auto;overflow:auto;-webkit-overflow-scrolling:touch;width:270px"
+      <span
+        class="ant-typography"
       >
-        <ul
-          class="ant-conversations"
-        />
         <div
-          style="text-align:center"
+          class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
         >
           <div
-            aria-busy="true"
-            aria-live="polite"
-            class="ant-spin ant-spin-sm ant-spin-spinning"
+            class="ant-space-item"
           >
             <span
-              aria-label="redo"
-              class="anticon anticon-redo anticon-spin ant-spin-dot"
+              aria-label="comment"
+              class="anticon anticon-comment"
               role="img"
             >
               <svg
                 aria-hidden="true"
-                data-icon="redo"
+                data-icon="comment"
                 fill="currentColor"
                 focusable="false"
                 height="1em"
                 viewBox="64 64 896 896"
                 width="1em"
               >
+                <defs>
+                  <style />
+                </defs>
                 <path
-                  d="M758.2 839.1C851.8 765.9 912 651.9 912 523.9 912 303 733.5 124.3 512.6 124 291.4 123.7 112 302.8 112 523.9c0 125.2 57.5 236.9 147.6 310.2 3.5 2.8 8.6 2.2 11.4-1.3l39.4-50.5c2.7-3.4 2.1-8.3-1.2-11.1-8.1-6.6-15.9-13.7-23.4-21.2a318.64 318.64 0 01-68.6-101.7C200.4 609 192 567.1 192 523.9s8.4-85.1 25.1-124.5c16.1-38.1 39.2-72.3 68.6-101.7 29.4-29.4 63.6-52.5 101.7-68.6C426.9 212.4 468.8 204 512 204s85.1 8.4 124.5 25.1c38.1 16.1 72.3 39.2 101.7 68.6 29.4 29.4 52.5 63.6 68.6 101.7 16.7 39.4 25.1 81.3 25.1 124.5s-8.4 85.1-25.1 124.5a318.64 318.64 0 01-68.6 101.7c-9.3 9.3-19.1 18-29.3 26L668.2 724a8 8 0 00-14.1 3l-39.6 162.2c-1.2 5 2.6 9.9 7.7 9.9l167 .8c6.7 0 10.5-7.7 6.3-12.9l-37.3-47.9z"
+                  d="M573 421c-23.1 0-41 17.9-41 40s17.9 40 41 40c21.1 0 39-17.9 39-40s-17.9-40-39-40zm-280 0c-23.1 0-41 17.9-41 40s17.9 40 41 40c21.1 0 39-17.9 39-40s-17.9-40-39-40z"
+                />
+                <path
+                  d="M894 345a343.92 343.92 0 00-189-130v.1c-17.1-19-36.4-36.5-58-52.1-163.7-119-393.5-82.7-513 81-96.3 133-92.2 311.9 6 439l.8 132.6c0 3.2.5 6.4 1.5 9.4a31.95 31.95 0 0040.1 20.9L309 806c33.5 11.9 68.1 18.7 102.5 20.6l-.5.4c89.1 64.9 205.9 84.4 313 49l127.1 41.4c3.2 1 6.5 1.6 9.9 1.6 17.7 0 32-14.3 32-32V753c88.1-119.6 90.4-284.9 1-408zM323 735l-12-5-99 31-1-104-8-9c-84.6-103.2-90.2-251.9-11-361 96.4-132.2 281.2-161.4 413-66 132.2 96.1 161.5 280.6 66 412-80.1 109.9-223.5 150.5-348 102zm505-17l-8 10 1 104-98-33-12 5c-56 20.8-115.7 22.5-171 7l-.2-.1A367.31 367.31 0 00729 676c76.4-105.3 88.8-237.6 44.4-350.4l.6.4c23 16.5 44.1 37.1 62 62 72.6 99.6 68.5 235.2-8 330z"
+                />
+                <path
+                  d="M433 421c-23.1 0-41 17.9-41 40s17.9 40 41 40c21.1 0 39-17.9 39-40s-17.9-40-39-40z"
                 />
               </svg>
             </span>
           </div>
+          <div
+            class="ant-space-item"
+          >
+            <span>
+              Today
+            </span>
+          </div>
+        </div>
+      </span>
+    </div>
+    <ul
+      class="ant-conversations-list"
+    >
+      <li
+        class="ant-conversations-item"
+      >
+        <span
+          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+        >
+          Conversation 1732204800000
+        </span>
+      </li>
+      <li
+        class="ant-conversations-item"
+      >
+        <span
+          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+        >
+          Conversation 1732204803600
+        </span>
+      </li>
+      <li
+        class="ant-conversations-item"
+      >
+        <span
+          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+        >
+          Conversation 1732204807200
+        </span>
+      </li>
+      <li
+        class="ant-conversations-item"
+      >
+        <span
+          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+        >
+          Conversation 1732204810800
+        </span>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <div
+      class="ant-conversations-group-title"
+    >
+      <span
+        class="ant-typography"
+      >
+        <div
+          class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
+        >
+          <div
+            class="ant-space-item"
+          >
+            <span
+              aria-label="comment"
+              class="anticon anticon-comment"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="comment"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <defs>
+                  <style />
+                </defs>
+                <path
+                  d="M573 421c-23.1 0-41 17.9-41 40s17.9 40 41 40c21.1 0 39-17.9 39-40s-17.9-40-39-40zm-280 0c-23.1 0-41 17.9-41 40s17.9 40 41 40c21.1 0 39-17.9 39-40s-17.9-40-39-40z"
+                />
+                <path
+                  d="M894 345a343.92 343.92 0 00-189-130v.1c-17.1-19-36.4-36.5-58-52.1-163.7-119-393.5-82.7-513 81-96.3 133-92.2 311.9 6 439l.8 132.6c0 3.2.5 6.4 1.5 9.4a31.95 31.95 0 0040.1 20.9L309 806c33.5 11.9 68.1 18.7 102.5 20.6l-.5.4c89.1 64.9 205.9 84.4 313 49l127.1 41.4c3.2 1 6.5 1.6 9.9 1.6 17.7 0 32-14.3 32-32V753c88.1-119.6 90.4-284.9 1-408zM323 735l-12-5-99 31-1-104-8-9c-84.6-103.2-90.2-251.9-11-361 96.4-132.2 281.2-161.4 413-66 132.2 96.1 161.5 280.6 66 412-80.1 109.9-223.5 150.5-348 102zm505-17l-8 10 1 104-98-33-12 5c-56 20.8-115.7 22.5-171 7l-.2-.1A367.31 367.31 0 00729 676c76.4-105.3 88.8-237.6 44.4-350.4l.6.4c23 16.5 44.1 37.1 62 62 72.6 99.6 68.5 235.2-8 330z"
+                />
+                <path
+                  d="M433 421c-23.1 0-41 17.9-41 40s17.9 40 41 40c21.1 0 39-17.9 39-40s-17.9-40-39-40z"
+                />
+              </svg>
+            </span>
+          </div>
+          <div
+            class="ant-space-item"
+          >
+            <span>
+              Yesterday
+            </span>
+          </div>
+        </div>
+      </span>
+    </div>
+    <ul
+      class="ant-conversations-list"
+    >
+      <li
+        class="ant-conversations-item"
+      >
+        <span
+          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+        >
+          Conversation 1732204728000
+        </span>
+      </li>
+      <li
+        class="ant-conversations-item"
+      >
+        <span
+          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+        >
+          Conversation 1732204731600
+        </span>
+      </li>
+    </ul>
+  </li>
+</ul>
+`;
+
+exports[`renders components/conversations/demo/infinite-load.tsx correctly 1`] = `
+<div
+  id="scrollableDiv"
+  style="width:280px;height:600px;background:#ffffff;border-radius:6px;overflow:scroll"
+>
+  <div
+    class="infinite-scroll-component__outerdiv"
+  >
+    <div
+      class="infinite-scroll-component "
+      style="height:auto;overflow:auto;-webkit-overflow-scrolling:touch"
+    >
+      <ul
+        class="ant-conversations"
+      />
+      <div
+        style="text-align:center"
+      >
+        <div
+          aria-busy="true"
+          aria-live="polite"
+          class="ant-spin ant-spin-sm ant-spin-spinning"
+        >
+          <span
+            aria-label="redo"
+            class="anticon anticon-redo anticon-spin ant-spin-dot"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="redo"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M758.2 839.1C851.8 765.9 912 651.9 912 523.9 912 303 733.5 124.3 512.6 124 291.4 123.7 112 302.8 112 523.9c0 125.2 57.5 236.9 147.6 310.2 3.5 2.8 8.6 2.2 11.4-1.3l39.4-50.5c2.7-3.4 2.1-8.3-1.2-11.1-8.1-6.6-15.9-13.7-23.4-21.2a318.64 318.64 0 01-68.6-101.7C200.4 609 192 567.1 192 523.9s8.4-85.1 25.1-124.5c16.1-38.1 39.2-72.3 68.6-101.7 29.4-29.4 63.6-52.5 101.7-68.6C426.9 212.4 468.8 204 512 204s85.1 8.4 124.5 25.1c38.1 16.1 72.3 39.2 101.7 68.6 29.4 29.4 52.5 63.6 68.6 101.7 16.7 39.4 25.1 81.3 25.1 124.5s-8.4 85.1-25.1 124.5a318.64 318.64 0 01-68.6 101.7c-9.3 9.3-19.1 18-29.3 26L668.2 724a8 8 0 00-14.1 3l-39.6 162.2c-1.2 5 2.6 9.9 7.7 9.9l167 .8c6.7 0 10.5-7.7 6.3-12.9l-37.3-47.9z"
+              />
+            </svg>
+          </span>
         </div>
       </div>
     </div>
@@ -640,114 +406,106 @@ exports[`renders components/conversations/demo/with-menu.tsx correctly 1`] = `
 <div
   class="ant-app"
 >
-  <div
-    class="ant-card ant-card-bordered ant-card-small"
-    style="width:320px"
+  <ul
+    class="ant-conversations"
+    style="width:256px;background:#ffffff;border-radius:6px"
   >
-    <div
-      class="ant-card-body"
+    <li
+      class="ant-conversations-item ant-conversations-item-active"
     >
-      <ul
-        class="ant-conversations"
+      <span
+        class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
       >
-        <li
-          class="ant-conversations-item"
+        Conversation Item 1
+      </span>
+      <span
+        aria-label="ellipsis"
+        class="anticon anticon-ellipsis ant-dropdown-trigger ant-conversations-menu-icon"
+        role="img"
+        tabindex="-1"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="ellipsis"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
         >
-          <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
-          >
-            Conversation Item 1
-          </span>
-          <span
-            aria-label="more"
-            class="anticon anticon-more ant-dropdown-trigger ant-conversations-menu-icon"
-            role="img"
-            tabindex="-1"
-          >
-            <svg
-              aria-hidden="true"
-              data-icon="more"
-              fill="currentColor"
-              focusable="false"
-              height="1em"
-              viewBox="64 64 896 896"
-              width="1em"
-            >
-              <path
-                d="M456 231a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0z"
-              />
-            </svg>
-          </span>
-        </li>
-        <li
-          class="ant-conversations-item"
+          <path
+            d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          />
+        </svg>
+      </span>
+    </li>
+    <li
+      class="ant-conversations-item"
+    >
+      <span
+        class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+      >
+        Conversation Item 2
+      </span>
+      <span
+        aria-label="ellipsis"
+        class="anticon anticon-ellipsis ant-dropdown-trigger ant-conversations-menu-icon"
+        role="img"
+        tabindex="-1"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="ellipsis"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
         >
-          <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
-          >
-            Conversation Item 2
-          </span>
-          <span
-            aria-label="more"
-            class="anticon anticon-more ant-dropdown-trigger ant-conversations-menu-icon"
-            role="img"
-            tabindex="-1"
-          >
-            <svg
-              aria-hidden="true"
-              data-icon="more"
-              fill="currentColor"
-              focusable="false"
-              height="1em"
-              viewBox="64 64 896 896"
-              width="1em"
-            >
-              <path
-                d="M456 231a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0z"
-              />
-            </svg>
-          </span>
-        </li>
-        <li
-          class="ant-conversations-item"
+          <path
+            d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          />
+        </svg>
+      </span>
+    </li>
+    <li
+      class="ant-conversations-item"
+    >
+      <span
+        class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+      >
+        Conversation Item 3
+      </span>
+      <span
+        aria-label="ellipsis"
+        class="anticon anticon-ellipsis ant-dropdown-trigger ant-conversations-menu-icon"
+        role="img"
+        tabindex="-1"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="ellipsis"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
         >
-          <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
-          >
-            Conversation Item 3
-          </span>
-          <span
-            aria-label="more"
-            class="anticon anticon-more ant-dropdown-trigger ant-conversations-menu-icon"
-            role="img"
-            tabindex="-1"
-          >
-            <svg
-              aria-hidden="true"
-              data-icon="more"
-              fill="currentColor"
-              focusable="false"
-              height="1em"
-              viewBox="64 64 896 896"
-              width="1em"
-            >
-              <path
-                d="M456 231a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0z"
-              />
-            </svg>
-          </span>
-        </li>
-        <li
-          class="ant-conversations-item ant-conversations-item-disabled"
-        >
-          <span
-            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
-          >
-            Conversation Item 4
-          </span>
-        </li>
-      </ul>
-    </div>
-  </div>
+          <path
+            d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          />
+        </svg>
+      </span>
+    </li>
+    <li
+      class="ant-conversations-item ant-conversations-item-disabled"
+    >
+      <span
+        class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+      >
+        Conversation Item 4
+      </span>
+    </li>
+  </ul>
 </div>
 `;
