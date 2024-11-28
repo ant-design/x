@@ -10,7 +10,8 @@ order: 0
 ## 使用 openai-node 流式调用示例
 
 ```tsx
-import { useXAgent, useXChat, Sender } from '@ant-design/x';
+import React from 'react';
+import { useXAgent, useXChat, Sender, Bubble } from '@ant-design/x';
 import OpenAI from 'openai';
 
 const client = new OpenAI({
@@ -18,39 +19,45 @@ const client = new OpenAI({
   dangerouslyAllowBrowser: true,
 });
 
-// react env ...
-const [agent] = useXAgent({
-  request: async (info, callbacks) => {
-    const stream = await client.chat.completions.create({
-      model: 'gpt-4o',
-      messages: [{ role: 'user', content: 'Say this is a test' }],
-      stream: true,
-    });
+const Component: React.FC = () => {
+  const [agent] = useXAgent({
+    request: async (info, callbacks) => {
+      const { messages, message } = info;
 
-    for await (const chunk of stream) {
-      // 调用回调
-      callbacks.onUpdate(chunk.choices[0]?.delta?.content || '');
-    }
-  },
-});
+      console.log('message', message);
+      console.log('messages', messages);
 
-const {
-  // 用于发起对话请求
-  onRequest,
-  // 用于绑定视图
-  messages,
-} = useXChat({ agent });
+      const stream = await client.chat.completions.create({
+        model: 'gpt-4o',
+        messages: [{ role: 'user', content: message }],
+        stream: true,
+      });
 
-const items = messages.map((i) => ({
-  content: message,
-}));
+      for await (const chunk of stream) {
+        // 调用回调
+        callbacks.onUpdate(chunk.choices[0]?.delta?.content || '');
+      }
+    },
+  });
 
-return (
-  <div>
-    <Bubble.List items={items} />
-    <Sender onSubmit={onRequest} />
-  </div>
-);
+  const {
+    // 用于发起对话请求
+    onRequest,
+    // 用于绑定视图
+    messages,
+  } = useXChat({ agent });
+
+  const items = messages.map((message) => ({
+    content: message,
+  }));
+
+  return (
+    <div>
+      <Bubble.List items={items} />
+      <Sender onSubmit={onRequest} />
+    </div>
+  );
+};
 ```
 
 ## 使用 openai API 调用

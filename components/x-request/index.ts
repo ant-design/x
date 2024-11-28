@@ -41,7 +41,7 @@ export type XRequestOptions = XRequestBaseOptions & XRequestCustomOptions;
 
 type XRequestMessageContent = string | AnyObject;
 
-export interface XRequestMessage extends AnyObject {
+interface XRequestMessage extends AnyObject {
   role?: string;
   content?: XRequestMessageContent;
 }
@@ -68,11 +68,11 @@ export interface XRequestParams {
   messages?: XRequestMessage[];
 }
 
-export interface XRequestCallbacks {
+export interface XRequestCallbacks<Output> {
   /**
    * @description Callback when the request is successful
    */
-  onSuccess: (chunk: SSEOutput, chunks?: SSEOutput[]) => void;
+  onSuccess: (chunks: Output[]) => void;
 
   /**
    * @description Callback when the request fails
@@ -82,28 +82,23 @@ export interface XRequestCallbacks {
   /**
    * @description Callback when the request is updated
    */
-  onUpdate: (chunk: SSEOutput, chunks?: SSEOutput[]) => void;
+  onUpdate: (chunk: Output) => void;
 }
 
-export type XRequestCreate<Params extends XRequestParams = AnyObject> = (
-  params: Params,
-  callbacks?: XRequestCallbacks,
-  transformStream?: XStreamOptions<SSEOutput>['transformStream'],
+export type XRequestFunction<Input = AnyObject, Output = SSEOutput> = (
+  params: XRequestParams & Input,
+  callbacks: XRequestCallbacks<Output>,
+  transformStream?: XStreamOptions<Output>['transformStream'],
 ) => Promise<void>;
 
-export type XRequestFunction<Params extends XRequestParams = AnyObject> = (
-  params: Params,
-  callbacks: XRequestCallbacks,
-) => Promise<void>;
-
-class XRequestClass<Params extends XRequestParams = AnyObject> {
+class XRequestClass {
   readonly baseURL;
   readonly model;
 
   private defaultHeaders;
   private customOptions;
 
-  private static instanceBuffer = new Map();
+  private static instanceBuffer: Map<string, XRequestClass> = new Map();
 
   private constructor(options: XRequestOptions) {
     const { baseURL, model, dangerouslyApiKey, ...customOptions } = options;
@@ -119,24 +114,22 @@ class XRequestClass<Params extends XRequestParams = AnyObject> {
     this.customOptions = customOptions;
   }
 
-  public static init<P extends XRequestParams = AnyObject>(
-    options: XRequestOptions,
-  ): XRequestClass<P> {
+  public static init(options: XRequestOptions): XRequestClass {
     const id = options.baseURL;
 
     if (!id || typeof id !== 'string') throw new Error('The baseURL is not valid!');
 
     if (!XRequestClass.instanceBuffer.has(id)) {
-      XRequestClass.instanceBuffer.set(id, new XRequestClass<P>(options));
+      XRequestClass.instanceBuffer.set(id, new XRequestClass(options));
     }
 
-    return XRequestClass.instanceBuffer.get(id);
+    return XRequestClass.instanceBuffer.get(id) as XRequestClass;
   }
 
-  public create = async (
-    params: Params,
-    callbacks?: XRequestCallbacks,
-    transformStream?: XStreamOptions<SSEOutput>['transformStream'],
+  public create = async <Input = AnyObject, Output = SSEOutput>(
+    params: XRequestParams & Input,
+    callbacks?: XRequestCallbacks<Output>,
+    transformStream?: XStreamOptions<Output>['transformStream'],
   ) => {
     const { onSuccess, onError, onUpdate } = callbacks || {};
 
@@ -157,8 +150,7 @@ class XRequestClass<Params extends XRequestParams = AnyObject> {
 
       const contentType = response.headers.get('content-type') || '';
 
-      const chunks: SSEOutput[] = [];
-      let deltaChunk: SSEOutput;
+      const chunks: Output[] = [];
 
       if (contentType.includes('text/event-stream')) {
         for await (const chunk of XStream({
@@ -167,23 +159,19 @@ class XRequestClass<Params extends XRequestParams = AnyObject> {
         })) {
           chunks.push(chunk);
 
-          deltaChunk = this.delta(chunks);
-
-          onUpdate?.(deltaChunk, chunks);
+          onUpdate?.(chunk);
         }
       } else if (contentType.includes('application/json')) {
-        const chunk: SSEOutput = await response.json();
+        const chunk: Output = await response.json();
 
         chunks.push(chunk);
 
-        deltaChunk = chunk;
-
-        onUpdate?.(deltaChunk, chunks);
+        onUpdate?.(chunk);
       } else {
         throw new Error(`The response content-type: ${contentType} is not support!`);
       }
 
-      onSuccess?.(deltaChunk!, chunks);
+      onSuccess?.(chunks);
     } catch (error) {
       const err = error instanceof Error ? error : new Error('Unknown error!');
 
@@ -191,30 +179,6 @@ class XRequestClass<Params extends XRequestParams = AnyObject> {
 
       throw err;
     }
-  };
-
-  public deltaContentRegex = new RegExp(
-    /"delta":\s*\{[^}]*?"content"\s*:\s*"([^"\\]*(\\.[^"\\]*)*)"/s,
-  );
-
-  private delta = (chunks: SSEOutput[]): SSEOutput => {
-    let deltaContent = '';
-
-    for (const chunk of chunks) {
-      const match = this.deltaContentRegex.exec(chunk.data);
-      if (match?.[1]) {
-        deltaContent += match[1];
-      }
-    }
-
-    const lastChunk = chunks[chunks.length - 1];
-
-    const lastChunkContentMatch = this.deltaContentRegex.exec(lastChunk.data) || [];
-
-    return {
-      ...lastChunk,
-      data: lastChunk.data.replace(lastChunkContentMatch[1], deltaContent),
-    };
   };
 }
 

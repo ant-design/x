@@ -10,7 +10,8 @@ Typically, `openai-node` is used in Node.js environments. If you need to use it 
 ## Example of Streaming Requests with `openai-node`
 
 ```tsx
-import { useXAgent, useXChat, Sender } from '@ant-design/x';
+import React from 'react';
+import { useXAgent, useXChat, Sender, Bubble } from '@ant-design/x';
 import OpenAI from 'openai';
 
 const client = new OpenAI({
@@ -18,39 +19,45 @@ const client = new OpenAI({
   dangerouslyAllowBrowser: true,
 });
 
-// React environment setup
-const [agent] = useXAgent({
-  request: async (info, callbacks) => {
-    const stream = await client.chat.completions.create({
-      model: 'gpt-4o',
-      messages: [{ role: 'user', content: 'Say this is a test' }],
-      stream: true,
-    });
+const Component: React.FC = () => {
+  const [agent] = useXAgent({
+    request: async (info, callbacks) => {
+      const { messages, message } = info;
 
-    for await (const chunk of stream) {
-      // Trigger the callback
-      callbacks.onUpdate(chunk.choices[0]?.delta?.content || '');
-    }
-  },
-});
+      console.log('message', message);
+      console.log('messages', messages);
 
-const {
-  // Used to initiate conversation requests
-  onRequest,
-  // Used to bind the view
-  messages,
-} = useXChat({ agent });
+      const stream = await client.chat.completions.create({
+        model: 'gpt-4o',
+        messages: [{ role: 'user', content: message }],
+        stream: true,
+      });
 
-const items = messages.map((message) => ({
-  content: message,
-}));
+      for await (const chunk of stream) {
+        // Trigger the callback
+        callbacks.onUpdate(chunk.choices[0]?.delta?.content || '');
+      }
+    },
+  });
 
-return (
-  <div>
-    <Bubble.List items={items} />
-    <Sender onSubmit={onRequest} />
-  </div>
-);
+  const {
+    // Used to initiate conversation requests
+    onRequest,
+    // Used to bind the view
+    messages,
+  } = useXChat({ agent });
+
+  const items = messages.map((message) => ({
+    content: message,
+  }));
+
+  return (
+    <div>
+      <Bubble.List items={items} />
+      <Sender onSubmit={onRequest} />
+    </div>
+  );
+};
 ```
 
 ## use openai API
