@@ -81,9 +81,7 @@ const useStyle = createStyles(({ token, css }) => {
       flex: 1;
     `,
     placeholder: css`
-      flex: 1;
       padding-top: 32px;
-      overflow: scroll;
     `,
     sender: css`
       box-shadow: ${token.boxShadow};
@@ -252,15 +250,10 @@ const Independent: React.FC = () => {
     setActiveKey(key);
   };
 
+  const handleFileChange: GetProp<typeof Attachments, 'onChange'> = (info) =>
+    setAttachedFiles(info.fileList);
+
   // ==================== Nodes ====================
-
-  const items: GetProp<typeof Bubble.List, 'items'> = messages.map(({ id, message, status }) => ({
-    key: id,
-    loading: status === 'loading',
-    role: status === 'local' ? 'local' : 'ai',
-    content: message,
-  }));
-
   const placeholderNode = (
     <Space direction="vertical" size={16} className={styles.placeholder}>
       <Welcome
@@ -291,19 +284,17 @@ const Independent: React.FC = () => {
     </Space>
   );
 
-  const handleFileChange: GetProp<typeof Attachments, 'onChange'> = (info) =>
-    setAttachedFiles(info.fileList);
+  const items: GetProp<typeof Bubble.List, 'items'> = messages.map(({ id, message, status }) => ({
+    key: id,
+    loading: status === 'loading',
+    role: status === 'local' ? 'local' : 'ai',
+    content: message,
+  }));
 
   const attachmentsNode = (
-    <div>
-      <Badge dot={attachedFiles.length > 0 && !headerOpen}>
-        <Button
-          type="text"
-          icon={<PaperClipOutlined />}
-          onClick={() => setHeaderOpen(!headerOpen)}
-        />
-      </Badge>
-    </div>
+    <Badge dot={attachedFiles.length > 0 && !headerOpen}>
+      <Button type="text" icon={<PaperClipOutlined />} onClick={() => setHeaderOpen(!headerOpen)} />
+    </Badge>
   );
 
   const senderHeader = (
@@ -369,14 +360,11 @@ const Independent: React.FC = () => {
         />
       </div>
       <div className={styles.chat}>
-        {/* 🌟 欢迎占位 */}
-        {!items.length && placeholderNode}
         {/* 🌟 消息列表 */}
         <Bubble.List
-          items={items}
+          items={items.length > 0 ? items : [{ content: placeholderNode, variant: 'borderless' }]}
           roles={roles}
           className={styles.messages}
-          style={{ display: !items.length ? 'none' : undefined }}
         />
         {/* 🌟 提示词 */}
         <Prompts items={senderPromptsItems} onItemClick={onPromptsItemClick} />
