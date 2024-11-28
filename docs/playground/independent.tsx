@@ -24,13 +24,6 @@ import {
   SmileOutlined,
 } from '@ant-design/icons';
 import { Badge, Button, type GetProp, Space } from 'antd';
-import { UploadChangeParam } from 'antd/es/upload';
-
-interface AttachedFile {
-  uid: string;
-  name: string;
-  size: number;
-}
 
 const renderTitle = (icon: React.ReactElement, title: string) => (
   <Space align="start">
@@ -206,11 +199,15 @@ const Independent: React.FC = () => {
   // ==================== State ====================
   const [headerOpen, setHeaderOpen] = React.useState(false);
 
+  const [content, setContent] = React.useState('');
+
   const [conversationsItems, setConversationsItems] = React.useState(defaultConversationsItems);
 
   const [activeKey, setActiveKey] = React.useState(defaultConversationsItems[0].key);
 
-  const [attachedFiles, setAttachedFiles] = React.useState<AttachedFile[]>([]);
+  const [attachedFiles, setAttachedFiles] = React.useState<GetProp<typeof Attachments, 'items'>>(
+    [],
+  );
 
   // ==================== Runtime ====================
   const [agent] = useXAgent({
@@ -233,6 +230,7 @@ const Independent: React.FC = () => {
   const onSubmit = (nextContent: string) => {
     if (!nextContent) return;
     onRequest(nextContent);
+    setContent('');
   };
 
   const onPromptsItemClick: GetProp<typeof Prompts, 'onItemClick'> = (info) => {
@@ -293,15 +291,8 @@ const Independent: React.FC = () => {
     </Space>
   );
 
-  const handleFileChange = (info: UploadChangeParam) => {
-    setAttachedFiles(
-      info.fileList.map((file) => ({
-        uid: file.uid,
-        name: file.name,
-        size: file.size ?? 0,
-      })),
-    );
-  };
+  const handleFileChange: GetProp<typeof Attachments, 'onChange'> = (info) =>
+    setAttachedFiles(info.fileList);
 
   const attachmentsNode = (
     <div>
@@ -381,13 +372,20 @@ const Independent: React.FC = () => {
         {/* 🌟 欢迎占位 */}
         {!items.length && placeholderNode}
         {/* 🌟 消息列表 */}
-        {!!items.length && <Bubble.List items={items} roles={roles} className={styles.messages} />}
+        <Bubble.List
+          items={items}
+          roles={roles}
+          className={styles.messages}
+          style={{ display: !items.length ? 'none' : undefined }}
+        />
         {/* 🌟 提示词 */}
         <Prompts items={senderPromptsItems} onItemClick={onPromptsItemClick} />
         {/* 🌟 输入框 */}
         <Sender
+          value={content}
           header={senderHeader}
           onSubmit={onSubmit}
+          onChange={setContent}
           prefix={attachmentsNode}
           loading={agent.isRequesting()}
           className={styles.sender}
