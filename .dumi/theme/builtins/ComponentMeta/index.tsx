@@ -42,18 +42,27 @@ const useStyle = createStyles(({ token }) => ({
   code: css`
     cursor: pointer;
     position: relative;
-    display: inline-flex;
     align-items: center;
-    column-gap: ${token.paddingXXS}px;
     border-radius: ${token.borderRadiusSM}px;
-    padding-inline: ${token.paddingXXS}px;
+    padding-inline: ${token.paddingXXS}px !important;
     transition: all ${token.motionDurationSlow} !important;
-    font-family: ${token.codeFamily};
     color: ${token.colorTextSecondary} !important;
-    white-space: nowrap;
+
+    > code {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      display: inline-flex;
+      column-gap: ${token.paddingXXS}px;
+      line-height: 1;
+      font-size: 13px;
+      font-family: ${token.codeFamily};
+    }
+  
     &:hover {
       background: ${token.controlItemBgHover};
     }
+
     a&:hover {
       text-decoration: underline !important;
     }
@@ -167,9 +176,9 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
                   title={copied ? locale.copied : locale.copy}
                   onOpenChange={onOpenChange}
                 >
-                  <Typography.Text className={styles.code} ellipsis onClick={onCopy}>
-                    {importList}
-                  </Typography.Text>
+                  <pre className={styles.code} onClick={onCopy}>
+                    <code>{importList}</code>
+                  </pre>
                 </Tooltip>
               </CopyToClipboard>
             ),
