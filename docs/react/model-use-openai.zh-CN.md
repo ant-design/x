@@ -47,7 +47,8 @@ const Component: React.FC = () => {
     messages,
   } = useXChat({ agent });
 
-  const items = messages.map((message) => ({
+  const items = messages.map(({ message, id }) => ({
+    key: id,
     content: message,
   }));
 
