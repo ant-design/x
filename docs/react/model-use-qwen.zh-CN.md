@@ -66,7 +66,7 @@ function request() {
 
 ## 方式二: 使用 XRequest
 
-该方式是 Ant Dssign X 提供的 **在 JS 环境下开箱即用的使用方式**。
+该方式是 Ant Design X 提供的 **在 JS 环境下开箱即用的使用方式**。
 
 ```tsx
 import { XRequest } from '@ant-design/x';
