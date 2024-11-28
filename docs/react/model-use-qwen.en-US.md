@@ -14,98 +14,129 @@ It refers to a model inference service whose interface design and usage are cons
 
 This means developers can use the same code and methods as they would for OpenAI models to interact with these compatible services, significantly reducing integration costs.
 
-## Method 1: Using `useXAgent`
-
-This method is **a ready-to-use solution for React environments** provided by Ant Design X.
+## Method 1: Using OpenAI compatible call
 
 ```tsx
-import { useXAgent } from '@ant-design/x';
+import React from 'react';
+import { useXAgent, useXChat, Sender, Bubble } from '@ant-design/x';
+import OpenAI from 'openai';
 
-interface YourMessageType {
-  role?: string;
-  content?: string;
-}
-
-// ... react env
-const [agent] = useXAgent<YourMessageType>({
+const client = new OpenAI({
   baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
-  model: 'qwen-plus',
-  // Use cautiously in production!
-  dangerouslyApiKey: 'DASHSCOPE_API_KEY',
+  apiKey: process.env['QWEN_API_KEY'],
+  dangerouslyAllowBrowser: true,
 });
 
-function request() {
-  agent.request(
-    {
-      // Conversation messages
-      messages: [
-        {
-          role: 'user',
-          content: 'Hello',
-        },
-      ],
-      // Enable streaming
-      stream: true,
+const Component: React.FC = () => {
+  const [agent] = useXAgent({
+    request: async (info, callbacks) => {
+      const { messages, message } = info;
+
+      // current message
+      console.log('message', message);
+      // messages list
+      console.log('messages', messages);
+
+      const stream = await client.chat.completions.create({
+        model: 'qwen-plus',
+        messages: [{ role: 'user', content: message }],
+        stream: true,
+      });
+
+      for await (const chunk of stream) {
+        callbacks.onUpdate(chunk.choices[0]?.delta?.content || '');
+      }
     },
-    {
-      // Success callback
-      onSuccess: (sseChunks) => {
-        // Triggered when the request completes
-        // This will contain the parsed sseChunks
-      },
-      onError: (error) => {
-        // Triggered in case of an error
-      },
-      onUpdate: (sse) => {
-        // Triggered during stream updates
-        // This will contain the parsed SSE object
-      },
-    },
+  });
+
+  const {
+    // request function
+    onRequest,
+    // messages list
+    messages,
+  } = useXChat({ agent });
+
+  const items = messages.map(({ message, id }) => ({
+    key: id,
+    content: message,
+  }));
+
+  return (
+    <div>
+      <Bubble.List items={items} />
+      <Sender onSubmit={onRequest} />
+    </div>
   );
-}
+};
 ```
 
-## Method 2: Using `XRequest`
+## Method 2: Using XRequest
 
-This method is **a ready-to-use solution for JavaScript environments** provided by Ant Design X.
+This method utilizes a function provided by Ant Design X, which integrates XStream to parse SSE streams internally.
 
 ```tsx
-import { XRequest } from '@ant-design/x';
+import React from 'react';
+import { useXAgent, useXChat, Sender, Bubble, XRequest } from '@ant-design/x';
 
-const xRequest = XRequest({
-  baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
-  model: 'qwen-plus',
-  // Use cautiously in production!
-  dangerouslyApiKey: 'DASHSCOPE_API_KEY',
-});
+const Component: React.FC = () => {
+  const [agent] = useXAgent({
+    request: async (info, callbacks) => {
+      const { messages, message } = info;
+      const { onUpdate } = callbacks;
 
-function request() {
-  xRequest.create(
-    {
-      // Conversation messages
-      messages: [
+      // current message
+      console.log('message', message);
+      // messages list
+      console.log('messages', messages);
+
+      const { create } = XRequest({
+        baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
+        dangerouslyApiKey: process.env['QWEN_API_KEY'],
+        model: 'qwen-plus',
+      });
+
+      create(
         {
-          role: 'user',
-          content: 'Hello',
+          messages: [{ role: 'user', content: message }],
+          stream: true,
         },
-      ],
-      // Enable streaming
-      stream: true,
+        {
+          onSuccess: (chunks) => {
+            // get chunk list
+            console.log('sse list', chunks);
+          },
+          onError: (error) => {
+            console.log('error', error);
+          },
+          onUpdate: (chunk) => {
+            console.log('sse object', chunk);
+            // get the content of the message
+            const content: string = JSON.parse(chunk.data).choices[0].delta.content;
+
+            onUpdate(content);
+          },
+        },
+      );
     },
-    {
-      // Success callback
-      onSuccess: (sseChunks) => {
-        // Triggered when the request completes
-        // This will contain the parsed sseChunks
-      },
-      onError: (error) => {
-        // Triggered in case of an error
-      },
-      onUpdate: (sse) => {
-        // Triggered during stream updates
-        // This will contain the parsed SSE object
-      },
-    },
+  });
+
+  const {
+    // request function
+    onRequest,
+    // messages list
+    messages,
+  } = useXChat({ agent });
+
+  const items = messages.map(({ message, id }) => ({
+    key: id,
+    content: message,
+  }));
+
+  return (
+    <div>
+      <Bubble.List items={items} />
+      <Sender onSubmit={onRequest} />
+    </div>
   );
-}
+};
 ```

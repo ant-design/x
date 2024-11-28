@@ -13,98 +13,129 @@ order: 1
 
 这意味着开发者可以使用与调用 OpenAI 模型相同的代码和方法，来调用这些兼容服务，从而减少开发接入成本。
 
-## 方式一: 使用 useXAgent
-
-该方式是 Ant Dssign X 提供的 **在 React 环境下开箱即用的使用方式**。
+## 方式一: 使用 openai 兼容调用
 
 ```tsx
-import { useXAgent } from '@ant-design/x';
+import React from 'react';
+import { useXAgent, useXChat, Sender, Bubble } from '@ant-design/x';
+import OpenAI from 'openai';
 
-interface YourMessageType {
-  role?: string;
-  content?: string;
-}
-
-// ... react env
-const [agent] = useXAgent<YourMessageType>({
+const client = new OpenAI({
   baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
-  model: 'qwen-plus',
-  // 请谨慎在生产环境使用！
-  dangerouslyApiKey: 'DASHSCOPE_API_KEY',
+  apiKey: process.env['QWEN_API_KEY'],
+  dangerouslyAllowBrowser: true,
 });
 
-function request() {
-  agent.request(
-    {
-      // 对话消息
-      messages: [
-        {
-          role: 'user',
-          content: 'Hello',
-        },
-      ],
-      // 是否流式渲染
-      stream: true,
+const Component: React.FC = () => {
+  const [agent] = useXAgent({
+    request: async (info, callbacks) => {
+      const { messages, message } = info;
+
+      // current message
+      console.log('message', message);
+      // messages list
+      console.log('messages', messages);
+
+      const stream = await client.chat.completions.create({
+        model: 'qwen-plus',
+        messages: [{ role: 'user', content: message }],
+        stream: true,
+      });
+
+      for await (const chunk of stream) {
+        callbacks.onUpdate(chunk.choices[0]?.delta?.content || '');
+      }
     },
-    {
-      // 成功回调
-      onSuccess: (sseChunks) => {
-        // 在请求完成时触发
-        // 这里将得到已经解析好的 sseChunks
-      },
-      onError: (error) => {
-        // 在请求异常时触发
-      },
-      onUpdate: (sse) => {
-        // 在流更新时触发
-        // 这里将得到已经解析好的 sse 对象
-      },
-    },
+  });
+
+  const {
+    // request function
+    onRequest,
+    // messages list
+    messages,
+  } = useXChat({ agent });
+
+  const items = messages.map(({ message, id }) => ({
+    key: id,
+    content: message,
+  }));
+
+  return (
+    <div>
+      <Bubble.List items={items} />
+      <Sender onSubmit={onRequest} />
+    </div>
   );
-}
+};
 ```
 
-## 方式二: 使用 XRequest
+## 方式二: 使用 XRequest 调用
 
-该方式是 Ant Design X 提供的 **在 JS 环境下开箱即用的使用方式**。
+该方式是 Ant Design X 提供的函数，内部集成了 XStream 解析 SSE 流。
 
 ```tsx
-import { XRequest } from '@ant-design/x';
+import React from 'react';
+import { useXAgent, useXChat, Sender, Bubble, XRequest } from '@ant-design/x';
 
-const xRequest = XRequest({
-  baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
-  model: 'qwen-plus',
-  // 请谨慎在生产环境使用！
-  dangerouslyApiKey: 'DASHSCOPE_API_KEY',
-});
+const Component: React.FC = () => {
+  const [agent] = useXAgent({
+    request: async (info, callbacks) => {
+      const { messages, message } = info;
+      const { onUpdate } = callbacks;
 
-function request() {
-  xRequest.create(
-    {
-      // 对话消息
-      messages: [
+      // current message
+      console.log('message', message);
+      // messages list
+      console.log('messages', messages);
+
+      const { create } = XRequest({
+        baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
+        dangerouslyApiKey: process.env['QWEN_API_KEY'],
+        model: 'qwen-plus',
+      });
+
+      create(
         {
-          role: 'user',
-          content: 'Hello',
+          messages: [{ role: 'user', content: message }],
+          stream: true,
         },
-      ],
-      // 是否流式渲染
-      stream: true,
+        {
+          onSuccess: (chunks) => {
+            // get chunk list
+            console.log('sse list', chunks);
+          },
+          onError: (error) => {
+            console.log('error', error);
+          },
+          onUpdate: (chunk) => {
+            console.log('sse object', chunk);
+            // get the content of the message
+            const content: string = JSON.parse(chunk.data).choices[0].delta.content;
+
+            onUpdate(content);
+          },
+        },
+      );
     },
-    {
-      // 成功回调
-      onSuccess: (sseChunks) => {
-        // 在请求完成时触发
-        // 这里将得到已经解析好的 sseChunks
-      },
-      onError: (error) => {
-        // 在请求异常时触发
-      },
-      onUpdate: (sse) => {
-        // 在流更新时触发
-        // 这里将得到已经解析好的 sse 对象
-      },
-    },
+  });
+
+  const {
+    // request function
+    onRequest,
+    // messages list
+    messages,
+  } = useXChat({ agent });
+
+  const items = messages.map(({ message, id }) => ({
+    key: id,
+    content: message,
+  }));
+
+  return (
+    <div>
+      <Bubble.List items={items} />
+      <Sender onSubmit={onRequest} />
+    </div>
   );
-}
+};
 ```
