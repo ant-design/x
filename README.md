@@ -98,7 +98,7 @@ We help you integrate standard model inference services out of the box by provid
 
 Here is an example of integrating Qwen:
 
-> Note: 🔥 `dangerouslyApiKey` has security risks, more details can be found in the [documentation](/docs/react/dangerously-api-key-cn).
+> Note: 🔥 `dangerouslyApiKey` has security risks, more details can be found in the [documentation](/docs/react/dangerously-api-key).
 
 ```tsx
 import { useXAgent, Sender, XRequest } from '@ant-design/x';

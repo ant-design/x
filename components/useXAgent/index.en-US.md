@@ -38,7 +38,7 @@ Use preset protocol for request, protocol is not implemented yet.
 | baseURL | Request for server address | string | - |  |
 | key | Request key | string | - |  |
 | model | Preset protocol model | string | - |  |
-| dangerouslyApiKey | Enabling this option can be dangerous, exposing secret API credentials | string | - | - |
+| dangerouslyApiKey | **🔥 `dangerouslyApiKey` presents security risks. Detailed documentation on this can be found in [Explanation](/docs/react/dangerously-api-key)** | string | - | - |
 
 ### XAgentConfigCustom
 

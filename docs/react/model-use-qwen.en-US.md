@@ -99,7 +99,7 @@ export default Demo;
 
 ## Using API Integration
 
-> Note: 🔥 `dangerouslyApiKey` presents security risks. Detailed documentation on this can be found in [Explanation](/docs/react/dangerously-api-key-cn).
+> Note: 🔥 `dangerouslyApiKey` presents security risks. Detailed documentation on this can be found in [Explanation](/docs/react/dangerously-api-key).
 
 ```tsx
 import { useXAgent, useXChat, Sender, Bubble, XRequest } from '@ant-design/x';

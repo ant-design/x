@@ -29,7 +29,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*lQydTrtLz9YAAA
 | --- | --- | --- | --- | --- |
 | baseURL | API 请求的基础 URL | string | - | - |
 | model | 模型名称，例如 'gpt-3.5-turbo' | string | - | - |
-| dangerouslyApiKey | **启用此选项可能存在风险，会暴露您的秘密 API 凭证!** | string | - | - |
+| dangerouslyApiKey | **注意: 🔥 `dangerouslyApiKey` 存在安全风险，对此有详细的[说明](/docs/react/dangerously-api-key-cn)。** | string | - | - |
 | fetch | 可选的自定义 fetch 函数，用于发起请求 | fetch | - | - |
 
 ### XRequestFunction

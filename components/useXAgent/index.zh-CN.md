@@ -39,7 +39,7 @@ type useXAgent<AgentMessage> = (
 | baseURL | 请求服务端地址 | string | - |  |
 | key | 请求秘钥 | string | - |  |
 | model | 协议模型 | string | - |  |
-| dangerouslyApiKey | **启用此选项可能存在风险，会暴露您的秘密 API 凭证!** | string | - | - |
+| dangerouslyApiKey | **注意: 🔥 `dangerouslyApiKey` 存在安全风险，对此有详细的[说明](/docs/react/dangerously-api-key-cn)。** | string | - | - |
 
 ### XAgentConfigCustom
 
