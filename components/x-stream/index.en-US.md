@@ -1,7 +1,7 @@
 ---
 category: Components
 group:
-  title: Tool
+  title: Tools
   order: 5
 title: XStream
 order: 1
