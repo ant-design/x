@@ -25,9 +25,6 @@ tag: vVERSION
 - 🛠 修复使用 `pnpm` 启动项目时幽灵依赖导致无法启动的问题。[#223](https://github.com/ant-design/x/pull/223) 由 [@YumoImer](https://github.com/YumoImer) 提交
 - 🌈 独立式样板间支持附件上传功能演示。[#250](https://github.com/ant-design/x/pull/250)、[#265](https://github.com/ant-design/x/pull/265) 由 [@kelvinelove](https://github.com/kelvinelove) 提交
 - 📖 修复缺失的贡献者信息。[#212](https://github.com/ant-design/x/pull/212) 由 [@afc163](https://github.com/afc163) 提交
-- 📖 修复模型使用文档中的代码示例问题。[#264](https://github.com/ant-design/x/pull/264) 由 [@YumoImer](https://github.com/YumoImer) 提交
-- 📖 修复设计文档中的错误图片链接。[#246](https://github.com/ant-design/x/pull/246) 由 [@Rain-1214](https://github.com/Rain-1214) 提交
-- 📖 更新 README.md。[#275](https://github.com/ant-design/x/pull/275)、[#224](https://github.com/ant-design/x/pull/224)、[#237](https://github.com/ant-design/x/pull/237)、[#215](https://github.com/ant-design/x/pull/215) 由 [@afc163](https://github.com/afc163) 、 [@YumoImer](https://github.com/YumoImer) 完成
 - 📖 优化官网站点提升用户体验。[#264](https://github.com/ant-design/x/pull/264)、[#263](https://github.com/ant-design/x/pull/263)、[#262](https://github.com/ant-design/x/pull/262)、[#261](https://github.com/ant-design/x/pull/261)、[#241](https://github.com/ant-design/x/pull/241)、[#246](https://github.com/ant-design/x/pull/246)、[#210](https://github.com/ant-design/x/pull/210)、[#211](https://github.com/ant-design/x/pull/211) 由 [@YumoImer](https://github.com/YumoImer)、[@afc163](https://github.com/afc163)、[@Rain-1214](https://github.com/Rain-1214)、[@kelvinelove](https://github.com/kelvinelove) 完成
 - 📦 更新浏览器目标减少打包体积。[#234](https://github.com/ant-design/x/pull/234) 由 [afc163](https://github.com/afc163) 提交
 
