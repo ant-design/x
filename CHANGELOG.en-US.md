@@ -16,6 +16,19 @@ tag: vVERSION
 
 ---
 
+## 1.0.1
+
+`2024-11-29`
+
+- 🛠 Optimized TS types for `useXAgent` and `XStream`. [#272](https://github.com/ant-design/x/pull/272) by [@YumoImer](https://github.com/YumoImer)
+- 🛠 Made the `agent` parameter optional to support data management functionality using only `useXChat`. [#271](https://github.com/ant-design/x/pull/271) by [@YumoImer](https://github.com/YumoImer)
+- 💄 Adjusted `Conversations` style based on RICH design specification. [#242](https://github.com/ant-design/x/pull/242) by [@YumoImer](https://github.com/YumoImer)
+- 🛠 Fixed ghost dependency issue that prevented the project from starting when using `pnpm`. [#223](https://github.com/ant-design/x/pull/223) by [@YumoImer](https://github.com/YumoImer)
+- 🌈 Demonstrated the attachment upload functionality in the standalone template. [#250](https://github.com/ant-design/x/pull/250), [#265](https://github.com/ant-design/x/pull/265) by [@kelvinelove](https://github.com/kelvinelove)
+- 📖 Fixed missing contributor information. [#212](https://github.com/ant-design/x/pull/212) by [@afc163](https://github.com/afc163)
+- 📖 Optimized official site to enhance user experience. [#277](https://github.com/ant-design/x/pull/277), [#264](https://github.com/ant-design/x/pull/264), [#263](https://github.com/ant-design/x/pull/263), [#262](https://github.com/ant-design/x/pull/262), [#261](https://github.com/ant-design/x/pull/261), [#241](https://github.com/ant-design/x/pull/241), [#246](https://github.com/ant-design/x/pull/246), [#210](https://github.com/ant-design/x/pull/210), [#211](https://github.com/ant-design/x/pull/211) by [@YumoImer](https://github.com/YumoImer), [@afc163](https://github.com/afc163), [@Rain-1214](https://github.com/Rain-1214), [@kelvinelove](https://github.com/kelvinelove) and [@tabzzz1](https://github.com/tabzzz1)
+- 📦 Updated browser targets to reduce bundle size. [#234](https://github.com/ant-design/x/pull/234) by [@afc163](https://github.com/afc163)
+
 ## 1.0.0
 
 `2024-11-22`

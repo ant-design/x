@@ -15,6 +15,19 @@ tag: vVERSION
 
 ---
 
+## 1.0.1
+
+`2024-11-29`
+
+- 🛠 优化 `useXAgent` 和 `XStream` 的 TS 类型。[#272](https://github.com/ant-design/x/pull/272) 由 [@YumoImer](https://github.com/YumoImer) 提交
+- 🛠 调整 `agent` 参数设为可选，以支持仅使用 `useXChat` 的数据管理功能。[#271](https://github.com/ant-design/x/pull/271) 由 [@YumoImer](https://github.com/YumoImer) 提交
+- 💄 调整 `Conversations` 样式基于 RICH 设计规范。[#242](https://github.com/ant-design/x/pull/242) 由 [@YumoImer](https://github.com/YumoImer) 提交
+- 🛠 修复使用 `pnpm` 启动项目时幽灵依赖导致无法启动的问题。[#223](https://github.com/ant-design/x/pull/223) 由 [@YumoImer](https://github.com/YumoImer) 提交
+- 🌈 独立式样板间支持附件上传功能演示。[#250](https://github.com/ant-design/x/pull/250)、[#265](https://github.com/ant-design/x/pull/265) 由 [@kelvinelove](https://github.com/kelvinelove) 提交
+- 📖 修复缺失的贡献者信息。[#212](https://github.com/ant-design/x/pull/212) 由 [@afc163](https://github.com/afc163) 提交
+- 📖 优化官网站点提升用户体验。[#277](https://github.com/ant-design/x/pull/277)、[#264](https://github.com/ant-design/x/pull/264)、[#263](https://github.com/ant-design/x/pull/263)、[#262](https://github.com/ant-design/x/pull/262)、[#261](https://github.com/ant-design/x/pull/261)、[#241](https://github.com/ant-design/x/pull/241)、[#246](https://github.com/ant-design/x/pull/246)、[#210](https://github.com/ant-design/x/pull/210)、[#211](https://github.com/ant-design/x/pull/211) 由 [@YumoImer](https://github.com/YumoImer)、[@afc163](https://github.com/afc163)、[@Rain-1214](https://github.com/Rain-1214)、[@kelvinelove](https://github.com/kelvinelove)、[@tabzzz1](https://github.com/tabzzz1) 完成
+- 📦 更新浏览器目标减少打包体积。[#234](https://github.com/ant-design/x/pull/234) 由 [@afc163](https://github.com/afc163) 提交
+
 ## 1.0.0
 
 `2024-11-22`
