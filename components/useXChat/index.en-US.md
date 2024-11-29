@@ -1,7 +1,7 @@
 ---
 category: Components
 group:
-  title: Tool
+  title: Tools
   order: 5
 title: useXChat
 description: Work with agent hook for data management.

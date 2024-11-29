@@ -1,7 +1,7 @@
 ---
 category: Components
 group:
-  title: Tool
+  title: Tools
   order: 5
 title: useXAgent
 description: Used for model scheduling with Agent hooks.
