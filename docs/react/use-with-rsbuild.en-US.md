@@ -3,7 +3,6 @@ group:
   title: Basic Usage
 order: 5
 title: Usage with Rsbuild
-tag: New
 ---
 
 Here’s the translation of your guide on using `@ant-design/x` with Rsbuild:

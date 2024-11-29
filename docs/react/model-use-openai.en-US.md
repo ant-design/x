@@ -3,56 +3,89 @@ group:
   title: Model Integration
 title: OpenAI
 order: 0
+tag: Updated
 ---
 
-Typically, `openai-node` is used in Node.js environments. If you need to use it in a browser environment, you must enable `dangerouslyAllowBrowser`.
+This guide will explain how to integrate OpenAI's model service into an application built using Ant Design X.
 
-## Example of Streaming Requests with `openai-node`
+## Using OpenAI API
+
+This is equivalent to integrating with a model inference service compatible with OpenAI. For reference, see [Model Integration - Qwen](/docs/react/model-use-qwen-cn).
+
+## Using openai-node
+
+Typically, `openai-node` is used in a Node environment. If used in a browser environment, the `dangerouslyAllowBrowser` option must be enabled.
+
+> Note: `dangerouslyAllowBrowser` poses a security risk. For more details, refer to the official [documentation](https://github.com/openai/openai-node?tab=readme-ov-file#requirements).
 
 ```tsx
-import { useXAgent, useXChat, Sender } from '@ant-design/x';
+import { useXAgent, useXChat, Sender, Bubble } from '@ant-design/x';
 import OpenAI from 'openai';
+import React from 'react';
 
 const client = new OpenAI({
   apiKey: process.env['OPENAI_API_KEY'],
   dangerouslyAllowBrowser: true,
 });
 
-// React environment setup
-const [agent] = useXAgent({
-  request: async (info, callbacks) => {
-    const stream = await client.chat.completions.create({
-      model: 'gpt-4o',
-      messages: [{ role: 'user', content: 'Say this is a test' }],
-      stream: true,
-    });
+const Demo: React.FC = () => {
+  const [agent] = useXAgent({
+    request: async (info, callbacks) => {
+      const { messages, message } = info;
 
-    for await (const chunk of stream) {
-      // Trigger the callback
-      callbacks.onUpdate(chunk.choices[0]?.delta?.content || '');
-    }
-  },
-});
+      const { onSuccess, onUpdate, onError } = callbacks;
 
-const {
-  // Used to initiate conversation requests
-  onRequest,
-  // Used to bind the view
-  messages,
-} = useXChat({ agent });
+      // current message
+      console.log('message', message);
 
-const items = messages.map((message) => ({
-  content: message,
-}));
+      // history messages
+      console.log('messages', messages);
 
-return (
-  <div>
-    <Bubble.List items={items} />
-    <Sender onSubmit={onRequest} />
-  </div>
-);
+      let content: string = '';
+
+      try {
+        const stream = await client.chat.completions.create({
+          model: 'gpt-4o',
+          // if chat context is needed, modify the array
+          messages: [{ role: 'user', content: message }],
+          // stream mode
+          stream: true,
+        });
+
+        for await (const chunk of stream) {
+          content += chunk.choices[0]?.delta?.content || '';
+
+          onUpdate(content);
+        }
+
+        onSuccess(content);
+      } catch (error) {
+        // handle error
+        // onError();
+      }
+    },
+  });
+
+  const {
+    // use to send message
+    onRequest,
+    // use to render messages
+    messages,
+  } = useXChat({ agent });
+
+  const items = messages.map(({ message, id }) => ({
+    // key is required, used to identify the message
+    key: id,
+    content: message,
+  }));
+
+  return (
+    <div>
+      <Bubble.List items={items} />
+      <Sender onSubmit={onRequest} />
+    </div>
+  );
+};
+
+export default Demo;
 ```
-
-## use openai API
-
-参考 [Compatible OpenAI](/docs/react/model-use-qwen)

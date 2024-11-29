@@ -3,104 +3,175 @@ group:
   title: Model Integration
 title: Qwen
 order: 1
+tag: Updated
 ---
 
-Tongyi Qianwen provides model inference services compatible with OpenAI.  
-[Alibaba Cloud - Tongyi Qianwen](https://help.aliyun.com/zh/dashscope/developer-reference/compatibility-of-openai-with-dashscope?spm=a2c4g.11186623.0.i10)
+This guide will introduce how to integrate the model service provided by Qwen into an application built with Ant Design X.
 
-## What is a "Service Compatible with OpenAI Models"?
+Qwen’s model inference service supports the "OpenAI Compatibility Mode." For more details, see the official documentation: [Alibaba Cloud - Tongyi Qianwen](https://help.aliyun.com/zh/model-studio/developer-reference/compatibility-of-openai-with-dashscope)
 
-It refers to a model inference service whose interface design and usage are consistent with OpenAI's API.
+- How to get the baseURL - <https://help.aliyun.com/zh/model-studio/getting-started/what-is-model-studio>
+- How to get the API Key - <https://help.aliyun.com/zh/model-studio/developer-reference/get-api-key>
+- Model list - <https://help.aliyun.com/zh/model-studio/getting-started/models>
 
-This means developers can use the same code and methods as they would for OpenAI models to interact with these compatible services, significantly reducing integration costs.
+### What is the "OpenAI Compatibility Mode"?
 
-## Method 1: Using `useXAgent`
+It refers to model inference services whose API design and usage methods are consistent with OpenAI’s API.
 
-This method is **a ready-to-use solution for React environments** provided by Ant Design X.
+This allows developers to use the same code and methods as OpenAI models to call these compatible services, thus reducing integration costs.
+
+## Using openai-node for Compatible Calls
+
+> Note: 🔥 `dangerouslyAllowBrowser` presents security risks. Detailed documentation on this can be found in the official [openai-node documentation](https://github.com/openai/openai-node?tab=readme-ov-file#requirements).
 
 ```tsx
-import { useXAgent } from '@ant-design/x';
+import { useXAgent, useXChat, Sender, Bubble } from '@ant-design/x';
+import OpenAI from 'openai';
+import React from 'react';
 
-// ... react env
-const [agent] = useXAgent({
+const client = new OpenAI({
   baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
-  model: 'qwen-plus',
-  // Use cautiously in production!
-  dangerouslyApiKey: 'DASHSCOPE_API_KEY',
+  apiKey: process.env['DASHSCOPE_API_KEY'],
+  dangerouslyAllowBrowser: true,
 });
 
-function request() {
-  agent.request(
-    {
-      // Conversation messages
-      messages: [
-        {
-          role: 'user',
-          content: 'Hello',
-        },
-      ],
-      // Enable streaming
-      stream: true,
+const Demo: React.FC = () => {
+  const [agent] = useXAgent({
+    request: async (info, callbacks) => {
+      const { messages, message } = info;
+
+      const { onSuccess, onUpdate, onError } = callbacks;
+
+      // current message
+      console.log('message', message);
+
+      // history messages
+      console.log('messages', messages);
+
+      let content: string = '';
+
+      try {
+        const stream = await client.chat.completions.create({
+          model: 'qwen-plus',
+          // if chat context is needed, modify the array
+          messages: [{ role: 'user', content: message }],
+          // stream mode
+          stream: true,
+        });
+
+        for await (const chunk of stream) {
+          content += chunk.choices[0]?.delta?.content || '';
+
+          onUpdate(content);
+        }
+
+        onSuccess(content);
+      } catch (error) {
+        // handle error
+        // onError();
+      }
     },
-    {
-      // Success callback
-      onSuccess: (sseChunks) => {
-        // Triggered when the request completes
-        // This will contain the parsed sseChunks
-      },
-      onError: (error) => {
-        // Triggered in case of an error
-      },
-      onUpdate: (sse) => {
-        // Triggered during stream updates
-        // This will contain the parsed SSE object
-      },
-    },
+  });
+
+  const {
+    // use to send message
+    onRequest,
+    // use to render messages
+    messages,
+  } = useXChat({ agent });
+
+  const items = messages.map(({ message, id }) => ({
+    // key is required, used to identify the message
+    key: id,
+    content: message,
+  }));
+
+  return (
+    <div>
+      <Bubble.List items={items} />
+      <Sender onSubmit={onRequest} />
+    </div>
   );
-}
+};
+
+export default Demo;
 ```
 
-## Method 2: Using `XRequest`
+## Using API Integration
 
-This method is **a ready-to-use solution for JavaScript environments** provided by Ant Design X.
+> Note: 🔥 `dangerouslyApiKey` presents security risks. Detailed documentation on this can be found in [Explanation](/docs/react/dangerously-api-key-cn).
 
 ```tsx
-import { XRequest } from '@ant-design/x';
+import { useXAgent, useXChat, Sender, Bubble, XRequest } from '@ant-design/x';
+import React from 'react';
 
-const xRequest = XRequest({
-  baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
-  model: 'qwen-plus',
-  // Use cautiously in production!
-  dangerouslyApiKey: 'DASHSCOPE_API_KEY',
-});
+const Component: React.FC = () => {
+  const [agent] = useXAgent({
+    request: async (info, callbacks) => {
+      const { messages, message } = info;
+      const { onUpdate } = callbacks;
 
-function request() {
-  xRequest.create(
-    {
-      // Conversation messages
-      messages: [
-        {
-          role: 'user',
-          content: 'Hello',
-        },
-      ],
-      // Enable streaming
-      stream: true,
+      // current message
+      console.log('message', message);
+      // messages list
+      console.log('messages', messages);
+
+      let content: string = '';
+
+      try {
+        const { create } = XRequest({
+          baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
+          dangerouslyApiKey: process.env['DASHSCOPE_API_KEY'],
+          model: 'qwen-plus',
+        });
+
+        create(
+          {
+            messages: [{ role: 'user', content: message }],
+            stream: true,
+          },
+          {
+            onSuccess: (chunks) => {
+              console.log('sse chunk list', chunks);
+            },
+            onError: (error) => {
+              console.log('error', error);
+            },
+            onUpdate: (chunk) => {
+              console.log('sse object', chunk);
+
+              const data = JSON.parse(chunk.data);
+
+              content += data?.choices[0].delta.content;
+
+              onUpdate(content);
+            },
+          },
+        );
+      } catch (error) {}
     },
-    {
-      // Success callback
-      onSuccess: (sseChunks) => {
-        // Triggered when the request completes
-        // This will contain the parsed sseChunks
-      },
-      onError: (error) => {
-        // Triggered in case of an error
-      },
-      onUpdate: (sse) => {
-        // Triggered during stream updates
-        // This will contain the parsed SSE object
-      },
-    },
+  });
+
+  const {
+    // use to send message
+    onRequest,
+    // use to render messages
+    messages,
+  } = useXChat({ agent });
+
+  const items = messages.map(({ message, id }) => ({
+    // key is required, used to identify the message
+    key: id,
+    content: message,
+  }));
+
+  return (
+    <div>
+      <Bubble.List items={items} />
+      <Sender onSubmit={onRequest} />
+    </div>
   );
-}
+};
+
+export default Component;
 ```
