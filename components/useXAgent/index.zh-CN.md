@@ -54,6 +54,7 @@ type useXAgent<AgentMessage> = (
 ```tsx | pure
 interface RequestFnInfo<Message> extends Partial<XAgentConfigPreset>, AnyObject {
   messages?: Message[];
+  message?: Message;
 }
 
 export type RequestFn<Message> = (

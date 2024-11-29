@@ -5,6 +5,7 @@ import { AnyObject } from '../_util/type';
 
 interface RequestFnInfo<Message> extends Partial<XAgentConfigPreset>, AnyObject {
   messages?: Message[];
+  message?: Message;
 }
 
 export type RequestFn<Message> = (

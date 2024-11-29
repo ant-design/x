@@ -53,6 +53,7 @@ Custom request protocol.
 ```tsx | pure
 interface RequestFnInfo<Message> extends Partial<XAgentConfigPreset>, AnyObject {
   messages?: Message[];
+  message?: Message;
 }
 
 type RequestFn<Message> = (
