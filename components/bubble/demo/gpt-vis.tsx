@@ -23,16 +23,15 @@ const RenderMarkdown: BubbleProps['messageRender'] = (content) => <GPTVis>{conte
 
 const App = () => {
   return (
-    <div>
-      <Bubble
-        typing={{ step: 30, interval: 300 }}
-        content={text}
-        messageRender={RenderMarkdown}
-        avatar={{ src: 'https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp', }}
-        variant="outlined"
-        // styles={{ content: { background: '#fcfbfb' } }}
-      />
-    </div>
+    <Bubble
+      typing={{ step: 30, interval: 300 }}
+      content={text}
+      messageRender={RenderMarkdown}
+      avatar={{
+        src: 'https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp',
+      }}
+      variant="outlined"
+    />
   );
 };
 
