@@ -24,7 +24,7 @@ tag: vVERSION
 - 🛠 Made the `agent` parameter optional to support data management functionality using only `useXChat` (#271) by [YumoImer](https://github.com/YumoImer)
 - 💄 Adjusted `Conversations` style based on RICH design specification (#242) by [YumoImer](https://github.com/YumoImer)
 - 🛠 Fixed ghost dependency issue that prevented the project from starting when using `pnpm` (#223) by [YumoImer](https://github.com/YumoImer)
-- 🏠 Demonstrated the attachment upload functionality in the standalone template (#250)(#265) by [kelvinelove](https://github.com/kelvinelove)
+- 🌈 Demonstrated the attachment upload functionality in the standalone template (#250)(#265) by [kelvinelove](https://github.com/kelvinelove)
 - 📖 Fixed missing contributor information (#212) by [afc163](https://github.com/afc163)
 - 📖 Fixed code example issues in the model usage documentation (#275) by [YumoImer](https://github.com/YumoImer)
 - 📖 Fixed incorrect image link in the design docs (#246) by [Rain-1214](https://github.com/Rain-1214)

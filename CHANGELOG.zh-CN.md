@@ -23,7 +23,7 @@ tag: vVERSION
 - 🛠 调整 agent 参数设为可选，以支持仅使用 `useXChat` 的数据管理功能 (#271) 由 [YumoImer](https://github.com/YumoImer) 提交
 - 💄 调整 `Conversations` 样式基于 RICH 设计规范 (#242) 由 [YumoImer](https://github.com/YumoImer) 提交
 - 🛠 修复使用 `pnpm` 启动项目时幽灵依赖导致无法启动的问题 (#223) 由 [YumoImer](https://github.com/YumoImer) 提交
-- 🏠 独立式样板间支持附件上传功能演示 (#250)(#265) 由 [kelvinelove](https://github.com/kelvinelove)、[YumoImer](https://github.com/YumoImer) 提交
+- 🌈 独立式样板间支持附件上传功能演示 (#250)(#265) 由 [kelvinelove](https://github.com/kelvinelove)、[YumoImer](https://github.com/YumoImer) 提交
 - 📖 修复缺失的贡献者信息 (#212) 由 [afc163](https://github.com/afc163) 提交
 - 📖 修复模型使用文档中的代码示例问题 (#264) 由 [YumoImer](https://github.com/YumoImer) 提交
 - 📖 修复设计文档中的错误图片链接 (#246) 由 [Rain-1214](https://github.com/Rain-1214) 提交
