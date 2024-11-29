@@ -65,10 +65,8 @@ pnpm add @ant-design/x
 
 我们基于 RICH 交互范式，在不同的交互阶段提供了大量的原子组件，帮助你灵活搭建你的 AI 对话应用：
 
-- 通用: `Bubble` - 消息气泡、`Conversations` - 会话管理
-- 唤醒: `Welcome` - 欢迎、`Prompts` - 提示集
-- 表达: `Sender` - 发送框、`Attachment` - 附件、`Suggestion` - 快捷指令
-- 确认: `ThoughtChain` - 思维链
+- [组件总览](https://x.ant.design/components/overview-cn)
+- [样板间](https://x.ant.design/docs/playground/independent-cn)
 
 下面是使用原子组件搭建一个最简单的对话框的代码示例:
 
@@ -100,74 +98,156 @@ export default App;
 
 ## ⚡️ 对接模型推理服务
 
-我们通过提供 `useXAgent` 运行时工具，帮助你开箱即用的对接符合 OpenAI 标准的模型推理服务。
+我们通过提供 `useXAgent` `XRequest` 等运行时工具，帮助你开箱即用的对接符合标准的模型推理服务。
 
-下面是如何使用 `useXAgent` 的代码示例:
+这是一个对接 Qwen 的示例:
+
+> 注意: 🔥 `dangerouslyApiKey` 存在安全风险，对此有详细的[说明](/docs/react/dangerously-api-key-cn)。
 
 ```tsx
+import { useXAgent, Sender, XRequest } from '@ant-design/x';
 import React from 'react';
-import { useXAgent, Sender } from '@ant-design/x';
 
-const App = () => {
+const Component: React.FC = () => {
   const [agent] = useXAgent({
-    // 模型推理服务地址
-    baseURL: 'https://your.api.host',
-    // 模型名称
-    model: 'gpt-3.5',
+    request: async (info, callbacks) => {
+      const { messages, message } = info;
+      const { onUpdate } = callbacks;
+
+      // current message
+      console.log('message', message);
+      // messages list
+      console.log('messages', messages);
+
+      let content: string = '';
+
+      try {
+        const { create } = XRequest({
+          baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
+          dangerouslyApiKey: process.env['DASHSCOPE_API_KEY'],
+          model: 'qwen-plus',
+        });
+
+        create(
+          {
+            messages: [{ role: 'user', content: message }],
+            stream: true,
+          },
+          {
+            onSuccess: (chunks) => {
+              console.log('sse chunk list', chunks);
+            },
+            onError: (error) => {
+              console.log('error', error);
+            },
+            onUpdate: (chunk) => {
+              console.log('sse object', chunk);
+
+              const data = JSON.parse(chunk.data);
+
+              content += data?.choices[0].delta.content;
+
+              onUpdate(content);
+            },
+          },
+        );
+      } catch (error) {
+        // handle error
+      }
+    },
   });
 
-  function chatRequest(text: string) {
-    agent.request({
-      // 消息
-      messages: [
-        {
-          content: text,
-          role: 'user',
-        },
-      ],
-      // 开启流式
-      stream: true,
-    });
+  function onRequest(message: string) {
+    agent.request(
+      { message },
+      {
+        onUpdate: () => {},
+        onSuccess: () => {},
+        onError: () => {},
+      },
+    );
   }
 
-  return <Sender onSubmit={chatRequest} />;
+  return <Sender onSubmit={onRequest} />;
 };
-
-export default App;
 ```
 
 ## 🔄 高效管理数据流
 
 我们通过提供 `useXChat` 运行时工具，帮助你开箱即用的管理 AI 对话应用的数据流:
 
-```tsx
-import React from 'react';
-import { useXChat, useXAgent } from '@ant-design/x';
+这是一个对接 OpenAI 的示例:
 
-const App = () => {
+```tsx
+import { useXAgent, useXChat, Sender, Bubble } from '@ant-design/x';
+import OpenAI from 'openai';
+import React from 'react';
+
+const client = new OpenAI({
+  apiKey: process.env['OPENAI_API_KEY'],
+  dangerouslyAllowBrowser: true,
+});
+
+const Demo: React.FC = () => {
   const [agent] = useXAgent({
-    // 模型推理服务地址
-    baseURL: 'https://your.api.host',
-    // 模型名称
-    model: 'gpt-3.5',
+    request: async (info, callbacks) => {
+      const { messages, message } = info;
+
+      const { onSuccess, onUpdate, onError } = callbacks;
+
+      // current message
+      console.log('message', message);
+
+      // history messages
+      console.log('messages', messages);
+
+      let content: string = '';
+
+      try {
+        const stream = await client.chat.completions.create({
+          model: 'gpt-4o',
+          // if chat context is needed, modify the array
+          messages: [{ role: 'user', content: message }],
+          // stream mode
+          stream: true,
+        });
+
+        for await (const chunk of stream) {
+          content += chunk.choices[0]?.delta?.content || '';
+
+          onUpdate(content);
+        }
+
+        onSuccess(content);
+      } catch (error) {
+        // handle error
+        // onError();
+      }
+    },
   });
 
   const {
-    // 发起聊天请求
+    // use to send message
     onRequest,
-    // 消息列表
+    // use to render messages
     messages,
   } = useXChat({ agent });
 
+  const items = messages.map(({ message, id }) => ({
+    // key is required, used to identify the message
+    key: id,
+    content: message,
+  }));
+
   return (
     <div>
-      <Bubble.List items={messages} />
+      <Bubble.List items={items} />
       <Sender onSubmit={onRequest} />
     </div>
   );
 };
 
-export default App;
+export default Demo;
 ```
 
 ## 按需加载
