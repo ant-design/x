@@ -66,7 +66,7 @@ const App = () => {
     request: async ({ message }, { onSuccess }) => {
       await sleep();
 
-      const { content } = message;
+      const { content } = message || {};
 
       onSuccess({
         type: 'ai',
