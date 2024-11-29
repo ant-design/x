@@ -68,22 +68,7 @@ type RequestFn<Message> = (
 
 ### Agent
 
-| Property     | Description                                | Type           | Version |
-| ------------ | ------------------------------------------ | -------------- | ------- |
-| request      | Call the configured request of `useXAgent` | AgentRequestFn |         |
-| isRequesting | Check if it is requesting                  | () => boolean  |         |
-
-```tsx | pure
-interface AgentRequestFnInfo<Message> extends Partial<XAgentConfigPreset>, AnyObject {
-  messages?: Message[];
-}
-
-type AgentRequestFn<AgentMessage> = (
-  info: AgentRequestFnInfo<Message>,
-  callbacks: {
-    onUpdate: (message: AgentMessage) => void;
-    onSuccess: (message: AgentMessage) => void;
-    onError: (error: Error) => void;
-  },
-) => void;
-```
+| Property     | Description                                | Type          | Version |
+| ------------ | ------------------------------------------ | ------------- | ------- |
+| request      | Call the configured request of `useXAgent` | RequestFn     |         |
+| isRequesting | Check if it is requesting                  | () => boolean |         |

@@ -69,22 +69,7 @@ export type RequestFn<Message> = (
 
 ### Agent
 
-| 属性         | 说明                        | 类型           | 版本 |
-| ------------ | --------------------------- | -------------- | ---- |
-| request      | 调用 `useXAgent` 配置的请求 | AgentRequestFn |      |
-| isRequesting | 是否正在请求                | () => boolean  |      |
-
-```tsx | pure
-interface AgentRequestFnInfo<Message> extends Partial<XAgentConfigPreset>, AnyObject {
-  messages?: Message[];
-}
-
-type AgentRequestFn<AgentMessage> = (
-  info: AgentRequestFnInfo<Message>,
-  callbacks: {
-    onUpdate: (message: AgentMessage) => void;
-    onSuccess: (message: AgentMessage) => void;
-    onError: (error: Error) => void;
-  },
-) => void;
-```
+| 属性         | 说明                        | 类型          | 版本 |
+| ------------ | --------------------------- | ------------- | ---- |
+| request      | 调用 `useXAgent` 配置的请求 | RequestFn     |      |
+| isRequesting | 是否正在请求                | () => boolean |      |
