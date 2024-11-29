@@ -1,6 +1,6 @@
-import React from 'react';
-import { css, Global } from '@emotion/react';
+import { Global, css } from '@emotion/react';
 import { useTheme } from 'antd-style';
+import React from 'react';
 
 const GlobalDemoStyles: React.FC = () => {
   const token = useTheme();
@@ -74,6 +74,7 @@ const GlobalDemoStyles: React.FC = () => {
           &-title {
             position: absolute;
             top: -14px;
+            height: auto;
             padding: 1px 8px;
             color: #777;
             background: ${token.colorBgContainer};
@@ -291,8 +292,8 @@ const GlobalDemoStyles: React.FC = () => {
           }
 
           &-codesandbox {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             overflow: hidden;
             border: 0;
             cursor: pointer;
