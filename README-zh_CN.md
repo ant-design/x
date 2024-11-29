@@ -102,7 +102,7 @@ export default App;
 
 这是一个对接 Qwen 的示例:
 
-> 注意: 🔥 `dangerouslyApiKey` 存在安全风险，对此有详细的[说明](/docs/react/dangerously-api-key-cn)。
+> 注意: 🔥 `dangerouslyApiKey` 存在安全风险，对此有详细的[说明](/docs/react/dangerously-api-key.zh-CN.md)。
 
 ```tsx
 import { useXAgent, Sender, XRequest } from '@ant-design/x';
