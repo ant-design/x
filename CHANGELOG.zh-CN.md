@@ -15,6 +15,23 @@ tag: vVERSION
 
 ---
 
+## 1.0.1
+
+`2024-11-29`
+
+- 🛠 优化 `useXAgent` 和 `XStream` 的 TS 类型 (#272) 由 [YumoImer](https://github.com/YumoImer) 提交
+- 🛠 调整 agent 参数设为可选，以支持仅使用 `useXChat` 的数据管理功能 (#271) 由 [YumoImer](https://github.com/YumoImer) 提交
+- 💄 调整 `Conversations` 样式基于 RICH 设计规范 (#242) 由 [YumoImer](https://github.com/YumoImer) 提交
+- 🛠 修复使用 `pnpm` 启动项目时幽灵依赖导致无法启动的问题 (#223) 由 [YumoImer](https://github.com/YumoImer) 提交
+- 🏠 独立式样板间支持附件上传功能演示 (#250)(#265) 由 [kelvinelove](https://github.com/kelvinelove)、[YumoImer](https://github.com/YumoImer) 提交
+- 📖 修复缺失的贡献者信息 (#212) 由 [afc163](https://github.com/afc163) 提交
+- 📖 修复模型使用文档中的代码示例问题 (#264) 由 [YumoImer](https://github.com/YumoImer) 提交
+- 📖 修复设计文档中的错误图片链接 (#246) 由 [Rain-1214](https://github.com/Rain-1214) 提交
+- 📖 更新 README.md (#275)(#224)(#237)(#215) 由 [afc163](https://github.com/afc163) 和 [YumoImer](https://github.com/YumoImer) 提交
+- 📖 优化官网站点提升用户体验 (#264)(#263)(#262)(#261)(#241)(#246)(#210)(#211) 由 [YumoImer](https://github.com/YumoImer)、[afc163](https://github.com/afc163)、[Rain-1214](https://github.com/Rain-1214)、[kelvinelove](https://github.com/kelvinelove) 完成
+- 📦 更新浏览器目标减少打包体积 (#234) 由 [afc163](https://github.com/afc163) 提交
+- 🛠 日常维护 (#249)(#244)(#220)(#231)(#227)(#228)(#222)(#217) 由 [afc163](https://github.com/afc163)、[zombieJ](https://github.com/zombieJ)、[YumoImer](https://github.com/YumoImer) 完成
+
 ## 1.0.0
 
 `2024-11-22`
