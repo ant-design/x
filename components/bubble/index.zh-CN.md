@@ -30,6 +30,7 @@ demo:
 <code src="./demo/list.tsx">气泡列表</code>
 <code src="./demo/bubble-custom.tsx">语义化自定义</code>
 <code src="./demo/list-custom.tsx">自定义列表内容</code>
+<code src="./demo/chart.tsx">自定义图表渲染</code>
 
 ## API
 
