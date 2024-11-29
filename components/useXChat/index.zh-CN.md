@@ -35,7 +35,7 @@ type useXChat<AgentMessage, ParsedMessage = AgentMessage> = (
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| agent | 由 useXAgent 生成的代理器, 如果需要使用 onRequest 方法，agent 参数是必需的 | XAgent | - |  |
+| agent | 由 `useXAgent` 生成的代理器, 如果需要使用 `onRequest` 方法, `agent` 参数是必需的 | XAgent | - |  |
 | defaultMessages | 默认展示信息 | { status, message }[] | - |  |
 | parser | 将 AgentMessage 转换成消费使用的 ParsedMessage，不设置时则直接消费 AgentMessage。支持将一条 AgentMessage 转换成多条 ParsedMessage | (message: AgentMessage) => BubbleMessage \| BubbleMessage[] | - |  |
 | requestFallback | 请求失败的兜底信息，不提供则不会展示 | AgentMessage \| () => AgentMessage | - |  |
