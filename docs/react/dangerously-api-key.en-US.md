@@ -5,7 +5,7 @@ order: 2
 title: dangerouslyApiKey 说明
 ---
 
-Please read this carefully, as it is important!!! We provide the `dangerouslyApiKey` option in `useXAgent` and `XRequest`. Here is a detailed explanation of its risks.
+:::warning Please read this carefully, as it is important!!! We provide the `dangerouslyApiKey` option in `useXAgent` and `XRequest`. Here is a detailed explanation of its risks. :::
 
 ## Why is it dangerous?
 
