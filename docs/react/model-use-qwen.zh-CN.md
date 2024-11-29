@@ -107,6 +107,12 @@ export default Demo;
 import { useXAgent, useXChat, Sender, Bubble, XRequest } from '@ant-design/x';
 import React from 'react';
 
+const { create } = XRequest({
+  baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
+  dangerouslyApiKey: process.env['DASHSCOPE_API_KEY'],
+  model: 'qwen-plus',
+});
+
 const Component: React.FC = () => {
   const [agent] = useXAgent({
     request: async (info, callbacks) => {
@@ -121,12 +127,6 @@ const Component: React.FC = () => {
       let content: string = '';
 
       try {
-        const { create } = XRequest({
-          baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
-          dangerouslyApiKey: process.env['DASHSCOPE_API_KEY'],
-          model: 'qwen-plus',
-        });
-
         create(
           {
             messages: [{ role: 'user', content: message }],
