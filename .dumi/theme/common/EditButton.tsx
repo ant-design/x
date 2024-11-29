@@ -21,6 +21,8 @@ const useStyle = createStyles(({ token, css }) => {
         display: inline-block;
         text-decoration: none;
         vertical-align: middle;
+        pointer-events: auto;
+        z-index: 999;
         margin-inline-start: ${token.marginXS}px;
         ${iconCls} {
           display: block;

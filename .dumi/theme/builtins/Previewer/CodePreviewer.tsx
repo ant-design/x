@@ -390,11 +390,13 @@ createRoot(document.getElementById('container')).render(<Demo />);
       {!simplify && (
         <section className="code-box-meta markdown">
           <div className="code-box-title">
-            <Tooltip title={originDebug ? <FormattedMessage id="app.demo.debug" /> : ''}>
-              <a href={`#${asset.id}`} ref={anchorRef}>
-                {localizedTitle}
-              </a>
-            </Tooltip>
+            {localizedTitle && (
+              <Tooltip title={originDebug ? <FormattedMessage id="app.demo.debug" /> : ''}>
+                <a href={`#${asset.id}`} ref={anchorRef}>
+                  {localizedTitle}
+                </a>
+              </Tooltip>
+            )}
             <EditButton
               title={<FormattedMessage id="app.content.edit-demo" />}
               filename={filename}
