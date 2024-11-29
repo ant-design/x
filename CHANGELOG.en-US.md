@@ -20,18 +20,18 @@ tag: vVERSION
 
 `2024-11-29`
 
-- 🛠 Optimized TS types for `useXAgent` and `XStream` (#272) by [YumoImer](https://github.com/YumoImer)
-- 🛠 Made the `agent` parameter optional to support data management functionality using only `useXChat` (#271) by [YumoImer](https://github.com/YumoImer)
-- 💄 Adjusted `Conversations` style based on RICH design specification (#242) by [YumoImer](https://github.com/YumoImer)
-- 🛠 Fixed ghost dependency issue that prevented the project from starting when using `pnpm` (#223) by [YumoImer](https://github.com/YumoImer)
-- 🌈 Demonstrated the attachment upload functionality in the standalone template (#250)(#265) by [kelvinelove](https://github.com/kelvinelove)
-- 📖 Fixed missing contributor information (#212) by [afc163](https://github.com/afc163)
-- 📖 Fixed code example issues in the model usage documentation (#275) by [YumoImer](https://github.com/YumoImer)
-- 📖 Fixed incorrect image link in the design docs (#246) by [Rain-1214](https://github.com/Rain-1214)
-- 📖 Updated README.md (#275)(#224)(#237)(#215) by [afc163](https://github.com/afc163) and [YumoImer](https://github.com/YumoImer)
-- 📖 Optimized official site to enhance user experience (#264)(#263)(#262)(#261)(#241)(#246)(#210)(#211) by [YumoImer](https://github.com/YumoImer), [afc163](https://github.com/afc163), [Rain-1214](https://github.com/Rain-1214), and [kelvinelove](https://github.com/kelvinelove)
-- 📦 Updated browser targets to reduce bundle size (#234) by [afc163](https://github.com/afc163)
-- 🛠 Daily maintenance (#249)(#244)(#220)(#231)(#227)(#228)(#222)(#217) by [afc163](https://github.com/afc163), [zombieJ](https://github.com/zombieJ), and [YumoImer](https://github.com/YumoImer)
+- 🛠 Optimized TS types for `useXAgent` and `XStream` [#272](https://github.com/ant-design/x/pull/272) by [@YumoImer](https://github.com/YumoImer)
+- 🛠 Made the `agent` parameter optional to support data management functionality using only `useXChat` [#271](https://github.com/ant-design/x/pull/271) by [@YumoImer](https://github.com/YumoImer)
+- 💄 Adjusted `Conversations` style based on RICH design specification [#242](https://github.com/ant-design/x/pull/242) by [@YumoImer](https://github.com/YumoImer)
+- 🛠 Fixed ghost dependency issue that prevented the project from starting when using `pnpm` [#223](https://github.com/ant-design/x/pull/223) by [@YumoImer](https://github.com/YumoImer)
+- 🌈 Demonstrated the attachment upload functionality in the standalone template [#250](https://github.com/ant-design/x/pull/250), [#265](https://github.com/ant-design/x/pull/265) by [@kelvinelove](https://github.com/kelvinelove)
+- 📖 Fixed missing contributor information [#212](https://github.com/ant-design/x/pull/212) by [afc163](https://github.com/afc163)
+- 📖 Fixed code example issues in the model usage documentation [#264](https://github.com/ant-design/x/pull/264) by [@YumoImer](https://github.com/YumoImer)
+- 📖 Fixed incorrect image link in the design docs [#246](https://github.com/ant-design/x/pull/246) by [@Rain-1214](https://github.com/Rain-1214)
+- 📖 Updated README.md [#275](https://github.com/ant-design/x/pull/275), [#224](https://github.com/ant-design/x/pull/224), [#237](https://github.com/ant-design/x/pull/237), [#215](https://github.com/ant-design/x/pull/215) by [@afc163](https://github.com/afc163) and [@YumoImer](https://github.com/YumoImer)
+- 📖 Optimized official site to enhance user experience [#264](https://github.com/ant-design/x/pull/264), [#263](https://github.com/ant-design/x/pull/263), [#262](https://github.com/ant-design/x/pull/262), [#261](https://github.com/ant-design/x/pull/261), [#241](https://github.com/ant-design/x/pull/241), [#246](https://github.com/ant-design/x/pull/246), [#210](https://github.com/ant-design/x/pull/210), [#211](https://github.com/ant-design/x/pull/211) by [@YumoImer](https://github.com/YumoImer), [@afc163](https://github.com/afc163), [@Rain-1214](https://github.com/Rain-1214), and [@kelvinelove](https://github.com/kelvinelove)
+- 📦 Updated browser targets to reduce bundle size [#234](https://github.com/ant-design/x/pull/234) by [afc163](https://github.com/afc163)
+- 🛠 Daily maintenance [#249](https://github.com/ant-design/x/pull/249), [#244](https://github.com/ant-design/x/pull/244), [#220](https://github.com/ant-design/x/pull/220), [#231](https://github.com/ant-design/x/pull/231), [#227](https://github.com/ant-design/x/pull/227), [#228](https://github.com/ant-design/x/pull/228), [#222](https://github.com/ant-design/x/pull/222), [#217](https://github.com/ant-design/x/pull/217) by [@afc163](https://github.com/afc163), [@zombieJ](https://github.com/zombieJ), and [@YumoImer](https://github.com/YumoImer)
 
 ## 1.0.0
 
