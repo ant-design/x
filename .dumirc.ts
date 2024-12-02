@@ -40,6 +40,11 @@ export default defineConfig({
   define: {
     antdReproduceVersion: version,
   },
+  externals: {
+    // optimize build of GPT-Vis
+    'mapbox-gl': 'mapboxgl',
+    'maplibre-gl': 'maplibregl',
+  },
   alias: {
     '@ant-design/x/lib': path.join(__dirname, 'components'),
     '@ant-design/x/es': path.join(__dirname, 'components'),
