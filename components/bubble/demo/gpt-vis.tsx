@@ -33,7 +33,7 @@ const App = () => {
           setRerenderKey((prev) => prev + 1);
         }}
       >
-        ReRender
+        Re-Render
       </Button>
 
       <Bubble
