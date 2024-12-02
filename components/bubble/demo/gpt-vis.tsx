@@ -24,7 +24,7 @@ const RenderMarkdown: BubbleProps['messageRender'] = (content) => <GPTVis>{conte
 const App = () => {
   return (
     <Bubble
-      typing={{ step: 30, interval: 300 }}
+      typing={{ step: 20, interval: 150 }}
       content={text}
       messageRender={RenderMarkdown}
       avatar={{
