@@ -1,6 +1,7 @@
 import { Bubble } from '@ant-design/x';
 import type { BubbleProps } from '@ant-design/x';
 import { GPTVis } from '@antv/gpt-vis';
+import { Button, Flex } from 'antd';
 /* eslint-disable react/no-danger */
 import React from 'react';
 
@@ -22,16 +23,29 @@ Here’s a visualization of Haidilao's food delivery revenue from 2013 to 2022. 
 const RenderMarkdown: BubbleProps['messageRender'] = (content) => <GPTVis>{content}</GPTVis>;
 
 const App = () => {
+  const [rerenderKey, setRerenderKey] = React.useState(0);
+
   return (
-    <Bubble
-      typing={{ step: 20, interval: 150 }}
-      content={text}
-      messageRender={RenderMarkdown}
-      avatar={{
-        src: 'https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp',
-      }}
-      variant="outlined"
-    />
+    <Flex vertical gap="small" key={rerenderKey}>
+      <Button
+        style={{ alignSelf: 'flex-end' }}
+        onClick={() => {
+          setRerenderKey((prev) => prev + 1);
+        }}
+      >
+        ReRender
+      </Button>
+
+      <Bubble
+        typing={{ step: 20, interval: 150 }}
+        content={text}
+        messageRender={RenderMarkdown}
+        avatar={{
+          src: 'https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp',
+        }}
+        variant="outlined"
+      />
+    </Flex>
   );
 };
 
