@@ -154,7 +154,9 @@ class XRequestClass {
 
       const contentType = response.headers.get('content-type') || '';
 
-      switch (contentType) {
+      const mimeType = contentType.split(';')[0].trim();
+
+      switch (mimeType) {
         /** SSE */
         case 'text/event-stream':
           await this.sseResponseHandler<Output>(response, callbacks);

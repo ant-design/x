@@ -78,7 +78,7 @@ describe('XRequest Class', () => {
       ok: true,
       status: 200,
       headers: {
-        get: jest.fn().mockReturnValue('application/json'),
+        get: jest.fn().mockReturnValue('application/json; charset=utf-8'),
       },
       json: jest.fn().mockResolvedValueOnce(params),
     });
