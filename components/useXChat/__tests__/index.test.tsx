@@ -82,7 +82,7 @@ describe('useXChat', () => {
       expect(requestNeverEnd).toHaveBeenCalledWith(
         expect.objectContaining({
           message: 'little',
-          messages: [],
+          messages: ['little'],
         }),
         expect.anything(),
       );
@@ -104,7 +104,7 @@ describe('useXChat', () => {
       expect(requestNeverEnd).toHaveBeenCalledWith(
         expect.objectContaining({
           message: 'little',
-          messages: [],
+          messages: ['little'],
         }),
         expect.anything(),
       );

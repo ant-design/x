@@ -1,12 +1,23 @@
 import React from 'react';
 
-export default function useSyncState<T>(defaultValue: T | (() => T)) {
-  const [state, setState] = React.useState(defaultValue);
+type Getter<T> = () => T;
+type Setter<T> = (pre: T) => T;
 
-  const stateRef = React.useRef(state);
-  stateRef.current = state;
+export default function useSyncState<T>(defaultValue: T | Getter<T>) {
+  const [, forceUpdate] = React.useState(0);
 
-  const getState = React.useCallback(() => stateRef.current, []);
+  const stateRef = React.useRef<T>(
+    typeof defaultValue === 'function' ? (defaultValue as Getter<T>)() : defaultValue,
+  );
 
-  return [state, setState, getState] as const;
+  const setState = React.useCallback((action: React.SetStateAction<T>) => {
+    stateRef.current =
+      typeof action === 'function' ? (action as Setter<T>)(stateRef.current) : action;
+
+    forceUpdate((prev) => prev + 1);
+  }, []);
+
+  const getState: Getter<T> = React.useCallback(() => stateRef.current, []);
+
+  return [stateRef.current, setState, getState] as const;
 }
