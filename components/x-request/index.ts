@@ -98,7 +98,7 @@ class XRequestClass {
   private defaultHeaders;
   private customOptions;
 
-  private static instanceBuffer: Map<string, XRequestClass> = new Map();
+  private static instanceBuffer: Map<string | typeof fetch, XRequestClass> = new Map();
 
   private constructor(options: XRequestOptions) {
     const { baseURL, model, dangerouslyApiKey, ...customOptions } = options;
@@ -115,9 +115,10 @@ class XRequestClass {
   }
 
   public static init(options: XRequestOptions): XRequestClass {
-    const id = options.baseURL;
+    if (!options.baseURL || typeof options.baseURL !== 'string')
+      throw new Error('The baseURL is not valid!');
 
-    if (!id || typeof id !== 'string') throw new Error('The baseURL is not valid!');
+    const id = options.fetch || options.baseURL;
 
     if (!XRequestClass.instanceBuffer.has(id)) {
       XRequestClass.instanceBuffer.set(id, new XRequestClass(options));
@@ -131,8 +132,6 @@ class XRequestClass {
     callbacks?: XRequestCallbacks<Output>,
     transformStream?: XStreamOptions<Output>['transformStream'],
   ) => {
-    const { onSuccess, onError, onUpdate } = callbacks || {};
-
     const requestInit = {
       method: 'POST',
       body: JSON.stringify({
@@ -148,37 +147,83 @@ class XRequestClass {
         ...requestInit,
       });
 
-      const contentType = response.headers.get('content-type') || '';
-
-      const chunks: Output[] = [];
-
-      if (contentType.includes('text/event-stream')) {
-        for await (const chunk of XStream({
-          readableStream: response.body!,
-          transformStream,
-        })) {
-          chunks.push(chunk);
-
-          onUpdate?.(chunk);
-        }
-      } else if (contentType.includes('application/json')) {
-        const chunk: Output = await response.json();
-
-        chunks.push(chunk);
-
-        onUpdate?.(chunk);
-      } else {
-        throw new Error(`The response content-type: ${contentType} is not support!`);
+      if (transformStream) {
+        await this.customResponseHandler<Output>(response, callbacks, transformStream);
+        return;
       }
 
-      onSuccess?.(chunks);
+      const contentType = response.headers.get('content-type') || '';
+
+      const mimeType = contentType.split(';')[0].trim();
+
+      switch (mimeType) {
+        /** SSE */
+        case 'text/event-stream':
+          await this.sseResponseHandler<Output>(response, callbacks);
+          break;
+
+        /** JSON */
+        case 'application/json':
+          await this.jsonResponseHandler<Output>(response, callbacks);
+          break;
+
+        default:
+          throw new Error(`The response content-type: ${contentType} is not support!`);
+      }
     } catch (error) {
       const err = error instanceof Error ? error : new Error('Unknown error!');
 
-      onError?.(err);
+      callbacks?.onError?.(err);
 
       throw err;
     }
+  };
+
+  private customResponseHandler = async <Output = SSEOutput>(
+    response: Response,
+    callbacks?: XRequestCallbacks<Output>,
+    transformStream?: XStreamOptions<Output>['transformStream'],
+  ) => {
+    const chunks: Output[] = [];
+
+    for await (const chunk of XStream({
+      readableStream: response.body!,
+      transformStream,
+    })) {
+      chunks.push(chunk);
+
+      callbacks?.onUpdate?.(chunk);
+    }
+
+    callbacks?.onSuccess?.(chunks);
+  };
+
+  private sseResponseHandler = async <Output = SSEOutput>(
+    response: Response,
+    callbacks?: XRequestCallbacks<Output>,
+  ) => {
+    const chunks: Output[] = [];
+
+    for await (const chunk of XStream<Output>({
+      readableStream: response.body!,
+    })) {
+      chunks.push(chunk);
+
+      callbacks?.onUpdate?.(chunk);
+    }
+
+    callbacks?.onSuccess?.(chunks);
+  };
+
+  private jsonResponseHandler = async <Output = SSEOutput>(
+    response: Response,
+    callbacks?: XRequestCallbacks<Output>,
+  ) => {
+    const chunk: Output = await response.json();
+
+    callbacks?.onUpdate?.(chunk);
+
+    callbacks?.onSuccess?.([chunk]);
   };
 }
 
