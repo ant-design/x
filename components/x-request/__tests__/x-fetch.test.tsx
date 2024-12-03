@@ -35,6 +35,12 @@ describe('xFetch', () => {
     expect(await response.text()).toBe('{"data": "modified"}');
   });
 
+  it('should throw an error while options.onResponse not return a Response instance', async () => {
+    await expect(
+      xFetch(baseURL, { middlewares: { onResponse: () => new Date() as any } }),
+    ).rejects.toThrow('The options.onResponse must return a Response instance!');
+  });
+
   it('should throw an error on non-200 status', async () => {
     (global.fetch as jest.Mock).mockResolvedValue(new Response(null, { status: 404 }));
 
