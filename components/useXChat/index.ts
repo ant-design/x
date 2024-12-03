@@ -163,9 +163,11 @@ export default function useXChat<
     // Request
     let updatingMsgId: number | string | null = null;
     const updateMessage = (message: AgentMessage, status: MessageStatus) => {
-      if (updatingMsgId === null) {
+      let msg = getMessages().find((info) => info.id === updatingMsgId);
+
+      if (!msg) {
         // Create if not exist
-        const msg = createMessage(message, status);
+        msg = createMessage(message, status);
         setMessages((ori) => {
           const oriWithoutPending = ori.filter((info) => info.id !== loadingMsgId);
           return [...oriWithoutPending, msg!];
@@ -186,6 +188,8 @@ export default function useXChat<
           });
         });
       }
+
+      return msg;
     };
 
     agent.request(
