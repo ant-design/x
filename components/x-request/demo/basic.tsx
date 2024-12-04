@@ -23,7 +23,7 @@ const exampleRequest = XRequest({
 
 const App = () => {
   const [status, setStatus] = React.useState<ThoughtChainItem['status']>();
-  const [lines, setLines] = React.useState<any[]>([]);
+  const [lines, setLines] = React.useState<Record<string, string>[]>([]);
 
   async function request() {
     setStatus('pending');
