@@ -22,6 +22,8 @@ export interface FileListProps {
   itemStyle?: React.CSSProperties;
 }
 
+const TOLERANCE = 1;
+
 export default function FileList(props: FileListProps) {
   const {
     prefixCls,
@@ -62,9 +64,10 @@ export default function FileList(props: FileListProps) {
     }
 
     if (overflow === 'scrollX') {
-      setPingStart(containerEle.scrollLeft !== 0);
+      setPingStart(Math.abs(containerEle.scrollLeft) >= TOLERANCE);
       setPingEnd(
-        containerEle.scrollWidth - containerEle.clientWidth !== Math.abs(containerEle.scrollLeft),
+        containerEle.scrollWidth - containerEle.clientWidth - Math.abs(containerEle.scrollLeft) >=
+          TOLERANCE,
       );
     } else if (overflow === 'scrollY') {
       setPingStart(containerEle.scrollTop !== 0);
