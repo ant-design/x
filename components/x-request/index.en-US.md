@@ -18,7 +18,9 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*lQydTrtLz9YAAA
 
 ## Examples
 
-<code src="./demo/basic.tsx">Basic</code> <code src="./demo/custom-transformer.tsx">Custom Transformer</code>
+<!-- prettier-ignore -->
+<code src="./demo/basic.tsx">Basic</code>
+<code src="./demo/custom-transformer.tsx">Custom Transformer</code>
 
 ## API
 

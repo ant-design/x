@@ -19,7 +19,9 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*lQydTrtLz9YAAA
 
 ## Examples
 
-<code src="./demo/basic.tsx">基础</code> <code src="./demo/custom-transformer.tsx">自定义转换器</code>
+<!-- prettier-ignore -->
+<code src="./demo/basic.tsx">基础</code>
+<code src="./demo/custom-transformer.tsx">自定义转换器</code>
 
 ## API
 

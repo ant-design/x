@@ -11,9 +11,7 @@ const MODEL = 'gpt-4o';
 
 const ND_JSON_SEPARATOR = '\n';
 
-async function mockFetch(input: RequestInfo | URL, init?: RequestInit) {
-  console.log('mockFetch', input, init);
-
+async function mockFetch() {
   const ndJsonData = `{data:{"id":"0","choices":[{"index":0,"delta":{"content":"Hello","role":"assistant"}}],"created":1733129200,"model":"gpt-4o"}}
 {data:{"id":"1","choices":[{"index":1,"delta":{"content":"world!","role":"assistant"}}],"created":1733129300,"model":"gpt-4o"}}
 {data:{"id":"2","choices":[{"index":2,"delta":{"content":"I","role":"assistant"}}],"created":1733129400,"model":"gpt-4o"}}
