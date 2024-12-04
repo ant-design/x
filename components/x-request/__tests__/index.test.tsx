@@ -147,4 +147,24 @@ describe('XRequest Class', () => {
       new Error(`The response content-type: ${contentType} is not support!`),
     );
   });
+
+  test('should handle TransformStream errors', async () => {
+    const errorTransform = new TransformStream({
+      transform() {
+        throw new Error('Transform error');
+      },
+    });
+
+    mockedXFetch.mockResolvedValueOnce({
+      headers: {
+        get: jest.fn().mockReturnValue('application/x-ndjson'),
+      },
+      body: mockNdJsonReadableStream(),
+    });
+
+    await request.create(params, callbacks, errorTransform).catch(() => {});
+    expect(callbacks.onError).toHaveBeenCalledWith(new Error('Transform error'));
+    expect(callbacks.onSuccess).not.toHaveBeenCalled();
+    expect(callbacks.onUpdate).not.toHaveBeenCalled();
+  });
 });
