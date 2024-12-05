@@ -1,6 +1,6 @@
 import { LoadingOutlined, TagsOutlined } from '@ant-design/icons';
 import { ThoughtChain, XRequest } from '@ant-design/x';
-import { Button, Descriptions, Splitter } from 'antd';
+import { Button, Descriptions, Space } from 'antd';
 import React from 'react';
 
 import type { ThoughtChainItem } from '@ant-design/x';
@@ -23,7 +23,7 @@ const exampleRequest = XRequest({
 
 const App = () => {
   const [status, setStatus] = React.useState<ThoughtChainItem['status']>();
-  const [lines, setLines] = React.useState<any[]>([]);
+  const [lines, setLines] = React.useState<Record<string, string>[]>([]);
 
   async function request() {
     setStatus('pending');
@@ -51,36 +51,31 @@ const App = () => {
   }
 
   return (
-    <Splitter>
-      <Splitter.Panel>
-        <Button type="primary" disabled={status === 'pending'} onClick={request}>
-          Request - {BASE_URL}
-          {PATH}
-        </Button>
-      </Splitter.Panel>
-      <Splitter.Panel>
-        <ThoughtChain
-          style={{ marginLeft: 16 }}
-          items={[
-            {
-              title: 'Request Log',
-              status: status,
-              icon: status === 'pending' ? <LoadingOutlined /> : <TagsOutlined />,
-              description:
-                status === 'error' &&
-                exampleRequest.baseURL === BASE_URL + PATH &&
-                'Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.',
-              content: (
-                <Descriptions column={1}>
-                  <Descriptions.Item label="Status">{status || '-'}</Descriptions.Item>
-                  <Descriptions.Item label="Update Times">{lines.length}</Descriptions.Item>
-                </Descriptions>
-              ),
-            },
-          ]}
-        />
-      </Splitter.Panel>
-    </Splitter>
+    <Space align="start" size={16}>
+      <Button type="primary" disabled={status === 'pending'} onClick={request}>
+        Request - {BASE_URL}
+        {PATH}
+      </Button>
+      <ThoughtChain
+        items={[
+          {
+            title: 'Request Log',
+            status: status,
+            icon: status === 'pending' ? <LoadingOutlined /> : <TagsOutlined />,
+            description:
+              status === 'error' &&
+              exampleRequest.baseURL === BASE_URL + PATH &&
+              'Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.',
+            content: (
+              <Descriptions column={1}>
+                <Descriptions.Item label="Status">{status || '-'}</Descriptions.Item>
+                <Descriptions.Item label="Update Times">{lines.length}</Descriptions.Item>
+              </Descriptions>
+            ),
+          },
+        ]}
+      />
+    </Space>
   );
 };
 

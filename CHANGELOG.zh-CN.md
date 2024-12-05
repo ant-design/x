@@ -15,6 +15,17 @@ tag: vVERSION
 
 ---
 
+## 1.0.2
+
+`2024-12-04`
+
+- 🛠 优化 `XRequest` 支持对自定义协议解析。[#293](https://github.com/ant-design/x/pull/293) 由 [@YumoImer](https://github.com/YumoImer) 提交
+- 🐛 修复 `Attachment` 前后预览按钮无法正常显隐的问题。[#295](https://github.com/ant-design/x/pull/295) 由 [@anzhou99](https://github.com/anzhou99) 提交
+- 🐛 修复 `useXChat` 对同一条消息重复触发 `onUpdate` 的问题。[#298](https://github.com/ant-design/x/pull/298) 由 [@YumoImer](https://github.com/YumoImer) 提交
+- 📖 添加 `Bubble` 配合 `GPT-Vis` 的使用演示文档。[#288](https://github.com/ant-design/x/pull/288) 由 [@lvisei](https://github.com/lvisei) 提交
+- 📦 更新浏览器目标配置减少打包体积。[#282](https://github.com/ant-design/x/pull/282) 由 [@afc163](https://github.com/afc163) 提交
+- 🛠 修复运行 `pnpm run prestart` 的错误。[#287](https://github.com/ant-design/x/pull/287) 由 [@long36708](https://github.com/long36708) 提交
+
 ## 1.0.1
 
 `2024-11-29`

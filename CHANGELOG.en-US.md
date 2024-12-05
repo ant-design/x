@@ -16,6 +16,17 @@ tag: vVERSION
 
 ---
 
+## 1.0.2
+
+`2024-12-04`
+
+- 🛠 Enhanced `XRequest` to support parsing custom protocols. [#293](https://github.com/ant-design/x/pull/293) by [@YumoImer](https://github.com/YumoImer)
+- 🐛 Fixed an issue where the preview buttons for `Attachment` did not toggle visibility properly. [#295](https://github.com/ant-design/x/pull/295) by [@anzhou99](https://github.com/anzhou99)
+- 🐛 Fixed a bug in `useXChat` where the same message triggered `onUpdate` multiple times. [#298](https://github.com/ant-design/x/pull/298) by [@YumoImer](https://github.com/YumoImer)
+- 📖 Added documentation for using `Bubble` with `GPT-Vis`. [#288](https://github.com/ant-design/x/pull/288) by [@lvisei](https://github.com/lvisei)
+- 📦 Updated browser target configurations to reduce bundle size. [#282](https://github.com/ant-design/x/pull/282) by [@afc163](https://github.com/afc163)
+- 🛠 Fixed errors when running `pnpm run prestart`. [#287](https://github.com/ant-design/x/pull/287) by [@long36708](https://github.com/long36708)
+
 ## 1.0.1
 
 `2024-11-29`
