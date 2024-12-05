@@ -9,6 +9,10 @@ export interface TypingOption {
    * @default 50
    */
   interval?: number;
+  /**
+   * @default ""
+   */
+  suffix?: React.ReactNode;
 }
 
 type SemanticType = 'avatar' | 'content' | 'header' | 'footer';

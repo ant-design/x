@@ -1308,7 +1308,7 @@ exports[`renders components/bubble/demo/typing.tsx extend context correctly 1`] 
     <div
       class="ant-bubble-content ant-bubble-content-filled"
     >
-      A
+      A💗
     </div>
   </div>
   <button
