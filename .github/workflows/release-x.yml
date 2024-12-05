@@ -14,7 +14,7 @@ jobs:
         with:
           message: |
             🤖 Ant Design X just released @ant-design/x@${{ github.event.release.tag_name }} ✨🎊✨ Check out the full release note: ${{ github.event.release.html_url }}
-          twitter-app-key: ${{ secrets.TWITTER_API_KEY }}
-          twitter-app-secret: ${{ secrets.TWITTER_API_SECRET_KEY }}
+          twitter-app-key: ${{ secrets.TWITTER_APP_KEY }}
+          twitter-app-secret: ${{ secrets.TWITTER_APP_SECRET }}
           twitter-access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
           twitter-access-token-secret: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
