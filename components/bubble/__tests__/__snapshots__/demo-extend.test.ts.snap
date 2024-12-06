@@ -1276,7 +1276,7 @@ exports[`renders components/bubble/demo/typing.tsx extend context correctly 1`] 
   class="ant-flex ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
 >
   <div
-    class="ant-bubble ant-bubble-start ant-bubble-typing"
+    class="ant-bubble ant-bubble-start"
   >
     <div
       class="ant-bubble-avatar"
@@ -1308,7 +1308,7 @@ exports[`renders components/bubble/demo/typing.tsx extend context correctly 1`] 
     <div
       class="ant-bubble-content ant-bubble-content-filled"
     >
-      A
+      A💗
     </div>
   </div>
   <button
