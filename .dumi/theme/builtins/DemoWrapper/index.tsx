@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
 import { BugOutlined, CodeOutlined, ExperimentOutlined } from '@ant-design/icons';
 import { XProvider } from '@ant-design/x';
-import { Tooltip, Button } from 'antd';
+import { Button, Tooltip } from 'antd';
 import classNames from 'classnames';
 import { DumiDemoGrid, FormattedMessage } from 'dumi';
+import React, { Suspense, useContext } from 'react';
 
 import useLayoutState from '../../../hooks/useLayoutState';
 import useLocale from '../../../hooks/useLocale';
@@ -106,7 +106,9 @@ const DemoWrapper: typeof DumiDemoGrid = ({ items }) => {
         </Tooltip>
       </span>
       <XProvider theme={{ cssVar: enableCssVar, hashed: !enableCssVar }}>
-        <DumiDemoGrid items={demos} />
+        <Suspense>
+          <DumiDemoGrid items={demos} />
+        </Suspense>
       </XProvider>
     </div>
   );
