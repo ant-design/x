@@ -94,6 +94,7 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-start',
+        maxWidth: '100%',
       },
 
       [`& ${componentCls}-content`]: {
