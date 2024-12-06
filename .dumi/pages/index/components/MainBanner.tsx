@@ -1,11 +1,12 @@
 import { createStyles } from 'antd-style';
 import classnames from 'classnames';
-import { Link, useLocation } from 'dumi';
+import { useLocation } from 'dumi';
 import React from 'react';
 
 import { Button } from 'antd';
 import useLocale from '../../../hooks/useLocale';
 import useLottie from '../../../hooks/useLottie';
+import Link from '../../../theme/common/Link';
 import { getLocalizedPathname, isZhCN } from '../../../theme/utils';
 import Container from '../common/Container';
 import SiteContext from './SiteContext';
