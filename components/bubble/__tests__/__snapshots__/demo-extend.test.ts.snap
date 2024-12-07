@@ -472,6 +472,50 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
     </span>
   </div>
   <div
+    class="ant-bubble ant-bubble-end"
+  >
+    <div
+      class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-corner"
+    >
+      string bubble
+    </div>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-end"
+  >
+    <div
+      class="ant-bubble-content ant-bubble-content-borderless"
+    >
+      longgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
+    </div>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-end"
+  >
+    <div
+      class="ant-bubble-content ant-bubble-content-outlined ant-bubble-content-round"
+    >
+      <div
+        class="acss-8wqn66"
+      >
+        block block block block block block block block block block block block block block block block block block block block block block block block block
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-end"
+  >
+    <div
+      class="ant-bubble-content ant-bubble-content-shadow"
+    >
+      <div
+        class="acss-13qb3y4"
+      >
+        fixed width content
+      </div>
+    </div>
+  </div>
+  <div
     class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center"
     role="separator"
   >

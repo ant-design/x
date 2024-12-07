@@ -83,6 +83,10 @@ const App = () => {
       <Bubble {...bubbleDict.block} />
       <Bubble {...bubbleDict.fixedWidthBlock} />
       <Divider>Basic placement: end</Divider>
+      <Bubble {...bubbleDict.string} placement="end" />
+      <Bubble {...bubbleDict.longString} placement="end" />
+      <Bubble {...bubbleDict.block} placement="end" />
+      <Bubble {...bubbleDict.fixedWidthBlock} placement="end" />
       <Divider>Custom</Divider>
       <Bubble {...customizationProps} {...bubbleDict.string} />
       <Bubble {...customizationProps} {...bubbleDict.longString} />
