@@ -49,7 +49,6 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
       [`&${componentCls}-end`]: {
         justifyContent: 'end',
         flexDirection: 'row-reverse',
-
         [`& ${componentCls}-content-wrapper`]: {
           alignItems: 'flex-end',
         },
@@ -93,10 +92,10 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
 
       // =========================== Content =============================
       [`& ${componentCls}-content-wrapper`]: {
-        flex: 'auto',
+        flex: 'auto', //
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'flex-start',
+        alignItems: 'flex-start', //
         minWidth: 0,
         maxWidth: '100%',
       },
@@ -141,6 +140,15 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
             },
           },
         },
+      },
+      // =========================== Editor =============================
+      [`& ${componentCls}-editor`]: {
+        minWidth: '30%',
+        maxWidth: '100%',
+        border: `1px solid ${token.colorPrimary}`,
+        padding: token.paddingSM,
+        borderRadius: token.borderRadius,
+        boxShadow: token.boxShadow,
       },
     },
   };

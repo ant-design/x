@@ -1,4 +1,6 @@
 import type { AvatarProps } from 'antd';
+import { TextAreaProps } from 'antd/es/input';
+import { ButtonProps } from 'antd/lib';
 
 export interface TypingOption {
   /**
@@ -11,7 +13,18 @@ export interface TypingOption {
   interval?: number;
 }
 
-type SemanticType = 'avatar' | 'content' | 'header' | 'footer';
+type SemanticType = 'avatar' | 'content' | 'header' | 'footer' | 'editor';
+
+type EditorButtonConfig = { type: 'save' | 'cancel'; text?: string; option?: ButtonProps };
+
+export interface EditConfig {
+  editing?: boolean;
+  onChange?: (content: string) => void;
+  onCancel?: VoidFunction;
+  onEnd?: (content: string) => void;
+  editorTextAreaConfig?: TextAreaProps;
+  editorButtonConfig?: EditorButtonConfig[];
+}
 
 export interface BubbleProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'content'> {
   prefixCls?: string;
@@ -30,4 +43,5 @@ export interface BubbleProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 
   onTypingComplete?: VoidFunction;
   header?: React.ReactNode;
   footer?: React.ReactNode;
+  editable?: EditConfig;
 }
