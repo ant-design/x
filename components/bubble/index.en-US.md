@@ -22,6 +22,7 @@ Often used when chatting.
 <code src="./demo/avatar-and-placement.tsx">Placement and avatar</code>
 <code src="./demo/header-and-footer.tsx">Header and footer</code>
 <code src="./demo/loading.tsx">Loading</code>
+<code src="./demo/editable.tsx">Editing effect</code>
 <code src="./demo/typing.tsx">Typing effect</code>
 <code src="./demo/markdown.tsx">Content render</code>
 <code src="./demo/variant.tsx">Variant</code>
