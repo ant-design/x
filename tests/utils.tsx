@@ -1,10 +1,10 @@
-import type { ReactElement } from 'react';
-import React, { createRef, StrictMode } from 'react';
-import type { RenderOptions } from '@testing-library/react';
+import type { RenderOptions, RenderResult } from '@testing-library/react';
 import { act, render } from '@testing-library/react';
 import MockDate from 'mockdate';
 import { _rs as onEsResize } from 'rc-resize-observer/es/utils/observerUtil';
 import { _rs as onLibResize } from 'rc-resize-observer/lib/utils/observerUtil';
+import type { ReactElement } from 'react';
+import React, { createRef, StrictMode } from 'react';
 
 export function assertsExist<T>(item?: T): asserts item is T {
   expect(item).not.toBeUndefined();
@@ -29,7 +29,7 @@ export const sleep = async (timeout = 0) => {
   });
 };
 
-const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) =>
+const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>): RenderResult =>
   render(ui, { wrapper: StrictMode, ...options });
 
 export function renderHook<T>(func: () => T): { result: React.RefObject<T> } {
