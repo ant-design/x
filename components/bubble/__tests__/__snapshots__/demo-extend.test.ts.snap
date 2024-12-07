@@ -403,6 +403,613 @@ exports[`renders components/bubble/demo/bubble-custom.tsx extend context correct
 
 exports[`renders components/bubble/demo/bubble-custom.tsx extend context correctly 2`] = `[]`;
 
+exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] = `
+<div
+  class="acss-1ozji6v"
+>
+  <div
+    class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center"
+    role="separator"
+  >
+    <span
+      class="ant-divider-inner-text"
+    >
+      Basic
+    </span>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-start"
+  >
+    <div
+      class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-corner"
+    >
+      string bubble
+    </div>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-start"
+  >
+    <div
+      class="ant-bubble-content ant-bubble-content-borderless"
+    >
+      longgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
+    </div>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-start"
+  >
+    <div
+      class="ant-bubble-content ant-bubble-content-outlined ant-bubble-content-round"
+    >
+      <div
+        class="acss-8wqn66"
+      >
+        block block block block block block block block block block block block block block block block block block block block block block block block block
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-start"
+  >
+    <div
+      class="ant-bubble-content ant-bubble-content-shadow"
+    >
+      <div
+        class="acss-13qb3y4"
+      >
+        fixed width content
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center"
+    role="separator"
+  >
+    <span
+      class="ant-divider-inner-text"
+    >
+      Basic placement: end
+    </span>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-end"
+  >
+    <div
+      class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-corner"
+    >
+      string bubble
+    </div>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-end"
+  >
+    <div
+      class="ant-bubble-content ant-bubble-content-borderless"
+    >
+      longgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
+    </div>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-end"
+  >
+    <div
+      class="ant-bubble-content ant-bubble-content-outlined ant-bubble-content-round"
+    >
+      <div
+        class="acss-8wqn66"
+      >
+        block block block block block block block block block block block block block block block block block block block block block block block block block
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-end"
+  >
+    <div
+      class="ant-bubble-content ant-bubble-content-shadow"
+    >
+      <div
+        class="acss-13qb3y4"
+      >
+        fixed width content
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center"
+    role="separator"
+  >
+    <span
+      class="ant-divider-inner-text"
+    >
+      Custom
+    </span>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-start"
+  >
+    <div
+      class="ant-bubble-avatar acss-8wqn66"
+    >
+      <span
+        class="ant-avatar ant-avatar-circle ant-avatar-image"
+      >
+        <img
+          src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
+        />
+      </span>
+    </div>
+    <div
+      class="ant-bubble-content-wrapper"
+    >
+      <div
+        class="ant-bubble-header acss-8wqn66"
+      >
+        header
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-corner acss-c2h5kd"
+      >
+        string bubble
+      </div>
+      <div
+        class="ant-bubble-footer acss-8wqn66"
+      >
+        <div>
+          footer
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-start"
+  >
+    <div
+      class="ant-bubble-avatar acss-8wqn66"
+    >
+      <span
+        class="ant-avatar ant-avatar-circle ant-avatar-image"
+      >
+        <img
+          src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
+        />
+      </span>
+    </div>
+    <div
+      class="ant-bubble-content-wrapper"
+    >
+      <div
+        class="ant-bubble-header acss-8wqn66"
+      >
+        header
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-borderless acss-c2h5kd"
+      >
+        longgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
+      </div>
+      <div
+        class="ant-bubble-footer acss-8wqn66"
+      >
+        <div>
+          footer
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-start"
+  >
+    <div
+      class="ant-bubble-avatar acss-8wqn66"
+    >
+      <span
+        class="ant-avatar ant-avatar-circle ant-avatar-image"
+      >
+        <img
+          src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
+        />
+      </span>
+    </div>
+    <div
+      class="ant-bubble-content-wrapper"
+    >
+      <div
+        class="ant-bubble-header acss-8wqn66"
+      >
+        header
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-outlined ant-bubble-content-round acss-c2h5kd"
+      >
+        <div
+          class="acss-8wqn66"
+        >
+          block block block block block block block block block block block block block block block block block block block block block block block block block
+        </div>
+      </div>
+      <div
+        class="ant-bubble-footer acss-8wqn66"
+      >
+        <div>
+          footer
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-start"
+  >
+    <div
+      class="ant-bubble-avatar acss-8wqn66"
+    >
+      <span
+        class="ant-avatar ant-avatar-circle ant-avatar-image"
+      >
+        <img
+          src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
+        />
+      </span>
+    </div>
+    <div
+      class="ant-bubble-content-wrapper"
+    >
+      <div
+        class="ant-bubble-header acss-8wqn66"
+      >
+        header
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-shadow acss-c2h5kd"
+      >
+        <div
+          class="acss-13qb3y4"
+        >
+          fixed width content
+        </div>
+      </div>
+      <div
+        class="ant-bubble-footer acss-8wqn66"
+      >
+        <div>
+          footer
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center"
+    role="separator"
+  >
+    <span
+      class="ant-divider-inner-text"
+    >
+      Custom placement: end
+    </span>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-end"
+  >
+    <div
+      class="ant-bubble-avatar acss-8wqn66"
+    >
+      <span
+        class="ant-avatar ant-avatar-circle ant-avatar-image"
+      >
+        <img
+          src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
+        />
+      </span>
+    </div>
+    <div
+      class="ant-bubble-content-wrapper"
+    >
+      <div
+        class="ant-bubble-header acss-8wqn66"
+      >
+        header
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-corner acss-c2h5kd"
+      >
+        string bubble
+      </div>
+      <div
+        class="ant-bubble-footer acss-8wqn66"
+      >
+        <div>
+          footer
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-end"
+  >
+    <div
+      class="ant-bubble-avatar acss-8wqn66"
+    >
+      <span
+        class="ant-avatar ant-avatar-circle ant-avatar-image"
+      >
+        <img
+          src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
+        />
+      </span>
+    </div>
+    <div
+      class="ant-bubble-content-wrapper"
+    >
+      <div
+        class="ant-bubble-header acss-8wqn66"
+      >
+        header
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-borderless acss-c2h5kd"
+      >
+        longgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
+      </div>
+      <div
+        class="ant-bubble-footer acss-8wqn66"
+      >
+        <div>
+          footer
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-end"
+  >
+    <div
+      class="ant-bubble-avatar acss-8wqn66"
+    >
+      <span
+        class="ant-avatar ant-avatar-circle ant-avatar-image"
+      >
+        <img
+          src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
+        />
+      </span>
+    </div>
+    <div
+      class="ant-bubble-content-wrapper"
+    >
+      <div
+        class="ant-bubble-header acss-8wqn66"
+      >
+        header
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-outlined ant-bubble-content-round acss-c2h5kd"
+      >
+        <div
+          class="acss-8wqn66"
+        >
+          block block block block block block block block block block block block block block block block block block block block block block block block block
+        </div>
+      </div>
+      <div
+        class="ant-bubble-footer acss-8wqn66"
+      >
+        <div>
+          footer
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-end"
+  >
+    <div
+      class="ant-bubble-avatar acss-8wqn66"
+    >
+      <span
+        class="ant-avatar ant-avatar-circle ant-avatar-image"
+      >
+        <img
+          src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
+        />
+      </span>
+    </div>
+    <div
+      class="ant-bubble-content-wrapper"
+    >
+      <div
+        class="ant-bubble-header acss-8wqn66"
+      >
+        header
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-shadow acss-c2h5kd"
+      >
+        <div
+          class="acss-13qb3y4"
+        >
+          fixed width content
+        </div>
+      </div>
+      <div
+        class="ant-bubble-footer acss-8wqn66"
+      >
+        <div>
+          footer
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center"
+    role="separator"
+  >
+    <span
+      class="ant-divider-inner-text"
+    >
+      List
+    </span>
+  </div>
+  <div
+    class="ant-bubble-list ant-bubble-list-reach-end"
+  >
+    <div
+      class="ant-bubble ant-bubble-start"
+    >
+      <div
+        class="ant-bubble-avatar acss-8wqn66"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-image"
+        >
+          <img
+            src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
+          />
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content-wrapper"
+      >
+        <div
+          class="ant-bubble-header acss-8wqn66"
+        >
+          header
+        </div>
+        <div
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-corner acss-c2h5kd"
+        >
+          string bubble
+        </div>
+        <div
+          class="ant-bubble-footer acss-8wqn66"
+        >
+          <div>
+            footer
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-bubble ant-bubble-end"
+    >
+      <div
+        class="ant-bubble-avatar acss-8wqn66"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-image"
+        >
+          <img
+            src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
+          />
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content-wrapper"
+      >
+        <div
+          class="ant-bubble-header acss-8wqn66"
+        >
+          header
+        </div>
+        <div
+          class="ant-bubble-content ant-bubble-content-borderless acss-c2h5kd"
+        >
+          longgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
+        </div>
+        <div
+          class="ant-bubble-footer acss-8wqn66"
+        >
+          <div>
+            footer
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-bubble ant-bubble-start"
+    >
+      <div
+        class="ant-bubble-avatar acss-8wqn66"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-image"
+        >
+          <img
+            src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
+          />
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content-wrapper"
+      >
+        <div
+          class="ant-bubble-header acss-8wqn66"
+        >
+          header
+        </div>
+        <div
+          class="ant-bubble-content ant-bubble-content-outlined ant-bubble-content-round acss-c2h5kd"
+        >
+          <div
+            class="acss-8wqn66"
+          >
+            block block block block block block block block block block block block block block block block block block block block block block block block block
+          </div>
+        </div>
+        <div
+          class="ant-bubble-footer acss-8wqn66"
+        >
+          <div>
+            footer
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-bubble ant-bubble-end"
+    >
+      <div
+        class="ant-bubble-avatar acss-8wqn66"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-image"
+        >
+          <img
+            src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
+          />
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content-wrapper"
+      >
+        <div
+          class="ant-bubble-header acss-8wqn66"
+        >
+          header
+        </div>
+        <div
+          class="ant-bubble-content ant-bubble-content-shadow acss-c2h5kd"
+        >
+          <div
+            class="acss-13qb3y4"
+          >
+            fixed width content
+          </div>
+        </div>
+        <div
+          class="ant-bubble-footer acss-8wqn66"
+        >
+          <div>
+            footer
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders components/bubble/demo/debug.tsx extend context correctly 2`] = `[]`;
+
 exports[`renders components/bubble/demo/header-and-footer.tsx extend context correctly 1`] = `
 <div
   class="ant-bubble ant-bubble-start"

@@ -46,10 +46,13 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
     [componentCls]: {
       display: 'flex',
       columnGap: paddingSM,
-      maxWidth: '100%',
       [`&${componentCls}-end`]: {
         justifyContent: 'end',
         flexDirection: 'row-reverse',
+
+        [`& ${componentCls}-content-wrapper`]: {
+          alignItems: 'flex-end',
+        },
       },
       [`&${componentCls}-rtl`]: {
         direction: 'rtl',
@@ -94,11 +97,15 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-start',
+        minWidth: 0,
+        maxWidth: '100%',
       },
 
       [`& ${componentCls}-content`]: {
         position: 'relative',
         boxSizing: 'border-box',
+        minWidth: 0,
+        maxWidth: '100%',
 
         color: colorText,
         fontSize: token.fontSize,
