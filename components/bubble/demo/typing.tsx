@@ -1,7 +1,7 @@
-import React from 'react';
 import { UserOutlined } from '@ant-design/icons';
 import { Bubble } from '@ant-design/x';
 import { Button, Flex } from 'antd';
+import React from 'react';
 
 const text = 'Ant Design X love you! ';
 
@@ -13,6 +13,11 @@ const App = () => {
       <Bubble
         content={text.repeat(repeat)}
         typing={{ step: 2, interval: 50 }}
+        avatar={{ icon: <UserOutlined /> }}
+      />
+      <Bubble
+        content={text.repeat(repeat)}
+        typing={{ step: 2, interval: 50, suffix: <>💗</> }}
         avatar={{ icon: <UserOutlined /> }}
       />
 
