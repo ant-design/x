@@ -64,6 +64,30 @@ demo:
 | items | 气泡数据列表 | (BubbleProps & { key?: string \| number, role?: string })[] | - |  |
 | roles | 设置气泡默认属性，`items` 中的 `role` 会进行自动对应 | Record<string, BubbleProps> \| (bubble) => BubbleProps | - |  |
 
+### editable
+
+```tsx
+interface EditConfig {
+  editing?: boolean;
+  onChange?: (content: string) => void;
+  onCancel?: () => void;
+  onEnd?: (content: string) => void;
+  editorClassNames?: string;
+  editorStyles?: CSSProperties;
+  editorTextAreaConfig?: TextAreaProps;
+  editorButtonConfig?: { type: 'save' | 'cancel'; text?: string; option?: ButtonProps }[];
+}
+```
+
+| 属性 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| editing | 控制是否是编辑中状态 | boolean | false |  |
+| onChange | 文本域编辑时触发 | (content?:string) => void | - |  |
+| onCancel | 退出编辑状态时触发 | () => void | - |  |
+| onEnd | 保存/结束编辑状态时触发 | (content?:string) => void | - |  |
+| editorTextAreaConfig | 配置编辑器中文本域的相关设置 | TextAreaProps | variant="borderless" autoSize={{ minRows: 2, maxRows: 3 }} |  |
+| editorButtonConfig | 配置编辑器中按钮的相关设置 | { type: 'save' \| 'cancel'; text?: string; option?: ButtonProps }[] | [{ type: 'save', text: 'Save', option: { size: 'small', type: 'primary' } }, { type: 'cancel', text: 'Cancel', option: { size: 'small' } }] |  |
+
 ## Semantic DOM
 
 <code src="./demo/_semantic.tsx" simplify="true"></code>

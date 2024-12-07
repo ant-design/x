@@ -63,6 +63,30 @@ Common props ref：[Common props](/docs/react/common-props)
 | items | Bubble items list | (BubbleProps & { key?: string \| number, role?: string })[] | - |  |
 | roles | Set the default properties of the bubble. The `role` in `items` will be automatically matched. | Record<string, BubbleProps> \| (bubble) => BubbleProps | - |  |
 
+### editable
+
+```tsx
+interface EditConfig {
+  editing?: boolean;
+  onChange?: (content: string) => void;
+  onCancel?: () => void;
+  onEnd?: (content: string) => void;
+  editorClassNames?: string;
+  editorStyles?: CSSProperties;
+  editorTextAreaConfig?: TextAreaProps;
+  editorButtonConfig?: { type: 'save' | 'cancel'; text?: string; option?: ButtonProps }[];
+}
+```
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| editing | Wether to be editable | boolean | false |  |
+| onChange | Called when input at textarea | (content?:string) => void | - |  |
+| onCancel | Called when exiting the editable state | () => void | - |  |
+| onEnd | Called when saving or ending the editable state | (content?:string) => void | - |  |
+| editorTextAreaConfig | Configure settings related to textarea in the editor | TextAreaProps | variant="borderless" autoSize={{ minRows: 2, maxRows: 3 }} |  |
+| editorButtonConfig | Configure settings related to button in the editor | { type: 'save' \| 'cancel'; text?: string; option?: ButtonProps }[] | [{ type: 'save', text: 'Save', option: { size: 'small', type: 'primary' } }, { type: 'cancel', text: 'Cancel', option: { size: 'small' } }] |  |
+
 ## Semantic DOM
 
 <code src="./demo/_semantic.tsx" simplify="true"></code>
