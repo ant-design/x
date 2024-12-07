@@ -12,6 +12,11 @@ const App = () => {
     <Flex vertical gap="small">
       <Bubble
         content={text.repeat(repeat)}
+        typing={{ step: 2, interval: 50 }}
+        avatar={{ icon: <UserOutlined /> }}
+      />
+      <Bubble
+        content={text.repeat(repeat)}
         typing={{ step: 2, interval: 50, suffix: <>💗</> }}
         avatar={{ icon: <UserOutlined /> }}
       />
