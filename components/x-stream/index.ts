@@ -137,9 +137,7 @@ export interface XStreamOptions<Output> {
   transformStream?: TransformStream<string, Output>;
 }
 
-interface XReadableStream<R = any> extends ReadableStream<R> {
-  [Symbol.asyncIterator](): AsyncGenerator<R, void, unknown>;
-}
+type XReadableStream<R = any> = ReadableStream<R> & AsyncIterable<R>;
 
 /**
  * @description Transform Uint8Array binary stream to {@link SSEOutput} by default
@@ -171,19 +169,24 @@ function XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
         .pipeThrough(splitPart());
 
   /** support async iterator */
-  (stream as XReadableStream<Output>)[Symbol.asyncIterator] = async function* () {
+  (stream as XReadableStream<Output>)[Symbol.asyncIterator] = function () {
     const reader = this.getReader();
-    try {
-      while (true) {
+    return {
+      async next() {
         const { done, value } = await reader.read();
-        if (done) {
-          return;
-        }
-        yield value;
-      }
-    } finally {
-      reader.cancel();
-    }
+        return {
+          done,
+          value: value!,
+        };
+      },
+      async return() {
+        await reader.cancel();
+        return {
+          done: true,
+          value: null,
+        };
+      },
+    };
   };
 
   return stream as XReadableStream<Output>;

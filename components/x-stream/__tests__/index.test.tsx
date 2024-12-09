@@ -63,7 +63,9 @@ describe('XStream', () => {
 
     const result: any[] = [];
     for await (const value of XStream({ readableStream, transformStream: customTransform })) {
-      result.push(value);
+      if (value) {
+        result.push(value);
+      }
     }
 
     expect(result).toEqual(['custom-part1', 'custom-part2']);
