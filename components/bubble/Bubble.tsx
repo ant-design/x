@@ -4,6 +4,8 @@ import React from 'react';
 import { Avatar } from 'antd';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
+import Editor from './Editor';
+import useMergedConfig from './hooks/useMergedConfig';
 import useTypedEffect from './hooks/useTypedEffect';
 import useTypingConfig from './hooks/useTypingConfig';
 import type { BubbleProps } from './interface';
@@ -40,6 +42,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     onTypingComplete,
     header,
     footer,
+    editable = {},
     ...otherHtmlProps
   } = props;
 
@@ -59,6 +62,28 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
 
   // ===================== Component Config =========================
   const contextConfig = useXComponentConfig('bubble');
+
+  // =========================== Editable ===========================
+  const [enableEdit, editConfig] = useMergedConfig<BubbleProps['editable']>(editable);
+  const [isEditing, setIsEditing] = React.useState(editConfig?.editing || false);
+
+  React.useEffect(() => {
+    setIsEditing(editConfig?.editing || false);
+  }, [editConfig?.editing]);
+
+  const onEditChange = (value: string) => {
+    editConfig?.onChange?.(value);
+  };
+
+  const onEditCancel = () => {
+    editConfig?.onCancel?.();
+    setIsEditing(false);
+  };
+
+  const onEditEnd = (value: string) => {
+    editConfig?.onEnd?.(value);
+    setIsEditing(false);
+  };
 
   // ============================ Typing ============================
   const [typingEnabled, typingStep, typingInterval] = useTypingConfig(typing);
@@ -119,23 +144,43 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     contentNode = mergedContent as React.ReactNode;
   }
 
-  let fullContent: React.ReactNode = (
-    <div
-      style={{
-        ...contextConfig.styles.content,
-        ...styles.content,
-      }}
-      className={classnames(
-        `${prefixCls}-content`,
-        `${prefixCls}-content-${variant}`,
-        shape && `${prefixCls}-content-${shape}`,
-        contextConfig.classNames.content,
-        classNames.content,
-      )}
-    >
-      {contentNode}
-    </div>
-  );
+  let fullContent: React.ReactNode =
+    enableEdit && isEditing ? (
+      <Editor
+        prefixCls={prefixCls}
+        value={mergedContent as string}
+        onChange={onEditChange}
+        onCancel={onEditCancel}
+        onEnd={onEditEnd}
+        editorStyle={{
+          ...contextConfig.styles.editor,
+          ...styles.editor,
+        }}
+        editorClassName={classnames(
+          `${prefixCls}-editor`,
+          contextConfig.classNames.editor,
+          classNames.editor,
+        )}
+        editorTextAreaConfig={editConfig?.editorTextAreaConfig}
+        editorButtonConfig={editConfig?.editorButtonConfig}
+      />
+    ) : (
+      <div
+        style={{
+          ...contextConfig.styles.content,
+          ...styles.content,
+        }}
+        className={classnames(
+          `${prefixCls}-content`,
+          `${prefixCls}-content-${variant}`,
+          shape && `${prefixCls}-content-${shape}`,
+          contextConfig.classNames.content,
+          classNames.content,
+        )}
+      >
+        {contentNode}
+      </div>
+    );
 
   if (header || footer) {
     fullContent = (
