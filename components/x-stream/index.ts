@@ -137,11 +137,13 @@ export interface XStreamOptions<Output> {
   transformStream?: TransformStream<string, Output>;
 }
 
+type XReadableStream<R = any> = ReadableStream<R> & AsyncIterable<R>;
+
 /**
  * @description Transform Uint8Array binary stream to {@link SSEOutput} by default
  * @warning The `XStream` only support the `utf-8` encoding. More encoding support maybe in the future.
  */
-async function* XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
+function XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
   const { readableStream, transformStream } = options;
 
   if (!(readableStream instanceof ReadableStream)) {
@@ -166,18 +168,28 @@ async function* XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
         .pipeThrough(splitStream())
         .pipeThrough(splitPart());
 
-  const reader = stream.getReader() as ReadableStreamDefaultReader<Output>;
+  /** support async iterator */
+  (stream as XReadableStream<Output>)[Symbol.asyncIterator] = function () {
+    const reader = this.getReader();
+    return {
+      async next() {
+        const { done, value } = await reader.read();
+        return {
+          done,
+          value: value!,
+        };
+      },
+      async return() {
+        await reader.cancel();
+        return {
+          done: true,
+          value: null,
+        };
+      },
+    };
+  };
 
-  while (reader instanceof ReadableStreamDefaultReader) {
-    const { value, done } = await reader.read();
-
-    if (done) break;
-
-    if (!value) continue;
-
-    // Transformed data through all transform pipes
-    yield value;
-  }
+  return stream as XReadableStream<Output>;
 }
 
 export default XStream;
