@@ -1,10 +1,10 @@
 import classNames from 'classnames';
-import { useEvent } from 'rc-util';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import * as React from 'react';
 import { useXProviderContext } from '../x-provider';
 import Bubble, { BubbleContext } from './Bubble';
 import type { BubbleRef } from './Bubble';
+import useAutoScrollToBottom from './hooks/useAutoScrollToBottom';
 import useDisplayData from './hooks/useDisplayData';
 import useListData from './hooks/useListData';
 import type { BubbleProps } from './interface';
@@ -84,43 +84,17 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   // Is current scrollTop at the end. User scroll will make this false.
   const [scrollReachEnd, setScrollReachEnd] = React.useState(true);
 
-  const [updateCount, setUpdateCount] = React.useState(0);
-
   const onInternalScroll: React.UIEventHandler<HTMLDivElement> = (e) => {
     const target = e.target as HTMLElement;
 
-    setScrollReachEnd(target.scrollTop + target.clientHeight === target.scrollHeight);
+    //  Allow 1px tolerance
+    setScrollReachEnd(Math.abs(target.scrollHeight - target.scrollTop - target.clientHeight) <= 1);
   };
 
-  React.useEffect(() => {
-    if (autoScroll && listRef.current && scrollReachEnd) {
-      listRef.current.scrollTo({
-        top: listRef.current.scrollHeight,
-      });
-    }
-  }, [updateCount]);
-
-  // Always scroll to bottom when data change
-  React.useEffect(() => {
-    if (autoScroll) {
-      // New date come, the origin last one is the second last one
-      const lastItemKey = displayData[displayData.length - 2]?.key;
-      const bubbleInst = bubbleRefs.current[lastItemKey!];
-
-      // Auto scroll if last 2 item is visible
-      if (bubbleInst) {
-        const { nativeElement } = bubbleInst;
-        const { top, bottom } = nativeElement.getBoundingClientRect();
-        const { top: listTop, bottom: listBottom } = listRef.current!.getBoundingClientRect();
-
-        const isVisible = top < listBottom && bottom > listTop;
-        if (isVisible) {
-          setUpdateCount((c) => c + 1);
-          setScrollReachEnd(true);
-        }
-      }
-    }
-  }, [displayData.length]);
+  const { manualScrollToBottom } = useAutoScrollToBottom({
+    container: listRef.current,
+    autoScroll: autoScroll,
+  });
 
   // ========================== Outer Ref ===========================
   React.useImperativeHandle(ref, () => ({
@@ -153,15 +127,10 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
 
   // =========================== Context ============================
   // When bubble content update, we try to trigger `autoScroll` for sync
-  const onBubbleUpdate = useEvent(() => {
-    if (autoScroll) {
-      setUpdateCount((c) => c + 1);
-    }
-  });
 
   const context = React.useMemo(
     () => ({
-      onUpdate: onBubbleUpdate,
+      onUpdate: manualScrollToBottom,
     }),
     [],
   );
