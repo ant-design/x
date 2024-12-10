@@ -19,17 +19,17 @@ demo:
 
 如果您已经使用 `antd` 的 `ConfigProvider`，请对您的代码做如下变更：
 
-```tsx
+```diff
 - import { ConfigProvider } from 'antd';
 + import { XProvider } from '@ant-design/x';
 
-- <ConfigProvider {...configProps}>
-- // ...
-- </ConfigProvider>
-
-+ <XProvider {...configProps}>
-+ // ...
-+ </XProvider>
+  const App = () => (
+-   <ConfigProvider>
++   <XProvider>
+      <YourApp />
+-   </ConfigProvider>
++   </XProvider>
+  );
 ```
 
 ## 代码演示
