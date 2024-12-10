@@ -176,7 +176,7 @@ function XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
         const { done, value } = await reader.read();
         return {
           done,
-          value: value!,
+          value: value ?? null,
         };
       },
       async return() {
