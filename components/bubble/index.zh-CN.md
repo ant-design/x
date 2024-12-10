@@ -19,6 +19,7 @@ demo:
 ## 代码演示
 
 <!-- prettier-ignore -->
+<code src="./demo/debug.tsx" debug>debug</code>
 <code src="./demo/basic.tsx">基本</code>
 <code src="./demo/avatar-and-placement.tsx">支持位置和头像</code>
 <code src="./demo/header-and-footer.tsx">头和尾</code>
