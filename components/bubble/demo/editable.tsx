@@ -33,6 +33,17 @@ const App = () => {
     setEditing((prev) => !prev);
   };
 
+  const triggerDelete = () => {
+    if (editHistory.length === 1 || editing) return null;
+    // Some else logic
+    setEditHistory((prev) => {
+      const newHistory = [...prev];
+      newHistory.splice(currentIndex, 1);
+      setCurrentIndex(Math.min(currentIndex, newHistory.length - 1));
+      return newHistory;
+    });
+  };
+
   const handleLeftClick = () => {
     if (currentIndex > 0) {
       setCurrentIndex((prev) => prev - 1);
@@ -51,25 +62,31 @@ const App = () => {
 
   const endEdit = (c: string) => {
     setEditing(false);
-    setEditHistory((prev) => [...prev, c]);
-    setCurrentIndex(editHistory.length);
+    setEditHistory((prev) => {
+      const newHistory = [...prev, c];
+      setCurrentIndex(newHistory.length - 1);
+      return newHistory;
+    });
   };
 
   const editConfig: EditConfig = {
     editing,
     onCancel: cancelEdit,
     onEnd: endEdit,
-    editorTextAreaConfig: { autoSize: { minRows: 2, maxRows: 4 } },
-    editorButtonConfig: [
+    textarea: { autoSize: { minRows: 2, maxRows: 4 } },
+    styles: {
+      minWidth: '50%',
+    },
+    buttons: [
       {
         type: 'cancel',
         text: 'Cancel',
-        option: { size: 'small' },
+        option: { danger: true },
       },
       {
         type: 'save',
         text: 'Save',
-        option: { size: 'small', type: 'primary' },
+        option: { type: 'primary' },
       },
     ],
   };
@@ -105,7 +122,7 @@ const App = () => {
         }
         footer={
           <Flex justify="end">
-            <Button size="small" type="text" icon={<DeleteOutlined />} />
+            <Button size="small" type="text" icon={<DeleteOutlined />} onClick={triggerDelete} />
             <Button size="small" type="text" icon={<EditOutlined />} onClick={triggerEdit} />
           </Flex>
         }

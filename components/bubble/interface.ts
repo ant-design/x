@@ -13,17 +13,23 @@ export interface TypingOption {
   interval?: number;
 }
 
-type SemanticType = 'avatar' | 'content' | 'header' | 'footer' | 'editor';
+type SemanticType = 'avatar' | 'content' | 'header' | 'footer';
 
-type EditorButtonConfig = { type: 'save' | 'cancel'; text?: string; option?: ButtonProps };
+type EditorButtonsConfig = {
+  type: 'save' | 'cancel';
+  text?: string;
+  option?: ButtonProps;
+};
 
 export interface EditConfig {
   editing?: boolean;
   onChange?: (content: string) => void;
   onCancel?: VoidFunction;
   onEnd?: (content: string) => void;
-  editorTextAreaConfig?: TextAreaProps;
-  editorButtonConfig?: EditorButtonConfig[];
+  styles?: React.CSSProperties;
+  classNames?: string;
+  textarea?: TextAreaProps;
+  buttons?: EditorButtonsConfig[];
 }
 
 export interface BubbleProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'content'> {

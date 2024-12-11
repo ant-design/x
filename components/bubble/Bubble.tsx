@@ -5,7 +5,7 @@ import { Avatar } from 'antd';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 import Editor from './Editor';
-import useMergedConfig from './hooks/useMergedConfig';
+import useEditableConfig from './hooks/useEditableConfig';
 import useTypedEffect from './hooks/useTypedEffect';
 import useTypingConfig from './hooks/useTypingConfig';
 import type { BubbleProps } from './interface';
@@ -64,26 +64,15 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
   const contextConfig = useXComponentConfig('bubble');
 
   // =========================== Editable ===========================
-  const [enableEdit, editConfig] = useMergedConfig<BubbleProps['editable']>(editable);
-  const [isEditing, setIsEditing] = React.useState(editConfig?.editing || false);
-
-  React.useEffect(() => {
-    setIsEditing(editConfig?.editing || false);
-  }, [editConfig?.editing]);
-
-  const onEditChange = (value: string) => {
-    editConfig?.onChange?.(value);
-  };
-
-  const onEditCancel = () => {
-    editConfig?.onCancel?.();
-    setIsEditing(false);
-  };
-
-  const onEditEnd = (value: string) => {
-    editConfig?.onEnd?.(value);
-    setIsEditing(false);
-  };
+  const {
+    enableEdit,
+    isEditing,
+    onEditorChange,
+    onEditorCancel,
+    onEditorEnd,
+    editorTextAreaConfig,
+    editorButtonsConfig,
+  } = useEditableConfig(editable);
 
   // ============================ Typing ============================
   const [typingEnabled, typingStep, typingInterval] = useTypingConfig(typing);
@@ -149,20 +138,20 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
       <Editor
         prefixCls={prefixCls}
         value={mergedContent as string}
-        onChange={onEditChange}
-        onCancel={onEditCancel}
-        onEnd={onEditEnd}
-        editorStyle={{
+        onChange={onEditorChange}
+        onCancel={onEditorCancel}
+        onEnd={onEditorEnd}
+        style={{
           ...contextConfig.styles.editor,
-          ...styles.editor,
+          ...editable.styles,
         }}
-        editorClassName={classnames(
+        className={classnames(
           `${prefixCls}-editor`,
           contextConfig.classNames.editor,
-          classNames.editor,
+          editable.classNames,
         )}
-        editorTextAreaConfig={editConfig?.editorTextAreaConfig}
-        editorButtonConfig={editConfig?.editorButtonConfig}
+        editorTextAreaConfig={editorTextAreaConfig}
+        editorButtonsConfig={editorButtonsConfig}
       />
     ) : (
       <div

@@ -92,10 +92,10 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
 
       // =========================== Content =============================
       [`& ${componentCls}-content-wrapper`]: {
-        flex: 'auto', //
+        flex: 'auto',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'flex-start', //
+        alignItems: 'flex-start',
         minWidth: 0,
         maxWidth: '100%',
       },
