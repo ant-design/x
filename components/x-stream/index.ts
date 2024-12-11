@@ -137,11 +137,13 @@ export interface XStreamOptions<Output> {
   transformStream?: TransformStream<string, Output>;
 }
 
+type XReadableStream<R = any> = ReadableStream<R> & AsyncGenerator<R>;
+
 /**
  * @description Transform Uint8Array binary stream to {@link SSEOutput} by default
  * @warning The `XStream` only support the `utf-8` encoding. More encoding support maybe in the future.
  */
-async function* XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
+function XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
   const { readableStream, transformStream } = options;
 
   if (!(readableStream instanceof ReadableStream)) {
@@ -155,29 +157,33 @@ async function* XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
     ? /**
        * Uint8Array binary -> string -> Output
        */
-      readableStream
-        .pipeThrough(decoderStream)
-        .pipeThrough(transformStream)
+    readableStream.pipeThrough(decoderStream).pipeThrough(transformStream)
     : /**
        * Uint8Array binary -> string -> SSE part string -> Default Output {@link SSEOutput}
        */
-      readableStream
-        .pipeThrough(decoderStream)
-        .pipeThrough(splitStream())
-        .pipeThrough(splitPart());
+    readableStream.pipeThrough(decoderStream).pipeThrough(splitStream()).pipeThrough(splitPart());
 
-  const reader = stream.getReader() as ReadableStreamDefaultReader<Output>;
+  /** support async iterator */
+  (stream as XReadableStream<Output>)[Symbol.asyncIterator] = async function* () {
+    const reader = stream.getReader() as ReadableStreamDefaultReader<Output>;
 
-  while (reader instanceof ReadableStreamDefaultReader) {
-    const { value, done } = await reader.read();
+    try {
+      while (reader instanceof ReadableStreamDefaultReader) {
+        const { done, value } = await reader.read();
 
-    if (done) break;
+        if (done) break;
 
-    if (!value) continue;
+        if (!value) continue;
 
-    // Transformed data through all transform pipes
-    yield value;
-  }
+        // Transformed data through all transform pipes
+        yield value;
+      }
+    } finally {
+      await reader.cancel();
+    }
+  };
+
+  return stream as XReadableStream<Output>;
 }
 
 export default XStream;
