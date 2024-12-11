@@ -137,7 +137,7 @@ export interface XStreamOptions<Output> {
   transformStream?: TransformStream<string, Output>;
 }
 
-type XReadableStream<R = any> = ReadableStream<R> & AsyncIterable<R>;
+type XReadableStream<R = any> = ReadableStream<R> & AsyncGenerator<R>;
 
 /**
  * @description Transform Uint8Array binary stream to {@link SSEOutput} by default
@@ -157,36 +157,30 @@ function XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
     ? /**
        * Uint8Array binary -> string -> Output
        */
-      readableStream
-        .pipeThrough(decoderStream)
-        .pipeThrough(transformStream)
+    readableStream.pipeThrough(decoderStream).pipeThrough(transformStream)
     : /**
        * Uint8Array binary -> string -> SSE part string -> Default Output {@link SSEOutput}
        */
-      readableStream
-        .pipeThrough(decoderStream)
-        .pipeThrough(splitStream())
-        .pipeThrough(splitPart());
+    readableStream.pipeThrough(decoderStream).pipeThrough(splitStream()).pipeThrough(splitPart());
 
   /** support async iterator */
-  (stream as XReadableStream<Output>)[Symbol.asyncIterator] = function () {
-    const reader = this.getReader();
-    return {
-      async next() {
+  (stream as XReadableStream<Output>)[Symbol.asyncIterator] = async function* () {
+    const reader = stream.getReader() as ReadableStreamDefaultReader<Output>;
+
+    try {
+      while (reader instanceof ReadableStreamDefaultReader) {
         const { done, value } = await reader.read();
-        return {
-          done,
-          value: value ?? null,
-        };
-      },
-      async return() {
-        await reader.cancel();
-        return {
-          done: true,
-          value: null,
-        };
-      },
-    };
+
+        if (done) break;
+
+        if (!value) continue;
+
+        // Transformed data through all transform pipes
+        yield value;
+      }
+    } finally {
+      await reader.cancel();
+    }
   };
 
   return stream as XReadableStream<Output>;
