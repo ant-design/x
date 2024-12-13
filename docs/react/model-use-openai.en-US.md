@@ -10,7 +10,7 @@ This guide will explain how to integrate OpenAI's model service into an applicat
 
 ## Using OpenAI API
 
-This is equivalent to integrating with a model inference service compatible with OpenAI. For reference, see [Model Integration - Qwen](/docs/react/model-use-qwen-cn).
+This is equivalent to integrating with a model inference service compatible with OpenAI. For reference, see [Model Integration - Qwen](/docs/react/model-use-qwen).
 
 ## Using openai-node
 
