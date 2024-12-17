@@ -137,6 +137,8 @@ export interface XStreamOptions<Output> {
   transformStream?: TransformStream<string, Output>;
 }
 
+type XReadableStream<R = SSEOutput> = ReadableStream<R> & AsyncGenerator<R>;
+
 /**
  * @description Transform Uint8Array binary stream to {@link SSEOutput} by default
  * @warning The `XStream` only support the `utf-8` encoding. More encoding support maybe in the future.
