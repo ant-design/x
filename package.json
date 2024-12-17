@@ -1,6 +1,6 @@
 {
   "name": "@ant-design/x",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Craft AI-driven interfaces effortlessly",
   "keywords": [
     "AI",
@@ -137,7 +137,6 @@
     "@types/markdown-it": "^14.1.2",
     "@types/minimist": "^1.2.5",
     "@types/node": "^22.5.5",
-    "@types/nprogress": "^0.2.3",
     "@types/ora": "^3.2.0",
     "@types/pixelmatch": "^5.2.6",
     "@types/pngjs": "^6.0.5",
@@ -211,7 +210,6 @@
     "mockdate": "^3.0.5",
     "node-fetch": "^3.3.2",
     "node-notifier": "^10.0.1",
-    "nprogress": "^0.2.0",
     "open": "^10.1.0",
     "ora": "^8.1.0",
     "pixelmatch": "^6.0.0",

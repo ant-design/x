@@ -2,7 +2,7 @@
 title: RICH 设计范式简介
 ---
 
-![](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*DvQ2Q6gYcaAAAAAAAAAAAAAADgCCAQ/fmt.webp)
+![](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*31g-RpB6F6UAAAAAAAAAAAAADgCCAQ/fmt.webp)
 
 2022 年 11 月 30 日，OpenAI 发布 ChatGPT 3.5，带领人类走向 AGI 人机交互新世纪。AGI 让自然人机交互成为现实，「语言」这一简单、自然的交互方式，一度威胁到统治人机交互领域长达几十年之久的 GUI（图形用户界面）。设计者们纷纷开始各种各样的尝试与改造：
 

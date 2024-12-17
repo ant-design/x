@@ -15,6 +15,15 @@ tag: vVERSION
 
 ---
 
+## 1.0.3
+
+`2024-12-16`
+
+- 💄 优化 `Bubble` 设置 `placement: 'end'` 后的样式。[#314](https://github.com/ant-design/x/pull/314) 由 [@YumoImer](https://github.com/YumoImer)
+- 🐛 修复 `Bubble.List` 设置 `autoScroll` 后偶现无法触发自动滚动的问题。[#336](https://github.com/ant-design/x/pull/336) 由 [@anzhou99Ru](https://github.com/anzhou99Ru)
+- 📖 优化官网站点提升用户体验。[#343](https://github.com/ant-design/x/pull/343)、[#334](https://github.com/ant-design/x/pull/334)、[#315](https://github.com/ant-design/x/pull/315)、[#331](https://github.com/ant-design/x/pull/331) 由 [@afc163](https://github.com/afc163)、[@YumoImer](https://github.com/YumoImer)、[@Wxh16144](https://github.com/Wxh16144)
+- 🛠 修复 `pnpm lint` 时的错误。[#313](https://github.com/ant-design/x/pull/313) 由 [@BQXBQX](https://github.com/BQXBQX)
+
 ## 1.0.2
 
 `2024-12-04`

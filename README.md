@@ -6,7 +6,9 @@
 
 Craft AI-driven interfaces effortlessly.
 
-[![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] [![NPM version][npm-image]][npm-url] [![NPM downloads][download-image]][download-url] [![][bundlephobia-image]][bundlephobia-url]
+[![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] [![NPM version][npm-image]][npm-url]
+
+[![NPM downloads][download-image]][download-url] [![][bundlephobia-image]][bundlephobia-url] [![antd][antd-image]][antd-url]
 
 [Changelog](./CHANGELOG.en-US.md) · [Report Bug][github-issues-bug-report] · [Request Feature][github-issues-feature-request] · English · [中文](./README-zh_CN.md)
 
@@ -22,6 +24,8 @@ Craft AI-driven interfaces effortlessly.
 [bundlephobia-url]: https://bundlephobia.com/package/@ant-design/x
 [github-issues-bug-report]: https://github.com/ant-design/x/issues/new?template=bug-report.yml
 [github-issues-feature-request]: https://github.com/ant-design/x/issues/new?template=bug-feature-request.yml
+[antd-image]: https://img.shields.io/badge/-Ant%20Design-blue?labelColor=black&logo=antdesign&style=flat-square
+[antd-url]: https://ant.design
 
 </div>
 

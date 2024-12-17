@@ -37,6 +37,8 @@ export interface BubbleListProps extends React.HTMLAttributes<HTMLDivElement> {
   roles?: RolesType;
 }
 
+const TOLERANCE = 1;
+
 const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps> = (props, ref) => {
   const {
     prefixCls: customizePrefixCls,
@@ -89,7 +91,9 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   const onInternalScroll: React.UIEventHandler<HTMLDivElement> = (e) => {
     const target = e.target as HTMLElement;
 
-    setScrollReachEnd(target.scrollTop + target.clientHeight === target.scrollHeight);
+    setScrollReachEnd(
+      target.scrollHeight - Math.abs(target.scrollTop) - target.clientHeight <= TOLERANCE,
+    );
   };
 
   React.useEffect(() => {
