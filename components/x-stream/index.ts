@@ -166,7 +166,7 @@ function XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
           .pipeThrough(decoderStream)
           .pipeThrough(splitStream())
           .pipeThrough(splitPart())
-  ) as XReadableStream;
+  ) as XReadableStream<Output>;
 
   /** support async iterator */
   stream[Symbol.asyncIterator] = async function* () {
