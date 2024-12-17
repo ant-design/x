@@ -143,7 +143,7 @@ type XReadableStream<R = SSEOutput> = ReadableStream<R> & AsyncGenerator<R>;
  * @description Transform Uint8Array binary stream to {@link SSEOutput} by default
  * @warning The `XStream` only support the `utf-8` encoding. More encoding support maybe in the future.
  */
-async function* XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
+function XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
   const { readableStream, transformStream } = options;
 
   if (!(readableStream instanceof ReadableStream)) {
@@ -183,6 +183,8 @@ async function* XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
       yield value;
     }
   }
+  
+  return stream;
 }
 
 export default XStream;
