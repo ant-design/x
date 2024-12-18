@@ -1,7 +1,7 @@
 import { UserOutlined } from '@ant-design/icons';
 import { Bubble, Sender, useXAgent, useXChat, XStream } from '@ant-design/x';
 import { Flex, type GetProp } from 'antd';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const roles: GetProp<typeof Bubble.List, 'roles'> = {
   ai: {
