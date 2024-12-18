@@ -20,6 +20,7 @@ Use Agent to manage conversation data and produce data for page rendering.
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">Basic</code>
 <code src="./demo/stream.tsx">Streaming</code>
+<code src="./demo/stream-cancel.tsx">Interrupt the output</code>
 <code src="./demo/suggestions.tsx">Multiple Suggestion</code>
 
 ## API
