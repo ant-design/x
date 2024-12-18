@@ -53,6 +53,12 @@ const App = () => {
 
   const abortRef = useRef(() => {});
 
+  useEffect(() => {
+    return () => {
+      abortRef.current();
+    };
+  }, []);
+
   // Agent for request
   const [agent] = useXAgent({
     request: async ({}, { onSuccess, onUpdate }) => {
