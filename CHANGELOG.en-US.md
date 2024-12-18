@@ -16,6 +16,15 @@ tag: vVERSION
 
 ---
 
+## 1.0.3
+
+`2024-12-16`
+
+- 💄 Refactor the styles when `placement: 'end'` is set for `Bubble`. [#314](https://github.com/ant-design/x/pull/314) by [@YumoImer](https://github.com/YumoImer)
+- 🐛 Fix occasional failure to trigger auto-scrolling when `autoScroll` is set in `Bubble.List`. [#336](https://github.com/ant-design/x/pull/336) by [@anzhou99Ru](https://github.com/anzhou99Ru)
+- 📖 Enhance the official website to improve user experience. [#343](https://github.com/ant-design/x/pull/343), [#334](https://github.com/ant-design/x/pull/334), [#315](https://github.com/ant-design/x/pull/315), [#331](https://github.com/ant-design/x/pull/331) by [@afc163](https://github.com/afc163), [@YumoImer](https://github.com/YumoImer), [@Wxh16144](https://github.com/Wxh16144)
+- 🛠 Fix errors encountered when running `pnpm lint`. [#313](https://github.com/ant-design/x/pull/313) by [@BQXBQX](https://github.com/BQXBQX)
+
 ## 1.0.2
 
 `2024-12-04`

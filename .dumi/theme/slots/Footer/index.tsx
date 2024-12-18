@@ -171,7 +171,7 @@ const Footer: React.FC = () => {
         },
         {
           title: <FormattedMessage id="app.footer.chinamirror" />,
-          url: 'https://ant-design.antgroup.com',
+          url: 'https://ant-design-x.antgroup.com',
         },
       ],
     };
