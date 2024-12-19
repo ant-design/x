@@ -23,6 +23,7 @@ Often used when chatting.
 <code src="./demo/avatar-and-placement.tsx">Placement and avatar</code>
 <code src="./demo/header-and-footer.tsx">Header and footer</code>
 <code src="./demo/loading.tsx">Loading</code>
+<code src="./demo/editable.tsx">Editing effect</code>
 <code src="./demo/typing.tsx">Typing effect</code>
 <code src="./demo/markdown.tsx">Content render</code>
 <code src="./demo/variant.tsx">Variant</code>
@@ -62,6 +63,28 @@ Common props ref：[Common props](/docs/react/common-props)
 | autoScroll | When the content is updated, scroll to the latest position automatically. If the user scrolls, the automatic scrolling will be paused. | boolean | true |  |
 | items | Bubble items list | (BubbleProps & { key?: string \| number, role?: string })[] | - |  |
 | roles | Set the default properties of the bubble. The `role` in `items` will be automatically matched. | Record<string, BubbleProps> \| (bubble) => BubbleProps | - |  |
+
+### editable
+
+```tsx
+interface EditConfig {
+  editing?: boolean;
+  onChange?: (content: string) => void;
+  onCancel?: () => void;
+  onEnd?: (content: string) => void;
+  editorTextAreaConfig?: TextAreaProps;
+  editorButtonConfig?: { type: 'save' | 'cancel'; text?: string; option?: ButtonProps }[];
+}
+```
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| editing | Wether to be editable | boolean | false |  |
+| onChange | Called when input at textarea | (content?:string) => void | - |  |
+| onCancel | Called when exiting the editable state | () => void | - |  |
+| onEnd | Called when saving or ending the editable state | (content?:string) => void | - |  |
+| editorTextAreaConfig | Configure settings related to textarea in the editor | TextAreaProps | variant="borderless" autoSize={{ minRows: 2, maxRows: 3 }} |  |
+| editorButtonConfig | Configure settings related to button in the editor | { type: 'save' \| 'cancel'; text?: string; option?: ButtonProps }[] | [{ type: 'save', text: 'Save', option: { size: 'small', type: 'primary' } }, { type: 'cancel', text: 'Cancel', option: { size: 'small' } }] |  |
 
 ## Semantic DOM
 
