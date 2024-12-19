@@ -18,9 +18,12 @@ import { DarkContext } from '../../hooks/useDark';
 import useLayoutState from '../../hooks/useLayoutState';
 import useLocation from '../../hooks/useLocation';
 import SiteThemeProvider from '../SiteThemeProvider';
+import PeterCat from '../common/PeterCat';
 import type { ThemeName } from '../common/ThemeSwitch';
 import type { SiteContextProps } from '../slots/SiteContext';
 import SiteContext from '../slots/SiteContext';
+
+import '@petercatai/assistant/style';
 
 const ThemeSwitch = React.lazy(() => import('../common/ThemeSwitch'));
 
@@ -203,6 +206,7 @@ const GlobalLayout: React.FC = () => {
             value={theme}
             onChange={(nextTheme) => updateSiteConfig({ theme: nextTheme })}
           />
+          <PeterCat />
         </Suspense>
       </App>
     );
