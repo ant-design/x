@@ -91,13 +91,13 @@
     "@ant-design/fast-color": "^2.0.6",
     "@ant-design/icons": "^5.4.0",
     "@babel/runtime": "^7.25.6",
-    "@petercatai/assistant": "^2.0.2",
     "classnames": "^2.5.1",
     "rc-motion": "^2.9.2",
     "rc-util": "^5.43.0"
   },
   "devDependencies": {
     "@ant-design/tools": "^18.0.2",
+    "@petercatai/assistant": "^2.0.2",
     "@antv/gpt-vis": "^0.3.0",
     "@biomejs/biome": "^1.9.0",
     "@codecov/webpack-plugin": "^1.4.0",
