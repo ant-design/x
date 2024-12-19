@@ -21,6 +21,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/speech.tsx">Speech input</code>
 <code src="./demo/speech-custom.tsx">Custom speech input</code>
 <code src="./demo/actions.tsx">Custom actions</code>
+<code src="./demo/CustomContent.tsx">Custom content</code>
 <code src="./demo/header.tsx">Header panel</code>
 <code src="./demo/header-fixed.tsx">Reference</code>
 <code src="./demo/send-style.tsx">Adjust style</code>

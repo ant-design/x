@@ -21,6 +21,8 @@ type TextareaProps = GetProps<typeof Input.TextArea>;
 
 export interface SenderComponents {
   input?: CustomizeComponent<TextareaProps>;
+  /**Sender Content CustomizeComponent*/
+  content?: CustomizeComponent;
 }
 
 export type ActionsRender = (
@@ -261,6 +263,9 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
   } else if (actions) {
     actionNode = actions;
   }
+  // ============================ CustomContent ============================
+  // 获取自定义的CustomContent组件（默认使用一个空的<div/>占位）
+  const CustomContent = getComponent(components, ['content'], () => <div />);
 
   // ============================ Render ============================
   return wrapCSSVar(
@@ -289,26 +294,20 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
           </div>
         )}
 
-        {/* Input */}
-        <InputTextArea
-          {...inputProps}
-          disabled={disabled}
-          style={{ ...contextConfig.styles.input, ...styles.input }}
-          className={classnames(inputCls, contextConfig.classNames.input, classNames.input)}
-          autoSize={{ maxRows: 8 }}
-          value={innerValue}
-          onChange={(e) => {
-            triggerValueChange((e.target as HTMLTextAreaElement).value);
-            triggerSpeech(true);
-          }}
-          onPressEnter={onInternalKeyPress}
-          onCompositionStart={onInternalCompositionStart}
-          onCompositionEnd={onInternalCompositionEnd}
-          onKeyDown={onKeyDown}
-          onPaste={onInternalPaste}
-          variant="borderless"
-          readOnly={readOnly}
-        />
+        {/* 自定义 content 渲染 */}
+        {CustomContent ? (
+          <CustomContent />
+        ) : (
+          <InputTextArea
+            {...inputProps}
+            disabled={disabled}
+            value={innerValue}
+            onChange={(e) => triggerValueChange((e.target as HTMLTextAreaElement).value)}
+            onPressEnter={onInternalKeyPress}
+            variant="borderless"
+            readOnly={readOnly}
+          />
+        )}
 
         {/* Action List */}
         <div
