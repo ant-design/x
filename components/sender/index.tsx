@@ -43,7 +43,7 @@ export interface SenderProps extends Pick<TextareaProps, 'placeholder' | 'onKeyP
   submitType?: SubmitType;
   disabled?: boolean;
   onSubmit?: (message: string) => void;
-  onChange?: (value: string) => void;
+  onChange?: (value: string, e?: React.FormEvent<HTMLElement>) => void;
   onCancel?: VoidFunction;
   onKeyDown?: React.KeyboardEventHandler<any>;
   onPaste?: React.ClipboardEventHandler<HTMLElement>;
@@ -142,11 +142,11 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
     value,
   });
 
-  const triggerValueChange = (nextValue: string) => {
+  const triggerValueChange = (nextValue: string, e?: React.FormEvent<HTMLElement>) => {
     setInnerValue(nextValue);
 
     if (onChange) {
-      onChange(nextValue);
+      onChange(nextValue, e);
     }
   };
 
@@ -298,7 +298,7 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
           autoSize={{ maxRows: 8 }}
           value={innerValue}
           onChange={(e) => {
-            triggerValueChange((e.target as HTMLTextAreaElement).value);
+            triggerValueChange((e.target as HTMLTextAreaElement).value, e);
             triggerSpeech(true);
           }}
           onPressEnter={onInternalKeyPress}
