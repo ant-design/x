@@ -50,7 +50,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 | submitType | 提交模式 | SubmitType | `enter` \| `shiftEnter` | - |
 | value | 输入框值 | string | - | - |
 | onSubmit | 点击发送按钮的回调 | (message: string) => void | - | - |
-| onChange | 输入框值改变的回调 | (value: string, e?: React.FormEvent<`HTMLElement`>) => void | - | - |
+| onChange | 输入框值改变的回调 | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`> ) => void | - | - |
 | onCancel | 点击取消按钮的回调 | () => void | - | - |
 
 ```typescript | pure
