@@ -61,7 +61,7 @@ const App = () => {
 
   // Agent for request
   const [agent] = useXAgent({
-    request: async ({}, { onSuccess, onUpdate }) => {
+    request: async (_, { onSuccess, onUpdate }) => {
       const stream = XStream({
         readableStream: mockReadableStream(),
       });
