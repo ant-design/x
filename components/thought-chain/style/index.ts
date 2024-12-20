@@ -118,7 +118,7 @@ const genThoughtChainItemBeforePseudoStyle: GenerateThoughtChainItemStyle = (tok
         position: 'relative',
 
         '&::before': {
-          bottom: `${token.calc(token.itemGap).mul(-1).equal()}`,
+          bottom: calc(token.itemGap).mul(-1).equal(),
         },
       },
       [`& ${itemCls}-header, & ${itemCls}-content`]: {
@@ -131,7 +131,7 @@ const genThoughtChainItemBeforePseudoStyle: GenerateThoughtChainItemStyle = (tok
       },
       [`& ${itemCls}-header::before`]: {
         top: token.itemSize,
-        bottom: `${token.calc(token.itemGap).mul(-2).equal()}`,
+        bottom: calc(token.itemGap).mul(-2).equal(),
       },
       [`& ${itemCls}-content::before`]: {
         top: '100%',
@@ -180,7 +180,7 @@ const genThoughtChainItemStyle: GenerateThoughtChainItemStyle = (token) => {
 
           [`& ${itemCls}-title`]: {
             height: token.itemSize,
-            lineHeight: token.itemSize,
+            lineHeight: `${unit(token.itemSize)}`,
             maxHeight: token.itemSize,
             fontSize: token.itemFontSize,
 

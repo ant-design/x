@@ -82,10 +82,10 @@ describe('Sender Component', () => {
     );
 
     fireEvent.change(container.querySelector('textarea')!, { target: { value: 'bamboo' } });
-    expect(onChange).toHaveBeenCalledWith('bamboo');
+    expect(onChange).toHaveBeenCalledWith('bamboo', {});
 
     fireEvent.click(container.querySelector('button')!);
-    expect(onChange).toHaveBeenCalledWith('');
+    expect(onChange).toHaveBeenCalledWith('', undefined);
   });
 
   describe('submitType', () => {

@@ -49,7 +49,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | submitType | Submit type | SubmitType | `enter` \| `shiftEnter` | - |
 | value | Input value | string | - | - |
 | onSubmit | Callback when click send button | (message: string) => void | - | - |
-| onChange | Callback when input value changes | (value: string) => void | - | - |
+| onChange | Callback when input value changes | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`> ) => void | - | - |
 | onCancel | Callback when click cancel button | () => void | - | - |
 
 ```typescript | pure

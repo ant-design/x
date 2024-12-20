@@ -97,6 +97,7 @@
   },
   "devDependencies": {
     "@ant-design/tools": "^18.0.2",
+    "@petercatai/assistant": "^2.0.2",
     "@antv/gpt-vis": "^0.3.0",
     "@biomejs/biome": "^1.9.0",
     "@codecov/webpack-plugin": "^1.4.0",
