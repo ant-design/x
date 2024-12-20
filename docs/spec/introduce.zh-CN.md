@@ -2,7 +2,7 @@
 title: RICH 设计范式简介
 ---
 
-![](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*31g-RpB6F6UAAAAAAAAAAAAADgCCAQ/fmt.webp)
+![](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*48RLR41kwHIAAAAAAAAAAAAADgCCAQ/fmt.webp)
 
 2022 年 11 月 30 日，OpenAI 发布 ChatGPT 3.5，带领人类走向 AGI 人机交互新世纪。AGI 让自然人机交互成为现实，「语言」这一简单、自然的交互方式，一度威胁到统治人机交互领域长达几十年之久的 GUI（图形用户界面）。设计者们纷纷开始各种各样的尝试与改造：
 
@@ -117,7 +117,7 @@ RICH 范式正是我们尝试定义的 AI 时代应该关注的设计要素集�
 
 那么该如何应用 RICH 创造卓越的 AI 产品体验呢？在后续的指引文档里，我们将深入浅出，分别针对 RICH 中的四个要素进行介绍和定义，通行提供了开箱即用的设计策略和案例，帮助大家更好的理解和应用 RICH。这套理念和最终的界面资产也集成到 Ant Design X 里，希望能帮助大家轻松创造卓越 AI 产品体验！
 
-![](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*eWaFS6DiXtYAAAAAAAAAAAAADgCCAQ/fmt.webp)
+![](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*0xUFQoMAhiIAAAAAAAAAAAAADgCCAQ/original)
 
 ## 附
 
