@@ -145,11 +145,11 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
     value,
   });
 
-  const triggerValueChange = (nextValue: string, e?: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const triggerValueChange: SenderProps['onChange'] = (nextValue, event) => {
     setInnerValue(nextValue);
 
     if (onChange) {
-      onChange(nextValue, e);
+      onChange(nextValue, event);
     }
   };
 
@@ -300,10 +300,11 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
           className={classnames(inputCls, contextConfig.classNames.input, classNames.input)}
           autoSize={{ maxRows: 8 }}
           value={innerValue}
-          onChange={(e) => {
-            if (e.target instanceof HTMLTextAreaElement) {
-              triggerValueChange(e.target.value, e as React.ChangeEvent<HTMLTextAreaElement>);
-            }
+          onChange={(event) => {
+            triggerValueChange(
+              (event.target as HTMLTextAreaElement).value,
+              event as React.ChangeEvent<HTMLTextAreaElement>,
+            );
             triggerSpeech(true);
           }}
           onPressEnter={onInternalKeyPress}
