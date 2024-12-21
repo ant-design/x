@@ -87,10 +87,10 @@ const messages = [
 ];
 
 const App = () => (
-  <div>
+  <>
     <Bubble.List items={messages} />
     <Sender />
-  </div>
+  </>
 );
 
 export default App;
@@ -142,11 +142,8 @@ const Component: React.FC = () => {
             },
             onUpdate: (chunk) => {
               console.log('sse object', chunk);
-
               const data = JSON.parse(chunk.data);
-
               content += data?.choices[0].delta.content;
-
               onUpdate(content);
             },
           },
@@ -157,7 +154,7 @@ const Component: React.FC = () => {
     },
   });
 
-  function onRequest(message: string) {
+  const onSubmit = (message: string) => {
     agent.request(
       { message },
       {
@@ -166,9 +163,9 @@ const Component: React.FC = () => {
         onError: () => {},
       },
     );
-  }
+  };
 
-  return <Sender onSubmit={onRequest} />;
+  return <Sender onSubmit={onSubmit} />;
 };
 ```
 
@@ -214,7 +211,6 @@ const Demo: React.FC = () => {
 
         for await (const chunk of stream) {
           content += chunk.choices[0]?.delta?.content || '';
-
           onUpdate(content);
         }
 
@@ -240,10 +236,10 @@ const Demo: React.FC = () => {
   }));
 
   return (
-    <div>
+    <>
       <Bubble.List items={items} />
       <Sender onSubmit={onRequest} />
-    </div>
+    </>
   );
 };
 
