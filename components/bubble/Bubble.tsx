@@ -4,6 +4,8 @@ import React from 'react';
 import { Avatar } from 'antd';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
+import Editor from './Editor';
+import useEditableConfig from './hooks/useEditableConfig';
 import useTypedEffect from './hooks/useTypedEffect';
 import useTypingConfig from './hooks/useTypingConfig';
 import type { BubbleProps } from './interface';
@@ -40,6 +42,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     onTypingComplete,
     header,
     footer,
+    editable = {},
     ...otherHtmlProps
   } = props;
 
@@ -59,6 +62,17 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
 
   // ===================== Component Config =========================
   const contextConfig = useXComponentConfig('bubble');
+
+  // =========================== Editable ===========================
+  const {
+    enableEdit,
+    isEditing,
+    onEditorChange,
+    onEditorCancel,
+    onEditorEnd,
+    editorTextAreaConfig,
+    editorButtonsConfig,
+  } = useEditableConfig(editable);
 
   // ============================ Typing ============================
   const [typingEnabled, typingStep, typingInterval, typingSuffix] = useTypingConfig(typing);
@@ -124,23 +138,43 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     );
   }
 
-  let fullContent: React.ReactNode = (
-    <div
-      style={{
-        ...contextConfig.styles.content,
-        ...styles.content,
-      }}
-      className={classnames(
-        `${prefixCls}-content`,
-        `${prefixCls}-content-${variant}`,
-        shape && `${prefixCls}-content-${shape}`,
-        contextConfig.classNames.content,
-        classNames.content,
-      )}
-    >
-      {contentNode}
-    </div>
-  );
+  let fullContent: React.ReactNode =
+    enableEdit && isEditing ? (
+      <Editor
+        prefixCls={prefixCls}
+        value={mergedContent as string}
+        onChange={onEditorChange}
+        onCancel={onEditorCancel}
+        onEnd={onEditorEnd}
+        style={{
+          ...contextConfig.styles.editor,
+          ...editable.styles,
+        }}
+        className={classnames(
+          `${prefixCls}-editor`,
+          contextConfig.classNames.editor,
+          editable.classNames,
+        )}
+        editorTextAreaConfig={editorTextAreaConfig}
+        editorButtonsConfig={editorButtonsConfig}
+      />
+    ) : (
+      <div
+        style={{
+          ...contextConfig.styles.content,
+          ...styles.content,
+        }}
+        className={classnames(
+          `${prefixCls}-content`,
+          `${prefixCls}-content-${variant}`,
+          shape && `${prefixCls}-content-${shape}`,
+          contextConfig.classNames.content,
+          classNames.content,
+        )}
+      >
+        {contentNode}
+      </div>
+    );
 
   if (header || footer) {
     fullContent = (
