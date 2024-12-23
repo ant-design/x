@@ -22,7 +22,7 @@ tag: vVERSION
 
 - 🆕 Extended `XStream` support for the cancel feature. [#319](https://github.com/ant-design/x/pull/319) by [@ppbl](https://github.com/ppbl)
 - 🆕 Extended `Bubble` support for the `typing.suffix` feature. [#316](https://github.com/ant-design/x/pull/316) by [@BQXBQX](https://github.com/BQXBQX)
-- 🆕 Extended `Sender` component's `onChange` parameter to include the `event` object. [#362](https://github.com/ant-design/x/pull/362) by [@defaultjacky](https://github.com/defaultjacky), [@YumoImer](https://github.com/YumoImer)
+- 🆕 Extended `Sender` component's `onChange` parameter to include the `event` object. [#362](https://github.com/ant-design/x/pull/362) by [@defaultjacky](https://github.com/defaultjacky)
 - 🐛 Fixed styling issues in `ThoughtChain` when `cssVar` is not applied. [#373](https://github.com/ant-design/x/pull/373) by [@YumoImer](https://github.com/YumoImer)
 - 📖 Added `Petercat` assistant feature. [#375](https://github.com/ant-design/x/pull/375) by [@xingwanying](https://github.com/xingwanying)
 - 📖 Improved the official website for a better user experience. [#389](https://github.com/ant-design/x/pull/389), [#377](https://github.com/ant-design/x/pull/377), [#364](https://github.com/ant-design/x/pull/364), [#368](https://github.com/ant-design/x/pull/368) by [@afc163](https://github.com/afc163), [@YumoImer](https://github.com/YumoImer)
