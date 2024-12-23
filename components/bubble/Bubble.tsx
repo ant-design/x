@@ -119,7 +119,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     contentNode = (
       <>
         {mergedContent as React.ReactNode}
-        {isTyping && typingSuffix}
+        {isTyping && customSuffix}
       </>
     );
   }
