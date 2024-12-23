@@ -61,7 +61,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
   const contextConfig = useXComponentConfig('bubble');
 
   // ============================ Typing ============================
-  const [typingEnabled, typingStep, typingInterval, typingSuffix] = useTypingConfig(typing);
+  const [typingEnabled, typingStep, typingInterval, customSuffix] = useTypingConfig(typing);
 
   const [typedContent, isTyping] = useTypedEffect(
     content,
@@ -101,7 +101,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     `${prefixCls}-${placement}`,
     {
       [`${prefixCls}-rtl`]: direction === 'rtl',
-      [`${prefixCls}-typing`]: isTyping && !loading && !messageRender && !typingSuffix,
+      [`${prefixCls}-typing`]: isTyping && !loading && !messageRender && !customSuffix,
     },
   );
 
@@ -119,7 +119,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     contentNode = (
       <>
         {mergedContent as React.ReactNode}
-        {isTyping && typingSuffix}
+        {isTyping && customSuffix}
       </>
     );
   }
