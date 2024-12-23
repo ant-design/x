@@ -1,6 +1,5 @@
 import { Assistant } from '@petercatai/assistant';
 import React from 'react';
-import '@petercatai/assistant/style';
 
 const PeterCat: React.FC = () => {
   return (
