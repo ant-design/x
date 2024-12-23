@@ -25,6 +25,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/header-fixed.tsx">Reference</code>
 <code src="./demo/send-style.tsx">Adjust style</code>
 <code src="./demo/paste-image.tsx">Paste image</code>
+<code src="./demo/focus.tsx">Focus</code>
 
 ## API
 

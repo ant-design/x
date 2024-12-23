@@ -1,6 +1,5 @@
-import { type ButtonProps, Flex, type GetProps, Input } from 'antd';
+import { Flex, Input } from 'antd';
 import classnames from 'classnames';
-
 import { useComposeRef, useMergedState } from 'rc-util';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import getValue from 'rc-util/lib/utils/get';
@@ -13,9 +12,11 @@ import ClearButton from './components/ClearButton';
 import LoadingButton from './components/LoadingButton';
 import SendButton from './components/SendButton';
 import SpeechButton from './components/SpeechButton';
-import type { CustomizeComponent, SubmitType } from './interface';
 import useStyle from './style';
 import useSpeech, { type AllowSpeech } from './useSpeech';
+
+import type { InputRef as AntdInputRef, ButtonProps, GetProps } from 'antd';
+import type { CustomizeComponent, SubmitType } from './interface';
 
 type TextareaProps = GetProps<typeof Input.TextArea>;
 
@@ -71,6 +72,8 @@ export interface SenderProps extends Pick<TextareaProps, 'placeholder' | 'onKeyP
   header?: React.ReactNode;
 }
 
+export type SenderRef = HTMLDivElement & AntdInputRef;
+
 function getComponent<T>(
   components: SenderComponents | undefined,
   path: string[],
@@ -79,7 +82,7 @@ function getComponent<T>(
   return getValue(components, path) || defaultComponent;
 }
 
-function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
+const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   const {
     prefixCls: customizePrefixCls,
     styles = {},
@@ -114,9 +117,13 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
 
   // ============================= Refs =============================
   const containerRef = React.useRef<HTMLDivElement>(null);
-  const inputRef = React.useRef<HTMLTextAreaElement>(null);
+  const inputRef = React.useRef<AntdInputRef>(null);
 
   const mergedContainerRef = useComposeRef(ref, containerRef);
+
+  React.useImperativeHandle(ref, () => {
+    return Object.assign((containerRef?.current ?? {}) as HTMLDivElement, inputRef.current);
+  });
 
   // ======================= Component Config =======================
   const contextConfig = useXComponentConfig('sender');
@@ -346,18 +353,18 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
       </div>
     </div>,
   );
-}
+});
 
-const ForwardSender = React.forwardRef(Sender) as React.ForwardRefExoticComponent<
-  SenderProps & React.RefAttributes<HTMLDivElement>
-> & {
+type CompoundedSender = typeof ForwardSender & {
   Header: typeof SenderHeader;
 };
 
+const Sender = ForwardSender as CompoundedSender;
+
 if (process.env.NODE_ENV !== 'production') {
-  ForwardSender.displayName = 'Sender';
+  Sender.displayName = 'Sender';
 }
 
-ForwardSender.Header = SenderHeader;
+Sender.Header = SenderHeader;
 
-export default ForwardSender;
+export default Sender;
