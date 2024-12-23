@@ -35,3 +35,6 @@ export { default as XStream } from './x-stream';
 export type { XStreamOptions } from './x-stream';
 
 export { default as XRequest } from './x-request';
+
+export { default as Actions } from './actions';
+export type { ActionsProps } from './actions';
