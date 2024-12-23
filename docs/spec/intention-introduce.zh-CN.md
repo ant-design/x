@@ -16,7 +16,7 @@ title: 介绍
 
 在不同的领域和维度，意图也有不同的分类，如按照用户意图清晰度可分成意图清晰与意图模糊；按照用户与系统的交互目的可分为咨询信息类与执行任务类。
 
-![](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*89KfQ7WummEAAAAAAAAAAAAADgCCAQ/fmt.webp)
+![](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*ss_NT7EEgGAAAAAAAAAAAAAADgCCAQ/original)
 
 ## Why 为什么要做意图设计
 
