@@ -4,6 +4,7 @@ import { useMergedState } from 'rc-util';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import getValue from 'rc-util/lib/utils/get';
 import React from 'react';
+import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 import SenderHeader, { SendHeaderContext } from './SenderHeader';
@@ -121,7 +122,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const inputRef = React.useRef<AntdInputRef>(null);
 
-  React.useImperativeHandle(ref, () => ({
+  useProxyImperativeHandle(ref, () => ({
     nativeElement: containerRef.current!,
     focus: inputRef.current?.focus!,
     blur: inputRef.current?.blur!,
