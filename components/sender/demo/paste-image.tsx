@@ -41,7 +41,7 @@ const Demo = () => {
                 description: 'Click or drag files to this area to upload',
               }
         }
-        getDropContainer={() => senderRef.current}
+        getDropContainer={() => senderRef.current?.nativeElement}
       />
     </Sender.Header>
   );

@@ -1,6 +1,6 @@
 import { Flex, Input } from 'antd';
 import classnames from 'classnames';
-import { useComposeRef, useMergedState } from 'rc-util';
+import { useMergedState } from 'rc-util';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import getValue from 'rc-util/lib/utils/get';
 import React from 'react';
@@ -72,7 +72,9 @@ export interface SenderProps extends Pick<TextareaProps, 'placeholder' | 'onKeyP
   header?: React.ReactNode;
 }
 
-export type SenderRef = HTMLDivElement & AntdInputRef;
+export type SenderRef = {
+  nativeElement: HTMLDivElement;
+} & Pick<AntdInputRef, 'focus' | 'blur'>;
 
 function getComponent<T>(
   components: SenderComponents | undefined,
@@ -119,11 +121,11 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const inputRef = React.useRef<AntdInputRef>(null);
 
-  const mergedContainerRef = useComposeRef(ref, containerRef);
-
-  React.useImperativeHandle(ref, () => {
-    return Object.assign((containerRef?.current ?? {}) as HTMLDivElement, inputRef.current);
-  });
+  React.useImperativeHandle(ref, () => ({
+    nativeElement: containerRef.current!,
+    focus: inputRef.current?.focus!,
+    blur: inputRef.current?.blur!,
+  }));
 
   // ======================= Component Config =======================
   const contextConfig = useXComponentConfig('sender');
@@ -274,11 +276,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
 
   // ============================ Render ============================
   return wrapCSSVar(
-    <div
-      ref={mergedContainerRef}
-      className={mergedCls}
-      style={{ ...contextConfig.style, ...style }}
-    >
+    <div ref={containerRef} className={mergedCls} style={{ ...contextConfig.style, ...style }}>
       {/* Header */}
       {header && (
         <SendHeaderContext.Provider value={{ prefixCls }}>{header}</SendHeaderContext.Provider>
