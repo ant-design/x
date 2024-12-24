@@ -25,6 +25,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/header-fixed.tsx">Reference</code>
 <code src="./demo/send-style.tsx">Adjust style</code>
 <code src="./demo/paste-image.tsx">Paste image</code>
+<code src="./demo/focus.tsx">Focus</code>
 
 ## API
 
@@ -60,6 +61,14 @@ type SpeechConfig = {
   onRecordingChange?: (recording: boolean) => void;
 };
 ```
+
+### Sender Ref
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| nativeElement | Outer container | `HTMLDivElement` | - | - |
+| focus | Set focus | (option?: { preventScroll?: boolean, cursor?: 'start' \| 'end' \| 'all' }) | - | - |
+| blur | Remove focus | () => void | - | - |
 
 ### Sender.Header
 
