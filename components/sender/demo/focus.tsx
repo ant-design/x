@@ -48,6 +48,13 @@ const App: React.FC = () => {
       >
         Focus prevent scroll
       </Button>
+      <Button
+        onClick={() => {
+          senderRef.current!.blur();
+        }}
+      >
+        Blur
+      </Button>
       <Sender {...senderProps} />
     </Flex>
   );
