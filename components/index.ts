@@ -4,7 +4,7 @@ export { default as Attachments } from './attachments';
 export type { AttachmentsProps } from './attachments';
 
 export { default as Sender } from './sender';
-export type { SenderProps, SenderRef } from './sender';
+export type { SenderProps } from './sender';
 
 export { default as Bubble } from './bubble';
 export type { BubbleProps } from './bubble';

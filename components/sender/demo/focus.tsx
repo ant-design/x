@@ -1,11 +1,9 @@
 import { Sender } from '@ant-design/x';
-import { Button, Flex } from 'antd';
+import { Button, Flex, type GetRef } from 'antd';
 import React, { useRef } from 'react';
 
-import type { SenderRef } from '@ant-design/x';
-
 const App: React.FC = () => {
-  const senderRef = useRef<SenderRef>(null);
+  const senderRef = useRef<GetRef<typeof Sender>>(null);
 
   const senderProps = {
     defaultValue: 'Hello, welcome to use Ant Design X!',
