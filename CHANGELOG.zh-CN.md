@@ -15,6 +15,17 @@ tag: vVERSION
 
 ---
 
+## 1.0.4
+
+`2024-12-23`
+
+- 🆕 扩展 `XStream` 对取消功能的支持。 [#319](https://github.com/ant-design/x/pull/319) by [@ppbl](https://github.com/ppbl)
+- 🆕 扩展 `Bubble` 对 `typing.suffix`打字后缀的支持。 [#316](https://github.com/ant-design/x/pull/316) by [@BQXBQX](https://github.com/BQXBQX)
+- 🆕 扩展 `Sender` 组件 `onChange` 对 `event` 事件参数的支持。 [#362](https://github.com/ant-design/x/pull/362) by [@defaultjacky](https://github.com/defaultjacky)
+- 🐛 修复 `ThoughtChain` 在非 cssVar 下的样式问题。 [#373](https://github.com/ant-design/x/pull/373) by [@YumoImer](https://github.com/YumoImer)
+- 📖 添加 `Petercat` 助理功能。 [#375](https://github.com/ant-design/x/pull/375) by [@xingwanying](https://github.com/xingwanying)
+- 📖 优化官网站点提升用户体验。 [#389](https://github.com/ant-design/x/pull/389)、[#377](https://github.com/ant-design/x/pull/377)、[#364](https://github.com/ant-design/x/pull/364)、[#368](https://github.com/ant-design/x/pull/368) by [@afc163](https://github.com/afc163)、[@YumoImer](https://github.com/YumoImer)
+
 ## 1.0.3
 
 `2024-12-16`
