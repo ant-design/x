@@ -63,6 +63,14 @@ type SpeechConfig = {
 };
 ```
 
+#### Sender Ref
+
+| 属性 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| nativeElement | 外层容器 | `HTMLDivElement` | - | - |
+| focus | 获取焦点 | (option?: { preventScroll?: boolean, cursor?: 'start' \| 'end' \| 'all' }) | - | - |
+| blur | 取消焦点 | () => void | - | - |
+
 ### Sender.Header
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |

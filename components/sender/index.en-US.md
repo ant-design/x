@@ -62,6 +62,14 @@ type SpeechConfig = {
 };
 ```
 
+### Sender Ref
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| nativeElement | Outer container | `HTMLDivElement` | - | - |
+| focus | Set focus | (option?: { preventScroll?: boolean, cursor?: 'start' \| 'end' \| 'all' }) | - | - |
+| blur | Remove focus | () => void | - | - |
+
 ### Sender.Header
 
 | Property | Description | Type | Default | Version |
