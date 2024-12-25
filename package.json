@@ -66,7 +66,6 @@
     "size-limit": "size-limit",
     "sort:api-table": "antd-tools run sort-api-table",
     "sort:package-json": "npx sort-package-json",
-    "dev": "npm start",
     "prestart": "npm run version && npm run token:statistic && npm run token:meta && npm run lint:changelog",
     "start": "tsx ./scripts/set-node-options.ts cross-env PORT=8001 dumi dev",
     "pretest": "npm run version",
