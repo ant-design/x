@@ -40,6 +40,7 @@ export interface HeaderActionsProps extends SharedProps {
 
 const HeaderActions: React.FC<HeaderActionsProps> = (props) => {
   const location = useLocation();
+  const actionsRef = React.useRef<HTMLDivElement>(null);
 
   const { pkg } = useSiteData();
 
@@ -113,7 +114,11 @@ const HeaderActions: React.FC<HeaderActionsProps> = (props) => {
         onChange={handleVersionChange}
         dropdownStyle={getDropdownStyle}
         popupMatchSelectWidth={false}
-        getPopupContainer={(trigger) => trigger.parentNode}
+        getPopupContainer={(trigger) => {
+          return (
+            props.isMini ? actionsRef.current?.parentNode?.parentNode : trigger.parentNode
+          ) as HTMLElement;
+        }}
         options={versionOptions}
       />
     </Button>,
@@ -150,6 +155,7 @@ const HeaderActions: React.FC<HeaderActionsProps> = (props) => {
         props.isMobile && styles.mobile,
         props.className,
       )}
+      ref={actionsRef}
     >
       {items}
     </div>
