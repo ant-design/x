@@ -40,6 +40,7 @@ export interface HeaderActionsProps extends SharedProps {
 
 const HeaderActions: React.FC<HeaderActionsProps> = (props) => {
   const location = useLocation();
+
   const { pkg } = useSiteData();
 
   const themeConfig = getThemeConfig();
