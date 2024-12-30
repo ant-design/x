@@ -90,8 +90,7 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
   React.useImperativeHandle(ref, () => ({
     nativeElement: containerRef.current,
     upload: (file) => {
-      const fileInput =
-        uploadRef.current?.nativeElement?.querySelector<HTMLInputElement>('input[type="file"]');
+      const fileInput = uploadRef.current?.nativeElement?.querySelector('input[type="file"]');
 
       // Trigger native change event
       if (fileInput) {
