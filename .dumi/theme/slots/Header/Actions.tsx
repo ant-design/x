@@ -116,7 +116,9 @@ const HeaderActions: React.FC<HeaderActionsProps> = (props) => {
         popupMatchSelectWidth={false}
         getPopupContainer={(trigger) => {
           return (
-            props.isMini ? actionsRef.current?.parentNode?.parentNode : trigger.parentNode
+            props.isMini && actionsRef.current?.parentNode
+              ? actionsRef.current?.parentNode?.parentNode
+              : trigger.parentNode
           ) as HTMLElement;
         }}
         options={versionOptions}
