@@ -97,7 +97,7 @@
   },
   "devDependencies": {
     "@ant-design/tools": "^18.0.2",
-    "@petercatai/assistant": "^2.0.10",
+    "@ant-design/v5-patch-for-react-19": "^1.0.3",
     "@antv/gpt-vis": "^0.4.1",
     "@biomejs/biome": "^1.9.0",
     "@codecov/webpack-plugin": "^1.4.0",
@@ -111,6 +111,7 @@
     "@microflash/rehype-figure": "^2.1.1",
     "@npmcli/run-script": "^9.0.1",
     "@octokit/rest": "^21.0.2",
+    "@petercatai/assistant": "^2.0.10",
     "@qixian.cs/github-contributors-list": "^2.0.2",
     "@rc-component/father-plugin": "1.2.0-alpha.0",
     "@rc-component/trigger": "^2.2.3",
