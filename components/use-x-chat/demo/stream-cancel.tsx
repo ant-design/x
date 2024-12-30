@@ -1,5 +1,5 @@
 import { UserOutlined } from '@ant-design/icons';
-import { Bubble, Sender, useXAgent, useXChat, XStream } from '@ant-design/x';
+import { Bubble, Sender, XStream, useXAgent, useXChat } from '@ant-design/x';
 import { Flex, type GetProp } from 'antd';
 import React, { useEffect, useRef } from 'react';
 

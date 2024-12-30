@@ -27,7 +27,7 @@ export type { WelcomeProps } from './welcome';
 export { default as XProvider } from './x-provider';
 export type { XProviderProps } from './x-provider';
 
-export { default as useXChat } from './useXChat';
+export { default as useXChat } from './use-x-chat';
 
 export { default as useXAgent } from './use-x-agent';
 
