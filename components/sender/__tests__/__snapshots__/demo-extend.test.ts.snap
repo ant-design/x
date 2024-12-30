@@ -1413,6 +1413,6 @@ exports[`renders components/sender/demo/submitType.tsx extend context correctly 
 
 exports[`renders components/sender/demo/submitType.tsx extend context correctly 2`] = `
 [
-  "Warning: \`NaN\` is an invalid value for the \`%s\` css style property.%s",
+  "\`NaN\` is an invalid value for the \`%s\` css style property.",
 ]
 `;

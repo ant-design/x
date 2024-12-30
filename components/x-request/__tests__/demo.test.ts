@@ -1,3 +1,3 @@
-import { baseText } from '../../../tests/shared/demoTest';
+import { baseTest } from '../../../tests/shared/demoTest';
 
-baseText(false, 'x-request');
+baseTest(false, 'x-request');
