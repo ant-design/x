@@ -1,3 +1,3 @@
-import demoTest from '../../../tests/shared/demoTest';
+import { baseTest } from '../../../tests/shared/demoTest';
 
-demoTest('useXAgent');
+baseTest(false, 'use-x-agent');
