@@ -146,7 +146,7 @@
     "@types/qs": "^6.9.16",
     "@types/react": "^19.0.2",
     "@types/react-copy-to-clipboard": "^5.0.7",
-    "@types/react-dom": "^18.3.0",
+    "@types/react-dom": "^19.0.2",
     "@types/react-highlight-words": "^0.20.0",
     "@types/react-resizable": "^3.0.8",
     "@types/semver": "^7.5.8",
