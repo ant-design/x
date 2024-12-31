@@ -1,3 +1,3 @@
 import { baseTest } from '../../../tests/shared/demoTest';
 
-baseTest(false, 'x-request');
+baseTest(false, 'use-x-chat');

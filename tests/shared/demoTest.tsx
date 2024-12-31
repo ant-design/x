@@ -1,10 +1,9 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
 import path from 'path';
 import { StyleProvider, createCache } from '@ant-design/cssinjs';
 import { XProvider } from '@ant-design/x';
 import { globSync } from 'glob';
 import kebabCase from 'lodash/kebabCase';
-import * as React from 'react';
+import React from 'react';
 import { renderToString } from 'react-dom/server';
 
 import { resetWarned } from '../../components/_util/warning';
@@ -27,24 +26,22 @@ export type Options = {
   nameCheckPathOnly?: boolean;
 };
 
-export function baseText(doInject: boolean, component: string, options: Options = {}) {
+export function baseTest(doInject: boolean, component: string, options: Options = {}) {
   const files = globSync(`./components/${component}/demo/*.tsx`).filter(
     (file) => !file.includes('_semantic'),
   );
   files.forEach((file) => {
     // to compatible windows path
-    const mergedFile = file.split(path.sep).join('/');
+    file = file.split(path.sep).join('/');
     const testMethod =
       options.skip === true ||
-      (Array.isArray(options.skip) && options.skip.some((c) => mergedFile.includes(c)))
+      (Array.isArray(options.skip) && options.skip.some((c) => file.includes(c)))
         ? test.skip
         : test;
 
     // function doTest(name: string, openTrigger = false) {
     testMethod(
-      doInject
-        ? `renders ${mergedFile} extend context correctly`
-        : `renders ${mergedFile} correctly`,
+      doInject ? `renders ${file} extend context correctly` : `renders ${file} correctly`,
       () => {
         resetWarned();
 
@@ -53,7 +50,7 @@ export function baseText(doInject: boolean, component: string, options: Options 
         Date.now = jest.fn(() => new Date('2016-11-22').getTime());
         jest.useFakeTimers().setSystemTime(new Date('2016-11-22'));
 
-        let Demo = require(`../../${mergedFile}`).default; // eslint-disable-line global-require
+        let Demo = require(`../../${file}`).default;
         // Inject Trigger status unless skipped
         Demo = typeof Demo === 'function' ? <Demo /> : Demo;
         if (doInject) {
@@ -90,6 +87,11 @@ export function baseText(doInject: boolean, component: string, options: Options 
             .filter((msg) => !isSafeWarning(msg, true))
             .sort();
 
+          // Console log the error messages for debugging
+          if (errorMessages.length) {
+            console.log(errSpy.mock.calls);
+          }
+
           expect(errorMessages).toMatchSnapshot();
         }
 
@@ -104,35 +106,32 @@ export function baseText(doInject: boolean, component: string, options: Options 
  * Inject Trigger to force open in test snapshots
  */
 export function extendTest(component: string, options: Options = {}) {
-  baseText(true, component, options);
+  baseTest(true, component, options);
 }
 
 /**
  * Test all the demo snapshots
  */
 export default function demoTest(component: string, options: Options = {}) {
-  baseText(false, component, options);
+  baseTest(false, component, options);
 
   // Test component name is match the kebab-case
   const testName = test;
+  testName('component name is match the kebab-case', () => {
+    const kebabName = kebabCase(component);
 
-  if (!component.startsWith('use')) {
-    testName('component name is match the kebab-case', () => {
-      const kebabName = kebabCase(component);
+    // Path should exist
 
-      // Path should exist
-      // eslint-disable-next-line global-require
-      const { default: Component } = require(`../../components/${kebabName}`);
+    const { default: Component } = require(`../../components/${kebabName}`);
 
-      if (options.nameCheckPathOnly !== true) {
-        expect(kebabCase(Component.displayName || '')).toEqual(kebabName);
-      }
-    });
-
-    if (options?.testRootProps !== false) {
-      rootPropsTest(component, null!, {
-        props: options?.testRootProps,
-      });
+    if (options.nameCheckPathOnly !== true) {
+      expect(kebabCase(Component.displayName || '')).toEqual(kebabName);
     }
+  });
+
+  if (options?.testRootProps !== false) {
+    rootPropsTest(component, null!, {
+      props: options?.testRootProps,
+    });
   }
 }
