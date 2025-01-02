@@ -113,7 +113,6 @@ const HeaderActions: React.FC<HeaderActionsProps> = (props) => {
         onChange={handleVersionChange}
         dropdownStyle={getDropdownStyle}
         popupMatchSelectWidth={false}
-        getPopupContainer={(trigger) => trigger.parentNode}
         options={versionOptions}
       />
     </Button>,
