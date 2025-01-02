@@ -17,12 +17,13 @@ import useStyle from './style';
 import useSpeech, { type AllowSpeech } from './useSpeech';
 
 import type { InputRef as AntdInputRef, ButtonProps, GetProps } from 'antd';
-import type { CustomizeComponent, SubmitType } from './interface';
+
+export type SubmitType = 'enter' | 'shiftEnter' | false;
 
 type TextareaProps = GetProps<typeof Input.TextArea>;
 
 export interface SenderComponents {
-  input?: CustomizeComponent<TextareaProps>;
+  input?: React.ComponentType<TextareaProps>;
 }
 
 export type ActionsRender = (
@@ -80,8 +81,8 @@ export type SenderRef = {
 function getComponent<T>(
   components: SenderComponents | undefined,
   path: string[],
-  defaultComponent: CustomizeComponent<T>,
-): CustomizeComponent<T> {
+  defaultComponent: React.ComponentType<T>,
+): React.ComponentType<T> {
   return getValue(components, path) || defaultComponent;
 }
 

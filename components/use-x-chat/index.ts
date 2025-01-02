@@ -1,6 +1,6 @@
 import { useEvent } from 'rc-util';
 import React from 'react';
-import { XAgent } from '../useXAgent';
+import { XAgent } from '../use-x-agent';
 import useSyncState from './useSyncState';
 
 export type SimpleType = string | number | boolean | object;

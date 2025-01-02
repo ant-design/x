@@ -306,7 +306,7 @@ Array [
 
 exports[`renders components/suggestion/demo/block.tsx extend context correctly 2`] = `
 [
-  "Warning: \`NaN\` is an invalid value for the \`%s\` css style property.%s",
+  "\`NaN\` is an invalid value for the \`%s\` css style property.",
 ]
 `;
 

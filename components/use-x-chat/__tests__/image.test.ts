@@ -1,5 +1,5 @@
 import { imageDemoTest } from '../../../tests/shared/imageTest';
 
-describe('useXAgent image', () => {
-  imageDemoTest('useXAgent');
+describe('useXChat image', () => {
+  imageDemoTest('use-x-chat');
 });

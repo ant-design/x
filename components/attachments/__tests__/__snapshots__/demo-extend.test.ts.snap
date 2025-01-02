@@ -733,7 +733,7 @@ exports[`renders components/attachments/demo/files.tsx extend context correctly 
 
 exports[`renders components/attachments/demo/files.tsx extend context correctly 2`] = `
 [
-  "Warning: Invalid DOM property \`%s\`. Did you mean \`%s\`?%s",
+  "Invalid DOM property \`%s\`. Did you mean \`%s\`?",
 ]
 `;
 
@@ -2764,6 +2764,6 @@ exports[`renders components/attachments/demo/with-sender.tsx extend context corr
 
 exports[`renders components/attachments/demo/with-sender.tsx extend context correctly 2`] = `
 [
-  "Warning: \`NaN\` is an invalid value for the \`%s\` css style property.%s",
+  "\`NaN\` is an invalid value for the \`%s\` css style property.",
 ]
 `;

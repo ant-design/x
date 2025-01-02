@@ -1,6 +1,6 @@
 import React from 'react';
 import { fireEvent, render, renderHook, waitFakeTimer } from '../../../tests/utils';
-import useXAgent, { RequestFn } from '../../useXAgent';
+import useXAgent, { RequestFn } from '../../use-x-agent';
 import { MessageStatus, SimpleType, XChatConfig } from '../index';
 import useXChat from '../index';
 
