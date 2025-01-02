@@ -17,6 +17,8 @@ export interface TypingOption {
 
 type SemanticType = 'avatar' | 'content' | 'header' | 'footer';
 
+type BubbleContentType = React.ReactNode | object;
+
 export interface BubbleProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'content'> {
   prefixCls?: string;
   rootClassName?: string;
@@ -26,8 +28,8 @@ export interface BubbleProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 
   placement?: 'start' | 'end';
   loading?: boolean;
   typing?: boolean | TypingOption;
-  content?: React.ReactNode | object;
-  messageRender?: (content: string) => React.ReactNode;
+  content?: BubbleContentType;
+  messageRender?: (content: BubbleContentType) => React.ReactNode;
   loadingRender?: () => React.ReactNode;
   variant?: 'filled' | 'borderless' | 'outlined' | 'shadow';
   shape?: 'round' | 'corner';
