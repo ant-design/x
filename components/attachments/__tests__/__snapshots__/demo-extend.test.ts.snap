@@ -757,6 +757,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
           class="ant-segmented-item ant-segmented-item-selected"
         >
           <input
+            checked=""
             class="ant-segmented-item-input"
             type="radio"
           />
