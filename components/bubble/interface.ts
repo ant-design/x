@@ -15,7 +15,7 @@ export interface TypingOption {
   suffix?: React.ReactNode;
 }
 
-type SemanticType = 'avatar' | 'content' | 'header' | 'footer';
+type SemanticType = 'avatar' | 'content' | 'header' | 'footer' | 'extra';
 
 export interface BubbleProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'content'> {
   prefixCls?: string;
@@ -34,4 +34,5 @@ export interface BubbleProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 
   onTypingComplete?: VoidFunction;
   header?: React.ReactNode;
   footer?: React.ReactNode;
+  extra?: React.ReactNode;
 }
