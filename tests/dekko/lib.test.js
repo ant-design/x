@@ -1,5 +1,5 @@
-const $ = require('dekko');
-const chalk = require('chalk');
+import chalk from 'chalk';
+import $ from 'dekko';
 
 $('lib').isDirectory().hasFile('index.js').hasFile('index.d.ts');
 
