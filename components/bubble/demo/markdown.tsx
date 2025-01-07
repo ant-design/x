@@ -14,7 +14,7 @@ const text = `
 Link: [Ant Design X](https://x.ant.design)
 `.trim();
 
-const renderMarkdown: BubbleProps['messageRender'] = (content) => (
+const renderMarkdown: BubbleProps<string>['messageRender'] = (content) => (
   <Typography>
     {/* biome-ignore lint/security/noDangerouslySetInnerHtml: used in demo */}
     <div dangerouslySetInnerHTML={{ __html: md.render(content) }} />

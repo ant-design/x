@@ -6,7 +6,7 @@ import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 import useTypedEffect from './hooks/useTypedEffect';
 import useTypingConfig from './hooks/useTypingConfig';
-import type { BubbleProps } from './interface';
+import type { BubbleContentType, BubbleProps } from './interface';
 import Loading from './loading';
 import useStyle from './style';
 
@@ -213,10 +213,14 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
   );
 };
 
+type ForwardBubbleType = <T extends BubbleContentType = BubbleContentType>(
+  props: BubbleProps<T> & { ref?: React.Ref<BubbleRef> },
+) => React.ReactElement;
+
 const ForwardBubble = React.forwardRef(Bubble);
 
 if (process.env.NODE_ENV !== 'production') {
   ForwardBubble.displayName = 'Bubble';
 }
 
-export default ForwardBubble;
+export default ForwardBubble as ForwardBubbleType;
