@@ -1,18 +1,18 @@
-const $ = require('dekko');
-const chalk = require('chalk');
+import chalk from 'chalk';
+import $ from 'dekko';
 
 $('lib').isDirectory().hasFile('index.js').hasFile('index.d.ts');
 
 $('lib/*')
   .filter(
-    (filename) =>
+    (filename: string) =>
       !filename.endsWith('index.js') &&
       !filename.endsWith('index.d.ts') &&
       !filename.endsWith('.map'),
   )
   .isDirectory()
   .filter(
-    (filename) =>
+    (filename: string) =>
       !filename.endsWith('style') &&
       !filename.endsWith('_util') &&
       !filename.endsWith('locale') &&

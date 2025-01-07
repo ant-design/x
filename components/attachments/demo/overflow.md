@@ -1,7 +1,7 @@
 ## zh-CN
 
-修改占位信息。
+控制附件超出区域长度时的展示方式。
 
 ## en-US
 
-Modify placeholder information.
+Controls the layout of attachments when they exceed the area.
