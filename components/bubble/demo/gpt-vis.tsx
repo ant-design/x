@@ -20,9 +20,7 @@ Here’s a visualization of Haidilao's food delivery revenue from 2013 to 2022. 
 \`\`\`
 `;
 
-const RenderMarkdown: BubbleProps<string>['messageRender'] = (content) => (
-  <GPTVis>{content}</GPTVis>
-);
+const RenderMarkdown: BubbleProps['messageRender'] = (content) => <GPTVis>{content}</GPTVis>;
 
 const App = () => {
   const [rerenderKey, setRerenderKey] = React.useState(0);
