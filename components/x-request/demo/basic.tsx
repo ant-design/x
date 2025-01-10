@@ -1,6 +1,6 @@
 import { LoadingOutlined, TagsOutlined } from '@ant-design/icons';
 import { ThoughtChain, XRequest } from '@ant-design/x';
-import { Button, Descriptions, Space } from 'antd';
+import { Button, Descriptions, Splitter } from 'antd';
 import React from 'react';
 
 import type { ThoughtChainItem } from '@ant-design/x';
@@ -51,31 +51,35 @@ const App = () => {
   }
 
   return (
-    <Space align="start" size={16}>
-      <Button type="primary" disabled={status === 'pending'} onClick={request}>
-        Request - {BASE_URL}
-        {PATH}
-      </Button>
-      <ThoughtChain
-        items={[
-          {
-            title: 'Request Log',
-            status: status,
-            icon: status === 'pending' ? <LoadingOutlined /> : <TagsOutlined />,
-            description:
-              status === 'error' &&
-              exampleRequest.baseURL === BASE_URL + PATH &&
-              'Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.',
-            content: (
-              <Descriptions column={1}>
-                <Descriptions.Item label="Status">{status || '-'}</Descriptions.Item>
-                <Descriptions.Item label="Update Times">{lines.length}</Descriptions.Item>
-              </Descriptions>
-            ),
-          },
-        ]}
-      />
-    </Space>
+    <Splitter>
+      <Splitter.Panel>
+        <Button type="primary" disabled={status === 'pending'} onClick={request}>
+          Request - {BASE_URL}
+          {PATH}
+        </Button>
+      </Splitter.Panel>
+      <Splitter.Panel style={{ marginLeft: 16 }}>
+        <ThoughtChain
+          items={[
+            {
+              title: 'Request Log',
+              status: status,
+              icon: status === 'pending' ? <LoadingOutlined /> : <TagsOutlined />,
+              description:
+                status === 'error' &&
+                exampleRequest.baseURL === BASE_URL + PATH &&
+                'Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.',
+              content: (
+                <Descriptions column={1}>
+                  <Descriptions.Item label="Status">{status || '-'}</Descriptions.Item>
+                  <Descriptions.Item label="Update Times">{lines.length}</Descriptions.Item>
+                </Descriptions>
+              ),
+            },
+          ]}
+        />
+      </Splitter.Panel>
+    </Splitter>
   );
 };
 

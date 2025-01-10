@@ -162,14 +162,9 @@ const genFileCardStyle: GenerateStyle<AttachmentsToken> = (token) => {
 
       // ============================== Motion ===============================
       '&-motion': {
-        overflow: 'hidden',
         transition: ['opacity', 'width', 'margin', 'padding']
           .map((prop) => `${prop} ${token.motionDurationSlow}`)
           .join(','),
-
-        [`${cardCls}-remove`]: {
-          display: 'none !important',
-        },
 
         '&-appear-start': {
           width: 0,
