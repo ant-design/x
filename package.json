@@ -223,7 +223,7 @@
     "prismjs": "^1.29.0",
     "puppeteer": "^23.3.0",
     "qs": "^6.13.0",
-    "rc-drawer": "^7.2.0",
+    "rc-drawer": "^8.0.0",
     "rc-footer": "^0.6.8",
     "rc-resize-observer": "^1.4.0",
     "rc-virtual-list": "^3.14.5",
