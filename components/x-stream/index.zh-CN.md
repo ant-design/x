@@ -13,12 +13,12 @@ cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*OD9kTJOmGdsAAAAAAA
 coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*PxJISo5t2YgAAAAAAAAAAAAADgCCAQ/original
 ---
 
-## When To Use
+## 何时使用
 
 - 将 SSE 协议的 `ReadableStream` 转换为 `Record`
 - 将任何协议的 `ReadableStream` 解码并读取
 
-## Use
+## 使用说明
 
 常见的 `ReadableStream` 实例，如 `await fetch(...).body` 使用示例:
 
@@ -37,7 +37,7 @@ async function request() {
 }
 ```
 
-## Examples
+## 代码演示
 
 <code src="./demo/default-protocol.tsx">默认协议 - SSE</code> <code src="./demo/custom-protocol.tsx">自定义协议</code>
 
