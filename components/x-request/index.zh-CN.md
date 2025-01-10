@@ -13,11 +13,11 @@ cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*22A2Qqn7OrEAAAAAAA
 coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*lQydTrtLz9YAAAAAAAAAAAAADgCCAQ/original
 ---
 
-## When To Use
+## 何时使用
 
 - 向符合 OpenAI 标准的 LLM 发起请求。
 
-## Examples
+## 代码演示
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">基础</code>
