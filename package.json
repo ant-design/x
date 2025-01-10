@@ -113,7 +113,7 @@
     "@octokit/rest": "^21.0.2",
     "@petercatai/assistant": "^2.0.13",
     "@qixian.cs/github-contributors-list": "^2.0.2",
-    "@rc-component/father-plugin": "1.2.0-alpha.0",
+    "@rc-component/father-plugin": "2.0.1",
     "@rc-component/trigger": "^2.2.3",
     "@size-limit/file": "^11.1.5",
     "@stackblitz/sdk": "^1.11.0",
