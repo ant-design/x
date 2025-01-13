@@ -22,7 +22,7 @@ tag: vVERSION
 - 🐛 修复 `Attachment` 组件移除图标的样式问题。 [#460](https://github.com/ant-design/x/pull/460) 由 [@Rain120](https://github.com/Rain120), [@YumoImer](https://github.com/YumoImer) 提交
 - 🛠 重构 `BubbleProps`，支持 `ContentType` 类型参数。 [#403](https://github.com/ant-design/x/pull/403) 由 [@YumoImer](https://github.com/YumoImer) 提交
 - 🛠 开发环境和网站支持 React 19。[#432](https://github.com/ant-design/x/pull/432) 由 [@YumoImer](https://github.com/YumoImer) 提交
-- 📖 优化官网站点提升用户体验。 [#456](https://github.com/ant-design/x/pull/456), [#446](https://github.com/ant-design/x/pull/446), [#448](https://github.com/ant-design/x/pull/448), [#444](https://github.com/ant-design/x/pull/444), [#414](https://github.com/ant-design/x/pull/414), [#406](https://github.com/ant-design/x/pull/406), [#404](https://github.com/ant-design/x/pull/404) 由 [@wzc520pyfm](https://github.com/wzc520pyfm), [@YumoImer](https://github.com/YumoImer), [@Rain120](https://github.com/Rain120), [@afc163](https://github.com/afc163) 提交
+- 📖 优化官网站点提升用户体验。[#456](https://github.com/ant-design/x/pull/456), [#446](https://github.com/ant-design/x/pull/446), [#448](https://github.com/ant-design/x/pull/448), [#444](https://github.com/ant-design/x/pull/444), [#414](https://github.com/ant-design/x/pull/414), [#406](https://github.com/ant-design/x/pull/406), [#404](https://github.com/ant-design/x/pull/404) 由 [@wzc520pyfm](https://github.com/wzc520pyfm), [@YumoImer](https://github.com/YumoImer), [@Rain120](https://github.com/Rain120), [@afc163](https://github.com/afc163) 提交
 
 ## 1.0.4
 
