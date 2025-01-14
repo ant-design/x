@@ -8,7 +8,7 @@
 
 [![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] [![NPM version][npm-image]][npm-url]
 
-[![NPM downloads][download-image]][download-url] [![][bundlephobia-image]][bundlephobia-url] [![antd][antd-image]][antd-url]
+[![NPM downloads][download-image]][download-url] [![][bundlephobia-image]][bundlephobia-url] [![antd][antd-image]][antd-url] [![Follow zhihu][zhihu-image]][zhihu-url]
 
 [更新日志](./CHANGELOG.zh-US.md) · [报告一个 Bug][github-issues-bug-report] · [想新增特性？][github-issues-feature-request] · [English](./README.md) · 中文
 
@@ -26,6 +26,8 @@
 [github-issues-feature-request]: https://github.com/ant-design/x/issues/new?template=bug-feature-request.yml
 [antd-image]: https://img.shields.io/badge/-Ant%20Design-blue?labelColor=black&logo=antdesign&style=flat-square
 [antd-url]: https://ant.design
+[zhihu-image]: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*DfdxTbwMsUkAAAAAAAAAAAAADgCCAQ/original
+[zhihu-url]: https://www.zhihu.com/column/c_1564262000561106944
 
 </div>
 
