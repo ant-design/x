@@ -26,7 +26,7 @@
 [github-issues-feature-request]: https://github.com/ant-design/x/issues/new?template=bug-feature-request.yml
 [antd-image]: https://img.shields.io/badge/-Ant%20Design-blue?labelColor=black&logo=antdesign&style=flat-square
 [antd-url]: https://ant.design
-[zhihu-image]: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*DfdxTbwMsUkAAAAAAAAAAAAADgCCAQ/original
+[zhihu-image]: https://img.shields.io/badge/-Ant%20Design-white?logo=zhihu
 [zhihu-url]: https://www.zhihu.com/column/c_1564262000561106944
 
 </div>
