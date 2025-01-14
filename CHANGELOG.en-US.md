@@ -20,7 +20,7 @@ tag: vVERSION
 
 `2025-01-13`
 
-- 🐛 Fix `Attachment` remove icon style. [#460](https://github.com/ant-design/x/pull/460) by [@Rain120](https://github.com/Rain120), [@YumoImer](https://github.com/YumoImer)
+- 🐛 Fix `Attachment` remove icon style. [#460](https://github.com/ant-design/x/pull/460) by [@Rain120](https://github.com/Rain120)
 - 🛠 Refactor `BubbleProps` to support `ContentType` type argument. [#403](https://github.com/ant-design/x/pull/403) by [@YumoImer](https://github.com/YumoImer)
 - 🛠 Dev and site support React 19. [#432](https://github.com/ant-design/x/pull/432) by [@YumoImer](https://github.com/YumoImer)
 - 📖 Enhance the official website to improve user experience. [#456](https://github.com/ant-design/x/pull/456), [#446](https://github.com/ant-design/x/pull/446), [#448](https://github.com/ant-design/x/pull/448), [#444](https://github.com/ant-design/x/pull/444), [#414](https://github.com/ant-design/x/pull/414), [#406](https://github.com/ant-design/x/pull/406), [#404](https://github.com/ant-design/x/pull/404) by [@wzc520pyfm](https://github.com/wzc520pyfm), [@YumoImer](https://github.com/YumoImer), [@Rain120](https://github.com/Rain120), [@afc163](https://github.com/afc163)
