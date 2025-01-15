@@ -16,7 +16,7 @@ const useTypedEffect = (
   typingInterval: number,
 ): [typedContent: React.ReactNode | object, isTyping: boolean] => {
 
-  const prevContentRef = React.useRef<React.ReactNode | object>();
+  const prevContentRef = React.useRef<React.ReactNode | object>('');
 
   const [typingIndex, setTypingIndex] = React.useState<number>(1);
 
