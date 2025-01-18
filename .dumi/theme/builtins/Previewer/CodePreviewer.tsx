@@ -137,7 +137,7 @@ const CodePreviewer: React.FC<AntdPreviewerProps> = (props) => {
   const { theme } = useContext<SiteContextProps>(SiteContext);
 
   const { hash, pathname, search } = location;
-  const docsOnlineUrl = `https://ant.design${pathname}${search}#${asset.id}`;
+  const docsOnlineUrl = `https://ant-design-x.antgroup.com${pathname}${search}#${asset.id}`;
 
   const [showOnlineUrl, setShowOnlineUrl] = useState<boolean>(false);
 
