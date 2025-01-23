@@ -53,6 +53,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 | onSubmit | 点击发送按钮的回调 | (message: string) => void | - | - |
 | onChange | 输入框值改变的回调 | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`> ) => void | - | - |
 | onCancel | 点击取消按钮的回调 | () => void | - | - |
+| onPasteFile | 黏贴文件的回调 | (file: File) => void | - | - |
 
 ```typescript | pure
 type SpeechConfig = {

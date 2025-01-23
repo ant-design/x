@@ -52,6 +52,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | onSubmit | Callback when click send button | (message: string) => void | - | - |
 | onChange | Callback when input value changes | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`> ) => void | - | - |
 | onCancel | Callback when click cancel button | () => void | - | - |
+| onPasteFile | Callback when paste file | (file: File) => void | - | - |
 
 ```typescript | pure
 type SpeechConfig = {
