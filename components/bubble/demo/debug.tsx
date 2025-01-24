@@ -1,5 +1,6 @@
+import { UserOutlined } from '@ant-design/icons';
 import { Bubble, type BubbleProps } from '@ant-design/x';
-import { Divider } from 'antd';
+import { Button, Divider, Flex } from 'antd';
 import { createStyles } from 'antd-style';
 import React from 'react';
 
@@ -33,6 +34,9 @@ const useStyle = createStyles(({ css, token }) => ({
 
 const App = () => {
   const { styles } = useStyle();
+  const [count, setCount] = React.useState(6);
+  const [markedIndex, setMarkedIndex] = React.useState<number | null>(null);
+  const listRef = React.useRef<React.ElementRef<typeof Bubble.List>>(null);
 
   const customizationProps: BubbleProps = {
     header: 'header',
@@ -73,6 +77,39 @@ const App = () => {
       content: <div className={styles.fixedWidthBlock}>fixed width content</div>,
       variant: 'shadow',
     },
+  };
+
+  const roles = (bubbleData: Bubble.BubbleDataType, index: number) => {
+    const commonProps = {
+      avatar: customizationProps.avatar,
+      footer: <span># {index}</span>,
+      header: bubbleData.role,
+      styles: {
+        content: {
+          cursor: 'pointer',
+          background: markedIndex === index ? '#e6f4ff' : undefined,
+        },
+      },
+      onClick: () => setMarkedIndex((current) => (current === index ? null : index)),
+    };
+    switch (bubbleData.role) {
+      case 'ai':
+        return {
+          placement: 'start',
+          avatar: customizationProps.avatar,
+          typing: { step: 5, interval: 20 },
+          style: {
+            maxWidth: 600,
+          },
+          ...commonProps,
+        };
+      case 'user':
+        return {
+          placement: 'end',
+          avatar: customizationProps.avatar,
+          ...commonProps,
+        };
+    }
   };
 
   return (
@@ -119,6 +156,51 @@ const App = () => {
             placement: 'end',
           },
         ]}
+      />
+      <Divider>List with roles</Divider>
+      <Flex gap="small" style={{ alignSelf: 'flex-end' }}>
+        <Button
+          onClick={() => {
+            setCount((i) => i + 1);
+          }}
+        >
+          Add Bubble
+        </Button>
+
+        <Button
+          onClick={() => {
+            listRef.current?.scrollTo({ key: 0, block: 'nearest' });
+          }}
+        >
+          Scroll To First
+        </Button>
+
+        <Button
+          disabled={markedIndex === null}
+          onClick={() =>
+            markedIndex !== null &&
+            listRef.current?.scrollTo({ key: markedIndex, block: 'nearest' })
+          }
+        >
+          Scroll To Marked index: {markedIndex}
+        </Button>
+      </Flex>
+      <Bubble.List
+        ref={listRef}
+        style={{ maxHeight: 300 }}
+        roles={roles}
+        items={Array.from({ length: count }).map((_, i) => {
+          const isAI = !!(i % 2);
+          const content = isAI ? bubbleDict.longString.content : bubbleDict.block.content;
+          const variant = isAI ? bubbleDict.longString.variant : bubbleDict.block.variant;
+
+          return {
+            key: i,
+            role: isAI ? 'ai' : 'user',
+            content,
+            variant,
+          };
+        })}
       />
     </div>
   );
