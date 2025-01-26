@@ -1,8 +1,8 @@
-import { UserOutlined } from '@ant-design/icons';
 import { Bubble, type BubbleProps } from '@ant-design/x';
 import { Button, Divider, Flex } from 'antd';
 import { createStyles } from 'antd-style';
 import React from 'react';
+import type { BubbleDataType } from '../BubbleList';
 
 const useStyle = createStyles(({ css, token }) => ({
   container: css`
@@ -79,7 +79,7 @@ const App = () => {
     },
   };
 
-  const roles = (bubbleData: Bubble.BubbleDataType, index: number) => {
+  const roles = (bubbleData: BubbleDataType, index: number) => {
     const commonProps = {
       avatar: customizationProps.avatar,
       footer: <span># {index}</span>,
@@ -95,8 +95,7 @@ const App = () => {
     switch (bubbleData.role) {
       case 'ai':
         return {
-          placement: 'start',
-          avatar: customizationProps.avatar,
+          placement: 'start' as const,
           typing: { step: 5, interval: 20 },
           style: {
             maxWidth: 600,
@@ -105,10 +104,11 @@ const App = () => {
         };
       case 'user':
         return {
-          placement: 'end',
-          avatar: customizationProps.avatar,
+          placement: 'end' as const,
           ...commonProps,
         };
+      default:
+        return commonProps;
     }
   };
 
