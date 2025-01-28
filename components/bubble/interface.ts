@@ -16,7 +16,7 @@ export interface TypingOption {
   suffix?: React.ReactNode;
 }
 
-type SemanticType = 'avatar' | 'content' | 'header' | 'footer';
+type SemanticType = 'avatar' | 'content' | 'header' | 'footer' | 'extra';
 
 export type BubbleContentType = React.ReactNode | AnyObject;
 
@@ -38,4 +38,5 @@ export interface BubbleProps<ContentType extends BubbleContentType = string>
   onTypingComplete?: VoidFunction;
   header?: React.ReactNode;
   footer?: React.ReactNode;
+  extra?: React.ReactNode;
 }
