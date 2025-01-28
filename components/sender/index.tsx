@@ -53,7 +53,7 @@ export interface SenderProps extends Pick<TextareaProps, 'placeholder' | 'onKeyP
   onCancel?: VoidFunction;
   onKeyDown?: React.KeyboardEventHandler<any>;
   onPaste?: React.ClipboardEventHandler<HTMLElement>;
-  onPasteFile?: (file: File) => void;
+  onPasteFile?: (firstFile: File, files: FileList) => void;
   components?: SenderComponents;
   styles?: {
     prefix?: React.CSSProperties;
@@ -232,10 +232,10 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
 
   // ============================ Paste =============================
   const onInternalPaste: React.ClipboardEventHandler<HTMLElement> = (e) => {
-    // Get file
-    const file = e.clipboardData?.files[0];
-    if (file && onPasteFile) {
-      onPasteFile(file);
+    // Get files
+    const files = e.clipboardData?.files;
+    if (files.length && onPasteFile) {
+      onPasteFile(files[0], files);
       e.preventDefault();
     }
 
