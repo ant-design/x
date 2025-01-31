@@ -19,6 +19,7 @@ Often used when chatting.
 
 <!-- prettier-ignore -->
 <code src="./demo/debug.tsx" debug>debug</code>
+<code src="./demo/debug-list.tsx" debug>debug list</code>
 <code src="./demo/basic.tsx">Basic</code>
 <code src="./demo/avatar-and-placement.tsx">Placement and avatar</code>
 <code src="./demo/header-and-footer.tsx">Header and footer</code>
