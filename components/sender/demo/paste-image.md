@@ -1,7 +1,7 @@
 ## zh-CN
 
-配合 Attachments 进行黏贴文件上传。
+使用 `onPasteFile` 获取黏贴的文件，配合 Attachments 进行文件上传。
 
 ## en-US
 
-Paste image to upload files with Attachments.
+Use `onPasteFile` to get pasted files, and upload them with Attachments.
