@@ -58,13 +58,15 @@ const App = () => {
   return (
     <Flex vertical gap="small">
       <Flex gap="small" justify="space-between">
-        <Switch
-          checked={useRolesAsFunction}
-          onChange={(checked) => setUseRolesAsFunction(checked)}
-          checkedChildren="Function"
-          unCheckedChildren="Object"
-          style={{ alignSelf: 'center' }}
-        />
+        <Flex gap="large" align="center">
+          Use roles as:
+          <Switch
+            checked={useRolesAsFunction}
+            onChange={(checked) => setUseRolesAsFunction(checked)}
+            checkedChildren="Function"
+            unCheckedChildren="Object"
+          />
+        </Flex>
 
         <Flex gap="small">
           <Button
