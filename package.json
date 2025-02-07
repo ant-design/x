@@ -105,7 +105,7 @@
     "@ctrl/tinycolor": "^4.1.0",
     "@emotion/react": "^11.13.5",
     "@emotion/server": "^11.11.0",
-    "@happy-dom/jest-environment": "^16.1.0",
+    "@happy-dom/jest-environment": "^17.0.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.3.1",
     "@madccc/duplicate-package-checker-webpack-plugin": "^1.0.0",
     "@microflash/rehype-figure": "^2.1.1",
