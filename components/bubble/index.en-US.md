@@ -25,6 +25,7 @@ Often used when chatting.
 <code src="./demo/loading.tsx">Loading</code>
 <code src="./demo/typing.tsx">Typing effect</code>
 <code src="./demo/markdown.tsx">Content render</code>
+<code src="./demo/stream_markdown.tsx">md-editor render</code>
 <code src="./demo/variant.tsx">Variant</code>
 <code src="./demo/shape.tsx">Shape</code>
 <code src="./demo/list.tsx">Bubble List</code>
