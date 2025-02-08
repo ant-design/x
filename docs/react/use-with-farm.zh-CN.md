@@ -32,7 +32,7 @@ $ npm run dev
 
 现在从 yarn 或 npm 或 pnpm 或 bun 安装并引入 @ant-design/x。
 
-<InstallDependencies npm='$ npm install @ant-design/x --save' yarn='$ yarn @ant-design/x antd' pnpm='$ pnpm install @ant-design/x --save' bun='$ bun add @ant-design/x'></InstallDependencies>
+<InstallDependencies npm='$ npm install @ant-design/x --save' yarn='$ yarn add @ant-design/x' pnpm='$ pnpm install @ant-design/x --save' bun='$ bun add @ant-design/x'></InstallDependencies>
 
 修改 `src/main.tsx`，引入 antd 的 Bubble 组件。
 

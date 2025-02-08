@@ -48,7 +48,7 @@ export function Main() {
 }
 ```
 
-OK, you should now see a blue primary button displayed on the page. Next you can choose any components of `@ant-design/x` to develop your application. Visit other workflows of `Farm` at its [Official documentation](https://www.farmfe.org).
+OK, you should now see the Bubble component displayed on the page. Next you can choose any components of `@ant-design/x` to develop your application. Visit other workflows of `Farm` at its [Official documentation](https://www.farmfe.org).
 
 ### Customize Theme
 
@@ -67,4 +67,4 @@ export function Main() {
 }
 ```
 
-We are successfully running the `@ant-design/x` components using Rsbuild now, let’s start build your own application!
+We are successfully running the `@ant-design/x` components using Farm now, let’s start build your own application!
