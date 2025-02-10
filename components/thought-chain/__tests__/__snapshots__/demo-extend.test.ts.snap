@@ -1403,7 +1403,6 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
         >
           <input
             class="ant-radio-button-input"
-            name="test-id"
             type="radio"
             value="large"
           />
@@ -1424,7 +1423,6 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
           <input
             checked=""
             class="ant-radio-button-input"
-            name="test-id"
             type="radio"
             value="middle"
           />
@@ -1444,7 +1442,6 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
         >
           <input
             class="ant-radio-button-input"
-            name="test-id"
             type="radio"
             value="small"
           />
