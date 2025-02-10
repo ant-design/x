@@ -44,9 +44,7 @@ const rolesAsFunction = (bubbleData: BubbleProps, index: number) => {
         messageRender: RenderIndex,
       };
     default:
-      return {
-        messageRender: RenderIndex,
-      };
+      return { messageRender: RenderIndex };
   }
 };
 
@@ -58,13 +56,15 @@ const App = () => {
   return (
     <Flex vertical gap="small">
       <Flex gap="small" justify="space-between">
-        <Switch
-          checked={useRolesAsFunction}
-          onChange={(checked) => setUseRolesAsFunction(checked)}
-          checkedChildren="Function"
-          unCheckedChildren="Object"
-          style={{ alignSelf: 'center' }}
-        />
+        <Flex gap="large" align="center">
+          Use roles as:
+          <Switch
+            checked={useRolesAsFunction}
+            onChange={(checked) => setUseRolesAsFunction(checked)}
+            checkedChildren="Function"
+            unCheckedChildren="Object"
+          />
+        </Flex>
 
         <Flex gap="small">
           <Button
@@ -93,11 +93,7 @@ const App = () => {
           const isAI = !!(i % 2);
           const content = isAI ? 'Mock AI content. '.repeat(20) : 'Mock user content.';
 
-          return {
-            key: i,
-            role: isAI ? 'ai' : 'user',
-            content,
-          };
+          return { key: i, role: isAI ? 'ai' : 'user', content };
         })}
       />
     </Flex>
