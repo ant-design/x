@@ -233,7 +233,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   // ============================ Paste =============================
   const onInternalPaste: React.ClipboardEventHandler<HTMLElement> = (e) => {
     // Get files
-    const files = e.clipboardData?.files as FileList | undefined;
+    const files = e.clipboardData?.files;
     if (files?.length && onPasteFile) {
       onPasteFile(files[0], files);
       e.preventDefault();
