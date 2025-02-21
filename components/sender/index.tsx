@@ -33,6 +33,7 @@ export type ActionsRender = (
       SendButton: React.ComponentType<ButtonProps>;
       ClearButton: React.ComponentType<ButtonProps>;
       LoadingButton: React.ComponentType<ButtonProps>;
+      SpeechButton: React.ComponentType<ButtonProps>;
     };
   },
 ) => React.ReactNode;
@@ -270,6 +271,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
         SendButton,
         ClearButton,
         LoadingButton,
+        SpeechButton,
       },
     });
   } else if (actions) {
