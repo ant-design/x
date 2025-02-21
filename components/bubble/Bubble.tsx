@@ -40,6 +40,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     onTypingComplete,
     header,
     footer,
+    extra,
     ...otherHtmlProps
   } = props;
 
@@ -139,6 +140,21 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
       )}
     >
       {contentNode}
+      {extra ? (
+        <div
+          className={classnames(
+            `${prefixCls}-extra`,
+            contextConfig.classNames.extra,
+            classNames.extra,
+          )}
+          style={{
+            ...contextConfig.styles.extra,
+            ...styles.extra,
+          }}
+        >
+          {extra}
+        </div>
+      ) : null}
     </div>
   );
 
