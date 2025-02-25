@@ -103,7 +103,7 @@ const SemanticPreview: React.FC<SemanticPreviewProps> = (props) => {
   // ======================== Hover =========================
   const containerRef = React.useRef<HTMLDivElement>(null);
 
-  const timerRef = React.useRef<ReturnType<typeof setTimeout>>();
+  const timerRef = React.useRef<ReturnType<typeof setTimeout>>(null);
 
   const [positionMotion, setPositionMotion] = React.useState<boolean>(false);
   const [hoverSemantic, setHoverSemantic] = React.useState<string | null>(null);

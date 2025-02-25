@@ -1421,6 +1421,7 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
           class="ant-radio-button ant-radio-button-checked"
         >
           <input
+            checked=""
             class="ant-radio-button-input"
             type="radio"
             value="middle"

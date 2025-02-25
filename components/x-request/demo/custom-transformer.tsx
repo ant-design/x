@@ -1,5 +1,5 @@
 import { ThoughtChain, XRequest } from '@ant-design/x';
-import { Button, Space } from 'antd';
+import { Button, Splitter } from 'antd';
 import React from 'react';
 
 import { TagsOutlined } from '@ant-design/icons';
@@ -81,26 +81,30 @@ const App = () => {
   }
 
   return (
-    <Space align="start" size={16}>
-      <Button type="primary" disabled={status === 'pending'} onClick={request}>
-        Request - {BASE_URL}
-        {PATH}
-      </Button>
-      <ThoughtChain
-        items={[
-          {
-            title: 'Mock Custom Protocol - Log',
-            status: status,
-            icon: <TagsOutlined />,
-            content: (
-              <pre style={{ overflow: 'scroll' }}>
-                <code>{lines.join(ND_JSON_SEPARATOR)}</code>
-              </pre>
-            ),
-          },
-        ]}
-      />
-    </Space>
+    <Splitter>
+      <Splitter.Panel>
+        <Button type="primary" disabled={status === 'pending'} onClick={request}>
+          Request - {BASE_URL}
+          {PATH}
+        </Button>
+      </Splitter.Panel>
+      <Splitter.Panel style={{ marginLeft: 16 }}>
+        <ThoughtChain
+          items={[
+            {
+              title: 'Mock Custom Protocol - Log',
+              status: status,
+              icon: <TagsOutlined />,
+              content: (
+                <pre style={{ overflow: 'scroll' }}>
+                  <code>{lines.join(ND_JSON_SEPARATOR)}</code>
+                </pre>
+              ),
+            },
+          ]}
+        />
+      </Splitter.Panel>
+    </Splitter>
   );
 };
 

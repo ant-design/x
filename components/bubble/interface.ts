@@ -1,4 +1,5 @@
 import type { AvatarProps } from 'antd';
+import type { AnyObject } from '../_util/type';
 
 export interface TypingOption {
   /**
@@ -17,7 +18,10 @@ export interface TypingOption {
 
 type SemanticType = 'avatar' | 'content' | 'header' | 'footer';
 
-export interface BubbleProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'content'> {
+export type BubbleContentType = React.ReactNode | AnyObject;
+
+export interface BubbleProps<ContentType extends BubbleContentType = string>
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'content'> {
   prefixCls?: string;
   rootClassName?: string;
   styles?: Partial<Record<SemanticType, React.CSSProperties>>;
@@ -26,8 +30,8 @@ export interface BubbleProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 
   placement?: 'start' | 'end';
   loading?: boolean;
   typing?: boolean | TypingOption;
-  content?: React.ReactNode | object;
-  messageRender?: (content: string) => React.ReactNode;
+  content?: BubbleContentType;
+  messageRender?: (content: ContentType) => React.ReactNode;
   loadingRender?: () => React.ReactNode;
   variant?: 'filled' | 'borderless' | 'outlined' | 'shadow';
   shape?: 'round' | 'corner';

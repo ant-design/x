@@ -1,5 +1,5 @@
-const $ = require('dekko');
-const chalk = require('chalk');
+import chalk from 'chalk';
+import $ from 'dekko';
 
 $('dist').isDirectory().hasFile('antdx.js').hasFile('antdx.min.js').hasFile('antdx.min.js.map');
 

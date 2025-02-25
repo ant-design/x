@@ -25,7 +25,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/header.tsx">展开面板</code>
 <code src="./demo/header-fixed.tsx">引用</code>
 <code src="./demo/send-style.tsx">调整样式</code>
-<code src="./demo/paste-image.tsx">黏贴图片</code>
+<code src="./demo/paste-image.tsx">黏贴文件</code>
 <code src="./demo/focus.tsx">聚焦</code>
 
 ## API
@@ -53,6 +53,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 | onSubmit | 点击发送按钮的回调 | (message: string) => void | - | - |
 | onChange | 输入框值改变的回调 | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`> ) => void | - | - |
 | onCancel | 点击取消按钮的回调 | () => void | - | - |
+| onPasteFile | 黏贴文件的回调 | (firstFile: File, files: FileList) => void | - | - |
 
 ```typescript | pure
 type SpeechConfig = {

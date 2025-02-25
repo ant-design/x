@@ -138,4 +138,79 @@ describe('Sender Component', () => {
     const { container } = render(<Sender readOnly />);
     expect(container.querySelector('textarea')).toHaveAttribute('readonly');
   });
+
+  describe('paste events', () => {
+    it('onPaste callback', () => {
+      const onPaste = jest.fn();
+      const { container } = render(<Sender onPaste={onPaste} />);
+
+      const textarea = container.querySelector('textarea')!;
+      fireEvent.paste(textarea);
+      expect(onPaste).toHaveBeenCalled();
+      const eventArg = onPaste.mock.calls[0][0];
+      expect(eventArg.type).toBe('paste');
+      expect(eventArg.target).toBe(textarea);
+    });
+
+    it('onPasteFile callback with files', () => {
+      const onPasteFile = jest.fn();
+      const { container } = render(<Sender onPasteFile={onPasteFile} />);
+
+      const file = new File(['test'], 'test.png', { type: 'image/png' });
+      const fileList = {
+        0: file,
+        length: 1,
+        item: (idx: number) => (idx === 0 ? file : null),
+      };
+
+      const textarea = container.querySelector('textarea')!;
+      fireEvent.paste(textarea, {
+        clipboardData: {
+          files: fileList,
+          getData: () => '',
+        },
+      });
+
+      expect(onPasteFile).toHaveBeenCalledWith(file, fileList);
+    });
+
+    it('should not trigger onPasteFile when no files', () => {
+      const onPasteFile = jest.fn();
+      const { container } = render(<Sender onPasteFile={onPasteFile} />);
+
+      const textarea = container.querySelector('textarea')!;
+      fireEvent.paste(textarea, {
+        clipboardData: {
+          files: { length: 0 },
+          getData: () => '',
+        },
+      });
+
+      expect(onPasteFile).not.toHaveBeenCalled();
+    });
+
+    it('should handle multiple files paste', () => {
+      const onPasteFile = jest.fn();
+      const { container } = render(<Sender onPasteFile={onPasteFile} />);
+
+      const file1 = new File(['test1'], 'test1.png', { type: 'image/png' });
+      const file2 = new File(['test2'], 'test2.jpg', { type: 'image/jpeg' });
+      const fileList = {
+        0: file1,
+        1: file2,
+        length: 2,
+        item: (idx: number) => (idx === 0 ? file1 : idx === 1 ? file2 : null),
+      };
+
+      const textarea = container.querySelector('textarea')!;
+      fireEvent.paste(textarea, {
+        clipboardData: {
+          files: fileList,
+          getData: () => '',
+        },
+      });
+
+      expect(onPasteFile).toHaveBeenCalledWith(file1, fileList);
+    });
+  });
 });
