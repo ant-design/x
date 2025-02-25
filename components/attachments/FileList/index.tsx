@@ -77,7 +77,7 @@ export default function FileList(props: FileListProps) {
 
   React.useEffect(() => {
     checkPing();
-  }, [overflow, items]);
+  }, [overflow, items.length]);
 
   const onScrollOffset = (offset: -1 | 1) => {
     const containerEle = containerRef.current;
