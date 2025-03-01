@@ -980,6 +980,7 @@ exports[`renders components/thought-chain/demo/size.tsx correctly 1`] = `
         >
           <input
             class="ant-radio-button-input"
+            name="test-id"
             type="radio"
             value="large"
           />
@@ -1000,6 +1001,7 @@ exports[`renders components/thought-chain/demo/size.tsx correctly 1`] = `
           <input
             checked=""
             class="ant-radio-button-input"
+            name="test-id"
             type="radio"
             value="middle"
           />
@@ -1019,6 +1021,7 @@ exports[`renders components/thought-chain/demo/size.tsx correctly 1`] = `
         >
           <input
             class="ant-radio-button-input"
+            name="test-id"
             type="radio"
             value="small"
           />
