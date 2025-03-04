@@ -260,6 +260,8 @@ export default Demo;
 
 Welcome to contribute!
 
+Vue Implementation: [Ant Design X Vue](https://github.com/wzc520pyfm/ant-design-x-vue)
+
 ## Companies using antdx
 
 Ant Design X is widely used in AI-driven user interfaces within Ant Group. If your company and products use Ant Design X, feel free to leave a comment [here](https://github.com/ant-design/x/issues/126).
