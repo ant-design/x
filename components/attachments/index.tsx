@@ -65,6 +65,7 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
     getDropContainer,
     placeholder,
     onChange,
+    onRemove,
     overflow,
     disabled,
     classNames = {},
@@ -124,14 +125,20 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
     onChange: triggerChange,
   };
 
-  const onItemRemove = (item: Attachment) => {
-    const newFileList = fileList.filter((fileItem) => fileItem.uid !== item.uid);
-    triggerChange({
-      file: item,
-      fileList: newFileList,
-    });
-  };
+  const onItemRemove = (item: Attachment) =>
+    Promise.resolve(typeof onRemove === 'function' ? onRemove(item) : onRemove).then((ret) => {
+      // Prevent removing file
+      if (ret === false) {
+        return;
+      }
 
+      const newFileList = fileList.filter((fileItem) => fileItem.uid !== item.uid);
+
+      triggerChange({
+        file: { ...item, status: 'removed' },
+        fileList: newFileList,
+      });
+    });
   // ============================ Render ============================
   let renderChildren: React.ReactElement;
 
