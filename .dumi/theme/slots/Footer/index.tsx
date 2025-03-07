@@ -243,12 +243,12 @@ const Footer: React.FC = () => {
       col2.items.push({
         icon: <UsergroupAddOutlined />,
         title: <FormattedMessage id="app.footer.work_with_us" />,
-        url: getLink('/docs/resources', {
+        url: `https://ant.design${getLink('/docs/resources', {
           cn: '加入我们',
           en: 'JoinUs',
-        }),
-        LinkComponent: Link,
-      } as unknown as (typeof col2)['items'][number]);
+        })}`,
+        openExternal: true,
+      });
     }
 
     const col3 = {
