@@ -1039,6 +1039,7 @@ exports[`renders components/sender/demo/send-style.tsx extend context correctly 
           class="ant-sender-actions-list"
         >
           <button
+            aria-describedby="test-id"
             class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
             style="border-radius: 12px;"
             type="button"
@@ -1080,6 +1081,7 @@ exports[`renders components/sender/demo/send-style.tsx extend context correctly 
             >
               <div
                 class="ant-tooltip-inner"
+                id="test-id"
                 role="tooltip"
               >
                 Send ↵
@@ -1106,6 +1108,7 @@ exports[`renders components/sender/demo/send-style.tsx extend context correctly 
           class="ant-sender-actions-list"
         >
           <button
+            aria-describedby="test-id"
             class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn"
             type="button"
           >
@@ -1149,6 +1152,7 @@ exports[`renders components/sender/demo/send-style.tsx extend context correctly 
             >
               <div
                 class="ant-tooltip-inner"
+                id="test-id"
                 role="tooltip"
               >
                 Send ↵

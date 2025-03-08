@@ -442,7 +442,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
       class="ant-bubble-content ant-bubble-content-outlined ant-bubble-content-round"
     >
       <div
-        class="acss-8wqn66"
+        class="acss-xvmduq"
       >
         block block block block block block block block block block block block block block block block block block block block block block block block block
       </div>
@@ -455,7 +455,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
       class="ant-bubble-content ant-bubble-content-shadow"
     >
       <div
-        class="acss-13qb3y4"
+        class="acss-56hdzn"
       >
         fixed width content
       </div>
@@ -496,7 +496,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
       class="ant-bubble-content ant-bubble-content-outlined ant-bubble-content-round"
     >
       <div
-        class="acss-8wqn66"
+        class="acss-xvmduq"
       >
         block block block block block block block block block block block block block block block block block block block block block block block block block
       </div>
@@ -509,7 +509,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
       class="ant-bubble-content ant-bubble-content-shadow"
     >
       <div
-        class="acss-13qb3y4"
+        class="acss-56hdzn"
       >
         fixed width content
       </div>
@@ -529,7 +529,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
     class="ant-bubble ant-bubble-start"
   >
     <div
-      class="ant-bubble-avatar acss-8wqn66"
+      class="ant-bubble-avatar acss-xvmduq"
     >
       <span
         class="ant-avatar ant-avatar-circle ant-avatar-image"
@@ -543,7 +543,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
       class="ant-bubble-content-wrapper"
     >
       <div
-        class="ant-bubble-header acss-8wqn66"
+        class="ant-bubble-header acss-xvmduq"
       >
         header
       </div>
@@ -553,7 +553,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
         string bubble
       </div>
       <div
-        class="ant-bubble-footer acss-8wqn66"
+        class="ant-bubble-footer acss-xvmduq"
       >
         <div>
           footer
@@ -565,7 +565,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
     class="ant-bubble ant-bubble-start"
   >
     <div
-      class="ant-bubble-avatar acss-8wqn66"
+      class="ant-bubble-avatar acss-xvmduq"
     >
       <span
         class="ant-avatar ant-avatar-circle ant-avatar-image"
@@ -579,7 +579,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
       class="ant-bubble-content-wrapper"
     >
       <div
-        class="ant-bubble-header acss-8wqn66"
+        class="ant-bubble-header acss-xvmduq"
       >
         header
       </div>
@@ -589,7 +589,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
         longgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
       </div>
       <div
-        class="ant-bubble-footer acss-8wqn66"
+        class="ant-bubble-footer acss-xvmduq"
       >
         <div>
           footer
@@ -601,7 +601,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
     class="ant-bubble ant-bubble-start"
   >
     <div
-      class="ant-bubble-avatar acss-8wqn66"
+      class="ant-bubble-avatar acss-xvmduq"
     >
       <span
         class="ant-avatar ant-avatar-circle ant-avatar-image"
@@ -615,7 +615,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
       class="ant-bubble-content-wrapper"
     >
       <div
-        class="ant-bubble-header acss-8wqn66"
+        class="ant-bubble-header acss-xvmduq"
       >
         header
       </div>
@@ -623,13 +623,13 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
         class="ant-bubble-content ant-bubble-content-outlined ant-bubble-content-round acss-c2h5kd"
       >
         <div
-          class="acss-8wqn66"
+          class="acss-xvmduq"
         >
           block block block block block block block block block block block block block block block block block block block block block block block block block
         </div>
       </div>
       <div
-        class="ant-bubble-footer acss-8wqn66"
+        class="ant-bubble-footer acss-xvmduq"
       >
         <div>
           footer
@@ -641,7 +641,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
     class="ant-bubble ant-bubble-start"
   >
     <div
-      class="ant-bubble-avatar acss-8wqn66"
+      class="ant-bubble-avatar acss-xvmduq"
     >
       <span
         class="ant-avatar ant-avatar-circle ant-avatar-image"
@@ -655,7 +655,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
       class="ant-bubble-content-wrapper"
     >
       <div
-        class="ant-bubble-header acss-8wqn66"
+        class="ant-bubble-header acss-xvmduq"
       >
         header
       </div>
@@ -663,13 +663,13 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
         class="ant-bubble-content ant-bubble-content-shadow acss-c2h5kd"
       >
         <div
-          class="acss-13qb3y4"
+          class="acss-56hdzn"
         >
           fixed width content
         </div>
       </div>
       <div
-        class="ant-bubble-footer acss-8wqn66"
+        class="ant-bubble-footer acss-xvmduq"
       >
         <div>
           footer
@@ -691,7 +691,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
     class="ant-bubble ant-bubble-end"
   >
     <div
-      class="ant-bubble-avatar acss-8wqn66"
+      class="ant-bubble-avatar acss-xvmduq"
     >
       <span
         class="ant-avatar ant-avatar-circle ant-avatar-image"
@@ -705,7 +705,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
       class="ant-bubble-content-wrapper"
     >
       <div
-        class="ant-bubble-header acss-8wqn66"
+        class="ant-bubble-header acss-xvmduq"
       >
         header
       </div>
@@ -715,7 +715,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
         string bubble
       </div>
       <div
-        class="ant-bubble-footer acss-8wqn66"
+        class="ant-bubble-footer acss-xvmduq"
       >
         <div>
           footer
@@ -727,7 +727,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
     class="ant-bubble ant-bubble-end"
   >
     <div
-      class="ant-bubble-avatar acss-8wqn66"
+      class="ant-bubble-avatar acss-xvmduq"
     >
       <span
         class="ant-avatar ant-avatar-circle ant-avatar-image"
@@ -741,7 +741,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
       class="ant-bubble-content-wrapper"
     >
       <div
-        class="ant-bubble-header acss-8wqn66"
+        class="ant-bubble-header acss-xvmduq"
       >
         header
       </div>
@@ -751,7 +751,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
         longgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
       </div>
       <div
-        class="ant-bubble-footer acss-8wqn66"
+        class="ant-bubble-footer acss-xvmduq"
       >
         <div>
           footer
@@ -763,7 +763,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
     class="ant-bubble ant-bubble-end"
   >
     <div
-      class="ant-bubble-avatar acss-8wqn66"
+      class="ant-bubble-avatar acss-xvmduq"
     >
       <span
         class="ant-avatar ant-avatar-circle ant-avatar-image"
@@ -777,7 +777,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
       class="ant-bubble-content-wrapper"
     >
       <div
-        class="ant-bubble-header acss-8wqn66"
+        class="ant-bubble-header acss-xvmduq"
       >
         header
       </div>
@@ -785,13 +785,13 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
         class="ant-bubble-content ant-bubble-content-outlined ant-bubble-content-round acss-c2h5kd"
       >
         <div
-          class="acss-8wqn66"
+          class="acss-xvmduq"
         >
           block block block block block block block block block block block block block block block block block block block block block block block block block
         </div>
       </div>
       <div
-        class="ant-bubble-footer acss-8wqn66"
+        class="ant-bubble-footer acss-xvmduq"
       >
         <div>
           footer
@@ -803,7 +803,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
     class="ant-bubble ant-bubble-end"
   >
     <div
-      class="ant-bubble-avatar acss-8wqn66"
+      class="ant-bubble-avatar acss-xvmduq"
     >
       <span
         class="ant-avatar ant-avatar-circle ant-avatar-image"
@@ -817,7 +817,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
       class="ant-bubble-content-wrapper"
     >
       <div
-        class="ant-bubble-header acss-8wqn66"
+        class="ant-bubble-header acss-xvmduq"
       >
         header
       </div>
@@ -825,13 +825,13 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
         class="ant-bubble-content ant-bubble-content-shadow acss-c2h5kd"
       >
         <div
-          class="acss-13qb3y4"
+          class="acss-56hdzn"
         >
           fixed width content
         </div>
       </div>
       <div
-        class="ant-bubble-footer acss-8wqn66"
+        class="ant-bubble-footer acss-xvmduq"
       >
         <div>
           footer
@@ -856,7 +856,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
       class="ant-bubble ant-bubble-start"
     >
       <div
-        class="ant-bubble-avatar acss-8wqn66"
+        class="ant-bubble-avatar acss-xvmduq"
       >
         <span
           class="ant-avatar ant-avatar-circle ant-avatar-image"
@@ -870,7 +870,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
         class="ant-bubble-content-wrapper"
       >
         <div
-          class="ant-bubble-header acss-8wqn66"
+          class="ant-bubble-header acss-xvmduq"
         >
           header
         </div>
@@ -880,7 +880,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
           string bubble
         </div>
         <div
-          class="ant-bubble-footer acss-8wqn66"
+          class="ant-bubble-footer acss-xvmduq"
         >
           <div>
             footer
@@ -892,7 +892,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
       class="ant-bubble ant-bubble-end"
     >
       <div
-        class="ant-bubble-avatar acss-8wqn66"
+        class="ant-bubble-avatar acss-xvmduq"
       >
         <span
           class="ant-avatar ant-avatar-circle ant-avatar-image"
@@ -906,7 +906,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
         class="ant-bubble-content-wrapper"
       >
         <div
-          class="ant-bubble-header acss-8wqn66"
+          class="ant-bubble-header acss-xvmduq"
         >
           header
         </div>
@@ -916,7 +916,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
           longgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
         </div>
         <div
-          class="ant-bubble-footer acss-8wqn66"
+          class="ant-bubble-footer acss-xvmduq"
         >
           <div>
             footer
@@ -928,7 +928,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
       class="ant-bubble ant-bubble-start"
     >
       <div
-        class="ant-bubble-avatar acss-8wqn66"
+        class="ant-bubble-avatar acss-xvmduq"
       >
         <span
           class="ant-avatar ant-avatar-circle ant-avatar-image"
@@ -942,7 +942,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
         class="ant-bubble-content-wrapper"
       >
         <div
-          class="ant-bubble-header acss-8wqn66"
+          class="ant-bubble-header acss-xvmduq"
         >
           header
         </div>
@@ -950,13 +950,13 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
           class="ant-bubble-content ant-bubble-content-outlined ant-bubble-content-round acss-c2h5kd"
         >
           <div
-            class="acss-8wqn66"
+            class="acss-xvmduq"
           >
             block block block block block block block block block block block block block block block block block block block block block block block block block
           </div>
         </div>
         <div
-          class="ant-bubble-footer acss-8wqn66"
+          class="ant-bubble-footer acss-xvmduq"
         >
           <div>
             footer
@@ -968,7 +968,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
       class="ant-bubble ant-bubble-end"
     >
       <div
-        class="ant-bubble-avatar acss-8wqn66"
+        class="ant-bubble-avatar acss-xvmduq"
       >
         <span
           class="ant-avatar ant-avatar-circle ant-avatar-image"
@@ -982,7 +982,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
         class="ant-bubble-content-wrapper"
       >
         <div
-          class="ant-bubble-header acss-8wqn66"
+          class="ant-bubble-header acss-xvmduq"
         >
           header
         </div>
@@ -990,13 +990,13 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
           class="ant-bubble-content ant-bubble-content-shadow acss-c2h5kd"
         >
           <div
-            class="acss-13qb3y4"
+            class="acss-56hdzn"
           >
             fixed width content
           </div>
         </div>
         <div
-          class="ant-bubble-footer acss-8wqn66"
+          class="ant-bubble-footer acss-xvmduq"
         >
           <div>
             footer
@@ -1077,7 +1077,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
           style="cursor: pointer;"
         >
           <div
-            class="acss-8wqn66"
+            class="acss-xvmduq"
           >
             block block block block block block block block block block block block block block block block block block block block block block block block block
           </div>
@@ -1158,7 +1158,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
           style="cursor: pointer;"
         >
           <div
-            class="acss-8wqn66"
+            class="acss-xvmduq"
           >
             block block block block block block block block block block block block block block block block block block block block block block block block block
           </div>
@@ -1239,7 +1239,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
           style="cursor: pointer;"
         >
           <div
-            class="acss-8wqn66"
+            class="acss-xvmduq"
           >
             block block block block block block block block block block block block block block block block block block block block block block block block block
           </div>

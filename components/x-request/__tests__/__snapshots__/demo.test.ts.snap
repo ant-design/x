@@ -68,6 +68,7 @@ exports[`renders components/x-request/demo/basic.tsx correctly 1`] = `
             class="ant-thought-chain-item-header-box"
           >
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -216,6 +217,7 @@ exports[`renders components/x-request/demo/custom-transformer.tsx correctly 1`] 
             class="ant-thought-chain-item-header-box"
           >
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
