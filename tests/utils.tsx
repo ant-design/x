@@ -29,8 +29,14 @@ export const sleep = async (timeout = 0) => {
   });
 };
 
-const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>): RenderResult =>
-  render(ui, { wrapper: StrictMode, ...options });
+const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>): RenderResult => {
+  try {
+    return render(ui, { wrapper: StrictMode, ...options });
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
 
 export function renderHook<T>(func: () => T): { result: React.RefObject<T | null> } {
   const result = createRef<T>();
