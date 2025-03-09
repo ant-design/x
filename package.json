@@ -158,7 +158,7 @@
     "@umijs/fabric": "^4.0.1",
     "adm-zip": "^0.5.16",
     "ali-oss": "^6.21.0",
-    "antd": "^5.20.6",
+    "antd": "^5.22.7",
     "antd-style": "^3.6.3",
     "antd-token-previewer": "^2.0.8",
     "axios": "^1.7.7",
