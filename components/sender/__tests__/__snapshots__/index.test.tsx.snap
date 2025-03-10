@@ -27,7 +27,6 @@ exports[`Sender Component loading state 1`] = `
               color="currentColor"
               viewBox="0 0 1000 1000"
               xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
             >
               <title>
                 Stop Loading

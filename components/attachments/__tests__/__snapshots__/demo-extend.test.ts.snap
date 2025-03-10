@@ -504,7 +504,6 @@ exports[`renders components/attachments/demo/files.tsx extend context correctly 
           viewBox="0 0 16 16"
           width="1em"
           xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
         >
           <title>
             video
@@ -563,7 +562,6 @@ exports[`renders components/attachments/demo/files.tsx extend context correctly 
           viewBox="0 0 16 16"
           width="1em"
           xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
         >
           <title>
             audio
@@ -731,11 +729,7 @@ exports[`renders components/attachments/demo/files.tsx extend context correctly 
 </div>
 `;
 
-exports[`renders components/attachments/demo/files.tsx extend context correctly 2`] = `
-[
-  "Invalid DOM property \`%s\`. Did you mean \`%s\`?",
-]
-`;
+exports[`renders components/attachments/demo/files.tsx extend context correctly 2`] = `[]`;
 
 exports[`renders components/attachments/demo/overflow.tsx extend context correctly 1`] = `
 <div
