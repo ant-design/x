@@ -40,6 +40,7 @@ exports[`ThoughtChain Component ThoughtChain component work 1`] = `
         class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
       >
         <span
+          aria-describedby="test-id"
           class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
         >
           <strong>
@@ -66,6 +67,7 @@ exports[`ThoughtChain Component ThoughtChain component work 1`] = `
           </strong>
         </span>
         <span
+          aria-describedby="test-id"
           class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
         >
           description
@@ -119,6 +121,7 @@ exports[`ThoughtChain Component ThoughtChain component work 1`] = `
         class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
       >
         <span
+          aria-describedby="test-id"
           class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
         >
           <strong>
@@ -145,6 +148,7 @@ exports[`ThoughtChain Component ThoughtChain component work 1`] = `
           </strong>
         </span>
         <span
+          aria-describedby="test-id"
           class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
         >
           description
@@ -198,6 +202,7 @@ exports[`ThoughtChain Component ThoughtChain component work 1`] = `
         class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
       >
         <span
+          aria-describedby="test-id"
           class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
         >
           <strong>
@@ -224,6 +229,7 @@ exports[`ThoughtChain Component ThoughtChain component work 1`] = `
           </strong>
         </span>
         <span
+          aria-describedby="test-id"
           class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
         >
           description
@@ -284,6 +290,7 @@ exports[`ThoughtChain Component rtl render component should be rendered correctl
         class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
       >
         <span
+          aria-describedby="test-id"
           class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
         >
           <strong>
@@ -310,6 +317,7 @@ exports[`ThoughtChain Component rtl render component should be rendered correctl
           </strong>
         </span>
         <span
+          aria-describedby="test-id"
           class="ant-typography ant-typography-rtl ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
         >
           description
@@ -363,6 +371,7 @@ exports[`ThoughtChain Component rtl render component should be rendered correctl
         class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
       >
         <span
+          aria-describedby="test-id"
           class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
         >
           <strong>
@@ -389,6 +398,7 @@ exports[`ThoughtChain Component rtl render component should be rendered correctl
           </strong>
         </span>
         <span
+          aria-describedby="test-id"
           class="ant-typography ant-typography-rtl ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
         >
           description
@@ -442,6 +452,7 @@ exports[`ThoughtChain Component rtl render component should be rendered correctl
         class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
       >
         <span
+          aria-describedby="test-id"
           class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
         >
           <strong>
@@ -468,6 +479,7 @@ exports[`ThoughtChain Component rtl render component should be rendered correctl
           </strong>
         </span>
         <span
+          aria-describedby="test-id"
           class="ant-typography ant-typography-rtl ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
         >
           description
@@ -528,6 +540,7 @@ exports[`ThoughtChain Component test theme component should be rendered correctl
         class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
       >
         <span
+          aria-describedby="test-id"
           class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
         >
           <strong>
@@ -554,6 +567,7 @@ exports[`ThoughtChain Component test theme component should be rendered correctl
           </strong>
         </span>
         <span
+          aria-describedby="test-id"
           class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
         >
           description
@@ -607,6 +621,7 @@ exports[`ThoughtChain Component test theme component should be rendered correctl
         class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
       >
         <span
+          aria-describedby="test-id"
           class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
         >
           <strong>
@@ -633,6 +648,7 @@ exports[`ThoughtChain Component test theme component should be rendered correctl
           </strong>
         </span>
         <span
+          aria-describedby="test-id"
           class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
         >
           description
@@ -686,6 +702,7 @@ exports[`ThoughtChain Component test theme component should be rendered correctl
         class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
       >
         <span
+          aria-describedby="test-id"
           class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
         >
           <strong>
@@ -712,6 +729,7 @@ exports[`ThoughtChain Component test theme component should be rendered correctl
           </strong>
         </span>
         <span
+          aria-describedby="test-id"
           class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
         >
           description

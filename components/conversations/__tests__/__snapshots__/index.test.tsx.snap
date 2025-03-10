@@ -5,6 +5,7 @@ exports[`Conversations Component Conversations component work 1`] = `
   class="ant-conversations"
 >
   <li
+    aria-describedby="test-id"
     class="ant-conversations-item"
   >
     <div
@@ -24,6 +25,7 @@ exports[`Conversations Component Conversations component work 1`] = `
     </span>
   </li>
   <li
+    aria-describedby="test-id"
     class="ant-conversations-item"
   >
     <span
@@ -42,6 +44,7 @@ exports[`Conversations Component Conversations component work 1`] = `
     </span>
   </li>
   <li
+    aria-describedby="test-id"
     class="ant-conversations-item"
   >
     <span
@@ -52,6 +55,7 @@ exports[`Conversations Component Conversations component work 1`] = `
     </span>
   </li>
   <li
+    aria-describedby="test-id"
     class="ant-conversations-item ant-conversations-item-disabled"
   >
     <span
@@ -62,6 +66,7 @@ exports[`Conversations Component Conversations component work 1`] = `
     </span>
   </li>
   <li
+    aria-describedby="test-id"
     class="ant-conversations-item ant-conversations-item-disabled"
   >
     <span
@@ -92,6 +97,7 @@ exports[`Conversations Component rtl render component should be rendered correct
       class="ant-conversations-list"
     >
       <li
+        aria-describedby="test-id"
         class="ant-conversations-item"
       >
         <div
@@ -140,6 +146,7 @@ exports[`Conversations Component rtl render component should be rendered correct
       class="ant-conversations-list"
     >
       <li
+        aria-describedby="test-id"
         class="ant-conversations-item"
       >
         <span
@@ -178,6 +185,7 @@ exports[`Conversations Component rtl render component should be rendered correct
         </span>
       </li>
       <li
+        aria-describedby="test-id"
         class="ant-conversations-item"
       >
         <span
@@ -208,6 +216,7 @@ exports[`Conversations Component rtl render component should be rendered correct
         </span>
       </li>
       <li
+        aria-describedby="test-id"
         class="ant-conversations-item ant-conversations-item-disabled"
       >
         <span
@@ -218,6 +227,7 @@ exports[`Conversations Component rtl render component should be rendered correct
         </span>
       </li>
       <li
+        aria-describedby="test-id"
         class="ant-conversations-item ant-conversations-item-disabled"
       >
         <span

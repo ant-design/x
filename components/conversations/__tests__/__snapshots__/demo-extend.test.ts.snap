@@ -6,6 +6,7 @@ exports[`renders components/conversations/demo/basic.tsx extend context correctl
   style="width: 256px; background: #ffffff; border-radius: 6px;"
 >
   <li
+    aria-describedby="test-id"
     class="ant-conversations-item ant-conversations-item-active"
   >
     <span
@@ -28,6 +29,7 @@ exports[`renders components/conversations/demo/basic.tsx extend context correctl
     >
       <div
         class="ant-tooltip-inner"
+        id="test-id"
         role="tooltip"
       >
         Conversation Item 1
@@ -35,6 +37,7 @@ exports[`renders components/conversations/demo/basic.tsx extend context correctl
     </div>
   </div>
   <li
+    aria-describedby="test-id"
     class="ant-conversations-item"
   >
     <span
@@ -57,6 +60,7 @@ exports[`renders components/conversations/demo/basic.tsx extend context correctl
     >
       <div
         class="ant-tooltip-inner"
+        id="test-id"
         role="tooltip"
       >
         Conversation Item 2
@@ -64,6 +68,7 @@ exports[`renders components/conversations/demo/basic.tsx extend context correctl
     </div>
   </div>
   <li
+    aria-describedby="test-id"
     class="ant-conversations-item"
   >
     <span
@@ -86,6 +91,7 @@ exports[`renders components/conversations/demo/basic.tsx extend context correctl
     >
       <div
         class="ant-tooltip-inner"
+        id="test-id"
         role="tooltip"
       >
         Conversation Item 3
@@ -93,6 +99,7 @@ exports[`renders components/conversations/demo/basic.tsx extend context correctl
     </div>
   </div>
   <li
+    aria-describedby="test-id"
     class="ant-conversations-item ant-conversations-item-disabled"
   >
     <span
@@ -115,6 +122,7 @@ exports[`renders components/conversations/demo/basic.tsx extend context correctl
     >
       <div
         class="ant-tooltip-inner"
+        id="test-id"
         role="tooltip"
       >
         Conversation Item 4
@@ -135,6 +143,7 @@ exports[`renders components/conversations/demo/controlled-mode.tsx extend contex
     style="width: 256px; background: #ffffff; border-radius: 6px;"
   >
     <li
+      aria-describedby="test-id"
       class="ant-conversations-item ant-conversations-item-active"
     >
       <span
@@ -157,6 +166,7 @@ exports[`renders components/conversations/demo/controlled-mode.tsx extend contex
       >
         <div
           class="ant-tooltip-inner"
+          id="test-id"
           role="tooltip"
         >
           Conversation Item 1
@@ -164,6 +174,7 @@ exports[`renders components/conversations/demo/controlled-mode.tsx extend contex
       </div>
     </div>
     <li
+      aria-describedby="test-id"
       class="ant-conversations-item"
     >
       <span
@@ -186,6 +197,7 @@ exports[`renders components/conversations/demo/controlled-mode.tsx extend contex
       >
         <div
           class="ant-tooltip-inner"
+          id="test-id"
           role="tooltip"
         >
           Conversation Item 2
@@ -193,6 +205,7 @@ exports[`renders components/conversations/demo/controlled-mode.tsx extend contex
       </div>
     </div>
     <li
+      aria-describedby="test-id"
       class="ant-conversations-item"
     >
       <span
@@ -215,6 +228,7 @@ exports[`renders components/conversations/demo/controlled-mode.tsx extend contex
       >
         <div
           class="ant-tooltip-inner"
+          id="test-id"
           role="tooltip"
         >
           Conversation Item 3
@@ -266,6 +280,7 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
       class="ant-conversations-list"
     >
       <li
+        aria-describedby="test-id"
         class="ant-conversations-item ant-conversations-item-active"
       >
         <span
@@ -288,6 +303,7 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
         >
           <div
             class="ant-tooltip-inner"
+            id="test-id"
             role="tooltip"
           >
             Conversation Item 1
@@ -295,6 +311,7 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
         </div>
       </div>
       <li
+        aria-describedby="test-id"
         class="ant-conversations-item"
       >
         <span
@@ -317,6 +334,7 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
         >
           <div
             class="ant-tooltip-inner"
+            id="test-id"
             role="tooltip"
           >
             Conversation Item 2
@@ -324,6 +342,7 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
         </div>
       </div>
       <li
+        aria-describedby="test-id"
         class="ant-conversations-item"
       >
         <span
@@ -346,6 +365,7 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
         >
           <div
             class="ant-tooltip-inner"
+            id="test-id"
             role="tooltip"
           >
             Conversation Item 3
@@ -368,6 +388,7 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
       class="ant-conversations-list"
     >
       <li
+        aria-describedby="test-id"
         class="ant-conversations-item ant-conversations-item-disabled"
       >
         <span
@@ -390,6 +411,7 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
         >
           <div
             class="ant-tooltip-inner"
+            id="test-id"
             role="tooltip"
           >
             Conversation Item 4
@@ -464,6 +486,7 @@ exports[`renders components/conversations/demo/group-sort.tsx extend context cor
       class="ant-conversations-list"
     >
       <li
+        aria-describedby="test-id"
         class="ant-conversations-item"
       >
         <span
@@ -486,6 +509,7 @@ exports[`renders components/conversations/demo/group-sort.tsx extend context cor
         >
           <div
             class="ant-tooltip-inner"
+            id="test-id"
             role="tooltip"
           >
             Conversation 1732204800000
@@ -493,6 +517,7 @@ exports[`renders components/conversations/demo/group-sort.tsx extend context cor
         </div>
       </div>
       <li
+        aria-describedby="test-id"
         class="ant-conversations-item"
       >
         <span
@@ -515,6 +540,7 @@ exports[`renders components/conversations/demo/group-sort.tsx extend context cor
         >
           <div
             class="ant-tooltip-inner"
+            id="test-id"
             role="tooltip"
           >
             Conversation 1732204803600
@@ -522,6 +548,7 @@ exports[`renders components/conversations/demo/group-sort.tsx extend context cor
         </div>
       </div>
       <li
+        aria-describedby="test-id"
         class="ant-conversations-item"
       >
         <span
@@ -544,6 +571,7 @@ exports[`renders components/conversations/demo/group-sort.tsx extend context cor
         >
           <div
             class="ant-tooltip-inner"
+            id="test-id"
             role="tooltip"
           >
             Conversation 1732204807200
@@ -551,6 +579,7 @@ exports[`renders components/conversations/demo/group-sort.tsx extend context cor
         </div>
       </div>
       <li
+        aria-describedby="test-id"
         class="ant-conversations-item"
       >
         <span
@@ -573,6 +602,7 @@ exports[`renders components/conversations/demo/group-sort.tsx extend context cor
         >
           <div
             class="ant-tooltip-inner"
+            id="test-id"
             role="tooltip"
           >
             Conversation 1732204810800
@@ -637,6 +667,7 @@ exports[`renders components/conversations/demo/group-sort.tsx extend context cor
       class="ant-conversations-list"
     >
       <li
+        aria-describedby="test-id"
         class="ant-conversations-item"
       >
         <span
@@ -659,6 +690,7 @@ exports[`renders components/conversations/demo/group-sort.tsx extend context cor
         >
           <div
             class="ant-tooltip-inner"
+            id="test-id"
             role="tooltip"
           >
             Conversation 1732204728000
@@ -666,6 +698,7 @@ exports[`renders components/conversations/demo/group-sort.tsx extend context cor
         </div>
       </div>
       <li
+        aria-describedby="test-id"
         class="ant-conversations-item"
       >
         <span
@@ -688,6 +721,7 @@ exports[`renders components/conversations/demo/group-sort.tsx extend context cor
         >
           <div
             class="ant-tooltip-inner"
+            id="test-id"
             role="tooltip"
           >
             Conversation 1732204731600
@@ -761,6 +795,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
     style="width: 256px; background: #ffffff; border-radius: 6px;"
   >
     <li
+      aria-describedby="test-id"
       class="ant-conversations-item ant-conversations-item-active"
     >
       <span
@@ -800,6 +835,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
           tabindex="0"
         >
           <li
+            aria-describedby="test-id"
             class="ant-dropdown-menu-item"
             data-menu-id="rc-menu-uuid-test-operation1"
             role="menuitem"
@@ -843,11 +879,13 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
             >
               <div
                 class="ant-tooltip-inner"
+                id="test-id"
                 role="tooltip"
               />
             </div>
           </div>
           <li
+            aria-describedby="test-id"
             aria-disabled="true"
             class="ant-dropdown-menu-item ant-dropdown-menu-item-disabled"
             data-menu-id="rc-menu-uuid-test-operation2"
@@ -891,11 +929,13 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
             >
               <div
                 class="ant-tooltip-inner"
+                id="test-id"
                 role="tooltip"
               />
             </div>
           </div>
           <li
+            aria-describedby="test-id"
             class="ant-dropdown-menu-item ant-dropdown-menu-item-danger"
             data-menu-id="rc-menu-uuid-test-operation3"
             role="menuitem"
@@ -939,6 +979,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
             >
               <div
                 class="ant-tooltip-inner"
+                id="test-id"
                 role="tooltip"
               />
             </div>
@@ -963,6 +1004,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
       >
         <div
           class="ant-tooltip-inner"
+          id="test-id"
           role="tooltip"
         >
           Conversation Item 1
@@ -970,6 +1012,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
       </div>
     </div>
     <li
+      aria-describedby="test-id"
       class="ant-conversations-item"
     >
       <span
@@ -1009,6 +1052,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
           tabindex="0"
         >
           <li
+            aria-describedby="test-id"
             class="ant-dropdown-menu-item"
             data-menu-id="rc-menu-uuid-test-operation1"
             role="menuitem"
@@ -1052,11 +1096,13 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
             >
               <div
                 class="ant-tooltip-inner"
+                id="test-id"
                 role="tooltip"
               />
             </div>
           </div>
           <li
+            aria-describedby="test-id"
             aria-disabled="true"
             class="ant-dropdown-menu-item ant-dropdown-menu-item-disabled"
             data-menu-id="rc-menu-uuid-test-operation2"
@@ -1100,11 +1146,13 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
             >
               <div
                 class="ant-tooltip-inner"
+                id="test-id"
                 role="tooltip"
               />
             </div>
           </div>
           <li
+            aria-describedby="test-id"
             class="ant-dropdown-menu-item ant-dropdown-menu-item-danger"
             data-menu-id="rc-menu-uuid-test-operation3"
             role="menuitem"
@@ -1148,6 +1196,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
             >
               <div
                 class="ant-tooltip-inner"
+                id="test-id"
                 role="tooltip"
               />
             </div>
@@ -1172,6 +1221,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
       >
         <div
           class="ant-tooltip-inner"
+          id="test-id"
           role="tooltip"
         >
           Conversation Item 2
@@ -1179,6 +1229,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
       </div>
     </div>
     <li
+      aria-describedby="test-id"
       class="ant-conversations-item"
     >
       <span
@@ -1218,6 +1269,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
           tabindex="0"
         >
           <li
+            aria-describedby="test-id"
             class="ant-dropdown-menu-item"
             data-menu-id="rc-menu-uuid-test-operation1"
             role="menuitem"
@@ -1261,11 +1313,13 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
             >
               <div
                 class="ant-tooltip-inner"
+                id="test-id"
                 role="tooltip"
               />
             </div>
           </div>
           <li
+            aria-describedby="test-id"
             aria-disabled="true"
             class="ant-dropdown-menu-item ant-dropdown-menu-item-disabled"
             data-menu-id="rc-menu-uuid-test-operation2"
@@ -1309,11 +1363,13 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
             >
               <div
                 class="ant-tooltip-inner"
+                id="test-id"
                 role="tooltip"
               />
             </div>
           </div>
           <li
+            aria-describedby="test-id"
             class="ant-dropdown-menu-item ant-dropdown-menu-item-danger"
             data-menu-id="rc-menu-uuid-test-operation3"
             role="menuitem"
@@ -1357,6 +1413,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
             >
               <div
                 class="ant-tooltip-inner"
+                id="test-id"
                 role="tooltip"
               />
             </div>
@@ -1381,6 +1438,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
       >
         <div
           class="ant-tooltip-inner"
+          id="test-id"
           role="tooltip"
         >
           Conversation Item 3
@@ -1388,6 +1446,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
       </div>
     </div>
     <li
+      aria-describedby="test-id"
       class="ant-conversations-item ant-conversations-item-disabled"
     >
       <span
@@ -1410,6 +1469,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
       >
         <div
           class="ant-tooltip-inner"
+          id="test-id"
           role="tooltip"
         >
           Conversation Item 4

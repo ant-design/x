@@ -26,6 +26,7 @@ exports[`renders components/thought-chain/demo/basic.tsx correctly 1`] = `
             class="ant-thought-chain-item-header-box"
           >
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -33,6 +34,7 @@ exports[`renders components/thought-chain/demo/basic.tsx correctly 1`] = `
               </strong>
             </span>
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
@@ -87,6 +89,7 @@ exports[`renders components/thought-chain/demo/basic.tsx correctly 1`] = `
             class="ant-thought-chain-item-header-box"
           >
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -94,6 +97,7 @@ exports[`renders components/thought-chain/demo/basic.tsx correctly 1`] = `
               </strong>
             </span>
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
@@ -148,6 +152,7 @@ exports[`renders components/thought-chain/demo/basic.tsx correctly 1`] = `
             class="ant-thought-chain-item-header-box"
           >
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -155,6 +160,7 @@ exports[`renders components/thought-chain/demo/basic.tsx correctly 1`] = `
               </strong>
             </span>
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
@@ -209,6 +215,7 @@ exports[`renders components/thought-chain/demo/basic.tsx correctly 1`] = `
             class="ant-thought-chain-item-header-box"
           >
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -216,6 +223,7 @@ exports[`renders components/thought-chain/demo/basic.tsx correctly 1`] = `
               </strong>
             </span>
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
@@ -286,6 +294,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx correctly 1`] = `
             class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
           >
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -312,6 +321,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx correctly 1`] = `
               </strong>
             </span>
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               Collapsible
@@ -334,6 +344,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx correctly 1`] = `
             class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
           >
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -360,6 +371,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx correctly 1`] = `
               </strong>
             </span>
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               Collapsible
@@ -419,6 +431,7 @@ exports[`renders components/thought-chain/demo/customization.tsx correctly 1`] =
             class="ant-thought-chain-item-header-box"
           >
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -426,6 +439,7 @@ exports[`renders components/thought-chain/demo/customization.tsx correctly 1`] =
               </strong>
             </span>
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
@@ -543,6 +557,7 @@ exports[`renders components/thought-chain/demo/customization.tsx correctly 1`] =
             class="ant-thought-chain-item-header-box"
           >
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -550,6 +565,7 @@ exports[`renders components/thought-chain/demo/customization.tsx correctly 1`] =
               </strong>
             </span>
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
@@ -667,6 +683,7 @@ exports[`renders components/thought-chain/demo/customization.tsx correctly 1`] =
             class="ant-thought-chain-item-header-box"
           >
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -674,6 +691,7 @@ exports[`renders components/thought-chain/demo/customization.tsx correctly 1`] =
               </strong>
             </span>
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
@@ -786,6 +804,7 @@ exports[`renders components/thought-chain/demo/nested.tsx correctly 1`] = `
             class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
           >
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -812,6 +831,7 @@ exports[`renders components/thought-chain/demo/nested.tsx correctly 1`] = `
               </strong>
             </span>
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
@@ -878,6 +898,7 @@ exports[`renders components/thought-chain/demo/nested.tsx correctly 1`] = `
             class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
           >
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -904,6 +925,7 @@ exports[`renders components/thought-chain/demo/nested.tsx correctly 1`] = `
               </strong>
             </span>
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
@@ -988,7 +1010,9 @@ exports[`renders components/thought-chain/demo/size.tsx correctly 1`] = `
             class="ant-radio-button-inner"
           />
         </span>
-        <span>
+        <span
+          class="ant-radio-button-label"
+        >
           Large
         </span>
       </label>
@@ -1009,7 +1033,9 @@ exports[`renders components/thought-chain/demo/size.tsx correctly 1`] = `
             class="ant-radio-button-inner"
           />
         </span>
-        <span>
+        <span
+          class="ant-radio-button-label"
+        >
           Default
         </span>
       </label>
@@ -1029,7 +1055,9 @@ exports[`renders components/thought-chain/demo/size.tsx correctly 1`] = `
             class="ant-radio-button-inner"
           />
         </span>
-        <span>
+        <span
+          class="ant-radio-button-label"
+        >
           Small
         </span>
       </label>
@@ -1052,6 +1080,7 @@ exports[`renders components/thought-chain/demo/size.tsx correctly 1`] = `
             class="ant-thought-chain-item-header-box"
           >
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -1059,6 +1088,7 @@ exports[`renders components/thought-chain/demo/size.tsx correctly 1`] = `
               </strong>
             </span>
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
@@ -1113,6 +1143,7 @@ exports[`renders components/thought-chain/demo/size.tsx correctly 1`] = `
             class="ant-thought-chain-item-header-box"
           >
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -1120,6 +1151,7 @@ exports[`renders components/thought-chain/demo/size.tsx correctly 1`] = `
               </strong>
             </span>
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
@@ -1174,6 +1206,7 @@ exports[`renders components/thought-chain/demo/size.tsx correctly 1`] = `
             class="ant-thought-chain-item-header-box"
           >
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -1181,6 +1214,7 @@ exports[`renders components/thought-chain/demo/size.tsx correctly 1`] = `
               </strong>
             </span>
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
@@ -1235,6 +1269,7 @@ exports[`renders components/thought-chain/demo/size.tsx correctly 1`] = `
             class="ant-thought-chain-item-header-box"
           >
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -1242,6 +1277,7 @@ exports[`renders components/thought-chain/demo/size.tsx correctly 1`] = `
               </strong>
             </span>
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
@@ -1342,6 +1378,7 @@ exports[`renders components/thought-chain/demo/status.tsx correctly 1`] = `
             class="ant-thought-chain-item-header-box"
           >
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -1349,6 +1386,7 @@ exports[`renders components/thought-chain/demo/status.tsx correctly 1`] = `
               </strong>
             </span>
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               status: success
@@ -1392,6 +1430,7 @@ exports[`renders components/thought-chain/demo/status.tsx correctly 1`] = `
             class="ant-thought-chain-item-header-box"
           >
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -1399,6 +1438,7 @@ exports[`renders components/thought-chain/demo/status.tsx correctly 1`] = `
               </strong>
             </span>
             <span
+              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               status: error
