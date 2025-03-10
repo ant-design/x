@@ -433,7 +433,6 @@ Array [
             viewBox="0 0 16 16"
             width="1em"
             xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
           >
             <title>
               video
@@ -492,7 +491,6 @@ Array [
             viewBox="0 0 16 16"
             width="1em"
             xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
           >
             <title>
               audio
