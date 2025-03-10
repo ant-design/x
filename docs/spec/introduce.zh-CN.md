@@ -115,7 +115,7 @@ RICH 范式正是我们尝试定义的 AI 时代应该关注的设计要素集�
 
 ## 三、How？如何应用 RICH AI 设计范式？
 
-那么该如何应用 RICH 创造卓越的 AI 产品体验呢？在后续的指引文档里，我们将深入浅出，分别针对 RICH 中的四个要素进行介绍和定义，通行提供了开箱即用的设计策略和案例，帮助大家更好的理解和应用 RICH。这套理念和最终的界面资产也集成到 Ant Design X 里，希望能帮助大家轻松创造卓越 AI 产品体验！
+那么该如何应用 RICH 创造卓越的 AI 产品体验呢？在后续的指引文档里，我们将深入浅出，分别针对 RICH 中的四个要素进行介绍和定义，通过提供开箱即用的设计策略和案例，帮助大家更好的理解和应用 RICH。这套理念和最终的界面资产也集成到 Ant Design X 里，希望能帮助大家轻松创造卓越 AI 产品体验！
 
 ![](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*0xUFQoMAhiIAAAAAAAAAAAAADgCCAQ/original)
 
