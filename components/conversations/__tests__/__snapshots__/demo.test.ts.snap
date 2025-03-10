@@ -6,6 +6,7 @@ exports[`renders components/conversations/demo/basic.tsx correctly 1`] = `
   style="width:256px;background:#ffffff;border-radius:6px"
 >
   <li
+    aria-describedby="test-id"
     class="ant-conversations-item ant-conversations-item-active"
   >
     <span
@@ -15,6 +16,7 @@ exports[`renders components/conversations/demo/basic.tsx correctly 1`] = `
     </span>
   </li>
   <li
+    aria-describedby="test-id"
     class="ant-conversations-item"
   >
     <span
@@ -24,6 +26,7 @@ exports[`renders components/conversations/demo/basic.tsx correctly 1`] = `
     </span>
   </li>
   <li
+    aria-describedby="test-id"
     class="ant-conversations-item"
   >
     <span
@@ -33,6 +36,7 @@ exports[`renders components/conversations/demo/basic.tsx correctly 1`] = `
     </span>
   </li>
   <li
+    aria-describedby="test-id"
     class="ant-conversations-item ant-conversations-item-disabled"
   >
     <span
@@ -53,6 +57,7 @@ exports[`renders components/conversations/demo/controlled-mode.tsx correctly 1`]
     style="width:256px;background:#ffffff;border-radius:6px"
   >
     <li
+      aria-describedby="test-id"
       class="ant-conversations-item ant-conversations-item-active"
     >
       <span
@@ -62,6 +67,7 @@ exports[`renders components/conversations/demo/controlled-mode.tsx correctly 1`]
       </span>
     </li>
     <li
+      aria-describedby="test-id"
       class="ant-conversations-item"
     >
       <span
@@ -71,6 +77,7 @@ exports[`renders components/conversations/demo/controlled-mode.tsx correctly 1`]
       </span>
     </li>
     <li
+      aria-describedby="test-id"
       class="ant-conversations-item"
     >
       <span
@@ -122,6 +129,7 @@ exports[`renders components/conversations/demo/group.tsx correctly 1`] = `
       class="ant-conversations-list"
     >
       <li
+        aria-describedby="test-id"
         class="ant-conversations-item ant-conversations-item-active"
       >
         <span
@@ -131,6 +139,7 @@ exports[`renders components/conversations/demo/group.tsx correctly 1`] = `
         </span>
       </li>
       <li
+        aria-describedby="test-id"
         class="ant-conversations-item"
       >
         <span
@@ -140,6 +149,7 @@ exports[`renders components/conversations/demo/group.tsx correctly 1`] = `
         </span>
       </li>
       <li
+        aria-describedby="test-id"
         class="ant-conversations-item"
       >
         <span
@@ -164,6 +174,7 @@ exports[`renders components/conversations/demo/group.tsx correctly 1`] = `
       class="ant-conversations-list"
     >
       <li
+        aria-describedby="test-id"
         class="ant-conversations-item ant-conversations-item-disabled"
       >
         <span
@@ -238,6 +249,7 @@ exports[`renders components/conversations/demo/group-sort.tsx correctly 1`] = `
       class="ant-conversations-list"
     >
       <li
+        aria-describedby="test-id"
         class="ant-conversations-item"
       >
         <span
@@ -247,6 +259,7 @@ exports[`renders components/conversations/demo/group-sort.tsx correctly 1`] = `
         </span>
       </li>
       <li
+        aria-describedby="test-id"
         class="ant-conversations-item"
       >
         <span
@@ -256,6 +269,7 @@ exports[`renders components/conversations/demo/group-sort.tsx correctly 1`] = `
         </span>
       </li>
       <li
+        aria-describedby="test-id"
         class="ant-conversations-item"
       >
         <span
@@ -265,6 +279,7 @@ exports[`renders components/conversations/demo/group-sort.tsx correctly 1`] = `
         </span>
       </li>
       <li
+        aria-describedby="test-id"
         class="ant-conversations-item"
       >
         <span
@@ -331,6 +346,7 @@ exports[`renders components/conversations/demo/group-sort.tsx correctly 1`] = `
       class="ant-conversations-list"
     >
       <li
+        aria-describedby="test-id"
         class="ant-conversations-item"
       >
         <span
@@ -340,6 +356,7 @@ exports[`renders components/conversations/demo/group-sort.tsx correctly 1`] = `
         </span>
       </li>
       <li
+        aria-describedby="test-id"
         class="ant-conversations-item"
       >
         <span
@@ -411,6 +428,7 @@ exports[`renders components/conversations/demo/with-menu.tsx correctly 1`] = `
     style="width:256px;background:#ffffff;border-radius:6px"
   >
     <li
+      aria-describedby="test-id"
       class="ant-conversations-item ant-conversations-item-active"
     >
       <span
@@ -440,6 +458,7 @@ exports[`renders components/conversations/demo/with-menu.tsx correctly 1`] = `
       </span>
     </li>
     <li
+      aria-describedby="test-id"
       class="ant-conversations-item"
     >
       <span
@@ -469,6 +488,7 @@ exports[`renders components/conversations/demo/with-menu.tsx correctly 1`] = `
       </span>
     </li>
     <li
+      aria-describedby="test-id"
       class="ant-conversations-item"
     >
       <span
@@ -498,6 +518,7 @@ exports[`renders components/conversations/demo/with-menu.tsx correctly 1`] = `
       </span>
     </li>
     <li
+      aria-describedby="test-id"
       class="ant-conversations-item ant-conversations-item-disabled"
     >
       <span

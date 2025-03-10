@@ -1077,7 +1077,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
           style="cursor: pointer;"
         >
           <div
-            class="acss-8wqn66"
+            class="acss-xvmduq"
           >
             block block block block block block block block block block block block block block block block block block block block block block block block block
           </div>
@@ -1158,7 +1158,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
           style="cursor: pointer;"
         >
           <div
-            class="acss-8wqn66"
+            class="acss-xvmduq"
           >
             block block block block block block block block block block block block block block block block block block block block block block block block block
           </div>
@@ -1239,7 +1239,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
           style="cursor: pointer;"
         >
           <div
-            class="acss-8wqn66"
+            class="acss-xvmduq"
           >
             block block block block block block block block block block block block block block block block block block block block block block block block block
           </div>
