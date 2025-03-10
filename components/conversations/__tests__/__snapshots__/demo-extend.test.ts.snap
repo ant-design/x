@@ -738,14 +738,14 @@ exports[`renders components/conversations/demo/group-sort.tsx extend context cor
 exports[`renders components/conversations/demo/infinite-load.tsx extend context correctly 1`] = `
 <div
   id="scrollableDiv"
-  style="width: 280px; height: 600px; background: #ffffff; border-radius: 6px; overflow: scroll;"
+  style="width: 280px; height: 600px; background: #ffffff; border-radius: 6px; overflow: auto;"
 >
   <div
     class="infinite-scroll-component__outerdiv"
   >
     <div
       class="infinite-scroll-component "
-      style="height: auto; overflow: auto;"
+      style="height: auto; overflow: hidden;"
     >
       <ul
         class="ant-conversations"

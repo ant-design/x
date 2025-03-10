@@ -53,6 +53,30 @@ describe('attachments', () => {
     expect(onChange.mock.calls[0][0].fileList).toHaveLength(0);
   });
 
+  it('add and remove file but can stop remove', async () => {
+    const onChange = jest.fn();
+    const { container } = render(
+      renderAttachments({
+        onChange,
+        onRemove: () => false,
+      }),
+    );
+
+    // Add file
+    fireEvent.change(container.querySelector('input')!, {
+      target: { files: [{ file: 'foo.png' }] },
+    });
+    await waitFakeTimer();
+    expect(onChange.mock.calls[0][0].fileList).toHaveLength(1);
+    onChange.mockClear();
+
+    // Remove file
+    fireEvent.click(container.querySelector('.ant-attachment-list-card-remove')!);
+    await waitFakeTimer();
+    expect(container.querySelectorAll('.ant-attachment-list-card')).toHaveLength(1);
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
   it('overflow: scrollX', () => {
     const { container } = render(
       renderAttachments({

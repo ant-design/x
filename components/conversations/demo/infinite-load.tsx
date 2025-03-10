@@ -16,7 +16,7 @@ const App: React.FC = () => {
     height: 600,
     background: token.colorBgContainer,
     borderRadius: token.borderRadius,
-    overflow: 'scroll',
+    overflow: 'auto',
   };
 
   const loadMoreData = () => {
@@ -59,6 +59,7 @@ const App: React.FC = () => {
         }
         endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
         scrollableTarget="scrollableDiv"
+        style={{ overflow: 'hidden' }}
       >
         <Conversations items={data} defaultActiveKey="demo1" groupable />
       </InfiniteScroll>
