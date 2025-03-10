@@ -35,6 +35,7 @@ config/base.yaml
 /coverage
 yarn.lock
 package-lock.json
+bun.lock
 pnpm-lock.yaml
 bun.lockb
 .pnpm-debug.log
