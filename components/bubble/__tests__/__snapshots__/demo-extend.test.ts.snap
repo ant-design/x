@@ -1341,6 +1341,39 @@ exports[`renders components/bubble/demo/header-and-footer.tsx extend context cor
       class="ant-bubble-content ant-bubble-content-filled"
     >
       Hello, welcome to use Ant Design X! Just ask if you have any questions.
+      <div
+        class="ant-bubble-extra"
+      >
+        <button
+          class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+          type="button"
+        >
+          <span
+            class="ant-btn-icon"
+          >
+            <span
+              aria-label="more"
+              class="anticon anticon-more"
+              role="img"
+              style="transform: rotate(90deg);"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="more"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M456 231a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0z"
+                />
+              </svg>
+            </span>
+          </span>
+        </button>
+      </div>
     </div>
     <div
       class="ant-bubble-footer"
