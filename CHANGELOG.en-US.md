@@ -36,7 +36,7 @@ tag: vVERSION
 
 - 📖 Improved`Bubble` `typing` reduces unnecessary rendering.[#477](https://github.com/ant-design/x/pull/477) by [@kxcy001123](https://github.com/kxcy001123)
 
-- ⚙️ Improved Chat Design X construct [#578](https://github.com/ant-design/x/pull/578)，[#584](https://github.com/ant-design/x/pull/584) by [@kimteayon](https://github.com/kimteayon) 、 [#578](https://github.com/ant-design/x/pull/578) by [@kimteayon](https://github.com/kimteayon) 、[#587](https://github.com/ant-design/x/pull/587) by [@afc163](https://github.com/afc163)
+- 📦 Improved Chat Design X construct [#578](https://github.com/ant-design/x/pull/578)，[#584](https://github.com/ant-design/x/pull/584) by [@kimteayon](https://github.com/kimteayon) 、 [#578](https://github.com/ant-design/x/pull/578) by [@kimteayon](https://github.com/kimteayon) 、[#587](https://github.com/ant-design/x/pull/587) by [@afc163](https://github.com/afc163)
 
 - 📖 Enhance the official website to improve user experience.[#484](https://github.com/ant-design/x/pull/484) by [@ztkuaikuai](https://github.com/ztkuaikuai) 、 [#495](https://github.com/ant-design/x/pull/495) by [@ztkuaikuai](https://github.com/ztkuaikuai) 、 [#522](https://github.com/ant-design/x/pull/522) by [@liangchaofei](https://github.com/liangchaofei) 、[#537](https://github.com/ant-design/x/pull/537) by [@wzc520pyfm](https://github.com/wzc520pyfm) 、 [#553](https://github.com/ant-design/x/pull/553) by [@PeachScript](https://github.com/PeachScript) 、 [#578](https://github.com/ant-design/x/pull/578) by [@kimteayon](https://github.com/kimteayon) 、 [#585](https://github.com/ant-design/x/pull/585) by [@MaricoHan](https://github.com/MaricoHan)
 

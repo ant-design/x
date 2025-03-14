@@ -35,7 +35,7 @@ tag: vVERSION
 
 - 📖 优化`Bubble` 组件typing 减少不必要的渲染。[#477](https://github.com/ant-design/x/pull/477) 由 [@kxcy001123](https://github.com/kxcy001123) 提交
 
-- ⚙️ 优化 Chat Design X 构建 [#578](https://github.com/ant-design/x/pull/578)，[#584](https://github.com/ant-design/x/pull/584) 由 [@kimteayon](https://github.com/kimteayon) 提交、 [#578](https://github.com/ant-design/x/pull/578) 由 [@kimteayon](https://github.com/kimteayon) 提交、[#587](https://github.com/ant-design/x/pull/587) 由 [@afc163](https://github.com/afc163) 提交
+- 📦 优化 Chat Design X 构建 [#578](https://github.com/ant-design/x/pull/578)，[#584](https://github.com/ant-design/x/pull/584) 由 [@kimteayon](https://github.com/kimteayon) 提交、 [#578](https://github.com/ant-design/x/pull/578) 由 [@kimteayon](https://github.com/kimteayon) 提交、[#587](https://github.com/ant-design/x/pull/587) 由 [@afc163](https://github.com/afc163) 提交
 
 - 📖 优化官网站点提升用户体验。[#484](https://github.com/ant-design/x/pull/484) 由 [@ztkuaikuai](https://github.com/ztkuaikuai) 提交、 [#495](https://github.com/ant-design/x/pull/495) 由 [@ztkuaikuai](https://github.com/ztkuaikuai) 提交、 [#522](https://github.com/ant-design/x/pull/522) 由 [@liangchaofei](https://github.com/liangchaofei) 提交 、[#537](https://github.com/ant-design/x/pull/537) 由 [@wzc520pyfm](https://github.com/wzc520pyfm) 提交、 [#553](https://github.com/ant-design/x/pull/553) 由 [@PeachScript](https://github.com/PeachScript) 提交、 [#578](https://github.com/ant-design/x/pull/578) 由 [@kimteayon](https://github.com/kimteayon) 提交 、 [#585](https://github.com/ant-design/x/pull/585) 由 [@MaricoHan](https://github.com/MaricoHan) 提交
 
