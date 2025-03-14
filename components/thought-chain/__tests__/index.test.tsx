@@ -1,11 +1,11 @@
 import React from 'react';
+import { fireEvent, render } from '../../../tests/utils';
 import ThoughtChain from '../index';
-import { render, fireEvent } from '../../../tests/utils';
 
+import { CheckCircleOutlined } from '@ant-design/icons';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
 import themeTest from '../../../tests/shared/themeTest';
-import { CheckCircleOutlined } from '@ant-design/icons';
 
 import type { ThoughtChainItem } from '../index';
 
@@ -83,5 +83,32 @@ describe('ThoughtChain Component', () => {
     expect(onExpand).toHaveBeenCalledWith(['test1']);
     fireEvent.click(element as Element);
     expect(onExpand).toHaveBeenCalledWith([]);
+  });
+
+  it('ThoughtChain component work with controlled mode', () => {
+    const App = () => {
+      const [expandedKeys] = React.useState<string[]>(['test3']);
+
+      return (
+        <ThoughtChain
+          items={items}
+          collapsible={{
+            expandedKeys,
+          }}
+        />
+      );
+    };
+    const { container } = render(<App />);
+    const element = container.querySelectorAll<HTMLDivElement>(
+      '.ant-thought-chain-item-header-box',
+    )[0];
+
+    fireEvent.click(element as Element);
+
+    const expandBodyElements = container.querySelectorAll<HTMLDivElement>(
+      '.ant-thought-chain-item .ant-thought-chain-item-content',
+    );
+
+    expect(expandBodyElements).toHaveLength(1);
   });
 });
