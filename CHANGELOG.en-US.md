@@ -16,6 +16,30 @@ tag: vVERSION
 
 ---
 
+## 1.0.6
+
+`2025-03-14`
+
+- 🆕 Extended `Sender` file pasting can handle multiple files. [#505](https://github.com/ant-design/x/pull/500) by [@ztkuaikuai](https://github.com/ztkuaikuai)
+
+- 🆕 Extended `BubbleList` role definition function.[#485](https://github.com/ant-design/x/pull/500) by [@chenluda](https://github.com/chenluda)
+
+- 🐛 Fixed `Attachments` multi file horizontal scrollbar display .[#556](https://github.com/ant-design/x/pull/556) by [@onefeng123 ](https://github.com/onefeng123)
+
+- 🐛 Fixed `Attachments` onRemove non effective issue.[#555](https://github.com/ant-design/x/pull/555) by [@edison-tianhe ](https://github.com/edison-tianhe)
+
+- 🐛 Fixed `Sender` the issue of actions lacking `SpeechButton`.[#549](https://github.com/ant-design/x/pull/549) by [@zombieJ ](https://github.com/zombieJ)
+
+- 🐛 Fixed `Attachments`the issue of file initialization display.[#524](https://github.com/ant-design/x/pull/524) by [@ztkuaikuai ](https://github.com/ztkuaikuai)
+
+- 🐛 Fixed `Conversations`scroll bar issue.[#485](https://github.com/ant-design/x/pull/485) by [@LofiSu](https://github.com/LofiSu)
+
+- 📖 Improved`Bubble` `typing` reduces unnecessary rendering.[#477](https://github.com/ant-design/x/pull/477) by [@kxcy001123](https://github.com/kxcy001123)
+
+- ⚙️ Improved Chat Design X construct [#578](https://github.com/ant-design/x/pull/578)，[#584](https://github.com/ant-design/x/pull/584) by [@kimteayon](https://github.com/kimteayon) 、 [#578](https://github.com/ant-design/x/pull/578) by [@kimteayon](https://github.com/kimteayon) 、[#587](https://github.com/ant-design/x/pull/587) by [@afc163](https://github.com/afc163)
+
+- 📖 Enhance the official website to improve user experience.[#484](https://github.com/ant-design/x/pull/484) by [@ztkuaikuai](https://github.com/ztkuaikuai) 、 [#495](https://github.com/ant-design/x/pull/495) by [@ztkuaikuai](https://github.com/ztkuaikuai) 、 [#522](https://github.com/ant-design/x/pull/522) by [@liangchaofei](https://github.com/liangchaofei) 、[#537](https://github.com/ant-design/x/pull/537) by [@wzc520pyfm](https://github.com/wzc520pyfm) 、 [#553](https://github.com/ant-design/x/pull/553) by [@PeachScript](https://github.com/PeachScript) 、 [#578](https://github.com/ant-design/x/pull/578) by [@kimteayon](https://github.com/kimteayon) 、 [#585](https://github.com/ant-design/x/pull/585) by [@MaricoHan](https://github.com/MaricoHan)
+
 ## 1.0.5
 
 `2025-01-13`
