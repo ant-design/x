@@ -60,12 +60,12 @@ interface PlaceholderType {
 ### Attachments.FileCard Props
 
 | Property | Description | Type | Default | Version |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | --- |
 | prefixCls | The prefix of the style class name | string | - | - |
 | className | Style class name | string | - | - |
 | style | Style Object | React.CSSProperties | - | - |
 | item | Attachment, same as Upload `UploadFile` | Attachment | - | - |
-| onRemove | Callback function when attachment is removed | (item: Attachment) => void | - | - |
+| onRemove | A callback function, will be executed when removing file button is clicked, remove event will be prevented when the return value is false or a Promise which resolve(false) or reject | (item: Attachment) => boolean | Promise | - | - |
 
 ## Semantic DOM
 
