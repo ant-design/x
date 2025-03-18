@@ -46,6 +46,7 @@ export interface AttachmentsProps extends Omit<UploadProps, 'fileList'> {
   // ============== File List ==============
   items?: Attachment[];
   overflow?: FileListProps['overflow'];
+  imageProps?: FileListProps['imageProps'];
 }
 
 export interface AttachmentsRef {
@@ -67,6 +68,7 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
     onChange,
     onRemove,
     overflow,
+    imageProps,
     disabled,
     classNames = {},
     styles = {},
@@ -218,6 +220,7 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
             ...contextStyles.item,
             ...styles.item,
           }}
+          imageProps={imageProps}
         />
         {getPlaceholderNode('inline', hasFileList ? { style: { display: 'none' } } : {}, uploadRef)}
         <DropArea

@@ -41,6 +41,7 @@ const Demo = () => {
       },
     ],
     onClick: (menuInfo) => {
+      menuInfo.domEvent.stopPropagation();
       message.info(`Click ${conversation.key} - ${menuInfo.key}`);
     },
   });

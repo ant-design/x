@@ -41,6 +41,7 @@ For more properties, see [Upload](https://ant.design/components/upload).
 | rootClassName | Root node className | React.CSSProperties | - | - |
 | rootStyle | Root node style object | React.CSSProperties | - | - |
 | styles | Custom style object, [see below](#semantic-dom) | Record<string, React.CSSProperties> | - | - |
+| imageProps | Image config, same as [Image](https://ant.design/components/image) | ImageProps | - | - |
 
 ```tsx | pure
 interface PlaceholderType {
@@ -66,6 +67,7 @@ interface PlaceholderType {
 | style | Style Object | React.CSSProperties | - | - |
 | item | Attachment, same as Upload `UploadFile` | Attachment | - | - |
 | onRemove | A callback function, will be executed when removing file button is clicked, remove event will be prevented when the return value is false or a Promise which resolve(false) or reject | (item: Attachment) => boolean | Promise | - | - |
+| imageProps | Image config, same as [Image](https://ant.design/components/image) | ImageProps | - | - |
 
 ## Semantic DOM
 
