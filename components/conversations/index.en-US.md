@@ -21,7 +21,7 @@ demo:
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" background="grey">Basic</code>
 <code src="./demo/with-menu.tsx" background="grey">Operations</code>
-<code src="./demo/action.tsx" background="grey">Custom actions</code>
+<code src="./demo/actions.tsx" background="grey">Custom actions</code>
 <code src="./demo/controlled-mode.tsx" background="grey">Controlled Mode</code>
 <code src="./demo/group.tsx" background="grey">Group</code>
 <code src="./demo/group-sort.tsx" background="grey">Group Sort</code>

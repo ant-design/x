@@ -22,7 +22,7 @@ demo:
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" background="grey">基本</code>
 <code src="./demo/with-menu.tsx" background="grey">会话操作</code>
-<code src="./demo/action.tsx" background="grey">自定义操作</code>
+<code src="./demo/actions.tsx" background="grey">自定义操作</code>
 <code src="./demo/controlled-mode.tsx" background="grey">受控模式</code>
 <code src="./demo/group.tsx" background="grey">分组展示</code>
 <code src="./demo/group-sort.tsx" background="grey">分组排序</code>
