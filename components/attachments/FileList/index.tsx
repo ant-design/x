@@ -1,5 +1,5 @@
 import { LeftOutlined, PlusOutlined, RightOutlined } from '@ant-design/icons';
-import { Button, type UploadProps } from 'antd';
+import { Button, type ImageProps, type UploadProps } from 'antd';
 import classnames from 'classnames';
 import { CSSMotionList } from 'rc-motion';
 import React from 'react';
@@ -14,6 +14,7 @@ export interface FileListProps {
   onRemove: (item: Attachment) => void;
   overflow?: 'scrollX' | 'scrollY' | 'wrap';
   upload: UploadProps;
+  imageProps?: ImageProps;
 
   // Semantic
   listClassName?: string;
@@ -35,6 +36,7 @@ export default function FileList(props: FileListProps) {
     listStyle,
     itemClassName,
     itemStyle,
+    imageProps,
   } = props;
 
   const listCls = `${prefixCls}-list`;
@@ -133,6 +135,7 @@ export default function FileList(props: FileListProps) {
               item={item}
               onRemove={onRemove}
               className={classnames(motionCls, itemClassName)}
+              imageProps={imageProps}
               style={{
                 ...motionStyle,
                 ...itemStyle,

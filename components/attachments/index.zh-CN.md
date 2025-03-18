@@ -44,6 +44,7 @@ Attachments 组件用于需要展示一组附件信息集合的场景。
 | rootClassName | 根节点的样式类名 | string | - | - |
 | rootStyle | 根节点的样式对象 | React.CSSProperties | - | - |
 | styles | 自定义样式对象，[见下](#semantic-dom) | Record<string, React.CSSProperties> | - | - |
+| imageProps | 图片属性，同 antd [Image](https://ant.design/components/image) 属性 | ImageProps | - | - |
 
 ```tsx | pure
 interface PlaceholderType {
@@ -69,6 +70,7 @@ interface PlaceholderType {
 | style | 样式对象 | React.CSSProperties | - | - |
 | item | 附件，同 Upload `UploadFile` | Attachment | - | - |
 | onRemove | 点击移除文件时的回调，返回值为 false 时不移除。支持返回一个 Promise 对象，Promise 对象 resolve(false) 或 reject 时不移除 | (item: Attachment) => boolean | Promise | - | - |
+| imageProps | 图片属性，同 antd [Image](https://ant.design/components/image) 属性 | ImageProps | - | - |
 
 ## Semantic DOM
 
