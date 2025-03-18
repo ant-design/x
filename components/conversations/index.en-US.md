@@ -21,6 +21,7 @@ demo:
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" background="grey">Basic</code>
 <code src="./demo/with-menu.tsx" background="grey">Operations</code>
+<code src="./demo/action.tsx" background="grey">Custom actions</code>
 <code src="./demo/controlled-mode.tsx" background="grey">Controlled Mode</code>
 <code src="./demo/group.tsx" background="grey">Group</code>
 <code src="./demo/group-sort.tsx" background="grey">Group Sort</code>
@@ -39,6 +40,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | items | Data source for conversation list | `Conversation`[] | - | - |
 | onActiveChange | Callback for selection change | (value: string) => void | - | - |
 | menu | Operation menu for conversations | MenuProps \| ((value: `Conversation`) => MenuProps) | - | - |
+| actions | Custom actions | ReactNode \| (oriNode, info: { components:{ menuNode: ReactNode}, value : Conversation }) => ReactNode | - | - |
 | groupable | If grouping is supported, it defaults to the `Conversation.group` field | boolean \| GroupableProps | - | - |
 | styles | Semantic structure styles | Record<'item', React.CSSProperties> | - | - |
 | classNames | Semantic structure class names | Record<'item', string> | - | - |

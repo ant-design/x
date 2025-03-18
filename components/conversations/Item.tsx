@@ -6,7 +6,7 @@ import React from 'react';
 import type { MenuProps } from 'antd';
 import type { DirectionType } from 'antd/es/config-provider';
 import pickAttrs from 'rc-util/lib/pickAttrs';
-import type { Conversation } from './interface';
+import type { ActionsRender, Conversation } from './interface';
 
 export interface ConversationsItemProps
   extends Omit<React.HTMLAttributes<HTMLLIElement>, 'onClick'> {
@@ -14,6 +14,7 @@ export interface ConversationsItemProps
   prefixCls?: string;
   direction?: DirectionType;
   menu?: MenuProps;
+  actions?: React.ReactNode | ActionsRender;
   active?: boolean;
   onClick?: (info: Conversation) => void;
 }
@@ -23,7 +24,8 @@ const stopPropagation: React.MouseEventHandler<HTMLSpanElement> = (e) => {
 };
 
 const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
-  const { prefixCls, info, className, direction, onClick, active, menu, ...restProps } = props;
+  const { prefixCls, info, className, direction, onClick, active, menu, actions, ...restProps } =
+    props;
 
   const domProps = pickAttrs(restProps, {
     aria: true,
@@ -61,6 +63,37 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
     }
   };
 
+  // ============================ Menu ============================
+  const menuNode = (
+    <Dropdown
+      menu={menu}
+      placement={direction === 'rtl' ? 'bottomLeft' : 'bottomRight'}
+      trigger={['click']}
+      disabled={disabled}
+      onOpenChange={onOpenChange}
+    >
+      <EllipsisOutlined
+        onClick={stopPropagation}
+        disabled={disabled}
+        className={`${prefixCls}-menu-icon`}
+      />
+    </Dropdown>
+  );
+
+  // ============================ Actions ============================
+  let actionNode: React.ReactNode = <></>;
+
+  if (typeof actions === 'function') {
+    actionNode = actions(menuNode, {
+      components: {
+        menuNode,
+      },
+      value: info,
+    });
+  } else if (actions) {
+    actionNode = actions;
+  }
+
   // ============================ Render ============================
   return (
     <Tooltip
@@ -79,21 +112,8 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
         >
           {info.label}
         </Typography.Text>
-        {menu && !disabled && (
-          <Dropdown
-            menu={menu}
-            placement={direction === 'rtl' ? 'bottomLeft' : 'bottomRight'}
-            trigger={['click']}
-            disabled={disabled}
-            onOpenChange={onOpenChange}
-          >
-            <EllipsisOutlined
-              onClick={stopPropagation}
-              disabled={disabled}
-              className={`${prefixCls}-menu-icon`}
-            />
-          </Dropdown>
-        )}
+        {actions && !disabled && actionNode}
+        {menu && !actions && !disabled && menuNode}
       </li>
     </Tooltip>
   );
