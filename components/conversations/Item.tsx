@@ -72,11 +72,15 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
       disabled={disabled}
       onOpenChange={onOpenChange}
     >
-      <EllipsisOutlined
-        onClick={stopPropagation}
-        disabled={disabled}
-        className={`${prefixCls}-menu-icon`}
-      />
+      {React.isValidElement(menu?.icon) ? (
+        menu.icon
+      ) : (
+        <EllipsisOutlined
+          onClick={stopPropagation}
+          disabled={disabled}
+          className={`${prefixCls}-menu-icon`}
+        />
+      )}
     </Dropdown>
   );
 

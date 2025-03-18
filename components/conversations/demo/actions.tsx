@@ -1,4 +1,10 @@
-import { DeleteOutlined, EditOutlined, ShareAltOutlined, StopOutlined } from '@ant-design/icons';
+import {
+  DeleteOutlined,
+  EditOutlined,
+  PlusSquareOutlined,
+  ShareAltOutlined,
+  StopOutlined,
+} from '@ant-design/icons';
 import { Conversations } from '@ant-design/x';
 import type { ConversationsProps } from '@ant-design/x';
 import { App, type GetProp, Tooltip, theme } from 'antd';
@@ -21,6 +27,7 @@ const Demo = () => {
   };
 
   const menuConfig: ConversationsProps['menu'] = (conversation) => ({
+    icon: <PlusSquareOutlined />,
     items: [
       {
         label: 'Operation 1',
@@ -51,10 +58,10 @@ const Demo = () => {
       actions={(_, { components: { menuNode }, value }) => {
         return (
           <>
+            {menuNode}
             <Tooltip title={value.label}>
               <ShareAltOutlined />
             </Tooltip>
-            {menuNode}
           </>
         );
       }}
