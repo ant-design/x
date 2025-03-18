@@ -1,7 +1,7 @@
 import { EllipsisOutlined } from '@ant-design/icons';
 import { Dropdown, Tooltip, Typography } from 'antd';
 import classnames from 'classnames';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import type { MenuProps } from 'antd';
 import type { DirectionType } from 'antd/es/config-provider';
@@ -94,6 +94,12 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
     actionNode = actions;
   }
 
+  useEffect(() => {
+    if (!React.isValidElement(actionNode)) {
+      console.error('Action is Valid Element : %s', actionNode);
+    }
+  }, [actionNode]);
+
   // ============================ Render ============================
   return (
     <Tooltip
@@ -112,7 +118,7 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
         >
           {info.label}
         </Typography.Text>
-        {actions && !disabled && actionNode}
+        {actions && !disabled && React.isValidElement(actionNode) && actionNode}
         {menu && !actions && !disabled && menuNode}
       </li>
     </Tooltip>
