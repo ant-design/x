@@ -1,5 +1,821 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`renders components/conversations/demo/action.tsx extend context correctly 1`] = `
+<div
+  class="ant-app"
+>
+  <ul
+    class="ant-conversations"
+    style="width: 256px; background: #ffffff; border-radius: 6px;"
+  >
+    <li
+      aria-describedby="test-id"
+      class="ant-conversations-item ant-conversations-item-active"
+    >
+      <span
+        aria-label="Conversation Item 1"
+        class="ant-typography ant-typography-ellipsis ant-conversations-label"
+      >
+        Conversation Item 1
+      </span>
+      <span
+        aria-describedby="test-id"
+        aria-label="share-alt"
+        class="anticon anticon-share-alt"
+        role="img"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="share-alt"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M752 664c-28.5 0-54.8 10-75.4 26.7L469.4 540.8a160.68 160.68 0 000-57.6l207.2-149.9C697.2 350 723.5 360 752 360c66.2 0 120-53.8 120-120s-53.8-120-120-120-120 53.8-120 120c0 11.6 1.6 22.7 4.7 33.3L439.9 415.8C410.7 377.1 364.3 352 312 352c-88.4 0-160 71.6-160 160s71.6 160 160 160c52.3 0 98.7-25.1 127.9-63.8l196.8 142.5c-3.1 10.6-4.7 21.8-4.7 33.3 0 66.2 53.8 120 120 120s120-53.8 120-120-53.8-120-120-120zm0-476c28.7 0 52 23.3 52 52s-23.3 52-52 52-52-23.3-52-52 23.3-52 52-52zM312 600c-48.5 0-88-39.5-88-88s39.5-88 88-88 88 39.5 88 88-39.5 88-88 88zm440 236c-28.7 0-52-23.3-52-52s23.3-52 52-52 52 23.3 52 52-23.3 52-52 52z"
+          />
+        </svg>
+      </span>
+      <div
+        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-top"
+        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1200;"
+      >
+        <div
+          class="ant-tooltip-arrow"
+          style="position: absolute; bottom: 0px; left: 0px;"
+        />
+        <div
+          class="ant-tooltip-content"
+        >
+          <div
+            class="ant-tooltip-inner"
+            id="test-id"
+            role="tooltip"
+          >
+            Conversation Item 1
+          </div>
+        </div>
+      </div>
+      <span
+        aria-label="ellipsis"
+        class="anticon anticon-ellipsis ant-dropdown-trigger ant-conversations-menu-icon"
+        role="img"
+        tabindex="-1"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="ellipsis"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          />
+        </svg>
+      </span>
+      <div
+        class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up ant-dropdown-placement-bottomRight"
+        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1150;"
+      >
+        <ul
+          class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light"
+          data-menu-list="true"
+          role="menu"
+          tabindex="0"
+        >
+          <li
+            aria-describedby="test-id"
+            class="ant-dropdown-menu-item"
+            data-menu-id="rc-menu-uuid-test-operation1"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <span
+              aria-label="edit"
+              class="anticon anticon-edit ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="edit"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Operation 1
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            />
+            <div
+              class="ant-tooltip-content"
+            >
+              <div
+                class="ant-tooltip-inner"
+                id="test-id"
+                role="tooltip"
+              />
+            </div>
+          </div>
+          <li
+            aria-describedby="test-id"
+            aria-disabled="true"
+            class="ant-dropdown-menu-item ant-dropdown-menu-item-disabled"
+            data-menu-id="rc-menu-uuid-test-operation2"
+            role="menuitem"
+          >
+            <span
+              aria-label="stop"
+              class="anticon anticon-stop ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="stop"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372 0-89 31.3-170.8 83.5-234.8l523.3 523.3C682.8 852.7 601 884 512 884zm288.5-137.2L277.2 223.5C341.2 171.3 423 140 512 140c205.4 0 372 166.6 372 372 0 89-31.3 170.8-83.5 234.8z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Operation 2
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            />
+            <div
+              class="ant-tooltip-content"
+            >
+              <div
+                class="ant-tooltip-inner"
+                id="test-id"
+                role="tooltip"
+              />
+            </div>
+          </div>
+          <li
+            aria-describedby="test-id"
+            class="ant-dropdown-menu-item ant-dropdown-menu-item-danger"
+            data-menu-id="rc-menu-uuid-test-operation3"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <span
+              aria-label="delete"
+              class="anticon anticon-delete ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="delete"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M360 184h-8c4.4 0 8-3.6 8-8v8h304v-8c0 4.4 3.6 8 8 8h-8v72h72v-80c0-35.3-28.7-64-64-64H352c-35.3 0-64 28.7-64 64v80h72v-72zm504 72H160c-17.7 0-32 14.3-32 32v32c0 4.4 3.6 8 8 8h60.4l24.7 523c1.6 34.1 29.8 61 63.9 61h454c34.2 0 62.3-26.8 63.9-61l24.7-523H888c4.4 0 8-3.6 8-8v-32c0-17.7-14.3-32-32-32zM731.3 840H292.7l-24.2-512h487l-24.2 512z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Operation 3
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            />
+            <div
+              class="ant-tooltip-content"
+            >
+              <div
+                class="ant-tooltip-inner"
+                id="test-id"
+                role="tooltip"
+              />
+            </div>
+          </div>
+        </ul>
+        <div
+          aria-hidden="true"
+          style="display: none;"
+        />
+      </div>
+    </li>
+    <div
+      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
+      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+    >
+      <div
+        class="ant-tooltip-arrow"
+        style="position: absolute; top: 0px; left: 0px;"
+      />
+      <div
+        class="ant-tooltip-content"
+      >
+        <div
+          class="ant-tooltip-inner"
+          id="test-id"
+          role="tooltip"
+        >
+          Conversation Item 1
+        </div>
+      </div>
+    </div>
+    <li
+      aria-describedby="test-id"
+      class="ant-conversations-item"
+    >
+      <span
+        aria-label="Conversation Item 2"
+        class="ant-typography ant-typography-ellipsis ant-conversations-label"
+      >
+        Conversation Item 2
+      </span>
+      <span
+        aria-describedby="test-id"
+        aria-label="share-alt"
+        class="anticon anticon-share-alt"
+        role="img"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="share-alt"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M752 664c-28.5 0-54.8 10-75.4 26.7L469.4 540.8a160.68 160.68 0 000-57.6l207.2-149.9C697.2 350 723.5 360 752 360c66.2 0 120-53.8 120-120s-53.8-120-120-120-120 53.8-120 120c0 11.6 1.6 22.7 4.7 33.3L439.9 415.8C410.7 377.1 364.3 352 312 352c-88.4 0-160 71.6-160 160s71.6 160 160 160c52.3 0 98.7-25.1 127.9-63.8l196.8 142.5c-3.1 10.6-4.7 21.8-4.7 33.3 0 66.2 53.8 120 120 120s120-53.8 120-120-53.8-120-120-120zm0-476c28.7 0 52 23.3 52 52s-23.3 52-52 52-52-23.3-52-52 23.3-52 52-52zM312 600c-48.5 0-88-39.5-88-88s39.5-88 88-88 88 39.5 88 88-39.5 88-88 88zm440 236c-28.7 0-52-23.3-52-52s23.3-52 52-52 52 23.3 52 52-23.3 52-52 52z"
+          />
+        </svg>
+      </span>
+      <div
+        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-top"
+        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1200;"
+      >
+        <div
+          class="ant-tooltip-arrow"
+          style="position: absolute; bottom: 0px; left: 0px;"
+        />
+        <div
+          class="ant-tooltip-content"
+        >
+          <div
+            class="ant-tooltip-inner"
+            id="test-id"
+            role="tooltip"
+          >
+            Conversation Item 2
+          </div>
+        </div>
+      </div>
+      <span
+        aria-label="ellipsis"
+        class="anticon anticon-ellipsis ant-dropdown-trigger ant-conversations-menu-icon"
+        role="img"
+        tabindex="-1"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="ellipsis"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          />
+        </svg>
+      </span>
+      <div
+        class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up ant-dropdown-placement-bottomRight"
+        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1150;"
+      >
+        <ul
+          class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light"
+          data-menu-list="true"
+          role="menu"
+          tabindex="0"
+        >
+          <li
+            aria-describedby="test-id"
+            class="ant-dropdown-menu-item"
+            data-menu-id="rc-menu-uuid-test-operation1"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <span
+              aria-label="edit"
+              class="anticon anticon-edit ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="edit"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Operation 1
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            />
+            <div
+              class="ant-tooltip-content"
+            >
+              <div
+                class="ant-tooltip-inner"
+                id="test-id"
+                role="tooltip"
+              />
+            </div>
+          </div>
+          <li
+            aria-describedby="test-id"
+            aria-disabled="true"
+            class="ant-dropdown-menu-item ant-dropdown-menu-item-disabled"
+            data-menu-id="rc-menu-uuid-test-operation2"
+            role="menuitem"
+          >
+            <span
+              aria-label="stop"
+              class="anticon anticon-stop ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="stop"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372 0-89 31.3-170.8 83.5-234.8l523.3 523.3C682.8 852.7 601 884 512 884zm288.5-137.2L277.2 223.5C341.2 171.3 423 140 512 140c205.4 0 372 166.6 372 372 0 89-31.3 170.8-83.5 234.8z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Operation 2
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            />
+            <div
+              class="ant-tooltip-content"
+            >
+              <div
+                class="ant-tooltip-inner"
+                id="test-id"
+                role="tooltip"
+              />
+            </div>
+          </div>
+          <li
+            aria-describedby="test-id"
+            class="ant-dropdown-menu-item ant-dropdown-menu-item-danger"
+            data-menu-id="rc-menu-uuid-test-operation3"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <span
+              aria-label="delete"
+              class="anticon anticon-delete ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="delete"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M360 184h-8c4.4 0 8-3.6 8-8v8h304v-8c0 4.4 3.6 8 8 8h-8v72h72v-80c0-35.3-28.7-64-64-64H352c-35.3 0-64 28.7-64 64v80h72v-72zm504 72H160c-17.7 0-32 14.3-32 32v32c0 4.4 3.6 8 8 8h60.4l24.7 523c1.6 34.1 29.8 61 63.9 61h454c34.2 0 62.3-26.8 63.9-61l24.7-523H888c4.4 0 8-3.6 8-8v-32c0-17.7-14.3-32-32-32zM731.3 840H292.7l-24.2-512h487l-24.2 512z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Operation 3
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            />
+            <div
+              class="ant-tooltip-content"
+            >
+              <div
+                class="ant-tooltip-inner"
+                id="test-id"
+                role="tooltip"
+              />
+            </div>
+          </div>
+        </ul>
+        <div
+          aria-hidden="true"
+          style="display: none;"
+        />
+      </div>
+    </li>
+    <div
+      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
+      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+    >
+      <div
+        class="ant-tooltip-arrow"
+        style="position: absolute; top: 0px; left: 0px;"
+      />
+      <div
+        class="ant-tooltip-content"
+      >
+        <div
+          class="ant-tooltip-inner"
+          id="test-id"
+          role="tooltip"
+        >
+          Conversation Item 2
+        </div>
+      </div>
+    </div>
+    <li
+      aria-describedby="test-id"
+      class="ant-conversations-item"
+    >
+      <span
+        aria-label="Conversation Item 3"
+        class="ant-typography ant-typography-ellipsis ant-conversations-label"
+      >
+        Conversation Item 3
+      </span>
+      <span
+        aria-describedby="test-id"
+        aria-label="share-alt"
+        class="anticon anticon-share-alt"
+        role="img"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="share-alt"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M752 664c-28.5 0-54.8 10-75.4 26.7L469.4 540.8a160.68 160.68 0 000-57.6l207.2-149.9C697.2 350 723.5 360 752 360c66.2 0 120-53.8 120-120s-53.8-120-120-120-120 53.8-120 120c0 11.6 1.6 22.7 4.7 33.3L439.9 415.8C410.7 377.1 364.3 352 312 352c-88.4 0-160 71.6-160 160s71.6 160 160 160c52.3 0 98.7-25.1 127.9-63.8l196.8 142.5c-3.1 10.6-4.7 21.8-4.7 33.3 0 66.2 53.8 120 120 120s120-53.8 120-120-53.8-120-120-120zm0-476c28.7 0 52 23.3 52 52s-23.3 52-52 52-52-23.3-52-52 23.3-52 52-52zM312 600c-48.5 0-88-39.5-88-88s39.5-88 88-88 88 39.5 88 88-39.5 88-88 88zm440 236c-28.7 0-52-23.3-52-52s23.3-52 52-52 52 23.3 52 52-23.3 52-52 52z"
+          />
+        </svg>
+      </span>
+      <div
+        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-top"
+        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1200;"
+      >
+        <div
+          class="ant-tooltip-arrow"
+          style="position: absolute; bottom: 0px; left: 0px;"
+        />
+        <div
+          class="ant-tooltip-content"
+        >
+          <div
+            class="ant-tooltip-inner"
+            id="test-id"
+            role="tooltip"
+          >
+            Conversation Item 3
+          </div>
+        </div>
+      </div>
+      <span
+        aria-label="ellipsis"
+        class="anticon anticon-ellipsis ant-dropdown-trigger ant-conversations-menu-icon"
+        role="img"
+        tabindex="-1"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="ellipsis"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          />
+        </svg>
+      </span>
+      <div
+        class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up ant-dropdown-placement-bottomRight"
+        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1150;"
+      >
+        <ul
+          class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light"
+          data-menu-list="true"
+          role="menu"
+          tabindex="0"
+        >
+          <li
+            aria-describedby="test-id"
+            class="ant-dropdown-menu-item"
+            data-menu-id="rc-menu-uuid-test-operation1"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <span
+              aria-label="edit"
+              class="anticon anticon-edit ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="edit"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Operation 1
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            />
+            <div
+              class="ant-tooltip-content"
+            >
+              <div
+                class="ant-tooltip-inner"
+                id="test-id"
+                role="tooltip"
+              />
+            </div>
+          </div>
+          <li
+            aria-describedby="test-id"
+            aria-disabled="true"
+            class="ant-dropdown-menu-item ant-dropdown-menu-item-disabled"
+            data-menu-id="rc-menu-uuid-test-operation2"
+            role="menuitem"
+          >
+            <span
+              aria-label="stop"
+              class="anticon anticon-stop ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="stop"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372 0-89 31.3-170.8 83.5-234.8l523.3 523.3C682.8 852.7 601 884 512 884zm288.5-137.2L277.2 223.5C341.2 171.3 423 140 512 140c205.4 0 372 166.6 372 372 0 89-31.3 170.8-83.5 234.8z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Operation 2
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            />
+            <div
+              class="ant-tooltip-content"
+            >
+              <div
+                class="ant-tooltip-inner"
+                id="test-id"
+                role="tooltip"
+              />
+            </div>
+          </div>
+          <li
+            aria-describedby="test-id"
+            class="ant-dropdown-menu-item ant-dropdown-menu-item-danger"
+            data-menu-id="rc-menu-uuid-test-operation3"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <span
+              aria-label="delete"
+              class="anticon anticon-delete ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="delete"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M360 184h-8c4.4 0 8-3.6 8-8v8h304v-8c0 4.4 3.6 8 8 8h-8v72h72v-80c0-35.3-28.7-64-64-64H352c-35.3 0-64 28.7-64 64v80h72v-72zm504 72H160c-17.7 0-32 14.3-32 32v32c0 4.4 3.6 8 8 8h60.4l24.7 523c1.6 34.1 29.8 61 63.9 61h454c34.2 0 62.3-26.8 63.9-61l24.7-523H888c4.4 0 8-3.6 8-8v-32c0-17.7-14.3-32-32-32zM731.3 840H292.7l-24.2-512h487l-24.2 512z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Operation 3
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            />
+            <div
+              class="ant-tooltip-content"
+            >
+              <div
+                class="ant-tooltip-inner"
+                id="test-id"
+                role="tooltip"
+              />
+            </div>
+          </div>
+        </ul>
+        <div
+          aria-hidden="true"
+          style="display: none;"
+        />
+      </div>
+    </li>
+    <div
+      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
+      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+    >
+      <div
+        class="ant-tooltip-arrow"
+        style="position: absolute; top: 0px; left: 0px;"
+      />
+      <div
+        class="ant-tooltip-content"
+      >
+        <div
+          class="ant-tooltip-inner"
+          id="test-id"
+          role="tooltip"
+        >
+          Conversation Item 3
+        </div>
+      </div>
+    </div>
+    <li
+      aria-describedby="test-id"
+      class="ant-conversations-item ant-conversations-item-disabled"
+    >
+      <span
+        aria-label="Conversation Item 4"
+        class="ant-typography ant-typography-ellipsis ant-conversations-label"
+      >
+        Conversation Item 4
+      </span>
+    </li>
+    <div
+      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
+      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+    >
+      <div
+        class="ant-tooltip-arrow"
+        style="position: absolute; top: 0px; left: 0px;"
+      />
+      <div
+        class="ant-tooltip-content"
+      >
+        <div
+          class="ant-tooltip-inner"
+          id="test-id"
+          role="tooltip"
+        >
+          Conversation Item 4
+        </div>
+      </div>
+    </div>
+  </ul>
+</div>
+`;
+
+exports[`renders components/conversations/demo/action.tsx extend context correctly 2`] = `[]`;
+
 exports[`renders components/conversations/demo/basic.tsx extend context correctly 1`] = `
 <ul
   class="ant-conversations"
