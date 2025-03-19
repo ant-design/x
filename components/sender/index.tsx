@@ -38,7 +38,8 @@ export type ActionsRender = (
   },
 ) => React.ReactNode;
 
-export interface SenderProps extends Pick<TextareaProps, 'placeholder' | 'onKeyPress'> {
+export interface SenderProps
+  extends Pick<TextareaProps, 'placeholder' | 'onKeyPress' | 'onFocus' | 'onBlur'> {
   prefixCls?: string;
   defaultValue?: string;
   value?: string;
