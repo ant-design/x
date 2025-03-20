@@ -1,7 +1,7 @@
 import { EllipsisOutlined } from '@ant-design/icons';
 import { Dropdown, Tooltip, Typography } from 'antd';
 import classnames from 'classnames';
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import type { MenuProps } from 'antd';
 import type { DirectionType } from 'antd/es/config-provider';
@@ -61,6 +61,32 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
     }
   };
 
+  // ============================ Menu ============================
+
+  const { trigger, items = [], ...menuOther } = menu || {};
+
+  const menusTriggerNode = useCallback(
+    (value: Conversation) => {
+      if (!menu) return null;
+      if (trigger) {
+        if (typeof trigger === 'function') {
+          const triggerNode = trigger(value);
+          return React.isValidElement(triggerNode) ? triggerNode : null;
+        }
+        if (React.isValidElement(trigger)) return trigger;
+        return null;
+      }
+      return (
+        <EllipsisOutlined
+          onClick={stopPropagation}
+          disabled={disabled}
+          className={`${prefixCls}-menu-icon`}
+        />
+      );
+    },
+    [trigger, menu],
+  );
+
   // ============================ Render ============================
   return (
     <Tooltip
@@ -79,19 +105,18 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
         >
           {info.label}
         </Typography.Text>
-        {menu && !disabled && (
+        {!disabled && menu && (
           <Dropdown
-            menu={menu}
+            menu={{
+              ...menuOther,
+              items,
+            }}
             placement={direction === 'rtl' ? 'bottomLeft' : 'bottomRight'}
             trigger={['click']}
             disabled={disabled}
             onOpenChange={onOpenChange}
           >
-            <EllipsisOutlined
-              onClick={stopPropagation}
-              disabled={disabled}
-              className={`${prefixCls}-menu-icon`}
-            />
+            {menusTriggerNode(info)}
           </Dropdown>
         )}
       </li>

@@ -21,6 +21,7 @@ demo:
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" background="grey">Basic</code>
 <code src="./demo/with-menu.tsx" background="grey">Operations</code>
+<code src="./demo/with-menu-trigger.tsx" background="grey">Custom Operations</code>
 <code src="./demo/controlled-mode.tsx" background="grey">Controlled Mode</code>
 <code src="./demo/group.tsx" background="grey">Group</code>
 <code src="./demo/group-sort.tsx" background="grey">Group Sort</code>
@@ -60,6 +61,13 @@ Common props ref：[Common props](/docs/react/common-props)
 | --- | --- | --- | --- | --- |
 | `sort` | Group sorter | (a: string, b: string) => number | - | - |
 | `title` | Semantic custom rendering | ((group: string, info: { components: { GroupTitle: React.ComponentType } }) => React.ReactNode) | - | - |
+
+### MenuProps
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| `trigger` | Customize menu trigger | React.ReactNode \| ((value: Conversation) => React.ReactNode) | - | - |
+| `items` | Operation configuration items | [ItemType[]](https://ant.design/components/menu-cn#itemtype) | [] | - |
 
 ## Design Token
 
