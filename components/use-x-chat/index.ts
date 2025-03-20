@@ -5,7 +5,7 @@ import useSyncState from './useSyncState';
 
 export type SimpleType = string | number | boolean | object;
 
-export type MessageStatus = 'local' | 'loading' | 'success' | 'error';
+export type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error';
 
 type RequestPlaceholderFn<Message extends SimpleType> = (
   message: Message,
@@ -199,7 +199,7 @@ export default function useXChat<
       },
       {
         onUpdate: (message) => {
-          updateMessage(message, 'loading');
+          updateMessage(message, 'updating');
         },
         onSuccess: (message) => {
           updateMessage(message, 'success');
