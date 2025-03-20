@@ -76,13 +76,7 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
         if (React.isValidElement(trigger)) return trigger;
         return null;
       }
-      return (
-        <EllipsisOutlined
-          onClick={stopPropagation}
-          disabled={disabled}
-          className={`${prefixCls}-menu-icon`}
-        />
-      );
+      return <EllipsisOutlined onClick={stopPropagation} className={`${prefixCls}-menu-icon`} />;
     },
     [trigger, menu],
   );
