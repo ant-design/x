@@ -1,7 +1,7 @@
 import { EllipsisOutlined } from '@ant-design/icons';
 import { Dropdown, Tooltip, Typography } from 'antd';
 import classnames from 'classnames';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 
 import type { MenuProps } from 'antd';
 import type { DirectionType } from 'antd/es/config-provider';
