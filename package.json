@@ -175,7 +175,7 @@
     "dayjs": "^1.11.13",
     "dekko": "^0.2.1",
     "dumi": "^2.4.17",
-    "dumi-plugin-color-chunk": "^1.1.2",
+    "dumi-plugin-color-chunk": "^2.1.0",
     "esbuild-loader": "^4.2.2",
     "fast-glob": "^3.3.2",
     "father": "4.5.2",
