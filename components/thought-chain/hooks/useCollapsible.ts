@@ -53,12 +53,19 @@ const useCollapsible: UseCollapsible = (collapsible, prefixCls, rootPrefixCls) =
   }, [collapsible]);
 
   // ============================ ExpandedKeys ============================
+  const collapsibleIsTrue = collapsible === true;
   const [mergedExpandedKeys, setMergedExpandedKeys] = useMergedState<
     RequiredCollapsibleOptions['expandedKeys']
-  >([], {
-    value: customizeExpandedKeys,
-    onChange: customizeOnExpand,
-  });
+  >(
+    customizeExpandedKeys,
+    collapsibleIsTrue
+      ? undefined
+      : {
+          defaultValue: customizeExpandedKeys,
+          value: customizeExpandedKeys,
+          onChange: customizeOnExpand,
+        },
+  );
 
   // ============================ Event ============================
   const onItemExpand = (curKey: string) => {
