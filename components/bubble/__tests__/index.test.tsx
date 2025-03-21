@@ -41,6 +41,28 @@ describe('bubble', () => {
     expect(element?.textContent).toBe('test-messageRender');
   });
 
+  // 测试 footer 属性为静态内容时的渲染
+  it('should render static footer', () => {
+    const { container } = render(<Bubble content="Test content" footer={'Test footer'} />);
+    const element = container.querySelector<HTMLSpanElement>('.ant-bubble .ant-bubble-footer');
+    expect(element).toBeTruthy();
+    expect(element?.textContent).toBe('Test footer');
+  });
+
+  // 测试 footer 属性为函数时的渲染
+  it('should render footer with function and get content', () => {
+    const content = 'Test content';
+    const footerFunction = (content: string) => (
+      <div className="test-footer">{`Footer for: ${content}`}</div>
+    );
+    const { container } = render(<Bubble content={content} footer={footerFunction} />);
+    const element = container.querySelector<HTMLSpanElement>(
+      '.ant-bubble .ant-bubble-footer .test-footer',
+    );
+    expect(element).toBeTruthy();
+    expect(element?.textContent).toBe('Footer for: Test content');
+  });
+
   it('Bubble support typing', () => {
     const { container } = render(<Bubble typing content="test" />);
     expect(container.querySelector<HTMLDivElement>('.ant-bubble')).toHaveClass('ant-bubble-typing');

@@ -44,7 +44,7 @@ demo:
 | avatar | 展示头像 | React.ReactNode | - |  |
 | classNames | 语义化结构 class | [Record<SemanticDOM, string>](#semantic-dom) | - |  |
 | content | 聊天内容 | string | - |  |
-| footer | 底部内容 | React.ReactNode | - |  |
+| footer | 底部内容 | React.ReactNode \| (content: string) => React.ReactNode | - |  |
 | header | 头部内容 | React.ReactNode | - |  |
 | loading | 聊天内容加载状态 | boolean | - |  |
 | placement | 信息位置 | `start` \| `end` | `start` |  |
