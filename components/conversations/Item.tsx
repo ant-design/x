@@ -3,14 +3,10 @@ import { Dropdown, Tooltip, Typography } from 'antd';
 import classnames from 'classnames';
 import React, { useCallback } from 'react';
 
-import type { MenuProps } from 'antd';
 import type { DirectionType } from 'antd/es/config-provider';
 import pickAttrs from 'rc-util/lib/pickAttrs';
-import type { Conversation } from './interface';
+import type { Conversation, menuType } from './interface';
 
-interface menuType extends MenuProps {
-  trigger?: React.ReactNode | ((value: Conversation) => React.ReactNode);
-}
 export interface ConversationsItemProps
   extends Omit<React.HTMLAttributes<HTMLLIElement>, 'onClick'> {
   info: Conversation;

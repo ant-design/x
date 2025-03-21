@@ -1,4 +1,3 @@
-import type { MenuProps } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
 
@@ -13,7 +12,7 @@ import useGroupable from './hooks/useGroupable';
 import useStyle from './style';
 
 import pickAttrs from 'rc-util/lib/pickAttrs';
-import type { Conversation, Groupable } from './interface';
+import type { Conversation, Groupable, menuType } from './interface';
 
 /**
  * @desc 会话列表组件参数
@@ -48,7 +47,7 @@ export interface ConversationsProps extends React.HTMLAttributes<HTMLUListElemen
    * @desc 会话操作菜单
    * @descEN Operation menu for conversations
    */
-  menu?: MenuProps | ((value: Conversation) => MenuProps);
+  menu?: menuType | ((value: Conversation) => menuType);
 
   /**
    * @desc 是否支持分组, 开启后默认按 {@link Conversation.group} 字段分组
