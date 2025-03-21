@@ -36,6 +36,7 @@ export interface MessageInfo<Message extends SimpleType> {
   id: number | string;
   message: Message;
   status: MessageStatus;
+  updating: boolean;
 }
 
 export type DefaultMessageInfo<Message extends SimpleType> = Pick<MessageInfo<Message>, 'message'> &
@@ -77,15 +78,17 @@ export default function useXChat<
     (defaultMessages || []).map((info, index) => ({
       id: `default_${index}`,
       status: 'local',
+      updating: false,
       ...info,
     })),
   );
 
-  const createMessage = (message: AgentMessage, status: MessageStatus) => {
+  const createMessage = (message: AgentMessage, status: MessageStatus, updating = false) => {
     const msg: MessageInfo<AgentMessage> = {
       id: `msg_${idRef.current}`,
       message,
       status,
+      updating,
     };
 
     idRef.current += 1;
@@ -111,6 +114,7 @@ export default function useXChat<
           id: key,
           message: bubbleMsg,
           status: agentMsg.status,
+          updating: agentMsg.updating,
         });
       });
     });
@@ -164,10 +168,11 @@ export default function useXChat<
     let updatingMsgId: number | string | null = null;
     const updateMessage = (message: AgentMessage, status: MessageStatus) => {
       let msg = getMessages().find((info) => info.id === updatingMsgId);
+      const updating = status === 'loading';
 
       if (!msg) {
         // Create if not exist
-        msg = createMessage(message, status);
+        msg = createMessage(message, status, updating);
         setMessages((ori) => {
           const oriWithoutPending = ori.filter((info) => info.id !== loadingMsgId);
           return [...oriWithoutPending, msg!];
@@ -182,6 +187,7 @@ export default function useXChat<
                 ...info,
                 message,
                 status,
+                updating,
               };
             }
             return info;

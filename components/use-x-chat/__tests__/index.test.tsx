@@ -45,10 +45,13 @@ describe('useXChat', () => {
     return JSON.parse(container.querySelector('pre')!.textContent!);
   }
 
-  function expectMessage<T = string>(message: T, status?: MessageStatus) {
+  function expectMessage<T = string>(message: T, status?: MessageStatus, updating?: boolean) {
     const obj: any = { message };
     if (status) {
       obj.status = status;
+    }
+    if (typeof updating === 'boolean') {
+      obj.updating = updating;
     }
     return expect.objectContaining(obj);
   }
@@ -69,6 +72,7 @@ describe('useXChat', () => {
         id: 'default_0',
         message: 'default',
         status: 'local',
+        updating: false,
       },
     ]);
   });
@@ -215,6 +219,29 @@ describe('useXChat', () => {
     expect(getMessages(container)).toEqual([
       expectMessage('little', 'local'),
       expectMessage('light', 'success'),
+    ]);
+  });
+
+  it('updating', async () => {
+    const request = jest.fn((_, { onUpdate, onSuccess }) => {
+      onUpdate('bamboo');
+
+      setTimeout(() => {
+        onSuccess('light');
+      }, 100);
+    });
+    const { container } = render(<Demo request={request} />);
+
+    fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
+    expect(getMessages(container)).toEqual([
+      expectMessage('little', 'local'),
+      expectMessage('bamboo', 'loading', true),
+    ]);
+
+    await waitFakeTimer();
+    expect(getMessages(container)).toEqual([
+      expectMessage('little', 'local'),
+      expectMessage('light', 'success', false),
     ]);
   });
 
