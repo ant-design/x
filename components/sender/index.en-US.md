@@ -53,6 +53,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | onChange | Callback when input value changes | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`> ) => void | - | - |
 | onCancel | Callback when click cancel button | () => void | - | - |
 | onPasteFile | Callback when paste files | (firstFile: File, files: FileList) => void | - | - |
+| autoSize | Height auto size feature, can be set to true \| false or an object { minRows: 2, maxRows: 6 } | { maxRows: 8 } | - |
 
 ```typescript | pure
 type SpeechConfig = {
