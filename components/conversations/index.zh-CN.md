@@ -65,10 +65,11 @@ demo:
 
 ### MenuProps
 
+继承 antd [MenuProps](https://ant.design/components/menu-cn#api) 属性。
+
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
 | `trigger` | 自定义menu触发器 | React.ReactNode \| ((value: Conversation) => React.ReactNode) | - | - |
-| `items` | 操作配置项 | [ItemType[]](https://ant.design/components/menu-cn#itemtype) | [] | - |
 
 ## 主题变量（Design Token）
 

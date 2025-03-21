@@ -8,12 +8,15 @@ import type { DirectionType } from 'antd/es/config-provider';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import type { Conversation } from './interface';
 
+interface menuType extends MenuProps {
+  trigger?: React.ReactNode | ((value: Conversation) => React.ReactNode);
+}
 export interface ConversationsItemProps
   extends Omit<React.HTMLAttributes<HTMLLIElement>, 'onClick'> {
   info: Conversation;
   prefixCls?: string;
   direction?: DirectionType;
-  menu?: MenuProps;
+  menu?: menuType;
   active?: boolean;
   onClick?: (info: Conversation) => void;
 }

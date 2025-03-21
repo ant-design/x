@@ -64,10 +64,11 @@ Common props ref：[Common props](/docs/react/common-props)
 
 ### MenuProps
 
+For more properties, see [MenuProps](https://ant.design/components/menu-cn#api).
+
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | `trigger` | Customize menu trigger | React.ReactNode \| ((value: Conversation) => React.ReactNode) | - | - |
-| `items` | Operation configuration items | [ItemType[]](https://ant.design/components/menu-cn#itemtype) | [] | - |
 
 ## Design Token
 
