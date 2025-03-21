@@ -1,19 +1,18 @@
 import { EllipsisOutlined } from '@ant-design/icons';
 import { Dropdown, Tooltip, Typography } from 'antd';
 import classnames from 'classnames';
-import React from 'react';
+import React, { useCallback } from 'react';
 
-import type { MenuProps } from 'antd';
 import type { DirectionType } from 'antd/es/config-provider';
 import pickAttrs from 'rc-util/lib/pickAttrs';
-import type { Conversation } from './interface';
+import type { Conversation, menuType } from './interface';
 
 export interface ConversationsItemProps
   extends Omit<React.HTMLAttributes<HTMLLIElement>, 'onClick'> {
   info: Conversation;
   prefixCls?: string;
   direction?: DirectionType;
-  menu?: MenuProps;
+  menu?: menuType;
   active?: boolean;
   onClick?: (info: Conversation) => void;
 }
@@ -61,6 +60,24 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
     }
   };
 
+  // ============================ Menu ============================
+
+  const { trigger, items = [], ...menuOther } = menu || {};
+
+  const menusTriggerNode = useCallback(
+    (value: Conversation) => {
+      if (trigger) {
+        if (typeof trigger === 'function') {
+          const triggerNode = trigger(value);
+          if (React.isValidElement(triggerNode)) return triggerNode;
+        }
+        if (React.isValidElement(trigger)) return trigger;
+      }
+      return <EllipsisOutlined onClick={stopPropagation} className={`${prefixCls}-menu-icon`} />;
+    },
+    [trigger, menu],
+  );
+
   // ============================ Render ============================
   return (
     <Tooltip
@@ -79,19 +96,18 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
         >
           {info.label}
         </Typography.Text>
-        {menu && !disabled && (
+        {!disabled && menu && (
           <Dropdown
-            menu={menu}
+            menu={{
+              ...menuOther,
+              items,
+            }}
             placement={direction === 'rtl' ? 'bottomLeft' : 'bottomRight'}
             trigger={['click']}
             disabled={disabled}
             onOpenChange={onOpenChange}
           >
-            <EllipsisOutlined
-              onClick={stopPropagation}
-              disabled={disabled}
-              className={`${prefixCls}-menu-icon`}
-            />
+            {menusTriggerNode(info)}
           </Dropdown>
         )}
       </li>
