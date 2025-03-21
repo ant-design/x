@@ -66,14 +66,12 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
 
   const menusTriggerNode = useCallback(
     (value: Conversation) => {
-      if (!menu) return null;
       if (trigger) {
         if (typeof trigger === 'function') {
           const triggerNode = trigger(value);
-          return React.isValidElement(triggerNode) ? triggerNode : null;
+          if (React.isValidElement(triggerNode)) return triggerNode;
         }
         if (React.isValidElement(trigger)) return trigger;
-        return null;
       }
       return <EllipsisOutlined onClick={stopPropagation} className={`${prefixCls}-menu-icon`} />;
     },
