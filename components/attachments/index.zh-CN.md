@@ -64,12 +64,12 @@ interface PlaceholderType {
 ### Attachments.FileCard Props
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | prefixCls | 样式类名的前缀 | string | - | - |
 | className | 样式类名 | string | - | - |
 | style | 样式对象 | React.CSSProperties | - | - |
 | item | 附件，同 Upload `UploadFile` | Attachment | - | - |
-| onRemove | 点击移除文件时的回调，返回值为 false 时不移除。支持返回一个 Promise 对象，Promise 对象 resolve(false) 或 reject 时不移除 | (item: Attachment) => boolean | Promise | - | - |
+| onRemove | 点击移除文件时的回调，返回值为 false 时不移除。支持返回一个 Promise 对象，Promise 对象 resolve(false) 或 reject 时不移除 | (item: Attachment) => boolean \| Promise | - | - |
 | imageProps | 图片属性，同 antd [Image](https://ant.design/components/image) 属性 | ImageProps | - | - |
 
 ## Semantic DOM

@@ -5,7 +5,6 @@ import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssi
 import { genStyleHooks } from '../../theme/genStyleUtils';
 import genFileCardStyle from './fileCard';
 
-// biome-ignore lint/suspicious/noEmptyInterface: ComponentToken need to be empty by default
 export interface ComponentToken {
   colorBgPlaceholderHover: string;
 }
