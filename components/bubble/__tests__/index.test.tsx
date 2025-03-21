@@ -4,6 +4,7 @@ import Bubble from '..';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
 import { render, waitFakeTimer } from '../../../tests/utils';
+import { BubbleContentType } from '../interface';
 
 describe('bubble', () => {
   mountTest(() => <Bubble content="test" />);
@@ -52,7 +53,7 @@ describe('bubble', () => {
   // 测试 footer 属性为函数时的渲染
   it('should render footer with function and get content', () => {
     const content = 'Test content';
-    const footerFunction = (content: string) => (
+    const footerFunction = (content: BubbleContentType) => (
       <div className="test-footer">{`Footer for: ${content}`}</div>
     );
     const { container } = render(<Bubble content={content} footer={footerFunction} />);

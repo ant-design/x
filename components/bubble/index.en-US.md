@@ -43,7 +43,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | avatar | Avatar component | React.ReactNode | - |  |
 | classNames | Semantic DOM class | [Record<SemanticDOM, string>](#semantic-dom) | - |  |
 | content | Content of bubble | string | - |  |
-| footer | Footer content | React.ReactNode \| (content: string) => React.ReactNode | - |  |
+| footer | Footer content | React.ReactNode \| (content: BubbleContentType) => React.ReactNode | - |  |
 | header | Header content | React.ReactNode | - |  |
 | loading | Loading state of Message | boolean | - |  |
 | placement | Direction of Message | `start` \| `end` | `start` |  |

@@ -142,14 +142,6 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     </div>
   );
 
-  // 渲染 footer
-  // let footerNode: React.ReactNode;
-  // if (typeof footer === 'function') {
-  //   footerNode = footer({ content: typedContent as any });
-  // } else {
-  //   footerNode = footer;
-  // }
-  // if (header || footerNode) {
   if (header || footer) {
     fullContent = (
       <div className={`${prefixCls}-content-wrapper`}>
@@ -169,7 +161,6 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
           </div>
         )}
         {fullContent}
-        {/* {footerNode && ( */}
         {footer && (
           <div
             className={classnames(
@@ -182,8 +173,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
               ...styles.footer,
             }}
           >
-            {/* {footerNode} */}
-            {typeof footer === 'function' ? footer(mergedContent as string) : footer}
+            {typeof footer === 'function' ? footer(mergedContent) : footer}
           </div>
         )}
       </div>
