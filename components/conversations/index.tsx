@@ -1,8 +1,6 @@
 import classnames from 'classnames';
 import React from 'react';
 
-import { MenuProps } from 'antd';
-
 import GroupTitle, { GroupTitleContext } from './GroupTitle';
 import ConversationsItem, { type ConversationsItemProps } from './Item';
 
