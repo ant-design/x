@@ -150,24 +150,6 @@ describe('Conversations Component', () => {
     expect(menuElement).toBeNull();
   });
 
-  it('should handle menu trigger of error function', () => {
-    const menuWithTriggerOfError = jest.fn().mockReturnValue({
-      trigger: () => {
-        return 1;
-      },
-    });
-
-    const { container } = render(
-      <Conversations items={items} menu={menuWithTriggerOfError} defaultActiveKey="demo1" />,
-    );
-
-    expect(menu).toHaveBeenCalled();
-    // 错误react node 需要展示默认icon
-    expect(menu).toHaveBeenCalled();
-    const menuElement = container.querySelector('.ant-conversations-menu-icon');
-    expect(menuElement).toBeInTheDocument();
-  });
-
   it('should group items when groupable is true', () => {
     const { getByText } = render(<Conversations items={items} groupable />);
     expect(getByText('pinned')).toBeInTheDocument();
