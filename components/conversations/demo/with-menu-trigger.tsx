@@ -1,7 +1,8 @@
 import { DeleteOutlined, EditOutlined, PlusSquareOutlined, StopOutlined } from '@ant-design/icons';
 import { Conversations } from '@ant-design/x';
 import type { ConversationsProps } from '@ant-design/x';
-import { App, type GetProp, theme } from 'antd';
+import { App, theme } from 'antd';
+import type { GetProp } from 'antd';
 import React from 'react';
 
 const items: GetProp<ConversationsProps, 'items'> = Array.from({ length: 4 }).map((_, index) => ({
@@ -11,7 +12,6 @@ const items: GetProp<ConversationsProps, 'items'> = Array.from({ length: 4 }).ma
 }));
 
 const Demo = () => {
-  const { message } = App.useApp();
   const { token } = theme.useToken();
 
   const style = {
@@ -21,15 +21,13 @@ const Demo = () => {
   };
 
   const menuConfig: ConversationsProps['menu'] = (conversation) => ({
-    trigger: (menuInfo) => {
-      return (
-        <PlusSquareOutlined
-          onClick={() => {
-            message.info(`Click ${conversation.key} - ${menuInfo.key}`);
-          }}
-        />
-      );
-    },
+    trigger: (menuInfo) => (
+      <PlusSquareOutlined
+        onClick={() => {
+          console.log(`Click ${conversation.key} - ${menuInfo.key}`);
+        }}
+      />
+    ),
     items: [
       {
         label: 'Operation 1',
@@ -51,7 +49,7 @@ const Demo = () => {
     ],
     onClick: (menuInfo) => {
       menuInfo.domEvent.stopPropagation();
-      message.info(`Click ${conversation.key} - ${menuInfo.key}`);
+      console.log(`Click ${conversation.key} - ${menuInfo.key}`);
     },
   });
 

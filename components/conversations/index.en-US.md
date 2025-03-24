@@ -68,7 +68,7 @@ For more properties, see [MenuProps](https://ant.design/components/menu-cn#api).
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| `trigger` | Customize menu trigger | React.ReactNode \| ((value: Conversation) => React.ReactNode) | - | - |
+| `trigger` | Customize menu trigger | React.ReactNode \| ((conversation: Conversation) => React.ReactNode) | - | - |
 
 ## Design Token
 

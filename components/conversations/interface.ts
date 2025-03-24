@@ -1,4 +1,3 @@
-import type { MenuProps } from 'antd';
 import type React from 'react';
 import type { AnyObject } from '../_util/type';
 import type { GroupTitleProps } from './GroupTitle';
@@ -71,8 +70,4 @@ export interface Groupable {
    * @descEN Semantic custom rendering
    */
   title?: GroupTitleRender;
-}
-
-export interface menuType extends MenuProps {
-  trigger?: React.ReactNode | ((value: Conversation) => React.ReactNode);
 }

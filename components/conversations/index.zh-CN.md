@@ -69,7 +69,7 @@ demo:
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| `trigger` | 自定义menu触发器 | React.ReactNode \| ((value: Conversation) => React.ReactNode) | - | - |
+| `trigger` | 自定义menu触发器 | React.ReactNode \| ((conversation: Conversation) => React.ReactNode) | - | - |
 
 ## 主题变量（Design Token）
 

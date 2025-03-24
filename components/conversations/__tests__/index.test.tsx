@@ -122,30 +122,32 @@ describe('Conversations Component', () => {
     expect(element).not.toBeInTheDocument();
   });
 
-  it('should handle menu trigger of ReactNode function', async () => {
-    const { findAllByText, container } = render(
+  it('should handle menu trigger function', async () => {
+    // render node
+    const renderTriggerNodeJest = render(
       <Conversations items={items} menu={menuWithTriggerOfReactNode} defaultActiveKey="demo1" />,
     );
 
-    // 默认icon 不需要渲染
-    const menuElement = container.querySelector('.ant-conversations-menu-icon');
-    expect(menuElement).toBeNull();
+    // render trigger node
+    expect(
+      (await renderTriggerNodeJest.findAllByText('menuTriggerForReactNodeButton')).length,
+    ).toBeGreaterThan(0);
 
-    // 渲染自定义trigger
-    expect((await findAllByText('menuTriggerForReactNodeButton')).length).toBeGreaterThan(0);
-  });
-
-  it('should handle menu trigger of function function', async () => {
-    const { findAllByText, container } = render(
+    // function render node
+    const renderTriggerFunJest = render(
       <Conversations items={items} menu={menuWithTriggerOfFunction} defaultActiveKey="demo1" />,
     );
 
-    // 默认icon 不需要渲染
-    const menuElement = container.querySelector('.ant-conversations-menu-icon');
-    expect(menuElement).toBeNull();
+    // render function trigger node
+    expect(
+      (await renderTriggerFunJest.findAllByText('menuTriggerForFunctionButton')).length,
+    ).toBeGreaterThan(0);
 
-    // 渲染自定义trigger
-    expect((await findAllByText('menuTriggerForFunctionButton')).length).toBeGreaterThan(0);
+    // default icon has't render
+    const menuElement = renderTriggerFunJest.container.querySelector(
+      '.ant-conversations-menu-icon',
+    );
+    expect(menuElement).toBeNull();
   });
 
   it('should handle menu trigger of error function', () => {

@@ -1,18 +1,21 @@
 import { EllipsisOutlined } from '@ant-design/icons';
 import { Dropdown, Tooltip, Typography } from 'antd';
+import type { MenuProps } from 'antd';
 import classnames from 'classnames';
-import React, { useCallback } from 'react';
+import React from 'react';
 
 import type { DirectionType } from 'antd/es/config-provider';
 import pickAttrs from 'rc-util/lib/pickAttrs';
-import type { Conversation, menuType } from './interface';
+import type { Conversation } from './interface';
 
 export interface ConversationsItemProps
   extends Omit<React.HTMLAttributes<HTMLLIElement>, 'onClick'> {
   info: Conversation;
   prefixCls?: string;
   direction?: DirectionType;
-  menu?: menuType;
+  menu?: MenuProps & {
+    trigger?: React.ReactNode | ((conversation: Conversation) => React.ReactNode);
+  };
   active?: boolean;
   onClick?: (info: Conversation) => void;
 }
@@ -64,19 +67,21 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
 
   const { trigger, items = [], ...menuOther } = menu || {};
 
-  const menusTriggerNode = useCallback(
-    (value: Conversation) => {
-      if (trigger) {
-        if (typeof trigger === 'function') {
-          const triggerNode = trigger(value);
-          if (React.isValidElement(triggerNode)) return triggerNode;
-        }
-        if (React.isValidElement(trigger)) return trigger;
-      }
-      return <EllipsisOutlined onClick={stopPropagation} className={`${prefixCls}-menu-icon`} />;
-    },
-    [trigger, menu],
-  );
+  const renderMenuTrigger = (conversation: Conversation) => {
+    let triggerNode: React.ReactNode = undefined;
+    if (typeof trigger === 'function') {
+      triggerNode = trigger(conversation);
+    }
+
+    if (typeof trigger === 'object') {
+      triggerNode = trigger;
+    }
+
+    if (React.isValidElement(triggerNode)) {
+      return triggerNode;
+    }
+    return <EllipsisOutlined onClick={stopPropagation} className={`${prefixCls}-menu-icon`} />;
+  };
 
   // ============================ Render ============================
   return (
@@ -107,7 +112,7 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
             disabled={disabled}
             onOpenChange={onOpenChange}
           >
-            {menusTriggerNode(info)}
+            {renderMenuTrigger(info)}
           </Dropdown>
         )}
       </li>
