@@ -23,6 +23,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/actions.tsx">Custom actions</code>
 <code src="./demo/header.tsx">Header panel</code>
 <code src="./demo/header-fixed.tsx">Reference</code>
+<code src="./demo/footer.tsx">Custom footer</code>
 <code src="./demo/send-style.tsx">Adjust style</code>
 <code src="./demo/paste-image.tsx">Paste files</code>
 <code src="./demo/focus.tsx">Focus</code>
