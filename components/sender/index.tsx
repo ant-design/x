@@ -73,6 +73,7 @@ export interface SenderProps
   actions?: React.ReactNode | ActionsRender;
   allowSpeech?: AllowSpeech;
   prefix?: React.ReactNode;
+  footer?: () => React.ReactNode | React.ReactNode;
   header?: React.ReactNode;
 }
 
@@ -111,6 +112,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     disabled,
     allowSpeech,
     prefix,
+    footer,
     header,
     onPaste,
     onPasteFile,
@@ -279,6 +281,14 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     actionNode = actions;
   }
 
+  // ============================ Footer ============================
+  let renderFooter: React.ReactNode = null;
+  if (typeof footer === 'function') {
+    renderFooter = footer();
+  } else if (actions) {
+    renderFooter = footer;
+  }
+
   // ============================ Render ============================
   return wrapCSSVar(
     <div ref={containerRef} className={mergedCls} style={{ ...contextConfig.style, ...style }}>
@@ -286,7 +296,6 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
       {header && (
         <SendHeaderContext.Provider value={{ prefixCls }}>{header}</SendHeaderContext.Provider>
       )}
-
       <div className={`${prefixCls}-content`} onMouseDown={onContentMouseDown}>
         {/* Prefix */}
         {prefix && (
@@ -303,29 +312,31 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
         )}
 
         {/* Input */}
-        <InputTextArea
-          {...inputProps}
-          disabled={disabled}
-          style={{ ...contextConfig.styles.input, ...styles.input }}
-          className={classnames(inputCls, contextConfig.classNames.input, classNames.input)}
-          autoSize={{ maxRows: 8 }}
-          value={innerValue}
-          onChange={(event) => {
-            triggerValueChange(
-              (event.target as HTMLTextAreaElement).value,
-              event as React.ChangeEvent<HTMLTextAreaElement>,
-            );
-            triggerSpeech(true);
-          }}
-          onPressEnter={onInternalKeyPress}
-          onCompositionStart={onInternalCompositionStart}
-          onCompositionEnd={onInternalCompositionEnd}
-          onKeyDown={onKeyDown}
-          onPaste={onInternalPaste}
-          variant="borderless"
-          readOnly={readOnly}
-        />
-
+        <div className={`${prefixCls}-content-box`}>
+          <InputTextArea
+            {...inputProps}
+            disabled={disabled}
+            style={{ ...contextConfig.styles.input, ...styles.input }}
+            className={classnames(inputCls, contextConfig.classNames.input, classNames.input)}
+            autoSize={{ maxRows: 8 }}
+            value={innerValue}
+            onChange={(event) => {
+              triggerValueChange(
+                (event.target as HTMLTextAreaElement).value,
+                event as React.ChangeEvent<HTMLTextAreaElement>,
+              );
+              triggerSpeech(true);
+            }}
+            onPressEnter={onInternalKeyPress}
+            onCompositionStart={onInternalCompositionStart}
+            onCompositionEnd={onInternalCompositionEnd}
+            onKeyDown={onKeyDown}
+            onPaste={onInternalPaste}
+            variant="borderless"
+            readOnly={readOnly}
+          />
+          {footer && <div className={`${prefixCls}-footer`}>{renderFooter}</div>}
+        </div>
         {/* Action List */}
         <div
           className={classnames(

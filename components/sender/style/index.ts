@@ -81,6 +81,13 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
         alignItems: 'flex-end',
       },
 
+      // ========================== Content Box ==========================
+      [`${componentCls}-content-box`]: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: paddingSM,
+        width: '100%',
+      },
       // ============================ Prefix =============================
       [`${componentCls}-prefix`]: {
         flex: 'none',
