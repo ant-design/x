@@ -139,6 +139,12 @@ describe('Sender Component', () => {
     expect(container.querySelector('textarea')).toHaveAttribute('readonly');
   });
 
+  it('footer', () => {
+    const { container } = render(
+      <Sender footer={<div className="sender-footer-test">footer content</div>} />,
+    );
+    expect(container.querySelector('.sender-footer-test')).toBeTruthy();
+  });
   describe('paste events', () => {
     it('onPaste callback', () => {
       const onPaste = jest.fn();
