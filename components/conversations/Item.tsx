@@ -68,18 +68,14 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
   const { trigger, items = [], ...menuOther } = menu || {};
 
   const renderMenuTrigger = (conversation: Conversation) => {
-    let triggerNode: React.ReactNode = undefined;
     if (typeof trigger === 'function') {
-      triggerNode = trigger(conversation);
+      return trigger(conversation);
     }
 
-    if (typeof trigger === 'object') {
-      triggerNode = trigger;
+    if (trigger) {
+      return trigger;
     }
 
-    if (React.isValidElement(triggerNode)) {
-      return triggerNode;
-    }
     return <EllipsisOutlined onClick={stopPropagation} className={`${prefixCls}-menu-icon`} />;
   };
 
