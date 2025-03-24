@@ -56,4 +56,4 @@ const App: React.FC = () => {
   return <Conversations defaultActiveKey="item1" menu={menuConfig} items={items} style={style} />;
 };
 
-export default () => <App />;
+export default App;
