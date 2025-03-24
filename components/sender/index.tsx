@@ -73,7 +73,7 @@ export interface SenderProps
   actions?: React.ReactNode | ActionsRender;
   allowSpeech?: AllowSpeech;
   prefix?: React.ReactNode;
-  footer?: () => React.ReactNode | React.ReactNode;
+  footer?: React.ReactNode | ActionsRender;
   header?: React.ReactNode;
 }
 
@@ -284,7 +284,14 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   // ============================ Footer ============================
   let renderFooter: React.ReactNode = null;
   if (typeof footer === 'function') {
-    renderFooter = footer();
+    renderFooter = footer(actionNode, {
+      components: {
+        SendButton,
+        ClearButton,
+        LoadingButton,
+        SpeechButton,
+      },
+    });
   } else if (actions) {
     renderFooter = footer;
   }
