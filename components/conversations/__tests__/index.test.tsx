@@ -121,33 +121,27 @@ describe('Conversations Component', () => {
     const element = container.querySelector('.ant-dropdown-open');
     expect(element).not.toBeInTheDocument();
   });
+  describe('should handle menu trigger function', () => {
+    it('render node', async () => {
+      const { findAllByText, container } = render(
+        <Conversations items={items} menu={menuWithTriggerOfReactNode} defaultActiveKey="demo1" />,
+      );
+      expect((await findAllByText('menuTriggerForReactNodeButton')).length).toBeGreaterThan(0);
 
-  it('should handle menu trigger function', async () => {
-    // render node
-    const renderTriggerNodeJest = render(
-      <Conversations items={items} menu={menuWithTriggerOfReactNode} defaultActiveKey="demo1" />,
-    );
+      // default icon has't render
+      const menuElement = container.querySelector('.ant-conversations-menu-icon');
+      expect(menuElement).toBeNull();
+    });
 
-    // render trigger node
-    expect(
-      (await renderTriggerNodeJest.findAllByText('menuTriggerForReactNodeButton')).length,
-    ).toBeGreaterThan(0);
-
-    // function render node
-    const renderTriggerFunJest = render(
-      <Conversations items={items} menu={menuWithTriggerOfFunction} defaultActiveKey="demo1" />,
-    );
-
-    // render function trigger node
-    expect(
-      (await renderTriggerFunJest.findAllByText('menuTriggerForFunctionButton')).length,
-    ).toBeGreaterThan(0);
-
-    // default icon has't render
-    const menuElement = renderTriggerFunJest.container.querySelector(
-      '.ant-conversations-menu-icon',
-    );
-    expect(menuElement).toBeNull();
+    it('render function node', async () => {
+      const { findAllByText, container } = render(
+        <Conversations items={items} menu={menuWithTriggerOfFunction} defaultActiveKey="demo1" />,
+      );
+      expect((await findAllByText('menuTriggerForFunctionButton')).length).toBeGreaterThan(0);
+      // default icon has't render
+      const menuElement = container.querySelector('.ant-conversations-menu-icon');
+      expect(menuElement).toBeNull();
+    });
   });
 
   it('should group items when groupable is true', () => {
