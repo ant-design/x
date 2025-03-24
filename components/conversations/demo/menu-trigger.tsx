@@ -1,7 +1,7 @@
 import { DeleteOutlined, EditOutlined, PlusSquareOutlined, StopOutlined } from '@ant-design/icons';
 import { Conversations } from '@ant-design/x';
 import type { ConversationsProps } from '@ant-design/x';
-import { App, theme } from 'antd';
+import { theme } from 'antd';
 import type { GetProp } from 'antd';
 import React from 'react';
 
@@ -11,7 +11,7 @@ const items: GetProp<ConversationsProps, 'items'> = Array.from({ length: 4 }).ma
   disabled: index === 3,
 }));
 
-const Demo = () => {
+const App: React.FC = () => {
   const { token } = theme.useToken();
 
   const style = {
@@ -56,8 +56,4 @@ const Demo = () => {
   return <Conversations defaultActiveKey="item1" menu={menuConfig} items={items} style={style} />;
 };
 
-export default () => (
-  <App>
-    <Demo />
-  </App>
-);
+export default () => <App />;

@@ -49,13 +49,7 @@ export interface ConversationsProps extends React.HTMLAttributes<HTMLUListElemen
    * @desc 会话操作菜单
    * @descEN Operation menu for conversations
    */
-  menu?:
-    | (MenuProps & {
-        trigger?: React.ReactNode | ((conversation: Conversation) => React.ReactNode);
-      })
-    | ((value: Conversation) => MenuProps & {
-        trigger?: React.ReactNode | ((conversation: Conversation) => React.ReactNode);
-      });
+  menu?: ConversationsItemProps['menu'] | ((value: Conversation) => ConversationsItemProps['menu']);
 
   /**
    * @desc 是否支持分组, 开启后默认按 {@link Conversation.group} 字段分组
