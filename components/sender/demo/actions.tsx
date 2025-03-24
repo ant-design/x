@@ -36,7 +36,6 @@ const Demo: React.FC = () => {
       }}
       actions={(_, info) => {
         const { SendButton, LoadingButton, ClearButton, SpeechButton } = info.components;
-
         return (
           <Space size="small">
             <Typography.Text type="secondary">

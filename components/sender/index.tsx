@@ -25,19 +25,20 @@ type TextareaProps = GetProps<typeof Input.TextArea>;
 export interface SenderComponents {
   input?: React.ComponentType<TextareaProps>;
 }
-
+type ActionsComponents = {
+  SendButton: React.ComponentType<ButtonProps>;
+  ClearButton: React.ComponentType<ButtonProps>;
+  LoadingButton: React.ComponentType<ButtonProps>;
+  SpeechButton: React.ComponentType<ButtonProps>;
+};
 export type ActionsRender = (
   ori: React.ReactNode,
   info: {
-    components: {
-      SendButton: React.ComponentType<ButtonProps>;
-      ClearButton: React.ComponentType<ButtonProps>;
-      LoadingButton: React.ComponentType<ButtonProps>;
-      SpeechButton: React.ComponentType<ButtonProps>;
-    };
+    components: ActionsComponents;
   },
 ) => React.ReactNode;
 
+export type FooterRender = (info: { actionsComponents: ActionsComponents }) => React.ReactNode;
 export interface SenderProps
   extends Pick<TextareaProps, 'placeholder' | 'onKeyPress' | 'onFocus' | 'onBlur'> {
   prefixCls?: string;
@@ -73,7 +74,7 @@ export interface SenderProps
   actions?: React.ReactNode | ActionsRender;
   allowSpeech?: AllowSpeech;
   prefix?: React.ReactNode;
-  footer?: React.ReactNode | ActionsRender;
+  footer?: React.ReactNode | FooterRender;
   header?: React.ReactNode;
 }
 
@@ -277,22 +278,22 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
         SpeechButton,
       },
     });
-  } else if (actions) {
+  } else if (actions || actions === null) {
     actionNode = actions;
   }
 
   // ============================ Footer ============================
   let renderFooter: React.ReactNode = null;
   if (typeof footer === 'function') {
-    renderFooter = footer(actionNode, {
-      components: {
+    renderFooter = footer({
+      actionsComponents: {
         SendButton,
         ClearButton,
         LoadingButton,
         SpeechButton,
       },
     });
-  } else if (actions) {
+  } else if (footer) {
     renderFooter = footer;
   }
 
@@ -342,35 +343,55 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
             variant="borderless"
             readOnly={readOnly}
           />
-          {footer && <div className={`${prefixCls}-footer`}>{renderFooter}</div>}
+          {footer && (
+            <ActionButtonContext.Provider
+              value={{
+                prefixCls: actionBtnCls,
+                onSend: triggerSend,
+                onSendDisabled: !innerValue,
+                onClear: triggerClear,
+                onClearDisabled: !innerValue,
+                onCancel,
+                onCancelDisabled: !loading,
+                onSpeech: () => triggerSpeech(false),
+                onSpeechDisabled: !speechPermission,
+                speechRecording,
+                disabled,
+              }}
+            >
+              <div className={`${prefixCls}-footer`}>{renderFooter}</div>
+            </ActionButtonContext.Provider>
+          )}
         </div>
         {/* Action List */}
-        <div
-          className={classnames(
-            actionListCls,
-            contextConfig.classNames.actions,
-            classNames.actions,
-          )}
-          style={{ ...contextConfig.styles.actions, ...styles.actions }}
-        >
-          <ActionButtonContext.Provider
-            value={{
-              prefixCls: actionBtnCls,
-              onSend: triggerSend,
-              onSendDisabled: !innerValue,
-              onClear: triggerClear,
-              onClearDisabled: !innerValue,
-              onCancel,
-              onCancelDisabled: !loading,
-              onSpeech: () => triggerSpeech(false),
-              onSpeechDisabled: !speechPermission,
-              speechRecording,
-              disabled,
-            }}
+        {actionNode && (
+          <div
+            className={classnames(
+              actionListCls,
+              contextConfig.classNames.actions,
+              classNames.actions,
+            )}
+            style={{ ...contextConfig.styles.actions, ...styles.actions }}
           >
-            {actionNode}
-          </ActionButtonContext.Provider>
-        </div>
+            <ActionButtonContext.Provider
+              value={{
+                prefixCls: actionBtnCls,
+                onSend: triggerSend,
+                onSendDisabled: !innerValue,
+                onClear: triggerClear,
+                onClearDisabled: !innerValue,
+                onCancel,
+                onCancelDisabled: !loading,
+                onSpeech: () => triggerSpeech(false),
+                onSpeechDisabled: !speechPermission,
+                speechRecording,
+                disabled,
+              }}
+            >
+              {actionNode}
+            </ActionButtonContext.Provider>
+          </div>
+        )}
       </div>
     </div>,
   );
