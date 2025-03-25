@@ -36,7 +36,7 @@ Common props ref：[Common props](/docs/react/common-props)
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| actions | Custom actions | ReactNode \| (oriNode, info: { components }) => ReactNode | - | - |
+| actions | Custom actions | ReactNode \| (oriNode, info: { components:ActionsComponents }) => ReactNode | - | - |
 | allowSpeech | Whether to allow speech input | boolean \| SpeechConfig | false | - |
 | classNames | Class name | [See below](#semantic-dom) | - | - |
 | components | Custom components | Record<'input', ComponentType> | - | - |
@@ -45,6 +45,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | loading | Whether it is loading | boolean | false | - |
 | header | Header panel | ReactNode | - | - |
 | prefix | Prefix content | ReactNode | - | - |
+| footer | Footer content | ReactNode \| (info: { actionsComponents: ActionsComponents }) => ReactNode | - | - |
 | readOnly | Whether to make the input box read-only | boolean | false | - |
 | rootClassName | Root element class name | string | - | - |
 | styles | Semantic DOM style | [See below](#semantic-dom) | - | - |
@@ -61,6 +62,15 @@ type SpeechConfig = {
   // It is up to the developer to implement the third-party speech input function.
   recording?: boolean;
   onRecordingChange?: (recording: boolean) => void;
+};
+```
+
+```typescript | pure
+type ActionsComponents = {
+  SendButton: React.ComponentType<ButtonProps>;
+  ClearButton: React.ComponentType<ButtonProps>;
+  LoadingButton: React.ComponentType<ButtonProps>;
+  SpeechButton: React.ComponentType<ButtonProps>;
 };
 ```
 

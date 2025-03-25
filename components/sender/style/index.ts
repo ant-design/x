@@ -12,7 +12,16 @@ export interface SenderToken extends FullToken<'Sender'> {
 }
 
 const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
-  const { componentCls, padding, paddingSM, paddingXS, lineWidth, lineWidthBold, calc } = token;
+  const {
+    componentCls,
+    padding,
+    paddingSM,
+    paddingXS,
+    paddingXXS,
+    lineWidth,
+    lineWidthBold,
+    calc,
+  } = token;
 
   return {
     [componentCls]: {
@@ -80,14 +89,6 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
         boxSizing: 'border-box',
         alignItems: 'flex-end',
       },
-
-      // ========================== Content Box ==========================
-      [`${componentCls}-content-box`]: {
-        display: 'flex',
-        flexDirection: 'column',
-        gap: paddingSM,
-        width: '100%',
-      },
       // ============================ Prefix =============================
       [`${componentCls}-prefix`]: {
         flex: 'none',
@@ -132,6 +133,15 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
           width: '1.2em',
           verticalAlign: 'top',
         },
+      },
+
+      // ========================== Footer ==========================
+      [`${componentCls}-footer`]: {
+        paddingInlineStart: padding,
+        paddingInlineEnd: paddingSM,
+        paddingBlockEnd: paddingSM,
+        paddingBlockStart: paddingXXS,
+        boxSizing: 'border-box',
       },
     },
   };

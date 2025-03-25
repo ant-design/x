@@ -140,10 +140,34 @@ describe('Sender Component', () => {
   });
 
   it('footer', () => {
-    const { container } = render(
-      <Sender footer={<div className="sender-footer-test">footer content</div>} />,
+    const onSubmit = jest.fn();
+    const { container, getByText } = render(
+      <Sender
+        footer={(info) => {
+          const { SendButton, ClearButton } = info.actionsComponents;
+          return (
+            <div className="sender-footer-test">
+              <SendButton onClick={onSubmit} disabled={false}>
+                SendPrompt
+              </SendButton>
+              <ClearButton disabled />
+            </div>
+          );
+        }}
+      />,
     );
+
     expect(container.querySelector('.sender-footer-test')).toBeTruthy();
+    // check children render
+    const sendButton = getByText('SendPrompt');
+    expect(sendButton).toBeInTheDocument();
+
+    const clearButton = container.querySelector('.sender-footer-test button[disabled]');
+    expect(clearButton).toBeInTheDocument();
+
+    // check custom onClick
+    fireEvent.click(sendButton);
+    expect(onSubmit).toHaveBeenCalled();
   });
   describe('paste events', () => {
     it('onPaste callback', () => {

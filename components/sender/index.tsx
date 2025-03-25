@@ -281,6 +281,20 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   } else if (actions || actions === null) {
     actionNode = actions;
   }
+  // Custom actions context props
+  const actionsButtonContextProps = {
+    prefixCls: actionBtnCls,
+    onSend: triggerSend,
+    onSendDisabled: !innerValue,
+    onClear: triggerClear,
+    onClearDisabled: !innerValue,
+    onCancel,
+    onCancelDisabled: !loading,
+    onSpeech: () => triggerSpeech(false),
+    onSpeechDisabled: !speechPermission,
+    speechRecording,
+    disabled,
+  };
 
   // ============================ Footer ============================
   let renderFooter: React.ReactNode = null;
@@ -320,49 +334,28 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
         )}
 
         {/* Input */}
-        <div className={`${prefixCls}-content-box`}>
-          <InputTextArea
-            {...inputProps}
-            disabled={disabled}
-            style={{ ...contextConfig.styles.input, ...styles.input }}
-            className={classnames(inputCls, contextConfig.classNames.input, classNames.input)}
-            autoSize={{ maxRows: 8 }}
-            value={innerValue}
-            onChange={(event) => {
-              triggerValueChange(
-                (event.target as HTMLTextAreaElement).value,
-                event as React.ChangeEvent<HTMLTextAreaElement>,
-              );
-              triggerSpeech(true);
-            }}
-            onPressEnter={onInternalKeyPress}
-            onCompositionStart={onInternalCompositionStart}
-            onCompositionEnd={onInternalCompositionEnd}
-            onKeyDown={onKeyDown}
-            onPaste={onInternalPaste}
-            variant="borderless"
-            readOnly={readOnly}
-          />
-          {footer && (
-            <ActionButtonContext.Provider
-              value={{
-                prefixCls: actionBtnCls,
-                onSend: triggerSend,
-                onSendDisabled: !innerValue,
-                onClear: triggerClear,
-                onClearDisabled: !innerValue,
-                onCancel,
-                onCancelDisabled: !loading,
-                onSpeech: () => triggerSpeech(false),
-                onSpeechDisabled: !speechPermission,
-                speechRecording,
-                disabled,
-              }}
-            >
-              <div className={`${prefixCls}-footer`}>{renderFooter}</div>
-            </ActionButtonContext.Provider>
-          )}
-        </div>
+        <InputTextArea
+          {...inputProps}
+          disabled={disabled}
+          style={{ ...contextConfig.styles.input, ...styles.input }}
+          className={classnames(inputCls, contextConfig.classNames.input, classNames.input)}
+          autoSize={{ maxRows: 8 }}
+          value={innerValue}
+          onChange={(event) => {
+            triggerValueChange(
+              (event.target as HTMLTextAreaElement).value,
+              event as React.ChangeEvent<HTMLTextAreaElement>,
+            );
+            triggerSpeech(true);
+          }}
+          onPressEnter={onInternalKeyPress}
+          onCompositionStart={onInternalCompositionStart}
+          onCompositionEnd={onInternalCompositionEnd}
+          onKeyDown={onKeyDown}
+          onPaste={onInternalPaste}
+          variant="borderless"
+          readOnly={readOnly}
+        />
         {/* Action List */}
         {actionNode && (
           <div
@@ -373,26 +366,17 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
             )}
             style={{ ...contextConfig.styles.actions, ...styles.actions }}
           >
-            <ActionButtonContext.Provider
-              value={{
-                prefixCls: actionBtnCls,
-                onSend: triggerSend,
-                onSendDisabled: !innerValue,
-                onClear: triggerClear,
-                onClearDisabled: !innerValue,
-                onCancel,
-                onCancelDisabled: !loading,
-                onSpeech: () => triggerSpeech(false),
-                onSpeechDisabled: !speechPermission,
-                speechRecording,
-                disabled,
-              }}
-            >
+            <ActionButtonContext.Provider value={actionsButtonContextProps}>
               {actionNode}
             </ActionButtonContext.Provider>
           </div>
         )}
       </div>
+      {footer && (
+        <ActionButtonContext.Provider value={actionsButtonContextProps}>
+          <div className={`${prefixCls}-footer`}>{renderFooter}</div>
+        </ActionButtonContext.Provider>
+      )}
     </div>,
   );
 });

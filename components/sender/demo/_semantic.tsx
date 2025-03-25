@@ -29,9 +29,19 @@ const headerLocales = {
   },
 };
 
+const footerLocales = {
+  cn: {
+    footer: '底部',
+  },
+  en: {
+    footer: 'Footer',
+  },
+};
+
 const App: React.FC = () => {
   const [locale] = useLocale(locales);
   const [headerLocale] = useLocale(headerLocales);
+  const [footerLocale] = useLocale(footerLocales);
 
   return (
     <Flex vertical>
@@ -62,6 +72,26 @@ const App: React.FC = () => {
                 Content
               </Sender.Header>
             }
+          />
+        )}
+      </SemanticPreview>
+      {/* With footer */}
+      <SemanticPreview semantics={[{ name: 'footer', desc: footerLocale.footer }]}>
+        {(injectProps) => (
+          <Sender
+            actions={null}
+            footer={(info) => {
+              const { SendButton } = info.actionsComponents;
+              return (
+                <Flex
+                  className={injectProps.classNames.footer}
+                  justify="space-between"
+                  align="center"
+                >
+                  Footer <SendButton />
+                </Flex>
+              );
+            }}
           />
         )}
       </SemanticPreview>

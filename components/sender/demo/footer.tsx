@@ -1,9 +1,4 @@
-import {
-  ApiOutlined,
-  DeploymentUnitOutlined,
-  LinkOutlined,
-  SearchOutlined,
-} from '@ant-design/icons';
+import { ApiOutlined, LinkOutlined, SearchOutlined } from '@ant-design/icons';
 import { Sender } from '@ant-design/x';
 import { Button, Divider, Flex, Switch, theme } from 'antd';
 import React, { useState } from 'react';
@@ -35,28 +30,29 @@ const App: React.FC = () => {
     <Sender
       value={value}
       onChange={setValue}
-      placeholder="Press Shift + Enter to send message"
+      placeholder="Press Enter to send message"
       footer={(info) => {
         const { SendButton, LoadingButton, SpeechButton } = info.actionsComponents;
         return (
-          <Flex justify="space-between">
+          <Flex justify="space-between" align="center">
             <Flex gap="small" align="center">
               <Button style={iconStyle} type="text" icon={<LinkOutlined />} />
-              <Button icon={<DeploymentUnitOutlined />}>
-                Deep Thinking
-                <Switch size="small" />
-              </Button>
-              <Button icon={<SearchOutlined />}>
-                Global Search
-                <Switch size="small" />
-              </Button>
+              <Divider type="vertical" />
+              Deep Thinking
+              <Switch size="small" />
+              <Divider type="vertical" />
+              <Button icon={<SearchOutlined />}>Global Search</Button>
             </Flex>
             <Flex align="center">
               <Button type="text" style={iconStyle} icon={<ApiOutlined />} />
               <Divider type="vertical" />
               <SpeechButton style={iconStyle} />
               <Divider type="vertical" />
-              {loading ? <LoadingButton type="default" /> : <SendButton type="primary" />}
+              {loading ? (
+                <LoadingButton type="default" />
+              ) : (
+                <SendButton type="primary" disabled={false} />
+              )}
             </Flex>
           </Flex>
         );
