@@ -138,37 +138,47 @@ describe('Sender Component', () => {
     const { container } = render(<Sender readOnly />);
     expect(container.querySelector('textarea')).toHaveAttribute('readonly');
   });
+  describe('footer', () => {
+    it('footer width function', () => {
+      const onSubmit = jest.fn();
+      const { container, getByText } = render(
+        <Sender
+          footer={(info) => {
+            const { SendButton, ClearButton } = info.actionsComponents;
+            return (
+              <div className="sender-footer-test">
+                <SendButton onClick={onSubmit} disabled={false}>
+                  SendPrompt
+                </SendButton>
+                <ClearButton disabled />
+              </div>
+            );
+          }}
+        />,
+      );
 
-  it('footer', () => {
-    const onSubmit = jest.fn();
-    const { container, getByText } = render(
-      <Sender
-        footer={(info) => {
-          const { SendButton, ClearButton } = info.actionsComponents;
-          return (
-            <div className="sender-footer-test">
-              <SendButton onClick={onSubmit} disabled={false}>
-                SendPrompt
-              </SendButton>
-              <ClearButton disabled />
-            </div>
-          );
-        }}
-      />,
-    );
+      expect(container.querySelector('.sender-footer-test')).toBeTruthy();
+      // check children render
+      const sendButton = getByText('SendPrompt');
+      expect(sendButton).toBeInTheDocument();
 
-    expect(container.querySelector('.sender-footer-test')).toBeTruthy();
-    // check children render
-    const sendButton = getByText('SendPrompt');
-    expect(sendButton).toBeInTheDocument();
+      const clearButton = container.querySelector('.sender-footer-test button[disabled]');
+      expect(clearButton).toBeInTheDocument();
 
-    const clearButton = container.querySelector('.sender-footer-test button[disabled]');
-    expect(clearButton).toBeInTheDocument();
-
-    // check custom onClick
-    fireEvent.click(sendButton);
-    expect(onSubmit).toHaveBeenCalled();
+      // check custom onClick
+      fireEvent.click(sendButton);
+      expect(onSubmit).toHaveBeenCalled();
+    });
+    it('footer width reactNode', () => {
+      const { container } = render(
+        <Sender
+          footer={<div className="sender-footer-test-reactNode">footer width reactNode</div>}
+        />,
+      );
+      expect(container.querySelector('.sender-footer-test-reactNode')).toBeTruthy();
+    });
   });
+
   describe('paste events', () => {
     it('onPaste callback', () => {
       const onPaste = jest.fn();
