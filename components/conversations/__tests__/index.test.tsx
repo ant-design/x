@@ -1,9 +1,8 @@
 import React from 'react';
-import { fireEvent, render } from '../../../tests/utils';
-import Conversations from '../index';
-
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
+import { fireEvent, render } from '../../../tests/utils';
+import Conversations from '../index';
 import type { Conversation } from '../index';
 
 const items: Conversation[] = [
