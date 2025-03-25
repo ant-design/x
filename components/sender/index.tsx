@@ -374,7 +374,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
           </div>
         )}
       </div>
-      {footer && (
+      {renderFooter && (
         <ActionButtonContext.Provider value={actionsButtonContextProps}>
           <div className={`${prefixCls}-footer`}>{renderFooter}</div>
         </ActionButtonContext.Provider>

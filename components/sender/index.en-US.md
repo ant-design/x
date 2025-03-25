@@ -36,7 +36,7 @@ Common props ref：[Common props](/docs/react/common-props)
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| actions | Custom actions | ReactNode \| (oriNode, info: { components:ActionsComponents }) => ReactNode | - | - |
+| actions | Custom actions,set as actions: null when you don't need default actions | ReactNode \| (oriNode, info: { components:ActionsComponents }) => ReactNode | - | - |
 | allowSpeech | Whether to allow speech input | boolean \| SpeechConfig | false | - |
 | classNames | Class name | [See below](#semantic-dom) | - | - |
 | components | Custom components | Record<'input', ComponentType> | - | - |

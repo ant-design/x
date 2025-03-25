@@ -37,7 +37,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| actions | 自定义按钮 | ReactNode \| (oriNode, info: { components: ActionsComponents }) => ReactNode | - | - |
+| actions | 自定义按钮，当不需要默认操作按钮时，可以设为 actions={null} | ReactNode \| (oriNode, info: { components: ActionsComponents }) => ReactNode | - | - |
 | allowSpeech | 是否允许语音输入 | boolean \| SpeechConfig | false | - |
 | classNames | 样式类名 | [见下](#semantic-dom) | - | - |
 | components | 自定义组件 | Record<'input', ComponentType> | - | - |
