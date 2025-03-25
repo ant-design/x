@@ -30,6 +30,7 @@ const App: React.FC = () => {
     <Sender
       value={value}
       onChange={setValue}
+      autoSize={{ minRows: 2, maxRows: 6 }}
       placeholder="Press Enter to send message"
       footer={(info) => {
         const { SendButton, LoadingButton, SpeechButton } = info.actionsComponents;
