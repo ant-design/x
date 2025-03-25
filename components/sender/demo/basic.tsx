@@ -38,7 +38,6 @@ const Demo: React.FC = () => {
           setLoading(false);
           message.error('Cancel sending!');
         }}
-        autoSize={{ minRows: 2, maxRows: 6 }}
       />
       <Sender value="Force as loading" loading readOnly />
       <Sender disabled value="Set to disabled" />

@@ -23,6 +23,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/actions.tsx">Custom actions</code>
 <code src="./demo/header.tsx">Header panel</code>
 <code src="./demo/header-fixed.tsx">Reference</code>
+<code src="./demo/footer.tsx">Custom footer</code>
 <code src="./demo/send-style.tsx">Adjust style</code>
 <code src="./demo/paste-image.tsx">Paste files</code>
 <code src="./demo/focus.tsx">Focus</code>
@@ -35,7 +36,7 @@ Common props ref：[Common props](/docs/react/common-props)
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| actions | Custom actions | ReactNode \| (oriNode, info: { components }) => ReactNode | - | - |
+| actions | Custom actions | ReactNode \| (oriNode, info: { components:ActionsComponents }) => ReactNode | - | - |
 | allowSpeech | Whether to allow speech input | boolean \| SpeechConfig | false | - |
 | classNames | Class name | [See below](#semantic-dom) | - | - |
 | components | Custom components | Record<'input', ComponentType> | - | - |
@@ -44,6 +45,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | loading | Whether it is loading | boolean | false | - |
 | header | Header panel | ReactNode | - | - |
 | prefix | Prefix content | ReactNode | - | - |
+| footer | Footer content | ReactNode \| (info: { actionsComponents: ActionsComponents }) => ReactNode | - | - |
 | readOnly | Whether to make the input box read-only | boolean | false | - |
 | rootClassName | Root element class name | string | - | - |
 | styles | Semantic DOM style | [See below](#semantic-dom) | - | - |
@@ -53,7 +55,6 @@ Common props ref：[Common props](/docs/react/common-props)
 | onChange | Callback when input value changes | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`> ) => void | - | - |
 | onCancel | Callback when click cancel button | () => void | - | - |
 | onPasteFile | Callback when paste files | (firstFile: File, files: FileList) => void | - | - |
-| autoSize | Height auto size feature, can be set to true \| false or an object { minRows: 2, maxRows: 6 } | boolean \| { minRows?: number; maxRows?: number } | { maxRows: 8 } | - |
 
 ```typescript | pure
 type SpeechConfig = {
@@ -61,6 +62,15 @@ type SpeechConfig = {
   // It is up to the developer to implement the third-party speech input function.
   recording?: boolean;
   onRecordingChange?: (recording: boolean) => void;
+};
+```
+
+```typescript | pure
+type ActionsComponents = {
+  SendButton: React.ComponentType<ButtonProps>;
+  ClearButton: React.ComponentType<ButtonProps>;
+  LoadingButton: React.ComponentType<ButtonProps>;
+  SpeechButton: React.ComponentType<ButtonProps>;
 };
 ```
 
