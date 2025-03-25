@@ -45,6 +45,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 | onChange | 输入框值改变的回调 | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`> ) => void | - | - |
 | onCancel | 点击取消按钮的回调 | () => void | - | - |
 | onPasteFile | 黏贴文件的回调 | (firstFile: File, files: FileList) => void | - | - |
+| autoSize | 自适应内容高度，可设置为 true \| false 或对象：{ minRows: 2, maxRows: 6 } | boolean \| { minRows?: number; maxRows?: number } | { maxRows: 8 } | - |
 
 ```typescript | pure
 type SpeechConfig = {
