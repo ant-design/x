@@ -62,12 +62,14 @@ export interface SenderProps
     prefix?: React.CSSProperties;
     input?: React.CSSProperties;
     actions?: React.CSSProperties;
+    footer?: React.CSSProperties;
   };
   rootClassName?: string;
   classNames?: {
     prefix?: string;
     input?: string;
     actions?: string;
+    footer?: string;
   };
   style?: React.CSSProperties;
   className?: string;
@@ -371,7 +373,21 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
             </div>
           )}
         </div>
-        {footerNode && <div className={`${prefixCls}-footer`}>{footerNode}</div>}
+        {footerNode && (
+          <div
+            className={classnames(
+              `${prefixCls}-footer`,
+              contextConfig.classNames.footer,
+              classNames.footer,
+            )}
+            style={{
+              ...contextConfig.styles.footer,
+              ...styles.footer,
+            }}
+          >
+            {footerNode}
+          </div>
+        )}
       </ActionButtonContext.Provider>
     </div>,
   );

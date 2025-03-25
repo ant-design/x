@@ -143,8 +143,8 @@ describe('Sender Component', () => {
       const onSubmit = jest.fn();
       const { container, getByText } = render(
         <Sender
-          footer={(info) => {
-            const { SendButton, ClearButton } = info.actionsComponents;
+          footer={({ components }) => {
+            const { SendButton, ClearButton } = components;
             return (
               <div className="sender-footer-test">
                 <SendButton onClick={onSubmit} disabled={false}>

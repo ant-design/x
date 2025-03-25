@@ -45,7 +45,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | loading | Whether it is loading | boolean | false | - |
 | header | Header panel | ReactNode | - | - |
 | prefix | Prefix content | ReactNode | - | - |
-| footer | Footer content | ReactNode \| (info: { actionsComponents: ActionsComponents }) => ReactNode | - | - |
+| footer | Footer content | ReactNode \| (info: { components: ActionsComponents }) => ReactNode | - | - |
 | readOnly | Whether to make the input box read-only | boolean | false | - |
 | rootClassName | Root element class name | string | - | - |
 | styles | Semantic DOM style | [See below](#semantic-dom) | - | - |

@@ -32,8 +32,8 @@ const App: React.FC = () => {
       onChange={setValue}
       autoSize={{ minRows: 2, maxRows: 6 }}
       placeholder="Press Enter to send message"
-      footer={(info) => {
-        const { SendButton, LoadingButton, SpeechButton } = info.actionsComponents;
+      footer={({ components }) => {
+        const { SendButton, LoadingButton, SpeechButton } = components;
         return (
           <Flex justify="space-between" align="center">
             <Flex gap="small" align="center">
