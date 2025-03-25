@@ -16,7 +16,18 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 
 ## 代码演示
 
-<code src="./demo/basic.tsx">基本用法</code> <code src="./demo/submitType.tsx">提交模式</code> <code src="./demo/speech.tsx">语音输入</code> <code src="./demo/speech-custom.tsx">自定义语音输入</code> <code src="./demo/actions.tsx">自定义按钮</code> <code src="./demo/header.tsx">展开面板</code> <code src="./demo/header-fixed.tsx">引用</code> <code src="./demo/footer.tsx">自定义底部内容</code> <code src="./demo/send-style.tsx">调整样式</code> <code src="./demo/paste-image.tsx">黏贴文件</code> <code src="./demo/focus.tsx">聚焦</code>
+<!-- prettier-ignore -->
+<code src="./demo/basic.tsx">基本用法</code>
+<code src="./demo/submitType.tsx">提交模式</code>
+<code src="./demo/speech.tsx">语音输入</code>
+<code src="./demo/speech-custom.tsx">自定义语音输入</code>
+<code src="./demo/actions.tsx">自定义按钮</code>
+<code src="./demo/header.tsx">展开面板</code>
+<code src="./demo/header-fixed.tsx">引用</code>
+<code src="./demo/footer.tsx">自定义底部内容</code>
+<code src="./demo/send-style.tsx">调整样式</code>
+<code src="./demo/paste-image.tsx">黏贴文件</code>
+<code src="./demo/focus.tsx">聚焦</code>
 
 ## API
 
