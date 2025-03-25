@@ -10,7 +10,6 @@ export interface ComponentToken {}
 export interface SenderToken extends FullToken<'Sender'> {
   SenderContentMaxWidth: number | string;
 }
-
 const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
   const {
     componentCls,
@@ -27,7 +26,6 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
     [componentCls]: {
       position: 'relative',
       width: '100%',
-
       boxSizing: 'border-box',
       boxShadow: `${token.boxShadowTertiary}`,
       transition: `background ${token.motionDurationSlow}`,
