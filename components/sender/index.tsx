@@ -320,65 +320,61 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
       {header && (
         <SendHeaderContext.Provider value={{ prefixCls }}>{header}</SendHeaderContext.Provider>
       )}
-      <div className={`${prefixCls}-content`} onMouseDown={onContentMouseDown}>
-        {/* Prefix */}
-        {prefix && (
-          <div
-            className={classnames(
-              `${prefixCls}-prefix`,
-              contextConfig.classNames.prefix,
-              classNames.prefix,
-            )}
-            style={{ ...contextConfig.styles.prefix, ...styles.prefix }}
-          >
-            {prefix}
-          </div>
-        )}
+      <ActionButtonContext.Provider value={actionsButtonContextProps}>
+        <div className={`${prefixCls}-content`} onMouseDown={onContentMouseDown}>
+          {/* Prefix */}
+          {prefix && (
+            <div
+              className={classnames(
+                `${prefixCls}-prefix`,
+                contextConfig.classNames.prefix,
+                classNames.prefix,
+              )}
+              style={{ ...contextConfig.styles.prefix, ...styles.prefix }}
+            >
+              {prefix}
+            </div>
+          )}
 
-        {/* Input */}
-        <InputTextArea
-          {...inputProps}
-          disabled={disabled}
-          style={{ ...contextConfig.styles.input, ...styles.input }}
-          className={classnames(inputCls, contextConfig.classNames.input, classNames.input)}
-          autoSize={autoSize}
-          value={innerValue}
-          onChange={(event) => {
-            triggerValueChange(
-              (event.target as HTMLTextAreaElement).value,
-              event as React.ChangeEvent<HTMLTextAreaElement>,
-            );
-            triggerSpeech(true);
-          }}
-          onPressEnter={onInternalKeyPress}
-          onCompositionStart={onInternalCompositionStart}
-          onCompositionEnd={onInternalCompositionEnd}
-          onKeyDown={onKeyDown}
-          onPaste={onInternalPaste}
-          variant="borderless"
-          readOnly={readOnly}
-        />
-        {/* Action List */}
-        {actionNode && (
-          <div
-            className={classnames(
-              actionListCls,
-              contextConfig.classNames.actions,
-              classNames.actions,
-            )}
-            style={{ ...contextConfig.styles.actions, ...styles.actions }}
-          >
-            <ActionButtonContext.Provider value={actionsButtonContextProps}>
+          {/* Input */}
+          <InputTextArea
+            {...inputProps}
+            disabled={disabled}
+            style={{ ...contextConfig.styles.input, ...styles.input }}
+            className={classnames(inputCls, contextConfig.classNames.input, classNames.input)}
+            autoSize={autoSize}
+            value={innerValue}
+            onChange={(event) => {
+              triggerValueChange(
+                (event.target as HTMLTextAreaElement).value,
+                event as React.ChangeEvent<HTMLTextAreaElement>,
+              );
+              triggerSpeech(true);
+            }}
+            onPressEnter={onInternalKeyPress}
+            onCompositionStart={onInternalCompositionStart}
+            onCompositionEnd={onInternalCompositionEnd}
+            onKeyDown={onKeyDown}
+            onPaste={onInternalPaste}
+            variant="borderless"
+            readOnly={readOnly}
+          />
+          {/* Action List */}
+          {actionNode && (
+            <div
+              className={classnames(
+                actionListCls,
+                contextConfig.classNames.actions,
+                classNames.actions,
+              )}
+              style={{ ...contextConfig.styles.actions, ...styles.actions }}
+            >
               {actionNode}
-            </ActionButtonContext.Provider>
-          </div>
-        )}
-      </div>
-      {renderFooter && (
-        <ActionButtonContext.Provider value={actionsButtonContextProps}>
-          <div className={`${prefixCls}-footer`}>{renderFooter}</div>
-        </ActionButtonContext.Provider>
-      )}
+            </div>
+          )}
+        </div>
+        {renderFooter && <div className={`${prefixCls}-footer`}>{renderFooter}</div>}
+      </ActionButtonContext.Provider>
     </div>,
   );
 });
