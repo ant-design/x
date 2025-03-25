@@ -38,7 +38,7 @@ export type ActionsRender = (
   },
 ) => React.ReactNode;
 
-export type FooterRender = (info: { actionsComponents: ActionsComponents }) => React.ReactNode;
+export type FooterRender = (info: { components: ActionsComponents }) => React.ReactNode;
 export interface SenderProps
   extends Pick<TextareaProps, 'placeholder' | 'onKeyPress' | 'onFocus' | 'onBlur'> {
   prefixCls?: string;
@@ -90,6 +90,14 @@ function getComponent<T>(
 ): React.ComponentType<T> {
   return getValue(components, path) || defaultComponent;
 }
+
+/** Used for actions render needed components */
+const sharedRenderComponents = {
+  SendButton,
+  ClearButton,
+  LoadingButton,
+  SpeechButton,
+};
 
 const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   const {
@@ -273,12 +281,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   // Custom actions
   if (typeof actions === 'function') {
     actionNode = actions(actionNode, {
-      components: {
-        SendButton,
-        ClearButton,
-        LoadingButton,
-        SpeechButton,
-      },
+      components: sharedRenderComponents,
     });
   } else if (actions || actions === false) {
     actionNode = actions;
@@ -299,18 +302,13 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   };
 
   // ============================ Footer ============================
-  let renderFooter: React.ReactNode = null;
+  let footerNode: React.ReactNode = null;
   if (typeof footer === 'function') {
-    renderFooter = footer({
-      actionsComponents: {
-        SendButton,
-        ClearButton,
-        LoadingButton,
-        SpeechButton,
-      },
+    footerNode = footer({
+      components: sharedRenderComponents,
     });
   } else if (footer) {
-    renderFooter = footer;
+    footerNode = footer;
   }
 
   // ============================ Render ============================
@@ -373,7 +371,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
             </div>
           )}
         </div>
-        {renderFooter && <div className={`${prefixCls}-footer`}>{renderFooter}</div>}
+        {footerNode && <div className={`${prefixCls}-footer`}>{footerNode}</div>}
       </ActionButtonContext.Provider>
     </div>,
   );
