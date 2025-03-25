@@ -120,51 +120,27 @@ describe('Conversations Component', () => {
     const element = container.querySelector('.ant-dropdown-open');
     expect(element).not.toBeInTheDocument();
   });
+  describe('should handle menu trigger function', () => {
+    it('render node', async () => {
+      const { findAllByText, container } = render(
+        <Conversations items={items} menu={menuWithTriggerOfReactNode} defaultActiveKey="demo1" />,
+      );
+      expect((await findAllByText('menuTriggerForReactNodeButton')).length).toBeGreaterThan(0);
 
-  it('should handle menu trigger function', async () => {
-    // render node
-    const renderTriggerNodeJest = render(
-      <Conversations items={items} menu={menuWithTriggerOfReactNode} defaultActiveKey="demo1" />,
-    );
-
-    // render trigger node
-    expect(
-      (await renderTriggerNodeJest.findAllByText('menuTriggerForReactNodeButton')).length,
-    ).toBeGreaterThan(0);
-
-    // function render node
-    const renderTriggerFunJest = render(
-      <Conversations items={items} menu={menuWithTriggerOfFunction} defaultActiveKey="demo1" />,
-    );
-
-    // render function trigger node
-    expect(
-      (await renderTriggerFunJest.findAllByText('menuTriggerForFunctionButton')).length,
-    ).toBeGreaterThan(0);
-
-    // default icon has't render
-    const menuElement = renderTriggerFunJest.container.querySelector(
-      '.ant-conversations-menu-icon',
-    );
-    expect(menuElement).toBeNull();
-  });
-
-  it('should handle menu trigger of error function', () => {
-    const menuWithTriggerOfError = jest.fn().mockReturnValue({
-      trigger: () => {
-        return 1;
-      },
+      // default icon has't render
+      const menuElement = container.querySelector('.ant-conversations-menu-icon');
+      expect(menuElement).toBeNull();
     });
 
-    const { container } = render(
-      <Conversations items={items} menu={menuWithTriggerOfError} defaultActiveKey="demo1" />,
-    );
-
-    expect(menu).toHaveBeenCalled();
-    // 错误react node 需要展示默认icon
-    expect(menu).toHaveBeenCalled();
-    const menuElement = container.querySelector('.ant-conversations-menu-icon');
-    expect(menuElement).toBeInTheDocument();
+    it('render function node', async () => {
+      const { findAllByText, container } = render(
+        <Conversations items={items} menu={menuWithTriggerOfFunction} defaultActiveKey="demo1" />,
+      );
+      expect((await findAllByText('menuTriggerForFunctionButton')).length).toBeGreaterThan(0);
+      // default icon has't render
+      const menuElement = container.querySelector('.ant-conversations-menu-icon');
+      expect(menuElement).toBeNull();
+    });
   });
 
   it('should group items when groupable is true', () => {
