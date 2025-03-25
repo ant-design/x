@@ -79,7 +79,7 @@ const App: React.FC = () => {
       <SemanticPreview semantics={[{ name: 'footer', desc: footerLocale.footer }]}>
         {(injectProps) => (
           <Sender
-            actions={null}
+            actions={false}
             footer={(info) => {
               const { SendButton } = info.actionsComponents;
               return (

@@ -64,7 +64,7 @@ const App: React.FC = () => {
       onCancel={() => {
         setLoading(false);
       }}
-      actions={null}
+      actions={false}
     />
   );
 };

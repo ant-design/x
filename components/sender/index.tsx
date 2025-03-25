@@ -280,7 +280,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
         SpeechButton,
       },
     });
-  } else if (actions || actions === null) {
+  } else if (actions || actions === false) {
     actionNode = actions;
   }
   // Custom actions context props
