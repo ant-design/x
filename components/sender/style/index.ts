@@ -133,7 +133,7 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
         },
       },
 
-      // ========================== Footer ==========================
+      // ============================ Footer =============================
       [`${componentCls}-footer`]: {
         paddingInlineStart: padding,
         paddingInlineEnd: paddingSM,
