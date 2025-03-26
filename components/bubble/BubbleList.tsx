@@ -27,7 +27,9 @@ export type BubbleDataType = BubbleProps & {
 
 export type RoleType = Partial<Omit<BubbleProps, 'content'>>;
 
-export type RolesType = Record<string, RoleType> | ((bubbleDataP: BubbleDataType, index: number) => RoleType);
+export type RolesType =
+  | Record<string, RoleType>
+  | ((bubbleDataP: BubbleDataType, index: number) => RoleType);
 
 export interface BubbleListProps extends React.HTMLAttributes<HTMLDivElement> {
   prefixCls?: string;

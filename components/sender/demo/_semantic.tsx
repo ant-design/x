@@ -1,6 +1,6 @@
 import { SmileOutlined } from '@ant-design/icons';
 import { Sender } from '@ant-design/x';
-import { Button, Divider, Flex } from 'antd';
+import { Button, Divider, Flex, Typography } from 'antd';
 import React from 'react';
 import SemanticPreview from '../../../.dumi/components/SemanticPreview';
 import useLocale from '../../../.dumi/hooks/useLocale';
@@ -10,11 +10,13 @@ const locales = {
     prefix: '前缀',
     input: '输入框',
     actions: '操作列表',
+    footer: '底部',
   },
   en: {
     prefix: 'Prefix',
     input: 'Input',
     actions: 'Action List',
+    footer: 'Footer',
   },
 };
 
@@ -41,9 +43,17 @@ const App: React.FC = () => {
           { name: 'prefix', desc: locale.prefix },
           { name: 'input', desc: locale.input },
           { name: 'actions', desc: locale.actions },
+          { name: 'footer', desc: locale.footer },
         ]}
       >
-        <Sender prefix={<Button type="text" icon={<SmileOutlined />} />} />
+        <Sender
+          prefix={<Button type="text" icon={<SmileOutlined />} />}
+          footer={() => (
+            <Typography.Text type="secondary">
+              Deep thinking can understand the intent behind.
+            </Typography.Text>
+          )}
+        />
       </SemanticPreview>
 
       <Divider style={{ margin: 0, padding: 0 }} />

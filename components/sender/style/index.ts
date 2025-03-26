@@ -10,15 +10,22 @@ export interface ComponentToken {}
 export interface SenderToken extends FullToken<'Sender'> {
   SenderContentMaxWidth: number | string;
 }
-
 const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
-  const { componentCls, padding, paddingSM, paddingXS, lineWidth, lineWidthBold, calc } = token;
+  const {
+    componentCls,
+    padding,
+    paddingSM,
+    paddingXS,
+    paddingXXS,
+    lineWidth,
+    lineWidthBold,
+    calc,
+  } = token;
 
   return {
     [componentCls]: {
       position: 'relative',
       width: '100%',
-
       boxSizing: 'border-box',
       boxShadow: `${token.boxShadowTertiary}`,
       transition: `background ${token.motionDurationSlow}`,
@@ -80,7 +87,6 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
         boxSizing: 'border-box',
         alignItems: 'flex-end',
       },
-
       // ============================ Prefix =============================
       [`${componentCls}-prefix`]: {
         flex: 'none',
@@ -125,6 +131,15 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
           width: '1.2em',
           verticalAlign: 'top',
         },
+      },
+
+      // ============================ Footer =============================
+      [`${componentCls}-footer`]: {
+        paddingInlineStart: padding,
+        paddingInlineEnd: paddingSM,
+        paddingBlockEnd: paddingSM,
+        paddingBlockStart: paddingXXS,
+        boxSizing: 'border-box',
       },
     },
   };
