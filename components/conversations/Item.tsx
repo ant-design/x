@@ -14,7 +14,12 @@ export interface ConversationsItemProps
   prefixCls?: string;
   direction?: DirectionType;
   menu?: MenuProps & {
-    trigger?: React.ReactNode | ((conversation: Conversation) => React.ReactNode);
+    trigger?:
+      | React.ReactNode
+      | ((
+          conversation: Conversation,
+          { originNode }: { originNode: React.ReactNode },
+        ) => React.ReactNode);
   };
   active?: boolean;
   onClick?: (info: Conversation) => void;
@@ -68,11 +73,14 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
   const { trigger, ...dropdownMenu } = menu || {};
 
   const renderMenuTrigger = (conversation: Conversation) => {
+    const originTriggerNode = (
+      <EllipsisOutlined onClick={stopPropagation} className={`${prefixCls}-menu-icon`} />
+    );
     if (typeof trigger === 'function') {
-      return trigger(conversation);
+      return trigger(conversation, { originNode: originTriggerNode });
     }
     if (trigger) return trigger;
-    return <EllipsisOutlined onClick={stopPropagation} className={`${prefixCls}-menu-icon`} />;
+    return originTriggerNode;
   };
 
   // ============================ Render ============================
