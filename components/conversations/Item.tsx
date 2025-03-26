@@ -67,7 +67,7 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
 
   const { trigger, items = [], ...menuOther } = menu || {};
 
-  const getMenuTriggerNode = (conversation: Conversation) => {
+  const renderMenuTrigger = (conversation: Conversation) => {
     const triggerNode = typeof trigger === 'function' ? trigger(conversation) : trigger;
 
     return (
@@ -106,7 +106,7 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
             disabled={disabled}
             onOpenChange={onOpenChange}
           >
-            {getMenuTriggerNode(info)}
+            {renderMenuTrigger(info)}
           </Dropdown>
         )}
       </li>
