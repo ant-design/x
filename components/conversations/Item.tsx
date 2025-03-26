@@ -16,10 +16,7 @@ export interface ConversationsItemProps
   menu?: MenuProps & {
     trigger?:
       | React.ReactNode
-      | ((
-          conversation: Conversation,
-          { originNode }: { originNode: React.ReactNode },
-        ) => React.ReactNode);
+      | ((conversation: Conversation, info: { originNode: React.ReactNode }) => React.ReactNode);
   };
   active?: boolean;
   onClick?: (info: Conversation) => void;
@@ -76,6 +73,7 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
     const originTriggerNode = (
       <EllipsisOutlined onClick={stopPropagation} className={`${prefixCls}-menu-icon`} />
     );
+
     if (typeof trigger === 'function') {
       return trigger(conversation, { originNode: originTriggerNode });
     }
