@@ -54,9 +54,7 @@ const menu = jest.fn().mockReturnValue({
 });
 
 const menuWithTriggerOfFunction = jest.fn().mockReturnValue({
-  trigger: () => {
-    return <div onClick={() => {}}>menuTriggerForFunctionButton</div>;
-  },
+  trigger: <div onClick={() => {}}>menuTriggerForFunctionButton</div>,
 });
 
 const menuWithTriggerOfReactNode = jest.fn().mockReturnValue({
