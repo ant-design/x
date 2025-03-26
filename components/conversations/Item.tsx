@@ -76,11 +76,11 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
     const originTriggerNode = (
       <EllipsisOutlined onClick={stopPropagation} className={`${prefixCls}-menu-icon`} />
     );
-
-    if (typeof trigger === 'function') {
-      return trigger(conversation, { originNode: originTriggerNode });
+    if (trigger) {
+      return typeof trigger === 'function'
+        ? trigger(conversation, { originNode: originTriggerNode })
+        : trigger;
     }
-    if (trigger) return trigger;
     return originTriggerNode;
   };
 
