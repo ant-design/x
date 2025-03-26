@@ -65,16 +65,14 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
 
   // ============================ Menu ============================
 
-  const { trigger, items = [], ...menuOther } = menu || {};
+  const { trigger, ...dropdownMenu } = menu || {};
 
   const renderMenuTrigger = (conversation: Conversation) => {
-    const triggerNode = typeof trigger === 'function' ? trigger(conversation) : trigger;
-
-    return (
-      triggerNode || (
-        <EllipsisOutlined onClick={stopPropagation} className={`${prefixCls}-menu-icon`} />
-      )
-    );
+    if (typeof trigger === 'function') {
+      return trigger(conversation);
+    }
+    if (trigger) return trigger;
+    return <EllipsisOutlined onClick={stopPropagation} className={`${prefixCls}-menu-icon`} />;
   };
 
   // ============================ Render ============================
@@ -97,10 +95,7 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
         </Typography.Text>
         {!disabled && menu && (
           <Dropdown
-            menu={{
-              ...menuOther,
-              items,
-            }}
+            menu={dropdownMenu}
             placement={direction === 'rtl' ? 'bottomLeft' : 'bottomRight'}
             trigger={['click']}
             disabled={disabled}
