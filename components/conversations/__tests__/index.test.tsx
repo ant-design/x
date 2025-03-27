@@ -1,10 +1,9 @@
 import React from 'react';
-import Conversations from '../index';
-import { render, fireEvent } from '../../../tests/utils';
-
-import type { Conversation } from '../index';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
+import { fireEvent, render } from '../../../tests/utils';
+import Conversations from '../index';
+import type { Conversation } from '../index';
 
 const items: Conversation[] = [
   {
@@ -52,6 +51,14 @@ const menu = jest.fn().mockReturnValue({
       danger: true,
     },
   ],
+});
+
+const menuWithTriggerOfFunction = jest.fn().mockReturnValue({
+  trigger: <div onClick={() => {}}>menuTriggerForFunctionButton</div>,
+});
+
+const menuWithTriggerOfReactNode = jest.fn().mockReturnValue({
+  trigger: <div onClick={() => {}}>menuTriggerForReactNodeButton</div>,
 });
 
 describe('Conversations Component', () => {
@@ -110,6 +117,28 @@ describe('Conversations Component', () => {
     fireEvent.click(menuElement as HTMLElement);
     const element = container.querySelector('.ant-dropdown-open');
     expect(element).not.toBeInTheDocument();
+  });
+  describe('should handle menu trigger function', () => {
+    it('render node', async () => {
+      const { findAllByText, container } = render(
+        <Conversations items={items} menu={menuWithTriggerOfReactNode} defaultActiveKey="demo1" />,
+      );
+      expect((await findAllByText('menuTriggerForReactNodeButton')).length).toBeGreaterThan(0);
+
+      // default icon has't render
+      const menuElement = container.querySelector('.ant-conversations-menu-icon');
+      expect(menuElement).toBeNull();
+    });
+
+    it('render function node', async () => {
+      const { findAllByText, container } = render(
+        <Conversations items={items} menu={menuWithTriggerOfFunction} defaultActiveKey="demo1" />,
+      );
+      expect((await findAllByText('menuTriggerForFunctionButton')).length).toBeGreaterThan(0);
+      // default icon has't render
+      const menuElement = container.querySelector('.ant-conversations-menu-icon');
+      expect(menuElement).toBeNull();
+    });
   });
 
   it('should group items when groupable is true', () => {
