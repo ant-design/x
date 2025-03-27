@@ -23,11 +23,9 @@ export interface ActionButtonProps extends ButtonProps {
 }
 
 export function ActionButton(props: ActionButtonProps, ref: React.Ref<HTMLButtonElement>) {
-  const { className, action, onClick: outClick, ...restProps } = props;
+  const { className, action, onClick, ...restProps } = props;
   const context = React.useContext(ActionButtonContext);
   const { prefixCls, disabled: rootDisabled } = context;
-
-  const onClick = context[action];
   const mergedDisabled = rootDisabled ?? restProps.disabled ?? context[`${action}Disabled`];
 
   return (
@@ -36,14 +34,11 @@ export function ActionButton(props: ActionButtonProps, ref: React.Ref<HTMLButton
       {...restProps}
       ref={ref}
       onClick={(e) => {
-        if (!mergedDisabled) {
-          if (onClick) {
-            onClick();
-          }
-          if (outClick) {
-            outClick(e);
-          }
+        if (mergedDisabled) {
+          return;
         }
+        context[action]?.();
+        onClick?.(e);
       }}
       className={classNames(prefixCls, className, {
         [`${prefixCls}-disabled`]: mergedDisabled,
