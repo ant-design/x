@@ -58,6 +58,30 @@ describe('Sender Component', () => {
     expect(onSubmit).toHaveBeenCalled();
   });
 
+  it('should not trigger action when button is disabled', () => {
+    const onSubmit = jest.fn();
+    const onClick = jest.fn();
+    const { container } = render(
+      <Sender
+        actions={(_, info) => {
+          const { SendButton } = info.components;
+          return (
+            <SendButton onClick={onClick} disabled>
+              SendPrompt
+            </SendButton>
+          );
+        }}
+        onSubmit={onSubmit}
+      />,
+    );
+
+    const button = container.querySelector('button')!;
+    fireEvent.click(button);
+
+    expect(onSubmit).not.toHaveBeenCalled();
+    expect(onClick).not.toHaveBeenCalled();
+  });
+
   it('onSubmit', () => {
     const onSubmit = jest.fn();
     const { container } = render(<Sender value="bamboo" onSubmit={onSubmit} />);
