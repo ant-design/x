@@ -57,7 +57,7 @@ Common props ref：[Common props](/docs/react/common-props)
 
 ### CollapsibleOptions
 
-:::info{title=default} When the parameter `collapsible` config `true`, the `default value` be like:
+:::info When the parameter `collapsible` config `true`, the `default value` be like:
 
 ```ts
 {

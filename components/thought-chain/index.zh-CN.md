@@ -58,7 +58,7 @@ demo:
 
 ### CollapsibleOptions
 
-:::info{title=默认值} 当参数 `collapsible` 配置为 `true` 时, 默认值如下:
+:::info当参数 `collapsible` 配置为 `true` 时, 默认值如下:
 
 ```ts
 {
