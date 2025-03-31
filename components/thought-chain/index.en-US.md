@@ -57,6 +57,17 @@ Common props ref：[Common props](/docs/react/common-props)
 
 ### CollapsibleOptions
 
+:::info{title=default} When the parameter `collapsible` config `true`, the `default value` be like:
+
+```ts
+{
+  expandedKeys: [],
+  onExpand: () => {},
+}
+```
+
+:::
+
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | expandedKeys | Current expanded keys | string[] | None | - |
