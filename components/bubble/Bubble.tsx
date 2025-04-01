@@ -111,12 +111,10 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
   // =========================== Content ============================
   const mergedContent = messageRender ? messageRender(typedContent as any) : typedContent;
   const renderSlot = (
-    node: React.ReactNode | ((info: { content?: BubbleContentType }) => React.ReactNode),
+    node: React.ReactNode | ((content: BubbleContentType) => React.ReactNode),
   ) => {
     if (typeof node === 'function') {
-      return node({
-        content: typedContent,
-      });
+      return node(typedContent);
     }
     return node;
   };

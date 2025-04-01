@@ -16,7 +16,7 @@ const App: React.FC = () => {
       avatar={{ icon: <UserOutlined /> }}
       header={(messageContext) => (
         <Space size={token.paddingXXS}>
-          <div>{messageContext.content as string} </div>
+          <div>{messageContext as string} </div>
         </Space>
       )}
       footer={(messageContext) => (
@@ -26,7 +26,7 @@ const App: React.FC = () => {
             color="default"
             variant="text"
             size="small"
-            onClick={() => onCopy(messageContext.content)}
+            onClick={() => onCopy(messageContext)}
             icon={<CopyOutlined />}
           />
         </Space>
