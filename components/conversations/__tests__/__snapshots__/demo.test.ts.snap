@@ -250,7 +250,7 @@ exports[`renders components/conversations/demo/group-sort.tsx correctly 1`] = `
     >
       <li
         aria-describedby="test-id"
-        class="ant-conversations-item"
+        class="ant-conversations-item ant-conversations-item-active"
       >
         <span
           class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
