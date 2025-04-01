@@ -14,27 +14,23 @@ const App: React.FC = () => {
     <Bubble
       content="Hello, welcome to use Ant Design X! Just ask if you have any questions."
       avatar={{ icon: <UserOutlined /> }}
-      header={(messageContext) => {
-        return (
-          <Space size={token.paddingXXS}>
-            <div>{messageContext.content as string} </div>
-          </Space>
-        );
-      }}
-      footer={(messageContext) => {
-        return (
-          <Space size={token.paddingXXS}>
-            <Button color="default" variant="text" size="small" icon={<SyncOutlined />} />
-            <Button
-              color="default"
-              variant="text"
-              size="small"
-              onClick={() => onCopy(messageContext.content)}
-              icon={<CopyOutlined />}
-            />
-          </Space>
-        );
-      }}
+      header={(messageContext) => (
+        <Space size={token.paddingXXS}>
+          <div>{messageContext.content as string} </div>
+        </Space>
+      )}
+      footer={(messageContext) => (
+        <Space size={token.paddingXXS}>
+          <Button color="default" variant="text" size="small" icon={<SyncOutlined />} />
+          <Button
+            color="default"
+            variant="text"
+            size="small"
+            onClick={() => onCopy(messageContext.content)}
+            icon={<CopyOutlined />}
+          />
+        </Space>
+      )}
     />
   );
 };
