@@ -36,6 +36,6 @@ export interface BubbleProps<ContentType extends BubbleContentType = string>
   variant?: 'filled' | 'borderless' | 'outlined' | 'shadow';
   shape?: 'round' | 'corner';
   onTypingComplete?: VoidFunction;
-  header?: React.ReactNode;
-  footer?: React.ReactNode | ((content: BubbleContentType) => React.ReactNode);
+  header?: React.ReactNode | ((info: { content?: BubbleContentType }) => React.ReactNode);
+  footer?: React.ReactNode | ((info: { content?: BubbleContentType }) => React.ReactNode);
 }
