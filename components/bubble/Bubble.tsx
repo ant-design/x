@@ -110,7 +110,14 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
 
   // =========================== Content ============================
   const mergedContent = messageRender ? messageRender(typedContent as any) : typedContent;
-
+  const renderSlot = (
+    node: React.ReactNode | ((content: BubbleContentType) => React.ReactNode),
+  ) => {
+    if (typeof node === 'function') {
+      return node(typedContent);
+    }
+    return node;
+  };
   // ============================ Render ============================
   let contentNode: React.ReactNode;
   if (loading) {
@@ -157,7 +164,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
               ...styles.header,
             }}
           >
-            {header}
+            {renderSlot(header)}
           </div>
         )}
         {fullContent}
@@ -173,7 +180,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
               ...styles.footer,
             }}
           >
-            {typeof footer === 'function' ? footer(mergedContent) : footer}
+            {renderSlot(footer)}
           </div>
         )}
       </div>
