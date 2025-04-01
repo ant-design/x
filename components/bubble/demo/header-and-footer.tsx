@@ -7,8 +7,7 @@ const App: React.FC = () => {
   const { token } = theme.useToken();
   const onCopy = (textToCopy: any) => {
     if (!textToCopy) return message.success('文本为空');
-    navigator.clipboard.writeText(textToCopy);
-    message.success('文本复制成功');
+    message.success(`文本复制成功${textToCopy}`);
   };
   return (
     <Bubble
