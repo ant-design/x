@@ -30,19 +30,22 @@ describe('Sender Component', () => {
 
   it('custom action button', () => {
     const onSubmit = jest.fn();
+    const onSend = jest.fn();
+    const onClear = jest.fn();
     const { container, getByText } = render(
       <Sender
         actions={(_, info) => {
           const { SendButton, ClearButton } = info.components;
           return (
             <div className="bamboo">
-              <SendButton onClick={onSubmit} disabled={false}>
-                SendPrompt
-              </SendButton>
-              <ClearButton disabled />
+              <SendButton onClick={onSend}>SendPrompt</SendButton>
+              <ClearButton onClick={onClear} className="clear-button" disabled={false} />
             </div>
           );
         }}
+        disabled
+        defaultValue="text"
+        onSubmit={onSubmit}
       />,
     );
 
@@ -50,36 +53,16 @@ describe('Sender Component', () => {
     const sendButton = getByText('SendPrompt');
     expect(sendButton).toBeInTheDocument();
 
-    const clearButton = container.querySelector('.bamboo button[disabled]');
+    const clearButton = container.querySelector('.bamboo button.clear-button')!;
     expect(clearButton).toBeInTheDocument();
 
     // check custom onClick
     fireEvent.click(sendButton);
-    expect(onSubmit).toHaveBeenCalled();
-  });
-
-  it('should not trigger action when button is disabled', () => {
-    const onSubmit = jest.fn();
-    const onClick = jest.fn();
-    const { container } = render(
-      <Sender
-        actions={(_, info) => {
-          const { SendButton } = info.components;
-          return (
-            <SendButton onClick={onClick} disabled>
-              SendPrompt
-            </SendButton>
-          );
-        }}
-        onSubmit={onSubmit}
-      />,
-    );
-
-    const button = container.querySelector('button')!;
-    fireEvent.click(button);
+    fireEvent.click(clearButton);
 
     expect(onSubmit).not.toHaveBeenCalled();
-    expect(onClick).not.toHaveBeenCalled();
+    expect(onSend).not.toHaveBeenCalled();
+    expect(onClear).toHaveBeenCalled();
   });
 
   it('onSubmit', () => {

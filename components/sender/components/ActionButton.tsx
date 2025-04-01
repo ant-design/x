@@ -26,7 +26,7 @@ export function ActionButton(props: ActionButtonProps, ref: React.Ref<HTMLButton
   const { className, action, onClick, ...restProps } = props;
   const context = React.useContext(ActionButtonContext);
   const { prefixCls, disabled: rootDisabled } = context;
-  const mergedDisabled = rootDisabled ?? restProps.disabled ?? context[`${action}Disabled`];
+  const mergedDisabled = restProps.disabled ?? rootDisabled ?? context[`${action}Disabled`];
 
   return (
     <Button
