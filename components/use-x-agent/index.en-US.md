@@ -26,6 +26,7 @@ Connect with the backend model to provide an abstract data flow.
 ```tsx | pure
 type useXAgent<AgentMessage> = (
   config: XAgentConfigPreset | XAgentConfigCustom<AgentMessage>,
+  deps: React.DependencyList,
 ) => [Agent];
 ```
 
