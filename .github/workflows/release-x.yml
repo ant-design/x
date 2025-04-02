@@ -1,13 +1,12 @@
 name: 🆇 Release to X
 
 on:
-  workflow_dispatch:
-  release:
-    types: [published]
+  create
 
 jobs:
   tweet:
     runs-on: ubuntu-latest
+    if: ${{ github.event.ref_type == 'tag' && !contains(github.event.ref, 'alpha') }}
     steps:
       - name: Tweet
         uses: nearform-actions/github-action-notify-twitter@master
