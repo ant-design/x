@@ -1,4 +1,19 @@
 import {
+  CloudUploadOutlined,
+  CommentOutlined,
+  DeleteOutlined,
+  EditOutlined,
+  EllipsisOutlined,
+  FireOutlined,
+  HeartOutlined,
+  PaperClipOutlined,
+  PlusOutlined,
+  QuestionCircleOutlined,
+  ReadOutlined,
+  ShareAltOutlined,
+  SmileOutlined,
+} from '@ant-design/icons';
+import {
   Attachments,
   Bubble,
   Conversations,
@@ -8,34 +23,25 @@ import {
   useXAgent,
   useXChat,
 } from '@ant-design/x';
+import { Avatar, Button, type GetProp, Space } from 'antd';
 import { createStyles } from 'antd-style';
 import React, { useEffect } from 'react';
 
-import {
-  CloudUploadOutlined,
-  CommentOutlined,
-  EllipsisOutlined,
-  FireOutlined,
-  HeartOutlined,
-  PaperClipOutlined,
-  PlusOutlined,
-  ReadOutlined,
-  ShareAltOutlined,
-  SmileOutlined,
-} from '@ant-design/icons';
-import { Badge, Button, type GetProp, Space } from 'antd';
-
-const renderTitle = (icon: React.ReactElement, title: string) => (
-  <Space align="start">
-    {icon}
-    <span>{title}</span>
-  </Space>
-);
-
-const defaultConversationsItems = [
+const DEFAULT_CONVERSATIONS_ITEMS = [
   {
-    key: '0',
+    key: 'default-0',
     label: 'What is Ant Design X?',
+    group: 'Today',
+  },
+  {
+    key: 'default-1',
+    label: 'How to quickly install and import components?',
+    group: 'Today',
+  },
+  {
+    key: 'default-2',
+    label: 'New AGI Hybrid Interface',
+    group: 'Yesterday',
   },
 ];
 
@@ -44,8 +50,7 @@ const useStyle = createStyles(({ token, css }) => {
     layout: css`
       width: 100%;
       min-width: 1000px;
-      height: 722px;
-      border-radius: ${token.borderRadius}px;
+      height: 100vh;
       display: flex;
       background: ${token.colorBgContainer};
       font-family: AlibabaPuHuiTi, ${token.fontFamily}, sans-serif;
@@ -54,18 +59,54 @@ const useStyle = createStyles(({ token, css }) => {
         color: ${token.colorText};
       }
     `,
-    menu: css`
+    // sider 样式
+    sider: css`
       background: ${token.colorBgLayout}80;
       width: 280px;
       height: 100%;
       display: flex;
       flex-direction: column;
+      padding: 0 12px;
+      box-sizing: border-box;
+    `,
+    logo: css`
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      padding: 0 24px;
+      box-sizing: border-box;
+      gap: 8px;
+      margin: 24px 0;
+
+      span {
+        font-weight: bold;
+        color: ${token.colorText};
+        font-size: 16px;
+      }
+    `,
+    addBtn: css`
+      background: #1677ff0f;
+      border: 1px solid #1677ff34;
+      height: 40px;
     `,
     conversations: css`
-      padding: 0 12px;
       flex: 1;
       overflow-y: auto;
+      margin-top: 12px;
+      padding: 0;
+
+      .ant-conversations-list {
+        padding-inline-start: 0;
+      }
     `,
+    siderFooter: css`
+      border-top: 1px solid ${token.colorBorderSecondary};
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    `,
+    // chat 样式
     chat: css`
       height: 100%;
       width: 100%;
@@ -85,37 +126,21 @@ const useStyle = createStyles(({ token, css }) => {
     `,
     sender: css`
       box-shadow: ${token.boxShadow};
+      color: ${token.colorText};
     `,
-    logo: css`
-      display: flex;
-      height: 72px;
-      align-items: center;
-      justify-content: start;
-      padding: 0 24px;
-      box-sizing: border-box;
-
-      img {
-        width: 24px;
-        height: 24px;
-        display: inline-block;
-      }
-
-      span {
-        display: inline-block;
-        margin: 0 8px;
-        font-weight: bold;
-        color: ${token.colorText};
-        font-size: 16px;
-      }
-    `,
-    addBtn: css`
-      background: #1677ff0f;
-      border: 1px solid #1677ff34;
-      width: calc(100% - 24px);
-      margin: 0 12px 24px 12px;
+    speechButton: css`
+      font-size: 24px;
+      color: ${token.colorText} !important;
     `,
   };
 });
+
+const renderTitle = (icon: React.ReactElement, title: string) => (
+  <Space align="start">
+    {icon}
+    <span>{title}</span>
+  </Space>
+);
 
 const placeholderPromptsItems: GetProp<typeof Prompts, 'items'> = [
   {
@@ -195,14 +220,11 @@ const Independent: React.FC = () => {
   const { styles } = useStyle();
 
   // ==================== State ====================
-  const [headerOpen, setHeaderOpen] = React.useState(false);
+  const [conversationsItems, setConversationsItems] = React.useState(DEFAULT_CONVERSATIONS_ITEMS);
+  const [activeKey, setActiveKey] = React.useState(DEFAULT_CONVERSATIONS_ITEMS[0].key);
 
   const [content, setContent] = React.useState('');
-
-  const [conversationsItems, setConversationsItems] = React.useState(defaultConversationsItems);
-
-  const [activeKey, setActiveKey] = React.useState(defaultConversationsItems[0].key);
-
+  const [attachmentsOpen, setAttachmentsOpen] = React.useState(false);
   const [attachedFiles, setAttachedFiles] = React.useState<GetProp<typeof Attachments, 'items'>>(
     [],
   );
@@ -233,17 +255,6 @@ const Independent: React.FC = () => {
 
   const onPromptsItemClick: GetProp<typeof Prompts, 'onItemClick'> = (info) => {
     onRequest(info.data.description as string);
-  };
-
-  const onAddConversation = () => {
-    setConversationsItems([
-      ...conversationsItems,
-      {
-        key: `${conversationsItems.length}`,
-        label: `New Conversation ${conversationsItems.length}`,
-      },
-    ]);
-    setActiveKey(`${conversationsItems.length}`);
   };
 
   const onConversationClick: GetProp<typeof Conversations, 'onActiveChange'> = (key) => {
@@ -291,22 +302,12 @@ const Independent: React.FC = () => {
     content: message,
   }));
 
-  const attachmentsNode = (
-    <Badge dot={attachedFiles.length > 0 && !headerOpen}>
-      <Button type="text" icon={<PaperClipOutlined />} onClick={() => setHeaderOpen(!headerOpen)} />
-    </Badge>
-  );
-
-  const senderHeader = (
+  const SenderHeader = (
     <Sender.Header
-      title="Attachments"
-      open={headerOpen}
-      onOpenChange={setHeaderOpen}
-      styles={{
-        content: {
-          padding: 0,
-        },
-      }}
+      title="Upload File"
+      open={attachmentsOpen}
+      onOpenChange={setAttachmentsOpen}
+      styles={{ content: { padding: 0 } }}
     >
       <Attachments
         beforeUpload={() => false}
@@ -325,40 +326,77 @@ const Independent: React.FC = () => {
     </Sender.Header>
   );
 
-  const logoNode = (
-    <div className={styles.logo}>
-      <img
-        src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*eco6RrQhxbMAAAAAAAAAAAAADgCCAQ/original"
-        draggable={false}
-        alt="logo"
-      />
-      <span>Ant Design X</span>
-    </div>
-  );
-
   // ==================== Render =================
   return (
     <div className={styles.layout}>
-      <div className={styles.menu}>
+      <div className={styles.sider}>
         {/* 🌟 Logo */}
-        {logoNode}
+        <div className={styles.logo}>
+          <img
+            src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*eco6RrQhxbMAAAAAAAAAAAAADgCCAQ/original"
+            draggable={false}
+            alt="logo"
+            width={24}
+            height={24}
+          />
+          <span>Ant Design X</span>
+        </div>
+
         {/* 🌟 添加会话 */}
         <Button
-          onClick={onAddConversation}
+          onClick={() => {
+            setConversationsItems([
+              {
+                key: `${conversationsItems.length}`,
+                label: `New Conversation ${conversationsItems.length}`,
+                group: 'Today',
+              },
+              ...conversationsItems,
+            ]);
+            setActiveKey(`${conversationsItems.length}`);
+          }}
           type="link"
           className={styles.addBtn}
           icon={<PlusOutlined />}
         >
           New Conversation
         </Button>
+
         {/* 🌟 会话管理 */}
         <Conversations
           items={conversationsItems}
           className={styles.conversations}
           activeKey={activeKey}
           onActiveChange={onConversationClick}
+          groupable
+          styles={{ item: { padding: '0 8px' } }}
+          menu={(conversation) => ({
+            items: [
+              {
+                label: 'Rename',
+                key: 'rename',
+                icon: <EditOutlined />,
+              },
+              {
+                label: 'Delete',
+                key: 'delete',
+                icon: <DeleteOutlined />,
+                danger: true,
+                onClick: () =>
+                  setConversationsItems(
+                    conversationsItems.filter((item) => item.key !== conversation.key),
+                  ),
+              },
+            ],
+          })}
         />
+
+        <div className={styles.siderFooter}>
+          <Avatar size={24} />
+          <Button type="text" icon={<QuestionCircleOutlined />} />
+        </div>
       </div>
+
       <div className={styles.chat}>
         {/* 🌟 消息列表 */}
         <Bubble.List
@@ -371,12 +409,33 @@ const Independent: React.FC = () => {
         {/* 🌟 输入框 */}
         <Sender
           value={content}
-          header={senderHeader}
+          header={SenderHeader}
           onSubmit={onSubmit}
           onChange={setContent}
-          prefix={attachmentsNode}
+          prefix={
+            <Button
+              type="text"
+              icon={<PaperClipOutlined style={{ fontSize: 24 }} />}
+              onClick={() => setAttachmentsOpen(!attachmentsOpen)}
+            />
+          }
           loading={agent.isRequesting()}
           className={styles.sender}
+          allowSpeech
+          actions={(_, info) => {
+            const { SendButton, LoadingButton, SpeechButton } = info.components;
+            return (
+              <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                <SpeechButton className={styles.speechButton} />
+                {agent.isRequesting() ? (
+                  <LoadingButton type="default" />
+                ) : (
+                  <SendButton type="primary" />
+                )}
+              </div>
+            );
+          }}
+          placeholder="Ask or input / use skills"
         />
       </div>
     </div>
