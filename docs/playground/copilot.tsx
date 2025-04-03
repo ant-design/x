@@ -34,28 +34,28 @@ import React, { useState } from 'react';
 const MOCK_SESSION_LIST = [
   {
     key: '5',
-    label: '新会话',
-    group: '今天',
+    label: 'New session',
+    group: 'Today',
   },
   {
     key: '4',
-    label: 'Ant Design X 全新升级了什么？',
-    group: '今天',
+    label: 'What has Ant Design X upgraded?',
+    group: 'Today',
   },
   {
     key: '3',
-    label: '全新 AGI 混合界面',
-    group: '今天',
+    label: 'New AGI Hybrid Interface',
+    group: 'Today',
   },
   {
     key: '2',
-    label: '如何快速安装和引入组件？',
-    group: '昨天',
+    label: 'How to quickly install and import components?',
+    group: 'Yesterday',
   },
   {
     key: '1',
-    label: 'Ant Design X 是什么？',
-    group: '昨天',
+    label: 'What is Ant Design X?',
+    group: 'Yesterday',
   },
 ];
 const MOCK_SUGGESTIONS = [
@@ -72,11 +72,11 @@ const MOCK_SUGGESTIONS = [
   },
 ];
 const MOCK_QUESTIONS = [
-  'Ant Design X 全新升级了什么？',
-  'Ant Design X 组件资产有哪些？',
-  '如何快速安装和引入组件？',
+  'What has Ant Design X upgraded?',
+  'What components are in Ant Design X?',
+  'How to quickly install and import components?',
 ];
-const AGENT_PLACEHOLDER = '内容生成中，请稍后···';
+const AGENT_PLACEHOLDER = 'Generating content, please wait...';
 
 const useCopilotStyle = createStyles(({ token, css }) => {
   return {
@@ -273,7 +273,7 @@ const CopilotChat = (props: CopilotChatProps) => {
             if (messages?.length) {
               setMessages([]);
             } else {
-              message.error('当前已是新对话');
+              message.error('It is now a new conversation.');
             }
           }}
           className={styles.headerButton}
@@ -284,7 +284,7 @@ const CopilotChat = (props: CopilotChatProps) => {
           content={
             <Conversations
               items={sessionList?.map((i) =>
-                i.key === curSession ? { ...i, label: `[当前会话] ${i.label}` } : i,
+                i.key === curSession ? { ...i, label: `[current] ${i.label}` } : i,
               )}
               activeKey={curSession}
               groupable
@@ -352,7 +352,7 @@ const CopilotChat = (props: CopilotChatProps) => {
             className={styles.chatWelcome}
           />
 
-          <span className={styles.questionTip}>我可以帮您：</span>
+          <span className={styles.questionTip}>I can help：</span>
           {MOCK_QUESTIONS.map((i) => (
             <div className={styles.question} key={i} onClick={() => handleUserSubmit(i)}>
               {i}
@@ -365,7 +365,7 @@ const CopilotChat = (props: CopilotChatProps) => {
 
   const SendHeader = (
     <Sender.Header
-      title="上传文件"
+      title="Upload File"
       styles={{ content: { padding: 0 } }}
       open={attachmentsOpen}
       onOpenChange={setAttachmentsOpen}
@@ -391,13 +391,19 @@ const CopilotChat = (props: CopilotChatProps) => {
   const ChatSend = (
     <div className={styles.chatSend}>
       <div className={styles.sendAction}>
-        <Button icon={<ScheduleOutlined />} onClick={() => handleUserSubmit('全新升级了什么？')}>
-          了解升级
+        <Button
+          icon={<ScheduleOutlined />}
+          onClick={() => handleUserSubmit('What has Ant Design X upgraded?')}
+        >
+          Upgrades
         </Button>
-        <Button icon={<ProductOutlined />} onClick={() => handleUserSubmit('组件资产有哪些？')}>
-          组件资产
+        <Button
+          icon={<ProductOutlined />}
+          onClick={() => handleUserSubmit('What component assets are available in Ant Design X?')}
+        >
+          Components
         </Button>
-        <Button icon={<AppstoreAddOutlined />}>更多</Button>
+        <Button icon={<AppstoreAddOutlined />}>More</Button>
       </div>
 
       {/** 输入框 */}
@@ -413,7 +419,7 @@ const CopilotChat = (props: CopilotChatProps) => {
             }}
             onCancel={() => setLoading(false)}
             allowSpeech
-            placeholder="问我问题或输入 / 使用技能"
+            placeholder="Ask or input / use skills"
             onKeyDown={onKeyDown}
             header={SendHeader}
             prefix={
