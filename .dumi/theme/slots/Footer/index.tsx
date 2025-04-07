@@ -275,7 +275,7 @@ const Footer: React.FC = () => {
         {
           icon: <BugOutlined />,
           title: <FormattedMessage id="app.footer.bug-report" />,
-          url: 'https://new-issue.ant.design/',
+          url: 'https://github.com/ant-design/x/issues/new?template=bug_report.yml',
           openExternal: true,
         },
         {
