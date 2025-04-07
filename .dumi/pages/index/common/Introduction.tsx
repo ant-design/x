@@ -103,7 +103,7 @@ export interface IntroductionItem extends Omit<React.HTMLAttributes<HTMLDivEleme
   startColor?: string;
   endColor?: string;
   icon?: string;
-  to: LinkProps['to'];
+  to?: LinkProps['to'];
   header?: React.ReactNode;
 }
 
@@ -124,35 +124,54 @@ const Introduction: React.FC<IntroductionProps> = (props) => {
           gridTemplateColumns: `repeat(${props.column || props.items?.length}, 1fr)`,
         }}
       >
-        {props.items?.map((item) => (
-          <Link className={styles.item} key={`${item.title}`} style={props.cardStyle} to={item.to}>
-            {item.header && (
-              <div className={styles.item_header}>
-                <CustomizationProvider>{item.header}</CustomizationProvider>
+        {props.items?.map((item) => {
+          const itemChildren = (
+            <>
+              {item.header && (
+                <div className={styles.item_header}>
+                  <CustomizationProvider>{item.header}</CustomizationProvider>
+                </div>
+              )}
+              <div className={styles.item_content}>
+                {item.icon && <img className={styles.item_icon} src={item.icon} alt={item.icon} />}
+                <div>
+                  <h3 className={styles.item_title}>
+                    {item.title}
+                    {item.tag && (
+                      <span
+                        className={styles.item_tag}
+                        style={{
+                          background: `linear-gradient(127deg, ${item.startColor || '#fff'} 23%, ${item.endColor || '#fff'} 100%)`,
+                          WebkitBackgroundClip: 'text',
+                        }}
+                      >
+                        {item.tag}
+                      </span>
+                    )}
+                  </h3>
+                  <p className={styles.item_desc}>{item.desc}</p>
+                </div>
               </div>
-            )}
-            <div className={styles.item_content}>
-              {item.icon && <img className={styles.item_icon} src={item.icon} alt={item.icon} />}
-              <div>
-                <h3 className={styles.item_title}>
-                  {item.title}
-                  {item.tag && (
-                    <span
-                      className={styles.item_tag}
-                      style={{
-                        background: `linear-gradient(127deg, ${item.startColor || '#fff'} 23%, ${item.endColor || '#fff'} 100%)`,
-                        WebkitBackgroundClip: 'text',
-                      }}
-                    >
-                      {item.tag}
-                    </span>
-                  )}
-                </h3>
-                <p className={styles.item_desc}>{item.desc}</p>
-              </div>
+            </>
+          );
+          if (item.to) {
+            return (
+              <Link
+                className={styles.item}
+                key={`${item.title}`}
+                style={props.cardStyle}
+                to={item.to}
+              >
+                {itemChildren}
+              </Link>
+            );
+          }
+          return (
+            <div className={styles.item} key={`${item.title}`} style={props.cardStyle}>
+              {itemChildren}
             </div>
-          </Link>
-        ))}
+          );
+        })}
       </div>
     </Container>
   );
