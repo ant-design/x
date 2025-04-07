@@ -1,10 +1,11 @@
-import { EditOutlined, GithubOutlined, HistoryOutlined } from '@ant-design/icons';
+import { CompassOutlined, EditOutlined, GithubOutlined, HistoryOutlined } from '@ant-design/icons';
 import type { GetProp } from 'antd';
 import { Descriptions, Flex, Tooltip, Typography, theme } from 'antd';
 import { createStyles, css } from 'antd-style';
 import kebabCase from 'lodash/kebabCase';
 import React from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
+import Link from '../../common/Link';
 
 import useLocale from '../../../hooks/useLocale';
 import ComponentChangelog from '../../common/ComponentChangelog';
@@ -18,6 +19,7 @@ const locales = {
     docs: '文档',
     edit: '编辑此页',
     changelog: '更新日志',
+    design: '设计指南',
     version: '版本',
   },
   en: {
@@ -28,11 +30,12 @@ const locales = {
     docs: 'Docs',
     edit: 'Edit this page',
     changelog: 'Changelog',
+    design: 'Design',
     version: 'Version',
   },
 };
 
-const branchUrl = 'https://github.com/ant-design/x/edit/main/';
+const branchUrl = 'https://github.com/ant-design/ant-design/edit/master/';
 
 function isVersionNumber(value?: string) {
   return value && /^\d+\.\d+\.\d+$/.test(value);
@@ -42,46 +45,23 @@ const useStyle = createStyles(({ token }) => ({
   code: css`
     cursor: pointer;
     position: relative;
+    display: inline-flex;
     align-items: center;
+    column-gap: ${token.paddingXXS}px;
     border-radius: ${token.borderRadiusSM}px;
     padding-inline: ${token.paddingXXS}px !important;
     transition: all ${token.motionDurationSlow} !important;
+    font-family: ${token.codeFamily};
     color: ${token.colorTextSecondary} !important;
-
-    > code {
-      padding: 0;
-      border: 0;
-      background: transparent;
-      display: inline-flex;
-      column-gap: ${token.paddingXXS}px;
-      line-height: 1;
-      font-size: 13px;
-      font-family: ${token.codeFamily};
-    }
-  
     &:hover {
       background: ${token.controlItemBgHover};
     }
-
     a&:hover {
       text-decoration: underline !important;
     }
   `,
-  import: css`
-    color: ${token.magenta8};
-  `,
-  component: css`
-    color: ${token.colorText};
-  `,
-  from: css`
-    color: ${token.magenta8};
-    margin-inline-end: 0.5em;
-  `,
-  antdx: css`
-    color: ${token.green8};
-  `,
-  semicolon: css`
-    color: ${token.colorText};
+  icon: css`
+    margin-inline-end: 3px;
   `,
 }));
 
@@ -90,10 +70,11 @@ export interface ComponentMetaProps {
   source: string | true;
   filename?: string;
   version?: string;
+  designUrl?: string;
 }
 
 const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
-  const { component, source, filename, version } = props;
+  const { component, source, filename, version, designUrl } = props;
   const { token } = theme.useToken();
   const [locale, lang] = useLocale(locales);
   const isZhCN = lang === 'cn';
@@ -117,7 +98,7 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
     if (String(source) === 'true') {
       const kebabComponent = kebabCase(component);
       return [
-        `https://github.com/ant-design/x/blob/main/components/${kebabComponent}`,
+        `https://github.com/ant-design/ant-design/blob/master/components/${kebabComponent}`,
         `components/${kebabComponent}`,
       ];
     }
@@ -130,30 +111,14 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
   }, [component, source]);
 
   const transformComponentName = (componentName: string) => {
-    if (componentName === 'Notifiction' || componentName === 'Message') {
+    if (componentName === 'Notification' || componentName === 'Message') {
       return componentName.toLowerCase();
     }
     return componentName;
   };
 
   // ======================== Render ========================
-  const importList = [
-    <span key="import" className={styles.import}>
-      import
-    </span>,
-    <span key="component" className={styles.component}>{`{ ${transformComponentName(
-      component,
-    )} }`}</span>,
-    <span key="from" className={styles.from}>
-      from
-    </span>,
-    <span key="@ant-design/x" className={styles.antdx}>
-      {`"@ant-design/x"`}
-    </span>,
-    <span key="semicolon" className={styles.semicolon}>
-      ;
-    </span>,
-  ];
+  const importList = `import { ${transformComponentName(component)} } from "antd";`;
 
   return (
     <Descriptions
@@ -161,24 +126,23 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
       colon={false}
       column={1}
       style={{ marginTop: token.margin }}
-      labelStyle={{ paddingInlineEnd: token.padding, width: 56 }}
+      styles={{
+        label: { paddingInlineEnd: token.padding, width: 56 },
+      }}
       items={
         [
           {
             label: locale.import,
             children: (
-              <CopyToClipboard
-                text={`import { ${component} } from "@ant-design/x";`}
-                onCopy={onCopy}
-              >
+              <CopyToClipboard text={`import { ${component} } from "antd";`} onCopy={onCopy}>
                 <Tooltip
                   placement="right"
                   title={copied ? locale.copied : locale.copy}
                   onOpenChange={onOpenChange}
                 >
-                  <pre className={styles.code} onClick={onCopy}>
-                    <code>{importList}</code>
-                  </pre>
+                  <Typography.Text className={styles.code} onClick={onCopy}>
+                    {importList}
+                  </Typography.Text>
                 </Tooltip>
               </CopyToClipboard>
             ),
@@ -187,7 +151,7 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
             label: locale.source,
             children: (
               <Typography.Link className={styles.code} href={filledSource} target="_blank">
-                <GithubOutlined style={{ marginInlineEnd: 4 }} />
+                <GithubOutlined className={styles.icon} />
                 <span>{abbrSource}</span>
               </Typography.Link>
             ),
@@ -195,18 +159,24 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
           filename && {
             label: locale.docs,
             children: (
-              <Flex gap={16}>
+              <Flex justify="flex-start" align="center" gap="small">
                 <Typography.Link
                   className={styles.code}
                   href={`${branchUrl}${filename}`}
                   target="_blank"
                 >
-                  <EditOutlined style={{ marginInlineEnd: 4 }} />
+                  <EditOutlined className={styles.icon} />
                   <span>{locale.edit}</span>
                 </Typography.Link>
+                {designUrl && (
+                  <Link className={styles.code} to={designUrl}>
+                    <CompassOutlined className={styles.icon} />
+                    <span>{locale.design}</span>
+                  </Link>
+                )}
                 <ComponentChangelog>
                   <Typography.Link className={styles.code}>
-                    <HistoryOutlined style={{ marginInlineEnd: 4 }} />
+                    <HistoryOutlined className={styles.icon} />
                     <span>{locale.changelog}</span>
                   </Typography.Link>
                 </ComponentChangelog>
@@ -217,7 +187,7 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
             label: locale.version,
             children: (
               <Typography.Text className={styles.code}>
-                {isZhCN ? `自 ${version} 后支持` : `supported since ${version}`}
+                {isZhCN ? `自 ${version} 起支持` : `supported since ${version}`}
               </Typography.Text>
             ),
           },

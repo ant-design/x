@@ -3,7 +3,7 @@ import { Tooltip } from 'antd';
 import { createStyles } from 'antd-style';
 import React from 'react';
 
-const branchUrl = 'https://github.com/ant-design/x/edit/main/';
+const branchUrl = 'https://github.com/ant-design/ant-design/edit/master/';
 
 export interface EditButtonProps {
   title: React.ReactNode;
@@ -21,8 +21,6 @@ const useStyle = createStyles(({ token, css }) => {
         display: inline-block;
         text-decoration: none;
         vertical-align: middle;
-        pointer-events: auto;
-        z-index: 999;
         margin-inline-start: ${token.marginXS}px;
         ${iconCls} {
           display: block;

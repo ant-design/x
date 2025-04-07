@@ -48,7 +48,7 @@ const NotFoundPage: React.FC<NotFoundProps> = ({ router }) => {
       extra={
         <Link to={utils.getLocalizedPathname('/', isZhCN)}>
           <Button type="primary" icon={<HomeOutlined />}>
-            {isZhCN ? '返回 Ant Design X 首页' : 'Back to home page'}
+            {isZhCN ? '返回 Ant Design 首页' : 'Back to home page'}
           </Button>
         </Link>
       }

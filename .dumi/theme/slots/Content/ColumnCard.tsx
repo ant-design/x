@@ -130,14 +130,14 @@ const ColumnCard: React.FC<Props> = ({ zhihuLink, yuqueLink, juejinLink }) => {
     return null;
   }
   return (
-    <Card className={card} bordered={false}>
+    <Card className={card} variant="borderless">
       <h3 className={bigTitle}>{locale.bigTitle}</h3>
       {zhihuLink && (
         <>
           <Divider />
           <div className={cardBody}>
             <div className={leftCard}>
-              <img draggable={false} src={ANTD_IMG_URL} alt="@ant-design/x" />
+              <img draggable={false} src={ANTD_IMG_URL} alt="antd" />
               <div>
                 <p className={title}>Ant Design</p>
                 <div className={subTitle}>
@@ -171,7 +171,7 @@ const ColumnCard: React.FC<Props> = ({ zhihuLink, yuqueLink, juejinLink }) => {
           <Divider />
           <div className={cardBody}>
             <div className={leftCard}>
-              <img draggable={false} src={ANTD_IMG_URL} alt="@ant-design/x" />
+              <img draggable={false} src={ANTD_IMG_URL} alt="antd" />
               <div>
                 <p className={title}>Ant Design</p>
                 <div className={subTitle}>
@@ -205,7 +205,7 @@ const ColumnCard: React.FC<Props> = ({ zhihuLink, yuqueLink, juejinLink }) => {
           <Divider />
           <div className={cardBody}>
             <div className={leftCard}>
-              <img draggable={false} src={ANTD_IMG_URL} alt="@ant-design/x" />
+              <img draggable={false} src={ANTD_IMG_URL} alt="antd" />
               <div>
                 <p className={title}>Ant Design</p>
                 <div className={subTitle}>

@@ -1,3 +1,4 @@
+import { FastColor } from '@ant-design/fast-color';
 import {
   AntDesignOutlined,
   BgColorsOutlined,
@@ -12,17 +13,15 @@ import {
   UsergroupAddOutlined,
   ZhihuOutlined,
 } from '@ant-design/icons';
-import { TinyColor } from '@ctrl/tinycolor';
 import { createStyles } from 'antd-style';
 import getAlphaColor from 'antd/es/theme/util/getAlphaColor';
-import { FormattedMessage } from 'dumi';
+import { FormattedMessage, Link } from 'dumi';
 import RcFooter from 'rc-footer';
 import type { FooterColumn } from 'rc-footer/lib/column';
-import React, { useContext } from 'react';
+import React from 'react';
 
 import useLocale from '../../../hooks/useLocale';
 import useLocation from '../../../hooks/useLocation';
-import Link from '../../../theme/common/Link';
 import SiteContext from '../SiteContext';
 import AdditionalInfo from './AdditionalInfo';
 
@@ -35,59 +34,52 @@ const locales = {
   },
 };
 
-const useStyle = () => {
-  const { isMobile } = useContext(SiteContext);
-  return createStyles(({ token, css }) => {
-    const background = new TinyColor(getAlphaColor('#f0f3fa', '#fff'))
-      .onBackground(token.colorBgContainer)
-      .toHexString();
+const useStyle = createStyles(({ token, css }) => {
+  const { isMobile } = React.use(SiteContext);
+  const background = new FastColor(getAlphaColor('#f0f3fa', '#fff'))
+    .onBackground(token.colorBgContainer)
+    .toHexString();
+  return {
+    holder: css`
+      background: ${background};
+    `,
 
-    return {
-      holder: css`
-        background: ${background};
-      `,
+    footer: css`
+      background: ${background};
+      color: ${token.colorTextSecondary};
+      box-shadow: inset 0 106px 36px -116px rgba(0, 0, 0, 0.14);
 
-      footer: css`
-        background: ${background};
-        color: ${token.colorTextSecondary};
+      * {
+        box-sizing: border-box;
+      }
+
+      h2,
+      a {
+        color: ${token.colorText};
+      }
+      .rc-footer-column {
+        margin-bottom: ${isMobile ? 60 : 0}px;
+        :last-child {
+          margin-bottom: ${isMobile ? 20 : 0}px;
+        }
+      }
+      .rc-footer-item-icon {
+        top: -1.5px;
+      }
+      .rc-footer-container {
+        max-width: 1208px;
+        margin-inline: auto;
+        padding-inline: ${token.marginXXL}px;
+      }
+      .rc-footer-bottom {
         box-shadow: inset 0 106px 36px -116px rgba(0, 0, 0, 0.14);
-
-        * {
-          box-sizing: border-box;
+        .rc-footer-bottom-container {
+          font-size: ${token.fontSize}px;
         }
-
-        h2,
-        a {
-          color: ${token.colorText};
-        }
-
-        .rc-footer-column {
-          margin-bottom: ${isMobile ? 60 : 0}px;
-          :last-child {
-            margin-bottom: ${isMobile ? 20 : 0}px;
-          }
-        }
-
-        .rc-footer-item-icon {
-          top: -1.5px;
-        }
-
-        .rc-footer-container {
-          max-width: 1208px;
-          margin-inline: auto;
-          padding-inline: ${token.marginXXL}px;
-        }
-
-        .rc-footer-bottom {
-          box-shadow: inset 0 106px 36px -116px rgba(0, 0, 0, 0.14);
-          .rc-footer-bottom-container {
-            font-size: ${token.fontSize}px;
-          }
-        }
-      `,
-    };
-  })();
-};
+      }
+    `,
+  };
+});
 
 const Footer: React.FC = () => {
   const location = useLocation();
@@ -103,6 +95,11 @@ const Footer: React.FC = () => {
       title: <FormattedMessage id="app.footer.resources" />,
       items: [
         {
+          title: 'Ant Design X',
+          url: isZhCN ? 'https://ant-design-x.antgroup.com' : 'https://x.ant.design',
+          openExternal: true,
+        },
+        {
           title: 'Ant Design Charts',
           url: isZhCN ? 'https://ant-design-charts.antgroup.com' : 'https://charts.ant.design',
           openExternal: true,
@@ -113,8 +110,10 @@ const Footer: React.FC = () => {
           openExternal: true,
         },
         {
-          title: 'Ant Design Pro Components',
-          url: 'https://procomponents.ant.design',
+          title: 'Pro Components',
+          url: isZhCN
+            ? 'https://pro-components.antdigital.dev'
+            : 'https://procomponents.ant.design',
           openExternal: true,
         },
         {
@@ -125,6 +124,11 @@ const Footer: React.FC = () => {
         {
           title: 'Ant Design Mini',
           url: isZhCN ? 'https://ant-design-mini.antgroup.com/' : 'https://mini.ant.design',
+          openExternal: true,
+        },
+        {
+          title: 'Ant Design Web3',
+          url: isZhCN ? 'https://web3.antdigital.dev' : 'https://web3.ant.design',
           openExternal: true,
         },
         {
@@ -158,12 +162,6 @@ const Footer: React.FC = () => {
           openExternal: true,
         },
         {
-          title: 'ahooks',
-          description: <FormattedMessage id="app.footer.hooks" />,
-          url: 'https://github.com/alibaba/hooks',
-          openExternal: true,
-        },
-        {
           title: 'Ant Motion',
           description: <FormattedMessage id="app.footer.motion" />,
           url: 'https://motion.ant.design',
@@ -171,7 +169,7 @@ const Footer: React.FC = () => {
         },
         {
           title: <FormattedMessage id="app.footer.chinamirror" />,
-          url: 'https://ant-design-x.antgroup.com',
+          url: 'https://ant-design.antgroup.com',
         },
       ],
     };
@@ -243,12 +241,12 @@ const Footer: React.FC = () => {
       col2.items.push({
         icon: <UsergroupAddOutlined />,
         title: <FormattedMessage id="app.footer.work_with_us" />,
-        url: `https://ant.design${getLink('/docs/resources', {
+        url: getLink('/docs/resources', {
           cn: '加入我们',
           en: 'JoinUs',
-        })}`,
-        openExternal: true,
-      });
+        }),
+        LinkComponent: Link,
+      } as unknown as (typeof col2)['items'][number]);
     }
 
     const col3 = {
@@ -257,7 +255,7 @@ const Footer: React.FC = () => {
         {
           icon: <GithubOutlined />,
           title: 'GitHub',
-          url: 'https://github.com/ant-design/x',
+          url: 'https://github.com/ant-design/ant-design',
           openExternal: true,
         },
         {
@@ -281,13 +279,13 @@ const Footer: React.FC = () => {
         {
           icon: <IssuesCloseOutlined />,
           title: <FormattedMessage id="app.footer.issues" />,
-          url: 'https://github.com/ant-design/x/issues',
+          url: 'https://github.com/ant-design/ant-design/issues',
           openExternal: true,
         },
         {
           icon: <MessageOutlined />,
           title: <FormattedMessage id="app.footer.discussions" />,
-          url: 'https://github.com/ant-design/x/discussions',
+          url: 'https://github.com/ant-design/ant-design/discussions',
           openExternal: true,
         },
         {
