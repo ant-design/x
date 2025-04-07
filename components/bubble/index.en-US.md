@@ -18,7 +18,6 @@ Often used when chatting.
 ## Examples
 
 <!-- prettier-ignore -->
-
 <code src="./demo/basic.tsx">Basic</code>
 <code src="./demo/avatar-and-placement.tsx">Placement and avatar</code>
 <code src="./demo/header-and-footer.tsx">Header and footer</code>
