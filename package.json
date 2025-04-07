@@ -101,7 +101,6 @@
     "@biomejs/biome": "^1.9.0",
     "@codecov/webpack-plugin": "^1.4.0",
     "@codesandbox/sandpack-react": "^2.19.8",
-    "@ctrl/tinycolor": "^4.1.0",
     "@emotion/react": "^11.13.5",
     "@emotion/server": "^11.11.0",
     "@happy-dom/jest-environment": "^17.4.3",

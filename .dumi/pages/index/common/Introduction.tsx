@@ -154,6 +154,21 @@ const Introduction: React.FC<IntroductionProps> = (props) => {
               </div>
             </>
           );
+          // 如果 to 是以 http 开头，使用 <a> 标签而不是 <Link>
+          if (item.to && typeof item.to === 'string' && item.to.startsWith('http')) {
+            return (
+              <a
+                className={styles.item}
+                key={`${item.title}`}
+                style={props.cardStyle}
+                href={item.to}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {itemChildren}
+              </a>
+            );
+          }
           if (item.to) {
             return (
               <Link
