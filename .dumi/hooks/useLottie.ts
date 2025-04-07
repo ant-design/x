@@ -15,7 +15,7 @@ const useLottie = (options: UseLottieOptions) => {
 
   const containerRef = React.useRef<HTMLDivElement>(null);
   const [isIntersected, setIsIntersected] = React.useState(!lazyLoad);
-  const [animationInstance, setAnimationInstance] = React.useState<AnimationItem | null>(null);
+  const animationInstanceRef = React.useRef<AnimationItem | null>(null);
 
   React.useEffect(() => {
     if (disabled) return;
@@ -24,7 +24,7 @@ const useLottie = (options: UseLottieOptions) => {
 
     const lottie: LottiePlayer = (window as any)?.lottie;
 
-    if (!animationInstance) {
+    if (!animationInstanceRef.current) {
       if (!lazyLoad || isIntersected) {
         if (containerRef.current && lottie) {
           animation = lottie.loadAnimation({
@@ -32,18 +32,18 @@ const useLottie = (options: UseLottieOptions) => {
             ...stableLottieOptions,
           });
 
-          setAnimationInstance(animation);
+          animationInstanceRef.current = animation;
         }
       }
     } else {
       return () => {
         if (animation) {
           animation.destroy();
-          setAnimationInstance(null);
+          animationInstanceRef.current = null;
         }
       };
     }
-  }, [isIntersected, lazyLoad, stableLottieOptions, animationInstance, disabled]);
+  }, [isIntersected, lazyLoad, stableLottieOptions, disabled]);
 
   React.useEffect(() => {
     if (disabled) return;
@@ -72,7 +72,7 @@ const useLottie = (options: UseLottieOptions) => {
 
   return [
     containerRef,
-    animationInstance,
+    animationInstanceRef.current,
     {
       isIntersected,
     },
