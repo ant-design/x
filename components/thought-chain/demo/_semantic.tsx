@@ -1,11 +1,11 @@
-import React from 'react';
-import { Button } from 'antd';
-import { ThoughtChain } from '@ant-design/x';
 import { CheckCircleOutlined, MoreOutlined } from '@ant-design/icons';
+import { ThoughtChain } from '@ant-design/x';
+import { Button } from 'antd';
+import React from 'react';
 import SemanticPreview from '../../../.dumi/components/SemanticPreview';
 import useLocale from '../../../.dumi/hooks/useLocale';
 
-import type { ThoughtChainProps, ThoughtChainItem } from '@ant-design/x';
+import type { ThoughtChainItem, ThoughtChainProps } from '@ant-design/x';
 
 const customizationProps: ThoughtChainItem = {
   title: 'Thought Chain Item Title',
@@ -42,6 +42,7 @@ const App: React.FC = () => {
   const [locale] = useLocale(locales);
   return (
     <SemanticPreview
+      componentName="ThoughtChain"
       semantics={[
         {
           name: 'item',
