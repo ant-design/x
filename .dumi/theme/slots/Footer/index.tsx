@@ -34,17 +34,18 @@ const locales = {
   },
 };
 
-const useStyle = createStyles(({ token, css }) => {
+const useStyle = () => {
   const { isMobile } = React.use(SiteContext);
-  const background = new FastColor(getAlphaColor('#f0f3fa', '#fff'))
-    .onBackground(token.colorBgContainer)
-    .toHexString();
-  return {
-    holder: css`
+  return createStyles(({ token, css }) => {
+    const background = new FastColor(getAlphaColor('#f0f3fa', '#fff'))
+      .onBackground(token.colorBgContainer)
+      .toHexString();
+    return {
+      holder: css`
       background: ${background};
     `,
 
-    footer: css`
+      footer: css`
       background: ${background};
       color: ${token.colorTextSecondary};
       box-shadow: inset 0 106px 36px -116px rgba(0, 0, 0, 0.14);
@@ -77,9 +78,10 @@ const useStyle = createStyles(({ token, css }) => {
           font-size: ${token.fontSize}px;
         }
       }
-    `,
-  };
-});
+      `,
+    };
+  })();
+};
 
 const Footer: React.FC = () => {
   const location = useLocation();
