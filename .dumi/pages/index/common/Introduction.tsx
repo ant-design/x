@@ -1,6 +1,7 @@
 import { createStyles } from 'antd-style';
 import React from 'react';
 
+import Link, { type LinkProps } from '../../../theme/common/Link';
 import Container, { type ContainerProps } from './Container';
 import CustomizationProvider from './CustomizationProvider';
 
@@ -102,7 +103,7 @@ export interface IntroductionItem extends Omit<React.HTMLAttributes<HTMLDivEleme
   startColor?: string;
   endColor?: string;
   icon?: string;
-  url?: string;
+  to: LinkProps['to'];
   header?: React.ReactNode;
 }
 
@@ -124,12 +125,7 @@ const Introduction: React.FC<IntroductionProps> = (props) => {
         }}
       >
         {props.items?.map((item) => (
-          <div
-            className={styles.item}
-            key={`${item.title}`}
-            style={props.cardStyle}
-            onClick={item.onClick}
-          >
+          <Link className={styles.item} key={`${item.title}`} style={props.cardStyle} to={item.to}>
             {item.header && (
               <div className={styles.item_header}>
                 <CustomizationProvider>{item.header}</CustomizationProvider>
@@ -155,7 +151,7 @@ const Introduction: React.FC<IntroductionProps> = (props) => {
                 <p className={styles.item_desc}>{item.desc}</p>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </Container>

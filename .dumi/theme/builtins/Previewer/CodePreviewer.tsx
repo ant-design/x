@@ -113,7 +113,7 @@ const CodePreviewer: React.FC<AntdPreviewerProps> = (props) => {
   const { theme } = React.use(SiteContext);
 
   const { hash, pathname, search } = location;
-  const docsOnlineUrl = `https://ant.design${pathname}${search}#${asset.id}`;
+  const docsOnlineUrl = `https://ant-design-x.antgroup.com${pathname}${search}#${asset.id}`;
 
   const [showOnlineUrl, setShowOnlineUrl] = useState<boolean>(false);
 
@@ -207,7 +207,7 @@ const CodePreviewer: React.FC<AntdPreviewerProps> = (props) => {
       }
       return acc;
     },
-    { antd: pkg.version },
+    { '@ant-design/x': pkg.version },
   );
 
   dependencies['@ant-design/icons'] = 'latest';
@@ -221,7 +221,7 @@ const CodePreviewer: React.FC<AntdPreviewerProps> = (props) => {
   dependencies['react-dom'] = '^18.0.0';
 
   const codepenPrefillConfig = {
-    title: `${localizedTitle} - antd@${dependencies.antd}`,
+    title: `${localizedTitle} - @ant-design/x@${dependencies['@ant-design/x']}`,
     html,
     js: `const { createRoot } = ReactDOM;\n${jsx
       .replace(/import\s+(?:React,\s+)?{(\s+[^}]*\s+)}\s+from\s+'react'/, `const { $1 } = React;`)
