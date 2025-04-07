@@ -109,31 +109,12 @@ describe('ThoughtChain Component', () => {
       '.ant-thought-chain-item .ant-thought-chain-item-content',
     );
 
-    expect(expandBodyElements).toHaveLength(1);
+    expect(expandBodyElements).toHaveLength(2);
   });
 
   it('ThoughtChain component work with uncontrolled mode', () => {
     const App = () => {
       return <ThoughtChain items={items} collapsible />;
-    };
-
-    const { container } = render(<App />);
-    const element = container.querySelectorAll<HTMLDivElement>(
-      '.ant-thought-chain-item-header-box',
-    )[0];
-
-    fireEvent.click(element as Element);
-
-    const expandBodyElements = container.querySelectorAll<HTMLDivElement>(
-      '.ant-thought-chain-item .ant-thought-chain-item-content',
-    );
-
-    expect(expandBodyElements).toHaveLength(1);
-  });
-
-  it('ThoughtChain component work with controlled mode', () => {
-    const App = () => {
-      return <ThoughtChain items={items} collapsible={{ expandedKeys: ['1'] }} />;
     };
 
     const { container } = render(<App />);

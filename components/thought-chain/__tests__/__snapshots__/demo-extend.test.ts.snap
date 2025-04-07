@@ -26,7 +26,6 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
             class="ant-thought-chain-item-header-box"
           >
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -46,7 +45,6 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   Thought Chain Item Title
@@ -54,7 +52,6 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
               </div>
             </div>
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
@@ -72,7 +69,6 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   description
@@ -129,7 +125,6 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
             class="ant-thought-chain-item-header-box"
           >
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -149,7 +144,6 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   Thought Chain Item Title
@@ -157,7 +151,6 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
               </div>
             </div>
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
@@ -175,7 +168,6 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   description
@@ -232,7 +224,6 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
             class="ant-thought-chain-item-header-box"
           >
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -252,7 +243,6 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   Thought Chain Item Title
@@ -260,7 +250,6 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
               </div>
             </div>
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
@@ -278,7 +267,6 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   description
@@ -335,7 +323,6 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
             class="ant-thought-chain-item-header-box"
           >
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -355,7 +342,6 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   Thought Chain Item Title
@@ -363,7 +349,6 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
               </div>
             </div>
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
@@ -381,7 +366,6 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   description
@@ -432,189 +416,791 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
 
 exports[`renders components/thought-chain/demo/collapsible.tsx extend context correctly 1`] = `
 <div
-  class="ant-card ant-card-bordered"
-  style="width: 500px;"
+  class="ant-space ant-space-horizontal ant-space-align-start"
+  style="column-gap: 16px; row-gap: 16px;"
 >
   <div
-    class="ant-card-body"
+    class="ant-space-item"
   >
     <div
-      class="ant-thought-chain ant-thought-chain-middle"
+      class="ant-card ant-card-bordered"
+      style="width: 400px;"
     >
       <div
-        class="ant-thought-chain-item"
+        class="ant-card-head"
       >
         <div
-          class="ant-thought-chain-item-header"
+          class="ant-card-head-wrapper"
         >
-          <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
-          >
-            1
-          </span>
           <div
-            class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
+            class="ant-card-head-title"
           >
-            <span
-              aria-describedby="test-id"
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+            受控组件: [2]
+          </div>
+          <div
+            class="ant-card-extra"
+          >
+            <button
+              class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
+              type="button"
             >
-              <strong>
-                <span
-                  aria-label="right"
-                  class="anticon anticon-right ant-thought-chain-item-collapse-icon"
-                  role="img"
-                >
-                  <svg
-                    aria-hidden="true"
-                    data-icon="right"
-                    fill="currentColor"
-                    focusable="false"
-                    height="1em"
-                    viewBox="64 64 896 896"
-                    width="1em"
-                  >
-                    <path
-                      d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
-                    />
-                  </svg>
-                </span>
-                Click me to expand the content
-              </strong>
-            </span>
+              <span>
+                更新expandedKeys
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ant-card-body"
+      >
+        <div
+          class="ant-thought-chain ant-thought-chain-middle"
+        >
+          <div
+            class="ant-thought-chain-item"
+          >
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
-              style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+              class="ant-thought-chain-item-header"
             >
-              <div
-                class="ant-tooltip-arrow"
-                style="position: absolute;"
-              />
-              <div
-                class="ant-tooltip-content"
+              <span
+                class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
               >
-                <div
-                  class="ant-tooltip-inner"
-                  id="test-id"
-                  role="tooltip"
+                1
+              </span>
+              <div
+                class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
                 >
-                  Click me to expand the content
+                  <strong>
+                    <span
+                      aria-label="right"
+                      class="anticon anticon-right ant-thought-chain-item-collapse-icon"
+                      role="img"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        data-icon="right"
+                        fill="currentColor"
+                        focusable="false"
+                        height="1em"
+                        viewBox="64 64 896 896"
+                        width="1em"
+                      >
+                        <path
+                          d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+                        />
+                      </svg>
+                    </span>
+                    Click me to expand the content
+                  </strong>
+                </span>
+                <div
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
+                  style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                >
+                  <div
+                    class="ant-tooltip-arrow"
+                    style="position: absolute;"
+                  />
+                  <div
+                    class="ant-tooltip-content"
+                  >
+                    <div
+                      class="ant-tooltip-inner"
+                      role="tooltip"
+                    >
+                      Click me to expand the content
+                    </div>
+                  </div>
+                </div>
+                <span
+                  class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
+                >
+                  Collapsible
+                </span>
+                <div
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
+                  style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                >
+                  <div
+                    class="ant-tooltip-arrow"
+                    style="position: absolute;"
+                  />
+                  <div
+                    class="ant-tooltip-content"
+                  >
+                    <div
+                      class="ant-tooltip-inner"
+                      role="tooltip"
+                    >
+                      Collapsible
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <span
-              aria-describedby="test-id"
-              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
-            >
-              Collapsible
-            </span>
+          </div>
+          <div
+            class="ant-thought-chain-item"
+          >
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
-              style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+              class="ant-thought-chain-item-header"
             >
-              <div
-                class="ant-tooltip-arrow"
-                style="position: absolute;"
-              />
-              <div
-                class="ant-tooltip-content"
+              <span
+                class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
               >
+                2
+              </span>
+              <div
+                class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+                >
+                  <strong>
+                    <span
+                      aria-label="right"
+                      class="anticon anticon-right ant-thought-chain-item-collapse-icon"
+                      role="img"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        data-icon="right"
+                        fill="currentColor"
+                        focusable="false"
+                        height="1em"
+                        style="transform: rotate(90deg);"
+                        viewBox="64 64 896 896"
+                        width="1em"
+                      >
+                        <path
+                          d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+                        />
+                      </svg>
+                    </span>
+                    Click me to expand the content
+                  </strong>
+                </span>
                 <div
-                  class="ant-tooltip-inner"
-                  id="test-id"
-                  role="tooltip"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
+                  style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                >
+                  <div
+                    class="ant-tooltip-arrow"
+                    style="position: absolute;"
+                  />
+                  <div
+                    class="ant-tooltip-content"
+                  >
+                    <div
+                      class="ant-tooltip-inner"
+                      role="tooltip"
+                    >
+                      Click me to expand the content
+                    </div>
+                  </div>
+                </div>
+                <span
+                  class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
                 >
                   Collapsible
+                </span>
+                <div
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
+                  style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                >
+                  <div
+                    class="ant-tooltip-arrow"
+                    style="position: absolute;"
+                  />
+                  <div
+                    class="ant-tooltip-content"
+                  >
+                    <div
+                      class="ant-tooltip-inner"
+                      role="tooltip"
+                    >
+                      Collapsible
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="ant-thought-chain-item-content"
+            >
+              <div
+                class="ant-thought-chain-item-content-box"
+              >
+                <article
+                  class="ant-typography"
+                >
+                  <div
+                    class="ant-typography"
+                  >
+                    In the process of internal desktop applications development, many different design specs and implementations would be involved, which might cause designers and developers difficulties and duplication and reduce the efficiency of development.
+                  </div>
+                  <div
+                    class="ant-typography"
+                  >
+                    After massive project practice and summaries, Ant Design, a design language for background applications, is refined by Ant UED Team, which aims to 
+                    <span
+                      class="ant-typography"
+                    >
+                      <strong>
+                        uniform the user interface specs for internal background projects, lower the unnecessary cost of design differences and implementation and liberate the resources of design and front-end development
+                      </strong>
+                    </span>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-thought-chain-item"
+          >
+            <div
+              class="ant-thought-chain-item-header"
+            >
+              <span
+                class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
+              >
+                3
+              </span>
+              <div
+                class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+                >
+                  <strong>
+                    <span
+                      aria-label="right"
+                      class="anticon anticon-right ant-thought-chain-item-collapse-icon"
+                      role="img"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        data-icon="right"
+                        fill="currentColor"
+                        focusable="false"
+                        height="1em"
+                        viewBox="64 64 896 896"
+                        width="1em"
+                      >
+                        <path
+                          d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+                        />
+                      </svg>
+                    </span>
+                    Click me to expand the content
+                  </strong>
+                </span>
+                <div
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
+                  style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                >
+                  <div
+                    class="ant-tooltip-arrow"
+                    style="position: absolute;"
+                  />
+                  <div
+                    class="ant-tooltip-content"
+                  >
+                    <div
+                      class="ant-tooltip-inner"
+                      role="tooltip"
+                    >
+                      Click me to expand the content
+                    </div>
+                  </div>
+                </div>
+                <span
+                  class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
+                >
+                  Collapsible
+                </span>
+                <div
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
+                  style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                >
+                  <div
+                    class="ant-tooltip-arrow"
+                    style="position: absolute;"
+                  />
+                  <div
+                    class="ant-tooltip-content"
+                  >
+                    <div
+                      class="ant-tooltip-inner"
+                      role="tooltip"
+                    >
+                      Collapsible
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-thought-chain-item"
+          >
+            <div
+              class="ant-thought-chain-item-header"
+            >
+              <span
+                class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
+              >
+                4
+              </span>
+              <div
+                class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+                >
+                  <strong>
+                    <span
+                      aria-label="right"
+                      class="anticon anticon-right ant-thought-chain-item-collapse-icon"
+                      role="img"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        data-icon="right"
+                        fill="currentColor"
+                        focusable="false"
+                        height="1em"
+                        viewBox="64 64 896 896"
+                        width="1em"
+                      >
+                        <path
+                          d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+                        />
+                      </svg>
+                    </span>
+                    Click me to expand the content
+                  </strong>
+                </span>
+                <div
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
+                  style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                >
+                  <div
+                    class="ant-tooltip-arrow"
+                    style="position: absolute;"
+                  />
+                  <div
+                    class="ant-tooltip-content"
+                  >
+                    <div
+                      class="ant-tooltip-inner"
+                      role="tooltip"
+                    >
+                      Click me to expand the content
+                    </div>
+                  </div>
+                </div>
+                <span
+                  class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
+                >
+                  Collapsible
+                </span>
+                <div
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
+                  style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                >
+                  <div
+                    class="ant-tooltip-arrow"
+                    style="position: absolute;"
+                  />
+                  <div
+                    class="ant-tooltip-content"
+                  >
+                    <div
+                      class="ant-tooltip-inner"
+                      role="tooltip"
+                    >
+                      Collapsible
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div
+    class="ant-space-item"
+  >
+    <div
+      class="ant-card ant-card-bordered"
+      style="width: 400px;"
+    >
       <div
-        class="ant-thought-chain-item"
+        class="ant-card-head"
       >
         <div
-          class="ant-thought-chain-item-header"
+          class="ant-card-head-wrapper"
         >
-          <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
-          >
-            2
-          </span>
           <div
-            class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
+            class="ant-card-head-title"
           >
-            <span
-              aria-describedby="test-id"
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
-            >
-              <strong>
-                <span
-                  aria-label="right"
-                  class="anticon anticon-right ant-thought-chain-item-collapse-icon"
-                  role="img"
-                >
-                  <svg
-                    aria-hidden="true"
-                    data-icon="right"
-                    fill="currentColor"
-                    focusable="false"
-                    height="1em"
-                    viewBox="64 64 896 896"
-                    width="1em"
-                  >
-                    <path
-                      d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
-                    />
-                  </svg>
-                </span>
-                Click me to expand the content
-              </strong>
-            </span>
+            非受控组件
+          </div>
+        </div>
+      </div>
+      <div
+        class="ant-card-body"
+      >
+        <div
+          class="ant-thought-chain ant-thought-chain-middle"
+        >
+          <div
+            class="ant-thought-chain-item"
+          >
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
-              style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+              class="ant-thought-chain-item-header"
             >
-              <div
-                class="ant-tooltip-arrow"
-                style="position: absolute;"
-              />
-              <div
-                class="ant-tooltip-content"
+              <span
+                class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
               >
-                <div
-                  class="ant-tooltip-inner"
-                  id="test-id"
-                  role="tooltip"
+                1
+              </span>
+              <div
+                class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
                 >
-                  Click me to expand the content
+                  <strong>
+                    <span
+                      aria-label="right"
+                      class="anticon anticon-right ant-thought-chain-item-collapse-icon"
+                      role="img"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        data-icon="right"
+                        fill="currentColor"
+                        focusable="false"
+                        height="1em"
+                        viewBox="64 64 896 896"
+                        width="1em"
+                      >
+                        <path
+                          d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+                        />
+                      </svg>
+                    </span>
+                    Click me to expand the content
+                  </strong>
+                </span>
+                <div
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
+                  style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                >
+                  <div
+                    class="ant-tooltip-arrow"
+                    style="position: absolute;"
+                  />
+                  <div
+                    class="ant-tooltip-content"
+                  >
+                    <div
+                      class="ant-tooltip-inner"
+                      role="tooltip"
+                    >
+                      Click me to expand the content
+                    </div>
+                  </div>
+                </div>
+                <span
+                  class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
+                >
+                  Collapsible
+                </span>
+                <div
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
+                  style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                >
+                  <div
+                    class="ant-tooltip-arrow"
+                    style="position: absolute;"
+                  />
+                  <div
+                    class="ant-tooltip-content"
+                  >
+                    <div
+                      class="ant-tooltip-inner"
+                      role="tooltip"
+                    >
+                      Collapsible
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <span
-              aria-describedby="test-id"
-              class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
-            >
-              Collapsible
-            </span>
+          </div>
+          <div
+            class="ant-thought-chain-item"
+          >
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
-              style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+              class="ant-thought-chain-item-header"
             >
-              <div
-                class="ant-tooltip-arrow"
-                style="position: absolute;"
-              />
-              <div
-                class="ant-tooltip-content"
+              <span
+                class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
               >
+                2
+              </span>
+              <div
+                class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+                >
+                  <strong>
+                    <span
+                      aria-label="right"
+                      class="anticon anticon-right ant-thought-chain-item-collapse-icon"
+                      role="img"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        data-icon="right"
+                        fill="currentColor"
+                        focusable="false"
+                        height="1em"
+                        viewBox="64 64 896 896"
+                        width="1em"
+                      >
+                        <path
+                          d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+                        />
+                      </svg>
+                    </span>
+                    Click me to expand the content
+                  </strong>
+                </span>
                 <div
-                  class="ant-tooltip-inner"
-                  id="test-id"
-                  role="tooltip"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
+                  style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                >
+                  <div
+                    class="ant-tooltip-arrow"
+                    style="position: absolute;"
+                  />
+                  <div
+                    class="ant-tooltip-content"
+                  >
+                    <div
+                      class="ant-tooltip-inner"
+                      role="tooltip"
+                    >
+                      Click me to expand the content
+                    </div>
+                  </div>
+                </div>
+                <span
+                  class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
                 >
                   Collapsible
+                </span>
+                <div
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
+                  style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                >
+                  <div
+                    class="ant-tooltip-arrow"
+                    style="position: absolute;"
+                  />
+                  <div
+                    class="ant-tooltip-content"
+                  >
+                    <div
+                      class="ant-tooltip-inner"
+                      role="tooltip"
+                    >
+                      Collapsible
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-thought-chain-item"
+          >
+            <div
+              class="ant-thought-chain-item-header"
+            >
+              <span
+                class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
+              >
+                3
+              </span>
+              <div
+                class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+                >
+                  <strong>
+                    <span
+                      aria-label="right"
+                      class="anticon anticon-right ant-thought-chain-item-collapse-icon"
+                      role="img"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        data-icon="right"
+                        fill="currentColor"
+                        focusable="false"
+                        height="1em"
+                        viewBox="64 64 896 896"
+                        width="1em"
+                      >
+                        <path
+                          d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+                        />
+                      </svg>
+                    </span>
+                    Click me to expand the content
+                  </strong>
+                </span>
+                <div
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
+                  style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                >
+                  <div
+                    class="ant-tooltip-arrow"
+                    style="position: absolute;"
+                  />
+                  <div
+                    class="ant-tooltip-content"
+                  >
+                    <div
+                      class="ant-tooltip-inner"
+                      role="tooltip"
+                    >
+                      Click me to expand the content
+                    </div>
+                  </div>
+                </div>
+                <span
+                  class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
+                >
+                  Collapsible
+                </span>
+                <div
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
+                  style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                >
+                  <div
+                    class="ant-tooltip-arrow"
+                    style="position: absolute;"
+                  />
+                  <div
+                    class="ant-tooltip-content"
+                  >
+                    <div
+                      class="ant-tooltip-inner"
+                      role="tooltip"
+                    >
+                      Collapsible
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-thought-chain-item"
+          >
+            <div
+              class="ant-thought-chain-item-header"
+            >
+              <span
+                class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
+              >
+                4
+              </span>
+              <div
+                class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+                >
+                  <strong>
+                    <span
+                      aria-label="right"
+                      class="anticon anticon-right ant-thought-chain-item-collapse-icon"
+                      role="img"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        data-icon="right"
+                        fill="currentColor"
+                        focusable="false"
+                        height="1em"
+                        viewBox="64 64 896 896"
+                        width="1em"
+                      >
+                        <path
+                          d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+                        />
+                      </svg>
+                    </span>
+                    Click me to expand the content
+                  </strong>
+                </span>
+                <div
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
+                  style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                >
+                  <div
+                    class="ant-tooltip-arrow"
+                    style="position: absolute;"
+                  />
+                  <div
+                    class="ant-tooltip-content"
+                  >
+                    <div
+                      class="ant-tooltip-inner"
+                      role="tooltip"
+                    >
+                      Click me to expand the content
+                    </div>
+                  </div>
+                </div>
+                <span
+                  class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
+                >
+                  Collapsible
+                </span>
+                <div
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
+                  style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                >
+                  <div
+                    class="ant-tooltip-arrow"
+                    style="position: absolute;"
+                  />
+                  <div
+                    class="ant-tooltip-content"
+                  >
+                    <div
+                      class="ant-tooltip-inner"
+                      role="tooltip"
+                    >
+                      Collapsible
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -675,7 +1261,6 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
             class="ant-thought-chain-item-header-box"
           >
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -695,7 +1280,6 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   Thought Chain Item Title
@@ -703,7 +1287,6 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
               </div>
             </div>
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
@@ -721,7 +1304,6 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   description
@@ -840,7 +1422,6 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
             class="ant-thought-chain-item-header-box"
           >
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -860,7 +1441,6 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   Thought Chain Item Title
@@ -868,7 +1448,6 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
               </div>
             </div>
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
@@ -886,7 +1465,6 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   description
@@ -1005,7 +1583,6 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
             class="ant-thought-chain-item-header-box"
           >
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -1025,7 +1602,6 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   Thought Chain Item Title
@@ -1033,7 +1609,6 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
               </div>
             </div>
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
@@ -1051,7 +1626,6 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   description
@@ -1167,7 +1741,6 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
             class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
           >
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -1206,7 +1779,6 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   1 - Thought Chain Item
@@ -1214,7 +1786,6 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
               </div>
             </div>
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
@@ -1232,7 +1803,6 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   description
@@ -1301,7 +1871,6 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
             class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
           >
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -1340,7 +1909,6 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   2 - Thought Chain Item
@@ -1348,7 +1916,6 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
               </div>
             </div>
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
@@ -1366,7 +1933,6 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   description
@@ -1455,9 +2021,7 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
             class="ant-radio-button-inner"
           />
         </span>
-        <span
-          class="ant-radio-button-label"
-        >
+        <span>
           Large
         </span>
       </label>
@@ -1478,9 +2042,7 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
             class="ant-radio-button-inner"
           />
         </span>
-        <span
-          class="ant-radio-button-label"
-        >
+        <span>
           Default
         </span>
       </label>
@@ -1500,9 +2062,7 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
             class="ant-radio-button-inner"
           />
         </span>
-        <span
-          class="ant-radio-button-label"
-        >
+        <span>
           Small
         </span>
       </label>
@@ -1525,7 +2085,6 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
             class="ant-thought-chain-item-header-box"
           >
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -1545,7 +2104,6 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   Thought Chain Item Title
@@ -1553,7 +2111,6 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
               </div>
             </div>
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
@@ -1571,7 +2128,6 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   description
@@ -1628,7 +2184,6 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
             class="ant-thought-chain-item-header-box"
           >
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -1648,7 +2203,6 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   Thought Chain Item Title
@@ -1656,7 +2210,6 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
               </div>
             </div>
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
@@ -1674,7 +2227,6 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   description
@@ -1731,7 +2283,6 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
             class="ant-thought-chain-item-header-box"
           >
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -1751,7 +2302,6 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   Thought Chain Item Title
@@ -1759,7 +2309,6 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
               </div>
             </div>
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
@@ -1777,7 +2326,6 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   description
@@ -1834,7 +2382,6 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
             class="ant-thought-chain-item-header-box"
           >
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -1854,7 +2401,6 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   Thought Chain Item Title
@@ -1862,7 +2408,6 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
               </div>
             </div>
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               description
@@ -1880,7 +2425,6 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   description
@@ -1985,7 +2529,6 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
             class="ant-thought-chain-item-header-box"
           >
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -2005,7 +2548,6 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   Thought Chain Item - 1
@@ -2013,7 +2555,6 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
               </div>
             </div>
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               status: success
@@ -2031,7 +2572,6 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   status: success
@@ -2077,7 +2617,6 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
             class="ant-thought-chain-item-header-box"
           >
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
             >
               <strong>
@@ -2097,7 +2636,6 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   Thought Chain Item - 2
@@ -2105,7 +2643,6 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
               </div>
             </div>
             <span
-              aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
             >
               status: error
@@ -2123,7 +2660,6 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
               >
                 <div
                   class="ant-tooltip-inner"
-                  id="test-id"
                   role="tooltip"
                 >
                   status: error
