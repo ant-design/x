@@ -69,7 +69,7 @@ const useStyle = createStyles(({ token }, markPos: [number, number, number, numb
 export interface SemanticPreviewProps {
   componentName?: string;
   semantics: { name: string; desc: string; version?: string }[];
-  children: React.ReactElement<any>;
+  children: React.ReactElement | ((injectProps: any) => React.ReactElement);
   height?: number;
 }
 
@@ -93,9 +93,14 @@ const SemanticPreview: React.FC<SemanticPreviewProps> = (props) => {
     return classNames;
   }, [semantics]);
 
-  const cloneNode = React.cloneElement(children, {
+  const injectProps = {
     classNames: semanticClassNames,
-  });
+  };
+
+  const cloneNode =
+    typeof children === 'function'
+      ? children(injectProps)
+      : React.cloneElement(children, injectProps);
 
   // ======================== Hover =========================
   const containerRef = React.useRef<HTMLDivElement>(null);

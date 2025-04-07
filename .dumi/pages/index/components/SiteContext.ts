@@ -1,9 +1,5 @@
-import * as React from 'react';
+import SiteContext from '../../../theme/slots/SiteContext';
 
-export interface SiteContextProps {
-  isMobile: boolean;
-}
-
-const SiteContext = React.createContext<SiteContextProps>({ isMobile: false });
+export type { SiteContextProps } from '../../../theme/slots/SiteContext';
 
 export default SiteContext;
