@@ -85,6 +85,7 @@ const CodePreviewer: React.FC<AntdPreviewerProps> = (props) => {
     simplify,
     clientOnly,
     pkgDependencyList,
+    pkgPeerDependencies,
   } = props;
   const { codeType } = React.use(DemoContext);
 
@@ -169,18 +170,18 @@ const CodePreviewer: React.FC<AntdPreviewerProps> = (props) => {
   });
 
   const html = `
-    <!DOCTYPE html>
-      <html lang="en">
-        <head>
-          <meta charset="utf-8">
-          <meta name="viewport" content="width=device-width">
-          <meta name="theme-color" content="#000000">
-        </head>
-        <body>
-          <div id="container" style="padding: 24px" />
-          <script>const mountNode = document.getElementById('container');</script>
-        </body>
-      </html>
+<!DOCTYPE html>    
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="theme-color" content="#000000">
+  </head>
+  <body>
+    <div id="container" style="padding: 24px" />
+    <script>const mountNode = document.getElementById('container');</script>
+  </body>
+</html>
     `;
 
   const tsconfig = {
@@ -196,6 +197,7 @@ const CodePreviewer: React.FC<AntdPreviewerProps> = (props) => {
   };
 
   const suffix = codeType === 'tsx' ? 'tsx' : 'js';
+  const antdVersion = pkgPeerDependencies.antd ?? '5.x';
 
   const dependencies = (jsx as string).split('\n').reduce<Record<PropertyKey, string>>(
     (acc, line) => {
@@ -207,7 +209,7 @@ const CodePreviewer: React.FC<AntdPreviewerProps> = (props) => {
       }
       return acc;
     },
-    { '@ant-design/x': pkg.version },
+    { '@ant-design/x': pkg.version, antd: antdVersion },
   );
 
   dependencies['@ant-design/icons'] = 'latest';
@@ -226,6 +228,7 @@ const CodePreviewer: React.FC<AntdPreviewerProps> = (props) => {
     js: `const { createRoot } = ReactDOM;\n${jsx
       .replace(/import\s+(?:React,\s+)?{(\s+[^}]*\s+)}\s+from\s+'react'/, `const { $1 } = React;`)
       .replace(/import\s+{(\s+[^}]*\s+)}\s+from\s+'antd';/, 'const { $1 } = antd;')
+      .replace(/import\s+{(\s+[^}]*\s+)}\s+from\s+'@ant-design\/x';/, 'const { $1 } = antdx;')
       .replace(/import\s+{(\s+[^}]*\s+)}\s+from\s+'@ant-design\/icons';/, 'const { $1 } = icons;')
       .replace("import moment from 'moment';", '')
       .replace("import React from 'react';", '')
@@ -242,13 +245,13 @@ const CodePreviewer: React.FC<AntdPreviewerProps> = (props) => {
     editors: '001',
     css: '',
     js_external: [
-      'react@18/umd/react.development.js',
-      'react-dom@18/umd/react-dom.development.js',
+      'react@18.x/umd/react.development.js',
+      'react-dom@18.x/umd/react-dom.development.js',
       'dayjs@1/dayjs.min.js',
-      `antd@${pkg.version}/dist/antd-with-locales.min.js`,
+      `@ant-design/cssinjs@${pkgDependencyList['@ant-design/cssinjs']}/dist/umd/cssinjs.min.js`,
       `@ant-design/icons/dist/index.umd.js`,
-      'react-router-dom/dist/umd/react-router-dom.production.min.js',
-      'react-router/dist/umd/react-router.production.min.js',
+      `antd@${antdVersion}/dist/antd-with-locales.min.js`,
+      `@ant-design/x@${pkg.version}/dist/antdx.min.js`,
     ]
       .map((url) => `https://unpkg.com/${url}`)
       .join(';'),

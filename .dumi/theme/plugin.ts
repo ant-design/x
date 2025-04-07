@@ -6,7 +6,7 @@ import type { IApi, IRoute } from 'dumi';
 import ReactTechStack from 'dumi/dist/techStacks/react';
 import tsToJs from './utils/tsToJs';
 
-import { dependencies, devDependencies } from '../../package.json';
+import { dependencies, devDependencies, peerDependencies } from '../../package.json';
 
 function extractEmotionStyle(html: string) {
   // copy from emotion ssr
@@ -38,6 +38,7 @@ export const getHash = (str: string, length = 8) =>
 class AntdReactTechStack extends ReactTechStack {
   generatePreviewerProps(...[props, opts]: any) {
     props.pkgDependencyList = { ...devDependencies, ...dependencies };
+    props.pkgPeerDependencies = peerDependencies;
     props.jsx ??= '';
 
     if (opts.type === 'code-block') {

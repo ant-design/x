@@ -41,6 +41,10 @@ Add `script` and `link` tags in your browser and use the global variable `antd`.
 
 We provide `antdx.js`, `antdx.min.js`, and `antdx.min.js.map` in the `dist` directory of the npm package.
 
+> **We do not recommend using the built files** because they cannot be tree-shaken and will not receive bug fixes for underlying dependencies.
+
+> Note: `antdx.js` and `antdx.min.js` depend on `react`, `react-dom`, `dayjs`, `antd`, `@ant-design/cssinjs`, `@ant-design/icons`, please ensure these files are loaded before using them.
+
 ## 🧩 Atomic Components
 
 Based on the RICH interaction paradigm, we provide numerous atomic components for various stages of interaction to help you flexibly build your AI dialogue applications:
