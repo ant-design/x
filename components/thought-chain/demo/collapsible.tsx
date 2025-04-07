@@ -2,7 +2,7 @@ import { ThoughtChain } from '@ant-design/x';
 import type { ThoughtChainProps } from '@ant-design/x';
 import React from 'react';
 
-import { Card, Typography } from 'antd';
+import { Button, Card, Space, Typography } from 'antd';
 
 const { Paragraph, Text } = Typography;
 
@@ -27,6 +27,7 @@ const mockContent = (
 
 const items: ThoughtChainProps['items'] = [
   {
+    key: '1',
     title: 'Click me to expand the content',
     description: 'Collapsible',
     content: mockContent,
@@ -51,14 +52,45 @@ const items: ThoughtChainProps['items'] = [
   },
 ];
 
-export default () => (
-  <Card style={{ width: 500 }}>
-    <ThoughtChain
-      items={items}
-      collapsible={{
-        // items[0] key
-        expandedKeys: ['2'],
-      }}
-    />
-  </Card>
-);
+const keys: string[] = items.map((item) => (item.key ? item.key : '')).filter(Boolean);
+
+export default () => {
+  const [expandedKeys, setExpandedKeys] = React.useState<string[]>(['2']);
+
+  return (
+    <Space align="start" size={16}>
+      <Card
+        style={{ width: 400 }}
+        title={`受控组件: [${expandedKeys.toString()}]`}
+        key={expandedKeys.toString()}
+        extra={
+          <Button
+            type="primary"
+            onClick={() => {
+              const count = Math.floor(Math.random() * keys.length) + 1;
+              const shuffled = [...keys].sort(() => 0.5 - Math.random());
+
+              setExpandedKeys(shuffled.slice(0, count));
+            }}
+          >
+            更新expandedKeys
+          </Button>
+        }
+      >
+        <ThoughtChain
+          items={items}
+          collapsible={{
+            // items[0] key
+            expandedKeys,
+            onExpand: (keys) => {
+              setExpandedKeys(keys);
+            },
+          }}
+        />
+      </Card>
+      <Card style={{ width: 400 }} title="非受控组件">
+        <ThoughtChain items={items} collapsible />
+      </Card>
+    </Space>
+  );
+};
