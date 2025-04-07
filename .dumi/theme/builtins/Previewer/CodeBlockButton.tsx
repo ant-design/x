@@ -64,30 +64,9 @@ const CodeBlockButton: React.FC<CodeBlockButtonProps> = ({ title, dependencies =
           alt="codeblock"
           src="https://mdn.alipayobjects.com/huamei_wtld8u/afts/img/A*K8rjSJpTNQ8AAAAAAAAAAAAADhOIAQ/original"
           className="code-box-codeblock"
-import { Tooltip } from 'antd';
-import { FormattedMessage } from 'dumi';
-import React, { Suspense, useEffect, useState } from 'react';
-
-import { ping } from '../../utils';
-// 导入或声明 openHituCodeBlock 函数
-import { openHituCodeBlock } from '../../utils/codeBlock';
-
-// ... other code ...
-
-// Somewhere in the component (e.g., within the render return):
-<button
-  onClick={() => {
-    if (typeof openHituCodeBlock === 'function') {
-      openHituCodeBlock(JSON.stringify(codeBlockPrefillConfig));
-    } else {
-      console.error('openHituCodeBlock is not available');
-    }
-  }}
->
-  {/* Button content */}
-</button>
-
-// ... other code ...
+          onClick={() => {
+            (window as any).openHituCodeBlock?.(JSON.stringify(codeBlockPrefillConfig));
+          }}
         />
       </div>
     </Tooltip>
