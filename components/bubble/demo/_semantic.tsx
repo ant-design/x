@@ -27,6 +27,7 @@ const App: React.FC = () => {
 
   return (
     <SemanticPreview
+      componentName="Bubble"
       semantics={[
         { name: 'avatar', desc: locale.avatar },
         { name: 'header', desc: locale.header },

@@ -67,7 +67,7 @@ const useStyle = createStyles(({ token }, markPos: [number, number, number, numb
 }));
 
 export interface SemanticPreviewProps {
-  componentName?: string;
+  componentName: string;
   semantics: { name: string; desc: string; version?: string }[];
   children: React.ReactElement | ((injectProps: any) => React.ReactElement);
   height?: number;

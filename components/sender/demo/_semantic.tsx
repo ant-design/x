@@ -39,6 +39,7 @@ const App: React.FC = () => {
     <Flex vertical>
       {/* Basic */}
       <SemanticPreview
+        componentName="Sender"
         semantics={[
           { name: 'prefix', desc: locale.prefix },
           { name: 'input', desc: locale.input },
@@ -60,6 +61,7 @@ const App: React.FC = () => {
 
       {/* With Header */}
       <SemanticPreview
+        componentName="Sender"
         semantics={[
           { name: 'header', desc: headerLocale.header },
           { name: 'content', desc: headerLocale.content },
