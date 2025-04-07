@@ -18,6 +18,7 @@ import {
   type AttachmentsProps,
   Bubble,
   Conversations,
+  Prompts,
   Sender,
   Suggestion,
   Welcome,
@@ -352,12 +353,15 @@ const CopilotChat = (props: CopilotChatProps) => {
             className={styles.chatWelcome}
           />
 
-          <span className={styles.questionTip}>I can help：</span>
-          {MOCK_QUESTIONS.map((i) => (
-            <div className={styles.question} key={i} onClick={() => handleUserSubmit(i)}>
-              {i}
-            </div>
-          ))}
+          <Prompts
+            vertical
+            title="I can help："
+            items={MOCK_QUESTIONS.map((i) => ({ key: i, description: i }))}
+            onItemClick={(info) => handleUserSubmit(info?.data?.description as string)}
+            styles={{
+              title: { fontSize: '14px' },
+            }}
+          />
         </>
       )}
     </div>
