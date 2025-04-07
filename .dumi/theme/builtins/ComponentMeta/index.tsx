@@ -35,7 +35,7 @@ const locales = {
   },
 };
 
-const branchUrl = 'https://github.com/ant-design/ant-design/edit/master/';
+const branchUrl = 'https://github.com/ant-design/x/edit/main/';
 
 function isVersionNumber(value?: string) {
   return value && /^\d+\.\d+\.\d+$/.test(value);
@@ -98,7 +98,7 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
     if (String(source) === 'true') {
       const kebabComponent = kebabCase(component);
       return [
-        `https://github.com/ant-design/ant-design/blob/master/components/${kebabComponent}`,
+        `https://github.com/ant-design/x/blob/main/components/${kebabComponent}`,
         `components/${kebabComponent}`,
       ];
     }
@@ -118,7 +118,7 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
   };
 
   // ======================== Render ========================
-  const importList = `import { ${transformComponentName(component)} } from "antd";`;
+  const importList = `import { ${transformComponentName(component)} } from "@ant-design/x";`;
 
   return (
     <Descriptions
@@ -134,7 +134,10 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
           {
             label: locale.import,
             children: (
-              <CopyToClipboard text={`import { ${component} } from "antd";`} onCopy={onCopy}>
+              <CopyToClipboard
+                text={`import { ${component} } from "@ant-design/x";`}
+                onCopy={onCopy}
+              >
                 <Tooltip
                   placement="right"
                   title={copied ? locale.copied : locale.copy}

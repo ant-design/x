@@ -58,8 +58,8 @@ const CustomTheme: React.FC = () => {
   return (
     <div>
       <Helmet>
-        <title>{`${locale.title} - Ant Design`}</title>
-        <meta property="og:title" content={`${locale.title} - Ant Design`} />
+        <title>{`${locale.title} - Ant Design X`}</title>
+        <meta property="og:title" content={`${locale.title} - Ant Design X`} />
       </Helmet>
       <Suspense fallback={<Skeleton style={{ margin: 24 }} />}>
         <ThemeEditor

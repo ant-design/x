@@ -97,8 +97,8 @@ const Footer: React.FC = () => {
       title: <FormattedMessage id="app.footer.resources" />,
       items: [
         {
-          title: 'Ant Design X',
-          url: isZhCN ? 'https://ant-design-x.antgroup.com' : 'https://x.ant.design',
+          title: 'Ant Design',
+          url: isZhCN ? 'https://ant-design.antgroup.com/index-cn' : 'https://ant.design',
           openExternal: true,
         },
         {
@@ -257,7 +257,7 @@ const Footer: React.FC = () => {
         {
           icon: <GithubOutlined />,
           title: 'GitHub',
-          url: 'https://github.com/ant-design/ant-design',
+          url: 'https://github.com/ant-design/x',
           openExternal: true,
         },
         {
@@ -281,13 +281,13 @@ const Footer: React.FC = () => {
         {
           icon: <IssuesCloseOutlined />,
           title: <FormattedMessage id="app.footer.issues" />,
-          url: 'https://github.com/ant-design/ant-design/issues',
+          url: 'https://github.com/ant-design/x/issues',
           openExternal: true,
         },
         {
           icon: <MessageOutlined />,
           title: <FormattedMessage id="app.footer.discussions" />,
-          url: 'https://github.com/ant-design/ant-design/discussions',
+          url: 'https://github.com/ant-design/x/discussions',
           openExternal: true,
         },
         {

@@ -7,11 +7,11 @@ const CommonHelmet: React.FC = () => {
   const [title, description] = React.useMemo<[string, string]>(() => {
     let helmetTitle: string;
     if (!meta.frontmatter.subtitle && !meta.frontmatter.title) {
-      helmetTitle = '404 Not Found - Ant Design';
+      helmetTitle = '404 Not Found - Ant Design X';
     } else {
       helmetTitle = `${meta.frontmatter.subtitle || ''} ${
         meta.frontmatter?.title || ''
-      } - Ant Design`;
+      } - Ant Design X`;
     }
     const helmetDescription = meta.frontmatter.description || '';
     return [helmetTitle, helmetDescription];

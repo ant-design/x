@@ -51,7 +51,7 @@ const Contributors: React.FC<ContributorsProps> = ({ filename }) => {
       <div className={styles.title}>{formatMessage({ id: 'app.content.contributors' })}</div>
       <ContributorsList
         cache
-        repo="ant-design"
+        repo="x"
         owner="ant-design"
         fileName={filename}
         className={styles.list}
