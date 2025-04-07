@@ -2,12 +2,20 @@ import { App, Button, Skeleton } from 'antd';
 import { enUS, zhCN } from 'antd-token-previewer';
 import type { ThemeConfig } from 'antd/es/config-provider/context';
 import { Helmet } from 'dumi';
-/* eslint-disable react-hooks-extra/no-direct-set-state-in-use-effect */
 import React, { Suspense, useEffect } from 'react';
 
+import { createStyles } from 'antd-style';
 import useLocale from '../../hooks/useLocale';
 
 const ThemeEditor = React.lazy(() => import('antd-token-previewer/lib/ThemeEditor'));
+
+const useStyle = createStyles(({ token, css }) => {
+  return {
+    editor: css`
+      margin-top: ${token.headerHeight - token.padding}px;
+    `,
+  };
+});
 
 const locales = {
   cn: {
@@ -39,6 +47,7 @@ const ANT_DESIGN_V5_THEME_EDITOR_THEME = 'ant-design-v5-theme-editor-theme';
 const CustomTheme: React.FC = () => {
   const { message } = App.useApp();
   const [locale, lang] = useLocale(locales);
+  const { styles } = useStyle();
 
   const [theme, setTheme] = React.useState<ThemeConfig>({});
 
@@ -56,7 +65,7 @@ const CustomTheme: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className={styles.editor}>
       <Helmet>
         <title>{`${locale.title} - Ant Design X`}</title>
         <meta property="og:title" content={`${locale.title} - Ant Design X`} />

@@ -18,11 +18,14 @@ export interface LangBtnProps {
 const BASE_SIZE = '1.2em';
 
 const useStyle = createStyles(({ token, css }) => {
-  const { colorText, controlHeight, colorBgContainer, motionDurationMid } = token;
+  const { colorText, controlHeightLG, colorBgContainer, motionDurationMid } = token;
 
   return {
     btn: css`
-      width: ${controlHeight}px;
+      width: ${controlHeightLG}px;
+      height: ${controlHeightLG}px;
+      padding: 0 !important;
+      border-radius: ${controlHeightLG / 2}px;
       .btn-inner {
         transition: all ${motionDurationMid};
       }

@@ -127,7 +127,11 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = () => {
 
   return (
     <Dropdown menu={{ items, onClick }} arrow={{ pointAtCenter: true }} placement="bottomRight">
-      <Button type="text" icon={<ThemeIcon />} style={{ fontSize: 16 }} />
+      <Button
+        type="text"
+        icon={<ThemeIcon />}
+        style={{ fontSize: 16, borderRadius: 100, height: 40, width: 40 }}
+      />
     </Dropdown>
   );
 };
