@@ -232,6 +232,11 @@ export default function useXChat<
         },
       },
     );
+
+    return {
+      loadingMsgId,
+      updatingMsgId
+    }
   });
 
   return {
