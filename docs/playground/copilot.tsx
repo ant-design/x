@@ -28,7 +28,7 @@ import {
 } from '@ant-design/x';
 import type { BubbleDataType } from '@ant-design/x/es/bubble/BubbleList';
 import type { Conversation } from '@ant-design/x/es/conversations';
-import { Button, GetProp, GetRef, Popover, Skeleton, message } from 'antd';
+import { Button, GetProp, GetRef, Image, Popover, message } from 'antd';
 import { createStyles } from 'antd-style';
 import React, { useState } from 'react';
 
@@ -87,12 +87,12 @@ const useCopilotStyle = createStyles(({ token, css }) => {
       display: flex;
       flex-direction: column;
       background: ${token.colorBgContainer};
-      box-sizing: border-box;
       color: ${token.colorText};
     `,
     // chatHeader 样式
     chatHeader: css`
-      height: 24px;
+      height: 52px;
+      box-sizing: border-box;
       border-bottom: 1px solid ${token.colorBorder};
       display: flex;
       align-items: center;
@@ -470,7 +470,7 @@ const useWorkareaStyle = createStyles(({ token, css }) => {
       min-width: 1000px;
       height: 100vh;
       display: flex;
-      border-radius: 16px;
+      overflow: hidden;
     `,
     workarea: css`
       flex: 1;
@@ -480,12 +480,14 @@ const useWorkareaStyle = createStyles(({ token, css }) => {
       flex-direction: column;
     `,
     workareaHeader: css`
-      height: 24px;
+      box-sizing: border-box;
+      height: 52px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 48px 14px 28px;
+      padding: 0 48px 0 28px;
       border-bottom: 1px solid ${token.colorBorder};
+      flex-shrink: 0;
     `,
     headerTitle: css`
       font-weight: 600;
@@ -515,10 +517,20 @@ const useWorkareaStyle = createStyles(({ token, css }) => {
       }
     `,
     workareaBody: css`
-      border-radius: 16px;
       flex: 1;
-      background: ${token.colorBgContainer};
       padding: 16px;
+      background: ${token.colorBgContainer};
+      border-radius: 16px;
+      min-height: 0;
+    `,
+    bodyContent: css`
+      overflow: auto;
+      height: 100%;
+      padding-right: 10px;
+    `,
+    bodyText: css`
+      color: ${token.colorText};
+      padding: 8px;
     `,
   };
 });
@@ -556,7 +568,46 @@ const Copilot = () => {
           className={workareaStyles.workareaBody}
           style={{ margin: copilotOpen ? 16 : '16px 48px' }}
         >
-          <Skeleton />
+          <div className={workareaStyles.bodyContent}>
+            <Image
+              src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*48RLR41kwHIAAAAAAAAAAAAADgCCAQ/fmt.webp"
+              preview={false}
+            />
+            <div className={workareaStyles.bodyText}>
+              <h4>What is the RICH design paradigm?</h4>
+              <div>
+                RICH is an AI interface design paradigm we propose, similar to how the WIMP paradigm
+                relates to graphical user interfaces.
+              </div>
+              <br />
+              <div>
+                The ACM SIGCHI 2005 (the premier conference on human-computer interaction) defined
+                that the core issues of human-computer interaction can be divided into three levels:
+              </div>
+              <ul>
+                <li>
+                  Interface Paradigm Layer: Defines the design elements of human-computer
+                  interaction interfaces, guiding designers to focus on core issues.
+                </li>
+                <li>
+                  User model layer: Build an interface experience evaluation model to measure the
+                  quality of the interface experience.
+                </li>
+                <li>
+                  Software framework layer: The underlying support algorithms and data structures
+                  for human-computer interfaces, which are the contents hidden behind the front-end
+                  interface.
+                </li>
+              </ul>
+              <div>
+                The interface paradigm is the aspect that designers need to focus on and define the
+                most when a new human-computer interaction technology is born. The interface
+                paradigm defines the design elements that designers should pay attention to, and
+                based on this, it is possible to determine what constitutes good design and how to
+                achieve it.
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
