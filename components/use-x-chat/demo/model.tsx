@@ -1,0 +1,99 @@
+import { UserOutlined } from '@ant-design/icons';
+import { Bubble, Sender, useXAgent, useXChat } from '@ant-design/x';
+import { Flex, type GetProp } from 'antd';
+import React from 'react';
+
+const BASE_URL = 'https://api.siliconflow.cn/v1/chat/completions';
+const MODEL = 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B';
+const API_KEY = 'Bearer sk-ravoadhrquyrkvaqsgyeufqdgphwxfheifujmaoscudjgldr';
+
+type YourMessageType = {
+  role: string;
+  content: string;
+};
+
+const roles: GetProp<typeof Bubble.List, 'roles'> = {
+  assistant: {
+    placement: 'start',
+    avatar: { icon: <UserOutlined />, style: { background: '#fde3cf' } },
+  },
+  user: {
+    placement: 'end',
+    avatar: { icon: <UserOutlined />, style: { background: '#87d068' } },
+  },
+};
+
+const App = () => {
+  const [content, setContent] = React.useState('');
+  const [agent] = useXAgent<YourMessageType>({
+    baseURL: BASE_URL,
+    model: MODEL,
+    dangerouslyApiKey: API_KEY,
+  });
+
+  // Chat messages
+  const { onRequest, messages } = useXChat({
+    agent,
+    requestFallback: () => {
+      return {
+        content: 'Request failed, please try again!',
+        role: 'assistant',
+      };
+    },
+    requestPlaceholder: () => {
+      return {
+        content: 'Please wait...',
+        role: 'assistant',
+      };
+    },
+    transformMessage: (info) => {
+      const { originMessage, currentMessage, status } = info || {};
+      let currentText = '';
+      let originText = '';
+      if (status === 'loading' && currentMessage.data && !currentMessage.data.includes('DONE')) {
+        const message = JSON.parse(currentMessage.data);
+        currentText =
+          message?.choices?.[0].delta?.reasoning_content === null
+            ? ''
+            : message?.choices?.[0].delta?.reasoning_content;
+      }
+      if (originMessage) {
+        originText = originMessage.content || '';
+      }
+      return {
+        content: originText + currentText,
+        role: 'assistant',
+      };
+    },
+  });
+  return (
+    <Flex vertical gap="middle">
+      <Bubble.List
+        roles={roles}
+        style={{ maxHeight: 300 }}
+        items={messages.map(({ id, message }) => ({
+          key: id,
+          role: message.role,
+          content: message.content,
+        }))}
+      />
+      <Sender
+        loading={agent.isRequesting()}
+        value={content}
+        onChange={setContent}
+        onSubmit={(nextContent) => {
+          onRequest({
+            stream: true,
+            message: {
+              role: 'user',
+              content: nextContent,
+            },
+          });
+          setContent('');
+        }}
+      />
+    </Flex>
+  );
+};
+
+export default App;

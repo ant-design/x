@@ -2,6 +2,7 @@ import React from 'react';
 import XRequest from '../x-request';
 
 import { AnyObject } from '../_util/type';
+import { XStreamOptions } from '../x-stream';
 
 interface RequestFnInfo<Message> extends Partial<XAgentConfigPreset>, AnyObject {
   messages?: Message[];
@@ -15,6 +16,7 @@ export type RequestFn<Message> = (
     onSuccess: (message: Message) => void;
     onError: (error: Error) => void;
   },
+  transformStream?: XStreamOptions<Message>['transformStream'],
 ) => void;
 
 export interface XAgentConfigPreset {
@@ -45,7 +47,7 @@ export class XAgent<Message = string> {
     delete this.requestingMap[id];
   }
 
-  public request: RequestFn<Message> = (info, callbacks) => {
+  public request: RequestFn<Message> = (info, callbacks, transformStream) => {
     const { request } = this.config;
     const { onUpdate, onSuccess, onError } = callbacks;
 
@@ -53,27 +55,31 @@ export class XAgent<Message = string> {
     uuid += 1;
     this.requestingMap[id] = true;
 
-    request?.(info, {
-      // Status should be unique.
-      // One get success or error should not get more message
-      onUpdate: (message) => {
-        if (this.requestingMap[id]) {
-          onUpdate(message);
-        }
+    request?.(
+      info,
+      {
+        // Status should be unique.
+        // One get success or error should not get more message
+        onUpdate: (message) => {
+          if (this.requestingMap[id]) {
+            onUpdate(message);
+          }
+        },
+        onSuccess: (message) => {
+          if (this.requestingMap[id]) {
+            onSuccess(message);
+            this.finishRequest(id);
+          }
+        },
+        onError: (error) => {
+          if (this.requestingMap[id]) {
+            onError(error);
+            this.finishRequest(id);
+          }
+        },
       },
-      onSuccess: (message) => {
-        if (this.requestingMap[id]) {
-          onSuccess(message);
-          this.finishRequest(id);
-        }
-      },
-      onError: (error) => {
-        if (this.requestingMap[id]) {
-          onError(error);
-          this.finishRequest(id);
-        }
-      },
-    });
+      transformStream,
+    );
   };
 
   public isRequesting() {

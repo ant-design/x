@@ -21,6 +21,7 @@ demo:
 <!-- prettier-ignore -->
 <code src="./demo/preset.tsx">预设请求</code>
 <code src="./demo/custom.tsx">自定义请求</code>
+<code src="./demo/model.tsx">模型接入</code>
 
 ## API
 

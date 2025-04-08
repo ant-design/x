@@ -20,6 +20,7 @@ Connect with the backend model to provide an abstract data flow.
 <!-- prettier-ignore -->
 <code src="./demo/preset.tsx">Preset Request</code>
 <code src="./demo/custom.tsx">Custom Request</code>
+<code src="./demo/model.tsx">Model Access</code>
 
 ## API
 
