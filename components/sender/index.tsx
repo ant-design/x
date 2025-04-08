@@ -315,8 +315,12 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
         <SendHeaderContext.Provider value={{ prefixCls }}>{header}</SendHeaderContext.Provider>
       )}
       <ActionButtonContext.Provider value={actionsButtonContextProps}>
-        <div 
-          className={classNames(`${prefixCls}-content`, contextConfig.classNames.content, classNames.content)} 
+        <div
+          className={classnames(
+            `${prefixCls}-content`,
+            contextConfig.classNames.content,
+            classNames.content,
+          )}
           style={{ ...contextConfig.styles.content, ...styles.content }}
           onMouseDown={onContentMouseDown}
         >
