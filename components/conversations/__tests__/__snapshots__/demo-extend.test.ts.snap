@@ -487,7 +487,7 @@ exports[`renders components/conversations/demo/group-sort.tsx extend context cor
     >
       <li
         aria-describedby="test-id"
-        class="ant-conversations-item"
+        class="ant-conversations-item ant-conversations-item-active"
       >
         <span
           aria-label="Conversation 1732204800000"

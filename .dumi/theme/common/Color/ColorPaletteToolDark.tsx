@@ -34,7 +34,7 @@ const ColorPaletteTool: React.FC = () => {
     setPrimaryColorInstance(color);
   };
 
-  const handleChangeBackgroundColor = (_, hex: string) => {
+  const handleChangeBackgroundColor = (_: Color, hex: string) => {
     setBackgroundColor(hex);
   };
 

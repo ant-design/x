@@ -9,7 +9,7 @@ import {
 import { getSandpackCssText } from '@codesandbox/sandpack-react';
 import { App, theme as antdTheme } from 'antd';
 import { createSearchParams, useOutlet, useSearchParams, useServerInsertedHTML } from 'dumi';
-import React, { Suspense, useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, Suspense } from 'react';
 
 import type { MappingAlgorithm } from 'antd';
 import type { DirectionType, ThemeConfig } from 'antd/es/config-provider';
@@ -24,8 +24,6 @@ import type { SiteContextProps } from '../slots/SiteContext';
 import SiteContext from '../slots/SiteContext';
 
 import '@ant-design/v5-patch-for-react-19';
-
-const ThemeSwitch = React.lazy(() => import('../common/ThemeSwitch'));
 
 type Entries<T> = { [K in keyof T]: [K, T[K]] }[keyof T][];
 type SiteState = Partial<Omit<SiteContextProps, 'updateSiteContext'>>;
@@ -56,11 +54,13 @@ const GlobalLayout: React.FC = () => {
   const { pathname } = useLocation();
   const { token } = antdTheme.useToken();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [{ theme = [], direction, isMobile }, setSiteState] = useLayoutState<SiteState>({
-    isMobile: false,
-    direction: 'ltr',
-    theme: [],
-  });
+  const [{ theme = [], direction, isMobile, bannerVisible = false }, setSiteState] =
+    useLayoutState<SiteState>({
+      isMobile: false,
+      direction: 'ltr',
+      theme: [],
+      bannerVisible: false,
+    });
   const isIndexPage = React.useMemo(
     () => pathname === '' || pathname.startsWith('/index'),
     [pathname],
@@ -140,6 +140,7 @@ const GlobalLayout: React.FC = () => {
       updateSiteConfig,
       theme: theme!,
       isMobile: isMobile!,
+      bannerVisible,
     }),
     [isMobile, direction, updateSiteConfig, theme],
   );
@@ -191,38 +192,22 @@ const GlobalLayout: React.FC = () => {
     />
   ));
 
-  const demoPage = pathname.startsWith('/~demos');
-
-  // ============================ Render ============================
-  let content: React.ReactNode = outlet;
-
-  // Demo page should not contain App component
-  if (!demoPage) {
-    content = (
-      <App>
-        {outlet}
-        <Suspense>
-          <ThemeSwitch
-            value={theme}
-            onChange={(nextTheme) => updateSiteConfig({ theme: nextTheme })}
-          />
-          <PeterCat />
-        </Suspense>
-      </App>
-    );
-  }
-
   return (
-    <DarkContext.Provider value={theme.includes('dark')}>
+    <DarkContext value={theme.includes('dark')}>
       <StyleProvider
         cache={styleCache}
         linters={[legacyNotSelectorLinter, parentSelectorLinter, NaNLinter]}
       >
-        <SiteContext.Provider value={siteContextValue}>
-          <SiteThemeProvider theme={themeConfig}>{content}</SiteThemeProvider>
-        </SiteContext.Provider>
+        <SiteContext value={siteContextValue}>
+          <SiteThemeProvider theme={themeConfig}>
+            <App>
+              {outlet}
+              <Suspense>{pathname.startsWith('/~demos') ? <PeterCat /> : null}</Suspense>
+            </App>
+          </SiteThemeProvider>
+        </SiteContext>
       </StyleProvider>
-    </DarkContext.Provider>
+    </DarkContext>
   );
 };
 
