@@ -43,7 +43,7 @@ type useXChat<AgentMessage, ParsedMessage = AgentMessage> = (
 | requestPlaceholder | 请求中的占位信息，不提供则不会展示 | AgentMessage \| () => AgentMessage | - | - |
 | transformMessage | 可在更新数据时对`messages`做转换，同时会更新到`messages` | (info: {originMessage?: AgentMessage;currentMessage: any;status: MessageStatus;}) => AgentMessage｜-｜-｜ |
 | transformStream | 可选的转换函数，用于处理流数据 | `XStreamOptions<Output>['transformStream']` | - | - |
-| abortController | `AbortController` 控制器，用于控制流状态 | (abortController: AbortController) => void｜ - | - |
+| resolveAbortController | `AbortController` 控制器，用于控制流状态 | (abortController: AbortController) => void｜ - | - |
 
 ### XChatConfigReturnType
 

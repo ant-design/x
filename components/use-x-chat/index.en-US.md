@@ -42,7 +42,7 @@ type useXChat<AgentMessage, ParsedMessage = AgentMessage> = (
 | requestPlaceholder | Show the placeholder information when requesting, not provided will not be displayed | AgentMessage \| () => AgentMessage | - | - |
 | transformMessage | The `messages` can be converted when updating data, and will also be updated to `messages` |
 
-| (info: {originMessage?: AgentMessage;currentMessage: any;status: MessageStatus;}) => AgentMessage｜-｜-｜ | transformStream | Optional transform function for processing stream data | `XStreamOptions<Output>['transformStream']` | - | - | | abortController | `AbortController`,used to control the stream state| (abortController: AbortController) => void| - | - |
+| (info: {originMessage?: AgentMessage;currentMessage: any;status: MessageStatus;}) => AgentMessage｜-｜-｜ | transformStream | Optional transform function for processing stream data | `XStreamOptions<Output>['transformStream']` | - | - | | resolveAbortController | `AbortController`,used to control the stream state| (abortController: AbortController) => void| - | - |
 
 ### XChatConfigReturnType
 

@@ -34,7 +34,13 @@ const App = () => {
   // Chat messages
   const { onRequest, messages } = useXChat({
     agent,
-    requestFallback: () => {
+    requestFallback: (_, { error }) => {
+      if (error.name === 'AbortError') {
+        return {
+          content: 'Request is aborted',
+          role: 'assistant',
+        };
+      }
       return {
         content: 'Request failed, please try again!',
         role: 'assistant',
@@ -65,7 +71,7 @@ const App = () => {
         role: 'assistant',
       };
     },
-    abortController: (controller) => {
+    resolveAbortController: (controller) => {
       abortController.current = controller;
     },
   });

@@ -37,7 +37,7 @@ export interface XChatConfig<
     status: MessageStatus;
   }) => AgentMessage;
   transformStream?: XStreamOptions<AgentMessage>['transformStream'];
-  abortController?: (abortController: AbortController) => void;
+  resolveAbortController?: (abortController: AbortController) => void;
 }
 
 export interface MessageInfo<Message extends SimpleType> {
@@ -88,7 +88,7 @@ export default function useXChat<
     parser,
     transformMessage,
     transformStream,
-    abortController,
+    resolveAbortController,
   } = config;
 
   // ========================= Agent Messages =========================
@@ -275,7 +275,7 @@ export default function useXChat<
           }
         },
         onStream: (controller) => {
-          abortController?.(controller);
+          resolveAbortController?.(controller);
         },
       },
       transformStream,
