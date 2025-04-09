@@ -20,6 +20,7 @@ demo:
 
 <!-- prettier-ignore -->
 <code src="./demo/preset.tsx">预设请求</code>
+<code src="./demo/requestParams.tsx">自定义入参</code>
 <code src="./demo/custom.tsx">自定义请求</code>
 <code src="./demo/model.tsx">模型接入</code>
 
@@ -72,7 +73,7 @@ export type RequestFn<Message> = (
 
 ### Agent
 
-| 属性         | 说明                        | 类型          | 版本 |
-| ------------ | --------------------------- | ------------- | ---- |
-| request      | 调用 `useXAgent` 配置的请求 | RequestFn     |      |
-| isRequesting | 是否正在请求                | () => boolean |      |
+| 属性 | 说明 | 类型 | 版本 |
+| --- | --- | --- | --- |
+| request | 调用 `useXAgent` 配置的请求，[详情](https://x.ant.design/components/x-request) | RequestFn |  |
+| isRequesting | 是否正在请求 | () => boolean |  |
