@@ -37,6 +37,7 @@ export interface XChatConfig<
     status: MessageStatus;
   }) => AgentMessage;
   transformStream?: XStreamOptions<AgentMessage>['transformStream'];
+  abortController?: (abortController: AbortController) => void;
 }
 
 export interface MessageInfo<Message extends SimpleType> {
@@ -87,6 +88,7 @@ export default function useXChat<
     parser,
     transformMessage,
     transformStream,
+    abortController,
   } = config;
 
   // ========================= Agent Messages =========================
@@ -250,7 +252,6 @@ export default function useXChat<
         onError: async (error: Error) => {
           if (requestFallback) {
             let fallbackMsg: AgentMessage;
-
             // Update as error
             if (typeof requestFallback === 'function') {
               // typescript has bug that not get real return type when use `typeof function` check
@@ -272,6 +273,9 @@ export default function useXChat<
               return ori.filter((info) => info.id !== loadingMsgId && info.id !== updatingMsgId);
             });
           }
+        },
+        onStream: (controller) => {
+          abortController?.(controller);
         },
       },
       transformStream,

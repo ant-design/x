@@ -1,12 +1,16 @@
 import { LoadingOutlined, TagsOutlined } from '@ant-design/icons';
 import { ThoughtChain, useXAgent } from '@ant-design/x';
 import type { ThoughtChainItem } from '@ant-design/x';
-import { Button, Descriptions, Splitter } from 'antd';
-import React from 'react';
+import { Button, Descriptions, Flex, Splitter, Typography } from 'antd';
+import React, { useRef, useState } from 'react';
+
+const { Paragraph } = Typography;
 
 const BASE_URL = 'https://api.siliconflow.cn/v1/chat/completions';
 const MODEL = 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B';
 const API_KEY = 'Bearer sk-ravoadhrquyrkvaqsgyeufqdgphwxfheifujmaoscudjgldr';
+/** 🔥🔥 Its dangerously! */
+// dangerouslyApiKey: API_KEY
 
 interface YourMessageType {
   role: string;
@@ -14,19 +18,22 @@ interface YourMessageType {
 }
 
 const App = () => {
-  const [status, setStatus] = React.useState<ThoughtChainItem['status']>();
-  const [lines, setLines] = React.useState<any[]>([]);
-  const [message, setMessage] = React.useState<string>('');
+  const [status, setStatus] = useState<string>('');
+  const [thoughtChainStatus, setThoughtChainStatus] = useState<ThoughtChainItem['status']>();
+  const [lines, setLines] = useState<any[]>([]);
+  const [message, setMessage] = useState<string>('');
 
   const [agent] = useXAgent<YourMessageType>({
     baseURL: BASE_URL,
     model: MODEL,
     dangerouslyApiKey: API_KEY,
   });
+  const abortController = useRef<AbortController>(null);
 
-  async function request() {
+  const request = () => {
     setMessage('');
     setLines([]);
+    setThoughtChainStatus('pending');
     setStatus('pending');
     agent.request(
       {
@@ -34,17 +41,22 @@ const App = () => {
         stream: true,
       },
       {
-        onSuccess: (messages) => {
+        onSuccess: () => {
           setStatus('success');
-          console.log('onSuccess', messages);
+          setThoughtChainStatus('success');
         },
         onError: (error) => {
-          setStatus('error');
-          console.error('onError', error);
+          if (error.name === 'AbortError') {
+            setStatus('abort');
+          }
+          setThoughtChainStatus('error');
         },
         onUpdate: (msg) => {
           setLines((pre) => [...pre, msg]);
           setMessage((pre) => pre + msg);
+        },
+        onStream: (controller) => {
+          abortController.current = controller;
         },
       },
       new TransformStream<string, any>({
@@ -63,28 +75,40 @@ const App = () => {
         },
       }),
     );
-  }
+  };
+
+  const abort = () => {
+    abortController?.current?.abort?.();
+  };
+
   return (
     <Splitter>
       <Splitter.Panel>
-        <Button type="primary" disabled={status === 'pending'} onClick={request}>
-          Agent Request
-        </Button>
-        <p>{message}</p>
+        <Splitter layout="vertical">
+          <Splitter.Panel>
+            <Flex gap="small">
+              <Button type="primary" disabled={status === 'pending'} onClick={request}>
+                Agent Request
+              </Button>
+              <Button type="primary" disabled={status !== 'pending'} onClick={abort}>
+                Agent Abort
+              </Button>
+            </Flex>
+          </Splitter.Panel>
+          <Splitter.Panel>
+            <Paragraph>{message}</Paragraph>
+          </Splitter.Panel>
+        </Splitter>
       </Splitter.Panel>
-
       <Splitter.Panel>
         <ThoughtChain
           style={{ marginLeft: 16 }}
           items={[
             {
               title: 'Agent Request Log',
-              status: status,
+              status: thoughtChainStatus,
               icon: status === 'pending' ? <LoadingOutlined /> : <TagsOutlined />,
-              description:
-                status === 'error' &&
-                agent.config.baseURL === BASE_URL &&
-                'Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.',
+              description: `request ${status}`,
               content: (
                 <Descriptions column={1}>
                   <Descriptions.Item label="Status">{status || '-'}</Descriptions.Item>

@@ -55,7 +55,8 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| onSuccess | Callback for successful. | `(messages: Output[]) => void` | - | - |
-| onError | Callback for error handling. | `(error: Error) => void` | - | - |
-| onUpdate | Callback for message updates. | `(message: Output) => void` | - | - |
+| onSuccess | Callback for successful | `(messages: Output[]) => void` | - | - |
+| onError | Callback for error handling | `(error: Error) => void` | - | - |
+| onUpdate | Callback for message updates | `(message: Output) => void` | - | - |
+| onStream | Callback for stream controller | `(abortController: AbortController) => void` | - | - |
 | transformStream | Optional transform function for processing stream data | `XStreamOptions<Output>['transformStream']` | - | - |

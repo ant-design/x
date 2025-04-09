@@ -20,11 +20,8 @@ Use Agent to manage conversation data and produce data for page rendering.
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">Basic</code>
 <code src="./demo/stream.tsx">Streaming</code>
-<code src="./demo/stream-cancel.tsx">Interrupt the output</code>
 <code src="./demo/suggestions.tsx">Multiple Suggestion</code>
 <code src="./demo/model.tsx">Model Access</code>
-
-## API
 
 ## API
 
@@ -43,6 +40,9 @@ type useXChat<AgentMessage, ParsedMessage = AgentMessage> = (
 | parser | Convert AgentMessage to ParsedMessage for consumption. If not set, AgentMessage will be consumed directly. Supports converting one AgentMessage to multiple ParsedMessages | (message: AgentMessage) => BubbleMessage \| BubbleMessage[] | - | - |
 | requestFallback | Fallback when request fails, not provided will not be displayed | AgentMessage \| () => AgentMessage | - | - |
 | requestPlaceholder | Show the placeholder information when requesting, not provided will not be displayed | AgentMessage \| () => AgentMessage | - | - |
+| transformMessage | The `messages` can be converted when updating data, and will also be updated to `messages` |
+
+| (info: {originMessage?: AgentMessage;currentMessage: any;status: MessageStatus;}) => AgentMessage｜-｜-｜ | transformStream | Optional transform function for processing stream data | `XStreamOptions<Output>['transformStream']` | - | - | | abortController | `AbortController`,used to control the stream state| (abortController: AbortController) => void| - | - |
 
 ### XChatConfigReturnType
 

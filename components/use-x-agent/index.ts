@@ -15,6 +15,7 @@ export type RequestFn<Message> = (
     onUpdate: (message: Message) => void;
     onSuccess: (message: Message) => void;
     onError: (error: Error) => void;
+    onStream?: (abortController: AbortController) => void;
   },
   transformStream?: XStreamOptions<Message>['transformStream'],
 ) => void;
@@ -49,7 +50,7 @@ export class XAgent<Message = string> {
 
   public request: RequestFn<Message> = (info, callbacks, transformStream) => {
     const { request } = this.config;
-    const { onUpdate, onSuccess, onError } = callbacks;
+    const { onUpdate, onSuccess, onError, onStream } = callbacks;
 
     const id = uuid;
     uuid += 1;
@@ -58,6 +59,11 @@ export class XAgent<Message = string> {
     request?.(
       info,
       {
+        onStream: (abortController) => {
+          if (this.requestingMap[id]) {
+            onStream?.(abortController);
+          }
+        },
         // Status should be unique.
         // One get success or error should not get more message
         onUpdate: (message) => {

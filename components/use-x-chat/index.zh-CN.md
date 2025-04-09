@@ -21,7 +21,6 @@ demo:
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">基本</code>
 <code src="./demo/stream.tsx">流式输出</code>
-<code src="./demo/stream-cancel.tsx">打断输出</code>
 <code src="./demo/suggestions.tsx">多项建议</code>
 <code src="./demo/model.tsx">模型接入</code>
 
@@ -42,6 +41,9 @@ type useXChat<AgentMessage, ParsedMessage = AgentMessage> = (
 | parser | 将 AgentMessage 转换成消费使用的 ParsedMessage，不设置时则直接消费 AgentMessage。支持将一条 AgentMessage 转换成多条 ParsedMessage | (message: AgentMessage) => BubbleMessage \| BubbleMessage[] | - | - |
 | requestFallback | 请求失败的兜底信息，不提供则不会展示 | AgentMessage \| () => AgentMessage | - | - |
 | requestPlaceholder | 请求中的占位信息，不提供则不会展示 | AgentMessage \| () => AgentMessage | - | - |
+| transformMessage | 可在更新数据时对`messages`做转换，同时会更新到`messages` | (info: {originMessage?: AgentMessage;currentMessage: any;status: MessageStatus;}) => AgentMessage｜-｜-｜ |
+| transformStream | 可选的转换函数，用于处理流数据 | `XStreamOptions<Output>['transformStream']` | - | - |
+| abortController | `AbortController` 控制器，用于控制流状态 | (abortController: AbortController) => void｜ - | - |
 
 ### XChatConfigReturnType
 

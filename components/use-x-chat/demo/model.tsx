@@ -1,7 +1,7 @@
 import { UserOutlined } from '@ant-design/icons';
 import { Bubble, Sender, useXAgent, useXChat } from '@ant-design/x';
 import { Flex, type GetProp } from 'antd';
-import React from 'react';
+import React, { useRef } from 'react';
 
 const BASE_URL = 'https://api.siliconflow.cn/v1/chat/completions';
 const MODEL = 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B';
@@ -30,7 +30,7 @@ const App = () => {
     model: MODEL,
     dangerouslyApiKey: API_KEY,
   });
-
+  const abortController = useRef<AbortController>(null);
   // Chat messages
   const { onRequest, messages } = useXChat({
     agent,
@@ -65,6 +65,9 @@ const App = () => {
         role: 'assistant',
       };
     },
+    abortController: (controller) => {
+      abortController.current = controller;
+    },
   });
   return (
     <Flex vertical gap="middle">
@@ -80,6 +83,9 @@ const App = () => {
       <Sender
         loading={agent.isRequesting()}
         value={content}
+        onCancel={() => {
+          abortController?.current?.abort?.();
+        }}
         onChange={setContent}
         onSubmit={(nextContent) => {
           onRequest({
