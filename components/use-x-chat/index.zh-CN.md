@@ -56,7 +56,7 @@ type useXChat<AgentMessage, ParsedMessage = AgentMessage> = (
 
 ### RequestParams
 
-继承 [XRequestParams](http://localhost:8001/components/x-request#xrequestparams)。
+继承 [XRequestParams](https://x.ant.design/components/x-request#xrequestparams)。
 
 | 属性    | 说明           | 类型         | 默认值 | 版本 |
 | ------- | -------------- | ------------ | ------ | ---- |

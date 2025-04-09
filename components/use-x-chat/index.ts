@@ -1,5 +1,6 @@
 import { useEvent } from 'rc-util';
 import React from 'react';
+import { AnyObject } from '../_util/type';
 import { XAgent } from '../use-x-agent';
 import { XRequestParams } from '../x-request';
 import { XStreamOptions } from '../x-stream';
@@ -54,9 +55,9 @@ export type RequestResultObject<Message> = {
   status: MessageStatus;
 };
 
-export type RequestParams<Message> = XRequestParams & {
+interface RequestParams<Message> extends XRequestParams, AnyObject {
   message: Message;
-};
+}
 
 export type RequestResult<Message extends SimpleType> =
   | Message

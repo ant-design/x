@@ -53,7 +53,7 @@ type useXChat<AgentMessage, ParsedMessage = AgentMessage> = (
 
 ### RequestParams
 
-For more properties, see [XRequestParams](http://localhost:8001/components/x-request#xrequestparams).
+For more properties, see [XRequestParams](https://x.ant.design/components/x-request#xrequestparams).
 
 | Property | Description             | Type         | Default | Version |
 | -------- | ----------------------- | ------------ | ------- | ------- |
