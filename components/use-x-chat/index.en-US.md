@@ -48,7 +48,7 @@ type useXChat<AgentMessage, ParsedMessage = AgentMessage> = (
 | --- | --- | --- | --- | --- |
 | messages | Current managed messages content | AgentMessages[] | - | - |
 | parsedMessages | Parsed messages by `parser` api | ParsedMessages[] | - | - |
-| onRequest | Create a message and trigger a request | (requestParams: AgentMessage \| RequestParams) => void | - | - |
+| onRequest | Create a message and trigger a request, If there is no data with `key` as` message`, the entire data will be processed as a message | (requestParams: AgentMessage \| RequestParams) => void | - | - |
 | setMessages | Modify messages directly without triggering requests | (messages: { message, status }[]) => void | - | - |
 
 ### RequestParams
