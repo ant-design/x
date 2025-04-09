@@ -9,41 +9,77 @@ interface UseLottieOptions extends Omit<AnimationConfig, 'container' | 'renderer
   path?: string;
 }
 
+// 用于确保 lottie-web 只加载一次
+let lottiePromise: Promise<LottiePlayer> | null = null;
+
+const loadLottie = async (): Promise<LottiePlayer> => {
+  if (!lottiePromise) {
+    lottiePromise = new Promise((resolve, reject) => {
+      if ((window as any)?.lottie) {
+        resolve((window as any).lottie);
+        return;
+      }
+
+      const script = document.createElement('script');
+      script.src =
+        'https://gw.alipayobjects.com/os/lib/lottie-web/5.12.2/build/player/lottie_svg.min.js';
+      script.async = true;
+      script.onload = () => resolve((window as any).lottie);
+      script.onerror = reject;
+      document.body.appendChild(script);
+    });
+  }
+  return lottiePromise;
+};
+
 const useLottie = (options: UseLottieOptions) => {
   const { lazyLoad = true, rootMargin = '200px', disabled = false, ...lottieOptions } = options;
   const stableLottieOptions = React.useMemo(() => lottieOptions, []);
 
   const containerRef = React.useRef<HTMLDivElement>(null);
   const [isIntersected, setIsIntersected] = React.useState(!lazyLoad);
-  const [animationInstance, setAnimationInstance] = React.useState<AnimationItem | null>(null);
+  const animationInstanceRef = React.useRef<AnimationItem | null>(null);
+  const [error, setError] = React.useState<Error | null>(null);
 
   React.useEffect(() => {
     if (disabled) return;
+    let mounted = true;
 
-    let animation: AnimationItem | undefined;
+    const initAnimation = async () => {
+      if (!animationInstanceRef.current && (!lazyLoad || isIntersected)) {
+        if (!containerRef.current) return;
 
-    const lottie: LottiePlayer = (window as any)?.lottie;
+        try {
+          const lottie = await loadLottie();
 
-    if (!animationInstance) {
-      if (!lazyLoad || isIntersected) {
-        if (containerRef.current && lottie) {
-          animation = lottie.loadAnimation({
+          if (!mounted) return;
+
+          const animation = lottie.loadAnimation({
             container: containerRef.current,
+            renderer: 'svg', // 默认使用 SVG 渲染，性能更好
             ...stableLottieOptions,
           });
 
-          setAnimationInstance(animation);
+          animationInstanceRef.current = animation;
+        } catch (err) {
+          if (mounted) {
+            setError(err as Error);
+            console.error('Failed to load Lottie animation:', err);
+          }
         }
       }
-    } else {
-      return () => {
-        if (animation) {
-          animation.destroy();
-          setAnimationInstance(null);
-        }
-      };
-    }
-  }, [isIntersected, lazyLoad, stableLottieOptions, animationInstance, disabled]);
+    };
+
+    initAnimation();
+
+    return () => {
+      mounted = false;
+      if (animationInstanceRef.current) {
+        animationInstanceRef.current.destroy();
+        animationInstanceRef.current = null;
+      }
+    };
+  }, [isIntersected, lazyLoad, stableLottieOptions, disabled]);
 
   React.useEffect(() => {
     if (disabled) return;
@@ -72,9 +108,10 @@ const useLottie = (options: UseLottieOptions) => {
 
   return [
     containerRef,
-    animationInstance,
+    animationInstanceRef.current,
     {
       isIntersected,
+      error,
     },
   ] as const;
 };

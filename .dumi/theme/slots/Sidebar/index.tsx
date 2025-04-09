@@ -3,7 +3,7 @@ import { Col, Menu } from 'antd';
 import { createStyles, useTheme } from 'antd-style';
 import { useSidebarData } from 'dumi';
 import MobileMenu from 'rc-drawer';
-import React, { useContext } from 'react';
+import React from 'react';
 
 import useMenu from '../../../hooks/useMenu';
 import SiteContext from '../SiteContext';
@@ -94,9 +94,9 @@ const useStyle = createStyles(({ token, css }) => {
     mainMenu: css`
       z-index: 1;
       position: sticky;
-      top: ${token.headerHeight + token.contentMarginTop}px;
+      top: ${token.headerHeight}px;
       width: 100%;
-      max-height: calc(100vh - ${token.headerHeight + token.contentMarginTop}px);
+      max-height: calc(100vh - ${token.headerHeight}px);
       overflow: hidden;
       scrollbar-width: thin;
       scrollbar-gutter: stable;
@@ -110,7 +110,7 @@ const useStyle = createStyles(({ token, css }) => {
 
 const Sidebar: React.FC = () => {
   const sidebarData = useSidebarData();
-  const { isMobile, theme } = useContext(SiteContext);
+  const { isMobile, theme } = React.use(SiteContext);
   const { styles } = useStyle();
 
   const [menuItems, selectedKey] = useMenu();
