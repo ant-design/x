@@ -48,7 +48,7 @@ export class XAgent<Message = string> {
     delete this.requestingMap[id];
   }
 
-  public request: RequestFn<Message> = (info, callbacks, transformStream) => {
+  public request: RequestFn<Message> = (info, callbacks, transformStream?) => {
     const { request } = this.config;
     const { onUpdate, onSuccess, onError, onStream } = callbacks;
 

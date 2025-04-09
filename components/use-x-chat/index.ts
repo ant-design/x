@@ -19,6 +19,11 @@ type RequestFallbackFn<Message extends SimpleType> = (
   info: { error: Error; messages: Message[] },
 ) => Message | Promise<Message>;
 
+type TransformMessageFn<Message> = (info: {
+  originMessage?: Message;
+  currentMessage: any;
+  status: MessageStatus;
+}) => Message;
 export interface XChatConfig<
   AgentMessage extends SimpleType = string,
   BubbleMessage extends SimpleType = AgentMessage,
@@ -28,14 +33,9 @@ export interface XChatConfig<
 
   /** Convert agent message to bubble usage message type */
   parser?: (message: AgentMessage) => BubbleMessage | BubbleMessage[];
-
   requestPlaceholder?: AgentMessage | RequestPlaceholderFn<AgentMessage>;
   requestFallback?: AgentMessage | RequestFallbackFn<AgentMessage>;
-  transformMessage?: (info: {
-    originMessage?: AgentMessage;
-    currentMessage: any;
-    status: MessageStatus;
-  }) => AgentMessage;
+  transformMessage?: TransformMessageFn<AgentMessage>;
   transformStream?: XStreamOptions<AgentMessage>['transformStream'];
   resolveAbortController?: (abortController: AbortController) => void;
 }
@@ -148,6 +148,9 @@ export default function useXChat<
   // For agent to use. Will filter out loading and error message
   const getRequestMessages = () => getFilteredMessages(getMessages());
 
+  const getTransformMessage: TransformMessageFn<AgentMessage> = (params) =>
+    typeof transformMessage === 'function' ? transformMessage(params) : params.currentMessage;
+
   const onRequest = useEvent((requestParams: AgentMessage | RequestParams<AgentMessage>) => {
     if (!agent)
       throw new Error(
@@ -200,10 +203,7 @@ export default function useXChat<
 
       if (!msg) {
         // Create if not exist
-        const transformData =
-          typeof transformMessage === 'function'
-            ? transformMessage({ currentMessage: message, status })
-            : message;
+        const transformData = getTransformMessage({ currentMessage: message, status });
         msg = createMessage(transformData, status);
         setMessages((ori) => {
           const oriWithoutPending = ori.filter((info) => info.id !== loadingMsgId);
@@ -215,14 +215,11 @@ export default function useXChat<
         setMessages((ori) => {
           return ori.map((info) => {
             if (info.id === updatingMsgId) {
-              const transformData =
-                typeof transformMessage === 'function'
-                  ? transformMessage({
-                      originMessage: info.message,
-                      currentMessage: message,
-                      status,
-                    })
-                  : message;
+              const transformData = getTransformMessage({
+                originMessage: info.message,
+                currentMessage: message,
+                status,
+              });
               return {
                 ...info,
                 message: transformData,
