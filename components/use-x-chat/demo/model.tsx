@@ -7,6 +7,10 @@ const BASE_URL = 'https://api.siliconflow.cn/v1/chat/completions';
 const MODEL = 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B';
 const API_KEY = 'Bearer sk-ravoadhrquyrkvaqsgyeufqdgphwxfheifujmaoscudjgldr';
 
+/**
+ * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
+ */
+
 type YourMessageType = {
   role: string;
   content: string;
@@ -29,6 +33,7 @@ const App = () => {
     baseURL: BASE_URL,
     model: MODEL,
     dangerouslyApiKey: API_KEY,
+    /** 🔥🔥 Its dangerously! */
   });
   const abortController = useRef<AbortController>(null);
   // Chat messages

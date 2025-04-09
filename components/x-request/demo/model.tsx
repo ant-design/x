@@ -1,43 +1,36 @@
 import { LoadingOutlined, TagsOutlined } from '@ant-design/icons';
-import { ThoughtChain, useXAgent } from '@ant-design/x';
-import type { ThoughtChainItem } from '@ant-design/x';
+import { ThoughtChain, XRequest } from '@ant-design/x';
 import { Button, Descriptions, Flex, Input, Splitter, Typography } from 'antd';
 import React, { useRef, useState } from 'react';
 
-const { Paragraph } = Typography;
+import type { ThoughtChainItem } from '@ant-design/x';
 
+const { Paragraph } = Typography;
 /**
  * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
  */
-
 const BASE_URL = 'https://api.siliconflow.cn/v1/chat/completions';
 const MODEL = 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B';
 const API_KEY = 'Bearer sk-ravoadhrquyrkvaqsgyeufqdgphwxfheifujmaoscudjgldr';
 
-interface YourMessageType {
-  role: string;
-  content: string;
-}
+const exampleRequest = XRequest({
+  baseURL: BASE_URL,
+  model: MODEL,
+  dangerouslyApiKey: API_KEY,
+  /** 🔥🔥 Its dangerously! */
+});
 
 const App = () => {
-  const [status, setStatus] = useState<string>('');
+  const [status, setStatus] = useState<string>();
   const [thoughtChainStatus, setThoughtChainStatus] = useState<ThoughtChainItem['status']>();
-  const [lines, setLines] = useState<any[]>([]);
-  const abortController = useRef<AbortController>(null);
+  const [lines, setLines] = useState<Record<string, string>[]>([]);
   const [questionText, setQuestionText] = useState<string>('hello, who are u?');
+  const abortController = useRef<AbortController>(null);
 
-  const [agent] = useXAgent<YourMessageType>({
-    baseURL: BASE_URL,
-    model: MODEL,
-    dangerouslyApiKey: API_KEY,
-    /** 🔥🔥 Its dangerously! */
-  });
-
-  const request = () => {
-    setLines([]);
-    setThoughtChainStatus('pending');
+  const request = async () => {
     setStatus('pending');
-    agent.request(
+    setLines([]);
+    await exampleRequest.create(
       {
         messages: [{ role: 'user', content: questionText }],
         stream: true,
@@ -60,23 +53,6 @@ const App = () => {
           abortController.current = controller;
         },
       },
-      new TransformStream<string, any>({
-        transform(chunk, controller) {
-          const DEFAULT_KV_SEPARATOR = 'data: ';
-          const separatorIndex = chunk.indexOf(DEFAULT_KV_SEPARATOR);
-          const value = chunk.slice(separatorIndex + DEFAULT_KV_SEPARATOR.length);
-          try {
-            const modalMessage = JSON.parse(value);
-            const content =
-              modalMessage?.choices?.[0].delta?.reasoning_content === null
-                ? ''
-                : modalMessage?.choices?.[0].delta?.reasoning_content;
-            controller.enqueue(content);
-          } catch (error) {
-            controller.enqueue('');
-          }
-        },
-      }),
     );
   };
 
@@ -98,25 +74,24 @@ const App = () => {
               />
               <Flex gap="small">
                 <Button type="primary" disabled={status === 'pending'} onClick={request}>
-                  Agent Request
+                  Request
                 </Button>
                 <Button type="primary" disabled={status !== 'pending'} onClick={abort}>
-                  Agent Abort
+                  Request Abort
                 </Button>
               </Flex>
             </Flex>
           </Splitter.Panel>
           <Splitter.Panel style={{ margin: 16 }}>
-            <Paragraph>{lines.length > 0 && lines.join('')}</Paragraph>
+            <Paragraph>{lines.length > 0 && JSON.stringify(lines)}</Paragraph>
           </Splitter.Panel>
         </Splitter>
       </Splitter.Panel>
-      <Splitter.Panel>
+      <Splitter.Panel style={{ marginLeft: 16 }}>
         <ThoughtChain
-          style={{ marginLeft: 16 }}
           items={[
             {
-              title: 'Agent Request Log',
+              title: 'Request Log',
               status: thoughtChainStatus,
               icon: status === 'pending' ? <LoadingOutlined /> : <TagsOutlined />,
               description: `request ${status}`,
