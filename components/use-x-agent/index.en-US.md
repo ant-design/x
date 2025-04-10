@@ -19,7 +19,9 @@ Connect with the backend model to provide an abstract data flow.
 
 <!-- prettier-ignore -->
 <code src="./demo/preset.tsx">Preset Request</code>
+<code src="./demo/requestParams.tsx">Custom RequestParams</code>
 <code src="./demo/custom.tsx">Custom Request</code>
+<code src="./demo/model.tsx">Model Access</code>
 
 ## API
 
@@ -62,13 +64,15 @@ type RequestFn<Message> = (
     onUpdate: (message: Message) => void;
     onSuccess: (message: Message) => void;
     onError: (error: Error) => void;
+    onStream?: (abortController: AbortController) => void;
   },
+  transformStream?: XStreamOptions<Message>['transformStream'],
 ) => void;
 ```
 
 ### Agent
 
-| Property     | Description                                | Type          | Version |
-| ------------ | ------------------------------------------ | ------------- | ------- |
-| request      | Call the configured request of `useXAgent` | RequestFn     |         |
-| isRequesting | Check if it is requesting                  | () => boolean |         |
+| Property | Description | Type | Version |
+| --- | --- | --- | --- |
+| request | Call the configured request of `useXAgent`,[more](https://x.ant.design/components/x-request) | RequestFn |  |
+| isRequesting | Check if it is requesting | () => boolean |  |
