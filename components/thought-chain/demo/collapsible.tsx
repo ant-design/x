@@ -1,6 +1,6 @@
-import React from 'react';
 import { ThoughtChain } from '@ant-design/x';
 import type { ThoughtChainProps } from '@ant-design/x';
+import React from 'react';
 
 import { Card, Typography } from 'antd';
 
@@ -27,19 +27,27 @@ const mockContent = (
 
 const items: ThoughtChainProps['items'] = [
   {
+    key: 'item-1',
     title: 'Click me to expand the content',
     description: 'Collapsible',
     content: mockContent,
   },
   {
+    key: 'item-2',
     title: 'Click me to expand the content',
     description: 'Collapsible',
     content: mockContent,
   },
 ];
+const collapsible: ThoughtChainProps['collapsible'] = {
+  expandedKeys: ['item-1'],
+  onExpand: (expandedKeys) => {
+    console.log(expandedKeys);
+  },
+};
 
 export default () => (
   <Card style={{ width: 500 }}>
-    <ThoughtChain items={items} collapsible />
+    <ThoughtChain items={items} collapsible={collapsible} />
   </Card>
 );
