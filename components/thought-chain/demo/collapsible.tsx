@@ -46,8 +46,10 @@ const collapsible: ThoughtChainProps['collapsible'] = {
   },
 };
 
-export default () => (
+const App: React.FC = () => (
   <Card style={{ width: 500 }}>
     <ThoughtChain items={items} collapsible={collapsible} />
   </Card>
 );
+
+export default App;
