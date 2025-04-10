@@ -27,8 +27,7 @@ const stopPropagation: React.MouseEventHandler<HTMLSpanElement> = (e) => {
 };
 
 const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
-  const { prefixCls, info, className, direction, onClick, active, menu, actions, ...restProps } =
-    props;
+  const { prefixCls, info, className, direction, onClick, active, menu, ...restProps } = props;
 
   const domProps = pickAttrs(restProps, {
     aria: true,

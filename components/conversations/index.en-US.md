@@ -21,12 +21,11 @@ demo:
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" background="grey">Basic</code>
 <code src="./demo/with-menu.tsx" background="grey">Operations</code>
-<<<<<<< HEAD
-<code src="./demo/actions.tsx" background="grey">Custom actions</code>
-=======
 <code src="./demo/menu-trigger.tsx" background="grey">Custom Operations</code>
-
-> > > > > > > 87246f3304b7a847e273f07fe263b08ac0f4fe18 <code src="./demo/controlled-mode.tsx" background="grey">Controlled Mode</code> <code src="./demo/group.tsx" background="grey">Group</code> <code src="./demo/group-sort.tsx" background="grey">Group Sort</code> <code src="./demo/infinite-load.tsx" background="grey">Scrolling loaded</code>
+<code src="./demo/controlled-mode.tsx" background="grey">Controlled Mode</code> 
+<code src="./demo/group.tsx" background="grey">Group</code>
+<code src="./demo/group-sort.tsx" background="grey">Group Sort</code> 
+<code src="./demo/infinite-load.tsx" background="grey">Scrolling loaded</code>
 
 ## API
 
@@ -41,7 +40,6 @@ Common props ref：[Common props](/docs/react/common-props)
 | items | Data source for conversation list | `Conversation`[] | - | - |
 | onActiveChange | Callback for selection change | (value: string) => void | - | - |
 | menu | Operation menu for conversations | MenuProps \| ((value: `Conversation`) => MenuProps) | - | - |
-| actions | Custom actions | ReactNode \| (oriNode, info: { components:{ menuNode: ReactNode}, value : Conversation }) => ReactNode | - | - |
 | groupable | If grouping is supported, it defaults to the `Conversation.group` field | boolean \| GroupableProps | - | - |
 | styles | Semantic structure styles | Record<'item', React.CSSProperties> | - | - |
 | classNames | Semantic structure class names | Record<'item', string> | - | - |

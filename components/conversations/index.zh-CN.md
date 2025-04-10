@@ -40,7 +40,6 @@ demo:
 | defaultActiveKey | 默认选中值 | string | - | - |
 | items | 会话列表数据源 | `Conversation`[] | - | - |
 | onActiveChange | 选中变更回调 | (value: string) => void | - | - |
-| actions | 自定义操作按钮 | ReactNode \| (oriNode, info: { components:{ menuNode: ReactNode}, value : Conversation }) => ReactNode | - | - |
 | menu | 会话操作菜单 | MenuProps \| ((value: `Conversation`) => MenuProps) | - | - |
 | groupable | 是否支持分组, 开启后默认按 `Conversation.group` 字段分组 | boolean \| GroupableProps | - | - |
 | styles | 语义化结构 style | Record<'item', React.CSSProperties> | - | - |

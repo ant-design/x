@@ -12,7 +12,7 @@ import useGroupable from './hooks/useGroupable';
 import useStyle from './style';
 
 import pickAttrs from 'rc-util/lib/pickAttrs';
-import type { ActionsRender, Conversation, Groupable } from './interface';
+import type { Conversation, Groupable } from './interface';
 
 /**
  * @desc 会话列表组件参数
@@ -49,7 +49,6 @@ export interface ConversationsProps extends React.HTMLAttributes<HTMLUListElemen
    */
   menu?: ConversationsItemProps['menu'] | ((value: Conversation) => ConversationsItemProps['menu']);
 
-  actions?: React.ReactNode | ActionsRender;
   /**
    * @desc 是否支持分组, 开启后默认按 {@link Conversation.group} 字段分组
    * @descEN If grouping is supported, it defaults to the {@link Conversation.group} field
@@ -90,7 +89,6 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
     defaultActiveKey,
     onActiveChange,
     menu,
-    actions,
     styles = {},
     classNames = {},
     groupable,
@@ -167,7 +165,6 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
             direction={direction}
             className={classnames(classNames.item, contextConfig.classNames.item)}
             style={{ ...contextConfig.styles.item, ...styles.item }}
-            actions={actions}
             menu={typeof menu === 'function' ? menu(convInfo) : menu}
             active={mergedActiveKey === convInfo.key}
             onClick={onConversationItemClick}

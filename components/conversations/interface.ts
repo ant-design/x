@@ -70,13 +70,3 @@ export interface Groupable {
    */
   title?: GroupTitleRender;
 }
-
-export type ActionsRender = (
-  ori: React.ReactNode,
-  info: {
-    components: {
-      menuNode: React.ReactNode;
-    };
-    readonly value: Conversation;
-  },
-) => React.ReactNode;

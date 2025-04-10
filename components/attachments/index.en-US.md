@@ -67,10 +67,7 @@ interface PlaceholderType {
 | style | Style Object | React.CSSProperties | - | - |
 | item | Attachment, same as Upload `UploadFile` | Attachment | - | - |
 | onRemove | A callback function, will be executed when removing file button is clicked, remove event will be prevented when the return value is false or a Promise which resolve(false) or reject | (item: Attachment) => boolean \| Promise | - | - |
-
-<<<<<<< HEAD | imageProps | Image config, same as [Image](https://ant.design/components/image) | | ImageProps | - | - | ======= | imageProps | Image config, same as [Image](https://ant.design/components/image) | ImageProps | - | - |
-
-> > > > > > > 87246f3304b7a847e273f07fe263b08ac0f4fe18
+| imageProps | Image config, same as [Image](https://ant.design/components/image) | ImageProps | - | - |
 
 ## Semantic DOM
 
