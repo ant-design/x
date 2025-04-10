@@ -41,6 +41,30 @@ describe('useXChat', () => {
     );
   }
 
+  function DemoForCustomMessage<Message extends SimpleType = string>({
+    request,
+    ...config
+  }: Partial<XChatConfig<Message>> & {
+    request?: RequestFn<Message>;
+  }) {
+    const [agent] = useXAgent<Message>({
+      request: request || requestNeverEnd,
+    });
+
+    const { parsedMessages, onRequest } = useXChat<Message>({ agent, ...config });
+
+    return (
+      <>
+        <pre>{JSON.stringify(parsedMessages)}</pre>
+        <input
+          onChange={(e) => {
+            onRequest({ message: e.target.value as Message, stream: true });
+          }}
+        />
+      </>
+    );
+  }
+
   function getMessages(container: HTMLElement) {
     return JSON.parse(container.querySelector('pre')!.textContent!);
   }
@@ -249,7 +273,6 @@ describe('useXChat', () => {
     const { container } = render(
       <Demo request={requestNeverEnd} transformStream={transformStream} />,
     );
-
     fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
 
     expect(requestNeverEnd).toHaveBeenCalledWith(
@@ -263,18 +286,39 @@ describe('useXChat', () => {
 
     expect(getMessages(container)).toEqual([expectMessage('little', 'local')]);
   });
-
-  it('custom require not called resolveAbortController', () => {
+  it('custom require called resolveAbortController', (done) => {
     const transformStream = new TransformStream();
     const resolveAbortController = jest.fn(() => {});
+    const request = jest.fn((_, { onStream }) => {
+      setTimeout(() => {
+        onStream(resolveAbortController);
+      }, 100);
+    });
+
     const { container } = render(
       <Demo
-        request={requestNeverEnd}
+        request={request}
         transformStream={transformStream}
         resolveAbortController={resolveAbortController}
       />,
     );
     fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
     expect(resolveAbortController).not.toHaveBeenCalled();
+    jest.advanceTimersByTime(100);
+    done();
+    expect(resolveAbortController).toHaveBeenCalled();
+  });
+
+  it('custom message type', () => {
+    const transformStream = new TransformStream();
+    const resolveAbortController = jest.fn(() => {});
+    const { container } = render(
+      <DemoForCustomMessage<{ message: string; stream: boolean }>
+        transformStream={transformStream}
+        resolveAbortController={resolveAbortController}
+      />,
+    );
+    fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
+    expect(getMessages(container)).toEqual([expectMessage('little', 'local')]);
   });
 });
