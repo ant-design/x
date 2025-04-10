@@ -33,7 +33,7 @@ export interface SuggestionProps<T = any> {
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   items: SuggestionItem[] | ((info?: T) => SuggestionItem[]);
-  onSelect?: (value: string) => void;
+  onSelect?: (value: string, item: SuggestionItem) => void;
   block?: boolean;
   styles?: Partial<Record<string, React.CSSProperties>>;
   classNames?: Partial<Record<string, string>>;
@@ -107,9 +107,9 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
     );
   };
 
-  const onInternalChange = (valuePath: string[]) => {
+  const onInternalChange = (valuePath: string[], selectedOptions: SuggestionItem[]) => {
     if (onSelect) {
-      onSelect(valuePath[valuePath.length - 1]);
+      onSelect(valuePath[valuePath.length - 1], selectedOptions[valuePath.length - 1]);
     }
     triggerOpen(false);
   };

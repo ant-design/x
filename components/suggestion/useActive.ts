@@ -1,6 +1,6 @@
 import { useEvent } from 'rc-util';
-import type { SuggestionItem } from '.';
 import React from 'react';
+import type { SuggestionItem } from '.';
 
 /**
  * Since Cascader not support ref active, we use `value` to mock the active item.
@@ -9,7 +9,7 @@ export default function useActive(
   items: SuggestionItem[],
   open: boolean,
   rtl: boolean,
-  onSelect: (value: string[]) => void,
+  onSelect: (value: string[], options: SuggestionItem[]) => void,
   onCancel: () => void,
 ) {
   const [activePaths, setActivePaths] = React.useState<string[]>([]);
@@ -17,7 +17,6 @@ export default function useActive(
   /** Get items by column index */
   const getItems = (colIndex: number, paths = activePaths) => {
     let currentItems = items;
-
     for (let i = 0; i < colIndex - 1; i += 1) {
       const activePath = paths[i];
       const activeItem = currentItems.find((item) => item.value === activePath);
@@ -104,7 +103,7 @@ export default function useActive(
       case 'Enter':
         // Submit if not have children
         if (!getItems(activePaths.length + 1).length) {
-          onSelect(getValues(activePaths));
+          onSelect(getValues(activePaths), getItems(activePaths.length, activePaths));
         }
         e.preventDefault();
         break;
