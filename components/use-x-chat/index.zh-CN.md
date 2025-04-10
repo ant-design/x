@@ -34,6 +34,7 @@ type useXChat<AgentMessage, ParsedMessage = AgentMessage> = (
 
 ### XChatConfig
 
+<!-- prettier-ignore -->
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
 | agent | 通过 `useXAgent` 生成的 `agent`，当使用 `onRequest` 方法时, `agent` 参数是必需的。 | XAgent | - | - |
@@ -41,9 +42,9 @@ type useXChat<AgentMessage, ParsedMessage = AgentMessage> = (
 | parser | 将 AgentMessage 转换成消费使用的 ParsedMessage，不设置时则直接消费 AgentMessage。支持将一条 AgentMessage 转换成多条 ParsedMessage | (message: AgentMessage) => BubbleMessage \| BubbleMessage[] | - | - |
 | requestFallback | 请求失败的兜底信息，不提供则不会展示 | AgentMessage \| () => AgentMessage | - | - |
 | requestPlaceholder | 请求中的占位信息，不提供则不会展示 | AgentMessage \| () => AgentMessage | - | - |
-| transformMessage | 可在更新数据时对`messages`做转换，同时会更新到`messages` | (info: {originMessage?: AgentMessage;currentMessage: any;status: MessageStatus;}) => AgentMessage｜-｜-｜ |
+| transformMessage | 可在更新数据时对`messages`做转换，同时会更新到`messages` | (info: {originMessage?: AgentMessage,currentMessage: any,status: MessageStatus}) => AgentMessage| - | - |
 | transformStream | 可选的转换函数，用于处理流数据 | `XStreamOptions<Output>['transformStream']` | - | - |
-| resolveAbortController | `AbortController` 控制器，用于控制流状态 | (abortController: AbortController) => void｜ - | - |
+| resolveAbortController | `AbortController` 控制器，用于控制流状态 | (abortController: AbortController) => void| - | - |
 
 ### XChatConfigReturnType
 
