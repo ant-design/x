@@ -8,7 +8,7 @@ import { useXProviderContext } from '../x-provider';
 import useStyle from './style';
 import useActive from './useActive';
 
-export type SuggestionItem = {
+export type SuggestionItem<T = Record<string, any>> = {
   label: React.ReactNode;
   value: string;
 
@@ -17,7 +17,7 @@ export type SuggestionItem = {
   children?: SuggestionItem[];
 
   extra?: React.ReactNode;
-};
+} & T;
 
 export interface RenderChildrenProps<T> {
   onTrigger: (info?: T | false) => void;
