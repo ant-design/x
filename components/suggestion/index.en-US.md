@@ -30,10 +30,10 @@ Common props ref：[Common props](/docs/react/common-props)
 | --- | --- | --- | --- | --- |
 | block | Take up the full width | boolean | false | - |
 | children | Custom input box | ({ onTrigger, onKeyDown }) => ReactElement | - | - |
-| items | Suggestion list | SuggestionItem[] \| ((info: T) => SuggestionItem[]) | - | - |
+| items | Suggestion list | SuggestionItem\<T\>[] \| ((info: T) => SuggestionItem\<K\>[]) | - | - |
 | open | Controlled open panel | boolean | - | - |
 | rootClassName | Root element class name | string | - | - |
-| onSelect | Callback when the suggestion item is selected | (value: string) => void | - | - |
+| onSelect | Callback when the suggestion item is selected | (value: string, item: SuggestionItem\<T\>) => void | - | - |
 | onOpenChange | Callback when the panel open state changes | (open: boolean) => void | - | - |
 
 #### onTrigger
@@ -46,13 +46,13 @@ Suggestion accepts generics to customize the parameter type passed to `items` re
 
 ### SuggestionItem
 
-| Property | Description                           | Type             | Default | Version |
-| -------- | ------------------------------------- | ---------------- | ------- | ------- |
-| children | Child item for the suggestion item    | SuggestionItem[] | -       | -       |
-| extra    | Extra content for the suggestion item | ReactNode        | -       | -       |
-| icon     | Icon for the suggestion               | ReactNode        | -       | -       |
-| label    | Content to display for the suggestion | ReactNode        | -       | -       |
-| value    | Value of the suggestion item          | string           | -       | -       |
+| Property | Description                           | Type                  | Default | Version |
+| -------- | ------------------------------------- | --------------------- | ------- | ------- |
+| children | Child item for the suggestion item    | SuggestionItem\<T\>[] | -       | -       |
+| extra    | Extra content for the suggestion item | ReactNode             | -       | -       |
+| icon     | Icon for the suggestion               | ReactNode             | -       | -       |
+| label    | Content to display for the suggestion | ReactNode             | -       | -       |
+| value    | Value of the suggestion item          | string                | -       | -       |
 
 ## Theme Variables (Design Token)
 
