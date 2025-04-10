@@ -3,14 +3,13 @@ import { Affix, Card, Col, Divider, Flex, Input, Row, Tag, Typography } from 'an
 import { createStyles, useTheme } from 'antd-style';
 import { useIntl, useLocation, useSidebarData } from 'dumi';
 import debounce from 'lodash/debounce';
-import React, { memo, useContext, useMemo, useRef, useState } from 'react';
+import React, { memo, useMemo, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 import scrollIntoView from 'scroll-into-view-if-needed';
 
 import Link from '../../common/Link';
 import SiteContext from '../../slots/SiteContext';
 import type { Component } from './ProComponentsList';
-// import proComponentsList from './ProComponentsList';
 
 const useStyle = createStyles(({ token, css }) => ({
   componentsOverviewGroupTitle: css`
@@ -83,7 +82,7 @@ const { Title } = Typography;
 
 const Overview: React.FC = () => {
   const { styles } = useStyle();
-  const { theme } = useContext(SiteContext);
+  const { theme } = React.use(SiteContext);
 
   const data = useSidebarData();
   const [searchBarAffixed, setSearchBarAffixed] = useState<boolean>(false);
@@ -132,15 +131,6 @@ const Overview: React.FC = () => {
             link: child.link,
           })),
         })),
-    // .concat([
-    //   {
-    //     title: locale === 'zh-CN' ? '重型组件' : 'Others',
-    //     children:
-    //       locale === 'zh-CN'
-    //         ? proComponentsList
-    //         : proComponentsList.map((component) => ({ ...component, subtitle: '' })),
-    //   },
-    // ])
     [data, locale],
   );
   return (

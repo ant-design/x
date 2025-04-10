@@ -1,4 +1,3 @@
-import type { MenuProps } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
 
@@ -48,7 +47,7 @@ export interface ConversationsProps extends React.HTMLAttributes<HTMLUListElemen
    * @desc 会话操作菜单
    * @descEN Operation menu for conversations
    */
-  menu?: MenuProps | ((value: Conversation) => MenuProps);
+  menu?: ConversationsItemProps['menu'] | ((value: Conversation) => ConversationsItemProps['menu']);
 
   actions?: React.ReactNode | ActionsRender;
   /**

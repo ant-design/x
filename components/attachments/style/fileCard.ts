@@ -79,6 +79,8 @@ const genFileCardStyle: GenerateStyle<AttachmentsToken> = (token) => {
         width: cardHeight,
         height: cardHeight,
         lineHeight: 1,
+        display: 'flex',
+        alignItems: 'center',
 
         [`&:not(${cardCls}-status-error)`]: {
           border: 0,
@@ -86,9 +88,6 @@ const genFileCardStyle: GenerateStyle<AttachmentsToken> = (token) => {
 
         // Img
         img: {
-          width: '100%',
-          height: '100%',
-          verticalAlign: 'top',
           objectFit: 'cover',
           borderRadius: 'inherit',
         },

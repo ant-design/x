@@ -18,7 +18,6 @@ Often used when chatting.
 ## Examples
 
 <!-- prettier-ignore -->
-<code src="./demo/debug.tsx" debug>debug</code>
 <code src="./demo/basic.tsx">Basic</code>
 <code src="./demo/avatar-and-placement.tsx">Placement and avatar</code>
 <code src="./demo/header-and-footer.tsx">Header and footer</code>
@@ -31,6 +30,8 @@ Often used when chatting.
 <code src="./demo/bubble-custom.tsx">Semantic Custom</code>
 <code src="./demo/list-custom.tsx">Custom List Content</code>
 <code src="./demo/gpt-vis.tsx">Using GPT-Vis to render charts</code>
+<code src="./demo/debug.tsx" debug>debug</code>
+<code src="./demo/debug-list.tsx" debug>debug list</code>
 
 ## API
 

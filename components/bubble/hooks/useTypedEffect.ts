@@ -15,7 +15,6 @@ const useTypedEffect = (
   typingStep: number,
   typingInterval: number,
 ): [typedContent: React.ReactNode | object, isTyping: boolean] => {
-
   const prevContentRef = React.useRef<React.ReactNode | object>('');
 
   const [typingIndex, setTypingIndex] = React.useState<number>(1);
@@ -26,7 +25,11 @@ const useTypedEffect = (
   useLayoutEffect(() => {
     if (!mergedTypingEnabled && isString(content)) {
       setTypingIndex(content.length);
-    } else if (isString(content) && isString(prevContentRef.current) && content.indexOf(prevContentRef.current) !== 0) {
+    } else if (
+      isString(content) &&
+      isString(prevContentRef.current) &&
+      content.indexOf(prevContentRef.current) !== 0
+    ) {
       setTypingIndex(1);
     }
     prevContentRef.current = content;

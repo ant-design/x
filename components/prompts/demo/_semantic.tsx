@@ -85,6 +85,7 @@ const App: React.FC = () => {
   return (
     <Flex vertical>
       <SemanticPreview
+        componentName="Prompts"
         semantics={[
           { name: 'title', desc: locale.title },
           { name: 'list', desc: locale.list },
@@ -96,6 +97,7 @@ const App: React.FC = () => {
       </SemanticPreview>
       <Divider style={{ margin: 0, padding: 0 }} />
       <SemanticPreview
+        componentName="Prompts"
         semantics={[
           { name: 'subList', desc: subLocale.subList },
           { name: 'subItem', desc: subLocale.subItem },

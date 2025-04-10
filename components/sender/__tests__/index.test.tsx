@@ -30,19 +30,22 @@ describe('Sender Component', () => {
 
   it('custom action button', () => {
     const onSubmit = jest.fn();
+    const onSend = jest.fn();
+    const onClear = jest.fn();
     const { container, getByText } = render(
       <Sender
         actions={(_, info) => {
           const { SendButton, ClearButton } = info.components;
           return (
             <div className="bamboo">
-              <SendButton onClick={onSubmit} disabled={false}>
-                SendPrompt
-              </SendButton>
-              <ClearButton disabled />
+              <SendButton onClick={onSend}>SendPrompt</SendButton>
+              <ClearButton onClick={onClear} className="clear-button" disabled={false} />
             </div>
           );
         }}
+        disabled
+        defaultValue="text"
+        onSubmit={onSubmit}
       />,
     );
 
@@ -50,12 +53,16 @@ describe('Sender Component', () => {
     const sendButton = getByText('SendPrompt');
     expect(sendButton).toBeInTheDocument();
 
-    const clearButton = container.querySelector('.bamboo button[disabled]');
+    const clearButton = container.querySelector('.bamboo button.clear-button')!;
     expect(clearButton).toBeInTheDocument();
 
     // check custom onClick
     fireEvent.click(sendButton);
-    expect(onSubmit).toHaveBeenCalled();
+    fireEvent.click(clearButton);
+
+    expect(onSubmit).not.toHaveBeenCalled();
+    expect(onSend).not.toHaveBeenCalled();
+    expect(onClear).toHaveBeenCalled();
   });
 
   it('onSubmit', () => {
@@ -137,6 +144,46 @@ describe('Sender Component', () => {
   it('readOnly', () => {
     const { container } = render(<Sender readOnly />);
     expect(container.querySelector('textarea')).toHaveAttribute('readonly');
+  });
+  describe('footer', () => {
+    it('footer width function', () => {
+      const onSubmit = jest.fn();
+      const { container, getByText } = render(
+        <Sender
+          footer={({ components }) => {
+            const { SendButton, ClearButton } = components;
+            return (
+              <div className="sender-footer-test">
+                <SendButton onClick={onSubmit} disabled={false}>
+                  SendPrompt
+                </SendButton>
+                <ClearButton disabled />
+              </div>
+            );
+          }}
+        />,
+      );
+
+      expect(container.querySelector('.sender-footer-test')).toBeTruthy();
+      // check children render
+      const sendButton = getByText('SendPrompt');
+      expect(sendButton).toBeInTheDocument();
+
+      const clearButton = container.querySelector('.sender-footer-test button[disabled]');
+      expect(clearButton).toBeInTheDocument();
+
+      // check custom onClick
+      fireEvent.click(sendButton);
+      expect(onSubmit).toHaveBeenCalled();
+    });
+    it('footer width reactNode', () => {
+      const { container } = render(
+        <Sender
+          footer={<div className="sender-footer-test-reactNode">footer width reactNode</div>}
+        />,
+      );
+      expect(container.querySelector('.sender-footer-test-reactNode')).toBeTruthy();
+    });
   });
 
   describe('paste events', () => {

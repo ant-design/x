@@ -1,20 +1,23 @@
 import { EllipsisOutlined } from '@ant-design/icons';
 import { Dropdown, Tooltip, Typography } from 'antd';
-import classnames from 'classnames';
-import React, { useEffect } from 'react';
-
 import type { MenuProps } from 'antd';
+import classnames from 'classnames';
+import React, { useMemo } from 'react';
+
 import type { DirectionType } from 'antd/es/config-provider';
 import pickAttrs from 'rc-util/lib/pickAttrs';
-import type { ActionsRender, Conversation } from './interface';
+import type { Conversation } from './interface';
 
 export interface ConversationsItemProps
   extends Omit<React.HTMLAttributes<HTMLLIElement>, 'onClick'> {
   info: Conversation;
   prefixCls?: string;
   direction?: DirectionType;
-  menu?: MenuProps;
-  actions?: React.ReactNode | ActionsRender;
+  menu?: MenuProps & {
+    trigger?:
+      | React.ReactNode
+      | ((conversation: Conversation, info: { originNode: React.ReactNode }) => React.ReactNode);
+  };
   active?: boolean;
   onClick?: (info: Conversation) => void;
 }
@@ -64,45 +67,23 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
   };
 
   // ============================ Menu ============================
-  const menuNode = (
-    <Dropdown
-      menu={menu}
-      placement={direction === 'rtl' ? 'bottomLeft' : 'bottomRight'}
-      trigger={['click']}
-      disabled={disabled}
-      onOpenChange={onOpenChange}
-    >
-      {React.isValidElement(menu?.icon) ? (
-        menu.icon
-      ) : (
-        <EllipsisOutlined
-          onClick={stopPropagation}
-          disabled={disabled}
-          className={`${prefixCls}-menu-icon`}
-        />
-      )}
-    </Dropdown>
-  );
 
-  // ============================ Actions ============================
-  let actionNode: React.ReactNode = <></>;
+  const [trigger, dropdownMenu] = useMemo(() => {
+    const { trigger, ...dropdownMenu } = menu || {};
+    return [trigger, dropdownMenu];
+  }, [menu]);
 
-  if (typeof actions === 'function') {
-    actionNode = actions(menuNode, {
-      components: {
-        menuNode,
-      },
-      value: info,
-    });
-  } else if (actions) {
-    actionNode = actions;
-  }
-
-  useEffect(() => {
-    if (!React.isValidElement(actionNode)) {
-      console.error('Action is Valid Element : %s', actionNode);
+  const renderMenuTrigger = (conversation: Conversation) => {
+    const originTriggerNode = (
+      <EllipsisOutlined onClick={stopPropagation} className={`${prefixCls}-menu-icon`} />
+    );
+    if (trigger) {
+      return typeof trigger === 'function'
+        ? trigger(conversation, { originNode: originTriggerNode })
+        : trigger;
     }
-  }, [actionNode]);
+    return originTriggerNode;
+  };
 
   // ============================ Render ============================
   return (
@@ -122,8 +103,17 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
         >
           {info.label}
         </Typography.Text>
-        {actions && !disabled && React.isValidElement(actionNode) && actionNode}
-        {menu && !actions && !disabled && menuNode}
+        {!disabled && menu && (
+          <Dropdown
+            menu={dropdownMenu}
+            placement={direction === 'rtl' ? 'bottomLeft' : 'bottomRight'}
+            trigger={['click']}
+            disabled={disabled}
+            onOpenChange={onOpenChange}
+          >
+            {renderMenuTrigger(info)}
+          </Dropdown>
+        )}
       </li>
     </Tooltip>
   );
