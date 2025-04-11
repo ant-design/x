@@ -62,11 +62,15 @@ const App = () => {
       let currentText = '';
       let originText = '';
       if (status === 'loading' && currentMessage.data && !currentMessage.data.includes('DONE')) {
-        const message = JSON.parse(currentMessage.data);
-        currentText =
-          message?.choices?.[0].delta?.reasoning_content === null
-            ? ''
-            : message?.choices?.[0].delta?.reasoning_content;
+        try {
+          const message = JSON.parse(currentMessage.data);
+          currentText =
+            message?.choices?.[0].delta?.reasoning_content === null
+              ? ''
+              : message?.choices?.[0].delta?.reasoning_content;
+        } catch (e) {
+          console.error('error', e);
+        }
       }
       if (originMessage) {
         originText = originMessage.content || '';
