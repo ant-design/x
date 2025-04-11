@@ -109,7 +109,6 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
     classNames = {},
     styles = {},
   } = React.useContext(ThoughtChainNodeContext);
-  console.log(enableCollapse, expandedKeys, 'enableCollapse');
 
   // ============================ Info ============================
   const id = React.useId();
