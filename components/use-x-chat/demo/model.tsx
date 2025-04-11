@@ -58,16 +58,21 @@ const App = () => {
       };
     },
     transformMessage: (info) => {
-      const { originMessage, currentMessage, status } = info || {};
+      const { originMessage, chunk, status } = info || {};
       let currentText = '';
       let originText = '';
-      if (status === 'loading' && currentMessage.data && !currentMessage.data.includes('DONE')) {
-        const message = JSON.parse(currentMessage.data);
-        currentText =
-          message?.choices?.[0].delta?.reasoning_content === null
-            ? ''
-            : message?.choices?.[0].delta?.reasoning_content;
+      try {
+        if (status === 'loading' && chunk?.data && !chunk?.data.includes('DONE')) {
+          const message = JSON.parse(chunk?.data);
+          currentText =
+            message?.choices?.[0].delta?.reasoning_content === null
+              ? ''
+              : message?.choices?.[0].delta?.reasoning_content;
+        }
+      } catch (error) {
+        console.error(error);
       }
+
       if (originMessage) {
         originText = originMessage.content || '';
       }
