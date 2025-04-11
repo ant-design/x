@@ -13,7 +13,6 @@ const roles: GetProp<typeof Bubble.List, 'roles'> = {
   text: {
     placement: 'start',
     avatar: { icon: <UserOutlined />, style: { background: '#fde3cf' } },
-    typing: true,
   },
   suggestion: {
     placement: 'start',
@@ -54,40 +53,35 @@ type AgentAIMessage = {
 
 type AgentMessage = AgentUserMessage | AgentAIMessage;
 
-type BubbleMessage = {
-  role: string;
-};
-
 const App = () => {
   const [content, setContent] = React.useState('');
 
   // Agent for request
-  const [agent] = useXAgent<AgentMessage>({
+  const [agent] = useXAgent<AgentMessage, { message: AgentMessage }, Record<string, any>>({
     request: async ({ message }, { onSuccess }) => {
       await sleep();
-
       const { content } = message || {};
-
-      onSuccess({
-        type: 'ai',
-        list: [
-          {
-            type: 'text',
-            content: `Do you want?`,
-          },
-          {
-            type: 'suggestion',
-            content: [`Look at: ${content}`, `Search: ${content}`, `Try: ${content}`],
-          },
-        ],
-      });
+      onSuccess([
+        {
+          type: 'ai',
+          list: [
+            {
+              type: 'text',
+              content: `Do you want?`,
+            },
+            {
+              type: 'suggestion',
+              content: [`Look at: ${content}`, `Search: ${content}`, `Try: ${content}`],
+            },
+          ],
+        },
+      ]);
     },
   });
 
   // Chat messages
-  const { onRequest, parsedMessages } = useXChat<AgentMessage, BubbleMessage>({
+  const { onRequest, parsedMessages } = useXChat({
     agent,
-
     defaultMessages: [
       {
         id: 'init',
@@ -107,7 +101,6 @@ const App = () => {
     // Convert AgentMessage to BubbleMessage
     parser: (agentMessages) => {
       const list = agentMessages.content ? [agentMessages] : (agentMessages as AgentAIMessage).list;
-
       return (list || []).map((msg) => ({
         role: msg.type,
         content: msg.content,

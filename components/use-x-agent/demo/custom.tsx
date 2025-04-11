@@ -1,7 +1,8 @@
 import { useXAgent } from '@ant-design/x';
 import { Button, Divider, Form, Input, Typography } from 'antd';
 import React from 'react';
-
+type OutPutType = string;
+type InputType = { message: string };
 const App = () => {
   const [lines, setLines] = React.useState<string[]>([]);
 
@@ -11,16 +12,18 @@ const App = () => {
     setLines((ori) => [...ori, text]);
   };
 
-  const [agent] = useXAgent({
+  const [agent] = useXAgent<string, InputType, OutPutType>({
     request: ({ message }, { onUpdate, onSuccess }) => {
       let times = 0;
-
+      const chunks: OutPutType[] = [];
       const id = setInterval(() => {
         times += 1;
-        onUpdate(`Thinking...(${times}/3)`);
-
+        const chunk = `Thinking...(${times}/3)`;
+        onUpdate(chunk);
+        chunks.push(chunk);
         if (times >= 3) {
-          onSuccess(`It's funny that you ask: ${message}`);
+          onUpdate(`It's funny that you ask: ${message}`);
+          onSuccess(chunks);
           clearInterval(id);
         }
       }, 500);
@@ -32,11 +35,11 @@ const App = () => {
     agent.request(
       { message: question },
       {
-        onUpdate: (message) => {
-          log(`[Agent] Update: ${message}`);
+        onUpdate: (chunk) => {
+          log(`[Agent] Update: ${chunk}`);
         },
-        onSuccess: (message) => {
-          log(`[Agent] Answer: ${message}`);
+        onSuccess: (chunks) => {
+          log(`[Agent] Answer: ${chunks.join(',')}`);
           form.setFieldsValue({ question: '' });
         },
         // Current demo not use error

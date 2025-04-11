@@ -53,16 +53,18 @@ Custom request protocol.
 #### RequestFn
 
 ```tsx | pure
-interface RequestFnInfo<Message> extends Partial<XAgentConfigPreset>, AnyObject {
+type RequestFnInfo<Message, Input> = AnyObject & {
+  [props in keyof Input]: Input[props];
+} & {
   messages?: Message[];
   message?: Message;
-}
+};
 
-type RequestFn<Message> = (
-  info: RequestFnInfo<Message>,
+type RequestFn<Message, Input, Output> = (
+  info: RequestFnInfo<Message, Input>,
   callbacks: {
-    onUpdate: (message: Message) => void;
-    onSuccess: (message: Message) => void;
+    onUpdate: (chunk: Output) => void;
+    onSuccess: (chunks: Output[]) => void;
     onError: (error: Error) => void;
     onStream?: (abortController: AbortController) => void;
   },

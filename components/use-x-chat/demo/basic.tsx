@@ -26,14 +26,12 @@ const App = () => {
   const [content, setContent] = React.useState('');
 
   // Agent for request
-  const [agent] = useXAgent({
+  const [agent] = useXAgent<string, { message: string }, string>({
     request: async ({ message }, { onSuccess, onError }) => {
       await sleep();
-
       mockSuccess = !mockSuccess;
-
       if (mockSuccess) {
-        onSuccess(`Mock success return. You said: ${message}`);
+        onSuccess([`Mock success return. You said: ${message}`]);
       }
 
       onError(new Error('Mock request failed'));

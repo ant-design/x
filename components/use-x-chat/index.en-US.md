@@ -26,9 +26,12 @@ Use Agent to manage conversation data and produce data for page rendering.
 ## API
 
 ```tsx | pure
-type useXChat<AgentMessage, ParsedMessage = AgentMessage> = (
-  config: XChatConfig<AgentMessage, ParsedMessage>,
-) => XChatConfigReturnType;
+type useXChat<
+  AgentMessage,
+  ParsedMessage = AgentMessage,
+  Input = AgentMessage,
+  Output = SSEOutput | AgentMessage,
+> = (config: XChatConfig<AgentMessage, ParsedMessage>) => XChatConfigReturnType;
 ```
 
 ### XChatConfig
@@ -41,7 +44,7 @@ type useXChat<AgentMessage, ParsedMessage = AgentMessage> = (
 | parser | Convert AgentMessage to ParsedMessage for consumption. If not set, AgentMessage will be consumed directly. Supports converting one AgentMessage to multiple ParsedMessages | (message: AgentMessage) => BubbleMessage \| BubbleMessage[] | - | - |
 | requestFallback | Fallback when request fails, not provided will not be displayed | AgentMessage \| () => AgentMessage | - | - |
 | requestPlaceholder | Show the placeholder information when requesting, not provided will not be displayed | AgentMessage \| () => AgentMessage | - | - |
-| transformMessage | The `messages` can be converted when updating data, and will also be updated to `messages` | (info: {originMessage?: AgentMessage,currentMessage: any,status: MessageStatus}) => AgentMessage|-|-| | transformStream | Optional transform function for processing stream data | `XStreamOptions<Output>['transformStream']` | - | - | - | resolveAbortController | `AbortController`,used to control the stream state | (abortController: AbortController) => void | - | - |
+| transformMessage | The `messages` can be converted when updating data, and will also be updated to `messages` |  (info: {originMessage?: AgentMessage,chunk: Output,chunks: Output[],status: MessageStatus}) => AgentMessage|-|-| | transformStream | Optional transform function for processing stream data | `XStreamOptions<Output>['transformStream']` | - | - | - | resolveAbortController | `AbortController`,used to control the stream state | (abortController: AbortController) => void | - | - |
 
 ### XChatConfigReturnType
 

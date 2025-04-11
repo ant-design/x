@@ -208,9 +208,9 @@ const Independent: React.FC = () => {
   );
 
   // ==================== Runtime ====================
-  const [agent] = useXAgent({
+  const [agent] = useXAgent<string, { message: string }, string>({
     request: async ({ message }, { onSuccess }) => {
-      onSuccess(`Mock success return. You said: ${message}`);
+      onSuccess([`Mock success return. You said: ${message}`]);
     },
   });
 
