@@ -2,7 +2,7 @@ import { EllipsisOutlined } from '@ant-design/icons';
 import { Dropdown, Tooltip, Typography } from 'antd';
 import type { MenuProps } from 'antd';
 import classnames from 'classnames';
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import type { DirectionType } from 'antd/es/config-provider';
 import pickAttrs from 'rc-util/lib/pickAttrs';
@@ -17,6 +17,7 @@ export interface ConversationsItemProps
     trigger?:
       | React.ReactNode
       | ((conversation: Conversation, info: { originNode: React.ReactNode }) => React.ReactNode);
+    getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
   };
   active?: boolean;
   onClick?: (info: Conversation) => void;
@@ -67,10 +68,9 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
 
   // ============================ Menu ============================
 
-  const [trigger, dropdownMenu] = useMemo(() => {
-    const { trigger, ...dropdownMenu } = menu || {};
-    return [trigger, dropdownMenu];
-  }, [menu]);
+  const { trigger, ...dropdownMenu } = menu || {};
+
+  const getPopupContainer = dropdownMenu?.getPopupContainer;
 
   const renderMenuTrigger = (conversation: Conversation) => {
     const originTriggerNode = (
@@ -109,6 +109,7 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
             trigger={['click']}
             disabled={disabled}
             onOpenChange={onOpenChange}
+            getPopupContainer={getPopupContainer}
           >
             {renderMenuTrigger(info)}
           </Dropdown>
