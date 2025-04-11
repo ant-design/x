@@ -83,7 +83,7 @@ export default function useXChat<
   AgentMessage extends SimpleType = string,
   ParsedMessage extends SimpleType = AgentMessage,
   Input = AgentMessage,
-  Output = SSEOutput,
+  Output = SSEOutput | AgentMessage,
 >(config: XChatConfig<AgentMessage, ParsedMessage, RequestParams<Input>, Output>) {
   const {
     defaultMessages,
