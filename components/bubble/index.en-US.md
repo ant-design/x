@@ -55,6 +55,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | loadingRender | Customize loading content | () => ReactNode | - |  |
 | messageRender | Customize display content | (content?: string) => ReactNode | - |  |
 | onTypingComplete | Callback when typing effect is completed. If typing is not set, it will be triggered immediately when rendering. | () => void | - |  |
+| extra | Customize extra content | React.ReactNode | - |  |
 
 ### Bubble.List
 
