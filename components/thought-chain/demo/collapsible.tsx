@@ -31,16 +31,18 @@ const items: ThoughtChainProps['items'] = [
     title: 'Click me to expand the content',
     description: 'Collapsible',
     content: mockContent,
+    status: 'success',
   },
   {
     key: 'item-2',
     title: 'Click me to expand the content',
     description: 'Collapsible',
     content: mockContent,
+    status: 'pending',
   },
 ];
 const collapsible: ThoughtChainProps['collapsible'] = {
-  expandedKeys: ['item-1'],
+  expandedKeys: ['item-2'],
   onExpand: (expandedKeys) => {
     console.log(expandedKeys);
   },

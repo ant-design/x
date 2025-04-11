@@ -1,9 +1,9 @@
-import React from 'react';
-import classnames from 'classnames';
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { Avatar, Typography } from 'antd';
-import { RightOutlined, LeftOutlined } from '@ant-design/icons';
+import classnames from 'classnames';
 import CSSMotion from 'rc-motion';
 import pickAttrs from 'rc-util/lib/pickAttrs';
+import React from 'react';
 
 import type { ConfigProviderProps, GetProp } from 'antd';
 import type { CSSMotionProps } from 'rc-motion';
@@ -109,6 +109,7 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
     classNames = {},
     styles = {},
   } = React.useContext(ThoughtChainNodeContext);
+  console.log(enableCollapse, expandedKeys, 'enableCollapse');
 
   // ============================ Info ============================
   const id = React.useId();
