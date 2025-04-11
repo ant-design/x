@@ -21,20 +21,20 @@ describe('useXChat', () => {
     request,
     ...config
   }: Partial<XChatConfig<Message>> & {
-    request?: RequestFn<Message>;
+    request?: RequestFn<Message, Message, Message>;
   }) {
-    const [agent] = useXAgent<Message>({
+    const [agent] = useXAgent({
       request: request || requestNeverEnd,
     });
 
-    const { parsedMessages, onRequest } = useXChat<Message>({ agent, ...config });
+    const { parsedMessages, onRequest } = useXChat({ agent, ...config });
 
     return (
       <>
         <pre>{JSON.stringify(parsedMessages)}</pre>
         <input
           onChange={(e) => {
-            onRequest(e.target.value as Message);
+            onRequest(e.target.value);
           }}
         />
       </>
@@ -45,13 +45,13 @@ describe('useXChat', () => {
     request,
     ...config
   }: Partial<XChatConfig<Message>> & {
-    request?: RequestFn<Message>;
+    request?: RequestFn<Message, Message, Message>;
   }) {
-    const [agent] = useXAgent<Message>({
+    const [agent] = useXAgent({
       request: request || requestNeverEnd,
     });
 
-    const { parsedMessages, onRequest } = useXChat<Message>({ agent, ...config });
+    const { parsedMessages, onRequest } = useXChat({ agent, ...config });
 
     return (
       <>

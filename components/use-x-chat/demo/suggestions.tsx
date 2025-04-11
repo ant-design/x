@@ -53,10 +53,6 @@ type AgentAIMessage = {
 
 type AgentMessage = AgentUserMessage | AgentAIMessage;
 
-type BubbleMessage = {
-  role: string;
-};
-
 const App = () => {
   const [content, setContent] = React.useState('');
 
@@ -84,7 +80,7 @@ const App = () => {
   });
 
   // Chat messages
-  const { onRequest, parsedMessages } = useXChat<AgentMessage, BubbleMessage, AgentMessage>({
+  const { onRequest, parsedMessages } = useXChat({
     agent,
     defaultMessages: [
       {

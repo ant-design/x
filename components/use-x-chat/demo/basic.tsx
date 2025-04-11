@@ -39,7 +39,7 @@ const App = () => {
   });
 
   // Chat messages
-  const { onRequest, messages } = useXChat<string, string, string, string>({
+  const { onRequest, messages } = useXChat({
     agent,
     requestPlaceholder: 'Waiting...',
     requestFallback: 'Mock failed return. Please try again later.',

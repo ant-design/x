@@ -3,14 +3,13 @@ import XRequest from '../x-request';
 
 import { AnyObject } from '../_util/type';
 import { SSEOutput, XStreamOptions } from '../x-stream';
-
-type RequestFnInfo<Message> = AnyObject & {
+interface RequestFnInfo<Message> extends AnyObject {
   messages?: Message[];
   message?: Message;
-};
+}
 
 export type RequestFn<Message, Input, Output> = (
-  info: RequestFnInfo<Message> | Input,
+  info: Input,
   callbacks: {
     onUpdate: (chunk: Output) => void;
     onSuccess: (chunks: Output[]) => void;
@@ -36,7 +35,7 @@ export type XAgentConfig<Message, Input, Output> = Partial<XAgentConfigPreset> &
 let uuid = 0;
 
 /** This is a wrap class to avoid developer can get too much on origin object */
-export class XAgent<Message = string, Input = AnyObject, Output = SSEOutput> {
+export class XAgent<Message = string, Input = RequestFnInfo<Message>, Output = SSEOutput> {
   config: XAgentConfig<Message, Input, Output>;
 
   private requestingMap: Record<number, boolean> = {};
@@ -94,9 +93,11 @@ export class XAgent<Message = string, Input = AnyObject, Output = SSEOutput> {
   }
 }
 
-export default function useXAgent<Message = string, Input = AnyObject, Output = SSEOutput>(
-  config: XAgentConfig<Message, Input, Output>,
-) {
+export default function useXAgent<
+  Message = string,
+  Input = RequestFnInfo<Message>,
+  Output = SSEOutput,
+>(config: XAgentConfig<Message, Input, Output>) {
   const { request, ...restConfig } = config;
   return React.useMemo(
     () =>
