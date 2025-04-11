@@ -22,15 +22,15 @@ import {
   Sender,
   Suggestion,
   Welcome,
-  XRequest,
   useXAgent,
   useXChat,
 } from '@ant-design/x';
 import type { BubbleDataType } from '@ant-design/x/es/bubble/BubbleList';
 import type { Conversation } from '@ant-design/x/es/conversations';
-import { Button, GetProp, GetRef, Image, Popover, message } from 'antd';
+import { Button, GetProp, GetRef, Image, Popover, Space, Spin, message } from 'antd';
 import { createStyles } from 'antd-style';
-import React, { useState } from 'react';
+import dayjs from 'dayjs';
+import React, { useEffect, useRef, useState } from 'react';
 
 const MOCK_SESSION_LIST = [
   {
@@ -82,8 +82,6 @@ const AGENT_PLACEHOLDER = 'Generating content, please wait...';
 const useCopilotStyle = createStyles(({ token, css }) => {
   return {
     copilotChat: css`
-      position: relative;
-      height: 100%;
       display: flex;
       flex-direction: column;
       background: ${token.colorBgContainer};
@@ -97,20 +95,17 @@ const useCopilotStyle = createStyles(({ token, css }) => {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 10px 14px 16px;
+      padding: 0 10px 0 16px;
     `,
     headerTitle: css`
       font-weight: 600;
       font-size: 15px;
     `,
-    headerAction: css`
-      display: flex;
-      align-items: center;
-    `,
     headerButton: css`
       font-size: 18px;
     `,
     conversations: css`
+      width: 300px;
       .ant-conversations-list {
         padding-inline-start: 0;
       }
@@ -127,25 +122,11 @@ const useCopilotStyle = createStyles(({ token, css }) => {
       background: ${token.colorBgTextHover};
       margin-bottom: 16px;
     `,
-    questionTip: css`
-      color: ${token.colorTextDescription};
-      font-size: 14px;
-    `,
-    question: css`
-      height: 42px;
-      border-radius: 12px;
-      margin-top: 12px;
-      display: flex;
-      padding: 0 12px;
-      align-items: center;
-      cursor: pointer;
-      transition: all 0.3s;
-      border: 1px solid ${token.colorBorder};
-      width: fit-content;
-      font-size: 14px;
-      &:hover {
-        opacity: 0.8;
-      }
+    loadingMessage: css`
+      background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
+      background-size: 100% 2px;
+      background-repeat: no-repeat;
+      background-position: bottom;
     `,
     // chatSend 样式
     chatSend: css`
@@ -164,86 +145,92 @@ const useCopilotStyle = createStyles(({ token, css }) => {
   };
 });
 
-interface CopilotChatProps {
+interface CopilotProps {
   copilotOpen: boolean;
   setCopilotOpen: (open: boolean) => void;
 }
 
-const CopilotChat = (props: CopilotChatProps) => {
+const Copilot = (props: CopilotProps) => {
   const { copilotOpen, setCopilotOpen } = props;
   const { styles } = useCopilotStyle();
-  const attachmentsRef = React.useRef<GetRef<typeof Attachments>>(null);
+  const attachmentsRef = useRef<GetRef<typeof Attachments>>(null);
+  const abortController = useRef<AbortController>(null);
 
   // ==================== State ====================
 
-  const [sessionList] = useState<Conversation[]>(MOCK_SESSION_LIST);
+  const [messageHistory, setMessageHistory] = useState<Record<string, any>>({});
+
+  const [sessionList, setSessionList] = useState<Conversation[]>(MOCK_SESSION_LIST);
   const [curSession, setCurSession] = useState(sessionList[0].key);
 
-  const [inputValue, setInputValue] = useState('');
-  const [loading, setLoading] = useState(false);
   const [attachmentsOpen, setAttachmentsOpen] = useState(false);
   const [files, setFiles] = useState<GetProp<AttachmentsProps, 'items'>>([]);
 
+  const [inputValue, setInputValue] = useState('');
+
   // ==================== Runtime ====================
   const [agent] = useXAgent<BubbleDataType>({
-    request: async (params, { onSuccess, onUpdate }) => {
-      let fullContent = '';
-
-      const modelRequest = XRequest({
-        baseURL: 'https://api.siliconflow.cn/v1/chat/completions',
-        model: 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B',
-        dangerouslyApiKey: 'Bearer sk-ravoadhrquyrkvaqsgyeufqdgphwxfheifujmaoscudjgldr',
-      });
-
-      modelRequest.create(
-        {
-          message: params.message,
-          messages: params.messages as Record<string, any>[],
-          stream: true,
-        },
-        {
-          onSuccess: () => {
-            onSuccess({
-              content: fullContent,
-              role: 'assistant',
-            });
-            setLoading(false);
-          },
-          onError: (error) => {
-            console.error('onError', error);
-            setLoading(false);
-          },
-          onUpdate: (msg) => {
-            try {
-              const parsed = JSON.parse(msg?.data);
-              const content = parsed.choices[0].delta.content;
-              if (content) {
-                fullContent += content;
-              }
-              onUpdate({
-                content: fullContent || AGENT_PLACEHOLDER,
-                role: 'assistant',
-              });
-            } catch (err) {
-              console.error('err', err);
-            }
-          },
-        },
-      );
-    },
+    baseURL: 'https://api.siliconflow.cn/v1/chat/completions',
+    model: 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B',
+    dangerouslyApiKey: 'Bearer sk-ravoadhrquyrkvaqsgyeufqdgphwxfheifujmaoscudjgldr',
   });
+  const loading = agent.isRequesting();
 
-  const { messages, onRequest, setMessages } = useXChat<BubbleDataType, BubbleDataType>({
+  const { messages, onRequest, setMessages } = useXChat({
     agent,
-    requestPlaceholder: {
-      content: AGENT_PLACEHOLDER,
+    requestFallback: (_, { error }) => {
+      if (error.name === 'AbortError') {
+        return {
+          content: 'Request is aborted',
+          role: 'assistant',
+        };
+      }
+      return {
+        content: 'Request failed, please try again!',
+        role: 'assistant',
+      };
+    },
+    transformMessage: (info) => {
+      const { originMessage, currentMessage, status } = info || {};
+      let currentText = '';
+      let originText = '';
+      if (status === 'loading' && currentMessage.data && !currentMessage.data.includes('DONE')) {
+        try {
+          const message = JSON.parse(currentMessage.data);
+          currentText =
+            message?.choices?.[0].delta?.reasoning_content === null
+              ? ''
+              : message?.choices?.[0].delta?.reasoning_content;
+        } catch (e) {
+          console.error('error', e);
+        }
+      }
+      if (originMessage) {
+        originText = (originMessage.content as string) || '';
+      }
+      return {
+        content: originText + currentText,
+        role: 'assistant',
+      };
+    },
+    resolveAbortController: (controller) => {
+      abortController.current = controller;
     },
   });
 
   // ==================== Event ====================
   const handleUserSubmit = (val: string) => {
-    onRequest({ content: val, role: 'user' });
-    setLoading(true);
+    onRequest({
+      stream: true,
+      message: { content: val, role: 'user' },
+    });
+
+    // session title mock
+    if (sessionList.find((i) => i.key === curSession)?.label === 'New session') {
+      setSessionList(
+        sessionList.map((i) => (i.key !== curSession ? i : { ...i, label: val?.slice(0, 20) })),
+      );
+    }
   };
 
   const onPasteFile = (_: File, files: FileList) => {
@@ -253,26 +240,28 @@ const CopilotChat = (props: CopilotChatProps) => {
     setAttachmentsOpen(true);
   };
 
-  const onSenderChange = (val: string, onTrigger: (info?: boolean) => void) => {
-    if (val === '/') {
-      onTrigger();
-    } else if (!val) {
-      onTrigger(false);
-    }
-    setInputValue(val);
-  };
-
   // ==================== Nodes ====================
   const ChatHeader = (
     <div className={styles.chatHeader}>
       <div className={styles.headerTitle}>✨ AI Copilot</div>
-      <div className={styles.headerAction}>
+      <Space size={0}>
         <Button
           type="text"
           icon={<PlusOutlined />}
           onClick={() => {
             if (messages?.length) {
-              setMessages([]);
+              const timeNow = dayjs().valueOf().toString();
+              abortController.current?.abort();
+              // The abort execution will trigger an asynchronous requestFallback, which may lead to timing issues.
+              // In future versions, the sessionId capability will be added to resolve this problem.
+              setTimeout(() => {
+                setSessionList([
+                  { key: timeNow, label: 'New session', group: 'Today' },
+                  ...sessionList,
+                ]);
+                setCurSession(timeNow);
+                setMessages([]);
+              }, 100);
             } else {
               message.error('It is now a new conversation.');
             }
@@ -289,7 +278,15 @@ const CopilotChat = (props: CopilotChatProps) => {
               )}
               activeKey={curSession}
               groupable
-              onActiveChange={setCurSession}
+              onActiveChange={async (val) => {
+                abortController.current?.abort();
+                // The abort execution will trigger an asynchronous requestFallback, which may lead to timing issues.
+                // In future versions, the sessionId capability will be added to resolve this problem.
+                setTimeout(() => {
+                  setCurSession(val);
+                  setMessages(messageHistory?.[val] || []);
+                }, 100);
+              }}
               styles={{ item: { padding: '0 8px' } }}
               className={styles.conversations}
             />
@@ -303,7 +300,7 @@ const CopilotChat = (props: CopilotChatProps) => {
           onClick={() => setCopilotOpen(false)}
           className={styles.headerButton}
         />
-      </div>
+      </Space>
     </div>
   );
 
@@ -314,23 +311,14 @@ const CopilotChat = (props: CopilotChatProps) => {
         <Bubble.List
           items={messages?.map((i) => ({
             ...i.message,
-            styles: {
-              content:
-                i.status === 'loading'
-                  ? {
-                      backgroundImage:
-                        'linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%)',
-                      backgroundSize: '100% 2px',
-                      backgroundRepeat: 'no-repeat',
-                      backgroundPosition: 'bottom',
-                    }
-                  : {},
+            classNames: {
+              content: i.status === 'loading' ? styles.loadingMessage : '',
             },
+            typing: i.status === 'loading' ? { step: 5, interval: 20, suffix: <>💗</> } : false,
           }))}
           roles={{
             assistant: {
               placement: 'start',
-              typing: { step: 5, interval: 20 },
               footer: (
                 <div style={{ display: 'flex' }}>
                   <Button type="text" size="small" icon={<ReloadOutlined />} />
@@ -338,6 +326,12 @@ const CopilotChat = (props: CopilotChatProps) => {
                   <Button type="text" size="small" icon={<LikeOutlined />} />
                   <Button type="text" size="small" icon={<DislikeOutlined />} />
                 </div>
+              ),
+              loadingRender: () => (
+                <Space>
+                  <Spin size="small" />
+                  {AGENT_PLACEHOLDER}
+                </Space>
               ),
             },
             user: { placement: 'end' },
@@ -392,7 +386,7 @@ const CopilotChat = (props: CopilotChatProps) => {
       />
     </Sender.Header>
   );
-  const ChatSend = (
+  const ChatSender = (
     <div className={styles.chatSend}>
       <div className={styles.sendAction}>
         <Button
@@ -416,12 +410,17 @@ const CopilotChat = (props: CopilotChatProps) => {
           <Sender
             loading={loading}
             value={inputValue}
-            onChange={(v) => onSenderChange(v, onTrigger)}
+            onChange={(v) => {
+              onTrigger(v === '/');
+              setInputValue(v);
+            }}
             onSubmit={() => {
               handleUserSubmit(inputValue);
               setInputValue('');
             }}
-            onCancel={() => setLoading(false)}
+            onCancel={() => {
+              abortController.current?.abort();
+            }}
             allowSpeech
             placeholder="Ask or input / use skills"
             onKeyDown={onKeyDown}
@@ -449,6 +448,16 @@ const CopilotChat = (props: CopilotChatProps) => {
     </div>
   );
 
+  useEffect(() => {
+    // history mock
+    if (messages?.length) {
+      setMessageHistory({
+        ...messageHistory,
+        [curSession]: messages,
+      });
+    }
+  }, [messages]);
+
   return (
     <div className={styles.copilotChat} style={{ width: copilotOpen ? 400 : 0 }}>
       {/** 对话区 - header */}
@@ -458,7 +467,7 @@ const CopilotChat = (props: CopilotChatProps) => {
       {ChatList}
 
       {/** 对话区 - 输入框 */}
-      {ChatSend}
+      {ChatSender}
     </div>
   );
 };
@@ -466,15 +475,12 @@ const CopilotChat = (props: CopilotChatProps) => {
 const useWorkareaStyle = createStyles(({ token, css }) => {
   return {
     copilotWrapper: css`
-      width: 100%;
       min-width: 1000px;
       height: 100vh;
       display: flex;
-      overflow: hidden;
     `,
     workarea: css`
       flex: 1;
-      height: 100%;
       background: ${token.colorBgLayout};
       display: flex;
       flex-direction: column;
@@ -487,7 +493,6 @@ const useWorkareaStyle = createStyles(({ token, css }) => {
       justify-content: space-between;
       padding: 0 48px 0 28px;
       border-bottom: 1px solid ${token.colorBorder};
-      flex-shrink: 0;
     `,
     headerTitle: css`
       font-weight: 600;
@@ -509,9 +514,7 @@ const useWorkareaStyle = createStyles(({ token, css }) => {
       cursor: pointer;
       font-size: 12px;
       font-weight: 600;
-      line-height: 24px;
       transition: all 0.3s;
-
       &:hover {
         opacity: 0.8;
       }
@@ -535,7 +538,7 @@ const useWorkareaStyle = createStyles(({ token, css }) => {
   };
 });
 
-const Copilot = () => {
+const CopilotDemo = () => {
   const { styles: workareaStyles } = useWorkareaStyle();
 
   // ==================== State =================
@@ -612,9 +615,9 @@ const Copilot = () => {
       </div>
 
       {/** 右侧对话区 */}
-      <CopilotChat copilotOpen={copilotOpen} setCopilotOpen={setCopilotOpen} />
+      <Copilot copilotOpen={copilotOpen} setCopilotOpen={setCopilotOpen} />
     </div>
   );
 };
 
-export default Copilot;
+export default CopilotDemo;
