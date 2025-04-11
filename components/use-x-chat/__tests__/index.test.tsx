@@ -238,7 +238,7 @@ describe('useXChat', () => {
       onUpdate('bamboo');
 
       setTimeout(() => {
-        onSuccess('light');
+        onSuccess(['bamboo']);
       }, 100);
     });
     const { container } = render(<Demo request={request} />);
@@ -252,7 +252,7 @@ describe('useXChat', () => {
     await waitFakeTimer();
     expect(getMessages(container)).toEqual([
       expectMessage('little', 'local'),
-      expectMessage('light', 'success'),
+      expectMessage('bamboo', 'success'),
     ]);
   });
 
