@@ -30,8 +30,8 @@ demo:
 type useXChat<
   AgentMessage,
   ParsedMessage = AgentMessage,
-  Input = AgentMessage,
-  Output = SSEOutput | AgentMessage,
+  Input = RequestParams<AgentMessage>,
+  Output = SSEOutput,
 > = (config: XChatConfig<AgentMessage, ParsedMessage>) => XChatConfigReturnType;
 ```
 

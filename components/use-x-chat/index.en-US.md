@@ -29,8 +29,8 @@ Use Agent to manage conversation data and produce data for page rendering.
 type useXChat<
   AgentMessage,
   ParsedMessage = AgentMessage,
-  Input = AgentMessage,
-  Output = SSEOutput | AgentMessage,
+  Input = RequestParams<AgentMessage>,
+  Output = SSEOutput,
 > = (config: XChatConfig<AgentMessage, ParsedMessage>) => XChatConfigReturnType;
 ```
 
@@ -57,7 +57,7 @@ type useXChat<
 
 ### RequestParams
 
-For more properties, see [XRequestParams](https://x.ant.design/components/x-request#xrequestparams).
+Extends [XRequestParams](https://x.ant.design/components/x-request#xrequestparams).
 
 | Property | Description             | Type         | Default | Version |
 | -------- | ----------------------- | ------------ | ------- | ------- |

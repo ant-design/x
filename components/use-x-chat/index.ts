@@ -2,6 +2,7 @@ import { useEvent } from 'rc-util';
 import React from 'react';
 import { AnyObject } from '../_util/type';
 import type { XAgent } from '../use-x-agent';
+import { XRequestParams } from '../x-request';
 import { SSEOutput, XStreamOptions } from '../x-stream';
 import useSyncState from './useSyncState';
 
@@ -26,7 +27,7 @@ type TransformMessageFn<Message, Output> = (info: {
   status: MessageStatus;
 }) => Message;
 
-interface RequestParams<Message> extends AnyObject {
+interface RequestParams<Message> extends AnyObject, XRequestParams {
   message: Message;
 }
 export interface XChatConfig<
