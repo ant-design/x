@@ -6,4 +6,4 @@ title: Independent
 description: Natural language is dominant.
 ---
 
-<code src="./independent.tsx" background="grey" compact></code>
+<code src="./independent.tsx" title="Independent" compact iframe="600"></code>

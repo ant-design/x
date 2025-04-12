@@ -1,7 +1,7 @@
-import { Col, Flex, Typography } from 'antd';
+import { Col, Flex, Skeleton, Space, Typography } from 'antd';
 import classNames from 'classnames';
 import { FormattedMessage, useRouteMeta } from 'dumi';
-import React, { useContext, useLayoutEffect, useMemo, useState } from 'react';
+import React, { useLayoutEffect, useMemo, useState } from 'react';
 
 import useLayoutState from '../../../hooks/useLayoutState';
 import useLocation from '../../../hooks/useLocation';
@@ -20,10 +20,15 @@ const Footer = React.lazy(() => import('../Footer'));
 const PrevAndNext = React.lazy(() => import('../../common/PrevAndNext'));
 const EditButton = React.lazy(() => import('../../common/EditButton'));
 
+const AvatarPlaceholder: React.FC<{ num?: number }> = ({ num = 6 }) =>
+  Array.from({ length: num }).map<React.ReactNode>((_, i) => (
+    <Skeleton.Avatar size="small" active key={i} style={{ marginInlineStart: i === 0 ? 0 : -8 }} />
+  ));
+
 const Content: React.FC<React.PropsWithChildren> = ({ children }) => {
   const meta = useRouteMeta();
   const { pathname, hash } = useLocation();
-  const { direction } = useContext(SiteContext);
+  const { direction } = React.use(SiteContext);
   const { styles } = useStyle();
 
   const [showDebug, setShowDebug] = useLayoutState(false);
@@ -47,27 +52,29 @@ const Content: React.FC<React.PropsWithChildren> = ({ children }) => {
   const isRTL = direction === 'rtl';
 
   return (
-    <DemoContext.Provider value={contextValue}>
+    <DemoContext value={contextValue}>
       <Col xxl={20} xl={19} lg={18} md={18} sm={24} xs={24}>
         <InViewSuspense fallback={null}>
           <DocAnchor showDebug={showDebug} debugDemos={debugDemos} />
         </InViewSuspense>
         <article className={classNames(styles.articleWrapper, { rtl: isRTL })}>
           {meta.frontmatter?.title ? (
-            <Typography.Title style={{ fontSize: 32, position: 'relative' }}>
-              <Flex gap={8} wrap>
-                <span>{meta.frontmatter?.title}</span>
-                <span>{meta.frontmatter?.subtitle}</span>
-                {!pathname.startsWith('/components/overview') && (
-                  <InViewSuspense fallback={null}>
-                    <EditButton
-                      title={<FormattedMessage id="app.content.edit-page" />}
-                      filename={meta.frontmatter.filename}
-                    />
-                  </InViewSuspense>
-                )}
-              </Flex>
-            </Typography.Title>
+            <Flex justify="space-between">
+              <Typography.Title style={{ fontSize: 32, position: 'relative' }}>
+                <Space>
+                  <span>{meta.frontmatter?.title}</span>
+                  <span>{meta.frontmatter?.subtitle}</span>
+                  {!pathname.startsWith('/components/overview') && (
+                    <InViewSuspense fallback={null}>
+                      <EditButton
+                        title={<FormattedMessage id="app.content.edit-page" />}
+                        filename={meta.frontmatter.filename}
+                      />
+                    </InViewSuspense>
+                  )}
+                </Space>
+              </Typography.Title>
+            </Flex>
           ) : null}
           <InViewSuspense fallback={null}>
             <DocMeta />
@@ -82,10 +89,11 @@ const Content: React.FC<React.PropsWithChildren> = ({ children }) => {
                 component={meta.frontmatter.title}
                 filename={meta.frontmatter.filename}
                 version={meta.frontmatter.tag}
+                designUrl={meta.frontmatter.designUrl}
               />
             )}
           <div style={{ minHeight: 'calc(100vh - 64px)' }}>{children}</div>
-          <InViewSuspense>
+          <InViewSuspense fallback={null}>
             <ColumnCard
               zhihuLink={meta.frontmatter.zhihu_url}
               yuqueLink={meta.frontmatter.yuque_url}
@@ -93,7 +101,7 @@ const Content: React.FC<React.PropsWithChildren> = ({ children }) => {
             />
           </InViewSuspense>
           <div style={{ marginTop: 120 }}>
-            <InViewSuspense fallback={<div style={{ height: 50 }} />}>
+            <InViewSuspense fallback={<AvatarPlaceholder />}>
               <Contributors filename={meta.frontmatter.filename} />
             </InViewSuspense>
           </div>
@@ -103,7 +111,7 @@ const Content: React.FC<React.PropsWithChildren> = ({ children }) => {
         </InViewSuspense>
         <Footer />
       </Col>
-    </DemoContext.Provider>
+    </DemoContext>
   );
 };
 

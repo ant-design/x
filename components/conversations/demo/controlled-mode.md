@@ -1,6 +1,6 @@
 ## zh-CN
 
-使用 `activeKey`、`onChange` 属性，控制当前选中的会话
+使用 `activeKey`、`onChange` 属性，控制当前选中的会话。
 
 ## en-US
 

@@ -1,10 +1,10 @@
-// 用于 color.md 中的颜色对比
-import React from 'react';
-import { TinyColor } from '@ctrl/tinycolor';
+import { FastColor } from '@ant-design/fast-color';
 import { Flex, theme } from 'antd';
 import { createStyles } from 'antd-style';
 import tokenMeta from 'antd/es/version/token-meta.json';
 import classNames from 'classnames';
+// 用于 color.md 中的颜色对比
+import React from 'react';
 
 import useLocale from '../../../hooks/useLocale';
 
@@ -55,7 +55,7 @@ const useStyle = createStyles(({ token, css }) => {
 });
 
 function color2Rgba(color: string) {
-  return `#${new TinyColor(color).toHex8().toUpperCase()}`;
+  return `#${new FastColor(color).toHexString().toUpperCase()}`;
 }
 
 interface ColorCircleProps {

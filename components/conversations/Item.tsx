@@ -1,9 +1,9 @@
 import { EllipsisOutlined } from '@ant-design/icons';
 import { Dropdown, Tooltip, Typography } from 'antd';
+import type { MenuProps } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
 
-import type { MenuProps } from 'antd';
 import type { DirectionType } from 'antd/es/config-provider';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import type { Conversation } from './interface';
@@ -13,7 +13,12 @@ export interface ConversationsItemProps
   info: Conversation;
   prefixCls?: string;
   direction?: DirectionType;
-  menu?: MenuProps;
+  menu?: MenuProps & {
+    trigger?:
+      | React.ReactNode
+      | ((conversation: Conversation, info: { originNode: React.ReactNode }) => React.ReactNode);
+    getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
+  };
   active?: boolean;
   onClick?: (info: Conversation) => void;
 }
@@ -61,6 +66,24 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
     }
   };
 
+  // ============================ Menu ============================
+
+  const { trigger, ...dropdownMenu } = menu || {};
+
+  const getPopupContainer = dropdownMenu?.getPopupContainer;
+
+  const renderMenuTrigger = (conversation: Conversation) => {
+    const originTriggerNode = (
+      <EllipsisOutlined onClick={stopPropagation} className={`${prefixCls}-menu-icon`} />
+    );
+    if (trigger) {
+      return typeof trigger === 'function'
+        ? trigger(conversation, { originNode: originTriggerNode })
+        : trigger;
+    }
+    return originTriggerNode;
+  };
+
   // ============================ Render ============================
   return (
     <Tooltip
@@ -79,19 +102,16 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
         >
           {info.label}
         </Typography.Text>
-        {menu && !disabled && (
+        {!disabled && menu && (
           <Dropdown
-            menu={menu}
+            menu={dropdownMenu}
             placement={direction === 'rtl' ? 'bottomLeft' : 'bottomRight'}
             trigger={['click']}
             disabled={disabled}
             onOpenChange={onOpenChange}
+            getPopupContainer={getPopupContainer}
           >
-            <EllipsisOutlined
-              onClick={stopPropagation}
-              disabled={disabled}
-              className={`${prefixCls}-menu-icon`}
-            />
+            {renderMenuTrigger(info)}
           </Dropdown>
         )}
       </li>

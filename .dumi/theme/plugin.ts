@@ -4,9 +4,9 @@ import path from 'path';
 import createEmotionServer from '@emotion/server/create-instance';
 import type { IApi, IRoute } from 'dumi';
 import ReactTechStack from 'dumi/dist/techStacks/react';
-import sylvanas from 'sylvanas';
+import tsToJs from './utils/tsToJs';
 
-import { dependencies, devDependencies } from '../../package.json';
+import { dependencies, devDependencies, peerDependencies } from '../../package.json';
 
 function extractEmotionStyle(html: string) {
   // copy from emotion ssr
@@ -38,10 +38,11 @@ export const getHash = (str: string, length = 8) =>
 class AntdReactTechStack extends ReactTechStack {
   generatePreviewerProps(...[props, opts]: any) {
     props.pkgDependencyList = { ...devDependencies, ...dependencies };
+    props.pkgPeerDependencies = peerDependencies;
     props.jsx ??= '';
 
     if (opts.type === 'code-block') {
-      props.jsx = opts?.entryPointCode ? sylvanas.parseText(opts.entryPointCode) : '';
+      props.jsx = opts?.entryPointCode ? tsToJs(opts.entryPointCode) : '';
     }
 
     if (opts.type === 'external') {
@@ -53,7 +54,7 @@ class AntdReactTechStack extends ReactTechStack {
       const codePath = opts.fileAbsPath!.replace(/\.\w+$/, '.tsx');
       const code = fs.existsSync(codePath) ? fs.readFileSync(codePath, 'utf-8') : '';
 
-      props.jsx = sylvanas.parseText(code);
+      props.jsx = tsToJs(code);
 
       if (md) {
         // extract description & css style from md file
@@ -126,8 +127,9 @@ class AntdReactTechStack extends ReactTechStack {
 const resolve = (p: string): string => require.resolve(p);
 
 const RoutesPlugin = async (api: IApi) => {
-  // const ssrCssFileName = `ssr-${Date.now()}.css`;
   const chalk = await import('chalk').then((m) => m.default);
+  // const ssrCssFileName = `ssr-${Date.now()}.css`;
+
   const writeCSSFile = (key: string, hashKey: string, cssString: string) => {
     const fileName = `style-${key}.${getHash(hashKey)}.css`;
 

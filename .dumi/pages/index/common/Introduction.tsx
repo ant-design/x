@@ -1,6 +1,7 @@
 import { createStyles } from 'antd-style';
 import React from 'react';
 
+import Link, { type LinkProps } from '../../../theme/common/Link';
 import Container, { type ContainerProps } from './Container';
 import CustomizationProvider from './CustomizationProvider';
 
@@ -102,7 +103,7 @@ export interface IntroductionItem extends Omit<React.HTMLAttributes<HTMLDivEleme
   startColor?: string;
   endColor?: string;
   icon?: string;
-  url?: string;
+  to?: LinkProps['to'];
   header?: React.ReactNode;
 }
 
@@ -123,40 +124,69 @@ const Introduction: React.FC<IntroductionProps> = (props) => {
           gridTemplateColumns: `repeat(${props.column || props.items?.length}, 1fr)`,
         }}
       >
-        {props.items?.map((item) => (
-          <div
-            className={styles.item}
-            key={`${item.title}`}
-            style={props.cardStyle}
-            onClick={item.onClick}
-          >
-            {item.header && (
-              <div className={styles.item_header}>
-                <CustomizationProvider>{item.header}</CustomizationProvider>
+        {props.items?.map((item) => {
+          const itemChildren = (
+            <>
+              {item.header && (
+                <div className={styles.item_header}>
+                  <CustomizationProvider>{item.header}</CustomizationProvider>
+                </div>
+              )}
+              <div className={styles.item_content}>
+                {item.icon && <img className={styles.item_icon} src={item.icon} alt={item.icon} />}
+                <div>
+                  <h3 className={styles.item_title}>
+                    {item.title}
+                    {item.tag && (
+                      <span
+                        className={styles.item_tag}
+                        style={{
+                          background: `linear-gradient(127deg, ${item.startColor || '#fff'} 23%, ${item.endColor || '#fff'} 100%)`,
+                          WebkitBackgroundClip: 'text',
+                        }}
+                      >
+                        {item.tag}
+                      </span>
+                    )}
+                  </h3>
+                  <p className={styles.item_desc}>{item.desc}</p>
+                </div>
               </div>
-            )}
-            <div className={styles.item_content}>
-              {item.icon && <img className={styles.item_icon} src={item.icon} alt={item.icon} />}
-              <div>
-                <h3 className={styles.item_title}>
-                  {item.title}
-                  {item.tag && (
-                    <span
-                      className={styles.item_tag}
-                      style={{
-                        background: `linear-gradient(127deg, ${item.startColor || '#fff'} 23%, ${item.endColor || '#fff'} 100%)`,
-                        WebkitBackgroundClip: 'text',
-                      }}
-                    >
-                      {item.tag}
-                    </span>
-                  )}
-                </h3>
-                <p className={styles.item_desc}>{item.desc}</p>
-              </div>
+            </>
+          );
+          // 如果 to 是以 http 开头，使用 <a> 标签而不是 <Link>
+          if (item.to && typeof item.to === 'string' && item.to.startsWith('http')) {
+            return (
+              <a
+                className={styles.item}
+                key={`${item.title}`}
+                style={props.cardStyle}
+                href={item.to}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {itemChildren}
+              </a>
+            );
+          }
+          if (item.to) {
+            return (
+              <Link
+                className={styles.item}
+                key={`${item.title}`}
+                style={props.cardStyle}
+                to={item.to}
+              >
+                {itemChildren}
+              </Link>
+            );
+          }
+          return (
+            <div className={styles.item} key={`${item.title}`} style={props.cardStyle}>
+              {itemChildren}
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </Container>
   );
