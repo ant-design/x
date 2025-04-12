@@ -321,4 +321,66 @@ describe('useXChat', () => {
     fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
     expect(getMessages(container)).toEqual([expectMessage('little', 'local')]);
   });
+
+  describe('transformMessage', () => {
+    const requestFailed = jest.fn(async (_, { onUpdate, onSuccess }) => {
+      onUpdate({ data: { content: 'bamboo' } });
+      setTimeout(() => {
+        onSuccess([{ data: { content: 'bamboo' } }]);
+      }, 200);
+    });
+
+    const transformMessage = jest.fn((info) => {
+      const { originMessage, chunk } = info || {};
+      if (chunk?.data) {
+        return (originMessage || '') + chunk?.data?.content;
+      }
+      return originMessage;
+    });
+
+    it('with transformMessageFn', async () => {
+      const { container } = render(
+        <Demo
+          request={requestFailed}
+          transformMessage={transformMessage}
+          requestFallback="bamboo"
+        />,
+      );
+      fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
+
+      expect(getMessages(container)).toEqual([
+        expectMessage('little', 'local'),
+        expectMessage('bamboo', 'loading'),
+      ]);
+      await waitFakeTimer();
+      expect(getMessages(container)).toEqual([
+        expectMessage('little', 'local'),
+        expectMessage('bamboo', 'success'),
+      ]);
+    });
+
+    const requestFailedWithUnknownType = jest.fn(async (_, { onUpdate, onSuccess }) => {
+      onUpdate('bamboo');
+      setTimeout(() => {
+        onSuccess('bamboo_success');
+      }, 200);
+    });
+
+    it('with unknown type chunks transformMessageFn', async () => {
+      const { container } = render(
+        <Demo request={requestFailedWithUnknownType} requestFallback="bamboo" />,
+      );
+      fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
+
+      expect(getMessages(container)).toEqual([
+        expectMessage('little', 'local'),
+        expectMessage('bamboo', 'loading'),
+      ]);
+      await waitFakeTimer();
+      expect(getMessages(container)).toEqual([
+        expectMessage('little', 'local'),
+        expectMessage('bamboo_success', 'success'),
+      ]);
+    });
+  });
 });

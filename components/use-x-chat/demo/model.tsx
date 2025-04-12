@@ -58,26 +58,21 @@ const App = () => {
       };
     },
     transformMessage: (info) => {
-      const { originMessage, chunk, status } = info || {};
+      const { originMessage, chunk } = info || {};
       let currentText = '';
-      let originText = '';
       try {
-        if (status === 'loading' && chunk?.data && !chunk?.data.includes('DONE')) {
+        if (chunk?.data && !chunk?.data.includes('DONE')) {
           const message = JSON.parse(chunk?.data);
-          currentText =
-            message?.choices?.[0].delta?.reasoning_content === null
-              ? ''
-              : message?.choices?.[0].delta?.reasoning_content;
+          currentText = !message?.choices?.[0].delta?.reasoning_content
+            ? ''
+            : message?.choices?.[0].delta?.reasoning_content;
         }
       } catch (error) {
         console.error(error);
       }
 
-      if (originMessage) {
-        originText = originMessage.content || '';
-      }
       return {
-        content: originText + currentText,
+        content: (originMessage?.content || '') + currentText,
         role: 'assistant',
       };
     },
