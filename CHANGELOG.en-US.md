@@ -26,10 +26,10 @@ tag: vVERSION
 - Conversation
 - 🐛 Fixed style issues of `ul` and `li` in Conversation.[#726](https://github.com/ant-design/x/pull/726) by [@kimteayon](https://github.com/kimteayon)
 - 🆕 Extended `getPopupContainer` for `menu`.[#698](https://github.com/ant-design/x/pull/720) by [@yuxuan-ctrl](https://github.com/yuxuan-ctrl)
-- 🐛 Fixed ThoughtChain 折叠面板无法展开问题.[#720](https://github.com/ant-design/x/pull/720) by [@kimteayon](https://github.com/kimteayon)
-- 🐛 Fixed Attachments 图片展示样式问题.[#708](https://github.com/ant-design/x/pull/708) by [@hy993658052](https://github.com/hy993658052)
+- 🐛 Fixed ThoughtChain Collapse cannot unfold issue.[#720](https://github.com/ant-design/x/pull/720) by [@kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed Attachments image display style issue.[#708](https://github.com/ant-design/x/pull/708) by [@hy993658052](https://github.com/hy993658052)
 - 💄 Refactor Sender,Control the 'disabled' attribute of custom `Actions`.[#666](https://github.com/ant-design/x/pull/666) by [@afc163](https://github.com/afc163)
-- 📖 优化官网站点提升用户体验.[#680](https://github.com/ant-design/x/pull/680) by [@wzc520pyfm](https://github.com/wzc520pyfm) 、[#699](https://github.com/ant-design/x/pull/699) by [@afc163](https://github.com/afc163) 、[#716](https://github.com/ant-design/x/pull/716) by [@afc163](https://github.com/afc163) 、[#686](https://github.com/ant-design/x/pull/686) by [@afc163](https://github.com/afc163) 、[#728](https://github.com/ant-design/x/pull/728) by [@kimteayon](https://github.com/kimteayon)
+- 📖 Enhance the official website to improve user experience.[#680](https://github.com/ant-design/x/pull/680) by [@wzc520pyfm](https://github.com/wzc520pyfm) 、[#699](https://github.com/ant-design/x/pull/699) by [@afc163](https://github.com/afc163) 、[#716](https://github.com/ant-design/x/pull/716) by [@afc163](https://github.com/afc163) 、[#686](https://github.com/ant-design/x/pull/686) by [@afc163](https://github.com/afc163) 、[#728](https://github.com/ant-design/x/pull/728) by [@kimteayon](https://github.com/kimteayon)
 
 ## 1.1.0
 
