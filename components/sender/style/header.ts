@@ -23,6 +23,13 @@ const genSenderHeaderStyle: GenerateStyle<SenderToken> = (token) => {
           paddingInlineEnd: token.paddingXS,
           display: 'flex',
 
+          borderRadius: {
+            _skip_check_: true,
+            value: calc(token.borderRadius).mul(2).equal(),
+          },
+          borderEndStartRadius: 0,
+          borderEndEndRadius: 0,
+
           [`${headerCls}-title`]: {
             flex: 'auto',
           },
