@@ -29,7 +29,7 @@ tag: vVERSION
 - 🐛 Fixed ThoughtChain Collapse cannot unfold issue.[#720](https://github.com/ant-design/x/pull/720) by [@kimteayon](https://github.com/kimteayon)
 - 🐛 Fixed Attachments image display style issue.[#708](https://github.com/ant-design/x/pull/708) by [@hy993658052](https://github.com/hy993658052)
 - 💄 Refactor Sender,Control the 'disabled' attribute of custom `Actions`.[#666](https://github.com/ant-design/x/pull/666) by [@afc163](https://github.com/afc163)
-- 📖 Enhance the official website to improve user experience.[#680](https://github.com/ant-design/x/pull/680) by [@wzc520pyfm](https://github.com/wzc520pyfm) 、[#699](https://github.com/ant-design/x/pull/699) by [@afc163](https://github.com/afc163) 、[#716](https://github.com/ant-design/x/pull/716) by [@afc163](https://github.com/afc163) 、[#686](https://github.com/ant-design/x/pull/686) by [@afc163](https://github.com/afc163) 、[#728](https://github.com/ant-design/x/pull/728) by [@kimteayon](https://github.com/kimteayon)
+- 📖 Enhance the official website to improve user experience.[#680](https://github.com/ant-design/x/pull/680) by [@wzc520pyfm](https://github.com/wzc520pyfm),[#699](https://github.com/ant-design/x/pull/699) by [@afc163](https://github.com/afc163),[#716](https://github.com/ant-design/x/pull/716) by [@afc163](https://github.com/afc163),[#686](https://github.com/ant-design/x/pull/686) by [@afc163](https://github.com/afc163),[#728](https://github.com/ant-design/x/pull/728) by [@kimteayon](https://github.com/kimteayon)
 
 ## 1.1.0
 
