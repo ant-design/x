@@ -18,7 +18,13 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
       gap: token.paddingXXS,
       overflowY: 'auto',
       padding: token.paddingSM,
-
+      margin: 0,
+      listStyle: 'none',
+      'ul, ol': {
+        margin: 0,
+        padding: 0,
+        listStyle: 'none',
+      },
       [`&${componentCls}-rtl`]: {
         direction: 'rtl',
       },
