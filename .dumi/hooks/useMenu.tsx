@@ -110,12 +110,10 @@ const useMenu = (options: UseMenuOptions = {}): readonly [MenuProps['items'], st
       const changelogData = Object.entries(fullData).find(([key]) =>
         key.startsWith('/changelog'),
       )?.[1];
-
       if (changelogData) {
         sidebarItems.splice(1, 0, changelogData[0]);
       }
     }
-
     if (pathname.startsWith('/changelog')) {
       const reactDocData = Object.entries(fullData).find(([key]) =>
         key.startsWith('/docs/react'),
