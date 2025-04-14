@@ -1,5 +1,6 @@
+import { version } from '@ant-design/x';
 import type { MenuProps } from 'antd';
-import { Flex, Tag, version } from 'antd';
+import { Flex, Tag } from 'antd';
 import { createStyles } from 'antd-style';
 import classnames from 'classnames';
 import { useFullSidebarData, useSidebarData } from 'dumi';
@@ -109,10 +110,12 @@ const useMenu = (options: UseMenuOptions = {}): readonly [MenuProps['items'], st
       const changelogData = Object.entries(fullData).find(([key]) =>
         key.startsWith('/changelog'),
       )?.[1];
+
       if (changelogData) {
         sidebarItems.splice(1, 0, changelogData[0]);
       }
     }
+
     if (pathname.startsWith('/changelog')) {
       const reactDocData = Object.entries(fullData).find(([key]) =>
         key.startsWith('/docs/react'),
