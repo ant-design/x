@@ -16,6 +16,21 @@ tag: vVERSION
 
 ---
 
+## 1.1.1
+
+`2025-04-14`
+
+- Bubble.List
+  - 💄 Refactor Bubble.List, reduce unnecessary refreshes during updates.[#479](https://github.com/ant-design/x/pull/479) by [@YumoImer](https://github.com/YumoImer)
+  - 🐛 Fixed scrollbar styles issues of `Bubble.List` under dark theme.[#727](https://github.com/ant-design/x/pull/727) by [@kimteayon](https://github.com/kimteayon)
+- Conversation
+- 🐛 Fixed style issues of `ul` and `li` in Conversation.[#726](https://github.com/ant-design/x/pull/726) by [@kimteayon](https://github.com/kimteayon)
+- 🆕 Extended `getPopupContainer` for `menu`.[#698](https://github.com/ant-design/x/pull/720) by [@yuxuan-ctrl](https://github.com/yuxuan-ctrl)
+- 🐛 Fixed ThoughtChain 折叠面板无法展开问题.[#720](https://github.com/ant-design/x/pull/720) by [@kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed Attachments 图片展示样式问题.[#708](https://github.com/ant-design/x/pull/708) by [@hy993658052](https://github.com/hy993658052)
+- 💄 Refactor Sender,Control the 'disabled' attribute of custom `Actions`.[#666](https://github.com/ant-design/x/pull/666) by [@afc163](https://github.com/afc163)
+- 📖 优化官网站点提升用户体验.[#680](https://github.com/ant-design/x/pull/680) by [@wzc520pyfm](https://github.com/wzc520pyfm) 、[#699](https://github.com/ant-design/x/pull/699) by [@afc163](https://github.com/afc163) 、[#716](https://github.com/ant-design/x/pull/716) by [@afc163](https://github.com/afc163) 、[#686](https://github.com/ant-design/x/pull/686) by [@afc163](https://github.com/afc163) 、[#728](https://github.com/ant-design/x/pull/728) by [@kimteayon](https://github.com/kimteayon)
+
 ## 1.1.0
 
 `2025-03-28`
@@ -24,7 +39,7 @@ tag: vVERSION
   - 🆕 Add `footer` to support custom footer content.[#654](https://github.com/ant-design/x/pull/654) by [@kimteayon](https://github.com/kimteayon)
   - 🆕 Extended `autoSize` to support custom content height.[#637](https://github.com/ant-design/x/pull/637) by [@Zhang-Wei-666](https://github.com/Zhang-Wei-666)
   - 📖 Add the declarations for `onFocus` and `onBlur` types.[#625](https://github.com/ant-design/x/pull/625) by [@aojunhao123](https://github.com/aojunhao123)
-  - 🆕 Extended Conversations `menu.trigger` to support custom menu trigger.[#630](https://github.com/ant-design/x/pull/630) by [@kimteayon](https://github.com/kimteayon)
+- 🆕 Extended Conversations `menu.trigger` to support custom menu trigger.[#630](https://github.com/ant-design/x/pull/630) by [@kimteayon](https://github.com/kimteayon)
 - Attachments
   - 🆕 Extended `ImageProps` to support custom image configuration.[#613](https://github.com/ant-design/x/pull/613) by [@hy993658052 ](https://github.com/hy993658052)
   - 📖 Add Attachments `onRemove` API documentation[#608](https://github.com/ant-design/x/pull/608) by [@kimteayon](https://github.com/kimteayon)
@@ -44,7 +59,7 @@ tag: vVERSION
 - 🐛 Fixed `Attachments`the issue of file initialization display.[#524](https://github.com/ant-design/x/pull/524) by [@ztkuaikuai ](https://github.com/ztkuaikuai)
 - 🐛 Fixed `Conversations`scroll bar issue.[#485](https://github.com/ant-design/x/pull/485) by [@LofiSu](https://github.com/LofiSu)
 - 📖 Improved`Bubble` `typing` reduces unnecessary rendering.[#477](https://github.com/ant-design/x/pull/477) by [@kxcy001123](https://github.com/kxcy001123)
-- 📦 Improved Chat Design X construct [#578](https://github.com/ant-design/x/pull/578)，[#584](https://github.com/ant-design/x/pull/584) by [@kimteayon](https://github.com/kimteayon), [#578](https://github.com/ant-design/x/pull/578) by [@kimteayon](https://github.com/kimteayon),[#587](https://github.com/ant-design/x/pull/587) by [@afc163](https://github.com/afc163)
+- 📦 Improved Chat Design X construct [#578](https://github.com/ant-design/x/pull/578),[#584](https://github.com/ant-design/x/pull/584) by [@kimteayon](https://github.com/kimteayon), [#578](https://github.com/ant-design/x/pull/578) by [@kimteayon](https://github.com/kimteayon),[#587](https://github.com/ant-design/x/pull/587) by [@afc163](https://github.com/afc163)
 - 📖 Enhance the official website to improve user experience.[#484](https://github.com/ant-design/x/pull/484) by [@ztkuaikuai](https://github.com/ztkuaikuai), [#495](https://github.com/ant-design/x/pull/495) by [@ztkuaikuai](https://github.com/ztkuaikuai), [#522](https://github.com/ant-design/x/pull/522) by [@liangchaofei](https://github.com/liangchaofei),[#537](https://github.com/ant-design/x/pull/537) by [@wzc520pyfm](https://github.com/wzc520pyfm),[#553](https://github.com/ant-design/x/pull/553) by [@PeachScript](https://github.com/PeachScript), [#578](https://github.com/ant-design/x/pull/578) by [@kimteayon](https://github.com/kimteayon), [#585](https://github.com/ant-design/x/pull/585) by [@MaricoHan](https://github.com/MaricoHan)
 
 ## 1.0.5

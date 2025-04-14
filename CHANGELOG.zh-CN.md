@@ -15,6 +15,21 @@ tag: vVERSION
 
 ---
 
+## 1.1.1
+
+`2025-04-14`
+
+- Bubble.List
+  - 💄 优化 Bubble.List更新时减少不必要的刷新。[#479](https://github.com/ant-design/x/pull/479) 由 [@YumoImer](https://github.com/YumoImer) 提交
+  - 🐛 修复 Bubble.List 暗黑主题下滚动条样式不兼容问题。[#727](https://github.com/ant-design/x/pull/727) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- Conversation
+- 🐛 修复 Conversation内ul和li的样式问题。[#726](https://github.com/ant-design/x/pull/726) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- 🆕 新增 `menu` 的 `getPopupContainer`的实现。[#698](https://github.com/ant-design/x/pull/720) 由 [@yuxuan-ctrl](https://github.com/yuxuan-ctrl) 提交
+- 🐛 修复 ThoughtChain 折叠面板无法展开问题。[#720](https://github.com/ant-design/x/pull/720) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- 🐛 修复 Attachments 图片展示样式问题。[#708](https://github.com/ant-design/x/pull/708) 由 [@hy993658052](https://github.com/hy993658052) 提交
+- 💄 优化 Sender，使自定义Actions的 `disabled`属性受控。[#666](https://github.com/ant-design/x/pull/666) 由 [@afc163](https://github.com/afc163) 提交
+- 📖 优化官网站点提升用户体验。[#680](https://github.com/ant-design/x/pull/680) 由 [@wzc520pyfm](https://github.com/wzc520pyfm) 提交、[#699](https://github.com/ant-design/x/pull/699) 由 [@afc163](https://github.com/afc163) 提交、[#716](https://github.com/ant-design/x/pull/716) 由 [@afc163](https://github.com/afc163) 提交、[#686](https://github.com/ant-design/x/pull/686) 由 [@afc163](https://github.com/afc163) 提交、[#728](https://github.com/ant-design/x/pull/728) 由 [@kimteayon](https://github.com/kimteayon) 提交
+
 ## 1.1.0
 
 `2025-03-28`
@@ -23,7 +38,7 @@ tag: vVERSION
   - 🆕 新增 `footer` 支持自定义底部内容。[#654](https://github.com/ant-design/x/pull/654) 由 [@kimteayon](https://github.com/kimteayon) 提交
   - 🆕 扩展 `autoSize` 支持配置内容高度。[#637](https://github.com/ant-design/x/pull/637) 由 [@Zhang-Wei-666](https://github.com/Zhang-Wei-666) 提交
   - 📖 补充 `onFocus`和`onBlur` 类型声明。[#625](https://github.com/ant-design/x/pull/625) 由 [@aojunhao123](https://github.com/aojunhao123) 提交
-  - 🆕 扩展 Conversations 组件 `menu.trigger` 支持自定义菜单触发器。[#630](https://github.com/ant-design/x/pull/630) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- 🆕 扩展 Conversations 组件 `menu.trigger` 支持自定义菜单触发器。[#630](https://github.com/ant-design/x/pull/630) 由 [@kimteayon](https://github.com/kimteayon) 提交
 - Attachments
   - 🆕 扩展 `ImageProps` 支持自定义图像展示配置。[#613](https://github.com/ant-design/x/pull/613) 由 [@hy993658052 ](https://github.com/hy993658052) 提交
   - 📖 补充 Attachments 组件 `onRemove` API文档。[#608](https://github.com/ant-design/x/pull/608) 由 [@kimteayon](https://github.com/kimteayon) 提交
