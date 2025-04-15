@@ -70,7 +70,6 @@ const App = () => {
       } catch (error) {
         console.error(error);
       }
-
       return {
         content: (originMessage?.content || '') + currentText,
         role: 'assistant',
