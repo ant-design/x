@@ -160,10 +160,9 @@ export default function useXChat<
       return chunk as unknown as AgentMessage;
     }
 
-    if (Array.isArray(chunks) && chunks?.length > 0) {
-      return originMessage
-        ? originMessage
-        : (chunks?.[chunks?.length - 1] as unknown as AgentMessage);
+    if (Array.isArray(chunks)) {
+      const chunk = chunks?.length > 0 ? chunks?.[chunks?.length - 1] : undefined;
+      return originMessage ? originMessage : (chunk as unknown as AgentMessage);
     }
 
     return chunks as unknown as AgentMessage;
