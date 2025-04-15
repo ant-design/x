@@ -382,5 +382,25 @@ describe('useXChat', () => {
         expectMessage('bamboo_success', 'success'),
       ]);
     });
+
+    const requestFailedOnlySuccess = jest.fn(async (_, { onSuccess }) => {
+      setTimeout(() => {
+        onSuccess(['bamboo_success']);
+      }, 200);
+    });
+
+    it('only width success transformMessageFn', async () => {
+      const { container } = render(
+        <Demo request={requestFailedOnlySuccess} requestFallback="bamboo" />,
+      );
+      fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
+
+      expect(getMessages(container)).toEqual([expectMessage('little', 'local')]);
+      await waitFakeTimer();
+      expect(getMessages(container)).toEqual([
+        expectMessage('little', 'local'),
+        expectMessage('bamboo_success', 'success'),
+      ]);
+    });
   });
 });

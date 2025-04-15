@@ -154,7 +154,7 @@ export default function useXChat<
       return transformMessage(params);
     }
 
-    // Compatible bug fixes, onSuccess(output) => onSuccess(output[]); v1.1.1
+    // Compatible bug fixes, onSuccess(output) => onSuccess(output[]),before v1.1.1
 
     if (chunk) {
       return chunk as unknown as AgentMessage;
