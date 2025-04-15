@@ -50,11 +50,8 @@ const App = () => {
 
   const changeBaseData = () => {
     setRequestOptions((pre) => ({
-      baseURL:
-        pre.baseURL === BASE_URL
-          ? 'https://alternative-api-endpoint.com/v1'
-          : 'https://your-api-endpoint.com/v1',
-      model: pre.model === MODEL ? 'gpt-4' : 'gpt-3.5-turbo',
+      baseURL: pre.baseURL === BASE_URL ? 'https://xxx-api.example.com/v1' : BASE_URL,
+      model: pre.model === MODEL ? 'gpt-4' : MODEL,
       dangerouslyApiKey:
         pre.dangerouslyApiKey === API_KEY ? 'Bearer sk-your-new-dangerouslyApiKey' : API_KEY,
     }));
@@ -90,7 +87,6 @@ const App = () => {
               icon: status === 'pending' ? <LoadingOutlined /> : <TagsOutlined />,
               description:
                 status === 'error' &&
-                exampleRequest.baseURL === requestOptions.baseURL &&
                 'Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.',
               content: (
                 <Descriptions column={1}>
