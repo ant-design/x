@@ -1,7 +1,7 @@
 import { useXAgent } from '@ant-design/x';
 import { Button, Divider, Form, Input, Typography } from 'antd';
 import React from 'react';
-type OutPutType = string;
+type OutputType = string;
 type InputType = { message: string };
 const App = () => {
   const [lines, setLines] = React.useState<string[]>([]);
@@ -12,10 +12,10 @@ const App = () => {
     setLines((ori) => [...ori, text]);
   };
 
-  const [agent] = useXAgent<string, InputType, OutPutType>({
+  const [agent] = useXAgent<string, InputType, OutputType>({
     request: ({ message }, { onUpdate, onSuccess }) => {
       let times = 0;
-      const chunks: OutPutType[] = [];
+      const chunks: OutputType[] = [];
       const id = setInterval(() => {
         times += 1;
         const chunk = `Thinking...(${times}/3)`;
