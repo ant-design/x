@@ -1,8 +1,7 @@
 import React from 'react';
+import type { AnyObject } from '../_util/type';
 import XRequest from '../x-request';
-
-import { AnyObject } from '../_util/type';
-import { SSEOutput, XStreamOptions } from '../x-stream';
+import type { SSEOutput, XStreamOptions } from '../x-stream';
 interface RequestFnInfo<Message> extends AnyObject {
   messages?: Message[];
   message?: Message;

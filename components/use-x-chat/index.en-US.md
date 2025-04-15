@@ -57,7 +57,7 @@ type useXChat<
 
 ### RequestParams
 
-Extends [XRequestParams](https://x.ant.design/components/x-request#xrequestparams).
+Extends [XRequestParams](/components/x-request#xrequestparams).
 
 | Property | Description             | Type         | Default | Version |
 | -------- | ----------------------- | ------------ | ------- | ------- |

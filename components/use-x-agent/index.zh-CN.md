@@ -53,7 +53,7 @@ type useXAgent<AgentMessage> = (
 
 #### RequestFn
 
-更多请查看 [XStreamOptions](https://x.ant.design/components/x-stream#xstreamoptions)。
+更多请查看 [XStreamOptions](/components/x-stream-cn#xstreamoptions)。
 
 ```tsx | pure
 type RequestFnInfo<Message, Input> = AnyObject & {

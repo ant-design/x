@@ -1,9 +1,9 @@
 import { useEvent } from 'rc-util';
 import React from 'react';
-import { AnyObject } from '../_util/type';
+import type { AnyObject } from '../_util/type';
 import type { XAgent } from '../use-x-agent';
 import { XRequestParams } from '../x-request';
-import { SSEOutput, XStreamOptions } from '../x-stream';
+import type { SSEOutput, XStreamOptions } from '../x-stream';
 import useSyncState from './useSyncState';
 
 export type SimpleType = string | number | boolean | object;
