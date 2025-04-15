@@ -10,7 +10,7 @@ import type { ThoughtChainItem } from '@ant-design/x';
  */
 const BASE_URL = 'https://api.example.com/chat';
 const MODEL = 'gpt-3.5-turbo';
-const API_KEY = 'your_dangerouslyApiKey';
+const API_KEY = 'Bearer sk-your-dangerouslyApiKey';
 
 const App = () => {
   const [status, setStatus] = useState<ThoughtChainItem['status']>();
@@ -27,48 +27,60 @@ const App = () => {
 
   async function request() {
     setStatus('pending');
+    setLines([]);
     await exampleRequest.create(
       {
         messages: [{ role: 'user', content: 'hello, who are u?' }],
         stream: true,
       },
       {
-        onSuccess: (messages) => {
+        onSuccess: () => {
           setStatus('success');
-          console.log('onSuccess', messages);
         },
         onError: (error) => {
+          setLines((pre) => [...pre, { error: error?.message || 'error' }]);
           setStatus('error');
-          console.error('onError', error);
         },
         onUpdate: (msg) => {
           setLines((pre) => [...pre, msg]);
-          console.log('onUpdate', msg);
         },
       },
     );
   }
 
   const changeBaseData = () => {
-    setRequestOptions({
-      baseURL: `${BASE_URL}/${Date.now()}`,
-      model: `${MODEL}/${Date.now()}`,
-      dangerouslyApiKey: `${API_KEY}/${Date.now()}`,
-    });
+    setRequestOptions((pre) => ({
+      baseURL:
+        pre.baseURL === BASE_URL
+          ? 'https://alternative-api-endpoint.com/v1'
+          : 'https://your-api-endpoint.com/v1',
+      model: pre.model === MODEL ? 'gpt-4' : 'gpt-3.5-turbo',
+      dangerouslyApiKey:
+        pre.dangerouslyApiKey === API_KEY ? 'Bearer sk-your-new-dangerouslyApiKey' : API_KEY,
+    }));
   };
 
   return (
     <Splitter>
-      <Splitter.Panel>
-        <Flex gap="small">
-          <Button type="primary" disabled={status === 'pending'} onClick={changeBaseData}>
-            Change Request Options
-          </Button>
-          <Button type="primary" disabled={status === 'pending'} onClick={request}>
-            Request - {requestOptions.baseURL}
-          </Button>
-        </Flex>
-      </Splitter.Panel>
+      <Splitter>
+        <Splitter layout="vertical">
+          <Splitter.Panel>
+            <Flex gap="small">
+              <Button type="primary" disabled={status === 'pending'} onClick={changeBaseData}>
+                Change Request Options
+              </Button>
+              <Button type="primary" disabled={status === 'pending'} onClick={request}>
+                Request - {requestOptions.baseURL}
+              </Button>
+            </Flex>
+          </Splitter.Panel>
+          <Splitter.Panel>
+            <p>baseURL: {requestOptions.baseURL}</p>
+            <p>model: {requestOptions.model}</p>
+            <p>dangerouslyApiKey: {requestOptions.dangerouslyApiKey}</p>
+          </Splitter.Panel>
+        </Splitter>
+      </Splitter>
       <Splitter.Panel style={{ marginLeft: 16 }}>
         <ThoughtChain
           items={[

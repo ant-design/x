@@ -211,7 +211,6 @@ class XRequestClass {
 
       callbacks?.onUpdate?.(chunk);
     }
-
     callbacks?.onSuccess?.(chunks);
   };
 
