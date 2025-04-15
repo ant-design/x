@@ -8,7 +8,7 @@ import type { ThoughtChainItem } from '@ant-design/x';
 /**
  * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
  */
-const BASE_URL = 'https://api.example.com/chat';
+const BASE_URL = 'https://api.example.com/chat/v1';
 const MODEL = 'gpt-3.5-turbo';
 const API_KEY = 'Bearer sk-your-dangerouslyApiKey';
 
@@ -50,7 +50,7 @@ const App = () => {
 
   const changeBaseData = () => {
     setRequestOptions((pre) => ({
-      baseURL: pre.baseURL === BASE_URL ? 'https://xxx-api.example.com/v1' : BASE_URL,
+      baseURL: pre.baseURL === BASE_URL ? 'https://api.example.com/chat/v2' : BASE_URL,
       model: pre.model === MODEL ? 'gpt-4' : MODEL,
       dangerouslyApiKey:
         pre.dangerouslyApiKey === API_KEY ? 'Bearer sk-your-new-dangerouslyApiKey' : API_KEY,
