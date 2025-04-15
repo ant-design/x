@@ -276,7 +276,7 @@ exports[`renders components/x-request/demo/request-options.tsx correctly 1`] = `
             type="button"
           >
             <span>
-              Request - https://api.example.com/chat
+              Agent Request
             </span>
           </button>
         </div>
@@ -299,7 +299,7 @@ exports[`renders components/x-request/demo/request-options.tsx correctly 1`] = `
         <p>
           baseURL: 
           <!-- -->
-          https://api.example.com/chat
+          https://api.example.com/chat/v1
         </p>
         <p>
           model: 

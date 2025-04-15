@@ -52,7 +52,7 @@ const App = () => {
 
   const changeBaseData = () => {
     setRequestOptions((pre) => ({
-      baseURL: pre.baseURL === BASE_URL ? 'https://api.example.com/chat/v2' : BASE_URL,
+      baseURL: BASE_URL,
       model: pre.model === MODEL ? 'gpt-4' : MODEL,
       dangerouslyApiKey:
         pre.dangerouslyApiKey === API_KEY ? 'Bearer sk-your-new-dangerouslyApiKey' : API_KEY,

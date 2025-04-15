@@ -91,12 +91,14 @@ export type XRequestFunction<Input = AnyObject, Output = SSEOutput> = (
   transformStream?: XStreamOptions<Output>['transformStream'],
 ) => Promise<void>;
 
-class XRequestClass {
+export class XRequestClass {
   readonly baseURL;
   readonly model;
 
   private defaultHeaders;
   private customOptions;
+
+  private static instanceBuffer: Map<string | typeof fetch, XRequestClass> = new Map();
 
   private constructor(options: XRequestOptions) {
     const { baseURL, model, dangerouslyApiKey, ...customOptions } = options;
@@ -115,7 +117,16 @@ class XRequestClass {
   public static init(options: XRequestOptions): XRequestClass {
     if (!options.baseURL || typeof options.baseURL !== 'string')
       throw new Error('The baseURL is not valid!');
-    return new XRequestClass(options);
+
+    const id = options.fetch || options.baseURL;
+
+    if (!XRequestClass.instanceBuffer.has(id)) {
+      XRequestClass.instanceBuffer.delete(id);
+    }
+
+    XRequestClass.instanceBuffer.set(id, new XRequestClass(options));
+
+    return XRequestClass.instanceBuffer.get(id) as XRequestClass;
   }
 
   public create = async <Input = AnyObject, Output = SSEOutput>(
@@ -202,6 +213,7 @@ class XRequestClass {
 
       callbacks?.onUpdate?.(chunk);
     }
+
     callbacks?.onSuccess?.(chunks);
   };
 

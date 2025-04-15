@@ -1,4 +1,5 @@
 import XRequest from '../index';
+import XRequestClass from '../index';
 import xFetch from '../x-fetch';
 
 import type { SSEOutput } from '../../x-stream';
@@ -24,6 +25,11 @@ const options: XRequestOptions = {
   dangerouslyApiKey: 'dangerouslyApiKey',
 };
 
+const otherOptions: XRequestOptions = {
+  baseURL: 'https://api.example.com/v1/chat',
+  model: 'gpt-4.0',
+  dangerouslyApiKey: 'dangerouslyApiKey',
+};
 const params = { messages: [{ role: 'user', content: 'Hello' }] };
 
 function mockSSEReadableStream() {
@@ -118,13 +124,13 @@ describe('XRequest Class', () => {
     expect(callbacks.onUpdate).toHaveBeenCalledWith(ndJsonData.split(ND_JSON_SEPARATOR)[1]);
   });
 
-  test('should reuse the same instance for the same baseURL or fetch', () => {
+  test('custom request options', () => {
     const request1 = XRequest(options);
-    const request2 = XRequest(options);
-    expect(request1).toBe(request2);
+    const request2 = XRequest(otherOptions);
+    expect(request1).not.toBe(request2);
     const request3 = XRequest({ fetch: mockedXFetch, baseURL: options.baseURL });
-    const request4 = XRequest({ fetch: mockedXFetch, baseURL: options.baseURL });
-    expect(request3).toBe(request4);
+    const request4 = XRequest({ fetch: mockedXFetch, baseURL: otherOptions.baseURL });
+    expect(request3).not.toBe(request4);
   });
 
   test('should handle error response', async () => {
