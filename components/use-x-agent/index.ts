@@ -97,6 +97,6 @@ export default function useXAgent<Message = string>(config: XAgentConfig<Message
           ...restConfig,
         }),
       ] as const,
-    [],
+    [config],
   );
 }

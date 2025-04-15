@@ -1,5 +1,5 @@
 import { LoadingOutlined, TagsOutlined } from '@ant-design/icons';
-import { ThoughtChain, XRequest } from '@ant-design/x';
+import { ThoughtChain, useXAgent } from '@ant-design/x';
 import { Button, Descriptions, Flex, Splitter } from 'antd';
 import React, { useState } from 'react';
 
@@ -11,10 +11,17 @@ import type { ThoughtChainItem } from '@ant-design/x';
 const BASE_URL = 'https://api.example.com/chat/v1';
 const MODEL = 'gpt-3.5-turbo';
 const API_KEY = 'Bearer sk-your-dangerouslyApiKey';
+/** 🔥🔥 Its dangerously! */
+// const API_KEY = '';
+
+interface YourMessageType {
+  role: string;
+  content: string;
+}
 
 const App = () => {
-  const [status, setStatus] = useState<ThoughtChainItem['status']>();
-  const [lines, setLines] = useState<Record<string, string>[]>([]);
+  const [status, setStatus] = React.useState<ThoughtChainItem['status']>();
+  const [lines, setLines] = React.useState<any[]>([]);
   const [error, setError] = useState<Error>();
   const [requestOptions, setRequestOptions] = useState({
     baseURL: BASE_URL,
@@ -24,31 +31,7 @@ const App = () => {
     // dangerouslyApiKey: API_KEY
   });
 
-  const exampleRequest = XRequest(requestOptions);
-
-  async function request() {
-    setStatus('pending');
-    setLines([]);
-    await exampleRequest.create(
-      {
-        messages: [{ role: 'user', content: 'hello, who are u?' }],
-        stream: true,
-      },
-      {
-        onSuccess: () => {
-          setStatus('success');
-        },
-        onError: (error) => {
-          setError(error);
-          console.log(error.message, 11);
-          setStatus('error');
-        },
-        onUpdate: (msg) => {
-          setLines((pre) => [...pre, msg]);
-        },
-      },
-    );
-  }
+  const [agent] = useXAgent<YourMessageType>(requestOptions);
 
   const changeBaseData = () => {
     setRequestOptions((pre) => ({
@@ -58,6 +41,28 @@ const App = () => {
         pre.dangerouslyApiKey === API_KEY ? 'Bearer sk-your-new-dangerouslyApiKey' : API_KEY,
     }));
   };
+
+  async function request() {
+    setStatus('pending');
+    agent.request(
+      {
+        messages: [{ role: 'user', content: 'hello, who are u?' }],
+        stream: true,
+      },
+      {
+        onSuccess: () => {
+          setStatus('success');
+        },
+        onError: (error) => {
+          setStatus('error');
+          setError(error);
+        },
+        onUpdate: (msg) => {
+          setLines((pre) => [...pre, msg]);
+        },
+      },
+    );
+  }
 
   return (
     <Splitter>
@@ -80,11 +85,12 @@ const App = () => {
           </Splitter.Panel>
         </Splitter>
       </Splitter>
-      <Splitter.Panel style={{ marginLeft: 16 }}>
+      <Splitter.Panel>
         <ThoughtChain
+          style={{ marginLeft: 16 }}
           items={[
             {
-              title: 'Request Log',
+              title: 'Agent Request Log',
               status: status,
               icon: status === 'pending' ? <LoadingOutlined /> : <TagsOutlined />,
               description: status === 'error' && (error?.message || 'request error'),

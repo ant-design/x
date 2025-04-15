@@ -21,6 +21,7 @@ demo:
 <!-- prettier-ignore -->
 <code src="./demo/preset.tsx">预设请求</code>
 <code src="./demo/custom.tsx">自定义请求</code>
+<code src="./demo/request-options.tsx">变更配置</code>
 
 ## API
 
