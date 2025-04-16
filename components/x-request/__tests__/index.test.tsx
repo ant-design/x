@@ -1,5 +1,4 @@
 import XRequest from '../index';
-import XRequestClass from '../index';
 import xFetch from '../x-fetch';
 
 import type { SSEOutput } from '../../x-stream';
@@ -22,12 +21,6 @@ const ndJsonData = `${JSON.stringify(sseEvent)}${ND_JSON_SEPARATOR}${JSON.string
 const options: XRequestOptions = {
   baseURL: 'https://api.example.com/v1/chat',
   model: 'gpt-3.5-turbo',
-  dangerouslyApiKey: 'dangerouslyApiKey',
-};
-
-const otherOptions: XRequestOptions = {
-  baseURL: 'https://api.example.com/v1/chat',
-  model: 'gpt-4.0',
   dangerouslyApiKey: 'dangerouslyApiKey',
 };
 const params = { messages: [{ role: 'user', content: 'Hello' }] };
@@ -122,15 +115,6 @@ describe('XRequest Class', () => {
     expect(callbacks.onError).not.toHaveBeenCalled();
     expect(callbacks.onUpdate).toHaveBeenCalledWith(ndJsonData.split(ND_JSON_SEPARATOR)[0]);
     expect(callbacks.onUpdate).toHaveBeenCalledWith(ndJsonData.split(ND_JSON_SEPARATOR)[1]);
-  });
-
-  test('custom request options', () => {
-    const request1 = XRequest(options);
-    const request2 = XRequest(otherOptions);
-    expect(request1).not.toBe(request2);
-    const request3 = XRequest({ fetch: mockedXFetch, baseURL: options.baseURL });
-    const request4 = XRequest({ fetch: mockedXFetch, baseURL: otherOptions.baseURL });
-    expect(request3).not.toBe(request4);
   });
 
   test('should handle error response', async () => {

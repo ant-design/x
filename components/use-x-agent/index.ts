@@ -83,6 +83,7 @@ export class XAgent<Message = string> {
 
 export default function useXAgent<Message = string>(config: XAgentConfig<Message>) {
   const { request, ...restConfig } = config;
+
   return React.useMemo(
     () =>
       [
