@@ -91,7 +91,7 @@ export type XRequestFunction<Input = AnyObject, Output = SSEOutput> = (
   transformStream?: XStreamOptions<Output>['transformStream'],
 ) => Promise<void>;
 
-export class XRequestClass {
+class XRequestClass {
   readonly baseURL;
   readonly model;
 
