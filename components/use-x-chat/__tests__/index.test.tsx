@@ -21,20 +21,20 @@ describe('useXChat', () => {
     request,
     ...config
   }: Partial<XChatConfig<Message>> & {
-    request?: RequestFn<Message>;
+    request?: RequestFn<Message, Message, Message>;
   }) {
-    const [agent] = useXAgent<Message>({
+    const [agent] = useXAgent({
       request: request || requestNeverEnd,
     });
 
-    const { parsedMessages, onRequest } = useXChat<Message>({ agent, ...config });
+    const { parsedMessages, onRequest } = useXChat({ agent, ...config });
 
     return (
       <>
         <pre>{JSON.stringify(parsedMessages)}</pre>
         <input
           onChange={(e) => {
-            onRequest(e.target.value as Message);
+            onRequest(e.target.value);
           }}
         />
       </>
@@ -45,13 +45,13 @@ describe('useXChat', () => {
     request,
     ...config
   }: Partial<XChatConfig<Message>> & {
-    request?: RequestFn<Message>;
+    request?: RequestFn<Message, Message, Message>;
   }) {
-    const [agent] = useXAgent<Message>({
+    const [agent] = useXAgent({
       request: request || requestNeverEnd,
     });
 
-    const { parsedMessages, onRequest } = useXChat<Message>({ agent, ...config });
+    const { parsedMessages, onRequest } = useXChat({ agent, ...config });
 
     return (
       <>
@@ -238,7 +238,7 @@ describe('useXChat', () => {
       onUpdate('bamboo');
 
       setTimeout(() => {
-        onSuccess('light');
+        onSuccess(['bamboo']);
       }, 100);
     });
     const { container } = render(<Demo request={request} />);
@@ -252,7 +252,7 @@ describe('useXChat', () => {
     await waitFakeTimer();
     expect(getMessages(container)).toEqual([
       expectMessage('little', 'local'),
-      expectMessage('light', 'success'),
+      expectMessage('bamboo', 'success'),
     ]);
   });
 
@@ -320,5 +320,87 @@ describe('useXChat', () => {
     );
     fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
     expect(getMessages(container)).toEqual([expectMessage('little', 'local')]);
+  });
+
+  describe('transformMessage', () => {
+    const requestFailed = jest.fn(async (_, { onUpdate, onSuccess }) => {
+      onUpdate({ data: { content: 'bamboo' } });
+      setTimeout(() => {
+        onSuccess([{ data: { content: 'bamboo' } }]);
+      }, 200);
+    });
+
+    const transformMessage = jest.fn((info) => {
+      const { originMessage, chunk } = info || {};
+      if (chunk?.data) {
+        return (originMessage || '') + chunk?.data?.content;
+      }
+      return originMessage;
+    });
+
+    it('with transformMessageFn', async () => {
+      const { container } = render(
+        <Demo
+          request={requestFailed}
+          transformMessage={transformMessage}
+          requestFallback="bamboo"
+        />,
+      );
+      fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
+
+      expect(getMessages(container)).toEqual([
+        expectMessage('little', 'local'),
+        expectMessage('bamboo', 'loading'),
+      ]);
+      await waitFakeTimer();
+      expect(getMessages(container)).toEqual([
+        expectMessage('little', 'local'),
+        expectMessage('bamboo', 'success'),
+      ]);
+    });
+
+    const requestFailedWithUnknownType = jest.fn(async (_, { onUpdate, onSuccess }) => {
+      onUpdate('bamboo');
+      setTimeout(() => {
+        onSuccess('bamboo_success');
+      }, 200);
+    });
+
+    it('with unknown type chunks transformMessageFn', async () => {
+      const { container } = render(
+        <Demo request={requestFailedWithUnknownType} requestFallback="bamboo" />,
+      );
+      fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
+
+      expect(getMessages(container)).toEqual([
+        expectMessage('little', 'local'),
+        expectMessage('bamboo', 'loading'),
+      ]);
+      await waitFakeTimer();
+      expect(getMessages(container)).toEqual([
+        expectMessage('little', 'local'),
+        expectMessage('bamboo_success', 'success'),
+      ]);
+    });
+
+    const requestFailedOnlySuccess = jest.fn(async (_, { onSuccess }) => {
+      setTimeout(() => {
+        onSuccess(['bamboo_success']);
+      }, 200);
+    });
+
+    it('only width success transformMessageFn', async () => {
+      const { container } = render(
+        <Demo request={requestFailedOnlySuccess} requestFallback="bamboo" />,
+      );
+      fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
+
+      expect(getMessages(container)).toEqual([expectMessage('little', 'local')]);
+      await waitFakeTimer();
+      expect(getMessages(container)).toEqual([
+        expectMessage('little', 'local'),
+        expectMessage('bamboo_success', 'success'),
+      ]);
+    });
   });
 });

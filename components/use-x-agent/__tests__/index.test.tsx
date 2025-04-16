@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '../../../tests/utils';
-import { XAgent } from '../index';
+import type { XAgent } from '../index';
 import useXAgent from '../index';
 
 describe('useXAgent', () => {

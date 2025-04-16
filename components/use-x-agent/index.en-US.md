@@ -26,9 +26,7 @@ Connect with the backend model to provide an abstract data flow.
 ## API
 
 ```tsx | pure
-type useXAgent<AgentMessage> = (
-  config: XAgentConfigPreset | XAgentConfigCustom<AgentMessage>,
-) => [Agent];
+type useXAgent<Message> = (config: XAgentConfigPreset | XAgentConfigCustom<Message>) => [Agent];
 ```
 
 ### XAgentConfigPreset
@@ -52,17 +50,21 @@ Custom request protocol.
 
 #### RequestFn
 
+For more properties, see [XStreamOptions](https://x.ant.design/components/x-stream#xstreamoptions).
+
 ```tsx | pure
-interface RequestFnInfo<Message> extends Partial<XAgentConfigPreset>, AnyObject {
+type RequestFnInfo<Message, Input> = AnyObject & {
+  [props in keyof Input]: Input[props];
+} & {
   messages?: Message[];
   message?: Message;
-}
+};
 
-type RequestFn<Message> = (
-  info: RequestFnInfo<Message>,
+type RequestFn<Message, Input, Output> = (
+  info: RequestFnInfo<Message, Input>,
   callbacks: {
-    onUpdate: (message: Message) => void;
-    onSuccess: (message: Message) => void;
+    onUpdate: (chunk: Output) => void;
+    onSuccess: (chunks: Output[]) => void;
     onError: (error: Error) => void;
     onStream?: (abortController: AbortController) => void;
   },

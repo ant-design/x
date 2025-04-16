@@ -58,25 +58,20 @@ const App = () => {
       };
     },
     transformMessage: (info) => {
-      const { originMessage, currentMessage, status } = info || {};
+      const { originMessage, chunk } = info || {};
       let currentText = '';
-      let originText = '';
-      if (status === 'loading' && currentMessage.data && !currentMessage.data.includes('DONE')) {
-        try {
-          const message = JSON.parse(currentMessage.data);
-          currentText =
-            message?.choices?.[0].delta?.reasoning_content === null
-              ? ''
-              : message?.choices?.[0].delta?.reasoning_content;
-        } catch (e) {
-          console.error('error', e);
+      try {
+        if (chunk?.data && !chunk?.data.includes('DONE')) {
+          const message = JSON.parse(chunk?.data);
+          currentText = !message?.choices?.[0].delta?.reasoning_content
+            ? ''
+            : message?.choices?.[0].delta?.reasoning_content;
         }
-      }
-      if (originMessage) {
-        originText = originMessage.content || '';
+      } catch (error) {
+        console.error(error);
       }
       return {
-        content: originText + currentText,
+        content: (originMessage?.content || '') + currentText,
         role: 'assistant',
       };
     },
