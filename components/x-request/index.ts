@@ -123,6 +123,7 @@ class XRequestClass {
     params: XRequestParams & Input,
     callbacks?: XRequestCallbacks<Output>,
     transformStream?: XStreamOptions<Output>['transformStream'],
+    fetchOptions?: XFetchOptions
   ) => {
     const requestInit = {
       method: 'POST',
@@ -137,6 +138,7 @@ class XRequestClass {
       const response = await xFetch(this.baseURL, {
         fetch: this.customOptions.fetch,
         ...requestInit,
+        ...fetchOptions,
       });
 
       if (transformStream) {
