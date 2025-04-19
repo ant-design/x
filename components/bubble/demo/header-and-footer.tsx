@@ -1,4 +1,4 @@
-import { CopyOutlined, SyncOutlined, UserOutlined } from '@ant-design/icons';
+import { CopyOutlined, MoreOutlined, SyncOutlined, UserOutlined } from '@ant-design/icons';
 import { Bubble } from '@ant-design/x';
 import { Button, Space, theme } from 'antd';
 import React from 'react';
@@ -23,6 +23,14 @@ const App: React.FC = () => {
           />
         </Space>
       )}
+      extra={
+        <Button
+          color="default"
+          variant="text"
+          size="small"
+          icon={<MoreOutlined style={{ transform: 'rotate(90deg)' }} />}
+        />
+      }
     />
   );
 };
