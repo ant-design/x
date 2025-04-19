@@ -55,16 +55,18 @@ const useCollapsible: UseCollapsible = (collapsible, prefixCls, rootPrefixCls) =
   // ============================ ExpandedKeys ============================
   const [mergedExpandedKeys, setMergedExpandedKeys] = useMergedState<
     RequiredCollapsibleOptions['expandedKeys']
-  >(customizeExpandedKeys, {
+  >(customizeExpandedKeys ?? [], {
+    value: customizeExpandedKeys,
     onChange: customizeOnExpand,
   });
 
   // ============================ Event ============================
   const onItemExpand = (curKey: string) => {
     setMergedExpandedKeys((preKeys) => {
-      const keys = preKeys?.includes(curKey)
-        ? preKeys.filter((key) => key !== curKey)
-        : [...preKeys, curKey];
+      const targetPreKeys = customizeExpandedKeys ?? preKeys;
+      const keys = targetPreKeys.includes(curKey)
+        ? targetPreKeys.filter((key) => key !== curKey)
+        : [...targetPreKeys, curKey];
       customizeOnExpand?.(keys);
       return keys;
     });
