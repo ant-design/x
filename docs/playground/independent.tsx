@@ -1,15 +1,21 @@
 import {
+  AppstoreAddOutlined,
   CloudUploadOutlined,
   CommentOutlined,
+  CopyOutlined,
   DeleteOutlined,
+  DislikeOutlined,
   EditOutlined,
   EllipsisOutlined,
-  FireOutlined,
+  FileSearchOutlined,
   HeartOutlined,
+  LikeOutlined,
   PaperClipOutlined,
   PlusOutlined,
+  ProductOutlined,
   QuestionCircleOutlined,
-  ReadOutlined,
+  ReloadOutlined,
+  ScheduleOutlined,
   ShareAltOutlined,
   SmileOutlined,
 } from '@ant-design/icons';
@@ -23,9 +29,11 @@ import {
   useXAgent,
   useXChat,
 } from '@ant-design/x';
-import { Avatar, Button, type GetProp, Space } from 'antd';
+import type { BubbleDataType } from '@ant-design/x/es/bubble/BubbleList';
+import { Avatar, Button, type GetProp, Space, Spin, message } from 'antd';
 import { createStyles } from 'antd-style';
-import React, { useEffect } from 'react';
+import dayjs from 'dayjs';
+import React, { useEffect, useRef, useState } from 'react';
 
 const DEFAULT_CONVERSATIONS_ITEMS = [
   {
@@ -45,6 +53,93 @@ const DEFAULT_CONVERSATIONS_ITEMS = [
   },
 ];
 
+const WELCOME_PROMPTS: GetProp<typeof Prompts, 'items'> = [
+  {
+    key: '1',
+    label: 'Hot Topics',
+    children: [
+      {
+        key: '1-1',
+        description: 'What has Ant Design X upgraded?',
+        icon: <span style={{ color: '#f93a4a', fontWeight: 700 }}>1</span>,
+      },
+      {
+        key: '1-2',
+        description: 'New AGI Hybrid Interface',
+        icon: <span style={{ color: '#ff6565', fontWeight: 700 }}>2</span>,
+      },
+      {
+        key: '1-3',
+        description: 'What components are in Ant Design X?',
+        icon: <span style={{ color: '#ff8f1f', fontWeight: 700 }}>3</span>,
+      },
+      {
+        key: '1-4',
+        description: 'Come and discover the new design paradigm of the AI era.',
+        icon: <span style={{ color: '#00000040', fontWeight: 700 }}>4</span>,
+      },
+      {
+        key: '1-5',
+        description: 'How to quickly install and import components?',
+        icon: <span style={{ color: '#00000040', fontWeight: 700 }}>5</span>,
+      },
+    ],
+  },
+  {
+    key: '2',
+    label: 'Design Guide',
+    children: [
+      {
+        key: '2-1',
+        icon: <HeartOutlined />,
+        label: 'Intention',
+        description: 'AI understands user needs and provides solutions.',
+      },
+      {
+        key: '2-2',
+        icon: <SmileOutlined />,
+        label: 'Role',
+        description: "AI's public persona and image",
+      },
+      {
+        key: '2-3',
+        icon: <CommentOutlined />,
+        label: 'Chat',
+        description: 'How AI Can Express Itself in a Way Users Understand',
+      },
+      {
+        key: '2-4',
+        icon: <PaperClipOutlined />,
+        label: 'Interface',
+        description: 'AI balances "chat" & "do" behaviors.',
+      },
+    ],
+  },
+];
+
+const SENDER_PROMPTS: GetProp<typeof Prompts, 'items'> = [
+  {
+    key: '1',
+    description: 'Upgrades',
+    icon: <ScheduleOutlined />,
+  },
+  {
+    key: '2',
+    description: 'Components',
+    icon: <ProductOutlined />,
+  },
+  {
+    key: '3',
+    description: 'RICH Guide',
+    icon: <FileSearchOutlined />,
+  },
+  {
+    key: '4',
+    description: 'Installation Introduction',
+    icon: <AppstoreAddOutlined />,
+  },
+];
+
 const useStyle = createStyles(({ token, css }) => {
   return {
     layout: css`
@@ -54,10 +149,6 @@ const useStyle = createStyles(({ token, css }) => {
       display: flex;
       background: ${token.colorBgContainer};
       font-family: AlibabaPuHuiTi, ${token.fontFamily}, sans-serif;
-
-      .ant-prompts {
-        color: ${token.colorText};
-      }
     `,
     // sider 样式
     sider: css`
@@ -106,7 +197,7 @@ const useStyle = createStyles(({ token, css }) => {
       align-items: center;
       justify-content: space-between;
     `,
-    // chat 样式
+    // chat list 样式
     chat: css`
       height: 100%;
       width: 100%;
@@ -118,12 +209,36 @@ const useStyle = createStyles(({ token, css }) => {
       padding: ${token.paddingLG}px;
       gap: 16px;
     `,
-    messages: css`
+    chatPrompt: css`
+      .ant-prompts-label {
+        color: #000000e0 !important;
+      }
+      .ant-prompts-item {
+        color: #000000a6;
+      }
+      .ant-prompts-content {
+        color: #000000a6;
+      }
+      .ant-prompts-desc {
+        color: #000000a6 !important;
+        width: 100%;
+      }
+    `,
+    chatList: css`
       flex: 1;
+      overflow: auto;
+      padding-right: 10px;
+    `,
+    loadingMessage: css`
+      background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
+      background-size: 100% 2px;
+      background-repeat: no-repeat;
+      background-position: bottom;
     `,
     placeholder: css`
       padding-top: 32px;
     `,
+    // sender 样式
     sender: css`
       box-shadow: ${token.boxShadow};
       color: ${token.colorText};
@@ -132,140 +247,203 @@ const useStyle = createStyles(({ token, css }) => {
       font-size: 24px;
       color: ${token.colorText} !important;
     `,
+    senderPrompt: css`
+      color: ${token.colorText};
+    `,
   };
 });
 
-const renderTitle = (icon: React.ReactElement, title: string) => (
-  <Space align="start">
-    {icon}
-    <span>{title}</span>
-  </Space>
-);
-
-const placeholderPromptsItems: GetProp<typeof Prompts, 'items'> = [
-  {
-    key: '1',
-    label: renderTitle(<FireOutlined style={{ color: '#FF4D4F' }} />, 'Hot Topics'),
-    description: 'What are you interested in?',
-    children: [
-      {
-        key: '1-1',
-        description: `What's new in X?`,
-      },
-      {
-        key: '1-2',
-        description: `What's AGI?`,
-      },
-      {
-        key: '1-3',
-        description: `Where is the doc?`,
-      },
-    ],
-  },
-  {
-    key: '2',
-    label: renderTitle(<ReadOutlined style={{ color: '#1890FF' }} />, 'Design Guide'),
-    description: 'How to design a good product?',
-    children: [
-      {
-        key: '2-1',
-        icon: <HeartOutlined />,
-        description: `Know the well`,
-      },
-      {
-        key: '2-2',
-        icon: <SmileOutlined />,
-        description: `Set the AI role`,
-      },
-      {
-        key: '2-3',
-        icon: <CommentOutlined />,
-        description: `Express the feeling`,
-      },
-    ],
-  },
-];
-
-const senderPromptsItems: GetProp<typeof Prompts, 'items'> = [
-  {
-    key: '1',
-    description: 'Hot Topics',
-    icon: <FireOutlined style={{ color: '#FF4D4F' }} />,
-  },
-  {
-    key: '2',
-    description: 'Design Guide',
-    icon: <ReadOutlined style={{ color: '#1890FF' }} />,
-  },
-];
-
-const roles: GetProp<typeof Bubble.List, 'roles'> = {
-  ai: {
-    placement: 'start',
-    typing: { step: 5, interval: 20 },
-    styles: {
-      content: {
-        borderRadius: 16,
-      },
-    },
-  },
-  local: {
-    placement: 'end',
-    variant: 'shadow',
-  },
-};
-
 const Independent: React.FC = () => {
-  // ==================== Style ====================
   const { styles } = useStyle();
+  const abortController = useRef<AbortController>(null);
 
   // ==================== State ====================
-  const [conversationsItems, setConversationsItems] = React.useState(DEFAULT_CONVERSATIONS_ITEMS);
-  const [activeKey, setActiveKey] = React.useState(DEFAULT_CONVERSATIONS_ITEMS[0].key);
+  const [messageHistory, setMessageHistory] = useState<Record<string, any>>({});
 
-  const [content, setContent] = React.useState('');
-  const [attachmentsOpen, setAttachmentsOpen] = React.useState(false);
-  const [attachedFiles, setAttachedFiles] = React.useState<GetProp<typeof Attachments, 'items'>>(
-    [],
-  );
+  const [conversations, setConversations] = useState(DEFAULT_CONVERSATIONS_ITEMS);
+  const [curConversation, setCurConversation] = useState(DEFAULT_CONVERSATIONS_ITEMS[0].key);
+
+  const [attachmentsOpen, setAttachmentsOpen] = useState(false);
+  const [attachedFiles, setAttachedFiles] = useState<GetProp<typeof Attachments, 'items'>>([]);
+
+  const [inputValue, setInputValue] = useState('');
 
   // ==================== Runtime ====================
-  const [agent] = useXAgent<string, { message: string }, string>({
-    request: async ({ message }, { onSuccess }) => {
-      onSuccess([`Mock success return. You said: ${message}`]);
-    },
+  const [agent] = useXAgent<BubbleDataType>({
+    baseURL: 'https://api.siliconflow.cn/v1/chat/completions',
+    model: 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B',
+    dangerouslyApiKey: 'Bearer sk-ravoadhrquyrkvaqsgyeufqdgphwxfheifujmaoscudjgldr',
   });
+  const loading = agent.isRequesting();
 
   const { onRequest, messages, setMessages } = useXChat({
     agent,
+    requestFallback: (_, { error }) => {
+      if (error.name === 'AbortError') {
+        return {
+          content: 'Request is aborted',
+          role: 'assistant',
+        };
+      }
+      return {
+        content: 'Request failed, please try again!',
+        role: 'assistant',
+      };
+    },
+    transformMessage: (info) => {
+      const { originMessage, chunk } = info || {};
+      let currentText = '';
+      try {
+        if (chunk?.data && !chunk?.data.includes('DONE')) {
+          const message = JSON.parse(chunk?.data);
+          currentText = !message?.choices?.[0].delta?.reasoning_content
+            ? ''
+            : message?.choices?.[0].delta?.reasoning_content;
+        }
+      } catch (error) {
+        console.error(error);
+      }
+      return {
+        content: (originMessage?.content || '') + currentText,
+        role: 'assistant',
+      };
+    },
+    resolveAbortController: (controller) => {
+      abortController.current = controller;
+    },
   });
 
-  useEffect(() => {
-    if (activeKey !== undefined) {
-      setMessages([]);
-    }
-  }, [activeKey]);
-
   // ==================== Event ====================
-  const onSubmit = (nextContent: string) => {
-    if (!nextContent) return;
-    onRequest(nextContent);
-    setContent('');
-  };
+  const onSubmit = (val: string) => {
+    if (!val) return;
 
-  const onPromptsItemClick: GetProp<typeof Prompts, 'onItemClick'> = (info) => {
-    onRequest(info.data.description as string);
-  };
+    if (loading) {
+      message.error('Request is in progress, please wait for the request to complete.');
+      return;
+    }
 
-  const onConversationClick: GetProp<typeof Conversations, 'onActiveChange'> = (key) => {
-    setActiveKey(key);
+    onRequest({
+      stream: true,
+      message: { role: 'user', content: val },
+    });
   };
-
-  const handleFileChange: GetProp<typeof Attachments, 'onChange'> = (info) =>
-    setAttachedFiles(info.fileList);
 
   // ==================== Nodes ====================
-  const placeholderNode = (
+  const ChatSider = (
+    <div className={styles.sider}>
+      {/* 🌟 Logo */}
+      <div className={styles.logo}>
+        <img
+          src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*eco6RrQhxbMAAAAAAAAAAAAADgCCAQ/original"
+          draggable={false}
+          alt="logo"
+          width={24}
+          height={24}
+        />
+        <span>Ant Design X</span>
+      </div>
+
+      {/* 🌟 添加会话 */}
+      <Button
+        onClick={() => {
+          const now = dayjs().valueOf().toString();
+          setConversations([
+            {
+              key: now,
+              label: `New Conversation ${conversations.length + 1}`,
+              group: 'Today',
+            },
+            ...conversations,
+          ]);
+          setCurConversation(now);
+          setMessages([]);
+        }}
+        type="link"
+        className={styles.addBtn}
+        icon={<PlusOutlined />}
+      >
+        New Conversation
+      </Button>
+
+      {/* 🌟 会话管理 */}
+      <Conversations
+        items={conversations}
+        className={styles.conversations}
+        activeKey={curConversation}
+        onActiveChange={async (val) => {
+          abortController.current?.abort();
+          // The abort execution will trigger an asynchronous requestFallback, which may lead to timing issues.
+          // In future versions, the sessionId capability will be added to resolve this problem.
+          setTimeout(() => {
+            setCurConversation(val);
+            setMessages(messageHistory?.[val] || []);
+          }, 100);
+        }}
+        groupable
+        styles={{ item: { padding: '0 8px' } }}
+        menu={(conversation) => ({
+          items: [
+            {
+              label: 'Rename',
+              key: 'rename',
+              icon: <EditOutlined />,
+            },
+            {
+              label: 'Delete',
+              key: 'delete',
+              icon: <DeleteOutlined />,
+              danger: true,
+              onClick: () => {
+                const newList = conversations.filter((item) => item.key !== conversation.key);
+                const newKey = newList?.[0]?.key;
+                setConversations(newList);
+                // The delete operation modifies curConversation and triggers onActiveChange, so it needs to be executed with a delay to ensure it overrides correctly at the end.
+                // This feature will be fixed in a future version.
+                setTimeout(() => {
+                  if (conversation.key === curConversation) {
+                    setCurConversation(newKey);
+                    setMessages(messageHistory?.[newKey] || []);
+                  }
+                }, 200);
+              },
+            },
+          ],
+        })}
+      />
+
+      <div className={styles.siderFooter}>
+        <Avatar size={24} />
+        <Button type="text" icon={<QuestionCircleOutlined />} />
+      </div>
+    </div>
+  );
+  const ChatList = messages?.length ? (
+    /* 🌟 消息列表 */
+    <Bubble.List
+      items={messages?.map((i) => ({
+        ...i.message,
+        classNames: {
+          content: i.status === 'loading' ? styles.loadingMessage : '',
+        },
+        typing: i.status === 'loading' ? { step: 5, interval: 20, suffix: <>💗</> } : false,
+      }))}
+      roles={{
+        assistant: {
+          placement: 'start',
+          footer: (
+            <div style={{ display: 'flex' }}>
+              <Button type="text" size="small" icon={<ReloadOutlined />} />
+              <Button type="text" size="small" icon={<CopyOutlined />} />
+              <Button type="text" size="small" icon={<LikeOutlined />} />
+              <Button type="text" size="small" icon={<DislikeOutlined />} />
+            </div>
+          ),
+          loadingRender: () => <Spin size="small" />,
+        },
+        user: { placement: 'end' },
+      }}
+    />
+  ) : (
     <Space direction="vertical" size={16} className={styles.placeholder}>
       <Welcome
         variant="borderless"
@@ -281,27 +459,23 @@ const Independent: React.FC = () => {
       />
       <Prompts
         title="Do you want?"
-        items={placeholderPromptsItems}
+        items={WELCOME_PROMPTS}
         styles={{
-          list: {
-            width: '100%',
-          },
           item: {
             flex: 1,
+            backgroundImage: 'linear-gradient(123deg, #e5f4ff 0%, #efe7ff 100%)',
+            borderRadius: 12,
+            border: 'none',
           },
+          subItem: { padding: 0, background: 'transparent' },
         }}
-        onItemClick={onPromptsItemClick}
+        onItemClick={(info) => {
+          onSubmit(info.data.description as string);
+        }}
+        className={styles.chatPrompt}
       />
     </Space>
   );
-
-  const items: GetProp<typeof Bubble.List, 'items'> = messages.map(({ id, message, status }) => ({
-    key: id,
-    loading: status === 'loading',
-    role: status === 'local' ? 'local' : 'ai',
-    content: message,
-  }));
-
   const SenderHeader = (
     <Sender.Header
       title="Upload File"
@@ -312,7 +486,7 @@ const Independent: React.FC = () => {
       <Attachments
         beforeUpload={() => false}
         items={attachedFiles}
-        onChange={handleFileChange}
+        onChange={(info) => setAttachedFiles(info.fileList)}
         placeholder={(type) =>
           type === 'drop'
             ? { title: 'Drop file here' }
@@ -325,118 +499,72 @@ const Independent: React.FC = () => {
       />
     </Sender.Header>
   );
+  const ChatSender = (
+    <>
+      {/* 🌟 提示词 */}
+      <Prompts
+        items={SENDER_PROMPTS}
+        onItemClick={(info) => {
+          onSubmit(info.data.description as string);
+        }}
+        styles={{ item: { padding: '6px 12px' } }}
+        className={styles.senderPrompt}
+      />
+      {/* 🌟 输入框 */}
+      <Sender
+        value={inputValue}
+        header={SenderHeader}
+        onSubmit={() => {
+          onSubmit(inputValue);
+          setInputValue('');
+        }}
+        onChange={setInputValue}
+        onCancel={() => {
+          abortController.current?.abort();
+        }}
+        prefix={
+          <Button
+            type="text"
+            icon={<PaperClipOutlined style={{ fontSize: 24 }} />}
+            onClick={() => setAttachmentsOpen(!attachmentsOpen)}
+          />
+        }
+        loading={loading}
+        className={styles.sender}
+        allowSpeech
+        actions={(_, info) => {
+          const { SendButton, LoadingButton, SpeechButton } = info.components;
+          return (
+            <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+              <SpeechButton className={styles.speechButton} />
+              {loading ? <LoadingButton type="default" /> : <SendButton type="primary" />}
+            </div>
+          );
+        }}
+        placeholder="Ask or input / use skills"
+      />
+    </>
+  );
+
+  useEffect(() => {
+    // history mock
+    if (messages?.length) {
+      setMessageHistory({
+        ...messageHistory,
+        [curConversation]: messages,
+      });
+    }
+  }, [messages]);
 
   // ==================== Render =================
   return (
     <div className={styles.layout}>
-      <div className={styles.sider}>
-        {/* 🌟 Logo */}
-        <div className={styles.logo}>
-          <img
-            src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*eco6RrQhxbMAAAAAAAAAAAAADgCCAQ/original"
-            draggable={false}
-            alt="logo"
-            width={24}
-            height={24}
-          />
-          <span>Ant Design X</span>
-        </div>
-
-        {/* 🌟 添加会话 */}
-        <Button
-          onClick={() => {
-            setConversationsItems([
-              {
-                key: `${conversationsItems.length}`,
-                label: `New Conversation ${conversationsItems.length}`,
-                group: 'Today',
-              },
-              ...conversationsItems,
-            ]);
-            setActiveKey(`${conversationsItems.length}`);
-          }}
-          type="link"
-          className={styles.addBtn}
-          icon={<PlusOutlined />}
-        >
-          New Conversation
-        </Button>
-
-        {/* 🌟 会话管理 */}
-        <Conversations
-          items={conversationsItems}
-          className={styles.conversations}
-          activeKey={activeKey}
-          onActiveChange={onConversationClick}
-          groupable
-          styles={{ item: { padding: '0 8px' } }}
-          menu={(conversation) => ({
-            items: [
-              {
-                label: 'Rename',
-                key: 'rename',
-                icon: <EditOutlined />,
-              },
-              {
-                label: 'Delete',
-                key: 'delete',
-                icon: <DeleteOutlined />,
-                danger: true,
-                onClick: () =>
-                  setConversationsItems(
-                    conversationsItems.filter((item) => item.key !== conversation.key),
-                  ),
-              },
-            ],
-          })}
-        />
-
-        <div className={styles.siderFooter}>
-          <Avatar size={24} />
-          <Button type="text" icon={<QuestionCircleOutlined />} />
-        </div>
-      </div>
+      {ChatSider}
 
       <div className={styles.chat}>
-        {/* 🌟 消息列表 */}
-        <Bubble.List
-          items={items.length > 0 ? items : [{ content: placeholderNode, variant: 'borderless' }]}
-          roles={roles}
-          className={styles.messages}
-        />
-        {/* 🌟 提示词 */}
-        <Prompts items={senderPromptsItems} onItemClick={onPromptsItemClick} />
-        {/* 🌟 输入框 */}
-        <Sender
-          value={content}
-          header={SenderHeader}
-          onSubmit={onSubmit}
-          onChange={setContent}
-          prefix={
-            <Button
-              type="text"
-              icon={<PaperClipOutlined style={{ fontSize: 24 }} />}
-              onClick={() => setAttachmentsOpen(!attachmentsOpen)}
-            />
-          }
-          loading={agent.isRequesting()}
-          className={styles.sender}
-          allowSpeech
-          actions={(_, info) => {
-            const { SendButton, LoadingButton, SpeechButton } = info.components;
-            return (
-              <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                <SpeechButton className={styles.speechButton} />
-                {agent.isRequesting() ? (
-                  <LoadingButton type="default" />
-                ) : (
-                  <SendButton type="primary" />
-                )}
-              </div>
-            );
-          }}
-          placeholder="Ask or input / use skills"
-        />
+        <div className={styles.chatList}>{ChatList}</div>
+
+        {ChatSender}
       </div>
     </div>
   );
