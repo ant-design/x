@@ -52,8 +52,14 @@ describe('ThoughtChain Component', () => {
   });
 
   it('ThoughtChain component work', () => {
-    const { container } = render(<ThoughtChain items={items} collapsible />);
+    const { container, getByText } = render(<ThoughtChain items={items} collapsible />);
     const element = container.querySelector<HTMLUListElement>('.ant-thought-chain');
+    const elementHeader = container.querySelectorAll<HTMLDivElement>(
+      '.ant-thought-chain-item-header-box',
+    )[0];
+    fireEvent.click(elementHeader as Element);
+
+    expect(getByText('content test1')).toBeInTheDocument();
     expect(element).toBeTruthy();
     expect(element).toMatchSnapshot();
   });
