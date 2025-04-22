@@ -86,23 +86,42 @@ describe('ThoughtChain Component', () => {
   });
 
   it('ThoughtChain component work with controlled mode', async () => {
+    const onExpand = jest.fn();
     const App = () => {
-      const [expandedKeys] = React.useState<string[]>(['test2']);
+      const [expandedKeys] = React.useState<string[]>(['test1']);
       return (
         <ThoughtChain
           items={items}
           collapsible={{
             expandedKeys,
+            onExpand: (keys) => {
+              onExpand(keys);
+            },
           }}
         />
       );
     };
     const { container } = render(<App />);
 
-    const expandBodyElements = container.querySelectorAll<HTMLDivElement>(
+    const expandBodyBeforeElements = container.querySelectorAll<HTMLDivElement>(
       '.ant-thought-chain-item-content-box',
     );
-    expect(expandBodyElements).toHaveLength(1);
+    expect(expandBodyBeforeElements).toHaveLength(1);
+
+    const itemHeaderElement = container.querySelectorAll<HTMLDivElement>(
+      '.ant-thought-chain-item-header-box',
+    )[0];
+    fireEvent.click(itemHeaderElement as Element);
+    expect(onExpand).toHaveBeenCalledWith([]);
+
+    // click again
+    fireEvent.click(itemHeaderElement as Element);
+    expect(onExpand).toHaveBeenCalledWith([]);
+
+    const expandBodyAfterElements = container.querySelectorAll<HTMLDivElement>(
+      '.ant-thought-chain-item-content-box',
+    );
+    expect(expandBodyAfterElements).toHaveLength(1);
   });
 
   it('ThoughtChain component work collapsible without expandedKeys', async () => {
