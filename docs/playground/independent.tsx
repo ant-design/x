@@ -30,7 +30,7 @@ import {
   useXChat,
 } from '@ant-design/x';
 import type { BubbleDataType } from '@ant-design/x/es/bubble/BubbleList';
-import { Avatar, Button, type GetProp, Space, Spin, message } from 'antd';
+import { Avatar, Button, Flex, type GetProp, Space, Spin, message } from 'antd';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
 import React, { useEffect, useRef, useState } from 'react';
@@ -53,69 +53,68 @@ const DEFAULT_CONVERSATIONS_ITEMS = [
   },
 ];
 
-const WELCOME_PROMPTS: GetProp<typeof Prompts, 'items'> = [
-  {
-    key: '1',
-    label: 'Hot Topics',
-    children: [
-      {
-        key: '1-1',
-        description: 'What has Ant Design X upgraded?',
-        icon: <span style={{ color: '#f93a4a', fontWeight: 700 }}>1</span>,
-      },
-      {
-        key: '1-2',
-        description: 'New AGI Hybrid Interface',
-        icon: <span style={{ color: '#ff6565', fontWeight: 700 }}>2</span>,
-      },
-      {
-        key: '1-3',
-        description: 'What components are in Ant Design X?',
-        icon: <span style={{ color: '#ff8f1f', fontWeight: 700 }}>3</span>,
-      },
-      {
-        key: '1-4',
-        description: 'Come and discover the new design paradigm of the AI era.',
-        icon: <span style={{ color: '#00000040', fontWeight: 700 }}>4</span>,
-      },
-      {
-        key: '1-5',
-        description: 'How to quickly install and import components?',
-        icon: <span style={{ color: '#00000040', fontWeight: 700 }}>5</span>,
-      },
-    ],
-  },
-  {
-    key: '2',
-    label: 'Design Guide',
-    children: [
-      {
-        key: '2-1',
-        icon: <HeartOutlined />,
-        label: 'Intention',
-        description: 'AI understands user needs and provides solutions.',
-      },
-      {
-        key: '2-2',
-        icon: <SmileOutlined />,
-        label: 'Role',
-        description: "AI's public persona and image",
-      },
-      {
-        key: '2-3',
-        icon: <CommentOutlined />,
-        label: 'Chat',
-        description: 'How AI Can Express Itself in a Way Users Understand',
-      },
-      {
-        key: '2-4',
-        icon: <PaperClipOutlined />,
-        label: 'Interface',
-        description: 'AI balances "chat" & "do" behaviors.',
-      },
-    ],
-  },
-];
+const HOT_TOPICS = {
+  key: '1',
+  label: 'Hot Topics',
+  children: [
+    {
+      key: '1-1',
+      description: 'What has Ant Design X upgraded?',
+      icon: <span style={{ color: '#f93a4a', fontWeight: 700 }}>1</span>,
+    },
+    {
+      key: '1-2',
+      description: 'New AGI Hybrid Interface',
+      icon: <span style={{ color: '#ff6565', fontWeight: 700 }}>2</span>,
+    },
+    {
+      key: '1-3',
+      description: 'What components are in Ant Design X?',
+      icon: <span style={{ color: '#ff8f1f', fontWeight: 700 }}>3</span>,
+    },
+    {
+      key: '1-4',
+      description: 'Come and discover the new design paradigm of the AI era.',
+      icon: <span style={{ color: '#00000040', fontWeight: 700 }}>4</span>,
+    },
+    {
+      key: '1-5',
+      description: 'How to quickly install and import components?',
+      icon: <span style={{ color: '#00000040', fontWeight: 700 }}>5</span>,
+    },
+  ],
+};
+
+const DESIGN_GUIDE = {
+  key: '2',
+  label: 'Design Guide',
+  children: [
+    {
+      key: '2-1',
+      icon: <HeartOutlined />,
+      label: 'Intention',
+      description: 'AI understands user needs and provides solutions.',
+    },
+    {
+      key: '2-2',
+      icon: <SmileOutlined />,
+      label: 'Role',
+      description: "AI's public persona and image",
+    },
+    {
+      key: '2-3',
+      icon: <CommentOutlined />,
+      label: 'Chat',
+      description: 'How AI Can Express Itself in a Way Users Understand',
+    },
+    {
+      key: '2-4',
+      icon: <PaperClipOutlined />,
+      label: 'Interface',
+      description: 'AI balances "chat" & "do" behaviors.',
+    },
+  ],
+};
 
 const SENDER_PROMPTS: GetProp<typeof Prompts, 'items'> = [
   {
@@ -210,6 +209,9 @@ const useStyle = createStyles(({ token, css }) => {
       gap: 16px;
     `,
     chatPrompt: css`
+      .ant-prompts-list {
+        height: 100%;
+      }
       .ant-prompts-label {
         color: #000000e0 !important;
       }
@@ -457,23 +459,41 @@ const Independent: React.FC = () => {
           </Space>
         }
       />
-      <Prompts
-        title="Do you want?"
-        items={WELCOME_PROMPTS}
-        styles={{
-          item: {
-            flex: 1,
-            backgroundImage: 'linear-gradient(123deg, #e5f4ff 0%, #efe7ff 100%)',
-            borderRadius: 12,
-            border: 'none',
-          },
-          subItem: { padding: 0, background: 'transparent' },
-        }}
-        onItemClick={(info) => {
-          onSubmit(info.data.description as string);
-        }}
-        className={styles.chatPrompt}
-      />
+      <Flex style={{ gap: 16 }}>
+        <Prompts
+          items={[HOT_TOPICS]}
+          styles={{
+            item: {
+              flex: 1,
+              backgroundImage: 'linear-gradient(123deg, #e5f4ff 0%, #efe7ff 100%)',
+              borderRadius: 12,
+              border: 'none',
+            },
+            subItem: { padding: 0, background: 'transparent' },
+          }}
+          onItemClick={(info) => {
+            onSubmit(info.data.description as string);
+          }}
+          className={styles.chatPrompt}
+        />
+
+        <Prompts
+          items={[DESIGN_GUIDE]}
+          styles={{
+            item: {
+              flex: 1,
+              backgroundImage: 'linear-gradient(123deg, #e5f4ff 0%, #efe7ff 100%)',
+              borderRadius: 12,
+              border: 'none',
+            },
+            subItem: { background: '#ffffffa6' },
+          }}
+          onItemClick={(info) => {
+            onSubmit(info.data.description as string);
+          }}
+          className={styles.chatPrompt}
+        />
+      </Flex>
     </Space>
   );
   const SenderHeader = (
