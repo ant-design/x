@@ -83,6 +83,12 @@ export interface XRequestCallbacks<Output> {
    * @description Callback when the request is updated
    */
   onUpdate: (chunk: Output) => void;
+
+  /**
+   * @description Callback monitoring and control the stream
+   */
+
+  onStream?: (abortController: AbortController) => void;
 }
 
 export type XRequestFunction<Input = AnyObject, Output = SSEOutput> = (
@@ -132,6 +138,7 @@ class XRequestClass {
     callbacks?: XRequestCallbacks<Output>,
     transformStream?: XStreamOptions<Output>['transformStream'],
   ) => {
+    const abortController = new AbortController();
     const requestInit = {
       method: 'POST',
       body: JSON.stringify({
@@ -139,7 +146,10 @@ class XRequestClass {
         ...params,
       }),
       headers: this.defaultHeaders,
+      signal: abortController.signal,
     };
+
+    callbacks?.onStream?.(abortController);
 
     try {
       const response = await xFetch(this.baseURL, {
@@ -191,7 +201,6 @@ class XRequestClass {
       transformStream,
     })) {
       chunks.push(chunk);
-
       callbacks?.onUpdate?.(chunk);
     }
 
@@ -203,15 +212,13 @@ class XRequestClass {
     callbacks?: XRequestCallbacks<Output>,
   ) => {
     const chunks: Output[] = [];
-
-    for await (const chunk of XStream<Output>({
+    const stream = XStream<Output>({
       readableStream: response.body!,
-    })) {
+    });
+    for await (const chunk of stream) {
       chunks.push(chunk);
-
       callbacks?.onUpdate?.(chunk);
     }
-
     callbacks?.onSuccess?.(chunks);
   };
 
@@ -222,7 +229,6 @@ class XRequestClass {
     const chunk: Output = await response.json();
 
     callbacks?.onUpdate?.(chunk);
-
     callbacks?.onSuccess?.([chunk]);
   };
 }

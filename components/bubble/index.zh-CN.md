@@ -19,7 +19,6 @@ demo:
 ## 代码演示
 
 <!-- prettier-ignore -->
-<code src="./demo/debug.tsx" debug>debug</code>
 <code src="./demo/basic.tsx">基本</code>
 <code src="./demo/avatar-and-placement.tsx">支持位置和头像</code>
 <code src="./demo/header-and-footer.tsx">头和尾</code>
@@ -32,6 +31,8 @@ demo:
 <code src="./demo/bubble-custom.tsx">语义化自定义</code>
 <code src="./demo/list-custom.tsx">自定义列表内容</code>
 <code src="./demo/gpt-vis.tsx">使用 GPT-Vis 渲染图表</code>
+<code src="./demo/debug.tsx" debug>debug</code>
+<code src="./demo/debug-list.tsx" debug>debug list</code>
 
 ## API
 
@@ -44,7 +45,7 @@ demo:
 | avatar | 展示头像 | React.ReactNode | - |  |
 | classNames | 语义化结构 class | [Record<SemanticDOM, string>](#semantic-dom) | - |  |
 | content | 聊天内容 | string | - |  |
-| footer | 底部内容 | React.ReactNode | - |  |
+| footer | 底部内容 | React.ReactNode \| (content: [BubbleContentType](https://github.com/ant-design/x/blob/d3232c925a0dc61ad763c6664e16f07323ebca4a/components/bubble/interface.ts#L21)) => React.ReactNode | - |  |
 | header | 头部内容 | React.ReactNode | - |  |
 | loading | 聊天内容加载状态 | boolean | - |  |
 | placement | 信息位置 | `start` \| `end` | `start` |  |

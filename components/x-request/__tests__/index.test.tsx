@@ -53,6 +53,7 @@ describe('XRequest Class', () => {
     onSuccess: jest.fn(),
     onError: jest.fn(),
     onUpdate: jest.fn(),
+    onStream: jest.fn(),
   };
 
   const mockedXFetch = xFetch as jest.Mock;
@@ -86,6 +87,7 @@ describe('XRequest Class', () => {
     expect(callbacks.onSuccess).toHaveBeenCalledWith([params]);
     expect(callbacks.onError).not.toHaveBeenCalled();
     expect(callbacks.onUpdate).toHaveBeenCalledWith(params);
+    expect(callbacks.onStream).toHaveBeenCalledWith(expect.any(AbortController));
   });
 
   test('should create request and handle streaming response', async () => {
@@ -99,6 +101,7 @@ describe('XRequest Class', () => {
     expect(callbacks.onSuccess).toHaveBeenCalledWith([sseEvent]);
     expect(callbacks.onError).not.toHaveBeenCalled();
     expect(callbacks.onUpdate).toHaveBeenCalledWith(sseEvent);
+    expect(callbacks.onStream).toHaveBeenCalledWith(expect.any(AbortController));
   });
 
   test('should create request and handle custom response, e.g. application/x-ndjson', async () => {
@@ -116,6 +119,7 @@ describe('XRequest Class', () => {
     expect(callbacks.onError).not.toHaveBeenCalled();
     expect(callbacks.onUpdate).toHaveBeenCalledWith(ndJsonData.split(ND_JSON_SEPARATOR)[0]);
     expect(callbacks.onUpdate).toHaveBeenCalledWith(ndJsonData.split(ND_JSON_SEPARATOR)[1]);
+    expect(callbacks.onStream).toHaveBeenCalledWith(expect.any(AbortController));
   });
 
   test('should reuse the same instance for the same baseURL or fetch', () => {
@@ -132,6 +136,7 @@ describe('XRequest Class', () => {
     await request.create(params, callbacks).catch(() => {});
     expect(callbacks.onSuccess).not.toHaveBeenCalled();
     expect(callbacks.onError).toHaveBeenCalledWith(new Error('Fetch failed'));
+    expect(callbacks.onStream).toHaveBeenCalledWith(expect.any(AbortController));
   });
 
   test('should throw error for unsupported content type', async () => {
@@ -166,5 +171,6 @@ describe('XRequest Class', () => {
     expect(callbacks.onError).toHaveBeenCalledWith(new Error('Transform error'));
     expect(callbacks.onSuccess).not.toHaveBeenCalled();
     expect(callbacks.onUpdate).not.toHaveBeenCalled();
+    expect(callbacks.onStream).toHaveBeenCalledWith(expect.any(AbortController));
   });
 });

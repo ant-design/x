@@ -1,5 +1,5 @@
 import { createStyles } from 'antd-style';
-import { useLocation, useNavigate } from 'dumi';
+import { useLocation } from 'dumi';
 import React, { useContext } from 'react';
 
 import useLocale from '../../../hooks/useLocale';
@@ -98,7 +98,6 @@ const DesignFramework: React.FC = () => {
   const { pathname, search } = useLocation();
   const isZhCN = utils.isZhCN(pathname);
   const { isMobile } = useContext(SiteContext);
-  const navigate = useNavigate();
 
   const items = [
     {
@@ -114,7 +113,7 @@ const DesignFramework: React.FC = () => {
           />
         </div>
       ),
-      onClick: () => navigate(utils.getLocalizedPathname('/docs/spec/introduce', isZhCN, search)),
+      to: utils.getLocalizedPathname('/docs/spec/introduce', isZhCN, search),
     },
     {
       title: locale.guide,
@@ -129,8 +128,7 @@ const DesignFramework: React.FC = () => {
           />
         </div>
       ),
-      onClick: () =>
-        navigate(utils.getLocalizedPathname('/docs/spec/hybrid-ui-design', isZhCN, search)),
+      to: utils.getLocalizedPathname('/docs/spec/hybrid-ui-design', isZhCN, search),
     },
     {
       title: locale.lib,
@@ -145,31 +143,31 @@ const DesignFramework: React.FC = () => {
           />
         </div>
       ),
-      onClick: () => navigate(utils.getLocalizedPathname('/components/overview', isZhCN, search)),
+      to: utils.getLocalizedPathname('/components/overview', isZhCN, search),
     },
     {
       title: locale.antd,
       desc: locale.antdDesc,
       icon: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*dUzuRJes4pUAAAAAAAAAAAAADgCCAQ/original',
-      onClick: () => window.open('https://ant.design/'),
+      to: 'https://ant.design/',
     },
     {
       title: locale.antdMobile,
       desc: locale.antdMobileDesc,
       icon: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*rzh3RoWC9zAAAAAAAAAAAAAADgCCAQ/original',
-      onClick: () => window.open('https://mobile.ant.design/'),
+      to: 'https://mobile.ant.design/',
     },
     {
       title: locale.antv,
       desc: locale.antvDesc,
       icon: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*9MFyQ77L6E4AAAAAAAAAAAAADgCCAQ/fmt.webp',
-      onClick: () => window.open('https://antv.vision/'),
+      to: 'https://antv.vision/',
     },
   ];
 
   return (
     <Introduction
-      cardStyle={{ background: '#ffffff1a' }}
+      cardStyle={{ background: '#ffffff1a', color: '#fff' }}
       title={locale.title}
       desc={locale.desc}
       items={items}

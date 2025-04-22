@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import { useLocation, useSiteData } from 'dumi';
 import React from 'react';
 
+import ThemeSwitch from '../../common/ThemeSwitch';
 import DirectionIcon from '../../icons/DirectionIcon';
 import * as utils from '../../utils';
 import { getThemeConfig } from '../../utils';
@@ -136,6 +137,7 @@ const HeaderActions: React.FC<HeaderActionsProps> = (props) => {
       pure
       aria-label="RTL Switch Button"
     />,
+    <ThemeSwitch key="theme" />,
     <a key="github" href="https://github.com/ant-design/x" target="_blank" rel="noreferrer">
       <SwitchBtn value={1} label1={<GithubOutlined />} tooltip1="Github" label2={null} pure />
     </a>,

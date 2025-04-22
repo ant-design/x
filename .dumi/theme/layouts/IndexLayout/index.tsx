@@ -20,7 +20,7 @@ const IndexLayout: React.FC<PropsWithChildren<IndexLayoutProps>> = (props) => {
         <meta property="og:title" content={title} />
         {desc && <meta name="description" content={desc} />}
       </Helmet>
-      {children}
+      <div style={{ minHeight: '100vh' }}>{children}</div>
       <Footer />
     </>
   );

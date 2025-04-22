@@ -158,7 +158,9 @@ function XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
       ? /**
          * Uint8Array binary -> string -> Output
          */
-        readableStream.pipeThrough(decoderStream).pipeThrough(transformStream)
+        readableStream
+          .pipeThrough(decoderStream)
+          .pipeThrough(transformStream)
       : /**
          * Uint8Array binary -> string -> SSE part string -> Default Output {@link SSEOutput}
          */
@@ -182,8 +184,8 @@ function XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
       // Transformed data through all transform pipes
       yield value;
     }
-  }
-  
+  };
+
   return stream;
 }
 

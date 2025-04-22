@@ -32,6 +32,7 @@ const App = () => {
       {
         messages: [{ role: 'user', content: 'hello, who are u?' }],
         stream: true,
+        agentId: 111,
       },
       {
         onSuccess: (messages) => {

@@ -1,6 +1,6 @@
-import React from 'react';
-import { css, Global } from '@emotion/react';
+import { Global, css } from '@emotion/react';
 import { useTheme } from 'antd-style';
+import React from 'react';
 
 export default () => {
   const token = useTheme();
@@ -34,6 +34,8 @@ export default () => {
             > .icon-link::before {
               font-size: ${token.fontSizeXL}px;
               content: '#';
+              color: ${token.colorTextSecondary};
+              font-family: ${token.codeFamily};
             }
           }
 

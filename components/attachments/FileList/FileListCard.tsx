@@ -186,7 +186,7 @@ function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) 
     // Preview Image style
     content = (
       <>
-        {previewUrl && <Image {...imageProps} alt="preview" src={previewUrl} />}
+        {previewUrl && <Image alt="preview" src={previewUrl} {...imageProps} />}
 
         {status !== 'done' && (
           <div className={`${cardCls}-img-mask`}>
