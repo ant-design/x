@@ -209,21 +209,15 @@ const useStyle = createStyles(({ token, css }) => {
       gap: 16px;
     `,
     chatPrompt: css`
-      .ant-prompts-list {
-        height: 100%;
-      }
       .ant-prompts-label {
         color: #000000e0 !important;
-      }
-      .ant-prompts-item {
-        color: #000000a6;
-      }
-      .ant-prompts-content {
-        color: #000000a6;
       }
       .ant-prompts-desc {
         color: #000000a6 !important;
         width: 100%;
+      }
+      .ant-prompts-icon {
+        color: #000000a6 !important;
       }
     `,
     chatList: css`
@@ -246,7 +240,7 @@ const useStyle = createStyles(({ token, css }) => {
       color: ${token.colorText};
     `,
     speechButton: css`
-      font-size: 24px;
+      font-size: 18px;
       color: ${token.colorText} !important;
     `,
     senderPrompt: css`
@@ -466,6 +460,7 @@ const Independent: React.FC = () => {
             <Prompts
               items={[HOT_TOPICS]}
               styles={{
+                list: { height: '100%' },
                 item: {
                   flex: 1,
                   backgroundImage: 'linear-gradient(123deg, #e5f4ff 0%, #efe7ff 100%)',
@@ -550,7 +545,7 @@ const Independent: React.FC = () => {
         prefix={
           <Button
             type="text"
-            icon={<PaperClipOutlined style={{ fontSize: 24 }} />}
+            icon={<PaperClipOutlined style={{ fontSize: 18 }} />}
             onClick={() => setAttachmentsOpen(!attachmentsOpen)}
           />
         }

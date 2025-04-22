@@ -139,7 +139,7 @@ const useCopilotStyle = createStyles(({ token, css }) => {
       gap: 8px;
     `,
     speechButton: css`
-      font-size: 24px;
+      font-size: 18px;
       color: ${token.colorText} !important;
     `,
   };
@@ -422,7 +422,7 @@ const Copilot = (props: CopilotProps) => {
             prefix={
               <Button
                 type="text"
-                icon={<PaperClipOutlined style={{ fontSize: 24 }} />}
+                icon={<PaperClipOutlined style={{ fontSize: 18 }} />}
                 onClick={() => setAttachmentsOpen(!attachmentsOpen)}
               />
             }
