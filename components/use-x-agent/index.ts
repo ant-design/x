@@ -98,6 +98,7 @@ export default function useXAgent<
   Output = SSEOutput,
 >(config: XAgentConfig<Message, Input, Output>) {
   const { request, ...restConfig } = config;
+
   return React.useMemo(
     () =>
       [
@@ -112,6 +113,6 @@ export default function useXAgent<
           ...restConfig,
         }),
       ] as const,
-    [],
+    [config],
   );
 }

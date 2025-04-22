@@ -442,7 +442,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
       class="ant-thought-chain ant-thought-chain-middle"
     >
       <div
-        class="ant-thought-chain-item"
+        class="ant-thought-chain-item ant-thought-chain-item-success-pending"
       >
         <div
           class="ant-thought-chain-item-header"
@@ -532,7 +532,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
         </div>
       </div>
       <div
-        class="ant-thought-chain-item"
+        class="ant-thought-chain-item ant-thought-chain-item-pending-pending"
       >
         <div
           class="ant-thought-chain-item-header"
@@ -561,6 +561,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
                     fill="currentColor"
                     focusable="false"
                     height="1em"
+                    style="transform: rotate(90deg);"
                     viewBox="64 64 896 896"
                     width="1em"
                   >
@@ -618,6 +619,35 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+        <div
+          class="ant-thought-chain-item-content"
+        >
+          <div
+            class="ant-thought-chain-item-content-box"
+          >
+            <article
+              class="ant-typography"
+            >
+              <div
+                class="ant-typography"
+              >
+                In the process of internal desktop applications development, many different design specs and implementations would be involved, which might cause designers and developers difficulties and duplication and reduce the efficiency of development.
+              </div>
+              <div
+                class="ant-typography"
+              >
+                After massive project practice and summaries, Ant Design, a design language for background applications, is refined by Ant UED Team, which aims to 
+                <span
+                  class="ant-typography"
+                >
+                  <strong>
+                    uniform the user interface specs for internal background projects, lower the unnecessary cost of design differences and implementation and liberate the resources of design and front-end development
+                  </strong>
+                </span>
+              </div>
+            </article>
           </div>
         </div>
       </div>

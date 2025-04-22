@@ -1,5 +1,5 @@
-import type { GenerateStyle } from '../../theme/cssinjs-utils';
 import type { BubbleToken } from '.';
+import type { GenerateStyle } from '../../theme/cssinjs-utils';
 
 const genBubbleListStyle: GenerateStyle<BubbleToken> = (token) => {
   const { componentCls, padding } = token;
@@ -9,6 +9,22 @@ const genBubbleListStyle: GenerateStyle<BubbleToken> = (token) => {
       flexDirection: 'column',
       gap: padding,
       overflowY: 'auto',
+
+      '&::-webkit-scrollbar': {
+        width: 8,
+        backgroundColor: 'transparent',
+      },
+
+      '&::-webkit-scrollbar-thumb': {
+        backgroundColor: token.colorTextTertiary,
+        borderRadius: token.borderRadiusSM,
+      },
+
+      // For Firefox
+      '&': {
+        scrollbarWidth: 'thin',
+        scrollbarColor: `${token.colorTextTertiary} transparent`,
+      },
     },
   };
 };

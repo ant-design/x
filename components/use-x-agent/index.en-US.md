@@ -22,6 +22,7 @@ Connect with the backend model to provide an abstract data flow.
 <code src="./demo/requestParams.tsx">Custom RequestParams</code>
 <code src="./demo/custom.tsx">Custom Request</code>
 <code src="./demo/model.tsx">Model Access</code>
+<code src="./demo/request-options.tsx">Control XRequestOptions</code>
 
 ## API
 

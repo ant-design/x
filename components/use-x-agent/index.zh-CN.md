@@ -23,6 +23,7 @@ demo:
 <code src="./demo/requestParams.tsx">自定义入参</code>
 <code src="./demo/custom.tsx">自定义请求</code>
 <code src="./demo/model.tsx">模型接入</code>
+<code src="./demo/request-options.tsx">变更配置</code>
 
 ## API
 

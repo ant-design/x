@@ -1,5 +1,5 @@
 import type { MenuProps } from 'antd';
-import { Flex, Tag, version } from 'antd';
+import { Flex, Tag } from 'antd';
 import { createStyles } from 'antd-style';
 import classnames from 'classnames';
 import { useFullSidebarData, useSidebarData } from 'dumi';

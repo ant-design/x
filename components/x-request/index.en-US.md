@@ -22,6 +22,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*lQydTrtLz9YAAA
 <code src="./demo/basic.tsx">Basic</code>
 <code src="./demo/requestParams.tsx">Custom RequestParams</code>
 <code src="./demo/custom-transformer.tsx">Custom Transformer</code>
+<code src="./demo/request-options.tsx">Control XRequestOptions</code>
 <code src="./demo/model.tsx">Model Access</code>
 
 ## API
