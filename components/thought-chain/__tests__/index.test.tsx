@@ -104,4 +104,37 @@ describe('ThoughtChain Component', () => {
     );
     expect(expandBodyElements).toHaveLength(1);
   });
+
+  it('ThoughtChain component work collapsible without expandedKeys', async () => {
+    const onExpand = jest.fn();
+    const App = () => {
+      return (
+        <ThoughtChain
+          items={items}
+          collapsible={{
+            onExpand: (keys) => {
+              onExpand(keys);
+            },
+          }}
+        />
+      );
+    };
+    const { container } = render(<App />);
+
+    const expandBodyElementBefore = container.querySelectorAll<HTMLDivElement>(
+      '.ant-thought-chain-item-content-box',
+    );
+    expect(expandBodyElementBefore).toHaveLength(0);
+
+    const element = container.querySelectorAll<HTMLDivElement>(
+      '.ant-thought-chain-item-header-box',
+    )[0];
+    fireEvent.click(element as Element);
+    expect(onExpand).toHaveBeenCalledWith(['test1']);
+
+    const expandBodyElementsAfter = container.querySelectorAll<HTMLDivElement>(
+      '.ant-thought-chain-item-content-box',
+    );
+    expect(expandBodyElementsAfter).toHaveLength(1);
+  });
 });
