@@ -429,6 +429,7 @@ const Independent: React.FC = () => {
         },
         typing: i.status === 'loading' ? { step: 5, interval: 20, suffix: <>💗</> } : false,
       }))}
+      style={{ height: '100%' }}
       roles={{
         assistant: {
           placement: 'start',
