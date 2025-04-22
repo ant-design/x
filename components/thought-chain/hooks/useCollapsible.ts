@@ -34,7 +34,7 @@ type UseCollapsible = (
 ];
 
 const useCollapsible: UseCollapsible = (collapsible, prefixCls, rootPrefixCls) => {
-  const isThoughtChainUnControlled = typeof collapsible === 'boolean' || !collapsible?.expandedKeys;
+  const isThoughtChainUnControlled = typeof collapsible === 'boolean' || collapsible?.expandedKeys !== undefined;
   // ============================ Collapsible ============================
   const [enableCollapse, customizeExpandedKeys, customizeOnExpand] = React.useMemo(() => {
     let baseConfig: RequiredCollapsibleOptions = {
