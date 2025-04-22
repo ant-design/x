@@ -331,7 +331,7 @@ const Independent: React.FC = () => {
   };
 
   // ==================== Nodes ====================
-  const ChatSider = (
+  const chatSider = (
     <div className={styles.sider}>
       {/* 🌟 Logo */}
       <div className={styles.logo}>
@@ -419,85 +419,89 @@ const Independent: React.FC = () => {
       </div>
     </div>
   );
-  const ChatList = messages?.length ? (
-    /* 🌟 消息列表 */
-    <Bubble.List
-      items={messages?.map((i) => ({
-        ...i.message,
-        classNames: {
-          content: i.status === 'loading' ? styles.loadingMessage : '',
-        },
-        typing: i.status === 'loading' ? { step: 5, interval: 20, suffix: <>💗</> } : false,
-      }))}
-      style={{ height: '100%' }}
-      roles={{
-        assistant: {
-          placement: 'start',
-          footer: (
-            <div style={{ display: 'flex' }}>
-              <Button type="text" size="small" icon={<ReloadOutlined />} />
-              <Button type="text" size="small" icon={<CopyOutlined />} />
-              <Button type="text" size="small" icon={<LikeOutlined />} />
-              <Button type="text" size="small" icon={<DislikeOutlined />} />
-            </div>
-          ),
-          loadingRender: () => <Spin size="small" />,
-        },
-        user: { placement: 'end' },
-      }}
-    />
-  ) : (
-    <Space direction="vertical" size={16} className={styles.placeholder}>
-      <Welcome
-        variant="borderless"
-        icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
-        title="Hello, I'm Ant Design X"
-        description="Base on Ant Design, AGI product interface solution, create a better intelligent vision~"
-        extra={
-          <Space>
-            <Button icon={<ShareAltOutlined />} />
-            <Button icon={<EllipsisOutlined />} />
-          </Space>
-        }
-      />
-      <Flex style={{ gap: 16 }}>
-        <Prompts
-          items={[HOT_TOPICS]}
-          styles={{
-            item: {
-              flex: 1,
-              backgroundImage: 'linear-gradient(123deg, #e5f4ff 0%, #efe7ff 100%)',
-              borderRadius: 12,
-              border: 'none',
+  const chatList = (
+    <div className={styles.chatList}>
+      {messages?.length ? (
+        /* 🌟 消息列表 */
+        <Bubble.List
+          items={messages?.map((i) => ({
+            ...i.message,
+            classNames: {
+              content: i.status === 'loading' ? styles.loadingMessage : '',
             },
-            subItem: { padding: 0, background: 'transparent' },
+            typing: i.status === 'loading' ? { step: 5, interval: 20, suffix: <>💗</> } : false,
+          }))}
+          style={{ height: '100%' }}
+          roles={{
+            assistant: {
+              placement: 'start',
+              footer: (
+                <div style={{ display: 'flex' }}>
+                  <Button type="text" size="small" icon={<ReloadOutlined />} />
+                  <Button type="text" size="small" icon={<CopyOutlined />} />
+                  <Button type="text" size="small" icon={<LikeOutlined />} />
+                  <Button type="text" size="small" icon={<DislikeOutlined />} />
+                </div>
+              ),
+              loadingRender: () => <Spin size="small" />,
+            },
+            user: { placement: 'end' },
           }}
-          onItemClick={(info) => {
-            onSubmit(info.data.description as string);
-          }}
-          className={styles.chatPrompt}
         />
+      ) : (
+        <Space direction="vertical" size={16} className={styles.placeholder}>
+          <Welcome
+            variant="borderless"
+            icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
+            title="Hello, I'm Ant Design X"
+            description="Base on Ant Design, AGI product interface solution, create a better intelligent vision~"
+            extra={
+              <Space>
+                <Button icon={<ShareAltOutlined />} />
+                <Button icon={<EllipsisOutlined />} />
+              </Space>
+            }
+          />
+          <Flex gap={16}>
+            <Prompts
+              items={[HOT_TOPICS]}
+              styles={{
+                item: {
+                  flex: 1,
+                  backgroundImage: 'linear-gradient(123deg, #e5f4ff 0%, #efe7ff 100%)',
+                  borderRadius: 12,
+                  border: 'none',
+                },
+                subItem: { padding: 0, background: 'transparent' },
+              }}
+              onItemClick={(info) => {
+                onSubmit(info.data.description as string);
+              }}
+              className={styles.chatPrompt}
+            />
 
-        <Prompts
-          items={[DESIGN_GUIDE]}
-          styles={{
-            item: {
-              flex: 1,
-              backgroundImage: 'linear-gradient(123deg, #e5f4ff 0%, #efe7ff 100%)',
-              borderRadius: 12,
-              border: 'none',
-            },
-            subItem: { background: '#ffffffa6' },
-          }}
-          onItemClick={(info) => {
-            onSubmit(info.data.description as string);
-          }}
-          className={styles.chatPrompt}
-        />
-      </Flex>
-    </Space>
+            <Prompts
+              items={[DESIGN_GUIDE]}
+              styles={{
+                item: {
+                  flex: 1,
+                  backgroundImage: 'linear-gradient(123deg, #e5f4ff 0%, #efe7ff 100%)',
+                  borderRadius: 12,
+                  border: 'none',
+                },
+                subItem: { background: '#ffffffa6' },
+              }}
+              onItemClick={(info) => {
+                onSubmit(info.data.description as string);
+              }}
+              className={styles.chatPrompt}
+            />
+          </Flex>
+        </Space>
+      )}
+    </div>
   );
-  const SenderHeader = (
+  const senderHeader = (
     <Sender.Header
       title="Upload File"
       open={attachmentsOpen}
@@ -520,7 +524,7 @@ const Independent: React.FC = () => {
       />
     </Sender.Header>
   );
-  const ChatSender = (
+  const chatSender = (
     <>
       {/* 🌟 提示词 */}
       <Prompts
@@ -534,7 +538,7 @@ const Independent: React.FC = () => {
       {/* 🌟 输入框 */}
       <Sender
         value={inputValue}
-        header={SenderHeader}
+        header={senderHeader}
         onSubmit={() => {
           onSubmit(inputValue);
           setInputValue('');
@@ -556,10 +560,10 @@ const Independent: React.FC = () => {
         actions={(_, info) => {
           const { SendButton, LoadingButton, SpeechButton } = info.components;
           return (
-            <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+            <Flex gap={4}>
               <SpeechButton className={styles.speechButton} />
               {loading ? <LoadingButton type="default" /> : <SendButton type="primary" />}
-            </div>
+            </Flex>
           );
         }}
         placeholder="Ask or input / use skills"
@@ -580,12 +584,11 @@ const Independent: React.FC = () => {
   // ==================== Render =================
   return (
     <div className={styles.layout}>
-      {ChatSider}
+      {chatSider}
 
       <div className={styles.chat}>
-        <div className={styles.chatList}>{ChatList}</div>
-
-        {ChatSender}
+        {chatList}
+        {chatSender}
       </div>
     </div>
   );

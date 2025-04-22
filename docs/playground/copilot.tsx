@@ -236,7 +236,7 @@ const Copilot = (props: CopilotProps) => {
   };
 
   // ==================== Nodes ====================
-  const ChatHeader = (
+  const chatHeader = (
     <div className={styles.chatHeader}>
       <div className={styles.headerTitle}>✨ AI Copilot</div>
       <Space size={0}>
@@ -298,12 +298,12 @@ const Copilot = (props: CopilotProps) => {
       </Space>
     </div>
   );
-
-  const ChatList = (
+  const chatList = (
     <div className={styles.chatList}>
       {messages?.length ? (
         /** 消息列表 */
         <Bubble.List
+          style={{ height: '100%' }}
           items={messages?.map((i) => ({
             ...i.message,
             classNames: {
@@ -355,8 +355,7 @@ const Copilot = (props: CopilotProps) => {
       )}
     </div>
   );
-
-  const SendHeader = (
+  const sendHeader = (
     <Sender.Header
       title="Upload File"
       styles={{ content: { padding: 0 } }}
@@ -381,7 +380,7 @@ const Copilot = (props: CopilotProps) => {
       />
     </Sender.Header>
   );
-  const ChatSender = (
+  const chatSender = (
     <div className={styles.chatSend}>
       <div className={styles.sendAction}>
         <Button
@@ -419,7 +418,7 @@ const Copilot = (props: CopilotProps) => {
             allowSpeech
             placeholder="Ask or input / use skills"
             onKeyDown={onKeyDown}
-            header={SendHeader}
+            header={sendHeader}
             prefix={
               <Button
                 type="text"
@@ -456,13 +455,13 @@ const Copilot = (props: CopilotProps) => {
   return (
     <div className={styles.copilotChat} style={{ width: copilotOpen ? 400 : 0 }}>
       {/** 对话区 - header */}
-      {ChatHeader}
+      {chatHeader}
 
       {/** 对话区 - 消息列表 */}
-      {ChatList}
+      {chatList}
 
       {/** 对话区 - 输入框 */}
-      {ChatSender}
+      {chatSender}
     </div>
   );
 };
