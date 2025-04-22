@@ -104,8 +104,6 @@ class XRequestClass {
   private defaultHeaders;
   private customOptions;
 
-  private static instanceBuffer: Map<string | typeof fetch, XRequestClass> = new Map();
-
   private constructor(options: XRequestOptions) {
     const { baseURL, model, dangerouslyApiKey, ...customOptions } = options;
 
@@ -124,13 +122,7 @@ class XRequestClass {
     if (!options.baseURL || typeof options.baseURL !== 'string')
       throw new Error('The baseURL is not valid!');
 
-    const id = options.fetch || options.baseURL;
-
-    if (!XRequestClass.instanceBuffer.has(id)) {
-      XRequestClass.instanceBuffer.set(id, new XRequestClass(options));
-    }
-
-    return XRequestClass.instanceBuffer.get(id) as XRequestClass;
+    return new XRequestClass(options);
   }
 
   public create = async <Input = AnyObject, Output = SSEOutput>(

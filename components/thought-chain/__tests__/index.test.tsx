@@ -9,28 +9,28 @@ import themeTest from '../../../tests/shared/themeTest';
 
 import type { ThoughtChainItem } from '../index';
 
-const customizationProps: ThoughtChainItem = {
+const customizationProps = (key: string): ThoughtChainItem => ({
   title: 'Thought Chain Item Title',
   description: 'description',
   icon: <CheckCircleOutlined />,
   extra: 'Extra',
   footer: 'Thought Chain Item Footer',
-  content: 'content',
-};
+  content: `content ${key}`,
+});
 
 const items: ThoughtChainItem[] = [
   {
-    ...customizationProps,
+    ...customizationProps('test1'),
     status: 'success',
     key: 'test1',
   },
   {
-    ...customizationProps,
+    ...customizationProps('test2'),
     status: 'error',
     key: 'test2',
   },
   {
-    ...customizationProps,
+    ...customizationProps('test3'),
     status: 'pending',
     key: 'test3',
   },
@@ -52,8 +52,14 @@ describe('ThoughtChain Component', () => {
   });
 
   it('ThoughtChain component work', () => {
-    const { container } = render(<ThoughtChain items={items} collapsible />);
+    const { container, getByText } = render(<ThoughtChain items={items} collapsible />);
     const element = container.querySelector<HTMLUListElement>('.ant-thought-chain');
+    const elementHeader = container.querySelectorAll<HTMLDivElement>(
+      '.ant-thought-chain-item-header-box',
+    )[0];
+    fireEvent.click(elementHeader as Element);
+
+    expect(getByText('content test1')).toBeInTheDocument();
     expect(element).toBeTruthy();
     expect(element).toMatchSnapshot();
   });
@@ -85,10 +91,9 @@ describe('ThoughtChain Component', () => {
     expect(onExpand).toHaveBeenCalledWith([]);
   });
 
-  it('ThoughtChain component work with controlled mode', () => {
+  it('ThoughtChain component work with controlled mode', async () => {
     const App = () => {
-      const [expandedKeys] = React.useState<string[]>(['test3']);
-
+      const [expandedKeys] = React.useState<string[]>(['test2']);
       return (
         <ThoughtChain
           items={items}
@@ -99,16 +104,10 @@ describe('ThoughtChain Component', () => {
       );
     };
     const { container } = render(<App />);
-    const element = container.querySelectorAll<HTMLDivElement>(
-      '.ant-thought-chain-item-header-box',
-    )[0];
-
-    fireEvent.click(element as Element);
 
     const expandBodyElements = container.querySelectorAll<HTMLDivElement>(
-      '.ant-thought-chain-item .ant-thought-chain-item-content',
+      '.ant-thought-chain-item-content-box',
     );
-
     expect(expandBodyElements).toHaveLength(1);
   });
 });

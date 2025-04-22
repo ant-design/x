@@ -23,6 +23,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*lQydTrtLz9YAAA
 <code src="./demo/basic.tsx">基础</code>
 <code src="./demo/requestParams.tsx">自定义入参</code>
 <code src="./demo/custom-transformer.tsx">自定义转换器</code>
+<code src="./demo/request-options.tsx">变更配置</code>
 <code src="./demo/model.tsx">模型接入</code>
 
 ## API
