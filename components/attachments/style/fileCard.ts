@@ -2,7 +2,7 @@ import type { AttachmentsToken } from '.';
 import type { GenerateStyle } from '../../theme/cssinjs-utils';
 
 const genFileCardStyle: GenerateStyle<AttachmentsToken> = (token) => {
-  const { componentCls, calc } = token;
+  const { componentCls, antCls, calc } = token;
 
   const cardCls = `${componentCls}-list-card`;
 
@@ -87,9 +87,16 @@ const genFileCardStyle: GenerateStyle<AttachmentsToken> = (token) => {
         },
 
         // Img
-        img: {
-          objectFit: 'cover',
+        [`${antCls}-image`]: {
+          width: '100%',
+          height: '100%',
           borderRadius: 'inherit',
+
+          img: {
+            height: '100%',
+            objectFit: 'cover',
+            borderRadius: 'inherit',
+          },
         },
 
         // Mask
