@@ -92,7 +92,12 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
       onOpenChange={setOpened}
       placement={direction === 'rtl' ? 'left' : 'right'}
     >
-      <li {...domProps} className={mergedCls} onClick={onInternalClick}>
+      <li
+        {...domProps}
+        className={mergedCls}
+        onClick={onInternalClick}
+        onMouseLeave={() => setOpened(false)}
+      >
         {info.icon && <div className={`${prefixCls}-icon`}>{info.icon}</div>}
         <Typography.Text
           className={`${prefixCls}-label`}
