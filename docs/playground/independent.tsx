@@ -569,10 +569,10 @@ const Independent: React.FC = () => {
   useEffect(() => {
     // history mock
     if (messages?.length) {
-      setMessageHistory({
-        ...messageHistory,
+      setMessageHistory((prev) => ({
+        ...prev,
         [curConversation]: messages,
-      });
+      }));
     }
   }, [messages]);
 
