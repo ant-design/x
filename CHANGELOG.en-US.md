@@ -40,10 +40,9 @@ tag: vVERSION
   - 🆕 XChatConfig adds `resolveAbortController`callback function, which can obtain the`AbortController` controller for controlling the stream state.[#711](https://github.com/ant-design/x/pull/711) by [@kimteayon](https://github.com/kimteayon) 
   - 🆕 Add model access examples and remove incorrect abort examples. [#711](https://github.com/ant-design/x/pull/726) by [@kimteayon](https://github.com/kimteayon) 
 - 🐛 Fixed the issue of Sender `header` `border-radius` style overflow.[#479](https://github.com/ant-design/x/pull/732) by [@Bao0630](https://github.com/Bao0630) 
-- 📝 Add a copilot style model room.[#657](https://github.com/ant-design/x/pull/657) by [@vanndxh](https://github.com/vanndxh) 
-- 📝  Refactoring the independent model room.[#753](https://github.com/ant-design/x/pull/753) by [@vanndxh](https://github.com/vanndxh) 
+- 📖 Add a copilot style model room.[#657](https://github.com/ant-design/x/pull/657) by [@vanndxh](https://github.com/vanndxh) 
+- 📖  Refactoring the independent model room.[#753](https://github.com/ant-design/x/pull/753) by [@vanndxh](https://github.com/vanndxh) 
 - 📖 Enhance the official website to improve user experience.[#730](https://github.com/ant-design/x/pull/680) by [@afc163](https://github.com/afc163) 提交、[#758](https://github.com/ant-design/x/pull/680) by [@coding-ice](https://github.com/coding-ice) 提交、 [#761](https://github.com/ant-design/x/pull/761) by [@ONLY-yours](https://github.com/ONLY-yours) 
-
 
 ## 1.1.1
 
