@@ -6,129 +6,45 @@ exports[`renders components/conversations/demo/basic.tsx extend context correctl
   style="width: 256px; background: #ffffff; border-radius: 6px;"
 >
   <li
-    aria-describedby="test-id"
     class="ant-conversations-item ant-conversations-item-active"
+    title="Conversation Item 1"
   >
     <span
-      aria-label="Conversation Item 1"
-      class="ant-typography ant-typography-ellipsis ant-conversations-label"
+      class="ant-typography ant-conversations-label"
     >
       Conversation Item 1
     </span>
   </li>
-  <div
-    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
-    style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-  >
-    <div
-      class="ant-tooltip-arrow"
-      style="position: absolute; top: 0px; left: 0px;"
-    />
-    <div
-      class="ant-tooltip-content"
-    >
-      <div
-        class="ant-tooltip-inner"
-        id="test-id"
-        role="tooltip"
-      >
-        Conversation Item 1
-      </div>
-    </div>
-  </div>
   <li
-    aria-describedby="test-id"
     class="ant-conversations-item"
+    title="Conversation Item 2"
   >
     <span
-      aria-label="Conversation Item 2"
-      class="ant-typography ant-typography-ellipsis ant-conversations-label"
+      class="ant-typography ant-conversations-label"
     >
       Conversation Item 2
     </span>
   </li>
-  <div
-    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
-    style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-  >
-    <div
-      class="ant-tooltip-arrow"
-      style="position: absolute; top: 0px; left: 0px;"
-    />
-    <div
-      class="ant-tooltip-content"
-    >
-      <div
-        class="ant-tooltip-inner"
-        id="test-id"
-        role="tooltip"
-      >
-        Conversation Item 2
-      </div>
-    </div>
-  </div>
   <li
-    aria-describedby="test-id"
     class="ant-conversations-item"
+    title="Conversation Item 3"
   >
     <span
-      aria-label="Conversation Item 3"
-      class="ant-typography ant-typography-ellipsis ant-conversations-label"
+      class="ant-typography ant-conversations-label"
     >
       Conversation Item 3
     </span>
   </li>
-  <div
-    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
-    style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-  >
-    <div
-      class="ant-tooltip-arrow"
-      style="position: absolute; top: 0px; left: 0px;"
-    />
-    <div
-      class="ant-tooltip-content"
-    >
-      <div
-        class="ant-tooltip-inner"
-        id="test-id"
-        role="tooltip"
-      >
-        Conversation Item 3
-      </div>
-    </div>
-  </div>
   <li
-    aria-describedby="test-id"
     class="ant-conversations-item ant-conversations-item-disabled"
+    title="Conversation Item 4"
   >
     <span
-      aria-label="Conversation Item 4"
-      class="ant-typography ant-typography-ellipsis ant-conversations-label"
+      class="ant-typography ant-conversations-label"
     >
       Conversation Item 4
     </span>
   </li>
-  <div
-    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
-    style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-  >
-    <div
-      class="ant-tooltip-arrow"
-      style="position: absolute; top: 0px; left: 0px;"
-    />
-    <div
-      class="ant-tooltip-content"
-    >
-      <div
-        class="ant-tooltip-inner"
-        id="test-id"
-        role="tooltip"
-      >
-        Conversation Item 4
-      </div>
-    </div>
-  </div>
 </ul>
 `;
 
@@ -143,98 +59,35 @@ exports[`renders components/conversations/demo/controlled-mode.tsx extend contex
     style="width: 256px; background: #ffffff; border-radius: 6px;"
   >
     <li
-      aria-describedby="test-id"
       class="ant-conversations-item ant-conversations-item-active"
+      title="Conversation Item 1"
     >
       <span
-        aria-label="Conversation Item 1"
-        class="ant-typography ant-typography-ellipsis ant-conversations-label"
+        class="ant-typography ant-conversations-label"
       >
         Conversation Item 1
       </span>
     </li>
-    <div
-      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
-      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-    >
-      <div
-        class="ant-tooltip-arrow"
-        style="position: absolute; top: 0px; left: 0px;"
-      />
-      <div
-        class="ant-tooltip-content"
-      >
-        <div
-          class="ant-tooltip-inner"
-          id="test-id"
-          role="tooltip"
-        >
-          Conversation Item 1
-        </div>
-      </div>
-    </div>
     <li
-      aria-describedby="test-id"
       class="ant-conversations-item"
+      title="Conversation Item 2"
     >
       <span
-        aria-label="Conversation Item 2"
-        class="ant-typography ant-typography-ellipsis ant-conversations-label"
+        class="ant-typography ant-conversations-label"
       >
         Conversation Item 2
       </span>
     </li>
-    <div
-      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
-      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-    >
-      <div
-        class="ant-tooltip-arrow"
-        style="position: absolute; top: 0px; left: 0px;"
-      />
-      <div
-        class="ant-tooltip-content"
-      >
-        <div
-          class="ant-tooltip-inner"
-          id="test-id"
-          role="tooltip"
-        >
-          Conversation Item 2
-        </div>
-      </div>
-    </div>
     <li
-      aria-describedby="test-id"
       class="ant-conversations-item"
+      title="Conversation Item 3"
     >
       <span
-        aria-label="Conversation Item 3"
-        class="ant-typography ant-typography-ellipsis ant-conversations-label"
+        class="ant-typography ant-conversations-label"
       >
         Conversation Item 3
       </span>
     </li>
-    <div
-      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
-      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-    >
-      <div
-        class="ant-tooltip-arrow"
-        style="position: absolute; top: 0px; left: 0px;"
-      />
-      <div
-        class="ant-tooltip-content"
-      >
-        <div
-          class="ant-tooltip-inner"
-          id="test-id"
-          role="tooltip"
-        >
-          Conversation Item 3
-        </div>
-      </div>
-    </div>
   </ul>
   <div
     class="ant-flex ant-flex-gap-small"
@@ -280,98 +133,35 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
       class="ant-conversations-list"
     >
       <li
-        aria-describedby="test-id"
         class="ant-conversations-item ant-conversations-item-active"
+        title="Conversation Item 1"
       >
         <span
-          aria-label="Conversation Item 1"
-          class="ant-typography ant-typography-ellipsis ant-conversations-label"
+          class="ant-typography ant-conversations-label"
         >
           Conversation Item 1
         </span>
       </li>
-      <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
-        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-      >
-        <div
-          class="ant-tooltip-arrow"
-          style="position: absolute; top: 0px; left: 0px;"
-        />
-        <div
-          class="ant-tooltip-content"
-        >
-          <div
-            class="ant-tooltip-inner"
-            id="test-id"
-            role="tooltip"
-          >
-            Conversation Item 1
-          </div>
-        </div>
-      </div>
       <li
-        aria-describedby="test-id"
         class="ant-conversations-item"
+        title="Conversation Item 2"
       >
         <span
-          aria-label="Conversation Item 2"
-          class="ant-typography ant-typography-ellipsis ant-conversations-label"
+          class="ant-typography ant-conversations-label"
         >
           Conversation Item 2
         </span>
       </li>
-      <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
-        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-      >
-        <div
-          class="ant-tooltip-arrow"
-          style="position: absolute; top: 0px; left: 0px;"
-        />
-        <div
-          class="ant-tooltip-content"
-        >
-          <div
-            class="ant-tooltip-inner"
-            id="test-id"
-            role="tooltip"
-          >
-            Conversation Item 2
-          </div>
-        </div>
-      </div>
       <li
-        aria-describedby="test-id"
         class="ant-conversations-item"
+        title="Conversation Item 3"
       >
         <span
-          aria-label="Conversation Item 3"
-          class="ant-typography ant-typography-ellipsis ant-conversations-label"
+          class="ant-typography ant-conversations-label"
         >
           Conversation Item 3
         </span>
       </li>
-      <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
-        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-      >
-        <div
-          class="ant-tooltip-arrow"
-          style="position: absolute; top: 0px; left: 0px;"
-        />
-        <div
-          class="ant-tooltip-content"
-        >
-          <div
-            class="ant-tooltip-inner"
-            id="test-id"
-            role="tooltip"
-          >
-            Conversation Item 3
-          </div>
-        </div>
-      </div>
     </ul>
   </li>
   <li>
@@ -388,36 +178,15 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
       class="ant-conversations-list"
     >
       <li
-        aria-describedby="test-id"
         class="ant-conversations-item ant-conversations-item-disabled"
+        title="Conversation Item 4"
       >
         <span
-          aria-label="Conversation Item 4"
-          class="ant-typography ant-typography-ellipsis ant-conversations-label"
+          class="ant-typography ant-conversations-label"
         >
           Conversation Item 4
         </span>
       </li>
-      <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
-        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-      >
-        <div
-          class="ant-tooltip-arrow"
-          style="position: absolute; top: 0px; left: 0px;"
-        />
-        <div
-          class="ant-tooltip-content"
-        >
-          <div
-            class="ant-tooltip-inner"
-            id="test-id"
-            role="tooltip"
-          >
-            Conversation Item 4
-          </div>
-        </div>
-      </div>
     </ul>
   </li>
 </ul>
@@ -486,129 +255,45 @@ exports[`renders components/conversations/demo/group-sort.tsx extend context cor
       class="ant-conversations-list"
     >
       <li
-        aria-describedby="test-id"
         class="ant-conversations-item ant-conversations-item-active"
+        title="Conversation 1732204800000"
       >
         <span
-          aria-label="Conversation 1732204800000"
-          class="ant-typography ant-typography-ellipsis ant-conversations-label"
+          class="ant-typography ant-conversations-label"
         >
           Conversation 1732204800000
         </span>
       </li>
-      <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
-        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-      >
-        <div
-          class="ant-tooltip-arrow"
-          style="position: absolute; top: 0px; left: 0px;"
-        />
-        <div
-          class="ant-tooltip-content"
-        >
-          <div
-            class="ant-tooltip-inner"
-            id="test-id"
-            role="tooltip"
-          >
-            Conversation 1732204800000
-          </div>
-        </div>
-      </div>
       <li
-        aria-describedby="test-id"
         class="ant-conversations-item"
+        title="Conversation 1732204803600"
       >
         <span
-          aria-label="Conversation 1732204803600"
-          class="ant-typography ant-typography-ellipsis ant-conversations-label"
+          class="ant-typography ant-conversations-label"
         >
           Conversation 1732204803600
         </span>
       </li>
-      <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
-        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-      >
-        <div
-          class="ant-tooltip-arrow"
-          style="position: absolute; top: 0px; left: 0px;"
-        />
-        <div
-          class="ant-tooltip-content"
-        >
-          <div
-            class="ant-tooltip-inner"
-            id="test-id"
-            role="tooltip"
-          >
-            Conversation 1732204803600
-          </div>
-        </div>
-      </div>
       <li
-        aria-describedby="test-id"
         class="ant-conversations-item"
+        title="Conversation 1732204807200"
       >
         <span
-          aria-label="Conversation 1732204807200"
-          class="ant-typography ant-typography-ellipsis ant-conversations-label"
+          class="ant-typography ant-conversations-label"
         >
           Conversation 1732204807200
         </span>
       </li>
-      <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
-        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-      >
-        <div
-          class="ant-tooltip-arrow"
-          style="position: absolute; top: 0px; left: 0px;"
-        />
-        <div
-          class="ant-tooltip-content"
-        >
-          <div
-            class="ant-tooltip-inner"
-            id="test-id"
-            role="tooltip"
-          >
-            Conversation 1732204807200
-          </div>
-        </div>
-      </div>
       <li
-        aria-describedby="test-id"
         class="ant-conversations-item"
+        title="Conversation 1732204810800"
       >
         <span
-          aria-label="Conversation 1732204810800"
-          class="ant-typography ant-typography-ellipsis ant-conversations-label"
+          class="ant-typography ant-conversations-label"
         >
           Conversation 1732204810800
         </span>
       </li>
-      <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
-        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-      >
-        <div
-          class="ant-tooltip-arrow"
-          style="position: absolute; top: 0px; left: 0px;"
-        />
-        <div
-          class="ant-tooltip-content"
-        >
-          <div
-            class="ant-tooltip-inner"
-            id="test-id"
-            role="tooltip"
-          >
-            Conversation 1732204810800
-          </div>
-        </div>
-      </div>
     </ul>
   </li>
   <li>
@@ -667,67 +352,25 @@ exports[`renders components/conversations/demo/group-sort.tsx extend context cor
       class="ant-conversations-list"
     >
       <li
-        aria-describedby="test-id"
         class="ant-conversations-item"
+        title="Conversation 1732204728000"
       >
         <span
-          aria-label="Conversation 1732204728000"
-          class="ant-typography ant-typography-ellipsis ant-conversations-label"
+          class="ant-typography ant-conversations-label"
         >
           Conversation 1732204728000
         </span>
       </li>
-      <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
-        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-      >
-        <div
-          class="ant-tooltip-arrow"
-          style="position: absolute; top: 0px; left: 0px;"
-        />
-        <div
-          class="ant-tooltip-content"
-        >
-          <div
-            class="ant-tooltip-inner"
-            id="test-id"
-            role="tooltip"
-          >
-            Conversation 1732204728000
-          </div>
-        </div>
-      </div>
       <li
-        aria-describedby="test-id"
         class="ant-conversations-item"
+        title="Conversation 1732204731600"
       >
         <span
-          aria-label="Conversation 1732204731600"
-          class="ant-typography ant-typography-ellipsis ant-conversations-label"
+          class="ant-typography ant-conversations-label"
         >
           Conversation 1732204731600
         </span>
       </li>
-      <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
-        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-      >
-        <div
-          class="ant-tooltip-arrow"
-          style="position: absolute; top: 0px; left: 0px;"
-        />
-        <div
-          class="ant-tooltip-content"
-        >
-          <div
-            class="ant-tooltip-inner"
-            id="test-id"
-            role="tooltip"
-          >
-            Conversation 1732204731600
-          </div>
-        </div>
-      </div>
     </ul>
   </li>
 </ul>
@@ -792,12 +435,11 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
   style="width: 256px; background: #ffffff; border-radius: 6px;"
 >
   <li
-    aria-describedby="test-id"
     class="ant-conversations-item ant-conversations-item-active"
+    title="Conversation Item 1"
   >
     <span
-      aria-label="Conversation Item 1"
-      class="ant-typography ant-typography-ellipsis ant-conversations-label"
+      class="ant-typography ant-conversations-label"
     >
       Conversation Item 1
     </span>
@@ -826,7 +468,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
     </span>
     <div
       class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up ant-dropdown-placement-bottomRight"
-      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1150;"
+      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
     >
       <ul
         class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light"
@@ -868,7 +510,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
         </li>
         <div
           class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
-          style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
+          style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
         >
           <div
             class="ant-tooltip-arrow"
@@ -918,7 +560,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
         </li>
         <div
           class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
-          style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
+          style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
         >
           <div
             class="ant-tooltip-arrow"
@@ -968,7 +610,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
         </li>
         <div
           class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
-          style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
+          style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
         >
           <div
             class="ant-tooltip-arrow"
@@ -991,33 +633,12 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
       />
     </div>
   </li>
-  <div
-    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
-    style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-  >
-    <div
-      class="ant-tooltip-arrow"
-      style="position: absolute; top: 0px; left: 0px;"
-    />
-    <div
-      class="ant-tooltip-content"
-    >
-      <div
-        class="ant-tooltip-inner"
-        id="test-id"
-        role="tooltip"
-      >
-        Conversation Item 1
-      </div>
-    </div>
-  </div>
   <li
-    aria-describedby="test-id"
     class="ant-conversations-item"
+    title="Conversation Item 2"
   >
     <span
-      aria-label="Conversation Item 2"
-      class="ant-typography ant-typography-ellipsis ant-conversations-label"
+      class="ant-typography ant-conversations-label"
     >
       Conversation Item 2
     </span>
@@ -1046,7 +667,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
     </span>
     <div
       class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up ant-dropdown-placement-bottomRight"
-      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1150;"
+      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
     >
       <ul
         class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light"
@@ -1088,7 +709,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
         </li>
         <div
           class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
-          style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
+          style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
         >
           <div
             class="ant-tooltip-arrow"
@@ -1138,7 +759,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
         </li>
         <div
           class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
-          style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
+          style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
         >
           <div
             class="ant-tooltip-arrow"
@@ -1188,7 +809,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
         </li>
         <div
           class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
-          style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
+          style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
         >
           <div
             class="ant-tooltip-arrow"
@@ -1211,33 +832,12 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
       />
     </div>
   </li>
-  <div
-    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
-    style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-  >
-    <div
-      class="ant-tooltip-arrow"
-      style="position: absolute; top: 0px; left: 0px;"
-    />
-    <div
-      class="ant-tooltip-content"
-    >
-      <div
-        class="ant-tooltip-inner"
-        id="test-id"
-        role="tooltip"
-      >
-        Conversation Item 2
-      </div>
-    </div>
-  </div>
   <li
-    aria-describedby="test-id"
     class="ant-conversations-item"
+    title="Conversation Item 3"
   >
     <span
-      aria-label="Conversation Item 3"
-      class="ant-typography ant-typography-ellipsis ant-conversations-label"
+      class="ant-typography ant-conversations-label"
     >
       Conversation Item 3
     </span>
@@ -1266,7 +866,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
     </span>
     <div
       class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up ant-dropdown-placement-bottomRight"
-      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1150;"
+      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
     >
       <ul
         class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light"
@@ -1308,7 +908,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
         </li>
         <div
           class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
-          style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
+          style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
         >
           <div
             class="ant-tooltip-arrow"
@@ -1358,7 +958,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
         </li>
         <div
           class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
-          style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
+          style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
         >
           <div
             class="ant-tooltip-arrow"
@@ -1408,7 +1008,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
         </li>
         <div
           class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
-          style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
+          style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
         >
           <div
             class="ant-tooltip-arrow"
@@ -1431,57 +1031,16 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
       />
     </div>
   </li>
-  <div
-    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
-    style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-  >
-    <div
-      class="ant-tooltip-arrow"
-      style="position: absolute; top: 0px; left: 0px;"
-    />
-    <div
-      class="ant-tooltip-content"
-    >
-      <div
-        class="ant-tooltip-inner"
-        id="test-id"
-        role="tooltip"
-      >
-        Conversation Item 3
-      </div>
-    </div>
-  </div>
   <li
-    aria-describedby="test-id"
     class="ant-conversations-item ant-conversations-item-disabled"
+    title="Conversation Item 4"
   >
     <span
-      aria-label="Conversation Item 4"
-      class="ant-typography ant-typography-ellipsis ant-conversations-label"
+      class="ant-typography ant-conversations-label"
     >
       Conversation Item 4
     </span>
   </li>
-  <div
-    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
-    style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-  >
-    <div
-      class="ant-tooltip-arrow"
-      style="position: absolute; top: 0px; left: 0px;"
-    />
-    <div
-      class="ant-tooltip-content"
-    >
-      <div
-        class="ant-tooltip-inner"
-        id="test-id"
-        role="tooltip"
-      >
-        Conversation Item 4
-      </div>
-    </div>
-  </div>
 </ul>
 `;
 
@@ -1496,12 +1055,11 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
     style="width: 256px; background: #ffffff; border-radius: 6px;"
   >
     <li
-      aria-describedby="test-id"
       class="ant-conversations-item ant-conversations-item-active"
+      title="Conversation Item 1"
     >
       <span
-        aria-label="Conversation Item 1"
-        class="ant-typography ant-typography-ellipsis ant-conversations-label"
+        class="ant-typography ant-conversations-label"
       >
         Conversation Item 1
       </span>
@@ -1527,7 +1085,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
       </span>
       <div
         class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up ant-dropdown-placement-bottomRight"
-        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1150;"
+        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
       >
         <ul
           class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light"
@@ -1569,7 +1127,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
           </li>
           <div
             class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
-            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
               class="ant-tooltip-arrow"
@@ -1619,7 +1177,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
           </li>
           <div
             class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
-            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
               class="ant-tooltip-arrow"
@@ -1669,7 +1227,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
           </li>
           <div
             class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
-            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
               class="ant-tooltip-arrow"
@@ -1692,33 +1250,12 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
         />
       </div>
     </li>
-    <div
-      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
-      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-    >
-      <div
-        class="ant-tooltip-arrow"
-        style="position: absolute; top: 0px; left: 0px;"
-      />
-      <div
-        class="ant-tooltip-content"
-      >
-        <div
-          class="ant-tooltip-inner"
-          id="test-id"
-          role="tooltip"
-        >
-          Conversation Item 1
-        </div>
-      </div>
-    </div>
     <li
-      aria-describedby="test-id"
       class="ant-conversations-item"
+      title="Conversation Item 2"
     >
       <span
-        aria-label="Conversation Item 2"
-        class="ant-typography ant-typography-ellipsis ant-conversations-label"
+        class="ant-typography ant-conversations-label"
       >
         Conversation Item 2
       </span>
@@ -1744,7 +1281,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
       </span>
       <div
         class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up ant-dropdown-placement-bottomRight"
-        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1150;"
+        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
       >
         <ul
           class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light"
@@ -1786,7 +1323,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
           </li>
           <div
             class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
-            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
               class="ant-tooltip-arrow"
@@ -1836,7 +1373,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
           </li>
           <div
             class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
-            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
               class="ant-tooltip-arrow"
@@ -1886,7 +1423,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
           </li>
           <div
             class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
-            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
               class="ant-tooltip-arrow"
@@ -1909,33 +1446,12 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
         />
       </div>
     </li>
-    <div
-      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
-      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-    >
-      <div
-        class="ant-tooltip-arrow"
-        style="position: absolute; top: 0px; left: 0px;"
-      />
-      <div
-        class="ant-tooltip-content"
-      >
-        <div
-          class="ant-tooltip-inner"
-          id="test-id"
-          role="tooltip"
-        >
-          Conversation Item 2
-        </div>
-      </div>
-    </div>
     <li
-      aria-describedby="test-id"
       class="ant-conversations-item"
+      title="Conversation Item 3"
     >
       <span
-        aria-label="Conversation Item 3"
-        class="ant-typography ant-typography-ellipsis ant-conversations-label"
+        class="ant-typography ant-conversations-label"
       >
         Conversation Item 3
       </span>
@@ -1961,7 +1477,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
       </span>
       <div
         class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up ant-dropdown-placement-bottomRight"
-        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1150;"
+        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
       >
         <ul
           class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light"
@@ -2003,7 +1519,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
           </li>
           <div
             class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
-            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
               class="ant-tooltip-arrow"
@@ -2053,7 +1569,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
           </li>
           <div
             class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
-            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
               class="ant-tooltip-arrow"
@@ -2103,7 +1619,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
           </li>
           <div
             class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
-            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box; z-index: 1250;"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
               class="ant-tooltip-arrow"
@@ -2126,57 +1642,16 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
         />
       </div>
     </li>
-    <div
-      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
-      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-    >
-      <div
-        class="ant-tooltip-arrow"
-        style="position: absolute; top: 0px; left: 0px;"
-      />
-      <div
-        class="ant-tooltip-content"
-      >
-        <div
-          class="ant-tooltip-inner"
-          id="test-id"
-          role="tooltip"
-        >
-          Conversation Item 3
-        </div>
-      </div>
-    </div>
     <li
-      aria-describedby="test-id"
       class="ant-conversations-item ant-conversations-item-disabled"
+      title="Conversation Item 4"
     >
       <span
-        aria-label="Conversation Item 4"
-        class="ant-typography ant-typography-ellipsis ant-conversations-label"
+        class="ant-typography ant-conversations-label"
       >
         Conversation Item 4
       </span>
     </li>
-    <div
-      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-right"
-      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-    >
-      <div
-        class="ant-tooltip-arrow"
-        style="position: absolute; top: 0px; left: 0px;"
-      />
-      <div
-        class="ant-tooltip-content"
-      >
-        <div
-          class="ant-tooltip-inner"
-          id="test-id"
-          role="tooltip"
-        >
-          Conversation Item 4
-        </div>
-      </div>
-    </div>
   </ul>
 </div>
 `;
