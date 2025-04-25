@@ -38,17 +38,17 @@ const App = () => {
         stream: true,
       },
       {
-        onSuccess: (messages) => {
+        onSuccess: (chunks) => {
           setStatus('success');
-          console.log('onSuccess', messages);
+          console.log('onSuccess', chunks);
         },
         onError: (error) => {
           setStatus('error');
           console.error('onError', error);
         },
-        onUpdate: (msg) => {
-          setLines((pre) => [...pre, msg]);
-          console.log('onUpdate', msg);
+        onUpdate: (chunk) => {
+          setLines((pre) => [...pre, chunk]);
+          console.log('onUpdate', chunk);
         },
       },
     );

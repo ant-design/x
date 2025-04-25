@@ -41,19 +41,17 @@ const items: ThoughtChainProps['items'] = [
     status: 'pending',
   },
 ];
-
-const App: React.FC = () => {
-  const [expandedKeys, setExpandedKeys] = React.useState(['item-2']);
-
-  const onExpand = (keys: string[]) => {
-    console.log(keys);
-    setExpandedKeys(keys);
-  };
-  return (
-    <Card style={{ width: 500 }}>
-      <ThoughtChain items={items} collapsible={{ expandedKeys, onExpand }} />
-    </Card>
-  );
+const collapsible: ThoughtChainProps['collapsible'] = {
+  expandedKeys: ['item-2'],
+  onExpand: (expandedKeys) => {
+    console.log(expandedKeys);
+  },
 };
+
+const App: React.FC = () => (
+  <Card style={{ width: 500 }}>
+    <ThoughtChain items={items} collapsible={collapsible} />
+  </Card>
+);
 
 export default App;

@@ -11,12 +11,18 @@ const App: React.FC = () => {
       content="Hello, welcome to use Ant Design X! Just ask if you have any questions."
       avatar={{ icon: <UserOutlined /> }}
       header="Ant Design X"
-      footer={
+      footer={(messageContext) => (
         <Space size={token.paddingXXS}>
           <Button color="default" variant="text" size="small" icon={<SyncOutlined />} />
-          <Button color="default" variant="text" size="small" icon={<CopyOutlined />} />
+          <Button
+            onClick={() => console.log('Copy message:', messageContext)}
+            color="default"
+            variant="text"
+            size="small"
+            icon={<CopyOutlined />}
+          />
         </Space>
-      }
+      )}
     />
   );
 };

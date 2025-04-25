@@ -1,38 +1,33 @@
 import { LoadingOutlined, TagsOutlined } from '@ant-design/icons';
-import { ThoughtChain, XRequest } from '@ant-design/x';
+import { ThoughtChain, useXAgent } from '@ant-design/x';
 import { Button, Descriptions, Splitter } from 'antd';
 import React from 'react';
 
 import type { ThoughtChainItem } from '@ant-design/x';
 
-/**
- * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
- */
-const BASE_URL = 'https://api.example.com';
-const PATH = '/chat';
-const MODEL = 'gpt-3.5-turbo';
-// const API_KEY = '';
+const BASE_URL = 'https://api.example.com/agent';
 
-const exampleRequest = XRequest({
-  baseURL: BASE_URL + PATH,
-  model: MODEL,
-
-  /** 🔥🔥 Its dangerously! */
-  // dangerouslyApiKey: API_KEY
-});
+interface YourMessageType {
+  role: string;
+  content: string;
+}
 
 const App = () => {
   const [status, setStatus] = React.useState<ThoughtChainItem['status']>();
-  const [lines, setLines] = React.useState<Record<string, string>[]>([]);
+  const [lines, setLines] = React.useState<any[]>([]);
+
+  const [agent] = useXAgent<YourMessageType>({
+    baseURL: BASE_URL,
+  });
 
   async function request() {
     setStatus('pending');
 
-    await exampleRequest.create(
+    agent.request(
       {
-        messages: [{ role: 'user', content: 'hello, who are u?' }],
+        agentId: 1234,
+        query: 'Search for the latest technology news',
         stream: true,
-        agentId: 111,
       },
       {
         onSuccess: (messages) => {
@@ -55,21 +50,21 @@ const App = () => {
     <Splitter>
       <Splitter.Panel>
         <Button type="primary" disabled={status === 'pending'} onClick={request}>
-          Request - {BASE_URL}
-          {PATH}
+          Agent Request
         </Button>
       </Splitter.Panel>
-      <Splitter.Panel style={{ marginLeft: 16 }}>
+      <Splitter.Panel>
         <ThoughtChain
+          style={{ marginLeft: 16 }}
           items={[
             {
-              title: 'Request Log',
+              title: 'Agent Request Log',
               status: status,
               icon: status === 'pending' ? <LoadingOutlined /> : <TagsOutlined />,
               description:
                 status === 'error' &&
-                exampleRequest.baseURL === BASE_URL + PATH &&
-                'Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.',
+                agent.config.baseURL === BASE_URL &&
+                'Please replace the BASE_URL,RequestParams with your own values.',
               content: (
                 <Descriptions column={1}>
                   <Descriptions.Item label="Status">{status || '-'}</Descriptions.Item>
