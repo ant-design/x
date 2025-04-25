@@ -60,7 +60,7 @@ type useXAgent<AgentMessage> = (
 interface RequestFnInfo<Message> extends AnyObject {
   messages?: Message[];
   message?: Message;
-}
+};
 
 type RequestFn<Message, Input, Output> = (
   info: RequestFnInfo<Message, Input>,
