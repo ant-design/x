@@ -57,9 +57,7 @@ type useXAgent<AgentMessage> = (
 更多请查看 [XStreamOptions](/components/x-stream-cn#xstreamoptions)。
 
 ```tsx | pure
-type RequestFnInfo<Message, Input> = AnyObject & {
-  [props in keyof Input]: Input[props];
-} & {
+interface RequestFnInfo<Message> extends AnyObject {
   messages?: Message[];
   message?: Message;
 };

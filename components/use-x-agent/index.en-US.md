@@ -54,9 +54,7 @@ Custom request protocol.
 For more properties, see [XStreamOptions](https://x.ant.design/components/x-stream#xstreamoptions).
 
 ```tsx | pure
-type RequestFnInfo<Message, Input> = AnyObject & {
-  [props in keyof Input]: Input[props];
-} & {
+interface RequestFnInfo<Message> extends AnyObject {
   messages?: Message[];
   message?: Message;
 };
