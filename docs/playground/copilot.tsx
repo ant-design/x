@@ -445,10 +445,10 @@ const Copilot = (props: CopilotProps) => {
   useEffect(() => {
     // history mock
     if (messages?.length) {
-      setMessageHistory({
-        ...messageHistory,
+      setMessageHistory((prev) => ({
+        ...prev,
         [curSession]: messages,
-      });
+      }));
     }
   }, [messages]);
 
