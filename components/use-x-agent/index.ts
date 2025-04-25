@@ -113,6 +113,6 @@ export default function useXAgent<
           ...restConfig,
         }),
       ] as const,
-    [config],
+    [config?.baseURL, config?.dangerouslyApiKey, config?.model],
   );
 }
