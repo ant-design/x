@@ -56,8 +56,4 @@ const ActionMenu = (props: { item: ItemType } & Pick<ActionsProps, 'prefixCls' |
   );
 };
 
-if (process.env.NODE_ENV === 'production') {
-  ActionMenu.displayName = 'ActionMenu';
-}
-
 export default ActionMenu;
