@@ -3,7 +3,6 @@ group:
   title: Basic Usage
 order: 3
 title: Usage with Next.js
-tag: Updated
 ---
 
 Here’s the translation of your guide on using `@ant-design/x` with Next.js:

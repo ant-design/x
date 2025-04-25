@@ -62,13 +62,18 @@ function splitStream() {
 }
 
 /**
+ * @link https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#fields
+ */
+export type SSEFields = 'data' | 'event' | 'id' | 'retry';
+
+/**
  * @example
  * const sseObject = {
  *    event: 'delta',
  *    data: '{ key: "world!" }',
  * };
  */
-export type SSEOutput = Record<string, any>;
+export type SSEOutput = Partial<Record<SSEFields, any>>;
 
 /**
  * @description A TransformStream inst that transforms a part string into {@link SSEOutput}
@@ -132,11 +137,13 @@ export interface XStreamOptions<Output> {
   transformStream?: TransformStream<string, Output>;
 }
 
+type XReadableStream<R = SSEOutput> = ReadableStream<R> & AsyncGenerator<R>;
+
 /**
  * @description Transform Uint8Array binary stream to {@link SSEOutput} by default
  * @warning The `XStream` only support the `utf-8` encoding. More encoding support maybe in the future.
  */
-async function* XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
+function XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
   const { readableStream, transformStream } = options;
 
   if (!(readableStream instanceof ReadableStream)) {
@@ -146,33 +153,40 @@ async function* XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
   // Default encoding is `utf-8`
   const decoderStream = new TextDecoderStream();
 
-  const stream = transformStream
-    ? /**
-       * Uint8Array binary -> string -> Output
-       */
-      readableStream
-        .pipeThrough(decoderStream)
-        .pipeThrough(transformStream)
-    : /**
-       * Uint8Array binary -> string -> SSE part string -> Default Output {@link SSEOutput}
-       */
-      readableStream
-        .pipeThrough(decoderStream)
-        .pipeThrough(splitStream())
-        .pipeThrough(splitPart());
+  const stream = (
+    transformStream
+      ? /**
+         * Uint8Array binary -> string -> Output
+         */
+        readableStream
+          .pipeThrough(decoderStream)
+          .pipeThrough(transformStream)
+      : /**
+         * Uint8Array binary -> string -> SSE part string -> Default Output {@link SSEOutput}
+         */
+        readableStream
+          .pipeThrough(decoderStream)
+          .pipeThrough(splitStream())
+          .pipeThrough(splitPart())
+  ) as XReadableStream<Output>;
 
-  const reader = stream.getReader() as ReadableStreamDefaultReader<Output>;
+  /** support async iterator */
+  stream[Symbol.asyncIterator] = async function* () {
+    const reader = this.getReader();
 
-  while (reader instanceof ReadableStreamDefaultReader) {
-    const { value, done } = await reader.read();
+    while (true) {
+      const { done, value } = await reader.read();
 
-    if (done) break;
+      if (done) break;
 
-    if (!value) continue;
+      if (!value) continue;
 
-    // Transformed data through all transform pipes
-    yield value;
-  }
+      // Transformed data through all transform pipes
+      yield value;
+    }
+  };
+
+  return stream;
 }
 
 export default XStream;

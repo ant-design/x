@@ -1,6 +1,6 @@
 import { CloudUploadOutlined, LinkOutlined } from '@ant-design/icons';
 import { Attachments, AttachmentsProps, Sender } from '@ant-design/x';
-import { App, Badge, Button, Flex, type GetProp, Typography } from 'antd';
+import { App, Badge, Button, Flex, type GetProp, type GetRef, Typography } from 'antd';
 import React from 'react';
 
 const Demo = () => {
@@ -10,7 +10,7 @@ const Demo = () => {
 
   const { notification } = App.useApp();
 
-  const senderRef = React.useRef<HTMLDivElement>(null);
+  const senderRef = React.useRef<GetRef<typeof Sender>>(null);
 
   const senderHeader = (
     <Sender.Header
@@ -39,7 +39,7 @@ const Demo = () => {
                 description: 'Click or drag files to this area to upload',
               }
         }
-        getDropContainer={() => senderRef.current}
+        getDropContainer={() => senderRef.current?.nativeElement}
       />
     </Sender.Header>
   );

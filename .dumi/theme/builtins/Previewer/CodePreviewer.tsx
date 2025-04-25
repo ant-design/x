@@ -6,7 +6,8 @@ import { createStyles, css } from 'antd-style';
 import classNames from 'classnames';
 import { FormattedMessage, useLiveDemo, useSiteData } from 'dumi';
 import LZString from 'lz-string';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+/* eslint-disable react-hooks-extra/no-direct-set-state-in-use-effect */
+import React, { useEffect, useRef, useState } from 'react';
 
 import useLocation from '../../../hooks/useLocation';
 import BrowserFrame from '../../common/BrowserFrame';
@@ -16,11 +17,9 @@ import EditButton from '../../common/EditButton';
 import CodePenIcon from '../../icons/CodePenIcon';
 import CodeSandboxIcon from '../../icons/CodeSandboxIcon';
 import ExternalLinkIcon from '../../icons/ExternalLinkIcon';
-import RiddleIcon from '../../icons/RiddleIcon';
 import DemoContext from '../../slots/DemoContext';
-import type { SiteContextProps } from '../../slots/SiteContext';
 import SiteContext from '../../slots/SiteContext';
-import { ping } from '../../utils';
+import CodeBlockButton from './CodeBlockButton';
 import type { AntdPreviewerProps } from './Previewer';
 
 const { ErrorBoundary } = Alert;
@@ -38,27 +37,6 @@ const track = ({ type, demo }: { type: string; demo: string }) => {
   }
   window.gtag('event', 'demo', { event_category: type, event_label: demo });
 };
-
-let pingDeferrer: PromiseLike<boolean>;
-
-function useShowRiddleButton() {
-  const [showRiddleButton, setShowRiddleButton] = useState(false);
-
-  useEffect(() => {
-    pingDeferrer ??= new Promise<boolean>((resolve) => {
-      ping((status) => {
-        if (status !== 'timeout' && status !== 'error') {
-          return resolve(true);
-        }
-
-        return resolve(false);
-      });
-    });
-    pingDeferrer.then(setShowRiddleButton);
-  }, []);
-
-  return showRiddleButton;
-}
 
 const useStyle = createStyles(({ token }) => {
   const { borderRadius } = token;
@@ -98,7 +76,7 @@ const CodePreviewer: React.FC<AntdPreviewerProps> = (props) => {
     title,
     description,
     originDebug,
-    jsx,
+    jsx = '',
     style,
     compact,
     background,
@@ -107,8 +85,9 @@ const CodePreviewer: React.FC<AntdPreviewerProps> = (props) => {
     simplify,
     clientOnly,
     pkgDependencyList,
+    pkgPeerDependencies,
   } = props;
-  const { showDebug, codeType } = useContext(DemoContext);
+  const { codeType } = React.use(DemoContext);
 
   const { pkg } = useSiteData();
   const location = useLocation();
@@ -117,7 +96,6 @@ const CodePreviewer: React.FC<AntdPreviewerProps> = (props) => {
 
   const entryName = 'index.tsx';
   const entryCode = asset.dependencies[entryName].value;
-  const showRiddleButton = useShowRiddleButton();
 
   const previewDemo = useRef<React.ReactNode>(null);
   const demoContainer = useRef<HTMLElement>(null);
@@ -127,17 +105,16 @@ const CodePreviewer: React.FC<AntdPreviewerProps> = (props) => {
     setSource: setLiveDemoSource,
   } = useLiveDemo(asset.id, {
     iframe: Boolean(iframe),
-    containerRef: demoContainer,
+    containerRef: demoContainer as React.RefObject<HTMLElement>,
   });
   const anchorRef = useRef<HTMLAnchorElement>(null);
   const codeSandboxIconRef = useRef<HTMLFormElement>(null);
-  const riddleIconRef = useRef<HTMLFormElement>(null);
   const codepenIconRef = useRef<HTMLFormElement>(null);
   const [codeExpand, setCodeExpand] = useState<boolean>(false);
-  const { theme } = useContext<SiteContextProps>(SiteContext);
+  const { theme } = React.use(SiteContext);
 
   const { hash, pathname, search } = location;
-  const docsOnlineUrl = `https://ant.design${pathname}${search}#${asset.id}`;
+  const docsOnlineUrl = `https://ant-design-x.antgroup.com${pathname}${search}#${asset.id}`;
 
   const [showOnlineUrl, setShowOnlineUrl] = useState<boolean>(false);
 
@@ -164,12 +141,13 @@ const CodePreviewer: React.FC<AntdPreviewerProps> = (props) => {
   }, [expand]);
 
   const mergedChildren = !iframe && clientOnly ? <ClientOnly>{children}</ClientOnly> : children;
+  const demoUrlWithTheme = `${demoUrl}${theme.includes('dark') ? '?theme=dark' : ''}`;
 
   if (!previewDemo.current) {
     previewDemo.current = iframe ? (
       <BrowserFrame>
         <iframe
-          src={demoUrl}
+          src={demoUrlWithTheme}
           height={iframe === true ? undefined : iframe}
           title="demo"
           className="iframe-demo"
@@ -192,18 +170,18 @@ const CodePreviewer: React.FC<AntdPreviewerProps> = (props) => {
   });
 
   const html = `
-    <!DOCTYPE html>
-      <html lang="en">
-        <head>
-          <meta charset="utf-8">
-          <meta name="viewport" content="width=device-width">
-          <meta name="theme-color" content="#000000">
-        </head>
-        <body>
-          <div id="container" style="padding: 24px" />
-          <script>const mountNode = document.getElementById('container');</script>
-        </body>
-      </html>
+<!DOCTYPE html>    
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="theme-color" content="#000000">
+  </head>
+  <body>
+    <div id="container" style="padding: 24px" />
+    <script>const mountNode = document.getElementById('container');</script>
+  </body>
+</html>
     `;
 
   const tsconfig = {
@@ -219,6 +197,7 @@ const CodePreviewer: React.FC<AntdPreviewerProps> = (props) => {
   };
 
   const suffix = codeType === 'tsx' ? 'tsx' : 'js';
+  const antdVersion = pkgPeerDependencies.antd ?? '5.x';
 
   const dependencies = (jsx as string).split('\n').reduce<Record<PropertyKey, string>>(
     (acc, line) => {
@@ -230,7 +209,7 @@ const CodePreviewer: React.FC<AntdPreviewerProps> = (props) => {
       }
       return acc;
     },
-    { antd: pkg.version },
+    { '@ant-design/x': pkg.version, antd: antdVersion },
   );
 
   dependencies['@ant-design/icons'] = 'latest';
@@ -244,11 +223,12 @@ const CodePreviewer: React.FC<AntdPreviewerProps> = (props) => {
   dependencies['react-dom'] = '^18.0.0';
 
   const codepenPrefillConfig = {
-    title: `${localizedTitle} - antd@${dependencies.antd}`,
+    title: `${localizedTitle} - @ant-design/x@${dependencies['@ant-design/x']}`,
     html,
     js: `const { createRoot } = ReactDOM;\n${jsx
       .replace(/import\s+(?:React,\s+)?{(\s+[^}]*\s+)}\s+from\s+'react'/, `const { $1 } = React;`)
       .replace(/import\s+{(\s+[^}]*\s+)}\s+from\s+'antd';/, 'const { $1 } = antd;')
+      .replace(/import\s+{(\s+[^}]*\s+)}\s+from\s+'@ant-design\/x';/, 'const { $1 } = antdx;')
       .replace(/import\s+{(\s+[^}]*\s+)}\s+from\s+'@ant-design\/icons';/, 'const { $1 } = icons;')
       .replace("import moment from 'moment';", '')
       .replace("import React from 'react';", '')
@@ -265,29 +245,17 @@ const CodePreviewer: React.FC<AntdPreviewerProps> = (props) => {
     editors: '001',
     css: '',
     js_external: [
-      'react@18/umd/react.development.js',
-      'react-dom@18/umd/react-dom.development.js',
+      'react@18.x/umd/react.development.js',
+      'react-dom@18.x/umd/react-dom.development.js',
       'dayjs@1/dayjs.min.js',
-      `antd@${pkg.version}/dist/antd-with-locales.min.js`,
+      `@ant-design/cssinjs@${pkgDependencyList['@ant-design/cssinjs']}/dist/umd/cssinjs.min.js`,
       `@ant-design/icons/dist/index.umd.js`,
-      'react-router-dom/dist/umd/react-router-dom.production.min.js',
-      'react-router/dist/umd/react-router.production.min.js',
+      `antd@${antdVersion}/dist/antd-with-locales.min.js`,
+      `@ant-design/x@${pkg.version}/dist/antdx.min.js`,
     ]
       .map((url) => `https://unpkg.com/${url}`)
       .join(';'),
     js_pre_processor: 'typescript',
-  };
-
-  const riddlePrefillConfig = {
-    title: `${localizedTitle} - antd@${dependencies.antd}`,
-    js: `${
-      /import React(\D*)from 'react';/.test(jsx) ? '' : `import React from 'react';\n`
-    }import { createRoot } from 'react-dom/client';\n${jsx.replace(
-      /export default/,
-      'const ComponentDemo =',
-    )}\n\ncreateRoot(mountNode).render(<ComponentDemo />);\n`,
-    css: '',
-    json: JSON.stringify({ name: 'antd-demo', dependencies }, null, 2),
   };
 
   // Reorder source code
@@ -356,10 +324,18 @@ createRoot(document.getElementById('container')).render(<Demo />);
   const stackblitzPrefillConfig: Project = {
     title: `${localizedTitle} - antd@${dependencies.antd}`,
     template: 'create-react-app',
-    dependencies,
+    dependencies: {
+      ...dependencies,
+      react: '^19.0.0',
+      'react-dom': '^19.0.0',
+      '@types/react': '^19.0.0',
+      '@types/react-dom': '^19.0.0',
+      '@ant-design/v5-patch-for-react-19': '^1.0.3',
+    },
     description: '',
     files: {
       'index.css': indexCssContent,
+      [`index.${suffix}`]: `import '@ant-design/v5-patch-for-react-19';\n${indexJsContent}`,
       [`index.${suffix}`]: indexJsContent,
       [`demo.${suffix}`]: demoJsContent,
       'index.html': html,
@@ -420,24 +396,27 @@ createRoot(document.getElementById('container')).render(<Demo />);
                 </a>
               </Tooltip>
             )}
-            {showRiddleButton ? (
-              <form
-                className="code-box-code-action"
-                action="//riddle.alibaba-inc.com/riddles/define"
-                method="POST"
-                target="_blank"
-                ref={riddleIconRef}
-                onClick={() => {
-                  track({ type: 'riddle', demo: asset.id });
-                  riddleIconRef.current?.submit();
-                }}
-              >
-                <input type="hidden" name="data" value={JSON.stringify(riddlePrefillConfig)} />
-                <Tooltip title={<FormattedMessage id="app.demo.riddle" />}>
-                  <RiddleIcon className="code-box-riddle" />
-                </Tooltip>
-              </form>
-            ) : null}
+            <form
+              className="code-box-code-action"
+              action="https://codesandbox.io/api/v1/sandboxes/define"
+              method="POST"
+              target="_blank"
+              ref={codeSandboxIconRef}
+              onClick={() => {
+                track({ type: 'codesandbox', demo: asset.id });
+                codeSandboxIconRef.current?.submit();
+              }}
+            >
+              <input
+                type="hidden"
+                name="parameters"
+                value={compress(JSON.stringify(codesanboxPrefillConfig))}
+              />
+              <Tooltip title={<FormattedMessage id="app.demo.codesandbox" />}>
+                <CodeSandboxIcon className="code-box-codesandbox" />
+              </Tooltip>
+            </form>
+            <CodeBlockButton title={localizedTitle} dependencies={dependencies} jsx={jsx} />
             <Tooltip title={<FormattedMessage id="app.demo.stackblitz" />}>
               <span
                 className="code-box-code-action"
@@ -472,35 +451,13 @@ createRoot(document.getElementById('container')).render(<Demo />);
                 <CodePenIcon className="code-box-codepen" />
               </Tooltip>
             </form>
-            {showDebug && (
-              <form
-                className="code-box-code-action"
-                action="https://codesandbox.io/api/v1/sandboxes/define"
-                method="POST"
-                target="_blank"
-                ref={codeSandboxIconRef}
-                onClick={() => {
-                  track({ type: 'codesandbox', demo: asset.id });
-                  codeSandboxIconRef.current?.submit();
-                }}
-              >
-                <input
-                  type="hidden"
-                  name="parameters"
-                  value={compress(JSON.stringify(codesanboxPrefillConfig))}
-                />
-                <Tooltip title={<FormattedMessage id="app.demo.codesandbox" />}>
-                  <CodeSandboxIcon className="code-box-codesandbox" />
-                </Tooltip>
-              </form>
-            )}
             <Tooltip title={<FormattedMessage id="app.demo.separate" />}>
               <a
                 className="code-box-code-action"
                 aria-label="open in new tab"
                 target="_blank"
                 rel="noreferrer"
-                href={demoUrl}
+                href={demoUrlWithTheme}
               >
                 <ExternalLinkIcon className="code-box-separate" />
               </a>
@@ -570,12 +527,12 @@ createRoot(document.getElementById('container')).render(<Demo />);
     const styleTag = document.createElement('style') as HTMLStyleElement;
     styleTag.type = 'text/css';
     styleTag.innerHTML = style;
-    (styleTag as any)['data-demo-url'] = demoUrl;
+    (styleTag as any)['data-demo-url'] = demoUrlWithTheme;
     document.head.appendChild(styleTag);
     return () => {
       document.head.removeChild(styleTag);
     };
-  }, [style, demoUrl]);
+  }, [style, demoUrlWithTheme]);
 
   if (version) {
     return (

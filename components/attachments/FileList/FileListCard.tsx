@@ -9,6 +9,7 @@ import {
   FileWordFilled,
   FileZipFilled,
 } from '@ant-design/icons';
+import { Image, type ImageProps } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
 import type { Attachment } from '..';
@@ -26,6 +27,7 @@ export interface FileListCardProps {
   onRemove?: (item: Attachment) => void;
   className?: string;
   style?: React.CSSProperties;
+  imageProps?: ImageProps;
 }
 
 const EMPTY = '\u00A0';
@@ -104,7 +106,7 @@ function getSize(size: number) {
 }
 
 function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) {
-  const { prefixCls: customizePrefixCls, item, onRemove, className, style } = props;
+  const { prefixCls: customizePrefixCls, item, onRemove, className, style, imageProps } = props;
   const context = React.useContext(AttachmentContext);
   const { disabled } = context || {};
 
@@ -184,7 +186,7 @@ function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) 
     // Preview Image style
     content = (
       <>
-        <img alt="preview" src={previewUrl} />
+        {previewUrl && <Image alt="preview" src={previewUrl} {...imageProps} />}
 
         {status !== 'done' && (
           <div className={`${cardCls}-img-mask`}>

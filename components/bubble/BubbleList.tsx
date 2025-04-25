@@ -5,7 +5,6 @@ import * as React from 'react';
 import { useXProviderContext } from '../x-provider';
 import Bubble, { BubbleContext } from './Bubble';
 import type { BubbleRef } from './Bubble';
-import useDisplayData from './hooks/useDisplayData';
 import useListData from './hooks/useListData';
 import type { BubbleProps } from './interface';
 import useStyle from './style';
@@ -27,7 +26,9 @@ export type BubbleDataType = BubbleProps & {
 
 export type RoleType = Partial<Omit<BubbleProps, 'content'>>;
 
-export type RolesType = Record<string, RoleType> | ((bubbleDataP: BubbleDataType) => RoleType);
+export type RolesType =
+  | Record<string, RoleType>
+  | ((bubbleDataP: BubbleDataType, index: number) => RoleType);
 
 export interface BubbleListProps extends React.HTMLAttributes<HTMLDivElement> {
   prefixCls?: string;
@@ -36,6 +37,30 @@ export interface BubbleListProps extends React.HTMLAttributes<HTMLDivElement> {
   autoScroll?: boolean;
   roles?: RolesType;
 }
+
+interface BubbleListItemProps extends BubbleProps {
+  _key?: BubbleDataType['key'];
+}
+
+const BubbleListItem: React.ForwardRefRenderFunction<
+  Record<string, BubbleRef>,
+  BubbleListItemProps
+> = ({ _key, ...restProps }, ref) => (
+  <Bubble
+    {...restProps}
+    ref={(node) => {
+      if (node) {
+        (ref as React.RefObject<Record<string, BubbleRef>>).current[_key!] = node;
+      } else {
+        delete (ref as React.RefObject<Record<string, BubbleRef>>).current?.[_key!];
+      }
+    }}
+  />
+);
+
+const MemoBubbleListItem = React.memo(React.forwardRef(BubbleListItem));
+
+const TOLERANCE = 1;
 
 const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps> = (props, ref) => {
   const {
@@ -78,8 +103,6 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   // ============================= Data =============================
   const mergedData = useListData(items, roles);
 
-  const [displayData, onTypingComplete] = useDisplayData(mergedData);
-
   // ============================ Scroll ============================
   // Is current scrollTop at the end. User scroll will make this false.
   const [scrollReachEnd, setScrollReachEnd] = React.useState(true);
@@ -89,7 +112,9 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   const onInternalScroll: React.UIEventHandler<HTMLDivElement> = (e) => {
     const target = e.target as HTMLElement;
 
-    setScrollReachEnd(target.scrollTop + target.clientHeight === target.scrollHeight);
+    setScrollReachEnd(
+      target.scrollHeight - Math.abs(target.scrollTop) - target.clientHeight <= TOLERANCE,
+    );
   };
 
   React.useEffect(() => {
@@ -104,7 +129,7 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   React.useEffect(() => {
     if (autoScroll) {
       // New date come, the origin last one is the second last one
-      const lastItemKey = displayData[displayData.length - 2]?.key;
+      const lastItemKey = mergedData[mergedData.length - 2]?.key;
       const bubbleInst = bubbleRefs.current[lastItemKey!];
 
       // Auto scroll if last 2 item is visible
@@ -120,7 +145,7 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
         }
       }
     }
-  }, [displayData.length]);
+  }, [mergedData.length]);
 
   // ========================== Outer Ref ===========================
   React.useImperativeHandle(ref, () => ({
@@ -138,8 +163,8 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
 
         if (bubbleInst) {
           // Block current auto scrolling
-          const index = displayData.findIndex((dataItem) => dataItem.key === key);
-          setScrollReachEnd(index === displayData.length - 1);
+          const index = mergedData.findIndex((dataItem) => dataItem.key === key);
+          setScrollReachEnd(index === mergedData.length - 1);
 
           // Do native scroll
           bubbleInst.nativeElement.scrollIntoView({
@@ -177,22 +202,13 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
         ref={listRef}
         onScroll={onInternalScroll}
       >
-        {displayData.map(({ key, ...bubble }) => (
-          <Bubble
+        {mergedData.map(({ key, ...bubble }) => (
+          <MemoBubbleListItem
             {...bubble}
             key={key}
-            ref={(node) => {
-              if (node) {
-                bubbleRefs.current[key] = node;
-              } else {
-                delete bubbleRefs.current[key];
-              }
-            }}
+            _key={key}
+            ref={bubbleRefs}
             typing={initialized ? bubble.typing : false}
-            onTypingComplete={() => {
-              bubble.onTypingComplete?.();
-              onTypingComplete(key);
-            }}
           />
         ))}
       </div>

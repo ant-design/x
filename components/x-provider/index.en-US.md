@@ -1,7 +1,7 @@
 ---
 category: Components
 group:
-  title: Tool
+  title: Tools
   order: 5
 title: XProvider
 order: 999
@@ -18,17 +18,17 @@ The `XProvider` extends the `ConfigProvider` from `antd` and provides global con
 
 If you are already using `ConfigProvider` from `antd`, please make the following changes to your code:
 
-```tsx
+```diff
 - import { ConfigProvider } from 'antd';
 + import { XProvider } from '@ant-design/x';
 
-- <ConfigProvider>
-- // ...
-- </ConfigProvider>
-
-+ <XProvider>
-+ // ...
-+ </XProvider>
+  const App = () => (
+-   <ConfigProvider>
++   <XProvider>
+      <YourApp />
+-   </ConfigProvider>
++   </XProvider>
+  );
 ```
 
 ## Examples

@@ -14,7 +14,6 @@ import type { ThoughtChainItem } from './Item';
 import type { Collapsible } from './hooks/useCollapsible';
 
 export type SemanticType = 'item' | 'itemHeader' | 'itemContent' | 'itemFooter';
-
 export interface ThoughtChainProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
   /**
    * @desc 思维节点集合

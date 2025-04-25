@@ -13,13 +13,18 @@ cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*22A2Qqn7OrEAAAAAAA
 coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*lQydTrtLz9YAAAAAAAAAAAAADgCCAQ/original
 ---
 
-## When To Use
+## 何时使用
 
 - 向符合 OpenAI 标准的 LLM 发起请求。
 
-## Examples
+## 代码演示
 
-<code src="./demo/basic.tsx">Basic</code>
+<!-- prettier-ignore -->
+<code src="./demo/basic.tsx">基础</code>
+<code src="./demo/requestParams.tsx">自定义入参</code>
+<code src="./demo/custom-transformer.tsx">自定义转换器</code>
+<code src="./demo/request-options.tsx">变更配置</code>
+<code src="./demo/model.tsx">模型接入</code>
 
 ## API
 
@@ -29,7 +34,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*lQydTrtLz9YAAA
 | --- | --- | --- | --- | --- |
 | baseURL | API 请求的基础 URL | string | - | - |
 | model | 模型名称，例如 'gpt-3.5-turbo' | string | - | - |
-| dangerouslyApiKey | **启用此选项可能存在风险，会暴露您的秘密 API 凭证!** | string | - | - |
+| dangerouslyApiKey | **注意: 🔥 `dangerouslyApiKey` 存在安全风险，对此有详细的[说明](/docs/react/dangerously-api-key-cn)。** | string | - | - |
 | fetch | 可选的自定义 fetch 函数，用于发起请求 | fetch | - | - |
 
 ### XRequestFunction
@@ -54,7 +59,8 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
 
 | 属性 | 描述 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| onSuccess | 成功时的回调。 | `(messages: Output[]) => void` | - | - |
-| onError | 错误处理的回调。 | `(error: Error) => void` | - | - |
-| onUpdate | 消息更新的回调。 | `(message: Output) => void` | - | - |
+| onSuccess | 成功时的回调 | `(chunks: Output[]) => void` | - | - |
+| onError | 错误处理的回调 | `(error: Error) => void` | - | - |
+| onUpdate | 消息更新的回调 | `(chunk: Output) => void` | - | - |
+| onStream | 流的控制回调 | `(abortController: AbortController) => void` | - | - |
 | transformStream | 可选的转换函数，用于处理流数据 | `XStreamOptions<Output>['transformStream']` | - | - |

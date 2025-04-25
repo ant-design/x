@@ -1,36 +1,36 @@
 import React from 'react';
+import { fireEvent, render } from '../../../tests/utils';
 import ThoughtChain from '../index';
-import { render, fireEvent } from '../../../tests/utils';
 
+import { CheckCircleOutlined } from '@ant-design/icons';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
 import themeTest from '../../../tests/shared/themeTest';
-import { CheckCircleOutlined } from '@ant-design/icons';
 
 import type { ThoughtChainItem } from '../index';
 
-const customizationProps: ThoughtChainItem = {
+const customizationProps = (key: string): ThoughtChainItem => ({
   title: 'Thought Chain Item Title',
   description: 'description',
   icon: <CheckCircleOutlined />,
   extra: 'Extra',
   footer: 'Thought Chain Item Footer',
-  content: 'content',
-};
+  content: `content ${key}`,
+});
 
 const items: ThoughtChainItem[] = [
   {
-    ...customizationProps,
+    ...customizationProps('test1'),
     status: 'success',
     key: 'test1',
   },
   {
-    ...customizationProps,
+    ...customizationProps('test2'),
     status: 'error',
     key: 'test2',
   },
   {
-    ...customizationProps,
+    ...customizationProps('test3'),
     status: 'pending',
     key: 'test3',
   },
@@ -52,8 +52,14 @@ describe('ThoughtChain Component', () => {
   });
 
   it('ThoughtChain component work', () => {
-    const { container } = render(<ThoughtChain items={items} collapsible />);
+    const { container, getByText } = render(<ThoughtChain items={items} collapsible />);
     const element = container.querySelector<HTMLUListElement>('.ant-thought-chain');
+    const elementHeader = container.querySelectorAll<HTMLDivElement>(
+      '.ant-thought-chain-item-header-box',
+    )[0];
+    fireEvent.click(elementHeader as Element);
+
+    expect(getByText('content test1')).toBeInTheDocument();
     expect(element).toBeTruthy();
     expect(element).toMatchSnapshot();
   });
@@ -83,5 +89,25 @@ describe('ThoughtChain Component', () => {
     expect(onExpand).toHaveBeenCalledWith(['test1']);
     fireEvent.click(element as Element);
     expect(onExpand).toHaveBeenCalledWith([]);
+  });
+
+  it('ThoughtChain component work with controlled mode', async () => {
+    const App = () => {
+      const [expandedKeys] = React.useState<string[]>(['test2']);
+      return (
+        <ThoughtChain
+          items={items}
+          collapsible={{
+            expandedKeys,
+          }}
+        />
+      );
+    };
+    const { container } = render(<App />);
+
+    const expandBodyElements = container.querySelectorAll<HTMLDivElement>(
+      '.ant-thought-chain-item-content-box',
+    );
+    expect(expandBodyElements).toHaveLength(1);
   });
 });

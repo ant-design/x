@@ -1,10 +1,10 @@
-import { type ButtonProps, Flex, type GetProps, Input } from 'antd';
+import { Flex, Input } from 'antd';
 import classnames from 'classnames';
-
-import { useComposeRef, useMergedState } from 'rc-util';
+import { useMergedState } from 'rc-util';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import getValue from 'rc-util/lib/utils/get';
 import React from 'react';
+import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 import SenderHeader, { SendHeaderContext } from './SenderHeader';
@@ -13,28 +13,34 @@ import ClearButton from './components/ClearButton';
 import LoadingButton from './components/LoadingButton';
 import SendButton from './components/SendButton';
 import SpeechButton from './components/SpeechButton';
-import type { CustomizeComponent, SubmitType } from './interface';
 import useStyle from './style';
 import useSpeech, { type AllowSpeech } from './useSpeech';
+
+import type { InputRef as AntdInputRef, ButtonProps, GetProps } from 'antd';
+
+export type SubmitType = 'enter' | 'shiftEnter' | false;
 
 type TextareaProps = GetProps<typeof Input.TextArea>;
 
 export interface SenderComponents {
-  input?: CustomizeComponent<TextareaProps>;
+  input?: React.ComponentType<TextareaProps>;
 }
-
+type ActionsComponents = {
+  SendButton: React.ComponentType<ButtonProps>;
+  ClearButton: React.ComponentType<ButtonProps>;
+  LoadingButton: React.ComponentType<ButtonProps>;
+  SpeechButton: React.ComponentType<ButtonProps>;
+};
 export type ActionsRender = (
   ori: React.ReactNode,
   info: {
-    components: {
-      SendButton: React.ComponentType<ButtonProps>;
-      ClearButton: React.ComponentType<ButtonProps>;
-      LoadingButton: React.ComponentType<ButtonProps>;
-    };
+    components: ActionsComponents;
   },
 ) => React.ReactNode;
 
-export interface SenderProps extends Pick<TextareaProps, 'placeholder' | 'onKeyPress'> {
+export type FooterRender = (info: { components: ActionsComponents }) => React.ReactNode;
+export interface SenderProps
+  extends Pick<TextareaProps, 'placeholder' | 'onKeyPress' | 'onFocus' | 'onBlur'> {
   prefixCls?: string;
   defaultValue?: string;
   value?: string;
@@ -43,40 +49,59 @@ export interface SenderProps extends Pick<TextareaProps, 'placeholder' | 'onKeyP
   submitType?: SubmitType;
   disabled?: boolean;
   onSubmit?: (message: string) => void;
-  onChange?: (value: string) => void;
+  onChange?: (
+    value: string,
+    event?: React.FormEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLTextAreaElement>,
+  ) => void;
   onCancel?: VoidFunction;
   onKeyDown?: React.KeyboardEventHandler<any>;
   onPaste?: React.ClipboardEventHandler<HTMLElement>;
-  onPasteFile?: (file: File) => void;
+  onPasteFile?: (firstFile: File, files: FileList) => void;
   components?: SenderComponents;
   styles?: {
     prefix?: React.CSSProperties;
     input?: React.CSSProperties;
     actions?: React.CSSProperties;
+    footer?: React.CSSProperties;
   };
   rootClassName?: string;
   classNames?: {
     prefix?: string;
     input?: string;
     actions?: string;
+    footer?: string;
   };
   style?: React.CSSProperties;
   className?: string;
   actions?: React.ReactNode | ActionsRender;
   allowSpeech?: AllowSpeech;
   prefix?: React.ReactNode;
+  footer?: React.ReactNode | FooterRender;
   header?: React.ReactNode;
+  autoSize?: boolean | { minRows?: number; maxRows?: number };
 }
+
+export type SenderRef = {
+  nativeElement: HTMLDivElement;
+} & Pick<AntdInputRef, 'focus' | 'blur'>;
 
 function getComponent<T>(
   components: SenderComponents | undefined,
   path: string[],
-  defaultComponent: CustomizeComponent<T>,
-): CustomizeComponent<T> {
+  defaultComponent: React.ComponentType<T>,
+): React.ComponentType<T> {
   return getValue(components, path) || defaultComponent;
 }
 
-function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
+/** Used for actions render needed components */
+const sharedRenderComponents = {
+  SendButton,
+  ClearButton,
+  LoadingButton,
+  SpeechButton,
+};
+
+const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   const {
     prefixCls: customizePrefixCls,
     styles = {},
@@ -99,9 +124,11 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
     disabled,
     allowSpeech,
     prefix,
+    footer,
     header,
     onPaste,
     onPasteFile,
+    autoSize = { maxRows: 8 },
     ...rest
   } = props;
 
@@ -111,9 +138,13 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
 
   // ============================= Refs =============================
   const containerRef = React.useRef<HTMLDivElement>(null);
-  const inputRef = React.useRef<HTMLTextAreaElement>(null);
+  const inputRef = React.useRef<AntdInputRef>(null);
 
-  const mergedContainerRef = useComposeRef(ref, containerRef);
+  useProxyImperativeHandle(ref, () => ({
+    nativeElement: containerRef.current!,
+    focus: inputRef.current?.focus!,
+    blur: inputRef.current?.blur!,
+  }));
 
   // ======================= Component Config =======================
   const contextConfig = useXComponentConfig('sender');
@@ -142,11 +173,11 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
     value,
   });
 
-  const triggerValueChange = (nextValue: string) => {
+  const triggerValueChange: SenderProps['onChange'] = (nextValue, event) => {
     setInnerValue(nextValue);
 
     if (onChange) {
-      onChange(nextValue);
+      onChange(nextValue, event);
     }
   };
 
@@ -211,17 +242,15 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
         break;
     }
 
-    if (onKeyPress) {
-      onKeyPress(e);
-    }
+    onKeyPress?.(e);
   };
 
   // ============================ Paste =============================
   const onInternalPaste: React.ClipboardEventHandler<HTMLElement> = (e) => {
-    // Get file
-    const file = e.clipboardData?.files[0];
-    if (file && onPasteFile) {
-      onPasteFile(file);
+    // Get files
+    const files = e.clipboardData?.files;
+    if (files?.length && onPasteFile) {
+      onPasteFile(files[0], files);
       e.preventDefault();
     }
 
@@ -252,106 +281,120 @@ function Sender(props: SenderProps, ref: React.Ref<HTMLDivElement>) {
   // Custom actions
   if (typeof actions === 'function') {
     actionNode = actions(actionNode, {
-      components: {
-        SendButton,
-        ClearButton,
-        LoadingButton,
-      },
+      components: sharedRenderComponents,
     });
-  } else if (actions) {
+  } else if (actions || actions === false) {
     actionNode = actions;
   }
+  // Custom actions context props
+  const actionsButtonContextProps = {
+    prefixCls: actionBtnCls,
+    onSend: triggerSend,
+    onSendDisabled: !innerValue,
+    onClear: triggerClear,
+    onClearDisabled: !innerValue,
+    onCancel,
+    onCancelDisabled: !loading,
+    onSpeech: () => triggerSpeech(false),
+    onSpeechDisabled: !speechPermission,
+    speechRecording,
+    disabled,
+  };
+
+  // ============================ Footer ============================
+  const footerNode =
+    typeof footer === 'function' ? footer({ components: sharedRenderComponents }) : footer || null;
 
   // ============================ Render ============================
   return wrapCSSVar(
-    <div
-      ref={mergedContainerRef}
-      className={mergedCls}
-      style={{ ...contextConfig.style, ...style }}
-    >
+    <div ref={containerRef} className={mergedCls} style={{ ...contextConfig.style, ...style }}>
       {/* Header */}
       {header && (
         <SendHeaderContext.Provider value={{ prefixCls }}>{header}</SendHeaderContext.Provider>
       )}
+      <ActionButtonContext.Provider value={actionsButtonContextProps}>
+        <div className={`${prefixCls}-content`} onMouseDown={onContentMouseDown}>
+          {/* Prefix */}
+          {prefix && (
+            <div
+              className={classnames(
+                `${prefixCls}-prefix`,
+                contextConfig.classNames.prefix,
+                classNames.prefix,
+              )}
+              style={{ ...contextConfig.styles.prefix, ...styles.prefix }}
+            >
+              {prefix}
+            </div>
+          )}
 
-      <div className={`${prefixCls}-content`} onMouseDown={onContentMouseDown}>
-        {/* Prefix */}
-        {prefix && (
+          {/* Input */}
+          <InputTextArea
+            {...inputProps}
+            disabled={disabled}
+            style={{ ...contextConfig.styles.input, ...styles.input }}
+            className={classnames(inputCls, contextConfig.classNames.input, classNames.input)}
+            autoSize={autoSize}
+            value={innerValue}
+            onChange={(event) => {
+              triggerValueChange(
+                (event.target as HTMLTextAreaElement).value,
+                event as React.ChangeEvent<HTMLTextAreaElement>,
+              );
+              triggerSpeech(true);
+            }}
+            onPressEnter={onInternalKeyPress}
+            onCompositionStart={onInternalCompositionStart}
+            onCompositionEnd={onInternalCompositionEnd}
+            onKeyDown={onKeyDown}
+            onPaste={onInternalPaste}
+            variant="borderless"
+            readOnly={readOnly}
+          />
+          {/* Action List */}
+          {actionNode && (
+            <div
+              className={classnames(
+                actionListCls,
+                contextConfig.classNames.actions,
+                classNames.actions,
+              )}
+              style={{ ...contextConfig.styles.actions, ...styles.actions }}
+            >
+              {actionNode}
+            </div>
+          )}
+        </div>
+        {footerNode && (
           <div
             className={classnames(
-              `${prefixCls}-prefix`,
-              contextConfig.classNames.prefix,
-              classNames.prefix,
+              `${prefixCls}-footer`,
+              contextConfig.classNames.footer,
+              classNames.footer,
             )}
-            style={{ ...contextConfig.styles.prefix, ...styles.prefix }}
-          >
-            {prefix}
-          </div>
-        )}
-
-        {/* Input */}
-        <InputTextArea
-          {...inputProps}
-          disabled={disabled}
-          style={{ ...contextConfig.styles.input, ...styles.input }}
-          className={classnames(inputCls, contextConfig.classNames.input, classNames.input)}
-          autoSize={{ maxRows: 8 }}
-          value={innerValue}
-          onChange={(e) => {
-            triggerValueChange((e.target as HTMLTextAreaElement).value);
-            triggerSpeech(true);
-          }}
-          onPressEnter={onInternalKeyPress}
-          onCompositionStart={onInternalCompositionStart}
-          onCompositionEnd={onInternalCompositionEnd}
-          onKeyDown={onKeyDown}
-          onPaste={onInternalPaste}
-          variant="borderless"
-          readOnly={readOnly}
-        />
-
-        {/* Action List */}
-        <div
-          className={classnames(
-            actionListCls,
-            contextConfig.classNames.actions,
-            classNames.actions,
-          )}
-          style={{ ...contextConfig.styles.actions, ...styles.actions }}
-        >
-          <ActionButtonContext.Provider
-            value={{
-              prefixCls: actionBtnCls,
-              onSend: triggerSend,
-              onSendDisabled: !innerValue,
-              onClear: triggerClear,
-              onClearDisabled: !innerValue,
-              onCancel,
-              onCancelDisabled: !loading,
-              onSpeech: () => triggerSpeech(false),
-              onSpeechDisabled: !speechPermission,
-              speechRecording,
-              disabled,
+            style={{
+              ...contextConfig.styles.footer,
+              ...styles.footer,
             }}
           >
-            {actionNode}
-          </ActionButtonContext.Provider>
-        </div>
-      </div>
+            {footerNode}
+          </div>
+        )}
+      </ActionButtonContext.Provider>
     </div>,
   );
-}
+});
 
-const ForwardSender = React.forwardRef(Sender) as React.ForwardRefExoticComponent<
-  SenderProps & React.RefAttributes<HTMLDivElement>
-> & {
+type CompoundedSender = typeof ForwardSender & {
   Header: typeof SenderHeader;
 };
 
+const Sender = ForwardSender as CompoundedSender;
+
 if (process.env.NODE_ENV !== 'production') {
-  ForwardSender.displayName = 'Sender';
+  Sender.displayName = 'Sender';
 }
 
-ForwardSender.Header = SenderHeader;
+Sender.Header = SenderHeader;
 
-export default ForwardSender;
+export default Sender;

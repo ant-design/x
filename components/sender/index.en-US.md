@@ -23,8 +23,10 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/actions.tsx">Custom actions</code>
 <code src="./demo/header.tsx">Header panel</code>
 <code src="./demo/header-fixed.tsx">Reference</code>
+<code src="./demo/footer.tsx">Custom footer</code>
 <code src="./demo/send-style.tsx">Adjust style</code>
-<code src="./demo/paste-image.tsx">Paste image</code>
+<code src="./demo/paste-image.tsx">Paste files</code>
+<code src="./demo/focus.tsx">Focus</code>
 
 ## API
 
@@ -34,7 +36,7 @@ Common props ref：[Common props](/docs/react/common-props)
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| actions | Custom actions | ReactNode \| (oriNode, info: { components }) => ReactNode | - | - |
+| actions | Custom actions,set as `actions: false` when you don't need default actions | ReactNode \| (oriNode, info: { components:ActionsComponents }) => ReactNode | - | - |
 | allowSpeech | Whether to allow speech input | boolean \| SpeechConfig | false | - |
 | classNames | Class name | [See below](#semantic-dom) | - | - |
 | components | Custom components | Record<'input', ComponentType> | - | - |
@@ -43,14 +45,17 @@ Common props ref：[Common props](/docs/react/common-props)
 | loading | Whether it is loading | boolean | false | - |
 | header | Header panel | ReactNode | - | - |
 | prefix | Prefix content | ReactNode | - | - |
+| footer | Footer content | ReactNode \| (info: { components: ActionsComponents }) => ReactNode | - | - |
 | readOnly | Whether to make the input box read-only | boolean | false | - |
 | rootClassName | Root element class name | string | - | - |
 | styles | Semantic DOM style | [See below](#semantic-dom) | - | - |
 | submitType | Submit type | SubmitType | `enter` \| `shiftEnter` | - |
 | value | Input value | string | - | - |
 | onSubmit | Callback when click send button | (message: string) => void | - | - |
-| onChange | Callback when input value changes | (value: string) => void | - | - |
+| onChange | Callback when input value changes | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`> ) => void | - | - |
 | onCancel | Callback when click cancel button | () => void | - | - |
+| onPasteFile | Callback when paste files | (firstFile: File, files: FileList) => void | - | - |
+| autoSize | Height auto size feature, can be set to true \| false or an object { minRows: 2, maxRows: 6 } | boolean \| { minRows?: number; maxRows?: number } | { maxRows: 8 } | - |
 
 ```typescript | pure
 type SpeechConfig = {
@@ -60,6 +65,23 @@ type SpeechConfig = {
   onRecordingChange?: (recording: boolean) => void;
 };
 ```
+
+```typescript | pure
+type ActionsComponents = {
+  SendButton: React.ComponentType<ButtonProps>;
+  ClearButton: React.ComponentType<ButtonProps>;
+  LoadingButton: React.ComponentType<ButtonProps>;
+  SpeechButton: React.ComponentType<ButtonProps>;
+};
+```
+
+### Sender Ref
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| nativeElement | Outer container | `HTMLDivElement` | - | - |
+| focus | Set focus | (option?: { preventScroll?: boolean, cursor?: 'start' \| 'end' \| 'all' }) | - | - |
+| blur | Remove focus | () => void | - | - |
 
 ### Sender.Header
 

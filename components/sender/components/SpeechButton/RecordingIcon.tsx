@@ -18,7 +18,7 @@ export default function RecordingIcon({ className }: RecordingIconProps) {
       color="currentColor"
       viewBox={`0 0 ${SIZE} ${SIZE}`}
       xmlns="http://www.w3.org/2000/svg"
-      xmlnsXlink="http://www.w3.org/1999/xlink"
+      // xmlnsXlink="http://www.w3.org/1999/xlink"
       className={className}
     >
       <title>Speech Recording</title>

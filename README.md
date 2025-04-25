@@ -6,7 +6,9 @@
 
 Craft AI-driven interfaces effortlessly.
 
-[![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] [![NPM version][npm-image]][npm-url] [![NPM downloads][download-image]][download-url] [![][bundlephobia-image]][bundlephobia-url]
+[![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] [![NPM version][npm-image]][npm-url]
+
+[![NPM downloads][download-image]][download-url] [![][bundlephobia-image]][bundlephobia-url] [![antd][antd-image]][antd-url] [![Follow Twitter][twitter-image]][twitter-url]
 
 [Changelog](./CHANGELOG.en-US.md) · [Report Bug][github-issues-bug-report] · [Request Feature][github-issues-feature-request] · English · [中文](./README-zh_CN.md)
 
@@ -18,24 +20,14 @@ Craft AI-driven interfaces effortlessly.
 [codecov-url]: https://codecov.io/gh/ant-design/x
 [download-image]: https://img.shields.io/npm/dm/@ant-design/x.svg?style=flat-square
 [download-url]: https://npmjs.org/package/@ant-design/x
-[fossa-image]: https://app.fossa.io/api/projects/git%2Bgithub.com%2Fant-design%2Fant-design.svg?type=shield
-[fossa-url]: https://app.fossa.io/projects/git%2Bgithub.com%2Fant-design%2Fant-design?ref=badge_shield
-[help-wanted-image]: https://flat.badgen.net/github/label-issues/ant-design/x/help%20wanted/open
-[help-wanted-url]: https://github.com/ant-design/x/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22
-[twitter-image]: https://img.shields.io/twitter/follow/AntDesignUI.svg?label=Ant%20Design
-[twitter-url]: https://twitter.com/AntDesignUI
-[bundlesize-js-image]: https://img.badgesize.io/https:/unpkg.com/@ant-design/x/dist/antdx.min.js?label=antdx.min.js&compression=gzip&style=flat-square
-[unpkg-js-url]: https://unpkg.com/browse/@ant-design/x/dist/antdx.min.js
 [bundlephobia-image]: https://badgen.net/bundlephobia/minzip/@ant-design/x?style=flat-square
 [bundlephobia-url]: https://bundlephobia.com/package/@ant-design/x
-[issues-helper-image]: https://img.shields.io/badge/using-actions--cool-blue?style=flat-square
-[issues-helper-url]: https://github.com/actions-cool
-[renovate-image]: https://img.shields.io/badge/renovate-enabled-brightgreen.svg?style=flat-square
-[renovate-dashboard-url]: https://github.com/ant-design/x/issues/32498
-[dumi-image]: https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square
-[dumi-url]: https://github.com/umijs/dumi
 [github-issues-bug-report]: https://github.com/ant-design/x/issues/new?template=bug-report.yml
 [github-issues-feature-request]: https://github.com/ant-design/x/issues/new?template=bug-feature-request.yml
+[antd-image]: https://img.shields.io/badge/-Ant%20Design-blue?labelColor=black&logo=antdesign&style=flat-square
+[antd-url]: https://ant.design
+[twitter-image]: https://img.shields.io/twitter/follow/AntDesignUI.svg?label=Ant%20Design
+[twitter-url]: https://twitter.com/AntDesignUI
 
 </div>
 
@@ -71,14 +63,16 @@ Add `script` and `link` tags in your browser and use the global variable `antd`.
 
 We provide `antdx.js`, `antdx.min.js`, and `antdx.min.js.map` in the [dist](https://cdn.jsdelivr.net/npm/@ant-design/x@1.0.0/dist/) directory of the npm package.
 
+> **We do not recommend using the built files** because they cannot be tree-shaken and will not receive bug fixes for underlying dependencies.
+
+> Note: `antdx.js` and `antdx.min.js` depend on `react`, `react-dom`, `dayjs`, `antd`, `@ant-design/cssinjs`, `@ant-design/icons`, please ensure these files are loaded before using them.
+
 ## 🧩 Atomic Components
 
 Based on the RICH interaction paradigm, we provide numerous atomic components for various stages of interaction to help you flexibly build your AI dialogue applications:
 
-- General: `Bubble` - Message bubble, `Conversations` - Conversation management
-- Wake-Up: `Welcome` - Welcome messages, `Prompts` - Prompt sets
-- Expression: `Sender` - Input box, `Attachment` - Attachments, `Suggestion` - Quick commands
-- Confirmation: `ThoughtChain` - Thought chains
+- [Components Overview](https://x.ant.design/components/overview)
+- [Playground](https://x.ant.design/docs/playground/independent)
 
 Below is an example of using atomic components to create a simple chatbot interface:
 
@@ -99,85 +93,163 @@ const messages = [
 ];
 
 const App = () => (
-  <div>
+  <>
     <Bubble.List items={messages} />
     <Sender />
-  </div>
+  </>
 );
 
 export default App;
 ```
 
-## ⚡️ Connecting to Model Inference Services
+## ⚡️ Integrating Model Inference Service
 
-With the `useXAgent` runtime tool, we make it easy to connect with model inference services that adhere to OpenAI standards.
+We help you integrate standard model inference services out of the box by providing runtime tools like `useXAgent`, `XRequest`, etc.
 
-Here’s an example of using `useXAgent`:
+Here is an example of integrating Qwen:
+
+> Note: 🔥 `dangerouslyApiKey` has security risks, more details can be found in the [documentation](/docs/react/dangerously-api-key.en-US.md).
 
 ```tsx
+import { useXAgent, Sender, XRequest } from '@ant-design/x';
 import React from 'react';
-import { useXAgent, Sender } from '@ant-design/x';
 
-const App = () => {
+const { create } = XRequest({
+  baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
+  dangerouslyApiKey: process.env['DASHSCOPE_API_KEY'],
+  model: 'qwen-plus',
+});
+
+const Component: React.FC = () => {
   const [agent] = useXAgent({
-    // Model inference service URL
-    baseURL: 'https://your.api.host',
-    // Model name
-    model: 'gpt-3.5',
+    request: async (info, callbacks) => {
+      const { messages, message } = info;
+      const { onUpdate } = callbacks;
+
+      // current message
+      console.log('message', message);
+      // messages list
+      console.log('messages', messages);
+
+      let content: string = '';
+
+      try {
+        create(
+          {
+            messages: [{ role: 'user', content: message }],
+            stream: true,
+          },
+          {
+            onSuccess: (chunks) => {
+              console.log('sse chunk list', chunks);
+            },
+            onError: (error) => {
+              console.log('error', error);
+            },
+            onUpdate: (chunk) => {
+              console.log('sse object', chunk);
+              const data = JSON.parse(chunk.data);
+              content += data?.choices[0].delta.content;
+              onUpdate(content);
+            },
+          },
+        );
+      } catch (error) {
+        // handle error
+      }
+    },
   });
 
-  function chatRequest(text: string) {
-    agent.request({
-      // Message
-      messages: [
-        {
-          content: text,
-          role: 'user',
-        },
-      ],
-      // Enable streaming
-      stream: true,
-    });
-  }
+  const onSubmit = (message: string) => {
+    agent.request(
+      { message },
+      {
+        onUpdate: () => {},
+        onSuccess: () => {},
+        onError: () => {},
+      },
+    );
+  };
 
-  return <Sender onSubmit={chatRequest} />;
+  return <Sender onSubmit={onSubmit} />;
 };
-
-export default App;
 ```
 
-## 🔄 Efficient Management of Data Flows
+## 🔄 Efficient Data Flow Management
 
-Using the `useXChat` runtime tool, you can easily manage data flows in AI dialogue applications:
+We help you efficiently manage the data flow of AI chat applications out of the box by providing the `useXChat` runtime tool:
+
+Here is an example of integrating OpenAI:
 
 ```tsx
+import { useXAgent, useXChat, Sender, Bubble } from '@ant-design/x';
+import OpenAI from 'openai';
 import React from 'react';
-import { useXChat, useXAgent } from '@ant-design/x';
 
-const App = () => {
+const client = new OpenAI({
+  apiKey: process.env['OPENAI_API_KEY'],
+  dangerouslyAllowBrowser: true,
+});
+
+const Demo: React.FC = () => {
   const [agent] = useXAgent({
-    // Model inference service URL
-    baseURL: 'https://your.api.host',
-    // Model name
-    model: 'gpt-3.5',
+    request: async (info, callbacks) => {
+      const { messages, message } = info;
+
+      const { onSuccess, onUpdate, onError } = callbacks;
+
+      // current message
+      console.log('message', message);
+
+      // history messages
+      console.log('messages', messages);
+
+      let content: string = '';
+
+      try {
+        const stream = await client.chat.completions.create({
+          model: 'gpt-4o',
+          // if chat context is needed, modify the array
+          messages: [{ role: 'user', content: message }],
+          // stream mode
+          stream: true,
+        });
+
+        for await (const chunk of stream) {
+          content += chunk.choices[0]?.delta?.content || '';
+          onUpdate(content);
+        }
+
+        onSuccess(content);
+      } catch (error) {
+        // handle error
+        // onError();
+      }
+    },
   });
 
   const {
-    // Initiate a chat request
+    // use to send message
     onRequest,
-    // Message list
+    // use to render messages
     messages,
   } = useXChat({ agent });
 
+  const items = messages.map(({ message, id }) => ({
+    // key is required, used to identify the message
+    key: id,
+    content: message,
+  }));
+
   return (
-    <div>
-      <Bubble.List items={messages} />
+    <>
+      <Bubble.List items={items} />
       <Sender onSubmit={onRequest} />
-    </div>
+    </>
   );
 };
 
-export default App;
+export default Demo;
 ```
 
 ## Use modularized antd
@@ -197,6 +269,10 @@ Welcome to contribute!
 Ant Design X is widely used in AI-driven user interfaces within Ant Group. If your company and products use Ant Design X, feel free to leave a comment [here](https://github.com/ant-design/x/issues/126).
 
 ## Contributing
+
+<a href="https://openomy.app/github/ant-design/x" target="_blank" style="display: block; width: 100%;" align="center">
+  <img src="https://openomy.app/svg?repo=ant-design/x&chart=bubble&latestMonth=3" target="_blank" alt="Contribution Leaderboard" style="display: block; width: 100%;" />
+ </a>
 
 Please read our [CONTRIBUTING.md](https://github.com/ant-design/ant-design/blob/master/.github/CONTRIBUTING.md) first.
 

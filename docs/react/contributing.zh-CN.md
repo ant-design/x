@@ -21,7 +21,7 @@ title: 贡献指南
 
 ## Bugs
 
-我们使用 [GitHub Issues](https://github.com/ant-design/ant-design/issues) 来做 bug 追踪。 如果你想要你发现的 bug 被快速解决，最好的办法就是通过我们提供的 [issue 小助手](http://new-issue.ant.design) 来提 issue，并且能使用这个 [模板](https://u.ant.design/codesandbox-repro) 来提供重现。
+我们使用 [GitHub Issues](https://github.com/ant-design/x/issues) 来做 bug 追踪。 如果你想要你发现的 bug 被快速解决，最好的办法就是通过我们提供的 [issue 小助手](http://new-issue.ant.design) 来提 issue，并且能使用这个 [模板](https://codesandbox.io/p/sandbox/ant-design-x-box-vmqvt8) 来提供重现。
 
 在你报告一个 bug 之前，请先确保已经搜索过已有的 issue 和阅读了我们的 [常见问题](/docs/react/faq)。
 
@@ -54,9 +54,8 @@ Ant Design 团队会关注所有的 pull request，我们会 review 以及合并
 3. 如果你修复了一个 bug 或者新增了一个功能，请确保编写了相应的测试，这很重要。
 4. 确认所有的测试都通过了 `npm run test`。小贴士：开发过程中可以用 `npm test -- --watch TestName` 来运行指定的测试。
 5. 运行 `npm test -- -u` 来更新 [jest snapshot](https://jestjs.io/zh-Hans/docs/snapshot-testing) 并且把这些更新也提交上来（如果有的话）。
-6. 确认所有的 UI 改动通过 `npm run test:image`，可以运行 `npm run test:image -- -u` 更新 UI 快照并且把这些更新也提交上来（如果有的话），**UI 测试基于 [Docker](https://docs.docker.com/get-docker/)，根据平台下载对应的安装程序。**
-7. 确保你的代码通过了 lint 检查 `npm run lint`。小贴士: Lint 会在你 `git commit` 的时候自动运行（通过[Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks)）。
-8. 最后请确保所有 GitHub CI 检查通过，如果失败，可点击 `detail` 进入详情查看原因。
+6. 确保你的代码通过了 lint 检查 `npm run lint`。小贴士: Lint 会在你 `git commit` 的时候自动运行（通过[Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks)）。
+7. 最后请确保所有 GitHub CI 检查通过，如果失败，可点击 `detail` 进入详情查看原因。
 
 给 [react-component](https://github.com/react-component/) 发送 pull request：
 

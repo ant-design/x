@@ -1,4 +1,3 @@
-import type { MenuProps } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
 
@@ -48,7 +47,7 @@ export interface ConversationsProps extends React.HTMLAttributes<HTMLUListElemen
    * @desc 会话操作菜单
    * @descEN Operation menu for conversations
    */
-  menu?: MenuProps | ((value: Conversation) => MenuProps);
+  menu?: ConversationsItemProps['menu'] | ((value: Conversation) => ConversationsItemProps['menu']);
 
   /**
    * @desc 是否支持分组, 开启后默认按 {@link Conversation.group} 字段分组
@@ -176,7 +175,7 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
         if (enableGroup) {
           return (
             <li key={groupInfo.name || `key-${groupIndex}`}>
-              <GroupTitleContext.Provider value={{ direction }}>
+              <GroupTitleContext.Provider value={{ prefixCls }}>
                 {groupInfo.title?.(groupInfo.name!, { components: { GroupTitle } }) || (
                   <GroupTitle key={groupInfo.name}>{groupInfo.name}</GroupTitle>
                 )}

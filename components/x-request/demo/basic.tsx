@@ -23,7 +23,7 @@ const exampleRequest = XRequest({
 
 const App = () => {
   const [status, setStatus] = React.useState<ThoughtChainItem['status']>();
-  const [lines, setLines] = React.useState<any[]>([]);
+  const [lines, setLines] = React.useState<Record<string, string>[]>([]);
 
   async function request() {
     setStatus('pending');
@@ -32,6 +32,7 @@ const App = () => {
       {
         messages: [{ role: 'user', content: 'hello, who are u?' }],
         stream: true,
+        agentId: 111,
       },
       {
         onSuccess: (messages) => {
@@ -58,9 +59,8 @@ const App = () => {
           {PATH}
         </Button>
       </Splitter.Panel>
-      <Splitter.Panel>
+      <Splitter.Panel style={{ marginLeft: 16 }}>
         <ThoughtChain
-          style={{ marginLeft: 16 }}
           items={[
             {
               title: 'Request Log',

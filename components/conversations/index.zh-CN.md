@@ -4,8 +4,8 @@ group:
   title: 通用
   order: 0
 title: Conversations
-subtitle: 会话列表
-description: 用于管理、查看会话列表
+subtitle: 管理对话
+description: 用于承载用户侧发送的历史对话列表。
 cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*Oj-bTbVXtpQAAAAAAAAAAAAADgCCAQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*qwdtSKWXeikAAAAAAAAAAAAADgCCAQ/original
 demo:
@@ -20,12 +20,13 @@ demo:
 ## 代码演示
 
 <!-- prettier-ignore -->
-<code src="./demo/basic.tsx">基本</code>
-<code src="./demo/with-menu.tsx">会话操作</code>
-<code src="./demo/controlled-mode.tsx">受控模式</code>
-<code src="./demo/group.tsx">分组展示</code>
-<code src="./demo/group-sort.tsx">分组排序</code>
-<code src="./demo/infinite-load.tsx">滚动加载</code>
+<code src="./demo/basic.tsx" background="grey">基本</code>
+<code src="./demo/with-menu.tsx" background="grey">会话操作</code>
+<code src="./demo/menu-trigger.tsx" background="grey">自定义操作</code>
+<code src="./demo/controlled-mode.tsx" background="grey">受控模式</code>
+<code src="./demo/group.tsx" background="grey">分组展示</code>
+<code src="./demo/group-sort.tsx" background="grey">分组排序</code>
+<code src="./demo/infinite-load.tsx" background="grey">滚动加载</code>
 
 ## API
 
@@ -61,6 +62,14 @@ demo:
 | --- | --- | --- | --- | --- |
 | `sort` | 分组排序函数 | (a: string, b: string) => number | - | - |
 | `title` | 自定义渲染组件 | ((group: string, info: { components: { GroupTitle: React.ComponentType } }) => React.ReactNode) | - | - |
+
+### MenuProps
+
+继承 antd [MenuProps](https://ant.design/components/menu-cn#api) 属性。
+
+| 属性 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| `trigger` | 自定义menu触发器 | React.ReactNode \| ((conversation: Conversation, info: { originNode: React.ReactNode }) => React.ReactNode) | - | - |
 
 ## 主题变量（Design Token）
 

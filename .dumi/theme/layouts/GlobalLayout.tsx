@@ -9,7 +9,7 @@ import {
 import { getSandpackCssText } from '@codesandbox/sandpack-react';
 import { App, theme as antdTheme } from 'antd';
 import { createSearchParams, useOutlet, useSearchParams, useServerInsertedHTML } from 'dumi';
-import React, { Suspense, useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, Suspense } from 'react';
 
 import type { MappingAlgorithm } from 'antd';
 import type { DirectionType, ThemeConfig } from 'antd/es/config-provider';
@@ -18,11 +18,12 @@ import { DarkContext } from '../../hooks/useDark';
 import useLayoutState from '../../hooks/useLayoutState';
 import useLocation from '../../hooks/useLocation';
 import SiteThemeProvider from '../SiteThemeProvider';
+import PeterCat from '../common/PeterCat';
 import type { ThemeName } from '../common/ThemeSwitch';
 import type { SiteContextProps } from '../slots/SiteContext';
 import SiteContext from '../slots/SiteContext';
 
-const ThemeSwitch = React.lazy(() => import('../common/ThemeSwitch'));
+import '@ant-design/v5-patch-for-react-19';
 
 type Entries<T> = { [K in keyof T]: [K, T[K]] }[keyof T][];
 type SiteState = Partial<Omit<SiteContextProps, 'updateSiteContext'>>;
@@ -51,12 +52,19 @@ const getAlgorithm = (themes: ThemeName[] = []) =>
 const GlobalLayout: React.FC = () => {
   const outlet = useOutlet();
   const { pathname } = useLocation();
+  const { token } = antdTheme.useToken();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [{ theme = [], direction, isMobile }, setSiteState] = useLayoutState<SiteState>({
-    isMobile: false,
-    direction: 'ltr',
-    theme: [],
-  });
+  const [{ theme = [], direction, isMobile, bannerVisible = false }, setSiteState] =
+    useLayoutState<SiteState>({
+      isMobile: false,
+      direction: 'ltr',
+      theme: [],
+      bannerVisible: false,
+    });
+  const isIndexPage = React.useMemo(
+    () => pathname === '' || pathname.startsWith('/index'),
+    [pathname],
+  );
 
   const updateSiteConfig = useCallback(
     (props: SiteState) => {
@@ -98,6 +106,14 @@ const GlobalLayout: React.FC = () => {
   };
 
   useEffect(() => {
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute('content', isIndexPage ? '#0c0e10cc' : token.colorBgContainer);
+    }
+  }, [theme.length, isIndexPage]);
+
+  useEffect(() => {
     const _theme = searchParams.getAll('theme') as ThemeName[];
     const _direction = searchParams.get('direction') as DirectionType;
 
@@ -124,6 +140,7 @@ const GlobalLayout: React.FC = () => {
       updateSiteConfig,
       theme: theme!,
       isMobile: isMobile!,
+      bannerVisible,
     }),
     [isMobile, direction, updateSiteConfig, theme],
   );
@@ -131,10 +148,7 @@ const GlobalLayout: React.FC = () => {
   const themeConfig = React.useMemo<ThemeConfig>(
     () => ({
       // index page should always use dark theme
-      algorithm:
-        pathname.startsWith('/index') || pathname === ''
-          ? getAlgorithm(['dark'])
-          : getAlgorithm(theme),
+      algorithm: isIndexPage ? getAlgorithm(['dark']) : getAlgorithm(theme),
       token: { motion: !theme.includes('motion-off') },
       cssVar: true,
       hashed: false,
@@ -178,37 +192,22 @@ const GlobalLayout: React.FC = () => {
     />
   ));
 
-  const demoPage = pathname.startsWith('/~demos');
-
-  // ============================ Render ============================
-  let content: React.ReactNode = outlet;
-
-  // Demo page should not contain App component
-  if (!demoPage) {
-    content = (
-      <App>
-        {outlet}
-        <Suspense>
-          <ThemeSwitch
-            value={theme}
-            onChange={(nextTheme) => updateSiteConfig({ theme: nextTheme })}
-          />
-        </Suspense>
-      </App>
-    );
-  }
-
   return (
-    <DarkContext.Provider value={theme.includes('dark')}>
+    <DarkContext value={theme.includes('dark')}>
       <StyleProvider
         cache={styleCache}
         linters={[legacyNotSelectorLinter, parentSelectorLinter, NaNLinter]}
       >
-        <SiteContext.Provider value={siteContextValue}>
-          <SiteThemeProvider theme={themeConfig}>{content}</SiteThemeProvider>
-        </SiteContext.Provider>
+        <SiteContext value={siteContextValue}>
+          <SiteThemeProvider theme={themeConfig}>
+            <App>
+              {outlet}
+              <Suspense>{pathname.startsWith('/~demos') ? <PeterCat /> : null}</Suspense>
+            </App>
+          </SiteThemeProvider>
+        </SiteContext>
       </StyleProvider>
-    </DarkContext.Provider>
+    </DarkContext>
   );
 };
 

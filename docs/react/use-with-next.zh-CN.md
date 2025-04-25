@@ -3,7 +3,6 @@ group:
   title: 如何使用
 order: 3
 title: 在 Next.js 中使用
-tag: Updated
 ---
 
 [Next.js](https://nextjs.org/) 是目前世界上最流行的 React 服务端同构框架，本文会尝试在 Next.js 创建的工程中使用 `@ant-design/x` 组件。

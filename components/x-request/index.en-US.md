@@ -18,7 +18,12 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*lQydTrtLz9YAAA
 
 ## Examples
 
+<!-- prettier-ignore -->
 <code src="./demo/basic.tsx">Basic</code>
+<code src="./demo/requestParams.tsx">Custom RequestParams</code>
+<code src="./demo/custom-transformer.tsx">Custom Transformer</code>
+<code src="./demo/request-options.tsx">Control XRequestOptions</code>
+<code src="./demo/model.tsx">Model Access</code>
 
 ## API
 
@@ -28,7 +33,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*lQydTrtLz9YAAA
 | --- | --- | --- | --- | --- |
 | baseURL | Base URL for the API request | string | - | - |
 | model | Model name, e.g., 'gpt-3.5-turbo' | string | - | - |
-| dangerouslyApiKey | Enabling this option can be dangerous, exposing secret API credentials | string | - | - |
+| dangerouslyApiKey | **🔥 `dangerouslyApiKey` presents security risks. Detailed documentation on this can be found in [Explanation](/docs/react/dangerously-api-key)** | string | - | - |
 | fetch | Optional custom fetch function for making requests | fetch | - | - |
 
 ### XRequestFunction
@@ -53,7 +58,8 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| onSuccess | Callback for successful. | `(messages: Output[]) => void` | - | - |
-| onError | Callback for error handling. | `(error: Error) => void` | - | - |
-| onUpdate | Callback for message updates. | `(message: Output) => void` | - | - |
+| onSuccess | Callback for successful | `(chunks: Output[]) => void` | - | - |
+| onError | Callback for error handling | `(error: Error) => void` | - | - |
+| onUpdate | Callback for message updates | `(chunk: Output) => void` | - | - |
+| onStream | Callback for stream controller | `(abortController: AbortController) => void` | - | - |
 | transformStream | Optional transform function for processing stream data | `XStreamOptions<Output>['transformStream']` | - | - |

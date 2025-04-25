@@ -1,5 +1,5 @@
 import { LeftOutlined, PlusOutlined, RightOutlined } from '@ant-design/icons';
-import { Button, type UploadProps } from 'antd';
+import { Button, type ImageProps, type UploadProps } from 'antd';
 import classnames from 'classnames';
 import { CSSMotionList } from 'rc-motion';
 import React from 'react';
@@ -14,6 +14,7 @@ export interface FileListProps {
   onRemove: (item: Attachment) => void;
   overflow?: 'scrollX' | 'scrollY' | 'wrap';
   upload: UploadProps;
+  imageProps?: ImageProps;
 
   // Semantic
   listClassName?: string;
@@ -21,6 +22,8 @@ export interface FileListProps {
   itemClassName?: string;
   itemStyle?: React.CSSProperties;
 }
+
+const TOLERANCE = 1;
 
 export default function FileList(props: FileListProps) {
   const {
@@ -33,6 +36,7 @@ export default function FileList(props: FileListProps) {
     listStyle,
     itemClassName,
     itemStyle,
+    imageProps,
   } = props;
 
   const listCls = `${prefixCls}-list`;
@@ -62,9 +66,10 @@ export default function FileList(props: FileListProps) {
     }
 
     if (overflow === 'scrollX') {
-      setPingStart(containerEle.scrollLeft !== 0);
+      setPingStart(Math.abs(containerEle.scrollLeft) >= TOLERANCE);
       setPingEnd(
-        containerEle.scrollWidth - containerEle.clientWidth !== Math.abs(containerEle.scrollLeft),
+        containerEle.scrollWidth - containerEle.clientWidth - Math.abs(containerEle.scrollLeft) >=
+          TOLERANCE,
       );
     } else if (overflow === 'scrollY') {
       setPingStart(containerEle.scrollTop !== 0);
@@ -74,7 +79,7 @@ export default function FileList(props: FileListProps) {
 
   React.useEffect(() => {
     checkPing();
-  }, [overflow]);
+  }, [overflow, items.length]);
 
   const onScrollOffset = (offset: -1 | 1) => {
     const containerEle = containerRef.current;
@@ -130,6 +135,7 @@ export default function FileList(props: FileListProps) {
               item={item}
               onRemove={onRemove}
               className={classnames(motionCls, itemClassName)}
+              imageProps={imageProps}
               style={{
                 ...motionStyle,
                 ...itemStyle,

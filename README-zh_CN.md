@@ -6,9 +6,11 @@
 
 轻松打造 AI 驱动的界面。
 
-[![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] [![NPM version][npm-image]][npm-url] [![NPM downloads][download-image]][download-url] [![][bundlephobia-image]][bundlephobia-url]
+[![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] [![NPM version][npm-image]][npm-url]
 
-[Changelog](./CHANGELOG.zh-US.md) · [Report Bug][github-issues-bug-report] · [Request Feature][github-issues-feature-request] · [English](./README.md) · 中文
+[![NPM downloads][download-image]][download-url] [![][bundlephobia-image]][bundlephobia-url] [![antd][antd-image]][antd-url] [![Follow zhihu][zhihu-image]][zhihu-url]
+
+[更新日志](./CHANGELOG.zh-US.md) · [报告一个 Bug][github-issues-bug-report] · [想新增特性？][github-issues-feature-request] · [English](./README.md) · 中文
 
 [npm-image]: https://img.shields.io/npm/v/@ant-design/x.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/@ant-design/x
@@ -22,6 +24,10 @@
 [bundlephobia-url]: https://bundlephobia.com/package/@ant-design/x
 [github-issues-bug-report]: https://github.com/ant-design/x/issues/new?template=bug-report.yml
 [github-issues-feature-request]: https://github.com/ant-design/x/issues/new?template=bug-feature-request.yml
+[antd-image]: https://img.shields.io/badge/-Ant%20Design-blue?labelColor=black&logo=antdesign&style=flat-square
+[antd-url]: https://ant.design
+[zhihu-image]: https://img.shields.io/badge/-Ant%20Design-white?logo=zhihu
+[zhihu-url]: https://www.zhihu.com/column/c_1564262000561106944
 
 </div>
 
@@ -59,16 +65,14 @@ pnpm add @ant-design/x
 
 > **强烈不推荐使用已构建文件**，这样无法按需加载，而且难以获得底层依赖模块的 bug 快速修复支持。
 
-> 注意：`antdx.js` 和 `antdx.min.js` 依赖 `react`、`react-dom`、`dayjs`，请确保提前引入这些文件。
+> 注意：`antdx.js` 和 `antdx.min.js` 依赖 `react`、`react-dom`、`dayjs` `antd` `@ant-design/cssinjs` `@ant-design/icons`，请确保提前引入这些文件。
 
 ## 🧩 原子组件
 
 我们基于 RICH 交互范式，在不同的交互阶段提供了大量的原子组件，帮助你灵活搭建你的 AI 对话应用：
 
-- 通用: `Bubble` - 消息气泡、`Conversations` - 会话管理
-- 唤醒: `Welcome` - 欢迎、`Prompts` - 提示集
-- 表达: `Sender` - 发送框、`Attachment` - 附件、`Suggestion` - 快捷指令
-- 确认: `ThoughtChain` - 思维链
+- [组件总览](https://x.ant.design/components/overview-cn)
+- [样板间](https://x.ant.design/docs/playground/independent-cn)
 
 下面是使用原子组件搭建一个最简单的对话框的代码示例:
 
@@ -100,74 +104,156 @@ export default App;
 
 ## ⚡️ 对接模型推理服务
 
-我们通过提供 `useXAgent` 运行时工具，帮助你开箱即用的对接符合 OpenAI 标准的模型推理服务。
+我们通过提供 `useXAgent` `XRequest` 等运行时工具，帮助你开箱即用的对接符合标准的模型推理服务。
 
-下面是如何使用 `useXAgent` 的代码示例:
+这是一个对接 Qwen 的示例:
+
+> 注意: 🔥 `dangerouslyApiKey` 存在安全风险，对此有详细的[说明](/docs/react/dangerously-api-key.zh-CN.md)。
 
 ```tsx
+import { useXAgent, Sender, XRequest } from '@ant-design/x';
 import React from 'react';
-import { useXAgent, Sender } from '@ant-design/x';
 
-const App = () => {
+const { create } = XRequest({
+  baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
+  dangerouslyApiKey: process.env['DASHSCOPE_API_KEY'],
+  model: 'qwen-plus',
+});
+
+const Component: React.FC = () => {
   const [agent] = useXAgent({
-    // 模型推理服务地址
-    baseURL: 'https://your.api.host',
-    // 模型名称
-    model: 'gpt-3.5',
+    request: async (info, callbacks) => {
+      const { messages, message } = info;
+      const { onUpdate } = callbacks;
+
+      // current message
+      console.log('message', message);
+      // messages list
+      console.log('messages', messages);
+
+      let content: string = '';
+
+      try {
+        create(
+          {
+            messages: [{ role: 'user', content: message }],
+            stream: true,
+          },
+          {
+            onSuccess: (chunks) => {
+              console.log('sse chunk list', chunks);
+            },
+            onError: (error) => {
+              console.log('error', error);
+            },
+            onUpdate: (chunk) => {
+              console.log('sse object', chunk);
+
+              const data = JSON.parse(chunk.data);
+
+              content += data?.choices[0].delta.content;
+
+              onUpdate(content);
+            },
+          },
+        );
+      } catch (error) {
+        // handle error
+      }
+    },
   });
 
-  function chatRequest(text: string) {
-    agent.request({
-      // 消息
-      messages: [
-        {
-          content: text,
-          role: 'user',
-        },
-      ],
-      // 开启流式
-      stream: true,
-    });
+  function onRequest(message: string) {
+    agent.request(
+      { message },
+      {
+        onUpdate: () => {},
+        onSuccess: () => {},
+        onError: () => {},
+      },
+    );
   }
 
-  return <Sender onSubmit={chatRequest} />;
+  return <Sender onSubmit={onRequest} />;
 };
-
-export default App;
 ```
 
 ## 🔄 高效管理数据流
 
 我们通过提供 `useXChat` 运行时工具，帮助你开箱即用的管理 AI 对话应用的数据流:
 
-```tsx
-import React from 'react';
-import { useXChat, useXAgent } from '@ant-design/x';
+这是一个对接 OpenAI 的示例:
 
-const App = () => {
+```tsx
+import { useXAgent, useXChat, Sender, Bubble } from '@ant-design/x';
+import OpenAI from 'openai';
+import React from 'react';
+
+const client = new OpenAI({
+  apiKey: process.env['OPENAI_API_KEY'],
+  dangerouslyAllowBrowser: true,
+});
+
+const Demo: React.FC = () => {
   const [agent] = useXAgent({
-    // 模型推理服务地址
-    baseURL: 'https://your.api.host',
-    // 模型名称
-    model: 'gpt-3.5',
+    request: async (info, callbacks) => {
+      const { messages, message } = info;
+
+      const { onSuccess, onUpdate, onError } = callbacks;
+
+      // current message
+      console.log('message', message);
+
+      // history messages
+      console.log('messages', messages);
+
+      let content: string = '';
+
+      try {
+        const stream = await client.chat.completions.create({
+          model: 'gpt-4o',
+          // if chat context is needed, modify the array
+          messages: [{ role: 'user', content: message }],
+          // stream mode
+          stream: true,
+        });
+
+        for await (const chunk of stream) {
+          content += chunk.choices[0]?.delta?.content || '';
+
+          onUpdate(content);
+        }
+
+        onSuccess(content);
+      } catch (error) {
+        // handle error
+        // onError();
+      }
+    },
   });
 
   const {
-    // 发起聊天请求
+    // use to send message
     onRequest,
-    // 消息列表
+    // use to render messages
     messages,
   } = useXChat({ agent });
 
+  const items = messages.map(({ message, id }) => ({
+    // key is required, used to identify the message
+    key: id,
+    content: message,
+  }));
+
   return (
     <div>
-      <Bubble.List items={messages} />
+      <Bubble.List items={items} />
       <Sender onSubmit={onRequest} />
     </div>
   );
 };
 
-export default App;
+export default Demo;
 ```
 
 ## 按需加载
@@ -183,6 +269,10 @@ export default App;
 Ant Design X 广泛用于蚂蚁集团内由 AI 驱动的用户交互界面。如果你的公司和产品使用了 Ant Design X，欢迎到 [这里](https://github.com/ant-design/x/issues/126) 留言。
 
 ## 如何贡献
+
+<a href="https://openomy.app/github/ant-design/x" target="_blank" style="display: block; width: 100%;" align="center">
+  <img src="https://openomy.app/svg?repo=ant-design/x&chart=bubble&latestMonth=3" target="_blank" alt="Contribution Leaderboard" style="display: block; width: 100%;" />
+ </a>
 
 在任何形式的参与前，请先阅读 [贡献者文档](https://github.com/ant-design/ant-design/blob/master/.github/CONTRIBUTING.md)。如果你希望参与贡献，欢迎提交 [Pull Request](https://github.com/ant-design/ant-design/pulls)，或给我们 [报告 Bug](http://new-issue.ant.design/)。
 

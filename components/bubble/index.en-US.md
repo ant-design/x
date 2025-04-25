@@ -29,6 +29,9 @@ Often used when chatting.
 <code src="./demo/list.tsx">Bubble List</code>
 <code src="./demo/bubble-custom.tsx">Semantic Custom</code>
 <code src="./demo/list-custom.tsx">Custom List Content</code>
+<code src="./demo/gpt-vis.tsx">Using GPT-Vis to render charts</code>
+<code src="./demo/debug.tsx" debug>debug</code>
+<code src="./demo/debug-list.tsx" debug>debug list</code>
 
 ## API
 
@@ -41,7 +44,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | avatar | Avatar component | React.ReactNode | - |  |
 | classNames | Semantic DOM class | [Record<SemanticDOM, string>](#semantic-dom) | - |  |
 | content | Content of bubble | string | - |  |
-| footer | Footer content | React.ReactNode | - |  |
+| footer | Footer content | React.ReactNode \| (content: [BubbleContentType](https://github.com/ant-design/x/blob/d3232c925a0dc61ad763c6664e16f07323ebca4a/components/bubble/interface.ts#L21)) => React.ReactNode | - |  |
 | header | Header content | React.ReactNode | - |  |
 | loading | Loading state of Message | boolean | - |  |
 | placement | Direction of Message | `start` \| `end` | `start` |  |
@@ -59,7 +62,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | --- | --- | --- | --- | --- |
 | autoScroll | When the content is updated, scroll to the latest position automatically. If the user scrolls, the automatic scrolling will be paused. | boolean | true |  |
 | items | Bubble items list | (BubbleProps & { key?: string \| number, role?: string })[] | - |  |
-| roles | Set the default properties of the bubble. The `role` in `items` will be automatically matched. | Record<string, BubbleProps> \| (bubble) => BubbleProps | - |  |
+| roles | Set the default properties of the bubble. The `role` in `items` will be automatically matched. | Record<string, BubbleProps> \| (bubble, index) => BubbleProps | - |  |
 
 ## Semantic DOM
 

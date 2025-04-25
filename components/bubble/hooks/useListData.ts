@@ -9,9 +9,9 @@ export default function useListData(
   roles?: BubbleListProps['roles'],
 ) {
   const getRoleBubbleProps = React.useCallback(
-    (bubble: BubbleDataType): Partial<BubbleProps> => {
+    (bubble: BubbleDataType, index: number): Partial<BubbleProps> => {
       if (typeof roles === 'function') {
-        return roles(bubble);
+        return roles(bubble, index);
       }
 
       if (roles) {
@@ -29,7 +29,7 @@ export default function useListData(
         const mergedKey = bubbleData.key ?? `preset_${i}`;
 
         return {
-          ...getRoleBubbleProps(bubbleData),
+          ...getRoleBubbleProps(bubbleData, i),
           ...bubbleData,
           key: mergedKey,
         };

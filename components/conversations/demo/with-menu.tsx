@@ -1,8 +1,8 @@
-import React from 'react';
+import { DeleteOutlined, EditOutlined, StopOutlined } from '@ant-design/icons';
 import { Conversations } from '@ant-design/x';
 import type { ConversationsProps } from '@ant-design/x';
-import { EditOutlined, DeleteOutlined, StopOutlined } from '@ant-design/icons';
-import { Card, type GetProp, App } from 'antd';
+import { App, type GetProp, theme } from 'antd';
+import React from 'react';
 
 const items: GetProp<ConversationsProps, 'items'> = Array.from({ length: 4 }).map((_, index) => ({
   key: `item${index + 1}`,
@@ -12,6 +12,13 @@ const items: GetProp<ConversationsProps, 'items'> = Array.from({ length: 4 }).ma
 
 const Demo = () => {
   const { message } = App.useApp();
+  const { token } = theme.useToken();
+
+  const style = {
+    width: 256,
+    background: token.colorBgContainer,
+    borderRadius: token.borderRadius,
+  };
 
   const menuConfig: ConversationsProps['menu'] = (conversation) => ({
     items: [
@@ -34,15 +41,12 @@ const Demo = () => {
       },
     ],
     onClick: (menuInfo) => {
+      menuInfo.domEvent.stopPropagation();
       message.info(`Click ${conversation.key} - ${menuInfo.key}`);
     },
   });
 
-  return (
-    <Card style={{ width: 320 }} size="small">
-      <Conversations menu={menuConfig} defaultActiveKey="demo3" items={items} />
-    </Card>
-  );
+  return <Conversations defaultActiveKey="item1" menu={menuConfig} items={items} style={style} />;
 };
 
 export default () => (

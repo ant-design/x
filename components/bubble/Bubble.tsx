@@ -6,7 +6,7 @@ import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 import useTypedEffect from './hooks/useTypedEffect';
 import useTypingConfig from './hooks/useTypingConfig';
-import type { BubbleProps } from './interface';
+import type { BubbleContentType, BubbleProps } from './interface';
 import Loading from './loading';
 import useStyle from './style';
 
@@ -61,7 +61,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
   const contextConfig = useXComponentConfig('bubble');
 
   // ============================ Typing ============================
-  const [typingEnabled, typingStep, typingInterval] = useTypingConfig(typing);
+  const [typingEnabled, typingStep, typingInterval, customSuffix] = useTypingConfig(typing);
 
   const [typedContent, isTyping] = useTypedEffect(
     content,
@@ -101,22 +101,33 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     `${prefixCls}-${placement}`,
     {
       [`${prefixCls}-rtl`]: direction === 'rtl',
-      [`${prefixCls}-typing`]: isTyping && !loading && !messageRender,
+      [`${prefixCls}-typing`]: isTyping && !loading && !messageRender && !customSuffix,
     },
   );
 
   // ============================ Avatar ============================
-  const avatarNode = React.isValidElement(avatar) ? avatar : <Avatar {...avatar} />;
+  const avatarNode = React.useMemo(
+    () => (React.isValidElement(avatar) ? avatar : <Avatar {...avatar} />),
+    [avatar],
+  );
 
   // =========================== Content ============================
-  const mergedContent = messageRender ? messageRender(typedContent as any) : typedContent;
+  const mergedContent = React.useMemo(
+    () => (messageRender ? messageRender(typedContent as any) : typedContent),
+    [typedContent, messageRender],
+  );
 
   // ============================ Render ============================
   let contentNode: React.ReactNode;
   if (loading) {
     contentNode = loadingRender ? loadingRender() : <Loading prefixCls={prefixCls} />;
   } else {
-    contentNode = mergedContent as React.ReactNode;
+    contentNode = (
+      <>
+        {mergedContent as React.ReactNode}
+        {isTyping && customSuffix}
+      </>
+    );
   }
 
   let fullContent: React.ReactNode = (
@@ -168,7 +179,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
               ...styles.footer,
             }}
           >
-            {footer}
+            {typeof footer === 'function' ? footer(mergedContent) : footer}
           </div>
         )}
       </div>
@@ -208,10 +219,14 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
   );
 };
 
+type ForwardBubbleType = <T extends BubbleContentType = string>(
+  props: BubbleProps<T> & { ref?: React.Ref<BubbleRef> },
+) => React.ReactElement;
+
 const ForwardBubble = React.forwardRef(Bubble);
 
 if (process.env.NODE_ENV !== 'production') {
   ForwardBubble.displayName = 'Bubble';
 }
 
-export default ForwardBubble;
+export default ForwardBubble as ForwardBubbleType;

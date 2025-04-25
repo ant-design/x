@@ -97,4 +97,17 @@ describe('XStream', () => {
       })(),
     ).rejects.toThrow('The key-value separator ":" is not found in the sse line chunk!');
   });
+
+  it('should return an instance of ReadableStream', () => {
+    expect(
+      XStream({
+        readableStream: new ReadableStream({
+          async start(controller) {
+            controller.enqueue(new TextEncoder().encode('event: message\n\ndata: value\n\n'));
+            controller.close();
+          },
+        }),
+      }),
+    ).toBeInstanceOf(ReadableStream);
+  });
 });

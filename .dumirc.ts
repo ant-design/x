@@ -8,7 +8,11 @@ import { version } from './package.json';
 
 export default defineConfig({
   plugins: ['dumi-plugin-color-chunk'],
+
+  // For <Link prefetch />
+  routePrefetch: {},
   manifest: {},
+
   conventionRoutes: {
     // to avoid generate routes for .dumi/pages/index/components/xx
     exclude: [/index\/components\//],
@@ -39,6 +43,11 @@ export default defineConfig({
   ],
   define: {
     antdReproduceVersion: version,
+  },
+  externals: {
+    // optimize build of GPT-Vis
+    'mapbox-gl': 'mapboxgl',
+    'maplibre-gl': 'maplibregl',
   },
   alias: {
     '@ant-design/x/lib': path.join(__dirname, 'components'),

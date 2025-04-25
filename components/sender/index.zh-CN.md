@@ -24,8 +24,10 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/actions.tsx">自定义按钮</code>
 <code src="./demo/header.tsx">展开面板</code>
 <code src="./demo/header-fixed.tsx">引用</code>
+<code src="./demo/footer.tsx">自定义底部内容</code>
 <code src="./demo/send-style.tsx">调整样式</code>
-<code src="./demo/paste-image.tsx">黏贴图片</code>
+<code src="./demo/paste-image.tsx">黏贴文件</code>
+<code src="./demo/focus.tsx">聚焦</code>
 
 ## API
 
@@ -35,7 +37,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| actions | 自定义按钮 | ReactNode \| (oriNode, info: { components }) => ReactNode | - | - |
+| actions | 自定义按钮，当不需要默认操作按钮时，可以设为 `actions={false}` | ReactNode \| (oriNode, info: { components: ActionsComponents }) => ReactNode | - | - |
 | allowSpeech | 是否允许语音输入 | boolean \| SpeechConfig | false | - |
 | classNames | 样式类名 | [见下](#semantic-dom) | - | - |
 | components | 自定义组件 | Record<'input', ComponentType> | - | - |
@@ -44,14 +46,17 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 | loading | 是否加载中 | boolean | false | - |
 | header | 头部面板 | ReactNode | - | - |
 | prefix | 前缀内容 | ReactNode | - | - |
+| footer | 底部内容 | ReactNode \| (info: { components: ActionsComponents }) => ReactNode | - | - |
 | readOnly | 是否让输入框只读 | boolean | false | - |
 | rootClassName | 根元素样式类 | string | - | - |
 | styles | 语义化定义样式 | [见下](#semantic-dom) | - | - |
 | submitType | 提交模式 | SubmitType | `enter` \| `shiftEnter` | - |
 | value | 输入框值 | string | - | - |
 | onSubmit | 点击发送按钮的回调 | (message: string) => void | - | - |
-| onChange | 输入框值改变的回调 | (value: string) => void | - | - |
+| onChange | 输入框值改变的回调 | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`> ) => void | - | - |
 | onCancel | 点击取消按钮的回调 | () => void | - | - |
+| onPasteFile | 黏贴文件的回调 | (firstFile: File, files: FileList) => void | - | - |
+| autoSize | 自适应内容高度，可设置为 true \| false 或对象：{ minRows: 2, maxRows: 6 } | boolean \| { minRows?: number; maxRows?: number } | { maxRows: 8 } | - |
 
 ```typescript | pure
 type SpeechConfig = {
@@ -61,6 +66,23 @@ type SpeechConfig = {
   onRecordingChange?: (recording: boolean) => void;
 };
 ```
+
+```typescript | pure
+type ActionsComponents = {
+  SendButton: React.ComponentType<ButtonProps>;
+  ClearButton: React.ComponentType<ButtonProps>;
+  LoadingButton: React.ComponentType<ButtonProps>;
+  SpeechButton: React.ComponentType<ButtonProps>;
+};
+```
+
+#### Sender Ref
+
+| 属性 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| nativeElement | 外层容器 | `HTMLDivElement` | - | - |
+| focus | 获取焦点 | (option?: { preventScroll?: boolean, cursor?: 'start' \| 'end' \| 'all' }) | - | - |
+| blur | 取消焦点 | () => void | - | - |
 
 ### Sender.Header
 

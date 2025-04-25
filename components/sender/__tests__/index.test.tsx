@@ -30,19 +30,22 @@ describe('Sender Component', () => {
 
   it('custom action button', () => {
     const onSubmit = jest.fn();
+    const onSend = jest.fn();
+    const onClear = jest.fn();
     const { container, getByText } = render(
       <Sender
         actions={(_, info) => {
           const { SendButton, ClearButton } = info.components;
           return (
             <div className="bamboo">
-              <SendButton onClick={onSubmit} disabled={false}>
-                SendPrompt
-              </SendButton>
-              <ClearButton disabled />
+              <SendButton onClick={onSend}>SendPrompt</SendButton>
+              <ClearButton onClick={onClear} className="clear-button" disabled={false} />
             </div>
           );
         }}
+        disabled
+        defaultValue="text"
+        onSubmit={onSubmit}
       />,
     );
 
@@ -50,12 +53,16 @@ describe('Sender Component', () => {
     const sendButton = getByText('SendPrompt');
     expect(sendButton).toBeInTheDocument();
 
-    const clearButton = container.querySelector('.bamboo button[disabled]');
+    const clearButton = container.querySelector('.bamboo button.clear-button')!;
     expect(clearButton).toBeInTheDocument();
 
     // check custom onClick
     fireEvent.click(sendButton);
-    expect(onSubmit).toHaveBeenCalled();
+    fireEvent.click(clearButton);
+
+    expect(onSubmit).not.toHaveBeenCalled();
+    expect(onSend).not.toHaveBeenCalled();
+    expect(onClear).toHaveBeenCalled();
   });
 
   it('onSubmit', () => {
@@ -82,10 +89,10 @@ describe('Sender Component', () => {
     );
 
     fireEvent.change(container.querySelector('textarea')!, { target: { value: 'bamboo' } });
-    expect(onChange).toHaveBeenCalledWith('bamboo');
+    expect(onChange).toHaveBeenCalledWith('bamboo', {});
 
     fireEvent.click(container.querySelector('button')!);
-    expect(onChange).toHaveBeenCalledWith('');
+    expect(onChange).toHaveBeenCalledWith('', undefined);
   });
 
   describe('submitType', () => {
@@ -137,5 +144,120 @@ describe('Sender Component', () => {
   it('readOnly', () => {
     const { container } = render(<Sender readOnly />);
     expect(container.querySelector('textarea')).toHaveAttribute('readonly');
+  });
+  describe('footer', () => {
+    it('footer width function', () => {
+      const onSubmit = jest.fn();
+      const { container, getByText } = render(
+        <Sender
+          footer={({ components }) => {
+            const { SendButton, ClearButton } = components;
+            return (
+              <div className="sender-footer-test">
+                <SendButton onClick={onSubmit} disabled={false}>
+                  SendPrompt
+                </SendButton>
+                <ClearButton disabled />
+              </div>
+            );
+          }}
+        />,
+      );
+
+      expect(container.querySelector('.sender-footer-test')).toBeTruthy();
+      // check children render
+      const sendButton = getByText('SendPrompt');
+      expect(sendButton).toBeInTheDocument();
+
+      const clearButton = container.querySelector('.sender-footer-test button[disabled]');
+      expect(clearButton).toBeInTheDocument();
+
+      // check custom onClick
+      fireEvent.click(sendButton);
+      expect(onSubmit).toHaveBeenCalled();
+    });
+    it('footer width reactNode', () => {
+      const { container } = render(
+        <Sender
+          footer={<div className="sender-footer-test-reactNode">footer width reactNode</div>}
+        />,
+      );
+      expect(container.querySelector('.sender-footer-test-reactNode')).toBeTruthy();
+    });
+  });
+
+  describe('paste events', () => {
+    it('onPaste callback', () => {
+      const onPaste = jest.fn();
+      const { container } = render(<Sender onPaste={onPaste} />);
+
+      const textarea = container.querySelector('textarea')!;
+      fireEvent.paste(textarea);
+      expect(onPaste).toHaveBeenCalled();
+      const eventArg = onPaste.mock.calls[0][0];
+      expect(eventArg.type).toBe('paste');
+      expect(eventArg.target).toBe(textarea);
+    });
+
+    it('onPasteFile callback with files', () => {
+      const onPasteFile = jest.fn();
+      const { container } = render(<Sender onPasteFile={onPasteFile} />);
+
+      const file = new File(['test'], 'test.png', { type: 'image/png' });
+      const fileList = {
+        0: file,
+        length: 1,
+        item: (idx: number) => (idx === 0 ? file : null),
+      };
+
+      const textarea = container.querySelector('textarea')!;
+      fireEvent.paste(textarea, {
+        clipboardData: {
+          files: fileList,
+          getData: () => '',
+        },
+      });
+
+      expect(onPasteFile).toHaveBeenCalledWith(file, fileList);
+    });
+
+    it('should not trigger onPasteFile when no files', () => {
+      const onPasteFile = jest.fn();
+      const { container } = render(<Sender onPasteFile={onPasteFile} />);
+
+      const textarea = container.querySelector('textarea')!;
+      fireEvent.paste(textarea, {
+        clipboardData: {
+          files: { length: 0 },
+          getData: () => '',
+        },
+      });
+
+      expect(onPasteFile).not.toHaveBeenCalled();
+    });
+
+    it('should handle multiple files paste', () => {
+      const onPasteFile = jest.fn();
+      const { container } = render(<Sender onPasteFile={onPasteFile} />);
+
+      const file1 = new File(['test1'], 'test1.png', { type: 'image/png' });
+      const file2 = new File(['test2'], 'test2.jpg', { type: 'image/jpeg' });
+      const fileList = {
+        0: file1,
+        1: file2,
+        length: 2,
+        item: (idx: number) => (idx === 0 ? file1 : idx === 1 ? file2 : null),
+      };
+
+      const textarea = container.querySelector('textarea')!;
+      fireEvent.paste(textarea, {
+        clipboardData: {
+          files: fileList,
+          getData: () => '',
+        },
+      });
+
+      expect(onPasteFile).toHaveBeenCalledWith(file1, fileList);
+    });
   });
 });
