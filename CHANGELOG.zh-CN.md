@@ -38,7 +38,7 @@ tag: vVERSION
   - 🆕 XChatConfig 新增 `transformMessage` 转换函数，可在更新数据时对`messages`做转换，同时会更新到`messages`。 [#711](https://github.com/ant-design/x/pull/711) 由 [@kimteayon](https://github.com/kimteayon) 提交
   - 🆕 XChatConfig 新增 `transformStream`转换函数，用于处理流数据。[#711](https://github.com/ant-design/x/pull/711) 由 [@kimteayon](https://github.com/kimteayon) 提交
   - 🆕 XChatConfig 新增 `resolveAbortController`回调函数，可获得`AbortController` 控制器，用于控制流状态。[#711](https://github.com/ant-design/x/pull/711) 由 [@kimteayon](https://github.com/kimteayon) 提交
-  - 🆕 新增模型接入示例，删除错误的终止流示例。 [#711](https://github.com/ant-design/x/pull/726) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 🆕 新增模型接入示例，删除错误的终止流示例。 [#711](https://github.com/ant-design/x/pull/711) 由 [@kimteayon](https://github.com/kimteayon) 提交
 - 🐛 修复 Sender `header`圆角样式溢出问题。[#732](https://github.com/ant-design/x/pull/732) 由 [@Bao0630](https://github.com/Bao0630) 提交
 - 📖 新增助手式样板间。[#657](https://github.com/ant-design/x/pull/657) 由 [@vanndxh](https://github.com/vanndxh) 提交
 - 📖 重构独立式样板间。[#753](https://github.com/ant-design/x/pull/753) 由 [@vanndxh](https://github.com/vanndxh) 提交

@@ -38,7 +38,7 @@ tag: vVERSION
   - 🆕 XChatConfig adds `transformMessage` transformation function,which can transform `messages` when updating data and update to `messages` at the same time. [#711](https://github.com/ant-design/x/pull/711) by [@kimteayon](https://github.com/kimteayon) 
   - 🆕 XChatConfig adds `transformStream`conversion function for processing stream data.[#711](https://github.com/ant-design/x/pull/711) by [@kimteayon](https://github.com/kimteayon) 
   - 🆕 XChatConfig adds `resolveAbortController`callback function, which can obtain the`AbortController` controller for controlling the stream state.[#711](https://github.com/ant-design/x/pull/711) by [@kimteayon](https://github.com/kimteayon) 
-  - 🆕 Add model access examples and remove incorrect abort examples. [#711](https://github.com/ant-design/x/pull/726) by [@kimteayon](https://github.com/kimteayon) 
+  - 🆕 Add model access examples and remove incorrect abort examples. [#711](https://github.com/ant-design/x/pull/711) by [@kimteayon](https://github.com/kimteayon) 
 - 🐛 Fixed the issue of Sender `header` `border-radius` style overflow.[#732](https://github.com/ant-design/x/pull/732) by [@Bao0630](https://github.com/Bao0630) 
 - 📖 Add a copilot style model room.[#657](https://github.com/ant-design/x/pull/657) by [@vanndxh](https://github.com/vanndxh) 
 - 📖  Refactoring the independent model room.[#753](https://github.com/ant-design/x/pull/753) by [@vanndxh](https://github.com/vanndxh) 
