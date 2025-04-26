@@ -21,7 +21,7 @@ tag: vVERSION
 `2025-04-25`
 - 🐛 Delete Conversations ellipsis tooltip , fix 'tooltip' display error issue。[#776](https://github.com/ant-design/x/pull/776) by [@afc163](https://github.com/afc163)
 - 🐛 Fixed Attachments `image` card style.[#751](https://github.com/ant-design/x/pull/751) by [@wzc520pyfm](https://github.com/wzc520pyfm) 
-- 🐛 Fixed ThoughtChain controlled issue.[#752](https://github.com/ant-design/x/pull/752) by [@Youzi2233](https://github.com/kimteayon) 
+- 🐛 Fixed ThoughtChain controlled issue.[#752](https://github.com/ant-design/x/pull/752) by [@Youzi2233](https://github.com/Youzi2233) 
 - XRequest
   - 🆕 XRequestCallbacks adds an 'onStream' callback that allows for stream listening and abort operations.[#711](https://github.com/ant-design/x/pull/711) by [@kimteayon](https://github.com/kimteayon) 
   - 🐛 Fixed the issue of XRequestOptions changes not taking effect and added a demo.[#736](https://github.com/ant-design/x/pull/736) by [@kimteayon](https://github.com/kimteayon) 
