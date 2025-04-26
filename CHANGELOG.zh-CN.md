@@ -21,7 +21,7 @@ tag: vVERSION
 
 - 🐛 删除 Conversations 溢出省略逻辑修复 `tooltip` 展示错误的问题。[#776](https://github.com/ant-design/x/pull/776) 由 [@afc163](https://github.com/afc163) 提交
 - 🐛 修复 Attachments `image`卡片样式问题。[#751](https://github.com/ant-design/x/pull/751) 由 [@wzc520pyfm](https://github.com/wzc520pyfm) 提交
-- 🐛 修复 ThoughtChain 受控问题。[#752](https://github.com/ant-design/x/pull/752) 由 [@Youzi2233](https://github.com/kimteayon) 提交
+- 🐛 修复 ThoughtChain 受控问题。[#752](https://github.com/ant-design/x/pull/752) 由 [@Youzi2233](https://github.com/Youzi2233) 提交
 - XRequest
   - 🆕 XRequestCallbacks 新增 `onStream` 回调，可对流监听和终止操作。[#711](https://github.com/ant-design/x/pull/711) 由 [@kimteayon](https://github.com/kimteayon) 提交
   - 🐛 修复 XRequestOptions 变更不生效问题，并新增示例。[#736](https://github.com/ant-design/x/pull/736) 由 [@kimteayon](https://github.com/kimteayon) 提交
