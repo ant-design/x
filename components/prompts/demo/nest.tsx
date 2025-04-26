@@ -26,7 +26,7 @@ const items: PromptsProps['items'] = [
     children: [
       {
         key: '1-1',
-        description: `What's new in X?`,
+        description: `What's new in X,What's new in XWhat's new in X?What's new in X,What's new in XWhat's new in X?`,
       },
       {
         key: '1-2',
