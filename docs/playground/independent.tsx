@@ -200,8 +200,6 @@ const useStyle = createStyles(({ token, css }) => {
     chat: css`
       height: 100%;
       width: 100%;
-      max-width: 700px;
-      margin: 0 auto;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
@@ -223,7 +221,7 @@ const useStyle = createStyles(({ token, css }) => {
     chatList: css`
       flex: 1;
       overflow: auto;
-      padding-right: 10px;
+      padding-inline:calc(calc(100% - 700px) /2);
     `,
     loadingMessage: css`
       background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
@@ -236,14 +234,18 @@ const useStyle = createStyles(({ token, css }) => {
     `,
     // sender 样式
     sender: css`
-      box-shadow: ${token.boxShadow};
-      color: ${token.colorText};
+      width:100%;
+      max-width: 700px;
+      margin: 0 auto;
     `,
     speechButton: css`
       font-size: 18px;
       color: ${token.colorText} !important;
     `,
     senderPrompt: css`
+      width:100%;
+      max-width: 700px;
+      margin: 0 auto;
       color: ${token.colorText};
     `,
   };
@@ -425,7 +427,7 @@ const Independent: React.FC = () => {
             },
             typing: i.status === 'loading' ? { step: 5, interval: 20, suffix: <>💗</> } : false,
           }))}
-          style={{ height: '100%' }}
+          style={{ height: '100%', paddingInline: "calc(calc(100% - 700px) /2)" }}
           roles={{
             assistant: {
               placement: 'start',
@@ -511,10 +513,10 @@ const Independent: React.FC = () => {
           type === 'drop'
             ? { title: 'Drop file here' }
             : {
-                icon: <CloudUploadOutlined />,
-                title: 'Upload files',
-                description: 'Click or drag files to this area to upload',
-              }
+              icon: <CloudUploadOutlined />,
+              title: 'Upload files',
+              description: 'Click or drag files to this area to upload',
+            }
         }
       />
     </Sender.Header>
@@ -527,7 +529,10 @@ const Independent: React.FC = () => {
         onItemClick={(info) => {
           onSubmit(info.data.description as string);
         }}
-        styles={{ item: { padding: '6px 12px' } }}
+
+        styles={{
+          item: { padding: '6px 12px' }
+        }}
         className={styles.senderPrompt}
       />
       {/* 🌟 输入框 */}

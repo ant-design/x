@@ -87,7 +87,7 @@ const App = () => {
 
       <Bubble.List
         ref={listRef}
-        style={{ maxHeight: 300 }}
+        style={{ maxHeight: 300 ,paddingInline: 16}}
         roles={useRolesAsFunction ? rolesAsFunction : rolesAsObject}
         items={Array.from({ length: count }).map((_, i) => {
           const isAI = !!(i % 2);

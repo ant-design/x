@@ -113,10 +113,11 @@ const useCopilotStyle = createStyles(({ token, css }) => {
     // chatList 样式
     chatList: css`
       overflow: auto;
-      padding: 16px;
+      padding-block:16px;
       flex: 1;
     `,
     chatWelcome: css`
+      margin-inline: 16px;
       padding: 12px 16px;
       border-radius: 2px 12px 12px 12px;
       background: ${token.colorBgTextHover};
@@ -303,7 +304,7 @@ const Copilot = (props: CopilotProps) => {
       {messages?.length ? (
         /** 消息列表 */
         <Bubble.List
-          style={{ height: '100%' }}
+          style={{ height: '100%', paddingInline: 16 }}
           items={messages?.map((i) => ({
             ...i.message,
             classNames: {
@@ -347,7 +348,11 @@ const Copilot = (props: CopilotProps) => {
             title="I can help："
             items={MOCK_QUESTIONS.map((i) => ({ key: i, description: i }))}
             onItemClick={(info) => handleUserSubmit(info?.data?.description as string)}
+            style={{
+             marginInline: "16px"
+            }}
             styles={{
+            
               title: { fontSize: '14px' },
             }}
           />
@@ -372,10 +377,10 @@ const Copilot = (props: CopilotProps) => {
           type === 'drop'
             ? { title: 'Drop file here' }
             : {
-                icon: <CloudUploadOutlined />,
-                title: 'Upload files',
-                description: 'Click or drag files to this area to upload',
-              }
+              icon: <CloudUploadOutlined />,
+              title: 'Upload files',
+              description: 'Click or drag files to this area to upload',
+            }
         }
       />
     </Sender.Header>
