@@ -203,7 +203,7 @@ const useStyle = createStyles(({ token, css }) => {
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      padding: ${token.paddingLG}px;
+      padding-block: ${token.paddingLG}px;
       gap: 16px;
     `,
     chatPrompt: css`
