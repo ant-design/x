@@ -19,7 +19,7 @@ tag: vVERSION
 ## 1.2.0
 
 `2025-04-25`
-- 🐛 Delete Conversations ellipsis tooltip , fix 'tooltip' display error issue。[#776](https://github.com/ant-design/x/pull/776) by [@afc163](https://github.com/afc163)
+- 🐛 Delete Conversations ellipsis tooltip , fix 'tooltip' display error issue.[#776](https://github.com/ant-design/x/pull/776) by [@afc163](https://github.com/afc163)
 - 🐛 Fixed Attachments `image` card style.[#751](https://github.com/ant-design/x/pull/751) by [@wzc520pyfm](https://github.com/wzc520pyfm) 
 - 🐛 Fixed ThoughtChain controlled issue.[#752](https://github.com/ant-design/x/pull/752) by [@Youzi2233](https://github.com/Youzi2233) 
 - XRequest

@@ -44,9 +44,8 @@ const items: ThoughtChainProps['items'] = [
 
 
 const App: React.FC = () => {
-
   const [expandedKeys, setExpandedKeys] = useState(['item-2']);
-
+  
   const collapsible: ThoughtChainProps['collapsible'] = {
     expandedKeys,
     onExpand: (keys: string[]) => {
