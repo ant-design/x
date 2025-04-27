@@ -221,7 +221,6 @@ const useStyle = createStyles(({ token, css }) => {
     chatList: css`
       flex: 1;
       overflow: auto;
-      padding-inline:calc(calc(100% - 700px) /2);
     `,
     loadingMessage: css`
       background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
@@ -234,7 +233,7 @@ const useStyle = createStyles(({ token, css }) => {
     `,
     // sender 样式
     sender: css`
-      width:100%;
+      width: 100%;
       max-width: 700px;
       margin: 0 auto;
     `,
@@ -243,7 +242,7 @@ const useStyle = createStyles(({ token, css }) => {
       color: ${token.colorText} !important;
     `,
     senderPrompt: css`
-      width:100%;
+      width: 100%;
       max-width: 700px;
       margin: 0 auto;
       color: ${token.colorText};
@@ -445,7 +444,7 @@ const Independent: React.FC = () => {
           }}
         />
       ) : (
-        <Space direction="vertical" size={16} className={styles.placeholder}>
+        <Space direction="vertical" size={16} style={{ paddingInline: "calc(calc(100% - 700px) /2)" }} className={styles.placeholder}>
           <Welcome
             variant="borderless"
             icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
@@ -529,7 +528,6 @@ const Independent: React.FC = () => {
         onItemClick={(info) => {
           onSubmit(info.data.description as string);
         }}
-
         styles={{
           item: { padding: '6px 12px' }
         }}

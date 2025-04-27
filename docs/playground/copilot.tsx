@@ -113,7 +113,7 @@ const useCopilotStyle = createStyles(({ token, css }) => {
     // chatList 样式
     chatList: css`
       overflow: auto;
-      padding-block:16px;
+      padding-block: 16px;
       flex: 1;
     `,
     chatWelcome: css`
@@ -349,11 +349,10 @@ const Copilot = (props: CopilotProps) => {
             items={MOCK_QUESTIONS.map((i) => ({ key: i, description: i }))}
             onItemClick={(info) => handleUserSubmit(info?.data?.description as string)}
             style={{
-             marginInline: "16px"
+             marginInline: 16
             }}
             styles={{
-            
-              title: { fontSize: '14px' },
+              title: { fontSize: 14 },
             }}
           />
         </>
