@@ -6,7 +6,7 @@ import { useXProviderContext } from '../x-provider';
 import Bubble, { BubbleContext } from './Bubble';
 import type { BubbleRef } from './Bubble';
 import useListData from './hooks/useListData';
-import type { BubbleProps } from './interface';
+import type { BubbleProps, footerType, messageRenderType } from './interface';
 import useStyle from './style';
 
 export interface BubbleListRef {
@@ -19,12 +19,15 @@ export interface BubbleListRef {
   }) => void;
 }
 
-export type BubbleDataType = BubbleProps & {
+export type BubbleDataType = Omit<BubbleProps, 'content' | 'messageRender' | 'footer'> & {
   key?: string | number;
+  content?: any;
+  messageRender?: messageRenderType<any>;
+  footer?: footerType<any>;
   role?: string;
 };
 
-export type RoleType = Partial<Omit<BubbleProps, 'content'>>;
+export type RoleType = Partial<Omit<BubbleDataType, 'content'>>;
 
 export type RolesType =
   | Record<string, RoleType>
