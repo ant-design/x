@@ -293,6 +293,11 @@ export default function useXChat<
       },
       transformStream,
     );
+
+    return {
+      loadingMsgId,
+      updatingMsgId
+    }
   });
 
   return {
