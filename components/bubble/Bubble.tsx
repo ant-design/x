@@ -40,6 +40,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     onTypingComplete,
     header,
     footer,
+    _key,
     ...otherHtmlProps
   } = props;
 
@@ -179,7 +180,12 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
               ...styles.footer,
             }}
           >
-            {typeof footer === 'function' ? footer(mergedContent) : footer}
+            {typeof footer === 'function'
+              ? footer(mergedContent, {
+                  content,
+                  key: _key,
+                })
+              : footer}
           </div>
         )}
       </div>
