@@ -1,4 +1,4 @@
-// Bun Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders components/x-request/demo/basic.tsx correctly 1`] = `
 {
