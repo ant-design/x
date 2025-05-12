@@ -172,7 +172,11 @@ Array [
 ]
 `;
 
-exports[`renders components/suggestion/demo/basic.tsx extend context correctly 2`] = `[]`;
+exports[`renders components/suggestion/demo/basic.tsx extend context correctly 3`] = `
+[
+  "Warning: [antd: Cascader] `onDropdownVisibleChange` is deprecated. Please use `onOpenChange` instead.",
+]
+`;
 
 exports[`renders components/suggestion/demo/block.tsx extend context correctly 1`] = `
 Array [
@@ -304,8 +308,9 @@ Array [
 ]
 `;
 
-exports[`renders components/suggestion/demo/block.tsx extend context correctly 2`] = `
+exports[`renders components/suggestion/demo/block.tsx extend context correctly 3`] = `
 [
+  "Warning: [antd: Cascader] `onDropdownVisibleChange` is deprecated. Please use `onOpenChange` instead.",
   "\`NaN\` is an invalid value for the \`%s\` css style property.",
 ]
 `;
@@ -489,4 +494,8 @@ Array [
 ]
 `;
 
-exports[`renders components/suggestion/demo/trigger.tsx extend context correctly 2`] = `[]`;
+exports[`renders components/suggestion/demo/trigger.tsx extend context correctly 3`] = `
+[
+  "Warning: [antd: Cascader] `onDropdownVisibleChange` is deprecated. Please use `onOpenChange` instead.",
+]
+`;
