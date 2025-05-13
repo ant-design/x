@@ -40,10 +40,10 @@ bun.lockb
 pnpm-lock.yaml
 bun.lockb
 .pnpm-debug.log
-components/**/*.js
-components/**/*.jsx
-!components/**/__tests__/**/*.js
-!components/**/__tests__/**/*.js.snap
+packages/*/components/**/*.js
+packages/*/components/**/*.jsx
+!packages/*/components/**/__tests__/**/*.js
+!packages/*/components/**/__tests__/**/*.js.snap
 /.history
 *.tmp
 artifacts.zip
@@ -51,16 +51,16 @@ oss-artifacts.zip
 server/
 
 # Docs templates
-scripts/previewEditor/index.html
-components/version/version.ts
-components/version/version.tsx
-components/version/token.json
-components/version/token-meta.json
-.dumi/tmp
-.dumi/tmp-test
-.dumi/tmp-production
-.dumi/preset/components-changelog*
-.dumi/preset/misc-changelog.json
+packages/x/scripts/previewEditor/index.html
+packages/x/components/version/version.ts
+packages/x/components/version/version.tsx
+packages/x/components/version/token.json
+packages/x/components/version/token-meta.json
+packages/*/.dumi/tmp
+packages/*/.dumi/tmp-test
+packages/*/.dumi/tmp-production
+packages/*/.dumi/preset/components-changelog*
+packages/*/.dumi/preset/misc-changelog.json
 
 # Image snapshot diff
 __diff_output__/

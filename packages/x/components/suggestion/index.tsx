@@ -1,4 +1,4 @@
-import { Cascader, Flex } from 'antd';
+import { Cascader, Flex, version } from 'antd';
 import type { CascaderProps } from 'antd';
 import classnames from 'classnames';
 import { useEvent, useMergedState } from 'rc-util';
@@ -7,6 +7,10 @@ import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 import useStyle from './style';
 import useActive from './useActive';
+
+const antdVersionCells = version.split('.').map(Number);
+const isNewAPI =
+  antdVersionCells[0] > 5 || (antdVersionCells[0] === 5 && antdVersionCells[1] >= 25);
 
 export type SuggestionItem = {
   label: React.ReactNode;
@@ -121,17 +125,31 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
   const childNode = children?.({ onTrigger, onKeyDown });
 
   // ============================ Render ============================
+  const onInternalOpenChange = (nextOpen: boolean) => {
+    if (!nextOpen) {
+      onClose();
+    }
+  };
+
+  const compatibleProps: Pick<
+    Partial<CascaderProps<SuggestionItem>>,
+    'onDropdownVisibleChange' | 'onOpenChange'
+  > = {};
+
+  /* istanbul ignore else */
+  if (isNewAPI) {
+    compatibleProps.onOpenChange = onInternalOpenChange;
+  } else {
+    compatibleProps.onDropdownVisibleChange = onInternalOpenChange;
+  }
+
   return wrapCSSVar(
     <Cascader
       options={itemList}
       open={mergedOpen}
       value={activePath}
       placement={isRTL ? 'topRight' : 'topLeft'}
-      onDropdownVisibleChange={(nextOpen) => {
-        if (!nextOpen) {
-          onClose();
-        }
-      }}
+      {...compatibleProps}
       optionRender={optionRender}
       rootClassName={classnames(rootClassName, prefixCls, hashId, cssVarCls, {
         [`${prefixCls}-block`]: block,
