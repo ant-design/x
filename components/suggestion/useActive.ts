@@ -117,6 +117,7 @@ export default function useActive(
   });
 
   React.useEffect(() => {
+    if(items?.length === 0) return;
     if (open) {
       setActivePaths([items[0].value]);
     }
