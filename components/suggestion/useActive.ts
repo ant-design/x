@@ -117,7 +117,8 @@ export default function useActive(
   });
 
   React.useEffect(() => {
-    if(items?.length === 0) return;
+    // 确保 items 是一个数组且至少有一个元素
+    if (!Array.isArray(items) || items.length === 0) return;
     if (open) {
       setActivePaths([items[0].value]);
     }
