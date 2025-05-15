@@ -46,7 +46,7 @@
 ## 📦 安装
 
 ```bash
-npm install @ant-design/x --save
+npm install @ant-design/x
 ```
 
 ```bash
