@@ -89,7 +89,7 @@ runs the complete test suite. (Make sure the `NODE_ENV` environment variable is 
 
 ### Build
 
-Build TypeScript code to the `lib` and `es` directory, creates UMD build of antdx.
+Build TypeScript code to the `lib` and `es` directory, creates UMD build of `@ant-design/x`.
 
 <InstallDependencies npm='$ npm run compile' yarn='$ yarn compile'></InstallDependencies>
 
