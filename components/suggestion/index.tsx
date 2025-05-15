@@ -131,7 +131,10 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
     }
   };
 
-  const compatibleProps: Partial<CascaderProps> = {};
+  const compatibleProps: Pick<
+    Partial<CascaderProps<SuggestionItem>>,
+    'onDropdownVisibleChange' | 'onOpenChange'
+  > = {};
   if (isNewAPI) {
     compatibleProps.onDropdownVisibleChange = onInternalOpenChange;
   } else {
