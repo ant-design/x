@@ -135,6 +135,8 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
     Partial<CascaderProps<SuggestionItem>>,
     'onDropdownVisibleChange' | 'onOpenChange'
   > = {};
+
+  /* istanbul ignore else */
   if (isNewAPI) {
     compatibleProps.onOpenChange = onInternalOpenChange;
   } else {
