@@ -136,9 +136,9 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
     'onDropdownVisibleChange' | 'onOpenChange'
   > = {};
   if (isNewAPI) {
-    compatibleProps.onDropdownVisibleChange = onInternalOpenChange;
-  } else {
     compatibleProps.onOpenChange = onInternalOpenChange;
+  } else {
+    compatibleProps.onDropdownVisibleChange = onInternalOpenChange;
   }
 
   return wrapCSSVar(
