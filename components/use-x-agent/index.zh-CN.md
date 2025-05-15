@@ -20,7 +20,10 @@ demo:
 
 <!-- prettier-ignore -->
 <code src="./demo/preset.tsx">预设请求</code>
+<code src="./demo/requestParams.tsx">自定义入参</code>
 <code src="./demo/custom.tsx">自定义请求</code>
+<code src="./demo/model.tsx">模型接入</code>
+<code src="./demo/request-options.tsx">变更配置</code>
 
 ## API
 
@@ -51,25 +54,29 @@ type useXAgent<AgentMessage> = (
 
 #### RequestFn
 
+更多请查看 [XStreamOptions](/components/x-stream-cn#xstreamoptions)。
+
 ```tsx | pure
-interface RequestFnInfo<Message> extends Partial<XAgentConfigPreset>, AnyObject {
+interface RequestFnInfo<Message> extends AnyObject {
   messages?: Message[];
   message?: Message;
-}
+};
 
-export type RequestFn<Message> = (
-  info: RequestFnInfo<Message>,
+type RequestFn<Message, Input, Output> = (
+  info: RequestFnInfo<Message, Input>,
   callbacks: {
-    onUpdate: (message: Message) => void;
-    onSuccess: (message: Message) => void;
+    onUpdate: (chunk: Output) => void;
+    onSuccess: (chunks: Output[]) => void;
     onError: (error: Error) => void;
+    onStream?: (abortController: AbortController) => void;
   },
+  transformStream?: XStreamOptions<Message>['transformStream'],
 ) => void;
 ```
 
 ### Agent
 
-| 属性         | 说明                        | 类型          | 版本 |
-| ------------ | --------------------------- | ------------- | ---- |
-| request      | 调用 `useXAgent` 配置的请求 | RequestFn     |      |
-| isRequesting | 是否正在请求                | () => boolean |      |
+| 属性 | 说明 | 类型 | 版本 |
+| --- | --- | --- | --- |
+| request | 调用 `useXAgent` 配置的请求，[详情](https://x.ant.design/components/x-request) | RequestFn |  |
+| isRequesting | 是否正在请求 | () => boolean |  |

@@ -106,10 +106,16 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
   );
 
   // ============================ Avatar ============================
-  const avatarNode = React.isValidElement(avatar) ? avatar : <Avatar {...avatar} />;
+  const avatarNode = React.useMemo(
+    () => (React.isValidElement(avatar) ? avatar : <Avatar {...avatar} />),
+    [avatar],
+  );
 
   // =========================== Content ============================
-  const mergedContent = messageRender ? messageRender(typedContent as any) : typedContent;
+  const mergedContent = React.useMemo(
+    () => (messageRender ? messageRender(typedContent as any) : typedContent),
+    [typedContent, messageRender],
+  );
 
   // ============================ Render ============================
   let contentNode: React.ReactNode;
@@ -173,7 +179,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
               ...styles.footer,
             }}
           >
-            {footer}
+            {typeof footer === 'function' ? footer(mergedContent) : footer}
           </div>
         )}
       </div>

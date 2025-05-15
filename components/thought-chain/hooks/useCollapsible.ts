@@ -34,6 +34,8 @@ type UseCollapsible = (
 ];
 
 const useCollapsible: UseCollapsible = (collapsible, prefixCls, rootPrefixCls) => {
+  const isThoughtChainUnControlled =
+    typeof collapsible === 'boolean' || collapsible?.expandedKeys === undefined;
   // ============================ Collapsible ============================
   const [enableCollapse, customizeExpandedKeys, customizeOnExpand] = React.useMemo(() => {
     let baseConfig: RequiredCollapsibleOptions = {
@@ -55,17 +57,18 @@ const useCollapsible: UseCollapsible = (collapsible, prefixCls, rootPrefixCls) =
   // ============================ ExpandedKeys ============================
   const [mergedExpandedKeys, setMergedExpandedKeys] = useMergedState<
     RequiredCollapsibleOptions['expandedKeys']
-  >([], {
-    value: customizeExpandedKeys,
+  >(customizeExpandedKeys, {
+    value: isThoughtChainUnControlled ? undefined : customizeExpandedKeys,
     onChange: customizeOnExpand,
   });
 
   // ============================ Event ============================
   const onItemExpand = (curKey: string) => {
     setMergedExpandedKeys((preKeys) => {
-      const keys = preKeys.includes(curKey)
-        ? preKeys.filter((key) => key !== curKey)
-        : [...preKeys, curKey];
+      const targetPreKeys = isThoughtChainUnControlled ? preKeys : customizeExpandedKeys;
+      const keys = targetPreKeys.includes(curKey)
+        ? targetPreKeys.filter((key) => key !== curKey)
+        : [...targetPreKeys, curKey];
       customizeOnExpand?.(keys);
       return keys;
     });

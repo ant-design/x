@@ -63,6 +63,10 @@ Add `script` and `link` tags in your browser and use the global variable `antd`.
 
 We provide `antdx.js`, `antdx.min.js`, and `antdx.min.js.map` in the [dist](https://cdn.jsdelivr.net/npm/@ant-design/x@1.0.0/dist/) directory of the npm package.
 
+> **We do not recommend using the built files** because they cannot be tree-shaken and will not receive bug fixes for underlying dependencies.
+
+> Note: `antdx.js` and `antdx.min.js` depend on `react`, `react-dom`, `dayjs`, `antd`, `@ant-design/cssinjs`, `@ant-design/icons`, please ensure these files are loaded before using them.
+
 ## 🧩 Atomic Components
 
 Based on the RICH interaction paradigm, we provide numerous atomic components for various stages of interaction to help you flexibly build your AI dialogue applications:
@@ -265,6 +269,10 @@ Welcome to contribute!
 Ant Design X is widely used in AI-driven user interfaces within Ant Group. If your company and products use Ant Design X, feel free to leave a comment [here](https://github.com/ant-design/x/issues/126).
 
 ## Contributing
+
+<a href="https://openomy.app/github/ant-design/x" target="_blank" style="display: block; width: 100%;" align="center">
+  <img src="https://openomy.app/svg?repo=ant-design/x&chart=bubble&latestMonth=3" target="_blank" alt="Contribution Leaderboard" style="display: block; width: 100%;" />
+ </a>
 
 Please read our [CONTRIBUTING.md](https://github.com/ant-design/ant-design/blob/master/.github/CONTRIBUTING.md) first.
 

@@ -129,7 +129,7 @@ export function getLocalizedPathname(
     enUS?: string;
   },
 ) {
-  const pathname = path?.startsWith('/') ? path : `/${path}`;
+  const pathname = path.startsWith('/') ? path : `/${path}`;
   let fullPath: string;
   if (!zhCN) {
     // to enUS

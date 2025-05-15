@@ -6,7 +6,7 @@ import 'dayjs/locale/zh-cn';
 import { XProvider } from '@ant-design/x';
 import zhCN from 'antd/es/locale/zh_CN';
 import { Helmet, useOutlet, useSiteData } from 'dumi';
-import React, { useContext, useEffect, useLayoutEffect, useRef } from 'react';
+import React, { useEffect, useLayoutEffect, useRef } from 'react';
 
 import useLocale from '../../../hooks/useLocale';
 import useLocation from '../../../hooks/useLocation';
@@ -35,8 +35,8 @@ const DocLayout: React.FC = () => {
   const location = useLocation();
   const { pathname, search, hash } = location;
   const [locale, lang] = useLocale(locales);
-  const timerRef = useRef<ReturnType<typeof setTimeout>>(null);
-  const { direction } = useContext(SiteContext);
+  const timerRef = useRef<ReturnType<typeof setTimeout>>(null!);
+  const { direction } = React.use(SiteContext);
   const { loading } = useSiteData();
 
   useLayoutEffect(() => {
@@ -52,11 +52,7 @@ const DocLayout: React.FC = () => {
     timerRef.current = setTimeout(() => {
       nprogressHiddenStyle?.remove();
     }, 0);
-    return () => {
-      if (timerRef.current) {
-        clearTimeout(timerRef.current);
-      }
-    };
+    return () => clearTimeout(timerRef.current);
   }, []);
 
   // handle hash change or visit page hash from Link component, and jump after async chunk loaded

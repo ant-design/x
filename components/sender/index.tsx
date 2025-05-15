@@ -242,9 +242,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
         break;
     }
 
-    if (onKeyPress) {
-      onKeyPress(e);
-    }
+    onKeyPress?.(e);
   };
 
   // ============================ Paste =============================
@@ -304,14 +302,8 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   };
 
   // ============================ Footer ============================
-  let footerNode: React.ReactNode = null;
-  if (typeof footer === 'function') {
-    footerNode = footer({
-      components: sharedRenderComponents,
-    });
-  } else if (footer) {
-    footerNode = footer;
-  }
+  const footerNode =
+    typeof footer === 'function' ? footer({ components: sharedRenderComponents }) : footer || null;
 
   // ============================ Render ============================
   return wrapCSSVar(
