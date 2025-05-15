@@ -70,6 +70,7 @@
     "start": "tsx ./scripts/set-node-options.ts cross-env PORT=8001 dumi dev",
     "pretest": "npm run version",
     "test": "jest --config .jest.js --no-cache --collect-coverage",
+    "coverage": "jest --config .jest.js --no-cache --collect-coverage --coverage",
     "test:dekko": "tsx ./tests/dekko/index.test.ts",
     "test:node": "npm run version && jest --config .jest.node.js --no-cache",
     "test:package-diff": "antd-tools run package-diff",

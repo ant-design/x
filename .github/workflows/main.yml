@@ -5,12 +5,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
-      - run: bun i
-      - run: npm run lint --workspace packages/x
-      - run: npm run tsc --noEmit --workspace packages/x
-      - run: npm run compile --workspace packages/x
-      - run: npm run test --workspace packages/x -- --coverage
+      - run: npm i -g utoo
+      - run: ut
+      - run: ut lint --workspace packages/x
+      - run: ut tsc --noEmit --workspace packages/x
+      - run: ut compile --workspace packages/x
+      - run: ut coverage --workspace packages/x
       - uses: codecov/codecov-action@v5
         with:
+          directory: packages/x
           token: ${{ secrets.CODECOV_TOKEN }}
