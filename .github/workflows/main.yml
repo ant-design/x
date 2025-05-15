@@ -5,8 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: npm i -g utoo
-      - run: ut
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install
       - run: ut lint --workspace packages/x
       - run: ut tsc --noEmit --workspace packages/x
       - run: ut compile --workspace packages/x
