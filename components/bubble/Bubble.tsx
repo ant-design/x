@@ -40,6 +40,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     onTypingComplete,
     header,
     footer,
+    _key,
     ...otherHtmlProps
   } = props;
 
@@ -110,14 +111,8 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
 
   // =========================== Content ============================
   const mergedContent = messageRender ? messageRender(typedContent as any) : typedContent;
-  const renderSlot = (
-    node: React.ReactNode | ((content: BubbleContentType) => React.ReactNode),
-  ) => {
-    if (typeof node === 'function') {
-      return node(typedContent);
-    }
-    return node;
-  };
+  const renderSlot = (node: BubbleProps<any>['footer'] | BubbleProps<any>['header']) =>
+    typeof node === 'function' ? node(typedContent, { key: _key }) : node;
   // ============================ Render ============================
   let contentNode: React.ReactNode;
   if (loading) {
