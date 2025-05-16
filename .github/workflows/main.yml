@@ -6,7 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: npm i -g utoo
-      - run: ut install --verbose
+      - run: ut install --ignore-scripts
       - run: ut lint --workspace packages/x
       - run: ut tsc --noEmit --workspace packages/x
       - run: ut compile --workspace packages/x
