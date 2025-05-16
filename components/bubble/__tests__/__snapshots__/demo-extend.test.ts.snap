@@ -141,22 +141,18 @@ exports[`renders components/bubble/demo/basic.tsx extend context correctly 1`] =
 
 exports[`renders components/bubble/demo/basic.tsx extend context correctly 2`] = `[]`;
 
-exports[`renders components/bubble/demo/bubble-custom.tsx extend context correctly 1`] = `
+exports[`renders components/bubble/demo/custom-content.tsx extend context correctly 1`] = `
 <div
-  class="ant-bubble-list ant-bubble-list-reach-end"
-  style="max-height: 300px;"
+  style="height: 100px;"
 >
   <div
     class="ant-bubble ant-bubble-start"
-    role="ai"
-    style="max-width: 600px; margin-inline-end: 44px;"
   >
     <div
       class="ant-bubble-avatar"
     >
       <span
         class="ant-avatar ant-avatar-circle ant-avatar-icon"
-        style="background: #fde3cf;"
       >
         <span
           aria-label="user"
@@ -185,223 +181,73 @@ exports[`renders components/bubble/demo/bubble-custom.tsx extend context correct
       <div
         class="ant-bubble-content ant-bubble-content-filled"
       >
-        Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. 
+        <div
+          class="ant-flex ant-flex-align-center ant-flex-gap-middle"
+        >
+          <div
+            class="ant-image"
+            style="height: 50px;"
+          >
+            <img
+              class="ant-image-img"
+              height="50"
+              src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*eco6RrQhxbMAAAAAAAAAAAAADgCCAQ/original"
+              style="height: 50px;"
+            />
+            <div
+              class="ant-image-mask"
+            >
+              <div
+                class="ant-image-mask-info"
+              >
+                <span
+                  aria-label="eye"
+                  class="anticon anticon-eye"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="eye"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 000 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"
+                    />
+                  </svg>
+                </span>
+                Preview
+              </div>
+            </div>
+          </div>
+          <span
+            style="font-size: 18px; font-weight: bold;"
+          >
+            Ant Design X
+          </span>
+        </div>
       </div>
       <div
         class="ant-bubble-footer"
-        style="width: 100%;"
       >
-        <div
-          class="ant-flex"
+        <button
+          class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text"
+          type="button"
         >
-          <button
-            class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
-            style="margin-inline-end: auto;"
-            type="button"
-          >
-            <span
-              class="ant-btn-icon"
-            >
-              <span
-                aria-label="sync"
-                class="anticon anticon-sync"
-                role="img"
-              >
-                <svg
-                  aria-hidden="true"
-                  data-icon="sync"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
-                >
-                  <path
-                    d="M168 504.2c1-43.7 10-86.1 26.9-126 17.3-41 42.1-77.7 73.7-109.4S337 212.3 378 195c42.4-17.9 87.4-27 133.9-27s91.5 9.1 133.8 27A341.5 341.5 0 01755 268.8c9.9 9.9 19.2 20.4 27.8 31.4l-60.2 47a8 8 0 003 14.1l175.7 43c5 1.2 9.9-2.6 9.9-7.7l.8-180.9c0-6.7-7.7-10.5-12.9-6.3l-56.4 44.1C765.8 155.1 646.2 92 511.8 92 282.7 92 96.3 275.6 92 503.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8zm756 7.8h-60c-4.4 0-7.9 3.5-8 7.8-1 43.7-10 86.1-26.9 126-17.3 41-42.1 77.8-73.7 109.4A342.45 342.45 0 01512.1 856a342.24 342.24 0 01-243.2-100.8c-9.9-9.9-19.2-20.4-27.8-31.4l60.2-47a8 8 0 00-3-14.1l-175.7-43c-5-1.2-9.9 2.6-9.9 7.7l-.7 181c0 6.7 7.7 10.5 12.9 6.3l56.4-44.1C258.2 868.9 377.8 932 512.2 932c229.2 0 415.5-183.7 419.8-411.8a8 8 0 00-8-8.2z"
-                  />
-                </svg>
-              </span>
-            </span>
-          </button>
-          <button
-            class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
-            type="button"
-          >
-            <span
-              class="ant-btn-icon"
-            >
-              <span
-                aria-label="smile"
-                class="anticon anticon-smile"
-                role="img"
-              >
-                <svg
-                  aria-hidden="true"
-                  data-icon="smile"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
-                >
-                  <path
-                    d="M288 421a48 48 0 1096 0 48 48 0 10-96 0zm352 0a48 48 0 1096 0 48 48 0 10-96 0zM512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm263 711c-34.2 34.2-74 61-118.3 79.8C611 874.2 562.3 884 512 884c-50.3 0-99-9.8-144.8-29.2A370.4 370.4 0 01248.9 775c-34.2-34.2-61-74-79.8-118.3C149.8 611 140 562.3 140 512s9.8-99 29.2-144.8A370.4 370.4 0 01249 248.9c34.2-34.2 74-61 118.3-79.8C413 149.8 461.7 140 512 140c50.3 0 99 9.8 144.8 29.2A370.4 370.4 0 01775.1 249c34.2 34.2 61 74 79.8 118.3C874.2 413 884 461.7 884 512s-9.8 99-29.2 144.8A368.89 368.89 0 01775 775zM664 533h-48.1c-4.2 0-7.8 3.2-8.1 7.4C604 589.9 562.5 629 512 629s-92.1-39.1-95.8-88.6c-.3-4.2-3.9-7.4-8.1-7.4H360a8 8 0 00-8 8.4c4.4 84.3 74.5 151.6 160 151.6s155.6-67.3 160-151.6a8 8 0 00-8-8.4z"
-                  />
-                </svg>
-              </span>
-            </span>
-          </button>
-          <button
-            class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
-            type="button"
-          >
-            <span
-              class="ant-btn-icon"
-            >
-              <span
-                aria-label="frown"
-                class="anticon anticon-frown"
-                role="img"
-              >
-                <svg
-                  aria-hidden="true"
-                  data-icon="frown"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
-                >
-                  <path
-                    d="M288 421a48 48 0 1096 0 48 48 0 10-96 0zm352 0a48 48 0 1096 0 48 48 0 10-96 0zM512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm263 711c-34.2 34.2-74 61-118.3 79.8C611 874.2 562.3 884 512 884c-50.3 0-99-9.8-144.8-29.2A370.4 370.4 0 01248.9 775c-34.2-34.2-61-74-79.8-118.3C149.8 611 140 562.3 140 512s9.8-99 29.2-144.8A370.4 370.4 0 01249 248.9c34.2-34.2 74-61 118.3-79.8C413 149.8 461.7 140 512 140c50.3 0 99 9.8 144.8 29.2A370.4 370.4 0 01775.1 249c34.2 34.2 61 74 79.8 118.3C874.2 413 884 461.7 884 512s-9.8 99-29.2 144.8A368.89 368.89 0 01775 775zM512 533c-85.5 0-155.6 67.3-160 151.6a8 8 0 008 8.4h48.1c4.2 0 7.8-3.2 8.1-7.4C420 636.1 461.5 597 512 597s92.1 39.1 95.8 88.6c.3 4.2 3.9 7.4 8.1 7.4H664a8 8 0 008-8.4C667.6 600.3 597.5 533 512 533z"
-                  />
-                </svg>
-              </span>
-            </span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div
-    class="ant-bubble ant-bubble-end"
-    role="user"
-  >
-    <div
-      class="ant-bubble-avatar"
-    >
-      <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon"
-        style="background: #87d068;"
-      >
-        <span
-          aria-label="user"
-          class="anticon anticon-user"
-          role="img"
-        >
-          <svg
-            aria-hidden="true"
-            data-icon="user"
-            fill="currentColor"
-            focusable="false"
-            height="1em"
-            viewBox="64 64 896 896"
-            width="1em"
-          >
-            <path
-              d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
-            />
-          </svg>
-        </span>
-      </span>
-    </div>
-    <div
-      class="ant-bubble-content ant-bubble-content-filled"
-    >
-      Mock user content.
-    </div>
-  </div>
-  <div
-    class="ant-bubble ant-bubble-start"
-    role="ai"
-    style="max-width: 600px; margin-inline-end: 44px;"
-  >
-    <div
-      class="ant-bubble-avatar"
-    >
-      <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon"
-        style="background: #fde3cf;"
-      >
-        <span
-          aria-label="user"
-          class="anticon anticon-user"
-          role="img"
-        >
-          <svg
-            aria-hidden="true"
-            data-icon="user"
-            fill="currentColor"
-            focusable="false"
-            height="1em"
-            viewBox="64 64 896 896"
-            width="1em"
-          >
-            <path
-              d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
-            />
-          </svg>
-        </span>
-      </span>
-    </div>
-    <div
-      class="ant-bubble-content ant-bubble-content-filled"
-    >
-      <div
-        class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
-      >
-        <div
-          class="ant-space-item"
-        >
-          <div
-            aria-busy="true"
-            aria-live="polite"
-            class="ant-spin ant-spin-sm ant-spin-spinning"
-          >
-            <span
-              class="ant-spin-dot-holder"
-            >
-              <span
-                class="ant-spin-dot ant-spin-dot-spin"
-              >
-                <i
-                  class="ant-spin-dot-item"
-                />
-                <i
-                  class="ant-spin-dot-item"
-                />
-                <i
-                  class="ant-spin-dot-item"
-                />
-                <i
-                  class="ant-spin-dot-item"
-                />
-              </span>
-            </span>
-          </div>
-        </div>
-        <div
-          class="ant-space-item"
-        >
-          Custom loading...
-        </div>
+          <span>
+            Click Me
+          </span>
+        </button>
       </div>
     </div>
   </div>
 </div>
 `;
 
-exports[`renders components/bubble/demo/bubble-custom.tsx extend context correctly 2`] = `[]`;
+exports[`renders components/bubble/demo/custom-content.tsx extend context correctly 2`] = `[]`;
 
 exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] = `
 <div
@@ -1335,7 +1181,18 @@ exports[`renders components/bubble/demo/header-and-footer.tsx extend context cor
     <div
       class="ant-bubble-header"
     >
-      Ant Design X
+      <div
+        class="ant-space ant-space-horizontal ant-space-align-center"
+        style="column-gap: 4px; row-gap: 4px;"
+      >
+        <div
+          class="ant-space-item"
+        >
+          <div>
+            Hello, welcome to use Ant Design X! Just ask if you have any questions. 
+          </div>
+        </div>
+      </div>
     </div>
     <div
       class="ant-bubble-content ant-bubble-content-filled"
@@ -1640,9 +1497,16 @@ exports[`renders components/bubble/demo/list-custom.tsx extend context correctly
       </span>
     </div>
     <div
-      class="ant-bubble-content ant-bubble-content-filled"
+      class="ant-bubble-content-wrapper"
     >
-      Normal message
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Normal message
+      </div>
+      <div
+        class="ant-bubble-footer"
+      />
     </div>
   </div>
   <div
@@ -1678,13 +1542,122 @@ exports[`renders components/bubble/demo/list-custom.tsx extend context correctly
       </span>
     </div>
     <div
-      class="ant-bubble-content ant-bubble-content-filled"
+      class="ant-bubble-content-wrapper"
+    >
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        <div
+          class="ant-flex ant-flex-align-center ant-flex-gap-middle"
+        >
+          <div
+            class="ant-image"
+            style="height: 50px;"
+          >
+            <img
+              class="ant-image-img"
+              height="50"
+              src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*eco6RrQhxbMAAAAAAAAAAAAADgCCAQ/original"
+              style="height: 50px;"
+            />
+            <div
+              class="ant-image-mask"
+            >
+              <div
+                class="ant-image-mask-info"
+              >
+                <span
+                  aria-label="eye"
+                  class="anticon anticon-eye"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="eye"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 000 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"
+                    />
+                  </svg>
+                </span>
+                Preview
+              </div>
+            </div>
+          </div>
+          <span
+            style="font-size: 18px; font-weight: bold;"
+          >
+            Ant Design X
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-bubble-footer"
+      >
+        <button
+          class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text"
+          type="button"
+        >
+          <span>
+            Click Me
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-start"
+    id="message_id_2"
+    role="ai"
+  >
+    <div
+      class="ant-bubble-avatar"
     >
       <span
-        class="ant-typography ant-typography-danger"
+        class="ant-avatar ant-avatar-circle ant-avatar-icon"
+        style="background: #fde3cf;"
       >
-        ReactNode message
+        <span
+          aria-label="user"
+          class="anticon anticon-user"
+          role="img"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="user"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+            />
+          </svg>
+        </span>
       </span>
+    </div>
+    <div
+      class="ant-bubble-content-wrapper"
+    >
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        <span
+          class="ant-typography ant-typography-danger"
+        >
+          ReactNode message
+        </span>
+      </div>
+      <div
+        class="ant-bubble-footer"
+      />
     </div>
   </div>
   <div
@@ -2131,6 +2104,268 @@ exports[`renders components/bubble/demo/markdown.tsx extend context correctly 1`
 `;
 
 exports[`renders components/bubble/demo/markdown.tsx extend context correctly 2`] = `[]`;
+
+exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context correctly 1`] = `
+<div
+  class="ant-bubble-list ant-bubble-list-reach-end"
+  style="max-height: 300px;"
+>
+  <div
+    class="ant-bubble ant-bubble-start"
+    role="ai"
+    style="max-width: 600px; margin-inline-end: 44px;"
+  >
+    <div
+      class="ant-bubble-avatar"
+    >
+      <span
+        class="ant-avatar ant-avatar-circle ant-avatar-icon"
+        style="background: #fde3cf;"
+      >
+        <span
+          aria-label="user"
+          class="anticon anticon-user"
+          role="img"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="user"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+            />
+          </svg>
+        </span>
+      </span>
+    </div>
+    <div
+      class="ant-bubble-content-wrapper"
+    >
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. 
+      </div>
+      <div
+        class="ant-bubble-footer"
+        style="width: 100%;"
+      >
+        <div
+          class="ant-flex"
+        >
+          <button
+            class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+            style="margin-inline-end: auto;"
+            type="button"
+          >
+            <span
+              class="ant-btn-icon"
+            >
+              <span
+                aria-label="sync"
+                class="anticon anticon-sync"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="sync"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M168 504.2c1-43.7 10-86.1 26.9-126 17.3-41 42.1-77.7 73.7-109.4S337 212.3 378 195c42.4-17.9 87.4-27 133.9-27s91.5 9.1 133.8 27A341.5 341.5 0 01755 268.8c9.9 9.9 19.2 20.4 27.8 31.4l-60.2 47a8 8 0 003 14.1l175.7 43c5 1.2 9.9-2.6 9.9-7.7l.8-180.9c0-6.7-7.7-10.5-12.9-6.3l-56.4 44.1C765.8 155.1 646.2 92 511.8 92 282.7 92 96.3 275.6 92 503.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8zm756 7.8h-60c-4.4 0-7.9 3.5-8 7.8-1 43.7-10 86.1-26.9 126-17.3 41-42.1 77.8-73.7 109.4A342.45 342.45 0 01512.1 856a342.24 342.24 0 01-243.2-100.8c-9.9-9.9-19.2-20.4-27.8-31.4l60.2-47a8 8 0 00-3-14.1l-175.7-43c-5-1.2-9.9 2.6-9.9 7.7l-.7 181c0 6.7 7.7 10.5 12.9 6.3l56.4-44.1C258.2 868.9 377.8 932 512.2 932c229.2 0 415.5-183.7 419.8-411.8a8 8 0 00-8-8.2z"
+                  />
+                </svg>
+              </span>
+            </span>
+          </button>
+          <button
+            class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+            type="button"
+          >
+            <span
+              class="ant-btn-icon"
+            >
+              <span
+                aria-label="smile"
+                class="anticon anticon-smile"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="smile"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M288 421a48 48 0 1096 0 48 48 0 10-96 0zm352 0a48 48 0 1096 0 48 48 0 10-96 0zM512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm263 711c-34.2 34.2-74 61-118.3 79.8C611 874.2 562.3 884 512 884c-50.3 0-99-9.8-144.8-29.2A370.4 370.4 0 01248.9 775c-34.2-34.2-61-74-79.8-118.3C149.8 611 140 562.3 140 512s9.8-99 29.2-144.8A370.4 370.4 0 01249 248.9c34.2-34.2 74-61 118.3-79.8C413 149.8 461.7 140 512 140c50.3 0 99 9.8 144.8 29.2A370.4 370.4 0 01775.1 249c34.2 34.2 61 74 79.8 118.3C874.2 413 884 461.7 884 512s-9.8 99-29.2 144.8A368.89 368.89 0 01775 775zM664 533h-48.1c-4.2 0-7.8 3.2-8.1 7.4C604 589.9 562.5 629 512 629s-92.1-39.1-95.8-88.6c-.3-4.2-3.9-7.4-8.1-7.4H360a8 8 0 00-8 8.4c4.4 84.3 74.5 151.6 160 151.6s155.6-67.3 160-151.6a8 8 0 00-8-8.4z"
+                  />
+                </svg>
+              </span>
+            </span>
+          </button>
+          <button
+            class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+            type="button"
+          >
+            <span
+              class="ant-btn-icon"
+            >
+              <span
+                aria-label="frown"
+                class="anticon anticon-frown"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="frown"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M288 421a48 48 0 1096 0 48 48 0 10-96 0zm352 0a48 48 0 1096 0 48 48 0 10-96 0zM512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm263 711c-34.2 34.2-74 61-118.3 79.8C611 874.2 562.3 884 512 884c-50.3 0-99-9.8-144.8-29.2A370.4 370.4 0 01248.9 775c-34.2-34.2-61-74-79.8-118.3C149.8 611 140 562.3 140 512s9.8-99 29.2-144.8A370.4 370.4 0 01249 248.9c34.2-34.2 74-61 118.3-79.8C413 149.8 461.7 140 512 140c50.3 0 99 9.8 144.8 29.2A370.4 370.4 0 01775.1 249c34.2 34.2 61 74 79.8 118.3C874.2 413 884 461.7 884 512s-9.8 99-29.2 144.8A368.89 368.89 0 01775 775zM512 533c-85.5 0-155.6 67.3-160 151.6a8 8 0 008 8.4h48.1c4.2 0 7.8-3.2 8.1-7.4C420 636.1 461.5 597 512 597s92.1 39.1 95.8 88.6c.3 4.2 3.9 7.4 8.1 7.4H664a8 8 0 008-8.4C667.6 600.3 597.5 533 512 533z"
+                  />
+                </svg>
+              </span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-end"
+    role="user"
+  >
+    <div
+      class="ant-bubble-avatar"
+    >
+      <span
+        class="ant-avatar ant-avatar-circle ant-avatar-icon"
+        style="background: #87d068;"
+      >
+        <span
+          aria-label="user"
+          class="anticon anticon-user"
+          role="img"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="user"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+            />
+          </svg>
+        </span>
+      </span>
+    </div>
+    <div
+      class="ant-bubble-content ant-bubble-content-filled"
+    >
+      Mock user content.
+    </div>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-start"
+    role="ai"
+    style="max-width: 600px; margin-inline-end: 44px;"
+  >
+    <div
+      class="ant-bubble-avatar"
+    >
+      <span
+        class="ant-avatar ant-avatar-circle ant-avatar-icon"
+        style="background: #fde3cf;"
+      >
+        <span
+          aria-label="user"
+          class="anticon anticon-user"
+          role="img"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="user"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+            />
+          </svg>
+        </span>
+      </span>
+    </div>
+    <div
+      class="ant-bubble-content ant-bubble-content-filled"
+    >
+      <div
+        class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
+      >
+        <div
+          class="ant-space-item"
+        >
+          <div
+            aria-busy="true"
+            aria-live="polite"
+            class="ant-spin ant-spin-sm ant-spin-spinning"
+          >
+            <span
+              class="ant-spin-dot-holder"
+            >
+              <span
+                class="ant-spin-dot ant-spin-dot-spin"
+              >
+                <i
+                  class="ant-spin-dot-item"
+                />
+                <i
+                  class="ant-spin-dot-item"
+                />
+                <i
+                  class="ant-spin-dot-item"
+                />
+                <i
+                  class="ant-spin-dot-item"
+                />
+              </span>
+            </span>
+          </div>
+        </div>
+        <div
+          class="ant-space-item"
+        >
+          Custom loading...
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context correctly 2`] = `[]`;
 
 exports[`renders components/bubble/demo/shape.tsx extend context correctly 1`] = `
 <div
