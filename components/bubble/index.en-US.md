@@ -39,8 +39,9 @@ Common props ref：[Common props](/docs/react/common-props)
 
 ### Bubble
 
+<!-- prettier-ignore -->
 | Property | Description | Type | Default | Version |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | avatar | Avatar component | React.ReactNode | - | - |
 | classNames | Semantic DOM class | [Record<SemanticDOM, string>](#semantic-dom) | - | - |
 | content | Content of bubble | ContentType | - | - |
