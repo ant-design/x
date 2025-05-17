@@ -8,7 +8,7 @@ import useSyncState from './useSyncState';
 
 export type SimpleType = string | number | boolean | object;
 
-export type MessageStatus = 'local' | 'loading' | 'success' | 'error';
+export type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error';
 
 type RequestPlaceholderFn<Message extends SimpleType> = (
   message: Message,
@@ -178,11 +178,7 @@ export default function useXChat<
     let message: AgentMessage;
     let otherRequestParams = {};
 
-    if (
-      requestParams &&
-      typeof requestParams === 'object' &&
-      'message' in requestParams
-    ) {
+    if (requestParams && typeof requestParams === 'object' && 'message' in requestParams) {
       const { message: requestParamsMessage, ...other } =
         requestParams as RequestParams<AgentMessage>;
       message = requestParamsMessage;
@@ -257,7 +253,7 @@ export default function useXChat<
       } as Input,
       {
         onUpdate: (chunk) => {
-          updateMessage('loading', chunk, []);
+          updateMessage('updating', chunk, []);
         },
         onSuccess: (chunks) => {
           updateMessage('success', undefined as Output, chunks);
