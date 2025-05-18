@@ -189,7 +189,7 @@ export default function useXChat<
     // Add placeholder message
     setMessages((ori) => {
       let nextMessages = [...ori, createMessage(message, 'local')];
-      let placeholderMsg = undefined as unknown as AgentMessage;
+      let placeholderMsg = '' as AgentMessage;
       if (requestPlaceholder) {
         if (typeof requestPlaceholder === 'function') {
           // typescript has bug that not get real return type when use `typeof function` check
