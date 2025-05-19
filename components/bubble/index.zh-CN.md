@@ -40,13 +40,14 @@ demo:
 
 ### Bubble
 
+<!-- prettier-ignore -->
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
 | avatar | 展示头像 | React.ReactNode | - |  |
 | classNames | 语义化结构 class | [Record<SemanticDOM, string>](#semantic-dom) | - |  |
 | content | 聊天内容 | ContentType | - |  |
-| footer | 底部内容 | React.ReactNode \| (content: ContentType ,info:{ key: string \| number }) => React.ReactNode | - |  |
-| header | 头部内容 | React.ReactNode \| (content: ContentType,info:{ key: string \| number }) => React.ReactNode | - |  |
+| footer | 底部内容 | React.ReactNode \| (content: ContentType ,info: { key?: string \| number }) => React.ReactNode | - |  |
+| header | 头部内容 | React.ReactNode \| (content: ContentType, info: { key?: string \| number }) => React.ReactNode | - |  |
 | loading | 聊天内容加载状态 | boolean | - |  |
 | placement | 信息位置 | `start` \| `end` | `start` |  |
 | shape | 气泡形状 | `round` \| `corner` | - |  |
