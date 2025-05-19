@@ -40,7 +40,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 | actions | 自定义按钮，当不需要默认操作按钮时，可以设为 `actions={false}` | ReactNode \| (oriNode, info: { components: ActionsComponents }) => ReactNode | - | - |
 | allowSpeech | 是否允许语音输入 | boolean \| SpeechConfig | false | - |
 | classNames | 样式类名 | [见下](#semantic-dom) | - | - |
-| components | 自定义组件，input默认为[Input.TextArea](https://ant.design/components/input-cn#api)，自定义input时需参考`Input.TextArea`实现props以免功能不全 | Record<'input', ComponentType> | - | - |
+| components | 自定义组件，input默认为[Input.TextArea](https://ant.design/components/input-cn#api)，确保在自定义输入组件时，按照 `Input.TextArea` 实现所有必要的 props，以避免功能不全。 | Record<'input', ComponentType> | - | - |
 | defaultValue | 输入框默认值 | string | - | - |
 | disabled | 是否禁用 | boolean | false | - |
 | loading | 是否加载中 | boolean | false | - |

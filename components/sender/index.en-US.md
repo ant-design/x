@@ -39,7 +39,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | actions | Custom actions,set as `actions: false` when you don't need default actions | ReactNode \| (oriNode, info: { components:ActionsComponents }) => ReactNode | - | - |
 | allowSpeech | Whether to allow speech input | boolean \| SpeechConfig | false | - |
 | classNames | Class name | [See below](#semantic-dom) | - | - |
-| components | Custom components, The default input is[Input.TextArea](https://ant.design/components/input#api),When customizing input, it is necessary to refer to `Input. TextArea` to implement props to avoid incomplete functionality | Record<'input', ComponentType> | - | - |
+| components | Custom components, The default input is[Input.TextArea](https://ant.design/components/input#api),Ensure that when customizing the input component, all necessary props are implemented as per `Input.TextArea` to avoid any incomplete functionality. | Record<'input', ComponentType> | - | - |
 | defaultValue | Default value of input | string | - | - |
 | disabled | Whether to disable | boolean | false | - |
 | loading | Whether it is loading | boolean | false | - |
