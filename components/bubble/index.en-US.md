@@ -45,8 +45,8 @@ Common props ref：[Common props](/docs/react/common-props)
 | avatar | Avatar component | React.ReactNode | - | - |
 | classNames | Semantic DOM class | [Record<SemanticDOM, string>](#semantic-dom) | - | - |
 | content | Content of bubble | ContentType | - | - |
-| footer | Footer content | React.ReactNode \| (content: ContentType ,info:{ key: string \| number }) => React.ReactNode | - | - |
-| header | Header content | React.ReactNode \| (content: ContentType,info:{ key: string \| number }) => React.ReactNode | - | - |
+| footer | Footer content | React.ReactNode \| (content: ContentType, info:{ key?: string \| number }) => React.ReactNode | - | - |
+| header | Header content | React.ReactNode \| (content: ContentType, info:{ key?: string \| number }) => React.ReactNode | - | - |
 | loading | Loading state of Message | boolean | - |  |
 | placement | Direction of Message | `start` \| `end` | `start` |  |
 | shape | Shape of bubble | `round` \| `corner` | - |  |  | styles | Semantic DOM style | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - |  |
