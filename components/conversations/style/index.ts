@@ -18,7 +18,13 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
       gap: token.paddingXXS,
       overflowY: 'auto',
       padding: token.paddingSM,
-
+      margin: 0,
+      listStyle: 'none',
+      'ul, ol': {
+        margin: 0,
+        padding: 0,
+        listStyle: 'none',
+      },
       [`&${componentCls}-rtl`]: {
         direction: 'rtl',
       },
@@ -33,6 +39,9 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
         },
         [`& ${componentCls}-label`]: {
           color: token.colorTextDescription,
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
         },
       },
       // 会话列表项
@@ -67,8 +76,12 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
         // 悬浮、选中时激活操作菜单
         '&:hover, &-active': {
           [`& ${componentCls}-menu-icon`]: {
-            opacity: 1,
+            opacity: 0.6,
           },
+        },
+
+        [`${componentCls}-menu-icon:hover`]: {
+          opacity: 1,
         },
       },
       // 会话名

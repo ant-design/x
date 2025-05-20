@@ -33,7 +33,10 @@ const App: React.FC = () => {
 
   return (
     <Flex vertical>
-      <SemanticPreview semantics={[{ name: 'placeholder', desc: placeholderLocale.placeholder }]}>
+      <SemanticPreview
+        componentName="Attachments"
+        semantics={[{ name: 'placeholder', desc: placeholderLocale.placeholder }]}
+      >
         <Attachments
           placeholder={{
             icon: <CloudUploadOutlined />,
@@ -44,6 +47,7 @@ const App: React.FC = () => {
       </SemanticPreview>
       <Divider style={{ margin: 0, padding: 0 }} />
       <SemanticPreview
+        componentName="Attachments"
         semantics={[
           { name: 'list', desc: withItemLocale.list },
           { name: 'item', desc: withItemLocale.item },

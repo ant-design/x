@@ -2,7 +2,7 @@ import ContributorsList from '@qixian.cs/github-contributors-list';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
 import { useIntl } from 'dumi';
-import React, { useContext } from 'react';
+import React from 'react';
 
 import SiteContext from '../SiteContext';
 import ContributorAvatar from './ContributorAvatar';
@@ -40,7 +40,7 @@ interface ContributorsProps {
 const Contributors: React.FC<ContributorsProps> = ({ filename }) => {
   const { formatMessage } = useIntl();
   const { styles } = useStyle();
-  const { isMobile } = useContext(SiteContext);
+  const { isMobile } = React.use(SiteContext);
 
   if (!filename) {
     return null;

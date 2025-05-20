@@ -65,7 +65,7 @@ pnpm add @ant-design/x
 
 > **强烈不推荐使用已构建文件**，这样无法按需加载，而且难以获得底层依赖模块的 bug 快速修复支持。
 
-> 注意：`antdx.js` 和 `antdx.min.js` 依赖 `react`、`react-dom`、`dayjs`，请确保提前引入这些文件。
+> 注意：`antdx.js` 和 `antdx.min.js` 依赖 `react`、`react-dom`、`dayjs` `antd` `@ant-design/cssinjs` `@ant-design/icons`，请确保提前引入这些文件。
 
 ## 🧩 原子组件
 
@@ -269,6 +269,10 @@ export default Demo;
 Ant Design X 广泛用于蚂蚁集团内由 AI 驱动的用户交互界面。如果你的公司和产品使用了 Ant Design X，欢迎到 [这里](https://github.com/ant-design/x/issues/126) 留言。
 
 ## 如何贡献
+
+<a href="https://openomy.app/github/ant-design/x" target="_blank" style="display: block; width: 100%;" align="center">
+  <img src="https://openomy.app/svg?repo=ant-design/x&chart=bubble&latestMonth=3" target="_blank" alt="Contribution Leaderboard" style="display: block; width: 100%;" />
+ </a>
 
 在任何形式的参与前，请先阅读 [贡献者文档](https://github.com/ant-design/ant-design/blob/master/.github/CONTRIBUTING.md)。如果你希望参与贡献，欢迎提交 [Pull Request](https://github.com/ant-design/ant-design/pulls)，或给我们 [报告 Bug](http://new-issue.ant.design/)。
 

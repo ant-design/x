@@ -1,8 +1,8 @@
-import { Tooltip } from 'antd';
+import { Button, Tooltip } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
+import omit from 'rc-util/lib/omit';
 import React from 'react';
-
 export interface LangBtnProps {
   label1: React.ReactNode;
   label2: React.ReactNode;
@@ -12,47 +12,26 @@ export interface LangBtnProps {
   pure?: boolean;
   onClick?: React.MouseEventHandler;
   'aria-label'?: string;
+  className?: string;
 }
 
 const BASE_SIZE = '1.2em';
 
 const useStyle = createStyles(({ token, css }) => {
-  const {
-    colorText,
-    colorBorder,
-    colorBgContainer,
-    colorBgTextHover,
-    controlHeightLG,
-    motionDurationMid,
-  } = token;
+  const { colorText, controlHeightLG, colorBgContainer, motionDurationMid } = token;
 
   return {
     btn: css`
-      color: ${colorText};
-      border-color: ${colorBorder};
-      padding: 0 !important;
       width: ${controlHeightLG}px;
       height: ${controlHeightLG}px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border: none;
-      background: transparent;
+      padding: 0 !important;
       border-radius: ${controlHeightLG / 2}px;
-      transition: all ${motionDurationMid};
-      cursor: pointer;
       .btn-inner {
         transition: all ${motionDurationMid};
-      }
-      &:hover {
-        background: ${colorBgTextHover};
       }
       img {
         width: ${BASE_SIZE};
         height: ${BASE_SIZE};
-      }
-      .anticon {
-        font-size: ${BASE_SIZE};
       }
     `,
     innerDiv: css`
@@ -87,19 +66,19 @@ const useStyle = createStyles(({ token, css }) => {
 });
 
 const LangBtn: React.FC<LangBtnProps> = (props) => {
-  const { label1, label2, tooltip1, tooltip2, value, pure, onClick } = props;
+  const { label1, label2, tooltip1, tooltip2, value, pure, onClick, ...rest } = props;
 
   const {
     styles: { btn, innerDiv, labelStyle, label1Style, label2Style },
   } = useStyle();
 
   const node = (
-    <button
-      type="button"
+    <Button
+      type="text"
       onClick={onClick}
       className={btn}
       key="lang-button"
-      aria-label={props['aria-label']}
+      {...omit(rest, ['className'])}
     >
       <div className="btn-inner">
         {pure && (value === 1 ? label1 : label2)}
@@ -114,7 +93,7 @@ const LangBtn: React.FC<LangBtnProps> = (props) => {
           </div>
         )}
       </div>
-    </button>
+    </Button>
   );
 
   if (tooltip1 || tooltip2) {

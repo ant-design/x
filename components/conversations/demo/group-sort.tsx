@@ -45,7 +45,7 @@ const App = () => {
   };
 
   return (
-    <Conversations style={style} groupable={groupable} defaultActiveKey="demo1" items={items} />
+    <Conversations style={style} groupable={groupable} defaultActiveKey="item1" items={items} />
   );
 };
 

@@ -67,6 +67,9 @@ export default defineConfig({
   analytics: {
     ga_v2: 'G-5CDH4LN3Z8',
   },
+  transformRuntime: {
+    absoluteRuntime: process.cwd(),
+  },
   analyze:
     process.env.NODE_ENV === 'production'
       ? false
@@ -188,6 +191,5 @@ export default defineConfig({
       document.documentElement.className += isZhCN(pathname) ? 'zh-cn' : 'en-us';
     })();
     `,
-    'https://gw.alipayobjects.com/os/lib/lottie-web/5.12.2/build/player/lottie_svg.min.js',
   ],
 });

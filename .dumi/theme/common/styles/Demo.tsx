@@ -74,7 +74,6 @@ const GlobalDemoStyles: React.FC = () => {
           &-title {
             position: absolute;
             top: -14px;
-            height: auto;
             padding: 1px 8px;
             color: #777;
             background: ${token.colorBgContainer};
@@ -283,17 +282,18 @@ const GlobalDemoStyles: React.FC = () => {
             cursor: pointer;
           }
 
-          &-riddle {
-            width: 14px;
-            height: 14px;
+           &-codeblock {
+            width: 16px;
+            height: 16px;
             overflow: hidden;
             border: 0;
             cursor: pointer;
+            max-width: 100% !important;
           }
 
           &-codesandbox {
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             overflow: hidden;
             border: 0;
             cursor: pointer;
@@ -325,7 +325,6 @@ const GlobalDemoStyles: React.FC = () => {
 
           &-debug {
             border-color: ${token.purple3};
-            display: none;
           }
 
           &-debug &-title a {
@@ -335,10 +334,6 @@ const GlobalDemoStyles: React.FC = () => {
 
         .demo-wrapper {
           position: relative;
-
-          &-show-debug .code-box-debug {
-            display: block;
-          }
         }
 
         .all-code-box-controls {
@@ -348,12 +343,12 @@ const GlobalDemoStyles: React.FC = () => {
           display: flex;
           align-items: center;
           column-gap: ${token.marginXS}px;
+        }
 
-          ${antCls}-btn {
-            opacity: 0.6;
-            &.icon-enabled {
-             background: ${token.colorFillSecondary};
-             opacity: 1;
+        ${antCls}-btn {
+          &.icon-enabled {
+            background-color: ${token.colorFillSecondary};
+            opacity: 1;
             ${iconCls} {
               color: ${token.colorTextBase};
               font-weight: bold;

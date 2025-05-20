@@ -15,6 +15,66 @@ tag: vVERSION
 
 ---
 
+## 1.2.0
+
+`2025-04-25`
+
+- 🐛 删除 Conversations 溢出省略逻辑修复 `tooltip` 展示错误的问题。[#776](https://github.com/ant-design/x/pull/776) 由 [@afc163](https://github.com/afc163) 提交
+- 🐛 修复 Attachments `image`卡片样式问题。[#751](https://github.com/ant-design/x/pull/751) 由 [@wzc520pyfm](https://github.com/wzc520pyfm) 提交
+- 🐛 修复 ThoughtChain 受控问题。[#752](https://github.com/ant-design/x/pull/752) 由 [@Youzi2233](https://github.com/Youzi2233) 提交
+- XRequest
+  - 🆕 XRequestCallbacks 新增 `onStream` 回调，可对流监听和终止操作。[#711](https://github.com/ant-design/x/pull/711) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 🐛 修复 XRequestOptions 变更不生效问题，并新增示例。[#736](https://github.com/ant-design/x/pull/736) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 🆕 新增模型接入示例。 [#725](https://github.com/ant-design/x/pull/725) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 📖 优化API方法参数命名不准确问题。[#736](https://github.com/ant-design/x/pull/736) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- useXAgent
+  - 🆕 RequestFn 新增 `onStream` 回调，可对流监听和终止操作。[#711](https://github.com/ant-design/x/pull/711) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 🆕 RequestFn 新增 `transformStream`转换函数，用于处理流数据。[#725](https://github.com/ant-design/x/pull/725) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 🐛 修复 XAgentConfigPreset 变更不生效问题，并新增示例。[#736](https://github.com/ant-design/x/pull/736) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 🐛 修复 RequestFn `onSuccess`回调类型错误问题，同时更新对应示例。 [#725](https://github.com/ant-design/x/pull/725) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 🆕 新增模型接入、自定义入参、变更配置示例。 [#725](https://github.com/ant-design/x/pull/725) 由 [@kimteayon](https://github.com/kimteayon) 提交、[#711](https://github.com/ant-design/x/pull/711) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- useXChat
+  - 🆕 XChatConfig 新增 Input 和 Output 泛型类型。[#725](https://github.com/ant-design/x/pull/725) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 🆕 XChatConfig 新增 `transformMessage` 转换函数，可在更新数据时对`messages`做转换，同时会更新到`messages`。 [#711](https://github.com/ant-design/x/pull/711) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 🆕 XChatConfig 新增 `transformStream`转换函数，用于处理流数据。[#711](https://github.com/ant-design/x/pull/711) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 🆕 XChatConfig 新增 `resolveAbortController`回调函数，可获得`AbortController` 控制器，用于控制流状态。[#711](https://github.com/ant-design/x/pull/711) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 🆕 新增模型接入示例，删除错误的终止流示例。 [#711](https://github.com/ant-design/x/pull/711) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- 🐛 修复 Sender `header`圆角样式溢出问题。[#732](https://github.com/ant-design/x/pull/732) 由 [@Bao0630](https://github.com/Bao0630) 提交
+- 📖 新增助手式样板间。[#657](https://github.com/ant-design/x/pull/657) 由 [@vanndxh](https://github.com/vanndxh) 提交
+- 📖 重构独立式样板间。[#753](https://github.com/ant-design/x/pull/753) 由 [@vanndxh](https://github.com/vanndxh) 提交
+- 📖 优化官网站点提升用户体验。[#730](https://github.com/ant-design/x/pull/730) 由 [@afc163](https://github.com/afc163) 提交、[#758](https://github.com/ant-design/x/pull/758) 由 [@coding-ice](https://github.com/coding-ice) 提交、 [#761](https://github.com/ant-design/x/pull/761) 由 [@ONLY-yours](https://github.com/ONLY-yours) 提交
+
+## 1.1.1
+
+`2025-04-14`
+
+- Bubble.List
+  - 💄 优化 Bubble.List更新时减少不必要的刷新。[#479](https://github.com/ant-design/x/pull/479) 由 [@YumoImer](https://github.com/YumoImer) 提交
+  - 🐛 修复 Bubble.List 暗黑主题下滚动条样式不兼容问题。[#727](https://github.com/ant-design/x/pull/727) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- Conversation
+  - 🐛 修复 Conversation内ul和li的样式问题。[#726](https://github.com/ant-design/x/pull/726) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 🆕 新增 `menu` 的 `getPopupContainer`的实现。[#698](https://github.com/ant-design/x/pull/698) 由 [@yuxuan-ctrl](https://github.com/yuxuan-ctrl) 提交
+- 🐛 修复 ThoughtChain 折叠面板无法展开问题。[#720](https://github.com/ant-design/x/pull/720) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- 🐛 修复 Attachments 图片展示样式问题。[#708](https://github.com/ant-design/x/pull/708) 由 [@hy993658052](https://github.com/hy993658052) 提交
+- 💄 优化 Sender，使自定义Actions的 `disabled`属性受控。[#666](https://github.com/ant-design/x/pull/666) 由 [@afc163](https://github.com/afc163) 提交
+- 📖 优化官网站点提升用户体验。[#680](https://github.com/ant-design/x/pull/680) 由 [@wzc520pyfm](https://github.com/wzc520pyfm) 提交、[#699](https://github.com/ant-design/x/pull/699) 由 [@afc163](https://github.com/afc163) 提交、[#716](https://github.com/ant-design/x/pull/716) 由 [@afc163](https://github.com/afc163) 提交、[#686](https://github.com/ant-design/x/pull/686) 由 [@afc163](https://github.com/afc163) 提交、[#728](https://github.com/ant-design/x/pull/728) 由 [@kimteayon](https://github.com/kimteayon) 提交
+
+## 1.1.0
+
+`2025-03-28`
+
+- Sender
+  - 🆕 新增 `footer` 支持自定义底部内容。[#654](https://github.com/ant-design/x/pull/654) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 🆕 扩展 `autoSize` 支持配置内容高度。[#637](https://github.com/ant-design/x/pull/637) 由 [@Zhang-Wei-666](https://github.com/Zhang-Wei-666) 提交
+  - 📖 补充 `onFocus`和`onBlur` 类型声明。[#625](https://github.com/ant-design/x/pull/625) 由 [@aojunhao123](https://github.com/aojunhao123) 提交
+- 🆕 扩展 Conversations 组件 `menu.trigger` 支持自定义菜单触发器。[#630](https://github.com/ant-design/x/pull/630) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- Attachments
+  - 🆕 扩展 `ImageProps` 支持自定义图像展示配置。[#613](https://github.com/ant-design/x/pull/613) 由 [@hy993658052 ](https://github.com/hy993658052) 提交
+  - 📖 补充 Attachments 组件 `onRemove` API文档。[#608](https://github.com/ant-design/x/pull/608) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- 📖 补充 `GPT-Vis` 渲染图表示例。 [#603](https://github.com/ant-design/x/pull/603) 由 [@lvisei](https://github.com/lvisei) 提交
+- 📦 优化 Chat Design X `peerDependencies`。[#611](https://github.com/ant-design/x/pull/611) 由 [@pokerface9830 ](https://github.com/pokerface9830) 提交
+- 📖 优化官网站点提升用户体验。[#626](https://github.com/ant-design/x/pull/626) 由 [@aojunhao123](https://github.com/aojunhao123) 提交、[#648](https://github.com/ant-design/x/pull/648) 由 [@kimteayon](https://github.com/kimteayon) 提交、[#659](https://github.com/ant-design/x/pull/659) 由 [@afc163](https://github.com/afc163) 提交、[#667](https://github.com/ant-design/x/pull/667) 由 [@jin19980928](https://github.com/jin19980928) 提交
+
 ## 1.0.6
 
 `2025-03-14`
