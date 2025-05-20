@@ -3,13 +3,18 @@ import { Bubble, Sender, useXAgent, useXChat } from '@ant-design/x';
 import { Flex, type GetProp } from 'antd';
 import React, { useRef } from 'react';
 
-const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow';
-const MODEL = 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B';
-const API_KEY = 'Bearer sk-xxxxxxxxxxxxxxxxxxxx';
-
 /**
  * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
  */
+
+const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow';
+const MODEL = 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B';
+
+/**
+ * 🔔 API_KEY is a placeholder indicator interface that has a built-in real API_KEY
+ */
+
+const API_KEY = 'Bearer sk-xxxxxxxxxxxxxxxxxxxx';
 
 type YourMessageType = {
   role: string;

@@ -12,6 +12,11 @@ const { Paragraph } = Typography;
 
 const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow';
 const MODEL = 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B';
+
+/**
+ * 🔔 API_KEY is a placeholder indicator interface that has a built-in real API_KEY
+ */
+
 const API_KEY = 'Bearer sk-xxxxxxxxxxxxxxxxxxxx';
 
 interface YourMessageType {
