@@ -29,11 +29,16 @@ import {
   useXAgent,
   useXChat,
 } from '@ant-design/x';
-import type { BubbleDataType } from '@ant-design/x/es/bubble/BubbleList';
+
 import { Avatar, Button, Flex, type GetProp, Space, Spin, message } from 'antd';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
 import React, { useEffect, useRef, useState } from 'react';
+
+type BubbleDataType = {
+  role: string;
+  content: string;
+};
 
 const DEFAULT_CONVERSATIONS_ITEMS = [
   {
@@ -267,9 +272,9 @@ const Independent: React.FC = () => {
 
   // ==================== Runtime ====================
   const [agent] = useXAgent<BubbleDataType>({
-    baseURL: 'https://api.siliconflow.cn/v1/chat/completions',
+    baseURL: 'https://api.x.ant.design/api/llm_siliconflow',
     model: 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B',
-    dangerouslyApiKey: 'Bearer sk-ravoadhrquyrkvaqsgyeufqdgphwxfheifujmaoscudjgldr',
+    dangerouslyApiKey: 'Bearer sk-xxxxxxxxxxxxxxxxxxxx',
   });
   const loading = agent.isRequesting();
 
@@ -289,19 +294,33 @@ const Independent: React.FC = () => {
     },
     transformMessage: (info) => {
       const { originMessage, chunk } = info || {};
-      let currentText = '';
+      let currentContent = '';
+      let currentThink = '';
       try {
         if (chunk?.data && !chunk?.data.includes('DONE')) {
           const message = JSON.parse(chunk?.data);
-          currentText = !message?.choices?.[0].delta?.reasoning_content
-            ? ''
-            : message?.choices?.[0].delta?.reasoning_content;
+          currentThink = message?.choices?.[0]?.delta?.reasoning_content || '';
+          currentContent = message?.choices?.[0]?.delta?.content || '';
         }
       } catch (error) {
         console.error(error);
       }
+
+      let content = '';
+
+      if (!originMessage?.content && currentThink) {
+        content = `<think>${currentThink}`;
+      } else if (
+        originMessage?.content?.includes('<think>') &&
+        !originMessage?.content.includes('</think>') &&
+        currentContent
+      ) {
+        content = `${originMessage?.content}</think>${currentContent}`;
+      } else {
+        content = `${originMessage?.content || ''}${currentThink}${currentContent}`;
+      }
       return {
-        content: (originMessage?.content || '') + currentText,
+        content: content,
         role: 'assistant',
       };
     },
@@ -426,7 +445,7 @@ const Independent: React.FC = () => {
             },
             typing: i.status === 'loading' ? { step: 5, interval: 20, suffix: <>💗</> } : false,
           }))}
-          style={{ height: '100%', paddingInline: "calc(calc(100% - 700px) /2)" }}
+          style={{ height: '100%', paddingInline: 'calc(calc(100% - 700px) /2)' }}
           roles={{
             assistant: {
               placement: 'start',
@@ -444,7 +463,12 @@ const Independent: React.FC = () => {
           }}
         />
       ) : (
-        <Space direction="vertical" size={16} style={{ paddingInline: "calc(calc(100% - 700px) /2)" }} className={styles.placeholder}>
+        <Space
+          direction="vertical"
+          size={16}
+          style={{ paddingInline: 'calc(calc(100% - 700px) /2)' }}
+          className={styles.placeholder}
+        >
           <Welcome
             variant="borderless"
             icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
@@ -512,10 +536,10 @@ const Independent: React.FC = () => {
           type === 'drop'
             ? { title: 'Drop file here' }
             : {
-              icon: <CloudUploadOutlined />,
-              title: 'Upload files',
-              description: 'Click or drag files to this area to upload',
-            }
+                icon: <CloudUploadOutlined />,
+                title: 'Upload files',
+                description: 'Click or drag files to this area to upload',
+              }
         }
       />
     </Sender.Header>
@@ -529,7 +553,7 @@ const Independent: React.FC = () => {
           onSubmit(info.data.description as string);
         }}
         styles={{
-          item: { padding: '6px 12px' }
+          item: { padding: '6px 12px' },
         }}
         className={styles.senderPrompt}
       />

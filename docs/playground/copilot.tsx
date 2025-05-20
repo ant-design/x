@@ -25,12 +25,16 @@ import {
   useXAgent,
   useXChat,
 } from '@ant-design/x';
-import type { BubbleDataType } from '@ant-design/x/es/bubble/BubbleList';
 import type { Conversation } from '@ant-design/x/es/conversations';
 import { Button, GetProp, GetRef, Image, Popover, Space, Spin, message } from 'antd';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
 import React, { useEffect, useRef, useState } from 'react';
+
+type BubbleDataType = {
+  role: string;
+  content: string;
+};
 
 const MOCK_SESSION_LIST = [
   {
@@ -171,9 +175,9 @@ const Copilot = (props: CopilotProps) => {
 
   // ==================== Runtime ====================
   const [agent] = useXAgent<BubbleDataType>({
-    baseURL: 'https://api.siliconflow.cn/v1/chat/completions',
+    baseURL: 'https://api.x.ant.design/api/llm_siliconflow',
     model: 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B',
-    dangerouslyApiKey: 'Bearer sk-ravoadhrquyrkvaqsgyeufqdgphwxfheifujmaoscudjgldr',
+    dangerouslyApiKey: 'Bearer sk-xxxxxxxxxxxxxxxxxxxx',
   });
   const loading = agent.isRequesting();
 
@@ -193,19 +197,34 @@ const Copilot = (props: CopilotProps) => {
     },
     transformMessage: (info) => {
       const { originMessage, chunk } = info || {};
-      let currentText = '';
+      let currentContent = '';
+      let currentThink = '';
       try {
         if (chunk?.data && !chunk?.data.includes('DONE')) {
           const message = JSON.parse(chunk?.data);
-          currentText = !message?.choices?.[0].delta?.reasoning_content
-            ? ''
-            : message?.choices?.[0].delta?.reasoning_content;
+          currentThink = message?.choices?.[0]?.delta?.reasoning_content || '';
+          currentContent = message?.choices?.[0]?.delta?.content || '';
         }
       } catch (error) {
         console.error(error);
       }
+
+      let content = '';
+
+      if (!originMessage?.content && currentThink) {
+        content = `<think>${currentThink}`;
+      } else if (
+        originMessage?.content?.includes('<think>') &&
+        !originMessage?.content.includes('</think>') &&
+        currentContent
+      ) {
+        content = `${originMessage?.content}</think>${currentContent}`;
+      } else {
+        content = `${originMessage?.content || ''}${currentThink}${currentContent}`;
+      }
+
       return {
-        content: (originMessage?.content || '') + currentText,
+        content: content,
         role: 'assistant',
       };
     },
@@ -349,7 +368,7 @@ const Copilot = (props: CopilotProps) => {
             items={MOCK_QUESTIONS.map((i) => ({ key: i, description: i }))}
             onItemClick={(info) => handleUserSubmit(info?.data?.description as string)}
             style={{
-             marginInline: 16
+              marginInline: 16,
             }}
             styles={{
               title: { fontSize: 14 },
@@ -376,10 +395,10 @@ const Copilot = (props: CopilotProps) => {
           type === 'drop'
             ? { title: 'Drop file here' }
             : {
-              icon: <CloudUploadOutlined />,
-              title: 'Upload files',
-              description: 'Click or drag files to this area to upload',
-            }
+                icon: <CloudUploadOutlined />,
+                title: 'Upload files',
+                description: 'Click or drag files to this area to upload',
+              }
         }
       />
     </Sender.Header>

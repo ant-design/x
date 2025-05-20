@@ -3,9 +3,9 @@ import { Bubble, Sender, useXAgent, useXChat } from '@ant-design/x';
 import { Flex, type GetProp } from 'antd';
 import React, { useRef } from 'react';
 
-const BASE_URL = 'https://api.siliconflow.cn/v1/chat/completions';
+const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow';
 const MODEL = 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B';
-const API_KEY = 'Bearer sk-ravoadhrquyrkvaqsgyeufqdgphwxfheifujmaoscudjgldr';
+const API_KEY = 'Bearer sk-xxxxxxxxxxxxxxxxxxxx';
 
 /**
  * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
@@ -59,19 +59,34 @@ const App = () => {
     },
     transformMessage: (info) => {
       const { originMessage, chunk } = info || {};
-      let currentText = '';
+      let currentContent = '';
+      let currentThink = '';
       try {
         if (chunk?.data && !chunk?.data.includes('DONE')) {
           const message = JSON.parse(chunk?.data);
-          currentText = !message?.choices?.[0].delta?.reasoning_content
-            ? ''
-            : message?.choices?.[0].delta?.reasoning_content;
+          currentThink = message?.choices?.[0]?.delta?.reasoning_content || '';
+          currentContent = message?.choices?.[0]?.delta?.content || '';
         }
       } catch (error) {
         console.error(error);
       }
+
+      let content = '';
+
+      if (!originMessage?.content && currentThink) {
+        content = `<think>${currentThink}`;
+      } else if (
+        originMessage?.content?.includes('<think>') &&
+        !originMessage?.content.includes('</think>') &&
+        currentContent
+      ) {
+        content = `${originMessage?.content}</think>${currentContent}`;
+      } else {
+        content = `${originMessage?.content || ''}${currentThink}${currentContent}`;
+      }
+
       return {
-        content: (originMessage?.content || '') + currentText,
+        content: content,
         role: 'assistant',
       };
     },

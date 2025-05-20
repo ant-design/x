@@ -9,9 +9,9 @@ const { Paragraph } = Typography;
 /**
  * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
  */
-const BASE_URL = 'https://api.siliconflow.cn/v1/chat/completions';
-const MODEL = 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B';
-const API_KEY = 'Bearer sk-ravoadhrquyrkvaqsgyeufqdgphwxfheifujmaoscudjgldr';
+const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow';
+const MODEL = 'deepseek-ai/DeepSeek-V3';
+const API_KEY = 'Bearer sk-xxxxxxxxxxxxxxxxxxxx';
 
 const exampleRequest = XRequest({
   baseURL: BASE_URL,
