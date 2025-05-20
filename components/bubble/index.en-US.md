@@ -43,7 +43,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | --- | --- | --- | --- | --- |
 | avatar | Avatar component | React.ReactNode | - |  |
 | classNames | Semantic DOM class | [Record<SemanticDOM, string>](#semantic-dom) | - |  |
-| content | Content of bubble | string | - |  |
+| content | Content of bubble | [BubbleContentType](https://github.com/ant-design/x/blob/d3232c925a0dc61ad763c6664e16f07323ebca4a/components/bubble/interface.ts#L21) | - |  |
 | footer | Footer content | React.ReactNode \| (content: [BubbleContentType](https://github.com/ant-design/x/blob/d3232c925a0dc61ad763c6664e16f07323ebca4a/components/bubble/interface.ts#L21)) => React.ReactNode | - |  |
 | header | Header content | React.ReactNode | - |  |
 | loading | Loading state of Message | boolean | - |  |
@@ -53,7 +53,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | typing | Show message with typing motion | boolean \| { step?: number, interval?: number } | false |  |
 | variant | Style variant | `filled` \| `borderless` \| `outlined` \| `shadow` | `filled` |  |
 | loadingRender | Customize loading content | () => ReactNode | - |  |
-| messageRender | Customize display content | (content?: string) => ReactNode | - |  |
+| messageRender | Customize display content | <ContentType extends [BubbleContentType](https://github.com/ant-design/x/blob/d3232c925a0dc61ad763c6664e16f07323ebca4a/components/bubble/interface.ts#L21) = string>(content?: ContentType) => ReactNode | - |  |
 | onTypingComplete | Callback when typing effect is completed. If typing is not set, it will be triggered immediately when rendering. | () => void | - |  |
 
 ### Bubble.List

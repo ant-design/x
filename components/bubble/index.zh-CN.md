@@ -44,7 +44,7 @@ demo:
 | --- | --- | --- | --- | --- |
 | avatar | 展示头像 | React.ReactNode | - |  |
 | classNames | 语义化结构 class | [Record<SemanticDOM, string>](#semantic-dom) | - |  |
-| content | 聊天内容 | string | - |  |
+| content | 聊天内容 | [BubbleContentType](https://github.com/ant-design/x/blob/d3232c925a0dc61ad763c6664e16f07323ebca4a/components/bubble/interface.ts#L21) | - |  |
 | footer | 底部内容 | React.ReactNode \| (content: [BubbleContentType](https://github.com/ant-design/x/blob/d3232c925a0dc61ad763c6664e16f07323ebca4a/components/bubble/interface.ts#L21)) => React.ReactNode | - |  |
 | header | 头部内容 | React.ReactNode | - |  |
 | loading | 聊天内容加载状态 | boolean | - |  |
@@ -54,7 +54,7 @@ demo:
 | typing | 设置聊天内容打字动画 | boolean \| { step?: number, interval?: number } | false |  |
 | variant | 气泡样式变体 | `filled` \| `borderless` \| `outlined` \| `shadow` | `filled` |  |
 | loadingRender | 自定义渲染加载态内容 | () => ReactNode | - |  |
-| messageRender | 自定义渲染内容 | (content?: string) => ReactNode | - |  |
+| messageRender | 自定义渲染内容 | <ContentType extends [BubbleContentType](https://github.com/ant-design/x/blob/d3232c925a0dc61ad763c6664e16f07323ebca4a/components/bubble/interface.ts#L21) = string>(content?: ContentType) => ReactNode | - |  |
 | onTypingComplete | 打字效果完成时的回调，如果没有设置 typing 将在渲染时立刻触发 | () => void | - |  |
 
 ### Bubble.List
