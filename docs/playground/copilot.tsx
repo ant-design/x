@@ -270,6 +270,13 @@ const Copilot = (props: CopilotProps) => {
           type="text"
           icon={<PlusOutlined />}
           onClick={() => {
+            if (agent.isRequesting()) {
+              message.error(
+                'Message is Requesting, you can create a new conversation after request done or abort it right now...',
+              );
+              return;
+            }
+
             if (messages?.length) {
               const timeNow = dayjs().valueOf().toString();
               abortController.current?.abort();
