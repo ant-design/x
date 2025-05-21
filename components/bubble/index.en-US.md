@@ -50,7 +50,8 @@ Common props ref：[Common props](/docs/react/common-props)
 | header | Header content | React.ReactNode \| (content: ContentType, info:{ key?: string \| number }) => React.ReactNode | - | - |
 | loading | Loading state of Message | boolean | - |  |
 | placement | Direction of Message | `start` \| `end` | `start` |  |
-| shape | Shape of bubble | `round` \| `corner` | - |  |  | styles | Semantic DOM style | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - |  |
+| shape | Shape of bubble | `round` \| `corner` | - | - |  
+| styles | Semantic DOM style | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - |  |
 | typing | Show message with typing motion | boolean \| { step?: number, interval?: number } | false |  |
 | variant | Style variant | `filled` \| `borderless` \| `outlined` \| `shadow` | `filled` |  |
 | loadingRender | Customize loading content | () => ReactNode | - |  |
