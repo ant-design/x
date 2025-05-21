@@ -6,8 +6,8 @@ import React from 'react';
 const App: React.FC = () => {
   const { token } = theme.useToken();
   const onCopy = (textToCopy: any) => {
-    if (!textToCopy) return message.success('文本为空');
-    message.success(`文本复制成功${textToCopy}`);
+    if (!textToCopy) return message.success('Text is empty');
+    message.success(`Text copied successfully：${textToCopy}`);
   };
   return (
     <Bubble
