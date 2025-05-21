@@ -16,6 +16,17 @@ tag: vVERSION
 
 ---
 
+## 1.3.0
+
+`2025-05-21`
+
+- ⌨️ Add Conversation type export. [#258](https://github.com/ant-design/x/pull/258) by [@ONLY-yours](https://github.com/ONLY-yours)
+- 💄 Fixed the issue that the Prompts scroll bar is always displayed. [#785](https://github.com/ant-design/x/pull/785) by [@kimteayon](https://github.com/kimteayon)
+- 🐛 Fix Suggestion warning for using antd deprecated API `onDropdownVisibleChange`. [#827](https://github.com/ant-design/x/pull/827) by [@zombieJ](https://github.com/zombieJ)
+- 🆕 Extend Bubble`content` to `footer` and `header` method implementation parameters, and add Demo implementation.[#683](https://github.com/ant-design/x/pull/683) by [@L-Hknu](https://github.com/L-Hknu) 和 [@kimteayon](https://github.com/kimteayon)
+- 📖 Fixed the security issue of Api Key being exposed on the site.[#840](https://github.com/ant-design/x/pull/840) by [@kimteayon](https://github.com/kimteayon)
+- 📖 优化官网站点提升用户体验.[#783](https://github.com/ant-design/x/pull/783) by [@kimteayon](https://github.com/kimteayon) ,[#229](https://github.com/ant-design/x/pull/229) by [@afc163](https://github.com/afc163) ,[#835](https://github.com/ant-design/x/pull/835) by [@kimteayon](https://github.com/kimteayon) ,[#814](https://github.com/ant-design/x/pull/814) by [@wzc520pyfm](https://github.com/wzc520pyfm)
+
 ## 1.2.0
 
 `2025-04-25`
@@ -33,7 +44,7 @@ tag: vVERSION
   - 🆕 RequestFn has added a `transformStream` transformation function for processing stream data.[#725](https://github.com/ant-design/x/pull/725) by [@kimteayon](https://github.com/kimteayon)
   - 🐛 Fix the issue of XAgentConfig Preset changes not taking effect and add an example.[#736](https://github.com/ant-design/x/pull/736) by [@kimteayon](https://github.com/kimteayon)
   - 🐛 Fix the issue of incorrect callback types for RequestFn `onSuccess` and update the corresponding demo. [#725](https://github.com/ant-design/x/pull/725) by [@kimteayon](https://github.com/kimteayon)
-  - 🆕 Add model access, Custom RequestParams,and customize `XRequestOptions`demos. [#725](https://github.com/ant-design/x/pull/725) by [@kimteayon](https://github.com/kimteayon) 提交、[#711](https://github.com/ant-design/x/pull/711) by [@kimteayon](https://github.com/kimteayon)
+  - 🆕 Add model access, Custom RequestParams,and customize `XRequestOptions`demos. [#725](https://github.com/ant-design/x/pull/725) by [@kimteayon](https://github.com/kimteayon) ,[#711](https://github.com/ant-design/x/pull/711) by [@kimteayon](https://github.com/kimteayon)
 - useXChat
   - 🆕 XChatConfig adds input and output generic types.[#725](https://github.com/ant-design/x/pull/725) by [@kimteayon](https://github.com/kimteayon)
   - 🆕 XChatConfig adds `transformMessage` transformation function,which can transform `messages` when updating data and update to `messages` at the same time. [#711](https://github.com/ant-design/x/pull/711) by [@kimteayon](https://github.com/kimteayon)
@@ -43,7 +54,7 @@ tag: vVERSION
 - 🐛 Fixed the issue of Sender `header` `border-radius` style overflow.[#732](https://github.com/ant-design/x/pull/732) by [@Bao0630](https://github.com/Bao0630)
 - 📖 Add a copilot style model room.[#657](https://github.com/ant-design/x/pull/657) by [@vanndxh](https://github.com/vanndxh)
 - 📖 Refactoring the independent model room.[#753](https://github.com/ant-design/x/pull/753) by [@vanndxh](https://github.com/vanndxh)
-- 📖 Enhance the official website to improve user experience.[#730](https://github.com/ant-design/x/pull/730) by [@afc163](https://github.com/afc163) 提交、[#758](https://github.com/ant-design/x/pull/758) by [@coding-ice](https://github.com/coding-ice) 提交、 [#761](https://github.com/ant-design/x/pull/761) by [@ONLY-yours](https://github.com/ONLY-yours)
+- 📖 Enhance the official website to improve user experience.[#730](https://github.com/ant-design/x/pull/730) by [@afc163](https://github.com/afc163) ,[#758](https://github.com/ant-design/x/pull/758) by [@coding-ice](https://github.com/coding-ice) , [#761](https://github.com/ant-design/x/pull/761) by [@ONLY-yours](https://github.com/ONLY-yours)
 
 ## 1.1.1
 
