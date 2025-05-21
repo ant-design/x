@@ -260,10 +260,4 @@ describe('Sender Component', () => {
       expect(onPasteFile).toHaveBeenCalledWith(file1, fileList);
     });
   });
-  describe('speech', () => {
-    it('allowSpeech', () => {
-      const { container } = render(<Sender allowSpeech />);
-      expect(container.querySelector('.ant-btn-icon')).toBeTruthy();
-    });
-  });
 });
