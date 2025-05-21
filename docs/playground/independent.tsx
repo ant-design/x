@@ -29,11 +29,15 @@ import {
   useXAgent,
   useXChat,
 } from '@ant-design/x';
-import type { BubbleDataType } from '@ant-design/x/es/bubble/BubbleList';
 import { Avatar, Button, Flex, type GetProp, Space, Spin, message } from 'antd';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
 import React, { useEffect, useRef, useState } from 'react';
+
+type BubbleDataType = {
+  role: string;
+  content: string;
+};
 
 const DEFAULT_CONVERSATIONS_ITEMS = [
   {
@@ -265,11 +269,15 @@ const Independent: React.FC = () => {
 
   const [inputValue, setInputValue] = useState('');
 
+  /**
+   * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
+   */
+
   // ==================== Runtime ====================
   const [agent] = useXAgent<BubbleDataType>({
-    baseURL: 'https://api.siliconflow.cn/v1/chat/completions',
-    model: 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B',
-    dangerouslyApiKey: 'Bearer sk-ravoadhrquyrkvaqsgyeufqdgphwxfheifujmaoscudjgldr',
+    baseURL: 'https://api.x.ant.design/api/llm_siliconflow_deepseekr1',
+    model: 'deepseek-ai/DeepSeek-R1',
+    dangerouslyApiKey: 'Bearer sk-xxxxxxxxxxxxxxxxxxxx',
   });
   const loading = agent.isRequesting();
 
@@ -289,19 +297,33 @@ const Independent: React.FC = () => {
     },
     transformMessage: (info) => {
       const { originMessage, chunk } = info || {};
-      let currentText = '';
+      let currentContent = '';
+      let currentThink = '';
       try {
         if (chunk?.data && !chunk?.data.includes('DONE')) {
           const message = JSON.parse(chunk?.data);
-          currentText = !message?.choices?.[0].delta?.reasoning_content
-            ? ''
-            : message?.choices?.[0].delta?.reasoning_content;
+          currentThink = message?.choices?.[0]?.delta?.reasoning_content || '';
+          currentContent = message?.choices?.[0]?.delta?.content || '';
         }
       } catch (error) {
         console.error(error);
       }
+
+      let content = '';
+
+      if (!originMessage?.content && currentThink) {
+        content = `<think>${currentThink}`;
+      } else if (
+        originMessage?.content?.includes('<think>') &&
+        !originMessage?.content.includes('</think>') &&
+        currentContent
+      ) {
+        content = `${originMessage?.content}</think>${currentContent}`;
+      } else {
+        content = `${originMessage?.content || ''}${currentThink}${currentContent}`;
+      }
       return {
-        content: (originMessage?.content || '') + currentText,
+        content: content,
         role: 'assistant',
       };
     },
