@@ -46,7 +46,7 @@ Craft AI-driven interfaces effortlessly.
 ## 📦 Installation
 
 ```bash
-npm install @ant-design/x --save
+npm install @ant-design/x
 ```
 
 ```bash

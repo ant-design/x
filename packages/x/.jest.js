@@ -7,6 +7,8 @@ const compileModules = [
   '.pnpm',
 ];
 
+const resolve = (p) => require.resolve(`@ant-design/tools/lib/jest/${p}`);
+
 const ignoreList = [];
 
 // cnpm use `_` as prefix
@@ -45,10 +47,10 @@ module.exports = {
   },
   testPathIgnorePatterns: ['/node_modules/', 'dekko', 'node', 'image.test.js', 'image.test.ts'],
   transform: {
-    '\\.tsx?$': './node_modules/@ant-design/tools/lib/jest/codePreprocessor',
-    '\\.(m?)js$': './node_modules/@ant-design/tools/lib/jest/codePreprocessor',
-    '\\.md$': './node_modules/@ant-design/tools/lib/jest/demoPreprocessor',
-    '\\.(jpg|png|gif|svg)$': './node_modules/@ant-design/tools/lib/jest/imagePreprocessor',
+    '\\.tsx?$': resolve("codePreprocessor"),
+    '\\.(m?)js$': resolve("codePreprocessor"),
+    '\\.md$': resolve("demoPreprocessor"),
+    '\\.(jpg|png|gif|svg)$': resolve("imagePreprocessor"),
   },
   testRegex: getTestRegex(process.env.LIB_DIR),
   collectCoverageFrom: [

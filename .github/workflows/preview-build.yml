@@ -22,16 +22,16 @@ jobs:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
       - run: bun install
-      - name: bun run site
+      - name: npm run site
         id: site
-        run: bun run site
+        run: npm run site --workspace packages/x
         env:
           NODE_OPTIONS: "--max_old_space_size=4096"
       - name: upload site artifact
         uses: actions/upload-artifact@v4
         with:
           name: site
-          path: _site/
+          path: packages/x/_site/
           retention-days: 5
       # Upload PR id for next workflow use
       - name: Save PR number
