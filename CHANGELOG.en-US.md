@@ -20,7 +20,7 @@ tag: vVERSION
 
 `2025-05-21`
 
-- ⌨️ Add Conversation type export. [#258](https://github.com/ant-design/x/pull/258) by [@ONLY-yours](https://github.com/ONLY-yours)
+- 📖 Add Conversation type export. [#258](https://github.com/ant-design/x/pull/258) by [@ONLY-yours](https://github.com/ONLY-yours)
 - 💄 Fixed the issue that the Prompts scroll bar is always displayed. [#785](https://github.com/ant-design/x/pull/785) by [@kimteayon](https://github.com/kimteayon)
 - 🐛 Fix Suggestion warning for using antd deprecated API `onDropdownVisibleChange`. [#827](https://github.com/ant-design/x/pull/827) by [@zombieJ](https://github.com/zombieJ)
 - 🆕 Extend Bubble`content` to `footer` and `header` method implementation parameters, and add Demo implementation.[#683](https://github.com/ant-design/x/pull/683) by [@L-Hknu](https://github.com/L-Hknu) and [@kimteayon](https://github.com/kimteayon)
