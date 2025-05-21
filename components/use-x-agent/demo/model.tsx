@@ -10,11 +10,16 @@ const { Paragraph } = Typography;
  * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
  */
 
-const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow';
-const MODEL = 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B';
+const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow_deepseekv3';
 
 /**
- * 🔔 API_KEY is a placeholder indicator interface that has a built-in real API_KEY
+ * 🔔 The MODEL is fixed in the current request, please replace it with your BASE_UR and MODEL
+ */
+
+const MODEL = 'deepseek-ai/DeepSeek-V3';
+
+/**
+ * 🔔 the API_KEY is a placeholder indicator interface that has a built-in real API_KEY
  */
 
 const API_KEY = 'Bearer sk-xxxxxxxxxxxxxxxxxxxx';
@@ -68,15 +73,20 @@ const App = () => {
       new TransformStream<string, any>({
         transform(chunk, controller) {
           const DEFAULT_KV_SEPARATOR = 'data: ';
-          const separatorIndex = chunk.indexOf(DEFAULT_KV_SEPARATOR);
-          const value = chunk.slice(separatorIndex + DEFAULT_KV_SEPARATOR.length);
-          try {
-            const modalMessage = JSON.parse(value);
-            const content = modalMessage?.choices?.[0]?.delta?.content || '';
-            controller.enqueue(content);
-          } catch (error) {
-            controller.enqueue('');
-          }
+          const DEFAULT_STREAM_SEPARATOR = '\n\n';
+          const parts = chunk.split(DEFAULT_STREAM_SEPARATOR);
+
+          parts.forEach((part) => {
+            const separatorIndex = part.indexOf(DEFAULT_KV_SEPARATOR);
+            const value = part.slice(separatorIndex + DEFAULT_KV_SEPARATOR.length);
+            try {
+              const modalMessage = JSON.parse(value || '{}');
+              const content = modalMessage?.choices?.[0]?.delta?.content || '';
+              controller.enqueue(content);
+            } catch (error) {
+              controller.enqueue('');
+            }
+          });
         },
       }),
     );

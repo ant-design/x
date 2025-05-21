@@ -269,10 +269,14 @@ const Independent: React.FC = () => {
 
   const [inputValue, setInputValue] = useState('');
 
+  /**
+   * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
+   */
+
   // ==================== Runtime ====================
   const [agent] = useXAgent<BubbleDataType>({
-    baseURL: 'https://api.x.ant.design/api/llm_siliconflow',
-    model: 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B',
+    baseURL: 'https://api.x.ant.design/api/llm_siliconflow_deepseekv3',
+    model: 'deepseek-ai/DeepSeek-V3',
     dangerouslyApiKey: 'Bearer sk-xxxxxxxxxxxxxxxxxxxx',
   });
   const loading = agent.isRequesting();

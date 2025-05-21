@@ -11,12 +11,18 @@ const { Paragraph } = Typography;
  * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
  */
 
-const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow';
+const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow_deepseekv3';
+
+/**
+ * 🔔 The MODEL is fixed in the current request, please replace it with your BASE_UR and MODEL
+ */
+
 const MODEL = 'deepseek-ai/DeepSeek-V3';
 
 /**
- * 🔔 API_KEY is a placeholder indicator interface that has a built-in real API_KEY
+ * 🔔 the API_KEY is a placeholder indicator interface that has a built-in real API_KEY
  */
+
 const API_KEY = 'Bearer sk-xxxxxxxxxxxxxxxxxxxx';
 
 const exampleRequest = XRequest({
