@@ -1,9 +1,11 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import React from 'react';
+import { findItem } from '../ActionMenu';
 import Actions, { ActionsProps } from '../index'; // Adjust the import according to your file structure
+import { ItemType } from '../interface';
 
 describe('Actions Component', () => {
-  const consoleSpy = jest.spyOn(console, 'log'); // 监视 console.log
+  const consoleSpy = jest.spyOn(console, 'log'); // apy on console.log
   const mockOnClick = jest.fn();
   const items = [
     { key: '1', label: 'Action 1', icon: <span>icon1</span> },
@@ -51,5 +53,45 @@ describe('Actions Component', () => {
     fireEvent.mouseOver(container.querySelector('.ant-dropdown-trigger')!); // Assuming the dropdown opens on hover
 
     await waitFor(() => expect(getByText('Sub Action 1')).toBeInTheDocument());
+  });
+});
+
+describe('Actions.Menu findItem function', () => {
+  const items: ItemType[] = [
+    { key: '1', label: 'Action 1' },
+    {
+      key: '2',
+      label: 'Action 2',
+      children: [
+        { key: '2-1', label: 'Sub Action 1' },
+        { key: '2-2', label: 'Sub Action 2' },
+      ],
+    },
+    { key: '3', label: 'Action 3' },
+  ];
+
+  it('should return the item if it exists at the root level', () => {
+    const result = findItem(['1'], items);
+    expect(result).toEqual(items[0]);
+  });
+
+  it('should return the item if it exists at a deeper level', () => {
+    const result = findItem(['2', '2-1'], items);
+    expect(result).toEqual(items[1].children![0]);
+  });
+
+  it('should return null if the item does not exist', () => {
+    const result = findItem(['4'], items);
+    expect(result).toBeNull();
+  });
+
+  it('should return null when searching a non-existent sub-item', () => {
+    const result = findItem(['2', '2-3'], items);
+    expect(result).toBeNull();
+  });
+
+  it('should handle an empty keyPath gracefully', () => {
+    const result = findItem([], items);
+    expect(result).toBeNull();
   });
 });

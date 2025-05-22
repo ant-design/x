@@ -51,3 +51,4 @@ demo:
 | sender | 输入框组件的全局配置 | 'classNames' \| 'styles' \| 'className' \| 'style' | - |  |
 | suggestion | 建议组件的全局配置 | 'className' \| 'style' | - |  |
 | thoughtChain | 思维链组件的全局配置 | 'classNames' \| 'styles' \| 'className' \| 'style' | - |  |
+| actions | 操作栏组件的全局配置 | 'className' \| 'style' | - |  |

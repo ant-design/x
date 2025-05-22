@@ -1,6 +1,6 @@
 ## zh-CN
 
-使用`variant`切换变体。
+使用 `variant` 切换变体。
 
 ## en-US
 
