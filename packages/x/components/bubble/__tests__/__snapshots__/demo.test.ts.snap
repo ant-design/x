@@ -894,7 +894,7 @@ Array [
         type="button"
       >
         <span>
-          Scroll To Marked index: 
+          Scroll To Marked index:
         </span>
       </button>
     </div>
@@ -939,7 +939,7 @@ Array [
             class="ant-bubble-footer"
           >
             <span>
-              # 
+              #
               <!-- -->
               0
             </span>
@@ -980,7 +980,7 @@ Array [
             class="ant-bubble-footer"
           >
             <span>
-              # 
+              #
               <!-- -->
               1
             </span>
@@ -1024,7 +1024,7 @@ Array [
             class="ant-bubble-footer"
           >
             <span>
-              # 
+              #
               <!-- -->
               2
             </span>
@@ -1065,7 +1065,7 @@ Array [
             class="ant-bubble-footer"
           >
             <span>
-              # 
+              #
               <!-- -->
               3
             </span>
@@ -1109,7 +1109,7 @@ Array [
             class="ant-bubble-footer"
           >
             <span>
-              # 
+              #
               <!-- -->
               4
             </span>
@@ -1150,7 +1150,7 @@ Array [
             class="ant-bubble-footer"
           >
             <span>
-              # 
+              #
               <!-- -->
               5
             </span>
@@ -1604,7 +1604,7 @@ exports[`renders components/bubble/demo/list.tsx correctly 1`] = `
       <div
         class="ant-bubble-content ant-bubble-content-filled"
       >
-        Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. 
+        Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content.
       </div>
     </div>
     <div
@@ -2339,7 +2339,7 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx correctly 1`] =
       <div
         class="ant-bubble-content ant-bubble-content-filled"
       >
-        Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. 
+        Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content.
       </div>
       <div
         class="ant-bubble-footer"
@@ -2575,7 +2575,7 @@ exports[`renders components/bubble/demo/shape.tsx correctly 1`] = `
       class="ant-bubble-content ant-bubble-content-filled"
       style="max-width:500px"
     >
-      This is a long text message to show the multiline view of the bubble component. This is a long text message to show the multiline view of the bubble component. This is a long text message to show the multiline view of the bubble component. 
+      This is a long text message to show the multiline view of the bubble component. This is a long text message to show the multiline view of the bubble component. This is a long text message to show the multiline view of the bubble component.
     </div>
   </div>
   <div
@@ -2594,7 +2594,7 @@ exports[`renders components/bubble/demo/shape.tsx correctly 1`] = `
       class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-round"
       style="max-width:500px"
     >
-      This is a long text message to show the multiline view of the bubble component. This is a long text message to show the multiline view of the bubble component. This is a long text message to show the multiline view of the bubble component. 
+      This is a long text message to show the multiline view of the bubble component. This is a long text message to show the multiline view of the bubble component. This is a long text message to show the multiline view of the bubble component.
     </div>
   </div>
   <div
@@ -2613,7 +2613,7 @@ exports[`renders components/bubble/demo/shape.tsx correctly 1`] = `
       class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-corner"
       style="max-width:500px"
     >
-      This is a long text message to show the multiline view of the bubble component. This is a long text message to show the multiline view of the bubble component. This is a long text message to show the multiline view of the bubble component. 
+      This is a long text message to show the multiline view of the bubble component. This is a long text message to show the multiline view of the bubble component. This is a long text message to show the multiline view of the bubble component.
     </div>
   </div>
 </div>
