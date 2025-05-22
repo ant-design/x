@@ -16,6 +16,35 @@ tag: vVERSION
 
 ---
 
+## 1.2.0
+
+`2025-04-25`
+
+- 🐛 Delete Conversations ellipsis tooltip , fix 'tooltip' display error issue.[#776](https://github.com/ant-design/x/pull/776) by [@afc163](https://github.com/afc163)
+- 🐛 Fixed Attachments `image` card style.[#751](https://github.com/ant-design/x/pull/751) by [@wzc520pyfm](https://github.com/wzc520pyfm)
+- 🐛 Fixed ThoughtChain controlled issue.[#752](https://github.com/ant-design/x/pull/752) by [@Youzi2233](https://github.com/Youzi2233)
+- XRequest
+  - 🆕 XRequestCallbacks adds an 'onStream' callback that allows for stream listening and abort operations.[#711](https://github.com/ant-design/x/pull/711) by [@kimteayon](https://github.com/kimteayon)
+  - 🐛 Fixed the issue of XRequestOptions changes not taking effect and added a demo.[#736](https://github.com/ant-design/x/pull/736) by [@kimteayon](https://github.com/kimteayon)
+  - 🆕 Add an example of model integration. [#725](https://github.com/ant-design/x/pull/725) by [@kimteayon](https://github.com/kimteayon)
+  - 📖 Inaccurate parameter naming in optimizing API methods.[#736](https://github.com/ant-design/x/pull/736) by [@kimteayon](https://github.com/kimteayon)
+- useXAgent
+  - 🆕 RequestFn adds an `onStream` callback that allows for stream listening and abort operations.[#711](https://github.com/ant-design/x/pull/711) by [@kimteayon](https://github.com/kimteayon)
+  - 🆕 RequestFn has added a `transformStream` transformation function for processing stream data.[#725](https://github.com/ant-design/x/pull/725) by [@kimteayon](https://github.com/kimteayon)
+  - 🐛 Fix the issue of XAgentConfig Preset changes not taking effect and add an example.[#736](https://github.com/ant-design/x/pull/736) by [@kimteayon](https://github.com/kimteayon)
+  - 🐛 Fix the issue of incorrect callback types for RequestFn `onSuccess` and update the corresponding demo. [#725](https://github.com/ant-design/x/pull/725) by [@kimteayon](https://github.com/kimteayon)
+  - 🆕 Add model access, Custom RequestParams,and customize `XRequestOptions`demos. [#725](https://github.com/ant-design/x/pull/725) by [@kimteayon](https://github.com/kimteayon) 提交、[#711](https://github.com/ant-design/x/pull/711) by [@kimteayon](https://github.com/kimteayon)
+- useXChat
+  - 🆕 XChatConfig adds input and output generic types.[#725](https://github.com/ant-design/x/pull/725) by [@kimteayon](https://github.com/kimteayon)
+  - 🆕 XChatConfig adds `transformMessage` transformation function,which can transform `messages` when updating data and update to `messages` at the same time. [#711](https://github.com/ant-design/x/pull/711) by [@kimteayon](https://github.com/kimteayon)
+  - 🆕 XChatConfig adds `transformStream`conversion function for processing stream data.[#711](https://github.com/ant-design/x/pull/711) by [@kimteayon](https://github.com/kimteayon)
+  - 🆕 XChatConfig adds `resolveAbortController`callback function, which can obtain the`AbortController` controller for controlling the stream state.[#711](https://github.com/ant-design/x/pull/711) by [@kimteayon](https://github.com/kimteayon)
+  - 🆕 Add model access examples and remove incorrect abort examples. [#711](https://github.com/ant-design/x/pull/711) by [@kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed the issue of Sender `header` `border-radius` style overflow.[#732](https://github.com/ant-design/x/pull/732) by [@Bao0630](https://github.com/Bao0630)
+- 📖 Add a copilot style model room.[#657](https://github.com/ant-design/x/pull/657) by [@vanndxh](https://github.com/vanndxh)
+- 📖 Refactoring the independent model room.[#753](https://github.com/ant-design/x/pull/753) by [@vanndxh](https://github.com/vanndxh)
+- 📖 Enhance the official website to improve user experience.[#730](https://github.com/ant-design/x/pull/730) by [@afc163](https://github.com/afc163) 提交、[#758](https://github.com/ant-design/x/pull/758) by [@coding-ice](https://github.com/coding-ice) 提交、 [#761](https://github.com/ant-design/x/pull/761) by [@ONLY-yours](https://github.com/ONLY-yours)
+
 ## 1.1.1
 
 `2025-04-14`

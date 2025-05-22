@@ -6,41 +6,41 @@ exports[`renders components/conversations/demo/basic.tsx correctly 1`] = `
   style="width:256px;background:#ffffff;border-radius:6px"
 >
   <li
-    aria-describedby="test-id"
     class="ant-conversations-item ant-conversations-item-active"
+    title="Conversation Item 1"
   >
     <span
-      class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+      class="ant-typography ant-conversations-label"
     >
       Conversation Item 1
     </span>
   </li>
   <li
-    aria-describedby="test-id"
     class="ant-conversations-item"
+    title="Conversation Item 2"
   >
     <span
-      class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+      class="ant-typography ant-conversations-label"
     >
       Conversation Item 2
     </span>
   </li>
   <li
-    aria-describedby="test-id"
     class="ant-conversations-item"
+    title="Conversation Item 3"
   >
     <span
-      class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+      class="ant-typography ant-conversations-label"
     >
       Conversation Item 3
     </span>
   </li>
   <li
-    aria-describedby="test-id"
     class="ant-conversations-item ant-conversations-item-disabled"
+    title="Conversation Item 4"
   >
     <span
-      class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+      class="ant-typography ant-conversations-label"
     >
       Conversation Item 4
     </span>
@@ -57,31 +57,31 @@ exports[`renders components/conversations/demo/controlled-mode.tsx correctly 1`]
     style="width:256px;background:#ffffff;border-radius:6px"
   >
     <li
-      aria-describedby="test-id"
       class="ant-conversations-item ant-conversations-item-active"
+      title="Conversation Item 1"
     >
       <span
-        class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+        class="ant-typography ant-conversations-label"
       >
         Conversation Item 1
       </span>
     </li>
     <li
-      aria-describedby="test-id"
       class="ant-conversations-item"
+      title="Conversation Item 2"
     >
       <span
-        class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+        class="ant-typography ant-conversations-label"
       >
         Conversation Item 2
       </span>
     </li>
     <li
-      aria-describedby="test-id"
       class="ant-conversations-item"
+      title="Conversation Item 3"
     >
       <span
-        class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+        class="ant-typography ant-conversations-label"
       >
         Conversation Item 3
       </span>
@@ -129,31 +129,31 @@ exports[`renders components/conversations/demo/group.tsx correctly 1`] = `
       class="ant-conversations-list"
     >
       <li
-        aria-describedby="test-id"
         class="ant-conversations-item ant-conversations-item-active"
+        title="Conversation Item 1"
       >
         <span
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+          class="ant-typography ant-conversations-label"
         >
           Conversation Item 1
         </span>
       </li>
       <li
-        aria-describedby="test-id"
         class="ant-conversations-item"
+        title="Conversation Item 2"
       >
         <span
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+          class="ant-typography ant-conversations-label"
         >
           Conversation Item 2
         </span>
       </li>
       <li
-        aria-describedby="test-id"
         class="ant-conversations-item"
+        title="Conversation Item 3"
       >
         <span
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+          class="ant-typography ant-conversations-label"
         >
           Conversation Item 3
         </span>
@@ -174,11 +174,11 @@ exports[`renders components/conversations/demo/group.tsx correctly 1`] = `
       class="ant-conversations-list"
     >
       <li
-        aria-describedby="test-id"
         class="ant-conversations-item ant-conversations-item-disabled"
+        title="Conversation Item 4"
       >
         <span
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+          class="ant-typography ant-conversations-label"
         >
           Conversation Item 4
         </span>
@@ -249,41 +249,41 @@ exports[`renders components/conversations/demo/group-sort.tsx correctly 1`] = `
       class="ant-conversations-list"
     >
       <li
-        aria-describedby="test-id"
         class="ant-conversations-item ant-conversations-item-active"
+        title="Conversation 1732204800000"
       >
         <span
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+          class="ant-typography ant-conversations-label"
         >
           Conversation 1732204800000
         </span>
       </li>
       <li
-        aria-describedby="test-id"
         class="ant-conversations-item"
+        title="Conversation 1732204803600"
       >
         <span
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+          class="ant-typography ant-conversations-label"
         >
           Conversation 1732204803600
         </span>
       </li>
       <li
-        aria-describedby="test-id"
         class="ant-conversations-item"
+        title="Conversation 1732204807200"
       >
         <span
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+          class="ant-typography ant-conversations-label"
         >
           Conversation 1732204807200
         </span>
       </li>
       <li
-        aria-describedby="test-id"
         class="ant-conversations-item"
+        title="Conversation 1732204810800"
       >
         <span
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+          class="ant-typography ant-conversations-label"
         >
           Conversation 1732204810800
         </span>
@@ -346,21 +346,21 @@ exports[`renders components/conversations/demo/group-sort.tsx correctly 1`] = `
       class="ant-conversations-list"
     >
       <li
-        aria-describedby="test-id"
         class="ant-conversations-item"
+        title="Conversation 1732204728000"
       >
         <span
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+          class="ant-typography ant-conversations-label"
         >
           Conversation 1732204728000
         </span>
       </li>
       <li
-        aria-describedby="test-id"
         class="ant-conversations-item"
+        title="Conversation 1732204731600"
       >
         <span
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+          class="ant-typography ant-conversations-label"
         >
           Conversation 1732204731600
         </span>
@@ -425,11 +425,11 @@ exports[`renders components/conversations/demo/menu-trigger.tsx correctly 1`] = 
   style="width:256px;background:#ffffff;border-radius:6px"
 >
   <li
-    aria-describedby="test-id"
     class="ant-conversations-item ant-conversations-item-active"
+    title="Conversation Item 1"
   >
     <span
-      class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+      class="ant-typography ant-conversations-label"
     >
       Conversation Item 1
     </span>
@@ -458,11 +458,11 @@ exports[`renders components/conversations/demo/menu-trigger.tsx correctly 1`] = 
     </span>
   </li>
   <li
-    aria-describedby="test-id"
     class="ant-conversations-item"
+    title="Conversation Item 2"
   >
     <span
-      class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+      class="ant-typography ant-conversations-label"
     >
       Conversation Item 2
     </span>
@@ -491,11 +491,11 @@ exports[`renders components/conversations/demo/menu-trigger.tsx correctly 1`] = 
     </span>
   </li>
   <li
-    aria-describedby="test-id"
     class="ant-conversations-item"
+    title="Conversation Item 3"
   >
     <span
-      class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+      class="ant-typography ant-conversations-label"
     >
       Conversation Item 3
     </span>
@@ -524,11 +524,11 @@ exports[`renders components/conversations/demo/menu-trigger.tsx correctly 1`] = 
     </span>
   </li>
   <li
-    aria-describedby="test-id"
     class="ant-conversations-item ant-conversations-item-disabled"
+    title="Conversation Item 4"
   >
     <span
-      class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+      class="ant-typography ant-conversations-label"
     >
       Conversation Item 4
     </span>
@@ -545,11 +545,11 @@ exports[`renders components/conversations/demo/with-menu.tsx correctly 1`] = `
     style="width:256px;background:#ffffff;border-radius:6px"
   >
     <li
-      aria-describedby="test-id"
       class="ant-conversations-item ant-conversations-item-active"
+      title="Conversation Item 1"
     >
       <span
-        class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+        class="ant-typography ant-conversations-label"
       >
         Conversation Item 1
       </span>
@@ -575,11 +575,11 @@ exports[`renders components/conversations/demo/with-menu.tsx correctly 1`] = `
       </span>
     </li>
     <li
-      aria-describedby="test-id"
       class="ant-conversations-item"
+      title="Conversation Item 2"
     >
       <span
-        class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+        class="ant-typography ant-conversations-label"
       >
         Conversation Item 2
       </span>
@@ -605,11 +605,11 @@ exports[`renders components/conversations/demo/with-menu.tsx correctly 1`] = `
       </span>
     </li>
     <li
-      aria-describedby="test-id"
       class="ant-conversations-item"
+      title="Conversation Item 3"
     >
       <span
-        class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+        class="ant-typography ant-conversations-label"
       >
         Conversation Item 3
       </span>
@@ -635,11 +635,11 @@ exports[`renders components/conversations/demo/with-menu.tsx correctly 1`] = `
       </span>
     </li>
     <li
-      aria-describedby="test-id"
       class="ant-conversations-item ant-conversations-item-disabled"
+      title="Conversation Item 4"
     >
       <span
-        class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-conversations-label"
+        class="ant-typography ant-conversations-label"
       >
         Conversation Item 4
       </span>

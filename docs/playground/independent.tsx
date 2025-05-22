@@ -200,12 +200,10 @@ const useStyle = createStyles(({ token, css }) => {
     chat: css`
       height: 100%;
       width: 100%;
-      max-width: 700px;
-      margin: 0 auto;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      padding: ${token.paddingLG}px;
+      padding-block: ${token.paddingLG}px;
       gap: 16px;
     `,
     chatPrompt: css`
@@ -223,7 +221,6 @@ const useStyle = createStyles(({ token, css }) => {
     chatList: css`
       flex: 1;
       overflow: auto;
-      padding-right: 10px;
     `,
     loadingMessage: css`
       background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
@@ -236,14 +233,18 @@ const useStyle = createStyles(({ token, css }) => {
     `,
     // sender 样式
     sender: css`
-      box-shadow: ${token.boxShadow};
-      color: ${token.colorText};
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
     `,
     speechButton: css`
       font-size: 18px;
       color: ${token.colorText} !important;
     `,
     senderPrompt: css`
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
       color: ${token.colorText};
     `,
   };
@@ -425,7 +426,7 @@ const Independent: React.FC = () => {
             },
             typing: i.status === 'loading' ? { step: 5, interval: 20, suffix: <>💗</> } : false,
           }))}
-          style={{ height: '100%' }}
+          style={{ height: '100%', paddingInline: 'calc(calc(100% - 700px) /2)' }}
           roles={{
             assistant: {
               placement: 'start',
@@ -443,7 +444,12 @@ const Independent: React.FC = () => {
           }}
         />
       ) : (
-        <Space direction="vertical" size={16} className={styles.placeholder}>
+        <Space
+          direction="vertical"
+          size={16}
+          style={{ paddingInline: 'calc(calc(100% - 700px) /2)' }}
+          className={styles.placeholder}
+        >
           <Welcome
             variant="borderless"
             icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
@@ -527,7 +533,9 @@ const Independent: React.FC = () => {
         onItemClick={(info) => {
           onSubmit(info.data.description as string);
         }}
-        styles={{ item: { padding: '6px 12px' } }}
+        styles={{
+          item: { padding: '6px 12px' },
+        }}
         className={styles.senderPrompt}
       />
       {/* 🌟 输入框 */}
@@ -569,10 +577,10 @@ const Independent: React.FC = () => {
   useEffect(() => {
     // history mock
     if (messages?.length) {
-      setMessageHistory({
-        ...messageHistory,
+      setMessageHistory((prev) => ({
+        ...prev,
         [curConversation]: messages,
-      });
+      }));
     }
   }, [messages]);
 

@@ -27,9 +27,9 @@ type TransformMessageFn<Message, Output> = (info: {
   status: MessageStatus;
 }) => Message;
 
-interface RequestParams<Message> extends AnyObject, XRequestParams {
+type RequestParams<Message> = Omit<XRequestParams, 'message'> & {
   message: Message;
-}
+} & AnyObject;
 export interface XChatConfig<
   AgentMessage extends SimpleType = string,
   BubbleMessage extends SimpleType = AgentMessage,
@@ -178,10 +178,7 @@ export default function useXChat<
     let message: AgentMessage;
     let otherRequestParams = {};
 
-    if (
-      typeof requestParams === 'object' &&
-      (requestParams as RequestParams<AgentMessage>)?.message
-    ) {
+    if (requestParams && typeof requestParams === 'object' && 'message' in requestParams) {
       const { message: requestParamsMessage, ...other } =
         requestParams as RequestParams<AgentMessage>;
       message = requestParamsMessage;

@@ -89,15 +89,9 @@ Ant Design 团队会关注所有的 pull request，我们会 review 以及合并
 
 ### 编译
 
-编译 TypeScript 代码到 lib 和 es 目录。
+编译 TypeScript 代码到 lib 和 es 目录，UMD 版本到 dist 目录。
 
 <InstallDependencies npm='$ npm run compile' yarn='$ yarn compile'></InstallDependencies>
-
-### 构建
-
-构建 antd 的 UMD 版本到 dist 目录。
-
-<InstallDependencies npm='$ npm run dist' yarn='$ yarn dist'></InstallDependencies>
 
 ## 配套开发工具
 

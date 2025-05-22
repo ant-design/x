@@ -1,6 +1,6 @@
 import { ThoughtChain } from '@ant-design/x';
 import type { ThoughtChainProps } from '@ant-design/x';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Card, Typography } from 'antd';
 
@@ -41,17 +41,21 @@ const items: ThoughtChainProps['items'] = [
     status: 'pending',
   },
 ];
-const collapsible: ThoughtChainProps['collapsible'] = {
-  expandedKeys: ['item-2'],
-  onExpand: (expandedKeys) => {
-    console.log(expandedKeys);
-  },
-};
 
-const App: React.FC = () => (
-  <Card style={{ width: 500 }}>
-    <ThoughtChain items={items} collapsible={collapsible} />
-  </Card>
-);
+const App: React.FC = () => {
+  const [expandedKeys, setExpandedKeys] = useState(['item-2']);
+
+  const collapsible: ThoughtChainProps['collapsible'] = {
+    expandedKeys,
+    onExpand: (keys: string[]) => {
+      setExpandedKeys(keys);
+    },
+  };
+  return (
+    <Card style={{ width: 500 }}>
+      <ThoughtChain items={items} collapsible={collapsible} />
+    </Card>
+  );
+};
 
 export default App;
