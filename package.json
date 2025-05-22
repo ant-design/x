@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "site": "npm run site --workspace packages/x && cp -rf packages/x/_site ./_site"
+    "site": "npm run site --workspace packages/x && cp -rf packages/x/_site ./_site",
+    "compile": "npm run compile --workspace packages/x"
   },
   "license": "MIT",
   "workspaces": [

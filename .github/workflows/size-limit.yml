@@ -22,4 +22,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           package_manager: npm
-          build_script: -v && /usr/local/bin/npm run compile --workspace packages/x
+          build_script: compile
