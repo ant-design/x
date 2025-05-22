@@ -23,12 +23,12 @@ jobs:
       - run: bun install
 
       - name: build site
-        run: bun run predeploy --workspace packages/x
+        run: npm run predeploy --workspace packages/x
         env:
           NODE_OPTIONS: --max_old_space_size=4096
 
       - name: build dist and bundle analyzer report
-        run: bun run compile --workspace packages/x
+        run: npm run compile --workspace packages/x
         env:
           ANALYZER: 1
           NODE_OPTIONS: --max_old_space_size=4096
