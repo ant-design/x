@@ -1,3 +1,4 @@
+import type { ComponentToken as ActionsToken } from '../actions/style';
 import type { ComponentToken as AttachmentsToken } from '../attachments/style';
 import type { ComponentToken as BubbleComponentToken } from '../bubble/style';
 import type { ComponentToken as ConversationsComponentToken } from '../conversations/style';
@@ -16,4 +17,5 @@ export interface ComponentTokenMap {
   Suggestion?: SuggestionComponentToken;
   ThoughtChain?: ThoughtChainComponentToken;
   Welcome?: WelcomeComponentToken;
+  Actions?: ActionsToken;
 }
