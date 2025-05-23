@@ -146,4 +146,8 @@ const Actions: React.FC<ActionsProps> = (props: ActionsProps) => {
   );
 };
 
+if (process.env.NODE_ENV !== 'production') {
+  Actions.displayName = 'Actions';
+}
+
 export default Actions;
