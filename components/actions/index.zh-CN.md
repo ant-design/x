@@ -1,10 +1,10 @@
 ---
 category: Components
 group:
-  title: 通用
-  order: 0
+  title: 反馈
+  order: 4
 title: Actions
-subtitle: 操作栏
+subtitle: 操作列表
 description: 用于快速配置一些 AI 场景下所需要的操作按钮/功能。
 cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*1ysXSqEnAckAAAAAAAAAAAAADgCCAQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*EkYUTotf-eYAAAAAAAAAAAAADgCCAQ/original
