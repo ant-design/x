@@ -527,7 +527,11 @@ exports[`renders components/actions/demo/sub.tsx extend context correctly 1`] = 
 </div>
 `;
 
-exports[`renders components/actions/demo/sub.tsx extend context correctly 2`] = `[]`;
+exports[`renders components/actions/demo/sub.tsx extend context correctly 2`] = `
+[
+  "Unknown event handler property \`%s\`. It will be ignored.",
+]
+`;
 
 exports[`renders components/actions/demo/variant.tsx extend context correctly 1`] = `
 <div
