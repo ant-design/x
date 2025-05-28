@@ -13,7 +13,7 @@ describe('Actions Component', () => {
       key: '2',
       label: 'Action 2',
       icon: <span>icon2</span>,
-      onClick: () => console.log('Action 2 clicked'),
+      onItemClick: () => console.log('Action 2 clicked'),
     },
     {
       key: 'sub',
