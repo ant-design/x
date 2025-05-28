@@ -31,7 +31,7 @@ const actionItems: ActionsProps['items'] = [
         key: 'delete',
         label: 'Delete',
         icon: <DeleteOutlined />,
-        onClick: () => {
+        onItemClick: () => {
           Modal.confirm({
             title: 'Are you sure want to delete?',
             content: 'Some descriptions',

@@ -30,7 +30,7 @@ Common props ref：[Common props](/docs/react/common-props)
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| items | A list containing multiple action items | ActionItemType[] | - | - |
+| items | A list containing multiple action items | ActionItem[] | - | - |
 | rootClassName | Style class for the root node | string | - | - |
 | onClick | Callback function when an action item is clicked | `function({ item, key, keyPath, selectedKeys, domEvent })` | - | - |
 | style | Style for the root node | React.CSSProperties | - | - |
@@ -44,9 +44,9 @@ Common props ref：[Common props](/docs/react/common-props)
 | key | The unique identifier for the custom action | string | - | - |
 | label | The display label for the custom action | string | - | - |
 | icon | The icon for the custom action | ReactNode | - | - |
-| children | Sub action items | ActionItemType[] | - | - |
+| children | Sub action items | ActionItem[] | - | - |
 | triggerSubMenuAction | Action to trigger the sub-menu | `hover \| click` | - | - |
-| onClick | Callback function when the custom action button is clicked | () => void | - | - |
+| onItemClick | Callback function when the custom action button is clicked | (info: ActionItem) => void | - | - |
 
 ### SubItemType
 
@@ -55,9 +55,11 @@ Common props ref：[Common props](/docs/react/common-props)
 | label | The display label for the custom action | string | - | - |
 | key | The unique identifier for the custom action | string | - | - |
 | icon | The icon for the custom action | ReactNode | - | - |
-| onClick | Callback function when the custom action button is clicked | () => void | - | - |
+| onItemClick | Callback function when the custom action button is clicked | (info: ActionItem) => void | - | - |
 | danger | Syntax sugar, set dangerous icon | boolean | false | - |
 
-### ActionItemType
+### ActionItem
 
-> type `ActionItemType` = `ItemType` | `SubItemType`
+```typescript
+type ActionItem = ItemType | SubItemType;
+```

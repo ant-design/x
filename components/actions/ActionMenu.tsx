@@ -3,9 +3,9 @@ import { Dropdown, MenuProps } from 'antd';
 import React from 'react';
 import { ActionsProps } from '.';
 import { useXProviderContext } from '../x-provider';
-import { ActionItemType, ItemType } from './interface';
+import { ActionItem, ItemType } from './interface';
 
-export const findItem = (keyPath: string[], items: ActionItemType[]): ActionItemType | null => {
+export const findItem = (keyPath: string[], items: ActionItem[]): ActionItem | null => {
   const keyToFind = keyPath[0]; // Get the first key from the keyPath
 
   for (const item of items) {
@@ -33,6 +33,10 @@ const ActionMenu = (props: { item: ItemType } & Pick<ActionsProps, 'prefixCls' |
   const menuProps: MenuProps = {
     items: children,
     onClick: ({ key, keyPath, domEvent }) => {
+      if (findItem(keyPath, children)?.onItemClick) {
+        findItem(keyPath, children)?.onItemClick?.(findItem(keyPath, children) as ActionItem);
+        return;
+      }
       onMenuClick?.({
         key,
         keyPath: [...keyPath, item.key],

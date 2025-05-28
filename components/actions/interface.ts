@@ -21,7 +21,7 @@ export interface SubItemType extends Pick<MenuItemProps, 'danger'> {
    * @desc 点击自定义操作按钮时的回调函数
    * @descEN Callback function when the custom action button is clicked.
    */
-  onClick?: () => void;
+  onItemClick?: (info?: ActionItem) => void;
 }
 
 export interface ItemType {
@@ -44,12 +44,12 @@ export interface ItemType {
    * @desc 子操作项
    * @descEN Child action items.
    */
-  children?: ActionItemType[];
+  children?: ActionItem[];
   triggerSubMenuAction?: MenuProps['triggerSubMenuAction'];
   /**
    * @desc 点击自定义操作按钮时的回调函数
    * @descEN Callback function when the custom action button is clicked.
    */
-  onClick?: () => void;
+  onItemClick?: (info?: ActionItem) => void;
 }
-export type ActionItemType = SubItemType | ItemType;
+export type ActionItem = SubItemType | ItemType;
