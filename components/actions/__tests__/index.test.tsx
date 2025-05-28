@@ -47,6 +47,24 @@ describe('Actions Component', () => {
     consoleSpy.mockRestore();
   });
 
+  it('executes parent item onItemClick when available', () => {
+    const parentItemClick = jest.fn();
+    const itemsWithParentClick = [
+      {
+        key: 'parent',
+        label: 'Parent Action',
+        icon: <span>📁</span>,
+        onItemClick: parentItemClick,
+      },
+    ];
+
+    const { getByText } = render(<Actions items={itemsWithParentClick} onClick={mockOnClick} />);
+    fireEvent.click(getByText('📁'));
+
+    expect(parentItemClick).toHaveBeenCalledWith(expect.objectContaining({ key: 'parent' }));
+    expect(mockOnClick).not.toHaveBeenCalled();
+  });
+
   it('renders sub-menu items', async () => {
     const { getByText, container } = render(<Actions items={items} onClick={mockOnClick} />);
 
