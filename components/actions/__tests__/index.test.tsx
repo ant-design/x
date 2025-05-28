@@ -47,21 +47,36 @@ describe('Actions Component', () => {
     consoleSpy.mockRestore();
   });
 
-  it('executes parent item onItemClick when available', () => {
-    const parentItemClick = jest.fn();
-    const itemsWithParentClick = [
+  it('executes sub item onItemClick when available', async () => {
+    const subItemClick = jest.fn();
+    const itemsWithSubClick = [
       {
         key: 'parent',
         label: 'Parent Action',
         icon: <span>📁</span>,
-        onItemClick: parentItemClick,
+        children: [
+          {
+            key: 'sub-1',
+            label: 'Sub Action 1',
+            icon: <span>⚙️</span>,
+            onItemClick: subItemClick,
+          },
+        ],
       },
     ];
 
-    const { getByText } = render(<Actions items={itemsWithParentClick} onClick={mockOnClick} />);
-    fireEvent.click(getByText('📁'));
+    const { getByText, container } = render(
+      <Actions items={itemsWithSubClick} onClick={mockOnClick} />,
+    );
 
-    expect(parentItemClick).toHaveBeenCalledWith(expect.objectContaining({ key: 'parent' }));
+    const parentTrigger = container.querySelector('.ant-dropdown-trigger')!;
+    fireEvent.mouseOver(parentTrigger);
+
+    await waitFor(() => expect(getByText('⚙️')).toBeInTheDocument());
+
+    fireEvent.click(getByText('⚙️'));
+
+    expect(subItemClick).toHaveBeenCalledWith(expect.objectContaining({ key: 'sub-1' }));
     expect(mockOnClick).not.toHaveBeenCalled();
   });
 
