@@ -365,6 +365,13 @@ const Independent: React.FC = () => {
       {/* 🌟 添加会话 */}
       <Button
         onClick={() => {
+          if (agent.isRequesting()) {
+            message.error(
+              'Message is Requesting, you can create a new conversation after request done or abort it right now...',
+            );
+            return;
+          }
+
           const now = dayjs().valueOf().toString();
           setConversations([
             {
