@@ -48,6 +48,7 @@ const BubbleListItem: React.ForwardRefRenderFunction<
 > = ({ _key, ...restProps }, ref) => (
   <Bubble
     {...restProps}
+    _key={_key}
     ref={(node) => {
       if (node) {
         (ref as React.RefObject<Record<string, BubbleRef>>).current[_key!] = node;
