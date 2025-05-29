@@ -178,11 +178,7 @@ export default function useXChat<
     let message: AgentMessage;
     let otherRequestParams = {};
 
-    if (
-      requestParams &&
-      typeof requestParams === 'object' &&
-      'message' in requestParams
-    ) {
+    if (requestParams && typeof requestParams === 'object' && 'message' in requestParams) {
       const { message: requestParamsMessage, ...other } =
         requestParams as RequestParams<AgentMessage>;
       message = requestParamsMessage;

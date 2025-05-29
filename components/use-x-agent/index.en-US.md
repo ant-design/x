@@ -57,7 +57,7 @@ For more properties, see [XStreamOptions](https://x.ant.design/components/x-stre
 interface RequestFnInfo<Message> extends AnyObject {
   messages?: Message[];
   message?: Message;
-};
+}
 
 type RequestFn<Message, Input, Output> = (
   info: RequestFnInfo<Message, Input>,
