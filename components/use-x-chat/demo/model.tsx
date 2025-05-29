@@ -7,13 +7,13 @@ import React, { useRef } from 'react';
  * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
  */
 
-const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow_deepseekr1';
+const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow_deepSeek-r1-distill-1wen-7b';
 
 /**
  * 🔔 The MODEL is fixed in the current request, please replace it with your BASE_UR and MODEL
  */
 
-const MODEL = 'deepseek-ai/DeepSeek-R1';
+const MODEL = 'DeepSeek-R1-Distill-Qwen-7B';
 
 /**
  * 🔔 the API_KEY is a placeholder indicator interface that has a built-in real API_KEY

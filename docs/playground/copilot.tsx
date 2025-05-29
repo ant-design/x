@@ -180,8 +180,8 @@ const Copilot = (props: CopilotProps) => {
   // ==================== Runtime ====================
 
   const [agent] = useXAgent<BubbleDataType>({
-    baseURL: 'https://api.x.ant.design/api/llm_siliconflow_deepseekr1',
-    model: 'deepseek-ai/DeepSeek-R1',
+    baseURL: 'https://api.x.ant.design/api/llm_siliconflow_deepSeek-r1-distill-1wen-7b',
+    model: 'DeepSeek-R1-Distill-Qwen-7B',
     dangerouslyApiKey: 'Bearer sk-xxxxxxxxxxxxxxxxxxxx',
   });
 
