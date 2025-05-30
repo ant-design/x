@@ -1,0 +1,29 @@
+{
+  "assets": {
+    "-async.js": "/c00875de-async.317cd31c.js",
+    "-async.js.map": "/c00875de-async.317cd31c.js.map",
+    "-worker.js": "/434a0265-worker.0fb94b26.js",
+    "-worker.js.map": "/434a0265-worker.0fb94b26.js.map",
+    ".gitkeep.": "/.gitkeep.d41d8cd9.",
+    "common-async.js": "/common-async.5158ad53.js",
+    "common-async.js.map": "/common-async.5158ad53.js.map",
+    "umi.css": "/umi.9f3d82c1.css",
+    "umi.css.map": "/umi.9f3d82c1.css.map",
+    "umi.js": "/umi.f18e4dfa.js",
+    "umi.js.map": "/umi.f18e4dfa.js.map",
+    "vendors_0-async.css": "/vendors_0-async.44190282.css",
+    "vendors_0-async.css.map": "/vendors_0-async.44190282.css.map",
+    "vendors_0-async.js": "/vendors_0-async.86b31770.js",
+    "vendors_0-async.js.map": "/vendors_0-async.86b31770.js.map",
+    "vendors_1-async.js": "/vendors_1-async.33156bbf.js",
+    "vendors_1-async.js.map": "/vendors_1-async.33156bbf.js.map",
+    "vendors_2-async.css": "/vendors_2-async.b6d51368.css",
+    "vendors_2-async.css.map": "/vendors_2-async.b6d51368.css.map",
+    "vendors_2-async.js": "/vendors_2-async.78295367.js",
+    "vendors_2-async.js.map": "/vendors_2-async.78295367.js.map",
+    "vendors_3-async.css": "/vendors_3-async.6cf5ec96.css",
+    "vendors_3-async.css.map": "/vendors_3-async.6cf5ec96.css.map",
+    "vendors_3-async.js": "/vendors_3-async.e68001e6.js",
+    "vendors_3-async.js.map": "/vendors_3-async.e68001e6.js.map"
+  }
+}
