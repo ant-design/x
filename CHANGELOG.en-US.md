@@ -16,6 +16,15 @@ tag: vVERSION
 
 ---
 
+## 1.4.0
+
+`2025-05-30`
+
+- 🔥 New Component Actions.[#768](https://github.com/ant-design/x/pull/768) by [vanndxh](https://github.com/vanndxh)
+- 🐛 Fix the issue where Bubble.List `footer` and `header` cannot retrieve keys.[#876](https://github.com/ant-design/x/pull/876) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fix the issue of overflow and ellipsis of Conversations list titles.[#877](https://github.com/ant-design/x/pull/877) by [kimteayon](https://github.com/kimteayon)
+- 📖 Enhance the official website to improve user experience.[#816](https://github.com/ant-design/x/pull/816) by [@Rain120](https://github.com/Rain120) 提交、[#880](https://github.com/ant-design/x/pull/880) by [@kimteayon](https://github.com/kimteayon)
+
 ## 1.3.0
 
 `2025-05-21`
