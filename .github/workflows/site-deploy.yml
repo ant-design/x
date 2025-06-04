@@ -41,7 +41,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
+          publish_dir: ./packages/x/_site
           force_orphan: true
 
       # Since force_orphan will not trigger Sync to Gitee, we need to force run it here
@@ -54,6 +54,7 @@ jobs:
           destination-repo: 'git@gitee.com:ant-design/antd-x.git'
 
       - name: Deploy to Surge (with TAG)
+        working-directory: ./packages/x
         run: |
           export DEPLOY_DOMAIN=ant-design-x-${{ steps.publish-version.outputs.VERSION }}.surge.sh
           bunx surge --project ./_site --domain $DEPLOY_DOMAIN --token ${{ secrets.SURGE_TOKEN }}
