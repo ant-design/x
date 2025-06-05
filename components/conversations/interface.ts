@@ -44,6 +44,12 @@ export interface Conversation extends AnyObject {
    * @descEN Whether to disable
    */
   disabled?: boolean;
+
+  /**
+   * @desc html 原生属性（除 onClick, direction 以外）
+   * @descEN html native attributes（except onClick, direction）
+   */
+  htmlAttrs?: Omit<React.HTMLAttributes<HTMLLIElement>, 'onClick'>;
 }
 
 export type GroupSorter = Parameters<GroupType[]['sort']>[0];
