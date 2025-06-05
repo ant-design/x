@@ -92,6 +92,11 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
         flex: 'none',
       },
 
+      // ============================ Suffix =============================
+      [`${componentCls}-suffix`]: {
+        flex: 'none',
+      },
+
       // ============================= Input =============================
       [`${componentCls}-input`]: {
         padding: 0,
