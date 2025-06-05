@@ -16,6 +16,8 @@ const locales = {
     components: '组件',
     playground: '演示',
     blog: '博客',
+    sdk: 'X SDK',
+    markdown: 'X Markdown',
     resources: '资源',
   },
   en: {
@@ -24,6 +26,8 @@ const locales = {
     components: 'Components',
     playground: 'Playground',
     blog: 'Blog',
+    sdk: 'X SDK',
+    markdown: 'X Markdown',
     resources: 'Resources',
   },
 };
@@ -43,6 +47,16 @@ const defaultItems = [
     path: '/components/overview/',
     basePath: '/components',
     key: 'components',
+  },
+  {
+    path: '/sdks/introduce',
+    basePath: '/sdk',
+    key: 'sdk',
+  },
+  {
+    path: '/markdowns/introduce',
+    basePath: '/markdown',
+    key: 'markdown',
   },
   {
     path: '/docs/playground/independent',
