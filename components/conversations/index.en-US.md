@@ -54,7 +54,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | group | Conversation type, linked to `ConversationsProps.groupable` | string | - | - |
 | icon | Conversation icon | React.ReactNode | - | - |
 | disabled | Whether to disable | boolean | - | - |
-| htmlAttrs | html native attributes(except onClick, direction) | Omit<React.HTMLAttributes<HTMLLIElement>, 'onClick'> | - | - |
+| htmlAttrs | html native attributes(except onClick) | Omit<React.HTMLAttributes<HTMLLIElement>, 'onClick'> | - | - |
 
 ### GroupableProps
 

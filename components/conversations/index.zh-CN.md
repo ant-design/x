@@ -55,7 +55,7 @@ demo:
 | group | 会话分组类型，与 `ConversationsProps.groupable` 联动 | string | - | - |
 | icon | 会话图标 | React.ReactNode | - | - |
 | disabled | 是否禁用 | boolean | - | - |
-| htmlAttrs | html 原生属性（除 onClick, direction 以外） | Omit<React.HTMLAttributes<HTMLLIElement>, 'onClick'> | - | - |
+| htmlAttrs | html 原生属性（除 onClick 以外） | Omit<React.HTMLAttributes<HTMLLIElement>, 'onClick'> | - | - |
 
 ### GroupableProps
 
