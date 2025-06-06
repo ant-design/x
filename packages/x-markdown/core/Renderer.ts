@@ -1,9 +1,11 @@
-import { createElement, ElementType, ReactElement, ReactNode } from 'react';
-import { Token, HeadingDepth } from '../interface';
+import { ElementType, ReactNode } from 'react';
+import { Token } from '../interface';
 import Parser from './Parser';
-import { jsx } from '@emotion/react';
-import { MarkedToken, Tokens } from 'marked';
+import { jsx, jsxs } from 'react/jsx-runtime';
+import { Tokens } from 'marked';
 import { unescape } from './helpers';
+
+type HeadingDepth = 1 | 2 | 3 | 4 | 5 | 6;
 
 class Renderer {
   parser!: Parser;
@@ -22,17 +24,23 @@ class Renderer {
     return elementName + '-' + elementCount;
   }
 
-  #render<T extends ElementType>(element: T, children: ReactNode = null, props = {}): ReactElement {
-    return createElement('');
+  #render<T extends ElementType>(
+    element: T,
+    children: ReactNode = null,
+    props: { key?: React.Key; [k: string]: unknown } = {},
+  ): ReactNode {
+    const renderFunc = Array.isArray(children) ? jsxs : jsx;
+    return renderFunc(element, { children, ...props }, props?.key || this.#getElementKey(element));
   }
 
-  hr(token: Token) {
+  hr(_token: Token) {
     return this.#render('hr');
   }
 
   heading(token: Token) {
     const children = token.tokens ? this.parser.parserInline(token.tokens) : null;
     const depth = token.depth as HeadingDepth;
+
     return this.#render(`h${depth}`, children);
   }
 
@@ -145,7 +153,7 @@ class Renderer {
     return this.#render('em', children);
   }
 
-  br(token: Token) {
+  br(_token: Token) {
     return this.#render('br');
   }
 

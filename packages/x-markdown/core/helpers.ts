@@ -1,17 +1,12 @@
-import {
-  MarkedOptions,
-  MaybePromise,
-  TokenizerAndRendererExtension,
-  TokenizerExtension,
-} from 'marked';
-import { MarkdownProps, RendererExtensionFunction } from '../interface';
-import { Renderer } from '.';
+import { MarkedOptions, MaybePromise, TokenizerAndRendererExtension } from 'marked';
+import { GenericRendererFunction, MarkdownProps, RendererObject } from '../interface';
+import Renderer from './Renderer';
 
 interface MarkdownXOptions extends MarkedOptions {
   XRenderer: Renderer;
 }
 
-const unEscapeReplacements = {
+const unEscapeReplacements: Record<string, string> = {
   '&amp;': '&',
   '&lt;': '<',
   '&gt;': '>',
@@ -27,13 +22,10 @@ export const unescape = (text: string) => {
     : text;
 };
 
-const overrideRenderer = (
-  renderer: Renderer,
-  customRenderer: RendererExtensionFunction,
-): Renderer => {
+const overrideRenderer = (renderer: Renderer, customRenderer: RendererObject): Renderer => {
   const renderer_: Renderer = Object.assign({}, renderer);
   for (const prop in customRenderer) {
-    if (!renderer_[prop]) {
+    if (!(prop in renderer_)) {
       throw new Error(`renderer '${prop}' does not exist`);
     }
     if (['parser'].includes(prop)) {
@@ -41,9 +33,10 @@ const overrideRenderer = (
       continue;
     }
     const rendererProp = prop as Exclude<keyof Renderer, 'parser'>;
-    const rendererFunc = customRenderer[rendererProp];
-    const prevRenderer = renderer_[rendererProp];
-    renderer_[rendererProp] = (...args: unknown[]) => {
+
+    const rendererFunc = customRenderer[rendererProp] as GenericRendererFunction;
+    const prevRenderer = renderer_[rendererProp] as GenericRendererFunction;
+    (renderer_[rendererProp] as GenericRendererFunction) = (...args: unknown[]) => {
       let ret = rendererFunc.apply(renderer_, args);
       if (ret === false) {
         ret = prevRenderer.apply(renderer_, args);

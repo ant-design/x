@@ -1,9 +1,7 @@
-import { RendererThis, TokenizerAndRendererExtension, Tokens } from 'marked';
-import { ReactNode } from 'react';
+import { TokenizerAndRendererExtension, Tokens } from 'marked';
+import { Renderer } from './core';
 
 export type Token = Tokens.Generic;
-
-export type HeadingDepth = 1 | 2 | 3 | 4 | 5 | 6;
 
 export interface BufferOption {
   /**
@@ -16,18 +14,22 @@ export interface BufferOption {
   interval?: number;
 }
 
-export type RendererExtensionFunction = (this: RendererThis, token: Token) => ReactNode | null;
+export type GenericRendererFunction = (...args: unknown[]) => React.ReactNode | false;
+
+export type RendererObject = {
+  [K in keyof Renderer]: GenericRendererFunction;
+};
 
 export interface plugin {
   gfm?: boolean;
   walkTokens?: (token: Token) => void | Promise<void>;
   extensions?: TokenizerAndRendererExtension[];
-  renderer?: RendererExtensionFunction;
+  renderer?: RendererObject;
 }
 
 export interface MarkdownProps {
   content?: string;
-  components?: RendererExtensionFunction;
+  components?: RendererObject;
   buffer?: boolean | BufferOption;
   rootClassName?: string;
   children?: string;

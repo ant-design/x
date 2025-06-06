@@ -38,7 +38,7 @@ class Parser {
           return this.renderer.hr(token);
         }
         case 'heading': {
-          return this.renderer.heading(token.depth);
+          return this.renderer.heading(token);
         }
         case 'code': {
           return this.renderer.code(token);

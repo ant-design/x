@@ -1,13 +1,27 @@
 {
   "name": "@ant-design/x-markdown",
   "version": "0.0.0",
-  "main": "index.js",
   "scripts": {
+    "build": "mako build --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "license": "MIT",
   "description": "placeholder for @ant-design/x-markdown",
   "dependencies": {
+    "@ant-design/fast-color": "^2.0.6",
+    "classnames": "^2.5.1",
     "marked": "^15.0.12"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "@umijs/mako": "^0.11.10",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "peerDependencies": {
+    "antd": "^5.20.3",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
   }
 }
