@@ -221,6 +221,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   };
 
   const onInternalCompositionEnd = () => {
+    // Safari 修复：由于事件执行顺序差异，Safari会在onInternalCompositionStart后立马执行此函数，需要在按键事件中重置组合状态
     if (isSafari) {
       return;
     }
@@ -246,7 +247,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
         }
         break;
     }
-
+    // Safari 修复：由于事件执行顺序差异，需要在按键事件中重置组合状态
     if (isSafari) {
       isCompositionRef.current = false;
     }
