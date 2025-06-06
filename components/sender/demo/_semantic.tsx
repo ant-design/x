@@ -49,6 +49,7 @@ const App: React.FC = () => {
       >
         <Sender
           prefix={<Button type="text" icon={<SmileOutlined />} />}
+          prefixNoFocus
           footer={() => (
             <Typography.Text type="secondary">
               Deep thinking can understand the intent behind.
