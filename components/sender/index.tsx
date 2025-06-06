@@ -4,6 +4,7 @@ import { useMergedState } from 'rc-util';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import getValue from 'rc-util/lib/utils/get';
 import React from 'react';
+import useIsSafari from '../../.dumi/hooks/useIsSafari';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
@@ -101,8 +102,6 @@ const sharedRenderComponents = {
   SpeechButton,
 };
 
-const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-
 const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   const {
     prefixCls: customizePrefixCls,
@@ -137,6 +136,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   // ============================= MISC =============================
   const { direction, getPrefixCls } = useXProviderContext();
   const prefixCls = getPrefixCls('sender', customizePrefixCls);
+  const isSafari = useIsSafari();
 
   // ============================= Refs =============================
   const containerRef = React.useRef<HTMLDivElement>(null);
