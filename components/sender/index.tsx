@@ -76,6 +76,7 @@ export interface SenderProps
   actions?: React.ReactNode | ActionsRender;
   allowSpeech?: AllowSpeech;
   prefix?: React.ReactNode;
+  prefixNoFocus?: boolean;
   footer?: React.ReactNode | FooterRender;
   header?: React.ReactNode;
   autoSize?: boolean | { minRows?: number; maxRows?: number };
@@ -124,6 +125,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     disabled,
     allowSpeech,
     prefix,
+    prefixNoFocus,
     footer,
     header,
     onPaste,
@@ -264,6 +266,11 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     // We call `preventDefault` to prevent this behavior
     if (e.target !== containerRef.current?.querySelector(`.${inputCls}`)) {
       e.preventDefault();
+    }
+
+    if (prefixNoFocus && (e.target as HTMLElement)?.closest(`.${prefixCls}-prefix`)) {
+      e.preventDefault();
+      return;
     }
 
     inputRef.current?.focus();
