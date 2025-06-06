@@ -101,6 +101,8 @@ const sharedRenderComponents = {
   SpeechButton,
 };
 
+const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
 const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   const {
     prefixCls: customizePrefixCls,
@@ -219,6 +221,9 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   };
 
   const onInternalCompositionEnd = () => {
+    if (isSafari) {
+      return;
+    }
     isCompositionRef.current = false;
   };
 
@@ -240,6 +245,10 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
           triggerSend();
         }
         break;
+    }
+
+    if (isSafari) {
+      isCompositionRef.current = false;
     }
 
     onKeyPress?.(e);
