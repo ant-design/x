@@ -4,6 +4,7 @@ import { useMergedState } from 'rc-util';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import getValue from 'rc-util/lib/utils/get';
 import React from 'react';
+import useIsSafari from '../../.dumi/hooks/useIsSafari';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
@@ -135,6 +136,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   // ============================= MISC =============================
   const { direction, getPrefixCls } = useXProviderContext();
   const prefixCls = getPrefixCls('sender', customizePrefixCls);
+  const isSafari = useIsSafari();
 
   // ============================= Refs =============================
   const containerRef = React.useRef<HTMLDivElement>(null);
@@ -219,6 +221,10 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   };
 
   const onInternalCompositionEnd = () => {
+    // Safari 修复：由于事件执行顺序差异，Safari会在onInternalCompositionStart后立马执行此函数，需要在按键事件中重置组合状态
+    if (isSafari) {
+      return;
+    }
     isCompositionRef.current = false;
   };
 
@@ -240,6 +246,10 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
           triggerSend();
         }
         break;
+    }
+    // Safari 修复：由于事件执行顺序差异，需要在按键事件中重置组合状态
+    if (isSafari) {
+      isCompositionRef.current = false;
     }
 
     onKeyPress?.(e);
