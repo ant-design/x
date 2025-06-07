@@ -159,7 +159,7 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
       {groupList.map((groupInfo, groupIndex) => {
         const convItems = groupInfo.data.map((convInfo: Conversation, convIndex: number) => (
           <ConversationsItem
-            {...convInfo.htmlAttrs}
+            {...convInfo}
             key={convInfo.key || `key-${convIndex}`}
             info={convInfo}
             prefixCls={prefixCls}
@@ -167,9 +167,9 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
             className={classnames(
               classNames.item,
               contextConfig.classNames.item,
-              convInfo.htmlAttrs?.className,
+              convInfo.className,
             )}
-            style={{ ...contextConfig.styles.item, ...styles.item, ...convInfo.htmlAttrs?.style }}
+            style={{ ...contextConfig.styles.item, ...styles.item, ...convInfo.style }}
             menu={typeof menu === 'function' ? menu(convInfo) : menu}
             active={mergedActiveKey === convInfo.key}
             onClick={onConversationItemClick}
