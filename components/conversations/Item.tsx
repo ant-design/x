@@ -74,7 +74,12 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
 
   // ============================ Render ============================
   return (
-    <li {...domProps} className={mergedCls} onClick={onInternalClick} title={`${info.label}`}>
+    <li
+      title={typeof info.label === 'object' ? undefined : `${info.label}`}
+      {...domProps}
+      className={mergedCls}
+      onClick={onInternalClick}
+    >
       {info.icon && <div className={`${prefixCls}-icon`}>{info.icon}</div>}
       <Typography.Text className={`${prefixCls}-label`}>{info.label}</Typography.Text>
       {!disabled && menu && (
