@@ -1,7 +1,7 @@
 const useIsSafari = (): boolean => {
   const ua = navigator.userAgent;
 
-  // 基于 UA 判断（去除 Chrome、CriOS、FxiOS 等）
+  // Determine based on UA (excluding Chrome, CriOS, FxiOS, etc.)
   const isSafariUA =
     ua.includes('Safari') &&
     !ua.includes('Chrome') &&
