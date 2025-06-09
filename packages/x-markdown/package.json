@@ -10,14 +10,19 @@
   "dependencies": {
     "@ant-design/fast-color": "^2.0.6",
     "classnames": "^2.5.1",
-    "marked": "^15.0.12"
+    "isomorphic-dompurify": "^2.25.0",
+    "marked": "^15.0.12",
+    "marked-footnote": "^1.2.4"
   },
   "devDependencies": {
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
+    "@types/react-syntax-highlighter": "^15.5.13",
     "@umijs/mako": "^0.11.10",
+    "katex": "^0.16.22",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-syntax-highlighter": "^15.6.1"
   },
   "peerDependencies": {
     "antd": "^5.20.3",

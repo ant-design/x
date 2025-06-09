@@ -1,9 +1,9 @@
-import { TokenizerAndRendererExtension, Tokens } from 'marked';
+import { MarkedExtension, Tokens } from 'marked';
 import { Renderer } from './core';
 
 export type Token = Tokens.Generic;
 
-export interface BufferOption {
+export interface SteamingOption {
   /**
    * @default 1
    */
@@ -20,17 +20,14 @@ export type RendererObject = {
   [K in keyof Renderer]: GenericRendererFunction;
 };
 
-export interface plugin {
-  gfm?: boolean;
-  walkTokens?: (token: Token) => void | Promise<void>;
-  extensions?: TokenizerAndRendererExtension[];
-  renderer?: RendererObject;
+export interface plugin extends Omit<MarkedExtension, 'renderer'> {
+  renderer?: any;
 }
 
 export interface MarkdownProps {
   content?: string;
   components?: RendererObject;
-  buffer?: boolean | BufferOption;
+  streaming?: boolean | SteamingOption;
   rootClassName?: string;
   children?: string;
   prefixCls?: string;

@@ -23,9 +23,8 @@ export const unescape = (text: string) => {
 };
 
 const overrideRenderer = (renderer: Renderer, customRenderer: RendererObject): Renderer => {
-  const renderer_: Renderer = Object.assign({}, renderer);
   for (const prop in customRenderer) {
-    if (!(prop in renderer_)) {
+    if (!(prop in renderer)) {
       throw new Error(`renderer '${prop}' does not exist`);
     }
     if (['parser'].includes(prop)) {
@@ -35,16 +34,16 @@ const overrideRenderer = (renderer: Renderer, customRenderer: RendererObject): R
     const rendererProp = prop as Exclude<keyof Renderer, 'parser'>;
 
     const rendererFunc = customRenderer[rendererProp] as GenericRendererFunction;
-    const prevRenderer = renderer_[rendererProp] as GenericRendererFunction;
-    (renderer_[rendererProp] as GenericRendererFunction) = (...args: unknown[]) => {
-      let ret = rendererFunc.apply(renderer_, args);
+    const prevRenderer = renderer[rendererProp] as GenericRendererFunction;
+    (renderer[rendererProp] as GenericRendererFunction) = (...args: unknown[]) => {
+      let ret = rendererFunc.apply(renderer, args);
       if (ret === false) {
-        ret = prevRenderer.apply(renderer_, args);
+        ret = prevRenderer.apply(renderer, args);
       }
       return ret || '';
     };
   }
-  return renderer_;
+  return renderer;
 };
 
 const processExtensions = (exts: TokenizerAndRendererExtension[]) => {

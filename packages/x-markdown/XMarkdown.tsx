@@ -1,7 +1,7 @@
 import { MarkdownProps } from './interface';
 import React from 'react';
 import useBuffer from './hooks/useBuffer';
-import { Lexer, Parser, processOptions, Renderer } from './core/index';
+import { Lexer, Parser, processOptions } from './core/index';
 import { useXProviderContext } from '../x/components/x-provider';
 import classnames from 'classnames';
 import { walkTokens } from 'marked';
@@ -13,7 +13,7 @@ const Markdown: React.FC<MarkdownProps> = (props) => {
     plugins,
     components,
     content,
-    buffer,
+    streaming,
     children,
   } = props;
 
@@ -25,15 +25,13 @@ const Markdown: React.FC<MarkdownProps> = (props) => {
   const mergedCls = classnames(prefixCls, rootClassName);
 
   // ============================ Buffer ============================
-  const displayContent = useBuffer(content || children || '', buffer);
+  const displayContent = useBuffer(content || children || '', streaming);
 
   // ============================ Render ============================
   const options = processOptions(plugins, components);
   const lexer = new Lexer(options);
   const parser = new Parser(options);
   const tokens = lexer.lex(displayContent);
-
-  console.log('tokens', tokens);
 
   if (options.walkTokens) {
     walkTokens(tokens, options.walkTokens);

@@ -1,4 +1,5 @@
 import { ElementType, ReactNode } from 'react';
+import DOMPurify from 'isomorphic-dompurify';
 import { Token } from '../interface';
 import Parser from './Parser';
 import { jsx, jsxs } from 'react/jsx-runtime';
@@ -38,7 +39,7 @@ class Renderer {
   }
 
   heading(token: Token) {
-    const children = token.tokens ? this.parser.parserInline(token.tokens) : null;
+    const children = token.tokens ? this.parser.parseInline(token.tokens) : null;
     const depth = token.depth as HeadingDepth;
 
     return this.#render(`h${depth}`, children);
@@ -54,7 +55,7 @@ class Renderer {
   }
 
   tableCell(token: Tokens.TableCell) {
-    const children = this.parser?.parserInline(token.tokens);
+    const children = this.parser?.parseInline(token.tokens);
     const type = token?.header ? 'th' : 'td';
     return this.#render(type, children, { align: token?.align });
   }
@@ -118,23 +119,25 @@ class Renderer {
   }
 
   html(token: Token) {
-    // TODO: html
-    return token.raw;
+    // TODO: any better way?
+    return this.#render('span', null, {
+      dangerouslySetInnerHTML: { __html: DOMPurify.sanitize(token.raw) },
+    });
   }
 
   paragraph(token: Token) {
-    const children = this.parser.parserInline(token?.tokens);
+    const children = this.parser.parseInline(token?.tokens);
     return this.#render('p', children);
   }
 
   text(token: Token) {
     const { text, tokens } = token;
-    return tokens ? this.parser.parserInline(tokens) : unescape(text);
+    return tokens ? this.parser.parseInline(tokens) : unescape(text);
   }
 
   link(token: Token) {
     const { href, title, tokens } = token as Tokens.Link;
-    const children = this.parser.parserInline(tokens);
+    const children = this.parser.parseInline(tokens);
     return this.#render('a', children, { href, title: title ? unescape(title) : '' });
   }
 
@@ -144,12 +147,12 @@ class Renderer {
   }
 
   strong(token: Token) {
-    const children = this.parser.parserInline(token.tokens);
+    const children = this.parser.parseInline(token.tokens);
     return this.#render('strong', children);
   }
 
   em(token: Token) {
-    const children = this.parser.parserInline(token.tokens);
+    const children = this.parser.parseInline(token.tokens);
     return this.#render('em', children);
   }
 
@@ -158,7 +161,7 @@ class Renderer {
   }
 
   del(token: Token) {
-    const children = this.parser.parserInline(token.tokens);
+    const children = this.parser.parseInline(token.tokens);
     return this.#render('del', children);
   }
 }
