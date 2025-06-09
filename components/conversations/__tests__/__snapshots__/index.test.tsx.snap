@@ -25,7 +25,6 @@ exports[`Conversations Component Conversations component work 1`] = `
   </li>
   <li
     class="ant-conversations-item"
-    title="[object Object]"
   >
     <span
       class="ant-typography ant-conversations-label"
@@ -142,7 +141,6 @@ exports[`Conversations Component rtl render component should be rendered correct
     >
       <li
         class="ant-conversations-item"
-        title="[object Object]"
       >
         <span
           class="ant-typography ant-typography-rtl ant-conversations-label"
