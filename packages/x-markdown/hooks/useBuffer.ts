@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { MarkdownProps } from '../interface';
 
-const useBuffer = (input: string, typing: MarkdownProps['buffer']) => {
+const useBuffer = (input: string, typing: MarkdownProps['streaming']) => {
   const [displayContent, setDisplayContent] = useState('');
   const currentIndexRef = useRef(0);
   const timeoutIdRef = useRef<NodeJS.Timeout | null>(null);
