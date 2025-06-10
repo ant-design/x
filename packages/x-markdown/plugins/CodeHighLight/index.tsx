@@ -1,12 +1,8 @@
 import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { Token } from '../../interface';
+import { plugin, Token } from '../../interface';
 
-type Extension = {
-  renderer: any;
-};
-
-const CodeHighLight = (): Extension => {
+const CodeHighLight = (): plugin => {
   return {
     renderer: {
       code(token: Token) {

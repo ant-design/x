@@ -1,5 +1,3 @@
-// Based on https://github.com/UziTech/marked-katex-extension/blob/main/src/index.js
-
 import katex from 'katex';
 
 const inlineRuleNonStandard = /^(?:\${1,2}([^$\n]+?)\${1,2}|\\\((.+?)\\\))/;
@@ -7,7 +5,7 @@ const blockRule = /^(\${1,2})\n([\s\S]+?)\n\1(?:\n|$)|^\\\[((?:\\.|[^\\])+?)\\\]
 
 type IOptions = {
   nonStandard?: boolean;
-  [key: string]: any;
+  [key: string]: unknown;
 };
 
 type IToken = {
