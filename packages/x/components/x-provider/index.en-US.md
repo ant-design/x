@@ -34,7 +34,9 @@ If you are already using `ConfigProvider` from `antd`, please make the following
 ## Examples
 
 <!-- prettier-ignore -->
-<code src="./demo/use.tsx" background="grey">Use</code>
+<code src="./demo/direction.tsx" background="grey">Direction</code>
+<code src="./demo/theme.tsx" background="grey">Theme</code>
+<code src="./demo/shortcutKeys.tsx" background="grey">Shortcut Key</code>
 
 ## API
 
@@ -42,12 +44,27 @@ If you are already using `ConfigProvider` from `antd`, please make the following
 
 ### Component Config
 
+<!-- prettier-ignore -->
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| bubble | Global configuration for the Bubble component | 'classNames' \| 'styles' \| 'className' \| 'style' | - |  |
-| conversations | Global configuration for the Conversations component | 'classNames' \| 'styles' \| 'className' \| 'style' | - |  |
-| prompts | Global configuration for the Prompts component | 'classNames' \| 'styles' \| 'className' \| 'style' | - |  |
-| sender | Global configuration for the Sender component | 'classNames' \| 'styles' \| 'className' \| 'style' | - |  |
-| suggestion | Global configuration for the Suggestion component | 'className' \| 'style' | - |  |
-| thoughtChain | Global configuration for the ThoughtChain component | 'classNames' \| 'styles' \| 'className' \| 'style' | - |  |
-| actions | Global configuration for the Actions component | 'className' \| 'style' | - |  |
+| bubble | Global configuration for the Bubble component | {style: React.CSSProperties; styles: Record<string, React.CSSProperties>;className: string; classNames: Record<string, string>;} | - | - |
+| conversations | Global configuration for the Conversations component | {style: React.CSSProperties; styles: Record<string, React.CSSProperties>;className: string; classNames: Record<string, string>;shortcutKeys: {items?: ShortcutKeys<'number'> \| ShortcutKeys<number>[]}}  | - | - |
+| prompts | Global configuration for the Prompts component | {style: React.CSSProperties; styles: Record<string, React.CSSProperties>;className: string; classNames: Record<string, string>;} | - | - |
+| sender | Global configuration for the Sender component | {style: React.CSSProperties; styles: Record<string, React.CSSProperties>;className: string; classNames: Record<string, string>;} | - | - |
+| suggestion | Global configuration for the Suggestion component | {style: React.CSSProperties; className: string;} | - |  |
+| thoughtChain | Global configuration for the ThoughtChain component | {style: React.CSSProperties; styles: Record<string, React.CSSProperties>;className: string; classNames: Record<string, string>;}| - |  |
+| actions | Global configuration for the Actions component | {style: React.CSSProperties; className: string;}| - |  |
+
+#### ShortcutKeys
+
+```ts
+type SignKeysType = {
+  Ctrl: keyof KeyboardEvent;
+  Alt: keyof KeyboardEvent;
+  Meta: keyof KeyboardEvent;
+  Shift: keyof KeyboardEvent;
+};
+type ShortcutKeys<CustomKey = number | 'number'> =
+  | [keyof SignKeysType, keyof SignKeysType, CustomKey]
+  | [keyof SignKeysType, CustomKey];
+```

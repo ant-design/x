@@ -4,6 +4,7 @@ import rtlTest from '../../../tests/shared/rtlTest';
 import { fireEvent, render } from '../../../tests/utils';
 import Conversations from '../index';
 import type { Conversation } from '../index';
+import KeyCode from 'rc-util/lib/KeyCode';
 
 const items: Conversation[] = [
   {
@@ -54,16 +55,23 @@ const menu = jest.fn().mockReturnValue({
 });
 
 const menuWithTriggerOfFunction = jest.fn().mockReturnValue({
-  trigger: <div onClick={() => {}}>menuTriggerForFunctionButton</div>,
+  trigger: <div onClick={() => { }}>menuTriggerForFunctionButton</div>,
 });
 
 const menuWithTriggerOfReactNode = jest.fn().mockReturnValue({
-  trigger: <div onClick={() => {}}>menuTriggerForReactNodeButton</div>,
+  trigger: <div onClick={() => { }}>menuTriggerForReactNodeButton</div>,
 });
+
+let cleanUp: () => void;
 
 describe('Conversations Component', () => {
   mountTest(() => <Conversations />);
-
+  beforeEach(() => {
+    cleanUp = (jest.spyOn(console, 'error').mockImplementation(() => { })).mockRestore;
+  });
+  afterEach(() => {
+    cleanUp() // 恢复 console.log 的原始实现
+  });
   rtlTest(() => <Conversations items={items} groupable menu={menu} />);
 
   beforeAll(() => {
@@ -162,5 +170,47 @@ describe('Conversations Component', () => {
   it('should not group items when groupable is false', () => {
     const { queryByText } = render(<Conversations items={items} groupable={false} />);
     expect(queryByText('pinned')).not.toBeInTheDocument();
+  });
+  describe('with shortcut keys', () => {
+    it('shortcut keys of items width "number"', async () => {
+      const onActiveChange = jest.fn();
+      const { getByText, container } = render(
+        <Conversations items={items} shortcutKeys={{
+          items: ['Alt', 'number']
+        }} menu={menu} onActiveChange={onActiveChange} defaultActiveKey="demo1" />,
+      );
+
+      fireEvent.keyDown(container, {
+        key: "™", keyCode: 51, code: "Digit3", altKey: true
+      });
+      expect((await getByText('In Docker, use 🐑 Ollama and initialize')).parentElement).toHaveClass("ant-conversations-item-active");
+      expect(onActiveChange).toHaveBeenCalledWith('demo4');
+
+    });
+    it('shortcut keys of items width number', async () => {
+      const onActiveChange = jest.fn();
+      const { getByText, container } = render(
+        <Conversations items={items}
+          shortcutKeys={{
+            items: [['Alt', 49], ['Alt', 50], ['Alt', 51]]
+          }}
+          menu={menu} onActiveChange={onActiveChange} defaultActiveKey="demo1" />,
+      );
+      fireEvent.keyDown(container, {
+        key: "™", keyCode: 51, code: "Digit3", altKey: true
+      });
+      expect((await getByText('In Docker, use 🐑 Ollama and initialize')).parentElement).toHaveClass("ant-conversations-item-active");
+      expect(onActiveChange).toHaveBeenCalledWith('demo4');
+
+
+    });
+    it('shortcut keys of items width error number', async () => {
+      render(
+        <Conversations items={items} shortcutKeys={{
+          items: [['Alt', KeyCode.ONE], ['Alt', KeyCode.ONE]]
+        }} menu={menu} defaultActiveKey="demo1" />,
+      );
+      expect(console.error).toHaveBeenCalledWith('Warning: [antd: conversations] Same shortcutKey Alt,49');
+    });
   });
 });

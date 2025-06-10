@@ -23,6 +23,7 @@ demo:
 <code src="./demo/with-menu.tsx" background="grey">Operations</code>
 <code src="./demo/menu-trigger.tsx" background="grey">Custom Operations</code>
 <code src="./demo/controlled-mode.tsx" background="grey">Controlled Mode</code>
+<code src="./demo/shortcutKeys.tsx" background="grey">Shortcut key Operation</code>
 <code src="./demo/group.tsx" background="grey">Group</code>
 <code src="./demo/group-sort.tsx" background="grey">Group Sort</code>
 <code src="./demo/infinite-load.tsx" background="grey">Scrolling loaded</code>

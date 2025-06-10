@@ -26,13 +26,13 @@ _site
 _data
 dist
 report.html
-/lib
-/es
+lib
+es
 /locale
 elasticsearch-*
 config/base.yaml
 /.vscode/
-/coverage
+coverage
 yarn.lock
 package-lock.json
 bun.lock

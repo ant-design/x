@@ -1046,6 +1046,175 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
 
 exports[`renders components/conversations/demo/menu-trigger.tsx extend context correctly 2`] = `[]`;
 
+exports[`renders components/conversations/demo/shortcutKeys.tsx extend context correctly 1`] = `
+Array [
+  <div
+    style="margin-bottom: 10px;"
+  >
+    You can switch sessions using the shortcut key: 
+    <span
+      class="ant-tag"
+    >
+      Alt/⌥
+    </span>
+     + 
+    <span
+      class="ant-tag"
+    >
+      number
+    </span>
+  </div>,
+  <div
+    class="ant-card ant-card-bordered"
+  >
+    <div
+      class="ant-card-body"
+    >
+      <ul
+        class="ant-conversations"
+        style="width: 200px;"
+      >
+        <li
+          class="ant-conversations-item ant-conversations-item-active"
+          title="Help Me Write"
+        >
+          <div
+            class="ant-conversations-icon"
+          >
+            <span
+              aria-label="signature"
+              class="anticon anticon-signature"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="signature"
+                fill="currentColor"
+                fill-rule="evenodd"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M145.71 752c2 0 4-.2 5.98-.5L319.9 722c1.99-.4 3.88-1.3 5.28-2.8l423.91-423.87a9.93 9.93 0 000-14.06L582.88 114.9C581 113 578.5 112 575.82 112s-5.18 1-7.08 2.9L144.82 538.76c-1.5 1.5-2.4 3.29-2.8 5.28l-29.5 168.17a33.59 33.59 0 009.37 29.81c6.58 6.48 14.95 9.97 23.82 9.97m51.75-85.43l15.65-88.92 362.7-362.67 73.28 73.27-362.7 362.67zm401.37-98.64c27.69-14.81 57.29-20.85 85.54-15.52 32.37 6.1 59.72 26.53 78.96 59.4 29.97 51.22 21.64 102.34-18.48 144.26-17.58 18.36-41.07 35.01-70 50.3l-.3.15.86.26a147.88 147.88 0 0041.54 6.2l1.17.01c61.07 0 100.98-22.1 125.28-67.87a36 36 0 0163.6 33.76C869.7 849.1 804.9 885 718.12 885c-47.69 0-91.94-15.03-128.19-41.36l-1.05-.78-1.36.47c-46.18 16-98.74 29.95-155.37 41.94l-2.24.47a1931.1 1931.1 0 01-139.16 23.96 36 36 0 11-9.5-71.38 1860.1 1860.1 0 00133.84-23.04c42.8-9 83-19.13 119.35-30.34l.24-.08-.44-.69c-16.46-26.45-25.86-55.43-26.14-83.24v-1.3c0-49.9 39.55-104.32 90.73-131.7M671 623.17c-10.74-2.03-24.1.7-38.22 8.26-29.55 15.8-52.7 47.64-52.7 68.2 0 18.2 8.9 40.14 24.71 59.73l.24.3 1.22-.52c39.17-16.58 68.49-34.27 85.93-52.18l.64-.67c18.74-19.57 21.39-35.84 8.36-58.1-9.06-15.47-19.03-22.92-30.18-25.02"
+                />
+              </svg>
+            </span>
+          </div>
+          <span
+            class="ant-typography ant-conversations-label"
+          >
+            Help Me Write
+          </span>
+        </li>
+        <li
+          class="ant-conversations-item"
+          title="AI Coding"
+        >
+          <div
+            class="ant-conversations-icon"
+          >
+            <span
+              aria-label="code"
+              class="anticon anticon-code"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="code"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M516 673c0 4.4 3.4 8 7.5 8h185c4.1 0 7.5-3.6 7.5-8v-48c0-4.4-3.4-8-7.5-8h-185c-4.1 0-7.5 3.6-7.5 8v48zm-194.9 6.1l192-161c3.8-3.2 3.8-9.1 0-12.3l-192-160.9A7.95 7.95 0 00308 351v62.7c0 2.4 1 4.6 2.9 6.1L420.7 512l-109.8 92.2a8.1 8.1 0 00-2.9 6.1V673c0 6.8 7.9 10.5 13.1 6.1zM880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 728H184V184h656v656z"
+                />
+              </svg>
+            </span>
+          </div>
+          <span
+            class="ant-typography ant-conversations-label"
+          >
+            AI Coding
+          </span>
+        </li>
+        <li
+          class="ant-conversations-item"
+          title="Create Image"
+        >
+          <div
+            class="ant-conversations-icon"
+          >
+            <span
+              aria-label="file-image"
+              class="anticon anticon-file-image"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="file-image"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M553.1 509.1l-77.8 99.2-41.1-52.4a8 8 0 00-12.6 0l-99.8 127.2a7.98 7.98 0 006.3 12.9H696c6.7 0 10.4-7.7 6.3-12.9l-136.5-174a8.1 8.1 0 00-12.7 0zM360 442a40 40 0 1080 0 40 40 0 10-80 0zm494.6-153.4L639.4 73.4c-6-6-14.1-9.4-22.6-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.7-9.4-22.7zM790.2 326H602V137.8L790.2 326zm1.8 562H232V136h302v216a42 42 0 0042 42h216v494z"
+                />
+              </svg>
+            </span>
+          </div>
+          <span
+            class="ant-typography ant-conversations-label"
+          >
+            Create Image
+          </span>
+        </li>
+        <li
+          class="ant-conversations-item"
+          title="Deep Search"
+        >
+          <div
+            class="ant-conversations-icon"
+          >
+            <span
+              aria-label="file-search"
+              class="anticon anticon-file-search"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="file-search"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M688 312v-48c0-4.4-3.6-8-8-8H296c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h384c4.4 0 8-3.6 8-8zm-392 88c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H296zm144 452H208V148h560v344c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V108c0-17.7-14.3-32-32-32H168c-17.7 0-32 14.3-32 32v784c0 17.7 14.3 32 32 32h272c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm445.7 51.5l-93.3-93.3C814.7 780.7 828 743.9 828 704c0-97.2-78.8-176-176-176s-176 78.8-176 176 78.8 176 176 176c35.8 0 69-10.7 96.8-29l94.7 94.7c1.6 1.6 3.6 2.3 5.6 2.3s4.1-.8 5.6-2.3l31-31a7.9 7.9 0 000-11.2zM652 816c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"
+                />
+              </svg>
+            </span>
+          </div>
+          <span
+            class="ant-typography ant-conversations-label"
+          >
+            Deep Search
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>,
+]
+`;
+
+exports[`renders components/conversations/demo/shortcutKeys.tsx extend context correctly 2`] = `[]`;
+
 exports[`renders components/conversations/demo/with-menu.tsx extend context correctly 1`] = `
 <div
   class="ant-app"

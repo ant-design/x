@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { AnyObject } from '../_util/type';
+import type { AnyObject, ShortcutKeys } from '../_util/type';
 import type { ActionsProps } from '../actions';
 import { AttachmentsProps } from '../attachments';
 import type { BubbleProps } from '../bubble';
@@ -10,31 +10,32 @@ import type { SenderProps } from '../sender';
 import type { SuggestionProps } from '../suggestion';
 import type { ThoughtChainProps } from '../thought-chain';
 import type { WelcomeProps } from '../welcome';
-
-export interface XComponentStyleConfig {
-  classNames: Record<string, string>;
+interface BaseComponentConfig {
+  style: React.CSSProperties;
   styles: Record<string, React.CSSProperties>;
   className: string;
-  style: React.CSSProperties;
+  classNames: Record<string, string>;
+}
+export interface XComponentConfig extends BaseComponentConfig {
+  shortcutKeys: Record<string, ShortcutKeys>,
 }
 
-type DefaultPickType = keyof XComponentStyleConfig;
 
-type ComponentStyleConfig<
+type ComponentConfig<
   CompProps extends AnyObject,
-  PickType extends keyof CompProps = DefaultPickType,
-> = Pick<CompProps, PickType | DefaultPickType>;
+  PickType extends keyof CompProps = keyof BaseComponentConfig,
+> = Pick<CompProps, PickType>;
 
 export interface XComponentsConfig {
-  bubble?: ComponentStyleConfig<BubbleProps>;
-  conversations?: ComponentStyleConfig<ConversationsProps>;
-  prompts?: ComponentStyleConfig<PromptsProps>;
-  sender?: ComponentStyleConfig<SenderProps>;
-  suggestion?: ComponentStyleConfig<SuggestionProps>;
-  thoughtChain?: ComponentStyleConfig<ThoughtChainProps>;
-  attachments?: ComponentStyleConfig<AttachmentsProps>;
-  welcome?: ComponentStyleConfig<WelcomeProps>;
-  actions?: ComponentStyleConfig<ActionsProps>;
+  bubble?: ComponentConfig<BubbleProps>;
+  conversations?: ComponentConfig<ConversationsProps, keyof XComponentConfig>;
+  prompts?: ComponentConfig<PromptsProps>;
+  sender?: ComponentConfig<SenderProps>;
+  suggestion?: ComponentConfig<SuggestionProps>;
+  thoughtChain?: ComponentConfig<ThoughtChainProps>;
+  attachments?: ComponentConfig<AttachmentsProps>;
+  welcome?: ComponentConfig<WelcomeProps>;
+  actions?: ComponentConfig<ActionsProps>;
 }
 
 export interface XProviderProps extends XComponentsConfig {

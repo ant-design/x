@@ -35,7 +35,9 @@ demo:
 ## 代码演示
 
 <!-- prettier-ignore -->
-<code src="./demo/use.tsx" background="grey">使用</code>
+<code src="./demo/direction.tsx" background="grey">方向</code>
+<code src="./demo/theme.tsx" background="grey">主题</code>
+<code src="./demo/shortcutKeys.tsx" background="grey">快捷键</code>
 
 ## API
 
@@ -43,12 +45,27 @@ demo:
 
 ### 组件配置
 
+<!-- prettier-ignore -->
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| bubble | 气泡组件的全局配置 | 'classNames' \| 'styles' \| 'className' \| 'style' | - |  |
-| conversations | 会话组件的全局配置 | 'classNames' \| 'styles' \| 'className' \| 'style' | - |  |
-| prompts | 提示集组件的全局配置 | 'classNames' \| 'styles' \| 'className' \| 'style' | - |  |
-| sender | 输入框组件的全局配置 | 'classNames' \| 'styles' \| 'className' \| 'style' | - |  |
-| suggestion | 建议组件的全局配置 | 'className' \| 'style' | - |  |
-| thoughtChain | 思维链组件的全局配置 | 'classNames' \| 'styles' \| 'className' \| 'style' | - |  |
-| actions | 操作列表组件的全局配置 | 'className' \| 'style' | - |  |
+| bubble | 气泡组件的全局配置 |{style: React.CSSProperties; styles: Record<string, React.CSSProperties>;className: string; classNames: Record<string, string>;}| - | - |
+| conversations | 会话组件的全局配置 | {style: React.CSSProperties; styles: Record<string, React.CSSProperties>;className: string; classNames: Record<string, string>;shortcutKeys: {items?: ShortcutKeys<'number'> \| ShortcutKeys<number>[]}} | - | - |
+| prompts | 提示集组件的全局配置 | {style: React.CSSProperties; styles: Record<string, React.CSSProperties>;className: string; classNames: Record<string, string>;} | - | - |
+| sender | 输入框组件的全局配置 | {style: React.CSSProperties; styles: Record<string, React.CSSProperties>;className: string; classNames: Record<string, string>;} | - | - |
+| suggestion | 建议组件的全局配置 |{style: React.CSSProperties; className: string;} | - |  |
+| thoughtChain | 思维链组件的全局配置 | {style: React.CSSProperties; styles: Record<string, React.CSSProperties>;className: string; classNames: Record<string, string>;} | - | - |
+| actions | 操作列表组件的全局配置 | {style: React.CSSProperties; className: string;} | - | - |
+
+#### ShortcutKeys
+
+```ts
+type SignKeysType = {
+  Ctrl: keyof KeyboardEvent;
+  Alt: keyof KeyboardEvent;
+  Meta: keyof KeyboardEvent;
+  Shift: keyof KeyboardEvent;
+};
+type ShortcutKeys<CustomKey = number | 'number'> =
+  | [keyof SignKeysType, keyof SignKeysType, CustomKey]
+  | [keyof SignKeysType, CustomKey];
+```
