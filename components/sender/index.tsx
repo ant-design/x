@@ -4,7 +4,6 @@ import { useMergedState } from 'rc-util';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import getValue from 'rc-util/lib/utils/get';
 import React from 'react';
-import useIsSafari from '../../.dumi/hooks/useIsSafari';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
@@ -136,7 +135,6 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   // ============================= MISC =============================
   const { direction, getPrefixCls } = useXProviderContext();
   const prefixCls = getPrefixCls('sender', customizePrefixCls);
-  const isSafari = useIsSafari();
 
   // ============================= Refs =============================
   const containerRef = React.useRef<HTMLDivElement>(null);
@@ -215,22 +213,44 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
 
   // ============================ Submit ============================
   const isCompositionRef = React.useRef(false);
+  const isCompositionEndRef = React.useRef(false);
+  const pendingKeyDownRef = React.useRef<React.KeyboardEvent<HTMLElement> | null>(null);
 
   const onInternalCompositionStart = () => {
     isCompositionRef.current = true;
   };
 
   const onInternalCompositionEnd = () => {
-    // Safari fix: Due to event execution order differences
-    // Safari executes this function immediately after onInternalCompositionStart, requiring composition state reset in key events
-    if (isSafari) {
-      return;
+    if (isCompositionRef.current) {
+      isCompositionEndRef.current = true;
+      isCompositionRef.current = false;
     }
-    isCompositionRef.current = false;
+    // After processing the input Chinese, use CapsLock
+    if (pendingKeyDownRef.current?.key === 'CapsLock') {
+      isCompositionEndRef.current = false;
+    }
   };
 
   const onInternalKeyPress: TextareaProps['onKeyPress'] = (e) => {
-    const canSubmit = e.key === 'Enter' && !isCompositionRef.current;
+    if (isCompositionRef.current || isCompositionEndRef.current) {
+      // Parameter isCompositionRef.current is the event execution: onInternalCompositionStart -> onInternalKeyPress -> onInternalCompositionEnd
+      // Parameter isCompositionEndRef.current is the event execution: onInternalCompositionStart -> onInternalCompositionEnd -> onInternalKeyPress
+      handleActualKeyPress(e, false);
+      isCompositionRef.current = false;
+      if (isCompositionEndRef.current) {
+        isCompositionEndRef.current = false;
+        pendingKeyDownRef.current = null;
+      }
+    } else {
+      handleActualKeyPress(e, true);
+    }
+  };
+
+  const handleActualKeyPress = (
+    e: React.KeyboardEvent<HTMLTextAreaElement>,
+    isCanSubmit: boolean,
+  ) => {
+    const canSubmit = e.key === 'Enter' && isCanSubmit;
 
     // Check for `submitType` to submit
     switch (submitType) {
@@ -248,12 +268,18 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
         }
         break;
     }
-    // Safari fix: Due to event execution order differences, composition state needs to be reset in key events
-    if (isSafari) {
-      isCompositionRef.current = false;
-    }
 
     onKeyPress?.(e);
+  };
+
+  const onInternalKeyDown: React.KeyboardEventHandler<HTMLElement> = (e) => {
+    if (e.key !== 'Unidentified') {
+      // Record e in the keydown event
+      pendingKeyDownRef.current = e;
+    }
+    if (onKeyDown) {
+      onKeyDown(e);
+    }
   };
 
   // ============================ Paste =============================
@@ -357,7 +383,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
             onPressEnter={onInternalKeyPress}
             onCompositionStart={onInternalCompositionStart}
             onCompositionEnd={onInternalCompositionEnd}
-            onKeyDown={onKeyDown}
+            onKeyDown={onInternalKeyDown}
             onPaste={onInternalPaste}
             variant="borderless"
             readOnly={readOnly}
