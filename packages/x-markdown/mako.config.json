@@ -1,5 +1,9 @@
 {
-  "entry": {
-    "index": "./index.ts"
+  "optimization": {
+    "skipModules": false,
+    "concatenateModules": false
+  },
+  "codeSplitting": {
+    "strategy": "auto"
   }
 }

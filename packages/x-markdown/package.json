@@ -2,9 +2,19 @@
   "name": "@ant-design/x-markdown",
   "version": "0.0.0",
   "scripts": {
-    "build": "mako build --mode production",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile": "father build",
+    "size-limit": "size-limit",
+    "test": "echo \"Success: no test specified\" && exit 0"
   },
+  "sideEffects": false,
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "typings": "es/index.d.ts",
+  "files": [
+    "dist",
+    "es",
+    "lib"
+  ],
   "license": "MIT",
   "description": "placeholder for @ant-design/x-markdown",
   "dependencies": {

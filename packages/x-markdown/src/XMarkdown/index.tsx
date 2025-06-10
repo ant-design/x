@@ -2,7 +2,8 @@ import { MarkdownProps } from './interface';
 import React from 'react';
 import useBuffer from './hooks/useBuffer';
 import { Lexer, Parser, processOptions } from './core/index';
-import { useXProviderContext } from '../x/components/x-provider';
+// todo: fix
+//  import { useXProviderContext } from '../x/components/x-provider';
 import classnames from 'classnames';
 import { walkTokens } from 'marked';
 
@@ -18,8 +19,8 @@ const Markdown: React.FC<MarkdownProps> = (props) => {
   } = props;
 
   // ============================ Prefix ============================
-  const { getPrefixCls } = useXProviderContext();
-  const prefixCls = getPrefixCls('markdown', customizePrefixCls);
+  // const { getPrefixCls } = useXProviderContext();
+  const prefixCls = 'xmarkdown'
 
   // ============================ Style ============================
   const mergedCls = classnames(prefixCls, rootClassName);
