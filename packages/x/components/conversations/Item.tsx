@@ -15,8 +15,8 @@ export interface ConversationsItemProps
   direction?: DirectionType;
   menu?: MenuProps & {
     trigger?:
-      | React.ReactNode
-      | ((conversation: Conversation, info: { originNode: React.ReactNode }) => React.ReactNode);
+    | React.ReactNode
+    | ((conversation: Conversation, info: { originNode: React.ReactNode }) => React.ReactNode);
     getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
   };
   active?: boolean;
