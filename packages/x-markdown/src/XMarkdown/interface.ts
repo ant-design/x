@@ -1,6 +1,10 @@
-import { MarkedExtension, Tokens } from 'marked';
-import { Renderer } from './core';
+import type { MarkedExtension, MarkedOptions, Tokens } from 'marked';
 import { CSSProperties } from 'react';
+import { Renderer } from './core';
+
+export interface MarkdownXOptions extends MarkedOptions {
+  XRenderer: Renderer;
+}
 
 export type Token = Tokens.Generic;
 

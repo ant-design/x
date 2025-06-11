@@ -1,10 +1,12 @@
 import { MarkedOptions, MaybePromise, TokenizerAndRendererExtension } from 'marked';
-import { GenericRendererFunction, MarkdownProps, RendererObject } from '../interface';
-import Renderer from './Renderer';
+import type {
+  GenericRendererFunction,
+  MarkdownProps,
+  MarkdownXOptions,
+  RendererObject,
+} from '../interface';
 
-interface MarkdownXOptions extends MarkedOptions {
-  XRenderer: Renderer;
-}
+type Renderer = MarkdownXOptions['XRenderer'];
 
 const unEscapeReplacements: Record<string, string> = {
   '&amp;': '&',
@@ -16,7 +18,7 @@ const unEscapeReplacements: Record<string, string> = {
 
 const entityRegex = /&(#(?:\d+)|(?:#x[0-9A-Fa-f]+)|(?:\w+));?/gi;
 
-export const unescape = (text: string) => {
+export const unescapeHtmlEntity = (text: string) => {
   return entityRegex.test(text)
     ? text.replace(entityRegex, (entity) => unEscapeReplacements[entity] || "'")
     : text;
@@ -106,10 +108,11 @@ const processExtensions = (exts: TokenizerAndRendererExtension[]) => {
 };
 
 export const processOptions = (
+  renderer: Renderer,
   plugins: MarkdownProps['plugins'],
   components: MarkdownProps['components'],
 ): MarkdownXOptions => {
-  const options = { XRenderer: new Renderer() } as MarkdownXOptions;
+  const options = { XRenderer: renderer } as MarkdownXOptions;
 
   plugins?.forEach((plugin) => {
     if (plugin.extensions) {

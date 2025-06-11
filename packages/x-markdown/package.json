@@ -38,5 +38,9 @@
     "antd": "^5.20.3",
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
+  },
+  "exports": {
+    ".": "./dist/antdxmarkdown.js",
+    "./plugins": "./dist/antdxmarkdownplugins.js"
   }
 }

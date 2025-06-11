@@ -1,10 +1,10 @@
-import type { ElementType, ReactNode } from 'react';
 import DOMPurify from 'isomorphic-dompurify';
+import type { Tokens } from 'marked';
+import type { ElementType, ReactNode } from 'react';
+import { jsx, jsxs } from 'react/jsx-runtime';
 import type { Token } from '../interface';
 import Parser from './Parser';
-import { jsx, jsxs } from 'react/jsx-runtime';
-import type { Tokens } from 'marked';
-import { unescape } from './helpers';
+import { unescapeHtmlEntity } from './helpers';
 
 type HeadingDepth = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -22,7 +22,7 @@ class Renderer {
 
     const elementCount = this.#elementMap.get(elementName) || 0;
     this.#elementMap.set(elementName, elementCount + 1);
-    return elementName + '-' + elementCount;
+    return `${elementName}-${elementCount}`;
   }
 
   #render<T extends ElementType>(
@@ -47,7 +47,7 @@ class Renderer {
 
   codespan(token: Token) {
     const { text } = token as Tokens.Codespan;
-    return this.#render('code', unescape(text));
+    return this.#render('code', unescapeHtmlEntity(text));
   }
 
   code(token: Token) {
@@ -132,13 +132,13 @@ class Renderer {
 
   text(token: Token) {
     const { text, tokens } = token;
-    return tokens ? this.parser.parseInline(tokens) : unescape(text);
+    return tokens ? this.parser.parseInline(tokens) : unescapeHtmlEntity(text);
   }
 
   link(token: Token) {
     const { href, title, tokens } = token as Tokens.Link;
     const children = this.parser.parseInline(tokens);
-    return this.#render('a', children, { href, title: title ? unescape(title) : '' });
+    return this.#render('a', children, { href, title: title ? unescapeHtmlEntity(title) : '' });
   }
 
   image(token: Token) {

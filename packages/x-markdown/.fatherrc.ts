@@ -20,13 +20,12 @@ export default defineConfig({
   },
   esm: {
     input: 'src',
-   
   },
   cjs: {
     input: 'src',
   },
   umd: {
-    entry: 'src/index.ts',
+    entry: 'src/XMarkdown/index.ts',
     name: 'antdxmarkdown',
     output: {
       path: 'dist/',

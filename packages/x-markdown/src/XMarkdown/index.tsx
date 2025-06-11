@@ -1,21 +1,22 @@
-import { MarkdownProps } from './interface';
-import React from 'react';
-import useBuffer from './hooks/useBuffer';
-import { Lexer, Parser, processOptions } from './core/index';
-import useXProviderContext from './hooks/use-x-provider-context';
 import { walkTokens } from 'marked';
+import React from 'react';
+import { Lexer, Parser, Renderer, processOptions } from './core';
+import useXProviderContext from './hooks/use-x-provider-context';
+import useBuffer from './hooks/useBuffer';
+import { MarkdownProps } from './interface';
 
 const Markdown: React.FC<MarkdownProps> = (props) => {
   const { content, streaming, children, plugins, components, className, style } = props;
 
   // ============================ Prefix ============================
-  const { theme } = useXProviderContext();
+  // const { theme } = useXProviderContext();
 
   // ============================ Buffer ============================
   const displayContent = useBuffer(content || children || '', streaming);
 
   // ============================ Render ============================
-  const options = processOptions(plugins, components);
+  const renderer = new Renderer();
+  const options = processOptions(renderer, plugins, components);
   const lexer = new Lexer(options);
   const parser = new Parser(options);
   const tokens = lexer.lex(displayContent);
