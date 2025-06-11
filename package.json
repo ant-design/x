@@ -44,6 +44,10 @@
       "limit": "350 KiB"
     },
     {
+      "path": "./packages/x-markdown/dist/antd-x-markdown.min.js",
+      "limit": "350 KiB"
+    },
+    {
       "path": "./packages/x-markdown/dist/antd-x-code-high-light.min.js",
       "limit": "350 KiB"
     },
