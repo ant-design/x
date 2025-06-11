@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { MarkdownProps } from '../interface';
+import type { MarkdownProps } from '../interface';
 
 const useBuffer = (input: string, typing: MarkdownProps['streaming']) => {
   const [displayContent, setDisplayContent] = useState('');

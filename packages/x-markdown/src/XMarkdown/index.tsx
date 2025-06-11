@@ -31,7 +31,7 @@ const Markdown: React.FC<MarkdownProps> = (props) => {
 };
 
 if (process.env.NODE_ENV !== 'production') {
-  Markdown.displayName = 'Markdown';
+  Markdown.displayName = 'XMarkdown';
 }
 
 export default Markdown;

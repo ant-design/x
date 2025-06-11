@@ -1,9 +1,9 @@
-import { ElementType, ReactNode } from 'react';
+import type { ElementType, ReactNode } from 'react';
 import DOMPurify from 'isomorphic-dompurify';
-import { Token } from '../interface';
+import type { Token } from '../interface';
 import Parser from './Parser';
 import { jsx, jsxs } from 'react/jsx-runtime';
-import { Tokens } from 'marked';
+import type { Tokens } from 'marked';
 import { unescape } from './helpers';
 
 type HeadingDepth = 1 | 2 | 3 | 4 | 5 | 6;

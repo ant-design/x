@@ -5,7 +5,7 @@ title: 介绍
 
 ## 何时使用
 
-XMarkdown 组件用于渲染流式Markdown格式。
+XMarkdown 组件用于渲染流式 Markdown 格式。
 
 ## 代码演示
 
