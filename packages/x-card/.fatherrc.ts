@@ -26,10 +26,10 @@ export default defineConfig({
   },
   umd: {
     entry: 'src/index.ts',
-    name: 'antdxcard',
+    name: 'antdxCard',
     output: {
       path: 'dist/',
-      filename: 'antdxcard',
+      filename: 'antd-x-card',
     },
     sourcemap: true,
     generateUnminified: true,
