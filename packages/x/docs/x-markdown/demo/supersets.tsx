@@ -1,5 +1,7 @@
+import XMarkdown from '@ant-design/x-markdown';
+import CodeHighLight from '@ant-design/x-markdown/plugins/CodeHighLight';
+import Latex from '@ant-design/x-markdown/plugins/Latex';
 import React from 'react';
-import XMarkdown, { Latex, Footnote, CodeHighLight } from '@ant-design/x-markdown';
 
 const content = `
 ### Latex

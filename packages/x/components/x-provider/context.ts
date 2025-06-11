@@ -17,9 +17,8 @@ interface BaseComponentConfig {
   classNames: Record<string, string>;
 }
 export interface XComponentConfig extends BaseComponentConfig {
-  shortcutKeys: Record<string, ShortcutKeys>,
+  shortcutKeys: Record<string, ShortcutKeys>;
 }
-
 
 type ComponentConfig<
   CompProps extends AnyObject,

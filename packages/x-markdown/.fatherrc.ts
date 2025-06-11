@@ -20,16 +20,38 @@ export default defineConfig({
   },
   esm: {
     input: 'src',
+    overrides: {
+      'src/plugins': {
+        output: 'plugins',
+      },
+    },
   },
   cjs: {
     input: 'src',
   },
   umd: {
-    entry: 'src/XMarkdown/index.ts',
-    name: 'antdxmarkdown',
-    output: {
-      path: 'dist/',
-      filename: 'antdxmarkdown',
+    entry: {
+      'src/index.ts': {
+        name: 'antdxMarkdown',
+        output: {
+          path: 'dist/',
+          filename: 'antdx-markdown',
+        },
+      },
+      'src/plugins/CodeHighLight/index.tsx': {
+        name: 'antdxCodeHighlight',
+        output: {
+          path: 'dist/',
+          filename: 'antdx-code-high-light',
+        },
+      },
+      'src/plugins/Latex/index.ts': {
+        name: 'antdxLatex',
+        output: {
+          path: 'dist/',
+          filename: 'antdx-latex',
+        },
+      },
     },
     sourcemap: true,
     generateUnminified: true,

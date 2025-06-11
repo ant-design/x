@@ -34,8 +34,6 @@ const XProvider: React.FC<XProviderProps & AntdConfigProviderProps> = (props) =>
     };
   }, [attachments, bubble, conversations, prompts, sender, suggestion, thoughtChain, welcome]);
 
-
-
   return (
     <XProviderContext.Provider value={xProviderProps}>
       <AntdConfigProvider

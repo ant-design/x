@@ -83,7 +83,12 @@
       }
     },
     {
-      "include": ["packages/x/components/*/demo/*"],
+      "include": [
+        "packages/x/components/*/demo/*",
+        "packages/x-card/src/*",
+        "packages/x-sdk/src/*",
+        "packages/x-markdown/src/*"
+      ],
       "linter": {
         "rules": {
           "correctness": {

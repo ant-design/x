@@ -3,8 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "compile": "father build",
-    "size-limit": "size-limit",
-    "test": "echo \"Success: no test specified\" && exit 0"
+    "tsc": "tsc --noEmit",
+    "lint": "npm run tsc && npm run lint:script && npm run lint:md",
+    "lint:deps": "antd-tools run deps-lint",
+    "lint:md": "remark . -f -q",
+    "lint:script": "biome lint",
+     "test": "jest --config .jest.js --no-cache --collect-coverage",
+     "coverage": "jest --config .jest.js --no-cache --collect-coverage --coverage"
   },
   "sideEffects": false,
   "main": "lib/index.js",
@@ -13,7 +18,8 @@
   "files": [
     "dist",
     "es",
-    "lib"
+    "lib",
+    "plugins"
   ],
   "license": "MIT",
   "description": "placeholder for @ant-design/x-markdown",
@@ -38,9 +44,5 @@
     "antd": "^5.20.3",
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
-  },
-  "exports": {
-    ".": "./dist/antdxmarkdown.js",
-    "./plugins": "./dist/antdxmarkdownplugins.js"
   }
 }

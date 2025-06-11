@@ -10,15 +10,11 @@ jobs:
       - uses: oven-sh/setup-bun@v2
       - run: bun i
       - run: npm i -g utoo
-      - run: ut lint --workspaces
-      - run: ut tsc --noEmit --workspaces
-      - run: ut compile --workspaces 
-      - run: ut coverage --workspaces
+      - run: ut lint
+      - run: ut tsc
+      - run: ut compile
+      - run: ut coverage
       - uses: codecov/codecov-action@v5
         with:
-          directories: 
-            - packages/x
-            - packages/x-markdown
-            - packages/x-sdk
-            - packages/x-card
+          directories: packages/x,packages/x-markdown,packages/x-sdk,packages/x-card
           token: ${{ secrets.CODECOV_TOKEN }}

@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@ant-design/x-sdk": ["index.ts"],
+      "@ant-design/x-sdk/es/*": ["src/*"],
+      "@ant-design/x-sdk/lib/*": ["src/*"]
+    }
+  },
+  "include": ["**/*"]
+}

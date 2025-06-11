@@ -1,7 +1,6 @@
 import { walkTokens } from 'marked';
 import React from 'react';
 import { Lexer, Parser, Renderer, processOptions } from './core';
-import useXProviderContext from './hooks/use-x-provider-context';
 import useBuffer from './hooks/useBuffer';
 import { MarkdownProps } from './interface';
 

@@ -1,5 +1,6 @@
+import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { plugin, Token } from './interface';
+import { Token, plugin } from './interface';
 
 const CodeHighLight = (): plugin => {
   return {

@@ -1,32 +1,18 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
       "@@/*": [".dumi/tmp/*"],
       "@ant-design/x": ["components/index.ts"],
       "@ant-design/x/es/*": ["components/*"],
       "@ant-design/x/lib/*": ["components/*"],
-      "@ant-design/x/locale/*": ["components/locale/*"]
-    },
-    "declaration": true,
-    "strict": true,
-    "strictNullChecks": true,
-    "module": "esnext",
-    "moduleResolution": "Bundler",
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "jsx": "react",
-    "jsxFactory": "React.createElement",
-    "jsxFragmentFactory": "React.Fragment",
-    "noUnusedParameters": true,
-    "noUnusedLocals": true,
-    "noImplicitAny": true,
-    "target": "es2020",
-    "lib": ["dom", "es2020"],
-    "skipLibCheck": true,
-    "stripInternal": true,
-    "resolvePackageJsonExports": true
+      "@ant-design/x/locale/*": ["components/locale/*"],
+      "@ant-design/x-markdown": ["../x-markdown/src/index.ts"],
+      "@ant-design/x-markdown/es/*": ["../x-markdown/src/*"],
+      "@ant-design/x-markdown/lib/*": ["../x-markdown/src/*"],
+      "@ant-design/x-markdown/plugins/*": ["../x-markdown/src/plugins/*"]
+    }
   },
-  "include": [".dumirc.ts", "**/*"],
-  "exclude": ["node_modules", "lib", "es"]
+  "include": [".dumirc.ts", "**/*"]
 }

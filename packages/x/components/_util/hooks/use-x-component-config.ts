@@ -8,7 +8,7 @@ const defaultXComponentStyleConfig: XComponentConfig = {
   styles: {},
   className: '',
   style: {},
-  shortcutKeys: {}
+  shortcutKeys: {},
 };
 
 const useXComponentConfig = <C extends keyof XComponentsConfig>(

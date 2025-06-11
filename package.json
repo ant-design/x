@@ -6,7 +6,13 @@
     "site": "npm run site --workspace packages/x && cp -rf packages/x/_site ./_site",
     "compile": "npm run compile --workspaces",
     "start": "npm run start --workspace packages/x",
-    "prepare": "husky"
+    "prepare": "husky install",
+    "size-limit": "size-limit",
+    "lint": "npm run lint --workspaces",
+    "tsc": "npm run tsc --workspaces",
+    "test": "npm run test --workspaces",
+    "coverage": "npm run test --workspaces",
+    "test:dekko": "npm run test:dekko --workspaces"
   },
   "license": "MIT",
   "workspaces": [
@@ -18,6 +24,7 @@
     "lint-staged": "^16.1.0",
     "husky": "^9.1.6",
     "father": "^4.5.4",
+    "dekko": "^0.2.1",
     "@biomejs/biome": "^1.9.0",
     "@codecov/webpack-plugin": "^1.4.0",
     "@madccc/duplicate-package-checker-webpack-plugin": "^1.0.0",
@@ -29,7 +36,15 @@
       "limit": "350 KiB"
     },
     {
+      "path": "./packages/x-card/dist/antdxcard.min.js",
+      "limit": "350 KiB"
+    },
+    {
       "path": "./packages/x-markdown/dist/antdxmarkdown.min.js",
+      "limit": "350 KiB"
+    },
+    {
+      "path": "./packages/x-sdk/dist/antdxsdk.min.js",
       "limit": "350 KiB"
     }
   ],

@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@ant-design/x-markdown": ["index.ts"],
+      "@ant-design/x-markdown/es/*": ["src/*"],
+      "@ant-design/x-markdown/lib/*": ["src/*"]
+    }
+  },
+  "include": ["**/*"]
+}
