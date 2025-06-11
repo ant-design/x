@@ -33,28 +33,32 @@ export default defineConfig({
     entry: {
       'src/index.ts': {
         name: 'antdxMarkdown',
+        sourcemap: true,
+        generateUnminified: true,
         output: {
           path: 'dist/',
-          filename: 'antdx-markdown',
+          filename: 'antd-x-markdown',
         },
       },
       'src/plugins/CodeHighLight/index.tsx': {
         name: 'antdxCodeHighlight',
+        sourcemap: true,
+        generateUnminified: true,
         output: {
           path: 'dist/',
-          filename: 'antdx-code-high-light',
+          filename: 'antd-x-code-high-light',
         },
       },
       'src/plugins/Latex/index.ts': {
         name: 'antdxLatex',
+        sourcemap: true,
+        generateUnminified: true,
         output: {
           path: 'dist/',
-          filename: 'antdx-latex',
+          filename: 'antd-x-latex',
         },
       },
     },
-    sourcemap: true,
-    generateUnminified: true,
     externals: {
       react: 'React',
       'react-dom': 'ReactDOM',

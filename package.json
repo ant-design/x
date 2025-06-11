@@ -36,15 +36,19 @@
       "limit": "350 KiB"
     },
     {
-      "path": "./packages/x-card/dist/antdxcard.min.js",
+      "path": "./packages/x-card/dist/antd-x-card.min.js",
       "limit": "350 KiB"
     },
     {
-      "path": "./packages/x-markdown/dist/antdxmarkdown.min.js",
+      "path": "./packages/x-sdk/dist/antd-x-sdk.min.js",
       "limit": "350 KiB"
     },
     {
-      "path": "./packages/x-sdk/dist/antdxsdk.min.js",
+      "path": "./packages/x-markdown/dist/antd-x-code-high-light.min.js",
+      "limit": "350 KiB"
+    },
+    {
+      "path": "./packages/x-markdown/dist/antd-x-latex.min.js",
       "limit": "350 KiB"
     }
   ],
