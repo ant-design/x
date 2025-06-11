@@ -2,28 +2,14 @@ import { MarkdownProps } from './interface';
 import React from 'react';
 import useBuffer from './hooks/useBuffer';
 import { Lexer, Parser, processOptions } from './core/index';
-// todo: fix
-//  import { useXProviderContext } from '../x/components/x-provider';
-import classnames from 'classnames';
+import useXProviderContext from './hooks/use-x-provider-context';
 import { walkTokens } from 'marked';
 
 const Markdown: React.FC<MarkdownProps> = (props) => {
-  const {
-    prefixCls: customizePrefixCls,
-    rootClassName,
-    plugins,
-    components,
-    content,
-    streaming,
-    children,
-  } = props;
+  const { content, streaming, children, plugins, components, className, style } = props;
 
   // ============================ Prefix ============================
-  // const { getPrefixCls } = useXProviderContext();
-  const prefixCls = 'xmarkdown'
-
-  // ============================ Style ============================
-  const mergedCls = classnames(prefixCls, rootClassName);
+  const { theme } = useXProviderContext();
 
   // ============================ Buffer ============================
   const displayContent = useBuffer(content || children || '', streaming);
@@ -37,7 +23,11 @@ const Markdown: React.FC<MarkdownProps> = (props) => {
   if (options.walkTokens) {
     walkTokens(tokens, options.walkTokens);
   }
-  return <div className={mergedCls}>{parser.parse(tokens)}</div>;
+  return (
+    <div className={className} style={style}>
+      {parser.parse(tokens)}
+    </div>
+  );
 };
 
 if (process.env.NODE_ENV !== 'production') {

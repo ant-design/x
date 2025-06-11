@@ -1,5 +1,6 @@
 import { MarkedExtension, Tokens } from 'marked';
 import { Renderer } from './core';
+import { CSSProperties } from 'react';
 
 export type Token = Tokens.Generic;
 
@@ -28,8 +29,8 @@ export interface MarkdownProps {
   content?: string;
   components?: RendererObject;
   streaming?: boolean | SteamingOption;
-  rootClassName?: string;
   children?: string;
-  prefixCls?: string;
   plugins?: plugin[];
+  className?: string;
+  style?: CSSProperties;
 }
