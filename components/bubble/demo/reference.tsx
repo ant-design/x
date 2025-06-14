@@ -63,7 +63,7 @@ const App: React.FC = () => (
         },
         {
           title: 'GitHub - Maifee Ul Asad',
-          url: 'https://github.com',
+          url: 'https://github.com/maifeeulasad',
         },
       ]}
     />

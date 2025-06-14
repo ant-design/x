@@ -44,7 +44,6 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     references,
     ...otherHtmlProps
   } = props;
-  console.log('Bubble', props);
 
   const { onUpdate } = React.useContext(BubbleContext);
 
