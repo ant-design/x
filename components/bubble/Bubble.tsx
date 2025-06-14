@@ -183,6 +183,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
             />
           </Popover>
           <Modal
+            style={{ maxHeight: '80vh' }}
             title="References"
             open={isModalVisible}
             onCancel={() => setIsModalVisible(false)}
@@ -213,7 +214,11 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
                 `${prefixCls}-references-list`,
                 contextConfig.classNames.references,
               )}
-              style={contextConfig.styles.references}
+              style={{
+                ...contextConfig.styles.references,
+                maxHeight: '100%',
+                overflowY: 'auto',
+              }}
             />
           </Modal>
         </>
