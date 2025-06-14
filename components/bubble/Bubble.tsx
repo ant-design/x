@@ -264,7 +264,10 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
 
   return wrapCSSVar(
     <div
-      style={{ ...contextConfig.style, ...style }}
+      style={{
+        ...contextConfig.style,
+        ...style,
+      }}
       className={mergedCls}
       {...otherHtmlProps}
       ref={divRef}
@@ -272,7 +275,10 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
       {/* Avatar */}
       {avatar && (
         <div
-          style={{ ...contextConfig.styles.avatar, ...styles.avatar }}
+          style={{
+            ...contextConfig.styles.avatar,
+            ...styles.avatar,
+          }}
           className={classnames(
             `${prefixCls}-avatar`,
             contextConfig.classNames.avatar,
