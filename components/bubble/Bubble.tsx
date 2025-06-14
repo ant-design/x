@@ -1,7 +1,8 @@
 import classnames from 'classnames';
 import React from 'react';
 
-import { Avatar } from 'antd';
+import { InfoCircleOutlined } from '@ant-design/icons';
+import { Avatar, Button, List, Modal, Popover } from 'antd';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 import useTypedEffect from './hooks/useTypedEffect';
@@ -40,8 +41,10 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     onTypingComplete,
     header,
     footer,
+    references,
     ...otherHtmlProps
   } = props;
+  console.log('Bubble', props);
 
   const { onUpdate } = React.useContext(BubbleContext);
 
@@ -148,6 +151,79 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     </div>
   );
 
+  // =========================== Reference ============================
+
+  const referencesContent: React.ReactNode = React.useMemo(() => {
+    const ReferencesOverlay = () => {
+      const [isModalVisible, setIsModalVisible] = React.useState(false);
+      if (!references || references.length === 0) {
+        return null;
+      }
+
+      const count = references.length;
+
+      const button = (
+        <Button
+          icon={<InfoCircleOutlined />}
+          onClick={() => setIsModalVisible(true)}
+          className={classnames(`${prefixCls}-references-toggle`)}
+          style={{ cursor: 'pointer', color: '#1890ff', ...contextConfig.styles.references }}
+        >
+          {count} reference{count > 1 ? 's' : ''} used
+        </Button>
+      );
+
+      return (
+        <>
+          <Popover content={button} trigger="hover" placement="bottom">
+            <Button
+              shape="circle"
+              icon={<InfoCircleOutlined />}
+              className={classnames(`${prefixCls}-references-toggle`)}
+              style={{ cursor: 'pointer' }}
+            />
+          </Popover>
+          <Modal
+            title="References"
+            open={isModalVisible}
+            onCancel={() => setIsModalVisible(false)}
+            footer={null}
+            destroyOnClose
+            className={classnames(`${prefixCls}-references-modal`)}
+          >
+            <List
+              dataSource={references}
+              renderItem={(ref, index) => (
+                <List.Item key={index} className={`${prefixCls}-reference-item`}>
+                  <a
+                    href={ref.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${prefixCls}-reference`}
+                  >
+                    <div>{ref.title}</div>
+                    {ref.description && (
+                      <span className={`${prefixCls}-reference-description`}>
+                        {ref.description}
+                      </span>
+                    )}
+                  </a>
+                </List.Item>
+              )}
+              className={classnames(
+                `${prefixCls}-references-list`,
+                contextConfig.classNames.references,
+              )}
+              style={contextConfig.styles.references}
+            />
+          </Modal>
+        </>
+      );
+    };
+
+    return <ReferencesOverlay />;
+  }, [references, prefixCls, contextConfig]);
+
   if (header || footer) {
     fullContent = (
       <div className={`${prefixCls}-content-wrapper`}>
@@ -187,34 +263,39 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
   }
 
   return wrapCSSVar(
-    <div
-      style={{
-        ...contextConfig.style,
-        ...style,
-      }}
-      className={mergedCls}
-      {...otherHtmlProps}
-      ref={divRef}
-    >
-      {/* Avatar */}
-      {avatar && (
-        <div
-          style={{
-            ...contextConfig.styles.avatar,
-            ...styles.avatar,
-          }}
-          className={classnames(
-            `${prefixCls}-avatar`,
-            contextConfig.classNames.avatar,
-            classNames.avatar,
-          )}
-        >
-          {avatarNode}
-        </div>
-      )}
+    <div>
+      <div
+        style={{
+          ...contextConfig.style,
+          ...style,
+        }}
+        className={mergedCls}
+        {...otherHtmlProps}
+        ref={divRef}
+      >
+        {/* Avatar */}
+        {avatar && (
+          <div
+            style={{
+              ...contextConfig.styles.avatar,
+              ...styles.avatar,
+            }}
+            className={classnames(
+              `${prefixCls}-avatar`,
+              contextConfig.classNames.avatar,
+              classNames.avatar,
+            )}
+          >
+            {avatarNode}
+          </div>
+        )}
 
-      {/* Content */}
-      {fullContent}
+        {/* Content */}
+        {fullContent}
+
+        {/* Source */}
+        {referencesContent}
+      </div>
     </div>,
   );
 };
