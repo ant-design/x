@@ -44,7 +44,7 @@ const main = async () => {
   const app = await Application.bootstrap(
     {
       // typedoc options here
-      entryPoints: ['components/*/style/index.{ts,tsx}'],
+      entryPoints: ['components/theme/interface/index.ts', 'components/*/style/index.{ts,tsx}'],
       skipErrorChecking: true,
       logLevel: 'Error',
     },
