@@ -7,7 +7,7 @@ import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 import useTypedEffect from './hooks/useTypedEffect';
 import useTypingConfig from './hooks/useTypingConfig';
-import type { BubbleContentType, BubbleProps } from './interface';
+import type { BubbleContentType, BubbleProps, ChatReference } from './interface';
 import Loading from './loading';
 import useStyle from './style';
 
@@ -150,84 +150,80 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     </div>
   );
 
-  // =========================== Reference ============================
+  // =========================== References Overlay ============================
+  const ReferencesOverlay: React.FC<{ refsData: ChatReference[] }> = ({ refsData }) => {
+    const [isModalVisible, setIsModalVisible] = React.useState(false);
+    if (!refsData || refsData.length === 0) return null;
 
-  const referencesContent: React.ReactNode = React.useMemo(() => {
-    const ReferencesOverlay = () => {
-      const [isModalVisible, setIsModalVisible] = React.useState(false);
-      if (!references || references.length === 0) {
-        return null;
-      }
+    const count = refsData.length;
+    const button = (
+      <Button
+        icon={<InfoCircleOutlined />}
+        onClick={() => setIsModalVisible(true)}
+        className={classnames(`${prefixCls}-references-toggle`)}
+        style={{ cursor: 'pointer', color: '#1890ff', ...contextConfig.styles.references }}
+      >
+        {count} reference{count > 1 ? 's' : ''} used
+      </Button>
+    );
 
-      const count = references.length;
-
-      const button = (
-        <Button
-          icon={<InfoCircleOutlined />}
-          onClick={() => setIsModalVisible(true)}
-          className={classnames(`${prefixCls}-references-toggle`)}
-          style={{ cursor: 'pointer', color: '#1890ff', ...contextConfig.styles.references }}
+    return (
+      <>
+        <Popover content={button} trigger="hover" placement="bottom">
+          <Button
+            shape="circle"
+            icon={<InfoCircleOutlined />}
+            className={classnames(`${prefixCls}-references-toggle`)}
+            style={{ cursor: 'pointer' }}
+          />
+        </Popover>
+        <Modal
+          title="References"
+          open={isModalVisible}
+          onCancel={() => setIsModalVisible(false)}
+          footer={null}
+          destroyOnClose
+          className={classnames(`${prefixCls}-references-modal`)}
+          style={{ maxHeight: '80vh' }}
         >
-          {count} reference{count > 1 ? 's' : ''} used
-        </Button>
-      );
+          <List
+            dataSource={refsData}
+            renderItem={(ref, index) => (
+              <List.Item key={index} className={`${prefixCls}-reference-item`}>
+                <a
+                  href={ref.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${prefixCls}-reference`}
+                >
+                  <div>{ref.title}</div>
+                  {ref.description && (
+                    <span className={`${prefixCls}-reference-description`}>{ref.description}</span>
+                  )}
+                </a>
+              </List.Item>
+            )}
+            className={classnames(
+              `${prefixCls}-references-list`,
+              contextConfig.classNames.references,
+            )}
+            style={{
+              ...contextConfig.styles.references,
+              maxHeight: '100%',
+              overflowY: 'auto',
+            }}
+          />
+        </Modal>
+      </>
+    );
+  };
 
-      return (
-        <>
-          <Popover content={button} trigger="hover" placement="bottom">
-            <Button
-              shape="circle"
-              icon={<InfoCircleOutlined />}
-              className={classnames(`${prefixCls}-references-toggle`)}
-              style={{ cursor: 'pointer' }}
-            />
-          </Popover>
-          <Modal
-            style={{ maxHeight: '80vh' }}
-            title="References"
-            open={isModalVisible}
-            onCancel={() => setIsModalVisible(false)}
-            footer={null}
-            destroyOnClose
-            className={classnames(`${prefixCls}-references-modal`)}
-          >
-            <List
-              dataSource={references}
-              renderItem={(ref, index) => (
-                <List.Item key={index} className={`${prefixCls}-reference-item`}>
-                  <a
-                    href={ref.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`${prefixCls}-reference`}
-                  >
-                    <div>{ref.title}</div>
-                    {ref.description && (
-                      <span className={`${prefixCls}-reference-description`}>
-                        {ref.description}
-                      </span>
-                    )}
-                  </a>
-                </List.Item>
-              )}
-              className={classnames(
-                `${prefixCls}-references-list`,
-                contextConfig.classNames.references,
-              )}
-              style={{
-                ...contextConfig.styles.references,
-                maxHeight: '100%',
-                overflowY: 'auto',
-              }}
-            />
-          </Modal>
-        </>
-      );
-    };
+  const referencesContent: React.ReactNode = React.useMemo<React.ReactNode>(
+    () => <ReferencesOverlay refsData={references ?? []} />,
+    [references],
+  );
 
-    return <ReferencesOverlay />;
-  }, [references, prefixCls, contextConfig]);
-
+  // ============================ Header/Footer Wrapper ============================
   if (header || footer) {
     fullContent = (
       <div className={`${prefixCls}-content-wrapper`}>
@@ -267,39 +263,31 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
   }
 
   return wrapCSSVar(
-    <div>
-      <div
-        style={{
-          ...contextConfig.style,
-          ...style,
-        }}
-        className={mergedCls}
-        {...otherHtmlProps}
-        ref={divRef}
-      >
-        {/* Avatar */}
-        {avatar && (
-          <div
-            style={{
-              ...contextConfig.styles.avatar,
-              ...styles.avatar,
-            }}
-            className={classnames(
-              `${prefixCls}-avatar`,
-              contextConfig.classNames.avatar,
-              classNames.avatar,
-            )}
-          >
-            {avatarNode}
-          </div>
-        )}
+    <div
+      style={{ ...contextConfig.style, ...style }}
+      className={mergedCls}
+      {...otherHtmlProps}
+      ref={divRef}
+    >
+      {/* Avatar */}
+      {avatar && (
+        <div
+          style={{ ...contextConfig.styles.avatar, ...styles.avatar }}
+          className={classnames(
+            `${prefixCls}-avatar`,
+            contextConfig.classNames.avatar,
+            classNames.avatar,
+          )}
+        >
+          {avatarNode}
+        </div>
+      )}
 
-        {/* Content */}
-        {fullContent}
+      {/* Content */}
+      {fullContent}
 
-        {/* Source */}
-        {referencesContent}
-      </div>
+      {/* Source */}
+      {referencesContent}
     </div>,
   );
 };
