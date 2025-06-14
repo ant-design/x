@@ -31,6 +31,7 @@ demo:
 <code src="./demo/bubble-custom.tsx">语义化自定义</code>
 <code src="./demo/list-custom.tsx">自定义列表内容</code>
 <code src="./demo/gpt-vis.tsx">使用 GPT-Vis 渲染图表</code>
+<code src="./demo/reference" debug>参考</code>
 <code src="./demo/debug.tsx" debug>debug</code>
 <code src="./demo/debug-list.tsx" debug>debug list</code>
 

@@ -30,6 +30,7 @@ Often used when chatting.
 <code src="./demo/bubble-custom.tsx">Semantic Custom</code>
 <code src="./demo/list-custom.tsx">Custom List Content</code>
 <code src="./demo/gpt-vis.tsx">Using GPT-Vis to render charts</code>
+<code src="./demo/reference" debug>Reference</code>
 <code src="./demo/debug.tsx" debug>debug</code>
 <code src="./demo/debug-list.tsx" debug>debug list</code>
 
