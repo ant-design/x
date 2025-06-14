@@ -16,6 +16,12 @@ export interface TypingOption {
   suffix?: React.ReactNode;
 }
 
+export interface ChatReference {
+  description?: string;
+  title: string;
+  url: string;
+}
+
 type SemanticType = 'avatar' | 'content' | 'header' | 'footer';
 
 export type BubbleContentType = React.ReactNode | AnyObject;
@@ -38,4 +44,5 @@ export interface BubbleProps<ContentType extends BubbleContentType = string>
   onTypingComplete?: VoidFunction;
   header?: React.ReactNode;
   footer?: React.ReactNode;
+  references?: ChatReference[];
 }
