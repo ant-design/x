@@ -157,19 +157,27 @@ const Conversations: React.FC<ConversationsProps> = (props) => {
       className={mergedCls}
     >
       {groupList.map((groupInfo, groupIndex) => {
-        const convItems = groupInfo.data.map((convInfo: Conversation, convIndex: number) => (
-          <ConversationsItem
-            key={convInfo.key || `key-${convIndex}`}
-            info={convInfo}
-            prefixCls={prefixCls}
-            direction={direction}
-            className={classnames(classNames.item, contextConfig.classNames.item)}
-            style={{ ...contextConfig.styles.item, ...styles.item }}
-            menu={typeof menu === 'function' ? menu(convInfo) : menu}
-            active={mergedActiveKey === convInfo.key}
-            onClick={onConversationItemClick}
-          />
-        ));
+        const convItems = groupInfo.data.map((convInfo: Conversation, convIndex: number) => {
+          const { label: _, disabled: __, icon: ___, ...restInfo } = convInfo;
+          return (
+            <ConversationsItem
+              {...restInfo}
+              key={convInfo.key || `key-${convIndex}`}
+              info={convInfo}
+              prefixCls={prefixCls}
+              direction={direction}
+              className={classnames(
+                classNames.item,
+                contextConfig.classNames.item,
+                convInfo.className,
+              )}
+              style={{ ...contextConfig.styles.item, ...styles.item, ...convInfo.style }}
+              menu={typeof menu === 'function' ? menu(convInfo) : menu}
+              active={mergedActiveKey === convInfo.key}
+              onClick={onConversationItemClick}
+            />
+          );
+        });
 
         // With group to show the title
         if (enableGroup) {

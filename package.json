@@ -1,6 +1,6 @@
 {
   "name": "@ant-design/x",
-  "version": "1.1.1",
+  "version": "1.4.0",
   "description": "Craft AI-driven interfaces effortlessly",
   "keywords": [
     "AI",
@@ -37,7 +37,6 @@
   "scripts": {
     "api-collection": "antd-tools run api-collection",
     "authors": "tsx scripts/generate-authors.ts",
-    "legacy_build": "npm run compile && NODE_OPTIONS='--max-old-space-size=4096' npm run dist",
     "changelog": "npm run lint:changelog && tsx scripts/print-changelog.ts",
     "check-commit": "tsx scripts/check-commit.ts",
     "clean": "antd-tools run clean && rm -rf es lib coverage locale dist report.html artifacts.zip oss-artifacts.zip",
@@ -46,9 +45,6 @@
     "predeploy": "npm run site && cp CNAME _site",
     "deploy": "gh-pages -d _site -b gh-pages -f",
     "predist": "npm run version && npm run token:statistic && npm run token:meta",
-    "legacy_dist": "antd-tools run dist",
-    "legacy_dist:esbuild": "ESBUILD=true npm run dist",
-    "legacy_dist:esbuild-no-dup-check": "ESBUILD=true NO_DUP_CHECK=true npm run dist",
     "format": "biome format --write .",
     "prelint": "dumi setup",
     "lint": "npm run version && npm run tsc && npm run lint:script && npm run lint:md && npm run lint:style && npm run lint:changelog",
@@ -158,7 +154,7 @@
     "@umijs/fabric": "^4.0.1",
     "adm-zip": "^0.5.16",
     "ali-oss": "^6.21.0",
-    "antd": "^5.22.7",
+    "antd": "^5.25.1",
     "antd-style": "^3.6.3",
     "antd-token-previewer": "^2.0.8",
     "axios": "^1.7.7",
@@ -178,7 +174,7 @@
     "dumi-plugin-color-chunk": "^1.1.2",
     "esbuild-loader": "^4.2.2",
     "fast-glob": "^3.3.2",
-    "father": "4.5.2",
+    "father": "^4.5.4",
     "fetch-jsonp": "^1.3.0",
     "fs-extra": "^11.2.0",
     "gh-pages": "^6.1.1",

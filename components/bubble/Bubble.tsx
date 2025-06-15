@@ -41,6 +41,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     onTypingComplete,
     header,
     footer,
+    _key,
     references,
     ...otherHtmlProps
   } = props;
@@ -118,6 +119,8 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     () => (messageRender ? messageRender(typedContent as any) : typedContent),
     [typedContent, messageRender],
   );
+  const renderSlot = (node: BubbleProps<any>['footer'] | BubbleProps<any>['header']) =>
+    typeof node === 'function' ? node(typedContent, { key: _key }) : node;
 
   // ============================ Render ============================
   let contentNode: React.ReactNode;
@@ -239,7 +242,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
               ...styles.header,
             }}
           >
-            {header}
+            {renderSlot(header)}
           </div>
         )}
         {fullContent}
@@ -255,7 +258,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
               ...styles.footer,
             }}
           >
-            {footer}
+            {renderSlot(footer)}
           </div>
         )}
       </div>

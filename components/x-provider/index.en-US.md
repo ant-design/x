@@ -50,3 +50,4 @@ If you are already using `ConfigProvider` from `antd`, please make the following
 | sender | Global configuration for the Sender component | 'classNames' \| 'styles' \| 'className' \| 'style' | - |  |
 | suggestion | Global configuration for the Suggestion component | 'className' \| 'style' | - |  |
 | thoughtChain | Global configuration for the ThoughtChain component | 'classNames' \| 'styles' \| 'className' \| 'style' | - |  |
+| actions | Global configuration for the Actions component | 'className' \| 'style' | - |  |

@@ -52,8 +52,14 @@ describe('ThoughtChain Component', () => {
   });
 
   it('ThoughtChain component work', () => {
-    const { container } = render(<ThoughtChain items={items} collapsible />);
+    const { container, getByText } = render(<ThoughtChain items={items} collapsible />);
     const element = container.querySelector<HTMLUListElement>('.ant-thought-chain');
+    const elementHeader = container.querySelectorAll<HTMLDivElement>(
+      '.ant-thought-chain-item-header-box',
+    )[0];
+    fireEvent.click(elementHeader as Element);
+
+    expect(getByText('content test1')).toBeInTheDocument();
     expect(element).toBeTruthy();
     expect(element).toMatchSnapshot();
   });
@@ -84,24 +90,74 @@ describe('ThoughtChain Component', () => {
     fireEvent.click(element as Element);
     expect(onExpand).toHaveBeenCalledWith([]);
   });
-
   it('ThoughtChain component work with controlled mode', async () => {
+    const onExpand = jest.fn();
     const App = () => {
-      const [expandedKeys] = React.useState<string[]>(['test2']);
+      const [expandedKeys] = React.useState<string[]>(['test1']);
       return (
         <ThoughtChain
           items={items}
           collapsible={{
             expandedKeys,
+            onExpand: (keys) => {
+              onExpand(keys);
+            },
           }}
         />
       );
     };
     const { container } = render(<App />);
 
-    const expandBodyElements = container.querySelectorAll<HTMLDivElement>(
+    const expandBodyBeforeElements = container.querySelectorAll<HTMLDivElement>(
       '.ant-thought-chain-item-content-box',
     );
-    expect(expandBodyElements).toHaveLength(1);
+    expect(expandBodyBeforeElements).toHaveLength(1);
+
+    const itemHeaderElement = container.querySelectorAll<HTMLDivElement>(
+      '.ant-thought-chain-item-header-box',
+    )[0];
+    fireEvent.click(itemHeaderElement as Element);
+    expect(onExpand).toHaveBeenCalledWith([]);
+
+    // click again
+    fireEvent.click(itemHeaderElement as Element);
+    expect(onExpand).toHaveBeenCalledWith([]);
+
+    const expandBodyAfterElements = container.querySelectorAll<HTMLDivElement>(
+      '.ant-thought-chain-item-content-box',
+    );
+    expect(expandBodyAfterElements).toHaveLength(1);
+  });
+  it('ThoughtChain component work collapsible without expandedKeys', async () => {
+    const onExpand = jest.fn();
+    const App = () => {
+      return (
+        <ThoughtChain
+          items={items}
+          collapsible={{
+            onExpand: (keys) => {
+              onExpand(keys);
+            },
+          }}
+        />
+      );
+    };
+    const { container } = render(<App />);
+
+    const expandBodyElementBefore = container.querySelectorAll<HTMLDivElement>(
+      '.ant-thought-chain-item-content-box',
+    );
+    expect(expandBodyElementBefore).toHaveLength(0);
+
+    const element = container.querySelectorAll<HTMLDivElement>(
+      '.ant-thought-chain-item-header-box',
+    )[0];
+    fireEvent.click(element as Element);
+    expect(onExpand).toHaveBeenCalledWith(['test1']);
+
+    const expandBodyElementsAfter = container.querySelectorAll<HTMLDivElement>(
+      '.ant-thought-chain-item-content-box',
+    );
+    expect(expandBodyElementsAfter).toHaveLength(1);
   });
 });

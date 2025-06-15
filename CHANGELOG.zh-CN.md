@@ -15,6 +15,55 @@ tag: vVERSION
 
 ---
 
+## 1.4.0
+
+`2025-05-30`
+
+- 🔥 新组件 操作列表 - Actions。[#768](https://github.com/ant-design/x/pull/768) 由 [vanndxh](https://github.com/vanndxh) 提交
+- 🐛 修复 Bubble.List `footer`和`header`无法获取key的问题。[#876](https://github.com/ant-design/x/pull/876) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 🐛 修复 Conversations 列表标题溢出截断失效问题。[#877](https://github.com/ant-design/x/pull/877) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 📖 优化官网站点提升用户体验。[#816](https://github.com/ant-design/x/pull/816) 由 [@Rain120](https://github.com/Rain120) 提交、[#880](https://github.com/ant-design/x/pull/880) 由 [@kimteayon](https://github.com/kimteayon) 提交
+
+## 1.3.0
+
+`2025-05-21`
+
+- 📖 新增 Conversation 类型导出。 [#258](https://github.com/ant-design/x/pull/258) 由 [@ONLY-yours](https://github.com/ONLY-yours) 提交
+- 💄 修复 Prompts 滚动条始终显示问题。 [#785](https://github.com/ant-design/x/pull/785) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- 🐛 修复 Suggestion 警告使用 antd 废弃 API `onDropdownVisibleChange` 的问题。 [#827](https://github.com/ant-design/x/pull/827) 由 [@zombieJ](https://github.com/zombieJ) 提交
+- 🆕 扩展Bubble`content`到`footer`和`header`的方法实现参数，同时补充Demo实现。[#683](https://github.com/ant-design/x/pull/683) 由 [@L-Hknu](https://github.com/L-Hknu) 和 [@kimteayon](https://github.com/kimteayon) 提交
+- 📖 修复Api Key在站点露出的安全问题。[#840](https://github.com/ant-design/x/pull/840) 由 [@kimteayon](https://github.com/kimteayon)提交
+- 📖 优化官网站点提升用户体验。[#783](https://github.com/ant-design/x/pull/783) 由 [@kimteayon](https://github.com/kimteayon) 提交、[#229](https://github.com/ant-design/x/pull/229) 由 [@afc163](https://github.com/afc163) 提交、[#835](https://github.com/ant-design/x/pull/835) 由 [@kimteayon](https://github.com/kimteayon) 、[#814](https://github.com/ant-design/x/pull/814) 由 [@wzc520pyfm](https://github.com/wzc520pyfm) 提交
+
+## 1.2.0
+
+`2025-04-25`
+
+- 🐛 删除 Conversations 溢出省略逻辑修复 `tooltip` 展示错误的问题。[#776](https://github.com/ant-design/x/pull/776) 由 [@afc163](https://github.com/afc163) 提交
+- 🐛 修复 Attachments `image`卡片样式问题。[#751](https://github.com/ant-design/x/pull/751) 由 [@wzc520pyfm](https://github.com/wzc520pyfm) 提交
+- 🐛 修复 ThoughtChain 受控问题。[#752](https://github.com/ant-design/x/pull/752) 由 [@Youzi2233](https://github.com/Youzi2233) 提交
+- XRequest
+  - 🆕 XRequestCallbacks 新增 `onStream` 回调，可对流监听和终止操作。[#711](https://github.com/ant-design/x/pull/711) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 🐛 修复 XRequestOptions 变更不生效问题，并新增示例。[#736](https://github.com/ant-design/x/pull/736) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 🆕 新增模型接入示例。 [#725](https://github.com/ant-design/x/pull/725) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 📖 优化API方法参数命名不准确问题。[#736](https://github.com/ant-design/x/pull/736) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- useXAgent
+  - 🆕 RequestFn 新增 `onStream` 回调，可对流监听和终止操作。[#711](https://github.com/ant-design/x/pull/711) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 🆕 RequestFn 新增 `transformStream`转换函数，用于处理流数据。[#725](https://github.com/ant-design/x/pull/725) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 🐛 修复 XAgentConfigPreset 变更不生效问题，并新增示例。[#736](https://github.com/ant-design/x/pull/736) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 🐛 修复 RequestFn `onSuccess`回调类型错误问题，同时更新对应示例。 [#725](https://github.com/ant-design/x/pull/725) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 🆕 新增模型接入、自定义入参、变更配置示例。 [#725](https://github.com/ant-design/x/pull/725) 由 [@kimteayon](https://github.com/kimteayon) 提交、[#711](https://github.com/ant-design/x/pull/711) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- useXChat
+  - 🆕 XChatConfig 新增 Input 和 Output 泛型类型。[#725](https://github.com/ant-design/x/pull/725) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 🆕 XChatConfig 新增 `transformMessage` 转换函数，可在更新数据时对`messages`做转换，同时会更新到`messages`。 [#711](https://github.com/ant-design/x/pull/711) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 🆕 XChatConfig 新增 `transformStream`转换函数，用于处理流数据。[#711](https://github.com/ant-design/x/pull/711) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 🆕 XChatConfig 新增 `resolveAbortController`回调函数，可获得`AbortController` 控制器，用于控制流状态。[#711](https://github.com/ant-design/x/pull/711) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 🆕 新增模型接入示例，删除错误的终止流示例。 [#711](https://github.com/ant-design/x/pull/711) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- 🐛 修复 Sender `header`圆角样式溢出问题。[#732](https://github.com/ant-design/x/pull/732) 由 [@Bao0630](https://github.com/Bao0630) 提交
+- 📖 新增助手式样板间。[#657](https://github.com/ant-design/x/pull/657) 由 [@vanndxh](https://github.com/vanndxh) 提交
+- 📖 重构独立式样板间。[#753](https://github.com/ant-design/x/pull/753) 由 [@vanndxh](https://github.com/vanndxh) 提交
+- 📖 优化官网站点提升用户体验。[#730](https://github.com/ant-design/x/pull/730) 由 [@afc163](https://github.com/afc163) 提交、[#758](https://github.com/ant-design/x/pull/758) 由 [@coding-ice](https://github.com/coding-ice) 提交、 [#761](https://github.com/ant-design/x/pull/761) 由 [@ONLY-yours](https://github.com/ONLY-yours) 提交
+
 ## 1.1.1
 
 `2025-04-14`

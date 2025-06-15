@@ -1,7 +1,6 @@
 name: 🆇 Release to X
 
-on:
-  create
+on: create
 
 jobs:
   tweet:

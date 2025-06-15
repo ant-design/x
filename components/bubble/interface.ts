@@ -24,8 +24,11 @@ export interface ChatReference {
 
 type SemanticType = 'avatar' | 'content' | 'header' | 'footer';
 
-export type BubbleContentType = React.ReactNode | AnyObject;
+export type BubbleContentType = React.ReactNode | AnyObject | React.ReactNode | string | number;
 
+type SlotInfoType = {
+  key?: string | number;
+};
 export interface BubbleProps<ContentType extends BubbleContentType = string>
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'content'> {
   prefixCls?: string;
@@ -36,13 +39,14 @@ export interface BubbleProps<ContentType extends BubbleContentType = string>
   placement?: 'start' | 'end';
   loading?: boolean;
   typing?: boolean | TypingOption;
-  content?: BubbleContentType;
+  content?: ContentType;
   messageRender?: (content: ContentType) => React.ReactNode;
   loadingRender?: () => React.ReactNode;
   variant?: 'filled' | 'borderless' | 'outlined' | 'shadow';
   shape?: 'round' | 'corner';
+  _key?: number | string;
   onTypingComplete?: VoidFunction;
-  header?: React.ReactNode;
-  footer?: React.ReactNode;
   references?: ChatReference[];
+  header?: React.ReactNode | ((content: ContentType, info: SlotInfoType) => React.ReactNode);
+  footer?: React.ReactNode | ((content: ContentType, info: SlotInfoType) => React.ReactNode);
 }

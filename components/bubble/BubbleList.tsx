@@ -19,12 +19,12 @@ export interface BubbleListRef {
   }) => void;
 }
 
-export type BubbleDataType = BubbleProps & {
+export type BubbleDataType = BubbleProps<any> & {
   key?: string | number;
   role?: string;
 };
 
-export type RoleType = Partial<Omit<BubbleProps, 'content'>>;
+export type RoleType = Partial<Omit<BubbleProps<any>, 'content'>>;
 
 export type RolesType =
   | Record<string, RoleType>
@@ -48,6 +48,7 @@ const BubbleListItem: React.ForwardRefRenderFunction<
 > = ({ _key, ...restProps }, ref) => (
   <Bubble
     {...restProps}
+    _key={_key}
     ref={(node) => {
       if (node) {
         (ref as React.RefObject<Record<string, BubbleRef>>).current[_key!] = node;

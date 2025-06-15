@@ -1,5 +1,5 @@
 import { EllipsisOutlined } from '@ant-design/icons';
-import { Dropdown, Tooltip, Typography } from 'antd';
+import { Dropdown, Typography } from 'antd';
 import type { MenuProps } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
@@ -39,12 +39,6 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
   // ============================= MISC =============================
   const { disabled } = info;
 
-  // =========================== Ellipsis ===========================
-  const [inEllipsis, onEllipsis] = React.useState(false);
-
-  // =========================== Tooltip ============================
-  const [opened, setOpened] = React.useState(false);
-
   // ============================ Style =============================
   const mergedCls = classnames(
     className,
@@ -57,12 +51,6 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
   const onInternalClick: React.MouseEventHandler<HTMLLIElement> = () => {
     if (!disabled && onClick) {
       onClick(info);
-    }
-  };
-
-  const onOpenChange = (open: boolean) => {
-    if (open) {
-      setOpened(!open);
     }
   };
 
@@ -86,36 +74,26 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
 
   // ============================ Render ============================
   return (
-    <Tooltip
-      title={info.label}
-      open={inEllipsis && opened}
-      onOpenChange={setOpened}
-      placement={direction === 'rtl' ? 'left' : 'right'}
+    <li
+      title={typeof info.label === 'object' ? undefined : `${info.label}`}
+      {...domProps}
+      className={mergedCls}
+      onClick={onInternalClick}
     >
-      <li {...domProps} className={mergedCls} onClick={onInternalClick}>
-        {info.icon && <div className={`${prefixCls}-icon`}>{info.icon}</div>}
-        <Typography.Text
-          className={`${prefixCls}-label`}
-          ellipsis={{
-            onEllipsis,
-          }}
+      {info.icon && <div className={`${prefixCls}-icon`}>{info.icon}</div>}
+      <Typography.Text className={`${prefixCls}-label`}>{info.label}</Typography.Text>
+      {!disabled && menu && (
+        <Dropdown
+          menu={dropdownMenu}
+          placement={direction === 'rtl' ? 'bottomLeft' : 'bottomRight'}
+          trigger={['click']}
+          disabled={disabled}
+          getPopupContainer={getPopupContainer}
         >
-          {info.label}
-        </Typography.Text>
-        {!disabled && menu && (
-          <Dropdown
-            menu={dropdownMenu}
-            placement={direction === 'rtl' ? 'bottomLeft' : 'bottomRight'}
-            trigger={['click']}
-            disabled={disabled}
-            onOpenChange={onOpenChange}
-            getPopupContainer={getPopupContainer}
-          >
-            {renderMenuTrigger(info)}
-          </Dropdown>
-        )}
-      </li>
-    </Tooltip>
+          {renderMenuTrigger(info)}
+        </Dropdown>
+      )}
+    </li>
   );
 };
 
