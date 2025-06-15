@@ -22,7 +22,7 @@
     "lib"
   ],
   "license": "MIT",
-  "description": "placeholder for @ant-design/x-markdown",
+  "description": "placeholder for @ant-design/x-card",
   "dependencies": {},
   "devDependencies": {
     "@types/react": "^19.0.2",
