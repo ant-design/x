@@ -1,12 +1,13 @@
 import classnames from 'classnames';
 import React from 'react';
 
-import { Avatar } from 'antd';
+import { InfoCircleOutlined } from '@ant-design/icons';
+import { Avatar, Button, List, Modal, Popover } from 'antd';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 import useTypedEffect from './hooks/useTypedEffect';
 import useTypingConfig from './hooks/useTypingConfig';
-import type { BubbleContentType, BubbleProps } from './interface';
+import type { BubbleContentType, BubbleProps, ChatReference } from './interface';
 import Loading from './loading';
 import useStyle from './style';
 
@@ -41,6 +42,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     header,
     footer,
     _key,
+    references,
     ...otherHtmlProps
   } = props;
 
@@ -151,6 +153,80 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     </div>
   );
 
+  // =========================== References Overlay ============================
+  const ReferencesOverlay: React.FC<{ refsData: ChatReference[] }> = ({ refsData }) => {
+    const [isModalVisible, setIsModalVisible] = React.useState(false);
+    if (!refsData || refsData.length === 0) return null;
+
+    const count = refsData.length;
+    const button = (
+      <Button
+        icon={<InfoCircleOutlined />}
+        onClick={() => setIsModalVisible(true)}
+        className={classnames(`${prefixCls}-references-toggle`)}
+        style={{ cursor: 'pointer', color: '#1890ff', ...contextConfig.styles.references }}
+      >
+        {count} reference{count > 1 ? 's' : ''} used
+      </Button>
+    );
+
+    return (
+      <>
+        <Popover content={button} trigger="hover" placement="bottom">
+          <Button
+            shape="circle"
+            icon={<InfoCircleOutlined />}
+            className={classnames(`${prefixCls}-references-toggle`)}
+            style={{ cursor: 'pointer' }}
+          />
+        </Popover>
+        <Modal
+          title="References"
+          open={isModalVisible}
+          onCancel={() => setIsModalVisible(false)}
+          footer={null}
+          destroyOnClose
+          className={classnames(`${prefixCls}-references-modal`)}
+          style={{ maxHeight: '80vh' }}
+        >
+          <List
+            dataSource={refsData}
+            renderItem={(ref, index) => (
+              <List.Item key={index} className={`${prefixCls}-reference-item`}>
+                <a
+                  href={ref.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${prefixCls}-reference`}
+                >
+                  <div>{ref.title}</div>
+                  {ref.description && (
+                    <span className={`${prefixCls}-reference-description`}>{ref.description}</span>
+                  )}
+                </a>
+              </List.Item>
+            )}
+            className={classnames(
+              `${prefixCls}-references-list`,
+              contextConfig.classNames.references,
+            )}
+            style={{
+              ...contextConfig.styles.references,
+              maxHeight: '100%',
+              overflowY: 'auto',
+            }}
+          />
+        </Modal>
+      </>
+    );
+  };
+
+  const referencesContent: React.ReactNode = React.useMemo<React.ReactNode>(
+    () => <ReferencesOverlay refsData={references ?? []} />,
+    [references],
+  );
+
+  // ============================ Header/Footer Wrapper ============================
   if (header || footer) {
     fullContent = (
       <div className={`${prefixCls}-content-wrapper`}>
@@ -218,6 +294,9 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
 
       {/* Content */}
       {fullContent}
+
+      {/* Source */}
+      {referencesContent}
     </div>,
   );
 };
