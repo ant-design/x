@@ -31,7 +31,7 @@ Often used when chatting.
 <code src="./demo/semantic-list-custom.tsx">Semantic custom list content</code>
 <code src="./demo/list-custom.tsx">Custom List Content</code>
 <code src="./demo/gpt-vis.tsx">Using GPT-Vis to render charts</code>
-<code src="./demo/reference" debug>Reference</code>
+<code src="./demo/reference.tsx">Reference</code>
 <code src="./demo/debug.tsx" debug>debug</code>
 <code src="./demo/debug-list.tsx" debug>debug list</code>
 
@@ -58,6 +58,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | loadingRender | Customize loading content | () => ReactNode | - |  |
 | messageRender | Customize display content | <ContentType extends [BubbleContentType](https://github.com/ant-design/x/blob/d3232c925a0dc61ad763c6664e16f07323ebca4a/components/bubble/interface.ts#L21) = string>(content?: ContentType) => ReactNode | - |  |
 | onTypingComplete | Callback when typing effect is completed. If typing is not set, it will be triggered immediately when rendering. | () => void | - |  |
+| references       | Array of source links (title, url, optional description); displays an info-icon trigger with popover/modal listing. | [ChatReference](#chat-reference) []  | - | |
 
 #### ContentType
 
@@ -88,6 +89,20 @@ type CustomContentType {
 ## Semantic DOM
 
 <code src="./demo/_semantic.tsx" simplify="true"></code>
+
+## Chat Reference
+
+Reference link data for `Bubble`. Pass an array of these via the `references` prop to enable an info-icon trigger with popover and then modal listing.
+
+```typescript
+export interface ChatReference {
+  description?: string;
+  title: string;
+  url: string;
+}
+```
+
+When provided, the `references` prop will render an info icon in the bubble. Clicking the icon will show a list of references, each with a title (as a clickable link), and an optional description.
 
 ## Design Token
 

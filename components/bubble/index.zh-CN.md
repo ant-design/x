@@ -32,7 +32,7 @@ demo:
 <code src="./demo/semantic-list-custom.tsx">语义化自定义</code>
 <code src="./demo/list-custom.tsx">自定义列表内容</code>
 <code src="./demo/gpt-vis.tsx">使用 GPT-Vis 渲染图表</code>
-<code src="./demo/reference" debug>参考</code>
+<code src="./demo/reference.tsx">参考</code>
 <code src="./demo/debug.tsx" debug>debug</code>
 <code src="./demo/debug-list.tsx" debug>debug list</code>
 
@@ -59,6 +59,7 @@ demo:
 | loadingRender | 自定义渲染加载态内容 | () => ReactNode | - |  |
 | messageRender | 自定义渲染内容 | (content?: ContentType) => ReactNode | - |  |
 | onTypingComplete | 打字效果完成时的回调，如果没有设置 typing 将在渲染时立刻触发 | () => void | - |  |
+| references | 引用源链接数组（包含标题、URL 和可选描述）；渲染信息图标以触发悬浮提示，并通过模态框列表展示。 | [聊天引用](#聊天引用)[] | - | |
 
 #### ContentType
 
@@ -89,6 +90,18 @@ type CustomContentType {
 ## Semantic DOM
 
 <code src="./demo/_semantic.tsx" simplify="true"></code>
+
+## 聊天引用
+
+`Bubble` 的引用链接数据。通过 `references` 属性传入该接口数组，可启用信息图标触发 Popover，并通过 Modal 列表展示引用。
+
+```typescript
+export interface ChatReference {
+  description?: string;
+  title: string;
+  url: string;
+}
+```
 
 ## 主题变量（Design Token）
 
