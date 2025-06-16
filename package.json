@@ -106,7 +106,7 @@
     "@npmcli/run-script": "^9.0.1",
     "@octokit/rest": "^21.0.2",
     "@petercatai/assistant": "^2.0.13",
-    "@prettier/sync": "^0.5.5",
+    "@prettier/sync": "^0.6.1",
     "@qixian.cs/github-contributors-list": "^2.0.2",
     "@rc-component/father-plugin": "^2.0.4",
     "@rc-component/np": "^1.0.3",
