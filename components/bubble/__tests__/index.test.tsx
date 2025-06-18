@@ -64,6 +64,26 @@ describe('bubble', () => {
     expect(element?.textContent).toBe('Footer for: Test content');
   });
 
+  it('should render static extra', () => {
+    const { container } = render(<Bubble content="extra content" extra="extra" />);
+    const element = container.querySelector<HTMLSpanElement>('.ant-bubble .ant-bubble-extra');
+    expect(element).toBeTruthy();
+    expect(element?.textContent).toBe('extra');
+  });
+
+  it('should render extra with function and get content', () => {
+    const content = 'extra content';
+    const extraFunction = (content: BubbleContentType) => (
+      <div className="test-extra">{`Extra for: ${content}`}</div>
+    );
+    const { container } = render(<Bubble content={content} extra={extraFunction} />);
+    const element = container.querySelector<HTMLSpanElement>(
+      '.ant-bubble .ant-bubble-extra .test-extra',
+    );
+    expect(element).toBeTruthy();
+    expect(element?.textContent).toBe('Extra for: extra content');
+  });
+
   it('Bubble support typing', () => {
     const { container } = render(<Bubble typing content="test" />);
     expect(container.querySelector<HTMLDivElement>('.ant-bubble')).toHaveClass('ant-bubble-typing');

@@ -16,13 +16,18 @@ export interface TypingOption {
   suffix?: React.ReactNode;
 }
 
-type SemanticType = 'avatar' | 'content' | 'header' | 'footer';
+type SemanticType = 'avatar' | 'content' | 'header' | 'footer' | 'extra';
 
 export type BubbleContentType = React.ReactNode | AnyObject | React.ReactNode | string | number;
 
 type SlotInfoType = {
   key?: string | number;
 };
+
+type SlotRenderType<ContentType> =
+  | React.ReactNode
+  | ((content: ContentType, info: SlotInfoType) => React.ReactNode);
+
 export interface BubbleProps<ContentType extends BubbleContentType = string>
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'content'> {
   prefixCls?: string;
@@ -40,6 +45,7 @@ export interface BubbleProps<ContentType extends BubbleContentType = string>
   shape?: 'round' | 'corner';
   _key?: number | string;
   onTypingComplete?: VoidFunction;
-  header?: React.ReactNode | ((content: ContentType, info: SlotInfoType) => React.ReactNode);
-  footer?: React.ReactNode | ((content: ContentType, info: SlotInfoType) => React.ReactNode);
+  header?: SlotRenderType<ContentType>;
+  footer?: SlotRenderType<ContentType>;
+  extra?: SlotRenderType<ContentType>;
 }

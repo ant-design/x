@@ -18,6 +18,11 @@ export interface BubbleContextProps {
   onUpdate?: VoidFunction;
 }
 
+type RenderSlotNode =
+  | BubbleProps<any>['footer']
+  | BubbleProps<any>['header']
+  | BubbleProps<any>['extra'];
+
 export const BubbleContext = React.createContext<BubbleContextProps>({});
 
 const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, ref) => {
@@ -40,6 +45,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     onTypingComplete,
     header,
     footer,
+    extra,
     _key,
     ...otherHtmlProps
   } = props;
@@ -117,7 +123,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     () => (messageRender ? messageRender(typedContent as any) : typedContent),
     [typedContent, messageRender],
   );
-  const renderSlot = (node: BubbleProps<any>['footer'] | BubbleProps<any>['header']) =>
+  const renderSlot = (node: RenderSlotNode) =>
     typeof node === 'function' ? node(typedContent, { key: _key }) : node;
 
   // ============================ Render ============================
@@ -148,6 +154,21 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
       )}
     >
       {contentNode}
+      {(extra || extra === 0) && (
+        <div
+          className={classnames(
+            `${prefixCls}-extra`,
+            contextConfig.classNames.extra,
+            classNames.extra,
+          )}
+          style={{
+            ...contextConfig.styles.extra,
+            ...styles.extra,
+          }}
+        >
+          {renderSlot(extra)}
+        </div>
+      )}
     </div>
   );
 

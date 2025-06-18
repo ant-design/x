@@ -1,4 +1,4 @@
-import { CopyOutlined, SyncOutlined, UserOutlined } from '@ant-design/icons';
+import { CopyOutlined, LoadingOutlined, SyncOutlined, UserOutlined } from '@ant-design/icons';
 import { Bubble } from '@ant-design/x';
 import { Avatar, Button, Space, theme } from 'antd';
 import React from 'react';
@@ -11,12 +11,14 @@ const locales = {
     header: '头部的容器',
     content: '聊天内容的容器',
     footer: '底部的容器',
+    extra: '额外的容器',
   },
   en: {
     avatar: 'Wrapper element of the avatar',
     header: 'Wrapper element of the header',
     content: 'Wrapper element of the content',
     footer: 'Wrapper element of the footer',
+    extra: 'Wrapper element of the extra',
   },
 };
 
@@ -33,6 +35,7 @@ const App: React.FC = () => {
         { name: 'header', desc: locale.header },
         { name: 'content', desc: locale.content },
         { name: 'footer', desc: locale.footer },
+        { name: 'extra', desc: locale.extra },
       ]}
     >
       <Bubble
@@ -45,6 +48,7 @@ const App: React.FC = () => {
             <Button color="default" variant="text" size="small" icon={<CopyOutlined />} />
           </Space>
         }
+        extra={<LoadingOutlined spin />}
       />
     </SemanticPreview>
   );

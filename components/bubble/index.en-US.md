@@ -21,6 +21,7 @@ Often used when chatting.
 <code src="./demo/basic.tsx">Basic</code>
 <code src="./demo/avatar-and-placement.tsx">Placement and avatar</code>
 <code src="./demo/header-and-footer.tsx">Header and footer</code>
+<code src="./demo/extra.tsx" version="1.5.0">Extra content</code>
 <code src="./demo/loading.tsx">Loading</code>
 <code src="./demo/typing.tsx">Typing effect</code>
 <code src="./demo/custom-content.tsx">Custom rendering content.</code>
@@ -46,8 +47,9 @@ Common props ref：[Common props](/docs/react/common-props)
 | avatar | Avatar component | React.ReactNode | - | - |
 | classNames | Semantic DOM class | [Record<SemanticDOM, string>](#semantic-dom) | - | - |
 | content | Content of bubble | ContentType | - | - |
-| footer | Footer content | React.ReactNode \| (content: ContentType, info:{ key?: string \| number }) => React.ReactNode | - | - |
-| header | Header content | React.ReactNode \| (content: ContentType, info:{ key?: string \| number }) => React.ReactNode | - | - |
+| footer | Footer content | [SlotRenderType](#slotrendertype) | - | - |
+| header | Header content | [SlotRenderType](#slotrendertype) | - | - |
+| extra | Extra content | [SlotRenderType](#slotrendertype) | - | 1.5.0 |
 | loading | Loading state of Message | boolean | - |  |
 | placement | Direction of Message | `start` \| `end` | `start` |  |
 | shape | Shape of bubble | `round` \| `corner` | - |  |  | styles | Semantic DOM style | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - |  |
@@ -56,6 +58,18 @@ Common props ref：[Common props](/docs/react/common-props)
 | loadingRender | Customize loading content | () => ReactNode | - |  |
 | messageRender | Customize display content | <ContentType extends [BubbleContentType](https://github.com/ant-design/x/blob/d3232c925a0dc61ad763c6664e16f07323ebca4a/components/bubble/interface.ts#L21) = string>(content?: ContentType) => ReactNode | - |  |
 | onTypingComplete | Callback when typing effect is completed. If typing is not set, it will be triggered immediately when rendering. | () => void | - |  |
+
+#### SlotRenderType
+
+```typescript
+type SlotInfoType = {
+  key?: string | number;
+};
+
+type SlotRenderType<ContentType> =
+  | React.ReactNode
+  | ((content: ContentType, info: SlotInfoType) => React.ReactNode);
+```
 
 #### ContentType
 

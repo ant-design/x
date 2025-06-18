@@ -142,6 +142,21 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
           },
         },
       },
+
+      // =========================== Extra =============================
+      [`& ${componentCls}-extra`]: {
+        position: 'absolute',
+        top: '50%',
+        transform: 'translateY(-50%)',
+      },
+
+      [`&-start ${componentCls}-extra`]: {
+        insetInlineStart: `calc(100% + ${token.paddingXS})`,
+      },
+
+      [`&-end ${componentCls}-extra`]: {
+        insetInlineEnd: `calc(100% + ${token.paddingXS})`,
+      },
     },
   };
 };

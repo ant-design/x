@@ -22,6 +22,7 @@ demo:
 <code src="./demo/basic.tsx">基本</code>
 <code src="./demo/avatar-and-placement.tsx">支持位置和头像</code>
 <code src="./demo/header-and-footer.tsx">头和尾</code>
+<code src="./demo/extra.tsx" version="1.5.0">额外内容</code>
 <code src="./demo/loading.tsx">加载中</code>
 <code src="./demo/typing.tsx">打字效果</code>
 <code src="./demo/custom-content.tsx">自定义渲染内容</code>
@@ -47,8 +48,9 @@ demo:
 | avatar | 展示头像 | React.ReactNode | - |  |
 | classNames | 语义化结构 class | [Record<SemanticDOM, string>](#semantic-dom) | - |  |
 | content | 聊天内容 | ContentType | - |  |
-| footer | 底部内容 | React.ReactNode \| (content: ContentType ,info: { key?: string \| number }) => React.ReactNode | - |  |
-| header | 头部内容 | React.ReactNode \| (content: ContentType, info: { key?: string \| number }) => React.ReactNode | - |  |
+| footer | 底部内容 | [SlotRenderType](#slotrendertype) | - |  |
+| header | 头部内容 | [SlotRenderType](#slotrendertype) | - |  |
+| extra | 额外内容 | [SlotRenderType](#slotrendertype) | - | 1.5.0 |
 | loading | 聊天内容加载状态 | boolean | - |  |
 | placement | 信息位置 | `start` \| `end` | `start` |  |
 | shape | 气泡形状 | `round` \| `corner` | - |  |
@@ -58,6 +60,18 @@ demo:
 | loadingRender | 自定义渲染加载态内容 | () => ReactNode | - |  |
 | messageRender | 自定义渲染内容 | (content?: ContentType) => ReactNode | - |  |
 | onTypingComplete | 打字效果完成时的回调，如果没有设置 typing 将在渲染时立刻触发 | () => void | - |  |
+
+#### SlotRenderType
+
+```typescript
+type SlotInfoType = {
+  key?: string | number;
+};
+
+type SlotRenderType<ContentType> =
+  | React.ReactNode
+  | ((content: ContentType, info: SlotInfoType) => React.ReactNode);
+```
 
 #### ContentType
 
