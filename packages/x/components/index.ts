@@ -18,6 +18,9 @@ export type { ConversationsProps, Conversation } from './conversations';
 export { default as Prompts } from './prompts';
 export type { PromptsProps, PromptProps } from './prompts';
 
+export { default as Think } from './think';
+export type { ThinkProps } from './think';
+
 export { default as ThoughtChain } from './thought-chain';
 export type { ThoughtChainProps, ThoughtChainItem } from './thought-chain';
 

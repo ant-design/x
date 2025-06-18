@@ -1,0 +1,290 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders components/think/demo/basic.tsx extend context correctly 1`] = `
+<div
+  class="ant-think"
+>
+  <div
+    class="ant-think-status-wrapper"
+  >
+    <div
+      class="ant-think-status-icon"
+    >
+      <span
+        class="anticon"
+        role="img"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          viewBox="0 0 1024 1024"
+          width="1em"
+        >
+          <title />
+          <symbol
+            id="icon-think"
+            viewBox="0 0 1024 1024"
+          >
+            <path
+              d="M847.936 168.448c65.088 65.664 46.144 198.528-36.224 337.536 88.128 143.04 109.824 281.408 43.008 348.8-66.56 67.072-202.688 45.696-343.808-41.984-141.12 87.68-277.248 109.056-343.808 41.984-66.816-67.392-45.056-205.76 43.008-348.8-82.368-139.008-101.248-271.872-36.16-337.536 65.408-65.92 198.336-46.336 336.96 37.76l9.728-5.76c135.104-79.232 263.36-96.448 327.296-32zM249.088 565.568l-2.24 4.16a536.704 536.704 0 0 0-38.272 85.696c-28.928 85.888-16.128 134.144 3.584 153.984 19.712 19.776 67.52 32.768 152.704 3.584a531.84 531.84 0 0 0 87.616-40.064c-35.84-26.816-71.488-57.664-105.792-92.288a950.4 950.4 0 0 1-97.6-115.072z m523.648 0.064l-2.56 3.584c-27.392 37.76-59.2 75.328-94.976 111.424a951.744 951.744 0 0 1-105.856 92.288c30.336 17.088 59.904 30.528 87.68 40.064 85.12 29.184 132.992 16.192 152.64-3.584 19.712-19.84 32.576-68.096 3.584-153.984a541.824 541.824 0 0 0-40.512-89.792z m-261.76-283.2l-17.664 12.416c-36.352 26.24-72.96 57.472-108.416 93.184a878.208 878.208 0 0 0-99.008 118.656c28.8 42.88 64.128 86.528 105.792 128.512a874.24 874.24 0 0 0 119.232 100.928 875.84 875.84 0 0 0 119.232-100.928 871.232 871.232 0 0 0 105.728-128.448 868.224 868.224 0 0 0-98.944-118.72 867.136 867.136 0 0 0-126.016-105.6z m3.2 105.472a11.52 11.52 0 0 1 7.808 7.808l7.232 24.512c10.432 35.2 37.888 62.72 73.088 73.152l24.192 7.168a11.52 11.52 0 0 1 0.064 22.144l-24.704 7.424A108.288 108.288 0 0 0 529.28 603.008l-7.296 24.576a11.52 11.52 0 0 1-22.144 0l-7.296-24.576a108.288 108.288 0 0 0-72.576-72.96l-24.704-7.36a11.52 11.52 0 0 1 0-22.144l24.32-7.168c35.136-10.432 62.592-37.952 73.024-73.152l7.232-24.512a11.52 11.52 0 0 1 14.336-7.808z m136.064-177.664a522.496 522.496 0 0 0-79.872 35.776c37.76 27.84 75.456 60.16 111.552 96.64a956.16 956.16 0 0 1 89.856 104.32c14.656-27.392 26.24-54.016 34.688-79.168 28.928-85.888 16.064-134.08-3.52-153.984-19.712-19.776-67.52-32.768-152.704-3.584z m-431.36 3.584c-19.584 19.84-32.512 68.096-3.52 153.984 8.512 25.152 20.096 51.776 34.688 79.168 26.24-35.392 56.32-70.528 89.856-104.32a948.224 948.224 0 0 1 111.616-96.64 514.816 514.816 0 0 0-79.936-35.776c-85.12-29.184-132.928-16.192-152.64 3.584z"
+            />
+          </symbol>
+          <use
+            xlink:href="#icon-think"
+          />
+        </svg>
+      </span>
+    </div>
+    <span
+      class="ant-think-status-text"
+    >
+      deep thinking
+    </span>
+    <span
+      aria-label="down"
+      class="anticon anticon-down"
+      role="img"
+    >
+      <svg
+        aria-hidden="true"
+        data-icon="down"
+        fill="currentColor"
+        focusable="false"
+        height="1em"
+        style="transform: rotate(180deg);"
+        viewBox="64 64 896 896"
+        width="1em"
+      >
+        <path
+          d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"
+        />
+      </svg>
+    </span>
+  </div>
+  <div
+    class="ant-think-content"
+  >
+    This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.
+  </div>
+</div>
+`;
+
+exports[`renders components/think/demo/basic.tsx extend context correctly 2`] = `[]`;
+
+exports[`renders components/think/demo/expand.tsx extend context correctly 1`] = `
+Array [
+  <button
+    class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    type="button"
+  >
+    <span>
+      Change expand
+    </span>
+  </button>,
+  <div
+    class="ant-think"
+  >
+    <div
+      class="ant-think-status-wrapper"
+    >
+      <div
+        class="ant-think-status-icon"
+      >
+        <span
+          class="anticon"
+          role="img"
+        >
+          <svg
+            fill="currentColor"
+            height="1em"
+            viewBox="0 0 1024 1024"
+            width="1em"
+          >
+            <title />
+            <symbol
+              id="icon-think"
+              viewBox="0 0 1024 1024"
+            >
+              <path
+                d="M847.936 168.448c65.088 65.664 46.144 198.528-36.224 337.536 88.128 143.04 109.824 281.408 43.008 348.8-66.56 67.072-202.688 45.696-343.808-41.984-141.12 87.68-277.248 109.056-343.808 41.984-66.816-67.392-45.056-205.76 43.008-348.8-82.368-139.008-101.248-271.872-36.16-337.536 65.408-65.92 198.336-46.336 336.96 37.76l9.728-5.76c135.104-79.232 263.36-96.448 327.296-32zM249.088 565.568l-2.24 4.16a536.704 536.704 0 0 0-38.272 85.696c-28.928 85.888-16.128 134.144 3.584 153.984 19.712 19.776 67.52 32.768 152.704 3.584a531.84 531.84 0 0 0 87.616-40.064c-35.84-26.816-71.488-57.664-105.792-92.288a950.4 950.4 0 0 1-97.6-115.072z m523.648 0.064l-2.56 3.584c-27.392 37.76-59.2 75.328-94.976 111.424a951.744 951.744 0 0 1-105.856 92.288c30.336 17.088 59.904 30.528 87.68 40.064 85.12 29.184 132.992 16.192 152.64-3.584 19.712-19.84 32.576-68.096 3.584-153.984a541.824 541.824 0 0 0-40.512-89.792z m-261.76-283.2l-17.664 12.416c-36.352 26.24-72.96 57.472-108.416 93.184a878.208 878.208 0 0 0-99.008 118.656c28.8 42.88 64.128 86.528 105.792 128.512a874.24 874.24 0 0 0 119.232 100.928 875.84 875.84 0 0 0 119.232-100.928 871.232 871.232 0 0 0 105.728-128.448 868.224 868.224 0 0 0-98.944-118.72 867.136 867.136 0 0 0-126.016-105.6z m3.2 105.472a11.52 11.52 0 0 1 7.808 7.808l7.232 24.512c10.432 35.2 37.888 62.72 73.088 73.152l24.192 7.168a11.52 11.52 0 0 1 0.064 22.144l-24.704 7.424A108.288 108.288 0 0 0 529.28 603.008l-7.296 24.576a11.52 11.52 0 0 1-22.144 0l-7.296-24.576a108.288 108.288 0 0 0-72.576-72.96l-24.704-7.36a11.52 11.52 0 0 1 0-22.144l24.32-7.168c35.136-10.432 62.592-37.952 73.024-73.152l7.232-24.512a11.52 11.52 0 0 1 14.336-7.808z m136.064-177.664a522.496 522.496 0 0 0-79.872 35.776c37.76 27.84 75.456 60.16 111.552 96.64a956.16 956.16 0 0 1 89.856 104.32c14.656-27.392 26.24-54.016 34.688-79.168 28.928-85.888 16.064-134.08-3.52-153.984-19.712-19.776-67.52-32.768-152.704-3.584z m-431.36 3.584c-19.584 19.84-32.512 68.096-3.52 153.984 8.512 25.152 20.096 51.776 34.688 79.168 26.24-35.392 56.32-70.528 89.856-104.32a948.224 948.224 0 0 1 111.616-96.64 514.816 514.816 0 0 0-79.936-35.776c-85.12-29.184-132.928-16.192-152.64 3.584z"
+              />
+            </symbol>
+            <use
+              xlink:href="#icon-think"
+            />
+          </svg>
+        </span>
+      </div>
+      <span
+        class="ant-think-status-text"
+      >
+        deep thinking
+      </span>
+      <span
+        aria-label="down"
+        class="anticon anticon-down"
+        role="img"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="down"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          style="transform: rotate(180deg);"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"
+          />
+        </svg>
+      </span>
+    </div>
+    <div
+      class="ant-think-content"
+    >
+      This is deep thinking content.
+    </div>
+  </div>,
+]
+`;
+
+exports[`renders components/think/demo/expand.tsx extend context correctly 2`] = `[]`;
+
+exports[`renders components/think/demo/status.tsx extend context correctly 1`] = `
+Array [
+  <button
+    class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    type="button"
+  >
+    <span>
+      Run
+    </span>
+  </button>,
+  <div
+    class="ant-think"
+  >
+    <div
+      class="ant-think-status-wrapper"
+    >
+      <div
+        class="ant-think-status-icon"
+      >
+        <span
+          aria-label="loading"
+          class="anticon anticon-loading anticon-spin"
+          role="img"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="loading"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="0 0 1024 1024"
+            width="1em"
+          >
+            <path
+              d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"
+            />
+          </svg>
+        </span>
+      </div>
+      <span
+        class="ant-think-status-text"
+      >
+        deep thinking
+      </span>
+      <span
+        aria-label="down"
+        class="anticon anticon-down"
+        role="img"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="down"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          style="transform: rotate(180deg);"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"
+          />
+        </svg>
+      </span>
+    </div>
+    <div
+      class="ant-think-content"
+    >
+      This is deep thinking content.
+    </div>
+  </div>,
+  <div
+    class="ant-think"
+  >
+    <div
+      class="ant-think-status-wrapper"
+    >
+      <div
+        class="ant-think-status-icon"
+      >
+        <span
+          aria-label="sync"
+          class="anticon anticon-sync"
+          role="img"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="sync"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M168 504.2c1-43.7 10-86.1 26.9-126 17.3-41 42.1-77.7 73.7-109.4S337 212.3 378 195c42.4-17.9 87.4-27 133.9-27s91.5 9.1 133.8 27A341.5 341.5 0 01755 268.8c9.9 9.9 19.2 20.4 27.8 31.4l-60.2 47a8 8 0 003 14.1l175.7 43c5 1.2 9.9-2.6 9.9-7.7l.8-180.9c0-6.7-7.7-10.5-12.9-6.3l-56.4 44.1C765.8 155.1 646.2 92 511.8 92 282.7 92 96.3 275.6 92 503.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8zm756 7.8h-60c-4.4 0-7.9 3.5-8 7.8-1 43.7-10 86.1-26.9 126-17.3 41-42.1 77.8-73.7 109.4A342.45 342.45 0 01512.1 856a342.24 342.24 0 01-243.2-100.8c-9.9-9.9-19.2-20.4-27.8-31.4l60.2-47a8 8 0 00-3-14.1l-175.7-43c-5-1.2-9.9 2.6-9.9 7.7l-.7 181c0 6.7 7.7 10.5 12.9 6.3l56.4-44.1C258.2 868.9 377.8 932 512.2 932c229.2 0 415.5-183.7 419.8-411.8a8 8 0 00-8-8.2z"
+            />
+          </svg>
+        </span>
+      </div>
+      <span
+        class="ant-think-status-text"
+      >
+        deep thinking
+      </span>
+      <span
+        aria-label="down"
+        class="anticon anticon-down"
+        role="img"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="down"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          style="transform: rotate(180deg);"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"
+          />
+        </svg>
+      </span>
+    </div>
+    <div
+      class="ant-think-content"
+    >
+      Customize status icon.
+    </div>
+  </div>,
+]
+`;
+
+exports[`renders components/think/demo/status.tsx extend context correctly 2`] = `[]`;
