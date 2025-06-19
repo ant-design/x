@@ -16,6 +16,12 @@ export interface TypingOption {
   suffix?: React.ReactNode;
 }
 
+export interface ChatReference {
+  description?: string;
+  title: string;
+  url: string;
+}
+
 type SemanticType = 'avatar' | 'content' | 'header' | 'footer';
 
 export type BubbleContentType = React.ReactNode | AnyObject | React.ReactNode | string | number;
@@ -40,6 +46,7 @@ export interface BubbleProps<ContentType extends BubbleContentType = string>
   shape?: 'round' | 'corner';
   _key?: number | string;
   onTypingComplete?: VoidFunction;
+  references?: ChatReference[];
   header?: React.ReactNode | ((content: ContentType, info: SlotInfoType) => React.ReactNode);
   footer?: React.ReactNode | ((content: ContentType, info: SlotInfoType) => React.ReactNode);
 }
