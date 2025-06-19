@@ -27,18 +27,17 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*uaGhTY1-LL0AAA
 
 ### ThinkProps
 
-| 属性           | 说明             | 类型                      | 默认值 | 版本 |
-| -------------- | ---------------- | ------------------------- | ------ | ---- |
-| className      | 样式类名         | string                    | -      | -    |
-| style          | 语义化结构 style | CSSProperties             | -      | -    |
-| content        | 内容             | React.ReactNode           | -      | -    |
-| statusText     | 状态文本         | React.ReactNode           | -      | -    |
-| statusIcon     | 状态图标         | React.ReactNode           | -      | -    |
-| loading        | 加载中           | boolean                   | false  | -    |
-| loadingIcon    | 加载图标         | React.ReactNode           | -      | -    |
-| defaultExpand  | 默认是否展开     | boolean                   | true   | -    |
-| expand         | 是否展开         | boolean                   | -      | -    |
-| onExpandChange | 展开事件         | (expand: boolean) => void | -      | -    |
+| 属性            | 说明             | 类型                      | 默认值          | 版本  |
+| --------------- | ---------------- | ------------------------- | --------------- | ----- | --- |
+| className       | 样式类名         | string                    | -               | -     |
+| style           | 语义化结构 style | CSSProperties             | -               | -     |
+| children        | 内容             | React.ReactNode           | -               | -     |
+| statusText      | 状态文本         | React.ReactNode           | -               | -     |
+| statusIcon      | 状态图标         | React.ReactNode           | -               | -     |
+| loading         | 加载中           | boolean                   | React.ReactNode | false | -   |
+| defaultExpanded | 默认是否展开     | boolean                   | true            | -     |
+| expanded        | 是否展开         | boolean                   | -               | -     |
+| onExpand        | 展开事件         | (expand: boolean) => void | -               | -     |
 
 ## Semantic DOM
 

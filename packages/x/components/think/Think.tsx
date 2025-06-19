@@ -10,35 +10,38 @@ import { useXProviderContext } from '../x-provider';
 import ThinkIcon from './icons/think';
 import useStyle from './style';
 
+export type SemanticType = 'root' | 'status' | 'content';
+
 export interface ThinkProps {
   prefixCls?: string;
   style?: React.CSSProperties;
+  styles?: Partial<Record<SemanticType, React.CSSProperties>>;
   className?: string;
+  classNames?: Partial<Record<SemanticType, string>>;
   rootClassName?: string;
-  content?: React.ReactNode;
   statusText?: React.ReactNode;
   statusIcon?: React.ReactNode;
-  loading?: boolean;
-  loadingIcon?: React.ReactNode;
-  defaultExpand?: boolean;
-  expand?: boolean;
-  onExpandChange?: (expand: boolean) => void;
+  loading?: boolean | React.ReactNode;
+  defaultExpanded?: boolean;
+  expanded?: boolean;
+  onExpand?: (expand: boolean) => void;
 }
 
-const Think: React.FC<ThinkProps> = (props) => {
+const Think: React.FC<React.PropsWithChildren<ThinkProps>> = (props) => {
   const {
     prefixCls: customizePrefixCls,
     style,
+    styles = {},
     className,
     rootClassName,
-    content,
+    classNames = {},
+    children,
     statusText,
     statusIcon,
     loading,
-    loadingIcon,
-    defaultExpand = true,
-    expand,
-    onExpandChange,
+    defaultExpanded = true,
+    expanded,
+    onExpand,
   } = props;
 
   const { direction, getPrefixCls } = useXProviderContext();
@@ -58,6 +61,7 @@ const Think: React.FC<ThinkProps> = (props) => {
     contextConfig.className,
     className,
     rootClassName,
+    classNames.root,
     hashId,
     cssVarCls,
     {
@@ -65,14 +69,14 @@ const Think: React.FC<ThinkProps> = (props) => {
     },
   );
 
-  const [isExpand, setIsExpand] = useMergedState(defaultExpand, {
-    value: expand,
-    onChange: onExpandChange,
+  const [isExpand, setIsExpand] = useMergedState(defaultExpanded, {
+    value: expanded,
+    onChange: onExpand,
   });
 
   const StatusIcon = () => {
     if (loading) {
-      return loadingIcon || <LoadingOutlined />;
+      return loading === true ? <LoadingOutlined /> : loading;
     }
     return statusIcon || <ThinkIcon />;
   };
@@ -83,23 +87,28 @@ const Think: React.FC<ThinkProps> = (props) => {
       style={{
         ...contextConfig.style,
         ...style,
+        ...styles.root,
       }}
     >
-      <div className={`${prefixCls}-status-wrapper`} onClick={() => setIsExpand(!isExpand)}>
+      <div
+        className={classnames(`${prefixCls}-status-wrapper`, classNames.status)}
+        onClick={() => setIsExpand(!isExpand)}
+        style={styles.status}
+      >
         <div className={`${prefixCls}-status-icon`}>
           <StatusIcon />
         </div>
-        <span className={`${prefixCls}-status-text`}>{statusText}</span>
-        {<DownOutlined rotate={isExpand ? 180 : 0} />}
+        <div className={`${prefixCls}-status-text`}>{statusText}</div>
+        <DownOutlined className={`${prefixCls}-status-down-icon`} rotate={isExpand ? 180 : 0} />
       </div>
       <CSSMotion {...collapseMotion} visible={isExpand}>
         {({ className: motionClassName, style }, motionRef) => (
           <div
-            className={classnames(`${prefixCls}-content`, motionClassName)}
+            className={classnames(`${prefixCls}-content`, motionClassName, classNames.content)}
             ref={motionRef}
-            style={style}
+            style={{ ...style, ...styles.content }}
           >
-            {content}
+            {children}
           </div>
         )}
       </CSSMotion>

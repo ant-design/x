@@ -6,15 +6,19 @@ const App = () => {
   const [value, setValue] = useState(true);
   return (
     <>
-      <Button onClick={() => setValue(!value)}>Change expand</Button>
+      <div>
+        <Button onClick={() => setValue(!value)}>Change expand</Button>
+      </div>
+      <br />
       <Think
-        content={'This is deep thinking content.'}
         statusText={'deep thinking'}
-        expand={value}
-        onExpandChange={(value) => {
+        expanded={value}
+        onExpand={(value) => {
           setValue(value);
         }}
-      />
+      >
+        This is deep thinking content.
+      </Think>
     </>
   );
 };

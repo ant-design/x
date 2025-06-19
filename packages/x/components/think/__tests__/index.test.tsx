@@ -19,14 +19,14 @@ describe('Think Component', () => {
   });
 
   it('Think component work', () => {
-    const { container } = render(<Think content={'test'} statusText={'test'} />);
+    const { container } = render(<Think statusText={'test'}>test</Think>);
     const element = container.querySelector<HTMLDivElement>('.ant-think');
     expect(element).toBeTruthy();
     expect(element).toMatchSnapshot();
   });
 
   it('Think support content', () => {
-    const { container } = render(<Think content="think content" statusText={'thinking'} />);
+    const { container } = render(<Think statusText={'thinking'}>think content</Think>);
     const element = container.querySelector<HTMLDivElement>('.ant-think .ant-think-content');
     expect(element?.textContent).toBe('think content');
     const elementStatus = container.querySelector<HTMLDivElement>(
@@ -37,10 +37,9 @@ describe('Think Component', () => {
 
   it('Think support content with ReactNode', () => {
     const { container } = render(
-      <Think
-        content={<span className="test-content">think content</span>}
-        statusText={<span className="test-status">thinking</span>}
-      />,
+      <Think statusText={<span className="test-status">thinking</span>}>
+        <span className="test-content">think content</span>
+      </Think>,
     );
     const element = container.querySelector<HTMLDivElement>('.ant-think .test-content');
     expect(element?.textContent).toBe('think content');
@@ -50,12 +49,9 @@ describe('Think Component', () => {
 
   it('Think Should support className & style', () => {
     const { container } = render(
-      <Think
-        content="test"
-        statusText="test"
-        className="test-className"
-        style={{ backgroundColor: 'green' }}
-      />,
+      <Think statusText="test" className="test-className" style={{ backgroundColor: 'green' }}>
+        test
+      </Think>,
     );
     const element = container.querySelector<HTMLDivElement>('.ant-think');
     expect(element).toHaveClass('test-className');
@@ -64,7 +60,9 @@ describe('Think Component', () => {
 
   it('Think support loading', () => {
     const { container } = render(
-      <Think content="think content" statusText={'thinking'} loading={true} />,
+      <Think statusText={'thinking'} loading={true}>
+        think content
+      </Think>,
     );
     const element = container.querySelector<HTMLDivElement>('.ant-think .anticon-loading');
     expect(element).toBeTruthy();
@@ -72,7 +70,9 @@ describe('Think Component', () => {
 
   it('Think support expand', async () => {
     const { container } = render(
-      <Think content="think content" statusText={'thinking'} defaultExpand={false} />,
+      <Think statusText={'thinking'} defaultExpanded={false}>
+        think content
+      </Think>,
     );
     const element = container.querySelector<HTMLDivElement>('.ant-think .ant-think-content');
     expect(element).toBeNull();

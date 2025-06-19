@@ -28,18 +28,17 @@ Common props ref：[Common props](/docs/react/common-props)
 
 ### ThinkProps
 
-| Property       | Description                  | Type                      | Default | Version |
-| -------------- | ---------------------------- | ------------------------- | ------- | ------- |
-| classNames     | DOM class                    | string                    | -       | -       |
-| style          | DOM style                    | CSSProperties             | -       | -       |
-| content        | Think Content                | React.ReactNode           | -       | -       |
-| statusText     | Text of status               | React.ReactNode           | -       | -       |
-| statusIcon     | Show icon                    | React.ReactNode           | -       | -       |
-| loading        | Loading                      | boolean                   | false   | -       |
-| loadingIcon    | Show icon in loading         | React.ReactNode           | -       | -       |
-| defaultExpand  | Default Expand state         | boolean                   | true    | -       |
-| expand         | Expand state                 | boolean                   | -       | -       |
-| onExpandChange | Callback when expand changes | (expand: boolean) => void | -       | -       |
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- | --- |
+| className | DOM class | string | - | - |
+| style | DOM style | CSSProperties | - | - |
+| children | Think Content | React.ReactNode | - | - |
+| statusText | Text of status | React.ReactNode | - | - |
+| statusIcon | Show icon | React.ReactNode | - | - |
+| loading | Loading | boolean | React.ReactNode | false | - |
+| defaultExpanded | Default Expand state | boolean | true | - |
+| expanded | Expand state | boolean | - | - |
+| onExpand | Callback when expand changes | (expand: boolean) => void | - | - |
 
 ## Semantic DOM
 

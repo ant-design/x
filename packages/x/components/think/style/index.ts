@@ -17,7 +17,8 @@ const genThinkStyle: GenerateStyle<ThinkToken> = (token) => {
     colorTextSecondary,
     colorTextDescription,
     fontSize,
-    fontSizeHeading4,
+    fontSizeHeading5,
+    fontSizeSM,
     lineHeight,
     colorBorder,
     lineWidth,
@@ -39,7 +40,12 @@ const genThinkStyle: GenerateStyle<ThinkToken> = (token) => {
       },
 
       '&-status-icon': {
-        fontSize: fontSizeHeading4,
+        fontSize: fontSizeHeading5,
+        display: 'flex',
+      },
+
+      '&-status-down-icon': {
+        fontSize: fontSizeSM,
       },
 
       '&-content': {

@@ -4,8 +4,8 @@ import { Button } from 'antd';
 import React from 'react';
 
 const App = () => {
-  const [statusText, setStatusText] = React.useState('deep thinking');
-  const [loading, setLoading] = React.useState(true);
+  const [statusText, setStatusText] = React.useState('Complete thinking');
+  const [loading, setLoading] = React.useState(false);
 
   const handleClick = () => {
     setLoading(true);
@@ -18,15 +18,21 @@ const App = () => {
   };
   return (
     <>
-      <Button onClick={handleClick}>Run</Button>
-      <Think content={'This is deep thinking content.'} statusText={statusText} loading={loading} />
+      <div>
+        <Button onClick={handleClick}>Run</Button>
+      </div>
+      <br />
+      <Think statusText={statusText} loading={loading}>
+        This is deep thinking content.
+      </Think>
+      <br />
       <Think
-        content={'Customize status icon.'}
         statusText={statusText}
-        loading={loading}
+        loading={loading ? <SyncOutlined /> : false}
         statusIcon={<MutedOutlined />}
-        loadingIcon={<SyncOutlined />}
-      />
+      >
+        Customize status icon.
+      </Think>
     </>
   );
 };

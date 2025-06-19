@@ -15,12 +15,13 @@ exports[`Think Component Think component work 1`] = `
         role="img"
       >
         <svg
+          aria-label="think"
           fill="currentColor"
           height="1em"
+          role="img"
           viewBox="0 0 1024 1024"
           width="1em"
         >
-          <title />
           <symbol
             id="icon-think"
             viewBox="0 0 1024 1024"
@@ -35,14 +36,14 @@ exports[`Think Component Think component work 1`] = `
         </svg>
       </span>
     </div>
-    <span
+    <div
       class="ant-think-status-text"
     >
       test
-    </span>
+    </div>
     <span
       aria-label="down"
-      class="anticon anticon-down"
+      class="anticon anticon-down ant-think-status-down-icon"
       role="img"
     >
       <svg
@@ -84,12 +85,13 @@ exports[`Think Component rtl render component should be rendered correctly in RT
         role="img"
       >
         <svg
+          aria-label="think"
           fill="currentColor"
           height="1em"
+          role="img"
           viewBox="0 0 1024 1024"
           width="1em"
         >
-          <title />
           <symbol
             id="icon-think"
             viewBox="0 0 1024 1024"
@@ -104,12 +106,12 @@ exports[`Think Component rtl render component should be rendered correctly in RT
         </svg>
       </span>
     </div>
-    <span
+    <div
       class="ant-think-status-text"
     />
     <span
       aria-label="down"
-      class="anticon anticon-down"
+      class="anticon anticon-down ant-think-status-down-icon"
       role="img"
     >
       <svg
