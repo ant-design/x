@@ -4,12 +4,7 @@ import React from 'react';
 const App = () => {
   return (
     <>
-      <Think
-        content={
-          'This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.This is deep thinking content.'
-        }
-        statusText={'deep thinking'}
-      />
+      <Think content={'This is deep thinking content.'} statusText={'deep thinking'} />
     </>
   );
 };

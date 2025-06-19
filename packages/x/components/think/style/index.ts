@@ -47,8 +47,12 @@ const genThinkStyle: GenerateStyle<ThinkToken> = (token) => {
         width: '100%',
         color: colorTextDescription,
         whiteSpace: 'pre-wrap',
-        paddingLeft: paddingSM,
-        borderLeft: `${calc(lineWidth).mul(2).equal()} solid ${colorBorder}`,
+        paddingInlineStart: paddingSM,
+        borderInlineStart: `${calc(lineWidth).mul(2).equal()} solid ${colorBorder}`,
+      },
+
+      [`&${componentCls}-rtl`]: {
+        direction: 'rtl',
       },
     },
   };
