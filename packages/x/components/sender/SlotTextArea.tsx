@@ -2,7 +2,7 @@ import { CaretDownFilled } from '@ant-design/icons';
 import { Dropdown, Input, InputRef } from 'antd';
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import useGetState from '../_util/hooks/useGetState';
+import useGetState from '../_util/hooks/use-get-state';
 import { SenderContext } from './index';
 import type { SlotNode } from './index';
 
