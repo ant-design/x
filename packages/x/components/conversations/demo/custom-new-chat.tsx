@@ -1,15 +1,16 @@
 import {
+  AppstoreAddOutlined,
   CodeOutlined,
-  CodeSandboxOutlined,
   FileImageOutlined,
   FileSearchOutlined,
   SignatureOutlined,
 } from '@ant-design/icons';
-import { Conversations, ConversationsProps } from '@ant-design/x';
-import { Flex, Tag, theme } from 'antd';
+import { Conversations } from '@ant-design/x';
+import type { ConversationsProps } from '@ant-design/x';
 import type { GetProp } from 'antd';
-import KeyCode from 'rc-util/lib/KeyCode';
+import { theme } from 'antd';
 import React, { useState } from 'react';
+
 const agentItems: GetProp<ConversationsProps, 'items'> = [
   {
     key: 'write',
@@ -31,28 +32,10 @@ const agentItems: GetProp<ConversationsProps, 'items'> = [
     label: 'Deep Search',
     icon: <FileSearchOutlined />,
   },
-
-  {
-    key: 'inDepthResearch',
-    label: 'In-depth research',
-    group: 'More Features',
-  },
-  {
-    key: 'vincentFigure',
-    label: 'Vincent Figure',
-    group: 'More Features',
-  },
   {
     type: 'divider',
   },
 ];
-
-const conversationsText = (
-  <div style={{ marginBottom: 16 }}>
-    You can switch sessions using the shortcut key: <Tag>Alt/⌥</Tag> + <Tag>number</Tag>, and create
-    new chat using the shortcut key: <Tag>Win/⌘</Tag> + <Tag>K</Tag>.
-  </div>
-);
 
 const App: React.FC = () => {
   const { token } = theme.useToken();
@@ -87,40 +70,18 @@ const App: React.FC = () => {
   };
 
   return (
-    <>
-      {conversationsText}
-      <Conversations
-        creation={{
-          disabled: true,
-          onClick: newChatClick,
-        }}
-        style={style}
-        defaultActiveKey="write"
-        onActiveChange={(value) => {
-          console.log(value);
-        }}
-        shortcutKeys={{
-          creation: ['Meta', KeyCode.K],
-          items: ['Alt', 'number'],
-        }}
-        groupable={{
-          label: (group) => {
-            return group !== 'Today' ? (
-              <Flex gap="small">
-                <CodeSandboxOutlined />
-                {group}
-              </Flex>
-            ) : (
-              group
-            );
-          },
-          collapsible: (group) => {
-            return group !== 'Today';
-          },
-        }}
-        items={items}
-      />
-    </>
+    <Conversations
+      creation={{
+        label: 'Create a new chat',
+        align: 'start',
+        icon: <AppstoreAddOutlined />,
+        onClick: newChatClick,
+      }}
+      items={items}
+      defaultActiveKey="write"
+      style={style}
+      groupable
+    />
   );
 };
 

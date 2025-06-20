@@ -1,7 +1,7 @@
 ## zh-CN
 
-通过 `shortcutKeys` 设置快捷键。
+通过 `shortcutKeys` 为切换会话或新建会话设置快捷键。
 
 ## en-US
 
-Modify shortcut keys by `shortcutKeys` prop.
+Set shortcut keys for switching sessions or creating new sessions through `shortcutKeys`.

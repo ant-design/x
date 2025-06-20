@@ -1,11 +1,31 @@
 import { unit } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
+import { FastColor } from '@ant-design/fast-color';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
 
-// biome-ignore lint/suspicious/noEmptyInterface: ComponentToken need to be empty by default
-export interface ComponentToken {}
-
+export interface ComponentToken {
+  /**
+   * @desc 新会话按钮背景颜色
+   * @descEN New conversation button background color
+   */
+  creationBgColor: string;
+  /**
+   * @desc 新会话按钮边框颜色
+   * @descEN New conversation button border color
+   */
+  creationBorderColor: string;
+  /**
+   * @desc 新会话按钮悬浮态背景颜色
+   * @descEN Background color of default new conversation button when hover
+   */
+  creationHoverColor: string;
+  /**
+   * @desc 快捷键标识字体颜色
+   * @descEN Shortcut key identification font color
+   */
+  shortcutKeyTextColor: string;
+}
 export interface ConversationsToken extends FullToken<'Conversations'> {}
 
 const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
@@ -25,26 +45,67 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
         padding: 0,
         listStyle: 'none',
       },
-      [`&${componentCls}-rtl`]: {
+      [`${componentCls}-creation`]: {
+        backgroundColor: token.creationBgColor,
+        color: token.colorPrimary,
+        border: `${unit(token.lineWidth)} ${token.lineType}, ${token.creationBorderColor}`,
+        fontWeight: 500,
+        paddingBlock: token.paddingXS,
+        paddingInline: token.paddingSM,
+        fontSize: token.fontSize,
+        cursor: 'pointer',
+        display: 'flex',
+        gap: token.paddingXS,
+        marginBlockEnd: token.marginSM,
+        lineHeight: token.lineHeight,
+        borderRadius: token.borderRadiusLG,
+        transition: `all ${token.motionDurationMid} ${token.motionEaseInOut}`,
+        '&:hover': {
+          color: token.colorPrimary,
+          background: token.creationHoverColor,
+        },
+        '&-start': {
+          justifyContent: 'flex-start',
+        },
+        '&-center': {
+          justifyContent: 'center',
+        },
+        '&-end': {
+          justifyContent: 'flex-end',
+        },
+        '&-label': {
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        },
+        '&-label-shortcut-keys-show': {
+          flex: 1,
+        },
+        '&-label-shortcut-keys': {
+          borderRadius: token.borderRadiusSM,
+          height: token.controlHeightXS,
+          fontSize: token.fontSizeSM,
+          paddingInline: token.paddingXXS,
+          color: token.shortcutKeyTextColor,
+          display: 'flex',
+          border: `${unit(token.lineWidth)} ${token.lineType}, ${token.creationBorderColor}`,
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: unit(4),
+        },
+        '&-disabled': {
+          cursor: 'not-allowed',
+          [`& ${componentCls}-label, ${componentCls}-icon, ${componentCls}-menu-icon`]: {
+            color: token.colorTextDisabled,
+          },
+        },
+      },
+      [`& ${componentCls}-rtl`]: {
         direction: 'rtl',
       },
-      // 会话列表
-      [`& ${componentCls}-list`]: {
-        display: 'flex',
-        gap: token.paddingXXS,
-        flexDirection: 'column',
-
-        [`& ${componentCls}-item`]: {
-          paddingInlineStart: token.paddingXL,
-        },
-        [`& ${componentCls}-label`]: {
-          color: token.colorTextDescription,
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          whiteSpace: 'nowrap',
-        },
+      [`& ${componentCls}-divider`]: {
+        marginBlock: token.marginXXS,
       },
-      // 会话列表项
       [`& ${componentCls}-item`]: {
         display: 'flex',
         height: token.controlHeightLG,
@@ -55,25 +116,21 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
         borderRadius: token.borderRadiusLG,
         cursor: 'pointer',
         transition: `all ${token.motionDurationMid} ${token.motionEaseInOut}`,
-        // 悬浮样式
         '&:hover': {
           backgroundColor: token.colorBgTextHover,
         },
-        // 选中样式
         '&-active': {
           backgroundColor: token.colorBgTextHover,
           [`& ${componentCls}-label, ${componentCls}-menu-icon`]: {
             color: token.colorText,
           },
         },
-        // 禁用样式
         '&-disabled': {
           cursor: 'not-allowed',
-          [`& ${componentCls}-label`]: {
+          [`& ${componentCls}-creation-label, ${componentCls}-creation-icon`]: {
             color: token.colorTextDisabled,
           },
         },
-        // 悬浮、选中时激活操作菜单
         '&:hover, &-active': {
           [`& ${componentCls}-menu-icon`]: {
             opacity: 0.6,
@@ -84,7 +141,6 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
           opacity: 1,
         },
       },
-      // 会话名
       [`& ${componentCls}-label`]: {
         flex: 1,
         color: token.colorText,
@@ -92,24 +148,66 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
       },
-      // 会话操作菜单
       [`& ${componentCls}-menu-icon`]: {
         opacity: 0,
         fontSize: token.fontSizeXL,
       },
-      // 会话图标
+      [`& ${componentCls}-list`]: {
+        display: 'flex',
+        gap: token.paddingXXS,
+        flexDirection: 'column',
+      },
+      [`& ${componentCls}-group-collapsible-list`]: {
+        [`& ${componentCls}-item`]: {
+          paddingInlineStart: token.paddingXL,
+        },
+      },
       [`& ${componentCls}-group-title`]: {
         display: 'flex',
         alignItems: 'center',
+        color: token.colorTextDescription,
         height: token.controlHeightLG,
         minHeight: token.controlHeightLG,
         padding: `0 ${unit(token.paddingXS)}`,
+      },
+
+      [`& ${componentCls}-group-title-collapsible`]: {
+        justifyContent: 'space-between',
+        cursor: 'pointer',
+        color: token.colorText,
+        borderRadius: token.borderRadiusLG,
+        transition: `all ${token.motionDurationMid} ${token.motionEaseInOut}`,
+        '&:hover': {
+          backgroundColor: token.colorBgTextHover,
+        },
+      },
+      [`& ${componentCls}-group-collapse-trigger`]: {
+        transition: `all ${token.motionDurationMid} ${token.motionEaseInOut}`,
+        transform: 'rotate(0deg)',
+        transformOrigin: 'center center',
+      },
+      [`& ${componentCls}-group-collapse-trigger-open`]: {
+        transform: 'rotate(90deg)',
+      },
+      [`& ${componentCls}-group-collapse-trigger-close`]: {
+        transform: 'rotate(0deg)',
       },
     },
   };
 };
 
-export const prepareComponentToken: GetDefaultToken<'Conversations'> = () => ({});
+export const prepareComponentToken: GetDefaultToken<'Conversations'> = (token) => {
+  const creationBgColor = new FastColor(token.colorPrimary).setA(0.15);
+  const creationBorderColor = new FastColor(token.colorPrimary).setA(0.22);
+  const creationHoverColor = new FastColor(token.colorPrimary).setA(0.25);
+  const shortcutKeyTextColor = new FastColor(token.colorPrimary).setA(0.65);
+  return {
+    creationBgColor: creationBgColor.toRgbString(),
+    creationBorderColor: creationBorderColor.toRgbString(),
+    creationHoverColor: creationHoverColor.toRgbString(),
+    shortcutKeyTextColor: shortcutKeyTextColor.toRgbString(),
+  };
+};
 
 export default genStyleHooks(
   'Conversations',

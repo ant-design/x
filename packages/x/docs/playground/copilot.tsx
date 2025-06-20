@@ -25,7 +25,7 @@ import {
   useXAgent,
   useXChat,
 } from '@ant-design/x';
-import type { Conversation } from '@ant-design/x/es/conversations';
+import type { ConversationItemType } from '@ant-design/x';
 import { Button, GetProp, GetRef, Image, Popover, Space, Spin, message } from 'antd';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
@@ -165,7 +165,7 @@ const Copilot = (props: CopilotProps) => {
 
   const [messageHistory, setMessageHistory] = useState<Record<string, any>>({});
 
-  const [sessionList, setSessionList] = useState<Conversation[]>(MOCK_SESSION_LIST);
+  const [sessionList, setSessionList] = useState<ConversationItemType[]>(MOCK_SESSION_LIST);
   const [curSession, setCurSession] = useState(sessionList[0].key);
 
   const [attachmentsOpen, setAttachmentsOpen] = useState(false);

@@ -6,6 +6,12 @@ import type { CSSMotionProps } from 'rc-motion';
 
 export type CollapsibleOptions = {
   /**
+   * @desc 初始化展开的节点
+   * @descEN default expanded keys
+   */
+  defaultExpandedKeys?: string[];
+
+  /**
    * @desc 当前展开的节点
    * @descEN current expanded keys
    */
@@ -37,27 +43,34 @@ const useCollapsible: UseCollapsible = (collapsible, prefixCls, rootPrefixCls) =
   const isThoughtChainUnControlled =
     typeof collapsible === 'boolean' || collapsible?.expandedKeys === undefined;
   // ============================ Collapsible ============================
-  const [enableCollapse, customizeExpandedKeys, customizeOnExpand] = React.useMemo(() => {
-    let baseConfig: RequiredCollapsibleOptions = {
-      expandedKeys: [],
-      onExpand: () => {},
-    };
+  const [enableCollapse, defaultExpandedKeys, customizeExpandedKeys, customizeOnExpand] =
+    React.useMemo(() => {
+      let baseConfig: RequiredCollapsibleOptions = {
+        expandedKeys: [],
+        defaultExpandedKeys: [],
+        onExpand: () => {},
+      };
 
-    if (!collapsible) {
-      return [false, baseConfig.expandedKeys, baseConfig.onExpand];
-    }
+      if (!collapsible) {
+        return [
+          false,
+          baseConfig.defaultExpandedKeys,
+          baseConfig.expandedKeys,
+          baseConfig.onExpand,
+        ];
+      }
 
-    if (typeof collapsible === 'object') {
-      baseConfig = { ...baseConfig, ...collapsible };
-    }
+      if (typeof collapsible === 'object') {
+        baseConfig = { ...baseConfig, ...collapsible };
+      }
 
-    return [true, baseConfig.expandedKeys, baseConfig.onExpand];
-  }, [collapsible]);
+      return [true, baseConfig.defaultExpandedKeys, baseConfig.expandedKeys, baseConfig.onExpand];
+    }, [collapsible]);
 
   // ============================ ExpandedKeys ============================
   const [mergedExpandedKeys, setMergedExpandedKeys] = useMergedState<
     RequiredCollapsibleOptions['expandedKeys']
-  >(customizeExpandedKeys, {
+  >(defaultExpandedKeys || [], {
     value: isThoughtChainUnControlled ? undefined : customizeExpandedKeys,
     onChange: customizeOnExpand,
   });
@@ -75,6 +88,7 @@ const useCollapsible: UseCollapsible = (collapsible, prefixCls, rootPrefixCls) =
   };
 
   // ============================ Motion ============================
+
   const collapseMotion: CSSMotionProps = React.useMemo(() => {
     if (!enableCollapse) return {};
 

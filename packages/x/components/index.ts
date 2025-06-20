@@ -13,7 +13,7 @@ export { default as Bubble } from './bubble';
 export type { BubbleProps } from './bubble';
 
 export { default as Conversations } from './conversations';
-export type { ConversationsProps, Conversation } from './conversations';
+export type { ConversationsProps, ConversationItemType } from './conversations';
 
 export { default as Prompts } from './prompts';
 export type { PromptsProps, PromptProps } from './prompts';

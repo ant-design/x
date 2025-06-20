@@ -161,7 +161,7 @@ const SubTokenTable: React.FC<SubTokenTableProps> = (props) => {
           {title}
           <Popover
             title={null}
-            destroyTooltipOnHide
+            destroyOnHidden
             styles={{ root: { width: 400 } }}
             content={
               <Typography>

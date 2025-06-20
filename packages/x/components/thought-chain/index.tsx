@@ -2,8 +2,8 @@ import classnames from 'classnames';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
 
+import useCollapsible, { Collapsible } from '../_util/hooks/use-collapsible';
 import { useXProviderContext } from '../x-provider';
-import useCollapsible from './hooks/useCollapsible';
 import useStyle from './style';
 
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
@@ -11,7 +11,6 @@ import ThoughtChainNode, { ThoughtChainNodeContext } from './Item';
 
 import type { ConfigProviderProps } from 'antd';
 import type { ThoughtChainItem } from './Item';
-import type { Collapsible } from './hooks/useCollapsible';
 
 export type SemanticType = 'item' | 'itemHeader' | 'itemContent' | 'itemFooter';
 export interface ThoughtChainProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {

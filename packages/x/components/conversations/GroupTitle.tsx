@@ -1,25 +1,76 @@
-import { Typography } from 'antd';
+import { RightOutlined } from '@ant-design/icons';
 import type { ConfigProviderProps, GetProp } from 'antd';
 import classnames from 'classnames';
+import CSSMotion from 'rc-motion';
+import type { CSSMotionProps } from 'rc-motion';
 import React from 'react';
+import type { GroupInfoType } from './hooks/useGroupable';
 
 export interface GroupTitleProps {
   children?: React.ReactNode;
+  enableGroup?: boolean;
 }
-
-// User should not care about internal state.
-// Which should pass by context instead.
-export const GroupTitleContext = React.createContext<{
+interface GroupTitleContextType {
   prefixCls?: GetProp<ConfigProviderProps, 'prefixCls'>;
-}>(null!);
+  enableCollapse: boolean;
+  expandedKeys: string[];
+  onItemExpand: ((curKey: string) => void) | undefined;
+  collapseMotion: CSSMotionProps;
+  groupInfo: Omit<GroupInfoType, 'collapsible'> & { collapsible: boolean };
+}
+export const GroupTitleContext = React.createContext<GroupTitleContextType>(null!);
 
 const GroupTitle: React.FC<GroupTitleProps> = ({ children }) => {
-  const { prefixCls } = React.useContext(GroupTitleContext);
+  const { prefixCls, groupInfo, enableCollapse, expandedKeys, onItemExpand, collapseMotion } =
+    React.useContext(GroupTitleContext) || {};
+  const { label, name, collapsible } = groupInfo || {};
+
+  const labelNode =
+    typeof label === 'function'
+      ? label(name, {
+          groupInfo,
+        })
+      : label || name;
+
+  const mergeCollapsible = collapsible && enableCollapse;
+  const expandFun = () => {
+    if (mergeCollapsible) {
+      onItemExpand?.(groupInfo.name);
+    }
+  };
+
+  const groupOpen = mergeCollapsible && !!expandedKeys?.includes?.(name);
 
   return (
-    <div className={classnames(`${prefixCls}-group-title`)}>
-      {children && <Typography.Text>{children}</Typography.Text>}
-    </div>
+    <>
+      <li>
+        <div
+          className={classnames(`${prefixCls}-group-title`, {
+            [`${prefixCls}-group-title-collapsible`]: mergeCollapsible,
+          })}
+          onClick={expandFun}
+        >
+          {labelNode && <div className={classnames(`${prefixCls}-group-label`)}>{labelNode}</div>}
+          {mergeCollapsible && (
+            <div
+              className={classnames(
+                `${prefixCls}-group-collapse-trigger `,
+                `${prefixCls}-group-collapse-trigger-${groupOpen ? 'open' : 'close'}`,
+              )}
+            >
+              <RightOutlined />
+            </div>
+          )}
+        </div>
+      </li>
+      <CSSMotion {...collapseMotion} visible={mergeCollapsible ? groupOpen : true}>
+        {({ className: motionClassName, style }, motionRef) => (
+          <div className={classnames(motionClassName)} ref={motionRef} style={style}>
+            {children}
+          </div>
+        )}
+      </CSSMotion>
+    </>
   );
 };
 

@@ -41,7 +41,7 @@ function getTokenList(list?: DeclarationReflection[], source?: string) {
 }
 
 const main = async () => {
-  const app = await Application.bootstrap(
+  const app = await (Application as any).bootstrap(
     {
       // typedoc options here
       entryPoints: ['components/theme/interface/index.ts', 'components/*/style/index.{ts,tsx}'],
@@ -68,6 +68,7 @@ const main = async () => {
       // Global Token
       if (file.name === 'theme/interface') {
         let presetColors: string[] = [];
+
         file.children?.forEach((type: any) => {
           if (type.name === 'SeedToken') {
             tokenMeta.seed = getTokenList(type.children, 'seed');

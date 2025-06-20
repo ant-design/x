@@ -1,7 +1,8 @@
-import { DeleteOutlined, EditOutlined, StopOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, ShareAltOutlined, StopOutlined } from '@ant-design/icons';
 import { Conversations } from '@ant-design/x';
 import type { ConversationsProps } from '@ant-design/x';
-import { App, type GetProp, theme } from 'antd';
+import type { GetProp } from 'antd';
+import { theme } from 'antd';
 import React from 'react';
 
 const items: GetProp<ConversationsProps, 'items'> = Array.from({ length: 4 }).map((_, index) => ({
@@ -10,8 +11,7 @@ const items: GetProp<ConversationsProps, 'items'> = Array.from({ length: 4 }).ma
   disabled: index === 3,
 }));
 
-const Demo = () => {
-  const { message } = App.useApp();
+const App: React.FC = () => {
   const { token } = theme.useToken();
 
   const style = {
@@ -20,37 +20,41 @@ const Demo = () => {
     borderRadius: token.borderRadius,
   };
 
-  const menuConfig: ConversationsProps['menu'] = (conversation) => ({
+  const menuConfig: ConversationsProps['menu'] = {
     items: [
       {
-        label: 'Operation 1',
-        key: 'operation1',
+        label: 'Rename',
+        key: 'Rename',
         icon: <EditOutlined />,
       },
       {
-        label: 'Operation 2',
-        key: 'operation2',
+        label: 'Share',
+        key: 'Share',
+        icon: <ShareAltOutlined />,
+      },
+      {
+        type: 'divider',
+      },
+      {
+        label: 'Archive',
+        key: 'Archive',
         icon: <StopOutlined />,
         disabled: true,
       },
       {
-        label: 'Operation 3',
-        key: 'operation3',
+        label: 'Delete Chat',
+        key: 'deleteChat',
         icon: <DeleteOutlined />,
         danger: true,
       },
     ],
-    onClick: (menuInfo) => {
-      menuInfo.domEvent.stopPropagation();
-      message.info(`Click ${conversation.key} - ${menuInfo.key}`);
+    onClick: (itemInfo) => {
+      console.log(`Click ${itemInfo.key}`);
+      itemInfo.domEvent.stopPropagation();
     },
-  });
+  };
 
   return <Conversations defaultActiveKey="item1" menu={menuConfig} items={items} style={style} />;
 };
 
-export default () => (
-  <App>
-    <Demo />
-  </App>
-);
+export default App;
