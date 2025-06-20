@@ -8,6 +8,7 @@ import type { ConversationsProps } from '../conversations';
 import type { PromptsProps } from '../prompts';
 import type { SenderProps } from '../sender';
 import type { SuggestionProps } from '../suggestion';
+import type { ThinkProps } from '../think';
 import type { ThoughtChainProps } from '../thought-chain';
 import type { WelcomeProps } from '../welcome';
 interface BaseComponentConfig {
@@ -35,6 +36,7 @@ export interface XComponentsConfig {
   attachments?: ComponentConfig<AttachmentsProps>;
   welcome?: ComponentConfig<WelcomeProps>;
   actions?: ComponentConfig<ActionsProps>;
+  think?: ComponentConfig<ThinkProps>;
 }
 
 export interface XProviderProps extends XComponentsConfig {
