@@ -16,6 +16,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 ## Examples
 
 <!-- prettier-ignore -->
+<code src="./demo/slot-filling.tsx">Slot filling</code>
 <code src="./demo/basic.tsx">Basic</code>
 <code src="./demo/submitType.tsx">Submit type</code>
 <code src="./demo/speech.tsx">Speech input</code>
@@ -39,7 +40,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | actions | Custom actions,set as `actions: false` when you don't need default actions | ReactNode \| (oriNode, info: { components:ActionsComponents }) => ReactNode | - | - |
 | allowSpeech | Whether to allow speech input | boolean \| SpeechConfig | false | - |
 | classNames | Class name | [See below](#semantic-dom) | - | - |
-| components | Custom components, The default input is[Input.TextArea](https://ant.design/components/input#api),Ensure that when customizing the input component, all necessary props are implemented as per `Input.TextArea` to avoid any incomplete functionality. | Record<'input', ComponentType> | - | - |
+| components | Custom components | Record<'input', ComponentType> | - | - |
 | defaultValue | Default value of input | string | - | - |
 | disabled | Whether to disable | boolean | false | - |
 | loading | Whether it is loading | boolean | false | - |
