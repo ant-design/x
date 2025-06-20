@@ -19,8 +19,8 @@ export interface ThinkProps {
   className?: string;
   classNames?: Partial<Record<SemanticType, string>>;
   rootClassName?: string;
-  statusText?: React.ReactNode;
-  statusIcon?: React.ReactNode;
+  title?: React.ReactNode;
+  icon?: React.ReactNode;
   loading?: boolean | React.ReactNode;
   defaultExpanded?: boolean;
   expanded?: boolean;
@@ -36,8 +36,8 @@ const Think: React.FC<React.PropsWithChildren<ThinkProps>> = (props) => {
     rootClassName,
     classNames = {},
     children,
-    statusText,
-    statusIcon,
+    title,
+    icon,
     loading,
     defaultExpanded = true,
     expanded,
@@ -78,7 +78,7 @@ const Think: React.FC<React.PropsWithChildren<ThinkProps>> = (props) => {
     if (loading) {
       return loading === true ? <LoadingOutlined /> : loading;
     }
-    return statusIcon || <ThinkIcon />;
+    return icon || <ThinkIcon />;
   };
 
   return wrapCSSVar(
@@ -98,7 +98,7 @@ const Think: React.FC<React.PropsWithChildren<ThinkProps>> = (props) => {
         <div className={`${prefixCls}-status-icon`}>
           <StatusIcon />
         </div>
-        <div className={`${prefixCls}-status-text`}>{statusText}</div>
+        <div className={`${prefixCls}-status-text`}>{title}</div>
         <DownOutlined className={`${prefixCls}-status-down-icon`} rotate={isExpand ? 180 : 0} />
       </div>
       <CSSMotion {...collapseMotion} visible={isExpand}>

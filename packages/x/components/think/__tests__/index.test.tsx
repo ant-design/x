@@ -19,14 +19,14 @@ describe('Think Component', () => {
   });
 
   it('Think component work', () => {
-    const { container } = render(<Think statusText={'test'}>test</Think>);
+    const { container } = render(<Think title={'test'}>test</Think>);
     const element = container.querySelector<HTMLDivElement>('.ant-think');
     expect(element).toBeTruthy();
     expect(element).toMatchSnapshot();
   });
 
   it('Think support content', () => {
-    const { container } = render(<Think statusText={'thinking'}>think content</Think>);
+    const { container } = render(<Think title={'thinking'}>think content</Think>);
     const element = container.querySelector<HTMLDivElement>('.ant-think .ant-think-content');
     expect(element?.textContent).toBe('think content');
     const elementStatus = container.querySelector<HTMLDivElement>(
@@ -37,7 +37,7 @@ describe('Think Component', () => {
 
   it('Think support content with ReactNode', () => {
     const { container } = render(
-      <Think statusText={<span className="test-status">thinking</span>}>
+      <Think title={<span className="test-status">thinking</span>}>
         <span className="test-content">think content</span>
       </Think>,
     );
@@ -49,7 +49,7 @@ describe('Think Component', () => {
 
   it('Think Should support className & style', () => {
     const { container } = render(
-      <Think statusText="test" className="test-className" style={{ backgroundColor: 'green' }}>
+      <Think title="test" className="test-className" style={{ backgroundColor: 'green' }}>
         test
       </Think>,
     );
@@ -60,7 +60,7 @@ describe('Think Component', () => {
 
   it('Think support loading', () => {
     const { container } = render(
-      <Think statusText={'thinking'} loading={true}>
+      <Think title={'thinking'} loading={true}>
         think content
       </Think>,
     );
@@ -70,7 +70,7 @@ describe('Think Component', () => {
 
   it('Think support expand', async () => {
     const { container } = render(
-      <Think statusText={'thinking'} defaultExpanded={false}>
+      <Think title={'thinking'} defaultExpanded={false}>
         think content
       </Think>,
     );

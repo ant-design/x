@@ -4,7 +4,7 @@ import React from 'react';
 const App = () => {
   return (
     <>
-      <Think statusText={'deep thinking'}>This is deep thinking content.</Think>
+      <Think title={'deep thinking'}>This is deep thinking content.</Think>
     </>
   );
 };

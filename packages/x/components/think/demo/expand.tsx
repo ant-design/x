@@ -11,7 +11,7 @@ const App = () => {
       </div>
       <br />
       <Think
-        statusText={'deep thinking'}
+        title={'deep thinking'}
         expanded={value}
         onExpand={(value) => {
           setValue(value);
