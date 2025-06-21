@@ -1,7 +1,9 @@
 import { CloudUploadOutlined, LinkOutlined } from '@ant-design/icons';
 import { Attachments, AttachmentsProps, Sender } from '@ant-design/x';
-import { App, Badge, Button, Flex, type GetProp, type GetRef, Typography } from 'antd';
+import { App, Badge, Button, Flex, type GetProp, type GetRef, Typography, UploadProps } from 'antd';
 import React from 'react';
+
+type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
 
 const Demo = () => {
   const [open, setOpen] = React.useState(true);
@@ -27,7 +29,20 @@ const Demo = () => {
         // Mock not real upload file
         beforeUpload={() => false}
         items={items}
-        onChange={({ fileList }) => setItems(fileList)}
+        onChange={({ file, fileList }) => {
+          if (file.status === 'removed') {
+            setItems(fileList);
+            return;
+          }
+          file.url = window.URL.createObjectURL(file as FileType);
+          const newFileList = fileList.slice();
+          newFileList.splice(
+            fileList.findIndex((item) => item.uid === file.uid),
+            1,
+            file,
+          );
+          setItems(newFileList);
+        }}
         placeholder={(type) =>
           type === 'drop'
             ? {
