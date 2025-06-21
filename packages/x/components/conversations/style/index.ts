@@ -49,7 +49,7 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
       [`${componentCls}-creation`]: {
         backgroundColor: token.creationBgColor,
         color: token.colorPrimary,
-        border: `${unit(token.lineWidth)} ${token.lineType}, ${token.creationBorderColor}`,
+        border: 'none',
         fontWeight: 500,
         paddingBlock: token.paddingXS,
         paddingInline: token.paddingSM,
@@ -61,9 +61,12 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
         lineHeight: token.lineHeight,
         borderRadius: token.borderRadiusLG,
         transition: `all ${token.motionDurationMid} ${token.motionEaseInOut}`,
-        '&:hover': {
+        [`&:not(${componentCls}-creation-disabled):hover`]: {
           color: token.colorPrimary,
           background: token.creationHoverColor,
+        },
+        [`&:not(${componentCls}-creation-disabled)`]: {
+          border: `${unit(token.lineWidth)} ${token.lineType}, ${token.creationBorderColor}`,
         },
         '&-start': {
           justifyContent: 'flex-start',
@@ -96,8 +99,13 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
         },
         '&-disabled': {
           cursor: 'not-allowed',
-          [`& ${componentCls}-label, ${componentCls}-icon, ${componentCls}-menu-icon`]: {
+          background: token.colorBgContainerDisabled,
+          [`& ${componentCls}-creation-label, ${componentCls}-creation-icon`]: {
             color: token.colorTextDisabled,
+          },
+          [`& ${componentCls}-creation-label-shortcut-keys`]: {
+            color: token.colorTextDisabled,
+            border: `${unit(token.lineWidth)} ${token.lineType}, ${token.colorBgContainerDisabled}`,
           },
         },
       },
@@ -117,7 +125,7 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
         borderRadius: token.borderRadiusLG,
         cursor: 'pointer',
         transition: `all ${token.motionDurationMid} ${token.motionEaseInOut}`,
-        '&:hover': {
+        [`&:not(${componentCls}-item-disabled):hover`]: {
           backgroundColor: token.colorBgTextHover,
         },
         '&-active': {
@@ -128,7 +136,7 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
         },
         '&-disabled': {
           cursor: 'not-allowed',
-          [`& ${componentCls}-creation-label, ${componentCls}-creation-icon`]: {
+          [`& ${componentCls}-label, ${componentCls}-icon, ${componentCls}-menu-icon`]: {
             color: token.colorTextDisabled,
           },
         },

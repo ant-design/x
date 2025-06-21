@@ -190,13 +190,14 @@ const Conversations: React.FC<ConversationsProps> & CompoundedComponent = (props
       case 'items':
         {
           const index = shortcutKeyAction?.actionKeyCodeNumber ?? shortcutKeyAction?.index;
-          const itemKey = typeof index === 'number' ? keyList?.[index] : mergedActiveKey;
-          itemKey && setMergedActiveKey(itemKey);
+          if (typeof index === 'number' && !keyList?.[index]?.disabled && keyList?.[index]?.key) {
+            setMergedActiveKey(keyList?.[index]?.key);
+          }
         }
         break;
       case 'creation':
         {
-          if (typeof creation?.onClick === 'function') {
+          if (typeof creation?.onClick === 'function' && !creation?.disabled) {
             creation.onClick();
           }
         }

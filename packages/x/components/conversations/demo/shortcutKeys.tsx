@@ -91,7 +91,6 @@ const App: React.FC = () => {
       {conversationsText}
       <Conversations
         creation={{
-          disabled: true,
           onClick: newChatClick,
         }}
         style={style}

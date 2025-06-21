@@ -292,7 +292,6 @@ describe('Conversations Component', () => {
         }}
         creation={{
           onClick,
-          disabled: true,
         }}
         menu={menu}
         defaultActiveKey="demo1"
@@ -306,5 +305,30 @@ describe('Conversations Component', () => {
     });
     expect(getByText('New chat')).toBeTruthy();
     expect(onClick).toHaveBeenCalledTimes(1);
+  });
+  it('with Creation shortcutKeys disable', async () => {
+    const onClick = jest.fn();
+    const { getByText, container } = render(
+      <Conversations
+        items={items}
+        shortcutKeys={{
+          creation: ['Meta', KeyCode.K],
+        }}
+        creation={{
+          disabled: true,
+          onClick,
+        }}
+        menu={menu}
+        defaultActiveKey="demo1"
+      />,
+    );
+    fireEvent.keyDown(container, {
+      key: '™',
+      keyCode: KeyCode.K,
+      code: 'Digit3',
+      metaKey: true,
+    });
+    expect(getByText('New chat')).toBeTruthy();
+    expect(onClick).toHaveBeenCalledTimes(0);
   });
 });

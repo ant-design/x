@@ -41,8 +41,8 @@ const App: React.FC = () => {
       disabled: !deepSearchChecked,
       label: (
         <Flex gap="small" align="center">
-          Deep Search{' '}
-          <Switch size="small" checked={deepSearchChecked} onChange={setDeepSearchChecked} />{' '}
+          Deep Search
+          <Switch size="small" checked={deepSearchChecked} onChange={setDeepSearchChecked} />
         </Flex>
       ),
       icon: <FileSearchOutlined />,
