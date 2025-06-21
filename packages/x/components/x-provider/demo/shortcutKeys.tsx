@@ -5,19 +5,17 @@ import {
   SignatureOutlined,
 } from '@ant-design/icons';
 import { Conversations, XProvider } from '@ant-design/x';
-import { Card, Tag } from 'antd';
+import { Card, Flex, Tag, Typography } from 'antd';
 import React from 'react';
 
 export default () => {
-  const conversationsText = (
-    <div style={{ marginBottom: 10 }}>
-      You can switch sessions using the shortcut key: <Tag>Alt/⌥</Tag> + <Tag>number</Tag>
-    </div>
-  );
-
   return (
     <>
-      {conversationsText}
+      <Flex gap={12} style={{ marginBottom: 16 }} align="center">
+        <Typography.Text>
+          You can switch sessions using the shortcut key: <Tag>Alt/⌥</Tag> + <Tag>number</Tag>
+        </Typography.Text>
+      </Flex>
       <Card>
         <XProvider
           conversations={{
