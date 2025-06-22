@@ -12,6 +12,16 @@ const Demo = () => {
 
   const senderRef = React.useRef<GetRef<typeof Sender>>(null);
 
+  React.useEffect(() => {
+    return () => {
+      items.forEach((item) => {
+        if (item.url?.startsWith('blob:')) {
+          URL.revokeObjectURL(item.url);
+        }
+      });
+    };
+  }, []);
+
   const senderHeader = (
     <Sender.Header
       title="Attachments"
@@ -27,7 +37,23 @@ const Demo = () => {
         // Mock not real upload file
         beforeUpload={() => false}
         items={items}
-        onChange={({ fileList }) => setItems(fileList)}
+        onChange={({ file, fileList }) => {
+          const updatedFileList = fileList.map((item) => {
+            if (item.uid === file.uid && file.status !== 'removed' && item.originFileObj) {
+              // clear URL
+              if (item.url?.startsWith('blob:')) {
+                URL.revokeObjectURL(item.url);
+              }
+              // create new preview URL
+              return {
+                ...item,
+                url: URL.createObjectURL(item.originFileObj),
+              };
+            }
+            return item;
+          });
+          setItems(updatedFileList);
+        }}
         placeholder={(type) =>
           type === 'drop'
             ? {
