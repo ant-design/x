@@ -1,5 +1,6 @@
-import { MutedOutlined, SyncOutlined } from '@ant-design/icons';
+import { OpenAIOutlined, SyncOutlined } from '@ant-design/icons';
 import { Think } from '@ant-design/x';
+import { Global, css } from '@emotion/react';
 import { Button } from 'antd';
 import React from 'react';
 
@@ -26,7 +27,31 @@ const App = () => {
         This is deep thinking content.
       </Think>
       <br />
-      <Think title={title} loading={loading ? <SyncOutlined /> : false} icon={<MutedOutlined />}>
+      <Global
+        styles={css`
+        :root {
+          @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+          }
+        }
+        `}
+      />
+      <Think
+        title={title}
+        loading={
+          loading ? (
+            <SyncOutlined style={{ fontSize: 12, animation: 'spin 1s linear infinite' }} />
+          ) : (
+            false
+          )
+        }
+        icon={<OpenAIOutlined />}
+      >
         Customize status icon.
       </Think>
     </>
