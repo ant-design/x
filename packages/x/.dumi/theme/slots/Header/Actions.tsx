@@ -112,9 +112,13 @@ const HeaderActions: React.FC<HeaderActionsProps> = (props) => {
         variant="borderless"
         defaultValue={pkg.version}
         onChange={handleVersionChange}
-        dropdownStyle={getDropdownStyle}
         popupMatchSelectWidth={false}
         options={versionOptions}
+        styles={{
+          popup: {
+            root: getDropdownStyle,
+          },
+        }}
       />
     </Button>,
     <SwitchBtn

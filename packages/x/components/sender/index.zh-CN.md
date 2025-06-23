@@ -18,7 +18,8 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">基本用法</code>
-<code src="./demo/submitType.tsx">提交模式</code>
+<code src="./demo/slot-filling.tsx">词槽模式</code>
+<code src="./demo/submitType.tsx">提交方式</code>
 <code src="./demo/speech.tsx">语音输入</code>
 <code src="./demo/speech-custom.tsx">自定义语音输入</code>
 <code src="./demo/actions.tsx">自定义按钮</code>
@@ -28,7 +29,6 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/send-style.tsx">调整样式</code>
 <code src="./demo/paste-image.tsx">黏贴文件</code>
 <code src="./demo/focus.tsx">聚焦</code>
-<code src="./demo/slot-filling.tsx">词槽输入</code>
 
 ## API
 
@@ -53,12 +53,12 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 | styles | 语义化定义样式 | [见下](#semantic-dom) | - | - |
 | submitType | 提交模式 | SubmitType | `enter` \| `shiftEnter` | - |
 | value | 输入框值 | string | - | - |
-| onSubmit | 点击发送按钮的回调 | (message: string) => void | - | - |
-| onChange | 输入框值改变的回调 | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`> ) => void | - | - |
+| onSubmit | 点击发送按钮的回调 | (message: string, slotConfig?: SlotConfigType[]) => void | - | - |
+| onChange | 输入框值改变的回调 | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`>, slotConfig?: SlotConfigType[]) => void | - | - |
 | onCancel | 点击取消按钮的回调 | () => void | - | - |
 | onPasteFile | 黏贴文件的回调 | (firstFile: File, files: FileList) => void | - | - |
 | autoSize | 自适应内容高度，可设置为 true \| false 或对象：{ minRows: 2, maxRows: 6 } | boolean \| { minRows?: number; maxRows?: number } | { maxRows: 8 } | - |
-| slotConfig | 词槽配置，配置后输入框将变为词槽模式，支持结构化输入 | SlotNode[] | - | 2.0.0 |
+| slotConfig | 词槽配置，配置后输入框将变为词槽模式，支持结构化输入 | SlotConfigType[] | - | - |
 
 ```typescript | pure
 type SpeechConfig = {
@@ -78,72 +78,59 @@ type ActionsComponents = {
 };
 ```
 
-```typescript | pure
-type SlotNode = {
-  type: 'text' | 'input' | 'select' | 'tag' | 'custom';
-  key?: string; // 唯一标识，type为text时可省略
-  text?: string; // type为text时的内容
-  props?: { [key: string]: any }; // 词槽节点的属性，如 placeholder、options 等
-  customRender?: (value: any, onChange: (value: any) => void) => React.ReactNode; // type为custom时自定义渲染
-  formatResult?: (value: any) => string; // 格式化最终结果
-};
-```
-
-##### SlotNode 通用属性
-
-| 属性 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- |
-| type | 节点类型，决定渲染组件类型，必填 | 'text' \| 'input' \| 'select' \| 'tag' \| 'custom' | - | 2.0.0 |
-| key | 唯一标识，type 为 text 时可省略 | string | - | 2.0.0 |
-| defaultValue | 默认值，部分类型支持 | string | - | 2.0.0 |
-| props | 组件属性，具体见下方各类型说明 | object | - | 2.0.0 |
-| customRender | 自定义渲染函数，type 为 custom 时必填 | (value: any, onChange: (value: any) => void) => ReactNode | - | 2.0.0 |
-| formatResult | 格式化最终结果 | (value: any) => string | - | 2.0.0 |
-
-##### text 节点属性
-
-| 属性 | 说明           | 类型   | 默认值 | 版本  |
-| ---- | -------------- | ------ | ------ | ----- |
-| text | 文本内容，必填 | string | -      | 2.0.0 |
-
-##### input 节点属性
-
-| 属性         | 说明   | 类型   | 默认值 | 版本  |
-| ------------ | ------ | ------ | ------ | ----- |
-| placeholder  | 占位符 | string | -      | 2.0.0 |
-| defaultValue | 默认值 | string | -      | 2.0.0 |
-
-##### select 节点属性
-
-| 属性         | 说明           | 类型     | 默认值 | 版本  |
-| ------------ | -------------- | -------- | ------ | ----- |
-| options      | 选项数组，必填 | string[] | -      | 2.0.0 |
-| placeholder  | 占位符         | string   | -      | 2.0.0 |
-| defaultValue | 默认值         | string   | -      | 2.0.0 |
-
-##### tag 节点属性
-
-| 属性  | 说明           | 类型   | 默认值 | 版本  |
-| ----- | -------------- | ------ | ------ | ----- |
-| label | 标签文本，必填 | string | -      | 2.0.0 |
-| value | 标签值         | string | -      | 2.0.0 |
-
-##### custom 节点属性
-
-| 属性 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- |
-| customRender | 自定义渲染函数，注意需要绑定好 onChange 函数及 value 实现受控 | (value: any, onChange: (value: any) => void) => ReactNode | - | 2.0.0 |
-
-#### Sender Ref
+### Sender Ref
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
 | nativeElement | 外层容器 | `HTMLDivElement` | - | - |
 | focus | 获取焦点 | (option?: { preventScroll?: boolean, cursor?: 'start' \| 'end' \| 'all' }) | - | - |
 | blur | 取消焦点 | () => void | - | - |
-| insert | 插入文本内容到末尾 | (value: string) => void | - | 2.0.0 |
-| clear | 清空内容 | () => void | - | 2.0.0 |
-| getValue | 获取当前内容和结构化配置 | () => { value: string; config: SlotNode[] } | - | 2.0.0 |
+| insert | 插入文本内容到末尾 | (value: string) => void | - | - |
+| clear | 清空内容 | () => void | - | - |
+| getValue | 获取当前内容和结构化配置 | () => { value: string; config: SlotConfigType[] } | - | - |
+
+#### SlotConfigType
+
+| 属性 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| type | 节点类型，决定渲染组件类型，必填 | 'text' \| 'input' \| 'select' \| 'tag' \| 'custom' | - | - |
+| key | 唯一标识，type 为 text 时可省略 | string | - | - |
+| formatResult | 格式化最终结果 | (value: any) => string | - | - |
+
+##### text 节点属性
+
+| 属性 | 说明     | 类型   | 默认值 | 版本 |
+| ---- | -------- | ------ | ------ | ---- |
+| text | 文本内容 | string | -      | -    |
+
+##### input 节点属性
+
+| 属性               | 说明   | 类型                                  | 默认值 | 版本 |
+| ------------------ | ------ | ------------------------------------- | ------ | ---- |
+| props.placeholder  | 占位符 | string                                | -      | -    |
+| props.defaultValue | 默认值 | string \| number \| readonly string[] | -      | -    |
+
+##### select 节点属性
+
+| 属性               | 说明           | 类型     | 默认值 | 版本 |
+| ------------------ | -------------- | -------- | ------ | ---- |
+| props.options      | 选项数组，必填 | string[] | -      | -    |
+| props.placeholder  | 占位符         | string   | -      | -    |
+| props.defaultValue | 默认值         | string   | -      | -    |
+
+##### tag 节点属性
+
+| 属性        | 说明           | 类型      | 默认值 | 版本 |
+| ----------- | -------------- | --------- | ------ | ---- |
+| props.label | 标签内容，必填 | ReactNode | -      | -    |
+| props.value | 标签值         | string    | -      | -    |
+
+##### custom 节点属性
+
+| 属性 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| props.defaultValue | 默认值 | any | - | - |
+| customRender | 自定义渲染函数 | (value: any, onChange: (value: any) => void, item: SlotConfigType) => React.ReactNode | - | - |
 
 ### Sender.Header
 
@@ -156,27 +143,27 @@ type SlotNode = {
 | title | 标题 | ReactNode | - | - |
 | onOpenChange | 展开状态改变的回调 | (open: boolean) => void | - | - |
 
-#### ⚠️ 词槽模式注意事项
+### ⚠️ 词槽模式注意事项
 
-- **词槽模式下，不要绑定 `value` 属性**，否则会导致输入内容无法正常受控，slot 内部状态会被频繁重置。
-- **词槽模式下，`onChange`/`onSubmit` 回调的第三个参数 `config`**，仅用于获取当前结构化内容，不建议直接将其赋值回 `slotConfig`，否则会导致输入框内容被重置。只有在需要整体切换/重置 slot 结构时，才应更新 `slotConfig`。
-- 一般情况下，slotConfig 只在初始化或结构变化时设置一次即可。
+- **词槽模式下，`value` 属性无效**，请使用 `ref` 及回调事件获取输入框的值和词槽配置。
+- **词槽模式下，`onChange`/`onSubmit` 回调的第三个参数 `config`**，仅用于获取当前结构化内容，不建议直接将其赋值回 `slotConfig`，否则会导致输入框内容被重置。
+- `slotConfig` 只在初始化或结构变化时设置一次即可.
 
 **示例：**
 
-```tsx
-// 错误用法（会导致输入内容丢失）
+```jsx
+// ❌ 错误用法（会导致光标位置丢失及重复渲染 */
 <Sender
-  slotConfig={config} // 不要直接用回调里的 config
+  slotConfig={config}
   onChange={(value, e, config) => {
-    setConfig(config); // ❌ 不建议
+    setConfig(config);
   }}
 />
 
-// 正确用法
+// ✅ 正确用法
 <Sender
-  slotConfig={initConfig} // 只在初始化或结构变化时设置
-  onChange={(value, e, config) => {
+  slotConfig={config}
+  onChange={(value, _e, config) => {
     // 仅用于获取结构化内容
     console.log(value, config);
   }}

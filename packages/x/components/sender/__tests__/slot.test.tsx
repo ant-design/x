@@ -2,10 +2,10 @@ import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 import { act } from '../../../tests/utils';
 import SlotTextArea from '../SlotTextArea';
-import Sender, { SlotNode } from '../index';
+import Sender, { SlotConfigType } from '../index';
 
 describe('Sender.SlotTextArea', () => {
-  const slotConfig: SlotNode[] = [
+  const slotConfig: SlotConfigType[] = [
     { type: 'text', text: '前缀文本' },
     { type: 'input', key: 'input1', props: { placeholder: '请输入内容', defaultValue: '默认值' } },
     { type: 'select', key: 'select1', props: { options: ['A', 'B'], placeholder: '请选择' } },
@@ -219,7 +219,11 @@ describe('Sender.SlotTextArea', () => {
     const { container } = render(
       <Sender
         slotConfig={[
-          { type: 'input', props: { defaultValue: '默认值', placeholder: '请输入内容' } },
+          {
+            type: 'input',
+            key: 'input1',
+            props: { defaultValue: '默认值', placeholder: '请输入内容' },
+          },
         ]}
       />,
     );
@@ -238,7 +242,7 @@ describe('Sender.SlotTextArea', () => {
 
   it('测试 input slot', () => {
     const ref = React.createRef<any>();
-    const slotConfig: SlotNode[] = [
+    const slotConfig: SlotConfigType[] = [
       {
         type: 'input',
         key: 'input1',
@@ -255,7 +259,7 @@ describe('Sender.SlotTextArea', () => {
 
   it('测试 select slot', () => {
     const ref = React.createRef<any>();
-    const slotConfig: SlotNode[] = [
+    const slotConfig: SlotConfigType[] = [
       { type: 'select', key: 'select1', props: { options: ['A', 'B'], placeholder: '请选择' } },
     ];
     const { container, getByText } = render(<Sender slotConfig={slotConfig} ref={ref} />);
@@ -267,7 +271,7 @@ describe('Sender.SlotTextArea', () => {
 
   it('测试 tag slot', () => {
     const ref = React.createRef<any>();
-    const slotConfig: SlotNode[] = [
+    const slotConfig: SlotConfigType[] = [
       { type: 'tag', key: 'tag1', props: { label: '标签', value: '值' } },
     ];
     render(<Sender slotConfig={slotConfig} ref={ref} />);
@@ -277,7 +281,7 @@ describe('Sender.SlotTextArea', () => {
 
   it('测试 custom slot', () => {
     const ref = React.createRef<any>();
-    const slotConfig: SlotNode[] = [
+    const slotConfig: SlotConfigType[] = [
       {
         type: 'custom',
         key: 'custom1',

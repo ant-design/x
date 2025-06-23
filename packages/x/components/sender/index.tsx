@@ -15,7 +15,7 @@ import SpeechButton from './components/SpeechButton';
 import useStyle from './style';
 import useSpeech, { type AllowSpeech } from './useSpeech';
 
-import type { ButtonProps, GetProps } from 'antd';
+import type { ButtonProps, GetProps, InputProps } from 'antd';
 import SlotTextArea, { SlotTextAreaRef } from './SlotTextArea';
 
 type TextareaProps = GetProps<typeof Input.TextArea>;
@@ -42,16 +42,65 @@ export type ActionsRender = (
 
 export type FooterRender = (info: { components: ActionsComponents }) => React.ReactNode;
 
-export interface SlotNode {
+interface SlotConfigBaseType {
   type: 'text' | 'input' | 'select' | 'tag' | 'custom';
-  key?: string;
-  text?: string;
-  props?: {
-    [key: string]: any;
-  };
-  customRender?: (value: any, onChange: (value: any) => void) => React.ReactNode;
   formatResult?: (value: any) => string;
 }
+
+interface SlotConfigTextType extends SlotConfigBaseType {
+  type: 'text';
+  text?: string;
+  key?: string;
+}
+
+interface SlotConfigInputType extends SlotConfigBaseType {
+  type: 'input';
+  key: string;
+  props?: {
+    defaultValue?: InputProps['defaultValue'];
+    placeholder?: string | undefined;
+  };
+}
+
+interface SlotConfigSelectType extends SlotConfigBaseType {
+  type: 'select';
+  key: string;
+  props?: {
+    defaultValue?: string;
+    options: string[];
+    placeholder?: string | undefined;
+  };
+}
+
+interface SlotConfigTagType extends SlotConfigBaseType {
+  type: 'tag';
+  key: string;
+  props?: {
+    label: React.ReactNode;
+    value?: string;
+  };
+}
+
+interface SlotConfigCustomType extends SlotConfigBaseType {
+  type: 'custom';
+  key: string;
+  props?: {
+    defaultValue?: any;
+    [key: string]: any;
+  };
+  customRender?: (
+    value: any,
+    onChange: (value: any) => void,
+    item: SlotConfigType,
+  ) => React.ReactNode;
+}
+
+export type SlotConfigType =
+  | SlotConfigTextType
+  | SlotConfigInputType
+  | SlotConfigSelectType
+  | SlotConfigTagType
+  | SlotConfigCustomType;
 
 export interface SenderProps
   extends Pick<TextareaProps, 'placeholder' | 'onKeyUp' | 'onFocus' | 'onBlur'> {
@@ -62,12 +111,12 @@ export interface SenderProps
   readOnly?: boolean;
   submitType?: SubmitType;
   disabled?: boolean;
-  slotConfig?: SlotNode[];
-  onSubmit?: (message: string, currentSlotConfig?: SlotNode[]) => void;
+  slotConfig?: SlotConfigType[];
+  onSubmit?: (message: string, slotConfig?: SlotConfigType[]) => void;
   onChange?: (
     value: string,
     event?: React.FormEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLTextAreaElement>,
-    currentSlotConfig?: SlotNode[],
+    slotConfig?: SlotConfigType[],
   ) => void;
   onCancel?: VoidFunction;
   onKeyDown?: React.KeyboardEventHandler<any>;
@@ -187,11 +236,11 @@ const ForwardSender = React.forwardRef<any, SenderProps>((props, ref) => {
     value,
   });
 
-  const triggerValueChange: SenderProps['onChange'] = (nextValue, event, currentSlotConfig) => {
+  const triggerValueChange: SenderProps['onChange'] = (nextValue, event, slotConfig) => {
     if (slotConfig) {
       setInnerValue(nextValue);
       if (onChange) {
-        onChange(nextValue, event, currentSlotConfig);
+        onChange(nextValue, event, slotConfig);
       }
       return;
     }

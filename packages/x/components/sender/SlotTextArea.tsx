@@ -4,7 +4,7 @@ import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import useGetState from '../_util/hooks/use-get-state';
 import { SenderContext } from './index';
-import type { SlotNode } from './index';
+import type { SlotConfigType } from './index';
 
 const prefixCls = 'ant-sender';
 
@@ -16,7 +16,7 @@ export interface SlotTextAreaRef {
   clear: () => void;
   getValue: () => {
     value: string;
-    config: SlotNode[];
+    config: SlotConfigType[];
   };
 }
 
@@ -50,7 +50,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   // ============================ Refs =============================
   const editableRef = useRef<HTMLDivElement>(null);
   const slotDomMap = useRef<Map<string, HTMLSpanElement>>(new Map());
-  const slotConfigMap = useRef<Map<string, SlotNode>>(new Map());
+  const slotConfigMap = useRef<Map<string, SlotConfigType>>(new Map());
   const isCompositionRef = useRef(false);
   const keyLockRef = useRef(false);
   const lastSelectionRef = useRef<Range | null>(null);
@@ -62,7 +62,11 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       return slotConfig.reduce(
         (acc, node) => {
           if (node.key) {
-            acc[node.key] = node.props?.defaultValue || '';
+            if (node.type === 'input' || node.type === 'select' || node.type === 'custom') {
+              acc[node.key] = node.props?.defaultValue || '';
+            } else {
+              acc[node.key] = '';
+            }
             slotConfigMap.current.set(node.key, node);
           }
           return acc;
@@ -113,7 +117,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
   };
 
-  const renderSlot = (node: SlotNode, slotSpan: HTMLSpanElement) => {
+  const renderSlot = (node: SlotConfigType, slotSpan: HTMLSpanElement) => {
     if (!node.key) return null;
 
     const value = getSlotValues()[node.key];
@@ -144,6 +148,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
                   label: opt,
                   key: opt,
                 })),
+                defaultSelectedKeys: node.props?.defaultValue ? [node.props.defaultValue] : [],
                 selectable: true,
                 onSelect: ({ key }) => {
                   updateSlot(node.key as string, key);
@@ -165,9 +170,13 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         case 'tag':
           return <div className={`${prefixCls}-slot-tag`}>{node.props?.label || ''}</div>;
         case 'custom':
-          return node.customRender?.(value, (value: any) => {
-            updateSlot(node.key as string, value);
-          });
+          return node.customRender?.(
+            value,
+            (value: any) => {
+              updateSlot(node.key as string, value);
+            },
+            node,
+          );
         default:
           return null;
       }
@@ -179,7 +188,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const getEditorValue = () => {
     const result: string[] = [];
     const currentValues = getSlotValues();
-    const currentConfig: SlotNode[] = [];
+    const currentConfig: SlotConfigType[] = [];
 
     editableRef.current?.childNodes.forEach((node) => {
       if (node.nodeType === Node.TEXT_NODE) {
@@ -194,8 +203,9 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         if (slotKey) {
           const nodeConfig = slotConfigMap.current.get(slotKey);
           const slotValue = currentValues[slotKey] || '';
-          const slotResult =
-            nodeConfig?.formatResult?.(slotValue) || nodeConfig?.props?.value || slotValue;
+          const tagValue =
+            nodeConfig?.type === 'tag' && nodeConfig.props?.value ? nodeConfig.props.value : null;
+          const slotResult = nodeConfig?.formatResult?.(slotValue) || tagValue || slotValue;
           result.push(slotResult);
           if (nodeConfig) {
             currentConfig.push(nodeConfig);
@@ -322,8 +332,10 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
       slotConfig.forEach((node) => {
         if (!node.key) {
-          const element = document.createTextNode(node.text || '');
-          editableRef.current?.appendChild(element);
+          if (node.type === 'text') {
+            const element = document.createTextNode(node.text || '');
+            editableRef.current?.appendChild(element);
+          }
           return;
         }
         const slotSpan = buildSlotSpan(node.key);

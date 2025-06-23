@@ -16,8 +16,8 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 ## Examples
 
 <!-- prettier-ignore -->
-<code src="./demo/slot-filling.tsx">Slot filling</code>
 <code src="./demo/basic.tsx">Basic</code>
+<code src="./demo/slot-filling.tsx">Slot Mode</code>
 <code src="./demo/submitType.tsx">Submit type</code>
 <code src="./demo/speech.tsx">Speech input</code>
 <code src="./demo/speech-custom.tsx">Custom speech input</code>
@@ -52,11 +52,12 @@ Common props ref：[Common props](/docs/react/common-props)
 | styles | Semantic DOM style | [See below](#semantic-dom) | - | - |
 | submitType | Submit type | SubmitType | `enter` \| `shiftEnter` | - |
 | value | Input value | string | - | - |
-| onSubmit | Callback when click send button | (message: string) => void | - | - |
-| onChange | Callback when input value changes | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`> ) => void | - | - |
+| onSubmit | Callback when click send button | (message: string, slotConfig?: SlotConfigType[]) => void | - | - |
+| onChange | Callback when input value changes | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`>, slotConfig?: SlotConfigType[]) => void | - | - |
 | onCancel | Callback when click cancel button | () => void | - | - |
 | onPasteFile | Callback when paste files | (firstFile: File, files: FileList) => void | - | - |
 | autoSize | Height auto size feature, can be set to true \| false or an object { minRows: 2, maxRows: 6 } | boolean \| { minRows?: number; maxRows?: number } | { maxRows: 8 } | - |
+| slotConfig | Slot configuration, after configuration, the input box will become slot mode, supporting structured input | SlotConfigType[] | - | - |
 
 ```typescript | pure
 type SpeechConfig = {
@@ -83,6 +84,52 @@ type ActionsComponents = {
 | nativeElement | Outer container | `HTMLDivElement` | - | - |
 | focus | Set focus | (option?: { preventScroll?: boolean, cursor?: 'start' \| 'end' \| 'all' }) | - | - |
 | blur | Remove focus | () => void | - | - |
+| insert | Insert text content to the end | (value: string) => void | - | - |
+| clear | Clear content | () => void | - | - |
+| getValue | Get current content and structured configuration | () => { value: string; config: SlotConfigType[] } | - | - |
+
+#### SlotConfigType
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| type | Node type, determines the rendering component type, required | 'text' \| 'input' \| 'select' \| 'tag' \| 'custom' | - | - |
+| key | Unique identifier, can be omitted when type is text | string | - | - |
+| formatResult | Format final result | (value: any) => string | - | - |
+
+##### text node properties
+
+| Property | Description  | Type   | Default | Version |
+| -------- | ------------ | ------ | ------- | ------- |
+| text     | Text content | string | -       | -       |
+
+##### input node properties
+
+| Property           | Description   | Type                                  | Default | Version |
+| ------------------ | ------------- | ------------------------------------- | ------- | ------- |
+| props.placeholder  | Placeholder   | string                                | -       | -       |
+| props.defaultValue | Default value | string \| number \| readonly string[] | -       | -       |
+
+##### select node properties
+
+| Property           | Description             | Type     | Default | Version |
+| ------------------ | ----------------------- | -------- | ------- | ------- |
+| props.options      | Options array, required | string[] | -       | -       |
+| props.placeholder  | Placeholder             | string   | -       | -       |
+| props.defaultValue | Default value           | string   | -       | -       |
+
+##### tag node properties
+
+| Property    | Description           | Type      | Default | Version |
+| ----------- | --------------------- | --------- | ------- | ------- |
+| props.label | Tag content, required | ReactNode | -       | -       |
+| props.value | Tag value             | string    | -       | -       |
+
+##### custom node properties
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| props.defaultValue | Default value | any | - | - |
+| customRender | Custom render function | (value: any, onChange: (value: any) => void, item: SlotConfigType) => React.ReactNode | - | - |
 
 ### Sender.Header
 
@@ -94,6 +141,33 @@ type ActionsComponents = {
 | open | Whether to expand | boolean | - | - |
 | title | Title content | ReactNode | - | - |
 | onOpenChange | Callback when the expansion state changes | (open: boolean) => void | - | - |
+
+### ⚠️ Notes for Slot Mode
+
+- **In slot mode, the `value` property is invalid**, please use `ref` and callback events to get the value and slotConfig.
+- **In slot mode, the third parameter `config` of `onChange`/`onSubmit` callback** is only used to get the current structured content, it is not recommended to assign it back to `slotConfig` directly, otherwise it will cause the input box content to be reset. Only when you need to switch/reset the slot structure as a whole should you update `slotConfig`.
+- Generally, slotConfig should only be set once during initialization or when the structure changes.
+
+**Example:**
+
+```jsx
+// ❌ Wrong usage (will cause cursor position loss and repeated rendering)
+<Sender
+  slotConfig={config}
+  onChange={(value, e, config) => {
+    setConfig(config);
+  }}
+/>
+
+// ✅ Correct usage
+<Sender
+  slotConfig={config}
+  onChange={(value, e, config) => {
+    // Only used to get structured content
+    console.log(value, config);
+  }}
+/>
+```
 
 ## Semantic DOM
 

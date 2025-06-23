@@ -1,20 +1,11 @@
-import { Sender } from '@ant-design/x';
+import { Sender, type SenderProps } from '@ant-design/x';
 import { App, Button, Flex, Slider } from 'antd';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 
-interface SenderContentNode {
-  type: 'text' | 'input' | 'select' | 'tag' | 'custom';
-  key?: string;
-  text?: string;
-  props?: {
-    [key: string]: any;
-  };
-  customRender?: (value: any, onChange: (value: any) => void) => React.ReactNode;
-  formatResult?: (value: any) => string;
-}
+type SlotConfig = SenderProps['slotConfig'];
 
 // 结构化 value 示例
-const initialValue: SenderContentNode[] = [
+const initialValue: SlotConfig = [
   { type: 'text', text: 'I want to go to ' },
   {
     type: 'select',
@@ -26,7 +17,7 @@ const initialValue: SenderContentNode[] = [
   },
   { type: 'text', text: 'for a trip with ' },
   { type: 'tag', key: 'tag', props: { label: '@ Chuck', value: 'a man' } },
-  { type: 'text', text: ', the date is' },
+  { type: 'text', text: ', the date is ' },
   {
     type: 'input',
     key: 'date',
@@ -34,7 +25,7 @@ const initialValue: SenderContentNode[] = [
       placeholder: 'Please enter a date',
     },
   },
-  { type: 'text', text: ', and the price should be between' },
+  { type: 'text', text: ', and the price should be ' },
   {
     type: 'custom',
     key: 'priceRange',
@@ -55,32 +46,24 @@ const initialValue: SenderContentNode[] = [
 ];
 
 const Demo: React.FC = () => {
-  const [slotConfig, setSlotConfig] = useState<SenderContentNode[]>(initialValue);
+  const [slotConfig, setSlotConfig] = useState<SlotConfig>(initialValue);
   const { message } = App.useApp();
   const inputRef = useRef<any>(null);
 
-  const handleChange = (
-    newValue: string,
-    event?: React.FormEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLTextAreaElement>,
-    currentSlotConfig?: SenderContentNode[],
-  ) => {
-    console.log('value change:', { newValue, currentSlotConfig });
-  };
-
-  // 新的 slotConfig 示例
-  const altSlotConfig: SenderContentNode[] = [
-    { type: 'text', text: 'My favorite city is' },
+  // 备用 slotConfig 示例
+  const altSlotConfig: SlotConfig = [
+    { type: 'text', text: 'My favorite city is ' },
     {
       type: 'select',
       key: 'city',
       props: {
+        defaultValue: 'London',
         options: ['London', 'Paris', 'New York'],
         placeholder: 'Select a city',
       },
     },
-    { type: 'text', text: ', and I want to travel with' },
+    { type: 'text', text: ', and I want to travel with ' },
     { type: 'input', key: 'partner', props: { placeholder: 'Enter a name' } },
-    { type: 'text', text: '.' },
   ];
 
   return (
@@ -119,7 +102,6 @@ const Demo: React.FC = () => {
       </Flex>
       {/* Sender 词槽填空示例 */}
       <Sender
-        onChange={handleChange}
         onSubmit={() => {
           const res = inputRef.current?.getValue?.();
           message.info(res.value);
