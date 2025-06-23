@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import getValue from 'rc-util/lib/utils/get';
 import React from 'react';
-import { SenderContext } from './index';
+import { SenderContext } from './context';
 
 function getComponent<T>(
   components: { input?: React.ComponentType<T> } | undefined,

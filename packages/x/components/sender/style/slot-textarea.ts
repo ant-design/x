@@ -61,7 +61,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       lineHeight: token.lineHeight,
     },
     [`${slotSelectCls}-arrow`]: {
-      marginLeft: 4,
+      marginInlineStart: 4,
       fontSize: token.fontSize,
       lineHeight: token.lineHeight,
       display: 'inline-flex',
@@ -70,7 +70,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
     },
     [`${slotSelectCls}-dropdown ${antDropdownCls}`]: {
       position: 'absolute',
-      left: 0,
+      insetInlineStart: 0,
       top: '100%',
       background: token.colorBgElevated,
       borderRadius: token.borderRadiusLG,

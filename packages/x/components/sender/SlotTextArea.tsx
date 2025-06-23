@@ -3,8 +3,8 @@ import { Dropdown, Input, InputRef } from 'antd';
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import useGetState from '../_util/hooks/use-get-state';
-import { SenderContext } from './index';
-import type { SlotConfigType } from './index';
+import { SenderContext } from './context';
+import type { SlotConfigType } from './interface';
 
 const prefixCls = 'ant-sender';
 
