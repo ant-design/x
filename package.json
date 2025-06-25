@@ -94,7 +94,7 @@
     "@ant-design/tools": "^19.0.2",
     "@ant-design/v5-patch-for-react-19": "^1.0.3",
     "@antv/gpt-vis": "^0.4.1",
-    "@biomejs/biome": "^1.9.0",
+    "@biomejs/biome": "2.0.0",
     "@codecov/webpack-plugin": "^1.4.0",
     "@codesandbox/sandpack-react": "^2.19.8",
     "@emotion/react": "^11.13.5",
