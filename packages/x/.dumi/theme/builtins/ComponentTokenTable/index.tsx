@@ -1,10 +1,10 @@
 import { LinkOutlined, QuestionCircleOutlined, RightOutlined } from '@ant-design/icons';
 import { XProvider } from '@ant-design/x';
-import { ConfigProvider, Flex, Popover, Table, Typography } from 'antd';
+import tokenMeta from '@ant-design/x/es/version/token-meta.json';
+import tokenData from '@ant-design/x/es/version/token.json';
+import { Flex, Popover, Table, Typography } from 'antd';
 import { createStyles, css, useTheme } from 'antd-style';
 import { getDesignToken } from 'antd-token-previewer';
-import tokenMeta from 'antd/es/version/token-meta.json';
-import tokenData from 'antd/es/version/token.json';
 import React, { useMemo, useState } from 'react';
 
 import useLocale from '../../../hooks/useLocale';
@@ -161,7 +161,7 @@ const SubTokenTable: React.FC<SubTokenTableProps> = (props) => {
           {title}
           <Popover
             title={null}
-            destroyTooltipOnHide
+            destroyOnHidden
             styles={{ root: { width: 400 } }}
             content={
               <Typography>

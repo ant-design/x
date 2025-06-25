@@ -19,7 +19,7 @@ const excludes = [
 ];
 
 async function execute() {
-  let { all } = await git.log();
+  let { all }: { all: any } = await git.log();
   all = remove(all, ({ author_email: email }) => {
     for (let i = 0; i < excludes.length; i++) {
       const item = excludes[i];
@@ -35,7 +35,9 @@ async function execute() {
   fs.writeFileSync(
     path.join(cwd, 'contributors.json'),
     JSON.stringify(
-      Array.from(new Set<string>(all.map((authorItem) => authorItem.author_name))),
+      Array.from(
+        new Set<string>(all.map((authorItem: { author_name: string }) => authorItem.author_name)),
+      ),
       null,
       2,
     ),

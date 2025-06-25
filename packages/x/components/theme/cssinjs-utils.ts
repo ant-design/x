@@ -1,15 +1,15 @@
+import type { CSSInterpolation } from '@ant-design/cssinjs';
 import type {
+  FullToken as FullTokenTypeUtil,
+  GenStyleFn as GenStyleFnTypeUtil,
+  GetDefaultToken as GetDefaultTokenTypeUtil,
   GlobalToken as GlobalTokenTypeUtil,
   OverrideTokenMap as OverrideTokenTypeUtil,
-  FullToken as FullTokenTypeUtil,
-  GetDefaultToken as GetDefaultTokenTypeUtil,
-  GenStyleFn as GenStyleFnTypeUtil,
   TokenMapKey,
 } from '@ant-design/cssinjs-utils';
-import type { CSSInterpolation } from '@ant-design/cssinjs';
 import type { AliasToken } from 'antd/es/theme/internal';
 import type { AnyObject } from '../_util/type';
-import type { ComponentTokenMap } from './components';
+import type { ComponentTokenMap } from './interface/components';
 
 export type { AliasToken, SeedToken } from 'antd/es/theme/internal';
 

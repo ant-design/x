@@ -1,12 +1,11 @@
 import React from 'react';
-import { Bubble } from '../../index';
-import XProvider from '../index';
-
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
 import themeTest from '../../../tests/shared/themeTest';
-import { render } from '../../../tests/utils';
-
+import { fireEvent, render } from '../../../tests/utils';
+import { Bubble, Conversations } from '../../index';
+import zhCN_X from '../../locale/zh_CN';
+import XProvider from '../index';
 import type { XProviderProps } from '../index';
 
 const xProviderProps: XProviderProps = {
@@ -53,5 +52,22 @@ describe('XProvider Component', () => {
     );
     const element = container.querySelector('.test-bubble');
     expect(element).toBeTruthy();
+  });
+
+  it('conversations.locale', () => {
+    const onClick = jest.fn();
+    const { getByText } = render(
+      <XProvider locale={zhCN_X}>
+        <Conversations
+          creation={{
+            onClick,
+          }}
+        />
+      </XProvider>,
+    );
+    const creationDom = getByText(zhCN_X.Conversations.create);
+    fireEvent.click(creationDom);
+    expect(creationDom).toBeTruthy();
+    expect(onClick).toHaveBeenCalled();
   });
 });

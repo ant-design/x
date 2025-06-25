@@ -1,5 +1,5 @@
 import { Conversations, Prompts, PromptsProps, Sender, Suggestion, XProvider } from '@ant-design/x';
-import { Card, ColorPicker, Divider, Flex, Space, message } from 'antd';
+import { Card, ColorPicker, Divider, Flex, Space, Typography, message } from 'antd';
 import React from 'react';
 
 import {
@@ -94,7 +94,7 @@ export default () => {
   return (
     <>
       <Flex gap={12} style={{ marginBottom: 16 }} align="center">
-        <span>ColorPrimary:</span>
+        <Typography.Text>ColorPrimary:</Typography.Text>
         <ColorPicker
           value={data.colorPrimary}
           onChange={(value) => {

@@ -19,8 +19,13 @@ export default defineConfig({
     chrome: 80,
   },
   esm: {
-    input: 'components/',
+    input: 'components',
     ignores: ['**/demo/**', '**/__tests__/**'],
+    overrides: {
+      'components/locale': {
+        output: 'locale',
+      },
+    },
   },
   cjs: {
     input: 'components/',

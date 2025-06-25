@@ -3,8 +3,8 @@ import { genStyleUtils } from '@ant-design/cssinjs-utils';
 import { useXProviderContext } from '../x-provider';
 import { useInternalToken } from './useToken';
 
-import type { ComponentTokenMap } from './components';
 import type { AliasToken, SeedToken } from './cssinjs-utils';
+import type { ComponentTokenMap } from './interface/components';
 
 export const { genStyleHooks, genComponentStyleHook, genSubStyleComponent } = genStyleUtils<
   ComponentTokenMap,

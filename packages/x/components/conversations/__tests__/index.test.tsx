@@ -4,9 +4,9 @@ import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
 import { fireEvent, render } from '../../../tests/utils';
 import Conversations from '../index';
-import type { Conversation } from '../index';
+import type { ItemType } from '../index';
 
-const items: Conversation[] = [
+const items: ItemType[] = [
   {
     key: 'demo1',
     label: 'What is Ant Design X ?',
@@ -156,15 +156,9 @@ describe('Conversations Component', () => {
 
   it('should use custom group title component', () => {
     const { getByText } = render(
-      <Conversations items={items} groupable={{ title: (group) => <div>{group}</div> }} />,
+      <Conversations items={items} groupable={{ label: (group) => <div>{group}</div> }} />,
     );
     expect(getByText('pinned')).toBeInTheDocument();
-  });
-
-  it('should sort groups when groupable.sort is provided', () => {
-    const sort = jest.fn().mockReturnValue(0);
-    render(<Conversations items={items} groupable={{ sort }} />);
-    expect(sort).toHaveBeenCalled();
   });
 
   it('should not group items when groupable is false', () => {
@@ -202,6 +196,7 @@ describe('Conversations Component', () => {
       const { getByText, container } = render(
         <Conversations
           items={items}
+          onActiveChange={onActiveChange}
           shortcutKeys={{
             items: [
               ['Alt', 49],
@@ -209,9 +204,6 @@ describe('Conversations Component', () => {
               ['Alt', 51],
             ],
           }}
-          menu={menu}
-          onActiveChange={onActiveChange}
-          defaultActiveKey="demo1"
         />,
       );
       fireEvent.keyDown(container, {
@@ -235,7 +227,6 @@ describe('Conversations Component', () => {
               ['Alt', KeyCode.ONE],
             ],
           }}
-          menu={menu}
           defaultActiveKey="demo1"
         />,
       );
@@ -243,5 +234,101 @@ describe('Conversations Component', () => {
         'Warning: [antd: conversations] Same shortcutKey Alt,49',
       );
     });
+    it('shortcut keys of items width error config', async () => {
+      render(
+        <Conversations
+          items={items}
+          shortcutKeys={{
+            items: {} as [],
+          }}
+          defaultActiveKey="demo1"
+        />,
+      );
+    });
+  });
+  describe('Creation', () => {
+    it('with Creation', async () => {
+      const onClick = jest.fn();
+      const { getByText } = render(
+        <Conversations
+          items={items}
+          creation={{
+            onClick,
+          }}
+          menu={menu}
+          defaultActiveKey="demo1"
+        />,
+      );
+      expect(getByText('New chat')).toBeTruthy();
+      fireEvent.click(getByText('New chat'));
+      expect(onClick).toHaveBeenCalled();
+    });
+  });
+
+  it('with Creation disable', async () => {
+    const onClick = jest.fn();
+    const { getByText } = render(
+      <Conversations
+        items={items}
+        creation={{
+          onClick,
+          disabled: true,
+        }}
+        menu={menu}
+        defaultActiveKey="demo1"
+      />,
+    );
+    expect(getByText('New chat')).toBeTruthy();
+    fireEvent.click(getByText('New chat'));
+    expect(onClick).toHaveBeenCalledTimes(0);
+  });
+  it('with Creation shortcutKeys', async () => {
+    const onClick = jest.fn();
+    const { getByText, container } = render(
+      <Conversations
+        items={items}
+        shortcutKeys={{
+          creation: ['Meta', KeyCode.K],
+        }}
+        creation={{
+          onClick,
+        }}
+        menu={menu}
+        defaultActiveKey="demo1"
+      />,
+    );
+    fireEvent.keyDown(container, {
+      key: '™',
+      keyCode: KeyCode.K,
+      code: 'Digit3',
+      metaKey: true,
+    });
+    expect(getByText('New chat')).toBeTruthy();
+    expect(onClick).toHaveBeenCalledTimes(1);
+  });
+  it('should disable shortcutKeys', async () => {
+    const onClick = jest.fn();
+    const { getByText, container } = render(
+      <Conversations
+        items={items}
+        shortcutKeys={{
+          creation: ['Meta', KeyCode.K],
+        }}
+        creation={{
+          disabled: true,
+          onClick,
+        }}
+        menu={menu}
+        defaultActiveKey="demo1"
+      />,
+    );
+    fireEvent.keyDown(container, {
+      key: '™',
+      keyCode: KeyCode.K,
+      code: 'Digit3',
+      metaKey: true,
+    });
+    expect(getByText('New chat')).toBeTruthy();
+    expect(onClick).toHaveBeenCalledTimes(0);
   });
 });

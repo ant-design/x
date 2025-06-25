@@ -1,18 +1,18 @@
 import { Conversations, type ConversationsProps } from '@ant-design/x';
-import { type GetProp, theme } from 'antd';
+import { theme } from 'antd';
+import type { GetProp } from 'antd';
 import React from 'react';
 
-const items: GetProp<ConversationsProps, 'items'> = Array.from({ length: 4 }).map((_, index) => ({
+const items: GetProp<ConversationsProps, 'items'> = Array.from({ length: 6 }).map((_, index) => ({
   key: `item${index + 1}`,
   label:
     index === 0
       ? "This's Conversation Item 1, you can click me!"
       : `Conversation Item ${index + 1}`,
-  disabled: index === 3,
-  group: index === 3 ? 'Group2' : 'Group1',
+  group: index < 3 ? 'Today' : 'Yesterday',
 }));
 
-const App = () => {
+const App: React.FC = () => {
   const { token } = theme.useToken();
 
   // Customize the style of the container

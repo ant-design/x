@@ -4,10 +4,10 @@ import React from 'react';
 import XProviderContext from './context';
 import useXProviderContext, { defaultPrefixCls } from './hooks/use-x-provider-context';
 
-import type { ConfigProviderProps as AntdConfigProviderProps } from 'antd/es/config-provider';
+import LocaleProvider, { ANT_MARK } from '../locale';
 import type { XProviderProps } from './context';
 
-const XProvider: React.FC<XProviderProps & AntdConfigProviderProps> = (props) => {
+const XProvider: React.FC<XProviderProps> = (props) => {
   const {
     attachments,
     bubble,
@@ -18,6 +18,8 @@ const XProvider: React.FC<XProviderProps & AntdConfigProviderProps> = (props) =>
     thoughtChain,
     welcome,
     theme,
+    locale,
+    children,
     ...antdConfProps
   } = props;
 
@@ -34,6 +36,14 @@ const XProvider: React.FC<XProviderProps & AntdConfigProviderProps> = (props) =>
     };
   }, [attachments, bubble, conversations, prompts, sender, suggestion, thoughtChain, welcome]);
 
+  let childNode = children;
+  if (locale) {
+    childNode = (
+      <LocaleProvider locale={locale} _ANT_MARK__={ANT_MARK}>
+        {childNode}
+      </LocaleProvider>
+    );
+  }
   return (
     <XProviderContext.Provider value={xProviderProps}>
       <AntdConfigProvider
@@ -44,7 +54,10 @@ const XProvider: React.FC<XProviderProps & AntdConfigProviderProps> = (props) =>
         // Origin comment: antdx enable cssVar by default, and antd v6 will enable cssVar by default
         // theme={{ cssVar: true, ...antdConfProps?.theme }}
         theme={theme}
-      />
+        locale={locale}
+      >
+        {childNode}
+      </AntdConfigProvider>
     </XProviderContext.Provider>
   );
 };

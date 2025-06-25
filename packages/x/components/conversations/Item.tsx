@@ -6,21 +6,25 @@ import React from 'react';
 
 import type { DirectionType } from 'antd/es/config-provider';
 import pickAttrs from 'rc-util/lib/pickAttrs';
-import type { Conversation } from './interface';
+import type { ConversationsProps } from '.';
+import type { ConversationItemType } from './interface';
 
 export interface ConversationsItemProps
   extends Omit<React.HTMLAttributes<HTMLLIElement>, 'onClick'> {
-  info: Conversation;
+  info: ConversationItemType;
   prefixCls?: string;
   direction?: DirectionType;
   menu?: MenuProps & {
     trigger?:
-    | React.ReactNode
-    | ((conversation: Conversation, info: { originNode: React.ReactNode }) => React.ReactNode);
+      | React.ReactNode
+      | ((
+          conversation: ConversationItemType,
+          info: { originNode: React.ReactNode },
+        ) => React.ReactNode);
     getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
   };
   active?: boolean;
-  onClick?: (info: Conversation) => void;
+  onClick?: ConversationsProps['onActiveChange'];
 }
 
 const stopPropagation: React.MouseEventHandler<HTMLSpanElement> = (e) => {
@@ -50,7 +54,7 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
   // ============================ Events ============================
   const onInternalClick: React.MouseEventHandler<HTMLLIElement> = () => {
     if (!disabled && onClick) {
-      onClick(info);
+      onClick(info.key);
     }
   };
 
@@ -60,7 +64,7 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
 
   const getPopupContainer = dropdownMenu?.getPopupContainer;
 
-  const renderMenuTrigger = (conversation: Conversation) => {
+  const renderMenuTrigger = (conversation: ConversationItemType) => {
     const originTriggerNode = (
       <EllipsisOutlined onClick={stopPropagation} className={`${prefixCls}-menu-icon`} />
     );
