@@ -32,30 +32,30 @@ export default defineConfig({
   umd: {
     entry: {
       'src/index.ts': {
-        name: 'antdxMarkdown',
+        name: 'XMarkdown',
         sourcemap: true,
         generateUnminified: true,
         output: {
           path: 'dist/',
-          filename: 'antd-x-markdown',
+          filename: 'x-markdown',
         },
       },
       'src/plugins/CodeHighLight/index.tsx': {
-        name: 'antdxCodeHighlight',
+        name: 'CodeHighlight',
         sourcemap: true,
         generateUnminified: true,
         output: {
           path: 'dist/',
-          filename: 'antd-x-code-high-light',
+          filename: 'code-high-light',
         },
       },
       'src/plugins/Latex/index.ts': {
-        name: 'antdxLatex',
+        name: 'Latex',
         sourcemap: true,
         generateUnminified: true,
         output: {
           path: 'dist/',
-          filename: 'antd-x-latex',
+          filename: 'x-latex',
         },
       },
     },
