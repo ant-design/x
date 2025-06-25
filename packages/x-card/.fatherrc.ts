@@ -26,7 +26,7 @@ export default defineConfig({
   },
   umd: {
     entry: 'src/index.ts',
-    name: 'antdxCard',
+    name: 'XCard',
     output: {
       path: 'dist/',
       filename: 'antd-x-card',
