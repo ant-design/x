@@ -20,19 +20,45 @@ export default defineConfig({
   },
   esm: {
     input: 'src',
+    overrides: {
+      'src/plugins': {
+        output: 'plugins',
+      },
+    },
   },
   cjs: {
     input: 'src',
   },
   umd: {
-    entry: 'src/index.ts',
-    name: 'XMarkdown',
-    output: {
-      path: 'dist/',
-      filename: 'x-markdown',
+    entry: {
+      'src/index.ts': {
+        name: 'XMarkdown',
+        sourcemap: true,
+        generateUnminified: true,
+        output: {
+          path: 'dist/',
+          filename: 'x-markdown',
+        },
+      },
+      'src/plugins/CodeHighLight/index.tsx': {
+        name: 'CodeHighlight',
+        sourcemap: true,
+        generateUnminified: true,
+        output: {
+          path: 'dist/',
+          filename: 'code-high-light',
+        },
+      },
+      'src/plugins/Latex/index.ts': {
+        name: 'Latex',
+        sourcemap: true,
+        generateUnminified: true,
+        output: {
+          path: 'dist/',
+          filename: 'x-latex',
+        },
+      },
     },
-    sourcemap: true,
-    generateUnminified: true,
     externals: {
       react: 'React',
       'react-dom': 'ReactDOM',

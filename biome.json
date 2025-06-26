@@ -6,6 +6,7 @@
       "dist/*",
       "es/**/*",
       "lib/**/*",
+      "x-markdown/plugins",
       "_site/**/*",
       "server/*",
       "node_modules",
