@@ -3,6 +3,7 @@ import { mergeToken } from '@ant-design/cssinjs-utils';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
 import genSenderHeaderStyle from './header';
+import genSlotTextAreaStyle from './slot-textarea';
 
 // biome-ignore lint/suspicious/noEmptyInterface: ComponentToken need to be empty by default
 export interface ComponentToken {}
@@ -154,7 +155,13 @@ export default genStyleHooks<'Sender'>(
     const SenderToken = mergeToken<SenderToken>(token, {
       SenderContentMaxWidth: `calc(100% - ${unit(calc(paddingXS).add(32).equal())})`,
     });
-    return [genSenderStyle(SenderToken), genSenderHeaderStyle(SenderToken)];
+    return [
+      genSenderStyle(SenderToken),
+      genSenderHeaderStyle(SenderToken),
+      genSlotTextAreaStyle(SenderToken),
+    ];
   },
   prepareComponentToken,
 );
+
+export { genSlotTextAreaStyle };
