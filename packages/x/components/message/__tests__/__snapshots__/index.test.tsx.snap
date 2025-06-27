@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`message Message component work 1`] = `
+<div
+  class="ant-message"
+>
+  test
+</div>
+`;
+
+exports[`message rtl render component should be rendered correctly in RTL direction 1`] = `
+<div
+  class="ant-message ant-message-rtl"
+>
+  test
+</div>
+`;
