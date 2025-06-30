@@ -1,5 +1,4 @@
 import XMarkdown from '@ant-design/x-markdown';
-import CodeHighlight from '@ant-design/x-markdown/plugins/CodeHighlight';
 import Latex from '@ant-design/x-markdown/plugins/Latex';
 import React from 'react';
 
@@ -27,7 +26,7 @@ console.log('XMarkdown');
 
 const App = () => {
   return (
-    <XMarkdown className="xmarkdown-body" plugins={[Latex({ output: 'mathml' }), CodeHighlight()]}>
+    <XMarkdown className="xmarkdown-body" plugins={[Latex({ output: 'mathml' })]}>
       {content}
     </XMarkdown>
   );
