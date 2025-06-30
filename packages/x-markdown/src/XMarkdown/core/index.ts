@@ -1,6 +1,6 @@
 import Lexer from './Lexer';
+import { createMarkdownOptions } from './Options';
 import Parser from './Parser';
 import Renderer from './Renderer';
 
-export { Lexer, Parser, Renderer };
-export * from './helpers';
+export { createMarkdownOptions, Lexer, Parser, Renderer };

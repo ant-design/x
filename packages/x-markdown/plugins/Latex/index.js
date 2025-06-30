@@ -1,55 +1,33 @@
 import katex from 'katex';
-
 const inlineRuleNonStandard = /^(?:\${1,2}([^$\n]+?)\${1,2}|\\\((.+?)\\\))/;
 const blockRule = /^(\${1,2})\n([\s\S]+?)\n\1(?:\n|$)|^\\\[((?:\\.|[^\\])+?)\\\]/;
-
-type IOptions = {
-  nonStandard?: boolean;
-  [key: string]: unknown;
-};
-
-type IToken = {
-  text: string;
-  displayMode: boolean;
-};
-
-type IRender = (token: IToken) => string;
-
-type ILevel = 'inline' | 'block';
-
 // fix katex 不支持渲染 align*: https://github.com/KaTeX/KaTeX/issues/1007
-function replaceAlign(text: string) {
+function replaceAlign(text) {
   return text ? text.replace(/\{align\*\}/g, '{aligned}') : text;
 }
-
-function createRenderer(options: IOptions, newlineAfter: boolean) {
-  return (token: IToken) =>
+function createRenderer(options, newlineAfter) {
+  return (token) =>
     katex.renderToString(token.text, {
       ...options,
       displayMode: token.displayMode,
     }) + (newlineAfter ? '\n' : '');
 }
-
-function inlineKatex(renderer: IRender) {
+function inlineKatex(renderer) {
   const ruleReg = inlineRuleNonStandard;
   return {
     name: 'inlineKatex',
-    level: 'inline' as ILevel,
-    start(src: string) {
+    level: 'inline',
+    start(src) {
       if (!src.includes('$') && !src.includes('\\(')) return;
-
       const indices = [src.indexOf('$'), src.indexOf('\\(')].filter((idx) => idx !== -1);
-
       if (indices.length === 0) return;
-
       const katexIndex = Math.min(...indices);
       const possibleKatex = src.slice(katexIndex);
-
       if (possibleKatex.match(ruleReg)) {
         return katexIndex;
       }
     },
-    tokenizer(src: string) {
+    tokenizer(src) {
       const match = src.match(inlineRuleNonStandard);
       if (match) {
         const text = replaceAlign((match[1] || match[2]).trim());
@@ -64,12 +42,11 @@ function inlineKatex(renderer: IRender) {
     renderer,
   };
 }
-
-function blockKatex(renderer: IRender) {
+function blockKatex(renderer) {
   return {
     name: 'blockKatex',
-    level: 'block' as ILevel,
-    tokenizer(src: string) {
+    level: 'block',
+    tokenizer(src) {
       const match = src.match(blockRule);
       if (match) {
         const text = replaceAlign(match[2] || match[3].trim());
@@ -84,7 +61,6 @@ function blockKatex(renderer: IRender) {
     renderer,
   };
 }
-
 export default function (options = {}) {
   return {
     extensions: [

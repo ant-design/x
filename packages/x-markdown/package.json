@@ -8,8 +8,8 @@
     "lint:deps": "antd-tools run deps-lint",
     "lint:md": "remark . -f -q",
     "lint:script": "biome lint",
-     "test": "jest --config .jest.js --no-cache --collect-coverage",
-     "coverage": "jest --config .jest.js --no-cache --collect-coverage --coverage"
+    "test": "jest --config .jest.js --no-cache --collect-coverage",
+    "coverage": "jest --config .jest.js --no-cache --collect-coverage --coverage"
   },
   "sideEffects": false,
   "main": "lib/index.js",
@@ -26,9 +26,13 @@
   "dependencies": {
     "@ant-design/fast-color": "^2.0.6",
     "classnames": "^2.5.1",
+    "@ant-design/icons": "^5.6.1",
+    "@types/react-syntax-highlighter": "^15.5.13",
+    "copy-to-clipboard": "^3.3.3",
+    "html-react-parser": "^5.2.5",
     "isomorphic-dompurify": "^2.25.0",
-    "marked": "^15.0.12",
-    "marked-footnote": "^1.2.4"
+    "katex": "^0.16.22",
+    "marked": "^15.0.12"
   },
   "devDependencies": {
     "@types/react": "^19.0.2",
@@ -36,6 +40,8 @@
     "@types/react-syntax-highlighter": "^15.5.13",
     "@umijs/mako": "^0.11.10",
     "katex": "^0.16.22",
+    "github-markdown-css": "^5.8.1",
+    "marked-footnote": "^1.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-syntax-highlighter": "^15.6.1"
@@ -44,5 +50,6 @@
     "antd": "^5.20.3",
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
-  }
+  },
+  "repository": "https://github.com/Div627/x.git"
 }

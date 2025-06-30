@@ -1,25 +1,23 @@
 import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { Token, plugin } from './interface';
-
-const CodeHighlight = (): plugin => {
+const CodeHighlight = () => {
   const id = React.useId();
-
   return {
     renderer: {
-      code(token: Token) {
+      code(token) {
         const { lang, text } = token;
         if (lang === 'mermaid') return false;
-
         const key = `${lang}-${id}-${text.length}`;
-        return (
-          <SyntaxHighlighter key={key} language={token.lang}>
-            {text}
-          </SyntaxHighlighter>
+        return /*#__PURE__*/ React.createElement(
+          SyntaxHighlighter,
+          {
+            key: key,
+            language: token.lang,
+          },
+          text,
         );
       },
     },
   };
 };
-
 export default CodeHighlight;

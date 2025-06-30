@@ -1,12 +1,28 @@
+import htmlParse from 'html-react-parser';
 import DOMPurify from 'isomorphic-dompurify';
 import type { Tokens } from 'marked';
 import type { ElementType, ReactNode } from 'react';
 import { jsx, jsxs } from 'react/jsx-runtime';
 import type { Token } from '../interface';
 import Parser from './Parser';
-import { unescapeHtmlEntity } from './helpers';
 
 type HeadingDepth = 1 | 2 | 3 | 4 | 5 | 6;
+
+const unEscapeReplacements: Record<string, string> = {
+  '&amp;': '&',
+  '&lt;': '<',
+  '&gt;': '>',
+  '&quot;': '"',
+  '&#39;': "'",
+};
+
+const entityRegex = /&(#(?:\d+)|(?:#x[0-9A-Fa-f]+)|(?:\w+));?/gi;
+
+export const unescapeHtmlEntity = (text: string) => {
+  return entityRegex.test(text)
+    ? text.replace(entityRegex, (entity) => unEscapeReplacements[entity] || "'")
+    : text;
+};
 
 class Renderer {
   parser!: Parser;
@@ -16,7 +32,7 @@ class Renderer {
     this.#elementMap = new Map();
   }
 
-  #getElementKey<T extends ElementType>(element: T) {
+  private getElementKey<T extends ElementType>(element: T) {
     const elementName =
       typeof element === 'string' ? element : element?.name || element?.displayName || 'Element';
 
@@ -25,54 +41,61 @@ class Renderer {
     return `${elementName}-${elementCount}`;
   }
 
-  #render<T extends ElementType>(
+  private render<T extends ElementType>(
     element: T,
     children: ReactNode = null,
     props: { key?: React.Key; [k: string]: unknown } = {},
   ): ReactNode {
     const renderFunc = Array.isArray(children) ? jsxs : jsx;
-    return renderFunc(element, { children, ...props }, props?.key || this.#getElementKey(element));
+    return renderFunc(element, { children, ...props }, props?.key || this.getElementKey(element));
   }
 
-  hr(_token: Token) {
-    return this.#render('hr');
+  public hr(_token: Token) {
+    return this.render('hr');
   }
 
-  heading(token: Token) {
+  public heading(token: Token) {
     const children = token.tokens ? this.parser.parseInline(token.tokens) : null;
     const depth = token.depth as HeadingDepth;
 
-    return this.#render(`h${depth}`, children);
+    return this.render(`h${depth}`, children);
   }
 
-  codespan(token: Token) {
+  public codespan(token: Token) {
     const { text } = token as Tokens.Codespan;
-    return this.#render('code', unescapeHtmlEntity(text));
+    return this.render('code', unescapeHtmlEntity(text));
   }
 
-  code(token: Token) {
-    return this.#render('pre', this.codespan(token));
+  public code(token: Token) {
+    const { text, lang } = token;
+    const props = lang
+      ? {
+          class: `language-${lang}`,
+        }
+      : {};
+    const children = this.render('code', unescapeHtmlEntity(text), props);
+    return this.render('pre', children);
   }
 
-  tableCell(token: Tokens.TableCell) {
+  public tableCell(token: Tokens.TableCell) {
     const children = this.parser?.parseInline(token.tokens);
     const type = token?.header ? 'th' : 'td';
-    return this.#render(type, children, { align: token?.align });
+    return this.render(type, children, { align: token?.align });
   }
 
-  tableRow(children: ReactNode[]) {
-    return this.#render('tr', children);
+  public tableRow(children: ReactNode[]) {
+    return this.render('tr', children);
   }
 
-  tableHeader(children: ReactNode) {
-    return this.#render('thead', children);
+  public tableHeader(children: ReactNode) {
+    return this.render('thead', children);
   }
 
-  tableBody(children: ReactNode) {
-    return this.#render('tbody', children);
+  public tableBody(children: ReactNode) {
+    return this.render('tbody', children);
   }
 
-  table(token: Token) {
+  public table(token: Token) {
     const { header: tableHeader, rows } = token as Tokens.Table;
     const headerCell = tableHeader.map((cell) => this.tableCell(cell));
     const headerRow = this.tableRow(headerCell);
@@ -84,23 +107,23 @@ class Renderer {
     });
     const body = this.tableBody(bodyCell);
 
-    return this.#render('table', [header, body]);
+    return this.render('table', [header, body]);
   }
 
-  blockquote(token: Token) {
+  public blockquote(token: Token) {
     const children = this.parser.parse(token?.tokens);
-    return this.#render('blockquote', children);
+    return this.render('blockquote', children);
   }
 
-  checkbox(token: Tokens.ListItem) {
-    return this.#render('input', null, {
+  public checkbox(token: Tokens.ListItem) {
+    return this.render('input', null, {
       type: 'checkbox',
       checked: !!token?.checked,
       disabled: true,
     });
   }
 
-  listItem(token: Tokens.ListItem) {
+  public listItem(token: Tokens.ListItem) {
     const { task, tokens } = token;
     const children: ReactNode[] = [];
     if (task) {
@@ -108,61 +131,62 @@ class Renderer {
     }
     children.push(this.parser.parse(tokens));
 
-    return this.#render('li', children);
+    return this.render('li', children);
   }
 
-  list(token: Token) {
+  public list(token: Token) {
     const { ordered, start, items } = token as Tokens.List;
     const type = ordered ? 'ol' : 'ul';
     const children = items.map((item) => this.listItem(item));
-    return this.#render(type, children, ordered && start !== -1 ? { start } : {});
+    return this.render(type, children, ordered && start !== -1 ? { start } : {});
   }
 
-  html(token: Token) {
-    // TODO: any better way?
-    return this.#render('span', null, {
-      dangerouslySetInnerHTML: { __html: DOMPurify.sanitize(token.raw) },
-    });
+  public html(token: Token) {
+    return htmlParse(DOMPurify.sanitize(token.raw));
   }
 
-  paragraph(token: Token) {
+  public paragraph(token: Token) {
     const children = this.parser.parseInline(token?.tokens);
-    return this.#render('p', children);
+    return this.render('p', children);
   }
 
-  text(token: Token) {
+  public text(token: Token) {
     const { text, tokens } = token;
     return tokens ? this.parser.parseInline(tokens) : unescapeHtmlEntity(text);
   }
 
-  link(token: Token) {
+  public link(token: Token) {
     const { href, title, tokens } = token as Tokens.Link;
     const children = this.parser.parseInline(tokens);
-    return this.#render('a', children, { href, title: title ? unescapeHtmlEntity(title) : '' });
+    const props: Record<string, unknown> = { href };
+    if (title) {
+      props.title = unescapeHtmlEntity(title);
+    }
+    return this.render('a', children, props);
   }
 
-  image(token: Token) {
+  public image(token: Token) {
     const { href, text, title } = token as Tokens.Image;
-    return this.#render('img', null, { src: href, alt: text, title });
+    return this.render('img', null, { src: href, alt: text, title });
   }
 
-  strong(token: Token) {
+  public strong(token: Token) {
     const children = this.parser.parseInline(token.tokens);
-    return this.#render('strong', children);
+    return this.render('strong', children);
   }
 
-  em(token: Token) {
+  public em(token: Token) {
     const children = this.parser.parseInline(token.tokens);
-    return this.#render('em', children);
+    return this.render('em', children);
   }
 
-  br(_token: Token) {
-    return this.#render('br');
+  public br(_token: Token) {
+    return this.render('br');
   }
 
-  del(token: Token) {
+  public del(token: Token) {
     const children = this.parser.parseInline(token.tokens);
-    return this.#render('del', children);
+    return this.render('del', children);
   }
 }
 

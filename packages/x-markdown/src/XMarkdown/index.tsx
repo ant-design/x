@@ -1,23 +1,35 @@
-import { walkTokens } from 'marked';
+import htmlParse from 'html-react-parser';
+import DOMPurify from 'isomorphic-dompurify';
+import { Marked, walkTokens } from 'marked';
 import React from 'react';
-import { Lexer, Parser, Renderer, processOptions } from './core';
-import useBuffer from './hooks/useBuffer';
-import { MarkdownProps } from './interface';
+import { Lexer, Parser, Renderer, createMarkdownOptions } from './core';
+import useStreaming from './hooks/useStreaming';
+import { XMarkdownProps } from './interface';
 
-const Markdown: React.FC<MarkdownProps> = (props) => {
-  const { content, streaming, children, plugins, components, className, style } = props;
+const XMarkdown: React.FC<XMarkdownProps> = (props) => {
+  const { content, children, config, allowHtml, streaming, plugins, components, className, style } =
+    props;
 
-  // ============================ Prefix ============================
-  // const { theme } = useXProviderContext();
-
-  // ============================ Buffer ============================
-  const displayContent = useBuffer(content || children || '', streaming);
+  // ============================ Streaming ============================
+  const displayContent = useStreaming(content || children || '', streaming, components);
 
   // ============================ Render ============================
+  if (allowHtml) {
+    const htmlString = new Marked().parse(displayContent) as string;
+    return (
+      <div className={className} style={style}>
+        {htmlParse(DOMPurify.sanitize(htmlString))}
+      </div>
+    );
+  }
+
   const renderer = new Renderer();
-  const options = processOptions(renderer, plugins, components);
+  const options = createMarkdownOptions(renderer, plugins, components, config);
   const lexer = new Lexer(options);
   const parser = new Parser(options);
+
+  if (!displayContent) return null;
+
   const tokens = lexer.lex(displayContent);
 
   if (options.walkTokens) {
@@ -31,7 +43,7 @@ const Markdown: React.FC<MarkdownProps> = (props) => {
 };
 
 if (process.env.NODE_ENV !== 'production') {
-  Markdown.displayName = 'XMarkdown';
+  XMarkdown.displayName = 'XMarkdown';
 }
 
-export default Markdown;
+export default XMarkdown;

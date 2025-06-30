@@ -1,5 +1,5 @@
-import type { MarkedExtension, MarkedOptions, Tokens } from 'marked';
-import { CSSProperties } from 'react';
+import type { MarkedExtension, MarkedOptions, TokenizerExtension, Tokens } from 'marked';
+import { CSSProperties, ReactNode } from 'react';
 import { Renderer } from './core';
 
 export interface MarkdownXOptions extends MarkedOptions {
@@ -10,30 +10,35 @@ export type Token = Tokens.Generic;
 
 export interface SteamingOption {
   /**
-   * @default 1
+   * @description 是否还有流式数据
+   * @default false
    */
-  step?: number;
-  /**
-   * @default 50
-   */
-  interval?: number;
+  hasNextChunk: boolean;
+}
+
+export interface Config {
+  break?: boolean;
+  gfm?: boolean;
 }
 
 export type GenericRendererFunction = (...args: unknown[]) => React.ReactNode | false;
 
 export type RendererObject = {
-  [K in keyof Renderer]: GenericRendererFunction;
+  [key: string]: GenericRendererFunction;
 };
 
-export interface plugin extends Omit<MarkedExtension, 'renderer'> {
+export interface plugin extends Omit<MarkedExtension, 'renderer' | 'walkTokens'> {
   renderer?: any;
+  walkTokens?: (token: Token) => void;
 }
 
-export interface MarkdownProps {
+export interface XMarkdownProps {
   content?: string;
-  components?: RendererObject;
-  streaming?: boolean | SteamingOption;
   children?: string;
+  config?: Config;
+  allowHtml?: boolean;
+  components?: Record<string, (props: Token) => ReactNode>;
+  streaming?: SteamingOption;
   plugins?: plugin[];
   className?: string;
   style?: CSSProperties;
