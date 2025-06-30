@@ -1,6 +1,6 @@
 import XMarkdown from '@ant-design/x-markdown';
-import CodeHighlight from '@ant-design/x-markdown/Plugins/CodeHighlight';
-import Latex from '@ant-design/x-markdown/Plugins/Latex';
+import CodeHighlight from '@ant-design/x-markdown/plugins/CodeHighlight';
+import Latex from '@ant-design/x-markdown/plugins/Latex';
 import React from 'react';
 
 const content = `
