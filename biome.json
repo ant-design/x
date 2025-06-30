@@ -1,16 +1,17 @@
 {
   "files": {
     "ignoreUnknown": true,
-    "ignore": [
-      ".dumi/tmp*",
-      "dist/*",
-      "es/**/*",
-      "lib/**/*",
-      "_site/**/*",
-      "server/*",
-      "node_modules",
-      "coverage",
-      "package.json"
+    "includes": [
+      "**",
+      "!**/.dumi/tmp*",
+      "!**/dist/**/*",
+      "!**/es/**/*",
+      "!**/lib/**/*",
+      "!**/_site/**/*",
+      "!**/server/**/*",
+      "!**/node_modules",
+      "!**/coverage",
+      "!**/package.json"
     ]
   },
   "formatter": {
@@ -20,6 +21,7 @@
     "indentWidth": 2
   },
   "javascript": {
+    "jsxRuntime": "reactClassic",
     "formatter": {
       "quoteStyle": "single"
     }
@@ -31,7 +33,14 @@
         "useNumberNamespace": "off",
         "useNodejsImportProtocol": "off",
         "noNonNullAssertion": "off",
-        "noUnusedTemplateLiteral": "off"
+        "noUnusedTemplateLiteral": "off",
+        "useAsConstAssertion": "error",
+        "useDefaultParameterLast": "error",
+        "useEnumInitializers": "error",
+        "useSelfClosingElements": "error",
+        "useSingleVarDeclarator": "error",
+        "noInferrableTypes": "error",
+        "noUselessElse": "error"
       },
       "complexity": {
         "noUselessTypeConstraint": "off",
@@ -55,13 +64,23 @@
       "a11y": {
         "noAriaHiddenOnFocusable": "off",
         "useSemanticElements": "off",
-        "useKeyWithClickEvents": "off"
+        "useKeyWithClickEvents": "off",
+        "noStaticElementInteractions": "off"
+      },
+      "nursery": {
+        "useUniqueElementIds": "off"
       }
     }
   },
   "overrides": [
     {
-      "include": ["**/*.test.ts", "**/*.test.tsx", "tests/**/*", "scripts/**/*", ".dumi/**/*"],
+      "includes": [
+        "**/*.test.ts",
+        "**/*.test.tsx",
+        "**/tests/**/*",
+        "**/scripts/**/*",
+        "**/.dumi/**/*"
+      ],
       "linter": {
         "rules": {
           "style": {
@@ -83,11 +102,11 @@
       }
     },
     {
-      "include": [
-        "packages/x/components/*/demo/*",
-        "packages/x-card/src/*",
-        "packages/x-sdk/src/*",
-        "packages/x-markdown/src/*"
+      "includes": [
+        "**/packages/x/components/**/*/demo/**/*",
+        "**/packages/x-card/src/**/*",
+        "**/packages/x-sdk/src/**/*",
+        "**/packages/x-markdown/src/**/*"
       ],
       "linter": {
         "rules": {

@@ -25,7 +25,7 @@
     "husky": "^9.1.6",
     "father": "^4.5.4",
     "dekko": "^0.2.1",
-    "@biomejs/biome": "^1.9.0",
+    "@biomejs/biome": "^2.0.5",
     "@codecov/webpack-plugin": "^1.4.0",
     "@madccc/duplicate-package-checker-webpack-plugin": "^1.0.0",
     "circular-dependency-plugin": "^5.2.2"
