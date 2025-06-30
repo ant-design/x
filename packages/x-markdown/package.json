@@ -8,8 +8,8 @@
     "lint:deps": "antd-tools run deps-lint",
     "lint:md": "remark . -f -q",
     "lint:script": "biome lint",
-     "test": "jest --config .jest.js --no-cache --collect-coverage",
-     "coverage": "jest --config .jest.js --no-cache --collect-coverage --coverage"
+    "test": "jest --config .jest.js --no-cache --collect-coverage",
+    "coverage": "jest --config .jest.js --no-cache --collect-coverage --coverage"
   },
   "sideEffects": false,
   "main": "lib/index.js",
@@ -22,7 +22,6 @@
   ],
   "license": "MIT",
   "description": "placeholder for @ant-design/x-markdown",
-  "dependencies": {},
   "devDependencies": {
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
