@@ -40,7 +40,7 @@ export default defineConfig({
           filename: 'x-markdown',
         },
       },
-      'src/plugins/CodeHighLight/index.tsx': {
+      'src/plugins/CodeHighlight/index.tsx': {
         name: 'CodeHighlight',
         sourcemap: true,
         generateUnminified: true,

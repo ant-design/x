@@ -1,5 +1,5 @@
-import type { MarkedExtension, MarkedOptions, TokenizerExtension, Tokens } from 'marked';
-import { CSSProperties, ReactNode } from 'react';
+import type { MarkedExtension, MarkedOptions, Tokens } from 'marked';
+import { CSSProperties } from 'react';
 import { Renderer } from './core';
 
 export interface MarkdownXOptions extends MarkedOptions {
@@ -37,7 +37,7 @@ export interface XMarkdownProps {
   children?: string;
   config?: Config;
   allowHtml?: boolean;
-  components?: Record<string, (props: Token) => ReactNode>;
+  components?: Record<string, any>;
   streaming?: SteamingOption;
   plugins?: plugin[];
   className?: string;
