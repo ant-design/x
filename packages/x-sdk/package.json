@@ -23,6 +23,7 @@
   ],
   "license": "MIT",
   "description": "placeholder for @ant-design/x-sdk",
+  "dependencies": {},
   "devDependencies": {
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
