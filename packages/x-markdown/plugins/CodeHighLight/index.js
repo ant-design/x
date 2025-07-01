@@ -9,7 +9,7 @@ const CodeHighlight = () => {
         children
       } = props;
       if (lang === 'mermaid') return false;
-      const key = `${lang}-${id}-${children.length}`;
+      const key = `${lang}-${id}-${children?.length}`;
       return /*#__PURE__*/React.createElement(SyntaxHighlighter, {
         key: key,
         language: lang

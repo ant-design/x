@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import CodeHighlight from '..';
+import CodeHighLight from '..';
 import XMarkdown from '../../../XMarkdown';
 
 jest.mock('react', () => ({
@@ -8,7 +8,7 @@ jest.mock('react', () => ({
   useId: () => 'mock-id-123',
 }));
 
-describe('CodeHighlight', () => {
+describe('CodeHighLight', () => {
   it('render normal code', () => {
     const content = `
     \`\`\`javascript
@@ -16,7 +16,7 @@ describe('CodeHighlight', () => {
     \`\`\`
     `;
 
-    const { container } = render(<XMarkdown content={content} components={CodeHighlight()} />);
+    const { container } = render(<XMarkdown content={content} components={CodeHighLight()} />);
     expect(container.querySelector('pre')).toBeInTheDocument();
     expect(container.querySelector('code')).toBeInTheDocument();
     expect(container.textContent).toContain('console.log("javascript");');
@@ -29,7 +29,7 @@ describe('CodeHighlight', () => {
       \`\`\`
       `;
 
-    const { container } = render(<XMarkdown content={content} components={CodeHighlight()} />);
+    const { container } = render(<XMarkdown content={content} components={CodeHighLight()} />);
     expect(container.querySelector('pre')).toBeInTheDocument();
     expect(container.textContent).toContain('graph TD; A-->B;');
   });
@@ -41,13 +41,13 @@ describe('CodeHighlight', () => {
     \`\`\`
     `;
 
-    const { container } = render(<XMarkdown content={content} components={CodeHighlight()} />);
+    const { container } = render(<XMarkdown content={content} components={CodeHighLight()} />);
     expect(container.querySelector('pre')).toBeInTheDocument();
     expect(container.textContent).toContain('plain text');
   });
 
   it('should return false when lang is mermaid', () => {
-    const plugin = CodeHighlight();
+    const plugin = CodeHighLight();
     const token = {
       type: 'code',
       lang: 'mermaid',

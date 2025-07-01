@@ -8,7 +8,7 @@ type CodeProps = {
   children: string;
 };
 
-const CodeHighlight = () => {
+const CodeHighLight = () => {
   const id = React.useId();
 
   return {
@@ -26,4 +26,4 @@ const CodeHighlight = () => {
   };
 };
 
-export default CodeHighlight;
+export default CodeHighLight;
