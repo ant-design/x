@@ -18,7 +18,7 @@ block: \n
 
 -----
 
-### CodeHighlight
+### CodeHighLight
 \`\`\` js
 console.log('XMarkdown');
 \`\`\`
