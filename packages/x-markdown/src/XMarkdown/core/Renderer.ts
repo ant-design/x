@@ -168,7 +168,7 @@ class Renderer {
       },
     };
 
-    return parseHtml(cleanedRaw, options);
+    return parseHtml(cleanedRaw, htmlRenderer ? options : {});
   }
 
   public html(token: Token) {

@@ -6,7 +6,7 @@ const testCases = [
   {
     title: 'Render basic text',
     markdown: 'Hello world!',
-    html: '<p>Hello world!</p>',
+    html: '<div class="xmarkdown-p">Hello world!</div>',
   },
   {
     title: 'Render heading1',
@@ -36,7 +36,7 @@ const testCases = [
   {
     title: 'Render code span',
     markdown: 'this is `codespan`',
-    html: '<p>this is <code>codespan</code></p>',
+    html: '<div class="xmarkdown-p">this is <code>codespan</code></div>',
   },
   {
     title: 'Render code block',
@@ -46,27 +46,27 @@ const testCases = [
   {
     title: 'Render link',
     markdown: '[Google](https://www.google.com)',
-    html: '<p><a href="https://www.google.com">Google</a></p>',
+    html: '<div class="xmarkdown-p"><a href="https://www.google.com">Google</a></div>',
   },
   {
     title: 'Render link with title',
     markdown: '[Google]: https://www.google.com "google"\n[Google]',
-    html: '<p><a href="https://www.google.com" title="google">Google</a></p>',
+    html: '<div class="xmarkdown-p"><a href="https://www.google.com" title="google">Google</a></div>',
   },
   {
     title: 'Render image',
     markdown: '![logo](https://example.com/logo.png)',
-    html: '<p><img alt="logo" src="https://example.com/logo.png"></p>',
+    html: '<div class="xmarkdown-p"><img alt="logo" src="https://example.com/logo.png"></div>',
   },
   {
     title: 'Render bold and italic',
     markdown: 'This is **bold** and *italic* text',
-    html: '<p>This is <strong>bold</strong> and <em>italic</em> text</p>',
+    html: '<div class="xmarkdown-p">This is <strong>bold</strong> and <em>italic</em> text</div>',
   },
   {
     title: 'Render blockquote',
     markdown: '> This is a quote',
-    html: '<blockquote><p>This is a quote</p></blockquote>',
+    html: '<blockquote><div class="xmarkdown-p">This is a quote</div></blockquote>',
   },
   {
     title: 'Render horizontal rule',
@@ -77,12 +77,12 @@ const testCases = [
     title: 'Render mixed formats',
     markdown:
       '# Title\n\nThis is a [link](https://example.com) and **bold** text\n\n- List item 1\n- List item 2',
-    html: '<h1>Title</h1><p>This is a <a href="https://example.com">link</a> and <strong>bold</strong> text</p><ul><li>List item 1</li><li>List item 2</li></ul>',
+    html: '<h1>Title</h1><div class="xmarkdown-p">This is a <a href="https://example.com">link</a> and <strong>bold</strong> text</div><ul><li>List item 1</li><li>List item 2</li></ul>',
   },
   {
     title: 'Render del',
     markdown: '~del~',
-    html: '<p><del>del</del></p>',
+    html: '<div class="xmarkdown-p"><del>del</del></div>',
   },
   {
     title: 'Render table',
@@ -101,13 +101,12 @@ const testCases = [
   {
     title: 'Render escape',
     markdown: '\\>',
-    html: '<p>&gt;</p>',
+    html: '<div class="xmarkdown-p">&gt;</div>',
   },
   {
     title: 'Render br',
-    markdown: '<br>',
-    html: '<br>',
-    options: { breaks: true },
+    markdown: 'br: <br>',
+    html: '<div class="xmarkdown-p">br: <br></div>',
   },
   {
     title: 'Render Html',
@@ -117,7 +116,7 @@ const testCases = [
   {
     title: 'Render Html',
     markdown: 'inline: <span>hello</span>',
-    html: '<p>inline: <span>hello</span></p>',
+    html: '<div class="xmarkdown-p">inline: <span>hello</span></div>',
   },
 ];
 
@@ -145,6 +144,23 @@ describe('XMarkdown', () => {
 
       expect((container.firstChild as HTMLElement)?.innerHTML).toBe(html);
     });
+  });
+
+  it(`render custom components`, () => {
+    const markdown = `custom component <Line>This is Line</Line>`;
+    const html = `<div class=\"xmarkdown-p\">custom component <span>change Line to span</span></div>`;
+    const { container } = render(
+      <XMarkdown
+        content={markdown}
+        components={{
+          Line: () => {
+            return <span>change Line to span</span>;
+          },
+        }}
+      />,
+    );
+
+    expect((container.firstChild as HTMLElement)?.innerHTML).toBe(html);
   });
 
   it('walkToken', () => {

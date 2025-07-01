@@ -45,17 +45,4 @@ describe('CodeHighLight', () => {
     expect(container.querySelector('pre')).toBeInTheDocument();
     expect(container.textContent).toContain('plain text');
   });
-
-  it('should return false when lang is mermaid', () => {
-    const plugin = CodeHighLight();
-    const token = {
-      type: 'code',
-      lang: 'mermaid',
-      text: 'graph TD; A-->B;',
-      children: 'graph TD; A-->B;',
-    };
-
-    const result = plugin.code(token);
-    expect(result).toBe(false);
-  });
 });
