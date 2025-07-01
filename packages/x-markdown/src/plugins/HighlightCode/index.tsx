@@ -8,13 +8,13 @@ type CodeProps = {
   children: string;
 };
 
-const CodeHighLight = () => {
+const HighlightCode = () => {
   const id = React.useId();
 
   return {
     code(props: CodeProps) {
       const { lang, children } = props;
-      if (lang === 'mermaid') return false;
+      if (!lang) return <code>{children}</code>;
 
       const key = `${lang}-${id}-${children?.length}`;
       return (
@@ -26,4 +26,4 @@ const CodeHighLight = () => {
   };
 };
 
-export default CodeHighLight;
+export default HighlightCode;

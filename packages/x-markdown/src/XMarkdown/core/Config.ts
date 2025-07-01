@@ -4,7 +4,7 @@ import Renderer from './Renderer';
 
 const nonSelfCloseHtml = ['div', 'p', 'span', 'table', 'section', 'article'];
 
-// fix non self tag lex error
+// match nonSelfClose as a token
 const createNonSelfClosingHtmlPlugins = (components: XMarkdownProps['components']) => {
   const XMLTags = [...nonSelfCloseHtml, ...Object.keys(components || {})];
   const XMLTag = XMLTags.join('|');
@@ -13,6 +13,9 @@ const createNonSelfClosingHtmlPlugins = (components: XMarkdownProps['components'
     {
       name: 'nonSelfClosingHtml',
       level: 'inline' as const,
+      start(src: string) {
+        return src.indexOf(`<(${XMLTag})>`);
+      },
       tokenizer(src: string) {
         const rule = new RegExp(`^<(${XMLTag})(.*?)>(.*?)</(${XMLTag})>`, 'gi');
         const match = rule.exec(src);
@@ -21,9 +24,9 @@ const createNonSelfClosingHtmlPlugins = (components: XMarkdownProps['components'
             type: 'nonSelfClosingHtml',
             raw: match[0],
             text: match[0],
+            tag: match[1],
           };
         }
-        return undefined;
       },
     },
   ];

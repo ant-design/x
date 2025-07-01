@@ -1,4 +1,5 @@
 import XMarkdown from '@ant-design/x-markdown';
+import HighlightCode from '@ant-design/x-markdown/plugins/HighlightCode';
 import Latex from '@ant-design/x-markdown/plugins/Latex';
 import React from 'react';
 
@@ -18,7 +19,7 @@ block: \n
 
 -----
 
-### CodeHighLight
+### HighlightCode
 \`\`\` js
 console.log('XMarkdown');
 \`\`\`
@@ -26,7 +27,7 @@ console.log('XMarkdown');
 
 const App = () => {
   return (
-    <XMarkdown className="xmarkdown-body" plugins={Latex()}>
+    <XMarkdown className="xmarkdown-body" plugins={Latex()} components={HighlightCode()}>
       {content}
     </XMarkdown>
   );

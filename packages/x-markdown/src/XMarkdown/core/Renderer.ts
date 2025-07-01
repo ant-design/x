@@ -1,7 +1,8 @@
-import htmlParse, { DOMNode, Element, domToReact } from 'html-react-parser';
-import DOMPurify from 'isomorphic-dompurify';
+import DOMPurify from 'dompurify';
+import parseHtml, { DOMNode, domToReact } from 'html-react-parser';
 import type { Tokens } from 'marked';
-import type { ElementType, ReactNode } from 'react';
+import { type ElementType, type ReactNode } from 'react';
+import React from 'react';
 import { jsx, jsxs } from 'react/jsx-runtime';
 import type { Token, XMarkdownProps } from '../interface';
 import Parser from './Parser';
@@ -150,34 +151,37 @@ class Renderer {
     return this.render(type, children, ordered && start !== -1 ? { start } : {});
   }
 
+  private replaceHtml(token: Token) {
+    const { raw, tag } = token;
+    const componentsMap = this.options.components;
+    // don't sanitize custom component
+    const htmlRenderer = componentsMap?.[tag];
+    const cleanedRaw = htmlRenderer ? raw : DOMPurify.sanitize(raw);
+
+    const options = {
+      replace(domNode: any) {
+        const { attribs, children, name } = domNode;
+        if (!name) return null;
+
+        const renderElement = htmlRenderer ? htmlRenderer : name;
+        return jsx(renderElement, { children: domToReact(children), ...attribs });
+      },
+    };
+
+    return parseHtml(cleanedRaw, options);
+  }
+
   public html(token: Token) {
-    console.log('HTML', token.raw);
-    return htmlParse(DOMPurify.sanitize(token.raw));
+    return this.replaceHtml(token);
   }
 
   public nonSelfClosingHtml(token: Token) {
-    const { raw } = token;
-    const componentMap = this.options.components;
-
-    return htmlParse(raw, {
-      replace(domNode: DOMNode, index) {
-        const { name, children, attribs } = domNode as Element;
-        const renderElement = componentMap?.[name] ? componentMap[name] : name;
-        return jsx(
-          renderElement,
-          {
-            children: domToReact(children as DOMNode[]),
-            ...attribs,
-          },
-          `nonSelfClosingHtml-${index}`,
-        );
-      },
-    });
+    return this.replaceHtml(token);
   }
 
   public paragraph(token: Token) {
     const children = this.parser.parseInline(token?.tokens);
-    return this.render('p', children);
+    return this.render('div', children, { className: 'xmarkdown-p' });
   }
 
   public text(token: Token) {

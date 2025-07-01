@@ -1,6 +1,6 @@
 import { Bubble } from '@ant-design/x';
 import type { BubbleProps } from '@ant-design/x';
-import XMarkdown, { Token } from '@ant-design/x-markdown';
+import XMarkdown from '@ant-design/x-markdown';
 import { Line, LineProps } from '@antv/gpt-vis';
 import { Button, Flex } from 'antd';
 import React from 'react';
@@ -17,16 +17,9 @@ const RenderMarkdown: BubbleProps['messageRender'] = (content) => (
   <XMarkdown
     className="xmarkdown-body"
     components={{
-      heading: (props: Token) => {
-        const { depth, children } = props;
-        if (depth === 3) {
-          return <h2>{children}</h2>;
-        }
-      },
-      line: (props: LineProps) => {
+      Line: (props: LineProps) => {
         const { data, axisXTitle, axisYTitle } = props;
-        console.log('lineProps', props);
-
+        console.log('lineprops', props);
         return (
           <Line data={JSON.parse(data || '')} axisXTitle={axisXTitle} axisYTitle={axisYTitle} />
         );

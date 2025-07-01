@@ -61,7 +61,7 @@ const useStreaming = (
     const { tokens } = streamBuffer.current;
     if (tokens.length <= 1) return;
 
-    const newTokens = [...tokens.slice(0, -1)]; // 创建新数组
+    const newTokens = [...tokens.slice(0, -1)];
     streamBuffer.current.tokens = newTokens;
     streamBuffer.current.token = newTokens[newTokens.length - 1];
   }, []);
@@ -76,7 +76,7 @@ const useStreaming = (
 
   const flushOutputByPending = () => {
     const { rawStream } = streamBuffer.current;
-    const processedContent = rawStream.slice(0, -1); // 更简洁的截取方式
+    const processedContent = rawStream.slice(0, -1);
 
     if (processedContent) {
       setOutput(processedContent);
