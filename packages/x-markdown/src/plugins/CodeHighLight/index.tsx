@@ -16,7 +16,7 @@ const CodeHighlight = () => {
       const { lang, children } = props;
       if (lang === 'mermaid') return false;
 
-      const key = `${lang}-${id}-${children.length}`;
+      const key = `${lang}-${id}-${children?.length}`;
       return (
         <SyntaxHighlighter key={key} language={lang}>
           {children}

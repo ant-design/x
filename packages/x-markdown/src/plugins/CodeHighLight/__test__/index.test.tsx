@@ -52,6 +52,7 @@ describe('CodeHighlight', () => {
       type: 'code',
       lang: 'mermaid',
       text: 'graph TD; A-->B;',
+      children: 'graph TD; A-->B;',
     };
 
     const result = plugin.code(token);
