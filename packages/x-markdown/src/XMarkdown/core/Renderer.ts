@@ -1,12 +1,17 @@
-import htmlParse from 'html-react-parser';
+import htmlParse, { DOMNode, Element, domToReact } from 'html-react-parser';
 import DOMPurify from 'isomorphic-dompurify';
 import type { Tokens } from 'marked';
 import type { ElementType, ReactNode } from 'react';
 import { jsx, jsxs } from 'react/jsx-runtime';
-import type { Token } from '../interface';
+import type { Token, XMarkdownProps } from '../interface';
 import Parser from './Parser';
 
 type HeadingDepth = 1 | 2 | 3 | 4 | 5 | 6;
+
+type RendererOptions = {
+  components?: XMarkdownProps['components'];
+  streaming?: XMarkdownProps['streaming'];
+};
 
 const unEscapeReplacements: Record<string, string> = {
   '&amp;': '&',
@@ -27,9 +32,11 @@ export const unescapeHtmlEntity = (text: string) => {
 class Renderer {
   parser!: Parser;
   #elementMap: Map<string, number>;
+  options: RendererOptions;
 
-  constructor() {
+  constructor(options?: RendererOptions) {
     this.#elementMap = new Map();
+    this.options = options || {};
   }
 
   private getElementKey<T extends ElementType>(element: T) {
@@ -46,8 +53,16 @@ class Renderer {
     children: ReactNode = null,
     props: { key?: React.Key; [k: string]: unknown } = {},
   ): ReactNode {
+    const componentMap = this.options?.components;
+    const renderElement =
+      typeof element === 'string' && componentMap?.[element] ? componentMap[element] : element;
+
     const renderFunc = Array.isArray(children) ? jsxs : jsx;
-    return renderFunc(element, { children, ...props }, props?.key || this.getElementKey(element));
+    return renderFunc(
+      renderElement,
+      { children, ...props },
+      props?.key || this.getElementKey(renderElement),
+    );
   }
 
   public hr(_token: Token) {
@@ -62,19 +77,13 @@ class Renderer {
   }
 
   public codespan(token: Token) {
-    const { text } = token as Tokens.Codespan;
-    return this.render('code', unescapeHtmlEntity(text));
+    const { text, lang } = token;
+    const className = lang ? `language-${lang}` : undefined;
+    return this.render('code', unescapeHtmlEntity(text), { className, lang });
   }
 
   public code(token: Token) {
-    const { text, lang } = token;
-    const props = lang
-      ? {
-          class: `language-${lang}`,
-        }
-      : {};
-    const children = this.render('code', unescapeHtmlEntity(text), props);
-    return this.render('pre', children);
+    return this.render('pre', this.codespan(token));
   }
 
   public tableCell(token: Tokens.TableCell) {
@@ -142,7 +151,28 @@ class Renderer {
   }
 
   public html(token: Token) {
+    console.log('HTML', token.raw);
     return htmlParse(DOMPurify.sanitize(token.raw));
+  }
+
+  public nonSelfClosingHtml(token: Token) {
+    const { raw } = token;
+    const componentMap = this.options.components;
+
+    return htmlParse(raw, {
+      replace(domNode: DOMNode, index) {
+        const { name, children, attribs } = domNode as Element;
+        const renderElement = componentMap?.[name] ? componentMap[name] : name;
+        return jsx(
+          renderElement,
+          {
+            children: domToReact(children as DOMNode[]),
+            ...attribs,
+          },
+          `nonSelfClosingHtml-${index}`,
+        );
+      },
+    });
   }
 
   public paragraph(token: Token) {
@@ -152,7 +182,11 @@ class Renderer {
 
   public text(token: Token) {
     const { text, tokens } = token;
-    return tokens ? this.parser.parseInline(tokens) : unescapeHtmlEntity(text);
+    if (tokens) {
+      return this.parser.parseInline(tokens);
+    }
+    const unescapedText = unescapeHtmlEntity(text);
+    return unescapedText;
   }
 
   public link(token: Token) {

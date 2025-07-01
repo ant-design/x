@@ -23,15 +23,15 @@ title: 介绍
 | --- | --- | --- | --- | --- |
 | content | markdown 内容 | `string` | - | - |
 | children | markdown 内容，与 content 作用一样 | `string` | - | - |
-| config | 渲染配置 | `Config` | `{ gfm: true }` | - |
-| allowHtml | 是否支持html | `boolean` | `false` | - |
+| options | 渲染配置 | `Options` | `{ gfm: true }` | - |
+| walkTokens | 遍历tokens函数 | `function` | `null` | - |
 | components | 自定义组件 | `Record<string, React.ReactNode>` | - | - |
 | streaming | 流式渲染配置 | `SteamingOption` | - | - |
 | plugins | Marked.js extension plugins | `MarkedExtension[]` | - | - |
 | className | 自定义 className | `string` | - | - |
 | style | 自定义样式 | `CSSProperties` | - | - |
 
-### Config
+### Options
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
@@ -43,9 +43,3 @@ title: 介绍
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
 | hasNextChunk | 是否还有下一个 chunk，如果为 false，清除所有缓存并渲染 | `boolean` | `false` |  |
-
-### RendererObject
-
-Type: `{ [key: string]: (...args: unknown[]) => React.ReactNode | false }`
-
-Custom renderer functions for markdown elements. Keys should match markdown token types (e.g. 'heading', 'paragraph').

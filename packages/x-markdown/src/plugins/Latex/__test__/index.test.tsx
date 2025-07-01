@@ -44,9 +44,7 @@ block: \n
 describe('LaTeX Plugin', () => {
   testCases.forEach(({ title, markdown }) => {
     it(`testcase: ${title}`, () => {
-      const { container } = render(
-        <XMarkdown plugins={[latexPlugin({ output: 'mathml' })]}>{markdown}</XMarkdown>,
-      );
+      const { container } = render(<XMarkdown plugins={latexPlugin()}>{markdown}</XMarkdown>);
 
       expect(container).toMatchSnapshot();
     });

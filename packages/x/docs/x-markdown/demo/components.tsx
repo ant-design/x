@@ -1,7 +1,7 @@
 import { Bubble } from '@ant-design/x';
 import type { BubbleProps } from '@ant-design/x';
-import XMarkdown from '@ant-design/x-markdown';
-import { Line } from '@antv/gpt-vis';
+import XMarkdown, { Token } from '@ant-design/x-markdown';
+import { Line, LineProps } from '@antv/gpt-vis';
 import { Button, Flex } from 'antd';
 import React from 'react';
 
@@ -10,22 +10,26 @@ const text = `
 
 Here’s a visualization of Haidilao's food delivery revenue from 2013 to 2022. You can see a steady increase over the years, with notable *growth* particularly in recent years.
 
-<Line data=[{"time":2013,"value":59.3},{"time":2014,"value":64.4},{"time":2015,"value":68.9},{"time":2016,"value":74.4},{"time":2017,"value":82.7},{"time":2018,"value":91.9},{"time":2019,"value":99.1},{"time":2020,"value":101.6},{"time":2021,"value":114.4},{"time":2022,"value":121}] axisXTitle="year" axisYTitle="sale" style="color:red"></Line>
+<Line data=[{"time":2013,"value":59.3},{"time":2014,"value":64.4},{"time":2015,"value":68.9},{"time":2016,"value":74.4},{"time":2017,"value":82.7},{"time":2018,"value":91.9},{"time":2019,"value":99.1},{"time":2020,"value":101.6},{"time":2021,"value":114.4},{"time":2022,"value":121}] axisXTitle="year" axisYTitle="sale" ></Line>
 `;
 
 const RenderMarkdown: BubbleProps['messageRender'] = (content) => (
   <XMarkdown
     className="xmarkdown-body"
     components={{
-      heading: (props: any) => {
+      heading: (props: Token) => {
         const { depth, children } = props;
         if (depth === 3) {
           return <h2>{children}</h2>;
         }
       },
-      Line: (props: any) => {
+      line: (props: LineProps) => {
+        const { data, axisXTitle, axisYTitle } = props;
         console.log('lineProps', props);
-        return <Line {...props} data={JSON.parse(props?.data || '')} />;
+
+        return (
+          <Line data={JSON.parse(data || '')} axisXTitle={axisXTitle} axisYTitle={axisYTitle} />
+        );
       },
     }}
     streaming={{ hasNextChunk: true }}

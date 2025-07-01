@@ -85,11 +85,6 @@ function blockKatex(renderer: IRender) {
   };
 }
 
-export default function (options = {}) {
-  return {
-    extensions: [
-      inlineKatex(createRenderer(options, false)),
-      blockKatex(createRenderer(options, true)),
-    ],
-  };
+export default function (options = { output: 'mathml' }) {
+  return [inlineKatex(createRenderer(options, false)), blockKatex(createRenderer(options, true))];
 }

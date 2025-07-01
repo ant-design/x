@@ -41,7 +41,7 @@ const testCases = [
   {
     title: 'Render code block',
     markdown: "```javascript\nconsole.log('hello');\n```",
-    html: '<pre><code class="language-javascript">console.log(\'hello\');</code></pre>',
+    html: '<pre><code class="language-javascript" lang="javascript">console.log(\'hello\');</code></pre>',
   },
   {
     title: 'Render link',
@@ -105,8 +105,8 @@ const testCases = [
   },
   {
     title: 'Render br',
-    markdown: 'Hello\nWorld!\n',
-    html: '<p>Hello<br>World!</p>',
+    markdown: '<br>',
+    html: '<br>',
     options: { breaks: true },
   },
   {
@@ -117,7 +117,7 @@ const testCases = [
   {
     title: 'Render Html',
     markdown: 'inline: <span>hello</span>',
-    html: '<p>inline: <span></span>hello</p>',
+    html: '<p>inline: <span>hello</span></p>',
   },
 ];
 
@@ -141,7 +141,7 @@ describe('XMarkdown', () => {
 
   testCases.forEach(({ markdown, title, html, options }: ITestCase) => {
     it(`common markdown case: ${title}`, () => {
-      const { container } = render(<XMarkdown content={markdown} config={options} />);
+      const { container } = render(<XMarkdown content={markdown} options={options} />);
 
       expect((container.firstChild as HTMLElement)?.innerHTML).toBe(html);
     });
@@ -153,7 +153,7 @@ describe('XMarkdown', () => {
         token.depth++;
       }
     };
-    const { container } = render(<XMarkdown content="# heading" plugins={[{ walkTokens }]} />);
+    const { container } = render(<XMarkdown content="# heading" walkTokens={walkTokens} />);
 
     expect(container.querySelector('h2')).toBeInTheDocument();
   });

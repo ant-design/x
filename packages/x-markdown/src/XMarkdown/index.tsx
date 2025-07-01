@@ -1,39 +1,46 @@
-import htmlParse from 'html-react-parser';
-import DOMPurify from 'isomorphic-dompurify';
 import { Marked, walkTokens } from 'marked';
 import React from 'react';
-import { Lexer, Parser, Renderer, createMarkdownOptions } from './core';
+import { Parser, createMarkdownConfig } from './core';
 import useStreaming from './hooks/useStreaming';
 import { XMarkdownProps } from './interface';
 
 const XMarkdown: React.FC<XMarkdownProps> = (props) => {
-  const { content, children, config, allowHtml, streaming, plugins, components, className, style } =
-    props;
-
-  // ============================ Streaming ============================
-  const displayContent = useStreaming(content || children || '', streaming, components);
+  const {
+    content,
+    children,
+    options,
+    streaming,
+    plugins,
+    components,
+    walkTokens: csWalkToken,
+    className,
+    style,
+  } = props;
 
   // ============================ Render ============================
-  if (allowHtml) {
-    const htmlString = new Marked().parse(displayContent) as string;
-    return (
-      <div className={className} style={style}>
-        {htmlParse(DOMPurify.sanitize(htmlString))}
-      </div>
-    );
-  }
-
-  const renderer = new Renderer();
-  const options = createMarkdownOptions(renderer, plugins, components, config);
-  const lexer = new Lexer(options);
-  const parser = new Parser(options);
-
+  const displayContent = useStreaming(content || children || '', streaming, components);
   if (!displayContent) return null;
 
-  const tokens = lexer.lex(displayContent);
+  const config = createMarkdownConfig(options, plugins, components, streaming);
 
-  if (options.walkTokens) {
-    walkTokens(tokens, options.walkTokens);
+  const markedInstance = new Marked({
+    breaks: config.break,
+    gfm: config.gfm,
+    extensions: config.plugins,
+  });
+
+  if (markedInstance.defaults.extensions) {
+    config.extensions = markedInstance.defaults.extensions;
+  }
+
+  const parser = new Parser(config);
+
+  const tokens = markedInstance.lexer(displayContent);
+
+  console.log('tokens', tokens);
+
+  if (csWalkToken) {
+    walkTokens(tokens, csWalkToken);
   }
   return (
     <div className={className} style={style}>

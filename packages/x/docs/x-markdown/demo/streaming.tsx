@@ -6,6 +6,8 @@ import { Button } from 'antd';
 import React, { useState } from 'react';
 
 const fullContent = `
+3*2
+
 <div align="center"><img height="180" src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*eco6RrQhxbMAAAAAAAAAAAAADgCCAQ/original"><h1>Ant Design X</h1>Craft AI-driven interfaces effortlessly.</div>
 
 [![CI status](https://github.com/ant-design/x/actions/workflows/main.yml/badge.svg)](https://github.com/ant-design/x/actions/workflows/main.yml) [![NPM version](https://img.shields.io/npm/v/@ant-design/x.svg?style=flat-square)](https://npmjs.org/package/@ant-design/x)

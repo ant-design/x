@@ -23,15 +23,15 @@ Used to render the streaming Markdown format returned by LLM.
 | --- | --- | --- | --- | --- |
 | content | Markdown content to render | `string` | - | - |
 | children | Alternative way to provide markdown content (will override content if both provided) | `string` | - | - |
-| config | Configuration options for markdown parsing | `Config` | `{ gfm: true }` | - |
-| allowHtml | Whether to allow raw HTML in markdown content | `boolean` | `false` | - |
+| options | Configuration options for markdown parsing | `Options` | `{ gfm: true }` | - |
+| walkTokens | A function which is called for every token. | `function` | `null` | - |
 | components | Custom React components to override default markdown rendering | `Record<string, React.ReactNode>` | - | - |
 | streaming | Options for streaming markdown content | `SteamingOption` | - | - |
 | plugins | Marked.js extension plugins | `MarkedExtension[]` | - | - |
 | className | Additional CSS class for the container | `string` | - | - |
 | style | Inline styles for the container | `CSSProperties` | - | - |
 
-### Config
+### Options
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
@@ -43,9 +43,3 @@ Used to render the streaming Markdown format returned by LLM.
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | hasNextChunk | Is there a next chunk, If false, clear all caches and render | `boolean` | `false` |  |
-
-### RendererObject
-
-Type: `{ [key: string]: (...args: unknown[]) => React.ReactNode | false }`
-
-Custom renderer functions for markdown elements. Keys should match markdown token types (e.g. 'heading', 'paragraph').

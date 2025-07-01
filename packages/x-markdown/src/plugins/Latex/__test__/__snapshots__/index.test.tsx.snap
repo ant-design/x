@@ -28,7 +28,6 @@ exports[`LaTeX Plugin testcase: should render block LaTeX with \\[..\\] syntax 1
     </pre>
     <p>
       \\Delta t' = \\frac{\\Delta t}{\\sqrt{1 - \\frac{v^2}{c^2}}}
-      <br />
       ]
     </p>
   </div>

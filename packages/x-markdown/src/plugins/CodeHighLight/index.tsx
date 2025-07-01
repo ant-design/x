@@ -1,23 +1,27 @@
 import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { Token, plugin } from './interface';
 
-const CodeHighlight = (): plugin => {
+type CodeProps = {
+  type: string;
+  lang: string;
+  text: string;
+  children: string;
+};
+
+const CodeHighlight = () => {
   const id = React.useId();
 
   return {
-    renderer: {
-      code(token: Token) {
-        const { lang, text } = token;
-        if (lang === 'mermaid') return false;
+    code(props: CodeProps) {
+      const { lang, children } = props;
+      if (lang === 'mermaid') return false;
 
-        const key = `${lang}-${id}-${text.length}`;
-        return (
-          <SyntaxHighlighter key={key} language={token.lang}>
-            {text}
-          </SyntaxHighlighter>
-        );
-      },
+      const key = `${lang}-${id}-${children.length}`;
+      return (
+        <SyntaxHighlighter key={key} language={lang}>
+          {children}
+        </SyntaxHighlighter>
+      );
     },
   };
 };

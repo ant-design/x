@@ -16,7 +16,7 @@ describe('CodeHighlight', () => {
     \`\`\`
     `;
 
-    const { container } = render(<XMarkdown content={content} plugins={[CodeHighlight()]} />);
+    const { container } = render(<XMarkdown content={content} components={CodeHighlight()} />);
     expect(container.querySelector('pre')).toBeInTheDocument();
     expect(container.querySelector('code')).toBeInTheDocument();
     expect(container.textContent).toContain('console.log("javascript");');
@@ -29,7 +29,7 @@ describe('CodeHighlight', () => {
       \`\`\`
       `;
 
-    const { container } = render(<XMarkdown content={content} plugins={[CodeHighlight()]} />);
+    const { container } = render(<XMarkdown content={content} components={CodeHighlight()} />);
     expect(container.querySelector('pre')).toBeInTheDocument();
     expect(container.textContent).toContain('graph TD; A-->B;');
   });
@@ -41,7 +41,7 @@ describe('CodeHighlight', () => {
     \`\`\`
     `;
 
-    const { container } = render(<XMarkdown content={content} plugins={[CodeHighlight()]} />);
+    const { container } = render(<XMarkdown content={content} components={CodeHighlight()} />);
     expect(container.querySelector('pre')).toBeInTheDocument();
     expect(container.textContent).toContain('plain text');
   });
@@ -49,11 +49,12 @@ describe('CodeHighlight', () => {
   it('should return false when lang is mermaid', () => {
     const plugin = CodeHighlight();
     const token = {
+      type: 'code',
       lang: 'mermaid',
       text: 'graph TD; A-->B;',
     };
 
-    const result = plugin.renderer?.code(token);
+    const result = plugin.code(token);
     expect(result).toBe(false);
   });
 });

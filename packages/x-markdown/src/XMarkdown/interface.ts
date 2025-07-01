@@ -1,10 +1,5 @@
-import type { MarkedExtension, MarkedOptions, Tokens } from 'marked';
+import type { MarkedExtension, Tokens } from 'marked';
 import { CSSProperties } from 'react';
-import { Renderer } from './core';
-
-export interface MarkdownXOptions extends MarkedOptions {
-  XRenderer: Renderer;
-}
 
 export type Token = Tokens.Generic;
 
@@ -16,7 +11,7 @@ export interface SteamingOption {
   hasNextChunk: boolean;
 }
 
-export interface Config {
+export interface Options {
   break?: boolean;
   gfm?: boolean;
 }
@@ -27,19 +22,15 @@ export type RendererObject = {
   [key: string]: GenericRendererFunction;
 };
 
-export interface plugin extends Omit<MarkedExtension, 'renderer' | 'walkTokens'> {
-  renderer?: any;
-  walkTokens?: (token: Token) => void;
-}
-
 export interface XMarkdownProps {
   content?: string;
   children?: string;
-  config?: Config;
+  options?: Options;
   allowHtml?: boolean;
   components?: Record<string, any>;
   streaming?: SteamingOption;
-  plugins?: plugin[];
+  plugins?: MarkedExtension['extensions'];
+  walkTokens?: (token: Token) => void;
   className?: string;
   style?: CSSProperties;
 }

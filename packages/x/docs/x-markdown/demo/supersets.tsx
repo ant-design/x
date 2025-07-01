@@ -26,7 +26,7 @@ console.log('XMarkdown');
 
 const App = () => {
   return (
-    <XMarkdown className="xmarkdown-body" plugins={[Latex({ output: 'mathml' })]}>
+    <XMarkdown className="xmarkdown-body" plugins={Latex()}>
       {content}
     </XMarkdown>
   );

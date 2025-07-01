@@ -58,6 +58,9 @@ class Parser {
         case 'html': {
           return this.renderer.html(token);
         }
+        case 'nonSelfClosingHtml': {
+          return this.renderer.nonSelfClosingHtml(token);
+        }
         case 'paragraph': {
           return this.renderer.paragraph(token);
         }
@@ -94,6 +97,9 @@ class Parser {
         }
         case 'html': {
           return this.renderer.html(token);
+        }
+        case 'nonSelfClosingHtml': {
+          return this.renderer.nonSelfClosingHtml(token);
         }
         case 'link': {
           return this.renderer.link(token);

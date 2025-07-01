@@ -36,7 +36,7 @@ const App = () => {
         return '';
       }
       const { text } = token;
-      const order = Number(text);
+      const order = Number(text) - 1;
       const currentUrl = referenceList?.[order]?.url;
       if (!currentUrl) {
         return null;
@@ -57,13 +57,7 @@ const App = () => {
     },
   };
 
-  return (
-    <XMarkdown
-      className="xmarkdown-body"
-      plugins={[{ extensions: [footNoteExtension] }]}
-      content={content}
-    />
-  );
+  return <XMarkdown className="xmarkdown-body" plugins={[footNoteExtension]} content={content} />;
 };
 
 export default App;
