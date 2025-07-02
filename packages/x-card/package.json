@@ -28,8 +28,7 @@
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "dekko": "^0.2.1"
+    "react-dom": "^19.0.0"
   },
   "peerDependencies": {
     "antd": "^5.20.3",

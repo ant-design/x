@@ -1,7 +1,7 @@
 ---
 category: Components
 group:
-  title: Common
+  title: Feedback
   order: 0
 title: Actions
 description: Used for quickly configuring required action buttons or features in some AI scenarios.

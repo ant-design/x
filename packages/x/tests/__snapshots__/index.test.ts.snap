@@ -15,6 +15,7 @@ exports[`antd dist files exports modules correctly 1`] = `
   "XProvider",
   "XRequest",
   "XStream",
+  "notification",
   "useXAgent",
   "useXChat",
   "version",

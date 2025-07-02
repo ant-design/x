@@ -1,7 +1,7 @@
 ---
 category: Components
 group:
-  title: Common
+  title: Feedback
   order: 0
 title: Think
 description: Show deep thinking process.
@@ -35,7 +35,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | children | Think Content | React.ReactNode | - | - |
 | title | Text of status | React.ReactNode | - | - |
 | icon | Show icon | React.ReactNode | - | - |
-| loading | Loading | boolean | false | - |
+| loading | Loading | boolean \| React.ReactNode | false | - |
 | defaultExpanded | Default Expand state | boolean | true | - |
 | expanded | Expand state | boolean | - | - |
 | onExpand | Callback when expand changes | (expand: boolean) => void | - | - |
@@ -45,3 +45,5 @@ Common props ref：[Common props](/docs/react/common-props)
 <code src="./demo/_semantic.tsx" simplify="true"></code>
 
 ## Design Token
+
+<ComponentTokenTable component="Think"></ComponentTokenTable>

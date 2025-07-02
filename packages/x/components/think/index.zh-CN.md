@@ -34,7 +34,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*uaGhTY1-LL0AAA
 | children | 内容 | React.ReactNode | - | - |
 | title | 状态文本 | React.ReactNode | - | - |
 | icon | 状态图标 | React.ReactNode | - | - |
-| loading | 加载中 | boolean | false | - |
+| loading | 加载中 | boolean \| React.ReactNode | false | - |
 | defaultExpanded | 默认是否展开 | boolean | true | - |
 | expanded | 是否展开 | boolean | - | - |
 | onExpand | 展开事件 | (expand: boolean) => void | - | - |
@@ -44,3 +44,5 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*uaGhTY1-LL0AAA
 <code src="./demo/_semantic.tsx" simplify="true"></code>
 
 ## 主题变量（Design Token）
+
+<ComponentTokenTable component="Think"></ComponentTokenTable>

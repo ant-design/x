@@ -50,6 +50,5 @@
     "antd": "^5.20.3",
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
-  },
-  "repository": "https://github.com/Div627/x.git"
+  }
 }

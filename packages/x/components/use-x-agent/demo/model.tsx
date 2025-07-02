@@ -1,6 +1,6 @@
 import { LoadingOutlined, TagsOutlined } from '@ant-design/icons';
-import { ThoughtChain, useXAgent } from '@ant-design/x';
 import type { ThoughtChainItem } from '@ant-design/x';
+import { ThoughtChain, useXAgent } from '@ant-design/x';
 import { Button, Descriptions, Flex, Input, Splitter, Typography } from 'antd';
 import React, { useRef, useState } from 'react';
 
@@ -83,7 +83,7 @@ const App = () => {
               const modalMessage = JSON.parse(value || '{}');
               const content = modalMessage?.choices?.[0]?.delta?.content || '';
               controller.enqueue(content);
-            } catch (error) {
+            } catch (_error) {
               controller.enqueue('');
             }
           });

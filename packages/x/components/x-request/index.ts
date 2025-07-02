@@ -1,10 +1,8 @@
-import XStream from '../x-stream';
-import xFetch from './x-fetch';
-
-import type { SSEOutput, XStreamOptions } from '../x-stream';
-import type { XFetchOptions } from './x-fetch';
-
 import type { AnyObject } from '../_util/type';
+import type { SSEOutput, XStreamOptions } from '../x-stream';
+import XStream from '../x-stream';
+import type { XFetchOptions } from './x-fetch';
+import xFetch from './x-fetch';
 
 export interface XRequestBaseOptions {
   /**
@@ -107,12 +105,12 @@ class XRequestClass {
   private constructor(options: XRequestOptions) {
     const { baseURL, model, dangerouslyApiKey, ...customOptions } = options;
 
-    this.baseURL = options.baseURL;
-    this.model = options.model;
+    this.baseURL = baseURL;
+    this.model = model;
     this.defaultHeaders = {
       'Content-Type': 'application/json',
-      ...(options.dangerouslyApiKey && {
-        Authorization: options.dangerouslyApiKey,
+      ...(dangerouslyApiKey && {
+        Authorization: dangerouslyApiKey,
       }),
     };
     this.customOptions = customOptions;
