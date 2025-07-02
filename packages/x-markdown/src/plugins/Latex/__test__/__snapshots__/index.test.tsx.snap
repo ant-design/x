@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LaTeX Plugin testcase: should render block LaTeX with $$..$$ syntax 1`] = `
+<div>
+  <div>
+    <div
+      class="xmarkdown-p"
+    >
+      This is an block LaTeX: 
+    </div>
+    <div
+      class="xmarkdown-p"
+    >
+      <span
+        class="katex"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`LaTeX Plugin testcase: should render block LaTeX with \\[..\\] syntax 1`] = `
+<div>
+  <div>
+    <div
+      class="xmarkdown-p"
+    >
+      This is an block LaTeX: 
+    </div>
+    <pre>
+      <code>
+          \\[
+      </code>
+    </pre>
+    <div
+      class="xmarkdown-p"
+    >
+      \\Delta t' = \\frac{\\Delta t}{\\sqrt{1 - \\frac{v^2}{c^2}}}
+      ]
+    </div>
+  </div>
+</div>
+`;
+
+exports[`LaTeX Plugin testcase: should render inline LaTeX with $..$ syntax 1`] = `
+<div>
+  <div>
+    <h3>
+      Latex
+    </h3>
+    <div
+      class="xmarkdown-p"
+    >
+      inline standard: 
+      <span
+        class="katex"
+      />
+    </div>
+    <div
+      class="xmarkdown-p"
+    >
+      block standard：
+    </div>
+    <span
+      class="katex"
+    />
+    <div
+      class="xmarkdown-p"
+    >
+      inline: 
+      <span
+        class="katex"
+      />
+    </div>
+    <div
+      class="xmarkdown-p"
+    >
+      block: 
+    </div>
+    <span
+      class="katex"
+    />
+  </div>
+</div>
+`;
+
+exports[`LaTeX Plugin testcase: should render inline LaTeX with \\(..\\) syntax 1`] = `
+<div>
+  <div>
+    <div
+      class="xmarkdown-p"
+    >
+      This is an inline LaTeX: 
+      <span
+        class="katex"
+      />
+    </div>
+  </div>
+</div>
+`;

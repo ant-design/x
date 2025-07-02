@@ -20,19 +20,45 @@ export default defineConfig({
   },
   esm: {
     input: 'src',
+    overrides: {
+      'src/plugins': {
+        output: 'plugins',
+      },
+    },
   },
   cjs: {
     input: 'src',
   },
   umd: {
-    entry: 'src/index.ts',
-    name: 'XMarkdown',
-    output: {
-      path: 'dist/',
-      filename: 'x-markdown',
+    entry: {
+      'src/index.ts': {
+        name: 'XMarkdown',
+        sourcemap: true,
+        generateUnminified: true,
+        output: {
+          path: 'dist/',
+          filename: 'x-markdown',
+        },
+      },
+      'src/plugins/HighlightCode/index.tsx': {
+        name: 'HighlightCode',
+        sourcemap: true,
+        generateUnminified: true,
+        output: {
+          path: 'dist/',
+          filename: 'code-high-light',
+        },
+      },
+      'src/plugins/Latex/index.ts': {
+        name: 'Latex',
+        sourcemap: true,
+        generateUnminified: true,
+        output: {
+          path: 'dist/',
+          filename: 'latex',
+        },
+      },
     },
-    sourcemap: true,
-    generateUnminified: true,
     externals: {
       react: 'React',
       'react-dom': 'ReactDOM',
@@ -47,7 +73,7 @@ export default defineConfig({
         memo.plugin('codecov').use(CodecovWebpackPlugin, [
           {
             enableBundleAnalysis: true,
-            bundleName: 'antdxmarkdown',
+            bundleName: 'x-markdown',
             uploadToken: process.env.CODECOV_TOKEN,
             gitService: 'github',
           },

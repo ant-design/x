@@ -1,13 +1,17 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
       "@@/*": [".dumi/tmp/*"],
       "@ant-design/x": ["components/index.ts"],
       "@ant-design/x/es/*": ["components/*"],
       "@ant-design/x/lib/*": ["components/*"],
-      "@ant-design/x/locale/*": ["components/locale/*"]
+      "@ant-design/x/locale/*": ["components/locale/*"],
+      "@ant-design/x-markdown": ["../x-markdown/src/index.ts"],
+      "@ant-design/x-markdown/es/*": ["../x-markdown/src/*"],
+      "@ant-design/x-markdown/lib/*": ["../x-markdown/src/*"],
+      "@ant-design/x-markdown/plugins/*": ["../x-markdown/src/plugins/*"]
     }
   },
   "include": [".dumirc.ts", "**/*"]

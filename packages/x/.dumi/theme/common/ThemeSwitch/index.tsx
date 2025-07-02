@@ -1,6 +1,6 @@
 import { BgColorsOutlined, LinkOutlined, SmileOutlined, SunOutlined } from '@ant-design/icons';
-import { Badge, Button, Dropdown } from 'antd';
 import type { MenuProps } from 'antd';
+import { Badge, Button, Dropdown } from 'antd';
 import { CompactTheme, DarkTheme } from 'antd-token-previewer/es/icons';
 import { FormattedMessage, useLocation } from 'dumi';
 import React, { use, useRef } from 'react';

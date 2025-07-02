@@ -1,0 +1,102 @@
+.xmarkdown-body {
+  width: 100%;
+  font-size: 16px;
+  line-height: 28px;
+}
+
+.xmarkdown-body h1,
+.xmarkdown-body h2,
+.xmarkdown-body h3,
+.xmarkdown-body h4,
+.xmarkdown-body p {
+  margin-bottom: 16px;
+}
+
+.xmarkdown-body ul {
+  list-style: disc;
+}
+
+.xmarkdown-body ul ul {
+  list-style: circle;
+}
+
+.xmarkdown-body ul ul ul {
+  list-style: square;
+}
+
+.xmarkdown-body ol {
+  list-style: decimal;
+}
+
+.xmarkdown-body ul,
+.xmarkdown-body ol {
+  margin-bottom: 16px;
+  margin-top: 8px;
+  text-align: left;
+  padding-left: 16px;
+}
+
+.xmarkdown-body li {
+  margin-bottom: 8px;
+  /* opacity: 0; */
+  /* animation: text-fade-in 1s forwards; */
+  word-break: break-word;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  margin-bottom: 4px;
+  margin-left: 4px;
+}
+
+.xmarkdown-body h1 {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 36px;
+}
+
+.xmarkdown-body h2 {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 32px;
+}
+
+.xmarkdown-body h3 {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 30px;
+}
+
+.xmarkdown-body h4 {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 28px;
+}
+
+.xmarkdown-body hr {
+  margin: 24px 0;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.9);
+}
+
+.xmarkdown-body strong {
+  font-weight: 600;
+}
+
+.xmarkdown-body pre {
+  margin-top: 0;
+  margin-bottom: 0;
+  flex: 1;
+}
+
+.xmarkdown-body code {
+  background-color: transparent;
+  display: inline-flex;
+}
+
+@keyframes text-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
