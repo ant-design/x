@@ -68,7 +68,7 @@ import { Table } from 'antd';
 import type { TableProps, TableColumnType } from 'antd/es/table';
 
 // 类型别名
-type Status = 'pending' | 'processing' | 'success' | 'failed';
+type Status = 'loading' | 'processing' | 'success' | 'failed';
 
 // 泛型接口
 interface DataItem<T = string> {
@@ -119,7 +119,7 @@ const DataTable = <T extends string>(props: {
       key: 'status',
       render: (status: Status) => {
         const statusColors = {
-          pending: 'blue',
+          loading: 'blue',
           processing: 'orange',
           success: 'green',
           failed: 'red',

@@ -51,7 +51,7 @@ const App = () => {
   const [lines, setLines] = React.useState<string[]>([]);
 
   async function request() {
-    setStatus('pending');
+    setStatus('loading');
 
     await exampleRequest.create(
       {
@@ -83,7 +83,7 @@ const App = () => {
   return (
     <Splitter>
       <Splitter.Panel>
-        <Button type="primary" disabled={status === 'pending'} onClick={request}>
+        <Button type="primary" disabled={status === 'loading'} onClick={request}>
           Request - {BASE_URL}
           {PATH}
         </Button>

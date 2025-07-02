@@ -1,7 +1,7 @@
 import { DownOutlined, LoadingOutlined } from '@ant-design/icons';
 import classnames from 'classnames';
-import type { CSSMotionProps } from 'rc-motion';
 import CSSMotion from 'rc-motion';
+import type { CSSMotionProps } from 'rc-motion';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import React from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
@@ -11,19 +11,6 @@ import ThinkIcon from './icons/think';
 import useStyle from './style';
 
 export type SemanticType = 'root' | 'status' | 'content';
-
-const StatusIcon = ({
-  loading,
-  icon,
-}: {
-  loading?: boolean | React.ReactNode;
-  icon?: React.ReactNode;
-}) => {
-  if (loading) {
-    return loading === true ? <LoadingOutlined /> : loading;
-  }
-  return icon || <ThinkIcon />;
-};
 
 export interface ThinkProps {
   prefixCls?: string;
@@ -87,6 +74,13 @@ const Think: React.FC<React.PropsWithChildren<ThinkProps>> = (props) => {
     onChange: onExpand,
   });
 
+  const StatusIcon = () => {
+    if (loading) {
+      return loading === true ? <LoadingOutlined /> : loading;
+    }
+    return icon || <ThinkIcon />;
+  };
+
   return wrapCSSVar(
     <div
       className={mergedCls}
@@ -102,7 +96,7 @@ const Think: React.FC<React.PropsWithChildren<ThinkProps>> = (props) => {
         style={styles.status}
       >
         <div className={`${prefixCls}-status-icon`}>
-          <StatusIcon loading={loading} icon={icon} />
+          <StatusIcon />
         </div>
         <div className={`${prefixCls}-status-text`}>{title}</div>
         <DownOutlined className={`${prefixCls}-status-down-icon`} rotate={isExpand ? 180 : 0} />

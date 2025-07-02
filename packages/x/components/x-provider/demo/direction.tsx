@@ -129,8 +129,8 @@ export default () => {
                 },
                 {
                   title: 'Pending...',
-                  status: 'pending',
-                  description: 'status: pending',
+                  status: 'loading',
+                  description: 'status: loading',
                   icon: <LoadingOutlined />,
                 },
               ]}

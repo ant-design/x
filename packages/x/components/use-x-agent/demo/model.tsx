@@ -1,6 +1,6 @@
 import { LoadingOutlined, TagsOutlined } from '@ant-design/icons';
-import type { ThoughtChainItem } from '@ant-design/x';
 import { ThoughtChain, useXAgent } from '@ant-design/x';
+import type { ThoughtChainItem } from '@ant-design/x';
 import { Button, Descriptions, Flex, Input, Splitter, Typography } from 'antd';
 import React, { useRef, useState } from 'react';
 
@@ -45,8 +45,8 @@ const App = () => {
 
   const request = () => {
     setLines([]);
-    setThoughtChainStatus('pending');
-    setStatus('pending');
+    setThoughtChainStatus('loading');
+    setStatus('loading');
     agent.request(
       {
         messages: [{ role: 'user', content: questionText }],
@@ -83,7 +83,7 @@ const App = () => {
               const modalMessage = JSON.parse(value || '{}');
               const content = modalMessage?.choices?.[0]?.delta?.content || '';
               controller.enqueue(content);
-            } catch (_error) {
+            } catch (error) {
               controller.enqueue('');
             }
           });
@@ -109,10 +109,10 @@ const App = () => {
                 }}
               />
               <Flex gap="small">
-                <Button type="primary" disabled={status === 'pending'} onClick={request}>
+                <Button type="primary" disabled={status === 'loading'} onClick={request}>
                   Agent Request
                 </Button>
-                <Button type="primary" disabled={status !== 'pending'} onClick={abort}>
+                <Button type="primary" disabled={status !== 'loading'} onClick={abort}>
                   Agent Abort
                 </Button>
               </Flex>
@@ -130,7 +130,7 @@ const App = () => {
             {
               title: 'Agent Request Log',
               status: thoughtChainStatus,
-              icon: status === 'pending' ? <LoadingOutlined /> : <TagsOutlined />,
+              icon: status === 'loading' ? <LoadingOutlined /> : <TagsOutlined />,
               description: `request ${status}`,
               content: (
                 <Descriptions column={1}>

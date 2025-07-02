@@ -20,7 +20,6 @@ demo:
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" background="grey">Basic</code>
-<code src="./demo/size.tsx" background="grey">Size</code>
 <code src="./demo/status.tsx" background="grey">Item Status</code>
 <code src="./demo/collapsible.tsx" background="grey">Collapsible</code>
 <code src="./demo/customization.tsx" background="grey">Item Customization</code>
@@ -52,7 +51,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | footer | Thought chain item footer | React.ReactNode | None | - |
 | icon | Thought chain item icon | React.ReactNode | None | - |
 | key | Unique identifier | string | None | - |
-| status | Thought chain item status | 'pending' \| 'success' \| 'error' | None | - |
+| status | Thought chain item status | 'loading' \| 'success' \| 'error' | None | - |
 | title | Thought chain item title | React.ReactNode | None | - |
 
 ### CollapsibleOptions

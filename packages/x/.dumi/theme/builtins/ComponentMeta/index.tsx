@@ -5,9 +5,10 @@ import { createStyles, css } from 'antd-style';
 import kebabCase from 'lodash/kebabCase';
 import React from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
+import Link from '../../common/Link';
+
 import useLocale from '../../../hooks/useLocale';
 import ComponentChangelog from '../../common/ComponentChangelog';
-import Link from '../../common/Link';
 
 const locales = {
   cn: {
@@ -152,12 +153,7 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
           filledSource && {
             label: locale.source,
             children: (
-              <Typography.Link
-                className={styles.code}
-                href={filledSource}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <Typography.Link className={styles.code} href={filledSource} target="_blank">
                 <GithubOutlined className={styles.icon} />
                 <span>{abbrSource}</span>
               </Typography.Link>
@@ -171,7 +167,6 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
                   className={styles.code}
                   href={`${branchUrl}${filename}`}
                   target="_blank"
-                  rel="noopener noreferrer"
                 >
                   <EditOutlined className={styles.icon} />
                   <span>{locale.edit}</span>

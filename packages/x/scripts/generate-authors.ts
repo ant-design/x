@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import remove from 'lodash/remove';
 import sortBy from 'lodash/sortBy';
 import unionBy from 'lodash/unionBy';
 import simpleGit from 'simple-git';
@@ -18,8 +19,8 @@ const excludes = [
 ];
 
 async function execute() {
-  const logResult = await git.log();
-  let all = logResult.all.filter(({ author_email: email }) => {
+  let { all }: { all: any } = await git.log();
+  all = remove(all, ({ author_email: email }) => {
     for (let i = 0; i < excludes.length; i++) {
       const item = excludes[i];
       if (email.includes(item)) {

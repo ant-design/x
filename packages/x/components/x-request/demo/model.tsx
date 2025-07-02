@@ -40,7 +40,7 @@ const App = () => {
   const abortController = useRef<AbortController>(null);
 
   const request = async () => {
-    setStatus('pending');
+    setStatus('loading');
     setLines([]);
     await exampleRequest.create(
       {
@@ -85,10 +85,10 @@ const App = () => {
                 }}
               />
               <Flex gap="small">
-                <Button type="primary" disabled={status === 'pending'} onClick={request}>
+                <Button type="primary" disabled={status === 'loading'} onClick={request}>
                   Request
                 </Button>
-                <Button type="primary" disabled={status !== 'pending'} onClick={abort}>
+                <Button type="primary" disabled={status !== 'loading'} onClick={abort}>
                   Request Abort
                 </Button>
               </Flex>
@@ -105,7 +105,7 @@ const App = () => {
             {
               title: 'Request Log',
               status: thoughtChainStatus,
-              icon: status === 'pending' ? <LoadingOutlined /> : <TagsOutlined />,
+              icon: status === 'loading' ? <LoadingOutlined /> : <TagsOutlined />,
               description: `request ${status}`,
               content: (
                 <Descriptions column={1}>

@@ -1,4 +1,4 @@
-import { CheckCircleOutlined, MoreOutlined } from '@ant-design/icons';
+import { CheckCircleOutlined } from '@ant-design/icons';
 import { ThoughtChain } from '@ant-design/x';
 import { Button } from 'antd';
 import React from 'react';
@@ -11,7 +11,6 @@ const customizationProps: ThoughtChainItem = {
   title: 'Thought Chain Item Title',
   description: 'description',
   icon: <CheckCircleOutlined />,
-  extra: <Button type="text" icon={<MoreOutlined />} />,
   footer: <Button block>Thought Chain Item Footer</Button>,
   content: 'Thought Chain Item Content',
 };
@@ -26,12 +25,14 @@ const items: ThoughtChainProps['items'] = [
 const locales = {
   cn: {
     item: '思维链节点',
+    itemIcon: '思维链图标',
     itemHeader: '思维链节点头部',
     itemContent: '思维链节点内容',
     itemFooter: '思维链节点页脚',
   },
   en: {
     item: 'Item',
+    itemIcon: 'Item Icon',
     itemHeader: 'Item Header',
     itemContent: 'Item Content',
     itemFooter: 'Item Footer',
@@ -47,6 +48,10 @@ const App: React.FC = () => {
         {
           name: 'item',
           desc: locale.item,
+        },
+        {
+          name: 'itemIcon',
+          desc: locale.itemIcon,
         },
         {
           name: 'itemHeader',

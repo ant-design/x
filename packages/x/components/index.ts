@@ -41,6 +41,3 @@ export { default as XStream } from './x-stream';
 export type { XStreamOptions } from './x-stream';
 
 export { default as XRequest } from './x-request';
-
-export { default as notification } from './notification';
-export type { XNotificationOpenArgs } from './notification';

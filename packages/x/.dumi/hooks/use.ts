@@ -1,6 +1,6 @@
 function use<T>(promise: PromiseLike<T>): T {
   const internal: PromiseLike<T> & {
-    status?: 'pending' | 'fulfilled' | 'rejected';
+    status?: 'loading' | 'fulfilled' | 'rejected';
     value?: T;
     reason?: any;
   } = promise;
@@ -10,10 +10,10 @@ function use<T>(promise: PromiseLike<T>): T {
   if (internal.status === 'rejected') {
     throw internal.reason;
   }
-  if (internal.status === 'pending') {
+  if (internal.status === 'loading') {
     throw internal;
   }
-  internal.status = 'pending';
+  internal.status = 'loading';
   internal.then(
     (result) => {
       internal.status = 'fulfilled';

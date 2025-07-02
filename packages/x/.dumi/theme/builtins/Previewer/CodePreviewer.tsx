@@ -389,7 +389,7 @@ createRoot(document.getElementById('container')).render(<Demo />);
                 <a
                   className="code-box-code-action"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noreferrer"
                   href={docsOnlineUrl}
                 >
                   <LinkOutlined aria-label="open in new tab" className="code-box-online" />
@@ -401,7 +401,6 @@ createRoot(document.getElementById('container')).render(<Demo />);
               action="https://codesandbox.io/api/v1/sandboxes/define"
               method="POST"
               target="_blank"
-              rel="noopener noreferrer"
               ref={codeSandboxIconRef}
               onClick={() => {
                 track({ type: 'codesandbox', demo: asset.id });
@@ -439,7 +438,6 @@ createRoot(document.getElementById('container')).render(<Demo />);
               action="https://codepen.io/pen/define"
               method="POST"
               target="_blank"
-              rel="noopener noreferrer"
               ref={codepenIconRef}
               onClick={() => {
                 track({ type: 'codepen', demo: asset.id });

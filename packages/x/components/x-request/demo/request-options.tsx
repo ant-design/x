@@ -27,7 +27,7 @@ const App = () => {
   const exampleRequest = XRequest(requestOptions);
 
   async function request() {
-    setStatus('pending');
+    setStatus('loading');
     setLines([]);
     await exampleRequest.create(
       {
@@ -65,10 +65,10 @@ const App = () => {
         <Splitter layout="vertical">
           <Splitter.Panel>
             <Flex gap="small">
-              <Button type="primary" disabled={status === 'pending'} onClick={changeBaseData}>
+              <Button type="primary" disabled={status === 'loading'} onClick={changeBaseData}>
                 Change Request Options
               </Button>
-              <Button type="primary" disabled={status === 'pending'} onClick={request}>
+              <Button type="primary" disabled={status === 'loading'} onClick={request}>
                 Agent Request
               </Button>
             </Flex>
@@ -86,7 +86,7 @@ const App = () => {
             {
               title: 'Request Log',
               status: status,
-              icon: status === 'pending' ? <LoadingOutlined /> : <TagsOutlined />,
+              icon: status === 'loading' ? <LoadingOutlined /> : <TagsOutlined />,
               description: status === 'error' && (error?.message || 'request error'),
               content: (
                 <Descriptions column={1}>

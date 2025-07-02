@@ -1,31 +1,25 @@
-import React from 'react';
 import { ThoughtChain } from '@ant-design/x';
 import type { ThoughtChainProps } from '@ant-design/x';
-
-import { Card, Button } from 'antd';
-import { MoreOutlined } from '@ant-design/icons';
+import { Card } from 'antd';
+import React from 'react';
 
 const items: ThoughtChainProps['items'] = [
   {
-    title: 'Thought Chain Item Title',
-    description: 'description',
-    extra: <Button type="text" icon={<MoreOutlined />} />,
+    title: 'Knowledge Query',
+    description: 'Query knowledge base',
   },
   {
-    title: 'Thought Chain Item Title',
-    description: 'description',
-    extra: <Button type="text" icon={<MoreOutlined />} />,
+    title: 'Web Search Tool Invoked',
+    description: 'Tool invocation',
   },
   {
-    title: 'Thought Chain Item Title',
-    description: 'description',
-    extra: <Button type="text" icon={<MoreOutlined />} />,
+    title: 'Model Invocation Complete',
+    description: 'Invoke model for response',
   },
 
   {
-    title: 'Thought Chain Item Title',
-    description: 'description',
-    extra: <Button type="text" icon={<MoreOutlined />} />,
+    title: 'Response Complete',
+    description: 'Task completed',
   },
 ];
 

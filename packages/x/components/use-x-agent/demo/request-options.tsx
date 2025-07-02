@@ -43,7 +43,7 @@ const App = () => {
   };
 
   async function request() {
-    setStatus('pending');
+    setStatus('loading');
     agent.request(
       {
         messages: [{ role: 'user', content: 'hello, who are u?' }],
@@ -70,10 +70,10 @@ const App = () => {
         <Splitter layout="vertical">
           <Splitter.Panel>
             <Flex gap="small">
-              <Button type="primary" disabled={status === 'pending'} onClick={changeBaseData}>
+              <Button type="primary" disabled={status === 'loading'} onClick={changeBaseData}>
                 Change Request Options
               </Button>
-              <Button type="primary" disabled={status === 'pending'} onClick={request}>
+              <Button type="primary" disabled={status === 'loading'} onClick={request}>
                 Agent Request
               </Button>
             </Flex>
@@ -92,7 +92,7 @@ const App = () => {
             {
               title: 'Agent Request Log',
               status: status,
-              icon: status === 'pending' ? <LoadingOutlined /> : <TagsOutlined />,
+              icon: status === 'loading' ? <LoadingOutlined /> : <TagsOutlined />,
               description: status === 'error' && (error?.message || 'request error'),
               content: (
                 <Descriptions column={1}>

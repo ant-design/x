@@ -21,7 +21,7 @@ const App = () => {
   });
 
   async function request() {
-    setStatus('pending');
+    setStatus('loading');
 
     agent.request(
       {
@@ -49,7 +49,7 @@ const App = () => {
   return (
     <Splitter>
       <Splitter.Panel>
-        <Button type="primary" disabled={status === 'pending'} onClick={request}>
+        <Button type="primary" disabled={status === 'loading'} onClick={request}>
           Agent Request
         </Button>
       </Splitter.Panel>
@@ -60,7 +60,7 @@ const App = () => {
             {
               title: 'Agent Request Log',
               status: status,
-              icon: status === 'pending' ? <LoadingOutlined /> : <TagsOutlined />,
+              icon: status === 'loading' ? <LoadingOutlined /> : <TagsOutlined />,
               description:
                 status === 'error' &&
                 agent.config.baseURL === BASE_URL &&

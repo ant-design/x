@@ -1,73 +1,30 @@
 import classnames from 'classnames';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
-
-import useCollapsible, { Collapsible } from '../_util/hooks/use-collapsible';
+import useCollapsible from '../_util/hooks/use-collapsible';
+import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
+import Item from './Item';
+import ThoughtChainNode, { ThoughtChainContext } from './Node';
+import type { ThoughtChainItem, ThoughtChainProps } from './interface';
 import useStyle from './style';
 
-import useXComponentConfig from '../_util/hooks/use-x-component-config';
-import ThoughtChainNode, { ThoughtChainNodeContext } from './Item';
+type CompoundedComponent = {
+  Item: typeof Item;
+};
 
-import type { ConfigProviderProps } from 'antd';
-import type { ThoughtChainItem } from './Item';
-
-export type SemanticType = 'item' | 'itemHeader' | 'itemContent' | 'itemFooter';
-export interface ThoughtChainProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
-  /**
-   * @desc 思维节点集合
-   * @descEN chain items
-   */
-  items?: ThoughtChainItem[];
-
-  /**
-   * @desc 是否可折叠
-   * @descEN Whether collapsible
-   */
-  collapsible?: Collapsible;
-
-  /**
-   * @desc 组件大小
-   * @descEN Component size
-   */
-  size?: ConfigProviderProps['componentSize'];
-
-  /**
-   * @desc 语义化结构 style
-   * @descEN Semantic structure styles
-   */
-  styles?: Partial<Record<SemanticType, React.CSSProperties>>;
-
-  /**
-   * @desc 语义化结构 className
-   * @descEN Semantic structure class names
-   */
-  classNames?: Partial<Record<SemanticType, string>>;
-
-  /**
-   * @desc 自定义前缀
-   * @descEN Prefix
-   */
-  prefixCls?: string;
-
-  /**
-   * @desc 自定义根类名
-   * @descEN Custom class name
-   */
-  rootClassName?: string;
-}
-
-const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
+const ThoughtChain: React.FC<ThoughtChainProps> & CompoundedComponent = (props) => {
   const {
     prefixCls: customizePrefixCls,
-    rootClassName,
     className,
     items,
-    collapsible,
+    defaultExpandedKeys,
+    expandedKeys: customExpandedKeys,
+    onExpand,
     styles = {},
+    line = true,
     style,
     classNames = {},
-    size = 'middle',
     ...restProps
   } = props;
 
@@ -80,72 +37,80 @@ const ThoughtChain: React.FC<ThoughtChainProps> = (props) => {
   // ============================ Prefix ============================
   const { getPrefixCls, direction } = useXProviderContext();
 
-  const rootPrefixCls = getPrefixCls();
-
   const prefixCls = getPrefixCls('thought-chain', customizePrefixCls);
 
   // ===================== Component Config =========================
   const contextConfig = useXComponentConfig('thoughtChain');
 
-  // ============================ UseCollapsible ============================
-  const [enableCollapse, expandedKeys, onItemExpand, collapseMotion] = useCollapsible(
-    collapsible,
-    prefixCls,
-    rootPrefixCls,
-  );
-
   // ============================ Style ============================
+
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
 
   const mergedCls = classnames(
     className,
-    rootClassName,
     prefixCls,
+    contextConfig.classNames.root,
     contextConfig.className,
     hashId,
     cssVarCls,
+    `${prefixCls}-box`,
     {
       [`${prefixCls}-rtl`]: direction === 'rtl',
     },
-    `${prefixCls}-${size}`,
+  );
+  //  ============================ Item Collapsible ============================
+
+  const rootPrefixCls = getPrefixCls();
+  const collapsibleOptions = {
+    defaultExpandedKeys,
+    expandedKeys: customExpandedKeys,
+    onExpand,
+  };
+  const [_, expandedKeys, onItemExpand, collapseMotion] = useCollapsible(
+    collapsibleOptions,
+    prefixCls,
+    rootPrefixCls,
   );
 
   // ============================ Render ============================
   return wrapCSSVar(
-    <div {...domProps} className={mergedCls} style={{ ...contextConfig.style, ...style }}>
-      <ThoughtChainNodeContext.Provider
+    <div
+      {...domProps}
+      className={mergedCls}
+      style={{ ...contextConfig.style, ...styles.root, ...style }}
+    >
+      <ThoughtChainContext.Provider
         value={{
           prefixCls,
-          enableCollapse,
-          collapseMotion,
-          expandedKeys,
           direction,
+          expandedKeys,
+          onItemExpand,
+          collapseMotion,
           classNames: {
             itemHeader: classnames(contextConfig.classNames.itemHeader, classNames.itemHeader),
             itemContent: classnames(contextConfig.classNames.itemContent, classNames.itemContent),
             itemFooter: classnames(contextConfig.classNames.itemFooter, classNames.itemFooter),
+            itemIcon: classnames(contextConfig.classNames.itemIcon, classNames.itemIcon),
           },
           styles: {
             itemHeader: { ...contextConfig.styles.itemHeader, ...styles.itemHeader },
             itemContent: { ...contextConfig.styles.itemContent, ...styles.itemContent },
             itemFooter: { ...contextConfig.styles.itemFooter, ...styles.itemFooter },
+            itemIcon: { ...contextConfig.styles.itemIcon, ...styles.itemIcon },
           },
         }}
       >
         {items?.map((item, index) => (
           <ThoughtChainNode
             key={item.key || `key_${index}`}
+            index={index}
+            line={line}
             className={classnames(contextConfig.classNames.item, classNames.item)}
             style={{ ...contextConfig.styles.item, ...styles.item }}
-            info={{
-              ...item,
-              icon: item.icon || index + 1,
-            }}
-            onClick={onItemExpand}
-            nextStatus={items[index + 1]?.status || item.status}
+            info={item}
           />
         ))}
-      </ThoughtChainNodeContext.Provider>
+      </ThoughtChainContext.Provider>
     </div>,
   );
 };
@@ -154,6 +119,6 @@ if (process.env.NODE_ENV !== 'production') {
   ThoughtChain.displayName = 'ThoughtChain';
 }
 
-export type { ThoughtChainItem };
-
+ThoughtChain.Item = Item;
+export type { ThoughtChainProps, ThoughtChainItem };
 export default ThoughtChain;
