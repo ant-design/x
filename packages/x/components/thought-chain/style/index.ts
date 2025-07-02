@@ -1,5 +1,6 @@
 import { unit } from '@ant-design/cssinjs/lib/util';
 import { mergeToken } from '@ant-design/cssinjs-utils';
+import { genCollapseMotion } from '../../style/motion';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
 import genThoughtChainItemStyle from './item';
@@ -149,7 +150,11 @@ export default genStyleHooks<'ThoughtChain'>(
   'ThoughtChain',
   (token) => {
     const compToken = mergeToken<ThoughtChainToken>(token, {});
-    return [genThoughtChainStyle(compToken), genThoughtChainItemStyle(compToken)];
+    return [
+      genThoughtChainStyle(compToken),
+      genThoughtChainItemStyle(compToken),
+      genCollapseMotion(compToken),
+    ];
   },
   prepareComponentToken,
 );
