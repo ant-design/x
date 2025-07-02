@@ -55,7 +55,7 @@ export default defineConfig({
         generateUnminified: true,
         output: {
           path: 'dist/',
-          filename: 'x-latex',
+          filename: 'latex',
         },
       },
     },
@@ -73,7 +73,7 @@ export default defineConfig({
         memo.plugin('codecov').use(CodecovWebpackPlugin, [
           {
             enableBundleAnalysis: true,
-            bundleName: 'antdxmarkdown',
+            bundleName: 'x-markdown',
             uploadToken: process.env.CODECOV_TOKEN,
             gitService: 'github',
           },
