@@ -47,7 +47,7 @@ export default () => (
     </Flex>
 
     <Flex gap="small" wrap align="center">
-      <Text>description:</Text>
+      <Text>description & click:</Text>
       <ThoughtChain.Item
         variant="solid"
         onClick={onClick}
