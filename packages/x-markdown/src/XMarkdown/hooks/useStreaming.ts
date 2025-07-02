@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { XMarkdownProps } from '../interface';
 
 enum TokenType {
@@ -9,19 +9,17 @@ enum TokenType {
   MaybeEmphasis = 4,
   Emphasis = 5,
   Strong = 6,
-  MaybeXML = 7,
-  XML = 8,
-  MaybeCode = 9,
-  Code = 10,
-  MaybeHr = 11,
+  XML = 7,
+  MaybeCode = 8,
+  Code = 9,
+  MaybeHr = 10,
+  MaybeList = 11,
 }
 
 const Markdown_Symbols = {
   emphasis: ['*', '_'],
   code: ['`'],
-  XMLTags: ['div', 'span'],
   list: ['-', '+', '*'],
-  thematicBreaks: ['*', '-', '_'],
 };
 
 const STREAM_BUFFER_INIT = {
@@ -30,27 +28,16 @@ const STREAM_BUFFER_INIT = {
   pending: '',
   token: TokenType.Text,
   tokens: [TokenType.Text],
-  XMLTag: '',
   headingLevel: 0,
   emphasisCount: 0,
   backtickCount: 0,
-  seTextCount: 0,
 };
 
-const useStreaming = (
-  input: string,
-  config?: XMarkdownProps['streaming'],
-  components?: XMarkdownProps['components'],
-) => {
+const useStreaming = (input: string, config?: XMarkdownProps['streaming']) => {
   const { hasNextChunk = false } = config || {};
 
   const [output, setOutput] = useState('');
   const streamBuffer = useRef({ ...STREAM_BUFFER_INIT });
-
-  const supportedTags = useMemo(
-    () => [...Markdown_Symbols.XMLTags, ...(components ? Object.keys(components) : [])],
-    [components],
-  );
 
   const pushToken = useCallback((type: TokenType) => {
     streamBuffer.current.tokens = [...streamBuffer.current.tokens, type];
@@ -66,53 +53,53 @@ const useStreaming = (
     streamBuffer.current.token = newTokens[newTokens.length - 1];
   }, []);
 
-  const flushOutput = () => {
-    popToken();
+  const flushOutput = (needPopToken = true) => {
+    if (needPopToken) popToken();
+
+    streamBuffer.current.pending = '';
     const renderText = streamBuffer.current.rawStream;
     if (renderText) {
       setOutput(renderText);
     }
   };
 
-  const flushOutputByPending = () => {
-    const { rawStream } = streamBuffer.current;
-    const processedContent = rawStream.slice(0, -1);
-
-    if (processedContent) {
-      setOutput(processedContent);
-    }
-  };
-
-  const updatePending = (char: string) => {
-    streamBuffer.current.pending = char;
-  };
-
   const handleChunk = (chunk: string) => {
+    const buffer = streamBuffer.current;
     for (const char of chunk) {
-      streamBuffer.current.rawStream += char;
-      const { token, pending, XMLTag } = streamBuffer.current;
-      // buffer and render
+      buffer.rawStream += char;
+      buffer.pending += char;
+
+      const { token, pending, tokens, emphasisCount } = buffer;
       switch (token) {
-        case TokenType.Image:
+        case TokenType.Image: {
+          /**
+           * \![
+           *   ^
+           */
+          const isInvalidStart = pending.indexOf('![') === -1;
+          /**
+           * \![image]()
+           *           ^
+           */
+          const isImageEnd = char === ')' || char === '\n';
+          if (isInvalidStart || isImageEnd) {
+            if (tokens[tokens.length - 2] === TokenType.Link) {
+              popToken();
+            } else {
+              flushOutput();
+            }
+          }
+          break;
+        }
         case TokenType.Link: {
           // not support link reference definitions, [foo]: /url "title" \n[foo]
-          if (pending === ']' && char !== '(') {
+          const isReferenceLink = pending.endsWith(']:');
+          const isLinkEnd = char === ')' || char === '\n';
+          const isImageInLink = char === '!';
+          if (isImageInLink) {
+            pushToken(TokenType.Image);
+          } else if (isLinkEnd || isReferenceLink) {
             flushOutput();
-            updatePending('');
-            continue;
-          }
-
-          if (char === ')') {
-            popToken();
-            // prevent nested
-            if (
-              streamBuffer.current.token !== TokenType.Image &&
-              streamBuffer.current.token !== TokenType.Link
-            ) {
-              flushOutput();
-              updatePending('');
-              continue;
-            }
           }
           break;
         }
@@ -121,325 +108,169 @@ const useStreaming = (
            * # token / ## token / #####token
            *  ^         ^              ^
            */
-          streamBuffer.current.headingLevel++;
+          buffer.headingLevel++;
 
-          const shouldFlushOutput =
-            char === ' ' || char !== '#' || streamBuffer.current.headingLevel >= 6;
+          const shouldFlushOutput = char !== '#' || buffer.headingLevel >= 6;
           if (shouldFlushOutput) {
             flushOutput();
-            updatePending('');
-            streamBuffer.current.headingLevel = 0;
-            continue;
+            buffer.headingLevel = 0;
           }
-
           break;
         }
         case TokenType.MaybeEmphasis: {
-          if (Markdown_Symbols.emphasis.includes(char)) {
-            streamBuffer.current.emphasisCount++;
-            continue;
-          }
-
-          popToken();
-          if (char === '\n') {
-            /**
-             * this is hr
-             * ***\n
-             *   ^
+          /**
+             * /* / *\/n
+                ^     ^
              */
-            streamBuffer.current.emphasisCount = 0;
-            break;
-          }
-
-          if (streamBuffer.current.emphasisCount === 1) {
-            /**
-             * _token_ / *token*
-             * ^         ^
-             */
-            pushToken(TokenType.Emphasis);
-          } else if (streamBuffer.current.emphasisCount === 2) {
-            /**
-             * __token__ / **token**
-             *  ^           ^
-             */
-            pushToken(TokenType.Strong);
-          } else if (streamBuffer.current.emphasisCount === 3) {
-            /**
-             * ___token___ / ***token***
-             *   ^             ^
-             */
-            pushToken(TokenType.Strong);
-            pushToken(TokenType.Emphasis);
+          const shouldFlushOutput = char === ' ' || char === '\n';
+          if (shouldFlushOutput) {
+            flushOutput();
+          } else if (Markdown_Symbols.emphasis.includes(char)) {
+            buffer.emphasisCount++;
           } else {
-            // no more than 3
-            streamBuffer.current.emphasisCount = 0;
+            popToken();
+            if (emphasisCount === 1) {
+              /**
+               * _token_ / *token*
+               * ^         ^
+               */
+              pushToken(TokenType.Emphasis);
+            } else if (emphasisCount === 2) {
+              /**
+               * __token__ / **token**
+               *  ^           ^
+               */
+              pushToken(TokenType.Strong);
+            } else if (emphasisCount === 3) {
+              /**
+               * ___token___ / ***token***
+               *   ^             ^
+               */
+              pushToken(TokenType.Emphasis);
+              pushToken(TokenType.Strong);
+            } else {
+              // no more than 3
+              buffer.emphasisCount = 0;
+            }
           }
+
           break;
         }
         case TokenType.Strong: {
-          if (Markdown_Symbols.emphasis.includes(char)) {
-            streamBuffer.current.emphasisCount--;
-            // if (tokens[tokens.length - 2] === TokenType.Emphasis) {
-            //   /**
-            //    * __token__ / **token**
-            //    *        ^           ^
-            //    */
-            //   streamBuffer.current.emphasisCount -= 2;
-            // } else {
-            //   /**
-            //    * __token_em / **token*em
-            //    *        ^           ^
-            //    */
-            //   pushToken(TokenType.Emphasis);
-            //   streamBuffer.current.emphasisCount++;
-            // }
-          }
-
           /**
            * __token__ / **token**
            *         ^           ^
            */
-          if (streamBuffer.current.emphasisCount === 0) {
+          if (char === '\n') {
             flushOutput();
-            updatePending('');
-            continue;
+          } else if (pending.endsWith('**') || pending.endsWith('__')) {
+            if (tokens[tokens.length - 2] === TokenType.Emphasis) {
+              popToken();
+            } else {
+              flushOutput();
+            }
           }
 
           break;
         }
         case TokenType.Emphasis: {
-          if (Markdown_Symbols.emphasis.includes(char)) {
-            streamBuffer.current.emphasisCount--;
-            // if (tokens[tokens.length - 2] === TokenType.Strong) {
-            //   /**
-            //    * _token_ / *token*
-            //    *       ^         ^
-            //    */
-            //   streamBuffer.current.emphasisCount--;
-            // } else {
-            //   /**
-            //    * / *emphasis **strong*** / *emphasis **strong***
-            //    *             ^                               ^
-            //    */
-            //   streamBuffer.current.emphasisCount += 2;
-            //   pushToken(TokenType.Strong);
-            // }
-          }
-
-          if (streamBuffer.current.emphasisCount === 0) {
+          /**
+           * _token_ / *token*
+           *       ^         ^
+           */
+          if (char === '\n') {
             flushOutput();
-            updatePending('');
-            continue;
-          }
-          break;
-        }
-        case TokenType.MaybeXML: {
-          const maxTagLength = Math.max(...supportedTags.map((tag) => tag.length));
-
-          const isTagValid = supportedTags.includes(XMLTag);
-          const isTagEnd = [' ', '/', '>'].includes(char);
-
-          if (isTagValid && isTagEnd) {
-            popToken();
-            pushToken(TokenType.XML);
-            break;
+            buffer.emphasisCount = 0;
+          } else if (Markdown_Symbols.emphasis.includes(char)) {
+            flushOutput();
+            buffer.emphasisCount = 0;
           }
 
-          if (streamBuffer.current.XMLTag.length >= maxTagLength) {
-            popToken();
-            streamBuffer.current.XMLTag = '';
-          } else {
-            streamBuffer.current.XMLTag += char;
-          }
           break;
         }
         case TokenType.XML: {
           /**
-           * <XML />
-           *      ^
+           * <XML /> /<XML></XML>
+           *       ^      ^
            */
-          if (char === '>') {
+          const shouldFlushOutput = char === '>' || pending === '< ' || char === '\n';
+          if (shouldFlushOutput) {
             flushOutput();
-            updatePending('');
-            streamBuffer.current.XMLTag = '';
             continue;
           }
-
-          /**
-           * <XML></XML>
-           *           ^
-           */
-          // if (pending[0] === '<') {
-          //   const potentialCloseTag = `</${XMLTag}>`;
-
-          //   if (pending + char === potentialCloseTag) {
-          //     flushOutput();
-          //     updatePending('');
-          //     streamBuffer.current.XMLTag = '';
-          //   } else {
-          //     updatePending(pending + char);
-          //   }
-          //   continue;
-          // }
           break;
         }
         case TokenType.MaybeCode: {
           if (char === '`') {
-            streamBuffer.current.backtickCount++;
+            buffer.backtickCount++;
           } else {
-            popToken();
-            pushToken(TokenType.Code);
+            if (buffer.backtickCount > 2) {
+              /**
+               * ```
+               *   ^
+               */
+              flushOutput();
+              buffer.backtickCount = 0;
+            } else {
+              /**
+               * ``
+               *  ^
+               */
+              popToken();
+              pushToken(TokenType.Code);
+            }
           }
           break;
         }
         case TokenType.Code: {
           if (char === '`') {
-            streamBuffer.current.backtickCount--;
-            if (streamBuffer.current.backtickCount === 0) {
-              flushOutput();
-              updatePending('');
-              continue;
-            }
+            buffer.backtickCount--;
+          }
+
+          if (buffer.backtickCount === 0) {
+            flushOutput();
+            buffer.backtickCount = 0;
           }
           break;
         }
         case TokenType.MaybeHr: {
-          if (char !== '-' && char !== '=') {
+          if (char !== '-' && char !== '=' && char !== ' ') {
             flushOutput();
-            updatePending('');
-            continue;
           }
           break;
         }
-      }
-
-      // recognize token type
-      switch (pending[0]) {
-        case '!': {
-          if (char === '[' && token !== TokenType.Image) {
-            pushToken(TokenType.Image);
-          }
-          break;
-        }
-        case '[': {
-          if (
-            token !== TokenType.Link &&
-            token !== TokenType.Image &&
-            token !== TokenType.XML &&
-            char !== ']'
-          ) {
-            pushToken(TokenType.Link);
-          }
-          break;
-        }
-        case '#': {
-          if (char === ' ' || token === TokenType.Heading) {
-            break;
-          }
-
-          // filter not heading format
-          if (char === '#') {
-            pushToken(TokenType.Heading);
-            streamBuffer.current.headingLevel = 1;
-          }
-
-          break;
-        }
-        case '_':
-        //emphasis or list
-        case '*': {
-          if (
-            token === TokenType.Strong ||
-            token === TokenType.Emphasis ||
-            token === TokenType.Image ||
-            char === ' '
-          ) {
-            break;
-          }
-
-          if (token !== TokenType.MaybeEmphasis) {
-            pushToken(TokenType.MaybeEmphasis);
-            const charIsEmphasis = Markdown_Symbols.emphasis.includes(char);
-            streamBuffer.current.emphasisCount = charIsEmphasis ? 2 : 1;
-          }
-
-          break;
-        }
-        case '<': {
-          if (char === ' ' || char === '/' || char === '>') {
-            break;
-          }
-          if (token === TokenType.MaybeXML || token === TokenType.XML) {
-            break;
-          }
-
-          pushToken(TokenType.MaybeXML);
-          streamBuffer.current.XMLTag = char;
-          break;
-        }
-        case '`': {
-          if (token === TokenType.Code || token === TokenType.MaybeCode) {
-            break;
-          }
-
-          pushToken(TokenType.MaybeCode);
-          const charIsCode = char === '`';
-          streamBuffer.current.backtickCount = charIsCode ? 2 : 1;
-          break;
-        }
-
-        // list or hr
-        case '-': {
-          if (token === TokenType.MaybeHr) {
-            break;
-          }
-
-          if (char === '-') {
-            pushToken(TokenType.MaybeHr);
-            streamBuffer.current.seTextCount = 2;
-          } else if (char === ' ') {
-            pushToken(TokenType.MaybeCode);
-          }
-          break;
-        }
-        // hr
-        case '=': {
-          if (token === TokenType.MaybeHr) {
-            break;
-          }
-          if (char === '=') {
-            pushToken(TokenType.MaybeHr);
-            streamBuffer.current.seTextCount = 2;
+        case TokenType.MaybeList: {
+          if (char !== ' ') {
+            flushOutput();
           }
           break;
         }
         default: {
-          if (token === TokenType.Text) {
-            flushOutputByPending();
+          buffer.pending = char;
+
+          if (char === '!') {
+            pushToken(TokenType.Image);
+          } else if (char === '[') {
+            pushToken(TokenType.Link);
+          } else if (char === '#') {
+            pushToken(TokenType.Heading);
+          } else if (char === '_' || char === '*') {
+            pushToken(TokenType.MaybeEmphasis);
+            buffer.emphasisCount = 1;
+          } else if (char === '<') {
+            pushToken(TokenType.XML);
+          } else if (char === '`') {
+            pushToken(TokenType.MaybeCode);
+            buffer.backtickCount = 1;
+          } else if (char === '-' || char === '=') {
+            pushToken(TokenType.MaybeHr);
+          } else if (Markdown_Symbols.list.includes(char)) {
+            pushToken(TokenType.MaybeList);
+          } else {
+            flushOutput(false);
           }
-          // list
-          // if (Markdown_Symbols.list.includes(pending) && char === ' ') {
-          //   break;
-          // }
-          // // thematic breaks
-          // if (
-          //   Markdown_Symbols.thematicBreaks.includes(pending) &&
-          //   (char === pending || char === ' ')
-          // ) {
-          //   break;
-          // }
         }
       }
-
-      updatePending(char);
-    }
-
-    // filter list
-    if (Markdown_Symbols.list.includes(streamBuffer.current.rawStream)) {
-      return;
-    }
-    if (streamBuffer.current.token === TokenType.Text) {
-      setOutput(streamBuffer.current.rawStream);
     }
   };
 

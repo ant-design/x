@@ -8,17 +8,17 @@ type CodeProps = {
   children: string;
 };
 
+let uuid = 0;
 const HighlightCode = () => {
-  const id = React.useId();
-
   return {
     code(props: CodeProps) {
       const { lang, children } = props;
-      if (!lang) return <code>{children}</code>;
-
-      const key = `${lang}-${id}-${children?.length}`;
+      if (!lang) {
+        return <code>{children}</code>;
+      }
+      const id = `${lang}-${uuid++}-${children?.length}`;
       return (
-        <SyntaxHighlighter key={key} language={lang}>
+        <SyntaxHighlighter key={id} language={lang}>
           {children}
         </SyntaxHighlighter>
       );

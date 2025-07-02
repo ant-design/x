@@ -18,7 +18,7 @@ const XMarkdown: React.FC<XMarkdownProps> = (props) => {
   } = props;
 
   // ============================ Render ============================
-  const displayContent = useStreaming(content || children || '', streaming, components);
+  const displayContent = useStreaming(content || children || '', streaming);
   if (!displayContent) return null;
 
   const config = createMarkdownConfig(options, plugins, components, streaming);
@@ -36,8 +36,6 @@ const XMarkdown: React.FC<XMarkdownProps> = (props) => {
   const parser = new Parser(config);
 
   const tokens = markedInstance.lexer(displayContent);
-
-  console.log('tokens', tokens);
 
   if (csWalkToken) {
     walkTokens(tokens, csWalkToken);

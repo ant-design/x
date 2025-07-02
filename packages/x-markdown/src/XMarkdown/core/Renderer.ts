@@ -1,5 +1,5 @@
 import DOMPurify from 'dompurify';
-import parseHtml, { DOMNode, domToReact } from 'html-react-parser';
+import parseHtml, { domToReact } from 'html-react-parser';
 import type { Tokens } from 'marked';
 import { type ElementType, type ReactNode } from 'react';
 import React from 'react';
@@ -159,7 +159,7 @@ class Renderer {
     const cleanedRaw = htmlRenderer ? raw : DOMPurify.sanitize(raw);
 
     const options = {
-      replace(domNode: any) {
+      replace(domNode: Record<string, any>) {
         const { attribs, children, name } = domNode;
         if (!name) return null;
 

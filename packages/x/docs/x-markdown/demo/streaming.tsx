@@ -1,6 +1,7 @@
 import { UserOutlined } from '@ant-design/icons';
 import { Bubble, Sender, useXAgent, useXChat } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
+import HighlightCode from '@ant-design/x-markdown/plugins/HighlightCode';
 import { RolesType } from '@ant-design/x/es/bubble/BubbleList';
 import { Button } from 'antd';
 import React, { useState } from 'react';
@@ -53,8 +54,8 @@ We provide \`antdx.js\`, \`antdx.min.js\`, and \`antdx.min.js.map\` in the [dist
 
 Based on the RICH interaction paradigm, we provide numerous atomic components for various stages of interaction to help you flexibly build your AI dialogue applications:
 
-- [Components Overview](https://x.ant.design/components/overview)
-- [Playground](https://x.ant.design/docs/playground/independent)
+- 1. [Components Overview](https://x.ant.design/components/overview)
+- 2. [Playground](https://x.ant.design/docs/playground/independent)
 
 Below is an example of using atomic components to create a simple chatbot interface:
 
@@ -233,44 +234,6 @@ const Demo: React.FC = () => {
 
 export default Demo;
 \`\`\`
-
-## Use modularized antd
-
-\`@ant-design/x\` supports ES modules tree shaking by default.
-
-## TypeScript
-
-\`@ant-design/x\` provides a built-in ts definition.
-
-## Non-React Implementations
-
-Welcome to contribute!
-
-## Companies using antdx
-
-Ant Design X is widely used in AI-driven user interfaces within Ant Group. If your company and products use Ant Design X, feel free to leave a comment [here](https://github.com/ant-design/x/issues/126).
-
-## Contributing
-
-<a href="https://openomy.app/github/ant-design/x" target="_blank" style="display: block; width: 100%;" align="center">
-  <img src="https://openomy.app/svg?repo=ant-design/x&chart=bubble&latestMonth=3" target="_blank" alt="Contribution Leaderboard" style="display: block; width: 100%;" />
- </a>
-
-Please read our [CONTRIBUTING.md](https://github.com/ant-design/ant-design/blob/master/.github/CONTRIBUTING.md) first.
-
-If you'd like to help us improve antd, just create a [Pull Request](https://github.com/ant-design/ant-design/pulls). Feel free to report bugs and issues [here](http://new-issue.ant.design/).
-
-> If you're new to posting issues, we ask that you read [_How To Ask Questions The Smart Way_](http://www.catb.org/~esr/faqs/smart-questions.html) and [How to Ask a Question in Open Source Community](https://github.com/seajs/seajs/issues/545) and [How to Report Bugs Effectively](http://www.chiark.greenend.org.uk/~sgtatham/bugs.html) prior to posting. Well written bug reports help us help you!
-
-## Need Help?
-
-If you encounter any issues while using Ant Design X, you can seek help through the following channels. We also encourage experienced users to assist newcomers via these platforms.
-
-When asking questions on GitHub Discussions, it's recommended to use the \`Q&A\` tag.
-
-1. [GitHub Discussions](https://github.com/ant-design/x/discussions)
-2. [GitHub Issues](https://github.com/ant-design/x/issues)
-
 `;
 
 const roles: RolesType = {
@@ -336,7 +299,7 @@ const App = () => {
               : (content) => (
                   <XMarkdown
                     content={content}
-                    allowHtml={true}
+                    components={HighlightCode()}
                     className="xmarkdown-body"
                     streaming={{ hasNextChunk: hasNextChunk && enableStreaming }}
                   />

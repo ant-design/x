@@ -10,11 +10,9 @@ jest.mock('react', () => ({
 
 describe('CodeHighLight', () => {
   it('render normal code', () => {
-    const content = `
-    \`\`\`javascript
-    console.log("javascript");
-    \`\`\`
-    `;
+    const content = `\`\`\`javascript
+console.log("javascript");
+\`\`\``;
 
     const { container } = render(<XMarkdown content={content} components={CodeHighLight()} />);
     expect(container.querySelector('pre')).toBeInTheDocument();
@@ -23,11 +21,9 @@ describe('CodeHighLight', () => {
   });
 
   it('mermaid code is render as text', () => {
-    const content = `
-      \`\`\`mermaid
-      graph TD; A-->B;
-      \`\`\`
-      `;
+    const content = `\`\`\`mermaid
+graph TD; A-->B;
+\`\`\``;
 
     const { container } = render(<XMarkdown content={content} components={CodeHighLight()} />);
     expect(container.querySelector('pre')).toBeInTheDocument();
@@ -37,9 +33,8 @@ describe('CodeHighLight', () => {
   it('should handle undefined lang', () => {
     const content = `
     \`\`\`
-    plain text
-    \`\`\`
-    `;
+plain text
+\`\`\``;
 
     const { container } = render(<XMarkdown content={content} components={CodeHighLight()} />);
     expect(container.querySelector('pre')).toBeInTheDocument();
