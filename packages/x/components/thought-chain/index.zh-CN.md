@@ -36,32 +36,38 @@ demo:
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| collapsible | 是否可折叠 | boolean \| CollapsibleOptions | - | - |
-| classNames | 语义化结构的类名 | Record<'item' \| 'itemHeader' \| 'itemContent' \| 'itemFooter', string> | - | - |
 | items | 思维节点集合 | ThoughtChainItem[] | - | - |
+| defaultExpandedKeys | 初始化展开的节点 | string[] | - | - |
+| expandedKeys | 当前展开的节点 | string[] | - | - |
+| onExpand | 展开节点变化回调 | (expandedKeys: string[]) => void; | - | - |
+| line | 线条样式，为`false` 时不展示线条 | boolean \| 'solid' \| 'dashed' \| 'dotted‌' | 'solid' | - |
+| classNames | 语义化结构的类名 | Record<'root'\|'item' \| 'itemIcon'\|'itemHeader' \| 'itemContent' \| 'itemFooter', string> | - | - |
 | prefixCls | 自定义前缀 | string | - | - |
-| size | 尺寸 | 'large' \| 'middle' \| 'small' | 'middle' | - |
-| styles | 语义化结构的样式 | Record<'item' \| 'itemHeader' \| 'itemContent' \| 'itemFooter', React.CSSProperties> | - | - |
+| styles | 语义化结构的样式 | Record<'root'\|'item' \|'itemIcon'\| 'itemHeader' \| 'itemContent' \| 'itemFooter', React.CSSProperties> | - | - |
 
 ### ThoughtChainItem
 
-| 属性        | 说明               | 类型                              | 默认值 | 版本 |
-| ----------- | ------------------ | --------------------------------- | ------ | ---- |
-| content     | 思维节点内容       | React.ReactNode                   | -      | -    |
-| description | 思维节点描述       | React.ReactNode                   | -      | -    |
-| extra       | 思维节点额外内容   | React.ReactNode                   | -      | -    |
-| footer      | 思维节点脚注       | React.ReactNode                   | -      | -    |
-| icon        | 思维节点图标       | React.ReactNode                   | -      | -    |
-| key         | 思维节点唯一标识符 | string                            | -      | -    |
-| status      | 思维节点状态       | 'loading' \| 'success' \| 'error' | -      | -    |
-| title       | 思维节点标题       | React.ReactNode                   | -      | -    |
+| 属性        | 说明               | 类型                                        | 默认值 | 版本 |
+| ----------- | ------------------ | ------------------------------------------- | ------ | ---- |
+| content     | 思维节点内容       | React.ReactNode                             | -      | -    |
+| description | 思维节点描述       | React.ReactNode                             | -      | -    |
+| footer      | 思维节点脚注       | React.ReactNode                             | -      | -    |
+| icon        | 思维节点图标       | React.ReactNode                             | -      | -    |
+| key         | 思维节点唯一标识符 | string                                      | -      | -    |
+| status      | 思维节点状态       | 'loading' \| 'success' \| 'error'\| 'abort' | -      | -    |
+| title       | 思维节点标题       | React.ReactNode                             | -      | -    |
+| collapsible | 思维节点是否可折叠 | boolean                                     | false  | -    |
 
-### CollapsibleOptions
+### ThoughtChain.Item
 
-| 属性         | 说明                   | 类型                             | 默认值 | 版本 |
-| ------------ | ---------------------- | -------------------------------- | ------ | ---- |
-| expandedKeys | 当前展开的节点         | string[]                         | -      | -    |
-| onExpand     | 展开节点变化的回调函数 | (expandedKeys: string[]) => void | -      | -    |
+| 属性        | 说明       | 类型                                        | 默认值 | 版本 |
+| ----------- | ---------- | ------------------------------------------- | ------ | ---- |
+| prefixCls   | 自定义前缀 | string                                      | -      | -    |
+| icon        | 思维链图标 | React.ReactNode                             | -      | -    |
+| title       | 思维链标题 | React.ReactNode                             | -      | -    |
+| description | 思维链描述 | React.ReactNode                             | -      | -    |
+| status      | 思维链状态 | 'loading' \| 'success' \| 'error'\| 'abort' | -      | -    |
+| variant     | 变体配置   | 'solid' \| 'outlined' \| 'text'             | -      | -    |
 
 ## Semantic DOM
 

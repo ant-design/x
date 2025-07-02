@@ -1,65 +1,72 @@
 ---
 category: Components
 group:
-  title: Confirm
+  title: Confirmation
   order: 3
 title: ThoughtChain
-description: The ThoughtChain component is used to visualize and track the call chain of Actions and Tools invoked by an Agent.
+description: The ThoughtChain component is used to visualize and track the call chain of an Agent to Actions and Tools.
 cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*GaspS5T6proAAAAAAAAAAAAADgCCAQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*siL-Qpl794sAAAAAAAAAAAAADgCCAQ/original
 demo:
   cols: 1
 ---
 
-## When To Use
+## When to use
 
-- Debug and trace complex call chains in the Agent System.
-- Similar chain-like scenarios.
+- To debug and trace the call chain in a complex Agent System.
+- For use in similar chain-like scenarios.
 
-## Examples
+## Code Demos
 
 <!-- prettier-ignore -->
-<code src="./demo/basic.tsx" background="grey">Basic</code>
-<code src="./demo/status.tsx" background="grey">Item Status</code>
+<code src="./demo/basic.tsx" background="grey">Basic Usage</code>
+<code src="./demo/status.tsx" background="grey">Node Status</code>
+<code src="./demo/simple.tsx">Simple ThoughtChain</code>
 <code src="./demo/collapsible.tsx" background="grey">Collapsible</code>
-<code src="./demo/customization.tsx" background="grey">Item Customization</code>
-<code src="./demo/nested.tsx" background="grey">Nested use</code>
+<code src="./demo/controlled-collapsible" background="grey">Controlled Collapsible</code>
+<code src="./demo/customization.tsx" background="grey">Customization</code>
+<code src="./demo/nested.tsx" background="grey">Nested Usage</code>
 
 ## API
 
-Common props ref：[Common props](/docs/react/common-props)
+Reference: [Common API](/docs/react/common-props)
 
 ### ThoughtChainProps
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| collapsible | Whether collapsible | boolean \| CollapsibleOptions | None | - |
-| classNames | Class names for semantic structure | Record<'item' \| 'itemHeader' \| 'itemContent' \| 'itemFooter', string> | None | - |
-| items | Chain items | ThoughtChainItem[] | None | - |
-| prefixCls | Custom prefix | string | None | - |
-| rootClassName | Custom root class name | string | None | - |
-| size | Size | 'large' \| 'middle' \| 'small' | 'middle' | - |
-| styles | Styles for semantic structure | Record<'item' \| 'itemHeader' \| 'itemContent' \| 'itemFooter', React.CSSProperties> | None | - |
+| items | Collection of thought nodes | ThoughtChainItem[] | - | - |
+| defaultExpandedKeys | Initially expanded nodes | string[] | - | - |
+| expandedKeys | Currently expanded nodes | string[] | - | - |
+| onExpand | Callback for when expanded nodes change | (expandedKeys: string[]) => void; | - | - |
+| line | Line style, no line is shown when `false` | boolean \| 'solid' \| 'dashed' \| 'dotted‌' | 'solid' | - |
+| classNames | Class names for semantic structure | Record<'root'\|'item' \| 'itemIcon'\|'itemHeader' \| 'itemContent' \| 'itemFooter', string> | - | - |
+| prefixCls | Custom prefix | string | - | - |
+| styles | Styles for semantic structure | Record<'root'\|'item' \|'itemIcon'\| 'itemHeader' \| 'itemContent' \| 'itemFooter', React.CSSProperties> | - | - |
 
 ### ThoughtChainItem
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| content | Thought chain item content | React.ReactNode | None | - |
-| description | Thought chain item description | React.ReactNode | None | - |
-| extra | Thought chain item extra content | React.ReactNode | None | - |
-| footer | Thought chain item footer | React.ReactNode | None | - |
-| icon | Thought chain item icon | React.ReactNode | None | - |
-| key | Unique identifier | string | None | - |
-| status | Thought chain item status | 'loading' \| 'success' \| 'error' | None | - |
-| title | Thought chain item title | React.ReactNode | None | - |
+| content | Content of the thought node | React.ReactNode | - | - |
+| description | Description of the thought node | React.ReactNode | - | - |
+| footer | Footer of the thought node | React.ReactNode | - | - |
+| icon | Icon of the thought node | React.ReactNode | - | - |
+| key | Unique identifier for the thought node | string | - | - |
+| status | Status of the thought node | 'loading' \| 'success' \| 'error'\| 'abort' | - | - |
+| title | Title of the thought node | React.ReactNode | - | - |
+| collapsible | Whether the thought node is collapsible | boolean | false | - |
 
-### CollapsibleOptions
+### ThoughtChain.Item
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| expandedKeys | Current expanded keys | string[] | None | - |
-| onExpand | Callback function when expanded keys change | (expandedKeys: string[]) => void | None | - |
+| prefixCls | Custom prefix | string | - | - |
+| icon | Icon of the thought chain | React.ReactNode | - | - |
+| title | Title of the thought chain | React.ReactNode | - | - |
+| description | Description of the thought chain | React.ReactNode | - | - |
+| status | Status of the thought chain | 'loading' \| 'success' \| 'error'\| 'abort' | - | - |
+| variant | Variant configuration | 'solid' \| 'outlined' \| 'text' | - | - |
 
 ## Semantic DOM
 
