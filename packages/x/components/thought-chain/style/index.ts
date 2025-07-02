@@ -1,298 +1,155 @@
+import { unit } from '@ant-design/cssinjs/lib/util';
 import { mergeToken } from '@ant-design/cssinjs-utils';
-import { genCollapseMotion } from '../../style/motion';
+import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
-import { THOUGHT_CHAIN_ITEM_STATUS } from '../Item';
+import genThoughtChainItemStyle from './item';
 
-import { type CSSObject, unit } from '@ant-design/cssinjs';
-import type { ConfigProviderProps } from 'antd';
-import type { FullToken, GenerateStyle } from '../../theme/cssinjs-utils';
-
-// biome-ignore lint/suspicious/noEmptyInterface: ComponentToken need to be empty by default
-export interface ComponentToken {}
-
-export interface ThoughtChainToken extends FullToken<'ThoughtChain'> {
+export interface ComponentToken {
   /**
-   * @desc default size for item font size
+   * @desc 实心的 ThoughtChain.Item 背景色
+   * @descEN ThoughtChain.Item `solid`'s background color
    */
-  itemFontSize: number;
+  itemSolidBg: string;
   /**
-   * @desc default size for item
+   * @desc 实心的 ThoughtChain.Item 悬浮态背景色
+   * @descEN ThoughtChain.Item `solid`'s hover background color
    */
-  itemSize: number;
+  itemSolidHoverBg: string;
   /**
-   * @desc gap between items
+   * @desc 边框模式的 ThoughtChain.Item 背景色
+   * @descEN ThoughtChain.Item `outlined`'s background color
    */
-  itemGap: number;
+  itemOutlinedBg: string;
   /**
-   * @desc large size for item font size
+   * @desc 边框模式的 ThoughtChain.Item 悬浮态背景色
+   * @descEN ThoughtChain.Item `outlined`'s hover background color
    */
-  itemFontSizeLG: number;
+  itemOutlinedHoverBg: string;
   /**
-   * @desc large size for item
+   * @desc ThoughtChain.Item 圆角
+   * @descEN ThoughtChain.Item's border radius
    */
-  itemSizeLG: number;
+  itemBorderRadius: number;
   /**
-   * @desc large gap between items
+   * @desc 图标容器尺寸
+   * @descEN ThoughtChain.Item `outlined`'s hover background color
    */
-  itemGapLG: number;
-  /**
-   * @desc small size for item font size
-   */
-  itemFontSizeSM: number;
-  /**
-   * @desc small size for item
-   */
-  itemSizeSM: number;
-  /**
-   * @desc small gap between items
-   */
-  itemGapSM: number;
+  iconSize: string;
 }
 
-type GenerateThoughtChainItemStyle = GenerateStyle<ThoughtChainToken, CSSObject>;
-
-const genThoughtChainItemStatusStyle: GenerateThoughtChainItemStyle = (token) => {
-  const { componentCls } = token;
-  const itemCls = `${componentCls}-item`;
-
-  const colors = {
-    [THOUGHT_CHAIN_ITEM_STATUS.PENDING]: token.colorPrimaryText,
-    [THOUGHT_CHAIN_ITEM_STATUS.SUCCESS]: token.colorSuccessText,
-    [THOUGHT_CHAIN_ITEM_STATUS.ERROR]: token.colorErrorText,
-  };
-
-  const statuses = Object.keys(colors) as (keyof typeof colors)[];
-
-  return statuses.reduce((acc, status) => {
-    const statusColor = colors[status];
-
-    statuses.forEach((nextStatus) => {
-      const itemStatusCls = `& ${itemCls}-${status}-${nextStatus}`;
-      const lastBeforePseudoStyle =
-        status === nextStatus
-          ? {}
-          : {
-              backgroundColor: 'none !important',
-              backgroundImage: `linear-gradient(${statusColor}, ${colors[nextStatus]})`,
-            };
-
-      acc[itemStatusCls] = {
-        [`& ${itemCls}-icon, & > *::before`]: {
-          backgroundColor: `${statusColor} !important`,
-        },
-        '& > :last-child::before': lastBeforePseudoStyle,
-      };
-    });
-
-    return acc;
-  }, {} as CSSObject);
-};
-
-const genThoughtChainItemBeforePseudoStyle: GenerateThoughtChainItemStyle = (token) => {
-  const { calc, componentCls } = token;
-  const itemCls = `${componentCls}-item`;
-
-  const beforePseudoBaseStyle = {
-    content: '""',
-    width: calc(token.lineWidth).mul(2).equal(),
-    display: 'block',
-    position: 'absolute',
-    insetInlineEnd: 'none',
-    backgroundColor: token.colorTextPlaceholder,
-  };
-
-  return {
-    '& > :last-child > :last-child': {
-      '&::before': {
-        display: 'none !important',
-      },
-      [`&${itemCls}-footer`]: {
-        '&::before': {
-          display: 'block !important',
-          bottom: 0,
-        },
-      },
-    },
-    [`& > ${itemCls}`]: {
-      [`& ${itemCls}-header, & ${itemCls}-content, & ${itemCls}-footer`]: {
-        position: 'relative',
-
-        '&::before': {
-          bottom: calc(token.itemGap).mul(-1).equal(),
-        },
-      },
-      [`& ${itemCls}-header, & ${itemCls}-content`]: {
-        marginInlineStart: calc(token.itemSize).mul(-1).equal(),
-
-        '&::before': {
-          ...beforePseudoBaseStyle,
-          insetInlineStart: calc(token.itemSize).div(2).sub(token.lineWidth).equal(),
-        },
-      },
-      [`& ${itemCls}-header::before`]: {
-        top: token.itemSize,
-        bottom: calc(token.itemGap).mul(-2).equal(),
-      },
-      [`& ${itemCls}-content::before`]: {
-        top: '100%',
-      },
-      [`& ${itemCls}-footer::before`]: {
-        ...beforePseudoBaseStyle,
-        top: 0,
-        insetInlineStart: calc(token.itemSize).div(-2).sub(token.lineWidth).equal(),
-      },
-    },
-  } as CSSObject;
-};
-
-const genThoughtChainItemStyle: GenerateThoughtChainItemStyle = (token) => {
-  const { componentCls } = token;
-  const itemCls = `${componentCls}-item`;
-
-  return {
-    [itemCls]: {
-      display: 'flex',
-      flexDirection: 'column',
-
-      [`& ${itemCls}-collapsible`]: {
-        cursor: 'pointer',
-      },
-      [`& ${itemCls}-header`]: {
-        display: 'flex',
-        marginBottom: token.itemGap,
-        gap: token.itemGap,
-        alignItems: 'flex-start',
-
-        [`& ${itemCls}-icon`]: {
-          height: token.itemSize,
-          width: token.itemSize,
-          fontSize: token.itemFontSize,
-        },
-        [`& ${itemCls}-extra`]: {
-          height: token.itemSize,
-          maxHeight: token.itemSize,
-        },
-        [`& ${itemCls}-header-box`]: {
-          flex: 1,
-          display: 'flex',
-          flexDirection: 'column',
-          overflow: 'hidden',
-
-          [`& ${itemCls}-title`]: {
-            height: token.itemSize,
-            lineHeight: `${unit(token.itemSize)}`,
-            maxHeight: token.itemSize,
-            fontSize: token.itemFontSize,
-
-            [`& ${itemCls}-collapse-icon`]: {
-              marginInlineEnd: token.marginXS,
-            },
-          },
-          [`& ${itemCls}-desc`]: {
-            fontSize: token.itemFontSize,
-          },
-        },
-      },
-      [`& ${itemCls}-content`]: {
-        [`& ${itemCls}-content-hidden`]: {
-          display: 'none',
-        },
-        [`& ${itemCls}-content-box`]: {
-          padding: token.itemGap,
-          display: 'inline-block',
-          maxWidth: `calc(100% - ${token.itemSize})`,
-          borderRadius: token.borderRadiusLG,
-          backgroundColor: token.colorBgContainer,
-          border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorderSecondary}`,
-        },
-      },
-      [`& ${itemCls}-footer`]: {
-        marginTop: token.itemGap,
-        display: 'inline-flex',
-      },
-    },
-  };
-};
-
-const genThoughtChainSizeStyle = (
-  token: ThoughtChainToken,
-  size: ConfigProviderProps['componentSize'] = 'middle',
-) => {
-  const { componentCls } = token;
-
-  const sizeTokens = {
-    large: {
-      itemSize: token.itemSizeLG,
-      itemGap: token.itemGapLG,
-      itemFontSize: token.itemFontSizeLG,
-    },
-    middle: {
-      itemSize: token.itemSize,
-      itemGap: token.itemGap,
-      itemFontSize: token.itemFontSize,
-    },
-    small: {
-      itemSize: token.itemSizeSM,
-      itemGap: token.itemGapSM,
-      itemFontSize: token.itemFontSizeSM,
-    },
-  }[size];
-
-  return {
-    [`&${componentCls}-${size}`]: {
-      paddingInlineStart: sizeTokens.itemSize,
-      gap: sizeTokens.itemGap,
-
-      ...genThoughtChainItemStyle({
-        ...token,
-        ...sizeTokens,
-      }),
-      ...genThoughtChainItemBeforePseudoStyle({
-        ...token,
-        ...sizeTokens,
-      }),
-    },
-  };
-};
+export interface ThoughtChainToken extends FullToken<'ThoughtChain'> {}
 
 const genThoughtChainStyle: GenerateStyle<ThoughtChainToken> = (token) => {
-  const { componentCls } = token;
-
+  const { componentCls, calc } = token;
   return {
     [componentCls]: {
-      display: 'flex',
-      flexDirection: 'column',
+      [`&${componentCls}-box`]: {
+        display: 'flex',
+        flexDirection: 'column',
+        [`& ${componentCls}-node:last-of-type`]: {
+          [`> ${componentCls}-node-icon`]: {
+            '&:after': {
+              display: 'none',
+            },
+          },
+        },
+      },
+      [`& ${componentCls}-node`]: {
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'baseline',
+        gap: token.margin,
+      },
+      [`& ${componentCls}-node-header`]: {
+        display: 'flex',
+        flexDirection: 'column',
+      },
+      [`& ${componentCls}-node-title`]: {
+        display: 'flex',
+        gap: token.marginXS,
+      },
 
-      ...genThoughtChainItemStatusStyle(token),
-      ...genThoughtChainSizeStyle(token),
-      ...genThoughtChainSizeStyle(token, 'large'),
-      ...genThoughtChainSizeStyle(token, 'small'),
+      [`& ${componentCls}-node-footer`]: {
+        marginBottom: token.margin,
+      },
+      [`& ${componentCls}-node-content`]: {
+        marginBottom: token.margin,
+      },
+      [`& ${componentCls}-node-collapse-icon`]: {
+        '& svg': {
+          transition: `transform ${token.motionDurationMid} ${token.motionEaseInOut}`,
+        },
+      },
 
+      [`& ${componentCls}-node-description`]: {
+        color: token.colorTextDescription,
+        fontSize: token.fontSize,
+        lineHeight: token.lineHeight,
+        marginBlockEnd: token.margin,
+      },
+      [`& ${componentCls}-node-icon`]: {
+        lineHeight: 1,
+        fontSize: token.iconSize,
+        '&:after': {
+          content: '""',
+          position: 'absolute',
+          height: unit(calc('100%').sub(calc(token.iconSize).mul(token.lineHeight)).equal()),
+          borderInlineStart: `${unit(token.lineWidth)} solid ${token.colorFillContent}`,
+          insetInlineStart: unit(calc(token.iconSize).sub(1).div(2).equal()),
+          top: unit(calc(token.iconSize).mul(token.lineHeight).equal()),
+        },
+      },
+      [`& ${componentCls}-node-icon-dashed`]: {
+        '&:after': {
+          borderInlineStart: `${unit(token.lineWidth)} dashed ${token.colorFillContent}`,
+        },
+      },
+      [`& ${componentCls}-node-icon-dotted‌`]: {
+        '&:after': {
+          borderInlineStart: `${unit(token.lineWidth)} dotted‌ ${token.colorFillContent}`,
+        },
+      },
+      [`& ${componentCls}-node-index-icon`]: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        lineHeight: 1,
+        color: token.colorTextSecondary,
+        fontSize: token.fontSizeSM,
+        width: token.iconSize,
+        height: token.iconSize,
+        backgroundColor: token.colorFillContent,
+        borderRadius: unit(calc(token.iconSize).div(2).equal()),
+      },
       [`&${componentCls}-rtl`]: {
         direction: 'rtl',
+        [`& ${componentCls}-node-icon`]: {
+          '&:after': {
+            insetInlineStart: 'unset',
+            insetInlineEnd: unit(calc(token.iconSize).sub(1).div(2).equal()),
+          },
+        },
       },
     },
   };
 };
 
-export default genStyleHooks('ThoughtChain', (token) => {
-  const compToken = mergeToken<ThoughtChainToken>(token, {
-    // small size tokens
-    itemFontSizeSM: token.fontSizeSM,
-    itemSizeSM: token
-      .calc(token.controlHeightXS)
-      .add(token.controlHeightSM)
-      .div(2)
-      .equal() as number,
-    itemGapSM: token.marginSM,
-    // default size tokens
-    itemFontSize: token.fontSize,
-    itemSize: token.calc(token.controlHeightSM).add(token.controlHeight).div(2).equal() as number,
-    itemGap: token.margin,
-    // large size tokens
-    itemFontSizeLG: token.fontSizeLG,
-    itemSizeLG: token.calc(token.controlHeight).add(token.controlHeightLG).div(2).equal() as number,
-    itemGapLG: token.marginLG,
-  });
-  return [genThoughtChainStyle(compToken), genCollapseMotion(compToken)];
-});
+export const prepareComponentToken: GetDefaultToken<'ThoughtChain'> = (token) => {
+  return {
+    itemSolidBg: token.colorFillTertiary,
+    itemSolidHoverBg: token.colorFillContentHover,
+    itemOutlinedBg: token.colorBgContainer,
+    itemOutlinedHoverBg: token.colorFillContentHover,
+    itemBorderRadius: token.borderRadius,
+    iconSize: '14px',
+  };
+};
+
+export default genStyleHooks<'ThoughtChain'>(
+  'ThoughtChain',
+  (token) => {
+    const compToken = mergeToken<ThoughtChainToken>(token, {});
+    return [genThoughtChainStyle(compToken), genThoughtChainItemStyle(compToken)];
+  },
+  prepareComponentToken,
+);

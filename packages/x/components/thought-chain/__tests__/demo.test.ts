@@ -1,3 +1,3 @@
 import demoTest from '../../../tests/shared/demoTest';
 
-demoTest('thought-chain');
+demoTest('thought-chain', { testRootProps: false });
