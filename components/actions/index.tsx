@@ -1,6 +1,8 @@
 import { Tooltip, type TooltipProps } from 'antd';
 import classnames from 'classnames';
+import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
+
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 import ActionMenu from './ActionMenu';
@@ -65,8 +67,14 @@ const Actions: React.FC<ActionsProps> = (props: ActionsProps) => {
     ...otherHtmlProps
   } = props;
 
+  const domProps = pickAttrs(otherHtmlProps, {
+    attr: true,
+    aria: true,
+    data: true,
+  });
+
   // ============================ PrefixCls ============================
-  const { getPrefixCls } = useXProviderContext();
+  const { getPrefixCls, direction } = useXProviderContext();
   const prefixCls = getPrefixCls('actions', customizePrefixCls);
 
   // ======================= Component Config =======================
@@ -81,6 +89,9 @@ const Actions: React.FC<ActionsProps> = (props: ActionsProps) => {
     rootClassName,
     cssVarCls,
     hashId,
+    {
+      [`${prefixCls}-rtl`]: direction === 'rtl',
+    },
   );
 
   const mergedStyle = {
@@ -131,7 +142,7 @@ const Actions: React.FC<ActionsProps> = (props: ActionsProps) => {
   };
 
   return wrapCSSVar(
-    <div className={mergedCls} {...otherHtmlProps} style={mergedStyle}>
+    <div className={mergedCls} {...domProps} style={mergedStyle}>
       <div className={classnames(`${prefixCls}-list`, variant, block)}>
         {items.map((item) => {
           if ('children' in item) {
