@@ -406,6 +406,7 @@ createRoot(document.getElementById('container')).render(<Demo />);
                 track({ type: 'codesandbox', demo: asset.id });
                 codeSandboxIconRef.current?.submit();
               }}
+              rel="noopener"
             >
               <input
                 type="hidden"
@@ -443,6 +444,7 @@ createRoot(document.getElementById('container')).render(<Demo />);
                 track({ type: 'codepen', demo: asset.id });
                 codepenIconRef.current?.submit();
               }}
+              rel="noopener"
             >
               <ClientOnly>
                 <input type="hidden" name="data" value={JSON.stringify(codepenPrefillConfig)} />

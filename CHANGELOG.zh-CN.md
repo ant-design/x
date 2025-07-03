@@ -15,6 +15,26 @@ tag: vVERSION
 
 ---
 
+## 1.4.0
+
+`2025-05-30`
+
+- 🔥 新组件 操作列表 - Actions。[#768](https://github.com/ant-design/x/pull/768) 由 [vanndxh](https://github.com/vanndxh) 提交
+- 🐛 修复 Bubble.List `footer`和`header`无法获取key的问题。[#876](https://github.com/ant-design/x/pull/876) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 🐛 修复 Conversations 列表标题溢出截断失效问题。[#877](https://github.com/ant-design/x/pull/877) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 📖 优化官网站点提升用户体验。[#816](https://github.com/ant-design/x/pull/816) 由 [@Rain120](https://github.com/Rain120) 提交、[#880](https://github.com/ant-design/x/pull/880) 由 [@kimteayon](https://github.com/kimteayon) 提交
+
+## 1.3.0
+
+`2025-05-21`
+
+- 📖 新增 Conversation 类型导出。 [#258](https://github.com/ant-design/x/pull/258) 由 [@ONLY-yours](https://github.com/ONLY-yours) 提交
+- 💄 修复 Prompts 滚动条始终显示问题。 [#785](https://github.com/ant-design/x/pull/785) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- 🐛 修复 Suggestion 警告使用 antd 废弃 API `onDropdownVisibleChange` 的问题。 [#827](https://github.com/ant-design/x/pull/827) 由 [@zombieJ](https://github.com/zombieJ) 提交
+- 🆕 扩展Bubble`content`到`footer`和`header`的方法实现参数，同时补充Demo实现。[#683](https://github.com/ant-design/x/pull/683) 由 [@L-Hknu](https://github.com/L-Hknu) 和 [@kimteayon](https://github.com/kimteayon) 提交
+- 📖 修复Api Key在站点露出的安全问题。[#840](https://github.com/ant-design/x/pull/840) 由 [@kimteayon](https://github.com/kimteayon)提交
+- 📖 优化官网站点提升用户体验。[#783](https://github.com/ant-design/x/pull/783) 由 [@kimteayon](https://github.com/kimteayon) 提交、[#229](https://github.com/ant-design/x/pull/229) 由 [@afc163](https://github.com/afc163) 提交、[#835](https://github.com/ant-design/x/pull/835) 由 [@kimteayon](https://github.com/kimteayon) 、[#814](https://github.com/ant-design/x/pull/814) 由 [@wzc520pyfm](https://github.com/wzc520pyfm) 提交
+
 ## 1.2.0
 
 `2025-04-25`
