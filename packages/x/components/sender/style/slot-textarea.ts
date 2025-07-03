@@ -1,3 +1,4 @@
+import { unit } from '@ant-design/cssinjs';
 import type { SenderToken } from '.';
 import type { GenerateStyle } from '../../theme/cssinjs-utils';
 
@@ -12,47 +13,47 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
   return {
     [slotCls]: {
       display: 'inline-block',
-      margin: '0 4px',
+      margin: `0 ${unit(token.marginXXS)}`,
     },
     [`${antInputCls}${slotInputCls}`]: {
-      background: '#1677FF0f',
-      border: '1px solid transparent',
+      background: token.colorBgSlot,
+      border: `1px solid ${token.colorBorderSlot}`,
       outline: 'none',
-      color: '#1677ff',
-      borderRadius: 6,
-      padding: '0 4px',
+      color: token.colorTextSlot,
+      borderRadius: token.borderRadius,
+      padding: `0 ${unit(token.paddingXXS)}`,
       fontSize: token.fontSize,
       lineHeight: token.lineHeight,
       position: 'relative',
       '&::placeholder': {
-        color: 'rgba(22, 119, 255, 0.25)',
+        color: token.colorTextSlotPlaceholder,
         fontSize: token.fontSize,
         lineHeight: token.lineHeight,
       },
       '&:hover, &:focus': {
-        borderColor: 'rgba(22, 119, 255, 0.1)',
+        borderColor: token.colorBorderSlotHover,
       },
     },
     [`${slotSelectCls}`]: {
       fontSize: token.fontSize,
       lineHeight: token.lineHeight,
-      padding: '0 4px',
-      transition: 'border-color 0.2s',
+      padding: `0 ${unit(token.paddingXXS)}`,
+      transition: `border-color  ${token.motionDurationMid}`,
       position: 'relative',
       display: 'inline-block',
       cursor: 'pointer',
-      background: '#1677FF0f',
+      background: token.colorBgSlot,
       alignItems: 'center',
       justifyContent: 'center',
-      borderRadius: 6,
+      borderRadius: token.borderRadius,
       userSelect: 'none',
-      color: '#1677ff',
-      border: '1px solid transparent',
+      color: token.colorTextSlot,
+      border: `1px solid ${token.colorBorderSlot}`,
       '&.placeholder': {
-        color: 'rgba(22, 119, 255, 0.25)',
+        color: token.colorTextSlotPlaceholder,
       },
       [`&${antDropdownCls}-open`]: {
-        borderColor: 'rgba(22, 119, 255, 0.1)',
+        borderColor: token.colorBorderSlotHover,
       },
     },
     [`${slotSelectCls}-value`]: {
@@ -61,7 +62,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       lineHeight: token.lineHeight,
     },
     [`${slotSelectCls}-arrow`]: {
-      marginInlineStart: 4,
+      marginInlineStart: token.marginXXS,
       fontSize: token.fontSize,
       lineHeight: token.lineHeight,
       display: 'inline-flex',
@@ -85,7 +86,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
     },
     [`${slotSelectCls}-dropdown li`]: {
       minWidth: 'fit-content',
-      padding: `${token.paddingXXS} ${token.controlPaddingHorizontal}`,
+      padding: `${unit(token.paddingXXS)} ${unit(token.controlPaddingHorizontal)}`,
       cursor: 'pointer',
       userSelect: 'none',
       fontSize: token.fontSize,
@@ -99,12 +100,12 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       color: token.colorText,
     },
     [`${slotTagCls}`]: {
-      background: '#1677FF0f',
-      border: '1px solid transparent',
+      background: token.colorBgSlot,
+      border: `1px solid ${token.colorBorderSlot}`,
       outline: 'none',
-      color: '#1677ff',
-      borderRadius: 6,
-      padding: '0 4px',
+      color: token.colorTextSlot,
+      borderRadius: token.borderRadius,
+      padding: `0 ${unit(token.paddingXXS)}`,
       fontSize: token.fontSize,
       lineHeight: token.lineHeight,
       position: 'relative',
