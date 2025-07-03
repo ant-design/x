@@ -3,43 +3,15 @@ order: 1
 title: 介绍
 ---
 
-## 何时使用
+`@ant-design/x-markdown` 旨在提供流式友好、高性能和强拓展性的Markdown渲染器。提供流式渲染公式、脚注、代码高亮等能力。
 
-用于渲染 LLM 返回的流式 Markdown 格式。
+## ✨ 特性
 
-## 代码演示
-
-<!-- prettier-ignore -->
-<code src="./demo/basic.tsx">基本使用</code>
-<code src="./demo/streaming.tsx">流式对话</code>
-<code src="./demo/components.tsx">自定义组件</code>
-<code src="./demo/supersets.tsx">拓展插件</code>
-<code src="./demo/plugin.tsx">自定义拓展插件</code>
-
-## API
-
-<!-- prettier-ignore -->
-| 属性 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- |
-| content | markdown 内容 | `string` | - | - |
-| children | markdown 内容，与 content 作用一样 | `string` | - | - |
-| options | 渲染配置 | `Options` | `{ gfm: true }` | - |
-| walkTokens | 遍历tokens函数 | `function` | `null` | - |
-| components | 自定义组件 | `Record<string, React.ReactNode>` | - | - |
-| streaming | 流式渲染配置 | `SteamingOption` | - | - |
-| plugins | Marked.js extension plugins | `MarkedExtension[]` | - | - |
-| className | 自定义 className | `string` | - | - |
-| style | 自定义样式 | `CSSProperties` | - | - |
-
-### Options
-
-| 属性 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- |
-| break | 是否支持在单个换行符处添加 `<br>`（需要 gfm 为 true） | `boolean` | - |  |
-| gfm | 是否支持[GitHub Flavored Markdown Spec](https://github.github.com/gfm/) | `boolean` | `true` |  |
-
-### SteamingOption
-
-| 属性 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- |
-| hasNextChunk | 是否还有下一个 chunk，如果为 false，清除所有缓存并渲染 | `boolean` | `false` |  |
+- 🚀 为速度而生
+- 🤖 流式友好，
+- ⬇️ 低级编译器，用于解析 Markdown，无需长时间缓存或阻塞。
+- ⚖️ 轻量级，同时实现所有支持的风格和规范的 markdown 功能。
+- 🔐 默认安全，无dangerouslySetInnerHTML XSS 攻击。
+- 🎨 可自定义组件，传递你自己的组件来代替\<h2\>for## hi。
+- 🔧 丰富的插件，有很多插件可供选择。
+- 😊 兼容，100% 符合 CommonMark，100% 符合 GFM 插件。
