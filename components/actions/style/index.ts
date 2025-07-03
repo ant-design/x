@@ -13,9 +13,7 @@ const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
   return {
     [componentCls]: {
       [`&${componentCls}-rtl`]: {
-        [`${componentCls}-list`]: {
-          flexDirection: 'row-reverse',
-        },
+        direction: 'rtl',
       },
 
       [`${componentCls}-list`]: {
