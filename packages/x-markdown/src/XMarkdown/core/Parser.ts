@@ -34,44 +34,25 @@ class Parser {
       }
 
       switch (token.type) {
-        case 'space': {
+        case 'space':
           return null;
-        }
-        case 'hr': {
-          return this.renderer.hr(token);
-        }
-        case 'heading': {
-          return this.renderer.heading(token);
-        }
-        case 'code': {
-          return this.renderer.code(token);
-        }
-        case 'table': {
-          return this.renderer.table(token);
-        }
-        case 'blockquote': {
-          return this.renderer.blockquote(token);
-        }
-        case 'list': {
-          return this.renderer.list(token);
-        }
-        case 'html': {
-          return this.renderer.html(token);
-        }
-        case 'nonSelfClosingHtml': {
-          return this.renderer.nonSelfClosingHtml(token);
-        }
-        case 'paragraph': {
-          return this.renderer.paragraph(token);
-        }
-        case 'text': {
-          return this.renderer.text(token);
-        }
-        default: {
-          const errMsg = `Block token with "${token.type}" type was not found.`;
-          console.error(errMsg);
+        case 'hr':
+        case 'heading':
+        case 'code':
+        case 'table':
+        case 'blockquote':
+        case 'list':
+        case 'html':
+        case 'nonSelfClosingHtml':
+        case 'paragraph':
+        case 'text':
+          if (typeof this.renderer[token.type as keyof Renderer] === 'function') {
+            return this.renderer[token.type](token);
+          }
+          break;
+        default:
+          console.error(`Block token with "${token.type}" type was not found.`);
           return;
-        }
       }
     });
   }
@@ -92,44 +73,25 @@ class Parser {
       }
 
       switch (token.type) {
-        case 'escape': {
-          return token.text;
-        }
-        case 'html': {
-          return this.renderer.html(token);
-        }
-        case 'nonSelfClosingHtml': {
-          return this.renderer.nonSelfClosingHtml(token);
-        }
-        case 'link': {
-          return this.renderer.link(token);
-        }
-        case 'image': {
-          return this.renderer.image(token);
-        }
-        case 'strong': {
-          return this.renderer.strong(token);
-        }
-        case 'em': {
-          return this.renderer.em(token);
-        }
-        case 'codespan': {
-          return this.renderer.codespan(token);
-        }
-        case 'br': {
-          return this.renderer.br(token);
-        }
-        case 'del': {
-          return this.renderer.del(token);
-        }
-        case 'text': {
+        case 'escape':
           return this.renderer.text(token);
-        }
-        default: {
-          const errMsg = `Block token with "${token.type}" type was not found.`;
-          console.error(errMsg);
+        case 'html':
+        case 'nonSelfClosingHtml':
+        case 'link':
+        case 'image':
+        case 'strong':
+        case 'em':
+        case 'codespan':
+        case 'br':
+        case 'del':
+        case 'text':
+          if (typeof this.renderer[token.type as keyof Renderer] === 'function') {
+            return this.renderer[token.type](token);
+          }
+          break;
+        default:
+          console.error(`Block token with "${token.type}" type was not found.`);
           return;
-        }
       }
     });
   }
