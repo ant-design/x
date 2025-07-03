@@ -1,7 +1,7 @@
+import React from 'react';
+import { message } from 'antd';
 import { CopyOutlined, RedoOutlined } from '@ant-design/icons';
 import { Actions, ActionsProps } from '@ant-design/x';
-import { message } from 'antd';
-import React from 'react';
 
 const actionItems = [
   {

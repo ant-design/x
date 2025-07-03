@@ -1,10 +1,13 @@
-import { Tooltip, type TooltipProps } from 'antd';
-import classnames from 'classnames';
 import React from 'react';
+import { Tooltip } from 'antd';
+import classnames from 'classnames';
+import pickAttrs from 'rc-util/lib/pickAttrs';
+
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
-import ActionMenu from './ActionMenu';
-import type { ActionItem, SubItemType } from './interface';
+import ActionsMenu from './ActionsMenu';
+import ActionsFeedback from './ActionsFeedback';
+import type { ActionItem, ItemType } from './interface';
 
 import useStyle from './style';
 
@@ -13,18 +16,7 @@ export interface ActionsProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
    * @desc 包含多个操作项的列表
    * @descEN A list containing multiple action items.
    */
-  items: ActionItem[];
-  /**
-   * @desc 根节点样式类
-   * @descEN Root node style class.
-   */
-  rootClassName?: string;
-  /**
-   * @desc 子操作项是否占据一行
-   * @descEN Whether the child action items occupy a line.
-   * @default false
-   */
-  block?: boolean;
+  items: (ActionItem | React.ReactNode)[];
   /**
    * @desc Item 操作项被点击时的回调函数。
    * @descEN Callback function when an action item is clicked.
@@ -36,11 +28,6 @@ export interface ActionsProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
     domEvent: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>;
   }) => void;
   /**
-   * @desc 根节点样式
-   * @descEN Style for the root node.
-   */
-  style?: React.CSSProperties;
-  /**
    * @desc 变体
    * @descEN Variant.
    * @default 'borderless'
@@ -51,28 +38,38 @@ export interface ActionsProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
    * @descEN Prefix for style class names.
    */
   prefixCls?: string;
+  /**
+   * @desc 根节点样式类
+   * @descEN Root node style class.
+   */
+  rootClassName?: string;
+  /**
+   * @desc 根节点样式
+   * @descEN Style for the root node.
+   */
+  style?: React.CSSProperties;
 }
 
-const Actions: React.FC<ActionsProps> = (props: ActionsProps) => {
+const ForwardActions: React.FC<ActionsProps> = (props: ActionsProps) => {
   const {
+    items = [],
+    onClick,
+    variant = 'borderless',
     prefixCls: customizePrefixCls,
     rootClassName = {},
     style = {},
-    variant = 'borderless',
-    block = false,
-    onClick,
-    items = [],
     ...otherHtmlProps
   } = props;
 
-  // ============================ PrefixCls ============================
-  const { getPrefixCls } = useXProviderContext();
+  const domProps = pickAttrs(otherHtmlProps, {
+    attr: true,
+    aria: true,
+    data: true,
+  });
+
+  const { getPrefixCls, direction } = useXProviderContext();
   const prefixCls = getPrefixCls('actions', customizePrefixCls);
-
-  // ======================= Component Config =======================
   const contextConfig = useXComponentConfig('actions');
-
-  // ============================ Styles ============================
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
 
   const mergedCls = classnames(
@@ -81,6 +78,9 @@ const Actions: React.FC<ActionsProps> = (props: ActionsProps) => {
     rootClassName,
     cssVarCls,
     hashId,
+    {
+      [`${prefixCls}-rtl`]: direction === 'rtl',
+    },
   );
 
   const mergedStyle = {
@@ -88,66 +88,68 @@ const Actions: React.FC<ActionsProps> = (props: ActionsProps) => {
     ...style,
   };
 
-  const getTooltipNode = (node: React.ReactNode, title?: string, tooltipProps?: TooltipProps) => {
-    if (title) {
-      return (
-        <Tooltip {...tooltipProps} title={title}>
-          {node}
-        </Tooltip>
-      );
-    }
-    return node;
-  };
-
-  const handleItemClick = (
-    key: string,
-    item: ActionItem,
-    domEvent: React.MouseEvent<HTMLElement, MouseEvent>,
-  ) => {
-    if (item.onItemClick) {
-      item.onItemClick(item);
-      return;
-    }
-    onClick?.({
-      key,
-      item,
-      keyPath: [key],
-      domEvent,
-    });
-  };
-
-  const renderSingleItem = (item: SubItemType) => {
-    const { icon, label, key } = item;
-
-    return (
-      <div
-        className={classnames(`${prefixCls}-list-item`)}
-        onClick={(domEvent) => handleItemClick(key, item, domEvent)}
-        key={key}
-      >
-        {getTooltipNode(<div className={`${prefixCls}-list-item-icon`}>{icon}</div>, label)}
-      </div>
-    );
-  };
-
   return wrapCSSVar(
-    <div className={mergedCls} {...otherHtmlProps} style={mergedStyle}>
-      <div className={classnames(`${prefixCls}-list`, variant, block)}>
+    <div className={mergedCls} {...domProps} style={mergedStyle}>
+      <div className={classnames(`${prefixCls}-list`, variant)}>
         {items.map((item) => {
-          if ('children' in item) {
+          const itemObj = item as ItemType;
+          const id = React.useId();
+          const itemKey = itemObj?.key || id;
+
+          if (itemObj === null) {
+            return null;
+          }
+
+          if (React.isValidElement(itemObj)) {
+            return React.cloneElement(itemObj, {
+              key: itemKey,
+            });
+          }
+
+          if ('subItems' in itemObj) {
             return (
-              <ActionMenu key={item.key} item={item} prefixCls={prefixCls} onClick={onClick} />
+              <ActionsMenu key={itemKey} item={itemObj} prefixCls={prefixCls} onClick={onClick} />
             );
           }
-          return renderSingleItem(item);
+
+          return (
+            <div
+              className={classnames(`${prefixCls}-list-item`)}
+              onClick={(domEvent) => {
+                if (itemObj?.onItemClick) {
+                  itemObj.onItemClick(itemObj);
+                  return;
+                }
+                onClick?.({
+                  key: itemKey,
+                  item: itemObj,
+                  keyPath: [itemKey],
+                  domEvent,
+                });
+              }}
+              key={itemKey}
+            >
+              <Tooltip title={itemObj.label}>
+                <div className={`${prefixCls}-list-item-icon`}>{itemObj?.icon}</div>
+              </Tooltip>
+            </div>
+          );
         })}
       </div>
     </div>,
   );
 };
 
+type CompoundedActions = typeof ForwardActions & {
+  Feedback: typeof ActionsFeedback;
+};
+
+const Actions = ForwardActions as CompoundedActions;
+
 if (process.env.NODE_ENV !== 'production') {
   Actions.displayName = 'Actions';
 }
+
+Actions.Feedback = ActionsFeedback;
 
 export default Actions;

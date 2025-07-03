@@ -1,6 +1,7 @@
-import { EllipsisOutlined } from '@ant-design/icons';
-import { Dropdown, MenuProps } from 'antd';
 import React from 'react';
+import { Dropdown, MenuProps } from 'antd';
+import { EllipsisOutlined } from '@ant-design/icons';
+
 import { ActionsProps } from '.';
 import { useXProviderContext } from '../x-provider';
 import { ActionItem, ItemType } from './interface';
@@ -13,9 +14,9 @@ export const findItem = (keyPath: string[], items: ActionItem[]): ActionItem | n
       // If the item is found and this is the last key in the path
       if (keyPath.length === 1) return item;
 
-      // If it is a SubItemType, recurse to find in its children
-      if ('children' in item) {
-        return findItem(keyPath.slice(1), item?.children!);
+      // If it is a SubItemType, recurse to find in its subItems
+      if ('subItems' in item) {
+        return findItem(keyPath.slice(1), item?.subItems!);
       }
     }
   }
@@ -23,25 +24,25 @@ export const findItem = (keyPath: string[], items: ActionItem[]): ActionItem | n
   return null;
 };
 
-const ActionMenu = (props: { item: ItemType } & Pick<ActionsProps, 'prefixCls' | 'onClick'>) => {
+const ActionsMenu = (props: { item: ItemType } & Pick<ActionsProps, 'prefixCls' | 'onClick'>) => {
   const { onClick: onMenuClick, item } = props;
-  const { children = [], triggerSubMenuAction = 'hover' } = item;
+  const { subItems = [], triggerSubMenuAction = 'hover' } = item;
   const { getPrefixCls } = useXProviderContext();
   const prefixCls = getPrefixCls('actions', props.prefixCls);
   const icon = item?.icon ?? <EllipsisOutlined />;
 
   const menuProps: MenuProps = {
-    items: children,
+    items: subItems as MenuProps['items'],
     onClick: ({ key, keyPath, domEvent }) => {
-      if (findItem(keyPath, children)?.onItemClick) {
-        findItem(keyPath, children)?.onItemClick?.(findItem(keyPath, children) as ActionItem);
+      if (findItem(keyPath, subItems)?.onItemClick) {
+        findItem(keyPath, subItems)?.onItemClick?.(findItem(keyPath, subItems) as ActionItem);
         return;
       }
       onMenuClick?.({
         key,
-        keyPath: [...keyPath, item.key],
+        keyPath: [...keyPath, item?.key || ''],
         domEvent,
-        item: findItem(keyPath, children)!,
+        item: findItem(keyPath, subItems)!,
       });
     },
   };
@@ -60,4 +61,4 @@ const ActionMenu = (props: { item: ItemType } & Pick<ActionsProps, 'prefixCls' |
   );
 };
 
-export default ActionMenu;
+export default ActionsMenu;
