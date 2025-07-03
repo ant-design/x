@@ -259,7 +259,7 @@
     "web-streams-polyfill": "^4.0.0",
     "webpack": "^5.94.0",
     "webpack-bundle-analyzer": "^4.10.2",
-    "@types/minimatch": "^3.0.5"
+    "@types/minimatch": "^5.1.2"
   },
   "peerDependencies": {
     "antd": "^5.20.3",
