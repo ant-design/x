@@ -52,7 +52,6 @@ class Parser {
           break;
         default:
           console.error(`Block token with "${token.type}" type was not found.`);
-          return;
       }
     });
   }
@@ -91,7 +90,6 @@ class Parser {
           break;
         default:
           console.error(`Block token with "${token.type}" type was not found.`);
-          return;
       }
     });
   }
