@@ -1,7 +1,7 @@
-import React from 'react';
-import { message } from 'antd';
 import { CopyOutlined, RedoOutlined } from '@ant-design/icons';
 import { Actions, ActionsProps } from '@ant-design/x';
+import { message } from 'antd';
+import React from 'react';
 
 const actionItems = [
   {
@@ -16,7 +16,7 @@ const actionItems = [
   },
 ];
 
-const Demo = () => {
+const Demo: React.FC = () => {
   const onClick: ActionsProps['onClick'] = ({ keyPath }) => {
     // Logic for handling click events
     message.success(`you clicked ${keyPath.join(',')}`);

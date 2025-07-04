@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { message, Pagination } from 'antd';
 import { AudioOutlined, CopyOutlined, LoadingOutlined } from '@ant-design/icons';
 import { Actions } from '@ant-design/x';
+import { message, Pagination } from 'antd';
+import React, { useState } from 'react';
 
 import { FeedbackValue } from '../ActionsFeedback';
 
-const PresetDemo: React.FC = () => {
+const Demo: React.FC = () => {
   const [feedbackStatus, setFeedbackStatus] = useState<FeedbackValue>('LIKE');
   const [curPage, setCurPage] = useState(1);
   const [isSpeaking, setIsSpeaking] = useState(false);
@@ -54,4 +54,4 @@ const PresetDemo: React.FC = () => {
   return <Actions items={items} />;
 };
 
-export default PresetDemo;
+export default Demo;

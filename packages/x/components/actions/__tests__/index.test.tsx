@@ -1,11 +1,10 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import React from 'react';
 import { findItem } from '../ActionsMenu';
-import ForwardActions, { ActionsProps } from '../index'; // Adjust the import according to your file structure
-import { ItemType } from '../interface';
+import Actions, { ActionsProps, ItemType } from '../index';
 
 describe('Actions Component', () => {
-  const consoleSpy = jest.spyOn(console, 'log'); // apy on console.log
+  const consoleSpy = jest.spyOn(console, 'log');
   const mockOnClick = jest.fn();
   const items = [
     { key: '1', label: 'Action 1', icon: <span>icon1</span> },
@@ -22,7 +21,7 @@ describe('Actions Component', () => {
   ];
 
   it('renders correctly', () => {
-    const { getByText } = render(<ForwardActions items={items} onClick={mockOnClick} />);
+    const { getByText } = render(<Actions items={items} onClick={mockOnClick} />);
 
     expect(getByText('icon1')).toBeInTheDocument();
     expect(getByText('icon2')).toBeInTheDocument();
@@ -32,7 +31,7 @@ describe('Actions Component', () => {
     const onClick: ActionsProps['onClick'] = ({ keyPath }) => {
       console.log(`You clicked ${keyPath.join(',')}`);
     };
-    const { getByText } = render(<ForwardActions items={items} onClick={onClick} />);
+    const { getByText } = render(<Actions items={items} onClick={onClick} />);
 
     fireEvent.click(getByText('icon1'));
     expect(consoleSpy).toHaveBeenCalledWith('You clicked 1');
@@ -40,7 +39,7 @@ describe('Actions Component', () => {
 
   it('calls individual item onClick if provided', () => {
     const consoleSpy = jest.spyOn(console, 'log');
-    const { getByText } = render(<ForwardActions items={items} onClick={mockOnClick} />);
+    const { getByText } = render(<Actions items={items} onClick={mockOnClick} />);
 
     fireEvent.click(getByText('icon2'));
     expect(consoleSpy).toHaveBeenCalledWith('Action 2 clicked');
@@ -66,7 +65,7 @@ describe('Actions Component', () => {
     ];
 
     const { getByText, container } = render(
-      <ForwardActions items={itemsWithSubClick} onClick={mockOnClick} />,
+      <Actions items={itemsWithSubClick} onClick={mockOnClick} />,
     );
 
     const parentTrigger = container.querySelector('.ant-dropdown-trigger')!;
@@ -81,7 +80,7 @@ describe('Actions Component', () => {
   });
 
   it('renders sub-menu items', async () => {
-    const { getByText, container } = render(<ForwardActions items={items} onClick={mockOnClick} />);
+    const { getByText, container } = render(<Actions items={items} onClick={mockOnClick} />);
 
     fireEvent.mouseOver(container.querySelector('.ant-dropdown-trigger')!); // Assuming the dropdown opens on hover
 

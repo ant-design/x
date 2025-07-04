@@ -1,20 +1,19 @@
-import React from 'react';
-import { Dropdown, MenuProps } from 'antd';
 import { EllipsisOutlined } from '@ant-design/icons';
-
-import { ActionsProps } from '.';
+import { Dropdown, type MenuProps } from 'antd';
+import classnames from 'classnames';
+import React from 'react';
 import { useXProviderContext } from '../x-provider';
-import { ActionItem, ItemType } from './interface';
+import { ActionItem } from '.';
+import { ActionsItemProps } from './Item';
 
+/** Tool function: Find data item by path */
 export const findItem = (keyPath: string[], items: ActionItem[]): ActionItem | null => {
-  const keyToFind = keyPath[0]; // Get the first key from the keyPath
+  const keyToFind = keyPath[0];
 
   for (const item of items) {
     if (item.key === keyToFind) {
-      // If the item is found and this is the last key in the path
       if (keyPath.length === 1) return item;
 
-      // If it is a SubItemType, recurse to find in its subItems
       if ('subItems' in item) {
         return findItem(keyPath.slice(1), item?.subItems!);
       }
@@ -24,8 +23,8 @@ export const findItem = (keyPath: string[], items: ActionItem[]): ActionItem | n
   return null;
 };
 
-const ActionsMenu = (props: { item: ItemType } & Pick<ActionsProps, 'prefixCls' | 'onClick'>) => {
-  const { onClick: onMenuClick, item } = props;
+const ActionsMenu: React.FC<ActionsItemProps> = (props) => {
+  const { onClick: onMenuClick, item, classNames, styles, dropdownProps = {} } = props;
   const { subItems = [], triggerSubMenuAction = 'hover' } = item;
   const { getPrefixCls } = useXProviderContext();
   const prefixCls = getPrefixCls('actions', props.prefixCls);
@@ -50,9 +49,11 @@ const ActionsMenu = (props: { item: ItemType } & Pick<ActionsProps, 'prefixCls' 
   return (
     <Dropdown
       menu={menuProps}
-      overlayClassName={`${prefixCls}-sub-item`}
+      overlayClassName={classnames(`${prefixCls}-sub-item`, classNames?.itemDropdown)}
+      overlayStyle={styles?.itemDropdown}
       arrow
       trigger={[triggerSubMenuAction]}
+      {...dropdownProps}
     >
       <div className={`${prefixCls}-list-item`}>
         <div className={`${prefixCls}-list-item-icon`}>{icon}</div>

@@ -34,6 +34,7 @@ Actions 组件用于快速配置一些 AI 场景下所需要的操作按钮/功�
 | --- | --- | --- | --- | --- |
 | items | 包含多个操作项的列表 | ([ActionItem](#actionitem) \| ReactNode)[] | - | - |
 | onClick | 组件被点击时的回调函数 | function({ item, key, keyPath, domEvent }) | - | - |
+| dropdownProps | 下拉菜单的配置属性 | DropdownProps | - | - |
 | variant | 变体 | `borderless` \| `border` | `borderless` | - |
 
 ### ActionItem
@@ -62,3 +63,7 @@ type ActionItem = ItemType | SubItemType;
 | icon | 自定义操作的图标 | ReactNode | - | - |
 | onItemClick | 点击自定义操作按钮时的回调函数 | (info: [ActionItem](#actionitem)) => void | - | - |
 | danger | 语法糖，设置危险icon | boolean | false | - |
+
+## Semantic DOM
+
+<code src="./demo/_semantic.tsx" simplify="true"></code>

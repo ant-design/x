@@ -1,7 +1,7 @@
-import React from 'react';
-import { Space, message } from 'antd';
-import { LikeOutlined, LikeFilled, DislikeOutlined, DislikeFilled } from '@ant-design/icons';
+import { DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined } from '@ant-design/icons';
+import { message, Space } from 'antd';
 import { createStyles } from 'antd-style';
+import React from 'react';
 
 const useStyle = createStyles(({ token }) => ({
   feedbackItem: {
@@ -21,12 +21,12 @@ const useStyle = createStyles(({ token }) => ({
 
 export type FeedbackValue = 'LIKE' | 'DISLIKE' | '';
 
-interface Props {
+interface ActionsFeedbackProps {
   value?: FeedbackValue;
   onChange?: (value: FeedbackValue) => void;
 }
 
-const ActionsFeedback = (props: Props) => {
+const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
   const { value, onChange } = props;
   const { styles } = useStyle();
 

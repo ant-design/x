@@ -1,15 +1,55 @@
-import React from 'react';
-import { Tooltip } from 'antd';
+import type { DropdownProps, MenuItemProps, MenuProps } from 'antd';
 import classnames from 'classnames';
 import pickAttrs from 'rc-util/lib/pickAttrs';
+import React from 'react';
 
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
-import ActionsMenu from './ActionsMenu';
 import ActionsFeedback from './ActionsFeedback';
-import type { ActionItem, ItemType } from './interface';
+import Item from './Item';
 
 import useStyle from './style';
+
+export type SemanticType = 'root' | 'item' | 'itemDropdown';
+
+export interface ItemType {
+  /**
+   * @desc 自定义操作的唯一标识
+   * @descEN Unique identifier for the custom action.
+   */
+  key?: string;
+  /**
+   * @desc 自定义操作的显示标签
+   * @descEN Display label for the custom action.
+   */
+  label?: string;
+  /**
+   * @desc 自定义操作的图标
+   * @descEN Icon for the custom action.
+   */
+  icon?: React.ReactNode;
+  /**
+   * @desc 点击自定义操作按钮时的回调函数
+   * @descEN Callback function when the custom action button is clicked.
+   */
+  onItemClick?: (info?: ActionItem) => void;
+  /**
+   * @desc 子操作项
+   * @descEN Child action items.
+   */
+  subItems?: ActionItem[];
+  /**
+   * @desc 子菜单的触发方式
+   * @descEN Trigger mode of sub menu.
+   */
+  triggerSubMenuAction?: MenuProps['triggerSubMenuAction'];
+}
+
+export interface SubItemType extends Omit<ItemType, 'subItems' | 'triggerSubMenuAction'> {
+  danger: MenuItemProps['danger'];
+}
+
+export type ActionItem = ItemType | SubItemType;
 
 export interface ActionsProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick'> {
   /**
@@ -18,8 +58,8 @@ export interface ActionsProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
    */
   items: (ActionItem | React.ReactNode)[];
   /**
-   * @desc Item 操作项被点击时的回调函数。
-   * @descEN Callback function when an action item is clicked.
+   * @desc 组件被点击时的回调函数。
+   * @descEN Callback function when component is clicked.
    */
   onClick?: (menuInfo: {
     item: ActionItem;
@@ -28,14 +68,20 @@ export interface ActionsProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
     domEvent: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>;
   }) => void;
   /**
+   * @desc 下拉菜单的配置属性
+   * @descEN Configuration properties for dropdown menu
+   */
+  dropdownProps?: DropdownProps;
+  /**
    * @desc 变体
    * @descEN Variant.
    * @default 'borderless'
    */
   variant?: 'borderless' | 'border';
+
   /**
    * @desc 样式类名的前缀。
-   * @descEN Prefix for style class names.
+   * @descEN Prefix for style classnames.
    */
   prefixCls?: string;
   /**
@@ -44,20 +90,31 @@ export interface ActionsProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
    */
   rootClassName?: string;
   /**
-   * @desc 根节点样式
-   * @descEN Style for the root node.
+   * @desc 语义化结构 className
+   * @descEN Semantic structure class names
    */
-  style?: React.CSSProperties;
+  classNames?: Partial<Record<SemanticType, string>>;
+  /**
+   * @desc 语义化结构 style
+   * @descEN Semantic structure styles
+   */
+  styles?: Partial<Record<SemanticType, React.CSSProperties>>;
 }
 
-const ForwardActions: React.FC<ActionsProps> = (props: ActionsProps) => {
+const ForwardActions: React.FC<ActionsProps> = (props) => {
   const {
     items = [],
     onClick,
+    dropdownProps = {},
     variant = 'borderless',
+
     prefixCls: customizePrefixCls,
-    rootClassName = {},
+    classNames = {},
+    rootClassName = '',
+    className = '',
+    styles = {},
     style = {},
+
     ...otherHtmlProps
   } = props;
 
@@ -75,64 +132,38 @@ const ForwardActions: React.FC<ActionsProps> = (props: ActionsProps) => {
   const mergedCls = classnames(
     prefixCls,
     contextConfig.className,
+    contextConfig.classNames.root,
     rootClassName,
+    className,
+    classNames.root,
     cssVarCls,
     hashId,
     {
       [`${prefixCls}-rtl`]: direction === 'rtl',
     },
   );
-
   const mergedStyle = {
     ...contextConfig.style,
+    ...styles.root,
     ...style,
   };
 
   return wrapCSSVar(
     <div className={mergedCls} {...domProps} style={mergedStyle}>
       <div className={classnames(`${prefixCls}-list`, variant)}>
-        {items.map((item) => {
-          const itemObj = item as ItemType;
-          const id = React.useId();
-          const itemKey = itemObj?.key || id;
-
-          if (itemObj === null) {
-            return null;
-          }
-
-          if (React.isValidElement(itemObj)) {
-            return React.cloneElement(itemObj, {
-              key: itemKey,
-            });
-          }
-
-          if ('subItems' in itemObj) {
-            return (
-              <ActionsMenu key={itemKey} item={itemObj} prefixCls={prefixCls} onClick={onClick} />
-            );
-          }
-
+        {items.map((item, idx) => {
           return (
-            <div
-              className={classnames(`${prefixCls}-list-item`)}
-              onClick={(domEvent) => {
-                if (itemObj?.onItemClick) {
-                  itemObj.onItemClick(itemObj);
-                  return;
-                }
-                onClick?.({
-                  key: itemKey,
-                  item: itemObj,
-                  keyPath: [itemKey],
-                  domEvent,
-                });
-              }}
-              key={itemKey}
-            >
-              <Tooltip title={itemObj.label}>
-                <div className={`${prefixCls}-list-item-icon`}>{itemObj?.icon}</div>
-              </Tooltip>
-            </div>
+            <Item
+              item={item as ItemType}
+              onClick={onClick}
+              prefixCls={prefixCls}
+              classNames={classNames}
+              styles={styles}
+              className={classnames(`${prefixCls}-list-item`, classNames.item)}
+              style={styles.item}
+              dropdownProps={dropdownProps}
+              key={idx}
+            />
           );
         })}
       </div>

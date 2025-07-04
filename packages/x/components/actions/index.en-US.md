@@ -33,6 +33,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | --- | --- | --- | --- | --- |
 | items | A list containing multiple action items | ([ActionItem](#actionitem) \| ReactNode)[] | - | - |
 | onClick | Callback function when an action item is clicked | function({ item, key, keyPath, domEvent }) | - | - |
+| dropdownProps | Configuration properties for dropdown menu | DropdownProps | - | - |
 | variant | Variant | `borderless` \| `border` | `borderless` | - |
 
 ### ActionItem
@@ -61,3 +62,7 @@ type ActionItem = ItemType | SubItemType;
 | icon | The icon for the custom action | ReactNode | - | - |
 | onItemClick | Callback function when the custom action button is clicked | (info: [ActionItem](#actionitem)) => void | - | - |
 | danger | Syntax sugar, set dangerous icon | boolean | false | - |
+
+## Semantic DOM
+
+<code src="./demo/_semantic.tsx" simplify="true"></code>
