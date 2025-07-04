@@ -278,6 +278,9 @@ Ant Design X 广泛用于蚂蚁集团内由 AI 驱动的用户交互界面。如
 
 ```bash
 
+# 安装 utoo
+$ npm i -g utoo
+
 # 通过主包的 script 脚本启动
 $ ut start
 $ npm start

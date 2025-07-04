@@ -274,6 +274,9 @@ Welcome to contribute!
 
 ```bash
 
+# install utoo
+$ npm i -g utoo
+
 # Start through main package script
 $ ut start
 $ npm start
