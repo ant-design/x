@@ -1,11 +1,10 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import React from 'react';
-import { findItem } from '../ActionMenu';
-import Actions, { ActionsProps } from '../index'; // Adjust the import according to your file structure
-import { ItemType } from '../interface';
+import { findItem } from '../ActionsMenu';
+import Actions, { ActionsProps, ItemType } from '../index';
 
 describe('Actions Component', () => {
-  const consoleSpy = jest.spyOn(console, 'log'); // apy on console.log
+  const consoleSpy = jest.spyOn(console, 'log');
   const mockOnClick = jest.fn();
   const items = [
     { key: '1', label: 'Action 1', icon: <span>icon1</span> },
@@ -95,7 +94,7 @@ describe('Actions.Menu findItem function', () => {
     {
       key: '2',
       label: 'Action 2',
-      children: [
+      subItems: [
         { key: '2-1', label: 'Sub Action 1' },
         { key: '2-2', label: 'Sub Action 2' },
       ],
@@ -110,7 +109,7 @@ describe('Actions.Menu findItem function', () => {
 
   it('should return the item if it exists at a deeper level', () => {
     const result = findItem(['2', '2-1'], items);
-    expect(result).toEqual(items[1].children![0]);
+    expect(result).toEqual(items[1].subItems![0]);
   });
 
   it('should return null if the item does not exist', () => {

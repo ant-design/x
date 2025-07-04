@@ -12,6 +12,10 @@ const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
 
   return {
     [componentCls]: {
+      [`&${componentCls}-rtl`]: {
+        direction: 'rtl',
+      },
+
       [`${componentCls}-list`]: {
         display: 'inline-flex',
         flexDirection: 'row',
@@ -23,7 +27,6 @@ const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
           padding: token.paddingXXS,
           borderRadius: token.borderRadius,
           height: token.controlHeightSM,
-          width: token.controlHeightSM,
           boxSizing: 'border-box',
           display: 'inline-flex',
           alignItems: 'center',
@@ -34,8 +37,6 @@ const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
             alignItems: 'center',
             justifyContent: 'center',
             fontSize: token.fontSize,
-            width: '100%',
-            height: '100%',
           },
 
           '&:hover': {
@@ -51,20 +52,17 @@ const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
         color: token.colorTextSecondary,
 
         [`${componentCls}-list-item, ${componentCls}-list-sub-item`]: {
-          padding: 0,
+          padding: token.paddingXXS,
           lineHeight: token.lineHeight,
 
           '&-icon': {
-            fontSize: token.fontSizeLG,
+            fontSize: token.fontSize,
           },
 
           '&:hover': {
             opacity: 0.8,
           },
         },
-      },
-      '& .block': {
-        display: 'flex',
       },
     },
   };

@@ -1,33 +1,65 @@
-import { Tooltip, type TooltipProps } from 'antd';
+import type { DropdownProps, MenuItemProps, MenuProps } from 'antd';
 import classnames from 'classnames';
+import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
+
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
-import ActionMenu from './ActionMenu';
-import type { ActionItem, SubItemType } from './interface';
+import ActionsFeedback from './ActionsFeedback';
+import Item from './Item';
 
 import useStyle from './style';
+
+export type SemanticType = 'root' | 'item' | 'itemDropdown';
+
+export interface ItemType {
+  /**
+   * @desc 自定义操作的唯一标识
+   * @descEN Unique identifier for the custom action.
+   */
+  key?: string;
+  /**
+   * @desc 自定义操作的显示标签
+   * @descEN Display label for the custom action.
+   */
+  label?: string;
+  /**
+   * @desc 自定义操作的图标
+   * @descEN Icon for the custom action.
+   */
+  icon?: React.ReactNode;
+  /**
+   * @desc 点击自定义操作按钮时的回调函数
+   * @descEN Callback function when the custom action button is clicked.
+   */
+  onItemClick?: (info?: ActionItem) => void;
+  /**
+   * @desc 子操作项
+   * @descEN Child action items.
+   */
+  subItems?: ActionItem[];
+  /**
+   * @desc 子菜单的触发方式
+   * @descEN Trigger mode of sub menu.
+   */
+  triggerSubMenuAction?: MenuProps['triggerSubMenuAction'];
+}
+
+export interface SubItemType extends Omit<ItemType, 'subItems' | 'triggerSubMenuAction'> {
+  danger: MenuItemProps['danger'];
+}
+
+export type ActionItem = ItemType | SubItemType;
 
 export interface ActionsProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick'> {
   /**
    * @desc 包含多个操作项的列表
    * @descEN A list containing multiple action items.
    */
-  items: ActionItem[];
+  items: (ActionItem | React.ReactNode)[];
   /**
-   * @desc 根节点样式类
-   * @descEN Root node style class.
-   */
-  rootClassName?: string;
-  /**
-   * @desc 子操作项是否占据一行
-   * @descEN Whether the child action items occupy a line.
-   * @default false
-   */
-  block?: boolean;
-  /**
-   * @desc Item 操作项被点击时的回调函数。
-   * @descEN Callback function when an action item is clicked.
+   * @desc 组件被点击时的回调函数。
+   * @descEN Callback function when component is clicked.
    */
   onClick?: (menuInfo: {
     item: ActionItem;
@@ -36,118 +68,119 @@ export interface ActionsProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
     domEvent: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>;
   }) => void;
   /**
-   * @desc 根节点样式
-   * @descEN Style for the root node.
+   * @desc 下拉菜单的配置属性
+   * @descEN Configuration properties for dropdown menu
    */
-  style?: React.CSSProperties;
+  dropdownProps?: DropdownProps;
   /**
    * @desc 变体
    * @descEN Variant.
    * @default 'borderless'
    */
   variant?: 'borderless' | 'border';
+
   /**
    * @desc 样式类名的前缀。
-   * @descEN Prefix for style class names.
+   * @descEN Prefix for style classnames.
    */
   prefixCls?: string;
+  /**
+   * @desc 根节点样式类
+   * @descEN Root node style class.
+   */
+  rootClassName?: string;
+  /**
+   * @desc 语义化结构 className
+   * @descEN Semantic structure class names
+   */
+  classNames?: Partial<Record<SemanticType, string>>;
+  /**
+   * @desc 语义化结构 style
+   * @descEN Semantic structure styles
+   */
+  styles?: Partial<Record<SemanticType, React.CSSProperties>>;
 }
 
-const Actions: React.FC<ActionsProps> = (props: ActionsProps) => {
+const ForwardActions: React.FC<ActionsProps> = (props) => {
   const {
-    prefixCls: customizePrefixCls,
-    rootClassName = {},
-    style = {},
-    variant = 'borderless',
-    block = false,
-    onClick,
     items = [],
+    onClick,
+    dropdownProps = {},
+    variant = 'borderless',
+
+    prefixCls: customizePrefixCls,
+    classNames = {},
+    rootClassName = '',
+    className = '',
+    styles = {},
+    style = {},
+
     ...otherHtmlProps
   } = props;
 
-  // ============================ PrefixCls ============================
-  const { getPrefixCls } = useXProviderContext();
+  const domProps = pickAttrs(otherHtmlProps, {
+    attr: true,
+    aria: true,
+    data: true,
+  });
+
+  const { getPrefixCls, direction } = useXProviderContext();
   const prefixCls = getPrefixCls('actions', customizePrefixCls);
-
-  // ======================= Component Config =======================
   const contextConfig = useXComponentConfig('actions');
-
-  // ============================ Styles ============================
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
 
   const mergedCls = classnames(
     prefixCls,
     contextConfig.className,
+    contextConfig.classNames.root,
     rootClassName,
+    className,
+    classNames.root,
     cssVarCls,
     hashId,
+    {
+      [`${prefixCls}-rtl`]: direction === 'rtl',
+    },
   );
-
   const mergedStyle = {
     ...contextConfig.style,
+    ...styles.root,
     ...style,
   };
 
-  const getTooltipNode = (node: React.ReactNode, title?: string, tooltipProps?: TooltipProps) => {
-    if (title) {
-      return (
-        <Tooltip {...tooltipProps} title={title}>
-          {node}
-        </Tooltip>
-      );
-    }
-    return node;
-  };
-
-  const handleItemClick = (
-    key: string,
-    item: ActionItem,
-    domEvent: React.MouseEvent<HTMLElement, MouseEvent>,
-  ) => {
-    if (item.onItemClick) {
-      item.onItemClick(item);
-      return;
-    }
-    onClick?.({
-      key,
-      item,
-      keyPath: [key],
-      domEvent,
-    });
-  };
-
-  const renderSingleItem = (item: SubItemType) => {
-    const { icon, label, key } = item;
-
-    return (
-      <div
-        className={classnames(`${prefixCls}-list-item`)}
-        onClick={(domEvent) => handleItemClick(key, item, domEvent)}
-        key={key}
-      >
-        {getTooltipNode(<div className={`${prefixCls}-list-item-icon`}>{icon}</div>, label)}
-      </div>
-    );
-  };
-
   return wrapCSSVar(
-    <div className={mergedCls} {...otherHtmlProps} style={mergedStyle}>
-      <div className={classnames(`${prefixCls}-list`, variant, block)}>
-        {items.map((item) => {
-          if ('children' in item) {
-            return (
-              <ActionMenu key={item.key} item={item} prefixCls={prefixCls} onClick={onClick} />
-            );
-          }
-          return renderSingleItem(item);
+    <div className={mergedCls} {...domProps} style={mergedStyle}>
+      <div className={classnames(`${prefixCls}-list`, variant)}>
+        {items.map((item, idx) => {
+          return (
+            <Item
+              item={item as ItemType}
+              onClick={onClick}
+              prefixCls={prefixCls}
+              classNames={classNames}
+              styles={styles}
+              className={classnames(`${prefixCls}-list-item`, classNames.item)}
+              style={styles.item}
+              dropdownProps={dropdownProps}
+              key={idx}
+            />
+          );
         })}
       </div>
     </div>,
   );
 };
 
+type CompoundedActions = typeof ForwardActions & {
+  Feedback: typeof ActionsFeedback;
+};
+
+const Actions = ForwardActions as CompoundedActions;
+
 if (process.env.NODE_ENV !== 'production') {
   Actions.displayName = 'Actions';
 }
+
+Actions.Feedback = ActionsFeedback;
 
 export default Actions;

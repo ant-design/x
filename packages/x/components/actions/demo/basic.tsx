@@ -16,7 +16,7 @@ const actionItems = [
   },
 ];
 
-const Demo = () => {
+const Demo: React.FC = () => {
   const onClick: ActionsProps['onClick'] = ({ keyPath }) => {
     // Logic for handling click events
     message.success(`you clicked ${keyPath.join(',')}`);
