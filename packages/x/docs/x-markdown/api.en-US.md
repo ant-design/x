@@ -7,7 +7,7 @@ order: 4
 
 Used to render the streaming Markdown format returned by LLM.
 
-## 代码演示
+## Code Demo
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">Basic</code>
