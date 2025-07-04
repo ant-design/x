@@ -258,7 +258,7 @@
     "vanilla-jsoneditor": "^3.0.0",
     "web-streams-polyfill": "^4.0.0",
     "webpack": "^5.94.0",
-    "webpack-bundle-analyzer": "^4.10.2",
+    "webpack-bundle-analyzer": "^4.10.2"
   },
   "peerDependencies": {
     "antd": "^5.20.3",
