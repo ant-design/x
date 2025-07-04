@@ -247,10 +247,6 @@
     "simple-git": "^3.26.0",
     "size-limit": "^11.1.5",
     "spinnies": "^0.5.1",
-    "stylelint": "^16.9.0",
-    "stylelint-config-rational-order": "^0.1.2",
-    "stylelint-config-standard": "^38.0.0",
-    "stylelint-prettier": "^5.0.2",
     "tar": "^7.4.3",
     "tsx": "^4.19.1",
     "typedoc": "^0.28.0",
@@ -258,8 +254,7 @@
     "vanilla-jsoneditor": "^3.0.0",
     "web-streams-polyfill": "^4.0.0",
     "webpack": "^5.94.0",
-    "webpack-bundle-analyzer": "^4.10.2",
-    "@types/minimatch": "^3.0.5"
+    "webpack-bundle-analyzer": "^4.10.2"
   },
   "peerDependencies": {
     "antd": "^5.20.3",
