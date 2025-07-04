@@ -4,7 +4,7 @@ group:
   title: Common
   order: 0
 title: Notification
-description: System-level notifications displayed outside the page.
+description: Send system-level notifications that are displayed outside the page.
 cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*Oj-bTbVXtpQAAAAAAAAAAAAADgCCAQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*qwdtSKWXeikAAAAAAAAAAAAADgCCAQ/original
 demo:
@@ -13,19 +13,27 @@ demo:
 
 ## When to Use
 
-- Push system-level notifications to keep users informed of task progress, especially when agents are performing complex tasks.
+- When the agent is performing complex tasks, system-level application notifications can be pushed to keep users informed of the task progress.
+- Controlled by the operating system's notification permissions, it is only used for weak notifications.
 
-## Examples
+## Note
+
+- **`Notification` is a system application notification and is controlled by the operating system's notification permissions. If the system notification permission is turned off, the `open` method call of XNotification will have no effect. [System Permission Settings](#system-permission-settings).**
+- XNotification is implemented by extending `window.Notification`. If the browser environment does not support Notification, the method calls of XNotification will have no effect.
+- The style and effect of XNotification notifications are subject to the current browser environment's support for Notification. For example, the `dir` attribute will be ignored by most browsers.
+- XNotification only manages the closing of notifications under the current instance. After the instance changes (for example, the browser page is refreshed), it has no ability to manage and close the sent notifications.
+
+## Code Demo
 
 <!-- prettier-ignore -->
-<code src="./demo/hooks.tsx">Hooks Usage</code> 
-<code src="./demo/duration.tsx">Auto Close Delay</code> 
-<code src="./demo/close_tag.tsx">Close Specific Notification</code> 
+<code src="./demo/hooks.tsx">Hooks Call</code>
+<code src="./demo/duration.tsx">Auto Close Delay</code>
+<code src="./demo/close_tag.tsx">Close Specified Notification</code>
 <code src="./demo/static-method.tsx">Static Method</code>
 
 ## API
 
-To send notifications successfully, make sure the current domain has notification permission.
+To successfully send a notification, you need to ensure that the current domain has been granted notification permission.
 
 ### XNotification
 
@@ -34,22 +42,22 @@ To send notifications successfully, make sure the current domain has notificatio
 | --- | --- | --- | --- | --- |
 | permission | Indicates whether the user has granted permission to display web notifications for the current origin. | NotificationPermission | - | - |
 | requestPermission| Requests permission from the user to display notifications for the current origin. | ()=> Promise</NotificationPermission/> | - | - |
-| open |Push a notification to the user| (arg: XNotificationArgs['openConfig'])=> void | - | - |
-| close|Close pushed notifications. You can pass a tag list to close specific notifications, or call without arguments to close all.| (arg?: XNotificationArgs['closeConfig'])=> void | - | - |
+| open |Push a notification to the user| (config: XNotificationOpenArgs)=> void | - | - |
+| close|Close pushed notifications. You can pass a tag list to close specific notifications, or call without arguments to close all.| (config?: string[])=> void | - | - |
 
 #### NotificationPermission
 
 ```tsx | pure
 type NotificationPermission =
-  | 'granted' // The user has explicitly granted permission to display system notifications for the current origin.
-  | 'denied' // The user has explicitly denied permission.
-  | 'default'; // The user's decision is unknown; in this case, the app behaves as if permission is denied.
+  | 'granted' // The user has explicitly granted the current origin permission to display system notifications.
+  | 'denied' // The user has explicitly denied the current origin permission to display system notifications.
+  | 'default'; // The user's decision is unknown; in this case, the application behaves as if the permission was "denied".
 ```
 
-#### XNotificationArgs
+#### XNotificationOpenArgs
 
 ```tsx | pure
-type XNotificationArgs = {
+type XNotificationOpenArgs = {
   openConfig: NotificationOptions & {
     title: string;
     onClick?: (event: Event, close?: Notification['close']) => void;
@@ -91,14 +99,18 @@ type useNotification = [
 ];
 ```
 
-# Notes
+## System Permission Settings
 
-- XNotification is an extension of `window.Notification`. If the browser does not support Notification, all XNotification methods will have no effect.
-- The style and effect of XNotification notifications depend on the browser's support for Notification. For example, the `dir` property is ignored by most browsers.
-- XNotification can only manage notifications sent in the current instance. After the instance changes (e.g., page refresh), it cannot manage or close previously sent notifications.
+### Change `Notification` settings on Windows
 
-# FAQ
+The setting path for different versions of the Windows system will be different. You can refer to the approximate path: "Start" menu > "Settings" > "System" > and then select "Notifications & actions" on the left, after which you can operate on global notifications and application notifications.
 
-## I have granted notification permission for the current origin and the `onShow` callback is triggered, but why can't I see the notification?
+### Change `Notification` settings on Mac
+
+On a Mac, use the "Notifications" settings to specify the period during which you do not want to be disturbed by notifications, and control how notifications are displayed in the "Notification Center". To change these settings, choose "Apple" menu > "System Settings", then click "Notifications" in the sidebar (you may need to scroll down).
+
+## FAQ
+
+### I have obtained the permission for the current `origin` to display system notifications, and the `onShow` callback has also been triggered. Why can't the pushed notification be displayed?
 
 `Notification` is a system-level feature. Please ensure that notifications are enabled for the browser application on your device.

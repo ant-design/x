@@ -20,18 +20,16 @@ const App: React.FC = () => {
   const [locale] = useLocale(locales);
 
   return (
-    <>
-      <SemanticPreview
-        componentName="Sender"
-        semantics={[
-          { name: 'root', desc: locale.root },
-          { name: 'status', desc: locale.status },
-          { name: 'content', desc: locale.content },
-        ]}
-      >
-        <Think title={'deep thinking'}>This is deep thinking content.</Think>
-      </SemanticPreview>
-    </>
+    <SemanticPreview
+      componentName="Sender"
+      semantics={[
+        { name: 'root', desc: locale.root },
+        { name: 'status', desc: locale.status },
+        { name: 'content', desc: locale.content },
+      ]}
+    >
+      <Think title={'deep thinking'}>This is deep thinking content.</Think>
+    </SemanticPreview>
   );
 };
 
