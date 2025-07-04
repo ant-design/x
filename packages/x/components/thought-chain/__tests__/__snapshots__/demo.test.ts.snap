@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`renders components/thought-chain/demo/basic.tsx correctly 1`] = `
 <div
@@ -2002,11 +2002,16 @@ exports[`renders components/thought-chain/demo/nested.tsx correctly 1`] = `
 
 exports[`renders components/thought-chain/demo/simple.tsx correctly 1`] = `
 <div
-  class="ant-flex ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+  class="ant-flex ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-flex ant-flex-wrap-wrap ant-flex-align-start ant-flex-gap-small"
+    class="ant-flex ant-flex-wrap-wrap ant-flex-align-center ant-flex-gap-small"
   >
+    <span
+      class="ant-typography"
+    >
+      loading status:
+    </span>
     <div
       class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
     >
@@ -2117,8 +2122,13 @@ exports[`renders components/thought-chain/demo/simple.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-flex ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex ant-flex-wrap-wrap ant-flex-align-center ant-flex-gap-small"
   >
+    <span
+      class="ant-typography"
+    >
+      success status:
+    </span>
     <div
       class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
     >
@@ -2238,8 +2248,13 @@ exports[`renders components/thought-chain/demo/simple.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-flex ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex ant-flex-wrap-wrap ant-flex-align-center ant-flex-gap-small"
   >
+    <span
+      class="ant-typography"
+    >
+      error status:
+    </span>
     <div
       class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid ant-thought-chain-item-error"
     >
@@ -2353,8 +2368,13 @@ exports[`renders components/thought-chain/demo/simple.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-flex ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex ant-flex-wrap-wrap ant-flex-align-center ant-flex-gap-small"
   >
+    <span
+      class="ant-typography"
+    >
+      abort status
+    </span>
     <div
       class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
     >
@@ -2474,8 +2494,13 @@ exports[`renders components/thought-chain/demo/simple.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-flex ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex ant-flex-wrap-wrap ant-flex-align-center ant-flex-gap-small"
   >
+    <span
+      class="ant-typography"
+    >
+      custom icon:
+    </span>
     <div
       class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
     >
@@ -2589,8 +2614,13 @@ exports[`renders components/thought-chain/demo/simple.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-flex ant-flex-wrap-wrap ant-flex-align-start ant-flex-gap-small"
+    class="ant-flex ant-flex-wrap-wrap ant-flex-align-center ant-flex-gap-small"
   >
+    <span
+      class="ant-typography"
+    >
+      description & click:
+    </span>
     <div
       class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid ant-thought-chain-item-click"
     >
