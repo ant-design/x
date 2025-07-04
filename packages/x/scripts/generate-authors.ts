@@ -1,7 +1,7 @@
 import fs from 'fs';
-import path from 'path';
 import sortBy from 'lodash/sortBy';
 import unionBy from 'lodash/unionBy';
+import path from 'path';
 import simpleGit from 'simple-git';
 
 const cwd = process.cwd();
