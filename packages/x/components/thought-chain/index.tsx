@@ -21,10 +21,12 @@ const ThoughtChain: React.FC<ThoughtChainProps> & CompoundedComponent = (props) 
     defaultExpandedKeys,
     expandedKeys: customExpandedKeys,
     onExpand,
+    rootClassName,
     styles = {},
+    classNames = {},
     line = true,
     style,
-    classNames = {},
+
     ...restProps
   } = props;
 
@@ -49,10 +51,13 @@ const ThoughtChain: React.FC<ThoughtChainProps> & CompoundedComponent = (props) 
   const mergedCls = classnames(
     className,
     prefixCls,
-    contextConfig.classNames.root,
     contextConfig.className,
+    contextConfig.classNames.root,
+    rootClassName,
     hashId,
     cssVarCls,
+    className,
+    classNames.root,
     `${prefixCls}-box`,
     {
       [`${prefixCls}-rtl`]: direction === 'rtl',

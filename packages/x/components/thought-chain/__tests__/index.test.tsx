@@ -4,6 +4,7 @@ import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
 import themeTest from '../../../tests/shared/themeTest';
 import { fireEvent, render } from '../../../tests/utils';
+import XProvider from '../../x-provider';
 import type { ThoughtChainItem } from '../index';
 import ThoughtChain from '../index';
 
@@ -81,7 +82,6 @@ describe('ThoughtChain Component', () => {
     expect(element).toBeTruthy();
     expect(element).toMatchSnapshot();
   });
-
   it('ThoughtChain component work with collapsible', () => {
     const onExpand = jest.fn();
     const App = () => {
@@ -167,5 +167,31 @@ describe('ThoughtChain Component', () => {
       '.ant-thought-chain-node-content',
     );
     expect(expandBodyElementsAfter).toHaveLength(1);
+  });
+  it('ThoughtChain component with XProvider', async () => {
+    const App = () => {
+      return (
+        <XProvider
+          direction="rtl"
+          thoughtChain={{
+            className: 'test-thoughtChain',
+            styles: {
+              item: {
+                backgroundColor: 'red',
+              },
+            },
+          }}
+        >
+          <ThoughtChain items={items_collapsible} />
+        </XProvider>
+      );
+    };
+    const { container } = render(<App />);
+
+    const element = container.querySelector('.test-thoughtChain');
+    expect(element).toBeTruthy();
+    const itemElement = container.querySelector('.ant-thought-chain-node');
+    expect(itemElement).toBeInTheDocument();
+    expect(window.getComputedStyle(itemElement as Element).backgroundColor).toBe('red');
   });
 });

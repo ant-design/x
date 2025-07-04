@@ -100,4 +100,9 @@ export interface ThoughtChainProps extends Omit<React.HTMLAttributes<HTMLDivElem
    * @descEN Line style
    */
   line?: boolean | 'solid' | 'dashed' | 'dotted‌';
+  /**
+   * @desc 根节点样式类
+   * @descEN Root node style class.
+   */
+  rootClassName?: string;
 }

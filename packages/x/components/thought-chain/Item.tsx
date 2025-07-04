@@ -43,6 +43,12 @@ export interface ThoughtChainItemProp
   description?: React.ReactNode;
 
   /**
+   * @desc 根节点样式类
+   * @descEN Root node style class.
+   */
+  rootClassName?: string;
+
+  /**
    * @desc 思维节点状态
    * @descEN Thought chain item status
    */
@@ -60,6 +66,7 @@ const Item: React.FC<ThoughtChainItemProp> = (props) => {
     key,
     variant = 'solid',
     prefixCls: customizePrefixCls,
+    rootClassName,
     title,
     icon,
     status,
@@ -90,7 +97,7 @@ const Item: React.FC<ThoughtChainItemProp> = (props) => {
       key={key || id}
       onClick={onClick}
       {...domProps}
-      className={classnames(prefixCls, hashId, cssVarCls, itemCls, {
+      className={classnames(prefixCls, hashId, cssVarCls, rootClassName, itemCls, {
         [`${itemCls}-${variant}`]: variant,
         [`${itemCls}-click`]: onClick,
         [`${itemCls}-error`]: status === THOUGHT_CHAIN_ITEM_STATUS.ERROR,
