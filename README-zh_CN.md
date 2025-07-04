@@ -57,6 +57,10 @@ yarn add @ant-design/x
 pnpm add @ant-design/x
 ```
 
+```ut
+ut install @ant-design/x
+```
+
 ### 浏览器引入
 
 在浏览器中使用 `script` 和 `link` 标签直接引入文件，并使用全局变量 `antdx`。
@@ -267,6 +271,37 @@ export default Demo;
 ## 谁在使用
 
 Ant Design X 广泛用于蚂蚁集团内由 AI 驱动的用户交互界面。如果你的公司和产品使用了 Ant Design X，欢迎到 [这里](https://github.com/ant-design/x/issues/126) 留言。
+
+## 本地研发
+
+> antx 通过 [npm-workspace](https://docs.npmjs.com/cli/v11/using-npm/workspaces) 来组织代码，推荐使用 npm 或 [utoo](https://github.com/umijs/mako/tree/next) 进行本地研发
+
+```bash
+
+# 通过主包的 script 脚本启动
+$ ut start
+$ npm start
+
+# 通过 workspace 参数
+$ npm start --workspace packages/x
+$ ut start --workspace packages/x
+
+# 通过包名指定 workspace (utoo only)
+$ ut start --workspace @ant-design/x
+
+# 进入子目录单独直接启动
+$ cd packages/x
+
+$ ut start
+$ npm start
+
+# 添加安装
+$ ut install [pkg]
+$ npm install [pkg]
+
+# 依赖更新
+$ ut update
+```
 
 ## 如何贡献
 
