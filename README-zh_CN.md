@@ -274,36 +274,30 @@ Ant Design X 广泛用于蚂蚁集团内由 AI 驱动的用户交互界面。如
 
 ## 本地研发
 
-> antx 通过 [npm-workspace](https://docs.npmjs.com/cli/v11/using-npm/workspaces) 来组织代码，推荐使用 npm 或 [utoo](https://github.com/umijs/mako/tree/next) 进行本地研发
+> antx 通过 [npm-workspace](https://docs.npmjs.com/cli/v11/using-npm/workspaces) 来组织代码，推荐使用 npm 或 [utoo](https://github.com/umijs/mako/tree/next) 进行本地研发。
 
 ```bash
 
 # 安装 utoo
 $ npm i -g utoo
 
-# 通过主包的 script 脚本启动
-$ ut start
-$ npm start
+# 安装项目依赖 (by utoo)
+$ ut [install]
 
-# 通过 workspace 参数
-$ npm start --workspace packages/x
-$ ut start --workspace packages/x
+# 启动项目
+$ ut start # 方式一: 通过主包的 script 启动
+$ ut start --workspace packages/x # 方式二: 通过 workspace 参数启动
+$ ut start --workspace @ant-design/x # 方式三: 通过 package.name 启动 (utoo only)
+$ cd packages/x && ut start # 方式四: 进入子包目录单独启动
 
-# 通过包名指定 workspace (utoo only)
-$ ut start --workspace @ant-design/x
 
-# 进入子目录单独直接启动
-$ cd packages/x
-
-$ ut start
-$ npm start
-
-# 添加安装
-$ ut install [pkg]
-$ npm install [pkg]
+# 添加依赖
+$ ut install [pkg@version] # 为主包添加依赖
+$ ut install [pkg@version] --workspace packages/x # 为子包添加依赖
+$ cd packages/x && ut install [pkg@version] # 为子包添加依赖
 
 # 依赖更新
-$ ut update
+$ ut update # utoo only
 ```
 
 ## 如何贡献

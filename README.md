@@ -274,32 +274,26 @@ Welcome to contribute!
 
 ```bash
 
-# install utoo
+# Install utoo
 $ npm i -g utoo
 
-# Start through main package script
-$ ut start
-$ npm start
+# Install project dependencies (by utoo)
+$ ut [install]
 
-# Through workspace parameter
-$ npm start --workspace packages/x
-$ ut start --workspace packages/x
+# Start project
+$ ut start # Method 1: Start through main package script
+$ ut start --workspace packages/x # Method 2: Start through workspace parameter
+$ ut start --workspace @ant-design/x # Method 3: Start through package.name (utoo only)
+$ cd packages/x && ut start # Method 4: Enter subpackage directory and start separately
 
-# Through package name to specify workspace (utoo only)
-$ ut start --workspace @ant-design/x
 
-# Enter subdirectory to start directly
-$ cd packages/x
-
-$ ut start
-$ npm start
-
-# Install packages
-$ ut install [pkg]
-$ npm install [pkg]
+# Add dependencies
+$ ut install [pkg@version] # Add dependencies to root package
+$ ut install [pkg@version] --workspace packages/x # Add dependencies to subpackage
+$ cd packages/x && ut install [pkg@version] # Add dependencies to subpackage
 
 # Dependency update
-$ ut update
+$ ut update # utoo only
 ```
 
 ## Companies using antdx
