@@ -213,6 +213,7 @@ export const prepareComponentToken: GetDefaultToken<'Conversations'> = (token) =
   const creationBorderColor = new FastColor(token.colorPrimary).setA(0.22);
   const creationHoverColor = new FastColor(token.colorPrimary).setA(0.25);
   const shortcutKeyTextColor = new FastColor(token.colorPrimary).setA(0.65);
+
   return {
     creationBgColor: creationBgColor.toRgbString(),
     creationBorderColor: creationBorderColor.toRgbString(),
