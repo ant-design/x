@@ -38,9 +38,9 @@ title: 介绍
 
 ### 使用 npm 或 yarn 或 pnpm 或 bun 安装 或 utoo 安装
 
-**我们推荐使用 [npm](https://www.npmjs.com/) 或 [yarn](https://github.com/yarnpkg/yarn/) 或 [pnpm](https://pnpm.io/zh/) 或 [bun](https://bun.sh/) 或 [utoo](https://bun.sh/) 的方式进行开发**，不仅可在开发环境轻松调试，也可放心地在生产环境打包部署使用，享受整个生态圈和工具链带来的诸多好处。
+**我们推荐使用 [npm](https://www.npmjs.com/) 或 [yarn](https://github.com/yarnpkg/yarn/) 或 [pnpm](https://pnpm.io/zh/) 或 [bun](https://bun.sh/) 或 [utoo](https://github.com/umijs/mako/tree/next) 的方式进行开发**，不仅可在开发环境轻松调试，也可放心地在生产环境打包部署使用，享受整个生态圈和工具链带来的诸多好处。
 
-<InstallDependencies npm='$ npm install @ant-design/x-markdown --save' yarn='$ yarn add @ant-design/x-markdown' pnpm='$ pnpm install @ant-design/x-markdown --save' bun='$ bun add @ant-design/x-markdown' utoo='$ ut add @ant-design/x-markdown --save'></InstallDependencies>
+<InstallDependencies npm='$ npm install @ant-design/x-markdown --save' yarn='$ yarn add @ant-design/x-markdown' pnpm='$ pnpm install @ant-design/x-markdown --save' bun='$ bun add @ant-design/x-markdown' utoo='$ ut install @ant-design/x-markdown --save'></InstallDependencies>
 
 如果你的网络环境不佳，推荐使用 [cnpm](https://github.com/cnpm/cnpm)。
 
@@ -53,3 +53,31 @@ title: 介绍
 > **强烈不推荐使用已构建文件**，这样无法按需加载，而且难以获得底层依赖模块的 bug 快速修复支持。
 
 > 注意：`x-markdown.js` 和 `x-markdown.min.js` 和 `x-markdown.min.js.map`。依赖 `react`、`react-dom`请确保提前引入这些文件。
+
+## 示例
+
+```tsx
+import React from 'react';
+import { XMarkdown } from '@ant-design/x-markdown';
+const content = `
+# Hello World
+
+### 欢迎使用 XMarkdown！
+
+- 项目1
+- 项目2
+- 项目3
+`;
+
+const App = () => <XMarkdown content={content} />;
+
+export default App;
+```
+
+## 插件
+
+`@ant-design/x-markdown` 提供了丰富的插件，你可以通过 `plugins` 属性来使用这些插件。插件详情查看[插件集]()
+
+## 主题
+
+`@ant-design/x-markdown` 提供了丰富的主题。

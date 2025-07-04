@@ -63,7 +63,6 @@ export default defineConfig({
       react: 'React',
       'react-dom': 'ReactDOM',
       '@ant-design/cssinjs': 'antdCssinjs',
-      antd: 'antd',
     },
     transformRuntime: {
       absoluteRuntime: process.cwd(),

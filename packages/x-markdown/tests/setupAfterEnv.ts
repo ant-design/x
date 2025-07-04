@@ -5,33 +5,10 @@ import jsdom from 'jsdom';
 import format, { plugins } from 'pretty-format';
 import { spyElementPrototypes } from 'rc-util/lib/test/domHook';
 
-import { defaultConfig as defaultConfigES } from 'antd/es/theme/internal';
-import { defaultConfig as defaultConfigLib } from 'antd/lib/theme/internal';
-
 // Mock `scrollTo` since jsdom do not support it
 spyElementPrototypes(HTMLElement, {
   scrollTo: jest.fn(),
 });
-
-// Not use dynamic hashed for test env since version will change hash dynamically.
-defaultConfigLib.hashed = false;
-defaultConfigES.hashed = false;
-
-if (process.env.LIB_DIR === 'dist') {
-  jest.mock('antd', () => jest.requireActual('../dist/antd'));
-} else if (process.env.LIB_DIR === 'dist-min') {
-  jest.mock('antd', () => jest.requireActual('../dist/antd.min'));
-} else if (process.env.LIB_DIR === 'es') {
-  jest.mock('antd', () => jest.requireActual('../es'));
-  jest.mock('../es/theme/internal', () => {
-    const esTheme = jest.requireActual('../es/theme/internal');
-    if (esTheme.defaultConfig) {
-      esTheme.defaultConfig.hashed = false;
-    }
-
-    return esTheme;
-  });
-}
 
 function cleanup(node: HTMLElement) {
   const childList = Array.from(node.childNodes);

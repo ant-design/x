@@ -7,6 +7,7 @@ import React from 'react';
 import BunLogo from './bun';
 import NpmLogo from './npm';
 import PnpmLogo from './pnpm';
+import UtooLogo from './utoo';
 import YarnLogo from './yarn';
 
 interface InstallProps {
@@ -48,7 +49,7 @@ const InstallDependencies: React.FC<InstallProps> = (props) => {
       key: 'utoo',
       label: 'utoo',
       children: utoo ? <SourceCode lang="bash">{utoo}</SourceCode> : null,
-      icon: '🤩',
+      icon: <UtooLogo />,
     },
   ].filter((item) => item.children);
 
