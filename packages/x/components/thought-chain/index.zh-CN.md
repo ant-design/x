@@ -27,6 +27,7 @@ demo:
 <code src="./demo/controlled-collapsible" background="grey">受控的折叠</code>
 <code src="./demo/customization.tsx" background="grey">客制化</code>
 <code src="./demo/nested.tsx" background="grey">嵌套使用</code>
+<code src="./demo/single-row.tsx" background="grey">单行折叠</code>
 
 ## API
 
@@ -44,19 +45,20 @@ demo:
 | classNames | 语义化结构的类名 | Record<'root'\|'item' \| 'itemIcon'\|'itemHeader' \| 'itemContent' \| 'itemFooter', string> | - | - |
 | prefixCls | 自定义前缀 | string | - | - |
 | styles | 语义化结构的样式 | Record<'root'\|'item' \|'itemIcon'\| 'itemHeader' \| 'itemContent' \| 'itemFooter', React.CSSProperties> | - | - |
+| rootClassName | 根元素样式类名 | string | - | - |
 
 ### ThoughtChainItem
 
-| 属性        | 说明               | 类型                                        | 默认值 | 版本 |
-| ----------- | ------------------ | ------------------------------------------- | ------ | ---- |
-| content     | 思维节点内容       | React.ReactNode                             | -      | -    |
-| description | 思维节点描述       | React.ReactNode                             | -      | -    |
-| footer      | 思维节点脚注       | React.ReactNode                             | -      | -    |
-| icon        | 思维节点图标       | React.ReactNode                             | -      | -    |
-| key         | 思维节点唯一标识符 | string                                      | -      | -    |
-| status      | 思维节点状态       | 'loading' \| 'success' \| 'error'\| 'abort' | -      | -    |
-| title       | 思维节点标题       | React.ReactNode                             | -      | -    |
-| collapsible | 思维节点是否可折叠 | boolean                                     | false  | -    |
+| 属性 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| content | 思维节点内容 | React.ReactNode | - | - |
+| description | 思维节点描述 | React.ReactNode | - | - |
+| footer | 思维节点脚注 | React.ReactNode | - | - |
+| icon | 思维节点图标,为false时不展示 | false\|React.ReactNode | DefaultIcon | - |
+| key | 思维节点唯一标识符 | string | - | - |
+| status | 思维节点状态 | 'loading' \| 'success' \| 'error'\| 'abort' | - | - |
+| title | 思维节点标题 | React.ReactNode | - | - |
+| collapsible | 思维节点是否可折叠 | boolean | false | - |
 
 ### ThoughtChain.Item
 

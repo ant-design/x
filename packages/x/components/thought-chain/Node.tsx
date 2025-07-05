@@ -53,12 +53,12 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
 
   // ============================ Content Open ============================
   const contentOpen = expandedKeys?.includes(key);
-
-  const iconNode = icon ? (
-    icon
-  ) : (
+  let iconNode: React.ReactNode = (
     <div className={classnames(`${nodeCls}-index-icon`)}>{index + 1}</div>
   );
+
+  iconNode = icon === false ? null : icon || iconNode;
+
   // ============================ Render ============================
   return (
     <div
@@ -66,15 +66,17 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
       className={classnames(nodeCls, className, classNames.item)}
       style={props.style}
     >
-      <Status
-        className={classnames(`${nodeCls}-icon`, classNames.itemIcon, {
-          [`${nodeCls}-icon-${line}`]: typeof line !== 'boolean',
-        })}
-        style={styles.itemIcon}
-        prefixCls={prefixCls}
-        icon={iconNode}
-        status={status}
-      />
+      {iconNode && (
+        <Status
+          className={classnames(`${nodeCls}-icon`, classNames.itemIcon, {
+            [`${nodeCls}-icon-${line}`]: typeof line !== 'boolean',
+          })}
+          style={styles.itemIcon}
+          prefixCls={prefixCls}
+          icon={iconNode}
+          status={status}
+        />
+      )}
       <div className={classnames(`${nodeCls}-box`)}>
         {/* Header */}
         <div
@@ -82,7 +84,10 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
           style={styles.itemHeader}
         >
           {/* Header */}
-          <div className={classnames(`${nodeCls}-title`)} onClick={() => onItemExpand?.(key)}>
+          <div
+            className={classnames(`${nodeCls}-title`, { [`${nodeCls}-collapsible`]: collapsible })}
+            onClick={collapsible ? () => onItemExpand?.(key) : undefined}
+          >
             {title}
             {collapsible &&
               content &&

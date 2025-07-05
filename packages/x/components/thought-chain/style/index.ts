@@ -59,17 +59,21 @@ const genThoughtChainStyle: GenerateStyle<ThoughtChainToken> = (token) => {
         position: 'relative',
         display: 'flex',
         alignItems: 'baseline',
-        gap: token.margin,
+        gap: token.marginSM,
       },
       [`& ${componentCls}-node-header`]: {
         display: 'flex',
         flexDirection: 'column',
       },
       [`& ${componentCls}-node-title`]: {
+        fontWeight: 500,
         display: 'flex',
         gap: token.marginXS,
       },
-
+      [`& ${componentCls}-node-collapsible`]: {
+        paddingInlineEnd: token.padding,
+        cursor: 'pointer',
+      },
       [`& ${componentCls}-node-footer`]: {
         marginBottom: token.margin,
       },

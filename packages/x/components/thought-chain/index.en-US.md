@@ -26,6 +26,7 @@ demo:
 <code src="./demo/controlled-collapsible" background="grey">Controlled Collapsible</code>
 <code src="./demo/customization.tsx" background="grey">Customization</code>
 <code src="./demo/nested.tsx" background="grey">Nested Usage</code>
+<code src="./demo/single-row.tsx" background="grey">Single Row</code>
 
 ## API
 
@@ -43,6 +44,7 @@ Reference: [Common API](/docs/react/common-props)
 | classNames | Class names for semantic structure | Record<'root'\|'item' \| 'itemIcon'\|'itemHeader' \| 'itemContent' \| 'itemFooter', string> | - | - |
 | prefixCls | Custom prefix | string | - | - |
 | styles | Styles for semantic structure | Record<'root'\|'item' \|'itemIcon'\| 'itemHeader' \| 'itemContent' \| 'itemFooter', React.CSSProperties> | - | - |
+| rootClassName | Root element class name | string | - | - |
 
 ### ThoughtChainItem
 
@@ -51,7 +53,7 @@ Reference: [Common API](/docs/react/common-props)
 | content | Content of the thought node | React.ReactNode | - | - |
 | description | Description of the thought node | React.ReactNode | - | - |
 | footer | Footer of the thought node | React.ReactNode | - | - |
-| icon | Icon of the thought node | React.ReactNode | - | - |
+| icon | Icon of the thought node, not displayed when `false` | false \| React.ReactNode | DefaultIcon | - |
 | key | Unique identifier for the thought node | string | - | - |
 | status | Status of the thought node | 'loading' \| 'success' \| 'error'\| 'abort' | - | - |
 | title | Title of the thought node | React.ReactNode | - | - |
