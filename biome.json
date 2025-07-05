@@ -12,7 +12,8 @@
       "!**/server/**/*",
       "!**/node_modules",
       "!**/coverage",
-      "!**/package.json"
+      "!**/package.json",
+      "!x-markdown/plugins/**/*"
     ]
   },
   "formatter": {

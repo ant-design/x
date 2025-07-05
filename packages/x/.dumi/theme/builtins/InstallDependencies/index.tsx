@@ -7,6 +7,7 @@ import React from 'react';
 import BunLogo from './bun';
 import NpmLogo from './npm';
 import PnpmLogo from './pnpm';
+import UtooLogo from './utoo';
 import YarnLogo from './yarn';
 
 interface InstallProps {
@@ -14,10 +15,11 @@ interface InstallProps {
   yarn?: string;
   pnpm?: string;
   bun?: string;
+  utoo?: string;
 }
 
 const InstallDependencies: React.FC<InstallProps> = (props) => {
-  const { npm, yarn, pnpm, bun } = props;
+  const { npm, yarn, pnpm, bun, utoo } = props;
   const items: Tab[] = [
     {
       key: 'npm',
@@ -42,6 +44,12 @@ const InstallDependencies: React.FC<InstallProps> = (props) => {
       label: 'Bun',
       children: bun ? <SourceCode lang="bash">{bun}</SourceCode> : null,
       icon: <BunLogo />,
+    },
+    {
+      key: 'utoo',
+      label: 'utoo',
+      children: utoo ? <SourceCode lang="bash">{utoo}</SourceCode> : null,
+      icon: <UtooLogo />,
     },
   ].filter((item) => item.children);
 
