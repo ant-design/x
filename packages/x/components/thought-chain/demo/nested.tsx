@@ -1,15 +1,12 @@
-import React from 'react';
-import { ThoughtChain } from '@ant-design/x';
 import type { ThoughtChainProps } from '@ant-design/x';
-
-import { Card, Button } from 'antd';
-import { MoreOutlined } from '@ant-design/icons';
+import { ThoughtChain } from '@ant-design/x';
+import { Button, Card } from 'antd';
+import React from 'react';
 
 const items: ThoughtChainProps['items'] = [
   {
     title: '1 - Thought Chain Item',
     description: 'description',
-    extra: <Button type="text" icon={<MoreOutlined />} />,
     footer: <Button>1 - Thought Chain Item Footer</Button>,
     content: (
       <ThoughtChain
@@ -17,12 +14,10 @@ const items: ThoughtChainProps['items'] = [
           {
             title: '1-1 Thought Chain Item',
             description: 'description',
-            extra: <Button type="text" icon={<MoreOutlined />} />,
           },
           {
             title: '1-2 Thought Chain Item',
             description: 'description',
-            extra: <Button type="text" icon={<MoreOutlined />} />,
           },
         ]}
       />
@@ -31,7 +26,6 @@ const items: ThoughtChainProps['items'] = [
   {
     title: '2 - Thought Chain Item',
     description: 'description',
-    extra: <Button type="text" icon={<MoreOutlined />} />,
     footer: <Button>2 - Thought Chain Item Footer</Button>,
     content: (
       <ThoughtChain
@@ -39,12 +33,14 @@ const items: ThoughtChainProps['items'] = [
           {
             title: '2-1 Thought Chain Item',
             description: 'description',
-            extra: <Button type="text" icon={<MoreOutlined />} />,
           },
           {
             title: '2-2 Thought Chain Item',
             description: 'description',
-            extra: <Button type="text" icon={<MoreOutlined />} />,
+          },
+          {
+            title: '2-3 Thought Chain Item',
+            description: 'description',
           },
         ]}
       />
@@ -54,6 +50,6 @@ const items: ThoughtChainProps['items'] = [
 
 export default () => (
   <Card style={{ width: 500 }}>
-    <ThoughtChain items={items} collapsible />
+    <ThoughtChain items={items} />
   </Card>
 );

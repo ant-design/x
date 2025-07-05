@@ -1,9 +1,8 @@
 import { LoadingOutlined, TagsOutlined } from '@ant-design/icons';
+import type { ThoughtChainItem } from '@ant-design/x';
 import { ThoughtChain, useXAgent } from '@ant-design/x';
 import { Button, Descriptions, Splitter } from 'antd';
 import React from 'react';
-
-import type { ThoughtChainItem } from '@ant-design/x';
 
 /**
  * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
@@ -30,7 +29,7 @@ const App = () => {
   });
 
   async function request() {
-    setStatus('pending');
+    setStatus('loading');
 
     agent.request(
       {
@@ -57,7 +56,7 @@ const App = () => {
   return (
     <Splitter>
       <Splitter.Panel>
-        <Button type="primary" disabled={status === 'pending'} onClick={request}>
+        <Button type="primary" disabled={status === 'loading'} onClick={request}>
           Agent Request
         </Button>
       </Splitter.Panel>
@@ -68,7 +67,7 @@ const App = () => {
             {
               title: 'Agent Request Log',
               status: status,
-              icon: status === 'pending' ? <LoadingOutlined /> : <TagsOutlined />,
+              icon: status === 'loading' ? <LoadingOutlined /> : <TagsOutlined />,
               description:
                 status === 'error' &&
                 agent.config.baseURL === BASE_URL + PATH &&

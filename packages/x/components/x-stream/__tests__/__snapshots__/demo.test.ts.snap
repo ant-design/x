@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`renders components/x-stream/demo/custom-protocol.tsx correctly 1`] = `
 <div
@@ -34,7 +34,7 @@ exports[`renders components/x-stream/demo/custom-protocol.tsx correctly 1`] = `
     style="margin-left:16px;flex-basis:auto;flex-grow:1"
   >
     <div
-      class="ant-thought-chain ant-thought-chain-middle"
+      class="ant-thought-chain ant-thought-chain-box"
     />
   </div>
 </div>
@@ -74,7 +74,7 @@ exports[`renders components/x-stream/demo/default-protocol.tsx correctly 1`] = `
     style="margin-left:16px;flex-basis:auto;flex-grow:1"
   >
     <div
-      class="ant-thought-chain ant-thought-chain-middle"
+      class="ant-thought-chain ant-thought-chain-box"
     />
   </div>
 </div>

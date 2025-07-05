@@ -45,7 +45,7 @@ const App = () => {
 
   const request = () => {
     setLines([]);
-    setThoughtChainStatus('pending');
+    setThoughtChainStatus('loading');
     setStatus('pending');
     agent.request(
       {

@@ -1,9 +1,8 @@
+import { TagsOutlined } from '@ant-design/icons';
+import type { ThoughtChainItem } from '@ant-design/x';
 import { ThoughtChain, XRequest } from '@ant-design/x';
 import { Button, Splitter } from 'antd';
 import React from 'react';
-
-import { TagsOutlined } from '@ant-design/icons';
-import type { ThoughtChainItem } from '@ant-design/x';
 
 const BASE_URL = 'https://api.example.host';
 const PATH = '/chat';
@@ -51,7 +50,7 @@ const App = () => {
   const [lines, setLines] = React.useState<string[]>([]);
 
   async function request() {
-    setStatus('pending');
+    setStatus('loading');
 
     await exampleRequest.create(
       {
@@ -83,7 +82,7 @@ const App = () => {
   return (
     <Splitter>
       <Splitter.Panel>
-        <Button type="primary" disabled={status === 'pending'} onClick={request}>
+        <Button type="primary" disabled={status === 'loading'} onClick={request}>
           Request - {BASE_URL}
           {PATH}
         </Button>
