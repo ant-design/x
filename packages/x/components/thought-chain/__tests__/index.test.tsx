@@ -88,7 +88,7 @@ describe('ThoughtChain Component', () => {
       const [expandedKeys, setExpandedKeys] = React.useState<string[]>([]);
       return (
         <ThoughtChain
-          items={items}
+          items={items_collapsible}
           expandedKeys={expandedKeys}
           onExpand={(keys) => {
             setExpandedKeys(keys);
@@ -98,6 +98,7 @@ describe('ThoughtChain Component', () => {
       );
     };
     const { container } = render(<App />);
+
     const element = container.querySelectorAll<HTMLDivElement>('.ant-thought-chain-node-title')[0];
     fireEvent.click(element as Element);
     expect(onExpand).toHaveBeenCalledWith(['test1']);

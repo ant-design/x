@@ -187,7 +187,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx correctly 1`] = `
             class="ant-thought-chain-node-header"
           >
             <div
-              class="ant-thought-chain-node-title"
+              class="ant-thought-chain-node-title ant-thought-chain-node-collapsible"
             >
               Create Task: Write New Component
               <span
@@ -709,7 +709,7 @@ exports[`renders components/thought-chain/demo/controlled-collapsible.tsx correc
             class="ant-thought-chain-node-header"
           >
             <div
-              class="ant-thought-chain-node-title"
+              class="ant-thought-chain-node-title ant-thought-chain-node-collapsible"
             >
               Create Task: Develop New Component
               <span
@@ -932,7 +932,7 @@ exports[`renders components/thought-chain/demo/controlled-collapsible.tsx correc
             class="ant-thought-chain-node-header"
           >
             <div
-              class="ant-thought-chain-node-title"
+              class="ant-thought-chain-node-title ant-thought-chain-node-collapsible"
             >
               Check Task Execution Steps Completion
               <span
@@ -1449,7 +1449,7 @@ exports[`renders components/thought-chain/demo/customization.tsx correctly 1`] =
             class="ant-thought-chain-node-header"
           >
             <div
-              class="ant-thought-chain-node-title"
+              class="ant-thought-chain-node-title ant-thought-chain-node-collapsible"
             >
               Check Task Execution Steps Completion
               <span
@@ -2741,6 +2741,256 @@ exports[`renders components/thought-chain/demo/simple.tsx correctly 1`] = `
           class="ant-thought-chain-item-description"
         >
           Route Information
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders components/thought-chain/demo/single-row.tsx correctly 1`] = `
+<div
+  class="ant-card ant-card-bordered"
+  style="width:500px"
+>
+  <div
+    class="ant-card-body"
+  >
+    <div
+      class="ant-thought-chain ant-thought-chain-box"
+    >
+      <div
+        class="ant-thought-chain-node"
+      >
+        <div
+          class="ant-thought-chain-node-box"
+        >
+          <div
+            class="ant-thought-chain-node-header"
+          >
+            <div
+              class="ant-thought-chain-node-title ant-thought-chain-node-collapsible"
+            >
+              Create Task: Write New Component
+              <span
+                aria-label="right"
+                class="anticon anticon-right ant-thought-chain-node-collapse-icon"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="right"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  style="-ms-transform:rotate(90deg);transform:rotate(90deg)"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div
+            class="ant-thought-chain-node-content"
+          >
+            <div
+              class="ant-thought-chain-node-content-box"
+              style="background-color:rgba(0,0,0,.01);border-radius:8px;padding:10px;margin-block-start:10px;border:1px solid rgba(0,0,0,.04)"
+            >
+              <div
+                class="ant-flex ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+              >
+                <span
+                  class="ant-typography ant-typography-secondary"
+                >
+                  Creating folder for new component
+                </span>
+                <div
+                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                >
+                  <div
+                    class="ant-thought-chain-status"
+                  >
+                    <span
+                      aria-label="code"
+                      class="anticon anticon-code"
+                      role="img"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        data-icon="code"
+                        fill="currentColor"
+                        focusable="false"
+                        height="1em"
+                        viewBox="64 64 896 896"
+                        width="1em"
+                      >
+                        <path
+                          d="M516 673c0 4.4 3.4 8 7.5 8h185c4.1 0 7.5-3.6 7.5-8v-48c0-4.4-3.4-8-7.5-8h-185c-4.1 0-7.5 3.6-7.5 8v48zm-194.9 6.1l192-161c3.8-3.2 3.8-9.1 0-12.3l-192-160.9A7.95 7.95 0 00308 351v62.7c0 2.4 1 4.6 2.9 6.1L420.7 512l-109.8 92.2a8.1 8.1 0 00-2.9 6.1V673c0 6.8 7.9 10.5 13.1 6.1zM880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 728H184V184h656v656z"
+                        />
+                      </svg>
+                    </span>
+                  </div>
+                  <div
+                    class="ant-thought-chain-item-content"
+                  >
+                    <div
+                      class="ant-thought-chain-item-title"
+                    >
+                      Executing command
+                    </div>
+                    <div
+                      class="ant-thought-chain-item-description"
+                    >
+                      mkdir -p component
+                    </div>
+                  </div>
+                </div>
+                <span
+                  class="ant-typography ant-typography-secondary"
+                >
+                  Creating files needed for new component
+                </span>
+                <div
+                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                >
+                  <div
+                    class="ant-thought-chain-status"
+                  >
+                    <span
+                      aria-label="edit"
+                      class="anticon anticon-edit"
+                      role="img"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        data-icon="edit"
+                        fill="currentColor"
+                        focusable="false"
+                        height="1em"
+                        viewBox="64 64 896 896"
+                        width="1em"
+                      >
+                        <path
+                          d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"
+                        />
+                      </svg>
+                    </span>
+                  </div>
+                  <div
+                    class="ant-thought-chain-item-content"
+                  >
+                    <div
+                      class="ant-thought-chain-item-title"
+                    >
+                      Creating file
+                    </div>
+                    <div
+                      class="ant-thought-chain-item-description"
+                    >
+                      component/index.tsx
+                    </div>
+                  </div>
+                </div>
+                <span
+                  class="ant-typography ant-typography-secondary"
+                >
+                  Creating Chinese description file for new component
+                </span>
+                <div
+                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                >
+                  <div
+                    class="ant-thought-chain-status"
+                  >
+                    <span
+                      aria-label="edit"
+                      class="anticon anticon-edit"
+                      role="img"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        data-icon="edit"
+                        fill="currentColor"
+                        focusable="false"
+                        height="1em"
+                        viewBox="64 64 896 896"
+                        width="1em"
+                      >
+                        <path
+                          d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"
+                        />
+                      </svg>
+                    </span>
+                  </div>
+                  <div
+                    class="ant-thought-chain-item-content"
+                  >
+                    <div
+                      class="ant-thought-chain-item-title"
+                    >
+                      Creating file
+                    </div>
+                    <div
+                      class="ant-thought-chain-item-description"
+                    >
+                      component/index.zh-CN.md
+                    </div>
+                  </div>
+                </div>
+                <span
+                  class="ant-typography ant-typography-secondary"
+                >
+                  Creating English description file for new component
+                </span>
+                <div
+                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                >
+                  <div
+                    class="ant-thought-chain-status"
+                  >
+                    <span
+                      aria-label="edit"
+                      class="anticon anticon-edit"
+                      role="img"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        data-icon="edit"
+                        fill="currentColor"
+                        focusable="false"
+                        height="1em"
+                        viewBox="64 64 896 896"
+                        width="1em"
+                      >
+                        <path
+                          d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"
+                        />
+                      </svg>
+                    </span>
+                  </div>
+                  <div
+                    class="ant-thought-chain-item-content"
+                  >
+                    <div
+                      class="ant-thought-chain-item-title"
+                    >
+                      Creating file
+                    </div>
+                    <div
+                      class="ant-thought-chain-item-description"
+                    >
+                      component/index.en-US.md
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
