@@ -1,4 +1,5 @@
 import katex from 'katex';
+import { PluginsType } from '..';
 
 const inlineRuleNonStandard = /^(?:\${1,2}([^$\n]+?)\${1,2}|\\\((.+?)\\\))/;
 const blockRule = /^(\${1,2})\n([\s\S]+?)\n\1(?:\n|$)|^\\\[((?:\\.|[^\\])+?)\\\]/;
@@ -85,6 +86,8 @@ function blockKatex(renderer: IRender) {
   };
 }
 
-export default function (options = { output: 'mathml' }) {
+const Latex: PluginsType['Latex'] = (options = { output: 'mathml' }) => {
   return [inlineKatex(createRenderer(options, false)), blockKatex(createRenderer(options, true))];
-}
+};
+
+export default Latex;

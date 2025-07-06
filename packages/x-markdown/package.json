@@ -9,6 +9,7 @@
     "lint:script": "biome lint",
     "test": "jest --config .jest.js --no-cache --collect-coverage",
     "coverage": "jest --config .jest.js --no-cache --collect-coverage --coverage",
+    "plugin:meta": "tsx scripts/generate-plugin-meta.ts",
     "version": "tsx scripts/generate-version.ts"
   },
   "sideEffects": false,

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { PluginsType } from '..';
 
 type CodeProps = {
   type: string;
@@ -9,7 +10,7 @@ type CodeProps = {
 };
 
 let uuid = 0;
-const HighlightCode = () => {
+const HighlightCode: PluginsType['HighlightCode'] = () => {
   return {
     code(props: CodeProps) {
       const { lang, children } = props;
