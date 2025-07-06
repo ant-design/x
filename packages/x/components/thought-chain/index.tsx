@@ -37,7 +37,7 @@ const ThoughtChain: React.FC<ThoughtChainProps> & CompoundedComponent = (props) 
   });
 
   // ============================ Prefix ============================
-  const { getPrefixCls, direction } = useXProviderContext();
+  const { direction, getPrefixCls } = useXProviderContext();
 
   const prefixCls = getPrefixCls('thought-chain', customizePrefixCls);
 
@@ -87,7 +87,6 @@ const ThoughtChain: React.FC<ThoughtChainProps> & CompoundedComponent = (props) 
       <ThoughtChainContext.Provider
         value={{
           prefixCls,
-          direction,
           expandedKeys,
           onItemExpand,
           collapseMotion,

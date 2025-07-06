@@ -5,6 +5,7 @@ import type { CSSMotionProps } from 'rc-motion';
 import CSSMotion from 'rc-motion';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
+import { useXProviderContext } from '../x-provider';
 import type { ThoughtChainItem, ThoughtChainProps } from './interface';
 import Status from './Status';
 
@@ -15,7 +16,6 @@ export const ThoughtChainContext = React.createContext<{
   expandedKeys?: string[];
   collapseMotion?: CSSMotionProps;
   onItemExpand?: (curKey: string) => void;
-  direction?: GetProp<ConfigProviderProps, 'direction'>;
   styles?: ThoughtChainProps['styles'];
   classNames?: ThoughtChainProps['classNames'];
 }>(null!);
@@ -39,12 +39,13 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
   const {
     prefixCls,
     expandedKeys,
-    direction,
     collapseMotion,
     onItemExpand,
     classNames = {},
     styles = {},
   } = React.useContext(ThoughtChainContext) || {};
+
+  const { direction } = useXProviderContext();
 
   const { collapsible, key = id, icon, title, content, footer, status, description } = info;
 
