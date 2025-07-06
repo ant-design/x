@@ -1,5 +1,4 @@
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
-import type { ConfigProviderProps, GetProp } from 'antd';
 import classnames from 'classnames';
 import type { CSSMotionProps } from 'rc-motion';
 import CSSMotion from 'rc-motion';
