@@ -8,7 +8,8 @@
     "lint:md": "remark . -f -q",
     "lint:script": "biome lint",
     "test": "jest --config .jest.js --no-cache --collect-coverage",
-    "coverage": "jest --config .jest.js --no-cache --collect-coverage --coverage"
+    "coverage": "jest --config .jest.js --no-cache --collect-coverage --coverage",
+    "version": "tsx scripts/generate-version.ts"
   },
   "sideEffects": false,
   "main": "lib/index.js",
@@ -48,5 +49,6 @@
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
-  }
+  },
+  "repository": "https://github.com/ant-design/x.git"
 }
