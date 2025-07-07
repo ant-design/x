@@ -78,8 +78,8 @@ const Demo = () => {
 
   return (
     <Flex vertical gap="middle">
-      {filesList.map((file, index) => (
-        <Attachments.FileCard fileIcons={fileIcons} key={index} item={file} />
+      {filesList.map((file) => (
+        <Attachments.FileCard fileIcons={fileIcons} key={file.uid} item={file} />
       ))}
     </Flex>
   );
