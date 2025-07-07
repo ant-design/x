@@ -51,7 +51,8 @@ export interface SubItemType extends Omit<ItemType, 'subItems' | 'triggerSubMenu
 
 export type ActionItem = ItemType | SubItemType;
 
-export interface ActionsProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick'> {
+export interface ActionsProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick' | 'popupRender'> {
   /**
    * @desc 包含多个操作项的列表
    * @descEN A list containing multiple action items.
@@ -67,6 +68,11 @@ export interface ActionsProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
     keyPath: string[];
     domEvent: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>;
   }) => void;
+  /**
+   * @desc 底部额外的React节点内容
+   * @descEN Additional React node content at the bottom.
+   */
+  popupRender?: React.ReactNode;
   /**
    * @desc 下拉菜单的配置属性
    * @descEN Configuration properties for dropdown menu
@@ -105,6 +111,7 @@ const ForwardActions: React.FC<ActionsProps> = (props) => {
   const {
     items = [],
     onClick,
+    popupRender,
     dropdownProps = {},
     variant = 'borderless',
 
@@ -167,6 +174,7 @@ const ForwardActions: React.FC<ActionsProps> = (props) => {
           );
         })}
       </div>
+      {popupRender}
     </div>,
   );
 };

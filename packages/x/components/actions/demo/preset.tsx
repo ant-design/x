@@ -1,14 +1,67 @@
-import { AudioOutlined, CopyOutlined, LoadingOutlined } from '@ant-design/icons';
+import { AudioOutlined, CloseOutlined, CopyOutlined, LoadingOutlined } from '@ant-design/icons';
 import { Actions } from '@ant-design/x';
-import { message, Pagination } from 'antd';
+import { Button, Flex, message, Pagination } from 'antd';
+import { createStyles } from 'antd-style';
 import React, { useState } from 'react';
-
 import { FeedbackValue } from '../ActionsFeedback';
 
+const useStyles = createStyles(({ css }) => ({
+  gridContainer: css`
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin: 12px 0;
+  `,
+  tagItem: css`
+    background: #f5f5f5;
+    padding: 4px 8px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+  `,
+  submitButton: css`
+    width: 100px;
+    border-radius: 12px;
+  `,
+}));
+
 const Demo: React.FC = () => {
-  const [feedbackStatus, setFeedbackStatus] = useState<FeedbackValue>('LIKE');
+  const { styles } = useStyles();
+
+  // pagination
   const [curPage, setCurPage] = useState(1);
+  // feedback
+  const [feedbackStatus, setFeedbackStatus] = useState<FeedbackValue>('');
+  const [feedbackPopupOpen, setFeedbackPopupOpen] = useState(false);
+  // read
   const [isSpeaking, setIsSpeaking] = useState(false);
+
+  const feedbackPopupRender = (
+    <div style={{ border: '1px solid #eee', padding: 8, borderRadius: 8, marginTop: 12 }}>
+      <Flex justify="space-between" align="center">
+        <div>What are the main reasons you are satisfied? (Select all that apply)</div>
+        <CloseOutlined onClick={() => setFeedbackPopupOpen(false)} />
+      </Flex>
+
+      <div className={styles.gridContainer}>
+        {[
+          'Matches my style',
+          'Meets requirements',
+          'Clear images',
+          'Reasonable content',
+          'Aesthetic images',
+          'Others',
+        ].map((text) => (
+          <div key={text} className={styles.tagItem}>
+            {text}
+          </div>
+        ))}
+      </div>
+      <Button variant="solid" color="purple" className={styles.submitButton}>
+        Submit
+      </Button>
+    </div>
+  );
 
   const items = [
     <Pagination
@@ -21,7 +74,11 @@ const Demo: React.FC = () => {
     />,
     <Actions.Feedback
       value={feedbackStatus}
-      onChange={(val: FeedbackValue) => setFeedbackStatus(val)}
+      onChange={(val: FeedbackValue) => {
+        setFeedbackStatus(val);
+        setFeedbackPopupOpen(val === 'LIKE');
+        message.success(`Feedback: ${val}`);
+      }}
       key="feedback"
     />,
     {
@@ -51,7 +108,9 @@ const Demo: React.FC = () => {
     },
   ];
 
-  return <Actions items={items} />;
+  return (
+    <Actions items={items} popupRender={feedbackPopupOpen ? feedbackPopupRender : undefined} />
+  );
 };
 
 export default Demo;

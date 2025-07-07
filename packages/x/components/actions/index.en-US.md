@@ -33,6 +33,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | --- | --- | --- | --- | --- |
 | items | A list containing multiple action items | ([ActionItem](#actionitem) \| ReactNode)[] | - | - |
 | onClick | Callback function when an action item is clicked | function({ item, key, keyPath, domEvent }) | - | - |
+| popupRender | Additional React node content at the bottom | ReactNode | - | - |
 | dropdownProps | Configuration properties for dropdown menu | DropdownProps | - | - |
 | variant | Variant | `borderless` \| `border` | `borderless` | - |
 

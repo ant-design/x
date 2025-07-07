@@ -1,5 +1,5 @@
 import { DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined } from '@ant-design/icons';
-import { message, Space } from 'antd';
+import { Space } from 'antd';
 import { createStyles } from 'antd-style';
 import React from 'react';
 
@@ -34,10 +34,7 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
     <Space>
       {(value === '' || value === 'LIKE') && (
         <span
-          onClick={() => {
-            message.success('Like successful');
-            onChange?.(value === 'LIKE' ? '' : 'LIKE');
-          }}
+          onClick={() => onChange?.(value === 'LIKE' ? '' : 'LIKE')}
           className={styles.feedbackItem}
         >
           {value === 'LIKE' ? <LikeFilled /> : <LikeOutlined />}
@@ -46,10 +43,7 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
 
       {(value === '' || value === 'DISLIKE') && (
         <span
-          onClick={() => {
-            message.success('Dislike successful');
-            onChange?.(value === 'DISLIKE' ? '' : 'DISLIKE');
-          }}
+          onClick={() => onChange?.(value === 'DISLIKE' ? '' : 'DISLIKE')}
           className={styles.feedbackItem}
         >
           {value === 'DISLIKE' ? <DislikeFilled /> : <DislikeOutlined />}
