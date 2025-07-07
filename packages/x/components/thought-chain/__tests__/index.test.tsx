@@ -172,6 +172,7 @@ describe('ThoughtChain Component', () => {
     const App = () => {
       return (
         <XProvider
+          direction="rtl"
           thoughtChain={{
             className: 'test-thoughtChain',
             classNames: {
