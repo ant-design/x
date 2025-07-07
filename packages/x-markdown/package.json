@@ -3,13 +3,17 @@
   "version": "0.0.0",
   "scripts": {
     "compile": "father build",
+    "precompile": "npm run prestart",
     "tsc": "tsc --noEmit",
     "lint": "npm run tsc && npm run lint:script && npm run lint:md",
     "lint:md": "remark . -f -q",
     "lint:script": "biome lint",
+    "pretest": "npm run version",
+    "predist": "npm run version && npm run plugin:meta",
     "test": "jest --config .jest.js --no-cache --collect-coverage",
     "coverage": "jest --config .jest.js --no-cache --collect-coverage --coverage",
     "plugin:meta": "tsx scripts/generate-plugin-meta.ts",
+    "prestart": "npm run version",
     "version": "tsx scripts/generate-version.ts"
   },
   "sideEffects": false,
