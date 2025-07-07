@@ -1,5 +1,5 @@
 import katex from 'katex';
-import { PluginsType } from '..';
+import { PluginsType } from '../interface';
 
 const inlineRuleNonStandard = /^(?:\${1,2}([^$\n]+?)\${1,2}|\\\((.+?)\\\))/;
 const blockRule = /^(\${1,2})\n([\s\S]+?)\n\1(?:\n|$)|^\\\[((?:\\.|[^\\])+?)\\\]/;

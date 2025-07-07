@@ -1,4 +1,5 @@
 import katex from 'katex';
+
 const inlineRuleNonStandard = /^(?:\${1,2}([^$\n]+?)\${1,2}|\\\((.+?)\\\))/;
 const blockRule = /^(\${1,2})\n([\s\S]+?)\n\1(?:\n|$)|^\\\[((?:\\.|[^\\])+?)\\\]/;
 // fix katex 不支持渲染 align*: https://github.com/KaTeX/KaTeX/issues/1007
@@ -6,10 +7,11 @@ function replaceAlign(text) {
   return text ? text.replace(/\{align\*\}/g, '{aligned}') : text;
 }
 function createRenderer(options, newlineAfter) {
-  return token => katex.renderToString(token.text, {
-    ...options,
-    displayMode: token.displayMode
-  }) + (newlineAfter ? '\n' : '');
+  return (token) =>
+    katex.renderToString(token.text, {
+      ...options,
+      displayMode: token.displayMode,
+    }) + (newlineAfter ? '\n' : '');
 }
 function inlineKatex(renderer) {
   const ruleReg = inlineRuleNonStandard;
@@ -18,7 +20,7 @@ function inlineKatex(renderer) {
     level: 'inline',
     start(src) {
       if (!src.includes('$') && !src.includes('\\(')) return;
-      const indices = [src.indexOf('$'), src.indexOf('\\(')].filter(idx => idx !== -1);
+      const indices = [src.indexOf('$'), src.indexOf('\\(')].filter((idx) => idx !== -1);
       if (indices.length === 0) return;
       const katexIndex = Math.min(...indices);
       const possibleKatex = src.slice(katexIndex);
@@ -34,11 +36,11 @@ function inlineKatex(renderer) {
           type: 'inlineKatex',
           raw: match[0],
           text,
-          displayMode: false
+          displayMode: false,
         };
       }
     },
-    renderer
+    renderer,
   };
 }
 function blockKatex(renderer) {
@@ -53,15 +55,18 @@ function blockKatex(renderer) {
           type: 'blockKatex',
           raw: match[0],
           text,
-          displayMode: true
+          displayMode: true,
         };
       }
     },
-    renderer
+    renderer,
   };
 }
-export default function (options = {
-  output: 'mathml'
-}) {
+const Latex = (
+  options = {
+    output: 'mathml',
+  },
+) => {
   return [inlineKatex(createRenderer(options, false)), blockKatex(createRenderer(options, true))];
-}
+};
+export default Latex;
