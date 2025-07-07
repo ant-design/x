@@ -24,6 +24,9 @@ export default defineConfig({
       'src/plugins': {
         output: 'plugins',
       },
+      'src/themes': {
+        output: 'themes',
+      },
     },
   },
   cjs: {
