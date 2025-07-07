@@ -19,7 +19,7 @@ interface XMarkdownProps {
   components?: Record<string, any>;
   streaming?: SteamingOption;
   plugins?: MarkedExtension;
-  prefixCls?: string;
+  rootClassName?: string;
   className?: string;
   style?: CSSProperties;
 }

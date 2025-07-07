@@ -34,3 +34,15 @@ $('lib/plugins/*')
 
 // eslint-disable-next-line no-console
 console.log(chalk.green('✨ `lib` directory is valid.'));
+
+// themes
+$('lib/theme').isDirectory().hasFile('index.js').hasFile('index.d.ts');
+
+$('lib/theme/*')
+  .filter((filename: string) => !filename.endsWith('index.js') && !filename.endsWith('index.d.ts'))
+  .isDirectory()
+  .hasFile('index.js')
+  .hasFile('index.d.ts');
+
+// eslint-disable-next-line no-console
+console.log(chalk.green('✨ `theme` directory is valid.'));

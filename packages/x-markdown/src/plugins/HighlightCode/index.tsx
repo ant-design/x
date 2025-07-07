@@ -1,24 +1,12 @@
-import React, { ReactNode } from 'react';
-import { Prism as SyntaxHighlighter, SyntaxHighlighterProps } from 'react-syntax-highlighter';
+import React from 'react';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import useXProviderContext from '../../hooks/use-x-provider-context';
 import useStyle from './style';
 import classnames from 'classnames';
+import type { PluginsType } from '../type';
 
-type HighlightCodeType = 'header' | 'headerTitle';
-
-interface HighlightCodeProps {
-  lang: string;
-  children: string;
-  header?: ReactNode | null;
-  prefixCls?: string;
-  style?: React.CSSProperties;
-  className?: string;
-  classNames?: Partial<Record<HighlightCodeType, string>>;
-  highlightProps?: Partial<SyntaxHighlighterProps>;
-}
-
-const HighlightCode = (props: HighlightCodeProps) => {
+const HighlightCode: PluginsType['HighlightCode'] = (props) => {
   const {
     lang,
     children,
