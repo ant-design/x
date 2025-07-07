@@ -8,5 +8,15 @@
     "plugin": "Latex",
     "desc": "渲染数学公式Latex语法。",
     "descEn": "Rendering mathematical formulas using Latex syntax."
+  },
+  {
+    "plugin": "Mermaid",
+    "desc": "渲染 Mermaid 图表。",
+    "descEn": "Rendering the Mermaid Chart."
+  },
+  {
+    "plugin": "Plugins",
+    "desc": "自定义插件。",
+    "descEn": "Custom plugins."
   }
 ]

@@ -3,11 +3,11 @@ order: 1
 title: 介绍
 ---
 
-`@ant-design/x-markdown` 旨在提供流式友好、高性能和强拓展性的Markdown渲染器。提供流式渲染公式、脚注、代码高亮等能力。
+`@ant-design/x-markdown` 旨在提供流式友好、强拓展性和高性能的 Markdown 渲染器。提供流式渲染公式、脚注、代码高亮等能力。
 
 ## ✨ 特性
 
-使用 [`marked`](https://github.com/markedjs/marked) 作为基础markdown渲染器，具备marked的所有特性。
+使用 [`marked`](https://github.com/markedjs/marked) 作为基础 markdown 渲染器，具备marked的所有特性。
 
 - 🚀 为速度而生。
 - 🤖 流式友好，大模型Markdown渲染解决方案。
@@ -20,13 +20,11 @@ title: 介绍
 
 ## 兼容环境
 
-为了提高整体markdown对于系统的兼容性支持，可以自定义polyfill，来提高兼容性。
+与 `marked` 保持一致。为了提高整体markdown对于系统的兼容性支持，可以自定义polyfill，来提高兼容性。
 
-| 兼容模式                 | Chrome     | IOS        | 安卓  | 鸿蒙 |
-| ------------------------ | ---------- | ---------- | ----- | ---- |
-| ✅ 原生兼容              | Chrome 92+ | iOS 15.2+  | -     | -    |
-| 🧥 复古模式: polyfill 前 | Chrome 92  | iOS 15.2   | -     | -    |
-| 🧥 复古模式: polyfill 后 | Chrome 92  | iOS 11.2.5 | 7.1.1 | 5.0+ |
+| 兼容模式    | Chrome     | IOS       |
+| ----------- | ---------- | --------- |
+| ✅ 原生兼容 | Chrome 92+ | iOS 15.2+ |
 
 ## 支持的 Markdown 规范
 

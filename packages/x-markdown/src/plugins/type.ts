@@ -9,4 +9,9 @@ export type PluginsType = {
    * @descEN Highlight the rendering code.
    */
   HighlightCode: () => any;
+  /**
+   * @desc 渲染 Mermaid 图表。
+   * @descEN Rendering the Mermaid Chart.
+   */
+  Mermaid: () => any;
 };

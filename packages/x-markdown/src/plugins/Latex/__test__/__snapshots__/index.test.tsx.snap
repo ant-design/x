@@ -3,18 +3,88 @@
 exports[`LaTeX Plugin testcase: should render block LaTeX with $$..$$ syntax 1`] = `
 <div>
   <div>
-    <div
-      class="xmarkdown-p"
-    >
+    <p>
       This is an block LaTeX: 
-    </div>
-    <div
-      class="xmarkdown-p"
-    >
+    </p>
+    <p>
       <span
         class="katex"
-      />
-    </div>
+      >
+        <math
+          xmlns="http://www.w3.org/1998/Math/MathML"
+        >
+          <semantics>
+            <mrow>
+              <mi
+                mathvariant="normal"
+              >
+                Δ
+              </mi>
+              <msup>
+                <mi>
+                  t
+                </mi>
+                <mo
+                  lspace="0em"
+                  mathvariant="normal"
+                  rspace="0em"
+                >
+                  ′
+                </mo>
+              </msup>
+              <mo>
+                =
+              </mo>
+              <mfrac>
+                <mrow>
+                  <mi
+                    mathvariant="normal"
+                  >
+                    Δ
+                  </mi>
+                  <mi>
+                    t
+                  </mi>
+                </mrow>
+                <msqrt>
+                  <mrow>
+                    <mn>
+                      1
+                    </mn>
+                    <mo>
+                      −
+                    </mo>
+                    <mfrac>
+                      <msup>
+                        <mi>
+                          v
+                        </mi>
+                        <mn>
+                          2
+                        </mn>
+                      </msup>
+                      <msup>
+                        <mi>
+                          c
+                        </mi>
+                        <mn>
+                          2
+                        </mn>
+                      </msup>
+                    </mfrac>
+                  </mrow>
+                </msqrt>
+              </mfrac>
+            </mrow>
+            <annotation
+              encoding="application/x-tex"
+            >
+              \\Delta t' = \\frac{\\Delta t}{\\sqrt{1 - \\frac{v^2}{c^2}}}
+            </annotation>
+          </semantics>
+        </math>
+      </span>
+    </p>
   </div>
 </div>
 `;
@@ -22,22 +92,18 @@ exports[`LaTeX Plugin testcase: should render block LaTeX with $$..$$ syntax 1`]
 exports[`LaTeX Plugin testcase: should render block LaTeX with \\[..\\] syntax 1`] = `
 <div>
   <div>
-    <div
-      class="xmarkdown-p"
-    >
+    <p>
       This is an block LaTeX: 
-    </div>
+    </p>
     <pre>
       <code>
           \\[
       </code>
     </pre>
-    <div
-      class="xmarkdown-p"
-    >
+    <p>
       \\Delta t' = \\frac{\\Delta t}{\\sqrt{1 - \\frac{v^2}{c^2}}}
-      ]
-    </div>
+]
+    </p>
   </div>
 </div>
 `;
@@ -48,38 +114,244 @@ exports[`LaTeX Plugin testcase: should render inline LaTeX with $..$ syntax 1`] 
     <h3>
       Latex
     </h3>
-    <div
-      class="xmarkdown-p"
-    >
+    <p>
       inline standard: 
       <span
         class="katex"
-      />
-    </div>
-    <div
-      class="xmarkdown-p"
-    >
+      >
+        <math
+          xmlns="http://www.w3.org/1998/Math/MathML"
+        >
+          <semantics>
+            <mrow>
+              <mfrac>
+                <mrow>
+                  <mi>
+                    d
+                  </mi>
+                  <mi>
+                    f
+                  </mi>
+                </mrow>
+                <mrow>
+                  <mi>
+                    d
+                  </mi>
+                  <mi>
+                    t
+                  </mi>
+                </mrow>
+              </mfrac>
+            </mrow>
+            <annotation
+              encoding="application/x-tex"
+            >
+              \\frac{df}{dt}
+            </annotation>
+          </semantics>
+        </math>
+      </span>
+    </p>
+    <p>
       block standard：
-    </div>
+    </p>
     <span
       class="katex"
-    />
-    <div
-      class="xmarkdown-p"
     >
+      <math
+        display="block"
+        xmlns="http://www.w3.org/1998/Math/MathML"
+      >
+        <semantics>
+          <mrow>
+            <mi
+              mathvariant="normal"
+            >
+              Δ
+            </mi>
+            <msup>
+              <mi>
+                t
+              </mi>
+              <mo
+                lspace="0em"
+                mathvariant="normal"
+                rspace="0em"
+              >
+                ′
+              </mo>
+            </msup>
+            <mo>
+              =
+            </mo>
+            <mfrac>
+              <mrow>
+                <mi
+                  mathvariant="normal"
+                >
+                  Δ
+                </mi>
+                <mi>
+                  t
+                </mi>
+              </mrow>
+              <msqrt>
+                <mrow>
+                  <mn>
+                    1
+                  </mn>
+                  <mo>
+                    −
+                  </mo>
+                  <mfrac>
+                    <msup>
+                      <mi>
+                        v
+                      </mi>
+                      <mn>
+                        2
+                      </mn>
+                    </msup>
+                    <msup>
+                      <mi>
+                        c
+                      </mi>
+                      <mn>
+                        2
+                      </mn>
+                    </msup>
+                  </mfrac>
+                </mrow>
+              </msqrt>
+            </mfrac>
+          </mrow>
+          <annotation
+            encoding="application/x-tex"
+          >
+            \\Delta t' = \\frac{\\Delta t}{\\sqrt{1 - \\frac{v^2}{c^2}}}
+          </annotation>
+        </semantics>
+      </math>
+    </span>
+    <p>
       inline: 
       <span
         class="katex"
-      />
-    </div>
-    <div
-      class="xmarkdown-p"
-    >
+      >
+        <math
+          xmlns="http://www.w3.org/1998/Math/MathML"
+        >
+          <semantics>
+            <mrow>
+              <mfrac>
+                <mrow>
+                  <mi>
+                    d
+                  </mi>
+                  <mi>
+                    f
+                  </mi>
+                </mrow>
+                <mrow>
+                  <mi>
+                    d
+                  </mi>
+                  <mi>
+                    t
+                  </mi>
+                </mrow>
+              </mfrac>
+            </mrow>
+            <annotation
+              encoding="application/x-tex"
+            >
+              \\frac{df}{dt}
+            </annotation>
+          </semantics>
+        </math>
+      </span>
+    </p>
+    <p>
       block: 
-    </div>
+    </p>
     <span
       class="katex"
-    />
+    >
+      <math
+        display="block"
+        xmlns="http://www.w3.org/1998/Math/MathML"
+      >
+        <semantics>
+          <mrow>
+            <mi
+              mathvariant="normal"
+            >
+              Δ
+            </mi>
+            <msup>
+              <mi>
+                t
+              </mi>
+              <mo
+                lspace="0em"
+                mathvariant="normal"
+                rspace="0em"
+              >
+                ′
+              </mo>
+            </msup>
+            <mo>
+              =
+            </mo>
+            <mfrac>
+              <mrow>
+                <mi
+                  mathvariant="normal"
+                >
+                  Δ
+                </mi>
+                <mi>
+                  t
+                </mi>
+              </mrow>
+              <msqrt>
+                <mrow>
+                  <mn>
+                    1
+                  </mn>
+                  <mo>
+                    −
+                  </mo>
+                  <mfrac>
+                    <msup>
+                      <mi>
+                        v
+                      </mi>
+                      <mn>
+                        2
+                      </mn>
+                    </msup>
+                    <msup>
+                      <mi>
+                        c
+                      </mi>
+                      <mn>
+                        2
+                      </mn>
+                    </msup>
+                  </mfrac>
+                </mrow>
+              </msqrt>
+            </mfrac>
+          </mrow>
+          <annotation
+            encoding="application/x-tex"
+          >
+            \\Delta t' = \\frac{\\Delta t}{\\sqrt{1 - \\frac{v^2}{c^2}}}
+          </annotation>
+        </semantics>
+      </math>
+    </span>
   </div>
 </div>
 `;
@@ -87,14 +359,43 @@ exports[`LaTeX Plugin testcase: should render inline LaTeX with $..$ syntax 1`] 
 exports[`LaTeX Plugin testcase: should render inline LaTeX with \\(..\\) syntax 1`] = `
 <div>
   <div>
-    <div
-      class="xmarkdown-p"
-    >
+    <p>
       This is an inline LaTeX: 
       <span
         class="katex"
-      />
-    </div>
+      >
+        <math
+          xmlns="http://www.w3.org/1998/Math/MathML"
+        >
+          <semantics>
+            <mrow>
+              <mi>
+                E
+              </mi>
+              <mo>
+                =
+              </mo>
+              <mi>
+                m
+              </mi>
+              <msup>
+                <mi>
+                  c
+                </mi>
+                <mn>
+                  2
+                </mn>
+              </msup>
+            </mrow>
+            <annotation
+              encoding="application/x-tex"
+            >
+              E=mc^2
+            </annotation>
+          </semantics>
+        </math>
+      </span>
+    </p>
   </div>
 </div>
 `;

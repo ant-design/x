@@ -58,6 +58,15 @@ export default defineConfig({
           filename: 'latex',
         },
       },
+      'src/plugins/Mermaid/index.tsx': {
+        name: 'Mermaid',
+        sourcemap: true,
+        generateUnminified: true,
+        output: {
+          path: 'dist/',
+          filename: 'mermaid',
+        },
+      },
     },
     externals: {
       react: 'React',

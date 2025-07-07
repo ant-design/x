@@ -1,6 +1,5 @@
 import { XMarkdown } from '@ant-design/x-markdown';
 import React from 'react';
-import './index.css';
 
 const content = `
 <div align="center"><img height="180" src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*eco6RrQhxbMAAAAAAAAAAAAADgCCAQ/original"><h3>X-Markdown</h3><p>Streaming Markdown Renderer.</p>
@@ -32,6 +31,6 @@ pnpm add @ant-design/x-markdown
 
 `;
 
-const App = () => <XMarkdown content={content} className="xmarkdown-body" allowHtml={true} />;
+const App = () => <XMarkdown content={content} className="xmarkdown-body" />;
 
 export default App;

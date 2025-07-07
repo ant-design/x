@@ -1,4 +1,4 @@
-import PluginMeta from '@ant-design/x-markdown/es/version/plugin-meta.json';
+import PluginMeta from '@ant-design/x-markdown/version/plugin-meta.json';
 import { List } from 'antd';
 import { createStyles, css } from 'antd-style';
 import classnames from 'classnames';
