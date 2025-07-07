@@ -57,8 +57,7 @@ const items_collapsible: ThoughtChainItem[] = [
 
 describe('ThoughtChain Component', () => {
   mountTest(() => <ThoughtChain />);
-
-  rtlTest(() => <ThoughtChain items={items} />);
+  rtlTest(() => <ThoughtChain />);
 
   themeTest(() => <ThoughtChain items={items} />);
 
