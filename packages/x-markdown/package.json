@@ -13,7 +13,8 @@
     "pretest": "echo \"true\"  && exit 0",
     "test": "jest --config .jest.js --no-cache --collect-coverage",
     "coverage": "jest --config .jest.js --no-cache --collect-coverage --coverage",
-    "version": "tsx scripts/generate-version.ts"
+    "version": "tsx scripts/generate-version.ts",
+    "test:dekko": "tsx ./tests/dekko/index.test.ts"
   },
   "sideEffects": false,
   "main": "lib/index.js",
