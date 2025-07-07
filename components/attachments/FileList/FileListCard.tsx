@@ -12,14 +12,22 @@ import {
 import { Image, type ImageProps } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
-import type { Attachment } from '..';
 import { useXProviderContext } from '../../x-provider';
+import type { Attachment } from '..';
 import { AttachmentContext } from '../context';
 import useStyle from '../style';
 import { previewImage } from '../util';
 import AudioIcon from './AudioIcon';
 import Progress from './Progress';
 import VideoIcon from './VideoIcon';
+
+export interface AttachmentFilesIcon {
+  ext: string[];
+  color: string;
+  icon: React.ReactElement;
+}
+
+export type AttachmentFilesIcons = AttachmentFilesIcon[];
 
 export interface FileListCardProps {
   prefixCls?: string;
@@ -28,6 +36,7 @@ export interface FileListCardProps {
   className?: string;
   style?: React.CSSProperties;
   imageProps?: ImageProps;
+  fileIcons?: AttachmentFilesIcons;
 }
 
 const EMPTY = '\u00A0';
@@ -36,11 +45,7 @@ const DEFAULT_ICON_COLOR = '#8c8c8c';
 
 const IMG_EXTS = ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp', 'svg'];
 
-const PRESET_FILE_ICONS: {
-  ext: string[];
-  color: string;
-  icon: React.ReactElement;
-}[] = [
+const PRESET_FILE_ICONS: AttachmentFilesIcons = [
   {
     icon: <FileExcelFilled />,
     color: '#22b35e',
@@ -106,7 +111,15 @@ function getSize(size: number) {
 }
 
 function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) {
-  const { prefixCls: customizePrefixCls, item, onRemove, className, style, imageProps } = props;
+  const {
+    prefixCls: customizePrefixCls,
+    item,
+    onRemove,
+    className,
+    style,
+    imageProps,
+    fileIcons,
+  } = props;
   const context = React.useContext(AttachmentContext);
   const { disabled } = context || {};
 
@@ -149,7 +162,8 @@ function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) 
 
   // ============================== Icon ==============================
   const [icon, iconColor] = React.useMemo(() => {
-    for (const { ext, icon, color } of PRESET_FILE_ICONS) {
+    const iconOptions = fileIcons || PRESET_FILE_ICONS;
+    for (const { ext, icon, color } of iconOptions) {
       if (matchExt(nameSuffix, ext)) {
         return [icon, color];
       }
