@@ -4,7 +4,7 @@ import 'github-markdown-css/github-markdown-light.css';
 import './plugin.css';
 
 const content = `
-### [Custom Plugin]()
+### Custom Plugin
 
 Footnotes: Bubble [^1]. Conversations [^2].
 `;
@@ -26,7 +26,6 @@ const App = () => {
           type: 'footnote',
           raw: content,
           text: content?.replace(/^\[\^(\d+)\]/g, '$1'),
-          renderType: 'component',
         };
       }
     },

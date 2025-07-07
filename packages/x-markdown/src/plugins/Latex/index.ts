@@ -1,37 +1,37 @@
-import katex from 'katex';
-import { PluginsType } from '../type';
+import { PluginsType } from '../interface';
+import katex, { type KatexOptions } from 'katex';
 
 const inlineRuleNonStandard = /^(?:\${1,2}([^$\n]+?)\${1,2}|\\\((.+?)\\\))/;
 const blockRule = /^(\${1,2})\n([\s\S]+?)\n\1(?:\n|$)|^\\\[((?:\\.|[^\\])+?)\\\]/;
 
-type IOptions = {
-  nonStandard?: boolean;
-  [key: string]: unknown;
+type Options = {
+  katexOptions?: KatexOptions;
+  replaceAlignStart?: boolean;
 };
 
-type IToken = {
+type Token = {
   text: string;
   displayMode: boolean;
 };
 
-type IRender = (token: IToken) => string;
+type Render = (token: Token) => string;
 
 type ILevel = 'inline' | 'block';
 
-// fix katex 不支持渲染 align*: https://github.com/KaTeX/KaTeX/issues/1007
+// fix katex not support align*: https://github.com/KaTeX/KaTeX/issues/1007
 function replaceAlign(text: string) {
   return text ? text.replace(/\{align\*\}/g, '{aligned}') : text;
 }
 
-function createRenderer(options: IOptions, newlineAfter: boolean) {
-  return (token: IToken) =>
+function createRenderer(options: KatexOptions, newlineAfter: boolean) {
+  return (token: Token) =>
     katex.renderToString(token.text, {
       ...options,
       displayMode: token.displayMode,
     }) + (newlineAfter ? '\n' : '');
 }
 
-function inlineKatex(renderer: IRender) {
+function inlineKatex(renderer: Render, replaceAlignStart: boolean) {
   const ruleReg = inlineRuleNonStandard;
   return {
     name: 'inlineKatex',
@@ -53,7 +53,10 @@ function inlineKatex(renderer: IRender) {
     tokenizer(src: string) {
       const match = src.match(inlineRuleNonStandard);
       if (match) {
-        const text = replaceAlign((match[1] || match[2]).trim());
+        let text = (match[1] || match[2]).trim();
+        if (replaceAlignStart) {
+          text = replaceAlign(text);
+        }
         return {
           type: 'inlineKatex',
           raw: match[0],
@@ -66,14 +69,17 @@ function inlineKatex(renderer: IRender) {
   };
 }
 
-function blockKatex(renderer: IRender) {
+function blockKatex(renderer: Render, replaceAlignStart: boolean) {
   return {
     name: 'blockKatex',
     level: 'block' as ILevel,
     tokenizer(src: string) {
       const match = src.match(blockRule);
       if (match) {
-        const text = replaceAlign(match[2] || match[3].trim());
+        let text = replaceAlign(match[2] || match[3].trim());
+        if (replaceAlignStart) {
+          text = replaceAlign(text);
+        }
         return {
           type: 'blockKatex',
           raw: match[0],
@@ -86,8 +92,15 @@ function blockKatex(renderer: IRender) {
   };
 }
 
-const Latex: PluginsType['Latex'] = (options = { output: 'mathml' }) => {
-  return [inlineKatex(createRenderer(options, false)), blockKatex(createRenderer(options, true))];
+const Latex: PluginsType['Latex'] = (options?: Options) => {
+  const { replaceAlignStart = false, katexOptions = { output: 'mathml' } } = options || {};
+
+  const inlineRenderer = createRenderer(katexOptions, false);
+  const blockRenderer = createRenderer(katexOptions, true);
+  return [
+    inlineKatex(inlineRenderer, replaceAlignStart),
+    blockKatex(blockRenderer, replaceAlignStart),
+  ];
 };
 
 export default Latex;

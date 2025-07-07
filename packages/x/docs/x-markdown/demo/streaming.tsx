@@ -299,8 +299,13 @@ const App = () => {
               : (content) => (
                   <XMarkdown
                     content={content}
-                    components={HighlightCode()}
-                    className="xmarkdown-body"
+                    components={{
+                      code: (props: { class: string; children: string }) => {
+                        const { class: className, children } = props;
+                        const lang = className?.replace('language-', '');
+                        return <HighlightCode lang={lang}>{children}</HighlightCode>;
+                      },
+                    }}
                     streaming={{ hasNextChunk: hasNextChunk && enableStreaming }}
                   />
                 ),

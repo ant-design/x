@@ -6,83 +6,83 @@ const testCases = [
   {
     title: 'Render basic text',
     markdown: 'Hello world!',
-    html: '<div class="xmarkdown-p">Hello world!</div>',
+    html: '<p>Hello world!</p>\n',
   },
   {
     title: 'Render heading1',
     markdown: '# Heading 1',
-    html: '<h1>Heading 1</h1>',
+    html: '<h1>Heading 1</h1>\n',
   },
   {
     title: 'Render heading2',
     markdown: '## Heading 2',
-    html: '<h2>Heading 2</h2>',
+    html: '<h2>Heading 2</h2>\n',
   },
   {
     title: 'Render heading6',
     markdown: '###### Heading 6',
-    html: '<h6>Heading 6</h6>',
+    html: '<h6>Heading 6</h6>\n',
   },
   {
     title: 'Render unordered list',
     markdown: '- Item 1\n- Item 2\n- Item 3',
-    html: '<ul><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul>',
+    html: '<ul>\n<li>Item 1</li>\n<li>Item 2</li>\n<li>Item 3</li>\n</ul>\n',
   },
   {
     title: 'Render ordered list',
     markdown: '1. First\n2. Second\n3. Third',
-    html: '<ol start="1"><li>First</li><li>Second</li><li>Third</li></ol>',
+    html: '<ol>\n<li>First</li>\n<li>Second</li>\n<li>Third</li>\n</ol>\n',
   },
   {
     title: 'Render code span',
     markdown: 'this is `codespan`',
-    html: '<div class="xmarkdown-p">this is <code>codespan</code></div>',
+    html: '<p>this is <code>codespan</code></p>\n',
   },
   {
     title: 'Render code block',
     markdown: "```javascript\nconsole.log('hello');\n```",
-    html: '<pre><code class="language-javascript" lang="javascript">console.log(\'hello\');</code></pre>',
+    html: '<pre><code class="language-javascript">console.log(\'hello\');\n</code></pre>\n',
   },
   {
     title: 'Render link',
     markdown: '[Google](https://www.google.com)',
-    html: '<div class="xmarkdown-p"><a href="https://www.google.com">Google</a></div>',
+    html: '<p><a href="https://www.google.com">Google</a></p>\n',
   },
   {
     title: 'Render link with title',
     markdown: '[Google]: https://www.google.com "google"\n[Google]',
-    html: '<div class="xmarkdown-p"><a href="https://www.google.com" title="google">Google</a></div>',
+    html: '<p><a href="https://www.google.com" title="google">Google</a></p>\n',
   },
   {
     title: 'Render image',
     markdown: '![logo](https://example.com/logo.png)',
-    html: '<div class="xmarkdown-p"><img alt="logo" src="https://example.com/logo.png"></div>',
+    html: '<p><img alt="logo" src="https://example.com/logo.png"></p>\n',
   },
   {
     title: 'Render bold and italic',
     markdown: 'This is **bold** and *italic* text',
-    html: '<div class="xmarkdown-p">This is <strong>bold</strong> and <em>italic</em> text</div>',
+    html: '<p>This is <strong>bold</strong> and <em>italic</em> text</p>\n',
   },
   {
     title: 'Render blockquote',
     markdown: '> This is a quote',
-    html: '<blockquote><div class="xmarkdown-p">This is a quote</div></blockquote>',
+    html: '<blockquote>\n<p>This is a quote</p>\n</blockquote>\n',
   },
   {
     title: 'Render horizontal rule',
     markdown: '---',
-    html: '<hr>',
+    html: '<hr>\n',
   },
   {
     title: 'Render mixed formats',
     markdown:
       '# Title\n\nThis is a [link](https://example.com) and **bold** text\n\n- List item 1\n- List item 2',
-    html: '<h1>Title</h1><div class="xmarkdown-p">This is a <a href="https://example.com">link</a> and <strong>bold</strong> text</div><ul><li>List item 1</li><li>List item 2</li></ul>',
+    html: '<h1>Title</h1>\n<p>This is a <a href="https://example.com">link</a> and <strong>bold</strong> text</p>\n<ul>\n<li>List item 1</li>\n<li>List item 2</li>\n</ul>\n',
   },
   {
     title: 'Render del',
     markdown: '~del~',
-    html: '<div class="xmarkdown-p"><del>del</del></div>',
+    html: '<p><del>del</del></p>\n',
   },
   {
     title: 'Render table',
@@ -91,22 +91,22 @@ const testCases = [
   | January  | $250    |
   | February | $80     |
   | March    | $420    |`,
-    html: '<table><thead><tr><th>Month</th><th>Savings</th></tr></thead><tbody><tr><td>January</td><td>$250</td></tr><tr><td>February</td><td>$80</td></tr><tr><td>March</td><td>$420</td></tr></tbody></table>',
+    html: '<table>\n<thead>\n<tr>\n<th>Month</th>\n<th>Savings</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>January</td>\n<td>$250</td>\n</tr>\n<tr>\n<td>February</td>\n<td>$80</td>\n</tr>\n<tr>\n<td>March</td>\n<td>$420</td>\n</tr>\n</tbody></table>\n',
   },
   {
     title: 'Render checkbox',
     markdown: '- [ ] checkbox',
-    html: '<ul><li><input disabled="" type="checkbox">checkbox</li></ul>',
+    html: '<ul>\n<li><input disabled="" type="checkbox"> checkbox</li>\n</ul>\n',
   },
   {
     title: 'Render escape',
     markdown: '\\>',
-    html: '<div class="xmarkdown-p">&gt;</div>',
+    html: '<p>&gt;</p>\n',
   },
   {
     title: 'Render br',
     markdown: 'br: <br>',
-    html: '<div class="xmarkdown-p">br: <br></div>',
+    html: '<p>br: <br></p>\n',
   },
   {
     title: 'Render Html',
@@ -116,7 +116,7 @@ const testCases = [
   {
     title: 'Render Html',
     markdown: 'inline: <span>hello</span>',
-    html: '<div class="xmarkdown-p">inline: <span>hello</span></div>',
+    html: '<p>inline: <span>hello</span></p>\n',
   },
 ];
 
@@ -138,9 +138,9 @@ describe('XMarkdown', () => {
     expect(container).toBeEmptyDOMElement();
   });
 
-  testCases.forEach(({ markdown, title, html, options }: ITestCase) => {
+  testCases.forEach(({ markdown, title, html }: ITestCase) => {
     it(`common markdown case: ${title}`, () => {
-      const { container } = render(<XMarkdown content={markdown} options={options} />);
+      const { container } = render(<XMarkdown content={markdown} />);
 
       expect((container.firstChild as HTMLElement)?.innerHTML).toBe(html);
     });
@@ -148,12 +148,12 @@ describe('XMarkdown', () => {
 
   it(`render custom components`, () => {
     const markdown = `custom component <Line>This is Line</Line>`;
-    const html = `<div class=\"xmarkdown-p\">custom component <span>change Line to span</span></div>`;
+    const html = `<p>custom component <span>change Line to span</span></p>\n`;
     const { container } = render(
       <XMarkdown
         content={markdown}
         components={{
-          Line: () => {
+          line: () => {
             return <span>change Line to span</span>;
           },
         }}
@@ -169,7 +169,7 @@ describe('XMarkdown', () => {
         token.depth++;
       }
     };
-    const { container } = render(<XMarkdown content="# heading" walkTokens={walkTokens} />);
+    const { container } = render(<XMarkdown content="# heading" plugins={{ walkTokens }} />);
 
     expect(container.querySelector('h2')).toBeInTheDocument();
   });

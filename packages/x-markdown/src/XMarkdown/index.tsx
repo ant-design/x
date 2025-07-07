@@ -1,49 +1,47 @@
-import { Marked, walkTokens } from 'marked';
 import React from 'react';
-import { Parser, createMarkdownConfig } from './core';
-import useStreaming from './hooks/useStreaming';
+import { useStreaming } from './hooks';
 import { XMarkdownProps } from './interface';
+import { Parser, Renderer } from './core';
+import classnames from 'classnames';
+import useXProviderContext from '../hooks/use-x-provider-context';
+import useStyle from './style';
 
 const XMarkdown: React.FC<XMarkdownProps> = (props) => {
   const {
     content,
     children,
-    options,
+    gfm,
+    breaks,
     streaming,
     plugins,
     components,
-    walkTokens: csWalkToken,
+    prefixCls: customizePrefixCls,
     className,
     style,
   } = props;
 
-  // ============================ Render ============================
+  // ============================ style ============================
+  const { getPrefixCls } = useXProviderContext();
+  const prefixCls = getPrefixCls('xmarkdown', customizePrefixCls);
+  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+
+  const mergedCls = classnames(prefixCls, className, hashId, cssVarCls);
+
+  // ============================ Streaming ============================
   const displayContent = useStreaming(content || children || '', streaming);
+
+  // ============================ Render ============================
   if (!displayContent) return null;
 
-  const config = createMarkdownConfig(options, plugins, components, streaming);
+  const parser = new Parser({ gfm, breaks, plugins });
+  const renderer = new Renderer({ components });
 
-  const markedInstance = new Marked({
-    breaks: config.break,
-    gfm: config.gfm,
-    extensions: config.plugins,
-  });
+  const htmlString = parser.parse(displayContent);
 
-  if (markedInstance.defaults.extensions) {
-    config.extensions = markedInstance.defaults.extensions;
-  }
-
-  const parser = new Parser(config);
-
-  const tokens = markedInstance.lexer(displayContent);
-
-  if (csWalkToken) {
-    walkTokens(tokens, csWalkToken);
-  }
-  return (
-    <div className={className} style={style}>
-      {parser.parse(tokens)}
-    </div>
+  return wrapCSSVar(
+    <div className={mergedCls} style={style}>
+      {renderer.render(htmlString)}
+    </div>,
   );
 };
 
