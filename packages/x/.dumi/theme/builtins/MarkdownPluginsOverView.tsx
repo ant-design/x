@@ -52,7 +52,7 @@ const MarkdownPluginsOverView: React.FC<null> = (props) => {
       itemLayout="horizontal"
       className={classnames(styles.container)}
       dataSource={PluginMeta || []}
-      renderItem={(item, index) => {
+      renderItem={(item) => {
         const info = getInfo(item);
         return (
           <List.Item className={classnames(styles.item)}>
