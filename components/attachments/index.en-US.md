@@ -103,12 +103,12 @@ const PRESET_FILE_ICONS: AttachmentFilesIcons = [
   },
   {
     icon: <FileImageFilled />,
-    color: '#8c8c8c'
+    color: '#8c8c8c',
     ext: ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp', 'svg'],
   },
   {
     icon: <FileMarkdownFilled />,
-    color: '#8c8c8c'
+    color: '#8c8c8c',
     ext: ['md', 'mdx'],
   },
   {
