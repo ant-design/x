@@ -57,6 +57,10 @@ yarn add @ant-design/x
 pnpm add @ant-design/x
 ```
 
+```bash
+ut install @ant-design/x
+```
+
 ### 🖥️ Import in Browser
 
 Add `script` and `link` tags in your browser and use the global variable `antd`.
@@ -263,6 +267,34 @@ export default Demo;
 ## Non-React Implementations
 
 Welcome to contribute!
+
+## Local Development
+
+> antx is organized through [npm-workspace](https://docs.npmjs.com/cli/v11/using-npm/workspaces). We recommend using npm or [utoo](https://github.com/umijs/mako/tree/next) for local development.
+
+```bash
+
+# Install utoo
+$ npm i -g utoo
+
+# Install project dependencies (by utoo)
+$ ut [install]
+
+# Start project
+$ ut start # Method 1: Start through main package script
+$ ut start --workspace packages/x # Method 2: Start through workspace parameter
+$ ut start --workspace @ant-design/x # Method 3: Start through package.name (utoo only)
+$ cd packages/x && ut start # Method 4: Enter subpackage directory and start separately
+
+
+# Add dependencies
+$ ut install [pkg@version] # Add dependencies to root package
+$ ut install [pkg@version] --workspace packages/x # Add dependencies to subpackage
+$ cd packages/x && ut install [pkg@version] # Add dependencies to subpackage
+
+# Dependency update
+$ ut update # utoo only
+```
 
 ## Companies using antdx
 
