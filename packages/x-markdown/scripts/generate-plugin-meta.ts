@@ -21,7 +21,7 @@ const main = async () => {
   const app = await (Application as any).bootstrap(
     {
       // typedoc options here
-      entryPoints: ['src/plugins/interface.ts'],
+      entryPoints: ['src/plugins/type.ts'],
       skipErrorChecking: true,
       logLevel: 'Error',
     },

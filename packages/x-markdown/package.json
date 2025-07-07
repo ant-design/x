@@ -15,7 +15,8 @@
     "prestart": "npm run version && npm run plugin:meta",
     "lint:deps": "antd-tools run deps-lint",
     "precompile": "npm run prestart",
-    "version": "tsx scripts/generate-version.ts"
+    "version": "tsx scripts/generate-version.ts",
+    "test:dekko": "tsx ./tests/dekko/index.test.ts"
   },
   "sideEffects": false,
   "main": "lib/index.js",

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { PluginsType } from '../interface';
+import { PluginsType } from '../type';
 
 type CodeProps = {
   type: string;
