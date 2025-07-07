@@ -56,6 +56,7 @@ const App: React.FC = () => {
         items={items}
         dropdownProps={{
           open: true,
+          getPopupContainer: (triggerNode) => triggerNode.parentElement!,
         }}
       />
     </SemanticPreview>
