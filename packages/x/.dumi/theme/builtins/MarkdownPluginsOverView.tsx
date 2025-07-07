@@ -1,3 +1,4 @@
+import PluginMeta from '"@ant-design/x-markdown/es/version/plugin-meta.json';
 import { createStyles, css } from 'antd-style';
 import classnames from 'classnames';
 /* eslint-disable react-hooks-extra/no-direct-set-state-in-use-effect */
@@ -59,6 +60,7 @@ export interface MarkdownPluginsOverViewProps {
 
 const MarkdownPluginsOverView: React.FC<MarkdownPluginsOverViewProps> = (props) => {
   const { items, children } = props;
+  console.log(PluginMeta, 111);
 
   // ======================== Hover =========================
   const containerRef = React.useRef<HTMLDivElement>(null);
