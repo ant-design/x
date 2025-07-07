@@ -81,3 +81,4 @@ __image_snapshots__/
 examples/
 
 packages/x-markdown/plugins
+packages/x-markdown/themes
