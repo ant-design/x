@@ -50,7 +50,7 @@ async function checkBranch({ current }: StatusResult) {
     version.includes('-experimental.')
   ) {
     spinner.info(chalk.cyan('😃 Alpha version. Skip branch check.'));
-  } else if (current !== 'main') {
+  } else if (current !== 'chore_site') {
     spinner.fail(chalk.red('🤔 You are not in the main branch!'));
     exitProcess();
   }
