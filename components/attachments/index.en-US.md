@@ -84,7 +84,6 @@ Default value of `fileIcons` is `PRESET_FILE_ICONS`:
 
 ```ts
 import {
-  CloseCircleFilled,
   FileExcelFilled,
   FileImageFilled,
   FileMarkdownFilled,
@@ -94,6 +93,8 @@ import {
   FileWordFilled,
   FileZipFilled,
 } from '@ant-design/icons';
+import VideoIcon from './icons/VideoIcon';
+import AudioIcon from './icons/AudioIcon';
 
 const PRESET_FILE_ICONS: AttachmentFilesIcons = [
   {
