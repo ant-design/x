@@ -1,7 +1,7 @@
 ---
 group:
-  title: 插件集
+  title: Plugins
   order: 2
-title: 思考
+title: Latex
 order: 2
 ---
