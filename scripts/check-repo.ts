@@ -2,8 +2,8 @@
 import chalk from 'chalk';
 import fetch from 'isomorphic-fetch';
 import ora from 'ora';
-import simpleGit from 'simple-git';
 import type { StatusResult } from 'simple-git';
+import simpleGit from 'simple-git';
 
 import { version } from '../package.json';
 
@@ -50,7 +50,7 @@ async function checkBranch({ current }: StatusResult) {
     version.includes('-experimental.')
   ) {
     spinner.info(chalk.cyan('😃 Alpha version. Skip branch check.'));
-  } else if (current !== 'main') {
+  } else if (current !== 'next') {
     spinner.fail(chalk.red('🤔 You are not in the main branch!'));
     exitProcess();
   }
