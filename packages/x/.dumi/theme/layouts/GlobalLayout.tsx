@@ -9,7 +9,7 @@ import {
 import { getSandpackCssText } from '@codesandbox/sandpack-react';
 import type { MappingAlgorithm } from 'antd';
 import { App, theme as antdTheme } from 'antd';
-import type { DirectionType, ThemeConfig } from 'antd/es/config-provider';
+import type { DirectionType } from 'antd/es/config-provider';
 import { createSearchParams, useOutlet, useSearchParams, useServerInsertedHTML } from 'dumi';
 import React, { Suspense, useCallback, useEffect } from 'react';
 
@@ -144,7 +144,7 @@ const GlobalLayout: React.FC = () => {
     [isMobile, direction, updateSiteConfig, theme],
   );
 
-  const themeConfig = React.useMemo<ThemeConfig>(
+  const themeConfig = React.useMemo(
     () => ({
       // index page should always use dark theme
       algorithm: isIndexPage ? getAlgorithm(['dark']) : getAlgorithm(theme),
