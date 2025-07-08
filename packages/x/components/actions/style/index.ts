@@ -9,7 +9,6 @@ export interface ActionsToken extends FullToken<'Actions'> {}
 
 const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
   const { componentCls } = token;
-
   return {
     [componentCls]: {
       [`${componentCls}-list`]: {

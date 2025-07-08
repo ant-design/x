@@ -81,7 +81,7 @@ const genFileCardStyle: GenerateStyle<AttachmentsToken> = (token) => {
         lineHeight: 1,
         display: 'flex',
         alignItems: 'center',
-
+        overflow: 'hidden',
         [`&:not(${cardCls}-status-error)`]: {
           border: 0,
         },
