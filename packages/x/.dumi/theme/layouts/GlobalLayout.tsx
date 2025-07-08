@@ -191,7 +191,7 @@ const GlobalLayout: React.FC = () => {
         linters={[legacyNotSelectorLinter, parentSelectorLinter, NaNLinter]}
       >
         <SiteContext value={siteContextValue}>
-          <SiteThemeProvider theme={themeConfig as any}>
+          <SiteThemeProvider theme={themeConfig}>
             <App>{outlet}</App>
           </SiteThemeProvider>
         </SiteContext>
