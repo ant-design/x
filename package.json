@@ -72,5 +72,8 @@
   "funding": {
     "type": "opencollective",
     "url": "https://opencollective.com/ant-design"
+  },
+  "dependencies": {
+    "antd": "6.0.0-alpha.1"
   }
 }

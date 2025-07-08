@@ -1,8 +1,8 @@
 import { EllipsisOutlined } from '@ant-design/icons';
 import { Dropdown, MenuProps } from 'antd';
 import React from 'react';
-import { ActionsProps } from '.';
 import { useXProviderContext } from '../x-provider';
+import { ActionsProps } from '.';
 import { ActionItem, ItemType } from './interface';
 
 export const findItem = (keyPath: string[], items: ActionItem[]): ActionItem | null => {
@@ -49,7 +49,7 @@ const ActionMenu = (props: { item: ItemType } & Pick<ActionsProps, 'prefixCls' |
   return (
     <Dropdown
       menu={menuProps}
-      overlayClassName={`${prefixCls}-sub-item`}
+      classNames={{ root: `${prefixCls}-sub-menu` }}
       arrow
       trigger={[triggerSubMenuAction]}
     >
