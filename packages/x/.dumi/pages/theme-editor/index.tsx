@@ -1,10 +1,9 @@
 import { App, Button, Skeleton } from 'antd';
-import { enUS, zhCN } from 'antd-token-previewer';
 import type { ThemeConfig } from 'antd/es/config-provider/context';
+import { createStyles } from 'antd-style';
+import { enUS, zhCN } from 'antd-token-previewer';
 import { Helmet } from 'dumi';
 import React, { Suspense, useEffect } from 'react';
-
-import { createStyles } from 'antd-style';
 import useLocale from '../../hooks/useLocale';
 
 const ThemeEditor = React.lazy(() => import('antd-token-previewer/lib/ThemeEditor'));
@@ -49,7 +48,7 @@ const CustomTheme: React.FC = () => {
   const [locale, lang] = useLocale(locales);
   const { styles } = useStyle();
 
-  const [theme, setTheme] = React.useState<ThemeConfig>({});
+  const [theme, setTheme] = React.useState<Omit<ThemeConfig, 'components'>>({});
 
   useEffect(() => {
     const storedConfig = localStorage.getItem(ANT_DESIGN_V5_THEME_EDITOR_THEME);
