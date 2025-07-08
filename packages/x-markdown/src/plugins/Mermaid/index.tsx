@@ -1,23 +1,12 @@
-import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import mermaid from 'mermaid';
 import { Segmented } from 'antd';
 import throttle from 'lodash.throttle';
-import SyntaxHighlighter, { SyntaxHighlighterProps } from 'react-syntax-highlighter';
+import SyntaxHighlighter from 'react-syntax-highlighter';
 import useXProviderContext from '../../hooks/use-x-provider-context';
 import useStyle from './style';
 import classnames from 'classnames';
-
-type MermaidType = 'header' | 'headerTitle' | 'mermaid';
-
-interface MermaidProps {
-  children: string;
-  header?: ReactNode | null;
-  prefixCls?: string;
-  style?: React.CSSProperties;
-  className?: string;
-  classNames?: Partial<Record<MermaidType, string>>;
-  codeProps?: Partial<SyntaxHighlighterProps>;
-}
+import type { PluginsType } from '../type';
 
 enum RenderType {
   Code = '代码',
@@ -33,7 +22,7 @@ mermaid.initialize({
 
 let uuid = 0;
 
-const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
+const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
   const {
     prefixCls: customizePrefixCls,
     className,

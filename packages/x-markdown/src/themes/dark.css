@@ -1,0 +1,102 @@
+.x-markdown-theme-dark {
+  width: 100%;
+  font-size: 16px;
+  line-height: 28px;
+  color: #ffffff;
+  word-wrap: break-word;
+  user-select: text;
+}
+
+.x-markdown-theme-dark h1,
+.x-markdown-theme-dark h2,
+.x-markdown-theme-dark h3,
+.x-markdown-theme-dark h4 {
+  color: #ffffff;
+}
+
+.x-markdown-theme-dark p,
+.x-markdown-theme-dark li {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.x-markdown-theme-dark li::marker {
+  color: #ffffff;
+}
+
+.x-markdown-theme-dark hr {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.x-markdown-theme-dark table thead {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.x-markdown-theme-dark table tbody {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.x-markdown-theme-dark table th,
+.x-markdown-theme-dark table td {
+  border: 1px solid #383838;
+}
+
+.x-markdown-theme-dark table th {
+  color: #ffffff;
+}
+
+.x-markdown-theme-dark table td {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.x-markdown-theme-dark .markdown-cite {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.x-markdown-theme-dark .markdown-cite:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.x-markdown-theme-dark .markdown-code-block {
+  border: 1px solid #383838;
+}
+
+.x-markdown-theme-dark .markdown-code-header {
+  background: rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid #383838;
+}
+
+.x-markdown-theme-dark h1,
+.x-markdown-theme-dark h2,
+.x-markdown-theme-dark h3,
+.x-markdown-theme-dark h4,
+.x-markdown-theme-dark p {
+  margin-bottom: 16px;
+}
+
+.x-markdown-theme-dark h1 {
+  font-size: 24px;
+  line-height: 36px;
+}
+
+.x-markdown-theme-dark h2 {
+  font-size: 20px;
+  line-height: 32px;
+}
+
+.x-markdown-theme-dark h3 {
+  font-size: 18px;
+  line-height: 30px;
+}
+
+.x-markdown-theme-dark h4 {
+  font-size: 16px;
+}
+
+.x-markdown-theme-dark ol,
+.x-markdown-theme-dark ul {
+  margin-left: 28px;
+}
+
+.x-markdown-theme-dark code {
+  margin-bottom: 12px;
+}
