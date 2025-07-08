@@ -1,5 +1,5 @@
 import type React from 'react';
-import { CollapsibleOptions } from '../_util/hooks/use-collapsible';
+import type { CollapsibleOptions } from '../_util/hooks/use-collapsible';
 import type { AnyObject } from '../_util/type';
 import type { GroupInfoType } from './hooks/useGroupable';
 

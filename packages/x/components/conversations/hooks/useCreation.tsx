@@ -52,7 +52,7 @@ const useCreation = ({
         shortcutKeysIcon={shortcutKeysIcon as string[]}
       />
     ),
-    icon: <PlusOutlined />,
+    icon: <PlusOutlined className={`${prefixCls}-icon`} />,
     align: 'center',
   };
 

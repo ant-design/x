@@ -35,6 +35,7 @@ demo:
 ## 代码演示
 
 <!-- prettier-ignore -->
+<code src="./demo/locale.tsx" background="grey">国际化</code>
 <code src="./demo/direction.tsx" background="grey">方向</code>
 <code src="./demo/theme.tsx" background="grey">主题</code>
 <code src="./demo/shortcutKeys.tsx" background="grey">快捷键</code>
@@ -42,6 +43,20 @@ demo:
 ## API
 
 `XProvider` 完全继承 `antd` 的 `ConfigProvider`, 属性参考：[Antd ConfigProvider](https://ant-design.antgroup.com/components/config-provider-cn#api)
+
+### 国际化
+
+如果您的项目使用了antd 那么需要将antd的locale合并传入XProvider
+
+```ts
+import { XProvider  } from '@ant-design/x';
+import zhCN from 'antd/locale/zh_CN';
+import zhCN_X from '@ant-design/x/locale/zh_CN';
+
+<XProvider locale={{...zhCN_X,..zhCN}}>
+  <App />
+</XProvider>
+```
 
 ### 组件配置
 

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
-import type { ConversationsProps } from '..';
 import type { CollapsibleOptions } from '../../_util/hooks/use-collapsible';
+import type { ConversationsProps } from '..';
 import type { Collapsible, ConversationItemType, GroupableProps, ItemType } from '../interface';
 
 interface GroupConfig {
@@ -17,10 +17,11 @@ export interface GroupInfoType {
 }
 type GroupList = GroupInfoType[];
 
+type KeyList = { key: string; disabled?: boolean }[];
 const useGroupable = (
   groupable?: ConversationsProps['groupable'],
   items: ItemType[] = [],
-): [groupList: GroupList, collapsibleOptions: CollapsibleOptions, keyList: string[]] => {
+): [groupList: GroupList, collapsibleOptions: CollapsibleOptions, keyList: KeyList] => {
   const [label, collapsibleHandle, collapsibleOptions] = useMemo<
     [GroupConfig['label'], GroupConfig['collapsibleHandle'], collapsibleOptions: CollapsibleOptions]
   >(() => {
@@ -87,10 +88,13 @@ const useGroupable = (
       }
       return currentGroupList;
     }, []);
-    const keyList = groupList.reduce<string[]>((currentKeyList, group) => {
+    const keyList = groupList.reduce<KeyList>((currentKeyList, group) => {
       group.data.forEach((item) => {
         if (item.type !== 'divider') {
-          currentKeyList.push((item as ConversationItemType).key);
+          currentKeyList.push({
+            key: (item as ConversationItemType).key,
+            disabled: (item as ConversationItemType).disabled,
+          });
         }
       });
       return currentKeyList;

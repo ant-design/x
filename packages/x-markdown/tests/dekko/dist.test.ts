@@ -3,9 +3,9 @@ import $ from 'dekko';
 
 $('dist')
   .isDirectory()
-  .hasFile('antdxmarkdown.js')
-  .hasFile('antdxmarkdown.min.js')
-  .hasFile('antdxmarkdown.min.js.map');
+  .hasFile('x-markdown.js')
+  .hasFile('x-markdown.min.js')
+  .hasFile('x-markdown.min.js.map');
 
 // eslint-disable-next-line no-console
 console.log(chalk.green('✨ `dist` directory is valid.'));

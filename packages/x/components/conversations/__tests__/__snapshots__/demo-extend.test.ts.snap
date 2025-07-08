@@ -137,7 +137,7 @@ exports[`renders components/conversations/demo/basic.tsx extend context correctl
       <div
         class="ant-flex ant-flex-align-center ant-flex-gap-small"
       >
-        Deep Search 
+        Deep Search
         <button
           aria-checked="false"
           class="ant-switch ant-switch-small"
@@ -1608,7 +1608,7 @@ exports[`renders components/conversations/demo/new-chat.tsx extend context corre
   >
     <span
       aria-label="plus"
-      class="anticon anticon-plus"
+      class="anticon anticon-plus ant-conversations-creation-icon"
       role="img"
     >
       <svg
@@ -1843,12 +1843,12 @@ Array [
     style="width: 256px; background: #ffffff; border-radius: 6px;"
   >
     <button
-      class="ant-conversations-creation ant-conversations-creation-center ant-conversations-creation-disabled"
+      class="ant-conversations-creation ant-conversations-creation-center"
       type="button"
     >
       <span
         aria-label="plus"
-        class="anticon anticon-plus"
+        class="anticon anticon-plus ant-conversations-creation-icon"
         role="img"
       >
         <svg

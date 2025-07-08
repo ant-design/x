@@ -1,12 +1,15 @@
 {
   "name": "@ant-design/x-sdk",
-  "version": "0.0.0",
+  "version": "2.0.0",
   "scripts": {
     "compile": "father build",
     "tsc": "tsc --noEmit",
     "lint": "npm run tsc && npm run lint:script && npm run lint:md",
     "lint:deps": "antd-tools run deps-lint",
     "lint:md": "remark . -f -q",
+    "prestart": "echo \"true\"  && exit 0",
+    "pretest": "echo \"true\"  && exit 0",
+    "precompile": "echo \"true\"  && exit 0",
     "lint:script": "biome lint",
     "test": "jest --config .jest.js --no-cache --collect-coverage",
     "coverage": "jest --config .jest.js --no-cache --collect-coverage --coverage",
@@ -22,7 +25,7 @@
     "lib"
   ],
   "license": "MIT",
-  "description": "placeholder for @ant-design/x-markdown",
+  "description": "placeholder for @ant-design/x-sdk",
   "dependencies": {},
   "devDependencies": {
     "@types/react": "^19.0.2",

@@ -1,5 +1,5 @@
+import type { ConfigProviderProps as AntdConfigProviderProps } from 'antd/es/config-provider';
 import React from 'react';
-
 import type { AnyObject, ShortcutKeys } from '../_util/type';
 import type { ActionsProps } from '../actions';
 import { AttachmentsProps } from '../attachments';
@@ -8,8 +8,10 @@ import type { ConversationsProps } from '../conversations';
 import type { PromptsProps } from '../prompts';
 import type { SenderProps } from '../sender';
 import type { SuggestionProps } from '../suggestion';
+import type { ThinkProps } from '../think';
 import type { ThoughtChainProps } from '../thought-chain';
 import type { WelcomeProps } from '../welcome';
+
 interface BaseComponentConfig {
   style: React.CSSProperties;
   styles: Record<string, React.CSSProperties>;
@@ -35,9 +37,10 @@ export interface XComponentsConfig {
   attachments?: ComponentConfig<AttachmentsProps>;
   welcome?: ComponentConfig<WelcomeProps>;
   actions?: ComponentConfig<ActionsProps>;
+  think?: ComponentConfig<ThinkProps>;
 }
 
-export interface XProviderProps extends XComponentsConfig {
+export interface XProviderProps extends XComponentsConfig, AntdConfigProviderProps {
   // Non-component config props
 }
 

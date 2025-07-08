@@ -26,10 +26,10 @@ export default defineConfig({
   },
   umd: {
     entry: 'src/index.ts',
-    name: 'antdxmarkdown',
+    name: 'XMarkdown',
     output: {
       path: 'dist/',
-      filename: 'antdxmarkdown',
+      filename: 'x-markdown',
     },
     sourcemap: true,
     generateUnminified: true,

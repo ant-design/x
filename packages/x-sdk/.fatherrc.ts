@@ -26,10 +26,10 @@ export default defineConfig({
   },
   umd: {
     entry: 'src/index.ts',
-    name: 'antdxsdk',
+    name: 'XSdk',
     output: {
       path: 'dist/',
-      filename: 'antdxsdk',
+      filename: 'x-sdk',
     },
     sourcemap: true,
     generateUnminified: true,

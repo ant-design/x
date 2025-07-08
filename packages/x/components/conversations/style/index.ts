@@ -1,6 +1,7 @@
 import { unit } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import { FastColor } from '@ant-design/fast-color';
+import { genCollapseMotion } from '../../style/motion';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
 
@@ -48,7 +49,7 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
       [`${componentCls}-creation`]: {
         backgroundColor: token.creationBgColor,
         color: token.colorPrimary,
-        border: `${unit(token.lineWidth)} ${token.lineType}, ${token.creationBorderColor}`,
+        border: 'none',
         fontWeight: 500,
         paddingBlock: token.paddingXS,
         paddingInline: token.paddingSM,
@@ -60,9 +61,12 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
         lineHeight: token.lineHeight,
         borderRadius: token.borderRadiusLG,
         transition: `all ${token.motionDurationMid} ${token.motionEaseInOut}`,
-        '&:hover': {
+        [`&:not(${componentCls}-creation-disabled):hover`]: {
           color: token.colorPrimary,
           background: token.creationHoverColor,
+        },
+        [`&:not(${componentCls}-creation-disabled)`]: {
+          border: `${unit(token.lineWidth)} ${token.lineType}, ${token.creationBorderColor}`,
         },
         '&-start': {
           justifyContent: 'flex-start',
@@ -95,8 +99,13 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
         },
         '&-disabled': {
           cursor: 'not-allowed',
-          [`& ${componentCls}-label, ${componentCls}-icon, ${componentCls}-menu-icon`]: {
+          background: token.colorBgContainerDisabled,
+          [`& ${componentCls}-creation-label, ${componentCls}-creation-icon`]: {
             color: token.colorTextDisabled,
+          },
+          [`& ${componentCls}-creation-label-shortcut-keys`]: {
+            color: token.colorTextDisabled,
+            border: `${unit(token.lineWidth)} ${token.lineType}, ${token.colorBgContainerDisabled}`,
           },
         },
       },
@@ -116,7 +125,7 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
         borderRadius: token.borderRadiusLG,
         cursor: 'pointer',
         transition: `all ${token.motionDurationMid} ${token.motionEaseInOut}`,
-        '&:hover': {
+        [`&:not(${componentCls}-item-disabled):hover`]: {
           backgroundColor: token.colorBgTextHover,
         },
         '&-active': {
@@ -127,7 +136,7 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
         },
         '&-disabled': {
           cursor: 'not-allowed',
-          [`& ${componentCls}-creation-label, ${componentCls}-creation-icon`]: {
+          [`& ${componentCls}-label, ${componentCls}-icon, ${componentCls}-menu-icon`]: {
             color: token.colorTextDisabled,
           },
         },
@@ -140,6 +149,9 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
         [`${componentCls}-menu-icon:hover`]: {
           opacity: 1,
         },
+      },
+      [`& ${componentCls}-content-hidden`]: {
+        display: 'none',
       },
       [`& ${componentCls}-label`]: {
         flex: 1,
@@ -201,6 +213,7 @@ export const prepareComponentToken: GetDefaultToken<'Conversations'> = (token) =
   const creationBorderColor = new FastColor(token.colorPrimary).setA(0.22);
   const creationHoverColor = new FastColor(token.colorPrimary).setA(0.25);
   const shortcutKeyTextColor = new FastColor(token.colorPrimary).setA(0.65);
+
   return {
     creationBgColor: creationBgColor.toRgbString(),
     creationBorderColor: creationBorderColor.toRgbString(),
@@ -213,7 +226,7 @@ export default genStyleHooks(
   'Conversations',
   (token) => {
     const compToken = mergeToken<ConversationsToken>(token, {});
-    return genConversationsStyle(compToken);
+    return [genConversationsStyle(compToken), genCollapseMotion(compToken)];
   },
   prepareComponentToken,
 );

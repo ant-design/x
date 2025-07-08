@@ -1,15 +1,20 @@
 {
   "name": "@ant-design/x-markdown",
-  "version": "0.0.0",
+  "version": "2.0.0",
   "scripts": {
     "compile": "father build",
     "tsc": "tsc --noEmit",
     "lint": "npm run tsc && npm run lint:script && npm run lint:md",
     "lint:deps": "antd-tools run deps-lint",
+    "precompile": "echo \"true\"  && exit 0",
     "lint:md": "remark . -f -q",
     "lint:script": "biome lint",
-     "test": "jest --config .jest.js --no-cache --collect-coverage",
-     "coverage": "jest --config .jest.js --no-cache --collect-coverage --coverage"
+    "prestart": "echo \"true\"  && exit 0",
+    "pretest": "echo \"true\"  && exit 0",
+    "test": "jest --config .jest.js --no-cache --collect-coverage",
+    "coverage": "jest --config .jest.js --no-cache --collect-coverage --coverage",
+    "version": "tsx scripts/generate-version.ts",
+    "test:dekko": "tsx ./tests/dekko/index.test.ts"
   },
   "sideEffects": false,
   "main": "lib/index.js",

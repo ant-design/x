@@ -1,7 +1,3 @@
-import { Conversations, Prompts, PromptsProps, Sender, Suggestion, XProvider } from '@ant-design/x';
-import { Card, ColorPicker, Divider, Flex, Space, message } from 'antd';
-import React from 'react';
-
 import {
   CommentOutlined,
   FireOutlined,
@@ -10,6 +6,9 @@ import {
   RocketOutlined,
   SmileOutlined,
 } from '@ant-design/icons';
+import { Conversations, Prompts, PromptsProps, Sender, Suggestion, XProvider } from '@ant-design/x';
+import { Card, ColorPicker, Divider, Flex, message, Space, Typography } from 'antd';
+import React from 'react';
 
 type ThemeData = {
   colorPrimary: string;
@@ -94,7 +93,7 @@ export default () => {
   return (
     <>
       <Flex gap={12} style={{ marginBottom: 16 }} align="center">
-        <span>ColorPrimary:</span>
+        <Typography.Text>ColorPrimary:</Typography.Text>
         <ColorPicker
           value={data.colorPrimary}
           onChange={(value) => {

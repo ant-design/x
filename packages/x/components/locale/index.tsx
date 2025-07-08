@@ -2,17 +2,13 @@ import * as React from 'react';
 import { devUseWarning } from '../_util/warning';
 import type { LocaleContextProps } from './context';
 import LocaleContext from './context';
+
 export { default as useLocale } from './useLocale';
 
 export const ANT_MARK = 'internalMark';
 
 export interface Locale {
   locale: string;
-  global?: {
-    placeholder?: string;
-    close?: string;
-  };
-  Icon?: Record<string, any>;
   Conversations?: {
     create: string;
   };
@@ -34,7 +30,7 @@ const LocaleProvider: React.FC<LocaleProviderProps> = (props) => {
     warning(
       _ANT_MARK__ === ANT_MARK,
       'deprecated',
-      '`LocaleProvider` is deprecated. Please use `locale` with `ConfigProvider` instead: http://u.ant.design/locale',
+      '`LocaleProvider` is deprecated. Please use `locale` with `XProvider` instead: https://x.ant.design/components/x-provider-cn#x-provider-demo-locale',
     );
   }
 

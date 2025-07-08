@@ -1,35 +1,28 @@
-import { LeftOutlined, RightOutlined } from '@ant-design/icons';
-import { Avatar, Typography } from 'antd';
 import classnames from 'classnames';
-import CSSMotion from 'rc-motion';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
+import { useXProviderContext } from '../x-provider';
+import Status, { THOUGHT_CHAIN_ITEM_STATUS } from './Status';
+import useStyle from './style';
 
-import type { ConfigProviderProps, GetProp } from 'antd';
-import type { CSSMotionProps } from 'rc-motion';
-import type { ThoughtChainProps } from './';
-
-export enum THOUGHT_CHAIN_ITEM_STATUS {
-  /**
-   * @desc 等待状态
-   */
-  PENDING = 'pending',
-  /**
-   * @desc 成功状态
-   */
-  SUCCESS = 'success',
-  /**
-   * @desc 错误状态
-   */
-  ERROR = 'error',
+enum VARIANT {
+  SOLID = 'solid',
+  OUTLINED = 'outlined',
+  TEXT = 'text',
 }
-
-export interface ThoughtChainItem {
+export interface ThoughtChainItemProp
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title' | 'content'> {
   /**
    * @desc 思维节点唯一标识符
    * @descEN Unique identifier
    */
   key?: string;
+
+  /**
+   * @desc 自定义前缀
+   * @descEN Prefix
+   */
+  prefixCls?: string;
 
   /**
    * @desc 思维节点图标
@@ -50,48 +43,37 @@ export interface ThoughtChainItem {
   description?: React.ReactNode;
 
   /**
-   * @desc 思维节点额外内容
-   * @descEN Thought chain item extra content
+   * @desc 根节点样式类
+   * @descEN Root node style class.
    */
-  extra?: React.ReactNode;
-
-  /**
-   * @desc 思维节点内容
-   * @descEN Thought chain item content
-   */
-  content?: React.ReactNode;
-
-  /**
-   * @desc 思维节点脚注
-   * @descEN Thought chain item footer
-   */
-  footer?: React.ReactNode;
+  rootClassName?: string;
 
   /**
    * @desc 思维节点状态
    * @descEN Thought chain item status
    */
   status?: `${THOUGHT_CHAIN_ITEM_STATUS}`;
+  /**
+   * @desc 思维节点变体
+   * @descEN Thought chain item variant
+   */
+  variant?: `${VARIANT}`;
 }
 
-export const ThoughtChainNodeContext = React.createContext<{
-  prefixCls?: string;
-  collapseMotion?: CSSMotionProps;
-  enableCollapse?: boolean;
-  expandedKeys?: string[];
-  direction?: GetProp<ConfigProviderProps, 'direction'>;
-  styles?: ThoughtChainProps['styles'];
-  classNames?: ThoughtChainProps['classNames'];
-}>(null!);
-
-interface ThoughtChainNodeProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick'> {
-  info?: ThoughtChainItem;
-  nextStatus?: ThoughtChainItem['status'];
-  onClick?: (key: string) => void;
-}
-
-const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
-  const { info = {}, nextStatus, onClick, ...restProps } = props;
+const Item: React.FC<ThoughtChainItemProp> = (props) => {
+  // ============================ Info ============================
+  const {
+    key,
+    variant = 'solid',
+    prefixCls: customizePrefixCls,
+    rootClassName,
+    title,
+    icon,
+    status,
+    onClick,
+    description,
+    ...restProps
+  } = props;
 
   const domProps = pickAttrs(restProps, {
     attr: true,
@@ -99,140 +81,36 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
     data: true,
   });
 
-  // ================= ThoughtChainNodeContext ====================
-  const {
-    prefixCls,
-    collapseMotion,
-    enableCollapse,
-    expandedKeys,
-    direction,
-    classNames = {},
-    styles = {},
-  } = React.useContext(ThoughtChainNodeContext);
-
-  // ============================ Info ============================
   const id = React.useId();
 
-  const {
-    key = id,
+  // ============================ Prefix ============================
 
-    icon,
-    title,
-    extra,
-    content,
-    footer,
-    status,
-    description,
-  } = info;
+  const { getPrefixCls, direction } = useXProviderContext();
 
-  // ============================ Style ============================
+  const prefixCls = getPrefixCls('thought-chain', customizePrefixCls);
+  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
   const itemCls = `${prefixCls}-item`;
 
-  // ============================ Event ============================
-  const onThoughtChainNodeClick = () => onClick?.(key);
-
-  // ============================ Content Open ============================
-  const contentOpen = expandedKeys?.includes(key);
-
   // ============================ Render ============================
-  return (
+  return wrapCSSVar(
     <div
+      key={key || id}
+      onClick={onClick}
       {...domProps}
-      className={classnames(
-        itemCls,
-        {
-          [`${itemCls}-${status}${nextStatus ? `-${nextStatus}` : ''}`]: status,
-        },
-        props.className,
-      )}
-      style={props.style}
+      className={classnames(prefixCls, hashId, cssVarCls, rootClassName, itemCls, {
+        [`${itemCls}-${variant}`]: variant,
+        [`${itemCls}-click`]: onClick,
+        [`${itemCls}-error`]: status === THOUGHT_CHAIN_ITEM_STATUS.ERROR,
+        [`${itemCls}-rtl`]: direction === 'rtl',
+      })}
     >
-      {/* Header */}
-      <div
-        className={classnames(`${itemCls}-header`, classNames.itemHeader)}
-        style={styles.itemHeader}
-        onClick={onThoughtChainNodeClick}
-      >
-        {/* Avatar */}
-        <Avatar icon={icon} className={`${itemCls}-icon`} />
-        {/* Header */}
-        <div
-          className={classnames(`${itemCls}-header-box`, {
-            [`${itemCls}-collapsible`]: enableCollapse && content,
-          })}
-        >
-          {/* Title */}
-          <Typography.Text
-            strong
-            ellipsis={{
-              tooltip: { placement: direction === 'rtl' ? 'topRight' : 'topLeft', title },
-            }}
-            className={`${itemCls}-title`}
-          >
-            {enableCollapse &&
-              content &&
-              (direction === 'rtl' ? (
-                <LeftOutlined
-                  className={`${itemCls}-collapse-icon`}
-                  rotate={contentOpen ? -90 : 0}
-                />
-              ) : (
-                <RightOutlined
-                  className={`${itemCls}-collapse-icon`}
-                  rotate={contentOpen ? 90 : 0}
-                />
-              ))}
-            {title}
-          </Typography.Text>
-          {/* Description */}
-          {description && (
-            <Typography.Text
-              className={`${itemCls}-desc`}
-              ellipsis={{
-                tooltip: {
-                  placement: direction === 'rtl' ? 'topRight' : 'topLeft',
-                  title: description,
-                },
-              }}
-              type="secondary"
-            >
-              {description}
-            </Typography.Text>
-          )}
-        </div>
-        {/* Extra */}
-        {extra && <div className={`${itemCls}-extra`}>{extra}</div>}
+      {(status || icon) && <Status prefixCls={prefixCls} icon={icon} status={status} />}
+      <div className={classnames(`${itemCls}-content`)}>
+        {title && <div className={classnames(`${itemCls}-title`)}>{title}</div>}
+        {description && <div className={classnames(`${itemCls}-description`)}>{description}</div>}
       </div>
-      {/* Content */}
-      {content && (
-        <CSSMotion {...collapseMotion} visible={enableCollapse ? contentOpen : true}>
-          {({ className: motionClassName, style }, motionRef) => (
-            <div
-              className={classnames(`${itemCls}-content`, motionClassName)}
-              ref={motionRef}
-              style={style}
-            >
-              <div
-                className={classnames(`${itemCls}-content-box`, classNames.itemContent)}
-                style={styles.itemContent}
-              >
-                {content}
-              </div>
-            </div>
-          )}
-        </CSSMotion>
-      )}
-      {/* Footer */}
-      {footer && (
-        <div
-          className={classnames(`${itemCls}-footer`, classNames.itemFooter)}
-          style={styles.itemFooter}
-        >
-          {footer}
-        </div>
-      )}
-    </div>
+    </div>,
   );
 };
 
-export default ThoughtChainNode;
+export default Item;
