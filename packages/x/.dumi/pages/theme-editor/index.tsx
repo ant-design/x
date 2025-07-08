@@ -48,7 +48,7 @@ const CustomTheme: React.FC = () => {
   const [locale, lang] = useLocale(locales);
   const { styles } = useStyle();
 
-  const [theme, setTheme] = React.useState<Omit<ThemeConfig, 'components'>>({});
+  const [theme, setTheme] = React.useState<Omit<ThemeConfig, 'components' | 'algorithm'>>({});
 
   useEffect(() => {
     const storedConfig = localStorage.getItem(ANT_DESIGN_V5_THEME_EDITOR_THEME);
