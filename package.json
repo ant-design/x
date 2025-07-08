@@ -1,11 +1,15 @@
 {
   "name": "x-mono",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "site": "npm run site --workspace packages/x && cp -rf packages/x/_site ./_site",
     "compile": "npm run compile --workspaces",
     "start": "npm run start --workspace packages/x",
+    "prestart": "npm run prestart --workspaces",
+    "pretest": "npm run pretest --workspaces",
+    "prepublishOnly": "tsx ./scripts/pre-publish.ts",
+    "precompile": "npm run precompile --workspaces",
     "prepare": "husky install",
     "size-limit": "size-limit",
     "lint": "npm run lint --workspaces",

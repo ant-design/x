@@ -1,56 +1,129 @@
+import { CodeOutlined, EditOutlined, HeartTwoTone, SmileTwoTone } from '@ant-design/icons';
+import type { ThoughtChainItem } from '@ant-design/x';
+import { Think, ThoughtChain } from '@ant-design/x';
+import { Button, Card, Flex, Typography } from 'antd';
 import React from 'react';
-import { ThoughtChain } from '@ant-design/x';
-import type { ThoughtChainProps, ThoughtChainItem } from '@ant-design/x';
 
-import { CheckCircleOutlined, MoreOutlined } from '@ant-design/icons';
-
-import { Card, Typography, Button } from 'antd';
-
-const { Paragraph, Text } = Typography;
-
-const customizationProps: ThoughtChainItem = {
-  title: 'Thought Chain Item Title',
-  description: 'description',
-  icon: <CheckCircleOutlined />,
-  extra: <Button type="text" icon={<MoreOutlined />} />,
-  footer: <Button block>Thought Chain Item Footer</Button>,
-  content: (
-    <Typography>
-      <Paragraph>
-        In the process of internal desktop applications development, many different design specs and
-        implementations would be involved, which might cause designers and developers difficulties
-        and duplication and reduce the efficiency of development.
-      </Paragraph>
-      <Paragraph>
-        After massive project practice and summaries, Ant Design, a design language for background
-        applications, is refined by Ant UED Team, which aims to{' '}
-        <Text strong>
-          uniform the user interface specs for internal background projects, lower the unnecessary
-          cost of design differences and implementation and liberate the resources of design and
-          front-end development
-        </Text>
-      </Paragraph>
-    </Typography>
-  ),
-};
-
-const items: ThoughtChainProps['items'] = [
+const { Text } = Typography;
+const items: ThoughtChainItem[] = [
   {
-    ...customizationProps,
-    status: 'success',
+    title: 'Create Task',
+    description: 'description',
+    icon: <HeartTwoTone twoToneColor="#eb2f96" />,
+    footer: <Button block>Thought Chain Item Footer</Button>,
+    content: (
+      <Flex gap="small" vertical>
+        <Think title="Thinking Process">
+          {`1. Analyze task, understand task workflow\n2. Task creation, files needed for task\n3. Task execution, using new component`}
+        </Think>
+        <Text type="secondary">Creating folder for new component</Text>
+        <ThoughtChain.Item
+          variant="solid"
+          icon={<CodeOutlined />}
+          title="Executing command"
+          description="mkdir -p component"
+        />
+        <Text type="secondary">Creating files needed for new component</Text>
+        <ThoughtChain.Item
+          variant="solid"
+          icon={<EditOutlined />}
+          title="Creating file"
+          description="component/index.tsx"
+        />
+        <Text type="secondary">Creating Chinese documentation file for new component</Text>
+        <ThoughtChain.Item
+          variant="solid"
+          icon={<EditOutlined />}
+          title="Continue creating file"
+          description="component/index.zh-CN.md"
+        />
+        <Text type="secondary">Creating English description file for new component</Text>
+        <ThoughtChain.Item
+          variant="solid"
+          icon={<EditOutlined />}
+          title="Continue creating file"
+          description="component/index.en-US.md"
+        />
+      </Flex>
+    ),
   },
   {
-    ...customizationProps,
+    key: 'check_task',
+    title: 'Check Task Execution Steps Completion',
+    icon: <SmileTwoTone />,
+    collapsible: true,
+    description: 'Verify the overall task execution logic and feasibility',
+    content: (
+      <Flex gap="small" vertical>
+        <ThoughtChain.Item
+          variant="solid"
+          status="success"
+          title="Folder creation completed"
+          description="component"
+        />
+        <ThoughtChain.Item
+          variant="solid"
+          status="success"
+          title="File creation completed"
+          description="component/index.tsx"
+        />
+        <ThoughtChain.Item
+          variant="solid"
+          status="success"
+          title="File creation completed"
+          description="component/index.zh-CN.md"
+        />
+        <ThoughtChain.Item
+          variant="solid"
+          status="success"
+          title="File creation completed"
+          description="component/index.en-US.md"
+        />
+      </Flex>
+    ),
+  },
+  {
+    key: 'used_task',
+    title: 'Checking Task Execution Steps',
+    description: 'Verify the overall task execution logic and feasibility',
+    content: (
+      <Flex gap="small" vertical>
+        <ThoughtChain.Item
+          variant="solid"
+          status="success"
+          title="Folder creation completed"
+          description="component"
+        />
+        <ThoughtChain.Item
+          variant="solid"
+          status="success"
+          title="File creation completed"
+          description="component/index.tsx"
+        />
+        <ThoughtChain.Item
+          variant="solid"
+          status="success"
+          title="File creation completed"
+          description="component/index.zh-CN.md"
+        />
+        <ThoughtChain.Item
+          variant="solid"
+          status="success"
+          title="File creation completed"
+          description="component/index.en-US.md"
+        />
+      </Flex>
+    ),
     status: 'error',
-  },
-  {
-    ...customizationProps,
-    status: 'pending',
   },
 ];
 
-export default () => (
-  <Card style={{ width: 500 }}>
-    <ThoughtChain items={items} />
-  </Card>
-);
+const App: React.FC = () => {
+  return (
+    <Card style={{ width: 500 }}>
+      <ThoughtChain items={items} line="dashed" />
+    </Card>
+  );
+};
+
+export default App;

@@ -1,261 +1,188 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`ThoughtChain Component ThoughtChain component work 1`] = `
 <div
-  class="ant-thought-chain ant-thought-chain-middle"
+  class="ant-thought-chain ant-thought-chain-box"
 >
   <div
-    class="ant-thought-chain-item ant-thought-chain-item-success-error"
+    class="ant-thought-chain-node"
   >
     <div
-      class="ant-thought-chain-item-header"
+      class="ant-thought-chain-status ant-thought-chain-node-icon ant-thought-chain-status-success"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
+        aria-label="check-circle"
+        class="anticon anticon-check-circle"
+        role="img"
       >
-        <span
-          aria-label="check-circle"
-          class="anticon anticon-check-circle"
-          role="img"
+        <svg
+          aria-hidden="true"
+          data-icon="check-circle"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
         >
-          <svg
-            aria-hidden="true"
-            data-icon="check-circle"
-            fill="currentColor"
-            focusable="false"
-            height="1em"
-            viewBox="64 64 896 896"
-            width="1em"
-          >
-            <path
-              d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0051.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"
-            />
-            <path
-              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-            />
-          </svg>
-        </span>
+          <path
+            d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0051.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"
+          />
+          <path
+            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+          />
+        </svg>
       </span>
+    </div>
+    <div
+      class="ant-thought-chain-node-box"
+    >
       <div
-        class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
+        class="ant-thought-chain-node-header"
       >
-        <span
-          aria-describedby="test-id"
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+        <div
+          class="ant-thought-chain-node-title"
         >
-          <strong>
-            <span
-              aria-label="right"
-              class="anticon anticon-right ant-thought-chain-item-collapse-icon"
-              role="img"
-            >
-              <svg
-                aria-hidden="true"
-                data-icon="right"
-                fill="currentColor"
-                focusable="false"
-                height="1em"
-                style="transform: rotate(90deg);"
-                viewBox="64 64 896 896"
-                width="1em"
-              >
-                <path
-                  d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
-                />
-              </svg>
-            </span>
-            Thought Chain Item Title
-          </strong>
-        </span>
-        <span
-          aria-describedby="test-id"
-          class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
+          Thought Chain Item Title
+        </div>
+        <div
+          class="ant-thought-chain-node-description"
         >
           description
-        </span>
+        </div>
       </div>
       <div
-        class="ant-thought-chain-item-extra"
+        class="ant-thought-chain-node-content"
       >
-        Extra
+        <div
+          class="ant-thought-chain-node-content-box"
+        >
+          content test1
+        </div>
       </div>
-    </div>
-    <div
-      class="ant-thought-chain-item-content ant-motion-collapse-enter ant-motion-collapse-enter-start ant-motion-collapse"
-      style="height: 0px; opacity: 0;"
-    >
       <div
-        class="ant-thought-chain-item-content-box"
+        class="ant-thought-chain-node-footer"
       >
-        content test1
+        Thought Chain Item Footer
       </div>
-    </div>
-    <div
-      class="ant-thought-chain-item-footer"
-    >
-      Thought Chain Item Footer
     </div>
   </div>
   <div
-    class="ant-thought-chain-item ant-thought-chain-item-error-pending"
+    class="ant-thought-chain-node"
   >
     <div
-      class="ant-thought-chain-item-header"
+      class="ant-thought-chain-status ant-thought-chain-node-icon ant-thought-chain-status-error"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
+        aria-label="close-circle"
+        class="anticon anticon-close-circle"
+        role="img"
       >
-        <span
-          aria-label="check-circle"
-          class="anticon anticon-check-circle"
-          role="img"
+        <svg
+          aria-hidden="true"
+          data-icon="close-circle"
+          fill="currentColor"
+          fill-rule="evenodd"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
         >
-          <svg
-            aria-hidden="true"
-            data-icon="check-circle"
-            fill="currentColor"
-            focusable="false"
-            height="1em"
-            viewBox="64 64 896 896"
-            width="1em"
-          >
-            <path
-              d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0051.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"
-            />
-            <path
-              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-            />
-          </svg>
-        </span>
+          <path
+            d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm0 76c-205.4 0-372 166.6-372 372s166.6 372 372 372 372-166.6 372-372-166.6-372-372-372zm128.01 198.83c.03 0 .05.01.09.06l45.02 45.01a.2.2 0 01.05.09.12.12 0 010 .07c0 .02-.01.04-.05.08L557.25 512l127.87 127.86a.27.27 0 01.05.06v.02a.12.12 0 010 .07c0 .03-.01.05-.05.09l-45.02 45.02a.2.2 0 01-.09.05.12.12 0 01-.07 0c-.02 0-.04-.01-.08-.05L512 557.25 384.14 685.12c-.04.04-.06.05-.08.05a.12.12 0 01-.07 0c-.03 0-.05-.01-.09-.05l-45.02-45.02a.2.2 0 01-.05-.09.12.12 0 010-.07c0-.02.01-.04.06-.08L466.75 512 338.88 384.14a.27.27 0 01-.05-.06l-.01-.02a.12.12 0 010-.07c0-.03.01-.05.05-.09l45.02-45.02a.2.2 0 01.09-.05.12.12 0 01.07 0c.02 0 .04.01.08.06L512 466.75l127.86-127.86c.04-.05.06-.06.08-.06a.12.12 0 01.07 0z"
+          />
+        </svg>
       </span>
-      <div
-        class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
-      >
-        <span
-          aria-describedby="test-id"
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
-        >
-          <strong>
-            <span
-              aria-label="right"
-              class="anticon anticon-right ant-thought-chain-item-collapse-icon"
-              role="img"
-            >
-              <svg
-                aria-hidden="true"
-                data-icon="right"
-                fill="currentColor"
-                focusable="false"
-                height="1em"
-                viewBox="64 64 896 896"
-                width="1em"
-              >
-                <path
-                  d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
-                />
-              </svg>
-            </span>
-            Thought Chain Item Title
-          </strong>
-        </span>
-        <span
-          aria-describedby="test-id"
-          class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
-        >
-          description
-        </span>
-      </div>
-      <div
-        class="ant-thought-chain-item-extra"
-      >
-        Extra
-      </div>
     </div>
     <div
-      class="ant-thought-chain-item-footer"
+      class="ant-thought-chain-node-box"
     >
-      Thought Chain Item Footer
+      <div
+        class="ant-thought-chain-node-header"
+      >
+        <div
+          class="ant-thought-chain-node-title"
+        >
+          Thought Chain Item Title
+        </div>
+        <div
+          class="ant-thought-chain-node-description"
+        >
+          description
+        </div>
+      </div>
+      <div
+        class="ant-thought-chain-node-content"
+      >
+        <div
+          class="ant-thought-chain-node-content-box"
+        >
+          content test2
+        </div>
+      </div>
+      <div
+        class="ant-thought-chain-node-footer"
+      >
+        Thought Chain Item Footer
+      </div>
     </div>
   </div>
   <div
-    class="ant-thought-chain-item ant-thought-chain-item-pending-pending"
+    class="ant-thought-chain-node"
   >
     <div
-      class="ant-thought-chain-item-header"
+      class="ant-thought-chain-status ant-thought-chain-node-icon ant-thought-chain-status-loading"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
+        aria-label="loading"
+        class="anticon anticon-loading anticon-spin"
+        role="img"
       >
-        <span
-          aria-label="check-circle"
-          class="anticon anticon-check-circle"
-          role="img"
+        <svg
+          aria-hidden="true"
+          data-icon="loading"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="0 0 1024 1024"
+          width="1em"
         >
-          <svg
-            aria-hidden="true"
-            data-icon="check-circle"
-            fill="currentColor"
-            focusable="false"
-            height="1em"
-            viewBox="64 64 896 896"
-            width="1em"
-          >
-            <path
-              d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0051.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"
-            />
-            <path
-              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-            />
-          </svg>
-        </span>
+          <path
+            d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"
+          />
+        </svg>
       </span>
-      <div
-        class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
-      >
-        <span
-          aria-describedby="test-id"
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
-        >
-          <strong>
-            <span
-              aria-label="right"
-              class="anticon anticon-right ant-thought-chain-item-collapse-icon"
-              role="img"
-            >
-              <svg
-                aria-hidden="true"
-                data-icon="right"
-                fill="currentColor"
-                focusable="false"
-                height="1em"
-                viewBox="64 64 896 896"
-                width="1em"
-              >
-                <path
-                  d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
-                />
-              </svg>
-            </span>
-            Thought Chain Item Title
-          </strong>
-        </span>
-        <span
-          aria-describedby="test-id"
-          class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
-        >
-          description
-        </span>
-      </div>
-      <div
-        class="ant-thought-chain-item-extra"
-      >
-        Extra
-      </div>
     </div>
     <div
-      class="ant-thought-chain-item-footer"
+      class="ant-thought-chain-node-box"
     >
-      Thought Chain Item Footer
+      <div
+        class="ant-thought-chain-node-header"
+      >
+        <div
+          class="ant-thought-chain-node-title"
+        >
+          Thought Chain Item Title
+        </div>
+        <div
+          class="ant-thought-chain-node-description"
+        >
+          description
+        </div>
+      </div>
+      <div
+        class="ant-thought-chain-node-content"
+      >
+        <div
+          class="ant-thought-chain-node-content-box"
+        >
+          content test3
+        </div>
+      </div>
+      <div
+        class="ant-thought-chain-node-footer"
+      >
+        Thought Chain Item Footer
+      </div>
     </div>
   </div>
 </div>
@@ -263,499 +190,193 @@ exports[`ThoughtChain Component ThoughtChain component work 1`] = `
 
 exports[`ThoughtChain Component rtl render component should be rendered correctly in RTL direction 1`] = `
 <div
-  class="ant-thought-chain ant-thought-chain-rtl ant-thought-chain-middle"
->
-  <div
-    class="ant-thought-chain-item ant-thought-chain-item-success-error"
-  >
-    <div
-      class="ant-thought-chain-item-header"
-    >
-      <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
-      >
-        <span
-          aria-label="check-circle"
-          class="anticon anticon-check-circle"
-          role="img"
-        >
-          <svg
-            aria-hidden="true"
-            data-icon="check-circle"
-            fill="currentColor"
-            focusable="false"
-            height="1em"
-            viewBox="64 64 896 896"
-            width="1em"
-          >
-            <path
-              d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0051.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"
-            />
-            <path
-              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-            />
-          </svg>
-        </span>
-      </span>
-      <div
-        class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
-      >
-        <span
-          aria-describedby="test-id"
-          class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
-        >
-          <strong>
-            <span
-              aria-label="left"
-              class="anticon anticon-left ant-thought-chain-item-collapse-icon"
-              role="img"
-            >
-              <svg
-                aria-hidden="true"
-                data-icon="left"
-                fill="currentColor"
-                focusable="false"
-                height="1em"
-                viewBox="64 64 896 896"
-                width="1em"
-              >
-                <path
-                  d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"
-                />
-              </svg>
-            </span>
-            Thought Chain Item Title
-          </strong>
-        </span>
-        <span
-          aria-describedby="test-id"
-          class="ant-typography ant-typography-rtl ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
-        >
-          description
-        </span>
-      </div>
-      <div
-        class="ant-thought-chain-item-extra"
-      >
-        Extra
-      </div>
-    </div>
-    <div
-      class="ant-thought-chain-item-footer"
-    >
-      Thought Chain Item Footer
-    </div>
-  </div>
-  <div
-    class="ant-thought-chain-item ant-thought-chain-item-error-pending"
-  >
-    <div
-      class="ant-thought-chain-item-header"
-    >
-      <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
-      >
-        <span
-          aria-label="check-circle"
-          class="anticon anticon-check-circle"
-          role="img"
-        >
-          <svg
-            aria-hidden="true"
-            data-icon="check-circle"
-            fill="currentColor"
-            focusable="false"
-            height="1em"
-            viewBox="64 64 896 896"
-            width="1em"
-          >
-            <path
-              d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0051.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"
-            />
-            <path
-              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-            />
-          </svg>
-        </span>
-      </span>
-      <div
-        class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
-      >
-        <span
-          aria-describedby="test-id"
-          class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
-        >
-          <strong>
-            <span
-              aria-label="left"
-              class="anticon anticon-left ant-thought-chain-item-collapse-icon"
-              role="img"
-            >
-              <svg
-                aria-hidden="true"
-                data-icon="left"
-                fill="currentColor"
-                focusable="false"
-                height="1em"
-                viewBox="64 64 896 896"
-                width="1em"
-              >
-                <path
-                  d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"
-                />
-              </svg>
-            </span>
-            Thought Chain Item Title
-          </strong>
-        </span>
-        <span
-          aria-describedby="test-id"
-          class="ant-typography ant-typography-rtl ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
-        >
-          description
-        </span>
-      </div>
-      <div
-        class="ant-thought-chain-item-extra"
-      >
-        Extra
-      </div>
-    </div>
-    <div
-      class="ant-thought-chain-item-footer"
-    >
-      Thought Chain Item Footer
-    </div>
-  </div>
-  <div
-    class="ant-thought-chain-item ant-thought-chain-item-pending-pending"
-  >
-    <div
-      class="ant-thought-chain-item-header"
-    >
-      <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
-      >
-        <span
-          aria-label="check-circle"
-          class="anticon anticon-check-circle"
-          role="img"
-        >
-          <svg
-            aria-hidden="true"
-            data-icon="check-circle"
-            fill="currentColor"
-            focusable="false"
-            height="1em"
-            viewBox="64 64 896 896"
-            width="1em"
-          >
-            <path
-              d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0051.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"
-            />
-            <path
-              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-            />
-          </svg>
-        </span>
-      </span>
-      <div
-        class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
-      >
-        <span
-          aria-describedby="test-id"
-          class="ant-typography ant-typography-rtl ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
-        >
-          <strong>
-            <span
-              aria-label="left"
-              class="anticon anticon-left ant-thought-chain-item-collapse-icon"
-              role="img"
-            >
-              <svg
-                aria-hidden="true"
-                data-icon="left"
-                fill="currentColor"
-                focusable="false"
-                height="1em"
-                viewBox="64 64 896 896"
-                width="1em"
-              >
-                <path
-                  d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"
-                />
-              </svg>
-            </span>
-            Thought Chain Item Title
-          </strong>
-        </span>
-        <span
-          aria-describedby="test-id"
-          class="ant-typography ant-typography-rtl ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
-        >
-          description
-        </span>
-      </div>
-      <div
-        class="ant-thought-chain-item-extra"
-      >
-        Extra
-      </div>
-    </div>
-    <div
-      class="ant-thought-chain-item-footer"
-    >
-      Thought Chain Item Footer
-    </div>
-  </div>
-</div>
+  class="ant-thought-chain ant-thought-chain-box ant-thought-chain-rtl"
+/>
 `;
 
 exports[`ThoughtChain Component test theme component should be rendered correctly when configuring the theme.components 1`] = `
 <div
-  class="ant-thought-chain ant-thought-chain-middle"
+  class="ant-thought-chain ant-thought-chain-box"
 >
   <div
-    class="ant-thought-chain-item ant-thought-chain-item-success-error"
+    class="ant-thought-chain-node"
   >
     <div
-      class="ant-thought-chain-item-header"
+      class="ant-thought-chain-status ant-thought-chain-node-icon ant-thought-chain-status-success"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
+        aria-label="check-circle"
+        class="anticon anticon-check-circle"
+        role="img"
       >
-        <span
-          aria-label="check-circle"
-          class="anticon anticon-check-circle"
-          role="img"
+        <svg
+          aria-hidden="true"
+          data-icon="check-circle"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
         >
-          <svg
-            aria-hidden="true"
-            data-icon="check-circle"
-            fill="currentColor"
-            focusable="false"
-            height="1em"
-            viewBox="64 64 896 896"
-            width="1em"
-          >
-            <path
-              d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0051.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"
-            />
-            <path
-              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-            />
-          </svg>
-        </span>
+          <path
+            d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0051.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"
+          />
+          <path
+            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+          />
+        </svg>
       </span>
-      <div
-        class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
-      >
-        <span
-          aria-describedby="test-id"
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
-        >
-          <strong>
-            <span
-              aria-label="right"
-              class="anticon anticon-right ant-thought-chain-item-collapse-icon"
-              role="img"
-            >
-              <svg
-                aria-hidden="true"
-                data-icon="right"
-                fill="currentColor"
-                focusable="false"
-                height="1em"
-                viewBox="64 64 896 896"
-                width="1em"
-              >
-                <path
-                  d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
-                />
-              </svg>
-            </span>
-            Thought Chain Item Title
-          </strong>
-        </span>
-        <span
-          aria-describedby="test-id"
-          class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
-        >
-          description
-        </span>
-      </div>
-      <div
-        class="ant-thought-chain-item-extra"
-      >
-        Extra
-      </div>
     </div>
     <div
-      class="ant-thought-chain-item-footer"
+      class="ant-thought-chain-node-box"
     >
-      Thought Chain Item Footer
+      <div
+        class="ant-thought-chain-node-header"
+      >
+        <div
+          class="ant-thought-chain-node-title"
+        >
+          Thought Chain Item Title
+        </div>
+        <div
+          class="ant-thought-chain-node-description"
+        >
+          description
+        </div>
+      </div>
+      <div
+        class="ant-thought-chain-node-content"
+      >
+        <div
+          class="ant-thought-chain-node-content-box"
+        >
+          content test1
+        </div>
+      </div>
+      <div
+        class="ant-thought-chain-node-footer"
+      >
+        Thought Chain Item Footer
+      </div>
     </div>
   </div>
   <div
-    class="ant-thought-chain-item ant-thought-chain-item-error-pending"
+    class="ant-thought-chain-node"
   >
     <div
-      class="ant-thought-chain-item-header"
+      class="ant-thought-chain-status ant-thought-chain-node-icon ant-thought-chain-status-error"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
+        aria-label="close-circle"
+        class="anticon anticon-close-circle"
+        role="img"
       >
-        <span
-          aria-label="check-circle"
-          class="anticon anticon-check-circle"
-          role="img"
+        <svg
+          aria-hidden="true"
+          data-icon="close-circle"
+          fill="currentColor"
+          fill-rule="evenodd"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
         >
-          <svg
-            aria-hidden="true"
-            data-icon="check-circle"
-            fill="currentColor"
-            focusable="false"
-            height="1em"
-            viewBox="64 64 896 896"
-            width="1em"
-          >
-            <path
-              d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0051.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"
-            />
-            <path
-              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-            />
-          </svg>
-        </span>
+          <path
+            d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm0 76c-205.4 0-372 166.6-372 372s166.6 372 372 372 372-166.6 372-372-166.6-372-372-372zm128.01 198.83c.03 0 .05.01.09.06l45.02 45.01a.2.2 0 01.05.09.12.12 0 010 .07c0 .02-.01.04-.05.08L557.25 512l127.87 127.86a.27.27 0 01.05.06v.02a.12.12 0 010 .07c0 .03-.01.05-.05.09l-45.02 45.02a.2.2 0 01-.09.05.12.12 0 01-.07 0c-.02 0-.04-.01-.08-.05L512 557.25 384.14 685.12c-.04.04-.06.05-.08.05a.12.12 0 01-.07 0c-.03 0-.05-.01-.09-.05l-45.02-45.02a.2.2 0 01-.05-.09.12.12 0 010-.07c0-.02.01-.04.06-.08L466.75 512 338.88 384.14a.27.27 0 01-.05-.06l-.01-.02a.12.12 0 010-.07c0-.03.01-.05.05-.09l45.02-45.02a.2.2 0 01.09-.05.12.12 0 01.07 0c.02 0 .04.01.08.06L512 466.75l127.86-127.86c.04-.05.06-.06.08-.06a.12.12 0 01.07 0z"
+          />
+        </svg>
       </span>
-      <div
-        class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
-      >
-        <span
-          aria-describedby="test-id"
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
-        >
-          <strong>
-            <span
-              aria-label="right"
-              class="anticon anticon-right ant-thought-chain-item-collapse-icon"
-              role="img"
-            >
-              <svg
-                aria-hidden="true"
-                data-icon="right"
-                fill="currentColor"
-                focusable="false"
-                height="1em"
-                viewBox="64 64 896 896"
-                width="1em"
-              >
-                <path
-                  d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
-                />
-              </svg>
-            </span>
-            Thought Chain Item Title
-          </strong>
-        </span>
-        <span
-          aria-describedby="test-id"
-          class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
-        >
-          description
-        </span>
-      </div>
-      <div
-        class="ant-thought-chain-item-extra"
-      >
-        Extra
-      </div>
     </div>
     <div
-      class="ant-thought-chain-item-footer"
+      class="ant-thought-chain-node-box"
     >
-      Thought Chain Item Footer
+      <div
+        class="ant-thought-chain-node-header"
+      >
+        <div
+          class="ant-thought-chain-node-title"
+        >
+          Thought Chain Item Title
+        </div>
+        <div
+          class="ant-thought-chain-node-description"
+        >
+          description
+        </div>
+      </div>
+      <div
+        class="ant-thought-chain-node-content"
+      >
+        <div
+          class="ant-thought-chain-node-content-box"
+        >
+          content test2
+        </div>
+      </div>
+      <div
+        class="ant-thought-chain-node-footer"
+      >
+        Thought Chain Item Footer
+      </div>
     </div>
   </div>
   <div
-    class="ant-thought-chain-item ant-thought-chain-item-pending-pending"
+    class="ant-thought-chain-node"
   >
     <div
-      class="ant-thought-chain-item-header"
+      class="ant-thought-chain-status ant-thought-chain-node-icon ant-thought-chain-status-loading"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon ant-thought-chain-item-icon"
+        aria-label="loading"
+        class="anticon anticon-loading anticon-spin"
+        role="img"
       >
-        <span
-          aria-label="check-circle"
-          class="anticon anticon-check-circle"
-          role="img"
+        <svg
+          aria-hidden="true"
+          data-icon="loading"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="0 0 1024 1024"
+          width="1em"
         >
-          <svg
-            aria-hidden="true"
-            data-icon="check-circle"
-            fill="currentColor"
-            focusable="false"
-            height="1em"
-            viewBox="64 64 896 896"
-            width="1em"
-          >
-            <path
-              d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0051.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"
-            />
-            <path
-              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-            />
-          </svg>
-        </span>
+          <path
+            d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"
+          />
+        </svg>
       </span>
-      <div
-        class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
-      >
-        <span
-          aria-describedby="test-id"
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
-        >
-          <strong>
-            <span
-              aria-label="right"
-              class="anticon anticon-right ant-thought-chain-item-collapse-icon"
-              role="img"
-            >
-              <svg
-                aria-hidden="true"
-                data-icon="right"
-                fill="currentColor"
-                focusable="false"
-                height="1em"
-                viewBox="64 64 896 896"
-                width="1em"
-              >
-                <path
-                  d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
-                />
-              </svg>
-            </span>
-            Thought Chain Item Title
-          </strong>
-        </span>
-        <span
-          aria-describedby="test-id"
-          class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
-        >
-          description
-        </span>
-      </div>
-      <div
-        class="ant-thought-chain-item-extra"
-      >
-        Extra
-      </div>
     </div>
     <div
-      class="ant-thought-chain-item-footer"
+      class="ant-thought-chain-node-box"
     >
-      Thought Chain Item Footer
+      <div
+        class="ant-thought-chain-node-header"
+      >
+        <div
+          class="ant-thought-chain-node-title"
+        >
+          Thought Chain Item Title
+        </div>
+        <div
+          class="ant-thought-chain-node-description"
+        >
+          description
+        </div>
+      </div>
+      <div
+        class="ant-thought-chain-node-content"
+      >
+        <div
+          class="ant-thought-chain-node-content-box"
+        >
+          content test3
+        </div>
+      </div>
+      <div
+        class="ant-thought-chain-node-footer"
+      >
+        Thought Chain Item Footer
+      </div>
     </div>
   </div>
 </div>

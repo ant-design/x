@@ -1,6 +1,6 @@
 {
   "name": "@ant-design/x",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "description": "Craft AI-driven interfaces effortlessly",
   "keywords": [
     "AI",
@@ -54,7 +54,6 @@
     "lint:md": "remark . -f -q",
     "lint:script": "biome lint",
     "lint:style": "tsx scripts/check-cssinjs.tsx",
-    "prepublishOnly": "tsx ./scripts/pre-publish.ts",
     "prettier": "prettier -c --write **/* --cache",
     "pub": "echo 'Please use `npm publish` instead.'",
     "presite": "npm run prestart",
