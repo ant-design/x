@@ -48,7 +48,7 @@ const CustomTheme: React.FC = () => {
   const [locale, lang] = useLocale(locales);
   const { styles } = useStyle();
 
-  const [theme, setTheme] = React.useState<Omit<ThemeConfig, 'components' | 'algorithm'>>({});
+  const [theme, setTheme] = React.useState<ThemeConfig>({});
 
   useEffect(() => {
     const storedConfig = localStorage.getItem(ANT_DESIGN_V5_THEME_EDITOR_THEME);
@@ -73,7 +73,7 @@ const CustomTheme: React.FC = () => {
         <ThemeEditor
           advanced
           hideAdvancedSwitcher
-          theme={{ name: 'Custom Theme', key: 'test', config: theme }}
+          theme={{ name: 'Custom Theme', key: 'test', config: theme as any }}
           style={{ height: 'calc(100vh - 64px)' }}
           onThemeChange={(newTheme) => {
             setTheme(newTheme.config);
