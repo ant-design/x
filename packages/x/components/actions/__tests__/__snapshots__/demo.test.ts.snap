@@ -1,8 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`renders components/actions/demo/basic.tsx correctly 1`] = `
 <div
-  class="ant-actions"
+  class="ant-actions css-var-«R0»"
 >
   <div
     class="ant-actions-list borderless"
@@ -69,7 +69,7 @@ exports[`renders components/actions/demo/basic.tsx correctly 1`] = `
 
 exports[`renders components/actions/demo/sub.tsx correctly 1`] = `
 <div
-  class="ant-actions"
+  class="ant-actions css-var-«R0»"
 >
   <div
     class="ant-actions-list borderless"
@@ -191,7 +191,7 @@ exports[`renders components/actions/demo/sub.tsx correctly 1`] = `
 
 exports[`renders components/actions/demo/variant.tsx correctly 1`] = `
 <div
-  class="ant-actions"
+  class="ant-actions css-var-«R0»"
 >
   <div
     class="ant-actions-list border"

@@ -2,14 +2,14 @@
 
 exports[`renders components/thought-chain/demo/basic.tsx extend context correctly 1`] = `
 <div
-  class="ant-card ant-card-bordered"
+  class="ant-card ant-card-bordered css-var-«r23»"
   style="width: 500px;"
 >
   <div
     class="ant-card-body"
   >
     <div
-      class="ant-thought-chain ant-thought-chain-box"
+      class="ant-thought-chain css-var-«r23» ant-thought-chain-box"
     >
       <div
         class="ant-thought-chain-node"
@@ -144,14 +144,14 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
 
 exports[`renders components/thought-chain/demo/collapsible.tsx extend context correctly 1`] = `
 <div
-  class="ant-card ant-card-bordered"
+  class="ant-card ant-card-bordered css-var-«r1o»"
   style="width: 500px;"
 >
   <div
     class="ant-card-body"
   >
     <div
-      class="ant-thought-chain ant-thought-chain-box"
+      class="ant-thought-chain css-var-«r1o» ant-thought-chain-box"
     >
       <div
         class="ant-thought-chain-node"
@@ -226,15 +226,15 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
               class="ant-thought-chain-node-content-box"
             >
               <div
-                class="ant-flex ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+                class="ant-flex css-var-«r1o» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
               >
                 <span
-                  class="ant-typography ant-typography-secondary"
+                  class="ant-typography ant-typography-secondary css-var-«r1o»"
                 >
                   Creating folder for new component
                 </span>
                 <div
-                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                  class="ant-thought-chain css-var-«r1o» ant-thought-chain-item ant-thought-chain-item-solid"
                 >
                   <div
                     class="ant-thought-chain-status"
@@ -275,12 +275,12 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
                   </div>
                 </div>
                 <span
-                  class="ant-typography ant-typography-secondary"
+                  class="ant-typography ant-typography-secondary css-var-«r1o»"
                 >
                   Creating files needed for new component
                 </span>
                 <div
-                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                  class="ant-thought-chain css-var-«r1o» ant-thought-chain-item ant-thought-chain-item-solid"
                 >
                   <div
                     class="ant-thought-chain-status"
@@ -321,12 +321,12 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
                   </div>
                 </div>
                 <span
-                  class="ant-typography ant-typography-secondary"
+                  class="ant-typography ant-typography-secondary css-var-«r1o»"
                 >
                   Creating Chinese description file for new component
                 </span>
                 <div
-                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                  class="ant-thought-chain css-var-«r1o» ant-thought-chain-item ant-thought-chain-item-solid"
                 >
                   <div
                     class="ant-thought-chain-status"
@@ -367,12 +367,12 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
                   </div>
                 </div>
                 <span
-                  class="ant-typography ant-typography-secondary"
+                  class="ant-typography ant-typography-secondary css-var-«r1o»"
                 >
                   Creating English description file for new component
                 </span>
                 <div
-                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                  class="ant-thought-chain css-var-«r1o» ant-thought-chain-item ant-thought-chain-item-solid"
                 >
                   <div
                     class="ant-thought-chain-status"
@@ -467,10 +467,10 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
               class="ant-thought-chain-node-content-box"
             >
               <div
-                class="ant-flex ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+                class="ant-flex css-var-«r1o» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
               >
                 <div
-                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                  class="ant-thought-chain css-var-«r1o» ant-thought-chain-item ant-thought-chain-item-solid"
                 >
                   <div
                     class="ant-thought-chain-status ant-thought-chain-status-success"
@@ -514,7 +514,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
                   </div>
                 </div>
                 <div
-                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                  class="ant-thought-chain css-var-«r1o» ant-thought-chain-item ant-thought-chain-item-solid"
                 >
                   <div
                     class="ant-thought-chain-status ant-thought-chain-status-success"
@@ -558,7 +558,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
                   </div>
                 </div>
                 <div
-                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                  class="ant-thought-chain css-var-«r1o» ant-thought-chain-item ant-thought-chain-item-solid"
                 >
                   <div
                     class="ant-thought-chain-status ant-thought-chain-status-success"
@@ -602,7 +602,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
                   </div>
                 </div>
                 <div
-                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                  class="ant-thought-chain css-var-«r1o» ant-thought-chain-item ant-thought-chain-item-solid"
                 >
                   <div
                     class="ant-thought-chain-status ant-thought-chain-status-success"
@@ -659,14 +659,14 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
 
 exports[`renders components/thought-chain/demo/controlled-collapsible.tsx extend context correctly 1`] = `
 <div
-  class="ant-card ant-card-bordered"
+  class="ant-card ant-card-bordered css-var-«r1g»"
   style="width: 500px;"
 >
   <div
     class="ant-card-body"
   >
     <button
-      class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-«r1g» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       style="margin-bottom: 16px;"
       type="button"
     >
@@ -675,7 +675,7 @@ exports[`renders components/thought-chain/demo/controlled-collapsible.tsx extend
       </span>
     </button>
     <div
-      class="ant-thought-chain ant-thought-chain-box"
+      class="ant-thought-chain css-var-«r1g» ant-thought-chain-box"
     >
       <div
         class="ant-thought-chain-node"
@@ -750,15 +750,15 @@ exports[`renders components/thought-chain/demo/controlled-collapsible.tsx extend
               class="ant-thought-chain-node-content-box"
             >
               <div
-                class="ant-flex ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+                class="ant-flex css-var-«r1g» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
               >
                 <span
-                  class="ant-typography ant-typography-secondary"
+                  class="ant-typography ant-typography-secondary css-var-«r1g»"
                 >
                   Creating folder for new component
                 </span>
                 <div
-                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                  class="ant-thought-chain css-var-«r1g» ant-thought-chain-item ant-thought-chain-item-solid"
                 >
                   <div
                     class="ant-thought-chain-status"
@@ -799,12 +799,12 @@ exports[`renders components/thought-chain/demo/controlled-collapsible.tsx extend
                   </div>
                 </div>
                 <span
-                  class="ant-typography ant-typography-secondary"
+                  class="ant-typography ant-typography-secondary css-var-«r1g»"
                 >
                   Creating files needed for new component
                 </span>
                 <div
-                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                  class="ant-thought-chain css-var-«r1g» ant-thought-chain-item ant-thought-chain-item-solid"
                 >
                   <div
                     class="ant-thought-chain-status"
@@ -845,17 +845,17 @@ exports[`renders components/thought-chain/demo/controlled-collapsible.tsx extend
                   </div>
                 </div>
                 <span
-                  class="ant-typography ant-typography-secondary"
+                  class="ant-typography ant-typography-secondary css-var-«r1g»"
                 >
                   Creating Chinese documentation file
                 </span>
                 <span
-                  class="ant-typography ant-typography-secondary"
+                  class="ant-typography ant-typography-secondary css-var-«r1g»"
                 >
                   Creating English description file for new component
                 </span>
                 <div
-                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                  class="ant-thought-chain css-var-«r1g» ant-thought-chain-item ant-thought-chain-item-solid"
                 >
                   <div
                     class="ant-thought-chain-status"
@@ -1017,10 +1017,10 @@ exports[`renders components/thought-chain/demo/controlled-collapsible.tsx extend
               class="ant-thought-chain-node-content-box"
             >
               <div
-                class="ant-flex ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+                class="ant-flex css-var-«r1g» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
               >
                 <div
-                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                  class="ant-thought-chain css-var-«r1g» ant-thought-chain-item ant-thought-chain-item-solid"
                 >
                   <div
                     class="ant-thought-chain-status ant-thought-chain-status-success"
@@ -1077,14 +1077,14 @@ exports[`renders components/thought-chain/demo/controlled-collapsible.tsx extend
 
 exports[`renders components/thought-chain/demo/customization.tsx extend context correctly 1`] = `
 <div
-  class="ant-card ant-card-bordered"
+  class="ant-card ant-card-bordered css-var-«r14»"
   style="width: 500px;"
 >
   <div
     class="ant-card-body"
   >
     <div
-      class="ant-thought-chain ant-thought-chain-box"
+      class="ant-thought-chain css-var-«r14» ant-thought-chain-box"
     >
       <div
         class="ant-thought-chain-node"
@@ -1141,10 +1141,10 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
               class="ant-thought-chain-node-content-box"
             >
               <div
-                class="ant-flex ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+                class="ant-flex css-var-«r14» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
               >
                 <div
-                  class="ant-think"
+                  class="ant-think css-var-«r14»"
                 >
                   <div
                     class="ant-think-status-wrapper"
@@ -1213,12 +1213,12 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
                   </div>
                 </div>
                 <span
-                  class="ant-typography ant-typography-secondary"
+                  class="ant-typography ant-typography-secondary css-var-«r14»"
                 >
                   Creating folder for new component
                 </span>
                 <div
-                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                  class="ant-thought-chain css-var-«r14» ant-thought-chain-item ant-thought-chain-item-solid"
                 >
                   <div
                     class="ant-thought-chain-status"
@@ -1259,12 +1259,12 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
                   </div>
                 </div>
                 <span
-                  class="ant-typography ant-typography-secondary"
+                  class="ant-typography ant-typography-secondary css-var-«r14»"
                 >
                   Creating files needed for new component
                 </span>
                 <div
-                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                  class="ant-thought-chain css-var-«r14» ant-thought-chain-item ant-thought-chain-item-solid"
                 >
                   <div
                     class="ant-thought-chain-status"
@@ -1305,12 +1305,12 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
                   </div>
                 </div>
                 <span
-                  class="ant-typography ant-typography-secondary"
+                  class="ant-typography ant-typography-secondary css-var-«r14»"
                 >
                   Creating Chinese documentation file for new component
                 </span>
                 <div
-                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                  class="ant-thought-chain css-var-«r14» ant-thought-chain-item ant-thought-chain-item-solid"
                 >
                   <div
                     class="ant-thought-chain-status"
@@ -1351,12 +1351,12 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
                   </div>
                 </div>
                 <span
-                  class="ant-typography ant-typography-secondary"
+                  class="ant-typography ant-typography-secondary css-var-«r14»"
                 >
                   Creating English description file for new component
                 </span>
                 <div
-                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                  class="ant-thought-chain css-var-«r14» ant-thought-chain-item ant-thought-chain-item-solid"
                 >
                   <div
                     class="ant-thought-chain-status"
@@ -1403,7 +1403,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
             class="ant-thought-chain-node-footer"
           >
             <button
-              class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-block"
+              class="ant-btn css-var-«r14» ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-block"
               type="button"
             >
               <span>
@@ -1537,10 +1537,10 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
               class="ant-thought-chain-node-content-box"
             >
               <div
-                class="ant-flex ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+                class="ant-flex css-var-«r14» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
               >
                 <div
-                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                  class="ant-thought-chain css-var-«r14» ant-thought-chain-item ant-thought-chain-item-solid"
                 >
                   <div
                     class="ant-thought-chain-status ant-thought-chain-status-success"
@@ -1584,7 +1584,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
                   </div>
                 </div>
                 <div
-                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                  class="ant-thought-chain css-var-«r14» ant-thought-chain-item ant-thought-chain-item-solid"
                 >
                   <div
                     class="ant-thought-chain-status ant-thought-chain-status-success"
@@ -1628,7 +1628,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
                   </div>
                 </div>
                 <div
-                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                  class="ant-thought-chain css-var-«r14» ant-thought-chain-item ant-thought-chain-item-solid"
                 >
                   <div
                     class="ant-thought-chain-status ant-thought-chain-status-success"
@@ -1672,7 +1672,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
                   </div>
                 </div>
                 <div
-                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                  class="ant-thought-chain css-var-«r14» ant-thought-chain-item ant-thought-chain-item-solid"
                 >
                   <div
                     class="ant-thought-chain-status ant-thought-chain-status-success"
@@ -1729,14 +1729,14 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
 
 exports[`renders components/thought-chain/demo/nested.tsx extend context correctly 1`] = `
 <div
-  class="ant-card ant-card-bordered"
+  class="ant-card ant-card-bordered css-var-«rs»"
   style="width: 500px;"
 >
   <div
     class="ant-card-body"
   >
     <div
-      class="ant-thought-chain ant-thought-chain-box"
+      class="ant-thought-chain css-var-«rs» ant-thought-chain-box"
     >
       <div
         class="ant-thought-chain-node"
@@ -1774,7 +1774,7 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
               class="ant-thought-chain-node-content-box"
             >
               <div
-                class="ant-thought-chain ant-thought-chain-box"
+                class="ant-thought-chain css-var-«rs» ant-thought-chain-box"
               >
                 <div
                   class="ant-thought-chain-node"
@@ -1845,7 +1845,7 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
             class="ant-thought-chain-node-footer"
           >
             <button
-              class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+              class="ant-btn css-var-«rs» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
               type="button"
             >
               <span>
@@ -1891,7 +1891,7 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
               class="ant-thought-chain-node-content-box"
             >
               <div
-                class="ant-thought-chain ant-thought-chain-box"
+                class="ant-thought-chain css-var-«rs» ant-thought-chain-box"
               >
                 <div
                   class="ant-thought-chain-node"
@@ -1993,7 +1993,7 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
             class="ant-thought-chain-node-footer"
           >
             <button
-              class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+              class="ant-btn css-var-«rs» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
               type="button"
             >
               <span>
@@ -2012,18 +2012,18 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
 
 exports[`renders components/thought-chain/demo/simple.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-«r9» ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-flex ant-flex-wrap-wrap ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-«r9» ant-flex-wrap-wrap ant-flex-align-center ant-flex-gap-small"
   >
     <span
-      class="ant-typography"
+      class="ant-typography css-var-«r9»"
     >
       loading status:
     </span>
     <div
-      class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+      class="ant-thought-chain css-var-«r9» ant-thought-chain-item ant-thought-chain-item-solid"
     >
       <div
         class="ant-thought-chain-status ant-thought-chain-status-loading"
@@ -2059,7 +2059,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
       </div>
     </div>
     <div
-      class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-outlined"
+      class="ant-thought-chain css-var-«r9» ant-thought-chain-item ant-thought-chain-item-outlined"
     >
       <div
         class="ant-thought-chain-status ant-thought-chain-status-loading"
@@ -2095,7 +2095,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
       </div>
     </div>
     <div
-      class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-text"
+      class="ant-thought-chain css-var-«r9» ant-thought-chain-item ant-thought-chain-item-text"
     >
       <div
         class="ant-thought-chain-status ant-thought-chain-status-loading"
@@ -2132,15 +2132,15 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
     </div>
   </div>
   <div
-    class="ant-flex ant-flex-wrap-wrap ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-«r9» ant-flex-wrap-wrap ant-flex-align-center ant-flex-gap-small"
   >
     <span
-      class="ant-typography"
+      class="ant-typography css-var-«r9»"
     >
       success status:
     </span>
     <div
-      class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+      class="ant-thought-chain css-var-«r9» ant-thought-chain-item ant-thought-chain-item-solid"
     >
       <div
         class="ant-thought-chain-status ant-thought-chain-status-success"
@@ -2179,7 +2179,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
       </div>
     </div>
     <div
-      class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-outlined"
+      class="ant-thought-chain css-var-«r9» ant-thought-chain-item ant-thought-chain-item-outlined"
     >
       <div
         class="ant-thought-chain-status ant-thought-chain-status-success"
@@ -2218,7 +2218,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
       </div>
     </div>
     <div
-      class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-text"
+      class="ant-thought-chain css-var-«r9» ant-thought-chain-item ant-thought-chain-item-text"
     >
       <div
         class="ant-thought-chain-status ant-thought-chain-status-success"
@@ -2258,15 +2258,15 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
     </div>
   </div>
   <div
-    class="ant-flex ant-flex-wrap-wrap ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-«r9» ant-flex-wrap-wrap ant-flex-align-center ant-flex-gap-small"
   >
     <span
-      class="ant-typography"
+      class="ant-typography css-var-«r9»"
     >
       error status:
     </span>
     <div
-      class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid ant-thought-chain-item-error"
+      class="ant-thought-chain css-var-«r9» ant-thought-chain-item ant-thought-chain-item-solid ant-thought-chain-item-error"
     >
       <div
         class="ant-thought-chain-status ant-thought-chain-status-error"
@@ -2303,7 +2303,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
       </div>
     </div>
     <div
-      class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-outlined ant-thought-chain-item-error"
+      class="ant-thought-chain css-var-«r9» ant-thought-chain-item ant-thought-chain-item-outlined ant-thought-chain-item-error"
     >
       <div
         class="ant-thought-chain-status ant-thought-chain-status-error"
@@ -2340,7 +2340,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
       </div>
     </div>
     <div
-      class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-text ant-thought-chain-item-error"
+      class="ant-thought-chain css-var-«r9» ant-thought-chain-item ant-thought-chain-item-text ant-thought-chain-item-error"
     >
       <div
         class="ant-thought-chain-status ant-thought-chain-status-error"
@@ -2378,15 +2378,15 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
     </div>
   </div>
   <div
-    class="ant-flex ant-flex-wrap-wrap ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-«r9» ant-flex-wrap-wrap ant-flex-align-center ant-flex-gap-small"
   >
     <span
-      class="ant-typography"
+      class="ant-typography css-var-«r9»"
     >
       abort status
     </span>
     <div
-      class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+      class="ant-thought-chain css-var-«r9» ant-thought-chain-item ant-thought-chain-item-solid"
     >
       <div
         class="ant-thought-chain-status ant-thought-chain-status-abort"
@@ -2425,7 +2425,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
       </div>
     </div>
     <div
-      class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-outlined"
+      class="ant-thought-chain css-var-«r9» ant-thought-chain-item ant-thought-chain-item-outlined"
     >
       <div
         class="ant-thought-chain-status ant-thought-chain-status-abort"
@@ -2464,7 +2464,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
       </div>
     </div>
     <div
-      class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-text"
+      class="ant-thought-chain css-var-«r9» ant-thought-chain-item ant-thought-chain-item-text"
     >
       <div
         class="ant-thought-chain-status ant-thought-chain-status-abort"
@@ -2504,15 +2504,15 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
     </div>
   </div>
   <div
-    class="ant-flex ant-flex-wrap-wrap ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-«r9» ant-flex-wrap-wrap ant-flex-align-center ant-flex-gap-small"
   >
     <span
-      class="ant-typography"
+      class="ant-typography css-var-«r9»"
     >
       custom icon:
     </span>
     <div
-      class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+      class="ant-thought-chain css-var-«r9» ant-thought-chain-item ant-thought-chain-item-solid"
     >
       <div
         class="ant-thought-chain-status"
@@ -2549,7 +2549,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
       </div>
     </div>
     <div
-      class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-outlined"
+      class="ant-thought-chain css-var-«r9» ant-thought-chain-item ant-thought-chain-item-outlined"
     >
       <div
         class="ant-thought-chain-status"
@@ -2586,7 +2586,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
       </div>
     </div>
     <div
-      class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-text"
+      class="ant-thought-chain css-var-«r9» ant-thought-chain-item ant-thought-chain-item-text"
     >
       <div
         class="ant-thought-chain-status"
@@ -2624,15 +2624,15 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
     </div>
   </div>
   <div
-    class="ant-flex ant-flex-wrap-wrap ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-«r9» ant-flex-wrap-wrap ant-flex-align-center ant-flex-gap-small"
   >
     <span
-      class="ant-typography"
+      class="ant-typography css-var-«r9»"
     >
       description & click:
     </span>
     <div
-      class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid ant-thought-chain-item-click"
+      class="ant-thought-chain css-var-«r9» ant-thought-chain-item ant-thought-chain-item-solid ant-thought-chain-item-click"
     >
       <div
         class="ant-thought-chain-status"
@@ -2673,7 +2673,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
       </div>
     </div>
     <div
-      class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-outlined ant-thought-chain-item-click"
+      class="ant-thought-chain css-var-«r9» ant-thought-chain-item ant-thought-chain-item-outlined ant-thought-chain-item-click"
     >
       <div
         class="ant-thought-chain-status"
@@ -2714,7 +2714,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
       </div>
     </div>
     <div
-      class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-text ant-thought-chain-item-click"
+      class="ant-thought-chain css-var-«r9» ant-thought-chain-item ant-thought-chain-item-text ant-thought-chain-item-click"
     >
       <div
         class="ant-thought-chain-status"
@@ -2762,14 +2762,14 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
 
 exports[`renders components/thought-chain/demo/single-row.tsx extend context correctly 1`] = `
 <div
-  class="ant-card ant-card-bordered"
+  class="ant-card ant-card-bordered css-var-«r3»"
   style="width: 500px;"
 >
   <div
     class="ant-card-body"
   >
     <div
-      class="ant-thought-chain ant-thought-chain-box"
+      class="ant-thought-chain css-var-«r3» ant-thought-chain-box"
     >
       <div
         class="ant-thought-chain-node"
@@ -2814,15 +2814,15 @@ exports[`renders components/thought-chain/demo/single-row.tsx extend context cor
               style="background-color: rgba(0, 0, 0, .01); border-radius: 8px; padding: 10px; margin-block-start: 10px; border: 1px solid rgba(0, 0, 0, .04);"
             >
               <div
-                class="ant-flex ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+                class="ant-flex css-var-«r3» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
               >
                 <span
-                  class="ant-typography ant-typography-secondary"
+                  class="ant-typography ant-typography-secondary css-var-«r3»"
                 >
                   Creating folder for new component
                 </span>
                 <div
-                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                  class="ant-thought-chain css-var-«r3» ant-thought-chain-item ant-thought-chain-item-solid"
                 >
                   <div
                     class="ant-thought-chain-status"
@@ -2863,12 +2863,12 @@ exports[`renders components/thought-chain/demo/single-row.tsx extend context cor
                   </div>
                 </div>
                 <span
-                  class="ant-typography ant-typography-secondary"
+                  class="ant-typography ant-typography-secondary css-var-«r3»"
                 >
                   Creating files needed for new component
                 </span>
                 <div
-                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                  class="ant-thought-chain css-var-«r3» ant-thought-chain-item ant-thought-chain-item-solid"
                 >
                   <div
                     class="ant-thought-chain-status"
@@ -2909,12 +2909,12 @@ exports[`renders components/thought-chain/demo/single-row.tsx extend context cor
                   </div>
                 </div>
                 <span
-                  class="ant-typography ant-typography-secondary"
+                  class="ant-typography ant-typography-secondary css-var-«r3»"
                 >
                   Creating Chinese description file for new component
                 </span>
                 <div
-                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                  class="ant-thought-chain css-var-«r3» ant-thought-chain-item ant-thought-chain-item-solid"
                 >
                   <div
                     class="ant-thought-chain-status"
@@ -2955,12 +2955,12 @@ exports[`renders components/thought-chain/demo/single-row.tsx extend context cor
                   </div>
                 </div>
                 <span
-                  class="ant-typography ant-typography-secondary"
+                  class="ant-typography ant-typography-secondary css-var-«r3»"
                 >
                   Creating English description file for new component
                 </span>
                 <div
-                  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+                  class="ant-thought-chain css-var-«r3» ant-thought-chain-item ant-thought-chain-item-solid"
                 >
                   <div
                     class="ant-thought-chain-status"
@@ -3014,14 +3014,14 @@ exports[`renders components/thought-chain/demo/single-row.tsx extend context cor
 
 exports[`renders components/thought-chain/demo/status.tsx extend context correctly 1`] = `
 <div
-  class="ant-card ant-card-bordered"
+  class="ant-card ant-card-bordered css-var-«r0»"
   style="width: 500px;"
 >
   <div
     class="ant-card-body"
   >
     <button
-      class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-«r0» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       style="margin-bottom: 16px;"
       type="button"
     >
@@ -3030,7 +3030,7 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
       </span>
     </button>
     <div
-      class="ant-thought-chain ant-thought-chain-box"
+      class="ant-thought-chain css-var-«r0» ant-thought-chain-box"
     >
       <div
         class="ant-thought-chain-node"

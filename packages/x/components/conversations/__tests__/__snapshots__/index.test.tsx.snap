@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Conversations Component Conversations component work 1`] = `
 <ul
@@ -18,7 +18,7 @@ exports[`Conversations Component Conversations component work 1`] = `
       </div>
     </div>
     <span
-      class="ant-typography ant-conversations-label"
+      class="ant-typography ant-conversations-label css-var-root"
     >
       What is Ant Design X ?
     </span>
@@ -27,7 +27,7 @@ exports[`Conversations Component Conversations component work 1`] = `
     class="ant-conversations-item"
   >
     <span
-      class="ant-typography ant-conversations-label"
+      class="ant-typography ant-conversations-label css-var-root"
     >
       <div>
         Getting Started:
@@ -46,7 +46,7 @@ exports[`Conversations Component Conversations component work 1`] = `
     title="In Docker, use 🐑 Ollama and initialize"
   >
     <span
-      class="ant-typography ant-conversations-label"
+      class="ant-typography ant-conversations-label css-var-root"
     >
       In Docker, use 🐑 Ollama and initialize
     </span>
@@ -56,7 +56,7 @@ exports[`Conversations Component Conversations component work 1`] = `
     title="Expired, please go to the recycle bin to check"
   >
     <span
-      class="ant-typography ant-conversations-label"
+      class="ant-typography ant-conversations-label css-var-root"
     >
       Expired, please go to the recycle bin to check
     </span>
@@ -66,7 +66,7 @@ exports[`Conversations Component Conversations component work 1`] = `
     title="No key"
   >
     <span
-      class="ant-typography ant-conversations-label"
+      class="ant-typography ant-conversations-label css-var-root"
     >
       No key
     </span>
@@ -109,7 +109,7 @@ exports[`Conversations Component rtl render component should be rendered correct
           </div>
         </div>
         <span
-          class="ant-typography ant-typography-rtl ant-conversations-label"
+          class="ant-typography ant-typography-rtl ant-conversations-label css-var-root"
         >
           What is Ant Design X ?
         </span>
@@ -140,7 +140,7 @@ exports[`Conversations Component rtl render component should be rendered correct
     class="ant-conversations-item"
   >
     <span
-      class="ant-typography ant-typography-rtl ant-conversations-label"
+      class="ant-typography ant-typography-rtl ant-conversations-label css-var-root"
     >
       <div>
         Getting Started:
@@ -179,7 +179,7 @@ exports[`Conversations Component rtl render component should be rendered correct
     title="In Docker, use 🐑 Ollama and initialize"
   >
     <span
-      class="ant-typography ant-typography-rtl ant-conversations-label"
+      class="ant-typography ant-typography-rtl ant-conversations-label css-var-root"
     >
       In Docker, use 🐑 Ollama and initialize
     </span>
@@ -209,7 +209,7 @@ exports[`Conversations Component rtl render component should be rendered correct
     title="Expired, please go to the recycle bin to check"
   >
     <span
-      class="ant-typography ant-typography-rtl ant-conversations-label"
+      class="ant-typography ant-typography-rtl ant-conversations-label css-var-root"
     >
       Expired, please go to the recycle bin to check
     </span>
@@ -219,7 +219,7 @@ exports[`Conversations Component rtl render component should be rendered correct
     title="No key"
   >
     <span
-      class="ant-typography ant-typography-rtl ant-conversations-label"
+      class="ant-typography ant-typography-rtl ant-conversations-label css-var-root"
     >
       No key
     </span>

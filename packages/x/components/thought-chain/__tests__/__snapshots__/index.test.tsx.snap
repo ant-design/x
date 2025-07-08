@@ -196,7 +196,7 @@ exports[`ThoughtChain Component rtl render component should be rendered correctl
 
 exports[`ThoughtChain Component test theme component should be rendered correctly when configuring the theme.components 1`] = `
 <div
-  class="ant-thought-chain ant-thought-chain-box"
+  class="ant-thought-chain css-var-«r1» ant-thought-chain-box"
 >
   <div
     class="ant-thought-chain-node"

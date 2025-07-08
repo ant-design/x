@@ -1,11 +1,11 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`welcome rtl render component should be rendered correctly in RTL direction 1`] = `
 <div
-  class="ant-welcome ant-welcome-filled ant-welcome-rtl ant-flex ant-flex-rtl"
+  class="ant-welcome ant-welcome-filled ant-welcome-rtl ant-flex css-var-root ant-flex-rtl"
 >
   <div
-    class="ant-welcome-content-wrapper ant-flex ant-flex-align-stretch ant-flex-rtl ant-flex-vertical"
+    class="ant-welcome-content-wrapper ant-flex css-var-root ant-flex-align-stretch ant-flex-rtl ant-flex-vertical"
   />
 </div>
 `;

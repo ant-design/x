@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Sender Component loading state 1`] = `
 <DocumentFragment>
@@ -9,17 +9,17 @@ exports[`Sender Component loading state 1`] = `
       class="ant-sender-content"
     >
       <textarea
-        class="ant-input ant-input-borderless ant-sender-input"
+        class="ant-input ant-input-borderless css-var-root ant-input-css-var ant-sender-input"
         style="overflow-y: hidden; resize: none;"
       />
       <div
         class="ant-sender-actions-list"
       >
         <div
-          class="ant-sender-actions-list-presets ant-flex"
+          class="ant-sender-actions-list-presets ant-flex css-var-root"
         >
           <button
-            class="ant-btn ant-btn-circle ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-sender-actions-btn ant-sender-actions-btn-loading-button"
+            class="ant-btn css-var-root ant-btn-circle ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-sender-actions-btn ant-sender-actions-btn-loading-button"
             type="button"
           >
             <svg
@@ -84,17 +84,17 @@ exports[`Sender Component rtl render component should be rendered correctly in R
     class="ant-sender-content"
   >
     <textarea
-      class="ant-input ant-input-borderless ant-sender-input"
+      class="ant-input ant-input-borderless css-var-root ant-input-css-var ant-sender-input"
       style="overflow-y: hidden; resize: none;"
     />
     <div
       class="ant-sender-actions-list"
     >
       <div
-        class="ant-sender-actions-list-presets ant-flex ant-flex-rtl"
+        class="ant-sender-actions-list-presets ant-flex css-var-root ant-flex-rtl"
       >
         <button
-          class="ant-btn ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-btn-rtl ant-sender-actions-btn ant-sender-actions-btn-disabled"
+          class="ant-btn css-var-root ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-btn-rtl ant-sender-actions-btn ant-sender-actions-btn-disabled"
           type="button"
         >
           <span

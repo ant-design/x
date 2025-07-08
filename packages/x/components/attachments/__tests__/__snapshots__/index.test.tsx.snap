@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`attachments rtl render component should be rendered correctly in RTL direction 1`] = `
 <div
@@ -10,7 +10,7 @@ exports[`attachments rtl render component should be rendered correctly in RTL di
     style="display: none;"
   >
     <span
-      class="ant-upload-wrapper ant-upload-rtl"
+      class="ant-upload-wrapper css-var-root ant-upload-rtl"
     >
       <div
         class="ant-upload ant-upload-select"
@@ -25,7 +25,7 @@ exports[`attachments rtl render component should be rendered correctly in RTL di
             type="file"
           />
           <button
-            class="ant-btn ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-btn-rtl ant-attachment-list-upload-btn"
+            class="ant-btn css-var-root ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-btn-rtl ant-attachment-list-upload-btn"
             type="button"
           >
             <span
@@ -59,7 +59,7 @@ exports[`attachments rtl render component should be rendered correctly in RTL di
     class="ant-attachment-placeholder"
   >
     <span
-      class="ant-upload-wrapper ant-upload-rtl"
+      class="ant-upload-wrapper css-var-root ant-upload-rtl"
     >
       <div
         class="ant-upload ant-upload-drag ant-upload-rtl"
@@ -80,16 +80,16 @@ exports[`attachments rtl render component should be rendered correctly in RTL di
             class="ant-upload-drag-container"
           >
             <div
-              class="ant-attachment-placeholder-inner ant-flex ant-flex-align-center ant-flex-justify-center ant-flex-rtl ant-flex-vertical"
+              class="ant-attachment-placeholder-inner ant-flex css-var-root ant-flex-align-center ant-flex-justify-center ant-flex-rtl ant-flex-vertical"
             >
               <span
-                class="ant-typography ant-typography-rtl ant-attachment-placeholder-icon"
+                class="ant-typography ant-typography-rtl ant-attachment-placeholder-icon css-var-root"
               />
               <h5
-                class="ant-typography ant-typography-rtl ant-attachment-placeholder-title"
+                class="ant-typography ant-typography-rtl ant-attachment-placeholder-title css-var-root"
               />
               <span
-                class="ant-typography ant-typography-rtl ant-typography-secondary ant-attachment-placeholder-description"
+                class="ant-typography ant-typography-rtl ant-typography-secondary ant-attachment-placeholder-description css-var-root"
               />
             </div>
           </div>
@@ -105,7 +105,7 @@ exports[`attachments rtl render component should be rendered correctly in RTL di
       class="ant-attachment-placeholder"
     >
       <span
-        class="ant-upload-wrapper ant-upload-rtl"
+        class="ant-upload-wrapper css-var-root ant-upload-rtl"
       >
         <div
           class="ant-upload ant-upload-drag ant-upload-rtl"
@@ -126,16 +126,16 @@ exports[`attachments rtl render component should be rendered correctly in RTL di
               class="ant-upload-drag-container"
             >
               <div
-                class="ant-attachment-placeholder-inner ant-flex ant-flex-align-center ant-flex-justify-center ant-flex-rtl ant-flex-vertical"
+                class="ant-attachment-placeholder-inner ant-flex css-var-root ant-flex-align-center ant-flex-justify-center ant-flex-rtl ant-flex-vertical"
               >
                 <span
-                  class="ant-typography ant-typography-rtl ant-attachment-placeholder-icon"
+                  class="ant-typography ant-typography-rtl ant-attachment-placeholder-icon css-var-root"
                 />
                 <h5
-                  class="ant-typography ant-typography-rtl ant-attachment-placeholder-title"
+                  class="ant-typography ant-typography-rtl ant-attachment-placeholder-title css-var-root"
                 />
                 <span
-                  class="ant-typography ant-typography-rtl ant-typography-secondary ant-attachment-placeholder-description"
+                  class="ant-typography ant-typography-rtl ant-typography-secondary ant-attachment-placeholder-description css-var-root"
                 />
               </div>
             </div>
