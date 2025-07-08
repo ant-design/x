@@ -175,10 +175,6 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
 
 export const prepareComponentToken: GetDefaultToken<'Sender'> = (token) => {
   const { colorPrimary } = token;
-  console.log(JSON.stringify(token, null, 2));
-  console.log(token.motionDurationFast);
-  console.log(token.motionDurationMid);
-  console.log(token.motionDurationSlow);
   const colorBgSlot = new FastColor(colorPrimary).setA(0.06).toRgbString();
   const colorTextSlot = colorPrimary;
   const colorTextSlotPlaceholder = new FastColor(colorPrimary).setA(0.25).toRgbString();
