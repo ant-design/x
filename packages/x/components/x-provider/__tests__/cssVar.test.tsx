@@ -26,6 +26,7 @@ describe('XProvider.cssVar', () => {
 
     const styleList = Array.from(document.head.querySelectorAll('style'));
     const bubbleStyle = styleList.find((style) => style.innerHTML.includes('.ant-bubble'))!;
+    expect(bubbleStyle.innerHTML).toContain('ant-bubble');
     expect(container.querySelector('.ant-bubble')?.className).toContain('ant-bubble');
   });
 
