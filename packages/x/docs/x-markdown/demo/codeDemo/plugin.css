@@ -1,0 +1,20 @@
+.markdown-cite {
+  background-color: rgba(154, 154, 154, 0.2);
+  color: inherit;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 0.8em;
+  margin-left: 8px;
+  vertical-align: middle;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(154, 154, 154, 40%);
+  }
+}

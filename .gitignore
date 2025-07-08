@@ -79,3 +79,6 @@ __image_snapshots__/
 
 .env
 examples/
+
+packages/x-markdown/plugins
+packages/x-markdown/themes
