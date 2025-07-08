@@ -22,9 +22,9 @@ title: 介绍
 
 与 `marked` 保持一致。为了提高整体markdown对于系统的兼容性支持，可以自定义polyfill，来提高兼容性。
 
-| 兼容模式    | Chrome     | IOS       |
-| ----------- | ---------- | --------- |
-| ✅ 原生兼容 | Chrome 92+ | iOS 15.2+ |
+| 兼容模式 | Chrome     | IOS       |
+| -------- | ---------- | --------- |
+| 原生兼容 | Chrome 92+ | iOS 15.2+ |
 
 ## 支持的 Markdown 规范
 
@@ -78,4 +78,4 @@ export default App;
 
 ## 主题
 
-`@ant-design/x-markdown` 提供了丰富的主题。
+`@ant-design/x-markdown` 提供了丰富的[主题](/markdowns/themes-cn)。

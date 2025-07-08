@@ -19,11 +19,13 @@ const HighlightCode: PluginsType['HighlightCode'] = (props) => {
   } = props;
 
   // ============================ style ============================
-  const { getPrefixCls } = useXProviderContext();
+  const { getPrefixCls, direction } = useXProviderContext();
   const prefixCls = getPrefixCls('highlightCode', customizePrefixCls);
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
 
-  const mergedCls = classnames(prefixCls, className, hashId, cssVarCls);
+  const mergedCls = classnames(prefixCls, className, hashId, cssVarCls, {
+    [`${prefixCls}-rtl`]: direction === 'rtl',
+  });
 
   // ============================ render ============================
   if (!children) return null;

@@ -55,6 +55,9 @@ const genMermaidStyle: GenerateStyle<MermaidToken> = (token) => {
       '&-mermaid-hidden': {
         display: 'none',
       },
+      [`&${componentCls}-rtl`]: {
+        direction: 'rtl',
+      },
     },
   };
 };

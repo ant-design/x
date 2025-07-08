@@ -25,6 +25,8 @@
 
 .x-markdown-theme-light hr {
   border-color: rgba(0, 0, 0, 0.2);
+  margin-top: 24px;
+  margin-bottom: 24px;
 }
 
 .x-markdown-theme-light table thead {
@@ -37,7 +39,8 @@
 
 .x-markdown-theme-light table th,
 .x-markdown-theme-light table td {
-  border: 1px solid #e0e0e0;
+  /* border: 1px solid #e0e0e0; */
+  padding: 10px 12px;
 }
 
 .x-markdown-theme-light table th {
@@ -99,4 +102,8 @@
 
 .x-markdown-theme-light code {
   margin-bottom: 12px;
+  background-color: #1f3b631f;
+  border-radius: 8px;
+  padding: 4px;
+  color: #333333;
 }

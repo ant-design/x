@@ -1,5 +1,5 @@
 ---
-title: API
+title: 代码示例
 order: 2
 ---
 
@@ -10,11 +10,11 @@ order: 2
 ## 代码演示
 
 <!-- prettier-ignore -->
-<code src="./demo/basic.tsx">基本使用</code>
-<code src="./demo/streaming.tsx">流式对话</code>
-<code src="./demo/components.tsx">自定义组件</code>
-<code src="./demo/supersets.tsx">拓展插件</code>
-<code src="./demo/plugin.tsx">自定义拓展插件</code>
+<code src="./demo/codeDemo/basic.tsx">基础用法</code>
+<code src="./demo/codeDemo/streaming.tsx">流式渲染</code>
+<code src="./demo/codeDemo/components.tsx">自定义组件渲染</code>
+<code src="./demo/codeDemo/supersets.tsx">拓展插件</code>
+<code src="./demo/codeDemo/plugin.tsx">自定义拓展插件</code>
 
 ## API
 

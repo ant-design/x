@@ -39,6 +39,9 @@ const genHighlightCodeStyle: GenerateStyle<HighlightCodeToken> = (token) => {
         borderTopLeftRadius: codeBorderRadius,
         borderTopRightRadius: codeBorderRadius,
       },
+      [`&${componentCls}-rtl`]: {
+        direction: 'rtl',
+      },
     },
   };
 };

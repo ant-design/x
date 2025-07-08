@@ -3,7 +3,7 @@ import { Bubble, Sender, useXAgent, useXChat } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
 import Mermaid from '@ant-design/x-markdown/plugins/Mermaid';
 import { RolesType } from '@ant-design/x/es/bubble/BubbleList';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 const fullContent = `
 Here are several Mermaid diagram examples 

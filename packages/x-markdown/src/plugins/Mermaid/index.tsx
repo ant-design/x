@@ -37,11 +37,13 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
   const id = `mermaid-${uuid++}-${children.length}`;
 
   // ============================ style ============================
-  const { getPrefixCls } = useXProviderContext();
+  const { getPrefixCls, direction } = useXProviderContext();
   const prefixCls = getPrefixCls('mermaid', customizePrefixCls);
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
 
-  const mergedCls = classnames(prefixCls, className, hashId, cssVarCls);
+  const mergedCls = classnames(prefixCls, className, hashId, cssVarCls, {
+    [`${prefixCls}-rtl`]: direction === 'rtl',
+  });
 
   // ============================ render mermaid ============================
   const renderDiagram = throttle(async () => {

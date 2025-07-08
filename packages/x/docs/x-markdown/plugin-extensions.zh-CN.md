@@ -2,9 +2,9 @@
 group:
   title: 插件集
   order: 2
-title: Plugins
+title: CustomPlugins
 subtitle: 自定义插件
-order: 1
+order: 4
 ---
 
 ## 何时使用

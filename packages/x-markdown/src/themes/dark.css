@@ -25,6 +25,8 @@
 
 .x-markdown-theme-dark hr {
   border-color: rgba(255, 255, 255, 0.3);
+  margin-top: 24px;
+  margin-bottom: 24px;
 }
 
 .x-markdown-theme-dark table thead {
@@ -38,6 +40,7 @@
 .x-markdown-theme-dark table th,
 .x-markdown-theme-dark table td {
   border: 1px solid #383838;
+  padding: 10px 12px;
 }
 
 .x-markdown-theme-dark table th {
@@ -99,4 +102,8 @@
 
 .x-markdown-theme-dark code {
   margin-bottom: 12px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 4px;
+  color: #333333;
 }

@@ -1,5 +1,5 @@
 ---
-title: API
+title: Code Demo
 order: 2
 ---
 
@@ -10,11 +10,11 @@ Used to render the streaming Markdown format returned by LLM.
 ## Code Demo
 
 <!-- prettier-ignore -->
-<code src="./demo/basic.tsx">Basic</code>
-<code src="./demo/streaming.tsx">Streaming</code>
-<code src="./demo/components.tsx">Components</code>
-<code src="./demo/supersets.tsx">Plugins</code>
-<code src="./demo/plugin.tsx">Custom Plugin</code>
+<code src="./demo/codeDemo/basic.tsx">Basic</code>
+<code src="./demo/codeDemo/streaming.tsx">Streaming</code>
+<code src="./demo/codeDemo/components.tsx">Components</code>
+<code src="./demo/codeDemo/supersets.tsx">Plugins</code>
+<code src="./demo/codeDemo/plugin.tsx">Custom Plugin</code>
 
 ## API
 
