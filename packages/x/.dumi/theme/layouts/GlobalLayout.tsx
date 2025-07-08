@@ -9,7 +9,7 @@ import {
 import { getSandpackCssText } from '@codesandbox/sandpack-react';
 import type { MappingAlgorithm } from 'antd';
 import { App, theme as antdTheme } from 'antd';
-import type { DirectionType } from 'antd/es/config-provider';
+import type { DirectionType, ThemeConfig } from 'antd/es/config-provider';
 import { createSearchParams, useOutlet, useSearchParams, useServerInsertedHTML } from 'dumi';
 import React, { Suspense, useCallback, useEffect } from 'react';
 
@@ -144,14 +144,14 @@ const GlobalLayout: React.FC = () => {
     [isMobile, direction, updateSiteConfig, theme],
   );
 
-  const themeConfig = React.useMemo(
+  const themeConfig = React.useMemo<ThemeConfig>(
     () => ({
       // index page should always use dark theme
       algorithm: isIndexPage ? getAlgorithm(['dark']) : getAlgorithm(theme),
       token: { motion: !theme.includes('motion-off') },
       hashed: false,
     }),
-    [theme, pathname],
+    [theme, pathname, isIndexPage],
   );
 
   const [styleCache] = React.useState(() => createCache());
@@ -197,7 +197,7 @@ const GlobalLayout: React.FC = () => {
         linters={[legacyNotSelectorLinter, parentSelectorLinter, NaNLinter]}
       >
         <SiteContext value={siteContextValue}>
-          <SiteThemeProvider theme={themeConfig as any}>
+          <SiteThemeProvider theme={themeConfig}>
             <App>
               {outlet}
               <Suspense>{pathname.startsWith('/~demos') ? <PeterCat /> : null}</Suspense>

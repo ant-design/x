@@ -1,5 +1,5 @@
-import { ConfigProvider, theme as antdTheme } from 'antd';
 import type { ThemeConfig } from 'antd';
+import { theme as antdTheme, ConfigProvider } from 'antd';
 import type { ThemeProviderProps } from 'antd-style';
 import { ThemeProvider } from 'antd-style';
 import React, { useContext } from 'react';
@@ -45,6 +45,7 @@ const SiteThemeProvider: React.FC<ThemeProviderProps<any>> = ({ children, theme,
   return (
     <ThemeProvider<NewToken>
       {...rest}
+      key={theme?.algorithm?.length}
       theme={theme}
       customToken={{
         headerHeight,
