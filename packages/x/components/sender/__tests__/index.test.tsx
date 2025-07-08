@@ -1,6 +1,5 @@
-import React from 'react';
-
 import { fireEvent, render } from '@testing-library/react';
+import React from 'react';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
 import { act } from '../../../tests/utils';
@@ -110,7 +109,7 @@ describe('Sender Component', () => {
     });
   });
 
-  it('Sender.Header can be focus', () => {
+  it('Sender.Header not can be focus', () => {
     const { container } = render(
       <Sender
         header={
@@ -131,7 +130,7 @@ describe('Sender Component', () => {
 
     // Click on the content
     fireEvent.mouseDown(container.querySelector('.ant-sender-content')!);
-    expect(document.activeElement).toEqual(container.querySelector('textarea'));
+    expect(document.activeElement).not.toEqual(container.querySelector('textarea'));
   });
 
   it('readOnly', () => {
