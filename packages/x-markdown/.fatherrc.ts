@@ -48,7 +48,7 @@ export default defineConfig({
         sourcemap: true,
         generateUnminified: true,
         output: {
-          path: 'dist/',
+          path: 'dist/plugins',
           filename: 'code-high-light',
         },
       },
@@ -57,7 +57,7 @@ export default defineConfig({
         sourcemap: true,
         generateUnminified: true,
         output: {
-          path: 'dist/',
+          path: 'dist/plugins',
           filename: 'latex',
         },
       },
@@ -66,7 +66,7 @@ export default defineConfig({
         sourcemap: true,
         generateUnminified: true,
         output: {
-          path: 'dist/',
+          path: 'dist/plugins',
           filename: 'mermaid',
         },
       },

@@ -11,3 +11,24 @@ order: 1
 ## 插件集
 
 <MarkdownPluginsOverView></MarkdownPluginsOverView>
+
+## 如何引入插件
+
+### 可从 `@ant-design/x-markdown/plugins/插件名` 引入插件。
+
+```tsx
+import Latex from '@ant-design/x-markdown/plugins/latex';
+```
+
+### 从浏览器引入
+
+在浏览器中使用 script 和 link 标签直接引入文件，并使用`插件名`作为全局变量 。
+
+我们在 npm 发布包内的 `dist/plugins` 目录下提供了插件的构建文件，你可以直接使用。
+
+```html
+<script src="**/dist/plugins/latex.min.js"></script>
+<script>
+  const Latex = window.Latex;
+</script>
+```

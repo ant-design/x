@@ -5,7 +5,11 @@ $('dist')
   .isDirectory()
   .hasFile('x-markdown.js')
   .hasFile('x-markdown.min.js')
-  .hasFile('x-markdown.min.js.map')
+  .hasFile('x-markdown.min.js.map');
+
+// plugins
+$('dist/plugins')
+  .isDirectory()
   .hasFile('latex.js')
   .hasFile('latex.min.js')
   .hasFile('latex.min.js.map')

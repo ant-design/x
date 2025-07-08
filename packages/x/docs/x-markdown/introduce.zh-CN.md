@@ -20,7 +20,7 @@ title: 介绍
 
 ## 兼容环境
 
-与 `marked` 保持一致。为了提高整体markdown对于系统的兼容性支持，可以自定义polyfill，来提高兼容性。
+与 [`marked`](https://github.com/markedjs/marked) 保持一致。为了提高整体markdown对于系统的兼容性支持，可以自定义polyfill，来提高兼容性。
 
 | 兼容模式 | Chrome     | IOS       |
 | -------- | ---------- | --------- |
@@ -78,4 +78,4 @@ export default App;
 
 ## 主题
 
-`@ant-design/x-markdown` 提供了丰富的[主题](/markdowns/themes-cn)。
+`@ant-design/x-markdown` 提供了丰富的主题可供选择。主题详情查看[主题](/markdowns/themes-cn)。
