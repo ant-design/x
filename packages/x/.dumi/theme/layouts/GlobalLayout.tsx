@@ -30,12 +30,6 @@ type SiteState = Partial<Omit<SiteContextProps, 'updateSiteContext'>>;
 const RESPONSIVE_MOBILE = 768;
 export const ANT_DESIGN_NOT_SHOW_BANNER = 'ANT_DESIGN_NOT_SHOW_BANNER';
 
-type ThemeConfigSite = {
-  algorithm: MappingAlgorithm[] | undefined;
-  token: ThemeConfig['token'];
-  hashed: boolean;
-};
-
 const getAlgorithm = (themes: ThemeName[] = []) =>
   themes
     .map((theme) => {
@@ -145,7 +139,7 @@ const GlobalLayout: React.FC = () => {
     [isMobile, direction, updateSiteConfig, theme],
   );
 
-  const themeConfig = React.useMemo<ThemeConfigSite>(
+  const themeConfig = React.useMemo<ThemeConfig>(
     () => ({
       // index page should always use dark theme
       algorithm: isIndexPage ? getAlgorithm(['dark']) : getAlgorithm(theme),
