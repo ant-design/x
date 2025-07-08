@@ -45,7 +45,7 @@ const SiteThemeProvider: React.FC<ThemeProviderProps<any>> = ({ children, theme,
   return (
     <ThemeProvider<NewToken>
       {...rest}
-      key={theme?.algorithm?.length}
+      key={(theme as ThemeConfig)?.algorithm?.length || 'light'}
       theme={theme}
       customToken={{
         headerHeight,
