@@ -197,7 +197,7 @@ const GlobalLayout: React.FC = () => {
         linters={[legacyNotSelectorLinter, parentSelectorLinter, NaNLinter]}
       >
         <SiteContext value={siteContextValue}>
-          <SiteThemeProvider theme={themeConfig}>
+          <SiteThemeProvider theme={themeConfig as any}>
             <App>
               {outlet}
               <Suspense>{pathname.startsWith('/~demos') ? <PeterCat /> : null}</Suspense>
