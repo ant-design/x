@@ -1,3 +1,4 @@
+import { CSSObject } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import { genCollapseMotion } from '../../style/motion';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
@@ -70,7 +71,7 @@ export default genStyleHooks<'Think'>(
   'Think',
   (token) => {
     const ThinkToken = mergeToken<ThinkToken>(token, {});
-    return [genThinkStyle(ThinkToken), genCollapseMotion(ThinkToken)];
+    return [genThinkStyle(ThinkToken), genCollapseMotion(ThinkToken) as CSSObject];
   },
   prepareComponentToken,
 );

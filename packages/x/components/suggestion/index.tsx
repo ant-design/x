@@ -1,5 +1,5 @@
-import { Cascader, Flex, version } from 'antd';
 import type { CascaderProps } from 'antd';
+import { Cascader, Flex, version } from 'antd';
 import classnames from 'classnames';
 import { useEvent, useMergedState } from 'rc-util';
 import React, { useState } from 'react';
@@ -155,7 +155,7 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
         [`${prefixCls}-block`]: block,
       })}
       onChange={onInternalChange}
-      dropdownMatchSelectWidth={block}
+      popupMatchSelectWidth={block}
     >
       <div
         className={classnames(

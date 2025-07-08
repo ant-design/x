@@ -1,17 +1,16 @@
-import path from 'path';
 // Reference: https://github.com/ant-design/ant-design/pull/24003#discussion_r427267386
-import { StyleProvider, createCache, extractStyle } from '@ant-design/cssinjs';
+import { createCache, extractStyle, StyleProvider } from '@ant-design/cssinjs';
+import { XProvider } from '@ant-design/x';
+import { App, theme } from 'antd';
 import dayjs from 'dayjs';
 import fse from 'fs-extra';
 import { globSync } from 'glob';
 import { JSDOM } from 'jsdom';
 import MockDate from 'mockdate';
+import path from 'path';
 import type { HTTPRequest } from 'puppeteer';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-
-import { XProvider } from '@ant-design/x';
-import { App, theme } from 'antd';
 import { fillWindowEnv } from '../setup';
 import { render } from '../utils';
 import { TriggerMockContext } from './demoTestContext';
@@ -243,7 +242,7 @@ export default function imageTest(
         }}
         key={key}
       >
-        <XProvider theme={{ algorithm, cssVar: true }}>{component}</XProvider>
+        <XProvider theme={{ algorithm }}>{component}</XProvider>
       </div>,
     );
   });

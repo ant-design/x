@@ -1,4 +1,4 @@
-import { unit } from '@ant-design/cssinjs';
+import { type CSSObject, unit } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import { FastColor } from '@ant-design/fast-color';
 import { genCollapseMotion } from '../../style/motion';
@@ -226,7 +226,7 @@ export default genStyleHooks(
   'Conversations',
   (token) => {
     const compToken = mergeToken<ConversationsToken>(token, {});
-    return [genConversationsStyle(compToken), genCollapseMotion(compToken)];
+    return [genConversationsStyle(compToken), genCollapseMotion(compToken) as CSSObject];
   },
   prepareComponentToken,
 );

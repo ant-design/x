@@ -1,13 +1,11 @@
+import type { Theme } from '@ant-design/cssinjs';
 import { createTheme, useCacheToken } from '@ant-design/cssinjs';
 import { theme as antdTheme } from 'antd';
+import type { DesignTokenProviderProps } from 'antd/es/theme/context';
 import { ignore, unitless } from 'antd/es/theme/useToken';
 import formatToken from 'antd/es/theme/util/alias';
 import React from 'react';
-
 import version from '../version';
-
-import type { Theme } from '@ant-design/cssinjs';
-import type { DesignTokenProviderProps } from 'antd/es/theme/context';
 import type { AliasToken, GlobalToken, SeedToken } from './cssinjs-utils';
 
 const defaultTheme: Theme<SeedToken, AliasToken> = createTheme(antdTheme.defaultAlgorithm);
@@ -67,7 +65,7 @@ export const getComputedToken = (
           {
             override: componentTokens,
           },
-          componentTheme,
+          componentTheme as unknown as Theme<any, any>,
         );
       }
       mergedDerivativeToken[key] = mergedComponentToken;
@@ -91,8 +89,10 @@ export function useInternalToken(): [
     cssVar,
   } = React.useContext(antdTheme._internalContext);
 
+  const mergedTheme = theme || defaultTheme;
+
   const [token, hashId, realToken] = useCacheToken<GlobalToken, SeedToken>(
-    theme,
+    mergedTheme as Theme<any, any>,
     [antdTheme.defaultSeed, rootDesignToken],
     {
       salt: `${version}-${hashed || ''}`,

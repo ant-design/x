@@ -1,9 +1,9 @@
 import {
-  NaNLinter,
-  StyleProvider,
   legacyNotSelectorLinter,
   logicalPropertiesLinter,
+  NaNLinter,
   parentSelectorLinter,
+  StyleProvider,
 } from '@ant-design/cssinjs';
 import chalk from 'chalk';
 /* eslint-disable no-console */
@@ -32,7 +32,7 @@ async function checkCSSVar() {
     render(Component: any) {
       ReactDOMServer.renderToString(
         <StyleProvider linters={[NaNLinter]}>
-          <XProvider theme={{ cssVar: true, hashed: false }}>
+          <XProvider theme={{ hashed: false }}>
             <Component />
           </XProvider>
         </StyleProvider>,

@@ -1,10 +1,8 @@
+import { createCache, StyleProvider } from '@ant-design/cssinjs';
 import React from 'react';
+import { render } from '../../../tests/utils';
 import { Bubble } from '../../index';
 import XProvider from '../index';
-
-import { render } from '../../../tests/utils';
-
-import { StyleProvider, createCache } from '@ant-design/cssinjs';
 
 describe('XProvider.cssVar', () => {
   beforeAll(() => {
@@ -36,7 +34,7 @@ describe('XProvider.cssVar', () => {
   it('with XProvider', () => {
     const { container } = render(
       <StyleProvider cache={createCache()}>
-        <XProvider theme={{ cssVar: true }}>
+        <XProvider>
           <Bubble content="test" />
         </XProvider>
       </StyleProvider>,
