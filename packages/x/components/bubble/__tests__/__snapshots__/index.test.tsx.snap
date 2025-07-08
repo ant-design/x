@@ -1,8 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`bubble Bubble component work 1`] = `
 <div
-  class="ant-bubble ant-bubble-start"
+  class="ant-bubble css-var-root ant-bubble-start"
 >
   <div
     class="ant-bubble-content ant-bubble-content-filled"
@@ -14,7 +14,7 @@ exports[`bubble Bubble component work 1`] = `
 
 exports[`bubble rtl render component should be rendered correctly in RTL direction 1`] = `
 <div
-  class="ant-bubble ant-bubble-start ant-bubble-rtl"
+  class="ant-bubble css-var-root ant-bubble-start ant-bubble-rtl"
 >
   <div
     class="ant-bubble-content ant-bubble-content-filled"

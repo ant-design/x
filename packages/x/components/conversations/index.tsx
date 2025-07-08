@@ -1,26 +1,20 @@
-import classnames from 'classnames';
-import React from 'react';
-
-import GroupTitle, { GroupTitleContext } from './GroupTitle';
-import ConversationsItem, { type ConversationsItemProps } from './Item';
-
-import useMergedState from 'rc-util/lib/hooks/useMergedState';
-import useXComponentConfig from '../_util/hooks/use-x-component-config';
-import { useXProviderContext } from '../x-provider';
-import useGroupable from './hooks/useGroupable';
-
-import useStyle from './style';
-
-import pickAttrs from 'rc-util/lib/pickAttrs';
-import type { ConversationItemType, DividerItemType, GroupableProps, ItemType } from './interface';
-
-import useShortcutKeys, { ShortcutKeyActionType } from '../_util/hooks/use-shortcut-keys';
-import type { ShortcutKeys } from '../_util/type';
-
 import { Divider } from 'antd';
+import classnames from 'classnames';
+import useMergedState from 'rc-util/lib/hooks/useMergedState';
+import pickAttrs from 'rc-util/lib/pickAttrs';
+import React from 'react';
 import useCollapsible from '../_util/hooks/use-collapsible';
-import Creation from './Creation';
+import useShortcutKeys, { ShortcutKeyActionType } from '../_util/hooks/use-shortcut-keys';
+import useXComponentConfig from '../_util/hooks/use-x-component-config';
+import type { ShortcutKeys } from '../_util/type';
+import { useXProviderContext } from '../x-provider';
 import type { CreationProps } from './Creation';
+import Creation from './Creation';
+import GroupTitle, { GroupTitleContext } from './GroupTitle';
+import useGroupable from './hooks/useGroupable';
+import ConversationsItem, { type ConversationsItemProps } from './Item';
+import type { ConversationItemType, DividerItemType, GroupableProps, ItemType } from './interface';
+import useStyle from './style';
 
 /**
  * @desc 会话列表组件参数
@@ -164,7 +158,7 @@ const Conversations: React.FC<ConversationsProps> & CompoundedComponent = (props
   const contextConfig = useXComponentConfig('conversations');
 
   // ============================ Style ============================
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+  const [hashId, cssVarCls] = useStyle(prefixCls);
 
   const mergedCls = classnames(
     prefixCls,
@@ -254,7 +248,7 @@ const Conversations: React.FC<ConversationsProps> & CompoundedComponent = (props
   );
 
   // ============================ Render ============================
-  return wrapCSSVar(
+  return (
     <ul
       {...domProps}
       style={{
@@ -303,7 +297,7 @@ const Conversations: React.FC<ConversationsProps> & CompoundedComponent = (props
           itemNode
         );
       })}
-    </ul>,
+    </ul>
   );
 };
 

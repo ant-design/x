@@ -67,7 +67,7 @@ const Think: React.FC<React.PropsWithChildren<ThinkProps>> = (props) => {
     leavedClassName: `${prefixCls}-content-hidden`,
   };
 
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+  const [hashId, cssVarCls] = useStyle(prefixCls);
 
   const mergedCls = classnames(
     prefixCls,
@@ -87,7 +87,7 @@ const Think: React.FC<React.PropsWithChildren<ThinkProps>> = (props) => {
     onChange: onExpand,
   });
 
-  return wrapCSSVar(
+  return (
     <div
       className={mergedCls}
       style={{
@@ -118,7 +118,7 @@ const Think: React.FC<React.PropsWithChildren<ThinkProps>> = (props) => {
           </div>
         )}
       </CSSMotion>
-    </div>,
+    </div>
   );
 };
 

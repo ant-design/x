@@ -1,5 +1,5 @@
-import type { AttachmentsToken } from '.';
 import type { GenerateStyle } from '../../theme/cssinjs-utils';
+import type { AttachmentsToken } from '.';
 
 const genFileCardStyle: GenerateStyle<AttachmentsToken> = (token) => {
   const { componentCls, antCls, calc } = token;
@@ -113,7 +113,7 @@ const genFileCardStyle: GenerateStyle<AttachmentsToken> = (token) => {
         // Error
         [`&${cardCls}-status-error`]: {
           [`img, ${cardCls}-img-mask`]: {
-            borderRadius: calc(token.borderRadius).sub(token.lineWidth).equal(),
+            borderRadius: token.borderRadius,
           },
 
           [`${cardCls}-desc`]: {

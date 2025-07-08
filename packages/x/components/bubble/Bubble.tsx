@@ -1,7 +1,6 @@
+import { Avatar } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
-
-import { Avatar } from 'antd';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 import useTypedEffect from './hooks/useTypedEffect';
@@ -90,7 +89,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
   }, [isTyping, loading]);
 
   // ============================ Styles ============================
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+  const [hashId, cssVarCls] = useStyle(prefixCls);
 
   const mergedCls = classnames(
     prefixCls,
@@ -189,7 +188,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
     );
   }
 
-  return wrapCSSVar(
+  return (
     <div
       style={{
         ...contextConfig.style,
@@ -218,7 +217,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (props, r
 
       {/* Content */}
       {fullContent}
-    </div>,
+    </div>
   );
 };
 

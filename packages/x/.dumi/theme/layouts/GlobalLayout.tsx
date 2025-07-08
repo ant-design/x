@@ -11,12 +11,11 @@ import type { MappingAlgorithm } from 'antd';
 import { App, theme as antdTheme } from 'antd';
 import type { DirectionType, ThemeConfig } from 'antd/es/config-provider';
 import { createSearchParams, useOutlet, useSearchParams, useServerInsertedHTML } from 'dumi';
-import React, { Suspense, useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 import { DarkContext } from '../../hooks/useDark';
 import useLayoutState from '../../hooks/useLayoutState';
 import useLocation from '../../hooks/useLocation';
-import PeterCat from '../common/PeterCat';
 import type { ThemeName } from '../common/ThemeSwitch';
 import SiteThemeProvider from '../SiteThemeProvider';
 import type { SiteContextProps } from '../slots/SiteContext';
@@ -193,10 +192,7 @@ const GlobalLayout: React.FC = () => {
       >
         <SiteContext value={siteContextValue}>
           <SiteThemeProvider theme={themeConfig as any}>
-            <App>
-              {outlet}
-              <Suspense>{pathname.startsWith('/~demos') ? <PeterCat /> : null}</Suspense>
-            </App>
+            <App>{outlet}</App>
           </SiteThemeProvider>
         </SiteContext>
       </StyleProvider>

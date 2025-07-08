@@ -65,7 +65,7 @@ export const getComputedToken = (
           {
             override: componentTokens,
           },
-          componentTheme as unknown as Theme<any, any>,
+          componentTheme,
         );
       }
       mergedDerivativeToken[key] = mergedComponentToken;
@@ -86,21 +86,25 @@ export function useInternalToken(): [
     hashed,
     theme = defaultTheme,
     override,
-    cssVar,
+    cssVar: ctxCssVar,
   } = React.useContext(antdTheme._internalContext);
+
+  const cssVar = {
+    prefix: ctxCssVar?.prefix || 'ant',
+    key: ctxCssVar?.key || 'css-var-root',
+  };
 
   const mergedTheme = theme || defaultTheme;
 
   const [token, hashId, realToken] = useCacheToken<GlobalToken, SeedToken>(
-    mergedTheme as Theme<any, any>,
+    mergedTheme,
     [antdTheme.defaultSeed, rootDesignToken],
     {
       salt: `${version}-${hashed || ''}`,
       override,
       getComputedToken,
-      cssVar: cssVar && {
-        prefix: cssVar.prefix,
-        key: cssVar.key,
+      cssVar: {
+        ...cssVar,
         unitless,
         ignore,
         preserve,

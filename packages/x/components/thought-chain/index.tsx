@@ -46,7 +46,7 @@ const ThoughtChain: React.FC<ThoughtChainProps> & CompoundedComponent = (props) 
 
   // ============================ Style ============================
 
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+  const [hashId, cssVarCls] = useStyle(prefixCls);
 
   const mergedCls = classnames(
     className,
@@ -78,7 +78,7 @@ const ThoughtChain: React.FC<ThoughtChainProps> & CompoundedComponent = (props) 
   );
 
   // ============================ Render ============================
-  return wrapCSSVar(
+  return (
     <div
       {...domProps}
       className={mergedCls}
@@ -115,7 +115,7 @@ const ThoughtChain: React.FC<ThoughtChainProps> & CompoundedComponent = (props) 
           />
         ))}
       </ThoughtChainContext.Provider>
-    </div>,
+    </div>
   );
 };
 

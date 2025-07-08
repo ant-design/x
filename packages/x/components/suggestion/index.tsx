@@ -68,7 +68,7 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
   const contextConfig = useXComponentConfig('suggestion');
 
   // ============================ Styles ============================
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+  const [hashId, cssVarCls] = useStyle(prefixCls);
 
   // =========================== Trigger ============================
   const [mergedOpen, setOpen] = useMergedState(false, {
@@ -143,7 +143,7 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
     compatibleProps.onDropdownVisibleChange = onInternalOpenChange;
   }
 
-  return wrapCSSVar(
+  return (
     <Cascader
       options={itemList}
       open={mergedOpen}
@@ -174,7 +174,7 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
       >
         {childNode}
       </div>
-    </Cascader>,
+    </Cascader>
   );
 }
 

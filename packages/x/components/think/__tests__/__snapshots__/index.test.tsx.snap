@@ -1,8 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Think Component Think component work 1`] = `
 <div
-  class="ant-think"
+  class="ant-think css-var-root"
 >
   <div
     class="ant-think-status-wrapper"
@@ -72,7 +72,7 @@ exports[`Think Component Think component work 1`] = `
 
 exports[`Think Component rtl render component should be rendered correctly in RTL direction 1`] = `
 <div
-  class="ant-think ant-think-rtl"
+  class="ant-think css-var-root ant-think-rtl"
 >
   <div
     class="ant-think-status-wrapper"

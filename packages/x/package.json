@@ -79,8 +79,8 @@
   ],
   "dependencies": {
     "@ant-design/colors": "^8.0.0",
-    "@ant-design/cssinjs": "^1.21.1",
-    "@ant-design/cssinjs-utils": "^1.1.0",
+    "@ant-design/cssinjs": "^2.0.0-alpha.6",
+    "@ant-design/cssinjs-utils": "^2.0.0-alpha.2",
     "@ant-design/fast-color": "^3.0.0",
     "@ant-design/icons": "^6.0.0",
     "@babel/runtime": "^7.25.6",
@@ -100,7 +100,6 @@
     "@microflash/rehype-figure": "^2.1.1",
     "@npmcli/run-script": "^9.0.1",
     "@octokit/rest": "^21.0.2",
-    "@petercatai/assistant": "^2.0.13",
     "@prettier/sync": "^0.6.1",
     "@qixian.cs/github-contributors-list": "^2.0.2",
     "@rc-component/father-plugin": "^2.0.4",

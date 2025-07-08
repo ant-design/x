@@ -3,8 +3,8 @@ import { useEvent } from 'rc-util';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import * as React from 'react';
 import { useXProviderContext } from '../x-provider';
-import Bubble, { BubbleContext } from './Bubble';
 import type { BubbleRef } from './Bubble';
+import Bubble, { BubbleContext } from './Bubble';
 import useListData from './hooks/useListData';
 import type { BubbleProps } from './interface';
 import useStyle from './style';
@@ -89,7 +89,7 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   const prefixCls = getPrefixCls('bubble', customizePrefixCls);
   const listPrefixCls = `${prefixCls}-list`;
 
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+  const [hashId, cssVarCls] = useStyle(prefixCls);
 
   // ============================ Typing ============================
   const [initialized, setInitialized] = React.useState(false);
@@ -193,7 +193,7 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   );
 
   // ============================ Render ============================
-  return wrapCSSVar(
+  return (
     <BubbleContext.Provider value={context}>
       <div
         {...domProps}
@@ -213,7 +213,7 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
           />
         ))}
       </div>
-    </BubbleContext.Provider>,
+    </BubbleContext.Provider>
   );
 };
 

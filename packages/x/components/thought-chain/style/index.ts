@@ -158,7 +158,7 @@ export default genStyleHooks<'ThoughtChain'>(
     return [
       genThoughtChainStyle(compToken),
       genThoughtChainItemStyle(compToken),
-      genCollapseMotion(compToken) as CSSObject,
+      genCollapseMotion(compToken),
     ];
   },
   prepareComponentToken,

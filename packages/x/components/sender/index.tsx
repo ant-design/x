@@ -1,3 +1,4 @@
+import type { InputRef as AntdInputRef, ButtonProps, GetProps } from 'antd';
 import { Flex, Input } from 'antd';
 import classnames from 'classnames';
 import { useMergedState } from 'rc-util';
@@ -7,16 +8,14 @@ import React from 'react';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
-import SenderHeader, { SendHeaderContext } from './SenderHeader';
 import { ActionButtonContext } from './components/ActionButton';
 import ClearButton from './components/ClearButton';
 import LoadingButton from './components/LoadingButton';
 import SendButton from './components/SendButton';
 import SpeechButton from './components/SpeechButton';
+import SenderHeader, { SendHeaderContext } from './SenderHeader';
 import useStyle from './style';
 import useSpeech, { type AllowSpeech } from './useSpeech';
-
-import type { InputRef as AntdInputRef, ButtonProps, GetProps } from 'antd';
 
 export type SubmitType = 'enter' | 'shiftEnter' | false;
 
@@ -151,7 +150,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   const inputCls = `${prefixCls}-input`;
 
   // ============================ Styles ============================
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+  const [hashId, cssVarCls] = useStyle(prefixCls);
   const mergedCls = classnames(
     prefixCls,
     contextConfig.className,
@@ -306,7 +305,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     typeof footer === 'function' ? footer({ components: sharedRenderComponents }) : footer || null;
 
   // ============================ Render ============================
-  return wrapCSSVar(
+  return (
     <div ref={containerRef} className={mergedCls} style={{ ...contextConfig.style, ...style }}>
       {/* Header */}
       {header && (
@@ -381,7 +380,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
           </div>
         )}
       </ActionButtonContext.Provider>
-    </div>,
+    </div>
   );
 });
 

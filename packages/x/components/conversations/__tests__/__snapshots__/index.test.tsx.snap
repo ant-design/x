@@ -2,7 +2,7 @@
 
 exports[`Conversations Component Conversations component work 1`] = `
 <ul
-  class="ant-conversations"
+  class="ant-conversations css-var-root"
 >
   <li
     class="ant-conversations-item"
@@ -76,7 +76,7 @@ exports[`Conversations Component Conversations component work 1`] = `
 
 exports[`Conversations Component rtl render component should be rendered correctly in RTL direction 1`] = `
 <ul
-  class="ant-conversations ant-conversations-rtl"
+  class="ant-conversations css-var-root ant-conversations-rtl"
 >
   <li>
     <div

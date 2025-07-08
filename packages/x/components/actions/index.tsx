@@ -73,7 +73,7 @@ const Actions: React.FC<ActionsProps> = (props: ActionsProps) => {
   const contextConfig = useXComponentConfig('actions');
 
   // ============================ Styles ============================
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+  const [hashId, cssVarCls] = useStyle(prefixCls);
 
   const mergedCls = classnames(
     prefixCls,
@@ -130,7 +130,7 @@ const Actions: React.FC<ActionsProps> = (props: ActionsProps) => {
     );
   };
 
-  return wrapCSSVar(
+  return (
     <div className={mergedCls} {...otherHtmlProps} style={mergedStyle}>
       <div className={classnames(`${prefixCls}-list`, variant, block)}>
         {items.map((item) => {
@@ -142,7 +142,7 @@ const Actions: React.FC<ActionsProps> = (props: ActionsProps) => {
           return renderSingleItem(item);
         })}
       </div>
-    </div>,
+    </div>
   );
 };
 

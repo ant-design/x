@@ -54,7 +54,7 @@ function Welcome(props: WelcomeProps, ref: React.Ref<HTMLDivElement>) {
   const contextConfig = useXComponentConfig('welcome');
 
   // ============================ Styles ============================
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+  const [hashId, cssVarCls] = useStyle(prefixCls);
 
   // ============================= Icon =============================
   const iconNode = React.useMemo(() => {
@@ -116,7 +116,7 @@ function Welcome(props: WelcomeProps, ref: React.Ref<HTMLDivElement>) {
   }, [extra]);
 
   // ============================ Render ============================
-  return wrapCSSVar(
+  return (
     <Flex
       ref={ref}
       className={classnames(
@@ -162,7 +162,7 @@ function Welcome(props: WelcomeProps, ref: React.Ref<HTMLDivElement>) {
           </Typography.Text>
         )}
       </Flex>
-    </Flex>,
+    </Flex>
   );
 }
 

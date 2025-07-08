@@ -2,7 +2,7 @@
 
 exports[`welcome rtl render component should be rendered correctly in RTL direction 1`] = `
 <div
-  class="ant-welcome ant-welcome-filled ant-welcome-rtl ant-flex css-var-root ant-flex-rtl"
+  class="ant-welcome css-var-root ant-welcome-filled ant-welcome-rtl ant-flex css-var-root ant-flex-rtl"
 >
   <div
     class="ant-welcome-content-wrapper ant-flex css-var-root ant-flex-align-stretch ant-flex-rtl ant-flex-vertical"

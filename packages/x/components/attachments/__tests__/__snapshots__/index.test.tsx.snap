@@ -2,7 +2,7 @@
 
 exports[`attachments rtl render component should be rendered correctly in RTL direction 1`] = `
 <div
-  class="ant-attachment ant-attachment-rtl"
+  class="ant-attachment css-var-root ant-attachment-rtl"
   dir="rtl"
 >
   <div
@@ -98,7 +98,7 @@ exports[`attachments rtl render component should be rendered correctly in RTL di
     </span>
   </div>
   <div
-    class="ant-attachment-drop-area"
+    class="ant-attachment-drop-area css-var-root"
     style="display: none;"
   >
     <div

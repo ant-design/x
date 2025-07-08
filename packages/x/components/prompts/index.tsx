@@ -127,7 +127,7 @@ const Prompts: React.FC<PromptsProps> = (props) => {
   const contextConfig = useXComponentConfig('prompts');
 
   // ============================ Style ============================
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+  const [hashId, cssVarCls] = useStyle(prefixCls);
 
   const mergedCls = classnames(
     prefixCls,
@@ -150,7 +150,7 @@ const Prompts: React.FC<PromptsProps> = (props) => {
   );
 
   // ============================ Render ============================
-  return wrapCSSVar(
+  return (
     <div {...htmlProps} className={mergedCls} style={{ ...style, ...contextConfig.style }}>
       {/* Title */}
       {title && (
@@ -229,7 +229,7 @@ const Prompts: React.FC<PromptsProps> = (props) => {
           );
         })}
       </div>
-    </div>,
+    </div>
   );
 };
 

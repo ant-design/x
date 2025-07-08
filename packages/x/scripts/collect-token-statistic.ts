@@ -1,12 +1,12 @@
 /* eslint-disable no-console */
-import React from 'react';
+
+import { statistic } from '@ant-design/cssinjs-utils';
+import { theme } from 'antd';
 import chalk from 'chalk';
 import cliProgress from 'cli-progress';
 import fs from 'fs-extra';
+import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-
-import { theme } from 'antd';
-import { statistic } from '@ant-design/cssinjs-utils';
 import { generateCssinjs, styleFiles } from './generate-cssinjs';
 
 console.log(`🪄 Collecting token statistics...`);
@@ -29,6 +29,7 @@ bar.start(styleFiles.length, 0);
     render(Component: any) {
       ReactDOMServer.renderToString(React.createElement(Component));
       // Render wireframe
+      console.log(theme.defaultConfig);
       const wireframeToken = { ...theme.defaultConfig.token, wireframe: true };
       ReactDOMServer.renderToString(
         React.createElement(

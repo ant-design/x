@@ -17,6 +17,7 @@ console.log(chalk.green(`🔥 Checking CSS-in-JS...`));
 
 let errorCount = 0;
 const originError = console.error;
+
 console.error = (msg: any) => {
   if (msg.includes('Warning: [Ant Design CSS-in-JS]')) {
     errorCount += 1;

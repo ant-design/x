@@ -12,8 +12,8 @@ import {
 import { Image, type ImageProps } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
-import type { Attachment } from '..';
 import { useXProviderContext } from '../../x-provider';
+import type { Attachment } from '..';
 import { AttachmentContext } from '../context';
 import useStyle from '../style';
 import { previewImage } from '../util';
@@ -119,7 +119,7 @@ function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) 
   const cardCls = `${prefixCls}-list-card`;
 
   // ============================= Style ==============================
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+  const [hashId, cssVarCls] = useStyle(prefixCls);
 
   // ============================== Name ==============================
   const [namePrefix, nameSuffix] = React.useMemo(() => {
@@ -222,7 +222,7 @@ function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) 
     );
   }
 
-  return wrapCSSVar(
+  return (
     <div
       className={classnames(
         cardCls,
@@ -252,7 +252,7 @@ function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) 
           <CloseCircleFilled />
         </button>
       )}
-    </div>,
+    </div>
   );
 }
 
