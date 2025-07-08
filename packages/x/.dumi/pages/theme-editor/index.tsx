@@ -1,5 +1,4 @@
 import { App, Button, Skeleton } from 'antd';
-import type { ThemeConfig } from 'antd/es/config-provider/context';
 import { createStyles } from 'antd-style';
 import { enUS, zhCN } from 'antd-token-previewer';
 import { Helmet } from 'dumi';
@@ -48,7 +47,7 @@ const CustomTheme: React.FC = () => {
   const [locale, lang] = useLocale(locales);
   const { styles } = useStyle();
 
-  const [theme, setTheme] = React.useState<ThemeConfig>({});
+  const [theme, setTheme] = React.useState<any>({});
 
   useEffect(() => {
     const storedConfig = localStorage.getItem(ANT_DESIGN_V5_THEME_EDITOR_THEME);
@@ -73,7 +72,7 @@ const CustomTheme: React.FC = () => {
         <ThemeEditor
           advanced
           hideAdvancedSwitcher
-          theme={{ name: 'Custom Theme', key: 'test', config: theme as any }}
+          theme={{ name: 'Custom Theme', key: 'test', config: theme }}
           style={{ height: 'calc(100vh - 64px)' }}
           onThemeChange={(newTheme) => {
             setTheme(newTheme.config);
