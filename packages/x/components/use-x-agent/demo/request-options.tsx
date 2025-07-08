@@ -66,7 +66,7 @@ const App = () => {
   return (
     <Splitter>
       <Splitter>
-        <Splitter layout="vertical">
+        <Splitter orientation="vertical">
           <Splitter.Panel>
             <Flex gap="small">
               <Button type="primary" disabled={status === 'loading'} onClick={changeBaseData}>

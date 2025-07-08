@@ -1,9 +1,8 @@
 import { LoadingOutlined, TagsOutlined } from '@ant-design/icons';
+import type { ThoughtChainItem } from '@ant-design/x';
 import { ThoughtChain, XRequest } from '@ant-design/x';
 import { Button, Descriptions, Flex, Input, Splitter, Typography } from 'antd';
 import React, { useRef, useState } from 'react';
-
-import type { ThoughtChainItem } from '@ant-design/x';
 
 const { Paragraph } = Typography;
 
@@ -75,7 +74,7 @@ const App = () => {
   return (
     <Splitter>
       <Splitter.Panel style={{ height: 300 }}>
-        <Splitter layout="vertical">
+        <Splitter orientation="vertical">
           <Splitter.Panel style={{ margin: '0 16px' }}>
             <Flex gap="large" vertical>
               <Input
