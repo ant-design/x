@@ -29,7 +29,6 @@ bar.start(styleFiles.length, 0);
     render(Component: any) {
       ReactDOMServer.renderToString(React.createElement(Component));
       // Render wireframe
-      console.log(theme.defaultConfig);
       const wireframeToken = { ...theme.defaultConfig.token, wireframe: true };
       ReactDOMServer.renderToString(
         React.createElement(
