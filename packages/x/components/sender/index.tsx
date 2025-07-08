@@ -259,8 +259,9 @@ const ForwardSender = React.forwardRef<any, SenderProps>((props, ref) => {
     if (!slotConfig && e.target !== containerRef.current?.querySelector(`.${inputCls}`)) {
       e.preventDefault();
     }
-
-    inputRef.current?.focus();
+    if (e.target === containerRef.current?.querySelector(`.${inputCls}`)) {
+      inputRef.current?.focus();
+    }
   };
 
   // ============================ Render ============================
