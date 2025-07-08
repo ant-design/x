@@ -49,7 +49,7 @@ const ActionMenu = (props: { item: ItemType } & Pick<ActionsProps, 'prefixCls' |
   return (
     <Dropdown
       menu={menuProps}
-      classNames={{ root: `${prefixCls}-sub-menu` }}
+      classNames={{ root: `${prefixCls}-sub-item` }}
       arrow
       trigger={[triggerSubMenuAction]}
     >
