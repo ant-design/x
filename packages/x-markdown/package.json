@@ -5,7 +5,6 @@
     "compile": "father build",
     "tsc": "tsc --noEmit",
     "lint": "npm run tsc && npm run lint:script && npm run lint:md",
-    "lint:deps": "antd-tools run deps-lint",
     "precompile": "echo \"true\"  && exit 0",
     "lint:md": "remark . -f -q",
     "lint:script": "biome lint",
@@ -35,7 +34,6 @@
     "react-dom": "^19.0.0"
   },
   "peerDependencies": {
-    "antd": "^5.20.3",
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
   }
