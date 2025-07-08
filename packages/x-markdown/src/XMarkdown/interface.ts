@@ -14,11 +14,9 @@ interface SteamingOption {
 interface XMarkdownProps {
   content?: string;
   children?: string;
-  breaks?: boolean;
-  gfm?: boolean;
   components?: Record<string, any>;
   streaming?: SteamingOption;
-  plugins?: MarkedExtension;
+  config?: MarkedExtension;
   rootClassName?: string;
   className?: string;
   style?: CSSProperties;

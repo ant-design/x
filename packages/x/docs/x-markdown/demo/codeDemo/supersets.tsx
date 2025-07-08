@@ -1,7 +1,7 @@
 import XMarkdown from '@ant-design/x-markdown';
 import HighlightCode from '@ant-design/x-markdown/plugins/HighlightCode';
-import Mermaid from '@ant-design/x-markdown/plugins/Mermaid';
 import Latex from '@ant-design/x-markdown/plugins/Latex';
+import Mermaid from '@ant-design/x-markdown/plugins/Mermaid';
 import React from 'react';
 import '@ant-design/x-markdown/themes/light.css';
 
@@ -51,17 +51,16 @@ quadrantChart
 const App = () => {
   return (
     <XMarkdown
-      className="x-markdown-theme-light"
-      plugins={{ extensions: Latex() }}
+      className="x-markdown-light"
+      config={{ extensions: Latex() }}
       components={{
         code: (props: any) => {
           const { class: className, children } = props;
           const lang = className?.replace('language-', '');
           if (lang === 'mermaid') {
-            return <Mermaid children={children} />;
-          } else {
-            return <HighlightCode lang={lang}>{children}</HighlightCode>;
+            return <Mermaid>{children}</Mermaid>;
           }
+          return <HighlightCode lang={lang}>{children}</HighlightCode>;
         },
       }}
     >

@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
-import mermaid from 'mermaid';
 import { Segmented } from 'antd';
+import classnames from 'classnames';
 import throttle from 'lodash.throttle';
+import mermaid from 'mermaid';
+import React, { useEffect, useRef, useState } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import useXProviderContext from '../../hooks/use-x-provider-context';
-import useStyle from './style';
-import classnames from 'classnames';
 import type { PluginsType } from '../type';
+import useStyle from './style';
 
 enum RenderType {
   Code = '代码',
@@ -30,7 +30,7 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
     style,
     header,
     children,
-    codeProps,
+    highlightProps,
   } = props;
   const [renderType, setRenderType] = useState(RenderType.Image);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -113,7 +113,7 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
             showLineNumbers={true}
             wrapLines={true}
             CodeTag="div"
-            {...codeProps}
+            {...highlightProps}
           >
             {children.replace(/\n$/, '')}
           </SyntaxHighlighter>

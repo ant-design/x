@@ -1,10 +1,11 @@
-import { PluginsType } from '../interface';
 import katex, { type KatexOptions } from 'katex';
+import { TokenizerAndRendererExtension } from 'marked';
+import { PluginsType } from '../type';
 
 const inlineRuleNonStandard = /^(?:\${1,2}([^$\n]+?)\${1,2}|\\\((.+?)\\\))/;
 const blockRule = /^(\${1,2})\n([\s\S]+?)\n\1(?:\n|$)|^\\\[((?:\\.|[^\\])+?)\\\]/;
 
-type Options = {
+type LatexOption = {
   katexOptions?: KatexOptions;
   replaceAlignStart?: boolean;
 };
@@ -92,8 +93,8 @@ function blockKatex(renderer: Render, replaceAlignStart: boolean) {
   };
 }
 
-const Latex: PluginsType['Latex'] = (options?: Options) => {
-  const { replaceAlignStart = false, katexOptions = { output: 'mathml' } } = options || {};
+const Latex: PluginsType['Latex'] = (options?: LatexOption): TokenizerAndRendererExtension[] => {
+  const { replaceAlignStart = true, katexOptions = { output: 'mathml' } } = options || {};
 
   const inlineRenderer = createRenderer(katexOptions, false);
   const blockRenderer = createRenderer(katexOptions, true);

@@ -1,8 +1,8 @@
 import { UserOutlined } from '@ant-design/icons';
 import { Bubble, Sender, useXAgent, useXChat } from '@ant-design/x';
+import { RolesType } from '@ant-design/x/es/bubble/BubbleList';
 import XMarkdown from '@ant-design/x-markdown';
 import Latex from '@ant-design/x-markdown/plugins/Latex';
-import { RolesType } from '@ant-design/x/es/bubble/BubbleList';
 import React from 'react';
 
 const fullContent = `
@@ -68,7 +68,7 @@ const App = () => {
           messageRender:
             status === 'local'
               ? undefined
-              : (content) => <XMarkdown content={content} plugins={{ extensions: Latex() }} />,
+              : (content) => <XMarkdown content={content} config={{ extensions: Latex() }} />,
         }))}
       />
       <Sender

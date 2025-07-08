@@ -1,11 +1,11 @@
 ---
-title: 主题
+title: Themes
 order: 2
 ---
 
-## 如何引入插件
+## How to Import Themes
 
-### 可从 `@ant-design/x-markdown/themes/主题名.css` 引入插件。
+### Import from `@ant-design/x-markdown/themes/theme-name.css`
 
 ```tsx
 import { XMarkdown } from '@ant-design/x-markdown';
@@ -14,18 +14,18 @@ import '@ant-design/x-markdown/themes/light.css';
 return <XMarkdown className="x-markdown-light" content="" />;
 ```
 
-### 从浏览器引入
+### Browser Import
 
-在浏览器中使用 script 和 link 标签直接引入文件，并注入`类名`到组件 。
+Use script and link tags to directly import files in browser, and inject `className` to the component.
 
 ```html
 <script src="**/dist/themes/light.css"></script>
 ```
 
-## 代码演示
+## Demos
 
 <!-- prettier-ignore -->
 <code src="./demo/themes/light.tsx">light</code>
 <code src="./demo/themes/dark.tsx">dark</code>
 
-## 贡献主题
+## Contributing Themes

@@ -1,16 +1,15 @@
 import { Marked } from 'marked';
 import { XMarkdownProps } from '../interface';
 
-type ParserOptions = Pick<XMarkdownProps, 'plugins' | 'gfm' | 'breaks'>;
+type ParserOptions = XMarkdownProps['config'];
 
 class Parser {
   options: ParserOptions;
   markdownParser: Marked;
 
-  constructor(options: ParserOptions) {
+  constructor(options: ParserOptions = {}) {
     this.options = options;
-    const { gfm = true, breaks = false, plugins } = options;
-    this.markdownParser = new Marked({ gfm, breaks, ...plugins });
+    this.markdownParser = new Marked(options);
   }
 
   public parse(content: string) {

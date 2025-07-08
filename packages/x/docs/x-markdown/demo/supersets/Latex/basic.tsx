@@ -18,7 +18,7 @@ block: \n
 `;
 
 const App = () => {
-  return <XMarkdown plugins={{ extensions: Latex() }}>{content}</XMarkdown>;
+  return <XMarkdown config={{ extensions: Latex() }}>{content}</XMarkdown>;
 };
 
 export default App;

@@ -1,109 +1,204 @@
-.x-markdown-theme-light {
+.x-markdown-light {
+  --primary-color: #1f1f1f;
+  --heading-color: #000000;
+  --text-color: rgba(0, 0, 0, 0.8);
+  --border-color: rgba(0, 0, 0, 0.2);
+  --light-bg: #f5f5f5;
+  --table-head-bg: rgba(0, 0, 0, 0.05);
+  --table-body-bg: rgba(0, 0, 0, 0.02);
+  --cite-bg: rgba(0, 0, 0, 0.1);
+  --cite-hover-bg: rgba(0, 0, 0, 0.2);
+
   width: 100%;
   font-size: 16px;
   line-height: 28px;
-  color: #1f1f1f;
+  color: var(--primary-color);
   word-wrap: break-word;
   user-select: text;
 }
 
-.x-markdown-theme-light h1,
-.x-markdown-theme-light h2,
-.x-markdown-theme-light h3,
-.x-markdown-theme-light h4 {
-  color: #000000;
-}
-
-.x-markdown-theme-light p,
-.x-markdown-theme-light li {
-  color: rgba(0, 0, 0, 0.8);
-}
-
-.x-markdown-theme-light li::marker {
-  color: #000000;
-}
-
-.x-markdown-theme-light hr {
-  border-color: rgba(0, 0, 0, 0.2);
-  margin-top: 24px;
-  margin-bottom: 24px;
-}
-
-.x-markdown-theme-light table thead {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-.x-markdown-theme-light table tbody {
-  background-color: rgba(0, 0, 0, 0.02);
-}
-
-.x-markdown-theme-light table th,
-.x-markdown-theme-light table td {
-  /* border: 1px solid #e0e0e0; */
-  padding: 10px 12px;
-}
-
-.x-markdown-theme-light table th {
-  color: #000000;
-}
-
-.x-markdown-theme-light table td {
-  color: rgba(0, 0, 0, 0.8);
-}
-
-.x-markdown-theme-light .markdown-cite {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-.x-markdown-theme-light .markdown-cite:hover {
-  background-color: rgba(0, 0, 0, 0.2);
-}
-
-.x-markdown-theme-light .markdown-code-block {
-  border: 1px solid #e0e0e0;
-}
-
-.x-markdown-theme-light .markdown-code-header {
-  background: rgba(0, 0, 0, 0.05);
-  border-bottom: 1px solid #e0e0e0;
-}
-
-.x-markdown-theme-light h1,
-.x-markdown-theme-light h2,
-.x-markdown-theme-light h3,
-.x-markdown-theme-light h4,
-.x-markdown-theme-light p {
+.x-markdown-light h1,
+.x-markdown-light h2,
+.x-markdown-light h3,
+.x-markdown-light h4 {
+  color: var(--heading-color);
+  font-weight: 600;
   margin-bottom: 16px;
 }
 
-.x-markdown-theme-light h1 {
+.x-markdown-light h1 {
   font-size: 24px;
   line-height: 36px;
 }
 
-.x-markdown-theme-light h2 {
+.x-markdown-light h2 {
   font-size: 20px;
   line-height: 32px;
 }
 
-.x-markdown-theme-light h3 {
-  font-size: 18px;
+.x-markdown-light h3 {
+  font-size: 18px; /* 18px */
   line-height: 30px;
 }
 
-.x-markdown-theme-light h4 {
+.x-markdown-light h4 {
   font-size: 16px;
 }
 
-.x-markdown-theme-light ol,
-.x-markdown-theme-light ul {
-  margin-left: 28px;
+.x-markdown-light p,
+.x-markdown-light li {
+  color: var(--text-color);
+  margin-bottom: 16px;
 }
 
-.x-markdown-theme-light code {
-  margin-bottom: 12px;
-  background-color: #1f3b631f;
+.x-markdown-light ol,
+.x-markdown-light ul {
+  margin-left: 28px;
+  padding-left: 8px;
+  margin-bottom: 16px;
+}
+
+.x-markdown-light ol > li {
+  list-style: decimal;
+}
+
+.x-markdown-light ul > li {
+  list-style: disc;
+}
+
+/* 列表项通用样式 */
+.x-markdown-light li {
+  margin-bottom: 14px;
+  position: relative;
+}
+
+.x-markdown-light li::marker {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  color: var(--heading-color);
+}
+
+.x-markdown-light ul > li ul > li,
+.x-markdown-light ul > li ol > li {
+  list-style: circle;
+}
+
+.x-markdown-light ul > li ul > li ul > li,
+.x-markdown-light ul > li ul > li ol > li,
+.x-markdown-light ul > li ol > li ul > li,
+.x-markdown-light ul > li ol > li ol > li {
+  list-style: square;
+}
+
+.x-markdown-light ol > li ol > li,
+.x-markdown-light ol > li ul > li {
+  list-style: lower-alpha;
+}
+
+.x-markdown-light ol > li ol > li ol > li,
+.x-markdown-light ol > li ol > li ul > li,
+.x-markdown-light ol > li ul > li ol > li,
+.x-markdown-light ol > li ul > li ul > li {
+  list-style: lower-roman;
+}
+
+.x-markdown-light hr {
+  border: 0;
+  border-top: 1px solid var(--border-color);
+  margin: 24px 0;
+  height: 1px;
+  background-color: var(--border-color);
+}
+
+.x-markdown-light table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.x-markdown-light thead {
+  background-color: var(--table-head-bg);
+}
+
+.x-markdown-light tbody {
+  background-color: var(--table-body-bg);
+}
+
+.x-markdown-light th,
+.x-markdown-light td {
+  padding: 10px 12px;
+  text-align: left;
+  border: 1px solid #e0e0e0;
+}
+
+.x-markdown-light th {
+  color: var(--heading-color);
+  font-weight: 600;
+}
+
+.x-markdown-light td {
+  color: var(--text-color);
+}
+
+.x-markdown-light blockquote {
+  border-left: 4px solid var(--border-color);
+  padding: 0.5rem 1rem;
+  margin: 1.25rem 0;
+  background-color: var(--cite-bg);
+  border-radius: 0 8px 8px 0;
+  transition: background-color 0.2s ease;
+}
+
+.x-markdown-light blockquote:hover {
+  background-color: var(--cite-hover-bg);
+}
+
+.x-markdown-light code,
+.x-markdown-light pre {
+  font-size: 14px;
+}
+
+.x-markdown-light pre code {
   border-radius: 8px;
-  padding: 4px;
-  color: #333333;
+  display: block;
+  background: var(--light-bg);
+  padding: 16px;
+  color: #333;
+  line-height: 24px;
+  margin-bottom: 16px;
+}
+
+.x-markdown-light code:not(pre code) {
+  background-color: var(--light-bg);
+  border-radius: 4px;
+  padding: 2px 4px;
+  font-size: 16px;
+}
+
+.x-markdown-light img {
+  max-width: 30%;
+  height: auto;
+  border-radius: 6px;
+}
+
+.x-markdown-light a {
+  color: #2563eb;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.x-markdown-light a:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+.x-markdown-light a::after {
+  content: "↗";
+  margin-left: 4px;
+  vertical-align: super;
+  opacity: 0.7;
 }

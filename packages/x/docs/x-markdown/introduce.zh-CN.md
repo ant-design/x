@@ -3,7 +3,7 @@ order: 1
 title: 介绍
 ---
 
-`@ant-design/x-markdown` 旨在提供流式友好、强拓展性和高性能的 Markdown 渲染器。提供流式渲染公式、脚注、代码高亮等能力。
+`@ant-design/x-markdown` 旨在提供流式友好、强拓展性和高性能的 Markdown 渲染器。提供流式渲染公式、代码高亮、mermaid 等能力。
 
 ## ✨ 特性
 
@@ -22,9 +22,9 @@ title: 介绍
 
 与 [`marked`](https://github.com/markedjs/marked) 保持一致。为了提高整体markdown对于系统的兼容性支持，可以自定义polyfill，来提高兼容性。
 
-| 兼容模式 | Chrome     | IOS       |
-| -------- | ---------- | --------- |
-| 原生兼容 | Chrome 92+ | iOS 15.2+ |
+| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="Edge" width="24px" height="24px" />](https://godban.github.io/browsers-support-badges/)</br>Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](https://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](https://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](https://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](https://godban.github.io/browsers-support-badges/)</br>Opera |
+| --- | --- | --- | --- | --- |
+| >= 92 | >= 92 | >= 90 | >= 15.4 | >= 78 |
 
 ## 支持的 Markdown 规范
 

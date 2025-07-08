@@ -1,5 +1,5 @@
 import type { KatexOptions } from 'katex';
-import { MarkedExtension } from 'marked';
+import { TokenizerAndRendererExtension } from 'marked';
 import { ReactNode } from 'react';
 import { SyntaxHighlighterProps } from 'react-syntax-highlighter';
 
@@ -28,7 +28,7 @@ type MermaidProps = {
   style?: React.CSSProperties;
   className?: string;
   classNames?: Partial<Record<MermaidType, string>>;
-  codeProps?: Partial<SyntaxHighlighterProps>;
+  highlightProps?: Partial<SyntaxHighlighterProps>;
 };
 
 export type PluginsType = {
@@ -36,7 +36,7 @@ export type PluginsType = {
    * @desc 渲染数学公式Latex语法。
    * @descEN Rendering mathematical formulas using Latex syntax.
    */
-  Latex: (options?: LatexOption) => MarkedExtension;
+  Latex: (options?: LatexOption) => TokenizerAndRendererExtension[];
   /**
    * @desc 渲染代码高亮。
    * @descEN Highlight the rendering code.

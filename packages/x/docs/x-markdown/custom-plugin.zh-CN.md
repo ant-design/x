@@ -9,7 +9,7 @@ order: 4
 
 ## 何时使用
 
-Markdown 中需要渲染 Mermaid。
+使用 [Marked](https://marked.js.org/using_advanced#extensions) 插件，或自定义插件。
 
 ## 代码演示
 

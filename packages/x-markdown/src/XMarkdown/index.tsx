@@ -1,23 +1,13 @@
+import classnames from 'classnames';
 import React from 'react';
+import useXProviderContext from '../hooks/use-x-provider-context';
+import { Parser, Renderer } from './core';
 import { useStreaming } from './hooks';
 import { XMarkdownProps } from './interface';
-import { Parser, Renderer } from './core';
-import classnames from 'classnames';
-import useXProviderContext from '../hooks/use-x-provider-context';
 
 const XMarkdown: React.FC<XMarkdownProps> = (props) => {
-  const {
-    content,
-    children,
-    gfm,
-    breaks,
-    streaming,
-    plugins,
-    components,
-    rootClassName,
-    className,
-    style,
-  } = props;
+  const { streaming, config, components, content, children, rootClassName, className, style } =
+    props;
 
   // ============================ style ============================
   const { direction: contextDirection } = useXProviderContext();
@@ -34,7 +24,7 @@ const XMarkdown: React.FC<XMarkdownProps> = (props) => {
   // ============================ Render ============================
   if (!displayContent) return null;
 
-  const parser = new Parser({ gfm, breaks, plugins });
+  const parser = new Parser(config);
   const renderer = new Renderer({ components });
 
   const htmlString = parser.parse(displayContent);

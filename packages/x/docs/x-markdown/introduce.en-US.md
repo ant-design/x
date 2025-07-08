@@ -3,30 +3,28 @@ order: 1
 title: Introduction
 ---
 
-`@ant-design/x-markdown` aims to provide a streaming-friendly, high-performance, and highly extensible Markdown renderer. It offers capabilities like streaming rendering of formulas, footnotes, and code highlighting.
+`@ant-design/x-markdown` aims to provide a streaming-friendly, highly extensible and high-performance Markdown renderer. It offers capabilities such as streaming rendering of formulas, code highlighting, mermaid etc.
 
 ## ✨ Features
 
-Using [`marked`](https://github.com/markedjs/marked) as the base markdown renderer, it inherits all the features of marked.
+Built on [`marked`](https://github.com/markedjs/marked) as the base Markdown renderer, inheriting all features of marked.
 
 - 🚀 Built for speed.
 - 🤖 Streaming-friendly, a Markdown rendering solution for large models.
-- ⬇️ Low-level compiler for parsing Markdown without long caching or blocking.
-- ⚖️ Lightweight, while implementing all supported markdown features of various styles and specifications.
-- 🔐 Secure by default, no `dangerouslySetInnerHTML` XSS attacks.
-- 🎨 Customizable components, pass your own components to replace `<h2>` for `## hi`.
-- 🔧 Rich plugins, with many plugins to choose from.
-- 😊 Compatible, 100% compliant with CommonMark, 100% compliant with GFM plugins.
+- ⬇️ Low-level compiler for parsing Markdown without long-term caching or blocking.
+- ⚖️ Lightweight while implementing all supported Markdown styles and specifications.
+- 🔐 Secure by default, no dangerouslySetInnerHTML XSS attacks.
+- 🎨 Customizable components - pass your own components to replace default ones like \<h2\> for ## hi.
+- 🔧 Rich plugin ecosystem with many plugins to choose from.
+- 😊 Compatible - 100% CommonMark compliant, 100% GFM plugin compliant.
 
 ## Compatibility
 
-To improve the overall compatibility of markdown with the system, you can customize polyfills to enhance compatibility.
+Aligned with [`marked`](https://github.com/markedjs/marked). To improve overall Markdown compatibility with systems, custom polyfills can be added.
 
-| Compatibility Mode             | Chrome     | iOS        | Android | HarmonyOS |
-| :----------------------------- | :--------- | :--------- | :------ | :-------- |
-| ✅ Native Compatibility        | Chrome 92+ | iOS 15.2+  | -       | -         |
-| 🧥 Retro Mode: Before polyfill | Chrome 92  | iOS 15.2   | -       | -         |
-| 🧥 Retro Mode: After polyfill  | Chrome 92  | iOS 11.2.5 | 7.1.1   | 5.0+      |
+| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="Edge" width="24px" height="24px" />](https://godban.github.io/browsers-support-badges/)</br>Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](https://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](https://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](https://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](https://godban.github.io/browsers-support-badges/)</br>Opera |
+| --- | --- | --- | --- | --- |
+| >= 92 | >= 92 | >= 90 | >= 15.4 | >= 78 |
 
 ## Supported Markdown Specifications
 
@@ -36,23 +34,23 @@ To improve the overall compatibility of markdown with the system, you can custom
 
 ## Installation
 
-### Install with npm, yarn, pnpm, bun, or utoo
+### Using npm or yarn or pnpm or bun or utoo
 
-**We recommend using [npm](https://www.npmjs.com/), [yarn](https://github.com/yarnpkg/yarn/), [pnpm](https://pnpm.io/), [bun](https://bun.sh/), or [utoo](https://github.com/umijs/mako/tree/next) for development.** This not only allows for easy debugging in the development environment but also enables confident packaging and deployment in the production environment, enjoying the many benefits of the entire ecosystem and toolchain.
+**We recommend using [npm](https://www.npmjs.com/) or [yarn](https://github.com/yarnpkg/yarn/) or [pnpm](https://pnpm.io/) or [bun](https://bun.sh/) or [utoo](https://github.com/umijs/mako/tree/next) for development**, which allows easy debugging in development environments and safe production deployment, enjoying the benefits of the entire ecosystem and toolchain.
 
 <InstallDependencies npm='$ npm install @ant-design/x-markdown --save' yarn='$ yarn add @ant-design/x-markdown' pnpm='$ pnpm install @ant-design/x-markdown --save' bun='$ bun add @ant-design/x-markdown' utoo='$ ut install @ant-design/x-markdown --save'></InstallDependencies>
 
-If you have a poor network environment, it is recommended to use [cnpm](https://github.com/cnpm/cnpm).
+If your network environment is poor, we recommend using [cnpm](https://github.com/cnpm/cnpm).
 
-### Browser Import
+### Browser Usage
 
-Use `script` and `link` tags to directly import files in the browser and use the global variable `XMarkdown`.
+Include files directly in the browser using `script` and `link` tags, and use the global variable `XMarkdown`.
 
-We provide `x-markdown.js`, `x-markdown.min.js`, and `x-markdown.min.js.map` in the `dist` directory of the npm package.
+We provide `x-markdown.js`, `x-markdown.min.js` and `x-markdown.min.js.map` in the dist directory of the npm package.
 
-> **It is strongly not recommended to use the built files.** This prevents on-demand loading and makes it difficult to get quick bug fixes for underlying dependencies.
+> **Strongly not recommended to use built files directly**, as this prevents on-demand loading and makes it difficult to get quick bug fixes for underlying dependencies.
 
-> Note: `x-markdown.js`, `x-markdown.min.js`, and `x-markdown.min.js.map` depend on `react` and `react-dom`. Please make sure to import these files beforehand.
+> Note: `x-markdown.js`, `x-markdown.min.js` and `x-markdown.min.js.map` depend on `react` and `react-dom`. Please ensure these are included first.
 
 ## Example
 
@@ -76,12 +74,8 @@ export default App;
 
 ## Plugins
 
-`@ant-design/x-markdown` provides a rich set of plugins, which you can use through the `plugins` property. For details on plugins, see [Plugins](/markdowns/plugins).
+`@ant-design/x-markdown` provides a rich set of plugins that can be used via the `plugins` property. See [Plugin Collection](/markdowns/plugins) for details.
 
 ## Themes
 
-`@ant-design/x-markdown` provides a rich set of themes.
-
-## TypeScript
-
-`@ant-design/x-markdown` Written in TypeScript and provided with a complete definition file.
+`@ant-design/x-markdown` offers a variety of themes to choose from. See [Themes](/markdowns/themes) for details.

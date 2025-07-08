@@ -1,11 +1,12 @@
-import { Bubble } from '@ant-design/x';
 import type { BubbleProps } from '@ant-design/x';
+import { Bubble } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
 import { Line, LineProps } from '@antv/gpt-vis';
 import { Button, Flex } from 'antd';
 import React from 'react';
 
 const text = `
+
 **GPT-Vis**, Components for GPTs, generative AI, and LLM projects. Not only UI Components. [more...](https://github.com/antvis/GPT-Vis) \n\n
 
 Here’s a visualization of Haidilao's food delivery revenue from 2013 to 2022. You can see a steady increase over the years, with notable *growth* particularly in recent years.

@@ -115,8 +115,8 @@ const App = () => {
 
   return (
     <XMarkdown
-      className="x-markdown-theme-light"
-      plugins={{ extensions: [footNoteExtension] }}
+      className="x-markdown-light"
+      config={{ extensions: [footNoteExtension] }}
       components={{
         footnote: (props: { children: string; href: string; title: string }) => {
           return (

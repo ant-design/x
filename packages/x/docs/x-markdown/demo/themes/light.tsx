@@ -108,6 +108,6 @@ export default App;
 
 `;
 
-const App = () => <XMarkdown content={content} className="x-markdown-theme-light" />;
+const App = () => <XMarkdown content={content} className="x-markdown-light" />;
 
 export default App;

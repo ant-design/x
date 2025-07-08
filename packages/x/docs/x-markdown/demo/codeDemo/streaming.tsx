@@ -1,8 +1,8 @@
 import { UserOutlined } from '@ant-design/icons';
 import { Bubble, Sender, useXAgent, useXChat } from '@ant-design/x';
+import { RolesType } from '@ant-design/x/es/bubble/BubbleList';
 import XMarkdown from '@ant-design/x-markdown';
 import HighlightCode from '@ant-design/x-markdown/plugins/HighlightCode';
-import { RolesType } from '@ant-design/x/es/bubble/BubbleList';
 import { Button } from 'antd';
 import React, { useState } from 'react';
 
@@ -15,28 +15,11 @@ const fullContent = `
 
 Craft AI-driven interfaces effortlessly.
 
-[![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] [![NPM version][npm-image]][npm-url]
+[![CI status](https://github.com/ant-design/x/actions/workflows/main.yml/badge.svg)](https://github.com/ant-design/x/actions/workflows/main.yml) [![codecov](https://codecov.io/gh/ant-design/x/graph/badge.svg?token=wrCCsyTmdi)](https://codecov.io/gh/ant-design/x/graph/badge.svg?token=wrCCsyTmdi) [![NPM version](https://img.shields.io/npm/v/@ant-design/x.svg?style=flat-square)](https://npmjs.org/package/@ant-design/x)
 
-[![NPM downloads][download-image]][download-url] [![][bundlephobia-image]][bundlephobia-url] [![antd][antd-image]][antd-url] [![Follow Twitter][twitter-image]][twitter-url]
+[![NPM downloads](https://img.shields.io/npm/dm/@ant-design/x.svg?style=flat-square)](https://npmjs.org/package/@ant-design/x) [![](https://badgen.net/bundlephobia/minzip/@ant-design/x?style=flat-square)](https://bundlephobia.com/package/@ant-design/x) [![antd](https://img.shields.io/badge/-Ant%20Design-blue?labelColor=black&logo=antdesign&style=flat-square)](https://ant.design) [![Follow Twitter](https://img.shields.io/twitter/follow/AntDesignUI.svg?label=Ant%20Design)](https://twitter.com/AntDesignUI)
 
-[Changelog](./CHANGELOG.en-US.md) · [Report Bug][github-issues-bug-report] · [Request Feature][github-issues-feature-request] · English · [中文](./README-zh_CN.md)
-
-[npm-image]: https://img.shields.io/npm/v/@ant-design/x.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/@ant-design/x
-[github-action-image]: https://github.com/ant-design/x/actions/workflows/main.yml/badge.svg
-[github-action-url]: https://github.com/ant-design/x/actions/workflows/main.yml
-[codecov-image]: https://codecov.io/gh/ant-design/x/graph/badge.svg?token=wrCCsyTmdi
-[codecov-url]: https://codecov.io/gh/ant-design/x
-[download-image]: https://img.shields.io/npm/dm/@ant-design/x.svg?style=flat-square
-[download-url]: https://npmjs.org/package/@ant-design/x
-[bundlephobia-image]: https://badgen.net/bundlephobia/minzip/@ant-design/x?style=flat-square
-[bundlephobia-url]: https://bundlephobia.com/package/@ant-design/x
-[github-issues-bug-report]: https://github.com/ant-design/x/issues/new?template=bug-report.yml
-[github-issues-feature-request]: https://github.com/ant-design/x/issues/new?template=bug-feature-request.yml
-[antd-image]: https://img.shields.io/badge/-Ant%20Design-blue?labelColor=black&logo=antdesign&style=flat-square
-[antd-url]: https://ant.design
-[twitter-image]: https://img.shields.io/twitter/follow/AntDesignUI.svg?label=Ant%20Design
-[twitter-url]: https://twitter.com/AntDesignUI
+[Changelog](./CHANGELOG.en-US.md) · [Report Bug](https://github.com/ant-design/x/issues/new?template=bug-report.yml) · [Request Feature](https://github.com/ant-design/x/issues/new?template=bug-feature-request.yml) 
 
 </div>
 
@@ -78,8 +61,8 @@ We provide \`antdx.js\`, \`antdx.min.js\`, and \`antdx.min.js.map\` in the [dist
 
 Based on the RICH interaction paradigm, we provide numerous atomic components for various stages of interaction to help you flexibly build your AI dialogue applications:
 
-- [Components Overview](https://x.ant.design/components/overview)
-- [Playground](https://x.ant.design/docs/playground/independent)
+[Components Overview](https://x.ant.design/components/overview)
+[Playground](https://x.ant.design/docs/playground/independent)
 
 Below is an example of using atomic components to create a simple chatbot interface:
 
