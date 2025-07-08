@@ -8,11 +8,19 @@ const { Text } = Typography;
 import { CodeOutlined, EditOutlined } from '@ant-design/icons';
 import { Card } from 'antd';
 
+const contentStyles = {
+  backgroundColor: 'rgba(0,0,0,.01)',
+  borderRadius: 8,
+  padding: 10,
+  marginBlockStart: 10,
+  border: '1px solid rgba(0,0,0,.04)',
+};
+
 const items: ThoughtChainProps['items'] = [
   {
     key: 'create_task',
     title: 'Create Task: Write New Component',
-    description: 'Execute files needed for creating new component',
+    icon: false,
     collapsible: true,
     content: (
       <Flex gap="small" vertical>
@@ -46,48 +54,19 @@ const items: ThoughtChainProps['items'] = [
         />
       </Flex>
     ),
-    status: 'success',
-  },
-  {
-    key: 'check_task',
-    title: 'Checking Task Execution Steps',
-    description: 'Verify overall task execution logic and feasibility',
-    content: (
-      <Flex gap="small" vertical>
-        <ThoughtChain.Item
-          variant="solid"
-          status="success"
-          title="Folder created"
-          description="component"
-        />
-        <ThoughtChain.Item
-          variant="solid"
-          status="success"
-          title="File created"
-          description="component/index.tsx"
-        />
-        <ThoughtChain.Item
-          variant="solid"
-          status="success"
-          title="File created"
-          description="component/index.zh-CN.md"
-        />
-        <ThoughtChain.Item
-          variant="solid"
-          status="success"
-          title="File created"
-          description="component/index.en-US.md"
-        />
-      </Flex>
-    ),
-    status: 'loading',
   },
 ];
 
 const App: React.FC = () => {
   return (
     <Card style={{ width: 500 }}>
-      <ThoughtChain defaultExpandedKeys={['create_task']} items={items} />
+      <ThoughtChain
+        styles={{
+          itemContent: contentStyles,
+        }}
+        defaultExpandedKeys={['create_task']}
+        items={items}
+      />
     </Card>
   );
 };

@@ -1,7 +1,7 @@
 import type { ThoughtChainProps } from '@ant-design/x';
 import { ThoughtChain } from '@ant-design/x';
-import { Flex, Typography } from 'antd';
-import React from 'react';
+import { Button, Flex, Typography } from 'antd';
+import React, { useState } from 'react';
 
 const { Text } = Typography;
 
@@ -11,8 +11,8 @@ import { Card } from 'antd';
 const items: ThoughtChainProps['items'] = [
   {
     key: 'create_task',
-    title: 'Create Task: Write New Component',
-    description: 'Execute files needed for creating new component',
+    title: 'Create Task: Develop New Component',
+    description: 'Execute files needed for new component creation',
     collapsible: true,
     content: (
       <Flex gap="small" vertical>
@@ -30,18 +30,12 @@ const items: ThoughtChainProps['items'] = [
           title="Creating file"
           description="component/index.tsx"
         />
-        <Text type="secondary">Creating Chinese description file for new component</Text>
-        <ThoughtChain.Item
-          variant="solid"
-          icon={<EditOutlined />}
-          title="Creating file"
-          description="component/index.zh-CN.md"
-        />
+        <Text type="secondary">Creating Chinese documentation file</Text>
         <Text type="secondary">Creating English description file for new component</Text>
         <ThoughtChain.Item
           variant="solid"
           icon={<EditOutlined />}
-          title="Creating file"
+          title="Continue creating file"
           description="component/index.en-US.md"
         />
       </Flex>
@@ -50,8 +44,9 @@ const items: ThoughtChainProps['items'] = [
   },
   {
     key: 'check_task',
-    title: 'Checking Task Execution Steps',
-    description: 'Verify overall task execution logic and feasibility',
+    title: 'Check Task Execution Steps Completion',
+    collapsible: true,
+    description: 'Verify the overall task execution logic and feasibility',
     content: (
       <Flex gap="small" vertical>
         <ThoughtChain.Item
@@ -80,14 +75,39 @@ const items: ThoughtChainProps['items'] = [
         />
       </Flex>
     ),
+    status: 'success',
+  },
+  {
+    key: 'used_task',
+    title: 'Using the New Component',
+    description: 'Using the generated component to complete the task',
+    content: (
+      <Flex gap="small" vertical>
+        <ThoughtChain.Item
+          variant="solid"
+          status="success"
+          title="File created"
+          description="component"
+        />
+      </Flex>
+    ),
     status: 'loading',
   },
 ];
 
 const App: React.FC = () => {
+  const [expandedKeys, setExpandedKeys] = useState(['create_task']);
   return (
     <Card style={{ width: 500 }}>
-      <ThoughtChain defaultExpandedKeys={['create_task']} items={items} />
+      <Button
+        style={{ marginBottom: 16 }}
+        onClick={() => {
+          setExpandedKeys(['check_task']);
+        }}
+      >
+        Open "check_task" details
+      </Button>
+      <ThoughtChain items={items} expandedKeys={expandedKeys} onExpand={setExpandedKeys} />
     </Card>
   );
 };
