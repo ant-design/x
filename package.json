@@ -72,5 +72,10 @@
   "funding": {
     "type": "opencollective",
     "url": "https://opencollective.com/ant-design"
+  },
+  "overrides": {
+    "@ant-design/cssinjs": {
+      "@emotion/hash": "^0.9.2"
+    }
   }
 }
