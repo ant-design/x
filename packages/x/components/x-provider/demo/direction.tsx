@@ -53,7 +53,7 @@ export default () => {
                 },
               ]}
             />
-            <Divider type="vertical" style={{ height: '100%' }} />
+            <Divider orientation="vertical" style={{ height: '100%' }} />
             <Flex vertical style={{ flex: 1 }} gap={8}>
               <Bubble.List
                 style={{ flex: 1 }}
@@ -109,7 +109,7 @@ export default () => {
                 }}
               </Suggestion>
             </Flex>
-            <Divider type="vertical" style={{ height: '100%' }} />
+            <Divider orientation="vertical" style={{ height: '100%' }} />
             <ThoughtChain
               style={{ width: 200 }}
               items={[
