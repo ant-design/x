@@ -30,10 +30,11 @@ type SiteState = Partial<Omit<SiteContextProps, 'updateSiteContext'>>;
 const RESPONSIVE_MOBILE = 768;
 export const ANT_DESIGN_NOT_SHOW_BANNER = 'ANT_DESIGN_NOT_SHOW_BANNER';
 
-// const styleCache = createCache();
-// if (typeof global !== 'undefined') {
-//   (global as any).styleCache = styleCache;
-// }
+type ThemeConfigSite = {
+  algorithm: MappingAlgorithm[] | undefined;
+  token: ThemeConfig['token'];
+  hashed: boolean;
+};
 
 const getAlgorithm = (themes: ThemeName[] = []) =>
   themes
@@ -144,7 +145,7 @@ const GlobalLayout: React.FC = () => {
     [isMobile, direction, updateSiteConfig, theme],
   );
 
-  const themeConfig = React.useMemo<ThemeConfig>(
+  const themeConfig = React.useMemo<ThemeConfigSite>(
     () => ({
       // index page should always use dark theme
       algorithm: isIndexPage ? getAlgorithm(['dark']) : getAlgorithm(theme),
@@ -197,7 +198,7 @@ const GlobalLayout: React.FC = () => {
         linters={[legacyNotSelectorLinter, parentSelectorLinter, NaNLinter]}
       >
         <SiteContext value={siteContextValue}>
-          <SiteThemeProvider theme={themeConfig as any}>
+          <SiteThemeProvider theme={themeConfig}>
             <App>
               {outlet}
               <Suspense>{pathname.startsWith('/~demos') ? <PeterCat /> : null}</Suspense>
