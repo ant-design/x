@@ -1,4 +1,4 @@
-import { DownOutlined, LoadingOutlined, RightOutlined } from '@ant-design/icons';
+import { LoadingOutlined, RightOutlined } from '@ant-design/icons';
 import classnames from 'classnames';
 import type { CSSMotionProps } from 'rc-motion';
 import CSSMotion from 'rc-motion';
