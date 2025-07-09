@@ -4,14 +4,15 @@ import {
   FileSearchOutlined,
   SignatureOutlined,
 } from '@ant-design/icons';
-import { Conversations, XProvider } from '@ant-design/x';
 import type { XProviderProps } from '@ant-design/x';
+import { Conversations, XProvider } from '@ant-design/x';
 import enUS_X from '@ant-design/x/locale/en_US';
 import zhCN_X from '@ant-design/x/locale/zh_CN';
 import { Card, Flex, Radio, RadioChangeEvent, Typography } from 'antd';
 import enUS from 'antd/locale/en_US';
 import zhCN from 'antd/locale/zh_CN';
 import React, { useState } from 'react';
+
 type Locale = XProviderProps['locale'];
 
 const items_locale = {

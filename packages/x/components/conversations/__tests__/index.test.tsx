@@ -3,8 +3,8 @@ import React from 'react';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
 import { fireEvent, render } from '../../../tests/utils';
-import Conversations from '../index';
 import type { ItemType } from '../index';
+import Conversations from '../index';
 
 const items: ItemType[] = [
   {

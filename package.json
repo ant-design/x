@@ -23,16 +23,18 @@
     "packages/*"
   ],
   "devDependencies": {
-    "size-limit": "^11.1.5",
-    "@size-limit/file": "^11.1.5",
-    "lint-staged": "^16.1.0",
-    "husky": "^9.1.6",
-    "father": "^4.5.4",
-    "dekko": "^0.2.1",
     "@biomejs/biome": "^2.0.5",
     "@codecov/webpack-plugin": "^1.4.0",
     "@madccc/duplicate-package-checker-webpack-plugin": "^1.0.0",
-    "circular-dependency-plugin": "^5.2.2"
+    "@size-limit/file": "^11.1.5",
+    "circular-dependency-plugin": "^5.2.2",
+    "dekko": "^0.2.1",
+    "father": "^4.5.4",
+    "husky": "^9.1.6",
+    "lint-staged": "^16.1.0",
+    "marked-emoji": "^2.0.1",
+    "size-limit": "^11.1.5",
+    "prettier": "^3.3.3"
   },
   "size-limit": [
     {
