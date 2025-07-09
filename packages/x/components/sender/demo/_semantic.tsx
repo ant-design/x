@@ -7,12 +7,14 @@ import useLocale from '../../../.dumi/hooks/useLocale';
 
 const locales = {
   cn: {
+    root: '根节点',
     prefix: '前缀',
     input: '输入框',
     actions: '操作列表',
     footer: '底部',
   },
   en: {
+    root: 'Root',
     prefix: 'Prefix',
     input: 'Input',
     actions: 'Action List',
@@ -41,6 +43,7 @@ const App: React.FC = () => {
       <SemanticPreview
         componentName="Sender"
         semantics={[
+          { name: 'root', desc: locale.root },
           { name: 'prefix', desc: locale.prefix },
           { name: 'input', desc: locale.input },
           { name: 'actions', desc: locale.actions },

@@ -110,6 +110,8 @@ const ForwardSender = React.forwardRef<any, SenderProps>((props, ref) => {
     contextConfig.className,
     className,
     rootClassName,
+    contextConfig.classNames.root,
+    classNames.root,
     hashId,
     cssVarCls,
     {
@@ -267,7 +269,16 @@ const ForwardSender = React.forwardRef<any, SenderProps>((props, ref) => {
   // ============================ Render ============================
   return (
     <SenderContext.Provider value={contextValue}>
-      <div ref={containerRef} className={mergedCls} style={{ ...contextConfig.style, ...style }}>
+      <div
+        ref={containerRef}
+        className={mergedCls}
+        style={{
+          ...contextConfig.style,
+          ...style,
+          ...contextConfig.styles.root,
+          ...styles.root,
+        }}
+      >
         {/* Header */}
         {header && (
           <SendHeaderContext.Provider value={{ prefixCls }}>{header}</SendHeaderContext.Provider>

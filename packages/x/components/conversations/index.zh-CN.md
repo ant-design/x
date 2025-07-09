@@ -103,6 +103,10 @@ MenuProps & {
 | onExpand | 展开或收起 | (expandedKeys: string[]) => void | - | - |
 | expandedKeys | 展开分组的 keys | string[] | - | - |
 
+## Semantic DOM
+
+<code src="./demo/_semantic.tsx" simplify="true"></code>
+
 ## 主题变量（Design Token）
 
 <ComponentTokenTable component="Conversations"></ComponentTokenTable>

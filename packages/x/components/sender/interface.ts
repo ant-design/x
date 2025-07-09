@@ -8,6 +8,8 @@ type TextareaProps = GetProps<typeof import('antd').Input.TextArea>;
 
 export type SubmitType = 'enter' | 'shiftEnter' | false;
 
+type SemanticType = 'root' | 'prefix' | 'input' | 'actions' | 'footer';
+
 export interface SenderComponents {
   input?: React.ComponentType<TextareaProps>;
 }
@@ -109,19 +111,9 @@ export interface SenderProps
   onPaste?: React.ClipboardEventHandler<HTMLElement>;
   onPasteFile?: (firstFile: File, files: FileList) => void;
   components?: SenderComponents;
-  styles?: {
-    prefix?: React.CSSProperties;
-    input?: React.CSSProperties;
-    actions?: React.CSSProperties;
-    footer?: React.CSSProperties;
-  };
+  classNames?: Partial<Record<SemanticType, string>>;
+  styles?: Partial<Record<SemanticType, React.CSSProperties>>;
   rootClassName?: string;
-  classNames?: {
-    prefix?: string;
-    input?: string;
-    actions?: string;
-    footer?: string;
-  };
   style?: React.CSSProperties;
   className?: string;
   actions?: React.ReactNode | ActionsRender;

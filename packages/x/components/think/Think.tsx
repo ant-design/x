@@ -1,4 +1,4 @@
-import { DownOutlined, LoadingOutlined } from '@ant-design/icons';
+import { DownOutlined, LoadingOutlined, RightOutlined } from '@ant-design/icons';
 import classnames from 'classnames';
 import type { CSSMotionProps } from 'rc-motion';
 import CSSMotion from 'rc-motion';
@@ -92,6 +92,7 @@ const Think: React.FC<React.PropsWithChildren<ThinkProps>> = (props) => {
       className={mergedCls}
       style={{
         ...contextConfig.style,
+        ...contextConfig.styles.root,
         ...style,
         ...styles.root,
       }}
@@ -105,7 +106,7 @@ const Think: React.FC<React.PropsWithChildren<ThinkProps>> = (props) => {
           <StatusIcon loading={loading} icon={icon} />
         </div>
         <div className={`${prefixCls}-status-text`}>{title}</div>
-        <DownOutlined className={`${prefixCls}-status-down-icon`} rotate={isExpand ? 180 : 0} />
+        <RightOutlined className={`${prefixCls}-status-down-icon`} rotate={isExpand ? 90 : 0} />
       </div>
       <CSSMotion {...collapseMotion} visible={isExpand}>
         {({ className: motionClassName, style }, motionRef) => (

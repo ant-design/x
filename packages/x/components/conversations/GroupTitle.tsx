@@ -1,14 +1,14 @@
 import { RightOutlined } from '@ant-design/icons';
 import type { ConfigProviderProps, GetProp } from 'antd';
 import classnames from 'classnames';
-import CSSMotion from 'rc-motion';
 import type { CSSMotionProps } from 'rc-motion';
+import CSSMotion from 'rc-motion';
 import React from 'react';
 import type { GroupInfoType } from './hooks/useGroupable';
 
 export interface GroupTitleProps {
   children?: React.ReactNode;
-  enableGroup?: boolean;
+  className?: string;
 }
 interface GroupTitleContextType {
   prefixCls?: GetProp<ConfigProviderProps, 'prefixCls'>;
@@ -20,7 +20,7 @@ interface GroupTitleContextType {
 }
 export const GroupTitleContext = React.createContext<GroupTitleContextType>(null!);
 
-const GroupTitle: React.FC<GroupTitleProps> = ({ children }) => {
+const GroupTitle: React.FC<GroupTitleProps> = ({ className, children }) => {
   const { prefixCls, groupInfo, enableCollapse, expandedKeys, onItemExpand, collapseMotion } =
     React.useContext(GroupTitleContext) || {};
   const { label, name, collapsible } = groupInfo || {};
@@ -43,7 +43,7 @@ const GroupTitle: React.FC<GroupTitleProps> = ({ children }) => {
 
   return (
     <>
-      <li>
+      <li className={className}>
         <div
           className={classnames(`${prefixCls}-group-title`, {
             [`${prefixCls}-group-title-collapsible`]: mergeCollapsible,
@@ -62,14 +62,14 @@ const GroupTitle: React.FC<GroupTitleProps> = ({ children }) => {
             </div>
           )}
         </div>
+        <CSSMotion {...collapseMotion} visible={mergeCollapsible ? groupOpen : true}>
+          {({ className: motionClassName, style }, motionRef) => (
+            <div className={classnames(motionClassName)} ref={motionRef} style={style}>
+              {children}
+            </div>
+          )}
+        </CSSMotion>
       </li>
-      <CSSMotion {...collapseMotion} visible={mergeCollapsible ? groupOpen : true}>
-        {({ className: motionClassName, style }, motionRef) => (
-          <div className={classnames(motionClassName)} ref={motionRef} style={style}>
-            {children}
-          </div>
-        )}
-      </CSSMotion>
     </>
   );
 };

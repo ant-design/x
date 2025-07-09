@@ -6,15 +6,23 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
   const { componentCls, antCls } = token;
   const slotCls = `${componentCls}-slot`;
   const antInputCls = `${antCls}-input`;
-  const antDropdownCls = `${antCls}-dropdown`;
+
+  const antDropdownCls = `${antCls}-dropdown-trigger`;
   const slotInputCls = `${componentCls}-slot-input`;
   const slotSelectCls = `${componentCls}-slot-select`;
   const slotTagCls = `${componentCls}-slot-tag`;
   return {
+    [`${componentCls}-input`]: {
+      outline: 'none',
+      cursor: 'text',
+      whiteSpace: 'pre-wrap',
+      width: '100%',
+    },
     [slotCls]: {
       display: 'inline-block',
       margin: `0 ${unit(token.marginXXS)}`,
     },
+
     [`${antInputCls}${slotInputCls}`]: {
       background: token.colorBgSlot,
       border: `1px solid ${token.colorBorderSlot}`,
@@ -73,6 +81,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       position: 'absolute',
       insetInlineStart: 0,
       top: '100%',
+      display: 'inline-flex',
       background: token.colorBgElevated,
       borderRadius: token.borderRadiusLG,
       boxShadow: token.boxShadowSecondary,

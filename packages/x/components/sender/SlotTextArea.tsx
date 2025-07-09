@@ -1,5 +1,6 @@
 import { CaretDownFilled } from '@ant-design/icons';
 import { Dropdown, Input, InputRef } from 'antd';
+import classnames from 'classnames';
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import useGetState from '../_util/hooks/use-get-state';
@@ -142,7 +143,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         case 'select':
           return (
             <Dropdown
-              className={`${prefixCls}-slot-select ${value ? '' : 'placeholder'}`}
               menu={{
                 items: node.props?.options?.map((opt: any) => ({
                   label: opt,
@@ -154,10 +154,14 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
                   updateSlot(node.key as string, key);
                 },
               }}
-              overlayClassName={`${prefixCls}-slot-select-dropdown`}
               trigger={['click']}
             >
-              <span className={`${prefixCls}-slot-select-selector-value`}>
+              <span
+                className={classnames(`${prefixCls}-slot-select`, {
+                  placeholder: !value,
+                  [`${prefixCls}-slot-select-selector-value`]: value,
+                })}
+              >
                 <span className={`${prefixCls}-slot-select-value`}>
                   {value || node.props?.placeholder || ''}
                 </span>
@@ -418,14 +422,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         ref={editableRef}
         role="textbox"
         tabIndex={0}
-        style={{
-          outline: 'none',
-          cursor: 'text',
-          whiteSpace: 'pre-wrap',
-          width: '100%',
-          ...styles.input,
-        }}
-        className={`${prefixCls}-input ${classNames.input || ''}`}
+        style={styles.input}
+        className={classnames(`${prefixCls}-input`, `${classNames.input}`)}
         contentEditable="true"
         suppressContentEditableWarning
         spellCheck={false}
