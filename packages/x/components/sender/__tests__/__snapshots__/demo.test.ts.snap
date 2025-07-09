@@ -1372,11 +1372,10 @@ exports[`renders components/sender/demo/slot-filling.tsx correctly 1`] = `
         class="ant-sender-content"
       >
         <div
-          class="ant-sender-input "
+          class="ant-sender-input undefined"
           contenteditable="true"
           role="textbox"
           spellcheck="false"
-          style="outline:none;cursor:text;white-space:pre-wrap;width:100%"
           tabindex="0"
         />
         <div

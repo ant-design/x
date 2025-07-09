@@ -171,7 +171,9 @@ exports[`renders components/conversations/demo/controlled-collapsible.tsx extend
   class="ant-conversations css-var-«r1n»"
   style="width: 256px; background: #ffffff; border-radius: 6px;"
 >
-  <li>
+  <li
+    class=""
+  >
     <div
       class="ant-conversations-group-title"
     >
@@ -210,46 +212,48 @@ exports[`renders components/conversations/demo/controlled-collapsible.tsx extend
         </div>
       </div>
     </div>
+    <div
+      class=""
+    >
+      <ul
+        class="ant-conversations-list"
+      >
+        <li
+          class="ant-conversations-item ant-conversations-item-active"
+          title="Conversation Item 1"
+        >
+          <span
+            class="ant-typography ant-conversations-label css-var-«r1n»"
+          >
+            Conversation Item 1
+          </span>
+        </li>
+        <li
+          class="ant-conversations-item"
+          title="Conversation Item 4"
+        >
+          <span
+            class="ant-typography ant-conversations-label css-var-«r1n»"
+          >
+            Conversation Item 4
+          </span>
+        </li>
+        <li
+          class="ant-conversations-item"
+          title="Conversation Item 7"
+        >
+          <span
+            class="ant-typography ant-conversations-label css-var-«r1n»"
+          >
+            Conversation Item 7
+          </span>
+        </li>
+      </ul>
+    </div>
   </li>
-  <div
+  <li
     class=""
   >
-    <ul
-      class="ant-conversations-list"
-    >
-      <li
-        class="ant-conversations-item ant-conversations-item-active"
-        title="Conversation Item 1"
-      >
-        <span
-          class="ant-typography ant-conversations-label css-var-«r1n»"
-        >
-          Conversation Item 1
-        </span>
-      </li>
-      <li
-        class="ant-conversations-item"
-        title="Conversation Item 4"
-      >
-        <span
-          class="ant-typography ant-conversations-label css-var-«r1n»"
-        >
-          Conversation Item 4
-        </span>
-      </li>
-      <li
-        class="ant-conversations-item"
-        title="Conversation Item 7"
-      >
-        <span
-          class="ant-typography ant-conversations-label css-var-«r1n»"
-        >
-          Conversation Item 7
-        </span>
-      </li>
-    </ul>
-  </div>
-  <li>
     <div
       class="ant-conversations-group-title ant-conversations-group-title-collapsible"
     >
@@ -311,46 +315,48 @@ exports[`renders components/conversations/demo/controlled-collapsible.tsx extend
         </span>
       </div>
     </div>
+    <div
+      class=""
+    >
+      <ul
+        class="ant-conversations-list ant-conversations-group-collapsible-list"
+      >
+        <li
+          class="ant-conversations-item"
+          title="Conversation Item 2"
+        >
+          <span
+            class="ant-typography ant-conversations-label css-var-«r1n»"
+          >
+            Conversation Item 2
+          </span>
+        </li>
+        <li
+          class="ant-conversations-item"
+          title="Conversation Item 5"
+        >
+          <span
+            class="ant-typography ant-conversations-label css-var-«r1n»"
+          >
+            Conversation Item 5
+          </span>
+        </li>
+        <li
+          class="ant-conversations-item"
+          title="Conversation Item 8"
+        >
+          <span
+            class="ant-typography ant-conversations-label css-var-«r1n»"
+          >
+            Conversation Item 8
+          </span>
+        </li>
+      </ul>
+    </div>
   </li>
-  <div
+  <li
     class=""
   >
-    <ul
-      class="ant-conversations-list ant-conversations-group-collapsible-list"
-    >
-      <li
-        class="ant-conversations-item"
-        title="Conversation Item 2"
-      >
-        <span
-          class="ant-typography ant-conversations-label css-var-«r1n»"
-        >
-          Conversation Item 2
-        </span>
-      </li>
-      <li
-        class="ant-conversations-item"
-        title="Conversation Item 5"
-      >
-        <span
-          class="ant-typography ant-conversations-label css-var-«r1n»"
-        >
-          Conversation Item 5
-        </span>
-      </li>
-      <li
-        class="ant-conversations-item"
-        title="Conversation Item 8"
-      >
-        <span
-          class="ant-typography ant-conversations-label css-var-«r1n»"
-        >
-          Conversation Item 8
-        </span>
-      </li>
-    </ul>
-  </div>
-  <li>
     <div
       class="ant-conversations-group-title ant-conversations-group-title-collapsible"
     >
@@ -755,7 +761,9 @@ exports[`renders components/conversations/demo/custom-new-chat.tsx extend contex
     class="ant-divider css-var-«r1l» ant-divider-horizontal ant-divider-rail ant-conversations-divider"
     role="separator"
   />
-  <li>
+  <li
+    class=""
+  >
     <div
       class="ant-conversations-group-title"
     >
@@ -765,25 +773,25 @@ exports[`renders components/conversations/demo/custom-new-chat.tsx extend contex
         Today
       </div>
     </div>
-  </li>
-  <div
-    class=""
-  >
-    <ul
-      class="ant-conversations-list"
+    <div
+      class=""
     >
-      <li
-        class="ant-conversations-item"
-        title="Conversation Item 1"
+      <ul
+        class="ant-conversations-list"
       >
-        <span
-          class="ant-typography ant-conversations-label css-var-«r1l»"
+        <li
+          class="ant-conversations-item"
+          title="Conversation Item 1"
         >
-          Conversation Item 1
-        </span>
-      </li>
-    </ul>
-  </div>
+          <span
+            class="ant-typography ant-conversations-label css-var-«r1l»"
+          >
+            Conversation Item 1
+          </span>
+        </li>
+      </ul>
+    </div>
+  </li>
 </ul>
 `;
 
@@ -794,7 +802,9 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
   class="ant-conversations css-var-«r1j»"
   style="width: 256px; background: #ffffff; border-radius: 6px;"
 >
-  <li>
+  <li
+    class=""
+  >
     <div
       class="ant-conversations-group-title"
     >
@@ -804,46 +814,48 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
         Today
       </div>
     </div>
+    <div
+      class=""
+    >
+      <ul
+        class="ant-conversations-list"
+      >
+        <li
+          class="ant-conversations-item ant-conversations-item-active"
+          title="This's Conversation Item 1, you can click me!"
+        >
+          <span
+            class="ant-typography ant-conversations-label css-var-«r1j»"
+          >
+            This's Conversation Item 1, you can click me!
+          </span>
+        </li>
+        <li
+          class="ant-conversations-item"
+          title="Conversation Item 2"
+        >
+          <span
+            class="ant-typography ant-conversations-label css-var-«r1j»"
+          >
+            Conversation Item 2
+          </span>
+        </li>
+        <li
+          class="ant-conversations-item"
+          title="Conversation Item 3"
+        >
+          <span
+            class="ant-typography ant-conversations-label css-var-«r1j»"
+          >
+            Conversation Item 3
+          </span>
+        </li>
+      </ul>
+    </div>
   </li>
-  <div
+  <li
     class=""
   >
-    <ul
-      class="ant-conversations-list"
-    >
-      <li
-        class="ant-conversations-item ant-conversations-item-active"
-        title="This's Conversation Item 1, you can click me!"
-      >
-        <span
-          class="ant-typography ant-conversations-label css-var-«r1j»"
-        >
-          This's Conversation Item 1, you can click me!
-        </span>
-      </li>
-      <li
-        class="ant-conversations-item"
-        title="Conversation Item 2"
-      >
-        <span
-          class="ant-typography ant-conversations-label css-var-«r1j»"
-        >
-          Conversation Item 2
-        </span>
-      </li>
-      <li
-        class="ant-conversations-item"
-        title="Conversation Item 3"
-      >
-        <span
-          class="ant-typography ant-conversations-label css-var-«r1j»"
-        >
-          Conversation Item 3
-        </span>
-      </li>
-    </ul>
-  </div>
-  <li>
     <div
       class="ant-conversations-group-title"
     >
@@ -853,45 +865,45 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
         Yesterday
       </div>
     </div>
-  </li>
-  <div
-    class=""
-  >
-    <ul
-      class="ant-conversations-list"
+    <div
+      class=""
     >
-      <li
-        class="ant-conversations-item"
-        title="Conversation Item 4"
+      <ul
+        class="ant-conversations-list"
       >
-        <span
-          class="ant-typography ant-conversations-label css-var-«r1j»"
+        <li
+          class="ant-conversations-item"
+          title="Conversation Item 4"
         >
-          Conversation Item 4
-        </span>
-      </li>
-      <li
-        class="ant-conversations-item"
-        title="Conversation Item 5"
-      >
-        <span
-          class="ant-typography ant-conversations-label css-var-«r1j»"
+          <span
+            class="ant-typography ant-conversations-label css-var-«r1j»"
+          >
+            Conversation Item 4
+          </span>
+        </li>
+        <li
+          class="ant-conversations-item"
+          title="Conversation Item 5"
         >
-          Conversation Item 5
-        </span>
-      </li>
-      <li
-        class="ant-conversations-item"
-        title="Conversation Item 6"
-      >
-        <span
-          class="ant-typography ant-conversations-label css-var-«r1j»"
+          <span
+            class="ant-typography ant-conversations-label css-var-«r1j»"
+          >
+            Conversation Item 5
+          </span>
+        </li>
+        <li
+          class="ant-conversations-item"
+          title="Conversation Item 6"
         >
-          Conversation Item 6
-        </span>
-      </li>
-    </ul>
-  </div>
+          <span
+            class="ant-typography ant-conversations-label css-var-«r1j»"
+          >
+            Conversation Item 6
+          </span>
+        </li>
+      </ul>
+    </div>
+  </li>
 </ul>
 `;
 
@@ -902,7 +914,9 @@ exports[`renders components/conversations/demo/group-collapsible.tsx extend cont
   class="ant-conversations css-var-«r1k»"
   style="width: 256px; background: #ffffff; border-radius: 6px;"
 >
-  <li>
+  <li
+    class=""
+  >
     <div
       class="ant-conversations-group-title ant-conversations-group-title-collapsible"
     >
@@ -936,7 +950,9 @@ exports[`renders components/conversations/demo/group-collapsible.tsx extend cont
       </div>
     </div>
   </li>
-  <li>
+  <li
+    class=""
+  >
     <div
       class="ant-conversations-group-title ant-conversations-group-title-collapsible"
     >
@@ -1773,7 +1789,9 @@ exports[`renders components/conversations/demo/new-chat.tsx extend context corre
     class="ant-divider css-var-«rt» ant-divider-horizontal ant-divider-rail ant-conversations-divider"
     role="separator"
   />
-  <li>
+  <li
+    class=""
+  >
     <div
       class="ant-conversations-group-title"
     >
@@ -1783,25 +1801,25 @@ exports[`renders components/conversations/demo/new-chat.tsx extend context corre
         Today
       </div>
     </div>
-  </li>
-  <div
-    class=""
-  >
-    <ul
-      class="ant-conversations-list"
+    <div
+      class=""
     >
-      <li
-        class="ant-conversations-item"
-        title="Conversation Item 1"
+      <ul
+        class="ant-conversations-list"
       >
-        <span
-          class="ant-typography ant-conversations-label css-var-«rt»"
+        <li
+          class="ant-conversations-item"
+          title="Conversation Item 1"
         >
-          Conversation Item 1
-        </span>
-      </li>
-    </ul>
-  </div>
+          <span
+            class="ant-typography ant-conversations-label css-var-«rt»"
+          >
+            Conversation Item 1
+          </span>
+        </li>
+      </ul>
+    </div>
+  </li>
 </ul>
 `;
 
@@ -2019,7 +2037,9 @@ Array [
         Deep Search
       </span>
     </li>
-    <li>
+    <li
+      class=""
+    >
       <div
         class="ant-conversations-group-title ant-conversations-group-title-collapsible"
       >
@@ -2080,7 +2100,9 @@ Array [
       class="ant-divider css-var-«rs» ant-divider-horizontal ant-divider-rail ant-conversations-divider"
       role="separator"
     />
-    <li>
+    <li
+      class=""
+    >
       <div
         class="ant-conversations-group-title"
       >
@@ -2090,25 +2112,25 @@ Array [
           Today
         </div>
       </div>
-    </li>
-    <div
-      class=""
-    >
-      <ul
-        class="ant-conversations-list"
+      <div
+        class=""
       >
-        <li
-          class="ant-conversations-item"
-          title="Conversation Item 1"
+        <ul
+          class="ant-conversations-list"
         >
-          <span
-            class="ant-typography ant-conversations-label css-var-«rs»"
+          <li
+            class="ant-conversations-item"
+            title="Conversation Item 1"
           >
-            Conversation Item 1
-          </span>
-        </li>
-      </ul>
-    </div>
+            <span
+              class="ant-typography ant-conversations-label css-var-«rs»"
+            >
+              Conversation Item 1
+            </span>
+          </li>
+        </ul>
+      </div>
+    </li>
   </ul>,
 ]
 `;
