@@ -243,7 +243,7 @@
     "remark-rehype": "^11.1.0",
     "scroll-into-view-if-needed": "^3.1.0",
     "semver": "^7.6.3",
-    "sharp": "^0.33.5",
+    "sharp": "^0.34.3",
     "simple-git": "^3.26.0",
     "size-limit": "^11.1.5",
     "spinnies": "^0.5.1",
