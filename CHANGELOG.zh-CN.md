@@ -15,6 +15,16 @@ tag: vVERSION
 
 ---
 
+## 1.5.0
+
+`2025-07-11`
+
+- 🆕 补充 Bubble 组件对滚动事件`onScroll`的监听。[#1021](https://github.com/ant-design/x/pull/1021) 由 [@QdabuliuQ](https://github.com/ QdabuliuQ) 提交。
+- 🐛 修复 Attachments 组件 `FileList` 语义化配置。[#1017](https://github.com/ant-design/x/pull/1017) 由 [@kimteayon](https://github.com/ kimteayon) 提交。
+- 🐛 补充 Actions 组件 html配置。[#995](https://github.com/ant-design/x/pull/995) 由 [@vanndxh](https://github.com/vanndxh) 提交。
+- 🐛 修复 Conversations label标签展示问题，同时补充语义化配置。[#898](https://github.com/ant-design/x/pull/898) 由 [@yuanliu147](https://github.com/yuanliu147) 提交。
+- 📖 优化官网站点提升用户体验。[#940](https://github.com/ant-design/x/pull/940) 由 [@coding-ice](https://github.com/coding-ice) 提交、[#969](https://github.com/ant-design/x/pull/969) 由 [@afc163](https://github.com/afc163) 提交、[#968](https://github.com/ant-design/x/pull/968) 由 [@afc163](https://github.com/afc163) 提交、[#1019](https://github.com/ant-design/x/pull/1019) 由 [@hylin](https://github.com/hylin) 提交。
+
 ## 1.4.0
 
 `2025-05-30`

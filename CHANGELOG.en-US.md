@@ -16,6 +16,16 @@ tag: vVERSION
 
 ---
 
+## 1.5.0
+
+`2025-07-11`
+
+- 🆕 Added Bubble component support for `onScroll` event listener. [#1021](https://github.com/ant-design/x/pull/1021) by [@QdabuliuQ](https://github.com/QdabuliuQ).
+- 🐛 Fixed semantic configuration for Attachments component `FileList`. [#1017](https://github.com/ant-design/x/pull/1017) by [@kimteayon](https://github.com/kimteayon).
+- 🐛 Added html configuration for Actions component. [#995](https://github.com/ant-design/x/pull/995) by [@vanndxh](https://github.com/vanndxh).
+- 🐛 Fixed Conversations label display issue and improved semantic configuration. [#898](https://github.com/ant-design/x/pull/898) by [@yuanliu147](https://github.com/yuanliu147).
+- 📖 Improved official site for better user experience. [#940](https://github.com/ant-design/x/pull/940) by [@coding-ice](https://github.com/coding-ice), [#969](https://github.com/ant-design/x/pull/969) by [@afc163](https://github.com/afc163), [#968](https://github.com/ant-design/x/pull/968) by [@afc163](https://github.com/afc163), [#1019](https://github.com/ant-design/x/pull/1019) by [hylin](https://github.com/hylin).
+
 ## 1.4.0
 
 `2025-05-30`
@@ -23,7 +33,7 @@ tag: vVERSION
 - 🔥 New Component Actions.[#768](https://github.com/ant-design/x/pull/768) by [vanndxh](https://github.com/vanndxh)
 - 🐛 Fix the issue where Bubble.List `footer` and `header` cannot retrieve keys.[#876](https://github.com/ant-design/x/pull/876) by [kimteayon](https://github.com/kimteayon)
 - 🐛 Fix the issue of overflow and ellipsis of Conversations list titles.[#877](https://github.com/ant-design/x/pull/877) by [kimteayon](https://github.com/kimteayon)
-- 📖 Enhance the official website to improve user experience.[#816](https://github.com/ant-design/x/pull/816) by [@Rain120](https://github.com/Rain120) 提交、[#880](https://github.com/ant-design/x/pull/880) by [@kimteayon](https://github.com/kimteayon)
+- 📖 Enhance the official website to improve user experience.[#816](https://github.com/ant-design/x/pull/816) by [@Rain120](https://github.com/Rain120)、[#880](https://github.com/ant-design/x/pull/880) by [@kimteayon](https://github.com/kimteayon)
 
 ## 1.3.0
 
