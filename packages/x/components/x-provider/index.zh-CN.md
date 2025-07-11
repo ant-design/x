@@ -64,7 +64,7 @@ import zhCN_X from '@ant-design/x/locale/zh_CN';
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
 | bubble | 气泡组件的全局配置 |{style: React.CSSProperties; styles: Record<string, React.CSSProperties>;className: string; classNames: Record<string, string>;}| - | - |
-| conversations | 会话组件的全局配置 | {style: React.CSSProperties; styles: Record<string, React.CSSProperties>;className: string; classNames: Record<string, string>;shortcutKeys: {items?: ShortcutKeys<'number'> \| ShortcutKeys<number>[]}} | - | - |
+| conversations | 会话组件的全局配置 | {style: React.CSSProperties; styles: Record<string, React.CSSProperties>;className: string; classNames: Record<string, string>;shortcutKeys: {items?: ShortcutKeys\<'number'\> \| ShortcutKeys\<number\>[]}} | - | - |
 | prompts | 提示集组件的全局配置 | {style: React.CSSProperties; styles: Record<string, React.CSSProperties>;className: string; classNames: Record<string, string>;} | - | - |
 | sender | 输入框组件的全局配置 | {style: React.CSSProperties; styles: Record<string, React.CSSProperties>;className: string; classNames: Record<string, string>;} | - | - |
 | suggestion | 建议组件的全局配置 |{style: React.CSSProperties; className: string;} | - |  |

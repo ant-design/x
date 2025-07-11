@@ -45,7 +45,7 @@ const App = () => {
 
   const request = () => {
     setLines([]);
-    setThoughtChainStatus('pending');
+    setThoughtChainStatus('loading');
     setStatus('pending');
     agent.request(
       {
@@ -99,7 +99,7 @@ const App = () => {
   return (
     <Splitter>
       <Splitter.Panel style={{ height: 300 }}>
-        <Splitter layout="vertical">
+        <Splitter orientation="vertical">
           <Splitter.Panel style={{ margin: '0 16px' }}>
             <Flex gap="large" vertical>
               <Input

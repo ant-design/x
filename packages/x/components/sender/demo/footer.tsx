@@ -38,17 +38,17 @@ const App: React.FC = () => {
           <Flex justify="space-between" align="center">
             <Flex gap="small" align="center">
               <Button style={iconStyle} type="text" icon={<LinkOutlined />} />
-              <Divider type="vertical" />
+              <Divider orientation="vertical" />
               Deep Thinking
               <Switch size="small" />
-              <Divider type="vertical" />
+              <Divider orientation="vertical" />
               <Button icon={<SearchOutlined />}>Global Search</Button>
             </Flex>
             <Flex align="center">
               <Button type="text" style={iconStyle} icon={<ApiOutlined />} />
-              <Divider type="vertical" />
+              <Divider orientation="vertical" />
               <SpeechButton style={iconStyle} />
-              <Divider type="vertical" />
+              <Divider orientation="vertical" />
               {loading ? (
                 <LoadingButton type="default" />
               ) : (

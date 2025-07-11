@@ -1,4 +1,5 @@
-import { XNotificationOpenArgs, notification } from '@ant-design/x';
+import type { XNotificationOpenArgs } from '@ant-design/x';
+import { notification } from '@ant-design/x';
 import { Button, Flex } from 'antd';
 import React from 'react';
 

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { devUseWarning } from '../_util/warning';
 import type { LocaleContextProps } from './context';
 import LocaleContext from './context';
+
 export { default as useLocale } from './useLocale';
 
 export const ANT_MARK = 'internalMark';

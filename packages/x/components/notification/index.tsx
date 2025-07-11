@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import type { XNotificationOpenArgs, useNotificationType } from './interface';
+import type { useNotificationType, XNotificationOpenArgs } from './interface';
+
 let uuid = 0;
 
 class XNotification {

@@ -1,17 +1,15 @@
-import { CheckCircleOutlined, MoreOutlined } from '@ant-design/icons';
+import { CheckCircleOutlined } from '@ant-design/icons';
+import type { ThoughtChainItem, ThoughtChainProps } from '@ant-design/x';
 import { ThoughtChain } from '@ant-design/x';
 import { Button } from 'antd';
 import React from 'react';
 import SemanticPreview from '../../../.dumi/components/SemanticPreview';
 import useLocale from '../../../.dumi/hooks/useLocale';
 
-import type { ThoughtChainItem, ThoughtChainProps } from '@ant-design/x';
-
 const customizationProps: ThoughtChainItem = {
   title: 'Thought Chain Item Title',
   description: 'description',
   icon: <CheckCircleOutlined />,
-  extra: <Button type="text" icon={<MoreOutlined />} />,
   footer: <Button block>Thought Chain Item Footer</Button>,
   content: 'Thought Chain Item Content',
 };
@@ -25,13 +23,17 @@ const items: ThoughtChainProps['items'] = [
 
 const locales = {
   cn: {
+    root: '根节点',
     item: '思维链节点',
+    itemIcon: '思维链图标',
     itemHeader: '思维链节点头部',
     itemContent: '思维链节点内容',
     itemFooter: '思维链节点页脚',
   },
   en: {
+    root: 'Root',
     item: 'Item',
+    itemIcon: 'Item Icon',
     itemHeader: 'Item Header',
     itemContent: 'Item Content',
     itemFooter: 'Item Footer',
@@ -45,8 +47,16 @@ const App: React.FC = () => {
       componentName="ThoughtChain"
       semantics={[
         {
+          name: 'root',
+          desc: locale.root,
+        },
+        {
           name: 'item',
           desc: locale.item,
+        },
+        {
+          name: 'itemIcon',
+          desc: locale.itemIcon,
         },
         {
           name: 'itemHeader',

@@ -11,6 +11,7 @@ import type { SuggestionProps } from '../suggestion';
 import type { ThinkProps } from '../think';
 import type { ThoughtChainProps } from '../thought-chain';
 import type { WelcomeProps } from '../welcome';
+
 interface BaseComponentConfig {
   style: React.CSSProperties;
   styles: Record<string, React.CSSProperties>;

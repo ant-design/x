@@ -48,7 +48,7 @@ demo:
 | onActiveChange | 选中变更回调 | (value: string) => void | - | - |
 | menu | 会话操作菜单 | ItemMenuProps\| ((value: ConversationItemType) => ItemMenuProps) | - | - |
 | groupable | 是否支持分组, 开启后默认按 `Conversation.group` 字段分组 | boolean \| GroupableProps | - | - |
-| shortcutKeys | 快捷键操作 | { creation?: ShortcutKeys<number>; items?:ShortcutKeys<'number'> \| ShortcutKeys<number>[];} | - | - |
+| shortcutKeys | 快捷键操作 | { creation?: ShortcutKeys\<number\>; items?:ShortcutKeys\<'number'\> \| ShortcutKeys\<number\>[];} | - | - |
 | creation | 新会话操作配置 | CreationProps | - | - |
 | styles | 语义化结构 style | styles?: {creation?: React.CSSProperties;item?: React.CSSProperties;} | - | - |
 | classNames | 语义化结构 className | classNames?: { creation?: string; item?:string;} | - | - |
@@ -102,6 +102,10 @@ MenuProps & {
 | defaultExpandedKeys | 默认展开或收起 | string[] | - | - |
 | onExpand | 展开或收起 | (expandedKeys: string[]) => void | - | - |
 | expandedKeys | 展开分组的 keys | string[] | - | - |
+
+## Semantic DOM
+
+<code src="./demo/_semantic.tsx" simplify="true"></code>
 
 ## 主题变量（Design Token）
 

@@ -1,7 +1,7 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Sender Component rtl render component should be rendered correctly in RTL direction 1`] = `
 <div
-  class="ant-suggestion ant-suggestion-wrapper"
+  class="ant-suggestion ant-suggestion-wrapper css-var-root"
 />
 `;

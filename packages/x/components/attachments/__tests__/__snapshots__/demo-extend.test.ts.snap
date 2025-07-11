@@ -1,14 +1,14 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`renders components/attachments/demo/basic.tsx extend context correctly 1`] = `
 <div
-  class="ant-app"
+  class="ant-app css-var-«r5»"
 >
   <div
-    class="ant-flex ant-flex-align-flex-start ant-flex-gap-middle ant-flex-vertical"
+    class="ant-flex css-var-«r5» ant-flex-align-flex-start ant-flex-gap-middle ant-flex-vertical"
   >
     <div
-      class="ant-sender"
+      class="ant-sender css-var-«r5»"
     >
       <div
         class="ant-sender-content"
@@ -17,7 +17,7 @@ exports[`renders components/attachments/demo/basic.tsx extend context correctly 
           class="ant-sender-prefix"
         >
           <span
-            class="ant-upload-wrapper"
+            class="ant-upload-wrapper css-var-«r5»"
           >
             <div
               class="ant-upload ant-upload-select"
@@ -32,7 +32,7 @@ exports[`renders components/attachments/demo/basic.tsx extend context correctly 
                   type="file"
                 />
                 <button
-                  class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+                  class="ant-btn css-var-«r5» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
                   type="button"
                 >
                   <span
@@ -64,17 +64,17 @@ exports[`renders components/attachments/demo/basic.tsx extend context correctly 
           </span>
         </div>
         <textarea
-          class="ant-input ant-input-borderless ant-sender-input"
+          class="ant-input ant-input-borderless css-var-«r5» ant-input-css-var ant-sender-input"
           style="overflow-y: hidden; resize: none;"
         />
         <div
           class="ant-sender-actions-list"
         >
           <div
-            class="ant-sender-actions-list-presets ant-flex"
+            class="ant-sender-actions-list-presets ant-flex css-var-«r5»"
           >
             <button
-              class="ant-btn ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              class="ant-btn css-var-«r5» ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
               type="button"
             >
               <span
@@ -107,7 +107,7 @@ exports[`renders components/attachments/demo/basic.tsx extend context correctly 
     </div>
     <button
       aria-checked="false"
-      class="ant-switch"
+      class="ant-switch css-var-«r5»"
       role="switch"
       type="button"
     >
@@ -130,14 +130,14 @@ exports[`renders components/attachments/demo/basic.tsx extend context correctly 
       </span>
     </button>
     <div
-      class="ant-attachment-drop-area"
+      class="ant-attachment-drop-area css-var-«r5»"
       style="display: none;"
     >
       <div
         class="ant-attachment-placeholder"
       >
         <span
-          class="ant-upload-wrapper"
+          class="ant-upload-wrapper css-var-«r5»"
         >
           <div
             class="ant-upload ant-upload-drag"
@@ -158,10 +158,10 @@ exports[`renders components/attachments/demo/basic.tsx extend context correctly 
                 class="ant-upload-drag-container"
               >
                 <div
-                  class="ant-attachment-placeholder-inner ant-flex ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
+                  class="ant-attachment-placeholder-inner ant-flex css-var-«r5» ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
                 >
                   <span
-                    class="ant-typography ant-attachment-placeholder-icon"
+                    class="ant-typography ant-attachment-placeholder-icon css-var-«r5»"
                   >
                     <span
                       aria-label="cloud-upload"
@@ -187,12 +187,12 @@ exports[`renders components/attachments/demo/basic.tsx extend context correctly 
                     </span>
                   </span>
                   <h5
-                    class="ant-typography ant-attachment-placeholder-title"
+                    class="ant-typography ant-attachment-placeholder-title css-var-«r5»"
                   >
                     Drag & Drop files here
                   </h5>
                   <span
-                    class="ant-typography ant-typography-secondary ant-attachment-placeholder-description"
+                    class="ant-typography ant-typography-secondary ant-attachment-placeholder-description css-var-«r5»"
                   >
                     Support file type: image, video, audio, document, etc.
                   </span>
@@ -211,13 +211,13 @@ exports[`renders components/attachments/demo/basic.tsx extend context correctly 
 
 exports[`renders components/attachments/demo/files.tsx extend context correctly 1`] = `
 <div
-  class="ant-app"
+  class="ant-app css-var-«r4»"
 >
   <div
-    class="ant-flex ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+    class="ant-flex css-var-«r4» ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
   >
     <div
-      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
+      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview css-var-«r4»"
     >
       <div
         class="ant-attachment-list-card-icon"
@@ -272,7 +272,7 @@ exports[`renders components/attachments/demo/files.tsx extend context correctly 
       </div>
     </div>
     <div
-      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
+      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview css-var-«r4»"
     >
       <div
         class="ant-attachment-list-card-icon"
@@ -327,7 +327,7 @@ exports[`renders components/attachments/demo/files.tsx extend context correctly 
       </div>
     </div>
     <div
-      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
+      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview css-var-«r4»"
     >
       <div
         class="ant-attachment-list-card-icon"
@@ -382,7 +382,7 @@ exports[`renders components/attachments/demo/files.tsx extend context correctly 
       </div>
     </div>
     <div
-      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
+      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview css-var-«r4»"
     >
       <div
         class="ant-attachment-list-card-icon"
@@ -437,7 +437,7 @@ exports[`renders components/attachments/demo/files.tsx extend context correctly 
       </div>
     </div>
     <div
-      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
+      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview css-var-«r4»"
     >
       <div
         class="ant-attachment-list-card-icon"
@@ -492,7 +492,7 @@ exports[`renders components/attachments/demo/files.tsx extend context correctly 
       </div>
     </div>
     <div
-      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
+      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview css-var-«r4»"
     >
       <div
         class="ant-attachment-list-card-icon"
@@ -550,7 +550,7 @@ exports[`renders components/attachments/demo/files.tsx extend context correctly 
       </div>
     </div>
     <div
-      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
+      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview css-var-«r4»"
     >
       <div
         class="ant-attachment-list-card-icon"
@@ -608,7 +608,7 @@ exports[`renders components/attachments/demo/files.tsx extend context correctly 
       </div>
     </div>
     <div
-      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
+      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview css-var-«r4»"
     >
       <div
         class="ant-attachment-list-card-icon"
@@ -663,7 +663,7 @@ exports[`renders components/attachments/demo/files.tsx extend context correctly 
       </div>
     </div>
     <div
-      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
+      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview css-var-«r4»"
     >
       <div
         class="ant-attachment-list-card-icon"
@@ -718,10 +718,10 @@ exports[`renders components/attachments/demo/files.tsx extend context correctly 
       </div>
     </div>
     <div
-      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r4»"
     >
       <div
-        class="ant-image"
+        class="ant-image css-var-«r4» ant-image-css-var"
       >
         <img
           alt="preview"
@@ -729,10 +729,10 @@ exports[`renders components/attachments/demo/files.tsx extend context correctly 
           src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
         />
         <div
-          class="ant-image-mask"
+          class="ant-image-cover"
         >
           <div
-            class="ant-image-mask-info"
+            class="ant-image-cover-info"
           >
             <span
               aria-label="eye"
@@ -766,14 +766,14 @@ exports[`renders components/attachments/demo/files.tsx extend context correctly 
 
 exports[`renders components/attachments/demo/overflow.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-«r2» ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-flex ant-flex-align-center ant-flex-gap-middle"
+    class="ant-flex css-var-«r2» ant-flex-align-center ant-flex-gap-middle"
   >
     <div
       aria-label="segmented control"
-      class="ant-segmented"
+      class="ant-segmented css-var-«r2»"
       role="radiogroup"
       style="margin-inline-end: auto;"
       tabindex="0"
@@ -791,8 +791,9 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             type="radio"
           />
           <div
-            aria-selected="true"
+            aria-checked="true"
             class="ant-segmented-item-label"
+            role="radio"
             title="Wrap"
           >
             Wrap
@@ -807,8 +808,9 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             type="radio"
           />
           <div
-            aria-selected="false"
+            aria-checked="false"
             class="ant-segmented-item-label"
+            role="radio"
             title="Scroll X"
           >
             Scroll X
@@ -823,8 +825,9 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             type="radio"
           />
           <div
-            aria-selected="false"
+            aria-checked="false"
             class="ant-segmented-item-label"
+            role="radio"
             title="Scroll Y"
           >
             Scroll Y
@@ -834,7 +837,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
     </div>
     <button
       aria-checked="true"
-      class="ant-switch ant-switch-checked"
+      class="ant-switch css-var-«r2» ant-switch-checked"
       role="switch"
       type="button"
     >
@@ -858,7 +861,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
     </button>
     <button
       aria-checked="false"
-      class="ant-switch"
+      class="ant-switch css-var-«r2»"
       role="switch"
       type="button"
     >
@@ -882,17 +885,17 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
     </button>
   </div>
   <div
-    class="ant-attachment"
+    class="ant-attachment css-var-«r2»"
     dir="ltr"
   >
     <div
       class="ant-attachment-list ant-attachment-list-overflow-wrap"
     >
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -900,10 +903,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -955,10 +958,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -966,10 +969,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -1021,10 +1024,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -1032,10 +1035,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -1087,10 +1090,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -1098,10 +1101,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -1153,10 +1156,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -1164,10 +1167,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -1219,10 +1222,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -1230,10 +1233,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -1285,10 +1288,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -1296,10 +1299,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -1351,10 +1354,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -1362,10 +1365,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -1417,10 +1420,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -1428,10 +1431,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -1483,10 +1486,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -1494,10 +1497,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -1549,10 +1552,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -1560,10 +1563,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -1615,10 +1618,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -1626,10 +1629,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -1681,10 +1684,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -1692,10 +1695,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -1747,10 +1750,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -1758,10 +1761,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -1813,10 +1816,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -1824,10 +1827,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -1879,10 +1882,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -1890,10 +1893,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -1945,10 +1948,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -1956,10 +1959,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -2011,10 +2014,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -2022,10 +2025,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -2077,10 +2080,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -2088,10 +2091,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -2143,10 +2146,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -2154,10 +2157,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -2209,10 +2212,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -2220,10 +2223,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -2275,10 +2278,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -2286,10 +2289,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -2341,10 +2344,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -2352,10 +2355,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -2407,10 +2410,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -2418,10 +2421,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -2473,10 +2476,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -2484,10 +2487,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -2539,10 +2542,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -2550,10 +2553,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -2605,10 +2608,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -2616,10 +2619,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -2671,10 +2674,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -2682,10 +2685,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -2737,10 +2740,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -2748,10 +2751,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -2803,10 +2806,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <div
-        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+        class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview css-var-«r2»"
       >
         <div
-          class="ant-image"
+          class="ant-image css-var-«r2» ant-image-css-var"
         >
           <img
             alt="preview"
@@ -2814,10 +2817,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <div
-            class="ant-image-mask"
+            class="ant-image-cover"
           >
             <div
-              class="ant-image-mask-info"
+              class="ant-image-cover-info"
             >
               <span
                 aria-label="eye"
@@ -2869,7 +2872,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         </button>
       </div>
       <span
-        class="ant-upload-wrapper"
+        class="ant-upload-wrapper css-var-«r2»"
       >
         <div
           class="ant-upload ant-upload-select"
@@ -2884,7 +2887,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               type="file"
             />
             <button
-              class="ant-btn ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
+              class="ant-btn css-var-«r2» ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
               type="button"
             >
               <span
@@ -2920,7 +2923,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
       style="display: none;"
     >
       <span
-        class="ant-upload-wrapper"
+        class="ant-upload-wrapper css-var-«r2»"
       >
         <div
           class="ant-upload ant-upload-drag"
@@ -2941,10 +2944,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-upload-drag-container"
             >
               <div
-                class="ant-attachment-placeholder-inner ant-flex ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
+                class="ant-attachment-placeholder-inner ant-flex css-var-«r2» ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
               >
                 <span
-                  class="ant-typography ant-attachment-placeholder-icon"
+                  class="ant-typography ant-attachment-placeholder-icon css-var-«r2»"
                 >
                   <span
                     aria-label="cloud-upload"
@@ -2970,12 +2973,12 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
                   </span>
                 </span>
                 <h5
-                  class="ant-typography ant-attachment-placeholder-title"
+                  class="ant-typography ant-attachment-placeholder-title css-var-«r2»"
                 >
                   Click or Drop files here
                 </h5>
                 <span
-                  class="ant-typography ant-typography-secondary ant-attachment-placeholder-description"
+                  class="ant-typography ant-typography-secondary ant-attachment-placeholder-description css-var-«r2»"
                 >
                   Support file type: image, video, audio, document, etc.
                 </span>
@@ -2986,7 +2989,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
       </span>
     </div>
     <div
-      class="ant-attachment-drop-area"
+      class="ant-attachment-drop-area css-var-«r2»"
       style="display: none;"
     >
       <div
@@ -2994,7 +2997,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         class="ant-attachment-placeholder"
       >
         <span
-          class="ant-upload-wrapper"
+          class="ant-upload-wrapper css-var-«r2»"
         >
           <div
             class="ant-upload ant-upload-drag"
@@ -3015,10 +3018,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
                 class="ant-upload-drag-container"
               >
                 <div
-                  class="ant-attachment-placeholder-inner ant-flex ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
+                  class="ant-attachment-placeholder-inner ant-flex css-var-«r2» ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
                 >
                   <span
-                    class="ant-typography ant-attachment-placeholder-icon"
+                    class="ant-typography ant-attachment-placeholder-icon css-var-«r2»"
                   >
                     <span
                       aria-label="cloud-upload"
@@ -3044,12 +3047,12 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
                     </span>
                   </span>
                   <h5
-                    class="ant-typography ant-attachment-placeholder-title"
+                    class="ant-typography ant-attachment-placeholder-title css-var-«r2»"
                   >
                     Click or Drop files here
                   </h5>
                   <span
-                    class="ant-typography ant-typography-secondary ant-attachment-placeholder-description"
+                    class="ant-typography ant-typography-secondary ant-attachment-placeholder-description css-var-«r2»"
                   >
                     Support file type: image, video, audio, document, etc.
                   </span>
@@ -3068,14 +3071,14 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
 
 exports[`renders components/attachments/demo/placeholder.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-«r1» ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
   style="padding: 16px; background: rgba(0, 0, 0, 0.04);"
 >
   <div
     style="border-radius: 6px; overflow: hidden; background: #ffffff;"
   >
     <div
-      class="ant-attachment"
+      class="ant-attachment css-var-«r1»"
       dir="ltr"
     >
       <div
@@ -3083,7 +3086,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
         style="display: none;"
       >
         <span
-          class="ant-upload-wrapper"
+          class="ant-upload-wrapper css-var-«r1»"
         >
           <div
             class="ant-upload ant-upload-select"
@@ -3098,7 +3101,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
                 type="file"
               />
               <button
-                class="ant-btn ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
+                class="ant-btn css-var-«r1» ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
                 type="button"
               >
                 <span
@@ -3132,7 +3135,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
         class="ant-attachment-placeholder"
       >
         <span
-          class="ant-upload-wrapper"
+          class="ant-upload-wrapper css-var-«r1»"
         >
           <div
             class="ant-upload ant-upload-drag"
@@ -3153,10 +3156,10 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
                 class="ant-upload-drag-container"
               >
                 <div
-                  class="ant-attachment-placeholder-inner ant-flex ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
+                  class="ant-attachment-placeholder-inner ant-flex css-var-«r1» ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
                 >
                   <span
-                    class="ant-typography ant-attachment-placeholder-icon"
+                    class="ant-typography ant-attachment-placeholder-icon css-var-«r1»"
                   >
                     <span
                       aria-label="cloud-upload"
@@ -3182,12 +3185,12 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
                     </span>
                   </span>
                   <h5
-                    class="ant-typography ant-attachment-placeholder-title"
+                    class="ant-typography ant-attachment-placeholder-title css-var-«r1»"
                   >
                     Click or Drop files here
                   </h5>
                   <span
-                    class="ant-typography ant-typography-secondary ant-attachment-placeholder-description"
+                    class="ant-typography ant-typography-secondary ant-attachment-placeholder-description css-var-«r1»"
                   >
                     Support file type: image, video, audio, document, etc.
                   </span>
@@ -3198,14 +3201,14 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
         </span>
       </div>
       <div
-        class="ant-attachment-drop-area"
+        class="ant-attachment-drop-area css-var-«r1»"
         style="display: none;"
       >
         <div
           class="ant-attachment-placeholder"
         >
           <span
-            class="ant-upload-wrapper"
+            class="ant-upload-wrapper css-var-«r1»"
           >
             <div
               class="ant-upload ant-upload-drag"
@@ -3226,18 +3229,18 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
                   class="ant-upload-drag-container"
                 >
                   <div
-                    class="ant-attachment-placeholder-inner ant-flex ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
+                    class="ant-attachment-placeholder-inner ant-flex css-var-«r1» ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
                   >
                     <span
-                      class="ant-typography ant-attachment-placeholder-icon"
+                      class="ant-typography ant-attachment-placeholder-icon css-var-«r1»"
                     />
                     <h5
-                      class="ant-typography ant-attachment-placeholder-title"
+                      class="ant-typography ant-attachment-placeholder-title css-var-«r1»"
                     >
                       Drop file here
                     </h5>
                     <span
-                      class="ant-typography ant-typography-secondary ant-attachment-placeholder-description"
+                      class="ant-typography ant-typography-secondary ant-attachment-placeholder-description css-var-«r1»"
                     />
                   </div>
                 </div>
@@ -3252,7 +3255,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
     style="border-radius: 6px; overflow: hidden; background: #ffffff;"
   >
     <div
-      class="ant-attachment"
+      class="ant-attachment css-var-«r1»"
       dir="ltr"
     >
       <div
@@ -3260,7 +3263,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
         style="display: none;"
       >
         <span
-          class="ant-upload-wrapper"
+          class="ant-upload-wrapper css-var-«r1»"
         >
           <div
             class="ant-upload ant-upload-select"
@@ -3275,7 +3278,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
                 type="file"
               />
               <button
-                class="ant-btn ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
+                class="ant-btn css-var-«r1» ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
                 type="button"
               >
                 <span
@@ -3309,7 +3312,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
         class="ant-attachment-placeholder"
       >
         <span
-          class="ant-upload-wrapper"
+          class="ant-upload-wrapper css-var-«r1»"
         >
           <div
             class="ant-upload ant-upload-drag"
@@ -3330,7 +3333,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
                 class="ant-upload-drag-container"
               >
                 <div
-                  class="ant-result ant-result-info"
+                  class="ant-result ant-result-info css-var-«r1»"
                   style="padding: 0px;"
                 >
                   <div
@@ -3368,7 +3371,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
                     class="ant-result-extra"
                   >
                     <button
-                      class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
+                      class="ant-btn css-var-«r1» ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
                       type="button"
                     >
                       <span>
@@ -3383,14 +3386,14 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
         </span>
       </div>
       <div
-        class="ant-attachment-drop-area"
+        class="ant-attachment-drop-area css-var-«r1»"
         style="display: none;"
       >
         <div
           class="ant-attachment-placeholder"
         >
           <span
-            class="ant-upload-wrapper"
+            class="ant-upload-wrapper css-var-«r1»"
           >
             <div
               class="ant-upload ant-upload-drag"
@@ -3411,18 +3414,18 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
                   class="ant-upload-drag-container"
                 >
                   <div
-                    class="ant-attachment-placeholder-inner ant-flex ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
+                    class="ant-attachment-placeholder-inner ant-flex css-var-«r1» ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
                   >
                     <span
-                      class="ant-typography ant-attachment-placeholder-icon"
+                      class="ant-typography ant-attachment-placeholder-icon css-var-«r1»"
                     />
                     <h5
-                      class="ant-typography ant-attachment-placeholder-title"
+                      class="ant-typography ant-attachment-placeholder-title css-var-«r1»"
                     >
                       Drop file here
                     </h5>
                     <span
-                      class="ant-typography ant-typography-secondary ant-attachment-placeholder-description"
+                      class="ant-typography ant-typography-secondary ant-attachment-placeholder-description css-var-«r1»"
                     />
                   </div>
                 </div>
@@ -3434,10 +3437,10 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
     </div>
   </div>
   <div
-    class="ant-flex ant-flex-gap-middle"
+    class="ant-flex css-var-«r1» ant-flex-gap-middle"
   >
     <button
-      class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
+      class="ant-btn css-var-«r1» ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
       style="flex-grow: 1; flex-shrink: 1; flex-basis: 50%;"
       type="button"
     >
@@ -3446,7 +3449,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
       </span>
     </button>
     <button
-      class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-«r1» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       disabled=""
       style="flex-grow: 1; flex-shrink: 1; flex-basis: 50%;"
       type="button"
@@ -3463,14 +3466,14 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
 
 exports[`renders components/attachments/demo/with-sender.tsx extend context correctly 1`] = `
 <div
-  class="ant-app"
+  class="ant-app css-var-«r0»"
 >
   <div
-    class="ant-flex ant-flex-align-flex-end"
+    class="ant-flex css-var-«r0» ant-flex-align-flex-end"
     style="min-height: 250px;"
   >
     <div
-      class="ant-sender"
+      class="ant-sender css-var-«r0»"
     >
       <div
         class="ant-sender-header ant-sender-header-motion-appear ant-sender-header-motion-appear-start ant-sender-header-motion"
@@ -3487,7 +3490,7 @@ exports[`renders components/attachments/demo/with-sender.tsx extend context corr
             class="ant-sender-header-close"
           >
             <button
-              class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+              class="ant-btn css-var-«r0» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
               type="button"
             >
               <span
@@ -3522,7 +3525,7 @@ exports[`renders components/attachments/demo/with-sender.tsx extend context corr
           style="padding: 0px;"
         >
           <div
-            class="ant-attachment"
+            class="ant-attachment css-var-«r0»"
             dir="ltr"
           >
             <div
@@ -3530,7 +3533,7 @@ exports[`renders components/attachments/demo/with-sender.tsx extend context corr
               style="display: none;"
             >
               <span
-                class="ant-upload-wrapper"
+                class="ant-upload-wrapper css-var-«r0»"
               >
                 <div
                   class="ant-upload ant-upload-select"
@@ -3545,7 +3548,7 @@ exports[`renders components/attachments/demo/with-sender.tsx extend context corr
                       type="file"
                     />
                     <button
-                      class="ant-btn ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
+                      class="ant-btn css-var-«r0» ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
                       type="button"
                     >
                       <span
@@ -3579,7 +3582,7 @@ exports[`renders components/attachments/demo/with-sender.tsx extend context corr
               class="ant-attachment-placeholder"
             >
               <span
-                class="ant-upload-wrapper"
+                class="ant-upload-wrapper css-var-«r0»"
               >
                 <div
                   class="ant-upload ant-upload-drag"
@@ -3600,10 +3603,10 @@ exports[`renders components/attachments/demo/with-sender.tsx extend context corr
                       class="ant-upload-drag-container"
                     >
                       <div
-                        class="ant-attachment-placeholder-inner ant-flex ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
+                        class="ant-attachment-placeholder-inner ant-flex css-var-«r0» ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
                       >
                         <span
-                          class="ant-typography ant-attachment-placeholder-icon"
+                          class="ant-typography ant-attachment-placeholder-icon css-var-«r0»"
                         >
                           <span
                             aria-label="cloud-upload"
@@ -3629,12 +3632,12 @@ exports[`renders components/attachments/demo/with-sender.tsx extend context corr
                           </span>
                         </span>
                         <h5
-                          class="ant-typography ant-attachment-placeholder-title"
+                          class="ant-typography ant-attachment-placeholder-title css-var-«r0»"
                         >
                           Upload files
                         </h5>
                         <span
-                          class="ant-typography ant-typography-secondary ant-attachment-placeholder-description"
+                          class="ant-typography ant-typography-secondary ant-attachment-placeholder-description css-var-«r0»"
                         >
                           Click or drag files to this area to upload
                         </span>
@@ -3654,10 +3657,10 @@ exports[`renders components/attachments/demo/with-sender.tsx extend context corr
           class="ant-sender-prefix"
         >
           <span
-            class="ant-badge"
+            class="ant-badge css-var-«r0»"
           >
             <button
-              class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-icon-only"
+              class="ant-btn css-var-«r0» ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-icon-only"
               type="button"
             >
               <span
@@ -3687,17 +3690,17 @@ exports[`renders components/attachments/demo/with-sender.tsx extend context corr
           </span>
         </div>
         <textarea
-          class="ant-input ant-input-borderless ant-sender-input"
+          class="ant-input ant-input-borderless css-var-«r0» ant-input-css-var ant-sender-input"
           style="overflow-y: hidden; resize: none;"
         />
         <div
           class="ant-sender-actions-list"
         >
           <div
-            class="ant-sender-actions-list-presets ant-flex"
+            class="ant-sender-actions-list-presets ant-flex css-var-«r0»"
           >
             <button
-              class="ant-btn ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              class="ant-btn css-var-«r0» ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
               type="button"
             >
               <span
@@ -3728,14 +3731,14 @@ exports[`renders components/attachments/demo/with-sender.tsx extend context corr
         </div>
       </div>
       <div
-        class="ant-attachment-drop-area"
+        class="ant-attachment-drop-area css-var-«r0»"
         style="display: none;"
       >
         <div
           class="ant-attachment-placeholder"
         >
           <span
-            class="ant-upload-wrapper"
+            class="ant-upload-wrapper css-var-«r0»"
           >
             <div
               class="ant-upload ant-upload-drag"
@@ -3756,18 +3759,18 @@ exports[`renders components/attachments/demo/with-sender.tsx extend context corr
                   class="ant-upload-drag-container"
                 >
                   <div
-                    class="ant-attachment-placeholder-inner ant-flex ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
+                    class="ant-attachment-placeholder-inner ant-flex css-var-«r0» ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
                   >
                     <span
-                      class="ant-typography ant-attachment-placeholder-icon"
+                      class="ant-typography ant-attachment-placeholder-icon css-var-«r0»"
                     />
                     <h5
-                      class="ant-typography ant-attachment-placeholder-title"
+                      class="ant-typography ant-attachment-placeholder-title css-var-«r0»"
                     >
                       Drop file here
                     </h5>
                     <span
-                      class="ant-typography ant-typography-secondary ant-attachment-placeholder-description"
+                      class="ant-typography ant-typography-secondary ant-attachment-placeholder-description css-var-«r0»"
                     />
                   </div>
                 </div>

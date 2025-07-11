@@ -1,12 +1,12 @@
 ---
 category: Components
 group:
-  title: Feedback
-  order: 0
+  title: Confirmation
+  order: 1
 title: Think
 description: Show deep thinking process.
 cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*rHIYQIL1X-QAAAAAAAAAAAAADgCCAQ/original
-coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*uaGhTY1-LL0AAAAAAAAAAAAADgCCAQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/OMCvQZVW3eUAAAAAQCAAAAgADtFMAQFr/original
 demo:
   cols: 1
 ---

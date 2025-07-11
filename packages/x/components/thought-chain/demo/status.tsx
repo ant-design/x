@@ -1,9 +1,8 @@
-import React from 'react';
-import { ThoughtChain } from '@ant-design/x';
-import { Card, Button } from 'antd';
 import { CheckCircleOutlined, InfoCircleOutlined, LoadingOutlined } from '@ant-design/icons';
-
 import type { ThoughtChainItem } from '@ant-design/x';
+import { ThoughtChain } from '@ant-design/x';
+import { Button, Card } from 'antd';
+import React from 'react';
 
 function getStatusIcon(status: ThoughtChainItem['status']) {
   switch (status) {
@@ -11,7 +10,7 @@ function getStatusIcon(status: ThoughtChainItem['status']) {
       return <CheckCircleOutlined />;
     case 'error':
       return <InfoCircleOutlined />;
-    case 'pending':
+    case 'loading':
       return <LoadingOutlined />;
     default:
       return undefined;
@@ -45,9 +44,9 @@ const delay = (ms: number) => {
 function addChainItem() {
   mockServerResponseData.push({
     title: `Thought Chain Item - ${mockServerResponseData.length + 1}`,
-    status: 'pending',
-    icon: getStatusIcon('pending'),
-    description: 'status: pending',
+    status: 'loading',
+    icon: getStatusIcon('loading'),
+    description: 'status: loading',
   });
 }
 
@@ -65,7 +64,7 @@ export default () => {
   const mockStatusChange = async () => {
     await updateChainItem('error');
     setItems([...mockServerResponseData]);
-    await updateChainItem('pending');
+    await updateChainItem('loading');
     setItems([...mockServerResponseData]);
     await updateChainItem('success');
     setItems([...mockServerResponseData]);

@@ -1,7 +1,3 @@
-import { Conversations, Prompts, PromptsProps, Sender, Suggestion, XProvider } from '@ant-design/x';
-import { Card, ColorPicker, Divider, Flex, Space, Typography, message } from 'antd';
-import React from 'react';
-
 import {
   CommentOutlined,
   FireOutlined,
@@ -10,6 +6,9 @@ import {
   RocketOutlined,
   SmileOutlined,
 } from '@ant-design/icons';
+import { Conversations, Prompts, PromptsProps, Sender, Suggestion, XProvider } from '@ant-design/x';
+import { Card, ColorPicker, Divider, Flex, message, Space, Typography } from 'antd';
+import React from 'react';
 
 type ThemeData = {
   colorPrimary: string;
@@ -123,7 +122,7 @@ export default () => {
                 },
               ]}
             />
-            <Divider type="vertical" style={{ height: '100%' }} />
+            <Divider orientation="vertical" style={{ height: '100%' }} />
             <Flex justify="space-between" vertical style={{ flex: 1 }} gap={8}>
               <Prompts
                 title="Do you want?"

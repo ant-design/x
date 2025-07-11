@@ -6,8 +6,15 @@ import SemanticPreview from '../../../.dumi/components/SemanticPreview';
 import useLocale from '../../../.dumi/hooks/useLocale';
 
 const locales = {
-  cn: { title: '标题容器', description: '描述容器', icon: '图标容器', extra: '额外内容' },
+  cn: {
+    root: '根节点',
+    title: '标题容器',
+    description: '描述容器',
+    icon: '图标容器',
+    extra: '额外内容',
+  },
   en: {
+    root: 'Root',
     title: 'Title container',
     description: 'Description container',
     icon: 'Icon container',
@@ -21,6 +28,7 @@ const App: React.FC = () => {
     <SemanticPreview
       componentName="Welcome"
       semantics={[
+        { name: 'root', desc: locale.root },
         { name: 'icon', desc: locale.icon },
         { name: 'title', desc: locale.title },
         { name: 'description', desc: locale.description },

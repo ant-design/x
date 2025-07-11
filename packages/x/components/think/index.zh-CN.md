@@ -1,13 +1,13 @@
 ---
 category: Think
 group:
-  title: 反馈
-  order: 2
+  title: 确认
+  order: 1
 title: Think
 subtitle: 思考过程
 description: 展示大模型深度思考过程。
-cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*rHIYQIL1X-QAAAAAAAAAAAAADgCCAQ/original
-coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*uaGhTY1-LL0AAAAAAAAAAAAADgCCAQ/original
+cover: https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/kXURQYCTEncAAAAAQCAAAAgADtFMAQFr/original
+coverDark: https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/OMCvQZVW3eUAAAAAQCAAAAgADtFMAQFr/original
 ---
 
 ## 何时使用

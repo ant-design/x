@@ -1,5 +1,5 @@
-import { ConfigProvider, theme as antdTheme } from 'antd';
-import type { ThemeConfig } from 'antd';
+import { theme as antdTheme, ConfigProvider } from 'antd';
+import type { ThemeConfig } from 'antd/es/config-provider';
 import type { ThemeProviderProps } from 'antd-style';
 import { ThemeProvider } from 'antd-style';
 import React, { useContext } from 'react';
