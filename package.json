@@ -74,5 +74,9 @@
   "funding": {
     "type": "opencollective",
     "url": "https://opencollective.com/ant-design"
+  },
+  "overrides": {
+    "@emotion/hash": "^0.9.2",
+    "react-is":"^18.3.1"
   }
 }
