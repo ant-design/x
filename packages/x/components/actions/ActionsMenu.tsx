@@ -2,12 +2,11 @@ import { EllipsisOutlined } from '@ant-design/icons';
 import { Dropdown, type MenuProps } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
-import { useXProviderContext } from '../x-provider';
-import { ActionItem } from '.';
-import { ActionsItemProps } from './Item';
+import { ActionsContext } from '.';
+import { ActionItemType, ActionsItemProps } from './Item';
 
 /** Tool function: Find data item by path */
-export const findItem = (keyPath: string[], items: ActionItem[]): ActionItem | null => {
+export const findItem = (keyPath: string[], items: ActionItemType[]): ActionItemType | null => {
   const keyToFind = keyPath[0];
 
   for (const item of items) {
@@ -24,17 +23,17 @@ export const findItem = (keyPath: string[], items: ActionItem[]): ActionItem | n
 };
 
 const ActionsMenu: React.FC<ActionsItemProps> = (props) => {
-  const { onClick: onMenuClick, item, classNames, styles, dropdownProps = {} } = props;
+  const { onClick: onMenuClick, item, dropdownProps = {} } = props;
+  const { prefixCls, classNames = {}, styles = {} } = React.useContext(ActionsContext) || {};
+
   const { subItems = [], triggerSubMenuAction = 'hover' } = item;
-  const { getPrefixCls } = useXProviderContext();
-  const prefixCls = getPrefixCls('actions', props.prefixCls);
   const icon = item?.icon ?? <EllipsisOutlined />;
 
   const menuProps: MenuProps = {
     items: subItems as MenuProps['items'],
     onClick: ({ key, keyPath, domEvent }) => {
       if (findItem(keyPath, subItems)?.onItemClick) {
-        findItem(keyPath, subItems)?.onItemClick?.(findItem(keyPath, subItems) as ActionItem);
+        findItem(keyPath, subItems)?.onItemClick?.(findItem(keyPath, subItems) as ActionItemType);
         return;
       }
       onMenuClick?.({
@@ -55,7 +54,7 @@ const ActionsMenu: React.FC<ActionsItemProps> = (props) => {
       trigger={[triggerSubMenuAction]}
       {...dropdownProps}
     >
-      <div className={`${prefixCls}-list-item`}>
+      <div className={classnames(`${prefixCls}-list-item`, classNames?.item)} style={styles?.item}>
         <div className={`${prefixCls}-list-item-icon`}>{icon}</div>
       </div>
     </Dropdown>

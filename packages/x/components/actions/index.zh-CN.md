@@ -21,8 +21,8 @@ Actions 组件用于快速配置一些 AI 场景下所需要的操作按钮/功�
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">基本</code>
 <code src="./demo/sub.tsx">更多菜单项</code>
-<code src="./demo/variant.tsx">使用变体</code>
 <code src="./demo/preset.tsx">预设模板</code>
+<code src="./demo/variant.tsx">使用变体</code>
 
 ## API
 
@@ -34,7 +34,7 @@ Actions 组件用于快速配置一些 AI 场景下所需要的操作按钮/功�
 | --- | --- | --- | --- | --- |
 | items | 包含多个操作项的列表 | ([ActionItem](#actionitem) \| ReactNode)[] | - | - |
 | onClick | 组件被点击时的回调函数 | function({ item, key, keyPath, domEvent }) | - | - |
-| popupRender | 底部额外的React节点内容 | ReactNode | - | - |
+| footer | 底部额外的React节点内容 | ReactNode | - | - |
 | dropdownProps | 下拉菜单的配置属性 | DropdownProps | - | - |
 | variant | 变体 | `borderless` \| `border` | `borderless` | - |
 
@@ -52,8 +52,10 @@ type ActionItem = ItemType | SubItemType;
 | label | 自定义操作的显示标签 | string | - | - |
 | icon | 自定义操作的图标 | ReactNode | - | - |
 | onItemClick | 点击自定义操作按钮时的回调函数 | (info: [ActionItem](#actionitem)) => void | - | - |
+| actionRender | 自定义渲染操作项内容 | (item: ActionItem) => ReactNode | - | - |
 | subItems | 子操作项 | [ActionItem](#actionitem)[] | - | - |
 | triggerSubMenuAction | 触发子菜单的操作 | `hover` \| `click` | `hover` | - |
+| danger | 语法糖，设置危险icon | boolean | false | - |
 
 ### SubItemType
 

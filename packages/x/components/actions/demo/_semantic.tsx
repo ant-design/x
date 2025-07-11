@@ -17,10 +17,6 @@ const items = [
         key: 'share',
         label: 'Share',
         icon: <ShareAltOutlined />,
-        subItems: [
-          { key: 'qq', label: 'QQ' },
-          { key: 'wechat', label: 'WeChat' },
-        ],
       },
       { key: 'import', label: 'Import' },
     ],
@@ -32,11 +28,13 @@ const locales = {
     root: '根节点',
     item: '操作项',
     itemDropdown: '操作下拉选项',
+    footer: '底部',
   },
   en: {
     root: 'Root',
     item: 'Item',
     itemDropdown: 'Item Dropdown',
+    footer: 'Footer',
   },
 };
 
@@ -50,6 +48,7 @@ const App: React.FC = () => {
         { name: 'root', desc: locale.root },
         { name: 'item', desc: locale.item },
         { name: 'itemDropdown', desc: locale.itemDropdown },
+        { name: 'footer', desc: locale.footer },
       ]}
     >
       <Actions
@@ -57,6 +56,15 @@ const App: React.FC = () => {
         dropdownProps={{
           open: true,
           getPopupContainer: (triggerNode) => triggerNode.parentElement!,
+          placement: 'topLeft',
+        }}
+        footer={<>footer</>}
+        styles={{
+          footer: {
+            border: '1px solid #eee',
+            padding: 8,
+            borderRadius: 12,
+          },
         }}
       />
     </SemanticPreview>

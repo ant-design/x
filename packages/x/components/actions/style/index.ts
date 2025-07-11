@@ -63,6 +63,9 @@ const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
           },
         },
       },
+      '& .danger': {
+        color: 'red',
+      },
     },
   };
 };

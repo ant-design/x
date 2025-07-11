@@ -1,7 +1,7 @@
-import React from 'react';
-import { Modal, message } from 'antd';
 import { CopyOutlined, DeleteOutlined, RedoOutlined, ShareAltOutlined } from '@ant-design/icons';
 import { Actions, ActionsProps } from '@ant-design/x';
+import { Modal, message } from 'antd';
+import React from 'react';
 
 const actionItems: ActionsProps['items'] = [
   {
@@ -21,10 +21,6 @@ const actionItems: ActionsProps['items'] = [
         key: 'share',
         label: 'Share',
         icon: <ShareAltOutlined />,
-        subItems: [
-          { key: 'qq', label: 'QQ' },
-          { key: 'wechat', label: 'WeChat' },
-        ],
       },
       { key: 'import', label: 'Import' },
       {
@@ -51,6 +47,7 @@ const actionItems: ActionsProps['items'] = [
     key: 'clear',
     label: 'Clear',
     icon: <DeleteOutlined />,
+    danger: true,
   },
 ];
 

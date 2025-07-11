@@ -5,7 +5,13 @@ import { createStyles } from 'antd-style';
 import React, { useState } from 'react';
 import { FeedbackValue } from '../ActionsFeedback';
 
-const useStyles = createStyles(({ css }) => ({
+const useStyles = createStyles(({ css, token }) => ({
+  feedbackFooter: css`
+    border: 1px solid ${token.colorBorderSecondary};
+    padding: 8px;
+    border-radius: 8px;
+    margin-top: 12px;
+  `,
   gridContainer: css`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -13,7 +19,7 @@ const useStyles = createStyles(({ css }) => ({
     margin: 12px 0;
   `,
   tagItem: css`
-    background: #f5f5f5;
+    background: ${token.colorFillSecondary};
     padding: 4px 8px;
     border-radius: 8px;
     text-align: center;
@@ -36,8 +42,8 @@ const Demo: React.FC = () => {
   // read
   const [isSpeaking, setIsSpeaking] = useState(false);
 
-  const feedbackPopupRender = (
-    <div style={{ border: '1px solid #eee', padding: 8, borderRadius: 8, marginTop: 12 }}>
+  const feedbackFooter = (
+    <div className={styles.feedbackFooter}>
       <Flex justify="space-between" align="center">
         <div>What are the main reasons you are satisfied? (Select all that apply)</div>
         <CloseOutlined onClick={() => setFeedbackPopupOpen(false)} />
@@ -64,23 +70,32 @@ const Demo: React.FC = () => {
   );
 
   const items = [
-    <Pagination
-      simple
-      current={curPage}
-      onChange={(page) => setCurPage(page)}
-      total={5}
-      pageSize={1}
-      key="pagination"
-    />,
-    <Actions.Feedback
-      value={feedbackStatus}
-      onChange={(val: FeedbackValue) => {
-        setFeedbackStatus(val);
-        setFeedbackPopupOpen(val === 'LIKE');
-        message.success(`Feedback: ${val}`);
-      }}
-      key="feedback"
-    />,
+    {
+      key: 'pagination',
+      actionRender: () => (
+        <Pagination
+          simple
+          current={curPage}
+          onChange={(page) => setCurPage(page)}
+          total={5}
+          pageSize={1}
+        />
+      ),
+    },
+    {
+      key: 'feedback',
+      actionRender: () => (
+        <Actions.Feedback
+          value={feedbackStatus}
+          onChange={(val: FeedbackValue) => {
+            setFeedbackStatus(val);
+            setFeedbackPopupOpen(val === 'LIKE');
+            message.success(`Feedback: ${val}`);
+          }}
+          key="feedback"
+        />
+      ),
+    },
     {
       key: 'copy',
       label: 'copy',
@@ -108,9 +123,7 @@ const Demo: React.FC = () => {
     },
   ];
 
-  return (
-    <Actions items={items} popupRender={feedbackPopupOpen ? feedbackPopupRender : undefined} />
-  );
+  return <Actions items={items} footer={feedbackPopupOpen ? feedbackFooter : undefined} />;
 };
 
 export default Demo;

@@ -1,7 +1,7 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import React from 'react';
 import { findItem } from '../ActionsMenu';
-import Actions, { ActionsProps, ItemType } from '../index';
+import Actions, { ActionsProps } from '../index';
 
 describe('Actions Component', () => {
   const consoleSpy = jest.spyOn(console, 'log');
@@ -89,7 +89,7 @@ describe('Actions Component', () => {
 });
 
 describe('Actions.Menu findItem function', () => {
-  const items: ItemType[] = [
+  const items = [
     { key: '1', label: 'Action 1' },
     {
       key: '2',
