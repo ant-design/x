@@ -1,4 +1,4 @@
-import { render, waitFor } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import MermaidDiagram from '../index';
 import React from 'react';
 import XMarkdown from '../../..';
