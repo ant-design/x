@@ -72,10 +72,9 @@ const Code = (props: any) => {
   const lang = className?.replace('language-', '');
 
   if (lang === 'mermaid') {
-    return <Mermaid children={children} />;
-  } else {
-    return <code>{children}</code>;
+    return <Mermaid>{children}</Mermaid>;
   }
+  return <code>{children}</code>;
 };
 
 const App = () => {

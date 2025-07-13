@@ -6,15 +6,20 @@ import { Link } from 'dumi';
 import React from 'react';
 import useLocale from '../../hooks/useLocale';
 
+interface PluginItem {
+  plugin: string;
+  [key: string]: any;
+}
+
 const useStyle = createStyles(({ token }) => ({
   container: css`
     border-radius: ${token.borderRadiusLG}px;
     border: 1px solid ${token.colorSplit};
   `,
   item: css`
-    a{
+    a {
       width: 100%;
-    };
+    }
     cursor: pointer;
     transition: all ${token.motionDurationMid} ${token.motionEaseInOut};
     &:hover {
@@ -26,7 +31,7 @@ const useStyle = createStyles(({ token }) => ({
   `,
 }));
 
-const MarkdownPluginsOverView: React.FC<null> = (props) => {
+const MarkdownPluginsOverView: React.FC<null> = () => {
   // ======================== locale =========================
   const [_, lang] = useLocale();
 
@@ -52,7 +57,7 @@ const MarkdownPluginsOverView: React.FC<null> = (props) => {
       itemLayout="horizontal"
       className={classnames(styles.container)}
       dataSource={PluginMeta || []}
-      renderItem={(item) => {
+      renderItem={(item: PluginItem) => {
         const info = getInfo(item);
         return (
           <List.Item className={classnames(styles.item)}>
