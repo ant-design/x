@@ -5,6 +5,11 @@ const compileModules = [
   '@ant-design',
   'countup.js',
   '.pnpm',
+  'react-syntax-highlighter',
+  'mermaid',
+  'khroma',
+  'd3',
+  'd3-'
 ];
 
 const resolve = (p) => require.resolve(`@ant-design/tools/lib/jest/${p}`);
@@ -51,6 +56,7 @@ module.exports = {
     '\\.md$': resolve('demoPreprocessor'),
     '\\.(jpg|png|gif|svg)$': resolve('imagePreprocessor'),
   },
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
   testRegex: getTestRegex(process.env.LIB_DIR),
   collectCoverageFrom: [
     'src/**/*.{ts,tsx}',
@@ -67,6 +73,7 @@ module.exports = {
   globals: {
     'ts-jest': {
       tsConfig: './tsconfig.test.json',
+      useESM: true,
     },
   },
   testEnvironmentOptions: {

@@ -27,3 +27,7 @@ Markdown 中需要渲染 Mermaid。
 | className | 样式类名 | `string` | |
 | classNames | 样式类名 | `string` | - |
 | highlightProps | 代码高亮配置 | [`highlightProps`](https://github.com/react-syntax-highlighter/react-syntax-highlighter?tab=readme-ov-file#props) | - |
+
+## Semantic DOM
+
+<code src="./demo/supersets/Mermaid/_semantic.tsx" simplify="true"></code>

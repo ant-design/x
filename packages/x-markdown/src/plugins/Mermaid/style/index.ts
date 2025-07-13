@@ -44,7 +44,7 @@ const genMermaidStyle: GenerateStyle<MermaidToken> = (token) => {
         borderTopLeftRadius: mermaidBorderRadius,
         borderTopRightRadius: mermaidBorderRadius,
       },
-      '&-mermaid': {
+      '&-graph': {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -52,7 +52,7 @@ const genMermaidStyle: GenerateStyle<MermaidToken> = (token) => {
         borderTop: 0,
         padding: mermaidPadding,
       },
-      '&-mermaid-hidden': {
+      '&-graph-hidden': {
         display: 'none',
       },
       [`&${componentCls}-rtl`]: {

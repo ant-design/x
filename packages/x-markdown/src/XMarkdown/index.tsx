@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import React from 'react';
 import useXProviderContext from '../hooks/use-x-provider-context';
 import { Parser, Renderer } from './core';
-import { useStreaming } from './hooks';
+import { useAnimation, useStreaming } from './hooks';
 import { XMarkdownProps } from './interface';
 
 const XMarkdown: React.FC<XMarkdownProps> = (props) => {
@@ -21,11 +21,16 @@ const XMarkdown: React.FC<XMarkdownProps> = (props) => {
   // ============================ Streaming ============================
   const displayContent = useStreaming(content || children || '', streaming);
 
+  // ============================ animation ============================
+  const animationComponents = useAnimation(streaming);
+
   // ============================ Render ============================
   if (!displayContent) return null;
 
   const parser = new Parser(config);
-  const renderer = new Renderer({ components });
+
+  const renderComponents = { ...animationComponents, ...(components || {}) };
+  const renderer = new Renderer({ components: renderComponents });
 
   const htmlString = parser.parse(displayContent);
 

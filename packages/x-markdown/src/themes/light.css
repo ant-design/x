@@ -164,7 +164,7 @@
 .x-markdown-light pre code {
   border-radius: 8px;
   display: block;
-  background: var(--light-bg);
+  background: var(--light-bg) !important;
   padding: 16px;
   color: #333;
   line-height: 24px;
@@ -172,7 +172,7 @@
 }
 
 .x-markdown-light code:not(pre code) {
-  background-color: var(--light-bg);
+  background-color: var(--light-bg) !important;
   border-radius: 4px;
   padding: 2px 4px;
   font-size: 16px;
@@ -197,7 +197,7 @@
 }
 
 .x-markdown-light a::after {
-  content: "↗";
+  content: '↗';
   margin-left: 4px;
   vertical-align: super;
   opacity: 0.7;

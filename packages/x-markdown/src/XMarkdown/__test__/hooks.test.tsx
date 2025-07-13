@@ -1,6 +1,6 @@
-import { render } from '@testing-library/react';
+import { render, renderHook } from '@testing-library/react';
 import React from 'react';
-import useStreaming from '../hooks/useStreaming';
+import { useStreaming, useAnimation } from '../hooks';
 import { XMarkdownProps } from '../interface';
 
 const testCases = [
@@ -85,6 +85,11 @@ const testCases = [
     output: '',
   },
   {
+    title: 'incomplete emphasis with \n',
+    input: '*emphasis\n',
+    output: '*emphasis\n',
+  },
+  {
     title: 'complete emphasis',
     input: '*emphasis*',
     output: '*emphasis*',
@@ -98,6 +103,11 @@ const testCases = [
     title: 'complete strong',
     input: '**strong**',
     output: '**strong**',
+  },
+  {
+    title: 'incomplete strong with \n',
+    input: '**strong\n',
+    output: '**strong\n',
   },
   {
     title: 'incomplete strong emphasis',
@@ -171,6 +181,11 @@ const testCases = [
     output: '',
   },
   {
+    title: 'not list ',
+    input: '+123',
+    output: '+123',
+  },
+  {
     title: 'incomplete list +',
     input: '+',
     output: '',
@@ -220,13 +235,38 @@ const TestComponent = ({
   return <div>{result}</div>;
 };
 
-describe('useStreaming', () => {
+describe('XMarkdown hooks', () => {
   testCases.forEach(({ title, input, output, config }: TestCase) => {
-    it(`testcase: ${title}`, () => {
+    it(`useStreaming testcase: ${title}`, () => {
       const { container } = render(
         <TestComponent input={input} config={config || { hasNextChunk: true }} />,
       );
       expect(container.textContent).toBe(output);
+    });
+
+    it('useAnimation should return empty object when streaming is not enabled', () => {
+      const { result } = renderHook(() => useAnimation(undefined));
+      expect(result.current).toEqual({});
+    });
+
+    it('useAnimation should return empty object when enableAnimation is false', () => {
+      const { result } = renderHook(() => useAnimation({ enableAnimation: false }));
+      expect(result.current).toEqual({});
+    });
+
+    it('useAnimation should memoize components based on animationConfig', () => {
+      const animationConfig = { duration: 1000 };
+      const { result, rerender } = renderHook(
+        ({ config }) => useAnimation({ enableAnimation: true, animationConfig: config }),
+        { initialProps: { config: animationConfig } },
+      );
+
+      const firstResult = result.current;
+      rerender({ config: { ...animationConfig } }); // Same config
+      expect(result.current).toBe(firstResult);
+
+      rerender({ config: { duration: 2000 } }); // Different config
+      expect(result.current).not.toBe(firstResult);
     });
   });
 });

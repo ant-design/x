@@ -91,7 +91,7 @@ const testCases = [
   | January  | $250    |
   | February | $80     |
   | March    | $420    |`,
-    html: '<table>\n<thead>\n<tr>\n<th>Month</th>\n<th>Savings</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>January</td>\n<td>$250</td>\n</tr>\n<tr>\n<td>February</td>\n<td>$80</td>\n</tr>\n<tr>\n<td>March</td>\n<td>$420</td>\n</tr>\n</tbody></table>\n',
+    html: '<table><thead><tr><th>Month</th><th>Savings</th></tr></thead><tbody><tr><td>January</td><td>$250</td></tr><tr><td>February</td><td>$80</td></tr><tr><td>March</td><td>$420</td></tr></tbody></table>\n',
   },
   {
     title: 'Render checkbox',
@@ -169,7 +169,7 @@ describe('XMarkdown', () => {
         token.depth++;
       }
     };
-    const { container } = render(<XMarkdown content="# heading" plugins={{ walkTokens }} />);
+    const { container } = render(<XMarkdown content="# heading" config={{ walkTokens }} />);
 
     expect(container.querySelector('h2')).toBeInTheDocument();
   });

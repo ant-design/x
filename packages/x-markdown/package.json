@@ -33,12 +33,13 @@
   "dependencies": {
     "@ant-design/fast-color": "^2.0.6",
     "@ant-design/icons": "^5.6.1",
+    "@react-spring/web": "^10.0.1",
     "classnames": "^2.5.1",
     "html-react-parser": "^5.2.5",
     "katex": "^0.16.22",
     "lodash.throttle": "^4.1.1",
     "marked": "^15.0.12",
-    "mermaid": "^11.8.0"
+    "mermaid": "^11.8.1"
   },
   "devDependencies": {
     "@types/lodash.throttle": "^4.1.9",

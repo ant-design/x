@@ -29,6 +29,6 @@ Markdown 中需要渲染高亮代码块。
 | classNames | 样式类名 | `string` | - |
 | highlightProps | 代码高亮配置 | [`highlightProps`](https://github.com/react-syntax-highlighter/react-syntax-highlighter?tab=readme-ov-file#props) | - |
 
-## 主题变量（Design Token）
+## Semantic DOM
 
-<ComponentTokenTable component="HighlightCode"></ComponentTokenTable>
+<code src="./demo/supersets/HighlightCode/_semantic.tsx" simplify="true"></code>

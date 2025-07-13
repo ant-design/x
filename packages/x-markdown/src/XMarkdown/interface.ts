@@ -1,3 +1,4 @@
+import { ControllerUpdate } from '@react-spring/web';
 import type { MarkedExtension, Tokens } from 'marked';
 import { CSSProperties } from 'react';
 
@@ -8,7 +9,16 @@ interface SteamingOption {
    * @description 是否还有流式数据
    * @default false
    */
-  hasNextChunk: boolean;
+  hasNextChunk?: boolean;
+  /**
+   * @description 是否开启文字渐显
+   * @default false
+   */
+  enableAnimation?: boolean;
+  /**
+   * @description 文字动画配置
+   */
+  animationConfig?: ControllerUpdate;
 }
 
 interface XMarkdownProps {

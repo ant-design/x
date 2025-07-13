@@ -1,3 +1,4 @@
 import useStreaming from './useStreaming';
+import useAnimation from './useAnimation';
 
-export { useStreaming };
+export { useStreaming, useAnimation };

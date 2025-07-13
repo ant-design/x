@@ -41,7 +41,7 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
   const prefixCls = getPrefixCls('mermaid', customizePrefixCls);
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
 
-  const mergedCls = classnames(prefixCls, className, hashId, cssVarCls, {
+  const mergedCls = classnames(prefixCls, className, classNames?.root, hashId, cssVarCls, {
     [`${prefixCls}-rtl`]: direction === 'rtl',
   });
 
@@ -91,33 +91,34 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
       <>
         <div
           className={classnames(
-            `${prefixCls}-mermaid`,
-            renderType === RenderType.Code && `${prefixCls}-mermaid-hidden`,
-            classNames?.mermaid,
+            `${prefixCls}-graph`,
+            renderType === RenderType.Code && `${prefixCls}-graph-hidden`,
+            classNames?.graph,
           )}
           ref={containerRef}
         />
-        {renderType === RenderType.Code && (
-          <SyntaxHighlighter
-            customStyle={{
-              marginTop: 0,
-              borderBottomLeftRadius: 6,
-              borderBottomRightRadius: 6,
-              border: '1px solid #f6f6f6',
-              background: 'transparent',
-              borderTop: 0,
-              fontSize: 14,
-              paddingLeft: 16,
-            }}
-            language="mermaid"
-            showLineNumbers={true}
-            wrapLines={true}
-            CodeTag="div"
-            {...highlightProps}
-          >
-            {children.replace(/\n$/, '')}
-          </SyntaxHighlighter>
-        )}
+        {renderType === RenderType.Code ? (
+          <div className={classNames?.code}>
+            <SyntaxHighlighter
+              customStyle={{
+                marginTop: 0,
+                borderBottomLeftRadius: 6,
+                borderBottomRightRadius: 6,
+                border: '1px solid #f6f6f6',
+                background: 'transparent',
+                borderTop: 0,
+                fontSize: 14,
+                paddingLeft: 16,
+              }}
+              language="mermaid"
+              showLineNumbers={true}
+              wrapLines={true}
+              {...highlightProps}
+            >
+              {children.replace(/\n$/, '')}
+            </SyntaxHighlighter>
+          </div>
+        ) : null}
       </>
     );
   };

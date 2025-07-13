@@ -108,7 +108,7 @@ export default App;
 `;
 
 const App = () => (
-  <div style={{ background: '#000', padding: 12, borderRadius: 6 }}>
+  <div style={{ background: '#000', padding: 16, borderRadius: 6 }}>
     <XMarkdown content={content} className="x-markdown-dark" />
   </div>
 );

@@ -20,14 +20,7 @@ const LineCompt = (props: LineProps) => {
 };
 
 const RenderMarkdown: BubbleProps['messageRender'] = (content) => (
-  <XMarkdown
-    components={{
-      line: LineCompt,
-    }}
-    streaming={{ hasNextChunk: true }}
-  >
-    {content}
-  </XMarkdown>
+  <XMarkdown components={{ line: LineCompt }}>{content}</XMarkdown>
 );
 
 const App = () => {

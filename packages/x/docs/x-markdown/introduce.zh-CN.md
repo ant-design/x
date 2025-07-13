@@ -78,4 +78,4 @@ export default App;
 
 ## 主题
 
-`@ant-design/x-markdown` 提供了丰富的主题可供选择。主题详情查看[主题](/markdowns/themes-cn)。
+`@ant-design/x-markdown` 提供了主题可供选择。主题详情查看[主题](/markdowns/themes-cn)。

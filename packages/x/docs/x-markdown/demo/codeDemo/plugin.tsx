@@ -1,7 +1,5 @@
 import { Token, XMarkdown } from '@ant-design/x-markdown';
 import React from 'react';
-import 'github-markdown-css/github-markdown-light.css';
-import './plugin.css';
 import '@ant-design/x-markdown/themes/light.css';
 import { Popover } from 'antd';
 
@@ -121,7 +119,22 @@ const App = () => {
         footnote: (props: { children: string; href: string; title: string }) => {
           return (
             <Popover content={props?.title} title="Footnote" trigger="hover">
-              <span onClick={() => window.open(props.href)} className="markdown-cite">
+              <span
+                onClick={() => window.open(props.href)}
+                style={{
+                  backgroundColor: '#9A9A9A33',
+                  width: 20,
+                  height: 20,
+                  borderRadius: 14,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: 14,
+                  marginLeft: 8,
+                  verticalAlign: 'middle',
+                  cursor: 'pointer',
+                }}
+              >
                 {props?.children}
               </span>
             </Popover>

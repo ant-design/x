@@ -36,3 +36,5 @@ Used for rendering streaming Markdown format returned by LLM.
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
 | hasNextChunk | Whether there is next chunk, if false, clear all cache and render | `boolean` | `false` |
+| enableAnimation | Whether enable animation，support `p, li, h1, h2, h3, h4` | `boolean` | `false` |
+| animationConfig | Animation config | [`ControllerUpdate`](https://react-spring.dev/docs/typescript#controllerupdate) | `{ from: { opacity: 0 }, to: { opacity: 1 }, config: { tension: 170, friction: 26 } }` |

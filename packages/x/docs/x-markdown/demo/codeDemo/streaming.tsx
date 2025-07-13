@@ -3,11 +3,19 @@ import { Bubble, Sender, useXAgent, useXChat } from '@ant-design/x';
 import { RolesType } from '@ant-design/x/es/bubble/BubbleList';
 import XMarkdown from '@ant-design/x-markdown';
 import HighlightCode from '@ant-design/x-markdown/plugins/HighlightCode';
-import { Button } from 'antd';
+import { Button, Row } from 'antd';
 import React, { useState } from 'react';
+import '@ant-design/x-markdown/themes/light.css';
 
 const fullContent = `
-<div align="center"><a name="readme-top"></a>
+
+Ant DesIgn X New AI Experience:
+
+The Ant Design team presents the RICH paradigm, crafting superior AI interface solutions and pioneering intelligent experiences.
+
+Here is introduce:
+
+<div align="center">
 
 <img height="180" src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*eco6RrQhxbMAAAAAAAAAAAAADgCCAQ/original">
 
@@ -23,7 +31,8 @@ Craft AI-driven interfaces effortlessly.
 
 </div>
 
-## ✨ Features
+
+## ✨ **Features**
 
 - 🌈 **Derived from Best Practices of Enterprise-Level AI Products**: Built on the RICH interaction paradigm, delivering an exceptional AI interaction experience.
 - 🧩 **Flexible and Diverse Atomic Components**: Covers most AI dialogue scenarios, empowering you to quickly build personalized AI interaction interfaces.
@@ -106,6 +115,7 @@ const roles: RolesType = {
 
 const App = () => {
   const [enableStreaming, setEnableStreaming] = useState(true);
+  const [enableAnimation, setEnableAnimation] = useState(true);
   const [hasNextChunk, setHasNextChunk] = useState(false);
   const [content, setContent] = React.useState('');
 
@@ -134,15 +144,24 @@ const App = () => {
   });
 
   return (
-    <div style={{ height: 500, display: 'flex', flexDirection: 'column' }}>
-      <Button
-        style={{ alignSelf: 'flex-end', marginBottom: 24 }}
-        onClick={() => {
-          setEnableStreaming(!enableStreaming);
-        }}
-      >
-        Streaming Optimization: {enableStreaming ? 'On' : 'Off'}
-      </Button>
+    <div style={{ minHeight: 500, display: 'flex', flexDirection: 'column' }}>
+      <Row justify="end" style={{ marginBottom: 24 }}>
+        <Button
+          style={{ marginRight: 8 }}
+          onClick={() => {
+            setEnableStreaming(!enableStreaming);
+          }}
+        >
+          Streaming Optimization: {enableStreaming ? 'On' : 'Off'}
+        </Button>
+        <Button
+          onClick={() => {
+            setEnableAnimation(!enableAnimation);
+          }}
+        >
+          Animation: {enableAnimation ? 'On' : 'Off'}
+        </Button>
+      </Row>
       <Bubble.List
         roles={roles}
         style={{ flex: 1 }}
@@ -155,6 +174,7 @@ const App = () => {
               ? undefined
               : (content) => (
                   <XMarkdown
+                    className="x-markdown-light"
                     content={content}
                     components={{
                       code: (props: { class: string; children: string }) => {
@@ -162,8 +182,15 @@ const App = () => {
                         const lang = className?.replace('language-', '');
                         return <HighlightCode lang={lang}>{children}</HighlightCode>;
                       },
+                      'line': () => {
+                        console.log('custom-Tag');
+                        return 'customTag';
+                      },
                     }}
-                    streaming={{ hasNextChunk: hasNextChunk && enableStreaming }}
+                    streaming={{
+                      hasNextChunk: hasNextChunk && enableStreaming,
+                      enableAnimation,
+                    }}
                   />
                 ),
         }))}

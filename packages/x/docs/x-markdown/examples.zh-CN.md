@@ -33,6 +33,8 @@ order: 2
 
 ### SteamingOption
 
-| 属性         | 说明                                                   | 类型      | 默认值  |
-| ------------ | ------------------------------------------------------ | --------- | ------- |
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
 | hasNextChunk | 是否还有下一个 chunk，如果为 false，清除所有缓存并渲染 | `boolean` | `false` |
+| enableAnimation | 是否开启文字动画，支持 `p, li, h1, h2, h3, h4` | `boolean` | `false` |
+| animationConfig | 文字动画配置 | [`ControllerUpdate`](https://react-spring.dev/docs/typescript#controllerupdate) | `{ from: { opacity: 0 }, to: { opacity: 1 }, config: { tension: 170, friction: 26 } }` |

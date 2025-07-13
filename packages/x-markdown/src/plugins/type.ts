@@ -8,9 +8,9 @@ type LatexOption = {
   replaceAlignStart?: boolean;
 };
 
-type HighlightCodeType = 'header' | 'headerTitle';
+type HighlightCodeType = 'root' | 'header' | 'headerTitle' | 'code';
 type HighlighCodeProps = {
-  lang: string;
+  lang?: string;
   children: string;
   header?: ReactNode | null;
   prefixCls?: string;
@@ -20,7 +20,7 @@ type HighlighCodeProps = {
   highlightProps?: Partial<SyntaxHighlighterProps>;
 };
 
-type MermaidType = 'header' | 'headerTitle' | 'mermaid';
+type MermaidType = 'root' | 'header' | 'headerTitle' | 'graph' | 'code';
 type MermaidProps = {
   children: string;
   header?: ReactNode | null;

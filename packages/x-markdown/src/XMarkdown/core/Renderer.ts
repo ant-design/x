@@ -13,27 +13,22 @@ class Renderer {
     this.options = options;
   }
 
-  private processHtml(htmlString: string): React.ReactNode {
-    try {
-      return parseHtml(htmlString, {
-        replace: (domNode: Record<string, any>) => {
-          const { type, name, attribs, children } = domNode;
-          if (type !== 'tag') return;
+  public processHtml(htmlString: string): React.ReactNode {
+    return parseHtml(htmlString, {
+      replace: (domNode: Record<string, any>) => {
+        const { type, name, attribs, children } = domNode;
+        if (type !== 'tag') return;
 
-          const renderElement = this.options.components?.[name];
-          if (renderElement) {
-            const props = { ...attribs };
-            if (children) {
-              props.children = domToReact(children);
-            }
-            return React.createElement(renderElement, props);
+        const renderElement = this.options.components?.[name];
+        if (renderElement) {
+          const props = { ...attribs };
+          if (children) {
+            props.children = domToReact(children);
           }
-        },
-      });
-    } catch (error) {
-      console.error('Error processing HTML:', error);
-      return null;
-    }
+          return React.createElement(renderElement, props);
+        }
+      },
+    });
   }
 
   public render(html: string): ReactNode | null {

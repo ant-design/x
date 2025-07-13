@@ -8,10 +8,10 @@ order: 2
 ### 可从 `@ant-design/x-markdown/themes/主题名.css` 引入插件。
 
 ```tsx
-import { XMarkdown } from '@ant-design/x-markdown';
+import XMarkdown from '@ant-design/x-markdown';
 import '@ant-design/x-markdown/themes/light.css';
 
-return <XMarkdown className="x-markdown-light" content="" />;
+return <XMarkdown className="x-markdown-light" content="Hello XMarkdown!" />;
 ```
 
 ### 从浏览器引入

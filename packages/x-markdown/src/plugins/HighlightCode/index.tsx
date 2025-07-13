@@ -23,16 +23,16 @@ const HighlightCode: PluginsType['HighlightCode'] = (props) => {
   const prefixCls = getPrefixCls('highlightCode', customizePrefixCls);
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
 
-  const mergedCls = classnames(prefixCls, className, hashId, cssVarCls, {
+  const mergedCls = classnames(prefixCls, className, classNames?.root, hashId, cssVarCls, {
     [`${prefixCls}-rtl`]: direction === 'rtl',
   });
 
   // ============================ render ============================
-  if (!children) return null;
-
   if (!lang) {
     return <code>{children}</code>;
   }
+
+  if (!children) return null;
 
   const renderTitle = () => {
     if (header === null) return null;
@@ -49,24 +49,26 @@ const HighlightCode: PluginsType['HighlightCode'] = (props) => {
   return wrapCSSVar(
     <div className={mergedCls} style={style}>
       {renderTitle()}
-      <SyntaxHighlighter
-        customStyle={{
-          marginTop: 0,
-          borderBottomLeftRadius: 6,
-          borderBottomRightRadius: 6,
-          border: '1px solid #f6f6f6',
-          borderTop: 0,
-          fontSize: 14,
-          padding: 16,
-        }}
-        language={lang}
-        wrapLines={true}
-        CodeTag="div"
-        style={tomorrow}
-        {...highlightProps}
-      >
-        {children.replace(/\n$/, '')}
-      </SyntaxHighlighter>
+      <div className={classNames?.code}>
+        <SyntaxHighlighter
+          customStyle={{
+            marginTop: 0,
+            borderBottomLeftRadius: 6,
+            borderBottomRightRadius: 6,
+            border: '1px solid #f6f6f6',
+            borderTop: 0,
+            fontSize: 14,
+            padding: 16,
+            background: 'transparent',
+          }}
+          language={lang}
+          wrapLines={true}
+          style={tomorrow}
+          {...highlightProps}
+        >
+          {children.replace(/\n$/, '')}
+        </SyntaxHighlighter>
+      </div>
     </div>,
   );
 };

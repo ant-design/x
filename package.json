@@ -59,6 +59,10 @@
     {
       "path": "./packages/x-markdown/dist/latex.min.js",
       "limit": "700 KiB"
+    },
+    {
+      "path": "./packages/x-markdown/dist/mermaid.min.js",
+      "limit": "700 KiB"
     }
   ],
   "description": "Craft AI-driven interfaces effortlessly",
@@ -81,5 +85,8 @@
   "funding": {
     "type": "opencollective",
     "url": "https://opencollective.com/ant-design"
+  },
+  "dependencies": {
+    "@emotion/styled": "^11.14.1"
   }
 }
