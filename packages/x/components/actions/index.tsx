@@ -101,7 +101,7 @@ const ForwardActions: React.FC<ActionsProps> = (props) => {
   const { getPrefixCls, direction } = useXProviderContext();
   const prefixCls = getPrefixCls('actions', customizePrefixCls);
   const contextConfig = useXComponentConfig('actions');
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+  const [hashId, cssVarCls] = useStyle(prefixCls);
 
   const mergedCls = classnames(
     prefixCls,
@@ -122,7 +122,7 @@ const ForwardActions: React.FC<ActionsProps> = (props) => {
     ...style,
   };
 
-  return wrapCSSVar(
+  return (
     <div {...domProps} className={mergedCls} style={mergedStyle}>
       <ActionsContext.Provider
         value={{
@@ -152,7 +152,7 @@ const ForwardActions: React.FC<ActionsProps> = (props) => {
           </div>
         )}
       </ActionsContext.Provider>
-    </div>,
+    </div>
   );
 };
 

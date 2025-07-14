@@ -4,22 +4,7 @@ import { createStyles } from 'antd-style';
 import classnames from 'classnames';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
-
-const useStyle = createStyles(({ token }) => ({
-  feedbackItem: {
-    padding: token.paddingXXS,
-    borderRadius: token.borderRadius,
-    height: token.controlHeightSM,
-    boxSizing: 'border-box',
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    cursor: 'pointer',
-    '&:hover': {
-      background: token.colorBgTextHover,
-    },
-  },
-}));
+import { useXProviderContext } from '../x-provider';
 
 export type FeedbackValue = 'LIKE' | 'DISLIKE' | '';
 
@@ -48,7 +33,38 @@ interface ActionsFeedbackProps extends Omit<React.HTMLAttributes<HTMLDivElement>
 }
 
 const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
-  const { value, onChange, className, style, rootClassName, prefixCls, ...otherHtmlProps } = props;
+  const {
+    value,
+    onChange,
+    className,
+    style,
+
+    prefixCls,
+    rootClassName,
+    ...otherHtmlProps
+  } = props;
+
+  const feedbackCls = `${prefixCls}-feedback`;
+
+  const useStyle = createStyles(({ token }) => ({
+    feedbackItem: {
+      padding: token.paddingXXS,
+      borderRadius: token.borderRadius,
+      height: token.controlHeightSM,
+      boxSizing: 'border-box',
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      cursor: 'pointer',
+      '&:hover': {
+        background: token.colorBgTextHover,
+      },
+    },
+    [`${feedbackCls}-rtl`]: {
+      direction: 'rtl',
+    },
+  }));
+
   const { styles } = useStyle();
 
   const domProps = pickAttrs(otherHtmlProps, {
@@ -57,8 +73,14 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
     data: true,
   });
 
+  const { direction } = useXProviderContext();
+
+  const mergedCls = classnames(feedbackCls, rootClassName, className, {
+    [`${feedbackCls}-rtl`]: direction === 'rtl',
+  });
+
   return (
-    <Space {...domProps} className={classnames(prefixCls, rootClassName, className)} style={style}>
+    <Space {...domProps} className={mergedCls} style={style}>
       {(value === '' || value === 'LIKE') && (
         <span
           onClick={() => onChange?.(value === 'LIKE' ? '' : 'LIKE')}

@@ -92,6 +92,7 @@ const Demo: React.FC = () => {
             setFeedbackPopupOpen(val === 'LIKE');
             message.success(`Feedback: ${val}`);
           }}
+          prefixCls={'actions-demo'}
           key="feedback"
         />
       ),
