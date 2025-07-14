@@ -45,6 +45,18 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
     ...otherHtmlProps
   } = props;
 
+  const domProps = pickAttrs(otherHtmlProps, {
+    attr: true,
+    aria: true,
+    data: true,
+  });
+
+  const { direction, getPrefixCls } = useXProviderContext();
+
+  const prefixCls = getPrefixCls('actions', customizePrefixCls);
+  const [hashId, cssVarCls] = useStyle(prefixCls);
+  const feedbackCls = `${prefixCls}-feedback`;
+
   const useStyles = createStyles(({ token }) => ({
     feedbackItem: {
       padding: token.paddingXXS,
@@ -65,18 +77,6 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
   }));
 
   const { styles } = useStyles();
-
-  const domProps = pickAttrs(otherHtmlProps, {
-    attr: true,
-    aria: true,
-    data: true,
-  });
-
-  const { direction, getPrefixCls } = useXProviderContext();
-
-  const prefixCls = getPrefixCls('actions', customizePrefixCls);
-  const [hashId, cssVarCls] = useStyle(prefixCls);
-  const feedbackCls = `${prefixCls}-feedback`;
 
   const mergedCls = classnames(feedbackCls, hashId, cssVarCls, rootClassName, className, {
     [`${feedbackCls}-rtl`]: direction === 'rtl',
