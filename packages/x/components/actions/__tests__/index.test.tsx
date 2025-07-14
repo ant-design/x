@@ -1,7 +1,8 @@
+import { ActionsProps } from '@ant-design/x';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import React from 'react';
 import { findItem } from '../ActionsMenu';
-import Actions, { ActionsProps } from '../index';
+import Actions from '../index';
 
 describe('Actions Component', () => {
   const consoleSpy = jest.spyOn(console, 'log');

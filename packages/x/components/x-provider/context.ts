@@ -1,7 +1,7 @@
 import type { ConfigProviderProps as AntdConfigProviderProps } from 'antd/es/config-provider';
 import React from 'react';
 import type { AnyObject, ShortcutKeys } from '../_util/type';
-import type { ActionsProps } from '../actions';
+import type { ActionsProps } from '../actions/interface';
 import { AttachmentsProps } from '../attachments';
 import type { BubbleProps } from '../bubble';
 import type { ConversationsProps } from '../conversations';
