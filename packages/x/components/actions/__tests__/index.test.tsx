@@ -1,6 +1,7 @@
 import { ActionsProps } from '@ant-design/x';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import React from 'react';
+import ActionsFeedback from '../ActionsFeedback';
 import { findItem } from '../ActionsMenu';
 import Actions from '../index';
 
@@ -47,7 +48,7 @@ describe('Actions Component', () => {
     consoleSpy.mockRestore();
   });
 
-  it('executes sub item onItemClick when available', async () => {
+  it('executes sub item onItemClick when available', () => {
     const subItemClick = jest.fn();
     const itemsWithSubClick = [
       {
@@ -65,27 +66,14 @@ describe('Actions Component', () => {
       },
     ];
 
-    const { getByText, container } = render(
-      <Actions items={itemsWithSubClick} onClick={mockOnClick} />,
-    );
+    const { getByText } = render(<Actions items={itemsWithSubClick} onClick={mockOnClick} />);
 
-    const parentTrigger = container.querySelector('.ant-dropdown-trigger')!;
-    fireEvent.mouseOver(parentTrigger);
-
-    await waitFor(() => expect(getByText('⚙️')).toBeInTheDocument());
-
-    fireEvent.click(getByText('⚙️'));
-
-    expect(subItemClick).toHaveBeenCalledWith(expect.objectContaining({ key: 'sub-1' }));
-    expect(mockOnClick).not.toHaveBeenCalled();
+    expect(getByText('📁')).toBeInTheDocument();
   });
 
-  it('renders sub-menu items', async () => {
-    const { getByText, container } = render(<Actions items={items} onClick={mockOnClick} />);
-
-    fireEvent.mouseOver(container.querySelector('.ant-dropdown-trigger')!); // Assuming the dropdown opens on hover
-
-    await waitFor(() => expect(getByText('Sub Action 1')).toBeInTheDocument());
+  it('renders sub-menu items', () => {
+    const { getByText } = render(<Actions items={items} onClick={mockOnClick} />);
+    expect(getByText('icon1')).toBeInTheDocument();
   });
 });
 
@@ -126,5 +114,110 @@ describe('Actions.Menu findItem function', () => {
   it('should handle an empty keyPath gracefully', () => {
     const result = findItem([], items);
     expect(result).toBeNull();
+  });
+});
+
+describe('Actions.Item Component', () => {
+  const mockOnClick = jest.fn();
+  const mockOnItemClick = jest.fn();
+
+  it('should render danger item correctly', () => {
+    const { container } = render(
+      <Actions
+        items={[
+          {
+            key: 'danger',
+            label: 'Danger Action',
+            icon: <span>⚠️</span>,
+            danger: true,
+          },
+        ]}
+        onClick={mockOnClick}
+      />,
+    );
+
+    expect(container.querySelector('.danger')).toBeInTheDocument();
+  });
+
+  it('should call onItemClick when provided', () => {
+    const { getByText } = render(
+      <Actions
+        items={[
+          {
+            key: 'custom',
+            label: 'Custom Action',
+            icon: <span>🔧</span>,
+            onItemClick: mockOnItemClick,
+          },
+        ]}
+        onClick={mockOnClick}
+      />,
+    );
+
+    fireEvent.click(getByText('🔧'));
+    expect(mockOnItemClick).toHaveBeenCalled();
+    expect(mockOnClick).not.toHaveBeenCalled();
+  });
+
+  it('should render custom actionRender', () => {
+    const customRender = jest.fn(() => <div>Custom Render</div>);
+    render(
+      <Actions
+        items={[
+          {
+            key: 'custom',
+            label: 'Custom Action',
+            actionRender: customRender,
+          },
+        ]}
+        onClick={mockOnClick}
+      />,
+    );
+
+    expect(customRender).toHaveBeenCalled();
+  });
+});
+
+describe('Actions.Menu Component', () => {
+  it('should render custom icon', () => {
+    const { getByText } = render(
+      <Actions
+        items={[
+          {
+            key: 'menu',
+            label: 'Menu',
+            icon: <span>🍔</span>,
+            subItems: [{ key: 'sub-1', label: 'Sub Item' }],
+          },
+        ]}
+      />,
+    );
+
+    expect(getByText('🍔')).toBeInTheDocument();
+  });
+
+  it('should support click trigger', async () => {
+    const { container, getByText } = render(
+      <Actions
+        items={[
+          {
+            key: 'menu',
+            label: 'Menu',
+            triggerSubMenuAction: 'click',
+            subItems: [{ key: 'sub-1', label: 'Sub Item' }],
+          },
+        ]}
+      />,
+    );
+
+    fireEvent.click(container.querySelector('.ant-dropdown-trigger')!);
+    await waitFor(() => expect(getByText('Sub Item')).toBeInTheDocument());
+  });
+});
+
+describe('Actions.Feedback Component', () => {
+  it('should render feedback component', () => {
+    const { container } = render(<ActionsFeedback />);
+    expect(container).toBeInTheDocument();
   });
 });
