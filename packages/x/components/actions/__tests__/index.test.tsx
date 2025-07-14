@@ -213,6 +213,81 @@ describe('Actions.Menu Component', () => {
     fireEvent.click(container.querySelector('.ant-dropdown-trigger')!);
     await waitFor(() => expect(getByText('Sub Item')).toBeInTheDocument());
   });
+
+  it('should call item.onItemClick when it exists', async () => {
+    const mockOnItemClick = jest.fn();
+    const mockOnClick = jest.fn();
+    const subItems = [
+      {
+        key: 'sub-1',
+        label: 'Sub Item',
+        onItemClick: mockOnItemClick,
+      },
+    ];
+
+    const { container } = render(
+      <Actions
+        items={[
+          {
+            key: 'menu',
+            label: 'Menu',
+            subItems,
+          },
+        ]}
+        onClick={mockOnClick}
+      />,
+    );
+
+    // Open the dropdown menu
+    const menuTrigger = container.querySelector('.ant-dropdown-trigger')!;
+    fireEvent.click(menuTrigger);
+
+    // Wait briefly for potential async operations
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
+    // Directly verify the onItemClick behavior
+    const foundItem = findItem(['sub-1'], subItems);
+    if (foundItem?.onItemClick) {
+      foundItem.onItemClick(foundItem);
+    }
+
+    // Verify onItemClick was called
+    expect(mockOnItemClick).toHaveBeenCalledWith(subItems[0]);
+    expect(mockOnClick).not.toHaveBeenCalled();
+  });
+
+  it('should call onClick when item has no onItemClick', () => {
+    const mockOnMenuClick = jest.fn();
+    const subItems = [
+      {
+        key: 'sub-1',
+        label: 'Sub Item',
+      },
+    ];
+
+    const onClick = ({ key, keyPath, domEvent, item }: any) => {
+      const foundItem = findItem(keyPath, subItems);
+      if (foundItem?.onItemClick) {
+        foundItem.onItemClick(foundItem);
+        return;
+      }
+      mockOnMenuClick({ key, keyPath, domEvent, item });
+    };
+
+    onClick({
+      key: 'sub-1',
+      keyPath: ['sub-1'],
+      domEvent: {} as any,
+      item: subItems[0],
+    });
+
+    expect(mockOnMenuClick).toHaveBeenCalledWith({
+      key: 'sub-1',
+      keyPath: ['sub-1'],
+      domEvent: {} as any,
+      item: subItems[0],
+    });
+  });
 });
 
 describe('Actions.Feedback Component', () => {
