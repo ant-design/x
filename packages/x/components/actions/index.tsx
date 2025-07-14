@@ -5,16 +5,11 @@ import React from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 import ActionsFeedback from './ActionsFeedback';
+import { ActionsContext } from './context';
 import Item from './Item';
 import type { ActionsProps } from './interface';
 
 import useStyle from './style';
-
-export const ActionsContext = React.createContext<{
-  prefixCls?: string;
-  styles?: ActionsProps['styles'];
-  classNames?: ActionsProps['classNames'];
-}>(null!);
 
 const ForwardActions: React.FC<ActionsProps> = (props) => {
   const {

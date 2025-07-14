@@ -2,7 +2,7 @@ import { EllipsisOutlined } from '@ant-design/icons';
 import { Dropdown, type MenuProps } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
-import { ActionsContext } from '.';
+import { ActionsContext } from './context';
 import type { ActionItemType, ActionsItemProps } from './interface';
 
 /** Tool function: Find data item by path */

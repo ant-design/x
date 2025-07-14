@@ -1,9 +1,8 @@
 import { Tooltip } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
-
-import { ActionsContext } from '.';
 import ActionsMenu from './ActionsMenu';
+import { ActionsContext } from './context';
 import type { ActionsItemProps } from './interface';
 
 const Item: React.FC<ActionsItemProps> = (props) => {
