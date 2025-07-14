@@ -88,6 +88,7 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
         <span
           onClick={() => onChange?.(value === 'LIKE' ? '' : 'LIKE')}
           className={styles.feedbackItem}
+          data-testid="feedback-like"
         >
           {value === 'LIKE' ? <LikeFilled /> : <LikeOutlined />}
         </span>
@@ -97,6 +98,7 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
         <span
           onClick={() => onChange?.(value === 'DISLIKE' ? '' : 'DISLIKE')}
           className={styles.feedbackItem}
+          data-testid="feedback-dislike"
         >
           {value === 'DISLIKE' ? <DislikeFilled /> : <DislikeOutlined />}
         </span>

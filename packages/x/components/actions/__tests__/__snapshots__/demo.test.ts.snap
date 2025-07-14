@@ -166,6 +166,7 @@ exports[`renders components/actions/demo/preset.tsx correctly 1`] = `
       >
         <span
           class="acss-mlrfho"
+          data-testid="feedback-like"
         >
           <span
             aria-label="like"
@@ -193,6 +194,7 @@ exports[`renders components/actions/demo/preset.tsx correctly 1`] = `
       >
         <span
           class="acss-mlrfho"
+          data-testid="feedback-dislike"
         >
           <span
             aria-label="dislike"

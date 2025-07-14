@@ -303,4 +303,40 @@ describe('Actions.Feedback Component', () => {
     const { container } = render(<ActionsFeedback />);
     expect(container).toBeInTheDocument();
   });
+
+  it('should toggle LIKE value when clicked', () => {
+    const mockOnChange = jest.fn();
+    const { rerender, getByTestId } = render(<ActionsFeedback value="" onChange={mockOnChange} />);
+
+    // First click - should set to LIKE
+    fireEvent.click(getByTestId('feedback-like'));
+    expect(mockOnChange).toHaveBeenCalledWith('LIKE');
+    expect(mockOnChange).toHaveBeenCalledTimes(1);
+
+    // Rerender with LIKE value
+    rerender(<ActionsFeedback value="LIKE" onChange={mockOnChange} />);
+
+    // Second click - should set to empty
+    fireEvent.click(getByTestId('feedback-like'));
+    expect(mockOnChange).toHaveBeenCalledWith('');
+    expect(mockOnChange).toHaveBeenCalledTimes(2);
+  });
+
+  it('should toggle DISLIKE value when clicked', () => {
+    const mockOnChange = jest.fn();
+    const { rerender, getByTestId } = render(<ActionsFeedback value="" onChange={mockOnChange} />);
+
+    // First click - should set to DISLIKE
+    fireEvent.click(getByTestId('feedback-dislike'));
+    expect(mockOnChange).toHaveBeenCalledWith('DISLIKE');
+    expect(mockOnChange).toHaveBeenCalledTimes(1);
+
+    // Rerender with DISLIKE value
+    rerender(<ActionsFeedback value="DISLIKE" onChange={mockOnChange} />);
+
+    // Second click - should set to empty
+    fireEvent.click(getByTestId('feedback-dislike'));
+    expect(mockOnChange).toHaveBeenCalledWith('');
+    expect(mockOnChange).toHaveBeenCalledTimes(2);
+  });
 });
