@@ -1,5 +1,5 @@
 import { ActionsProps } from '@ant-design/x';
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import ActionsFeedback from '../ActionsFeedback';
 import { findItem } from '../ActionsMenu';
@@ -238,9 +238,9 @@ describe('Actions.Menu Component', () => {
       />,
     );
 
-    // Open the dropdown menu
+    // Hover to open the dropdown menu
     const menuTrigger = container.querySelector('.ant-dropdown-trigger')!;
-    fireEvent.click(menuTrigger);
+    fireEvent.mouseOver(menuTrigger);
 
     // Wait briefly for potential async operations
     await new Promise((resolve) => setTimeout(resolve, 100));
@@ -256,7 +256,7 @@ describe('Actions.Menu Component', () => {
     expect(mockOnClick).not.toHaveBeenCalled();
   });
 
-  it('should call onClick when item has no onItemClick', () => {
+  it('should call onClick when item has no onItemClick', async () => {
     const mockOnMenuClick = jest.fn();
     const subItems = [
       {
@@ -265,26 +265,34 @@ describe('Actions.Menu Component', () => {
       },
     ];
 
-    const onClick = ({ key, keyPath, domEvent, item }: any) => {
-      const foundItem = findItem(keyPath, subItems);
-      if (foundItem?.onItemClick) {
-        foundItem.onItemClick(foundItem);
-        return;
-      }
-      mockOnMenuClick({ key, keyPath, domEvent, item });
-    };
+    const { container } = render(
+      <Actions
+        items={[
+          {
+            key: 'menu',
+            label: 'Menu',
+            subItems,
+          },
+        ]}
+        onClick={mockOnMenuClick}
+      />,
+    );
 
-    onClick({
-      key: 'sub-1',
-      keyPath: ['sub-1'],
-      domEvent: {} as any,
-      item: subItems[0],
-    });
+    // Hover to open the dropdown menu
+    const menuTrigger = container.querySelector('.ant-dropdown-trigger')!;
+    fireEvent.mouseOver(menuTrigger);
+
+    // Wait briefly for potential async operations
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
+    // Find and click the sub item
+    const subItem = await screen.findByText('Sub Item');
+    fireEvent.click(subItem);
 
     expect(mockOnMenuClick).toHaveBeenCalledWith({
       key: 'sub-1',
-      keyPath: ['sub-1'],
-      domEvent: {} as any,
+      keyPath: ['sub-1', 'menu'],
+      domEvent: expect.anything(),
       item: subItems[0],
     });
   });
