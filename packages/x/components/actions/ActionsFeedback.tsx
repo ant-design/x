@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
 import { useXProviderContext } from '../x-provider';
+import useStyle from './style';
 
 export type FeedbackValue = 'LIKE' | 'DISLIKE' | '';
 
@@ -39,14 +40,12 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
     className,
     style,
 
-    prefixCls,
+    prefixCls: customizePrefixCls,
     rootClassName,
     ...otherHtmlProps
   } = props;
 
-  const feedbackCls = `${prefixCls}-feedback`;
-
-  const useStyle = createStyles(({ token }) => ({
+  const useStyles = createStyles(({ token }) => ({
     feedbackItem: {
       padding: token.paddingXXS,
       borderRadius: token.borderRadius,
@@ -65,7 +64,7 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
     },
   }));
 
-  const { styles } = useStyle();
+  const { styles } = useStyles();
 
   const domProps = pickAttrs(otherHtmlProps, {
     attr: true,
@@ -73,9 +72,13 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
     data: true,
   });
 
-  const { direction } = useXProviderContext();
+  const { direction, getPrefixCls } = useXProviderContext();
 
-  const mergedCls = classnames(feedbackCls, rootClassName, className, {
+  const prefixCls = getPrefixCls('actions', customizePrefixCls);
+  const [hashId, cssVarCls] = useStyle(prefixCls);
+  const feedbackCls = `${prefixCls}-feedback`;
+
+  const mergedCls = classnames(feedbackCls, hashId, cssVarCls, rootClassName, className, {
     [`${feedbackCls}-rtl`]: direction === 'rtl',
   });
 

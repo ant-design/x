@@ -3,7 +3,7 @@ import { Dropdown, type MenuProps } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
 import { ActionsContext } from '.';
-import { ActionItemType, ActionsItemProps } from './Item';
+import type { ActionItemType, ActionsItemProps } from './interface';
 
 /** Tool function: Find data item by path */
 export const findItem = (keyPath: string[], items: ActionItemType[]): ActionItemType | null => {

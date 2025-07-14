@@ -1,4 +1,3 @@
-import type { DropdownProps } from 'antd';
 import classnames from 'classnames';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
@@ -6,7 +5,8 @@ import React from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 import ActionsFeedback from './ActionsFeedback';
-import Item, { ActionItemType } from './Item';
+import Item from './Item';
+import type { ActionsProps } from './interface';
 
 import useStyle from './style';
 
@@ -15,64 +15,6 @@ export const ActionsContext = React.createContext<{
   styles?: ActionsProps['styles'];
   classNames?: ActionsProps['classNames'];
 }>(null!);
-
-export type SemanticType = 'root' | 'item' | 'itemDropdown' | 'footer';
-
-export interface ActionsProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick' | 'footer'> {
-  /**
-   * @desc 包含多个操作项的列表
-   * @descEN A list containing multiple action items.
-   */
-  items: ActionItemType[];
-  /**
-   * @desc 组件被点击时的回调函数。
-   * @descEN Callback function when component is clicked.
-   */
-  onClick?: (menuInfo: {
-    item: ActionItemType;
-    key: string;
-    keyPath: string[];
-    domEvent: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>;
-  }) => void;
-  /**
-   * @desc 底部额外的React节点内容
-   * @descEN Additional React node content at the bottom.
-   */
-  footer?: React.ReactNode;
-  /**
-   * @desc 下拉菜单的配置属性
-   * @descEN Configuration properties for dropdown menu
-   */
-  dropdownProps?: DropdownProps;
-  /**
-   * @desc 变体
-   * @descEN Variant.
-   * @default 'borderless'
-   */
-  variant?: 'borderless' | 'border';
-
-  /**
-   * @desc 样式类名的前缀。
-   * @descEN Prefix for style classnames.
-   */
-  prefixCls?: string;
-  /**
-   * @desc 根节点样式类
-   * @descEN Root node style class.
-   */
-  rootClassName?: string;
-  /**
-   * @desc 语义化结构 className
-   * @descEN Semantic structure class names
-   */
-  classNames?: Partial<Record<SemanticType, string>>;
-  /**
-   * @desc 语义化结构 style
-   * @descEN Semantic structure styles
-   */
-  styles?: Partial<Record<SemanticType, React.CSSProperties>>;
-}
 
 const ForwardActions: React.FC<ActionsProps> = (props) => {
   const {
