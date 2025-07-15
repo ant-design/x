@@ -110,7 +110,7 @@
     "@qixian.cs/github-contributors-list": "^2.0.2",
     "@rc-component/father-plugin": "^2.0.4",
     "@rc-component/np": "^1.0.3",
-    "@rc-component/trigger": "^2.2.3",
+    "@rc-component/trigger": "^3.5.0",
     "@size-limit/file": "^11.1.5",
     "@stackblitz/sdk": "^1.11.0",
     "@testing-library/dom": "^10.4.0",
