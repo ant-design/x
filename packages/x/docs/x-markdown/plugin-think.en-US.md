@@ -2,25 +2,16 @@
 group:
   title: Plugins
   order: 2
-title: Latex
-subtitle: Formula
+title: Think
 order: 2
 ---
 
-## When to Use
+## When To Use
 
-When you need to render formulas in Markdown.
+Render thinking process
 
-## Code Demo
-
-<!-- prettier-ignore -->
-<code src="./demo/supersets/Latex/basic.tsx">Basic Usage</code>
-<code src="./demo/supersets/Latex/streaming.tsx">Streaming Conversation</code>
-
-## API
+## Code Examples
 
 <!-- prettier-ignore -->
-| Property | Description | Type | Default |
-| --- | --- | --- | --- |
-| replaceAlignStart | Whether to replace align* with aligned in formulas, [katex doesn't support align*](https://github.com/KaTeX/KaTeX/issues/1007) | `boolean` | `true` |
-| katexOptions | Katex configuration | [`KatexOptions`](https://katex.org/docs/options) | `{ output: 'mathml' }` |
+<code src="./demo/supersets/Think/basic.tsx">With [`Think`](https://x.ant.design/components/think)</code>
+<code src="./demo/supersets/Think/tool.tsx">With [`ThoughtChain`](https://x.ant.design/components/thought-chain)</code>
