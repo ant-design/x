@@ -4,7 +4,7 @@ group:
   order: 2
 title: Latex
 subtitle: Formula
-order: 3
+order: 2
 ---
 
 ## When to Use

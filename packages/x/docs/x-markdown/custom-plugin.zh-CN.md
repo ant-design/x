@@ -4,7 +4,7 @@ group:
   order: 2
 title: CustomPlugins
 subtitle: 自定义插件
-order: 4
+order: 6
 ---
 
 ## 何时使用

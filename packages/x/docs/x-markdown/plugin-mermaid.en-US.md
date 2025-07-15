@@ -4,7 +4,7 @@ group:
   order: 2
 title: Mermaid
 subtitle: Diagram
-order: 3
+order: 5
 ---
 
 ## When to Use

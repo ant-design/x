@@ -4,7 +4,7 @@ group:
   order: 2
 title: HighlightCode
 subtitle: 代码高亮
-order: 3
+order: 4
 ---
 
 ## 何时使用

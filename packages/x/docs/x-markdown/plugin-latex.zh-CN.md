@@ -4,7 +4,7 @@ group:
   order: 2
 title: Latex
 subtitle: 公式
-order: 2
+order: 3
 ---
 
 ## 何时使用

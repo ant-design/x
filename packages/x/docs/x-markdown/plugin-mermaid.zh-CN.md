@@ -4,7 +4,7 @@ group:
   order: 2
 title: Mermaid
 subtitle: 图表
-order: 3
+order: 5
 ---
 
 ## 何时使用

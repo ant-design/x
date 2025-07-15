@@ -3,7 +3,7 @@ group:
   title: Plugins
   order: 2
 title: HighlightCode
-order: 3
+order: 4
 ---
 
 ## When to Use

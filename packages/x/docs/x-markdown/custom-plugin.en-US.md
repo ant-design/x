@@ -3,7 +3,7 @@ group:
   title: Plugins
   order: 2
 title: CustomPlugins
-order: 4
+order: 6
 ---
 
 ## When to Use
