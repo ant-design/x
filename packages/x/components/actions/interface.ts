@@ -9,13 +9,13 @@ export interface ActionsProps
    * @desc 包含多个操作项的列表
    * @descEN A list containing multiple action items.
    */
-  items: ActionItemType[];
+  items: ItemType[];
   /**
    * @desc 组件被点击时的回调函数。
    * @descEN Callback function when component is clicked.
    */
   onClick?: (menuInfo: {
-    item: ActionItemType;
+    item: ItemType;
     key: string;
     keyPath: string[];
     domEvent: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>;
@@ -83,29 +83,26 @@ export interface ItemType {
    * @desc 点击自定义操作按钮时的回调函数
    * @descEN Callback function when the custom action button is clicked.
    */
-  onItemClick?: (info?: ActionItemType) => void;
+  onItemClick?: (info?: ItemType) => void;
   /**
-   * @desc 自定义渲染操作项内容
-   * @descEN Custom render action item content
+   * @desc 危险状态
+   * @descEN Danger status
    */
-  actionRender?: (item: ActionItemType) => React.ReactNode;
+  danger?: boolean;
+
   /**
    * @desc 子操作项
    * @descEN Child action items.
    */
-  subItems?: SubItemType[];
+  subItems?: Omit<ItemType, 'subItems' | 'triggerSubMenuAction' | 'actionRender'>[];
   /**
    * @desc 子菜单的触发方式
    * @descEN Trigger mode of sub menu.
    */
   triggerSubMenuAction?: MenuProps['triggerSubMenuAction'];
   /**
-   * @desc 危险状态
-   * @descEN Danger status
+   * @desc 自定义渲染操作项内容
+   * @descEN Custom render action item content
    */
-  danger?: boolean;
+  actionRender?: (item: ItemType) => React.ReactNode;
 }
-
-export interface SubItemType extends Omit<ItemType, 'subItems' | 'triggerSubMenuAction'> {}
-
-export type ActionItemType = ItemType | SubItemType;

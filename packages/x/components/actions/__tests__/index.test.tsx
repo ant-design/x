@@ -304,39 +304,42 @@ describe('Actions.Feedback Component', () => {
     expect(container).toBeInTheDocument();
   });
 
-  it('should toggle LIKE value when clicked', () => {
+  it('should toggle like value when clicked', () => {
     const mockOnChange = jest.fn();
-    const { rerender, getByTestId } = render(<ActionsFeedback value="" onChange={mockOnChange} />);
+    const { rerender, getByTestId } = render(
+      <ActionsFeedback value="default" onChange={mockOnChange} />,
+    );
 
-    // First click - should set to LIKE
+    // First click - should set to like
     fireEvent.click(getByTestId('feedback-like'));
-    expect(mockOnChange).toHaveBeenCalledWith('LIKE');
+    expect(mockOnChange).toHaveBeenCalledWith('like');
     expect(mockOnChange).toHaveBeenCalledTimes(1);
 
-    // Rerender with LIKE value
-    rerender(<ActionsFeedback value="LIKE" onChange={mockOnChange} />);
+    // Rerender with like value
+    rerender(<ActionsFeedback value="like" onChange={mockOnChange} />);
 
     // Second click - should set to empty
     fireEvent.click(getByTestId('feedback-like'));
-    expect(mockOnChange).toHaveBeenCalledWith('');
+    expect(mockOnChange).toHaveBeenCalledWith('default');
     expect(mockOnChange).toHaveBeenCalledTimes(2);
   });
 
-  it('should toggle DISLIKE value when clicked', () => {
+  it('should toggle dislike value when clicked', () => {
     const mockOnChange = jest.fn();
-    const { rerender, getByTestId } = render(<ActionsFeedback value="" onChange={mockOnChange} />);
+    const { rerender, getByTestId } = render(
+      <ActionsFeedback value="default" onChange={mockOnChange} />,
+    );
 
-    // First click - should set to DISLIKE
+    // First click - should set to dislike
     fireEvent.click(getByTestId('feedback-dislike'));
-    expect(mockOnChange).toHaveBeenCalledWith('DISLIKE');
-    expect(mockOnChange).toHaveBeenCalledTimes(1);
+    expect(mockOnChange).toHaveBeenCalledWith('dislike');
 
-    // Rerender with DISLIKE value
-    rerender(<ActionsFeedback value="DISLIKE" onChange={mockOnChange} />);
+    // Rerender with dislike value
+    rerender(<ActionsFeedback value="dislike" onChange={mockOnChange} />);
 
     // Second click - should set to empty
     fireEvent.click(getByTestId('feedback-dislike'));
-    expect(mockOnChange).toHaveBeenCalledWith('');
+    expect(mockOnChange).toHaveBeenCalledWith('default');
     expect(mockOnChange).toHaveBeenCalledTimes(2);
   });
 });

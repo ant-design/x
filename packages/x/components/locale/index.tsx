@@ -12,6 +12,10 @@ export interface Locale {
   Conversations?: {
     create: string;
   };
+  Actions?: {
+    feedbackLike: string;
+    feedbackDislike: string;
+  };
 }
 
 export interface LocaleProviderProps {

@@ -7,6 +7,7 @@ import useXProviderContext, { defaultPrefixCls } from './hooks/use-x-provider-co
 
 const XProvider: React.FC<XProviderProps> = (props) => {
   const {
+    actions,
     attachments,
     bubble,
     conversations,
@@ -23,6 +24,7 @@ const XProvider: React.FC<XProviderProps> = (props) => {
 
   const xProviderProps = React.useMemo(() => {
     return {
+      actions,
       attachments,
       bubble,
       conversations,
@@ -32,7 +34,17 @@ const XProvider: React.FC<XProviderProps> = (props) => {
       thoughtChain,
       welcome,
     };
-  }, [attachments, bubble, conversations, prompts, sender, suggestion, thoughtChain, welcome]);
+  }, [
+    actions,
+    attachments,
+    bubble,
+    conversations,
+    prompts,
+    sender,
+    suggestion,
+    thoughtChain,
+    welcome,
+  ]);
 
   let childNode = children;
   if (locale) {

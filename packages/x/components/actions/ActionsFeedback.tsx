@@ -1,25 +1,33 @@
 import { DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined } from '@ant-design/icons';
-import { Space } from 'antd';
+import { Space, Tooltip } from 'antd';
 import { createStyles } from 'antd-style';
 import classnames from 'classnames';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
+import { useLocale } from '../locale';
+import enUS from '../locale/en_US';
 import { useXProviderContext } from '../x-provider';
+
 import useStyle from './style';
 
-export type FeedbackValue = 'LIKE' | 'DISLIKE' | '';
+enum FEEDBACK_VALUE {
+  like = 'like',
+  dislike = 'dislike',
+  default = 'default',
+}
 
-interface ActionsFeedbackProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+export interface ActionsFeedbackProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /**
    * @desc 反馈状态值
    * @descEN Feedback status value
    */
-  value?: FeedbackValue;
+  value?: `${FEEDBACK_VALUE}`;
   /**
    * @desc 反馈状态变化回调
    * @descEN Feedback status change callback
    */
-  onChange?: (value: FeedbackValue) => void;
+  onChange?: (value: `${FEEDBACK_VALUE}`) => void;
 
   /**
    * @desc 自定义样式前缀
@@ -35,7 +43,7 @@ interface ActionsFeedbackProps extends Omit<React.HTMLAttributes<HTMLDivElement>
 
 const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
   const {
-    value,
+    value = 'default',
     onChange,
     className,
     style,
@@ -50,6 +58,8 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
     aria: true,
     data: true,
   });
+
+  const [contextLocale] = useLocale('Actions', enUS.Actions);
 
   const { direction, getPrefixCls } = useXProviderContext();
 
@@ -84,24 +94,36 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
 
   return (
     <Space {...domProps} className={mergedCls} style={style}>
-      {(value === '' || value === 'LIKE') && (
-        <span
-          onClick={() => onChange?.(value === 'LIKE' ? '' : 'LIKE')}
-          className={styles.feedbackItem}
-          data-testid="feedback-like"
-        >
-          {value === 'LIKE' ? <LikeFilled /> : <LikeOutlined />}
-        </span>
+      {[FEEDBACK_VALUE.default, FEEDBACK_VALUE.like].includes(value as FEEDBACK_VALUE) && (
+        <Tooltip title={contextLocale.feedbackLike}>
+          <span
+            onClick={() =>
+              onChange?.(
+                value === FEEDBACK_VALUE.like ? FEEDBACK_VALUE.default : FEEDBACK_VALUE.like,
+              )
+            }
+            className={styles.feedbackItem}
+            data-testid="feedback-like"
+          >
+            {value === FEEDBACK_VALUE.like ? <LikeFilled /> : <LikeOutlined />}
+          </span>
+        </Tooltip>
       )}
 
-      {(value === '' || value === 'DISLIKE') && (
-        <span
-          onClick={() => onChange?.(value === 'DISLIKE' ? '' : 'DISLIKE')}
-          className={styles.feedbackItem}
-          data-testid="feedback-dislike"
-        >
-          {value === 'DISLIKE' ? <DislikeFilled /> : <DislikeOutlined />}
-        </span>
+      {[FEEDBACK_VALUE.default, FEEDBACK_VALUE.dislike].includes(value as FEEDBACK_VALUE) && (
+        <Tooltip title={contextLocale.feedbackDislike}>
+          <span
+            onClick={() =>
+              onChange?.(
+                value === FEEDBACK_VALUE.dislike ? FEEDBACK_VALUE.default : FEEDBACK_VALUE.dislike,
+              )
+            }
+            className={styles.feedbackItem}
+            data-testid="feedback-dislike"
+          >
+            {value === FEEDBACK_VALUE.dislike ? <DislikeFilled /> : <DislikeOutlined />}
+          </span>
+        </Tooltip>
       )}
     </Space>
   );

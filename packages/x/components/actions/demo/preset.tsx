@@ -1,9 +1,8 @@
 import { AudioOutlined, CloseOutlined, CopyOutlined, LoadingOutlined } from '@ant-design/icons';
-import { Actions } from '@ant-design/x';
+import { Actions, type ActionsFeedbackProps } from '@ant-design/x';
 import { Button, Flex, message, Pagination } from 'antd';
 import { createStyles } from 'antd-style';
 import React, { useState } from 'react';
-import { FeedbackValue } from '../ActionsFeedback';
 
 const useStyles = createStyles(({ css, token }) => ({
   feedbackFooter: css`
@@ -37,7 +36,7 @@ const Demo: React.FC = () => {
   // pagination
   const [curPage, setCurPage] = useState(1);
   // feedback
-  const [feedbackStatus, setFeedbackStatus] = useState<FeedbackValue>('');
+  const [feedbackStatus, setFeedbackStatus] = useState<ActionsFeedbackProps['value']>('default');
   const [feedbackPopupOpen, setFeedbackPopupOpen] = useState(false);
   // read
   const [isSpeaking, setIsSpeaking] = useState(false);
@@ -87,10 +86,10 @@ const Demo: React.FC = () => {
       actionRender: () => (
         <Actions.Feedback
           value={feedbackStatus}
-          onChange={(val: FeedbackValue) => {
+          onChange={(val) => {
             setFeedbackStatus(val);
-            setFeedbackPopupOpen(val === 'LIKE');
-            message.success(`Feedback: ${val}`);
+            setFeedbackPopupOpen(val === 'like');
+            message.success(`Change feedback value to: ${val}`);
           }}
           prefixCls={'actions-demo'}
           key="feedback"

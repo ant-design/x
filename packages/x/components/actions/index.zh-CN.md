@@ -28,21 +28,15 @@ Actions 组件用于快速配置一些 AI 场景下所需要的操作按钮/功�
 
 通用属性参考：[通用属性](/docs/react/common-props)
 
-### Actions
+### ActionsProps
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| items | 包含多个操作项的列表 | ([ActionItem](#actionitem) \| ReactNode)[] | - | - |
+| items | 包含多个操作项的列表 | ([ItemType](#itemtype) \| ReactNode)[] | - | - |
 | onClick | 组件被点击时的回调函数 | function({ item, key, keyPath, domEvent }) | - | - |
 | footer | 底部额外的React节点内容 | ReactNode | - | - |
 | dropdownProps | 下拉菜单的配置属性 | DropdownProps | - | - |
 | variant | 变体 | `borderless` \| `border` | `borderless` | - |
-
-### ActionItem
-
-```typescript
-type ActionItem = ItemType | SubItemType;
-```
 
 ### ItemType
 
@@ -51,21 +45,18 @@ type ActionItem = ItemType | SubItemType;
 | key | 自定义操作的唯一标识 | string | - | - |
 | label | 自定义操作的显示标签 | string | - | - |
 | icon | 自定义操作的图标 | ReactNode | - | - |
-| onItemClick | 点击自定义操作按钮时的回调函数 | (info: [ActionItem](#actionitem)) => void | - | - |
-| actionRender | 自定义渲染操作项内容 | (item: ActionItem) => ReactNode | - | - |
-| subItems | 子操作项 | [ActionItem](#actionitem)[] | - | - |
-| triggerSubMenuAction | 触发子菜单的操作 | `hover` \| `click` | `hover` | - |
+| onItemClick | 点击自定义操作按钮时的回调函数 | (info: [ItemType](#itemtype)) => void | - | - |
 | danger | 语法糖，设置危险icon | boolean | false | - |
+| subItems | 子操作项 | Omit<ItemType, 'subItems' \| 'triggerSubMenuAction' \| 'actionRender'>[] | - | - |
+| triggerSubMenuAction | 触发子菜单的操作 | `hover` \| `click` | `hover` | - |
+| actionRender | 自定义渲染操作项内容 | (item: [ItemType](#itemtype)) => ReactNode | - | - |
 
-### SubItemType
+### Actions.Feedback
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| key | 自定义操作的唯一标识 | string | - | - |
-| label | 自定义操作的显示标签 | string | - | - |
-| icon | 自定义操作的图标 | ReactNode | - | - |
-| onItemClick | 点击自定义操作按钮时的回调函数 | (info: [ActionItem](#actionitem)) => void | - | - |
-| danger | 语法糖，设置危险icon | boolean | false | - |
+| value | 反馈状态值 | `like` \| `dislike` \| `default` | `default` | - |
+| onChange | 反馈状态变化回调 | (value: `like` \| `dislike` \| `default`) => void | - | - |
 
 ## Semantic DOM
 

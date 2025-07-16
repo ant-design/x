@@ -27,21 +27,15 @@ The Actions component is used for quickly configuring required action buttons or
 
 Common props ref：[Common props](/docs/react/common-props)
 
-### Actions
+### ActionsProps
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| items | A list containing multiple action items | ([ActionItem](#actionitem) \| ReactNode)[] | - | - |
+| items | A list containing multiple action items | ([ItemType](#itemtype) \| ReactNode)[] | - | - |
 | onClick | Callback function when an action item is clicked | function({ item, key, keyPath, domEvent }) | - | - |
 | footer | Additional React node content at the bottom | ReactNode | - | - |
 | dropdownProps | Configuration properties for dropdown menu | DropdownProps | - | - |
 | variant | Variant | `borderless` \| `border` | `borderless` | - |
-
-### ActionItem
-
-```typescript
-type ActionItem = ItemType | SubItemType;
-```
 
 ### ItemType
 
@@ -50,21 +44,18 @@ type ActionItem = ItemType | SubItemType;
 | key | The unique identifier for the custom action | string | - | - |
 | label | The display label for the custom action | string | - | - |
 | icon | The icon for the custom action | ReactNode | - | - |
-| onItemClick | Callback function when the custom action button is clicked | (info: [ActionItem](#actionitem)) => void | - | - |
-| actionRender | Custom render action item content | (item: ActionItem) => ReactNode | - | - |
-| subItems | Sub action items | [ActionItem](#actionitem)[] | - | - |
-| triggerSubMenuAction | Action to trigger the sub-menu | `hover` \| `click` | `hover` | - |
+| onItemClick | Callback function when the custom action button is clicked | (info: [ItemType](#itemtype)) => void | - | - |
 | danger | Syntax sugar, set dangerous icon | boolean | false | - |
+| subItems | Sub action items | Omit<ItemType, 'subItems' \| 'triggerSubMenuAction' \| 'actionRender'>[] | - | - |
+| triggerSubMenuAction | Action to trigger the sub-menu | `hover` \| `click` | `hover` | - |
+| actionRender | Custom render action item content | (item: [ItemType](#itemtype)) => ReactNode | - | - |
 
-### SubItemType
+### Actions.Feedback
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| key | The unique identifier for the custom action | string | - | - |
-| label | The display label for the custom action | string | - | - |
-| icon | The icon for the custom action | ReactNode | - | - |
-| onItemClick | Callback function when the custom action button is clicked | (info: [ActionItem](#actionitem)) => void | - | - |
-| danger | Syntax sugar, set dangerous icon | boolean | false | - |
+| value | Feedback value | `like` \| `dislike` \| `default` | `default` | - |
+| onChange | Feedback status change callback | (value: `like` \| `dislike` \| `default`) => void | - | - |
 
 ## Semantic DOM
 

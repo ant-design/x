@@ -1,5 +1,6 @@
 export { default as Actions } from './actions';
-export type { ActionItemType, ActionsItemProps, ActionsProps } from './actions/interface';
+export type { ActionsFeedbackProps } from './actions/ActionsFeedback';
+export type { ActionsProps } from './actions/interface';
 export type { AttachmentsProps } from './attachments';
 export { default as Attachments } from './attachments';
 export type { BubbleProps } from './bubble';

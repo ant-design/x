@@ -3,10 +3,10 @@ import { Dropdown, type MenuProps } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
 import { ActionsContext } from './context';
-import type { ActionItemType, ActionsItemProps } from './interface';
+import type { ActionsItemProps, ItemType } from './interface';
 
 /** Tool function: Find data item by path */
-export const findItem = (keyPath: string[], items: ActionItemType[]): ActionItemType | null => {
+export const findItem = (keyPath: string[], items: ItemType[]): ItemType | null => {
   const keyToFind = keyPath[0];
 
   for (const item of items) {
@@ -33,7 +33,7 @@ const ActionsMenu: React.FC<ActionsItemProps> = (props) => {
     items: subItems as MenuProps['items'],
     onClick: ({ key, keyPath, domEvent }) => {
       if (findItem(keyPath, subItems)?.onItemClick) {
-        findItem(keyPath, subItems)?.onItemClick?.(findItem(keyPath, subItems) as ActionItemType);
+        findItem(keyPath, subItems)?.onItemClick?.(findItem(keyPath, subItems) as ItemType);
         return;
       }
       onMenuClick?.({
