@@ -1,5 +1,6 @@
 import useLayoutEffect from 'rc-util/lib/hooks/useLayoutEffect';
 import * as React from 'react';
+import { BubbleContentType } from '../interface';
 
 function isString(str: any): str is string {
   return typeof str === 'string';
@@ -10,7 +11,7 @@ function isString(str: any): str is string {
  * Or return content directly.
  */
 const useTypedEffect = (
-  content: React.ReactNode | object,
+  content: BubbleContentType,
   typingEnabled: boolean,
   typingStep: number,
   typingInterval: number,

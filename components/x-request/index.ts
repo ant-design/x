@@ -176,7 +176,6 @@ class XRequestClass {
       const err = error instanceof Error ? error : new Error('Unknown error!');
 
       callbacks?.onError?.(err);
-
       throw err;
     }
   };

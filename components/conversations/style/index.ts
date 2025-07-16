@@ -88,6 +88,9 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
       [`& ${componentCls}-label`]: {
         flex: 1,
         color: token.colorText,
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
       },
       // 会话操作菜单
       [`& ${componentCls}-menu-icon`]: {

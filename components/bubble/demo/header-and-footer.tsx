@@ -1,24 +1,31 @@
 import { CopyOutlined, SyncOutlined, UserOutlined } from '@ant-design/icons';
 import { Bubble } from '@ant-design/x';
-import { Button, Space, theme } from 'antd';
+import { Button, Space, message, theme } from 'antd';
 import React from 'react';
 
 const App: React.FC = () => {
   const { token } = theme.useToken();
-
+  const onCopy = (textToCopy: any) => {
+    if (!textToCopy) return message.success('Text is empty');
+    message.success(`Text copied successfully：${textToCopy}`);
+  };
   return (
     <Bubble
       content="Hello, welcome to use Ant Design X! Just ask if you have any questions."
       avatar={{ icon: <UserOutlined /> }}
-      header="Ant Design X"
+      header={(messageContext) => (
+        <Space size={token.paddingXXS}>
+          <div>{messageContext as string} </div>
+        </Space>
+      )}
       footer={(messageContext) => (
         <Space size={token.paddingXXS}>
           <Button color="default" variant="text" size="small" icon={<SyncOutlined />} />
           <Button
-            onClick={() => console.log('Copy message:', messageContext)}
             color="default"
             variant="text"
             size="small"
+            onClick={() => onCopy(messageContext)}
             icon={<CopyOutlined />}
           />
         </Space>

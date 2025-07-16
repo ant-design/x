@@ -40,7 +40,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 | actions | 自定义按钮，当不需要默认操作按钮时，可以设为 `actions={false}` | ReactNode \| (oriNode, info: { components: ActionsComponents }) => ReactNode | - | - |
 | allowSpeech | 是否允许语音输入 | boolean \| SpeechConfig | false | - |
 | classNames | 样式类名 | [见下](#semantic-dom) | - | - |
-| components | 自定义组件 | Record<'input', ComponentType> | - | - |
+| components | 自定义组件，input默认为[Input.TextArea](https://ant.design/components/input-cn#api)，确保在自定义输入组件时，按照 `Input.TextArea` 实现所有必要的 props，以避免功能不全。 | Record<'input', ComponentType> | - | - |
 | defaultValue | 输入框默认值 | string | - | - |
 | disabled | 是否禁用 | boolean | false | - |
 | loading | 是否加载中 | boolean | false | - |
@@ -89,9 +89,11 @@ type ActionsComponents = {
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
 | children | 面板内容 | ReactNode | - | - |
+| classNames | 样式类名 | [见下](#semantic-dom) | - | - |
 | closable | 是否可关闭 | boolean | true | - |
 | forceRender | 强制渲染，在初始化便需要 ref 内部元素时使用 | boolean | false | - |
 | open | 是否展开 | boolean | - | - |
+| styles | 语义化定义样式 | [见下](#semantic-dom) | - | - |
 | title | 标题 | ReactNode | - | - |
 | onOpenChange | 展开状态改变的回调 | (open: boolean) => void | - | - |
 

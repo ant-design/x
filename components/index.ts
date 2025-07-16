@@ -1,5 +1,8 @@
 export { default as version } from './version';
 
+export { default as Actions } from './actions';
+export type { ActionsProps } from './actions';
+
 export { default as Attachments } from './attachments';
 export type { AttachmentsProps } from './attachments';
 

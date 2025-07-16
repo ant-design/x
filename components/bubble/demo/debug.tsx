@@ -52,7 +52,10 @@ const App = () => {
     },
   };
 
-  const bubbleDict: Record<'string' | 'longString' | 'block' | 'fixedWidthBlock', BubbleProps> = {
+  const bubbleDict: Record<
+    'string' | 'longString' | 'block' | 'fixedWidthBlock',
+    BubbleProps<any>
+  > = {
     string: {
       content: 'string bubble',
       variant: 'filled',

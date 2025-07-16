@@ -3,8 +3,8 @@ import { useEvent } from 'rc-util';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import * as React from 'react';
 import { useXProviderContext } from '../x-provider';
-import Bubble, { BubbleContext } from './Bubble';
 import type { BubbleRef } from './Bubble';
+import Bubble, { BubbleContext } from './Bubble';
 import useListData from './hooks/useListData';
 import type { BubbleProps } from './interface';
 import useStyle from './style';
@@ -19,12 +19,12 @@ export interface BubbleListRef {
   }) => void;
 }
 
-export type BubbleDataType = BubbleProps & {
+export type BubbleDataType = BubbleProps<any> & {
   key?: string | number;
   role?: string;
 };
 
-export type RoleType = Partial<Omit<BubbleProps, 'content'>>;
+export type RoleType = Partial<Omit<BubbleProps<any>, 'content'>>;
 
 export type RolesType =
   | Record<string, RoleType>
@@ -36,6 +36,10 @@ export interface BubbleListProps extends React.HTMLAttributes<HTMLDivElement> {
   items?: BubbleDataType[];
   autoScroll?: boolean;
   roles?: RolesType;
+  /**
+   * @version 1.5.0
+   */
+  onScroll?: (e: React.UIEvent<HTMLDivElement, UIEvent>) => void;
 }
 
 interface BubbleListItemProps extends BubbleProps {
@@ -48,6 +52,7 @@ const BubbleListItem: React.ForwardRefRenderFunction<
 > = ({ _key, ...restProps }, ref) => (
   <Bubble
     {...restProps}
+    _key={_key}
     ref={(node) => {
       if (node) {
         (ref as React.RefObject<Record<string, BubbleRef>>).current[_key!] = node;
@@ -70,6 +75,7 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
     items,
     autoScroll = true,
     roles,
+    onScroll,
     ...restProps
   } = props;
   const domProps = pickAttrs(restProps, {
@@ -115,6 +121,8 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
     setScrollReachEnd(
       target.scrollHeight - Math.abs(target.scrollTop) - target.clientHeight <= TOLERANCE,
     );
+
+    onScroll?.(e);
   };
 
   React.useEffect(() => {
