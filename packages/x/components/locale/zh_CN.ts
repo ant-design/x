@@ -7,8 +7,8 @@ const localeValues: Required<Locale> = {
     create: '新对话',
   },
   Actions: {
-    feedbackLike: '点赞',
-    feedbackDislike: '点踩',
+    feedbackLike: '喜欢',
+    feedbackDislike: '不喜欢',
   },
 };
 
