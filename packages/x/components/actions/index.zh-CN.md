@@ -36,7 +36,7 @@ Actions 组件用于快速配置一些 AI 场景下所需要的操作按钮/功�
 | onClick | 组件被点击时的回调函数 | function({ item, key, keyPath, domEvent }) | - | - |
 | footer | 底部额外的React节点内容 | ReactNode | - | - |
 | dropdownProps | 下拉菜单的配置属性 | DropdownProps | - | - |
-| variant | 变体 | `borderless` \| `border` | `borderless` | - |
+| variant | 变体 | `borderless` \| `outlined` \|`filled` | `borderless` | - |
 
 ### ItemType
 
