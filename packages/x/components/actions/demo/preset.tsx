@@ -30,7 +30,7 @@ const useStyles = createStyles(({ css, token }) => ({
   `,
 }));
 
-const Demo: React.FC = () => {
+const App: React.FC = () => {
   const { styles } = useStyles();
 
   // pagination
@@ -126,4 +126,4 @@ const Demo: React.FC = () => {
   return <Actions items={items} footer={feedbackPopupOpen ? feedbackFooter : undefined} />;
 };
 
-export default Demo;
+export default App;
