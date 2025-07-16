@@ -35,7 +35,7 @@ export interface ActionsProps
    * @descEN Variant.
    * @default 'borderless'
    */
-  variant?: 'borderless' | 'border';
+  variant?: 'borderless' | 'filled' | 'outlined';
 
   /**
    * @desc 样式类名的前缀。

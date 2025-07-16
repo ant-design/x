@@ -1,3 +1,4 @@
+import { unit } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
@@ -8,9 +9,12 @@ export interface ComponentToken {}
 export interface ActionsToken extends FullToken<'Actions'> {}
 
 const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
-  const { componentCls } = token;
+  const { componentCls, antCls } = token;
   return {
     [componentCls]: {
+      [`& ${antCls}-pagination-item-link`]: {
+        width: token.controlHeightSM,
+      },
       [`&${componentCls}-rtl`]: {
         direction: 'rtl',
       },
@@ -18,9 +22,8 @@ const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
       [`${componentCls}-list`]: {
         display: 'inline-flex',
         flexDirection: 'row',
-        gap: token.paddingXS,
         color: token.colorTextDescription,
-
+        gap: token.paddingXS,
         '&-item, &-sub-item': {
           cursor: 'pointer',
           padding: token.paddingXXS,
@@ -30,7 +33,8 @@ const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
           display: 'inline-flex',
           alignItems: 'center',
           justifyContent: 'center',
-
+          lineHeight: token.lineHeight,
+          transition: `all ${token.motionDurationMid} ${token.motionEaseInOut}`,
           '&-icon': {
             display: 'inline-flex',
             alignItems: 'center',
@@ -43,23 +47,24 @@ const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
           },
         },
       },
-      '& .border': {
-        padding: `${token.paddingXS} ${token.paddingSM}`,
-        gap: token.paddingSM,
-        borderRadius: token.borderRadiusLG,
+      '&-variant-outlined': {
+        padding: token.paddingXXS,
+        borderRadius: token.borderRadius,
+        border: `${unit(token.lineWidth)} ${token.lineType}, ${token.colorBorderSecondary}`,
+      },
+      '&-variant-filled': {
+        padding: token.paddingXXS,
+        borderRadius: token.borderRadius,
         backgroundColor: token.colorBorderSecondary,
-        color: token.colorTextSecondary,
 
         [`${componentCls}-list-item, ${componentCls}-list-sub-item`]: {
           padding: token.paddingXXS,
-          lineHeight: token.lineHeight,
-
           '&-icon': {
             fontSize: token.fontSize,
           },
-
           '&:hover': {
-            opacity: 0.8,
+            color: token.colorTextSecondary,
+            background: 'transparent',
           },
         },
       },

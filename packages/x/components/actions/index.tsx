@@ -78,7 +78,7 @@ const ForwardActions: React.FC<ActionsProps> = (props) => {
           },
         }}
       >
-        <div className={classnames(`${prefixCls}-list`, variant)}>
+        <div className={classnames(`${prefixCls}-list`, `${prefixCls}-variant-${variant}`)}>
           {items.map((item, idx) => {
             return <Item item={item} onClick={onClick} dropdownProps={dropdownProps} key={idx} />;
           })}
