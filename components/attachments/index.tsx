@@ -17,7 +17,7 @@ import SilentUploader from './SilentUploader';
 import { AttachmentContext } from './context';
 import useStyle from './style';
 
-export type SemanticType = 'list' | 'item' | 'placeholder';
+export type SemanticType = 'list' | 'item' | 'placeholder' | 'upload';
 
 export type Attachment = GetProp<UploadProps, 'fileList'>[number] & {
   description?: React.ReactNode;
@@ -215,6 +215,8 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
             ...styles.list,
             ...(!hasFileList && { display: 'none' }),
           }}
+          uploadClassName={classnames(contextClassNames.upload, classNames.upload)}
+          uploadStyle={{ ...contextStyles.upload, ...styles.upload }}
           itemClassName={classnames(contextClassNames.item, classNames.item)}
           itemStyle={{
             ...contextStyles.item,

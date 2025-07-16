@@ -34,6 +34,7 @@ demo:
 <code src="./demo/gpt-vis.tsx">使用 GPT-Vis 渲染图表</code>
 <code src="./demo/debug.tsx" debug>debug</code>
 <code src="./demo/debug-list.tsx" debug>debug list</code>
+<code src="./demo/onScroll.tsx">监听滚动</code>
 
 ## API
 
@@ -84,6 +85,7 @@ type CustomContentType {
 | autoScroll | 当内容更新时，自动滚动到最新位置。如果用户滚动，则会暂停自动滚动。 | boolean | true |  |
 | items | 气泡数据列表 | (BubbleProps & { key?: string \| number, role?: string })[] | - |  |
 | roles | 设置气泡默认属性，`items` 中的 `role` 会进行自动对应 | Record<string, BubbleProps> \| (bubble, index) => BubbleProps | - |  |
+| onScroll | 监听 `Bubble.List` 滚动 | (e: React.UIEvent<HTMLDivElement, UIEvent>) => void | - | 1.5.0 |
 
 ## Semantic DOM
 
