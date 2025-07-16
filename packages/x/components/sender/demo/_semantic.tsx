@@ -64,7 +64,7 @@ const App: React.FC = () => {
 
       {/* With Header */}
       <SemanticPreview
-        componentName="Sender"
+        componentName="Sender.Header"
         semantics={[
           { name: 'header', desc: headerLocale.header },
           { name: 'content', desc: headerLocale.content },

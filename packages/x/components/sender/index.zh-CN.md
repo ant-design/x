@@ -137,9 +137,11 @@ type ActionsComponents = {
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
 | children | 面板内容 | ReactNode | - | - |
+| classNames | 样式类名 | [见下](#semantic-dom) | - | - |
 | closable | 是否可关闭 | boolean | true | - |
 | forceRender | 强制渲染，在初始化便需要 ref 内部元素时使用 | boolean | false | - |
 | open | 是否展开 | boolean | - | - |
+| styles | 语义化定义样式 | [见下](#semantic-dom) | - | - |
 | title | 标题 | ReactNode | - | - |
 | onOpenChange | 展开状态改变的回调 | (open: boolean) => void | - | - |
 

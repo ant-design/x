@@ -1,15 +1,15 @@
 import { LinkOutlined, QuestionCircleOutlined, RightOutlined } from '@ant-design/icons';
 import { XProvider } from '@ant-design/x';
-import tokenMeta from '@ant-design/x/es/version/token-meta.json';
 import tokenData from '@ant-design/x/es/version/token.json';
+import tokenMeta from '@ant-design/x/es/version/token-meta.json';
 import { Flex, Popover, Table, Typography } from 'antd';
 import { createStyles, css, useTheme } from 'antd-style';
 import { getDesignToken } from 'antd-token-previewer';
 import React, { useMemo, useState } from 'react';
 
 import useLocale from '../../../hooks/useLocale';
-import { useColumns } from '../TokenTable';
 import type { TokenData } from '../TokenTable';
+import { useColumns } from '../TokenTable';
 
 const compare = (token1: string, token2: string) => {
   const hasColor1 = token1.toLowerCase().includes('color');

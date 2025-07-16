@@ -51,6 +51,11 @@ const menu = jest.fn().mockReturnValue({
       key: 'delete',
       danger: true,
     },
+    {
+      label: '禁用',
+      key: 'disabled',
+      disabled: true,
+    },
   ],
 });
 

@@ -36,6 +36,10 @@ export interface BubbleListProps extends React.HTMLAttributes<HTMLDivElement> {
   items?: BubbleDataType[];
   autoScroll?: boolean;
   roles?: RolesType;
+  /**
+   * @version 1.5.0
+   */
+  onScroll?: (e: React.UIEvent<HTMLDivElement, UIEvent>) => void;
 }
 
 interface BubbleListItemProps extends BubbleProps {
@@ -71,6 +75,7 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
     items,
     autoScroll = true,
     roles,
+    onScroll,
     ...restProps
   } = props;
   const domProps = pickAttrs(restProps, {
@@ -116,6 +121,8 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
     setScrollReachEnd(
       target.scrollHeight - Math.abs(target.scrollTop) - target.clientHeight <= TOLERANCE,
     );
+
+    onScroll?.(e);
   };
 
   React.useEffect(() => {
