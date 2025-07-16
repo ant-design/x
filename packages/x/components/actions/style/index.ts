@@ -18,7 +18,6 @@ const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
       [`&${componentCls}-rtl`]: {
         direction: 'rtl',
       },
-
       [`${componentCls}-list`]: {
         display: 'inline-flex',
         flexDirection: 'row',
@@ -68,8 +67,8 @@ const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
           },
         },
       },
-      '& .danger': {
-        color: 'red',
+      '&-list-danger': {
+        color: token.colorError,
       },
     },
   };

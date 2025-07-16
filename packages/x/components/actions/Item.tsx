@@ -29,7 +29,7 @@ const Item: React.FC<ActionsItemProps> = (props) => {
   return (
     <div
       className={classnames(`${prefixCls}-list-item`, classNames.item, {
-        danger: item?.danger,
+        [`${prefixCls}-list-danger`]: item?.danger,
       })}
       style={styles.item}
       onClick={(domEvent) => {

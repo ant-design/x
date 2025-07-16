@@ -136,7 +136,7 @@ describe('Actions.Item Component', () => {
       />,
     );
 
-    expect(container.querySelector('.danger')).toBeInTheDocument();
+    expect(container.querySelector('.ant-actions-list-danger')).toBeInTheDocument();
   });
 
   it('should call onItemClick when provided', () => {
