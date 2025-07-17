@@ -20,10 +20,6 @@ Using plugins enables `@ant-design/x-markdown` to support more extended features
 import Latex from '@ant-design/x-markdown/plugins/latex';
 ```
 
-## Custom Plugins
-
-### Supports implementing all Marked plugins, or creating custom plugins [Reference](/markdowns/custom-plugin-en)
-
 ### Browser Import
 
 In browsers, you can directly import files using script and link tags, with the `plugin name` as the global variable.
@@ -36,3 +32,7 @@ We provide built plugin files in the `dist/plugins` directory of the npm package
   const Latex = window.Latex;
 </script>
 ```
+
+## Custom Plugins
+
+### Supports implementing all Marked plugins, or creating custom plugins [Reference](/markdowns/custom-plugin-en)

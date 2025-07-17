@@ -1,6 +1,6 @@
 ---
 group:
-  title: 插件集
+  title: 插件
   order: 2
 title: CustomPlugins
 subtitle: 自定义插件

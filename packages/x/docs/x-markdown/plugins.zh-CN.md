@@ -1,6 +1,6 @@
 ---
 group:
-  title: 插件集
+  title: 插件
   order: 2
 title: 总览
 order: 1
@@ -8,7 +8,7 @@ order: 1
 
 使用插件可以使 `@ant-design/x-markdown` 支持更多的扩展功能，比如：Latex、代码高亮等。
 
-## 插件集
+## 插件列表
 
 <MarkdownPluginsOverView></MarkdownPluginsOverView>
 
@@ -19,10 +19,6 @@ order: 1
 ```tsx
 import Latex from '@ant-design/x-markdown/plugins/latex';
 ```
-
-## 自定义插件
-
-### 支持基于实现 Marked 所有插件，也可通过自定义方式来插件 [参考](/markdowns/custom-plugin-cn)
 
 ### 从浏览器引入
 
@@ -36,3 +32,7 @@ import Latex from '@ant-design/x-markdown/plugins/latex';
   const Latex = window.Latex;
 </script>
 ```
+
+## 自定义插件
+
+### 支持基于实现 Marked 所有插件，也可通过自定义方式来插件 [参考](/markdowns/custom-plugin-cn)

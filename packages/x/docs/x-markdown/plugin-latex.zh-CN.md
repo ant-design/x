@@ -1,6 +1,6 @@
 ---
 group:
-  title: 插件集
+  title: 插件
   order: 2
 title: Latex
 subtitle: 公式
