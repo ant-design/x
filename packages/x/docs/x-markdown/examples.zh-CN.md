@@ -13,9 +13,9 @@ order: 2
 <code src="./demo/codeDemo/basic.tsx" description="markdown基础语法渲染。" title="基础用法"></code>
 <code src="./demo/codeDemo/streaming.tsx" description="配合 `Bubble` 实现流式对话。" title="流式渲染"></code>
 <code src="./demo/codeDemo/components.tsx" description="自定义组件渲染标签。" title="标签组件"></code>
-<code src="./demo/codeDemo/supersets.tsx" description="使用插件渲染" title="插件使用"></code>
+<code src="./demo/codeDemo/supersets.tsx" description="使用插件渲染。" title="插件使用"></code>
 <code src="./demo/codeDemo/plugin.tsx" title="自定义拓展插件"></code>
-<code src="./demo/codeDemo/xss.tsx" title="XSS 防御"></code>
+<code src="./demo/codeDemo/xss.tsx"  title="XSS 防御"></code>
 
 ## API
 
