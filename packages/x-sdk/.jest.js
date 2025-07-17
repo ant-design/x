@@ -34,7 +34,7 @@ function getTestRegex(libDir) {
 module.exports = {
   verbose: true,
   testEnvironment: '@happy-dom/jest-environment',
-  setupFiles: [],
+  setupFiles: ['./tests/setup.ts'],
   setupFilesAfterEnv: [],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'md'],
   modulePathIgnorePatterns: [],
@@ -44,7 +44,14 @@ module.exports = {
     '^@ant-design/x-sdk/es/(.*)$': '<rootDir>/components/$1',
     '^@ant-design/x-sdk/lib/(.*)$': '<rootDir>/components/$1',
   },
-  testPathIgnorePatterns: ['/node_modules/', 'dekko', 'node', 'image.test.js', 'image.test.ts'],
+  testPathIgnorePatterns: [
+    '/node_modules/',
+    'dekko',
+    'node',
+    '/src/_util',
+    'image.test.js',
+    'image.test.ts',
+  ],
   transform: {
     '\\.tsx?$': resolve('codePreprocessor'),
     '\\.(m?)js$': resolve('codePreprocessor'),
@@ -70,7 +77,7 @@ module.exports = {
     },
   },
   testEnvironmentOptions: {
-    url: 'http://localhost/x-mardown',
+    url: 'http://localhost/x-sdk',
   },
   bail: true,
   maxWorkers: '50%',
