@@ -24,7 +24,7 @@ order: 2
 | --- | --- | --- | --- |
 | content | markdown 内容 | `string` | - |
 | children | markdown 内容，与 content 作用一样 | `string` | - |
-| components | 自定义组件 | `Record<string, React.ReactNode>`，查看[详情](/markdowns/components-cn) | - |
+| components | 自定义组件 | `Record<string, React.FC<Props>>`，查看[详情](/markdowns/components-cn) | - |
 | streaming | 流式渲染配置 | `SteamingOption` | - |
 | config | Marked.js extension | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |
 | className | 自定义 className | `string` | - |

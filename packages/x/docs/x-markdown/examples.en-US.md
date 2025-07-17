@@ -24,7 +24,7 @@ Used for rendering streaming Markdown format returned by LLM.
 | --- | --- | --- | --- |
 | content | Markdown content | `string` | - |
 | children | Markdown content, same as content | `string` | - |
-| components | Custom components | `Record<string, React.ReactNode>`,[more](/markdowns/components)  | - |
+| components | Custom components | `Record<string, React.FC<Props>>`,[more](/markdowns/components)  | - |
 | streaming | Streaming rendering configuration | `SteamingOption` | - |
 | config | Marked.js extension | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |
 | className | Custom className | `string` | - |
