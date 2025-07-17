@@ -23,7 +23,7 @@ const RenderMarkdown: BubbleProps['messageRender'] = (content) => (
   <XMarkdown components={{ line: LineCompt }}>{content}</XMarkdown>
 );
 
-const App = () => {
+const App: React.FC = () => {
   const [rerenderKey, setRerenderKey] = React.useState(0);
 
   return (

@@ -80,7 +80,7 @@ const referenceList = [
   { url: 'https://x.ant.design', title: 'link9' },
 ];
 
-const App = () => {
+const App: React.FC = () => {
   const footNoteExtension = {
     name: 'footnote',
     level: 'inline' as const,

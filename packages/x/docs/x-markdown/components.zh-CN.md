@@ -3,6 +3,10 @@ title: 标签组件
 order: 5
 ---
 
+设置`components`可以将标签名称映射到组件。
+
 ## 代码演示
 
-<code src="./demo/supersets/Think/tool.tsx">配合 [`ThoughtChain`](https://x.ant.design/components/thought-chain-cn)</code>
+<!-- prettier-ignore -->
+<code src="./demo/supersets/Think/basic.tsx">渲染 [`Think`](https://x.ant.design/components/think-cn)</code>
+<code src="./demo/supersets/Think/tool.tsx">渲染 [`ThoughtChain`](https://x.ant.design/components/thought-chain-cn)</code>

@@ -12,7 +12,7 @@ order: 2
 <!-- prettier-ignore -->
 <code src="./demo/codeDemo/basic.tsx">基础用法</code>
 <code src="./demo/codeDemo/streaming.tsx">流式渲染</code>
-<code src="./demo/codeDemo/components.tsx">自定义组件渲染</code>
+<code src="./demo/codeDemo/components.tsx">标签组件渲染</code>
 <code src="./demo/codeDemo/supersets.tsx">拓展插件</code>
 <code src="./demo/codeDemo/plugin.tsx">自定义拓展插件</code>
 <code src="./demo/codeDemo/xss.tsx">XSS 防御</code>
@@ -24,7 +24,7 @@ order: 2
 | --- | --- | --- | --- |
 | content | markdown 内容 | `string` | - |
 | children | markdown 内容，与 content 作用一样 | `string` | - |
-| components | 自定义组件 | `Record<string, React.ReactNode>` | - |
+| components | 自定义组件 | `Record<string, React.ReactNode>`，查看[详情](/markdowns/components-cn) | - |
 | streaming | 流式渲染配置 | `SteamingOption` | - |
 | config | Marked.js extension | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |
 | className | 自定义 className | `string` | - |

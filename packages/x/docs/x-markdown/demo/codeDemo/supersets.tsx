@@ -48,7 +48,7 @@ quadrantChart
 \`\`\`
 `;
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <XMarkdown
       className="x-markdown-light"

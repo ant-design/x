@@ -135,6 +135,6 @@ Like links, Images also have a footnote style syntax
 [id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
 `;
 
-const App = () => <XMarkdown content={content} className="x-markdown-light" />;
+const App: React.FC = () => <XMarkdown content={content} className="x-markdown-light" />;
 
 export default App;

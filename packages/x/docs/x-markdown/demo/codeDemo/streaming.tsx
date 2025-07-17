@@ -113,7 +113,7 @@ const roles: RolesType = {
   },
 };
 
-const App = () => {
+const App: React.FC = () => {
   const [enableStreaming, setEnableStreaming] = useState(true);
   const [enableAnimation, setEnableAnimation] = useState(true);
   const [hasNextChunk, setHasNextChunk] = useState(false);
@@ -182,7 +182,7 @@ const App = () => {
                         const lang = className?.replace('language-', '');
                         return <HighlightCode lang={lang}>{children}</HighlightCode>;
                       },
-                      'line': () => {
+                      line: () => {
                         console.log('custom-Tag');
                         return 'customTag';
                       },
