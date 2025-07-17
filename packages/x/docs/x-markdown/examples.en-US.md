@@ -13,7 +13,7 @@ Used to render streaming Markdown format returned by LLM.
 <code src="./demo/codeDemo/basic.tsx" description="Render basic markdown syntax." title="Basic Usage"></code>
 <code src="./demo/codeDemo/streaming.tsx" description="Work with `Bubble` to implement streaming conversations." title="Streaming Render"></code>
 <code src="./demo/codeDemo/components.tsx" description="Custom component rendering tags." title="Component Tags"></code>
-<code src="./demo/codeDemo/supersets.tsx" description="Render with plugins" title="Plugin Usage"></code>
+<code src="./demo/codeDemo/supersets.tsx" description="Render with plugins." title="Plugin Usage"></code>
 <code src="./demo/codeDemo/plugin.tsx" title="Custom Extension Plugin"></code>
 <code src="./demo/codeDemo/xss.tsx" title="XSS Defense"></code>
 
