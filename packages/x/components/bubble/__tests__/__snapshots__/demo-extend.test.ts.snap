@@ -1278,7 +1278,6 @@ exports[`renders components/bubble/demo/debug-list.tsx extend context correctly 
                     style="display: flex; flex-direction: column;"
                   >
                     <div
-                      aria-selected="false"
                       class="ant-select-item ant-select-item-option ant-select-item-option-active"
                       title="#0 - message content"
                     >
@@ -1397,7 +1396,6 @@ exports[`renders components/bubble/demo/debug-list.tsx extend context correctly 
                     style="display: flex; flex-direction: column;"
                   >
                     <div
-                      aria-selected="false"
                       class="ant-select-item ant-select-item-option ant-select-item-option-active"
                       title="#0 - message content"
                     >
