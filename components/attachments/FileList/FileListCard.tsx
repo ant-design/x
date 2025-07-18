@@ -21,13 +21,17 @@ import AudioIcon from './AudioIcon';
 import Progress from './Progress';
 import VideoIcon from './VideoIcon';
 
-export interface AttachmentFilesIcon {
-  ext: string[];
-  color: string;
-  icon: React.ReactElement;
-}
-
-export type AttachmentFilesIcons = AttachmentFilesIcon[];
+export type PresetIcons =
+  | 'default'
+  | 'excel'
+  | 'image'
+  | 'markdown'
+  | 'pdf'
+  | 'ppt'
+  | 'word'
+  | 'zip'
+  | 'video'
+  | 'audio';
 
 export interface FileListCardProps {
   prefixCls?: string;
@@ -36,7 +40,8 @@ export interface FileListCardProps {
   className?: string;
   style?: React.CSSProperties;
   imageProps?: ImageProps;
-  fileIcons?: AttachmentFilesIcons;
+  icon?: React.ReactNode | PresetIcons;
+  type?: 'file' | 'image';
 }
 
 const EMPTY = '\u00A0';
@@ -45,48 +50,68 @@ const DEFAULT_ICON_COLOR = '#8c8c8c';
 
 const IMG_EXTS = ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp', 'svg'];
 
-const PRESET_FILE_ICONS: AttachmentFilesIcons = [
+const PRESET_FILE_ICONS: {
+  key: PresetIcons;
+  ext: string[];
+  color: string;
+  icon: React.ReactElement;
+}[] = [
   {
+    key: 'default',
+    icon: <FileTextFilled />,
+    color: DEFAULT_ICON_COLOR,
+    ext: [],
+  },
+  {
+    key: 'excel',
     icon: <FileExcelFilled />,
     color: '#22b35e',
     ext: ['xlsx', 'xls'],
   },
   {
+    key: 'image',
     icon: <FileImageFilled />,
     color: DEFAULT_ICON_COLOR,
     ext: IMG_EXTS,
   },
   {
+    key: 'markdown',
     icon: <FileMarkdownFilled />,
     color: DEFAULT_ICON_COLOR,
     ext: ['md', 'mdx'],
   },
   {
+    key: 'pdf',
     icon: <FilePdfFilled />,
     color: '#ff4d4f',
     ext: ['pdf'],
   },
   {
+    key: 'ppt',
     icon: <FilePptFilled />,
     color: '#ff6e31',
     ext: ['ppt', 'pptx'],
   },
   {
+    key: 'word',
     icon: <FileWordFilled />,
     color: '#1677ff',
     ext: ['doc', 'docx'],
   },
   {
+    key: 'zip',
     icon: <FileZipFilled />,
     color: '#fab714',
     ext: ['zip', 'rar', '7z', 'tar', 'gz'],
   },
   {
+    key: 'video',
     icon: <VideoIcon />,
     color: '#ff4d4f',
     ext: ['mp4', 'avi', 'mov', 'wmv', 'flv', 'mkv'],
   },
   {
+    key: 'audio',
     icon: <AudioIcon />,
     color: '#8c8c8c',
     ext: ['mp3', 'wav', 'flac', 'ape', 'aac', 'ogg'],
@@ -118,7 +143,8 @@ function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) 
     className,
     style,
     imageProps,
-    fileIcons,
+    type,
+    icon,
   } = props;
   const context = React.useContext(AttachmentContext);
   const { disabled } = context || {};
@@ -161,16 +187,26 @@ function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) 
   }, [status, percent]);
 
   // ============================== Icon ==============================
-  const [icon, iconColor] = React.useMemo(() => {
-    const iconOptions = fileIcons || PRESET_FILE_ICONS;
-    for (const { ext, icon, color } of iconOptions) {
+  const [finalIcon, iconColor] = React.useMemo(() => {
+    if (icon) {
+      if (typeof icon === 'string') {
+        const presetIcon = PRESET_FILE_ICONS.find((preset) => preset.key === icon);
+        if (presetIcon) {
+          return [presetIcon.icon, presetIcon.color];
+        }
+      } else {
+        return [icon, DEFAULT_ICON_COLOR];
+      }
+    }
+
+    for (const { ext, icon: presetIcon, color } of PRESET_FILE_ICONS) {
       if (matchExt(nameSuffix, ext)) {
-        return [icon, color];
+        return [presetIcon, color];
       }
     }
 
     return [<FileTextFilled key="defaultIcon" />, DEFAULT_ICON_COLOR];
-  }, [nameSuffix]);
+  }, [nameSuffix, icon]);
 
   // ========================== ImagePreview ==========================
   const [previewImg, setPreviewImg] = React.useState<string>();
@@ -194,9 +230,12 @@ function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) 
   // ============================= Render =============================
   let content: React.ReactNode = null;
   const previewUrl = item.thumbUrl || item.url || previewImg;
-  const isImgPreview = isImg && (item.originFileObj || previewUrl);
 
-  if (isImgPreview) {
+  // 根据 type 属性或文件类型决定是否显示图片预览
+  const shouldShowImagePreview =
+    type === 'image' || (type !== 'file' && isImg && (item.originFileObj || previewUrl));
+
+  if (shouldShowImagePreview) {
     // Preview Image style
     content = (
       <>
@@ -221,7 +260,7 @@ function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) 
     content = (
       <>
         <div className={`${cardCls}-icon`} style={{ color: iconColor }}>
-          {icon}
+          {finalIcon}
         </div>
         <div className={`${cardCls}-content`}>
           <div className={`${cardCls}-name`}>
@@ -242,8 +281,8 @@ function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) 
         cardCls,
         {
           [`${cardCls}-status-${status}`]: status,
-          [`${cardCls}-type-preview`]: isImgPreview,
-          [`${cardCls}-type-overview`]: !isImgPreview,
+          [`${cardCls}-type-preview`]: shouldShowImagePreview,
+          [`${cardCls}-type-overview`]: !shouldShowImagePreview,
         },
         className,
         hashId,

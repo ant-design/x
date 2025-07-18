@@ -72,71 +72,21 @@ interface PlaceholderType {
 | item | 附件，同 Upload `UploadFile` | Attachment | - | - |
 | onRemove | 点击移除文件时的回调，返回值为 false 时不移除。支持返回一个 Promise 对象，Promise 对象 resolve(false) 或 reject 时不移除 | (item: Attachment) => boolean \| Promise | - | - |
 | imageProps | 图片属性，同 antd [Image](https://ant.design/components/image) 属性 | ImageProps | - | - |
-| fileIcons | 自定义文件卡片的图标、图标颜色、文件范围。 | { ext: string[]; color: string; icon: React.ReactElement; }[] | `PRESET_FILE_ICONS` | - |
-
-`fileIcons` 默认值 `PRESET_FILE_ICONS`：
+| icon | 自定义图标 | React.ReactNode \| PresetIcons | - | - |
+| type | 是否图片类型 | 'file' \| 'image' | `file` | - |
 
 ```ts
-import {
-  FileExcelFilled,
-  FileImageFilled,
-  FileMarkdownFilled,
-  FilePdfFilled,
-  FilePptFilled,
-  FileTextFilled,
-  FileWordFilled,
-  FileZipFilled,
-} from '@ant-design/icons';
-import VideoIcon from './icons/VideoIcon';
-import AudioIcon from './icons/AudioIcon';
-
-const PRESET_FILE_ICONS: AttachmentFilesIcons = [
-  {
-    icon: <FileExcelFilled />,
-    color: '#22b35e',
-    ext: ['xlsx', 'xls'],
-  },
-  {
-    icon: <FileImageFilled />,
-    color: '#8c8c8c',
-    ext: ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp', 'svg'],
-  },
-  {
-    icon: <FileMarkdownFilled />,
-    color: '#8c8c8c',
-    ext: ['md', 'mdx'],
-  },
-  {
-    icon: <FilePdfFilled />,
-    color: '#ff4d4f',
-    ext: ['pdf'],
-  },
-  {
-    icon: <FilePptFilled />,
-    color: '#ff6e31',
-    ext: ['ppt', 'pptx'],
-  },
-  {
-    icon: <FileWordFilled />,
-    color: '#1677ff',
-    ext: ['doc', 'docx'],
-  },
-  {
-    icon: <FileZipFilled />,
-    color: '#fab714',
-    ext: ['zip', 'rar', '7z', 'tar', 'gz'],
-  },
-  {
-    icon: <VideoIcon />,
-    color: '#ff4d4f',
-    ext: ['mp4', 'avi', 'mov', 'wmv', 'flv', 'mkv'],
-  },
-  {
-    icon: <AudioIcon />,
-    color: '#8c8c8c',
-    ext: ['mp3', 'wav', 'flac', 'ape', 'aac', 'ogg'],
-  },
-];
+type PresetIcons =
+  | 'default'
+  | 'excel'
+  | 'image'
+  | 'markdown'
+  | 'pdf'
+  | 'ppt'
+  | 'word'
+  | 'zip'
+  | 'video'
+  | 'audio';
 ```
 
 ## Semantic DOM

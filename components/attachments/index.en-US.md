@@ -78,71 +78,21 @@ interface Attachment extends UploadFile {
 | item | Attachment, same as Upload `UploadFile` | Attachment | - | - |
 | onRemove | A callback function, will be executed when removing file button is clicked, remove event will be prevented when the return value is false or a Promise which resolve(false) or reject | (item: Attachment) => boolean \| Promise | - | - |
 | imageProps | Image config, same as [Image](https://ant.design/components/image) | ImageProps | - | - |
-| fileIcons | Custom icons, colors, and file extensions for file cards. | { ext: string[]; color: string; icon: React.ReactElement; }[] | `PRESET_FILE_ICONS` | - |
-
-Default value of `fileIcons` is `PRESET_FILE_ICONS`:
+| icon | Custom Icon | React.ReactNode \| PresetIcons | - | - |
+| type | Is the image type | 'file' \| 'image' | `file` | - |
 
 ```ts
-import {
-  FileExcelFilled,
-  FileImageFilled,
-  FileMarkdownFilled,
-  FilePdfFilled,
-  FilePptFilled,
-  FileTextFilled,
-  FileWordFilled,
-  FileZipFilled,
-} from '@ant-design/icons';
-import VideoIcon from './icons/VideoIcon';
-import AudioIcon from './icons/AudioIcon';
-
-const PRESET_FILE_ICONS: AttachmentFilesIcons = [
-  {
-    icon: <FileExcelFilled />,
-    color: '#22b35e',
-    ext: ['xlsx', 'xls'],
-  },
-  {
-    icon: <FileImageFilled />,
-    color: '#8c8c8c',
-    ext: ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp', 'svg'],
-  },
-  {
-    icon: <FileMarkdownFilled />,
-    color: '#8c8c8c',
-    ext: ['md', 'mdx'],
-  },
-  {
-    icon: <FilePdfFilled />,
-    color: '#ff4d4f',
-    ext: ['pdf'],
-  },
-  {
-    icon: <FilePptFilled />,
-    color: '#ff6e31',
-    ext: ['ppt', 'pptx'],
-  },
-  {
-    icon: <FileWordFilled />,
-    color: '#1677ff',
-    ext: ['doc', 'docx'],
-  },
-  {
-    icon: <FileZipFilled />,
-    color: '#fab714',
-    ext: ['zip', 'rar', '7z', 'tar', 'gz'],
-  },
-  {
-    icon: <VideoIcon />,
-    color: '#ff4d4f',
-    ext: ['mp4', 'avi', 'mov', 'wmv', 'flv', 'mkv'],
-  },
-  {
-    icon: <AudioIcon />,
-    color: '#8c8c8c',
-    ext: ['mp3', 'wav', 'flac', 'ape', 'aac', 'ogg'],
-  },
-];
+type PresetIcons =
+  | 'default'
+  | 'excel'
+  | 'image'
+  | 'markdown'
+  | 'pdf'
+  | 'ppt'
+  | 'word'
+  | 'zip'
+  | 'video'
+  | 'audio';
 ```
 
 ## Semantic DOM
