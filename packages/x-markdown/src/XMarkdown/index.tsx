@@ -6,8 +6,17 @@ import { useAnimation, useStreaming } from './hooks';
 import { XMarkdownProps } from './interface';
 
 const XMarkdown: React.FC<XMarkdownProps> = (props) => {
-  const { streaming, config, components, content, children, rootClassName, className, style } =
-    props;
+  const {
+    streaming,
+    config,
+    components,
+    paragraphTag,
+    content,
+    children,
+    rootClassName,
+    className,
+    style,
+  } = props;
 
   // ============================ style ============================
   const { direction: contextDirection } = useXProviderContext();
@@ -27,13 +36,12 @@ const XMarkdown: React.FC<XMarkdownProps> = (props) => {
   // ============================ Render ============================
   if (!displayContent) return null;
 
-  const parser = new Parser(config);
+  const parser = new Parser({ markedConfig: config, paragraphTag });
 
   const renderComponents = { ...animationComponents, ...(components || {}) };
   const renderer = new Renderer({ components: renderComponents });
 
   const htmlString = parser.parse(displayContent);
-
   return (
     <div className={mergedCls} style={mergedStyle}>
       {renderer.render(htmlString)}

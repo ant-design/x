@@ -12,7 +12,7 @@ order: 2
 <!-- prettier-ignore -->
 <code src="./demo/codeDemo/basic.tsx" description="markdown基础语法渲染。" title="基础用法"></code>
 <code src="./demo/codeDemo/streaming.tsx" description="配合 `Bubble` 实现流式对话。" title="流式渲染"></code>
-<code src="./demo/codeDemo/components.tsx" description="自定义组件渲染标签。" title="标签组件"></code>
+<code src="./demo/codeDemo/components.tsx" description="自定义组件渲染标签。" title="自定义组件"></code>
 <code src="./demo/codeDemo/supersets.tsx" description="使用插件渲染。" title="插件使用"></code>
 <code src="./demo/codeDemo/plugin.tsx" title="自定义拓展插件"></code>
 <code src="./demo/codeDemo/xss.tsx"  title="XSS 防御"></code>
@@ -25,6 +25,7 @@ order: 2
 | content | markdown 内容 | `string` | - |
 | children | markdown 内容，与 content 作用一样 | `string` | - |
 | components | 自定义组件 | `Record<string, React.FC<Props>>`，查看[详情](/markdowns/components-cn) | - |
+| paragraphTag | 自定义段落渲染的标签。避免自定义组件导致 p 标签包裹 div 报错。 | `string` | `p` |
 | streaming | 流式渲染配置 | `SteamingOption` | - |
 | config | Marked.js extension | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |
 | className | 自定义 className | `string` | - |

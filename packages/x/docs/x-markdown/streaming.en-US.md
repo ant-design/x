@@ -1,6 +1,6 @@
 ---
 title: Themes
-order: 5
+order: 3
 ---
 
 ## How to Import Themes

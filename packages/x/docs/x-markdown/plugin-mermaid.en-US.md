@@ -1,10 +1,10 @@
 ---
 group:
   title: Plugins
-  order: 2
+  order: 4
 title: Mermaid
 subtitle: Diagram
-order: 5
+order: 6
 ---
 
 ## When to Use

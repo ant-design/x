@@ -1,9 +1,9 @@
 ---
 group:
   title: Plugins
-  order: 2
+  order: 1
 title: Overview
-order: 1
+order: 6
 ---
 
 Using plugins enables `@ant-design/x-markdown` to support more extended features, such as LaTeX, code highlighting, etc.

@@ -2,6 +2,8 @@ import { UserOutlined } from '@ant-design/icons';
 import { Bubble, Sender, useXAgent, useXChat } from '@ant-design/x';
 import { RolesType } from '@ant-design/x/es/bubble/BubbleList';
 import XMarkdown from '@ant-design/x-markdown';
+import HighlightCode from '@ant-design/x-markdown/plugins/HighlightCode';
+import { Button, Row } from 'antd';
 import React, { useState } from 'react';
 import '@ant-design/x-markdown/themes/light.css';
 
@@ -111,7 +113,9 @@ const roles: RolesType = {
   },
 };
 
-const App: React.FC = () => {
+const App = () => {
+  const [enableStreaming, setEnableStreaming] = useState(true);
+  const [enableAnimation, setEnableAnimation] = useState(true);
   const [hasNextChunk, setHasNextChunk] = useState(false);
   const [content, setContent] = React.useState('');
 
@@ -141,6 +145,23 @@ const App: React.FC = () => {
 
   return (
     <div style={{ minHeight: 500, display: 'flex', flexDirection: 'column' }}>
+      <Row justify="end" style={{ marginBottom: 24 }}>
+        <Button
+          style={{ marginRight: 8 }}
+          onClick={() => {
+            setEnableStreaming(!enableStreaming);
+          }}
+        >
+          Streaming Optimization: {enableStreaming ? 'On' : 'Off'}
+        </Button>
+        <Button
+          onClick={() => {
+            setEnableAnimation(!enableAnimation);
+          }}
+        >
+          Animation: {enableAnimation ? 'On' : 'Off'}
+        </Button>
+      </Row>
       <Bubble.List
         roles={roles}
         style={{ flex: 1 }}
@@ -155,9 +176,20 @@ const App: React.FC = () => {
                   <XMarkdown
                     className="x-markdown-light"
                     content={content}
+                    components={{
+                      code: (props: { class: string; children: string }) => {
+                        const { class: className, children } = props;
+                        const lang = className?.replace('language-', '');
+                        return <HighlightCode lang={lang}>{children}</HighlightCode>;
+                      },
+                      line: () => {
+                        console.log('custom-Tag');
+                        return 'customTag';
+                      },
+                    }}
                     streaming={{
-                      hasNextChunk: hasNextChunk,
-                      enableAnimation: true,
+                      hasNextChunk: hasNextChunk && enableStreaming,
+                      enableAnimation,
                     }}
                   />
                 ),

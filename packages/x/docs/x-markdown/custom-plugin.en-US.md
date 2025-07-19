@@ -1,7 +1,7 @@
 ---
 group:
   title: Plugins
-  order: 2
+  order: 5
 title: CustomPlugins
 order: 6
 ---

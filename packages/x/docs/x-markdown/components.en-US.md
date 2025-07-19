@@ -1,6 +1,6 @@
 ---
 title: Components
-order: 5
+order: 4
 ---
 
 Set `components` to map tag names to components.

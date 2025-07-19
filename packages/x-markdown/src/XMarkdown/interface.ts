@@ -29,6 +29,7 @@ interface XMarkdownProps {
   config?: MarkedExtension;
   rootClassName?: string;
   className?: string;
+  paragraphTag?: string;
   style?: CSSProperties;
 }
 
