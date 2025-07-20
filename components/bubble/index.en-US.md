@@ -56,7 +56,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | typing | Show message with typing motion | boolean \| { step?: number, interval?: number } | false |  |
 | variant | Style variant | `filled` \| `borderless` \| `outlined` \| `shadow` | `filled` |  |
 | loadingRender | Customize loading content | () => ReactNode | - |  |
-| messageRender | Customize display content | (content?: ContentType) => ReactNode | - |  |
+| messageRender | Customize display content | <ContentType extends [BubbleContentType](https://github.com/ant-design/x/blob/fc7a000f5ee0c3c75def63d2e47a328486b66465/components/bubble/interface.ts#L21) = string>(content?: ContentType) => ReactNode | - |  |
 | onTypingComplete | Callback when typing effect is completed. If typing is not set, it will be triggered immediately when rendering. | () => void | - |  |
 
 #### ContentType
