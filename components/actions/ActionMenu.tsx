@@ -1,8 +1,8 @@
 import { EllipsisOutlined } from '@ant-design/icons';
 import { Dropdown, MenuProps } from 'antd';
 import React from 'react';
-import { ActionsProps } from '.';
 import { useXProviderContext } from '../x-provider';
+import { ActionsProps } from '.';
 import { ActionItem, ItemType } from './interface';
 
 export const findItem = (keyPath: string[], items: ActionItem[]): ActionItem | null => {
@@ -31,7 +31,7 @@ const ActionMenu = (props: { item: ItemType } & Pick<ActionsProps, 'prefixCls' |
   const icon = item?.icon ?? <EllipsisOutlined />;
 
   const menuProps: MenuProps = {
-    items: children,
+    items: children as MenuProps['items'],
     onClick: ({ key, keyPath, domEvent }) => {
       if (findItem(keyPath, children)?.onItemClick) {
         findItem(keyPath, children)?.onItemClick?.(findItem(keyPath, children) as ActionItem);
