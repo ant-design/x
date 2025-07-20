@@ -126,7 +126,6 @@ describe('attachments', () => {
 
     if (uploadBtn) {
       fireEvent.click(uploadBtn);
-
       const fileInput = container.querySelector('input[type="file"]');
       if (fileInput) {
         fireEvent.change(fileInput, {
