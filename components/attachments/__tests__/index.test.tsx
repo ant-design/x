@@ -1,9 +1,9 @@
+import { GetProp } from 'antd';
 import React from 'react';
-
-import Attachments, { type AttachmentsProps } from '..';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
 import { fireEvent, render, waitFakeTimer } from '../../../tests/utils';
+import Attachments, { type AttachmentsProps } from '..';
 
 describe('attachments', () => {
   mountTest(() => <Attachments />);
@@ -97,5 +97,48 @@ describe('attachments', () => {
     );
 
     expect(container.querySelector('.ant-attachment-list-overflow-scrollY')).toBeTruthy();
+  });
+
+  it('maxCount', async () => {
+    const onChange = jest.fn();
+    const presetFiles = Array.from({ length: 5 }).map(
+      (_, index) =>
+        ({
+          uid: String(index),
+          name: `file-${index}.jpg`,
+          status: 'done',
+          thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+          url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+        }) as const,
+    );
+
+    const { container } = render(
+      renderAttachments({
+        maxCount: 5,
+        items: presetFiles,
+        onChange,
+      }),
+    );
+
+    expect(container.querySelectorAll('.ant-attachment-list-card')).toHaveLength(5);
+
+    const uploadBtn = container.querySelector('.ant-upload-wrapper .ant-btn');
+    expect(uploadBtn).toBeTruthy();
+
+    if (uploadBtn) {
+      fireEvent.click(uploadBtn);
+
+      const fileInput = container.querySelector('input[type="file"]');
+      if (fileInput) {
+        fireEvent.change(fileInput, {
+          target: { files: [new File(['test'], 'test-file.jpg', { type: 'image/jpeg' })] },
+        });
+        await waitFakeTimer();
+        if (onChange.mock.calls.length > 0) {
+          const lastCall = onChange.mock.calls[onChange.mock.calls.length - 1];
+          expect(lastCall[0].fileList.length).toBeLessThanOrEqual(5);
+        }
+      }
+    }
   });
 });

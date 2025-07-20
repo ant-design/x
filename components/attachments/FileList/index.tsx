@@ -4,8 +4,8 @@ import classnames from 'classnames';
 import { CSSMotionList } from 'rc-motion';
 import React from 'react';
 import type { Attachment } from '..';
-import SilentUploader from '../SilentUploader';
 import { AttachmentContext } from '../context';
+import SilentUploader from '../SilentUploader';
 import FileListCard from './FileListCard';
 
 export interface FileListProps {
@@ -15,6 +15,7 @@ export interface FileListProps {
   overflow?: 'scrollX' | 'scrollY' | 'wrap';
   upload: UploadProps;
   imageProps?: ImageProps;
+  maxCount?: number;
 
   // Semantic
   listClassName?: string;
@@ -42,8 +43,8 @@ export default function FileList(props: FileListProps) {
     uploadStyle,
     itemStyle,
     imageProps,
+    maxCount,
   } = props;
-
   const listCls = `${prefixCls}-list`;
 
   const containerRef = React.useRef<HTMLDivElement>(null);
@@ -150,7 +151,7 @@ export default function FileList(props: FileListProps) {
         }}
       </CSSMotionList>
       {!disabled && (
-        <SilentUploader upload={upload}>
+        <SilentUploader upload={upload} maxCount={maxCount}>
           <Button
             className={classnames(uploadClassName, `${listCls}-upload-btn`)}
             style={uploadStyle}
