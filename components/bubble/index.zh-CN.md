@@ -71,7 +71,7 @@ type ContentType = React.ReactNode | AnyObject | string | number;
 自定义类型使用
 
 ```tsx
-type CustomContentType {
+type CustomContentType = {
   ...
 }
 
