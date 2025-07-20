@@ -21,7 +21,7 @@ class Renderer {
 
         const renderElement = this.options.components?.[name];
         if (renderElement) {
-          const props = { ...attribs };
+          const props = { ...attribs, domNode };
           if (children) {
             props.children = domToReact(children);
           }

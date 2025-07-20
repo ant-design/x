@@ -1,31 +1,15 @@
 ---
-title: Themes
+title: Streaming Rendering
 order: 3
 ---
 
-## How to Import Themes
+## Introduction
 
-### Import from `@ant-design/x-markdown/themes/theme-name.css`
+Optimize streaming Markdown rendering in LLM scenarios by caching to hide markdown formatting and animation effects.
 
-```tsx
-import { XMarkdown } from '@ant-design/x-markdown';
-import '@ant-design/x-markdown/themes/light.css';
-
-return <XMarkdown className="x-markdown-light" content="" />;
-```
-
-### Browser Import
-
-Use script and link tags to directly import files in browser, and inject `className` to the component.
-
-```html
-<script src="**/dist/themes/light.css"></script>
-```
-
-## Demos
+## Code Demos
 
 <!-- prettier-ignore -->
-<code src="./demo/themes/light.tsx">light</code>
-<code src="./demo/themes/dark.tsx">dark</code>
-
-## Contributing Themes
+<code src="./demo/streaming/typing.tsx" description="Rendering with `Bubble`">Typing Effect</code>
+<code src="./demo/streaming/format.tsx" description="Hide Markdown formatting through caching">Caching</code>
+<code src="./demo/streaming/animation.tsx">Animation Effects</code>

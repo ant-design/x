@@ -1,10 +1,9 @@
 ---
 group:
   title: 插件集
-  order: 5
 title: CustomPlugins
 subtitle: 自定义插件
-order: 6
+order: 5
 ---
 
 ## 何时使用

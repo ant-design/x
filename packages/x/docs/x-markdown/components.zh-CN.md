@@ -8,5 +8,5 @@ order: 4
 ## 代码演示
 
 <!-- prettier-ignore -->
-<code src="./demo/supersets/Think/basic.tsx">渲染 [`Think`](https://x.ant.design/components/think-cn)</code>
-<code src="./demo/supersets/Think/tool.tsx">渲染 [`ThoughtChain`](https://x.ant.design/components/thought-chain-cn)</code>
+<code src="./demo/components/think.tsx" description="配合 `Think` 渲染思考过程">思考过程</code>
+<code src="./demo/components/thoughtChain.tsx" description="配合 `ThoughtChain` 渲染思考过程">思维链</code>

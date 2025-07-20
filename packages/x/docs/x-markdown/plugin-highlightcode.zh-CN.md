@@ -1,10 +1,9 @@
 ---
 group:
   title: 插件集
-  order: 3
 title: HighlightCode
 subtitle: 代码高亮
-order: 6
+order: 3
 ---
 
 ## 何时使用

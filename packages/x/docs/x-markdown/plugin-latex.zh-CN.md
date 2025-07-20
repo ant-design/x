@@ -1,10 +1,9 @@
 ---
 group:
   title: 插件集
-  order: 2
 title: Latex
 subtitle: 公式
-order: 6
+order: 2
 ---
 
 ## 何时使用

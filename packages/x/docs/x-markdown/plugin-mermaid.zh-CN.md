@@ -1,10 +1,9 @@
 ---
 group:
   title: 插件集
-  order: 4
 title: Mermaid
 subtitle: 图表
-order: 6
+order: 4
 ---
 
 ## 何时使用

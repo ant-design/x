@@ -6,12 +6,7 @@ import React, { useState } from 'react';
 import '@ant-design/x-markdown/themes/light.css';
 
 const fullContent = `
-
-Ant DesIgn X New AI Experience:
-
 The Ant Design team presents the RICH paradigm, crafting superior AI interface solutions and pioneering intelligent experiences.
-
-Here is introduce:
 
 <div align="center">
 

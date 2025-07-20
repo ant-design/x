@@ -1,10 +1,9 @@
 ---
 group:
   title: Plugins
-  order: 2
 title: Latex
 subtitle: Formula
-order: 6
+order: 2
 ---
 
 ## When to Use

@@ -1,9 +1,8 @@
 ---
 group:
   title: Plugins
-  order: 3
 title: HighlightCode
-order: 6
+order: 3
 ---
 
 ## When to Use

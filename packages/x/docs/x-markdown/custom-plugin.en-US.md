@@ -1,9 +1,8 @@
 ---
 group:
   title: Plugins
-  order: 5
 title: CustomPlugins
-order: 6
+order: 5
 ---
 
 ## When to Use

@@ -3,9 +3,9 @@ title: 主题
 order: 5
 ---
 
-## 如何引入插件
+## 如何引入主题
 
-### 可从 `@ant-design/x-markdown/themes/主题名.css` 引入插件。
+### 可从 `@ant-design/x-markdown/themes/主题名.css` 引入主题。
 
 ```tsx
 import XMarkdown from '@ant-design/x-markdown';
