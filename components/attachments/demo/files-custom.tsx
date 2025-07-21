@@ -32,7 +32,7 @@ const Demo = () => {
       uid: '3',
       name: 'pdf-file.pdf',
       size: 444444,
-      icon: <VideoCameraFilled />,
+      icon: <CopyFilled />,
       type: 'file',
     },
     {
@@ -46,15 +46,7 @@ const Demo = () => {
       uid: '5',
       name: 'audio-file.mp3',
       size: 777777,
-      icon: <CopyFilled />,
-      type: 'file',
-    },
-    {
-      uid: '6',
-      name: 'markdown-file.md',
-      size: 999999,
-      description: 'Custom description here',
-      icon: <CopyFilled />,
+      icon: <VideoCameraFilled />,
       type: 'file',
     },
   ];
