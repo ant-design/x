@@ -39,14 +39,14 @@ const Demo = () => {
       uid: '4',
       name: 'video-file.mp4',
       size: 666666,
-      icon: <AudioFilled />,
+      icon: <VideoCameraFilled />,
       type: 'file',
     },
     {
       uid: '5',
       name: 'audio-file.mp3',
       size: 777777,
-      icon: <VideoCameraFilled />,
+      icon: <AudioFilled />,
       type: 'file',
     },
   ];
