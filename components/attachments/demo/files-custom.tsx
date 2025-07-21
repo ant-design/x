@@ -26,9 +26,7 @@ const Demo = () => {
       name: 'image-file.png',
       size: 333333,
       icon: <FileImageFilled />,
-      type: 'image',
-      thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+      type: 'file',
     },
     {
       uid: '3',
