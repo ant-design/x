@@ -195,7 +195,7 @@ function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) 
           return [presetIcon.icon, presetIcon.color];
         }
       } else {
-        return [icon, DEFAULT_ICON_COLOR];
+        return [icon, undefined];
       }
     }
 
@@ -259,7 +259,7 @@ function FileListCard(props: FileListCardProps, ref: React.Ref<HTMLDivElement>) 
     // Preview Card style
     content = (
       <>
-        <div className={`${cardCls}-icon`} style={{ color: iconColor }}>
+        <div className={`${cardCls}-icon`} style={iconColor ? { color: iconColor } : undefined}>
           {finalIcon}
         </div>
         <div className={`${cardCls}-content`}>
