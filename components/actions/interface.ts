@@ -1,7 +1,11 @@
 import type { MenuItemProps, MenuProps } from 'antd';
 import type { ReactNode } from 'react';
 
-export interface SubItemType extends Pick<MenuItemProps, 'danger'> {
+type DataAttributes = {
+  [Key in `data-${string}`]: string | number;
+};
+
+export interface SubItemType extends Pick<MenuItemProps, 'danger'>, DataAttributes {
   /**
    * @desc 自定义操作的显示标签
    * @descEN Display label for the custom action.
@@ -24,7 +28,7 @@ export interface SubItemType extends Pick<MenuItemProps, 'danger'> {
   onItemClick?: (info?: ActionItem) => void;
 }
 
-export interface ItemType {
+export interface ItemType extends DataAttributes {
   /**
    * @desc 自定义操作的唯一标识
    * @descEN Unique identifier for the custom action.
