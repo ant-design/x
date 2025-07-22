@@ -6,7 +6,7 @@ const content = `
 
 <script>alert('This is a reflection XSS');</script>
 
-<img src="invalid.jpg" onerror="alert('XSS via onerror');" />
+<img src="invalid.jpg" alt="图片测试" onerror="alert('XSS via onerror');" />
 
 <a href="http://your-vulnerable-site.com/?param=<script>alert('XSS');</script>">Click here</a>
 
