@@ -1,22 +1,14 @@
-import React from 'react';
-
 import { fireEvent, render } from '@testing-library/react';
+import React from 'react';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
+import { act } from '../../../tests/utils';
 import Sender from '../index';
 
 describe('Sender Component', () => {
   mountTest(() => <Sender />);
 
   rtlTest(() => <Sender />);
-
-  beforeAll(() => {
-    jest.useFakeTimers();
-  });
-
-  afterAll(() => {
-    jest.useRealTimers();
-  });
 
   it('loading state', () => {
     const { asFragment } = render(<Sender loading />);
@@ -98,13 +90,11 @@ describe('Sender Component', () => {
   describe('submitType', () => {
     it('default', () => {
       const onSubmit = jest.fn();
-      const onPressKey = jest.fn();
-      const { container } = render(
-        <Sender value="bamboo" onSubmit={onSubmit} onKeyPress={onPressKey} />,
-      );
-      fireEvent.keyDown(container.querySelector('textarea')!, { key: 'Enter', shiftKey: false });
+      const { container } = render(<Sender value="bamboo" onSubmit={onSubmit} />);
+      act(() => {
+        fireEvent.keyUp(container.querySelector('textarea')!, { key: 'Enter', shiftKey: false });
+      });
       expect(onSubmit).toHaveBeenCalledWith('bamboo');
-      expect(onPressKey).toHaveBeenCalled();
     });
 
     it('shiftEnter', () => {
@@ -112,12 +102,14 @@ describe('Sender Component', () => {
       const { container } = render(
         <Sender value="bamboo" onSubmit={onSubmit} submitType="shiftEnter" />,
       );
-      fireEvent.keyDown(container.querySelector('textarea')!, { key: 'Enter', shiftKey: true });
+      act(() => {
+        fireEvent.keyUp(container.querySelector('textarea')!, { key: 'Enter', shiftKey: true });
+      });
       expect(onSubmit).toHaveBeenCalledWith('bamboo');
     });
   });
 
-  it('Sender.Header can be focus', () => {
+  it('Sender.Header not can be focus', () => {
     const { container } = render(
       <Sender
         header={
@@ -138,7 +130,7 @@ describe('Sender Component', () => {
 
     // Click on the content
     fireEvent.mouseDown(container.querySelector('.ant-sender-content')!);
-    expect(document.activeElement).toEqual(container.querySelector('textarea'));
+    expect(document.activeElement).not.toEqual(container.querySelector('textarea'));
   });
 
   it('readOnly', () => {

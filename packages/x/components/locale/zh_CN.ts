@@ -6,6 +6,10 @@ const localeValues: Required<Locale> = {
   Conversations: {
     create: '新对话',
   },
+  Actions: {
+    feedbackLike: '喜欢',
+    feedbackDislike: '不喜欢',
+  },
 };
 
 export default localeValues;

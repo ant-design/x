@@ -88,11 +88,11 @@ const Item: React.FC<ThoughtChainItemProp> = (props) => {
   const { getPrefixCls, direction } = useXProviderContext();
 
   const prefixCls = getPrefixCls('thought-chain', customizePrefixCls);
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+  const [hashId, cssVarCls] = useStyle(prefixCls);
   const itemCls = `${prefixCls}-item`;
 
   // ============================ Render ============================
-  return wrapCSSVar(
+  return (
     <div
       key={key || id}
       onClick={onClick}
@@ -109,7 +109,7 @@ const Item: React.FC<ThoughtChainItemProp> = (props) => {
         {title && <div className={classnames(`${itemCls}-title`)}>{title}</div>}
         {description && <div className={classnames(`${itemCls}-description`)}>{description}</div>}
       </div>
-    </div>,
+    </div>
   );
 };
 

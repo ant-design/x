@@ -1,3 +1,4 @@
+import type { CSSObject } from '@ant-design/cssinjs';
 import { unit } from '@ant-design/cssinjs/lib/util';
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import { genCollapseMotion } from '../../style/motion';
@@ -40,7 +41,7 @@ export interface ComponentToken {
 
 export interface ThoughtChainToken extends FullToken<'ThoughtChain'> {}
 
-const genThoughtChainStyle: GenerateStyle<ThoughtChainToken> = (token) => {
+const genThoughtChainStyle: GenerateStyle<ThoughtChainToken, CSSObject> = (token): CSSObject => {
   const { componentCls, calc } = token;
   return {
     [componentCls]: {

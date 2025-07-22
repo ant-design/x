@@ -4,16 +4,16 @@ exports[`renders components/use-x-agent/demo/custom.tsx correctly 1`] = `
 Array [
   <form
     autocomplete="off"
-    class="ant-form ant-form-vertical"
+    class="ant-form ant-form-vertical css-var-«R0» ant-form-css-var"
   >
     <div
-      class="ant-form-item"
+      class="ant-form-item css-var-«R0» ant-form-css-var"
     >
       <div
-        class="ant-row ant-form-item-row"
+        class="ant-row ant-form-item-row css-var-«R0»"
       >
         <div
-          class="ant-col ant-form-item-label"
+          class="ant-col ant-form-item-label css-var-«R0»"
         >
           <label
             class=""
@@ -24,7 +24,7 @@ Array [
           </label>
         </div>
         <div
-          class="ant-col ant-form-item-control"
+          class="ant-col ant-form-item-control css-var-«R0»"
         >
           <div
             class="ant-form-item-control-input"
@@ -33,7 +33,7 @@ Array [
               class="ant-form-item-control-input-content"
             >
               <input
-                class="ant-input ant-input-outlined"
+                class="ant-input ant-input-outlined css-var-«R0» ant-input-css-var"
                 id="question"
                 type="text"
                 value=""
@@ -44,7 +44,7 @@ Array [
       </div>
     </div>
     <button
-      class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
+      class="ant-btn css-var-«R0» ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
       type="submit"
     >
       <span>
@@ -53,11 +53,11 @@ Array [
     </button>
   </form>,
   <div
-    class="ant-divider ant-divider-horizontal"
+    class="ant-divider css-var-«R0» ant-divider-horizontal ant-divider-rail"
     role="separator"
   />,
   <article
-    class="ant-typography"
+    class="ant-typography css-var-«R0»"
   >
     <ul />
   </article>,
@@ -66,32 +66,32 @@ Array [
 
 exports[`renders components/use-x-agent/demo/model.tsx correctly 1`] = `
 <div
-  class="ant-splitter ant-splitter-horizontal"
+  class="ant-splitter ant-splitter-horizontal css-var-«R0» ant-splitter-css-var"
 >
   <div
     class="ant-splitter-panel"
     style="height:300px;flex-basis:auto;flex-grow:1"
   >
     <div
-      class="ant-splitter ant-splitter-vertical"
+      class="ant-splitter ant-splitter-vertical css-var-«R0» ant-splitter-css-var"
     >
       <div
         class="ant-splitter-panel"
         style="margin:0 16px;flex-basis:auto;flex-grow:1"
       >
         <div
-          class="ant-flex ant-flex-align-stretch ant-flex-gap-large ant-flex-vertical"
+          class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-gap-large ant-flex-vertical"
         >
           <input
-            class="ant-input ant-input-outlined"
+            class="ant-input ant-input-outlined css-var-«R0» ant-input-css-var"
             type="text"
             value="hello, who are u?"
           />
           <div
-            class="ant-flex ant-flex-gap-small"
+            class="ant-flex css-var-«R0» ant-flex-gap-small"
           >
             <button
-              class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
+              class="ant-btn css-var-«R0» ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
               type="button"
             >
               <span>
@@ -99,7 +99,7 @@ exports[`renders components/use-x-agent/demo/model.tsx correctly 1`] = `
               </span>
             </button>
             <button
-              class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
+              class="ant-btn css-var-«R0» ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
               disabled=""
               type="button"
             >
@@ -126,7 +126,7 @@ exports[`renders components/use-x-agent/demo/model.tsx correctly 1`] = `
         style="margin:16px;flex-basis:auto;flex-grow:1"
       >
         <div
-          class="ant-typography"
+          class="ant-typography css-var-«R0»"
         />
       </div>
     </div>
@@ -147,7 +147,7 @@ exports[`renders components/use-x-agent/demo/model.tsx correctly 1`] = `
     style="flex-basis:auto;flex-grow:1"
   >
     <div
-      class="ant-thought-chain ant-thought-chain-box"
+      class="ant-thought-chain css-var-«R0» ant-thought-chain-box"
       style="margin-left:16px"
     >
       <div
@@ -200,7 +200,7 @@ exports[`renders components/use-x-agent/demo/model.tsx correctly 1`] = `
               class="ant-thought-chain-node-content-box"
             >
               <div
-                class="ant-descriptions"
+                class="ant-descriptions css-var-«R0»"
               >
                 <div
                   class="ant-descriptions-view"
@@ -268,14 +268,14 @@ exports[`renders components/use-x-agent/demo/model.tsx correctly 1`] = `
 
 exports[`renders components/use-x-agent/demo/preset.tsx correctly 1`] = `
 <div
-  class="ant-splitter ant-splitter-horizontal"
+  class="ant-splitter ant-splitter-horizontal css-var-«R0» ant-splitter-css-var"
 >
   <div
     class="ant-splitter-panel"
     style="flex-basis:auto;flex-grow:1"
   >
     <button
-      class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
+      class="ant-btn css-var-«R0» ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
       type="button"
     >
       <span>
@@ -299,7 +299,7 @@ exports[`renders components/use-x-agent/demo/preset.tsx correctly 1`] = `
     style="flex-basis:auto;flex-grow:1"
   >
     <div
-      class="ant-thought-chain ant-thought-chain-box"
+      class="ant-thought-chain css-var-«R0» ant-thought-chain-box"
       style="margin-left:16px"
     >
       <div
@@ -347,7 +347,7 @@ exports[`renders components/use-x-agent/demo/preset.tsx correctly 1`] = `
               class="ant-thought-chain-node-content-box"
             >
               <div
-                class="ant-descriptions"
+                class="ant-descriptions css-var-«R0»"
               >
                 <div
                   class="ant-descriptions-view"
@@ -415,24 +415,24 @@ exports[`renders components/use-x-agent/demo/preset.tsx correctly 1`] = `
 
 exports[`renders components/use-x-agent/demo/request-options.tsx correctly 1`] = `
 <div
-  class="ant-splitter ant-splitter-horizontal"
+  class="ant-splitter ant-splitter-horizontal css-var-«R0» ant-splitter-css-var"
 >
   <div
     class="ant-splitter-panel"
     style="flex-basis:auto;flex-grow:1"
   >
     <div
-      class="ant-splitter ant-splitter-vertical"
+      class="ant-splitter ant-splitter-vertical css-var-«R0» ant-splitter-css-var"
     >
       <div
         class="ant-splitter-panel"
         style="flex-basis:auto;flex-grow:1"
       >
         <div
-          class="ant-flex ant-flex-gap-small"
+          class="ant-flex css-var-«R0» ant-flex-gap-small"
         >
           <button
-            class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
+            class="ant-btn css-var-«R0» ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
             type="button"
           >
             <span>
@@ -440,7 +440,7 @@ exports[`renders components/use-x-agent/demo/request-options.tsx correctly 1`] =
             </span>
           </button>
           <button
-            class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
+            class="ant-btn css-var-«R0» ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
             type="button"
           >
             <span>
@@ -498,7 +498,7 @@ exports[`renders components/use-x-agent/demo/request-options.tsx correctly 1`] =
     style="flex-basis:auto;flex-grow:1"
   >
     <div
-      class="ant-thought-chain ant-thought-chain-box"
+      class="ant-thought-chain css-var-«R0» ant-thought-chain-box"
       style="margin-left:16px"
     >
       <div
@@ -546,7 +546,7 @@ exports[`renders components/use-x-agent/demo/request-options.tsx correctly 1`] =
               class="ant-thought-chain-node-content-box"
             >
               <div
-                class="ant-descriptions"
+                class="ant-descriptions css-var-«R0»"
               >
                 <div
                   class="ant-descriptions-view"
@@ -614,14 +614,14 @@ exports[`renders components/use-x-agent/demo/request-options.tsx correctly 1`] =
 
 exports[`renders components/use-x-agent/demo/requestParams.tsx correctly 1`] = `
 <div
-  class="ant-splitter ant-splitter-horizontal"
+  class="ant-splitter ant-splitter-horizontal css-var-«R0» ant-splitter-css-var"
 >
   <div
     class="ant-splitter-panel"
     style="flex-basis:auto;flex-grow:1"
   >
     <button
-      class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
+      class="ant-btn css-var-«R0» ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
       type="button"
     >
       <span>
@@ -645,7 +645,7 @@ exports[`renders components/use-x-agent/demo/requestParams.tsx correctly 1`] = `
     style="flex-basis:auto;flex-grow:1"
   >
     <div
-      class="ant-thought-chain ant-thought-chain-box"
+      class="ant-thought-chain css-var-«R0» ant-thought-chain-box"
       style="margin-left:16px"
     >
       <div
@@ -693,7 +693,7 @@ exports[`renders components/use-x-agent/demo/requestParams.tsx correctly 1`] = `
               class="ant-thought-chain-node-content-box"
             >
               <div
-                class="ant-descriptions"
+                class="ant-descriptions css-var-«R0»"
               >
                 <div
                   class="ant-descriptions-view"

@@ -1,27 +1,47 @@
 import { CopyOutlined, RedoOutlined } from '@ant-design/icons';
 import { Actions, ActionsProps } from '@ant-design/x';
-import { message } from 'antd';
-import React from 'react';
+import { Flex, message, Pagination } from 'antd';
+import React, { useState } from 'react';
 
-const actionItems = [
-  {
-    key: 'retry',
-    icon: <RedoOutlined />,
-    label: 'Retry',
-  },
-  {
-    key: 'copy',
-    icon: <CopyOutlined />,
-    label: 'Copy',
-  },
-];
+const App: React.FC = () => {
+  // pagination
+  const [curPage, setCurPage] = useState(1);
 
-const Demo: React.FC = () => {
+  const actionItems = [
+    {
+      key: 'pagination',
+      actionRender: () => (
+        <Pagination
+          simple
+          current={curPage}
+          onChange={(page) => setCurPage(page)}
+          total={5}
+          pageSize={1}
+        />
+      ),
+    },
+    {
+      key: 'retry',
+      icon: <RedoOutlined />,
+      label: 'Retry',
+    },
+    {
+      key: 'copy',
+      icon: <CopyOutlined />,
+      label: 'Copy',
+    },
+  ];
   const onClick: ActionsProps['onClick'] = ({ keyPath }) => {
     // Logic for handling click events
     message.success(`you clicked ${keyPath.join(',')}`);
   };
-  return <Actions items={actionItems} onClick={onClick} variant="border" />;
+  return (
+    <Flex gap="middle" vertical>
+      <Actions items={actionItems} onClick={onClick} variant="outlined" />
+      <Actions items={actionItems} onClick={onClick} variant="filled" />
+      <Actions items={actionItems} onClick={onClick} variant="borderless" />
+    </Flex>
+  );
 };
 
-export default Demo;
+export default App;

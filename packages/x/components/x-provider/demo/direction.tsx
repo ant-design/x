@@ -8,6 +8,7 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import {
+  Actions,
   Bubble,
   Conversations,
   Prompts,
@@ -34,109 +35,118 @@ export default () => {
           <Radio.Button value="rtl">RTL</Radio.Button>
         </Radio.Group>
       </Flex>
-      <Card>
-        <XProvider direction={direction}>
-          <Flex style={{ height: 500 }} gap={12}>
-            <Conversations
-              style={{ width: 200 }}
-              defaultActiveKey="1"
-              items={[
-                {
-                  key: '1',
-                  label: 'Conversation - 1',
-                  icon: <GithubOutlined />,
-                },
-                {
-                  key: '2',
-                  label: 'Conversation - 2',
-                  icon: <AlipayCircleOutlined />,
-                },
-              ]}
-            />
-            <Divider type="vertical" style={{ height: '100%' }} />
-            <Flex vertical style={{ flex: 1 }} gap={8}>
-              <Bubble.List
-                style={{ flex: 1 }}
+
+      <Flex gap={12} vertical>
+        <Card>
+          <XProvider direction={direction}>
+            <Flex style={{ height: 500 }} gap={12}>
+              <Conversations
+                style={{ width: 200 }}
+                defaultActiveKey="1"
                 items={[
                   {
                     key: '1',
-                    placement: 'end',
-                    content: 'Hello Ant Design X!',
-                    avatar: { icon: <UserOutlined /> },
+                    label: 'Conversation - 1',
+                    icon: <GithubOutlined />,
                   },
                   {
                     key: '2',
-                    content: 'Hello World!',
-                  },
-                  {
-                    key: '3',
-                    content: '',
-                    loading: true,
+                    label: 'Conversation - 2',
+                    icon: <AlipayCircleOutlined />,
                   },
                 ]}
               />
-              <Prompts
+              <Divider orientation="vertical" style={{ height: '100%' }} />
+              <Flex vertical style={{ flex: 1 }} gap={8}>
+                <Bubble.List
+                  style={{ flex: 1 }}
+                  items={[
+                    {
+                      key: '1',
+                      placement: 'end',
+                      content: 'Hello Ant Design X!',
+                      avatar: { icon: <UserOutlined /> },
+                    },
+                    {
+                      key: '2',
+                      content: 'Hello World!',
+                    },
+                    {
+                      key: '3',
+                      content: '',
+                      loading: true,
+                    },
+                  ]}
+                />
+                <Prompts
+                  items={[
+                    {
+                      key: '1',
+                      icon: <BulbOutlined style={{ color: '#FFD700' }} />,
+                      label: 'Ignite Your Creativity',
+                    },
+                    {
+                      key: '2',
+                      icon: <SmileOutlined style={{ color: '#52C41A' }} />,
+                      label: 'Tell me a Joke',
+                    },
+                  ]}
+                />
+                <Suggestion items={[{ label: 'Write a report', value: 'report' }]}>
+                  {({ onTrigger, onKeyDown }) => {
+                    return (
+                      <Sender
+                        value={value}
+                        onChange={(nextVal) => {
+                          if (nextVal === '/') {
+                            onTrigger();
+                          } else if (!nextVal) {
+                            onTrigger(false);
+                          }
+                          setValue(nextVal);
+                        }}
+                        onKeyDown={onKeyDown}
+                        placeholder='Type "/" to trigger suggestion'
+                      />
+                    );
+                  }}
+                </Suggestion>
+              </Flex>
+              <Divider orientation="vertical" style={{ height: '100%' }} />
+              <ThoughtChain
+                style={{ width: 200 }}
                 items={[
                   {
-                    key: '1',
-                    icon: <BulbOutlined style={{ color: '#FFD700' }} />,
-                    label: 'Ignite Your Creativity',
+                    title: 'Hello Ant Design X!',
+                    status: 'success',
+                    description: 'status: success',
+                    icon: <CheckCircleOutlined />,
+                    content: 'Ant Design X help you build AI chat/platform app as ready-to-use 📦.',
                   },
                   {
-                    key: '2',
-                    icon: <SmileOutlined style={{ color: '#52C41A' }} />,
-                    label: 'Tell me a Joke',
+                    title: 'Hello World!',
+                    status: 'success',
+                    description: 'status: success',
+                    icon: <CheckCircleOutlined />,
+                  },
+                  {
+                    title: 'Pending...',
+                    status: 'loading',
+                    description: 'status: pending',
+                    icon: <LoadingOutlined />,
                   },
                 ]}
               />
-              <Suggestion items={[{ label: 'Write a report', value: 'report' }]}>
-                {({ onTrigger, onKeyDown }) => {
-                  return (
-                    <Sender
-                      value={value}
-                      onChange={(nextVal) => {
-                        if (nextVal === '/') {
-                          onTrigger();
-                        } else if (!nextVal) {
-                          onTrigger(false);
-                        }
-                        setValue(nextVal);
-                      }}
-                      onKeyDown={onKeyDown}
-                      placeholder='Type "/" to trigger suggestion'
-                    />
-                  );
-                }}
-              </Suggestion>
             </Flex>
-            <Divider type="vertical" style={{ height: '100%' }} />
-            <ThoughtChain
-              style={{ width: 200 }}
-              items={[
-                {
-                  title: 'Hello Ant Design X!',
-                  status: 'success',
-                  description: 'status: success',
-                  icon: <CheckCircleOutlined />,
-                  content: 'Ant Design X help you build AI chat/platform app as ready-to-use 📦.',
-                },
-                {
-                  title: 'Hello World!',
-                  status: 'success',
-                  description: 'status: success',
-                  icon: <CheckCircleOutlined />,
-                },
-                {
-                  title: 'Pending...',
-                  status: 'loading',
-                  description: 'status: pending',
-                  icon: <LoadingOutlined />,
-                },
-              ]}
-            />
-          </Flex>
-        </XProvider>
-      </Card>
+          </XProvider>
+        </Card>
+
+        <Card>
+          <XProvider direction={direction}>
+            <Actions.Feedback value={'default'} />
+          </XProvider>
+        </Card>
+      </Flex>
     </>
   );
 };

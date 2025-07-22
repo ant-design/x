@@ -58,7 +58,7 @@ const Demo = () => {
         onChange={setText}
         onSubmit={() => {
           notification.info({
-            message: 'Mock Submit',
+            title: 'Mock Submit',
             description: (
               <Typography>
                 <ul>

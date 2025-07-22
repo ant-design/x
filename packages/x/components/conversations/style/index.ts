@@ -170,6 +170,7 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
         flexDirection: 'column',
       },
       [`& ${componentCls}-group-collapsible-list`]: {
+        paddingBlockStart: token.paddingXXS,
         [`& ${componentCls}-item`]: {
           paddingInlineStart: token.paddingXL,
         },

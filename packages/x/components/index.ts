@@ -1,8 +1,7 @@
-export type { ActionsProps } from './actions';
-
 export { default as Actions } from './actions';
+export type { ActionsFeedbackProps } from './actions/ActionsFeedback';
+export type { ActionsProps } from './actions/interface';
 export type { AttachmentsProps } from './attachments';
-
 export { default as Attachments } from './attachments';
 export type { BubbleProps } from './bubble';
 export { default as Bubble } from './bubble';
@@ -11,7 +10,6 @@ export { default as Conversations } from './conversations';
 export type { XNotificationOpenArgs } from './notification';
 export { default as notification } from './notification';
 export type { PromptProps, PromptsProps } from './prompts';
-
 export { default as Prompts } from './prompts';
 export type { SenderProps } from './sender';
 export { default as Sender } from './sender';

@@ -8,7 +8,6 @@
     "prestart": "echo \"true\"  && exit 0",
     "pretest": "echo \"true\"  && exit 0",
     "precompile": "echo \"true\"  && exit 0",
-    "lint:deps": "antd-tools run deps-lint",
     "lint:md": "remark . -f -q",
     "lint:script": "biome lint",
     "test": "jest --config .jest.js --no-cache --collect-coverage",
@@ -35,7 +34,6 @@
     "react-dom": "^19.0.0"
   },
   "peerDependencies": {
-    "antd": "^5.20.3",
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
   }

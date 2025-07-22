@@ -1,6 +1,6 @@
 import { OpenAIOutlined, SyncOutlined } from '@ant-design/icons';
 import { Think } from '@ant-design/x';
-import { Global, css } from '@emotion/react';
+import { css, Global } from '@emotion/react';
 import { Button } from 'antd';
 import React from 'react';
 

@@ -1,9 +1,9 @@
 import {
-  NaNLinter,
-  StyleProvider,
   legacyNotSelectorLinter,
   logicalPropertiesLinter,
+  NaNLinter,
   parentSelectorLinter,
+  StyleProvider,
 } from '@ant-design/cssinjs';
 import chalk from 'chalk';
 /* eslint-disable no-console */
@@ -17,6 +17,7 @@ console.log(chalk.green(`🔥 Checking CSS-in-JS...`));
 
 let errorCount = 0;
 const originError = console.error;
+
 console.error = (msg: any) => {
   if (msg.includes('Warning: [Ant Design CSS-in-JS]')) {
     errorCount += 1;
@@ -32,7 +33,7 @@ async function checkCSSVar() {
     render(Component: any) {
       ReactDOMServer.renderToString(
         <StyleProvider linters={[NaNLinter]}>
-          <XProvider theme={{ cssVar: true, hashed: false }}>
+          <XProvider theme={{ hashed: false }}>
             <Component />
           </XProvider>
         </StyleProvider>,

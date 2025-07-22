@@ -1,4 +1,4 @@
-import { DownOutlined, LoadingOutlined } from '@ant-design/icons';
+import { LoadingOutlined, RightOutlined } from '@ant-design/icons';
 import classnames from 'classnames';
 import type { CSSMotionProps } from 'rc-motion';
 import CSSMotion from 'rc-motion';
@@ -67,7 +67,7 @@ const Think: React.FC<React.PropsWithChildren<ThinkProps>> = (props) => {
     leavedClassName: `${prefixCls}-content-hidden`,
   };
 
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+  const [hashId, cssVarCls] = useStyle(prefixCls);
 
   const mergedCls = classnames(
     prefixCls,
@@ -87,11 +87,12 @@ const Think: React.FC<React.PropsWithChildren<ThinkProps>> = (props) => {
     onChange: onExpand,
   });
 
-  return wrapCSSVar(
+  return (
     <div
       className={mergedCls}
       style={{
         ...contextConfig.style,
+        ...contextConfig.styles.root,
         ...style,
         ...styles.root,
       }}
@@ -105,7 +106,7 @@ const Think: React.FC<React.PropsWithChildren<ThinkProps>> = (props) => {
           <StatusIcon loading={loading} icon={icon} />
         </div>
         <div className={`${prefixCls}-status-text`}>{title}</div>
-        <DownOutlined className={`${prefixCls}-status-down-icon`} rotate={isExpand ? 180 : 0} />
+        <RightOutlined className={`${prefixCls}-status-down-icon`} rotate={isExpand ? 90 : 0} />
       </div>
       <CSSMotion {...collapseMotion} visible={isExpand}>
         {({ className: motionClassName, style }, motionRef) => (
@@ -118,7 +119,7 @@ const Think: React.FC<React.PropsWithChildren<ThinkProps>> = (props) => {
           </div>
         )}
       </CSSMotion>
-    </div>,
+    </div>
   );
 };
 

@@ -1,8 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Conversations Component Conversations component work 1`] = `
 <ul
-  class="ant-conversations"
+  class="ant-conversations css-var-root"
 >
   <li
     class="ant-conversations-item"
@@ -18,7 +18,7 @@ exports[`Conversations Component Conversations component work 1`] = `
       </div>
     </div>
     <span
-      class="ant-typography ant-conversations-label"
+      class="ant-typography ant-conversations-label css-var-root"
     >
       What is Ant Design X ?
     </span>
@@ -27,7 +27,7 @@ exports[`Conversations Component Conversations component work 1`] = `
     class="ant-conversations-item"
   >
     <span
-      class="ant-typography ant-conversations-label"
+      class="ant-typography ant-conversations-label css-var-root"
     >
       <div>
         Getting Started:
@@ -46,7 +46,7 @@ exports[`Conversations Component Conversations component work 1`] = `
     title="In Docker, use 🐑 Ollama and initialize"
   >
     <span
-      class="ant-typography ant-conversations-label"
+      class="ant-typography ant-conversations-label css-var-root"
     >
       In Docker, use 🐑 Ollama and initialize
     </span>
@@ -56,7 +56,7 @@ exports[`Conversations Component Conversations component work 1`] = `
     title="Expired, please go to the recycle bin to check"
   >
     <span
-      class="ant-typography ant-conversations-label"
+      class="ant-typography ant-conversations-label css-var-root"
     >
       Expired, please go to the recycle bin to check
     </span>
@@ -66,7 +66,7 @@ exports[`Conversations Component Conversations component work 1`] = `
     title="No key"
   >
     <span
-      class="ant-typography ant-conversations-label"
+      class="ant-typography ant-conversations-label css-var-root"
     >
       No key
     </span>
@@ -76,9 +76,11 @@ exports[`Conversations Component Conversations component work 1`] = `
 
 exports[`Conversations Component rtl render component should be rendered correctly in RTL direction 1`] = `
 <ul
-  class="ant-conversations ant-conversations-rtl"
+  class="ant-conversations css-var-root ant-conversations-rtl"
 >
-  <li>
+  <li
+    class=""
+  >
     <div
       class="ant-conversations-group-title"
     >
@@ -88,59 +90,61 @@ exports[`Conversations Component rtl render component should be rendered correct
         pinned
       </div>
     </div>
-  </li>
-  <div
-    class=""
-  >
-    <ul
-      class="ant-conversations-list"
+    <div
+      class=""
     >
-      <li
-        class="ant-conversations-item"
-        title="What is Ant Design X ?"
+      <ul
+        class="ant-conversations-list"
       >
-        <div
-          class="ant-conversations-icon"
+        <li
+          class="ant-conversations-item"
+          title="What is Ant Design X ?"
         >
           <div
-            id="conversation-test-id"
+            class="ant-conversations-icon"
           >
-            icon
+            <div
+              id="conversation-test-id"
+            >
+              icon
+            </div>
           </div>
-        </div>
-        <span
-          class="ant-typography ant-typography-rtl ant-conversations-label"
-        >
-          What is Ant Design X ?
-        </span>
-        <span
-          aria-label="ellipsis"
-          class="anticon anticon-ellipsis ant-dropdown-trigger ant-dropdown-rtl ant-conversations-menu-icon"
-          role="img"
-          tabindex="-1"
-        >
-          <svg
-            aria-hidden="true"
-            data-icon="ellipsis"
-            fill="currentColor"
-            focusable="false"
-            height="1em"
-            viewBox="64 64 896 896"
-            width="1em"
+          <span
+            class="ant-typography ant-typography-rtl ant-conversations-label css-var-root"
           >
-            <path
-              d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
-            />
-          </svg>
-        </span>
-      </li>
-    </ul>
-  </div>
+            What is Ant Design X ?
+          </span>
+          <div>
+            <span
+              aria-label="ellipsis"
+              class="anticon anticon-ellipsis ant-dropdown-trigger ant-dropdown-rtl ant-conversations-menu-icon"
+              role="img"
+              tabindex="-1"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="ellipsis"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+                />
+              </svg>
+            </span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </li>
   <li
     class="ant-conversations-item"
   >
     <span
-      class="ant-typography ant-typography-rtl ant-conversations-label"
+      class="ant-typography ant-typography-rtl ant-conversations-label css-var-root"
     >
       <div>
         Getting Started:
@@ -153,63 +157,67 @@ exports[`Conversations Component rtl render component should be rendered correct
         </a>
       </div>
     </span>
-    <span
-      aria-label="ellipsis"
-      class="anticon anticon-ellipsis ant-dropdown-trigger ant-dropdown-rtl ant-conversations-menu-icon"
-      role="img"
-      tabindex="-1"
-    >
-      <svg
-        aria-hidden="true"
-        data-icon="ellipsis"
-        fill="currentColor"
-        focusable="false"
-        height="1em"
-        viewBox="64 64 896 896"
-        width="1em"
+    <div>
+      <span
+        aria-label="ellipsis"
+        class="anticon anticon-ellipsis ant-dropdown-trigger ant-dropdown-rtl ant-conversations-menu-icon"
+        role="img"
+        tabindex="-1"
       >
-        <path
-          d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
-        />
-      </svg>
-    </span>
+        <svg
+          aria-hidden="true"
+          data-icon="ellipsis"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          />
+        </svg>
+      </span>
+    </div>
   </li>
   <li
     class="ant-conversations-item"
     title="In Docker, use 🐑 Ollama and initialize"
   >
     <span
-      class="ant-typography ant-typography-rtl ant-conversations-label"
+      class="ant-typography ant-typography-rtl ant-conversations-label css-var-root"
     >
       In Docker, use 🐑 Ollama and initialize
     </span>
-    <span
-      aria-label="ellipsis"
-      class="anticon anticon-ellipsis ant-dropdown-trigger ant-dropdown-rtl ant-conversations-menu-icon"
-      role="img"
-      tabindex="-1"
-    >
-      <svg
-        aria-hidden="true"
-        data-icon="ellipsis"
-        fill="currentColor"
-        focusable="false"
-        height="1em"
-        viewBox="64 64 896 896"
-        width="1em"
+    <div>
+      <span
+        aria-label="ellipsis"
+        class="anticon anticon-ellipsis ant-dropdown-trigger ant-dropdown-rtl ant-conversations-menu-icon"
+        role="img"
+        tabindex="-1"
       >
-        <path
-          d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
-        />
-      </svg>
-    </span>
+        <svg
+          aria-hidden="true"
+          data-icon="ellipsis"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          />
+        </svg>
+      </span>
+    </div>
   </li>
   <li
     class="ant-conversations-item ant-conversations-item-disabled"
     title="Expired, please go to the recycle bin to check"
   >
     <span
-      class="ant-typography ant-typography-rtl ant-conversations-label"
+      class="ant-typography ant-typography-rtl ant-conversations-label css-var-root"
     >
       Expired, please go to the recycle bin to check
     </span>
@@ -219,7 +227,7 @@ exports[`Conversations Component rtl render component should be rendered correct
     title="No key"
   >
     <span
-      class="ant-typography ant-typography-rtl ant-conversations-label"
+      class="ant-typography ant-typography-rtl ant-conversations-label css-var-root"
     >
       No key
     </span>

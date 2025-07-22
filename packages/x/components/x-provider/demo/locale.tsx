@@ -4,14 +4,15 @@ import {
   FileSearchOutlined,
   SignatureOutlined,
 } from '@ant-design/icons';
-import { Conversations, XProvider } from '@ant-design/x';
 import type { XProviderProps } from '@ant-design/x';
+import { Actions, Conversations, XProvider } from '@ant-design/x';
 import enUS_X from '@ant-design/x/locale/en_US';
 import zhCN_X from '@ant-design/x/locale/zh_CN';
 import { Card, Flex, Radio, RadioChangeEvent, Typography } from 'antd';
 import enUS from 'antd/locale/en_US';
 import zhCN from 'antd/locale/zh_CN';
 import React, { useState } from 'react';
+
 type Locale = XProviderProps['locale'];
 
 const items_locale = {
@@ -49,39 +50,48 @@ export default () => {
           <Radio.Button value="zh">中文</Radio.Button>
         </Radio.Group>
       </Flex>
-      <Card>
-        <XProvider locale={locale}>
-          <Conversations
-            style={{ width: 200 }}
-            defaultActiveKey="write"
-            creation={{
-              onClick: () => {},
-            }}
-            items={[
-              {
-                key: 'write',
-                label: items_locale[localeType].write,
-                icon: <SignatureOutlined />,
-              },
-              {
-                key: 'coding',
-                label: items_locale[localeType].coding,
-                icon: <CodeOutlined />,
-              },
-              {
-                key: 'createImage',
-                label: items_locale[localeType].createImage,
-                icon: <FileImageOutlined />,
-              },
-              {
-                key: 'deepSearch',
-                label: items_locale[localeType].deepSearch,
-                icon: <FileSearchOutlined />,
-              },
-            ]}
-          />
-        </XProvider>
-      </Card>
+
+      <Flex gap={12} vertical>
+        <Card>
+          <XProvider locale={locale}>
+            <Conversations
+              style={{ width: 200 }}
+              defaultActiveKey="write"
+              creation={{
+                onClick: () => {},
+              }}
+              items={[
+                {
+                  key: 'write',
+                  label: items_locale[localeType].write,
+                  icon: <SignatureOutlined />,
+                },
+                {
+                  key: 'coding',
+                  label: items_locale[localeType].coding,
+                  icon: <CodeOutlined />,
+                },
+                {
+                  key: 'createImage',
+                  label: items_locale[localeType].createImage,
+                  icon: <FileImageOutlined />,
+                },
+                {
+                  key: 'deepSearch',
+                  label: items_locale[localeType].deepSearch,
+                  icon: <FileSearchOutlined />,
+                },
+              ]}
+            />
+          </XProvider>
+        </Card>
+
+        <Card>
+          <XProvider locale={locale}>
+            <Actions.Feedback value={'default'} />
+          </XProvider>
+        </Card>
+      </Flex>
     </>
   );
 };

@@ -1,6 +1,6 @@
 import { BugOutlined, CodeOutlined, ExperimentOutlined } from '@ant-design/icons';
 import { XProvider } from '@ant-design/x';
-import { Global, css } from '@emotion/react';
+import { css, Global } from '@emotion/react';
 import { Button, Tooltip } from 'antd';
 import { DumiDemo, DumiDemoGrid, FormattedMessage } from 'dumi';
 import React, { Suspense } from 'react';
@@ -112,7 +112,7 @@ const DemoWrapper: typeof DumiDemoGrid = ({ items }) => {
           />
         </Tooltip>
       </span>
-      <XProvider theme={{ cssVar: enableCssVar, hashed: !enableCssVar }}>
+      <XProvider theme={{ hashed: !enableCssVar }}>
         <DumiDemoGrid
           items={demos}
           demoRender={(item) => (

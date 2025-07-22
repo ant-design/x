@@ -1,27 +1,22 @@
+import { Divider } from 'antd';
 import classnames from 'classnames';
-import React from 'react';
-
-import GroupTitle, { GroupTitleContext } from './GroupTitle';
-import ConversationsItem, { type ConversationsItemProps } from './Item';
-
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
+import pickAttrs from 'rc-util/lib/pickAttrs';
+import React from 'react';
+import useCollapsible from '../_util/hooks/use-collapsible';
+import useShortcutKeys, { ShortcutKeyActionType } from '../_util/hooks/use-shortcut-keys';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
+import type { ShortcutKeys } from '../_util/type';
 import { useXProviderContext } from '../x-provider';
+import type { CreationProps } from './Creation';
+import Creation from './Creation';
+import GroupTitle, { GroupTitleContext } from './GroupTitle';
 import useGroupable from './hooks/useGroupable';
-
+import ConversationsItem, { type ConversationsItemProps } from './Item';
+import type { ConversationItemType, DividerItemType, GroupableProps, ItemType } from './interface';
 import useStyle from './style';
 
-import pickAttrs from 'rc-util/lib/pickAttrs';
-import type { ConversationItemType, DividerItemType, GroupableProps, ItemType } from './interface';
-
-import useShortcutKeys, { ShortcutKeyActionType } from '../_util/hooks/use-shortcut-keys';
-import type { ShortcutKeys } from '../_util/type';
-
-import { Divider } from 'antd';
-import useCollapsible from '../_util/hooks/use-collapsible';
-import Creation from './Creation';
-import type { CreationProps } from './Creation';
-
+type SemanticType = 'root' | 'creation' | 'group' | 'item';
 /**
  * @desc 会话列表组件参数
  * @descEN Props for the conversation list component
@@ -69,19 +64,13 @@ export interface ConversationsProps extends React.HTMLAttributes<HTMLUListElemen
    * @desc 语义化结构 style
    * @descEN Semantic structure styles
    */
-  styles?: {
-    creation?: React.CSSProperties;
-    item?: React.CSSProperties;
-  };
+  styles?: Partial<Record<SemanticType, React.CSSProperties>>;
 
   /**
    * @desc 语义化结构 className
    * @descEN Semantic structure class names
    */
-  classNames?: {
-    creation?: string;
-    item?: string;
-  };
+  classNames?: Partial<Record<SemanticType, string>>;
 
   /**
    * @desc 自定义前缀
@@ -164,12 +153,14 @@ const Conversations: React.FC<ConversationsProps> & CompoundedComponent = (props
   const contextConfig = useXComponentConfig('conversations');
 
   // ============================ Style ============================
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+  const [hashId, cssVarCls] = useStyle(prefixCls);
 
   const mergedCls = classnames(
     prefixCls,
     contextConfig.className,
+    contextConfig.classNames.root,
     className,
+    classNames.root,
     rootClassName,
     hashId,
     cssVarCls,
@@ -254,18 +245,20 @@ const Conversations: React.FC<ConversationsProps> & CompoundedComponent = (props
   );
 
   // ============================ Render ============================
-  return wrapCSSVar(
+  return (
     <ul
       {...domProps}
       style={{
         ...contextConfig.style,
         ...style,
+        ...contextConfig.styles.root,
+        ...styles.root,
       }}
       className={mergedCls}
     >
       {!!creation && (
         <Creation
-          className={classnames(classNames.creation, contextConfig.classNames.creation)}
+          className={classnames(contextConfig.classNames.creation, classNames.creation)}
           style={{
             ...contextConfig.styles.creation,
             ...styles.creation,
@@ -289,11 +282,12 @@ const Conversations: React.FC<ConversationsProps> & CompoundedComponent = (props
               collapseMotion,
             }}
           >
-            <GroupTitle>
+            <GroupTitle className={classnames(contextConfig.classNames.group, classNames.group)}>
               <ul
                 className={classnames(`${prefixCls}-list`, {
                   [`${prefixCls}-group-collapsible-list`]: groupInfo.collapsible,
                 })}
+                style={{ ...contextConfig.styles.group, ...styles.group }}
               >
                 {itemNode}
               </ul>
@@ -303,7 +297,7 @@ const Conversations: React.FC<ConversationsProps> & CompoundedComponent = (props
           itemNode
         );
       })}
-    </ul>,
+    </ul>
   );
 };
 

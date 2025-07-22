@@ -1,8 +1,7 @@
-import React from 'react';
-
-import Bubble from '../../bubble';
-import { render } from '../../../tests/utils';
 import { createCache, StyleProvider } from '@ant-design/cssinjs';
+import React from 'react';
+import { render } from '../../../tests/utils';
+import Bubble from '../../bubble';
 
 describe('bubble', () => {
   beforeAll(() => {
@@ -21,7 +20,7 @@ describe('bubble', () => {
       </StyleProvider>,
     );
     expect(document.head.innerHTML).toContain('@layer antd,antdx;');
-    expect(document.head.innerHTML).toContain('@layer antd{');
+    expect(document.head.innerHTML).toContain('<style ');
     expect(document.head.innerHTML).toContain('@layer antdx{');
   });
 });

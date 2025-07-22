@@ -5,8 +5,8 @@ import themeTest from '../../../tests/shared/themeTest';
 import { fireEvent, render } from '../../../tests/utils';
 import { Bubble, Conversations } from '../../index';
 import zhCN_X from '../../locale/zh_CN';
-import XProvider from '../index';
 import type { XProviderProps } from '../index';
+import XProvider from '../index';
 
 const xProviderProps: XProviderProps = {
   bubble: {

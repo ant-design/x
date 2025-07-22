@@ -18,7 +18,7 @@ export interface TypingOption {
 
 type SemanticType = 'avatar' | 'content' | 'header' | 'footer';
 
-export type BubbleContentType = React.ReactNode | AnyObject | React.ReactNode | string | number;
+export type BubbleContentType = React.ReactNode | AnyObject | string | number;
 
 type SlotInfoType = {
   key?: string | number;

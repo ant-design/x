@@ -1,17 +1,17 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`renders components/bubble/demo/avatar-and-placement.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-«ri» ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«ri» ant-bubble-start"
   >
     <div
       class="ant-bubble-avatar"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon"
+        class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«ri» ant-avatar-css-var"
         style="color: #f56a00; background-color: #fde3cf;"
       >
         <span
@@ -42,14 +42,14 @@ exports[`renders components/bubble/demo/avatar-and-placement.tsx extend context 
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«ri» ant-bubble-start"
   >
     <div
       class="ant-bubble-avatar"
       style="visibility: hidden;"
     >
       <span
-        class="ant-avatar ant-avatar-circle"
+        class="ant-avatar ant-avatar-circle css-var-«ri» ant-avatar-css-var"
       >
         <span
           class="ant-avatar-string"
@@ -64,13 +64,13 @@ exports[`renders components/bubble/demo/avatar-and-placement.tsx extend context 
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-end"
+    class="ant-bubble css-var-«ri» ant-bubble-end"
   >
     <div
       class="ant-bubble-avatar"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon"
+        class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«ri» ant-avatar-css-var"
         style="color: #fff; background-color: #87d068;"
       >
         <span
@@ -101,14 +101,14 @@ exports[`renders components/bubble/demo/avatar-and-placement.tsx extend context 
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-end"
+    class="ant-bubble css-var-«ri» ant-bubble-end"
   >
     <div
       class="ant-bubble-avatar"
       style="visibility: hidden;"
     >
       <span
-        class="ant-avatar ant-avatar-circle"
+        class="ant-avatar ant-avatar-circle css-var-«ri» ant-avatar-css-var"
       >
         <span
           class="ant-avatar-string"
@@ -129,7 +129,7 @@ exports[`renders components/bubble/demo/avatar-and-placement.tsx extend context 
 
 exports[`renders components/bubble/demo/basic.tsx extend context correctly 1`] = `
 <div
-  class="ant-bubble ant-bubble-start"
+  class="ant-bubble css-var-«rh» ant-bubble-start"
 >
   <div
     class="ant-bubble-content ant-bubble-content-filled"
@@ -146,13 +146,13 @@ exports[`renders components/bubble/demo/custom-content.tsx extend context correc
   style="height: 100px;"
 >
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«rg» ant-bubble-start"
   >
     <div
       class="ant-bubble-avatar"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon"
+        class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«rg» ant-avatar-css-var"
       >
         <span
           aria-label="user"
@@ -182,10 +182,10 @@ exports[`renders components/bubble/demo/custom-content.tsx extend context correc
         class="ant-bubble-content ant-bubble-content-filled"
       >
         <div
-          class="ant-flex ant-flex-align-center ant-flex-gap-middle"
+          class="ant-flex css-var-«rg» ant-flex-align-center ant-flex-gap-middle"
         >
           <div
-            class="ant-image"
+            class="ant-image css-var-«rg» ant-image-css-var"
             style="height: 50px;"
           >
             <img
@@ -195,10 +195,10 @@ exports[`renders components/bubble/demo/custom-content.tsx extend context correc
               style="height: 50px;"
             />
             <div
-              class="ant-image-mask"
+              class="ant-image-cover"
             >
               <div
-                class="ant-image-mask-info"
+                class="ant-image-cover-info"
               >
                 <span
                   aria-label="eye"
@@ -234,7 +234,7 @@ exports[`renders components/bubble/demo/custom-content.tsx extend context correc
         class="ant-bubble-footer"
       >
         <button
-          class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text"
+          class="ant-btn css-var-«rg» ant-btn-text ant-btn-color-default ant-btn-variant-text"
           type="button"
         >
           <span>
@@ -254,17 +254,23 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
   class="acss-1ozji6v"
 >
   <div
-    class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center"
+    class="ant-divider css-var-«ra» ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center"
     role="separator"
   >
+    <div
+      class="ant-divider-rail ant-divider-rail-start"
+    />
     <span
       class="ant-divider-inner-text"
     >
       Basic
     </span>
+    <div
+      class="ant-divider-rail ant-divider-rail-end"
+    />
   </div>
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«ra» ant-bubble-start"
   >
     <div
       class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-corner"
@@ -273,7 +279,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«ra» ant-bubble-start"
   >
     <div
       class="ant-bubble-content ant-bubble-content-borderless"
@@ -282,7 +288,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«ra» ant-bubble-start"
   >
     <div
       class="ant-bubble-content ant-bubble-content-outlined ant-bubble-content-round"
@@ -295,7 +301,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«ra» ant-bubble-start"
   >
     <div
       class="ant-bubble-content ant-bubble-content-shadow"
@@ -308,17 +314,23 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
     </div>
   </div>
   <div
-    class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center"
+    class="ant-divider css-var-«ra» ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center"
     role="separator"
   >
+    <div
+      class="ant-divider-rail ant-divider-rail-start"
+    />
     <span
       class="ant-divider-inner-text"
     >
       Basic placement: end
     </span>
+    <div
+      class="ant-divider-rail ant-divider-rail-end"
+    />
   </div>
   <div
-    class="ant-bubble ant-bubble-end"
+    class="ant-bubble css-var-«ra» ant-bubble-end"
   >
     <div
       class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-corner"
@@ -327,7 +339,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-end"
+    class="ant-bubble css-var-«ra» ant-bubble-end"
   >
     <div
       class="ant-bubble-content ant-bubble-content-borderless"
@@ -336,7 +348,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-end"
+    class="ant-bubble css-var-«ra» ant-bubble-end"
   >
     <div
       class="ant-bubble-content ant-bubble-content-outlined ant-bubble-content-round"
@@ -349,7 +361,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-end"
+    class="ant-bubble css-var-«ra» ant-bubble-end"
   >
     <div
       class="ant-bubble-content ant-bubble-content-shadow"
@@ -362,23 +374,29 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
     </div>
   </div>
   <div
-    class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center"
+    class="ant-divider css-var-«ra» ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center"
     role="separator"
   >
+    <div
+      class="ant-divider-rail ant-divider-rail-start"
+    />
     <span
       class="ant-divider-inner-text"
     >
       Custom
     </span>
+    <div
+      class="ant-divider-rail ant-divider-rail-end"
+    />
   </div>
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«ra» ant-bubble-start"
   >
     <div
       class="ant-bubble-avatar acss-xvmduq"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-image"
+        class="ant-avatar ant-avatar-circle ant-avatar-image css-var-«ra» ant-avatar-css-var"
       >
         <img
           src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
@@ -408,13 +426,13 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«ra» ant-bubble-start"
   >
     <div
       class="ant-bubble-avatar acss-xvmduq"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-image"
+        class="ant-avatar ant-avatar-circle ant-avatar-image css-var-«ra» ant-avatar-css-var"
       >
         <img
           src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
@@ -444,13 +462,13 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«ra» ant-bubble-start"
   >
     <div
       class="ant-bubble-avatar acss-xvmduq"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-image"
+        class="ant-avatar ant-avatar-circle ant-avatar-image css-var-«ra» ant-avatar-css-var"
       >
         <img
           src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
@@ -484,13 +502,13 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«ra» ant-bubble-start"
   >
     <div
       class="ant-bubble-avatar acss-xvmduq"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-image"
+        class="ant-avatar ant-avatar-circle ant-avatar-image css-var-«ra» ant-avatar-css-var"
       >
         <img
           src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
@@ -524,23 +542,29 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
     </div>
   </div>
   <div
-    class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center"
+    class="ant-divider css-var-«ra» ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center"
     role="separator"
   >
+    <div
+      class="ant-divider-rail ant-divider-rail-start"
+    />
     <span
       class="ant-divider-inner-text"
     >
       Custom placement: end
     </span>
+    <div
+      class="ant-divider-rail ant-divider-rail-end"
+    />
   </div>
   <div
-    class="ant-bubble ant-bubble-end"
+    class="ant-bubble css-var-«ra» ant-bubble-end"
   >
     <div
       class="ant-bubble-avatar acss-xvmduq"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-image"
+        class="ant-avatar ant-avatar-circle ant-avatar-image css-var-«ra» ant-avatar-css-var"
       >
         <img
           src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
@@ -570,13 +594,13 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-end"
+    class="ant-bubble css-var-«ra» ant-bubble-end"
   >
     <div
       class="ant-bubble-avatar acss-xvmduq"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-image"
+        class="ant-avatar ant-avatar-circle ant-avatar-image css-var-«ra» ant-avatar-css-var"
       >
         <img
           src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
@@ -606,13 +630,13 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-end"
+    class="ant-bubble css-var-«ra» ant-bubble-end"
   >
     <div
       class="ant-bubble-avatar acss-xvmduq"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-image"
+        class="ant-avatar ant-avatar-circle ant-avatar-image css-var-«ra» ant-avatar-css-var"
       >
         <img
           src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
@@ -646,13 +670,13 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-end"
+    class="ant-bubble css-var-«ra» ant-bubble-end"
   >
     <div
       class="ant-bubble-avatar acss-xvmduq"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-image"
+        class="ant-avatar ant-avatar-circle ant-avatar-image css-var-«ra» ant-avatar-css-var"
       >
         <img
           src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
@@ -686,26 +710,32 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
     </div>
   </div>
   <div
-    class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center"
+    class="ant-divider css-var-«ra» ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center"
     role="separator"
   >
+    <div
+      class="ant-divider-rail ant-divider-rail-start"
+    />
     <span
       class="ant-divider-inner-text"
     >
       List
     </span>
+    <div
+      class="ant-divider-rail ant-divider-rail-end"
+    />
   </div>
   <div
-    class="ant-bubble-list ant-bubble-list-reach-end"
+    class="ant-bubble-list css-var-«ra» ant-bubble-list-reach-end"
   >
     <div
-      class="ant-bubble ant-bubble-start"
+      class="ant-bubble css-var-«ra» ant-bubble-start"
     >
       <div
         class="ant-bubble-avatar acss-xvmduq"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-image"
+          class="ant-avatar ant-avatar-circle ant-avatar-image css-var-«ra» ant-avatar-css-var"
         >
           <img
             src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
@@ -735,13 +765,13 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
       </div>
     </div>
     <div
-      class="ant-bubble ant-bubble-end"
+      class="ant-bubble css-var-«ra» ant-bubble-end"
     >
       <div
         class="ant-bubble-avatar acss-xvmduq"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-image"
+          class="ant-avatar ant-avatar-circle ant-avatar-image css-var-«ra» ant-avatar-css-var"
         >
           <img
             src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
@@ -771,13 +801,13 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
       </div>
     </div>
     <div
-      class="ant-bubble ant-bubble-start"
+      class="ant-bubble css-var-«ra» ant-bubble-start"
     >
       <div
         class="ant-bubble-avatar acss-xvmduq"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-image"
+          class="ant-avatar ant-avatar-circle ant-avatar-image css-var-«ra» ant-avatar-css-var"
         >
           <img
             src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
@@ -811,13 +841,13 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
       </div>
     </div>
     <div
-      class="ant-bubble ant-bubble-end"
+      class="ant-bubble css-var-«ra» ant-bubble-end"
     >
       <div
         class="ant-bubble-avatar acss-xvmduq"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-image"
+          class="ant-avatar ant-avatar-circle ant-avatar-image css-var-«ra» ant-avatar-css-var"
         >
           <img
             src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
@@ -852,21 +882,27 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
     </div>
   </div>
   <div
-    class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center"
+    class="ant-divider css-var-«ra» ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center"
     role="separator"
   >
+    <div
+      class="ant-divider-rail ant-divider-rail-start"
+    />
     <span
       class="ant-divider-inner-text"
     >
       List with roles
     </span>
+    <div
+      class="ant-divider-rail ant-divider-rail-end"
+    />
   </div>
   <div
-    class="ant-flex ant-flex-gap-small"
+    class="ant-flex css-var-«ra» ant-flex-gap-small"
     style="align-self: flex-end;"
   >
     <button
-      class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-«ra» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -874,7 +910,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
       </span>
     </button>
     <button
-      class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-«ra» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -882,7 +918,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
       </span>
     </button>
     <button
-      class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-«ra» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       disabled=""
       type="button"
     >
@@ -892,18 +928,18 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
     </button>
   </div>
   <div
-    class="ant-bubble-list ant-bubble-list-reach-end"
+    class="ant-bubble-list css-var-«ra» ant-bubble-list-reach-end"
     style="max-height: 300px;"
   >
     <div
-      class="ant-bubble ant-bubble-end"
+      class="ant-bubble css-var-«ra» ant-bubble-end"
       role="user"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-image"
+          class="ant-avatar ant-avatar-circle ant-avatar-image css-var-«ra» ant-avatar-css-var"
         >
           <img
             src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
@@ -938,7 +974,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
       </div>
     </div>
     <div
-      class="ant-bubble ant-bubble-start"
+      class="ant-bubble css-var-«ra» ant-bubble-start"
       role="ai"
       style="max-width: 600px;"
     >
@@ -946,7 +982,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-image"
+          class="ant-avatar ant-avatar-circle ant-avatar-image css-var-«ra» ant-avatar-css-var"
         >
           <img
             src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
@@ -977,14 +1013,14 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
       </div>
     </div>
     <div
-      class="ant-bubble ant-bubble-end"
+      class="ant-bubble css-var-«ra» ant-bubble-end"
       role="user"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-image"
+          class="ant-avatar ant-avatar-circle ant-avatar-image css-var-«ra» ant-avatar-css-var"
         >
           <img
             src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
@@ -1019,7 +1055,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
       </div>
     </div>
     <div
-      class="ant-bubble ant-bubble-start"
+      class="ant-bubble css-var-«ra» ant-bubble-start"
       role="ai"
       style="max-width: 600px;"
     >
@@ -1027,7 +1063,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-image"
+          class="ant-avatar ant-avatar-circle ant-avatar-image css-var-«ra» ant-avatar-css-var"
         >
           <img
             src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
@@ -1058,14 +1094,14 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
       </div>
     </div>
     <div
-      class="ant-bubble ant-bubble-end"
+      class="ant-bubble css-var-«ra» ant-bubble-end"
       role="user"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-image"
+          class="ant-avatar ant-avatar-circle ant-avatar-image css-var-«ra» ant-avatar-css-var"
         >
           <img
             src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
@@ -1100,7 +1136,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
       </div>
     </div>
     <div
-      class="ant-bubble ant-bubble-start"
+      class="ant-bubble css-var-«ra» ant-bubble-start"
       role="ai"
       style="max-width: 600px;"
     >
@@ -1108,7 +1144,7 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 1`] =
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-image"
+          class="ant-avatar ant-avatar-circle ant-avatar-image css-var-«ra» ant-avatar-css-var"
         >
           <img
             src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
@@ -1146,18 +1182,18 @@ exports[`renders components/bubble/demo/debug.tsx extend context correctly 2`] =
 
 exports[`renders components/bubble/demo/debug-list.tsx extend context correctly 1`] = `
 <div
-  class="ant-app"
+  class="ant-app css-var-«rb»"
 >
   <div
-    class="ant-flex ant-flex-align-stretch ant-flex-vertical"
+    class="ant-flex css-var-«rb» ant-flex-align-stretch ant-flex-vertical"
     style="gap: 16px;"
   >
     <div
-      class="ant-flex"
+      class="ant-flex css-var-«rb»"
       style="gap: 16px;"
     >
       <button
-        class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+        class="ant-btn css-var-«rb» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
         type="button"
       >
         <span>
@@ -1165,7 +1201,7 @@ exports[`renders components/bubble/demo/debug-list.tsx extend context correctly 
         </span>
       </button>
       <button
-        class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+        class="ant-btn css-var-«rb» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
         type="button"
       >
         <span>
@@ -1173,7 +1209,7 @@ exports[`renders components/bubble/demo/debug-list.tsx extend context correctly 
         </span>
       </button>
       <div
-        class="ant-select ant-select-outlined ant-select-single ant-select-show-arrow"
+        class="ant-select ant-select-outlined css-var-«rb» ant-select-css-var ant-select-single ant-select-show-arrow"
         style="width: 200px;"
       >
         <div
@@ -1187,13 +1223,13 @@ exports[`renders components/bubble/demo/debug-list.tsx extend context correctly 
             >
               <input
                 aria-autocomplete="list"
-                aria-controls="rc_select_TEST_OR_SSR_list"
+                aria-controls="test-id_list"
                 aria-expanded="false"
                 aria-haspopup="listbox"
-                aria-owns="rc_select_TEST_OR_SSR_list"
+                aria-owns="test-id_list"
                 autocomplete="off"
                 class="ant-select-selection-search-input"
-                id="rc_select_TEST_OR_SSR"
+                id="test-id"
                 readonly=""
                 role="combobox"
                 style="opacity: 0;"
@@ -1210,19 +1246,19 @@ exports[`renders components/bubble/demo/debug-list.tsx extend context correctly 
           </span>
         </div>
         <div
-          class="ant-select-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up ant-select-dropdown-placement-bottomLeft"
+          class="ant-select-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-«rb» ant-select-css-var ant-select-dropdown-placement-bottomLeft"
           style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
         >
           <div>
             <div
-              id="rc_select_TEST_OR_SSR_list"
+              id="test-id_list"
               role="listbox"
               style="height: 0px; width: 0px; overflow: hidden;"
             >
               <div
                 aria-label="#0 - message content"
                 aria-selected="false"
-                id="rc_select_TEST_OR_SSR_list_0"
+                id="test-id_list_0"
                 role="option"
               >
                 0
@@ -1292,7 +1328,7 @@ exports[`renders components/bubble/demo/debug-list.tsx extend context correctly 
         </span>
       </div>
       <div
-        class="ant-select ant-select-outlined ant-select-single ant-select-show-arrow"
+        class="ant-select ant-select-outlined css-var-«rb» ant-select-css-var ant-select-single ant-select-show-arrow"
         style="width: 200px;"
       >
         <div
@@ -1306,13 +1342,13 @@ exports[`renders components/bubble/demo/debug-list.tsx extend context correctly 
             >
               <input
                 aria-autocomplete="list"
-                aria-controls="rc_select_TEST_OR_SSR_list"
+                aria-controls="test-id_list"
                 aria-expanded="false"
                 aria-haspopup="listbox"
-                aria-owns="rc_select_TEST_OR_SSR_list"
+                aria-owns="test-id_list"
                 autocomplete="off"
                 class="ant-select-selection-search-input"
-                id="rc_select_TEST_OR_SSR"
+                id="test-id"
                 readonly=""
                 role="combobox"
                 style="opacity: 0;"
@@ -1329,19 +1365,19 @@ exports[`renders components/bubble/demo/debug-list.tsx extend context correctly 
           </span>
         </div>
         <div
-          class="ant-select-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up ant-select-dropdown-placement-bottomLeft"
+          class="ant-select-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-«rb» ant-select-css-var ant-select-dropdown-placement-bottomLeft"
           style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
         >
           <div>
             <div
-              id="rc_select_TEST_OR_SSR_list"
+              id="test-id_list"
               role="listbox"
               style="height: 0px; width: 0px; overflow: hidden;"
             >
               <div
                 aria-label="#0 - message content"
                 aria-selected="false"
-                id="rc_select_TEST_OR_SSR_list_0"
+                id="test-id_list_0"
                 role="option"
               >
                 0
@@ -1412,11 +1448,11 @@ exports[`renders components/bubble/demo/debug-list.tsx extend context correctly 
       </div>
     </div>
     <div
-      class="ant-bubble-list ant-bubble-list-reach-end"
+      class="ant-bubble-list css-var-«rb» ant-bubble-list-reach-end"
       style="height: 300px; overflow: auto;"
     >
       <div
-        class="ant-bubble ant-bubble-start"
+        class="ant-bubble css-var-«rb» ant-bubble-start"
         id="0"
       >
         <div
@@ -1434,13 +1470,13 @@ exports[`renders components/bubble/demo/debug-list.tsx extend context correctly 
 
 exports[`renders components/bubble/demo/header-and-footer.tsx extend context correctly 1`] = `
 <div
-  class="ant-bubble ant-bubble-start"
+  class="ant-bubble css-var-«r9» ant-bubble-start"
 >
   <div
     class="ant-bubble-avatar"
   >
     <span
-      class="ant-avatar ant-avatar-circle ant-avatar-icon"
+      class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r9» ant-avatar-css-var"
     >
       <span
         aria-label="user"
@@ -1470,7 +1506,7 @@ exports[`renders components/bubble/demo/header-and-footer.tsx extend context cor
       class="ant-bubble-header"
     >
       <div
-        class="ant-space ant-space-horizontal ant-space-align-center"
+        class="ant-space ant-space-horizontal ant-space-align-center css-var-«r9»"
         style="column-gap: 4px; row-gap: 4px;"
       >
         <div
@@ -1491,14 +1527,14 @@ exports[`renders components/bubble/demo/header-and-footer.tsx extend context cor
       class="ant-bubble-footer"
     >
       <div
-        class="ant-space ant-space-horizontal ant-space-align-center"
+        class="ant-space ant-space-horizontal ant-space-align-center css-var-«r9»"
         style="column-gap: 4px; row-gap: 4px;"
       >
         <div
           class="ant-space-item"
         >
           <button
-            class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+            class="ant-btn css-var-«r9» ant-btn-default ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
             type="button"
           >
             <span
@@ -1530,7 +1566,7 @@ exports[`renders components/bubble/demo/header-and-footer.tsx extend context cor
           class="ant-space-item"
         >
           <button
-            class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+            class="ant-btn css-var-«r9» ant-btn-default ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
             type="button"
           >
             <span
@@ -1568,18 +1604,18 @@ exports[`renders components/bubble/demo/header-and-footer.tsx extend context cor
 
 exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+  class="ant-flex css-var-«r7» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
 >
   <div
-    class="ant-flex ant-flex-justify-space-between ant-flex-gap-small"
+    class="ant-flex css-var-«r7» ant-flex-justify-space-between ant-flex-gap-small"
   >
     <div
-      class="ant-flex ant-flex-align-center ant-flex-gap-large"
+      class="ant-flex css-var-«r7» ant-flex-align-center ant-flex-gap-large"
     >
       Use roles as:
       <button
         aria-checked="false"
-        class="ant-switch"
+        class="ant-switch css-var-«r7»"
         role="switch"
         type="button"
       >
@@ -1603,10 +1639,10 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
       </button>
     </div>
     <div
-      class="ant-flex ant-flex-gap-small"
+      class="ant-flex css-var-«r7» ant-flex-gap-small"
     >
       <button
-        class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+        class="ant-btn css-var-«r7» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
         type="button"
       >
         <span>
@@ -1614,7 +1650,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
         </span>
       </button>
       <button
-        class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+        class="ant-btn css-var-«r7» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
         type="button"
       >
         <span>
@@ -1624,18 +1660,18 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
     </div>
   </div>
   <div
-    class="ant-bubble-list ant-bubble-list-reach-end"
+    class="ant-bubble-list css-var-«r7» ant-bubble-list-reach-end"
     style="max-height: 300px;"
   >
     <div
-      class="ant-bubble ant-bubble-end"
+      class="ant-bubble css-var-«r7» ant-bubble-end"
       role="user"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r7» ant-avatar-css-var"
           style="background: #87d068;"
         >
           <span
@@ -1666,7 +1702,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
       </div>
     </div>
     <div
-      class="ant-bubble ant-bubble-start"
+      class="ant-bubble css-var-«r7» ant-bubble-start"
       role="ai"
       style="max-width: 600px;"
     >
@@ -1674,7 +1710,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r7» ant-avatar-css-var"
           style="background: #fde3cf;"
         >
           <span
@@ -1705,14 +1741,14 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
       </div>
     </div>
     <div
-      class="ant-bubble ant-bubble-end"
+      class="ant-bubble css-var-«r7» ant-bubble-end"
       role="user"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r7» ant-avatar-css-var"
           style="background: #87d068;"
         >
           <span
@@ -1750,17 +1786,17 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 2`] = 
 
 exports[`renders components/bubble/demo/list-custom.tsx extend context correctly 1`] = `
 <div
-  class="ant-bubble-list ant-bubble-list-reach-end"
+  class="ant-bubble-list css-var-«r8» ant-bubble-list-reach-end"
 >
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«r8» ant-bubble-start"
     role="ai"
   >
     <div
       class="ant-bubble-avatar"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon"
+        class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r8» ant-avatar-css-var"
         style="background: #fde3cf;"
       >
         <span
@@ -1798,14 +1834,14 @@ exports[`renders components/bubble/demo/list-custom.tsx extend context correctly
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«r8» ant-bubble-start"
     role="ai"
   >
     <div
       class="ant-bubble-avatar"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon"
+        class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r8» ant-avatar-css-var"
         style="background: #fde3cf;"
       >
         <span
@@ -1836,10 +1872,10 @@ exports[`renders components/bubble/demo/list-custom.tsx extend context correctly
         class="ant-bubble-content ant-bubble-content-filled"
       >
         <div
-          class="ant-flex ant-flex-align-center ant-flex-gap-middle"
+          class="ant-flex css-var-«r8» ant-flex-align-center ant-flex-gap-middle"
         >
           <div
-            class="ant-image"
+            class="ant-image css-var-«r8» ant-image-css-var"
             style="height: 50px;"
           >
             <img
@@ -1849,10 +1885,10 @@ exports[`renders components/bubble/demo/list-custom.tsx extend context correctly
               style="height: 50px;"
             />
             <div
-              class="ant-image-mask"
+              class="ant-image-cover"
             >
               <div
-                class="ant-image-mask-info"
+                class="ant-image-cover-info"
               >
                 <span
                   aria-label="eye"
@@ -1888,7 +1924,7 @@ exports[`renders components/bubble/demo/list-custom.tsx extend context correctly
         class="ant-bubble-footer"
       >
         <button
-          class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text"
+          class="ant-btn css-var-«r8» ant-btn-text ant-btn-color-default ant-btn-variant-text"
           type="button"
         >
           <span>
@@ -1899,7 +1935,7 @@ exports[`renders components/bubble/demo/list-custom.tsx extend context correctly
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«r8» ant-bubble-start"
     id="message_id_2"
     role="ai"
   >
@@ -1907,7 +1943,7 @@ exports[`renders components/bubble/demo/list-custom.tsx extend context correctly
       class="ant-bubble-avatar"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon"
+        class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r8» ant-avatar-css-var"
         style="background: #fde3cf;"
       >
         <span
@@ -1938,7 +1974,7 @@ exports[`renders components/bubble/demo/list-custom.tsx extend context correctly
         class="ant-bubble-content ant-bubble-content-filled"
       >
         <span
-          class="ant-typography ant-typography-danger"
+          class="ant-typography ant-typography-danger css-var-«r8»"
         >
           ReactNode message
         </span>
@@ -1949,14 +1985,14 @@ exports[`renders components/bubble/demo/list-custom.tsx extend context correctly
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«r8» ant-bubble-start"
     role="suggestion"
   >
     <div
       class="ant-bubble-avatar"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon"
+        class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r8» ant-avatar-css-var"
         style="visibility: hidden;"
       >
         <span
@@ -1984,7 +2020,7 @@ exports[`renders components/bubble/demo/list-custom.tsx extend context correctly
       class="ant-bubble-content ant-bubble-content-borderless"
     >
       <div
-        class="ant-prompts"
+        class="ant-prompts css-var-«r8»"
       >
         <div
           class="ant-prompts-list ant-prompts-list-vertical"
@@ -2105,14 +2141,14 @@ exports[`renders components/bubble/demo/list-custom.tsx extend context correctly
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«r8» ant-bubble-start"
     role="file"
   >
     <div
       class="ant-bubble-avatar"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon"
+        class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r8» ant-avatar-css-var"
         style="visibility: hidden;"
       >
         <span
@@ -2140,10 +2176,10 @@ exports[`renders components/bubble/demo/list-custom.tsx extend context correctly
       class="ant-bubble-content ant-bubble-content-borderless"
     >
       <div
-        class="ant-flex ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+        class="ant-flex css-var-«r8» ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
       >
         <div
-          class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
+          class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview css-var-«r8»"
         >
           <div
             class="ant-attachment-list-card-icon"
@@ -2198,7 +2234,7 @@ exports[`renders components/bubble/demo/list-custom.tsx extend context correctly
           </div>
         </div>
         <div
-          class="ant-attachment-list-card ant-attachment-list-card-status-uploading ant-attachment-list-card-type-overview"
+          class="ant-attachment-list-card ant-attachment-list-card-status-uploading ant-attachment-list-card-type-overview css-var-«r8»"
         >
           <div
             class="ant-attachment-list-card-icon"
@@ -2262,16 +2298,16 @@ exports[`renders components/bubble/demo/list-custom.tsx extend context correctly
 
 exports[`renders components/bubble/demo/loading.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex ant-flex-align-stretch ant-flex-gap-large ant-flex-vertical"
+  class="ant-flex css-var-«r6» ant-flex-align-stretch ant-flex-gap-large ant-flex-vertical"
 >
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«r6» ant-bubble-start"
   >
     <div
       class="ant-bubble-avatar"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon"
+        class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r6» ant-avatar-css-var"
       >
         <span
           aria-label="user"
@@ -2313,12 +2349,12 @@ exports[`renders components/bubble/demo/loading.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-flex ant-flex-wrap-wrap ant-flex-gap-large"
+    class="ant-flex css-var-«r6» ant-flex-wrap-wrap ant-flex-gap-large"
   >
     Loading state:
     <button
       aria-checked="true"
-      class="ant-switch ant-switch-checked"
+      class="ant-switch css-var-«r6» ant-switch-checked"
       role="switch"
       type="button"
     >
@@ -2347,13 +2383,13 @@ exports[`renders components/bubble/demo/markdown.tsx extend context correctly 1`
   style="height: 100px;"
 >
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«r5» ant-bubble-start"
   >
     <div
       class="ant-bubble-avatar"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon"
+        class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r5» ant-avatar-css-var"
       >
         <span
           aria-label="user"
@@ -2380,7 +2416,7 @@ exports[`renders components/bubble/demo/markdown.tsx extend context correctly 1`
       class="ant-bubble-content ant-bubble-content-filled"
     >
       <article
-        class="ant-typography"
+        class="ant-typography css-var-«r5»"
       >
         <div>
           <blockquote />
@@ -2393,13 +2429,1189 @@ exports[`renders components/bubble/demo/markdown.tsx extend context correctly 1`
 
 exports[`renders components/bubble/demo/markdown.tsx extend context correctly 2`] = `[]`;
 
+exports[`renders components/bubble/demo/onScroll.tsx extend context correctly 1`] = `
+<div
+  class="ant-flex css-var-«r4» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+>
+  <div
+    class="ant-flex css-var-«r4»"
+  >
+    <div>
+      scrollTop: 0
+    </div>
+  </div>
+  <div
+    class="ant-bubble-list css-var-«r4» ant-bubble-list-reach-end"
+    style="max-height: 300px;"
+  >
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-end"
+      role="user"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #87d068;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock user content.
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-start"
+      role="ai"
+      style="max-width: 600px;"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #fde3cf;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. 
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-end"
+      role="user"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #87d068;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock user content.
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-start"
+      role="ai"
+      style="max-width: 600px;"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #fde3cf;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. 
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-end"
+      role="user"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #87d068;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock user content.
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-start"
+      role="ai"
+      style="max-width: 600px;"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #fde3cf;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. 
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-end"
+      role="user"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #87d068;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock user content.
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-start"
+      role="ai"
+      style="max-width: 600px;"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #fde3cf;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. 
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-end"
+      role="user"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #87d068;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock user content.
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-start"
+      role="ai"
+      style="max-width: 600px;"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #fde3cf;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. 
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-end"
+      role="user"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #87d068;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock user content.
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-start"
+      role="ai"
+      style="max-width: 600px;"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #fde3cf;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. 
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-end"
+      role="user"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #87d068;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock user content.
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-start"
+      role="ai"
+      style="max-width: 600px;"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #fde3cf;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. 
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-end"
+      role="user"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #87d068;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock user content.
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-start"
+      role="ai"
+      style="max-width: 600px;"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #fde3cf;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. 
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-end"
+      role="user"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #87d068;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock user content.
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-start"
+      role="ai"
+      style="max-width: 600px;"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #fde3cf;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. 
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-end"
+      role="user"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #87d068;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock user content.
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-start"
+      role="ai"
+      style="max-width: 600px;"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #fde3cf;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. 
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-end"
+      role="user"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #87d068;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock user content.
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-start"
+      role="ai"
+      style="max-width: 600px;"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #fde3cf;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. 
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-end"
+      role="user"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #87d068;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock user content.
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-start"
+      role="ai"
+      style="max-width: 600px;"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #fde3cf;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. 
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-end"
+      role="user"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #87d068;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock user content.
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-start"
+      role="ai"
+      style="max-width: 600px;"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #fde3cf;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. 
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-end"
+      role="user"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #87d068;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock user content.
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-start"
+      role="ai"
+      style="max-width: 600px;"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #fde3cf;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. 
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-end"
+      role="user"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #87d068;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock user content.
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-«r4» ant-bubble-start"
+      role="ai"
+      style="max-width: 600px;"
+    >
+      <div
+        class="ant-bubble-avatar"
+      >
+        <span
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r4» ant-avatar-css-var"
+          style="background: #fde3cf;"
+        >
+          <span
+            aria-label="user"
+            class="anticon anticon-user"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="user"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-bubble-content ant-bubble-content-filled"
+      >
+        Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. Mock AI content. 
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders components/bubble/demo/onScroll.tsx extend context correctly 2`] = `[]`;
+
 exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context correctly 1`] = `
 <div
-  class="ant-bubble-list ant-bubble-list-reach-end"
+  class="ant-bubble-list css-var-«r3» ant-bubble-list-reach-end"
   style="max-height: 300px;"
 >
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«r3» ant-bubble-start"
     role="ai"
     style="max-width: 600px; margin-inline-end: 44px;"
   >
@@ -2407,7 +3619,7 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context 
       class="ant-bubble-avatar"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon"
+        class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r3» ant-avatar-css-var"
         style="background: #fde3cf;"
       >
         <span
@@ -2444,10 +3656,10 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context 
         style="width: 100%;"
       >
         <div
-          class="ant-flex"
+          class="ant-flex css-var-«r3»"
         >
           <button
-            class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+            class="ant-btn css-var-«r3» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
             style="margin-inline-end: auto;"
             type="button"
           >
@@ -2476,7 +3688,7 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context 
             </span>
           </button>
           <button
-            class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+            class="ant-btn css-var-«r3» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
             type="button"
           >
             <span
@@ -2504,7 +3716,7 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context 
             </span>
           </button>
           <button
-            class="ant-btn ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+            class="ant-btn css-var-«r3» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
             type="button"
           >
             <span
@@ -2536,14 +3748,14 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context 
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-end"
+    class="ant-bubble css-var-«r3» ant-bubble-end"
     role="user"
   >
     <div
       class="ant-bubble-avatar"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon"
+        class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r3» ant-avatar-css-var"
         style="background: #87d068;"
       >
         <span
@@ -2574,7 +3786,7 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context 
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«r3» ant-bubble-start"
     role="ai"
     style="max-width: 600px; margin-inline-end: 44px;"
   >
@@ -2582,7 +3794,7 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context 
       class="ant-bubble-avatar"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon"
+        class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r3» ant-avatar-css-var"
         style="background: #fde3cf;"
       >
         <span
@@ -2610,7 +3822,7 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context 
       class="ant-bubble-content ant-bubble-content-filled"
     >
       <div
-        class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
+        class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-«r3»"
       >
         <div
           class="ant-space-item"
@@ -2618,7 +3830,7 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context 
           <div
             aria-busy="true"
             aria-live="polite"
-            class="ant-spin ant-spin-sm ant-spin-spinning"
+            class="ant-spin ant-spin-sm ant-spin-spinning css-var-«r3»"
           >
             <span
               class="ant-spin-dot-holder"
@@ -2657,10 +3869,10 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context 
 
 exports[`renders components/bubble/demo/shape.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-«r2» ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«r2» ant-bubble-start"
   >
     <div
       class="ant-bubble-content ant-bubble-content-filled"
@@ -2669,7 +3881,7 @@ exports[`renders components/bubble/demo/shape.tsx extend context correctly 1`] =
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-end"
+    class="ant-bubble css-var-«r2» ant-bubble-end"
   >
     <div
       class="ant-bubble-content ant-bubble-content-filled"
@@ -2679,7 +3891,7 @@ exports[`renders components/bubble/demo/shape.tsx extend context correctly 1`] =
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«r2» ant-bubble-start"
   >
     <div
       class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-round"
@@ -2688,7 +3900,7 @@ exports[`renders components/bubble/demo/shape.tsx extend context correctly 1`] =
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-end"
+    class="ant-bubble css-var-«r2» ant-bubble-end"
   >
     <div
       class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-round"
@@ -2698,7 +3910,7 @@ exports[`renders components/bubble/demo/shape.tsx extend context correctly 1`] =
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«r2» ant-bubble-start"
   >
     <div
       class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-corner"
@@ -2707,7 +3919,7 @@ exports[`renders components/bubble/demo/shape.tsx extend context correctly 1`] =
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-end"
+    class="ant-bubble css-var-«r2» ant-bubble-end"
   >
     <div
       class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-corner"
@@ -2723,16 +3935,16 @@ exports[`renders components/bubble/demo/shape.tsx extend context correctly 2`] =
 
 exports[`renders components/bubble/demo/typing.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+  class="ant-flex css-var-«r1» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
 >
   <div
-    class="ant-bubble ant-bubble-start ant-bubble-typing"
+    class="ant-bubble css-var-«r1» ant-bubble-start ant-bubble-typing"
   >
     <div
       class="ant-bubble-avatar"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon"
+        class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r1» ant-avatar-css-var"
       >
         <span
           aria-label="user"
@@ -2762,13 +3974,13 @@ exports[`renders components/bubble/demo/typing.tsx extend context correctly 1`] 
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«r1» ant-bubble-start"
   >
     <div
       class="ant-bubble-avatar"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon"
+        class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r1» ant-avatar-css-var"
       >
         <span
           aria-label="user"
@@ -2798,7 +4010,7 @@ exports[`renders components/bubble/demo/typing.tsx extend context correctly 1`] 
     </div>
   </div>
   <button
-    class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-«r1» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     style="align-self: flex-end;"
     type="button"
   >
@@ -2813,16 +4025,16 @@ exports[`renders components/bubble/demo/typing.tsx extend context correctly 2`] 
 
 exports[`renders components/bubble/demo/variant.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-«r0» ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«r0» ant-bubble-start"
   >
     <div
       class="ant-bubble-avatar"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon"
+        class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r0» ant-avatar-css-var"
       >
         <span
           aria-label="user"
@@ -2852,13 +4064,13 @@ exports[`renders components/bubble/demo/variant.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«r0» ant-bubble-start"
   >
     <div
       class="ant-bubble-avatar"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon"
+        class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r0» ant-avatar-css-var"
       >
         <span
           aria-label="user"
@@ -2888,13 +4100,13 @@ exports[`renders components/bubble/demo/variant.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«r0» ant-bubble-start"
   >
     <div
       class="ant-bubble-avatar"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon"
+        class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r0» ant-avatar-css-var"
       >
         <span
           aria-label="user"
@@ -2924,13 +4136,13 @@ exports[`renders components/bubble/demo/variant.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-start"
+    class="ant-bubble css-var-«r0» ant-bubble-start"
   >
     <div
       class="ant-bubble-avatar"
     >
       <span
-        class="ant-avatar ant-avatar-circle ant-avatar-icon"
+        class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r0» ant-avatar-css-var"
       >
         <span
           aria-label="user"
@@ -2957,10 +4169,10 @@ exports[`renders components/bubble/demo/variant.tsx extend context correctly 1`]
       class="ant-bubble-content ant-bubble-content-borderless"
     >
       <div
-        class="ant-prompts"
+        class="ant-prompts css-var-«r0»"
       >
         <h5
-          class="ant-typography ant-prompts-title"
+          class="ant-typography ant-prompts-title css-var-«r0»"
         >
           variant: borderless to customize
         </h5>

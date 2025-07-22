@@ -16,15 +16,11 @@ const actionItems: ActionsProps['items'] = [
   },
   {
     key: 'more',
-    children: [
+    subItems: [
       {
         key: 'share',
         label: 'Share',
         icon: <ShareAltOutlined />,
-        children: [
-          { key: 'qq', label: 'QQ' },
-          { key: 'wechat', label: 'WeChat' },
-        ],
       },
       { key: 'import', label: 'Import' },
       {
@@ -51,10 +47,11 @@ const actionItems: ActionsProps['items'] = [
     key: 'clear',
     label: 'Clear',
     icon: <DeleteOutlined />,
+    danger: true,
   },
 ];
 
-const Demo: React.FC = () => {
+const App: React.FC = () => {
   const onClick: ActionsProps['onClick'] = ({ keyPath }) => {
     // Logic for handling click events
     message.success(`you clicked ${keyPath.join(',')}`);
@@ -62,4 +59,4 @@ const Demo: React.FC = () => {
   return <Actions items={actionItems} onClick={onClick} />;
 };
 
-export default Demo;
+export default App;

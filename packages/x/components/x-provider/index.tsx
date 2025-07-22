@@ -1,14 +1,13 @@
 import { ConfigProvider as AntdConfigProvider } from 'antd';
 import React from 'react';
-
+import LocaleProvider, { ANT_MARK } from '../locale';
+import type { XProviderProps } from './context';
 import XProviderContext from './context';
 import useXProviderContext, { defaultPrefixCls } from './hooks/use-x-provider-context';
 
-import LocaleProvider, { ANT_MARK } from '../locale';
-import type { XProviderProps } from './context';
-
 const XProvider: React.FC<XProviderProps> = (props) => {
   const {
+    actions,
     attachments,
     bubble,
     conversations,
@@ -25,6 +24,7 @@ const XProvider: React.FC<XProviderProps> = (props) => {
 
   const xProviderProps = React.useMemo(() => {
     return {
+      actions,
       attachments,
       bubble,
       conversations,
@@ -34,7 +34,17 @@ const XProvider: React.FC<XProviderProps> = (props) => {
       thoughtChain,
       welcome,
     };
-  }, [attachments, bubble, conversations, prompts, sender, suggestion, thoughtChain, welcome]);
+  }, [
+    actions,
+    attachments,
+    bubble,
+    conversations,
+    prompts,
+    sender,
+    suggestion,
+    thoughtChain,
+    welcome,
+  ]);
 
   let childNode = children;
   if (locale) {
@@ -46,16 +56,7 @@ const XProvider: React.FC<XProviderProps> = (props) => {
   }
   return (
     <XProviderContext.Provider value={xProviderProps}>
-      <AntdConfigProvider
-        {...antdConfProps}
-        // Note:  we can not set `cssVar` by default.
-        //        Since when developer not wrap with XProvider,
-        //        the generate css is still using css var but no css var injected.
-        // Origin comment: antdx enable cssVar by default, and antd v6 will enable cssVar by default
-        // theme={{ cssVar: true, ...antdConfProps?.theme }}
-        theme={theme}
-        locale={locale}
-      >
+      <AntdConfigProvider {...antdConfProps} theme={theme} locale={locale}>
         {childNode}
       </AntdConfigProvider>
     </XProviderContext.Provider>

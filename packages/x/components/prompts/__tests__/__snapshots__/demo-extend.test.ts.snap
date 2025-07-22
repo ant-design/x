@@ -1,14 +1,14 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] = `
 <div
-  class="ant-app"
+  class="ant-app css-var-«r6»"
 >
   <div
-    class="ant-prompts"
+    class="ant-prompts css-var-«r6»"
   >
     <h5
-      class="ant-typography ant-prompts-title"
+      class="ant-typography ant-prompts-title css-var-«r6»"
     >
       ✨ Inspirational Sparks and Marvelous Tips
     </h5>
@@ -237,10 +237,10 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 2`] 
 
 exports[`renders components/prompts/demo/disabled.tsx extend context correctly 1`] = `
 <div
-  class="ant-prompts"
+  class="ant-prompts css-var-«r5»"
 >
   <h5
-    class="ant-typography ant-prompts-title"
+    class="ant-typography ant-prompts-title css-var-«r5»"
   >
     ☕️ It's time to relax!
   </h5>
@@ -342,10 +342,10 @@ exports[`renders components/prompts/demo/disabled.tsx extend context correctly 2
 
 exports[`renders components/prompts/demo/flex-vertical.tsx extend context correctly 1`] = `
 <div
-  class="ant-prompts"
+  class="ant-prompts css-var-«r4»"
 >
   <h5
-    class="ant-typography ant-prompts-title"
+    class="ant-typography ant-prompts-title css-var-«r4»"
   >
     🤔 You might also want to ask:
   </h5>
@@ -471,10 +471,10 @@ exports[`renders components/prompts/demo/flex-vertical.tsx extend context correc
 
 exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 1`] = `
 <div
-  class="ant-prompts"
+  class="ant-prompts css-var-«r2»"
 >
   <h5
-    class="ant-typography ant-prompts-title"
+    class="ant-typography ant-prompts-title css-var-«r2»"
   >
     ✨ Inspirational Sparks and Marvelous Tips
   </h5>
@@ -791,10 +791,10 @@ exports[`renders components/prompts/demo/flex-wrap.tsx extend context correctly 
 
 exports[`renders components/prompts/demo/flex-wrap-fixed.tsx extend context correctly 1`] = `
 <div
-  class="ant-prompts"
+  class="ant-prompts css-var-«r3»"
 >
   <h5
-    class="ant-typography ant-prompts-title"
+    class="ant-typography ant-prompts-title css-var-«r3»"
   >
     ✨ Inspirational Sparks and Marvelous Tips
   </h5>
@@ -1027,20 +1027,20 @@ exports[`renders components/prompts/demo/flex-wrap-fixed.tsx extend context corr
 
 exports[`renders components/prompts/demo/nest.tsx extend context correctly 1`] = `
 <div
-  class="ant-app"
+  class="ant-app css-var-«r0»"
 >
   <div
-    class="ant-card ant-card-bordered"
+    class="ant-card ant-card-bordered css-var-«r1»"
     style="border-radius: 0px; border: 0px;"
   >
     <div
       class="ant-card-body"
     >
       <div
-        class="ant-prompts"
+        class="ant-prompts css-var-«r1»"
       >
         <h5
-          class="ant-typography ant-prompts-title"
+          class="ant-typography ant-prompts-title css-var-«r1»"
         >
           Do you want?
         </h5>
@@ -1058,7 +1058,7 @@ exports[`renders components/prompts/demo/nest.tsx extend context correctly 1`] =
                 class="ant-prompts-label"
               >
                 <div
-                  class="ant-space ant-space-horizontal ant-space-align-start ant-space-gap-row-small ant-space-gap-col-small"
+                  class="ant-space ant-space-horizontal ant-space-align-start ant-space-gap-row-small ant-space-gap-col-small css-var-«r1»"
                 >
                   <div
                     class="ant-space-item"
@@ -1099,7 +1099,7 @@ exports[`renders components/prompts/demo/nest.tsx extend context correctly 1`] =
                 What are you interested in?
               </p>
               <div
-                class="ant-prompts ant-prompts-nested"
+                class="ant-prompts ant-prompts-nested css-var-«r1»"
               >
                 <div
                   class="ant-prompts-list ant-prompts-list-vertical"
@@ -1161,7 +1161,7 @@ exports[`renders components/prompts/demo/nest.tsx extend context correctly 1`] =
                 class="ant-prompts-label"
               >
                 <div
-                  class="ant-space ant-space-horizontal ant-space-align-start ant-space-gap-row-small ant-space-gap-col-small"
+                  class="ant-space ant-space-horizontal ant-space-align-start ant-space-gap-row-small ant-space-gap-col-small css-var-«r1»"
                 >
                   <div
                     class="ant-space-item"
@@ -1202,7 +1202,7 @@ exports[`renders components/prompts/demo/nest.tsx extend context correctly 1`] =
                 How to design a good product?
               </p>
               <div
-                class="ant-prompts ant-prompts-nested"
+                class="ant-prompts ant-prompts-nested css-var-«r1»"
               >
                 <div
                   class="ant-prompts-list ant-prompts-list-vertical"
@@ -1342,7 +1342,7 @@ exports[`renders components/prompts/demo/nest.tsx extend context correctly 1`] =
                 class="ant-prompts-label"
               >
                 <div
-                  class="ant-space ant-space-horizontal ant-space-align-start ant-space-gap-row-small ant-space-gap-col-small"
+                  class="ant-space ant-space-horizontal ant-space-align-start ant-space-gap-row-small ant-space-gap-col-small css-var-«r1»"
                 >
                   <div
                     class="ant-space-item"
@@ -1383,7 +1383,7 @@ exports[`renders components/prompts/demo/nest.tsx extend context correctly 1`] =
                 How to start a new project?
               </p>
               <div
-                class="ant-prompts ant-prompts-nested"
+                class="ant-prompts ant-prompts-nested css-var-«r1»"
               >
                 <div
                   class="ant-prompts-list ant-prompts-list-vertical"

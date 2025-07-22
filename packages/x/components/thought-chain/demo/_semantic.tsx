@@ -23,6 +23,7 @@ const items: ThoughtChainProps['items'] = [
 
 const locales = {
   cn: {
+    root: '根节点',
     item: '思维链节点',
     itemIcon: '思维链图标',
     itemHeader: '思维链节点头部',
@@ -30,6 +31,7 @@ const locales = {
     itemFooter: '思维链节点页脚',
   },
   en: {
+    root: 'Root',
     item: 'Item',
     itemIcon: 'Item Icon',
     itemHeader: 'Item Header',
@@ -44,6 +46,10 @@ const App: React.FC = () => {
     <SemanticPreview
       componentName="ThoughtChain"
       semantics={[
+        {
+          name: 'root',
+          desc: locale.root,
+        },
         {
           name: 'item',
           desc: locale.item,
