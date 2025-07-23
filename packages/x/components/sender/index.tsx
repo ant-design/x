@@ -13,8 +13,7 @@ import SpeechButton from './components/SpeechButton';
 import { SenderContext } from './context';
 import type {
   ActionsComponents,
-  ActionsRender,
-  FooterRender,
+  BaseNode,
   SenderComponents,
   SenderProps,
   SenderRef,
@@ -29,8 +28,6 @@ import useSpeech from './useSpeech';
 
 export type {
   ActionsComponents,
-  ActionsRender,
-  FooterRender,
   SenderComponents,
   SenderProps,
   SenderRef,
@@ -66,7 +63,7 @@ const ForwardSender = React.forwardRef<any, SenderProps>((props, ref) => {
     components,
     onCancel,
     onChange,
-    actions,
+    suffix,
     onKeyUp,
     onKeyDown,
     disabled,
@@ -120,8 +117,8 @@ const ForwardSender = React.forwardRef<any, SenderProps>((props, ref) => {
     },
   );
 
-  const actionBtnCls = `${prefixCls}-actions-btn`;
-  const actionListCls = `${prefixCls}-actions-list`;
+  const actionBtnCls = `${prefixCls}-suffix-btn`;
+  const actionListCls = `${prefixCls}-suffix-list`;
 
   // ============================ Value =============================
   const [innerValue, setInnerValue] = useMergedState(defaultValue || '', {
@@ -168,7 +165,7 @@ const ForwardSender = React.forwardRef<any, SenderProps>((props, ref) => {
   };
 
   // ============================ Action ============================
-  let actionNode: React.ReactNode = (
+  const actionNode: React.ReactNode = (
     <Flex className={`${actionListCls}-presets`}>
       {allowSpeech && <SpeechButton />}
       {/* Loading or Send */}
@@ -176,14 +173,37 @@ const ForwardSender = React.forwardRef<any, SenderProps>((props, ref) => {
     </Flex>
   );
 
-  // Custom actions
-  if (typeof actions === 'function') {
-    actionNode = actions(actionNode, {
+  // ============================ Suffix ============================
+
+  let suffixNode: BaseNode = actionNode;
+
+  if (typeof suffix === 'function') {
+    suffixNode = suffix(actionNode, {
       components: sharedRenderComponents,
     });
-  } else if (actions || actions === false) {
-    actionNode = actions;
+  } else if (suffix || suffix === false) {
+    suffixNode = suffix;
   }
+
+  // ============================ Prefix ============================
+
+  const prefixNode =
+    typeof prefix === 'function'
+      ? prefix(actionNode, { components: sharedRenderComponents })
+      : prefix || null;
+
+  // ============================ Header ============================
+  const headerNode =
+    typeof header === 'function'
+      ? header(actionNode, { components: sharedRenderComponents })
+      : header || null;
+
+  // ============================ Footer ============================
+  const footerNode =
+    typeof footer === 'function'
+      ? footer(actionNode, { components: sharedRenderComponents })
+      : footer || null;
+
   // Custom actions context props
   const actionsButtonContextProps = {
     prefixCls: actionBtnCls,
@@ -198,10 +218,6 @@ const ForwardSender = React.forwardRef<any, SenderProps>((props, ref) => {
     speechRecording,
     disabled,
   };
-
-  // ============================ Footer ============================
-  const footerNode =
-    typeof footer === 'function' ? footer({ components: sharedRenderComponents }) : footer || null;
 
   // ============================ Context ============================
   const contextValue = React.useMemo(
@@ -279,14 +295,16 @@ const ForwardSender = React.forwardRef<any, SenderProps>((props, ref) => {
           ...styles.root,
         }}
       >
-        {/* Header */}
-        {header && (
-          <SendHeaderContext.Provider value={{ prefixCls }}>{header}</SendHeaderContext.Provider>
-        )}
         <ActionButtonContext.Provider value={actionsButtonContextProps}>
+          {/* Header */}
+          {headerNode && (
+            <SendHeaderContext.Provider value={{ prefixCls }}>
+              {headerNode}
+            </SendHeaderContext.Provider>
+          )}
           <div className={`${prefixCls}-content`} onMouseDown={onContentMouseDown}>
             {/* Prefix */}
-            {prefix && (
+            {prefixNode && (
               <div
                 className={classnames(
                   `${prefixCls}-prefix`,
@@ -295,7 +313,7 @@ const ForwardSender = React.forwardRef<any, SenderProps>((props, ref) => {
                 )}
                 style={{ ...contextConfig.styles.prefix, ...styles.prefix }}
               >
-                {prefix}
+                {prefixNode}
               </div>
             )}
 
@@ -307,16 +325,16 @@ const ForwardSender = React.forwardRef<any, SenderProps>((props, ref) => {
             )}
 
             {/* Action List */}
-            {actionNode && (
+            {suffixNode && (
               <div
                 className={classnames(
                   actionListCls,
-                  contextConfig.classNames.actions,
-                  classNames.actions,
+                  contextConfig.classNames.suffix,
+                  classNames.suffix,
                 )}
-                style={{ ...contextConfig.styles.actions, ...styles.actions }}
+                style={{ ...contextConfig.styles.suffix, ...styles.suffix }}
               >
-                {actionNode}
+                {suffixNode}
               </div>
             )}
           </div>

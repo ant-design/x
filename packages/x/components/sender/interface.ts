@@ -8,7 +8,7 @@ type TextareaProps = GetProps<typeof import('antd').Input.TextArea>;
 
 export type SubmitType = 'enter' | 'shiftEnter' | false;
 
-type SemanticType = 'root' | 'prefix' | 'input' | 'actions' | 'footer';
+type SemanticType = 'root' | 'prefix' | 'input' | 'suffix' | 'footer';
 
 export interface SenderComponents {
   input?: React.ComponentType<TextareaProps>;
@@ -21,14 +21,13 @@ export type ActionsComponents = {
   SpeechButton: React.ComponentType<ButtonProps>;
 };
 
-export type ActionsRender = (
+export type BaseNode = React.ReactNode | false;
+export type NodeRender = (
   ori: React.ReactNode,
   info: {
     components: ActionsComponents;
   },
-) => React.ReactNode;
-
-export type FooterRender = (info: { components: ActionsComponents }) => React.ReactNode;
+) => BaseNode;
 
 interface SlotConfigBaseType {
   type: 'text' | 'input' | 'select' | 'tag' | 'custom';
@@ -116,11 +115,11 @@ export interface SenderProps
   rootClassName?: string;
   style?: React.CSSProperties;
   className?: string;
-  actions?: React.ReactNode | ActionsRender;
   allowSpeech?: AllowSpeech;
-  prefix?: React.ReactNode;
-  footer?: React.ReactNode | FooterRender;
-  header?: React.ReactNode;
+  prefix?: BaseNode | NodeRender;
+  footer?: BaseNode | NodeRender;
+  suffix?: BaseNode | NodeRender;
+  header?: BaseNode | NodeRender;
   autoSize?: boolean | { minRows?: number; maxRows?: number };
 }
 

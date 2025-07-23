@@ -10,14 +10,14 @@ const locales = {
     root: '根节点',
     prefix: '前缀',
     input: '输入框',
-    actions: '操作列表',
+    suffix: '后缀',
     footer: '底部',
   },
   en: {
     root: 'Root',
     prefix: 'Prefix',
     input: 'Input',
-    actions: 'Action List',
+    suffix: 'Suffix',
     footer: 'Footer',
   },
 };
@@ -46,7 +46,7 @@ const App: React.FC = () => {
           { name: 'root', desc: locale.root },
           { name: 'prefix', desc: locale.prefix },
           { name: 'input', desc: locale.input },
-          { name: 'actions', desc: locale.actions },
+          { name: 'suffix', desc: locale.suffix },
           { name: 'footer', desc: locale.footer },
         ]}
       >

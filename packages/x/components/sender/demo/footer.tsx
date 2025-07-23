@@ -32,7 +32,7 @@ const App: React.FC = () => {
       onChange={setValue}
       autoSize={{ minRows: 2, maxRows: 6 }}
       placeholder="Press Enter to send message"
-      footer={({ components }) => {
+      footer={(_, { components }) => {
         const { SendButton, LoadingButton, SpeechButton } = components;
         return (
           <Flex justify="space-between" align="center">
@@ -64,7 +64,7 @@ const App: React.FC = () => {
       onCancel={() => {
         setLoading(false);
       }}
-      actions={false}
+      suffix={false}
     />
   );
 };
