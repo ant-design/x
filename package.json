@@ -62,8 +62,8 @@
       "limit": "700 KiB"
     },
     {
-      "path": "./packages/x-markdown/dist/plugins/mermaid.min.js",
-      "limit": "700 KiB"
+      "path": "./packages/x-markdown/dist/mermaid.min.js",
+      "limit": "800 KiB"
     }
   ],
   "description": "Craft AI-driven interfaces effortlessly",
