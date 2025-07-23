@@ -2,7 +2,7 @@
 
 exports[`ThoughtChain.Item Component ThoughtChain component work 1`] = `
 <div
-  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+  class="ant-thought-chain css-var-root ant-thought-chain-item ant-thought-chain-item-solid"
 >
   <div
     class="ant-thought-chain-item-content"
@@ -18,7 +18,7 @@ exports[`ThoughtChain.Item Component ThoughtChain component work 1`] = `
 
 exports[`ThoughtChain.Item Component rtl render component should be rendered correctly in RTL direction 1`] = `
 <div
-  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid ant-thought-chain-item-rtl"
+  class="ant-thought-chain css-var-root ant-thought-chain-item ant-thought-chain-item-solid ant-thought-chain-item-rtl"
 >
   <div
     class="ant-thought-chain-item-content"
@@ -34,7 +34,7 @@ exports[`ThoughtChain.Item Component rtl render component should be rendered cor
 
 exports[`ThoughtChain.Item Component test theme component should be rendered correctly when configuring the theme.components 1`] = `
 <div
-  class="ant-thought-chain ant-thought-chain-item ant-thought-chain-item-solid"
+  class="ant-thought-chain css-var-«r3» ant-thought-chain-item ant-thought-chain-item-solid"
 >
   <div
     class="ant-thought-chain-item-content"

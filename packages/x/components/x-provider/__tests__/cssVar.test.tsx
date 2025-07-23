@@ -1,10 +1,8 @@
+import { createCache, StyleProvider } from '@ant-design/cssinjs';
 import React from 'react';
+import { render } from '../../../tests/utils';
 import { Bubble } from '../../index';
 import XProvider from '../index';
-
-import { render } from '../../../tests/utils';
-
-import { StyleProvider, createCache } from '@ant-design/cssinjs';
 
 describe('XProvider.cssVar', () => {
   beforeAll(() => {
@@ -28,15 +26,15 @@ describe('XProvider.cssVar', () => {
 
     const styleList = Array.from(document.head.querySelectorAll('style'));
     const bubbleStyle = styleList.find((style) => style.innerHTML.includes('.ant-bubble'))!;
-    expect(bubbleStyle.innerHTML).not.toContain('var(--ant-');
+    expect(bubbleStyle.innerHTML).toContain('var(--ant-');
 
-    expect(container.querySelector('.ant-bubble')?.className).not.toContain('css-var-');
+    expect(container.querySelector('.ant-bubble')?.className).toContain('css-var-');
   });
 
   it('with XProvider', () => {
     const { container } = render(
       <StyleProvider cache={createCache()}>
-        <XProvider theme={{ cssVar: true }}>
+        <XProvider>
           <Bubble content="test" />
         </XProvider>
       </StyleProvider>,

@@ -73,7 +73,7 @@ const App = () => {
 
       setHasNextChunk(true);
       const id = setInterval(() => {
-        const addCount = Math.floor(Math.random() * 30);
+        const addCount = Math.floor(Math.random() * 10);
         currentContent = fullContent.slice(0, currentContent.length + addCount);
         onUpdate(currentContent);
         if (currentContent === fullContent) {

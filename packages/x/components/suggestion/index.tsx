@@ -1,5 +1,5 @@
-import { Cascader, Flex, version } from 'antd';
 import type { CascaderProps } from 'antd';
+import { Cascader, Flex, version } from 'antd';
 import classnames from 'classnames';
 import { useEvent, useMergedState } from 'rc-util';
 import React, { useState } from 'react';
@@ -68,7 +68,7 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
   const contextConfig = useXComponentConfig('suggestion');
 
   // ============================ Styles ============================
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+  const [hashId, cssVarCls] = useStyle(prefixCls);
 
   // =========================== Trigger ============================
   const [mergedOpen, setOpen] = useMergedState(false, {
@@ -143,7 +143,7 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
     compatibleProps.onDropdownVisibleChange = onInternalOpenChange;
   }
 
-  return wrapCSSVar(
+  return (
     <Cascader
       options={itemList}
       open={mergedOpen}
@@ -155,7 +155,7 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
         [`${prefixCls}-block`]: block,
       })}
       onChange={onInternalChange}
-      dropdownMatchSelectWidth={block}
+      popupMatchSelectWidth={block}
     >
       <div
         className={classnames(
@@ -174,7 +174,7 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
       >
         {childNode}
       </div>
-    </Cascader>,
+    </Cascader>
   );
 }
 

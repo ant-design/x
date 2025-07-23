@@ -1,10 +1,10 @@
+import classnames from 'classnames';
 import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import useXProviderContext from '../../hooks/use-x-provider-context';
-import useStyle from './style';
-import classnames from 'classnames';
 import type { PluginsType } from '../type';
+import useStyle from './style';
 
 const HighlightCode: PluginsType['HighlightCode'] = (props) => {
   const {
@@ -21,7 +21,7 @@ const HighlightCode: PluginsType['HighlightCode'] = (props) => {
   // ============================ style ============================
   const { getPrefixCls, direction } = useXProviderContext();
   const prefixCls = getPrefixCls('highlightCode', customizePrefixCls);
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+  const [hashId, cssVarCls] = useStyle(prefixCls);
 
   const mergedCls = classnames(prefixCls, className, classNames?.root, hashId, cssVarCls, {
     [`${prefixCls}-rtl`]: direction === 'rtl',
@@ -46,7 +46,7 @@ const HighlightCode: PluginsType['HighlightCode'] = (props) => {
     );
   };
 
-  return wrapCSSVar(
+  return (
     <div className={mergedCls} style={style}>
       {renderTitle()}
       <div className={classNames?.code}>
@@ -69,7 +69,7 @@ const HighlightCode: PluginsType['HighlightCode'] = (props) => {
           {children.replace(/\n$/, '')}
         </SyntaxHighlighter>
       </div>
-    </div>,
+    </div>
   );
 };
 

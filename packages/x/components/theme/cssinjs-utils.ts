@@ -7,11 +7,11 @@ import type {
   OverrideTokenMap as OverrideTokenTypeUtil,
   TokenMapKey,
 } from '@ant-design/cssinjs-utils';
-import type { AliasToken } from 'antd/es/theme/internal';
+import type { AliasToken } from 'antd/es/theme/interface';
 import type { AnyObject } from '../_util/type';
 import type { ComponentTokenMap } from './interface/components';
 
-export type { AliasToken, SeedToken } from 'antd/es/theme/internal';
+export type { AliasToken, SeedToken } from 'antd/es/theme/interface';
 
 /** Final token which contains the components level override */
 export type GlobalToken = GlobalTokenTypeUtil<ComponentTokenMap, AliasToken>;

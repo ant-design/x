@@ -1,11 +1,39 @@
 import { unit } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
+import { FastColor } from '@ant-design/fast-color';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
 import genSenderHeaderStyle from './header';
+import genSlotTextAreaStyle from './slot-textarea';
 
 // biome-ignore lint/suspicious/noEmptyInterface: ComponentToken need to be empty by default
-export interface ComponentToken {}
+export interface ComponentToken {
+  /**
+   * @desc 词槽背景颜色
+   * @descEN Slot background color
+   */
+  colorBgSlot: string;
+  /**
+   * @desc 词槽文本颜色
+   * @descEN Slot text color
+   */
+  colorTextSlot: string;
+  /**
+   * @desc 词槽文本占位符颜色
+   * @descEN Slot text placeholder color
+   */
+  colorTextSlotPlaceholder: string;
+  /**
+   * @desc 词槽边框颜色
+   * @descEN Slot border color
+   */
+  colorBorderSlot: string;
+  /**
+   * @desc 词槽边框悬浮态颜色
+   * @descEN Slot border hover color
+   */
+  colorBorderSlotHover: string;
+}
 
 export interface SenderToken extends FullToken<'Sender'> {
   SenderContentMaxWidth: number | string;
@@ -145,7 +173,21 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
   };
 };
 
-export const prepareComponentToken: GetDefaultToken<'Sender'> = () => ({});
+export const prepareComponentToken: GetDefaultToken<'Sender'> = (token) => {
+  const { colorPrimary } = token;
+  const colorBgSlot = new FastColor(colorPrimary).setA(0.06).toRgbString();
+  const colorTextSlot = colorPrimary;
+  const colorTextSlotPlaceholder = new FastColor(colorPrimary).setA(0.25).toRgbString();
+  const colorBorderSlotHover = new FastColor(colorPrimary).setA(0.1).toRgbString();
+  const colorBorderSlot = colorBgSlot;
+  return {
+    colorBgSlot,
+    colorTextSlot,
+    colorTextSlotPlaceholder,
+    colorBorderSlotHover,
+    colorBorderSlot,
+  };
+};
 
 export default genStyleHooks<'Sender'>(
   'Sender',
@@ -154,7 +196,13 @@ export default genStyleHooks<'Sender'>(
     const SenderToken = mergeToken<SenderToken>(token, {
       SenderContentMaxWidth: `calc(100% - ${unit(calc(paddingXS).add(32).equal())})`,
     });
-    return [genSenderStyle(SenderToken), genSenderHeaderStyle(SenderToken)];
+    return [
+      genSenderStyle(SenderToken),
+      genSenderHeaderStyle(SenderToken),
+      genSlotTextAreaStyle(SenderToken),
+    ];
   },
   prepareComponentToken,
 );
+
+export { genSlotTextAreaStyle };

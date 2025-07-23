@@ -43,9 +43,16 @@ const genThinkStyle: GenerateStyle<ThinkToken> = (token) => {
         fontSize: fontSizeHeading5,
         display: 'flex',
       },
+      '&-status-text': {
+        lineHeight: token.lineHeight,
+        fontSize: token.fontSize,
+      },
 
       '&-status-down-icon': {
         fontSize: fontSizeSM,
+        svg: {
+          transition: `all ${token.motionDurationMid} ${token.motionEaseInOut}`,
+        },
       },
 
       '&-content': {

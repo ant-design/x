@@ -13,6 +13,7 @@ Key characteristics of deep thinking include:
 ​Skepticism & Reflection: Challenging existing conclusions, authoritative opinions, and even personal biases, validating them through logic or evidence.
 ​Long-term Value Focus: Prioritizing systemic consequences and sustainable impact over short-term or localized benefits.
 This mode of thinking helps individuals avoid cognitive biases in complex scenarios, improve decision-making, and generate groundbreaking insights in fields such as academic research, business innovation, and social problem-solving.</think>
+# Hello Deep Thinking\n - Deep thinking is over.\n- You can use the think tag to package your thoughts.
 `;
 
 const roles: RolesType = {
@@ -78,7 +79,7 @@ const App: React.FC = () => {
 
   // Chat messages
   const { onRequest, messages } = useXChat({
-    agent,
+    agent
   });
 
   return (

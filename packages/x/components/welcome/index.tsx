@@ -7,7 +7,7 @@ import { useXProviderContext } from '../x-provider';
 
 import useStyle from './style';
 
-export type SemanticType = 'title' | 'description' | 'icon' | 'extra';
+export type SemanticType = 'root' | 'title' | 'description' | 'icon' | 'extra';
 
 export interface WelcomeProps {
   prefixCls?: string;
@@ -54,7 +54,7 @@ function Welcome(props: WelcomeProps, ref: React.Ref<HTMLDivElement>) {
   const contextConfig = useXComponentConfig('welcome');
 
   // ============================ Styles ============================
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+  const [hashId, cssVarCls] = useStyle(prefixCls);
 
   // ============================= Icon =============================
   const iconNode = React.useMemo(() => {
@@ -116,7 +116,7 @@ function Welcome(props: WelcomeProps, ref: React.Ref<HTMLDivElement>) {
   }, [extra]);
 
   // ============================ Render ============================
-  return wrapCSSVar(
+  return (
     <Flex
       ref={ref}
       className={classnames(
@@ -124,6 +124,7 @@ function Welcome(props: WelcomeProps, ref: React.Ref<HTMLDivElement>) {
         contextConfig.className,
         className,
         rootClassName,
+        classNames.root,
         hashId,
         cssVarCls,
         `${prefixCls}-${variant}`,
@@ -131,7 +132,7 @@ function Welcome(props: WelcomeProps, ref: React.Ref<HTMLDivElement>) {
           [`${prefixCls}-rtl`]: direction === 'rtl',
         },
       )}
-      style={style}
+      style={{ ...style, ...styles.root }}
     >
       {/* Icon */}
       {iconNode}
@@ -162,7 +163,7 @@ function Welcome(props: WelcomeProps, ref: React.Ref<HTMLDivElement>) {
           </Typography.Text>
         )}
       </Flex>
-    </Flex>,
+    </Flex>
   );
 }
 

@@ -5,6 +5,10 @@ const localeValues: Required<Locale> = {
   Conversations: {
     create: 'New chat',
   },
+  Actions: {
+    feedbackLike: 'like',
+    feedbackDislike: 'dislike',
+  },
 };
 
 export default localeValues;

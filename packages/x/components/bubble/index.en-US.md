@@ -33,6 +33,7 @@ Often used when chatting.
 <code src="./demo/gpt-vis.tsx">Using GPT-Vis to render charts</code>
 <code src="./demo/debug.tsx" debug>debug</code>
 <code src="./demo/debug-list.tsx" debug>debug list</code>
+<code src="./demo/onScroll.tsx">onScroll</code>
 
 ## API
 
@@ -83,6 +84,7 @@ type CustomContentType {
 | autoScroll | When the content is updated, scroll to the latest position automatically. If the user scrolls, the automatic scrolling will be paused. | boolean | true |  |
 | items | Bubble items list | (BubbleProps & { key?: string \| number, role?: string })[] | - |  |
 | roles | Set the default properties of the bubble. The `role` in `items` will be automatically matched. | Record<string, BubbleProps> \| (bubble, index) => BubbleProps | - |  |
+| onScroll | Listen to `Bubble.List` scroll event | (e: React.UIEvent<HTMLDivElement, UIEvent>) => void | - | 1.5.0 |
 
 ## Semantic DOM
 

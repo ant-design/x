@@ -104,7 +104,8 @@ export default defineConfig({
               if (
                 instance.name === 'cose-base' ||
                 instance.name === 'layout-base' ||
-                instance.name.startsWith('d3-')
+                instance.name.startsWith('d3-') ||
+                instance.name === 'internmap'
               ) {
                 return true;
               }
