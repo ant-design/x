@@ -31,10 +31,7 @@
   "license": "MIT",
   "description": "placeholder for @ant-design/x-markdown",
   "dependencies": {
-<<<<<<< HEAD
     "@ant-design/colors": "^8.0.0",
-=======
->>>>>>> 47c2e99d1d85529a405453ea4f161803fb20c8a3
     "@ant-design/cssinjs": "^2.0.0-alpha.6",
     "@ant-design/cssinjs-utils": "^2.0.0-alpha.2",
     "@ant-design/fast-color": "^3.0.0",
