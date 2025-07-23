@@ -116,16 +116,17 @@ export function useInternalToken(): [
     key: ctxCssVar?.key || 'css-var-root',
   };
 
+  const mergedTheme = theme || defaultTheme;
+
   const [token, hashId, realToken] = useCacheToken<GlobalToken, SeedToken>(
-    theme,
+    mergedTheme,
     [antdTheme.defaultSeed, rootDesignToken],
     {
       salt: `${version}-${hashed || ''}`,
       override,
       getComputedToken,
       cssVar: {
-        prefix: cssVar.prefix,
-        key: cssVar.key,
+        ...cssVar,
         unitless,
         ignore,
         preserve,
