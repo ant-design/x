@@ -90,7 +90,14 @@ const Demo: React.FC = () => {
             inputRef.current?.insert?.(' some text ');
           }}
         >
-          Insert
+          Insert Text
+        </Button>
+        <Button
+          onClick={() => {
+            inputRef.current?.insert?.(' some text ');
+          }}
+        >
+          Insert Slot
         </Button>
         <Button
           onClick={() => {

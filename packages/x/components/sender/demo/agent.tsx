@@ -1,16 +1,43 @@
-import { ApiOutlined, PaperClipOutlined, SearchOutlined } from '@ant-design/icons';
+import {
+  AntDesignOutlined,
+  ApiOutlined,
+  CodeOutlined,
+  EditOutlined,
+  OpenAIOutlined,
+  PaperClipOutlined,
+  SearchOutlined,
+  SmileOutlined,
+} from '@ant-design/icons';
 import { Sender } from '@ant-design/x';
-import { Button, Divider, Flex, message, Switch, theme } from 'antd';
+import { Button, Divider, Dropdown, Flex, MenuProps, message, theme } from 'antd';
 import React, { useEffect, useState } from 'react';
+
+const items: MenuProps['items'] = [
+  {
+    key: 'deep_search',
+    icon: <SearchOutlined />,
+    label: 'Deep Search',
+  },
+  {
+    key: 'ai_code',
+    label: 'AI Code',
+    icon: <CodeOutlined />,
+  },
+  {
+    key: 'ai_writing',
+    label: 'Writing',
+    icon: <EditOutlined />,
+  },
+];
 
 const App: React.FC = () => {
   const [value, setValue] = useState<string>('Hello? this is X!');
   const [loading, setLoading] = useState<boolean>(false);
-
+  const [deepThink, setDeepThink] = useState<boolean>(false);
   const { token } = theme.useToken();
 
   const iconStyle = {
-    fontSize: 18,
+    fontSize: 16,
     color: token.colorText,
   };
 
@@ -37,9 +64,17 @@ const App: React.FC = () => {
             <Flex justify="space-between" align="center">
               <Flex gap="small" align="center">
                 <Button style={iconStyle} type="text" icon={<PaperClipOutlined />} />
-                Deep Thinking
-                <Switch size="small" />
-                <Button icon={<SearchOutlined />}>Global Search</Button>
+                <Button
+                  color={deepThink ? 'primary' : 'default'}
+                  variant={deepThink ? 'solid' : 'outlined'}
+                  onClick={() => setDeepThink((ori) => !ori)}
+                  icon={<OpenAIOutlined />}
+                >
+                  Deep Think
+                </Button>
+                <Dropdown menu={{ items }}>
+                  <Button icon={<AntDesignOutlined />}>Agent</Button>
+                </Dropdown>
               </Flex>
               <Flex align="center">
                 <Button type="text" style={iconStyle} icon={<ApiOutlined />} />
