@@ -1,10 +1,18 @@
+import { ApiOutlined, PaperClipOutlined, SearchOutlined } from '@ant-design/icons';
 import { Sender } from '@ant-design/x';
-import { Flex, message } from 'antd';
+import { Button, Divider, Flex, message, Switch, theme } from 'antd';
 import React, { useEffect, useState } from 'react';
 
 const App: React.FC = () => {
   const [value, setValue] = useState<string>('Hello? this is X!');
   const [loading, setLoading] = useState<boolean>(false);
+
+  const { token } = theme.useToken();
+
+  const iconStyle = {
+    fontSize: 18,
+    color: token.colorText,
+  };
 
   // Mock send message
   useEffect(() => {
@@ -24,6 +32,32 @@ const App: React.FC = () => {
       <Sender
         loading={loading}
         value={value}
+        footer={({ components }) => {
+          const { SendButton, LoadingButton, SpeechButton } = components;
+          return (
+            <Flex justify="space-between" align="center">
+              <Flex gap="small" align="center">
+                <Button style={iconStyle} type="text" icon={<PaperClipOutlined />} />
+                <Divider orientation="vertical" />
+                Deep Thinking
+                <Switch size="small" />
+                <Divider orientation="vertical" />
+                <Button icon={<SearchOutlined />}>Global Search</Button>
+              </Flex>
+              <Flex align="center">
+                <Button type="text" style={iconStyle} icon={<ApiOutlined />} />
+                <Divider orientation="vertical" />
+                <SpeechButton style={iconStyle} />
+                <Divider orientation="vertical" />
+                {loading ? (
+                  <LoadingButton type="default" />
+                ) : (
+                  <SendButton type="primary" disabled={false} />
+                )}
+              </Flex>
+            </Flex>
+          );
+        }}
         onChange={(v) => {
           setValue(v);
         }}
