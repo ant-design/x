@@ -21,7 +21,7 @@ const HighlightCode: PluginsType['HighlightCode'] = (props) => {
   // ============================ style ============================
   const { getPrefixCls, direction } = useXProviderContext();
   const prefixCls = getPrefixCls('highlightCode', customizePrefixCls);
-  const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+  const [hashId, cssVarCls] = useStyle(prefixCls);
 
   const mergedCls = classnames(prefixCls, className, classNames?.root, hashId, cssVarCls, {
     [`${prefixCls}-rtl`]: direction === 'rtl',
@@ -46,7 +46,7 @@ const HighlightCode: PluginsType['HighlightCode'] = (props) => {
     );
   };
 
-  return wrapCSSVar(
+  return (
     <div className={mergedCls} style={style}>
       {renderTitle()}
       <div className={classNames?.code}>
@@ -69,7 +69,7 @@ const HighlightCode: PluginsType['HighlightCode'] = (props) => {
           {children.replace(/\n$/, '')}
         </SyntaxHighlighter>
       </div>
-    </div>,
+    </div>
   );
 };
 
