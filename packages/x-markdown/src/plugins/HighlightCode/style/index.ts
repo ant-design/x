@@ -58,7 +58,7 @@ export default genStyleHooks<'HighlightCode'>(
   'HighlightCode',
   (token) => {
     const highlightCodeToken = mergeToken<HighlightCodeToken>(token, {});
-    return [genHighlightCodeStyle(highlightCodeToken)] as any;
+    return [genHighlightCodeStyle(highlightCodeToken)];
   },
   prepareComponentToken,
 );

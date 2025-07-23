@@ -1,6 +1,5 @@
 import { Token, XMarkdown } from '@ant-design/x-markdown';
 import React from 'react';
-import 'github-markdown-css/github-markdown-light.css';
 import './plugin.css';
 import '@ant-design/x-markdown/themes/light.css';
 import { Popover } from 'antd';

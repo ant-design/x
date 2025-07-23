@@ -108,11 +108,18 @@ export function useInternalToken(): [
     hashed,
     theme = defaultTheme,
     override,
-    cssVar,
+    cssVar: ctxCssVar,
   } = React.useContext(antdTheme._internalContext);
 
+  const cssVar = {
+    prefix: ctxCssVar?.prefix || 'ant',
+    key: ctxCssVar?.key || 'css-var-root',
+  };
+
+  const mergedTheme = theme || defaultTheme;
+
   const [token, hashId, realToken] = useCacheToken<GlobalToken, SeedToken>(
-    theme,
+    mergedTheme,
     [antdTheme.defaultSeed, rootDesignToken],
     {
       salt: `${version}-${hashed || ''}`,

@@ -75,7 +75,7 @@ export default genStyleHooks<'Mermaid'>(
   'Mermaid',
   (token) => {
     const mermaidToken = mergeToken<MermaidToken>(token, {});
-    return [genMermaidStyle(mermaidToken)] as any;
+    return [genMermaidStyle(mermaidToken)];
   },
   prepareComponentToken,
 );

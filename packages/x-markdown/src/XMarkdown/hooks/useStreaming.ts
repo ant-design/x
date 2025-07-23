@@ -234,7 +234,7 @@ const useStreaming = (input: string, config?: XMarkdownProps['streaming']) => {
           break;
         }
         case TokenType.MaybeHr: {
-          if (char !== '-' && char !== '=' && char !== ' ') {
+          if (char !== '-' && char !== '=') {
             flushOutput();
           }
           break;
