@@ -2416,8 +2416,12 @@ exports[`renders components/bubble/demo/markdown.tsx extend context correctly 1`
       <article
         class="ant-typography css-var-«r5»"
       >
-        <div>
-          <blockquote />
+        <div
+          class=""
+          style="direction: ltr;"
+        >
+          <blockquote>
+          </blockquote>
         </div>
       </article>
     </div>

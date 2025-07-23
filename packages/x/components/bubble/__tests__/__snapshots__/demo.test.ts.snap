@@ -2323,11 +2323,7 @@ exports[`renders components/bubble/demo/markdown.tsx correctly 1`] = `
     >
       <article
         class="ant-typography css-var-«R0»"
-      >
-        <div>
-          <blockquote />
-        </div>
-      </article>
+      />
     </div>
   </div>
 </div>
