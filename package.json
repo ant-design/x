@@ -62,7 +62,7 @@
       "limit": "700 KiB"
     },
     {
-      "path": "./packages/x-markdown/dist/mermaid.min.js",
+      "path": "./packages/x-markdown/dist/plugins/mermaid.min.js",
       "limit": "800 KiB"
     }
   ],
@@ -89,6 +89,6 @@
   },
   "overrides": {
     "@emotion/hash": "^0.9.2",
-    "react-is":"^18.3.1"
+    "react-is": "^18.3.1"
   }
 }
