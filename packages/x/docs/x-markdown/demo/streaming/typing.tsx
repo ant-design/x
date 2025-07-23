@@ -1,7 +1,7 @@
 import type { BubbleProps } from '@ant-design/x';
 import { Bubble } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
-import { Slider, Flex, Typography, Space } from 'antd';
+import { Flex, Slider, Space, Typography } from 'antd';
 import React from 'react';
 import '@ant-design/x-markdown/themes/light.css';
 

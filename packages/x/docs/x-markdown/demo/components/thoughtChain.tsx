@@ -1,10 +1,9 @@
-import { Bubble } from '@ant-design/x';
+import { CheckCircleOutlined, InfoCircleOutlined, LoadingOutlined } from '@ant-design/icons';
+import type { ThoughtChainItem } from '@ant-design/x';
+import { Bubble, ThoughtChain } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
 import { Button, Card, Flex } from 'antd';
 import React from 'react';
-import { CheckCircleOutlined, InfoCircleOutlined, LoadingOutlined } from '@ant-design/icons';
-import type { ThoughtChainItem } from '@ant-design/x';
-import { ThoughtChain } from '@ant-design/x';
 
 function getStatusIcon(status: ThoughtChainItem['status']) {
   switch (status) {
