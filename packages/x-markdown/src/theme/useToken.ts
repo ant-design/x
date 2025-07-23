@@ -1,18 +1,18 @@
-import formatToken from 'antd/es/theme/util/alias';
-import { createTheme, useCacheToken } from '@ant-design/cssinjs';
-import { theme as antdTheme } from 'antd';
 import type { Theme } from '@ant-design/cssinjs';
-import type { AliasToken, SeedToken } from 'antd/es/theme/internal';
-import type { DesignTokenProviderProps } from 'antd/es/theme/context';
-import React from 'react';
-import { ignore, unitless } from 'antd/es/theme/useToken';
-import version from '../version';
+import { createTheme, useCacheToken } from '@ant-design/cssinjs';
 import type {
+  FullToken as FullTokenTypeUtil,
+  GetDefaultToken as GetDefaultTokenTypeUtil,
   GlobalToken as GlobalTokenTypeUtil,
   TokenMapKey,
-  GetDefaultToken as GetDefaultTokenTypeUtil,
-  FullToken as FullTokenTypeUtil,
 } from '@ant-design/cssinjs-utils';
+import { theme as antdTheme } from 'antd';
+import type { DesignTokenProviderProps } from 'antd/es/theme/context';
+import type { AliasToken, SeedToken } from 'antd/es/theme/internal';
+import { ignore, unitless } from 'antd/es/theme/useToken';
+import formatToken from 'antd/es/theme/util/alias';
+import React from 'react';
+import version from '../version';
 import { ComponentTokenMap } from './interface/components';
 
 const defaultTheme: Theme<SeedToken, AliasToken> = createTheme(antdTheme.defaultAlgorithm);
@@ -108,8 +108,13 @@ export function useInternalToken(): [
     hashed,
     theme = defaultTheme,
     override,
-    cssVar,
+    cssVar: ctxCssVar,
   } = React.useContext(antdTheme._internalContext);
+
+  const cssVar = {
+    prefix: ctxCssVar?.prefix || 'ant',
+    key: ctxCssVar?.key || 'css-var-root',
+  };
 
   const [token, hashId, realToken] = useCacheToken<GlobalToken, SeedToken>(
     theme,
@@ -118,7 +123,7 @@ export function useInternalToken(): [
       salt: `${version}-${hashed || ''}`,
       override,
       getComputedToken,
-      cssVar: cssVar && {
+      cssVar: {
         prefix: cssVar.prefix,
         key: cssVar.key,
         unitless,
