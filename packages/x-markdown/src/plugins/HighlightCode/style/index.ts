@@ -22,7 +22,7 @@ export interface ComponentToken {
   codeBorderRadius: number;
 }
 
-export interface HighlightCodeToken extends FullToken<'HighlightCode'> {}
+export interface HighlightCodeToken extends FullToken<'HighlightCode'> { }
 
 const genHighlightCodeStyle: GenerateStyle<HighlightCodeToken> = (token) => {
   const { componentCls, codeBorderRadius, codeHeaderBgColor, padding, codePadding } = token;
@@ -58,7 +58,7 @@ export default genStyleHooks<'HighlightCode'>(
   'HighlightCode',
   (token) => {
     const highlightCodeToken = mergeToken<HighlightCodeToken>(token, {});
-    return [genHighlightCodeStyle(highlightCodeToken)];
+    return [genHighlightCodeStyle(highlightCodeToken)] as any;
   },
   prepareComponentToken,
 );

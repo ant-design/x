@@ -27,7 +27,7 @@ export interface ComponentToken {
   mermaidFontSize: number;
 }
 
-export interface MermaidToken extends FullToken<'Mermaid'> {}
+export interface MermaidToken extends FullToken<'Mermaid'> { }
 
 const genMermaidStyle: GenerateStyle<MermaidToken> = (token) => {
   const { componentCls, mermaidBorderRadius, mermaidHeaderBgColor, mermaidPadding } = token;
@@ -75,7 +75,7 @@ export default genStyleHooks<'Mermaid'>(
   'Mermaid',
   (token) => {
     const mermaidToken = mergeToken<MermaidToken>(token, {});
-    return [genMermaidStyle(mermaidToken)];
+    return [genMermaidStyle(mermaidToken)] as any;
   },
   prepareComponentToken,
 );
