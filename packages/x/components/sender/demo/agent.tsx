@@ -1,15 +1,13 @@
 import { Sender } from '@ant-design/x';
-import { App, Flex } from 'antd';
-import React, { useState } from 'react';
+import { Flex, message } from 'antd';
+import React, { useEffect, useState } from 'react';
 
-const Demo: React.FC = () => {
+const App: React.FC = () => {
   const [value, setValue] = useState<string>('Hello? this is X!');
   const [loading, setLoading] = useState<boolean>(false);
 
-  const { message } = App.useApp();
-
   // Mock send message
-  React.useEffect(() => {
+  useEffect(() => {
     if (loading) {
       const timer = setTimeout(() => {
         setLoading(false);
@@ -38,16 +36,10 @@ const Demo: React.FC = () => {
           setLoading(false);
           message.error('Cancel sending!');
         }}
-        autoSize={{ minRows: 4, maxRows: 6 }}
+        autoSize={{ minRows: 2, maxRows: 6 }}
       />
-      <Sender value="Force as loading" loading readOnly />
-      <Sender disabled value="Set to disabled" />
     </Flex>
   );
 };
 
-export default () => (
-  <App>
-    <Demo />
-  </App>
-);
+export default () => <App />;
