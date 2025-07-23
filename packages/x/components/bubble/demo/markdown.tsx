@@ -1,7 +1,7 @@
 import { UserOutlined } from '@ant-design/icons';
 import type { BubbleProps } from '@ant-design/x';
 import { Bubble } from '@ant-design/x';
-import MarkdownX from '@ant-design/x-markdown';
+import XMarkdown from '@ant-design/x-markdown';
 import { Typography } from 'antd';
 /* eslint-disable react/no-danger */
 import React from 'react';
@@ -15,7 +15,7 @@ Link: [Ant Design X](https://x.ant.design)
 const renderMarkdown: BubbleProps['messageRender'] = (content) => {
   return (
     <Typography>
-      <MarkdownX content={content} />
+      <XMarkdown content={content} />
     </Typography>
   );
 };
