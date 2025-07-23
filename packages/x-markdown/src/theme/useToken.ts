@@ -118,9 +118,8 @@ export function useInternalToken(): [
       salt: `${version}-${hashed || ''}`,
       override,
       getComputedToken,
-      cssVar: cssVar && {
-        prefix: cssVar.prefix,
-        key: cssVar.key,
+      cssVar: {
+        ...cssVar,
         unitless,
         ignore,
         preserve,
