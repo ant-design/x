@@ -18,6 +18,13 @@ const locales = {
   },
 };
 
+const content = `import React from 'react';
+import { XMarkdown } from '@ant-design/x-markdown';
+
+const App = () => <XMarkdown content='Hello World' />;
+export default App;
+`;
+
 const App: React.FC = () => {
   const [locale] = useLocale(locales);
 
@@ -31,9 +38,7 @@ const App: React.FC = () => {
         { name: 'code', desc: locale.code },
       ]}
     >
-      <HighlightCode lang="typescript">
-        console.log("this is XMarkdown Plugin HighlightCode");
-      </HighlightCode>
+      <HighlightCode lang="typescript">{content}</HighlightCode>
     </SemanticPreview>
   );
 };
