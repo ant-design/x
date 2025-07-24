@@ -63,7 +63,7 @@ const Demo: React.FC = () => {
         placeholder: 'Select a city',
       },
     },
-    { type: 'text', text: ', and I want to travel with ' },
+    { type: 'text', value: ', and I want to travel with ' },
     { type: 'input', key: 'partner', props: { placeholder: 'Enter a name' } },
   ];
 
@@ -117,7 +117,6 @@ const Demo: React.FC = () => {
       {/* Sender 词槽填空示例 */}
       <Sender
         onSubmit={(value, config) => {
-          console.log(value, config, 22);
           message.info(value);
           setSlotConfig([]);
         }}
