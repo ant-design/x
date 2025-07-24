@@ -272,12 +272,16 @@ const Independent: React.FC = () => {
         onUpdate(data);
       });
 
+      stream.on('error', (error) => {
+        onError(error);
+      });
+
       stream.on('end', () => {
         onSuccess(dataArr);
       });
 
-      stream.on('error', (error) => {
-        onError(error);
+      stream.on('abort', () => {
+        onSuccess(dataArr);
       });
     },
   });
@@ -299,6 +303,12 @@ const Independent: React.FC = () => {
     },
     transformMessage: (info) => {
       const { originMessage, chunk } = info || {};
+      if (!chunk) {
+        return {
+          content: originMessage?.content || '',
+          role: 'assistant',
+        };
+      }
       let parsedPayload: { text?: string } | undefined;
       try {
         parsedPayload = JSON.parse((chunk as any).data.payload);
