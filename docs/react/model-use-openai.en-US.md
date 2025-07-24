@@ -1,6 +1,7 @@
 ---
 group:
   title: Model Integration
+  order: 1
 title: OpenAI
 order: 0
 tag: Updated

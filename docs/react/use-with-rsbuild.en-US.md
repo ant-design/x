@@ -1,6 +1,7 @@
 ---
 group:
   title: Basic Usage
+  order: 3
 order: 5
 title: Usage with Rsbuild
 ---

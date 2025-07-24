@@ -1,6 +1,7 @@
 ---
 group:
   title: 其他
+  order: 4
 order: 2
 title: FAQ
 ---

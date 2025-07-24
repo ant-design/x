@@ -1,6 +1,7 @@
 ---
 group:
   title: 模型接入
+  order: 1
 title: 通义千问
 order: 1
 tag: Updated
