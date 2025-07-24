@@ -289,11 +289,11 @@ const Independent: React.FC = () => {
     },
     transformMessage: (info) => {
       const { originMessage, chunk } = info || {};
-      let parsedPayload: any;
+      let parsedPayload: { text?: string } | undefined;
       try {
         parsedPayload = JSON.parse((chunk as any).data.payload);
       } catch (e) {
-        //
+        console.error('Failed to parse payload:', e);
       }
       let content = originMessage?.content || '';
       if (parsedPayload?.text) {
@@ -348,7 +348,9 @@ const Independent: React.FC = () => {
         onClick={() => {
           if (agent.isRequesting()) {
             message.error(
-              'Message is Requesting, you can create a new conversation after request done or abort it right now...',
+              isZhCN
+                ? '请求正在进行中，请等待请求完成。'
+                : 'Request is in progress, please wait for the request to complete.',
             );
             return;
           }
