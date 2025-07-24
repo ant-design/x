@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`renders components/attachments/demo/basic.tsx extend context correctly 1`] = `
 <div
@@ -763,6 +763,335 @@ exports[`renders components/attachments/demo/files.tsx extend context correctly 
 `;
 
 exports[`renders components/attachments/demo/files.tsx extend context correctly 2`] = `[]`;
+
+exports[`renders components/attachments/demo/files-custom.tsx extend context correctly 1`] = `
+<div
+  class="ant-app"
+>
+  <div
+    class="ant-flex ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  >
+    <div
+      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
+    >
+      <div
+        class="ant-attachment-list-card-icon"
+      >
+        <span
+          aria-label="robot"
+          class="anticon anticon-robot"
+          role="img"
+          style="color: rgb(250, 183, 20);"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="robot"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M300 328a60 60 0 10120 0 60 60 0 10-120 0zM852 64H172c-17.7 0-32 14.3-32 32v660c0 17.7 14.3 32 32 32h680c17.7 0 32-14.3 32-32V96c0-17.7-14.3-32-32-32zm-32 660H204V128h616v596zM604 328a60 60 0 10120 0 60 60 0 10-120 0zm250.2 556H169.8c-16.5 0-29.8 14.3-29.8 32v36c0 4.4 3.3 8 7.4 8h729.1c4.1 0 7.4-3.6 7.4-8v-36c.1-17.7-13.2-32-29.7-32zM664 508H360c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h304c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z"
+            />
+          </svg>
+        </span>
+      </div>
+      <div
+        class="ant-attachment-list-card-content"
+      >
+        <div
+          class="ant-attachment-list-card-name"
+        >
+          <div
+            class="ant-attachment-list-card-ellipsis-prefix"
+          >
+            excel-file
+          </div>
+          <div
+            class="ant-attachment-list-card-ellipsis-suffix"
+          >
+            .xlsx
+          </div>
+        </div>
+        <div
+          class="ant-attachment-list-card-desc"
+        >
+          <div
+            class="ant-attachment-list-card-ellipsis-prefix"
+          >
+            109 KB
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
+    >
+      <div
+        class="ant-attachment-list-card-icon"
+      >
+        <span
+          aria-label="file-image"
+          class="anticon anticon-file-image"
+          role="img"
+          style="color: rgb(22, 119, 255);"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="file-image"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M854.6 288.7L639.4 73.4c-6-6-14.2-9.4-22.7-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.6-9.4-22.6zM400 402c22.1 0 40 17.9 40 40s-17.9 40-40 40-40-17.9-40-40 17.9-40 40-40zm296 294H328c-6.7 0-10.4-7.7-6.3-12.9l99.8-127.2a8 8 0 0112.6 0l41.1 52.4 77.8-99.2a8 8 0 0112.6 0l136.5 174c4.3 5.2.5 12.9-6.1 12.9zm-94-370V137.8L790.2 326H602z"
+            />
+          </svg>
+        </span>
+      </div>
+      <div
+        class="ant-attachment-list-card-content"
+      >
+        <div
+          class="ant-attachment-list-card-name"
+        >
+          <div
+            class="ant-attachment-list-card-ellipsis-prefix"
+          >
+            image-file
+          </div>
+          <div
+            class="ant-attachment-list-card-ellipsis-suffix"
+          >
+            .png
+          </div>
+        </div>
+        <div
+          class="ant-attachment-list-card-desc"
+        >
+          <div
+            class="ant-attachment-list-card-ellipsis-prefix"
+          >
+            326 KB
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
+    >
+      <div
+        class="ant-attachment-list-card-icon"
+      >
+        <span
+          aria-label="copy"
+          class="anticon anticon-copy"
+          role="img"
+          style="color: rgb(140, 140, 140);"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="copy"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM382 896h-.2L232 746.2v-.2h150v150z"
+            />
+          </svg>
+        </span>
+      </div>
+      <div
+        class="ant-attachment-list-card-content"
+      >
+        <div
+          class="ant-attachment-list-card-name"
+        >
+          <div
+            class="ant-attachment-list-card-ellipsis-prefix"
+          >
+            pdf-file
+          </div>
+          <div
+            class="ant-attachment-list-card-ellipsis-suffix"
+          >
+            .pdf
+          </div>
+        </div>
+        <div
+          class="ant-attachment-list-card-desc"
+        >
+          <div
+            class="ant-attachment-list-card-ellipsis-prefix"
+          >
+            434 KB
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
+    >
+      <div
+        class="ant-attachment-list-card-icon"
+      >
+        <span
+          aria-label="video-camera"
+          class="anticon anticon-video-camera"
+          role="img"
+          style="color: rgb(255, 77, 79);"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="video-camera"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M912 302.3L784 376V224c0-35.3-28.7-64-64-64H128c-35.3 0-64 28.7-64 64v576c0 35.3 28.7 64 64 64h592c35.3 0 64-28.7 64-64V648l128 73.7c21.3 12.3 48-3.1 48-27.6V330c0-24.6-26.7-40-48-27.7zM328 352c0 4.4-3.6 8-8 8H208c-4.4 0-8-3.6-8-8v-48c0-4.4 3.6-8 8-8h112c4.4 0 8 3.6 8 8v48zm560 273l-104-59.8V458.9L888 399v226z"
+            />
+          </svg>
+        </span>
+      </div>
+      <div
+        class="ant-attachment-list-card-content"
+      >
+        <div
+          class="ant-attachment-list-card-name"
+        >
+          <div
+            class="ant-attachment-list-card-ellipsis-prefix"
+          >
+            video-file
+          </div>
+          <div
+            class="ant-attachment-list-card-ellipsis-suffix"
+          >
+            .mp4
+          </div>
+        </div>
+        <div
+          class="ant-attachment-list-card-desc"
+        >
+          <div
+            class="ant-attachment-list-card-ellipsis-prefix"
+          >
+            651 KB
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-overview"
+    >
+      <div
+        class="ant-attachment-list-card-icon"
+      >
+        <span
+          aria-label="audio"
+          class="anticon anticon-audio"
+          role="img"
+          style="color: rgb(255, 110, 49);"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="audio"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M512 624c93.9 0 170-75.2 170-168V232c0-92.8-76.1-168-170-168s-170 75.2-170 168v224c0 92.8 76.1 168 170 168zm330-170c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 140.3-113.7 254-254 254S258 594.3 258 454c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 168.7 126.6 307.9 290 327.6V884H326.7c-13.7 0-24.7 14.3-24.7 32v36c0 4.4 2.8 8 6.2 8h407.6c3.4 0 6.2-3.6 6.2-8v-36c0-17.7-11-32-24.7-32H548V782.1c165.3-18 294-158 294-328.1z"
+            />
+          </svg>
+        </span>
+      </div>
+      <div
+        class="ant-attachment-list-card-content"
+      >
+        <div
+          class="ant-attachment-list-card-name"
+        >
+          <div
+            class="ant-attachment-list-card-ellipsis-prefix"
+          >
+            audio-file
+          </div>
+          <div
+            class="ant-attachment-list-card-ellipsis-suffix"
+          >
+            .mp3
+          </div>
+        </div>
+        <div
+          class="ant-attachment-list-card-desc"
+        >
+          <div
+            class="ant-attachment-list-card-ellipsis-prefix"
+          >
+            760 KB
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-attachment-list-card ant-attachment-list-card-status-done ant-attachment-list-card-type-preview"
+    >
+      <div
+        class="ant-image"
+      >
+        <img
+          alt="preview"
+          class="ant-image-img"
+          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+        />
+        <div
+          class="ant-image-mask"
+        >
+          <div
+            class="ant-image-mask-info"
+          >
+            <span
+              aria-label="eye"
+              class="anticon anticon-eye"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="eye"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 000 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"
+                />
+              </svg>
+            </span>
+            Preview
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders components/attachments/demo/files-custom.tsx extend context correctly 2`] = `[]`;
 
 exports[`renders components/attachments/demo/overflow.tsx extend context correctly 1`] = `
 <div

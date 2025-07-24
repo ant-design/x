@@ -1,6 +1,6 @@
 {
   "name": "@ant-design/x",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Craft AI-driven interfaces effortlessly",
   "keywords": [
     "AI",
@@ -94,7 +94,7 @@
   "devDependencies": {
     "@ant-design/tools": "^19.0.2",
     "@ant-design/v5-patch-for-react-19": "^1.0.3",
-    "@antv/gpt-vis": "^0.4.1",
+    "@antv/gpt-vis": "^0.5.2",
     "@biomejs/biome": "^2.0.5",
     "@codecov/webpack-plugin": "^1.4.0",
     "@codesandbox/sandpack-react": "^2.19.8",
@@ -244,7 +244,7 @@
     "remark-rehype": "^11.1.0",
     "scroll-into-view-if-needed": "^3.1.0",
     "semver": "^7.6.3",
-    "sharp": "^0.33.5",
+    "sharp": "^0.34.3",
     "simple-git": "^3.26.0",
     "size-limit": "^11.1.5",
     "spinnies": "^0.5.1",
