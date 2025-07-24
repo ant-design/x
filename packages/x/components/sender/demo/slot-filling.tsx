@@ -87,14 +87,20 @@ const Demo: React.FC = () => {
         </Button>
         <Button
           onClick={() => {
-            inputRef.current?.insert?.(' some text ');
+            inputRef.current?.insert?.([{ type: 'text', text: ' some text ' }]);
           }}
         >
           Insert Text
         </Button>
         <Button
           onClick={() => {
-            inputRef.current?.insert?.(' some text ');
+            inputRef.current?.insert?.([
+              {
+                type: 'input',
+                key: 'partner_1',
+                props: { placeholder: 'Enter a name' },
+              },
+            ]);
           }}
         >
           Insert Slot

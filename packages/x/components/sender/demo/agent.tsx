@@ -6,7 +6,6 @@ import {
   OpenAIOutlined,
   PaperClipOutlined,
   SearchOutlined,
-  SmileOutlined,
 } from '@ant-design/icons';
 import { Sender } from '@ant-design/x';
 import { Button, Divider, Dropdown, Flex, MenuProps, message, theme } from 'antd';
