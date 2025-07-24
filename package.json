@@ -89,7 +89,7 @@
     "classnames": "^2.5.1",
     "rc-motion": "^2.9.2",
     "rc-util": "^5.43.0",
-    "tbox-nodejs-sdk": "^0.0.12"
+    "tbox-nodejs-sdk": "^0.0.13"
   },
   "devDependencies": {
     "@ant-design/tools": "^19.0.2",

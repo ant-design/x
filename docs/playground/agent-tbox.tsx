@@ -232,7 +232,8 @@ const useStyle = createStyles(({ token, css }) => {
 
 const Independent: React.FC = () => {
   const { styles } = useStyle();
-  const abortController = useRef<AbortController>(null);
+  const streamRef = useRef<any>(null); // 存储 tbox stream 对象
+  const abortControllerRef = useRef<AbortController | null>(null); // 存储 AbortController
 
   // ==================== State ====================
   const [messageHistory, setMessageHistory] = useState<Record<string, any>>({});
@@ -248,12 +249,21 @@ const Independent: React.FC = () => {
 
   // ==================== Runtime ====================
   const [agent] = useXAgent<BubbleDataType, any, string>({
-    request: async ({ message }, { onUpdate, onSuccess, onError }) => {
+    request: async ({ message }, { onUpdate, onSuccess, onError, onStream }) => {
       const stream = tboxClient.chat({
         appId: 'your-app-id', // Replace with your app ID
         query: message.content,
         userId: 'antd-x',
       });
+
+      streamRef.current = stream;
+      const abortController = new AbortController();
+      const originalAbort = abortController.abort.bind(abortController);
+      abortController.abort = () => {
+        stream.abort();
+        originalAbort();
+      };
+      onStream?.(abortController);
 
       const dataArr = [] as string[];
 
@@ -305,7 +315,8 @@ const Independent: React.FC = () => {
       };
     },
     resolveAbortController: (controller) => {
-      abortController.current = controller;
+      // 存储传入的 controller，这个已经包装了 stream.abort() 方法
+      abortControllerRef.current = controller;
     },
   });
 
@@ -382,7 +393,7 @@ const Independent: React.FC = () => {
         className={styles.conversations}
         activeKey={curConversation}
         onActiveChange={async (val) => {
-          abortController.current?.abort();
+          abortControllerRef.current?.abort();
           // The abort execution will trigger an asynchronous requestFallback, which may lead to timing issues.
           // In future versions, the sessionId capability will be added to resolve this problem.
           setTimeout(() => {
@@ -566,7 +577,7 @@ const Independent: React.FC = () => {
         }}
         onChange={setInputValue}
         onCancel={() => {
-          abortController.current?.abort();
+          abortControllerRef.current?.abort();
         }}
         loading={loading}
         className={styles.sender}
