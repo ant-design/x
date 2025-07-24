@@ -236,7 +236,7 @@ const Independent: React.FC = () => {
   const abortControllerRef = useRef<AbortController | null>(null); // 存储 AbortController
 
   // ==================== State ====================
-  const [messageHistory, setMessageHistory] = useState<Record<string, any>>({});
+  const [messageHistory, setMessageHistory] = useState<Record<string, typeof messages>>({});
 
   const [conversations, setConversations] = useState(DEFAULT_CONVERSATIONS_ITEMS);
   const [curConversation, setCurConversation] = useState(DEFAULT_CONVERSATIONS_ITEMS[0].key);
@@ -311,7 +311,8 @@ const Independent: React.FC = () => {
       }
       let parsedPayload: { text?: string } | undefined;
       try {
-        parsedPayload = JSON.parse((chunk as any).data.payload);
+        const payload = (chunk as any).data?.payload || '{}';
+        parsedPayload = JSON.parse(payload);
       } catch (e) {
         console.error('Failed to parse payload:', e);
       }
