@@ -2,6 +2,7 @@ import { LoadingOutlined, RightOutlined } from '@ant-design/icons';
 import classnames from 'classnames';
 import type { CSSMotionProps } from 'rc-motion';
 import CSSMotion from 'rc-motion';
+import pickAttrs from 'rc-util/lib/pickAttrs';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import React from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
@@ -25,7 +26,8 @@ const StatusIcon = ({
   return icon || <ThinkIcon />;
 };
 
-export interface ThinkProps {
+export interface ThinkProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
   prefixCls?: string;
   style?: React.CSSProperties;
   styles?: Partial<Record<SemanticType, React.CSSProperties>>;
@@ -55,7 +57,14 @@ const Think: React.FC<React.PropsWithChildren<ThinkProps>> = (props) => {
     defaultExpanded = true,
     expanded,
     onExpand,
+    ...restProps
   } = props;
+
+  const domProps = pickAttrs(restProps, {
+    attr: true,
+    aria: true,
+    data: true,
+  });
 
   const { direction, getPrefixCls } = useXProviderContext();
   const prefixCls = getPrefixCls('think', customizePrefixCls);
@@ -89,6 +98,7 @@ const Think: React.FC<React.PropsWithChildren<ThinkProps>> = (props) => {
 
   return (
     <div
+      {...domProps}
       className={mergedCls}
       style={{
         ...contextConfig.style,
