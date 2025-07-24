@@ -2,7 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 
 function useGetState<T>(
   initialState: T | (() => T),
-): [T, React.Dispatch<React.SetStateAction<T>>, () => T] {
+): [React.Dispatch<React.SetStateAction<T>>, () => T] {
   const [state, _setState] = useState<T>(initialState);
   const stateRef = useRef<T>(state);
 
@@ -19,7 +19,7 @@ function useGetState<T>(
     return stateRef.current;
   }, []);
 
-  return [state, setState, getState];
+  return [setState, getState];
 }
 
 export default useGetState;

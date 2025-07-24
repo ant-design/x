@@ -36,7 +36,7 @@ interface SlotConfigBaseType {
 
 interface SlotConfigTextType extends SlotConfigBaseType {
   type: 'text';
-  text?: string;
+  value?: string;
   key?: string;
 }
 

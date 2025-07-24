@@ -144,7 +144,12 @@ const ForwardSender = React.forwardRef<any, SenderProps>((props, ref) => {
   // ============================ Speech ============================
   const [speechPermission, triggerSpeech, speechRecording] = useSpeech((transcript) => {
     if (slotConfig) {
-      (inputRef.current as SlotTextAreaRef)?.insert?.(transcript);
+      (inputRef.current as SlotTextAreaRef)?.insert?.([
+        {
+          type: 'text',
+          value: transcript,
+        },
+      ]);
     } else {
       triggerValueChange(`${innerValue} ${transcript}`);
     }

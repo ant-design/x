@@ -6,18 +6,19 @@ type SlotConfig = SenderProps['slotConfig'];
 
 // 结构化 value 示例
 const initialValue: SlotConfig = [
-  { type: 'text', text: 'I want to go to ' },
+  { type: 'text', value: 'I want to go to ' },
   {
     type: 'select',
     key: 'destination',
     props: {
+      defaultValue: 'Beijing',
       options: ['Beijing', 'Shanghai', 'Guangzhou'],
       placeholder: 'Please select a destination',
     },
   },
-  { type: 'text', text: 'for a trip with ' },
+  { type: 'text', value: 'for a trip with ' },
   { type: 'tag', key: 'tag', props: { label: '@ Chuck', value: 'a man' } },
-  { type: 'text', text: ', the date is ' },
+  { type: 'text', value: ', the date is ' },
   {
     type: 'input',
     key: 'date',
@@ -25,7 +26,7 @@ const initialValue: SlotConfig = [
       placeholder: 'Please enter a date',
     },
   },
-  { type: 'text', text: ', and the price should be ' },
+  { type: 'text', value: ', and the price should be ' },
   {
     type: 'custom',
     key: 'priceRange',
@@ -115,10 +116,10 @@ const Demo: React.FC = () => {
       </Flex>
       {/* Sender 词槽填空示例 */}
       <Sender
-        onSubmit={() => {
-          const res = inputRef.current?.getValue?.();
-          message.info(res.value);
-          inputRef.current?.clear?.();
+        onSubmit={(value, config) => {
+          console.log(value, config, 22);
+          message.info(value);
+          setSlotConfig([]);
         }}
         slotConfig={slotConfig}
         ref={inputRef}
