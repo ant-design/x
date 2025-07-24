@@ -1,25 +1,24 @@
 import {
-  NaNLinter,
-  StyleProvider,
   createCache,
   extractStyle,
   legacyNotSelectorLinter,
+  NaNLinter,
   parentSelectorLinter,
+  StyleProvider,
 } from '@ant-design/cssinjs';
 import { getSandpackCssText } from '@codesandbox/sandpack-react';
-import { App, theme as antdTheme } from 'antd';
-import { createSearchParams, useOutlet, useSearchParams, useServerInsertedHTML } from 'dumi';
-import React, { useCallback, useEffect, Suspense } from 'react';
-
 import type { MappingAlgorithm } from 'antd';
+import { App, theme as antdTheme } from 'antd';
 import type { DirectionType, ThemeConfig } from 'antd/es/config-provider';
+import { createSearchParams, useOutlet, useSearchParams, useServerInsertedHTML } from 'dumi';
+import React, { Suspense, useCallback, useEffect } from 'react';
 
 import { DarkContext } from '../../hooks/useDark';
 import useLayoutState from '../../hooks/useLayoutState';
 import useLocation from '../../hooks/useLocation';
-import SiteThemeProvider from '../SiteThemeProvider';
 import PeterCat from '../common/PeterCat';
 import type { ThemeName } from '../common/ThemeSwitch';
+import SiteThemeProvider from '../SiteThemeProvider';
 import type { SiteContextProps } from '../slots/SiteContext';
 import SiteContext from '../slots/SiteContext';
 
@@ -192,6 +191,9 @@ const GlobalLayout: React.FC = () => {
     />
   ));
 
+  // tbox demo 不需要 PeterCat
+  const isPeterCatEnabled = pathname.startsWith('/~demos') && !pathname.includes('tbox-demo');
+
   return (
     <DarkContext value={theme.includes('dark')}>
       <StyleProvider
@@ -202,7 +204,7 @@ const GlobalLayout: React.FC = () => {
           <SiteThemeProvider theme={themeConfig}>
             <App>
               {outlet}
-              <Suspense>{pathname.startsWith('/~demos') ? <PeterCat /> : null}</Suspense>
+              <Suspense>{isPeterCatEnabled ? <PeterCat /> : null}</Suspense>
             </App>
           </SiteThemeProvider>
         </SiteContext>

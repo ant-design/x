@@ -1,6 +1,6 @@
 ---
 group:
-  title: Sample
+  title: Model Sample
   order: 0
 title: Independent
 description: Natural language is dominant.

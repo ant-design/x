@@ -1,6 +1,7 @@
 ---
 group:
   title: Basic Usage
+  order: 3
 order: 1
 title: Usage with create-react-app
 ---

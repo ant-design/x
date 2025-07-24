@@ -1,6 +1,7 @@
 ---
 group:
   title: Model Integration
+  order: 1
 title: Others
 order: 2
 ---
@@ -17,9 +18,8 @@ To address this, **X** provides tools to help developers resolve protocol compat
 import { XStream } from '@ant-design/x';
 
 async function request() {
-  const response =
-    await fetch();
-    // ...
+  const response = await fetch();
+  // ...
   // .....
 
   for await (const chunk of XStream({

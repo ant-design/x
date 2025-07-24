@@ -1,6 +1,7 @@
 ---
 group:
   title: Model Integration
+  order: 1
 title: Qwen
 order: 1
 tag: Updated

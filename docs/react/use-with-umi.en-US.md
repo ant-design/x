@@ -1,6 +1,7 @@
 ---
 group:
   title: Basic Usage
+  order: 3
 order: 4
 title: Usage with Umi
 ---
