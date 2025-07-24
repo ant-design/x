@@ -21,11 +21,11 @@ import {
   Conversations,
   Prompts,
   Sender,
-  Welcome,
   useXAgent,
   useXChat,
+  Welcome,
 } from '@ant-design/x';
-import { Avatar, Button, Flex, type GetProp, Space, Spin, message } from 'antd';
+import { Avatar, Button, Flex, type GetProp, message, Space, Spin } from 'antd';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
 import React, { useEffect, useRef, useState } from 'react';
@@ -34,8 +34,8 @@ import { TboxClient } from 'tbox-nodejs-sdk';
 const tboxClient = new TboxClient({
   httpClientConfig: {
     authorization: 'your-api-key', // Replace with your API key
-    isAntdX: true, // Only for Ant Design X demo
-  }
+    isAntdXDemo: true, // Only for Ant Design X demo
+  },
 });
 
 type BubbleDataType = {
@@ -69,7 +69,7 @@ const HOT_TOPICS = {
     },
     {
       key: '1-2',
-      description: isZhCN ?  '百宝箱可以做什么?' : 'What can Tbox.cn do?',
+      description: isZhCN ? '百宝箱可以做什么?' : 'What can Tbox.cn do?',
       icon: <span style={{ color: '#ff6565', fontWeight: 700 }}>2</span>,
     },
   ],
@@ -83,13 +83,15 @@ const DESIGN_GUIDE = {
       key: '2-1',
       icon: <HeartOutlined />,
       label: isZhCN ? '意图' : 'Intent',
-      description: isZhCN ? 'AI 理解用户需求并提供解决方案' : 'AI understands user needs and provides solutions',
+      description: isZhCN
+        ? 'AI 理解用户需求并提供解决方案'
+        : 'AI understands user needs and provides solutions',
     },
     {
       key: '2-2',
       icon: <SmileOutlined />,
       label: isZhCN ? '角色' : 'Role',
-      description: isZhCN ? 'AI 的公众形象' : 'AI\'s public image',
+      description: isZhCN ? 'AI 的公众形象' : "AI's public image",
     },
   ],
 };
@@ -228,7 +230,7 @@ const useStyle = createStyles(({ token, css }) => {
   };
 });
 
-const Independent: React.FC = (props) => {
+const Independent: React.FC = () => {
   const { styles } = useStyle();
   const abortController = useRef<AbortController>(null);
 
@@ -250,18 +252,18 @@ const Independent: React.FC = (props) => {
       const stream = tboxClient.chat({
         appId: 'your-app-id', // Replace with your app ID
         query: message.content,
-        userId: 'antd-x'
+        userId: 'antd-x',
       });
 
       const dataArr = [] as string[];
 
       stream.on('data', (data) => {
         dataArr.push(data);
-        onUpdate(data)
+        onUpdate(data);
       });
 
       stream.on('end', () => {
-        onSuccess(dataArr)
+        onSuccess(dataArr);
       });
 
       stream.on('error', (error) => {
@@ -287,14 +289,14 @@ const Independent: React.FC = (props) => {
     },
     transformMessage: (info) => {
       const { originMessage, chunk } = info || {};
-      let parsedPayload
+      let parsedPayload: any;
       try {
         parsedPayload = JSON.parse((chunk as any).data.payload);
       } catch (e) {
         //
-      } 
+      }
       let content = originMessage?.content || '';
-      if (parsedPayload && parsedPayload.text) {
+      if (parsedPayload?.text) {
         content += parsedPayload.text;
       }
       return {
@@ -323,10 +325,8 @@ const Independent: React.FC = (props) => {
   };
 
   const onFooterButtonClick = () => {
-    message.info(
-      isZhCN ? '演示按钮，无实际功能' : 'Demo button, no actual function',
-    )
-  }
+    message.info(isZhCN ? '演示按钮，无实际功能' : 'Demo button, no actual function');
+  };
 
   // ==================== Nodes ====================
   const chatSider = (
@@ -357,7 +357,9 @@ const Independent: React.FC = (props) => {
           setConversations([
             {
               key: now,
-              label: isZhCN ? `新会话 ${conversations.length + 1}` : `New Conversation ${conversations.length + 1}`,
+              label: isZhCN
+                ? `新会话 ${conversations.length + 1}`
+                : `New Conversation ${conversations.length + 1}`,
               group: isZhCN ? '今天' : 'Today',
             },
             ...conversations,
@@ -442,10 +444,30 @@ const Independent: React.FC = (props) => {
               placement: 'start',
               footer: (
                 <div style={{ display: 'flex' }}>
-                  <Button type="text" size="small" icon={<ReloadOutlined />} onClick={onFooterButtonClick} />
-                  <Button type="text" size="small" icon={<CopyOutlined />} onClick={onFooterButtonClick} />
-                  <Button type="text" size="small" icon={<LikeOutlined />} onClick={onFooterButtonClick} />
-                  <Button type="text" size="small" icon={<DislikeOutlined />} onClick={onFooterButtonClick} />
+                  <Button
+                    type="text"
+                    size="small"
+                    icon={<ReloadOutlined />}
+                    onClick={onFooterButtonClick}
+                  />
+                  <Button
+                    type="text"
+                    size="small"
+                    icon={<CopyOutlined />}
+                    onClick={onFooterButtonClick}
+                  />
+                  <Button
+                    type="text"
+                    size="small"
+                    icon={<LikeOutlined />}
+                    onClick={onFooterButtonClick}
+                  />
+                  <Button
+                    type="text"
+                    size="small"
+                    icon={<DislikeOutlined />}
+                    onClick={onFooterButtonClick}
+                  />
                 </div>
               ),
               loadingRender: () => <Spin size="small" />,
@@ -463,7 +485,11 @@ const Independent: React.FC = (props) => {
           <Welcome
             variant="borderless"
             icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
-            title={isZhCN ? '你好， 我是 Ant Design X & 百宝箱智能体' : 'Hello, I am Ant Design X & Tbox Agent'}
+            title={
+              isZhCN
+                ? '你好， 我是 Ant Design X & 百宝箱智能体'
+                : 'Hello, I am Ant Design X & Tbox Agent'
+            }
             description={
               isZhCN
                 ? '基于 Ant Design 的 AGI 产品界面解决方案，打造更卓越的智能视觉体验，集成了百宝箱 Tbox.cn 的智能体能力，助力产品设计与开发。'
