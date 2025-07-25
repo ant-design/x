@@ -153,6 +153,27 @@ describe('bubble', () => {
     expect(element?.textContent).toBe('再见');
   });
 
+  it('Bubble typing should handle empty string edge cases', async () => {
+    const { container, rerender } = render(<Bubble typing content="你好" />);
+    const element = container.querySelector<HTMLDivElement>('.ant-bubble .ant-bubble-content');
+
+    expect(element?.textContent).toBe('你');
+    await waitFakeTimer();
+    expect(element?.textContent).toBe('你好');
+
+    // Change to empty content
+    rerender(<Bubble typing content="" />);
+    // Should handle empty string gracefully
+    expect(element?.textContent).toBe('');
+
+    // Change from empty to non-empty content
+    rerender(<Bubble typing content="新内容" />);
+    expect(element?.textContent).toBe('新');
+
+    await waitFakeTimer();
+    expect(element?.textContent).toBe('新内容');
+  });
+
   it('Bubble Should support className & classNames & style & styles', () => {
     const { container } = render(
       <Bubble

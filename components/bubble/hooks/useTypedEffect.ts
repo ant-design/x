@@ -45,6 +45,12 @@ const useTypedEffect = (
       isString(prevContentRef.current) &&
       content.indexOf(prevContentRef.current) !== 0
     ) {
+      // Handle empty strings
+      if (!content || !prevContentRef.current) {
+        setTypingIndex(1);
+        return;
+      }
+
       // Find the longest common prefix between new and old content
       const commonPrefixLength = findCommonPrefix(content, prevContentRef.current);
 
