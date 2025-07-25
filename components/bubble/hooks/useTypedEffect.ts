@@ -40,7 +40,11 @@ const useTypedEffect = (
   useLayoutEffect(() => {
     if (!mergedTypingEnabled && isString(content)) {
       setTypingIndex(content.length);
-    } else if (isString(content) && isString(prevContentRef.current)) {
+    } else if (
+      isString(content) &&
+      isString(prevContentRef.current) &&
+      content.indexOf(prevContentRef.current) !== 0
+    ) {
       // Find the longest common prefix between new and old content
       const commonPrefixLength = findCommonPrefix(content, prevContentRef.current);
 

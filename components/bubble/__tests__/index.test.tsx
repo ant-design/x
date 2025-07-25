@@ -1,9 +1,8 @@
 import React from 'react';
-
-import Bubble from '..';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
 import { render, waitFakeTimer } from '../../../tests/utils';
+import Bubble from '..';
 import { BubbleContentType } from '../interface';
 
 describe('bubble', () => {
@@ -104,6 +103,54 @@ describe('bubble', () => {
 
     await waitFakeTimer();
     expect(element?.textContent).toBe('你好你好你好?!');
+  });
+
+  it('Bubble typing should continue from common prefix difference point', async () => {
+    const { container, rerender } = render(<Bubble typing content="今天天气真好" />);
+    const element = container.querySelector<HTMLDivElement>('.ant-bubble .ant-bubble-content');
+
+    expect(element?.textContent).toBe('今');
+    await waitFakeTimer();
+    expect(element?.textContent).toBe('今天天气真好');
+
+    // Change content with common prefix "今天天气"
+    rerender(<Bubble typing content="今天天气不好" />);
+    // Should start from the difference point "不", showing the common prefix immediately
+    expect(element?.textContent).toBe('今天天气不');
+
+    await waitFakeTimer();
+    expect(element?.textContent).toBe('今天天气不好');
+  });
+
+  it('Bubble typing should handle shorter new content', async () => {
+    const { container, rerender } = render(<Bubble typing content="你好你好你好" />);
+    const element = container.querySelector<HTMLDivElement>('.ant-bubble .ant-bubble-content');
+
+    expect(element?.textContent).toBe('你');
+    await waitFakeTimer();
+    expect(element?.textContent).toBe('你好你好你好');
+
+    // Change to shorter content with common prefix
+    rerender(<Bubble typing content="你好" />);
+    // Should show full content immediately since new content is not longer than common prefix
+    expect(element?.textContent).toBe('你好');
+  });
+
+  it('Bubble typing should restart from beginning when no common prefix', async () => {
+    const { container, rerender } = render(<Bubble typing content="你好" />);
+    const element = container.querySelector<HTMLDivElement>('.ant-bubble .ant-bubble-content');
+
+    expect(element?.textContent).toBe('你');
+    await waitFakeTimer();
+    expect(element?.textContent).toBe('你好');
+
+    // Change to completely different content
+    rerender(<Bubble typing content="再见" />);
+    // Should start from beginning since no common prefix
+    expect(element?.textContent).toBe('再');
+
+    await waitFakeTimer();
+    expect(element?.textContent).toBe('再见');
   });
 
   it('Bubble Should support className & classNames & style & styles', () => {
