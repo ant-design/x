@@ -1,4 +1,4 @@
-import { CloudUploadOutlined, LinkOutlined } from '@ant-design/icons';
+import { CloudUploadOutlined, PaperClipOutlined } from '@ant-design/icons';
 import { Sender } from '@ant-design/x';
 import { App, Button, Flex, Typography, theme } from 'antd';
 import React from 'react';
@@ -37,7 +37,8 @@ const Demo: React.FC = () => {
         prefix={
           <Button
             type="text"
-            icon={<LinkOutlined />}
+            style={{ fontSize: 16 }}
+            icon={<PaperClipOutlined />}
             onClick={() => {
               setOpen(!open);
             }}

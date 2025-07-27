@@ -1,4 +1,4 @@
-import { CloudUploadOutlined, LinkOutlined } from '@ant-design/icons';
+import { CloudUploadOutlined, PaperClipOutlined } from '@ant-design/icons';
 import { Attachments, AttachmentsProps, Sender } from '@ant-design/x';
 import { App, Button, Flex, type GetProp, type GetRef } from 'antd';
 import React from 'react';
@@ -54,7 +54,8 @@ const Demo = () => {
         prefix={
           <Button
             type="text"
-            icon={<LinkOutlined />}
+            style={{ fontSize: 16 }}
+            icon={<PaperClipOutlined />}
             onClick={() => {
               setOpen(!open);
             }}

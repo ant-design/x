@@ -6,6 +6,7 @@ import {
   FileImageOutlined,
   OpenAIOutlined,
   PaperClipOutlined,
+  ProfileOutlined,
   SearchOutlined,
 } from '@ant-design/icons';
 import { Attachments, AttachmentsProps, Sender, SenderProps } from '@ant-design/x';
@@ -178,7 +179,7 @@ const App: React.FC = () => {
                 </Dropdown>
                 {fileItems?.length ? (
                   <Dropdown menu={{ onClick: fileItemClick, items: fileItems }}>
-                    <Button icon={<AntDesignOutlined />}>Files</Button>
+                    <Button icon={<ProfileOutlined />}>Files</Button>
                   </Dropdown>
                 ) : null}
               </Flex>
