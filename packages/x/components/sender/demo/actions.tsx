@@ -39,7 +39,7 @@ const Demo: React.FC = () => {
 
         return (
           <Space size="small">
-            <Typography.Text type="secondary">
+            <Typography.Text style={{ whiteSpace: 'nowrap' }} type="secondary">
               <small>`Shift + Enter` to submit</small>
             </Typography.Text>
             <ClearButton />
