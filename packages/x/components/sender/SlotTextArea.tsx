@@ -511,7 +511,14 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         onInput={onInternalInput}
         {...(rest as React.HTMLAttributes<HTMLDivElement>)}
       />
-      <div id={`${prefixCls}-slot-placeholders`}>{Array.from(slotPlaceholders.values())}</div>
+      <div
+        style={{
+          display: 'none',
+        }}
+        id={`${prefixCls}-slot-placeholders`}
+      >
+        {Array.from(slotPlaceholders.values())}
+      </div>
     </>
   );
 });
