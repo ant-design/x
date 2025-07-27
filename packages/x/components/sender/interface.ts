@@ -89,6 +89,9 @@ export type SlotConfigType =
   | SlotConfigTagType
   | SlotConfigCustomType;
 
+export type EventType =
+  | React.FormEvent<HTMLTextAreaElement>
+  | React.ChangeEvent<HTMLTextAreaElement>;
 export interface SenderProps
   extends Pick<TextareaProps, 'placeholder' | 'onKeyUp' | 'onFocus' | 'onBlur'> {
   prefixCls?: string;
@@ -100,11 +103,7 @@ export interface SenderProps
   disabled?: boolean;
   slotConfig?: SlotConfigType[];
   onSubmit?: (message: string, slotConfig?: SlotConfigType[]) => void;
-  onChange?: (
-    value: string,
-    event?: React.FormEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLTextAreaElement>,
-    slotConfig?: SlotConfigType[],
-  ) => void;
+  onChange?: (value: string, event?: EventType, slotConfig?: SlotConfigType[]) => void;
   onCancel?: VoidFunction;
   onKeyDown?: React.KeyboardEventHandler<any>;
   onPaste?: React.ClipboardEventHandler<HTMLElement>;

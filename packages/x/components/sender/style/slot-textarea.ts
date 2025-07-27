@@ -17,6 +17,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       cursor: 'text',
       whiteSpace: 'pre-wrap',
       width: '100%',
+      lineHeight: token.lineHeight,
     },
     [slotCls]: {
       display: 'inline-block',

@@ -39,16 +39,7 @@ export interface SenderToken extends FullToken<'Sender'> {
   SenderContentMaxWidth: number | string;
 }
 const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
-  const {
-    componentCls,
-    padding,
-    paddingSM,
-    paddingXS,
-    paddingXXS,
-    lineWidth,
-    lineWidthBold,
-    calc,
-  } = token;
+  const { componentCls, paddingSM, paddingXS, paddingXXS, lineWidth, lineWidthBold, calc } = token;
 
   return {
     [componentCls]: {
@@ -108,9 +99,8 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
         display: 'flex',
         gap: paddingXS,
         width: '100%',
-
         paddingBlock: paddingSM,
-        paddingInlineStart: padding,
+        paddingInlineStart: paddingSM,
         paddingInlineEnd: paddingSM,
         boxSizing: 'border-box',
         alignItems: 'flex-end',
@@ -163,7 +153,7 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
 
       // ============================ Footer =============================
       [`${componentCls}-footer`]: {
-        paddingInlineStart: padding,
+        paddingInlineStart: paddingSM,
         paddingInlineEnd: paddingSM,
         paddingBlockEnd: paddingSM,
         paddingBlockStart: paddingXXS,

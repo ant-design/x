@@ -3,41 +3,115 @@ import {
   ApiOutlined,
   CodeOutlined,
   EditOutlined,
+  FileImageOutlined,
   OpenAIOutlined,
   PaperClipOutlined,
   SearchOutlined,
 } from '@ant-design/icons';
-import { Sender } from '@ant-design/x';
-import { Button, Divider, Dropdown, Flex, MenuProps, message, theme } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { Attachments, AttachmentsProps, Sender, SenderProps } from '@ant-design/x';
+import { Button, Divider, Dropdown, Flex, GetRef, MenuProps, message, theme } from 'antd';
+import React, { useEffect, useRef, useState } from 'react';
 
-const items: MenuProps['items'] = [
-  {
-    key: 'deep_search',
+const AgentInfo: {
+  [key: string]: {
+    icon: React.ReactNode;
+    label: string;
+  };
+} = {
+  deep_search: {
     icon: <SearchOutlined />,
     label: 'Deep Search',
   },
-  {
-    key: 'ai_code',
-    label: 'AI Code',
+  ai_code: {
     icon: <CodeOutlined />,
+    label: 'AI Code',
   },
-  {
-    key: 'ai_writing',
-    label: 'Writing',
+  ai_writing: {
     icon: <EditOutlined />,
+    label: 'Writing',
   },
-];
+};
+
+const FileInfo: {
+  [key: string]: {
+    icon: React.ReactNode;
+    label: string;
+  };
+} = {
+  file_image: {
+    icon: <FileImageOutlined />,
+    label: 'x-image',
+  },
+};
 
 const App: React.FC = () => {
   const [value, setValue] = useState<string>('Hello? this is X!');
   const [loading, setLoading] = useState<boolean>(false);
   const [deepThink, setDeepThink] = useState<boolean>(false);
   const { token } = theme.useToken();
+  const [slotConfig, setSlotConfig] = useState<SenderProps['slotConfig']>([]);
+
+  const [fileList, setFileList] = useState<AttachmentsProps['items']>([]);
+  const agentItems: MenuProps['items'] = Object.keys(AgentInfo).map((agent) => {
+    const { icon, label } = AgentInfo[agent];
+    return {
+      key: agent,
+      icon,
+      label,
+      disabled: !!slotConfig?.find((config) => config.key === agent),
+    };
+  });
+
+  const fileItems = Object.keys(FileInfo).map((file) => {
+    const { icon, label } = FileInfo[file];
+    return {
+      key: file,
+      icon,
+      label,
+    };
+  });
 
   const iconStyle = {
     fontSize: 16,
     color: token.colorText,
+  };
+
+  const senderRef = useRef<any>(null);
+  const agentItemClick: MenuProps['onClick'] = (item) => {
+    const { icon, label } = AgentInfo[item.key];
+    senderRef.current?.insert?.([
+      {
+        type: 'tag',
+        key: item.key,
+        props: {
+          label: (
+            <Flex gap="small">
+              {icon}
+              {label}
+            </Flex>
+          ),
+          value: item.key,
+        },
+      },
+    ]);
+  };
+  const fileItemClick: MenuProps['onClick'] = (item) => {
+    const { icon, label } = FileInfo[item.key];
+    senderRef.current?.insert?.([
+      {
+        type: 'tag',
+        key: item.key + Date.now(),
+        props: {
+          label: (
+            <Flex gap="small">
+              {icon}
+              {label}
+            </Flex>
+          ),
+          value: item.key,
+        },
+      },
+    ]);
   };
 
   // Mock send message
@@ -53,11 +127,39 @@ const App: React.FC = () => {
     }
   }, [loading]);
 
+  const [open, setOpen] = React.useState(false);
+  const attachmentsRef = React.useRef<GetRef<typeof Attachments>>(null);
+
+  const senderHeader = (
+    <Sender.Header
+      title="Attachments"
+      styles={{
+        content: {
+          padding: 0,
+        },
+      }}
+      open={open}
+      onOpenChange={setOpen}
+      forceRender
+    >
+      <Attachments
+        ref={attachmentsRef}
+        // Mock not real upload file
+        beforeUpload={() => false}
+        items={fileList}
+        onChange={({ fileList }) => setFileList(fileList)}
+        getDropContainer={() => senderRef.current?.nativeElement}
+      />
+    </Sender.Header>
+  );
+
   return (
     <Flex vertical gap="middle">
       <Sender
         loading={loading}
         value={value}
+        ref={senderRef}
+        header={senderHeader}
         footer={(actionNode) => {
           return (
             <Flex justify="space-between" align="center">
@@ -71,9 +173,14 @@ const App: React.FC = () => {
                 >
                   Deep Think
                 </Button>
-                <Dropdown menu={{ items }}>
-                  <Button icon={<AntDesignOutlined />}>Agent</Button>
+                <Dropdown menu={{ onClick: agentItemClick, items: agentItems }}>
+                  <Button icon={<AntDesignOutlined />}>Agents</Button>
                 </Dropdown>
+                {fileItems?.length ? (
+                  <Dropdown menu={{ onClick: fileItemClick, items: fileItems }}>
+                    <Button icon={<AntDesignOutlined />}>Files</Button>
+                  </Dropdown>
+                ) : null}
               </Flex>
               <Flex align="center">
                 <Button type="text" style={iconStyle} icon={<ApiOutlined />} />
@@ -84,7 +191,9 @@ const App: React.FC = () => {
           );
         }}
         suffix={false}
-        onChange={(v) => {
+        onChange={(v, _, config) => {
+          setSlotConfig(config);
+          console.log('onChange', v, config);
           setValue(v);
         }}
         onSubmit={() => {
@@ -96,7 +205,8 @@ const App: React.FC = () => {
           setLoading(false);
           message.error('Cancel sending!');
         }}
-        autoSize={{ minRows: 2, maxRows: 6 }}
+        slotConfig={[]}
+        autoSize={{ minRows: 3, maxRows: 6 }}
       />
     </Flex>
   );

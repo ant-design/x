@@ -3,11 +3,11 @@ import { Dropdown, Input, InputRef } from 'antd';
 import classnames from 'classnames';
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import useGetState from '../_util/hooks/use-get-state';
+import warning from '../_util/warning';
 import { useXProviderContext } from '../x-provider';
 import { SenderContext } from './context';
-import type { SlotConfigType } from './interface';
-
+import useGetState from './hooks/use-get-state';
+import type { EventType, SlotConfigType } from './interface';
 export interface SlotTextAreaRef {
   focus: InputRef['focus'];
   blur: InputRef['blur'];
@@ -85,7 +85,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     return slotDomMap.current.get(key);
   };
 
-  const updateSlot = (key: string, value: any) => {
+  const updateSlot = (key: string, value: any, e?: EventType) => {
     const slotDom = getSlotDom(key);
     const node = slotConfig?.find((item) => item.key === key);
     setSlotValues((prev) => ({ ...prev, [key]: value }));
@@ -100,13 +100,12 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
       // 触发 onChange 回调
       const newValue = getEditorValue();
-      onChange?.(newValue.value, undefined, newValue.config);
+      onChange?.(newValue.value, e, newValue.config);
     }
   };
 
   const renderSlot = (node: SlotConfigType, slotSpan: HTMLSpanElement) => {
     if (!node.key) return null;
-
     const value = getSlotValues()[node.key];
     const renderContent = () => {
       switch (node.type) {
@@ -121,7 +120,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
               value={value || ''}
               tabIndex={0}
               onChange={(e) => {
-                updateSlot(node.key as string, e.target.value);
+                updateSlot(node.key as string, e.target.value, e as unknown as EventType);
               }}
               spellCheck={false}
             />
@@ -136,8 +135,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
                 })),
                 defaultSelectedKeys: node.props?.defaultValue ? [node.props.defaultValue] : [],
                 selectable: true,
-                onSelect: ({ key }) => {
-                  updateSlot(node.key as string, key);
+                onSelect: ({ key, domEvent }) => {
+                  updateSlot(node.key as string, key, domEvent as unknown as EventType);
                 },
               }}
               trigger={['click']}
@@ -182,6 +181,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       }
       if (config.key) {
         const slotKey = config.key;
+        warning(!getSlotDom(slotKey), 'sender', `Duplicate slot key: ${slotKey}`);
         const slotSpan = buildSlotSpan(slotKey);
         saveSlotDom(config.key, slotSpan);
         if (slotSpan) {
@@ -206,7 +206,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const result: string[] = [];
     const currentValues = getSlotValues();
     const currentConfig: (SlotConfigType & { value: string })[] = [];
-
     editableRef.current?.childNodes.forEach((node) => {
       if (node.nodeType === Node.TEXT_NODE) {
         result.push(node.textContent || '');
@@ -374,6 +373,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const selection = window.getSelection();
     if (!editableDom || !selection) return;
     const slotNode = getSlotListNode(slotConfig);
+
     const { type } = getCursorPosition();
     let range: Range = document.createRange();
     setSlotConfig((ori) => {
@@ -399,6 +399,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         range.setStartBefore(selection.focusNode.nextSibling);
       }
     }
+
     slotNode.forEach((node) => {
       range.insertNode(node);
       range.setStartAfter(node);
@@ -409,8 +410,9 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     selection.removeAllRanges();
     selection.addRange(range);
     range.collapse(false);
-
-    onInternalInput(null as unknown as React.FormEvent<HTMLDivElement>);
+    setTimeout(() => {
+      onInternalInput(null as unknown as React.FormEvent<HTMLDivElement>);
+    }, 0);
   };
 
   const clear = () => {
@@ -423,6 +425,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
   // ============================ Effects =============================
   useEffect(() => {
+    if (propsSlotConfig?.length === 0) return;
     if (editableRef.current && propsSlotConfig) {
       editableRef.current.innerHTML = '';
       const slotNodeList = getSlotListNode(propsSlotConfig);
@@ -482,7 +485,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         ref={editableRef}
         role="textbox"
         tabIndex={0}
-        style={styles.input}
+        style={{ ...styles.input, height: 88 }}
         className={classnames(`${prefixCls}-input`, classNames.input, {
           [`${prefixCls}-rtl`]: direction === 'rtl',
         })}
@@ -499,7 +502,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         onInput={onInternalInput}
         {...(rest as React.HTMLAttributes<HTMLDivElement>)}
       />
-      <div id="slot-placeholders">{Array.from(slotPlaceholders.values())}</div>
+      <div id={`${prefixCls}-slot-placeholders`}>{Array.from(slotPlaceholders.values())}</div>
     </>
   );
 });

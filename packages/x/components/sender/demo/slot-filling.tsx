@@ -117,6 +117,7 @@ const Demo: React.FC = () => {
       {/* Sender 词槽填空示例 */}
       <Sender
         onSubmit={(value, config) => {
+          console.log('Submitted value:', value, config);
           message.info(value);
           setSlotConfig([]);
         }}
