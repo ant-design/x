@@ -1,5 +1,5 @@
 import { Sender, type SenderProps } from '@ant-design/x';
-import { App, Button, Flex, Slider } from 'antd';
+import { App, Button, Flex, GetRef, Slider } from 'antd';
 import React, { useRef, useState } from 'react';
 
 type SlotConfig = SenderProps['slotConfig'];
@@ -49,11 +49,11 @@ const initialValue: SlotConfig = [
 const Demo: React.FC = () => {
   const [slotConfig, setSlotConfig] = useState<SlotConfig>(initialValue);
   const { message } = App.useApp();
-  const inputRef = useRef<any>(null);
+  const inputRef = useRef<GetRef<typeof Sender>['SlotTextAreaRef']>(null);
 
   // 备用 slotConfig 示例
   const altSlotConfig: SlotConfig = [
-    { type: 'text', text: 'My favorite city is ' },
+    { type: 'text', value: 'My favorite city is ' },
     {
       type: 'select',
       key: 'city',
@@ -88,7 +88,7 @@ const Demo: React.FC = () => {
         </Button>
         <Button
           onClick={() => {
-            inputRef.current?.insert?.([{ type: 'text', text: ' some text ' }]);
+            inputRef.current?.insert?.([{ type: 'text', value: ' some text ' }]);
           }}
         >
           Insert Text
@@ -116,8 +116,7 @@ const Demo: React.FC = () => {
       </Flex>
       {/* Sender 词槽填空示例 */}
       <Sender
-        onSubmit={(value, config) => {
-          console.log('Submitted value:', value, config);
+        onSubmit={(value) => {
           message.info(value);
           setSlotConfig([]);
         }}

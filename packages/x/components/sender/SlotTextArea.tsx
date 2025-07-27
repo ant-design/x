@@ -495,9 +495,16 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         role="textbox"
         tabIndex={0}
         style={{ ...mergeStyle, ...inputHeightStyle }}
-        className={classnames(inputCls, contextConfig.classNames.input, classNames.input, {
-          [`${prefixCls}-rtl`]: direction === 'rtl',
-        })}
+        className={classnames(
+          inputCls,
+          `${inputCls}-slot`,
+          contextConfig.classNames.input,
+          classNames.input,
+          {
+            [`${prefixCls}-rtl`]: direction === 'rtl',
+          },
+        )}
+        data-placeholder={placeholder}
         contentEditable="true"
         suppressContentEditableWarning
         spellCheck={false}

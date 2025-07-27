@@ -77,7 +77,7 @@ const App: React.FC = () => {
     color: token.colorText,
   };
 
-  const senderRef = useRef<any>(null);
+  const senderRef = useRef<GetRef<typeof Sender>['SlotTextAreaRef']>(null);
   const agentItemClick: MenuProps['onClick'] = (item) => {
     const { icon, label } = AgentInfo[item.key];
     senderRef.current?.insert?.([
@@ -160,6 +160,7 @@ const App: React.FC = () => {
         loading={loading}
         value={value}
         ref={senderRef}
+        placeholder="Press Enter to send message"
         header={senderHeader}
         footer={(actionNode) => {
           return (
@@ -194,7 +195,6 @@ const App: React.FC = () => {
         suffix={false}
         onChange={(v, _, config) => {
           setSlotConfig(config);
-          console.log('onChange', v, config);
           setValue(v);
         }}
         onSubmit={() => {

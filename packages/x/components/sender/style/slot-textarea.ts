@@ -12,12 +12,16 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
   const slotSelectCls = `${componentCls}-slot-select`;
   const slotTagCls = `${componentCls}-slot-tag`;
   return {
-    [`${componentCls}-input`]: {
+    [`${componentCls}-input-slot`]: {
       outline: 'none',
       cursor: 'text',
       whiteSpace: 'pre-wrap',
       width: '100%',
       lineHeight: token.lineHeight,
+      '&:empty::before': {
+        content: 'attr(data-placeholder)',
+        color: token.colorTextPlaceholder,
+      },
     },
     [slotCls]: {
       display: 'inline-block',
