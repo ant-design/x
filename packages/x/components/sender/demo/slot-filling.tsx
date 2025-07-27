@@ -1,5 +1,5 @@
 import { Sender, type SenderProps } from '@ant-design/x';
-import { App, Button, Flex, GetRef, Slider } from 'antd';
+import { Button, Flex, GetRef, message, Slider } from 'antd';
 import React, { useRef, useState } from 'react';
 
 type SlotConfig = SenderProps['slotConfig'];
@@ -46,10 +46,9 @@ const initialValue: SlotConfig = [
   },
 ];
 
-const Demo: React.FC = () => {
+const App: React.FC = () => {
   const [slotConfig, setSlotConfig] = useState<SlotConfig>(initialValue);
-  const { message } = App.useApp();
-  const inputRef = useRef<GetRef<typeof Sender>['SlotTextAreaRef']>(null);
+  const senderRef = useRef<GetRef<typeof Sender>['SlotTextAreaRef']>(null);
 
   // 备用 slotConfig 示例
   const altSlotConfig: SlotConfig = [
@@ -70,17 +69,17 @@ const Demo: React.FC = () => {
   return (
     <Flex vertical gap={16}>
       {/* 操作按钮区 */}
-      <Flex gap={8}>
+      <Flex wrap gap={8}>
         <Button
           onClick={() => {
-            inputRef.current?.clear?.();
+            senderRef.current?.clear?.();
           }}
         >
           Clear
         </Button>
         <Button
           onClick={() => {
-            const val = inputRef.current?.getValue?.();
+            const val = senderRef.current?.getValue?.();
             message.info(val ? val.value : 'No value');
           }}
         >
@@ -88,14 +87,14 @@ const Demo: React.FC = () => {
         </Button>
         <Button
           onClick={() => {
-            inputRef.current?.insert?.([{ type: 'text', value: ' some text ' }]);
+            senderRef.current?.insert?.([{ type: 'text', value: ' some text ' }]);
           }}
         >
           Insert Text
         </Button>
         <Button
           onClick={() => {
-            inputRef.current?.insert?.([
+            senderRef.current?.insert?.([
               {
                 type: 'input',
                 key: 'partner_1',
@@ -113,6 +112,49 @@ const Demo: React.FC = () => {
         >
           Change SlotConfig
         </Button>
+        <Button
+          onClick={() => {
+            senderRef.current!.focus({
+              cursor: 'start',
+            });
+          }}
+        >
+          Focus at first
+        </Button>
+        <Button
+          onClick={() => {
+            senderRef.current!.focus({
+              cursor: 'end',
+            });
+          }}
+        >
+          Focus at last
+        </Button>
+        <Button
+          onClick={() => {
+            senderRef.current!.focus({
+              cursor: 'all',
+            });
+          }}
+        >
+          Focus to select all
+        </Button>
+        <Button
+          onClick={() => {
+            senderRef.current!.focus({
+              preventScroll: true,
+            });
+          }}
+        >
+          Focus prevent scroll
+        </Button>
+        <Button
+          onClick={() => {
+            senderRef.current!.blur();
+          }}
+        >
+          Blur
+        </Button>
       </Flex>
       {/* Sender 词槽填空示例 */}
       <Sender
@@ -121,14 +163,10 @@ const Demo: React.FC = () => {
           setSlotConfig([]);
         }}
         slotConfig={slotConfig}
-        ref={inputRef}
+        ref={senderRef}
       />
     </Flex>
   );
 };
 
-export default () => (
-  <App>
-    <Demo />
-  </App>
-);
+export default () => <App />;
