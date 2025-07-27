@@ -3,10 +3,12 @@ import { Dropdown, Input, InputRef } from 'antd';
 import classnames from 'classnames';
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import warning from '../_util/warning';
 import { useXProviderContext } from '../x-provider';
 import { SenderContext } from './context';
 import useGetState from './hooks/use-get-state';
+import useInputHeight from './hooks/use-input-height';
 import type { EventType, SlotConfigType } from './interface';
 export interface SlotTextAreaRef {
   focus: InputRef['focus'];
@@ -37,7 +39,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     prefixCls: customizePrefixCls,
     styles = {},
     classNames = {},
-    autoSize = { maxRows: 8 },
+    autoSize,
     components,
     onSubmit,
     placeholder,
@@ -50,6 +52,13 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   // ============================= MISC =============================
   const { direction, getPrefixCls } = useXProviderContext();
   const prefixCls = `${getPrefixCls('sender', customizePrefixCls)}`;
+  const contextConfig = useXComponentConfig('sender');
+  const inputCls = `${prefixCls}-input`;
+
+  // ============================ Style =============================
+
+  const mergeStyle = { ...contextConfig.styles?.input, ...styles.input };
+  const inputHeightStyle = useInputHeight(mergeStyle, autoSize);
 
   // ============================ Refs =============================
   const editableRef = useRef<HTMLDivElement>(null);
@@ -485,8 +494,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         ref={editableRef}
         role="textbox"
         tabIndex={0}
-        style={{ ...styles.input, height: 88 }}
-        className={classnames(`${prefixCls}-input`, classNames.input, {
+        style={{ ...mergeStyle, ...inputHeightStyle }}
+        className={classnames(inputCls, contextConfig.classNames.input, classNames.input, {
           [`${prefixCls}-rtl`]: direction === 'rtl',
         })}
         contentEditable="true"

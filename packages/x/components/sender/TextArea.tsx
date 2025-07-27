@@ -38,7 +38,7 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
     prefixCls,
     styles = {},
     classNames = {},
-    autoSize = { maxRows: 8 },
+    autoSize,
     components,
     onSubmit,
     placeholder,
