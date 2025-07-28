@@ -62,6 +62,7 @@ const zhCN = {
   'antd-x-tbox-description':
     '基于 Ant Design 的 AGI 产品界面解决方案，打造更卓越的智能视觉体验，集成了百宝箱 Tbox.cn 的智能体能力，助力产品设计与开发。',
   'ask-me-anything': '向我提问吧',
+  'loading-message': '加载中...',
 };
 
 const enUS = {
@@ -88,6 +89,7 @@ const enUS = {
   'antd-x-tbox-description':
     'An AGI product interface solution based on Ant Design, creating a superior intelligent visual experience, integrating the capabilities of Tbox.cn agents to assist in product design and development.',
   'ask-me-anything': 'Ask me anything...',
+  'loading-message': 'Loading...',
 };
 
 type BubbleDataType = {
@@ -340,6 +342,12 @@ const Independent: React.FC = () => {
 
   const { onRequest, messages, setMessages } = useXChat({
     agent,
+    requestPlaceholder: () => {
+      return {
+        content: t['loading-message'],
+        role: 'assistant',
+      };
+    },
     requestFallback: (_, { error }) => {
       if (error.name === 'AbortError') {
         return {
