@@ -39,16 +39,16 @@ Common props ref：[Common props](/docs/react/common-props)
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| actions | Custom actions,set as `actions: false` when you don't need default actions | ReactNode \| (oriNode, info: { components:ActionsComponents }) => ReactNode | - | - |
 | allowSpeech | Whether to allow speech input | boolean \| SpeechConfig | false | - |
 | classNames | Class name | [See below](#semantic-dom) | - | - |
 | components | Custom components | Record<'input', ComponentType> | - | - |
 | defaultValue | Default value of input | string | - | - |
 | disabled | Whether to disable | boolean | false | - |
 | loading | Whether it is loading | boolean | false | - |
-| header | Header panel | ReactNode | - | - |
-| prefix | Prefix content | ReactNode | - | - |
-| footer | Footer content | ReactNode \| (info: { components: ActionsComponents }) => ReactNode | - | - |
+| suffix | Suffix content, shows action buttons by default. Set `suffix={false}` to hide default actions. | React.ReactNode \| false \| (oriNode: React.ReactNode, info: { components: ActionsComponents; }) => React.ReactNode \| false | oriNode | - |
+| header | Header panel | React.ReactNode \| false \| (oriNode: React.ReactNode, info: { components: ActionsComponents; }) => React.ReactNode \| false | false | - |
+| prefix | Prefix content | React.ReactNode \| false \| (oriNode: React.ReactNode, info: { components: ActionsComponents; }) => React.ReactNode \| false | false | - |
+| footer | Footer content | React.ReactNode \| false \| (oriNode: React.ReactNode, info: { components: ActionsComponents; }) => React.ReactNode \| false | false | - |
 | readOnly | Whether to make the input box read-only | boolean | false | - |
 | rootClassName | Root element class name | string | - | - |
 | styles | Semantic DOM style | [See below](#semantic-dom) | - | - |
@@ -58,7 +58,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | onChange | Callback when input value changes | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`>, slotConfig?: SlotConfigType[]) => void | - | - |
 | onCancel | Callback when click cancel button | () => void | - | - |
 | onPasteFile | Callback when paste files | (firstFile: File, files: FileList) => void | - | - |
-| autoSize | Height auto size feature, can be set to true \| false or an object { minRows: 2, maxRows: 6 } | boolean \| { minRows?: number; maxRows?: number } | { maxRows: 8 } | - |
+| autoSize | Height auto size feature, can be set to true \| false or an object: { minRows: 2, maxRows: 6 } | boolean \| { minRows?: number; maxRows?: number } | { maxRows: 8 } | - |
 | slotConfig | Slot configuration, after configuration, the input box will become slot mode, supporting structured input | SlotConfigType[] | - | - |
 
 ```typescript | pure
