@@ -62,7 +62,7 @@ const zhCN = {
   'antd-x-tbox-description':
     '基于 Ant Design 的 AGI 产品界面解决方案，打造更卓越的智能视觉体验，集成了百宝箱 Tbox.cn 的智能体能力，助力产品设计与开发。',
   'ask-me-anything': '向我提问吧',
-  'loading-message': '加载中...',
+  'loading-message': '加载中💗',
 };
 
 const enUS = {
@@ -321,8 +321,19 @@ const Independent: React.FC = () => {
       const dataArr = [] as string[];
 
       stream.on('data', (data) => {
-        dataArr.push(data);
-        onUpdate(data);
+        let parsedPayload: { text?: string } | undefined;
+        try {
+          const payload = (data as any).data?.payload || '{}';
+          parsedPayload = JSON.parse(payload);
+        } catch (e) {
+          console.error('Failed to parse payload:', e);
+          return;
+        }
+
+        if (parsedPayload?.text) {
+          dataArr.push(parsedPayload.text);
+          onUpdate(parsedPayload.text);
+        }
       });
 
       stream.on('error', (error) => {
@@ -368,19 +379,10 @@ const Independent: React.FC = () => {
           role: 'assistant',
         };
       }
-      let parsedPayload: { text?: string } | undefined;
-      try {
-        const payload = (chunk as any).data?.payload || '{}';
-        parsedPayload = JSON.parse(payload);
-      } catch (e) {
-        console.error('Failed to parse payload:', e);
-      }
-      let content = originMessage?.content || '';
-      if (parsedPayload?.text) {
-        content += parsedPayload.text;
-      }
+
+      const content = originMessage?.content || '';
       return {
-        content: content,
+        content: content + chunk,
         role: 'assistant',
       };
     },
