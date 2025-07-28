@@ -2,10 +2,9 @@ import { Sender, type SenderProps } from '@ant-design/x';
 import { Button, Flex, GetRef, message, Slider } from 'antd';
 import React, { useRef, useState } from 'react';
 
-type SlotConfig = SenderProps['slotConfig'];
+type SlotConfig = SenderProps['defaultSlotConfig'];
 
-// 结构化 value 示例
-const initialValue: SlotConfig = [
+const initialSlotConfig: SlotConfig = [
   { type: 'text', value: 'I want to go to ' },
   {
     type: 'select',
@@ -46,25 +45,31 @@ const initialValue: SlotConfig = [
   },
 ];
 
-const App: React.FC = () => {
-  const [slotConfig, setSlotConfig] = useState<SlotConfig>(initialValue);
-  const senderRef = useRef<GetRef<typeof Sender>>(null);
-
-  // 备用 slotConfig 示例
-  const altSlotConfig: SlotConfig = [
-    { type: 'text', value: 'My favorite city is ' },
-    {
-      type: 'select',
-      key: 'city',
-      props: {
-        defaultValue: 'London',
-        options: ['London', 'Paris', 'New York'],
-        placeholder: 'Select a city',
-      },
+const altSlotConfig: SlotConfig = [
+  { type: 'text', value: 'My favorite city is ' },
+  {
+    type: 'select',
+    key: 'city',
+    props: {
+      defaultValue: 'London',
+      options: ['London', 'Paris', 'New York'],
+      placeholder: 'Select a city',
     },
-    { type: 'text', value: ', and I want to travel with ' },
-    { type: 'input', key: 'partner', props: { placeholder: 'Enter a name' } },
-  ];
+  },
+  { type: 'text', value: ', and I want to travel with ' },
+  { type: 'input', key: 'partner', props: { placeholder: 'Enter a name' } },
+];
+
+const slotConfig = {
+  initialSlotConfig,
+  altSlotConfig,
+};
+
+const App: React.FC = () => {
+  const [slotConfigKey, setSlotConfigKey] = useState<keyof typeof slotConfig | false>(
+    'initialSlotConfig',
+  );
+  const senderRef = useRef<GetRef<typeof Sender>>(null);
 
   return (
     <Flex vertical gap={16}>
@@ -107,7 +112,12 @@ const App: React.FC = () => {
         </Button>
         <Button
           onClick={() => {
-            setSlotConfig((prev) => (prev === initialValue ? altSlotConfig : initialValue));
+            setSlotConfigKey((prev) => {
+              if (prev === 'initialSlotConfig') {
+                return 'altSlotConfig';
+              }
+              return 'initialSlotConfig';
+            });
           }}
         >
           Change SlotConfig
@@ -158,11 +168,12 @@ const App: React.FC = () => {
       </Flex>
       {/* Sender 词槽填空示例 */}
       <Sender
+        key={slotConfigKey || 'default'}
         onSubmit={(value) => {
           message.info(value);
-          setSlotConfig([]);
+          setSlotConfigKey(false);
         }}
-        slotConfig={slotConfig}
+        defaultSlotConfig={slotConfigKey ? slotConfig?.[slotConfigKey] : []}
         ref={senderRef}
       />
     </Flex>

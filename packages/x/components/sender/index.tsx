@@ -57,7 +57,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     style,
     defaultValue,
     value,
-    slotConfig,
+    defaultSlotConfig,
     readOnly,
     submitType = 'enter',
     onSubmit,
@@ -158,7 +158,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
 
   // ============================ Speech ============================
   const [speechPermission, triggerSpeech, speechRecording] = useSpeech((transcript) => {
-    if (slotConfig) {
+    if (defaultSlotConfig) {
       (inputRef.current as SlotTextAreaRef)?.insert?.([
         {
           type: 'text',
@@ -179,7 +179,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
 
   const triggerClear = () => {
     triggerValueChange('');
-    if (slotConfig) {
+    if (defaultSlotConfig) {
       (inputRef.current as SlotTextAreaRef)?.clear?.();
     }
   };
@@ -244,7 +244,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     () => ({
       value: innerValue,
       onChange: triggerValueChange,
-      slotConfig,
+      defaultSlotConfig,
       onKeyUp,
       onKeyDown,
       onPaste,
@@ -267,7 +267,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     [
       innerValue,
       triggerValueChange,
-      slotConfig,
+      defaultSlotConfig,
       onKeyUp,
       onKeyDown,
       onPaste,
@@ -294,7 +294,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     // If input focused but click on the container,
     // input will lose focus.
     // We call `preventDefault` to prevent this behavior
-    if (!slotConfig && e.target !== containerRef.current?.querySelector(`.${inputCls}`)) {
+    if (!defaultSlotConfig && e.target !== containerRef.current?.querySelector(`.${inputCls}`)) {
       e.preventDefault();
     }
     if (e.target === containerRef.current?.querySelector(`.${inputCls}`)) {
@@ -340,7 +340,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
             )}
 
             {/* Input */}
-            {slotConfig ? (
+            {defaultSlotConfig ? (
               <SlotTextArea ref={inputRef as React.Ref<SlotTextAreaRef>} />
             ) : (
               <TextArea ref={inputRef as React.Ref<TextAreaRef>} />

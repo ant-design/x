@@ -46,7 +46,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     placeholder,
     onFocus,
     onBlur,
-    slotConfig: propsSlotConfig,
+    defaultSlotConfig,
     ...restProps
   } = React.useContext(SenderContext);
 
@@ -83,7 +83,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   // ============================ State =============================
 
   const [slotConfig, setSlotConfig] = useState<SlotConfigType[]>(
-    propsSlotConfig as SlotConfigType[],
+    defaultSlotConfig as SlotConfigType[],
   );
 
   const [slotConfigMap, getSlotValues, setSlotValues] = useGetState(slotConfig);
@@ -447,16 +447,16 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
   // ============================ Effects =============================
   useEffect(() => {
-    if (propsSlotConfig?.length === 0) return;
-    if (editableRef.current && propsSlotConfig) {
+    if (defaultSlotConfig?.length === 0) return;
+    if (editableRef.current && defaultSlotConfig) {
       editableRef.current.innerHTML = '';
-      const slotNodeList = getSlotListNode(propsSlotConfig);
+      const slotNodeList = getSlotListNode(defaultSlotConfig);
       slotNodeList.forEach((element) => {
         editableRef.current?.appendChild(element);
       });
       onChange?.(getEditorValue().value, undefined, getEditorValue().config);
     }
-  }, [propsSlotConfig]);
+  }, []);
 
   useImperativeHandle(ref, () => ({
     nativeElement: editableRef.current! as unknown as HTMLTextAreaElement,

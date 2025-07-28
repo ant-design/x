@@ -60,7 +60,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 | onCancel | 点击取消按钮的回调 | () => void | - | - |
 | onPasteFile | 黏贴文件的回调 | (firstFile: File, files: FileList) => void | - | - |
 | autoSize | 自适应内容高度，可设置为 true \| false 或对象：{ minRows: 2, maxRows: 6 } | boolean \| { minRows?: number; maxRows?: number } | { maxRows: 8 } | - |
-| slotConfig | 词槽配置，配置后输入框将变为词槽模式，支持结构化输入 | SlotConfigType[] | - | - |
+| defaultSlotConfig | 词槽配置，配置后输入框将变为词槽模式，支持结构化输入 | SlotConfigType[] | - | - |
 
 ```typescript | pure
 type SpeechConfig = {

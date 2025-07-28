@@ -10,7 +10,7 @@ import {
   SearchOutlined,
 } from '@ant-design/icons';
 import { Attachments, AttachmentsProps, Sender, SenderProps } from '@ant-design/x';
-import { Button, Divider, Dropdown, Flex, GetRef, MenuProps, message, theme } from 'antd';
+import { Button, Divider, Dropdown, Flex, GetRef, MenuProps, message } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 
 const Switch = Sender.Switch;
@@ -57,12 +57,24 @@ const FileInfo: {
     label: 'x-image',
   },
 };
+const defaultSlotConfig: SenderProps['defaultSlotConfig'] = [
+  { type: 'text', value: 'I want to go to ' },
+  {
+    type: 'select',
+    key: 'destination',
+    props: {
+      defaultValue: 'Beijing',
+      options: ['Beijing', 'Shanghai', 'Guangzhou'],
+      placeholder: 'Please select a destination',
+    },
+  },
+];
 
 const App: React.FC = () => {
   const [value, setValue] = useState<string>('Hello? this is X!');
   const [loading, setLoading] = useState<boolean>(false);
-  const [deepThink, setDeepThink] = useState<boolean>(false);
-  const [slotConfig, setSlotConfig] = useState<SenderProps['slotConfig']>([]);
+  const [deepThink, setDeepThink] = useState<boolean>(true);
+  const [slotConfigValue, setSlotConfigValue] = useState<SenderProps['defaultSlotConfig']>([]);
 
   const [fileList, setFileList] = useState<AttachmentsProps['items']>([]);
   const agentItems: MenuProps['items'] = Object.keys(AgentInfo).map((agent) => {
@@ -71,7 +83,7 @@ const App: React.FC = () => {
       key: agent,
       icon,
       label,
-      disabled: !!slotConfig?.find((config) => config.key === agent),
+      disabled: !!slotConfigValue?.find((config) => config.key === agent),
     };
   });
 
@@ -215,7 +227,7 @@ const App: React.FC = () => {
         }}
         suffix={false}
         onChange={(v, _, config) => {
-          setSlotConfig(config);
+          setSlotConfigValue(config);
           setValue(v);
         }}
         onSubmit={() => {
@@ -227,7 +239,7 @@ const App: React.FC = () => {
           setLoading(false);
           message.error('Cancel sending!');
         }}
-        slotConfig={[]}
+        defaultSlotConfig={defaultSlotConfig}
         autoSize={{ minRows: 3, maxRows: 6 }}
       />
     </Flex>
