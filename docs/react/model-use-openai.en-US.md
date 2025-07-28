@@ -4,7 +4,6 @@ group:
   order: 1
 title: OpenAI
 order: 0
-tag: Updated
 ---
 
 This guide will explain how to integrate OpenAI's model service into an application built using Ant Design X.

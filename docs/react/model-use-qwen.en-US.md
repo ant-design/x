@@ -4,7 +4,6 @@ group:
   order: 1
 title: Qwen
 order: 1
-tag: Updated
 ---
 
 This guide will introduce how to integrate the model service provided by Qwen into an application built with Ant Design X.

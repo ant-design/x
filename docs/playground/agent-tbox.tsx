@@ -39,57 +39,57 @@ const tboxClient = new TboxClient({
 });
 
 const zhCN = {
-  'what-is-tbox': '什么是百宝箱 Tbox.cn?',
-  'what-can-tbox-do': '百宝箱可以做什么?',
+  whatIsTbox: '什么是百宝箱 Tbox.cn?',
+  whatCanTboxDo: '百宝箱可以做什么?',
   today: '今天',
   yesterday: '昨天',
-  'hot-topics': '最热话题',
-  'design-guide': '设计指南',
+  hotTopics: '最热话题',
+  designGuide: '设计指南',
   intent: '意图',
   role: '角色',
-  'ai-understands-user-needs': 'AI 理解用户需求并提供解决方案',
-  'ai-public-image': 'AI 的公众形象',
+  aiUnderstandsUserNeeds: 'AI 理解用户需求并提供解决方案',
+  aiPublicImage: 'AI 的公众形象',
   dynamic: '动态',
   component: '组件',
   guide: '指南',
   tutorial: '教程',
-  'new-conversation': '新会话',
+  newConversation: '新会话',
   rename: '重命名',
   delete: '删除',
-  'request-in-progress': '请求正在进行中，请等待请求完成。',
-  'demo-button-no-function': '演示按钮，无实际功能',
-  'hello-antd-x-tbox-agent': '你好， 我是 Ant Design X & 百宝箱智能体',
-  'antd-x-tbox-description':
+  requestInProgress: '请求正在进行中，请等待请求完成。',
+  demoButtonNoFunction: '演示按钮，无实际功能',
+  helloAntdXTboxAgent: '你好， 我是 Ant Design X & 百宝箱智能体',
+  antdXTboxDescription:
     '基于 Ant Design 的 AGI 产品界面解决方案，打造更卓越的智能视觉体验，集成了百宝箱 Tbox.cn 的智能体能力，助力产品设计与开发。',
-  'ask-me-anything': '向我提问吧',
-  'loading-message': '加载中💗',
+  askMeAnything: '向我提问吧',
+  loadingMessage: '加载中💗',
 };
 
 const enUS = {
-  'what-is-tbox': 'What is Tbox.cn?',
-  'what-can-tbox-do': 'What can Tbox.cn do?',
+  whatIsTbox: 'What is Tbox.cn?',
+  whatCanTboxDo: 'What can Tbox.cn do?',
   today: 'Today',
   yesterday: 'Yesterday',
-  'hot-topics': 'Hot Topics',
-  'design-guide': 'Design Guide',
+  hotTopics: 'Hot Topics',
+  designGuide: 'Design Guide',
   intent: 'Intent',
   role: 'Role',
-  'ai-understands-user-needs': 'AI understands user needs and provides solutions',
-  'ai-public-image': "AI's public image",
+  aiUnderstandsUserNeeds: 'AI understands user needs and provides solutions',
+  aiPublicImage: "AI's public image",
   dynamic: 'Dynamic',
   component: 'Component',
   guide: 'Guide',
   tutorial: 'Tutorial',
-  'new-conversation': 'New Conversation',
+  newConversation: 'New Conversation',
   rename: 'Rename',
   delete: 'Delete',
-  'request-in-progress': 'Request is in progress, please wait for the request to complete.',
-  'demo-button-no-function': 'Demo button, no actual function',
-  'hello-antd-x-tbox-agent': 'Hello, I am Ant Design X & Tbox Agent',
-  'antd-x-tbox-description':
+  requestInProgress: 'Request is in progress, please wait for the request to complete.',
+  demoButtonNoFunction: 'Demo button, no actual function',
+  helloAntdXTboxAgent: 'Hello, I am Ant Design X & Tbox Agent',
+  antdXTboxDescription:
     'An AGI product interface solution based on Ant Design, creating a superior intelligent visual experience, integrating the capabilities of Tbox.cn agents to assist in product design and development.',
-  'ask-me-anything': 'Ask me anything...',
-  'loading-message': 'Loading...',
+  askMeAnything: 'Ask me anything...',
+  loadingMessage: 'Loading...',
 };
 
 type BubbleDataType = {
@@ -103,28 +103,28 @@ const t = isZhCN ? zhCN : enUS;
 const DEFAULT_CONVERSATIONS_ITEMS = [
   {
     key: 'default-0',
-    label: t['what-is-tbox'],
-    group: t['today'],
+    label: t.whatIsTbox,
+    group: t.today,
   },
   {
     key: 'default-2',
-    label: t['what-can-tbox-do'],
-    group: t['yesterday'],
+    label: t.whatCanTboxDo,
+    group: t.yesterday,
   },
 ];
 
 const HOT_TOPICS = {
   key: '1',
-  label: t['hot-topics'],
+  label: t.hotTopics,
   children: [
     {
       key: '1-1',
-      description: t['what-is-tbox'],
+      description: t.whatIsTbox,
       icon: <span style={{ color: '#f93a4a', fontWeight: 700 }}>1</span>,
     },
     {
       key: '1-2',
-      description: t['what-can-tbox-do'],
+      description: t.whatCanTboxDo,
       icon: <span style={{ color: '#ff6565', fontWeight: 700 }}>2</span>,
     },
   ],
@@ -132,19 +132,19 @@ const HOT_TOPICS = {
 
 const DESIGN_GUIDE = {
   key: '2',
-  label: t['design-guide'],
+  label: t.designGuide,
   children: [
     {
       key: '2-1',
       icon: <HeartOutlined />,
-      label: t['intent'],
-      description: t['ai-understands-user-needs'],
+      label: t.intent,
+      description: t.aiUnderstandsUserNeeds,
     },
     {
       key: '2-2',
       icon: <SmileOutlined />,
-      label: t['role'],
-      description: t['ai-public-image'],
+      label: t.role,
+      description: t.aiPublicImage,
     },
   ],
 };
@@ -152,22 +152,22 @@ const DESIGN_GUIDE = {
 const SENDER_PROMPTS: GetProp<typeof Prompts, 'items'> = [
   {
     key: '1',
-    description: t['dynamic'],
+    description: t.dynamic,
     icon: <ScheduleOutlined />,
   },
   {
     key: '2',
-    description: t['component'],
+    description: t.component,
     icon: <ProductOutlined />,
   },
   {
     key: '3',
-    description: t['guide'],
+    description: t.guide,
     icon: <FileSearchOutlined />,
   },
   {
     key: '4',
-    description: t['tutorial'],
+    description: t.tutorial,
     icon: <AppstoreAddOutlined />,
   },
 ];
@@ -355,7 +355,7 @@ const Independent: React.FC = () => {
     agent,
     requestPlaceholder: () => {
       return {
-        content: t['loading-message'],
+        content: t.loadingMessage,
         role: 'assistant',
       };
     },
@@ -408,7 +408,7 @@ const Independent: React.FC = () => {
   };
 
   const onFooterButtonClick = () => {
-    message.info(t['demo-button-no-function']);
+    message.info(t.demoButtonNoFunction);
   };
 
   // ==================== Nodes ====================
@@ -430,7 +430,7 @@ const Independent: React.FC = () => {
       <Button
         onClick={() => {
           if (agent.isRequesting()) {
-            message.error(t['request-in-progress']);
+            message.error(t.requestInProgress);
             return;
           }
 
@@ -438,8 +438,8 @@ const Independent: React.FC = () => {
           setConversations([
             {
               key: now,
-              label: `${t['new-conversation']} ${conversations.length + 1}`,
-              group: t['today'],
+              label: `${t.newConversation} ${conversations.length + 1}`,
+              group: t.today,
             },
             ...conversations,
           ]);
@@ -450,7 +450,7 @@ const Independent: React.FC = () => {
         className={styles.addBtn}
         icon={<PlusOutlined />}
       >
-        {t['new-conversation']}
+        {t.newConversation}
       </Button>
 
       {/* 🌟 会话管理 */}
@@ -460,7 +460,7 @@ const Independent: React.FC = () => {
         activeKey={curConversation}
         onActiveChange={async (val) => {
           if (agent.isRequesting()) {
-            message.error(t['request-in-progress']);
+            message.error(t.requestInProgress);
             return;
           }
           abortControllerRef.current?.abort();
@@ -476,12 +476,12 @@ const Independent: React.FC = () => {
         menu={(conversation) => ({
           items: [
             {
-              label: t['rename'],
+              label: t.rename,
               key: 'rename',
               icon: <EditOutlined />,
             },
             {
-              label: t['delete'],
+              label: t.delete,
               key: 'delete',
               icon: <DeleteOutlined />,
               danger: true,
@@ -568,8 +568,8 @@ const Independent: React.FC = () => {
           <Welcome
             variant="borderless"
             icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
-            title={t['hello-antd-x-tbox-agent']}
-            description={t['antd-x-tbox-description']}
+            title={t.helloAntdXTboxAgent}
+            description={t.antdXTboxDescription}
             extra={
               <Space>
                 <Button icon={<ShareAltOutlined />} />
@@ -651,7 +651,7 @@ const Independent: React.FC = () => {
             </Flex>
           );
         }}
-        placeholder={t['ask-me-anything']}
+        placeholder={t.askMeAnything}
       />
     </>
   );

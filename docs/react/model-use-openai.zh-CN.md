@@ -4,7 +4,6 @@ group:
   order: 1
 title: OpenAI
 order: 0
-tag: Updated
 ---
 
 这篇指南将介绍如何在使用 Ant Design X 搭建的应用中接入 OpenAI 提供的模型服务。
