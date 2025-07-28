@@ -26,6 +26,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
     [slotCls]: {
       display: 'inline-block',
       margin: `0 ${unit(token.marginXXS)}`,
+      verticalAlign: 'middle',
     },
 
     [`${antInputCls}${slotInputCls}`]: {
