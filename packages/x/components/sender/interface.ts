@@ -8,7 +8,7 @@ type TextareaProps = GetProps<typeof import('antd').Input.TextArea>;
 
 export type SubmitType = 'enter' | 'shiftEnter' | false;
 
-type SemanticType = 'root' | 'prefix' | 'input' | 'suffix' | 'footer';
+type SemanticType = 'root' | 'prefix' | 'input' | 'suffix' | 'footer' | 'switch';
 
 export interface SenderComponents {
   input?: React.ComponentType<TextareaProps>;
@@ -23,7 +23,7 @@ export type ActionsComponents = {
 
 export type BaseNode = React.ReactNode | false;
 export type NodeRender = (
-  ori: React.ReactNode,
+  oriNode: React.ReactNode,
   info: {
     components: ActionsComponents;
   },
@@ -122,4 +122,8 @@ export interface SenderProps
   autoSize?: boolean | { minRows?: number; maxRows?: number };
 }
 
-export type SenderRef = TextAreaRef & SlotTextAreaRef;
+export type SenderRef = Omit<TextAreaRef, 'nativeElement'> &
+  Omit<SlotTextAreaRef, 'nativeElement'> & {
+    inputElement: TextAreaRef['nativeElement'] | SlotTextAreaRef['nativeElement'];
+    nativeElement: HTMLDivElement;
+  };

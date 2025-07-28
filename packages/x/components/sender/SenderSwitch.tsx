@@ -1,10 +1,12 @@
 import { Button } from 'antd';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import * as React from 'react';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
+import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
+import { SenderContext } from './context';
 import useStyle from './style';
 
 export interface SenderSwitchProps
@@ -13,6 +15,7 @@ export interface SenderSwitchProps
     'onClick' | 'value' | 'defaultValue' | 'onChange'
   > {
   prefixCls?: string;
+  rootClassName?: string;
   checkedChildren?: React.ReactNode;
   unCheckedChildren?: React.ReactNode;
   value?: boolean;
@@ -21,8 +24,6 @@ export interface SenderSwitchProps
   loading?: boolean;
   disabled?: boolean;
   children?: React.ReactNode;
-  className?: string;
-  style?: React.CSSProperties;
   onChange?: (checked: boolean) => void;
 }
 
@@ -37,6 +38,7 @@ const SenderSwitch = React.forwardRef<SenderSwitchRef, SenderSwitchProps>((props
     icon,
     style,
     onChange,
+    rootClassName,
     loading,
     defaultValue,
     value: customValue,
@@ -46,6 +48,12 @@ const SenderSwitch = React.forwardRef<SenderSwitchRef, SenderSwitchProps>((props
     prefixCls: customizePrefixCls,
     ...restProps
   } = props;
+
+  const {
+    styles = {},
+    classNames = {},
+    prefixCls: contextPrefixCls,
+  } = React.useContext(SenderContext);
 
   const domProps = pickAttrs(restProps, {
     attr: true,
@@ -57,7 +65,7 @@ const SenderSwitch = React.forwardRef<SenderSwitchRef, SenderSwitchProps>((props
 
   // ============================ Prefix ============================
   const { direction, getPrefixCls } = useXProviderContext();
-  const prefixCls = getPrefixCls('sender', customizePrefixCls);
+  const prefixCls = getPrefixCls('sender', customizePrefixCls || contextPrefixCls);
   const switchCls = `${prefixCls}-switch`;
   const [hashId, cssVarCls] = useStyle(prefixCls);
 
@@ -81,23 +89,40 @@ const SenderSwitch = React.forwardRef<SenderSwitchRef, SenderSwitchProps>((props
     },
   );
 
+  // ============================ style ============================
+  const contextConfig = useXComponentConfig('sender');
+
+  const mergedCls = classnames(
+    prefixCls,
+    switchCls,
+    className,
+    rootClassName,
+    contextConfig.classNames.switch,
+    classNames.switch,
+    hashId,
+    cssVarCls,
+    {
+      [`${switchCls}-checked`]: mergedChecked,
+      [`${prefixCls}-rtl`]: direction === 'rtl',
+    },
+  );
+
   return (
     <div
       ref={containerRef}
-      className={classNames(prefixCls, switchCls, className, hashId, cssVarCls, {
-        [`${switchCls}-checked`]: mergedChecked,
-        [`${switchCls}-rtl`]: direction === 'rtl',
-      })}
+      className={mergedCls}
       key={id}
       style={{
         ...style,
+        ...contextConfig.styles.switch,
+        ...styles.switch,
       }}
       {...domProps}
     >
       <Button
         disabled={disabled}
         loading={loading}
-        className={classNames(`${switchCls}-content`)}
+        className={classnames(`${switchCls}-content`)}
         variant="outlined"
         color={mergedChecked ? 'primary' : 'default'}
         icon={icon}

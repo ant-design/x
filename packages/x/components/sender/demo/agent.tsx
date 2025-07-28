@@ -35,6 +35,17 @@ const AgentInfo: {
   },
 };
 
+const IconStyle = {
+  fontSize: 16,
+};
+
+const SwitchTextStyle = {
+  display: 'inline-flex',
+  width: 28,
+  justifyContent: 'center',
+  alignItems: 'center',
+};
+
 const FileInfo: {
   [key: string]: {
     icon: React.ReactNode;
@@ -51,7 +62,6 @@ const App: React.FC = () => {
   const [value, setValue] = useState<string>('Hello? this is X!');
   const [loading, setLoading] = useState<boolean>(false);
   const [deepThink, setDeepThink] = useState<boolean>(false);
-  const { token } = theme.useToken();
   const [slotConfig, setSlotConfig] = useState<SenderProps['slotConfig']>([]);
 
   const [fileList, setFileList] = useState<AttachmentsProps['items']>([]);
@@ -74,12 +84,8 @@ const App: React.FC = () => {
     };
   });
 
-  const iconStyle = {
-    fontSize: 16,
-    color: token.colorText,
-  };
-
   const senderRef = useRef<GetRef<typeof Sender>>(null);
+
   const agentItemClick: MenuProps['onClick'] = (item) => {
     const { icon, label } = AgentInfo[item.key];
     senderRef.current?.insert?.([
@@ -168,11 +174,19 @@ const App: React.FC = () => {
           return (
             <Flex justify="space-between" align="center">
               <Flex gap="small" align="center">
-                <Button style={iconStyle} type="text" icon={<PaperClipOutlined />} />
+                <Button style={IconStyle} type="text" icon={<PaperClipOutlined />} />
                 <Switch
                   value={deepThink}
-                  checkedChildren={<>Deep Think: on</>}
-                  unCheckedChildren={<>Deep Think: off</>}
+                  checkedChildren={
+                    <>
+                      Deep Think:<span style={SwitchTextStyle}>on</span>
+                    </>
+                  }
+                  unCheckedChildren={
+                    <>
+                      Deep Think:<span style={SwitchTextStyle}>off</span>{' '}
+                    </>
+                  }
                   onChange={(checked: boolean) => {
                     setDeepThink(checked);
                   }}
@@ -192,7 +206,7 @@ const App: React.FC = () => {
                 ) : null}
               </Flex>
               <Flex align="center">
-                <Button type="text" style={iconStyle} icon={<ApiOutlined />} />
+                <Button type="text" style={IconStyle} icon={<ApiOutlined />} />
                 <Divider orientation="vertical" />
                 {actionNode}
               </Flex>

@@ -23,7 +23,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/submitType.tsx">Submit type</code>
 <code src="./demo/speech.tsx">Speech input</code>
 <code src="./demo/speech-custom.tsx">Custom speech input</code>
-<code src="./demo/actions.tsx">Custom actions</code>
+<code src="./demo/suffix.tsx">Custom actions</code>
 <code src="./demo/header.tsx">Header panel</code>
 <code src="./demo/header-fixed.tsx">Reference</code>
 <code src="./demo/footer.tsx">Custom footer</code>
@@ -138,11 +138,27 @@ type ActionsComponents = {
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | children | Panel content | ReactNode | - | - |
+| classNames | Class name | [See below](#semantic-dom) | - | - |
 | closable | Whether to close | boolean | true | - |
 | forceRender | Force render, use when need ref internal elements on init | boolean | false | - |
 | open | Whether to expand | boolean | - | - |
+| styles | Semantic DOM style | [See below](#semantic-dom) | - | - |
 | title | Title content | ReactNode | - | - |
 | onOpenChange | Callback when the expansion state changes | (open: boolean) => void | - | - |
+
+### Sender.Switch
+
+| Property          | Description             | Type                       | Default | Version |
+| ----------------- | ----------------------- | -------------------------- | ------- | ------- |
+| children          | General content         | ReactNode                  | -       | -       |
+| checkedChildren   | Content when checked    | ReactNode                  | -       | -       |
+| unCheckedChildren | Content when unchecked  | ReactNode                  | -       | -       |
+| icon              | Set icon component      | ReactNode                  | -       | -       |
+| disabled          | Whether disabled        | boolean                    | false   | -       |
+| loading           | Loading state           | boolean                    | -       | -       |
+| value             | Switch value            | boolean                    | false   | -       |
+| onChange          | Callback when changed   | function(checked: boolean) | -       | -       |
+| rootClassName     | Root element class name | string                     | -       | -       |
 
 ### ⚠️ Notes for Slot Mode
 

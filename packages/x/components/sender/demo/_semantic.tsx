@@ -12,6 +12,7 @@ const locales = {
     input: '输入框',
     suffix: '后缀',
     footer: '底部',
+    switch: '开关',
   },
   en: {
     root: 'Root',
@@ -19,6 +20,7 @@ const locales = {
     input: 'Input',
     suffix: 'Suffix',
     footer: 'Footer',
+    switch: 'Switch',
   },
 };
 
@@ -48,14 +50,18 @@ const App: React.FC = () => {
           { name: 'input', desc: locale.input },
           { name: 'suffix', desc: locale.suffix },
           { name: 'footer', desc: locale.footer },
+          { name: 'switch', desc: locale.switch },
         ]}
       >
         <Sender
           prefix={<Button type="text" icon={<SmileOutlined />} />}
           footer={() => (
-            <Typography.Text type="secondary">
-              Deep thinking can understand the intent behind.
-            </Typography.Text>
+            <Flex gap="small" align="center">
+              <Sender.Switch>Deep Search</Sender.Switch>
+              <Typography.Text type="secondary">
+                Deep thinking can understand the intent behind.
+              </Typography.Text>
+            </Flex>
           )}
         />
       </SemanticPreview>

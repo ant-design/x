@@ -8,6 +8,7 @@ const genSenderSwitchStyle: GenerateStyle<SenderToken> = (token) => {
 
   return {
     [switchCls]: {
+      display: 'inline-block',
       [`${antCls}-btn:not(:disabled):not(${antCls}-btn-disabled):hover`]: {
         background: token.switchUncheckedHoverBg,
         borderColor: token.colorBorder,
@@ -23,6 +24,10 @@ const genSenderSwitchStyle: GenerateStyle<SenderToken> = (token) => {
         [`${switchCls}-content`]: {
           background: token.switchCheckedBg,
         },
+      },
+      // ============================== RTL ==============================
+      [`&${componentCls}-rtl`]: {
+        direction: 'rtl',
       },
     },
   };

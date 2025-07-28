@@ -101,6 +101,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   useProxyImperativeHandle(ref, () => {
     return {
       nativeElement: containerRef.current!,
+      inputElement: inputRef.current?.nativeElement,
       focus: inputRef.current?.focus!,
       blur: inputRef.current?.blur!,
       insert: inputRef.current?.insert!,
@@ -111,6 +112,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
 
   // ======================= Component Config =======================
   const contextConfig = useXComponentConfig('sender');
+
   const inputCls = `${prefixCls}-input`;
 
   // ============================ Styles ============================

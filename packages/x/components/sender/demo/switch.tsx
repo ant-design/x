@@ -8,30 +8,48 @@ const App: React.FC = () => {
 
   return (
     <Flex vertical gap="middle">
-      <Sender.Switch icon={<SearchOutlined />}>Deep Search</Sender.Switch>
-      <Sender.Switch
-        checkedChildren={'Deep Search: on'}
-        unCheckedChildren={'Deep Search: off'}
-        icon={<SearchOutlined />}
-      />
-      <Sender.Switch disabled icon={<SearchOutlined />}>
-        Deep Search
-      </Sender.Switch>
-      <Sender.Switch loading icon={<SearchOutlined />}>
-        Deep Search
-      </Sender.Switch>
-      <Sender.Switch
-        icon={<SearchOutlined />}
-        defaultValue={true}
-        onChange={(checked) => {
-          console.log('Switch toggled', checked);
-        }}
-      >
-        Deep Search
-      </Sender.Switch>
-      <Sender.Switch icon={<SearchOutlined />} value={value} onChange={setValue}>
-        Deep Search
-      </Sender.Switch>
+      <Flex align="center" gap="small">
+        {' '}
+        Default: <Sender.Switch icon={<SearchOutlined />}>Deep Search</Sender.Switch>
+      </Flex>
+      <Flex align="center" gap="small">
+        Custom checked/unchecked content:{' '}
+        <Sender.Switch
+          checkedChildren={'Deep Search: on'}
+          unCheckedChildren={'Deep Search: off'}
+          icon={<SearchOutlined />}
+        />
+      </Flex>
+      <Flex align="center" gap="small">
+        Disabled:
+        <Sender.Switch disabled icon={<SearchOutlined />}>
+          Deep Search
+        </Sender.Switch>
+      </Flex>
+      <Flex align="center" gap="small">
+        Loading:{' '}
+        <Sender.Switch loading icon={<SearchOutlined />}>
+          Deep Search
+        </Sender.Switch>
+      </Flex>
+      <Flex align="center" gap="small">
+        DefaultValue:{' '}
+        <Sender.Switch
+          icon={<SearchOutlined />}
+          defaultValue={true}
+          onChange={(checked) => {
+            console.log('Switch toggled', checked);
+          }}
+        >
+          Deep Search
+        </Sender.Switch>
+      </Flex>
+      <Flex align="center" gap="small">
+        Controlled mode:{' '}
+        <Sender.Switch icon={<SearchOutlined />} value={value} onChange={setValue}>
+          Deep Search
+        </Sender.Switch>
+      </Flex>
     </Flex>
   );
 };
