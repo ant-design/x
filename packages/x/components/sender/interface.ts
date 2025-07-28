@@ -122,4 +122,4 @@ export interface SenderProps
   autoSize?: boolean | { minRows?: number; maxRows?: number };
 }
 
-export type SenderRef = TextAreaRef | SlotTextAreaRef;
+export type SenderRef = TextAreaRef & SlotTextAreaRef;

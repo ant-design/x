@@ -1,6 +1,7 @@
 import { Flex } from 'antd';
 import classnames from 'classnames';
 import { useMergedState } from 'rc-util';
+import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
@@ -21,6 +22,7 @@ import type {
   SubmitType,
 } from './interface';
 import SenderHeader, { SendHeaderContext } from './SenderHeader';
+import SenderSwitch from './SenderSwitch';
 import SlotTextArea, { type SlotTextAreaRef } from './SlotTextArea';
 import useStyle from './style';
 import TextArea, { type TextAreaRef } from './TextArea';
@@ -45,7 +47,7 @@ const sharedRenderComponents = {
   SpeechButton,
 };
 
-const ForwardSender = React.forwardRef<any, SenderProps>((props, ref) => {
+const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   const {
     prefixCls: customizePrefixCls,
     styles = {},
@@ -74,8 +76,19 @@ const ForwardSender = React.forwardRef<any, SenderProps>((props, ref) => {
     onPaste,
     onPasteFile,
     autoSize = { maxRows: 8 },
-    ...rest
+    placeholder,
+    onFocus,
+    onBlur,
+    ...restProps
   } = props;
+
+  const domProps = pickAttrs(restProps, {
+    attr: true,
+    aria: true,
+    data: true,
+  });
+
+  const id = React.useId();
 
   // ============================= MISC =============================
   const { direction, getPrefixCls } = useXProviderContext();
@@ -244,10 +257,10 @@ const ForwardSender = React.forwardRef<any, SenderProps>((props, ref) => {
       autoSize,
       components,
       onSubmit,
-      placeholder: rest.placeholder,
-      onFocus: rest.onFocus,
-      onBlur: rest.onBlur,
-      ...rest,
+      placeholder,
+      onFocus,
+      onBlur,
+      ...restProps,
     }),
     [
       innerValue,
@@ -267,10 +280,10 @@ const ForwardSender = React.forwardRef<any, SenderProps>((props, ref) => {
       autoSize,
       components,
       onSubmit,
-      rest.placeholder,
-      rest.onFocus,
-      rest.onBlur,
-      rest,
+      placeholder,
+      onFocus,
+      onBlur,
+      restProps,
     ],
   );
 
@@ -291,6 +304,7 @@ const ForwardSender = React.forwardRef<any, SenderProps>((props, ref) => {
   return (
     <SenderContext.Provider value={contextValue}>
       <div
+        key={id}
         ref={containerRef}
         className={mergedCls}
         style={{
@@ -299,6 +313,7 @@ const ForwardSender = React.forwardRef<any, SenderProps>((props, ref) => {
           ...contextConfig.styles.root,
           ...styles.root,
         }}
+        {...domProps}
       >
         <ActionButtonContext.Provider value={actionsButtonContextProps}>
           {/* Header */}
@@ -366,6 +381,7 @@ const ForwardSender = React.forwardRef<any, SenderProps>((props, ref) => {
 
 type CompoundedSender = typeof ForwardSender & {
   Header: typeof SenderHeader;
+  Switch: typeof SenderSwitch;
 };
 
 const Sender = ForwardSender as CompoundedSender;
@@ -375,5 +391,6 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 Sender.Header = SenderHeader;
+Sender.Switch = SenderSwitch;
 
 export default Sender;

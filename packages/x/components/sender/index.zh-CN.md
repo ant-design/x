@@ -19,6 +19,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <!-- prettier-ignore -->
 <code src="./demo/agent.tsx">智能体输入</code>
 <code src="./demo/basic.tsx">基本用法</code>
+<code src="./demo/switch.tsx">功能开关</code>
 <code src="./demo/slot-filling.tsx">词槽模式</code>
 <code src="./demo/submitType.tsx">提交方式</code>
 <code src="./demo/speech.tsx">语音输入</code>

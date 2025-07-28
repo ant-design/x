@@ -18,6 +18,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <!-- prettier-ignore -->
 <code src="./demo/agent.tsx">Agent Sender</code>
 <code src="./demo/basic.tsx">Basic</code>
+<code src="./demo/switch.tsx">Feature Switch</code>
 <code src="./demo/slot-filling.tsx">Slot Mode</code>
 <code src="./demo/submitType.tsx">Submit type</code>
 <code src="./demo/speech.tsx">Speech input</code>

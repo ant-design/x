@@ -5,6 +5,7 @@ import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssi
 import { genStyleHooks } from '../../theme/genStyleUtils';
 import genSenderHeaderStyle from './header';
 import genSlotTextAreaStyle from './slot-textarea';
+import genSenderSwitchStyle from './switch';
 
 // biome-ignore lint/suspicious/noEmptyInterface: ComponentToken need to be empty by default
 export interface ComponentToken {
@@ -33,6 +34,22 @@ export interface ComponentToken {
    * @descEN Slot border hover color
    */
   colorBorderSlotHover: string;
+  /**
+   * @desc 开关选中背景颜色
+   * @descEN Switch checked background colo
+   */
+  switchCheckedBg: string;
+  /**
+   * @desc 开关选中悬浮态背景颜色
+   * @descEN Switch checked hover background color
+   */
+  switchCheckedHoverBg: string;
+
+  /**
+   * @desc 开关未选中悬浮态背景颜色
+   * @descEN Switch unchecked hover background color
+   */
+  switchUncheckedHoverBg: string;
 }
 
 export interface SenderToken extends FullToken<'Sender'> {
@@ -42,7 +59,7 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
   const { componentCls, paddingSM, paddingXS, paddingXXS, lineWidth, lineWidthBold, calc } = token;
 
   return {
-    [componentCls]: {
+    [`${componentCls}:not(${componentCls}-switch)`]: {
       position: 'relative',
       width: '100%',
       boxSizing: 'border-box',
@@ -164,18 +181,25 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
 };
 
 export const prepareComponentToken: GetDefaultToken<'Sender'> = (token) => {
-  const { colorPrimary } = token;
+  const { colorPrimary, colorFillTertiary } = token;
   const colorBgSlot = new FastColor(colorPrimary).setA(0.06).toRgbString();
   const colorTextSlot = colorPrimary;
   const colorTextSlotPlaceholder = new FastColor(colorPrimary).setA(0.25).toRgbString();
   const colorBorderSlotHover = new FastColor(colorPrimary).setA(0.1).toRgbString();
   const colorBorderSlot = colorBgSlot;
+  const switchCheckedBg = new FastColor(colorPrimary).setA(0.08).toRgbString();
+
+  const switchUncheckedHoverBg = new FastColor(colorFillTertiary).setA(0.04).toRgbString();
+  const switchCheckedHoverBg = new FastColor(colorPrimary).setA(0.1).toRgbString();
   return {
     colorBgSlot,
     colorTextSlot,
     colorTextSlotPlaceholder,
     colorBorderSlotHover,
     colorBorderSlot,
+    switchCheckedBg,
+    switchCheckedHoverBg,
+    switchUncheckedHoverBg,
   };
 };
 
@@ -189,10 +213,9 @@ export default genStyleHooks<'Sender'>(
     return [
       genSenderStyle(SenderToken),
       genSenderHeaderStyle(SenderToken),
+      genSenderSwitchStyle(SenderToken),
       genSlotTextAreaStyle(SenderToken),
     ];
   },
   prepareComponentToken,
 );
-
-export { genSlotTextAreaStyle };

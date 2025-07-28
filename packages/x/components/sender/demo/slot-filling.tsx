@@ -48,7 +48,7 @@ const initialValue: SlotConfig = [
 
 const App: React.FC = () => {
   const [slotConfig, setSlotConfig] = useState<SlotConfig>(initialValue);
-  const senderRef = useRef<GetRef<typeof Sender>['SlotTextAreaRef']>(null);
+  const senderRef = useRef<GetRef<typeof Sender>>(null);
 
   // 备用 slotConfig 示例
   const altSlotConfig: SlotConfig = [

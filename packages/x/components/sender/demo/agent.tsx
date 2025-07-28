@@ -13,6 +13,8 @@ import { Attachments, AttachmentsProps, Sender, SenderProps } from '@ant-design/
 import { Button, Divider, Dropdown, Flex, GetRef, MenuProps, message, theme } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 
+const Switch = Sender.Switch;
+
 const AgentInfo: {
   [key: string]: {
     icon: React.ReactNode;
@@ -77,7 +79,7 @@ const App: React.FC = () => {
     color: token.colorText,
   };
 
-  const senderRef = useRef<GetRef<typeof Sender>['SlotTextAreaRef']>(null);
+  const senderRef = useRef<GetRef<typeof Sender>>(null);
   const agentItemClick: MenuProps['onClick'] = (item) => {
     const { icon, label } = AgentInfo[item.key];
     senderRef.current?.insert?.([
@@ -167,20 +169,25 @@ const App: React.FC = () => {
             <Flex justify="space-between" align="center">
               <Flex gap="small" align="center">
                 <Button style={iconStyle} type="text" icon={<PaperClipOutlined />} />
-                <Button
-                  color={deepThink ? 'primary' : 'default'}
-                  variant={deepThink ? 'solid' : 'outlined'}
-                  onClick={() => setDeepThink((ori) => !ori)}
+                <Switch
+                  value={deepThink}
+                  checkedChildren={<>Deep Think: on</>}
+                  unCheckedChildren={<>Deep Think: off</>}
+                  onChange={(checked: boolean) => {
+                    setDeepThink(checked);
+                  }}
                   icon={<OpenAIOutlined />}
-                >
-                  Deep Think
-                </Button>
+                />
                 <Dropdown menu={{ onClick: agentItemClick, items: agentItems }}>
-                  <Button icon={<AntDesignOutlined />}>Agents</Button>
+                  <Switch value={false} icon={<AntDesignOutlined />}>
+                    Agent
+                  </Switch>
                 </Dropdown>
                 {fileItems?.length ? (
                   <Dropdown menu={{ onClick: fileItemClick, items: fileItems }}>
-                    <Button icon={<ProfileOutlined />}>Files</Button>
+                    <Switch value={false} icon={<ProfileOutlined />}>
+                      Files
+                    </Switch>
                   </Dropdown>
                 ) : null}
               </Flex>

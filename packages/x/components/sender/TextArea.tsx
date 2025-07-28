@@ -44,7 +44,7 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
     placeholder,
     onFocus,
     onBlur,
-    ...rest
+    ...restProps
   } = React.useContext(SenderContext);
 
   const inputRef = React.useRef<AntdInputRef>(null);
@@ -119,7 +119,7 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
 
   const InputTextArea = getComponent(components, ['input'], Input.TextArea);
 
-  const domProps = pickAttrs(rest, {
+  const domProps = pickAttrs(restProps, {
     attr: true,
     aria: true,
     data: true,

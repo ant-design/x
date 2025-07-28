@@ -13,6 +13,7 @@ export type { PromptProps, PromptsProps } from './prompts';
 export { default as Prompts } from './prompts';
 export type { SenderProps } from './sender';
 export { default as Sender } from './sender';
+export { default as SenderSwitch } from './sender/SenderSwitch';
 export type { SuggestionProps } from './suggestion';
 export { default as Suggestion } from './suggestion';
 export type { ThinkProps } from './think';
@@ -26,7 +27,6 @@ export type { WelcomeProps } from './welcome';
 export { default as Welcome } from './welcome';
 export type { XProviderProps } from './x-provider';
 export { default as XProvider } from './x-provider';
-
 export { default as XRequest } from './x-request';
 export type { XStreamOptions } from './x-stream';
 export { default as XStream } from './x-stream';

@@ -1,6 +1,7 @@
 import { CaretDownFilled } from '@ant-design/icons';
 import { Dropdown, Input, InputRef } from 'antd';
 import classnames from 'classnames';
+import pickAttrs from 'rc-util/lib/pickAttrs';
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
@@ -46,7 +47,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     onFocus,
     onBlur,
     slotConfig: propsSlotConfig,
-    ...rest
+    ...restProps
   } = React.useContext(SenderContext);
 
   // ============================= MISC =============================
@@ -66,6 +67,18 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const isCompositionRef = useRef(false);
   const keyLockRef = useRef(false);
   const lastSelectionRef = useRef<Range | null>(null);
+
+  // ============================ Attrs =============================
+  const domProps = pickAttrs(restProps, {
+    attr: true,
+    aria: true,
+    data: true,
+  });
+
+  const inputProps = {
+    ...domProps,
+    ref: editableRef,
+  };
 
   // ============================ State =============================
 
@@ -491,7 +504,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   return (
     <>
       <div
-        ref={editableRef}
+        {...inputProps}
         role="textbox"
         tabIndex={0}
         style={{ ...mergeStyle, ...inputHeightStyle }}
@@ -516,7 +529,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         onFocus={onInternalFocus}
         onBlur={onInternalBlur}
         onInput={onInternalInput}
-        {...(rest as React.HTMLAttributes<HTMLDivElement>)}
+        {...(restProps as React.HTMLAttributes<HTMLDivElement>)}
       />
       <div
         style={{
