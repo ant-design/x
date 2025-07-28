@@ -68,10 +68,10 @@ const defaultSlotConfig: SenderProps['defaultSlotConfig'] = [
       placeholder: 'Please select a destination',
     },
   },
+  { type: 'text', value: '，Please help me plan the most cost-effective trip.' },
 ];
 
 const App: React.FC = () => {
-  const [value, setValue] = useState<string>('Hello? this is X!');
   const [loading, setLoading] = useState<boolean>(false);
   const [deepThink, setDeepThink] = useState<boolean>(true);
   const [slotConfigValue, setSlotConfigValue] = useState<SenderProps['defaultSlotConfig']>([]);
@@ -178,7 +178,6 @@ const App: React.FC = () => {
     <Flex vertical gap="middle">
       <Sender
         loading={loading}
-        value={value}
         ref={senderRef}
         placeholder="Press Enter to send message"
         header={senderHeader}
@@ -226,14 +225,13 @@ const App: React.FC = () => {
           );
         }}
         suffix={false}
-        onChange={(v, _, config) => {
+        onChange={(__, _, config) => {
           setSlotConfigValue(config);
-          setValue(v);
         }}
-        onSubmit={() => {
-          setValue('');
+        onSubmit={(v) => {
           setLoading(true);
-          message.info('Send message!');
+          message.info(`Send message: ${v}`);
+          senderRef.current?.clear?.();
         }}
         onCancel={() => {
           setLoading(false);
