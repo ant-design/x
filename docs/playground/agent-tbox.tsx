@@ -38,38 +38,91 @@ const tboxClient = new TboxClient({
   },
 });
 
+const zhCN = {
+  'what-is-tbox': '什么是百宝箱 Tbox.cn?',
+  'what-can-tbox-do': '百宝箱可以做什么?',
+  today: '今天',
+  yesterday: '昨天',
+  'hot-topics': '最热话题',
+  'design-guide': '设计指南',
+  intent: '意图',
+  role: '角色',
+  'ai-understands-user-needs': 'AI 理解用户需求并提供解决方案',
+  'ai-public-image': 'AI 的公众形象',
+  dynamic: '动态',
+  component: '组件',
+  guide: '指南',
+  tutorial: '教程',
+  'new-conversation': '新会话',
+  rename: '重命名',
+  delete: '删除',
+  'request-in-progress': '请求正在进行中，请等待请求完成。',
+  'demo-button-no-function': '演示按钮，无实际功能',
+  'hello-antd-x-tbox-agent': '你好， 我是 Ant Design X & 百宝箱智能体',
+  'antd-x-tbox-description':
+    '基于 Ant Design 的 AGI 产品界面解决方案，打造更卓越的智能视觉体验，集成了百宝箱 Tbox.cn 的智能体能力，助力产品设计与开发。',
+  'ask-me-anything': '向我提问吧',
+};
+
+const enUS = {
+  'what-is-tbox': 'What is Tbox.cn?',
+  'what-can-tbox-do': 'What can Tbox.cn do?',
+  today: 'Today',
+  yesterday: 'Yesterday',
+  'hot-topics': 'Hot Topics',
+  'design-guide': 'Design Guide',
+  intent: 'Intent',
+  role: 'Role',
+  'ai-understands-user-needs': 'AI understands user needs and provides solutions',
+  'ai-public-image': "AI's public image",
+  dynamic: 'Dynamic',
+  component: 'Component',
+  guide: 'Guide',
+  tutorial: 'Tutorial',
+  'new-conversation': 'New Conversation',
+  rename: 'Rename',
+  delete: 'Delete',
+  'request-in-progress': 'Request is in progress, please wait for the request to complete.',
+  'demo-button-no-function': 'Demo button, no actual function',
+  'hello-antd-x-tbox-agent': 'Hello, I am Ant Design X & Tbox Agent',
+  'antd-x-tbox-description':
+    'An AGI product interface solution based on Ant Design, creating a superior intelligent visual experience, integrating the capabilities of Tbox.cn agents to assist in product design and development.',
+  'ask-me-anything': 'Ask me anything...',
+};
+
 type BubbleDataType = {
   role: string;
   content: string;
 };
 
 const isZhCN = window.parent?.location?.pathname?.includes('-cn');
+const t = isZhCN ? zhCN : enUS;
 
 const DEFAULT_CONVERSATIONS_ITEMS = [
   {
     key: 'default-0',
-    label: isZhCN ? '什么是百宝箱 Tbox.cn?' : 'What is Tbox.cn?',
-    group: isZhCN ? '今天' : 'Today',
+    label: t['what-is-tbox'],
+    group: t['today'],
   },
   {
     key: 'default-2',
-    label: isZhCN ? '百宝箱可以做什么?' : 'What can Tbox.cn do?',
-    group: isZhCN ? '昨天' : 'Yesterday',
+    label: t['what-can-tbox-do'],
+    group: t['yesterday'],
   },
 ];
 
 const HOT_TOPICS = {
   key: '1',
-  label: isZhCN ? '最热话题' : 'Hot Topics',
+  label: t['hot-topics'],
   children: [
     {
       key: '1-1',
-      description: isZhCN ? '什么是百宝箱 Tbox.cn?' : 'What is Tbox.cn?',
+      description: t['what-is-tbox'],
       icon: <span style={{ color: '#f93a4a', fontWeight: 700 }}>1</span>,
     },
     {
       key: '1-2',
-      description: isZhCN ? '百宝箱可以做什么?' : 'What can Tbox.cn do?',
+      description: t['what-can-tbox-do'],
       icon: <span style={{ color: '#ff6565', fontWeight: 700 }}>2</span>,
     },
   ],
@@ -77,21 +130,19 @@ const HOT_TOPICS = {
 
 const DESIGN_GUIDE = {
   key: '2',
-  label: isZhCN ? '设计指南' : 'Design Guide',
+  label: t['design-guide'],
   children: [
     {
       key: '2-1',
       icon: <HeartOutlined />,
-      label: isZhCN ? '意图' : 'Intent',
-      description: isZhCN
-        ? 'AI 理解用户需求并提供解决方案'
-        : 'AI understands user needs and provides solutions',
+      label: t['intent'],
+      description: t['ai-understands-user-needs'],
     },
     {
       key: '2-2',
       icon: <SmileOutlined />,
-      label: isZhCN ? '角色' : 'Role',
-      description: isZhCN ? 'AI 的公众形象' : "AI's public image",
+      label: t['role'],
+      description: t['ai-public-image'],
     },
   ],
 };
@@ -99,22 +150,22 @@ const DESIGN_GUIDE = {
 const SENDER_PROMPTS: GetProp<typeof Prompts, 'items'> = [
   {
     key: '1',
-    description: isZhCN ? '动态' : 'Dynamic',
+    description: t['dynamic'],
     icon: <ScheduleOutlined />,
   },
   {
     key: '2',
-    description: isZhCN ? '组件' : 'Component',
+    description: t['component'],
     icon: <ProductOutlined />,
   },
   {
     key: '3',
-    description: isZhCN ? '指南' : 'Guide',
+    description: t['guide'],
     icon: <FileSearchOutlined />,
   },
   {
     key: '4',
-    description: isZhCN ? '教程' : 'Tutorial',
+    description: t['tutorial'],
     icon: <AppstoreAddOutlined />,
   },
 ];
@@ -347,7 +398,7 @@ const Independent: React.FC = () => {
   };
 
   const onFooterButtonClick = () => {
-    message.info(isZhCN ? '演示按钮，无实际功能' : 'Demo button, no actual function');
+    message.info(t['demo-button-no-function']);
   };
 
   // ==================== Nodes ====================
@@ -369,11 +420,7 @@ const Independent: React.FC = () => {
       <Button
         onClick={() => {
           if (agent.isRequesting()) {
-            message.error(
-              isZhCN
-                ? '请求正在进行中，请等待请求完成。'
-                : 'Request is in progress, please wait for the request to complete.',
-            );
+            message.error(t['request-in-progress']);
             return;
           }
 
@@ -381,10 +428,8 @@ const Independent: React.FC = () => {
           setConversations([
             {
               key: now,
-              label: isZhCN
-                ? `新会话 ${conversations.length + 1}`
-                : `New Conversation ${conversations.length + 1}`,
-              group: isZhCN ? '今天' : 'Today',
+              label: `${t['new-conversation']} ${conversations.length + 1}`,
+              group: t['today'],
             },
             ...conversations,
           ]);
@@ -395,7 +440,7 @@ const Independent: React.FC = () => {
         className={styles.addBtn}
         icon={<PlusOutlined />}
       >
-        {isZhCN ? '新会话' : 'New Conversation'}
+        {t['new-conversation']}
       </Button>
 
       {/* 🌟 会话管理 */}
@@ -404,6 +449,10 @@ const Independent: React.FC = () => {
         className={styles.conversations}
         activeKey={curConversation}
         onActiveChange={async (val) => {
+          if (agent.isRequesting()) {
+            message.error(t['request-in-progress']);
+            return;
+          }
           abortControllerRef.current?.abort();
           // The abort execution will trigger an asynchronous requestFallback, which may lead to timing issues.
           // In future versions, the sessionId capability will be added to resolve this problem.
@@ -417,12 +466,12 @@ const Independent: React.FC = () => {
         menu={(conversation) => ({
           items: [
             {
-              label: isZhCN ? '重命名' : 'Rename',
+              label: t['rename'],
               key: 'rename',
               icon: <EditOutlined />,
             },
             {
-              label: isZhCN ? '删除' : 'Delete',
+              label: t['delete'],
               key: 'delete',
               icon: <DeleteOutlined />,
               danger: true,
@@ -509,16 +558,8 @@ const Independent: React.FC = () => {
           <Welcome
             variant="borderless"
             icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
-            title={
-              isZhCN
-                ? '你好， 我是 Ant Design X & 百宝箱智能体'
-                : 'Hello, I am Ant Design X & Tbox Agent'
-            }
-            description={
-              isZhCN
-                ? '基于 Ant Design 的 AGI 产品界面解决方案，打造更卓越的智能视觉体验，集成了百宝箱 Tbox.cn 的智能体能力，助力产品设计与开发。'
-                : 'An AGI product interface solution based on Ant Design, creating a superior intelligent visual experience, integrating the capabilities of Tbox.cn agents to assist in product design and development.'
-            }
+            title={t['hello-antd-x-tbox-agent']}
+            description={t['antd-x-tbox-description']}
             extra={
               <Space>
                 <Button icon={<ShareAltOutlined />} />
@@ -600,7 +641,7 @@ const Independent: React.FC = () => {
             </Flex>
           );
         }}
-        placeholder={isZhCN ? '向我提问吧' : 'Ask me anything...'}
+        placeholder={t['ask-me-anything']}
       />
     </>
   );

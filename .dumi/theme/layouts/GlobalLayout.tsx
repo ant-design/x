@@ -191,9 +191,6 @@ const GlobalLayout: React.FC = () => {
     />
   ));
 
-  // tbox demo 不需要 PeterCat
-  const isPeterCatEnabled = pathname.startsWith('/~demos') && !pathname.includes('tbox-demo');
-
   return (
     <DarkContext value={theme.includes('dark')}>
       <StyleProvider
@@ -204,7 +201,7 @@ const GlobalLayout: React.FC = () => {
           <SiteThemeProvider theme={themeConfig}>
             <App>
               {outlet}
-              <Suspense>{isPeterCatEnabled ? <PeterCat /> : null}</Suspense>
+              <Suspense>{pathname.startsWith('/~demos') ? <PeterCat /> : null}</Suspense>
             </App>
           </SiteThemeProvider>
         </SiteContext>
