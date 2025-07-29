@@ -23,7 +23,7 @@ const CustomizationSender: React.FC<SenderProps> = (props) => {
   return (
     <Sender
       className={styles.sender}
-      actions={() => {
+      suffix={() => {
         return (
           <Button
             type="text"

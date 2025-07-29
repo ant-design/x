@@ -13,6 +13,7 @@ import {
   ReloadOutlined,
   ScheduleOutlined,
 } from '@ant-design/icons';
+import type { ConversationItemType } from '@ant-design/x';
 import {
   Attachments,
   type AttachmentsProps,
@@ -21,12 +22,11 @@ import {
   Prompts,
   Sender,
   Suggestion,
-  Welcome,
   useXAgent,
   useXChat,
+  Welcome,
 } from '@ant-design/x';
-import type { ConversationItemType } from '@ant-design/x';
-import { Button, GetProp, GetRef, Image, Popover, Space, Spin, message } from 'antd';
+import { Button, GetProp, GetRef, Image, message, Popover, Space, Spin } from 'antd';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
 import React, { useEffect, useRef, useState } from 'react';
@@ -463,7 +463,7 @@ const Copilot = (props: CopilotProps) => {
               />
             }
             onPasteFile={onPasteFile}
-            actions={(_, info) => {
+            suffix={(_, info) => {
               const { SendButton, LoadingButton, SpeechButton } = info.components;
               return (
                 <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>

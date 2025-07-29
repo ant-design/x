@@ -40,7 +40,7 @@ const Demo: React.FC = () => {
         onCancel={() => {
           setLoading(false);
         }}
-        actions={(_, info) => {
+        suffix={(_, info) => {
           const { SendButton, LoadingButton } = info.components;
 
           if (!ignoreLoading && loading) {

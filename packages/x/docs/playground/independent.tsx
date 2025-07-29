@@ -25,11 +25,11 @@ import {
   Conversations,
   Prompts,
   Sender,
-  Welcome,
   useXAgent,
   useXChat,
+  Welcome,
 } from '@ant-design/x';
-import { Avatar, Button, Flex, type GetProp, Space, Spin, message } from 'antd';
+import { Avatar, Button, Flex, type GetProp, message, Space, Spin } from 'antd';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
 import React, { useEffect, useRef, useState } from 'react';
@@ -589,7 +589,7 @@ const Independent: React.FC = () => {
         loading={loading}
         className={styles.sender}
         allowSpeech
-        actions={(_, info) => {
+        suffix={(_, info) => {
           const { SendButton, LoadingButton, SpeechButton } = info.components;
           return (
             <Flex gap={4}>

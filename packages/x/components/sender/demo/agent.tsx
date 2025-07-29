@@ -11,7 +11,7 @@ import {
 } from '@ant-design/icons';
 import { Attachments, AttachmentsProps, Sender, SenderProps } from '@ant-design/x';
 import { Button, Divider, Dropdown, Flex, GetRef, MenuProps, message } from 'antd';
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const Switch = Sender.Switch;
 
