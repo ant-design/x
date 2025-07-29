@@ -13,17 +13,17 @@ exports[`Sender Component loading state 1`] = `
         style="overflow-y: hidden; resize: none;"
       />
       <div
-        class="ant-sender-actions-list"
+        class="ant-sender-suffix-list"
       >
         <div
-          class="ant-sender-actions-list-presets ant-flex css-var-root"
+          class="ant-sender-suffix-list-presets ant-flex css-var-root"
         >
           <button
-            class="ant-btn css-var-root ant-btn-circle ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-sender-actions-btn ant-sender-actions-btn-loading-button"
+            class="ant-btn css-var-root ant-btn-circle ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-sender-suffix-btn ant-sender-suffix-btn-loading-button"
             type="button"
           >
             <svg
-              class="ant-sender-actions-btn-loading-icon"
+              class="ant-sender-suffix-btn-loading-icon"
               color="currentColor"
               viewBox="0 0 1000 1000"
               xmlns="http://www.w3.org/2000/svg"
@@ -88,13 +88,13 @@ exports[`Sender Component rtl render component should be rendered correctly in R
       style="overflow-y: hidden; resize: none;"
     />
     <div
-      class="ant-sender-actions-list"
+      class="ant-sender-suffix-list"
     >
       <div
-        class="ant-sender-actions-list-presets ant-flex css-var-root ant-flex-rtl"
+        class="ant-sender-suffix-list-presets ant-flex css-var-root ant-flex-rtl"
       >
         <button
-          class="ant-btn css-var-root ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-btn-rtl ant-sender-actions-btn ant-sender-actions-btn-disabled"
+          class="ant-btn css-var-root ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-btn-rtl ant-sender-suffix-btn ant-sender-suffix-btn-disabled"
           type="button"
         >
           <span

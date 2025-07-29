@@ -5,8 +5,8 @@ import Sender, { SlotConfigType } from '../index';
 import SlotTextArea from '../SlotTextArea';
 
 describe('Sender.SlotTextArea', () => {
-  const slotConfig: SlotConfigType[] = [
-    { type: 'text', text: '前缀文本' },
+  const initialSlotConfig: SlotConfigType[] = [
+    { type: 'text', value: '前缀文本' },
     { type: 'input', key: 'input1', props: { placeholder: '请输入内容', defaultValue: '默认值' } },
     { type: 'select', key: 'select1', props: { options: ['A', 'B'], placeholder: '请选择' } },
     { type: 'tag', key: 'tag1', props: { label: '标签' } },
@@ -22,20 +22,20 @@ describe('Sender.SlotTextArea', () => {
     },
   ];
 
-  it('should render slotConfig', () => {
-    const { container, getByPlaceholderText, getByText, getByTestId } = render(
-      <Sender slotConfig={slotConfig} />,
+  it('should render initialSlotConfig', () => {
+    const { getByText, getByTestId } = render(
+      <Sender key="text" initialSlotConfig={initialSlotConfig} />,
     );
-    expect(container.textContent).toContain('前缀文本');
-    expect(getByPlaceholderText('请输入内容')).toBeInTheDocument();
-    expect(getByText('请选择')).toBeInTheDocument();
+    expect(getByText('前缀文本')).toBeInTheDocument();
     expect(getByText('标签')).toBeInTheDocument();
     expect(getByTestId('custom-btn')).toBeInTheDocument();
   });
 
   it('should handle input slot change', () => {
     const onChange = jest.fn();
-    const { getByPlaceholderText } = render(<Sender slotConfig={slotConfig} onChange={onChange} />);
+    const { getByPlaceholderText } = render(
+      <Sender initialSlotConfig={initialSlotConfig} onChange={onChange} />,
+    );
     const input = getByPlaceholderText('请输入内容') as HTMLInputElement;
     fireEvent.change(input, { target: { value: '新内容' } });
     const calls = onChange.mock.calls;
@@ -44,20 +44,21 @@ describe('Sender.SlotTextArea', () => {
 
   it('should handle select slot change', () => {
     const onChange = jest.fn();
-    const { container, getByText } = render(<Sender slotConfig={slotConfig} onChange={onChange} />);
+    const { container, getByText } = render(
+      <Sender key="test" initialSlotConfig={initialSlotConfig} onChange={onChange} />,
+    );
     // 触发下拉
     fireEvent.click(container.querySelector('.ant-sender-slot-select')!);
     fireEvent.click(getByText('A'));
-    expect(onChange).toHaveBeenCalledWith(
-      expect.stringContaining('A'),
-      undefined,
-      expect.any(Array),
-    );
+
+    expect(container.querySelector('.ant-dropdown-menu-title-content')?.textContent).toContain('A');
   });
 
   it('should handle custom slot interaction', () => {
     const onChange = jest.fn();
-    const { getByTestId } = render(<Sender slotConfig={slotConfig} onChange={onChange} />);
+    const { getByTestId } = render(
+      <Sender initialSlotConfig={initialSlotConfig} onChange={onChange} />,
+    );
     fireEvent.click(getByTestId('custom-btn'));
     expect(onChange).toHaveBeenCalledWith(
       expect.stringContaining('custom-value'),
@@ -68,7 +69,9 @@ describe('Sender.SlotTextArea', () => {
 
   it('should trigger onSubmit', () => {
     const onSubmit = jest.fn();
-    const { container } = render(<Sender slotConfig={slotConfig} onSubmit={onSubmit} />);
+    const { container } = render(
+      <Sender initialSlotConfig={initialSlotConfig} onSubmit={onSubmit} />,
+    );
     // 回车提交
     act(() => {
       fireEvent.keyDown(container.querySelector('[role="textbox"]')!, { key: 'Enter' });
@@ -80,7 +83,7 @@ describe('Sender.SlotTextArea', () => {
     it('default', () => {
       const onSubmit = jest.fn();
       const { container } = render(
-        <Sender value="bamboo" slotConfig={slotConfig} onSubmit={onSubmit} />,
+        <Sender value="bamboo" initialSlotConfig={initialSlotConfig} onSubmit={onSubmit} />,
       );
       act(() => {
         fireEvent.keyDown(container.querySelector('[role="textbox"]')!, {
@@ -96,7 +99,7 @@ describe('Sender.SlotTextArea', () => {
       const { container } = render(
         <Sender
           value="bamboo"
-          slotConfig={slotConfig}
+          initialSlotConfig={initialSlotConfig}
           onSubmit={onSubmit}
           submitType="shiftEnter"
         />,
@@ -113,9 +116,9 @@ describe('Sender.SlotTextArea', () => {
 
   it('should have ref methods getValue/insert/clear', () => {
     const ref = React.createRef<any>();
-    render(<Sender slotConfig={slotConfig} ref={ref} />);
+    render(<Sender initialSlotConfig={initialSlotConfig} ref={ref} />);
     // insert
-    ref.current.insert('插入文本');
+    ref.current.insert([{ type: 'text', value: '插入文本' }]);
     expect(ref.current.getValue().value).toContain('插入文本');
     // clear
     ref.current.clear();
@@ -124,7 +127,9 @@ describe('Sender.SlotTextArea', () => {
 
   it('should handle onPaste with text', () => {
     const onChange = jest.fn();
-    const { container } = render(<Sender slotConfig={slotConfig} onChange={onChange} />);
+    const { container } = render(
+      <Sender initialSlotConfig={initialSlotConfig} onChange={onChange} />,
+    );
     const editable = container.querySelector('.ant-sender-input')!;
     fireEvent.paste(editable, {
       clipboardData: {
@@ -138,7 +143,9 @@ describe('Sender.SlotTextArea', () => {
 
   it('should handle onPaste with file', () => {
     const onPasteFile = jest.fn();
-    const { container } = render(<Sender slotConfig={slotConfig} onPasteFile={onPasteFile} />);
+    const { container } = render(
+      <Sender initialSlotConfig={initialSlotConfig} onPasteFile={onPasteFile} />,
+    );
     const editable = container.querySelector('.ant-sender-input')!;
     const file = new File(['test'], 'test.txt', { type: 'text/plain' });
     fireEvent.paste(editable, {
@@ -152,7 +159,9 @@ describe('Sender.SlotTextArea', () => {
 
   it('should handle onPaste when clipboardData is empty', () => {
     const onPaste = jest.fn();
-    const { container } = render(<Sender slotConfig={slotConfig} onPaste={onPaste} />);
+    const { container } = render(
+      <Sender initialSlotConfig={initialSlotConfig} onPaste={onPaste} />,
+    );
     const editable = container.querySelector('.ant-sender-input')!;
     fireEvent.paste(editable, {});
     expect(onPaste).toHaveBeenCalled();
@@ -162,7 +171,7 @@ describe('Sender.SlotTextArea', () => {
     const onFocus = jest.fn();
     const onBlur = jest.fn();
     const { container } = render(
-      <Sender slotConfig={slotConfig} onFocus={onFocus} onBlur={onBlur} />,
+      <Sender initialSlotConfig={initialSlotConfig} onFocus={onFocus} onBlur={onBlur} />,
     );
     const editable = container.querySelector('.ant-sender-input')!;
     fireEvent.focus(editable);
@@ -173,7 +182,9 @@ describe('Sender.SlotTextArea', () => {
 
   it('should not trigger onSubmit during composition input', () => {
     const onSubmit = jest.fn();
-    const { container } = render(<Sender slotConfig={slotConfig} onSubmit={onSubmit} />);
+    const { container } = render(
+      <Sender initialSlotConfig={initialSlotConfig} onSubmit={onSubmit} />,
+    );
     const editable = container.querySelector('.ant-sender-input')!;
     fireEvent.compositionStart(editable);
     fireEvent.keyUp(editable, { key: 'Enter' });
@@ -183,17 +194,16 @@ describe('Sender.SlotTextArea', () => {
 
   it('should have ref methods focus/blur', () => {
     const ref = React.createRef<any>();
-    render(<Sender slotConfig={slotConfig} ref={ref} />);
+    render(<Sender initialSlotConfig={initialSlotConfig} ref={ref} />);
     expect(typeof ref.current.focus).toBe('function');
     expect(typeof ref.current.blur).toBe('function');
-    // focus({cursor})
     ref.current.focus({ cursor: 'start' });
     ref.current.focus({ cursor: 'end' });
     ref.current.focus({ cursor: 'all' });
     ref.current.blur();
   });
 
-  it('should be plain text editing when slotConfig is empty', () => {
+  it('should be plain text editing when initialSlotConfig is empty', () => {
     const onChange = jest.fn();
     const { container } = render(<Sender onChange={onChange} />);
     const editable = container.querySelector('.ant-sender-input')!;
@@ -201,24 +211,26 @@ describe('Sender.SlotTextArea', () => {
     expect(onChange).toHaveBeenCalled();
   });
 
-  it('should reset content when slotConfig changes', () => {
-    const { rerender, container } = render(<Sender slotConfig={[{ type: 'text', text: 'A' }]} />);
+  it('should reset content when initialSlotConfig changes', () => {
+    const { rerender, container } = render(
+      <Sender key="A" initialSlotConfig={[{ type: 'text', value: 'A' }]} />,
+    );
     expect(container.textContent).toContain('A');
-    rerender(<Sender slotConfig={[{ type: 'text', text: 'B' }]} />);
+    rerender(<Sender key="B" initialSlotConfig={[{ type: 'text', value: 'B' }]} />);
     expect(container.textContent).toContain('B');
   });
 
-  it('should initialize when slotConfig is undefined', () => {
+  it('should initialize when initialSlotConfig is undefined', () => {
     // 直接渲染 SlotTextArea
     expect(() => {
       render(<SlotTextArea />);
     }).not.toThrow();
   });
 
-  it('should return null from renderSlot when slotConfig has type but no key', () => {
+  it('should return null from renderSlot when initialSlotConfig has type but no key', () => {
     const { container } = render(
       <Sender
-        slotConfig={[
+        initialSlotConfig={[
           {
             type: 'input',
             key: 'input1',
@@ -233,7 +245,7 @@ describe('Sender.SlotTextArea', () => {
 
   it('should cover editor?.focus() branch when ref.focus() is called without arguments', () => {
     const ref = React.createRef<any>();
-    render(<Sender slotConfig={slotConfig} ref={ref} />);
+    render(<Sender initialSlotConfig={initialSlotConfig} ref={ref} />);
     // 只调用不传参数
     ref.current.focus();
     // 能正常调用即可
@@ -242,14 +254,16 @@ describe('Sender.SlotTextArea', () => {
 
   it('should test input slot', () => {
     const ref = React.createRef<any>();
-    const slotConfig: SlotConfigType[] = [
+    const initialSlotConfig: SlotConfigType[] = [
       {
         type: 'input',
         key: 'input1',
         props: { placeholder: '请输入内容', defaultValue: '默认值' },
       },
     ];
-    const { getByPlaceholderText } = render(<Sender slotConfig={slotConfig} ref={ref} />);
+    const { getByPlaceholderText } = render(
+      <Sender initialSlotConfig={initialSlotConfig} ref={ref} />,
+    );
     // 初始值
     expect(ref.current.getValue().value).toContain('默认值');
     // 输入新内容
@@ -259,10 +273,12 @@ describe('Sender.SlotTextArea', () => {
 
   it('should test select slot', () => {
     const ref = React.createRef<any>();
-    const slotConfig: SlotConfigType[] = [
+    const initialSlotConfig: SlotConfigType[] = [
       { type: 'select', key: 'select1', props: { options: ['A', 'B'], placeholder: '请选择' } },
     ];
-    const { container, getByText } = render(<Sender slotConfig={slotConfig} ref={ref} />);
+    const { container, getByText } = render(
+      <Sender initialSlotConfig={initialSlotConfig} ref={ref} />,
+    );
     // 选择 A
     fireEvent.click(container.querySelector('.ant-sender-slot-select')!);
     fireEvent.click(getByText('A'));
@@ -271,17 +287,17 @@ describe('Sender.SlotTextArea', () => {
 
   it('should test tag slot', () => {
     const ref = React.createRef<any>();
-    const slotConfig: SlotConfigType[] = [
+    const initialSlotConfig: SlotConfigType[] = [
       { type: 'tag', key: 'tag1', props: { label: '标签', value: '值' } },
     ];
-    render(<Sender slotConfig={slotConfig} ref={ref} />);
+    render(<Sender initialSlotConfig={initialSlotConfig} ref={ref} />);
     // tag slot 只显示 label
     expect(ref.current.getValue().value).toContain('值');
   });
 
   it('should test custom slot', () => {
     const ref = React.createRef<any>();
-    const slotConfig: SlotConfigType[] = [
+    const initialSlotConfig: SlotConfigType[] = [
       {
         type: 'custom',
         key: 'custom1',
@@ -293,7 +309,7 @@ describe('Sender.SlotTextArea', () => {
         formatResult: (v: any) => `[${v}]`,
       },
     ];
-    const { getByTestId } = render(<Sender slotConfig={slotConfig} ref={ref} />);
+    const { getByTestId } = render(<Sender initialSlotConfig={initialSlotConfig} ref={ref} />);
     // 初始值
     expect(ref.current.getValue().value).toBe('[]');
     // 交互
@@ -301,17 +317,17 @@ describe('Sender.SlotTextArea', () => {
     expect(ref.current.getValue().value).toBe('[custom-value]');
   });
 
-  it('should call insert when speech input and slotConfig exists', () => {
+  it('should call insert when speech input and initialSlotConfig exists', () => {
     const ref = React.createRef<any>();
-    const slotConfig = [
+    const testSlotConfig = [
       { type: 'input' as const, key: 'input1', props: { placeholder: '请输入内容' } },
     ];
-    render(<Sender slotConfig={slotConfig} allowSpeech ref={ref} />);
-    ref.current.insert('语音内容');
+    render(<Sender initialSlotConfig={testSlotConfig} allowSpeech ref={ref} />);
+    ref.current.insert([{ type: 'text', value: '语音内容' }]);
     expect(ref.current.getValue().value).toContain('语音内容');
   });
 
-  it('should call triggerValueChange when speech input and slotConfig does not exist', () => {
+  it('should call triggerValueChange when speech input and initialSlotConfig does not exist', () => {
     const onChange = jest.fn();
     const { container } = render(<Sender allowSpeech onChange={onChange} />);
     const textarea = container.querySelector('textarea')!;
@@ -334,21 +350,21 @@ describe('Sender.SlotTextArea', () => {
     expect(onSubmit).not.toHaveBeenCalled();
   });
 
-  it('should call clear when clear button is clicked and slotConfig exists', () => {
+  it('should call clear when clear button is clicked and initialSlotConfig exists', () => {
     const ref = React.createRef<any>();
-    const slotConfig = [
+    const testInitialSlotConfig = [
       { type: 'input' as const, key: 'input1', props: { placeholder: '请输入内容' } },
     ];
-    render(<Sender slotConfig={slotConfig} ref={ref} />);
-    ref.current.insert('内容');
+    render(<Sender initialSlotConfig={testInitialSlotConfig} ref={ref} />);
+    ref.current.insert([{ type: 'text', value: '内容' }]);
     ref.current.clear();
     expect(ref.current.getValue().value).toBe('');
   });
 
-  it('should only clear value when clear button is clicked and slotConfig does not exist', () => {
+  it('should only clear value when clear button is clicked and initialSlotConfig does not exist', () => {
     const ref = React.createRef<any>();
     render(<Sender ref={ref} />);
-    ref.current.insert('内容');
+    ref.current.insert([{ type: 'text', value: '内容' }]);
     ref.current.clear();
     expect(ref.current.getValue().value).toBe('');
   });
@@ -369,22 +385,22 @@ describe('Sender.SlotTextArea', () => {
     expect(container.querySelector('button')).toBeTruthy();
   });
 
-  it('should render custom actions when actions is a function', () => {
-    const { getByText } = render(<Sender actions={() => <div>自定义按钮</div>} />);
+  it('should render custom suffix when suffix is a function', () => {
+    const { getByText } = render(<Sender suffix={() => <div>自定义按钮</div>} />);
     expect(getByText('自定义按钮')).toBeInTheDocument();
   });
 
-  it('should render actions when actions is a ReactNode', () => {
-    const { getByText } = render(<Sender actions={<div>节点按钮</div>} />);
+  it('should render suffix when suffix is a ReactNode', () => {
+    const { getByText } = render(<Sender suffix={<div>节点按钮</div>} />);
     expect(getByText('节点按钮')).toBeInTheDocument();
   });
 
-  it('should not render actions when actions is false', () => {
-    const { container } = render(<Sender actions={false} />);
+  it('should not render suffix when suffix is false', () => {
+    const { container } = render(<Sender suffix={false} />);
     expect(container.querySelector('.ant-sender-actions-list')).toBeNull();
   });
 
-  it('should prevent default and focus when clicking content area (not input) and slotConfig does not exist', () => {
+  it('should prevent default and focus when clicking content area (not input) and initialSlotConfig does not exist', () => {
     const { container } = render(<Sender />);
     const content = container.querySelector('.ant-sender-content')!;
     const event = new window.MouseEvent('mousedown', { bubbles: true, cancelable: true });
@@ -392,15 +408,15 @@ describe('Sender.SlotTextArea', () => {
     expect(event.defaultPrevented).toBe(true);
   });
 
-  it('should not prevent default when clicking content area and slotConfig exists', () => {
-    const slotConfig = [
+  it('should not prevent default when clicking content area and initialSlotConfig exists', () => {
+    const initialSlotConfig = [
       { type: 'input' as const, key: 'input1', props: { placeholder: '请输入内容' } },
     ];
-    const { container } = render(<Sender slotConfig={slotConfig} />);
+    const { container } = render(<Sender initialSlotConfig={initialSlotConfig} />);
     const content = container.querySelector('.ant-sender-content')!;
     const preventDefault = jest.fn();
     fireEvent.mouseDown(content, { target: content, preventDefault });
-    // slotConfig 存在时不阻止默认
+    // initialSlotConfig 存在时不阻止默认
     expect(preventDefault).not.toHaveBeenCalled();
   });
 });

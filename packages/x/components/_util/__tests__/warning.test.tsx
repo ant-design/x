@@ -1,5 +1,5 @@
-import React from 'react';
 import { render } from '@testing-library/react';
+import React from 'react';
 import warning, { devUseWarning, WarningContext } from '../warning';
 
 const TestUnStrictProvider: React.FC<{ children: React.ReactNode }> = (props) => {
@@ -49,9 +49,9 @@ describe('Test warning', () => {
       };
       render(<App />);
 
-      expect(spy).toHaveBeenCalledWith('Warning: [antd: Test] test message');
+      expect(spy).toHaveBeenCalledWith('Warning: [antdx: Test] test message');
       expect(spy).toHaveBeenCalledWith(
-        'Warning: [antd: Test] `old prop` is deprecated. Please use `new prop` instead.',
+        'Warning: [antdx: Test] `old prop` is deprecated. Please use `new prop` instead.',
       );
       expect(spy).toHaveBeenCalledTimes(2);
     });

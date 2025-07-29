@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`antd dist files exports modules correctly 1`] = `
 [
@@ -8,6 +8,7 @@ exports[`antd dist files exports modules correctly 1`] = `
   "Conversations",
   "Prompts",
   "Sender",
+  "SenderSwitch",
   "Suggestion",
   "Think",
   "ThoughtChain",

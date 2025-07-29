@@ -5,8 +5,8 @@ const buildSlotValues = (
   slotConfig: SlotConfigType[],
   slotConfigMap: { current: Map<string, SlotConfigType> },
 ) => {
-  if (slotConfig) {
-    return slotConfig.reduce(
+  if (Array.isArray(slotConfig)) {
+    return slotConfig?.reduce(
       (acc, node) => {
         if (node.key) {
           if (node.type === 'input' || node.type === 'select' || node.type === 'custom') {

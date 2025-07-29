@@ -196,6 +196,9 @@ const App: React.FC = () => {
         ref={senderRef}
         placeholder="Press Enter to send message"
         header={senderHeader}
+        onChange={(value, e, con) => {
+          console.log(value, e, con);
+        }}
         footer={(actionNode) => {
           return (
             <Flex justify="space-between" align="center">

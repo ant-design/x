@@ -236,7 +236,7 @@ describe('Conversations Component', () => {
         />,
       );
       expect(console.error).toHaveBeenCalledWith(
-        'Warning: [antd: conversations] Same shortcutKey Alt,49',
+        'Warning: [antdx: conversations] Same shortcutKey Alt,49',
       );
     });
     it('shortcut keys of items width error config', async () => {
