@@ -25,7 +25,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/submitType.tsx">提交方式</code>
 <code src="./demo/speech.tsx">语音输入</code>
 <code src="./demo/speech-custom.tsx">自定义语音输入</code>
-<code src="./demo/suffix.tsx">自定义按钮</code>
+<code src="./demo/suffix.tsx">自定义后缀</code>
 <code src="./demo/header.tsx">展开面板</code>
 <code src="./demo/header-fixed.tsx">引用</code>
 <code src="./demo/footer.tsx">自定义底部内容</code>

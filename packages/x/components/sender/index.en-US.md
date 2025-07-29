@@ -24,7 +24,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/submitType.tsx">Submit Type</code>
 <code src="./demo/speech.tsx">Speech Input</code>
 <code src="./demo/speech-custom.tsx">Custom Speech Input</code>
-<code src="./demo/suffix.tsx">Custom Actions</code>
+<code src="./demo/suffix.tsx">Custom Suffix</code>
 <code src="./demo/header.tsx">Expandable Panel</code>
 <code src="./demo/header-fixed.tsx">Reference</code>
 <code src="./demo/footer.tsx">Custom Footer</code>

@@ -1,7 +1,7 @@
 ## zh-CN
 
-通过 `actions` 属性，调整默认样式。
+通过定制后缀，调整`actions`。
 
 ## en-US
 
-Customize the default style through the `actions` property.
+Adjust `actions` by customizing the suffix.
