@@ -3234,7 +3234,7 @@ exports[`renders components/attachments/demo/with-sender.tsx correctly 1`] = `
       class="ant-sender css-var-«R0»"
     >
       <div
-        class="ant-sender-header"
+        class="ant-sender ant-sender-header"
       >
         <div
           class="ant-sender-header-header"

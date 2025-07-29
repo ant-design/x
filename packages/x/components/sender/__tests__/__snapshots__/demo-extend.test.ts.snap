@@ -8,7 +8,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
     class="ant-sender css-var-«r1e»"
   >
     <div
-      class="ant-sender-header"
+      class="ant-sender ant-sender-header"
       style="display: none;"
     >
       <div
@@ -1370,7 +1370,7 @@ exports[`renders components/sender/demo/header-fixed.tsx extend context correctl
       class="ant-sender css-var-«r16»"
     >
       <div
-        class="ant-sender-header ant-sender-header-motion-appear ant-sender-header-motion-appear-start ant-sender-header-motion"
+        class="ant-sender ant-sender-header ant-sender-header-motion-appear ant-sender-header-motion-appear-start ant-sender-header-motion"
       >
         <div
           class="ant-sender-header-header"
@@ -1513,7 +1513,7 @@ exports[`renders components/sender/demo/paste-image.tsx extend context correctly
       class="ant-sender css-var-«r12»"
     >
       <div
-        class="ant-sender-header"
+        class="ant-sender ant-sender-header"
         style="display: none;"
       >
         <div

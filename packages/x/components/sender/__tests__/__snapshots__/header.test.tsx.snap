@@ -2,7 +2,7 @@
 
 exports[`Sender.Header rtl render component should be rendered correctly in RTL direction 1`] = `
 <div
-  class="ant-sender-header ant-sender-header-motion-appear ant-sender-header-motion-appear-start ant-sender-header-motion ant-sender-rtl"
+  class="ant-sender ant-sender-header ant-sender-header-motion-appear ant-sender-header-motion-appear-start ant-sender-header-motion ant-sender-header-rtl"
 >
   <div
     class="ant-sender-header-header"

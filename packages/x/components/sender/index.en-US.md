@@ -59,7 +59,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | onCancel | Callback when click cancel button | () => void | - | - |
 | onPasteFile | Callback when paste files | (firstFile: File, files: FileList) => void | - | - |
 | autoSize | Height auto size feature, can be set to true \| false or an object: { minRows: 2, maxRows: 6 } | boolean \| { minRows?: number; maxRows?: number } | { maxRows: 8 } | - |
-| initialSlotConfig | Slot configuration, after configuration, the input box will become slot mode, supporting structured input | SlotConfigType[] | - | - |
+| initialSlotConfig | Slot configuration, after configuration, the input box will become slot mode, supporting structured input. In this mode, `value` and `defaultValue` are invalid. | SlotConfigType[] | - | - |
 
 ```typescript | pure
 type SpeechConfig = {
@@ -86,7 +86,7 @@ type ActionsComponents = {
 | nativeElement | Outer container | `HTMLDivElement` | - | - |
 | focus | Set focus | (option?: { preventScroll?: boolean, cursor?: 'start' \| 'end' \| 'all' }) | - | - |
 | blur | Remove focus | () => void | - | - |
-| insert | Insert text content to the end | (value: string) => void | - | - |
+| insert | Insert text or slot(s). When using slot(s), make sure initialSlotConfig is set. | (value: string) => void \| (slotConfig: SlotConfigType[], position?: insertPosition) => void; | - | - |
 | clear | Clear content | () => void | - | - |
 | getValue | Get current content and structured configuration | () => { value: string; config: SlotConfigType[] } | - | - |
 
@@ -139,7 +139,7 @@ type ActionsComponents = {
 | --- | --- | --- | --- | --- |
 | children | Panel content | ReactNode | - | - |
 | classNames | Class name | [See below](#semantic-dom) | - | - |
-| closable | Whether to close | boolean | true | - |
+| closable | Whether the panel can be closed | boolean | true | - |
 | forceRender | Force render, use when need ref internal elements on init | boolean | false | - |
 | open | Whether to expand | boolean | - | - |
 | styles | Semantic DOM style | [See below](#semantic-dom) | - | - |
@@ -162,16 +162,16 @@ type ActionsComponents = {
 
 ### ⚠️ Notes for Slot Mode
 
-- **In slot mode, the `value` property is invalid**, please use `ref` and callback events to get the value and slotConfig.
-- **In slot mode, the third parameter `config` of `onChange`/`onSubmit` callback** is only used to get the current structured content, it is not recommended to assign it back to `slotConfig` directly, otherwise it will cause the input box content to be reset. Only when you need to switch/reset the slot structure as a whole should you update `slotConfig`.
-- Generally, slotConfig should only be set once during initialization or when the structure changes.
+- In slot mode, the `value` and `defaultValue` properties are invalid. Please use `ref` and callback events to get the value and slotConfig.
+- In slot mode, the third parameter `config` of the `onChange`/`onSubmit` callback is only used to get the current structured content. Do not assign it directly back to `slotConfig`, otherwise the input box content will be reset. Only update `slotConfig` when you need to switch or reset the slot structure as a whole.
+- Usually, `initialSlotConfig` should only be set once during initialization or when the structure changes. If you need to force re-render the component, use a different `key` prop.
 
 **Example:**
 
 ```jsx
-// ❌ Wrong usage (will cause cursor position loss and repeated rendering)
+// ❌ Wrong usage (initialSlotConfig is for initialization only)
 <Sender
-  slotConfig={config}
+  initialSlotConfig={config}
   onChange={(value, e, config) => {
     setConfig(config);
   }}
@@ -179,9 +179,11 @@ type ActionsComponents = {
 
 // ✅ Correct usage
 <Sender
-  slotConfig={config}
-  onChange={(value, e, config) => {
-    // Only used to get structured content
+  key={key}
+  initialSlotConfig={config}
+  onChange={(value, _e, config) => {
+    // Only used to get structured content, use key to force re-render
+    setKey('new_key');
     console.log(value, config);
   }}
 />
