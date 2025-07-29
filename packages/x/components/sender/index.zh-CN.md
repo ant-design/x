@@ -21,6 +21,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/basic.tsx">基本用法</code>
 <code src="./demo/switch.tsx">功能开关</code>
 <code src="./demo/slot-filling.tsx">词槽模式</code>
+<code src="./demo/ref-action.tsx">实例方法</code>
 <code src="./demo/submitType.tsx">提交方式</code>
 <code src="./demo/speech.tsx">语音输入</code>
 <code src="./demo/speech-custom.tsx">自定义语音输入</code>
@@ -30,7 +31,6 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/footer.tsx">自定义底部内容</code>
 <code src="./demo/send-style.tsx">调整样式</code>
 <code src="./demo/paste-image.tsx">黏贴文件</code>
-<code src="./demo/focus.tsx">聚焦</code>
 
 ## API
 
@@ -60,7 +60,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 | onCancel | 点击取消按钮的回调 | () => void | - | - |
 | onPasteFile | 黏贴文件的回调 | (firstFile: File, files: FileList) => void | - | - |
 | autoSize | 自适应内容高度，可设置为 true \| false 或对象：{ minRows: 2, maxRows: 6 } | boolean \| { minRows?: number; maxRows?: number } | { maxRows: 8 } | - |
-| defaultSlotConfig | 词槽配置，配置后输入框将变为词槽模式，支持结构化输入 | SlotConfigType[] | - | - |
+| initialSlotConfig | 初始化词槽配置，配置后输入框将变为词槽模式，支持结构化输入，此模式`value` 和 `defaultValue` 配置将无效。 | SlotConfigType[] | - | - |
 
 ```typescript | pure
 type SpeechConfig = {
@@ -87,7 +87,7 @@ type ActionsComponents = {
 | nativeElement | 外层容器 | `HTMLDivElement` | - | - |
 | focus | 获取焦点 | (option?: { preventScroll?: boolean, cursor?: 'start' \| 'end' \| 'all' }) | - | - |
 | blur | 取消焦点 | () => void | - | - |
-| insert | 插入文本内容到末尾 | (value: string) => void | - | - |
+| insert | 插入文本或者插槽，使用插槽时需确保 initialSlotConfig 已配置 | (value: string) => void \| (slotConfig: SlotConfigType[], position?: insertPosition) => void; | - | - |
 | clear | 清空内容 | () => void | - | - |
 | getValue | 获取当前内容和结构化配置 | () => { value: string; config: SlotConfigType[] } | - | - |
 
@@ -163,16 +163,16 @@ type ActionsComponents = {
 
 ### ⚠️ 词槽模式注意事项
 
-- **词槽模式下，`value` 属性无效**，请使用 `ref` 及回调事件获取输入框的值和词槽配置。
-- **词槽模式下，`onChange`/`onSubmit` 回调的第三个参数 `config`**，仅用于获取当前结构化内容，不建议直接将其赋值回 `slotConfig`，否则会导致输入框内容被重置。
-- `slotConfig` 只在初始化或结构变化时设置一次即可.
+- **词槽模式下，`value` 和 `defaultValue` 属性无效**，请使用 `ref` 及回调事件获取输入框的值和词槽配置。
+- **词槽模式下，`onChange`/`onSubmit` 回调的第三个参数 `config`**，仅用于获取当前结构化内容。
+- `initialSlotConfig` 只在初始化或结构变化时设置一次即可.
 
 **示例：**
 
 ```jsx
-// ❌ 错误用法（会导致光标位置丢失及重复渲染 */
+// ❌ 错误用法（initialSlotConfig为初始化配置 */
 <Sender
-  slotConfig={config}
+  initialSlotConfig={config}
   onChange={(value, e, config) => {
     setConfig(config);
   }}
@@ -180,9 +180,11 @@ type ActionsComponents = {
 
 // ✅ 正确用法
 <Sender
-  slotConfig={config}
+  key={key}
+  initialSlotConfig={config}
   onChange={(value, _e, config) => {
-    // 仅用于获取结构化内容
+    // 仅用于获取结构化内容,通过key控制重新渲染组件
+    setKey('new_key')
     console.log(value, config);
   }}
 />

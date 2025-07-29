@@ -57,7 +57,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     style,
     defaultValue,
     value,
-    defaultSlotConfig,
+    initialSlotConfig,
     readOnly,
     submitType = 'enter',
     onSubmit,
@@ -78,6 +78,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     autoSize = { maxRows: 8 },
     placeholder,
     onFocus,
+    onInit,
     onBlur,
     ...restProps
   } = props;
@@ -90,6 +91,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
 
   const id = React.useId();
 
+  const isSlotMode = Array.isArray(initialSlotConfig);
   // ============================= MISC =============================
   const { direction, getPrefixCls } = useXProviderContext();
   const prefixCls = getPrefixCls('sender', customizePrefixCls);
@@ -158,7 +160,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
 
   // ============================ Speech ============================
   const [speechPermission, triggerSpeech, speechRecording] = useSpeech((transcript) => {
-    if (defaultSlotConfig) {
+    if (isSlotMode) {
       (inputRef.current as SlotTextAreaRef)?.insert?.([
         {
           type: 'text',
@@ -179,7 +181,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
 
   const triggerClear = () => {
     triggerValueChange('');
-    if (defaultSlotConfig) {
+    if (isSlotMode) {
       (inputRef.current as SlotTextAreaRef)?.clear?.();
     }
   };
@@ -232,6 +234,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     onClear: triggerClear,
     onClearDisabled: !innerValue,
     onCancel,
+    onInit,
     onCancelDisabled: !loading,
     onSpeech: () => triggerSpeech(false),
     onSpeechDisabled: !speechPermission,
@@ -244,7 +247,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     () => ({
       value: innerValue,
       onChange: triggerValueChange,
-      defaultSlotConfig,
+      initialSlotConfig,
       onKeyUp,
       onKeyDown,
       onPaste,
@@ -261,13 +264,14 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
       onSubmit,
       placeholder,
       onFocus,
+      onInit,
       onBlur,
       ...restProps,
     }),
     [
       innerValue,
       triggerValueChange,
-      defaultSlotConfig,
+      initialSlotConfig,
       onKeyUp,
       onKeyDown,
       onPaste,
@@ -294,7 +298,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     // If input focused but click on the container,
     // input will lose focus.
     // We call `preventDefault` to prevent this behavior
-    if (!defaultSlotConfig && e.target !== containerRef.current?.querySelector(`.${inputCls}`)) {
+    if (!isSlotMode && e.target !== containerRef.current?.querySelector(`.${inputCls}`)) {
       e.preventDefault();
     }
     if (e.target === containerRef.current?.querySelector(`.${inputCls}`)) {
@@ -340,7 +344,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
             )}
 
             {/* Input */}
-            {defaultSlotConfig ? (
+            {isSlotMode ? (
               <SlotTextArea ref={inputRef as React.Ref<SlotTextAreaRef>} />
             ) : (
               <TextArea ref={inputRef as React.Ref<TextAreaRef>} />

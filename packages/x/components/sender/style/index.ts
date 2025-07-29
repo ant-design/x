@@ -50,13 +50,19 @@ export interface ComponentToken {
    * @descEN Switch unchecked hover background color
    */
   switchUncheckedHoverBg: string;
+
+  /**
+   * @desc 输入框边框颜色
+   * @descEN Input border color
+   */
+  colorBorderInput: string;
 }
 
 export interface SenderToken extends FullToken<'Sender'> {
   SenderContentMaxWidth: number | string;
 }
 const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
-  const { componentCls, paddingSM, paddingXS, paddingXXS, lineWidth, lineWidthBold, calc } = token;
+  const { componentCls, paddingSM, paddingXS, paddingXXS, lineWidth, calc } = token;
 
   return {
     [`${componentCls}:not(${componentCls}-switch)`]: {
@@ -64,43 +70,15 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
       width: '100%',
       boxSizing: 'border-box',
       boxShadow: `${token.boxShadowTertiary}`,
-      transition: `background ${token.motionDurationSlow}`,
-
       // Border
       borderRadius: {
         _skip_check_: true,
         value: calc(token.borderRadius).mul(2).equal(),
       },
-      borderColor: token.colorBorder,
-      borderWidth: 0,
+
+      borderColor: token.colorBorderInput,
+      borderWidth: lineWidth,
       borderStyle: 'solid',
-
-      // Border
-      '&:after': {
-        content: '""',
-        position: 'absolute',
-        inset: 0,
-        pointerEvents: 'none',
-        transition: `border-color ${token.motionDurationSlow}`,
-
-        borderRadius: {
-          _skip_check_: true,
-          value: 'inherit',
-        },
-        borderStyle: 'inherit',
-        borderColor: 'inherit',
-        borderWidth: lineWidth,
-      },
-
-      // Focus
-      '&:focus-within': {
-        boxShadow: `${token.boxShadowSecondary}`,
-        borderColor: token.colorPrimary,
-
-        '&:after': {
-          borderWidth: lineWidthBold,
-        },
-      },
 
       '&-disabled': {
         background: token.colorBgContainerDisabled,
@@ -134,6 +112,7 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
         flex: 'auto',
         alignSelf: 'center',
         minHeight: 'auto',
+        caretColor: token.colorPrimary,
       },
 
       // ============================ Actions ============================
@@ -182,6 +161,7 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
 
 export const prepareComponentToken: GetDefaultToken<'Sender'> = (token) => {
   const { colorPrimary, colorFillTertiary } = token;
+
   const colorBgSlot = new FastColor(colorPrimary).setA(0.06).toRgbString();
   const colorTextSlot = colorPrimary;
   const colorTextSlotPlaceholder = new FastColor(colorPrimary).setA(0.25).toRgbString();
@@ -191,6 +171,8 @@ export const prepareComponentToken: GetDefaultToken<'Sender'> = (token) => {
 
   const switchUncheckedHoverBg = new FastColor(colorFillTertiary).setA(0.04).toRgbString();
   const switchCheckedHoverBg = new FastColor(colorPrimary).setA(0.1).toRgbString();
+  const colorBorderInput = new FastColor(colorFillTertiary).setA(0.1).toRgbString();
+  const boxShadowInput = `0 4px 12px 0 ${new FastColor(colorPrimary).setA(0.1).toRgbString()}`;
   return {
     colorBgSlot,
     colorTextSlot,
@@ -200,6 +182,8 @@ export const prepareComponentToken: GetDefaultToken<'Sender'> = (token) => {
     switchCheckedBg,
     switchCheckedHoverBg,
     switchUncheckedHoverBg,
+    colorBorderInput,
+    boxShadowInput,
   };
 };
 

@@ -14,6 +14,27 @@ const App: React.FC = () => {
     <Flex wrap gap={12}>
       <Button
         onClick={() => {
+          senderRef.current!.insert('some text');
+        }}
+      >
+        Insert Text
+      </Button>
+      <Button
+        onClick={() => {
+          senderRef.current!.insert('some text', 'end');
+        }}
+      >
+        Insert Text End
+      </Button>
+      <Button
+        onClick={() => {
+          senderRef.current!.insert('some text', 'start');
+        }}
+      >
+        Insert Text Start
+      </Button>
+      <Button
+        onClick={() => {
           senderRef.current!.focus({
             cursor: 'start',
           });

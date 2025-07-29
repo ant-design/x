@@ -17,6 +17,8 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       cursor: 'text',
       whiteSpace: 'pre-wrap',
       width: '100%',
+      caretColor: token.colorPrimary,
+      fontSize: token.fontSize,
       lineHeight: token.lineHeight,
       '&:empty::before': {
         content: 'attr(data-placeholder)',
@@ -24,9 +26,11 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       },
     },
     [slotCls]: {
-      display: 'inline-block',
+      display: 'inline-flex',
       margin: `0 ${unit(token.marginXXS)}`,
-      verticalAlign: 'middle',
+      verticalAlign: 'bottom',
+      alignItems: 'center',
+      minHeight: token.controlHeightSM,
     },
 
     [`${antInputCls}${slotInputCls}`]: {
@@ -54,13 +58,12 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       padding: `0 ${unit(token.paddingXXS)}`,
       transition: `border-color  ${token.motionDurationMid}`,
       position: 'relative',
-      display: 'inline-block',
+      display: 'inline',
       cursor: 'pointer',
       background: token.colorBgSlot,
       alignItems: 'center',
       justifyContent: 'center',
       borderRadius: token.borderRadius,
-      userSelect: 'none',
       color: token.colorTextSlot,
       border: `1px solid ${token.colorBorderSlot}`,
       '&.placeholder': {
@@ -74,6 +77,9 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       flex: 1,
       fontSize: token.fontSize,
       lineHeight: token.lineHeight,
+      '&:empty::before': {
+        content: 'attr(data-placeholder)',
+      },
     },
     [`${slotSelectCls}-arrow`]: {
       marginInlineStart: token.marginXXS,

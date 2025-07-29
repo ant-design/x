@@ -17,19 +17,19 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 
 <!-- prettier-ignore -->
 <code src="./demo/agent.tsx">Agent Sender</code>
-<code src="./demo/basic.tsx">Basic</code>
+<code src="./demo/basic.tsx">Basic Usage</code>
 <code src="./demo/switch.tsx">Feature Switch</code>
 <code src="./demo/slot-filling.tsx">Slot Mode</code>
-<code src="./demo/submitType.tsx">Submit type</code>
-<code src="./demo/speech.tsx">Speech input</code>
-<code src="./demo/speech-custom.tsx">Custom speech input</code>
-<code src="./demo/suffix.tsx">Custom actions</code>
-<code src="./demo/header.tsx">Header panel</code>
+<code src="./demo/ref-action.tsx">Instance Methods</code>
+<code src="./demo/submitType.tsx">Submit Type</code>
+<code src="./demo/speech.tsx">Speech Input</code>
+<code src="./demo/speech-custom.tsx">Custom Speech Input</code>
+<code src="./demo/suffix.tsx">Custom Actions</code>
+<code src="./demo/header.tsx">Expandable Panel</code>
 <code src="./demo/header-fixed.tsx">Reference</code>
-<code src="./demo/footer.tsx">Custom footer</code>
-<code src="./demo/send-style.tsx">Adjust style</code>
-<code src="./demo/paste-image.tsx">Paste files</code>
-<code src="./demo/focus.tsx">Focus</code>
+<code src="./demo/footer.tsx">Custom Footer</code>
+<code src="./demo/send-style.tsx">Adjust Style</code>
+<code src="./demo/paste-image.tsx">Paste Files</code>
 
 ## API
 
@@ -59,7 +59,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | onCancel | Callback when click cancel button | () => void | - | - |
 | onPasteFile | Callback when paste files | (firstFile: File, files: FileList) => void | - | - |
 | autoSize | Height auto size feature, can be set to true \| false or an object: { minRows: 2, maxRows: 6 } | boolean \| { minRows?: number; maxRows?: number } | { maxRows: 8 } | - |
-| defaultSlotConfig | Slot configuration, after configuration, the input box will become slot mode, supporting structured input | SlotConfigType[] | - | - |
+| initialSlotConfig | Slot configuration, after configuration, the input box will become slot mode, supporting structured input | SlotConfigType[] | - | - |
 
 ```typescript | pure
 type SpeechConfig = {

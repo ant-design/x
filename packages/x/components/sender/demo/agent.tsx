@@ -11,7 +11,7 @@ import {
 } from '@ant-design/icons';
 import { Attachments, AttachmentsProps, Sender, SenderProps } from '@ant-design/x';
 import { Button, Divider, Dropdown, Flex, GetRef, MenuProps, message } from 'antd';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 const Switch = Sender.Switch;
 
@@ -19,19 +19,65 @@ const AgentInfo: {
   [key: string]: {
     icon: React.ReactNode;
     label: string;
+    slotConfig: SenderProps['initialSlotConfig'];
   };
 } = {
   deep_search: {
     icon: <SearchOutlined />,
     label: 'Deep Search',
+    slotConfig: [
+      { type: 'text', value: 'Please help me search for news about ' },
+      {
+        type: 'select',
+        key: 'search_type',
+        props: {
+          options: ['AI', 'Technology', 'Entertainment'],
+          placeholder: 'Please select a category',
+        },
+      },
+      { type: 'text', value: ' and summarize it into a list.' },
+    ],
   },
   ai_code: {
     icon: <CodeOutlined />,
     label: 'AI Code',
+    slotConfig: [
+      { type: 'text', value: 'Please use ' },
+      {
+        type: 'select',
+        key: 'code_lang',
+        props: {
+          options: ['JS', 'C++', 'Java'],
+          placeholder: 'Please select a programming language',
+        },
+      },
+      { type: 'text', value: ' to write a mini game.' },
+    ],
   },
   ai_writing: {
     icon: <EditOutlined />,
     label: 'Writing',
+    slotConfig: [
+      { type: 'text', value: 'Please write an article about ' },
+      {
+        type: 'select',
+        key: 'writing_type',
+        props: {
+          options: ['Campus', 'Travel', 'Reading'],
+          placeholder: 'Please enter a topic',
+        },
+      },
+      { type: 'text', value: '. The requirement is ' },
+      {
+        type: 'input',
+        key: 'writing_num',
+        props: {
+          defaultValue: '800',
+          placeholder: 'Please enter the number of words.',
+        },
+      },
+      { type: 'text', value: ' words.' },
+    ],
   },
 };
 
@@ -57,25 +103,11 @@ const FileInfo: {
     label: 'x-image',
   },
 };
-const defaultSlotConfig: SenderProps['defaultSlotConfig'] = [
-  { type: 'text', value: 'I want to go to ' },
-  {
-    type: 'select',
-    key: 'destination',
-    props: {
-      defaultValue: 'Beijing',
-      options: ['Beijing', 'Shanghai', 'Guangzhou'],
-      placeholder: 'Please select a destination',
-    },
-  },
-  { type: 'text', value: '，Please help me plan the most cost-effective trip.' },
-];
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [deepThink, setDeepThink] = useState<boolean>(true);
-  const [slotConfigValue, setSlotConfigValue] = useState<SenderProps['defaultSlotConfig']>([]);
-
+  const [activeAgentKey, setActiveAgentKey] = useState('deep_search');
   const [fileList, setFileList] = useState<AttachmentsProps['items']>([]);
   const agentItems: MenuProps['items'] = Object.keys(AgentInfo).map((agent) => {
     const { icon, label } = AgentInfo[agent];
@@ -83,10 +115,10 @@ const App: React.FC = () => {
       key: agent,
       icon,
       label,
-      disabled: !!slotConfigValue?.find((config) => config.key === agent),
     };
   });
-
+  const [open, setOpen] = React.useState(false);
+  const attachmentsRef = React.useRef<GetRef<typeof Attachments>>(null);
   const fileItems = Object.keys(FileInfo).map((file) => {
     const { icon, label } = FileInfo[file];
     return {
@@ -99,29 +131,14 @@ const App: React.FC = () => {
   const senderRef = useRef<GetRef<typeof Sender>>(null);
 
   const agentItemClick: MenuProps['onClick'] = (item) => {
-    const { icon, label } = AgentInfo[item.key];
-    senderRef.current?.insert?.([
-      {
-        type: 'tag',
-        key: item.key,
-        props: {
-          label: (
-            <Flex gap="small">
-              {icon}
-              {label}
-            </Flex>
-          ),
-          value: item.key,
-        },
-      },
-    ]);
+    setActiveAgentKey(item.key);
   };
   const fileItemClick: MenuProps['onClick'] = (item) => {
     const { icon, label } = FileInfo[item.key];
     senderRef.current?.insert?.([
       {
         type: 'tag',
-        key: item.key + Date.now(),
+        key: `${item.key}_${Date.now()}`,
         props: {
           label: (
             <Flex gap="small">
@@ -147,9 +164,6 @@ const App: React.FC = () => {
       };
     }
   }, [loading]);
-
-  const [open, setOpen] = React.useState(false);
-  const attachmentsRef = React.useRef<GetRef<typeof Attachments>>(null);
 
   const senderHeader = (
     <Sender.Header
@@ -178,6 +192,7 @@ const App: React.FC = () => {
     <Flex vertical gap="middle">
       <Sender
         loading={loading}
+        key={activeAgentKey}
         ref={senderRef}
         placeholder="Press Enter to send message"
         header={senderHeader}
@@ -203,7 +218,13 @@ const App: React.FC = () => {
                   }}
                   icon={<OpenAIOutlined />}
                 />
-                <Dropdown menu={{ onClick: agentItemClick, items: agentItems }}>
+                <Dropdown
+                  menu={{
+                    selectedKeys: [activeAgentKey],
+                    onClick: agentItemClick,
+                    items: agentItems,
+                  }}
+                >
                   <Switch value={false} icon={<AntDesignOutlined />}>
                     Agent
                   </Switch>
@@ -225,9 +246,6 @@ const App: React.FC = () => {
           );
         }}
         suffix={false}
-        onChange={(__, _, config) => {
-          setSlotConfigValue(config);
-        }}
         onSubmit={(v) => {
           setLoading(true);
           message.info(`Send message: ${v}`);
@@ -237,7 +255,10 @@ const App: React.FC = () => {
           setLoading(false);
           message.error('Cancel sending!');
         }}
-        defaultSlotConfig={defaultSlotConfig}
+        onInit={(_, { focus }) => {
+          focus({ cursor: 'end' });
+        }}
+        initialSlotConfig={AgentInfo[activeAgentKey].slotConfig}
         autoSize={{ minRows: 3, maxRows: 6 }}
       />
     </Flex>

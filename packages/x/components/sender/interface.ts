@@ -10,6 +10,7 @@ export type SubmitType = 'enter' | 'shiftEnter' | false;
 
 type SemanticType = 'root' | 'prefix' | 'input' | 'suffix' | 'footer' | 'switch';
 
+export type insertPosition = 'start' | 'end' | 'cursor';
 export interface SenderComponents {
   input?: React.ComponentType<TextareaProps>;
 }
@@ -101,10 +102,11 @@ export interface SenderProps
   readOnly?: boolean;
   submitType?: SubmitType;
   disabled?: boolean;
-  defaultSlotConfig?: SlotConfigType[];
+  initialSlotConfig?: SlotConfigType[];
   onSubmit?: (message: string, slotConfig?: SlotConfigType[]) => void;
   onChange?: (value: string, event?: EventType, slotConfig?: SlotConfigType[]) => void;
   onCancel?: VoidFunction;
+  onInit?: (info: any, actions: any) => void;
   onKeyDown?: React.KeyboardEventHandler<any>;
   onPaste?: React.ClipboardEventHandler<HTMLElement>;
   onPasteFile?: (firstFile: File, files: FileList) => void;

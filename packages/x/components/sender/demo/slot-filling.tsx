@@ -1,11 +1,11 @@
 import { Sender, type SenderProps } from '@ant-design/x';
-import { Button, Flex, GetRef, message, Slider } from 'antd';
+import { Button, Flex, GetRef, Slider } from 'antd';
 import React, { useRef, useState } from 'react';
 
-type SlotConfig = SenderProps['defaultSlotConfig'];
+type SlotConfig = SenderProps['initialSlotConfig'];
 
 const initialSlotConfig: SlotConfig = [
-  { type: 'text', value: 'I want to go to ' },
+  { type: 'text', value: 'I want to go to' },
   {
     type: 'select',
     key: 'destination',
@@ -70,6 +70,7 @@ const App: React.FC = () => {
     'initialSlotConfig',
   );
   const senderRef = useRef<GetRef<typeof Sender>>(null);
+  const [value, setValue] = useState<string>('');
 
   return (
     <Flex vertical gap={16}>
@@ -85,7 +86,7 @@ const App: React.FC = () => {
         <Button
           onClick={() => {
             const val = senderRef.current?.getValue?.();
-            message.info(val ? val.value : 'No value');
+            setValue(val?.value ? val.value : 'No value');
           }}
         >
           Get Value
@@ -102,13 +103,45 @@ const App: React.FC = () => {
             senderRef.current?.insert?.([
               {
                 type: 'input',
-                key: 'partner_1',
+                key: `partner_2_${Date.now()}`,
                 props: { placeholder: 'Enter a name' },
               },
             ]);
           }}
         >
           Insert Slot
+        </Button>
+        <Button
+          onClick={() => {
+            senderRef.current?.insert?.(
+              [
+                {
+                  type: 'input',
+                  key: `partner_2_${Date.now()}`,
+                  props: { placeholder: 'Enter a name' },
+                },
+              ],
+              'start',
+            );
+          }}
+        >
+          Insert Slot Start
+        </Button>
+        <Button
+          onClick={() => {
+            senderRef.current?.insert?.(
+              [
+                {
+                  type: 'input',
+                  key: `partner_3_${Date.now()}`,
+                  props: { placeholder: 'Enter a name' },
+                },
+              ],
+              'end',
+            );
+          }}
+        >
+          Insert Slot End
         </Button>
         <Button
           onClick={() => {
@@ -170,12 +203,13 @@ const App: React.FC = () => {
       <Sender
         key={slotConfigKey || 'default'}
         onSubmit={(value) => {
-          message.info(value);
+          setValue(value);
           setSlotConfigKey(false);
         }}
-        defaultSlotConfig={slotConfigKey ? slotConfig?.[slotConfigKey] : []}
+        initialSlotConfig={slotConfigKey ? slotConfig?.[slotConfigKey] : []}
         ref={senderRef}
       />
+      {value ? `value:${value}` : null}
     </Flex>
   );
 };
