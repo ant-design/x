@@ -33,7 +33,6 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
     onPaste,
     onPasteFile,
     loading,
-    onInit,
     disabled,
     readOnly,
     submitType = 'enter',
@@ -91,10 +90,6 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
   };
 
   React.useImperativeHandle(ref, () => {
-    const timer = setTimeout(() => {
-      onInit?.({ nativeElement: inputRef.current }, { focus });
-      clearTimeout(timer);
-    }, 0);
     return {
       nativeElement: (inputRef.current as any)?.resizableTextArea?.textArea as HTMLTextAreaElement,
       focus: inputRef.current?.focus!,

@@ -1,4 +1,5 @@
 import { fireEvent, render } from '@testing-library/react';
+import { GetRef } from 'antd';
 import React from 'react';
 import { act } from '../../../tests/utils';
 import Sender, { SlotConfigType } from '../index';
@@ -6,16 +7,24 @@ import SlotTextArea from '../SlotTextArea';
 
 describe('Sender.SlotTextArea', () => {
   const initialSlotConfig: SlotConfigType[] = [
-    { type: 'text', value: '前缀文本' },
-    { type: 'input', key: 'input1', props: { placeholder: '请输入内容', defaultValue: '默认值' } },
-    { type: 'select', key: 'select1', props: { options: ['A', 'B'], placeholder: '请选择' } },
-    { type: 'tag', key: 'tag1', props: { label: '标签' } },
+    { type: 'text', value: 'Prefix text' },
+    {
+      type: 'input',
+      key: 'input1',
+      props: { placeholder: 'Please enter content', defaultValue: 'Default value' },
+    },
+    {
+      type: 'select',
+      key: 'select1',
+      props: { options: ['A', 'B'], placeholder: 'Please select' },
+    },
+    { type: 'tag', key: 'tag1', props: { label: 'Tag' } },
     {
       type: 'custom',
       key: 'custom1',
       customRender: (value: any, onChange: (value: any) => void) => (
         <button type="button" data-testid="custom-btn" onClick={() => onChange('custom-value')}>
-          {value || '自定义'}
+          {value || 'Custom'}
         </button>
       ),
       formatResult: (v: any) => `[${v}]`,
@@ -23,11 +32,18 @@ describe('Sender.SlotTextArea', () => {
   ];
 
   it('should render initialSlotConfig', () => {
-    const { getByText, getByTestId } = render(
+    const { getByText, getByTestId, getByPlaceholderText, container } = render(
       <Sender key="text" initialSlotConfig={initialSlotConfig} />,
     );
-    expect(getByText('前缀文本')).toBeInTheDocument();
-    expect(getByText('标签')).toBeInTheDocument();
+    // text slot
+    expect(getByText('Prefix text')).toBeInTheDocument();
+    // input slot placeholder
+    expect(getByPlaceholderText('Please enter content')).toBeInTheDocument();
+    // select slot placeholder
+    expect(container.querySelector('[data-placeholder="Please select"]')).toBeInTheDocument();
+    // tag slot label
+    expect(getByText('Tag')).toBeInTheDocument();
+    // custom slot button
     expect(getByTestId('custom-btn')).toBeInTheDocument();
   });
 
@@ -36,10 +52,10 @@ describe('Sender.SlotTextArea', () => {
     const { getByPlaceholderText } = render(
       <Sender initialSlotConfig={initialSlotConfig} onChange={onChange} />,
     );
-    const input = getByPlaceholderText('请输入内容') as HTMLInputElement;
-    fireEvent.change(input, { target: { value: '新内容' } });
+    const input = getByPlaceholderText('Please enter content') as HTMLInputElement;
+    fireEvent.change(input, { target: { value: 'New content' } });
     const calls = onChange.mock.calls;
-    expect(calls[calls.length - 1][0]).toContain('新内容');
+    expect(calls[calls.length - 1][0]).toContain('New content');
   });
 
   it('should handle select slot change', () => {
@@ -47,10 +63,9 @@ describe('Sender.SlotTextArea', () => {
     const { container, getByText } = render(
       <Sender key="test" initialSlotConfig={initialSlotConfig} onChange={onChange} />,
     );
-    // 触发下拉
+    // trigger dropdown
     fireEvent.click(container.querySelector('.ant-sender-slot-select')!);
     fireEvent.click(getByText('A'));
-
     expect(container.querySelector('.ant-dropdown-menu-title-content')?.textContent).toContain('A');
   });
 
@@ -72,7 +87,7 @@ describe('Sender.SlotTextArea', () => {
     const { container } = render(
       <Sender initialSlotConfig={initialSlotConfig} onSubmit={onSubmit} />,
     );
-    // 回车提交
+    // Submit by pressing Enter
     act(() => {
       fireEvent.keyDown(container.querySelector('[role="textbox"]')!, { key: 'Enter' });
     });
@@ -115,14 +130,21 @@ describe('Sender.SlotTextArea', () => {
   });
 
   it('should have ref methods getValue/insert/clear', () => {
-    const ref = React.createRef<any>();
+    const ref = React.createRef<GetRef<typeof Sender>>();
     render(<Sender initialSlotConfig={initialSlotConfig} ref={ref} />);
     // insert
-    ref.current.insert([{ type: 'text', value: '插入文本' }]);
-    expect(ref.current.getValue().value).toContain('插入文本');
+    ref?.current?.insert([{ type: 'text', value: 'Insert text' }]);
+    expect(ref?.current?.getValue().value).toContain('Insert text');
+
+    ref?.current?.insert?.([{ type: 'text', value: 'end' }], 'end');
+    expect(ref?.current?.getValue().value).toContain('end');
+
+    ref?.current?.insert([{ type: 'text', value: 'start' }], 'start');
+    expect(ref?.current?.getValue().value).toContain('start');
+
     // clear
-    ref.current.clear();
-    expect(ref.current.getValue().value).toBe('');
+    ref?.current?.clear();
+    expect(ref?.current?.getValue().value).toBe('');
   });
 
   it('should handle onPaste with text', () => {
@@ -133,11 +155,11 @@ describe('Sender.SlotTextArea', () => {
     const editable = container.querySelector('.ant-sender-input')!;
     fireEvent.paste(editable, {
       clipboardData: {
-        getData: () => '粘贴内容',
+        getData: () => 'Paste content',
         files: { length: 0 },
       },
     });
-    // 粘贴文本后内容应变化
+    // After pasting, content should change
     expect(onChange).toHaveBeenCalled();
   });
 
@@ -193,21 +215,21 @@ describe('Sender.SlotTextArea', () => {
   });
 
   it('should have ref methods focus/blur', () => {
-    const ref = React.createRef<any>();
+    const ref = React.createRef<GetRef<typeof Sender>>();
     render(<Sender initialSlotConfig={initialSlotConfig} ref={ref} />);
-    expect(typeof ref.current.focus).toBe('function');
-    expect(typeof ref.current.blur).toBe('function');
-    ref.current.focus({ cursor: 'start' });
-    ref.current.focus({ cursor: 'end' });
-    ref.current.focus({ cursor: 'all' });
-    ref.current.blur();
+    expect(typeof ref?.current?.focus).toBe('function');
+    expect(typeof ref?.current?.blur).toBe('function');
+    ref?.current?.focus({ cursor: 'start' });
+    ref?.current?.focus({ cursor: 'end' });
+    ref?.current?.focus({ cursor: 'all' });
+    ref?.current?.blur();
   });
 
   it('should be plain text editing when initialSlotConfig is empty', () => {
     const onChange = jest.fn();
     const { container } = render(<Sender onChange={onChange} />);
     const editable = container.querySelector('.ant-sender-input')!;
-    fireEvent.input(editable, { target: { textContent: '纯文本' } });
+    fireEvent.input(editable, { target: { textContent: 'Plain text' } });
     expect(onChange).toHaveBeenCalled();
   });
 
@@ -221,7 +243,7 @@ describe('Sender.SlotTextArea', () => {
   });
 
   it('should initialize when initialSlotConfig is undefined', () => {
-    // 直接渲染 SlotTextArea
+    // Directly render SlotTextArea
     expect(() => {
       render(<SlotTextArea />);
     }).not.toThrow();
@@ -239,21 +261,21 @@ describe('Sender.SlotTextArea', () => {
         ]}
       />,
     );
-    // 不显示任何内容
+    // Should not display any content
     expect(container.textContent).toBe('');
   });
 
   it('should cover editor?.focus() branch when ref.focus() is called without arguments', () => {
-    const ref = React.createRef<any>();
+    const ref = React.createRef<GetRef<typeof Sender>>();
     render(<Sender initialSlotConfig={initialSlotConfig} ref={ref} />);
-    // 只调用不传参数
-    ref.current.focus();
-    // 能正常调用即可
-    expect(typeof ref.current.focus).toBe('function');
+
+    ref?.current?.focus();
+
+    expect(typeof ref?.current?.focus).toBe('function');
   });
 
-  it('should test input slot', () => {
-    const ref = React.createRef<any>();
+  it('should render and update input slot', () => {
+    const ref = React.createRef<GetRef<typeof Sender>>();
     const initialSlotConfig: SlotConfigType[] = [
       {
         type: 'input',
@@ -264,76 +286,92 @@ describe('Sender.SlotTextArea', () => {
     const { getByPlaceholderText } = render(
       <Sender initialSlotConfig={initialSlotConfig} ref={ref} />,
     );
-    // 初始值
-    expect(ref.current.getValue().value).toContain('默认值');
-    // 输入新内容
-    fireEvent.change(getByPlaceholderText('请输入内容'), { target: { value: '新内容' } });
-    expect(ref.current.getValue().value).toContain('新内容');
+    // Should render input with correct placeholder
+    const input = getByPlaceholderText('请输入内容');
+    expect(input).toBeInTheDocument();
+    // Should have initial value
+    expect(ref?.current?.getValue().value).toContain('默认值');
+    // Should update value after change
+    fireEvent.change(input, { target: { value: '新内容' } });
+    expect(ref?.current?.getValue().value).toContain('新内容');
   });
 
   it('should test select slot', () => {
-    const ref = React.createRef<any>();
+    const ref = React.createRef<GetRef<typeof Sender>>();
     const initialSlotConfig: SlotConfigType[] = [
       { type: 'select', key: 'select1', props: { options: ['A', 'B'], placeholder: '请选择' } },
     ];
     const { container, getByText } = render(
       <Sender initialSlotConfig={initialSlotConfig} ref={ref} />,
     );
-    // 选择 A
+    // Select option A
     fireEvent.click(container.querySelector('.ant-sender-slot-select')!);
     fireEvent.click(getByText('A'));
-    expect(ref.current.getValue().value).toContain('A');
+    expect(ref?.current?.getValue().value).toContain('A');
   });
 
   it('should test tag slot', () => {
-    const ref = React.createRef<any>();
+    const ref = React.createRef<GetRef<typeof Sender>>();
     const initialSlotConfig: SlotConfigType[] = [
-      { type: 'tag', key: 'tag1', props: { label: '标签', value: '值' } },
+      { type: 'tag', key: 'tag1', props: { label: 'Tag', value: 'Value' } },
     ];
     render(<Sender initialSlotConfig={initialSlotConfig} ref={ref} />);
-    // tag slot 只显示 label
-    expect(ref.current.getValue().value).toContain('值');
+    // Tag slot only shows label
+    expect(ref?.current?.getValue().value).toContain('Value');
   });
 
   it('should test custom slot', () => {
-    const ref = React.createRef<any>();
+    const ref = React.createRef<GetRef<typeof Sender>>();
     const initialSlotConfig: SlotConfigType[] = [
       {
         type: 'custom',
         key: 'custom1',
         customRender: (value: any, onChange: (value: any) => void) => (
           <button type="button" data-testid="custom-btn" onClick={() => onChange('custom-value')}>
-            {value || '自定义'}
+            {value || 'Custom'}
           </button>
         ),
         formatResult: (v: any) => `[${v}]`,
       },
     ];
     const { getByTestId } = render(<Sender initialSlotConfig={initialSlotConfig} ref={ref} />);
-    // 初始值
-    expect(ref.current.getValue().value).toBe('[]');
-    // 交互
+    // Initial value
+    expect(ref?.current?.getValue().value).toBe('[]');
+    // Click custom button
     fireEvent.click(getByTestId('custom-btn'));
-    expect(ref.current.getValue().value).toBe('[custom-value]');
+    expect(ref?.current?.getValue().value).toBe('[custom-value]');
   });
 
   it('should call insert when speech input and initialSlotConfig exists', () => {
-    const ref = React.createRef<any>();
+    const ref = React.createRef<GetRef<typeof Sender>>();
     const testSlotConfig = [
-      { type: 'input' as const, key: 'input1', props: { placeholder: '请输入内容' } },
+      { type: 'input' as const, key: 'input1', props: { placeholder: 'Please enter content' } },
     ];
     render(<Sender initialSlotConfig={testSlotConfig} allowSpeech ref={ref} />);
-    ref.current.insert([{ type: 'text', value: '语音内容' }]);
-    expect(ref.current.getValue().value).toContain('语音内容');
+    ref?.current?.insert([{ type: 'text', value: 'Speech content' }]);
+    expect(ref?.current?.getValue().value).toContain('Speech content');
   });
 
+  it('should call insert slot', () => {
+    const senderRef = React.createRef<GetRef<typeof Sender>>();
+    const testSlotConfig = [
+      { type: 'input' as const, key: 'input1', props: { placeholder: 'Please enter content' } },
+    ];
+    (globalThis.getSelection as any) = () => null;
+
+    render(<Sender initialSlotConfig={testSlotConfig} ref={senderRef} />);
+    senderRef?.current?.insert(
+      [{ type: 'tag', key: 'tag_1', props: { label: 'Tag_1', value: 'Tag1' } }],
+      'end',
+    );
+  });
   it('should call triggerValueChange when speech input and initialSlotConfig does not exist', () => {
     const onChange = jest.fn();
     const { container } = render(<Sender allowSpeech onChange={onChange} />);
     const textarea = container.querySelector('textarea')!;
-    fireEvent.change(textarea, { target: { value: '语音内容' } });
+    fireEvent.change(textarea, { target: { value: 'Speech content' } });
     const call = onChange.mock.calls[0];
-    expect(call[0]).toBe('语音内容');
+    expect(call[0]).toBe('Speech content');
   });
 
   it('should not trigger onSubmit when loading is true and send button is clicked', () => {
@@ -351,22 +389,22 @@ describe('Sender.SlotTextArea', () => {
   });
 
   it('should call clear when clear button is clicked and initialSlotConfig exists', () => {
-    const ref = React.createRef<any>();
+    const ref = React.createRef<GetRef<typeof Sender>>();
     const testInitialSlotConfig = [
-      { type: 'input' as const, key: 'input1', props: { placeholder: '请输入内容' } },
+      { type: 'input' as const, key: 'input1', props: { placeholder: 'Please enter content' } },
     ];
     render(<Sender initialSlotConfig={testInitialSlotConfig} ref={ref} />);
-    ref.current.insert([{ type: 'text', value: '内容' }]);
-    ref.current.clear();
-    expect(ref.current.getValue().value).toBe('');
+    ref?.current?.insert([{ type: 'text', value: 'Clear me' }]);
+    ref?.current?.clear();
+    expect(ref?.current?.getValue().value).toBe('');
   });
 
   it('should only clear value when clear button is clicked and initialSlotConfig does not exist', () => {
-    const ref = React.createRef<any>();
+    const ref = React.createRef<GetRef<typeof Sender>>();
     render(<Sender ref={ref} />);
-    ref.current.insert([{ type: 'text', value: '内容' }]);
-    ref.current.clear();
-    expect(ref.current.getValue().value).toBe('');
+    ref?.current?.insert([{ type: 'text', value: 'Clear me' }]);
+    ref?.current?.clear();
+    expect(ref?.current?.getValue().value).toBe('');
   });
 
   it('should render speech button when allowSpeech is true', () => {
@@ -376,7 +414,7 @@ describe('Sender.SlotTextArea', () => {
 
   it('should render LoadingButton when loading is true', () => {
     const { container } = render(<Sender loading />);
-    // 断言存在 loading icon
+    // Should render loading icon
     expect(container.querySelector('[class*="loading-icon"]')).toBeTruthy();
   });
 
@@ -386,13 +424,13 @@ describe('Sender.SlotTextArea', () => {
   });
 
   it('should render custom suffix when suffix is a function', () => {
-    const { getByText } = render(<Sender suffix={() => <div>自定义按钮</div>} />);
-    expect(getByText('自定义按钮')).toBeInTheDocument();
+    const { getByText } = render(<Sender suffix={() => <div>Custom Button</div>} />);
+    expect(getByText('Custom Button')).toBeInTheDocument();
   });
 
   it('should render suffix when suffix is a ReactNode', () => {
-    const { getByText } = render(<Sender suffix={<div>节点按钮</div>} />);
-    expect(getByText('节点按钮')).toBeInTheDocument();
+    const { getByText } = render(<Sender suffix={<div>Node Button</div>} />);
+    expect(getByText('Node Button')).toBeInTheDocument();
   });
 
   it('should not render suffix when suffix is false', () => {
@@ -410,13 +448,13 @@ describe('Sender.SlotTextArea', () => {
 
   it('should not prevent default when clicking content area and initialSlotConfig exists', () => {
     const initialSlotConfig = [
-      { type: 'input' as const, key: 'input1', props: { placeholder: '请输入内容' } },
+      { type: 'input' as const, key: 'input1', props: { placeholder: 'Please enter content' } },
     ];
     const { container } = render(<Sender initialSlotConfig={initialSlotConfig} />);
     const content = container.querySelector('.ant-sender-content')!;
     const preventDefault = jest.fn();
     fireEvent.mouseDown(content, { target: content, preventDefault });
-    // initialSlotConfig 存在时不阻止默认
+    // Should not prevent default when initialSlotConfig exists
     expect(preventDefault).not.toHaveBeenCalled();
   });
 });

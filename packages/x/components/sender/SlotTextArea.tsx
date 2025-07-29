@@ -37,7 +37,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     loading,
     disabled,
     readOnly,
-    onInit,
     submitType = 'enter',
     prefixCls: customizePrefixCls,
     styles = {},
@@ -524,11 +523,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   }, []);
 
   useImperativeHandle(ref, () => {
-    const timer = setTimeout(() => {
-      onInit?.({ nativeElement: editableRef.current }, { focus });
-      clearTimeout(timer);
-    }, 0);
-
     return {
       nativeElement: editableRef.current! as unknown as HTMLTextAreaElement,
       focus,

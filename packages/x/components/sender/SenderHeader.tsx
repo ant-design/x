@@ -3,6 +3,7 @@ import { Button } from 'antd';
 import classNames from 'classnames';
 import CSSMotion, { type MotionEventHandler } from 'rc-motion';
 import * as React from 'react';
+import { useXProviderContext } from '../x-provider';
 
 export interface SendHeaderContextProps {
   prefixCls: string;
@@ -12,12 +13,17 @@ export const SendHeaderContext = React.createContext<SendHeaderContextProps>({} 
 
 export type SemanticType = 'header' | 'content';
 
-export interface SenderHeaderProps {
+export interface SenderHeaderProps
+  extends Omit<
+    React.HTMLAttributes<HTMLLIElement>,
+    'onClick' | 'value' | 'defaultValue' | 'onChange' | 'title'
+  > {
   forceRender?: boolean;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   title?: React.ReactNode;
   children?: React.ReactNode;
+  prefixCls?: string;
   className?: string;
   style?: React.CSSProperties;
   classNames?: Partial<Record<SemanticType, string>>;
@@ -42,11 +48,14 @@ export default function SenderHeader(props: SenderHeaderProps) {
     style,
     classNames: classes = {},
     styles = {},
+    prefixCls: customizePrefixCls,
     closable,
     forceRender,
   } = props;
 
-  const { prefixCls } = React.useContext(SendHeaderContext);
+  const { prefixCls: contextPrefixCls } = React.useContext(SendHeaderContext);
+  const { direction, getPrefixCls } = useXProviderContext();
+  const prefixCls = getPrefixCls('sender', customizePrefixCls || contextPrefixCls);
 
   const headerCls = `${prefixCls}-header`;
 
@@ -66,7 +75,9 @@ export default function SenderHeader(props: SenderHeaderProps) {
       {({ className: motionClassName, style: motionStyle }) => {
         return (
           <div
-            className={classNames(headerCls, motionClassName, className)}
+            className={classNames(headerCls, motionClassName, className, {
+              [`${headerCls}-rtl`]: direction === 'rtl',
+            })}
             style={{
               ...motionStyle,
               ...style,

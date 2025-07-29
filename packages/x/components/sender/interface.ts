@@ -106,7 +106,6 @@ export interface SenderProps
   onSubmit?: (message: string, slotConfig?: SlotConfigType[]) => void;
   onChange?: (value: string, event?: EventType, slotConfig?: SlotConfigType[]) => void;
   onCancel?: VoidFunction;
-  onInit?: (info: any, actions: any) => void;
   onKeyDown?: React.KeyboardEventHandler<any>;
   onPaste?: React.ClipboardEventHandler<HTMLElement>;
   onPasteFile?: (firstFile: File, files: FileList) => void;

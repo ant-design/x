@@ -1,5 +1,5 @@
-import type { SenderToken } from '.';
 import type { GenerateStyle } from '../../theme/cssinjs-utils';
+import type { SenderToken } from '.';
 
 const genSenderHeaderStyle: GenerateStyle<SenderToken> = (token) => {
   const { componentCls, calc } = token;
@@ -8,6 +8,9 @@ const genSenderHeaderStyle: GenerateStyle<SenderToken> = (token) => {
 
   return {
     [componentCls]: {
+      [`&${headerCls}-rtl`]: {
+        direction: 'rtl',
+      },
       [headerCls]: {
         borderBottomWidth: token.lineWidth,
         borderBottomStyle: 'solid',

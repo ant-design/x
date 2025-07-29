@@ -78,7 +78,6 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     autoSize = { maxRows: 8 },
     placeholder,
     onFocus,
-    onInit,
     onBlur,
     ...restProps
   } = props;
@@ -234,7 +233,6 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     onClear: triggerClear,
     onClearDisabled: !innerValue,
     onCancel,
-    onInit,
     onCancelDisabled: !loading,
     onSpeech: () => triggerSpeech(false),
     onSpeechDisabled: !speechPermission,
@@ -264,7 +262,6 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
       onSubmit,
       placeholder,
       onFocus,
-      onInit,
       onBlur,
       ...restProps,
     }),
