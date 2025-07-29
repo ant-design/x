@@ -1,6 +1,7 @@
 ---
 group:
   title: 模型接入
+  order: 1
 title: 其他
 order: 2
 ---
@@ -17,9 +18,8 @@ order: 2
 import { XStream } from '@ant-design/x';
 
 async function request() {
-  const response =
-    await fetch();
-    // ...
+  const response = await fetch();
+  // ...
   // .....
 
   for await (const chunk of XStream({
