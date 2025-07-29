@@ -894,7 +894,7 @@ exports[`renders components/sender/demo/basic.tsx extend context correctly 1`] =
         <textarea
           class="ant-input ant-input-borderless css-var-«r1a» ant-input-css-var ant-sender-input"
           readonly=""
-          style="overflow-y: hidden; resize: none;"
+          style="resize: none;"
         >
           Force as loading
         </textarea>
@@ -1961,7 +1961,7 @@ exports[`renders components/sender/demo/send-style.tsx extend context correctly 
         <textarea
           class="ant-input ant-input-borderless css-var-«ro» ant-input-css-var ant-sender-input"
           placeholder="Change button border radius"
-          style="resize: none;"
+          style="overflow-y: hidden; resize: none;"
         >
           Ask something?
         </textarea>
@@ -2030,7 +2030,7 @@ exports[`renders components/sender/demo/send-style.tsx extend context correctly 
         <textarea
           class="ant-input ant-input-borderless css-var-«ro» ant-input-css-var ant-sender-input"
           placeholder="Change button icon"
-          style="resize: none;"
+          style="overflow-y: hidden; resize: none;"
         >
           Ask something?
         </textarea>
@@ -2101,7 +2101,7 @@ exports[`renders components/sender/demo/send-style.tsx extend context correctly 
         <textarea
           class="ant-input ant-input-borderless css-var-«ro» ant-input-css-var ant-sender-input"
           placeholder="Loading not change button"
-          style="resize: none;"
+          style="overflow-y: hidden; resize: none;"
         >
           Ask something?
         </textarea>
