@@ -65,7 +65,7 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
   const { componentCls, paddingSM, paddingXS, paddingXXS, lineWidth, calc } = token;
 
   return {
-    [`${componentCls}:not(${componentCls}-switch)`]: {
+    [`${componentCls}:not(${componentCls}-switch):not(${componentCls}-header)`]: {
       position: 'relative',
       width: '100%',
       boxSizing: 'border-box',

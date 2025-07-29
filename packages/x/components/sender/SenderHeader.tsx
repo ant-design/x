@@ -75,7 +75,7 @@ export default function SenderHeader(props: SenderHeaderProps) {
       {({ className: motionClassName, style: motionStyle }) => {
         return (
           <div
-            className={classNames(headerCls, motionClassName, className, {
+            className={classNames(prefixCls, headerCls, motionClassName, className, {
               [`${headerCls}-rtl`]: direction === 'rtl',
             })}
             style={{
