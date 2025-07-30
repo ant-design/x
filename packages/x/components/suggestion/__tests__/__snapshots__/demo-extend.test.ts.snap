@@ -17,13 +17,14 @@ Array [
           style="overflow-y: hidden; resize: none;"
         />
         <div
-          class="ant-sender-suffix-list"
+          class="ant-sender-actions-list"
         >
           <div
-            class="ant-sender-suffix-list-presets ant-flex css-var-«r9»"
+            class="ant-sender-actions-list-presets ant-flex css-var-«r9»"
           >
             <button
-              class="ant-btn css-var-«r9» ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-suffix-btn ant-sender-suffix-btn-disabled"
+              class="ant-btn css-var-«r9» ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              disabled=""
               type="button"
             >
               <span
@@ -191,13 +192,14 @@ Array [
           style="overflow-y: hidden; resize: none;"
         />
         <div
-          class="ant-sender-suffix-list"
+          class="ant-sender-actions-list"
         >
           <div
-            class="ant-sender-suffix-list-presets ant-flex css-var-«r5»"
+            class="ant-sender-actions-list-presets ant-flex css-var-«r5»"
           >
             <button
-              class="ant-btn css-var-«r5» ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-suffix-btn ant-sender-suffix-btn-disabled"
+              class="ant-btn css-var-«r5» ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              disabled=""
               type="button"
             >
               <span
