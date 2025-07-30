@@ -16,6 +16,14 @@ tag: vVERSION
 
 ---
 
+## 1.6.0
+
+`2025-07-30`
+
+- 🆕 Attachments component `FileCard` adds icon and type configuration. [#1006](https://github.com/ant-design/x/pull/1006) by [@kieranwv](https://github.com/kieranwv).
+- 📖 Added documentation and demo for Toolbox Agent integration. [#1063](https://github.com/ant-design/x/pull/1063) by [iamkun-2](https://github.com/iamkun-2).
+- 📖 Improved official site for better user experience. [#1054](https://github.com/ant-design/x/pull/1054) by [@hylin](https://github.com/hylin), [#1056](https://github.com/hylin),[#880](https://github.com/ant-design/x/pull/880) by [@kimteayon](https://github.com/kimteayon).
+
 ## 1.5.0
 
 `2025-07-16`
