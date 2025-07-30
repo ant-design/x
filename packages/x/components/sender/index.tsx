@@ -97,7 +97,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
 
   // ============================= Refs =============================
   const containerRef = React.useRef<HTMLDivElement>(null);
-  const inputRef = React.useRef<any>(null);
+  const inputRef = React.useRef<SenderRef>(null);
 
   useProxyImperativeHandle(ref, () => {
     return {
