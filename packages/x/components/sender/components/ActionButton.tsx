@@ -40,6 +40,7 @@ export function ActionButton(props: ActionButtonProps, ref: React.Ref<HTMLButton
         context[action]?.();
         onClick?.(e);
       }}
+      disabled={mergedDisabled}
       className={classNames(prefixCls, className, {
         [`${prefixCls}-disabled`]: mergedDisabled,
       })}

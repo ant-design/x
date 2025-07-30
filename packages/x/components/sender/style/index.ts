@@ -127,7 +127,9 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
 
       [`${componentCls}-actions-btn`]: {
         '&-disabled': {
+          background: token.colorPrimary,
           opacity: 0.45,
+          color: token.colorTextLightSolid,
         },
 
         '&-loading-button': {

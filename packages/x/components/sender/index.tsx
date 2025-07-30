@@ -133,8 +133,8 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     },
   );
 
-  const actionBtnCls = `${prefixCls}-suffix-btn`;
-  const actionListCls = `${prefixCls}-suffix-list`;
+  const actionBtnCls = `${prefixCls}-actions-btn`;
+  const actionListCls = `${prefixCls}-actions-list`;
 
   // ============================ Value =============================
   const [innerValue, setInnerValue] = useMergedState(defaultValue || '', {
