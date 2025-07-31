@@ -2,6 +2,7 @@ import type { ComponentToken as ActionsToken } from '../../actions/style';
 import type { ComponentToken as AttachmentsToken } from '../../attachments/style';
 import type { ComponentToken as BubbleComponentToken } from '../../bubble/style';
 import type { ComponentToken as ConversationsComponentToken } from '../../conversations/style';
+import type { ComponentToken as FileCardComponentToken } from '../../file-card/style';
 import type { ComponentToken as PromptsComponentToken } from '../../prompts/style';
 import type { ComponentToken as SenderComponentToken } from '../../sender/style';
 import type { ComponentToken as SuggestionComponentToken } from '../../suggestion/style';
@@ -20,4 +21,5 @@ export interface ComponentTokenMap {
   ThoughtChain?: ThoughtChainComponentToken;
   Welcome?: WelcomeComponentToken;
   Actions?: ActionsToken;
+  FileCard?: FileCardComponentToken;
 }

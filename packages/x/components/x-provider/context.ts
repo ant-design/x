@@ -5,6 +5,7 @@ import type { ActionsProps } from '../actions/interface';
 import { AttachmentsProps } from '../attachments';
 import type { BubbleProps } from '../bubble';
 import type { ConversationsProps } from '../conversations';
+import type { FileCardProps } from '../file-card';
 import type { PromptsProps } from '../prompts';
 import type { SenderProps } from '../sender';
 import type { SuggestionProps } from '../suggestion';
@@ -38,6 +39,7 @@ export interface XComponentsConfig {
   welcome?: ComponentConfig<WelcomeProps>;
   actions?: ComponentConfig<ActionsProps>;
   think?: ComponentConfig<ThinkProps>;
+  fileCard?: ComponentConfig<FileCardProps>;
 }
 
 export interface XProviderProps extends XComponentsConfig, AntdConfigProviderProps {
