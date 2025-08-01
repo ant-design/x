@@ -16,15 +16,25 @@ tag: vVERSION
 
 ---
 
+## 1.6.0
+
+`2025-07-30`
+
+- 🆕 Attachments component `FileCard` adds icon and type configuration. [#1006](https://github.com/ant-design/x/pull/1006) by [@kieranwv](https://github.com/kieranwv).
+- 📖 Added documentation and demo for Toolbox Agent integration. [#1063](https://github.com/ant-design/x/pull/1063) by [iamkun-2](https://github.com/iamkun-2).
+- 📖 Improved official site for better user experience. [#1054](https://github.com/ant-design/x/pull/1054) by [@hylin](https://github.com/hylin), [#1056](https://github.com/hylin).
+
 ## 1.5.0
 
-`2025-07-11`
+`2025-07-16`
 
 - 🆕 Added Bubble component support for `onScroll` event listener. [#1021](https://github.com/ant-design/x/pull/1021) by [@QdabuliuQ](https://github.com/QdabuliuQ).
+- 🐛 Removed duplicate TypeScript type declaration in Bubble component. [#1032](https://github.com/ant-design/x/pull/1032) by [@wzc520pyfm](https://github.com/wzc520pyfm).
+- 🐛 Fixed Conversations `onActiveChange` being triggered when a disabled `menu` item is clicked. [#1024](https://github.com/ant-design/x/pull/1024) by [@QdabuliuQ](https://github.com/QdabuliuQ).
 - 🐛 Fixed semantic configuration for Attachments component `FileList`. [#1017](https://github.com/ant-design/x/pull/1017) by [@kimteayon](https://github.com/kimteayon).
 - 🐛 Added html configuration for Actions component. [#995](https://github.com/ant-design/x/pull/995) by [@vanndxh](https://github.com/vanndxh).
 - 🐛 Fixed Conversations label display issue and improved semantic configuration. [#898](https://github.com/ant-design/x/pull/898) by [@yuanliu147](https://github.com/yuanliu147).
-- 📖 Improved official site for better user experience. [#940](https://github.com/ant-design/x/pull/940) by [@coding-ice](https://github.com/coding-ice), [#969](https://github.com/ant-design/x/pull/969) by [@afc163](https://github.com/afc163), [#968](https://github.com/ant-design/x/pull/968) by [@afc163](https://github.com/afc163), [#1019](https://github.com/ant-design/x/pull/1019) by [hylin](https://github.com/hylin).
+- 📖 Improved official site for better user experience. [#940](https://github.com/ant-design/x/pull/940) by [@coding-ice](https://github.com/coding-ice), [#969](https://github.com/ant-design/x/pull/969) by [@afc163](https://github.com/afc163), [#968](https://github.com/ant-design/x/pull/968) by [@afc163](https://github.com/afc163), [#1019](https://github.com/ant-design/x/pull/1019) by [hylin](https://github.com/hylin),[#1036](https://github.com/ant-design/x/pull/1036) by [@kimteayon](https://github.com/kimteayon).
 
 ## 1.4.0
 
