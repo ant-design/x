@@ -251,7 +251,7 @@
     "tar": "^7.4.3",
     "tsx": "^4.19.1",
     "typedoc": "^0.28.0",
-    "typescript": "~5.8.2",
+    "typescript": "~5.9.2",
     "vanilla-jsoneditor": "^3.0.0",
     "web-streams-polyfill": "^4.0.0",
     "webpack": "^5.94.0",
