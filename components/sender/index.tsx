@@ -60,6 +60,7 @@ export interface SenderProps
   components?: SenderComponents;
   styles?: {
     prefix?: React.CSSProperties;
+    suffix?: React.CSSProperties;
     input?: React.CSSProperties;
     actions?: React.CSSProperties;
     footer?: React.CSSProperties;
@@ -67,6 +68,7 @@ export interface SenderProps
   rootClassName?: string;
   classNames?: {
     prefix?: string;
+    suffix?: string;
     input?: string;
     actions?: string;
     footer?: string;
@@ -76,6 +78,7 @@ export interface SenderProps
   actions?: React.ReactNode | ActionsRender;
   allowSpeech?: AllowSpeech;
   prefix?: React.ReactNode;
+  suffix?: React.ReactNode;
   footer?: React.ReactNode | FooterRender;
   header?: React.ReactNode;
   autoSize?: boolean | { minRows?: number; maxRows?: number };
@@ -124,6 +127,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     disabled,
     allowSpeech,
     prefix,
+    suffix,
     footer,
     header,
     onPaste,
@@ -351,6 +355,20 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
             variant="borderless"
             readOnly={readOnly}
           />
+
+          {/* Suffix */}
+          {suffix && (
+            <div
+              className={classnames(
+                `${prefixCls}-suffix`,
+                contextConfig.classNames.suffix,
+                classNames.suffix,
+              )}
+              style={{ ...contextConfig.styles.suffix, ...styles.suffix }}
+            >
+              {suffix}
+            </div>
+          )}
           {/* Action List */}
           {actionNode && (
             <div
