@@ -13,6 +13,7 @@ const Demo = () => {
   const senderRef = React.useRef<GetRef<typeof Sender>>(null);
 
   React.useEffect(() => {
+    // Clear all created object URLs when the component is unmounted
     return () => {
       items.forEach((item) => {
         if (item.url?.startsWith('blob:')) {
