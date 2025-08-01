@@ -1,7 +1,5 @@
 import {
   AppstoreAddOutlined,
-  CloudUploadOutlined,
-  CommentOutlined,
   CopyOutlined,
   DeleteOutlined,
   DislikeOutlined,
@@ -10,7 +8,6 @@ import {
   FileSearchOutlined,
   HeartOutlined,
   LikeOutlined,
-  PaperClipOutlined,
   PlusOutlined,
   ProductOutlined,
   QuestionCircleOutlined,
@@ -20,7 +17,6 @@ import {
   SmileOutlined,
 } from '@ant-design/icons';
 import {
-  Attachments,
   Bubble,
   Conversations,
   Prompts,
@@ -33,89 +29,122 @@ import { Avatar, Button, Flex, type GetProp, message, Space, Spin } from 'antd';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
 import React, { useEffect, useRef, useState } from 'react';
+import { TboxClient } from 'tbox-nodejs-sdk';
+
+const tboxClient = new TboxClient({
+  httpClientConfig: {
+    authorization: 'your-api-key', // Replace with your API key
+    isAntdXDemo: true, // Only for Ant Design X demo
+  },
+});
+
+const zhCN = {
+  whatIsTbox: '什么是百宝箱 Tbox.cn?',
+  whatCanTboxDo: '百宝箱可以做什么?',
+  today: '今天',
+  yesterday: '昨天',
+  hotTopics: '最热话题',
+  designGuide: '设计指南',
+  intent: '意图',
+  role: '角色',
+  aiUnderstandsUserNeeds: 'AI 理解用户需求并提供解决方案',
+  aiPublicImage: 'AI 的公众形象',
+  dynamic: '动态',
+  component: '组件',
+  guide: '指南',
+  tutorial: '教程',
+  newConversation: '新会话',
+  rename: '重命名',
+  delete: '删除',
+  requestInProgress: '请求正在进行中，请等待请求完成。',
+  demoButtonNoFunction: '演示按钮，无实际功能',
+  helloAntdXTboxAgent: '你好， 我是 Ant Design X & 百宝箱智能体',
+  antdXTboxDescription:
+    '基于 Ant Design 的 AGI 产品界面解决方案，打造更卓越的智能视觉体验，集成了百宝箱 Tbox.cn 的智能体能力，助力产品设计与开发。',
+  askMeAnything: '向我提问吧',
+  loadingMessage: '加载中💗',
+};
+
+const enUS = {
+  whatIsTbox: 'What is Tbox.cn?',
+  whatCanTboxDo: 'What can Tbox.cn do?',
+  today: 'Today',
+  yesterday: 'Yesterday',
+  hotTopics: 'Hot Topics',
+  designGuide: 'Design Guide',
+  intent: 'Intent',
+  role: 'Role',
+  aiUnderstandsUserNeeds: 'AI understands user needs and provides solutions',
+  aiPublicImage: "AI's public image",
+  dynamic: 'Dynamic',
+  component: 'Component',
+  guide: 'Guide',
+  tutorial: 'Tutorial',
+  newConversation: 'New Conversation',
+  rename: 'Rename',
+  delete: 'Delete',
+  requestInProgress: 'Request is in progress, please wait for the request to complete.',
+  demoButtonNoFunction: 'Demo button, no actual function',
+  helloAntdXTboxAgent: 'Hello, I am Ant Design X & Tbox Agent',
+  antdXTboxDescription:
+    'An AGI product interface solution based on Ant Design, creating a superior intelligent visual experience, integrating the capabilities of Tbox.cn agents to assist in product design and development.',
+  askMeAnything: 'Ask me anything...',
+  loadingMessage: 'Loading...',
+};
 
 type BubbleDataType = {
   role: string;
   content: string;
 };
 
+const isZhCN = window.parent?.location?.pathname?.includes('-cn');
+const t = isZhCN ? zhCN : enUS;
+
 const DEFAULT_CONVERSATIONS_ITEMS = [
   {
     key: 'default-0',
-    label: 'What is Ant Design X?',
-    group: 'Today',
-  },
-  {
-    key: 'default-1',
-    label: 'How to quickly install and import components?',
-    group: 'Today',
+    label: t.whatIsTbox,
+    group: t.today,
   },
   {
     key: 'default-2',
-    label: 'New AGI Hybrid Interface',
-    group: 'Yesterday',
+    label: t.whatCanTboxDo,
+    group: t.yesterday,
   },
 ];
 
 const HOT_TOPICS = {
   key: '1',
-  label: 'Hot Topics',
+  label: t.hotTopics,
   children: [
     {
       key: '1-1',
-      description: 'What has Ant Design X upgraded?',
+      description: t.whatIsTbox,
       icon: <span style={{ color: '#f93a4a', fontWeight: 700 }}>1</span>,
     },
     {
       key: '1-2',
-      description: 'New AGI Hybrid Interface',
+      description: t.whatCanTboxDo,
       icon: <span style={{ color: '#ff6565', fontWeight: 700 }}>2</span>,
-    },
-    {
-      key: '1-3',
-      description: 'What components are in Ant Design X?',
-      icon: <span style={{ color: '#ff8f1f', fontWeight: 700 }}>3</span>,
-    },
-    {
-      key: '1-4',
-      description: 'Come and discover the new design paradigm of the AI era.',
-      icon: <span style={{ color: '#00000040', fontWeight: 700 }}>4</span>,
-    },
-    {
-      key: '1-5',
-      description: 'How to quickly install and import components?',
-      icon: <span style={{ color: '#00000040', fontWeight: 700 }}>5</span>,
     },
   ],
 };
 
 const DESIGN_GUIDE = {
   key: '2',
-  label: 'Design Guide',
+  label: t.designGuide,
   children: [
     {
       key: '2-1',
       icon: <HeartOutlined />,
-      label: 'Intention',
-      description: 'AI understands user needs and provides solutions.',
+      label: t.intent,
+      description: t.aiUnderstandsUserNeeds,
     },
     {
       key: '2-2',
       icon: <SmileOutlined />,
-      label: 'Role',
-      description: "AI's public persona and image",
-    },
-    {
-      key: '2-3',
-      icon: <CommentOutlined />,
-      label: 'Chat',
-      description: 'How AI Can Express Itself in a Way Users Understand',
-    },
-    {
-      key: '2-4',
-      icon: <PaperClipOutlined />,
-      label: 'Interface',
-      description: 'AI balances "chat" & "do" behaviors.',
+      label: t.role,
+      description: t.aiPublicImage,
     },
   ],
 };
@@ -123,22 +152,22 @@ const DESIGN_GUIDE = {
 const SENDER_PROMPTS: GetProp<typeof Prompts, 'items'> = [
   {
     key: '1',
-    description: 'Upgrades',
+    description: t.dynamic,
     icon: <ScheduleOutlined />,
   },
   {
     key: '2',
-    description: 'Components',
+    description: t.component,
     icon: <ProductOutlined />,
   },
   {
     key: '3',
-    description: 'RICH Guide',
+    description: t.guide,
     icon: <FileSearchOutlined />,
   },
   {
     key: '4',
-    description: 'Installation Introduction',
+    description: t.tutorial,
     icon: <AppstoreAddOutlined />,
   },
 ];
@@ -256,16 +285,14 @@ const useStyle = createStyles(({ token, css }) => {
 
 const Independent: React.FC = () => {
   const { styles } = useStyle();
-  const abortController = useRef<AbortController>(null);
+  const streamRef = useRef<any>(null); // 存储 tbox stream 对象
+  const abortControllerRef = useRef<AbortController | null>(null); // 存储 AbortController
 
   // ==================== State ====================
-  const [messageHistory, setMessageHistory] = useState<Record<string, any>>({});
+  const [messageHistory, setMessageHistory] = useState<Record<string, typeof messages>>({});
 
   const [conversations, setConversations] = useState(DEFAULT_CONVERSATIONS_ITEMS);
   const [curConversation, setCurConversation] = useState(DEFAULT_CONVERSATIONS_ITEMS[0].key);
-
-  const [attachmentsOpen, setAttachmentsOpen] = useState(false);
-  const [attachedFiles, setAttachedFiles] = useState<GetProp<typeof Attachments, 'items'>>([]);
 
   const [inputValue, setInputValue] = useState('');
 
@@ -274,15 +301,64 @@ const Independent: React.FC = () => {
    */
 
   // ==================== Runtime ====================
-  const [agent] = useXAgent<BubbleDataType>({
-    baseURL: 'https://api.x.ant.design/api/llm_siliconflow_deepSeek-r1-distill-1wen-7b',
-    model: 'DeepSeek-R1-Distill-Qwen-7B',
-    dangerouslyApiKey: 'Bearer sk-xxxxxxxxxxxxxxxxxxxx',
+  const [agent] = useXAgent<BubbleDataType, any, string>({
+    request: async ({ message }, { onUpdate, onSuccess, onError, onStream }) => {
+      const stream = tboxClient.chat({
+        appId: 'your-app-id', // Replace with your app ID
+        query: message.content,
+        userId: 'antd-x',
+      });
+
+      streamRef.current = stream;
+      const abortController = new AbortController();
+      const originalAbort = abortController.abort.bind(abortController);
+      abortController.abort = () => {
+        stream.abort();
+        originalAbort();
+      };
+      onStream?.(abortController);
+
+      const dataArr = [] as string[];
+
+      stream.on('data', (data) => {
+        let parsedPayload: { text?: string } | undefined;
+        try {
+          const payload = (data as any).data?.payload || '{}';
+          parsedPayload = JSON.parse(payload);
+        } catch (e) {
+          console.error('Failed to parse payload:', e);
+          return;
+        }
+
+        if (parsedPayload?.text) {
+          dataArr.push(parsedPayload.text);
+          onUpdate(parsedPayload.text);
+        }
+      });
+
+      stream.on('error', (error) => {
+        onError(error);
+      });
+
+      stream.on('end', () => {
+        onSuccess(dataArr);
+      });
+
+      stream.on('abort', () => {
+        onSuccess(dataArr);
+      });
+    },
   });
   const loading = agent.isRequesting();
 
   const { onRequest, messages, setMessages } = useXChat({
     agent,
+    requestPlaceholder: () => {
+      return {
+        content: t.loadingMessage,
+        role: 'assistant',
+      };
+    },
     requestFallback: (_, { error }) => {
       if (error.name === 'AbortError') {
         return {
@@ -297,38 +373,22 @@ const Independent: React.FC = () => {
     },
     transformMessage: (info) => {
       const { originMessage, chunk } = info || {};
-      let currentContent = '';
-      let currentThink = '';
-      try {
-        if (chunk?.data && !chunk?.data.includes('DONE')) {
-          const message = JSON.parse(chunk?.data);
-          currentThink = message?.choices?.[0]?.delta?.reasoning_content || '';
-          currentContent = message?.choices?.[0]?.delta?.content || '';
-        }
-      } catch (error) {
-        console.error(error);
+      if (!chunk) {
+        return {
+          content: originMessage?.content || '',
+          role: 'assistant',
+        };
       }
 
-      let content = '';
-
-      if (!originMessage?.content && currentThink) {
-        content = `<think>${currentThink}`;
-      } else if (
-        originMessage?.content?.includes('<think>') &&
-        !originMessage?.content.includes('</think>') &&
-        currentContent
-      ) {
-        content = `${originMessage?.content}</think>${currentContent}`;
-      } else {
-        content = `${originMessage?.content || ''}${currentThink}${currentContent}`;
-      }
+      const content = originMessage?.content || '';
       return {
-        content: content,
+        content: content + chunk,
         role: 'assistant',
       };
     },
     resolveAbortController: (controller) => {
-      abortController.current = controller;
+      // 存储传入的 controller，这个已经包装了 stream.abort() 方法
+      abortControllerRef.current = controller;
     },
   });
 
@@ -345,6 +405,10 @@ const Independent: React.FC = () => {
       stream: true,
       message: { role: 'user', content: val },
     });
+  };
+
+  const onFooterButtonClick = () => {
+    message.info(t.demoButtonNoFunction);
   };
 
   // ==================== Nodes ====================
@@ -366,9 +430,7 @@ const Independent: React.FC = () => {
       <Button
         onClick={() => {
           if (agent.isRequesting()) {
-            message.error(
-              'Message is Requesting, you can create a new conversation after request done or abort it right now...',
-            );
+            message.error(t.requestInProgress);
             return;
           }
 
@@ -376,8 +438,8 @@ const Independent: React.FC = () => {
           setConversations([
             {
               key: now,
-              label: `New Conversation ${conversations.length + 1}`,
-              group: 'Today',
+              label: `${t.newConversation} ${conversations.length + 1}`,
+              group: t.today,
             },
             ...conversations,
           ]);
@@ -388,7 +450,7 @@ const Independent: React.FC = () => {
         className={styles.addBtn}
         icon={<PlusOutlined />}
       >
-        New Conversation
+        {t.newConversation}
       </Button>
 
       {/* 🌟 会话管理 */}
@@ -397,7 +459,11 @@ const Independent: React.FC = () => {
         className={styles.conversations}
         activeKey={curConversation}
         onActiveChange={async (val) => {
-          abortController.current?.abort();
+          if (agent.isRequesting()) {
+            message.error(t.requestInProgress);
+            return;
+          }
+          abortControllerRef.current?.abort();
           // The abort execution will trigger an asynchronous requestFallback, which may lead to timing issues.
           // In future versions, the sessionId capability will be added to resolve this problem.
           setTimeout(() => {
@@ -410,12 +476,12 @@ const Independent: React.FC = () => {
         menu={(conversation) => ({
           items: [
             {
-              label: 'Rename',
+              label: t.rename,
               key: 'rename',
               icon: <EditOutlined />,
             },
             {
-              label: 'Delete',
+              label: t.delete,
               key: 'delete',
               icon: <DeleteOutlined />,
               danger: true,
@@ -453,7 +519,7 @@ const Independent: React.FC = () => {
             classNames: {
               content: i.status === 'loading' ? styles.loadingMessage : '',
             },
-            typing: i.status === 'loading' ? { step: 5, interval: 20, suffix: <>💗</> } : false,
+            typing: i.status === 'loading' ? { suffix: <>💗</> } : false,
           }))}
           style={{ height: '100%', paddingInline: 'calc(calc(100% - 700px) /2)' }}
           roles={{
@@ -461,10 +527,30 @@ const Independent: React.FC = () => {
               placement: 'start',
               footer: (
                 <div style={{ display: 'flex' }}>
-                  <Button type="text" size="small" icon={<ReloadOutlined />} />
-                  <Button type="text" size="small" icon={<CopyOutlined />} />
-                  <Button type="text" size="small" icon={<LikeOutlined />} />
-                  <Button type="text" size="small" icon={<DislikeOutlined />} />
+                  <Button
+                    type="text"
+                    size="small"
+                    icon={<ReloadOutlined />}
+                    onClick={onFooterButtonClick}
+                  />
+                  <Button
+                    type="text"
+                    size="small"
+                    icon={<CopyOutlined />}
+                    onClick={onFooterButtonClick}
+                  />
+                  <Button
+                    type="text"
+                    size="small"
+                    icon={<LikeOutlined />}
+                    onClick={onFooterButtonClick}
+                  />
+                  <Button
+                    type="text"
+                    size="small"
+                    icon={<DislikeOutlined />}
+                    onClick={onFooterButtonClick}
+                  />
                 </div>
               ),
               loadingRender: () => <Spin size="small" />,
@@ -482,8 +568,8 @@ const Independent: React.FC = () => {
           <Welcome
             variant="borderless"
             icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
-            title="Hello, I'm Ant Design X"
-            description="Base on Ant Design, AGI product interface solution, create a better intelligent vision~"
+            title={t.helloAntdXTboxAgent}
+            description={t.antdXTboxDescription}
             extra={
               <Space>
                 <Button icon={<ShareAltOutlined />} />
@@ -531,29 +617,6 @@ const Independent: React.FC = () => {
       )}
     </div>
   );
-  const senderHeader = (
-    <Sender.Header
-      title="Upload File"
-      open={attachmentsOpen}
-      onOpenChange={setAttachmentsOpen}
-      styles={{ content: { padding: 0 } }}
-    >
-      <Attachments
-        beforeUpload={() => false}
-        items={attachedFiles}
-        onChange={(info) => setAttachedFiles(info.fileList)}
-        placeholder={(type) =>
-          type === 'drop'
-            ? { title: 'Drop file here' }
-            : {
-              icon: <CloudUploadOutlined />,
-              title: 'Upload files',
-              description: 'Click or drag files to this area to upload',
-            }
-        }
-      />
-    </Sender.Header>
-  );
   const chatSender = (
     <>
       {/* 🌟 提示词 */}
@@ -570,26 +633,17 @@ const Independent: React.FC = () => {
       {/* 🌟 输入框 */}
       <Sender
         value={inputValue}
-        header={senderHeader}
         onSubmit={() => {
           onSubmit(inputValue);
           setInputValue('');
         }}
         onChange={setInputValue}
         onCancel={() => {
-          abortController.current?.abort();
+          abortControllerRef.current?.abort();
         }}
-        prefix={
-          <Button
-            type="text"
-            icon={<PaperClipOutlined style={{ fontSize: 18 }} />}
-            onClick={() => setAttachmentsOpen(!attachmentsOpen)}
-          />
-        }
         loading={loading}
         className={styles.sender}
-        allowSpeech
-        placeholder="Ask or input / use skills"
+        placeholder={t.askMeAnything}
       />
     </>
   );

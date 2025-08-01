@@ -463,15 +463,6 @@ const Copilot = (props: CopilotProps) => {
               />
             }
             onPasteFile={onPasteFile}
-            suffix={(_, info) => {
-              const { SendButton, LoadingButton, SpeechButton } = info.components;
-              return (
-                <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                  <SpeechButton className={styles.speechButton} />
-                  {loading ? <LoadingButton type="default" /> : <SendButton type="primary" />}
-                </div>
-              );
-            }}
           />
         )}
       </Suggestion>

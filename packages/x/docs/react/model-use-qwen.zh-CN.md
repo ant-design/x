@@ -1,9 +1,9 @@
 ---
 group:
   title: 模型接入
+  order: 1
 title: 通义千问
 order: 1
-tag: Updated
 ---
 
 这篇指南将介绍如何在使用 Ant Design X 搭建的应用中接入 Qwen 提供的模型服务。

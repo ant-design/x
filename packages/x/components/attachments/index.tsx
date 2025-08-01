@@ -68,6 +68,7 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
     overflow,
     imageProps,
     disabled,
+    maxCount,
     classNames = {},
     styles = {},
     ...uploadProps
@@ -122,6 +123,7 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
   const mergedUploadProps: UploadProps = {
     ...uploadProps,
     fileList,
+    maxCount,
     onChange: triggerChange,
   };
 

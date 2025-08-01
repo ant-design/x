@@ -1,6 +1,7 @@
 ---
 group:
   title: Other
+  order: 4
 order: 2
 title: dangerouslyApiKey Explanation
 ---

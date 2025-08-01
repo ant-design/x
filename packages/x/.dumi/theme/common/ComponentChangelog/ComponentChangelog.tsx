@@ -1,6 +1,6 @@
 import { BugOutlined } from '@ant-design/icons';
-import { Button, Drawer, Flex, Grid, Popover, Tag, Timeline, Typography } from 'antd';
 import type { TimelineItemProps } from 'antd';
+import { Button, Drawer, Flex, Grid, Popover, Tag, Timeline, Typography } from 'antd';
 import { createStyles } from 'antd-style';
 import React, { cloneElement, isValidElement } from 'react';
 import semver from 'semver';
@@ -302,7 +302,7 @@ const ComponentChangelog: React.FC<Readonly<React.PropsWithChildren>> = (props) 
                   </Popover>
                 )}
               </Button>
-              <Tag className={styles.versionTag} bordered={false} color="blue">
+              <Tag className={styles.versionTag} variant="filled" color="blue">
                 {changelogList[0]?.releaseDate}
               </Tag>
             </Flex>

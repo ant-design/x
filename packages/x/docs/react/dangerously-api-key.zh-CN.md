@@ -1,14 +1,13 @@
 ---
 group:
   title: 其他
+  order: 4
 order: 2
 title: dangerouslyApiKey 说明
 tag: New
 ---
 
-:::warning
-请认真阅读，这很重要 !!! 我们在 `useXAgent` 、 `XRequest` 里提供了 `dangerouslyApiKey` 这里对其做一个详细的说明。
-:::
+:::warning 请认真阅读，这很重要 !!! 我们在 `useXAgent` 、 `XRequest` 里提供了 `dangerouslyApiKey` 这里对其做一个详细的说明。:::
 
 ## 为什么危险 ？
 
