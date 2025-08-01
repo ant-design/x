@@ -2,7 +2,7 @@ import { CheckCircleOutlined, InfoCircleOutlined, LoadingOutlined } from '@ant-d
 import type { ThoughtChainItem } from '@ant-design/x';
 import { Bubble, ThoughtChain } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
-import { Button, Card, Flex } from 'antd';
+import { Avatar, Button, Card, Flex } from 'antd';
 import React from 'react';
 
 function getStatusIcon(status: ThoughtChainItem['status']) {
@@ -86,9 +86,9 @@ const App = () => {
   return (
     <Flex vertical gap="small">
       <Bubble
-        typing={{ step: 50, interval: 150 }}
+        typing={{ effect: 'typing', step: 50, interval: 150 }}
         content={text}
-        messageRender={(content) => (
+        contentRender={(content) => (
           <XMarkdown
             components={{
               thought: (props: { children: string }) => {
@@ -102,8 +102,10 @@ const App = () => {
             {content}
           </XMarkdown>
         )}
-        avatar={{
-          src: 'https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp',
+        components={{
+          avatar: (
+            <Avatar src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp" />
+          ),
         }}
         variant="outlined"
       />

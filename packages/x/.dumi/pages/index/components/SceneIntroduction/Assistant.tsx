@@ -1,19 +1,18 @@
-import { Bubble, Prompts, Welcome, useXAgent, useXChat } from '@ant-design/x';
+import { Bubble, Prompts, useXAgent, useXChat, Welcome } from '@ant-design/x';
+import type { BubbleData } from '@ant-design/x/es/bubble/interface';
+import { Flex, type GetProp, Skeleton } from 'antd';
 import { createStyles } from 'antd-style';
 import React from 'react';
 import useLocale from '../../../../hooks/useLocale';
 import CustomizationProvider, { LOCALES } from '../../common/CustomizationProvider';
 import CustomizationSender from '../../common/CustomizationSender';
 
-import { BubbleDataType } from '@ant-design/x/es/bubble/BubbleList';
-import { Flex, type GetProp, Skeleton } from 'antd';
-
 const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000));
 
-const roles: GetProp<typeof Bubble.List, 'roles'> = {
+const roles: GetProp<typeof Bubble.List, 'role'> = {
   ai: {
     placement: 'start',
-    typing: { step: 5, interval: 20 },
+    typing: { effect: 'typing', step: 5, interval: 20 },
     style: {
       maxWidth: 600,
     },
@@ -47,7 +46,7 @@ const useStyle = createStyles(({ token, css }) => {
       height: 100%;
       width: 350px;
       background: #0000001a;
-   `,
+    `,
     content: css`
       padding: ${token.paddingXL}px;
       flex: 1;
@@ -102,8 +101,6 @@ const useStyle = createStyles(({ token, css }) => {
         line-height: 36px;
         border: none;
         flex: 1;
-
-        
       }
     `,
   };
@@ -136,7 +133,8 @@ const AssistantScene: React.FC = () => {
     requestFallback: 'Mock failed return. Please try again later.',
   });
 
-  const placeholderMessage: BubbleDataType = {
+  const placeholderMessage: BubbleData = {
+    role: '',
     key: 'placeholder',
     variant: 'borderless',
     className: styles.placeholder_bubble,
@@ -153,33 +151,35 @@ const AssistantScene: React.FC = () => {
         description={locale.description_short}
       />
     ),
-    footer: (
-      <Prompts
-        title={locale.help_text}
-        onItemClick={(item) => {
-          onRequest(item.data.description as string);
-        }}
-        vertical
-        items={[
-          {
-            key: '1-1',
-            description: locale.question1,
-          },
-          {
-            key: '1-2',
-            description: locale.question2,
-          },
-          {
-            key: '1-3',
-            description: locale.question3,
-          },
-          {
-            key: '1-4',
-            description: locale.question4,
-          },
-        ]}
-      />
-    ),
+    components: {
+      footer: (
+        <Prompts
+          title={locale.help_text}
+          onItemClick={(item) => {
+            onRequest(item.data.description as string);
+          }}
+          vertical
+          items={[
+            {
+              key: '1-1',
+              description: locale.question1,
+            },
+            {
+              key: '1-2',
+              description: locale.question2,
+            },
+            {
+              key: '1-3',
+              description: locale.question3,
+            },
+            {
+              key: '1-4',
+              description: locale.question4,
+            },
+          ]}
+        />
+      ),
+    },
   };
 
   return (
@@ -193,7 +193,7 @@ const AssistantScene: React.FC = () => {
         <div className={styles.container}>
           <Bubble.List
             className={styles.bubble_list}
-            roles={roles}
+            role={roles}
             items={[
               placeholderMessage,
               ...messages.map(({ id, message, status }) => ({

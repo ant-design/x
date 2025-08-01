@@ -1,8 +1,7 @@
-import { UserOutlined } from '@ant-design/icons';
 import type { BubbleProps } from '@ant-design/x';
 import { Bubble } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
-import { Typography } from 'antd';
+import { Button, Flex, Typography } from 'antd';
 /* eslint-disable react/no-danger */
 import React from 'react';
 
@@ -12,7 +11,7 @@ const text = `
 Link: [Ant Design X](https://x.ant.design)
 `.trim();
 
-const renderMarkdown: BubbleProps['messageRender'] = (content) => {
+const renderMarkdown: BubbleProps['contentRender'] = (content) => {
   return (
     <Typography>
       <XMarkdown content={content} />
@@ -21,30 +20,39 @@ const renderMarkdown: BubbleProps['messageRender'] = (content) => {
 };
 
 const App = () => {
-  const [renderKey, setRenderKey] = React.useState(0);
+  const [index, setIndex] = React.useState(text.length);
+  const timer = React.useRef<any>(-1);
+
+  const renderStream = () => {
+    if (index >= text.length) {
+      clearTimeout(timer.current);
+      return;
+    }
+    timer.current = setTimeout(() => {
+      setIndex((prev) => prev + 1);
+      renderStream();
+    }, 20);
+  };
 
   React.useEffect(() => {
-    const id = setTimeout(
-      () => {
-        setRenderKey((prev) => prev + 1);
-      },
-      text.length * 100 + 2000,
-    );
-
+    if (index === text.length) return;
+    renderStream();
     return () => {
-      clearTimeout(id);
+      clearTimeout(timer.current);
     };
-  }, [renderKey]);
+  }, [index]);
 
   return (
-    <div style={{ height: 100 }} key={renderKey}>
-      <Bubble
-        typing
-        content={text}
-        messageRender={renderMarkdown}
-        avatar={{ icon: <UserOutlined /> }}
-      />
-    </div>
+    <Flex vertical style={{ height: 150 }} gap={16}>
+      <Flex>
+        <Button type="primary" onClick={() => setIndex(1)}>
+          rerender
+        </Button>
+      </Flex>
+      <Flex>
+        <Bubble content={text.slice(0, index)} contentRender={renderMarkdown} />
+      </Flex>
+    </Flex>
   );
 };
 

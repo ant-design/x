@@ -26,14 +26,20 @@ type YourMessageType = {
   content: string;
 };
 
-const roles: GetProp<typeof Bubble.List, 'roles'> = {
+const roles: GetProp<typeof Bubble.List, 'role'> = {
   assistant: {
     placement: 'start',
-    avatar: { icon: <UserOutlined />, style: { background: '#fde3cf' } },
+    styles: { avatar: { background: '#fde3cf' } },
+    components: {
+      avatar: <UserOutlined />,
+    },
   },
   user: {
     placement: 'end',
-    avatar: { icon: <UserOutlined />, style: { background: '#87d068' } },
+    styles: { avatar: { background: '#87d068' } },
+    components: {
+      avatar: <UserOutlined />,
+    },
   },
 };
 
@@ -107,7 +113,7 @@ const App = () => {
   return (
     <Flex vertical gap="middle">
       <Bubble.List
-        roles={roles}
+        role={roles}
         style={{ maxHeight: 300 }}
         items={messages.map(({ id, message }) => ({
           key: id,

@@ -5,7 +5,7 @@ exports[`renders components/use-x-chat/demo/basic.tsx correctly 1`] = `
   class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-bubble-list css-var-«R0» ant-bubble-list-reach-end"
+    class="ant-bubble-list css-var-«R0» ant-bubble-list-autoscroll"
     style="max-height:300px"
   />
   <div
@@ -64,7 +64,7 @@ exports[`renders components/use-x-chat/demo/model.tsx correctly 1`] = `
   class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-bubble-list css-var-«R0» ant-bubble-list-reach-end"
+    class="ant-bubble-list css-var-«R0» ant-bubble-list-autoscroll"
     style="max-height:300px"
   />
   <div
@@ -123,7 +123,7 @@ exports[`renders components/use-x-chat/demo/stream.tsx correctly 1`] = `
   class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-bubble-list css-var-«R0» ant-bubble-list-reach-end"
+    class="ant-bubble-list css-var-«R0» ant-bubble-list-autoscroll"
     style="max-height:300px"
   />
   <div
@@ -182,17 +182,20 @@ exports[`renders components/use-x-chat/demo/suggestions.tsx correctly 1`] = `
   class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-bubble-list css-var-«R0» ant-bubble-list-reach-end"
+    class="ant-bubble-list css-var-«R0» ant-bubble-list-autoscroll"
     style="max-height:300px"
   >
     <div
       class="ant-bubble css-var-«R0» ant-bubble-start"
-      role="ai"
     >
       <div
-        class="ant-bubble-content ant-bubble-content-filled"
+        class="ant-bubble-body"
       >
-        Hello, what can I do for you?
+        <div
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+        >
+          Hello, what can I do for you?
+        </div>
       </div>
     </div>
   </div>

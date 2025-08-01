@@ -1,9 +1,9 @@
 import { UserOutlined } from '@ant-design/icons';
 import { Bubble, Sender, Think, useXAgent, useXChat } from '@ant-design/x';
-import { RolesType } from '@ant-design/x/es/bubble/BubbleList';
 import XMarkdown from '@ant-design/x-markdown';
 import React from 'react';
 import '@ant-design/x-markdown/themes/light.css';
+import { BubbleListProps } from '@ant-design/x/es/bubble';
 
 const fullContent = `
 <think>Deep thinking is a systematic and structured cognitive approach that requires individuals to move beyond intuition and superficial information, delving into the essence of a problem and its underlying principles through logical analysis, multi-perspective examination, and persistent inquiry. Unlike quick reactions or heuristic judgments, deep thinking emphasizes ​slow thinking, actively engaging knowledge reserves, critical thinking, and creativity to uncover deeper connections and meanings.
@@ -16,14 +16,20 @@ This mode of thinking helps individuals avoid cognitive biases in complex scenar
 # Hello Deep Thinking\n - Deep thinking is over.\n- You can use the think tag to package your thoughts.
 `;
 
-const roles: RolesType = {
+const roles: BubbleListProps['role'] = {
   ai: {
     placement: 'start',
-    avatar: { icon: <UserOutlined />, style: { background: '#fde3cf' } },
+    styles: { avatar: { background: '#fde3cf' } },
+    components: {
+      avatar: <UserOutlined />,
+    },
   },
   local: {
     placement: 'end',
-    avatar: { icon: <UserOutlined />, style: { background: '#87d068' } },
+    styles: { avatar: { background: '#87d068' } },
+    components: {
+      avatar: <UserOutlined />,
+    },
   },
 };
 
@@ -79,26 +85,26 @@ const App: React.FC = () => {
 
   // Chat messages
   const { onRequest, messages } = useXChat({
-    agent
+    agent,
   });
 
   return (
     <div style={{ minHeight: 500, display: 'flex', flexDirection: 'column' }}>
       <Bubble.List
-        roles={roles}
+        role={roles}
         style={{ flex: 1 }}
         items={messages.map(({ id, message, status }) => ({
           key: id,
           role: status === 'local' ? 'local' : 'ai',
           content: message,
-          messageRender:
+          contentRender:
             status === 'local'
               ? undefined
               : (content) => (
                   <XMarkdown
                     className="x-markdown-light"
                     paragraphTag="div"
-                    content={content}
+                    content={content as string}
                     components={{
                       think: ThinkComponent,
                     }}

@@ -1,19 +1,18 @@
-import { Bubble, Prompts, Welcome, useXAgent, useXChat } from '@ant-design/x';
+import { Bubble, Prompts, useXAgent, useXChat, Welcome } from '@ant-design/x';
+import { BubbleData } from '@ant-design/x/es/bubble';
+import { type GetProp, Tag } from 'antd';
 import { createStyles } from 'antd-style';
 import React from 'react';
 import useLocale from '../../../../hooks/useLocale';
 import CustomizationProvider, { LOCALES } from '../../common/CustomizationProvider';
 import CustomizationSender from '../../common/CustomizationSender';
 
-import { BubbleDataType } from '@ant-design/x/es/bubble/BubbleList';
-import { type GetProp, Tag } from 'antd';
-
 const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000));
 
-const roles: GetProp<typeof Bubble.List, 'roles'> = {
+const roles: GetProp<typeof Bubble.List, 'role'> = {
   ai: {
     placement: 'start',
-    typing: { step: 5, interval: 20 },
+    typing: { effect: 'typing', step: 5, interval: 20 },
     style: {
       maxWidth: 600,
     },
@@ -146,7 +145,8 @@ const IndependentScene: React.FC = () => {
     requestFallback: 'Mock failed return. Please try again later.',
   });
 
-  const placeholderMessage: BubbleDataType = {
+  const placeholderMessage: BubbleData = {
+    role: '',
     key: 'placeholder',
     variant: 'borderless',
     className: styles.placeholder_bubble,
@@ -238,7 +238,7 @@ const IndependentScene: React.FC = () => {
       <div className={styles.container}>
         <Bubble.List
           className={styles.bubble_list}
-          roles={roles}
+          role={roles}
           items={[
             placeholderMessage,
             ...messages.map(({ id, message, status }) => ({

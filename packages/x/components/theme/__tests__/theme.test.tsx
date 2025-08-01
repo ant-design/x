@@ -16,7 +16,7 @@ describe('bubble', () => {
   it('Bubble component work', () => {
     render(
       <StyleProvider cache={createCache()} layer>
-        <Bubble avatar={{}} content="test" />
+        <Bubble content="test" />
       </StyleProvider>,
     );
     expect(document.head.innerHTML).toContain('@layer antd,antdx;');
