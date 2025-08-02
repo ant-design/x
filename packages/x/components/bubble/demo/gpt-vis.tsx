@@ -1,4 +1,3 @@
-import type { BubbleProps } from '@ant-design/x';
 import { Bubble } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
 import { Line, LineProps } from '@antv/gpt-vis';
@@ -19,17 +18,15 @@ const LineCompt = (props: LineProps) => {
   return <Line data={JSON.parse(data || '')} axisXTitle={axisXTitle} axisYTitle={axisYTitle} />;
 };
 
-const RenderMarkdown: BubbleProps['contentRender'] = (content) => (
-  <XMarkdown components={{ line: LineCompt }}>{content}</XMarkdown>
-);
-
 const App = () => {
   const [index, setIndex] = React.useState(text.length);
+  const [hasNextChunk, setHasNextChunk] = React.useState(false);
   const timer = React.useRef<any>(-1);
 
   const renderStream = () => {
     if (index >= text.length) {
       clearTimeout(timer.current);
+      setHasNextChunk(false);
       return;
     }
     timer.current = setTimeout(() => {
@@ -40,6 +37,7 @@ const App = () => {
 
   React.useEffect(() => {
     if (index === text.length) return;
+    setHasNextChunk(true);
     renderStream();
     return () => {
       clearTimeout(timer.current);
@@ -52,7 +50,15 @@ const App = () => {
         Re-Render
       </Button>
 
-      <Bubble content={text.slice(0, index)} contentRender={RenderMarkdown} variant="outlined" />
+      <Bubble
+        content={text.slice(0, index)}
+        contentRender={(content) => (
+          <XMarkdown components={{ line: LineCompt }} streaming={{ hasNextChunk }}>
+            {content}
+          </XMarkdown>
+        )}
+        variant="outlined"
+      />
     </Flex>
   );
 };
