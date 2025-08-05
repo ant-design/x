@@ -32,7 +32,6 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
     onKeyDown,
     onPaste,
     onPasteFile,
-    loading,
     disabled,
     readOnly,
     submitType = 'enter',

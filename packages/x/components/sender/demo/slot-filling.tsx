@@ -32,10 +32,10 @@ const initialSlotConfig: SlotConfig = [
     props: {
       defaultValue: [20, 50],
     },
-    customRender: (value: any, onChange: (value: any) => void) => {
+    customRender: (value: any, onChange: (value: any) => void, props) => {
       return (
         <div style={{ width: '100px' }}>
-          <Slider style={{ margin: 0 }} range value={value} onChange={onChange} />
+          <Slider  {...props} style={{ margin: 0 }} range value={value} onChange={onChange} />
         </div>
       );
     },
