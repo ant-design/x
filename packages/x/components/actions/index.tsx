@@ -5,6 +5,7 @@ import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 import ActionsFeedback from './ActionsFeedback';
+import ActionsCopy from './ActionsCopy';
 import { ActionsContext } from './context';
 import Item from './Item';
 import type { ActionsProps } from './interface';
@@ -109,6 +110,7 @@ const ForwardActions = React.forwardRef<ActionsRef, ActionsProps>((props, ref) =
 
 type CompoundedActions = typeof ForwardActions & {
   Feedback: typeof ActionsFeedback;
+  Copy: typeof ActionsCopy;
 };
 
 const Actions = ForwardActions as CompoundedActions;
@@ -118,5 +120,6 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 Actions.Feedback = ActionsFeedback;
+Actions.Copy = ActionsCopy;
 
 export default Actions;

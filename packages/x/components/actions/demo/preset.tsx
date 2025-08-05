@@ -100,12 +100,9 @@ const App: React.FC = () => {
       key: 'copy',
       label: 'copy',
       icon: <CopyOutlined />,
-      onItemClick: () => {
-        navigator.clipboard
-          .writeText('This is a text to be copied')
-          .then(() => message.success('Copied successfully'))
-          .catch(() => message.error('Copy failed'));
-      },
+      actionRender: ()=>{
+        return <Actions.Copy></Actions.Copy>
+      }
     },
     {
       key: 'read',
