@@ -10,6 +10,7 @@ import {
   BubbleRef,
   BubbleSlot,
   BubbleSlotType,
+  EditableBubbleOption,
 } from './interface';
 import Loading from './loading';
 import useBubbleStyle from './style';
@@ -33,12 +34,13 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
     variant = 'filled',
     shape = 'default',
     components,
-    footerPlacement = 'outer-start',
+    footerPlacement,
     loading,
     loadingRender,
     onTyping,
     onTypingComplete,
-    onEditing,
+    onEditConfirm,
+    onEditCancle,
     ...restProps
   },
   ref,
@@ -105,12 +107,14 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
     content && onTypingComplete?.(content);
   }, [memoedContent, usingInnerAnimation, streaming]);
   // ============================= render ==============================
+  const _footerPlacement: BubbleProps['footerPlacement'] =
+    footerPlacement || (placement === 'start' ? 'outer-start' : 'outer-end');
+
+  const isEditing = typeof editable === 'boolean' ? editable : editable.editing;
 
   const renderContent = () => {
     if (loading) return loadingRender ? loadingRender() : <Loading prefixCls={prefixCls} />;
-    const _content = editable ? (
-      <EditableContent content={content} onEditing={onEditing} />
-    ) : (
+    const _content = (
       <>
         {usingInnerAnimation ? (
           <TypingContent
@@ -131,7 +135,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
           : null}
       </>
     );
-    const isFooterIn = footerPlacement.includes('inner');
+    const isFooterIn = _footerPlacement.includes('inner');
     return (
       <div className={getSlotClassName('body')} style={getSlotStyle('body')}>
         {renderHeader()}
@@ -147,18 +151,31 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
             contextConfig.classNames.content,
             classNames.content,
             {
-              [`${prefixCls}-content-editing`]: editable,
+              [`${prefixCls}-content-editing`]: isEditing,
             },
           )}
         >
-          {isFooterIn ? (
-            <div className={classnames(`${prefixCls}-content-with-footer`)}>{_content}</div>
+          {isEditing ? (
+            <EditableContent
+              prefixCls={prefixCls}
+              content={content}
+              okText={(editable as EditableBubbleOption)?.okText}
+              cancelText={(editable as EditableBubbleOption)?.cancelText}
+              onEditConfirm={onEditConfirm}
+              onEditCancle={onEditCancle}
+            />
           ) : (
-            _content
+            <>
+              {isFooterIn ? (
+                <div className={classnames(`${prefixCls}-content-with-footer`)}>{_content}</div>
+              ) : (
+                _content
+              )}
+              {isFooterIn && renderFooter()}
+            </>
           )}
-          {isFooterIn && renderFooter()}
         </div>
-        {!isFooterIn && renderFooter()}
+        {!isEditing && !isFooterIn && renderFooter()}
       </div>
     );
   };
@@ -208,8 +225,8 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
   const renderFooter = () => {
     if (!components?.footer) return null;
     const cls = classnames(getSlotClassName('footer'), {
-      [`${prefixCls}-footer-start`]: footerPlacement.includes('start'),
-      [`${prefixCls}-footer-end`]: footerPlacement.includes('end'),
+      [`${prefixCls}-footer-start`]: _footerPlacement.includes('start'),
+      [`${prefixCls}-footer-end`]: _footerPlacement.includes('end'),
     });
     return (
       <div className={cls} style={getSlotStyle('footer')}>
@@ -222,7 +239,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
     <div className={rootMergedCls} style={rootMergedStyle} {...restProps} ref={rootDiv}>
       {renderAvatar()}
       {renderContent()}
-      {!loading && renderExtra()}
+      {!isEditing && !loading && renderExtra()}
     </div>
   );
 };

@@ -4,13 +4,13 @@ import { useTyping } from './hooks/useTyping';
 import { BubbleAnimationOption, BubbleProps } from './interface';
 
 export const TypingContent: React.FC<{
-  prefixCls?: string;
+  prefixCls: string;
   streaming: boolean;
   content: string;
   typing: true | BubbleAnimationOption;
   onTyping?: BubbleProps['onTyping'];
   onTypingComplete?: BubbleProps['onTypingComplete'];
-}> = ({ prefixCls = '', streaming, content, typing, onTyping, onTypingComplete }) => {
+}> = ({ prefixCls, streaming, content, typing, onTyping, onTypingComplete }) => {
   const { renderedData, animating, memoedAnimationCfg } = useTyping({
     streaming,
     content,

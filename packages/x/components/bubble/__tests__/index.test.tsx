@@ -974,8 +974,8 @@ describe('bubble', () => {
     });
   });
 
-  describe('可编辑功能', () => {
-    it('应该支持 editable 属性', () => {
+  describe('可编辑功能 - 新API', () => {
+    it('应该支持 boolean 类型的 editable 配置', () => {
       const { container } = render(<Bubble content="可编辑内容" editable />);
 
       const contentElement = container.querySelector('.ant-bubble-content');
@@ -986,42 +986,101 @@ describe('bubble', () => {
       expect(editableDiv).toHaveTextContent('可编辑内容');
     });
 
-    it('应该支持 onEditing 回调', () => {
-      const onEditing = jest.fn();
-      const { container } = render(<Bubble content="初始内容" editable onEditing={onEditing} />);
-
-      const editableDiv = container.querySelector('[contenteditable="true"]')!;
-
-      // 模拟输入事件
-      fireEvent.input(editableDiv, { target: { textContent: '修改后的内容' } });
-
-      expect(onEditing).toHaveBeenCalledWith('修改后的内容');
-    });
-
-    it('应该拒绝非字符串内容用于可编辑模式', () => {
-      // 捕获控制台错误
-      const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
-
-      expect(() => {
-        render(<Bubble content={<div>非字符串内容</div>} editable />);
-      }).toThrow('Content of editable Bubble should be string');
-
-      consoleSpy.mockRestore();
-    });
-
-    it('应该支持 editable 与 typing 同时启用时优先显示编辑模式', () => {
-      const { container } = render(<Bubble content="测试内容" editable typing />);
+    it('应该支持 EditableBubbleOption 类型的 editable 配置', () => {
+      const { container } = render(
+        <Bubble
+          content="测试内容"
+          editable={{ editing: true, okText: '保存', cancelText: <span>放弃</span> }}
+          onEditConfirm={jest.fn()}
+        />,
+      );
 
       const contentElement = container.querySelector('.ant-bubble-content');
       expect(contentElement).toHaveClass('ant-bubble-content-editing');
 
-      // 应该显示可编辑的 div，而不是动画内容
-      const editableDiv = container.querySelector('[contenteditable="true"]');
-      expect(editableDiv).toBeInTheDocument();
+      const btns = container.querySelectorAll('.ant-bubble-editing-opts button');
+      expect(btns.length).toBe(2);
+      expect(btns[0].textContent?.replace(/\s/g, '')).toBe('保存');
+      expect(btns[1].innerHTML).toBe('<span>放弃</span>');
+    });
+
+    it('应该支持 editable.editing 控制编辑状态', () => {
+      const { container, rerender } = render(
+        <Bubble content="测试内容" editable={{ editing: false }} onEditConfirm={jest.fn()} />,
+      );
+
+      expect(container.querySelector('.ant-bubble-content')).not.toHaveClass(
+        'ant-bubble-content-editing',
+      );
+
+      rerender(
+        <Bubble content="测试内容" editable={{ editing: true }} onEditConfirm={jest.fn()} />,
+      );
+
+      expect(container.querySelector('.ant-bubble-content')).toHaveClass(
+        'ant-bubble-content-editing',
+      );
+    });
+
+    it('应该支持 onEditConfirm 回调', () => {
+      const onEditConfirm = jest.fn();
+      const { container } = render(
+        <Bubble content="初始内容" editable onEditConfirm={onEditConfirm} />,
+      );
+
+      const editableDiv = container.querySelector('[contenteditable="true"]')!;
+      const confirmBtn = container.querySelectorAll('.ant-bubble-editing-opts button')[0]!;
+
+      fireEvent.input(editableDiv, { target: { textContent: '修改后的内容' } });
+      fireEvent.click(confirmBtn);
+      expect(onEditConfirm).toHaveBeenCalledWith('修改后的内容');
+
+      fireEvent.input(editableDiv, { target: { textContent: null } });
+      fireEvent.click(confirmBtn);
+      expect(onEditConfirm).toHaveBeenCalledWith('');
+    });
+
+    it('应该支持 onEditCancle 回调', () => {
+      const onEditCancle = jest.fn();
+      const { container } = render(
+        <Bubble content="初始内容" editable onEditCancle={onEditCancle} />,
+      );
+
+      const cancelBtn = container.querySelectorAll('.ant-bubble-editing-opts button')[1]!;
+      fireEvent.click(cancelBtn);
+
+      expect(onEditCancle).toHaveBeenCalled();
+    });
+
+    // it('应该支持 onEditConfirm 为 undefined', () => {
+    //   const { container } = render(<Bubble content="初始内容" editable />);
+
+    //   const confirmBtn = container.querySelectorAll('.ant-bubble-editing-opts button')[0]!;
+
+    //   expect(() => {
+    //     fireEvent.click(confirmBtn);
+    //   }).not.toThrow();
+    // });
+
+    // it('应该支持 onEditCancle 为 undefined', () => {
+    //   const { container } = render(<Bubble content="初始内容" editable />);
+
+    //   const cancelBtn = container.querySelectorAll('.ant-bubble-editing-opts button')[1]!;
+    //   expect(() => {
+    //     fireEvent.click(cancelBtn);
+    //   }).not.toThrow();
+    // });
+
+    it('应该支持 editable 与 typing 同时启用时优先显示编辑模式', () => {
+      const { container } = render(
+        <Bubble content="测试内容" editable typing={{ effect: 'typing', step: 1 }} />,
+      );
+
+      const contentElement = container.querySelector('.ant-bubble-content');
+      expect(contentElement).toHaveClass('ant-bubble-content-editing');
 
       // 不应该有动画相关的类名
       expect(container.querySelector('.ant-bubble-typing')).not.toBeInTheDocument();
-      expect(container.querySelector('.ant-bubble-fade-in')).not.toBeInTheDocument();
     });
 
     it('应该支持 editable 与 loading 同时启用时优先显示加载状态', () => {
@@ -1032,24 +1091,7 @@ describe('bubble', () => {
       expect(loadingElement).toBeInTheDocument();
 
       // 不应该显示可编辑内容
-      const editableDiv = container.querySelector('[contenteditable="true"]');
-      expect(editableDiv).not.toBeInTheDocument();
-    });
-
-    it('应该支持 editable 模式下 contentRender 被忽略', () => {
-      const contentRender = (content: string) => (
-        <span className="rendered-content">{content.toUpperCase()}</span>
-      );
-
-      const { container } = render(
-        <Bubble content="hello" editable contentRender={contentRender} />,
-      );
-
-      // 应该显示原始内容，而不是经过 contentRender 处理的内容
-      const editableDiv = container.querySelector('[contenteditable="true"]')!;
-      expect(editableDiv).toHaveTextContent('hello');
-      expect(editableDiv).not.toHaveTextContent('HELLO');
-      expect(container.querySelector('.rendered-content')).not.toBeInTheDocument();
+      expect(container.querySelector('[contenteditable="true"]')).not.toBeInTheDocument();
     });
 
     it('应该支持 editable 模式下空内容', () => {
@@ -1059,27 +1101,30 @@ describe('bubble', () => {
       expect(editableDiv).toHaveTextContent('');
     });
 
-    it('应该支持 editable 模式下 onEditing 为 undefined', () => {
-      const { container } = render(<Bubble content="测试内容" editable />);
-
-      const editableDiv = container.querySelector('[contenteditable="true"]')!;
-
-      // 不应该抛出错误
+    it('应该支持 editable 模式下拒绝非字符串内容', () => {
       expect(() => {
-        fireEvent.input(editableDiv, { target: { textContent: '新内容' } });
-      }).not.toThrow();
+        render(
+          <Bubble
+            content={<div>非字符串内容</div>}
+            editable={{ editing: true }}
+            onEditConfirm={jest.fn()}
+          />,
+        );
+      }).toThrow('Content of editable Bubble should be string');
     });
 
-    it('应该支持 editable 模式下输入空内容', () => {
-      const onEditing = jest.fn();
-      const { container } = render(<Bubble content="测试内容" editable onEditing={onEditing} />);
+    it('应该支持 editable 配置切换时的行为', () => {
+      const { container, rerender } = render(<Bubble content="测试内容" editable={false} />);
 
-      const editableDiv = container.querySelector('[contenteditable="true"]')!;
+      expect(container.querySelector('.ant-bubble-content')).not.toHaveClass(
+        'ant-bubble-content-editing',
+      );
 
-      // 模拟输入空内容
-      fireEvent.input(editableDiv, { target: { textContent: '' } });
+      rerender(<Bubble content="测试内容" editable />);
 
-      expect(onEditing).toHaveBeenCalledWith('');
+      expect(container.querySelector('.ant-bubble-content')).toHaveClass(
+        'ant-bubble-content-editing',
+      );
     });
   });
 

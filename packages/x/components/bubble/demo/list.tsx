@@ -89,7 +89,6 @@ const App = () => {
       user: (data) => ({
         placement: 'end',
         typing: false,
-        footerPlacement: 'outer-end',
         components: {
           header: `User-${data.key}`,
           avatar: () => <Avatar icon={<UserOutlined />} />,
@@ -108,9 +107,12 @@ const App = () => {
             />
           ),
         },
-        onEditing: (content) => {
+        onEditConfirm: (content) => {
           console.log(`editing User-${data.key}: `, content);
-          update(data.key, { content });
+          update(data.key, { content, editable: false });
+        },
+        onEditCancle: () => {
+          update(data.key, { editable: false });
         },
       }),
       divider: {
@@ -134,6 +136,7 @@ const App = () => {
     }),
     [],
   );
+
   return (
     <Flex vertical gap="small">
       <Flex gap="small" justify="space-between">

@@ -137,6 +137,10 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
         [`& ${componentCls}-header`]: {
           flexDirection: 'row-reverse',
         },
+
+        [`& ${componentCls}-editing-opts`]: {
+          flexDirection: 'row-reverse',
+        },
       },
     },
   };
