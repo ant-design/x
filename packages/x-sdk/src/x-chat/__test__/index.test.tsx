@@ -6,6 +6,7 @@ import { DefaultChatProvider } from '../providers';
 
 interface ChatInput {
   query: string;
+  [PropertyKey: string]: any;
 }
 
 describe('useXChat', () => {
@@ -68,7 +69,7 @@ describe('useXChat', () => {
   }
 
   it('defaultMessages', () => {
-    const provider = new DefaultChatProvider({
+    const provider = new DefaultChatProvider<string, any, any>({
       request: XRequest('http://localhost:8000/', {
         manual: true,
       }),
@@ -95,7 +96,7 @@ describe('useXChat', () => {
 
   describe('requestPlaceholder', () => {
     it('static', () => {
-      const provider = new DefaultChatProvider({
+      const provider = new DefaultChatProvider<ChatInput, any, any>({
         request: XRequest('http://localhost:8000/', {
           manual: true,
           fetch: async () => {
@@ -116,7 +117,7 @@ describe('useXChat', () => {
     it('callback', () => {
       const requestPlaceholder = jest.fn(() => 'light');
       const transformStream = new TransformStream();
-      const provider = new DefaultChatProvider({
+      const provider = new DefaultChatProvider<ChatInput, any, any>({
         request: XRequest('http://localhost:8000/', {
           manual: true,
           transformStream: transformStream,
@@ -148,7 +149,7 @@ describe('useXChat', () => {
 
   describe('requestFallback', () => {
     it('static', async () => {
-      const provider = new DefaultChatProvider({
+      const provider = new DefaultChatProvider<ChatInput, any, any>({
         request: XRequest('http://localhost:8000/', {
           manual: true,
           fetch: async () => {
@@ -167,7 +168,7 @@ describe('useXChat', () => {
     });
 
     it('callback', async () => {
-      const provider = new DefaultChatProvider({
+      const provider = new DefaultChatProvider<ChatInput, any, any>({
         request: XRequest('http://localhost:8000/', {
           manual: true,
           fetch: async () => {
@@ -198,7 +199,7 @@ describe('useXChat', () => {
   });
 
   it('parser return multiple messages', async () => {
-    const provider = new DefaultChatProvider({
+    const provider = new DefaultChatProvider<ChatInput, any, any>({
       request: XRequest('http://localhost:8000/', {
         manual: true,
       }),
@@ -238,7 +239,7 @@ describe('useXChat', () => {
 
   it('should setMessage work successfully', async () => {
     const { result } = renderHook(() =>
-      useXChat({
+      useXChat<string, ChatInput, any, any>({
         defaultMessages: [{ message: 'Hello' }],
       }),
     );
@@ -251,7 +252,7 @@ describe('useXChat', () => {
 
   it('should reload work successfully', async () => {
     let count = 0;
-    const provider = new DefaultChatProvider({
+    const provider = new DefaultChatProvider<ChatInput, any, any>({
       request: XRequest('http://localhost:8000/', {
         manual: true,
         fetch: async () => {
