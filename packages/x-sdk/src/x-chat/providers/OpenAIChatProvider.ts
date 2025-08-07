@@ -30,10 +30,19 @@ export default class OpenAIChatProvider<
   transformMessage(info: TransformMessage<ChatMessage, Output>): ChatMessage {
     const { originMessage, chunk } = info;
     let currentContent = '';
+    let role = 'assistant';
     try {
       if (chunk && chunk.data !== '[DONE]') {
         const message = JSON.parse(chunk.data);
-        currentContent = message?.choices?.[0]?.delta?.content || '';
+        message?.choices?.forEach((choice: any) => {
+          if (choice?.delta) {
+            currentContent += choice.delta.content || '';
+            role = choice.delta.role || 'assistant';
+          } else if (choice?.message) {
+            currentContent += choice.message.content || '';
+            role = choice.message.role || 'assistant';
+          }
+        });
       }
     } catch (error) {
       console.error(error);
@@ -42,8 +51,8 @@ export default class OpenAIChatProvider<
     const content = `${originMessage?.content || ''}${currentContent}`;
 
     return {
-      content: content,
-      role: 'assistant',
+      content,
+      role,
     } as ChatMessage;
   }
 }

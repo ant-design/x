@@ -31,7 +31,7 @@ export interface XChatConfig<
   Input = ChatMessage,
   Output = ChatMessage,
 > {
-  provider: AbstractChatProvider<ChatMessage, Input, Output>;
+  provider?: AbstractChatProvider<ChatMessage, Input, Output>;
   conversationKey?: ConversationData['key'];
   defaultMessages?: DefaultMessageInfo<ChatMessage>[];
   /** Convert agent message to bubble usage message type */
@@ -74,9 +74,6 @@ export default function useXChat<
 >(config: XChatConfig<ChatMessage, ParsedMessage, Input, Output>) {
   const { defaultMessages, requestFallback, requestPlaceholder, parser, provider } = config;
 
-  if (!provider) {
-    throw new Error('provider is required');
-  }
   // ========================= Agent Messages =========================
   const idRef = React.useRef(0);
   const requestHandlerRef = React.useRef<XRequestClass<Input, Output>>(undefined);
@@ -146,7 +143,7 @@ export default function useXChat<
       .filter((info) => info.status !== 'loading' && info.status !== 'error')
       .map((info) => info.message);
 
-  provider.injectGetMessages(() => {
+  provider?.injectGetMessages(() => {
     return getFilteredMessages(getMessages());
   });
   // For agent to use. Will filter out loading and error message
@@ -159,6 +156,9 @@ export default function useXChat<
       reload: boolean;
     },
   ) => {
+    if (!provider) {
+      return;
+    }
     const { updatingId, reload } = opts || {};
     let loadingMsgId: number | string | null | undefined = null;
     const message = provider.transformLocalMessage(requestParams);
@@ -296,10 +296,16 @@ export default function useXChat<
   };
 
   const onRequest = useEvent((requestParams: Partial<Input>) => {
+    if (!provider) {
+      throw new Error('provider is required');
+    }
     innerOnRequest(requestParams);
   });
 
-  const onReload = async (id: string | number, requestParams: Partial<Input>) => {
+  const onReload = (id: string | number, requestParams: Partial<Input>) => {
+    if (!provider) {
+      throw new Error('provider is required');
+    }
     if (!id || !getMessages().find((info) => info.id === id)) {
       console.error(`message [${id}] is not found`);
       return;
@@ -317,9 +323,15 @@ export default function useXChat<
     setMessages,
     setMessage,
     abort: () => {
+      if (!provider) {
+        throw new Error('provider is required');
+      }
       requestHandlerRef.current?.abort();
     },
     isRequesting: () => {
+      if (!provider) {
+        throw new Error('provider is required');
+      }
       return requestHandlerRef.current?.isRequesting;
     },
     onReload,
