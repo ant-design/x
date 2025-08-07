@@ -51,6 +51,7 @@ type useXAgent<AgentMessage> = (
 | 属性    | 说明                         | 类型      | 默认值 | 版本 |
 | ------- | ---------------------------- | --------- | ------ | ---- |
 | request | 配置自定义请求，支持流式更新 | RequestFn |        |      |
+| refreshDeps | Agent 实例更新的依赖列表，使用场景详见 [#536](https://github.com/ant-design/x/issues/536)。 | any[] |        |      |
 
 #### RequestFn
 

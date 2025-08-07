@@ -26,6 +26,7 @@ export interface XAgentConfigPreset {
 }
 export interface XAgentConfigCustom<Message, Input, Output> {
   request?: RequestFn<Message, Input, Output>;
+  refreshDeps?: any[];
 }
 
 export type XAgentConfig<Message, Input, Output> = Partial<XAgentConfigPreset> &
@@ -97,7 +98,7 @@ export default function useXAgent<
   Input = RequestFnInfo<Message>,
   Output = SSEOutput,
 >(config: XAgentConfig<Message, Input, Output>) {
-  const { request, ...restConfig } = config;
+  const { request, refreshDeps = [], ...restConfig } = config;
 
   return React.useMemo(
     () =>
@@ -113,6 +114,6 @@ export default function useXAgent<
           ...restConfig,
         }),
       ] as const,
-    [config?.baseURL, config?.dangerouslyApiKey, config?.model],
+    [config?.baseURL, config?.dangerouslyApiKey, config?.model, ...refreshDeps],
   );
 }
