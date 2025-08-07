@@ -7,6 +7,15 @@ import React, { useRef, useState } from 'react';
 
 const { Paragraph } = Typography;
 
+interface ChatInput {
+  model: string;
+  messages: {
+    role: 'user' | 'assistant';
+    content: string;
+  }[];
+  stream: boolean;
+}
+
 /**
  * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
  */
@@ -25,13 +34,13 @@ const App = () => {
   const [lines, setLines] = useState<Record<string, string>[]>([]);
   const [questionText, setQuestionText] = useState<string>('hello, who are u?');
 
-  const requestHandlerRef = useRef<XRequestClass>(null);
+  const requestHandlerRef = useRef<XRequestClass<ChatInput, Record<string, string>>>(null);
 
   function request() {
     setStatus('pending');
     setLines([]);
 
-    const requestHandler = XRequest(BASE_URL, {
+    const requestHandler = XRequest<ChatInput, Record<string, string>>(BASE_URL, {
       params: {
         model: MODEL,
         messages: [{ role: 'user', content: questionText }],
