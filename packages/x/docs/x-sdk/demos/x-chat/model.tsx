@@ -1,8 +1,13 @@
-import { UserOutlined } from '@ant-design/icons';
+import { SyncOutlined, UserOutlined } from '@ant-design/icons';
 import { Bubble, Sender } from '@ant-design/x';
-import { OpenAIChatProvider, useXChat, XModel } from '@ant-design/x-sdk';
-import { XModelParams, XModelResponse } from '@ant-design/x-sdk/es/x-model';
-import { Flex, type GetProp } from 'antd';
+import {
+  OpenAIChatProvider,
+  useXChat,
+  XModel,
+  XModelParams,
+  XModelResponse,
+} from '@ant-design/x-sdk';
+import { Button, Flex, type GetProp, Tooltip } from 'antd';
 import React from 'react';
 
 /**
@@ -42,7 +47,7 @@ const App = () => {
     }),
   );
   // Chat messages
-  const { onRequest, messages, isRequesting, abort } = useXChat({
+  const { onRequest, messages, isRequesting, abort, onReload } = useXChat({
     provider,
     requestFallback: (_, { error }) => {
       if (error.name === 'AbortError') {
@@ -72,6 +77,21 @@ const App = () => {
           key: id,
           role: message.role,
           content: message.content,
+          footer: (
+            <Tooltip title="重新生成">
+              <Button
+                size="small"
+                type="text"
+                icon={<SyncOutlined />}
+                style={{ marginInlineEnd: 'auto' }}
+                onClick={() =>
+                  onReload(id, {
+                    userAction: 'retry',
+                  })
+                }
+              />
+            </Tooltip>
+          ),
         }))}
       />
       <Sender
@@ -83,8 +103,12 @@ const App = () => {
         onChange={setContent}
         onSubmit={(nextContent) => {
           onRequest({
-            role: 'user',
-            content: nextContent,
+            messages: [
+              {
+                role: 'user',
+                content: nextContent,
+              },
+            ],
           });
           setContent('');
         }}

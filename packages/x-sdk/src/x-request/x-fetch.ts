@@ -1,26 +1,22 @@
-export interface XFetchMiddlewares {
-  onRequest?: (...ags: Parameters<typeof fetch>) => Promise<Parameters<typeof fetch>>;
+import { XRequestOptions } from '.';
+
+export interface XFetchMiddlewares<Input, Output> {
+  onRequest?: (
+    baseURL: Parameters<typeof fetch>[0],
+    options: XRequestOptions<Input, Output>,
+  ) => Promise<[Parameters<typeof fetch>[0], XRequestOptions<Input, Output>]>;
   onResponse?: (response: Response) => Promise<Response>;
 }
 
-export interface XFetchOptions extends RequestInit {
-  /**
-   * @description A typeof fetch function
-   * @default globalThis.fetch
-   */
-  fetch?: typeof fetch;
-  /**
-   * @description Middleware for request and response
-   */
-  middlewares?: XFetchMiddlewares;
-}
-
-export type XFetchType = (
+export type XFetchType<Input, Output> = (
   baseURL: Parameters<typeof fetch>[0],
-  options?: XFetchOptions,
+  options?: XRequestOptions<Input, Output>,
 ) => Promise<Response>;
 
-const XFetch: XFetchType = async (baseURL, options = {}) => {
+const XFetch = async <Input, Output>(
+  baseURL: Parameters<typeof fetch>[0],
+  options: XRequestOptions<Input, Output>,
+) => {
   const { fetch: fetchFn = globalThis.fetch, middlewares = {}, ...requestInit } = options;
 
   if (typeof fetchFn !== 'function') {
@@ -28,7 +24,10 @@ const XFetch: XFetchType = async (baseURL, options = {}) => {
   }
 
   /** ---------------------- request init ---------------------- */
-  let fetchArgs: Parameters<typeof fetch> = [baseURL, requestInit];
+  let fetchArgs: [Parameters<typeof fetch>[0], XRequestOptions<Input, Output>] = [
+    baseURL,
+    requestInit,
+  ];
 
   /** ---------------------- request middleware ---------------------- */
   if (typeof middlewares.onRequest === 'function') {

@@ -3,9 +3,8 @@ group:
   title: 数据流
   order: 2
 title: useXChat
-order: 1
+order: 2
 subtitle: 会话数据
-description:
 demo:
   cols: 1
 cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*22A2Qqn7OrEAAAAAAAAAAAAADgCCAQ/original
@@ -26,11 +25,11 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*lQydTrtLz9YAAA
 
 ```tsx | pure
 type useXChat<
-  AgentMessage,
-  ParsedMessage = AgentMessage,
-  Input = RequestParams<AgentMessage>,
+  ChatMessage extends SimpleType = object,
+  ParsedMessage extends SimpleType = ChatMessage,
+  Input = RequestParams<ChatMessage>,
   Output = SSEOutput,
-> = (config: XChatConfig<AgentMessage, ParsedMessage>) => XChatConfigReturnType;
+> = (config: XChatConfig<ChatMessage, ParsedMessage, Input, Output>) => XChatConfigReturnType;
 ```
 
 ### XChatConfig
@@ -38,28 +37,21 @@ type useXChat<
 <!-- prettier-ignore -->
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| agent | 通过 `useXAgent` 生成的 `agent`，当使用 `onRequest` 方法时, `agent` 参数是必需的。 | XAgent | - | - |
+| provider | 数据提供方，用于将不同结构的数据及请求转换为useXChat能消费的格式，平台内置了`DefaultChatProvider`和`OpenAIChatProvider`，你也可以通过继承`AbstractChatProvider`实现自己的Provider | AbstractChatProvider\<ChatMessage, Input, Output\> | - | - |
 | defaultMessages | 默认展示信息 | { status, message }[] | - | - |
-| parser | 将 AgentMessage 转换成消费使用的 ParsedMessage，不设置时则直接消费 AgentMessage。支持将一条 AgentMessage 转换成多条 ParsedMessage | (message: AgentMessage) => BubbleMessage \| BubbleMessage[] | - | - |
-| requestFallback | 请求失败的兜底信息，不提供则不会展示 | AgentMessage \| () => AgentMessage | - | - |
-| requestPlaceholder | 请求中的占位信息，不提供则不会展示 | AgentMessage \| () => AgentMessage | - | - |
-| transformMessage | 可在更新数据时对`messages`做转换，同时会更新到`messages` | (info: {originMessage?: AgentMessage,chunk: Output,chunks: Output[],status: MessageStatus}) => AgentMessage| - | - |
-| transformStream | 可选的转换函数，用于处理流数据 | `XStreamOptions<Output>['transformStream']` | - | - |
-| resolveAbortController | `AbortController` 控制器，用于控制流状态 | (abortController: AbortController) => void| - | - |
+| parser | 将 ChatMessage 转换成消费使用的 ParsedMessage，不设置时则直接消费 ChatMessage。支持将一条 ChatMessage 转换成多条 ParsedMessage | (message: ChatMessage) => BubbleMessage \| BubbleMessage[] | - | - |
+| requestFallback | 请求失败的兜底信息，不提供则不会展示 | ChatMessage \| () => ChatMessage | - | - |
+| requestPlaceholder | 请求中的占位信息，不提供则不会展示 | ChatMessage \| () => ChatMessage | - | - |
 
 ### XChatConfigReturnType
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- |
-| messages | 当前管理的内容 | AgentMessages[] | - | - |
+| --- | --- | --- | --- | --- | --- |
+| abort | 取消请求 | () => void | - | - |
+| isRequesting | 是否在请求中 | () => boolean | - | - |
+| messages | 当前管理消息列表的内容 | ChatMessage[] | - | - |
 | parsedMessages | 经过 `parser` 转译过的内容 | ParsedMessages[] | - | - |
-| onRequest | 添加一条 Message，并且触发请求，若无`key`为`message`的数据则会将整个数据做为消息处理 | (requestParams: AgentMessage \| RequestParams) => void | - | - |
+| onReload | 重新生成，会发送请求到后台，使用新返回数据更新该条消息 | (id: string \| number, requestParams: Partial\<Input\>) => void | - | - |
+| onRequest | 添加一条 Message，并且触发请求 | (requestParams: Partial\<Input\>) => void | - | - |
 | setMessages | 直接修改 messages，不会触发请求 | (messages: { message, status }[]) => void | - | - |
-
-### RequestParams
-
-继承 [XRequestParams](https://x.ant.design/components/x-request#xrequestparams)。
-
-| 属性    | 说明           | 类型         | 默认值 | 版本 |
-| ------- | -------------- | ------------ | ------ | ---- |
-| message | 当前消息的内容 | AgentMessage | -      | -    |
+| setMessage | 直接修改单条 message，不会触发请求 | (id: string | number, data: { message, status }) => void | - | - |

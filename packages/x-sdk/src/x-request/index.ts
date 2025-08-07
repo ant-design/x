@@ -1,7 +1,7 @@
 import type { AnyObject } from '../_util/type';
 import type { SSEOutput, XReadableStream, XStreamOptions } from '../x-stream';
 import XStream from '../x-stream';
-import type { XFetchMiddlewares, XFetchOptions } from './x-fetch';
+import type { XFetchMiddlewares } from './x-fetch';
 import xFetch from './x-fetch';
 
 export interface XRequestCallbacks<Output> {
@@ -21,7 +21,7 @@ export interface XRequestCallbacks<Output> {
   onUpdate?: (chunk: Output) => void;
 }
 
-export interface XRequestOptions<Input = AnyObject, Output = SSEOutput> {
+export interface XRequestOptions<Input = AnyObject, Output = SSEOutput> extends RequestInit {
   /**
    * @description Callbacks for the request
    */
@@ -45,15 +45,19 @@ export interface XRequestOptions<Input = AnyObject, Output = SSEOutput> {
   /**
    * @description Custom fetch
    */
-  fetch?: XFetchOptions['fetch'];
+  fetch?: (
+    baseURL: Parameters<typeof fetch>[0],
+    options: XRequestOptions<Input, Output>,
+  ) => Promise<Response>;
   /**
    * @description Middlewares for the request and response
    */
-  middlewares?: XFetchMiddlewares;
+  middlewares?: XFetchMiddlewares<Input, Output>;
   /**
    * @description Custom stream transformer, can use to adapt the stream data to the custom format
    */
-  transformStream?: XStreamOptions<Output>['transformStream']
+  transformStream?:
+    | XStreamOptions<Output>['transformStream']
     | ((baseURL: string, responseHeaders: Headers) => XStreamOptions<Output>['transformStream']);
 
   /**
@@ -154,25 +158,30 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> {
     this.abortController.abort();
   }
 
-  private init(extraParams?: Input) {
+  private init(extraParams?: Partial<Input>) {
     this.abortController = new AbortController();
     const {
       callbacks,
-      params = {},
+      params,
       headers = {},
       transformStream,
       fetch,
       timeout,
       streamTimeout,
       middlewares,
+      ...otherOptions
     } = this.options;
-    const requestInit = {
+    const requestInit: XRequestOptions<Input, Output> = {
+      ...otherOptions,
       method: 'POST',
       body: JSON.stringify({
         ...params,
         ...(extraParams || {}),
       }),
-      params,
+      params: {
+        ...params,
+        ...extraParams,
+      } as Input,
       headers: Object.assign({}, globalOptions.headers || {}, headers),
       signal: this.abortController.signal,
       middlewares,
@@ -187,7 +196,7 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> {
     this.startRequest();
     // save and export a async handler to wait for the request to be finished
     // though it is not necessary, but it is useful for some scenarios
-    this._asyncHandler = xFetch(this.baseURL, {
+    this._asyncHandler = xFetch<Input, Output>(this.baseURL, {
       fetch,
       ...requestInit,
     })

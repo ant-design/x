@@ -3,7 +3,7 @@ group:
   title: Data Flow
   order: 2
 title: useXChat
-order: 1
+order: 2
 subtitle: Conversation Data
 description:
 demo:

@@ -31,7 +31,7 @@ export interface XChatConfig<
   Input = ChatMessage,
   Output = ChatMessage,
 > {
-  provider: AbstractChatProvider<ChatMessage, Input, Output>;
+  provider?: AbstractChatProvider<ChatMessage, Input, Output>;
   conversationKey?: ConversationData['key'];
   defaultMessages?: DefaultMessageInfo<ChatMessage>[];
   /** Convert agent message to bubble usage message type */
@@ -74,9 +74,6 @@ export default function useXChat<
 >(config: XChatConfig<ChatMessage, ParsedMessage, Input, Output>) {
   const { defaultMessages, requestFallback, requestPlaceholder, parser, provider } = config;
 
-  if (!provider) {
-    throw new Error('provider is required');
-  }
   // ========================= Agent Messages =========================
   const idRef = React.useRef(0);
   const requestHandlerRef = React.useRef<XRequestClass<Input, Output>>(undefined);
@@ -99,6 +96,20 @@ export default function useXChat<
     idRef.current += 1;
 
     return msg;
+  };
+
+  const setMessage = (id: string, data: { message?: ChatMessage; status?: MessageStatus }) => {
+    setMessages((ori) => {
+      return ori.map((info) => {
+        if (info.id === id) {
+          return {
+            ...info,
+            ...data,
+          };
+        }
+        return info;
+      });
+    });
   };
 
   // ========================= BubbleMessages =========================
@@ -132,47 +143,97 @@ export default function useXChat<
       .filter((info) => info.status !== 'loading' && info.status !== 'error')
       .map((info) => info.message);
 
+  provider?.injectGetMessages(() => {
+    return getFilteredMessages(getMessages());
+  });
   // For agent to use. Will filter out loading and error message
   const getRequestMessages = () => getFilteredMessages(getMessages());
 
-  const onRequest = useEvent((requestParams: Partial<Input>) => {
-    let loadingMsgId: number | string | null = null;
+  const innerOnRequest = (
+    requestParams: Partial<Input>,
+    opts?: {
+      updatingId: number | string;
+      reload: boolean;
+    },
+  ) => {
+    if (!provider) {
+      return;
+    }
+    const { updatingId, reload } = opts || {};
+    let loadingMsgId: number | string | null | undefined = null;
     const message = provider.transformLocalMessage(requestParams);
-    // Add placeholder message
-    setMessages((ori) => {
-      let nextMessages = [...ori, createMessage(message, 'local')];
-      if (requestPlaceholder) {
-        let placeholderMsg: ChatMessage;
-        if (typeof requestPlaceholder === 'function') {
-          // typescript has bug that not get real return type when use `typeof function` check
-          placeholderMsg = (requestPlaceholder as RequestPlaceholderFn<ChatMessage>)(message, {
-            messages: getFilteredMessages(nextMessages),
+    if (reload) {
+      loadingMsgId = updatingId;
+      setMessages((ori) => {
+        const nextMessages = [...ori];
+        if (requestPlaceholder) {
+          let placeholderMsg: ChatMessage;
+          if (typeof requestPlaceholder === 'function') {
+            // typescript has bug that not get real return type when use `typeof function` check
+            placeholderMsg = (requestPlaceholder as RequestPlaceholderFn<ChatMessage>)(message, {
+              messages: getFilteredMessages(nextMessages),
+            });
+          } else {
+            placeholderMsg = requestPlaceholder;
+          }
+          nextMessages.forEach((info) => {
+            if (info.id === updatingId) {
+              info.status = 'loading';
+              info.message = placeholderMsg;
+            }
           });
-        } else {
-          placeholderMsg = requestPlaceholder;
         }
-        const loadingMsg = createMessage(placeholderMsg, 'loading');
-        loadingMsgId = loadingMsg.id;
+        return nextMessages;
+      });
+    } else {
+      // Add placeholder message
+      setMessages((ori) => {
+        let nextMessages = [...ori, createMessage(message, 'local')];
+        if (requestPlaceholder) {
+          let placeholderMsg: ChatMessage;
+          if (typeof requestPlaceholder === 'function') {
+            // typescript has bug that not get real return type when use `typeof function` check
+            placeholderMsg = (requestPlaceholder as RequestPlaceholderFn<ChatMessage>)(message, {
+              messages: getFilteredMessages(nextMessages),
+            });
+          } else {
+            placeholderMsg = requestPlaceholder;
+          }
+          const loadingMsg = createMessage(placeholderMsg, 'loading');
+          loadingMsgId = loadingMsg.id;
 
-        nextMessages = [...nextMessages, loadingMsg];
-      }
+          nextMessages = [...nextMessages, loadingMsg];
+        }
 
-      return nextMessages;
-    });
+        return nextMessages;
+      });
+    }
 
     // Request
-    let updatingMsgId: number | string | null = null;
+    let updatingMsgId: number | string | null | undefined = null;
     const updateMessage = (status: MessageStatus, chunk: Output, chunks: Output[]) => {
       let msg = getMessages().find((info) => info.id === updatingMsgId);
       if (!msg) {
-        // Create if not exist
-        const transformData = provider.transformMessage({ chunk, status, chunks });
-        msg = createMessage(transformData, status);
-        setMessages((ori) => {
-          const oriWithoutPending = ori.filter((info) => info.id !== loadingMsgId);
-          return [...oriWithoutPending, msg!];
-        });
-        updatingMsgId = msg.id;
+        if (reload && updatingId) {
+          msg = getMessages().find((info) => info.id === updatingId);
+          if (msg) {
+            msg.status = status;
+            msg.message = provider.transformMessage({ chunk, status, chunks });
+            setMessages((ori) => {
+              return [...ori];
+            });
+            updatingMsgId = msg.id;
+          }
+        } else {
+          // Create if not exist
+          const transformData = provider.transformMessage({ chunk, status, chunks });
+          msg = createMessage(transformData, status);
+          setMessages((ori) => {
+            const oriWithoutPending = ori.filter((info) => info.id !== loadingMsgId);
+            return [...oriWithoutPending, msg!];
+          });
+          updatingMsgId = msg.id;
+        }
       } else {
         // Update directly
         setMessages((ori) => {
@@ -197,7 +258,7 @@ export default function useXChat<
 
       return msg;
     };
-    provider.inspectRequest({
+    provider.injectRequest({
       onUpdate: (chunk: Output) => {
         updateMessage('loading', chunk, []);
       },
@@ -232,18 +293,47 @@ export default function useXChat<
     });
     requestHandlerRef.current = provider.request;
     provider.request.run(provider.transformParams(requestParams, provider.request.options));
+  };
+
+  const onRequest = useEvent((requestParams: Partial<Input>) => {
+    if (!provider) {
+      throw new Error('provider is required');
+    }
+    innerOnRequest(requestParams);
   });
+
+  const onReload = (id: string | number, requestParams: Partial<Input>) => {
+    if (!provider) {
+      throw new Error('provider is required');
+    }
+    if (!id || !getMessages().find((info) => info.id === id)) {
+      console.error(`message [${id}] is not found`);
+      return;
+    }
+    innerOnRequest(requestParams, {
+      updatingId: id,
+      reload: true,
+    });
+  };
 
   return {
     onRequest,
     messages,
     parsedMessages,
     setMessages,
+    setMessage,
     abort: () => {
+      if (!provider) {
+        throw new Error('provider is required');
+      }
       requestHandlerRef.current?.abort();
     },
     isRequesting: () => {
+      if (!provider) {
+        throw new Error('provider is required');
+      }
       return requestHandlerRef.current?.isRequesting;
     },
+    onReload,
   } as const;
 }

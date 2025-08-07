@@ -12,7 +12,7 @@ describe('xFetch', () => {
     const mockResponse = new Response('{"data": "test"}', { status: 200 });
     (global.fetch as jest.Mock).mockResolvedValue(mockResponse);
 
-    const response = await xFetch(baseURL);
+    const response = await xFetch(baseURL, {});
 
     expect(response).toBe(mockResponse);
     expect(global.fetch).toHaveBeenCalledWith(baseURL, {});
@@ -44,13 +44,13 @@ describe('xFetch', () => {
   it('should throw an error on non-200 status', async () => {
     (global.fetch as jest.Mock).mockResolvedValue(new Response(null, { status: 404 }));
 
-    await expect(xFetch(baseURL)).rejects.toThrow('Fetch failed with status 404');
+    await expect(xFetch(baseURL, {})).rejects.toThrow('Fetch failed with status 404');
   });
 
   it('should throw an error on empty response body', async () => {
     (global.fetch as jest.Mock).mockResolvedValue(new Response(null, { status: 200 }));
 
-    await expect(xFetch(baseURL)).rejects.toThrow('The response body is empty.');
+    await expect(xFetch(baseURL, {})).rejects.toThrow('The response body is empty.');
   });
 
   it('should throw an error if fetch is not a function', async () => {
@@ -63,7 +63,7 @@ describe('xFetch', () => {
     const mockResponse = new Response('{"data": "test"}', { status: 200 });
     (global.fetch as jest.Mock).mockResolvedValue(mockResponse);
 
-    const response = await xFetch(baseURL);
+    const response = await xFetch(baseURL, {});
 
     expect(response).toBe(mockResponse);
     expect(global.fetch).toHaveBeenCalledWith(baseURL, {});

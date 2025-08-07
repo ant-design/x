@@ -1,6 +1,6 @@
 import { UserOutlined } from '@ant-design/icons';
 import { Bubble, Sender } from '@ant-design/x';
-import { DefaultChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';
+import { DefaultChatProvider, useXChat, XRequest, XRequestOptions } from '@ant-design/x-sdk';
 import { Flex, type GetProp } from 'antd';
 import React from 'react';
 
@@ -34,9 +34,12 @@ const App = () => {
     new DefaultChatProvider<string, ChatInput, string>({
       request: XRequest('https://api.example.com/chat', {
         manual: true,
-        fetch: async (_: string | URL | Request, options: RequestInit | undefined) => {
+        fetch: async (
+          _: Parameters<typeof fetch>[0],
+          options: XRequestOptions<ChatInput, string>,
+        ) => {
           await sleep();
-          const params = JSON.parse((options?.body as string) || '{}');
+          const params = options?.params;
           return Promise.resolve(
             new Response(JSON.stringify([`Mock success return. You said: ${params?.query}`]), {
               headers: { 'Content-Type': 'application/json' },

@@ -34,7 +34,7 @@ export class ConversationStore {
 
   constructor(defaultConversations: ConversationData[]) {
     this.setConversations(defaultConversations);
-    this.storeKey = Date.now().toString();
+    this.storeKey = Math.random().toString();
     conversationStoreHelper.set(this.storeKey, this);
   }
 
