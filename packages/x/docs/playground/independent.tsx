@@ -450,23 +450,29 @@ const Independent: React.FC = () => {
         <Bubble.List
           items={messages?.map((i) => ({
             ...i.message,
+            key: i.id,
             classNames: {
               content: i.status === 'loading' ? styles.loadingMessage : '',
             },
-            typing: i.status === 'loading' ? { step: 5, interval: 20, suffix: <>💗</> } : false,
+            typing:
+              i.status === 'loading'
+                ? { effect: 'typing', step: 5, interval: 20, suffix: <>💗</> }
+                : false,
           }))}
           style={{ height: '100%', paddingInline: 'calc(calc(100% - 700px) /2)' }}
-          roles={{
+          role={{
             assistant: {
               placement: 'start',
-              footer: (
-                <div style={{ display: 'flex' }}>
-                  <Button type="text" size="small" icon={<ReloadOutlined />} />
-                  <Button type="text" size="small" icon={<CopyOutlined />} />
-                  <Button type="text" size="small" icon={<LikeOutlined />} />
-                  <Button type="text" size="small" icon={<DislikeOutlined />} />
-                </div>
-              ),
+              components: {
+                footer: (
+                  <div style={{ display: 'flex' }}>
+                    <Button type="text" size="small" icon={<ReloadOutlined />} />
+                    <Button type="text" size="small" icon={<CopyOutlined />} />
+                    <Button type="text" size="small" icon={<LikeOutlined />} />
+                    <Button type="text" size="small" icon={<DislikeOutlined />} />
+                  </div>
+                ),
+              },
               loadingRender: () => <Spin size="small" />,
             },
             user: { placement: 'end' },

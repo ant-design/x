@@ -1,80 +1,62 @@
 import classNames from 'classnames';
-import { useEvent } from 'rc-util';
-import pickAttrs from 'rc-util/lib/pickAttrs';
+import omit from 'rc-util/es/omit';
+import pickAttrs from 'rc-util/es/pickAttrs';
 import * as React from 'react';
 import { useXProviderContext } from '../x-provider';
-import type { BubbleRef } from './Bubble';
-import Bubble, { BubbleContext } from './Bubble';
-import useListData from './hooks/useListData';
-import type { BubbleProps } from './interface';
-import useStyle from './style';
+import Bubble from './Bubble';
+import {
+  BubbleData,
+  BubbleListProps,
+  BubbleListRef,
+  BubbleRef,
+  FuncRoleProps,
+  RoleProps,
+} from './interface';
+import useBubbleListStyle from './style';
 
-export interface BubbleListRef {
-  nativeElement: HTMLDivElement;
-  scrollTo: (info: {
-    offset?: number;
-    key?: string | number;
-    behavior?: ScrollBehavior;
-    block?: ScrollLogicalPosition;
-  }) => void;
+interface BubblesRecord {
+  [key: string]: BubbleRef;
 }
 
-export type BubbleDataType = BubbleProps<any> & {
-  key?: string | number;
-  role?: string;
-};
-
-export type RoleType = Partial<Omit<BubbleProps<any>, 'content'>>;
-
-export type RolesType =
-  | Record<string, RoleType>
-  | ((bubbleDataP: BubbleDataType, index: number) => RoleType);
-
-export interface BubbleListProps extends React.HTMLAttributes<HTMLDivElement> {
-  prefixCls?: string;
-  rootClassName?: string;
-  items?: BubbleDataType[];
-  autoScroll?: boolean;
-  roles?: RolesType;
-  /**
-   * @version 1.5.0
-   */
-  onScroll?: (e: React.UIEvent<HTMLDivElement, UIEvent>) => void;
+function roleCfgIsFunction(roleCfg: RoleProps | FuncRoleProps): roleCfg is FuncRoleProps {
+  return typeof roleCfg === 'function' && roleCfg instanceof Function;
 }
 
-interface BubbleListItemProps extends BubbleProps {
-  _key?: BubbleDataType['key'];
-}
+const MemoedBubble = React.memo(Bubble);
 
-const BubbleListItem: React.ForwardRefRenderFunction<
-  Record<string, BubbleRef>,
-  BubbleListItemProps
-> = ({ _key, ...restProps }, ref) => (
-  <Bubble
-    {...restProps}
-    _key={_key}
-    ref={(node) => {
+const BubbleListItem: React.FC<
+  BubbleData & {
+    bubblesRef: React.RefObject<BubblesRecord>;
+    // BubbleData.key 会在 BubbleList 内渲染时被吞掉，使得 BubbleListItem.props 无法获取到 key
+    _key: string | number;
+  }
+> = (props) => {
+  const { _key, bubblesRef, ...restProps } = props;
+
+  const initBubbleRef = React.useCallback(
+    (node: BubbleRef) => {
       if (node) {
-        (ref as React.RefObject<Record<string, BubbleRef>>).current[_key!] = node;
+        bubblesRef.current[_key] = node;
       } else {
-        delete (ref as React.RefObject<Record<string, BubbleRef>>).current?.[_key!];
+        delete bubblesRef.current[_key];
       }
-    }}
-  />
-);
+    },
+    [_key],
+  );
 
-const MemoBubbleListItem = React.memo(React.forwardRef(BubbleListItem));
-
-const TOLERANCE = 1;
+  return <MemoedBubble ref={initBubbleRef} {...omit(restProps, ['role'])} />;
+};
 
 const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps> = (props, ref) => {
   const {
     prefixCls: customizePrefixCls,
     rootClassName,
     className,
+    rootStyle,
+    style,
     items,
     autoScroll = true,
-    roles,
+    role,
     onScroll,
     ...restProps
   } = props;
@@ -86,7 +68,10 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   // ============================= Refs =============================
   const listRef = React.useRef<HTMLDivElement>(null);
 
-  const bubbleRefs = React.useRef<Record<string, BubbleRef>>({});
+  const bubblesRef = React.useRef<BubblesRecord>({});
+
+  const latestItems = React.useRef(items);
+  latestItems.current = items;
 
   // ============================ Prefix ============================
   const { getPrefixCls } = useXProviderContext();
@@ -94,133 +79,78 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   const prefixCls = getPrefixCls('bubble', customizePrefixCls);
   const listPrefixCls = `${prefixCls}-list`;
 
-  const [hashId, cssVarCls] = useStyle(prefixCls);
+  const [hashId, cssVarCls] = useBubbleListStyle(prefixCls);
 
-  // ============================ Typing ============================
-  const [initialized, setInitialized] = React.useState(false);
-
-  React.useEffect(() => {
-    setInitialized(true);
-    return () => {
-      setInitialized(false);
-    };
-  }, []);
-
-  // ============================= Data =============================
-  const mergedData = useListData(items, roles);
-
-  // ============================ Scroll ============================
-  // Is current scrollTop at the end. User scroll will make this false.
-  const [scrollReachEnd, setScrollReachEnd] = React.useState(true);
-
-  const [updateCount, setUpdateCount] = React.useState(0);
-
-  const onInternalScroll: React.UIEventHandler<HTMLDivElement> = (e) => {
-    const target = e.target as HTMLElement;
-
-    setScrollReachEnd(
-      target.scrollHeight - Math.abs(target.scrollTop) - target.clientHeight <= TOLERANCE,
-    );
-
-    onScroll?.(e);
-  };
-
-  React.useEffect(() => {
-    if (autoScroll && listRef.current && scrollReachEnd) {
-      listRef.current.scrollTo({
-        top: listRef.current.scrollHeight,
-      });
-    }
-  }, [updateCount]);
-
-  // Always scroll to bottom when data change
-  React.useEffect(() => {
-    if (autoScroll) {
-      // New date come, the origin last one is the second last one
-      const lastItemKey = mergedData[mergedData.length - 2]?.key;
-      const bubbleInst = bubbleRefs.current[lastItemKey!];
-
-      // Auto scroll if last 2 item is visible
-      if (bubbleInst) {
-        const { nativeElement } = bubbleInst;
-        const { top, bottom } = nativeElement.getBoundingClientRect();
-        const { top: listTop, bottom: listBottom } = listRef.current!.getBoundingClientRect();
-
-        const isVisible = top < listBottom && bottom > listTop;
-        if (isVisible) {
-          setUpdateCount((c) => c + 1);
-          setScrollReachEnd(true);
-        }
-      }
-    }
-  }, [mergedData.length]);
-
-  // ========================== Outer Ref ===========================
-  React.useImperativeHandle(ref, () => ({
-    nativeElement: listRef.current!,
-    scrollTo: ({ key, offset, behavior = 'smooth', block }) => {
-      if (typeof offset === 'number') {
-        // Offset scroll
-        listRef.current!.scrollTo({
-          top: offset,
-          behavior,
-        });
-      } else if (key !== undefined) {
-        // Key scroll
-        const bubbleInst = bubbleRefs.current[key];
-
-        if (bubbleInst) {
-          // Block current auto scrolling
-          const index = mergedData.findIndex((dataItem) => dataItem.key === key);
-          setScrollReachEnd(index === mergedData.length - 1);
-
-          // Do native scroll
-          bubbleInst.nativeElement.scrollIntoView({
-            behavior,
-            block,
-          });
-        }
-      }
-    },
-  }));
-
-  // =========================== Context ============================
-  // When bubble content update, we try to trigger `autoScroll` for sync
-  const onBubbleUpdate = useEvent(() => {
-    if (autoScroll) {
-      setUpdateCount((c) => c + 1);
-    }
+  const mergedClassNames = classNames(listPrefixCls, rootClassName, className, hashId, cssVarCls, {
+    [`${listPrefixCls}-autoscroll`]: autoScroll,
   });
 
-  const context = React.useMemo(
+  const mergedStyle = {
+    ...rootStyle,
+    ...style,
+  };
+
+  // ============================ Scroll ============================
+  // Always scroll to bottom when data change
+  React.useEffect(() => {
+    listRef.current?.scrollTo({ top: autoScroll ? 0 : listRef.current.scrollHeight });
+  }, [items.length, autoScroll]);
+
+  // ========================== Ref ===========================
+  React.useImperativeHandle(
+    ref,
     () => ({
-      onUpdate: onBubbleUpdate,
+      nativeElement: listRef.current!,
+      scrollTo: ({ key, top, behavior = 'smooth', block }) => {
+        const { scrollHeight, clientHeight } = listRef.current!;
+        if (typeof top === 'number') {
+          listRef.current?.scrollTo({
+            top: autoScroll ? -scrollHeight + clientHeight + top : top,
+            behavior,
+          });
+        } else if (top === 'bottom') {
+          const bottomOffset = autoScroll ? 0 : scrollHeight;
+          listRef.current?.scrollTo({ top: bottomOffset, behavior });
+        } else if (top === 'top') {
+          const topOffset = autoScroll ? -scrollHeight : 0;
+          listRef.current?.scrollTo({ top: topOffset, behavior });
+        } else if (key && bubblesRef.current[key]) {
+          bubblesRef.current[key].nativeElement.scrollIntoView({ behavior, block });
+        }
+      },
     }),
-    [],
+    [autoScroll],
   );
+
+  const renderData = autoScroll ? [...items].reverse() : items;
 
   // ============================ Render ============================
   return (
-    <BubbleContext.Provider value={context}>
-      <div
-        {...domProps}
-        className={classNames(listPrefixCls, rootClassName, className, hashId, cssVarCls, {
-          [`${listPrefixCls}-reach-end`]: scrollReachEnd,
-        })}
-        ref={listRef}
-        onScroll={onInternalScroll}
-      >
-        {mergedData.map(({ key, ...bubble }) => (
-          <MemoBubbleListItem
-            {...bubble}
-            key={key}
-            _key={key}
-            ref={bubbleRefs}
-            typing={initialized ? bubble.typing : false}
+    <div
+      {...domProps}
+      className={mergedClassNames}
+      style={mergedStyle}
+      ref={listRef}
+      onScroll={onScroll}
+    >
+      {renderData.map((item) => {
+        let mergedProps: BubbleData;
+        if (item.role && role) {
+          const cfg = role[item.role];
+          mergedProps = { ...(roleCfgIsFunction(cfg) ? cfg(item) : cfg), ...item };
+        } else {
+          mergedProps = item;
+        }
+        return (
+          <BubbleListItem
+            {...omit(mergedProps, ['key'])}
+            key={item.key}
+            _key={item.key}
+            bubblesRef={bubblesRef}
           />
-        ))}
-      </div>
-    </BubbleContext.Provider>
+        );
+      })}
+    </div>
   );
 };
 

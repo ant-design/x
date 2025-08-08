@@ -23,8 +23,6 @@ Attachments 组件用于需要展示一组附件信息集合的场景。
 <code src="./demo/placeholder.tsx">占位信息</code>
 <code src="./demo/overflow.tsx">超出样式</code>
 <code src="./demo/with-sender.tsx">组合示例</code>
-<code src="./demo/files.tsx">文件卡片</code>
-<code src="./demo/files-custom.tsx">自定义卡片图标</code>
 
 ## API
 
@@ -61,33 +59,6 @@ interface PlaceholderType {
 | ------------- | ---------------- | -------------------- | ---- |
 | nativeElement | 获取原生节点     | HTMLElement          | -    |
 | upload        | 手工调用上传文件 | (file: File) => void | -    |
-
-### Attachments.FileCard Props
-
-| 属性 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- |
-| prefixCls | 样式类名的前缀 | string | - | - |
-| className | 样式类名 | string | - | - |
-| style | 样式对象 | React.CSSProperties | - | - |
-| item | 附件，同 Upload `UploadFile` | Attachment | - | - |
-| onRemove | 点击移除文件时的回调，返回值为 false 时不移除。支持返回一个 Promise 对象，Promise 对象 resolve(false) 或 reject 时不移除 | (item: Attachment) => boolean \| Promise | - | - |
-| imageProps | 图片属性，同 antd [Image](https://ant.design/components/image) 属性 | ImageProps | - | - |
-| icon | 自定义图标 | React.ReactNode \| PresetIcons | - | 1.6.0 |
-| type | 定义文件类型，当类型为`image`时，会展示为图片预览模式 | 'file' \| 'image' | `file` | 1.6.0 |
-
-```ts
-type PresetIcons =
-  | 'default'
-  | 'excel'
-  | 'image'
-  | 'markdown'
-  | 'pdf'
-  | 'ppt'
-  | 'word'
-  | 'zip'
-  | 'video'
-  | 'audio';
-```
 
 ## Semantic DOM
 

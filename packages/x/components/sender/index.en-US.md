@@ -131,7 +131,7 @@ type ActionsComponents = {
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | props.defaultValue | Default value | any | - | - |
-| customRender | Custom render function | (value: any, onChange: (value: any) => void, item: SlotConfigType) => React.ReactNode | - | - |
+| customRender | Custom render function | (value: any, onChange: (value: any) => void, props: { disabled?: boolean, readOnly?: boolean }, item: SlotConfigType) => React.ReactNode | - | - |
 
 ### Sender.Header
 
@@ -162,9 +162,9 @@ type ActionsComponents = {
 
 ### ⚠️ Notes for Slot Mode
 
-- In slot mode, the `value` and `defaultValue` properties are invalid. Please use `ref` and callback events to get the value and slotConfig.
-- In slot mode, the third parameter `config` of the `onChange`/`onSubmit` callback is only used to get the current structured content. Do not assign it directly back to `slotConfig`, otherwise the input box content will be reset. Only update `slotConfig` when you need to switch or reset the slot structure as a whole.
-- Usually, `initialSlotConfig` should only be set once during initialization or when the structure changes. If you need to force re-render the component, use a different `key` prop.
+- **In slot mode, `value` and `defaultValue` are invalid.** Please use `ref` and callback events to get the value and slot configuration.
+- **In slot mode, the third parameter `config` of the `onChange`/`onSubmit` callback** is only for getting the current structured content.
+- `initialSlotConfig` should only be set once during initialization or when the structure changes. If you need to force re-render the component, use a different `key` prop.
 
 **Example:**
 

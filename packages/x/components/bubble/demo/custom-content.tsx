@@ -1,4 +1,3 @@
-import { UserOutlined } from '@ant-design/icons';
 import { Bubble } from '@ant-design/x';
 import { Button, Flex, Image } from 'antd';
 import React, { useState } from 'react';
@@ -20,9 +19,8 @@ const App = () => {
   return (
     <div style={{ height: 100 }}>
       <Bubble<ContentType>
-        typing
         content={content}
-        messageRender={(content) => {
+        contentRender={(content) => {
           return (
             <Flex gap="middle" align="center">
               <Image height={50} src={content.imageUrl} />
@@ -30,21 +28,22 @@ const App = () => {
             </Flex>
           );
         }}
-        avatar={{ icon: <UserOutlined /> }}
-        footer={(content) => {
-          return (
-            <Button
-              onClick={() => {
-                setContent((ori) => ({
-                  ...ori,
-                  actionNode: <>🎉 Happy Ant Design X !</>,
-                }));
-              }}
-              type="text"
-            >
-              {content?.actionNode}
-            </Button>
-          );
+        components={{
+          footer: (content) => {
+            return (
+              <Button
+                onClick={() => {
+                  setContent((ori) => ({
+                    ...ori,
+                    actionNode: <>🎉 Happy Ant Design X !</>,
+                  }));
+                }}
+                type="text"
+              >
+                {content?.actionNode}
+              </Button>
+            );
+          },
         }}
       />
     </div>

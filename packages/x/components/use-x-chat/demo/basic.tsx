@@ -5,18 +5,24 @@ import React from 'react';
 
 const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000));
 
-const roles: GetProp<typeof Bubble.List, 'roles'> = {
+const roles: GetProp<typeof Bubble.List, 'role'> = {
   ai: {
     placement: 'start',
-    avatar: { icon: <UserOutlined />, style: { background: '#fde3cf' } },
-    typing: { step: 5, interval: 20 },
+    styles: { avatar: { background: '#fde3cf' } },
+    components: {
+      avatar: <UserOutlined />,
+    },
+    typing: { effect: 'typing', step: 5, interval: 20 },
     style: {
       maxWidth: 600,
     },
   },
   local: {
     placement: 'end',
-    avatar: { icon: <UserOutlined />, style: { background: '#87d068' } },
+    styles: { avatar: { background: '#87d068' } },
+    components: {
+      avatar: <UserOutlined />,
+    },
   },
 };
 
@@ -48,7 +54,7 @@ const App = () => {
   return (
     <Flex vertical gap="middle">
       <Bubble.List
-        roles={roles}
+        role={roles}
         style={{ maxHeight: 300 }}
         items={messages.map(({ id, message, status }) => ({
           key: id,

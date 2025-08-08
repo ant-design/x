@@ -10,6 +10,10 @@ const localeValues: Required<Locale> = {
     feedbackLike: '喜欢',
     feedbackDislike: '不喜欢',
   },
+  Bubble: {
+    editableOk: '确认',
+    editableCancel: '取消',
+  },
 };
 
 export default localeValues;

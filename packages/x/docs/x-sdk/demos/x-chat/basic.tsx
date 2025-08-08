@@ -1,7 +1,8 @@
 import { UserOutlined } from '@ant-design/icons';
 import { Bubble, Sender } from '@ant-design/x';
+import { BubbleListProps } from '@ant-design/x/es/bubble';
 import { DefaultChatProvider, useXChat, XRequest, XRequestOptions } from '@ant-design/x-sdk';
-import { Flex, type GetProp } from 'antd';
+import { Avatar, Flex } from 'antd';
 import React from 'react';
 
 interface ChatInput {
@@ -10,20 +11,24 @@ interface ChatInput {
 
 const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000));
 
-const roles: GetProp<typeof Bubble.List, 'roles'> = {
+const role: BubbleListProps['role'] = {
   ai: {
     placement: 'start',
-    avatar: { icon: <UserOutlined />, style: { background: '#fde3cf' } },
-    typing: { step: 5, interval: 20 },
+    components: {
+      avatar: <Avatar icon={<UserOutlined />} />,
+    },
+    typing: true,
     style: {
       maxWidth: 600,
     },
   },
   local: {
     placement: 'end',
-    avatar: { icon: <UserOutlined />, style: { background: '#87d068' } },
-    messageRender(content) {
-      return content.query;
+    components: {
+      avatar: <Avatar icon={<UserOutlined />} style={{ background: '#87d068' }} />,
+    },
+    contentRender(content: any) {
+      return content?.query;
     },
   },
 };
@@ -60,7 +65,7 @@ const App = () => {
   return (
     <Flex vertical gap="middle">
       <Bubble.List
-        roles={roles}
+        role={role}
         style={{ maxHeight: 300 }}
         items={messages.map(({ id, message, status }) => ({
           key: id,

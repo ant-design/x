@@ -16,6 +16,10 @@ export interface Locale {
     feedbackLike: string;
     feedbackDislike: string;
   };
+  Bubble?: {
+    editableOk: string;
+    editableCancel: string;
+  };
 }
 
 export interface LocaleProviderProps {
