@@ -1,12 +1,13 @@
-import { LeftOutlined, PlusOutlined, RightOutlined } from '@ant-design/icons';
-import { Button, type ImageProps, type UploadProps } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+import { Button, type UploadProps, type ImageProps } from 'antd';
 import classnames from 'classnames';
-import { CSSMotionList } from 'rc-motion';
 import React from 'react';
 import type { Attachment } from '..';
 import { AttachmentContext } from '../context';
 import SilentUploader from '../SilentUploader';
-import FileListCard from './FileListCard';
+import FileCard, { FileCardProps } from '../../file-card';
+import { previewImage } from '../util';
+import Progress from './Progress';
 
 export interface FileListProps {
   prefixCls: string;
@@ -14,7 +15,6 @@ export interface FileListProps {
   onRemove: (item: Attachment) => void;
   overflow?: 'scrollX' | 'scrollY' | 'wrap';
   upload: UploadProps;
-  imageProps?: ImageProps;
 
   // Semantic
   listClassName?: string;
@@ -25,8 +25,6 @@ export interface FileListProps {
   uploadClassName?: string;
   uploadStyle?: React.CSSProperties;
 }
-
-const TOLERANCE = 1;
 
 export default function FileList(props: FileListProps) {
   const {
@@ -41,115 +39,90 @@ export default function FileList(props: FileListProps) {
     uploadClassName,
     uploadStyle,
     itemStyle,
-    imageProps,
   } = props;
 
   const listCls = `${prefixCls}-list`;
 
-  const containerRef = React.useRef<HTMLDivElement>(null);
-
-  const [firstMount, setFirstMount] = React.useState(false);
-
   const { disabled } = React.useContext(AttachmentContext);
 
-  React.useEffect(() => {
-    setFirstMount(true);
-    return () => {
-      setFirstMount(false);
-    };
-  }, []);
+  const [list, setList] = React.useState<FileCardProps[]>([]);
 
-  // ================================= Scroll =================================
-  const [pingStart, setPingStart] = React.useState(false);
-  const [pingEnd, setPingEnd] = React.useState(false);
-
-  const checkPing = () => {
-    const containerEle = containerRef.current;
-
-    if (!containerEle) {
-      return;
+  const getDescription = (item: Attachment) => {
+    if (item.description) {
+      return item.description;
     }
-
-    if (overflow === 'scrollX') {
-      setPingStart(Math.abs(containerEle.scrollLeft) >= TOLERANCE);
-      setPingEnd(
-        containerEle.scrollWidth - containerEle.clientWidth - Math.abs(containerEle.scrollLeft) >=
-          TOLERANCE,
-      );
-    } else if (overflow === 'scrollY') {
-      setPingStart(containerEle.scrollTop !== 0);
-      setPingEnd(containerEle.scrollHeight - containerEle.clientHeight !== containerEle.scrollTop);
+    if (item.status === 'uploading') {
+      return `${item.percent || 0}%`;
     }
+    if (item.status === 'error') {
+      return item.response || '';
+    }
+    return '';
   };
 
-  React.useEffect(() => {
-    checkPing();
-  }, [overflow, items.length]);
-
-  const onScrollOffset = (offset: -1 | 1) => {
-    const containerEle = containerRef.current;
-
-    if (containerEle) {
-      containerEle.scrollTo({
-        left: containerEle.scrollLeft + offset * containerEle.clientWidth,
-        behavior: 'smooth',
+  const getList = async (items: Attachment[]) => {
+    let fileCardMap: FileCardProps[] = [];
+    for (let i = 0; i < items.length; i++) {
+      const desc = getDescription(items[i]);
+      let previewImg = undefined;
+      if (items[i].originFileObj) {
+        previewImg = await previewImage(items[i].originFileObj!);
+      }
+      const previewUrl = items[i].thumbUrl || items[i].url || previewImg;
+      const cardCls = `${prefixCls}-list-card`;
+      const status = items[i].status;
+      let preview: ImageProps['preview'] = undefined;
+      if (previewUrl && status !== 'done') {
+        const percent = items[i].percent;
+        const mask = (
+          <div className={`${cardCls}-file-img-mask`}>
+            {status === 'uploading' && percent !== undefined && (
+              <Progress percent={percent} prefixCls={cardCls} />
+            )}
+            {status === 'error' && (
+              <div className={`${cardCls}-desc`}>
+                <div className={`${cardCls}-ellipsis`}>{desc}</div>
+              </div>
+            )}
+          </div>
+        );
+        preview = {
+          mask,
+        };
+      }
+      fileCardMap.push({
+        key: items[i].uid || i,
+        description: desc,
+        src: previewUrl,
+        classNames: {file: `${cardCls}-status-${status}`, description: `${cardCls}-desc`},
+        byte: items[i].size,
+        ...(items[i] as FileCardProps),
+        size: undefined,
+        preview: preview,
       });
     }
+    setList(fileCardMap);
   };
 
-  const onScrollLeft = () => {
-    onScrollOffset(-1);
-  };
+  React.useEffect(() => {
+    getList(items);
+  }, [items]);
 
-  const onScrollRight = () => {
-    onScrollOffset(1);
+  const handleRemove = (item: FileCardProps) => {
+    const index = list.findIndex((i) => i.key === item.key);
+    onRemove(items[index]);
   };
 
   // ================================= Render =================================
   return (
-    <div
-      className={classnames(
-        listCls,
-        {
-          [`${listCls}-overflow-${props.overflow}`]: overflow,
-          [`${listCls}-overflow-ping-start`]: pingStart,
-          [`${listCls}-overflow-ping-end`]: pingEnd,
-        },
-        listClassName,
-      )}
-      ref={containerRef}
-      onScroll={checkPing}
-      style={listStyle}
-    >
-      <CSSMotionList
-        keys={items.map((item) => ({
-          key: item.uid,
-          item,
-        }))}
-        motionName={`${listCls}-card-motion`}
-        component={false}
-        motionAppear={firstMount}
-        motionLeave
-        motionEnter
-      >
-        {({ key, item, className: motionCls, style: motionStyle }) => {
-          return (
-            <FileListCard
-              key={key}
-              prefixCls={prefixCls}
-              item={item}
-              onRemove={onRemove}
-              className={classnames(motionCls, itemClassName)}
-              imageProps={imageProps}
-              style={{
-                ...motionStyle,
-                ...itemStyle,
-              }}
-            />
-          );
-        }}
-      </CSSMotionList>
-      {!disabled && (
+    <FileCard.List
+      items={list}
+      classNames={{root: `${prefixCls}-list ${listClassName}`, file: itemClassName}}
+      styles={{root: listStyle, file: itemStyle}}
+      removable={!disabled}
+      onRemove={handleRemove}
+      overflow={overflow}
+      extension={!disabled && (
         <SilentUploader upload={upload}>
           <Button
             className={classnames(uploadClassName, `${listCls}-upload-btn`)}
@@ -160,25 +133,6 @@ export default function FileList(props: FileListProps) {
           </Button>
         </SilentUploader>
       )}
-
-      {overflow === 'scrollX' && (
-        <>
-          <Button
-            size="small"
-            shape="circle"
-            className={`${listCls}-prev-btn`}
-            icon={<LeftOutlined />}
-            onClick={onScrollLeft}
-          />
-          <Button
-            size="small"
-            shape="circle"
-            className={`${listCls}-next-btn`}
-            icon={<RightOutlined />}
-            onClick={onScrollRight}
-          />
-        </>
-      )}
-    </div>
+    />
   );
 }

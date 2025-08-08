@@ -519,40 +519,43 @@ const Independent: React.FC = () => {
             classNames: {
               content: i.status === 'loading' ? styles.loadingMessage : '',
             },
-            typing: i.status === 'loading' ? { suffix: <>💗</> } : false,
+            typing: i.status === 'loading' ? { effect: 'typing', suffix: <>💗</> } : false,
+            key: i.id,
           }))}
           style={{ height: '100%', paddingInline: 'calc(calc(100% - 700px) /2)' }}
-          roles={{
+          role={{
             assistant: {
               placement: 'start',
-              footer: (
-                <div style={{ display: 'flex' }}>
-                  <Button
-                    type="text"
-                    size="small"
-                    icon={<ReloadOutlined />}
-                    onClick={onFooterButtonClick}
-                  />
-                  <Button
-                    type="text"
-                    size="small"
-                    icon={<CopyOutlined />}
-                    onClick={onFooterButtonClick}
-                  />
-                  <Button
-                    type="text"
-                    size="small"
-                    icon={<LikeOutlined />}
-                    onClick={onFooterButtonClick}
-                  />
-                  <Button
-                    type="text"
-                    size="small"
-                    icon={<DislikeOutlined />}
-                    onClick={onFooterButtonClick}
-                  />
-                </div>
-              ),
+              components: {
+                footer: (
+                  <div style={{ display: 'flex' }}>
+                    <Button
+                      type="text"
+                      size="small"
+                      icon={<ReloadOutlined />}
+                      onClick={onFooterButtonClick}
+                    />
+                    <Button
+                      type="text"
+                      size="small"
+                      icon={<CopyOutlined />}
+                      onClick={onFooterButtonClick}
+                    />
+                    <Button
+                      type="text"
+                      size="small"
+                      icon={<LikeOutlined />}
+                      onClick={onFooterButtonClick}
+                    />
+                    <Button
+                      type="text"
+                      size="small"
+                      icon={<DislikeOutlined />}
+                      onClick={onFooterButtonClick}
+                    />
+                  </div>
+                ),
+              },
               loadingRender: () => <Spin size="small" />,
             },
             user: { placement: 'end' },

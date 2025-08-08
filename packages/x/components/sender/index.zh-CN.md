@@ -132,7 +132,7 @@ type ActionsComponents = {
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
 | props.defaultValue | 默认值 | any | - | - |
-| customRender | 自定义渲染函数 | (value: any, onChange: (value: any) => void, item: SlotConfigType) => React.ReactNode | - | - |
+| customRender | 自定义渲染函数 | (value: any, onChange: (value: any) => void, props: { disabled？:boolean,readOnly？: boolean},item: SlotConfigType) => React.ReactNode | - | - |
 
 ### Sender.Header
 

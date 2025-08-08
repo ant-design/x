@@ -47,7 +47,7 @@ describe('attachments', () => {
     onChange.mockClear();
 
     // Remove file
-    fireEvent.click(container.querySelector('.ant-attachment-list-card-remove')!);
+    fireEvent.click(container.querySelector('.ant-file-card-list-remove')!);
     await waitFakeTimer();
     expect(onChange.mock.calls[0][0].fileList).toHaveLength(0);
   });
@@ -70,9 +70,9 @@ describe('attachments', () => {
     onChange.mockClear();
 
     // Remove file
-    fireEvent.click(container.querySelector('.ant-attachment-list-card-remove')!);
+    fireEvent.click(container.querySelector('.ant-file-card-list-remove')!);
     await waitFakeTimer();
-    expect(container.querySelectorAll('.ant-attachment-list-card')).toHaveLength(1);
+    expect(container.querySelectorAll('.ant-file-card-list-item')).toHaveLength(1);
     expect(onChange).not.toHaveBeenCalled();
   });
 
@@ -84,7 +84,7 @@ describe('attachments', () => {
       }),
     );
 
-    expect(container.querySelector('.ant-attachment-list-overflow-scrollX')).toBeTruthy();
+    expect(container.querySelector('.ant-file-card-list-overflow-scrollX')).toBeTruthy();
   });
 
   it('overflow: scrollY', () => {
@@ -95,7 +95,87 @@ describe('attachments', () => {
       }),
     );
 
-    expect(container.querySelector('.ant-attachment-list-overflow-scrollY')).toBeTruthy();
+    expect(container.querySelector('.ant-file-card-list-overflow-scrollY')).toBeTruthy();
+  });
+
+  it ('card list description done', () => {
+    const { container } = render(
+      renderAttachments({
+        items: [
+          {
+            uid: '1',
+            name: 'file-1.txt',
+            status: 'done',
+            description: 'test description',
+          },
+        ],
+      }),
+    );
+
+    expect(container.querySelector('.ant-file-card-file-description')?.textContent).toBe('test description');
+  });
+
+  it ('card list description uploading', () => {
+    const { container } = render(
+      renderAttachments({
+        items: [
+          {
+            uid: '2',
+            name: 'file-2.txt',
+            status: 'uploading',
+            percent: 50,
+          },
+        ],
+      }),
+    );
+
+    expect(container.querySelector('.ant-file-card-file-description')?.textContent).toBe('50%');
+  });
+
+  it ('card list description error', () => {
+    const { container } = render(
+      renderAttachments({
+        items: [
+          {
+            uid: '3',
+            name: 'file-3.txt',
+            status: 'error',
+            response: 'Error message',
+          },
+        ],
+      }),
+    );
+
+    expect(container.querySelector('.ant-file-card-file-description')?.textContent).toBe('Error message');
+  });
+
+  it ('image list mask', () => {
+    const { container } = render(
+      renderAttachments({
+        items: [
+          {
+            uid: '1',
+            name: 'image uploading preview.png',
+            status: 'uploading',
+            percent: 33,
+            thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+            url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+          },
+          {
+            uid: '2',
+            name: 'image error preview.png',
+            status: 'error',
+            response: 'Server Error 500',
+            thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+            url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+          },
+        ],
+      }),
+    );
+
+    expect(container.querySelector('.ant-attachment-list-card-file-img-mask')).toBeTruthy();
+    expect(container.querySelector('.ant-progress')).toBeTruthy();
+    expect(container.querySelector('.ant-attachment-list-card-ellipsis')?.textContent).toBe('Server Error 500');
   });
 
   it('maxCount', async () => {
@@ -119,7 +199,7 @@ describe('attachments', () => {
       }),
     );
 
-    expect(container.querySelectorAll('.ant-attachment-list-card')).toHaveLength(5);
+    expect(container.querySelectorAll('.ant-file-card-list-item')).toHaveLength(5);
 
     const uploadBtn = container.querySelector('.ant-upload-wrapper .ant-btn');
     expect(uploadBtn).toBeTruthy();

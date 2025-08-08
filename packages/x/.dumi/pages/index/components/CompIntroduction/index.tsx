@@ -158,7 +158,7 @@ const CompIntroduction: React.FC = () => {
       endColor: DESIGN_STAGE_COLOR.FEEDBACK.END,
       header: (
         <div className={styles.header}>
-          <CustomizationBubble />
+          <CustomizationBubble content="" />
         </div>
       ),
     },

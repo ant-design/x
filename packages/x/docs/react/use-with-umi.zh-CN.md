@@ -195,7 +195,7 @@ export default () => {
                     key: '1',
                     placement: 'end',
                     content: 'Hello Ant Design X!',
-                    avatar: { icon: <UserOutlined /> },
+                    components: { avatar: <UserOutlined /> },
                   },
                   {
                     key: '2',

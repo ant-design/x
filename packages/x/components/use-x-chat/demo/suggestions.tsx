@@ -5,20 +5,29 @@ import React from 'react';
 
 const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000));
 
-const roles: GetProp<typeof Bubble.List, 'roles'> = {
+const roles: GetProp<typeof Bubble.List, 'role'> = {
   user: {
     placement: 'end',
-    avatar: { icon: <UserOutlined />, style: { background: '#87d068' } },
+    styles: { avatar: { background: '#87d068' } },
+    components: {
+      avatar: <UserOutlined />,
+    },
   },
   text: {
     placement: 'start',
-    avatar: { icon: <UserOutlined />, style: { background: '#fde3cf' } },
+    styles: { avatar: { background: '#fde3cf' } },
+    components: {
+      avatar: <UserOutlined />,
+    },
   },
   suggestion: {
     placement: 'start',
-    avatar: { icon: <UserOutlined />, style: { visibility: 'hidden' } },
+    styles: { avatar: { visibility: 'hidden' } },
+    components: {
+      avatar: <UserOutlined />,
+    },
     variant: 'borderless',
-    messageRender: (content) => (
+    contentRender: (content) => (
       <Prompts
         vertical
         items={(content as any as string[]).map((text) => ({
@@ -111,7 +120,7 @@ const App = () => {
   return (
     <Flex vertical gap="middle">
       <Bubble.List
-        roles={roles}
+        role={roles}
         style={{ maxHeight: 300 }}
         items={parsedMessages.map(({ id, message, status }) => ({
           key: id,

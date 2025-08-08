@@ -1,9 +1,9 @@
 import { UserOutlined } from '@ant-design/icons';
 import { Bubble, Sender, useXAgent, useXChat } from '@ant-design/x';
-import { RolesType } from '@ant-design/x/es/bubble/BubbleList';
 import XMarkdown from '@ant-design/x-markdown';
 import React, { useState } from 'react';
 import '@ant-design/x-markdown/themes/light.css';
+import { BubbleListProps } from '@ant-design/x/es/bubble';
 
 const fullContent = `
 The Ant Design team presents the RICH paradigm, crafting superior AI interface solutions and pioneering intelligent experiences.
@@ -95,14 +95,20 @@ export default App;
 \`\`\`
 `;
 
-const roles: RolesType = {
+const roles: BubbleListProps['role'] = {
   ai: {
     placement: 'start',
-    avatar: { icon: <UserOutlined />, style: { background: '#fde3cf' } },
+    styles: { avatar: { background: '#fde3cf' } },
+    components: {
+      avatar: <UserOutlined />,
+    },
   },
   local: {
     placement: 'end',
-    avatar: { icon: <UserOutlined />, style: { background: '#87d068' } },
+    styles: { avatar: { background: '#87d068' } },
+    components: {
+      avatar: <UserOutlined />,
+    },
   },
 };
 
@@ -137,19 +143,19 @@ const App: React.FC = () => {
   return (
     <div style={{ minHeight: 500, display: 'flex', flexDirection: 'column' }}>
       <Bubble.List
-        roles={roles}
+        role={roles}
         style={{ flex: 1 }}
         items={messages.map(({ id, message, status }) => ({
           key: id,
           role: status === 'local' ? 'local' : 'ai',
           content: message,
-          messageRender:
+          contentRender:
             status === 'local'
               ? undefined
               : (content) => (
                   <XMarkdown
                     className="x-markdown-light"
-                    content={content}
+                    content={content as string}
                     streaming={{
                       hasNextChunk: hasNextChunk,
                       enableAnimation: true,

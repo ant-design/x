@@ -9,6 +9,10 @@ const localeValues: Required<Locale> = {
     feedbackLike: 'like',
     feedbackDislike: 'dislike',
   },
+  Bubble: {
+    editableOk: 'ok',
+    editableCancel: 'cancel',
+  },
 };
 
 export default localeValues;

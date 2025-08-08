@@ -2,7 +2,7 @@ import type { BubbleProps } from '@ant-design/x';
 import { Bubble } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
 import { Line, LineProps } from '@antv/gpt-vis';
-import { Button, Flex } from 'antd';
+import { Avatar, Button, Flex } from 'antd';
 import React from 'react';
 
 const text = `
@@ -18,7 +18,7 @@ const LineCompt = (props: LineProps) => {
   return <Line data={JSON.parse(data || '')} axisXTitle={axisXTitle} axisYTitle={axisYTitle} />;
 };
 
-const RenderMarkdown: BubbleProps['messageRender'] = (content) => (
+const RenderMarkdown: BubbleProps['contentRender'] = (content) => (
   <XMarkdown components={{ line: LineCompt }}>{content}</XMarkdown>
 );
 
@@ -37,11 +37,13 @@ const App: React.FC = () => {
       </Button>
 
       <Bubble
-        typing={{ step: 50, interval: 150 }}
+        typing={{ effect: 'typing', step: 50, interval: 150 }}
         content={text}
-        messageRender={RenderMarkdown}
-        avatar={{
-          src: 'https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp',
+        contentRender={RenderMarkdown}
+        components={{
+          avatar: (
+            <Avatar src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp" />
+          ),
         }}
         variant="outlined"
       />
