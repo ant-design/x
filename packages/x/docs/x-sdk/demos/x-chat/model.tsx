@@ -1,5 +1,6 @@
 import { SyncOutlined, UserOutlined } from '@ant-design/icons';
 import { Bubble, Sender } from '@ant-design/x';
+import { BubbleListProps } from '@ant-design/x/es/bubble';
 import {
   OpenAIChatProvider,
   useXChat,
@@ -7,7 +8,7 @@ import {
   XModelParams,
   XModelResponse,
 } from '@ant-design/x-sdk';
-import { Button, Flex, type GetProp, Tooltip } from 'antd';
+import { Avatar, Button, Flex, Tooltip } from 'antd';
 import React from 'react';
 
 /**
@@ -22,14 +23,18 @@ const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow_deepSeek-r1-disti
 
 const MODEL = 'DeepSeek-R1-Distill-Qwen-7B';
 
-const roles: GetProp<typeof Bubble.List, 'roles'> = {
+const role: BubbleListProps['role'] = {
   assistant: {
     placement: 'start',
-    avatar: { icon: <UserOutlined />, style: { background: '#fde3cf' } },
+    components: {
+      avatar: <Avatar icon={<UserOutlined />} />,
+    },
   },
   user: {
     placement: 'end',
-    avatar: { icon: <UserOutlined />, style: { background: '#87d068' } },
+    components: {
+      avatar: <Avatar icon={<UserOutlined />} style={{ background: '#87d068' }} />,
+    },
   },
 };
 
@@ -71,7 +76,7 @@ const App = () => {
   return (
     <Flex vertical gap="middle">
       <Bubble.List
-        roles={roles}
+        role={role}
         style={{ maxHeight: 300 }}
         items={messages.map(({ id, message }) => ({
           key: id,
