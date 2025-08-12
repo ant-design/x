@@ -1,5 +1,5 @@
-import { Cascader, Flex, version } from 'antd';
 import type { CascaderProps } from 'antd';
+import { Cascader, Flex, version } from 'antd';
 import classnames from 'classnames';
 import { useEvent, useMergedState } from 'rc-util';
 import React, { useState } from 'react';
@@ -28,7 +28,19 @@ export interface RenderChildrenProps<T> {
   onKeyDown: (e: React.KeyboardEvent) => void;
 }
 
-export interface SuggestionProps<T = any> {
+export interface SuggestionProps<T = any>
+  extends Omit<
+    CascaderProps,
+    | 'children'
+    | 'onChange'
+    | 'optionRender'
+    | 'value'
+    | 'options'
+    | 'multiple'
+    | 'showSearch'
+    | 'defaultValue'
+    | 'fieldNames'
+  > {
   prefixCls?: string;
   className?: string;
   rootClassName?: string;
@@ -55,6 +67,7 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
     items,
     onSelect,
     block,
+    ...otherProps
   } = props;
 
   // ============================= MISC =============================
@@ -148,6 +161,7 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
       options={itemList}
       open={mergedOpen}
       value={activePath}
+      multiple={false}
       placement={isRTL ? 'topRight' : 'topLeft'}
       {...compatibleProps}
       optionRender={optionRender}
@@ -156,6 +170,7 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
       })}
       onChange={onInternalChange}
       dropdownMatchSelectWidth={block}
+      {...otherProps}
     >
       <div
         className={classnames(
