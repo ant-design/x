@@ -140,7 +140,7 @@ type RemainRole = 'ai' | 'system' | 'user';
 
 type AnyStr = string;
 
-export type BubbleData = BubbleProps<BubbleContentType> & {
+export type BubbleData = BubbleProps<any> & {
   /**
    * @description 数据项唯一标识
    */

@@ -7,11 +7,11 @@ import {
   RedoOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import { Actions, Bubble } from '@ant-design/x';
+import { Actions, Bubble, FileCard, FileCardProps } from '@ant-design/x';
 import type { BubbleData, BubbleListProps } from '@ant-design/x/es/bubble';
 import XMarkdown from '@ant-design/x-markdown';
 import type { GetRef } from 'antd';
-import { Avatar, Button, Divider, Flex, Typography } from 'antd';
+import { Avatar, Button, Divider, Flex, Space, Typography } from 'antd';
 import React, { useCallback, useEffect } from 'react';
 
 const actionItems = [
@@ -118,19 +118,18 @@ const App = () => {
       divider: {
         variant: 'borderless',
         styles: { root: { margin: 0 }, body: { width: '100%' } },
-        contentRender: (content) => <Divider>{content as string}</Divider>,
+        contentRender: (content: string) => <Divider>{content}</Divider>,
       },
       reference: {
         variant: 'borderless',
         // 16px for list item gap
-        styles: { root: { margin: 0, marginBottom: -16 } },
-        contentRender: (content) => (
-          <Typography.Text style={{ textAlign: 'right' }}>
-            <LinkOutlined />{' '}
-            <Button type="link" style={{ padding: 0 }}>
-              {content as string}
-            </Button>
-          </Typography.Text>
+        styles: { root: { margin: 0, marginBottom: -12 } },
+        components: { avatar: () => '' },
+        contentRender: (content: FileCardProps) => (
+          <Space>
+            <LinkOutlined />
+            <FileCard type="file" size="small" name={content.name} byte={content.byte} />
+          </Space>
         ),
       },
     }),
@@ -158,9 +157,9 @@ const App = () => {
                 role: 'ai',
                 typing: { effect: 'fade-in', step: 6 },
                 content: text,
-                contentRender: (content) => (
+                contentRender: (content: string) => (
                   <Typography>
-                    <XMarkdown content={content as string} />
+                    <XMarkdown content={content} />
                   </Typography>
                 ),
               });
@@ -186,7 +185,12 @@ const App = () => {
             onClick={() => {
               set((pre) => [
                 ...pre,
-                { key: getKey(), role: 'reference', placement: 'end', content: 'Ant Design X' },
+                {
+                  key: getKey(),
+                  role: 'reference',
+                  placement: 'end',
+                  content: { name: 'Ant-Design-X.pdf' },
+                },
                 genItem(false),
               ]);
             }}
