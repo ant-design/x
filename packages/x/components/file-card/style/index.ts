@@ -3,9 +3,9 @@ import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssi
 import { genStyleHooks } from '../../theme/genStyleUtils';
 
 // biome-ignore lint/suspicious/noEmptyInterface: ComponentToken need to be empty by default
-export interface ComponentToken {}
+export interface ComponentToken { }
 
-export interface FileCardToken extends FullToken<'FileCard'> {}
+export interface FileCardToken extends FullToken<'FileCard'> { }
 
 const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
   const {
@@ -34,7 +34,6 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
   return {
     [componentCls]: {
       display: 'flex',
-
       [`${componentCls}-file`]: {
         display: 'flex',
         alignItems: 'center',
@@ -171,7 +170,7 @@ const genFileCardListStyle: GenerateStyle<FileCardToken> = (token) => {
     motionDurationSlow,
     calc,
   } = token;
-  
+
   return {
     [`${componentCls}-list`]: {
       display: 'flex',

@@ -12,15 +12,15 @@ const Item: React.FC<ActionsItemProps> = (props) => {
   const id = React.useId();
   const itemKey = item?.key || id;
 
-  if (item === null) {
+  if (!item) {
     return null;
   }
 
-  if (item?.actionRender) {
+  if (item.actionRender) {
     return item?.actionRender(item);
   }
 
-  if ('subItems' in item) {
+  if (item.subItems) {
     return (
       <ActionsMenu key={itemKey} item={item} onClick={onClick} dropdownProps={dropdownProps} />
     );
