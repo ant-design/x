@@ -4,7 +4,6 @@
   "scripts": {
     "compile": "father build",
     "tsc": "tsc --noEmit",
-    "prepublishOnly": "tsx ../../scripts/pre-publish.ts",
     "lint": "npm run tsc && npm run lint:script && npm run lint:md",
     "lint:md": "remark . -f -q",
     "lint:script": "biome lint",

@@ -35,7 +35,6 @@
     "BUG_VERSIONS.json"
   ],
   "scripts": {
-    "prepublishOnly": "tsx ../../scripts/pre-publish.ts",
     "api-collection": "antd-tools run api-collection",
     "authors": "tsx scripts/generate-authors.ts",
     "changelog": "npm run lint:changelog && tsx scripts/print-changelog.ts",
@@ -93,8 +92,8 @@
     "tbox-nodejs-sdk": "^0.0.13",
     "@ant-design/tools": "^19.0.2",
     "@ant-design/v5-patch-for-react-19": "^1.0.3",
-    "@ant-design/x-markdown": "^2.0.0-alpha.0",
-    "@ant-design/x-sdk": "^2.0.0-alpha.0",
+    "@ant-design/x-markdown": "*",
+    "@ant-design/x-sdk": "*",
     "@antv/gpt-vis": "^0.4.1",
     "@codesandbox/sandpack-react": "^2.19.8",
     "@emotion/react": "^11.13.5",
