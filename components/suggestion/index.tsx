@@ -164,6 +164,7 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
 
   return wrapCSSVar(
     <Cascader
+      {...otherProps}
       options={itemList}
       open={mergedOpen}
       value={activePath}
@@ -176,7 +177,6 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
       })}
       onChange={onInternalChange}
       dropdownMatchSelectWidth={block}
-      {...otherProps}
     >
       <div
         className={classnames(
