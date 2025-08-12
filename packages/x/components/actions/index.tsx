@@ -10,7 +10,7 @@ import Item from './Item';
 import type { ActionsProps } from './interface';
 import useStyle from './style';
 
-type ActionsRef = {
+type ActionsRef = {asdasds
   nativeElement: HTMLDivElement;
 };
 
