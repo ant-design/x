@@ -40,6 +40,8 @@ export interface SuggestionProps<T = any>
     | 'showSearch'
     | 'defaultValue'
     | 'fieldNames'
+    | 'onOpenChange'
+    | 'onDropdownVisibleChange'
   > {
   prefixCls?: string;
   className?: string;
