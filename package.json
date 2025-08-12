@@ -5,6 +5,7 @@
   "scripts": {
     "site": "npm run site --workspace packages/x && cp -rf packages/x/_site ./_site",
     "compile": "npm run compile --workspaces",
+    "version": "npm run version --workspaces",
     "start": "npm run start --workspace packages/x",
     "prestart": "npm run prestart --workspaces",
     "pretest": "npm run pretest --workspaces",
