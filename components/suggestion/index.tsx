@@ -42,6 +42,10 @@ export interface SuggestionProps<T = any>
     | 'fieldNames'
     | 'onOpenChange'
     | 'onDropdownVisibleChange'
+    | 'dropdownMatchSelectWidth'
+    | 'open'
+    | 'rootClassName'
+    | 'placement'
   > {
   prefixCls?: string;
   className?: string;
