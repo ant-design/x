@@ -63,9 +63,6 @@
       "limit": "800 KiB"
     }
   ],
-  "lint-staged":{
-     "*.{ts,tsx,js,jsx}": "npm run lint"
-  },
   "description": "Craft AI-driven interfaces effortlessly",
   "keywords": [
     "AI",
