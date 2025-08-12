@@ -18,6 +18,11 @@
     "coverage": "npm run test --workspaces",
     "test:dekko": "npm run test:dekko --workspaces"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "license": "MIT",
   "workspaces": [
     "packages/*"

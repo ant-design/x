@@ -113,8 +113,6 @@ type CompoundedActions = typeof ForwardActions & {
 
 const Actions = ForwardActions as CompoundedActions;
 
-asdadsadsada
-
 if (process.env.NODE_ENV !== 'production') {
   Actions.displayName = 'Actions';
 }
