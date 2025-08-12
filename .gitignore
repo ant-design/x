@@ -56,6 +56,11 @@ packages/x/components/version/version.ts
 packages/x/components/version/version.tsx
 packages/x/components/version/token.json
 packages/x/components/version/token-meta.json
+packages/*/src/version/version.ts
+packages/*/src/version/version.tsx
+packages/*/src/version/token.json
+packages/*/src/version/token-meta.json
+
 packages/*/.dumi/tmp
 packages/*/.dumi/tmp-test
 packages/*/.dumi/tmp-production
