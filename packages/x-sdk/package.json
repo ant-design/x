@@ -2,6 +2,7 @@
   "name": "@ant-design/x-sdk",
   "version": "2.0.0-alpha.1",
   "scripts": {
+    "prepublishOnly": "tsx ../../scripts/pre-publish.ts",
     "compile": "father build",
     "tsc": "tsc --noEmit",
     "lint": "npm run tsc && npm run lint:script && npm run lint:md",

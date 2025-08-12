@@ -35,6 +35,7 @@
     "BUG_VERSIONS.json"
   ],
   "scripts": {
+    "prepublishOnly": "tsx ../../scripts/pre-publish.ts",
     "api-collection": "antd-tools run api-collection",
     "authors": "tsx scripts/generate-authors.ts",
     "changelog": "npm run lint:changelog && tsx scripts/print-changelog.ts",

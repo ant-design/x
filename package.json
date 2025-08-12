@@ -9,6 +9,7 @@
     "prestart": "npm run prestart --workspaces",
     "pretest": "npm run pretest --workspaces",
     "prepublishOnly": "tsx ./scripts/pre-publish.ts",
+    "publish": "npm publish --workspaces --access=public",
     "precompile": "npm run precompile --workspaces",
     "prepare": "husky install",
     "size-limit": "size-limit",
