@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-npm run version &&  npm run lint
+npm run version && lint-staged

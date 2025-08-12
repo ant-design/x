@@ -63,6 +63,9 @@
       "limit": "800 KiB"
     }
   ],
+  "lint-staged":{
+    "*.{js,ts,jsx,tsx,json,css,md}": "biome format"
+  },
   "description": "Craft AI-driven interfaces effortlessly",
   "keywords": [
     "AI",
