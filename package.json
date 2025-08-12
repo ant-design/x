@@ -63,7 +63,7 @@
     }
   ],
   "lint-staged":{
-     "*.{ts,tsx,js,jsx}": "npm lint"
+     "*.{ts,tsx,js,jsx}": "npm run lint"
   },
   "description": "Craft AI-driven interfaces effortlessly",
   "keywords": [
