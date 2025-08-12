@@ -91,3 +91,5 @@ packages/x/components/version/token-meta.json
 
 packages/x-markdown/src/version/version.ts
 packages/x-markdown/src/version/plugin-meta.ts
+
+packages/x-sdk/src/version/version.ts
