@@ -111,8 +111,6 @@ type CompoundedActions = typeof ForwardActions & {
   Feedback: typeof ActionsFeedback;
 };
 
-const
-
 const Actions = ForwardActions as CompoundedActions;
 
 if (process.env.NODE_ENV !== 'production') {
