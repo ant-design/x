@@ -41,7 +41,7 @@
     "check-commit": "tsx scripts/check-commit.ts",
     "clean": "antd-tools run clean && rm -rf es lib coverage locale dist report.html artifacts.zip oss-artifacts.zip",
     "precompile": "npm run prestart",
-    "compile": "father build",
+    "compile": "father build && cp -r locale es",
     "predeploy": "npm run site && cp CNAME _site",
     "deploy": "gh-pages -d _site -b gh-pages -f",
     "predist": "npm run version && npm run token:statistic && npm run token:meta",
