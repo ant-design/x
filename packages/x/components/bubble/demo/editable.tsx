@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 const App = () => {
   const [editable, setEditable] = useState([
     false,
-    { editing: false, okText: '确认', cancelText: <span>取消</span> },
+    { editing: false, okText: 'ok', cancelText: <span>cancel</span> },
   ]);
   const [content, setContent] = useState(['editable bubble 1', 'editable bubble 2']);
 
