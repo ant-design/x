@@ -1,4 +1,127 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-
+  "files": {
+    "ignoreUnknown": true,
+    "includes": [
+      "**",
+      "!**/.dumi/tmp*",
+      "!**/dist/**/*",
+      "!**/es/**/*",
+      "!**/lib/**/*",
+      "!**/_site/**/*",
+      "!**/server/**/*",
+      "!**/node_modules",
+      "!**/coverage",
+      "!**/package.json",
+      "!**/x-markdown/plugins/**/*",
+      "!**/x-markdown/themes/**/*"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "lineWidth": 100,
+    "indentWidth": 2
+  },
+  "javascript": {
+    "jsxRuntime": "reactClassic",
+    "formatter": {
+      "quoteStyle": "single"
+    }
+  },
+  "linter": {
+    "rules": {
+      "style": {
+        "useImportType": "off",
+        "useNumberNamespace": "off",
+        "useNodejsImportProtocol": "off",
+        "noNonNullAssertion": "off",
+        "noUnusedTemplateLiteral": "off",
+        "useAsConstAssertion": "error",
+        "useDefaultParameterLast": "error",
+        "useEnumInitializers": "error",
+        "useSelfClosingElements": "error",
+        "useSingleVarDeclarator": "error",
+        "noInferrableTypes": "error",
+        "noUselessElse": "error"
+      },
+      "complexity": {
+        "noUselessTypeConstraint": "off",
+        "noForEach": "off"
+      },
+      "correctness": {
+        "useExhaustiveDependencies": "off"
+      },
+      "suspicious": {
+        "noGlobalIsNan": "off",
+        "noGlobalIsFinite": "off",
+        "noExplicitAny": "off",
+        "noArrayIndexKey": "off",
+        "noConfusingVoidType": "off",
+        "noThenProperty": "off"
+      },
+      "performance": {
+        "noDelete": "off",
+        "noAccumulatingSpread": "off"
+      },
+      "a11y": {
+        "noAriaHiddenOnFocusable": "off",
+        "useSemanticElements": "off",
+        "useKeyWithClickEvents": "off",
+        "noStaticElementInteractions": "off"
+      },
+      "nursery": {
+        "useUniqueElementIds": "off"
+      }
+    }
+  },
+  "overrides": [
+    {
+      "includes": [
+        "**/*.test.ts",
+        "**/*.test.tsx",
+        "**/tests/**/*",
+        "**/scripts/**/*",
+        "**/.dumi/**/*"
+      ],
+      "linter": {
+        "rules": {
+          "style": {
+            "noParameterAssign": "off"
+          },
+          "suspicious": {
+            "noThenProperty": "off",
+            "noImplicitAnyLet": "off"
+          },
+          "complexity": {
+            "noUselessFragments": "off"
+          },
+          "a11y": {
+            "useValidAnchor": "off",
+            "useAnchorContent": "off",
+            "useKeyWithClickEvents": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": [
+        "**/packages/x/components/**/*/demo/**/*",
+        "**/packages/x-sdk/src/**/*",
+        "**/packages/x-markdown/src/**/*"
+      ],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noVoidTypeReturn": "off"
+          },
+          "a11y": {
+            "useValidAnchor": "off",
+            "useAnchorContent": "off",
+            "useKeyWithClickEvents": "off"
+          }
+        }
+      }
+    }
+  ]
 }
