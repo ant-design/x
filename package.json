@@ -1,6 +1,6 @@
 {
   "name": "x-mono",
-  "version": "2.0.0-alpha.1",
+  "version": "2.0.0-alpha.2",
   "private": true,
   "scripts": {
     "site": "npm run site --workspace packages/x && cp -rf packages/x/_site ./_site",
@@ -63,7 +63,7 @@
       "limit": "800 KiB"
     }
   ],
-  "lint-staged":{
+  "lint-staged": {
     "*.{js,ts,jsx,tsx,json,css,md}": "biome format"
   },
   "description": "Craft AI-driven interfaces effortlessly",
