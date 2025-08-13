@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import React from 'react';
-import useXProviderContext from '../../hooks/use-x-provider-context';
+import useXProviderContext from '../hooks/use-x-provider-context';
 import { Parser, Renderer } from './core';
 import { useAnimation, useStreaming } from './hooks';
 import { XMarkdownProps } from './interface';
