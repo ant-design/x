@@ -16,7 +16,6 @@ const App = () => {
   };
 
   return (
-    <>
       <FileCard
         name="txt-file.txt"
         byte={1024}
@@ -27,7 +26,6 @@ const App = () => {
           />
         }
       />
-    </>
   );
 };
 

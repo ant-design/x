@@ -24,7 +24,7 @@ const App: React.FC = () => {
   const [locale] = useLocale(locales);
 
   return (
-    <>
+
       <SemanticPreview
         componentName="FileCard"
         semantics={[
@@ -37,7 +37,6 @@ const App: React.FC = () => {
       >
         <FileCard name="pdf-file.pdf" byte={1024} />
       </SemanticPreview>
-    </>
   );
 };
 

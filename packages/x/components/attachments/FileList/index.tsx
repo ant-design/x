@@ -61,17 +61,17 @@ export default function FileList(props: FileListProps) {
   };
 
   const getList = async (items: Attachment[]) => {
-    let fileCardMap: FileCardProps[] = [];
+    const fileCardMap: FileCardProps[] = [];
     for (let i = 0; i < items.length; i++) {
       const desc = getDescription(items[i]);
-      let previewImg = undefined;
+      let previewImg;
       if (items[i].originFileObj) {
         previewImg = await previewImage(items[i].originFileObj!);
       }
       const previewUrl = items[i].thumbUrl || items[i].url || previewImg;
       const cardCls = `${prefixCls}-list-card`;
       const status = items[i].status;
-      let preview: ImageProps['preview'] = undefined;
+      let preview: ImageProps['preview'];
       if (previewUrl && status !== 'done') {
         const percent = items[i].percent;
         const mask = (

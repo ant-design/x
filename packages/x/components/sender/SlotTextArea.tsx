@@ -28,7 +28,6 @@ type InputFocusOptions = Parameters<InputRef['focus']>[0];
 type SlotNode = Text | Document | HTMLSpanElement;
 const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const {
-    value,
     onChange,
     onKeyUp,
     onKeyDown,
@@ -565,7 +564,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
           },
         )}
         data-placeholder={placeholder}
-        contentEditable={readOnly ? false : true}
+        contentEditable={!readOnly}
         suppressContentEditableWarning
         spellCheck={false}
         onKeyDown={onInternalKeyDown}
