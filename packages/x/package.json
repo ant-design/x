@@ -250,5 +250,13 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
+  },
+  "lint-stage": {
+    "*.{ts,tsx,js,jsx,json,css,sh}": [
+      "biome check --write --no-errors-on-unmatched"
+    ],
+    "*.{md,yml}": [
+      "prettier --ignore-unknown --write"
+    ]
   }
 }

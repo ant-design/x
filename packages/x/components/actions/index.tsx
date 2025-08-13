@@ -9,8 +9,8 @@ import { ActionsContext } from './context';
 import Item from './Item';
 import type { ActionsProps } from './interface';
 import useStyle from './style';
-asdsadsaasdsa
-type ActionsRef asdas= {
+
+type ActionsRef= {
   nativeElement: HTMLDivElement;
 };
 const ForwardActions = React.forwardRef<ActionsRef, ActionsProps>((props, ref) => {
