@@ -33,7 +33,7 @@ const main = async () => {
   let pluginMeta: Record<string, any> = {};
   if (project) {
     // Project may not have converted correctly
-    const output = 'src/version/plugin-meta.json';
+    const output = 'src/plugins/version/plugin-meta.json';
 
     // eslint-disable-next-line no-restricted-syntax
     project?.children?.forEach((file: any) => {
