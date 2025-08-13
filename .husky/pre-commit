@@ -1,2 +1,1 @@
-#!/bin/sh
-npx --no-install lint-staged --quiet
+lint-staged

@@ -63,14 +63,6 @@
       "limit": "800 KiB"
     }
   ],
-  "lint-staged": {
-    "*.{jsx,less,md,json}": [
-      "prettier --no-error-on-unmatched-pattern --cache --write"
-    ],
-    "*.ts?(x)": [
-      "prettier --no-error-on-unmatched-pattern --cache --parser=typescript --write"
-    ]
-  },
   "description": "Craft AI-driven interfaces effortlessly",
   "keywords": [
     "AI",
