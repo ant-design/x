@@ -9,7 +9,6 @@ import { ActionsContext } from './context';
 import Item from './Item';
 import type { ActionsProps } from './interface';
 import useStyle from './style';
-asdsadsadsdasasdsdsad
 type ActionsRef= {
   nativeElement: HTMLDivElement;
 };
