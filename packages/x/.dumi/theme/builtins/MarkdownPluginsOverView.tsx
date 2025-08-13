@@ -1,19 +1,10 @@
+import PluginMeta from '@ant-design/x-markdown/plugins/version/plugin-meta.json';
 import { List } from 'antd';
 import { createStyles, css } from 'antd-style';
 import classnames from 'classnames';
 import { Link } from 'dumi';
 import React from 'react';
 import useLocale from '../../hooks/useLocale';
-
-const PluginMeta = [
-  { plugin: 'HighlightCode', desc: '渲染代码高亮。', descEn: 'Highlight the rendering code.' },
-  {
-    plugin: 'Latex',
-    desc: '渲染数学公式Latex语法。',
-    descEn: 'Rendering mathematical formulas using Latex syntax.',
-  },
-  { plugin: 'Mermaid', desc: '渲染 Mermaid 图表。', descEn: 'Rendering the Mermaid Chart.' },
-];
 
 interface PluginItem {
   plugin: string;
