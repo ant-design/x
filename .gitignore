@@ -88,8 +88,8 @@ packages/x/components/version/version.tsx
 packages/x/components/version/token.json
 packages/x/components/version/token-meta.json
 
-packages/x-markdown/src/version/version.ts
+packages/x-markdown/src/plugins/version.ts
 packages/x-markdown/src/plugins/version/version.ts
-packages/x-markdown/src/plugins/version/plugin-meta.ts
+packages/x-markdown/src/plugins/version/plugin-meta.json
 
 packages/x-sdk/src/version/version.ts
