@@ -171,6 +171,7 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
         spellcheck="false"
         style="min-height:66px;max-height:132px;overflow-y:auto"
         tabindex="0"
+        value=""
       />
       <div
         id="ant-sender-slot-placeholders"
@@ -1734,6 +1735,7 @@ exports[`renders components/sender/demo/slot-filling.tsx correctly 1`] = `
         spellcheck="false"
         style="min-height:auto;max-height:176px;overflow-y:auto"
         tabindex="0"
+        value=""
       />
       <div
         id="ant-sender-slot-placeholders"

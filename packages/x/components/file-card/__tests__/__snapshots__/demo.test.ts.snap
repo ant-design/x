@@ -655,6 +655,7 @@ exports[`renders components/file-card/demo/basic.tsx correctly 1`] = `
   >
     <div
       class="ant-file-card-file"
+      style="width:260px"
     >
       <div
         class="ant-file-card-file-icon"
