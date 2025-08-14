@@ -44,16 +44,17 @@ $('lib/plugins/*')
 // hooks
 $('lib/plugins/hooks')
   .isDirectory();
+
 // theme
 $('lib/plugins/theme')
   .isDirectory();
 
 // eslint-disable-next-line no-console
-console.log(chalk.green('✨ `lib` directory is valid.'));
+console.log(chalk.green('✨ `lib/plugins` directory is valid.'));
 
 // themes
 $('lib/themes').isDirectory().hasFile('light.css')
 
 
 // eslint-disable-next-line no-console
-console.log(chalk.green('✨ `theme` directory is valid.'));
+console.log(chalk.green('✨ `lib/themes` directory is valid.'));
