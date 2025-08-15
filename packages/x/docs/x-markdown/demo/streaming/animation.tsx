@@ -53,14 +53,12 @@ const fullContent = `
 const roles: BubbleListProps['role'] = {
   ai: {
     placement: 'start',
-    styles: { avatar: { background: '#fde3cf' } },
     components: {
       avatar: <UserOutlined />,
     },
   },
   local: {
     placement: 'end',
-    styles: { avatar: { background: '#87d068' } },
     components: {
       avatar: <UserOutlined />,
     },
