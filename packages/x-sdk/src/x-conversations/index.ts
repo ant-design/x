@@ -4,7 +4,6 @@ import { ConversationStore } from './store';
 
 export interface ConversationData extends AnyObject {
   key: string | number;
-  label?: string;
 }
 
 interface XConversationConfig {

@@ -50,7 +50,8 @@
         "noForEach": "off"
       },
       "correctness": {
-        "useExhaustiveDependencies": "off"
+        "useExhaustiveDependencies": "off",
+        "useUniqueElementIds": "off"
       },
       "suspicious": {
         "noGlobalIsNan": "off",
@@ -69,9 +70,6 @@
         "useSemanticElements": "off",
         "useKeyWithClickEvents": "off",
         "noStaticElementInteractions": "off"
-      },
-      "nursery": {
-        "useUniqueElementIds": "off"
       }
     }
   },

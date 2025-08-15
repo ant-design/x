@@ -25,7 +25,9 @@ export class ChatMessagesStore<T extends { id: number | string }> {
   private conversationKey: ConversationKey | undefined;
 
   private emitListeners() {
-    this.listeners.forEach((listener) => listener());
+    this.listeners.forEach((listener) => {
+      listener();
+    });
   }
 
   constructor(defaultMessages: T[], conversationKey?: ConversationKey) {
