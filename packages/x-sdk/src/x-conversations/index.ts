@@ -3,7 +3,7 @@ import { AnyObject } from '../_util/type';
 import { ConversationStore } from './store';
 
 export interface ConversationData extends AnyObject {
-  key: string;
+  key: string | number;
   label?: string;
 }
 
@@ -32,5 +32,6 @@ export default function useXConversations(config: XConversationConfig) {
     setConversation: store.setConversation,
     getConversation: store.getConversation,
     setConversations: store.setConversations,
+    getMessages: store.getMessages,
   };
 }

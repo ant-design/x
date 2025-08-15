@@ -1,3 +1,4 @@
+import { chatMessagesStoreHelper } from '../x-chat/store';
 import type { ConversationData } from '.';
 
 /**
@@ -61,7 +62,7 @@ export class ConversationStore {
     const exist = this.getConversation(key);
     if (exist) {
       Object.assign(exist, conversation);
-      this.setConversations(this.conversations);
+      this.setConversations([...this.conversations]);
       return true;
     }
     return false;
@@ -71,10 +72,14 @@ export class ConversationStore {
     const index = this.conversations.findIndex((item) => item.key === key);
     if (index !== -1) {
       this.conversations.splice(index, 1);
-      this.setConversations(this.conversations);
+      this.setConversations([...this.conversations]);
       return true;
     }
     return false;
+  };
+
+  getMessages = (key: ConversationData['key']) => {
+    return chatMessagesStoreHelper.getMessages(key);
   };
 
   getSnapshot = () => {

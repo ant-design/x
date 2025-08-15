@@ -1,11 +1,13 @@
 import { AnyObject } from '../../_util/type';
 import XRequest, { XRequestClass } from '../../x-request';
-import DefaultChatProvider from '../providers/DefaultChatProvider';
-import OpenAIChatProvider from '../providers/OpenAIChatProvider';
+import { DeepSeekChatProvider, DefaultChatProvider, OpenAIChatProvider } from '../providers';
 
 const baseURL = 'http://localhost:3000';
 
 describe('DefaultChatProvider test', () => {
+  const headers = new Headers();
+  headers.set('content-type', 'text/event-stream');
+
   it('should initialize successfully', () => {
     const defaultProvider = new DefaultChatProvider({
       request: XRequest(baseURL, {
@@ -72,6 +74,7 @@ describe('DefaultChatProvider test', () => {
       chunk,
       chunks: [],
       status: 'loading',
+      responseHeaders: headers,
     });
     expect(defaultMsg).toEqual('test');
 
@@ -81,6 +84,7 @@ describe('DefaultChatProvider test', () => {
       chunk: '',
       chunks: [chunk],
       status: 'loading',
+      responseHeaders: headers,
     });
     expect(defaultMsg).toEqual('test2');
 
@@ -90,12 +94,16 @@ describe('DefaultChatProvider test', () => {
       chunk: '',
       chunks: chunk,
       status: 'loading',
+      responseHeaders: headers,
     });
     expect(defaultMsg).toEqual('test3');
   });
 });
 
 describe('OpenAiChatProvider test', () => {
+  const headers = new Headers();
+  headers.set('content-type', 'text/event-stream');
+
   it('should initialize successfully', () => {
     const openAIProvider = new OpenAIChatProvider({
       request: XRequest(baseURL, {
@@ -175,6 +183,7 @@ describe('OpenAiChatProvider test', () => {
       chunk,
       chunks: [],
       status: 'loading',
+      responseHeaders: headers,
     });
     expect(openAIMsg).toEqual({ role: 'assistant', content: '' });
   });
@@ -198,6 +207,7 @@ describe('OpenAiChatProvider test', () => {
       chunk,
       chunks: [],
       status: 'loading',
+      responseHeaders: headers,
     });
     expect(openAIMsg).toEqual({ role: 'assistant', content: 'testtest2' });
 
@@ -213,6 +223,136 @@ describe('OpenAiChatProvider test', () => {
       chunk,
       chunks: [],
       status: 'loading',
+      responseHeaders: headers,
+    });
+    expect(openAIMsg).toEqual({ role: 'assistant', content: 'testtest3' });
+  });
+});
+
+describe('DeepSeekChatProvider test', () => {
+  const headers = new Headers();
+  headers.set('content-type', 'text/event-stream');
+
+  it('should initialize successfully', () => {
+    const openAIProvider = new DeepSeekChatProvider({
+      request: XRequest(baseURL, {
+        manual: true,
+      }),
+    });
+
+    expect(openAIProvider).not.toBeNull();
+  });
+
+  it('should transformParams work successfully', () => {
+    const openAIProvider = new DeepSeekChatProvider({
+      request: XRequest(baseURL, {
+        manual: true,
+      }),
+    });
+    openAIProvider.injectGetMessages(() => [
+      {
+        role: 'user',
+        content: 'test',
+      },
+    ]);
+    const openAITransformParams = openAIProvider.transformParams(
+      {
+        test2: 'test2',
+      },
+      {
+        params: {
+          test3: 'test3',
+        },
+      },
+    );
+    expect(openAITransformParams).toEqual({
+      test2: 'test2',
+      test3: 'test3',
+      messages: [
+        {
+          role: 'user',
+          content: 'test',
+        },
+      ],
+    });
+  });
+
+  it('should transformLocalMessage work successfully', () => {
+    const openAIProvider = new DeepSeekChatProvider({
+      request: XRequest(baseURL, {
+        manual: true,
+      }),
+    });
+    const openAIMsg = openAIProvider.transformLocalMessage({
+      messages: [
+        {
+          role: 'user',
+          content: 'test',
+        },
+      ],
+    });
+    expect(openAIMsg).toEqual({
+      role: 'user',
+      content: 'test',
+    });
+  });
+
+  it('should transformMessage not throw error', () => {
+    let chunk = {};
+    const openAIProvider = new DeepSeekChatProvider({
+      request: XRequest(baseURL, {
+        manual: true,
+      }),
+    });
+    // error json format
+    chunk = {
+      data: 'test',
+    };
+    const openAIMsg = openAIProvider.transformMessage({
+      chunk,
+      chunks: [],
+      status: 'loading',
+      responseHeaders: headers,
+    });
+    expect(openAIMsg).toEqual({ role: 'assistant', content: '' });
+  });
+
+  it('should transformMessage work successfully', () => {
+    let chunk = {};
+    const openAIProvider = new DeepSeekChatProvider({
+      request: XRequest(baseURL, {
+        manual: true,
+      }),
+    });
+    // test for streaming
+    chunk = {
+      data: '{"choices":[{"delta":{"role":"assistant","content":"test2"}}]}',
+    };
+    let openAIMsg = openAIProvider.transformMessage({
+      originMessage: {
+        role: 'assistant',
+        content: 'test',
+      },
+      chunk,
+      chunks: [],
+      status: 'loading',
+      responseHeaders: headers,
+    });
+    expect(openAIMsg).toEqual({ role: 'assistant', content: 'testtest2' });
+
+    // test for normal http
+    chunk = {
+      data: '{"choices":[{"message":{"role":"assistant","content":"test3"}}]}',
+    };
+    openAIMsg = openAIProvider.transformMessage({
+      originMessage: {
+        role: 'assistant',
+        content: 'test',
+      },
+      chunk,
+      chunks: [],
+      status: 'loading',
+      responseHeaders: headers,
     });
     expect(openAIMsg).toEqual({ role: 'assistant', content: 'testtest3' });
   });

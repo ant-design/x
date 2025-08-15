@@ -4,12 +4,12 @@ import { SSEFields } from '../../x-stream';
 import AbstractChatProvider, { TransformMessage } from './AbstractChatProvider';
 
 /**
- * LLM OpenAI Compatible Chat Provider
+ * DeepSeek Chat Provider
  * @template ChatMessage 消息类型
  * @template Input 请求参数类型
  * @template Output 响应数据类型
  */
-export default class OpenAIChatProvider<
+export default class DeepSeekChatProvider<
   ChatMessage extends XModelMessage = XModelMessage,
   Input extends XModelParams = XModelParams,
   Output extends Partial<Record<SSEFields, any>> = Partial<Record<SSEFields, any>>,
@@ -30,6 +30,7 @@ export default class OpenAIChatProvider<
   transformMessage(info: TransformMessage<ChatMessage, Output>): ChatMessage {
     const { originMessage, chunk, chunks, responseHeaders } = info;
     let currentContent = '';
+    let currentThink = '';
     let role = 'assistant';
     try {
       let message: any;
@@ -43,23 +44,40 @@ export default class OpenAIChatProvider<
       if (message) {
         message?.choices?.forEach((choice: any) => {
           if (choice?.delta) {
+            currentThink = choice.delta.reasoning_content || '';
             currentContent += choice.delta.content || '';
-            role = choice.delta.role || 'assistant';
+            role = choice.delta.role;
           } else if (choice?.message) {
+            currentThink = choice.message.reasoning_content || '';
             currentContent += choice.message.content || '';
-            role = choice.message.role || 'assistant';
+            role = choice.message.role;
           }
         });
       }
     } catch (error) {
       console.error('transformMessage error', error);
     }
-
-    const content = `${originMessage?.content || ''}${currentContent}`;
+    let content = '';
+    let originMessageContent =
+      typeof originMessage?.content === 'string'
+        ? originMessage?.content
+        : originMessage?.content.text || '';
+    if (!originMessageContent && currentThink) {
+      content = `<think>${currentThink}`;
+    } else if (
+      originMessageContent.includes('<think>') &&
+      !originMessageContent.includes('</think>') &&
+      currentContent
+    ) {
+      originMessageContent = originMessageContent.replace('<think>', '<think status="done">');
+      content = `${originMessageContent}</think>${currentContent}`;
+    } else {
+      content = `${originMessageContent || ''}${currentThink}${currentContent}`;
+    }
 
     return {
       content,
-      role,
+      role: role || 'assistant',
     } as ChatMessage;
   }
 }
