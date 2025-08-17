@@ -88,7 +88,7 @@ const runPrePublish = async () => {
   showMessage(`成功清理构建产物目录`, 'succeed');
 
   // CI
-  console.log(process.cwd(), process.argv.slice(2), 1111);
+  console.log(process.cwd(), process.argv, 1111);
   showMessage(`[CI] 正在执行 lint`, true);
   await runScript({ event: 'lint', path: '.', stdio: 'inherit' });
   showMessage(`[CI] lint 执行成功`, 'succeed');
