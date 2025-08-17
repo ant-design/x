@@ -35,7 +35,8 @@ async function checkVersion() {
 
   if (version in versions) {
     spinner.fail(chalk.yellow('😈 Current version already exists. Forget update package.json?'));
-    spinner.info(`${chalk.cyan(' => Current:')}: version`);
+    spinner.info(`${chalk.cyan(' => Current:')}: ${version}`);
+    spinner.info(`${chalk.cyan(' => Todo:')}: update the x-mono version and execute the command ${chalk.yellow('npm run publish-version')}`);
     exitProcess();
   }
   spinner.succeed('版本检查通过');

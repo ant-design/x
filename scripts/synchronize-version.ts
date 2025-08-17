@@ -22,12 +22,13 @@ export default async function synchronizeVersion() {
         package_json.version = publishVersion;
         fs.writeJson(subPath, package_json, { spaces: 2 });
         spinner.succeed(`${dir} 同步版本成功!`);
+       
       }
     }
   } else {
     spinner.fail(chalk.red('🤔 同步发布版本失败!'));
-    exitProcess();
   }
+   exitProcess()
 }
 
 synchronizeVersion();
