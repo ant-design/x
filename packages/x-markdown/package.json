@@ -1,6 +1,6 @@
 {
   "name": "@ant-design/x-markdown",
-  "version": "2.0.0-alpha.3",
+  "version": "2.0.0-alpha.4",
   "scripts": {
     "compile": "father build",
     "tsc": "tsc --noEmit",
@@ -15,7 +15,8 @@
     "prestart": "npm run version && npm run plugin:meta",
     "precompile": "npm run prestart",
     "version": "tsx scripts/generate-version.ts",
-    "test:dekko": "tsx ./tests/dekko/index.test.ts"
+    "test:dekko": "tsx ./tests/dekko/index.test.ts",
+    "clean": "rm -rf es lib coverage plugins dist themes"
   },
   "sideEffects": false,
   "main": "lib/index.js",
