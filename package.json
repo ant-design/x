@@ -1,6 +1,6 @@
 {
   "name": "x-mono",
-  "version": "2.0.0-alpha.4",
+  "version": "2.0.0-alpha.3",
   "private": true,
   "scripts": {
     "site": "npm run site --workspace packages/x && cp -rf packages/x/_site ./_site",
