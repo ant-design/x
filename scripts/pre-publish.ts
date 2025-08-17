@@ -4,7 +4,7 @@ import chalk from 'chalk';
 import Spinnies from 'spinnies';
 
 import checkRepo from './check-repo';
-import synchronizeVersion from './synchronize_version';
+import synchronizeVersion from './synchronize-version';
 
 const { Notification: Notifier } = require('node-notifier');
 const simpleGit = require('simple-git');
@@ -60,7 +60,6 @@ process.on('SIGINT', () => {
 });
 
 const runPrePublish = async () => {
-  await synchronizeVersion();
   await checkRepo();
 
   const git = simpleGit();

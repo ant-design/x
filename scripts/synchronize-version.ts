@@ -6,9 +6,9 @@ import path from 'path';
 function exitProcess(code = 1) {
   process.exit(code);
 }
-const spinner = ora('Loading unicorns').start('开始同步发布版本');
+const spinner = ora('Loading unicorns').start('开始同步版本');
 export default async function synchronizeVersion() {
-  spinner.start('正在获取发布版本');
+  spinner.start('正在同步发布版本');
   const baseDir = path.join(__dirname, '../packages');
   const { version: publishVersion } = await fs.readJSON(path.join(__dirname, '../package.json'));
   if (publishVersion) {
@@ -25,7 +25,9 @@ export default async function synchronizeVersion() {
       }
     }
   } else {
-    spinner.fail(chalk.red('🤔 获取发布版本失败!'));
+    spinner.fail(chalk.red('🤔 同步发布版本失败!'));
     exitProcess();
   }
 }
+
+synchronizeVersion();
