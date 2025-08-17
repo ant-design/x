@@ -16,7 +16,8 @@
     "precompile": "npm run prestart",
     "version": "tsx scripts/generate-version.ts",
     "test:dekko": "tsx ./tests/dekko/index.test.ts",
-    "clean": "rm -rf es lib coverage plugins dist themes"
+    "clean": "rm -rf es lib coverage plugins dist themes",
+    "test:package-diff": "antd-tools run package-diff"
   },
   "sideEffects": false,
   "main": "lib/index.js",

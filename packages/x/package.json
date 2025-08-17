@@ -91,7 +91,6 @@
   },
   "devDependencies": {
     "tbox-nodejs-sdk": "^0.0.13",
-    "@ant-design/tools": "^19.0.2",
     "@ant-design/v5-patch-for-react-19": "^1.0.3",
     "@ant-design/x-markdown": "*",
     "@ant-design/x-sdk": "*",

@@ -15,7 +15,8 @@
     "coverage": "jest --config .jest.js --no-cache --collect-coverage --coverage",
     "version": "tsx scripts/generate-version.ts",
     "test:dekko": "tsx ./tests/dekko/index.test.ts",
-    "clean": "rm -rf es lib coverage dist"
+    "clean": "rm -rf es lib coverage dist",
+    "test:package-diff": "antd-tools run package-diff"
   },
   "sideEffects": false,
   "main": "lib/index.js",
