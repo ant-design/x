@@ -19,22 +19,18 @@ export default async function synchronizeVersion() {
 
       if (stat.isDirectory()) {
         const subPath = `${baseDir}/${dir}/package.json`;
-
         const package_json = await fs.readJson(subPath);
-        console.log(package_json.version, 111)
         package_json.version = publishVersion;
 
-        fs.writeJsonSync(subPath, package_json, { spaces: 2,encoding:'utf-8' });
+        fs.writeJsonSync(subPath, package_json, { spaces: 2, encoding: 'utf-8' });
 
         spinner.succeed(`${dir} 同步版本成功!`);
-
       }
     }
   } else {
     spinner.fail(chalk.red('🤔 同步发布版本失败!'));
-     exitProcess()
+    exitProcess();
   }
- 
 }
 
 synchronizeVersion();
