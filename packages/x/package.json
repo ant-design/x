@@ -36,7 +36,7 @@
   ],
   "scripts": {
     "api-collection": "antd-tools run api-collection",
-    "prepublishOnly": "tsx ../../scripts/pre-publish.ts",
+    "prepublishOnly": "tsx ../../scripts/pre-publish.ts @ant-design/x",
     "authors": "tsx scripts/generate-authors.ts",
     "changelog": "npm run lint:changelog && tsx scripts/print-changelog.ts",
     "check-commit": "tsx scripts/check-commit.ts",
