@@ -5,7 +5,7 @@ import { ConversationData } from '../x-conversations';
 import { XRequestClass } from '../x-request';
 import type { SSEOutput } from '../x-stream';
 import { AbstractChatProvider } from './providers';
-import useSyncState from './useSyncState';
+import { useChatStore } from './store';
 
 export type SimpleType = string | number | boolean | object;
 
@@ -72,18 +72,27 @@ export default function useXChat<
   Input = RequestParams<ChatMessage>,
   Output = SSEOutput,
 >(config: XChatConfig<ChatMessage, ParsedMessage, Input, Output>) {
-  const { defaultMessages, requestFallback, requestPlaceholder, parser, provider } = config;
+  const {
+    defaultMessages,
+    requestFallback,
+    requestPlaceholder,
+    parser,
+    provider,
+    conversationKey,
+  } = config;
 
   // ========================= Agent Messages =========================
   const idRef = React.useRef(0);
   const requestHandlerRef = React.useRef<XRequestClass<Input, Output>>(undefined);
 
-  const [messages, setMessages, getMessages] = useSyncState<MessageInfo<ChatMessage>[]>(() =>
-    (defaultMessages || []).map((info, index) => ({
-      id: `default_${index}`,
-      status: 'local',
-      ...info,
-    })),
+  const { messages, setMessages, getMessages, setMessage } = useChatStore<MessageInfo<ChatMessage>>(
+    () =>
+      (defaultMessages || []).map((info, index) => ({
+        id: `default_${index}`,
+        status: 'local',
+        ...info,
+      })),
+    conversationKey,
   );
 
   const createMessage = (message: ChatMessage, status: MessageStatus) => {
@@ -96,20 +105,6 @@ export default function useXChat<
     idRef.current += 1;
 
     return msg;
-  };
-
-  const setMessage = (id: string, data: { message?: ChatMessage; status?: MessageStatus }) => {
-    setMessages((ori) => {
-      return ori.map((info) => {
-        if (info.id === id) {
-          return {
-            ...info,
-            ...data,
-          };
-        }
-        return info;
-      });
-    });
   };
 
   // ========================= BubbleMessages =========================
@@ -164,7 +159,7 @@ export default function useXChat<
     const message = provider.transformLocalMessage(requestParams);
     if (reload) {
       loadingMsgId = updatingId;
-      setMessages((ori) => {
+      setMessages((ori: MessageInfo<ChatMessage>[]) => {
         const nextMessages = [...ori];
         if (requestPlaceholder) {
           let placeholderMsg: ChatMessage;
@@ -187,7 +182,7 @@ export default function useXChat<
       });
     } else {
       // Add placeholder message
-      setMessages((ori) => {
+      setMessages((ori: MessageInfo<ChatMessage>[]) => {
         let nextMessages = [...ori, createMessage(message, 'local')];
         if (requestPlaceholder) {
           let placeholderMsg: ChatMessage;
@@ -211,39 +206,52 @@ export default function useXChat<
 
     // Request
     let updatingMsgId: number | string | null | undefined = null;
-    const updateMessage = (status: MessageStatus, chunk: Output, chunks: Output[]) => {
+    const updateMessage = (
+      status: MessageStatus,
+      chunk: Output,
+      chunks: Output[],
+      responseHeaders: Headers,
+    ) => {
       let msg = getMessages().find((info) => info.id === updatingMsgId);
       if (!msg) {
         if (reload && updatingId) {
           msg = getMessages().find((info) => info.id === updatingId);
           if (msg) {
             msg.status = status;
-            msg.message = provider.transformMessage({ chunk, status, chunks });
-            setMessages((ori) => {
+            msg.message = provider.transformMessage({ chunk, status, chunks, responseHeaders });
+            setMessages((ori: MessageInfo<ChatMessage>[]) => {
               return [...ori];
             });
             updatingMsgId = msg.id;
           }
         } else {
           // Create if not exist
-          const transformData = provider.transformMessage({ chunk, status, chunks });
+          const transformData = provider.transformMessage({
+            chunk,
+            status,
+            chunks,
+            responseHeaders,
+          });
           msg = createMessage(transformData, status);
-          setMessages((ori) => {
-            const oriWithoutPending = ori.filter((info) => info.id !== loadingMsgId);
+          setMessages((ori: MessageInfo<ChatMessage>[]) => {
+            const oriWithoutPending = ori.filter(
+              (info: { id: string | number | null | undefined }) => info.id !== loadingMsgId,
+            );
             return [...oriWithoutPending, msg!];
           });
           updatingMsgId = msg.id;
         }
       } else {
         // Update directly
-        setMessages((ori) => {
-          return ori.map((info) => {
+        setMessages((ori: MessageInfo<ChatMessage>[]) => {
+          return ori.map((info: MessageInfo<ChatMessage>) => {
             if (info.id === updatingMsgId) {
               const transformData = provider.transformMessage({
                 originMessage: info.message,
                 chunk,
                 chunks,
                 status,
+                responseHeaders,
               });
               return {
                 ...info,
@@ -259,11 +267,11 @@ export default function useXChat<
       return msg;
     };
     provider.injectRequest({
-      onUpdate: (chunk: Output) => {
-        updateMessage('loading', chunk, []);
+      onUpdate: (chunk: Output, headers: Headers) => {
+        updateMessage('loading', chunk, [], headers);
       },
-      onSuccess: (chunks: Output[]) => {
-        updateMessage('success', undefined as Output, chunks);
+      onSuccess: (chunks: Output[], headers: Headers) => {
+        updateMessage('success', undefined as Output, chunks, headers);
       },
       onError: async (error: Error) => {
         if (requestFallback) {
@@ -279,14 +287,20 @@ export default function useXChat<
             fallbackMsg = requestFallback;
           }
 
-          setMessages((ori) => [
-            ...ori.filter((info) => info.id !== loadingMsgId && info.id !== updatingMsgId),
+          setMessages((ori: MessageInfo<ChatMessage>[]) => [
+            ...ori.filter(
+              (info: { id: string | number | null | undefined }) =>
+                info.id !== loadingMsgId && info.id !== updatingMsgId,
+            ),
             createMessage(fallbackMsg, 'error'),
           ]);
         } else {
           // Remove directly
-          setMessages((ori) => {
-            return ori.filter((info) => info.id !== loadingMsgId && info.id !== updatingMsgId);
+          setMessages((ori: MessageInfo<ChatMessage>[]) => {
+            return ori.filter(
+              (info: { id: string | number | null | undefined }) =>
+                info.id !== loadingMsgId && info.id !== updatingMsgId,
+            );
           });
         }
       },
@@ -307,8 +321,7 @@ export default function useXChat<
       throw new Error('provider is required');
     }
     if (!id || !getMessages().find((info) => info.id === id)) {
-      console.error(`message [${id}] is not found`);
-      return;
+      throw new Error(`message [${id}] is not found`);
     }
     innerOnRequest(requestParams, {
       updatingId: id,

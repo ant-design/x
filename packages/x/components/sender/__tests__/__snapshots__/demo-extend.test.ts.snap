@@ -171,6 +171,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
         spellcheck="false"
         style="min-height: 66px; max-height: 132px; overflow-y: auto;"
         tabindex="0"
+        value="Please help me search for news about  and summarize it into a list."
       >
         Please help me search for news about 
         <span
@@ -2277,6 +2278,7 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
         spellcheck="false"
         style="min-height: auto; max-height: 176px; overflow-y: auto;"
         tabindex="0"
+        value="I want to go toBeijingfor a trip with a man, the date is , and the price should be between 20 and 50 RMB."
       >
         I want to go to
         <span

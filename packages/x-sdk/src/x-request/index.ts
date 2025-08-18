@@ -8,7 +8,7 @@ export interface XRequestCallbacks<Output> {
   /**
    * @description Callback when the request is successful
    */
-  onSuccess: (chunks: Output[]) => void;
+  onSuccess: (chunks: Output[], responseHeaders: Headers) => void;
 
   /**
    * @description Callback when the request fails
@@ -18,7 +18,7 @@ export interface XRequestCallbacks<Output> {
   /**
    * @description Callback when the request is updated
    */
-  onUpdate?: (chunk: Output) => void;
+  onUpdate?: (chunk: Output, responseHeaders: Headers) => void;
 }
 
 export interface XRequestOptions<Input = AnyObject, Output = SSEOutput> extends RequestInit {
@@ -149,7 +149,11 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> {
   }
 
   public run(params?: Input) {
-    this.init(params);
+    if (this.manual) {
+      this.init(params);
+    } else {
+      console.warn('The request is not manual, so it cannot be run!');
+    }
   }
 
   public abort() {
@@ -257,7 +261,7 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> {
       readableStream: response.body!,
       transformStream,
     });
-    await this.processStream<Output>(stream, callbacks, streamTimeout);
+    await this.processStream<Output>(stream, response, callbacks, streamTimeout);
   };
 
   private sseResponseHandler = async <Output = SSEOutput>(
@@ -268,11 +272,12 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> {
     const stream = XStream<Output>({
       readableStream: response.body!,
     });
-    await this.processStream<Output>(stream, callbacks, streamTimeout);
+    await this.processStream<Output>(stream, response, callbacks, streamTimeout);
   };
 
   private async processStream<Output>(
     stream: XReadableStream<Output>,
+    response: Response,
     callbacks?: XRequestCallbacks<Output>,
     streamTimeout?: number,
   ) {
@@ -291,7 +296,7 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> {
       }
       result = await iterator.next();
       chunks.push(result.value);
-      callbacks?.onUpdate?.(result.value);
+      callbacks?.onUpdate?.(result.value, response.headers);
       clearTimeout(this.streamTimeoutHandler);
       if (this.isStreamTimeout) {
         break;
@@ -305,7 +310,7 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> {
       }
     }
     this.finishRequest();
-    callbacks?.onSuccess?.(chunks);
+    callbacks?.onSuccess?.(chunks, response.headers);
   }
 
   private jsonResponseHandler = async <Output = SSEOutput>(
@@ -313,10 +318,10 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> {
     callbacks?: XRequestCallbacks<Output>,
   ) => {
     const chunk: Output = await response.json();
-    callbacks?.onUpdate?.(chunk);
+    callbacks?.onUpdate?.(chunk, response.headers);
     this.finishRequest();
     // keep type consistency with stream mode
-    callbacks?.onSuccess?.([chunk]);
+    callbacks?.onSuccess?.([chunk], response.headers);
   };
 }
 

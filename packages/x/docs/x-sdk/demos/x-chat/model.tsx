@@ -4,9 +4,9 @@ import { BubbleListProps } from '@ant-design/x/es/bubble';
 import {
   OpenAIChatProvider,
   useXChat,
-  XModel,
   XModelParams,
   XModelResponse,
+  XRequest,
 } from '@ant-design/x-sdk';
 import { Avatar, Button, Flex, Tooltip } from 'antd';
 import React from 'react';
@@ -42,7 +42,7 @@ const App = () => {
   const [content, setContent] = React.useState('');
   const [provider] = React.useState(
     new OpenAIChatProvider({
-      request: XModel<XModelParams, XModelResponse>(BASE_URL, {
+      request: XRequest<XModelParams, XModelResponse>(BASE_URL, {
         manual: true,
         params: {
           model: MODEL,

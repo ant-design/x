@@ -8,12 +8,12 @@ import type { ActionsItemProps, ItemType } from './interface';
 /** Tool function: Find data item by path */
 export const findItem = (keyPath: string[], items: ItemType[]): ItemType | null => {
   const keyToFind = keyPath[0];
-
   for (const item of items) {
+    if (!item) return null;
     if (item.key === keyToFind) {
       if (keyPath.length === 1) return item;
 
-      if ('subItems' in item) {
+      if (item.subItems) {
         return findItem(keyPath.slice(1), item?.subItems!);
       }
     }

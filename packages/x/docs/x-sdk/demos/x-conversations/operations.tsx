@@ -1,13 +1,13 @@
 import { DeleteOutlined } from '@ant-design/icons';
-import type { ConversationsProps } from '@ant-design/x';
+import type { ConversationItemType, ConversationsProps } from '@ant-design/x';
 import { Conversations } from '@ant-design/x';
-import { ConversationData, useXConversations } from '@ant-design/x-sdk';
+import { useXConversations } from '@ant-design/x-sdk';
 import { Button, Flex, Typography, theme } from 'antd';
 import React, { useState } from 'react';
 
 const { Paragraph } = Typography;
 
-const createItems: () => ConversationData[] = () =>
+const createItems: () => ConversationItemType[] = () =>
   Array.from({ length: 4 }).map((_, index) => ({
     key: `item${index + 1}`,
     label:
@@ -73,7 +73,7 @@ export default () => {
   return (
     <Flex vertical gap="small" align="flex-start">
       <Conversations
-        items={conversations}
+        items={conversations as ConversationItemType[]}
         activeKey={active}
         style={style}
         onActiveChange={onActiveChange}

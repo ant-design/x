@@ -20,6 +20,7 @@ export default defineConfig({
   },
   esm: {
     input: 'src',
+    ignores: ['**/__tests__/**'],
     overrides: {
       'src/plugins': {
         output: 'plugins',
@@ -30,6 +31,7 @@ export default defineConfig({
     },
   },
   cjs: {
+    ignores: ['**/__tests__/**'],
     input: 'src',
   },
   umd: {

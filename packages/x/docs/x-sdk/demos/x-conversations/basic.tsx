@@ -1,10 +1,10 @@
-import type { ConversationsProps } from '@ant-design/x';
+import type { ConversationItemType } from '@ant-design/x';
 import { Conversations } from '@ant-design/x';
 import { useXConversations } from '@ant-design/x-sdk';
-import { Flex, type GetProp, theme } from 'antd';
+import { Flex, theme } from 'antd';
 import React from 'react';
 
-const items: GetProp<ConversationsProps, 'items'> = Array.from({ length: 4 }).map((_, index) => ({
+const items: ConversationItemType[] = Array.from({ length: 4 }).map((_, index) => ({
   key: `item${index + 1}`,
   label:
     index + 1 === 3
@@ -15,7 +15,7 @@ const items: GetProp<ConversationsProps, 'items'> = Array.from({ length: 4 }).ma
 
 export default () => {
   const { token } = theme.useToken();
-  const { conversations } = useXConversations({ defaultConversations: items as any });
+  const { conversations } = useXConversations({ defaultConversations: items });
 
   // Customize the style of the container
   const style = {
@@ -26,7 +26,11 @@ export default () => {
 
   return (
     <Flex vertical gap="small" align="flex-start">
-      <Conversations items={conversations} defaultActiveKey="item1" style={style} />
+      <Conversations
+        items={conversations as ConversationItemType[]}
+        defaultActiveKey="item1"
+        style={style}
+      />
     </Flex>
   );
 };

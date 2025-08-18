@@ -1,5 +1,4 @@
-import { AnyObject } from '../_util/type';
-import XRequest, { XRequestOptions } from '../x-request';
+import { AnyObject } from '../../../_util/type';
 
 export interface XModelMessage extends AnyObject {
   role: string;
@@ -84,6 +83,7 @@ export interface XModelResponse {
     message: {
       role: string;
       content: string | null;
+      reasoning_content: string | null;
       refusal: string | null;
       annotations: {
         type: 'url_citation';
@@ -118,12 +118,3 @@ export interface XModelResponse {
     };
   };
 }
-
-function XModel<Input = XModelParams, Output = XModelResponse>(
-  baseURL: string,
-  options?: XRequestOptions<Input, Output>,
-) {
-  return XRequest<Input, Output>(baseURL, options);
-}
-
-export default XModel;

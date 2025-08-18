@@ -1,11 +1,11 @@
 import { DeleteOutlined } from '@ant-design/icons';
-import type { ConversationsProps } from '@ant-design/x';
+import type { ConversationItemType, ConversationsProps } from '@ant-design/x';
 import { Conversations } from '@ant-design/x';
 import { useXConversations } from '@ant-design/x-sdk';
-import { Button, Col, Flex, type GetProp, Row, theme } from 'antd';
+import { Button, Col, Flex, Row, theme } from 'antd';
 import React, { useState } from 'react';
 
-const items: GetProp<ConversationsProps, 'items'> = Array.from({ length: 4 }).map((_, index) => ({
+const items: ConversationItemType[] = Array.from({ length: 4 }).map((_, index) => ({
   key: `item${index + 1}`,
   label:
     index + 1 === 3
@@ -13,7 +13,7 @@ const items: GetProp<ConversationsProps, 'items'> = Array.from({ length: 4 }).ma
       : `Conversation Item ${index + 1}`,
   disabled: index === 3,
 }));
-const others: GetProp<ConversationsProps, 'items'> = Array.from({ length: 2 }).map((_, index) => ({
+const others: ConversationItemType[] = Array.from({ length: 2 }).map((_, index) => ({
   key: `other${index + 1}`,
   label:
     index + 1 === 3
@@ -51,7 +51,7 @@ export default () => {
     const instance = type === 'other' ? otherHandler : handler;
     instance.addConversation({
       key: `other${type === 'other' ? otherIdx : idx}`,
-      label: 'Conversation Item ' + (type === 'other' ? otherIdx : idx),
+      label: `Conversation Item ${type === 'other' ? otherIdx : idx}`,
     });
     if (type === 'other') {
       otherIdx = otherIdx + 1;
@@ -100,7 +100,7 @@ export default () => {
         <Col>
           <h3>会话列表1</h3>
           <Conversations
-            items={handler.conversations}
+            items={handler.conversations as ConversationItemType[]}
             activeKey={active}
             style={style}
             onActiveChange={(active) => onActiveChange(active)}
@@ -114,7 +114,7 @@ export default () => {
         <Col>
           <h3>会话列表2</h3>
           <Conversations
-            items={otherHandler.conversations}
+            items={otherHandler.conversations as ConversationItemType[]}
             activeKey={otherActive}
             style={style}
             onActiveChange={(active) => onActiveChange(active, 'other')}

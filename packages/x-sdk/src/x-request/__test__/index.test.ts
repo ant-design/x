@@ -82,40 +82,43 @@ describe('XRequest Class', () => {
   });
 
   test('should create request and handle successful JSON response', async () => {
+    const headers = {
+      get: jest.fn().mockReturnValue('application/json; charset=utf-8'),
+    };
     mockedXFetch.mockResolvedValueOnce({
       ok: true,
       status: 200,
-      headers: {
-        get: jest.fn().mockReturnValue('application/json; charset=utf-8'),
-      },
+      headers,
       json: jest.fn().mockResolvedValueOnce(options.params),
     });
     const request = XRequest(baseURL, options);
     await request.asyncHandler;
-    expect(callbacks.onSuccess).toHaveBeenCalledWith([options.params]);
+    expect(callbacks.onSuccess).toHaveBeenCalledWith([options.params], headers);
     expect(callbacks.onError).not.toHaveBeenCalled();
-    expect(callbacks.onUpdate).toHaveBeenCalledWith(options.params);
+    expect(callbacks.onUpdate).toHaveBeenCalledWith(options.params, headers);
   });
 
   test('should create request and handle streaming response', async () => {
+    const headers = {
+      get: jest.fn().mockReturnValue('text/event-stream'),
+    };
     mockedXFetch.mockResolvedValueOnce({
-      headers: {
-        get: jest.fn().mockReturnValue('text/event-stream'),
-      },
+      headers,
       body: mockSSEReadableStream(),
     });
     const request = XRequest(baseURL, options);
     await request.asyncHandler;
-    expect(callbacks.onSuccess).toHaveBeenCalledWith([sseEvent]);
+    expect(callbacks.onSuccess).toHaveBeenCalledWith([sseEvent], headers);
     expect(callbacks.onError).not.toHaveBeenCalled();
-    expect(callbacks.onUpdate).toHaveBeenCalledWith(sseEvent);
+    expect(callbacks.onUpdate).toHaveBeenCalledWith(sseEvent, headers);
   });
 
   test('should create request and handle custom response, e.g. application/x-ndjson', async () => {
+    const headers = {
+      get: jest.fn().mockReturnValue('application/x-ndjson'),
+    };
     mockedXFetch.mockResolvedValueOnce({
-      headers: {
-        get: jest.fn().mockReturnValue('application/x-ndjson'),
-      },
+      headers,
       body: mockNdJsonReadableStream(),
     });
     const request = XRequest(baseURL, {
@@ -123,20 +126,27 @@ describe('XRequest Class', () => {
       transformStream: new TransformStream(),
     });
     await request.asyncHandler;
-    expect(callbacks.onSuccess).toHaveBeenCalledWith([
-      ndJsonData.split(ND_JSON_SEPARATOR)[0],
-      ndJsonData.split(ND_JSON_SEPARATOR)[1],
-    ]);
+    expect(callbacks.onSuccess).toHaveBeenCalledWith(
+      [ndJsonData.split(ND_JSON_SEPARATOR)[0], ndJsonData.split(ND_JSON_SEPARATOR)[1]],
+      headers,
+    );
     expect(callbacks.onError).not.toHaveBeenCalled();
-    expect(callbacks.onUpdate).toHaveBeenCalledWith(ndJsonData.split(ND_JSON_SEPARATOR)[0]);
-    expect(callbacks.onUpdate).toHaveBeenCalledWith(ndJsonData.split(ND_JSON_SEPARATOR)[1]);
+    expect(callbacks.onUpdate).toHaveBeenCalledWith(
+      ndJsonData.split(ND_JSON_SEPARATOR)[0],
+      headers,
+    );
+    expect(callbacks.onUpdate).toHaveBeenCalledWith(
+      ndJsonData.split(ND_JSON_SEPARATOR)[1],
+      headers,
+    );
   });
 
   test('should create request and handle custom response by response headers', async () => {
+    const headers = {
+      get: jest.fn().mockReturnValue('application/x-custom'),
+    };
     mockedXFetch.mockResolvedValueOnce({
-      headers: {
-        get: jest.fn().mockReturnValue('application/x-custom'),
-      },
+      headers,
       body: mockNdJsonReadableStream(),
     });
     const request = XRequest(baseURL, {
@@ -148,13 +158,19 @@ describe('XRequest Class', () => {
       },
     });
     await request.asyncHandler;
-    expect(callbacks.onSuccess).toHaveBeenCalledWith([
-      ndJsonData.split(ND_JSON_SEPARATOR)[0],
-      ndJsonData.split(ND_JSON_SEPARATOR)[1],
-    ]);
+    expect(callbacks.onSuccess).toHaveBeenCalledWith(
+      [ndJsonData.split(ND_JSON_SEPARATOR)[0], ndJsonData.split(ND_JSON_SEPARATOR)[1]],
+      headers,
+    );
     expect(callbacks.onError).not.toHaveBeenCalled();
-    expect(callbacks.onUpdate).toHaveBeenCalledWith(ndJsonData.split(ND_JSON_SEPARATOR)[0]);
-    expect(callbacks.onUpdate).toHaveBeenCalledWith(ndJsonData.split(ND_JSON_SEPARATOR)[1]);
+    expect(callbacks.onUpdate).toHaveBeenCalledWith(
+      ndJsonData.split(ND_JSON_SEPARATOR)[0],
+      headers,
+    );
+    expect(callbacks.onUpdate).toHaveBeenCalledWith(
+      ndJsonData.split(ND_JSON_SEPARATOR)[1],
+      headers,
+    );
   });
 
   test('should handle error response', async () => {

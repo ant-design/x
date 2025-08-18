@@ -1,8 +1,8 @@
 import { genStyleUtils } from '@ant-design/cssinjs-utils';
-import useXProviderContext from '../hooks/use-x-provider-context';
-import { useInternalToken } from './useToken';
 import type { AliasToken, SeedToken } from 'antd/es/theme/internal';
+import useXProviderContext from '../hooks/use-x-provider-context';
 import { ComponentTokenMap } from './interface/components';
+import { useInternalToken } from './useToken';
 
 export const { genStyleHooks, genComponentStyleHook, genSubStyleComponent } = genStyleUtils<
   ComponentTokenMap,

@@ -13,7 +13,6 @@ import useStyle from './style';
 type ActionsRef = {
   nativeElement: HTMLDivElement;
 };
-
 const ForwardActions = React.forwardRef<ActionsRef, ActionsProps>((props, ref) => {
   const {
     items = [],
@@ -64,7 +63,6 @@ const ForwardActions = React.forwardRef<ActionsRef, ActionsProps>((props, ref) =
 
   // ============================= Refs =============================
   const containerRef = React.useRef<HTMLDivElement>(null);
-
   useProxyImperativeHandle(ref, () => {
     return {
       nativeElement: containerRef.current!,
@@ -72,7 +70,6 @@ const ForwardActions = React.forwardRef<ActionsRef, ActionsProps>((props, ref) =
   });
 
   // ============================= Render =============================
-
   return (
     <div ref={containerRef} {...domProps} className={mergedCls} style={mergedStyle}>
       <ActionsContext.Provider

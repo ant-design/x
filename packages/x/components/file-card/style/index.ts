@@ -34,7 +34,6 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
   return {
     [componentCls]: {
       display: 'flex',
-
       [`${componentCls}-file`]: {
         display: 'flex',
         alignItems: 'center',
@@ -137,7 +136,7 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
           height: '100%',
           objectFit: 'cover',
           borderRadius: 'inherit',
-        }
+        },
       },
 
       [`${componentCls}-video`]: {
@@ -171,7 +170,7 @@ const genFileCardListStyle: GenerateStyle<FileCardToken> = (token) => {
     motionDurationSlow,
     calc,
   } = token;
-  
+
   return {
     [`${componentCls}-list`]: {
       display: 'flex',
@@ -209,20 +208,22 @@ const genFileCardListStyle: GenerateStyle<FileCardToken> = (token) => {
       [`${componentCls}-list-motion`]: {
         transition: `opacity ${motionDurationSlow}`,
 
-        [`${componentCls}-file, ${componentCls}-image, ${componentCls}-video, ${componentCls}-audio`]: {
-          transition: ['width', 'padding']
-            .map((prop) => `${prop} ${motionDurationSlow}`)
-            .join(','),
-        },
+        [`${componentCls}-file, ${componentCls}-image, ${componentCls}-video, ${componentCls}-audio`]:
+          {
+            transition: ['width', 'padding']
+              .map((prop) => `${prop} ${motionDurationSlow}`)
+              .join(','),
+          },
 
         '&-leave-active': {
           opacity: 0,
           marginInlineEnd: calc(marginXS).mul(-1).equal(),
 
-          [`${componentCls}-file, ${componentCls}-image, ${componentCls}-video, ${componentCls}-audio`]: {
-            width: 0,
-            paddingInline: 0,
-          },
+          [`${componentCls}-file, ${componentCls}-image, ${componentCls}-video, ${componentCls}-audio`]:
+            {
+              width: 0,
+              paddingInline: 0,
+            },
         },
       },
 
@@ -258,7 +259,6 @@ const genFileCardListStyle: GenerateStyle<FileCardToken> = (token) => {
 
       // small size
       '&-small': {
-
         [`${componentCls}-list-remove`]: {
           fontSize: fontSize,
         },
@@ -372,8 +372,8 @@ const genFileCardListStyle: GenerateStyle<FileCardToken> = (token) => {
         },
       },
     },
-  }
-}
+  };
+};
 
 export const prepareComponentToken: GetDefaultToken<'FileCard'> = () => ({});
 
