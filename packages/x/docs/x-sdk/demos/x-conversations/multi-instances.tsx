@@ -51,7 +51,7 @@ export default () => {
     const instance = type === 'other' ? otherHandler : handler;
     instance.addConversation({
       key: `other${type === 'other' ? otherIdx : idx}`,
-      label: `Conversation Item ${(type === 'other' ? otherIdx : idx)}`,
+      label: `Conversation Item ${type === 'other' ? otherIdx : idx}`,
     });
     if (type === 'other') {
       otherIdx = otherIdx + 1;

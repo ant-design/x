@@ -54,7 +54,7 @@ demo:
 | loadingRender | 自定义加载内容渲染 | () => React.ReactNode | - | - | 
 | content | 气泡内容 | [ContentType](#contenttype) | - | - | 
 | contentRender | 自定义内容渲染 | (content: ContentType) => React.ReactNode | - | - | 
-| editable | 是否可编辑 | boolean | `false` | - | 
+| editable | 是否可编辑 | boolean \| [EditableBubbleOption](#editablebubbleoption) | `false` | - | 
 | typing | 打字动画效果 | boolean \| [BubbleAnimationOption](#bubbleanimationoption) | `false` | - | 
 | streaming | 是否为流式传输 | boolean | `false` | - | 
 | variant | 气泡样式变体 | `filled` \| `outlined` \| `shadow` \| `borderless` | `filled` | - | 
@@ -107,6 +107,25 @@ type CustomContentType {
 
 ```typescript
 type BubbleSlot<ContentType> = React.ReactNode | ((content: ContentType) => React.ReactNode);
+```
+
+#### EditableBubbleOption
+
+```typescript
+interface EditableBubbleOption {
+  /**
+   * @description 是否可编辑
+   */
+  editing?: boolean;
+  /**
+   * @description 确认按钮
+   */
+  okText?: React.ReactNode;
+  /**
+   * @description 取消按钮
+   */
+  cancelText?: React.ReactNode;
+}
 ```
 
 #### BubbleAnimationOption

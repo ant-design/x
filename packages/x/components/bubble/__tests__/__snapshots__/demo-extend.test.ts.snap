@@ -680,7 +680,7 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
           <div
             class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
           >
-            外气泡尾外气泡尾
+            outer footer
           </div>
           <div
             class="ant-bubble-footer ant-bubble-footer-start"
@@ -844,7 +844,7 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
             <div
               class="ant-bubble-content-with-footer"
             >
-              内气泡尾内气泡尾
+              inner footer
             </div>
             <div
               class="ant-bubble-footer ant-bubble-footer-end"
@@ -1006,7 +1006,7 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
           <div
             class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
           >
-            外气泡尾外气泡尾-右对齐
+            outer footer and align right
           </div>
           <div
             class="ant-bubble-footer ant-bubble-footer-end"
@@ -1170,7 +1170,7 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
             <div
               class="ant-bubble-content-with-footer"
             >
-              内气泡尾内气泡尾-左对齐
+              inner footer and align left
             </div>
             <div
               class="ant-bubble-footer ant-bubble-footer-start"
@@ -1341,7 +1341,7 @@ exports[`renders components/bubble/demo/header.tsx extend context correctly 1`] 
           <div
             class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
           >
-            左对齐 header
+            align left
           </div>
         </div>
       </div>
@@ -1394,7 +1394,7 @@ exports[`renders components/bubble/demo/header.tsx extend context correctly 1`] 
           <div
             class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
           >
-            右对齐 header
+            align right
           </div>
         </div>
       </div>
@@ -3278,7 +3278,7 @@ exports[`renders components/bubble/demo/sider-and-placement.tsx extend context c
                 id="test-id"
                 role="tooltip"
               >
-                主侧
+                main side
               </div>
             </div>
           </div>
@@ -3289,7 +3289,7 @@ exports[`renders components/bubble/demo/sider-and-placement.tsx extend context c
           <div
             class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
           >
-            左对齐
+            align left
           </div>
         </div>
         <div
@@ -3331,7 +3331,7 @@ exports[`renders components/bubble/demo/sider-and-placement.tsx extend context c
                 id="test-id"
                 role="tooltip"
               >
-                扩展侧
+                extra side
               </div>
             </div>
           </div>
@@ -3391,7 +3391,7 @@ exports[`renders components/bubble/demo/sider-and-placement.tsx extend context c
                 id="test-id"
                 role="tooltip"
               >
-                主侧
+                main side
               </div>
             </div>
           </div>
@@ -3402,7 +3402,7 @@ exports[`renders components/bubble/demo/sider-and-placement.tsx extend context c
           <div
             class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
           >
-            右对齐
+            align right
           </div>
         </div>
         <div
@@ -3444,7 +3444,7 @@ exports[`renders components/bubble/demo/sider-and-placement.tsx extend context c
                 id="test-id"
                 role="tooltip"
               >
-                扩展侧
+                extra side
               </div>
             </div>
           </div>
