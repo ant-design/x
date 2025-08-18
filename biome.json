@@ -50,7 +50,8 @@
         "noForEach": "off"
       },
       "correctness": {
-        "useExhaustiveDependencies": "off"
+        "useExhaustiveDependencies": "off",
+        "useUniqueElementIds": "off"
       },
       "suspicious": {
         "noGlobalIsNan": "off",
@@ -58,7 +59,8 @@
         "noExplicitAny": "off",
         "noArrayIndexKey": "off",
         "noConfusingVoidType": "off",
-        "noThenProperty": "off"
+        "noThenProperty": "off",
+        "noTsIgnore": "off"
       },
       "performance": {
         "noDelete": "off",
