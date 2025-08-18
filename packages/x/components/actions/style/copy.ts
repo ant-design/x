@@ -12,6 +12,7 @@ const genActionsCopyStyle: GenerateStyle<ActionsToken> = (token) => {
         direction: 'rtl',
       },
       [`${copyCls}-copy`]: {
+        fontSize:'inherit',
         [`&:not(${copyCls}-copy-success)`]: {
           color: "inherit!important"
         }

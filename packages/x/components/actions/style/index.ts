@@ -28,6 +28,7 @@ const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
         gap: token.paddingXS,
         '&-item, &-sub-item': {
           cursor: 'pointer',
+          fontSize:token.fontSize,
           paddingInline: unit(calc(token.paddingXXS).add(1).equal()),
           paddingBlock: token.paddingXXS,
           borderRadius: token.borderRadiusSM,

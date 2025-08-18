@@ -1,5 +1,5 @@
 import { DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined } from '@ant-design/icons';
-import { Space, Tooltip } from 'antd';
+import { Tooltip } from 'antd';
 import classnames from 'classnames';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
@@ -68,7 +68,7 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
   const feedbackCls = `${prefixCls}-feedback`;
 
   // ============================ Classname ============================
-  const mergedCls = classnames(feedbackCls, hashId, cssVarCls, rootClassName, className, {
+  const mergedCls = classnames(feedbackCls, hashId, cssVarCls, rootClassName, `${prefixCls}-list`, className, {
     [`${feedbackCls}-rtl`]: direction === 'rtl',
   });
 
@@ -76,7 +76,7 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
   const onFeedBacKClick = () =>
     onChange?.(value === FEEDBACK_VALUE.dislike ? FEEDBACK_VALUE.default : FEEDBACK_VALUE.dislike);
   return (
-    <Space {...domProps} className={mergedCls} style={style}>
+    <div {...domProps} className={mergedCls} style={style}>
       {[FEEDBACK_VALUE.default, FEEDBACK_VALUE.like].includes(value as FEEDBACK_VALUE) && (
         <Tooltip title={contextLocale.feedbackLike}>
           <span
@@ -102,7 +102,7 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
           </span>
         </Tooltip>
       )}
-    </Space>
+    </div>
   );
 };
 
