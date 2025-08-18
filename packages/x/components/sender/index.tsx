@@ -304,19 +304,20 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
 
   // ============================ Render ============================
   return (
-    <SenderContext.Provider value={contextValue}>
-      <div
-        key={id}
-        ref={containerRef}
-        className={mergedCls}
-        style={{
-          ...contextConfig.style,
-          ...style,
-          ...contextConfig.styles.root,
-          ...styles.root,
-        }}
-        {...domProps}
-      >
+
+    <div
+      key={id}
+      ref={containerRef}
+      className={mergedCls}
+      style={{
+        ...contextConfig.style,
+        ...style,
+        ...contextConfig.styles.root,
+        ...styles.root,
+      }}
+      {...domProps}
+    >
+      <SenderContext.Provider value={contextValue}>
         <ActionButtonContext.Provider value={actionsButtonContextProps}>
           {/* Header */}
           {headerNode && (
@@ -376,8 +377,9 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
             </div>
           )}
         </ActionButtonContext.Provider>
-      </div>
-    </SenderContext.Provider>
+      </SenderContext.Provider>
+    </div>
+
   );
 });
 
