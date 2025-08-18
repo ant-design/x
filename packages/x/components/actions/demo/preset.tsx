@@ -1,5 +1,6 @@
-import { AudioOutlined, CloseOutlined, CopyOutlined, LoadingOutlined } from '@ant-design/icons';
-import { Actions, type ActionsFeedbackProps } from '@ant-design/x';
+import { CheckOutlined, CloseOutlined, ShareAltOutlined } from '@ant-design/icons';
+import { Actions } from '@ant-design/x';
+import type { ActionsFeedbackProps, ActionsItemProps } from '@ant-design/x';
 import { Button, Flex, message, Pagination } from 'antd';
 import { createStyles } from 'antd-style';
 import React, { useState } from 'react';
@@ -38,8 +39,50 @@ const App: React.FC = () => {
   // feedback
   const [feedbackStatus, setFeedbackStatus] = useState<ActionsFeedbackProps['value']>('default');
   const [feedbackPopupOpen, setFeedbackPopupOpen] = useState(false);
-  // read
-  const [isSpeaking, setIsSpeaking] = useState(false);
+  // speak
+  const [speakStatus, setSpeakingStatus] = useState<ActionsItemProps['status']>('default');
+  // share
+  const [shareStatus, setShareStatus] = useState<ActionsItemProps['status']>('default');
+
+  const speakClick = () => {
+    let timer: any = null;
+    switch (speakStatus) {
+      case 'default':
+        setSpeakingStatus('loading')
+        timer = setTimeout(() => {
+          clearTimeout(timer);
+          setSpeakingStatus('running');
+        }, 1500);
+        break;
+      case 'running':
+        setSpeakingStatus('loading');
+        timer = setTimeout(() => {
+          clearTimeout(timer);
+          setSpeakingStatus('default')
+        }, 1500);
+        break;
+    }
+  }
+
+  const shareClick = () => {
+    let timer: any = null;
+    switch (shareStatus) {
+      case 'default':
+        setShareStatus('loading')
+        timer = setTimeout(() => {
+          clearTimeout(timer);
+          setShareStatus('running');
+        }, 1500);
+        break;
+      case 'running':
+        setShareStatus('loading');
+        timer = setTimeout(() => {
+          clearTimeout(timer);
+          setShareStatus('default')
+        }, 1500);
+        break;
+    }
+  }
 
   const feedbackFooter = (
     <div className={styles.feedbackFooter}>
@@ -98,24 +141,23 @@ const App: React.FC = () => {
     {
       key: 'copy',
       label: 'copy',
-      icon: <CopyOutlined />,
       actionRender: () => {
-        return <Actions.Copy text='copy value'></Actions.Copy>
+        return <Actions.Copy text='copy value' />
       }
     },
     {
-      key: 'read',
-      label: 'read',
-      icon: isSpeaking ? <LoadingOutlined /> : <AudioOutlined />,
-      onItemClick: () => {
-        const utterance = new SpeechSynthesisUtterance('This is a text to be read');
-        utterance.onend = () => {
-          setIsSpeaking(false);
-        };
-        setIsSpeaking(true);
-        window.speechSynthesis.speak(utterance);
-        message.success('Text read aloud');
-      },
+      key: 'audio',
+      label: 'audio',
+      actionRender: () => {
+        return <Actions.Audio onClick={speakClick} status={speakStatus} />
+      }
+    },
+    {
+      key: 'share',
+      label: 'share',
+      actionRender: () => {
+        return <Actions.Item onClick={shareClick} label={shareStatus} status={shareStatus} defaultIcon={<ShareAltOutlined />} runningIcon={<CheckOutlined />} />
+      }
     },
   ];
 

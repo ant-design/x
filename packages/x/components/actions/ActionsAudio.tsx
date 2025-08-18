@@ -1,27 +1,21 @@
 import classnames from 'classnames';
-import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
-import CopyBtn from 'antd/lib/typography/Base';
-
+import Item, { ActionsItemProps } from './ActionsItem';
 
 import { useXProviderContext } from '../x-provider';
 
 import useStyle from './style';
+import { MutedOutlined } from '@ant-design/icons';
 
 
-export interface ActionsCopyProps
+export interface ActionsAudioProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
-  /**
-   * @desc 复制的文本
-   * @descEN Text to be copied
-   */
-  text?: string;
-  /**
-   * @desc 复制图标
-   * @descEN Copy icon
-   */
-  icon?: React.ReactNode,
 
+  /**
+   * @desc 状态
+   * @descEN status
+   */
+  status?: ActionsItemProps['status'];
   /**
    * @desc 自定义样式前缀
    * @descEN Customize the component's prefixCls
@@ -34,22 +28,17 @@ export interface ActionsCopyProps
   rootClassName?: string;
 }
 
-const ActionsCopy: React.FC<ActionsCopyProps> = (props) => {
+const ActionsAudio: React.FC<ActionsAudioProps> = (props) => {
   const {
-    text = '',
-    icon,
+    status,
     className,
     style,
     prefixCls: customizePrefixCls,
     rootClassName,
-    ...otherHtmlProps
+    ...otherProps
   } = props;
 
-  const domProps = pickAttrs(otherHtmlProps, {
-    attr: true,
-    aria: true,
-    data: true,
-  });
+
 
 
   // ============================ Prefix ============================
@@ -58,21 +47,18 @@ const ActionsCopy: React.FC<ActionsCopyProps> = (props) => {
 
   const prefixCls = getPrefixCls('actions', customizePrefixCls);
   const [hashId, cssVarCls] = useStyle(prefixCls);
-  const copyCls = `${prefixCls}-copy`;
+  const audioCls = `${prefixCls}-audio`;
 
   // ============================ Classname ============================
 
-  const mergedCls = classnames(copyCls, hashId, cssVarCls, rootClassName, className, `${prefixCls}-list-item`, {
-    [`${copyCls}-rtl`]: direction === 'rtl',
+  const mergedCls = classnames(audioCls, hashId, cssVarCls, rootClassName, className, {
+    [`${audioCls}-rtl`]: direction === 'rtl',
   });
 
 
   return (
-    <CopyBtn {...domProps} className={mergedCls} style={style} prefixCls={copyCls} copyable={{
-      text,
-      icon
-    }} />
+    <Item label='播放语音' className={mergedCls} status={status} defaultIcon={<MutedOutlined />} {...otherProps}/>
   );
 };
 
-export default ActionsCopy;
+export default ActionsAudio;
