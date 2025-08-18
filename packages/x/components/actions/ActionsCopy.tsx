@@ -1,9 +1,6 @@
-import { createStyles } from 'antd-style';
 import classnames from 'classnames';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
-import { useLocale } from '../locale';
-import enUS from '../locale/en_US';
 import CopyBtn from 'antd/lib/typography/Base';
 
 
@@ -11,11 +8,6 @@ import { useXProviderContext } from '../x-provider';
 
 import useStyle from './style';
 
-enum FEEDBACK_VALUE {
-  like = 'like',
-  dislike = 'dislike',
-  default = 'default',
-}
 
 export interface ActionsCopyProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
@@ -23,12 +15,12 @@ export interface ActionsCopyProps
    * @desc 反馈状态值
    * @descEN Feedback status value
    */
-  value?: `${FEEDBACK_VALUE}`;
+  text?: string;
   /**
    * @desc 反馈状态变化回调
    * @descEN Feedback status change callback
    */
-  onChange?: (value: `${FEEDBACK_VALUE}`) => void;
+  icon?: React.ReactNode,
 
   /**
    * @desc 自定义样式前缀
@@ -44,8 +36,8 @@ export interface ActionsCopyProps
 
 const ActionsCopy: React.FC<ActionsCopyProps> = (props) => {
   const {
-    value = 'default',
-    onChange,
+    text = '',
+    icon,
     className,
     style,
     prefixCls: customizePrefixCls,
@@ -59,7 +51,6 @@ const ActionsCopy: React.FC<ActionsCopyProps> = (props) => {
     data: true,
   });
 
-  const [contextLocale] = useLocale('Actions', enUS.Actions);
 
   // ============================ Prefix ============================
 
@@ -67,39 +58,20 @@ const ActionsCopy: React.FC<ActionsCopyProps> = (props) => {
 
   const prefixCls = getPrefixCls('actions', customizePrefixCls);
   const [hashId, cssVarCls] = useStyle(prefixCls);
-  const copyCls = `${prefixCls}-feedback`;
+  const copyCls = `${prefixCls}-copy`;
 
-  // ============================ Styles ============================
-  const useStyles = createStyles(({ token }) => ({
-    feedbackItem: {
-      padding: token.paddingXXS,
-      borderRadius: token.borderRadius,
-      height: token.controlHeightSM,
-      boxSizing: 'border-box',
-      display: 'inline-flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      cursor: 'pointer',
-      '&:hover': {
-        background: token.colorBgTextHover,
-      },
-    },
-    [`${copyCls}-rtl`]: {
-      direction: 'rtl',
-    },
-  }));
+  // ============================ Classname ============================
 
-  const { styles } = useStyles();
-
-  const mergedCls = classnames(copyCls, hashId, cssVarCls, rootClassName, className, {
+  const mergedCls = classnames(copyCls, hashId, cssVarCls, rootClassName, className, `${prefixCls}-list-item`, {
     [`${copyCls}-rtl`]: direction === 'rtl',
   });
 
-  
+
   return (
-   <CopyBtn prefixCls={copyCls} copyable={{
-    text:'1111111'
-   }}/>
+    <CopyBtn {...domProps} className={mergedCls} prefixCls={copyCls} copyable={{
+      text,
+      icon
+    }} />
   );
 };
 

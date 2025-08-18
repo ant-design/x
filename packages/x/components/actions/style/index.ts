@@ -2,11 +2,13 @@ import { unit } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
+import genActionsCopyStyle from './copy';
+import genActionsFeedbackStyle from './feedback';
 
 // biome-ignore lint/suspicious/noEmptyInterface: ComponentToken need to be empty by default
-export interface ComponentToken {}
+export interface ComponentToken { }
 
-export interface ActionsToken extends FullToken<'Actions'> {}
+export interface ActionsToken extends FullToken<'Actions'> { }
 
 const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
   const { componentCls, antCls, calc } = token;
@@ -85,7 +87,7 @@ export default genStyleHooks(
   'Actions',
   (token) => {
     const compToken = mergeToken<ActionsToken>(token, {});
-    return [genActionsStyle(compToken)];
+    return [genActionsStyle(compToken), genActionsCopyStyle(compToken), genActionsFeedbackStyle(compToken)];
   },
   prepareComponentToken,
 );

@@ -91,7 +91,6 @@ const App: React.FC = () => {
             setFeedbackPopupOpen(val === 'like');
             message.success(`Change feedback value to: ${val}`);
           }}
-          prefixCls={'actions-demo'}
           key="feedback"
         />
       ),
@@ -100,8 +99,8 @@ const App: React.FC = () => {
       key: 'copy',
       label: 'copy',
       icon: <CopyOutlined />,
-      actionRender: ()=>{
-        return <Actions.Copy></Actions.Copy>
+      actionRender: () => {
+        return <Actions.Copy text='copy value'></Actions.Copy>
       }
     },
     {
