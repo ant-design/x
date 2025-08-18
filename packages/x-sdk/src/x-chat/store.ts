@@ -94,7 +94,7 @@ export class ChatMessagesStore<T extends { id: number | string }> {
   subscribe = (callback: () => void) => {
     this.listeners.push(callback);
     return () => {
-      this.listeners.filter((listener) => listener !== callback);
+      this.listeners = this.listeners.filter((listener) => listener !== callback);
     };
   };
 }
