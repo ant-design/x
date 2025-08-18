@@ -40,7 +40,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
     onTyping,
     onTypingComplete,
     onEditConfirm,
-    onEditCancle,
+    onEditCancel,
     ...restProps
   },
   ref,
@@ -162,7 +162,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
               okText={(editable as EditableBubbleOption)?.okText}
               cancelText={(editable as EditableBubbleOption)?.cancelText}
               onEditConfirm={onEditConfirm}
-              onEditCancle={onEditCancle}
+              onEditCancel={onEditCancel}
             />
           ) : (
             <>

@@ -111,7 +111,7 @@ const App = () => {
           console.log(`editing User-${data.key}: `, content);
           update(data.key, { content, editable: false });
         },
-        onEditCancle: () => {
+        onEditCancel: () => {
           update(data.key, { editable: false });
         },
       }),
