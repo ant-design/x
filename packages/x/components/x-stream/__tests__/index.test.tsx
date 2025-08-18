@@ -57,7 +57,9 @@ describe('XStream', () => {
     const customTransform = new TransformStream({
       transform(chunk, controller) {
         const parts = chunk.split('|');
-        parts.forEach((part: string) => controller.enqueue(part));
+        parts.forEach((part: string) => {
+          controller.enqueue(part);
+        });
       },
     });
 

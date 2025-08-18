@@ -29,7 +29,9 @@ export class ConversationStore {
   private storeKey: string;
 
   private emitListeners() {
-    this.listeners.forEach((listener) => listener());
+    this.listeners.forEach((listener) => {
+      listener();
+    });
   }
 
   constructor(defaultConversations: ConversationData[]) {
