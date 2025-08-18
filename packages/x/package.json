@@ -150,7 +150,7 @@
     "adm-zip": "^0.5.16",
     "ali-oss": "^6.21.0",
     "antd": "6.0.0-alpha.1",
-    "antd-style": "^3.6.3",
+    "antd-style": "^4.0.0-alpha.1",
     "antd-token-previewer": "^3.0.0-alpha.0",
     "axios": "^1.7.7",
     "browserslist": "^4.23.3",
