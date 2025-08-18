@@ -40,7 +40,7 @@ const main = async () => {
       pluginMeta = getPluginMeta(file.children);
     });
 
-    fs.writeJsonSync(output, pluginMeta, 'utf8');
+    fs.writeJsonSync(output, pluginMeta, { spaces: 2, encoding: 'utf-8' });
     // eslint-disable-next-line no-console
     console.log(`✅  Plugin Meta has been written to ${output}`);
   }
