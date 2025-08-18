@@ -3,6 +3,7 @@ import { fireEvent, render, renderHook, sleep, waitFakeTimer } from '../../../te
 import XRequest from '../../x-request';
 import useXChat, { MessageStatus, SimpleType, XChatConfig } from '../index';
 import { DefaultChatProvider } from '../providers';
+import { chatMessagesStoreHelper } from '../store';
 
 interface ChatInput {
   query: string;
@@ -214,8 +215,6 @@ describe('useXChat', () => {
     fireEvent.change(container.querySelector('input')!, { target: { value: 'light' } });
     await waitFakeTimer();
 
-    console.log(container.innerHTML);
-
     expect(getMessages(container)).toEqual([
       expectMessage('0_{"query":"light"}', 'local'),
       expectMessage('1_{"query":"light"}', 'local'),
@@ -250,7 +249,7 @@ describe('useXChat', () => {
     expect(result.current?.messages[0].message).toEqual('Hello2');
   });
 
-  it('should reload work successfully', async () => {
+  it('should reload, isRequesting work successfully', async () => {
     let count = 0;
     const provider = new DefaultChatProvider<ChatInput, any, any>({
       request: XRequest('http://localhost:8000/', {
@@ -277,17 +276,60 @@ describe('useXChat', () => {
     );
 
     fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
+    expect(ref.current?.isRequesting()).toBe(true);
     await sleep(200);
+    expect(ref.current?.isRequesting()).toBe(false);
     expect(getMessages(container)).toEqual([
       expectMessage({ query: 'little' }, 'local'),
       expectMessage({ content: 'bamboo' }, 'success'),
     ]);
-    console.log(11111111, container.querySelector('pre')!.textContent);
+
     ref.current.onReload(ref.current.parsedMessages[1].id, {});
+    expect(() => ref.current?.onReload('fake id', { query: 'Hello' })).toThrow(
+      'message [fake id] is not found',
+    );
     await sleep(200);
     expect(getMessages(container)).toEqual([
       expectMessage({ query: 'little' }, 'local'),
       expectMessage({ content: 'bamboo2' }, 'success'),
     ]);
+  });
+
+  it('should chat messages store(dep conversationKey) work successfully', async () => {
+    renderHook(() =>
+      useXChat<string, ChatInput, any, any>({
+        defaultMessages: [{ message: 'Hello' }],
+        conversationKey: 'conversation-1',
+      }),
+    );
+    await sleep(100);
+    const store = chatMessagesStoreHelper.get('conversation-1');
+    expect(store).toBeTruthy();
+    expect(store?.getMessages()).toEqual([{ id: 'default_0', message: 'Hello', status: 'local' }]);
+
+    store?.addMessage({
+      id: 'msg_1',
+      message: 'Kitty',
+      status: 'local',
+    });
+    expect(store?.getMessages().length).toBe(2);
+    expect(
+      store?.addMessage({
+        id: 'msg_1',
+        message: 'Kitty2',
+        status: 'local',
+      }),
+    ).toBe(false);
+    expect(store?.getMessages().length).toBe(2);
+
+    store?.removeMessage('msg_1');
+    expect(store?.getMessages().length).toBe(1);
+    expect(store?.removeMessage('msg_2')).toBe(false);
+
+    const messages = chatMessagesStoreHelper.getMessages('conversation-1');
+    expect(messages).toEqual([{ id: 'default_0', message: 'Hello', status: 'local' }]);
+
+    chatMessagesStoreHelper.delete('conversation-1');
+    expect(chatMessagesStoreHelper.get('conversation-1')).toBeFalsy();
   });
 });

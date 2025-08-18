@@ -124,7 +124,6 @@ describe('useXConversations tests', () => {
     const Demo2 = createDemo();
     render(<Demo2 ref={ref} defaultConversations={list} />);
     await sleep(500);
-    console.dir(conversationStoreHelper._allConversationStores);
     const conversation = conversationStoreHelper.getConversation('1');
     expect(conversation).toEqual(list[0]);
   });

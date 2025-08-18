@@ -1,7 +1,8 @@
+import { AnyObject } from '../../_util/type';
 import { XRequestCallbacks, XRequestClass, XRequestOptions } from '../../x-request';
 import { MessageStatus } from '..';
 
-export interface ChatProviderConfig<Input, Output> {
+export interface ChatProviderConfig<Input, Output> extends AnyObject {
   request: XRequestClass<Input, Output> | (() => XRequestClass<Input, Output>);
 }
 
@@ -10,6 +11,7 @@ export interface TransformMessage<ChatMessage, Output> {
   chunk: Output;
   chunks: Output[];
   status: MessageStatus;
+  responseHeaders: Headers;
 }
 
 export default abstract class AbstractChatProvider<ChatMessage, Input, Output> {
@@ -65,21 +67,21 @@ export default abstract class AbstractChatProvider<ChatMessage, Input, Output> {
     onSuccess,
     onError,
   }: {
-    onUpdate: (data: Output) => void;
-    onSuccess: (data: Output[]) => void;
+    onUpdate: (data: Output, responseHeaders: Headers) => void;
+    onSuccess: (data: Output[], responseHeaders: Headers) => void;
     onError: (error: any) => void;
   }) {
     const originalOnUpdate = this._originalCallbacks?.onUpdate;
     const originalOnSuccess = this._originalCallbacks?.onSuccess;
     const originalOnError = this._originalCallbacks?.onError;
     this._request.options.callbacks = {
-      onUpdate: (data: Output) => {
-        onUpdate(data);
-        if (originalOnUpdate) originalOnUpdate(data);
+      onUpdate: (data: Output, responseHeaders: Headers) => {
+        onUpdate(data, responseHeaders);
+        if (originalOnUpdate) originalOnUpdate(data, responseHeaders);
       },
-      onSuccess: (data) => {
-        onSuccess(data);
-        if (originalOnSuccess) originalOnSuccess(data);
+      onSuccess: (data: Output[], responseHeaders: Headers) => {
+        onSuccess(data, responseHeaders);
+        if (originalOnSuccess) originalOnSuccess(data, responseHeaders);
       },
       onError: (error) => {
         onError(error);
