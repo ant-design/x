@@ -32,9 +32,10 @@ const App = () => {
             ),
           }}
           onEditCancel={() => setEditable([false, editable[1]])}
-          onEditConfirm={(val) => (
-            setContent([val, content[1]]), setEditable([false, editable[1]])
-          )}
+          onEditConfirm={(val) => {
+            setContent([val, content[1]]);
+            setEditable([false, editable[1]]);
+          }}
         />
       </Flex>
       <Flex>
@@ -61,10 +62,10 @@ const App = () => {
             ),
           }}
           onEditCancel={() => setEditable([editable[0], false])}
-          onEditConfirm={(val) => (
-            setContent([content[0], val]),
-            setEditable([editable[0], { ...(editable[1] as any), editing: false }])
-          )}
+          onEditConfirm={(val) => {
+            setContent([content[0], val]);
+            setEditable([editable[0], { ...(editable[1] as any), editing: false }]);
+          }}
         />
       </Flex>
     </Flex>
