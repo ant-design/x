@@ -57,7 +57,6 @@
     "lint:style": "tsx scripts/check-cssinjs.tsx",
     "prettier": "prettier -c --write **/* --cache",
     "pub": "echo 'Please use `npm publish` instead.'",
-    "presite": "npm run prestart",
     "site": "dumi build && cp .surgeignore _site",
     "sort:api-table": "antd-tools run sort-api-table",
     "sort:package-json": "npx sort-package-json",
