@@ -53,7 +53,7 @@ Common Props Reference: [Common Props](/docs/react/common-props)
 | loadingRender | Custom loading content rendering | () => React.ReactNode | - | - | 
 | content | Bubble Contents | [ContentType](#contenttype) | - | - | 
 | contentRender | Custom content rendering | (content: ContentType) => React.ReactNode | - | - | 
-| editable | Whether bubble is editable | boolean | `false` | - | 
+| editable | Whether bubble is editable | boolean \| [EditableBubbleOption](#editablebubbleoption) | `false` | - | 
 | typing | Typing Animation Effects | boolean \| [BubbleAnimationOption](#bubbleanimationoption) | `false` | - | 
 | streaming | Whether it is streaming | boolean | `false` | - | 
 | variant | Bubble style variants | `filled` \| `outlined` \| `shadow` \| `borderless` | `filled` | - | 
@@ -106,6 +106,25 @@ type CustomContentType {
 
 ```typescript
 type BubbleSlot<ContentType> = React.ReactNode | ((content: ContentType) => React.ReactNode);
+```
+
+#### EditableBubbleOption
+
+```typescript
+interface EditableBubbleOption {
+  /**
+   * @description Whether to enable editing
+   */
+  editing?: boolean;
+  /**
+   * @description Button UI for commit
+   */
+  okText?: React.ReactNode;
+  /**
+   * @description Button UI for cancel
+   */
+  cancelText?: React.ReactNode;
+}
 ```
 
 #### BubbleAnimationOption
