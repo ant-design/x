@@ -1,6 +1,6 @@
 import { UserOutlined } from '@ant-design/icons';
 import { Bubble, Sender, useXAgent, useXChat } from '@ant-design/x';
-import { RolesType } from '@ant-design/x/es/bubble/BubbleList';
+import { BubbleListProps } from '@ant-design/x/es/bubble';
 import XMarkdown from '@ant-design/x-markdown';
 import Latex from '@ant-design/x-markdown/plugins/Latex';
 import React from 'react';
@@ -20,14 +20,18 @@ block: \n
 \\]
 `;
 
-const roles: RolesType = {
+const roles: BubbleListProps['role'] = {
   ai: {
     placement: 'start',
-    avatar: { icon: <UserOutlined />, style: { background: '#fde3cf' } },
+    components: {
+      avatar: <UserOutlined />,
+    },
   },
   local: {
     placement: 'end',
-    avatar: { icon: <UserOutlined />, style: { background: '#87d068' } },
+    components: {
+      avatar: <UserOutlined />,
+    },
   },
 };
 
@@ -59,16 +63,18 @@ const App = () => {
   return (
     <div style={{ height: 500, display: 'flex', flexDirection: 'column' }}>
       <Bubble.List
-        roles={roles}
+        role={roles}
         style={{ flex: 1 }}
         items={messages.map(({ id, message, status }) => ({
           key: id,
           role: status === 'local' ? 'local' : 'ai',
           content: message,
-          messageRender:
+          contentRender:
             status === 'local'
               ? undefined
-              : (content) => <XMarkdown content={content} config={{ extensions: Latex() }} />,
+              : (content) => (
+                  <XMarkdown content={content as string} config={{ extensions: Latex() }} />
+                ),
         }))}
       />
       <Sender

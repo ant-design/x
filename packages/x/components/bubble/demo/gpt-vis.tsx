@@ -1,4 +1,3 @@
-import type { BubbleProps } from '@ant-design/x';
 import { Bubble } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
 import { Line, LineProps } from '@antv/gpt-vis';
@@ -19,31 +18,45 @@ const LineCompt = (props: LineProps) => {
   return <Line data={JSON.parse(data || '')} axisXTitle={axisXTitle} axisYTitle={axisYTitle} />;
 };
 
-const RenderMarkdown: BubbleProps['messageRender'] = (content) => (
-  <XMarkdown components={{ line: LineCompt }}>{content}</XMarkdown>
-);
-
 const App = () => {
-  const [rerenderKey, setRerenderKey] = React.useState(0);
+  const [index, setIndex] = React.useState(text.length);
+  const [hasNextChunk, setHasNextChunk] = React.useState(false);
+  const timer = React.useRef<any>(-1);
+
+  const renderStream = () => {
+    if (index >= text.length) {
+      clearTimeout(timer.current);
+      setHasNextChunk(false);
+      return;
+    }
+    timer.current = setTimeout(() => {
+      setIndex((prev) => prev + 5);
+      renderStream();
+    }, 20);
+  };
+
+  React.useEffect(() => {
+    if (index === text.length) return;
+    setHasNextChunk(true);
+    renderStream();
+    return () => {
+      clearTimeout(timer.current);
+    };
+  }, [index]);
 
   return (
-    <Flex vertical gap="small" key={rerenderKey}>
-      <Button
-        style={{ alignSelf: 'flex-end' }}
-        onClick={() => {
-          setRerenderKey((prev) => prev + 1);
-        }}
-      >
+    <Flex vertical gap="small">
+      <Button style={{ alignSelf: 'flex-end' }} onClick={() => setIndex(1)}>
         Re-Render
       </Button>
 
       <Bubble
-        typing={{ step: 20, interval: 150 }}
-        content={text}
-        messageRender={RenderMarkdown}
-        avatar={{
-          src: 'https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp',
-        }}
+        content={text.slice(0, index)}
+        contentRender={(content) => (
+          <XMarkdown components={{ line: LineCompt }} streaming={{ hasNextChunk }}>
+            {content}
+          </XMarkdown>
+        )}
         variant="outlined"
       />
     </Flex>

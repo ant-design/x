@@ -9,7 +9,7 @@ export interface ComponentToken {}
 export interface ActionsToken extends FullToken<'Actions'> {}
 
 const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
-  const { componentCls, antCls } = token;
+  const { componentCls, antCls, calc } = token;
   return {
     [componentCls]: {
       [`& ${antCls}-pagination-item-link`]: {
@@ -21,12 +21,14 @@ const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
       [`${componentCls}-list`]: {
         display: 'inline-flex',
         flexDirection: 'row',
-        color: token.colorTextDescription,
+        alignItems: 'center',
+        color: token.colorText,
         gap: token.paddingXS,
         '&-item, &-sub-item': {
           cursor: 'pointer',
-          padding: token.paddingXXS,
-          borderRadius: token.borderRadius,
+          paddingInline: unit(calc(token.paddingXXS).add(1).equal()),
+          paddingBlock: token.paddingXXS,
+          borderRadius: token.borderRadiusSM,
           height: token.controlHeightSM,
           boxSizing: 'border-box',
           display: 'inline-flex',
@@ -47,17 +49,20 @@ const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
         },
       },
       '&-variant-outlined': {
-        padding: token.paddingXXS,
+        paddingInline: unit(calc(token.paddingXXS).add(1).equal()),
+        paddingBlock: token.paddingXXS,
         borderRadius: token.borderRadius,
         border: `${unit(token.lineWidth)} ${token.lineType}, ${token.colorBorderSecondary}`,
       },
       '&-variant-filled': {
-        padding: token.paddingXXS,
+        paddingInline: unit(calc(token.paddingXXS).add(1).equal()),
+        paddingBlock: token.paddingXXS,
         borderRadius: token.borderRadius,
         backgroundColor: token.colorBorderSecondary,
 
         [`${componentCls}-list-item, ${componentCls}-list-sub-item`]: {
-          padding: token.paddingXXS,
+          paddingInline: unit(calc(token.paddingXXS).add(1).equal()),
+          paddingBlock: token.paddingXXS,
           '&-icon': {
             fontSize: token.fontSize,
           },

@@ -7,6 +7,8 @@ export type { BubbleProps } from './bubble';
 export { default as Bubble } from './bubble';
 export type { ConversationItemType, ConversationsProps } from './conversations';
 export { default as Conversations } from './conversations';
+export { default as FileCard } from './file-card';
+export type { FileCardProps, FileCardListProps } from './file-card';
 export type { XNotificationOpenArgs } from './notification';
 export { default as notification } from './notification';
 export type { PromptProps, PromptsProps } from './prompts';

@@ -7,6 +7,7 @@ $('dist')
   .hasFile('x-markdown.min.js')
   .hasFile('x-markdown.min.js.map');
 
+console.log(chalk.green('✨ `dist` directory is valid.'));
 // plugins
 $('dist/plugins')
   .isDirectory()
@@ -21,4 +22,4 @@ $('dist/plugins')
   .hasFile('code-high-light.min.js.map');
 
 // eslint-disable-next-line no-console
-console.log(chalk.green('✨ `dist` directory is valid.'));
+console.log(chalk.green('✨ `dist/plugins` directory is valid.'));

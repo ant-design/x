@@ -16,5 +16,5 @@ jobs:
       - run: ut coverage
       - uses: codecov/codecov-action@v5
         with:
-          directories: packages/x,packages/x-markdown,packages/x-sdk,packages/x-card
+          directories: packages/x,packages/x-markdown,packages/x-sdk
           token: ${{ secrets.CODECOV_TOKEN }}

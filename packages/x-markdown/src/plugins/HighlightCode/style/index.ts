@@ -1,8 +1,8 @@
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import { FastColor } from '@ant-design/fast-color';
 import type { GenerateStyle } from 'antd/es/theme/internal';
-import { genStyleHooks } from '../../../theme/genStyleUtils';
-import type { FullToken, GetDefaultToken } from '../../../theme/useToken';
+import { genStyleHooks } from '../../theme/genStyleUtils';
+import type { FullToken, GetDefaultToken } from '../../theme/useToken';
 
 export interface ComponentToken {
   /**

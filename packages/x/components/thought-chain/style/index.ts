@@ -36,7 +36,7 @@ export interface ComponentToken {
    * @desc 图标容器尺寸
    * @descEN ThoughtChain.Item `outlined`'s hover background color
    */
-  iconSize: string;
+  iconSize: number;
 }
 
 export interface ThoughtChainToken extends FullToken<'ThoughtChain'> {}
@@ -143,11 +143,11 @@ const genThoughtChainStyle: GenerateStyle<ThoughtChainToken, CSSObject> = (token
 export const prepareComponentToken: GetDefaultToken<'ThoughtChain'> = (token) => {
   return {
     itemSolidBg: token.colorFillTertiary,
-    itemSolidHoverBg: token.colorFillContentHover,
+    itemSolidHoverBg: token.colorBgTextHover,
     itemOutlinedBg: token.colorBgContainer,
-    itemOutlinedHoverBg: token.colorFillContentHover,
+    itemOutlinedHoverBg: token.colorBgTextHover,
     itemBorderRadius: token.borderRadius,
-    iconSize: '14px',
+    iconSize: token.fontSize,
   };
 };
 

@@ -28,13 +28,11 @@ type InputFocusOptions = Parameters<InputRef['focus']>[0];
 type SlotNode = Text | Document | HTMLSpanElement;
 const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const {
-    value,
     onChange,
     onKeyUp,
     onKeyDown,
     onPaste,
     onPasteFile,
-    loading,
     disabled,
     readOnly,
     submitType = 'enter',
@@ -42,7 +40,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     styles = {},
     classNames = {},
     autoSize,
-    components,
     onSubmit,
     placeholder,
     onFocus,
@@ -135,6 +132,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         case 'input':
           return (
             <Input
+              readOnly={readOnly}
               className={`${prefixCls}-slot-input`}
               placeholder={node.props?.placeholder || ''}
               data-slot-input={node.key}
@@ -151,6 +149,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         case 'select':
           return (
             <Dropdown
+              disabled={readOnly}
               menu={{
                 items: node.props?.options?.map((opt: any) => ({
                   label: opt,
@@ -190,6 +189,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
             (value: any) => {
               updateSlot(node.key as string, value);
             },
+            { disabled, readOnly },
             node,
           );
         default:
@@ -324,7 +324,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       onKeyDown?.(e as unknown as React.KeyboardEvent<HTMLTextAreaElement>);
       return;
     }
-
     const canSubmit = e.key === 'Enter';
 
     switch (submitType) {
@@ -410,8 +409,17 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     onBlur?.(e as unknown as React.FocusEvent<HTMLTextAreaElement>);
   };
 
+  // 移除<br>
+  const removeSpecificBRs = (element: HTMLDivElement | null) => {
+    const brElements = element?.querySelectorAll('br');
+    brElements?.forEach((br) => {
+      br.remove();
+    });
+  };
+
   const onInternalInput = (e: React.FormEvent<HTMLDivElement>) => {
     const newValue = getEditorValue();
+    removeSpecificBRs(editableRef?.current);
     onChange?.(
       newValue.value,
       e as unknown as React.ChangeEvent<HTMLTextAreaElement>,
@@ -555,7 +563,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
           },
         )}
         data-placeholder={placeholder}
-        contentEditable="true"
+        contentEditable={!readOnly}
         suppressContentEditableWarning
         spellCheck={false}
         onKeyDown={onInternalKeyDown}

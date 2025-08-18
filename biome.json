@@ -13,7 +13,8 @@
       "!**/node_modules",
       "!**/coverage",
       "!**/package.json",
-      "!x-markdown/plugins/**/*"
+      "!**/x-markdown/plugins/**/*",
+      "!**/x-markdown/themes/**/*"
     ]
   },
   "formatter": {
@@ -49,7 +50,8 @@
         "noForEach": "off"
       },
       "correctness": {
-        "useExhaustiveDependencies": "off"
+        "useExhaustiveDependencies": "off",
+        "useUniqueElementIds": "off"
       },
       "suspicious": {
         "noGlobalIsNan": "off",
@@ -57,7 +59,8 @@
         "noExplicitAny": "off",
         "noArrayIndexKey": "off",
         "noConfusingVoidType": "off",
-        "noThenProperty": "off"
+        "noThenProperty": "off",
+        "noTsIgnore": "off"
       },
       "performance": {
         "noDelete": "off",
@@ -68,9 +71,6 @@
         "useSemanticElements": "off",
         "useKeyWithClickEvents": "off",
         "noStaticElementInteractions": "off"
-      },
-      "nursery": {
-        "useUniqueElementIds": "off"
       }
     }
   },
@@ -104,16 +104,29 @@
       }
     },
     {
-      "includes": [
-        "**/packages/x/components/**/*/demo/**/*",
-        "**/packages/x-card/src/**/*",
-        "**/packages/x-sdk/src/**/*",
-        "**/packages/x-markdown/src/**/*"
-      ],
+      "includes": ["**/packages/x/components/**/*/demo/**/*", "**/packages/x-sdk/src/**/*"],
       "linter": {
         "rules": {
           "correctness": {
             "noVoidTypeReturn": "off"
+          },
+          "a11y": {
+            "useValidAnchor": "off",
+            "useAnchorContent": "off",
+            "useKeyWithClickEvents": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["**/packages/x-markdown/src/**/*"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noVoidTypeReturn": "off"
+          },
+          "suspicious": {
+            "noImportantInKeyframe": "error"
           },
           "a11y": {
             "useValidAnchor": "off",

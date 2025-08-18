@@ -22,7 +22,7 @@ const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (token) => {
     },
     [itemCls]: {
       display: 'inline-flex',
-      gap: token.marginXS,
+      gap: unit(calc(token.marginXXS).add(1).equal()),
       whiteSpace: 'normal',
       wordBreak: 'break-word',
       fontSize: token.fontSize,

@@ -4,7 +4,7 @@ import throttle from 'lodash.throttle';
 import mermaid from 'mermaid';
 import React, { useEffect, useRef, useState } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import useXProviderContext from '../../hooks/use-x-provider-context';
+import useXProviderContext from '../hooks/use-x-provider-context';
 import type { PluginsType } from '../type';
 import useStyle from './style';
 

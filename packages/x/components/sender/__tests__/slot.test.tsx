@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render } from '../../../tests/utils';
 import { GetRef } from 'antd';
 import React from 'react';
 import { act } from '../../../tests/utils';

@@ -42,35 +42,33 @@ const GroupTitle: React.FC<GroupTitleProps> = ({ className, children }) => {
   const groupOpen = mergeCollapsible && !!expandedKeys?.includes?.(name);
 
   return (
-    <>
-      <li className={className}>
-        <div
-          className={classnames(`${prefixCls}-group-title`, {
-            [`${prefixCls}-group-title-collapsible`]: mergeCollapsible,
-          })}
-          onClick={expandFun}
-        >
-          {labelNode && <div className={classnames(`${prefixCls}-group-label`)}>{labelNode}</div>}
-          {mergeCollapsible && (
-            <div
-              className={classnames(
-                `${prefixCls}-group-collapse-trigger `,
-                `${prefixCls}-group-collapse-trigger-${groupOpen ? 'open' : 'close'}`,
-              )}
-            >
-              <RightOutlined />
-            </div>
-          )}
-        </div>
-        <CSSMotion {...collapseMotion} visible={mergeCollapsible ? groupOpen : true}>
-          {({ className: motionClassName, style }, motionRef) => (
-            <div className={classnames(motionClassName)} ref={motionRef} style={style}>
-              {children}
-            </div>
-          )}
-        </CSSMotion>
-      </li>
-    </>
+    <li className={className}>
+      <div
+        className={classnames(`${prefixCls}-group-title`, {
+          [`${prefixCls}-group-title-collapsible`]: mergeCollapsible,
+        })}
+        onClick={expandFun}
+      >
+        {labelNode && <div className={classnames(`${prefixCls}-group-label`)}>{labelNode}</div>}
+        {mergeCollapsible && (
+          <div
+            className={classnames(
+              `${prefixCls}-group-collapse-trigger `,
+              `${prefixCls}-group-collapse-trigger-${groupOpen ? 'open' : 'close'}`,
+            )}
+          >
+            <RightOutlined />
+          </div>
+        )}
+      </div>
+      <CSSMotion {...collapseMotion} visible={mergeCollapsible ? groupOpen : true}>
+        {({ className: motionClassName, style }, motionRef) => (
+          <div className={classnames(motionClassName)} ref={motionRef} style={style}>
+            {children}
+          </div>
+        )}
+      </CSSMotion>
+    </li>
   );
 };
 

@@ -1,6 +1,6 @@
 import os from 'node:os';
-import path from 'path';
 import { defineConfig } from 'dumi';
+import path from 'path';
 
 import rehypeAntd from './.dumi/rehypeAntd';
 import remarkAntd from './.dumi/remarkAntd';
@@ -58,6 +58,7 @@ export default defineConfig({
     '@ant-design/x/es': path.join(__dirname, 'components'),
     '@ant-design/x': path.join(__dirname, 'components'),
     '@ant-design/x-markdown': '../x-markdown/src',
+    '@ant-design/x-sdk': '../x-sdk/src',
     // https://github.com/ant-design/ant-design/issues/46628
     '@ant-design/icons$': '@ant-design/icons/lib',
   },

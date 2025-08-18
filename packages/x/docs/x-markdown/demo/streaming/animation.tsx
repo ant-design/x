@@ -1,10 +1,10 @@
 import { UserOutlined } from '@ant-design/icons';
 import { Bubble, Sender, useXAgent, useXChat } from '@ant-design/x';
-import { RolesType } from '@ant-design/x/es/bubble/BubbleList';
 import XMarkdown from '@ant-design/x-markdown';
 import { Button, Row } from 'antd';
 import React, { useState } from 'react';
 import '@ant-design/x-markdown/themes/light.css';
+import { BubbleListProps } from '@ant-design/x/es/bubble';
 
 const fullContent = `
 乌镇是中国著名的江南水乡古镇，位于浙江省嘉兴市桐乡市，地处杭嘉湖平原，距离杭州约80公里。以下是关于乌镇的详细介绍：
@@ -50,14 +50,18 @@ const fullContent = `
 乌镇完美融合了古典水乡风情与现代文化活力，无论是追寻历史，还是享受慢生活，都是理想之选！如果想了解具体景点或行程规划，欢迎继续提问~ 🚣‍♀️
 `;
 
-const roles: RolesType = {
+const roles: BubbleListProps['role'] = {
   ai: {
     placement: 'start',
-    avatar: { icon: <UserOutlined />, style: { background: '#fde3cf' } },
+    components: {
+      avatar: <UserOutlined />,
+    },
   },
   local: {
     placement: 'end',
-    avatar: { icon: <UserOutlined />, style: { background: '#87d068' } },
+    components: {
+      avatar: <UserOutlined />,
+    },
   },
 };
 
@@ -99,19 +103,19 @@ const App = () => {
         </Button>
       </Row>
       <Bubble.List
-        roles={roles}
+        role={roles}
         style={{ flex: 1 }}
         items={messages.map(({ id, message, status }) => ({
           key: id,
           role: status === 'local' ? 'local' : 'ai',
           content: message,
-          messageRender:
+          contentRender:
             status === 'local'
               ? undefined
               : (content) => (
                   <XMarkdown
                     className="x-markdown-light"
-                    content={content}
+                    content={content as string}
                     streaming={{ enableAnimation }}
                   />
                 ),

@@ -1,7 +1,7 @@
 import type { BubbleProps } from '@ant-design/x';
 import { Bubble } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
-import { Flex, Slider, Space, Typography } from 'antd';
+import { Avatar, Flex, Slider, Space, Typography } from 'antd';
 import React from 'react';
 import '@ant-design/x-markdown/themes/light.css';
 
@@ -51,7 +51,7 @@ const text = `
 乌镇完美融合了古典水乡风情与现代文化活力，无论是追寻历史，还是享受慢生活，都是理想之选！如果想了解具体景点或行程规划，欢迎继续提问~ 🚣‍♀️
 `;
 
-const RenderMarkdown: BubbleProps['messageRender'] = (content) => (
+const RenderMarkdown: BubbleProps['contentRender'] = (content) => (
   <XMarkdown className="x-markdown-light">{content}</XMarkdown>
 );
 
@@ -66,11 +66,13 @@ const App: React.FC = () => {
       </Space>
 
       <Bubble
-        typing={{ step: value, interval: 150 }}
+        typing={{ effect: 'typing', step: value, interval: 150 }}
         content={text}
-        messageRender={RenderMarkdown}
-        avatar={{
-          src: 'https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp',
+        contentRender={RenderMarkdown}
+        components={{
+          avatar: (
+            <Avatar src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp" />
+          ),
         }}
       />
     </Flex>

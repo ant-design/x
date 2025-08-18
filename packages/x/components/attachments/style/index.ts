@@ -3,7 +3,6 @@ import { mergeToken } from '@ant-design/cssinjs-utils';
 import { FastColor } from '@ant-design/fast-color';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
-import genFileCardStyle from './fileCard';
 
 export interface ComponentToken {
   colorBgPlaceholderHover: string;
@@ -50,6 +49,7 @@ const genAttachmentsStyle: GenerateStyle<AttachmentsToken> = (token) => {
     '&': {
       // ============================= Placeholder =============================
       [placeholderCls]: {
+        width: '100%',
         height: '100%',
         borderRadius: token.borderRadius,
         borderWidth: token.lineWidthBold,
@@ -92,9 +92,10 @@ const genAttachmentsStyle: GenerateStyle<AttachmentsToken> = (token) => {
 };
 
 const genFileListStyle: GenerateStyle<AttachmentsToken> = (token) => {
-  const { componentCls, calc } = token;
+  const { componentCls, calc, antCls } = token;
 
   const fileListCls = `${componentCls}-list`;
+  const cardCls = `${componentCls}-list-card`;
 
   const cardHeight = calc(token.fontSize)
     .mul(token.lineHeight)
@@ -111,88 +112,7 @@ const genFileListStyle: GenerateStyle<AttachmentsToken> = (token) => {
 
       // =============================== File List ===============================
       [fileListCls]: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: token.paddingSM,
-        fontSize: token.fontSize,
-        lineHeight: token.lineHeight,
-        color: token.colorText,
-        paddingBlock: token.paddingSM,
-        paddingInline: token.padding,
-        width: '100%',
-        background: token.colorBgContainer,
-
-        // Hide scrollbar
-        scrollbarWidth: 'none',
-        '-ms-overflow-style': 'none',
-        '&::-webkit-scrollbar': {
-          display: 'none',
-        },
-
-        // Scroll
-        '&-overflow-scrollX, &-overflow-scrollY': {
-          '&:before, &:after': {
-            content: '""',
-            position: 'absolute',
-            opacity: 0,
-            transition: `opacity ${token.motionDurationSlow}`,
-            zIndex: 1,
-          },
-        },
-        '&-overflow-ping-start:before': {
-          opacity: 1,
-        },
-        '&-overflow-ping-end:after': {
-          opacity: 1,
-        },
-
-        '&-overflow-scrollX': {
-          overflowX: 'auto',
-          overflowY: 'hidden',
-          flexWrap: 'nowrap',
-
-          '&:before, &:after': {
-            insetBlock: 0,
-            width: 8,
-          },
-          '&:before': {
-            insetInlineStart: 0,
-            background: `linear-gradient(to right, rgba(0,0,0,0.06), rgba(0,0,0,0));`,
-          },
-          '&:after': {
-            insetInlineEnd: 0,
-            background: `linear-gradient(to left, rgba(0,0,0,0.06), rgba(0,0,0,0));`,
-          },
-
-          '&:dir(rtl)': {
-            '&:before': {
-              background: `linear-gradient(to left, rgba(0,0,0,0.06), rgba(0,0,0,0));`,
-            },
-            '&:after': {
-              background: `linear-gradient(to right, rgba(0,0,0,0.06), rgba(0,0,0,0));`,
-            },
-          },
-        },
-
-        '&-overflow-scrollY': {
-          overflowX: 'hidden',
-          overflowY: 'auto',
-          maxHeight: calc(cardHeight).mul(3).equal(),
-
-          '&:before, &:after': {
-            insetInline: 0,
-            height: 8,
-          },
-
-          '&:before': {
-            insetBlockStart: 0,
-            background: `linear-gradient(to bottom, rgba(0,0,0,0.06), rgba(0,0,0,0));`,
-          },
-          '&:after': {
-            insetBlockEnd: 0,
-            background: `linear-gradient(to top, rgba(0,0,0,0.06), rgba(0,0,0,0));`,
-          },
-        },
+        boxSizing: 'content-box',
 
         // ======================================================================
         // ==                              Upload                              ==
@@ -204,49 +124,41 @@ const genFileListStyle: GenerateStyle<AttachmentsToken> = (token) => {
           color: '#999',
         },
 
-        // ======================================================================
-        // ==                             PrevNext                             ==
-        // ======================================================================
-        '&-prev-btn, &-next-btn': {
-          position: 'absolute',
-          top: '50%',
-          transform: 'translateY(-50%)',
-          boxShadow: token.boxShadowTertiary,
-          opacity: 0,
-          pointerEvents: 'none',
-        },
-        '&-prev-btn': {
-          left: {
-            _skip_check_: true,
-            value: token.padding,
-          },
-        },
-        '&-next-btn': {
-          right: {
-            _skip_check_: true,
-            value: token.padding,
+        // ============================== Status ===============================
+        [`${cardCls}-status-error`]: {
+          borderColor: token.colorError,
+          borderWidth: token.lineWidth,
+          borderStyle: token.lineType,
+
+          [`${cardCls}-desc`]: {
+            color: token.colorError,
           },
         },
 
-        '&:dir(ltr)': {
-          [`&${fileListCls}-overflow-ping-start ${fileListCls}-prev-btn`]: {
+        // ============================== Mask =================================
+        [`${cardCls}-status-uploading, ${cardCls}-status-error`]: {
+          [`${antCls}-image-cover`]: {
             opacity: 1,
-            pointerEvents: 'auto',
-          },
-          [`&${fileListCls}-overflow-ping-end ${fileListCls}-next-btn`]: {
-            opacity: 1,
-            pointerEvents: 'auto',
           },
         },
-        '&:dir(rtl)': {
-          [`&${fileListCls}-overflow-ping-end ${fileListCls}-prev-btn`]: {
-            opacity: 1,
-            pointerEvents: 'auto',
-          },
-          [`&${fileListCls}-overflow-ping-start ${fileListCls}-next-btn`]: {
-            opacity: 1,
-            pointerEvents: 'auto',
-          },
+
+        [`${cardCls}-file-img-mask`]: {
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
+
+        [`${cardCls}-desc`]: {
+          display: 'flex',
+          flexWrap: 'nowrap',
+          maxWidth: '100%',
+        },
+
+        [`${cardCls}-ellipsis`]: {
+          maxWidth: 58,
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
         },
       },
     },
@@ -269,7 +181,6 @@ export default genStyleHooks(
     return [
       genAttachmentsStyle(compToken),
       genFileListStyle(compToken),
-      genFileCardStyle(compToken),
     ];
   },
   prepareComponentToken,

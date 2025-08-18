@@ -8,3 +8,9 @@ fs.writeFileSync(
   `export default '${version}';`,
   'utf8',
 );
+
+fs.writeFileSync(
+  path.join(__dirname, '..', 'src', 'plugins', 'version', 'version.ts'),
+  `export default '${version}';`,
+  'utf8',
+);

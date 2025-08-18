@@ -1,13 +1,16 @@
 {
   "name": "x-mono",
-  "version": "2.0.0",
+  "version": "2.0.0-alpha.3",
   "private": true,
   "scripts": {
+    "presite": "npm run prestart --workspaces",
     "site": "npm run site --workspace packages/x && cp -rf packages/x/_site ./_site",
     "compile": "npm run compile --workspaces",
+    "version": "npm run version --workspaces",
     "start": "npm run start --workspace packages/x",
     "prestart": "npm run prestart --workspaces",
     "pretest": "npm run pretest --workspaces",
+    "publish-version": "tsx ./scripts/synchronize-version.ts",
     "prepublishOnly": "tsx ./scripts/pre-publish.ts",
     "precompile": "npm run precompile --workspaces",
     "prepare": "husky install",
@@ -16,13 +19,15 @@
     "tsc": "npm run tsc --workspaces",
     "test": "npm run test --workspaces",
     "coverage": "npm run test --workspaces",
-    "test:dekko": "npm run test:dekko --workspaces"
+    "test:dekko": "npm run test:dekko --workspaces",
+    "test:package-diff": "npm run test:package-diff --workspaces"
   },
   "license": "MIT",
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
+    "@ant-design/tools": "^19.0.2",
     "@biomejs/biome": "^2.0.5",
     "@codecov/webpack-plugin": "^1.4.0",
     "@madccc/duplicate-package-checker-webpack-plugin": "^1.0.0",
@@ -31,18 +36,14 @@
     "dekko": "^0.2.1",
     "father": "^4.5.4",
     "husky": "^9.1.6",
-    "lint-staged": "^16.1.0",
+    "lint-staged": "^16.1.5",
     "marked-emoji": "^2.0.1",
-    "size-limit": "^11.1.5",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "size-limit": "^11.1.5"
   },
   "size-limit": [
     {
       "path": "./packages/x/dist/antdx.min.js",
-      "limit": "350 KiB"
-    },
-    {
-      "path": "./packages/x-card/dist/x-card.min.js",
       "limit": "350 KiB"
     },
     {

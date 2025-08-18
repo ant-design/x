@@ -11,7 +11,10 @@
       "@ant-design/x-markdown": ["../x-markdown/src/index.ts"],
       "@ant-design/x-markdown/es/*": ["../x-markdown/src/*"],
       "@ant-design/x-markdown/lib/*": ["../x-markdown/src/*"],
-      "@ant-design/x-markdown/plugins/*": ["../x-markdown/src/plugins/*"]
+      "@ant-design/x-markdown/plugins/*": ["../x-markdown/src/plugins/*"],
+      "@ant-design/x-sdk": ["../x-sdk/src/index.ts"],
+      "@ant-design/x-sdk/es/*": ["../x-sdk/src/*"],
+      "@ant-design/x-sdk/lib/*": ["../x-sdk/src/*"]
     }
   },
   "include": [".dumirc.ts", "**/*"]

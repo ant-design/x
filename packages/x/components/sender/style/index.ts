@@ -7,7 +7,6 @@ import genSenderHeaderStyle from './header';
 import genSlotTextAreaStyle from './slot-textarea';
 import genSenderSwitchStyle from './switch';
 
-// biome-ignore lint/suspicious/noEmptyInterface: ComponentToken need to be empty by default
 export interface ComponentToken {
   /**
    * @desc 词槽背景颜色

@@ -7,17 +7,17 @@ import { useXProviderContext } from '../x-provider';
 import { AttachmentContext } from './context';
 import DropArea from './DropArea';
 import FileList, { type FileListProps } from './FileList';
-import FileListCard from './FileList/FileListCard';
 import PlaceholderUploader, {
   type PlaceholderProps,
   type PlaceholderType,
 } from './PlaceholderUploader';
 import SilentUploader from './SilentUploader';
 import useStyle from './style';
+import { FileCardProps } from '../file-card';
 
 export type SemanticType = 'list' | 'item' | 'placeholder' | 'upload';
 
-export type Attachment = GetProp<UploadProps, 'fileList'>[number] & {
+export type Attachment = GetProp<UploadProps, 'fileList'>[number] & Omit<FileCardProps,'size'|'byte'> & {
   description?: React.ReactNode;
 };
 
@@ -44,7 +44,6 @@ export interface AttachmentsProps extends Omit<UploadProps, 'fileList'> {
   // ============== File List ==============
   items?: Attachment[];
   overflow?: FileListProps['overflow'];
-  imageProps?: FileListProps['imageProps'];
 }
 
 export interface AttachmentsRef {
@@ -66,7 +65,6 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
     onChange,
     onRemove,
     overflow,
-    imageProps,
     disabled,
     maxCount,
     classNames = {},
@@ -222,7 +220,6 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
             ...contextStyles.item,
             ...styles.item,
           }}
-          imageProps={imageProps}
         />
         {getPlaceholderNode('inline', hasFileList ? { style: { display: 'none' } } : {}, uploadRef)}
         <DropArea
@@ -249,14 +246,10 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
 
 const ForwardAttachments = React.forwardRef(Attachments) as React.ForwardRefExoticComponent<
   AttachmentsProps & React.RefAttributes<AttachmentsRef>
-> & {
-  FileCard: typeof FileListCard;
-};
+>;
 
 if (process.env.NODE_ENV !== 'production') {
   ForwardAttachments.displayName = 'Attachments';
 }
-
-ForwardAttachments.FileCard = FileListCard;
 
 export default ForwardAttachments;

@@ -79,6 +79,10 @@ interface SlotConfigCustomType extends SlotConfigBaseType {
   customRender?: (
     value: any,
     onChange: (value: any) => void,
+    props: {
+      disabled?: boolean,
+      readOnly?: boolean
+    },
     item: SlotConfigType,
   ) => React.ReactNode;
 }

@@ -339,22 +339,28 @@ const Copilot = (props: CopilotProps) => {
           style={{ height: '100%', paddingInline: 16 }}
           items={messages?.map((i) => ({
             ...i.message,
+            key: i.id,
             classNames: {
               content: i.status === 'loading' ? styles.loadingMessage : '',
             },
-            typing: i.status === 'loading' ? { step: 5, interval: 20, suffix: <>💗</> } : false,
+            typing:
+              i.status === 'loading'
+                ? { effect: 'typing', step: 5, interval: 20, suffix: <>💗</> }
+                : false,
           }))}
-          roles={{
+          role={{
             assistant: {
               placement: 'start',
-              footer: (
-                <div style={{ display: 'flex' }}>
-                  <Button type="text" size="small" icon={<ReloadOutlined />} />
-                  <Button type="text" size="small" icon={<CopyOutlined />} />
-                  <Button type="text" size="small" icon={<LikeOutlined />} />
-                  <Button type="text" size="small" icon={<DislikeOutlined />} />
-                </div>
-              ),
+              components: {
+                footer: (
+                  <div style={{ display: 'flex' }}>
+                    <Button type="text" size="small" icon={<ReloadOutlined />} />
+                    <Button type="text" size="small" icon={<CopyOutlined />} />
+                    <Button type="text" size="small" icon={<LikeOutlined />} />
+                    <Button type="text" size="small" icon={<DislikeOutlined />} />
+                  </div>
+                ),
+              },
               loadingRender: () => (
                 <Space>
                   <Spin size="small" />

@@ -1,9 +1,8 @@
+import { DeleteOutlined, EditOutlined, EnterOutlined } from '@ant-design/icons';
+import type { BubbleProps, ConversationsProps, PromptsProps, WelcomeProps } from '@ant-design/x';
 import { Bubble, Conversations, Prompts, Suggestion, Welcome } from '@ant-design/x';
 import { createStyles } from 'antd-style';
 import React from 'react';
-
-import { DeleteOutlined, EditOutlined, EnterOutlined } from '@ant-design/icons';
-import type { BubbleProps, ConversationsProps, PromptsProps, WelcomeProps } from '@ant-design/x';
 import useLocale from '../../../../hooks/useLocale';
 import { LOCALES, useCustomizationBgStyle } from '../../common/CustomizationProvider';
 import CustomizationSender from '../../common/CustomizationSender';
@@ -128,18 +127,20 @@ export const CustomizationBubble: React.FC<BubbleProps> = (props) => {
 
   return (
     <Bubble
-      content={locale.question1}
       classNames={{
         content: background,
       }}
-      footer={
-        <div className={styles.actions}>
-          <EditOutlined />
-          <DeleteOutlined />
-          <EnterOutlined />
-        </div>
-      }
+      components={{
+        footer: (
+          <div className={styles.actions}>
+            <EditOutlined />
+            <DeleteOutlined />
+            <EnterOutlined />
+          </div>
+        ),
+      }}
       {...props}
+      content={props.content || locale.question1}
     />
   );
 };
