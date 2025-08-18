@@ -58,7 +58,8 @@
         "noExplicitAny": "off",
         "noArrayIndexKey": "off",
         "noConfusingVoidType": "off",
-        "noThenProperty": "off"
+        "noThenProperty": "off",
+        "noTsIgnore":"off"
       },
       "performance": {
         "noDelete": "off",
