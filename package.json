@@ -3,8 +3,7 @@
   "version": "2.0.0-alpha.3",
   "private": true,
   "scripts": {
-    "presite": "npm run prestart",
-    "site": "npm run site --workspace packages/x && cp -rf packages/x/_site ./_site",
+    "site": "npm run prestart && --workspaces && npm run site --workspace packages/x && cp -rf packages/x/_site ./_site",
     "compile": "npm run compile --workspaces",
     "version": "npm run version --workspaces",
     "start": "npm run start --workspace packages/x",
