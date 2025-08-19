@@ -63,6 +63,7 @@ export interface SenderProps
     input?: React.CSSProperties;
     actions?: React.CSSProperties;
     footer?: React.CSSProperties;
+    content?: React.CSSProperties;
   };
   rootClassName?: string;
   classNames?: {
@@ -70,6 +71,7 @@ export interface SenderProps
     input?: string;
     actions?: string;
     footer?: string;
+    content?: string;
   };
   style?: React.CSSProperties;
   className?: string;
@@ -313,7 +315,15 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
         <SendHeaderContext.Provider value={{ prefixCls }}>{header}</SendHeaderContext.Provider>
       )}
       <ActionButtonContext.Provider value={actionsButtonContextProps}>
-        <div className={`${prefixCls}-content`} onMouseDown={onContentMouseDown}>
+        <div
+          className={classnames(
+            `${prefixCls}-content`,
+            contextConfig.classNames.content,
+            classNames.content,
+          )}
+          style={{ ...contextConfig.styles.content, ...styles.content }}
+          onMouseDown={onContentMouseDown}
+        >
           {/* Prefix */}
           {prefix && (
             <div
