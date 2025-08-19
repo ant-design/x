@@ -5,7 +5,7 @@ import { genStyleHooks } from '../../theme/genStyleUtils';
 import genActionsCopyStyle from './copy';
 import genActionsFeedbackStyle from './feedback';
 import genActionsAudioStyle from './audio';
-
+// biome-ignore lint/suspicious/noEmptyInterface: ComponentToken need to be empty by default
 export interface ComponentToken { }
 
 export interface ActionsToken extends FullToken<'Actions'> { }
