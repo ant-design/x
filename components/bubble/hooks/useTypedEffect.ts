@@ -57,13 +57,11 @@ const useTypedEffect = (
       // If there's no common prefix, start from beginning
       // If there's a common prefix, start from the point where they differ
       if (commonPrefixLength === 0) {
+        // Scenario 1: No common prefix, start from the beginning (AI completely changes the thinking process of the answer).
         setTypingIndex(1);
-      } else if (commonPrefixLength < content.length) {
-        // Start from the next character after the common prefix
-        setTypingIndex(commonPrefixLength + 1);
       } else {
-        // New content is shorter or same as common prefix, show all
-        setTypingIndex(content.length);
+        // Scenario 2: There is a common prefix, start from the point where they differ (common streaming output scenario)
+        setTypingIndex(commonPrefixLength + 1);
       }
     }
     prevContentRef.current = content;
