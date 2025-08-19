@@ -72,7 +72,7 @@ const ActionsAudio: React.FC<ActionsAudioProps> = (props) => {
     };
 
     return (
-        <Item label={status ? StatusLabel[status] : ''} className={mergedCls} status={status} defaultIcon={<MutedOutlined />} runningIcon={<RecordingIcon className={`${audioCls}-recording-icon`} />} {...otherProps} />
+        <Item label={status ? StatusLabel[status] : ''} style={style} className={mergedCls} status={status} defaultIcon={<MutedOutlined />} runningIcon={<RecordingIcon className={`${audioCls}-recording-icon`} />} {...otherProps} />
     );
 };
 
