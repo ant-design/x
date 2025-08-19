@@ -1,44 +1,18 @@
-import { CheckOutlined, CloseOutlined, ShareAltOutlined } from '@ant-design/icons';
+import { CheckOutlined, ShareAltOutlined } from '@ant-design/icons';
 import { Actions } from '@ant-design/x';
 import type { ActionsFeedbackProps, ActionsItemProps } from '@ant-design/x';
-import { Button, Flex, message, Pagination } from 'antd';
-import { createStyles } from 'antd-style';
+import { message, Pagination } from 'antd';
 import React, { useState } from 'react';
 
-const useStyles = createStyles(({ css, token }) => ({
-  feedbackFooter: css`
-    border: 1px solid ${token.colorBorderSecondary};
-    padding: 8px;
-    border-radius: 8px;
-    margin-top: 12px;
-  `,
-  gridContainer: css`
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin: 12px 0;
-  `,
-  tagItem: css`
-    background: ${token.colorFillSecondary};
-    padding: 4px 8px;
-    border-radius: 8px;
-    text-align: center;
-    cursor: pointer;
-  `,
-  submitButton: css`
-    width: 100px;
-    border-radius: 12px;
-  `,
-}));
 
 const App: React.FC = () => {
-  const { styles } = useStyles();
+
 
   // pagination
   const [curPage, setCurPage] = useState(1);
   // feedback
   const [feedbackStatus, setFeedbackStatus] = useState<ActionsFeedbackProps['value']>('default');
-  const [feedbackPopupOpen, setFeedbackPopupOpen] = useState(false);
+
   // audio
   const [audioStatus, setAudioStatus] = useState<ActionsItemProps['status']>('default');
   // share
@@ -66,33 +40,6 @@ const App: React.FC = () => {
     }
   }
 
-  const feedbackFooter = (
-    <div className={styles.feedbackFooter}>
-      <Flex justify="space-between" align="center">
-        <div>What are the main reasons you are satisfied? (Select all that apply)</div>
-        <CloseOutlined onClick={() => setFeedbackPopupOpen(false)} />
-      </Flex>
-
-      <div className={styles.gridContainer}>
-        {[
-          'Matches my style',
-          'Meets requirements',
-          'Clear images',
-          'Reasonable content',
-          'Aesthetic images',
-          'Others',
-        ].map((text) => (
-          <div key={text} className={styles.tagItem}>
-            {text}
-          </div>
-        ))}
-      </div>
-      <Button variant="solid" color="purple" className={styles.submitButton}>
-        Submit
-      </Button>
-    </div>
-  );
-
   const items = [
     {
       key: 'pagination',
@@ -113,7 +60,6 @@ const App: React.FC = () => {
           value={feedbackStatus}
           onChange={(val) => {
             setFeedbackStatus(val);
-            setFeedbackPopupOpen(val === 'like');
             message.success(`Change feedback value to: ${val}`);
           }}
           key="feedback"
@@ -143,7 +89,7 @@ const App: React.FC = () => {
     },
   ];
 
-  return <Actions items={items} footer={feedbackPopupOpen ? feedbackFooter : undefined} />;
+  return <Actions items={items} />;
 };
 
 export default App;

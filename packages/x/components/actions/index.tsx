@@ -20,7 +20,6 @@ const ForwardActions = React.forwardRef<ActionsRef, ActionsProps>((props, ref) =
   const {
     items = [],
     onClick,
-    footer,
     dropdownProps = {},
     variant = 'borderless',
     prefixCls: customizePrefixCls,
@@ -96,12 +95,6 @@ const ForwardActions = React.forwardRef<ActionsRef, ActionsProps>((props, ref) =
             return <Item item={item} onClick={onClick} dropdownProps={dropdownProps} key={idx} />;
           })}
         </div>
-
-        {footer && (
-          <div className={classNames.footer} style={styles.footer}>
-            {footer}
-          </div>
-        )}
       </ActionsContext.Provider>
     </div>
   );
