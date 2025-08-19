@@ -1,9 +1,11 @@
 import classnames from 'classnames';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
-import CopyBtn from 'antd/es/typography/Base';
 import { useXProviderContext } from '../x-provider';
 import useStyle from './style';
+import { Typography } from 'antd';
+
+const { Text } = Typography;
 export interface ActionsCopyProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /**
@@ -64,10 +66,7 @@ const ActionsCopy: React.FC<ActionsCopyProps> = (props) => {
   });
 
   return (
-    <CopyBtn {...domProps} className={mergedCls} style={style} prefixCls={copyCls} copyable={{
-      text,
-      icon
-    }} />
+    <Text {...domProps} className={mergedCls} style={style} prefixCls={copyCls} copyable={{ text, icon }} />
   );
 };
 

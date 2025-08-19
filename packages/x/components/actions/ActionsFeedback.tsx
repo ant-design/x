@@ -85,7 +85,9 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
                 value === FEEDBACK_VALUE.like ? FEEDBACK_VALUE.default : FEEDBACK_VALUE.like,
               )
             }
-            className={classnames(`${feedbackCls}-item`, `${prefixCls}-item`)}
+            className={classnames(`${feedbackCls}-item`, `${prefixCls}-item`, `${feedbackCls}-item-like`, {
+              [`${feedbackCls}-item-like-active`]: value === 'like'
+            })}
           >
             {value === FEEDBACK_VALUE.like ? <LikeFilled /> : <LikeOutlined />}
           </span>
@@ -96,7 +98,10 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
         <Tooltip title={contextLocale.feedbackDislike}>
           <span
             onClick={onFeedBacKClick}
-            className={classnames(`${feedbackCls}-item`, `${prefixCls}-item`)}
+            className={classnames(`${feedbackCls}-item`, `${prefixCls}-item`,`${feedbackCls}-item-dislike`, {
+              [`${feedbackCls}-item-dislike-active`]: value === 'dislike'
+            }
+            )}
           >
             {value === FEEDBACK_VALUE.dislike ? <DislikeFilled /> : <DislikeOutlined />}
           </span>

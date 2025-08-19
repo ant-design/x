@@ -1,10 +1,11 @@
 import * as React from 'react';
-import type { Locale } from '.';
+import type { xLocale, Locale } from '.';
 import type { LocaleContextProps } from './context';
 import LocaleContext from './context';
 import defaultLocaleData from './en_US';
+import defaultAntdEnUS from 'antd/locale/en_US';
 import type { LocaleComponentName as AntdLocaleContextProps } from 'antd/es/locale/useLocale';
-export type LocaleComponentName = Exclude<keyof Locale, 'locale'>
+export type LocaleComponentName = Exclude<keyof xLocale, 'locale'>
 type mergeLocaleComponentName = LocaleComponentName | AntdLocaleContextProps;
 const useLocale = <C extends mergeLocaleComponentName = LocaleComponentName>(
   componentName: C,
@@ -12,7 +13,7 @@ const useLocale = <C extends mergeLocaleComponentName = LocaleComponentName>(
 ): readonly [NonNullable<Locale[C]>, string] => {
   const fullLocale = React.useContext<LocaleContextProps | undefined>(LocaleContext);
   const getLocale = React.useMemo<NonNullable<Locale[C]>>(() => {
-    const locale = defaultLocale || defaultLocaleData[componentName];
+    const locale = defaultLocale || defaultLocaleData?.[componentName as LocaleComponentName] || defaultAntdEnUS?.[componentName as AntdLocaleContextProps];
     const localeFromContext = fullLocale?.[componentName] ?? {};
     return {
       ...(typeof locale === 'function' ? locale() : locale),
