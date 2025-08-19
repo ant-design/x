@@ -1,4 +1,4 @@
-import { CopyOutlined, DeleteOutlined, EditOutlined, RedoOutlined, ShareAltOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, RedoOutlined, ShareAltOutlined } from '@ant-design/icons';
 import { Actions, ActionsProps } from '@ant-design/x';
 import { Modal, message } from 'antd';
 import React from 'react';
