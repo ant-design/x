@@ -6,7 +6,7 @@ const genActionsFeedbackStyle: GenerateStyle<ActionsToken> = (token) => {
     const feedbackCls = `${componentCls}-feedback`;
     return {
         [feedbackCls]: {
-            ['&-rtl']: {
+            '&-rtl': {
                 direction: 'rtl',
             }
         }

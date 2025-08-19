@@ -6,10 +6,10 @@ const genActionsAudioStyle: GenerateStyle<ActionsToken> = (token) => {
     const audioCls = `${componentCls}-audio`;
     return {
         [audioCls]: {
-            ['&-rtl']: {
+            '&-rtl': {
                 direction: 'rtl',
             },
-            ['&-recording-icon']: {
+            '&-recording-icon': {
                 width: token.fontSize,
                 height: token.fontSize
             }
