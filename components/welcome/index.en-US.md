@@ -29,6 +29,7 @@ Use the appropriate welcome recommendation component to effectively reduce the u
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
+| prefixCls | Prefix for style class names | string | - | - |
 | classNames | Custom style class names for different parts of each prompt item. | Record<'icon' \| 'title' \| 'description' \| 'extra', string> | - | - |
 | description | The description displayed in the prompt list. | React.ReactNode | - | - |
 | extra | The extra operation displayed at the end of the prompt list. | React.ReactNode | - | - |

@@ -32,6 +32,7 @@ demo:
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
+| prefixCls | 样式类名的前缀 | string | - | - |
 | classNames | 自定义样式类名，用于各个提示项的不同部分。 | Record<'icon' \| 'title' \| 'description' \| 'extra', string> | - | - |
 | description | 显示在提示列表中的描述。 | React.ReactNode | - | - |
 | extra | 显示在提示列表末尾的额外操作。 | React.ReactNode | - | - |
