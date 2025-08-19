@@ -20,6 +20,8 @@ const transformIgnorePatterns = [
   // Ignore modules without es dir.
   // Update: @babel/runtime should also be transformed
   `[/\\\\]node_modules[/\\\\](?!${ignoreList.join('|')})[^/\\\\]+?[/\\\\](?!(es)[/\\\\])`,
+  // Ignore antdx umd js file
+  '[/\\\\]dist[/\\\\]antdx.*\\.js$',
 ];
 
 function getTestRegex(libDir) {
