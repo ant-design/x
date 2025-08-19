@@ -1,12 +1,14 @@
 ---
 category: FileCard
 group:
-  title: Express
-  order: 0
+  title: Feedback
+  order: 4
 title: FileCard
 description: Display files in the form of cards.
 demo:
   cols: 1
+cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*pJrtTaf-bWAAAAAAAAAAAAAADgCCAQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*6ySvTqb7XhkAAAAAAAAAAAAADgCCAQ/original
 ---
 
 ## When To Use
@@ -71,7 +73,7 @@ type PresetIcons =
 | removable | Can be removed | boolean \| ((item: FileCardProps) => boolean) | false | - |
 | onRemove | Callback when remove | (item: FileCardProps, list?: FileCardProps[]) => void | - | - |
 | extension | Show extension | React.ReactNode | - | - |
-| overflow  | Style when overflow | 'scrollX' \| 'scrollY' \| 'wrap' | wrap | - |
+| overflow | Style when overflow | 'scrollX' \| 'scrollY' \| 'wrap' | wrap | - |
 
 ## Semantic DOM
 
