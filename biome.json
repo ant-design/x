@@ -104,7 +104,10 @@
       }
     },
     {
-      "includes": ["**/packages/x/components/**/*/demo/**/*", "**/packages/x-sdk/src/**/*"],
+      "includes": [
+        "**/packages/x/components/**/*/demo/**/*",
+        "**/packages/x-sdk/src/**/*"
+      ],
       "linter": {
         "rules": {
           "correctness": {
@@ -119,7 +122,9 @@
       }
     },
     {
-      "includes": ["**/packages/x-markdown/src/**/*"],
+      "includes": [
+        "**/packages/x-markdown/src/**/*"
+      ],
       "linter": {
         "rules": {
           "correctness": {
