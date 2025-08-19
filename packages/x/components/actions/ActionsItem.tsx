@@ -53,11 +53,6 @@ export interface ActionsItemProps
  * @descEN running icon
  */
   runningIcon?: React.ReactNode,
-  /**
-   * @desc 状态
-   * @descEN status
-   */
-  onChange?: (status: `${ACTIONS_ITEM_STATUS}`) => void;
 
   /**
    * @desc 自定义样式前缀
