@@ -66,15 +66,15 @@ Common props ref：[Common props](/docs/react/common-props)
 
 ### Actions.Audio
 
-| Property | Description     | Type                | Default                     | Version |
-| -------- | --------------- | ------------------- | --------------------------- | ------- |
-| status   | Playback status | ACTIONS_ITEM_STATUS | ACTIONS_ITEM_STATUS.DEFAULT | -       |
+| Property | Description     | Type                                     | Default | Version |
+| -------- | --------------- | ---------------------------------------- | ------- | ------- |
+| status   | Playback status | 'loading'\|'error'\|'running'\|'default' | default | -       |
 
 ### Actions.Item
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| status | Status | ACTIONS_ITEM_STATUS | ACTIONS_ITEM_STATUS.DEFAULT | - |
+| status | Status | 'loading'\|'error'\|'running'\|'default' | default | - |
 | label | Display label for the custom action | string | - | - |
 | defaultIcon | Default status icon | React.ReactNode | - | - |
 | runningIcon | Running status icon | React.ReactNode | - | - |
