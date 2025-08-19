@@ -1,64 +1,78 @@
 import classnames from 'classnames';
 import React from 'react';
-import Item, { ActionsItemProps } from './ActionsItem';
-
+import Item, { ACTIONS_ITEM_STATUS } from './ActionsItem';
+import type { ActionsItemProps } from './ActionsItem';
 import { useXProviderContext } from '../x-provider';
-
+import { useLocale } from '../locale';
 import useStyle from './style';
 import { MutedOutlined } from '@ant-design/icons';
+import RecordingIcon from '../sender/components/SpeechButton/RecordingIcon';
+import enUS from '../locale/en_US';
 
 
 export interface ActionsAudioProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+    extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
 
-  /**
-   * @desc 状态
-   * @descEN status
-   */
-  status?: ActionsItemProps['status'];
-  /**
-   * @desc 自定义样式前缀
-   * @descEN Customize the component's prefixCls
-   */
-  prefixCls?: string;
-  /**
-   * @desc 根节点样式类
-   * @descEN Root node style class.
-   */
-  rootClassName?: string;
+    /**
+     * @desc 状态
+     * @descEN status
+     */
+    status?: ActionsItemProps['status'];
+
+    /**
+     * @desc 自定义样式前缀
+     * @descEN Customize the component's prefixCls
+     */
+    prefixCls?: string;
+
+    /**
+     * @desc 根节点样式类
+     * @descEN Root node style class.
+     */
+    rootClassName?: string;
 }
 
 const ActionsAudio: React.FC<ActionsAudioProps> = (props) => {
-  const {
-    status,
-    className,
-    style,
-    prefixCls: customizePrefixCls,
-    rootClassName,
-    ...otherProps
-  } = props;
+    const {
+        status = ACTIONS_ITEM_STATUS.DEFAULT,
+        className,
+        style,
+        prefixCls: customizePrefixCls,
+        rootClassName,
+        ...otherProps
+    } = props;
 
 
 
 
-  // ============================ Prefix ============================
+    // ============================ Prefix ============================
 
-  const { direction, getPrefixCls } = useXProviderContext();
+    const { direction, getPrefixCls } = useXProviderContext();
 
-  const prefixCls = getPrefixCls('actions', customizePrefixCls);
-  const [hashId, cssVarCls] = useStyle(prefixCls);
-  const audioCls = `${prefixCls}-audio`;
+    const prefixCls = getPrefixCls('actions', customizePrefixCls);
+    const [hashId, cssVarCls] = useStyle(prefixCls);
+    const audioCls = `${prefixCls}-audio`;
 
-  // ============================ Classname ============================
+    // ============================ Classname ============================
 
-  const mergedCls = classnames(audioCls, hashId, cssVarCls, rootClassName, className, {
-    [`${audioCls}-rtl`]: direction === 'rtl',
-  });
+    const mergedCls = classnames(audioCls, hashId, cssVarCls, rootClassName, className, {
+        [`${audioCls}-rtl`]: direction === 'rtl',
+    });
 
+    // ============================ Locale ============================
 
-  return (
-    <Item label='播放语音' className={mergedCls} status={status} defaultIcon={<MutedOutlined />} {...otherProps}/>
-  );
+    const [contextLocale] = useLocale('Actions', enUS.Actions);
+
+    const StatusLabel = {
+        [ACTIONS_ITEM_STATUS.LOADING]: contextLocale.audioLoading,
+        [ACTIONS_ITEM_STATUS.ERROR]: contextLocale.audioError,
+        [ACTIONS_ITEM_STATUS.RUNNING]: contextLocale.audioRunning,
+        [ACTIONS_ITEM_STATUS.DEFAULT]: contextLocale.audio
+    };
+
+    return (
+        <Item label={status ? StatusLabel[status] : ''} className={mergedCls} status={status} defaultIcon={<MutedOutlined />} runningIcon={<RecordingIcon className={`${audioCls}-recording-icon`} />} {...otherProps} />
+    );
 };
 
 export default ActionsAudio;

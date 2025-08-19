@@ -54,6 +54,7 @@ const XProvider: React.FC<XProviderProps> = (props) => {
       </LocaleProvider>
     );
   }
+
   return (
     <XProviderContext.Provider value={xProviderProps}>
       <AntdConfigProvider {...antdConfProps} theme={theme} locale={locale}>

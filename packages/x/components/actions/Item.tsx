@@ -28,7 +28,7 @@ const Item: React.FC<ActionsItemProps> = (props) => {
 
   return (
     <div
-      className={classnames(`${prefixCls}-list-item`, classNames.item, {
+      className={classnames(`${prefixCls}-item`, classNames.item, {
         [`${prefixCls}-list-danger`]: item?.danger,
       })}
       style={styles.item}
@@ -47,7 +47,7 @@ const Item: React.FC<ActionsItemProps> = (props) => {
       key={itemKey}
     >
       <Tooltip title={item.label}>
-        <div className={`${prefixCls}-list-item-icon`}>{item?.icon}</div>
+        <div className={`${prefixCls}-icon`}>{item?.icon}</div>
       </Tooltip>
     </div>
   );

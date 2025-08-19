@@ -1,14 +1,9 @@
 import classnames from 'classnames';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
-import CopyBtn from 'antd/lib/typography/Base';
-
-
+import CopyBtn from 'antd/es/typography/Base';
 import { useXProviderContext } from '../x-provider';
-
 import useStyle from './style';
-
-
 export interface ActionsCopyProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /**
@@ -16,6 +11,7 @@ export interface ActionsCopyProps
    * @descEN Text to be copied
    */
   text?: string;
+
   /**
    * @desc 复制图标
    * @descEN Copy icon
@@ -27,6 +23,7 @@ export interface ActionsCopyProps
    * @descEN Customize the component's prefixCls
    */
   prefixCls?: string;
+
   /**
    * @desc 根节点样式类
    * @descEN Root node style class.
@@ -62,10 +59,9 @@ const ActionsCopy: React.FC<ActionsCopyProps> = (props) => {
 
   // ============================ Classname ============================
 
-  const mergedCls = classnames(copyCls, hashId, cssVarCls, rootClassName, className, `${prefixCls}-list-item`, {
+  const mergedCls = classnames(copyCls, hashId, cssVarCls, rootClassName, className, `${prefixCls}-item`, {
     [`${copyCls}-rtl`]: direction === 'rtl',
   });
-
 
   return (
     <CopyBtn {...domProps} className={mergedCls} style={style} prefixCls={copyCls} copyable={{

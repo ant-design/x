@@ -58,6 +58,28 @@ Actions 组件用于快速配置一些 AI 场景下所需要的操作按钮/功�
 | value | 反馈状态值 | `like` \| `dislike` \| `default` | `default` | - |
 | onChange | 反馈状态变化回调 | (value: `like` \| `dislike` \| `default`) => void | - | - |
 
+### Actions.Copy
+
+| 属性 | 说明       | 类型            | 默认值 | 版本 |
+| ---- | ---------- | --------------- | ------ | ---- |
+| text | 复制的文本 | string          | ''     | -    |
+| icon | 复制按钮   | React.ReactNode | -      | -    |
+
+### Actions.Audio
+
+| 属性   | 说明     | 类型                | 默认值                      | 版本 |
+| ------ | -------- | ------------------- | --------------------------- | ---- |
+| status | 播放状态 | ACTIONS_ITEM_STATUS | ACTIONS_ITEM_STATUS.DEFAULT | -    |
+
+### Actions.Item
+
+| 属性        | 说明                 | 类型                | 默认值                      | 版本 |
+| ----------- | -------------------- | ------------------- | --------------------------- | ---- |
+| status      | 状态                 | ACTIONS_ITEM_STATUS | ACTIONS_ITEM_STATUS.DEFAULT | -    |
+| label       | 自定义操作的显示标签 | string              | -                           | -    |
+| defaultIcon | 默认状态图标         | React.ReactNode     | -                           | -    |
+| runningIcon | 执行状态图标         | React.ReactNode     | -                           | -    |
+
 ## Semantic DOM
 
 <code src="./demo/_semantic.tsx" simplify="true"></code>

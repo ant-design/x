@@ -3,10 +3,10 @@ import type { Locale } from '.';
 import type { LocaleContextProps } from './context';
 import LocaleContext from './context';
 import defaultLocaleData from './en_US';
-
-export type LocaleComponentName = Exclude<keyof Locale, 'locale'>;
-
-const useLocale = <C extends LocaleComponentName = LocaleComponentName>(
+import type { LocaleComponentName as AntdLocaleContextProps } from 'antd/es/locale/useLocale';
+export type LocaleComponentName = Exclude<keyof Locale, 'locale'>
+type mergeLocaleComponentName = LocaleComponentName | AntdLocaleContextProps;
+const useLocale = <C extends mergeLocaleComponentName = LocaleComponentName>(
   componentName: C,
   defaultLocale?: Locale[C] | (() => Locale[C]),
 ): readonly [NonNullable<Locale[C]>, string] => {

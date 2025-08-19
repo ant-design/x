@@ -9,7 +9,7 @@ import useStyle from './style';
 import { CloseCircleOutlined, LoadingOutlined } from '@ant-design/icons';
 import { Tooltip } from 'antd';
 
-enum ACTIONS_ITEM_STATUS {
+export enum ACTIONS_ITEM_STATUS {
   /**
    * @desc 等待状态
    */
@@ -73,7 +73,7 @@ export interface ActionsItemProps
 
 const ActionsItem: React.FC<ActionsItemProps> = (props) => {
   const {
-    status,
+    status = ACTIONS_ITEM_STATUS.DEFAULT,
     defaultIcon,
     runningIcon,
     label,
@@ -101,7 +101,7 @@ const ActionsItem: React.FC<ActionsItemProps> = (props) => {
 
   // ============================ Classname ============================
 
-  const mergedCls = classnames(itemCls, hashId, cssVarCls, rootClassName, className, `${prefixCls}-list-item`, {
+  const mergedCls = classnames(itemCls, hashId, cssVarCls, rootClassName, className, `${prefixCls}-item`, {
     [`${itemCls}-rtl`]: direction === 'rtl',
   });
 

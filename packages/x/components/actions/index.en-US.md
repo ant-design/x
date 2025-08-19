@@ -57,6 +57,28 @@ Common props ref：[Common props](/docs/react/common-props)
 | value | Feedback value | `like` \| `dislike` \| `default` | `default` | - |
 | onChange | Feedback status change callback | (value: `like` \| `dislike` \| `default`) => void | - | - |
 
+### Actions.Copy
+
+| Property | Description       | Type            | Default | Version |
+| -------- | ----------------- | --------------- | ------- | ------- |
+| text     | Text to be copied | string          | ''      | -       |
+| icon     | Copy button       | React.ReactNode | -       | -       |
+
+### Actions.Audio
+
+| Property | Description     | Type                | Default                     | Version |
+| -------- | --------------- | ------------------- | --------------------------- | ------- |
+| status   | Playback status | ACTIONS_ITEM_STATUS | ACTIONS_ITEM_STATUS.DEFAULT | -       |
+
+### Actions.Item
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| status | Status | ACTIONS_ITEM_STATUS | ACTIONS_ITEM_STATUS.DEFAULT | - |
+| label | Display label for the custom action | string | - | - |
+| defaultIcon | Default status icon | React.ReactNode | - | - |
+| runningIcon | Running status icon | React.ReactNode | - | - |
+
 ## Semantic DOM
 
 <code src="./demo/_semantic.tsx" simplify="true"></code>

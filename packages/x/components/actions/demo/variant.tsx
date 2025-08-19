@@ -1,4 +1,4 @@
-import { CopyOutlined, RedoOutlined } from '@ant-design/icons';
+import { RedoOutlined } from '@ant-design/icons';
 import { Actions, ActionsProps } from '@ant-design/x';
 import { Flex, message, Pagination } from 'antd';
 import React, { useState } from 'react';
@@ -27,8 +27,10 @@ const App: React.FC = () => {
     },
     {
       key: 'copy',
-      icon: <CopyOutlined />,
-      label: 'Copy',
+      label: 'copy',
+      actionRender: () => {
+        return <Actions.Copy text='copy value' />
+      }
     },
   ];
   const onClick: ActionsProps['onClick'] = ({ keyPath }) => {
