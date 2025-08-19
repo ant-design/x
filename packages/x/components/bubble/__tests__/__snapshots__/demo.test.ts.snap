@@ -223,11 +223,11 @@ exports[`renders components/bubble/demo/basic.tsx correctly 1`] = `
           class="ant-actions-list ant-actions-variant-borderless"
         >
           <div
-            class="ant-actions-list-item"
+            class="ant-actions-item"
           >
             <div
               aria-describedby="test-id"
-              class="ant-actions-list-item-icon"
+              class="ant-actions-icon"
             >
               <span
                 aria-label="redo"
@@ -251,11 +251,11 @@ exports[`renders components/bubble/demo/basic.tsx correctly 1`] = `
             </div>
           </div>
           <div
-            class="ant-actions-list-item"
+            class="ant-actions-item"
           >
             <div
               aria-describedby="test-id"
-              class="ant-actions-list-item-icon"
+              class="ant-actions-icon"
             >
               <span
                 aria-label="copy"
@@ -427,11 +427,11 @@ exports[`renders components/bubble/demo/editable.tsx correctly 1`] = `
               class="ant-actions-list ant-actions-variant-borderless"
             >
               <div
-                class="ant-actions-list-item"
+                class="ant-actions-item"
               >
                 <div
                   aria-describedby="test-id"
-                  class="ant-actions-list-item-icon"
+                  class="ant-actions-icon"
                 >
                   <span
                     aria-label="edit"
@@ -512,11 +512,11 @@ exports[`renders components/bubble/demo/editable.tsx correctly 1`] = `
               class="ant-actions-list ant-actions-variant-borderless"
             >
               <div
-                class="ant-actions-list-item"
+                class="ant-actions-item"
               >
                 <div
                   aria-describedby="test-id"
-                  class="ant-actions-list-item-icon"
+                  class="ant-actions-icon"
                 >
                   <span
                     aria-label="edit"
@@ -611,11 +611,11 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
                 class="ant-actions-list ant-actions-variant-borderless"
               >
                 <div
-                  class="ant-actions-list-item"
+                  class="ant-actions-item"
                 >
                   <div
                     aria-describedby="test-id"
-                    class="ant-actions-list-item-icon"
+                    class="ant-actions-icon"
                   >
                     <span
                       aria-label="redo"
@@ -639,11 +639,11 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
                   </div>
                 </div>
                 <div
-                  class="ant-actions-list-item"
+                  class="ant-actions-item"
                 >
                   <div
                     aria-describedby="test-id"
-                    class="ant-actions-list-item-icon"
+                    class="ant-actions-icon"
                   >
                     <span
                       aria-label="copy"
@@ -735,11 +735,11 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
                   class="ant-actions-list ant-actions-variant-borderless"
                 >
                   <div
-                    class="ant-actions-list-item"
+                    class="ant-actions-item"
                   >
                     <div
                       aria-describedby="test-id"
-                      class="ant-actions-list-item-icon"
+                      class="ant-actions-icon"
                     >
                       <span
                         aria-label="redo"
@@ -763,11 +763,11 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
                     </div>
                   </div>
                   <div
-                    class="ant-actions-list-item"
+                    class="ant-actions-item"
                   >
                     <div
                       aria-describedby="test-id"
-                      class="ant-actions-list-item-icon"
+                      class="ant-actions-icon"
                     >
                       <span
                         aria-label="copy"
@@ -857,11 +857,11 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
                 class="ant-actions-list ant-actions-variant-borderless"
               >
                 <div
-                  class="ant-actions-list-item"
+                  class="ant-actions-item"
                 >
                   <div
                     aria-describedby="test-id"
-                    class="ant-actions-list-item-icon"
+                    class="ant-actions-icon"
                   >
                     <span
                       aria-label="redo"
@@ -885,11 +885,11 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
                   </div>
                 </div>
                 <div
-                  class="ant-actions-list-item"
+                  class="ant-actions-item"
                 >
                   <div
                     aria-describedby="test-id"
-                    class="ant-actions-list-item-icon"
+                    class="ant-actions-icon"
                   >
                     <span
                       aria-label="copy"
@@ -981,11 +981,11 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
                   class="ant-actions-list ant-actions-variant-borderless"
                 >
                   <div
-                    class="ant-actions-list-item"
+                    class="ant-actions-item"
                   >
                     <div
                       aria-describedby="test-id"
-                      class="ant-actions-list-item-icon"
+                      class="ant-actions-icon"
                     >
                       <span
                         aria-label="redo"
@@ -1009,11 +1009,11 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
                     </div>
                   </div>
                   <div
-                    class="ant-actions-list-item"
+                    class="ant-actions-item"
                   >
                     <div
                       aria-describedby="test-id"
-                      class="ant-actions-list-item-icon"
+                      class="ant-actions-icon"
                     >
                       <span
                         aria-label="copy"
