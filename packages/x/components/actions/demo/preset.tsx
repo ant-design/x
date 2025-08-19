@@ -39,46 +39,28 @@ const App: React.FC = () => {
   // feedback
   const [feedbackStatus, setFeedbackStatus] = useState<ActionsFeedbackProps['value']>('default');
   const [feedbackPopupOpen, setFeedbackPopupOpen] = useState(false);
-  // speak
-  const [speakStatus, setSpeakingStatus] = useState<ActionsItemProps['status']>('default');
+  // audio
+  const [audioStatus, setAudioStatus] = useState<ActionsItemProps['status']>('default');
   // share
   const [shareStatus, setShareStatus] = useState<ActionsItemProps['status']>('default');
 
-  const speakClick = () => {
-    let timer: any = null;
-    switch (speakStatus) {
-      case 'default':
-        setSpeakingStatus('loading')
-        timer = setTimeout(() => {
-          clearTimeout(timer);
-          setSpeakingStatus('running');
-        }, 1500);
-        break;
-      case 'running':
-        setSpeakingStatus('loading');
-        timer = setTimeout(() => {
-          clearTimeout(timer);
-          setSpeakingStatus('default')
-        }, 1500);
-        break;
-    }
-  }
 
-  const shareClick = () => {
-    let timer: any = null;
+  const onClick = (type: 'share' | 'audio') => {
+    let timer: NodeJS.Timeout | null = null;
+    const dispatchFN = type === 'share' ? setShareStatus : setAudioStatus
     switch (shareStatus) {
       case 'default':
-        setShareStatus('loading')
+        dispatchFN('loading')
         timer = setTimeout(() => {
-          clearTimeout(timer);
-          setShareStatus('running');
+          timer && clearTimeout(timer);
+          dispatchFN('running');
         }, 1500);
         break;
       case 'running':
-        setShareStatus('loading');
+        dispatchFN('loading');
         timer = setTimeout(() => {
-          clearTimeout(timer);
-          setShareStatus('default')
+          timer && clearTimeout(timer);
+          dispatchFN('default')
         }, 1500);
         break;
     }
@@ -149,14 +131,14 @@ const App: React.FC = () => {
       key: 'audio',
       label: 'audio',
       actionRender: () => {
-        return <Actions.Audio onClick={speakClick} status={speakStatus} />
+        return <Actions.Audio onClick={() => onClick('audio')} status={audioStatus} />
       }
     },
     {
       key: 'share',
       label: 'share',
       actionRender: () => {
-        return <Actions.Item onClick={shareClick} label={shareStatus} status={shareStatus} defaultIcon={<ShareAltOutlined />} runningIcon={<CheckOutlined />} />
+        return <Actions.Item onClick={() => onClick('share')} label={shareStatus} status={shareStatus} defaultIcon={<ShareAltOutlined />} runningIcon={<CheckOutlined />} />
       }
     },
   ];
