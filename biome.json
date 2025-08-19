@@ -130,8 +130,8 @@
           "correctness": {
             "noVoidTypeReturn": "off"
           },
-          "suspicious": {
-            "noImportantInKeyframe": "off"
+          "complexity": {
+            "noImportantStyles": "off"
           },
           "a11y": {
             "useValidAnchor": "off",
