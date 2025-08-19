@@ -126,7 +126,7 @@
             "noVoidTypeReturn": "off"
           },
           "suspicious": {
-            "noImportantInKeyframe": "error"
+            "noImportantInKeyframe": "off"
           },
           "a11y": {
             "useValidAnchor": "off",
