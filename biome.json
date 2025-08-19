@@ -45,10 +45,12 @@
       "correctness": {
         "useExhaustiveDependencies": "off",
         "useHookAtTopLevel": "off",
+        "useUniqueElementIds": "off",
         "noUnusedFunctionParameters": "off",
         "noUnusedVariables": "off"
       },
       "suspicious": {
+        "noTsIgnore": "off",
         "noGlobalIsNan": "off",
         "noGlobalIsFinite": "off",
         "noExplicitAny": "off",
@@ -71,9 +73,6 @@
         "noStaticElementInteractions": "off",
         "useAriaPropsSupportedByRole": "off",
         "useAriaPropsForRole": "off"
-      },
-      "nursery": {
-        "useUniqueElementIds": "off"
       }
     }
   },

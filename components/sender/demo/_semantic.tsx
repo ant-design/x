@@ -11,12 +11,14 @@ const locales = {
     input: '输入框',
     actions: '操作列表',
     footer: '底部',
+    content: '内容',
   },
   en: {
     prefix: 'Prefix',
     input: 'Input',
     actions: 'Action List',
     footer: 'Footer',
+    content: 'Content',
   },
 };
 
@@ -45,6 +47,7 @@ const App: React.FC = () => {
           { name: 'input', desc: locale.input },
           { name: 'actions', desc: locale.actions },
           { name: 'footer', desc: locale.footer },
+          { name: 'content', desc: locale.content },
         ]}
       >
         <Sender
