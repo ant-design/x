@@ -8,7 +8,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
     class="ant-sender css-var-«r1e»"
   >
     <div
-      class="ant-sender ant-sender-header"
+      class="ant-sender-header"
       style="display: none;"
     >
       <div
@@ -366,7 +366,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
             </span>
           </button>
           <div
-            class="ant-sender ant-sender-switch css-var-«r1e» ant-sender-switch-checked"
+            class="ant-sender-switch css-var-«r1e» ant-sender-switch-checked"
           >
             <button
               class="ant-btn css-var-«r1e» ant-btn-default ant-btn-color-primary ant-btn-variant-outlined ant-sender-switch-content"
@@ -407,7 +407,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
             </button>
           </div>
           <div
-            class="ant-sender ant-sender-switch ant-dropdown-trigger css-var-«r1e»"
+            class="ant-sender-switch ant-dropdown-trigger css-var-«r1e»"
           >
             <button
               class="ant-btn css-var-«r1e» ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
@@ -608,7 +608,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
             />
           </div>
           <div
-            class="ant-sender ant-sender-switch ant-dropdown-trigger css-var-«r1e»"
+            class="ant-sender-switch ant-dropdown-trigger css-var-«r1e»"
           >
             <button
               class="ant-btn css-var-«r1e» ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
@@ -1378,7 +1378,7 @@ exports[`renders components/sender/demo/header-fixed.tsx extend context correctl
       class="ant-sender css-var-«r16»"
     >
       <div
-        class="ant-sender ant-sender-header ant-sender-header-motion-appear ant-sender-header-motion-appear-start ant-sender-header-motion"
+        class="ant-sender-header ant-sender-header-motion-appear ant-sender-header-motion-appear-start ant-sender-header-motion"
       >
         <div
           class="ant-sender-header-header"
@@ -1522,7 +1522,7 @@ exports[`renders components/sender/demo/paste-image.tsx extend context correctly
       class="ant-sender css-var-«r12»"
     >
       <div
-        class="ant-sender ant-sender-header"
+        class="ant-sender-header"
         style="display: none;"
       >
         <div
@@ -2960,7 +2960,7 @@ exports[`renders components/sender/demo/switch.tsx extend context correctly 1`] 
   >
      Default: 
     <div
-      class="ant-sender ant-sender-switch css-var-«r0»"
+      class="ant-sender-switch css-var-«r0»"
     >
       <button
         class="ant-btn css-var-«r0» ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
@@ -3000,7 +3000,7 @@ exports[`renders components/sender/demo/switch.tsx extend context correctly 1`] 
   >
     Custom checked/unchecked content: 
     <div
-      class="ant-sender ant-sender-switch css-var-«r0»"
+      class="ant-sender-switch css-var-«r0»"
     >
       <button
         class="ant-btn css-var-«r0» ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
@@ -3040,7 +3040,7 @@ exports[`renders components/sender/demo/switch.tsx extend context correctly 1`] 
   >
     Disabled:
     <div
-      class="ant-sender ant-sender-switch css-var-«r0»"
+      class="ant-sender-switch css-var-«r0»"
     >
       <button
         class="ant-btn css-var-«r0» ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
@@ -3081,7 +3081,7 @@ exports[`renders components/sender/demo/switch.tsx extend context correctly 1`] 
   >
     Loading: 
     <div
-      class="ant-sender ant-sender-switch css-var-«r0»"
+      class="ant-sender-switch css-var-«r0»"
     >
       <button
         class="ant-btn css-var-«r0» ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-loading ant-sender-switch-content"
@@ -3121,7 +3121,7 @@ exports[`renders components/sender/demo/switch.tsx extend context correctly 1`] 
   >
     DefaultValue: 
     <div
-      class="ant-sender ant-sender-switch css-var-«r0» ant-sender-switch-checked"
+      class="ant-sender-switch css-var-«r0» ant-sender-switch-checked"
     >
       <button
         class="ant-btn css-var-«r0» ant-btn-default ant-btn-color-primary ant-btn-variant-outlined ant-sender-switch-content"
@@ -3161,7 +3161,7 @@ exports[`renders components/sender/demo/switch.tsx extend context correctly 1`] 
   >
     Controlled mode: 
     <div
-      class="ant-sender ant-sender-switch css-var-«r0»"
+      class="ant-sender-switch css-var-«r0»"
     >
       <button
         class="ant-btn css-var-«r0» ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"

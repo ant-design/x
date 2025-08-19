@@ -93,7 +93,6 @@ const SenderSwitch = React.forwardRef<SenderSwitchRef, SenderSwitchProps>((props
   const contextConfig = useXComponentConfig('sender');
 
   const mergedCls = classnames(
-    prefixCls,
     switchCls,
     className,
     rootClassName,
