@@ -19,10 +19,26 @@ function exitProcess(code = 1) {
 async function checkVersion() {
   spinner.start('正在检查当前版本是否已经存在');
 
-  const raceUrl = [
-    'http://registry.npmjs.org/@ant-design/x',
-    'https://registry.npmmirror.com/@ant-design/x',
-  ];
+  type RaceUrlKey = 'x' | 'x-sdk' | 'x-markdown';
+  const raceUrlObj: Record<RaceUrlKey, string[]> = {
+    x: ['http://registry.npmjs.org/@ant-design/x', 'https://registry.npmmirror.com/@ant-design/x'],
+    'x-sdk': [
+      'http://registry.npmjs.org/@ant-design/x-sdk',
+      'https://registry.npmmirror.com/@ant-design/x-sdk',
+    ],
+    'x-markdown': [
+      'http://registry.npmjs.org/@ant-design/x-markdown',
+      'https://registry.npmmirror.com/@ant-design/x-markdown',
+    ],
+  };
+
+  const argKey = process.argv.slice(2)[0] as RaceUrlKey;
+  const raceUrl: string[] = argKey
+    ? raceUrlObj[argKey]
+    : Object.keys(raceUrlObj).reduce((raceUrls: string[], key) => {
+        raceUrls.push(...(raceUrlObj?.[key as RaceUrlKey] || []));
+        return raceUrls;
+      }, []);
 
   // any of the urls return the data will be fine
   const promises = raceUrl.map((url) =>
@@ -34,10 +50,14 @@ async function checkVersion() {
   const { versions } = await Promise.race(promises);
 
   if (version in versions) {
-    spinner.fail(chalk.yellow('😈 Current version already exists. Forget update package.json?'));
+    spinner.fail(
+      chalk.yellow(
+        `😈${argKey ? versions[version].name : ''} Current version already exists. Forget update package.json?`,
+      ),
+    );
     spinner.info(`${chalk.cyan(' => Current:')}: ${version}`);
     spinner.info(
-      `${chalk.cyan(' => Todo:')}: update the x-mono version and execute the command ${chalk.yellow('npm run publish-version')}`,
+      `${chalk.cyan(' => Todo:')}: update the x-mono package.json version and execute the command ${chalk.yellow('npm run publish-version')}`,
     );
     exitProcess();
   }
