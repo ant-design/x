@@ -31,6 +31,7 @@ interface XMarkdownProps {
   className?: string;
   paragraphTag?: string;
   style?: CSSProperties;
+  prefixCls?: string;
 }
 
 export type { XMarkdownProps, Token, Tokens };
