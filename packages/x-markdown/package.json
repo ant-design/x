@@ -30,11 +30,11 @@
     "plugins",
     "themes"
   ],
-    "homepage": "https://x.ant.design/markdowns/introduce",
+  "homepage": "https://x.ant.design/markdowns/introduce",
   "bugs": {
     "url": "https://github.com/ant-design/x/issues"
   },
-   "keywords": [
+  "keywords": [
     "AI",
     "Agent",
     "Copilot",
