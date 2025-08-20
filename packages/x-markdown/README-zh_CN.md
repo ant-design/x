@@ -88,7 +88,7 @@ ut install @ant-design/x-markdown
 
 > **强烈不推荐使用已构建文件**，这样无法按需加载，而且难以获得底层依赖模块的 bug 快速修复支持。
 
-> 注意：`x-markdown.js` 和 `x-markdown.min.js` 和 `x-markdown.min.js.map`。依赖 `react`、`react-dom`请确保提前引入这些文件。
+> 注意：`x-markdown.js` 、 `x-markdown.min.js` 和 `x-markdown.min.js.map`。依赖 `react`、`react-dom`请确保提前引入这些文件。
 
 ## 示例
 
