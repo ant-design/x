@@ -16,16 +16,11 @@ const App = () => {
   };
 
   return (
-      <FileCard
-        name="txt-file.txt"
-        byte={1024}
-        mask={
-          <VerticalAlignBottomOutlined
-            style={{ fontSize: 20 }}
-            onClick={() => onDownload()}
-          />
-        }
-      />
+    <FileCard
+      name="txt-file.txt"
+      byte={1024}
+      mask={<VerticalAlignBottomOutlined style={{ fontSize: 20 }} onClick={() => onDownload()} />}
+    />
   );
 };
 

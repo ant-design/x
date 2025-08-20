@@ -184,7 +184,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         case 'tag':
           return <div className={`${prefixCls}-slot-tag`}>{node.props?.label || ''}</div>;
         case 'custom':
-
           return node.customRender?.(
             value,
             (value: any) => {
@@ -416,7 +415,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     brElements?.forEach((br) => {
       br.remove();
     });
-  }
+  };
 
   const onInternalInput = (e: React.FormEvent<HTMLDivElement>) => {
     const newValue = getEditorValue();

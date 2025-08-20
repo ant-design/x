@@ -33,7 +33,6 @@ Common props ref：[Common props](/docs/react/common-props)
 | --- | --- | --- | --- | --- |
 | items | A list containing multiple action items | ([ItemType](#itemtype) \| ReactNode)[] | - | - |
 | onClick | Callback function when an action item is clicked | function({ item, key, keyPath, domEvent }) | - | - |
-| footer | Additional React node content at the bottom | ReactNode | - | - |
 | dropdownProps | Configuration properties for dropdown menu | DropdownProps | - | - |
 | variant | Variant | `borderless` \| `outlined` \|`filled` | `borderless` | - |
 
@@ -56,6 +55,28 @@ Common props ref：[Common props](/docs/react/common-props)
 | --- | --- | --- | --- | --- |
 | value | Feedback value | `like` \| `dislike` \| `default` | `default` | - |
 | onChange | Feedback status change callback | (value: `like` \| `dislike` \| `default`) => void | - | - |
+
+### Actions.Copy
+
+| Property | Description       | Type            | Default | Version |
+| -------- | ----------------- | --------------- | ------- | ------- |
+| text     | Text to be copied | string          | ''      | -       |
+| icon     | Copy button       | React.ReactNode | -       | -       |
+
+### Actions.Audio
+
+| Property | Description     | Type                                     | Default | Version |
+| -------- | --------------- | ---------------------------------------- | ------- | ------- |
+| status   | Playback status | 'loading'\|'error'\|'running'\|'default' | default | -       |
+
+### Actions.Item
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| status | Status | 'loading'\|'error'\|'running'\|'default' | default | - |
+| label | Display label for the custom action | string | - | - |
+| defaultIcon | Default status icon | React.ReactNode | - | - |
+| runningIcon | Running status icon | React.ReactNode | - | - |
 
 ## Semantic DOM
 

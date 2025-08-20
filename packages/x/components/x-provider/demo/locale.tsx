@@ -29,6 +29,29 @@ const items_locale = {
     deepSearch: '深度搜索',
   },
 };
+
+const items = [
+  {
+    key: 'feedback',
+    actionRender: () => (
+      <Actions.Feedback />
+    ),
+  },
+  {
+    key: 'copy',
+    label: 'copy',
+    actionRender: () => {
+      return <Actions.Copy text='copy value' />
+    }
+  },
+  {
+    key: 'audio',
+    label: 'audio',
+    actionRender: () => {
+      return <Actions.Audio />
+    }
+  }
+];
 export default () => {
   const [localeType, setLocaleType] = useState<'zh' | 'en'>('zh');
 
@@ -50,15 +73,16 @@ export default () => {
           <Radio.Button value="zh">中文</Radio.Button>
         </Radio.Group>
       </Flex>
+      <XProvider locale={locale}>
 
-      <Flex gap={12} vertical>
-        <Card>
-          <XProvider locale={locale}>
+        <Flex gap={12} vertical>
+          <Card>
+
             <Conversations
               style={{ width: 200 }}
               defaultActiveKey="write"
               creation={{
-                onClick: () => {},
+                onClick: () => { },
               }}
               items={[
                 {
@@ -83,15 +107,16 @@ export default () => {
                 },
               ]}
             />
-          </XProvider>
-        </Card>
 
-        <Card>
-          <XProvider locale={locale}>
-            <Actions.Feedback value={'default'} />
-          </XProvider>
-        </Card>
-      </Flex>
+          </Card>
+
+          <Card>
+            <Actions items={items} />
+
+          </Card>
+        </Flex>
+      </XProvider>
+
     </>
   );
 };

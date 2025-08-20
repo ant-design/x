@@ -223,11 +223,11 @@ exports[`renders components/bubble/demo/basic.tsx correctly 1`] = `
           class="ant-actions-list ant-actions-variant-borderless"
         >
           <div
-            class="ant-actions-list-item"
+            class="ant-actions-item"
           >
             <div
               aria-describedby="test-id"
-              class="ant-actions-list-item-icon"
+              class="ant-actions-icon"
             >
               <span
                 aria-label="redo"
@@ -251,11 +251,11 @@ exports[`renders components/bubble/demo/basic.tsx correctly 1`] = `
             </div>
           </div>
           <div
-            class="ant-actions-list-item"
+            class="ant-actions-item"
           >
             <div
               aria-describedby="test-id"
-              class="ant-actions-list-item-icon"
+              class="ant-actions-icon"
             >
               <span
                 aria-label="copy"
@@ -427,11 +427,11 @@ exports[`renders components/bubble/demo/editable.tsx correctly 1`] = `
               class="ant-actions-list ant-actions-variant-borderless"
             >
               <div
-                class="ant-actions-list-item"
+                class="ant-actions-item"
               >
                 <div
                   aria-describedby="test-id"
-                  class="ant-actions-list-item-icon"
+                  class="ant-actions-icon"
                 >
                   <span
                     aria-label="edit"
@@ -512,11 +512,11 @@ exports[`renders components/bubble/demo/editable.tsx correctly 1`] = `
               class="ant-actions-list ant-actions-variant-borderless"
             >
               <div
-                class="ant-actions-list-item"
+                class="ant-actions-item"
               >
                 <div
                   aria-describedby="test-id"
-                  class="ant-actions-list-item-icon"
+                  class="ant-actions-icon"
                 >
                   <span
                     aria-label="edit"
@@ -599,7 +599,7 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
           <div
             class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
           >
-            外气泡尾外气泡尾
+            outer footer
           </div>
           <div
             class="ant-bubble-footer ant-bubble-footer-start"
@@ -611,11 +611,11 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
                 class="ant-actions-list ant-actions-variant-borderless"
               >
                 <div
-                  class="ant-actions-list-item"
+                  class="ant-actions-item"
                 >
                   <div
                     aria-describedby="test-id"
-                    class="ant-actions-list-item-icon"
+                    class="ant-actions-icon"
                   >
                     <span
                       aria-label="redo"
@@ -639,11 +639,11 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
                   </div>
                 </div>
                 <div
-                  class="ant-actions-list-item"
+                  class="ant-actions-item"
                 >
                   <div
                     aria-describedby="test-id"
-                    class="ant-actions-list-item-icon"
+                    class="ant-actions-icon"
                   >
                     <span
                       aria-label="copy"
@@ -723,7 +723,7 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
             <div
               class="ant-bubble-content-with-footer"
             >
-              内气泡尾内气泡尾
+              inner footer
             </div>
             <div
               class="ant-bubble-footer ant-bubble-footer-end"
@@ -735,11 +735,11 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
                   class="ant-actions-list ant-actions-variant-borderless"
                 >
                   <div
-                    class="ant-actions-list-item"
+                    class="ant-actions-item"
                   >
                     <div
                       aria-describedby="test-id"
-                      class="ant-actions-list-item-icon"
+                      class="ant-actions-icon"
                     >
                       <span
                         aria-label="redo"
@@ -763,11 +763,11 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
                     </div>
                   </div>
                   <div
-                    class="ant-actions-list-item"
+                    class="ant-actions-item"
                   >
                     <div
                       aria-describedby="test-id"
-                      class="ant-actions-list-item-icon"
+                      class="ant-actions-icon"
                     >
                       <span
                         aria-label="copy"
@@ -845,7 +845,7 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
           <div
             class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
           >
-            外气泡尾外气泡尾-右对齐
+            outer footer and align right
           </div>
           <div
             class="ant-bubble-footer ant-bubble-footer-end"
@@ -857,11 +857,11 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
                 class="ant-actions-list ant-actions-variant-borderless"
               >
                 <div
-                  class="ant-actions-list-item"
+                  class="ant-actions-item"
                 >
                   <div
                     aria-describedby="test-id"
-                    class="ant-actions-list-item-icon"
+                    class="ant-actions-icon"
                   >
                     <span
                       aria-label="redo"
@@ -885,11 +885,11 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
                   </div>
                 </div>
                 <div
-                  class="ant-actions-list-item"
+                  class="ant-actions-item"
                 >
                   <div
                     aria-describedby="test-id"
-                    class="ant-actions-list-item-icon"
+                    class="ant-actions-icon"
                   >
                     <span
                       aria-label="copy"
@@ -969,7 +969,7 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
             <div
               class="ant-bubble-content-with-footer"
             >
-              内气泡尾内气泡尾-左对齐
+              inner footer and align left
             </div>
             <div
               class="ant-bubble-footer ant-bubble-footer-start"
@@ -981,11 +981,11 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
                   class="ant-actions-list ant-actions-variant-borderless"
                 >
                   <div
-                    class="ant-actions-list-item"
+                    class="ant-actions-item"
                   >
                     <div
                       aria-describedby="test-id"
-                      class="ant-actions-list-item-icon"
+                      class="ant-actions-icon"
                     >
                       <span
                         aria-label="redo"
@@ -1009,11 +1009,11 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
                     </div>
                   </div>
                   <div
-                    class="ant-actions-list-item"
+                    class="ant-actions-item"
                   >
                     <div
                       aria-describedby="test-id"
-                      class="ant-actions-list-item-icon"
+                      class="ant-actions-icon"
                     >
                       <span
                         aria-label="copy"
@@ -1098,7 +1098,7 @@ exports[`renders components/bubble/demo/header.tsx correctly 1`] = `
           <div
             class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
           >
-            左对齐 header
+            align left
           </div>
         </div>
       </div>
@@ -1151,7 +1151,7 @@ exports[`renders components/bubble/demo/header.tsx correctly 1`] = `
           <div
             class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
           >
-            右对齐 header
+            align right
           </div>
         </div>
       </div>
@@ -1595,7 +1595,7 @@ exports[`renders components/bubble/demo/sider-and-placement.tsx correctly 1`] = 
           <div
             class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
           >
-            左对齐
+            align left
           </div>
         </div>
         <div
@@ -1668,7 +1668,7 @@ exports[`renders components/bubble/demo/sider-and-placement.tsx correctly 1`] = 
           <div
             class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
           >
-            右对齐
+            align right
           </div>
         </div>
         <div

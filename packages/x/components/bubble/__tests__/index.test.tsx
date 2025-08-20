@@ -1040,16 +1040,16 @@ describe('bubble', () => {
       expect(onEditConfirm).toHaveBeenCalledWith('');
     });
 
-    it('应该支持 onEditCancle 回调', () => {
-      const onEditCancle = jest.fn();
+    it('应该支持 onEditCancel 回调', () => {
+      const onEditCancel = jest.fn();
       const { container } = render(
-        <Bubble content="初始内容" editable onEditCancle={onEditCancle} />,
+        <Bubble content="初始内容" editable onEditCancel={onEditCancel} />,
       );
 
       const cancelBtn = container.querySelectorAll('.ant-bubble-editing-opts button')[1]!;
       fireEvent.click(cancelBtn);
 
-      expect(onEditCancle).toHaveBeenCalled();
+      expect(onEditCancel).toHaveBeenCalled();
     });
 
     // it('应该支持 onEditConfirm 为 undefined', () => {
@@ -1062,7 +1062,7 @@ describe('bubble', () => {
     //   }).not.toThrow();
     // });
 
-    // it('应该支持 onEditCancle 为 undefined', () => {
+    // it('应该支持 onEditCancel 为 undefined', () => {
     //   const { container } = render(<Bubble content="初始内容" editable />);
 
     //   const cancelBtn = container.querySelectorAll('.ant-bubble-editing-opts button')[1]!;

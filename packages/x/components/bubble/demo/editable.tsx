@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 const App = () => {
   const [editable, setEditable] = useState([
     false,
-    { editing: false, okText: '确认', cancelText: <span>取消</span> },
+    { editing: false, okText: 'ok', cancelText: <span>cancel</span> },
   ]);
   const [content, setContent] = useState(['editable bubble 1', 'editable bubble 2']);
 
@@ -31,10 +31,10 @@ const App = () => {
               />
             ),
           }}
-          onEditCancle={() => setEditable([false, editable[1]])}
+          onEditCancel={() => setEditable([false, editable[1]])}
           onEditConfirm={(val) => {
             setContent([val, content[1]]);
-            setEditable([false, editable[1]])
+            setEditable([false, editable[1]]);
           }}
         />
       </Flex>
@@ -61,10 +61,10 @@ const App = () => {
               />
             ),
           }}
-          onEditCancle={() => setEditable([editable[0], false])}
+          onEditCancel={() => setEditable([editable[0], false])}
           onEditConfirm={(val) => {
             setContent([content[0], val]);
-            setEditable([editable[0], { ...(editable[1] as any), editing: false }])
+            setEditable([editable[0], { ...(editable[1] as any), editing: false }]);
           }}
         />
       </Flex>

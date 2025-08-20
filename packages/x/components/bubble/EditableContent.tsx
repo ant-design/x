@@ -11,8 +11,8 @@ export const EditableContent: React.FC<{
   okText?: EditableBubbleOption['okText'];
   cancelText?: EditableBubbleOption['cancelText'];
   onEditConfirm?: BubbleProps['onEditConfirm'];
-  onEditCancle?: BubbleProps['onEditCancle'];
-}> = ({ content, prefixCls, okText, cancelText, onEditConfirm, onEditCancle }) => {
+  onEditCancel?: BubbleProps['onEditCancel'];
+}> = ({ content, prefixCls, okText, cancelText, onEditConfirm, onEditCancel }) => {
   const mockInputRef = React.useRef<HTMLDivElement>(null);
 
   const [contextLocale] = useLocale('Bubble', en_US.Bubble);
@@ -22,7 +22,7 @@ export const EditableContent: React.FC<{
     // 但 onEditing 端应该对入参做 xss 防护
     onEditConfirm?.(mockInputRef.current!.textContent || ''),
   );
-  const onCancel = useEvent(() => onEditCancle?.());
+  const onCancel = useEvent(() => onEditCancel?.());
 
   React.useEffect(() => {
     mockInputRef.current!.textContent = content;

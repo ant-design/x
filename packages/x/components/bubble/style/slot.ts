@@ -2,7 +2,8 @@ import type { GenerateStyle } from '../../theme/cssinjs-utils';
 import type { BubbleToken } from './bubble';
 
 export const genSlotStyle: GenerateStyle<BubbleToken> = (token) => {
-  const { componentCls, fontSize, lineHeight, paddingXXS, margin, colorText } = token;
+  const { componentCls, fontSize, lineHeight, paddingXXS, margin, colorText, fontSizeLG, calc } =
+    token;
   return {
     [componentCls]: {
       // ======================== Header & Footer ========================
@@ -31,7 +32,9 @@ export const genSlotStyle: GenerateStyle<BubbleToken> = (token) => {
       },
 
       // ======================== Sider ========================
-      '&-avatar': {},
+      '&-avatar': {
+        minWidth: calc(fontSizeLG).mul(2).equal(),
+      },
 
       '&-extra': {},
     },

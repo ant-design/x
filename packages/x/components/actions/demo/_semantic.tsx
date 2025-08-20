@@ -27,14 +27,12 @@ const locales = {
   cn: {
     root: '根节点',
     item: '操作项',
-    itemDropdown: '操作下拉选项',
-    footer: '底部',
+    itemDropdown: '操作下拉选项'
   },
   en: {
     root: 'Root',
     item: 'Item',
-    itemDropdown: 'Item Dropdown',
-    footer: 'Footer',
+    itemDropdown: 'Item Dropdown'
   },
 };
 
@@ -47,8 +45,7 @@ const App: React.FC = () => {
       semantics={[
         { name: 'root', desc: locale.root },
         { name: 'item', desc: locale.item },
-        { name: 'itemDropdown', desc: locale.itemDropdown },
-        { name: 'footer', desc: locale.footer },
+        { name: 'itemDropdown', desc: locale.itemDropdown }
       ]}
     >
       <Actions
@@ -57,14 +54,6 @@ const App: React.FC = () => {
           open: true,
           getPopupContainer: (triggerNode) => triggerNode.parentElement!,
           placement: 'topLeft',
-        }}
-        footer={<>footer</>}
-        styles={{
-          footer: {
-            border: '1px solid #eee',
-            padding: 8,
-            borderRadius: 12,
-          },
         }}
       />
     </SemanticPreview>

@@ -2,12 +2,13 @@ import * as React from 'react';
 import { devUseWarning } from '../_util/warning';
 import type { LocaleContextProps } from './context';
 import LocaleContext from './context';
+import type {Locale as antdLocale} from 'antd/es/locale'
 
 export { default as useLocale } from './useLocale';
 
 export const ANT_MARK = 'internalMark';
 
-export interface Locale {
+export interface xLocale  {
   locale: string;
   Conversations?: {
     create: string;
@@ -15,12 +16,17 @@ export interface Locale {
   Actions?: {
     feedbackLike: string;
     feedbackDislike: string;
+    audio: string;
+    audioRunning: string;
+    audioError:string;
+    audioLoading:string
   };
   Bubble?: {
     editableOk: string;
     editableCancel: string;
   };
-}
+};
+export type Locale = xLocale & antdLocale
 
 export interface LocaleProviderProps {
   locale: Locale;

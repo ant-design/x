@@ -1,17 +1,21 @@
-import type { Locale } from '.';
+import type { xLocale } from '.';
 
-const localeValues: Required<Locale> = {
+const localeValues: Required<xLocale> = {
   locale: 'en',
   Conversations: {
     create: 'New chat',
   },
   Actions: {
-    feedbackLike: 'like',
-    feedbackDislike: 'dislike',
+    feedbackLike: 'Like',
+    feedbackDislike: 'Dislike',
+    audio: 'Play audio',
+    audioRunning: 'Audio playing',
+    audioError: 'Playback error',
+    audioLoading: 'Loading audio',
   },
   Bubble: {
-    editableOk: 'ok',
-    editableCancel: 'cancel',
+    editableOk: 'OK',
+    editableCancel: 'Cancel',
   },
 };
 

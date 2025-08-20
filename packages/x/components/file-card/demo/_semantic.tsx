@@ -24,19 +24,18 @@ const App: React.FC = () => {
   const [locale] = useLocale(locales);
 
   return (
-
-      <SemanticPreview
-        componentName="FileCard"
-        semantics={[
-          { name: 'root', desc: locale.root },
-          { name: 'file', desc: locale.file },
-          { name: 'icon', desc: locale.icon },
-          { name: 'name', desc: locale.name },
-          { name: 'description', desc: locale.description },
-        ]}
-      >
-        <FileCard name="pdf-file.pdf" byte={1024} />
-      </SemanticPreview>
+    <SemanticPreview
+      componentName="FileCard"
+      semantics={[
+        { name: 'root', desc: locale.root },
+        { name: 'file', desc: locale.file },
+        { name: 'icon', desc: locale.icon },
+        { name: 'name', desc: locale.name },
+        { name: 'description', desc: locale.description },
+      ]}
+    >
+      <FileCard name="pdf-file.pdf" byte={1024} />
+    </SemanticPreview>
   );
 };
 
