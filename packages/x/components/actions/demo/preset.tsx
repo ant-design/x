@@ -1,13 +1,10 @@
 import { CheckOutlined, ShareAltOutlined } from '@ant-design/icons';
-import { Actions } from '@ant-design/x';
 import type { ActionsFeedbackProps, ActionsItemProps } from '@ant-design/x';
+import { Actions } from '@ant-design/x';
 import { message, Pagination } from 'antd';
 import React, { useState } from 'react';
 
-
 const App: React.FC = () => {
-
-
   // pagination
   const [curPage, setCurPage] = useState(1);
   // feedback
@@ -18,13 +15,13 @@ const App: React.FC = () => {
   // share
   const [shareStatus, setShareStatus] = useState<ActionsItemProps['status']>('default');
 
-
   const onClick = (type: 'share' | 'audio') => {
     let timer: NodeJS.Timeout | null = null;
-    const dispatchFN = type === 'share' ? setShareStatus : setAudioStatus
-    switch (shareStatus) {
+    const dispatchFN = type === 'share' ? setShareStatus : setAudioStatus;
+    const status = type === 'share' ? shareStatus : audioStatus;
+    switch (status) {
       case 'default':
-        dispatchFN('loading')
+        dispatchFN('loading');
         timer = setTimeout(() => {
           timer && clearTimeout(timer);
           dispatchFN('running');
@@ -34,11 +31,11 @@ const App: React.FC = () => {
         dispatchFN('loading');
         timer = setTimeout(() => {
           timer && clearTimeout(timer);
-          dispatchFN('default')
+          dispatchFN('default');
         }, 1500);
         break;
     }
-  }
+  };
 
   const items = [
     {
@@ -70,22 +67,30 @@ const App: React.FC = () => {
       key: 'copy',
       label: 'copy',
       actionRender: () => {
-        return <Actions.Copy text='copy value' />
-      }
+        return <Actions.Copy text="copy value" />;
+      },
     },
     {
       key: 'audio',
       label: 'audio',
       actionRender: () => {
-        return <Actions.Audio onClick={() => onClick('audio')} status={audioStatus} />
-      }
+        return <Actions.Audio onClick={() => onClick('audio')} status={audioStatus} />;
+      },
     },
     {
       key: 'share',
       label: 'share',
       actionRender: () => {
-        return <Actions.Item onClick={() => onClick('share')} label={shareStatus} status={shareStatus} defaultIcon={<ShareAltOutlined />} runningIcon={<CheckOutlined />} />
-      }
+        return (
+          <Actions.Item
+            onClick={() => onClick('share')}
+            label={shareStatus}
+            status={shareStatus}
+            defaultIcon={<ShareAltOutlined />}
+            runningIcon={<CheckOutlined />}
+          />
+        );
+      },
     },
   ];
 

@@ -1,13 +1,10 @@
+import { CloseCircleOutlined, LoadingOutlined } from '@ant-design/icons';
+import { Tooltip } from 'antd';
 import classnames from 'classnames';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
-
-
 import { useXProviderContext } from '../x-provider';
-
 import useStyle from './style';
-import { CloseCircleOutlined, LoadingOutlined } from '@ant-design/icons';
-import { Tooltip } from 'antd';
 
 export enum ACTIONS_ITEM_STATUS {
   /**
@@ -19,20 +16,16 @@ export enum ACTIONS_ITEM_STATUS {
    */
   ERROR = 'error',
   /**
- * @desc 执行中
- */
+   * @desc 执行中
+   */
   RUNNING = 'running',
   /**
- * @desc 默认
- */
+   * @desc 默认
+   */
   DEFAULT = 'default',
 }
 
-
-
-
-export interface ActionsItemProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+export interface ActionsItemProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /**
    * @desc 状态
    * @descEN status
@@ -42,17 +35,17 @@ export interface ActionsItemProps
    * @desc 图标
    * @descEN icon
    */
-  defaultIcon: React.ReactNode,
+  defaultIcon: React.ReactNode;
   /**
    * @desc 自定义操作的显示标签
    * @descEN Display label for the custom action.
    */
-  label?: string,
+  label?: string;
   /**
- * @desc 执行中图标
- * @descEN running icon
- */
-  runningIcon?: React.ReactNode,
+   * @desc 执行中图标
+   * @descEN running icon
+   */
+  runningIcon?: React.ReactNode;
 
   /**
    * @desc 自定义样式前缀
@@ -85,7 +78,6 @@ const ActionsItem: React.FC<ActionsItemProps> = (props) => {
     data: true,
   });
 
-
   // ============================ Prefix ============================
 
   const { direction, getPrefixCls } = useXProviderContext();
@@ -96,26 +88,33 @@ const ActionsItem: React.FC<ActionsItemProps> = (props) => {
 
   // ============================ Classname ============================
 
-  const mergedCls = classnames(itemCls, hashId, cssVarCls, rootClassName, className, `${prefixCls}-item`, {
-    [`${itemCls}-rtl`]: direction === 'rtl',
-  });
+  const mergedCls = classnames(
+    itemCls,
+    hashId,
+    cssVarCls,
+    rootClassName,
+    className,
+    `${prefixCls}-item`,
+    {
+      [`${itemCls}-rtl`]: direction === 'rtl',
+    },
+  );
 
   const StatusIcon = {
     [ACTIONS_ITEM_STATUS.LOADING]: <LoadingOutlined />,
     [ACTIONS_ITEM_STATUS.ERROR]: <CloseCircleOutlined />,
     [ACTIONS_ITEM_STATUS.RUNNING]: runningIcon,
-    [ACTIONS_ITEM_STATUS.DEFAULT]: defaultIcon
+    [ACTIONS_ITEM_STATUS.DEFAULT]: defaultIcon,
   };
 
   const iconNode = status && StatusIcon[status] ? StatusIcon[status] : defaultIcon;
 
-
   return (
-    <div {...domProps} className={mergedCls} style={style} >
-      <Tooltip title={label}>
+    <Tooltip title={label}>
+      <div {...domProps} className={mergedCls} style={style}>
         {iconNode}
-      </Tooltip>
-    </div>
+      </div>
+    </Tooltip>
   );
 };
 
