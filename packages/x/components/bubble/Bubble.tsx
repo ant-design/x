@@ -4,7 +4,7 @@ import pickAttrs from 'rc-util/lib/pickAttrs';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 import { EditableContent } from './EditableContent';
-import {
+import type {
   BubbleAnimationOption,
   BubbleContentType,
   BubbleProps,
