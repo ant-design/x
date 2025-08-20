@@ -1,6 +1,19 @@
 {
   "name": "@ant-design/x-sdk",
   "version": "2.0.0-alpha.3",
+  "homepage": "https://x.ant.design/sdks/introduce-cn",
+  "bugs": {
+    "url": "https://github.com/ant-design/x/issues"
+  },
+   "keywords": [
+    "AI",
+    "Agent",
+    "Copilot",
+    "ant",
+    "sdk",
+    "framework",
+    "react"
+  ],
   "scripts": {
     "compile": "father build",
     "tsc": "tsc --noEmit",

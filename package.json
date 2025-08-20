@@ -68,14 +68,6 @@
     }
   ],
   "description": "Craft AI-driven interfaces effortlessly",
-  "keywords": [
-    "AI",
-    "Copilot",
-    "ant",
-    "components",
-    "framework",
-    "react"
-  ],
   "homepage": "https://x.ant.design",
   "bugs": {
     "url": "https://github.com/ant-design/x/issues"

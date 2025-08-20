@@ -36,10 +36,11 @@
 ## ✨ 特性
 
 - 🌈 **源自企业级 AI 产品的最佳实践**：基于 RICH 交互范式，提供卓越的 AI 交互体验
-- 🧩 **灵活多样的原子组件**：覆盖绝大部分 AI 对话场景，助力快速构建个性化 AI 交互页面
-- ⚡ **开箱即用的模型对接能力**：轻松对接符合 OpenAI 标准的模型推理服务
-- 🔄 **高效管理对话数据流**：提供好用的数据流管理功能，让开发更高效
-- 📦 **丰富的样板间支持**：提供多种模板，快速启动 LUI 应用开发
+- 🧩 **灵活多样的原子组件**：覆盖绝大部分 AI 场景，助力快速构建个性化 AI 交互页面
+- ✨ **流式友好、强拓展性和高性能的 Markdown 渲染器**:提供流式渲染公式、代码高亮、mermaid 等能力 [@ant-design/x-markdown](../x-markdown/README-zh_CN.md)
+- 🚀 **开箱即用的模型/智能体对接能力**：轻松对接符合 OpenAI 标准的模型/智能体服务 [@ant-design/x-sdk](../x-sdk/README-zh_CN.md)
+- ⚡️ **高效管理大模型数据流**：提供好用的数据流管理功能，让开发更高效 [@ant-design/x-sdk](../x-sdk/README-zh_CN.md)
+- 📦 **丰富的样板间支持**：提供多种模板，快速启动 LUI 应用开发[样板间](https://github.com/ant-design/x/tree/main/packages/x/docs/playground/)
 - 🛡 **TypeScript 全覆盖**：采用 TypeScript 开发，提供完整类型支持，提升开发体验与可靠性
 - 🎨 **深度主题定制能力**：支持细粒度的样式调整，满足各种场景的个性化需求
 
@@ -57,7 +58,7 @@ yarn add @ant-design/x
 pnpm add @ant-design/x
 ```
 
-```ut
+```bash
 ut install @ant-design/x
 ```
 
@@ -73,7 +74,7 @@ ut install @ant-design/x
 
 ## 🧩 原子组件
 
-我们基于 RICH 交互范式，在不同的交互阶段提供了大量的原子组件，帮助你灵活搭建你的 AI 对话应用：
+我们基于 RICH 交互范式，在不同的交互阶段提供了大量的原子组件，帮助你灵活搭建你的 AI 应用：
 
 - [组件总览](https://x.ant.design/components/overview-cn)
 - [样板间](https://x.ant.design/docs/playground/independent-cn)
@@ -91,14 +92,27 @@ import {
 
 const messages = [
   {
+    key: 'message_1',
     content: 'Hello, Ant Design X!',
     role: 'user',
   },
+  {
+    key: 'x_message_1',
+    content: 'Hello, I am Ant Design X!',
+    role: 'x',
+  },
 ];
+
+const role = {
+  // 气泡位置:end
+  x: {
+    placement: 'end',
+  },
+};
 
 const App = () => (
   <div>
-    <Bubble.List items={messages} />
+    <Bubble.List items={messages} role={role} />
     <Sender />
   </div>
 );
@@ -106,159 +120,13 @@ const App = () => (
 export default App;
 ```
 
-## ⚡️ 对接模型推理服务
+## ⚡️ 对接模型智能体服务 & 高效管理数据流
 
-我们通过提供 `useXAgent` `XRequest` 等运行时工具，帮助你开箱即用的对接符合标准的模型推理服务。
+`@ant-design/x-sdk` 提供了一系列的工具API，旨在提供开发者开箱即用的管理AI应用数据流，详情点击[这里](../x-sdk/README-zh_CN.md)。
 
-这是一个对接 Qwen 的示例:
+## ✨ Markdown 渲染器
 
-> 注意: 🔥 `dangerouslyApiKey` 存在安全风险，对此有详细的[说明](/docs/react/dangerously-api-key.zh-CN.md)。
-
-```tsx
-import { useXAgent, Sender, XRequest } from '@ant-design/x';
-import React from 'react';
-
-const { create } = XRequest({
-  baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
-  dangerouslyApiKey: process.env['DASHSCOPE_API_KEY'],
-  model: 'qwen-plus',
-});
-
-const Component: React.FC = () => {
-  const [agent] = useXAgent({
-    request: async (info, callbacks) => {
-      const { messages, message } = info;
-      const { onUpdate } = callbacks;
-
-      // current message
-      console.log('message', message);
-      // messages list
-      console.log('messages', messages);
-
-      let content: string = '';
-
-      try {
-        create(
-          {
-            messages: [{ role: 'user', content: message }],
-            stream: true,
-          },
-          {
-            onSuccess: (chunks) => {
-              console.log('sse chunk list', chunks);
-            },
-            onError: (error) => {
-              console.log('error', error);
-            },
-            onUpdate: (chunk) => {
-              console.log('sse object', chunk);
-
-              const data = JSON.parse(chunk.data);
-
-              content += data?.choices[0].delta.content;
-
-              onUpdate(content);
-            },
-          },
-        );
-      } catch (error) {
-        // handle error
-      }
-    },
-  });
-
-  function onRequest(message: string) {
-    agent.request(
-      { message },
-      {
-        onUpdate: () => {},
-        onSuccess: () => {},
-        onError: () => {},
-      },
-    );
-  }
-
-  return <Sender onSubmit={onRequest} />;
-};
-```
-
-## 🔄 高效管理数据流
-
-我们通过提供 `useXChat` 运行时工具，帮助你开箱即用的管理 AI 对话应用的数据流:
-
-这是一个对接 OpenAI 的示例:
-
-```tsx
-import { useXAgent, useXChat, Sender, Bubble } from '@ant-design/x';
-import OpenAI from 'openai';
-import React from 'react';
-
-const client = new OpenAI({
-  apiKey: process.env['OPENAI_API_KEY'],
-  dangerouslyAllowBrowser: true,
-});
-
-const Demo: React.FC = () => {
-  const [agent] = useXAgent({
-    request: async (info, callbacks) => {
-      const { messages, message } = info;
-
-      const { onSuccess, onUpdate, onError } = callbacks;
-
-      // current message
-      console.log('message', message);
-
-      // history messages
-      console.log('messages', messages);
-
-      let content: string = '';
-
-      try {
-        const stream = await client.chat.completions.create({
-          model: 'gpt-4o',
-          // if chat context is needed, modify the array
-          messages: [{ role: 'user', content: message }],
-          // stream mode
-          stream: true,
-        });
-
-        for await (const chunk of stream) {
-          content += chunk.choices[0]?.delta?.content || '';
-
-          onUpdate(content);
-        }
-
-        onSuccess(content);
-      } catch (error) {
-        // handle error
-        // onError();
-      }
-    },
-  });
-
-  const {
-    // use to send message
-    onRequest,
-    // use to render messages
-    messages,
-  } = useXChat({ agent });
-
-  const items = messages.map(({ message, id }) => ({
-    // key is required, used to identify the message
-    key: id,
-    content: message,
-  }));
-
-  return (
-    <div>
-      <Bubble.List items={items} />
-      <Sender onSubmit={onRequest} />
-    </div>
-  );
-};
-
-export default Demo;
-```
+`@ant-design/x-markdown` 旨在提供流式友好、强拓展性和高性能的 Markdown 渲染器。提供流式渲染公式、代码高亮、mermaid 等能力，详情点击[这里](../x-markdown/README-zh_CN.md)。
 
 ## 按需加载
 
@@ -302,10 +170,6 @@ $ ut update # utoo only
 
 ## 如何贡献
 
-<a href="https://openomy.app/github/ant-design/x" target="_blank" style="display: block; width: 100%;" align="center">
-  <img src="https://openomy.app/svg?repo=ant-design/x&chart=bubble&latestMonth=3" target="_blank" alt="Contribution Leaderboard" style="display: block; width: 100%;" />
- </a>
-
 在任何形式的参与前，请先阅读 [贡献者文档](https://github.com/ant-design/ant-design/blob/master/.github/CONTRIBUTING.md)。如果你希望参与贡献，欢迎提交 [Pull Request](https://github.com/ant-design/ant-design/pulls)，或给我们 [报告 Bug](http://new-issue.ant.design/)。
 
 > 强烈推荐阅读 [《提问的智慧》](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way)、[《如何向开源社区提问题》](https://github.com/seajs/seajs/issues/545) 和 [《如何有效地报告 Bug》](http://www.chiark.greenend.org.uk/%7Esgtatham/bugs-cn.html)、[《如何向开源项目提交无法解答的问题》](https://zhuanlan.zhihu.com/p/25795393)，更好的问题更容易获得帮助。
@@ -318,3 +182,7 @@ $ ut update # utoo only
 
 1. [GitHub Discussions](https://github.com/ant-design/x/discussions)
 2. [GitHub Issues](https://github.com/ant-design/x/issues)
+
+<a href="https://openomy.app/github/ant-design/x" target="_blank" style="display: block; width: 100%;" align="center">
+  <img src="https://openomy.app/svg?repo=ant-design/x&chart=bubble&latestMonth=3" target="_blank" alt="Contribution Leaderboard" style="display: block; width: 100%;" />
+ </a>

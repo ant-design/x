@@ -16,6 +16,56 @@ tag: vVERSION
 
 ---
 
+## 2.0.0-alpha.4
+
+`2025-08-20`
+
+## 2.0.0-alpha.3
+
+`2025-08-14`
+
+## 2.0.0-alpha.2
+
+`2025-08-12`
+
+## 2.0.0-alpha.1
+
+`2025-08-12`
+
+### @ant-design/x
+
+- 🛠 Refactored and upgraded Bubble component.
+- 🛠 Refactored and upgraded Bubble.List component.
+
+## 2.0.0-alpha.0
+
+`2025-08-05`
+
+### @ant-design/x
+
+- 🔥 New component: FileCard.
+- 🔥 New component: Notification.
+- 🔥 New component: Think.
+- 🛠 Refactored and upgraded Attachments component.
+- 🛠 Refactored and upgraded Conversations component.
+- 🛠 Refactored and upgraded Sender component.
+- 🛠 Refactored and upgraded ThoughtChain component.
+
+### @ant-design/x-markdown
+
+- 🔥 New component: XMarkdown.
+- 🔥 New plugin: Latex.
+- 🔥 New plugin: HighlightCode.
+- 🔥 New plugin: Mermaid.
+
+### @ant-design/x-sdk
+
+- 🔥 New utility: useXChat.
+- 🔥 New utility: useXConversations.
+- 🔥 New utility: Chat Provider.
+- 🔥 New utility: XRequest.
+- 🔥 New utility: XStream.
+
 ## 1.6.0
 
 `2025-07-30`

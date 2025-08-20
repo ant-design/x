@@ -30,6 +30,19 @@
     "plugins",
     "themes"
   ],
+    "homepage": "https://x.ant.design/markdowns/introduce",
+  "bugs": {
+    "url": "https://github.com/ant-design/x/issues"
+  },
+   "keywords": [
+    "AI",
+    "Agent",
+    "Copilot",
+    "ant",
+    "markdown",
+    "framework",
+    "react"
+  ],
   "license": "MIT",
   "description": "placeholder for @ant-design/x-markdown",
   "dependencies": {
