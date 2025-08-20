@@ -343,10 +343,10 @@ exports[`renders components/actions/demo/preset.tsx extend context correctly 1`]
       </div>
     </span>
     <div
+      aria-describedby="test-id"
       class="ant-actions-button-item css-var-«r18» ant-actions-audio css-var-«r18» ant-actions-audio-default ant-actions-item"
     >
       <span
-        aria-describedby="test-id"
         aria-label="muted"
         class="anticon anticon-muted"
         role="img"
@@ -366,32 +366,32 @@ exports[`renders components/actions/demo/preset.tsx extend context correctly 1`]
           />
         </svg>
       </span>
+    </div>
+    <div
+      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r18» ant-tooltip-placement-top"
+      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+    >
       <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r18» ant-tooltip-placement-top"
-        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+        class="ant-tooltip-arrow"
+        style="position: absolute; bottom: 0px; left: 0px;"
+      />
+      <div
+        class="ant-tooltip-content"
       >
         <div
-          class="ant-tooltip-arrow"
-          style="position: absolute; bottom: 0px; left: 0px;"
-        />
-        <div
-          class="ant-tooltip-content"
+          class="ant-tooltip-inner"
+          id="test-id"
+          role="tooltip"
         >
-          <div
-            class="ant-tooltip-inner"
-            id="test-id"
-            role="tooltip"
-          >
-            Play audio
-          </div>
+          Play audio
         </div>
       </div>
     </div>
     <div
+      aria-describedby="test-id"
       class="ant-actions-button-item css-var-«r18» ant-actions-item"
     >
       <span
-        aria-describedby="test-id"
         aria-label="share-alt"
         class="anticon anticon-share-alt"
         role="img"
@@ -410,24 +410,24 @@ exports[`renders components/actions/demo/preset.tsx extend context correctly 1`]
           />
         </svg>
       </span>
+    </div>
+    <div
+      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r18» ant-tooltip-placement-top"
+      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+    >
       <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r18» ant-tooltip-placement-top"
-        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+        class="ant-tooltip-arrow"
+        style="position: absolute; bottom: 0px; left: 0px;"
+      />
+      <div
+        class="ant-tooltip-content"
       >
         <div
-          class="ant-tooltip-arrow"
-          style="position: absolute; bottom: 0px; left: 0px;"
-        />
-        <div
-          class="ant-tooltip-content"
+          class="ant-tooltip-inner"
+          id="test-id"
+          role="tooltip"
         >
-          <div
-            class="ant-tooltip-inner"
-            id="test-id"
-            role="tooltip"
-          >
-            default
-          </div>
+          default
         </div>
       </div>
     </div>

@@ -241,10 +241,10 @@ exports[`renders components/actions/demo/preset.tsx correctly 1`] = `
       </button>
     </span>
     <div
+      aria-describedby="test-id"
       class="ant-actions-button-item css-var-«R0» ant-actions-audio css-var-«R0» ant-actions-audio-default ant-actions-item"
     >
       <span
-        aria-describedby="test-id"
         aria-label="muted"
         class="anticon anticon-muted"
         role="img"
@@ -266,10 +266,10 @@ exports[`renders components/actions/demo/preset.tsx correctly 1`] = `
       </span>
     </div>
     <div
+      aria-describedby="test-id"
       class="ant-actions-button-item css-var-«R0» ant-actions-item"
     >
       <span
-        aria-describedby="test-id"
         aria-label="share-alt"
         class="anticon anticon-share-alt"
         role="img"
