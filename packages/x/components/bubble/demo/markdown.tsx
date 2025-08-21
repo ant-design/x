@@ -14,7 +14,7 @@ Link: [Ant Design X](https://x.ant.design)
 const renderMarkdown: BubbleProps['contentRender'] = (content) => {
   return (
     <Typography>
-      <XMarkdown content={content} />
+      <XMarkdown style={{ whiteSpace: 'normal' }} content={content} />
     </Typography>
   );
 };

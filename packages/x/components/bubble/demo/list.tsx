@@ -159,7 +159,7 @@ const App = () => {
                 content: text,
                 contentRender: (content: string) => (
                   <Typography>
-                    <XMarkdown content={content} />
+                    <XMarkdown style={{ whiteSpace: 'normal' }} content={content} />
                   </Typography>
                 ),
               });
