@@ -195,7 +195,9 @@ const genFileCardListStyle: GenerateStyle<FileCardToken> = (token) => {
       [`${componentCls}-list-item`]: {
         display: 'flex',
         position: 'relative',
-
+        [`${componentCls}-list-remove`]: {
+          transition: `opacity ${token.motionDurationMid} ${token.motionEaseOut}`,
+        },
         '&:hover': {
           [`${componentCls}-list-remove`]: {
             opacity: 1,
