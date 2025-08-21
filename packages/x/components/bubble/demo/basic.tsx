@@ -16,7 +16,7 @@ const actionItems = [
   },
 ];
 
-const text = `Hello World\nNext line\nT   a   b indent`;
+const text = `Hello World\nNext line\nTab\tindent`;
 
 const App = () => (
   <Bubble
