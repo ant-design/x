@@ -60,7 +60,6 @@ const File: React.FC<FileProps> = (props) => {
       </div>
       <div className={`${compCls}-content`}>
         <div className={classnames(`${compCls}-name`, classNames.name)} style={styles.name}>
-          {/* {name}{ext} */}
           <span className={`${compCls}-name-prefix`}>{name}</span>
           <span className={`${compCls}-name-suffix`}>{ext}</span>
         </div>
