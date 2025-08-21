@@ -127,8 +127,7 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
       },
 
       [`${componentCls}-image`]: {
-        width: 200,
-        height: 200,
+        width: 268,
         borderRadius: paddingSM,
         overflow: 'hidden',
 
@@ -140,13 +139,12 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
       },
 
       [`${componentCls}-video`]: {
-        width: 548,
-        height: 308,
+        width: 268,
         borderRadius: paddingSM,
       },
 
       [`${componentCls}-audio`]: {
-        width: 300,
+        width: 268,
       },
 
       [`&${componentCls}-rtl`]: {

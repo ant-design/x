@@ -257,6 +257,7 @@ const FileCard: React.FC<FileCardProps> = (props) => {
       <video
         src={src}
         controls
+        style={styles.file}
         className={classnames(`${prefixCls}-video`, classNames.file)}
         {...(restProps as React.JSX.IntrinsicElements['video'])}
       />
@@ -266,6 +267,7 @@ const FileCard: React.FC<FileCardProps> = (props) => {
       <audio
         src={src}
         controls
+        style={styles.file}
         className={classnames(`${prefixCls}-audio`, classNames.file)}
         {...(restProps as React.JSX.IntrinsicElements['audio'])}
       />

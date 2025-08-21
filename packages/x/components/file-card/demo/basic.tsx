@@ -14,7 +14,7 @@ const App = () => {
       <FileCard name="markdown-file.md" byte={1024} />
       <FileCard name="java-file.java" byte={1024} />
       <FileCard name="javascript-file.js" byte={1024} />
-      <FileCard styles={{ file: { width: 260 } }} name="python-file.py" byte={1024} />
+      <FileCard styles={{ file: { width: 268 } }} name="python-file.py" byte={1024} />
     </Flex>
   );
 };
