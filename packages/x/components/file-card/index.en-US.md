@@ -64,7 +64,7 @@ type PresetIcons =
   | 'python';
 ```
 
-### FileCardListProps
+### FileCard.List
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
