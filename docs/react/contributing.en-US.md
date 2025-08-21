@@ -1,7 +1,7 @@
 ---
 group:
   title: Other
-  order: 4
+  order: 5
 order: 1
 title: Contributing
 ---

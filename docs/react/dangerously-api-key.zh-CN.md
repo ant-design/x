@@ -1,7 +1,7 @@
 ---
 group:
   title: 其他
-  order: 4
+  order: 5
 order: 2
 title: dangerouslyApiKey 说明
 tag: New
