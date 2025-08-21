@@ -11,9 +11,10 @@ import {
   JavaScriptOutlined,
   PythonOutlined,
 } from '@ant-design/icons';
+import { Image, type ImageProps } from 'antd';
 import classnames from 'classnames';
-import React, { useMemo } from 'react';
 import pickAttrs from 'rc-util/lib/pickAttrs';
+import React, { useMemo } from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 import File from './components/File';
@@ -21,8 +22,6 @@ import AudioIcon from './icons/audio';
 import VideoIcon from './icons/video';
 import useStyle from './style';
 import { matchExt } from './utils';
-
-import { Image, type ImageProps } from 'antd';
 
 export type SemanticType = 'root' | 'file' | 'icon' | 'name' | 'description';
 export type PresetIcons =
@@ -62,7 +61,7 @@ export type FileCardProps = FileExtendsProps & {
   icon?: React.ReactNode | PresetIcons;
   type?: 'file' | 'image' | 'audio' | 'video' | string;
   onClick?: () => void;
-}
+};
 
 const IMAGE_EXT = ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp', 'svg'];
 const AUDIO_EXT = ['mp3', 'wav', 'flac', 'ape', 'aac', 'ogg'];
@@ -145,7 +144,7 @@ const PRESET_FILE_ICONS: {
     color: '#fab714',
     ext: ['py'],
     key: 'python',
-  }
+  },
 ];
 
 const DEFAULT_ICON = {
@@ -244,6 +243,9 @@ const FileCard: React.FC<FileCardProps> = (props) => {
     ContentNode = (
       <Image
         rootClassName={classnames(`${prefixCls}-image`, classNames.file)}
+        width={styles?.file?.width}
+        height={styles?.file?.height}
+        style={styles.file}
         alt={name}
         src={src}
         preview={preview}
