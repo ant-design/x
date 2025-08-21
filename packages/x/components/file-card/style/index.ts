@@ -42,7 +42,8 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
         borderRadius: paddingSM,
         position: 'relative',
         overflow: 'hidden',
-
+        boxSizing: 'border-box',
+        width: 268,
         '&-pointer': {
           cursor: 'pointer',
         },
@@ -57,7 +58,7 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
 
         [`${componentCls}-file-content`]: {
           flex: 1,
-          maxWidth: 275,
+          maxWidth: calc('100%').sub(calc(fontSizeHeading1).sub(2).equal()).sub(marginSM).equal(),
         },
 
         [`${componentCls}-file-name`]: {
@@ -137,14 +138,12 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
           borderRadius: 'inherit',
         },
       },
-
+      [`${componentCls}-audio`]: {
+        width: 268,
+      },
       [`${componentCls}-video`]: {
         width: 268,
         borderRadius: paddingSM,
-      },
-
-      [`${componentCls}-audio`]: {
-        width: 268,
       },
 
       [`&${componentCls}-rtl`]: {
@@ -228,8 +227,6 @@ const genFileCardListStyle: GenerateStyle<FileCardToken> = (token) => {
       },
 
       [`${componentCls}-file`]: {
-        width: 236,
-
         [`${componentCls}-file-content`]: {
           maxWidth: 156,
         },
