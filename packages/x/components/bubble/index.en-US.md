@@ -83,7 +83,7 @@ The auto-scroll feature in **Bubble.List** works by reversing the order of messa
 </div>
 ```
 
-If you don't want to use elastic layout, you can set the maximum height `max-height` for **Bubble.List**. In this way, when there is less content, the height of **Bubble.List** will adapt to the top alignment effect.
+Alternatively, if you prefer not to use a flexbox layout, you can set a `max-height` on the **Bubble.List** itself using the `rootStyle` prop. This way, the list's height will adapt to its content, resulting in a top-aligned appearance when the content is sparse.
 
 ```tsx
 <Bubble.List items={items} autoScroll rootStyle={{ maxHeight: 600 }} />
