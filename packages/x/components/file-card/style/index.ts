@@ -143,6 +143,7 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
       },
       [`${componentCls}-video`]: {
         width: 268,
+        aspectRatio: '16 / 9',
         borderRadius: paddingSM,
       },
 

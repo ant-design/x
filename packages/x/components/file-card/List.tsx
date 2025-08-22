@@ -7,7 +7,7 @@ import { useXProviderContext } from '../x-provider';
 import FileCard, { SemanticType as CardSemanticType, FileCardProps } from './FileCard';
 import useStyle from './style';
 
-export type SemanticType = 'root' | 'file' | 'card';
+export type SemanticType = 'root' | 'card';
 export interface FileCardListProps {
   prefixCls?: string;
   className?: string;

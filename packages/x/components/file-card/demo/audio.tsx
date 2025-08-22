@@ -11,7 +11,6 @@ const App = () => {
       />
       <FileCard
         name="video-file.mp4"
-        styles={{}}
         src="https://mdn.alipayobjects.com/doraemon_plugin/afts/file/vl7tSa-m3jEAAAAAAAAAAAAAeur1AQBr"
       />
       <FileCard name="audio-file.mp3" byte={1024} type="file" />
