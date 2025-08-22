@@ -75,7 +75,7 @@ In [this example](#bubble-demo-stream), you can try to force the streaming flag 
 
 #### Bubble.List autoScroll Top Alignment
 
-The automatic scrolling scheme of **Bubble.List** is actually a very simple reverse sorting scheme, so in a fixed-height **Bubble.List**, if the message content is small and does not fill the height of the **Bubble.List**, then you will find that the message content is bottom-aligned. Therefore, it is not recommended to set a fixed height for the **Bubble.List**, but to add a fixed height to the parent container of the **Bubble.List**, and set the parent container to the elastic layout `display: flex` and `flex-direction: column`, so that the **Bubble.List** will use adaptive height and top alignment when there is less content. As shown in the [Bubble List](#bubble-demo-list).
+The auto-scroll feature in **Bubble.List** works by reversing the order of messages. In a fixed-height **Bubble.List**, if there isn't enough content to fill the available space, the messages will be aligned to the bottom. To achieve top alignment, it's recommended to wrap **Bubble.List** in a parent container with a fixed height and flexbox properties (`display: flex` and `flex-direction: column`). This allows **Bubble.List** to adapt its height and align content to the top when the list isn't full. This approach is demonstrated in the [Bubble List demo](#bubble-demo-list).
 
 ```tsx
 <div style={{ height: 600, display: 'flex', flexDirection: 'column' }}>
