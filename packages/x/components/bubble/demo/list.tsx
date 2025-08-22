@@ -137,7 +137,7 @@ const App = () => {
   );
 
   return (
-    <Flex vertical gap="small">
+    <Flex style={{ height: 650 }} vertical gap="small">
       <Flex gap="small" justify="space-between">
         <Flex gap="small">
           <Button
@@ -210,7 +210,6 @@ const App = () => {
 
       <Bubble.List
         ref={listRef}
-        style={{ maxHeight: 300 }}
         role={memoRole}
         items={items}
         onScroll={(e) => {

@@ -73,6 +73,22 @@ In [this example](#bubble-demo-stream), you can try to force the streaming flag 
 - If you enable input animations, `onTypingComplete` will be triggered multiple times when performing a **load slowly** because the streaming speed cannot keep up with the animation speed.
 - If you turn off the input animation, `onTypingComplete` will be triggered every time you stream the input.
 
+#### Bubble.List autoScroll Top Alignment
+
+The automatic scrolling scheme of **Bubble.List** is actually a very simple reverse sorting scheme, so in a fixed-height **Bubble.List**, if the message content is small and does not fill the height of the **Bubble.List**, then you will find that the message content is bottom-aligned. Therefore, it is not recommended to set a fixed height for the **Bubble.List**, but to add a fixed height to the parent container of the **Bubble.List**, and set the parent container to the elastic layout `display: flex` and `flex-direction: column`, so that the **Bubble.List** will use adaptive height and top alignment when there is less content. As shown in the [Bubble List](#bubble-demo-list).
+
+```tsx
+<div style={{ height: 600, display: 'flex', flexDirection: 'column' }}>
+  <Bubble.List items={items} autoScroll />
+</div>
+```
+
+If you don't want to use elastic layout, you can set the maximum height `max-height` for **Bubble.List**. In this way, when there is less content, the height of **Bubble.List** will adapt to the top alignment effect.
+
+```tsx
+<Bubble.List items={items} autoScroll rootStyle={{ maxHeight: 600 }} />
+```
+
 ### Bubble.List Component API
 
 | Attributes | Description | Type | Default | Version |
