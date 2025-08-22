@@ -1408,6 +1408,7 @@ exports[`renders components/bubble/demo/header.tsx extend context correctly 2`] 
 exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = `
 <div
   class="ant-flex css-var-«re» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+  style="height: 650px;"
 >
   <div
     class="ant-flex css-var-«re» ant-flex-justify-space-between ant-flex-gap-small"
@@ -1467,7 +1468,6 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
   </div>
   <div
     class="ant-bubble-list css-var-«re» ant-bubble-list-autoscroll"
-    style="max-height: 300px;"
   >
     <div
       class="ant-bubble css-var-«re» ant-bubble-end"
