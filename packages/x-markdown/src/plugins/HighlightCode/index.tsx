@@ -14,6 +14,7 @@ const HighlightCode: PluginsType['HighlightCode'] = (props) => {
     prefixCls: customizePrefixCls,
     className,
     classNames,
+    styles = {},
     style,
     highlightProps,
   } = props;
@@ -40,16 +41,18 @@ const HighlightCode: PluginsType['HighlightCode'] = (props) => {
     if (header) return header;
 
     return (
-      <div className={classnames(`${prefixCls}-header`, classNames?.header)}>
-        <span className={classNames?.headerTitle}>{lang}</span>
+      <div className={classnames(`${prefixCls}-header`, classNames?.header)} style={styles.header}>
+        <span className={classNames?.headerTitle} style={styles.headerTitle}>
+          {lang}
+        </span>
       </div>
     );
   };
 
   return (
-    <div className={mergedCls} style={style}>
+    <div className={mergedCls} style={{ ...style, ...styles.root }}>
       {renderTitle()}
-      <div className={classNames?.code}>
+      <div className={classNames?.code} style={styles.code}>
         <SyntaxHighlighter
           customStyle={{
             marginTop: 0,

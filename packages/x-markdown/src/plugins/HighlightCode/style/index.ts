@@ -25,7 +25,7 @@ export interface ComponentToken {
 export interface HighlightCodeToken extends FullToken<'HighlightCode'> {}
 
 const genHighlightCodeStyle: GenerateStyle<HighlightCodeToken> = (token) => {
-  const { componentCls, codeBorderRadius, codeHeaderBgColor, padding, codePadding } = token;
+  const { componentCls, codeBorderRadius, codeHeaderBgColor, codePadding } = token;
 
   return {
     [componentCls]: {
@@ -34,8 +34,7 @@ const genHighlightCodeStyle: GenerateStyle<HighlightCodeToken> = (token) => {
         alignItems: 'center',
         justifyContent: 'space-between',
         backgroundColor: codeHeaderBgColor,
-        padding,
-        paddingLeft: codePadding,
+        padding: codePadding,
         borderTopLeftRadius: codeBorderRadius,
         borderTopRightRadius: codeBorderRadius,
       },
@@ -48,7 +47,7 @@ const genHighlightCodeStyle: GenerateStyle<HighlightCodeToken> = (token) => {
 
 export const prepareComponentToken: GetDefaultToken<'HighlightCode'> = (token) => {
   const codeHeaderBgColor = new FastColor(token.colorBgLayout).toRgbString();
-  const codePadding = token.paddingMD;
+  const codePadding = token.paddingSM;
   const codeBorderRadius = token.borderRadius;
 
   return { codeHeaderBgColor, codePadding, codeBorderRadius };

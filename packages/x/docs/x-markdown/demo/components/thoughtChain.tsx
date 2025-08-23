@@ -82,6 +82,13 @@ const Thought = (props: { items: ThoughtChainItem[] }) => {
 const text = `<div><thought>[{"title":"Thought Chain Item - 1","status":"success","description":"status: success"},{"title":"Thought Chain Item - 2","status":"error","description":"status: error"}]</thought></div>
 `;
 
+const ThoughtComponent = (props: { children: string }) => {
+  if (props.children.endsWith('}]')) {
+    const data = JSON.parse(props.children) as ThoughtChainItem[];
+    return <Thought items={data} />;
+  }
+};
+
 const App = () => {
   return (
     <Flex vertical gap="small">
@@ -91,12 +98,7 @@ const App = () => {
         contentRender={(content) => (
           <XMarkdown
             components={{
-              thought: (props: { children: string }) => {
-                if (props.children.endsWith('}]')) {
-                  const data = JSON.parse(props.children) as ThoughtChainItem[];
-                  return <Thought items={data} />;
-                }
-              },
+              thought: ThoughtComponent,
             }}
           >
             {content}

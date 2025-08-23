@@ -40,7 +40,6 @@ const genMermaidStyle: GenerateStyle<MermaidToken> = (token) => {
         justifyContent: 'space-between',
         background: mermaidHeaderBgColor,
         padding: mermaidPadding,
-        paddingLeft: mermaidPadding,
         borderTopLeftRadius: mermaidBorderRadius,
         borderTopRightRadius: mermaidBorderRadius,
       },
@@ -51,9 +50,17 @@ const genMermaidStyle: GenerateStyle<MermaidToken> = (token) => {
         border: '1px solid #f6f6f6',
         borderTop: 0,
         padding: mermaidPadding,
+        overflow: 'auto',
+        minHeight: 200,
+        borderBottomRightRadius: mermaidBorderRadius,
+        borderBottomLeftRadius: mermaidBorderRadius,
       },
       '&-graph-hidden': {
         display: 'none',
+      },
+      '&-graph svg': {
+        maxWidth: '100%',
+        height: 'auto',
       },
       [`&${componentCls}-rtl`]: {
         direction: 'rtl',
@@ -64,7 +71,7 @@ const genMermaidStyle: GenerateStyle<MermaidToken> = (token) => {
 
 export const prepareComponentToken: GetDefaultToken<'Mermaid'> = (token) => {
   const mermaidHeaderBgColor = new FastColor(token.colorBgLayout).toRgbString();
-  const mermaidPadding = token.paddingMD;
+  const mermaidPadding = token.paddingSM;
   const mermaidBorderRadius = token.borderRadius;
   const mermaidFontSize = token.fontSizeHeading5;
 

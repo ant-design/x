@@ -43,15 +43,17 @@ This code includes:
 You can modify the parameters or output format as needed. The Fibonacci sequence here starts with fib(1) = 1, fib(2) = 1.
 `;
 
+const Code = (props: { class: string; children: string }) => {
+  const { class: className, children } = props;
+  const lang = className?.replace('language-', '');
+  return <HighlightCode lang={lang}>{children}</HighlightCode>;
+};
+
 const App = () => {
   return (
     <XMarkdown
       components={{
-        code: (props: any) => {
-          const { class: className, children } = props;
-          const lang = className?.replace('language-', '');
-          return <HighlightCode lang={lang}>{children}</HighlightCode>;
-        },
+        code: Code,
       }}
     >
       {content}

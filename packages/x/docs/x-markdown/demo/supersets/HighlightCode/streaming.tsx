@@ -61,6 +61,12 @@ const roles: BubbleListProps['role'] = {
   },
 };
 
+const Code = (props: { class: string; children: string }) => {
+  const { class: className, children } = props;
+  const lang = className?.replace('language-', '');
+  return <HighlightCode lang={lang}>{children}</HighlightCode>;
+};
+
 const App = () => {
   const [content, setContent] = React.useState('');
 
@@ -102,11 +108,7 @@ const App = () => {
                   <XMarkdown
                     content={content as string}
                     components={{
-                      code: (props: any) => {
-                        const { class: className, children } = props;
-                        const lang = className?.replace('language-', '');
-                        return <HighlightCode lang={lang}>{children}</HighlightCode>;
-                      },
+                      code: Code,
                     }}
                   />
                 ),

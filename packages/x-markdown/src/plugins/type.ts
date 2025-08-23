@@ -16,19 +16,23 @@ type HighlighCodeProps = {
   prefixCls?: string;
   style?: React.CSSProperties;
   className?: string;
-  classNames?: Partial<Record<HighlightCodeType, string>>;
   highlightProps?: Partial<SyntaxHighlighterProps>;
+  // Semantic
+  classNames?: Partial<Record<HighlightCodeType, string>>;
+  styles?: Partial<Record<HighlightCodeType, React.CSSProperties>>;
 };
 
-type MermaidType = 'root' | 'header' | 'headerTitle' | 'graph' | 'code';
+type MermaidType = 'root' | 'header' | 'graph' | 'code';
 type MermaidProps = {
   children: string;
   header?: ReactNode | null;
   prefixCls?: string;
   style?: React.CSSProperties;
   className?: string;
-  classNames?: Partial<Record<MermaidType, string>>;
   highlightProps?: Partial<SyntaxHighlighterProps>;
+  // Semantic
+  classNames?: Partial<Record<MermaidType, string>>;
+  styles?: Partial<Record<MermaidType, React.CSSProperties>>;
 };
 
 export type PluginsType = {
