@@ -9,21 +9,6 @@ jest.mock('mermaid', () => ({
   render: jest.fn(),
 }));
 
-// Mock useXProviderContext
-jest.mock('../../hooks/use-x-provider-context', () => ({
-  __esModule: true,
-  default: () => ({
-    getPrefixCls: (prefix: string) => `ant-${prefix}`,
-    direction: 'ltr',
-  }),
-}));
-
-// Mock useStyle
-jest.mock('../style', () => ({
-  __esModule: true,
-  default: () => ['hash-id', 'css-var-cls'],
-}));
-
 // Mock SyntaxHighlighter
 jest.mock('react-syntax-highlighter', () => ({
   __esModule: true,
@@ -347,22 +332,22 @@ describe('Mermaid Plugin', () => {
   describe('Style Coverage', () => {
     it('should apply correct CSS classes and styles', () => {
       const { container } = render(<Mermaid>{mermaidContent}</Mermaid>);
-      
+
       // Verify root class
       expect(container.querySelector('.ant-mermaid')).toBeInTheDocument();
-      
+
       // Verify header class
       expect(container.querySelector('.ant-mermaid-header')).toBeInTheDocument();
-      
+
       // Verify graph class
       expect(container.querySelector('.ant-mermaid-graph')).toBeInTheDocument();
-      
+
       // Verify RTL class when direction is rtl
       jest.spyOn(require('../../hooks/use-x-provider-context'), 'default').mockReturnValue({
         getPrefixCls: (prefix: string) => `ant-${prefix}`,
         direction: 'rtl',
       });
-      
+
       const { container: rtlContainer } = render(<Mermaid>{mermaidContent}</Mermaid>);
       expect(rtlContainer.querySelector('.ant-mermaid-rtl')).toBeInTheDocument();
     });
@@ -374,15 +359,13 @@ describe('Mermaid Plugin', () => {
         graph: { border: '2px solid blue' },
         code: { fontSize: '16px' },
       };
-      
-      const { container } = render(
-        <Mermaid styles={customStyles}>{mermaidContent}</Mermaid>
-      );
-      
+
+      const { container } = render(<Mermaid styles={customStyles}>{mermaidContent}</Mermaid>);
+
       const root = container.querySelector('.ant-mermaid');
       const header = container.querySelector('.ant-mermaid-header');
       const graph = container.querySelector('.ant-mermaid-graph');
-      
+
       expect(root).toBeInTheDocument();
       expect(header).toBeInTheDocument();
       expect(graph).toBeInTheDocument();
@@ -395,11 +378,11 @@ describe('Mermaid Plugin', () => {
         graph: 'custom-graph',
         code: 'custom-code',
       };
-      
+
       const { container } = render(
-        <Mermaid classNames={customClassNames}>{mermaidContent}</Mermaid>
+        <Mermaid classNames={customClassNames}>{mermaidContent}</Mermaid>,
       );
-      
+
       expect(container.querySelector('.custom-root')).toBeInTheDocument();
       expect(container.querySelector('.custom-header')).toBeInTheDocument();
       expect(container.querySelector('.custom-graph')).toBeInTheDocument();
