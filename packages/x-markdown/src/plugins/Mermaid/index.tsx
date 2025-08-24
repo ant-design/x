@@ -239,7 +239,7 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
           onWheel={handleWheel}
         />
         {renderType === RenderType.Code ? (
-          <div className={classNames?.code} style={styles.code}>
+          <div className={classnames(`${prefixCls}-code`, classNames?.code)} style={styles.code}>
             <SyntaxHighlighter
               customStyle={{
                 marginTop: 0,

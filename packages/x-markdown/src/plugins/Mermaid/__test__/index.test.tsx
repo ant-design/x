@@ -354,21 +354,31 @@ describe('Mermaid Plugin', () => {
 
     it('should apply custom styles through styles prop', () => {
       const customStyles = {
-        root: { backgroundColor: 'red' },
-        header: { padding: '20px' },
-        graph: { border: '2px solid blue' },
-        code: { fontSize: '16px' },
+        root: { backgroundColor: 'red', padding: '10px' },
+        header: { padding: '20px', backgroundColor: 'blue' },
+        graph: { border: '2px solid blue', margin: '5px' },
+        code: { fontSize: '16px', color: 'green' },
       };
 
       const { container } = render(<Mermaid styles={customStyles}>{mermaidContent}</Mermaid>);
 
+      // 切换到代码模式以显示代码视图
+      const codeButton = screen.getByText('代码');
+      fireEvent.click(codeButton);
+
       const root = container.querySelector('.ant-mermaid');
       const header = container.querySelector('.ant-mermaid-header');
       const graph = container.querySelector('.ant-mermaid-graph');
+      const code = container.querySelector('.ant-mermaid-code');
 
-      expect(root).toBeInTheDocument();
-      expect(header).toBeInTheDocument();
-      expect(graph).toBeInTheDocument();
+      expect(root).toHaveStyle('background-color: red');
+      expect(root).toHaveStyle('padding: 10px');
+      expect(header).toHaveStyle('padding: 20px');
+      expect(header).toHaveStyle('background-color: blue');
+      expect(graph).toHaveStyle('border: 2px solid blue');
+      expect(graph).toHaveStyle('margin: 5px');
+      expect(code).toHaveStyle('font-size: 16px');
+      expect(code).toHaveStyle('color: green');
     });
 
     it('should apply custom classNames through classNames prop', () => {
