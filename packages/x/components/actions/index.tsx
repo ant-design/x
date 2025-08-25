@@ -4,14 +4,14 @@ import React from 'react';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
-import ActionsFeedback from './ActionsFeedback';
+import ActionsAudio from './ActionsAudio';
 import ActionsCopy from './ActionsCopy';
+import ActionsFeedback from './ActionsFeedback';
 import ActionsItem from './ActionsItem';
 import { ActionsContext } from './context';
 import Item from './Item';
 import type { ActionsProps } from './interface';
 import useStyle from './style';
-import ActionsAudio from './ActionsAudio';
 
 type ActionsRef = {
   nativeElement: HTMLDivElement;
@@ -104,7 +104,7 @@ type CompoundedActions = typeof ForwardActions & {
   Feedback: typeof ActionsFeedback;
   Copy: typeof ActionsCopy;
   Item: typeof ActionsItem;
-  Audio:typeof ActionsAudio;
+  Audio: typeof ActionsAudio;
 };
 
 const Actions = ForwardActions as CompoundedActions;
@@ -116,6 +116,6 @@ if (process.env.NODE_ENV !== 'production') {
 Actions.Feedback = ActionsFeedback;
 Actions.Copy = ActionsCopy;
 Actions.Item = ActionsItem;
-Actions.Audio=  ActionsAudio;
+Actions.Audio = ActionsAudio;
 
 export default Actions;

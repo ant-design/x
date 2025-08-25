@@ -33,24 +33,22 @@ const items_locale = {
 const items = [
   {
     key: 'feedback',
-    actionRender: () => (
-      <Actions.Feedback />
-    ),
+    actionRender: () => <Actions.Feedback />,
   },
   {
     key: 'copy',
     label: 'copy',
     actionRender: () => {
-      return <Actions.Copy text='copy value' />
-    }
+      return <Actions.Copy text="copy value" />;
+    },
   },
   {
     key: 'audio',
     label: 'audio',
     actionRender: () => {
-      return <Actions.Audio />
-    }
-  }
+      return <Actions.Audio />;
+    },
+  },
 ];
 export default () => {
   const [localeType, setLocaleType] = useState<'zh' | 'en'>('zh');
@@ -74,15 +72,13 @@ export default () => {
         </Radio.Group>
       </Flex>
       <XProvider locale={locale}>
-
         <Flex gap={12} vertical>
           <Card>
-
             <Conversations
               style={{ width: 200 }}
               defaultActiveKey="write"
               creation={{
-                onClick: () => { },
+                onClick: () => {},
               }}
               items={[
                 {
@@ -107,16 +103,13 @@ export default () => {
                 },
               ]}
             />
-
           </Card>
 
           <Card>
             <Actions items={items} />
-
           </Card>
         </Flex>
       </XProvider>
-
     </>
   );
 };

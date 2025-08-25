@@ -29,8 +29,8 @@ const App: React.FC = () => {
       key: 'copy',
       label: 'copy',
       actionRender: () => {
-        return <Actions.Copy text='copy value' />
-      }
+        return <Actions.Copy text="copy value" />;
+      },
     },
   ];
   const onClick: ActionsProps['onClick'] = ({ keyPath }) => {

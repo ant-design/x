@@ -269,4 +269,4 @@ if (process.env.NODE_ENV !== 'production') {
 
 export default ForwardBubble as ForwardBubbleType;
 
-export { BubbleProps };
+export type { BubbleProps };

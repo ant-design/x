@@ -1,7 +1,6 @@
-
-import { fireEvent, render} from '@testing-library/react';
-import ActionsFeedback from '../ActionsFeedback';
+import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
+import ActionsFeedback from '../ActionsFeedback';
 
 describe('Actions.Feedback Component', () => {
   it('should render feedback component', () => {
@@ -15,7 +14,7 @@ describe('Actions.Feedback Component', () => {
       <ActionsFeedback value="default" onChange={mockOnChange} />,
     );
 
-     const feedbackTrigger = container.querySelector('.ant-actions-feedback-item-like')!;
+    const feedbackTrigger = container.querySelector('.ant-actions-feedback-item-like')!;
     // First click - should set to like
     fireEvent.click(feedbackTrigger);
     expect(mockOnChange).toHaveBeenCalledWith('like');
@@ -25,7 +24,9 @@ describe('Actions.Feedback Component', () => {
     rerender(<ActionsFeedback value="like" onChange={mockOnChange} />);
 
     // Second click - should set to empty
-     const feedbackActiveTrigger = container.querySelector('.ant-actions-feedback-item-like-active')!;
+    const feedbackActiveTrigger = container.querySelector(
+      '.ant-actions-feedback-item-like-active',
+    )!;
     fireEvent.click(feedbackActiveTrigger);
     expect(mockOnChange).toHaveBeenCalledWith('default');
     expect(mockOnChange).toHaveBeenCalledTimes(2);
@@ -44,7 +45,9 @@ describe('Actions.Feedback Component', () => {
 
     // Rerender with dislike value
     rerender(<ActionsFeedback value="dislike" onChange={mockOnChange} />);
-    const feedbackActiveTrigger = container.querySelector('.ant-actions-feedback-item-dislike-active')!;
+    const feedbackActiveTrigger = container.querySelector(
+      '.ant-actions-feedback-item-dislike-active',
+    )!;
     // Second click - should set to empty
     fireEvent.click(feedbackActiveTrigger);
     expect(mockOnChange).toHaveBeenCalledWith('default');

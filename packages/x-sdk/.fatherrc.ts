@@ -27,7 +27,7 @@ export default defineConfig({
   },
   umd: {
     entry: 'src/index.ts',
-    name: 'XSdk',
+    name: 'XSDK',
     bundler: 'utoopack',
     rootPath: path.resolve(__dirname, '../../'),
     output: {

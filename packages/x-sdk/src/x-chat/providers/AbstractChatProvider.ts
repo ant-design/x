@@ -1,9 +1,9 @@
 import { AnyObject } from '../../_util/type';
-import { XRequestCallbacks, XRequestClass, XRequestOptions } from '../../x-request';
+import { AbstractXRequestClass, XRequestCallbacks, XRequestOptions } from '../../x-request';
 import { MessageStatus } from '..';
 
 export interface ChatProviderConfig<Input, Output> extends AnyObject {
-  request: XRequestClass<Input, Output> | (() => XRequestClass<Input, Output>);
+  request: AbstractXRequestClass<Input, Output> | (() => AbstractXRequestClass<Input, Output>);
 }
 
 export interface TransformMessage<ChatMessage, Output> {
@@ -15,7 +15,7 @@ export interface TransformMessage<ChatMessage, Output> {
 }
 
 export default abstract class AbstractChatProvider<ChatMessage, Input, Output> {
-  private _request!: XRequestClass<Input, Output>;
+  private _request!: AbstractXRequestClass<Input, Output>;
   private _getMessagesFn!: () => ChatMessage[];
   private _originalCallbacks?: XRequestCallbacks<Output>;
 
@@ -29,7 +29,7 @@ export default abstract class AbstractChatProvider<ChatMessage, Input, Output> {
       throw new Error('request must be manual');
     }
     this._request = request;
-    this._originalCallbacks = this._request.options.callbacks;
+    this._originalCallbacks = this._request.options?.callbacks;
   }
 
   /**

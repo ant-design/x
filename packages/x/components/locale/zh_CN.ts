@@ -10,7 +10,7 @@ const localeValues: Required<xLocale> = {
     feedbackDislike: '不喜欢',
     audio: '播放语音',
     audioRunning: '语音播放中',
-    audioError:'播放出错了',
+    audioError: '播放出错了',
     audioLoading: '正在加载语音',
   },
   Bubble: {

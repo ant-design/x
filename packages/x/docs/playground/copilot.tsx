@@ -22,66 +22,147 @@ import {
   Prompts,
   Sender,
   Suggestion,
-  useXAgent,
-  useXChat,
+  Think,
   Welcome,
 } from '@ant-design/x';
+import { SSEFields } from '@ant-design/x/es/x-stream';
+import XMarkdown from '@ant-design/x-markdown';
+import {
+  DeepSeekChatProvider,
+  useXChat,
+  useXConversations,
+  XModelParams,
+  XModelResponse,
+  XRequest,
+} from '@ant-design/x-sdk';
 import { Button, GetProp, GetRef, Image, message, Popover, Space, Spin } from 'antd';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
-type BubbleDataType = {
-  role: string;
-  content: string;
+const zhCN = {
+  'AI Copilot': 'AI 助手',
+  'New session': '新会话',
+  Today: '今天',
+  'What has Ant Design X upgraded?': 'Ant Design X 有哪些升级？',
+  'What components are in Ant Design X?': 'Ant Design X 有哪些组件',
+  'New AGI Hybrid Interface': '新的 AGI 混合界面',
+  Yesterday: '昨天',
+  'How to quickly install and import components?': '如何快速安装和导入组件？',
+  'What is Ant Design X?': '什么是 Ant Design X？',
+  'Write a report': '写报告',
+  'Draw a picture': '画图',
+  'Check some knowledge': '查看知识',
+  'About React': '关于 React',
+  'About Ant Design': '关于 Ant Design',
+  'Generating content, please wait...': '正在生成内容，请稍候...',
+  'Message is Requesting, you can create a new conversation after request done or abort it right now...':
+    '消息正在请求中，您可以在请求完成后创建新对话或立即中止...',
+  'It is now a new conversation.': '当前已经是新会话',
+  'Request is aborted': '请求已中止',
+  'Request failed, please try again!': '请求失败，请重试！',
+  'Upload File': '上传文件',
+  'Drop file here': '将文件拖到此处',
+  'Upload files': '上传文件',
+  'Click or drag files to this area to upload': '点击或将文件拖到此处上传',
+  'Ask or input / use skills': '提问或输入 / 使用技能',
+  Upgrades: '升级',
+  Components: '组件',
+  More: '更多',
+  "Hello, I'm Ant Design X": '你好，我是 Ant Design X',
+  'Base on Ant Design, AGI product interface solution, create a better intelligent vision~':
+    '基于 Ant Design，AGI 产品界面解决方案，创造更智能的视觉体验~',
+  'I can help:': '我可以帮助：',
+  'Deep thinking': '深度思考中',
+  'Complete thinking': '深度思考完成',
 };
 
-const MOCK_SESSION_LIST = [
+const enUS = {
+  'AI Copilot': 'AI Copilot',
+  'New session': 'New session',
+  Today: 'Today',
+  'What has Ant Design X upgraded?': 'What has Ant Design X upgraded?',
+  'What components are in Ant Design X?': 'What components are in Ant Design X?',
+  'New AGI Hybrid Interface': 'New AGI Hybrid Interface',
+  Yesterday: 'Yesterday',
+  'How to quickly install and import components?': 'How to quickly install and import components?',
+  'What is Ant Design X?': 'What is Ant Design X?',
+  'Write a report': 'Write a report',
+  'Draw a picture': 'Draw a picture',
+  'Check some knowledge': 'Check some knowledge',
+  'About React': 'About React',
+  'About Ant Design': 'About Ant Design',
+  'Generating content, please wait...': 'Generating content, please wait...',
+  'Message is Requesting, you can create a new conversation after request done or abort it right now...':
+    'Message is Requesting, you can create a new conversation after request done or abort it right now...',
+  'It is now a new conversation.': 'It is now a new conversation.',
+  'Request is aborted': 'Request is aborted',
+  'Request failed, please try again!': 'Request failed, please try again!',
+  'Upload File': 'Upload File',
+  'Drop file here': 'Drop file here',
+  'Upload files': 'Upload files',
+  'Click or drag files to this area to upload': 'Click or drag files to this area to upload',
+  'Ask or input / use skills': 'Ask or input / use skills',
+  Upgrades: 'Upgrades',
+  Components: 'Components',
+  More: 'More',
+  "Hello, I'm Ant Design X": "Hello, I'm Ant Design X",
+  'Base on Ant Design, AGI product interface solution, create a better intelligent vision~':
+    'Base on Ant Design, AGI product interface solution, create a better intelligent vision~',
+  'I can help:': 'I can help:',
+  'Deep thinking': 'Deep Thinking',
+  'Complete thinking': 'Complete Thinking',
+};
+
+const isZhCN = window.parent?.location?.pathname?.includes('-cn');
+const t = isZhCN ? zhCN : enUS;
+
+const DEFAULT_CONVERSATIONS_ITEMS: ConversationItemType[] = [
   {
     key: '5',
-    label: 'New session',
-    group: 'Today',
+    label: t['New session'],
+    group: t['Today'],
   },
   {
     key: '4',
-    label: 'What has Ant Design X upgraded?',
-    group: 'Today',
+    label: t['What has Ant Design X upgraded?'],
+    group: t['Today'],
   },
   {
     key: '3',
-    label: 'New AGI Hybrid Interface',
-    group: 'Today',
+    label: t['New AGI Hybrid Interface'],
+    group: t['Today'],
   },
   {
     key: '2',
-    label: 'How to quickly install and import components?',
-    group: 'Yesterday',
+    label: t['How to quickly install and import components?'],
+    group: t['Yesterday'],
   },
   {
     key: '1',
-    label: 'What is Ant Design X?',
-    group: 'Yesterday',
+    label: t['What is Ant Design X?'],
+    group: t['Yesterday'],
   },
 ];
 const MOCK_SUGGESTIONS = [
-  { label: 'Write a report', value: 'report' },
-  { label: 'Draw a picture', value: 'draw' },
+  { label: t['Write a report'], value: 'report' },
+  { label: t['Draw a picture'], value: 'draw' },
   {
-    label: 'Check some knowledge',
+    label: t['Check some knowledge'],
     value: 'knowledge',
     icon: <OpenAIFilled />,
     children: [
-      { label: 'About React', value: 'react' },
-      { label: 'About Ant Design', value: 'antd' },
+      { label: t['About React'], value: 'react' },
+      { label: t['About Ant Design'], value: 'antd' },
     ],
   },
 ];
 const MOCK_QUESTIONS = [
-  'What has Ant Design X upgraded?',
-  'What components are in Ant Design X?',
-  'How to quickly install and import components?',
+  t['What has Ant Design X upgraded?'],
+  t['What components are in Ant Design X?'],
+  t['How to quickly install and import components?'],
 ];
-const AGENT_PLACEHOLDER = 'Generating content, please wait...';
+const AGENT_PLACEHOLDER = t['Generating content, please wait...'];
 
 const useCopilotStyle = createStyles(({ token, css }) => {
   return {
@@ -150,6 +231,49 @@ const useCopilotStyle = createStyles(({ token, css }) => {
   };
 });
 
+const ThinkComponent = React.memo((props: { children: string; status: string }) => {
+  const [title, setTitle] = React.useState(t['Deep thinking'] + '...');
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    if (props.status === 'done') {
+      setTitle(t['Complete thinking']);
+      setLoading(false);
+    }
+  }, [props.status]);
+
+  return (
+    <Think title={title} loading={loading}>
+      {props.children}
+    </Think>
+  );
+});
+
+/**
+ * 🔔 Please replace the BASE_URL, MODEL with your own values.
+ */
+const providerCaches = new Map<string, DeepSeekChatProvider>();
+const providerFactory = (conversationKey: string) => {
+  if (!providerCaches.get(conversationKey)) {
+    providerCaches.set(
+      conversationKey,
+      new DeepSeekChatProvider({
+        request: XRequest<XModelParams, Partial<Record<SSEFields, XModelResponse>>>(
+          'https://api.x.ant.design/api/llm_siliconflow_deepSeek-r1-distill-1wen-7b',
+          {
+            manual: true,
+            params: {
+              stream: true,
+              model: 'DeepSeek-R1-Distill-Qwen-7B',
+            },
+          },
+        ),
+      }),
+    );
+  }
+  return providerCaches.get(conversationKey);
+};
+
 interface CopilotProps {
   copilotOpen: boolean;
   setCopilotOpen: (open: boolean) => void;
@@ -159,98 +283,51 @@ const Copilot = (props: CopilotProps) => {
   const { copilotOpen, setCopilotOpen } = props;
   const { styles } = useCopilotStyle();
   const attachmentsRef = useRef<GetRef<typeof Attachments>>(null);
-  const abortController = useRef<AbortController>(null);
 
   // ==================== State ====================
-
-  const [messageHistory, setMessageHistory] = useState<Record<string, any>>({});
-
-  const [sessionList, setSessionList] = useState<ConversationItemType[]>(MOCK_SESSION_LIST);
-  const [curSession, setCurSession] = useState(sessionList[0].key);
+  const { conversations, addConversation, getConversation, setConversation } = useXConversations({
+    defaultConversations: DEFAULT_CONVERSATIONS_ITEMS,
+  });
+  const [curConversation, setCurConversation] = useState<string>(
+    DEFAULT_CONVERSATIONS_ITEMS[0].key,
+  );
 
   const [attachmentsOpen, setAttachmentsOpen] = useState(false);
   const [files, setFiles] = useState<GetProp<AttachmentsProps, 'items'>>([]);
 
   const [inputValue, setInputValue] = useState('');
 
-  /**
-   * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
-   */
-
   // ==================== Runtime ====================
 
-  const [agent] = useXAgent<BubbleDataType>({
-    baseURL: 'https://api.x.ant.design/api/llm_siliconflow_deepSeek-r1-distill-1wen-7b',
-    model: 'DeepSeek-R1-Distill-Qwen-7B',
-    dangerouslyApiKey: 'Bearer sk-xxxxxxxxxxxxxxxxxxxx',
-  });
-
-  const loading = agent.isRequesting();
-
-  const { messages, onRequest, setMessages } = useXChat({
-    agent,
+  const { onRequest, messages, isRequesting, abort } = useXChat({
+    provider: providerFactory(curConversation), // every conversation has its own provider
+    conversationKey: curConversation,
     requestFallback: (_, { error }) => {
       if (error.name === 'AbortError') {
         return {
-          content: 'Request is aborted',
+          content: t['Request is aborted'],
           role: 'assistant',
         };
       }
       return {
-        content: 'Request failed, please try again!',
+        content: t['Request failed, please try again!'],
         role: 'assistant',
       };
-    },
-    transformMessage: (info) => {
-      const { originMessage, chunk } = info || {};
-      let currentContent = '';
-      let currentThink = '';
-      try {
-        if (chunk?.data && !chunk?.data.includes('DONE')) {
-          const message = JSON.parse(chunk?.data);
-          currentThink = message?.choices?.[0]?.delta?.reasoning_content || '';
-          currentContent = message?.choices?.[0]?.delta?.content || '';
-        }
-      } catch (error) {
-        console.error(error);
-      }
-
-      let content = '';
-
-      if (!originMessage?.content && currentThink) {
-        content = `<think>${currentThink}`;
-      } else if (
-        originMessage?.content?.includes('<think>') &&
-        !originMessage?.content.includes('</think>') &&
-        currentContent
-      ) {
-        content = `${originMessage?.content}</think>${currentContent}`;
-      } else {
-        content = `${originMessage?.content || ''}${currentThink}${currentContent}`;
-      }
-
-      return {
-        content: content,
-        role: 'assistant',
-      };
-    },
-    resolveAbortController: (controller) => {
-      abortController.current = controller;
     },
   });
+
+  const loading = isRequesting();
 
   // ==================== Event ====================
   const handleUserSubmit = (val: string) => {
     onRequest({
-      stream: true,
-      message: { content: val, role: 'user' },
+      messages: [{ role: 'user', content: val }],
     });
 
     // session title mock
-    if (sessionList.find((i) => i.key === curSession)?.label === 'New session') {
-      setSessionList(
-        sessionList.map((i) => (i.key !== curSession ? i : { ...i, label: val?.slice(0, 20) })),
-      );
+    const conversation = getConversation(curConversation);
+    if (conversation?.label === t['New session']) {
+      setConversation(curConversation, { ...conversation, label: val?.slice(0, 20) });
     }
   };
 
@@ -264,34 +341,18 @@ const Copilot = (props: CopilotProps) => {
   // ==================== Nodes ====================
   const chatHeader = (
     <div className={styles.chatHeader}>
-      <div className={styles.headerTitle}>✨ AI Copilot</div>
+      <div className={styles.headerTitle}>✨ {t['AI Copilot']}</div>
       <Space size={0}>
         <Button
           type="text"
           icon={<PlusOutlined />}
           onClick={() => {
-            if (agent.isRequesting()) {
-              message.error(
-                'Message is Requesting, you can create a new conversation after request done or abort it right now...',
-              );
-              return;
-            }
-
             if (messages?.length) {
               const timeNow = dayjs().valueOf().toString();
-              abortController.current?.abort();
-              // The abort execution will trigger an asynchronous requestFallback, which may lead to timing issues.
-              // In future versions, the sessionId capability will be added to resolve this problem.
-              setTimeout(() => {
-                setSessionList([
-                  { key: timeNow, label: 'New session', group: 'Today' },
-                  ...sessionList,
-                ]);
-                setCurSession(timeNow);
-                setMessages([]);
-              }, 100);
+              addConversation({ key: timeNow, label: 'New session', group: 'Today' });
+              setCurConversation(timeNow);
             } else {
-              message.error('It is now a new conversation.');
+              message.error(t['It is now a new conversation.']);
             }
           }}
           className={styles.headerButton}
@@ -301,19 +362,13 @@ const Copilot = (props: CopilotProps) => {
           styles={{ body: { padding: 0, maxHeight: 600 } }}
           content={
             <Conversations
-              items={sessionList?.map((i) =>
-                i.key === curSession ? { ...i, label: `[current] ${i.label}` } : i,
+              items={conversations?.map((i) =>
+                i.key === curConversation ? { ...i, label: `[current] ${i.label}` } : i,
               )}
-              activeKey={curSession}
+              activeKey={curConversation}
               groupable
               onActiveChange={async (val) => {
-                abortController.current?.abort();
-                // The abort execution will trigger an asynchronous requestFallback, which may lead to timing issues.
-                // In future versions, the sessionId capability will be added to resolve this problem.
-                setTimeout(() => {
-                  setCurSession(val);
-                  setMessages(messageHistory?.[val] || []);
-                }, 100);
+                setCurConversation(val);
               }}
               styles={{ item: { padding: '0 8px' } }}
               className={styles.conversations}
@@ -367,6 +422,17 @@ const Copilot = (props: CopilotProps) => {
                   {AGENT_PLACEHOLDER}
                 </Space>
               ),
+              contentRender(content: any) {
+                const newContent = content.replaceAll('\n\n', '<br/><br/>');
+                return (
+                  <XMarkdown
+                    content={newContent}
+                    components={{
+                      think: ThinkComponent,
+                    }}
+                  />
+                );
+              },
             },
             user: { placement: 'end' },
           }}
@@ -376,14 +442,18 @@ const Copilot = (props: CopilotProps) => {
         <>
           <Welcome
             variant="borderless"
-            title="👋 Hello, I'm Ant Design X"
-            description="Base on Ant Design, AGI product interface solution, create a better intelligent vision~"
+            title={`👋 ${t["Hello, I'm Ant Design X"]}`}
+            description={
+              t[
+                'Base on Ant Design, AGI product interface solution, create a better intelligent vision~'
+              ]
+            }
             className={styles.chatWelcome}
           />
 
           <Prompts
             vertical
-            title="I can help："
+            title={t['I can help:']}
             items={MOCK_QUESTIONS.map((i) => ({ key: i, description: i }))}
             onItemClick={(info) => handleUserSubmit(info?.data?.description as string)}
             style={{
@@ -399,7 +469,7 @@ const Copilot = (props: CopilotProps) => {
   );
   const sendHeader = (
     <Sender.Header
-      title="Upload File"
+      title={t['Upload File']}
       styles={{ content: { padding: 0 } }}
       open={attachmentsOpen}
       onOpenChange={setAttachmentsOpen}
@@ -412,11 +482,11 @@ const Copilot = (props: CopilotProps) => {
         onChange={({ fileList }) => setFiles(fileList)}
         placeholder={(type) =>
           type === 'drop'
-            ? { title: 'Drop file here' }
+            ? { title: t['Drop file here'] }
             : {
                 icon: <CloudUploadOutlined />,
-                title: 'Upload files',
-                description: 'Click or drag files to this area to upload',
+                title: t['Upload files'],
+                description: t['Click or drag files to this area to upload'],
               }
         }
       />
@@ -429,15 +499,15 @@ const Copilot = (props: CopilotProps) => {
           icon={<ScheduleOutlined />}
           onClick={() => handleUserSubmit('What has Ant Design X upgraded?')}
         >
-          Upgrades
+          {t['Upgrades']}
         </Button>
         <Button
           icon={<ProductOutlined />}
           onClick={() => handleUserSubmit('What component assets are available in Ant Design X?')}
         >
-          Components
+          {t['Components']}
         </Button>
-        <Button icon={<AppstoreAddOutlined />}>More</Button>
+        <Button icon={<AppstoreAddOutlined />}>{t['More']}</Button>
       </div>
 
       {/** 输入框 */}
@@ -455,10 +525,10 @@ const Copilot = (props: CopilotProps) => {
               setInputValue('');
             }}
             onCancel={() => {
-              abortController.current?.abort();
+              abort();
             }}
             allowSpeech
-            placeholder="Ask or input / use skills"
+            placeholder={t['Ask or input / use skills']}
             onKeyDown={onKeyDown}
             header={sendHeader}
             prefix={
@@ -474,16 +544,6 @@ const Copilot = (props: CopilotProps) => {
       </Suggestion>
     </div>
   );
-
-  useEffect(() => {
-    // history mock
-    if (messages?.length) {
-      setMessageHistory((prev) => ({
-        ...prev,
-        [curSession]: messages,
-      }));
-    }
-  }, [messages]);
 
   return (
     <div className={styles.copilotChat} style={{ width: copilotOpen ? 400 : 0 }}>

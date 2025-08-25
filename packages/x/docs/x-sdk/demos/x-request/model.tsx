@@ -1,7 +1,7 @@
 import { LoadingOutlined, TagsOutlined } from '@ant-design/icons';
 import type { ThoughtChainItem } from '@ant-design/x';
 import { ThoughtChain } from '@ant-design/x';
-import { XRequest, XRequestClass } from '@ant-design/x-sdk';
+import { AbstractXRequestClass, XRequest } from '@ant-design/x-sdk';
 import { Button, Descriptions, Flex, Input, Splitter, Typography } from 'antd';
 import React, { useRef, useState } from 'react';
 
@@ -34,7 +34,7 @@ const App = () => {
   const [lines, setLines] = useState<Record<string, string>[]>([]);
   const [questionText, setQuestionText] = useState<string>('hello, who are u?');
 
-  const requestHandlerRef = useRef<XRequestClass<ChatInput, Record<string, string>>>(null);
+  const requestHandlerRef = useRef<AbstractXRequestClass<ChatInput, Record<string, string>>>(null);
 
   function request() {
     setStatus('pending');

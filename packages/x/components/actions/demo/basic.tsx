@@ -1,4 +1,4 @@
-import {  EditOutlined, RedoOutlined } from '@ant-design/icons';
+import { EditOutlined, RedoOutlined } from '@ant-design/icons';
 import { Actions, ActionsProps } from '@ant-design/x';
 import { message } from 'antd';
 import React from 'react';

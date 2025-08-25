@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { render, fireEvent } from '../../../tests/utils';
+import { fireEvent, render } from '../../../tests/utils';
 import ActionsCopy from '../ActionsCopy';
 
 describe('ActionsCopy', () => {
@@ -16,16 +15,14 @@ describe('ActionsCopy', () => {
 
   it('supports custom className and prefixCls', () => {
     const { container } = render(
-      <ActionsCopy text="test" className="my-class" prefixCls="my-prefix" />
+      <ActionsCopy text="test" className="my-class" prefixCls="my-prefix" />,
     );
     expect(container.querySelector('.my-class')).toBeTruthy();
     expect(container.querySelector('.my-prefix-copy')).toBeTruthy();
   });
 
   it('supports rootClassName', () => {
-    const { container } = render(
-      <ActionsCopy text="test" rootClassName="root-class" />
-    );
+    const { container } = render(<ActionsCopy text="test" rootClassName="root-class" />);
     expect(container.querySelector('.root-class')).toBeTruthy();
   });
 

@@ -1,13 +1,12 @@
+import { Typography } from 'antd';
 import classnames from 'classnames';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
 import { useXProviderContext } from '../x-provider';
 import useStyle from './style';
-import { Typography } from 'antd';
 
 const { Text } = Typography;
-export interface ActionsCopyProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+export interface ActionsCopyProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /**
    * @desc 复制的文本
    * @descEN Text to be copied
@@ -18,7 +17,7 @@ export interface ActionsCopyProps
    * @desc 复制图标
    * @descEN Copy icon
    */
-  icon?: React.ReactNode,
+  icon?: React.ReactNode;
 
   /**
    * @desc 自定义样式前缀
@@ -50,7 +49,6 @@ const ActionsCopy: React.FC<ActionsCopyProps> = (props) => {
     data: true,
   });
 
-
   // ============================ Prefix ============================
 
   const { direction, getPrefixCls } = useXProviderContext();
@@ -61,12 +59,26 @@ const ActionsCopy: React.FC<ActionsCopyProps> = (props) => {
 
   // ============================ Classname ============================
 
-  const mergedCls = classnames(copyCls, hashId, cssVarCls, rootClassName, className, `${prefixCls}-item`, {
-    [`${copyCls}-rtl`]: direction === 'rtl',
-  });
+  const mergedCls = classnames(
+    copyCls,
+    hashId,
+    cssVarCls,
+    rootClassName,
+    className,
+    `${prefixCls}-item`,
+    {
+      [`${copyCls}-rtl`]: direction === 'rtl',
+    },
+  );
 
   return (
-    <Text {...domProps} className={mergedCls} style={style} prefixCls={copyCls} copyable={{ text, icon }} />
+    <Text
+      {...domProps}
+      className={mergedCls}
+      style={style}
+      prefixCls={copyCls}
+      copyable={{ text, icon }}
+    />
   );
 };
 

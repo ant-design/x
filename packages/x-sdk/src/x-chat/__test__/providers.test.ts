@@ -4,6 +4,11 @@ import { DeepSeekChatProvider, DefaultChatProvider, OpenAIChatProvider } from '.
 
 const baseURL = 'http://localhost:3000';
 
+interface DefaultInput {
+  test?: string;
+  test2?: string;
+}
+
 describe('DefaultChatProvider test', () => {
   const headers = new Headers();
   headers.set('content-type', 'text/event-stream');
@@ -19,7 +24,7 @@ describe('DefaultChatProvider test', () => {
   });
 
   it('should transformParams throw error when requestParams is not an object', () => {
-    const defaultProvider = new DefaultChatProvider({
+    const defaultProvider = new DefaultChatProvider<{}, DefaultInput, {}>({
       request: XRequest(baseURL, {
         manual: true,
       }),
@@ -34,7 +39,7 @@ describe('DefaultChatProvider test', () => {
   });
 
   it('should transformParams work successfully', () => {
-    const defaultProvider = new DefaultChatProvider({
+    const defaultProvider = new DefaultChatProvider<{}, DefaultInput, {}>({
       request: XRequest(baseURL, {
         manual: true,
       }),
@@ -53,7 +58,7 @@ describe('DefaultChatProvider test', () => {
   });
 
   it('should transformLocalMessage work successfully', () => {
-    const defaultProvider = new DefaultChatProvider({
+    const defaultProvider = new DefaultChatProvider<{}, DefaultInput, {}>({
       request: XRequest(baseURL, {
         manual: true,
       }),

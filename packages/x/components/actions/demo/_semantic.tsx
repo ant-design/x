@@ -27,12 +27,12 @@ const locales = {
   cn: {
     root: '根节点',
     item: '操作项',
-    itemDropdown: '操作下拉选项'
+    itemDropdown: '操作下拉选项',
   },
   en: {
     root: 'Root',
     item: 'Item',
-    itemDropdown: 'Item Dropdown'
+    itemDropdown: 'Item Dropdown',
   },
 };
 
@@ -45,7 +45,7 @@ const App: React.FC = () => {
       semantics={[
         { name: 'root', desc: locale.root },
         { name: 'item', desc: locale.item },
-        { name: 'itemDropdown', desc: locale.itemDropdown }
+        { name: 'itemDropdown', desc: locale.itemDropdown },
       ]}
     >
       <Actions

@@ -304,7 +304,6 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
 
   // ============================ Render ============================
   return (
-
     <div
       key={id}
       ref={containerRef}
@@ -379,7 +378,6 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
         </ActionButtonContext.Provider>
       </SenderContext.Provider>
     </div>
-
   );
 });
 

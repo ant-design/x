@@ -68,10 +68,17 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
   const feedbackCls = `${prefixCls}-feedback`;
 
   // ============================ Classname ============================
-  const mergedCls = classnames(feedbackCls, hashId, cssVarCls, rootClassName, `${prefixCls}-list`, className, {
-    [`${feedbackCls}-rtl`]: direction === 'rtl',
-  });
-
+  const mergedCls = classnames(
+    feedbackCls,
+    hashId,
+    cssVarCls,
+    rootClassName,
+    `${prefixCls}-list`,
+    className,
+    {
+      [`${feedbackCls}-rtl`]: direction === 'rtl',
+    },
+  );
 
   const onFeedBacKClick = () =>
     onChange?.(value === FEEDBACK_VALUE.dislike ? FEEDBACK_VALUE.default : FEEDBACK_VALUE.dislike);
@@ -85,9 +92,14 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
                 value === FEEDBACK_VALUE.like ? FEEDBACK_VALUE.default : FEEDBACK_VALUE.like,
               )
             }
-            className={classnames(`${feedbackCls}-item`, `${prefixCls}-item`, `${feedbackCls}-item-like`, {
-              [`${feedbackCls}-item-like-active`]: value === 'like'
-            })}
+            className={classnames(
+              `${feedbackCls}-item`,
+              `${prefixCls}-item`,
+              `${feedbackCls}-item-like`,
+              {
+                [`${feedbackCls}-item-like-active`]: value === 'like',
+              },
+            )}
           >
             {value === FEEDBACK_VALUE.like ? <LikeFilled /> : <LikeOutlined />}
           </span>
@@ -98,9 +110,13 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
         <Tooltip title={contextLocale.feedbackDislike}>
           <span
             onClick={onFeedBacKClick}
-            className={classnames(`${feedbackCls}-item`, `${prefixCls}-item`,`${feedbackCls}-item-dislike`, {
-              [`${feedbackCls}-item-dislike-active`]: value === 'dislike'
-            }
+            className={classnames(
+              `${feedbackCls}-item`,
+              `${prefixCls}-item`,
+              `${feedbackCls}-item-dislike`,
+              {
+                [`${feedbackCls}-item-dislike-active`]: value === 'dislike',
+              },
             )}
           >
             {value === FEEDBACK_VALUE.dislike ? <DislikeFilled /> : <DislikeOutlined />}

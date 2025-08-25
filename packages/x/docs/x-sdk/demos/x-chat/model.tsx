@@ -1,8 +1,9 @@
 import { SyncOutlined, UserOutlined } from '@ant-design/icons';
-import { Bubble, Sender } from '@ant-design/x';
+import { Bubble, Sender, Think } from '@ant-design/x';
 import { BubbleListProps } from '@ant-design/x/es/bubble';
+import XMarkdown from '@ant-design/x-markdown';
 import {
-  OpenAIChatProvider,
+  DeepSeekChatProvider,
   useXChat,
   XModelParams,
   XModelResponse,
@@ -23,11 +24,41 @@ const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow_deepSeek-r1-disti
 
 const MODEL = 'DeepSeek-R1-Distill-Qwen-7B';
 
+const ThinkComponent = React.memo((props: { children: string; status: string }) => {
+  const [title, setTitle] = React.useState('Deep thinking...');
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    if (props.status === 'done') {
+      setTitle('Complete thinking');
+      setLoading(false);
+    }
+  }, [props.status]);
+
+  return (
+    <Think title={title} loading={loading}>
+      {props.children}
+    </Think>
+  );
+});
+
 const role: BubbleListProps['role'] = {
   assistant: {
     placement: 'start',
     components: {
       avatar: <Avatar icon={<UserOutlined />} />,
+    },
+    contentRender(content: any) {
+      // Double '\n' in a mark will causes markdown parse as a new paragraph, so we need to replace it with a single '\n'
+      const newContent = content.replaceAll('\n\n', '<br/><br/>');
+      return (
+        <XMarkdown
+          content={newContent}
+          components={{
+            think: ThinkComponent,
+          }}
+        />
+      );
     },
   },
   user: {
@@ -41,7 +72,7 @@ const role: BubbleListProps['role'] = {
 const App = () => {
   const [content, setContent] = React.useState('');
   const [provider] = React.useState(
-    new OpenAIChatProvider({
+    new DeepSeekChatProvider({
       request: XRequest<XModelParams, XModelResponse>(BASE_URL, {
         manual: true,
         params: {
@@ -83,7 +114,7 @@ const App = () => {
           role: message.role,
           content: message.content,
           footer: (
-            <Tooltip title="重新生成">
+            <Tooltip title="Retry">
               <Button
                 size="small"
                 type="text"

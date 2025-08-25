@@ -2,13 +2,13 @@ import { unit } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
+import genActionsAudioStyle from './audio';
 import genActionsCopyStyle from './copy';
 import genActionsFeedbackStyle from './feedback';
-import genActionsAudioStyle from './audio';
 // biome-ignore lint/suspicious/noEmptyInterface: ComponentToken need to be empty by default
-export interface ComponentToken { }
+export interface ComponentToken {}
 
-export interface ActionsToken extends FullToken<'Actions'> { }
+export interface ActionsToken extends FullToken<'Actions'> {}
 
 const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
   const { componentCls, antCls, calc } = token;
@@ -36,14 +36,13 @@ const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
       '&:hover': {
         background: token.colorBgTextHover,
       },
-
     },
     [`${componentCls}-list`]: {
       display: 'inline-flex',
       flexDirection: 'row',
       alignItems: 'center',
       color: token.colorText,
-      gap: token.paddingXS
+      gap: token.paddingXS,
     },
     [componentCls]: {
       [`& ${antCls}-pagination-item-link`]: {
@@ -93,7 +92,7 @@ export default genStyleHooks(
       genActionsStyle(compToken),
       genActionsCopyStyle(compToken),
       genActionsFeedbackStyle(compToken),
-      genActionsAudioStyle(compToken)
+      genActionsAudioStyle(compToken),
     ];
   },
   prepareComponentToken,

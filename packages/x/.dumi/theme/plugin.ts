@@ -1,12 +1,11 @@
-import { createHash } from 'crypto';
-import fs from 'fs';
-import path from 'path';
 import createEmotionServer from '@emotion/server/create-instance';
+import { createHash } from 'crypto';
 import type { IApi, IRoute } from 'dumi';
 import ReactTechStack from 'dumi/dist/techStacks/react';
-import tsToJs from './utils/tsToJs';
-
+import fs from 'fs';
+import path from 'path';
 import { dependencies, devDependencies, peerDependencies } from '../../package.json';
+import tsToJs from './utils/tsToJs';
 
 function extractEmotionStyle(html: string) {
   // copy from emotion ssr
@@ -47,7 +46,8 @@ class AntdReactTechStack extends ReactTechStack {
 
     if (opts.type === 'external') {
       // try to find md file with the same name as the demo tsx file
-      const locale = opts.mdAbsPath.match(/index\.([a-z-]+)\.md$/i)?.[1];
+      const arr = opts.mdAbsPath.split('.');
+      const locale = arr[arr.length - 2];
       const mdPath = opts.fileAbsPath!.replace(/\.\w+$/, '.md');
       const md = fs.existsSync(mdPath) ? fs.readFileSync(mdPath, 'utf-8') : '';
 
