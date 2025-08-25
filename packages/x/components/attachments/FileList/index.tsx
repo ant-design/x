@@ -2,6 +2,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import { Button, type ImageProps, type UploadProps } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
+import Omit from 'lodash/Omit';
 import FileCard, { FileCardProps } from '../../file-card';
 import type { Attachment } from '..';
 import { AttachmentContext } from '../context';
@@ -72,7 +73,7 @@ export default function FileList(props: FileListProps) {
       const cardCls = `${prefixCls}-list-card`;
       const status = items[i].status;
       let preview: ImageProps['preview'];
-      if (previewUrl && status !== 'done') {
+      if (previewUrl && (status === 'uploading' || status === 'error')) {
         const percent = items[i].percent;
         const mask = (
           <div className={`${cardCls}-file-img-mask`}>
@@ -96,7 +97,7 @@ export default function FileList(props: FileListProps) {
         src: previewUrl,
         classNames: { file: `${cardCls}-status-${status}`, description: `${cardCls}-desc` },
         byte: items[i].size,
-        ...(items[i] as FileCardProps),
+        ...(Omit(items[i], 'type') as FileCardProps),
         size: undefined,
         preview: preview,
       });
