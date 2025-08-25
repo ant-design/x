@@ -80,12 +80,12 @@ export default () => {
         menu={menuConfig}
       />
       <Flex gap="small">
-        <Button onClick={onAdd}>添加会话</Button>
-        <Button onClick={onUpdate}>更新会话</Button>
-        <Button onClick={onReset}>重设列表</Button>
+        <Button onClick={onAdd}>Add</Button>
+        <Button onClick={onUpdate}>Update</Button>
+        <Button onClick={onReset}>Reset</Button>
       </Flex>
       <Paragraph>
-        当前会话数据：
+        Current Conversation Data:
         <pre>{JSON.stringify(getConversation(active), null, 2)}</pre>
       </Paragraph>
     </Flex>

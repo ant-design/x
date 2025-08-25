@@ -19,71 +19,155 @@ import {
   ShareAltOutlined,
   SmileOutlined,
 } from '@ant-design/icons';
+import { Attachments, Bubble, Conversations, Prompts, Sender, Think, Welcome } from '@ant-design/x';
+import XMarkdown from '@ant-design/x-markdown';
 import {
-  Attachments,
-  Bubble,
-  Conversations,
-  Prompts,
-  Sender,
-  useXAgent,
+  DeepSeekChatProvider,
   useXChat,
-  Welcome,
-} from '@ant-design/x';
+  useXConversations,
+  XModelParams,
+  XModelResponse,
+  XRequest,
+} from '@ant-design/x-sdk';
+import { SSEFields } from '@ant-design/x-sdk/es/x-stream';
 import { Avatar, Button, Flex, type GetProp, message, Space, Spin } from 'antd';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 
-type BubbleDataType = {
-  role: string;
-  content: string;
+const zhCN = {
+  'What is Ant Design X?': '什么是 Ant Design X？',
+  Today: '今天',
+  'How to quickly install and import components?': '如何快速安装和导入组件？',
+  'New AGI Hybrid Interface': '新的 AGI 混合界面',
+  Yesterday: '昨天',
+  'Hot Topics': '热门话题',
+  'Design Guide': '设计指南',
+  Intention: '意图',
+  Role: '角色',
+  Chat: '对话',
+  Interface: '界面',
+  Upgrades: '升级',
+  Components: '组件',
+  'RICH Guide': 'RICH 指南',
+  'Installation Introduction': '安装介绍',
+  'What has Ant Design X upgraded?': 'Ant Design X 有哪些升级？',
+  'What components are in Ant Design X?': 'Ant Design X 中有哪些组件？',
+  'Come and discover the new design paradigm of the AI era.': '快来发现 AI 时代的新设计范式。',
+  'Request is aborted': '请求已中止',
+  'Request failed, please try again!': '请求失败，请重试！',
+  'Request is in progress, please wait for the request to complete.':
+    '请求正在进行中，请等待请求完成。',
+  'Message is Requesting, you can create a new conversation after request done or abort it right now...':
+    '消息正在请求中，您可以在请求完成后创建新对话或立即中止...',
+  Rename: '重命名',
+  Delete: '删除',
+  'Upload File': '上传文件',
+  'Drop file here': '将文件拖到此处',
+  'Upload files': '上传文件',
+  'Click or drag files to this area to upload': '点击或将文件拖到此处上传',
+  'Ask or input / use skills': '提问或输入 / 使用技能',
+  'AI understands user needs and provides solutions.': 'AI理解用户需求并提供解决方案',
+  "AI's public persona and image": 'AI的公众形象',
+  'How AI Can Express Itself in a Way Users Understand': 'AI如何以用户理解的方式表达自己',
+  'AI balances "chat" & "do" behaviors.': 'AI平衡"聊天"和"执行"行为',
+  'New Conversation': '新会话',
+  'Deep thinking': '深度思考中',
+  'Complete thinking': '深度思考完成',
 };
+
+const enUS = {
+  'What is Ant Design X?': 'What is Ant Design X?',
+  Today: 'Today',
+  'How to quickly install and import components?': 'How to quickly install and import components?',
+  'New AGI Hybrid Interface': 'New AGI Hybrid Interface',
+  Yesterday: 'Yesterday',
+  'Hot Topics': 'Hot Topics',
+  'Design Guide': 'Design Guide',
+  Intention: 'Intention',
+  Role: 'Role',
+  Chat: 'Chat',
+  Interface: 'Interface',
+  Upgrades: 'Upgrades',
+  Components: 'Components',
+  'RICH Guide': 'RICH Guide',
+  'Installation Introduction': 'Installation Introduction',
+  'What has Ant Design X upgraded?': 'What has Ant Design X upgraded?',
+  'What components are in Ant Design X?': 'What components are in Ant Design X?',
+  'Come and discover the new design paradigm of the AI era.':
+    'Come and discover the new design paradigm of the AI era.',
+  'Request is aborted': 'Request is aborted',
+  'Request failed, please try again!': 'Request failed, please try again!',
+  'Request is in progress, please wait for the request to complete.':
+    'Request is in progress, please wait for the request to complete.',
+  'Message is Requesting, you can create a new conversation after request done or abort it right now...':
+    'Message is Requesting, you can create a new conversation after request done or abort it right now...',
+  Rename: 'Rename',
+  Delete: 'Delete',
+  'Upload File': 'Upload File',
+  'Drop file here': 'Drop file here',
+  'Upload files': 'Upload files',
+  'Click or drag files to this area to upload': 'Click or drag files to this area to upload',
+  'Ask or input / use skills': 'Ask or input / use skills',
+  'AI understands user needs and provides solutions.':
+    'AI understands user needs and provides solutions.',
+  "AI's public persona and image": "AI's public persona and image",
+  'How AI Can Express Itself in a Way Users Understand':
+    'How AI Can Express Itself in a Way Users Understand',
+  'AI balances "chat" & "do" behaviors.': 'AI balances "chat" & "do" behaviors.',
+  'New Conversation': 'New Conversation',
+  'Deep thinking': 'Deep Thinking',
+  'Complete thinking': 'Complete Thinking',
+};
+
+const isZhCN = window.parent?.location?.pathname?.includes('-cn');
+const t = isZhCN ? zhCN : enUS;
 
 const DEFAULT_CONVERSATIONS_ITEMS = [
   {
     key: 'default-0',
-    label: 'What is Ant Design X?',
-    group: 'Today',
+    label: t['What is Ant Design X?'],
+    group: t['Today'],
   },
   {
     key: 'default-1',
-    label: 'How to quickly install and import components?',
-    group: 'Today',
+    label: t['How to quickly install and import components?'],
+    group: t['Today'],
   },
   {
     key: 'default-2',
-    label: 'New AGI Hybrid Interface',
-    group: 'Yesterday',
+    label: t['New AGI Hybrid Interface'],
+    group: t['Yesterday'],
   },
 ];
 
 const HOT_TOPICS = {
   key: '1',
-  label: 'Hot Topics',
+  label: t['Hot Topics'],
   children: [
     {
       key: '1-1',
-      description: 'What has Ant Design X upgraded?',
+      description: t['What has Ant Design X upgraded?'],
       icon: <span style={{ color: '#f93a4a', fontWeight: 700 }}>1</span>,
     },
     {
       key: '1-2',
-      description: 'New AGI Hybrid Interface',
+      description: t['New AGI Hybrid Interface'],
       icon: <span style={{ color: '#ff6565', fontWeight: 700 }}>2</span>,
     },
     {
       key: '1-3',
-      description: 'What components are in Ant Design X?',
+      description: t['What components are in Ant Design X?'],
       icon: <span style={{ color: '#ff8f1f', fontWeight: 700 }}>3</span>,
     },
     {
       key: '1-4',
-      description: 'Come and discover the new design paradigm of the AI era.',
+      description: t['Come and discover the new design paradigm of the AI era.'],
       icon: <span style={{ color: '#00000040', fontWeight: 700 }}>4</span>,
     },
     {
       key: '1-5',
-      description: 'How to quickly install and import components?',
+      description: t['How to quickly install and import components?'],
       icon: <span style={{ color: '#00000040', fontWeight: 700 }}>5</span>,
     },
   ],
@@ -91,31 +175,31 @@ const HOT_TOPICS = {
 
 const DESIGN_GUIDE = {
   key: '2',
-  label: 'Design Guide',
+  label: t['Design Guide'],
   children: [
     {
       key: '2-1',
       icon: <HeartOutlined />,
-      label: 'Intention',
-      description: 'AI understands user needs and provides solutions.',
+      label: t['Intention'],
+      description: t['AI understands user needs and provides solutions.'],
     },
     {
       key: '2-2',
       icon: <SmileOutlined />,
-      label: 'Role',
-      description: "AI's public persona and image",
+      label: t['Role'],
+      description: t["AI's public persona and image"],
     },
     {
       key: '2-3',
       icon: <CommentOutlined />,
-      label: 'Chat',
-      description: 'How AI Can Express Itself in a Way Users Understand',
+      label: t['Chat'],
+      description: t['How AI Can Express Itself in a Way Users Understand'],
     },
     {
       key: '2-4',
       icon: <PaperClipOutlined />,
-      label: 'Interface',
-      description: 'AI balances "chat" & "do" behaviors.',
+      label: t['Interface'],
+      description: t['AI balances "chat" & "do" behaviors.'],
     },
   ],
 };
@@ -123,22 +207,22 @@ const DESIGN_GUIDE = {
 const SENDER_PROMPTS: GetProp<typeof Prompts, 'items'> = [
   {
     key: '1',
-    description: 'Upgrades',
+    description: t['Upgrades'],
     icon: <ScheduleOutlined />,
   },
   {
     key: '2',
-    description: 'Components',
+    description: t['Components'],
     icon: <ProductOutlined />,
   },
   {
     key: '3',
-    description: 'RICH Guide',
+    description: t['RICH Guide'],
     icon: <FileSearchOutlined />,
   },
   {
     key: '4',
-    description: 'Installation Introduction',
+    description: t['Installation Introduction'],
     icon: <AppstoreAddOutlined />,
   },
 ];
@@ -254,96 +338,93 @@ const useStyle = createStyles(({ token, css }) => {
   };
 });
 
+const ThinkComponent = React.memo((props: { children: string; status: string }) => {
+  const [title, setTitle] = React.useState(t['Deep thinking'] + '...');
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    if (props.status === 'done') {
+      setTitle(t['Complete thinking']);
+      setLoading(false);
+    }
+  }, [props.status]);
+
+  return (
+    <Think title={title} loading={loading}>
+      {props.children}
+    </Think>
+  );
+});
+
+/**
+ * 🔔 Please replace the BASE_URL, MODEL with your own values.
+ */
+const providerCaches = new Map<string, DeepSeekChatProvider>();
+const providerFactory = (conversationKey: string) => {
+  if (!providerCaches.get(conversationKey)) {
+    providerCaches.set(
+      conversationKey,
+      new DeepSeekChatProvider({
+        request: XRequest<XModelParams, Partial<Record<SSEFields, XModelResponse>>>(
+          'https://api.x.ant.design/api/llm_siliconflow_deepSeek-r1-distill-1wen-7b',
+          {
+            manual: true,
+            params: {
+              stream: true,
+              model: 'DeepSeek-R1-Distill-Qwen-7B',
+            },
+          },
+        ),
+      }),
+    );
+  }
+  return providerCaches.get(conversationKey);
+};
+
 const Independent: React.FC = () => {
   const { styles } = useStyle();
-  const abortController = useRef<AbortController>(null);
 
   // ==================== State ====================
-  const [messageHistory, setMessageHistory] = useState<Record<string, any>>({});
 
-  const [conversations, setConversations] = useState(DEFAULT_CONVERSATIONS_ITEMS);
-  const [curConversation, setCurConversation] = useState(DEFAULT_CONVERSATIONS_ITEMS[0].key);
+  const { conversations, addConversation, setConversations } = useXConversations({
+    defaultConversations: DEFAULT_CONVERSATIONS_ITEMS,
+  });
+  const [curConversation, setCurConversation] = useState<string>(
+    DEFAULT_CONVERSATIONS_ITEMS[0].key,
+  );
 
   const [attachmentsOpen, setAttachmentsOpen] = useState(false);
   const [attachedFiles, setAttachedFiles] = useState<GetProp<typeof Attachments, 'items'>>([]);
 
   const [inputValue, setInputValue] = useState('');
 
-  /**
-   * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
-   */
-
   // ==================== Runtime ====================
-  const [agent] = useXAgent<BubbleDataType>({
-    baseURL: 'https://api.x.ant.design/api/llm_siliconflow_deepSeek-r1-distill-1wen-7b',
-    model: 'DeepSeek-R1-Distill-Qwen-7B',
-    dangerouslyApiKey: 'Bearer sk-xxxxxxxxxxxxxxxxxxxx',
-  });
-  const loading = agent.isRequesting();
 
-  const { onRequest, messages, setMessages } = useXChat({
-    agent,
+  const { onRequest, messages, isRequesting, abort } = useXChat({
+    provider: providerFactory(curConversation), // every conversation has its own provider
+    conversationKey: curConversation,
     requestFallback: (_, { error }) => {
       if (error.name === 'AbortError') {
         return {
-          content: 'Request is aborted',
+          content: t['Request is aborted'],
           role: 'assistant',
         };
       }
       return {
-        content: 'Request failed, please try again!',
+        content: t['Request failed, please try again!'],
         role: 'assistant',
       };
-    },
-    transformMessage: (info) => {
-      const { originMessage, chunk } = info || {};
-      let currentContent = '';
-      let currentThink = '';
-      try {
-        if (chunk?.data && !chunk?.data.includes('DONE')) {
-          const message = JSON.parse(chunk?.data);
-          currentThink = message?.choices?.[0]?.delta?.reasoning_content || '';
-          currentContent = message?.choices?.[0]?.delta?.content || '';
-        }
-      } catch (error) {
-        console.error(error);
-      }
-
-      let content = '';
-
-      if (!originMessage?.content && currentThink) {
-        content = `<think>${currentThink}`;
-      } else if (
-        originMessage?.content?.includes('<think>') &&
-        !originMessage?.content.includes('</think>') &&
-        currentContent
-      ) {
-        content = `${originMessage?.content}</think>${currentContent}`;
-      } else {
-        content = `${originMessage?.content || ''}${currentThink}${currentContent}`;
-      }
-      return {
-        content: content,
-        role: 'assistant',
-      };
-    },
-    resolveAbortController: (controller) => {
-      abortController.current = controller;
     },
   });
+
+  const loading = isRequesting();
 
   // ==================== Event ====================
   const onSubmit = (val: string) => {
     if (!val) return;
 
-    if (loading) {
-      message.error('Request is in progress, please wait for the request to complete.');
-      return;
-    }
-
     onRequest({
-      stream: true,
-      message: { role: 'user', content: val },
+      messages: [{ role: 'user', content: val }],
     });
   };
 
@@ -365,30 +446,28 @@ const Independent: React.FC = () => {
       {/* 🌟 添加会话 */}
       <Button
         onClick={() => {
-          if (agent.isRequesting()) {
+          if (loading) {
             message.error(
-              'Message is Requesting, you can create a new conversation after request done or abort it right now...',
+              t[
+                'Message is Requesting, you can create a new conversation after request done or abort it right now...'
+              ],
             );
             return;
           }
 
           const now = dayjs().valueOf().toString();
-          setConversations([
-            {
-              key: now,
-              label: `New Conversation ${conversations.length + 1}`,
-              group: 'Today',
-            },
-            ...conversations,
-          ]);
+          addConversation({
+            key: now,
+            label: `${t['New Conversation']} ${conversations.length + 1}`,
+            group: t['Today'],
+          });
           setCurConversation(now);
-          setMessages([]);
         }}
         type="link"
         className={styles.addBtn}
         icon={<PlusOutlined />}
       >
-        New Conversation
+        {t['New Conversation']}
       </Button>
 
       {/* 🌟 会话管理 */}
@@ -397,25 +476,19 @@ const Independent: React.FC = () => {
         className={styles.conversations}
         activeKey={curConversation}
         onActiveChange={async (val) => {
-          abortController.current?.abort();
-          // The abort execution will trigger an asynchronous requestFallback, which may lead to timing issues.
-          // In future versions, the sessionId capability will be added to resolve this problem.
-          setTimeout(() => {
-            setCurConversation(val);
-            setMessages(messageHistory?.[val] || []);
-          }, 100);
+          setCurConversation(val);
         }}
         groupable
         styles={{ item: { padding: '0 8px' } }}
         menu={(conversation) => ({
           items: [
             {
-              label: 'Rename',
+              label: t['Rename'],
               key: 'rename',
               icon: <EditOutlined />,
             },
             {
-              label: 'Delete',
+              label: t['Delete'],
               key: 'delete',
               icon: <DeleteOutlined />,
               danger: true,
@@ -423,14 +496,9 @@ const Independent: React.FC = () => {
                 const newList = conversations.filter((item) => item.key !== conversation.key);
                 const newKey = newList?.[0]?.key;
                 setConversations(newList);
-                // The delete operation modifies curConversation and triggers onActiveChange, so it needs to be executed with a delay to ensure it overrides correctly at the end.
-                // This feature will be fixed in a future version.
-                setTimeout(() => {
-                  if (conversation.key === curConversation) {
-                    setCurConversation(newKey);
-                    setMessages(messageHistory?.[newKey] || []);
-                  }
-                }, 200);
+                if (conversation.key === curConversation) {
+                  setCurConversation(newKey);
+                }
               },
             },
           ],
@@ -474,6 +542,17 @@ const Independent: React.FC = () => {
                 ),
               },
               loadingRender: () => <Spin size="small" />,
+              contentRender(content: any) {
+                const newContent = content.replaceAll('\n\n', '<br/><br/>');
+                return (
+                  <XMarkdown
+                    content={newContent}
+                    components={{
+                      think: ThinkComponent,
+                    }}
+                  />
+                );
+              },
             },
             user: { placement: 'end' },
           }}
@@ -539,7 +618,7 @@ const Independent: React.FC = () => {
   );
   const senderHeader = (
     <Sender.Header
-      title="Upload File"
+      title={t['Upload File']}
       open={attachmentsOpen}
       onOpenChange={setAttachmentsOpen}
       styles={{ content: { padding: 0 } }}
@@ -550,12 +629,12 @@ const Independent: React.FC = () => {
         onChange={(info) => setAttachedFiles(info.fileList)}
         placeholder={(type) =>
           type === 'drop'
-            ? { title: 'Drop file here' }
+            ? { title: t['Drop file here'] }
             : {
-              icon: <CloudUploadOutlined />,
-              title: 'Upload files',
-              description: 'Click or drag files to this area to upload',
-            }
+                icon: <CloudUploadOutlined />,
+                title: t['Upload files'],
+                description: t['Click or drag files to this area to upload'],
+              }
         }
       />
     </Sender.Header>
@@ -583,7 +662,7 @@ const Independent: React.FC = () => {
         }}
         onChange={setInputValue}
         onCancel={() => {
-          abortController.current?.abort();
+          abort();
         }}
         prefix={
           <Button
@@ -595,20 +674,10 @@ const Independent: React.FC = () => {
         loading={loading}
         className={styles.sender}
         allowSpeech
-        placeholder="Ask or input / use skills"
+        placeholder={t['Ask or input / use skills']}
       />
     </>
   );
-
-  useEffect(() => {
-    // history mock
-    if (messages?.length) {
-      setMessageHistory((prev) => ({
-        ...prev,
-        [curConversation]: messages,
-      }));
-    }
-  }, [messages]);
 
   // ==================== Render =================
   return (

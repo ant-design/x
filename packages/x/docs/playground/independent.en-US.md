@@ -7,4 +7,4 @@ description: Natural language is dominant.
 order: 0
 ---
 
-<code src="./independent.tsx" title="Independent" compact iframe="600"></code>
+<code src="./independent.tsx" title="Independent" compact iframe="800"></code>
