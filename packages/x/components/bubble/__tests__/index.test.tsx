@@ -376,6 +376,29 @@ describe('bubble', () => {
       expect(contentElement?.textContent).toBe('Test-second');
     });
 
+    it('应该支持完全重新输出', async () => {
+      const typingConfig: BubbleAnimationOption = {
+        effect: 'typing',
+        step: 2,
+        interval: 50,
+        keepPrefix: false,
+      };
+      const text1 = 'Test-first';
+      const text2 = 'Test-second';
+      const { container, rerender } = render(<Bubble content={text1} typing={typingConfig} />);
+
+      // 等待动画完成
+      await waitFakeTimer(100, 5);
+      const contentElement = container.querySelector('.ant-bubble-content');
+      expect(contentElement?.textContent).toBe(text1);
+
+      rerender(<Bubble content={text2} typing={typingConfig} />);
+      expect(contentElement?.textContent?.startsWith('Test-')).toBeFalsy();
+
+      await waitFakeTimer(100, 6);
+      expect(contentElement?.textContent).toBe(text2);
+    });
+
     it('应该在内容为空时不执行动画', () => {
       const onTyping = jest.fn();
       const onTypingComplete = jest.fn();
