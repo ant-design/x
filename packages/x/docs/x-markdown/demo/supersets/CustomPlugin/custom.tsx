@@ -82,7 +82,7 @@ const referenceList = [
 ];
 
 const App = () => {
-  const urlParams = new URLSearchParams(window.location.search);
+  const urlParams = new URLSearchParams(window?.location?.search);
   const theme = urlParams.get('theme');
   const className = theme === 'dark' ? 'x-markdown-dark' : 'x-markdown-light';
 

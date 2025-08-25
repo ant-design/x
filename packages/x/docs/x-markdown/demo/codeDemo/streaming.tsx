@@ -113,7 +113,7 @@ const roles: BubbleListProps['role'] = {
 const App: React.FC = () => {
   const [hasNextChunk, setHasNextChunk] = useState(false);
   const [content, setContent] = React.useState('');
-   const urlParams = new URLSearchParams(window.location.search);
+   const urlParams = new URLSearchParams(window?.location?.search);
   const theme = urlParams.get('theme');
   const className = theme === 'dark' ? 'x-markdown-dark' : 'x-markdown-light';
 
