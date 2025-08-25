@@ -242,13 +242,8 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
           <div className={classnames(`${prefixCls}-code`, classNames?.code)} style={styles.code}>
             <SyntaxHighlighter
               customStyle={{
-                marginTop: 0,
-                borderBottomLeftRadius: 6,
-                borderBottomRightRadius: 6,
-                border: '1px solid #f6f6f6',
+                padding: 0,
                 background: 'transparent',
-                borderTop: 0,
-                fontSize: 14,
               }}
               language="mermaid"
               wrapLines={true}

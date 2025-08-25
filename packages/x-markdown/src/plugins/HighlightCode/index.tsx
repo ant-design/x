@@ -52,16 +52,10 @@ const HighlightCode: PluginsType['HighlightCode'] = (props) => {
   return (
     <div className={mergedCls} style={{ ...style, ...styles.root }}>
       {renderTitle()}
-      <div className={classNames?.code} style={styles.code}>
+      <div className={classnames(`${prefixCls}-code`, classNames?.code)} style={styles.code}>
         <SyntaxHighlighter
           customStyle={{
-            marginTop: 0,
-            borderBottomLeftRadius: 6,
-            borderBottomRightRadius: 6,
-            border: '1px solid #f6f6f6',
-            borderTop: 0,
-            fontSize: 14,
-            padding: 16,
+            padding: 0,
             background: 'transparent',
           }}
           language={lang}

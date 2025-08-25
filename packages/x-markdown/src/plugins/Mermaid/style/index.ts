@@ -1,36 +1,16 @@
 import { mergeToken } from '@ant-design/cssinjs-utils';
-import { FastColor } from '@ant-design/fast-color';
 import type { GenerateStyle } from 'antd/es/theme/internal';
 import { genStyleHooks } from '../../theme/genStyleUtils';
-import type { FullToken, GetDefaultToken } from '../../theme/useToken';
+import type { FullToken } from '../../theme/useToken';
 
-export interface ComponentToken {
-  /**
-   * @desc 头部背景色
-   * @descEN Mermaid header background color
-   */
-  mermaidHeaderBgColor: string;
-  /**
-   * @desc 内边距
-   * @descEN Mermaid padding
-   */
-  mermaidPadding: number;
-  /**
-   * @desc 内边距
-   * @descEN Mermaid padding
-   */
-  mermaidBorderRadius: number;
-  /**
-   * @desc 内边距
-   * @descEN Mermaid padding
-   */
-  mermaidFontSize: number;
-}
+export interface ComponentToken {}
 
 export interface MermaidToken extends FullToken<'Mermaid'> {}
 
 const genMermaidStyle: GenerateStyle<MermaidToken> = (token) => {
-  const { componentCls, mermaidBorderRadius, mermaidHeaderBgColor, mermaidPadding } = token;
+  const { componentCls } = token;
+
+  console.log('token', token);
 
   return {
     [componentCls]: {
@@ -38,22 +18,23 @@ const genMermaidStyle: GenerateStyle<MermaidToken> = (token) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        background: mermaidHeaderBgColor,
-        padding: mermaidPadding,
-        borderTopLeftRadius: mermaidBorderRadius,
-        borderTopRightRadius: mermaidBorderRadius,
+        background: token.colorFillContent,
+        padding: token.paddingSM,
+        borderTopLeftRadius: token.borderRadius,
+        borderTopRightRadius: token.borderRadius,
       },
       '&-graph': {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        border: '1px solid #f6f6f6',
+        border: '1px solid',
+        borderColor: token.colorBorderSecondary,
         borderTop: 0,
-        padding: mermaidPadding,
+        padding: token.paddingSM,
         overflow: 'auto',
         minHeight: 200,
-        borderBottomRightRadius: mermaidBorderRadius,
-        borderBottomLeftRadius: mermaidBorderRadius,
+        borderBottomRightRadius: token.borderRadius,
+        borderBottomLeftRadius: token.borderRadius,
       },
       '&-graph-hidden': {
         display: 'none',
@@ -62,6 +43,14 @@ const genMermaidStyle: GenerateStyle<MermaidToken> = (token) => {
         maxWidth: '100%',
         height: 'auto',
       },
+      '&-code': {
+        border: '1px solid',
+        borderColor: token.colorBorderSecondary,
+        borderBottomRightRadius: token.borderRadius,
+        borderBottomLeftRadius: token.borderRadius,
+        background: 'transparent',
+        borderTop: 0,
+      },
       [`&${componentCls}-rtl`]: {
         direction: 'rtl',
       },
@@ -69,20 +58,7 @@ const genMermaidStyle: GenerateStyle<MermaidToken> = (token) => {
   };
 };
 
-export const prepareComponentToken: GetDefaultToken<'Mermaid'> = (token) => {
-  const mermaidHeaderBgColor = new FastColor(token.colorBgLayout).toRgbString();
-  const mermaidPadding = token.paddingSM;
-  const mermaidBorderRadius = token.borderRadius;
-  const mermaidFontSize = token.fontSizeHeading5;
-
-  return { mermaidHeaderBgColor, mermaidPadding, mermaidBorderRadius, mermaidFontSize };
-};
-
-export default genStyleHooks<'Mermaid'>(
-  'Mermaid',
-  (token) => {
-    const mermaidToken = mergeToken<MermaidToken>(token, {});
-    return [genMermaidStyle(mermaidToken)];
-  },
-  prepareComponentToken,
-);
+export default genStyleHooks<'Mermaid'>('Mermaid', (token) => {
+  const mermaidToken = mergeToken<MermaidToken>(token, {});
+  return [genMermaidStyle(mermaidToken)];
+});
