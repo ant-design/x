@@ -2,7 +2,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import { Button, type ImageProps, type UploadProps } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
-import Omit from 'lodash/Omit';
+import omit from 'lodash/omit';
 import FileCard, { FileCardProps } from '../../file-card';
 import type { Attachment } from '..';
 import { AttachmentContext } from '../context';
@@ -97,7 +97,7 @@ export default function FileList(props: FileListProps) {
         src: previewUrl,
         classNames: { file: `${cardCls}-status-${status}`, description: `${cardCls}-desc` },
         byte: items[i].size,
-        ...(Omit(items[i], 'type') as FileCardProps),
+        ...(omit(items[i], 'type') as FileCardProps),
         size: undefined,
         preview: preview,
       });
