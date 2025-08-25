@@ -20,11 +20,11 @@ import { Bubble, Conversations, Prompts, Sender, Welcome } from '@ant-design/x';
 import {
   AbstractChatProvider,
   AbstractXRequestClass,
+  TransformMessage,
   useXChat,
   useXConversations,
   XRequestOptions,
 } from '@ant-design/x-sdk';
-import { TransformMessage } from '@ant-design/x-sdk/es/x-chat/providers/AbstractChatProvider';
 import { Avatar, Button, Flex, type GetProp, message, Space, Spin } from 'antd';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';

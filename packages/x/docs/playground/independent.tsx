@@ -23,13 +23,13 @@ import { Attachments, Bubble, Conversations, Prompts, Sender, Think, Welcome } f
 import XMarkdown from '@ant-design/x-markdown';
 import {
   DeepSeekChatProvider,
+  SSEFields,
   useXChat,
   useXConversations,
   XModelParams,
   XModelResponse,
   XRequest,
 } from '@ant-design/x-sdk';
-import { SSEFields } from '@ant-design/x-sdk/es/x-stream';
 import { Avatar, Button, Flex, type GetProp, message, Space, Spin } from 'antd';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';

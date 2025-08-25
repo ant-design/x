@@ -15,4 +15,10 @@ export type {
   XRequestOptions,
 } from './x-request';
 export { AbstractXRequestClass, default as XRequest } from './x-request';
+export type {
+  SSEFields,
+  SSEOutput,
+  XReadableStream,
+  XStreamOptions,
+} from './x-stream';
 export { default as XStream } from './x-stream';
