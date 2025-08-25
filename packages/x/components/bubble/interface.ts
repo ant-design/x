@@ -117,7 +117,7 @@ export interface BubbleProps<ContentType extends BubbleContentType = string>
   /**
    * @description 编辑态下内容变化时回调
    */
-  onEditCancle?: () => void;
+  onEditCancel?: () => void;
 }
 
 export interface BubbleListRef {
@@ -140,7 +140,7 @@ type RemainRole = 'ai' | 'system' | 'user';
 
 type AnyStr = string;
 
-export type BubbleData = BubbleProps<BubbleContentType> & {
+export type BubbleData = BubbleProps<any> & {
   /**
    * @description 数据项唯一标识
    */
@@ -172,7 +172,7 @@ export type RoleProps = Pick<
   | 'onTyping'
   | 'onTypingComplete'
   | 'onEditConfirm'
-  | 'onEditCancle'
+  | 'onEditCancel'
 >;
 
 export type FuncRoleProps = (data: BubbleData) => RoleProps;

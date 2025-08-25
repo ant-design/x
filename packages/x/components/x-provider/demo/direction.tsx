@@ -8,7 +8,6 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import {
-  Actions,
   Bubble,
   Conversations,
   Prompts,
@@ -140,12 +139,6 @@ export default () => {
                 ]}
               />
             </Flex>
-          </XProvider>
-        </Card>
-
-        <Card>
-          <XProvider direction={direction}>
-            <Actions.Feedback value={'default'} />
           </XProvider>
         </Card>
       </Flex>

@@ -2,6 +2,7 @@ import { codecovWebpackPlugin } from '@codecov/webpack-plugin';
 import DuplicatePackageCheckerPlugin from '@madccc/duplicate-package-checker-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
 import { defineConfig } from 'father';
+import path from 'path';
 
 class CodecovWebpackPlugin {
   private options;
@@ -20,6 +21,7 @@ export default defineConfig({
   },
   esm: {
     input: 'src',
+    ignores: ['**/__tests__/**'],
     overrides: {
       'src/plugins': {
         output: 'plugins',
@@ -30,6 +32,7 @@ export default defineConfig({
     },
   },
   cjs: {
+    ignores: ['**/__tests__/**'],
     input: 'src',
   },
   umd: {
@@ -71,11 +74,32 @@ export default defineConfig({
         },
       },
     },
+    bundler: 'webpack',
+    // bundler: 'utoopack',
+    concatenateModules: true,
+    rootPath: path.resolve(__dirname, '../../'),
     externals: {
-      react: 'React',
-      'react-dom': 'ReactDOM',
-      '@ant-design/cssinjs': 'antdCssinjs',
+      react: {
+        root: 'React',
+        commonjs: 'react',
+        commonjs2: 'react',
+      },
+      'react-dom': {
+        root: 'ReactDOM',
+        commonjs: 'react-dom',
+        commonjs2: 'react-dom',
+      },
+      '@ant-design/cssinjs': {
+        root: 'antdCssinjs',
+        commonjs: 'antdCssinjs',
+        commonjs2: 'antdCssinjs',
+      },
     },
+    // externals: {
+    //   react: 'React',
+    //   'react-dom': 'ReactDOM',
+    //   '@ant-design/cssinjs': 'antdCssinjs',
+    // },
     transformRuntime: {
       absoluteRuntime: process.cwd(),
     },

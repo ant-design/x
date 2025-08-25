@@ -53,7 +53,7 @@ Common Props Reference: [Common Props](/docs/react/common-props)
 | loadingRender | Custom loading content rendering | () => React.ReactNode | - | - | 
 | content | Bubble Contents | [ContentType](#contenttype) | - | - | 
 | contentRender | Custom content rendering | (content: ContentType) => React.ReactNode | - | - | 
-| editable | Whether bubble is editable | boolean | `false` | - | 
+| editable | Whether bubble is editable | boolean \| [EditableBubbleOption](#editablebubbleoption) | `false` | - | 
 | typing | Typing Animation Effects | boolean \| [BubbleAnimationOption](#bubbleanimationoption) | `false` | - | 
 | streaming | Whether it is streaming | boolean | `false` | - | 
 | variant | Bubble style variants | `filled` \| `outlined` \| `shadow` \| `borderless` | `filled` | - | 
@@ -72,6 +72,22 @@ In [this example](#bubble-demo-stream), you can try to force the streaming flag 
 
 - If you enable input animations, `onTypingComplete` will be triggered multiple times when performing a **load slowly** because the streaming speed cannot keep up with the animation speed.
 - If you turn off the input animation, `onTypingComplete` will be triggered every time you stream the input.
+
+#### Bubble.List autoScroll Top Alignment
+
+The auto-scroll feature in **Bubble.List** works by reversing the order of messages. In a fixed-height **Bubble.List**, if there isn't enough content to fill the available space, the messages will be aligned to the bottom. To achieve top alignment, it's recommended to wrap **Bubble.List** in a parent container with a fixed height and flexbox properties (`display: flex` and `flex-direction: column`). This allows **Bubble.List** to adapt its height and align content to the top when the list isn't full. This approach is demonstrated in the [Bubble List demo](#bubble-demo-list).
+
+```tsx
+<div style={{ height: 600, display: 'flex', flexDirection: 'column' }}>
+  <Bubble.List items={items} autoScroll />
+</div>
+```
+
+Alternatively, if you prefer not to use a flexbox layout, you can set a `max-height` on the **Bubble.List** itself using the `rootStyle` prop. This way, the list's height will adapt to its content, resulting in a top-aligned appearance when the content is sparse.
+
+```tsx
+<Bubble.List items={items} autoScroll rootStyle={{ maxHeight: 600 }} />
+```
 
 ### Bubble.List Component API
 
@@ -106,6 +122,25 @@ type CustomContentType {
 
 ```typescript
 type BubbleSlot<ContentType> = React.ReactNode | ((content: ContentType) => React.ReactNode);
+```
+
+#### EditableBubbleOption
+
+```typescript
+interface EditableBubbleOption {
+  /**
+   * @description Whether to enable editing
+   */
+  editing?: boolean;
+  /**
+   * @description Button UI for commit
+   */
+  okText?: React.ReactNode;
+  /**
+   * @description Button UI for cancel
+   */
+  cancelText?: React.ReactNode;
+}
 ```
 
 #### BubbleAnimationOption

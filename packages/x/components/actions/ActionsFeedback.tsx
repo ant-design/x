@@ -1,6 +1,5 @@
 import { DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined } from '@ant-design/icons';
-import { Space, Tooltip } from 'antd';
-import { createStyles } from 'antd-style';
+import { Tooltip } from 'antd';
 import classnames from 'classnames';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
@@ -68,36 +67,23 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
   const [hashId, cssVarCls] = useStyle(prefixCls);
   const feedbackCls = `${prefixCls}-feedback`;
 
-  // ============================ Styles ============================
-  const useStyles = createStyles(({ token }) => ({
-    feedbackItem: {
-      padding: token.paddingXXS,
-      borderRadius: token.borderRadius,
-      height: token.controlHeightSM,
-      boxSizing: 'border-box',
-      display: 'inline-flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      cursor: 'pointer',
-      '&:hover': {
-        background: token.colorBgTextHover,
-      },
+  // ============================ Classname ============================
+  const mergedCls = classnames(
+    feedbackCls,
+    hashId,
+    cssVarCls,
+    rootClassName,
+    `${prefixCls}-list`,
+    className,
+    {
+      [`${feedbackCls}-rtl`]: direction === 'rtl',
     },
-    [`${feedbackCls}-rtl`]: {
-      direction: 'rtl',
-    },
-  }));
-
-  const { styles } = useStyles();
-
-  const mergedCls = classnames(feedbackCls, hashId, cssVarCls, rootClassName, className, {
-    [`${feedbackCls}-rtl`]: direction === 'rtl',
-  });
+  );
 
   const onFeedBacKClick = () =>
     onChange?.(value === FEEDBACK_VALUE.dislike ? FEEDBACK_VALUE.default : FEEDBACK_VALUE.dislike);
   return (
-    <Space {...domProps} className={mergedCls} style={style}>
+    <div {...domProps} className={mergedCls} style={style}>
       {[FEEDBACK_VALUE.default, FEEDBACK_VALUE.like].includes(value as FEEDBACK_VALUE) && (
         <Tooltip title={contextLocale.feedbackLike}>
           <span
@@ -106,8 +92,14 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
                 value === FEEDBACK_VALUE.like ? FEEDBACK_VALUE.default : FEEDBACK_VALUE.like,
               )
             }
-            className={styles.feedbackItem}
-            data-testid="feedback-like"
+            className={classnames(
+              `${feedbackCls}-item`,
+              `${prefixCls}-item`,
+              `${feedbackCls}-item-like`,
+              {
+                [`${feedbackCls}-item-like-active`]: value === 'like',
+              },
+            )}
           >
             {value === FEEDBACK_VALUE.like ? <LikeFilled /> : <LikeOutlined />}
           </span>
@@ -118,14 +110,20 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
         <Tooltip title={contextLocale.feedbackDislike}>
           <span
             onClick={onFeedBacKClick}
-            className={styles.feedbackItem}
-            data-testid="feedback-dislike"
+            className={classnames(
+              `${feedbackCls}-item`,
+              `${prefixCls}-item`,
+              `${feedbackCls}-item-dislike`,
+              {
+                [`${feedbackCls}-item-dislike-active`]: value === 'dislike',
+              },
+            )}
           >
             {value === FEEDBACK_VALUE.dislike ? <DislikeFilled /> : <DislikeOutlined />}
           </span>
         </Tooltip>
       )}
-    </Space>
+    </div>
   );
 };
 

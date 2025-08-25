@@ -1,11 +1,11 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, type UploadProps, type ImageProps } from 'antd';
+import { Button, type ImageProps, type UploadProps } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
+import FileCard, { FileCardProps } from '../../file-card';
 import type { Attachment } from '..';
 import { AttachmentContext } from '../context';
 import SilentUploader from '../SilentUploader';
-import FileCard, { FileCardProps } from '../../file-card';
 import { previewImage } from '../util';
 import Progress from './Progress';
 
@@ -61,17 +61,17 @@ export default function FileList(props: FileListProps) {
   };
 
   const getList = async (items: Attachment[]) => {
-    let fileCardMap: FileCardProps[] = [];
+    const fileCardMap: FileCardProps[] = [];
     for (let i = 0; i < items.length; i++) {
       const desc = getDescription(items[i]);
-      let previewImg = undefined;
+      let previewImg: any;
       if (items[i].originFileObj) {
         previewImg = await previewImage(items[i].originFileObj!);
       }
       const previewUrl = items[i].thumbUrl || items[i].url || previewImg;
       const cardCls = `${prefixCls}-list-card`;
       const status = items[i].status;
-      let preview: ImageProps['preview'] = undefined;
+      let preview: ImageProps['preview'];
       if (previewUrl && status !== 'done') {
         const percent = items[i].percent;
         const mask = (
@@ -94,7 +94,7 @@ export default function FileList(props: FileListProps) {
         key: items[i].uid || i,
         description: desc,
         src: previewUrl,
-        classNames: {file: `${cardCls}-status-${status}`, description: `${cardCls}-desc`},
+        classNames: { file: `${cardCls}-status-${status}`, description: `${cardCls}-desc` },
         byte: items[i].size,
         ...(items[i] as FileCardProps),
         size: undefined,
@@ -117,22 +117,24 @@ export default function FileList(props: FileListProps) {
   return (
     <FileCard.List
       items={list}
-      classNames={{root: `${prefixCls}-list ${listClassName}`, file: itemClassName}}
-      styles={{root: listStyle, file: itemStyle}}
+      classNames={{ root: `${prefixCls}-list ${listClassName}`, file: itemClassName }}
+      styles={{ root: listStyle, file: itemStyle }}
       removable={!disabled}
       onRemove={handleRemove}
       overflow={overflow}
-      extension={!disabled && (
-        <SilentUploader upload={upload}>
-          <Button
-            className={classnames(uploadClassName, `${listCls}-upload-btn`)}
-            style={uploadStyle}
-            type="dashed"
-          >
-            <PlusOutlined className={`${listCls}-upload-btn-icon`} />
-          </Button>
-        </SilentUploader>
-      )}
+      extension={
+        !disabled && (
+          <SilentUploader upload={upload}>
+            <Button
+              className={classnames(uploadClassName, `${listCls}-upload-btn`)}
+              style={uploadStyle}
+              type="dashed"
+            >
+              <PlusOutlined className={`${listCls}-upload-btn-icon`} />
+            </Button>
+          </SilentUploader>
+        )
+      }
     />
   );
 }

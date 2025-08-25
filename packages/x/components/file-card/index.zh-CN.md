@@ -1,11 +1,13 @@
 ---
 category: FileCard
 group:
-  title: 表达
-  order: 2
+  title: 反馈
+  order: 4
 title: FileCard
 subtitle: 文件卡片
 description: 用卡片的形式展示文件。
+cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*pJrtTaf-bWAAAAAAAAAAAAAADgCCAQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*6ySvTqb7XhkAAAAAAAAAAAAADgCCAQ/original
 ---
 
 ## 何时使用
@@ -61,20 +63,26 @@ type PresetIcons =
   | 'python';
 ```
 
-### FileCardListProps
+### FileCard.List
 
-| 属性      | 说明       | 类型                                                  | 默认值 | 版本 |
-| --------- | ---------- | --------------------------------------------------- | ------ | ---- |
-| items     | 文件列表   | FileCardProps[]                                       | -      | -    |
-| size      | 卡片大小   | 'small' \| 'default'                                  | default |-    |
-| removable | 是否可删除 | boolean \| ((item: FileCardProps) => boolean)         | false  | -    |
-| onRemove  | 删除事件   | (item: FileCardProps, list?: FileCardProps[]) => void | -      | -    |
-| extension | 扩展      | React.ReactNode                                       | -      | -    |
-| overflow  | 超出展示   | 'scrollX' \| 'scrollY' \| 'wrap'                      | wrap   | -    |
+| 属性      | 说明       | 类型                                                  | 默认值  | 版本 |
+| --------- | ---------- | ----------------------------------------------------- | ------- | ---- |
+| items     | 文件列表   | FileCardProps[]                                       | -       | -    |
+| size      | 卡片大小   | 'small' \| 'default'                                  | default | -    |
+| removable | 是否可删除 | boolean \| ((item: FileCardProps) => boolean)         | false   | -    |
+| onRemove  | 删除事件   | (item: FileCardProps, list?: FileCardProps[]) => void | -       | -    |
+| extension | 扩展       | React.ReactNode                                       | -       | -    |
+| overflow  | 超出展示   | 'scrollX' \| 'scrollY' \| 'wrap'                      | wrap    | -    |
 
 ## Semantic DOM
 
+### FileCard
+
 <code src="./demo/_semantic.tsx" simplify="true"></code>
+
+### FileCard.List
+
+<code src="./demo/_semantic-list.tsx" simplify="true"></code>
 
 ## 主题变量（Design Token）
 

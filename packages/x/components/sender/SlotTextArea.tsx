@@ -28,7 +28,6 @@ type InputFocusOptions = Parameters<InputRef['focus']>[0];
 type SlotNode = Text | Document | HTMLSpanElement;
 const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const {
-    value,
     onChange,
     onKeyUp,
     onKeyDown,
@@ -185,7 +184,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         case 'tag':
           return <div className={`${prefixCls}-slot-tag`}>{node.props?.label || ''}</div>;
         case 'custom':
-
           return node.customRender?.(
             value,
             (value: any) => {
@@ -417,7 +415,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     brElements?.forEach((br) => {
       br.remove();
     });
-  }
+  };
 
   const onInternalInput = (e: React.FormEvent<HTMLDivElement>) => {
     const newValue = getEditorValue();
@@ -565,7 +563,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
           },
         )}
         data-placeholder={placeholder}
-        contentEditable={readOnly ? false : true}
+        contentEditable={!readOnly}
         suppressContentEditableWarning
         spellCheck={false}
         onKeyDown={onInternalKeyDown}

@@ -73,7 +73,13 @@ demo:
 
 ## Semantic DOM
 
+## ThoughtChain
+
 <code src="./demo/_semantic.tsx" simplify="true"></code>
+
+## ThoughtChain.Item
+
+<code src="./demo/_semantic-item.tsx" simplify="true"></code>
 
 ## 主题变量（Design Token）
 

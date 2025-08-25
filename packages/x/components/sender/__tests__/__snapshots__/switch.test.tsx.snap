@@ -2,7 +2,7 @@
 
 exports[`Sender.Switch rtl render component should be rendered correctly in RTL direction 1`] = `
 <div
-  class="ant-sender ant-sender-switch css-var-root ant-sender-rtl"
+  class="ant-sender-switch css-var-root ant-sender-rtl"
 >
   <button
     class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-rtl ant-sender-switch-content"

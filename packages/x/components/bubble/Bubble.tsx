@@ -1,9 +1,10 @@
 import classnames from 'classnames';
+import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 import { EditableContent } from './EditableContent';
-import {
+import type {
   BubbleAnimationOption,
   BubbleContentType,
   BubbleProps,
@@ -40,7 +41,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
     onTyping,
     onTypingComplete,
     onEditConfirm,
-    onEditCancle,
+    onEditCancel,
     ...restProps
   },
   ref,
@@ -85,6 +86,12 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
       [`${prefixCls}-rtl`]: direction === 'rtl',
     },
   );
+
+  const domProps = pickAttrs(restProps, {
+    attr: true,
+    aria: true,
+    data: true,
+  });
 
   // ============================= process content ==============================
   const memoedContent = React.useMemo(
@@ -162,7 +169,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
               okText={(editable as EditableBubbleOption)?.okText}
               cancelText={(editable as EditableBubbleOption)?.cancelText}
               onEditConfirm={onEditConfirm}
-              onEditCancle={onEditCancle}
+              onEditCancel={onEditCancel}
             />
           ) : (
             <>
@@ -236,7 +243,13 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
   };
 
   return (
-    <div className={rootMergedCls} style={rootMergedStyle} {...restProps} ref={rootDiv}>
+    <div
+      className={rootMergedCls}
+      style={rootMergedStyle}
+      {...restProps}
+      {...domProps}
+      ref={rootDiv}
+    >
       {renderAvatar()}
       {renderContent()}
       {!isEditing && !loading && renderExtra()}
@@ -256,4 +269,4 @@ if (process.env.NODE_ENV !== 'production') {
 
 export default ForwardBubble as ForwardBubbleType;
 
-export { BubbleProps };
+export type { BubbleProps };

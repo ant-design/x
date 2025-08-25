@@ -14,14 +14,19 @@ const XMarkdown: React.FC<XMarkdownProps> = (props) => {
     content,
     children,
     rootClassName,
+    prefixCls: customizePrefixCls,
     className,
     style,
   } = props;
 
   // ============================ style ============================
-  const { direction: contextDirection } = useXProviderContext();
 
-  const mergedCls = classnames(rootClassName, className);
+  const { direction: contextDirection, getPrefixCls } = useXProviderContext();
+
+  const prefixCls = getPrefixCls('x-markdown', customizePrefixCls);
+
+  const mergedCls = classnames(prefixCls, rootClassName, className);
+
   const mergedStyle: React.CSSProperties = {
     direction: contextDirection === 'rtl' ? 'rtl' : 'ltr',
     ...style,

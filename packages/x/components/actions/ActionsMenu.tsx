@@ -8,12 +8,12 @@ import type { ActionsItemProps, ItemType } from './interface';
 /** Tool function: Find data item by path */
 export const findItem = (keyPath: string[], items: ItemType[]): ItemType | null => {
   const keyToFind = keyPath[0];
-
   for (const item of items) {
+    if (!item) return null;
     if (item.key === keyToFind) {
       if (keyPath.length === 1) return item;
 
-      if ('subItems' in item) {
+      if (item.subItems) {
         return findItem(keyPath.slice(1), item?.subItems!);
       }
     }
@@ -49,7 +49,7 @@ const ActionsMenu: React.FC<ActionsItemProps> = (props) => {
     <Dropdown
       menu={menuProps}
       classNames={{
-        root: classnames(`${prefixCls}-sub-item`, classNames?.itemDropdown),
+        root: classnames(`${prefixCls}-dropdown`, classNames?.itemDropdown),
       }}
       styles={{
         root: styles?.itemDropdown,
@@ -58,8 +58,11 @@ const ActionsMenu: React.FC<ActionsItemProps> = (props) => {
       trigger={[triggerSubMenuAction]}
       {...dropdownProps}
     >
-      <div className={classnames(`${prefixCls}-list-item`, classNames?.item)} style={styles?.item}>
-        <div className={`${prefixCls}-list-item-icon`}>{icon}</div>
+      <div
+        className={classnames(`${prefixCls}-item`, `${prefixCls}-sub-item`, classNames?.item)}
+        style={styles?.item}
+      >
+        <div className={`${prefixCls}-icon`}>{icon}</div>
       </div>
     </Dropdown>
   );

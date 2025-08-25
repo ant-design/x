@@ -1,4 +1,4 @@
-import { CopyOutlined, DeleteOutlined, RedoOutlined, ShareAltOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, RedoOutlined, ShareAltOutlined } from '@ant-design/icons';
 import { Actions, ActionsProps } from '@ant-design/x';
 import { Modal, message } from 'antd';
 import React from 'react';
@@ -10,9 +10,9 @@ const actionItems: ActionsProps['items'] = [
     icon: <RedoOutlined />,
   },
   {
-    key: 'copy',
-    label: 'Copy',
-    icon: <CopyOutlined />,
+    key: 'edit',
+    icon: <EditOutlined />,
+    label: 'Edit',
   },
   {
     key: 'more',

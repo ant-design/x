@@ -10,6 +10,16 @@ const App = () => {
         src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
       />
       <FileCard
+        styles={{
+          file: {
+            width: 100,
+            height: 100,
+          },
+        }}
+        name="image-file.png"
+        src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+      />
+      <FileCard
         type="file"
         name="image-file.png"
         byte={1024}

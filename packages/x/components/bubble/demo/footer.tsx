@@ -21,7 +21,7 @@ const App = () => (
     <Flex gap="small" wrap>
       <div style={{ width: '100%' }}>
         <Bubble
-          content="外气泡尾外气泡尾"
+          content="outer footer"
           components={{
             header: 'footer',
             avatar: <Avatar icon={<UserOutlined />} />,
@@ -35,7 +35,7 @@ const App = () => (
     <Flex gap="small" wrap>
       <div style={{ width: '100%' }}>
         <Bubble
-          content="内气泡尾内气泡尾"
+          content="inner footer"
           placement="end"
           footerPlacement="inner-end"
           components={{
@@ -51,7 +51,7 @@ const App = () => (
     <Flex gap="small" wrap>
       <div style={{ width: '100%' }}>
         <Bubble
-          content="外气泡尾外气泡尾-右对齐"
+          content="outer footer and align right"
           footerPlacement="outer-end"
           components={{
             header: 'footer',
@@ -66,7 +66,7 @@ const App = () => (
     <Flex gap="small" wrap>
       <div style={{ width: '100%' }}>
         <Bubble
-          content="内气泡尾内气泡尾-左对齐"
+          content="inner footer and align left"
           placement="end"
           footerPlacement="inner-start"
           components={{

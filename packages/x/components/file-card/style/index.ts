@@ -34,7 +34,6 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
   return {
     [componentCls]: {
       display: 'flex',
-
       [`${componentCls}-file`]: {
         display: 'flex',
         alignItems: 'center',
@@ -43,7 +42,8 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
         borderRadius: paddingSM,
         position: 'relative',
         overflow: 'hidden',
-
+        boxSizing: 'border-box',
+        width: 268,
         '&-pointer': {
           cursor: 'pointer',
         },
@@ -58,7 +58,7 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
 
         [`${componentCls}-file-content`]: {
           flex: 1,
-          maxWidth: 275,
+          maxWidth: calc('100%').sub(calc(fontSizeHeading1).sub(2).equal()).sub(marginSM).equal(),
         },
 
         [`${componentCls}-file-name`]: {
@@ -128,8 +128,7 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
       },
 
       [`${componentCls}-image`]: {
-        width: 200,
-        height: 200,
+        width: 268,
         borderRadius: paddingSM,
         overflow: 'hidden',
 
@@ -137,17 +136,15 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
           height: '100%',
           objectFit: 'cover',
           borderRadius: 'inherit',
-        }
+        },
       },
-
-      [`${componentCls}-video`]: {
-        width: 548,
-        height: 308,
-        borderRadius: paddingSM,
-      },
-
       [`${componentCls}-audio`]: {
-        width: 300,
+        width: 268,
+      },
+      [`${componentCls}-video`]: {
+        width: 268,
+        aspectRatio: '16 / 9',
+        borderRadius: paddingSM,
       },
 
       [`&${componentCls}-rtl`]: {
@@ -171,7 +168,7 @@ const genFileCardListStyle: GenerateStyle<FileCardToken> = (token) => {
     motionDurationSlow,
     calc,
   } = token;
-  
+
   return {
     [`${componentCls}-list`]: {
       display: 'flex',
@@ -198,7 +195,9 @@ const genFileCardListStyle: GenerateStyle<FileCardToken> = (token) => {
       [`${componentCls}-list-item`]: {
         display: 'flex',
         position: 'relative',
-
+        [`${componentCls}-list-remove`]: {
+          transition: `opacity ${token.motionDurationMid} ${token.motionEaseOut}`,
+        },
         '&:hover': {
           [`${componentCls}-list-remove`]: {
             opacity: 1,
@@ -209,26 +208,26 @@ const genFileCardListStyle: GenerateStyle<FileCardToken> = (token) => {
       [`${componentCls}-list-motion`]: {
         transition: `opacity ${motionDurationSlow}`,
 
-        [`${componentCls}-file, ${componentCls}-image, ${componentCls}-video, ${componentCls}-audio`]: {
-          transition: ['width', 'padding']
-            .map((prop) => `${prop} ${motionDurationSlow}`)
-            .join(','),
-        },
+        [`${componentCls}-file, ${componentCls}-image, ${componentCls}-video, ${componentCls}-audio`]:
+          {
+            transition: ['width', 'padding']
+              .map((prop) => `${prop} ${motionDurationSlow}`)
+              .join(','),
+          },
 
         '&-leave-active': {
           opacity: 0,
           marginInlineEnd: calc(marginXS).mul(-1).equal(),
 
-          [`${componentCls}-file, ${componentCls}-image, ${componentCls}-video, ${componentCls}-audio`]: {
-            width: 0,
-            paddingInline: 0,
-          },
+          [`${componentCls}-file, ${componentCls}-image, ${componentCls}-video, ${componentCls}-audio`]:
+            {
+              width: 0,
+              paddingInline: 0,
+            },
         },
       },
 
       [`${componentCls}-file`]: {
-        width: 236,
-
         [`${componentCls}-file-content`]: {
           maxWidth: 156,
         },
@@ -258,7 +257,6 @@ const genFileCardListStyle: GenerateStyle<FileCardToken> = (token) => {
 
       // small size
       '&-small': {
-
         [`${componentCls}-list-remove`]: {
           fontSize: fontSize,
         },
@@ -372,8 +370,8 @@ const genFileCardListStyle: GenerateStyle<FileCardToken> = (token) => {
         },
       },
     },
-  }
-}
+  };
+};
 
 export const prepareComponentToken: GetDefaultToken<'FileCard'> = () => ({});
 

@@ -27,7 +27,6 @@ const ForwardThoughtChain = React.forwardRef<any, ThoughtChainProps>((props, ref
     classNames = {},
     line = true,
     style,
-
     ...restProps
   } = props;
 

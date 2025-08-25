@@ -15,6 +15,56 @@ tag: vVERSION
 
 ---
 
+## 2.0.0-alpha.4
+
+`2025-08-20`
+
+## 2.0.0-alpha.3
+
+`2025-08-14`
+
+## 2.0.0-alpha.2
+
+`2025-08-12`
+
+## 2.0.0-alpha.1
+
+`2025-08-12`
+
+### @ant-design/x
+
+- 🛠 重构升级组件 Bubble。
+- 🛠 重构升级组件 Bubble.List。
+
+## 2.0.0-alpha.0
+
+`2025-08-05`
+
+### @ant-design/x
+
+- 🔥 新组件 FileCard。
+- 🔥 新组件 Notification。
+- 🔥 新组件 Think。
+- 🛠 重构升级组件 Attachments。
+- 🛠 重构升级组件 Conversations。
+- 🛠 重构升级组件 Sender。
+- 🛠 重构升级组件 ThoughtChain。
+
+### @ant-design/x-markdown
+
+- 🔥 新组件 XMarkdown。
+- 🔥 新插件 Latex。
+- 🔥 新插件 HighlightCode。
+- 🔥 新插件 Mermaid。
+
+### @ant-design/x-sdk
+
+- 🔥 新工具 useXChat。
+- 🔥 新工具 useXConversations。
+- 🔥 新工具 Chat Provider。
+- 🔥 新工具 XRequest。
+- 🔥 新工具 XStream。
+
 ## 1.6.0
 
 `2025-07-30`
@@ -315,15 +365,15 @@ tag: vVERSION
 
 `2024-09-05`
 
-- 🔥 新组件 Bubble. [#19](https://github.com/ant-design/x/pull/19) [@li-jia-nan](https://github.com/li-jia-nan)
+- 🔥 新组件 Bubble。 [#19](https://github.com/ant-design/x/pull/19) [@li-jia-nan](https://github.com/li-jia-nan)
   - 🔥 Bubble 支持方向 [#52](https://github.com/ant-design/x/pull/52) [@li-jia-nan](https://github.com/li-jia-nan)
-- 🔥 新组件 Bubble.List. [#57](https://github.com/ant-design/x/pull/57) [@zombieJ](https://github.com/zombieJ)
-- 🔥 新组件 Conversations. [#48](https://github.com/ant-design/x/pull/48) [@YumoImer](https://github.com/YumoImer)
-- 🔥 新组件 Prompts. [#55](https://github.com/ant-design/x/pull/55) [@YumoImer](https://github.com/YumoImer)
-- 🔥 新组件 Sender. [#46](https://github.com/ant-design/x/pull/46) [@ONLY-yours](https://github.com/ONLY-yours)
-- 🔥 新组件 ThoughtChain. [#86](https://github.com/ant-design/x/pull/86) [@YumoImer](https://github.com/YumoImer)
-- 📦 使用 `father` 构建. [#84](https://github.com/ant-design/x/pull/84) [@zombieJ](https://github.com/zombieJ)
-- 🛠 修复使用 `antd` 的 es 或 lib 包时 ThemeContext 实例不一致的问题. [#88](https://github.com/ant-design/x/pull/88) [@YumoImer](https://github.com/YumoImer)
+- 🔥 新组件 Bubble.List。 [#57](https://github.com/ant-design/x/pull/57) [@zombieJ](https://github.com/zombieJ)
+- 🔥 新组件 Conversations。 [#48](https://github.com/ant-design/x/pull/48) [@YumoImer](https://github.com/YumoImer)
+- 🔥 新组件 Prompts。 [#55](https://github.com/ant-design/x/pull/55) [@YumoImer](https://github.com/YumoImer)
+- 🔥 新组件 Sender。 [#46](https://github.com/ant-design/x/pull/46) [@ONLY-yours](https://github.com/ONLY-yours)
+- 🔥 新组件 ThoughtChain。 [#86](https://github.com/ant-design/x/pull/86) [@YumoImer](https://github.com/YumoImer)
+- 📦 使用 `father` 构建。 [#84](https://github.com/ant-design/x/pull/84) [@zombieJ](https://github.com/zombieJ)
+- 🛠 修复使用 `antd` 的 es 或 lib 包时 ThemeContext 实例不一致的问题。 [#88](https://github.com/ant-design/x/pull/88) [@YumoImer](https://github.com/YumoImer)
 - 🛠 重构：API 命名规范 [#73](https://github.com/ant-design/x/pull/73) [@zombieJ](https://github.com/zombieJ)
 - 🛠 杂项：CI、Github Actions、发布
   - 🛠 [#59](https://github.com/ant-design/x/pull/59) [@zombieJ](https://github.com/zombieJ)

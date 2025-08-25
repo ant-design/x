@@ -59,7 +59,8 @@
         "noExplicitAny": "off",
         "noArrayIndexKey": "off",
         "noConfusingVoidType": "off",
-        "noThenProperty": "off"
+        "noThenProperty": "off",
+        "noTsIgnore": "off"
       },
       "performance": {
         "noDelete": "off",
@@ -103,15 +104,29 @@
       }
     },
     {
-      "includes": [
-        "**/packages/x/components/**/*/demo/**/*",
-        "**/packages/x-sdk/src/**/*",
-        "**/packages/x-markdown/src/**/*"
-      ],
+      "includes": ["**/packages/x/components/**/*/demo/**/*", "**/packages/x-sdk/src/**/*"],
       "linter": {
         "rules": {
           "correctness": {
             "noVoidTypeReturn": "off"
+          },
+          "a11y": {
+            "useValidAnchor": "off",
+            "useAnchorContent": "off",
+            "useKeyWithClickEvents": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["**/packages/x-markdown/src/**/*"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noVoidTypeReturn": "off"
+          },
+          "complexity": {
+            "noImportantStyles": "off"
           },
           "a11y": {
             "useValidAnchor": "off",

@@ -35,14 +35,10 @@ const File: React.FC<FileProps> = (props) => {
   } = props;
   const compCls = `${prefixCls}-file`;
 
-  const mergedCls = classnames(
-    compCls,
-    classNames.file,
-    {
-      [`${compCls}-pointer`]: !!onClick,
-      [`${compCls}-small`]: size === 'small',
-    },
-  );
+  const mergedCls = classnames(compCls, classNames.file, {
+    [`${compCls}-pointer`]: !!onClick,
+    [`${compCls}-small`]: size === 'small',
+  });
 
   const desc = useMemo(() => {
     if (description) {

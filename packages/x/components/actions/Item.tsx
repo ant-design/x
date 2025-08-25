@@ -12,15 +12,15 @@ const Item: React.FC<ActionsItemProps> = (props) => {
   const id = React.useId();
   const itemKey = item?.key || id;
 
-  if (item === null) {
+  if (!item) {
     return null;
   }
 
-  if (item?.actionRender) {
+  if (item.actionRender) {
     return item?.actionRender(item);
   }
 
-  if ('subItems' in item) {
+  if (item.subItems) {
     return (
       <ActionsMenu key={itemKey} item={item} onClick={onClick} dropdownProps={dropdownProps} />
     );
@@ -28,7 +28,7 @@ const Item: React.FC<ActionsItemProps> = (props) => {
 
   return (
     <div
-      className={classnames(`${prefixCls}-list-item`, classNames.item, {
+      className={classnames(`${prefixCls}-item`, classNames.item, {
         [`${prefixCls}-list-danger`]: item?.danger,
       })}
       style={styles.item}
@@ -47,7 +47,7 @@ const Item: React.FC<ActionsItemProps> = (props) => {
       key={itemKey}
     >
       <Tooltip title={item.label}>
-        <div className={`${prefixCls}-list-item-icon`}>{item?.icon}</div>
+        <div className={`${prefixCls}-icon`}>{item?.icon}</div>
       </Tooltip>
     </div>
   );

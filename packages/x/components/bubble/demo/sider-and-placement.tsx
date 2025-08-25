@@ -8,15 +8,15 @@ const App = () => (
     <Flex gap="small" wrap>
       <div style={{ width: '100%' }}>
         <Bubble
-          content="左对齐"
+          content="align left"
           components={{
             avatar: (
-              <Tooltip title="主侧">
+              <Tooltip title="main side">
                 <Avatar icon={<UserOutlined />} />
               </Tooltip>
             ),
             extra: () => (
-              <Tooltip title="扩展侧">
+              <Tooltip title="extra side">
                 <CopyOutlined />
               </Tooltip>
             ),
@@ -27,16 +27,16 @@ const App = () => (
     <Flex gap="small" wrap>
       <div style={{ width: '100%' }}>
         <Bubble
-          content="右对齐"
+          content="align right"
           placement="end"
           components={{
             avatar: (
-              <Tooltip title="主侧">
+              <Tooltip title="main side">
                 <Avatar icon={<UserOutlined />} />
               </Tooltip>
             ),
             extra: () => (
-              <Tooltip title="扩展侧">
+              <Tooltip title="extra side">
                 <CopyOutlined />
               </Tooltip>
             ),

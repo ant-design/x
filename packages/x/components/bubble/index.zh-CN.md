@@ -54,7 +54,7 @@ demo:
 | loadingRender | 自定义加载内容渲染 | () => React.ReactNode | - | - | 
 | content | 气泡内容 | [ContentType](#contenttype) | - | - | 
 | contentRender | 自定义内容渲染 | (content: ContentType) => React.ReactNode | - | - | 
-| editable | 是否可编辑 | boolean | `false` | - | 
+| editable | 是否可编辑 | boolean \| [EditableBubbleOption](#editablebubbleoption) | `false` | - | 
 | typing | 打字动画效果 | boolean \| [BubbleAnimationOption](#bubbleanimationoption) | `false` | - | 
 | streaming | 是否为流式传输 | boolean | `false` | - | 
 | variant | 气泡样式变体 | `filled` \| `outlined` \| `shadow` \| `borderless` | `filled` | - | 
@@ -73,6 +73,22 @@ demo:
 
 - 若你启用了输入动画，进行 **慢速加载** 时，会因为流式传输的速度跟不上动画速度而导致多次触发 `onTypingComplete`。
 - 若你关闭了输入动画，每一次的流式输入都会触发 `onTypingComplete`。
+
+#### Bubble.List autoScroll 顶对齐
+
+**Bubble.List** 的自动滚动方案其实是一个很简单的倒序排序方案，因此在固定高度的 **Bubble.List** 中，如果消息内容较少，没有撑满 **Bubble.List** 的高度，那么你会发现消息内容是底对齐的。故不推荐给 **Bubble.List** 设置固定高度，而是为 **Bubble.List** 的父容器添加固定高度，并把父容器设置为弹性布局 `display: flex` 且 `flex-direction: column`，这样 **Bubble.List** 在内容较少时会使用自适应高度且顶对齐。正如 [气泡列表](#bubble-demo-list) 中体现的一样。
+
+```tsx
+<div style={{ height: 600, display: 'flex', flexDirection: 'column' }}>
+  <Bubble.List items={items} autoScroll />
+</div>
+```
+
+如果你不想使用弹性布局，那么你可以为 **Bubble.List** 设置最大高度 `max-height`，这样在内容较少时，**Bubble.List** 的高度会自适应，呈现顶对齐效果。
+
+```tsx
+<Bubble.List items={items} autoScroll rootStyle={{ maxHeight: 600 }} />
+```
 
 ### Bubble.List 组件 API
 
@@ -107,6 +123,25 @@ type CustomContentType {
 
 ```typescript
 type BubbleSlot<ContentType> = React.ReactNode | ((content: ContentType) => React.ReactNode);
+```
+
+#### EditableBubbleOption
+
+```typescript
+interface EditableBubbleOption {
+  /**
+   * @description 是否可编辑
+   */
+  editing?: boolean;
+  /**
+   * @description 确认按钮
+   */
+  okText?: React.ReactNode;
+  /**
+   * @description 取消按钮
+   */
+  cancelText?: React.ReactNode;
+}
 ```
 
 #### BubbleAnimationOption

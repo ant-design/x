@@ -1,7 +1,7 @@
 import type { DropdownProps, MenuProps } from 'antd';
 import type React from 'react';
 
-export type SemanticType = 'root' | 'item' | 'itemDropdown' | 'footer';
+export type SemanticType = 'root' | 'item' | 'itemDropdown';
 
 export interface ActionsProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick' | 'footer'> {
@@ -20,11 +20,6 @@ export interface ActionsProps
     keyPath: string[];
     domEvent: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>;
   }) => void;
-  /**
-   * @desc 底部额外的React节点内容
-   * @descEN Additional React node content at the bottom.
-   */
-  footer?: React.ReactNode;
   /**
    * @desc 下拉菜单的配置属性
    * @descEN Configuration properties for dropdown menu

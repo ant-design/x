@@ -5,24 +5,60 @@ import { useLocale } from '../locale';
 import en_US from '../locale/en_US';
 import { BubbleProps, EditableBubbleOption } from './interface';
 
+/**
+ * 判断块级元素（跨浏览器）
+ * div.contentEditable 在换行时会注入块级元素以达成换行效果
+ * 编辑后提取格式化纯文本，需要识别出这些块级元素并替换为 \n
+ * */
+function isBlock(el: HTMLElement): boolean {
+  const d = getComputedStyle(el).display;
+  return d === 'block' || d === 'flex' || d === 'list-item' || d === 'table';
+}
+
+function getPlainTextWithFormat(dom: HTMLElement) {
+  const lines: string[] = [''];
+  const walker = document.createTreeWalker(dom, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT);
+
+  while (walker.nextNode()) {
+    const node = walker.currentNode as HTMLElement;
+
+    if (node.nodeType === Node.TEXT_NODE) {
+      // textContent 拒绝直接 xss
+      lines[lines.length - 1] += node.textContent;
+      continue;
+    }
+
+    // 单纯空行结构 <div><br></div>（chrome/edge/safari/firefox)，仅保留一个换行
+    if (node.tagName === 'BR' && node.parentNode?.childElementCount === 1) {
+      continue;
+    }
+
+    // 换行
+    if (node.tagName === 'BR' || isBlock(node)) {
+      lines.push('');
+    }
+  }
+
+  return lines.join('\n');
+}
+
 export const EditableContent: React.FC<{
   content: string;
   prefixCls: BubbleProps['prefixCls'];
   okText?: EditableBubbleOption['okText'];
   cancelText?: EditableBubbleOption['cancelText'];
   onEditConfirm?: BubbleProps['onEditConfirm'];
-  onEditCancle?: BubbleProps['onEditCancle'];
-}> = ({ content, prefixCls, okText, cancelText, onEditConfirm, onEditCancle }) => {
+  onEditCancel?: BubbleProps['onEditCancel'];
+}> = ({ content, prefixCls, okText, cancelText, onEditConfirm, onEditCancel }) => {
   const mockInputRef = React.useRef<HTMLDivElement>(null);
 
   const [contextLocale] = useLocale('Bubble', en_US.Bubble);
 
-  const onConfirm = useEvent(() =>
-    // textContent 拒绝直接 xss
+  const onConfirm = useEvent(() => {
     // 但 onEditing 端应该对入参做 xss 防护
-    onEditConfirm?.(mockInputRef.current!.textContent || ''),
-  );
-  const onCancel = useEvent(() => onEditCancle?.());
+    onEditConfirm?.(getPlainTextWithFormat(mockInputRef.current!));
+  });
+  const onCancel = useEvent(() => onEditCancel?.());
 
   React.useEffect(() => {
     mockInputRef.current!.textContent = content;

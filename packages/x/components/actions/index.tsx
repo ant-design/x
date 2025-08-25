@@ -4,7 +4,10 @@ import React from 'react';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
+import ActionsAudio from './ActionsAudio';
+import ActionsCopy from './ActionsCopy';
 import ActionsFeedback from './ActionsFeedback';
+import ActionsItem from './ActionsItem';
 import { ActionsContext } from './context';
 import Item from './Item';
 import type { ActionsProps } from './interface';
@@ -13,12 +16,10 @@ import useStyle from './style';
 type ActionsRef = {
   nativeElement: HTMLDivElement;
 };
-
 const ForwardActions = React.forwardRef<ActionsRef, ActionsProps>((props, ref) => {
   const {
     items = [],
     onClick,
-    footer,
     dropdownProps = {},
     variant = 'borderless',
     prefixCls: customizePrefixCls,
@@ -64,7 +65,6 @@ const ForwardActions = React.forwardRef<ActionsRef, ActionsProps>((props, ref) =
 
   // ============================= Refs =============================
   const containerRef = React.useRef<HTMLDivElement>(null);
-
   useProxyImperativeHandle(ref, () => {
     return {
       nativeElement: containerRef.current!,
@@ -72,7 +72,6 @@ const ForwardActions = React.forwardRef<ActionsRef, ActionsProps>((props, ref) =
   });
 
   // ============================= Render =============================
-
   return (
     <div ref={containerRef} {...domProps} className={mergedCls} style={mergedStyle}>
       <ActionsContext.Provider
@@ -96,12 +95,6 @@ const ForwardActions = React.forwardRef<ActionsRef, ActionsProps>((props, ref) =
             return <Item item={item} onClick={onClick} dropdownProps={dropdownProps} key={idx} />;
           })}
         </div>
-
-        {footer && (
-          <div className={classNames.footer} style={styles.footer}>
-            {footer}
-          </div>
-        )}
       </ActionsContext.Provider>
     </div>
   );
@@ -109,6 +102,9 @@ const ForwardActions = React.forwardRef<ActionsRef, ActionsProps>((props, ref) =
 
 type CompoundedActions = typeof ForwardActions & {
   Feedback: typeof ActionsFeedback;
+  Copy: typeof ActionsCopy;
+  Item: typeof ActionsItem;
+  Audio: typeof ActionsAudio;
 };
 
 const Actions = ForwardActions as CompoundedActions;
@@ -118,5 +114,8 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 Actions.Feedback = ActionsFeedback;
+Actions.Copy = ActionsCopy;
+Actions.Item = ActionsItem;
+Actions.Audio = ActionsAudio;
 
 export default Actions;

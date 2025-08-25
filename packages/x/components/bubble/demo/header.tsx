@@ -8,7 +8,7 @@ const App = () => (
     <Flex gap="small" wrap>
       <div style={{ width: '100%' }}>
         <Bubble
-          content="左对齐 header"
+          content="align left"
           components={{
             header: 'header',
             avatar: <Avatar icon={<UserOutlined />} />,
@@ -19,7 +19,7 @@ const App = () => (
     <Flex gap="small" wrap>
       <div style={{ width: '100%' }}>
         <Bubble
-          content="右对齐 header"
+          content="align right"
           placement="end"
           components={{
             header: 'header',

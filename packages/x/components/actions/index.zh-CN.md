@@ -6,8 +6,8 @@ group:
 title: Actions
 subtitle: 操作列表
 description: 用于快速配置一些 AI 场景下所需要的操作按钮/功能。
-cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*1ysXSqEnAckAAAAAAAAAAAAADgCCAQ/original
-coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*EkYUTotf-eYAAAAAAAAAAAAADgCCAQ/original
+cover: https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/DAQYQqFa5n0AAAAAQFAAAAgADtFMAQFr/original
+coverDark: https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/bcXhRphVOuIAAAAAQFAAAAgADtFMAQFr/original
 demo:
   cols: 1
 ---
@@ -34,7 +34,6 @@ Actions 组件用于快速配置一些 AI 场景下所需要的操作按钮/功�
 | --- | --- | --- | --- | --- |
 | items | 包含多个操作项的列表 | ([ItemType](#itemtype) \| ReactNode)[] | - | - |
 | onClick | 组件被点击时的回调函数 | function({ item, key, keyPath, domEvent }) | - | - |
-| footer | 底部额外的React节点内容 | ReactNode | - | - |
 | dropdownProps | 下拉菜单的配置属性 | DropdownProps | - | - |
 | variant | 变体 | `borderless` \| `outlined` \|`filled` | `borderless` | - |
 
@@ -57,6 +56,28 @@ Actions 组件用于快速配置一些 AI 场景下所需要的操作按钮/功�
 | --- | --- | --- | --- | --- |
 | value | 反馈状态值 | `like` \| `dislike` \| `default` | `default` | - |
 | onChange | 反馈状态变化回调 | (value: `like` \| `dislike` \| `default`) => void | - | - |
+
+### Actions.Copy
+
+| 属性 | 说明       | 类型            | 默认值 | 版本 |
+| ---- | ---------- | --------------- | ------ | ---- |
+| text | 复制的文本 | string          | ''     | -    |
+| icon | 复制按钮   | React.ReactNode | -      | -    |
+
+### Actions.Audio
+
+| 属性   | 说明     | 类型                                     | 默认值  | 版本 |
+| ------ | -------- | ---------------------------------------- | ------- | ---- |
+| status | 播放状态 | 'loading'\|'error'\|'running'\|'default' | default | -    |
+
+### Actions.Item
+
+| 属性        | 说明                 | 类型                                     | 默认值  | 版本 |
+| ----------- | -------------------- | ---------------------------------------- | ------- | ---- |
+| status      | 状态                 | 'loading'\|'error'\|'running'\|'default' | default | -    |
+| label       | 自定义操作的显示标签 | string                                   | -       | -    |
+| defaultIcon | 默认状态图标         | React.ReactNode                          | -       | -    |
+| runningIcon | 执行状态图标         | React.ReactNode                          | -       | -    |
 
 ## Semantic DOM
 

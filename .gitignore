@@ -28,7 +28,7 @@ dist
 report.html
 lib
 es
-locale
+
 elasticsearch-*
 config/base.yaml
 /.vscode/
@@ -50,12 +50,8 @@ artifacts.zip
 oss-artifacts.zip
 server/
 
-# Docs templates
-packages/x/scripts/previewEditor/index.html
-packages/x/components/version/version.ts
-packages/x/components/version/version.tsx
-packages/x/components/version/token.json
-packages/x/components/version/token-meta.json
+
+
 packages/*/.dumi/tmp
 packages/*/.dumi/tmp-test
 packages/*/.dumi/tmp-production
@@ -82,3 +78,18 @@ examples/
 
 packages/x-markdown/plugins
 packages/x-markdown/themes
+
+packages/x/locale
+
+# Docs templates
+packages/x/scripts/previewEditor/index.html
+packages/x/components/version/version.ts
+packages/x/components/version/version.tsx
+packages/x/components/version/token.json
+packages/x/components/version/token-meta.json
+
+packages/x-markdown/src/plugins/version/version.ts
+packages/x-markdown/src/plugins/version/plugin-meta.json
+packages/x-markdown/src/version/version.ts
+
+packages/x-sdk/src/version/version.ts
