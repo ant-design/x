@@ -3,7 +3,7 @@ import type { GenerateStyle } from 'antd/es/theme/internal';
 import { genStyleHooks } from '../../theme/genStyleUtils';
 import type { FullToken } from '../../theme/useToken';
 
-export interface ComponentToken {}
+export type ComponentToken = {};
 
 export interface HighlightCodeToken extends FullToken<'HighlightCode'> {}
 
