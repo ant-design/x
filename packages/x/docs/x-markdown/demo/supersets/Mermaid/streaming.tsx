@@ -71,14 +71,12 @@ const roles: BubbleListProps['role'] = {
   },
 };
 
-const Code = (props: any) => {
+const Code = (props: { class: string; children: string }) => {
   const { class: className, children } = props;
   const lang = className?.replace('language-', '');
-
   if (lang === 'mermaid') {
     return <Mermaid>{children}</Mermaid>;
   }
-  return <code>{children}</code>;
 };
 
 const App = () => {

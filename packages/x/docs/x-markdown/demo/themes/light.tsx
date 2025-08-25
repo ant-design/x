@@ -108,6 +108,22 @@ export default App;
 
 `;
 
-const App = () => <XMarkdown content={content} className="x-markdown-light" />;
+const App = () => {
+  const [className, setClassName] = React.useState('x-markdown-light');
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const theme = urlParams.get('theme');
+      setClassName(theme === 'dark' ? 'x-markdown-dark' : 'x-markdown-light');
+    }
+  }, []);
+
+  return (
+    <div style={{ background: '#fff', padding: 16, borderRadius: 6 }}>
+      <XMarkdown content={content} className={className} />
+    </div>
+  );
+};
 
 export default App;

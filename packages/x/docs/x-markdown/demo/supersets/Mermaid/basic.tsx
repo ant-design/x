@@ -53,17 +53,19 @@ quadrantChart
 \`\`\`
 `;
 
+const Code = (props: { class: string; children: string }) => {
+  const { class: className, children } = props;
+  const lang = className?.replace('language-', '');
+  if (lang === 'mermaid') {
+    return <Mermaid>{children}</Mermaid>;
+  }
+};
+
 const App = () => {
   return (
     <XMarkdown
       components={{
-        code: (props: any) => {
-          const { class: className, children } = props;
-          const lang = className?.replace('language-', '');
-          if (lang === 'mermaid') {
-            return <Mermaid>{children}</Mermaid>;
-          }
-        },
+        code: Code,
       }}
     >
       {content}

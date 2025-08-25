@@ -113,6 +113,15 @@ const roles: BubbleListProps['role'] = {
 const App: React.FC = () => {
   const [hasNextChunk, setHasNextChunk] = useState(false);
   const [content, setContent] = React.useState('');
+  const [className, setClassName] = React.useState('x-markdown-light');
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const theme = urlParams.get('theme');
+      setClassName(theme === 'dark' ? 'x-markdown-dark' : 'x-markdown-light');
+    }
+  }, []);
 
   // Agent for request
   const [agent] = useXAgent<string, { message: string }, string>({
@@ -152,7 +161,7 @@ const App: React.FC = () => {
               ? undefined
               : (content) => (
                   <XMarkdown
-                    className="x-markdown-light"
+                    className={className}
                     content={content as string}
                     streaming={{
                       hasNextChunk: hasNextChunk,

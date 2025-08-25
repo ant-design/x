@@ -7,14 +7,12 @@ const locales = {
   cn: {
     root: '根节点',
     header: '头部的容器',
-    headerTitle: '标题',
     graph: '图片的容器',
     code: '代码容器',
   },
   en: {
     root: 'root',
     header: 'Wrapper element of the header',
-    headerTitle: 'Wrapper element of the headerTitle',
     graph: 'Wrapper element of the graph',
     code: 'Wrapper element of the code',
   },
@@ -40,7 +38,6 @@ const App: React.FC = () => {
       semantics={[
         { name: 'root', desc: locale.root },
         { name: 'header', desc: locale.header },
-        { name: 'headerTitle', desc: locale.headerTitle },
         { name: 'graph', desc: locale.graph },
         { name: 'code', desc: locale.code },
       ]}
