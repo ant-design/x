@@ -150,22 +150,27 @@ interface EditableBubbleOption {
 interface BubbleAnimationOption {
   /**
    * @description 动画效果类型，打字机，渐入
+   * @default 'fade-in'
    */
   effect: 'typing' | 'fade-in';
   /**
    * @description 内容步进单位，数组格式为随机区间
+   * @default 6
    */
   step?: number | [number, number];
   /**
    * @description 动画触发间隔
+   * @default 100
    */
   interval?: number;
   /**
    * @description 重新开始一段动画时是否保留文本的公共前缀
+   * @default true
    */
   keepPrefix?: boolean;
   /**
    * @description 打字机效果下步进UI
+   * @default undefined
    */
   suffix?: React.ReactNode;
 }

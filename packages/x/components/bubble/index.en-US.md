@@ -149,22 +149,27 @@ interface EditableBubbleOption {
 interface BubbleAnimationOption {
   /**
    * @description Animation effect type, typewriter, fade
+   * @default 'fade-in'
    */
   effect: 'typing' | 'fade-in';
   /**
    * @description Content step units, array format as random intervals
+   * @default 6
    */
   step?: number | [number, number];
   /**
    * @description Animation trigger interval
+   * @default 100
    */
   interval?: number;
   /**
    * @description Whether to restart an animation with the common prefix of the text
+   * @default true
    */
   keepPrefix?: boolean;
   /**
    * @description Stepping UI under typewriter effect
+   * @default undefined
    */
   suffix?: React.ReactNode;
 }
