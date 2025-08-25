@@ -108,10 +108,16 @@ export default App;
 
 `;
 
-const App = () => (
-  <div style={{ background: '#fff', padding: 16, borderRadius: 6 }}>
-    <XMarkdown content={content} className="x-markdown-light" />
-  </div>
-);
+const App = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const theme = urlParams.get('theme');
+  const className = theme === 'dark' ? 'x-markdown-dark' : 'x-markdown-light';
+
+  return (
+    <div style={{ background: '#fff', padding: 16, borderRadius: 6 }}>
+      <XMarkdown content={content} className={className} />
+    </div>
+  );
+};
 
 export default App;

@@ -82,6 +82,10 @@ const referenceList = [
 ];
 
 const App = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const theme = urlParams.get('theme');
+  const className = theme === 'dark' ? 'x-markdown-dark' : 'x-markdown-light';
+
   const footNoteExtension = {
     name: 'footnote',
     level: 'inline' as const,
@@ -114,7 +118,7 @@ const App = () => {
 
   return (
     <XMarkdown
-      className="x-markdown-light"
+      className={className}
       config={{ extensions: [footNoteExtension] }}
       components={{
         footnote: (props: { children: string; href: string; title: string }) => {

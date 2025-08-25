@@ -68,6 +68,9 @@ const roles: BubbleListProps['role'] = {
 const App = () => {
   const [enableAnimation, setEnableAnimation] = useState(true);
   const [content, setContent] = React.useState('');
+  const urlParams = new URLSearchParams(window.location.search);
+  const theme = urlParams.get('theme');
+  const className = theme === 'dark' ? 'x-markdown-dark' : 'x-markdown-light';
 
   // Agent for request
   const [agent] = useXAgent<string, { message: string }, string>({
@@ -114,7 +117,7 @@ const App = () => {
               ? undefined
               : (content) => (
                   <XMarkdown
-                    className="x-markdown-light"
+                    className={className}
                     content={content as string}
                     streaming={{ enableAnimation }}
                   />

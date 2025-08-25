@@ -106,6 +106,10 @@ const Footnote = (props: { children: string; href: string; title: string }) => {
 };
 
 const App: React.FC = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const theme = urlParams.get('theme');
+  const className = theme === 'dark' ? 'x-markdown-dark' : 'x-markdown-light';
+
   const footNoteExtension = {
     name: 'footnote',
     level: 'inline' as const,
@@ -138,7 +142,7 @@ const App: React.FC = () => {
 
   return (
     <XMarkdown
-      className="x-markdown-light"
+      className={className}
       config={{ extensions: [footNoteExtension] }}
       components={{ footnote: Footnote }}
     >
