@@ -127,10 +127,15 @@ Like links, Images also have a footnote style syntax
 `;
 
 const App: React.FC = () => {
-  const urlParams = new URLSearchParams(window?.location?.search);
-  const theme = urlParams.get('theme');
+  const [className, setClassName] = React.useState('x-markdown-light');
 
-  const className = theme === 'dark' ? 'x-markdown-dark' : 'x-markdown-light';
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const theme = urlParams.get('theme');
+      setClassName(theme === 'dark' ? 'x-markdown-dark' : 'x-markdown-light');
+    }
+  }, []);
 
   return <XMarkdown content={content} className={className} />;
 };

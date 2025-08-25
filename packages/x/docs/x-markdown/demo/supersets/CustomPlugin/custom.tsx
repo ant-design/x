@@ -82,9 +82,15 @@ const referenceList = [
 ];
 
 const App = () => {
-  const urlParams = new URLSearchParams(window?.location?.search);
-  const theme = urlParams.get('theme');
-  const className = theme === 'dark' ? 'x-markdown-dark' : 'x-markdown-light';
+  const [className, setClassName] = React.useState('x-markdown-light');
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const theme = urlParams.get('theme');
+      setClassName(theme === 'dark' ? 'x-markdown-dark' : 'x-markdown-light');
+    }
+  }, []);
 
   const footNoteExtension = {
     name: 'footnote',
