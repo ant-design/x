@@ -42,6 +42,8 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const id = `mermaid-${uuid++}-${children?.length || 0}`;
 
+  const [messageApi] = message.useMessage();
+
   // ============================ style ============================
   const { getPrefixCls, direction } = useXProviderContext();
   const prefixCls = getPrefixCls('mermaid', customizePrefixCls);
@@ -167,7 +169,10 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
 
     try {
       await navigator.clipboard.writeText(children.trim());
-      message.success('复制成功');
+      messageApi.open({
+        type: 'success',
+        content: '复制成功',
+      });
     } catch (error) {
       console.error('Failed to copy code:', error);
     }

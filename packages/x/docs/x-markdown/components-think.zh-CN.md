@@ -1,6 +1,7 @@
 ---
 group:
   title: 自定义组件
+  order: 2
 title: Think
 subtitle: 思考过程
 order: 1

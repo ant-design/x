@@ -59,6 +59,7 @@ const Code = (props: { class: string; children: string }) => {
   if (lang === 'mermaid') {
     return <Mermaid>{children}</Mermaid>;
   }
+  return <code>{children}</code>;
 };
 
 const App = () => {

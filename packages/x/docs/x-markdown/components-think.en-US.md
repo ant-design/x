@@ -1,8 +1,8 @@
 ---
 group:
   title: Custom Components
+  order: 2
 title: Think
-subtitle: Thinking Process
 order: 1
 ---
 

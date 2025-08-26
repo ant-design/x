@@ -2,7 +2,7 @@ import { CheckCircleOutlined, InfoCircleOutlined, LoadingOutlined } from '@ant-d
 import type { ThoughtChainItem } from '@ant-design/x';
 import { Bubble, ThoughtChain } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
-import { Avatar, Button, Card, Flex } from 'antd';
+import { Avatar, Button, Card, Flex, Spin } from 'antd';
 import React from 'react';
 
 function getStatusIcon(status: ThoughtChainItem['status']) {
@@ -86,6 +86,8 @@ const ThoughtComponent = (props: { children: string }) => {
   if (props.children.endsWith('}]')) {
     const data = JSON.parse(props.children) as ThoughtChainItem[];
     return <Thought items={data} />;
+  } else {
+    return <Spin />;
   }
 };
 
