@@ -1,18 +1,20 @@
 import { CloseCircleFilled, LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import classnames from 'classnames';
-import React from 'react';
 import { CSSMotionList } from 'rc-motion';
+import React from 'react';
 import { useXProviderContext } from '../x-provider';
-import FileCard, { FileCardProps } from './FileCard';
+import FileCard, { SemanticType as CardSemanticType, FileCardProps } from './FileCard';
 import useStyle from './style';
 
+export type SemanticType = 'root' | 'card';
 export interface FileCardListProps {
   prefixCls?: string;
   className?: string;
-  classNames?: Partial<Record<'root' | 'file', string>>;
+  classNames?: Partial<Record<SemanticType | CardSemanticType, string>>;
+  rootClassName?: string;
   style?: React.CSSProperties;
-  styles?: Partial<Record<'root' | 'file', React.CSSProperties>>;
+  styles?: Partial<Record<SemanticType | CardSemanticType, React.CSSProperties>>;
   items: FileCardProps[];
   size?: 'small' | 'default';
   removable?: boolean | ((item: FileCardProps) => boolean);
@@ -25,6 +27,7 @@ const List: React.FC<FileCardListProps> = (props) => {
   const {
     prefixCls: customizePrefixCls,
     className,
+    rootClassName,
     classNames = {},
     style,
     styles = {},
@@ -38,12 +41,12 @@ const List: React.FC<FileCardListProps> = (props) => {
 
   const containerRef = React.useRef<HTMLDivElement>(null);
 
-  const [list, setList] = React.useState<(FileCardProps & {key: React.Key})[]>([]);
+  const [list, setList] = React.useState<(FileCardProps & { key: React.Key })[]>([]);
 
   React.useEffect(() => {
-    const list = items.map((item) => ({
+    const list = items.map((item, index) => ({
       ...item,
-      key: item.key || item.name,
+      key: item.key || `${item.name}-${index}`,
     }));
     setList(list);
   }, [items]);
@@ -56,10 +59,12 @@ const List: React.FC<FileCardListProps> = (props) => {
   const [pingStart, setPingStart] = React.useState(false);
   const [pingEnd, setPingEnd] = React.useState(false);
 
+  const { root: classNameRoot, card: classNameCard, ...classNameOther } = classNames;
   const mergedCls = classnames(
     compCls,
+    rootClassName,
     className,
-    classNames?.root,
+    classNameRoot,
     hashId,
     cssVarCls,
     {
@@ -81,7 +86,8 @@ const List: React.FC<FileCardListProps> = (props) => {
     if (overflow === 'scrollX') {
       setPingStart(Math.abs(containerEle.scrollLeft) >= 1);
       setPingEnd(
-        containerEle.scrollWidth - containerEle.clientWidth - Math.abs(containerEle.scrollLeft) >= 1,
+        containerEle.scrollWidth - containerEle.clientWidth - Math.abs(containerEle.scrollLeft) >=
+          1,
       );
     } else if (overflow === 'scrollY') {
       setPingStart(containerEle.scrollTop !== 0);
@@ -117,12 +123,19 @@ const List: React.FC<FileCardListProps> = (props) => {
     setList(newList);
     onRemove?.(item);
   };
+  const { root, card, ...other } = styles;
 
   return (
     <div className={`${compCls}-wrapper`}>
-      <div className={mergedCls} dir={direction} style={{...style, ...styles?.root}} ref={containerRef} onScroll={checkPing}>
+      <div
+        className={mergedCls}
+        dir={direction}
+        style={{ ...style, ...styles?.root }}
+        ref={containerRef}
+        onScroll={checkPing}
+      >
         <CSSMotionList
-          keys={list.map(item => ({ key: item.key, item }))}
+          keys={list.map((item) => ({ key: item.key, item }))}
           motionName={`${compCls}-motion`}
           component={false}
           motionAppear={false}
@@ -131,13 +144,19 @@ const List: React.FC<FileCardListProps> = (props) => {
         >
           {({ key, item, className: motionCls, style: motionStyle }) => {
             return (
-              <div className={classnames(`${compCls}-item`, motionCls)} style={motionStyle} key={key}>
+              <div
+                className={classnames(`${compCls}-item`, motionCls)}
+                style={{ ...motionStyle, ...root }}
+                key={key}
+              >
                 <FileCard
                   {...item}
                   size={size}
                   key={key}
-                  className={classnames(item.className, classNames?.file)}
-                  style={{ ...item.style, ...styles?.file }}
+                  className={classnames(item.className, classNameCard)}
+                  classNames={classNameOther}
+                  style={{ ...item.style, ...styles?.card }}
+                  styles={other}
                 />
                 {(typeof removable === 'function' ? removable(item) : removable) && (
                   <div className={`${compCls}-remove`} onClick={() => handleRemove(item, key)}>

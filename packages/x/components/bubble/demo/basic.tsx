@@ -16,9 +16,11 @@ const actionItems = [
   },
 ];
 
+const text = `Hello World\nNext line\nTab\tindent`;
+
 const App = () => (
   <Bubble
-    content="Hello World"
+    content={text}
     typing={{ effect: 'fade-in', suffix: '...' }}
     components={{
       header: <h5>Ant Design X</h5>,

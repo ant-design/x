@@ -11,6 +11,9 @@ enum VARIANT {
   OUTLINED = 'outlined',
   TEXT = 'text',
 }
+
+export type SemanticType = 'root' | 'icon' | 'title' | 'description';
+
 export interface ThoughtChainItemProp
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title' | 'content'> {
   /**
@@ -59,6 +62,10 @@ export interface ThoughtChainItemProp
    * @descEN Thought chain item variant
    */
   variant?: `${VARIANT}`;
+  className?: string;
+  classNames?: Partial<Record<SemanticType, string>>;
+  style?: React.CSSProperties;
+  styles?: Partial<Record<SemanticType, React.CSSProperties>>;
 }
 
 type ItemRef = {
@@ -71,6 +78,10 @@ const Item = React.forwardRef<ItemRef, ThoughtChainItemProp>((props, ref) => {
     variant = 'solid',
     prefixCls: customizePrefixCls,
     rootClassName,
+    className,
+    classNames,
+    style,
+    styles,
     title,
     icon,
     status,
@@ -109,18 +120,47 @@ const Item = React.forwardRef<ItemRef, ThoughtChainItemProp>((props, ref) => {
       ref={itemRef}
       key={key || id}
       onClick={onClick}
+      style={style}
+      className={classnames(
+        prefixCls,
+        hashId,
+        className,
+        cssVarCls,
+        rootClassName,
+        classNames?.root,
+        itemCls,
+        {
+          [`${itemCls}-${variant}`]: variant,
+          [`${itemCls}-click`]: onClick,
+          [`${itemCls}-error`]: status === THOUGHT_CHAIN_ITEM_STATUS.ERROR,
+          [`${itemCls}-rtl`]: direction === 'rtl',
+        },
+      )}
       {...domProps}
-      className={classnames(prefixCls, hashId, cssVarCls, rootClassName, itemCls, {
-        [`${itemCls}-${variant}`]: variant,
-        [`${itemCls}-click`]: onClick,
-        [`${itemCls}-error`]: status === THOUGHT_CHAIN_ITEM_STATUS.ERROR,
-        [`${itemCls}-rtl`]: direction === 'rtl',
-      })}
     >
-      {(status || icon) && <Status prefixCls={prefixCls} icon={icon} status={status} />}
+      {(status || icon) && (
+        <Status
+          style={styles?.icon}
+          className={classNames?.icon}
+          prefixCls={prefixCls}
+          icon={icon}
+          status={status}
+        />
+      )}
       <div className={classnames(`${itemCls}-content`)}>
-        {title && <div className={classnames(`${itemCls}-title`)}>{title}</div>}
-        {description && <div className={classnames(`${itemCls}-description`)}>{description}</div>}
+        {title && (
+          <div style={styles?.title} className={classnames(`${itemCls}-title`, classNames?.title)}>
+            {title}
+          </div>
+        )}
+        {description && (
+          <div
+            style={styles?.description}
+            className={classnames(`${itemCls}-description`, classNames?.description)}
+          >
+            {description}
+          </div>
+        )}
       </div>
     </div>
   );

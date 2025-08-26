@@ -1,10 +1,10 @@
 import classnames from 'classnames';
-import React from 'react';
 import pickAttrs from 'rc-util/lib/pickAttrs';
+import React from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 import { EditableContent } from './EditableContent';
-import {
+import type {
   BubbleAnimationOption,
   BubbleContentType,
   BubbleProps,
@@ -87,11 +87,11 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
     },
   );
 
-    const domProps = pickAttrs(restProps, {
-      attr: true,
-      aria: true,
-      data: true,
-    });
+  const domProps = pickAttrs(restProps, {
+    attr: true,
+    aria: true,
+    data: true,
+  });
 
   // ============================= process content ==============================
   const memoedContent = React.useMemo(
@@ -136,8 +136,8 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
           memoedContent
         )}
         {!usingInnerAnimation &&
-          (typing as BubbleAnimationOption)?.effect === 'typing' &&
-          (typing as BubbleAnimationOption)?.suffix
+        (typing as BubbleAnimationOption)?.effect === 'typing' &&
+        (typing as BubbleAnimationOption)?.suffix
           ? (typing as BubbleAnimationOption).suffix
           : null}
       </>
@@ -243,7 +243,13 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
   };
 
   return (
-    <div className={rootMergedCls} style={rootMergedStyle} {...restProps} {...domProps} ref={rootDiv}>
+    <div
+      className={rootMergedCls}
+      style={rootMergedStyle}
+      {...restProps}
+      {...domProps}
+      ref={rootDiv}
+    >
       {renderAvatar()}
       {renderContent()}
       {!isEditing && !loading && renderExtra()}

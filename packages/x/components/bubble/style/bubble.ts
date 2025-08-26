@@ -71,6 +71,7 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
         fontSize: token.fontSize,
         lineHeight: token.lineHeight,
         wordBreak: 'break-word',
+        whiteSpace: 'pre-wrap',
       },
 
       '&-typing:last-child::after': {
