@@ -3,4 +3,4 @@ export { default as AnimationNode, AnimationText } from './XMarkdown/AnimationNo
 export { useStreaming, useAnimation } from './XMarkdown/hooks';
 
 export { default as version } from './version';
-export type { XMarkdownProps, Token, Tokens } from './XMarkdown/interface.ts';
+export type { XMarkdownProps, Token, Tokens, streamStatus } from './XMarkdown/interface.ts';

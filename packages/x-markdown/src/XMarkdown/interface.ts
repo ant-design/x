@@ -22,22 +22,12 @@ interface SteamingOption {
   animationConfig?: ControllerUpdate;
 }
 
-export interface ComponentProps {
-  /**
-   * @description html react parser node
-   */
-  domNode: DOMNode;
-  /**
-   * @description stream render status
-   */
-  streamStatus: 'loading' | 'done';
-  [key: string]: any;
-}
+type streamStatus = 'loading' | 'done';
 
 interface XMarkdownProps {
   content?: string;
   children?: string;
-  components?: Record<string, React.ComponentType<ComponentProps>>;
+  components?: Record<string, any>;
   streaming?: SteamingOption;
   config?: MarkedExtension;
   rootClassName?: string;
@@ -47,4 +37,4 @@ interface XMarkdownProps {
   prefixCls?: string;
 }
 
-export type { XMarkdownProps, Token, Tokens };
+export type { XMarkdownProps, Token, Tokens, streamStatus };
