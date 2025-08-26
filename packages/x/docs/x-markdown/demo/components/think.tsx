@@ -31,23 +31,27 @@ const roles: BubbleListProps['role'] = {
   },
 };
 
-const ThinkComponent = React.memo((props: { children: string; status: string }) => {
-  const [title, setTitle] = React.useState('Deep thinking...');
-  const [loading, setLoading] = React.useState(true);
+const ThinkComponent = React.memo(
+  (props: { streamStatus: string; children: string; status: string }) => {
+    const [title, setTitle] = React.useState('Deep thinking...');
+    const [loading, setLoading] = React.useState(true);
+    const [expand, setExpand] = React.useState(true);
 
-  React.useEffect(() => {
-    if (props.status === 'done') {
-      setTitle('Complete thinking');
-      setLoading(false);
-    }
-  }, [props.status]);
+    React.useEffect(() => {
+      if (props.streamStatus === 'done') {
+        setTitle('Complete thinking');
+        setLoading(false);
+        setExpand(false);
+      }
+    }, [props.streamStatus]);
 
-  return (
-    <Think title={title} loading={loading}>
-      {props.children}
-    </Think>
-  );
-});
+    return (
+      <Think title={title} loading={loading} expanded={expand} onClick={() => setExpand(!expand)}>
+        {props.children}
+      </Think>
+    );
+  },
+);
 
 const App: React.FC = () => {
   const [content, setContent] = React.useState('');
@@ -71,20 +75,8 @@ const App: React.FC = () => {
         currentContent = fullContent.slice(0, currentContent.length + addCount);
         onUpdate(currentContent);
         if (currentContent === fullContent) {
-          const thinkContent = currentContent.replace(
-            /<think.*?>([\s\S]*?)<\/think>/gi,
-            (match, content) => {
-              try {
-                return `<think status="done">${content}</think>`;
-              } catch (error) {
-                console.error(error);
-                return match;
-              }
-            },
-          );
-          onUpdate(thinkContent);
           clearInterval(id);
-          onSuccess([thinkContent]);
+          onSuccess([currentContent]);
         }
       }, 100);
     },

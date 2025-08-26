@@ -8,12 +8,12 @@ type ParserOptions = {
 
 class Parser {
   options: ParserOptions;
-  markdownParser: Marked;
+  markdownInstance: Marked;
 
   constructor(options: ParserOptions = {}) {
     const { markedConfig = {} } = options;
     this.options = options;
-    this.markdownParser = new Marked(markedConfig);
+    this.markdownInstance = new Marked(markedConfig);
     this.configureParagraph();
   }
 
@@ -26,11 +26,11 @@ class Parser {
         return `<${paragraphTag}>${this.parser.parseInline(tokens)}</${paragraphTag}>\n`;
       },
     };
-    this.markdownParser.use({ renderer });
+    this.markdownInstance.use({ renderer });
   }
 
   public parse(content: string) {
-    return this.markdownParser.parse(content) as string;
+    return this.markdownInstance.parse(content) as string;
   }
 }
 

@@ -10,8 +10,6 @@ export interface MermaidToken extends FullToken<'Mermaid'> {}
 const genMermaidStyle: GenerateStyle<MermaidToken> = (token) => {
   const { componentCls } = token;
 
-  console.log('token', token);
-
   return {
     [componentCls]: {
       '&-header': {
