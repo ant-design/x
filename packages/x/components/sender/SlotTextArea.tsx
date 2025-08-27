@@ -389,7 +389,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const text = e.clipboardData?.getData('text/plain');
 
     if (text) {
-      insert([{ type: 'text', value: text }]);
+      insert([{ type: 'text', value: text.replace(/\n/g, '') }]);
     }
 
     onPaste?.(e as unknown as React.ClipboardEvent<HTMLTextAreaElement>);
