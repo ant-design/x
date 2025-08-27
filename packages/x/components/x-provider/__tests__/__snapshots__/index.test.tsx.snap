@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`XProvider Component rtl render component should be rendered correctly in RTL direction 1`] = `null`;
+
+exports[`XProvider Component test theme component should be rendered correctly when configuring the theme.components 1`] = `null`;
