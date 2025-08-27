@@ -227,13 +227,12 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }, [] as SlotNode[]);
   };
 
-  const getNodeTextValue = (node: Node): string => {
+  const getNodeTextValue = (node: Node, currentValues: Record<string, any>): string => {
     if (node.nodeType === Node.TEXT_NODE) {
       return node.textContent || '';
     }
     if (node.nodeType === Node.ELEMENT_NODE) {
       const el = node as HTMLElement;
-      const currentValues = getSlotValues();
       const slotKey = el.getAttribute('data-slot-key');
       if (slotKey) {
         const nodeConfig = slotConfigMap.get(slotKey);
@@ -255,7 +254,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const result: string[] = [];
     const currentConfig: (SlotConfigType & { value: string })[] = [];
     editableRef.current?.childNodes.forEach((node) => {
-      const textValue = getNodeTextValue(node);
+      const textValue = getNodeTextValue(node, getSlotValues());
       if (node.nodeType === Node.TEXT_NODE) {
         result.push(textValue);
         currentConfig.push({
@@ -359,8 +358,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       case 'shiftEnter':
         if (e.shiftKey && !e.ctrlKey && !e.altKey && !e.metaKey) {
           // 设置键盘锁定，防止重复触发
-          e.preventDefault();
           keyLockRef.current = true;
+          e.preventDefault();
           const result = getEditorValue();
           onSubmit?.(result.value, result.config);
         }
