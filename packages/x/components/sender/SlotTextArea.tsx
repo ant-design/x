@@ -48,6 +48,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     ...restProps
   } = React.useContext(SenderContext);
 
+  const mergeInitialSlotConfig = [...(initialSlotConfig || [])];
   // ============================= MISC =============================
   const { direction, getPrefixCls } = useXProviderContext();
   const prefixCls = `${getPrefixCls('sender', customizePrefixCls)}`;
@@ -81,7 +82,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   // ============================ State =============================
 
   const [slotConfig, setSlotConfig] = useState<SlotConfigType[]>(
-    initialSlotConfig as SlotConfigType[],
+    mergeInitialSlotConfig as SlotConfigType[],
   );
 
   const [slotConfigMap, getSlotValues, setSlotValues] = useGetState(slotConfig);
@@ -538,11 +539,11 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
   // ============================ Effects =============================
   useEffect(() => {
-    if (initialSlotConfig?.length === 0) return;
-    if (editableRef.current && initialSlotConfig) {
+    if (mergeInitialSlotConfig?.length === 0) return;
+    if (editableRef.current && mergeInitialSlotConfig) {
       editableRef.current.innerHTML = '';
       slotDomMap?.current?.clear();
-      const slotNodeList = getSlotListNode(initialSlotConfig);
+      const slotNodeList = getSlotListNode(mergeInitialSlotConfig);
       slotNodeList.forEach((element) => {
         editableRef.current?.appendChild(element);
       });
