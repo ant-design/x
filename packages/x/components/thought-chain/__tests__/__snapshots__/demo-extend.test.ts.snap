@@ -263,7 +263,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
                     class="ant-thought-chain-item-content"
                   >
                     <div
-                      class="ant-thought-chain-item-title"
+                      class="ant-thought-chain-item-title ant-thought-chain-item-title-with-description"
                     >
                       Executing command
                     </div>
@@ -309,7 +309,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
                     class="ant-thought-chain-item-content"
                   >
                     <div
-                      class="ant-thought-chain-item-title"
+                      class="ant-thought-chain-item-title ant-thought-chain-item-title-with-description"
                     >
                       Creating file
                     </div>
@@ -355,7 +355,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
                     class="ant-thought-chain-item-content"
                   >
                     <div
-                      class="ant-thought-chain-item-title"
+                      class="ant-thought-chain-item-title ant-thought-chain-item-title-with-description"
                     >
                       Creating file
                     </div>
@@ -401,7 +401,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
                     class="ant-thought-chain-item-content"
                   >
                     <div
-                      class="ant-thought-chain-item-title"
+                      class="ant-thought-chain-item-title ant-thought-chain-item-title-with-description"
                     >
                       Creating file
                     </div>
@@ -502,7 +502,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
                     class="ant-thought-chain-item-content"
                   >
                     <div
-                      class="ant-thought-chain-item-title"
+                      class="ant-thought-chain-item-title ant-thought-chain-item-title-with-description"
                     >
                       Folder created
                     </div>
@@ -546,7 +546,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
                     class="ant-thought-chain-item-content"
                   >
                     <div
-                      class="ant-thought-chain-item-title"
+                      class="ant-thought-chain-item-title ant-thought-chain-item-title-with-description"
                     >
                       File created
                     </div>
@@ -590,7 +590,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
                     class="ant-thought-chain-item-content"
                   >
                     <div
-                      class="ant-thought-chain-item-title"
+                      class="ant-thought-chain-item-title ant-thought-chain-item-title-with-description"
                     >
                       File created
                     </div>
@@ -634,7 +634,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
                     class="ant-thought-chain-item-content"
                   >
                     <div
-                      class="ant-thought-chain-item-title"
+                      class="ant-thought-chain-item-title ant-thought-chain-item-title-with-description"
                     >
                       File created
                     </div>
@@ -787,7 +787,7 @@ exports[`renders components/thought-chain/demo/controlled-collapsible.tsx extend
                     class="ant-thought-chain-item-content"
                   >
                     <div
-                      class="ant-thought-chain-item-title"
+                      class="ant-thought-chain-item-title ant-thought-chain-item-title-with-description"
                     >
                       Executing command
                     </div>
@@ -833,7 +833,7 @@ exports[`renders components/thought-chain/demo/controlled-collapsible.tsx extend
                     class="ant-thought-chain-item-content"
                   >
                     <div
-                      class="ant-thought-chain-item-title"
+                      class="ant-thought-chain-item-title ant-thought-chain-item-title-with-description"
                     >
                       Creating file
                     </div>
@@ -884,7 +884,7 @@ exports[`renders components/thought-chain/demo/controlled-collapsible.tsx extend
                     class="ant-thought-chain-item-content"
                   >
                     <div
-                      class="ant-thought-chain-item-title"
+                      class="ant-thought-chain-item-title ant-thought-chain-item-title-with-description"
                     >
                       Continue creating file
                     </div>
@@ -1052,7 +1052,7 @@ exports[`renders components/thought-chain/demo/controlled-collapsible.tsx extend
                     class="ant-thought-chain-item-content"
                   >
                     <div
-                      class="ant-thought-chain-item-title"
+                      class="ant-thought-chain-item-title ant-thought-chain-item-title-with-description"
                     >
                       File created
                     </div>
@@ -1247,7 +1247,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
                     class="ant-thought-chain-item-content"
                   >
                     <div
-                      class="ant-thought-chain-item-title"
+                      class="ant-thought-chain-item-title ant-thought-chain-item-title-with-description"
                     >
                       Executing command
                     </div>
@@ -1293,7 +1293,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
                     class="ant-thought-chain-item-content"
                   >
                     <div
-                      class="ant-thought-chain-item-title"
+                      class="ant-thought-chain-item-title ant-thought-chain-item-title-with-description"
                     >
                       Creating file
                     </div>
@@ -1339,7 +1339,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
                     class="ant-thought-chain-item-content"
                   >
                     <div
-                      class="ant-thought-chain-item-title"
+                      class="ant-thought-chain-item-title ant-thought-chain-item-title-with-description"
                     >
                       Continue creating file
                     </div>
@@ -1385,7 +1385,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
                     class="ant-thought-chain-item-content"
                   >
                     <div
-                      class="ant-thought-chain-item-title"
+                      class="ant-thought-chain-item-title ant-thought-chain-item-title-with-description"
                     >
                       Continue creating file
                     </div>
@@ -1572,7 +1572,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
                     class="ant-thought-chain-item-content"
                   >
                     <div
-                      class="ant-thought-chain-item-title"
+                      class="ant-thought-chain-item-title ant-thought-chain-item-title-with-description"
                     >
                       Folder creation completed
                     </div>
@@ -1616,7 +1616,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
                     class="ant-thought-chain-item-content"
                   >
                     <div
-                      class="ant-thought-chain-item-title"
+                      class="ant-thought-chain-item-title ant-thought-chain-item-title-with-description"
                     >
                       File creation completed
                     </div>
@@ -1660,7 +1660,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
                     class="ant-thought-chain-item-content"
                   >
                     <div
-                      class="ant-thought-chain-item-title"
+                      class="ant-thought-chain-item-title ant-thought-chain-item-title-with-description"
                     >
                       File creation completed
                     </div>
@@ -1704,7 +1704,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
                     class="ant-thought-chain-item-content"
                   >
                     <div
-                      class="ant-thought-chain-item-title"
+                      class="ant-thought-chain-item-title ant-thought-chain-item-title-with-description"
                     >
                       File creation completed
                     </div>
@@ -2661,7 +2661,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
         class="ant-thought-chain-item-content"
       >
         <div
-          class="ant-thought-chain-item-title"
+          class="ant-thought-chain-item-title ant-thought-chain-item-title-with-description"
         >
           Opening Webpage
         </div>
@@ -2702,7 +2702,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
         class="ant-thought-chain-item-content"
       >
         <div
-          class="ant-thought-chain-item-title"
+          class="ant-thought-chain-item-title ant-thought-chain-item-title-with-description"
         >
           Creating
         </div>
@@ -2743,7 +2743,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
         class="ant-thought-chain-item-content"
       >
         <div
-          class="ant-thought-chain-item-title"
+          class="ant-thought-chain-item-title ant-thought-chain-item-title-with-description"
         >
           Searching
         </div>
@@ -2851,7 +2851,7 @@ exports[`renders components/thought-chain/demo/single-row.tsx extend context cor
                     class="ant-thought-chain-item-content"
                   >
                     <div
-                      class="ant-thought-chain-item-title"
+                      class="ant-thought-chain-item-title ant-thought-chain-item-title-with-description"
                     >
                       Executing command
                     </div>
@@ -2897,7 +2897,7 @@ exports[`renders components/thought-chain/demo/single-row.tsx extend context cor
                     class="ant-thought-chain-item-content"
                   >
                     <div
-                      class="ant-thought-chain-item-title"
+                      class="ant-thought-chain-item-title ant-thought-chain-item-title-with-description"
                     >
                       Creating file
                     </div>
@@ -2943,7 +2943,7 @@ exports[`renders components/thought-chain/demo/single-row.tsx extend context cor
                     class="ant-thought-chain-item-content"
                   >
                     <div
-                      class="ant-thought-chain-item-title"
+                      class="ant-thought-chain-item-title ant-thought-chain-item-title-with-description"
                     >
                       Creating file
                     </div>
@@ -2989,7 +2989,7 @@ exports[`renders components/thought-chain/demo/single-row.tsx extend context cor
                     class="ant-thought-chain-item-content"
                   >
                     <div
-                      class="ant-thought-chain-item-title"
+                      class="ant-thought-chain-item-title ant-thought-chain-item-title-with-description"
                     >
                       Creating file
                     </div>
