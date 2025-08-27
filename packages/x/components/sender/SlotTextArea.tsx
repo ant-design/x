@@ -226,32 +226,49 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }, [] as SlotNode[]);
   };
 
+  const getNodeTextValue = (node: Node): string => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      return node.textContent || '';
+    }
+    if (node.nodeType === Node.ELEMENT_NODE) {
+      const el = node as HTMLElement;
+      const currentValues = getSlotValues();
+      const slotKey = el.getAttribute('data-slot-key');
+      if (slotKey) {
+        const nodeConfig = slotConfigMap.get(slotKey);
+        const slotValue = currentValues[slotKey] || '';
+        const tagValue =
+          nodeConfig?.type === 'tag' && nodeConfig.props?.value ? nodeConfig.props.value : null;
+        const slotResult = nodeConfig?.formatResult?.(slotValue) || tagValue || slotValue;
+        return slotResult;
+      }
+      return el?.innerText || '';
+    }
+    return '';
+  };
+
   const getEditorValue = (): {
     value: string;
     config: (SlotConfigType & { value: string })[];
   } => {
     const result: string[] = [];
-    const currentValues = getSlotValues();
     const currentConfig: (SlotConfigType & { value: string })[] = [];
     editableRef.current?.childNodes.forEach((node) => {
+      const textValue = getNodeTextValue(node);
       if (node.nodeType === Node.TEXT_NODE) {
-        result.push(node.textContent || '');
+        result.push(textValue);
         currentConfig.push({
           type: 'text',
-          value: node.textContent || '',
+          value: textValue,
         });
       } else if (node.nodeType === Node.ELEMENT_NODE) {
         const el = node as HTMLElement;
         const slotKey = el.getAttribute('data-slot-key');
         if (slotKey) {
           const nodeConfig = slotConfigMap.get(slotKey);
-          const slotValue = currentValues[slotKey] || '';
-          const tagValue =
-            nodeConfig?.type === 'tag' && nodeConfig.props?.value ? nodeConfig.props.value : null;
-          const slotResult = nodeConfig?.formatResult?.(slotValue) || tagValue || slotValue;
-          result.push(slotResult);
+          result.push(textValue);
           if (nodeConfig) {
-            currentConfig.push({ ...nodeConfig, value: slotResult });
+            currentConfig.push({ ...nodeConfig, value: textValue });
           }
         }
       }
@@ -319,34 +336,35 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   };
 
   const onInternalKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const canSubmit = e.key === 'Enter';
     // 如果键盘被锁定或者正在组合输入，则跳过处理
-    if (keyLockRef.current || isCompositionRef.current) {
+
+    if (keyLockRef.current || isCompositionRef.current || !canSubmit) {
       onKeyDown?.(e as unknown as React.KeyboardEvent<HTMLTextAreaElement>);
       return;
     }
-    const canSubmit = e.key === 'Enter';
 
     switch (submitType) {
       case 'enter':
-        if (canSubmit && !e.shiftKey && !e.ctrlKey && !e.altKey && !e.metaKey) {
-          e.preventDefault();
+        // 发送
+        if (!e.shiftKey && !e.ctrlKey && !e.altKey && !e.metaKey) {
           // 设置键盘锁定，防止重复触发
           keyLockRef.current = true;
+          e.preventDefault();
           const result = getEditorValue();
           onSubmit?.(result.value, result.config);
         }
         break;
       case 'shiftEnter':
-        if (canSubmit && e.shiftKey && !e.ctrlKey && !e.altKey && !e.metaKey) {
-          e.preventDefault();
+        if (e.shiftKey && !e.ctrlKey && !e.altKey && !e.metaKey) {
           // 设置键盘锁定，防止重复触发
+          e.preventDefault();
           keyLockRef.current = true;
           const result = getEditorValue();
           onSubmit?.(result.value, result.config);
         }
         break;
     }
-
     onKeyDown?.(e as unknown as React.KeyboardEvent<HTMLTextAreaElement>);
   };
 
@@ -371,7 +389,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const text = e.clipboardData?.getData('text/plain');
 
     if (text) {
-      insert([{ type: 'text', value: text.replace(/\n/g, '') }]);
+      insert([{ type: 'text', value: text }]);
     }
 
     onPaste?.(e as unknown as React.ClipboardEvent<HTMLTextAreaElement>);
@@ -411,10 +429,12 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
   // 移除<br>
   const removeSpecificBRs = (element: HTMLDivElement | null) => {
-    const brElements = element?.querySelectorAll('br');
-    brElements?.forEach((br) => {
-      br.remove();
-    });
+    if (submitType === 'enter') {
+      const brElements = element?.querySelectorAll('br');
+      brElements?.forEach((br) => {
+        br.remove();
+      });
+    }
   };
 
   const onInternalInput = (e: React.FormEvent<HTMLDivElement>) => {
