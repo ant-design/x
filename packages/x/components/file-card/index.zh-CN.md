@@ -63,7 +63,7 @@ type PresetIcons =
   | 'python';
 ```
 
-### FileCardListProps
+### FileCard.List
 
 | 属性      | 说明       | 类型                                                  | 默认值  | 版本 |
 | --------- | ---------- | ----------------------------------------------------- | ------- | ---- |
@@ -76,7 +76,13 @@ type PresetIcons =
 
 ## Semantic DOM
 
+### FileCard
+
 <code src="./demo/_semantic.tsx" simplify="true"></code>
+
+### FileCard.List
+
+<code src="./demo/_semantic-list.tsx" simplify="true"></code>
 
 ## 主题变量（Design Token）
 

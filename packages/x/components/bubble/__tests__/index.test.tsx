@@ -376,6 +376,29 @@ describe('bubble', () => {
       expect(contentElement?.textContent).toBe('Test-second');
     });
 
+    it('应该支持完全重新输出', async () => {
+      const typingConfig: BubbleAnimationOption = {
+        effect: 'typing',
+        step: 2,
+        interval: 50,
+        keepPrefix: false,
+      };
+      const text1 = 'Test-first';
+      const text2 = 'Test-second';
+      const { container, rerender } = render(<Bubble content={text1} typing={typingConfig} />);
+
+      // 等待动画完成
+      await waitFakeTimer(100, 5);
+      const contentElement = container.querySelector('.ant-bubble-content');
+      expect(contentElement?.textContent).toBe(text1);
+
+      rerender(<Bubble content={text2} typing={typingConfig} />);
+      expect(contentElement?.textContent?.startsWith('Test-')).toBeFalsy();
+
+      await waitFakeTimer(100, 6);
+      expect(contentElement?.textContent).toBe(text2);
+    });
+
     it('应该在内容为空时不执行动画', () => {
       const onTyping = jest.fn();
       const onTypingComplete = jest.fn();
@@ -974,7 +997,7 @@ describe('bubble', () => {
     });
   });
 
-  describe('可编辑功能 - 新API', () => {
+  describe('可编辑功能', () => {
     it('应该支持 boolean 类型的 editable 配置', () => {
       const { container } = render(<Bubble content="可编辑内容" editable />);
 
@@ -1052,25 +1075,6 @@ describe('bubble', () => {
       expect(onEditCancel).toHaveBeenCalled();
     });
 
-    // it('应该支持 onEditConfirm 为 undefined', () => {
-    //   const { container } = render(<Bubble content="初始内容" editable />);
-
-    //   const confirmBtn = container.querySelectorAll('.ant-bubble-editing-opts button')[0]!;
-
-    //   expect(() => {
-    //     fireEvent.click(confirmBtn);
-    //   }).not.toThrow();
-    // });
-
-    // it('应该支持 onEditCancel 为 undefined', () => {
-    //   const { container } = render(<Bubble content="初始内容" editable />);
-
-    //   const cancelBtn = container.querySelectorAll('.ant-bubble-editing-opts button')[1]!;
-    //   expect(() => {
-    //     fireEvent.click(cancelBtn);
-    //   }).not.toThrow();
-    // });
-
     it('应该支持 editable 与 typing 同时启用时优先显示编辑模式', () => {
       const { container } = render(
         <Bubble content="测试内容" editable typing={{ effect: 'typing', step: 1 }} />,
@@ -1125,6 +1129,71 @@ describe('bubble', () => {
       expect(container.querySelector('.ant-bubble-content')).toHaveClass(
         'ant-bubble-content-editing',
       );
+    });
+
+    it.each([
+      { tag: 'div', display: 'block' },
+      { tag: 'p', display: 'block' },
+      { tag: 'section', display: 'flex' },
+      { tag: 'li', display: 'list-item' },
+      { tag: 'table', display: 'table' },
+    ])('应支持任意块级元素换行情况', ({ tag }) => {
+      const onEditConfirm = jest.fn();
+      const { container } = render(
+        <Bubble content="初始内容" editable onEditConfirm={onEditConfirm} />,
+      );
+      const editableDiv = container.querySelector('[contenteditable="true"]')!;
+      const confirmBtn = container.querySelectorAll('.ant-bubble-editing-opts button')[0]!;
+
+      editableDiv.innerHTML = `a<${tag}>b</${tag}>`;
+      fireEvent.click(confirmBtn);
+
+      expect(onEditConfirm).toHaveBeenCalledWith('a\nb');
+    });
+
+    it('应支持 span 不触发换行', () => {
+      const onEditConfirm = jest.fn();
+      const { container } = render(
+        <Bubble content="初始内容" editable onEditConfirm={onEditConfirm} />,
+      );
+
+      const editableDiv = container.querySelector('[contenteditable="true"]')!;
+      const confirmBtn = container.querySelectorAll('.ant-bubble-editing-opts button')[0]!;
+
+      editableDiv.innerHTML = 'a<span>b</span>';
+      fireEvent.click(confirmBtn);
+
+      expect(onEditConfirm).toHaveBeenCalledWith('ab');
+    });
+
+    it('应支持 <br> 触发换行', () => {
+      const onEditConfirm = jest.fn();
+      const { container } = render(
+        <Bubble content="初始内容" editable onEditConfirm={onEditConfirm} />,
+      );
+
+      const editableDiv = container.querySelector('[contenteditable="true"]')!;
+      const confirmBtn = container.querySelectorAll('.ant-bubble-editing-opts button')[0]!;
+
+      editableDiv.innerHTML = 'a<br>b<br>c';
+      fireEvent.click(confirmBtn);
+
+      expect(onEditConfirm).toHaveBeenCalledWith('a\nb\nc');
+    });
+
+    it('应支持连续换行', () => {
+      const onEditConfirm = jest.fn();
+      const { container } = render(
+        <Bubble content="初始内容" editable onEditConfirm={onEditConfirm} />,
+      );
+
+      const editableDiv = container.querySelector('[contenteditable="true"]')!;
+      const confirmBtn = container.querySelectorAll('.ant-bubble-editing-opts button')[0]!;
+
+      editableDiv.innerHTML = 'line1<div><br></div><div><br></div><div>line2</div>';
+      fireEvent.click(confirmBtn);
+
+      expect(onEditConfirm).toHaveBeenCalledWith('line1\n\n\nline2');
     });
   });
 

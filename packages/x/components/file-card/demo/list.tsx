@@ -34,6 +34,19 @@ const App = () => {
     <Flex vertical gap="middle" style={{ width: '900px' }}>
       <FileCard.List items={files} removable />
       <FileCard.List items={files} removable size="small" />
+      <FileCard.List
+        items={new Array(6).fill({
+          name: 'image-file.png',
+          src: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+        })}
+      />
+      <FileCard.List
+        styles={{ file: { width: 230, height: 230 } }}
+        items={new Array(3).fill({
+          name: 'image-file.png',
+          src: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+        })}
+      />
     </Flex>
   );
 };

@@ -347,7 +347,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="0"
@@ -420,7 +420,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="1"
@@ -493,7 +493,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="2"
@@ -566,7 +566,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="3"
@@ -639,7 +639,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="4"
@@ -712,7 +712,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="5"
@@ -785,7 +785,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="6"
@@ -858,7 +858,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="7"
@@ -931,7 +931,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="8"
@@ -1004,7 +1004,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="9"
@@ -1077,7 +1077,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="10"
@@ -1150,7 +1150,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="11"
@@ -1223,7 +1223,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="12"
@@ -1296,7 +1296,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="13"
@@ -1369,7 +1369,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="14"
@@ -1442,7 +1442,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="15"
@@ -1515,7 +1515,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="16"
@@ -1588,7 +1588,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="17"
@@ -1661,7 +1661,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="18"
@@ -1734,7 +1734,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="19"
@@ -1807,7 +1807,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="20"
@@ -1880,7 +1880,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="21"
@@ -1953,7 +1953,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="22"
@@ -2026,7 +2026,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="23"
@@ -2099,7 +2099,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="24"
@@ -2172,7 +2172,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="25"
@@ -2245,7 +2245,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="26"
@@ -2318,7 +2318,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="27"
@@ -2391,7 +2391,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="28"
@@ -2464,7 +2464,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             class="ant-file-card css-var-«r3»"
           >
             <div
-              class="ant-image ant-file-card-image ant-attachment-list-card-status-done css-var-«r3» ant-image-css-var"
+              class="ant-image ant-file-card-image css-var-«r3» ant-image-css-var"
               status="done"
               thumburl="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               uid="29"

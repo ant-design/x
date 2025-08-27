@@ -49,7 +49,7 @@ export function useTyping({
       effect: 'fade-in',
       interval: 100,
       step: 6,
-      keepPrefix: false,
+      keepPrefix: true,
     };
     if (typing === true) return baseCfg;
     // exclude undefined value
