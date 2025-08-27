@@ -32,6 +32,7 @@ const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (token) => {
       boxSizing: 'border-box',
       lineHeight: token.lineHeight,
       borderRadius: token.itemBorderRadius,
+      alignItems: 'baseline',
       [`&${itemCls}-rtl`]: {
         direction: 'rtl',
       },
@@ -86,17 +87,22 @@ const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (token) => {
           background: token.itemSolidHoverBg,
         },
       },
+
       [`&${itemCls}-click`]: {
         cursor: 'pointer',
         transition: `all ${token.motionDurationMid}  ${token.motionEaseInOut}`,
       },
       [`& ${itemCls}-title`]: {
         display: 'inline-block',
+        whiteSpace: 'nowrap',
+      },
+      [`& ${itemCls}-title-with-description`]: {
+        marginInlineEnd: token.marginXS,
       },
       [`& ${itemCls}-description`]: {
-        paddingInlineStart: token.paddingXS,
         color: token.colorTextDescription,
         display: 'inline-block',
+        whiteSpace: 'break-spaces',
       },
     },
   };
