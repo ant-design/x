@@ -1,8 +1,7 @@
-import { fireEvent, render } from '../../../tests/utils';
 import React from 'react';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
-import { act } from '../../../tests/utils';
+import { act, fireEvent, render } from '../../../tests/utils';
 import Sender from '../index';
 
 describe('Sender Component', () => {
@@ -98,7 +97,7 @@ describe('Sender Component', () => {
       const onSubmit = jest.fn();
       const { container } = render(<Sender value="bamboo" onSubmit={onSubmit} />);
       act(() => {
-        fireEvent.keyUp(container.querySelector('textarea')!, { key: 'Enter', shiftKey: false });
+        fireEvent.keyDown(container.querySelector('textarea')!, { key: 'Enter', shiftKey: false });
       });
       expect(onSubmit).toHaveBeenCalledWith('bamboo');
     });
@@ -109,7 +108,7 @@ describe('Sender Component', () => {
         <Sender value="bamboo" onSubmit={onSubmit} submitType="shiftEnter" />,
       );
       act(() => {
-        fireEvent.keyUp(container.querySelector('textarea')!, { key: 'Enter', shiftKey: true });
+        fireEvent.keyDown(container.querySelector('textarea')!, { key: 'Enter', shiftKey: true });
       });
       expect(onSubmit).toHaveBeenCalledWith('bamboo');
     });
