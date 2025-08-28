@@ -149,7 +149,12 @@ const Item = React.forwardRef<ItemRef, ThoughtChainItemProp>((props, ref) => {
       )}
       <div className={classnames(`${itemCls}-content`)}>
         {title && (
-          <div style={styles?.title} className={classnames(`${itemCls}-title`, classNames?.title)}>
+          <div
+            style={styles?.title}
+            className={classnames(`${itemCls}-title`, classNames?.title, {
+              [`${itemCls}-title-with-description`]: description,
+            })}
+          >
             {title}
           </div>
         )}

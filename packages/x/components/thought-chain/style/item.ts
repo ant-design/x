@@ -32,6 +32,7 @@ const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (token) => {
       boxSizing: 'border-box',
       lineHeight: token.lineHeight,
       borderRadius: token.itemBorderRadius,
+      alignItems: 'baseline',
       [`&${itemCls}-rtl`]: {
         direction: 'rtl',
       },
@@ -79,7 +80,6 @@ const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (token) => {
           color: token.colorError,
         },
       },
-
       [`&${itemCls}-click`]: {
         cursor: 'pointer',
         '&-solid:hover': {
@@ -92,11 +92,15 @@ const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (token) => {
       },
       [`& ${itemCls}-title`]: {
         display: 'inline-block',
+        whiteSpace: 'nowrap',
+      },
+      [`& ${itemCls}-title-with-description`]: {
+        marginInlineEnd: token.marginXS,
       },
       [`& ${itemCls}-description`]: {
-        paddingInlineStart: token.paddingXS,
         color: token.colorTextDescription,
         display: 'inline-block',
+        whiteSpace: 'break-spaces',
       },
     },
   };

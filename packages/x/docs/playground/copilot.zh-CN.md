@@ -6,4 +6,4 @@ title: 助手式
 order: 1
 ---
 
-<code src="./copilot.tsx" title='助手式' compact iframe='600'></code>
+<code src="./copilot.tsx" title='助手式' compact iframe='1200'></code>

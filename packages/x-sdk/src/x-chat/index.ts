@@ -2,7 +2,7 @@ import { useEvent } from 'rc-util';
 import React from 'react';
 import type { AnyObject } from '../_util/type';
 import { ConversationData } from '../x-conversations';
-import { XRequestClass } from '../x-request';
+import { AbstractXRequestClass } from '../x-request';
 import type { SSEOutput } from '../x-stream';
 import { AbstractChatProvider } from './providers';
 import { useChatStore } from './store';
@@ -83,7 +83,7 @@ export default function useXChat<
 
   // ========================= Agent Messages =========================
   const idRef = React.useRef(0);
-  const requestHandlerRef = React.useRef<XRequestClass<Input, Output>>(undefined);
+  const requestHandlerRef = React.useRef<AbstractXRequestClass<Input, Output>>(undefined);
 
   const { messages, setMessages, getMessages, setMessage } = useChatStore<MessageInfo<ChatMessage>>(
     () =>
@@ -141,6 +141,7 @@ export default function useXChat<
   provider?.injectGetMessages(() => {
     return getFilteredMessages(getMessages());
   });
+  requestHandlerRef.current = provider?.request;
   // For agent to use. Will filter out loading and error message
   const getRequestMessages = () => getFilteredMessages(getMessages());
 
@@ -305,7 +306,6 @@ export default function useXChat<
         }
       },
     });
-    requestHandlerRef.current = provider.request;
     provider.request.run(provider.transformParams(requestParams, provider.request.options));
   };
 

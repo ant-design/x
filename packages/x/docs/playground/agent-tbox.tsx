@@ -16,19 +16,19 @@ import {
   ShareAltOutlined,
   SmileOutlined,
 } from '@ant-design/icons';
+import { Bubble, Conversations, Prompts, Sender, Welcome } from '@ant-design/x';
 import {
-  Bubble,
-  Conversations,
-  Prompts,
-  Sender,
-  useXAgent,
+  AbstractChatProvider,
+  AbstractXRequestClass,
+  TransformMessage,
   useXChat,
-  Welcome,
-} from '@ant-design/x';
+  useXConversations,
+  XRequestOptions,
+} from '@ant-design/x-sdk';
 import { Avatar, Button, Flex, type GetProp, message, Space, Spin } from 'antd';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { TboxClient } from 'tbox-nodejs-sdk';
 
 const tboxClient = new TboxClient({
@@ -92,11 +92,6 @@ const enUS = {
   loadingMessage: 'Loading...',
 };
 
-type BubbleDataType = {
-  role: string;
-  content: string;
-};
-
 const isZhCN = window.parent?.location?.pathname?.includes('-cn');
 const t = isZhCN ? zhCN : enUS;
 
@@ -107,7 +102,7 @@ const DEFAULT_CONVERSATIONS_ITEMS = [
     group: t.today,
   },
   {
-    key: 'default-2',
+    key: 'default-1',
     label: t.whatCanTboxDo,
     group: t.yesterday,
   },
@@ -283,16 +278,159 @@ const useStyle = createStyles(({ token, css }) => {
   };
 });
 
-const Independent: React.FC = () => {
+interface TBoxMessage {
+  content: string;
+  role: string;
+}
+
+interface TBoxInput {
+  message: TBoxMessage;
+}
+
+interface TBoxOutput {
+  text?: string;
+}
+
+class TBoxRequest<
+  Input extends TBoxInput = TBoxInput,
+  Output extends TBoxOutput = TBoxOutput,
+> extends AbstractXRequestClass<Input, Output> {
+  tboxClient: TboxClient;
+  tboxStream: any;
+
+  _isTimeout = false;
+  _isStreamTimeout = false;
+  _isRequesting = false;
+
+  constructor(baseURL: string, options: XRequestOptions<Input, Output>) {
+    super(baseURL, options);
+    this.tboxClient = new TboxClient({
+      httpClientConfig: {
+        authorization: 'your-api-key', // Replace with your API key
+        isAntdXDemo: true, // Only for Ant Design X demo
+      },
+    });
+  }
+  get asyncHandler(): Promise<any> {
+    return Promise.resolve();
+  }
+  get isTimeout(): boolean {
+    return this._isTimeout;
+  }
+  get isStreamTimeout(): boolean {
+    return this._isStreamTimeout;
+  }
+  get isRequesting(): boolean {
+    return this._isRequesting;
+  }
+  get manual(): boolean {
+    return true;
+  }
+  run(params?: Input | undefined): void {
+    const stream = tboxClient.chat({
+      appId: 'your-app-id', // Replace with your app ID
+      query: params?.message.content || '',
+      userId: 'antd-x',
+    });
+    this.tboxStream = stream;
+    const { callbacks } = this.options;
+
+    const dataArr: Output[] = [];
+
+    stream.on('data', (data) => {
+      let parsedPayload: Output;
+      try {
+        const payload = (data as any).data?.payload || '{}';
+        parsedPayload = JSON.parse(payload);
+      } catch (e) {
+        console.error('Failed to parse payload:', e);
+        return;
+      }
+
+      if (parsedPayload?.text) {
+        dataArr.push(parsedPayload);
+        callbacks?.onUpdate?.(parsedPayload, new Headers());
+      }
+    });
+
+    stream.on('error', (error) => {
+      callbacks?.onError(error);
+    });
+
+    stream.on('end', () => {
+      callbacks?.onSuccess(dataArr, new Headers());
+    });
+
+    stream.on('abort', () => {
+      callbacks?.onSuccess(dataArr, new Headers());
+    });
+  }
+  abort(): void {
+    this.tboxStream?.abort?.();
+  }
+}
+
+class TBoxProvider<
+  ChatMessage extends TBoxMessage = TBoxMessage,
+  Input extends TBoxInput = TBoxInput,
+  Output extends TBoxOutput = TBoxOutput,
+> extends AbstractChatProvider<ChatMessage, Input, Output> {
+  transformParams(requestParams: Partial<Input>, options: XRequestOptions<Input, Output>): Input {
+    if (typeof requestParams !== 'object') {
+      throw new Error('requestParams must be an object');
+    }
+    return {
+      ...(options?.params || {}),
+      ...(requestParams || {}),
+    } as Input;
+  }
+  transformLocalMessage(requestParams: Partial<Input>): ChatMessage {
+    return requestParams.message as unknown as ChatMessage;
+  }
+  transformMessage(info: TransformMessage<ChatMessage, Output>): ChatMessage {
+    const { originMessage, chunk } = info || {};
+    if (!chunk) {
+      return {
+        content: originMessage?.content || '',
+        role: 'assistant',
+      } as ChatMessage;
+    }
+
+    const content = originMessage?.content || '';
+    return {
+      content: content + chunk.text,
+      role: 'assistant',
+    } as ChatMessage;
+  }
+}
+
+/**
+ * 🔔 Please replace the BASE_URL, MODEL with your own values.
+ */
+const providerCaches = new Map<string, TBoxProvider>();
+const providerFactory = (conversationKey: string) => {
+  if (!providerCaches.get(conversationKey)) {
+    providerCaches.set(
+      conversationKey,
+      new TBoxProvider({
+        request: new TBoxRequest('TBox Client', {}),
+      }),
+    );
+  }
+  return providerCaches.get(conversationKey);
+};
+
+const AgentTBox: React.FC = () => {
   const { styles } = useStyle();
-  const streamRef = useRef<any>(null); // 存储 tbox stream 对象
-  const abortControllerRef = useRef<AbortController | null>(null); // 存储 AbortController
 
   // ==================== State ====================
-  const [messageHistory, setMessageHistory] = useState<Record<string, typeof messages>>({});
 
-  const [conversations, setConversations] = useState(DEFAULT_CONVERSATIONS_ITEMS);
-  const [curConversation, setCurConversation] = useState(DEFAULT_CONVERSATIONS_ITEMS[0].key);
+  const { conversations, addConversation, setConversations } = useXConversations({
+    defaultConversations: DEFAULT_CONVERSATIONS_ITEMS,
+  });
+  const [curConversation, setCurConversation] = useState<string>(
+    DEFAULT_CONVERSATIONS_ITEMS[0].key,
+  );
 
   const [inputValue, setInputValue] = useState('');
 
@@ -301,58 +439,10 @@ const Independent: React.FC = () => {
    */
 
   // ==================== Runtime ====================
-  const [agent] = useXAgent<BubbleDataType, any, string>({
-    request: async ({ message }, { onUpdate, onSuccess, onError, onStream }) => {
-      const stream = tboxClient.chat({
-        appId: 'your-app-id', // Replace with your app ID
-        query: message.content,
-        userId: 'antd-x',
-      });
 
-      streamRef.current = stream;
-      const abortController = new AbortController();
-      const originalAbort = abortController.abort.bind(abortController);
-      abortController.abort = () => {
-        stream.abort();
-        originalAbort();
-      };
-      onStream?.(abortController);
-
-      const dataArr = [] as string[];
-
-      stream.on('data', (data) => {
-        let parsedPayload: { text?: string } | undefined;
-        try {
-          const payload = (data as any).data?.payload || '{}';
-          parsedPayload = JSON.parse(payload);
-        } catch (e) {
-          console.error('Failed to parse payload:', e);
-          return;
-        }
-
-        if (parsedPayload?.text) {
-          dataArr.push(parsedPayload.text);
-          onUpdate(parsedPayload.text);
-        }
-      });
-
-      stream.on('error', (error) => {
-        onError(error);
-      });
-
-      stream.on('end', () => {
-        onSuccess(dataArr);
-      });
-
-      stream.on('abort', () => {
-        onSuccess(dataArr);
-      });
-    },
-  });
-  const loading = agent.isRequesting();
-
-  const { onRequest, messages, setMessages } = useXChat({
-    agent,
+  const { onRequest, messages, isRequesting, abort } = useXChat({
+    provider: providerFactory(curConversation), // every conversation has its own provider
+    conversationKey: curConversation,
     requestPlaceholder: () => {
       return {
         content: t.loadingMessage,
@@ -371,38 +461,15 @@ const Independent: React.FC = () => {
         role: 'assistant',
       };
     },
-    transformMessage: (info) => {
-      const { originMessage, chunk } = info || {};
-      if (!chunk) {
-        return {
-          content: originMessage?.content || '',
-          role: 'assistant',
-        };
-      }
-
-      const content = originMessage?.content || '';
-      return {
-        content: content + chunk,
-        role: 'assistant',
-      };
-    },
-    resolveAbortController: (controller) => {
-      // 存储传入的 controller，这个已经包装了 stream.abort() 方法
-      abortControllerRef.current = controller;
-    },
   });
+
+  const loading = isRequesting();
 
   // ==================== Event ====================
   const onSubmit = (val: string) => {
     if (!val) return;
 
-    if (loading) {
-      message.error('Request is in progress, please wait for the request to complete.');
-      return;
-    }
-
     onRequest({
-      stream: true,
       message: { role: 'user', content: val },
     });
   };
@@ -429,22 +496,13 @@ const Independent: React.FC = () => {
       {/* 🌟 添加会话 */}
       <Button
         onClick={() => {
-          if (agent.isRequesting()) {
-            message.error(t.requestInProgress);
-            return;
-          }
-
           const now = dayjs().valueOf().toString();
-          setConversations([
-            {
-              key: now,
-              label: `${t.newConversation} ${conversations.length + 1}`,
-              group: t.today,
-            },
-            ...conversations,
-          ]);
+          addConversation({
+            key: now,
+            label: `${t.newConversation} ${conversations.length + 1}`,
+            group: t.today,
+          });
           setCurConversation(now);
-          setMessages([]);
         }}
         type="link"
         className={styles.addBtn}
@@ -459,17 +517,7 @@ const Independent: React.FC = () => {
         className={styles.conversations}
         activeKey={curConversation}
         onActiveChange={async (val) => {
-          if (agent.isRequesting()) {
-            message.error(t.requestInProgress);
-            return;
-          }
-          abortControllerRef.current?.abort();
-          // The abort execution will trigger an asynchronous requestFallback, which may lead to timing issues.
-          // In future versions, the sessionId capability will be added to resolve this problem.
-          setTimeout(() => {
-            setCurConversation(val);
-            setMessages(messageHistory?.[val] || []);
-          }, 100);
+          setCurConversation(val);
         }}
         groupable
         styles={{ item: { padding: '0 8px' } }}
@@ -489,14 +537,9 @@ const Independent: React.FC = () => {
                 const newList = conversations.filter((item) => item.key !== conversation.key);
                 const newKey = newList?.[0]?.key;
                 setConversations(newList);
-                // The delete operation modifies curConversation and triggers onActiveChange, so it needs to be executed with a delay to ensure it overrides correctly at the end.
-                // This feature will be fixed in a future version.
-                setTimeout(() => {
-                  if (conversation.key === curConversation) {
-                    setCurConversation(newKey);
-                    setMessages(messageHistory?.[newKey] || []);
-                  }
-                }, 200);
+                if (conversation.key === curConversation) {
+                  setCurConversation(newKey);
+                }
               },
             },
           ],
@@ -519,7 +562,10 @@ const Independent: React.FC = () => {
             classNames: {
               content: i.status === 'loading' ? styles.loadingMessage : '',
             },
-            typing: i.status === 'loading' ? { effect: 'typing', suffix: <>💗</> } : false,
+            typing:
+              i.status === 'loading'
+                ? { effect: 'typing', suffix: <>💗</>, keepPrefix: true }
+                : false,
             key: i.id,
           }))}
           style={{ height: '100%', paddingInline: 'calc(calc(100% - 700px) /2)' }}
@@ -642,7 +688,7 @@ const Independent: React.FC = () => {
         }}
         onChange={setInputValue}
         onCancel={() => {
-          abortControllerRef.current?.abort();
+          abort();
         }}
         loading={loading}
         className={styles.sender}
@@ -650,16 +696,6 @@ const Independent: React.FC = () => {
       />
     </>
   );
-
-  useEffect(() => {
-    // history mock
-    if (messages?.length) {
-      setMessageHistory((prev) => ({
-        ...prev,
-        [curConversation]: messages,
-      }));
-    }
-  }, [messages]);
 
   // ==================== Render =================
   return (
@@ -674,4 +710,4 @@ const Independent: React.FC = () => {
   );
 };
 
-export default Independent;
+export default AgentTBox;
