@@ -22,9 +22,19 @@ block: \n
 `;
 
 const App: React.FC = () => {
+  const [className, setClassName] = React.useState('x-markdown-light');
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const theme = urlParams.get('theme');
+      setClassName(theme === 'dark' ? 'x-markdown-dark' : 'x-markdown-light');
+    }
+  }, []);
+
   return (
     <XMarkdown
-      className="x-markdown-light"
+      className={className}
       config={{ extensions: Latex() }}
       components={{
         code: (props: any) => {

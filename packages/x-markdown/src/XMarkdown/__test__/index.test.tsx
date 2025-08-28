@@ -186,4 +186,18 @@ describe('XMarkdown', () => {
 
     expect(container.firstChild).toHaveStyle(testStyle);
   });
+
+  it('should render paragraphs with custom tag when paragraphTag is provided', () => {
+    const { container } = render(
+      <XMarkdown 
+        content="This is a paragraph." 
+        paragraphTag="div"
+      />
+    );
+
+    // XMarkdown wraps content in a div with class "ant-x-markdown"
+    const wrapper = container.firstChild as HTMLElement;
+    expect(wrapper).toHaveClass('ant-x-markdown');
+    expect(wrapper.innerHTML).toBe('<div>This is a paragraph.</div>\n');
+  });
 });

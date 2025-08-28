@@ -1,4 +1,5 @@
 import { ControllerUpdate } from '@react-spring/web';
+import { DOMNode } from 'html-react-parser';
 import type { MarkedExtension, Tokens } from 'marked';
 import { CSSProperties } from 'react';
 
@@ -21,6 +22,8 @@ interface SteamingOption {
   animationConfig?: ControllerUpdate;
 }
 
+type streamStatus = 'loading' | 'done';
+
 interface XMarkdownProps {
   content?: string;
   children?: string;
@@ -34,4 +37,4 @@ interface XMarkdownProps {
   prefixCls?: string;
 }
 
-export type { XMarkdownProps, Token, Tokens };
+export type { XMarkdownProps, Token, Tokens, streamStatus };

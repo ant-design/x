@@ -50,7 +50,7 @@ Consistent with [`marked`](https://github.com/markedjs/marked). For better overa
 
 | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="Edge" width="24px" height="24px" /> Edge | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" /> Firefox | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" /> Chrome | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" /> Safari | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" /> Opera |
 | --- | --- | --- | --- | --- |
-| >= 92 | >= 92 | >= 90 | >= 15.4 | >= 78 |
+| >= 92 | >= 90 | >= 92 | >= 15.4 | >= 78 |
 
 ## Supported Markdown Specs
 
