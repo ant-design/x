@@ -154,11 +154,12 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
           className={classnames(
             `${prefixCls}-content`,
             `${prefixCls}-content-${variant}`,
-            variant !== 'borderless' && `${prefixCls}-content-${shape}`,
             contextConfig.classNames.content,
             classNames.content,
             {
+              [`${prefixCls}-content-${shape}`]: variant !== 'borderless',
               [`${prefixCls}-content-editing`]: isEditing,
+              [`${prefixCls}-content-string`]: typeof memoedContent === 'string',
             },
           )}
         >
