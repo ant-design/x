@@ -1,4 +1,4 @@
-import { ComponentProps, XMarkdownProps } from '../interface';
+import { XMarkdownProps } from '../interface';
 import parseHtml, { DOMNode, domToReact, Element } from 'html-react-parser';
 import React, { ReactNode } from 'react';
 
@@ -59,10 +59,10 @@ class Renderer {
 
         if (renderElement) {
           const streamStatus = unclosedTags.has(name) ? 'loading' : 'done';
-          const props: ComponentProps = {
-            ...attribs,
+          const props: Record<string, any> = {
             domNode,
             streamStatus,
+            ...attribs,
           };
 
           if (children) {

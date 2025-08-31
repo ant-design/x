@@ -8,6 +8,8 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import useXProviderContext from '../hooks/use-x-provider-context';
 import type { PluginsType } from '../type';
 import useStyle from './style';
+import { useLocale } from './locale';
+import enUS from './locale/en_US';
 
 enum RenderType {
   Code = '代码',
@@ -43,6 +45,9 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
   const id = `mermaid-${uuid++}-${children?.length || 0}`;
 
   const [messageApi] = message.useMessage();
+
+  // ============================ locale ============================
+  const [contextLocale] = useLocale('Mermaid', enUS.Mermaid);
 
   // ============================ style ============================
   const { getPrefixCls, direction } = useXProviderContext();
@@ -171,7 +176,7 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
       await navigator.clipboard.writeText(children.trim());
       messageApi.open({
         type: 'success',
-        content: '复制成功',
+        content: contextLocale.copySuccess,
       });
     } catch (error) {
       console.error('Failed to copy code:', error);
@@ -190,15 +195,15 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
           onChange={setRenderType}
         />
         <Space>
-          <Tooltip title="复制代码">
+          <Tooltip title={contextLocale.copyText}>
             <Button type="text" size="small" icon={<CopyOutlined />} onClick={handleCopyCode} />
           </Tooltip>
           {renderType === RenderType.Image ? (
             <>
-              <Tooltip title="放大">
+              <Tooltip title={contextLocale.zoomInText}>
                 <Button type="text" size="small" icon={<ZoomInOutlined />} onClick={handleZoomIn} />
               </Tooltip>
-              <Tooltip title="缩小">
+              <Tooltip title={contextLocale.zoomOutText}>
                 <Button
                   type="text"
                   size="small"
@@ -206,12 +211,12 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
                   onClick={handleZoomOut}
                 />
               </Tooltip>
-              <Tooltip title="重置">
+              <Tooltip title={contextLocale.zoomResetText}>
                 <Button type="text" size="small" onClick={handleReset}>
-                  重置
+                  {contextLocale.zoomResetText}
                 </Button>
               </Tooltip>
-              <Tooltip title="下载">
+              <Tooltip title={contextLocale.downloadText}>
                 <Button
                   type="text"
                   size="small"
