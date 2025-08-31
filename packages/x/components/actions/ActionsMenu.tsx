@@ -58,7 +58,10 @@ const ActionsMenu: React.FC<ActionsItemProps> = (props) => {
       trigger={[triggerSubMenuAction]}
       {...dropdownProps}
     >
-      <div className={classnames(`${prefixCls}-item`, `${prefixCls}-sub-item`,classNames?.item)} style={styles?.item}>
+      <div
+        className={classnames(`${prefixCls}-item`, `${prefixCls}-sub-item`, classNames?.item)}
+        style={styles?.item}
+      >
         <div className={`${prefixCls}-icon`}>{icon}</div>
       </div>
     </Dropdown>

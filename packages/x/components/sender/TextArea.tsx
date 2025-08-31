@@ -110,27 +110,30 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
     isCompositionRef.current = false;
   };
 
-  const onInternalKeyUp: React.KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
-    const canSubmit = e.key === 'Enter' && !isCompositionRef.current;
+  const onInternalKeyDown: React.KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
+    const canSubmit = e.key === 'Enter';
+    if (isCompositionRef.current || !canSubmit) {
+      onKeyDown?.(e as unknown as React.KeyboardEvent<HTMLTextAreaElement>);
+      return;
+    }
 
-    // Check for `submitType` to submit
     switch (submitType) {
       case 'enter':
-        if (canSubmit && !e.shiftKey && !e.ctrlKey && !e.altKey && !e.metaKey) {
+        if (!e.shiftKey && !e.ctrlKey && !e.altKey && !e.metaKey) {
           e.preventDefault();
           onSubmit?.(value || '');
         }
         break;
 
       case 'shiftEnter':
-        if (canSubmit && e.shiftKey && !e.ctrlKey && !e.altKey && !e.metaKey) {
+        if (e.shiftKey && !e.ctrlKey && !e.altKey && !e.metaKey) {
           e.preventDefault();
           onSubmit?.(value || '');
         }
         break;
     }
 
-    onKeyUp?.(e);
+    onKeyDown?.(e);
   };
 
   // ============================ Paste =============================
@@ -174,10 +177,10 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
       autoSize={autoSize}
       value={value}
       onChange={mergeOnChange}
-      onKeyUp={onInternalKeyUp}
+      onKeyUp={onKeyUp}
       onCompositionStart={onInternalCompositionStart}
       onCompositionEnd={onInternalCompositionEnd}
-      onKeyDown={onKeyDown}
+      onKeyDown={onInternalKeyDown}
       onPaste={onInternalPaste}
       variant="borderless"
       readOnly={readOnly}

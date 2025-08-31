@@ -303,5 +303,3 @@ describe('Actions.Menu Component', () => {
     });
   });
 });
-
-

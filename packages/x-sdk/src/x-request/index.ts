@@ -96,10 +96,30 @@ export function setXRequestGlobalOptions<Input, Output>(
   Object.assign(globalOptions, options);
 }
 
-export class XRequestClass<Input = AnyObject, Output = SSEOutput> {
-  readonly baseURL: string;
-  readonly options: XRequestOptions<Input, Output>;
+export abstract class AbstractXRequestClass<Input, Output> {
+  baseURL!: string;
+  options!: XRequestOptions<Input, Output>;
 
+  constructor(baseURL: string, options?: XRequestOptions<Input, Output>) {
+    if (!baseURL || typeof baseURL !== 'string') throw new Error('The baseURL is not valid!');
+    this.baseURL = baseURL;
+    this.options = options || {};
+  }
+
+  abstract get asyncHandler(): Promise<any>;
+  abstract get isTimeout(): boolean;
+  abstract get isStreamTimeout(): boolean;
+  abstract get isRequesting(): boolean;
+  abstract get manual(): boolean;
+
+  abstract run(params?: Input): void;
+  abstract abort(): void;
+}
+
+export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends AbstractXRequestClass<
+  Input,
+  Output
+> {
   private _asyncHandler!: Promise<any>;
 
   private timeoutHandler!: number;
@@ -139,9 +159,7 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> {
   }
 
   constructor(baseURL: string, options?: XRequestOptions<Input, Output>) {
-    if (!baseURL || typeof baseURL !== 'string') throw new Error('The baseURL is not valid!');
-    this.baseURL = baseURL;
-    this.options = options || {};
+    super(baseURL, options);
     this._manual = options?.manual || false;
     if (!this.manual) {
       this.init();
@@ -328,7 +346,7 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> {
 function XRequest<Input = AnyObject, Output = SSEOutput>(
   baseURL: string,
   options?: XRequestOptions<Input, Output>,
-): XRequestClass<Input, Output> {
+): AbstractXRequestClass<Input, Output> {
   return new XRequestClass<Input, Output>(baseURL, options);
 }
 

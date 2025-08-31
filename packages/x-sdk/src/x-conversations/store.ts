@@ -51,10 +51,14 @@ export class ConversationStore {
     return this.conversations.find((item) => item.key === key);
   };
 
-  addConversation = (conversation: ConversationData) => {
+  addConversation = (conversation: ConversationData, placement?: 'prepend' | 'append') => {
     const exist = this.getConversation(conversation.key);
     if (!exist) {
-      this.setConversations([...this.conversations, conversation]);
+      this.setConversations(
+        placement === 'append'
+          ? [...this.conversations, conversation]
+          : [conversation, ...this.conversations],
+      );
       return true;
     }
     return false;

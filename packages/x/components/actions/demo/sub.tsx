@@ -10,7 +10,7 @@ const actionItems: ActionsProps['items'] = [
     icon: <RedoOutlined />,
   },
   {
-   key: 'edit',
+    key: 'edit',
     icon: <EditOutlined />,
     label: 'Edit',
   },

@@ -98,7 +98,7 @@ export default () => {
     <Flex vertical gap="small" align="flex-start">
       <Row gutter={36}>
         <Col>
-          <h3>会话列表1</h3>
+          <h3>List 1</h3>
           <Conversations
             items={handler.conversations as ConversationItemType[]}
             activeKey={active}
@@ -107,12 +107,12 @@ export default () => {
             menu={menuConfig}
           />
           <Flex gap="small">
-            <Button onClick={() => onAdd()}>添加会话</Button>
-            <Button onClick={() => onUpdate()}>更新会话</Button>
+            <Button onClick={() => onAdd()}>Add</Button>
+            <Button onClick={() => onUpdate()}>Update</Button>
           </Flex>
         </Col>
         <Col>
-          <h3>会话列表2</h3>
+          <h3>List 2</h3>
           <Conversations
             items={otherHandler.conversations as ConversationItemType[]}
             activeKey={otherActive}
@@ -121,8 +121,8 @@ export default () => {
             menu={otherMenuConfig}
           />
           <Flex gap="small">
-            <Button onClick={() => onAdd('other')}>添加会话</Button>
-            <Button onClick={() => onUpdate('other')}>更新会话</Button>
+            <Button onClick={() => onAdd('other')}>Add</Button>
+            <Button onClick={() => onUpdate('other')}>Update</Button>
           </Flex>
         </Col>
       </Row>
