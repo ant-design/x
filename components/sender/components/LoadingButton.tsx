@@ -10,7 +10,7 @@ function LoadingButton(props: ButtonProps, ref: React.Ref<HTMLButtonElement>) {
 
   return (
     <ActionButton
-      icon={null}
+      icon={<StopLoadingIcon className={`${prefixCls}-loading-icon`} />}
       color="primary"
       variant="text"
       shape="circle"
@@ -18,9 +18,7 @@ function LoadingButton(props: ButtonProps, ref: React.Ref<HTMLButtonElement>) {
       className={classNames(className, `${prefixCls}-loading-button`)}
       action="onCancel"
       ref={ref}
-    >
-      <StopLoadingIcon className={`${prefixCls}-loading-icon`} />
-    </ActionButton>
+    />
   );
 }
 
