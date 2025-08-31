@@ -268,11 +268,10 @@ const useStyle = createStyles(({ token, css }) => {
       height: 40px;
     `,
     conversations: css`
-      flex: 1;
       overflow-y: auto;
       margin-top: 12px;
       padding: 0;
-
+    flex:1;
       .ant-conversations-list {
         padding-inline-start: 0;
       }
@@ -307,8 +306,9 @@ const useStyle = createStyles(({ token, css }) => {
       }
     `,
     chatList: css`
-      flex: 1;
-      overflow: auto;
+      display: flex;
+      height: calc(100% - 120px);
+      flex-direction: column;
     `,
     loadingMessage: css`
       background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
@@ -410,6 +410,7 @@ const Independent: React.FC = () => {
           role: 'assistant',
         };
       }
+      console.log(error, 'error');
       return {
         content: t['Request failed, please try again!'],
         role: 'assistant',
@@ -527,7 +528,7 @@ const Independent: React.FC = () => {
                 ? { effect: 'typing', step: 5, interval: 20, suffix: <>💗</> }
                 : false,
           }))}
-          style={{ height: '100%', paddingInline: 'calc(calc(100% - 700px) /2)' }}
+          style={{ paddingInline: 'calc(calc(100% - 700px) /2)' }}
           role={{
             assistant: {
               placement: 'start',
@@ -543,7 +544,7 @@ const Independent: React.FC = () => {
               },
               loadingRender: () => <Spin size="small" />,
               contentRender(content: any) {
-                const newContent = content.replaceAll('\n\n', '<br/><br/>');
+                const newContent = content.replaceAll('\n\n', '<br/>');
                 return (
                   <XMarkdown
                     content={newContent}
@@ -640,7 +641,7 @@ const Independent: React.FC = () => {
     </Sender.Header>
   );
   const chatSender = (
-    <>
+    <Flex vertical gap={12}>
       {/* 🌟 提示词 */}
       <Prompts
         items={SENDER_PROMPTS}
@@ -676,7 +677,7 @@ const Independent: React.FC = () => {
         allowSpeech
         placeholder={t['Ask or input / use skills']}
       />
-    </>
+    </Flex>
   );
 
   // ==================== Render =================

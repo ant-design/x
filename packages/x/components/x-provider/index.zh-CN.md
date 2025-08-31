@@ -1,7 +1,7 @@
 ---
 category: Components
 group:
-  title: 工具
+  title: 其他
   order: 5
 title: XProvider
 order: 999

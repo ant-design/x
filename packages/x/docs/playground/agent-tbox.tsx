@@ -247,8 +247,9 @@ const useStyle = createStyles(({ token, css }) => {
       }
     `,
     chatList: css`
-      flex: 1;
-      overflow: auto;
+      display: flex;
+      height: calc(100% - 120px);
+      flex-direction: column;
     `,
     loadingMessage: css`
       background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
@@ -568,7 +569,7 @@ const AgentTBox: React.FC = () => {
                 : false,
             key: i.id,
           }))}
-          style={{ height: '100%', paddingInline: 'calc(calc(100% - 700px) /2)' }}
+          style={{ paddingInline: 'calc(calc(100% - 700px) /2)' }}
           role={{
             assistant: {
               placement: 'start',

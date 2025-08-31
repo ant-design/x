@@ -197,16 +197,17 @@ const useCopilotStyle = createStyles(({ token, css }) => {
     `,
     // chatList 样式
     chatList: css`
-      overflow: auto;
-      padding-block: 16px;
-      flex: 1;
+      margin-block-start: ${token.margin}px;
+      display: flex;
+      height: calc(100% - 194px);
+      flex-direction: column;
     `,
     chatWelcome: css`
-      margin-inline: 16px;
+      margin-inline: ${token.margin}px;
       padding: 12px 16px;
       border-radius: 2px 12px 12px 12px;
       background: ${token.colorBgTextHover};
-      margin-bottom: 16px;
+      margin-bottom: ${token.margin}px;
     `,
     loadingMessage: css`
       background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
@@ -216,13 +217,13 @@ const useCopilotStyle = createStyles(({ token, css }) => {
     `,
     // chatSend 样式
     chatSend: css`
-      padding: 12px;
+      padding: ${token.padding}px;
     `,
     sendAction: css`
       display: flex;
       align-items: center;
       margin-bottom: 12px;
-      gap: 8px;
+      justify-content:space-between;
     `,
     speechButton: css`
       font-size: 18px;
@@ -391,7 +392,7 @@ const Copilot = (props: CopilotProps) => {
       {messages?.length ? (
         /** 消息列表 */
         <Bubble.List
-          style={{ height: '100%', paddingInline: 16 }}
+          style={{ paddingInline: 16 }}
           items={messages?.map((i) => ({
             ...i.message,
             key: i.id,
@@ -608,9 +609,9 @@ const useWorkareaStyle = createStyles(({ token, css }) => {
     `,
     workareaBody: css`
       flex: 1;
-      padding: 16px;
+      padding: ${token.padding}px;
       background: ${token.colorBgContainer};
-      border-radius: 16px;
+      border-radius: ${token.borderRadius}px;
       min-height: 0;
     `,
     bodyContent: css`

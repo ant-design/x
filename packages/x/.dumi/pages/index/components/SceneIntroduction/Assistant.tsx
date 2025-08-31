@@ -1,5 +1,6 @@
-import { Bubble, Prompts, useXAgent, useXChat, Welcome } from '@ant-design/x';
+import { Bubble, Prompts, Welcome } from '@ant-design/x';
 import type { BubbleData } from '@ant-design/x/es/bubble/interface';
+import { DefaultChatProvider, useXChat, XRequest, XRequestOptions } from '@ant-design/x-sdk';
 import { Flex, type GetProp, Skeleton } from 'antd';
 import { createStyles } from 'antd-style';
 import React from 'react';
@@ -8,6 +9,10 @@ import CustomizationProvider, { LOCALES } from '../../common/CustomizationProvid
 import CustomizationSender from '../../common/CustomizationSender';
 
 const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000));
+
+interface ChatInput {
+  query: string;
+}
 
 const roles: GetProp<typeof Bubble.List, 'role'> = {
   ai: {
@@ -30,10 +35,11 @@ const roles: GetProp<typeof Bubble.List, 'role'> = {
         background: '#3877FF',
       },
     },
+    contentRender(content: any) {
+      return content?.query;
+    },
   },
 };
-
-let mockSuccess = false;
 
 const useStyle = createStyles(({ token, css }) => {
   return {
@@ -112,23 +118,28 @@ const AssistantScene: React.FC = () => {
 
   const [content, setContent] = React.useState('');
 
-  const [agent] = useXAgent<string, { message: string }, string>({
-    request: async ({ message }, { onSuccess, onError }) => {
-      await sleep();
+  const [provider] = React.useState(
+    new DefaultChatProvider<string, ChatInput, string>({
+      request: XRequest('https://api.example.com/chat', {
+        manual: true,
+        fetch: async (
+          _: Parameters<typeof fetch>[0],
+          options: XRequestOptions<ChatInput, string>,
+        ) => {
+          await sleep();
+          const params = options?.params;
+          return Promise.resolve(
+            new Response(JSON.stringify([`Mock success return. You said: ${params?.query}`]), {
+              headers: { 'Content-Type': 'application/json' },
+            }),
+          );
+        },
+      }),
+    }),
+  );
 
-      mockSuccess = !mockSuccess;
-
-      if (mockSuccess) {
-        onSuccess([`Mock success return. You said: ${message}`]);
-      }
-
-      onError(new Error('Mock request failed'));
-    },
-  });
-
-  // Chat messages
-  const { onRequest, messages } = useXChat({
-    agent,
+  const { onRequest, messages, isRequesting } = useXChat({
+    provider,
     requestPlaceholder: 'Waiting...',
     requestFallback: 'Mock failed return. Please try again later.',
   });
@@ -156,7 +167,7 @@ const AssistantScene: React.FC = () => {
         <Prompts
           title={locale.help_text}
           onItemClick={(item) => {
-            onRequest(item.data.description as string);
+            onRequest({ query: item.data.description as string });
           }}
           vertical
           items={[
@@ -205,13 +216,13 @@ const AssistantScene: React.FC = () => {
             ]}
           />
           <CustomizationSender
-            loading={agent.isRequesting()}
+            loading={isRequesting()}
             value={content}
             onChange={setContent}
             placeholder={locale.send_placeholder}
             onSubmit={(nextContent) => {
               if (!nextContent) return;
-              onRequest(nextContent);
+              onRequest({ query: nextContent });
               setContent('');
             }}
           />
