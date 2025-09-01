@@ -8,7 +8,7 @@ exports[`bubble 基础功能 应该正确渲染基本的 Bubble 组件 1`] = `
     class="ant-bubble-body"
   >
     <div
-      class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+      class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
     >
       测试内容
     </div>

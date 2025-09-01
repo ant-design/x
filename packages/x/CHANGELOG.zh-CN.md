@@ -15,9 +15,30 @@ tag: vVERSION
 
 ---
 
-## 2.0.0-alpha.4
+## 2.0.0-alpha.6
+
+`2025-08-28`
+
+### @ant-design/x
+
+- 🐛 修复Sender 普通模式点击 `Enter` 选中文候选词时触发`Submit`的问题。[#1144](https://github.com/ant-design/x/pull/1144) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🐛 修复Sender 词槽模式 `submitType` 为 `shiftEnter`时无法换行问题。[#1143](https://github.com/ant-design/x/pull/1143) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 💄 修复 ThoughtChain.Item `description` 内容过多换行后 `margin`样式异常。
+- 🛠 使用`@ant-design/x-sdk`重构样板间。[#1139](https://github.com/ant-design/x/pull/1139) 由 [@hylin](https://github.com/hylin) 提交。
+- 🐛 修复 Bubble `prefix` 持续展示。[#1137](https://github.com/ant-design/x/pull/1137) 由 [@anxLiang](https://github.com/anxLiang) 提交。
+- 📖 补充 Bubble.List 文档解释滚动容器问题。[#1133](https://github.com/ant-design/x/pull/1133) 由 [@anxLiang](https://github.com/anxLiang) 提交。
+- 🐛 修复 Attachment 组件上传图片未展示图片问题。[#1140](https://github.com/ant-design/x/pull/1140) 由 [@hy993658052](https://github.com/hy993658052) 提交。
+- 🐛 修复 FileCard 语义化问题以及卡片大小展示问题。[#1130](https://github.com/ant-design/x/pull/1130) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 📦 升级father配置。[#1125](https://github.com/ant-design/x/pull/1125) 由 [@fireairforce](https://github.com/fireairforce) 提交。
+- 📖 优化官网站点提升用户体验。[#1142](https://github.com/ant-design/x/pull/1142) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+
+## 2.0.0-alpha.5
 
 `2025-08-20`
+
+### @ant-design/x
+
+- 🆕 新增 Actions 子组件功能，Actions.Copy、Actions.Audio、Actions.Item。[#1122](https://github.com/ant-design/x/pull/1122) 由 [@kimteayon](https://github.com/kimteayon) 提交。
 
 ## 2.0.0-alpha.3
 

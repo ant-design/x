@@ -16,7 +16,24 @@ tag: vVERSION
 
 ---
 
-## 2.0.0-alpha.4
+## 2.0.0-alpha.6
+
+`2025-08-28`
+
+### @ant-design/x
+
+- 🐛 Fixed the issue where pressing `Enter` in Sender normal mode would trigger `Submit` when selecting a candidate word. [#1144](https://github.com/ant-design/x/pull/1144) by [@kimteayon](https://github.com/kimteayon).
+- 🐛 Fixed the issue where `shiftEnter` could not create a new line in Sender slot mode. [#1143](https://github.com/ant-design/x/pull/1143) by [@kimteayon](https://github.com/kimteayon).
+- 💄 Fixed abnormal `margin` style when there are too many lines in ThoughtChain.Item `description`.
+- 🛠 Refactored the model room using `@ant-design/x-sdk`. [#1139](https://github.com/ant-design/x/pull/1139) by [@hylin](https://github.com/hylin).
+- 🐛 Fixed Bubble `prefix` always displaying. [#1137](https://github.com/ant-design/x/pull/1137) by [@anxLiang](https://github.com/anxLiang).
+- 📖 Supplemented Bubble.List documentation to explain scroll container issues. [#1133](https://github.com/ant-design/x/pull/1133) by [@anxLiang](https://github.com/anxLiang).
+- 🐛 Fixed the issue where uploaded images in Attachment component were not displayed. [#1140](https://github.com/ant-design/x/pull/1140) by [@hy993658052](https://github.com/hy993658052).
+- 🐛 Fixed semantic and size display issues in FileCard. [#1130](https://github.com/ant-design/x/pull/1130) by [@kimteayon](https://github.com/kimteayon).
+- 📦 Upgraded father configuration. [#1125](https://github.com/ant-design/x/pull/1125) by [@fireairforce](https://github.com/fireairforce).
+- 📖 Improved the official site for better user experience. [#1142](https://github.com/ant-design/x/pull/1142) by [@kimteayon](https://github.com/kimteayon).
+
+## 2.0.0-alpha.5
 
 `2025-08-20`
 

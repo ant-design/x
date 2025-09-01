@@ -209,7 +209,7 @@ exports[`renders components/bubble/demo/basic.tsx extend context correctly 1`] =
       </h5>
     </div>
     <div
-      class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+      class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
     >
       <div
         class="ant-bubble-fade-in"
@@ -452,7 +452,7 @@ exports[`renders components/bubble/demo/editable.tsx extend context correctly 1`
         class="ant-bubble-body"
       >
         <div
-          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
         >
           editable bubble 1
         </div>
@@ -557,7 +557,7 @@ exports[`renders components/bubble/demo/editable.tsx extend context correctly 1`
         class="ant-bubble-body"
       >
         <div
-          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
         >
           editable bubble 2
         </div>
@@ -678,7 +678,7 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
             footer
           </div>
           <div
-            class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+            class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
           >
             outer footer
           </div>
@@ -839,7 +839,7 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
             footer
           </div>
           <div
-            class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+            class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
           >
             <div
               class="ant-bubble-content-with-footer"
@@ -1004,7 +1004,7 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
             footer
           </div>
           <div
-            class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+            class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
           >
             outer footer and align right
           </div>
@@ -1165,7 +1165,7 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
             footer
           </div>
           <div
-            class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+            class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
           >
             <div
               class="ant-bubble-content-with-footer"
@@ -1339,7 +1339,7 @@ exports[`renders components/bubble/demo/header.tsx extend context correctly 1`] 
             header
           </div>
           <div
-            class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+            class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
           >
             align left
           </div>
@@ -1392,7 +1392,7 @@ exports[`renders components/bubble/demo/header.tsx extend context correctly 1`] 
             header
           </div>
           <div
-            class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+            class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
           >
             align right
           </div>
@@ -1508,7 +1508,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
           User-bubble_5
         </div>
         <div
-          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
         >
           6 : Mock user content.
         </div>
@@ -1613,7 +1613,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
           AI
         </div>
         <div
-          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
         >
           5 : Mock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI content
         </div>
@@ -1766,7 +1766,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
           User-bubble_3
         </div>
         <div
-          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
         >
           4 : Mock user content.
         </div>
@@ -1933,7 +1933,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
           User
         </div>
         <div
-          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
         >
           22 : Mock user content.
         </div>
@@ -1978,7 +1978,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
           AI
         </div>
         <div
-          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
         >
           21 : Mock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI content
         </div>
@@ -2131,7 +2131,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
           User
         </div>
         <div
-          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
         >
           20 : Mock user content.
         </div>
@@ -2176,7 +2176,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
           AI
         </div>
         <div
-          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
         >
           19 : Mock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI content
         </div>
@@ -2329,7 +2329,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
           User
         </div>
         <div
-          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
         >
           18 : Mock user content.
         </div>
@@ -2374,7 +2374,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
           AI
         </div>
         <div
-          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
         >
           17 : Mock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI content
         </div>
@@ -2527,7 +2527,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
           User
         </div>
         <div
-          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
         >
           16 : Mock user content.
         </div>
@@ -2572,7 +2572,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
           AI
         </div>
         <div
-          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
         >
           15 : Mock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI content
         </div>
@@ -2725,7 +2725,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
           User
         </div>
         <div
-          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
         >
           14 : Mock user content.
         </div>
@@ -2770,7 +2770,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
           AI
         </div>
         <div
-          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
         >
           13 : Mock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI content
         </div>
@@ -2923,7 +2923,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
           User
         </div>
         <div
-          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
         >
           12 : Mock user content.
         </div>
@@ -3102,7 +3102,7 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context 
       class="ant-bubble-body"
     >
       <div
-        class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+        class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
       >
         Mock user content.
       </div>
@@ -3116,7 +3116,7 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context 
       class="ant-bubble-body"
     >
       <div
-        class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+        class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
       >
         <div
           class=""
@@ -3287,7 +3287,7 @@ exports[`renders components/bubble/demo/sider-and-placement.tsx extend context c
           class="ant-bubble-body"
         >
           <div
-            class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+            class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
           >
             align left
           </div>
@@ -3400,7 +3400,7 @@ exports[`renders components/bubble/demo/sider-and-placement.tsx extend context c
           class="ant-bubble-body"
         >
           <div
-            class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+            class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
           >
             align right
           </div>
@@ -3629,7 +3629,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx extend context cor
         class="ant-bubble-body"
       >
         <div
-          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
         >
           filled - default
         </div>
@@ -3642,7 +3642,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx extend context cor
         class="ant-bubble-body"
       >
         <div
-          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-round"
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-round ant-bubble-content-string"
         >
           filled - round
         </div>
@@ -3655,7 +3655,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx extend context cor
         class="ant-bubble-body"
       >
         <div
-          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-corner"
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-corner ant-bubble-content-string"
         >
           filled - corner left
         </div>
@@ -3668,7 +3668,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx extend context cor
         class="ant-bubble-body"
       >
         <div
-          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-corner"
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-corner ant-bubble-content-string"
         >
           filled - corner right
         </div>
@@ -3685,7 +3685,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx extend context cor
         class="ant-bubble-body"
       >
         <div
-          class="ant-bubble-content ant-bubble-content-outlined ant-bubble-content-default"
+          class="ant-bubble-content ant-bubble-content-outlined ant-bubble-content-default ant-bubble-content-string"
         >
           outlined - default
         </div>
@@ -3698,7 +3698,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx extend context cor
         class="ant-bubble-body"
       >
         <div
-          class="ant-bubble-content ant-bubble-content-outlined ant-bubble-content-round"
+          class="ant-bubble-content ant-bubble-content-outlined ant-bubble-content-round ant-bubble-content-string"
         >
           outlined - round
         </div>
@@ -3711,7 +3711,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx extend context cor
         class="ant-bubble-body"
       >
         <div
-          class="ant-bubble-content ant-bubble-content-outlined ant-bubble-content-corner"
+          class="ant-bubble-content ant-bubble-content-outlined ant-bubble-content-corner ant-bubble-content-string"
         >
           outlined - corner left
         </div>
@@ -3724,7 +3724,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx extend context cor
         class="ant-bubble-body"
       >
         <div
-          class="ant-bubble-content ant-bubble-content-outlined ant-bubble-content-corner"
+          class="ant-bubble-content ant-bubble-content-outlined ant-bubble-content-corner ant-bubble-content-string"
         >
           outlined - corner right
         </div>
@@ -3741,7 +3741,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx extend context cor
         class="ant-bubble-body"
       >
         <div
-          class="ant-bubble-content ant-bubble-content-shadow ant-bubble-content-default"
+          class="ant-bubble-content ant-bubble-content-shadow ant-bubble-content-default ant-bubble-content-string"
         >
           shadow - default
         </div>
@@ -3754,7 +3754,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx extend context cor
         class="ant-bubble-body"
       >
         <div
-          class="ant-bubble-content ant-bubble-content-shadow ant-bubble-content-round"
+          class="ant-bubble-content ant-bubble-content-shadow ant-bubble-content-round ant-bubble-content-string"
         >
           shadow - round
         </div>
@@ -3767,7 +3767,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx extend context cor
         class="ant-bubble-body"
       >
         <div
-          class="ant-bubble-content ant-bubble-content-shadow ant-bubble-content-corner"
+          class="ant-bubble-content ant-bubble-content-shadow ant-bubble-content-corner ant-bubble-content-string"
         >
           shadow - corner left
         </div>
@@ -3780,7 +3780,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx extend context cor
         class="ant-bubble-body"
       >
         <div
-          class="ant-bubble-content ant-bubble-content-shadow ant-bubble-content-corner"
+          class="ant-bubble-content ant-bubble-content-shadow ant-bubble-content-corner ant-bubble-content-string"
         >
           shadow - corner right
         </div>
