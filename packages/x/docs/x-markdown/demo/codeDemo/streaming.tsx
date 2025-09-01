@@ -40,8 +40,16 @@ export default App;
 \`\`\`
 `;
 
+const splitIntoChunks = (str: string, chunkSize: number): string[] => {
+  const chunks = [];
+  for (let i = 0; i < str.length; i += chunkSize) {
+    chunks.push(str.slice(i, i + chunkSize));
+  }
+  return chunks;
+};
+
 const mockFetch = async () => {
-  const chunks = fullContent.split('\n\n');
+  const chunks = splitIntoChunks(fullContent, 10);
   const response = new Response(
     new ReadableStream({
       async start(controller) {
@@ -82,7 +90,7 @@ const App: React.FC = () => {
           fetch: mockFetch,
           transformStream: new TransformStream<string, string>({
             transform(chunk, controller) {
-              chunks += `\n\n${chunk}`;
+              chunks += chunk;
               controller.enqueue(chunks);
             },
           }),

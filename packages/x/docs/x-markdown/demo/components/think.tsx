@@ -1,9 +1,14 @@
 import { UserOutlined } from '@ant-design/icons';
-import { Bubble, Sender, Think, useXAgent, useXChat } from '@ant-design/x';
+import { Bubble, Sender, Think } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
-import React from 'react';
+import { DefaultChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';
+import React, { useMemo } from 'react';
 import '@ant-design/x-markdown/themes/light.css';
 import { BubbleListProps } from '@ant-design/x/es/bubble';
+
+interface ChatInput {
+  query: string;
+}
 
 const fullContent = `
 <think>Deep thinking is a systematic and structured cognitive approach that requires individuals to move beyond intuition and superficial information, delving into the essence of a problem and its underlying principles through logical analysis, multi-perspective examination, and persistent inquiry. Unlike quick reactions or heuristic judgments, deep thinking emphasizes ​slow thinking, actively engaging knowledge reserves, critical thinking, and creativity to uncover deeper connections and meanings.
@@ -15,6 +20,45 @@ Key characteristics of deep thinking include:
 This mode of thinking helps individuals avoid cognitive biases in complex scenarios, improve decision-making, and generate groundbreaking insights in fields such as academic research, business innovation, and social problem-solving.</think>
 # Hello Deep Thinking\n - Deep thinking is over.\n- You can use the think tag to package your thoughts.
 `;
+
+const splitIntoChunks = (str: string, chunkSize: number) => {
+  const chunks = [];
+  for (let i = 0; i < str.length; i += chunkSize) {
+    chunks.push(str.slice(i, i + chunkSize));
+  }
+  return chunks;
+};
+const mockFetch = async () => {
+  const chunks = splitIntoChunks(fullContent, 10);
+  const response = new Response(
+    new ReadableStream({
+      async start(controller) {
+        try {
+          await new Promise((resolve) => setTimeout(resolve, 100));
+          for (const chunk of chunks) {
+            await new Promise((resolve) => setTimeout(resolve, 100));
+            if (!controller.desiredSize) {
+              // 流已满或关闭，避免写入
+              return;
+            }
+
+            controller.enqueue(new TextEncoder().encode(chunk));
+          }
+          controller.close();
+        } catch (error) {
+          console.log(error, 333);
+        }
+      },
+    }),
+    {
+      headers: {
+        'Content-Type': 'application/x-ndjson',
+      },
+    },
+  );
+
+  return response;
+};
 
 const roles: BubbleListProps['role'] = {
   ai: {
@@ -52,52 +96,59 @@ const ThinkComponent = React.memo((props: { children: string; status: string }) 
 const App: React.FC = () => {
   const [content, setContent] = React.useState('');
 
-  // Agent for request
-  const [agent] = useXAgent<string, { message: string }, string>({
-    request: async (_, { onSuccess, onUpdate }) => {
-      let currentContent = '';
-
-      const id = setInterval(() => {
-        const addCount = Math.floor(Math.random() * 30);
-        currentContent = fullContent.slice(0, currentContent.length + addCount);
-        onUpdate(currentContent);
-        if (currentContent === fullContent) {
-          const thinkContent = currentContent.replace(
-            /<think.*?>([\s\S]*?)<\/think>/gi,
-            (match, content) => {
-              try {
-                return `<think status="done">${content}</think>`;
-              } catch (error) {
-                console.error(error);
-                return match;
-              }
+  let chunks = '';
+  const provider = useMemo(
+    () =>
+      new DefaultChatProvider<string, ChatInput, string>({
+        request: XRequest('https://api.example.com/chat', {
+          manual: true,
+          fetch: mockFetch,
+          transformStream: new TransformStream<string, string>({
+            transform(chunk, controller) {
+              chunks = `${chunks}${chunk}`.replace(
+                /<think.*?>([\s\S]*?)<\/think>/gi,
+                (match, content) => {
+                  try {
+                    return `<think status="done">${content}</think>`;
+                  } catch (error) {
+                    console.error(error);
+                    return match;
+                  }
+                },
+              );
+              controller.enqueue(chunks);
             },
-          );
-          onUpdate(thinkContent);
-          clearInterval(id);
-          onSuccess([thinkContent]);
-        }
-      }, 100);
-    },
-  });
+          }),
+        }),
+      }),
+    [content],
+  );
 
-  // Chat messages
-  const { onRequest, messages } = useXChat({
-    agent,
+  const { onRequest, messages, isRequesting } = useXChat({
+    provider: provider,
+    requestPlaceholder: 'Waiting...',
+    requestFallback: 'Mock failed return. Please try again later.',
   });
 
   return (
-    <div style={{ minHeight: 500, display: 'flex', flexDirection: 'column' }}>
+    <div
+      style={{
+        height: 700,
+        paddingBlock: 20,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      }}
+    >
       <Bubble.List
         role={roles}
-        style={{ flex: 1 }}
         items={messages.map(({ id, message, status }) => ({
           key: id,
           role: status === 'local' ? 'local' : 'ai',
           content: message,
           contentRender:
             status === 'local'
-              ? undefined
+              ? (content) => content.query
               : (content) => (
                   <XMarkdown
                     className="x-markdown-light"
@@ -111,12 +162,14 @@ const App: React.FC = () => {
         }))}
       />
       <Sender
-        loading={agent.isRequesting()}
+        loading={isRequesting()}
         value={content}
         onChange={setContent}
         style={{ marginTop: 48 }}
         onSubmit={(nextContent) => {
-          onRequest(nextContent);
+          onRequest({
+            query: nextContent,
+          });
           setContent('');
         }}
       />
