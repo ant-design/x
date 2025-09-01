@@ -24,7 +24,11 @@ describe('DefaultChatProvider test', () => {
   });
 
   it('should transformParams throw error when requestParams is not an object', () => {
-    const defaultProvider = new DefaultChatProvider<{}, DefaultInput, {}>({
+    const defaultProvider = new DefaultChatProvider<
+      Record<string, any>,
+      DefaultInput,
+      Record<string, any>
+    >({
       request: XRequest(baseURL, {
         manual: true,
       }),
@@ -39,7 +43,11 @@ describe('DefaultChatProvider test', () => {
   });
 
   it('should transformParams work successfully', () => {
-    const defaultProvider = new DefaultChatProvider<{}, DefaultInput, {}>({
+    const defaultProvider = new DefaultChatProvider<
+      Record<string, any>,
+      DefaultInput,
+      Record<string, any>
+    >({
       request: XRequest(baseURL, {
         manual: true,
       }),
@@ -58,7 +66,11 @@ describe('DefaultChatProvider test', () => {
   });
 
   it('should transformLocalMessage work successfully', () => {
-    const defaultProvider = new DefaultChatProvider<{}, DefaultInput, {}>({
+    const defaultProvider = new DefaultChatProvider<
+      Record<string, any>,
+      DefaultInput,
+      Record<string, any>
+    >({
       request: XRequest(baseURL, {
         manual: true,
       }),
