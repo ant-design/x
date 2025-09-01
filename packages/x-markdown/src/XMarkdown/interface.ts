@@ -1,5 +1,4 @@
 import { ControllerUpdate } from '@react-spring/web';
-import { DOMNode } from 'html-react-parser';
 import type { MarkedExtension, Tokens } from 'marked';
 import { CSSProperties } from 'react';
 
