@@ -268,7 +268,6 @@ const IndependentScene: React.FC = () => {
           placeholder={locale.question1}
           onSubmit={(nextContent) => {
             if (!nextContent) return;
-            console.log(nextContent);
             onRequest({
               query: nextContent,
             });
