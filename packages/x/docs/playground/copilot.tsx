@@ -25,8 +25,8 @@ import {
   Think,
   Welcome,
 } from '@ant-design/x';
-import { SSEFields } from '@ant-design/x/es/x-stream';
 import XMarkdown from '@ant-design/x-markdown';
+import type { SSEFields } from '@ant-design/x-sdk';
 import {
   DeepSeekChatProvider,
   useXChat,
