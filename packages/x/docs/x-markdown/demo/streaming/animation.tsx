@@ -6,6 +6,7 @@ import { Button, Row } from 'antd';
 import React, { useMemo, useState } from 'react';
 import '@ant-design/x-markdown/themes/light.css';
 import { BubbleListProps } from '@ant-design/x/es/bubble';
+import { mockFetch } from '../_utils';
 
 interface ChatInput {
   query: string;
@@ -55,37 +56,6 @@ const fullContent = `
 乌镇完美融合了古典水乡风情与现代文化活力，无论是追寻历史，还是享受慢生活，都是理想之选！如果想了解具体景点或行程规划，欢迎继续提问~ 🚣‍♀️
 `;
 
-const splitIntoChunks = (str: string, chunkSize: number): string[] => {
-  const chunks = [];
-  for (let i = 0; i < str.length; i += chunkSize) {
-    chunks.push(str.slice(i, i + chunkSize));
-  }
-  return chunks;
-};
-
-async function mockFetch() {
-  const chunks = splitIntoChunks(fullContent, 10);
-  const response = new Response(
-    new ReadableStream({
-      async start(controller) {
-        await new Promise((resolve) => setTimeout(resolve, 100));
-        for (const chunk of chunks) {
-          await new Promise((resolve) => setTimeout(resolve, 500));
-          controller.enqueue(new TextEncoder().encode(chunk));
-        }
-        controller.close();
-      },
-    }),
-    {
-      headers: {
-        'Content-Type': 'application/x-ndjson',
-      },
-    },
-  );
-
-  return response;
-}
-
 const roles: BubbleListProps['role'] = {
   ai: {
     placement: 'start',
@@ -110,7 +80,7 @@ const App = () => {
       new DefaultChatProvider<string, ChatInput, string>({
         request: XRequest('https://api.example.com/chat', {
           manual: true,
-          fetch: mockFetch,
+          fetch: () => mockFetch(fullContent),
           transformStream: new TransformStream<string, string>({
             transform(chunk, controller) {
               chunks += chunk;
@@ -142,7 +112,7 @@ const App = () => {
 
       <div
         style={{
-          height: 700,
+          height: 400,
           paddingBlock: 20,
           display: 'flex',
           flexDirection: 'column',

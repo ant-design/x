@@ -28,6 +28,7 @@ const splitIntoChunks = (str: string, chunkSize: number) => {
   }
   return chunks;
 };
+
 const mockFetch = async () => {
   const chunks = splitIntoChunks(fullContent, 10);
   const response = new Response(
@@ -133,7 +134,7 @@ const App: React.FC = () => {
   return (
     <div
       style={{
-        height: 700,
+        height: 400,
         paddingBlock: 20,
         display: 'flex',
         flexDirection: 'column',

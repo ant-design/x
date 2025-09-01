@@ -1,9 +1,15 @@
 import { UserOutlined } from '@ant-design/icons';
-import { Bubble, Sender, useXAgent, useXChat } from '@ant-design/x';
+import { Bubble, Sender } from '@ant-design/x';
 import { BubbleListProps } from '@ant-design/x/es/bubble';
 import XMarkdown from '@ant-design/x-markdown';
 import Mermaid from '@ant-design/x-markdown/plugins/Mermaid';
-import React from 'react';
+import { DefaultChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';
+import React, { useMemo } from 'react';
+import { mockFetch } from '../../_utils';
+
+interface ChatInput {
+  query: string;
+}
 
 const fullContent = `
 Here are several Mermaid diagram examples 
@@ -83,41 +89,59 @@ const Code = (props: any) => {
 
 const App = () => {
   const [content, setContent] = React.useState('');
+  let chunks = '';
+  const provider = useMemo(
+    () =>
+      new DefaultChatProvider<string, ChatInput, string>({
+        request: XRequest('https://api.example.com/chat', {
+          manual: true,
+          fetch: () => mockFetch(fullContent),
+          transformStream: new TransformStream<string, string>({
+            transform(chunk, controller) {
+              chunks = `${chunks}${chunk}`.replace(
+                /<think.*?>([\s\S]*?)<\/think>/gi,
+                (match, content) => {
+                  try {
+                    return `<think status="done">${content}</think>`;
+                  } catch (error) {
+                    console.error(error);
+                    return match;
+                  }
+                },
+              );
+              controller.enqueue(chunks);
+            },
+          }),
+        }),
+      }),
+    [content],
+  );
 
-  // Agent for request
-  const [agent] = useXAgent<string, { message: string }, string>({
-    request: async (_, { onSuccess, onUpdate }) => {
-      let currentContent = '';
-
-      const id = setInterval(() => {
-        const addCount = Math.floor(Math.random() * 30);
-        currentContent = fullContent.slice(0, currentContent.length + addCount);
-        onUpdate(currentContent);
-        if (currentContent === fullContent) {
-          clearInterval(id);
-          onSuccess([fullContent]);
-        }
-      }, 100);
-    },
-  });
-
-  // Chat messages
-  const { onRequest, messages } = useXChat({
-    agent,
+  const { onRequest, messages, isRequesting } = useXChat({
+    provider: provider,
+    requestPlaceholder: 'Waiting...',
+    requestFallback: 'Mock failed return. Please try again later.',
   });
 
   return (
-    <div style={{ height: 500, display: 'flex', flexDirection: 'column' }}>
+    <div
+      style={{
+        height: 400,
+        paddingBlock: 20,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      }}
+    >
       <Bubble.List
         role={roles}
-        style={{ flex: 1 }}
         items={messages.map(({ id, message, status }) => ({
           key: id,
           role: status === 'local' ? 'local' : 'ai',
           content: message,
           contentRender:
             status === 'local'
-              ? undefined
+              ? (content) => content.query
               : (content) => (
                   <XMarkdown
                     content={content as string}
@@ -129,12 +153,14 @@ const App = () => {
         }))}
       />
       <Sender
-        loading={agent.isRequesting()}
+        loading={isRequesting()}
         value={content}
         onChange={setContent}
         style={{ marginTop: 48 }}
         onSubmit={(nextContent) => {
-          onRequest(nextContent);
+          onRequest({
+            query: nextContent,
+          });
           setContent('');
         }}
       />

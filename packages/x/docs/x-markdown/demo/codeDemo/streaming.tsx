@@ -5,6 +5,7 @@ import { DefaultChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';
 import React, { useMemo } from 'react';
 import '@ant-design/x-markdown/themes/light.css';
 import { BubbleListProps } from '@ant-design/x/es/bubble';
+import { mockFetch } from '../_utils';
 
 interface ChatInput {
   query: string;
@@ -40,45 +41,6 @@ export default App;
 \`\`\`
 `;
 
-const splitIntoChunks = (str: string, chunkSize: number): string[] => {
-  const chunks = [];
-  for (let i = 0; i < str.length; i += chunkSize) {
-    chunks.push(str.slice(i, i + chunkSize));
-  }
-  return chunks;
-};
-
-const mockFetch = async () => {
-  const chunks = splitIntoChunks(fullContent, 10);
-  const response = new Response(
-    new ReadableStream({
-      async start(controller) {
-        try {
-          await new Promise((resolve) => setTimeout(resolve, 100));
-          for (const chunk of chunks) {
-            await new Promise((resolve) => setTimeout(resolve, 100));
-            if (!controller.desiredSize) {
-              // 流已满或关闭，避免写入
-              return;
-            }
-            controller.enqueue(new TextEncoder().encode(chunk));
-          }
-          controller.close();
-        } catch (error) {
-          console.log(error, 333);
-        }
-      },
-    }),
-    {
-      headers: {
-        'Content-Type': 'application/x-ndjson',
-      },
-    },
-  );
-
-  return response;
-};
-
 const App: React.FC = () => {
   const [content, setContent] = React.useState('');
   let chunks = '';
@@ -87,7 +49,7 @@ const App: React.FC = () => {
       new DefaultChatProvider<string, ChatInput, string>({
         request: XRequest('https://api.example.com/chat', {
           manual: true,
-          fetch: mockFetch,
+          fetch: () => mockFetch(fullContent),
           transformStream: new TransformStream<string, string>({
             transform(chunk, controller) {
               chunks += chunk;
@@ -138,7 +100,7 @@ const App: React.FC = () => {
   return (
     <div
       style={{
-        height: 700,
+        height: 400,
         paddingBlock: 20,
         display: 'flex',
         flexDirection: 'column',
