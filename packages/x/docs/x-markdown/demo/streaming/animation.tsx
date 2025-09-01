@@ -1,10 +1,16 @@
 import { UserOutlined } from '@ant-design/icons';
-import { Bubble, Sender, useXAgent, useXChat } from '@ant-design/x';
+import { Bubble, Sender } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
+import { DefaultChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';
 import { Button, Row } from 'antd';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import '@ant-design/x-markdown/themes/light.css';
 import { BubbleListProps } from '@ant-design/x/es/bubble';
+import { mockFetch } from '../_utils';
+
+interface ChatInput {
+  query: string;
+}
 
 const fullContent = `
 乌镇是中国著名的江南水乡古镇，位于浙江省嘉兴市桐乡市，地处杭嘉湖平原，距离杭州约80公里。以下是关于乌镇的详细介绍：
@@ -68,40 +74,32 @@ const roles: BubbleListProps['role'] = {
 const App = () => {
   const [enableAnimation, setEnableAnimation] = useState(true);
   const [content, setContent] = React.useState('');
-  const [className, setClassName] = React.useState('x-markdown-light');
+  let chunks = '';
+  const provider = useMemo(
+    () =>
+      new DefaultChatProvider<string, ChatInput, string>({
+        request: XRequest('https://api.example.com/chat', {
+          manual: true,
+          fetch: () => mockFetch(fullContent),
+          transformStream: new TransformStream<string, string>({
+            transform(chunk, controller) {
+              chunks += chunk;
+              controller.enqueue(chunks);
+            },
+          }),
+        }),
+      }),
+    [content],
+  );
 
-  React.useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const urlParams = new URLSearchParams(window.location.search);
-      const theme = urlParams.get('theme');
-      setClassName(theme === 'dark' ? 'x-markdown-dark' : 'x-markdown-light');
-    }
-  }, []);
-
-  // Agent for request
-  const [agent] = useXAgent<string, { message: string }, string>({
-    request: async (_, { onSuccess, onUpdate }) => {
-      let currentContent = '';
-
-      const id = setInterval(() => {
-        const addCount = Math.floor(Math.random() * 30);
-        currentContent = fullContent.slice(0, currentContent.length + addCount);
-        onUpdate(currentContent);
-        if (currentContent === fullContent) {
-          clearInterval(id);
-          onSuccess([fullContent]);
-        }
-      }, 100);
-    },
-  });
-
-  // Chat messages
-  const { onRequest, messages } = useXChat({
-    agent,
+  const { onRequest, messages, isRequesting } = useXChat({
+    provider: provider,
+    requestPlaceholder: 'Waiting...',
+    requestFallback: 'Mock failed return. Please try again later.',
   });
 
   return (
-    <div style={{ minHeight: 500, display: 'flex', flexDirection: 'column' }}>
+    <>
       <Row justify="end" style={{ marginBottom: 24 }}>
         <Button
           onClick={() => {
@@ -111,36 +109,48 @@ const App = () => {
           Animation: {enableAnimation ? 'On' : 'Off'}
         </Button>
       </Row>
-      <Bubble.List
-        role={roles}
-        style={{ flex: 1 }}
-        items={messages.map(({ id, message, status }) => ({
-          key: id,
-          role: status === 'local' ? 'local' : 'ai',
-          content: message,
-          contentRender:
-            status === 'local'
-              ? undefined
-              : (content) => (
-                  <XMarkdown
-                    className={className}
-                    content={content as string}
-                    streaming={{ enableAnimation }}
-                  />
-                ),
-        }))}
-      />
-      <Sender
-        loading={agent.isRequesting()}
-        value={content}
-        onChange={setContent}
-        style={{ marginTop: 48 }}
-        onSubmit={(nextContent) => {
-          onRequest(nextContent);
-          setContent('');
+
+      <div
+        style={{
+          height: 400,
+          paddingBlock: 20,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
         }}
-      />
-    </div>
+      >
+        <Bubble.List
+          role={roles}
+          items={messages.map(({ id, message, status }) => ({
+            key: id,
+            role: status === 'local' ? 'local' : 'ai',
+            content: message,
+            contentRender:
+              status === 'local'
+                ? (content) => content?.query
+                : (content) => (
+                    <XMarkdown
+                      className="x-markdown-light"
+                      content={content as string}
+                      streaming={{ hasNextChunk: isRequesting() }}
+                    />
+                  ),
+          }))}
+        />
+        <Sender
+          loading={isRequesting()}
+          value={content}
+          onChange={setContent}
+          style={{ marginTop: 48 }}
+          onSubmit={(nextContent) => {
+            onRequest({
+              query: nextContent,
+            });
+            setContent('');
+          }}
+        />
+      </div>
+    </>
   );
 };
 

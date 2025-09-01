@@ -1,9 +1,15 @@
 import { UserOutlined } from '@ant-design/icons';
-import { Bubble, Sender, useXAgent, useXChat } from '@ant-design/x';
+import { Bubble, Sender } from '@ant-design/x';
 import { BubbleListProps } from '@ant-design/x/es/bubble';
 import XMarkdown from '@ant-design/x-markdown';
 import Latex from '@ant-design/x-markdown/plugins/Latex';
-import React from 'react';
+import { DefaultChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';
+import React, { useMemo } from 'react';
+import { mockFetch } from '../../_utils';
+
+interface ChatInput {
+  query: string;
+}
 
 const fullContent = `
 ### Latex
@@ -38,30 +44,49 @@ const roles: BubbleListProps['role'] = {
 const App = () => {
   const [content, setContent] = React.useState('');
 
-  // Agent for request
-  const [agent] = useXAgent<string, { message: string }, string>({
-    request: async (_, { onSuccess, onUpdate }) => {
-      let currentContent = '';
+  let chunks = '';
+  const provider = useMemo(
+    () =>
+      new DefaultChatProvider<string, ChatInput, string>({
+        request: XRequest('https://api.example.com/chat', {
+          manual: true,
+          fetch: () => mockFetch(fullContent),
+          transformStream: new TransformStream<string, string>({
+            transform(chunk, controller) {
+              chunks = `${chunks}${chunk}`.replace(
+                /<think.*?>([\s\S]*?)<\/think>/gi,
+                (match, content) => {
+                  try {
+                    return `<think status="done">${content}</think>`;
+                  } catch (error) {
+                    console.error(error);
+                    return match;
+                  }
+                },
+              );
+              controller.enqueue(chunks);
+            },
+          }),
+        }),
+      }),
+    [content],
+  );
 
-      const id = setInterval(() => {
-        const addCount = Math.floor(Math.random() * 30);
-        currentContent = fullContent.slice(0, currentContent.length + addCount);
-        onUpdate(currentContent);
-        if (currentContent === fullContent) {
-          clearInterval(id);
-          onSuccess([fullContent]);
-        }
-      }, 100);
-    },
+  const { onRequest, messages, isRequesting } = useXChat({
+    provider: provider,
+    requestPlaceholder: 'Waiting...',
+    requestFallback: 'Mock failed return. Please try again later.',
   });
-
-  // Chat messages
-  const { onRequest, messages } = useXChat({
-    agent,
-  });
-
   return (
-    <div style={{ height: 500, display: 'flex', flexDirection: 'column' }}>
+    <div
+      style={{
+        height: 400,
+        paddingBlock: 20,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      }}
+    >
       <Bubble.List
         role={roles}
         style={{ flex: 1 }}
@@ -71,19 +96,21 @@ const App = () => {
           content: message,
           contentRender:
             status === 'local'
-              ? undefined
+              ? (content) => content.query
               : (content) => (
                   <XMarkdown content={content as string} config={{ extensions: Latex() }} />
                 ),
         }))}
       />
       <Sender
-        loading={agent.isRequesting()}
+        loading={isRequesting()}
         value={content}
         onChange={setContent}
         style={{ marginTop: 48 }}
         onSubmit={(nextContent) => {
-          onRequest(nextContent);
+          onRequest({
+            query: nextContent,
+          });
           setContent('');
         }}
       />

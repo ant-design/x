@@ -1,11 +1,16 @@
-import { Bubble, Prompts, useXAgent, useXChat, Welcome } from '@ant-design/x';
+import { Bubble, Prompts, Welcome } from '@ant-design/x';
 import { BubbleData } from '@ant-design/x/es/bubble';
+import { DefaultChatProvider, useXChat, XRequest, XRequestOptions } from '@ant-design/x-sdk';
 import { type GetProp, Tag } from 'antd';
 import { createStyles } from 'antd-style';
 import React from 'react';
 import useLocale from '../../../../hooks/useLocale';
 import CustomizationProvider, { LOCALES } from '../../common/CustomizationProvider';
 import CustomizationSender from '../../common/CustomizationSender';
+
+interface ChatInput {
+  query: string;
+}
 
 const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000));
 
@@ -30,10 +35,11 @@ const roles: GetProp<typeof Bubble.List, 'role'> = {
         background: '#3877FF',
       },
     },
+    contentRender(content: any) {
+      return content?.query;
+    },
   },
 };
-
-let mockSuccess = false;
 
 const useStyle = createStyles(({ token, css }) => {
   return {
@@ -121,26 +127,30 @@ const useStyle = createStyles(({ token, css }) => {
 const IndependentScene: React.FC = () => {
   const { styles } = useStyle();
   const [locale] = useLocale(LOCALES);
-
   const [content, setContent] = React.useState('');
 
-  const [agent] = useXAgent<string, { message: string }, string>({
-    request: async ({ message }, { onSuccess, onError }) => {
-      await sleep();
+  const [provider] = React.useState(
+    new DefaultChatProvider<string, ChatInput, string>({
+      request: XRequest('https://api.example.com/chat', {
+        manual: true,
+        fetch: async (
+          _: Parameters<typeof fetch>[0],
+          options: XRequestOptions<ChatInput, string>,
+        ) => {
+          await sleep();
+          const params = options?.params;
+          return Promise.resolve(
+            new Response(JSON.stringify([`Mock success return. You said: ${params?.query}`]), {
+              headers: { 'Content-Type': 'application/json' },
+            }),
+          );
+        },
+      }),
+    }),
+  );
 
-      mockSuccess = !mockSuccess;
-
-      if (mockSuccess) {
-        onSuccess([`Mock success return. You said: ${message}`]);
-      }
-
-      onError(new Error('Mock request failed'));
-    },
-  });
-
-  // Chat messages
-  const { onRequest, messages } = useXChat({
-    agent,
+  const { onRequest, messages, isRequesting } = useXChat({
+    provider,
     requestPlaceholder: 'Waiting...',
     requestFallback: 'Mock failed return. Please try again later.',
   });
@@ -166,7 +176,9 @@ const IndependentScene: React.FC = () => {
         <Prompts
           title={locale.help_text}
           onItemClick={(item) => {
-            onRequest(item.data.description as string);
+            onRequest({
+              query: item.data.description as string,
+            });
           }}
           styles={{
             subItem: {
@@ -250,13 +262,15 @@ const IndependentScene: React.FC = () => {
           ]}
         />
         <CustomizationSender
-          loading={agent.isRequesting()}
+          loading={isRequesting()}
           value={content}
           onChange={setContent}
           placeholder={locale.question1}
           onSubmit={(nextContent) => {
             if (!nextContent) return;
-            onRequest(nextContent);
+            onRequest({
+              query: nextContent,
+            });
             setContent('');
           }}
         />

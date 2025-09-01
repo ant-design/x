@@ -1,7 +1,7 @@
 ---
 category: Components
 group:
-  title: Tools
+  title: Others
   order: 5
 title: XProvider
 order: 999
