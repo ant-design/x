@@ -76,8 +76,7 @@
   "peerDependencies": {
     "antd": "6.0.0-alpha.1",
     "react": ">=18.0.0",
-    "react-dom": ">=18.0.0",
-    "@ant-design/x": "*"
+    "react-dom": ">=18.0.0"
   },
   "repository": {
     "type": "git",
