@@ -58,7 +58,9 @@
     "lodash.throttle": "^4.1.1",
     "marked": "^15.0.12",
     "react-syntax-highlighter": "^15.6.1",
-    "mermaid": "^11.8.1"
+    "mermaid": "^11.8.1",
+    "@ant-design/x/es/locale/useLocale": "*",
+    "@ant-design/x/locale/en_US": "*"
   },
   "devDependencies": {
     "@types/lodash.throttle": "^4.1.9",
@@ -73,6 +75,7 @@
     "react-dom": "^19.0.0"
   },
   "peerDependencies": {
+    "antd": "6.0.0-alpha.1",
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
   },

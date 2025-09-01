@@ -1,4 +1,6 @@
 import { CopyOutlined, DownloadOutlined, ZoomInOutlined, ZoomOutOutlined } from '@ant-design/icons';
+import useLocale from '@ant-design/x/es/locale/useLocale';
+import locale_EN from '@ant-design/x/locale/en_US';
 import { Button, message, Segmented, Space, Tooltip } from 'antd';
 import classnames from 'classnames';
 import throttle from 'lodash.throttle';
@@ -8,8 +10,6 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import useXProviderContext from '../hooks/use-x-provider-context';
 import type { PluginsType } from '../type';
 import useStyle from './style';
-import { useLocale } from './locale';
-import enUS from './locale/en_US';
 
 enum RenderType {
   Code = '代码',
@@ -43,12 +43,11 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
   const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
   const id = `mermaid-${uuid++}-${children?.length || 0}`;
-
   const [messageApi] = message.useMessage();
 
   // ============================ locale ============================
-  const [contextLocale] = useLocale('Mermaid', enUS.Mermaid);
-
+  const [contextLocale] = useLocale('Mermaid', locale_EN.Mermaid);
+  console.log(contextLocale, 'contextLocale');
   // ============================ style ============================
   const { getPrefixCls, direction } = useXProviderContext();
   const prefixCls = getPrefixCls('mermaid', customizePrefixCls);

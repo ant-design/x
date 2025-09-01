@@ -1,9 +1,20 @@
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import type { GenerateStyle } from 'antd/es/theme/internal';
 import { genStyleHooks } from '../../theme/genStyleUtils';
-import type { FullToken } from '../../theme/useToken';
+import type { FullToken, GetDefaultToken } from '../../theme/useToken';
 
-export type ComponentToken = {};
+export type ComponentToken = {
+  /**
+   * @desc 标题背景颜色
+   * @descEN title background color
+   */
+  colorBgTitle: string;
+  /**
+   * @desc
+   * @descEN
+   */
+  colorBorderCode: string;
+};
 
 export interface HighlightCodeToken extends FullToken<'HighlightCode'> {}
 
@@ -16,16 +27,18 @@ const genHighlightCodeStyle: GenerateStyle<HighlightCodeToken> = (token) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        background: token.colorFillContent,
+        background: token.colorBgTitle,
         padding: token.paddingSM,
         borderTopLeftRadius: token.borderRadius,
         borderTopRightRadius: token.borderRadius,
       },
       '&-code': {
         border: '1px solid',
-        borderColor: token.colorBorderSecondary,
+        borderColor: token.colorBorderCode,
         borderBottomRightRadius: token.borderRadius,
         borderBottomLeftRadius: token.borderRadius,
+        borderTopLeftRadius: 0,
+        borderTopRightRadius: 0,
         background: 'transparent',
       },
       [`&${componentCls}-rtl`]: {
@@ -35,7 +48,18 @@ const genHighlightCodeStyle: GenerateStyle<HighlightCodeToken> = (token) => {
   };
 };
 
-export default genStyleHooks<'HighlightCode'>('HighlightCode', (token) => {
-  const highlightCodeToken = mergeToken<HighlightCodeToken>(token, {});
-  return [genHighlightCodeStyle(highlightCodeToken)];
-});
+export const prepareComponentToken: GetDefaultToken<'HighlightCode'> = (token) => {
+  return {
+    colorBgTitle: token.colorFillContent,
+    colorBorderCode: token.colorBorderSecondary,
+  };
+};
+
+export default genStyleHooks<'HighlightCode'>(
+  'HighlightCode',
+  (token) => {
+    const highlightCodeToken = mergeToken<HighlightCodeToken>(token, {});
+    return [genHighlightCodeStyle(highlightCodeToken)];
+  },
+  prepareComponentToken,
+);
