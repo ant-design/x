@@ -82,3 +82,7 @@ Actions 组件用于快速配置一些 AI 场景下所需要的操作按钮/功�
 ## Semantic DOM
 
 <code src="./demo/_semantic.tsx" simplify="true"></code>
+
+## 主题变量（Design Token）
+
+<ComponentTokenTable component="Actions"></ComponentTokenTable>

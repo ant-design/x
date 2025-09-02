@@ -1,8 +1,5 @@
-import { XProvider } from '@ant-design/x';
-import zhCN_X from '@ant-design/x/locale/zh_CN';
 import XMarkdown from '@ant-design/x-markdown';
 import Mermaid from '@ant-design/x-markdown/plugins/Mermaid';
-
 import React from 'react';
 
 const content = `
@@ -67,15 +64,13 @@ const Code = (props: { class: string; children: string }) => {
 
 const App = () => {
   return (
-    <XProvider locale={zhCN_X}>
-      <XMarkdown
-        components={{
-          code: Code,
-        }}
-      >
-        {content}
-      </XMarkdown>
-    </XProvider>
+    <XMarkdown
+      components={{
+        code: Code,
+      }}
+    >
+      {content}
+    </XMarkdown>
   );
 };
 

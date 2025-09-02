@@ -1,7 +1,7 @@
 import { LinkOutlined, QuestionCircleOutlined, RightOutlined } from '@ant-design/icons';
 import { XProvider } from '@ant-design/x';
-import tokenData from '@ant-design/x/es/version/token.json';
-import tokenMeta from '@ant-design/x/es/version/token-meta.json';
+import tokenData from '@ant-design/x-markdown/es/version/token.json';
+import tokenMeta from '@ant-design/x-markdown/es/version/token-meta.json';
 import { Flex, Popover, Table, Typography } from 'antd';
 import { createStyles, css, useTheme } from 'antd-style';
 import { getDesignToken } from 'antd-token-previewer';
@@ -205,7 +205,7 @@ export interface ComponentTokenTableProps {
   component: string;
 }
 
-const ComponentTokenTable: React.FC<ComponentTokenTableProps> = ({ component }) => {
+const XMarkdownComponentTokenTable: React.FC<ComponentTokenTableProps> = ({ component }) => {
   const [locale] = useLocale(locales);
   const [mergedGlobalTokens] = useMemo(() => {
     const globalTokenSet = new Set<string>();
@@ -251,4 +251,4 @@ const ComponentTokenTable: React.FC<ComponentTokenTableProps> = ({ component }) 
   );
 };
 
-export default React.memo(ComponentTokenTable);
+export default React.memo(XMarkdownComponentTokenTable);

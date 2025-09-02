@@ -2,7 +2,6 @@
 group:
   title: Plugins
 title: Latex
-subtitle: Formula
 order: 2
 ---
 

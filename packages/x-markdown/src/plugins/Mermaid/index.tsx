@@ -12,8 +12,8 @@ import type { PluginsType } from '../type';
 import useStyle from './style';
 
 enum RenderType {
-  Code = '代码',
-  Image = '图片',
+  Code = 'code',
+  Image = 'image',
 }
 
 mermaid.initialize({
@@ -47,7 +47,7 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
 
   // ============================ locale ============================
   const [contextLocale] = useLocale('Mermaid', locale_EN.Mermaid);
-  console.log(contextLocale, 'contextLocale');
+
   // ============================ style ============================
   const { getPrefixCls, direction } = useXProviderContext();
   const prefixCls = getPrefixCls('mermaid', customizePrefixCls);
@@ -189,7 +189,10 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
     return (
       <div className={classnames(`${prefixCls}-header`, classNames?.header)} style={styles.header}>
         <Segmented
-          options={[RenderType.Image, RenderType.Code]}
+          options={[
+            { label: contextLocale.image, value: RenderType.Image },
+            { label: contextLocale.code, value: RenderType.Code },
+          ]}
           value={renderType}
           onChange={setRenderType}
         />

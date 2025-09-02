@@ -24,6 +24,8 @@ const localeValues: Required<xLocale & xMarkdownLocale> = {
     zoomOutText: '放大',
     zoomResetText: '重置',
     downloadText: '下载',
+    code: '代码',
+    image: '图片',
   },
 };
 

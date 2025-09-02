@@ -24,6 +24,8 @@ const localeValues: Required<xLocale & xMarkdownLocale> = {
     zoomOutText: 'Zoom out',
     zoomResetText: 'Reset',
     downloadText: 'Download',
+    code: 'Code',
+    image: 'Image',
   },
 };
 

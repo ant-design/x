@@ -35,6 +35,8 @@ export interface xMarkdownLocale {
     zoomOutText: string;
     zoomResetText: string;
     downloadText: string;
+    code: string;
+    image: string;
   };
 }
 export type Locale = xLocale & antdLocale & xMarkdownLocale;
