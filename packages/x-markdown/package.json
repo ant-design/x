@@ -58,6 +58,7 @@
     "html-react-parser": "^5.2.5",
     "katex": "^0.16.22",
     "lodash.throttle": "^4.1.1",
+    "glob": "^11.0.0",
     "marked": "^15.0.12",
     "react-syntax-highlighter": "^15.6.1",
     "mermaid": "^11.8.1",
