@@ -9,8 +9,8 @@ const splitIntoChunks = (str: string, chunkSize: number) => {
   return chunks;
 };
 
-export const mockFetch = async (fullContent: string) => {
-  const chunks = splitIntoChunks(fullContent, 2);
+export const mockFetch = async (fullContent: string, onFinish?: () => void) => {
+  const chunks = splitIntoChunks(fullContent, 3);
   const response = new Response(
     new ReadableStream({
       async start(controller) {
@@ -25,6 +25,7 @@ export const mockFetch = async (fullContent: string) => {
 
             controller.enqueue(new TextEncoder().encode(chunk));
           }
+          onFinish?.();
           controller.close();
         } catch (error) {
           console.log(error);
