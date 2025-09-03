@@ -36,7 +36,6 @@ const genMermaidStyle: GenerateStyle<MermaidToken> = (token) => {
         borderTop: 0,
         padding: token.paddingSM,
         overflow: 'auto',
-        minHeight: 200,
         borderBottomRightRadius: token.borderRadius,
         borderBottomLeftRadius: token.borderRadius,
       },

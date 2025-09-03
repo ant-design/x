@@ -43,7 +43,7 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
   const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
   const id = `mermaid-${uuid++}-${children?.length || 0}`;
-  const [messageApi] = message.useMessage();
+  const [messageApi, contextHolder] = message.useMessage();
 
   // ============================ locale ============================
   const [contextLocale] = useLocale('Mermaid', locale_EN.Mermaid);
@@ -188,6 +188,7 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
 
     return (
       <div className={classnames(`${prefixCls}-header`, classNames?.header)} style={styles.header}>
+        {contextHolder}
         <Segmented
           options={[RenderType.Image, RenderType.Code]}
           value={renderType}
