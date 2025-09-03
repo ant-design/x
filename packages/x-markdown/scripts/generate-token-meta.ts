@@ -44,7 +44,10 @@ const main = async () => {
   const app = await (Application as any).bootstrap(
     {
       // typedoc options here
-      entryPoints: ['src/plugins/theme/interface/index.ts', 'src/plugins/*/style/index.{ts,tsx}'],
+      entryPoints: [
+        'src/plugins/theme/interface/index.ts',
+        'src/plugins/theme/interface/components.ts',
+      ],
       skipErrorChecking: true,
       logLevel: 'Error',
     },
@@ -66,7 +69,7 @@ const main = async () => {
     // eslint-disable-next-line no-restricted-syntax
     project?.children?.forEach((file: any) => {
       // Global Token
-      if (file.name === 'theme/interface') {
+      if (file.name === 'index') {
         let presetColors: string[] = [];
 
         file.children?.forEach((type: any) => {
@@ -99,13 +102,17 @@ const main = async () => {
           (item) => !tokenMeta.seed.some((seedItem) => seedItem.token === item.token),
         );
       } else {
-        const component = file.name
-          .slice(0, file.name.indexOf('/'))
-          .replace(/(^(.)|-(.))/g, (match: string) => match.replace('-', '').toUpperCase());
-        const componentToken = file.children?.find((item: any) => item?.name === 'ComponentToken');
-        if (componentToken) {
-          tokenMeta.components[component] = getTokenList(componentToken.children, component);
-        }
+        const componentTokens = file.children?.filter((item: any) =>
+          item?.name?.includes('PluginToken'),
+        );
+        componentTokens.forEach(
+          (componentToken: { name: string; children: DeclarationReflection[] | undefined }) => {
+            const component = componentToken.name.replace('PluginToken', '');
+            if (componentToken) {
+              tokenMeta.components[component] = getTokenList(componentToken.children, component);
+            }
+          },
+        );
       }
     });
 

@@ -73,7 +73,8 @@
     "antd-style": "^4.0.0-alpha.1",
     "antd-token-previewer": "^3.0.0-alpha.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "glob": "^11.0.0"
   },
   "peerDependencies": {
     "antd": "6.0.0-alpha.1",

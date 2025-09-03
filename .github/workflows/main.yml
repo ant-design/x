@@ -10,6 +10,7 @@ jobs:
       - uses: oven-sh/setup-bun@v2
       - run: bun i
       - run: npm i -g utoo
+      - run: ut prestart
       - run: ut lint
       - run: ut tsc
       - run: ut compile

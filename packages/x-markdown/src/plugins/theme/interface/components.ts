@@ -1,4 +1,4 @@
-type HighlightCodeToken = {
+export interface HighlightCodePluginToken {
   /**
    * @desc 标题背景颜色
    * @descEN Title background color
@@ -14,9 +14,9 @@ type HighlightCodeToken = {
    * @descEN Code block border color
    */
   colorBorderCode: string;
-};
+}
 
-type MermaidToken = {
+export interface MermaidPluginToken {
   /**
    * @desc 标题背景颜色
    * @descEN Title background color
@@ -40,9 +40,9 @@ type MermaidToken = {
    * @descEN Graph border color
    */
   colorBorderGraph: string;
-};
+}
 
 export interface ComponentTokenMap {
-  Mermaid: MermaidToken;
-  HighlightCode: HighlightCodeToken;
+  Mermaid: MermaidPluginToken;
+  HighlightCode: HighlightCodePluginToken;
 }
