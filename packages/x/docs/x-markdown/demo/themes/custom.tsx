@@ -1,6 +1,6 @@
 import { XMarkdown } from '@ant-design/x-markdown';
-import React from 'react';
 import { createStyles, css } from 'antd-style';
+import React from 'react';
 import '@ant-design/x-markdown/themes/light.css';
 
 const content = `

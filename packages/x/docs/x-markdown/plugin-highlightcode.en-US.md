@@ -27,6 +27,10 @@ When you need to render highlighted code blocks in Markdown.
 | classNames | Style class names | `string` | - |
 | highlightProps | Code highlighting configuration | [`highlightProps`](https://github.com/react-syntax-highlighter/react-syntax-highlighter?tab=readme-ov-file#props) | - |
 
-## Design Tokens
+## Semantic DOM
 
-<ComponentTokenTable component="HighlightCode"></ComponentTokenTable>
+<code src="./demo/supersets/HighlightCode/_semantic.tsx" simplify="true"></code>
+
+## Design Token
+
+<XMarkdownComponentTokenTable component="HighlightCode"></XMarkdownComponentTokenTable>

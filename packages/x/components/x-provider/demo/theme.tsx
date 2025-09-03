@@ -105,7 +105,6 @@ export default () => {
         <XProvider
           theme={{
             token: data,
-            components: {},
           }}
         >
           <Flex style={{ height: 500 }} gap={12}>

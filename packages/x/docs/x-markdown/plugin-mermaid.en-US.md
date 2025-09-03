@@ -2,7 +2,6 @@
 group:
   title: Plugins
 title: Mermaid
-subtitle: Diagram
 order: 4
 ---
 
@@ -26,3 +25,11 @@ When you need to render Mermaid diagrams in Markdown.
 | className | Style class name | `string` | |
 | classNames | Style class names | `string` | - |
 | highlightProps | Code highlighting configuration | [`highlightProps`](https://github.com/react-syntax-highlighter/react-syntax-highlighter?tab=readme-ov-file#props) | - |
+
+## Semantic DOM
+
+<code src="./demo/supersets/Mermaid/_semantic.tsx" simplify="true"></code>
+
+## Design Token
+
+<XMarkdownComponentTokenTable component="Mermaid"></XMarkdownComponentTokenTable>

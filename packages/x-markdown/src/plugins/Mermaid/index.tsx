@@ -12,8 +12,8 @@ import type { PluginsType } from '../type';
 import useStyle from './style';
 
 enum RenderType {
-  Code = '代码',
-  Image = '图片',
+  Code = 'code',
+  Image = 'image',
 }
 
 mermaid.initialize({
@@ -47,7 +47,7 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
 
   // ============================ locale ============================
   const [contextLocale] = useLocale('Mermaid', locale_EN.Mermaid);
-  console.log(contextLocale, 'contextLocale');
+
   // ============================ style ============================
   const { getPrefixCls, direction } = useXProviderContext();
   const prefixCls = getPrefixCls('mermaid', customizePrefixCls);
@@ -190,20 +190,23 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
       <div className={classnames(`${prefixCls}-header`, classNames?.header)} style={styles.header}>
         {contextHolder}
         <Segmented
-          options={[RenderType.Image, RenderType.Code]}
+          options={[
+            { label: contextLocale.image, value: RenderType.Image },
+            { label: contextLocale.code, value: RenderType.Code },
+          ]}
           value={renderType}
           onChange={setRenderType}
         />
         <Space>
-          <Tooltip title={contextLocale.copyText}>
+          <Tooltip title={contextLocale.copy}>
             <Button type="text" size="small" icon={<CopyOutlined />} onClick={handleCopyCode} />
           </Tooltip>
           {renderType === RenderType.Image ? (
             <>
-              <Tooltip title={contextLocale.zoomInText}>
+              <Tooltip title={contextLocale.zoomOut}>
                 <Button type="text" size="small" icon={<ZoomInOutlined />} onClick={handleZoomIn} />
               </Tooltip>
-              <Tooltip title={contextLocale.zoomOutText}>
+              <Tooltip title={contextLocale.zoomIn}>
                 <Button
                   type="text"
                   size="small"
@@ -211,12 +214,12 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
                   onClick={handleZoomOut}
                 />
               </Tooltip>
-              <Tooltip title={contextLocale.zoomResetText}>
+              <Tooltip title={contextLocale.zoomReset}>
                 <Button type="text" size="small" onClick={handleReset}>
-                  {contextLocale.zoomResetText}
+                  {contextLocale.zoomReset}
                 </Button>
               </Tooltip>
-              <Tooltip title={contextLocale.downloadText}>
+              <Tooltip title={contextLocale.download}>
                 <Button
                   type="text"
                   size="small"

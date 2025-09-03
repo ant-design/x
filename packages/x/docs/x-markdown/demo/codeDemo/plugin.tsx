@@ -2,8 +2,7 @@ import { Token, XMarkdown } from '@ant-design/x-markdown';
 import React from 'react';
 import '@ant-design/x-markdown/themes/light.css';
 import '@ant-design/x-markdown/themes/dark.css';
-import { Popover, theme } from 'antd';
-import useToken from 'antd/es/theme/useToken';
+import { Popover } from 'antd';
 import { useMarkdownTheme } from '../_utils';
 
 const content = `

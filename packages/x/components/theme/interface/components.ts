@@ -9,8 +9,9 @@ import type { ComponentToken as SuggestionComponentToken } from '../../suggestio
 import type { ComponentToken as ThinkComponentToken } from '../../think/style';
 import type { ComponentToken as ThoughtChainComponentToken } from '../../thought-chain/style';
 import type { ComponentToken as WelcomeComponentToken } from '../../welcome/style';
+import type { ComponentTokenMap as XMarkdownToken } from './XMarkdownComponents';
 
-export interface ComponentTokenMap {
+export interface ComponentTokenMap extends XMarkdownToken {
   Attachments?: AttachmentsToken;
   Bubble?: BubbleComponentToken;
   Conversations?: ConversationsComponentToken;

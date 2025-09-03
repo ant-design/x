@@ -19,11 +19,13 @@ const localeValues: Required<xLocale & xMarkdownLocale> = {
   },
   Mermaid: {
     copySuccess: '复制成功',
-    copyText: '复制代码',
-    zoomInText: '缩小',
-    zoomOutText: '放大',
-    zoomResetText: '重置',
-    downloadText: '下载',
+    copy: '复制代码',
+    zoomIn: '缩小',
+    zoomOut: '放大',
+    zoomReset: '重置',
+    download: '下载',
+    code: '代码',
+    image: '图片',
   },
 };
 

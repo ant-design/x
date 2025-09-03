@@ -30,3 +30,7 @@ Markdown 中需要渲染 Mermaid。
 ## Semantic DOM
 
 <code src="./demo/supersets/Mermaid/_semantic.tsx" simplify="true"></code>
+
+## 主题变量（Design Token）
+
+<XMarkdownComponentTokenTable component="Mermaid"></XMarkdownComponentTokenTable>

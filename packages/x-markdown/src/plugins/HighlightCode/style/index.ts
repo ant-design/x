@@ -3,19 +3,6 @@ import type { GenerateStyle } from 'antd/es/theme/internal';
 import { genStyleHooks } from '../../theme/genStyleUtils';
 import type { FullToken, GetDefaultToken } from '../../theme/useToken';
 
-export type ComponentToken = {
-  /**
-   * @desc 标题背景颜色
-   * @descEN title background color
-   */
-  colorBgTitle: string;
-  /**
-   * @desc
-   * @descEN
-   */
-  colorBorderCode: string;
-};
-
 export interface HighlightCodeToken extends FullToken<'HighlightCode'> {}
 
 const genHighlightCodeStyle: GenerateStyle<HighlightCodeToken> = (token) => {
@@ -27,6 +14,7 @@ const genHighlightCodeStyle: GenerateStyle<HighlightCodeToken> = (token) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
+        color: token.colorTextTitle,
         background: token.colorBgTitle,
         padding: token.paddingSM,
         borderTopLeftRadius: token.borderRadius,
@@ -52,6 +40,7 @@ export const prepareComponentToken: GetDefaultToken<'HighlightCode'> = (token) =
   return {
     colorBgTitle: token.colorFillContent,
     colorBorderCode: token.colorBorderSecondary,
+    colorTextTitle: token.colorText,
   };
 };
 

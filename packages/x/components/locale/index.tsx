@@ -30,11 +30,13 @@ export interface xLocale {
 export interface xMarkdownLocale {
   Mermaid?: {
     copySuccess: string;
-    copyText: string;
-    zoomInText: string;
-    zoomOutText: string;
-    zoomResetText: string;
-    downloadText: string;
+    copy: string;
+    zoomIn: string;
+    zoomOut: string;
+    zoomReset: string;
+    download: string;
+    code: string;
+    image: string;
   };
 }
 export type Locale = xLocale & antdLocale & xMarkdownLocale;
