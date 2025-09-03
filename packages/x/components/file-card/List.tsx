@@ -154,7 +154,7 @@ const List: React.FC<FileCardListProps> = (props) => {
                   size={size}
                   key={key}
                   className={classnames(item.className, classNameCard)}
-                  classNames={classNameOther}
+                  classNames={{...classNameOther, ...item.classNames}}
                   style={{ ...item.style, ...styles?.card }}
                   styles={other}
                 />
