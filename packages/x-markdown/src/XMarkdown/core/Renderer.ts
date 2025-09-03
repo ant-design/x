@@ -1,6 +1,6 @@
-import { XMarkdownProps } from '../interface';
 import parseHtml, { DOMNode, domToReact, Element } from 'html-react-parser';
 import React, { ReactNode } from 'react';
+import { XMarkdownProps } from '../interface';
 
 interface RendererOptions {
   components?: XMarkdownProps['components'];
@@ -43,7 +43,9 @@ class Renderer {
     }
 
     // 栈中剩下的就是未闭合的标签
-    stack.forEach((tag) => unclosedTags.add(tag));
+    stack.forEach((tag) => {
+      unclosedTags.add(tag);
+    });
     return unclosedTags;
   }
 

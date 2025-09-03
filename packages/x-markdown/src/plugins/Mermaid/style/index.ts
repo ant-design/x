@@ -3,7 +3,13 @@ import type { GenerateStyle } from 'antd/es/theme/internal';
 import { genStyleHooks } from '../../theme/genStyleUtils';
 import type { FullToken } from '../../theme/useToken';
 
-export type ComponentToken = {};
+export type ComponentToken = {
+  /**
+   * @desc 标题背景颜色
+   * @descEN title background color
+   */
+  colorBgTitle: string;
+};
 
 export interface MermaidToken extends FullToken<'Mermaid'> {}
 
