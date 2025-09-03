@@ -1,6 +1,6 @@
-import { XMarkdownProps } from '../interface';
 import parseHtml, { DOMNode, domToReact, Element } from 'html-react-parser';
 import React, { ReactNode } from 'react';
+import { XMarkdownProps } from '../interface';
 
 interface RendererOptions {
   components?: XMarkdownProps['components'];
@@ -21,8 +21,8 @@ class Renderer {
     const stack: string[] = [];
     const tagRegex = /<\/?([a-zA-Z][a-zA-Z0-9-]*)(?:\s[^>]*)?>/g;
 
-    let match;
-    while ((match = tagRegex.exec(htmlString)) !== null) {
+    let match = tagRegex.exec(htmlString);
+    while (match !== null) {
       const [fullMatch, tagName] = match;
       const isClosing = fullMatch.startsWith('</');
       const isSelfClosing = fullMatch.endsWith('/>');
@@ -39,11 +39,13 @@ class Renderer {
           stack.push(tagName.toLowerCase());
         }
       }
+      match = tagRegex.exec(htmlString);
     }
 
     // 栈中剩下的就是未闭合的标签
-    stack.forEach((tag) => unclosedTags.add(tag));
-
+    stack.forEach((tag) => {
+      unclosedTags.add(tag);
+    });
     return unclosedTags;
   }
 
@@ -59,12 +61,15 @@ class Renderer {
 
         if (renderElement) {
           const streamStatus = unclosedTags.has(name) ? 'loading' : 'done';
-          const props: Record<string, any> = {
+          const props: Record<string, unknown> = {
             domNode,
             streamStatus,
             ...attribs,
           };
-
+          if (props.class) {
+            // merge className
+            props.className = props.className ? `${props.className} ${props.class}` : props.class;
+          }
           if (children) {
             props.children = domToReact(children as DOMNode[]);
           }

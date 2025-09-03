@@ -3,6 +3,7 @@ import React from 'react';
 import './plugin.css';
 import '@ant-design/x-markdown/themes/light.css';
 import { Popover } from 'antd';
+import { useMarkdownTheme } from '../../_utils';
 
 const content = `
 ## Custom Plugin
@@ -82,15 +83,7 @@ const referenceList = [
 ];
 
 const App = () => {
-  const [className, setClassName] = React.useState('x-markdown-light');
-
-  React.useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const urlParams = new URLSearchParams(window.location.search);
-      const theme = urlParams.get('theme');
-      setClassName(theme === 'dark' ? 'x-markdown-dark' : 'x-markdown-light');
-    }
-  }, []);
+  const [className] = useMarkdownTheme();
 
   const footNoteExtension = {
     name: 'footnote',

@@ -132,7 +132,7 @@ const App = () => {
                     <XMarkdown
                       className="x-markdown-light"
                       content={content as string}
-                      streaming={{ hasNextChunk: isRequesting() }}
+                      streaming={{ hasNextChunk: isRequesting(), enableAnimation }}
                     />
                   ),
           }))}

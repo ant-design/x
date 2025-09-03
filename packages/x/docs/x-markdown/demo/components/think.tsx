@@ -5,6 +5,7 @@ import { DefaultChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';
 import React, { useMemo } from 'react';
 import '@ant-design/x-markdown/themes/light.css';
 import { BubbleListProps } from '@ant-design/x/es/bubble';
+import { useMarkdownTheme } from '../_utils';
 
 interface ChatInput {
   query: string;
@@ -100,15 +101,7 @@ const ThinkComponent = React.memo(
 
 const App: React.FC = () => {
   const [content, setContent] = React.useState('');
-  const [className, setClassName] = React.useState('x-markdown-light');
-
-  React.useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const urlParams = new URLSearchParams(window.location.search);
-      const theme = urlParams.get('theme');
-      setClassName(theme === 'dark' ? 'x-markdown-dark' : 'x-markdown-light');
-    }
-  }, []);
+  const [className] = useMarkdownTheme();
 
   let chunks = '';
   const provider = useMemo(
