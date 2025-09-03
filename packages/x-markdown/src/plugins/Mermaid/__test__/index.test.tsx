@@ -1,6 +1,6 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import Mermaid from '../index';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
+import Mermaid from '../index';
 
 // Mock mermaid
 jest.mock('mermaid', () => ({
@@ -83,7 +83,7 @@ describe('Mermaid Plugin', () => {
     it('should switch between image and code view', async () => {
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const codeButton = screen.getByText('代码');
+      const codeButton = screen.getByText('Code');
       fireEvent.click(codeButton);
 
       expect(screen.getByTestId('syntax-highlighter')).toBeInTheDocument();
@@ -93,7 +93,7 @@ describe('Mermaid Plugin', () => {
     it('should render code view with proper styling', async () => {
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const codeButton = screen.getByText('代码');
+      const codeButton = screen.getByText('Code');
       fireEvent.click(codeButton);
 
       const syntaxHighlighter = screen.getByTestId('syntax-highlighter');
@@ -134,10 +134,10 @@ describe('Mermaid Plugin', () => {
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
       const copyButton = screen.getByRole('button', { name: 'copy' });
-      
+
       // 确保点击不会抛出错误
       expect(() => fireEvent.click(copyButton)).not.toThrow();
-      
+
       // 验证剪贴板被调用
       await waitFor(() => {
         expect(mockClipboard.writeText).toHaveBeenCalledWith('graph TD; A-->B;');
@@ -176,7 +176,7 @@ describe('Mermaid Plugin', () => {
       expect(screen.getByRole('button', { name: 'Reset' })).toBeInTheDocument();
       expect(screen.getByRole('button', { name: 'download' })).toBeInTheDocument();
 
-      const codeButton = screen.getByText('代码');
+      const codeButton = screen.getByText('Code');
       fireEvent.click(codeButton);
 
       expect(screen.queryByRole('button', { name: 'zoom-in' })).not.toBeInTheDocument();
@@ -218,8 +218,8 @@ describe('Mermaid Plugin', () => {
     it('should render default header when header is undefined', () => {
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      expect(screen.getByText('代码')).toBeInTheDocument();
-      expect(screen.getByText('图片')).toBeInTheDocument();
+      expect(screen.getByText('Code')).toBeInTheDocument();
+      expect(screen.getByText('Image')).toBeInTheDocument();
     });
   });
 
@@ -369,7 +369,7 @@ describe('Mermaid Plugin', () => {
       const { container } = render(<Mermaid styles={customStyles}>{mermaidContent}</Mermaid>);
 
       // 切换到代码模式以显示代码视图
-      const codeButton = screen.getByText('代码');
+      const codeButton = screen.getByText('Code');
       fireEvent.click(codeButton);
 
       const root = container.querySelector('.ant-mermaid');
