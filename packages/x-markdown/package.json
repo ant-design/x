@@ -13,7 +13,7 @@
     "test": "jest --config .jest.js --no-cache --collect-coverage",
     "coverage": "jest --config .jest.js --no-cache --collect-coverage --coverage",
     "plugin:meta": "tsx scripts/generate-plugin-meta.ts",
-    "prestart": "npm run version &&  npm run token:statistic && npm run plugin:meta && npm run token:meta && cp src/plugins/theme/XMarkdownPluginsType.ts ../../../../x/components/x-provider",
+    "prestart": "npm run version &&  npm run token:statistic && npm run plugin:meta && npm run token:meta && cp src/plugins/theme/XMarkdownPluginsType.ts ../../..",
     "precompile": "npm run prestart",
     "version": "tsx scripts/generate-version.ts",
     "test:dekko": "tsx ./tests/dekko/index.test.ts",
