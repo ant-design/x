@@ -76,7 +76,7 @@ export default () => {
       <Card>
         <XProvider
           theme={{
-            token: {
+            components: {
               HighlightCode: data,
             },
           }}

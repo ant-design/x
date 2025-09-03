@@ -9,6 +9,7 @@ export { default as useLocale } from './useLocale';
 export const ANT_MARK = 'internalMark';
 
 export interface xLocale {
+  locale: string;
   Conversations?: {
     create: string;
   };

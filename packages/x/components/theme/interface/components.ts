@@ -1,3 +1,5 @@
+import type { ComponentToken as HighlightCodeComponentToken } from '../../../../x-markdown/src/plugins/HighlightCode/style';
+import type { ComponentToken as MermaidComponentToken } from '../../../../x-markdown/src/plugins/Mermaid/style';
 import type { ComponentToken as ActionsToken } from '../../actions/style';
 import type { ComponentToken as AttachmentsToken } from '../../attachments/style';
 import type { ComponentToken as BubbleComponentToken } from '../../bubble/style';
@@ -22,4 +24,6 @@ export interface ComponentTokenMap {
   Welcome?: WelcomeComponentToken;
   Actions?: ActionsToken;
   FileCard?: FileCardComponentToken;
+  HighlightCode?: HighlightCodeComponentToken;
+  Mermaid?: MermaidComponentToken;
 }
