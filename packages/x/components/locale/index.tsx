@@ -26,7 +26,18 @@ export interface xLocale {
     editableCancel: string;
   };
 }
-export type Locale = xLocale & antdLocale;
+
+export interface xMarkdownLocale {
+  Mermaid?: {
+    copySuccess: string;
+    copyText: string;
+    zoomInText: string;
+    zoomOutText: string;
+    zoomResetText: string;
+    downloadText: string;
+  };
+}
+export type Locale = xLocale & antdLocale & xMarkdownLocale;
 
 export interface LocaleProviderProps {
   locale: Locale;

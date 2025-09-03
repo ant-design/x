@@ -1,6 +1,6 @@
-import type { xLocale } from '.';
+import type { xLocale, xMarkdownLocale } from '.';
 
-const localeValues: Required<xLocale> = {
+const localeValues: Required<xLocale & xMarkdownLocale> = {
   locale: 'en',
   Conversations: {
     create: 'New chat',
@@ -16,6 +16,14 @@ const localeValues: Required<xLocale> = {
   Bubble: {
     editableOk: 'OK',
     editableCancel: 'Cancel',
+  },
+  Mermaid: {
+    copySuccess: 'Copied',
+    copyText: 'Copy code',
+    zoomInText: 'Zoom in',
+    zoomOutText: 'Zoom out',
+    zoomResetText: 'Reset',
+    downloadText: 'Download',
   },
 };
 

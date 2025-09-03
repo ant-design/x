@@ -1,4 +1,7 @@
-import type { ConfigProviderProps as AntdConfigProviderProps } from 'antd/es/config-provider';
+import type {
+  ConfigProviderProps as AntdConfigProviderProps,
+  ThemeConfig,
+} from 'antd/es/config-provider';
 import React from 'react';
 import type { AnyObject, ShortcutKeys } from '../_util/type';
 import type { ActionsProps } from '../actions/interface';
@@ -9,6 +12,8 @@ import type { FileCardProps } from '../file-card';
 import type { PromptsProps } from '../prompts';
 import type { SenderProps } from '../sender';
 import type { SuggestionProps } from '../suggestion';
+import { OverrideToken } from '../theme/cssinjs-utils';
+import { MappingAlgorithm } from '../theme/interface';
 import type { ThinkProps } from '../think';
 import type { ThoughtChainProps } from '../thought-chain';
 import type { WelcomeProps } from '../welcome';
@@ -42,8 +47,16 @@ export interface XComponentsConfig {
   fileCard?: ComponentConfig<FileCardProps>;
 }
 
-export interface XProviderProps extends XComponentsConfig, AntdConfigProviderProps {
-  // Non-component config props
+type ComponentsConfig = {
+  [key in keyof OverrideToken]?: OverrideToken[key] & {
+    algorithm?: boolean | MappingAlgorithm | MappingAlgorithm[];
+  };
+};
+
+export interface XProviderProps extends XComponentsConfig, Omit<AntdConfigProviderProps, 'theme'> {
+  theme?: Omit<ThemeConfig, 'components'> & {
+    components?: ThemeConfig['components'] & ComponentsConfig;
+  };
 }
 
 const XProviderContext = React.createContext<XProviderProps>({});
