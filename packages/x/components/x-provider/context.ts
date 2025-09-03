@@ -9,6 +9,7 @@ import { AttachmentsProps } from '../attachments';
 import type { BubbleProps } from '../bubble';
 import type { ConversationsProps } from '../conversations';
 import type { FileCardProps } from '../file-card';
+import { Locale } from '../locale';
 import type { PromptsProps } from '../prompts';
 import type { SenderProps } from '../sender';
 import type { SuggestionProps } from '../suggestion';
@@ -53,10 +54,13 @@ type ComponentsConfig = {
   };
 };
 
-export interface XProviderProps extends XComponentsConfig, Omit<AntdConfigProviderProps, 'theme'> {
+export interface XProviderProps
+  extends XComponentsConfig,
+    Omit<AntdConfigProviderProps, 'theme' | 'locale'> {
   theme?: Omit<ThemeConfig, 'components'> & {
     components?: ThemeConfig['components'] & ComponentsConfig;
   };
+  locale?: Locale;
 }
 
 const XProviderContext = React.createContext<XProviderProps>({});

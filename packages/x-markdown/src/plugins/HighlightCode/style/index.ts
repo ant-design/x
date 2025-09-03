@@ -6,12 +6,17 @@ import type { FullToken, GetDefaultToken } from '../../theme/useToken';
 export type ComponentToken = {
   /**
    * @desc 标题背景颜色
-   * @descEN title background color
+   * @descEN Title background color
    */
   colorBgTitle: string;
   /**
-   * @desc
-   * @descEN
+   * @desc 标题文本颜色
+   * @descEN Title text color
+   */
+  colorTextTitle: string;
+  /**
+   * @desc 代码块边框颜色
+   * @descEN Code block border color
    */
   colorBorderCode: string;
 };
@@ -27,6 +32,7 @@ const genHighlightCodeStyle: GenerateStyle<HighlightCodeToken> = (token) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
+        color: token.colorTextTitle,
         background: token.colorBgTitle,
         padding: token.paddingSM,
         borderTopLeftRadius: token.borderRadius,
@@ -52,6 +58,7 @@ export const prepareComponentToken: GetDefaultToken<'HighlightCode'> = (token) =
   return {
     colorBgTitle: token.colorFillContent,
     colorBorderCode: token.colorBorderSecondary,
+    colorTextTitle: token.colorText,
   };
 };
 

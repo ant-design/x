@@ -28,3 +28,4 @@ XProvider 使用 React 的 context 特性，只需在应用外围包裹一次即
 
 <!-- prettier-ignore -->
 <code src="./demo/xprovider/locale.tsx">国际化</code>
+<code src="./demo/xprovider/theme.tsx">主题</code>

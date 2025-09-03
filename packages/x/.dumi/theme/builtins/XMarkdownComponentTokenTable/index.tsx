@@ -1,7 +1,7 @@
 import { LinkOutlined, QuestionCircleOutlined, RightOutlined } from '@ant-design/icons';
 import { XProvider } from '@ant-design/x';
-import tokenData from '@ant-design/x-markdown/es/version/token.json';
-import tokenMeta from '@ant-design/x-markdown/es/version/token-meta.json';
+import tokenData from '@ant-design/x-markdown/plugins/version/token.json';
+import tokenMeta from '@ant-design/x-markdown/plugins/version/token-meta.json';
 import { Flex, Popover, Table, Typography } from 'antd';
 import { createStyles, css, useTheme } from 'antd-style';
 import { getDesignToken } from 'antd-token-previewer';
@@ -220,7 +220,6 @@ const XMarkdownComponentTokenTable: React.FC<ComponentTokenTableProps> = ({ comp
 
     return [Array.from(globalTokenSet)] as const;
   }, [component]);
-
   return (
     <>
       {xTokenMeta?.components?.[component] && (

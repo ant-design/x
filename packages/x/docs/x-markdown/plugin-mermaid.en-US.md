@@ -29,3 +29,7 @@ When you need to render Mermaid diagrams in Markdown.
 ## Semantic DOM
 
 <code src="./demo/supersets/Mermaid/_semantic.tsx" simplify="true"></code>
+
+## Design Token
+
+<XMarkdownComponentTokenTable component="Mermaid"></XMarkdownComponentTokenTable>

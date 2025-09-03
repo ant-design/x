@@ -12,38 +12,6 @@ import React, { useState } from 'react';
 type Locale = XProviderProps['locale'];
 
 const content = `
-Here are several Mermaid diagram examples 
-
-#### 1. Flowchart (Vertical)
-
-\`\`\` mermaid
-graph TD
-    A[Start] --> B{Data Valid?}
-    B -->|Yes| C[Process Data]
-    B -->|No| D[Error Handling]
-    C --> E[Generate Report]
-    D --> E
-    E --> F[End]
-    style A fill:#2ecc71,stroke:#27ae60
-    style F fill:#e74c3c,stroke:#c0392b
-\`\`\`
-
-#### 2. Sequence Diagram
-
-\`\`\` mermaid
-sequenceDiagram
-    participant Client
-    participant Server
-    participant Database
-    
-    Client->>Server: POST /api/data
-    Server->>Database: INSERT record
-    Database-->>Server: Success
-    Server-->>Client: 201 Created
-\`\`\`
-
-#### 3. Quadrant Chart
-
 \`\`\`mermaid
 quadrantChart
     title Reach and engagement of campaigns

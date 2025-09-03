@@ -9,7 +9,6 @@ export { default as useLocale } from './useLocale';
 export const ANT_MARK = 'internalMark';
 
 export interface xLocale {
-  locale: string;
   Conversations?: {
     create: string;
   };
@@ -30,11 +29,11 @@ export interface xLocale {
 export interface xMarkdownLocale {
   Mermaid?: {
     copySuccess: string;
-    copyText: string;
-    zoomInText: string;
-    zoomOutText: string;
-    zoomResetText: string;
-    downloadText: string;
+    copy: string;
+    zoomIn: string;
+    zoomOut: string;
+    zoomReset: string;
+    download: string;
     code: string;
     image: string;
   };

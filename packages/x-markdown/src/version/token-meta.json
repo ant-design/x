@@ -1,0 +1,25 @@
+{
+  "components": {
+    "HighlightCode": [
+      {
+        "source": "HighlightCode",
+        "token": "colorBgTitle",
+        "type": "string",
+        "desc": "标题背景颜色",
+        "descEn": "title background color",
+        "name": "",
+        "nameEn": ""
+      },
+      {
+        "source": "HighlightCode",
+        "token": "colorBorderCode",
+        "type": "string",
+        "desc": "",
+        "descEn": "",
+        "name": "",
+        "nameEn": ""
+      }
+    ],
+    "Mermaid": []
+  }
+}
