@@ -28,3 +28,4 @@ XProvider leverages React's context feature, so you only need to wrap your app o
 
 <!-- prettier-ignore -->
 <code src="./demo/xprovider/locale.tsx">Locale</code>
+<code src="./demo/xprovider/theme.tsx">Theme</code>
