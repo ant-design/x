@@ -91,8 +91,8 @@ packages/x/components/theme/interface/XMarkdownComponents.ts
 
 packages/x-markdown/src/plugins/version/version.ts
 packages/x-markdown/src/plugins/version/plugin-meta.json
-packages/x/components/src/plugins/version/token-meta.json
-packages/x/components/src/plugins/version/token.json
+packages/x-markdown/src/plugins/version/token-meta.json
+packages/x-markdown/src/plugins/version/token.json
 packages/x-markdown/src/version/version.ts
 
 packages/x-sdk/src/version/version.ts
