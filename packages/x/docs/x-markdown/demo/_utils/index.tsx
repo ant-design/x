@@ -42,21 +42,16 @@ export const mockFetch = async (fullContent: string) => {
 };
 
 export const useMarkdownTheme = () => {
-  const { token } = theme.useToken();
+  const token = theme.useToken();
 
   // 使用 Ant Design 的主题系统判断亮色还是暗色
-  const isDarkMode = React.useMemo(() => {
-    // 通过 token 的颜色模式判断
-    return (
-      token.colorBgBase === '#000' ||
-      token.colorBgBase === '#141414' ||
-      token.colorBgBase === '#1f1f1f'
-    );
+  const isLightMode = React.useMemo(() => {
+    return token?.theme?.id === 0;
   }, [token]);
 
   const className = React.useMemo(() => {
-    return isDarkMode ? 'x-markdown-dark' : 'x-markdown-light';
-  }, [isDarkMode]);
+    return isLightMode ? 'x-markdown-light' : 'x-markdown-dark';
+  }, [isLightMode]);
 
   return [className];
 };
