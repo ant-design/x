@@ -27,5 +27,6 @@ Use script and link tags to directly import files in browser, and inject `classN
 <!-- prettier-ignore -->
 <code src="./demo/themes/light.tsx">light</code>
 <code src="./demo/themes/dark.tsx">dark</code>
+<code src="./demo/themes/custom.tsx">custom</code>
 
 ## Contributing Themes

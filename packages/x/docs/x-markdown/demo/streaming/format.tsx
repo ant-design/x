@@ -6,7 +6,7 @@ import { Button, Row } from 'antd';
 import React, { useMemo, useState } from 'react';
 import '@ant-design/x-markdown/themes/light.css';
 import { BubbleListProps } from '@ant-design/x/es/bubble';
-import { mockFetch } from '../_utils';
+import { mockFetch, useMarkdownTheme } from '../_utils';
 
 interface ChatInput {
   query: string;
@@ -74,15 +74,7 @@ const roles: BubbleListProps['role'] = {
 const App = () => {
   const [enableStreaming, setEnableStreaming] = useState(true);
   const [content, setContent] = React.useState('');
-  const [className, setClassName] = React.useState('x-markdown-light');
-
-  React.useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const urlParams = new URLSearchParams(window.location.search);
-      const theme = urlParams.get('theme');
-      setClassName(theme === 'dark' ? 'x-markdown-dark' : 'x-markdown-light');
-    }
-  }, []);
+  const [className] = useMarkdownTheme();
 
   let chunks = '';
   const provider = useMemo(
@@ -140,7 +132,7 @@ const App = () => {
                 ? (content) => content?.query
                 : (content) => (
                     <XMarkdown
-                      className="x-markdown-light"
+                      className={className}
                       content={content as string}
                       streaming={{ hasNextChunk: enableStreaming && isRequesting() }}
                     />

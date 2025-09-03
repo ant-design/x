@@ -2,6 +2,7 @@ import { XMarkdown } from '@ant-design/x-markdown';
 import React from 'react';
 import '@ant-design/x-markdown/themes/light.css';
 import '@ant-design/x-markdown/themes/dark.css';
+import { useMarkdownTheme } from '../_utils';
 
 const content = `
 # h1 Heading 
@@ -127,15 +128,7 @@ Like links, Images also have a footnote style syntax
 `;
 
 const App: React.FC = () => {
-  const [className, setClassName] = React.useState('x-markdown-light');
-
-  React.useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const urlParams = new URLSearchParams(window.location.search);
-      const theme = urlParams.get('theme');
-      setClassName(theme === 'dark' ? 'x-markdown-dark' : 'x-markdown-light');
-    }
-  }, []);
+  const [className] = useMarkdownTheme();
 
   return <XMarkdown content={content} className={className} />;
 };

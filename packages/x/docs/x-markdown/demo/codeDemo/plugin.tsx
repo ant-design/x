@@ -1,7 +1,10 @@
 import { Token, XMarkdown } from '@ant-design/x-markdown';
 import React from 'react';
 import '@ant-design/x-markdown/themes/light.css';
-import { Popover } from 'antd';
+import '@ant-design/x-markdown/themes/dark.css';
+import { Popover, theme } from 'antd';
+import useToken from 'antd/es/theme/useToken';
+import { useMarkdownTheme } from '../_utils';
 
 const content = `
 ## Custom Plugin
@@ -104,15 +107,7 @@ const Footnote = (props: { children: string; href: string; title: string }) => (
 );
 
 const App: React.FC = () => {
-  const [className, setClassName] = React.useState('x-markdown-light');
-
-  React.useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const urlParams = new URLSearchParams(window.location.search);
-      const theme = urlParams.get('theme');
-      setClassName(theme === 'dark' ? 'x-markdown-dark' : 'x-markdown-light');
-    }
-  }, []);
+  const [className] = useMarkdownTheme();
 
   const footNoteExtension = {
     name: 'footnote',

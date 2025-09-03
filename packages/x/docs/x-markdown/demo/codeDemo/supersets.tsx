@@ -4,6 +4,7 @@ import Latex from '@ant-design/x-markdown/plugins/Latex';
 import Mermaid from '@ant-design/x-markdown/plugins/Mermaid';
 import React from 'react';
 import '@ant-design/x-markdown/themes/light.css';
+import { useMarkdownTheme } from '../_utils';
 
 const content = `
 ### Latex
@@ -22,15 +23,7 @@ block: \n
 `;
 
 const App: React.FC = () => {
-  const [className, setClassName] = React.useState('x-markdown-light');
-
-  React.useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const urlParams = new URLSearchParams(window.location.search);
-      const theme = urlParams.get('theme');
-      setClassName(theme === 'dark' ? 'x-markdown-dark' : 'x-markdown-light');
-    }
-  }, []);
+  const [className] = useMarkdownTheme();
 
   return (
     <XMarkdown

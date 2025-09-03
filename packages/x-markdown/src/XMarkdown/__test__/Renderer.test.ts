@@ -182,5 +182,157 @@ describe('Renderer', () => {
       
       createElementSpy.mockRestore();
     });
+
+    it('should merge class and className attributes correctly', () => {
+      const components = {
+        'test-component': MockComponent,
+      };
+      
+      const renderer = new Renderer({ components });
+      
+      // Mock createElement to capture props
+      const createElementSpy = jest.spyOn(React, 'createElement');
+      
+      // Test case 1: Only class attribute
+      const html1 = '<test-component class="custom-class">content</test-component>';
+      renderer.processHtml(html1);
+      
+      expect(createElementSpy).toHaveBeenCalledWith(
+        MockComponent,
+        expect.objectContaining({
+          className: 'custom-class',
+        })
+      );
+      
+      createElementSpy.mockClear();
+      
+      // Test case 2: Only className attribute
+      const html2 = '<test-component className="existing-class">content</test-component>';
+      renderer.processHtml(html2);
+      
+      expect(createElementSpy).toHaveBeenCalledWith(
+        MockComponent,
+        expect.objectContaining({
+          className: 'existing-class',
+        })
+      );
+      
+      createElementSpy.mockClear();
+      
+      // Test case 3: Both class and className attributes
+      const html3 = '<test-component class="new-class" className="existing-class">content</test-component>';
+      renderer.processHtml(html3);
+      
+      expect(createElementSpy).toHaveBeenCalledWith(
+        MockComponent,
+        expect.objectContaining({
+          className: 'existing-class new-class',
+        })
+      );
+      
+      createElementSpy.mockClear();
+      
+      // Test case 4: Multiple classes in class attribute
+      const html4 = '<test-component class="class1 class2" className="existing-class">content</test-component>';
+      renderer.processHtml(html4);
+      
+      expect(createElementSpy).toHaveBeenCalledWith(
+        MockComponent,
+        expect.objectContaining({
+          className: 'existing-class class1 class2',
+        })
+      );
+      
+      createElementSpy.mockClear();
+      
+      // Test case 5: Empty class attribute
+      const html5 = '<test-component class="" className="existing-class">content</test-component>';
+      renderer.processHtml(html5);
+      
+      expect(createElementSpy).toHaveBeenCalledWith(
+        MockComponent,
+        expect.objectContaining({
+          className: 'existing-class',
+        })
+      );
+      
+      createElementSpy.mockClear();
+      
+      // Test case 6: Empty className attribute
+      const html6 = '<test-component class="new-class" className="">content</test-component>';
+      renderer.processHtml(html6);
+      
+      expect(createElementSpy).toHaveBeenCalledWith(
+        MockComponent,
+        expect.objectContaining({
+          className: 'new-class',
+        })
+      );
+      
+      createElementSpy.mockClear();
+      
+      // Test case 7: Both empty
+      const html7 = '<test-component class="" className="">content</test-component>';
+      renderer.processHtml(html7);
+      
+      expect(createElementSpy).toHaveBeenCalledWith(
+        MockComponent,
+        expect.objectContaining({
+          className: '',
+        })
+      );
+      
+      createElementSpy.mockRestore();
+    });
+
+    it('should handle class attribute merging with special characters', () => {
+      const components = {
+        'test-component': MockComponent,
+      };
+      
+      const renderer = new Renderer({ components });
+      
+      // Mock createElement to capture props
+      const createElementSpy = jest.spyOn(React, 'createElement');
+      
+      // Test case: Classes with special characters
+      const html = '<test-component class="btn btn-primary" className="custom-component">content</test-component>';
+      renderer.processHtml(html);
+      
+      expect(createElementSpy).toHaveBeenCalledWith(
+        MockComponent,
+        expect.objectContaining({
+          className: 'custom-component btn btn-primary',
+        })
+      );
+      
+      createElementSpy.mockRestore();
+    });
+
+    it('should preserve other attributes while merging class and className', () => {
+      const components = {
+        'test-component': MockComponent,
+      };
+      
+      const renderer = new Renderer({ components });
+      
+      // Mock createElement to capture props
+      const createElementSpy = jest.spyOn(React, 'createElement');
+      
+      // Test case: Multiple attributes including class and className
+      const html = '<test-component id="test-id" class="custom-class" className="existing-class" data-test="value">content</test-component>';
+      renderer.processHtml(html);
+      
+      expect(createElementSpy).toHaveBeenCalledWith(
+        MockComponent,
+        expect.objectContaining({
+          id: 'test-id',
+          className: 'existing-class custom-class',
+          'data-test': 'value',
+        })
+      );
+      
+      createElementSpy.mockRestore();
+    });
   });
 });

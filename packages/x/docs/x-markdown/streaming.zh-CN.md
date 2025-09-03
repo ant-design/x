@@ -10,6 +10,6 @@ order: 3
 ## 代码演示
 
 <!-- prettier-ignore -->
-<code src="./demo/streaming/typing.tsx" description="配合`Bubble`渲染">打字机效果</code>
+<!-- <code src="./demo/streaming/typing.tsx" description="配合`Bubble`渲染">打字机效果</code> -->
 <code src="./demo/streaming/format.tsx"  description="通过缓存隐藏 Markdown 格式">缓存</code>
 <code src="./demo/streaming/animation.tsx">动画效果</code>

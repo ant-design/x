@@ -4,6 +4,7 @@ import XMarkdown from '@ant-design/x-markdown';
 import { Avatar, Flex, Slider, Space, Typography } from 'antd';
 import React from 'react';
 import '@ant-design/x-markdown/themes/light.css';
+import { useMarkdownTheme } from '../_utils';
 
 const { Text } = Typography;
 
@@ -52,15 +53,7 @@ const text = `
 `;
 
 const RenderMarkdown: BubbleProps['contentRender'] = (content) => {
-  const [className, setClassName] = React.useState('x-markdown-light');
-
-  React.useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const urlParams = new URLSearchParams(window.location.search);
-      const theme = urlParams.get('theme');
-      setClassName(theme === 'dark' ? 'x-markdown-dark' : 'x-markdown-light');
-    }
-  }, []);
+  const [className] = useMarkdownTheme();
 
   return <XMarkdown className={className}>{content}</XMarkdown>;
 };
