@@ -82,13 +82,13 @@ const Thought = (props: { items: ThoughtChainItem[] }) => {
 const text = `<div><thought>[{"title":"Thought Chain Item - 1","status":"success","description":"status: success"},{"title":"Thought Chain Item - 2","status":"error","description":"status: error"}]</thought></div>
 `;
 
-const ThoughtComponent = (props: { children: string }) => {
-  if (props.children.endsWith('}]')) {
-    const data = JSON.parse(props.children) as ThoughtChainItem[];
-    return <Thought items={data} />;
-  } else {
+const ThoughtComponent = (props: { children: string; streamStatus: string }) => {
+  if (props.streamStatus === 'loading') {
     return <Spin />;
   }
+
+  const data = JSON.parse(props.children) as ThoughtChainItem[];
+  return <Thought items={data} />;
 };
 
 const App = () => {

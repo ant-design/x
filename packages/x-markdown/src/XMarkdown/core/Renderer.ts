@@ -1,6 +1,6 @@
 import parseHtml, { DOMNode, domToReact, Element } from 'html-react-parser';
 import React, { ReactNode } from 'react';
-import { XMarkdownProps } from '../interface';
+import type { XMarkdownProps } from '../interface';
 
 interface RendererOptions {
   components?: XMarkdownProps['components'];
