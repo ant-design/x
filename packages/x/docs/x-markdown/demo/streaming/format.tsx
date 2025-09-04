@@ -41,7 +41,7 @@ const fullContent = `
 
 __这也是strong的效果__
 
-### XML标签 🏷️ 
+### XML标签 
 \`\`\`xml
 <user>
   <name>张三</name>
