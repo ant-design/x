@@ -1,17 +1,10 @@
-import { UserOutlined } from '@ant-design/icons';
-import { Bubble, Sender, Think } from '@ant-design/x';
+import { Bubble, Think } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
-import { DefaultChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';
-import React, { useMemo } from 'react';
+import React from 'react';
 import '@ant-design/x-markdown/themes/light.css';
-import { BubbleListProps } from '@ant-design/x/es/bubble';
-import { useMarkdownTheme } from '../_utils';
+import { Flex, Button } from 'antd';
 
-interface ChatInput {
-  query: string;
-}
-
-const fullContent = `
+const text = `
 <think>Deep thinking is a systematic and structured cognitive approach that requires individuals to move beyond intuition and superficial information, delving into the essence of a problem and its underlying principles through logical analysis, multi-perspective examination, and persistent inquiry. Unlike quick reactions or heuristic judgments, deep thinking emphasizes ​slow thinking, actively engaging knowledge reserves, critical thinking, and creativity to uncover deeper connections and meanings.
 Key characteristics of deep thinking include:
 ​Probing the Essence: Not settling for "what it is," but continuously asking "why" and "how it works" until reaching the fundamental logic.
@@ -21,61 +14,6 @@ Key characteristics of deep thinking include:
 This mode of thinking helps individuals avoid cognitive biases in complex scenarios, improve decision-making, and generate groundbreaking insights in fields such as academic research, business innovation, and social problem-solving.</think>
 # Hello Deep Thinking\n - Deep thinking is over.\n- You can use the think tag to package your thoughts.
 `;
-
-const splitIntoChunks = (str: string, chunkSize: number) => {
-  const chunks = [];
-  for (let i = 0; i < str.length; i += chunkSize) {
-    chunks.push(str.slice(i, i + chunkSize));
-  }
-  return chunks;
-};
-
-const mockFetch = async () => {
-  const chunks = splitIntoChunks(fullContent, 10);
-  const response = new Response(
-    new ReadableStream({
-      async start(controller) {
-        try {
-          await new Promise((resolve) => setTimeout(resolve, 100));
-          for (const chunk of chunks) {
-            await new Promise((resolve) => setTimeout(resolve, 100));
-            if (!controller.desiredSize) {
-              // 流已满或关闭，避免写入
-              return;
-            }
-
-            controller.enqueue(new TextEncoder().encode(chunk));
-          }
-          controller.close();
-        } catch (error) {
-          console.log(error, 333);
-        }
-      },
-    }),
-    {
-      headers: {
-        'Content-Type': 'application/x-ndjson',
-      },
-    },
-  );
-
-  return response;
-};
-
-const roles: BubbleListProps['role'] = {
-  ai: {
-    placement: 'start',
-    components: {
-      avatar: <UserOutlined />,
-    },
-  },
-  local: {
-    placement: 'end',
-    components: {
-      avatar: <UserOutlined />,
-    },
-  },
-};
 
 const ThinkComponent = React.memo(
   (props: { streamStatus: string; children: string; status: string }) => {
@@ -99,88 +37,49 @@ const ThinkComponent = React.memo(
   },
 );
 
-const App: React.FC = () => {
-  const [content, setContent] = React.useState('');
-  const [className] = useMarkdownTheme();
+const App = () => {
+  const [index, setIndex] = React.useState(0);
+  const timer = React.useRef<any>(-1);
 
-  let chunks = '';
-  const provider = useMemo(
-    () =>
-      new DefaultChatProvider<string, ChatInput, string>({
-        request: XRequest('https://api.example.com/chat', {
-          manual: true,
-          fetch: mockFetch,
-          transformStream: new TransformStream<string, string>({
-            transform(chunk, controller) {
-              chunks = `${chunks}${chunk}`.replace(
-                /<think.*?>([\s\S]*?)<\/think>/gi,
-                (match, content) => {
-                  try {
-                    return `<think status="done">${content}</think>`;
-                  } catch (error) {
-                    console.error(error);
-                    return match;
-                  }
-                },
-              );
-              controller.enqueue(chunks);
-            },
-          }),
-        }),
-      }),
-    [content],
-  );
+  const renderStream = () => {
+    if (index >= text.length) {
+      clearTimeout(timer.current);
+      return;
+    }
+    timer.current = setTimeout(() => {
+      setIndex((prev) => prev + 5);
+      renderStream();
+    }, 20);
+  };
 
-  const { onRequest, messages, isRequesting } = useXChat({
-    provider: provider,
-    requestPlaceholder: 'Waiting...',
-    requestFallback: 'Mock failed return. Please try again later.',
-  });
+  React.useEffect(() => {
+    if (index === text.length) return;
+    renderStream();
+    return () => {
+      clearTimeout(timer.current);
+    };
+  }, [index]);
 
   return (
-    <div
-      style={{
-        height: 400,
-        paddingBlock: 20,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-      }}
-    >
-      <Bubble.List
-        role={roles}
-        items={messages.map(({ id, message, status }) => ({
-          key: id,
-          role: status === 'local' ? 'local' : 'ai',
-          content: message,
-          contentRender:
-            status === 'local'
-              ? (content) => content.query
-              : (content) => (
-                  <XMarkdown
-                    className={className}
-                    paragraphTag="div"
-                    content={content as string}
-                    components={{
-                      think: ThinkComponent,
-                    }}
-                  />
-                ),
-        }))}
+    <Flex vertical gap="small">
+      <Button style={{ alignSelf: 'flex-end' }} onClick={() => setIndex(0)}>
+        Re-Render
+      </Button>
+
+      <Bubble
+        content={text.slice(0, index)}
+        contentRender={(content) => (
+          <XMarkdown
+            style={{ whiteSpace: 'normal' }}
+            components={{ think: ThinkComponent }}
+            paragraphTag="div"
+          >
+            {content}
+          </XMarkdown>
+        )}
+        variant="outlined"
       />
-      <Sender
-        loading={isRequesting()}
-        value={content}
-        onChange={setContent}
-        style={{ marginTop: 48 }}
-        onSubmit={(nextContent) => {
-          onRequest({
-            query: nextContent,
-          });
-          setContent('');
-        }}
-      />
-    </div>
+    </Flex>
   );
 };
 

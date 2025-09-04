@@ -12,8 +12,7 @@ When you need to render formulas in Markdown.
 ## Code Demo
 
 <!-- prettier-ignore -->
-<code src="./demo/supersets/Latex/basic.tsx">Basic Usage</code>
-<code src="./demo/supersets/Latex/streaming.tsx">Streaming Conversation</code>
+<code src="./demo/supersets/Latex/basic.tsx"></code>
 
 ## API
 

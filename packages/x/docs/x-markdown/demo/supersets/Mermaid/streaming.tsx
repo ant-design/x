@@ -77,9 +77,9 @@ const roles: BubbleListProps['role'] = {
   },
 };
 
-const Code = (props: { class: string; children: string }) => {
-  const { class: className, children } = props;
-  const lang = className?.replace('language-', '');
+const Code = (props: { className: string; children: string }) => {
+  const { className, children } = props;
+  const lang = className?.match(/language-(\w+)/)?.[1] || '';
   if (lang === 'mermaid') {
     return <Mermaid>{children}</Mermaid>;
   }

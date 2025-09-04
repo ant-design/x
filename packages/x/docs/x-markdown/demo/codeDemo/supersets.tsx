@@ -22,6 +22,12 @@ block: \n
 
 `;
 
+const Code = (props: { className: string; children: string }) => {
+  const { className, children } = props;
+  const lang = className?.match(/language-(\w+)/)?.[1] || '';
+  return <HighlightCode lang={lang}>{children}</HighlightCode>;
+};
+
 const App: React.FC = () => {
   const [className] = useMarkdownTheme();
 
@@ -30,14 +36,7 @@ const App: React.FC = () => {
       className={className}
       config={{ extensions: Latex() }}
       components={{
-        code: (props: any) => {
-          const { class: className, children } = props;
-          const lang = className?.replace('language-', '');
-          if (lang === 'mermaid') {
-            return <Mermaid>{children}</Mermaid>;
-          }
-          return <HighlightCode lang={lang}>{children}</HighlightCode>;
-        },
+        code: Code,
       }}
     >
       {content}

@@ -20,7 +20,7 @@ console.log("javascript");
         components={{
           code: (props: { class: string; children: string }) => {
             const { class: className, children } = props;
-            const lang = className?.replace('language-', '');
+            const lang = className?.match(/language-(\w+)/)?.[1] || '';
             return <HighlightCode lang={lang}>{children}</HighlightCode>;
           },
         }}
@@ -42,7 +42,7 @@ console.log("javascript");
         components={{
           code: (props: { class: string; children: string }) => {
             const { class: className, children } = props;
-            const lang = className?.replace('language-', '');
+            const lang = className?.match(/language-(\w+)/)?.[1] || '';
             return <HighlightCode lang={lang}>{children}</HighlightCode>;
           },
         }}
@@ -65,7 +65,7 @@ console.log("javascript");
         components={{
           code: (props: { class: string; children: string }) => {
             const { class: className, children } = props;
-            const lang = className?.replace('language-', '');
+            const lang = className?.match(/language-(\w+)/)?.[1] || '';
             return (
               <HighlightCode lang={lang} classNames={{ header: 'customHeader' }}>
                 {children}
@@ -89,7 +89,7 @@ console.log("javascript");
         components={{
           code: (props: { class: string; children: string }) => {
             const { class: className, children } = props;
-            const lang = className?.replace('language-', '');
+            const lang = className?.match(/language-(\w+)/)?.[1] || '';
             return (
               <HighlightCode
                 lang={lang}
@@ -117,7 +117,7 @@ console.log("javascript");
         components={{
           code: (props: { class: string; children: string }) => {
             const { class: className, children } = props;
-            const lang = className?.replace('language-', '');
+            const lang = className?.match(/language-(\w+)/)?.[1] || '';
             return (
               <HighlightCode lang={lang} header={null}>
                 {children}
@@ -146,7 +146,7 @@ graph TD; A-->B;
         components={{
           code: (props: { class: string; children: string }) => {
             const { class: className, children } = props;
-            const lang = className?.replace('language-', '');
+            const lang = className?.match(/language-(\w+)/)?.[1] || '';
             return <HighlightCode lang={lang}>{children}</HighlightCode>;
           },
         }}
@@ -168,7 +168,7 @@ plain text
         components={{
           code: (props: { class: string; children: string }) => {
             const { class: className, children } = props;
-            const lang = className?.replace('language-', '');
+            const lang = className?.match(/language-(\w+)/)?.[1] || '';
             return <HighlightCode lang={lang}>{children}</HighlightCode>;
           },
         }}

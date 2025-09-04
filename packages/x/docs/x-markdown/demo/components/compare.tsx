@@ -10,9 +10,9 @@ import rehypeRaw from 'rehype-raw';
 const { Title, Text } = Typography;
 const { TextArea } = Input;
 
-const Code = (props: { class: string; children: string }) => {
-  const { class: className, children } = props;
-  const lang = className?.replace('language-', '');
+const Code = (props: { className: string; children: string }) => {
+  const { className, children } = props;
+  const lang = className?.match(/language-(\w+)/)?.[1] || '';
   return <HighlightCode lang={lang}>{children}</HighlightCode>;
 };
 

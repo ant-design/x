@@ -38,6 +38,10 @@ export interface xMarkdownLocale {
     code: string;
     image: string;
   };
+  HighlightCode?: {
+    copySuccess: string;
+    copy: string;
+  };
 }
 export type Locale = xLocale & antdLocale & xMarkdownLocale;
 

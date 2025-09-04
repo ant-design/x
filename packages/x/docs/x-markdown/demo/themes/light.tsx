@@ -110,11 +110,9 @@ export default App;
 `;
 
 const App = () => {
-  const [className] = useMarkdownTheme();
-
   return (
     <div style={{ background: '#fff', padding: 16, borderRadius: 6 }}>
-      <XMarkdown content={content} className={className} />
+      <XMarkdown content={content} className='x-markdown-light' />
     </div>
   );
 };

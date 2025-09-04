@@ -48,6 +48,8 @@ module.exports = {
     '^@ant-design/x-markdown$': '<rootDir>/components/index',
     '^@ant-design/x-markdown/es/(.*)$': '<rootDir>/components/$1',
     '^@ant-design/x-markdown/lib/(.*)$': '<rootDir>/components/$1',
+    '^@ant-design/x/es/locale/useLocale$': '<rootDir>/../x/components/locale/useLocale',
+    '^@ant-design/x/locale/en_US$': '<rootDir>/../x/components/locale/en_US',
   },
   testPathIgnorePatterns: ['/node_modules/', 'dekko', 'node', 'image.test.js', 'image.test.ts'],
   transform: {

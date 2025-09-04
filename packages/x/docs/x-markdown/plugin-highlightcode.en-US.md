@@ -12,8 +12,7 @@ When you need to render highlighted code blocks in Markdown.
 ## Code Demo
 
 <!-- prettier-ignore -->
-<code src="./demo/supersets/HighlightCode/basic.tsx">Basic Usage</code>
-<code src="./demo/supersets/HighlightCode/streaming.tsx">Streaming Conversation</code>
+<code src="./demo/supersets/HighlightCode/basic.tsx"></code>
 
 ## API
 

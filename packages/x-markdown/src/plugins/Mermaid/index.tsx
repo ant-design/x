@@ -129,7 +129,9 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
   };
 
   // ============================ render content ============================
-  if (!children) return null;
+  if (!children) {
+    return null;
+  }
 
   const handleDownload = async () => {
     const svgElement = containerRef.current?.querySelector('svg');

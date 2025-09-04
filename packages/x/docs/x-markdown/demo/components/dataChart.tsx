@@ -59,6 +59,7 @@ const App = () => {
           <XMarkdown
             style={{ whiteSpace: 'normal' }}
             components={{ line: LineCompt }}
+            paragraphTag="div"
             streaming={{ hasNextChunk }}
           >
             {content}

@@ -53,9 +53,9 @@ This code includes:
 You can modify the parameters or output format as needed. The Fibonacci sequence here starts with fib(1) = 1, fib(2) = 1.
 `;
 
-const Code = (props: { class: string; children: string }) => {
-  const { class: className, children } = props;
-  const lang = className?.replace('language-', '');
+const Code = (props: { className: string; children: string }) => {
+  const { className, children } = props;
+  const lang = className?.match(/language-(\w+)/)?.[1] || '';
   return <HighlightCode lang={lang}>{children}</HighlightCode>;
 };
 

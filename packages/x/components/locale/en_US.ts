@@ -27,6 +27,10 @@ const localeValues: Required<xLocale & xMarkdownLocale> = {
     code: 'Code',
     image: 'Image',
   },
+  HighlightCode: {
+    copySuccess: 'Copied',
+    copy: 'Copy code',
+  },
 };
 
 export default localeValues;

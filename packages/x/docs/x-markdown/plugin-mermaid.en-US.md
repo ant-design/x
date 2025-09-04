@@ -12,8 +12,7 @@ When you need to render Mermaid diagrams in Markdown.
 ## Code Demo
 
 <!-- prettier-ignore -->
-<code src="./demo/supersets/Mermaid/basic.tsx">Basic Usage</code>
-<code src="./demo/supersets/Mermaid/streaming.tsx">Streaming Conversation</code>
+<code src="./demo/supersets/Mermaid/basic.tsx"></code>
 
 ## API
 
