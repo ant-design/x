@@ -14,14 +14,14 @@ interface ChatInput {
 
 const fullContent = `
 ### Link链接 🔗
-- 内部链接：[Ant Design X](https://github.com/ant-design/x)
-- 邮箱链接：<contact@example.com>
+内部链接：[Ant Design X](https://github.com/ant-design/x)
+
+邮箱链接：<contact@example.com>
 
 ### Image图片 🖼️ 
 ![示例图片](https://mdn.alipayobjects.com/huamei_yz9z7c/afts/img/0lMhRYbo0-8AAAAAQDAAAAgADlJoAQFr/original)
-![带标题的图片](https://mdn.alipayobjects.com/huamei_yz9z7c/afts/img/0lMhRYbo0-8AAAAAQDAAAAgADlJoAQFr/original "图片标题")
 
-### Heading标题 📑
+### Heading标题  📑
 # 一级标题
 ## 二级标题
 ### 三级标题
@@ -30,13 +30,15 @@ const fullContent = `
 ###### 六级标题
 
 ### Emphasis强调 ✨
-- *斜体文本*
-- **粗体文本**
-- ***粗斜体文本***
-- ~~删除线文本~~
+*斜体文本*
+
+**粗体文本**
+
+***粗斜体文本***
 
 ###  Strong强调
 **这是strong标签的效果**
+
 __这也是strong的效果__
 
 ### XML标签 🏷️ 
@@ -50,6 +52,7 @@ __这也是strong的效果__
 
 ### Code代码 💻 
 \`console.log('Hello World')\`
+
 #### 行内代码
 使用 \`console.log('Hello World')\` 输出信息
 
@@ -73,25 +76,12 @@ def fibonacci(n):
 ***
 ___
 
-### List列表 
-#### 无序列表
-- 项目一
-- 项目二
-  - 子项目2.1
-  - 子项目2.2
-- 项目三
-
 #### 有序列表
 1. 第一步
 2. 第二步
    1. 子步骤2.1
    2. 子步骤2.2
 3. 第三步
-
-#### 任务列表
-- [x] 已完成任务
-- [ ] 待办任务1
-- [ ] 待办任务2
 
 #### 混合列表
 1. 主要任务
