@@ -1,7 +1,6 @@
 import { XMarkdown } from '@ant-design/x-markdown';
 import React from 'react';
 import '@ant-design/x-markdown/themes/light.css';
-import { useMarkdownTheme } from '../_utils';
 
 const content = `
 <div align="center"><a name="readme-top"></a>
@@ -112,7 +111,7 @@ export default App;
 const App = () => {
   return (
     <div style={{ background: '#fff', padding: 16, borderRadius: 6 }}>
-      <XMarkdown content={content} className='x-markdown-light' />
+      <XMarkdown content={content} className="x-markdown-light" />
     </div>
   );
 };
