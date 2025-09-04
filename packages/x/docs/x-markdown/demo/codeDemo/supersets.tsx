@@ -25,6 +25,9 @@ block: \n
 const Code = (props: { className: string; children: string }) => {
   const { className, children } = props;
   const lang = className?.match(/language-(\w+)/)?.[1] || '';
+  if (lang === 'mermaid') {
+    return <Mermaid>{children}</Mermaid>;
+  }
   return <HighlightCode lang={lang}>{children}</HighlightCode>;
 };
 
