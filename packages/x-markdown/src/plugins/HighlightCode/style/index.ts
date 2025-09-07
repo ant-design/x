@@ -1,3 +1,4 @@
+import { NONAME } from 'node:dns';
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import type { GenerateStyle } from 'antd/es/theme/internal';
 import { genStyleHooks } from '../../theme/genStyleUtils';
@@ -21,9 +22,6 @@ const genHighlightCodeStyle: GenerateStyle<HighlightCodeToken> = (token) => {
         borderTopRightRadius: token.borderRadius,
       },
       '&-code': {
-        borderWidth: token.lineWidth,
-        borderStyle: token.lineType,
-        borderColor: token.colorBorderCode,
         borderBottomRightRadius: token.borderRadius,
         borderBottomLeftRadius: token.borderRadius,
         borderTopLeftRadius: 0,
@@ -32,6 +30,7 @@ const genHighlightCodeStyle: GenerateStyle<HighlightCodeToken> = (token) => {
         overflow: 'hidden',
         code: {
           borderRadius: 0,
+          border: 'none',
         },
       },
       [`&${componentCls}-rtl`]: {
