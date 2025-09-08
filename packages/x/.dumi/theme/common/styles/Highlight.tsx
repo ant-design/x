@@ -13,8 +13,9 @@ export default () => {
 * Based on dabblet (http://dabblet.com)
 * @author Lea Verou
 */
-.not(.code-box){
-     pre code {
+  .code-box {
+    .not(.ant-x-markdown){
+            pre code {
           display: block;
           padding: ${token.padding}px ${token.paddingXL}px;
           color: ${token.colorText};
@@ -151,7 +152,8 @@ export default () => {
             cursor: help;
           }
         }
-}
+    }
+  }
 
    
       `}

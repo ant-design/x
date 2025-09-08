@@ -46,10 +46,19 @@ const genMermaidStyle: GenerateStyle<MermaidToken> = (token) => {
         borderLeft: `1px solid ${token.colorBgTitle}`,
         borderRight: `1px solid ${token.colorBgTitle}`,
         background: token.colorBgContainer,
+        paddingInline: token.paddingSM,
+        paddingBlock: token.paddingSM,
         overflow: 'hidden',
-        code: {
+        'pre,code': {
+          whiteSpace: 'pre',
+          fontSize: token.fontSize,
+          fontFamily: token.fontFamilyCode,
+          lineHeight: 2,
           borderRadius: 0,
           border: 'none',
+        },
+        "code[class*='language-'],pre[class*='language-']": {
+          background: 'none',
         },
       },
       [`&${componentCls}-rtl`]: {
