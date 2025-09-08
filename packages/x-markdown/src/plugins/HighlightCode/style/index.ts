@@ -26,9 +26,8 @@ const genHighlightCodeStyle: GenerateStyle<HighlightCodeToken> = (token) => {
         borderTopLeftRadius: 0,
         borderTopRightRadius: 0,
         background: token.colorBgContainer,
-        borderBottom: `1px solid ${token.colorBgTitle}`,
-        borderLeft: `1px solid ${token.colorBgTitle}`,
-        borderRight: `1px solid ${token.colorBgTitle}`,
+        border: `1px solid ${token.colorBgTitle}`,
+        borderTop: 0,
         overflow: 'hidden',
         code: {
           borderRadius: 0,
