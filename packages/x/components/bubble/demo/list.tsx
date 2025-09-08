@@ -1,4 +1,3 @@
-import type { BubbleData, BubbleListProps } from '@ant-design';
 import {
   AntDesignOutlined,
   CheckOutlined,
@@ -8,6 +7,7 @@ import {
   RedoOutlined,
   UserOutlined,
 } from '@ant-design/icons';
+import type { BubbleData, BubbleListProps } from '@ant-design/x';
 import { Actions, Bubble, FileCard, FileCardProps } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
 import type { GetRef } from 'antd';
