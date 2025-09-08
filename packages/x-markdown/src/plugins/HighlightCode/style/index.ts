@@ -27,7 +27,7 @@ const genHighlightCodeStyle: GenerateStyle<HighlightCodeToken> = (token) => {
         borderTopRightRadius: 0,
         background: token.colorBgContainer,
         border: `1px solid ${token.colorBgTitle}`,
-        borderTop: 0,
+        borderTop: 'none',
         paddingInline: token.paddingSM,
         paddingBlock: token.paddingSM,
         overflow: 'hidden',

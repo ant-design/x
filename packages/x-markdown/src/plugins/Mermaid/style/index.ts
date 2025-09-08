@@ -25,7 +25,7 @@ const genMermaidStyle: GenerateStyle<MermaidToken> = (token) => {
         alignItems: 'center',
         justifyContent: 'center',
         border: `1px solid ${token.colorBgTitle}`,
-        borderTop: 0,
+        borderTop: 'none',
         padding: token.paddingSM,
         background: token.colorBgContainer,
         overflow: 'auto',
