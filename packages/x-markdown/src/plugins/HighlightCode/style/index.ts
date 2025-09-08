@@ -1,4 +1,3 @@
-import { NONAME } from 'node:dns';
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import type { GenerateStyle } from 'antd/es/theme/internal';
 import { genStyleHooks } from '../../theme/genStyleUtils';
