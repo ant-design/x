@@ -56,9 +56,8 @@ export default () => {
                 ]}
               />
               <Divider orientation="vertical" style={{ height: '100%' }} />
-              <Flex vertical style={{ flex: 1 }} gap={8}>
+              <Flex vertical justify="space-between" gap={8}>
                 <Bubble.List
-                  style={{ flex: 1 }}
                   items={[
                     {
                       key: '1',
@@ -79,39 +78,41 @@ export default () => {
                     },
                   ]}
                 />
-                <Prompts
-                  items={[
-                    {
-                      key: '1',
-                      icon: <BulbOutlined style={{ color: '#FFD700' }} />,
-                      label: 'Ignite Your Creativity',
-                    },
-                    {
-                      key: '2',
-                      icon: <SmileOutlined style={{ color: '#52C41A' }} />,
-                      label: 'Tell me a Joke',
-                    },
-                  ]}
-                />
-                <Suggestion items={[{ label: 'Write a report', value: 'report' }]}>
-                  {({ onTrigger, onKeyDown }) => {
-                    return (
-                      <Sender
-                        value={value}
-                        onChange={(nextVal) => {
-                          if (nextVal === '/') {
-                            onTrigger();
-                          } else if (!nextVal) {
-                            onTrigger(false);
-                          }
-                          setValue(nextVal);
-                        }}
-                        onKeyDown={onKeyDown}
-                        placeholder='Type "/" to trigger suggestion'
-                      />
-                    );
-                  }}
-                </Suggestion>
+                <Flex vertical gap={12}>
+                  <Prompts
+                    items={[
+                      {
+                        key: '1',
+                        icon: <BulbOutlined style={{ color: '#FFD700' }} />,
+                        label: 'Ignite Your Creativity',
+                      },
+                      {
+                        key: '2',
+                        icon: <SmileOutlined style={{ color: '#52C41A' }} />,
+                        label: 'Tell me a Joke',
+                      },
+                    ]}
+                  />
+                  <Suggestion items={[{ label: 'Write a report', value: 'report' }]}>
+                    {({ onTrigger, onKeyDown }) => {
+                      return (
+                        <Sender
+                          value={value}
+                          onChange={(nextVal) => {
+                            if (nextVal === '/') {
+                              onTrigger();
+                            } else if (!nextVal) {
+                              onTrigger(false);
+                            }
+                            setValue(nextVal);
+                          }}
+                          onKeyDown={onKeyDown}
+                          placeholder='Type "/" to trigger suggestion'
+                        />
+                      );
+                    }}
+                  </Suggestion>
+                </Flex>
               </Flex>
               <Divider orientation="vertical" style={{ height: '100%' }} />
               <ThoughtChain
