@@ -5,7 +5,7 @@ import { DefaultChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';
 import { Button, Row } from 'antd';
 import React, { useMemo, useState } from 'react';
 import '@ant-design/x-markdown/themes/light.css';
-import { BubbleListProps } from '@ant-design/x/es/bubble';
+import type { BubbleListProps } from '@ant-design/x';
 import { mockFetch } from '../_utils';
 
 interface ChatInput {

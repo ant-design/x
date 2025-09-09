@@ -1,4 +1,4 @@
-import { Global, css } from '@emotion/react';
+import { css, Global } from '@emotion/react';
 import { useTheme } from 'antd-style';
 import React from 'react';
 
@@ -19,7 +19,8 @@ const GlobalDemoStyles: React.FC = () => {
           vertical-align: top;
         }
 
-        .code-box {
+        
+        .code-box{
           position: relative;
           display: inline-block;
           width: calc(100% - ${token.lineWidth * 2}px);
@@ -60,12 +61,12 @@ const GlobalDemoStyles: React.FC = () => {
               margin: 0.5em 0;
               padding: 6px 12px;
             }
-
             pre code {
               margin: 0;
               background: #f5f5f5;
             }
           }
+          
 
           &:target {
             border: 1px solid ${token.colorPrimary};
@@ -311,7 +312,8 @@ const GlobalDemoStyles: React.FC = () => {
           }
 
           pre {
-            width: auto;
+          .not{.ant-x-markdown}{
+           width: auto;
             margin: 0;
 
             code {
@@ -321,6 +323,8 @@ const GlobalDemoStyles: React.FC = () => {
               padding: ${token.paddingSM}px ${token.padding}px;
               font-size: ${token.fontSize}px;
             }
+          }
+           
           }
 
           &-debug {

@@ -2,7 +2,7 @@ import { Bubble } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
 import React from 'react';
 import '@ant-design/x-markdown/themes/light.css';
-import { Flex, Button } from 'antd';
+import { Button, Flex } from 'antd';
 import { useMarkdownTheme } from '../_utils';
 
 const text = `The Ant Design team presents the RICH paradigm, crafting superior AI interface solutions and pioneering intelligent experiences.\n\n<div align="center">\n\n<img height="180" src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*eco6RrQhxbMAAAAAAAAAAAAADgCCAQ/original">\n\n<h1>Ant Design X</h1>\n\nCraft AI-driven interfaces effortlessly.\n[![CI status](https://github.com/ant-design/x/actions/workflows/main.yml/badge.svg)](https://github.com/ant-design/x/actions/workflows/main.yml) [![codecov](https://codecov.io/gh/ant-design/x/graph/badge.svg?token=wrCCsyTmdi)](https://codecov.io/gh/ant-design/x/graph/badge.svg?token=wrCCsyTmdi) [![NPM version](https://img.shields.io/npm/v/@ant-design/x.svg?style=flat-square)](https://npmjs.org/package/@ant-design/x)
@@ -71,11 +71,7 @@ const App = () => {
       <Bubble
         content={text.slice(0, index)}
         contentRender={(content) => (
-          <XMarkdown
-            style={{ whiteSpace: 'normal' }}
-            streaming={{ hasNextChunk }}
-            className={className}
-          >
+          <XMarkdown streaming={{ hasNextChunk }} className={className}>
             {content}
           </XMarkdown>
         )}

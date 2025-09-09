@@ -7,8 +7,8 @@ import {
   RedoOutlined,
   UserOutlined,
 } from '@ant-design/icons';
+import type { BubbleData, BubbleListProps } from '@ant-design/x';
 import { Actions, Bubble, FileCard, FileCardProps } from '@ant-design/x';
-import type { BubbleData, BubbleListProps } from '@ant-design/x/es/bubble';
 import XMarkdown from '@ant-design/x-markdown';
 import type { GetRef } from 'antd';
 import { Avatar, Button, Divider, Flex, Space, Typography } from 'antd';
@@ -159,7 +159,7 @@ const App = () => {
                 content: text,
                 contentRender: (content: string) => (
                   <Typography>
-                    <XMarkdown style={{ whiteSpace: 'normal' }} content={content} />
+                    <XMarkdown content={content} />
                   </Typography>
                 ),
               });

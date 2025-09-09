@@ -1,6 +1,6 @@
 import { UserOutlined } from '@ant-design/icons';
+import type { BubbleListProps } from '@ant-design/x';
 import { Bubble, Sender } from '@ant-design/x';
-import { BubbleListProps } from '@ant-design/x/es/bubble';
 import XMarkdown from '@ant-design/x-markdown';
 import Latex from '@ant-design/x-markdown/plugins/Latex';
 import { DefaultChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';

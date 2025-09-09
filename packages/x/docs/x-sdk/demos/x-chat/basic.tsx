@@ -1,6 +1,6 @@
 import { UserOutlined } from '@ant-design/icons';
+import type { BubbleListProps } from '@ant-design/x';
 import { Bubble, Sender } from '@ant-design/x';
-import { BubbleListProps } from '@ant-design/x/es/bubble';
 import { DefaultChatProvider, useXChat, XRequest, XRequestOptions } from '@ant-design/x-sdk';
 import { Avatar, Flex } from 'antd';
 import React from 'react';

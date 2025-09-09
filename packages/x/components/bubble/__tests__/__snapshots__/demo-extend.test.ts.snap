@@ -3020,7 +3020,7 @@ exports[`renders components/bubble/demo/markdown.tsx extend context correctly 1`
           >
             <div
               class="ant-x-markdown"
-              style="direction: ltr; white-space: normal;"
+              style="direction: ltr;"
             >
               <blockquote>
                 <p>
