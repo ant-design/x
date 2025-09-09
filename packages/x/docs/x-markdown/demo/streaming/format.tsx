@@ -18,7 +18,7 @@ const fullContent = `
 
 邮箱链接：<contact@example.com>
 
-### Image图片 🖼️ 
+### Image图片 🖼️
 ![示例图片](https://mdn.alipayobjects.com/huamei_yz9z7c/afts/img/0lMhRYbo0-8AAAAAQDAAAAgADlJoAQFr/original)
 
 ### Heading标题  📑
@@ -41,7 +41,7 @@ const fullContent = `
 
 __这也是strong的效果__
 
-### XML标签 
+### XML标签
 \`\`\`xml
 <user>
   <name>张三</name>
@@ -50,7 +50,7 @@ __这也是strong的效果__
 </user>
 \`\`\`
 
-### Code代码 💻 
+### Code代码 💻
 \`console.log('Hello World')\`
 
 #### 行内代码
@@ -71,7 +71,7 @@ def fibonacci(n):
     return fibonacci(n-1) + fibonacci(n-2)
 \`\`\`
 
-### Hr水平线 📏 
+### Hr水平线 📏
 ---
 ***
 ___
@@ -134,7 +134,7 @@ const App = () => {
     [content],
   );
 
-  const { onRequest, messages, isRequesting } = useXChat({
+  const { onRequest, messages, requesting } = useXChat({
     provider: provider,
     requestPlaceholder: 'Waiting...',
     requestFallback: 'Mock failed return. Please try again later.',
@@ -180,7 +180,7 @@ const App = () => {
           }))}
         />
         <Sender
-          loading={isRequesting()}
+          loading={requesting}
           value={content}
           onChange={setContent}
           style={{ marginTop: 48 }}

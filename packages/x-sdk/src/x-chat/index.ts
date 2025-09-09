@@ -1,5 +1,5 @@
 import { useEvent } from 'rc-util';
-import React from 'react';
+import React, { useState } from 'react';
 import type { AnyObject } from '../_util/type';
 import { ConversationData } from '../x-conversations';
 import { AbstractXRequestClass } from '../x-request';
@@ -84,6 +84,7 @@ export default function useXChat<
   // ========================= Agent Messages =========================
   const idRef = React.useRef(0);
   const requestHandlerRef = React.useRef<AbstractXRequestClass<Input, Output>>(undefined);
+  const [requesting, setRequesting] = useState<boolean>(false);
 
   const { messages, setMessages, getMessages, setMessage } = useChatStore<MessageInfo<ChatMessage>>(
     () =>
@@ -272,9 +273,11 @@ export default function useXChat<
         updateMessage('loading', chunk, [], headers);
       },
       onSuccess: (chunks: Output[], headers: Headers) => {
+        setRequesting(false);
         updateMessage('success', undefined as Output, chunks, headers);
       },
       onError: async (error: Error) => {
+        setRequesting(false);
         if (requestFallback) {
           let fallbackMsg: ChatMessage;
           // Update as error
@@ -306,6 +309,7 @@ export default function useXChat<
         }
       },
     });
+    setRequesting(true);
     provider.request.run(provider.transformParams(requestParams, provider.request.options));
   };
 
@@ -341,12 +345,7 @@ export default function useXChat<
       }
       requestHandlerRef.current?.abort();
     },
-    isRequesting: () => {
-      if (!provider) {
-        throw new Error('provider is required');
-      }
-      return requestHandlerRef.current?.isRequesting;
-    },
+    requesting,
     onReload,
   } as const;
 }

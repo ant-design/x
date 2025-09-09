@@ -149,7 +149,7 @@ const IndependentScene: React.FC = () => {
     }),
   );
 
-  const { onRequest, messages, isRequesting } = useXChat({
+  const { onRequest, messages, requesting } = useXChat({
     provider,
     requestPlaceholder: 'Waiting...',
     requestFallback: 'Mock failed return. Please try again later.',
@@ -262,7 +262,7 @@ const IndependentScene: React.FC = () => {
           ]}
         />
         <CustomizationSender
-          loading={isRequesting()}
+          loading={requesting}
           value={content}
           onChange={setContent}
           placeholder={locale.question1}
