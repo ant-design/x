@@ -89,7 +89,7 @@ const App: React.FC = () => {
           },
         ]}
         onScroll={(e) => {
-          console.log('scroll', (e.target as any).scrollTop);
+          console.log('scroll', (e.target as HTMLDivElement).scrollTop);
         }}
       />
     </SemanticPreview>

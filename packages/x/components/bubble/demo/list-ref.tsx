@@ -112,7 +112,7 @@ const App = () => {
         role={memoRole}
         items={items}
         onScroll={(e) => {
-          console.log('scroll', (e.target as any).scrollTop);
+          console.log('scroll', (e.target as HTMLDivElement).scrollTop);
         }}
       />
     </Flex>
