@@ -3,7 +3,6 @@ import type { SenderToken } from '.';
 
 const genSenderSwitchStyle: GenerateStyle<SenderToken> = (token) => {
   const { componentCls, antCls } = token;
-
   const switchCls = `${componentCls}-switch`;
 
   return {

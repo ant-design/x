@@ -1,6 +1,6 @@
 import { createStyles } from 'antd-style';
 import classnames from 'classnames';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import Context from '../../../../../theme/layouts/IndexLayout/Context';
 import Agent from './Agent';
 import Prompt from './Prompt';
