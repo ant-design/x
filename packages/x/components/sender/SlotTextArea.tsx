@@ -379,14 +379,12 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
   const onInternalPaste: React.ClipboardEventHandler<HTMLDivElement> = (e) => {
     e.preventDefault();
-
     const files = e.clipboardData?.files;
-    if (files?.length && onPasteFile) {
+    const text = e.clipboardData?.getData('text/plain');
+    if (!text && files?.length && onPasteFile) {
       onPasteFile(files[0], files);
       return;
     }
-
-    const text = e.clipboardData?.getData('text/plain');
 
     if (text) {
       insert([{ type: 'text', value: text.replace(/\n/g, '') }]);
