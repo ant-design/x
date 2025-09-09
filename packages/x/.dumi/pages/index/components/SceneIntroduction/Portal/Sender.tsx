@@ -56,8 +56,8 @@ export const useStyle = createStyles(({ css, token }) => {
 
 const CustomizationSender: React.FC<{
   onSubmit: (text: string) => void;
-  loading: boolean;
-  abort: () => void;
+  loading?: boolean;
+  abort?: () => void;
 }> = (props) => {
   const { styles } = useStyle();
   const [locale] = useLocale(locales);
@@ -107,7 +107,9 @@ const CustomizationSender: React.FC<{
   ];
 
   useEffect(() => {
-    setMergeLoading(props.loading);
+    if (props?.loading !== undefined) {
+      setMergeLoading(props?.loading);
+    }
   }, [props.loading]);
   useEffect(() => {
     senderRef.current?.focus();

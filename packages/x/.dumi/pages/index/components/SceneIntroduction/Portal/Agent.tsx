@@ -10,7 +10,7 @@ import {
   useXChat,
 } from '@ant-design/x-sdk';
 import { createStyles } from 'antd-style';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { TboxClient } from 'tbox-nodejs-sdk';
 import Sender from './Sender';
 
@@ -38,9 +38,6 @@ const useStyle = createStyles(({ token, css }) => {
         width:100%;
         box-sizing: border-box;
         align-items: center;
-        .ant-bubble{
-          width: 900px
-        }
         `,
     messageList: css`
         width:100%;
@@ -152,6 +149,7 @@ class TBoxRequest<
       query: params?.message.content || '',
       userId: 'antd-x',
     });
+    console.log(stream, 'stream');
     this.tboxStream = stream;
     const { callbacks } = this.options;
 
@@ -190,24 +188,14 @@ class TBoxRequest<
   }
 }
 
+const provider = new TBoxProvider({
+  request: new TBoxRequest('TBox Client', {}),
+});
 interface AgentProps {
   query: string;
 }
 const Agent: React.FC<AgentProps> = ({ query }) => {
   const { styles } = useStyle();
-  // ==================== Runtime ====================
-  const providerCaches = new Map<string, TBoxProvider>();
-  const providerFactory = (conversationKey: string) => {
-    if (!providerCaches.get(conversationKey)) {
-      providerCaches.set(
-        conversationKey,
-        new TBoxProvider({
-          request: new TBoxRequest('TBox Client', {}),
-        }),
-      );
-    }
-    return providerCaches.get(conversationKey);
-  };
 
   // ==================== Event ====================
   const onSubmit = (val: string) => {
@@ -225,17 +213,15 @@ const Agent: React.FC<AgentProps> = ({ query }) => {
   const role: BubbleListProps['role'] = {
     assistant: {
       placement: 'start',
-      contentRender: (content) => {
-        return (
-          <XMarkdown
-            components={{ code: Code }}
-            paragraphTag="div"
-            streaming={{ hasNextChunk: content.status === 'loading', enableAnimation: true }}
-          >
-            {content.text}
-          </XMarkdown>
-        );
-      },
+      contentRender: (content) => (
+        <XMarkdown
+          components={{ code: Code }}
+          paragraphTag="div"
+          streaming={{ hasNextChunk: content.status === 'loading', enableAnimation: true }}
+        >
+          {content.text}
+        </XMarkdown>
+      ),
     },
     user: {
       placement: 'end',
@@ -245,10 +231,8 @@ const Agent: React.FC<AgentProps> = ({ query }) => {
     },
   };
 
-  const [curConversation, setCurConversation] = useState<string>(`${Date.now()}`);
   const { onRequest, messages, isRequesting, abort } = useXChat({
-    provider: providerFactory(curConversation), // every conversation has its own provider
-    conversationKey: curConversation,
+    provider: provider, // every conversation has its own provider
     requestPlaceholder: () => {
       return {
         content: '',
@@ -278,7 +262,7 @@ const Agent: React.FC<AgentProps> = ({ query }) => {
     classNames: {
       content: i.status === 'loading' ? styles.loadingMessage : '',
     },
-    loading: true,
+    loading: !i.message.content,
     key: i.id,
   }));
 
@@ -286,9 +270,10 @@ const Agent: React.FC<AgentProps> = ({ query }) => {
     <div className={styles.container}>
       <div className={styles.messageList}>
         <Bubble.List
-          style={{
-            width: '100%',
-            alignItems: 'center',
+          styles={{
+            bubble: {
+              width: 900,
+            },
           }}
           autoScroll
           items={items}
@@ -296,7 +281,14 @@ const Agent: React.FC<AgentProps> = ({ query }) => {
         />
       </div>
       <div className={styles.sender}>
-        <Sender onSubmit={onSubmit} abort={abort} loading={isRequesting() || false} />
+        <Sender
+          onSubmit={onSubmit}
+          abort={() => {
+            console.log(abort, '11111');
+            abort?.();
+          }}
+          loading={isRequesting() || false}
+        />
       </div>
     </div>
   );

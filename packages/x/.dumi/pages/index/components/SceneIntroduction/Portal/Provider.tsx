@@ -169,10 +169,10 @@ const Provider: React.FC<{
   return (
     <XProvider
       theme={{
+        token: {
+          colorPrimary: '#ffffff',
+        },
         components: {
-          Button: {
-            colorPrimary: '#ffffff',
-          },
           Sender: {
             colorPrimary: '#ffffff',
             switchColorBorder: 'rgba(255,255,255,.2)',
