@@ -56,7 +56,7 @@ const App = () => {
   );
 
   // Chat messages
-  const { onRequest, messages, isRequesting } = useXChat({
+  const { onRequest, messages, requesting } = useXChat({
     provider,
     requestPlaceholder: 'Waiting...',
     requestFallback: 'Mock failed return. Please try again later.',
@@ -75,7 +75,7 @@ const App = () => {
         }))}
       />
       <Sender
-        loading={isRequesting()}
+        loading={requesting}
         value={content}
         onChange={setContent}
         onSubmit={(nextContent) => {

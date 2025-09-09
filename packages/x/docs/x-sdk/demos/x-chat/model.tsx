@@ -83,7 +83,7 @@ const App = () => {
     }),
   );
   // Chat messages
-  const { onRequest, messages, isRequesting, abort, onReload } = useXChat({
+  const { onRequest, messages, requesting, abort, onReload } = useXChat({
     provider,
     requestFallback: (_, { error }) => {
       if (error.name === 'AbortError') {
@@ -131,7 +131,7 @@ const App = () => {
         }))}
       />
       <Sender
-        loading={isRequesting()}
+        loading={requesting}
         value={content}
         onCancel={() => {
           abort();

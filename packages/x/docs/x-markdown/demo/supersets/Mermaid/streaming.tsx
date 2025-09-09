@@ -12,7 +12,7 @@ interface ChatInput {
 }
 
 const fullContent = `
-Here are several Mermaid diagram examples 
+Here are several Mermaid diagram examples
 
 #### 1. Flowchart (Vertical)
 
@@ -35,7 +35,7 @@ sequenceDiagram
     participant Client
     participant Server
     participant Database
-    
+
     Client->>Server: POST /api/data
     Server->>Database: INSERT record
     Database-->>Server: Success
@@ -116,7 +116,7 @@ const App = () => {
     [content],
   );
 
-  const { onRequest, messages, isRequesting } = useXChat({
+  const { onRequest, messages, requesting } = useXChat({
     provider: provider,
     requestPlaceholder: 'Waiting...',
     requestFallback: 'Mock failed return. Please try again later.',
@@ -152,7 +152,7 @@ const App = () => {
         }))}
       />
       <Sender
-        loading={isRequesting()}
+        loading={requesting}
         value={content}
         onChange={setContent}
         style={{ marginTop: 48 }}

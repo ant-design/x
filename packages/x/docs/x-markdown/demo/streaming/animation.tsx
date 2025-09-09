@@ -92,7 +92,7 @@ const App = () => {
     [content],
   );
 
-  const { onRequest, messages, isRequesting } = useXChat({
+  const { onRequest, messages, requesting } = useXChat({
     provider: provider,
     requestPlaceholder: 'Waiting...',
     requestFallback: 'Mock failed return. Please try again later.',
@@ -132,13 +132,13 @@ const App = () => {
                     <XMarkdown
                       className="x-markdown-light"
                       content={content as string}
-                      streaming={{ hasNextChunk: isRequesting(), enableAnimation }}
+                      streaming={{ hasNextChunk: requesting, enableAnimation }}
                     />
                   ),
           }))}
         />
         <Sender
-          loading={isRequesting()}
+          loading={requesting}
           value={content}
           onChange={setContent}
           style={{ marginTop: 48 }}
