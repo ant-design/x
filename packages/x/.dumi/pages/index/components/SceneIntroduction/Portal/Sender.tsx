@@ -15,7 +15,7 @@ const locales = {
     functionPrompt_1: '请介绍',
     functionPrompt_2: '相关的功能以及写出简单的示例',
     componentsPromptPlaceholder: '请选择一个您想了解的组件',
-    componentsPrompt_1: '请介绍Ant Design X 中',
+    componentsPrompt_1: '请介绍Ant Design X 中的',
     componentsPrompt_2: '组件，相关的功能以及写出简单的示例',
   },
   en: {
@@ -101,7 +101,7 @@ const CustomizationSender: React.FC<{
             placeholder: locale.componentsPromptPlaceholder,
           },
         },
-        { type: 'text', value: locale.componentsPrompt_1 },
+        { type: 'text', value: locale.componentsPrompt_2 },
       ],
     },
   ];
@@ -134,9 +134,12 @@ const CustomizationSender: React.FC<{
       }}
       autoSize={{ minRows: 2, maxRows: 2 }}
       onSubmit={(value) => {
-        setMergeLoading(true);
-        props.onSubmit(value);
-        senderRef.current?.clear?.();
+        if (!mergeLoading) {
+          setMergeLoading(true);
+          props.onSubmit(value);
+          setActiveKey('');
+          senderRef.current?.clear?.();
+        }
       }}
       initialSlotConfig={SlotInfo.find(({ key }) => key === activeKey)?.slotConfig}
       suffix={false}

@@ -54,7 +54,7 @@ const useStyle = createStyles(({ token, css }) => {
         `,
     sender: css`
         max-width: 1000px;
-        paddingInline: ${token.marginXL}px;
+        padding-inline: ${token.marginXL}px;
         width:100%;
     `,
     loadingMessage: css``,
@@ -255,7 +255,7 @@ const Agent: React.FC<AgentProps> = ({ setIsOnAgent }) => {
     }
   }, [messages]);
 
-  const items: BubbleListProps['items'] = messages?.map((i) => ({
+  const items: BubbleListProps['items'] = messages?.map((i, index) => ({
     content: {
       status: i.status,
       text: i.message.content,
@@ -270,23 +270,24 @@ const Agent: React.FC<AgentProps> = ({ setIsOnAgent }) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.messageList}>
-        <Bubble.List
-          styles={{
-            bubble: {
-              width: 900,
-            },
-          }}
-          autoScroll
-          items={items}
-          role={role}
-        />
-      </div>
+      {messages.length > 0 && (
+        <div className={styles.messageList}>
+          <Bubble.List
+            styles={{
+              bubble: {
+                width: 1000,
+              },
+            }}
+            autoScroll
+            items={items}
+            role={role}
+          />
+        </div>
+      )}
       <div className={styles.sender}>
         <Sender
           onSubmit={onSubmit}
           abort={() => {
-            console.log(abort, '11111');
             abort?.();
           }}
           loading={requesting}
