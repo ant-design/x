@@ -117,7 +117,6 @@ class TBoxRequest<
 
   _isTimeout = false;
   _isStreamTimeout = false;
-  _isRequesting = false;
 
   constructor(baseURL: string, options: XRequestOptions<Input, Output>) {
     super(baseURL, options);
@@ -137,9 +136,7 @@ class TBoxRequest<
   get isStreamTimeout(): boolean {
     return this._isStreamTimeout;
   }
-  get isRequesting(): boolean {
-    return this._isRequesting;
-  }
+
   get manual(): boolean {
     return true;
   }
@@ -149,7 +146,6 @@ class TBoxRequest<
       query: params?.message.content || '',
       userId: 'antd-x',
     });
-    console.log(stream, 'stream');
     this.tboxStream = stream;
     const { callbacks } = this.options;
 
@@ -192,23 +188,21 @@ const provider = new TBoxProvider({
   request: new TBoxRequest('TBox Client', {}),
 });
 interface AgentProps {
-  query: string;
+  setIsOnAgent: (val: boolean) => void;
 }
-const Agent: React.FC<AgentProps> = ({ query }) => {
+const Agent: React.FC<AgentProps> = ({ setIsOnAgent }) => {
   const { styles } = useStyle();
 
   // ==================== Event ====================
   const onSubmit = (val: string) => {
     if (!val) return;
-
     onRequest({
-      message: { role: 'user', content: val },
+      message: {
+        role: 'user',
+        content: val,
+      },
     });
   };
-
-  useEffect(() => {
-    onSubmit(query);
-  }, []);
 
   const role: BubbleListProps['role'] = {
     assistant: {
@@ -231,7 +225,7 @@ const Agent: React.FC<AgentProps> = ({ query }) => {
     },
   };
 
-  const { onRequest, messages, isRequesting, abort } = useXChat({
+  const { onRequest, messages, requesting, abort } = useXChat({
     provider: provider, // every conversation has its own provider
     requestPlaceholder: () => {
       return {
@@ -252,6 +246,14 @@ const Agent: React.FC<AgentProps> = ({ query }) => {
       };
     },
   });
+
+  useEffect(() => {
+    if (messages.length) {
+      setIsOnAgent(true);
+    } else {
+      setIsOnAgent(false);
+    }
+  }, [messages]);
 
   const items: BubbleListProps['items'] = messages?.map((i) => ({
     content: {
@@ -287,7 +289,7 @@ const Agent: React.FC<AgentProps> = ({ query }) => {
             console.log(abort, '11111');
             abort?.();
           }}
-          loading={isRequesting() || false}
+          loading={requesting}
         />
       </div>
     </div>

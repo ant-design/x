@@ -1,10 +1,10 @@
 import { createStyles } from 'antd-style';
+import classnames from 'classnames';
 import React, { useContext, useState } from 'react';
 import Context from '../../../../../theme/layouts/IndexLayout/Context';
 import Agent from './Agent';
 import Prompt from './Prompt';
 import Provider from './Provider';
-import Sender from './Sender';
 import StartPage from './StartPage';
 
 const useStyle = createStyles(({ token, css }) => {
@@ -29,6 +29,10 @@ const useStyle = createStyles(({ token, css }) => {
     max-width: 1000px;
     padding-inline: ${token.paddingXL * 2}px;
    `,
+    agentPage: css`
+   height: 100%;
+   width: 100%;
+   `,
   };
 });
 
@@ -36,23 +40,16 @@ const PortalScene: React.FC = () => {
   const { styles } = useStyle();
   const { setIsOnAgent, isOnAgent } = useContext(Context);
 
-  const [query, setQuery] = useState('');
-  const onSubmit = (value: string) => {
-    setQuery(value);
-    setIsOnAgent(true);
-  };
   return (
     <Provider>
       <div className={styles.container}>
-        {!isOnAgent ? (
-          <div className={styles.startPage}>
-            <StartPage />
-            <Sender onSubmit={onSubmit} />
-            <Prompt />
-          </div>
-        ) : (
-          <Agent query={query} />
-        )}
+        <div
+          className={classnames({ [styles.startPage]: !isOnAgent, [styles.agentPage]: isOnAgent })}
+        >
+          {!isOnAgent && <StartPage />}
+          <Agent isOnAgent={isOnAgent} setIsOnAgent={setIsOnAgent} />
+          {!isOnAgent && <Prompt />}
+        </div>
       </div>
     </Provider>
   );
