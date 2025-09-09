@@ -110,6 +110,9 @@ export default () => {
           <Flex style={{ height: 500 }} gap={12}>
             <Conversations
               style={{ width: 130 }}
+              creation={{
+                onClick: () => {},
+              }}
               defaultActiveKey="1"
               items={[
                 {
