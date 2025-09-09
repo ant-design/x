@@ -117,6 +117,7 @@ class TBoxRequest<
 
   _isTimeout = false;
   _isStreamTimeout = false;
+  _isRequesting = false;
 
   constructor(baseURL: string, options: XRequestOptions<Input, Output>) {
     super(baseURL, options);
@@ -135,6 +136,10 @@ class TBoxRequest<
   }
   get isStreamTimeout(): boolean {
     return this._isStreamTimeout;
+  }
+
+  get isRequesting(): boolean {
+    return this._isRequesting;
   }
 
   get manual(): boolean {
@@ -189,6 +194,7 @@ const provider = new TBoxProvider({
 });
 interface AgentProps {
   setIsOnAgent: (val: boolean) => void;
+  isOnAgent: boolean;
 }
 const Agent: React.FC<AgentProps> = ({ setIsOnAgent }) => {
   const { styles } = useStyle();
