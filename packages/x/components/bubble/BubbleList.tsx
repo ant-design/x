@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import classnames from 'classnames';
 import omit from 'rc-util/es/omit';
 import pickAttrs from 'rc-util/es/pickAttrs';
 import * as React from 'react';
@@ -53,6 +53,8 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
     rootClassName,
     className,
     rootStyle,
+    styles,
+    classNames,
     style,
     items,
     autoScroll = true,
@@ -81,11 +83,20 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
 
   const [hashId, cssVarCls] = useBubbleListStyle(prefixCls);
 
-  const mergedClassNames = classNames(listPrefixCls, rootClassName, className, hashId, cssVarCls, {
-    [`${listPrefixCls}-autoscroll`]: autoScroll,
-  });
+  const mergedClassNames = classnames(
+    listPrefixCls,
+    rootClassName,
+    className,
+    classNames?.root,
+    hashId,
+    cssVarCls,
+    {
+      [`${listPrefixCls}-autoscroll`]: autoScroll,
+    },
+  );
 
   const mergedStyle = {
+    ...styles?.root,
     ...rootStyle,
     ...style,
   };
@@ -143,6 +154,14 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
         }
         return (
           <BubbleListItem
+            classNames={{
+              ...classNames,
+              root: classNames?.bubble,
+            }}
+            styles={{
+              ...styles,
+              root: styles?.bubble,
+            }}
             {...omit(mergedProps, ['key'])}
             key={item.key}
             _key={item.key}

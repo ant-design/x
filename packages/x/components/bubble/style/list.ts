@@ -9,8 +9,12 @@ const genBubbleListStyle: GenerateStyle<BubbleToken> = (token) => {
       flexDirection: 'column',
       gap: padding,
       overflowY: 'auto',
+      width: '100%',
+      alignItems: 'center',
       // For Firefox
       scrollbarWidth: 'thin',
+      paddingInline: token.paddingXS,
+      boxSizing: 'border-box',
       scrollbarColor: `${token.colorTextTertiary} transparent`,
 
       '&::-webkit-scrollbar': {
@@ -22,13 +26,16 @@ const genBubbleListStyle: GenerateStyle<BubbleToken> = (token) => {
         backgroundColor: token.colorTextTertiary,
         borderRadius: token.borderRadiusSM,
       },
-
+      [`& ${componentCls}`]: {
+        width: '100%',
+        boxSizing: 'border-box',
+      },
       [`& ${componentCls}-start`]: {
-        marginInlineEnd: '15%',
+        paddingInlineEnd: '15%',
       },
 
       [`& ${componentCls}-end`]: {
-        marginInlineStart: '15%',
+        paddingInlineStart: '15%',
       },
     },
 

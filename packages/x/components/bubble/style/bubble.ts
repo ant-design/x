@@ -49,13 +49,17 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
       display: 'flex',
       columnGap: paddingSM,
 
+      [`&${componentCls}-rtl`]: {
+        direction: 'rtl',
+      },
+
+      [`&${componentCls}-loading`]: {
+        height: token.controlHeight,
+      },
+
       [`& ${componentCls}-body`]: {
         display: 'flex',
         flexDirection: 'column',
-      },
-
-      [`& ${componentCls}-rtl`]: {
-        direction: 'rtl',
       },
 
       // =========================== Content =============================

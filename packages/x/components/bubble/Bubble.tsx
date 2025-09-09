@@ -84,6 +84,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
     `${prefixCls}-${placement}`,
     {
       [`${prefixCls}-rtl`]: direction === 'rtl',
+      [`${prefixCls}-loading`]: loading,
     },
   );
 
