@@ -43,7 +43,14 @@ export interface PromptProps extends BasePromptItem {
   children?: BasePromptItem[];
 }
 
-export type SemanticType = 'list' | 'item' | 'itemContent' | 'title' | 'subList' | 'subItem';
+export type SemanticType =
+  | 'root'
+  | 'list'
+  | 'item'
+  | 'itemContent'
+  | 'title'
+  | 'subList'
+  | 'subItem';
 
 export interface PromptsProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick' | 'title'> {
@@ -134,6 +141,7 @@ const Prompts: React.FC<PromptsProps> = (props) => {
     contextConfig.className,
     className,
     rootClassName,
+    classNames.root,
     hashId,
     cssVarCls,
     {
@@ -151,7 +159,11 @@ const Prompts: React.FC<PromptsProps> = (props) => {
 
   // ============================ Render ============================
   return (
-    <div {...htmlProps} className={mergedCls} style={{ ...style, ...contextConfig.style }}>
+    <div
+      {...htmlProps}
+      className={mergedCls}
+      style={{ ...style, ...contextConfig.style, ...styles.root }}
+    >
       {/* Title */}
       {title && (
         <Typography.Title

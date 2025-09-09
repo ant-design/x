@@ -189,6 +189,8 @@ export interface BubbleListProps extends Omit<React.HTMLAttributes<HTMLDivElemen
   prefixCls?: string;
   rootClassName?: string;
   rootStyle?: React.CSSProperties;
+  styles?: Partial<Record<BubbleSlotType | 'bubble' | 'root', React.CSSProperties>>;
+  classNames?: Partial<Record<BubbleSlotType | 'bubble' | 'root', string>>;
   items: BubbleData[];
   autoScroll?: boolean;
   /**

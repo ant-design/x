@@ -206,7 +206,13 @@ export type RoleType = Partial<Record<'ai' | 'system' | 'user', RoleProps | Func
 
 ## Semantic DOM
 
+### Bubble
+
 <code src="./demo/_semantic.tsx" simplify="true"></code>
+
+### Bubble.List
+
+<code src="./demo/_semantic-list.tsx" simplify="true"></code>
 
 ## 主题变量（Design Token）
 
