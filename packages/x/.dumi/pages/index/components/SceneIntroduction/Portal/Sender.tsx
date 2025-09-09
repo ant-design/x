@@ -112,8 +112,10 @@ const CustomizationSender: React.FC<{
     }
   }, [props.loading]);
   useEffect(() => {
-    senderRef.current?.focus();
-  }, []);
+    senderRef.current!.focus({
+      cursor: 'end',
+    });
+  }, [activeKey, senderRef.current]);
 
   const onClick = (key: string) => {
     setActiveKey(key);
