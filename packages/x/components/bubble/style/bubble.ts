@@ -53,10 +53,6 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
         direction: 'rtl',
       },
 
-      [`&${componentCls}-loading`]: {
-        height: token.controlHeight,
-      },
-
       [`& ${componentCls}-body`]: {
         display: 'flex',
         flexDirection: 'column',
@@ -100,7 +96,7 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
 
       [`& ${componentCls}-dot`]: {
         position: 'relative',
-        height: '100%',
+        height: token.controlHeight,
         display: 'flex',
         alignItems: 'center',
         columnGap: token.marginXS,
