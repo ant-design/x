@@ -16,7 +16,9 @@ import {
   ShareAltOutlined,
   SmileOutlined,
 } from '@ant-design/icons';
-import { Bubble, Conversations, Prompts, Sender, Welcome } from '@ant-design/x';
+import type { BubbleListProps } from '@ant-design/x';
+import { Bubble, Conversations, Prompts, Sender, Think, Welcome } from '@ant-design/x';
+import XMarkdown from '@ant-design/x-markdown';
 import type { TransformMessage } from '@ant-design/x-sdk';
 import {
   AbstractChatProvider,
@@ -63,6 +65,8 @@ const zhCN = {
     '基于 Ant Design 的 AGI 产品界面解决方案，打造更卓越的智能视觉体验，集成了百宝箱 Tbox.cn 的智能体能力，助力产品设计与开发。',
   askMeAnything: '向我提问吧',
   loadingMessage: '加载中💗',
+  DeepThinking: '深度思考中',
+  CompleteThinking: '深度思考完成',
 };
 
 const enUS = {
@@ -90,6 +94,8 @@ const enUS = {
     'An AGI product interface solution based on Ant Design, creating a superior intelligent visual experience, integrating the capabilities of Tbox.cn agents to assist in product design and development.',
   askMeAnything: 'Ask me anything...',
   loadingMessage: 'Loading...',
+  DeepThinking: 'Deep thinking',
+  CompleteThinking: 'Deep thinking completed',
 };
 
 const isZhCN = window.parent?.location?.pathname?.includes('-cn');
@@ -217,12 +223,17 @@ const useStyle = createStyles(({ token, css }) => {
         padding-inline-start: 0;
       }
     `,
-    siderFooter: css`
+    sideFooter: css`
       border-top: 1px solid ${token.colorBorderSecondary};
       height: 40px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+    `,
+    typing: css`
+      position: absolute;
+      right: 20px;
+      bottom: 10px;
     `,
     // chat list 样式
     chat: css`
@@ -421,6 +432,24 @@ const providerFactory = (conversationKey: string) => {
   return providerCaches.get(conversationKey);
 };
 
+const ThinkComponent = React.memo((props: { children: string; status: string }) => {
+  const [title, setTitle] = React.useState(t.DeepThinking + '...');
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    if (props.status === 'done') {
+      setTitle(t.CompleteThinking);
+      setLoading(false);
+    }
+  }, [props.status]);
+
+  return (
+    <Think title={title} loading={loading}>
+      {props.children}
+    </Think>
+  );
+});
+
 const AgentTBox: React.FC = () => {
   const { styles } = useStyle();
 
@@ -478,7 +507,7 @@ const AgentTBox: React.FC = () => {
   };
 
   // ==================== Nodes ====================
-  const chatSider = (
+  const chatSide = (
     <div className={styles.sider}>
       {/* 🌟 Logo */}
       <div className={styles.logo}>
@@ -545,12 +574,57 @@ const AgentTBox: React.FC = () => {
         })}
       />
 
-      <div className={styles.siderFooter}>
+      <div className={styles.sideFooter}>
         <Avatar size={24} />
         <Button type="text" icon={<QuestionCircleOutlined />} />
       </div>
     </div>
   );
+  const role: BubbleListProps['role'] = {
+    assistant: {
+      placement: 'start',
+      components: {
+        footer: (
+          <div style={{ display: 'flex' }}>
+            <Button
+              type="text"
+              size="small"
+              icon={<ReloadOutlined />}
+              onClick={onFooterButtonClick}
+            />
+            <Button
+              type="text"
+              size="small"
+              icon={<CopyOutlined />}
+              onClick={onFooterButtonClick}
+            />
+            <Button
+              type="text"
+              size="small"
+              icon={<LikeOutlined />}
+              onClick={onFooterButtonClick}
+            />
+            <Button
+              type="text"
+              size="small"
+              icon={<DislikeOutlined />}
+              onClick={onFooterButtonClick}
+            />
+          </div>
+        ),
+      },
+      contentRender: (content) => (
+        <XMarkdown
+          content={content as string}
+          components={{
+            think: ThinkComponent,
+          }}
+          streaming={{ hasNextChunk: isRequesting, enableAnimation: true }}
+        />
+      ),
+    },
+    user: { placement: 'end' },
+  };
   const chatList = (
     <div className={styles.chatList}>
       {messages?.length ? (
@@ -559,53 +633,20 @@ const AgentTBox: React.FC = () => {
           items={messages?.map((i) => ({
             ...i.message,
             classNames: {
-              content:
-                i.status === 'loading' || i.status === 'updating' ? styles.loadingMessage : '',
+              content: i.status === 'loading' ? styles.loadingMessage : '',
             },
             typing:
-              i.status === 'loading' || i.status === 'updating'
-                ? { effect: 'typing', suffix: <>💗</>, keepPrefix: true }
+              i.status === 'updating'
+                ? {
+                    effect: 'typing',
+                    suffix: <div className={styles.typing}>💗</div>,
+                    keepPrefix: true,
+                  }
                 : false,
             key: i.id,
           }))}
           style={{ paddingInline: 'calc(calc(100% - 700px) /2)' }}
-          role={{
-            assistant: {
-              placement: 'start',
-              components: {
-                footer: (
-                  <div style={{ display: 'flex' }}>
-                    <Button
-                      type="text"
-                      size="small"
-                      icon={<ReloadOutlined />}
-                      onClick={onFooterButtonClick}
-                    />
-                    <Button
-                      type="text"
-                      size="small"
-                      icon={<CopyOutlined />}
-                      onClick={onFooterButtonClick}
-                    />
-                    <Button
-                      type="text"
-                      size="small"
-                      icon={<LikeOutlined />}
-                      onClick={onFooterButtonClick}
-                    />
-                    <Button
-                      type="text"
-                      size="small"
-                      icon={<DislikeOutlined />}
-                      onClick={onFooterButtonClick}
-                    />
-                  </div>
-                ),
-              },
-              loadingRender: () => <Spin size="small" />,
-            },
-            user: { placement: 'end' },
-          }}
+          role={role}
         />
       ) : (
         <Space
@@ -700,8 +741,7 @@ const AgentTBox: React.FC = () => {
   // ==================== Render =================
   return (
     <div className={styles.layout}>
-      {chatSider}
-
+      {chatSide}
       <div className={styles.chat}>
         {chatList}
         {chatSender}

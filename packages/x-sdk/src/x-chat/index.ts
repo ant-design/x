@@ -9,7 +9,7 @@ import { useChatStore } from './store';
 
 export type SimpleType = string | number | boolean | object;
 
-export type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error';
+export type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error' | 'abort';
 
 type RequestPlaceholderFn<Message extends SimpleType> = (
   message: Message,
@@ -283,10 +283,15 @@ export default function useXChat<
           // Update as error
           if (typeof requestFallback === 'function') {
             // typescript has bug that not get real return type when use `typeof function` check
-            fallbackMsg = await (requestFallback as RequestFallbackFn<ChatMessage>)(message, {
-              error,
-              messages: getRequestMessages(),
-            });
+            const messages = getRequestMessages();
+            const msg = getMessages().find((info) => info.id === updatingMsgId);
+            fallbackMsg = await (requestFallback as RequestFallbackFn<ChatMessage>)(
+              msg?.message || message,
+              {
+                error,
+                messages,
+              },
+            );
           } else {
             fallbackMsg = requestFallback;
           }
@@ -296,15 +301,20 @@ export default function useXChat<
               (info: { id: string | number | null | undefined }) =>
                 info.id !== loadingMsgId && info.id !== updatingMsgId,
             ),
-            createMessage(fallbackMsg, 'error'),
+            createMessage(fallbackMsg, error.name === 'AbortError' ? 'abort' : 'error'),
           ]);
         } else {
           // Remove directly
           setMessages((ori: MessageInfo<ChatMessage>[]) => {
-            return ori.filter(
-              (info: { id: string | number | null | undefined }) =>
-                info.id !== loadingMsgId && info.id !== updatingMsgId,
-            );
+            return ori.map((info: MessageInfo<ChatMessage>) => {
+              if (info.id !== loadingMsgId && info.id !== updatingMsgId) {
+                return {
+                  ...info,
+                  status: 'error',
+                };
+              }
+              return info;
+            });
           });
         }
       },

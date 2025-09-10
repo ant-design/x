@@ -21,7 +21,7 @@ export type { SuggestionProps } from './suggestion';
 export { default as Suggestion } from './suggestion';
 export type { ThinkProps } from './think';
 export { default as Think } from './think';
-export type { ThoughtChainItem, ThoughtChainProps } from './thought-chain';
+export type { ThoughtChainItem, ThoughtChainItemProp, ThoughtChainProps } from './thought-chain';
 export { default as ThoughtChain } from './thought-chain';
 export { default as version } from './version';
 export type { WelcomeProps } from './welcome';
