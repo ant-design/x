@@ -63,7 +63,7 @@ const { onRequest, messages, isRequesting } = useXChat({
 
 ## AbsoluteChatProvider
 
-`AbsoluteChatProvider` 是一个抽象类，用于定义 `Chat Provider` 的接口。当你需要使用自定义的数据服务时，你可以继承 `AbsoluteChatProvider` 并实现其方法。
+`AbstractChatProvider` 是一个抽象类，用于定义 `Chat Provider` 的接口。当你需要使用自定义的数据服务时，你可以继承 `AbstractChatProvider` 并实现其方法。
 
 ```ts
 type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error';
