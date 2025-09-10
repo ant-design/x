@@ -441,7 +441,7 @@ const AgentTBox: React.FC = () => {
 
   // ==================== Runtime ====================
 
-  const { onRequest, messages, requesting, abort } = useXChat({
+  const { onRequest, messages, isRequesting, abort } = useXChat({
     provider: providerFactory(curConversation), // every conversation has its own provider
     conversationKey: curConversation,
     requestPlaceholder: () => {
@@ -689,7 +689,7 @@ const AgentTBox: React.FC = () => {
         onCancel={() => {
           abort();
         }}
-        loading={requesting}
+        loading={isRequesting}
         className={styles.sender}
         placeholder={t.askMeAnything}
       />
