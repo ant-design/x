@@ -441,7 +441,7 @@ const AgentTBox: React.FC = () => {
 
   // ==================== Runtime ====================
 
-  const { onRequest, messages, requesting, abort } = useXChat({
+  const { onRequest, messages, isRequesting, abort } = useXChat({
     provider: providerFactory(curConversation), // every conversation has its own provider
     conversationKey: curConversation,
     requestPlaceholder: () => {
@@ -559,10 +559,11 @@ const AgentTBox: React.FC = () => {
           items={messages?.map((i) => ({
             ...i.message,
             classNames: {
-              content: i.status === 'loading' ? styles.loadingMessage : '',
+              content:
+                i.status === 'loading' || i.status === 'updating' ? styles.loadingMessage : '',
             },
             typing:
-              i.status === 'loading'
+              i.status === 'loading' || i.status === 'updating'
                 ? { effect: 'typing', suffix: <>💗</>, keepPrefix: true }
                 : false,
             key: i.id,
@@ -689,7 +690,7 @@ const AgentTBox: React.FC = () => {
         onCancel={() => {
           abort();
         }}
-        loading={requesting}
+        loading={isRequesting}
         className={styles.sender}
         placeholder={t.askMeAnything}
       />

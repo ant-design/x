@@ -400,7 +400,7 @@ const Independent: React.FC = () => {
 
   // ==================== Runtime ====================
 
-  const { onRequest, messages, requesting, abort } = useXChat({
+  const { onRequest, messages, isRequesting, abort } = useXChat({
     provider: providerFactory(curConversation), // every conversation has its own provider
     conversationKey: curConversation,
     requestFallback: (_, { error }) => {
@@ -445,7 +445,7 @@ const Independent: React.FC = () => {
       {/* 🌟 添加会话 */}
       <Button
         onClick={() => {
-          if (requesting) {
+          if (isRequesting) {
             message.error(
               t[
                 'Message is Requesting, you can create a new conversation after request done or abort it right now...'
@@ -519,10 +519,11 @@ const Independent: React.FC = () => {
             ...i.message,
             key: i.id,
             classNames: {
-              content: i.status === 'loading' ? styles.loadingMessage : '',
+              content:
+                i.status === 'loading' || i.status === 'updating' ? styles.loadingMessage : '',
             },
             typing:
-              i.status === 'loading'
+              i.status === 'loading' || i.status === 'updating'
                 ? { effect: 'typing', step: 5, interval: 20, suffix: <>💗</> }
                 : false,
           }))}
@@ -670,7 +671,7 @@ const Independent: React.FC = () => {
             onClick={() => setAttachmentsOpen(!attachmentsOpen)}
           />
         }
-        loading={requesting}
+        loading={isRequesting}
         className={styles.sender}
         allowSpeech
         placeholder={t['Ask or input / use skills']}

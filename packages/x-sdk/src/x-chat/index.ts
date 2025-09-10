@@ -9,7 +9,7 @@ import { useChatStore } from './store';
 
 export type SimpleType = string | number | boolean | object;
 
-export type MessageStatus = 'local' | 'loading' | 'success' | 'error';
+export type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error';
 
 type RequestPlaceholderFn<Message extends SimpleType> = (
   message: Message,
@@ -84,7 +84,7 @@ export default function useXChat<
   // ========================= Agent Messages =========================
   const idRef = React.useRef(0);
   const requestHandlerRef = React.useRef<AbstractXRequestClass<Input, Output>>(undefined);
-  const [requesting, setRequesting] = useState<boolean>(false);
+  const [isRequesting, setIsRequesting] = useState<boolean>(false);
 
   const { messages, setMessages, getMessages, setMessage } = useChatStore<MessageInfo<ChatMessage>>(
     () =>
@@ -270,14 +270,14 @@ export default function useXChat<
     };
     provider.injectRequest({
       onUpdate: (chunk: Output, headers: Headers) => {
-        updateMessage('loading', chunk, [], headers);
+        updateMessage('updating', chunk, [], headers);
       },
       onSuccess: (chunks: Output[], headers: Headers) => {
-        setRequesting(false);
+        setIsRequesting(false);
         updateMessage('success', undefined as Output, chunks, headers);
       },
       onError: async (error: Error) => {
-        setRequesting(false);
+        setIsRequesting(false);
         if (requestFallback) {
           let fallbackMsg: ChatMessage;
           // Update as error
@@ -309,7 +309,7 @@ export default function useXChat<
         }
       },
     });
-    setRequesting(true);
+    setIsRequesting(true);
     provider.request.run(provider.transformParams(requestParams, provider.request.options));
   };
 
@@ -345,7 +345,7 @@ export default function useXChat<
       }
       requestHandlerRef.current?.abort();
     },
-    requesting,
+    isRequesting,
     onReload,
   } as const;
 }
