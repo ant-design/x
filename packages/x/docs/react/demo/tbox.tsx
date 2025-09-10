@@ -38,7 +38,6 @@ class TBoxRequest<
 
   constructor(baseURL: string, options: XRequestOptions<Input, Output>) {
     super(baseURL, options);
-    console.log(1111);
     this.tboxClient = new TboxClient({
       httpClientConfig: {
         authorization: 'your-api-key', // Replace with your API key
