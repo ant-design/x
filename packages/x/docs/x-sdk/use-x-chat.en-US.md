@@ -7,8 +7,6 @@ order: 2
 subtitle: Conversation Data
 demo:
   cols: 1
-cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*22A2Qqn7OrEAAAAAAAAAAAAADgCCAQ/original
-coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*lQydTrtLz9YAAAAAAAAAAAAADgCCAQ/original
 ---
 
 ## When To Use
@@ -53,8 +51,8 @@ type useXChat<
 | isRequesting | Is requesting | boolean | - | - |
 | messages | Current managed message list | ChatMessage[] | - | - |
 | parsedMessages | Content converted by `parser` | ParsedMessages[] | - | - |
-| onReload | Regenerate, sends a request to the backend and updates the message with new data | (id: string \| number, requestParams: Partial<Input>) => void | - | - |
-| onRequest | Add a Message and trigger a request | (requestParams: Partial<Input>) => void | - | - |
+| onReload | Regenerate, sends a request to the backend and updates the message with new data | (id: string \| number, requestParams: Partial\<Input\>) => void | - | - |
+| onRequest | Add a Message and trigger a request | (requestParams: Partial\<Input\>) => void | - | - |
 | setMessages | Directly modify messages without triggering a request | (messages: { message: ChatMessage, status:MessageStatus }[]) => void | - | - |
 | setMessage | Directly modify a single message without triggering a request | (id: string \| number, data: { message: ChatMessage, status: MessageStatus }) => void | - | - |
 

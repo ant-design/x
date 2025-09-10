@@ -7,8 +7,6 @@ order: 2
 subtitle: 会话数据
 demo:
   cols: 1
-cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*22A2Qqn7OrEAAAAAAAAAAAAADgCCAQ/original
-coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*lQydTrtLz9YAAAAAAAAAAAAADgCCAQ/original
 ---
 
 ## 何时使用
