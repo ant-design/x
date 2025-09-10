@@ -618,7 +618,6 @@ const Independent: React.FC = () => {
             ...i.message,
             key: i.id,
             status: i.status,
-            loading: false,
             classNames: {
               content: i.status === 'loading' ? styles.loadingMessage : '',
             },
