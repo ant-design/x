@@ -6,17 +6,21 @@ title: OpenAI
 order: 0
 ---
 
-This guide introduces how to integrate OpenAI model services into applications built with Ant Design X. For details, see [X SDK](/sdks/introduce)
+This guide introduces how to integrate OpenAI model services into applications built with Ant Design X. For details, see [X SDK](/sdks/introduce).
 
-## Using OpenAI API
+## Integrate with X SDK
 
-Equivalent to integrating model inference services compatible with OpenAI. Refer to [Model Integration - Qwen](/docs/react/model-use-qwen)
+Using URL to integrate models/agents is a basic capability provided by X SDK. For details, see [X SDK](/sdks/introduce).
+
+### Example
+
+<code src="../x-sdk/demos/x-chat/model.tsx" title="Integrate with X SDK"></code>
 
 ## Using openai-node
 
-Usually, openai-node is used in Node environments. If you use it in the browser, you need to enable `dangerouslyAllowBrowser`.
+Usually, openai-node is used in the node environment. If you use it in the browser, you need to enable `dangerouslyAllowBrowser`.
 
-> Note: `dangerouslyAllowBrowser` has security risks. See the official documentation for details: [openai-node requirements](https://github.com/openai/openai-node?tab=readme-ov-file#requirements).
+> Note: `dangerouslyAllowBrowser` has security risks. See the official openai-node [documentation](https://github.com/openai/openai-node?tab=readme-ov-file#requirements) for details.
 
 ```tsx
 import { Bubble, BubbleListProps, Sender } from '@ant-design/x';
@@ -159,4 +163,4 @@ export default Demo;
 
 ### Example
 
-<code src="./demo/openai-node.tsx" title="Integrate openai" description="This example only shows the logic reference for integrating openai with X SDK. Model data is not processed, please fill in the correct apiKey for data debugging." compact iframe="450"></code>
+<code src="./demo/openai-node.tsx" title="Integrate openai" description="This example only shows the logic reference for integrating openai with X SDK. Model data is not processed, please fill in the correct apiKey for data debugging."></code>
