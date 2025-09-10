@@ -15,7 +15,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*lQydTrtLz9YAAA
 
 Manage conversation data via Agent and produce data for page rendering.
 
-## Examples
+## Code Demo
 
 <!-- prettier-ignore -->
 <code src="./demos/x-chat/basic.tsx">Basic</code>
