@@ -64,6 +64,7 @@ const messages = [
   {
     content: 'Hello, Ant Design X!',
     role: 'user',
+    key: 'user_0',
   },
 ];
 
