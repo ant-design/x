@@ -16,7 +16,7 @@ An optimized Markdown rendering solution for streaming content, with powerful ex
 
 **`@ant-design/x-sdk` - AI Conversation Data Flow Management**
 
-Provides a complete set of tool APIs, out-of-the-box AI conversation data flow management, simplifying development and improving efficiency. For details, click [here](/markdowns/introduce).
+Provides a complete set of tool APIs, out-of-the-box AI conversation data flow management, simplifying development and improving efficiency. For details, click [here](/sdks/introduce).
 
 <div class="pic-plus">
   <img width="150" src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*eco6RrQhxbMAAAAAAAAAAAAADgCCAQ/original"/>
