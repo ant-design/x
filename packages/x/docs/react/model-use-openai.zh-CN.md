@@ -10,7 +10,7 @@ order: 0
 
 ## 使用 X SDK 接入
 
-使用URL接入模型/智能体是 X SDK提供的基础能力，详情请查看[X SDK](/sdks/introduce-cn)。
+使用URL接入模型是 X SDK提供的基础能力，详情请查看[X SDK](/sdks/introduce-cn)。
 
 ### 示例
 

@@ -10,7 +10,7 @@ This guide introduces how to integrate OpenAI model services into applications b
 
 ## Integrate with X SDK
 
-Using URL to integrate models/agents is a basic capability provided by X SDK. For details, see [X SDK](/sdks/introduce).
+Using URL to integrate Model is a basic capability provided by X SDK. For details, see [X SDK](/sdks/introduce).
 
 ### Example
 

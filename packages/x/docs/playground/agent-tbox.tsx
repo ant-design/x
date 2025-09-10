@@ -17,10 +17,10 @@ import {
   SmileOutlined,
 } from '@ant-design/icons';
 import { Bubble, Conversations, Prompts, Sender, Welcome } from '@ant-design/x';
+import type { TransformMessage } from '@ant-design/x-sdk';
 import {
   AbstractChatProvider,
   AbstractXRequestClass,
-  TransformMessage,
   useXChat,
   useXConversations,
   XRequestOptions,

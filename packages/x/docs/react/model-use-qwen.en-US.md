@@ -22,7 +22,7 @@ It refers to model inference services that keep the API design and usage consist
 
 ## Integrate with X SDK
 
-Using URL to integrate models/agents is a basic capability provided by X SDK. For details, see [X SDK](/sdks/introduce).
+Using URL to integrate Model is a basic capability provided by X SDK. For details, see [X SDK](/sdks/introduce).
 
 ### Example
 
@@ -174,4 +174,4 @@ export default Demo;
 
 ### Example
 
-<code src="./demo/qwen.tsx" title="Integrate openai with qwen" description="This example only shows the logic reference for integrating openai with X SDK. Model data is not processed, please fill in the correct apiKey for data debugging." compact iframe="450"></code>
+<code src="./demo/qwen.tsx" title="Integrate openai with qwen" description="This example only shows the logic reference for integrating openai with X SDK. Model data is not processed, please fill in the correct apiKey for data debugging."></code>

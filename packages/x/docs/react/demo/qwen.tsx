@@ -113,6 +113,7 @@ const Demo: React.FC = () => {
   return (
     <Flex
       vertical
+      gap={16}
       justify="space-between"
       style={{
         height: 400,

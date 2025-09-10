@@ -67,7 +67,7 @@ const { onRequest, messages, isRequesting } = useXChat({
 
 When using some SDKs (such as `openai-node`, `@openrouter/ai-sdk-provider`) to request models or agents, you need to use the built-in Provider to process data and customize the Request. See the example below.
 
-<code src="../react/demo/openai-node.tsx" title="Integrate openai" description="This example only shows the logic reference for integrating openai with X SDK. Model data is not processed, please fill in the correct apiKey for data debugging." compact iframe="450"></code>
+<code src="../react/demo/openai-node.tsx" title="Integrate openai" description="This example only shows the logic reference for integrating openai with X SDK. Model data is not processed, please fill in the correct apiKey for data debugging."></code>
 
 ## Custom Provider
 

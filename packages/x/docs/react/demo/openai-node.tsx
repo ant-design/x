@@ -75,7 +75,7 @@ const provider = new OpenAIChatProvider<XModelMessage, InputType, OutputType>({
 
 const Demo: React.FC = () => {
   const [content, setContent] = useState('');
-  const { onRequest, messages, requesting, abort } = useXChat({
+  const { onRequest, messages, isRequesting, abort } = useXChat({
     provider,
     requestPlaceholder: () => {
       return {
@@ -112,6 +112,7 @@ const Demo: React.FC = () => {
   return (
     <Flex
       vertical
+      gap={16}
       justify="space-between"
       style={{
         height: 400,
@@ -122,7 +123,7 @@ const Demo: React.FC = () => {
       <Sender
         value={content}
         onChange={setContent}
-        loading={requesting}
+        loading={isRequesting}
         onCancel={abort}
         onSubmit={(val) => {
           onRequest({

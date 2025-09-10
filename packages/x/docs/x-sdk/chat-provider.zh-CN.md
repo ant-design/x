@@ -67,7 +67,7 @@ const { onRequest, messages, isRequesting } = useXChat({
 
 当使用一些sdk（例如：`openai-node`,`@openrouter/ai-sdk-provider`）请求模型或者智能体时需要使用内置的Provider处理数据，需要自定义Request，可参考。
 
-<code src="../react/demo/openai-node.tsx" title="接入 openai" description="此示例仅展示使用X SDK接入 openai 的逻辑参考，并未对模型数据进行处理，需填写正确的apiKey再进行数据调试" compact iframe="450"></code>
+<code src="../react/demo/openai-node.tsx" title="接入 openai" description="此示例仅展示使用X SDK接入 openai 的逻辑参考，并未对模型数据进行处理，需填写正确的apiKey再进行数据调试"></code>
 
 ## 自定义 Provider
 
