@@ -23,7 +23,7 @@ Ant Design X 是一款AI应用复合工具集，融合了 UI 组件库、流式 
   <span>+</span>
   <img width="160" src="https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg"/>
     <span>+</span>
-  <img width="160" src="https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/2hP6RJw_VnUAAAAAQbAAAAgADtFMAQFr/fmt.avif"/>
+  <img width="200" src="https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/2v_BT6g_DFUAAAAAVEAAAAgADtFMAQFr/original"/>
 
 </div>
 

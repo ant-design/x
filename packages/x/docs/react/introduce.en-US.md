@@ -23,7 +23,7 @@ Provides a complete set of tool APIs, out-of-the-box AI conversation data flow m
   <span>+</span>
   <img width="160" src="https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg"/>
   <span>+</span>
-  <img width="160" src="https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/2hP6RJw_VnUAAAAAQbAAAAgADtFMAQFr/fmt.avif"/>
+  <img width="200" src="https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/2v_BT6g_DFUAAAAAVEAAAAgADtFMAQFr/original"/>
 </div>
 
 ---

@@ -19,9 +19,7 @@ order: 0
 > 注意: `dangerouslyAllowBrowser` 存在安全风险，对此 openai-node 的官方文档有详细的[说明](https://github.com/openai/openai-node?tab=readme-ov-file#requirements)。
 
 ```tsx
-import { Sender, Bubble, BubbleListProps } from '@ant-design/x';
-import OpenAI from 'openai';
-import React, { useState } from 'react';
+import { Bubble, BubbleListProps, Sender } from '@ant-design/x';
 import {
   AbstractXRequestClass,
   OpenAIChatProvider,
@@ -32,6 +30,8 @@ import {
   XRequestOptions,
 } from '@ant-design/x-sdk';
 import { Flex } from 'antd';
+import OpenAI from 'openai';
+import React, { useState } from 'react';
 
 type OutputType = Partial<Record<SSEFields, any>>;
 type InputType = XModelParams;
@@ -98,6 +98,12 @@ const Demo: React.FC = () => {
   const [content, setContent] = useState('');
   const { onRequest, messages, requesting, abort } = useXChat({
     provider,
+    requestPlaceholder: () => {
+      return {
+        content: 'loading...',
+        role: 'assistant',
+      };
+    },
     requestFallback: (_, { error }) => {
       if (error.name === 'AbortError') {
         return {
