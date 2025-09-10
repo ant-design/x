@@ -44,19 +44,19 @@ const defaultItems = [
     key: 'development',
   },
   {
-    path: '/components/overview/',
+    path: '/components/introduce/',
     basePath: '/components',
     key: 'components',
-  },
-  {
-    path: '/sdks/introduce',
-    basePath: '/sdk',
-    key: 'sdk',
   },
   {
     path: '/markdowns/introduce',
     basePath: '/markdown',
     key: 'markdown',
+  },
+  {
+    path: '/sdks/introduce',
+    basePath: '/sdk',
+    key: 'sdk',
   },
   {
     path: '/docs/playground/independent',

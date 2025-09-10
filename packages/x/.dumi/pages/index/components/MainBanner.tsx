@@ -1,16 +1,15 @@
+import { Button } from 'antd';
 import { createStyles } from 'antd-style';
 import classnames from 'classnames';
 import { useLocation } from 'dumi';
 import React from 'react';
-
-import { Button } from 'antd';
 import useLocale from '../../../hooks/useLocale';
 import useLottie from '../../../hooks/useLottie';
 import Link from '../../../theme/common/Link';
 import { getLocalizedPathname, isZhCN } from '../../../theme/utils';
 import Container from '../common/Container';
-import SiteContext from './SiteContext';
 import type { SiteContextProps } from './SiteContext';
+import SiteContext from './SiteContext';
 
 const locales = {
   cn: {
@@ -308,7 +307,7 @@ const MainBanner: React.FC = () => {
           <h5 className={styles.desc}>{locale.desc}</h5>
 
           <div className={styles.content}>
-            <Link to={getLocalizedPathname('components/overview', isZhCN(pathname), search)}>
+            <Link to={getLocalizedPathname('components/introduce', isZhCN(pathname), search)}>
               <button type="button" className={classnames(styles.btn, styles.startBtn)}>
                 {locale.start}
               </button>

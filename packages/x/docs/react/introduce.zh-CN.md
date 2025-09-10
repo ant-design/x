@@ -1,14 +1,30 @@
 ---
 order: 0
-title: Ant Design X of React
+title: Ant Design X
+subtitle: ｜智能界面开发的解决方案
 ---
 
-`@ant-design/x` 是遵循 Ant Design 设计体系的一个 React UI 库，用于构建由 AI 驱动的界面，一键接入智能对话组件与 API 服务。
+Ant Design X 是一款AI应用复合工具集，融合了 UI 组件库、流式 Markdown 渲染引擎和 AI SDK，为开发者提供构建下一代 AI 驱动应用的完整工具链。
+
+**`@ant-design/x` - 智能界面构建框架**
+
+基于 Ant Design 设计体系的 React UI 库、专为 AI 驱动界面设计，开箱即用的智能对话组件、无缝集成 API 服务，快速搭建智能应用界面。
+
+**`@ant-design/x-markdown` - 高性能流式渲染引擎**
+
+专为流式内容优化的 Markdown 渲染解决方案、强大的扩展能力，支持公式、代码高亮、mermaid 图表等极致性能表现，确保流畅的内容展示体验。
+
+**`@ant-design/x-sdk` - AI 对话数据流管理**
+
+提供完整的工具 API 集合、开箱即用的 AI 对话应用数据流管理、简化开发流程，提升开发效率。
 
 <div class="pic-plus">
   <img width="150" src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*eco6RrQhxbMAAAAAAAAAAAAADgCCAQ/original"/>
   <span>+</span>
   <img width="160" src="https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg"/>
+    <span>+</span>
+  <img width="160" src="https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/2hP6RJw_VnUAAAAAQbAAAAgADtFMAQFr/fmt.avif"/>
+
 </div>
 
 ---
@@ -25,34 +41,14 @@ title: Ant Design X of React
 - 🛡 **TypeScript 全覆盖**：采用 TypeScript 开发，提供完整类型支持，提升开发体验与可靠性
 - 🎨 **深度主题定制能力**：支持细粒度的样式调整，满足各种场景的个性化需求
 
-## 安装
-
-### 使用 npm 或 yarn 或 pnpm 或 bun 安装
-
-**我们推荐使用 [npm](https://www.npmjs.com/) 或 [yarn](https://github.com/yarnpkg/yarn/) 或 [pnpm](https://pnpm.io/zh/) 或 [bun](https://bun.sh/) 的方式进行开发**，不仅可在开发环境轻松调试，也可放心地在生产环境打包部署使用，享受整个生态圈和工具链带来的诸多好处。
-
-<InstallDependencies npm='$ npm install @ant-design/x --save' yarn='$ yarn add @ant-design/x' pnpm='$ pnpm install @ant-design/x --save' bun='$ bun add @ant-design/x'></InstallDependencies>
-
-如果你的网络环境不佳，推荐使用 [cnpm](https://github.com/cnpm/cnpm)。
-
-### 浏览器引入
-
-在浏览器中使用 `script` 和 `link` 标签直接引入文件，并使用全局变量 `antdx`。
-
-我们在 npm 发布包内的 dist 目录下提供了 `antdx.js`、`antdx.min.js` 和 `antdx.min.js.map`。
-
-> **强烈不推荐使用已构建文件**，这样无法按需加载，而且难以获得底层依赖模块的 bug 快速修复支持。
-
-> 注意：`antdx.js` 和 `antdx.min.js` 依赖 `react`、`react-dom`、`dayjs` `antd` `@ant-design/cssinjs` `@ant-design/icons`，请确保提前引入这些文件。
-
 ## 🧩 原子组件
 
 我们基于 RICH 交互范式，在不同的交互阶段提供了大量的原子组件，帮助你灵活搭建你的 AI 对话应用：
 
-- 通用: `Bubble` - 消息气泡、`Conversations` - 会话管理
+- 通用: `Bubble` - 消息气泡、`Conversations` - 会话管理、`Notification` - 系统通知
 - 唤醒: `Welcome` - 欢迎、`Prompts` - 提示集
 - 表达: `Sender` - 发送框、`Attachment` - 附件、`Suggestion` - 快捷指令
-- 确认: `ThoughtChain` - 思维链
+- 确认: `Think` - 思考过程、 `ThoughtChain` - 思维链
 
 下面是使用原子组件搭建一个最简单的对话框的代码示例:
 
