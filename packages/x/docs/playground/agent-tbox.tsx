@@ -559,10 +559,11 @@ const AgentTBox: React.FC = () => {
           items={messages?.map((i) => ({
             ...i.message,
             classNames: {
-              content: i.status === 'loading' ? styles.loadingMessage : '',
+              content:
+                i.status === 'loading' || i.status === 'updating' ? styles.loadingMessage : '',
             },
             typing:
-              i.status === 'loading'
+              i.status === 'loading' || i.status === 'updating'
                 ? { effect: 'typing', suffix: <>💗</>, keepPrefix: true }
                 : false,
             key: i.id,

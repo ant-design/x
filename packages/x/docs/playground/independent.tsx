@@ -519,10 +519,11 @@ const Independent: React.FC = () => {
             ...i.message,
             key: i.id,
             classNames: {
-              content: i.status === 'loading' ? styles.loadingMessage : '',
+              content:
+                i.status === 'loading' || i.status === 'updating' ? styles.loadingMessage : '',
             },
             typing:
-              i.status === 'loading'
+              i.status === 'loading' || i.status === 'updating'
                 ? { effect: 'typing', step: 5, interval: 20, suffix: <>💗</> }
                 : false,
           }))}

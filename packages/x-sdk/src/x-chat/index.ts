@@ -9,7 +9,7 @@ import { useChatStore } from './store';
 
 export type SimpleType = string | number | boolean | object;
 
-export type MessageStatus = 'local' | 'loading' | 'success' | 'error';
+export type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error';
 
 type RequestPlaceholderFn<Message extends SimpleType> = (
   message: Message,
@@ -270,7 +270,7 @@ export default function useXChat<
     };
     provider.injectRequest({
       onUpdate: (chunk: Output, headers: Headers) => {
-        updateMessage('loading', chunk, [], headers);
+        updateMessage('updating', chunk, [], headers);
       },
       onSuccess: (chunks: Output[], headers: Headers) => {
         setIsRequesting(false);
