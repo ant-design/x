@@ -300,7 +300,7 @@ const Copilot = (props: CopilotProps) => {
 
   // ==================== Runtime ====================
 
-  const { onRequest, messages, isRequesting, abort } = useXChat({
+  const { onRequest, messages, requesting, abort } = useXChat({
     provider: providerFactory(curConversation), // every conversation has its own provider
     conversationKey: curConversation,
     requestFallback: (_, { error }) => {
@@ -316,8 +316,6 @@ const Copilot = (props: CopilotProps) => {
       };
     },
   });
-
-  const loading = isRequesting();
 
   // ==================== Event ====================
   const handleUserSubmit = (val: string) => {
@@ -515,7 +513,7 @@ const Copilot = (props: CopilotProps) => {
       <Suggestion items={MOCK_SUGGESTIONS} onSelect={(itemVal) => setInputValue(`[${itemVal}]:`)}>
         {({ onTrigger, onKeyDown }) => (
           <Sender
-            loading={loading}
+            loading={requesting}
             value={inputValue}
             onChange={(v) => {
               onTrigger(v === '/');

@@ -1,5 +1,5 @@
+import type { BubbleData } from '@ant-design/x';
 import { Bubble, Prompts, Welcome } from '@ant-design/x';
-import type { BubbleData } from '@ant-design/x/es/bubble/interface';
 import { DefaultChatProvider, useXChat, XRequest, XRequestOptions } from '@ant-design/x-sdk';
 import { Flex, type GetProp, Skeleton } from 'antd';
 import { createStyles } from 'antd-style';
@@ -138,7 +138,7 @@ const AssistantScene: React.FC = () => {
     }),
   );
 
-  const { onRequest, messages, isRequesting } = useXChat({
+  const { onRequest, messages, requesting } = useXChat({
     provider,
     requestPlaceholder: 'Waiting...',
     requestFallback: 'Mock failed return. Please try again later.',
@@ -216,7 +216,7 @@ const AssistantScene: React.FC = () => {
             ]}
           />
           <CustomizationSender
-            loading={isRequesting()}
+            loading={requesting}
             value={content}
             onChange={setContent}
             placeholder={locale.send_placeholder}

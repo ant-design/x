@@ -7,6 +7,7 @@ import useLocale from '../../../.dumi/hooks/useLocale';
 
 const locales = {
   cn: {
+    root: '气泡根节点',
     body: '主体容器',
     avatar: '头像的外层容器',
     header: '头部的容器',
@@ -15,6 +16,7 @@ const locales = {
     extra: '气泡尾边栏容器',
   },
   en: {
+    root: 'Bubble root',
     body: 'Wrapper element of the body',
     avatar: 'Wrapper element of the avatar',
     header: 'Wrapper element of the header',
@@ -33,6 +35,7 @@ const App: React.FC = () => {
     <SemanticPreview
       componentName="Bubble"
       semantics={[
+        { name: 'root', desc: locale.root },
         { name: 'body', desc: locale.body },
         { name: 'avatar', desc: locale.avatar },
         { name: 'header', desc: locale.header },

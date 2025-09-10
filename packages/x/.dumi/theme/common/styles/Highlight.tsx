@@ -1,6 +1,6 @@
-import React from 'react';
 import { css, Global } from '@emotion/react';
 import { useTheme } from 'antd-style';
+import React from 'react';
 
 export default () => {
   const token = useTheme();
@@ -13,8 +13,9 @@ export default () => {
 * Based on dabblet (http://dabblet.com)
 * @author Lea Verou
 */
-
-        pre code {
+  .code-box {
+    .not(.ant-x-markdown){
+            pre code {
           display: block;
           padding: ${token.padding}px ${token.paddingXL}px;
           color: ${token.colorText};
@@ -151,6 +152,10 @@ export default () => {
             cursor: help;
           }
         }
+    }
+  }
+
+   
       `}
     />
   );

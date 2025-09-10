@@ -1,6 +1,6 @@
 import { UserOutlined } from '@ant-design/icons';
+import type { BubbleListProps } from '@ant-design/x';
 import { Bubble, Sender } from '@ant-design/x';
-import { BubbleListProps } from '@ant-design/x/es/bubble';
 import { DefaultChatProvider, useXChat, XRequest, XRequestOptions } from '@ant-design/x-sdk';
 import { Avatar, Flex } from 'antd';
 import React from 'react';
@@ -56,7 +56,7 @@ const App = () => {
   );
 
   // Chat messages
-  const { onRequest, messages, isRequesting } = useXChat({
+  const { onRequest, messages, requesting } = useXChat({
     provider,
     requestPlaceholder: 'Waiting...',
     requestFallback: 'Mock failed return. Please try again later.',
@@ -75,7 +75,7 @@ const App = () => {
         }))}
       />
       <Sender
-        loading={isRequesting()}
+        loading={requesting}
         value={content}
         onChange={setContent}
         onSubmit={(nextContent) => {

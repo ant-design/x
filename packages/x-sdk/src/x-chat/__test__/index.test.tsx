@@ -29,7 +29,7 @@ describe('useXChat', () => {
     Input = ChatInput,
     Output = string,
   >({ provider, ...config }: XChatConfig<ChatMessage, ParsedMessage, Input, Output>, ref: any) {
-    const { messages, parsedMessages, onRequest, onReload, isRequesting, abort } = useXChat({
+    const { messages, parsedMessages, onRequest, onReload, requesting, abort } = useXChat({
       provider,
       ...config,
     });
@@ -39,7 +39,7 @@ describe('useXChat', () => {
       parsedMessages,
       onRequest,
       onReload,
-      isRequesting,
+      requesting,
       abort,
     }));
 
@@ -221,7 +221,7 @@ describe('useXChat', () => {
     ]);
   });
 
-  it('should throw an error if onRequest,onReload,abort,isRequesting is called without an agent', () => {
+  it('should throw an error if onRequest,onReload,abort is called without an agent', () => {
     const { result } = renderHook(() =>
       useXChat({
         defaultMessages: [{ message: 'Hello' }],
@@ -233,7 +233,6 @@ describe('useXChat', () => {
       'provider is required',
     );
     expect(() => result.current?.abort()).toThrow('provider is required');
-    expect(() => result.current?.isRequesting()).toThrow('provider is required');
   });
 
   it('should setMessage work successfully', async () => {
@@ -249,7 +248,7 @@ describe('useXChat', () => {
     expect(result.current?.messages[0].message).toEqual('Hello2');
   });
 
-  it('should reload, isRequesting work successfully', async () => {
+  it('should reload, requesting work successfully', async () => {
     let count = 0;
     const provider = new DefaultChatProvider<ChatInput, any, any>({
       request: XRequest('http://localhost:8000/', {
@@ -276,9 +275,9 @@ describe('useXChat', () => {
     );
 
     fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
-    expect(ref.current?.isRequesting()).toBe(true);
+    expect(ref.current?.requesting).toBe(true);
     await sleep(200);
-    expect(ref.current?.isRequesting()).toBe(false);
+    expect(ref.current?.requesting).toBe(false);
     expect(getMessages(container)).toEqual([
       expectMessage({ query: 'little' }, 'local'),
       expectMessage({ content: 'bamboo' }, 'success'),

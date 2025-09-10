@@ -4,7 +4,7 @@ export type { ActionsItemProps } from './actions/ActionsItem';
 export type { ActionsProps } from './actions/interface';
 export type { AttachmentsProps } from './attachments';
 export { default as Attachments } from './attachments';
-export type { BubbleProps } from './bubble';
+export type { BubbleData, BubbleListProps, BubbleProps } from './bubble';
 export { default as Bubble } from './bubble';
 export type { ConversationItemType, ConversationsProps } from './conversations';
 export { default as Conversations } from './conversations';

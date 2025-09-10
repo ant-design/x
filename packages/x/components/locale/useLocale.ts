@@ -17,7 +17,6 @@ const useLocale = <C extends mergeLocaleComponentName = LocaleComponentName>(
   defaultLocale?: Locale[C] | (() => Locale[C]),
 ): readonly [NonNullable<Locale[C]>, string] => {
   const fullLocale = React.useContext<LocaleContextProps | undefined>(LocaleContext);
-  console.log(fullLocale, 'fullLocale');
   const getLocale = React.useMemo<NonNullable<Locale[C]>>(() => {
     const locale =
       defaultLocale ||

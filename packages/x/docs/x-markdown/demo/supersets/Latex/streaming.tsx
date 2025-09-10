@@ -1,6 +1,6 @@
 import { UserOutlined } from '@ant-design/icons';
+import type { BubbleListProps } from '@ant-design/x';
 import { Bubble, Sender } from '@ant-design/x';
-import { BubbleListProps } from '@ant-design/x/es/bubble';
 import XMarkdown from '@ant-design/x-markdown';
 import Latex from '@ant-design/x-markdown/plugins/Latex';
 import { DefaultChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';
@@ -72,7 +72,7 @@ const App = () => {
     [content],
   );
 
-  const { onRequest, messages, isRequesting } = useXChat({
+  const { onRequest, messages, requesting } = useXChat({
     provider: provider,
     requestPlaceholder: 'Waiting...',
     requestFallback: 'Mock failed return. Please try again later.',
@@ -103,7 +103,7 @@ const App = () => {
         }))}
       />
       <Sender
-        loading={isRequesting()}
+        loading={requesting}
         value={content}
         onChange={setContent}
         style={{ marginTop: 48 }}

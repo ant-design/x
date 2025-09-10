@@ -118,7 +118,7 @@ exports[`renders components/bubble/demo/animation.tsx extend context correctly 1
     class="ant-flex css-var-«r33» ant-flex-align-center ant-flex-gap-small"
   >
     <div
-      class="ant-bubble css-var-«r33» ant-bubble-start"
+      class="ant-bubble css-var-«r33» ant-bubble-start ant-bubble-loading"
     >
       <div
         class="ant-bubble-avatar"
@@ -2940,7 +2940,7 @@ exports[`renders components/bubble/demo/loading.tsx extend context correctly 1`]
   class="ant-flex css-var-«rd» ant-flex-align-stretch ant-flex-gap-large ant-flex-vertical"
 >
   <div
-    class="ant-bubble css-var-«rd» ant-bubble-start"
+    class="ant-bubble css-var-«rd» ant-bubble-start ant-bubble-loading"
   >
     <span
       class="ant-bubble-dot"
@@ -3020,7 +3020,7 @@ exports[`renders components/bubble/demo/markdown.tsx extend context correctly 1`
           >
             <div
               class="ant-x-markdown"
-              style="direction: ltr; white-space: normal;"
+              style="direction: ltr;"
             >
               <blockquote>
                 <p>
@@ -3052,7 +3052,7 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context 
   style="max-height: 300px;"
 >
   <div
-    class="ant-bubble css-var-«rb» ant-bubble-start"
+    class="ant-bubble css-var-«rb» ant-bubble-start ant-bubble-loading"
     style="max-width: 600px; margin-inline-end: 44px;"
   >
     <div
@@ -3566,7 +3566,7 @@ exports[`renders components/bubble/demo/stream.tsx extend context correctly 1`] 
     class="ant-flex css-var-«r1» ant-flex-align-center ant-flex-gap-small"
   >
     <div
-      class="ant-bubble css-var-«r1» ant-bubble-start"
+      class="ant-bubble css-var-«r1» ant-bubble-start ant-bubble-loading"
     >
       <div
         class="ant-bubble-avatar"

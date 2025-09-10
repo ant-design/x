@@ -118,7 +118,7 @@ exports[`renders components/bubble/demo/animation.tsx correctly 1`] = `
     class="ant-flex css-var-«R0» ant-flex-align-center ant-flex-gap-small"
   >
     <div
-      class="ant-bubble css-var-«R0» ant-bubble-start"
+      class="ant-bubble css-var-«R0» ant-bubble-start ant-bubble-loading"
     >
       <div
         class="ant-bubble-avatar"
@@ -1291,7 +1291,7 @@ exports[`renders components/bubble/demo/loading.tsx correctly 1`] = `
   class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-gap-large ant-flex-vertical"
 >
   <div
-    class="ant-bubble css-var-«R0» ant-bubble-start"
+    class="ant-bubble css-var-«R0» ant-bubble-start ant-bubble-loading"
   >
     <span
       class="ant-bubble-dot"
@@ -1380,7 +1380,7 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx correctly 1`] =
   style="max-height:300px"
 >
   <div
-    class="ant-bubble css-var-«R0» ant-bubble-start"
+    class="ant-bubble css-var-«R0» ant-bubble-start ant-bubble-loading"
     style="max-width:600px;margin-inline-end:44px"
   >
     <div
@@ -1811,7 +1811,7 @@ exports[`renders components/bubble/demo/stream.tsx correctly 1`] = `
     class="ant-flex css-var-«R0» ant-flex-align-center ant-flex-gap-small"
   >
     <div
-      class="ant-bubble css-var-«R0» ant-bubble-start"
+      class="ant-bubble css-var-«R0» ant-bubble-start ant-bubble-loading"
     >
       <div
         class="ant-bubble-avatar"

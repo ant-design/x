@@ -59,7 +59,6 @@ const App = () => {
         content={text.slice(0, index)}
         contentRender={(content) => (
           <XMarkdown
-            style={{ whiteSpace: 'normal' }}
             components={{ line: LineCompt }}
             className={className}
             streaming={{ hasNextChunk }}

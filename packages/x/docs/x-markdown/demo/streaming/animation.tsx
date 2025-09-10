@@ -5,7 +5,7 @@ import { DefaultChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';
 import { Button, Row } from 'antd';
 import React, { useMemo, useState } from 'react';
 import '@ant-design/x-markdown/themes/light.css';
-import { BubbleListProps } from '@ant-design/x/es/bubble';
+import type { BubbleListProps } from '@ant-design/x';
 import { mockFetch } from '../_utils';
 
 interface ChatInput {
@@ -92,7 +92,7 @@ const App = () => {
     [content],
   );
 
-  const { onRequest, messages, isRequesting } = useXChat({
+  const { onRequest, messages, requesting } = useXChat({
     provider: provider,
     requestPlaceholder: 'Waiting...',
     requestFallback: 'Mock failed return. Please try again later.',
@@ -132,13 +132,13 @@ const App = () => {
                     <XMarkdown
                       className="x-markdown-light"
                       content={content as string}
-                      streaming={{ hasNextChunk: isRequesting(), enableAnimation }}
+                      streaming={{ hasNextChunk: requesting, enableAnimation }}
                     />
                   ),
           }))}
         />
         <Sender
-          loading={isRequesting()}
+          loading={requesting}
           value={content}
           onChange={setContent}
           style={{ marginTop: 48 }}

@@ -2,7 +2,7 @@ import { Bubble, Think } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
 import React from 'react';
 import '@ant-design/x-markdown/themes/light.css';
-import { Flex, Button } from 'antd';
+import { Button, Flex } from 'antd';
 
 const text = `
 <think>Deep thinking is a systematic and structured cognitive approach that requires individuals to move beyond intuition and superficial information, delving into the essence of a problem and its underlying principles through logical analysis, multi-perspective examination, and persistent inquiry. Unlike quick reactions or heuristic judgments, deep thinking emphasizes ​slow thinking, actively engaging knowledge reserves, critical thinking, and creativity to uncover deeper connections and meanings.
@@ -69,11 +69,7 @@ const App = () => {
       <Bubble
         content={text.slice(0, index)}
         contentRender={(content) => (
-          <XMarkdown
-            style={{ whiteSpace: 'normal' }}
-            components={{ think: ThinkComponent }}
-            paragraphTag="div"
-          >
+          <XMarkdown components={{ think: ThinkComponent }} paragraphTag="div">
             {content}
           </XMarkdown>
         )}
