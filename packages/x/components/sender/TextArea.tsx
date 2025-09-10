@@ -140,7 +140,8 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
   const onInternalPaste: React.ClipboardEventHandler<HTMLElement> = (e) => {
     // Get files
     const files = e.clipboardData?.files;
-    if (files?.length && onPasteFile) {
+    const text = e.clipboardData?.getData('text/plain');
+    if (!text && files?.length && onPasteFile) {
       onPasteFile(files[0], files);
       e.preventDefault();
     }

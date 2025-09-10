@@ -2,7 +2,7 @@
 
 exports[`renders components/actions/demo/basic.tsx extend context correctly 1`] = `
 <div
-  class="ant-actions css-var-«r1o»"
+  class="ant-actions css-var-«r1p»"
 >
   <div
     class="ant-actions-list ant-actions-variant-borderless"
@@ -35,7 +35,7 @@ exports[`renders components/actions/demo/basic.tsx extend context correctly 1`] 
         </span>
       </div>
       <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r1o» ant-tooltip-placement-top"
+        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r1p» ant-tooltip-placement-top"
         style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
       >
         <div
@@ -83,7 +83,7 @@ exports[`renders components/actions/demo/basic.tsx extend context correctly 1`] 
         </span>
       </div>
       <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r1o» ant-tooltip-placement-top"
+        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r1p» ant-tooltip-placement-top"
         style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
       >
         <div
@@ -111,13 +111,13 @@ exports[`renders components/actions/demo/basic.tsx extend context correctly 2`] 
 
 exports[`renders components/actions/demo/preset.tsx extend context correctly 1`] = `
 <div
-  class="ant-actions css-var-«r18»"
+  class="ant-actions css-var-«r19»"
 >
   <div
     class="ant-actions-list ant-actions-variant-borderless"
   >
     <ul
-      class="ant-pagination css-var-«r18» ant-pagination-simple"
+      class="ant-pagination css-var-«r19» ant-pagination-simple"
     >
       <li
         aria-disabled="true"
@@ -201,7 +201,7 @@ exports[`renders components/actions/demo/preset.tsx extend context correctly 1`]
       </li>
     </ul>
     <div
-      class="ant-actions-feedback css-var-«r18» ant-actions-list"
+      class="ant-actions-feedback css-var-«r19» ant-actions-list"
     >
       <span
         aria-describedby="test-id"
@@ -228,7 +228,7 @@ exports[`renders components/actions/demo/preset.tsx extend context correctly 1`]
         </span>
       </span>
       <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r18» ant-tooltip-placement-top"
+        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r19» ant-tooltip-placement-top"
         style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
       >
         <div
@@ -272,7 +272,7 @@ exports[`renders components/actions/demo/preset.tsx extend context correctly 1`]
         </span>
       </span>
       <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r18» ant-tooltip-placement-top"
+        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r19» ant-tooltip-placement-top"
         style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
       >
         <div
@@ -293,7 +293,7 @@ exports[`renders components/actions/demo/preset.tsx extend context correctly 1`]
       </div>
     </div>
     <span
-      class="ant-actions-copy ant-actions-copy css-var-«r18» ant-actions-item css-var-«r18»"
+      class="ant-actions-copy ant-actions-copy css-var-«r19» ant-actions-item css-var-«r19»"
     >
       <button
         aria-describedby="test-id"
@@ -322,7 +322,7 @@ exports[`renders components/actions/demo/preset.tsx extend context correctly 1`]
         </span>
       </button>
       <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r18» ant-tooltip-placement-top"
+        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r19» ant-tooltip-placement-top"
         style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
       >
         <div
@@ -344,7 +344,7 @@ exports[`renders components/actions/demo/preset.tsx extend context correctly 1`]
     </span>
     <div
       aria-describedby="test-id"
-      class="ant-actions-button-item css-var-«r18» ant-actions-audio css-var-«r18» ant-actions-audio-default ant-actions-item"
+      class="ant-actions-button-item css-var-«r19» ant-actions-audio css-var-«r19» ant-actions-audio-default ant-actions-item"
     >
       <span
         aria-label="muted"
@@ -368,7 +368,7 @@ exports[`renders components/actions/demo/preset.tsx extend context correctly 1`]
       </span>
     </div>
     <div
-      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r18» ant-tooltip-placement-top"
+      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r19» ant-tooltip-placement-top"
       style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
     >
       <div
@@ -389,7 +389,7 @@ exports[`renders components/actions/demo/preset.tsx extend context correctly 1`]
     </div>
     <div
       aria-describedby="test-id"
-      class="ant-actions-button-item css-var-«r18» ant-actions-item"
+      class="ant-actions-button-item css-var-«r19» ant-actions-item"
     >
       <span
         aria-label="share-alt"
@@ -412,7 +412,7 @@ exports[`renders components/actions/demo/preset.tsx extend context correctly 1`]
       </span>
     </div>
     <div
-      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r18» ant-tooltip-placement-top"
+      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r19» ant-tooltip-placement-top"
       style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
     >
       <div
@@ -583,7 +583,7 @@ exports[`renders components/actions/demo/sub.tsx extend context correctly 1`] = 
         <li
           aria-describedby="test-id"
           class="ant-dropdown-menu-item"
-          data-menu-id="rc-menu-uuid-test-share"
+          data-menu-id="rc-menu-uuid-share"
           role="menuitem"
           tabindex="-1"
         >
@@ -633,7 +633,7 @@ exports[`renders components/actions/demo/sub.tsx extend context correctly 1`] = 
         <li
           aria-describedby="test-id"
           class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-          data-menu-id="rc-menu-uuid-test-import"
+          data-menu-id="rc-menu-uuid-import"
           role="menuitem"
           tabindex="-1"
         >
@@ -664,7 +664,7 @@ exports[`renders components/actions/demo/sub.tsx extend context correctly 1`] = 
         <li
           aria-describedby="test-id"
           class="ant-dropdown-menu-item ant-dropdown-menu-item-danger"
-          data-menu-id="rc-menu-uuid-test-delete"
+          data-menu-id="rc-menu-uuid-delete"
           role="menuitem"
           tabindex="-1"
         >
