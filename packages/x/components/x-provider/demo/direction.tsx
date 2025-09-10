@@ -56,7 +56,7 @@ export default () => {
                 ]}
               />
               <Divider orientation="vertical" style={{ height: '100%' }} />
-              <Flex vertical justify="space-between" gap={8}>
+              <Flex vertical justify="space-between" style={{ flex: 1 }}>
                 <Bubble.List
                   items={[
                     {
