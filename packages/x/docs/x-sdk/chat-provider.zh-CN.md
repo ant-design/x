@@ -11,7 +11,7 @@ cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*22A2Qqn7OrEAAAAAAA
 coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*lQydTrtLz9YAAAAAAAAAAAAADgCCAQ/original
 ---
 
-`Chat Provider` 用于为 `useXChat` 提供统一的请求管理和数据格式转换，通过实现`AbsoluteChatProvider`，你可以将不同的模型提供商、或者Agent服务数据转换为统一的 `useXChat` 可消费的格式，从而实现不同模型、Agent之间的无缝接入和切换。
+`Chat Provider` 用于为 `useXChat` 提供统一的请求管理和数据格式转换，通过实现`AbstractChatProvider`，你可以将不同的模型提供商、或者Agent服务数据转换为统一的 `useXChat` 可消费的格式，从而实现不同模型、Agent之间的无缝接入和切换。
 
 ## 使用示例
 
