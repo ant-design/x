@@ -6,11 +6,11 @@ title: OpenAI
 order: 0
 ---
 
-This guide introduces how to integrate OpenAI model services into applications built with Ant Design X. For details, see [X SDK](/sdks/introduce-en)
+This guide introduces how to integrate OpenAI model services into applications built with Ant Design X. For details, see [X SDK](/sdks/introduce)
 
 ## Using OpenAI API
 
-Equivalent to integrating model inference services compatible with OpenAI. Refer to [Model Integration - Qwen](/docs/react/model-use-qwen-en)
+Equivalent to integrating model inference services compatible with OpenAI. Refer to [Model Integration - Qwen](/docs/react/model-use-qwen)
 
 ## Using openai-node
 

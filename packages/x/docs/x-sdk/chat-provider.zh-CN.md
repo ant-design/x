@@ -61,9 +61,19 @@ const { onRequest, messages, isRequesting } = useXChat({
 
 `DeepSeekChatProvider` 是 `DeepSeek` 兼容的 `Chat Provider`，和`OpenAIChatProvider`相差不大，唯一的差异点是，该Provider会自动解析DeepSeek特有的`reasoning_content`字段，作为模型思考过程的输出，配合`Think`组件可以快捷展示模型思考过程。详细的使用示例，可以参考[独立式样板间](https://x.ant.design/docs/playground/independent-cn)代码。
 
-## AbstractChatProvider
+<code src="./demos/x-chat/deepSeek.tsx">DeepSeekChatProvider</code>
 
-`AbstractChatProvider` 是一个抽象类，用于定义 `Chat Provider` 的接口。当你需要使用自定义的数据服务时，你可以继承 `AbstractChatProvider` 并实现其方法。
+### 自定义Request
+
+当使用一些sdk（例如：`openai-node`,`@openrouter/ai-sdk-provider`）请求模型或者智能体时需要使用内置的Provider处理数据，需要自定义Request，可参考。
+
+<code src="../react/demo/openai-node.tsx" title="接入 openai" description="此示例仅展示使用X SDK接入 openai 的逻辑参考，并未对模型数据进行处理，需填写正确的apiKey再进行数据调试" compact iframe="450"></code>
+
+## 自定义 Provider
+
+### AbstractChatProvider
+
+`AbstractChatProvider` 是一个抽象类，用于定义 `Chat Provider` 的接口。当你需要使用自定义的数据服务时，你可以继承 `AbstractChatProvider` 并实现其方法，可参考[样板间-百宝箱](/docs/playground/agent-tbox-cn)。
 
 ```ts
 type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error';

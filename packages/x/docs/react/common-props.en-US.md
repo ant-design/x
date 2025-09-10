@@ -4,7 +4,6 @@ group:
   title: Advanced Usage
 title: Common Props
 order: 1
-tag: Updated
 ---
 
 > Tips: The following common props apply to most Ant Design X components. Components that do not support them will be specified separately.

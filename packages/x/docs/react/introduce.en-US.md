@@ -8,15 +8,15 @@ Ant Design X is a comprehensive toolkit for AI applications, integrating a UI co
 
 **`@ant-design/x` - Intelligent Interface Framework**
 
-A React UI library based on the Ant Design system, designed for AI-driven interfaces. Out-of-the-box smart conversation components, seamless API integration, and rapid smart interface development. For details, click [here](/components/introduce-en/).
+A React UI library based on the Ant Design system, designed for AI-driven interfaces. Out-of-the-box smart conversation components, seamless API integration, and rapid smart interface development. For details, click [here](/components/introduce/).
 
 **`@ant-design/x-markdown` - High-performance Streaming Rendering Engine**
 
-An optimized Markdown rendering solution for streaming content, with powerful extension capabilities. Supports formulas, code highlighting, mermaid charts, and delivers excellent performance for smooth content display. For details, click [here](/markdowns/introduce-en).
+An optimized Markdown rendering solution for streaming content, with powerful extension capabilities. Supports formulas, code highlighting, mermaid charts, and delivers excellent performance for smooth content display. For details, click [here](/markdowns/introduce).
 
 **`@ant-design/x-sdk` - AI Conversation Data Flow Management**
 
-Provides a complete set of tool APIs, out-of-the-box AI conversation data flow management, simplifying development and improving efficiency. For details, click [here](/markdowns/introduce-en).
+Provides a complete set of tool APIs, out-of-the-box AI conversation data flow management, simplifying development and improving efficiency. For details, click [here](/markdowns/introduce).
 
 <div class="pic-plus">
   <img width="150" src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*eco6RrQhxbMAAAAAAAAAAAAADgCCAQ/original"/>

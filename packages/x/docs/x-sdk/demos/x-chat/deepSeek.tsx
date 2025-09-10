@@ -3,7 +3,7 @@ import type { BubbleListProps } from '@ant-design/x';
 import { Bubble, Sender, Think } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
 import {
-  OpenAIChatProvider,
+  DeepSeekChatProvider,
   useXChat,
   XModelParams,
   XModelResponse,
@@ -16,13 +16,13 @@ import React from 'react';
  * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
  */
 
-const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow_qwen3-8b';
+const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow_deepSeek-r1-distill-1wen-7b';
 
 /**
  * 🔔 The MODEL is fixed in the current request, please replace it with your BASE_UR and MODEL
  */
 
-const MODEL = 'Qwen3-8B';
+const MODEL = 'DeepSeek-R1-Distill-Qwen-7B';
 
 const ThinkComponent = React.memo((props: { children: string; status: string }) => {
   const [title, setTitle] = React.useState('Deep thinking...');
@@ -72,7 +72,7 @@ const role: BubbleListProps['role'] = {
 const App = () => {
   const [content, setContent] = React.useState('');
   const [provider] = React.useState(
-    new OpenAIChatProvider({
+    new DeepSeekChatProvider({
       request: XRequest<XModelParams, XModelResponse>(BASE_URL, {
         manual: true,
         params: {

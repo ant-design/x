@@ -4,7 +4,6 @@ group:
   title: Agent Integration
 title: Tbox
 order: 1
-tag: Updated
 ---
 
 This guide will introduce how to integrate the agent service provided by Tbox into an application built with Ant Design X.

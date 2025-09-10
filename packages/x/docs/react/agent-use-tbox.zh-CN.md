@@ -4,7 +4,6 @@ group:
   title: 智能体接入
 title: 百宝箱
 order: 1
-tag: Updated
 ---
 
 这篇指南将介绍如何在使用 Ant Design X 搭建的应用中接入百宝箱智能体服务。
