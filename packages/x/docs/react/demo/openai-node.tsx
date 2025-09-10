@@ -1,27 +1,4 @@
----
-group:
-  title: 模型接入
-  order: 1
-title: OpenAI
-order: 0
----
-
-这篇指南将介绍如何在使用 Ant Design X 搭建的应用中接入 OpenAI 提供的模型服务。详情请查看[X SDK](/sdks/introduce-cn)
-
-## 使用 OpenAI API
-
-等同于接入兼容 OpenAI 的模型推理服务，参考 [模型接入-通义千问](/docs/react/model-use-qwen-cn)
-
-## 使用 openai-node
-
-通常情况 openai-node 用于 node 环境，如果在浏览器环境使用，需要开启 `dangerouslyAllowBrowser`。
-
-> 注意: `dangerouslyAllowBrowser` 存在安全风险，对此 openai-node 的官方文档有详细的[说明](https://github.com/openai/openai-node?tab=readme-ov-file#requirements)。
-
-```tsx
-import { Sender, Bubble, BubbleListProps } from '@ant-design/x';
-import OpenAI from 'openai';
-import React, { useState } from 'react';
+import { Bubble, BubbleListProps, Sender } from '@ant-design/x';
 import {
   AbstractXRequestClass,
   OpenAIChatProvider,
@@ -32,6 +9,8 @@ import {
   XRequestOptions,
 } from '@ant-design/x-sdk';
 import { Flex } from 'antd';
+import OpenAI from 'openai';
+import React, { useState } from 'react';
 
 type OutputType = Partial<Record<SSEFields, any>>;
 type InputType = XModelParams;
@@ -98,6 +77,12 @@ const Demo: React.FC = () => {
   const [content, setContent] = useState('');
   const { onRequest, messages, requesting, abort } = useXChat({
     provider,
+    requestPlaceholder: () => {
+      return {
+        content: 'loading...',
+        role: 'assistant',
+      };
+    },
     requestFallback: (_, { error }) => {
       if (error.name === 'AbortError') {
         return {
@@ -151,8 +136,3 @@ const Demo: React.FC = () => {
 };
 
 export default Demo;
-```
-
-## 示例
-
-<code src="./demo/openai-node.tsx" title="接入 openai" description="此示例仅展示使用X SDK接入 openai 的逻辑参考，并未对模型数据进行处理，需填写正确的apiKey再进行数据调试" compact iframe="450"></code>
