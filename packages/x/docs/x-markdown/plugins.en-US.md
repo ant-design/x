@@ -34,4 +34,4 @@ We provide built plugin files in the `dist/plugins` directory of the npm package
 
 ## Custom Plugins
 
-### Supports implementing all Marked plugins, or creating custom plugins [Reference](/markdowns/custom-plugin-en)
+### Supports implementing all Marked plugins, or creating custom plugins [Reference](/markdowns/custom-plugin)
