@@ -48,7 +48,7 @@ class OpenAiRequest<
   get manual(): boolean {
     return true;
   }
-  async run(input?: Input | undefined): Promise<void> {
+  async run(input: Input): Promise<void> {
     const { callbacks } = this.options;
     try {
       await this.client.responses.create({

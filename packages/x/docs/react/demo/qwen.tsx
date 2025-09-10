@@ -1,28 +1,3 @@
----
-group:
-  title: 模型接入
-  order: 1
-title: OpenAI
-order: 0
----
-
-这篇指南将介绍如何在使用 Ant Design X 搭建的应用中接入 OpenAI 提供的模型服务，详情请查看[X SDK](/sdks/introduce-cn)。
-
-## 使用 X SDK 接入
-
-使用URL接入模型/智能体是 X SDK提供的基础能力，详情请查看[X SDK](/sdks/introduce-cn)。
-
-### 示例
-
-<code src="../x-sdk/demos/x-chat/model.tsx" title="使用X SDK接入"></code>
-
-## 使用 openai-node
-
-通常情况 openai-node 用于 node 环境，如果在浏览器环境使用，需要开启 `dangerouslyAllowBrowser`。
-
-> 注意: `dangerouslyAllowBrowser` 存在安全风险，对此 openai-node 的官方文档有详细的[说明](https://github.com/openai/openai-node?tab=readme-ov-file#requirements)。
-
-```tsx
 import { Bubble, BubbleListProps, Sender } from '@ant-design/x';
 import {
   AbstractXRequestClass,
@@ -54,6 +29,7 @@ class OpenAiRequest<
   constructor(baseURL: string, options: XRequestOptions<Input, Output>) {
     super(baseURL, options);
     this.client = new OpenAI({
+      baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
       apiKey: 'OPENAI_API_KEY',
       dangerouslyAllowBrowser: true,
     });
@@ -77,8 +53,8 @@ class OpenAiRequest<
     const { callbacks } = this.options;
     try {
       await this.client.responses.create({
-        model: 'gpt-4o',
-        input: input?.messages?.[0]?.content || '',
+        model: 'qwen-plus',
+        messages: input?.messages || [],
         stream: true,
       });
 
@@ -100,7 +76,7 @@ const provider = new OpenAIChatProvider<XModelMessage, InputType, OutputType>({
 
 const Demo: React.FC = () => {
   const [content, setContent] = useState('');
-  const { onRequest, messages, requesting, abort } = useXChat({
+  const { onRequest, messages, isRequesting, abort } = useXChat({
     provider,
     requestPlaceholder: () => {
       return {
@@ -147,7 +123,7 @@ const Demo: React.FC = () => {
       <Sender
         value={content}
         onChange={setContent}
-        loading={requesting}
+        loading={isRequesting}
         onCancel={abort}
         onSubmit={(val) => {
           onRequest({
@@ -161,8 +137,3 @@ const Demo: React.FC = () => {
 };
 
 export default Demo;
-```
-
-### 示例
-
-<code src="./demo/openai-node.tsx" title="接入 openai" description="此示例仅展示使用X SDK接入 openai 的逻辑参考，并未对模型数据进行处理，需填写正确的apiKey再进行数据调试"></code>

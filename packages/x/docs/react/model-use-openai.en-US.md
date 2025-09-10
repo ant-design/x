@@ -69,7 +69,7 @@ class OpenAiRequest<
   get manual(): boolean {
     return true;
   }
-  async run(input?: Input | undefined): Promise<void> {
+  async run(input: Input): Promise<void> {
     const { callbacks } = this.options;
     try {
       await this.client.responses.create({
@@ -157,6 +157,6 @@ const Demo: React.FC = () => {
 export default Demo;
 ```
 
-## Example
+### Example
 
 <code src="./demo/openai-node.tsx" title="Integrate openai" description="This example only shows the logic reference for integrating openai with X SDK. Model data is not processed, please fill in the correct apiKey for data debugging." compact iframe="450"></code>

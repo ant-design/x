@@ -22,158 +22,160 @@ Qwen 的模型推理服务支持「兼容 OpenAI 模式」。详见官方文档:
 
 这意味着开发者可以使用与调用 OpenAI 模型相同的代码和方法，来调用这些兼容服务，从而减少开发接入成本。
 
+## 使用 X SDK 接入
+
+使用URL接入模型/智能体是 X SDK提供的基础能力，详情请查看[X SDK](/sdks/introduce-cn)。
+
+### 示例
+
+<code src="../x-sdk/demos/x-chat/model.tsx" title="使用X SDK接入"></code>
+
 ## 使用 openai-node 兼容调用
 
 > 注意: 🔥 `dangerouslyAllowBrowser` 存在安全风险，对此 openai-node 的官方文档有详细的[说明](https://github.com/openai/openai-node?tab=readme-ov-file#requirements)。
 
 ```tsx
-import { useXAgent, useXChat, Sender, Bubble } from '@ant-design/x';
+import { Bubble, BubbleListProps, Sender } from '@ant-design/x';
+import {
+  AbstractXRequestClass,
+  OpenAIChatProvider,
+  SSEFields,
+  useXChat,
+  XModelMessage,
+  XModelParams,
+  XRequestOptions,
+} from '@ant-design/x-sdk';
+import { Flex } from 'antd';
 import OpenAI from 'openai';
-import React from 'react';
+import React, { useState } from 'react';
 
-const client = new OpenAI({
-  baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
-  apiKey: process.env['DASHSCOPE_API_KEY'],
-  dangerouslyAllowBrowser: true,
+type OutputType = Partial<Record<SSEFields, any>>;
+type InputType = XModelParams;
+
+class OpenAiRequest<
+  Input extends InputType = InputType,
+  Output extends OutputType = OutputType,
+> extends AbstractXRequestClass<Input, Output> {
+  client: any;
+  stream: OpenAI | undefined;
+
+  _isTimeout = false;
+  _isStreamTimeout = false;
+  _isRequesting = false;
+
+  constructor(baseURL: string, options: XRequestOptions<Input, Output>) {
+    super(baseURL, options);
+    this.client = new OpenAI({
+      baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
+      apiKey: 'OPENAI_API_KEY',
+      dangerouslyAllowBrowser: true,
+    });
+  }
+  get asyncHandler(): Promise<any> {
+    return Promise.resolve();
+  }
+  get isTimeout(): boolean {
+    return this._isTimeout;
+  }
+  get isStreamTimeout(): boolean {
+    return this._isStreamTimeout;
+  }
+  get isRequesting(): boolean {
+    return this._isRequesting;
+  }
+  get manual(): boolean {
+    return true;
+  }
+  async run(input: Input): Promise<void> {
+    const { callbacks } = this.options;
+    try {
+      await this.client.responses.create({
+        model: 'qwen-plus',
+        messages: input?.messages || [],
+        stream: true,
+      });
+
+      // 请基于 response 实现 流数据更新逻辑
+      // Please implement stream data update logic based on response
+    } catch (error: any) {
+      callbacks?.onError(error);
+    }
+  }
+  abort(): void {
+    // 请基于openai 实现 abort
+    // Please implement abort based on OpenAI
+  }
+}
+
+const provider = new OpenAIChatProvider<XModelMessage, InputType, OutputType>({
+  request: new OpenAiRequest('OPENAI', {}),
 });
 
 const Demo: React.FC = () => {
-  const [agent] = useXAgent({
-    request: async (info, callbacks) => {
-      const { messages, message } = info;
-
-      const { onSuccess, onUpdate, onError } = callbacks;
-
-      // current message
-      console.log('message', message);
-
-      // history messages
-      console.log('messages', messages);
-
-      let content: string = '';
-
-      try {
-        const stream = await client.chat.completions.create({
-          model: 'qwen-plus',
-          // if chat context is needed, modify the array
-          messages: [{ role: 'user', content: message }],
-          // stream mode
-          stream: true,
-        });
-
-        for await (const chunk of stream) {
-          content += chunk.choices[0]?.delta?.content || '';
-
-          onUpdate(content);
-        }
-
-        onSuccess(content);
-      } catch (error) {
-        // handle error
-        // onError();
+  const [content, setContent] = useState('');
+  const { onRequest, messages, isRequesting, abort } = useXChat({
+    provider,
+    requestPlaceholder: () => {
+      return {
+        content: 'loading...',
+        role: 'assistant',
+      };
+    },
+    requestFallback: (_, { error }) => {
+      if (error.name === 'AbortError') {
+        return {
+          content: 'Request is aborted',
+          role: 'assistant',
+        };
       }
+      return {
+        content: error?.toString(),
+        role: 'assistant',
+      };
     },
   });
 
-  const {
-    // use to send message
-    onRequest,
-    // use to render messages
-    messages,
-  } = useXChat({ agent });
-
   const items = messages.map(({ message, id }) => ({
-    // key is required, used to identify the message
     key: id,
-    content: message,
+    ...message,
   }));
 
+  const role: BubbleListProps['role'] = {
+    assistant: {
+      placement: 'start',
+    },
+    user: { placement: 'end' },
+  };
+
   return (
-    <div>
-      <Bubble.List items={items} />
-      <Sender onSubmit={onRequest} />
-    </div>
+    <Flex
+      vertical
+      justify="space-between"
+      style={{
+        height: 400,
+        padding: 16,
+      }}
+    >
+      <Bubble.List role={role} items={items} />
+      <Sender
+        value={content}
+        onChange={setContent}
+        loading={isRequesting}
+        onCancel={abort}
+        onSubmit={(val) => {
+          onRequest({
+            messages: [{ role: 'user', content: val }],
+          });
+          setContent('');
+        }}
+      />
+    </Flex>
   );
 };
 
 export default Demo;
 ```
 
-## 使用 API 接入
+### 示例
 
-> 注意: 🔥 `dangerouslyApiKey` 存在安全风险，对此有详细的[说明](/docs/react/dangerously-api-key-cn)。
-
-```tsx
-import { useXAgent, useXChat, Sender, Bubble, XRequest } from '@ant-design/x';
-import React from 'react';
-
-const { create } = XRequest({
-  baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
-  dangerouslyApiKey: process.env['DASHSCOPE_API_KEY'],
-  model: 'qwen-plus',
-});
-
-const Component: React.FC = () => {
-  const [agent] = useXAgent({
-    request: async (info, callbacks) => {
-      const { messages, message } = info;
-      const { onUpdate } = callbacks;
-
-      // current message
-      console.log('message', message);
-      // messages list
-      console.log('messages', messages);
-
-      let content: string = '';
-
-      try {
-        create(
-          {
-            messages: [{ role: 'user', content: message }],
-            stream: true,
-          },
-          {
-            onSuccess: (chunks) => {
-              console.log('sse chunk list', chunks);
-            },
-            onError: (error) => {
-              console.log('error', error);
-            },
-            onUpdate: (chunk) => {
-              console.log('sse object', chunk);
-
-              const data = JSON.parse(chunk.data);
-
-              content += data?.choices[0].delta.content;
-
-              onUpdate(content);
-            },
-          },
-        );
-      } catch (error) {}
-    },
-  });
-
-  const {
-    // use to send message
-    onRequest,
-    // use to render messages
-    messages,
-  } = useXChat({ agent });
-
-  const items = messages.map(({ message, id }) => ({
-    // key is required, used to identify the message
-    key: id,
-    content: message,
-  }));
-
-  return (
-    <div>
-      <Bubble.List items={items} />
-      <Sender onSubmit={onRequest} />
-    </div>
-  );
-};
-
-export default Component;
-```
+<code src="./demo/qwen.tsx" title="使用 openai 接入qwen" description="此示例仅展示使用X SDK接入 openai 的逻辑参考，并未对模型数据进行处理，需填写正确的apiKey再进行数据调试" compact iframe="450"></code>

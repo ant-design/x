@@ -1,6 +1,6 @@
 import { SyncOutlined, UserOutlined } from '@ant-design/icons';
 import type { BubbleListProps } from '@ant-design/x';
-import { Bubble, Sender, Think } from '@ant-design/x';
+import { Bubble, Sender } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
 import {
   OpenAIChatProvider,
@@ -16,31 +16,13 @@ import React from 'react';
  * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
  */
 
-const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow_qwen3-8b';
+const BASE_URL = 'https://api.x.ant.design/api/llm_cloudflare_llama-3.3-70b-instruct-fp8-fast';
 
 /**
  * 🔔 The MODEL is fixed in the current request, please replace it with your BASE_UR and MODEL
  */
 
-const MODEL = 'Qwen3-8B';
-
-const ThinkComponent = React.memo((props: { children: string; status: string }) => {
-  const [title, setTitle] = React.useState('Deep thinking...');
-  const [loading, setLoading] = React.useState(true);
-
-  React.useEffect(() => {
-    if (props.status === 'done') {
-      setTitle('Complete thinking');
-      setLoading(false);
-    }
-  }, [props.status]);
-
-  return (
-    <Think title={title} loading={loading}>
-      {props.children}
-    </Think>
-  );
-});
+const MODEL = 'llama-3.3-70b-instruct-fp8-fast';
 
 const role: BubbleListProps['role'] = {
   assistant: {
@@ -51,14 +33,7 @@ const role: BubbleListProps['role'] = {
     contentRender(content: any) {
       // Double '\n' in a mark will causes markdown parse as a new paragraph, so we need to replace it with a single '\n'
       const newContent = content.replaceAll('\n\n', '<br/><br/>');
-      return (
-        <XMarkdown
-          content={newContent}
-          components={{
-            think: ThinkComponent,
-          }}
-        />
-      );
+      return <XMarkdown content={newContent} />;
     },
   },
   user: {
