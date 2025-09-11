@@ -41,7 +41,7 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'md'],
   modulePathIgnorePatterns: ['/_site/'],
   moduleNameMapper: {
-    '/\\.(css|less)$/': 'identity-obj-proxy',
+    '\\.(css|less)$': 'identity-obj-proxy',
     '^@ant-design/x$': '<rootDir>/components/index',
     '^@ant-design/x/es/(.*)$': '<rootDir>/components/$1',
     '^@ant-design/x/lib/(.*)$': '<rootDir>/components/$1',
