@@ -73,6 +73,7 @@ const App = () => {
       genItem(false, { typing: false }),
       genItem(true, { typing: false }),
       genItem(false, { typing: false }),
+      genItem(true, { typing: false, loading: true }),
     ]);
   }, []);
 
