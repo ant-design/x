@@ -15,7 +15,7 @@ export default () => {
 */
   .code-box {
     .not(.ant-x-markdown){
-            pre code {
+        pre code {
           display: block;
           padding: ${token.padding}px ${token.paddingXL}px;
           color: ${token.colorText};

@@ -2,26 +2,23 @@ import {
   AppstoreAddOutlined,
   CloudUploadOutlined,
   CommentOutlined,
-  CopyOutlined,
   DeleteOutlined,
-  DislikeOutlined,
   EditOutlined,
   EllipsisOutlined,
   FileSearchOutlined,
   GlobalOutlined,
   HeartOutlined,
-  LikeOutlined,
   PaperClipOutlined,
   PlusOutlined,
   ProductOutlined,
   QuestionCircleOutlined,
-  ReloadOutlined,
   ScheduleOutlined,
   ShareAltOutlined,
   SmileOutlined,
 } from '@ant-design/icons';
 import type { BubbleListProps, ThoughtChainItemProp } from '@ant-design/x';
 import {
+  Actions,
   Attachments,
   Bubble,
   Conversations,
@@ -41,7 +38,7 @@ import {
   XModelResponse,
   XRequest,
 } from '@ant-design/x-sdk';
-import { Avatar, Button, Flex, type GetProp, message, Space, Spin } from 'antd';
+import { Avatar, Button, Flex, type GetProp, message, Pagination, Space, Spin } from 'antd';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
 import React, { useState } from 'react';
@@ -87,7 +84,7 @@ const zhCN = {
   modelExecutionCompleted: '大模型执行完成',
   executionFailed: '执行失败',
   aborted: '已经终止',
-  loading: '正在请求中...',
+  noData: '暂无数据',
 };
 
 const enUS = {
@@ -134,7 +131,7 @@ const enUS = {
   modelExecutionCompleted: 'Model execution completed',
   executionFailed: 'Execution failed',
   aborted: 'Aborted',
-  loading: 'loading...',
+  noData: 'No Data',
 };
 
 const isZhCN = window.parent?.location?.pathname?.includes('-cn');
@@ -310,7 +307,7 @@ const useStyle = createStyles(({ token, css }) => {
       flex-direction: column;
       padding-block: ${token.paddingLG}px;
       gap: 16px;
-      .ant-bubble-content-loading {
+      .ant-bubble-content-updating {
         background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
         background-size: 100% 2px;
         background-repeat: no-repeat;
@@ -334,9 +331,6 @@ const useStyle = createStyles(({ token, css }) => {
       height: calc(100% - 120px);
       flex-direction: column;
     `,
-    loadingMessage: css`
-
-    `,
     placeholder: css`
       padding-top: 32px;
     `,
@@ -359,16 +353,16 @@ const useStyle = createStyles(({ token, css }) => {
   };
 });
 
-const ThinkComponent = React.memo((props: { children: string; status: string }) => {
+const ThinkComponent = React.memo((props: { children: string; streamStatus: string }) => {
   const [title, setTitle] = React.useState(t['Deep thinking'] + '...');
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    if (props.status === 'done') {
+    if (props.streamStatus === 'done') {
       setTitle(t['Complete thinking']);
       setLoading(false);
     }
-  }, [props.status]);
+  }, [props.streamStatus]);
 
   return (
     <Think title={title} loading={loading}>
@@ -424,6 +418,31 @@ const ThoughtChainConfig = {
     status: 'abort',
   },
 };
+const actionsItems = [
+  {
+    key: 'pagination',
+    actionRender: () => <Pagination simple total={5} pageSize={1} />,
+  },
+  {
+    key: 'feedback',
+    actionRender: () => <Actions.Feedback key="feedback" />,
+  },
+  {
+    key: 'copy',
+    label: 'copy',
+    actionRender: () => {
+      return <Actions.Copy text="copy value" />;
+    },
+  },
+  {
+    key: 'audio',
+    label: 'audio',
+    actionRender: () => {
+      return <Actions.Audio />;
+    },
+  },
+];
+
 const role: BubbleListProps['role'] = {
   assistant: {
     placement: 'start',
@@ -445,10 +464,7 @@ const role: BubbleListProps['role'] = {
       footer: (_, { status }) => {
         return status !== 'updating' && status !== 'loading' ? (
           <div style={{ display: 'flex' }}>
-            <Button type="text" size="small" icon={<ReloadOutlined />} />
-            <Button type="text" size="small" icon={<CopyOutlined />} />
-            <Button type="text" size="small" icon={<LikeOutlined />} />
-            <Button type="text" size="small" icon={<DislikeOutlined />} />
+            <Actions items={actionsItems} />
           </div>
         ) : null;
       },
@@ -457,14 +473,16 @@ const role: BubbleListProps['role'] = {
       const newContent = content.replaceAll('\n\n', '<br/>');
       return (
         <XMarkdown
-          content={newContent}
+          paragraphTag="div"
           components={{
             think: ThinkComponent,
           }}
           streaming={{
             hasNextChunk: status === 'updating',
           }}
-        />
+        >
+          {newContent}
+        </XMarkdown>
       );
     },
     typing: (_, { status }) =>
@@ -514,7 +532,7 @@ const Independent: React.FC = () => {
     conversationKey: curConversation,
     requestPlaceholder: () => {
       return {
-        content: t.loading,
+        content: t.noData,
         role: 'assistant',
       };
     },
@@ -618,9 +636,7 @@ const Independent: React.FC = () => {
             ...i.message,
             key: i.id,
             status: i.status,
-            classNames: {
-              content: i.status === 'loading' ? styles.loadingMessage : '',
-            },
+            loading: i.status === 'loading',
           }))}
           styles={{
             bubble: {

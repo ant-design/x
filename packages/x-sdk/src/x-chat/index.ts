@@ -135,9 +135,7 @@ export default function useXChat<
 
   // ============================ Request =============================
   const getFilteredMessages = (msgs: MessageInfo<ChatMessage>[]) =>
-    msgs
-      .filter((info) => info.status !== 'loading' && info.status !== 'error')
-      .map((info) => info.message);
+    msgs.filter((info) => info.status !== 'loading').map((info) => info.message);
 
   provider?.injectGetMessages(() => {
     return getFilteredMessages(getMessages());
@@ -295,7 +293,6 @@ export default function useXChat<
           } else {
             fallbackMsg = requestFallback;
           }
-
           setMessages((ori: MessageInfo<ChatMessage>[]) => [
             ...ori.filter(
               (info: { id: string | number | null | undefined }) =>
@@ -307,10 +304,10 @@ export default function useXChat<
           // Remove directly
           setMessages((ori: MessageInfo<ChatMessage>[]) => {
             return ori.map((info: MessageInfo<ChatMessage>) => {
-              if (info.id !== loadingMsgId && info.id !== updatingMsgId) {
+              if (info.id === loadingMsgId || info.id === updatingMsgId) {
                 return {
                   ...info,
-                  status: 'error',
+                  status: error.name === 'AbortError' ? 'abort' : 'error',
                 };
               }
               return info;

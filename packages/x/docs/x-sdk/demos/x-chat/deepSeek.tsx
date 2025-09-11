@@ -24,16 +24,16 @@ const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow_deepSeek-r1-disti
 
 const MODEL = 'DeepSeek-R1-Distill-Qwen-7B';
 
-const ThinkComponent = React.memo((props: { children: string; status: string }) => {
+const ThinkComponent = React.memo((props: { children: string; streamStatus: string }) => {
   const [title, setTitle] = React.useState('Deep thinking...');
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    if (props.status === 'done') {
+    if (props.streamStatus === 'done') {
       setTitle('Complete thinking');
       setLoading(false);
     }
-  }, [props.status]);
+  }, [props.streamStatus]);
 
   return (
     <Think title={title} loading={loading}>

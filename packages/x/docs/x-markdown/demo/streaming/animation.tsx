@@ -128,11 +128,11 @@ const App = () => {
             contentRender:
               status === 'local'
                 ? (content) => content?.query
-                : (content) => (
+                : (content, { status }) => (
                     <XMarkdown
                       className="x-markdown-light"
                       content={content as string}
-                      streaming={{ hasNextChunk: isRequesting, enableAnimation }}
+                      streaming={{ hasNextChunk: status === 'updating', enableAnimation }}
                     />
                   ),
           }))}

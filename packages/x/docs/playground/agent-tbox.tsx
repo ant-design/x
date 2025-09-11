@@ -1,23 +1,29 @@
 import {
   AppstoreAddOutlined,
-  CopyOutlined,
   DeleteOutlined,
-  DislikeOutlined,
   EditOutlined,
   EllipsisOutlined,
   FileSearchOutlined,
+  GlobalOutlined,
   HeartOutlined,
-  LikeOutlined,
   PlusOutlined,
   ProductOutlined,
   QuestionCircleOutlined,
-  ReloadOutlined,
   ScheduleOutlined,
   ShareAltOutlined,
   SmileOutlined,
 } from '@ant-design/icons';
-import type { BubbleListProps } from '@ant-design/x';
-import { Bubble, Conversations, Prompts, Sender, Think, Welcome } from '@ant-design/x';
+import type { BubbleListProps, ThoughtChainItemProp } from '@ant-design/x';
+import {
+  Actions,
+  Bubble,
+  Conversations,
+  Prompts,
+  Sender,
+  Think,
+  ThoughtChain,
+  Welcome,
+} from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
 import type { TransformMessage } from '@ant-design/x-sdk';
 import {
@@ -27,7 +33,7 @@ import {
   useXConversations,
   XRequestOptions,
 } from '@ant-design/x-sdk';
-import { Avatar, Button, Flex, type GetProp, message, Space, Spin } from 'antd';
+import { Avatar, Button, Flex, type GetProp, message, Pagination, Space, Spin } from 'antd';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
 import React, { useState } from 'react';
@@ -64,9 +70,13 @@ const zhCN = {
   antdXTboxDescription:
     '基于 Ant Design 的 AGI 产品界面解决方案，打造更卓越的智能视觉体验，集成了百宝箱 Tbox.cn 的智能体能力，助力产品设计与开发。',
   askMeAnything: '向我提问吧',
-  loadingMessage: '加载中💗',
   DeepThinking: '深度思考中',
   CompleteThinking: '深度思考完成',
+  noData: '暂无数据',
+  modelIsRunning: '正在调用模型',
+  modelExecutionCompleted: '大模型执行完成',
+  executionFailed: '执行失败',
+  aborted: '已经终止',
 };
 
 const enUS = {
@@ -93,9 +103,13 @@ const enUS = {
   antdXTboxDescription:
     'An AGI product interface solution based on Ant Design, creating a superior intelligent visual experience, integrating the capabilities of Tbox.cn agents to assist in product design and development.',
   askMeAnything: 'Ask me anything...',
-  loadingMessage: 'Loading...',
   DeepThinking: 'Deep thinking',
   CompleteThinking: 'Deep thinking completed',
+  noData: 'No Data',
+  modelIsRunning: 'Model is running',
+  modelExecutionCompleted: 'Model execution completed',
+  executionFailed: 'Execution failed',
+  aborted: 'Aborted',
 };
 
 const isZhCN = window.parent?.location?.pathname?.includes('-cn');
@@ -244,6 +258,12 @@ const useStyle = createStyles(({ token, css }) => {
       flex-direction: column;
       padding-block: ${token.paddingLG}px;
       gap: 16px;
+      .ant-bubble-content-updating {
+        background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
+        background-size: 100% 2px;
+        background-repeat: no-repeat;
+        background-position: bottom;
+      }
     `,
     chatPrompt: css`
       .ant-prompts-label {
@@ -261,12 +281,6 @@ const useStyle = createStyles(({ token, css }) => {
       display: flex;
       height: calc(100% - 120px);
       flex-direction: column;
-    `,
-    loadingMessage: css`
-      background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
-      background-size: 100% 2px;
-      background-repeat: no-repeat;
-      background-position: bottom;
     `,
     placeholder: css`
       padding-top: 32px;
@@ -366,7 +380,9 @@ class TBoxRequest<
     });
 
     stream.on('error', (error) => {
-      callbacks?.onError(error);
+      if (!error?.message?.includes('abort')) {
+        callbacks?.onError(error);
+      }
     });
 
     stream.on('end', () => {
@@ -374,7 +390,7 @@ class TBoxRequest<
     });
 
     stream.on('abort', () => {
-      callbacks?.onSuccess(dataArr, new Headers());
+      callbacks?.onError({ name: 'AbortError', message: '' });
     });
   }
   abort(): void {
@@ -432,16 +448,16 @@ const providerFactory = (conversationKey: string) => {
   return providerCaches.get(conversationKey);
 };
 
-const ThinkComponent = React.memo((props: { children: string; status: string }) => {
+const ThinkComponent = React.memo((props: { children: string; streamStatus: string }) => {
   const [title, setTitle] = React.useState(t.DeepThinking + '...');
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    if (props.status === 'done') {
+    if (props.streamStatus === 'done') {
       setTitle(t.CompleteThinking);
       setLoading(false);
     }
-  }, [props.status]);
+  }, [props.streamStatus]);
 
   return (
     <Think title={title} loading={loading}>
@@ -475,19 +491,7 @@ const AgentTBox: React.FC = () => {
     conversationKey: curConversation,
     requestPlaceholder: () => {
       return {
-        content: t.loadingMessage,
-        role: 'assistant',
-      };
-    },
-    requestFallback: (_, { error }) => {
-      if (error.name === 'AbortError') {
-        return {
-          content: 'Request is aborted',
-          role: 'assistant',
-        };
-      }
-      return {
-        content: 'Request failed, please try again!',
+        content: t.noData,
         role: 'assistant',
       };
     },
@@ -500,10 +504,6 @@ const AgentTBox: React.FC = () => {
     onRequest({
       message: { role: 'user', content: val },
     });
-  };
-
-  const onFooterButtonClick = () => {
-    message.info(t.demoButtonNoFunction);
   };
 
   // ==================== Nodes ====================
@@ -580,48 +580,107 @@ const AgentTBox: React.FC = () => {
       </div>
     </div>
   );
+  const ThoughtChainConfig = {
+    loading: {
+      title: t.modelIsRunning,
+      status: 'loading',
+    },
+    updating: {
+      title: t.modelIsRunning,
+      status: 'loading',
+    },
+    success: {
+      title: t.modelExecutionCompleted,
+      status: 'success',
+    },
+    error: {
+      title: t.executionFailed,
+      status: 'error',
+    },
+    abort: {
+      title: t.aborted,
+      status: 'abort',
+    },
+  };
+  const actionsItems = [
+    {
+      key: 'pagination',
+      actionRender: () => <Pagination simple total={5} pageSize={1} />,
+    },
+    {
+      key: 'feedback',
+      actionRender: () => <Actions.Feedback key="feedback" />,
+    },
+    {
+      key: 'copy',
+      label: 'copy',
+      actionRender: () => {
+        return <Actions.Copy text="copy value" />;
+      },
+    },
+    {
+      key: 'audio',
+      label: 'audio',
+      actionRender: () => {
+        return <Actions.Audio />;
+      },
+    },
+  ];
   const role: BubbleListProps['role'] = {
     assistant: {
       placement: 'start',
       components: {
-        footer: (
-          <div style={{ display: 'flex' }}>
-            <Button
-              type="text"
-              size="small"
-              icon={<ReloadOutlined />}
-              onClick={onFooterButtonClick}
+        header: (_, { status }) => {
+          console.log(status, '1111');
+          const config = ThoughtChainConfig[status as keyof typeof ThoughtChainConfig];
+          return config ? (
+            <ThoughtChain.Item
+              style={{
+                marginBottom: 8,
+              }}
+              status={config.status as ThoughtChainItemProp['status']}
+              variant="solid"
+              icon={<GlobalOutlined />}
+              title={config.title}
             />
-            <Button
-              type="text"
-              size="small"
-              icon={<CopyOutlined />}
-              onClick={onFooterButtonClick}
-            />
-            <Button
-              type="text"
-              size="small"
-              icon={<LikeOutlined />}
-              onClick={onFooterButtonClick}
-            />
-            <Button
-              type="text"
-              size="small"
-              icon={<DislikeOutlined />}
-              onClick={onFooterButtonClick}
-            />
-          </div>
-        ),
+          ) : null;
+        },
+        footer: (_, { status }) => {
+          return status !== 'updating' && status !== 'loading' ? (
+            <div style={{ display: 'flex' }}>
+              <Actions items={actionsItems} />
+            </div>
+          ) : null;
+        },
       },
-      contentRender: (content) => (
+      contentRender: (content, { status }) => (
         <XMarkdown
           content={content as string}
           components={{
             think: ThinkComponent,
           }}
-          streaming={{ hasNextChunk: isRequesting, enableAnimation: true }}
+          streaming={{ hasNextChunk: status === 'updating', enableAnimation: true }}
         />
       ),
+      typing: (_, { status }) =>
+        status === 'updating'
+          ? {
+              effect: 'typing',
+              step: 5,
+              interval: 20,
+              suffix: (
+                <div
+                  style={{
+                    position: 'absolute',
+                    right: 20,
+                    bottom: 10,
+                  }}
+                >
+                  💗
+                </div>
+              ),
+            }
+          : false,
     },
     user: { placement: 'end' },
   };
@@ -632,30 +691,21 @@ const AgentTBox: React.FC = () => {
         <Bubble.List
           items={messages?.map((i) => ({
             ...i.message,
-            classNames: {
-              content: i.status === 'loading' ? styles.loadingMessage : '',
-            },
-            typing:
-              i.status === 'updating'
-                ? {
-                    effect: 'typing',
-                    suffix: <div className={styles.typing}>💗</div>,
-                    keepPrefix: true,
-                  }
-                : false,
+            status: i.status,
+            loading: i.status === 'loading',
             key: i.id,
           }))}
-          style={{ paddingInline: 'calc(calc(100% - 700px) /2)' }}
+          styles={{
+            bubble: {
+              width: 700,
+            },
+          }}
           role={role}
         />
       ) : (
-        <Space
-          orientation="vertical"
-          size={16}
-          style={{ paddingInline: 'calc(calc(100% - 700px) /2)' }}
-          className={styles.placeholder}
-        >
+        <Space orientation="vertical" size={16} align="center" className={styles.placeholder}>
           <Welcome
+            style={{ width: 700 }}
             variant="borderless"
             icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
             title={t.helloAntdXTboxAgent}
@@ -667,7 +717,7 @@ const AgentTBox: React.FC = () => {
               </Space>
             }
           />
-          <Flex gap={16}>
+          <Flex style={{ width: 700 }} gap={16}>
             <Prompts
               items={[HOT_TOPICS]}
               styles={{
