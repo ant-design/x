@@ -28,7 +28,7 @@ Qwen 的模型推理服务支持「兼容 OpenAI 模式」。详见官方文档:
 
 ### 示例
 
-<code src="../x-sdk/demos/x-chat/model.tsx" title="使用X SDK接入"></code>
+<code src="./demo/qwen-sdk.tsx" title="使用X SDK接入"></code>
 
 ## 使用 openai-node 兼容调用
 

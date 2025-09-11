@@ -26,7 +26,7 @@ Using URL to integrate Model is a basic capability provided by X SDK. For detail
 
 ### Example
 
-<code src="../x-sdk/demos/x-chat/model.tsx" title="Integrate with X SDK"></code>
+<code src="./demo/qwen-sdk.tsx" title="Integrate with X SDK"></code>
 
 ## Use openai-node for compatible calls
 

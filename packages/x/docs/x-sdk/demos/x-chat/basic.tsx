@@ -1,8 +1,7 @@
-import { UserOutlined } from '@ant-design/icons';
 import type { BubbleListProps } from '@ant-design/x';
 import { Bubble, Sender } from '@ant-design/x';
 import { DefaultChatProvider, useXChat, XRequest, XRequestOptions } from '@ant-design/x-sdk';
-import { Avatar, Flex } from 'antd';
+import { Flex } from 'antd';
 import React from 'react';
 
 interface ChatInput {
@@ -14,19 +13,9 @@ const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000));
 const role: BubbleListProps['role'] = {
   ai: {
     placement: 'start',
-    components: {
-      avatar: <Avatar icon={<UserOutlined />} />,
-    },
-    typing: true,
-    style: {
-      maxWidth: 600,
-    },
   },
   local: {
     placement: 'end',
-    components: {
-      avatar: <Avatar icon={<UserOutlined />} style={{ background: '#87d068' }} />,
-    },
     contentRender(content: any) {
       return content?.query;
     },

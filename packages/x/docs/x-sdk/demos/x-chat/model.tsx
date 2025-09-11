@@ -1,4 +1,4 @@
-import { SyncOutlined, UserOutlined } from '@ant-design/icons';
+import { SyncOutlined } from '@ant-design/icons';
 import type { BubbleListProps } from '@ant-design/x';
 import { Bubble, Sender } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
@@ -9,7 +9,7 @@ import {
   XModelResponse,
   XRequest,
 } from '@ant-design/x-sdk';
-import { Avatar, Button, Flex, Tooltip } from 'antd';
+import { Button, Flex, Tooltip } from 'antd';
 import React from 'react';
 
 /**
@@ -27,9 +27,6 @@ const MODEL = 'llama-3.3-70b-instruct-fp8-fast';
 const role: BubbleListProps['role'] = {
   assistant: {
     placement: 'start',
-    components: {
-      avatar: <Avatar icon={<UserOutlined />} />,
-    },
     contentRender(content: any) {
       // Double '\n' in a mark will causes markdown parse as a new paragraph, so we need to replace it with a single '\n'
       const newContent = content.replaceAll('\n\n', '<br/><br/>');
@@ -38,9 +35,6 @@ const role: BubbleListProps['role'] = {
   },
   user: {
     placement: 'end',
-    components: {
-      avatar: <Avatar icon={<UserOutlined />} style={{ background: '#87d068' }} />,
-    },
   },
 };
 
@@ -84,25 +78,32 @@ const App = () => {
       <Bubble.List
         role={role}
         style={{ maxHeight: 300 }}
-        items={messages.map(({ id, message }) => ({
+        items={messages.map(({ id, message, status }) => ({
           key: id,
           role: message.role,
+          status: status,
+          loading: status === 'loading',
           content: message.content,
-          footer: (
-            <Tooltip title="Retry">
-              <Button
-                size="small"
-                type="text"
-                icon={<SyncOutlined />}
-                style={{ marginInlineEnd: 'auto' }}
-                onClick={() =>
-                  onReload(id, {
-                    userAction: 'retry',
-                  })
+          components:
+            message.role === 'assistant'
+              ? {
+                  footer: (
+                    <Tooltip title="Retry">
+                      <Button
+                        size="small"
+                        type="text"
+                        icon={<SyncOutlined />}
+                        style={{ marginInlineEnd: 'auto' }}
+                        onClick={() =>
+                          onReload(id, {
+                            userAction: 'retry',
+                          })
+                        }
+                      />
+                    </Tooltip>
+                  ),
                 }
-              />
-            </Tooltip>
-          ),
+              : {},
         }))}
       />
       <Sender
