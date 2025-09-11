@@ -35,7 +35,7 @@ import {
   XModelResponse,
   XRequest,
 } from '@ant-design/x-sdk';
-import { Button, GetProp, GetRef, Image, message, Popover, Space, Spin } from 'antd';
+import { Button, GetProp, GetRef, Image, message, Popover, Space } from 'antd';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
 import React, { useRef, useState } from 'react';

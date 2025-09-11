@@ -33,7 +33,7 @@ import {
   useXConversations,
   XRequestOptions,
 } from '@ant-design/x-sdk';
-import { Avatar, Button, Flex, type GetProp, message, Pagination, Space, Spin } from 'antd';
+import { Avatar, Button, Flex, type GetProp, Pagination, Space } from 'antd';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
 import React, { useState } from 'react';
