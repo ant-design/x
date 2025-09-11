@@ -8,8 +8,8 @@ const text = 'Ant Design X - Better UI toolkit for your AI Chat WebApp. '.repeat
 function useStreamContent(
   content: string,
   { step, interval }: { step: number; interval: number } = { step: 3, interval: 50 },
-) {
-  const [streamContent, _setStreamContent] = useState('');
+): [string, boolean] {
+  const [streamContent, _setStreamContent] = useState<string>('');
   const streamRef = useRef('');
   const done = useRef(true);
   const timer = useRef(-1);
@@ -45,7 +45,7 @@ function useStreamContent(
     timer.current = setInterval(() => {
       const len = streamRef.current.length + _step.current;
       if (len <= text.length - 1) {
-        setStreamContent(text.slice(0, len));
+        setStreamContent(text.slice(0, len) || '');
       } else {
         setStreamContent(text);
         done.current = true;
