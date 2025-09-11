@@ -282,7 +282,9 @@ export default function useXChat<
           if (typeof requestFallback === 'function') {
             // typescript has bug that not get real return type when use `typeof function` check
             const messages = getRequestMessages();
-            const msg = getMessages().find((info) => info.id === updatingMsgId);
+            const msg = getMessages().find(
+              (info) => info.id === loadingMsgId || info.id === updatingMsgId,
+            );
             fallbackMsg = await (requestFallback as RequestFallbackFn<ChatMessage>)(
               msg?.message || message,
               {
