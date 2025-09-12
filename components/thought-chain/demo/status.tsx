@@ -1,9 +1,8 @@
-import React from 'react';
-import { ThoughtChain } from '@ant-design/x';
-import { Card, Button } from 'antd';
 import { CheckCircleOutlined, InfoCircleOutlined, LoadingOutlined } from '@ant-design/icons';
-
 import type { ThoughtChainItem } from '@ant-design/x';
+import { ThoughtChain } from '@ant-design/x';
+import { Button, Card } from 'antd';
+import React from 'react';
 
 function getStatusIcon(status: ThoughtChainItem['status']) {
   switch (status) {
