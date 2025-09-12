@@ -327,9 +327,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx correctly 1`] = `
               <span
                 class="ant-thought-chain-item-title-content"
               >
-                <div>
-                  Click me to expand the contentClick me to expand the contentClick me to expand the contentClick me to expand the contentClick me to expand the content
-                </div>
+                Click me to expand the content
               </span>
             </div>
             <span

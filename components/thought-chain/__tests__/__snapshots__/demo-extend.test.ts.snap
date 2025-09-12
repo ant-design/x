@@ -481,9 +481,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
               <span
                 class="ant-thought-chain-item-title-content"
               >
-                <div>
-                  Click me to expand the contentClick me to expand the contentClick me to expand the contentClick me to expand the contentClick me to expand the content
-                </div>
+                Click me to expand the content
               </span>
             </div>
             <div
