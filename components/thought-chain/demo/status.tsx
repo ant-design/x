@@ -19,8 +19,7 @@ function getStatusIcon(status: ThoughtChainItem['status']) {
 
 const mockServerResponseData: ThoughtChainItem[] = [
   {
-    title:
-      'Thought Chain Item - 1Thought Chain Item - 1Thought Chain Item - 1Thought Chain Item - 1Thought Chain Item - 1Thought Chain Item - 1Thought Chain Item - 1Thought Chain Item - 1',
+    title: 'Thought Chain Item - 1',
     status: 'success',
     description: 'status: success',
     icon: getStatusIcon('success'),
