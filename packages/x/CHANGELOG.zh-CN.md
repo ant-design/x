@@ -15,6 +15,16 @@ tag: vVERSION
 
 ---
 
+## 2.0.0-alpha.7
+
+`2025-09-15`
+
+### @ant-design/x
+
+### @ant-design/x-markdown
+
+### @ant-design/x-sdk
+
 ## 2.0.0-alpha.6
 
 `2025-08-28`
