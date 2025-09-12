@@ -1,12 +1,11 @@
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
-import { Avatar, Typography } from 'antd';
+import type { ConfigProviderProps, GetProp } from 'antd';
+import { Avatar, Tooltip, Typography } from 'antd';
 import classnames from 'classnames';
+import type { CSSMotionProps } from 'rc-motion';
 import CSSMotion from 'rc-motion';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
-
-import type { ConfigProviderProps, GetProp } from 'antd';
-import type { CSSMotionProps } from 'rc-motion';
 import type { ThoughtChainProps } from './';
 
 export enum THOUGHT_CHAIN_ITEM_STATUS {
@@ -125,6 +124,27 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
     description,
   } = info;
 
+  // ============================ Tooltip State ============================
+  const [showTooltip, setShowTooltip] = React.useState(false);
+  const textRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const checkTextOverflow = () => {
+      if (textRef.current) {
+        setShowTooltip(textRef.current.scrollWidth > textRef.current.clientWidth);
+      }
+    };
+    checkTextOverflow();
+    const resizeObserver = new ResizeObserver(checkTextOverflow);
+    if (textRef.current) {
+      resizeObserver.observe(textRef.current);
+    }
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [title]);
+
   // ============================ Style ============================
   const itemCls = `${prefixCls}-item`;
 
@@ -162,28 +182,30 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
           })}
         >
           {/* Title */}
-          <Typography.Text
-            strong
-            ellipsis={{
-              tooltip: { placement: direction === 'rtl' ? 'topRight' : 'topLeft', title },
-            }}
-            className={`${itemCls}-title`}
+          <Tooltip
+            title={showTooltip ? title : undefined}
+            placement={direction === 'rtl' ? 'topRight' : 'topLeft'}
           >
-            {enableCollapse &&
-              content &&
-              (direction === 'rtl' ? (
-                <LeftOutlined
-                  className={`${itemCls}-collapse-icon`}
-                  rotate={contentOpen ? -90 : 0}
-                />
-              ) : (
-                <RightOutlined
-                  className={`${itemCls}-collapse-icon`}
-                  rotate={contentOpen ? 90 : 0}
-                />
-              ))}
-            {title}
-          </Typography.Text>
+            <div className={`${itemCls}-title`}>
+              {enableCollapse &&
+                content &&
+                (direction === 'rtl' ? (
+                  <LeftOutlined
+                    className={`${itemCls}-collapse-icon`}
+                    rotate={contentOpen ? -90 : 0}
+                  />
+                ) : (
+                  <RightOutlined
+                    className={`${itemCls}-collapse-icon`}
+                    rotate={contentOpen ? 90 : 0}
+                  />
+                ))}
+
+              <div ref={textRef} className={`${itemCls}-title-content`}>
+                {title}
+              </div>
+            </div>
+          </Tooltip>
           {/* Description */}
           {description && (
             <Typography.Text
