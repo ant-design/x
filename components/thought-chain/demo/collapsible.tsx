@@ -27,12 +27,7 @@ const mockContent = (
 const items: ThoughtChainProps['items'] = [
   {
     key: 'item-1',
-    title: (
-      <div>
-        Click me to expand the contentClick me to expand the contentClick me to expand the
-        contentClick me to expand the contentClick me to expand the content
-      </div>
-    ),
+    title: 'Click me to expand the content',
     description: 'Collapsible',
     content: mockContent,
     status: 'success',

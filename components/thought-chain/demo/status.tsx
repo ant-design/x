@@ -1,9 +1,8 @@
-import React from 'react';
-import { ThoughtChain } from '@ant-design/x';
-import { Card, Button } from 'antd';
 import { CheckCircleOutlined, InfoCircleOutlined, LoadingOutlined } from '@ant-design/icons';
-
 import type { ThoughtChainItem } from '@ant-design/x';
+import { ThoughtChain } from '@ant-design/x';
+import { Button, Card } from 'antd';
+import React from 'react';
 
 function getStatusIcon(status: ThoughtChainItem['status']) {
   switch (status) {
@@ -20,7 +19,8 @@ function getStatusIcon(status: ThoughtChainItem['status']) {
 
 const mockServerResponseData: ThoughtChainItem[] = [
   {
-    title: 'Thought Chain Item - 1',
+    title:
+      'Thought Chain Item - 1Thought Chain Item - 1Thought Chain Item - 1Thought Chain Item - 1Thought Chain Item - 1Thought Chain Item - 1Thought Chain Item - 1Thought Chain Item - 1',
     status: 'success',
     description: 'status: success',
     icon: getStatusIcon('success'),
