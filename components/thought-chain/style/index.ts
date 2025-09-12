@@ -1,11 +1,10 @@
+import { type CSSObject, unit } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
+import type { ConfigProviderProps } from 'antd';
 import { genCollapseMotion } from '../../style/motion';
+import type { FullToken, GenerateStyle } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
 import { THOUGHT_CHAIN_ITEM_STATUS } from '../Item';
-
-import { type CSSObject, unit } from '@ant-design/cssinjs';
-import type { ConfigProviderProps } from 'antd';
-import type { FullToken, GenerateStyle } from '../../theme/cssinjs-utils';
 
 // biome-ignore lint/suspicious/noEmptyInterface: ComponentToken need to be empty by default
 export interface ComponentToken {}
@@ -183,9 +182,22 @@ const genThoughtChainItemStyle: GenerateThoughtChainItemStyle = (token) => {
             lineHeight: `${unit(token.itemSize)}`,
             maxHeight: token.itemSize,
             fontSize: token.itemFontSize,
+            display: 'flex',
+            alignItems: 'center',
 
             [`& ${itemCls}-collapse-icon`]: {
               marginInlineEnd: token.marginXS,
+              flexShrink: 0,
+            },
+
+            // 文本内容样式
+            [`& ${itemCls}-title-content`]: {
+              flex: 1,
+              minWidth: 0,
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+              display: 'inline-block',
             },
           },
           [`& ${itemCls}-desc`]: {

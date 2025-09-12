@@ -189,44 +189,23 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
           <Tooltip
             title={showTooltip ? title : undefined}
             placement={direction === 'rtl' ? 'topRight' : 'topLeft'}
-            overlayStyle={{ maxWidth: '300px' }}
           >
-            <div
-              className={`${itemCls}-title`}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '4px',
-                minWidth: 0,
-              }}
-            >
+            <div className={`${itemCls}-title`}>
               {enableCollapse &&
                 content &&
                 (direction === 'rtl' ? (
                   <LeftOutlined
                     className={`${itemCls}-collapse-icon`}
                     rotate={contentOpen ? -90 : 0}
-                    style={{ flexShrink: 0 }}
                   />
                 ) : (
                   <RightOutlined
                     className={`${itemCls}-collapse-icon`}
                     rotate={contentOpen ? 90 : 0}
-                    style={{ flexShrink: 0 }}
                   />
                 ))}
 
-              <span
-                ref={textRef}
-                style={{
-                  flex: 1,
-                  minWidth: 0,
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  whiteSpace: 'nowrap',
-                  display: 'inline-block',
-                }}
-              >
+              <span ref={textRef} className={`${itemCls}-title-content`}>
                 {title}
               </span>
             </div>
