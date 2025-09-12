@@ -15,6 +15,17 @@ tag: vVERSION
 
 ---
 
+## 1.6.1
+
+`2025-09-12`
+
+- 🐛 修复Sender 组件 `LoadingButton` 传入icon属性时同时显示两个图标。[#1145](https://github.com/ant-design/x/pull/1145) 由 [@IsDyh01](https://github.com/IsDyh01) 提交。
+- 🐛 修复Sender 组件`content`语义化缺失问题。[#703](https://github.com/ant-design/x/pull/703) 由 [@HomyeeKing](https://github.com/HomyeeKing) 提交。
+- 🐛 移除 Bubble 组件打字效果公共前缀逻辑中的冗余条件判断。[#1091](https://github.com/ant-design/x/pull/1091) 由 [@AqingCyan](https://github.com/AqingCyan) 提交。
+- 🐛 修复 useXChat `updating` 状态缺失问题。[#833](https://github.com/ant-design/x/pull/833) 由 [@wzc520pyfm](https://github.com/wzc520pyfm)
+- 🐛 修复 Suggestion 组件修复 `useActive` 中 items 为空数组导致的异常。[#824](https://github.com/ant-design/x/pull/824) 由 [@LengYXin ](https://github.com/LengYXin) 提交。
+- 📖 优化官网站点提升用户体验。[#960](https://github.com/ant-design/x/pull/960) 由 [@wzc520pyfm](https://github.com/wzc520pyfm) 提交、[#1048](https://github.com/ant-design/x/pull/1048) 由 [@wzc520pyfm](https://github.com/wzc520pyfm) 提交、[#1118](https://github.com/ant-design/x/pull/1118) 由 [@afc163](https://github.com/afc163) 提交、[#1122](https://github.com/ant-design/x/pull/1122) 由 [@fireairforce](https://github.com/fireairforce) 提交、[#1120](https://github.com/ant-design/x/pull/1120) 由 [@IsDyh01](https://github.com/IsDyh01) 提交。
+
 ## 1.6.0
 
 `2025-07-30`
