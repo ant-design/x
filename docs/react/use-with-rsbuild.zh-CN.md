@@ -1,6 +1,7 @@
 ---
 group:
   title: 如何使用
+  order: 3
 order: 5
 title: 在 Rsbuild 中使用
 ---

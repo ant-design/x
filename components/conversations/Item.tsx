@@ -1,11 +1,10 @@
 import { EllipsisOutlined } from '@ant-design/icons';
-import { Dropdown, Typography } from 'antd';
 import type { MenuProps } from 'antd';
-import classnames from 'classnames';
-import React from 'react';
-
+import { Dropdown, Typography } from 'antd';
 import type { DirectionType } from 'antd/es/config-provider';
+import classnames from 'classnames';
 import pickAttrs from 'rc-util/lib/pickAttrs';
+import React from 'react';
 import type { Conversation } from './interface';
 
 export interface ConversationsItemProps
@@ -74,19 +73,26 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
 
   // ============================ Render ============================
   return (
-    <li {...domProps} className={mergedCls} onClick={onInternalClick} title={`${info.label}`}>
+    <li
+      title={typeof info.label === 'object' ? undefined : `${info.label}`}
+      {...domProps}
+      className={mergedCls}
+      onClick={onInternalClick}
+    >
       {info.icon && <div className={`${prefixCls}-icon`}>{info.icon}</div>}
       <Typography.Text className={`${prefixCls}-label`}>{info.label}</Typography.Text>
       {!disabled && menu && (
-        <Dropdown
-          menu={dropdownMenu}
-          placement={direction === 'rtl' ? 'bottomLeft' : 'bottomRight'}
-          trigger={['click']}
-          disabled={disabled}
-          getPopupContainer={getPopupContainer}
-        >
-          {renderMenuTrigger(info)}
-        </Dropdown>
+        <div onClick={stopPropagation}>
+          <Dropdown
+            menu={dropdownMenu}
+            placement={direction === 'rtl' ? 'bottomLeft' : 'bottomRight'}
+            trigger={['click']}
+            disabled={disabled}
+            getPopupContainer={getPopupContainer}
+          >
+            {renderMenuTrigger(info)}
+          </Dropdown>
+        </div>
       )}
     </li>
   );

@@ -25,12 +25,16 @@ import {
   useXAgent,
   useXChat,
 } from '@ant-design/x';
-import type { BubbleDataType } from '@ant-design/x/es/bubble/BubbleList';
 import type { Conversation } from '@ant-design/x/es/conversations';
 import { Button, GetProp, GetRef, Image, Popover, Space, Spin, message } from 'antd';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
 import React, { useEffect, useRef, useState } from 'react';
+
+type BubbleDataType = {
+  role: string;
+  content: string;
+};
 
 const MOCK_SESSION_LIST = [
   {
@@ -169,12 +173,18 @@ const Copilot = (props: CopilotProps) => {
 
   const [inputValue, setInputValue] = useState('');
 
+  /**
+   * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
+   */
+
   // ==================== Runtime ====================
+
   const [agent] = useXAgent<BubbleDataType>({
-    baseURL: 'https://api.siliconflow.cn/v1/chat/completions',
-    model: 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B',
-    dangerouslyApiKey: 'Bearer sk-ravoadhrquyrkvaqsgyeufqdgphwxfheifujmaoscudjgldr',
+    baseURL: 'https://api.x.ant.design/api/llm_siliconflow_deepSeek-r1-distill-1wen-7b',
+    model: 'DeepSeek-R1-Distill-Qwen-7B',
+    dangerouslyApiKey: 'Bearer sk-xxxxxxxxxxxxxxxxxxxx',
   });
+
   const loading = agent.isRequesting();
 
   const { messages, onRequest, setMessages } = useXChat({
@@ -193,19 +203,34 @@ const Copilot = (props: CopilotProps) => {
     },
     transformMessage: (info) => {
       const { originMessage, chunk } = info || {};
-      let currentText = '';
+      let currentContent = '';
+      let currentThink = '';
       try {
         if (chunk?.data && !chunk?.data.includes('DONE')) {
           const message = JSON.parse(chunk?.data);
-          currentText = !message?.choices?.[0].delta?.reasoning_content
-            ? ''
-            : message?.choices?.[0].delta?.reasoning_content;
+          currentThink = message?.choices?.[0]?.delta?.reasoning_content || '';
+          currentContent = message?.choices?.[0]?.delta?.content || '';
         }
       } catch (error) {
         console.error(error);
       }
+
+      let content = '';
+
+      if (!originMessage?.content && currentThink) {
+        content = `<think>${currentThink}`;
+      } else if (
+        originMessage?.content?.includes('<think>') &&
+        !originMessage?.content.includes('</think>') &&
+        currentContent
+      ) {
+        content = `${originMessage?.content}</think>${currentContent}`;
+      } else {
+        content = `${originMessage?.content || ''}${currentThink}${currentContent}`;
+      }
+
       return {
-        content: (originMessage?.content || '') + currentText,
+        content: content,
         role: 'assistant',
       };
     },
@@ -245,6 +270,13 @@ const Copilot = (props: CopilotProps) => {
           type="text"
           icon={<PlusOutlined />}
           onClick={() => {
+            if (agent.isRequesting()) {
+              message.error(
+                'Message is Requesting, you can create a new conversation after request done or abort it right now...',
+              );
+              return;
+            }
+
             if (messages?.length) {
               const timeNow = dayjs().valueOf().toString();
               abortController.current?.abort();
@@ -349,7 +381,7 @@ const Copilot = (props: CopilotProps) => {
             items={MOCK_QUESTIONS.map((i) => ({ key: i, description: i }))}
             onItemClick={(info) => handleUserSubmit(info?.data?.description as string)}
             style={{
-             marginInline: 16
+              marginInline: 16,
             }}
             styles={{
               title: { fontSize: 14 },
@@ -376,10 +408,10 @@ const Copilot = (props: CopilotProps) => {
           type === 'drop'
             ? { title: 'Drop file here' }
             : {
-              icon: <CloudUploadOutlined />,
-              title: 'Upload files',
-              description: 'Click or drag files to this area to upload',
-            }
+                icon: <CloudUploadOutlined />,
+                title: 'Upload files',
+                description: 'Click or drag files to this area to upload',
+              }
         }
       />
     </Sender.Header>

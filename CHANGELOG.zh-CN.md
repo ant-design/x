@@ -15,6 +15,46 @@ tag: vVERSION
 
 ---
 
+## 1.6.0
+
+`2025-07-30`
+
+- 🆕 Attachments 组件 `FileCard` 新增图标和类型的配置能力。[#1006](https://github.com/ant-design/x/pull/1006) 由 [@kieranwv](https://github.com/kieranwv) 提交。
+- 📖 新增百宝箱智能体接入文档和样板间。[#1063](https://github.com/ant-design/x/pull/1063)由 [iamkun-2](https://github.com/iamkun-2) 提交。
+- 📖 优化官网站点提升用户体验。[#1054](https://github.com/ant-design/x/pull/1054) 由 [@hylin](https://github.com/hylin) 提交、[#1056](https://github.com/ant-design/x/pull/1056) 由 [@hylin](https://github.com/hylin) 提交。
+
+## 1.5.0
+
+`2025-07-16`
+
+- 🆕 补充 Bubble 组件对滚动事件`onScroll`的监听。[#1021](https://github.com/ant-design/x/pull/1021) 由 [@QdabuliuQ](https://github.com/QdabuliuQ) 提交。
+- 🐛 移除 Bubble 重复的 TS 类型定义。 [#1032](https://github.com/ant-design/x/pull/1032) 由 [@wzc520pyfm](https://github.com/wzc520pyfm) 提交。
+- 🐛 修复 Conversations 组件点击禁用的 `menu` 导致触发 `onActiveChange` 的问题。[#1024](https://github.com/ant-design/x/pull/1024) 由 [@QdabuliuQ](https://github.com/QdabuliuQ) 提交。
+- 🐛 修复 Attachments 组件 `FileList` 语义化配置。[#1017](https://github.com/ant-design/x/pull/1017) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🐛 补充 Actions 组件 html配置。[#995](https://github.com/ant-design/x/pull/995) 由 [@vanndxh](https://github.com/vanndxh) 提交。
+- 🐛 修复 Conversations label标签展示问题，同时补充语义化配置。[#898](https://github.com/ant-design/x/pull/898) 由 [@yuanliu147](https://github.com/yuanliu147) 提交。
+- 📖 优化官网站点提升用户体验。[#940](https://github.com/ant-design/x/pull/940) 由 [@coding-ice](https://github.com/coding-ice) 提交、[#969](https://github.com/ant-design/x/pull/969) 由 [@afc163](https://github.com/afc163) 提交、[#968](https://github.com/ant-design/x/pull/968) 由 [@afc163](https://github.com/afc163) 提交、[#1019](https://github.com/ant-design/x/pull/1019) 由 [@hylin](https://github.com/hylin) 提交、[#1036](https://github.com/ant-design/x/pull/1036) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+
+## 1.4.0
+
+`2025-05-30`
+
+- 🔥 新组件 操作列表 - Actions。[#768](https://github.com/ant-design/x/pull/768) 由 [vanndxh](https://github.com/vanndxh) 提交
+- 🐛 修复 Bubble.List `footer`和`header`无法获取key的问题。[#876](https://github.com/ant-design/x/pull/876) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 🐛 修复 Conversations 列表标题溢出截断失效问题。[#877](https://github.com/ant-design/x/pull/877) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 📖 优化官网站点提升用户体验。[#816](https://github.com/ant-design/x/pull/816) 由 [@Rain120](https://github.com/Rain120) 提交、[#880](https://github.com/ant-design/x/pull/880) 由 [@kimteayon](https://github.com/kimteayon) 提交
+
+## 1.3.0
+
+`2025-05-21`
+
+- 📖 新增 Conversation 类型导出。 [#258](https://github.com/ant-design/x/pull/258) 由 [@ONLY-yours](https://github.com/ONLY-yours) 提交
+- 💄 修复 Prompts 滚动条始终显示问题。 [#785](https://github.com/ant-design/x/pull/785) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- 🐛 修复 Suggestion 警告使用 antd 废弃 API `onDropdownVisibleChange` 的问题。 [#827](https://github.com/ant-design/x/pull/827) 由 [@zombieJ](https://github.com/zombieJ) 提交
+- 🆕 扩展Bubble`content`到`footer`和`header`的方法实现参数，同时补充Demo实现。[#683](https://github.com/ant-design/x/pull/683) 由 [@L-Hknu](https://github.com/L-Hknu) 和 [@kimteayon](https://github.com/kimteayon) 提交
+- 📖 修复Api Key在站点露出的安全问题。[#840](https://github.com/ant-design/x/pull/840) 由 [@kimteayon](https://github.com/kimteayon)提交
+- 📖 优化官网站点提升用户体验。[#783](https://github.com/ant-design/x/pull/783) 由 [@kimteayon](https://github.com/kimteayon) 提交、[#229](https://github.com/ant-design/x/pull/229) 由 [@afc163](https://github.com/afc163) 提交、[#835](https://github.com/ant-design/x/pull/835) 由 [@kimteayon](https://github.com/kimteayon) 、[#814](https://github.com/ant-design/x/pull/814) 由 [@wzc520pyfm](https://github.com/wzc520pyfm) 提交
+
 ## 1.2.0
 
 `2025-04-25`
