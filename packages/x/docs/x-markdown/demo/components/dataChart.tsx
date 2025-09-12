@@ -9,7 +9,7 @@ const text = `
 
 Here’s a visualization of Haidilao's food delivery revenue from 2013 to 2022. You can see a steady increase over the years, with notable *growth* particularly in recent years.
 
-<line axisXTitle="year" axisYTitle="sale">[{"time":2013,"value":59.3},{"time":2014,"value":64.4},{"time":2015,"value":68.9},{"time":2016,"value":74.4},{"time":2017,"value":82.7},{"time":2018,"value":91.9},{"time":2019,"value":99.1},{"time":2020,"value":101.6},{"time":2021,"value":114.4},{"time":2022,"value":121}]</line>
+<custom-line axisXTitle="year" axisYTitle="sale">[{"time":2013,"value":59.3},{"time":2014,"value":64.4},{"time":2015,"value":68.9},{"time":2016,"value":74.4},{"time":2017,"value":82.7},{"time":2018,"value":91.9},{"time":2019,"value":99.1},{"time":2020,"value":101.6},{"time":2021,"value":114.4},{"time":2022,"value":121}]</custom-line>
 `;
 
 const LineCompt = (props: Record<string, any>) => {
@@ -57,7 +57,8 @@ const App = () => {
         content={text.slice(0, index)}
         contentRender={(content) => (
           <XMarkdown
-            components={{ line: LineCompt }}
+            style={{ whiteSpace: 'normal' }}
+            components={{ 'custom-line': LineCompt }}
             paragraphTag="div"
             streaming={{ hasNextChunk }}
           >

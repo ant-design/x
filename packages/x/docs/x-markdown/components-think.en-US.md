@@ -1,6 +1,6 @@
 ---
 group:
-  title: Custom Components
+  title: Components
   order: 2
 title: Think
 order: 1

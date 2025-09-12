@@ -1,7 +1,7 @@
 import { Bubble } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
-import { Line, LineProps } from '@antv/gpt-vis';
-import { Button, Flex } from 'antd';
+import { Line } from '@antv/gpt-vis';
+import { Button, Flex, Skeleton } from 'antd';
 /* eslint-disable react/no-danger */
 import React from 'react';
 
@@ -10,12 +10,16 @@ const text = `
 
 Here’s a visualization of Haidilao's food delivery revenue from 2013 to 2022. You can see a steady increase over the years, with notable *growth* particularly in recent years.
 
-<line axisXTitle="year" axisYTitle="sale" data='[{"time":2013,"value":59.3},{"time":2014,"value":64.4},{"time":2015,"value":68.9},{"time":2016,"value":74.4},{"time":2017,"value":82.7},{"time":2018,"value":91.9},{"time":2019,"value":99.1},{"time":2020,"value":101.6},{"time":2021,"value":114.4},{"time":2022,"value":121}]' />
+<custom-line axisXTitle="year" axisYTitle="sale">[{"time":2013,"value":59.3},{"time":2014,"value":64.4},{"time":2015,"value":68.9},{"time":2016,"value":74.4},{"time":2017,"value":82.7},{"time":2018,"value":91.9},{"time":2019,"value":99.1},{"time":2020,"value":101.6},{"time":2021,"value":114.4},{"time":2022,"value":121}]</custom-line>
 `;
 
-const LineCompt = (props: LineProps) => {
-  const { data, axisXTitle, axisYTitle } = props;
-  return <Line data={JSON.parse(data || '')} axisXTitle={axisXTitle} axisYTitle={axisYTitle} />;
+const LineCompt = (props: Record<string, any>) => {
+  const { children, axisXTitle, axisYTitle, streamStatus } = props;
+
+  if (streamStatus === 'loading') {
+    return <Skeleton.Image active={true} style={{ width: 901, height: 408 }} />;
+  }
+  return <Line data={JSON.parse(children)} axisXTitle={axisXTitle} axisYTitle={axisYTitle} />;
 };
 
 const App = () => {
@@ -53,7 +57,7 @@ const App = () => {
       <Bubble
         content={text.slice(0, index)}
         contentRender={(content) => (
-          <XMarkdown components={{ line: LineCompt }} streaming={{ hasNextChunk }}>
+          <XMarkdown components={{ 'custom-line': LineCompt }} streaming={{ hasNextChunk }}>
             {content}
           </XMarkdown>
         )}

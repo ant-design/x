@@ -44,18 +44,13 @@ demo:
 <!-- prettier-ignore -->
 | 属性 | 说明 | 类型 | 默认值 | 版本 | 
 |------|------|------|--------|------| 
-| prefixCls | 自定义类名前缀 | string | - | - | 
-| rootStyle | 根节点样式 | React.CSSProperties | - | - | 
-| styles | 语义化结构 style | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - |  |
-| rootClassName | 根节点类名 | string | - | - | 
-| classNames | 语义化结构 class | [Record<SemanticDOM, string>](#semantic-dom) | - |  |
 | placement | 气泡位置 | `start` \| `end` | `start` | - | 
 | loading | 加载状态 | boolean | - | - | 
 | loadingRender | 自定义加载内容渲染 | () => React.ReactNode | - | - | 
 | content | 气泡内容 | [ContentType](#contenttype) | - | - | 
-| contentRender | 自定义内容渲染 | (content: ContentType) => React.ReactNode | - | - | 
+| contentRender | 自定义内容渲染 | (content: ContentType, info: InfoType ) => React.ReactNode | - | - | 
 | editable | 是否可编辑 | boolean \| [EditableBubbleOption](#editablebubbleoption) | `false` | - | 
-| typing | 打字动画效果 | boolean \| [BubbleAnimationOption](#bubbleanimationoption) | `false` | - | 
+| typing | 打字动画效果 |  boolean \| [BubbleAnimationOption](#bubbleanimationoption) \| ((content: ContentType, info: InfoType) => boolean \| [BubbleAnimationOption](#bubbleanimationoption)) | `false` | - | 
 | streaming | 是否为流式传输 | boolean | `false` | - | 
 | variant | 气泡样式变体 | `filled` \| `outlined` \| `shadow` \| `borderless` | `filled` | - | 
 | shape | 气泡形状 | `default` \| `round` \| `corner` | `default` | - | 
@@ -94,10 +89,7 @@ demo:
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| prefixCls | 自定义类名前缀 | string | - | - |
-| rootClassName | 根节点类名 | string | - | - |
-| rootStyle | 根节点样式 | React.CSSProperties | - | - |
-| items | 气泡数据列表，`key`，`role` 必填 | (BubbleProps & { key: string \| number, role: string })[] | - | - |
+| items | 气泡数据列表，`key`，`role` 必填 ，当结合X SDK `useXChat`使用时可传入`status` 帮助 Bubble 对配置进行管理 | (BubbleProps & { key: string \| number, role: string , status: MessageStatus})[] | - | - |
 | autoScroll | 是否自动滚动 | boolean | `true` | - |
 | role | 角色默认配置 | [RoleType](#roletype) | - | - |
 
@@ -122,7 +114,23 @@ type CustomContentType {
 #### BubbleSlot
 
 ```typescript
-type BubbleSlot<ContentType> = React.ReactNode | ((content: ContentType) => React.ReactNode);
+type BubbleSlot<ContentType> =
+  | React.ReactNode
+  | ((content: ContentType, info: InfoType) => React.ReactNode);
+```
+
+#### MessageStatus
+
+```typescript
+type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error' | 'abort';
+```
+
+#### InfoType
+
+```typescript
+type InfoType = {
+  status: MessageStatus;
+};
 ```
 
 #### EditableBubbleOption

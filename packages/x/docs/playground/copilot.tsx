@@ -13,7 +13,7 @@ import {
   ReloadOutlined,
   ScheduleOutlined,
 } from '@ant-design/icons';
-import type { ConversationItemType } from '@ant-design/x';
+import type { BubbleListProps, ConversationItemType } from '@ant-design/x';
 import {
   Attachments,
   type AttachmentsProps,
@@ -35,7 +35,7 @@ import {
   XModelResponse,
   XRequest,
 } from '@ant-design/x-sdk';
-import { Button, GetProp, GetRef, Image, message, Popover, Space, Spin } from 'antd';
+import { Button, GetProp, GetRef, Image, message, Popover, Space } from 'antd';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
 import React, { useRef, useState } from 'react';
@@ -55,7 +55,6 @@ const zhCN = {
   'Check some knowledge': '查看知识',
   'About React': '关于 React',
   'About Ant Design': '关于 Ant Design',
-  'Generating content, please wait...': '正在生成内容，请稍候...',
   'Message is Requesting, you can create a new conversation after request done or abort it right now...':
     '消息正在请求中，您可以在请求完成后创建新对话或立即中止...',
   'It is now a new conversation.': '当前已经是新会话',
@@ -75,6 +74,7 @@ const zhCN = {
   'I can help:': '我可以帮助：',
   'Deep thinking': '深度思考中',
   'Complete thinking': '深度思考完成',
+  noData: '暂无数据',
 };
 
 const enUS = {
@@ -92,7 +92,7 @@ const enUS = {
   'Check some knowledge': 'Check some knowledge',
   'About React': 'About React',
   'About Ant Design': 'About Ant Design',
-  'Generating content, please wait...': 'Generating content, please wait...',
+
   'Message is Requesting, you can create a new conversation after request done or abort it right now...':
     'Message is Requesting, you can create a new conversation after request done or abort it right now...',
   'It is now a new conversation.': 'It is now a new conversation.',
@@ -112,6 +112,7 @@ const enUS = {
   'I can help:': 'I can help:',
   'Deep thinking': 'Deep Thinking',
   'Complete thinking': 'Complete Thinking',
+  noData: 'No Data',
 };
 
 const isZhCN = window.parent?.location?.pathname?.includes('-cn');
@@ -162,7 +163,6 @@ const MOCK_QUESTIONS = [
   t['What components are in Ant Design X?'],
   t['How to quickly install and import components?'],
 ];
-const AGENT_PLACEHOLDER = t['Generating content, please wait...'];
 
 const useCopilotStyle = createStyles(({ token, css }) => {
   return {
@@ -232,16 +232,16 @@ const useCopilotStyle = createStyles(({ token, css }) => {
   };
 });
 
-const ThinkComponent = React.memo((props: { children: string; status: string }) => {
+const ThinkComponent = React.memo((props: { children: string; streamStatus: string }) => {
   const [title, setTitle] = React.useState(t['Deep thinking'] + '...');
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    if (props.status === 'done') {
+    if (props.streamStatus === 'done') {
       setTitle(t['Complete thinking']);
       setLoading(false);
     }
-  }, [props.status]);
+  }, [props.streamStatus]);
 
   return (
     <Think title={title} loading={loading}>
@@ -280,6 +280,34 @@ interface CopilotProps {
   setCopilotOpen: (open: boolean) => void;
 }
 
+const role: BubbleListProps['role'] = {
+  assistant: {
+    placement: 'start',
+    components: {
+      footer: (
+        <div style={{ display: 'flex' }}>
+          <Button type="text" size="small" icon={<ReloadOutlined />} />
+          <Button type="text" size="small" icon={<CopyOutlined />} />
+          <Button type="text" size="small" icon={<LikeOutlined />} />
+          <Button type="text" size="small" icon={<DislikeOutlined />} />
+        </div>
+      ),
+    },
+    contentRender(content: any) {
+      const newContent = content.replaceAll('\n\n', '<br/><br/>');
+      return (
+        <XMarkdown
+          content={newContent}
+          components={{
+            think: ThinkComponent,
+          }}
+        />
+      );
+    },
+  },
+  user: { placement: 'end' },
+};
+
 const Copilot = (props: CopilotProps) => {
   const { copilotOpen, setCopilotOpen } = props;
   const { styles } = useCopilotStyle();
@@ -300,20 +328,18 @@ const Copilot = (props: CopilotProps) => {
 
   // ==================== Runtime ====================
 
-  const { onRequest, messages, requesting, abort } = useXChat({
+  const { onRequest, messages, isRequesting, abort } = useXChat({
     provider: providerFactory(curConversation), // every conversation has its own provider
     conversationKey: curConversation,
-    requestFallback: (_, { error }) => {
-      if (error.name === 'AbortError') {
-        return {
-          content: t['Request is aborted'],
-          role: 'assistant',
-        };
-      }
+    requestPlaceholder: () => {
       return {
-        content: t['Request failed, please try again!'],
+        content: t.noData,
         role: 'assistant',
       };
+    },
+    requestFallback: (message, info) => {
+      console.log(message, info);
+      return message;
     },
   });
 
@@ -394,47 +420,10 @@ const Copilot = (props: CopilotProps) => {
           items={messages?.map((i) => ({
             ...i.message,
             key: i.id,
-            classNames: {
-              content: i.status === 'loading' ? styles.loadingMessage : '',
-            },
-            typing:
-              i.status === 'loading'
-                ? { effect: 'typing', step: 5, interval: 20, suffix: <>💗</> }
-                : false,
+            status: i.status,
+            loading: i.status === 'loading',
           }))}
-          role={{
-            assistant: {
-              placement: 'start',
-              components: {
-                footer: (
-                  <div style={{ display: 'flex' }}>
-                    <Button type="text" size="small" icon={<ReloadOutlined />} />
-                    <Button type="text" size="small" icon={<CopyOutlined />} />
-                    <Button type="text" size="small" icon={<LikeOutlined />} />
-                    <Button type="text" size="small" icon={<DislikeOutlined />} />
-                  </div>
-                ),
-              },
-              loadingRender: () => (
-                <Space>
-                  <Spin size="small" />
-                  {AGENT_PLACEHOLDER}
-                </Space>
-              ),
-              contentRender(content: any) {
-                const newContent = content.replaceAll('\n\n', '<br/><br/>');
-                return (
-                  <XMarkdown
-                    content={newContent}
-                    components={{
-                      think: ThinkComponent,
-                    }}
-                  />
-                );
-              },
-            },
-            user: { placement: 'end' },
-          }}
+          role={role}
         />
       ) : (
         /** 没有消息时的 welcome */
@@ -513,7 +502,7 @@ const Copilot = (props: CopilotProps) => {
       <Suggestion items={MOCK_SUGGESTIONS} onSelect={(itemVal) => setInputValue(`[${itemVal}]:`)}>
         {({ onTrigger, onKeyDown }) => (
           <Sender
-            loading={requesting}
+            loading={isRequesting}
             value={inputValue}
             onChange={(v) => {
               onTrigger(v === '/');

@@ -1,16 +1,19 @@
 .x-markdown-dark {
-  --primary-color: #e0e0e0;
+  --primary-color: #1677ff;
+  --primary-color-hover: #4096ff;
   --heading-color: #ffffff;
-  --text-color: rgba(255, 255, 255, 0.8);
-  --border-color: rgba(255, 255, 255, 0.2);
-  --dark-bg: rgba(255, 255, 255, 0.12);
-  --table-head-bg: rgba(255, 255, 255, 0.05);
-  --table-body-bg: rgba(255, 255, 255, 0.02);
+  --text-color: rgba(255, 255, 255, 0.85);
+  --border-color: rgba(48, 48, 48, 1);
+  --line-color: rgba(253, 253, 253, 0.12);
+  --dark-bg: rgba(255, 255, 255, 0.1);
+  --table-head-bg: rgba(29, 29, 29, 1);
+  --table-body-bg: rgba(20, 20, 20, 1);
   --cite-bg: rgba(255, 255, 255, 0.1);
   --cite-hover-bg: rgba(255, 255, 255, 0.2);
-
+  --border-radius-middle: 6px;
+  --border-radius-small: 4px;
   width: 100%;
-  color: var(--primary-color);
+  color: var(--text-color);
   word-wrap: break-word;
   user-select: text;
 }
@@ -103,10 +106,8 @@
 
 .x-markdown-dark hr {
   border: 0;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid var(--line-color);
   margin: 24px 0;
-  height: 1px;
-  background-color: var(--border-color);
 }
 
 .x-markdown-dark table {
@@ -125,19 +126,28 @@
   background-color: var(--table-body-bg);
 }
 
+.x-markdown-dark tbody tr {
+  background-color: var(--table-body-bg);
+  transition: background-color 200ms linear;
+
+  &:hover {
+    background-color: var(--table-head-bg);
+  }
+}
+
 .x-markdown-dark th,
 .x-markdown-dark td {
   padding: 10px 12px;
-  border: 1px solid #303030;
+  border: 1px solid var(--border-color);
 }
 
 .x-markdown-dark th {
-  color: var(--heading-color);
+  color: var(--heading-color) !important;
   font-weight: 600;
 }
 
 .x-markdown-dark td {
-  color: var(--text-color);
+  color: var(--text-color) !important;
 }
 
 .x-markdown-dark blockquote {
@@ -145,7 +155,7 @@
   padding: 0.5rem 1rem;
   margin: 1.25rem 0;
   background-color: var(--cite-bg);
-  border-radius: 0 8px 8px 0;
+  border-radius: 0 var(--border-radius-middle) var(--border-radius-middle) 0;
   transition: background-color 0.2s ease;
 }
 
@@ -157,35 +167,35 @@
   display: block;
   background: var(--dark-bg) !important;
   padding: 16px;
-  color: var(--text-color);
+  color: var(--text-color) !important;
   line-height: 24px;
-  border-radius: 8px;
+  border-radius: var(--border-radius-middle);
   margin-bottom: 16px;
 }
 
 .x-markdown-dark code:not(pre code) {
   background-color: var(--dark-bg) !important;
-  border-radius: 4px;
-  padding: 2px 4px;
-  color: var(--text-color);
-  font-size: 16px;
+  color: var(--text-color) !important;
+  border-radius: var(--border-radius-small);
+  padding: 4px 8px;
+  font-size: 14px;
+  border: 1px solid var(--border-color);
 }
 
 .x-markdown-dark img {
   max-width: 30%;
   height: auto;
-  border-radius: 6px;
 }
 
 .x-markdown-dark a {
-  color: #2563eb;
+  color: var(--primary-color);
   text-decoration: none;
   transition: color 0.2s ease;
   position: relative;
 }
 
 .x-markdown-dark a:hover {
-  color: #1d4ed8;
+  color: var(--primary-color-hover);
   text-decoration: underline;
 }
 

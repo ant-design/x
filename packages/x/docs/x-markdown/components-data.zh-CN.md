@@ -1,6 +1,6 @@
 ---
 group:
-  title: 自定义组件
+  title: 组件
   order: 2
 title: DataChart
 subtitle: 数据图表

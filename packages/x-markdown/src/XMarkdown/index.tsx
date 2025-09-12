@@ -4,6 +4,7 @@ import useXProviderContext from '../hooks/use-x-provider-context';
 import { Parser, Renderer } from './core';
 import { useAnimation, useStreaming } from './hooks';
 import { XMarkdownProps } from './interface';
+import './index.less';
 
 const XMarkdown: React.FC<XMarkdownProps> = (props) => {
   const {
@@ -17,6 +18,7 @@ const XMarkdown: React.FC<XMarkdownProps> = (props) => {
     prefixCls: customizePrefixCls,
     className,
     style,
+    openLinksInNewTab,
   } = props;
 
   // ============================ style ============================
@@ -25,7 +27,7 @@ const XMarkdown: React.FC<XMarkdownProps> = (props) => {
 
   const prefixCls = getPrefixCls('x-markdown', customizePrefixCls);
 
-  const mergedCls = classnames(prefixCls, rootClassName, className);
+  const mergedCls = classnames(prefixCls, 'x-markdown', rootClassName, className);
 
   const mergedStyle: React.CSSProperties = {
     direction: contextDirection === 'rtl' ? 'rtl' : 'ltr',
@@ -41,10 +43,16 @@ const XMarkdown: React.FC<XMarkdownProps> = (props) => {
   // ============================ Render ============================
   if (!displayContent) return null;
 
-  const parser = new Parser({ markedConfig: config, paragraphTag });
+  const parser = new Parser({
+    markedConfig: config,
+    paragraphTag,
+    openLinksInNewTab,
+  });
 
   const renderComponents = { ...animationComponents, ...(components || {}) };
-  const renderer = new Renderer({ components: renderComponents });
+  const renderer = new Renderer({
+    components: renderComponents,
+  });
 
   const htmlString = parser.parse(displayContent);
   return (

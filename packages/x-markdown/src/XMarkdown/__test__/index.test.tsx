@@ -147,13 +147,13 @@ describe('XMarkdown', () => {
   });
 
   it(`render custom components`, () => {
-    const markdown = `custom component <Line>This is Line</Line>`;
+    const markdown = `custom component <custom-component>This is Line</custom-component>`;
     const html = `<p>custom component <span>change Line to span</span></p>\n`;
     const { container } = render(
       <XMarkdown
         content={markdown}
         components={{
-          line: () => {
+          'custom-component': () => {
             return <span>change Line to span</span>;
           },
         }}
@@ -188,12 +188,7 @@ describe('XMarkdown', () => {
   });
 
   it('should render paragraphs with custom tag when paragraphTag is provided', () => {
-    const { container } = render(
-      <XMarkdown 
-        content="This is a paragraph." 
-        paragraphTag="div"
-      />
-    );
+    const { container } = render(<XMarkdown content="This is a paragraph." paragraphTag="div" />);
 
     // XMarkdown wraps content in a div with class "ant-x-markdown"
     const wrapper = container.firstChild as HTMLElement;

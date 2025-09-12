@@ -29,7 +29,7 @@ describe('useXChat', () => {
     Input = ChatInput,
     Output = string,
   >({ provider, ...config }: XChatConfig<ChatMessage, ParsedMessage, Input, Output>, ref: any) {
-    const { messages, parsedMessages, onRequest, onReload, requesting, abort } = useXChat({
+    const { messages, parsedMessages, onRequest, onReload, isRequesting, abort } = useXChat({
       provider,
       ...config,
     });
@@ -39,7 +39,7 @@ describe('useXChat', () => {
       parsedMessages,
       onRequest,
       onReload,
-      requesting,
+      isRequesting,
       abort,
     }));
 
@@ -248,7 +248,7 @@ describe('useXChat', () => {
     expect(result.current?.messages[0].message).toEqual('Hello2');
   });
 
-  it('should reload, requesting work successfully', async () => {
+  it('should reload, isRequesting work successfully', async () => {
     let count = 0;
     const provider = new DefaultChatProvider<ChatInput, any, any>({
       request: XRequest('http://localhost:8000/', {
@@ -275,9 +275,9 @@ describe('useXChat', () => {
     );
 
     fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
-    expect(ref.current?.requesting).toBe(true);
+    expect(ref.current?.isRequesting).toBe(true);
     await sleep(200);
-    expect(ref.current?.requesting).toBe(false);
+    expect(ref.current?.isRequesting).toBe(false);
     expect(getMessages(container)).toEqual([
       expectMessage({ query: 'little' }, 'local'),
       expectMessage({ content: 'bamboo' }, 'success'),

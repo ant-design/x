@@ -1,4 +1,3 @@
-import { UserOutlined } from '@ant-design/icons';
 import type { BubbleListProps } from '@ant-design/x';
 import { Bubble, Sender } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
@@ -6,10 +5,6 @@ import Mermaid from '@ant-design/x-markdown/plugins/Mermaid';
 import { DefaultChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';
 import React, { useMemo } from 'react';
 import { mockFetch } from '../../_utils';
-
-interface ChatInput {
-  query: string;
-}
 
 const fullContent = `
 Here are several Mermaid diagram examples
@@ -65,17 +60,16 @@ quadrantChart
 const roles: BubbleListProps['role'] = {
   ai: {
     placement: 'start',
-    components: {
-      avatar: <UserOutlined />,
-    },
   },
   local: {
     placement: 'end',
-    components: {
-      avatar: <UserOutlined />,
-    },
   },
 };
+
+interface MessageType {
+  role: 'ai' | 'user';
+  content: string;
+}
 
 const Code = (props: { className: string; children: string }) => {
   const { className, children } = props;
@@ -91,11 +85,11 @@ const App = () => {
   let chunks = '';
   const provider = useMemo(
     () =>
-      new DefaultChatProvider<string, ChatInput, string>({
+      new DefaultChatProvider<MessageType, MessageType, MessageType>({
         request: XRequest('https://api.example.com/chat', {
           manual: true,
           fetch: () => mockFetch(fullContent),
-          transformStream: new TransformStream<string, string>({
+          transformStream: new TransformStream<string, MessageType>({
             transform(chunk, controller) {
               chunks = `${chunks}${chunk}`.replace(
                 /<think.*?>([\s\S]*?)<\/think>/gi,
@@ -108,7 +102,10 @@ const App = () => {
                   }
                 },
               );
-              controller.enqueue(chunks);
+              controller.enqueue({
+                content: chunks,
+                role: 'ai',
+              });
             },
           }),
         }),
@@ -116,10 +113,8 @@ const App = () => {
     [content],
   );
 
-  const { onRequest, messages, requesting } = useXChat({
+  const { onRequest, messages, isRequesting } = useXChat({
     provider: provider,
-    requestPlaceholder: 'Waiting...',
-    requestFallback: 'Mock failed return. Please try again later.',
   });
 
   return (
@@ -152,13 +147,14 @@ const App = () => {
         }))}
       />
       <Sender
-        loading={requesting}
+        loading={isRequesting}
         value={content}
         onChange={setContent}
         style={{ marginTop: 48 }}
         onSubmit={(nextContent) => {
           onRequest({
-            query: nextContent,
+            content: nextContent,
+            role: 'user',
           });
           setContent('');
         }}

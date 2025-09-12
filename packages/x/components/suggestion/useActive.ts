@@ -1,6 +1,6 @@
 import { useEvent } from 'rc-util';
-import type { SuggestionItem } from '.';
 import React from 'react';
+import type { SuggestionItem } from '.';
 
 /**
  * Since Cascader not support ref active, we use `value` to mock the active item.
@@ -117,10 +117,11 @@ export default function useActive(
   });
 
   React.useEffect(() => {
-    if (open) {
+    // 确保 items 是一个数组且至少有一个元素
+    if (open && Array.isArray(items) && items.length > 0) {
       setActivePaths([items[0].value]);
     }
-  }, [open]);
+  }, [open, items]);
 
   return [activePaths, onKeyDown] as const;
 }

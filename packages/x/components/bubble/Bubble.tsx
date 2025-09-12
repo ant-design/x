@@ -28,6 +28,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
     classNames = {},
     placement = 'start',
     content,
+    status,
     contentRender,
     editable = false,
     typing,
@@ -71,7 +72,6 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
     ...rootStyle,
     ...style,
   };
-
   const rootMergedCls = classnames(
     prefixCls,
     contextConfig.className,
@@ -83,6 +83,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
     cssVarCls,
     `${prefixCls}-${placement}`,
     {
+      [`${prefixCls}-${status}`]: status,
       [`${prefixCls}-rtl`]: direction === 'rtl',
       [`${prefixCls}-loading`]: loading,
     },
@@ -96,11 +97,13 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
 
   // ============================= process content ==============================
   const memoedContent = React.useMemo(
-    () => (contentRender ? contentRender(content) : content),
+    () => (contentRender ? contentRender(content, { status }) : content),
     [content, contentRender],
   );
 
-  const usingInnerAnimation = !!typing && typeof memoedContent === 'string';
+  const mergeTyping = typeof typing === 'function' ? typing(content, { status }) : typing;
+
+  const usingInnerAnimation = !!mergeTyping && typeof memoedContent === 'string';
 
   /**
    * 1、启用内置动画的情况下，由 TypingContent 来负责通知。
@@ -128,7 +131,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
           <TypingContent
             prefixCls={prefixCls}
             streaming={streaming}
-            typing={typing}
+            typing={mergeTyping}
             content={memoedContent as string}
             onTyping={onTyping}
             onTypingComplete={onTypingComplete}
@@ -137,9 +140,9 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
           memoedContent
         )}
         {!usingInnerAnimation &&
-        (typing as BubbleAnimationOption)?.effect === 'typing' &&
-        (typing as BubbleAnimationOption)?.suffix
-          ? (typing as BubbleAnimationOption).suffix
+        (mergeTyping as BubbleAnimationOption)?.effect === 'typing' &&
+        (mergeTyping as BubbleAnimationOption)?.suffix
+          ? (mergeTyping as BubbleAnimationOption).suffix
           : null}
       </>
     );
@@ -158,6 +161,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
             contextConfig.classNames.content,
             classNames.content,
             {
+              [`${prefixCls}-content-${status}`]: status,
               [`${prefixCls}-content-${shape}`]: variant !== 'borderless',
               [`${prefixCls}-content-editing`]: isEditing,
               [`${prefixCls}-content-string`]: typeof memoedContent === 'string',
@@ -202,7 +206,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
   });
 
   const renderSlot = (slot: BubbleSlot<typeof content>) =>
-    typeof slot === 'function' ? slot(content) : slot;
+    typeof slot === 'function' ? slot(content, { status }) : slot;
 
   const renderAvatar = () => {
     if (!components?.avatar) return null;

@@ -9,7 +9,7 @@ const compileModules = [
   'mermaid',
   'khroma',
   'd3',
-  'd3-'
+  'd3-',
 ];
 
 const resolve = (p) => require.resolve(`@ant-design/tools/lib/jest/${p}`);
@@ -44,7 +44,7 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'md'],
   modulePathIgnorePatterns: [],
   moduleNameMapper: {
-    '/\\.(css|less)$/': 'identity-obj-proxy',
+    '\\.(css|less)$': 'identity-obj-proxy',
     '^@ant-design/x-markdown$': '<rootDir>/components/index',
     '^@ant-design/x-markdown/es/(.*)$': '<rootDir>/components/$1',
     '^@ant-design/x-markdown/lib/(.*)$': '<rootDir>/components/$1',

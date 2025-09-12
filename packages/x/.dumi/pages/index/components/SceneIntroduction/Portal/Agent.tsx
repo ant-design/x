@@ -231,7 +231,7 @@ const Agent: React.FC<AgentProps> = ({ setIsOnAgent }) => {
     },
   };
 
-  const { onRequest, messages, requesting, abort } = useXChat({
+  const { onRequest, messages, isRequesting, abort } = useXChat({
     provider: provider, // every conversation has its own provider
     requestPlaceholder: () => {
       return {
@@ -261,7 +261,7 @@ const Agent: React.FC<AgentProps> = ({ setIsOnAgent }) => {
     }
   }, [messages]);
 
-  const items: BubbleListProps['items'] = messages?.map((i, index) => ({
+  const items: BubbleListProps['items'] = messages?.map((i) => ({
     content: {
       status: i.status,
       text: i.message.content,
@@ -296,7 +296,7 @@ const Agent: React.FC<AgentProps> = ({ setIsOnAgent }) => {
           abort={() => {
             abort?.();
           }}
-          loading={requesting}
+          loading={isRequesting}
         />
       </div>
     </div>

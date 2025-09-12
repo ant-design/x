@@ -34,6 +34,10 @@ interface XMarkdownProps {
   paragraphTag?: string;
   style?: CSSProperties;
   prefixCls?: string;
+  /**
+   * @description a 标签是否增加 target="_blank"
+   */
+  openLinksInNewTab?: boolean;
 }
 
 export type { XMarkdownProps, Token, Tokens, streamStatus };

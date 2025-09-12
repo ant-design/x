@@ -1,4 +1,3 @@
-import { UserOutlined } from '@ant-design/icons';
 import type { BubbleListProps } from '@ant-design/x';
 import { Bubble, Sender } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
@@ -6,10 +5,6 @@ import Latex from '@ant-design/x-markdown/plugins/Latex';
 import { DefaultChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';
 import React, { useMemo } from 'react';
 import { mockFetch } from '../../_utils';
-
-interface ChatInput {
-  query: string;
-}
 
 const fullContent = `
 ### Latex
@@ -26,18 +21,17 @@ block: \n
 \\]
 `;
 
+interface MessageType {
+  role: 'ai' | 'user';
+  content: string;
+}
+
 const roles: BubbleListProps['role'] = {
   ai: {
     placement: 'start',
-    components: {
-      avatar: <UserOutlined />,
-    },
   },
-  local: {
+  user: {
     placement: 'end',
-    components: {
-      avatar: <UserOutlined />,
-    },
   },
 };
 
@@ -47,11 +41,11 @@ const App = () => {
   let chunks = '';
   const provider = useMemo(
     () =>
-      new DefaultChatProvider<string, ChatInput, string>({
+      new DefaultChatProvider<MessageType, MessageType, MessageType>({
         request: XRequest('https://api.example.com/chat', {
           manual: true,
           fetch: () => mockFetch(fullContent),
-          transformStream: new TransformStream<string, string>({
+          transformStream: new TransformStream<string, MessageType>({
             transform(chunk, controller) {
               chunks = `${chunks}${chunk}`.replace(
                 /<think.*?>([\s\S]*?)<\/think>/gi,
@@ -64,7 +58,10 @@ const App = () => {
                   }
                 },
               );
-              controller.enqueue(chunks);
+              controller.enqueue({
+                content: chunks,
+                role: 'ai',
+              });
             },
           }),
         }),
@@ -72,10 +69,8 @@ const App = () => {
     [content],
   );
 
-  const { onRequest, messages, requesting } = useXChat({
+  const { onRequest, messages, isRequesting } = useXChat({
     provider: provider,
-    requestPlaceholder: 'Waiting...',
-    requestFallback: 'Mock failed return. Please try again later.',
   });
   return (
     <div
@@ -90,26 +85,27 @@ const App = () => {
       <Bubble.List
         role={roles}
         style={{ flex: 1 }}
-        items={messages.map(({ id, message, status }) => ({
+        items={messages.map(({ id, message }) => ({
           key: id,
-          role: status === 'local' ? 'local' : 'ai',
-          content: message,
+          role: message.role,
+          content: message.content,
           contentRender:
-            status === 'local'
-              ? (content) => content.query
+            message.role === 'user'
+              ? (content) => content
               : (content) => (
                   <XMarkdown content={content as string} config={{ extensions: Latex() }} />
                 ),
         }))}
       />
       <Sender
-        loading={requesting}
+        loading={isRequesting}
         value={content}
         onChange={setContent}
         style={{ marginTop: 48 }}
         onSubmit={(nextContent) => {
           onRequest({
-            query: nextContent,
+            content: nextContent,
+            role: 'ai',
           });
           setContent('');
         }}

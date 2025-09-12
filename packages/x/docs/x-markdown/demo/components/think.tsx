@@ -15,27 +15,25 @@ This mode of thinking helps individuals avoid cognitive biases in complex scenar
 # Hello Deep Thinking\n - Deep thinking is over.\n- You can use the think tag to package your thoughts.
 `;
 
-const ThinkComponent = React.memo(
-  (props: { streamStatus: string; children: string; status: string }) => {
-    const [title, setTitle] = React.useState('Deep thinking...');
-    const [loading, setLoading] = React.useState(true);
-    const [expand, setExpand] = React.useState(true);
+const ThinkComponent = React.memo((props: { streamStatus: string; children: string }) => {
+  const [title, setTitle] = React.useState('Deep thinking...');
+  const [loading, setLoading] = React.useState(true);
+  const [expand, setExpand] = React.useState(true);
 
-    React.useEffect(() => {
-      if (props.streamStatus === 'done') {
-        setTitle('Complete thinking');
-        setLoading(false);
-        setExpand(false);
-      }
-    }, [props.streamStatus]);
+  React.useEffect(() => {
+    if (props.streamStatus === 'done') {
+      setTitle('Complete thinking');
+      setLoading(false);
+      setExpand(false);
+    }
+  }, [props.streamStatus]);
 
-    return (
-      <Think title={title} loading={loading} expanded={expand} onClick={() => setExpand(!expand)}>
-        {props.children}
-      </Think>
-    );
-  },
-);
+  return (
+    <Think title={title} loading={loading} expanded={expand} onClick={() => setExpand(!expand)}>
+      {props.children}
+    </Think>
+  );
+});
 
 const App = () => {
   const [index, setIndex] = React.useState(0);

@@ -1,4 +1,3 @@
-import { UserOutlined } from '@ant-design/icons';
 import { Bubble, Sender } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
 import { DefaultChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';
@@ -6,11 +5,7 @@ import { Button, Row } from 'antd';
 import React, { useMemo, useState } from 'react';
 import '@ant-design/x-markdown/themes/light.css';
 import type { BubbleListProps } from '@ant-design/x';
-import { mockFetch } from '../_utils';
-
-interface ChatInput {
-  query: string;
-}
+import { mockFetch, useMarkdownTheme } from '../_utils';
 
 const fullContent = `
 乌镇是中国著名的江南水乡古镇，位于浙江省嘉兴市桐乡市，地处杭嘉湖平原，距离杭州约80公里。以下是关于乌镇的详细介绍：
@@ -56,35 +51,39 @@ const fullContent = `
 乌镇完美融合了古典水乡风情与现代文化活力，无论是追寻历史，还是享受慢生活，都是理想之选！如果想了解具体景点或行程规划，欢迎继续提问~ 🚣‍♀️
 `;
 
+interface MessageType {
+  role: 'ai' | 'user';
+  content: string;
+}
+
 const roles: BubbleListProps['role'] = {
   ai: {
     placement: 'start',
-    components: {
-      avatar: <UserOutlined />,
-    },
   },
-  local: {
+  user: {
     placement: 'end',
-    components: {
-      avatar: <UserOutlined />,
-    },
   },
 };
 
 const App = () => {
   const [enableAnimation, setEnableAnimation] = useState(true);
   const [content, setContent] = React.useState('');
+  const [className] = useMarkdownTheme();
+
   let chunks = '';
   const provider = useMemo(
     () =>
-      new DefaultChatProvider<string, ChatInput, string>({
+      new DefaultChatProvider<MessageType, MessageType, MessageType>({
         request: XRequest('https://api.example.com/chat', {
           manual: true,
           fetch: () => mockFetch(fullContent),
-          transformStream: new TransformStream<string, string>({
+          transformStream: new TransformStream<string, MessageType>({
             transform(chunk, controller) {
               chunks += chunk;
-              controller.enqueue(chunks);
+              controller.enqueue({
+                content: chunks,
+                role: 'ai',
+              });
             },
           }),
         }),
@@ -92,10 +91,8 @@ const App = () => {
     [content],
   );
 
-  const { onRequest, messages, requesting } = useXChat({
+  const { onRequest, messages, isRequesting } = useXChat({
     provider: provider,
-    requestPlaceholder: 'Waiting...',
-    requestFallback: 'Mock failed return. Please try again later.',
   });
 
   return (
@@ -123,28 +120,30 @@ const App = () => {
           role={roles}
           items={messages.map(({ id, message, status }) => ({
             key: id,
-            role: status === 'local' ? 'local' : 'ai',
-            content: message,
+            role: message.role,
+            content: message.content,
+            status,
             contentRender:
-              status === 'local'
-                ? (content) => content?.query
-                : (content) => (
+              message.role === 'user'
+                ? (content) => content
+                : (content, { status }) => (
                     <XMarkdown
-                      className="x-markdown-light"
+                      className={className}
                       content={content as string}
-                      streaming={{ hasNextChunk: requesting, enableAnimation }}
+                      streaming={{ hasNextChunk: status === 'updating', enableAnimation }}
                     />
                   ),
           }))}
         />
         <Sender
-          loading={requesting}
+          loading={isRequesting}
           value={content}
           onChange={setContent}
           style={{ marginTop: 48 }}
           onSubmit={(nextContent) => {
             onRequest({
-              query: nextContent,
+              content: nextContent,
+              role: 'user',
             });
             setContent('');
           }}

@@ -29,11 +29,11 @@ const locales = {
 const headerLocales = {
   cn: {
     header: '头部',
-    content: '内容',
+    content: '头部-内容',
   },
   en: {
     header: 'Header',
-    content: 'Content',
+    content: 'Header Content',
   },
 };
 
@@ -54,6 +54,7 @@ const App: React.FC = () => {
           { name: 'suffix', desc: locale.suffix },
           { name: 'footer', desc: locale.footer },
           { name: 'switch', desc: locale.switch },
+          { name: 'content', desc: locale.content },
         ]}
       >
         <Sender

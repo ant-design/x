@@ -4,6 +4,7 @@ import { XMarkdownProps } from '../interface';
 type ParserOptions = {
   markedConfig?: XMarkdownProps['config'];
   paragraphTag?: string;
+  openLinksInNewTab?: boolean;
 };
 
 class Parser {
@@ -11,10 +12,24 @@ class Parser {
   markdownInstance: Marked;
 
   constructor(options: ParserOptions = {}) {
-    const { markedConfig = {} } = options;
+    const { markedConfig = {}, openLinksInNewTab } = options;
     this.options = options;
     this.markdownInstance = new Marked(markedConfig);
+    this.configureRenderer(openLinksInNewTab);
     this.configureParagraph();
+  }
+
+  private configureRenderer(openLinksInNewTab?: boolean) {
+    if (!openLinksInNewTab) return;
+
+    const renderer = {
+      link(this: Renderer, { href, title, tokens }: Tokens.Link) {
+        const text = this.parser.parseInline(tokens);
+        const titleAttr = title ? ` title="${title}"` : '';
+        return `<a href="${href}"${titleAttr} target="_blank" rel="noopener noreferrer">${text}</a>`;
+      },
+    };
+    this.markdownInstance.use({ renderer });
   }
 
   public configureParagraph() {

@@ -16,6 +16,7 @@ order: 2
 <code src="./demo/codeDemo/supersets.tsx" description="使用插件渲染。" title="插件使用"></code>
 <code src="./demo/codeDemo/plugin.tsx" title="自定义拓展插件"></code>
 <code src="./demo/codeDemo/xss.tsx"  title="XSS 防御"></code>
+<code src="./demo/codeDemo/open-links-in-new-tab.tsx" description="链接在新标签页打开。" title="新标签页打开链接"></code>
 
 ## API
 
@@ -28,6 +29,7 @@ order: 2
 | paragraphTag | 自定义段落渲染的标签。避免自定义组件导致 p 标签包裹 div 报错。 | `string` | `p` |
 | streaming | 流式渲染配置 | `SteamingOption`，查看[详情](/markdowns/streaming-cn) | - |
 | config | Marked.js extension | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |
+| openLinksInNewTab | 是否在新标签页打开链接 | `boolean` | `false` |
 | className | 自定义 className | `string` | - |
 | rootClassName | 根节点自定义 className, 与 className 作用一致 | `string` | - |
 | style | 自定义样式 | `CSSProperties` | - |

@@ -8,7 +8,7 @@ type TextareaProps = GetProps<typeof import('antd').Input.TextArea>;
 
 export type SubmitType = 'enter' | 'shiftEnter' | false;
 
-type SemanticType = 'root' | 'content' | 'prefix' | 'input' | 'suffix' | 'footer' | 'switch';
+type SemanticType = 'root' | 'prefix' | 'input' | 'suffix' | 'footer' | 'switch' | 'content';
 
 export type insertPosition = 'start' | 'end' | 'cursor';
 export interface SenderComponents {

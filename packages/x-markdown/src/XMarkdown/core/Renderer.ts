@@ -1,4 +1,6 @@
+import DOMPurify from 'dompurify';
 import parseHtml, { DOMNode, domToReact, Element } from 'html-react-parser';
+import htmlTags from 'html-tags';
 import React, { ReactNode } from 'react';
 import type { XMarkdownProps } from '../interface';
 
@@ -14,7 +16,7 @@ class Renderer {
   }
 
   /**
-   * 使用正则表达式检测未闭合标签
+   * Detect unclosed tags using regular expressions
    */
   private detectUnclosedTags(htmlString: string): Set<string> {
     const unclosedTags = new Set<string>();
@@ -29,30 +31,79 @@ class Renderer {
 
       if (this.options.components?.[tagName.toLowerCase()]) {
         if (isClosing) {
-          // 找到结束标签，弹出栈
+          // Found closing tag, pop from stack
           const lastIndex = stack.lastIndexOf(tagName.toLowerCase());
           if (lastIndex !== -1) {
             stack.splice(lastIndex, 1);
           }
         } else if (!isSelfClosing) {
-          // 开始标签，压入栈
+          // Found opening tag, push to stack
           stack.push(tagName.toLowerCase());
         }
       }
       match = tagRegex.exec(htmlString);
     }
 
-    // 栈中剩下的就是未闭合的标签
+    // Remaining tags in stack are unclosed
     stack.forEach((tag) => {
       unclosedTags.add(tag);
     });
     return unclosedTags;
   }
 
+  /**
+   * Configure DOMPurify to preserve components and target attributes, filter everything else
+   */
+  private configureDOMPurify() {
+    // Get all custom component tag names
+    const customComponents = Object.keys(this.options.components || {});
+
+    // Get all standard HTML tags using html-tags
+    const standardHtmlTags = htmlTags as string[];
+
+    // Configure DOMPurify - only preserve custom components and standard HTML tags
+    const purifyConfig = {
+      // Allow custom components and standard HTML tags
+      ALLOWED_TAGS: [...standardHtmlTags, ...customComponents],
+      // Allow basic attributes and target attribute
+      ALLOWED_ATTR: [
+        'target',
+        'href',
+        'class',
+        'id',
+        'style',
+        'title',
+        'alt',
+        'src',
+        'width',
+        'height',
+        'type',
+        'disabled',
+      ],
+      // Custom component handling
+      CUSTOM_ELEMENT_HANDLING: {
+        tagNameCheck: (tagName: string) => {
+          // Allow custom components to pass through
+          return customComponents.includes(tagName.toLowerCase());
+        },
+        attributeNameCheck: () => {
+          // Allow all attributes for custom components
+          return true;
+        },
+        allowCustomizedBuiltInElements: true,
+      },
+    };
+
+    return purifyConfig;
+  }
+
   public processHtml(htmlString: string): React.ReactNode {
     const unclosedTags = this.detectUnclosedTags(htmlString);
+    // Use DOMPurify to clean HTML while preserving custom components and target attributes
+    const purifyConfig = this.configureDOMPurify();
+    const cleanHtml = DOMPurify.sanitize(htmlString, purifyConfig);
 
-    return parseHtml(htmlString, {
+    return parseHtml(cleanHtml, {
       replace: (domNode) => {
         if (!('name' in domNode)) return;
 
@@ -66,10 +117,14 @@ class Renderer {
             streamStatus,
             ...attribs,
           };
-          if (props.class) {
-            // merge className
-            props.className = props.className ? `${props.className} ${props.class}` : props.class;
-          }
+
+          // Handle class and className merging
+          const classes = [props.className, props.classname, props.class]
+            .filter(Boolean)
+            .join(' ')
+            .trim();
+          props.className = classes || '';
+
           if (children) {
             props.children = domToReact(children as DOMNode[]);
           }

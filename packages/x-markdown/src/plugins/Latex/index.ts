@@ -2,6 +2,8 @@ import katex, { type KatexOptions } from 'katex';
 import { TokenizerAndRendererExtension } from 'marked';
 import { PluginsType } from '../type';
 
+import 'katex/dist/katex.min.css';
+
 const inlineRuleNonStandard = /^(?:\${1,2}([^$\n]+?)\${1,2}|\\\((.+?)\\\))/;
 const blockRule = /^(\${1,2})\n([\s\S]+?)\n\1(?:\n|$)|^\\\[((?:\\.|[^\\])+?)\\\]/;
 
@@ -94,7 +96,7 @@ function blockKatex(renderer: Render, replaceAlignStart: boolean) {
 }
 
 const Latex: PluginsType['Latex'] = (options?: LatexOption): TokenizerAndRendererExtension[] => {
-  const { replaceAlignStart = true, katexOptions = { output: 'mathml' } } = options || {};
+  const { replaceAlignStart = true, katexOptions = { output: 'html' } } = options || {};
 
   const inlineRenderer = createRenderer(katexOptions, false);
   const blockRenderer = createRenderer(katexOptions, true);

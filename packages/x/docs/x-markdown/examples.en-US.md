@@ -16,6 +16,7 @@ Used for rendering streaming Markdown format returned by LLMs.
 <code src="./demo/codeDemo/supersets.tsx" description="Rendering with plugins." title="Plugin Usage"></code>
 <code src="./demo/codeDemo/plugin.tsx" title="Custom Extension Plugin"></code>
 <code src="./demo/codeDemo/xss.tsx" title="XSS Protection"></code>
+<code src="./demo/codeDemo/open-links-in-new-tab.tsx" description="Open links in new tab." title="Open Links in New Tab"></code>
 
 ## API
 
@@ -28,6 +29,7 @@ Used for rendering streaming Markdown format returned by LLMs.
 | paragraphTag | Custom paragraph rendering tag. Avoids errors from p tags wrapping divs in custom components. | `string` | `p` |
 | streaming | Streaming rendering configuration | `SteamingOption`, see [details](/markdowns/streaming) | - |
 | config | Marked.js extension | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |
+| openLinksInNewTab | Whether to open links in new tab | `boolean` | `false` |
 | className | Custom className | `string` | - |
 | rootClassName | Root node custom className, same as className | `string` | - |
 | style | Custom styles | `CSSProperties` | - |
