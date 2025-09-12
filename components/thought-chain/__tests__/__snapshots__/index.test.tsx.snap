@@ -55,6 +55,7 @@ exports[`ThoughtChain Component ThoughtChain component work 1`] = `
                 fill="currentColor"
                 focusable="false"
                 height="1em"
+                style="transform: rotate(90deg);"
                 viewBox="64 64 896 896"
                 width="1em"
               >
@@ -77,6 +78,16 @@ exports[`ThoughtChain Component ThoughtChain component work 1`] = `
         class="ant-thought-chain-item-extra"
       >
         Extra
+      </div>
+    </div>
+    <div
+      class="ant-thought-chain-item-content ant-motion-collapse-enter ant-motion-collapse-enter-start ant-motion-collapse"
+      style="height: 0px; opacity: 0;"
+    >
+      <div
+        class="ant-thought-chain-item-content-box"
+      >
+        content test1
       </div>
     </div>
     <div

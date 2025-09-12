@@ -72,6 +72,6 @@ module.exports = {
   testEnvironmentOptions: {
     url: 'http://localhost',
   },
-  // bail: true,
+  bail: true,
   maxWorkers: '50%',
 };

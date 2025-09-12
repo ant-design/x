@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '../../../tests/utils';
-import { XAgent } from '../index';
+import type { XAgent } from '../index';
 import useXAgent from '../index';
 
 describe('useXAgent', () => {
@@ -31,6 +31,7 @@ describe('useXAgent', () => {
 
       // Mock request
       request.mockImplementation((_, { onUpdate, onSuccess }) => {
+        onStream(new AbortController());
         onUpdate('bamboo');
         onUpdate('little');
         onSuccess('light');
@@ -42,17 +43,20 @@ describe('useXAgent', () => {
       const onUpdate = jest.fn();
       const onSuccess = jest.fn();
       const onError = jest.fn();
+      const onStream = jest.fn();
 
       agentRef.current?.request({} as any, {
         onUpdate,
         onSuccess,
         onError,
+        onStream,
       });
 
       // Test
       expect(onUpdate).toHaveBeenCalledTimes(2);
       expect(onSuccess).toHaveBeenCalledTimes(1);
       expect(onError).toHaveBeenCalledTimes(0);
+      expect(onStream).toHaveBeenCalledTimes(1);
     });
 
     it('error', () => {
@@ -60,18 +64,22 @@ describe('useXAgent', () => {
       render(<Demo ref={agentRef} />);
 
       // Mock request
-      request.mockImplementation((_, { onError, onSuccess }) => {
+      request.mockImplementation((_, { onError, onSuccess, onStream }) => {
+        onStream(new AbortController());
         onError(new Error('noop'));
         onSuccess('light');
+        onStream(new AbortController());
       });
 
       // Trigger
       const onUpdate = jest.fn();
       const onSuccess = jest.fn();
       const onError = jest.fn();
+      const onStream = jest.fn();
 
       agentRef.current?.request({} as any, {
         onUpdate,
+        onStream,
         onSuccess,
         onError,
       });
@@ -80,6 +88,7 @@ describe('useXAgent', () => {
       expect(onUpdate).toHaveBeenCalledTimes(0);
       expect(onSuccess).toHaveBeenCalledTimes(0);
       expect(onError).toHaveBeenCalledTimes(1);
+      expect(onStream).toHaveBeenCalledTimes(1);
     });
 
     it('requesting', () => {

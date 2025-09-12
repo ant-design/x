@@ -18,7 +18,7 @@ const App = () => {
   const [content, setContent] = React.useState('');
 
   // Agent for request
-  const [agent] = useXAgent({
+  const [agent] = useXAgent<string, { message: string }, string>({
     request: async ({ message }, { onSuccess, onUpdate }) => {
       const fullContent = `Streaming output instead of Bubble typing effect. You typed: ${message}`;
       let currentContent = '';
@@ -26,10 +26,9 @@ const App = () => {
       const id = setInterval(() => {
         currentContent = fullContent.slice(0, currentContent.length + 2);
         onUpdate(currentContent);
-
         if (currentContent === fullContent) {
           clearInterval(id);
-          onSuccess(fullContent);
+          onSuccess([fullContent]);
         }
       }, 100);
     },
