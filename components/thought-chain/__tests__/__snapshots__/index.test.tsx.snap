@@ -63,11 +63,11 @@ exports[`ThoughtChain Component ThoughtChain component work 1`] = `
               />
             </svg>
           </span>
-          <span
+          <div
             class="ant-thought-chain-item-title-content"
           >
             Thought Chain Item Title
-          </span>
+          </div>
         </div>
         <span
           aria-describedby="test-id"
@@ -156,11 +156,11 @@ exports[`ThoughtChain Component ThoughtChain component work 1`] = `
               />
             </svg>
           </span>
-          <span
+          <div
             class="ant-thought-chain-item-title-content"
           >
             Thought Chain Item Title
-          </span>
+          </div>
         </div>
         <span
           aria-describedby="test-id"
@@ -239,11 +239,11 @@ exports[`ThoughtChain Component ThoughtChain component work 1`] = `
               />
             </svg>
           </span>
-          <span
+          <div
             class="ant-thought-chain-item-title-content"
           >
             Thought Chain Item Title
-          </span>
+          </div>
         </div>
         <span
           aria-describedby="test-id"
@@ -329,11 +329,11 @@ exports[`ThoughtChain Component rtl render component should be rendered correctl
               />
             </svg>
           </span>
-          <span
+          <div
             class="ant-thought-chain-item-title-content"
           >
             Thought Chain Item Title
-          </span>
+          </div>
         </div>
         <span
           aria-describedby="test-id"
@@ -412,11 +412,11 @@ exports[`ThoughtChain Component rtl render component should be rendered correctl
               />
             </svg>
           </span>
-          <span
+          <div
             class="ant-thought-chain-item-title-content"
           >
             Thought Chain Item Title
-          </span>
+          </div>
         </div>
         <span
           aria-describedby="test-id"
@@ -495,11 +495,11 @@ exports[`ThoughtChain Component rtl render component should be rendered correctl
               />
             </svg>
           </span>
-          <span
+          <div
             class="ant-thought-chain-item-title-content"
           >
             Thought Chain Item Title
-          </span>
+          </div>
         </div>
         <span
           aria-describedby="test-id"
@@ -585,11 +585,11 @@ exports[`ThoughtChain Component test theme component should be rendered correctl
               />
             </svg>
           </span>
-          <span
+          <div
             class="ant-thought-chain-item-title-content"
           >
             Thought Chain Item Title
-          </span>
+          </div>
         </div>
         <span
           aria-describedby="test-id"
@@ -668,11 +668,11 @@ exports[`ThoughtChain Component test theme component should be rendered correctl
               />
             </svg>
           </span>
-          <span
+          <div
             class="ant-thought-chain-item-title-content"
           >
             Thought Chain Item Title
-          </span>
+          </div>
         </div>
         <span
           aria-describedby="test-id"
@@ -751,11 +751,11 @@ exports[`ThoughtChain Component test theme component should be rendered correctl
               />
             </svg>
           </span>
-          <span
+          <div
             class="ant-thought-chain-item-title-content"
           >
             Thought Chain Item Title
-          </span>
+          </div>
         </div>
         <span
           aria-describedby="test-id"

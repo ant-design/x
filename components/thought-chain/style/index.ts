@@ -190,14 +190,13 @@ const genThoughtChainItemStyle: GenerateThoughtChainItemStyle = (token) => {
               flexShrink: 0,
             },
 
-            // 文本内容样式
             [`& ${itemCls}-title-content`]: {
               flex: 1,
               minWidth: 0,
               overflow: 'hidden',
               textOverflow: 'ellipsis',
               whiteSpace: 'nowrap',
-              display: 'inline-block',
+              fontWeight: token.fontWeightStrong,
             },
           },
           [`& ${itemCls}-desc`]: {

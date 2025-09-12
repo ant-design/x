@@ -126,7 +126,7 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
 
   // ============================ Tooltip State ============================
   const [showTooltip, setShowTooltip] = React.useState(false);
-  const textRef = React.useRef<HTMLSpanElement>(null);
+  const textRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     const checkTextOverflow = () => {
@@ -201,9 +201,9 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
                   />
                 ))}
 
-              <span ref={textRef} className={`${itemCls}-title-content`}>
+              <div ref={textRef} className={`${itemCls}-title-content`}>
                 {title}
-              </span>
+              </div>
             </div>
           </Tooltip>
           {/* Description */}
