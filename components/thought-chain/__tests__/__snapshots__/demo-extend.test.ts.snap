@@ -25,14 +25,16 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
           <div
             class="ant-thought-chain-item-header-box"
           >
-            <span
+            <div
               aria-describedby="test-id"
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+              class="ant-thought-chain-item-title"
             >
-              <strong>
+              <div
+                class="ant-thought-chain-item-title-content"
+              >
                 Thought Chain Item Title
-              </strong>
-            </span>
+              </div>
+            </div>
             <div
               class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
@@ -48,9 +50,7 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
                   class="ant-tooltip-inner"
                   id="test-id"
                   role="tooltip"
-                >
-                  Thought Chain Item Title
-                </div>
+                />
               </div>
             </div>
             <span
@@ -128,14 +128,16 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
           <div
             class="ant-thought-chain-item-header-box"
           >
-            <span
+            <div
               aria-describedby="test-id"
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+              class="ant-thought-chain-item-title"
             >
-              <strong>
+              <div
+                class="ant-thought-chain-item-title-content"
+              >
                 Thought Chain Item Title
-              </strong>
-            </span>
+              </div>
+            </div>
             <div
               class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
@@ -151,9 +153,7 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
                   class="ant-tooltip-inner"
                   id="test-id"
                   role="tooltip"
-                >
-                  Thought Chain Item Title
-                </div>
+                />
               </div>
             </div>
             <span
@@ -231,14 +231,16 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
           <div
             class="ant-thought-chain-item-header-box"
           >
-            <span
+            <div
               aria-describedby="test-id"
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+              class="ant-thought-chain-item-title"
             >
-              <strong>
+              <div
+                class="ant-thought-chain-item-title-content"
+              >
                 Thought Chain Item Title
-              </strong>
-            </span>
+              </div>
+            </div>
             <div
               class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
@@ -254,9 +256,7 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
                   class="ant-tooltip-inner"
                   id="test-id"
                   role="tooltip"
-                >
-                  Thought Chain Item Title
-                </div>
+                />
               </div>
             </div>
             <span
@@ -334,14 +334,16 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
           <div
             class="ant-thought-chain-item-header-box"
           >
-            <span
+            <div
               aria-describedby="test-id"
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+              class="ant-thought-chain-item-title"
             >
-              <strong>
+              <div
+                class="ant-thought-chain-item-title-content"
+              >
                 Thought Chain Item Title
-              </strong>
-            </span>
+              </div>
+            </div>
             <div
               class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
@@ -357,9 +359,7 @@ exports[`renders components/thought-chain/demo/basic.tsx extend context correctl
                   class="ant-tooltip-inner"
                   id="test-id"
                   role="tooltip"
-                >
-                  Thought Chain Item Title
-                </div>
+                />
               </div>
             </div>
             <span
@@ -455,33 +455,35 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
           <div
             class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
           >
-            <span
+            <div
               aria-describedby="test-id"
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+              class="ant-thought-chain-item-title"
             >
-              <strong>
-                <span
-                  aria-label="right"
-                  class="anticon anticon-right ant-thought-chain-item-collapse-icon"
-                  role="img"
+              <span
+                aria-label="right"
+                class="anticon anticon-right ant-thought-chain-item-collapse-icon"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="right"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
                 >
-                  <svg
-                    aria-hidden="true"
-                    data-icon="right"
-                    fill="currentColor"
-                    focusable="false"
-                    height="1em"
-                    viewBox="64 64 896 896"
-                    width="1em"
-                  >
-                    <path
-                      d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
-                    />
-                  </svg>
-                </span>
+                  <path
+                    d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+                  />
+                </svg>
+              </span>
+              <div
+                class="ant-thought-chain-item-title-content"
+              >
                 Click me to expand the content
-              </strong>
-            </span>
+              </div>
+            </div>
             <div
               class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
@@ -497,9 +499,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
                   class="ant-tooltip-inner"
                   id="test-id"
                   role="tooltip"
-                >
-                  Click me to expand the content
-                </div>
+                />
               </div>
             </div>
             <span
@@ -545,34 +545,36 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
           <div
             class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
           >
-            <span
+            <div
               aria-describedby="test-id"
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+              class="ant-thought-chain-item-title"
             >
-              <strong>
-                <span
-                  aria-label="right"
-                  class="anticon anticon-right ant-thought-chain-item-collapse-icon"
-                  role="img"
+              <span
+                aria-label="right"
+                class="anticon anticon-right ant-thought-chain-item-collapse-icon"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="right"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  style="transform: rotate(90deg);"
+                  viewBox="64 64 896 896"
+                  width="1em"
                 >
-                  <svg
-                    aria-hidden="true"
-                    data-icon="right"
-                    fill="currentColor"
-                    focusable="false"
-                    height="1em"
-                    style="transform: rotate(90deg);"
-                    viewBox="64 64 896 896"
-                    width="1em"
-                  >
-                    <path
-                      d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
-                    />
-                  </svg>
-                </span>
+                  <path
+                    d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+                  />
+                </svg>
+              </span>
+              <div
+                class="ant-thought-chain-item-title-content"
+              >
                 Click me to expand the content
-              </strong>
-            </span>
+              </div>
+            </div>
             <div
               class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
@@ -588,9 +590,7 @@ exports[`renders components/thought-chain/demo/collapsible.tsx extend context co
                   class="ant-tooltip-inner"
                   id="test-id"
                   role="tooltip"
-                >
-                  Click me to expand the content
-                </div>
+                />
               </div>
             </div>
             <span
@@ -704,14 +704,16 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
           <div
             class="ant-thought-chain-item-header-box"
           >
-            <span
+            <div
               aria-describedby="test-id"
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+              class="ant-thought-chain-item-title"
             >
-              <strong>
+              <div
+                class="ant-thought-chain-item-title-content"
+              >
                 Thought Chain Item Title
-              </strong>
-            </span>
+              </div>
+            </div>
             <div
               class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
@@ -727,9 +729,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
                   class="ant-tooltip-inner"
                   id="test-id"
                   role="tooltip"
-                >
-                  Thought Chain Item Title
-                </div>
+                />
               </div>
             </div>
             <span
@@ -869,14 +869,16 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
           <div
             class="ant-thought-chain-item-header-box"
           >
-            <span
+            <div
               aria-describedby="test-id"
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+              class="ant-thought-chain-item-title"
             >
-              <strong>
+              <div
+                class="ant-thought-chain-item-title-content"
+              >
                 Thought Chain Item Title
-              </strong>
-            </span>
+              </div>
+            </div>
             <div
               class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
@@ -892,9 +894,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
                   class="ant-tooltip-inner"
                   id="test-id"
                   role="tooltip"
-                >
-                  Thought Chain Item Title
-                </div>
+                />
               </div>
             </div>
             <span
@@ -1034,14 +1034,16 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
           <div
             class="ant-thought-chain-item-header-box"
           >
-            <span
+            <div
               aria-describedby="test-id"
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+              class="ant-thought-chain-item-title"
             >
-              <strong>
+              <div
+                class="ant-thought-chain-item-title-content"
+              >
                 Thought Chain Item Title
-              </strong>
-            </span>
+              </div>
+            </div>
             <div
               class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
@@ -1057,9 +1059,7 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
                   class="ant-tooltip-inner"
                   id="test-id"
                   role="tooltip"
-                >
-                  Thought Chain Item Title
-                </div>
+                />
               </div>
             </div>
             <span
@@ -1196,33 +1196,35 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
           <div
             class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
           >
-            <span
+            <div
               aria-describedby="test-id"
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+              class="ant-thought-chain-item-title"
             >
-              <strong>
-                <span
-                  aria-label="right"
-                  class="anticon anticon-right ant-thought-chain-item-collapse-icon"
-                  role="img"
+              <span
+                aria-label="right"
+                class="anticon anticon-right ant-thought-chain-item-collapse-icon"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="right"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
                 >
-                  <svg
-                    aria-hidden="true"
-                    data-icon="right"
-                    fill="currentColor"
-                    focusable="false"
-                    height="1em"
-                    viewBox="64 64 896 896"
-                    width="1em"
-                  >
-                    <path
-                      d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
-                    />
-                  </svg>
-                </span>
+                  <path
+                    d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+                  />
+                </svg>
+              </span>
+              <div
+                class="ant-thought-chain-item-title-content"
+              >
                 1 - Thought Chain Item
-              </strong>
-            </span>
+              </div>
+            </div>
             <div
               class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
@@ -1238,9 +1240,7 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
                   class="ant-tooltip-inner"
                   id="test-id"
                   role="tooltip"
-                >
-                  1 - Thought Chain Item
-                </div>
+                />
               </div>
             </div>
             <span
@@ -1330,33 +1330,35 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
           <div
             class="ant-thought-chain-item-header-box ant-thought-chain-item-collapsible"
           >
-            <span
+            <div
               aria-describedby="test-id"
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+              class="ant-thought-chain-item-title"
             >
-              <strong>
-                <span
-                  aria-label="right"
-                  class="anticon anticon-right ant-thought-chain-item-collapse-icon"
-                  role="img"
+              <span
+                aria-label="right"
+                class="anticon anticon-right ant-thought-chain-item-collapse-icon"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="right"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
                 >
-                  <svg
-                    aria-hidden="true"
-                    data-icon="right"
-                    fill="currentColor"
-                    focusable="false"
-                    height="1em"
-                    viewBox="64 64 896 896"
-                    width="1em"
-                  >
-                    <path
-                      d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
-                    />
-                  </svg>
-                </span>
+                  <path
+                    d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+                  />
+                </svg>
+              </span>
+              <div
+                class="ant-thought-chain-item-title-content"
+              >
                 2 - Thought Chain Item
-              </strong>
-            </span>
+              </div>
+            </div>
             <div
               class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
@@ -1372,9 +1374,7 @@ exports[`renders components/thought-chain/demo/nested.tsx extend context correct
                   class="ant-tooltip-inner"
                   id="test-id"
                   role="tooltip"
-                >
-                  2 - Thought Chain Item
-                </div>
+                />
               </div>
             </div>
             <span
@@ -1554,14 +1554,16 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
           <div
             class="ant-thought-chain-item-header-box"
           >
-            <span
+            <div
               aria-describedby="test-id"
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+              class="ant-thought-chain-item-title"
             >
-              <strong>
+              <div
+                class="ant-thought-chain-item-title-content"
+              >
                 Thought Chain Item Title
-              </strong>
-            </span>
+              </div>
+            </div>
             <div
               class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
@@ -1577,9 +1579,7 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
                   class="ant-tooltip-inner"
                   id="test-id"
                   role="tooltip"
-                >
-                  Thought Chain Item Title
-                </div>
+                />
               </div>
             </div>
             <span
@@ -1657,14 +1657,16 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
           <div
             class="ant-thought-chain-item-header-box"
           >
-            <span
+            <div
               aria-describedby="test-id"
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+              class="ant-thought-chain-item-title"
             >
-              <strong>
+              <div
+                class="ant-thought-chain-item-title-content"
+              >
                 Thought Chain Item Title
-              </strong>
-            </span>
+              </div>
+            </div>
             <div
               class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
@@ -1680,9 +1682,7 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
                   class="ant-tooltip-inner"
                   id="test-id"
                   role="tooltip"
-                >
-                  Thought Chain Item Title
-                </div>
+                />
               </div>
             </div>
             <span
@@ -1760,14 +1760,16 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
           <div
             class="ant-thought-chain-item-header-box"
           >
-            <span
+            <div
               aria-describedby="test-id"
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+              class="ant-thought-chain-item-title"
             >
-              <strong>
+              <div
+                class="ant-thought-chain-item-title-content"
+              >
                 Thought Chain Item Title
-              </strong>
-            </span>
+              </div>
+            </div>
             <div
               class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
@@ -1783,9 +1785,7 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
                   class="ant-tooltip-inner"
                   id="test-id"
                   role="tooltip"
-                >
-                  Thought Chain Item Title
-                </div>
+                />
               </div>
             </div>
             <span
@@ -1863,14 +1863,16 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
           <div
             class="ant-thought-chain-item-header-box"
           >
-            <span
+            <div
               aria-describedby="test-id"
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+              class="ant-thought-chain-item-title"
             >
-              <strong>
+              <div
+                class="ant-thought-chain-item-title-content"
+              >
                 Thought Chain Item Title
-              </strong>
-            </span>
+              </div>
+            </div>
             <div
               class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
@@ -1886,9 +1888,7 @@ exports[`renders components/thought-chain/demo/size.tsx extend context correctly
                   class="ant-tooltip-inner"
                   id="test-id"
                   role="tooltip"
-                >
-                  Thought Chain Item Title
-                </div>
+                />
               </div>
             </div>
             <span
@@ -2014,14 +2014,16 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
           <div
             class="ant-thought-chain-item-header-box"
           >
-            <span
+            <div
               aria-describedby="test-id"
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+              class="ant-thought-chain-item-title"
             >
-              <strong>
+              <div
+                class="ant-thought-chain-item-title-content"
+              >
                 Thought Chain Item - 1
-              </strong>
-            </span>
+              </div>
+            </div>
             <div
               class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
@@ -2037,9 +2039,7 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
                   class="ant-tooltip-inner"
                   id="test-id"
                   role="tooltip"
-                >
-                  Thought Chain Item - 1
-                </div>
+                />
               </div>
             </div>
             <span
@@ -2106,14 +2106,16 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
           <div
             class="ant-thought-chain-item-header-box"
           >
-            <span
+            <div
               aria-describedby="test-id"
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+              class="ant-thought-chain-item-title"
             >
-              <strong>
+              <div
+                class="ant-thought-chain-item-title-content"
+              >
                 Thought Chain Item - 2
-              </strong>
-            </span>
+              </div>
+            </div>
             <div
               class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-placement-topLeft"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
@@ -2129,9 +2131,7 @@ exports[`renders components/thought-chain/demo/status.tsx extend context correct
                   class="ant-tooltip-inner"
                   id="test-id"
                   role="tooltip"
-                >
-                  Thought Chain Item - 2
-                </div>
+                />
               </div>
             </div>
             <span
