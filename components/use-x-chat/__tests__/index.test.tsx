@@ -211,7 +211,7 @@ describe('useXChat', () => {
       fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
       expect(getMessages(container)).toEqual([
         expectMessage('little', 'local'),
-        expectMessage('bamboo', 'loading'),
+        expectMessage('bamboo', 'updating'),
       ]);
 
       await waitFakeTimer();
@@ -230,6 +230,8 @@ describe('useXChat', () => {
     expect(getMessages(container)).toEqual([
       expectMessage('0_light', 'local'),
       expectMessage('1_light', 'local'),
+      expectMessage('0_', 'loading'),
+      expectMessage('1_', 'loading'),
     ]);
   });
 
@@ -246,7 +248,7 @@ describe('useXChat', () => {
     fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
     expect(getMessages(container)).toEqual([
       expectMessage('little', 'local'),
-      expectMessage('bamboo', 'loading'),
+      expectMessage('bamboo', 'updating'),
     ]);
 
     await waitFakeTimer();
@@ -284,7 +286,10 @@ describe('useXChat', () => {
       expect.any(TransformStream),
     );
 
-    expect(getMessages(container)).toEqual([expectMessage('little', 'local')]);
+    expect(getMessages(container)).toEqual([
+      expectMessage('little', 'local'),
+      expectMessage('', 'loading'),
+    ]);
   });
   it('custom require called resolveAbortController', (done) => {
     const transformStream = new TransformStream();
@@ -319,7 +324,10 @@ describe('useXChat', () => {
       />,
     );
     fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
-    expect(getMessages(container)).toEqual([expectMessage('little', 'local')]);
+    expect(getMessages(container)).toEqual([
+      expectMessage('little', 'local'),
+      expectMessage('', 'loading'),
+    ]);
   });
 
   describe('transformMessage', () => {
@@ -350,7 +358,7 @@ describe('useXChat', () => {
 
       expect(getMessages(container)).toEqual([
         expectMessage('little', 'local'),
-        expectMessage('bamboo', 'loading'),
+        expectMessage('bamboo', 'updating'),
       ]);
       await waitFakeTimer();
       expect(getMessages(container)).toEqual([
@@ -374,7 +382,7 @@ describe('useXChat', () => {
 
       expect(getMessages(container)).toEqual([
         expectMessage('little', 'local'),
-        expectMessage('bamboo', 'loading'),
+        expectMessage('bamboo', 'updating'),
       ]);
       await waitFakeTimer();
       expect(getMessages(container)).toEqual([
@@ -395,7 +403,10 @@ describe('useXChat', () => {
       );
       fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
 
-      expect(getMessages(container)).toEqual([expectMessage('little', 'local')]);
+      expect(getMessages(container)).toEqual([
+        expectMessage('little', 'local'),
+        expectMessage('', 'loading'),
+      ]);
       await waitFakeTimer();
       expect(getMessages(container)).toEqual([
         expectMessage('little', 'local'),
