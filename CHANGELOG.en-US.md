@@ -21,7 +21,7 @@ tag: vVERSION
 `2025-09-12`
 
 - 🐛 Fixed ThoughtChain component `title` could not display the collapsed title when passing `ReactNode`. [#1172](https://github.com/ant-design/x/pull/1172) by [@IsDyh01](https://github.com/IsDyh01).
-- 🐛 Fixed Sender component `LoadingButton` would display two icons when the icon property is passed. [#1145](https://github.com/ant-design/x/pull/1145) by [@IsDyh01](https://github.com/IsDyh01).
+- 🐛 Fixed Sender component `LoadingButton` would display two icons when the `icon ` property is passed. [#1145](https://github.com/ant-design/x/pull/1145) by [@IsDyh01](https://github.com/IsDyh01).
 - 🐛 Fixed semantic loss in Sender component `content`. [#703](https://github.com/ant-design/x/pull/703) by [@HomyeeKing](https://github.com/HomyeeKing).
 - 🐛 Removed redundant condition checks in Bubble component typing effect prefix logic. [#1091](https://github.com/ant-design/x/pull/1091) by [@AqingCyan](https://github.com/AqingCyan).
 - 🐛 Fixed missing `updating` status in useXChat. [#833](https://github.com/ant-design/x/pull/833) by [@wzc520pyfm](https://github.com/wzc520pyfm).
