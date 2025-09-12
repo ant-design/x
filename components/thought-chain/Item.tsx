@@ -131,14 +131,10 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
   React.useEffect(() => {
     const checkTextOverflow = () => {
       if (textRef.current) {
-        const isOverflowing = textRef.current.scrollWidth > textRef.current.clientWidth;
-        setShowTooltip(isOverflowing);
+        setShowTooltip(textRef.current.scrollWidth > textRef.current.clientWidth);
       }
     };
-
     checkTextOverflow();
-
-    // 使用 ResizeObserver 监听尺寸变化
     const resizeObserver = new ResizeObserver(checkTextOverflow);
     if (textRef.current) {
       resizeObserver.observe(textRef.current);
