@@ -16,7 +16,7 @@ import {
   ShareAltOutlined,
   SmileOutlined,
 } from '@ant-design/icons';
-import type { BubbleListProps, ThoughtChainItemProp } from '@ant-design/x';
+import type { BubbleListProps, ThoughtChainItemProps } from '@ant-design/x';
 import {
   Actions,
   Attachments,
@@ -454,7 +454,7 @@ const role: BubbleListProps['role'] = {
             style={{
               marginBottom: 8,
             }}
-            status={config.status as ThoughtChainItemProp['status']}
+            status={config.status as ThoughtChainItemProps['status']}
             variant="solid"
             icon={<GlobalOutlined />}
             title={config.title}

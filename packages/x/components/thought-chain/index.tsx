@@ -5,7 +5,7 @@ import useCollapsible from '../_util/hooks/use-collapsible';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
-import type { ThoughtChainItemProp } from './Item';
+import type { ThoughtChainItemProps } from './Item';
 import Item from './Item';
 import type { ThoughtChainItem, ThoughtChainProps } from './interface';
 import ThoughtChainNode, { ThoughtChainContext } from './Node';
@@ -142,5 +142,5 @@ if (process.env.NODE_ENV !== 'production') {
   ThoughtChain.displayName = 'ThoughtChain';
 }
 
-export type { ThoughtChainProps, ThoughtChainItem, ThoughtChainItemProp };
+export type { ThoughtChainProps, ThoughtChainItem, ThoughtChainItemProps };
 export default ThoughtChain;

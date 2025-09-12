@@ -14,7 +14,7 @@ enum VARIANT {
 
 export type SemanticType = 'root' | 'icon' | 'title' | 'description';
 
-export interface ThoughtChainItemProp
+export interface ThoughtChainItemProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title' | 'content'> {
   /**
    * @desc 思维节点唯一标识符
@@ -71,7 +71,7 @@ export interface ThoughtChainItemProp
 type ItemRef = {
   nativeElement: HTMLElement;
 };
-const Item = React.forwardRef<ItemRef, ThoughtChainItemProp>((props, ref) => {
+const Item = React.forwardRef<ItemRef, ThoughtChainItemProps>((props, ref) => {
   // ============================ Info ============================
   const {
     key,
