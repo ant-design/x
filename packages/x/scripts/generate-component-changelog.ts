@@ -1,8 +1,9 @@
 /* eslint-disable no-loop-func, no-console */
 // Collect from `changelog.md` to get all components changelog
-import path from 'path';
+
 import fs from 'fs-extra';
 import { globSync } from 'glob';
+import path from 'path';
 
 const output = '.dumi/preset';
 
@@ -203,8 +204,8 @@ const miscKeys = [
     fs.writeFileSync(path.join(output, targetFile), JSON.stringify(componentChangelog), 'utf-8');
   }
 
-  syncChangelog('CHANGELOG.zh-CN.md', 'components-changelog-cn.json');
-  syncChangelog('CHANGELOG.en-US.md', 'components-changelog-en.json');
+  syncChangelog('../../CHANGELOG.zh-CN.md', 'components-changelog-cn.json');
+  syncChangelog('../../CHANGELOG.en-US.md', 'components-changelog-en.json');
   fs.writeFileSync(
     path.join(output, 'misc-changelog.json'),
     JSON.stringify(miscChangelog),
