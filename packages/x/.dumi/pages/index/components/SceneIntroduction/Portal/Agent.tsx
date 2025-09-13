@@ -216,7 +216,7 @@ const Agent: React.FC<AgentProps> = ({ setIsOnAgent, isOnAgent }) => {
       placement: 'start',
       contentRender: (content, { status }) => (
         <XMarkdown
-          components={{ code: Code }}
+          components={{ code: Code, pre: Code }}
           paragraphTag="div"
           streaming={{ hasNextChunk: status === 'updating', enableAnimation: true }}
         >
