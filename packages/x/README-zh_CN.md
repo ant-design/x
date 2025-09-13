@@ -31,7 +31,7 @@
 
 </div>
 
-![demos](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*UAEeSbJfuM8AAAAAAAAAAAAADgCCAQ/fmt.webp)
+<img width="100%" src="https://mdn.alipayobjects.com/huamei_35zehm/afts/img/A*DfJHS4rP4SgAAAAAgGAAAAgAejCDAQ/original">
 
 ## ✨ 特性
 

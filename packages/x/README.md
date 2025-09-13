@@ -4,13 +4,13 @@
 
 <h1>Ant Design X</h1>
 
-Craft AI-driven interfaces effortlessly.
+Easily build AI-driven interfaces.
 
 [![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] [![NPM version][npm-image]][npm-url]
 
-[![NPM downloads][download-image]][download-url] [![][bundlephobia-image]][bundlephobia-url] [![antd][antd-image]][antd-url] [![Follow Twitter][twitter-image]][twitter-url]
+[![NPM downloads][download-image]][download-url] [![][bundlephobia-image]][bundlephobia-url] [![antd][antd-image]][antd-url] [![Follow zhihu][zhihu-image]][zhihu-url]
 
-[Changelog](./CHANGELOG.en-US.md) · [Report Bug][github-issues-bug-report] · [Request Feature][github-issues-feature-request] · English · [中文](./README-zh_CN.md)
+[Changelog](./CHANGELOG.md) · [Report a Bug][github-issues-bug-report] · [Feature Request][github-issues-feature-request] · [中文](./README-zh_CN.md) · English
 
 [npm-image]: https://img.shields.io/npm/v/@ant-design/x.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/@ant-design/x
@@ -26,22 +26,23 @@ Craft AI-driven interfaces effortlessly.
 [github-issues-feature-request]: https://github.com/ant-design/x/issues/new?template=bug-feature-request.yml
 [antd-image]: https://img.shields.io/badge/-Ant%20Design-blue?labelColor=black&logo=antdesign&style=flat-square
 [antd-url]: https://ant.design
-[twitter-image]: https://img.shields.io/twitter/follow/AntDesignUI.svg?label=Ant%20Design
-[twitter-url]: https://twitter.com/AntDesignUI
+[zhihu-image]: https://img.shields.io/badge/-Ant%20Design-white?logo=zhihu
+[zhihu-url]: https://www.zhihu.com/column/c_1564262000561106944
 
 </div>
-![demos](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*UAEeSbJfuM8AAAAAAAAAAAAADgCCAQ/fmt.webp)
+
+<img width="100%" src="https://mdn.alipayobjects.com/huamei_35zehm/afts/img/A*DfJHS4rP4SgAAAAAgGAAAAgAejCDAQ/original">
 
 ## ✨ Features
 
-- 🌈 **Best Practices from Enterprise-level AI Products**: Based on the RICH interaction paradigm, delivering an excellent AI experience
-- 🧩 **Flexible Atomic Components**: Covering most AI chat scenarios, helping you quickly build personalized AI UIs
-- ✨ **Streaming-friendly, extensible, high-performance Markdown renderer**: Formula, code highlight, mermaid, etc. [@ant-design/x-markdown](../x-markdown/README.md)
-- 🚀 **Out-of-the-box model/agent integration**: Easily connect to OpenAI-compatible models/agents [@ant-design/x-sdk](../x-sdk/README.md)
-- ⚡️ **Efficient conversation data flow management**: Powerful data flow management for efficient development [@ant-design/x-sdk](../x-sdk/README.md)
-- 📦 **Rich templates**: Multiple templates for quick LUI app development [Playground](https://github.com/ant-design/x/tree/main/packages/x/docs/playground/)
-- 🛡 **Full TypeScript support**: Developed in TypeScript, providing complete type definitions
-- 🎨 **Deep theme customization**: Fine-grained style adjustments for all scenarios
+- 🌈 **Best practices from enterprise-level AI products**: Based on RICH interaction paradigms, providing excellent AI interaction experience
+- 🧩 **Flexible atomic components**: Covering most AI scenarios, helping you quickly build personalized AI interaction pages
+- ✨ **Stream-friendly, extensible, and high-performance Markdown renderer**: Supports streaming formulas, code highlighting, mermaid diagrams, etc. [@ant-design/x-markdown](../x-markdown/README.md)
+- 🚀 **Out-of-the-box model/agent integration**: Easily connect to OpenAI-compatible model/agent services [@ant-design/x-sdk](../x-sdk/README.md)
+- ⚡️ **Efficient management of large model data streams**: Provides handy data stream management features for more efficient development [@ant-design/x-sdk](../x-sdk/README.md)
+- 📦 **Rich template support**: Multiple templates for quick LUI app development [Templates](https://github.com/ant-design/x/tree/main/packages/x/docs/playground/)
+- 🛡 **Full TypeScript coverage**: Developed with TypeScript, providing complete type support for better experience and reliability
+- 🎨 **Deep theme customization**: Fine-grained style adjustments for personalized needs in various scenarios
 
 ## 📦 Installation
 
@@ -61,31 +62,31 @@ pnpm add @ant-design/x
 ut install @ant-design/x
 ```
 
-### 🖥️ Import in Browser
+### Browser Usage
 
-Use `script` and `link` tags to import files directly in the browser, and use the global variable `antdx`.
+Use `script` and `link` tags to directly import files and use the global variable `antdx`.
 
-We provide `antdx.js`, `antdx.min.js`, and `antdx.min.js.map` in the [dist](https://cdn.jsdelivr.net/npm/@ant-design/x@1.0.0/dist/) directory of the npm package.
+The npm package's [dist](https://cdn.jsdelivr.net/npm/@ant-design/x@1.0.0/dist/) directory provides `antdx.js`, `antdx.min.js`, and `antdx.min.js.map`.
 
-> **Strongly not recommended to use built files** as they cannot be tree-shaken and are hard to get bug fixes for dependencies.
+> **Strongly not recommended to use built files** as they do not support on-demand loading and may not get quick bug fixes for underlying dependencies.
 
-> Note: `antdx.js` and `antdx.min.js` depend on `react`, `react-dom`, `dayjs`, `antd`, `@ant-design/cssinjs`, `@ant-design/icons`. Please make sure to import these files first.
+> Note: `antdx.js` and `antdx.min.js` depend on `react`, `react-dom`, `dayjs`, `antd`, `@ant-design/cssinjs`, and `@ant-design/icons`. Please make sure to import these files first.
 
 ## 🧩 Atomic Components
 
-Based on the RICH interaction paradigm, we provide a large number of atomic components for different interaction stages to help you flexibly build your AI chat applications:
+Based on the RICH interaction paradigm, we provide many atomic components for different interaction stages to help you flexibly build your AI application:
 
-- [Components Overview](https://x.ant.design/components/overview)
-- [Playground](https://x.ant.design/docs/playground/independent)
+- [Component Overview](https://x.ant.design/components/overview)
+- [Templates](https://x.ant.design/docs/playground/independent)
 
-Below is an example of building a simple chat box with atomic components:
+Here is a simple example of building a dialog using atomic components:
 
 ```tsx
 import React from 'react';
 import {
   // Message bubble
   Bubble,
-  // Input box
+  // Sender box
   Sender,
 } from '@ant-design/x';
 
@@ -119,217 +120,67 @@ const App = () => (
 export default App;
 ```
 
-## ⚡️ Model/Agent Integration & Efficient Data Flow Management
+## ⚡️ Model/Agent Integration & Efficient Data Stream Management
 
-`@ant-design/x-sdk` provides a set of tools and APIs to help developers manage AI chat app data flow out of the box. See details [here](../x-sdk/README.md).
-
-### Qwen Integration Example
-
-> Note: 🔥 `dangerouslyApiKey` has security risks, see [documentation](/docs/react/dangerously-api-key.en-US.md) for details.
-
-```tsx
-import { useXAgent, Sender, XRequest } from '@ant-design/x';
-import React from 'react';
-
-const { create } = XRequest({
-  baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
-  dangerouslyApiKey: process.env['DASHSCOPE_API_KEY'],
-  model: 'qwen-plus',
-});
-
-const Component: React.FC = () => {
-  const [agent] = useXAgent({
-    request: async (info, callbacks) => {
-      const { messages, message } = info;
-      const { onUpdate } = callbacks;
-
-      // current message
-      console.log('message', message);
-      // messages list
-      console.log('messages', messages);
-
-      let content: string = '';
-
-      try {
-        create(
-          {
-            messages: [{ role: 'user', content: message }],
-            stream: true,
-          },
-          {
-            onSuccess: (chunks) => {
-              console.log('sse chunk list', chunks);
-            },
-            onError: (error) => {
-              console.log('error', error);
-            },
-            onUpdate: (chunk) => {
-              console.log('sse object', chunk);
-              const data = JSON.parse(chunk.data);
-              content += data?.choices[0].delta.content;
-              onUpdate(content);
-            },
-          },
-        );
-      } catch (error) {
-        // handle error
-      }
-    },
-  });
-
-  const onSubmit = (message: string) => {
-    agent.request(
-      { message },
-      {
-        onUpdate: () => {},
-        onSuccess: () => {},
-        onError: () => {},
-      },
-    );
-  };
-
-  return <Sender onSubmit={onSubmit} />;
-};
-```
-
-### OpenAI Integration Example
-
-```tsx
-import { useXAgent, useXChat, Sender, Bubble } from '@ant-design/x';
-import OpenAI from 'openai';
-import React from 'react';
-
-const client = new OpenAI({
-  apiKey: process.env['OPENAI_API_KEY'],
-  dangerouslyAllowBrowser: true,
-});
-
-const Demo: React.FC = () => {
-  const [agent] = useXAgent({
-    request: async (info, callbacks) => {
-      const { messages, message } = info;
-
-      const { onSuccess, onUpdate, onError } = callbacks;
-
-      // current message
-      console.log('message', message);
-
-      // history messages
-      console.log('messages', messages);
-
-      let content: string = '';
-
-      try {
-        const stream = await client.chat.completions.create({
-          model: 'gpt-4o',
-          // if chat context is needed, modify the array
-          messages: [{ role: 'user', content: message }],
-          // stream mode
-          stream: true,
-        });
-
-        for await (const chunk of stream) {
-          content += chunk.choices[0]?.delta?.content || '';
-          onUpdate(content);
-        }
-
-        onSuccess(content);
-      } catch (error) {
-        // handle error
-        // onError();
-      }
-    },
-  });
-
-  const {
-    // use to send message
-    onRequest,
-    // use to render messages
-    messages,
-  } = useXChat({ agent });
-
-  const items = messages.map(({ message, id }) => ({
-    // key is required, used to identify the message
-    key: id,
-    content: message,
-  }));
-
-  return (
-    <>
-      <Bubble.List items={items} />
-      <Sender onSubmit={onRequest} />
-    </>
-  );
-};
-
-export default Demo;
-```
+`@ant-design/x-sdk` provides a series of tool APIs for out-of-the-box management of AI application data streams. See details [here](../x-sdk/README.md).
 
 ## ✨ Markdown Renderer
 
-`@ant-design/x-markdown` provides a streaming-friendly, extensible, high-performance Markdown renderer. Supports formula, code highlight, mermaid, etc. See details [here](../x-markdown/README.md).
+`@ant-design/x-markdown` aims to provide a stream-friendly, extensible, and high-performance Markdown renderer. Supports streaming formulas, code highlighting, mermaid diagrams, etc. See details [here](../x-markdown/README.md).
 
-## 🧩 Atomic Components
+## On-demand Loading
 
-Based on the RICH interaction paradigm, we provide a large number of atomic components for different interaction stages to help you flexibly build your AI chat applications:
+`@ant-design/x` supports tree shaking based on ES modules by default.
 
-- [Components Overview](https://x.ant.design/components/overview)
-- [Playground](https://x.ant.design/docs/playground/independent)
+## TypeScript
 
-Below is an example of building a simple chat box with atomic components:
+`@ant-design/x` is written in TypeScript and provides complete definition files.
 
-```tsx
-import React from 'react';
-import {
-  // Message bubble
-  Bubble,
-  // Input box
-  Sender,
-} from '@ant-design/x';
+## Who's Using
 
-const messages = [
-  {
-    key: 'message_1',
-    content: 'Hello, Ant Design X!',
-    role: 'user',
-  },
-  {
-    key: 'x_message_1',
-    content: 'Hello, I am Ant Design X!',
-    role: 'x',
-  },
-];
+Ant Design X is widely used in AI-driven user interfaces within Ant Group. If your company or product uses Ant Design X, feel free to leave a message [here](https://github.com/ant-design/x/issues/126).
 
-const role = {
-  // Bubble position: end
-  x: {
-    placement: 'end',
-  },
-};
+## Local Development
 
-const App = () => (
-  <div>
-    <Bubble.List items={messages} role={role} />
-    <Sender />
-  </div>
-);
+> antx uses [npm-workspace](https://docs.npmjs.com/cli/v11/using-npm/workspaces) to organize code. It is recommended to use npm or [utoo](https://github.com/umijs/mako/tree/next) for local development.
 
-export default App;
+```bash
+# Install utoo
+$ npm i -g utoo
+
+# Install project dependencies (by utoo)
+$ ut [install]
+
+# Start project
+$ ut start # Method 1: Start via main package script
+$ ut start --workspace packages/x # Method 2: Start via workspace parameter
+$ ut start --workspace @ant-design/x # Method 3: Start via package.name (utoo only)
+$ cd packages/x && ut start # Method 4: Start in subpackage directory
+
+# Add dependencies
+$ ut install [pkg@version] # Add dependency to main package
+$ ut install [pkg@version] --workspace packages/x # Add dependency to subpackage
+$ cd packages/x && ut install [pkg@version] # Add dependency to subpackage
+
+# Update dependencies
+$ ut update # utoo only
 ```
 
- </a>
+## How to Contribute
 
-Please read our [CONTRIBUTING.md](https://github.com/ant-design/ant-design/blob/master/.github/CONTRIBUTING.md) first.
+Before participating in any form, please read the [Contributor Guide](https://github.com/ant-design/ant-design/blob/master/.github/CONTRIBUTING.md). If you wish to contribute, feel free to submit a [Pull Request](https://github.com/ant-design/ant-design/pulls) or [Report a Bug](http://new-issue.ant.design/).
 
-If you'd like to help us improve Ant Design X, just create a [Pull Request](https://github.com/ant-design/ant-design/pulls). Feel free to report bugs and issues [here](http://new-issue.ant.design/).
+> Highly recommended reading [How To Ask Questions The Smart Way](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way), [How to Ask Questions in Open Source Community](https://github.com/seajs/seajs/issues/545), [How to Report Bugs Effectively](http://www.chiark.greenend.org.uk/%7Esgtatham/bugs.html), and [How to Submit Unsolvable Issues to Open Source Projects](https://zhuanlan.zhihu.com/p/25795393) for better help.
 
-> We strongly recommend reading [_How To Ask Questions The Smart Way_](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way), [How to Ask a Question in Open Source Community](https://github.com/seajs/seajs/issues/545), and [How to Report Bugs Effectively](http://www.chiark.greenend.org.uk/~sgtatham/bugs.html) before posting. Well-written bug reports help us help you!
+## Community Support
 
-## Community
+If you encounter problems during use, you can seek help through the following channels. We also encourage experienced users to help newcomers through these channels.
 
-If you encounter any problems, you can seek help through the following channels. We also encourage experienced users to help newcomers.
-
-When asking questions on GitHub Discussions, please use the `Q&A` tag.
+When asking questions in GitHub Discussions, please use the `Q&A` label.
 
 1. [GitHub Discussions](https://github.com/ant-design/x/discussions)
 2. [GitHub Issues](https://github.com/ant-design/x/issues)
+
+<a href="https://openomy.app/github/ant-design/x" target="_blank" style="display: block; width: 100%;" align="center">
+  <img src="https://openomy.app/svg?repo=ant-design/x&chart=bubble&latestMonth=3" target="_blank" alt="Contribution Leaderboard" style="display: block; width: 100%;" />
+ </a>
