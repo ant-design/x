@@ -1,6 +1,7 @@
 import type { BubbleListProps } from '@ant-design/x';
 import { Bubble } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
+import '@ant-design/x-markdown/themes/dark.css';
 import HighlightCode from '@ant-design/x-markdown/plugins/HighlightCode';
 import type { XRequestOptions } from '@ant-design/x-sdk';
 import {
@@ -10,6 +11,7 @@ import {
   useXChat,
 } from '@ant-design/x-sdk';
 import { createStyles } from 'antd-style';
+import classNames from 'classnames';
 import React, { useEffect } from 'react';
 import { TboxClient } from 'tbox-nodejs-sdk';
 import useLocale from '../../../../../hooks/useLocale';
@@ -57,6 +59,8 @@ const useStyle = createStyles(({ token, css }, isOnAgent: any) => {
         background-position: bottom;
       }
         `,
+    markdown: css`
+    `,
     sender: css`
         max-width: 1000px;
         padding-inline: ${token.marginXL}px;
@@ -216,8 +220,9 @@ const Agent: React.FC<AgentProps> = ({ setIsOnAgent, isOnAgent }) => {
       placement: 'start',
       contentRender: (content, { status }) => (
         <XMarkdown
-          components={{ code: Code, pre: Code }}
+          components={{ code: Code }}
           paragraphTag="div"
+          className={classNames('x-markdown-dark', styles.markdown)}
           streaming={{ hasNextChunk: status === 'updating', enableAnimation: true }}
         >
           {content}

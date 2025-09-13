@@ -38,7 +38,8 @@
 }
 
 .x-markdown-dark h3 {
-  font-size: 18px; /* 18px */
+  font-size: 18px;
+  /* 18px */
   line-height: 30px;
 }
 
@@ -163,7 +164,7 @@
   background-color: var(--cite-hover-bg);
 }
 
-.x-markdown-dark pre code {
+.x-markdown-dark pre code:not([class$="-highlightCode-code"] pre code) {
   display: block;
   background: var(--dark-bg) !important;
   padding: 16px;
@@ -173,7 +174,7 @@
   margin-bottom: 16px;
 }
 
-.x-markdown-dark code:not(pre code) {
+.x-markdown-dark code:not([class$="-highlightCode-code"] code) :not(pre code) {
   background-color: var(--dark-bg) !important;
   color: var(--text-color) !important;
   border-radius: var(--border-radius-small);
