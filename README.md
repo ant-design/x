@@ -288,3 +288,7 @@ When asking questions on GitHub Discussions, it's recommended to use the `Q&A` t
 
 1. [GitHub Discussions](https://github.com/ant-design/x/discussions)
 2. [GitHub Issues](https://github.com/ant-design/x/issues)
+
+## Star History
+
+[![Star History](https://api.lucabubi.me/chart?username=ant-design&repository=x)](https://github.com/lucabubi/star-history)
