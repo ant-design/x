@@ -14,6 +14,36 @@ order: 1
 - 授权管理 - [https://alipaytbox.yuque.com/sxs0ba/doc/tbox_open_token](https://alipaytbox.yuque.com/sxs0ba/doc/tbox_open_token)
 - OpenAPI - [https://alipaytbox.yuque.com/sxs0ba/doc/tbox_openapi_overview](https://alipaytbox.yuque.com/sxs0ba/doc/tbox_openapi_overview)
 
+### tbox-nodejs-sdk
+
+```ts
+import { TboxClient } from 'tbox-nodejs-sdk';
+
+const client = new TboxClient({
+  httpClientConfig: {
+    authorization: 'TBox-your-token-xxx',
+  },
+});
+
+const stream = client.chat({
+  appId: 'your-app-id',
+  query: '今天杭州天气怎么样？',
+  userId: 'user123',
+});
+
+stream.on('data', (data) => {
+  console.log('Received data:', data);
+});
+
+stream.on('end', () => {
+  console.log('Stream ended');
+});
+
+stream.on('error', (error) => {
+  console.error('Stream error:', error);
+});
+```
+
 ## 使用 X SDK 接入 tbox-nodejs-sdk
 
 使用URL接入智能体是 X SDK提供的基础能力，详情请查看[X SDK](/sdks/introduce-cn)，百宝箱完整样板间请查看[样板间-百宝箱](/docs/playground/agent-tbox-cn)。
