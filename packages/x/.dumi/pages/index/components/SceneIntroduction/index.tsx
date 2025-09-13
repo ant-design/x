@@ -49,7 +49,6 @@ const useStyle = createStyles(({ token, css }) => {
   return {
     container: css`
       position: relative;
-
       @media screen and (max-width: ${token.mobileMaxWidth}px) {
         height: 100vh;
       }

@@ -12,32 +12,31 @@ import {
 import { createStyles } from 'antd-style';
 import React, { useEffect } from 'react';
 import { TboxClient } from 'tbox-nodejs-sdk';
+import useLocale from '../../../../../hooks/useLocale';
+import type { AgentProps, TBoxInput, TBoxMessage, TBoxOutput } from './interface';
 import Sender from './Sender';
 
-const Code = (props: { className: string; children: string }) => {
-  const { className, children } = props;
-  const lang = className?.match(/language-(\w+)/)?.[1] || '';
-  return <HighlightCode lang={lang}>{children}</HighlightCode>;
+const locales = {
+  cn: {
+    noData: '暂无数据',
+  },
+  en: {
+    noData: 'No Data',
+  },
 };
 
-const tboxClient = new TboxClient({
-  httpClientConfig: {
-    authorization: 'your-api-key', // Replace with your API key
-    isAntdXDemo: true, // Only for Ant Design X demo
-  },
-});
-
-const useStyle = createStyles(({ token, css }) => {
+const useStyle = createStyles(({ token, css }, isOnAgent: any) => {
   return {
     container: css`
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         padding-block: ${token.marginXL}px;
-        height: 100%;
-        width:100%;
+        height: ${isOnAgent ? '100%' : '200px'};
+        width: 100%;
         box-sizing: border-box;
         align-items: center;
+ 
         `,
     messageList: css`
         width:100%;
@@ -51,28 +50,33 @@ const useStyle = createStyles(({ token, css }) => {
         .ant-bubble-end{
          margin-inline-end: ${token.marginXL * 2}px;
         }
+        .ant-bubble-content-updating {
+        background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
+        background-size: 100% 2px;
+        background-repeat: no-repeat;
+        background-position: bottom;
+      }
         `,
     sender: css`
         max-width: 1000px;
         padding-inline: ${token.marginXL}px;
         width:100%;
     `,
-    loadingMessage: css``,
   };
 });
 
-interface TBoxMessage {
-  content: string;
-  role: string;
-}
+const Code = (props: { className: string; children: string }) => {
+  const { className, children } = props;
+  const lang = className?.match(/language-(\w+)/)?.[1] || '';
+  return <HighlightCode lang={lang}>{children}</HighlightCode>;
+};
 
-interface TBoxInput {
-  message: TBoxMessage;
-}
-
-interface TBoxOutput {
-  text?: string;
-}
+const tboxClient = new TboxClient({
+  httpClientConfig: {
+    authorization: 'your-api-key', // Replace with your API key
+    isAntdXDemo: true, // Only for Ant Design X demo
+  },
+});
 
 class TBoxProvider<
   ChatMessage extends TBoxMessage = TBoxMessage,
@@ -192,13 +196,10 @@ class TBoxRequest<
 const provider = new TBoxProvider({
   request: new TBoxRequest('TBox Client', {}),
 });
-interface AgentProps {
-  setIsOnAgent: (val: boolean) => void;
-  isOnAgent: boolean;
-}
-const Agent: React.FC<AgentProps> = ({ setIsOnAgent }) => {
-  const { styles } = useStyle();
 
+const Agent: React.FC<AgentProps> = ({ setIsOnAgent, isOnAgent }) => {
+  const { styles } = useStyle(isOnAgent);
+  const [locale] = useLocale(locales);
   // ==================== Event ====================
   const onSubmit = (val: string) => {
     if (!val) return;
@@ -213,41 +214,29 @@ const Agent: React.FC<AgentProps> = ({ setIsOnAgent }) => {
   const role: BubbleListProps['role'] = {
     assistant: {
       placement: 'start',
-      contentRender: (content) => (
+      contentRender: (content, { status }) => (
         <XMarkdown
           components={{ code: Code }}
           paragraphTag="div"
-          streaming={{ hasNextChunk: content.status === 'loading', enableAnimation: true }}
+          streaming={{ hasNextChunk: status === 'updating', enableAnimation: true }}
         >
-          {content.text}
+          {content}
         </XMarkdown>
       ),
     },
     user: {
       placement: 'end',
       contentRender: (content) => {
-        return content.text;
+        return content;
       },
     },
   };
 
   const { onRequest, messages, isRequesting, abort } = useXChat({
-    provider: provider, // every conversation has its own provider
+    provider: provider,
     requestPlaceholder: () => {
       return {
-        content: '',
-        role: 'assistant',
-      };
-    },
-    requestFallback: (_, { error }) => {
-      if (error.name === 'AbortError') {
-        return {
-          content: 'Request is aborted',
-          role: 'assistant',
-        };
-      }
-      return {
-        content: 'Request failed, please try again!',
+        content: locale.noData,
         role: 'assistant',
       };
     },
@@ -262,15 +251,10 @@ const Agent: React.FC<AgentProps> = ({ setIsOnAgent }) => {
   }, [messages]);
 
   const items: BubbleListProps['items'] = messages?.map((i) => ({
-    content: {
-      status: i.status,
-      text: i.message.content,
-    },
+    content: i.message.content,
+    status: i.status,
     role: i.message.role,
-    classNames: {
-      content: i.status === 'loading' ? styles.loadingMessage : '',
-    },
-    loading: !i.message.content,
+    loading: i.status === 'loading',
     key: i.id,
   }));
 
@@ -281,7 +265,7 @@ const Agent: React.FC<AgentProps> = ({ setIsOnAgent }) => {
           <Bubble.List
             styles={{
               bubble: {
-                width: 1000,
+                maxWidth: 1000,
               },
             }}
             autoScroll

@@ -173,6 +173,9 @@ const Provider: React.FC<{
           colorPrimary: '#ffffff',
         },
         components: {
+          HighlightCode: {
+            colorBgContainer: '#262626',
+          },
           Sender: {
             colorPrimary: '#ffffff',
             switchColorBorder: 'rgba(255,255,255,.2)',

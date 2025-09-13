@@ -201,7 +201,14 @@ const StartPage: React.FC = () => {
           gn <div className={classnames(styles.x, 'x-hover')}>X</div>
         </h1>
       </div>
-      <Carousel autoplay dots={false} dotPosition="left">
+      <Carousel
+        autoplay
+        style={{
+          marginBlock: 20,
+        }}
+        dots={false}
+        dotPosition="left"
+      >
         <div className={classnames(styles.carouselItem, styles.subTitle)}>{locale.subTitle}</div>
         <div className={classnames(styles.carouselItem, styles.slogan)}>{locale.slogan}</div>
         <div className={classnames(styles.carouselItem, styles.desc)}>{locale.desc}</div>

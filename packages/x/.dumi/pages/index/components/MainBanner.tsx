@@ -4,12 +4,12 @@ import useLottie from '../../../hooks/useLottie';
 import Context from '../../../theme/layouts/IndexLayout/Context';
 import Portal from './SceneIntroduction/Portal';
 
-const useStyle = createStyles(({ token, css }, isOnAgent) => {
+const useStyle = createStyles(({ token, css }, isOnAgent: any) => {
   return {
     banner: css`
       width: 100vw;
-      height: calc(100vh - ${isOnAgent ? 80 : 120}px);
-      min-height: 750px;
+      height: calc(100vh - ${isOnAgent ? 80 : 160}px);
+      min-height: 700px;
       margin-block-start: 64px;
       display: flex;
       justify-content: center;
