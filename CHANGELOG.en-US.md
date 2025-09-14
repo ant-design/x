@@ -18,7 +18,7 @@ tag: vVERSION
 
 ## 2.0.0-alpha.7
 
-`2025-09-15`
+`2025-09-14`
 
 ### @ant-design/x
 
