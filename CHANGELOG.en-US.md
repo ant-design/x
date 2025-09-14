@@ -16,34 +16,87 @@ tag: vVERSION
 
 ---
 
+## 2.0.0-alpha.7
+
+`2025-09-14`
+
+### @ant-design/x
+
+- Bubble
+  - 💄 Fixed the default `white-space` style issue. [#1147](https://github.com/ant-design/x/pull/1147) by [@kimteayon](https://github.com/kimteayon).
+  - 🐛 Fixed type export and documentation import errors. [#1160](https://github.com/ant-design/x/pull/1160) by [@kimteayon](https://github.com/kimteayon).
+- 📖 Removed deprecated tools `useXAgent` and `useXChat`, and updated or replaced related documentation with `X SDK`. [#1148](https://github.com/ant-design/x/pull/1148) by [@kimteayon](https://github.com/kimteayon).
+- 🐛 Fixed the missing `status` display issue in the FileCard component. [#1156](https://github.com/ant-design/x/pull/1156) by [@hy993658052](https://github.com/hy993658052).
+- 🐛 Fixed the issue where the Sender component could not paste Excel cell text when file paste was enabled. [#1167](https://github.com/ant-design/x/pull/1167) by [@kimteayon](https://github.com/kimteayon).
+
+### @ant-design/x-markdown
+
+- 🆕 Added Mermaid plugin operation functionality. [#1135](https://github.com/ant-design/x/pull/1135) by [@Div627](https://github.com/Div627).
+- 🐛 Fixed the streaming effect in XMarkdown. [#1135](https://github.com/ant-design/x/pull/1135) by [@Div627](https://github.com/Div627).
+- 🆕 Added plugin internationalization and theme customization features, along with documentation upgrades. [#1135](https://github.com/ant-design/x/pull/1135) by [@kimteayon](https://github.com/kimteayon).
+- 🆕 Added `openLinksInNewTab` configuration for XMarkdown links and adjusted theme colors. [#1164](https://github.com/ant-design/x/pull/1164) by [@Div627](https://github.com/Div627).
+- 🐛 Fixed style conflicts between XMarkdown and documentation markdown. [#1161](https://github.com/ant-design/x/pull/1161) by [@kimteayon](https://github.com/kimteayon).
+
+### @ant-design/x-sdk
+
+- 🛠 Refactored the `isRequesting` property in the useXChat tool, upgrading it from a method to an observable variable. [#1168](https://github.com/ant-design/x/pull/1168) by [@hylin](https://github.com/hylin).
+- 🆕 Added message `abort` status to the useXChat tool, fixed the `message` parameter error in the `requestFallback` callback method, and removed error state message filtering. [#1171](https://github.com/ant-design/x/pull/1171) by [@kimteayon](https://github.com/kimteayon).
+
+### Others
+
+- 📖 Optimized the official site to enhance user experience. [#1169](https://github.com/ant-design/x/pull/1169) by [@hylin](https://github.com/hylin).
+- 📖 Updated documentation for introduction, model integration, agent integration, X SDK, and template code. [#1171](https://github.com/ant-design/x/pull/1171) by [@kimteayon](https://github.com/hylin).
+
 ## 2.0.0-alpha.6
 
 `2025-08-28`
 
 ### @ant-design/x
 
-- 🐛 Fixed the issue where pressing `Enter` in Sender normal mode would trigger `Submit` when selecting a candidate word. [#1144](https://github.com/ant-design/x/pull/1144) by [@kimteayon](https://github.com/kimteayon).
-- 🐛 Fixed the issue where `shiftEnter` could not create a new line in Sender slot mode. [#1143](https://github.com/ant-design/x/pull/1143) by [@kimteayon](https://github.com/kimteayon).
-- 💄 Fixed abnormal `margin` style when there are too many lines in ThoughtChain.Item `description`.
-- 🛠 Refactored the model room using `@ant-design/x-sdk`. [#1139](https://github.com/ant-design/x/pull/1139) by [@hylin](https://github.com/hylin).
-- 🐛 Fixed Bubble `prefix` always displaying. [#1137](https://github.com/ant-design/x/pull/1137) by [@anxLiang](https://github.com/anxLiang).
-- 📖 Supplemented Bubble.List documentation to explain scroll container issues. [#1133](https://github.com/ant-design/x/pull/1133) by [@anxLiang](https://github.com/anxLiang).
-- 🐛 Fixed the issue where uploaded images in Attachment component were not displayed. [#1140](https://github.com/ant-design/x/pull/1140) by [@hy993658052](https://github.com/hy993658052).
-- 🐛 Fixed semantic and size display issues in FileCard. [#1130](https://github.com/ant-design/x/pull/1130) by [@kimteayon](https://github.com/kimteayon).
-- 📦 Upgraded father configuration. [#1125](https://github.com/ant-design/x/pull/1125) by [@fireairforce](https://github.com/fireairforce).
-- 📖 Improved the official site for better user experience. [#1142](https://github.com/ant-design/x/pull/1142) by [@kimteayon](https://github.com/kimteayon).
+- 🐛 Fixed the issue where pressing `Enter` in normal mode of the Sender component would trigger `Submit` when selecting a candidate word. [#1144](https://github.com/ant-design/x/pull/1144) by [@kimteayon](https://github.com/kimteayon).
+- 🐛 Fixed the issue where the Sender component could not insert a new line when `submitType` was set to `shiftEnter` in slot mode. [#1143](https://github.com/ant-design/x/pull/1143) by [@kimteayon](https://github.com/kimteayon).
+- 💄 Fixed the abnormal `margin` style when the `description` content of ThoughtChain.Item wrapped to a new line.
+- 🛠 Refactored the template room using `@ant-design/x-sdk`. [#1139](https://github.com/ant-design/x/pull/1139) by [@hylin](https://github.com/hylin).
+- 🐛 Fixed the persistent display of the `prefix` in the Bubble component. [#1137](https://github.com/ant-design/x/pull/1137) by [@anxLiang](https://github.com/anxLiang).
+- 📖 Added documentation to explain the scrolling container issue in Bubble.List. [#1133](https://github.com/ant-design/x/pull/1133) by [@anxLiang](https://github.com/anxLiang).
+- 🐛 Fixed the issue where uploaded images in the Attachment component were not displayed. [#1140](https://github.com/ant-design/x/pull/1140) by [@hy993658052](https://github.com/hy993658052).
+- 🐛 Fixed semantic issues and size display problems in the FileCard component. [#1130](https://github.com/ant-design/x/pull/1130) by [@kimteayon](https://github.com/kimteayon).
+
+### Others
+
+- 📦 Upgraded the father configuration. [#1125](https://github.com/ant-design/x/pull/1125) by [@fireairforce](https://github.com/fireairforce).
+- 📖 Optimized the official site to enhance user experience. [#1142](https://github.com/ant-design/x/pull/1142) by [@kimteayon](https://github.com/kimteayon).
 
 ## 2.0.0-alpha.5
 
 `2025-08-20`
 
+### @ant-design/x
+
+- 🆕 Added subcomponent features for Actions, including Actions.Copy, Actions.Audio, and Actions.Item. [#1121](https://github.com/ant-design/x/pull/1121) by [@kimteayon](https://github.com/kimteayon).
+- Bubble
+  - 🆕 Added functionality to render content with line breaks and tabs when `string content` is provided. [#1127](https://github.com/ant-design/x/pull/1122) by [@anxLiang](https://github.com/anxLiang).
+  - 🆕 Added semantic implementation. [#1116](https://github.com/ant-design/x/pull/1116) by [@kimteayon](https://github.com/kimteayon).
+  - 🐛 Optimized styles and type issues. [#1108](https://github.com/ant-design/x/pull/1108) by [@anxLiang](https://github.com/anxLiang).
+- 🆕 Added semantic configuration for the Sender component. [#1116](https://github.com/ant-design/x/pull/1116) by [@kimteayon](https://github.com/kimteayon).
+
+### @ant-design/x-sdk
+
+- 🛠 Overall optimization of X SDK. [#1114](https://github.com/ant-design/x/pull/1114) by [@hylin](https://github.com/hylin).
+
+### Others
+
+- 📖 Refactored the template room using X SDK. [#1139](https://github.com/ant-design/x/pull/1139) by [@hylin](https://github.com/hylin).
+- 📖 Optimized the official site to enhance user experience. [#1124](https://github.com/ant-design/x/pull/1124) by [@kimteayon](https://github.com/kimteayon), [#1123](https://github.com/ant-design/x/pull/1123) by [@kimteayon](https://github.com/kimteayon).
+- 🛠 Optimized the release process. [#1115](https://github.com/ant-design/x/pull/1115) by [@kimteayon](https://github.com/kimteayon).
+
 ## 2.0.0-alpha.3
 
 `2025-08-14`
 
-## 2.0.0-alpha.2
+### @ant-design/x-markdown
 
-`2025-08-12`
+- 🛠 Optimized version logic, configuration, and documentation. [#1112](https://github.com/ant-design/x/pull/1112) by [@Div627](https://github.com/Div627).
 
 ## 2.0.0-alpha.1
 
@@ -51,8 +104,14 @@ tag: vVERSION
 
 ### @ant-design/x
 
-- 🛠 Refactored and upgraded Bubble component.
-- 🛠 Refactored and upgraded Bubble.List component.
+- 🛠 Refactored and upgraded the Bubble component. [#1100](https://github.com/ant-design/x/pull/1100) by [@anxLiang](https://github.com/anxLiang), [#1077](https://github.com/ant-design/x/pull/1077) by [@anxLiang](https://github.com/anxLiang).
+- 🛠 Refactored and upgraded the Bubble.List component. [#1077](https://github.com/ant-design/x/pull/1077) by [@anxLiang](https://github.com/anxLiang).
+- 🐛 Fixed the issue where the `readOnly` and `loading` logic of the Bubble component did not take effect. [#1101](https://github.com/ant-design/x/pull/1101) by [@kimteayon](https://github.com/kimteayon).
+
+### Others
+
+- 🛠 Optimized the release process. [#1098](https://github.com/ant-design/x/pull/1098) by [@kimteayon](https://github.com/kimteayon).
+- 📖 Optimized the official site to enhance user experience. [#1087](https://github.com/ant-design/x/pull/1087) by [@kimteayon](https://github.com/kimteayon).
 
 ## 2.0.0-alpha.0
 
@@ -60,28 +119,38 @@ tag: vVERSION
 
 ### @ant-design/x
 
-- 🔥 New component: FileCard.
-- 🔥 New component: Notification.
-- 🔥 New component: Think.
-- 🛠 Refactored and upgraded Attachments component.
-- 🛠 Refactored and upgraded Conversations component.
-- 🛠 Refactored and upgraded Sender component.
-- 🛠 Refactored and upgraded ThoughtChain component.
+- 🔥 Added new component FileCard. [#1095](https://github.com/ant-design/x/pull/1094) by [@hy993658052](https://github.com/hy993658052).
+- 🔥 Added new component Notification. [#973](https://github.com/ant-design/x/pull/973) by [@kimteayon](https://github.com/kimteayon).
+- 🔥 Added new component Think. [#970](https://github.com/ant-design/x/pull/970), [#966](https://github.com/ant-design/x/pull/966), [#946](https://github.com/ant-design/x/pull/946) by [@hy993658052](https://github.com/hy993658052).
+- 🛠 Refactored and upgraded the Attachments component.
+- 🛠 Refactored and upgraded the Actions component. [#994](https://github.com/ant-design/x/pull/994) by [@vanndxh](https://github.com/vanndxh).
+- 🛠 Refactored and upgraded the Conversations component. [#955](https://github.com/ant-design/x/pull/955), [#954](https://github.com/ant-design/x/pull/954), [#937](https://github.com/ant-design/x/pull/937) by [@kimteayon](https://github.com/kimteayon).
+- 🛠 Refactored and upgraded the Sender component. [#1073](https://github.com/ant-design/x/pull/1073), [#962](https://github.com/ant-design/x/pull/962) by [@kimteayon](https://github.com/kimteayon), [@Chuck-Ray](https://github.com/Chuck-Ray).
+- 🛠 Refactored and upgraded the ThoughtChain component. [#985](https://github.com/ant-design/x/pull/985) by [@kimteayon](https://github.com/kimteayon).
+- 🆕 Added `Ref` functionality to all components. [#1081](https://github.com/ant-design/x/pull/1081) by [@kimteayon](https://github.com/kimteayon).
+- 🆕 Integrated internationalization logic into the XProvider component. [#952](https://github.com/ant-design/x/pull/952) by [@kimteayon](https://github.com/kimteayon).
 
 ### @ant-design/x-markdown
 
-- 🔥 New component: XMarkdown.
-- 🔥 New plugin: Latex.
-- 🔥 New plugin: HighlightCode.
-- 🔥 New plugin: Mermaid.
+- 🔥 Added new component XMarkdown. [#1060](https://github.com/ant-design/x/pull/1060), [#989](https://github.com/ant-design/x/pull/989) by [@Div627](https://github.com/Div627).
+- 🔥 Added new plugin Latex. [#1060](https://github.com/ant-design/x/pull/1060), [#989](https://github.com/ant-design/x/pull/989) by [@Div627](https://github.com/Div627).
+- 🔥 Added new plugin HighlightCode. [#1060](https://github.com/ant-design/x/pull/1060), [#989](https://github.com/ant-design/x/pull/989) by [@Div627](https://github.com/Div627).
+- 🔥 Added new plugin Mermaid. [#1060](https://github.com/ant-design/x/pull/1060), [#989](https://github.com/ant-design/x/pull/989) by [@Div627](https://github.com/Div627).
 
 ### @ant-design/x-sdk
 
-- 🔥 New utility: useXChat.
-- 🔥 New utility: useXConversations.
-- 🔥 New utility: Chat Provider.
-- 🔥 New utility: XRequest.
-- 🔥 New utility: XStream.
+- 🔥 Added new tool useXChat. [#1098](https://github.com/ant-design/x/pull/1098) by [@hylin](https://github.com/hylin).
+- 🔥 Added new tool useXConversations. [#1098](https://github.com/ant-design/x/pull/1098) by [@hylin](https://github.com/hylin).
+- 🔥 Added new tool Chat Provider. [#1098](https://github.com/ant-design/x/pull/1098) by [@hylin](https://github.com/hylin).
+- 🔥 Added new tool XRequest. [#1098](https://github.com/ant-design/x/pull/1098) by [@hylin](https://github.com/hylin).
+- 🔥 Added new tool XStream. [#1098](https://github.com/ant-design/x/pull/1098) by [@hylin](https://github.com/hylin).
+
+### Others
+
+- 🛠 The overall framework has been upgraded to Monorepo.[#823](https://github.com/ant-design/x/pull/823) by [@elrrrrrrr](https://github.com/elrrrrrrr).
+- 🛠 Upgraded all components to Ant Design V6. [#1012](https://github.com/ant-design/x/pull/1012) by [@kimteayon](https://github.com/kimteayon).
+- 🛠 Upgraded and adjusted the release logic of Ant Design X. [#1098](https://github.com/ant-design/x/pull/1098), [#1009](https://github.com/ant-design/x/pull/1009) by [@kimteayon](https://github.com/kimteayon).
+- 📖 Optimized the official site to enhance user experience. [#1083](https://github.com/ant-design/x/pull/1083) by [@kimteayon](https://github.com/kimteayon), [#1001](https://github.com/ant-design/x/pull/1001) by [@elrrrrrrr](https://github.com/elrrrrrrr).
 
 ## 1.6.1
 

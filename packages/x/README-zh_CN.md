@@ -10,7 +10,7 @@
 
 [![NPM downloads][download-image]][download-url] [![][bundlephobia-image]][bundlephobia-url] [![antd][antd-image]][antd-url] [![Follow zhihu][zhihu-image]][zhihu-url]
 
-[更新日志](./CHANGELOG.zh-CN.md) · [报告一个 Bug][github-issues-bug-report] · [想新增特性？][github-issues-feature-request] · [English](./README.md) · 中文
+[更新日志](../../CHANGELOG.zh-CN.md) · [报告一个 Bug][github-issues-bug-report] · [想新增特性？][github-issues-feature-request] · [English](./README.md) · 中文
 
 [npm-image]: https://img.shields.io/npm/v/@ant-design/x.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/@ant-design/x
@@ -31,7 +31,7 @@
 
 </div>
 
-![demos](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*UAEeSbJfuM8AAAAAAAAAAAAADgCCAQ/fmt.webp)
+<img width="100%" src="https://mdn.alipayobjects.com/huamei_35zehm/afts/img/A*DfJHS4rP4SgAAAAAgGAAAAgAejCDAQ/original">
 
 ## ✨ 特性
 

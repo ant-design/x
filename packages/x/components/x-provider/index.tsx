@@ -16,9 +16,13 @@ const XProvider: React.FC<XProviderProps> = (props) => {
     suggestion,
     thoughtChain,
     welcome,
+    fileCard,
+    think,
     theme,
     locale,
     children,
+    mermaid,
+    highlightCode,
     ...antdConfProps
   } = props;
 
@@ -32,6 +36,10 @@ const XProvider: React.FC<XProviderProps> = (props) => {
       sender,
       suggestion,
       thoughtChain,
+      fileCard,
+      think,
+      mermaid,
+      highlightCode,
       welcome,
     };
   }, [
@@ -44,6 +52,10 @@ const XProvider: React.FC<XProviderProps> = (props) => {
     suggestion,
     thoughtChain,
     welcome,
+    mermaid,
+    think,
+    fileCard,
+    highlightCode,
   ]);
 
   let childNode = children;

@@ -170,11 +170,12 @@
   padding: 16px;
   color: var(--text-color) !important;
   line-height: 24px;
+  font-size: 14px;
   border-radius: var(--border-radius-middle);
   margin-bottom: 16px;
 }
 
-.x-markdown-dark code:not([class$="-highlightCode-code"] code) :not(pre code) {
+.x-markdown-dark code:not([class$="-highlightCode-code"] code):not(pre code) {
   background-color: var(--dark-bg) !important;
   color: var(--text-color) !important;
   border-radius: var(--border-radius-small);

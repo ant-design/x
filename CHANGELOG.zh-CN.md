@@ -15,6 +15,38 @@ tag: vVERSION
 
 ---
 
+## 2.0.0-alpha.7
+
+`2025-09-14`
+
+### @ant-design/x
+
+- Bubble
+  - 💄 修复默认 `white-space` 样式问题。[#1147](https://github.com/ant-design/x/pull/1147) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+  - 💄 修复语义化缺失以及 `loading` 状态下在 Bubble.List 下高度错误问题。[#1162](https://github.com/ant-design/x/pull/1162) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+  - 🐛 修复类型导出和文档引入错误问题。[#1160](https://github.com/ant-design/x/pull/1160) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 📖 删除下线工具 `useXAgent` 和 `useXChat`，以及对应的文档引用删除或者替换为`X SDK`。[#1148](https://github.com/ant-design/x/pull/1148) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🐛 修复 FileCard 组件 `status` 展示缺失问题。[#1156](https://github.com/ant-design/x/pull/1156) 由 [@hy993658052](https://github.com/hy993658052) 提交。
+- 🐛 修复 Sender 组件开启文件粘贴功能时无法粘贴Excel单元格文本数据问题。[#1167](https://github.com/ant-design/x/pull/1167) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+
+### @ant-design/x-markdown
+
+- 🆕 新增 Mermaid 插件操作功能。[#1135](https://github.com/ant-design/x/pull/1135) 由 [@Div627](https://github.com/Div627) 提交。
+- 🐛 修复 XMarkdown 流式效果。[#1135](https://github.com/ant-design/x/pull/1135) 由 [@Div627](https://github.com/Div627) 提交。
+- 🆕 新增插件国际化和主题定制功能，以及文档升级。[#1135](https://github.com/ant-design/x/pull/1135) 由 [@kimteayon ](https://github.com/kimteayon) 提交。
+- 🆕 新增 XMarkdown 链接 `openLinksInNewTab` 配置、以及主题颜色调整。[#1164](https://github.com/ant-design/x/pull/1164) 由 [@Div627](https://github.com/Div627) 提交。
+- 🐛 修复 XMarkdown 与文档 markdown 样式冲突问题。[#1161](https://github.com/ant-design/x/pull/1161) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+
+### @ant-design/x-sdk
+
+- 🛠 重构 useXChat 工具 `isRequesting` 属性，由方法升级为可监控变量。[#1168](https://github.com/ant-design/x/pull/1168) 由 [@hylin](https://github.com/hylin) 提交。
+- 🆕 行政 useXChat 工具 消息 `abort` 状态，同时修复 `requestFallback` 回调方法 `message` 参数错误以及删掉对错误状态的消息过滤。[#1171](https://github.com/ant-design/x/pull/1171) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+
+### 其他
+
+- 📖 优化官网站点提升用户体验。[#1169](https://github.com/ant-design/x/pull/1169) 由 [@hylin](https://github.com/hylin) 提交。
+- 📖 更新官网介绍、模型接入、百宝箱智能体接入、X SDK等文档,以及样板间代码更新。[#1171](https://github.com/ant-design/x/pull/1171) 由 [@kimteayon](https://github.com/hylin) 提交。
+
 ## 2.0.0-alpha.6
 
 `2025-08-28`
@@ -29,6 +61,9 @@ tag: vVERSION
 - 📖 补充 Bubble.List 文档解释滚动容器问题。[#1133](https://github.com/ant-design/x/pull/1133) 由 [@anxLiang](https://github.com/anxLiang) 提交。
 - 🐛 修复 Attachment 组件上传图片未展示图片问题。[#1140](https://github.com/ant-design/x/pull/1140) 由 [@hy993658052](https://github.com/hy993658052) 提交。
 - 🐛 修复 FileCard 语义化问题以及卡片大小展示问题。[#1130](https://github.com/ant-design/x/pull/1130) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+
+### 其他
+
 - 📦 升级father配置。[#1125](https://github.com/ant-design/x/pull/1125) 由 [@fireairforce](https://github.com/fireairforce) 提交。
 - 📖 优化官网站点提升用户体验。[#1142](https://github.com/ant-design/x/pull/1142) 由 [@kimteayon](https://github.com/kimteayon) 提交。
 
@@ -38,15 +73,30 @@ tag: vVERSION
 
 ### @ant-design/x
 
-- 🆕 新增 Actions 子组件功能，Actions.Copy、Actions.Audio、Actions.Item。[#1122](https://github.com/ant-design/x/pull/1122) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🆕 新增 Actions 子组件功能，Actions.Copy、Actions.Audio、Actions.Item。[#1121](https://github.com/ant-design/x/pull/1121) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- Bubble
+  - 🆕 新增 `string content` 时渲染带换行符、制表符的功能。[#1127](https://github.com/ant-design/x/pull/1122) 由 [@anxLiang](https://github.com/anxLiang) 提交。
+  - 🆕 新增语义化实现。[#1116](https://github.com/ant-design/x/pull/1116) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+  - 🐛 优化样式和类型问题。[#1108](https://github.com/ant-design/x/pull/1108) 由 [@anxLiang](https://github.com/anxLiang) 提交。
+- 🆕 新增 Sender 组件语义化配置。[#1116](https://github.com/ant-design/x/pull/1116) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+
+### @ant-design/x-sdk
+
+- 🛠 整体优化 X SDK 。[#1114](https://github.com/ant-design/x/pull/1114) 由 [@hylin](https://github.com/hylin) 提交。
+
+### 其他
+
+- 📖 使用X SDK重构样板间。[#1139](https://github.com/ant-design/x/pull/1139) 由 [@hylin](https://github.com/hylin) 提交。
+- 📖 优化官网站点提升用户体验。[#1124](https://github.com/ant-design/x/pull/1124) 由 [@kimteayon](https://github.com/kimteayon) 提交、[#1123](https://github.com/ant-design/x/pull/1123) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🛠 发布链路优化。[#1115](https://github.com/ant-design/x/pull/1115) 由 [@kimteayon](https://github.com/kimteayon) 提交。
 
 ## 2.0.0-alpha.3
 
 `2025-08-14`
 
-## 2.0.0-alpha.2
+### @ant-design/x-markdown
 
-`2025-08-12`
+- 🛠 优化 version 逻辑以及配置、文档。[#1112](https://github.com/ant-design/x/pull/1112) 由 [@Div627](https://github.com/Div627) 提交。
 
 ## 2.0.0-alpha.1
 
@@ -54,8 +104,14 @@ tag: vVERSION
 
 ### @ant-design/x
 
-- 🛠 重构升级组件 Bubble。
-- 🛠 重构升级组件 Bubble.List。
+- 🛠 重构升级组件 Bubble。[#1100](https://github.com/ant-design/x/pull/1100) 由 [@anxLiang](https://github.com/anxLiang) 提交、[#1077](https://github.com/ant-design/x/pull/1077) 由 [@anxLiang](https://github.com/anxLiang) 提交。
+- 🛠 重构升级组件 Bubble.List。[#1077](https://github.com/ant-design/x/pull/1077) 由 [@anxLiang](https://github.com/anxLiang) 提交。
+- 🐛 修复 Bubble 组件 `readOnly` 和 `loading` 逻辑不生效问题。[#1101](https://github.com/ant-design/x/pull/1101) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+
+### 其他
+
+- 🛠 发布链路优化。[#1098](https://github.com/ant-design/x/pull/1098) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 📖 优化官网站点提升用户体验。[#1087](https://github.com/ant-design/x/pull/1087) 由 [@kimteayon](https://github.com/kimteayon) 提交。
 
 ## 2.0.0-alpha.0
 
@@ -63,28 +119,38 @@ tag: vVERSION
 
 ### @ant-design/x
 
-- 🔥 新组件 FileCard。
-- 🔥 新组件 Notification。
-- 🔥 新组件 Think。
+- 🔥 新组件 FileCard。[#1095](https://github.com/ant-design/x/pull/1094) 由 [@hy993658052](https://github.com/hy993658052) 提交。
+- 🔥 新组件 Notification。[#973](https://github.com/ant-design/x/pull/973) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🔥 新组件 Think。[#970](https://github.com/ant-design/x/pull/970) 由 [@hy993658052](https://github.com/hy993658052) 提交、[#966](https://github.com/ant-design/x/pull/966) 由 [@hy993658052](https://github.com/hy993658052) 提交、[#946](https://github.com/ant-design/x/pull/946) 由 [@hy993658052](https://github.com/hy993658052) 提交。
 - 🛠 重构升级组件 Attachments。
-- 🛠 重构升级组件 Conversations。
-- 🛠 重构升级组件 Sender。
-- 🛠 重构升级组件 ThoughtChain。
+- 🛠 重构升级组件 Actions。[#994](https://github.com/ant-design/x/pull/994) 由 [@vanndxh](https://github.com/vanndxh) 提交。
+- 🛠 重构升级组件 Conversations。[#955](https://github.com/ant-design/x/pull/955) 由 [@kimteayon](https://github.com/kimteayon) 提交、[#954](https://github.com/ant-design/x/pull/954) 由 [@kimteayon](https://github.com/kimteayon) 提交、[#937](https://github.com/ant-design/x/pull/937) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🛠 重构升级组件 Sender。[#1073](https://github.com/ant-design/x/pull/1073) 由 [@kimteayon](https://github.com/kimteayon) 提交、[#962](https://github.com/ant-design/x/pull/962) 由 [@Chuck-Ray](https://github.com/Chuck-Ray) 提交。
+- 🛠 重构升级组件 ThoughtChain。[#985](https://github.com/ant-design/x/pull/985) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🆕 全部组件 `Ref` 功能补全。[#1081](https://github.com/ant-design/x/pull/1081) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🆕 XProvider 组件 国际化逻辑接入。[#952](https://github.com/ant-design/x/pull/952) 由 [@kimteayon](https://github.com/kimteayon) 提交。
 
 ### @ant-design/x-markdown
 
-- 🔥 新组件 XMarkdown。
-- 🔥 新插件 Latex。
-- 🔥 新插件 HighlightCode。
-- 🔥 新插件 Mermaid。
+- 🔥 新组件 XMarkdown。[#1060](https://github.com/ant-design/x/pull/1060) 由 [@Div627](https://github.com/Div627) 提交、[#989](https://github.com/ant-design/x/pull/989) 由 [@Div627](https://github.com/Div627) 提交。
+- 🔥 新插件 Latex。[#1060](https://github.com/ant-design/x/pull/1060) 由 [@Div627](https://github.com/Div627) 提交、[#989](https://github.com/ant-design/x/pull/989) 由 [@Div627](https://github.com/Div627) 提交。
+- 🔥 新插件 HighlightCode。[#1060](https://github.com/ant-design/x/pull/1060) 由 [@Div627](https://github.com/Div627) 提交、[#989](https://github.com/ant-design/x/pull/989) 由 [@Div627](https://github.com/Div627) 提交。
+- 🔥 新插件 Mermaid。[#1060](https://github.com/ant-design/x/pull/1060) 由 [@Div627](https://github.com/Div627) 提交、[#989](https://github.com/ant-design/x/pull/989) 由 [@Div627](https://github.com/Div627) 提交。
 
 ### @ant-design/x-sdk
 
-- 🔥 新工具 useXChat。
-- 🔥 新工具 useXConversations。
-- 🔥 新工具 Chat Provider。
-- 🔥 新工具 XRequest。
-- 🔥 新工具 XStream。
+- 🔥 新工具 useXChat。[#1098](https://github.com/ant-design/x/pull/1098) 由 [@hylin](https://github.com/hylin) 提交。
+- 🔥 新工具 useXConversations。[#1098](https://github.com/ant-design/x/pull/1098) 由 [@hylin](https://github.com/hylin) 提交。
+- 🔥 新工具 Chat Provider。[#1098](https://github.com/ant-design/x/pull/1098) 由 [@hylin](https://github.com/hylin) 提交。
+- 🔥 新工具 XRequest。[#1098](https://github.com/ant-design/x/pull/1098) 由 [@hylin](https://github.com/hylin) 提交。
+- 🔥 新工具 XStream。[#1098](https://github.com/ant-design/x/pull/1098) 由 [@hylin](https://github.com/hylin) 提交。
+
+### 其他
+
+- 🛠 整体框架升级为Monorepo。[#823](https://github.com/ant-design/x/pull/823) 由 [@elrrrrrrr](https://github.com/elrrrrrrr) 提交。
+- 🛠 整体组件升级 Ant Design V6。[#1012](https://github.com/ant-design/x/pull/1012) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🛠 Ant Design X 发布逻辑升级调整。[#1098](https://github.com/ant-design/x/pull/1098) 由 [@kimteayon](https://github.com/kimteayon) 提交、[#1009](https://github.com/ant-design/x/pull/1009) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 📖 优化官网站点提升用户体验。[#1083](https://github.com/ant-design/x/pull/1083) 由 [@kimteayon](https://github.com/kimteayon) 提交、[#1001](https://github.com/ant-design/x/pull/1001) 由 [@elrrrrrrr](https://github.com/elrrrrrrr) 提交。
 
 ## 1.6.1
 
