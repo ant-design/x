@@ -133,6 +133,15 @@ const CustomizationSender: React.FC<{
     setActiveKey(key);
   };
 
+  const onSubmitFn = (value: string) => {
+    if (!mergeLoading) {
+      setMergeLoading(true);
+      onSubmit(value);
+      setActiveKey('');
+      setValue('');
+      senderRef.current?.clear?.();
+    }
+  };
   return (
     <Sender
       ref={senderRef}
@@ -148,15 +157,7 @@ const CustomizationSender: React.FC<{
         },
       }}
       autoSize={{ minRows: 2, maxRows: 2 }}
-      onSubmit={(value) => {
-        if (!mergeLoading) {
-          setMergeLoading(true);
-          onSubmit(value);
-          setActiveKey('');
-          setValue('');
-          senderRef.current?.clear?.();
-        }
-      }}
+      onSubmit={onSubmitFn}
       initialSlotConfig={SlotInfo.find(({ key }) => key === activeKey)?.slotConfig}
       suffix={false}
       footer={(_, info) => {
@@ -187,7 +188,12 @@ const CustomizationSender: React.FC<{
               <Button
                 type="text"
                 style={{ padding: 0 }}
-                onClick={() => {}}
+                onClick={() => {
+                  const { value } = senderRef?.current?.getValue?.() || {};
+                  if (value) {
+                    onSubmitFn(value);
+                  }
+                }}
                 icon={
                   <img
                     alt="send"
