@@ -8,7 +8,7 @@ const useStyle = createStyles(({ token, css }, isOnAgent: any) => {
   return {
     banner: css`
       width: 100vw;
-      height: calc(100vh - ${isOnAgent ? 80 : 160}px);
+      height: calc(100vh - ${isOnAgent ? 80 : 235}px);
       min-height: 700px;
       margin-block-start: 64px;
       display: flex;

@@ -1,5 +1,5 @@
 import type { BubbleListProps } from '@ant-design/x';
-import { Bubble } from '@ant-design/x';
+import { Bubble, ThoughtChain } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
 import '@ant-design/x-markdown/themes/dark.css';
 import HighlightCode from '@ant-design/x-markdown/plugins/HighlightCode';
@@ -21,9 +21,13 @@ import Sender from './Sender';
 const locales = {
   cn: {
     noData: '暂无数据',
+    abort: '已终止',
+    error: '运行错误',
   },
   en: {
     noData: 'No Data',
+    abort: 'Aborted',
+    error: 'Runtime Error',
   },
 };
 
@@ -38,7 +42,6 @@ const useStyle = createStyles(({ token, css }, isOnAgent: any) => {
         width: 100%;
         box-sizing: border-box;
         align-items: center;
- 
         `,
     messageList: css`
         width:100%;
@@ -46,20 +49,17 @@ const useStyle = createStyles(({ token, css }, isOnAgent: any) => {
         display: flex;
         flex-direction:column;
         align-items: center;
-        .ant-bubble-start{
-        margin-inline-start: ${token.marginXL * 2}px;
-        }
-        .ant-bubble-end{
-         margin-inline-end: ${token.marginXL * 2}px;
-        }
+        .ant-highlightCode-code{
+          code {
+            color: rgba(255,255,255,.85);
+            }
+          };
         .ant-bubble-content-updating {
-        background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
-        background-size: 100% 2px;
-        background-repeat: no-repeat;
-        background-position: bottom;
+          background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
+          background-size: 100% 2px;
+          background-repeat: no-repeat;
+          background-position: bottom;
       }
-        `,
-    markdown: css`
     `,
     sender: css`
         max-width: 1000px;
@@ -181,7 +181,9 @@ class TBoxRequest<
     });
 
     stream.on('error', (error) => {
-      callbacks?.onError(error);
+      if (!error?.message?.includes('abort')) {
+        callbacks?.onError(error);
+      }
     });
 
     stream.on('end', () => {
@@ -189,7 +191,7 @@ class TBoxRequest<
     });
 
     stream.on('abort', () => {
-      callbacks?.onSuccess(dataArr, new Headers());
+      callbacks?.onError({ name: 'AbortError', message: '' });
     });
   }
   abort(): void {
@@ -218,11 +220,17 @@ const Agent: React.FC<AgentProps> = ({ setIsOnAgent, isOnAgent }) => {
   const role: BubbleListProps['role'] = {
     assistant: {
       placement: 'start',
+      components: {
+        header: (_, { status }) =>
+          status === 'abort' || status === 'error' ? (
+            <ThoughtChain.Item variant="solid" status={status} title={locale[status]} />
+          ) : null,
+      },
       contentRender: (content, { status }) => (
         <XMarkdown
           components={{ code: Code }}
           paragraphTag="div"
-          className={classNames('x-markdown-dark', styles.markdown)}
+          className={classNames('x-markdown-dark')}
           streaming={{ hasNextChunk: status === 'updating', enableAnimation: true }}
         >
           {content}
@@ -241,9 +249,13 @@ const Agent: React.FC<AgentProps> = ({ setIsOnAgent, isOnAgent }) => {
     provider: provider,
     requestPlaceholder: () => {
       return {
-        content: locale.noData,
+        content: locale.noData || 'loading',
         role: 'assistant',
       };
+    },
+    requestFallback: (message) => {
+      console.log(message);
+      return message;
     },
   });
 
