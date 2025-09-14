@@ -1,6 +1,7 @@
+import { PromptProps } from '@ant-design/x';
 import { createStyles } from 'antd-style';
 import classnames from 'classnames';
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import Context from '../../../../../theme/layouts/IndexLayout/Context';
 import Agent from './Agent';
 import Prompt from './Prompt';
@@ -39,6 +40,12 @@ const useStyle = createStyles(({ token, css }) => {
 const PortalScene: React.FC = () => {
   const { styles } = useStyle();
   const { setIsOnAgent, isOnAgent } = useContext(Context);
+  const agentRef = useRef<{
+    senderRef: any;
+  }>(null);
+  const onPromptClick = ({ data }: { data: PromptProps }) => {
+    agentRef?.current?.senderRef.setPrompt?.(data.description as string);
+  };
 
   return (
     <Provider>
@@ -47,8 +54,8 @@ const PortalScene: React.FC = () => {
           className={classnames({ [styles.startPage]: !isOnAgent, [styles.agentPage]: isOnAgent })}
         >
           {!isOnAgent && <StartPage />}
-          <Agent isOnAgent={isOnAgent} setIsOnAgent={setIsOnAgent} />
-          {!isOnAgent && <Prompt />}
+          <Agent isOnAgent={isOnAgent} setIsOnAgent={setIsOnAgent} ref={agentRef} />
+          {!isOnAgent && <Prompt onClick={onPromptClick} />}
         </div>
       </div>
     </Provider>

@@ -12,7 +12,7 @@ import {
 } from '@ant-design/x-sdk';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
-import React, { useEffect } from 'react';
+import React, { useEffect, useImperativeHandle, useRef } from 'react';
 import { TboxClient } from 'tbox-nodejs-sdk';
 import useLocale from '../../../../../hooks/useLocale';
 import type { AgentProps, TBoxInput, TBoxMessage, TBoxOutput } from './interface';
@@ -203,7 +203,7 @@ const provider = new TBoxProvider({
   request: new TBoxRequest('TBox Client', {}),
 });
 
-const Agent: React.FC<AgentProps> = ({ setIsOnAgent, isOnAgent }) => {
+const Agent: React.FC<AgentProps> = ({ setIsOnAgent, isOnAgent, ref }) => {
   const { styles } = useStyle(isOnAgent);
   const [locale] = useLocale(locales);
   // ==================== Event ====================
@@ -216,6 +216,12 @@ const Agent: React.FC<AgentProps> = ({ setIsOnAgent, isOnAgent }) => {
       },
     });
   };
+  const senderRef = useRef(null);
+  useImperativeHandle(ref, () => {
+    return {
+      senderRef: senderRef.current,
+    };
+  }, [senderRef.current]);
 
   const role: BubbleListProps['role'] = {
     assistant: {
@@ -254,7 +260,6 @@ const Agent: React.FC<AgentProps> = ({ setIsOnAgent, isOnAgent }) => {
       };
     },
     requestFallback: (message) => {
-      console.log(message);
       return message;
     },
   });
@@ -293,6 +298,7 @@ const Agent: React.FC<AgentProps> = ({ setIsOnAgent, isOnAgent }) => {
       )}
       <div className={styles.sender}>
         <Sender
+          ref={senderRef}
           onSubmit={onSubmit}
           abort={() => {
             abort?.();

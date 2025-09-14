@@ -3,7 +3,7 @@ import { Sender, type SenderProps } from '@ant-design/x';
 import tokenData from '@ant-design/x/es/version/token.json';
 import { Button, Flex, GetRef } from 'antd';
 import { createStyles } from 'antd-style';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
 import useLocale from '../../../../../hooks/useLocale';
 
 const locales = {
@@ -58,14 +58,17 @@ const CustomizationSender: React.FC<{
   onSubmit: (text: string) => void;
   loading?: boolean;
   abort?: () => void;
-}> = (props) => {
+  ref: React.Ref<any>;
+}> = ({ onSubmit, loading, ref, abort }) => {
   const { styles } = useStyle();
   const [locale] = useLocale(locales);
   const [mergeLoading, setMergeLoading] = useState(false);
   const senderRef = useRef<GetRef<typeof Sender>>(null);
   const [activeKey, setActiveKey] = useState('');
+  const [value, setValue] = useState('');
   const options = Object.keys(tokenData) || [];
   options.push('Notification', 'XProvider');
+
   const SlotInfo: {
     key: string;
     icon: React.ReactNode;
@@ -106,11 +109,20 @@ const CustomizationSender: React.FC<{
     },
   ];
 
+  useImperativeHandle(ref, () => {
+    return {
+      setPrompt: (text: string) => {
+        setActiveKey('text');
+        setValue(text);
+      },
+    };
+  });
+
   useEffect(() => {
-    if (props?.loading !== undefined) {
-      setMergeLoading(props?.loading);
+    if (loading !== undefined) {
+      setMergeLoading(loading);
     }
-  }, [props.loading]);
+  }, [loading]);
   useEffect(() => {
     senderRef.current!.focus({
       cursor: 'end',
@@ -124,10 +136,11 @@ const CustomizationSender: React.FC<{
   return (
     <Sender
       ref={senderRef}
+      value={value}
       placeholder={locale.placeholder}
       loading={mergeLoading}
       className={styles.sender}
-      onCancel={props.abort}
+      onCancel={abort}
       key={activeKey}
       styles={{
         input: {
@@ -138,8 +151,9 @@ const CustomizationSender: React.FC<{
       onSubmit={(value) => {
         if (!mergeLoading) {
           setMergeLoading(true);
-          props.onSubmit(value);
+          onSubmit(value);
           setActiveKey('');
+          setValue('');
           senderRef.current?.clear?.();
         }
       }}
@@ -147,7 +161,6 @@ const CustomizationSender: React.FC<{
       suffix={false}
       footer={(_, info) => {
         const { LoadingButton } = info.components;
-
         return (
           <Flex justify="space-between" align="center">
             <Flex gap="small">

@@ -1,4 +1,5 @@
-import { Prompts, PromptsProps } from '@ant-design/x';
+import type { PromptProps, PromptsProps } from '@ant-design/x';
+import { Prompts } from '@ant-design/x';
 import { createStyles } from 'antd-style';
 import React from 'react';
 import useLocale from '../../../../../hooks/useLocale';
@@ -97,7 +98,7 @@ const useStyle = createStyles(({ token, css }) => {
   };
 });
 
-const Prompt: React.FC = () => {
+const Prompt: React.FC<{ onClick: (info: { data: PromptProps }) => void }> = ({ onClick }) => {
   const [locale] = useLocale(locales);
   const items: PromptsProps['items'] = new Array(5).fill(1).map((_, index) => ({
     key: `${index}`,
@@ -108,6 +109,7 @@ const Prompt: React.FC = () => {
   return (
     <div className={styles.container}>
       <Prompts
+        onItemClick={onClick}
         items={items}
         className={styles.prompts}
         classNames={{
