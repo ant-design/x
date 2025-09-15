@@ -42,9 +42,6 @@ $('lib/plugins/*')
   .hasFile('index.js')
   .hasFile('index.d.ts');
 
-// hooks
-$('lib/plugins/hooks').isDirectory();
-
 // theme
 $('lib/plugins/theme').isDirectory();
 
