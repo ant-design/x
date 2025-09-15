@@ -1,7 +1,7 @@
 import { FrownOutlined, SmileOutlined, SyncOutlined } from '@ant-design/icons';
 import { Bubble } from '@ant-design/x';
 import type { GetProp, GetRef } from 'antd';
-import { Button, Flex, Space, Spin } from 'antd';
+import { Button, Flex, Spin } from 'antd';
 import React from 'react';
 
 const roles: GetProp<typeof Bubble.List, 'role'> = {
