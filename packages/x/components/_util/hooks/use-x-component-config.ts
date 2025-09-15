@@ -1,7 +1,7 @@
 import React from 'react';
-import XProviderContext from '../../x-provider/context';
-
 import type { XComponentConfig, XComponentsConfig } from '../../x-provider/context';
+import XProviderContext from '../../x-provider/context';
+import { MarkdownComponentsConfig as XMarkdownComponentsConfig } from '../../x-provider/XMarkdownComponents';
 
 const defaultXComponentStyleConfig: XComponentConfig = {
   classNames: {},
@@ -11,9 +11,10 @@ const defaultXComponentStyleConfig: XComponentConfig = {
   shortcutKeys: {},
 };
 
-const useXComponentConfig = <C extends keyof XComponentsConfig>(
+type MergeXComponentsConfig = XComponentsConfig & XMarkdownComponentsConfig;
+const useXComponentConfig = <C extends keyof MergeXComponentsConfig>(
   component: C,
-): Required<XComponentsConfig>[C] & XComponentConfig => {
+): Required<MergeXComponentsConfig>[C] & XComponentConfig => {
   const xProviderContext = React.useContext(XProviderContext);
 
   return React.useMemo(

@@ -3100,43 +3100,35 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context 
     style="max-width: 600px; margin-inline-end: 44px;"
   >
     <div
-      class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-«rb»"
+      class="ant-flex css-var-«rb» ant-flex-align-center ant-flex-gap-small"
     >
       <div
-        class="ant-space-item"
+        aria-busy="true"
+        aria-live="polite"
+        class="ant-spin ant-spin-sm ant-spin-spinning css-var-«rb»"
       >
-        <div
-          aria-busy="true"
-          aria-live="polite"
-          class="ant-spin ant-spin-sm ant-spin-spinning css-var-«rb»"
+        <span
+          class="ant-spin-dot-holder"
         >
           <span
-            class="ant-spin-dot-holder"
+            class="ant-spin-dot ant-spin-dot-spin"
           >
-            <span
-              class="ant-spin-dot ant-spin-dot-spin"
-            >
-              <i
-                class="ant-spin-dot-item"
-              />
-              <i
-                class="ant-spin-dot-item"
-              />
-              <i
-                class="ant-spin-dot-item"
-              />
-              <i
-                class="ant-spin-dot-item"
-              />
-            </span>
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
           </span>
-        </div>
+        </span>
       </div>
-      <div
-        class="ant-space-item"
-      >
-        Custom loading...
-      </div>
+      Custom loading...
     </div>
   </div>
   <div

@@ -1,5 +1,7 @@
 import { CopyOutlined, DownloadOutlined, ZoomInOutlined, ZoomOutOutlined } from '@ant-design/icons';
+import useXComponentConfig from '@ant-design/x/es/_util/hooks/use-x-component-config';
 import useLocale from '@ant-design/x/es/locale/useLocale';
+import useXProviderContext from '@ant-design/x/es/x-provider/hooks/use-x-provider-context';
 import locale_EN from '@ant-design/x/locale/en_US';
 import { Button, message, Segmented, Space, Tooltip } from 'antd';
 import classnames from 'classnames';
@@ -7,7 +9,6 @@ import throttle from 'lodash.throttle';
 import mermaid from 'mermaid';
 import React, { useEffect, useRef, useState } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import useXProviderContext from '../hooks/use-x-provider-context';
 import type { PluginsType } from '../type';
 import useStyle from './style';
 
@@ -30,7 +31,7 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
     prefixCls: customizePrefixCls,
     className,
     style,
-    classNames,
+    classNames = {},
     styles = {},
     header,
     children,
@@ -48,14 +49,27 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
   // ============================ locale ============================
   const [contextLocale] = useLocale('Mermaid', locale_EN.Mermaid);
 
-  // ============================ style ============================
+  // ============================ Prefix ============================
   const { getPrefixCls, direction } = useXProviderContext();
   const prefixCls = getPrefixCls('mermaid', customizePrefixCls);
   const [hashId, cssVarCls] = useStyle(prefixCls);
 
-  const mergedCls = classnames(prefixCls, className, classNames?.root, hashId, cssVarCls, {
-    [`${prefixCls}-rtl`]: direction === 'rtl',
-  });
+  // ===================== Component Config =========================
+  const contextConfig = useXComponentConfig('mermaid');
+
+  // ============================ style ============================
+  const mergedCls = classnames(
+    prefixCls,
+    contextConfig.className,
+    contextConfig.classNames.root,
+    className,
+    classNames.root,
+    hashId,
+    cssVarCls,
+    {
+      [`${prefixCls}-rtl`]: direction === 'rtl',
+    },
+  );
 
   // ============================ render mermaid ============================
   const renderDiagram = throttle(async () => {
@@ -189,7 +203,14 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
     if (header) return header;
 
     return (
-      <div className={classnames(`${prefixCls}-header`, classNames?.header)} style={styles.header}>
+      <div
+        className={classnames(
+          `${prefixCls}-header`,
+          contextConfig.classNames.header,
+          classNames?.header,
+        )}
+        style={{ ...contextConfig.styles.header, ...styles.header }}
+      >
         {contextHolder}
         <Segmented
           options={[
@@ -242,10 +263,11 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
         <div
           className={classnames(
             `${prefixCls}-graph`,
+            contextConfig.classNames.graph,
             renderType === RenderType.Code && `${prefixCls}-graph-hidden`,
             classNames?.graph,
           )}
-          style={styles.graph}
+          style={{ ...contextConfig.styles.graph, ...styles.graph }}
           ref={containerRef}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
@@ -254,7 +276,14 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
           onWheel={handleWheel}
         />
         {renderType === RenderType.Code ? (
-          <div className={classnames(`${prefixCls}-code`, classNames?.code)} style={styles.code}>
+          <div
+            className={classnames(
+              `${prefixCls}-code`,
+              contextConfig.classNames.code,
+              classNames.code,
+            )}
+            style={{ ...contextConfig.styles.code, ...styles.code }}
+          >
             <SyntaxHighlighter
               customStyle={{
                 padding: 0,
@@ -273,7 +302,10 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
   };
 
   return (
-    <div className={mergedCls} style={{ ...style, ...styles.root }}>
+    <div
+      className={mergedCls}
+      style={{ ...style, ...contextConfig.style, ...contextConfig.styles.root, ...styles.root }}
+    >
       {renderHeader()}
       {renderContent()}
     </div>

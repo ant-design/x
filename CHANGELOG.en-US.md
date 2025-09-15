@@ -45,7 +45,7 @@ tag: vVERSION
 ### Others
 
 - 📖 Optimized the official site to enhance user experience. [#1169](https://github.com/ant-design/x/pull/1169) by [@hylin](https://github.com/hylin).
-- 📖 Updated documentation for introduction, model integration, agent integration, X SDK, and template code. [#1171](https://github.com/ant-design/x/pull/1171) by [@kimteayon](https://github.com/hylin).
+- 📖 Updated documentation for introduction, model integration, agent integration, X SDK, and template code. [#1171](https://github.com/ant-design/x/pull/1171) by [@kimteayon](https://github.com/kimteayon).
 
 ## 2.0.0-alpha.6
 
@@ -75,7 +75,7 @@ tag: vVERSION
 
 - 🆕 Added subcomponent features for Actions, including Actions.Copy, Actions.Audio, and Actions.Item. [#1121](https://github.com/ant-design/x/pull/1121) by [@kimteayon](https://github.com/kimteayon).
 - Bubble
-  - 🆕 Added functionality to render content with line breaks and tabs when `string content` is provided. [#1127](https://github.com/ant-design/x/pull/1122) by [@anxLiang](https://github.com/anxLiang).
+  - 🆕 Added functionality to render content with line breaks and tabs when `string content` is provided. [#1127](https://github.com/ant-design/x/pull/1127) by [@anxLiang](https://github.com/anxLiang).
   - 🆕 Added semantic implementation. [#1116](https://github.com/ant-design/x/pull/1116) by [@kimteayon](https://github.com/kimteayon).
   - 🐛 Optimized styles and type issues. [#1108](https://github.com/ant-design/x/pull/1108) by [@anxLiang](https://github.com/anxLiang).
 - 🆕 Added semantic configuration for the Sender component. [#1116](https://github.com/ant-design/x/pull/1116) by [@kimteayon](https://github.com/kimteayon).
@@ -119,7 +119,7 @@ tag: vVERSION
 
 ### @ant-design/x
 
-- 🔥 Added new component FileCard. [#1095](https://github.com/ant-design/x/pull/1094) by [@hy993658052](https://github.com/hy993658052).
+- 🔥 Added new component FileCard. [#1094](https://github.com/ant-design/x/pull/1094) by [@hy993658052](https://github.com/hy993658052).
 - 🔥 Added new component Notification. [#973](https://github.com/ant-design/x/pull/973) by [@kimteayon](https://github.com/kimteayon).
 - 🔥 Added new component Think. [#970](https://github.com/ant-design/x/pull/970), [#966](https://github.com/ant-design/x/pull/966), [#946](https://github.com/ant-design/x/pull/946) by [@hy993658052](https://github.com/hy993658052).
 - 🛠 Refactored and upgraded the Attachments component.
