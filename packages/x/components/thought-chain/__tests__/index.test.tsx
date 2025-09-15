@@ -5,10 +5,10 @@ import rtlTest from '../../../tests/shared/rtlTest';
 import themeTest from '../../../tests/shared/themeTest';
 import { fireEvent, render } from '../../../tests/utils';
 import XProvider from '../../x-provider';
-import type { ThoughtChainItem } from '../index';
+import type { ThoughtChainItemType } from '../index';
 import ThoughtChain from '../index';
 
-const customizationProps = (key: string): ThoughtChainItem => ({
+const customizationProps = (key: string): ThoughtChainItemType => ({
   title: 'Thought Chain Item Title',
   description: 'description',
   icon: <CheckCircleOutlined />,
@@ -16,7 +16,7 @@ const customizationProps = (key: string): ThoughtChainItem => ({
   content: `content ${key}`,
 });
 
-const items: ThoughtChainItem[] = [
+const items: ThoughtChainItemType[] = [
   {
     ...customizationProps('test1'),
     status: 'success',
@@ -34,7 +34,7 @@ const items: ThoughtChainItem[] = [
   },
 ];
 
-const items_collapsible: ThoughtChainItem[] = [
+const items_collapsible: ThoughtChainItemType[] = [
   {
     ...customizationProps('test1'),
     status: 'success',

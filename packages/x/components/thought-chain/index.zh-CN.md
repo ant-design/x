@@ -37,7 +37,7 @@ demo:
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| items | 思维节点集合 | ThoughtChainItem[] | - | - |
+| items | 思维节点集合 | ThoughtChainItemType[] | - | - |
 | defaultExpandedKeys | 初始化展开的节点 | string[] | - | - |
 | expandedKeys | 当前展开的节点 | string[] | - | - |
 | onExpand | 展开节点变化回调 | (expandedKeys: string[]) => void; | - | - |
@@ -47,7 +47,7 @@ demo:
 | styles | 语义化结构的样式 | Record<'root'\|'item' \|'itemIcon'\| 'itemHeader' \| 'itemContent' \| 'itemFooter', React.CSSProperties> | - | - |
 | rootClassName | 根元素样式类名 | string | - | - |
 
-### ThoughtChainItem
+### ThoughtChainItemType
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |

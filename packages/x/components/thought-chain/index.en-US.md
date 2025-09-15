@@ -36,7 +36,7 @@ Reference: [Common API](/docs/react/common-props)
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| items | Collection of thought nodes | ThoughtChainItem[] | - | - |
+| items | Collection of thought nodes | ThoughtChainItemType[] | - | - |
 | defaultExpandedKeys | Initially expanded nodes | string[] | - | - |
 | expandedKeys | Currently expanded nodes | string[] | - | - |
 | onExpand | Callback for when expanded nodes change | (expandedKeys: string[]) => void; | - | - |
@@ -46,7 +46,7 @@ Reference: [Common API](/docs/react/common-props)
 | styles | Styles for semantic structure | Record<'root'\|'item' \|'itemIcon'\| 'itemHeader' \| 'itemContent' \| 'itemFooter', React.CSSProperties> | - | - |
 | rootClassName | Root element class name | string | - | - |
 
-### ThoughtChainItem
+### ThoughtChainItemType
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |

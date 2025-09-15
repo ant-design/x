@@ -205,7 +205,7 @@ type RoleProps = Pick<
   | 'components'
 > & { key: string | number; role: string };
 
-export type FuncRoleProps = (data: BubbleData) => RoleProps;
+export type FuncRoleProps = (data: BubbleItemType) => RoleProps;
 
 export type RoleType = Partial<Record<'ai' | 'system' | 'user', RoleProps | FuncRoleProps>> &
   Record<string, RoleProps | FuncRoleProps>;

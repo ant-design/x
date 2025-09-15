@@ -2,7 +2,7 @@ import { act, fireEvent, render } from '@testing-library/react';
 import React from 'react';
 import { waitFakeTimer } from '../../../tests/utils';
 import BubbleList from '../BubbleList';
-import { BubbleData, BubbleListRef, RoleType } from '../interface';
+import type { BubbleItemType, BubbleListRef, RoleType } from '../interface';
 
 describe('Bubble.List', () => {
   beforeAll(() => {
@@ -17,7 +17,7 @@ describe('Bubble.List', () => {
     jest.clearAllTimers();
   });
 
-  const mockItems: BubbleData[] = [
+  const mockItems: BubbleItemType[] = [
     {
       key: 'item1',
       role: 'user',
@@ -155,7 +155,7 @@ describe('Bubble.List', () => {
         },
       };
 
-      const itemsWithOverride: BubbleData[] = [
+      const itemsWithOverride: BubbleItemType[] = [
         {
           key: 'item1',
           role: 'user',
@@ -184,7 +184,7 @@ describe('Bubble.List', () => {
         },
       };
 
-      const itemsWithOverride: BubbleData[] = [
+      const itemsWithOverride: BubbleItemType[] = [
         {
           key: 'item1',
           role: 'user',
@@ -409,7 +409,7 @@ describe('Bubble.List', () => {
 
   describe('动画回调处理', () => {
     it('应该在动画过程中触发自动滚动', async () => {
-      const itemsWithAnimation: BubbleData[] = [
+      const itemsWithAnimation: BubbleItemType[] = [
         {
           key: 'item1',
           role: 'user',
@@ -501,7 +501,7 @@ describe('Bubble.List', () => {
         user: { placement: 'end' as const },
       };
 
-      const itemsWithUnknownRole: BubbleData[] = [
+      const itemsWithUnknownRole: BubbleItemType[] = [
         {
           key: 'item1',
           role: 'unknown',
@@ -555,7 +555,7 @@ describe('Bubble.List', () => {
 
       expect(container.querySelectorAll('.ant-bubble')).toHaveLength(2);
 
-      const newItems: BubbleData[] = [
+      const newItems: BubbleItemType[] = [
         {
           key: 'new-item',
           role: 'user',

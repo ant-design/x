@@ -1,10 +1,10 @@
 import { CheckCircleOutlined, InfoCircleOutlined, LoadingOutlined } from '@ant-design/icons';
-import type { ThoughtChainItem } from '@ant-design/x';
+import type { ThoughtChainItemType } from '@ant-design/x';
 import { ThoughtChain } from '@ant-design/x';
 import { Button, Card } from 'antd';
 import React from 'react';
 
-function getStatusIcon(status: ThoughtChainItem['status']) {
+function getStatusIcon(status: ThoughtChainItemType['status']) {
   switch (status) {
     case 'success':
       return <CheckCircleOutlined />;
@@ -17,7 +17,7 @@ function getStatusIcon(status: ThoughtChainItem['status']) {
   }
 }
 
-const mockServerResponseData: ThoughtChainItem[] = [
+const mockServerResponseData: ThoughtChainItemType[] = [
   {
     title: 'Thought Chain Item - 1',
     status: 'success',
@@ -50,7 +50,7 @@ function addChainItem() {
   });
 }
 
-async function updateChainItem(status: ThoughtChainItem['status']) {
+async function updateChainItem(status: ThoughtChainItemType['status']) {
   await delay(800);
   mockServerResponseData[mockServerResponseData.length - 1].status = status;
   mockServerResponseData[mockServerResponseData.length - 1].icon = getStatusIcon(status);
@@ -58,7 +58,7 @@ async function updateChainItem(status: ThoughtChainItem['status']) {
 }
 
 export default () => {
-  const [items, setItems] = React.useState<ThoughtChainItem[]>(mockServerResponseData);
+  const [items, setItems] = React.useState<ThoughtChainItemType[]>(mockServerResponseData);
   const [loading, setLoading] = React.useState<boolean>(false);
 
   const mockStatusChange = async () => {

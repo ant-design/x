@@ -5,7 +5,7 @@ import * as React from 'react';
 import { useXProviderContext } from '../x-provider';
 import Bubble from './Bubble';
 import {
-  BubbleData,
+  BubbleItemType,
   BubbleListProps,
   BubbleListRef,
   BubbleRef,
@@ -25,9 +25,9 @@ function roleCfgIsFunction(roleCfg: RoleProps | FuncRoleProps): roleCfg is FuncR
 const MemoedBubble = React.memo(Bubble);
 
 const BubbleListItem: React.FC<
-  BubbleData & {
+  BubbleItemType & {
     bubblesRef: React.RefObject<BubblesRecord>;
-    // BubbleData.key 会在 BubbleList 内渲染时被吞掉，使得 BubbleListItem.props 无法获取到 key
+    // BubbleItemType.key 会在 BubbleList 内渲染时被吞掉，使得 BubbleListItem.props 无法获取到 key
     _key: string | number;
   }
 > = (props) => {
@@ -145,7 +145,7 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
       onScroll={onScroll}
     >
       {renderData.map((item) => {
-        let mergedProps: BubbleData;
+        let mergedProps: BubbleItemType;
         if (item.role && role) {
           const cfg = role[item.role];
           mergedProps = { ...(roleCfgIsFunction(cfg) ? cfg(item) : cfg), ...item };

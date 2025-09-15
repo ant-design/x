@@ -7,7 +7,7 @@ import {
   RedoOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import type { BubbleData, BubbleListProps } from '@ant-design/x';
+import type { BubbleItemType, BubbleListProps } from '@ant-design/x';
 import { Actions, Bubble, FileCard, FileCardProps } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
 import type { GetRef } from 'antd';
@@ -31,7 +31,7 @@ let id = 0;
 
 const getKey = () => `bubble_${id++}`;
 
-const genItem = (isAI: boolean, config?: Partial<BubbleData>): BubbleData => {
+const genItem = (isAI: boolean, config?: Partial<BubbleItemType>): BubbleItemType => {
   return {
     key: getKey(),
     role: isAI ? 'ai' : 'user',
@@ -47,15 +47,15 @@ const text = `
 Link: [Ant Design X](https://x.ant.design)
 `.trim();
 
-function useBubbleList(initialItems: BubbleData[] = []) {
-  const [items, setItems] = React.useState<BubbleData[]>(initialItems);
+function useBubbleList(initialItems: BubbleItemType[] = []) {
+  const [items, setItems] = React.useState<BubbleItemType[]>(initialItems);
 
-  const add = useCallback((item: BubbleData) => {
+  const add = useCallback((item: BubbleItemType) => {
     setItems((prev) => [...prev, item]);
   }, []);
 
   const update = useCallback(
-    (key: string | number, data: Omit<Partial<BubbleData>, 'key' | 'role'>) => {
+    (key: string | number, data: Omit<Partial<BubbleItemType>, 'key' | 'role'>) => {
       setItems((prev) => prev.map((item) => (item.key === key ? { ...item, ...data } : item)));
     },
     [],

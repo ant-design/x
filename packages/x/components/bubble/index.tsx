@@ -2,7 +2,7 @@ import Bubble from './Bubble';
 import List from './BubbleList';
 
 export type {
-  BubbleData,
+  BubbleItemType,
   BubbleListProps,
   BubbleListRef,
   BubbleProps,

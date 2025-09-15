@@ -153,7 +153,7 @@ type RemainRole = 'ai' | 'system' | 'user';
 
 type AnyStr = string;
 
-export type BubbleData = BubbleProps<any> & {
+export type BubbleItemType = BubbleProps<any> & {
   /**
    * @description 数据项唯一标识
    */
@@ -165,7 +165,7 @@ export type BubbleData = BubbleProps<any> & {
 };
 
 export type RoleProps = Pick<
-  BubbleData,
+  BubbleItemType,
   | 'typing'
   | 'variant'
   | 'shape'
@@ -188,7 +188,7 @@ export type RoleProps = Pick<
   | 'onEditCancel'
 >;
 
-export type FuncRoleProps = (data: BubbleData) => RoleProps;
+export type FuncRoleProps = (data: BubbleItemType) => RoleProps;
 
 export type RoleType = Partial<Record<RemainRole, RoleProps | FuncRoleProps>> &
   Record<AnyStr, RoleProps | FuncRoleProps>;
@@ -199,7 +199,7 @@ export interface BubbleListProps extends Omit<React.HTMLAttributes<HTMLDivElemen
   rootStyle?: React.CSSProperties;
   styles?: Partial<Record<BubbleSlotType | 'bubble' | 'root', React.CSSProperties>>;
   classNames?: Partial<Record<BubbleSlotType | 'bubble' | 'root', string>>;
-  items: BubbleData[];
+  items: BubbleItemType[];
   autoScroll?: boolean;
   /**
    * @description 数据类别基础配置项，优先级低，会被 items 配置覆盖。默认 ai、system、user 三类，允许自定义类别
