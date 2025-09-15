@@ -49,6 +49,12 @@ const useStyle = createStyles(({ token, css }, isOnAgent: any) => {
         display: flex;
         flex-direction:column;
         align-items: center;
+           .x-markdown-dark code:not(pre code){
+            border: 1px solid ##fafafa!important;
+          };
+           .x-markdown-dark blockquote{
+           border-left:4px solid #ffffff;
+           };
         .ant-highlightCode-code{
           code {
             color: rgba(255,255,255,.85);
@@ -59,7 +65,17 @@ const useStyle = createStyles(({ token, css }, isOnAgent: any) => {
           background-size: 100% 2px;
           background-repeat: no-repeat;
           background-position: bottom;
-      }
+      };
+          .ant-x-markdown{
+          a{
+          color: #91caff;
+          &:hover{
+          color: #e6f4ff;
+          }
+          };
+       
+
+          }
     `,
     sender: css`
         max-width: 1000px;
@@ -236,6 +252,7 @@ const Agent: React.FC<AgentProps> = ({ setIsOnAgent, isOnAgent, ref }) => {
         <XMarkdown
           components={{ code: Code }}
           paragraphTag="div"
+          openLinksInNewTab
           className={classNames('x-markdown-dark')}
           streaming={{ hasNextChunk: status === 'updating', enableAnimation: true }}
         >
