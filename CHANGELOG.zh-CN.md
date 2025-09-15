@@ -40,12 +40,12 @@ tag: vVERSION
 ### @ant-design/x-sdk
 
 - 🛠 重构 useXChat 工具 `isRequesting` 属性，由方法升级为可监控变量。[#1168](https://github.com/ant-design/x/pull/1168) 由 [@hylin](https://github.com/hylin) 提交。
-- 🆕 行政 useXChat 工具 消息 `abort` 状态，同时修复 `requestFallback` 回调方法 `message` 参数错误以及删掉对错误状态的消息过滤。[#1171](https://github.com/ant-design/x/pull/1171) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🆕 新增 useXChat 工具 消息 `abort` 状态，同时修复 `requestFallback` 回调方法 `message` 参数错误以及删掉对错误状态的消息过滤。[#1171](https://github.com/ant-design/x/pull/1171) 由 [@kimteayon](https://github.com/kimteayon) 提交。
 
 ### 其他
 
 - 📖 优化官网站点提升用户体验。[#1169](https://github.com/ant-design/x/pull/1169) 由 [@hylin](https://github.com/hylin) 提交。
-- 📖 更新官网介绍、模型接入、百宝箱智能体接入、X SDK等文档,以及样板间代码更新。[#1171](https://github.com/ant-design/x/pull/1171) 由 [@kimteayon](https://github.com/hylin) 提交。
+- 📖 更新官网介绍、模型接入、百宝箱智能体接入、X SDK等文档,以及样板间代码更新。[#1171](https://github.com/ant-design/x/pull/1171) 由 [@kimteayon](https://github.com/kimteayon) 提交。
 
 ## 2.0.0-alpha.6
 
@@ -75,7 +75,7 @@ tag: vVERSION
 
 - 🆕 新增 Actions 子组件功能，Actions.Copy、Actions.Audio、Actions.Item。[#1121](https://github.com/ant-design/x/pull/1121) 由 [@kimteayon](https://github.com/kimteayon) 提交。
 - Bubble
-  - 🆕 新增 `string content` 时渲染带换行符、制表符的功能。[#1127](https://github.com/ant-design/x/pull/1122) 由 [@anxLiang](https://github.com/anxLiang) 提交。
+  - 🆕 新增 `string content` 时渲染带换行符、制表符的功能。[#1127](https://github.com/ant-design/x/pull/1127) 由 [@anxLiang](https://github.com/anxLiang) 提交。
   - 🆕 新增语义化实现。[#1116](https://github.com/ant-design/x/pull/1116) 由 [@kimteayon](https://github.com/kimteayon) 提交。
   - 🐛 优化样式和类型问题。[#1108](https://github.com/ant-design/x/pull/1108) 由 [@anxLiang](https://github.com/anxLiang) 提交。
 - 🆕 新增 Sender 组件语义化配置。[#1116](https://github.com/ant-design/x/pull/1116) 由 [@kimteayon](https://github.com/kimteayon) 提交。
@@ -119,7 +119,7 @@ tag: vVERSION
 
 ### @ant-design/x
 
-- 🔥 新组件 FileCard。[#1095](https://github.com/ant-design/x/pull/1094) 由 [@hy993658052](https://github.com/hy993658052) 提交。
+- 🔥 新组件 FileCard。[#1094](https://github.com/ant-design/x/pull/1094) 由 [@hy993658052](https://github.com/hy993658052) 提交。
 - 🔥 新组件 Notification。[#973](https://github.com/ant-design/x/pull/973) 由 [@kimteayon](https://github.com/kimteayon) 提交。
 - 🔥 新组件 Think。[#970](https://github.com/ant-design/x/pull/970) 由 [@hy993658052](https://github.com/hy993658052) 提交、[#966](https://github.com/ant-design/x/pull/966) 由 [@hy993658052](https://github.com/hy993658052) 提交、[#946](https://github.com/ant-design/x/pull/946) 由 [@hy993658052](https://github.com/hy993658052) 提交。
 - 🛠 重构升级组件 Attachments。

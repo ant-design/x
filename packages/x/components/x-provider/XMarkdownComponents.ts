@@ -9,7 +9,7 @@ type LatexOption = {
 };
 
 type HighlightCodeType = 'root' | 'header' | 'headerTitle' | 'code';
-type HighlighCodeProps = {
+type HighlightCodeProps = {
   lang?: string;
   children: string;
   header?: ReactNode | null;
@@ -45,7 +45,7 @@ export type PluginsType = {
    * @desc 渲染代码高亮。
    * @descEN Highlight the rendering code.
    */
-  HighlightCode: (props: HighlighCodeProps) => React.ReactNode;
+  HighlightCode: (props: HighlightCodeProps) => React.ReactNode;
   /**
    * @desc 渲染 Mermaid 图表。
    * @descEN Rendering the Mermaid Chart.
@@ -66,6 +66,6 @@ type ComponentConfig<
 > = Pick<CompProps, PickType>;
 
 export interface MarkdownComponentsConfig {
-  highlightCode?: ComponentConfig<HighlighCodeProps>;
+  highlightCode?: ComponentConfig<HighlightCodeProps>;
   mermaid?: ComponentConfig<MermaidProps>;
 }

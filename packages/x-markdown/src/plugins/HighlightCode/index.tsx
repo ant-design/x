@@ -83,7 +83,7 @@ const HighlightCode: PluginsType['HighlightCode'] = (props) => {
         {contextHolder}
         <span
           className={classnames(
-            `${prefixCls}-header-tile`,
+            `${prefixCls}-header-title`,
             classNames.headerTitle,
             contextConfig.classNames.headerTitle,
           )}
