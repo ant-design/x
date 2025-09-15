@@ -225,10 +225,12 @@ describe('Mermaid Plugin', () => {
 
   describe('RTL Support', () => {
     it('should handle RTL direction', () => {
-      jest.spyOn(require('../../hooks/use-x-provider-context'), 'default').mockReturnValue({
-        getPrefixCls: (prefix: string) => `ant-${prefix}`,
-        direction: 'rtl',
-      });
+      jest
+        .spyOn(require('@ant-design/x/es/x-provider/hooks/use-x-provider-context'), 'default')
+        .mockReturnValue({
+          getPrefixCls: (prefix: string) => `ant-${prefix}`,
+          direction: 'rtl',
+        });
 
       const { container } = render(<Mermaid>{mermaidContent}</Mermaid>);
       expect(container.querySelector('.ant-mermaid-rtl')).toBeInTheDocument();
@@ -349,10 +351,12 @@ describe('Mermaid Plugin', () => {
       expect(container.querySelector('.ant-mermaid-graph')).toBeInTheDocument();
 
       // Verify RTL class when direction is rtl
-      jest.spyOn(require('../../hooks/use-x-provider-context'), 'default').mockReturnValue({
-        getPrefixCls: (prefix: string) => `ant-${prefix}`,
-        direction: 'rtl',
-      });
+      jest
+        .spyOn(require('@ant-design/x/es/x-provider/hooks/use-x-provider-context'), 'default')
+        .mockReturnValue({
+          getPrefixCls: (prefix: string) => `ant-${prefix}`,
+          direction: 'rtl',
+        });
 
       const { container: rtlContainer } = render(<Mermaid>{mermaidContent}</Mermaid>);
       expect(rtlContainer.querySelector('.ant-mermaid-rtl')).toBeInTheDocument();
