@@ -13,10 +13,10 @@ const roles: GetProp<typeof Bubble.List, 'role'> = {
       marginInlineEnd: 44,
     },
     loadingRender: () => (
-      <Space>
+      <Flex align="center" gap="small">
         <Spin size="small" />
         Custom loading...
-      </Space>
+      </Flex>
     ),
   },
   user: {

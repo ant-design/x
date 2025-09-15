@@ -1,14 +1,15 @@
 import { CopyOutlined } from '@ant-design/icons';
+import useXComponentConfig from '@ant-design/x/es/_util/hooks/use-x-component-config';
+import useLocale from '@ant-design/x/es/locale/useLocale';
+import useXProviderContext from '@ant-design/x/es/x-provider/hooks/use-x-provider-context';
+import locale_EN from '@ant-design/x/locale/en_US';
 import { Button, message, Tooltip } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-import useXProviderContext from '../hooks/use-x-provider-context';
 import type { PluginsType } from '../type';
 import useStyle from './style';
-import useLocale from '@ant-design/x/es/locale/useLocale';
-import locale_EN from '@ant-design/x/locale/en_US';
 
 const HighlightCode: PluginsType['HighlightCode'] = (props) => {
   const {
@@ -17,7 +18,7 @@ const HighlightCode: PluginsType['HighlightCode'] = (props) => {
     header,
     prefixCls: customizePrefixCls,
     className,
-    classNames,
+    classNames = {},
     styles = {},
     style,
     highlightProps,
@@ -26,14 +27,27 @@ const HighlightCode: PluginsType['HighlightCode'] = (props) => {
   // ============================ locale ============================
   const [contextLocale] = useLocale('HighlightCode', locale_EN.HighlightCode);
 
-  // ============================ style ============================
+  // ============================ Prefix ============================
   const { getPrefixCls, direction } = useXProviderContext();
   const prefixCls = getPrefixCls('highlightCode', customizePrefixCls);
   const [hashId, cssVarCls] = useStyle(prefixCls);
 
-  const mergedCls = classnames(prefixCls, className, classNames?.root, hashId, cssVarCls, {
-    [`${prefixCls}-rtl`]: direction === 'rtl',
-  });
+  // ===================== Component Config =========================
+  const contextConfig = useXComponentConfig('highlightCode');
+
+  // ============================ style ============================
+  const mergedCls = classnames(
+    prefixCls,
+    contextConfig.className,
+    className,
+    contextConfig.classNames.root,
+    classNames.root,
+    hashId,
+    cssVarCls,
+    {
+      [`${prefixCls}-rtl`]: direction === 'rtl',
+    },
+  );
 
   // ============================ locale ============================
   const [messageApi, contextHolder] = message.useMessage();
@@ -58,9 +72,23 @@ const HighlightCode: PluginsType['HighlightCode'] = (props) => {
     if (header) return header;
 
     return (
-      <div className={classnames(`${prefixCls}-header`, classNames?.header)} style={styles.header}>
+      <div
+        className={classnames(
+          `${prefixCls}-header`,
+          contextConfig.classNames.header,
+          classNames.header,
+        )}
+        style={{ ...contextConfig.styles.header, ...styles.header }}
+      >
         {contextHolder}
-        <span className={classNames?.headerTitle} style={styles.headerTitle}>
+        <span
+          className={classnames(
+            `${prefixCls}-header-tile`,
+            classNames.headerTitle,
+            contextConfig.classNames.headerTitle,
+          )}
+          style={{ ...contextConfig.styles.headerTitle, ...styles.headerTitle }}
+        >
           {lang}
         </span>
         <Tooltip title={contextLocale.copy}>
@@ -80,9 +108,12 @@ const HighlightCode: PluginsType['HighlightCode'] = (props) => {
   }
 
   return (
-    <div className={mergedCls} style={{ ...style, ...styles.root }}>
+    <div className={mergedCls} style={{ ...contextConfig.styles.root, ...style, ...styles.root }}>
       {renderTitle()}
-      <div className={classnames(`${prefixCls}-code`, classNames?.code)} style={styles.code}>
+      <div
+        className={classnames(`${prefixCls}-code`, contextConfig.classNames.code, classNames.code)}
+        style={{ ...contextConfig.styles.code, ...styles.code }}
+      >
         <SyntaxHighlighter
           customStyle={{
             padding: 0,

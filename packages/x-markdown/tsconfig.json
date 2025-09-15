@@ -7,6 +7,7 @@
       "@ant-design/x-markdown/es/*": ["src/*"],
       "@ant-design/x-markdown/lib/*": ["src/*"],
       "@ant-design/x/locale/en_US": ["../x/components/locale/en_US"],
+      "@ant-design/x/es/*": ["../x/components/*"],
       "@ant-design/x/es/locale/useLocale": ["../x/components/locale/useLocale"]
     }
   },

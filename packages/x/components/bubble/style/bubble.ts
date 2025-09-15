@@ -53,7 +53,7 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
         direction: 'rtl',
       },
       [`&${componentCls}-loading`]: {
-        height: token.controlHeight,
+        minHeight: token.controlHeight,
         alignItems: 'center',
       },
 
