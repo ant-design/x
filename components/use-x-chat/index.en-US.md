@@ -50,10 +50,10 @@ type useXChat<
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| messages | Current managed messages content | AgentMessages[] | - | - |
-| parsedMessages | Parsed messages by `parser` api | ParsedMessages[] | - | - |
+| messages | Current managed messages content | {id: string \| number; message: AgentMessage; status: MessageStatus;}[] | - | - |
+| parsedMessages | Parsed messages by `parser` api | {id: string \| number; message: ParsedMessage; status: MessageStatus;}[] | - | - |
 | onRequest | Create a message and trigger a request, If there is no data with `key` as` message`, the entire data will be processed as a message | (requestParams: AgentMessage \| RequestParams) => void | - | - |
-| setMessages | Modify messages directly without triggering requests | (messages: { message, status }[]) => void | - | - |
+| setMessages | Modify messages directly without triggering requests | (messages: {id: string \| number; message: AgentMessage; status: MessageStatus;}[]) => void | - | - |
 
 ### RequestParams
 
