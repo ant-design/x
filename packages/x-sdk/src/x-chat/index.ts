@@ -9,7 +9,16 @@ import { useChatStore } from './store';
 
 export type SimpleType = string | number | boolean | object;
 
-export type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error' | 'abort';
+enum MessageStatusEnum {
+  local = 'local',
+  loading = 'loading',
+  updating = 'updating',
+  success = 'success',
+  error = 'error',
+  abort = 'abort',
+}
+
+export type MessageStatus = `${MessageStatusEnum}`;
 
 type RequestPlaceholderFn<Message extends SimpleType> = (
   message: Message,

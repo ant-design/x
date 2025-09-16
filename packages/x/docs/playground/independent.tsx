@@ -31,11 +31,13 @@ import {
 import enUS_X from '@ant-design/x/locale/en_US';
 import zhCN_X from '@ant-design/x/locale/zh_CN';
 import XMarkdown from '@ant-design/x-markdown';
+import type { DefaultMessageInfo } from '@ant-design/x-sdk';
 import {
   DeepSeekChatProvider,
   SSEFields,
   useXChat,
   useXConversations,
+  XModelMessage,
   XModelParams,
   XModelResponse,
   XRequest,
@@ -46,6 +48,7 @@ import zhCN_antd from 'antd/locale/zh_CN';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
 import React, { useState } from 'react';
+import { useMarkdownTheme } from '../x-markdown/demo/_utils';
 
 const zhCN = {
   whatIsAntDesignX: '什么是 Ant Design X？',
@@ -69,7 +72,6 @@ const zhCN = {
   requestIsAborted: '请求已中止',
   requestFailedPleaseTryAgain: '请求失败，请重试！',
   requestIsInProgress: '请求正在进行中，请等待请求完成。',
-  messageIsRequesting: '消息正在请求中，您可以在请求完成后创建新对话或立即中止...',
   rename: '重命名',
   delete: '删除',
   uploadFile: '上传文件',
@@ -89,6 +91,8 @@ const zhCN = {
   aborted: '已经终止',
   noData: '暂无数据',
   NewConversation: '新对话',
+  curConversation: '当前对话',
+  nowNenConversation: '当前已经是新会话',
 };
 
 const enUS = {
@@ -113,8 +117,6 @@ const enUS = {
   requestIsAborted: 'Request is aborted',
   requestFailedPleaseTryAgain: 'Request failed, please try again!',
   requestIsInProgress: 'Request is in progress, please wait for the request to complete.',
-  messageIsRequesting:
-    'Message is Requesting, you can create a new conversation after request done or abort it right now...',
   rename: 'Rename',
   delete: 'Delete',
   uploadFile: 'Upload File',
@@ -134,6 +136,8 @@ const enUS = {
   aborted: 'Aborted',
   noData: 'No Data',
   NewConversation: 'New Conversation',
+  curConversation: 'Current Conversation',
+  nowNenConversation: 'It is now a new conversation.',
 };
 
 const isZhCN = window.parent?.location?.pathname?.includes('-cn');
@@ -286,7 +290,7 @@ const ThoughtChainConfig = {
 const actionsItems = [
   {
     key: 'pagination',
-    actionRender: () => <Pagination simple total={5} pageSize={1} />,
+    actionRender: () => <Pagination simple total={1} pageSize={1} />,
   },
   {
     key: 'feedback',
@@ -308,7 +312,7 @@ const actionsItems = [
   },
 ];
 
-const role: BubbleListProps['role'] = {
+const getRole = (className: string): BubbleListProps['role'] => ({
   assistant: {
     placement: 'start',
     components: {
@@ -342,6 +346,7 @@ const role: BubbleListProps['role'] = {
           components={{
             think: ThinkComponent,
           }}
+          className={className}
           streaming={{
             hasNextChunk: status === 'updating',
           }}
@@ -371,7 +376,7 @@ const role: BubbleListProps['role'] = {
         : false,
   },
   user: { placement: 'end' },
-};
+});
 
 const useStyle = createStyles(({ token, css }) => {
   return {
@@ -479,6 +484,34 @@ const useStyle = createStyles(({ token, css }) => {
   };
 });
 
+const HISTORY_MESSAGES: {
+  [key: string]: DefaultMessageInfo<XModelMessage>[];
+} = {
+  'default-1': [
+    {
+      message: { role: 'user', content: t.howToQuicklyInstallAndImportComponents },
+      status: 'success',
+    },
+    {
+      message: {
+        role: 'assistant',
+        content: `# 快速安装和导入组件 \n \`npm install @ant-design/x --save \` \n [查看详情](/components/introduce${isZhCN ? '-cn' : ''}/)`,
+      },
+      status: 'success',
+    },
+  ],
+  'default-2': [
+    { message: { role: 'user', content: t.newAgiHybridInterface }, status: 'success' },
+    {
+      message: {
+        role: 'assistant',
+        content: `RICH 设计范式 \n [查看详情](/docs/spec/introduce${isZhCN ? '-cn' : ''}/)`,
+      },
+      status: 'success',
+    },
+  ],
+};
+
 /**
  * 🔔 Please replace the BASE_URL, MODEL with your own values.
  */
@@ -504,6 +537,9 @@ const providerFactory = (conversationKey: string) => {
   return providerCaches.get(conversationKey);
 };
 
+const historyMessageFactory = (conversationKey: string): DefaultMessageInfo<XModelMessage>[] => {
+  return HISTORY_MESSAGES[conversationKey] || [];
+};
 const Independent: React.FC = () => {
   const { styles } = useStyle();
   const locale = isZhCN ? { ...zhCN_antd, ...zhCN_X } : { ...enUS_antd, ...enUS_X };
@@ -513,10 +549,13 @@ const Independent: React.FC = () => {
   const { conversations, addConversation, setConversations } = useXConversations({
     defaultConversations: DEFAULT_CONVERSATIONS_ITEMS,
   });
+
   const [curConversation, setCurConversation] = useState<string>(
     DEFAULT_CONVERSATIONS_ITEMS[0].key,
   );
 
+  const [className] = useMarkdownTheme();
+  const [messageApi, contextHolder] = message.useMessage();
   const [attachmentsOpen, setAttachmentsOpen] = useState(false);
   const [attachedFiles, setAttachedFiles] = useState<GetProp<typeof Attachments, 'items'>>([]);
 
@@ -527,6 +566,7 @@ const Independent: React.FC = () => {
   const { onRequest, messages, isRequesting, abort } = useXChat({
     provider: providerFactory(curConversation), // every conversation has its own provider
     conversationKey: curConversation,
+    defaultMessages: historyMessageFactory(curConversation),
     requestPlaceholder: () => {
       return {
         content: t.noData,
@@ -562,8 +602,8 @@ const Independent: React.FC = () => {
       <Conversations
         creation={{
           onClick: () => {
-            if (isRequesting) {
-              message.error(t.messageIsRequesting);
+            if (messages.length === 0) {
+              messageApi.error(t.nowNenConversation);
               return;
             }
             const now = dayjs().valueOf().toString();
@@ -575,7 +615,10 @@ const Independent: React.FC = () => {
             setCurConversation(now);
           },
         }}
-        items={conversations}
+        items={conversations.map(({ key, label }) => ({
+          key,
+          label: key === curConversation ? `[${t.curConversation}]${label}` : label,
+        }))}
         className={styles.conversations}
         activeKey={curConversation}
         onActiveChange={async (val) => {
@@ -631,7 +674,7 @@ const Independent: React.FC = () => {
               width: 700,
             },
           }}
-          role={role}
+          role={getRole(className)}
         />
       ) : (
         <Space orientation="vertical" size={16} align="center" className={styles.placeholder}>
@@ -759,6 +802,7 @@ const Independent: React.FC = () => {
 
   return (
     <XProvider locale={locale}>
+      {contextHolder}
       <div className={styles.layout}>
         {chatSide}
         <div className={styles.chat}>

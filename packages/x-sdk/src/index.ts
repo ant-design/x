@@ -1,3 +1,4 @@
+export type { DefaultMessageInfo } from './x-chat';
 export { default as useXChat } from './x-chat';
 export * from './x-chat/providers';
 export type {

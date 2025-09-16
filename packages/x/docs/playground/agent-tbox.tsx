@@ -6,7 +6,6 @@ import {
   FileSearchOutlined,
   GlobalOutlined,
   HeartOutlined,
-  PlusOutlined,
   ProductOutlined,
   QuestionCircleOutlined,
   ScheduleOutlined,
@@ -23,7 +22,10 @@ import {
   Think,
   ThoughtChain,
   Welcome,
+  XProvider,
 } from '@ant-design/x';
+import enUS_X from '@ant-design/x/locale/en_US';
+import zhCN_X from '@ant-design/x/locale/zh_CN';
 import XMarkdown from '@ant-design/x-markdown';
 import type { TransformMessage } from '@ant-design/x-sdk';
 import {
@@ -33,7 +35,9 @@ import {
   useXConversations,
   XRequestOptions,
 } from '@ant-design/x-sdk';
-import { Avatar, Button, Flex, type GetProp, Pagination, Space } from 'antd';
+import { Avatar, Button, Flex, type GetProp, message, Pagination, Space } from 'antd';
+import enUS_antd from 'antd/locale/en_US';
+import zhCN_antd from 'antd/locale/zh_CN';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
 import React, { useState } from 'react';
@@ -77,6 +81,8 @@ const zhCN = {
   modelExecutionCompleted: '大模型执行完成',
   executionFailed: '执行失败',
   aborted: '已经终止',
+  curConversation: '当前对话',
+  nowNenConversation: '当前已经是新会话',
 };
 
 const enUS = {
@@ -110,6 +116,8 @@ const enUS = {
   modelExecutionCompleted: 'Model execution completed',
   executionFailed: 'Execution failed',
   aborted: 'Aborted',
+  curConversation: 'Current Conversation',
+  nowNenConversation: 'It is now a new conversation.',
 };
 
 const isZhCN = window.parent?.location?.pathname?.includes('-cn');
@@ -221,11 +229,6 @@ const useStyle = createStyles(({ token, css }) => {
         color: ${token.colorText};
         font-size: 16px;
       }
-    `,
-    addBtn: css`
-      background: #1677ff0f;
-      border: 1px solid #1677ff34;
-      height: 40px;
     `,
     conversations: css`
       flex: 1;
@@ -468,7 +471,7 @@ const ThinkComponent = React.memo((props: { children: string; streamStatus: stri
 
 const AgentTBox: React.FC = () => {
   const { styles } = useStyle();
-
+  const locale = isZhCN ? { ...zhCN_antd, ...zhCN_X } : { ...enUS_antd, ...enUS_X };
   // ==================== State ====================
 
   const { conversations, addConversation, setConversations } = useXConversations({
@@ -477,6 +480,8 @@ const AgentTBox: React.FC = () => {
   const [curConversation, setCurConversation] = useState<string>(
     DEFAULT_CONVERSATIONS_ITEMS[0].key,
   );
+
+  const [messageApi, contextHolder] = message.useMessage();
 
   const [inputValue, setInputValue] = useState('');
 
@@ -520,28 +525,27 @@ const AgentTBox: React.FC = () => {
         />
         <span>Ant Design X</span>
       </div>
-
-      {/* 🌟 添加会话 */}
-      <Button
-        onClick={() => {
-          const now = dayjs().valueOf().toString();
-          addConversation({
-            key: now,
-            label: `${t.newConversation} ${conversations.length + 1}`,
-            group: t.today,
-          });
-          setCurConversation(now);
-        }}
-        type="link"
-        className={styles.addBtn}
-        icon={<PlusOutlined />}
-      >
-        {t.newConversation}
-      </Button>
-
       {/* 🌟 会话管理 */}
       <Conversations
-        items={conversations}
+        creation={{
+          onClick: () => {
+            if (messages.length === 0) {
+              messageApi.error(t.nowNenConversation);
+              return;
+            }
+            const now = dayjs().valueOf().toString();
+            addConversation({
+              key: now,
+              label: `${t.newConversation} ${conversations.length + 1}`,
+              group: t.today,
+            });
+            setCurConversation(now);
+          },
+        }}
+        items={conversations.map(({ key, label }) => ({
+          key,
+          label: key === curConversation ? `[${t.curConversation}]${label}` : label,
+        }))}
         className={styles.conversations}
         activeKey={curConversation}
         onActiveChange={async (val) => {
@@ -605,7 +609,7 @@ const AgentTBox: React.FC = () => {
   const actionsItems = [
     {
       key: 'pagination',
-      actionRender: () => <Pagination simple total={5} pageSize={1} />,
+      actionRender: () => <Pagination simple total={1} pageSize={1} />,
     },
     {
       key: 'feedback',
@@ -790,13 +794,16 @@ const AgentTBox: React.FC = () => {
 
   // ==================== Render =================
   return (
-    <div className={styles.layout}>
-      {chatSide}
-      <div className={styles.chat}>
-        {chatList}
-        {chatSender}
+    <XProvider locale={locale}>
+      {contextHolder}
+      <div className={styles.layout}>
+        {chatSide}
+        <div className={styles.chat}>
+          {chatList}
+          {chatSender}
+        </div>
       </div>
-    </div>
+    </XProvider>
   );
 };
 
