@@ -1,14 +1,12 @@
 import React from 'react';
-
-import Prompts, { type PromptsProps } from '..';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
 import { fireEvent, render } from '../../../tests/utils';
-
-import type { PromptProps } from '..';
+import type { PromptsItemType } from '..';
+import Prompts, { type PromptsProps } from '..';
 
 // Mock data
-const mockData: PromptProps[] = [
+const mockData: PromptsItemType[] = [
   {
     key: '1',
     label: 'Label 1',
