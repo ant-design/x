@@ -9,7 +9,6 @@ import {
   GlobalOutlined,
   HeartOutlined,
   PaperClipOutlined,
-  PlusOutlined,
   ProductOutlined,
   QuestionCircleOutlined,
   ScheduleOutlined,
@@ -27,7 +26,10 @@ import {
   Think,
   ThoughtChain,
   Welcome,
+  XProvider,
 } from '@ant-design/x';
+import enUS_X from '@ant-design/x/locale/en_US';
+import zhCN_X from '@ant-design/x/locale/zh_CN';
 import XMarkdown from '@ant-design/x-markdown';
 import {
   DeepSeekChatProvider,
@@ -39,6 +41,8 @@ import {
   XRequest,
 } from '@ant-design/x-sdk';
 import { Avatar, Button, Flex, type GetProp, message, Pagination, Space } from 'antd';
+import enUS_antd from 'antd/locale/en_US';
+import zhCN_antd from 'antd/locale/zh_CN';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
 import React, { useState } from 'react';
@@ -73,18 +77,18 @@ const zhCN = {
   uploadFiles: '上传文件',
   clickOrDragFilesToUpload: '点击或将文件拖到此处上传',
   askOrInputUseSkills: '提问或输入 / 使用技能',
-  'AI understands user needs and provides solutions.': 'AI理解用户需求并提供解决方案',
-  "AI's public persona and image": 'AI的公众形象',
-  'How AI Can Express Itself in a Way Users Understand': 'AI如何以用户理解的方式表达自己',
-  'AI balances "chat" & "do" behaviors.': 'AI平衡"聊天"和"执行"行为',
-  'New Conversation': '新会话',
-  'Deep thinking': '深度思考中',
-  'Complete thinking': '深度思考完成',
+  aiUnderstandsUserNeedsAndProvidesSolutions: 'AI理解用户需求并提供解决方案',
+  AIPublicPersonAndImage: 'AI的公众形象',
+  HowAICanExpressItselfWayUsersUnderstand: 'AI如何以用户理解的方式表达自己',
+  AIBalances: 'AI平衡"聊天"和"执行"行为',
+  DeepThinking: '深度思考中',
+  CompleteThinking: '深度思考完成',
   modelIsRunning: '正在调用模型',
   modelExecutionCompleted: '大模型执行完成',
   executionFailed: '执行失败',
   aborted: '已经终止',
   noData: '暂无数据',
+  NewConversation: '新对话',
 };
 
 const enUS = {
@@ -118,20 +122,18 @@ const enUS = {
   uploadFiles: 'Upload files',
   clickOrDragFilesToUpload: 'Click or drag files to this area to upload',
   askOrInputUseSkills: 'Ask or input / use skills',
-  'AI understands user needs and provides solutions.':
-    'AI understands user needs and provides solutions.',
-  "AI's public persona and image": "AI's public persona and image",
-  'How AI Can Express Itself in a Way Users Understand':
-    'How AI Can Express Itself in a Way Users Understand',
-  'AI balances "chat" & "do" behaviors.': 'AI balances "chat" & "do" behaviors.',
-  'New Conversation': 'New Conversation',
-  'Deep thinking': 'Deep Thinking',
-  'Complete thinking': 'Complete Thinking',
+  aiUnderstandsUserNeedsAndProvidesSolutions: 'AI understands user needs and provides solutions.',
+  AIPublicPersonAndImage: "AI's public persona and image",
+  HowAICanExpressItselfWayUsersUnderstand: 'How AI Can Express Itself in a Way Users Understand',
+  AIBalances: 'AI balances "chat" & "do" behaviors.',
+  DeepThinking: 'Deep Thinking',
+  CompleteThinking: 'Complete Thinking',
   modelIsRunning: 'Model is running',
   modelExecutionCompleted: 'Model execution completed',
   executionFailed: 'Execution failed',
   aborted: 'Aborted',
   noData: 'No Data',
+  NewConversation: 'New Conversation',
 };
 
 const isZhCN = window.parent?.location?.pathname?.includes('-cn');
@@ -195,25 +197,25 @@ const DESIGN_GUIDE = {
       key: '2-1',
       icon: <HeartOutlined />,
       label: t.intention,
-      description: t['AI understands user needs and provides solutions.'],
+      description: t.aiUnderstandsUserNeedsAndProvidesSolutions,
     },
     {
       key: '2-2',
       icon: <SmileOutlined />,
       label: t.role,
-      description: t["AI's public persona and image"],
+      description: t.AIPublicPersonAndImage,
     },
     {
       key: '2-3',
       icon: <CommentOutlined />,
       label: t.chat,
-      description: t['How AI Can Express Itself in a Way Users Understand'],
+      description: t.HowAICanExpressItselfWayUsersUnderstand,
     },
     {
       key: '2-4',
       icon: <PaperClipOutlined />,
       label: t.interface,
-      description: t['AI balances "chat" & "do" behaviors.'],
+      description: t.AIBalances,
     },
   ],
 };
@@ -241,125 +243,13 @@ const SENDER_PROMPTS: GetProp<typeof Prompts, 'items'> = [
   },
 ];
 
-const useStyle = createStyles(({ token, css }) => {
-  return {
-    layout: css`
-      width: 100%;
-      min-width: 1000px;
-      height: 100vh;
-      display: flex;
-      background: ${token.colorBgContainer};
-      font-family: AlibabaPuHuiTi, ${token.fontFamily}, sans-serif;
-
-    `,
-    // side 样式
-    side: css`
-      background: ${token.colorBgLayout}80;
-      width: 280px;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      padding: 0 12px;
-      box-sizing: border-box;
-    `,
-    logo: css`
-      display: flex;
-      align-items: center;
-      justify-content: start;
-      padding: 0 24px;
-      box-sizing: border-box;
-      gap: 8px;
-      margin: 24px 0;
-
-      span {
-        font-weight: bold;
-        color: ${token.colorText};
-        font-size: 16px;
-      }
-    `,
-    addBtn: css`
-      background: #1677ff0f;
-      border: 1px solid #1677ff34;
-      height: 40px;
-    `,
-    conversations: css`
-      overflow-y: auto;
-      margin-top: 12px;
-      padding: 0;
-    flex:1;
-      .ant-conversations-list {
-        padding-inline-start: 0;
-      }
-    `,
-    sideFooter: css`
-      border-top: 1px solid ${token.colorBorderSecondary};
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    `,
-    // chat list 样式
-    chat: css`
-      height: 100%;
-      width: 100%;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      padding-block: ${token.paddingLG}px;
-      gap: 16px;
-      .ant-bubble-content-updating {
-        background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
-        background-size: 100% 2px;
-        background-repeat: no-repeat;
-        background-position: bottom;
-      }
-    `,
-    chatPrompt: css`
-      .ant-prompts-label {
-        color: #000000e0 !important;
-      }
-      .ant-prompts-desc {
-        color: #000000a6 !important;
-        width: 100%;
-      }
-      .ant-prompts-icon {
-        color: #000000a6 !important;
-      }
-    `,
-    chatList: css`
-      display: flex;
-      height: calc(100% - 120px);
-      flex-direction: column;
-    `,
-    placeholder: css`
-      padding-top: 32px;
-    `,
-    // sender 样式
-    sender: css`
-      width: 100%;
-      max-width: 700px;
-      margin: 0 auto;
-    `,
-    speechButton: css`
-      font-size: 18px;
-      color: ${token.colorText} !important;
-    `,
-    senderPrompt: css`
-      width: 100%;
-      max-width: 700px;
-      margin: 0 auto;
-      color: ${token.colorText};
-    `,
-  };
-});
-
 const ThinkComponent = React.memo((props: { children: string; streamStatus: string }) => {
-  const [title, setTitle] = React.useState(t['Deep thinking'] + '...');
+  const [title, setTitle] = React.useState(t.DeepThinking + '...');
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     if (props.streamStatus === 'done') {
-      setTitle(t['Complete thinking']);
+      setTitle(t.CompleteThinking);
       setLoading(false);
     }
   }, [props.streamStatus]);
@@ -370,31 +260,6 @@ const ThinkComponent = React.memo((props: { children: string; streamStatus: stri
     </Think>
   );
 });
-
-/**
- * 🔔 Please replace the BASE_URL, MODEL with your own values.
- */
-const providerCaches = new Map<string, DeepSeekChatProvider>();
-const providerFactory = (conversationKey: string) => {
-  if (!providerCaches.get(conversationKey)) {
-    providerCaches.set(
-      conversationKey,
-      new DeepSeekChatProvider({
-        request: XRequest<XModelParams, Partial<Record<SSEFields, XModelResponse>>>(
-          'https://api.x.ant.design/api/llm_siliconflow_deepSeek-r1-distill-1wen-7b',
-          {
-            manual: true,
-            params: {
-              stream: true,
-              model: 'DeepSeek-R1-Distill-Qwen-7B',
-            },
-          },
-        ),
-      }),
-    );
-  }
-  return providerCaches.get(conversationKey);
-};
 
 const ThoughtChainConfig = {
   loading: {
@@ -508,8 +373,140 @@ const role: BubbleListProps['role'] = {
   user: { placement: 'end' },
 };
 
+const useStyle = createStyles(({ token, css }) => {
+  return {
+    layout: css`
+      width: 100%;
+      min-width: 1000px;
+      height: 100vh;
+      display: flex;
+      background: ${token.colorBgContainer};
+      font-family: AlibabaPuHuiTi, ${token.fontFamily}, sans-serif;
+    `,
+    // side 样式
+    side: css`
+      background: ${token.colorBgLayout}80;
+      width: 280px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 0 12px;
+      box-sizing: border-box;
+    `,
+    logo: css`
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      padding: 0 24px;
+      box-sizing: border-box;
+      gap: 8px;
+      margin: 24px 0;
+
+      span {
+        font-weight: bold;
+        color: ${token.colorText};
+        font-size: 16px;
+      }
+    `,
+    conversations: css`
+      overflow-y: auto;
+      margin-top: 12px;
+      padding: 0;
+    flex:1;
+      .ant-conversations-list {
+        padding-inline-start: 0;
+      }
+    `,
+    sideFooter: css`
+      border-top: 1px solid ${token.colorBorderSecondary};
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    `,
+    // chat list 样式
+    chat: css`
+      height: 100%;
+      width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      padding-block: ${token.paddingLG}px;
+      gap: 16px;
+      .ant-bubble-content-updating {
+        background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
+        background-size: 100% 2px;
+        background-repeat: no-repeat;
+        background-position: bottom;
+      }
+    `,
+    chatPrompt: css`
+      .ant-prompts-label {
+        color: #000000e0 !important;
+      }
+      .ant-prompts-desc {
+        color: #000000a6 !important;
+        width: 100%;
+      }
+      .ant-prompts-icon {
+        color: #000000a6 !important;
+      }
+    `,
+    chatList: css`
+      display: flex;
+      height: calc(100% - 120px);
+      flex-direction: column;
+    `,
+    placeholder: css`
+      padding-top: 32px;
+    `,
+    // sender 样式
+    sender: css`
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+    `,
+    speechButton: css`
+      font-size: 18px;
+      color: ${token.colorText} !important;
+    `,
+    senderPrompt: css`
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+      color: ${token.colorText};
+    `,
+  };
+});
+
+/**
+ * 🔔 Please replace the BASE_URL, MODEL with your own values.
+ */
+const providerCaches = new Map<string, DeepSeekChatProvider>();
+const providerFactory = (conversationKey: string) => {
+  if (!providerCaches.get(conversationKey)) {
+    providerCaches.set(
+      conversationKey,
+      new DeepSeekChatProvider({
+        request: XRequest<XModelParams, Partial<Record<SSEFields, XModelResponse>>>(
+          'https://api.x.ant.design/api/llm_siliconflow_deepSeek-r1-distill-1wen-7b',
+          {
+            manual: true,
+            params: {
+              stream: true,
+              model: 'DeepSeek-R1-Distill-Qwen-7B',
+            },
+          },
+        ),
+      }),
+    );
+  }
+  return providerCaches.get(conversationKey);
+};
+
 const Independent: React.FC = () => {
   const { styles } = useStyle();
+  const locale = isZhCN ? { ...zhCN_antd, ...zhCN_X } : { ...enUS_antd, ...enUS_X };
 
   // ==================== State ====================
 
@@ -561,32 +558,23 @@ const Independent: React.FC = () => {
         />
         <span>Ant Design X</span>
       </div>
-
-      {/* 🌟 添加会话 */}
-      <Button
-        onClick={() => {
-          if (isRequesting) {
-            message.error(t.messageIsRequesting);
-            return;
-          }
-
-          const now = dayjs().valueOf().toString();
-          addConversation({
-            key: now,
-            label: `${t['New Conversation']} ${conversations.length + 1}`,
-            group: t.today,
-          });
-          setCurConversation(now);
-        }}
-        type="link"
-        className={styles.addBtn}
-        icon={<PlusOutlined />}
-      >
-        {t['New Conversation']}
-      </Button>
-
       {/* 🌟 会话管理 */}
       <Conversations
+        creation={{
+          onClick: () => {
+            if (isRequesting) {
+              message.error(t.messageIsRequesting);
+              return;
+            }
+            const now = dayjs().valueOf().toString();
+            addConversation({
+              key: now,
+              label: `${t.NewConversation} ${conversations.length + 1}`,
+              group: t.today,
+            });
+            setCurConversation(now);
+          },
+        }}
         items={conversations}
         className={styles.conversations}
         activeKey={curConversation}
@@ -768,15 +756,17 @@ const Independent: React.FC = () => {
   );
 
   // ==================== Render =================
-  return (
-    <div className={styles.layout}>
-      {chatSide}
 
-      <div className={styles.chat}>
-        {chatList}
-        {chatSender}
+  return (
+    <XProvider locale={locale}>
+      <div className={styles.layout}>
+        {chatSide}
+        <div className={styles.chat}>
+          {chatList}
+          {chatSender}
+        </div>
       </div>
-    </div>
+    </XProvider>
   );
 };
 
