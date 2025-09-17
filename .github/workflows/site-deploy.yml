@@ -18,17 +18,21 @@ jobs:
       - name: checkout
         uses: actions/checkout@v5
 
-      - uses: oven-sh/setup-bun@v2
+      - uses: utooland/setup-utoo@v1
+        with:
+          utoo-version: 'latest'
+          registry: 'https://registry.npmjs.org/'
+          cache-store: false
 
-      - run: bun install
+      - run: ut
 
       - name: build site
-        run: npm run predeploy --workspace packages/x
+        run: ut predeploy --workspace packages/x
         env:
           NODE_OPTIONS: --max_old_space_size=4096
 
       - name: build dist and bundle analyzer report
-        run: npm run compile --workspace packages/x
+        run: ut compile --workspace packages/x
         env:
           ANALYZER: 1
           NODE_OPTIONS: --max_old_space_size=4096
