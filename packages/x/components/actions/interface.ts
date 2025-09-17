@@ -99,5 +99,5 @@ export interface ItemType {
    * @desc 自定义渲染操作项内容
    * @descEN Custom render action item content
    */
-  actionRender?: (item: ItemType) => React.ReactNode;
+  actionRender?: ((item: ItemType) => React.ReactNode) | React.ReactNode;
 }

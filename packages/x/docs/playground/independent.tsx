@@ -15,7 +15,7 @@ import {
   ShareAltOutlined,
   SmileOutlined,
 } from '@ant-design/icons';
-import type { BubbleListProps, ThoughtChainItemProps } from '@ant-design/x';
+import type { ActionsProps, BubbleListProps, ThoughtChainItemProps } from '@ant-design/x';
 import {
   Actions,
   Attachments,
@@ -287,30 +287,34 @@ const ThoughtChainConfig = {
     status: 'abort',
   },
 };
-const actionsItems = [
-  {
-    key: 'pagination',
-    actionRender: () => <Pagination simple total={1} pageSize={1} />,
-  },
-  {
-    key: 'feedback',
-    actionRender: () => <Actions.Feedback key="feedback" />,
-  },
-  {
-    key: 'copy',
-    label: 'copy',
-    actionRender: () => {
-      return <Actions.Copy text="copy value" />;
+
+const getActionsItems = (content: string, key?: string | number): ActionsProps['items'] => {
+  return [
+    {
+      key: 'pagination',
+      actionRender: <Pagination simple total={1} pageSize={1} />,
     },
-  },
-  {
-    key: 'audio',
-    label: 'audio',
-    actionRender: () => {
-      return <Actions.Audio />;
+    {
+      key: 'feedback',
+      actionRender: (
+        <Actions.Feedback
+          key="feedback"
+          onChange={(val) => {
+            message.success(`${key}: ${val}`);
+          }}
+        />
+      ),
     },
-  },
-];
+    {
+      key: 'copy',
+      actionRender: <Actions.Copy text={content} />,
+    },
+    {
+      key: 'audio',
+      actionRender: <Actions.Audio />,
+    },
+  ];
+};
 
 const getRole = (className: string): BubbleListProps['role'] => ({
   assistant: {
@@ -330,10 +334,10 @@ const getRole = (className: string): BubbleListProps['role'] => ({
           />
         ) : null;
       },
-      footer: (_, { status }) => {
+      footer: (content, { status, key }) => {
         return status !== 'updating' && status !== 'loading' ? (
           <div style={{ display: 'flex' }}>
-            <Actions items={actionsItems} />
+            <Actions items={getActionsItems(content, key)} />
           </div>
         ) : null;
       },

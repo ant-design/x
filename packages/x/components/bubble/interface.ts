@@ -49,14 +49,25 @@ export interface EditableBubbleOption {
 
 export type BubbleSlot<ContentType> =
   | React.ReactNode
-  | ((content: ContentType, info: { status?: MessageStatus }) => React.ReactNode);
+  | ((content: ContentType, info: Info) => React.ReactNode);
 
 export interface BubbleRef {
   nativeElement: HTMLElement;
 }
 
-type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error' | 'abort';
+export enum MessageStatus {
+  local = 'local',
+  loading = 'loading',
+  updating = 'updating',
+  success = 'success',
+  error = 'error',
+  abort = 'abort',
+}
 
+export type Info = {
+  status?: `${MessageStatus}`;
+  key?: string | number;
+};
 export interface BubbleProps<ContentType extends BubbleContentType = string>
   extends Omit<
     React.HTMLAttributes<HTMLDivElement>,
@@ -71,8 +82,7 @@ export interface BubbleProps<ContentType extends BubbleContentType = string>
   loading?: boolean;
   loadingRender?: () => React.ReactNode;
   content: ContentType;
-  status?: MessageStatus;
-  contentRender?: (content: ContentType, info: { status?: MessageStatus }) => React.ReactNode;
+  contentRender?: (content: ContentType, info: Info) => React.ReactNode;
   /**
    * @description 是否可编辑，提供一个仅针对 content 为 string 的编辑应用场景
    */
@@ -83,7 +93,7 @@ export interface BubbleProps<ContentType extends BubbleContentType = string>
   typing?:
     | boolean
     | BubbleAnimationOption
-    | ((content: ContentType, info: { status?: MessageStatus }) => boolean | BubbleAnimationOption);
+    | ((content: ContentType, info: Info) => boolean | BubbleAnimationOption);
   /**
    * @description 是否为流式传输 content
    * @default false
@@ -162,6 +172,7 @@ export type BubbleItemType = BubbleProps<any> & {
    * @description Bubble.List.role key 映射
    */
   role?: RemainRole | AnyStr;
+  status?: `${MessageStatus}`;
 };
 
 export type RoleProps = Pick<

@@ -4,12 +4,14 @@ import pickAttrs from 'rc-util/es/pickAttrs';
 import * as React from 'react';
 import { useXProviderContext } from '../x-provider';
 import Bubble from './Bubble';
+import { BubbleContext } from './context';
 import {
   BubbleItemType,
   BubbleListProps,
   BubbleListRef,
   BubbleRef,
   FuncRoleProps,
+  MessageStatus,
   RoleProps,
 } from './interface';
 import useBubbleListStyle from './style';
@@ -29,9 +31,10 @@ const BubbleListItem: React.FC<
     bubblesRef: React.RefObject<BubblesRecord>;
     // BubbleItemType.key 会在 BubbleList 内渲染时被吞掉，使得 BubbleListItem.props 无法获取到 key
     _key: string | number;
+    status?: `${MessageStatus}`;
   }
 > = (props) => {
-  const { _key, bubblesRef, ...restProps } = props;
+  const { _key, bubblesRef, status, ...restProps } = props;
 
   const initBubbleRef = React.useCallback(
     (node: BubbleRef) => {
@@ -44,7 +47,11 @@ const BubbleListItem: React.FC<
     [_key],
   );
 
-  return <MemoedBubble ref={initBubbleRef} {...omit(restProps, ['role'])} />;
+  return (
+    <BubbleContext.Provider value={{ key: _key, status }}>
+      <MemoedBubble ref={initBubbleRef} {...omit(restProps, ['role'])} />
+    </BubbleContext.Provider>
+  );
 };
 
 const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps> = (props, ref) => {

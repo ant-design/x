@@ -3,6 +3,7 @@ import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
+import { BubbleContext } from './context';
 import { EditableContent } from './EditableContent';
 import type {
   BubbleAnimationOption,
@@ -28,7 +29,6 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
     classNames = {},
     placement = 'start',
     content,
-    status,
     contentRender,
     editable = false,
     typing,
@@ -62,6 +62,9 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
 
   const prefixCls = getPrefixCls('bubble', customizePrefixCls);
 
+  // ============================= Bubble context ==============================
+  const context = React.useContext(BubbleContext);
+
   // ============================ Styles ============================
   const [hashId, cssVarCls] = useBubbleStyle(prefixCls);
 
@@ -83,7 +86,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
     cssVarCls,
     `${prefixCls}-${placement}`,
     {
-      [`${prefixCls}-${status}`]: status,
+      [`${prefixCls}-${context.status}`]: context.status,
       [`${prefixCls}-rtl`]: direction === 'rtl',
       [`${prefixCls}-loading`]: loading,
     },
@@ -95,13 +98,14 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
     data: true,
   });
 
+  const info = { key: context?.key, status: context?.status };
   // ============================= process content ==============================
   const memoedContent = React.useMemo(
-    () => (contentRender ? contentRender(content, { status }) : content),
+    () => (contentRender ? contentRender(content, info) : content),
     [content, contentRender],
   );
 
-  const mergeTyping = typeof typing === 'function' ? typing(content, { status }) : typing;
+  const mergeTyping = typeof typing === 'function' ? typing(content, info) : typing;
 
   const usingInnerAnimation = !!mergeTyping && typeof memoedContent === 'string';
 
@@ -161,7 +165,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
             contextConfig.classNames.content,
             classNames.content,
             {
-              [`${prefixCls}-content-${status}`]: status,
+              [`${prefixCls}-content-${context?.status}`]: context?.status,
               [`${prefixCls}-content-${shape}`]: variant !== 'borderless',
               [`${prefixCls}-content-editing`]: isEditing,
               [`${prefixCls}-content-string`]: typeof memoedContent === 'string',
@@ -206,7 +210,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
   });
 
   const renderSlot = (slot: BubbleSlot<typeof content>) =>
-    typeof slot === 'function' ? slot(content, { status }) : slot;
+    typeof slot === 'function' ? slot(content, info) : slot;
 
   const renderAvatar = () => {
     if (!components?.avatar) return null;
