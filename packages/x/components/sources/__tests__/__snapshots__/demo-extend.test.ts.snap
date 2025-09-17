@@ -1,0 +1,564 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`renders components/sources/demo/basic.tsx extend context correctly 1`] = `
+<div
+  class="ant-sources css-var-«r5»"
+>
+  <div
+    class="ant-sources-title-wrapper ant-sources-icon-position-start"
+  >
+    <span
+      aria-label="right"
+      class="anticon anticon-right ant-sources-title-down-icon"
+      role="img"
+    >
+      <svg
+        aria-hidden="true"
+        data-icon="right"
+        fill="currentColor"
+        focusable="false"
+        height="1em"
+        style="transform: rotate(90deg);"
+        viewBox="64 64 896 896"
+        width="1em"
+      >
+        <path
+          d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+        />
+      </svg>
+    </span>
+    <span
+      class="ant-sources-title"
+    >
+      Used 3 sources
+    </span>
+  </div>
+  <div
+    class="ant-sources-content"
+  >
+    <ul
+      class="ant-sources-list"
+    >
+      <li
+        class="ant-sources-list-item"
+      >
+        <a
+          class="ant-sources-link"
+          href="https://x.ant.design/components/overview"
+          target="_blank"
+        >
+          <span
+            class="ant-sources-link-title"
+          >
+            1. Data source
+          </span>
+        </a>
+      </li>
+      <li
+        class="ant-sources-list-item"
+      >
+        <a
+          class="ant-sources-link"
+          href="https://x.ant.design/components/overview"
+          target="_blank"
+        >
+          <span
+            class="ant-sources-link-title"
+          >
+            2. Data source
+          </span>
+        </a>
+      </li>
+      <li
+        class="ant-sources-list-item"
+      >
+        <a
+          class="ant-sources-link"
+          href="https://x.ant.design/components/overview"
+          target="_blank"
+        >
+          <span
+            class="ant-sources-link-title"
+          >
+            3. Data source
+          </span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`renders components/sources/demo/basic.tsx extend context correctly 2`] = `[]`;
+
+exports[`renders components/sources/demo/expand.tsx extend context correctly 1`] = `
+Array [
+  <button
+    class="ant-btn css-var-«r4» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    style="margin-bottom: 8px;"
+    type="button"
+  >
+    <span>
+      Change expand
+    </span>
+  </button>,
+  <br />,
+  <div
+    class="ant-sources css-var-«r4»"
+  >
+    <div
+      class="ant-sources-title-wrapper ant-sources-icon-position-start"
+    >
+      <span
+        aria-label="right"
+        class="anticon anticon-right ant-sources-title-down-icon"
+        role="img"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="right"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          style="transform: rotate(90deg);"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+          />
+        </svg>
+      </span>
+      <span
+        class="ant-sources-title"
+      >
+        Used 3 sources
+      </span>
+    </div>
+    <div
+      class="ant-sources-content"
+    >
+      <ul
+        class="ant-sources-list"
+      >
+        <li
+          class="ant-sources-list-item"
+        >
+          <a
+            class="ant-sources-link"
+            href="https://x.ant.design/components/overview"
+            target="_blank"
+          >
+            <span
+              class="ant-sources-link-title"
+            >
+              1. Data source
+            </span>
+          </a>
+        </li>
+        <li
+          class="ant-sources-list-item"
+        >
+          <a
+            class="ant-sources-link"
+            href="https://x.ant.design/components/overview"
+            target="_blank"
+          >
+            <span
+              class="ant-sources-link-title"
+            >
+              2. Data source
+            </span>
+          </a>
+        </li>
+        <li
+          class="ant-sources-list-item"
+        >
+          <a
+            class="ant-sources-link"
+            href="https://x.ant.design/components/overview"
+            target="_blank"
+          >
+            <span
+              class="ant-sources-link-title"
+            >
+              3. Data source
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>,
+]
+`;
+
+exports[`renders components/sources/demo/expand.tsx extend context correctly 2`] = `[]`;
+
+exports[`renders components/sources/demo/icon.tsx extend context correctly 1`] = `
+<div
+  class="ant-sources css-var-«r3»"
+>
+  <div
+    class="ant-sources-title-wrapper ant-sources-icon-position-end"
+  >
+    <span
+      aria-label="right"
+      class="anticon anticon-right ant-sources-title-down-icon"
+      role="img"
+    >
+      <svg
+        aria-hidden="true"
+        data-icon="right"
+        fill="currentColor"
+        focusable="false"
+        height="1em"
+        style="transform: rotate(90deg);"
+        viewBox="64 64 896 896"
+        width="1em"
+      >
+        <path
+          d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+        />
+      </svg>
+    </span>
+    <span
+      class="ant-sources-title"
+    >
+      Used 3 sources
+    </span>
+  </div>
+  <div
+    class="ant-sources-content"
+  >
+    <ul
+      class="ant-sources-list"
+    >
+      <li
+        class="ant-sources-list-item"
+      >
+        <a
+          class="ant-sources-link"
+          href="https://x.ant.design/components/overview"
+          target="_blank"
+        >
+          <span
+            class="ant-sources-link-icon"
+          >
+            <span
+              aria-label="twitter"
+              class="anticon anticon-twitter"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="twitter"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M928 254.3c-30.6 13.2-63.9 22.7-98.2 26.4a170.1 170.1 0 0075-94 336.64 336.64 0 01-108.2 41.2A170.1 170.1 0 00672 174c-94.5 0-170.5 76.6-170.5 170.6 0 13.2 1.6 26.4 4.2 39.1-141.5-7.4-267.7-75-351.6-178.5a169.32 169.32 0 00-23.2 86.1c0 59.2 30.1 111.4 76 142.1a172 172 0 01-77.1-21.7v2.1c0 82.9 58.6 151.6 136.7 167.4a180.6 180.6 0 01-44.9 5.8c-11.1 0-21.6-1.1-32.2-2.6C211 652 273.9 701.1 348.8 702.7c-58.6 45.9-132 72.9-211.7 72.9-14.3 0-27.5-.5-41.2-2.1C171.5 822 261.2 850 357.8 850 671.4 850 843 590.2 843 364.7c0-7.4 0-14.8-.5-22.2 33.2-24.3 62.3-54.4 85.5-88.2z"
+                />
+              </svg>
+            </span>
+          </span>
+          <span
+            class="ant-sources-link-title"
+          >
+            Data source from twitter
+          </span>
+        </a>
+      </li>
+      <li
+        class="ant-sources-list-item"
+      >
+        <a
+          class="ant-sources-link"
+          href="https://x.ant.design/components/overview"
+          target="_blank"
+        >
+          <span
+            class="ant-sources-link-icon"
+          >
+            <span
+              aria-label="youtube"
+              class="anticon anticon-youtube"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="youtube"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M960 509.2c0-2.2 0-4.7-.1-7.6-.1-8.1-.3-17.2-.5-26.9-.8-27.9-2.2-55.7-4.4-81.9-3-36.1-7.4-66.2-13.4-88.8a139.52 139.52 0 00-98.3-98.5c-28.3-7.6-83.7-12.3-161.7-15.2-37.1-1.4-76.8-2.3-116.5-2.8-13.9-.2-26.8-.3-38.4-.4h-29.4c-11.6.1-24.5.2-38.4.4-39.7.5-79.4 1.4-116.5 2.8-78 3-133.5 7.7-161.7 15.2A139.35 139.35 0 0082.4 304C76.3 326.6 72 356.7 69 392.8c-2.2 26.2-3.6 54-4.4 81.9-.3 9.7-.4 18.8-.5 26.9 0 2.9-.1 5.4-.1 7.6v5.6c0 2.2 0 4.7.1 7.6.1 8.1.3 17.2.5 26.9.8 27.9 2.2 55.7 4.4 81.9 3 36.1 7.4 66.2 13.4 88.8 12.8 47.9 50.4 85.7 98.3 98.5 28.2 7.6 83.7 12.3 161.7 15.2 37.1 1.4 76.8 2.3 116.5 2.8 13.9.2 26.8.3 38.4.4h29.4c11.6-.1 24.5-.2 38.4-.4 39.7-.5 79.4-1.4 116.5-2.8 78-3 133.5-7.7 161.7-15.2 47.9-12.8 85.5-50.5 98.3-98.5 6.1-22.6 10.4-52.7 13.4-88.8 2.2-26.2 3.6-54 4.4-81.9.3-9.7.4-18.8.5-26.9 0-2.9.1-5.4.1-7.6v-5.6zm-72 5.2c0 2.1 0 4.4-.1 7.1-.1 7.8-.3 16.4-.5 25.7-.7 26.6-2.1 53.2-4.2 77.9-2.7 32.2-6.5 58.6-11.2 76.3-6.2 23.1-24.4 41.4-47.4 47.5-21 5.6-73.9 10.1-145.8 12.8-36.4 1.4-75.6 2.3-114.7 2.8-13.7.2-26.4.3-37.8.3h-28.6l-37.8-.3c-39.1-.5-78.2-1.4-114.7-2.8-71.9-2.8-124.9-7.2-145.8-12.8-23-6.2-41.2-24.4-47.4-47.5-4.7-17.7-8.5-44.1-11.2-76.3-2.1-24.7-3.4-51.3-4.2-77.9-.3-9.3-.4-18-.5-25.7 0-2.7-.1-5.1-.1-7.1v-4.8c0-2.1 0-4.4.1-7.1.1-7.8.3-16.4.5-25.7.7-26.6 2.1-53.2 4.2-77.9 2.7-32.2 6.5-58.6 11.2-76.3 6.2-23.1 24.4-41.4 47.4-47.5 21-5.6 73.9-10.1 145.8-12.8 36.4-1.4 75.6-2.3 114.7-2.8 13.7-.2 26.4-.3 37.8-.3h28.6l37.8.3c39.1.5 78.2 1.4 114.7 2.8 71.9 2.8 124.9 7.2 145.8 12.8 23 6.2 41.2 24.4 47.4 47.5 4.7 17.7 8.5 44.1 11.2 76.3 2.1 24.7 3.4 51.3 4.2 77.9.3 9.3.4 18 .5 25.7 0 2.7.1 5.1.1 7.1v4.8zM423 646l232-135-232-133z"
+                />
+              </svg>
+            </span>
+          </span>
+          <span
+            class="ant-sources-link-title"
+          >
+            Data source from youtube
+          </span>
+        </a>
+      </li>
+      <li
+        class="ant-sources-list-item"
+      >
+        <a
+          class="ant-sources-link"
+          href="https://x.ant.design/components/overview"
+          target="_blank"
+        >
+          <span
+            class="ant-sources-link-icon"
+          >
+            <span
+              aria-label="github"
+              class="anticon anticon-github"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="github"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"
+                />
+              </svg>
+            </span>
+          </span>
+          <span
+            class="ant-sources-link-title"
+          >
+            Data source from github
+          </span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`renders components/sources/demo/icon.tsx extend context correctly 2`] = `[]`;
+
+exports[`renders components/sources/demo/inline.tsx extend context correctly 1`] = `
+Array [
+  <span>
+    Use the inline mode in the text
+  </span>,
+  <div
+    class="ant-sources css-var-«r0» ant-sources-inline"
+  >
+    <div
+      aria-describedby="test-id"
+      class="ant-sources-title-wrapper"
+    >
+      <span
+        class="ant-sources-title"
+      >
+        1
+      </span>
+    </div>
+    <div
+      class="ant-popover ant-zoom-big-appear ant-zoom-big-appear-prepare ant-zoom-big css-var-«r0» css-var-«r0» ant-popover-placement-top"
+      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+    >
+      <div
+        class="ant-popover-arrow"
+        style="position: absolute; bottom: 0px; left: 0px;"
+      />
+      <div
+        class="ant-popover-content"
+      >
+        <div
+          class="ant-popover-inner"
+          id="test-id"
+          role="tooltip"
+          style="width: 300px;"
+        >
+          <div
+            class="ant-popover-inner-content"
+          >
+            <div
+              class="ant-sources-carousel-wrapper"
+            >
+              <div
+                class="ant-sources-carousel-title"
+              >
+                <div
+                  class="ant-sources-carousel-btn-wrapper"
+                >
+                  <span
+                    class="ant-sources-carousel-btn ant-sources-carousel-btn-disabled"
+                  >
+                    <span
+                      aria-label="left"
+                      class="anticon anticon-left"
+                      role="img"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        data-icon="left"
+                        fill="currentColor"
+                        focusable="false"
+                        height="1em"
+                        viewBox="64 64 896 896"
+                        width="1em"
+                      >
+                        <path
+                          d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"
+                        />
+                      </svg>
+                    </span>
+                  </span>
+                  <span
+                    class="ant-sources-carousel-btn"
+                  >
+                    <span
+                      aria-label="right"
+                      class="anticon anticon-right"
+                      role="img"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        data-icon="right"
+                        fill="currentColor"
+                        focusable="false"
+                        height="1em"
+                        viewBox="64 64 896 896"
+                        width="1em"
+                      >
+                        <path
+                          d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+                        />
+                      </svg>
+                    </span>
+                  </span>
+                </div>
+                <div
+                  class="ant-sources-carousel-page"
+                >
+                  1/3
+                </div>
+              </div>
+              <div
+                class="ant-carousel css-var-«r0»"
+              >
+                <div
+                  class="slick-slider ant-sources-carousel slick-initialized"
+                  dir="ltr"
+                >
+                  <div
+                    class="slick-list"
+                  >
+                    <div
+                      class="slick-track"
+                      style="opacity: 1; transform: translate3d(0px, 0px, 0px);"
+                    >
+                      <div
+                        aria-hidden="false"
+                        class="slick-slide slick-active slick-current"
+                        data-index="0"
+                        style="width: 0px; outline-color: none; outline-style: none; outline-width: initial;"
+                        tabindex="-1"
+                      >
+                        <div>
+                          <div
+                            class="ant-sources-carousel-item"
+                            style="width: 100%; display: inline-block;"
+                            tabindex="-1"
+                          >
+                            <div
+                              class="ant-sources-carousel-item-title-wrapper"
+                            >
+                              <span
+                                class="ant-sources-carousel-item-title"
+                              >
+                                1. Data source
+                              </span>
+                            </div>
+                            <div
+                              class="ant-sources-carousel-item-description"
+                            >
+                              Artificial Intelligence, often abbreviated as AI, is a broad branch of computer science concerned with building smart machines capable of performing tasks that typically require human intelligence.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        aria-hidden="true"
+                        class="slick-slide"
+                        data-index="1"
+                        style="width: 0px; outline-color: none; outline-style: none; outline-width: initial;"
+                        tabindex="-1"
+                      >
+                        <div>
+                          <div
+                            class="ant-sources-carousel-item"
+                            style="width: 100%; display: inline-block;"
+                            tabindex="-1"
+                          >
+                            <div
+                              class="ant-sources-carousel-item-title-wrapper"
+                            >
+                              <span
+                                class="ant-sources-carousel-item-title"
+                              >
+                                2. Data source
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        aria-hidden="true"
+                        class="slick-slide"
+                        data-index="2"
+                        style="width: 0px; outline-color: none; outline-style: none; outline-width: initial;"
+                        tabindex="-1"
+                      >
+                        <div>
+                          <div
+                            class="ant-sources-carousel-item"
+                            style="width: 100%; display: inline-block;"
+                            tabindex="-1"
+                          >
+                            <div
+                              class="ant-sources-carousel-item-title-wrapper"
+                            >
+                              <span
+                                class="ant-sources-carousel-item-title"
+                              >
+                                3. Data source
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`renders components/sources/demo/inline.tsx extend context correctly 2`] = `[]`;
