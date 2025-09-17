@@ -19,7 +19,7 @@ enum RenderType {
 
 mermaid.initialize({
   startOnLoad: false,
-  securityLevel: 'loose',
+  securityLevel: 'strict',
   theme: 'default',
   fontFamily: 'monospace',
 });
@@ -73,13 +73,14 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
 
   // ============================ render mermaid ============================
   const renderDiagram = throttle(async () => {
-    if (!children || !containerRef.current) return;
+    if (!children || !containerRef.current || renderType === RenderType.Code) return;
 
     try {
       const isValid = await mermaid.parse(children, { suppressErrors: true });
       if (!isValid) throw new Error('Invalid Mermaid syntax');
 
       const newText = children.replace(/[`\s]+$/g, '');
+
       const { svg } = await mermaid.render(id, newText, containerRef.current);
 
       containerRef.current.innerHTML = svg;
@@ -89,8 +90,37 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
   }, 100);
 
   useEffect(() => {
-    renderDiagram();
-  }, [children]);
+    if (renderType === RenderType.Code && containerRef.current) {
+      // 清理图表内容，避免在代码视图下出现渲染错误
+      containerRef.current.innerHTML = '';
+    } else {
+      renderDiagram();
+    }
+  }, [children, renderType]);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || renderType !== RenderType.Image) return;
+
+    let lastTime = 0;
+    const wheelHandler = (e: WheelEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const now = Date.now();
+      if (now - lastTime < 16) return;
+      lastTime = now;
+
+      const delta = e.deltaY > 0 ? -0.1 : 0.1;
+      setScale((prev) => Math.max(0.5, Math.min(3, prev + delta)));
+    };
+
+    container.addEventListener('wheel', wheelHandler, { passive: false });
+
+    return () => {
+      container.removeEventListener('wheel', wheelHandler);
+    };
+  }, [renderType]);
 
   useEffect(() => {
     if (containerRef.current && renderType === RenderType.Image) {
@@ -98,7 +128,7 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
       if (svg) {
         svg.style.transform = `scale(${scale}) translate(${position.x}px, ${position.y}px)`;
         svg.style.transformOrigin = 'center';
-        svg.style.transition = isDragging ? 'none' : 'transform 0.2s ease';
+        svg.style.transition = isDragging ? 'none' : 'transform 0.1s ease-out';
         svg.style.cursor = isDragging ? 'grabbing' : 'grab';
       }
     }
@@ -107,12 +137,14 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
   // 鼠标拖动事件处理
   const handleMouseDown = (e: React.MouseEvent) => {
     if (renderType !== RenderType.Image) return;
+    e.preventDefault();
     setIsDragging(true);
     setLastMousePos({ x: e.clientX, y: e.clientY });
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isDragging || renderType !== RenderType.Image) return;
+    e.preventDefault();
 
     const deltaX = e.clientX - lastMousePos.x;
     const deltaY = e.clientY - lastMousePos.y;
@@ -127,14 +159,6 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
 
   const handleMouseUp = () => {
     setIsDragging(false);
-  };
-
-  const handleWheel = (e: React.WheelEvent) => {
-    if (renderType !== RenderType.Image) return;
-
-    e.preventDefault();
-    const delta = e.deltaY > 0 ? -0.1 : 0.1;
-    setScale((prev) => Math.max(0.5, Math.min(3, prev + delta)));
   };
 
   const handleReset = () => {
@@ -273,7 +297,6 @@ const Mermaid: PluginsType['Mermaid'] = React.memo((props) => {
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
-          onWheel={handleWheel}
         />
         {renderType === RenderType.Code ? (
           <div

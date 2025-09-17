@@ -22,7 +22,6 @@ const XMarkdown: React.FC<XMarkdownProps> = (props) => {
   } = props;
 
   // ============================ style ============================
-
   const { direction: contextDirection, getPrefixCls } = useXProviderContext();
 
   const prefixCls = getPrefixCls('x-markdown', customizePrefixCls);
