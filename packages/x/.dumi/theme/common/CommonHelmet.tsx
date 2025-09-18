@@ -9,9 +9,11 @@ const CommonHelmet: React.FC = () => {
     if (!meta.frontmatter.subtitle && !meta.frontmatter.title) {
       helmetTitle = '404 Not Found - Ant Design X';
     } else {
-      helmetTitle = `${meta.frontmatter.subtitle || ''} ${
-        meta.frontmatter?.title || ''
-      } - Ant Design X`;
+      const mergeSubTitle =
+        meta.frontmatter.subtitle?.split('｜')?.length === 2
+          ? meta.frontmatter.subtitle?.split('｜')?.[1]
+          : `${meta?.frontmatter?.subtitle || ''}${meta.frontmatter?.title || ''}`;
+      helmetTitle = `${mergeSubTitle || ''} - Ant Design X`;
     }
     const helmetDescription = meta.frontmatter.description || '';
     return [helmetTitle, helmetDescription];
@@ -21,7 +23,7 @@ const CommonHelmet: React.FC = () => {
     <Helmet>
       <title>{title}</title>
       <meta property="og:title" content={title} />
-      {description && <meta name="description" content={description} />}
+      {description && <meta name="og:description" content={description} />}
     </Helmet>
   );
 };
