@@ -10,7 +10,7 @@ const CommonHelmet: React.FC = () => {
       helmetTitle = '404 Not Found - Ant Design X';
     } else {
       const mergeSubTitle =
-        meta.frontmatter.subtitle?.split('｜').length === 2
+        meta.frontmatter.subtitle?.split('｜')?.length === 2
           ? meta.frontmatter.subtitle?.split('｜')?.[1]
           : `${meta?.frontmatter?.subtitle || ''}${meta.frontmatter?.title || ''}`;
       helmetTitle = `${mergeSubTitle || ''} - Ant Design X`;
