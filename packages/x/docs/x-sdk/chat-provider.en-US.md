@@ -73,7 +73,7 @@ When using some SDKs (such as `openai-node`, `@openrouter/ai-sdk-provider`) to r
 
 ### AbstractChatProvider
 
-`AbstractChatProvider` is an abstract class used to define the interface for `Chat Provider`. When you need to use custom data services, you can extend `AbstractChatProvider` and implement its methods. See [Playground TBox](/docs/playground/agent-tbox) for reference.
+`AbstractChatProvider` is an abstract class used to define the interface for `Chat Provider`. When you need to use custom data services, you can extend `AbstractChatProvider` and implement its methods. See [Playground Tbox](/docs/playground/agent-tbox) for reference.
 
 ```ts
 type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error';

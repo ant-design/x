@@ -4,7 +4,7 @@
 
 <h1>Ant Design X</h1>
 
-轻松打造 AI 驱动的界面。
+打造卓越 AI 界面解决方案，引领智能新体验。
 
 [![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] [![NPM version][npm-image]][npm-url]
 

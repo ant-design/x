@@ -1,7 +1,7 @@
 ---
 order: 0
 title: Ant Design X
-subtitle: ｜Solution for Intelligent Interface Development
+subtitle: ｜AI interface solution
 ---
 
 Ant Design X is a comprehensive toolkit for AI applications, integrating a UI component library, streaming Markdown rendering engine, and AI SDK, providing developers with a complete toolchain for building next-generation AI-driven applications.

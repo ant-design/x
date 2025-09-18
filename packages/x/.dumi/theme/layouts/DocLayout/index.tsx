@@ -21,11 +21,11 @@ import SidebarLayout from '../SidebarLayout';
 
 const locales = {
   cn: {
-    title: 'Ant Design X',
+    title: 'Ant Design X - AI界面解决方案',
     description: '轻松打造 AI 驱动的界面。',
   },
   en: {
-    title: 'Ant Design X',
+    title: 'Ant Design X - AI interface solution',
     description: 'Craft AI-driven interfaces effortlessly.',
   },
 };
@@ -102,7 +102,7 @@ const DocLayout: React.FC = () => {
         <meta property="og:type" content="website" />
         <meta
           property="og:image"
-          content="https://gw.alipayobjects.com/zos/rmsportal/rlpTLlbMzTNYuZGGCVYM.png"
+          content="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*eco6RrQhxbMAAAAAAAAAAAAADgCCAQ/original"
         />
       </Helmet>
       <XProvider direction={direction} locale={lang === 'cn' ? zhCN : undefined}>

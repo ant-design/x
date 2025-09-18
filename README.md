@@ -4,7 +4,7 @@
 
 <h1>Ant Design X</h1>
 
-Craft AI-driven interfaces effortlessly.
+Build excellent AI interfaces and pioneer intelligent new experiences.
 
 [![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] [![NPM version][npm-image]][npm-url]
 
