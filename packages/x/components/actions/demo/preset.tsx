@@ -55,6 +55,11 @@ const App: React.FC = () => {
       actionRender: () => (
         <Actions.Feedback
           value={feedbackStatus}
+          styles={{
+            liked: {
+              color: '#f759ab',
+            },
+          }}
           onChange={(val) => {
             setFeedbackStatus(val);
             message.success(`Change feedback value to: ${val}`);

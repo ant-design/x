@@ -14,8 +14,14 @@ import {
   ScheduleOutlined,
   ShareAltOutlined,
   SmileOutlined,
+  SyncOutlined,
 } from '@ant-design/icons';
-import type { BubbleListProps, ThoughtChainItemProps } from '@ant-design/x';
+import type {
+  ActionsFeedbackProps,
+  ActionsProps,
+  BubbleListProps,
+  ThoughtChainItemProps,
+} from '@ant-design/x';
 import {
   Actions,
   Attachments,
@@ -93,6 +99,8 @@ const zhCN = {
   NewConversation: '新对话',
   curConversation: '当前对话',
   nowNenConversation: '当前已经是新会话',
+  isMock: '当前为模拟功能',
+  retry: '重新生成',
 };
 
 const enUS = {
@@ -138,6 +146,8 @@ const enUS = {
   NewConversation: 'New Conversation',
   curConversation: 'Current Conversation',
   nowNenConversation: 'It is now a new conversation.',
+  isMock: 'It is Mock',
+  retry: 'retry',
 };
 
 const isZhCN = window.parent?.location?.pathname?.includes('-cn');
@@ -287,32 +297,87 @@ const ThoughtChainConfig = {
     status: 'abort',
   },
 };
-const actionsItems = [
-  {
-    key: 'pagination',
-    actionRender: () => <Pagination simple total={1} pageSize={1} />,
-  },
-  {
-    key: 'feedback',
-    actionRender: () => <Actions.Feedback key="feedback" />,
-  },
-  {
-    key: 'copy',
-    label: 'copy',
-    actionRender: () => {
-      return <Actions.Copy text="copy value" />;
-    },
-  },
-  {
-    key: 'audio',
-    label: 'audio',
-    actionRender: () => {
-      return <Actions.Audio />;
-    },
-  },
-];
 
-const getRole = (className: string): BubbleListProps['role'] => ({
+const getActionsItems = (
+  content: string,
+  onReload: (key: string | number, info: any) => any,
+  key: string | number,
+  feedBackValue: ActionsFeedbackProps['value'],
+  onFeedBackChange: React.Dispatch<
+    React.SetStateAction<'default' | 'like' | 'dislike' | undefined>
+  >,
+): ActionsProps['items'] => {
+  return [
+    {
+      key: 'pagination',
+      actionRender: <Pagination simple total={1} pageSize={1} />,
+    },
+    {
+      key: 'retry',
+      label: t.retry,
+      icon: <SyncOutlined />,
+      onItemClick: () => {
+        if (key) {
+          onReload(key, {
+            userAction: 'retry',
+          });
+        }
+      },
+    },
+    {
+      key: 'copy',
+      actionRender: <Actions.Copy text={content} />,
+    },
+    {
+      key: 'audio',
+      actionRender: (
+        <Actions.Audio
+          onClick={() => {
+            message.info(t.isMock);
+          }}
+        />
+      ),
+    },
+    {
+      key: 'feedback',
+      actionRender: (
+        <Actions.Feedback
+          styles={{
+            liked: {
+              color: '#f759ab',
+            },
+          }}
+          value={feedBackValue || 'default'}
+          key="feedback"
+          onChange={(val) => {
+            onFeedBackChange(val);
+            message.success(`${key}: ${val}`);
+          }}
+        />
+      ),
+    },
+  ];
+};
+const Footer: React.FC<{
+  id?: number | string;
+  content: string;
+  onReload: (key: string | number, info: any) => any;
+  status?: string;
+}> = ({ id, content, onReload, status }) => {
+  const [mockFeedback, setMockFeedback] = useState<ActionsFeedbackProps['value']>('default');
+  return status !== 'updating' && status !== 'loading' ? (
+    <div style={{ display: 'flex' }}>
+      {id && (
+        <Actions items={getActionsItems(content, onReload, id, mockFeedback, setMockFeedback)} />
+      )}
+    </div>
+  ) : null;
+};
+
+const getRole = (
+  className: string,
+  onReload: (key: string | number, info: any) => any,
+): BubbleListProps['role'] => ({
   assistant: {
     placement: 'start',
     components: {
@@ -330,13 +395,9 @@ const getRole = (className: string): BubbleListProps['role'] => ({
           />
         ) : null;
       },
-      footer: (_, { status }) => {
-        return status !== 'updating' && status !== 'loading' ? (
-          <div style={{ display: 'flex' }}>
-            <Actions items={actionsItems} />
-          </div>
-        ) : null;
-      },
+      footer: (content, { status, key }) => (
+        <Footer content={content} onReload={onReload} status={status} id={key} />
+      ),
     },
     contentRender: (content: any, { status }) => {
       const newContent = content.replaceAll('\n\n', '<br/>');
@@ -355,25 +416,6 @@ const getRole = (className: string): BubbleListProps['role'] => ({
         </XMarkdown>
       );
     },
-    typing: (_, { status }) =>
-      status === 'updating'
-        ? {
-            effect: 'typing',
-            step: 5,
-            interval: 20,
-            suffix: (
-              <div
-                style={{
-                  position: 'absolute',
-                  right: 20,
-                  bottom: 10,
-                }}
-              >
-                💗
-              </div>
-            ),
-          }
-        : false,
   },
   user: { placement: 'end' },
 });
@@ -540,6 +582,7 @@ const providerFactory = (conversationKey: string) => {
 const historyMessageFactory = (conversationKey: string): DefaultMessageInfo<XModelMessage>[] => {
   return HISTORY_MESSAGES[conversationKey] || [];
 };
+
 const Independent: React.FC = () => {
   const { styles } = useStyle();
   const locale = isZhCN ? { ...zhCN_antd, ...zhCN_X } : { ...enUS_antd, ...enUS_X };
@@ -563,7 +606,7 @@ const Independent: React.FC = () => {
 
   // ==================== Runtime ====================
 
-  const { onRequest, messages, isRequesting, abort } = useXChat({
+  const { onRequest, messages, isRequesting, abort, onReload } = useXChat({
     provider: providerFactory(curConversation), // every conversation has its own provider
     conversationKey: curConversation,
     defaultMessages: historyMessageFactory(curConversation),
@@ -574,7 +617,6 @@ const Independent: React.FC = () => {
       };
     },
   });
-
   // ==================== Event ====================
   const onSubmit = (val: string) => {
     if (!val) return;
@@ -674,7 +716,7 @@ const Independent: React.FC = () => {
               width: 700,
             },
           }}
-          role={getRole(className)}
+          role={getRole(className, onReload)}
         />
       ) : (
         <Space orientation="vertical" size={16} align="center" className={styles.placeholder}>
