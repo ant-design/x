@@ -11,8 +11,14 @@ import {
   ScheduleOutlined,
   ShareAltOutlined,
   SmileOutlined,
+  SyncOutlined,
 } from '@ant-design/icons';
-import type { BubbleListProps, ThoughtChainItemProps } from '@ant-design/x';
+import type {
+  ActionsFeedbackProps,
+  ActionsProps,
+  BubbleListProps,
+  ThoughtChainItemProps,
+} from '@ant-design/x';
 import {
   Actions,
   Bubble,
@@ -83,6 +89,8 @@ const zhCN = {
   aborted: '已经终止',
   curConversation: '当前对话',
   nowNenConversation: '当前已经是新会话',
+  isMock: '当前为模拟功能',
+  retry: '重新生成',
 };
 
 const enUS = {
@@ -118,6 +126,8 @@ const enUS = {
   aborted: 'Aborted',
   curConversation: 'Current Conversation',
   nowNenConversation: 'It is now a new conversation.',
+  retry: 'retry',
+  isMock: 'It is Mock',
 };
 
 const isZhCN = window.parent?.location?.pathname?.includes('-cn');
@@ -359,8 +369,9 @@ class TBoxRequest<
     const stream = tboxClient.chat({
       appId: 'your-app-id', // Replace with your app ID
       query: params?.message.content || '',
+      version: 'v2', // only for antd-x v2
       userId: 'antd-x',
-    });
+    } as any);
     this.tboxStream = stream;
     const { callbacks } = this.options;
 
@@ -452,7 +463,7 @@ const providerFactory = (conversationKey: string) => {
 };
 
 const ThinkComponent = React.memo((props: { children: string; streamStatus: string }) => {
-  const [title, setTitle] = React.useState(t.DeepThinking + '...');
+  const [title, setTitle] = React.useState(`${t.DeepThinking}...`);
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
@@ -468,6 +479,83 @@ const ThinkComponent = React.memo((props: { children: string; streamStatus: stri
     </Think>
   );
 });
+
+const getActionsItems = (
+  content: string,
+  onReload: (key: string | number, info: any) => any,
+  key: string | number,
+  feedBackValue: ActionsFeedbackProps['value'],
+  onFeedBackChange: React.Dispatch<
+    React.SetStateAction<'default' | 'like' | 'dislike' | undefined>
+  >,
+): ActionsProps['items'] => {
+  return [
+    {
+      key: 'pagination',
+      actionRender: <Pagination simple total={1} pageSize={1} />,
+    },
+    {
+      key: 'retry',
+      label: t.retry,
+      icon: <SyncOutlined />,
+      onItemClick: () => {
+        if (key) {
+          onReload(key, {
+            userAction: 'retry',
+          });
+        }
+      },
+    },
+    {
+      key: 'copy',
+      actionRender: <Actions.Copy text={content} />,
+    },
+    {
+      key: 'audio',
+      actionRender: (
+        <Actions.Audio
+          onClick={() => {
+            message.info(t.isMock);
+          }}
+        />
+      ),
+    },
+    {
+      key: 'feedback',
+      actionRender: (
+        <Actions.Feedback
+          styles={{
+            liked: {
+              color: '#f759ab',
+            },
+          }}
+          value={feedBackValue || 'default'}
+          key="feedback"
+          onChange={(val) => {
+            onFeedBackChange(val);
+            message.success(`${key}: ${val}`);
+          }}
+        />
+      ),
+    },
+  ];
+};
+
+const Footer: React.FC<{
+  id?: number | string;
+  content: string;
+  onReload: (key: string | number, info: any) => any;
+  status?: string;
+}> = ({ id, content, onReload, status }) => {
+  const [mockFeedback, setMockFeedback] = useState<ActionsFeedbackProps['value']>('default');
+  return status !== 'updating' && status !== 'loading' ? (
+    <div style={{ display: 'flex' }}>
+      {id && (
+        <Actions items={getActionsItems(content, onReload, id, mockFeedback, setMockFeedback)} />
+      )}
+    </div>
+  ) : null;
+};
 
 const AgentTBox: React.FC = () => {
   const { styles } = useStyle();
@@ -491,7 +579,7 @@ const AgentTBox: React.FC = () => {
 
   // ==================== Runtime ====================
 
-  const { onRequest, messages, isRequesting, abort } = useXChat({
+  const { onRequest, messages, isRequesting, abort, onReload } = useXChat({
     provider: providerFactory(curConversation), // every conversation has its own provider
     conversationKey: curConversation,
     requestPlaceholder: () => {
@@ -606,36 +694,12 @@ const AgentTBox: React.FC = () => {
       status: 'abort',
     },
   };
-  const actionsItems = [
-    {
-      key: 'pagination',
-      actionRender: () => <Pagination simple total={1} pageSize={1} />,
-    },
-    {
-      key: 'feedback',
-      actionRender: () => <Actions.Feedback key="feedback" />,
-    },
-    {
-      key: 'copy',
-      label: 'copy',
-      actionRender: () => {
-        return <Actions.Copy text="copy value" />;
-      },
-    },
-    {
-      key: 'audio',
-      label: 'audio',
-      actionRender: () => {
-        return <Actions.Audio />;
-      },
-    },
-  ];
+
   const role: BubbleListProps['role'] = {
     assistant: {
       placement: 'start',
       components: {
         header: (_, { status }) => {
-          console.log(status, '1111');
           const config = ThoughtChainConfig[status as keyof typeof ThoughtChainConfig];
           return config ? (
             <ThoughtChain.Item
@@ -649,13 +713,9 @@ const AgentTBox: React.FC = () => {
             />
           ) : null;
         },
-        footer: (_, { status }) => {
-          return status !== 'updating' && status !== 'loading' ? (
-            <div style={{ display: 'flex' }}>
-              <Actions items={actionsItems} />
-            </div>
-          ) : null;
-        },
+        footer: (content, { status, key }) => (
+          <Footer content={content} onReload={onReload} status={status} id={key} />
+        ),
       },
       contentRender: (content, { status }) => (
         <XMarkdown
@@ -666,25 +726,6 @@ const AgentTBox: React.FC = () => {
           streaming={{ hasNextChunk: status === 'updating', enableAnimation: true }}
         />
       ),
-      typing: (_, { status }) =>
-        status === 'updating'
-          ? {
-              effect: 'typing',
-              step: 5,
-              interval: 20,
-              suffix: (
-                <div
-                  style={{
-                    position: 'absolute',
-                    right: 20,
-                    bottom: 10,
-                  }}
-                >
-                  💗
-                </div>
-              ),
-            }
-          : false,
     },
     user: { placement: 'end' },
   };
