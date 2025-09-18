@@ -22,7 +22,7 @@ import { TboxClient } from 'tbox-nodejs-sdk';
 
 const client = new TboxClient({
   httpClientConfig: {
-    authorization: 'TBox-your-token-xxx',
+    authorization: 'Tbox-your-token-xxx',
   },
 });
 
