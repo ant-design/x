@@ -16,7 +16,12 @@ import {
   SmileOutlined,
   SyncOutlined,
 } from '@ant-design/icons';
-import type { ActionsProps, BubbleListProps, ThoughtChainItemProps } from '@ant-design/x';
+import type {
+  ActionsFeedbackProps,
+  ActionsProps,
+  BubbleListProps,
+  ThoughtChainItemProps,
+} from '@ant-design/x';
 import {
   Actions,
   Attachments,
@@ -94,6 +99,8 @@ const zhCN = {
   NewConversation: '新对话',
   curConversation: '当前对话',
   nowNenConversation: '当前已经是新会话',
+  isMock: '当前为模拟功能',
+  retry: '重新生成',
 };
 
 const enUS = {
@@ -139,6 +146,8 @@ const enUS = {
   NewConversation: 'New Conversation',
   curConversation: 'Current Conversation',
   nowNenConversation: 'It is now a new conversation.',
+  isMock: 'It is Mock',
+  retry: 'retry',
 };
 
 const isZhCN = window.parent?.location?.pathname?.includes('-cn');
@@ -292,7 +301,11 @@ const ThoughtChainConfig = {
 const getActionsItems = (
   content: string,
   onReload: (key: string | number, info: any) => any,
-  key?: string | number,
+  key: string | number,
+  feedBackValue: ActionsFeedbackProps['value'],
+  onFeedBackChange: React.Dispatch<
+    React.SetStateAction<'default' | 'like' | 'dislike' | undefined>
+  >,
 ): ActionsProps['items'] => {
   return [
     {
@@ -301,7 +314,7 @@ const getActionsItems = (
     },
     {
       key: 'retry',
-      label: '重新生成',
+      label: t.retry,
       icon: <SyncOutlined />,
       onItemClick: () => {
         if (key) {
@@ -312,25 +325,48 @@ const getActionsItems = (
       },
     },
     {
-      key: 'feedback',
-      actionRender: (
-        <Actions.Feedback
-          key="feedback"
-          onChange={(val) => {
-            message.success(`${key}: ${val}`);
-          }}
-        />
-      ),
-    },
-    {
       key: 'copy',
       actionRender: <Actions.Copy text={content} />,
     },
     {
       key: 'audio',
-      actionRender: <Actions.Audio />,
+      actionRender: (
+        <Actions.Audio
+          onClick={() => {
+            message.info(t.isMock);
+          }}
+        />
+      ),
+    },
+    {
+      key: 'feedback',
+      actionRender: (
+        <Actions.Feedback
+          value={feedBackValue || 'default'}
+          key="feedback"
+          onChange={(val) => {
+            onFeedBackChange(val);
+            message.success(`${key}: ${val}`);
+          }}
+        />
+      ),
     },
   ];
+};
+const Footer: React.FC<{
+  id?: number | string;
+  content: string;
+  onReload: (key: string | number, info: any) => any;
+  status?: string;
+}> = ({ id, content, onReload, status }) => {
+  const [mockFeedback, setMockFeedback] = useState<ActionsFeedbackProps['value']>('default');
+  return status !== 'updating' && status !== 'loading' ? (
+    <div style={{ display: 'flex' }}>
+      {id && (
+        <Actions items={getActionsItems(content, onReload, id, mockFeedback, setMockFeedback)} />
+      )}
+    </div>
+  ) : null;
 };
 
 const getRole = (
@@ -354,13 +390,9 @@ const getRole = (
           />
         ) : null;
       },
-      footer: (content, { status, key }) => {
-        return status !== 'updating' && status !== 'loading' ? (
-          <div style={{ display: 'flex' }}>
-            <Actions items={getActionsItems(content, onReload, key)} />
-          </div>
-        ) : null;
-      },
+      footer: (content, { status, key }) => (
+        <Footer content={content} onReload={onReload} status={status} id={key} />
+      ),
     },
     contentRender: (content: any, { status }) => {
       const newContent = content.replaceAll('\n\n', '<br/>');
@@ -379,25 +411,6 @@ const getRole = (
         </XMarkdown>
       );
     },
-    typing: (_, { status }) =>
-      status === 'updating'
-        ? {
-            effect: 'typing',
-            step: 5,
-            interval: 20,
-            suffix: (
-              <div
-                style={{
-                  position: 'absolute',
-                  right: 20,
-                  bottom: 10,
-                }}
-              >
-                💗
-              </div>
-            ),
-          }
-        : false,
   },
   user: { placement: 'end' },
 });
@@ -564,6 +577,7 @@ const providerFactory = (conversationKey: string) => {
 const historyMessageFactory = (conversationKey: string): DefaultMessageInfo<XModelMessage>[] => {
   return HISTORY_MESSAGES[conversationKey] || [];
 };
+
 const Independent: React.FC = () => {
   const { styles } = useStyle();
   const locale = isZhCN ? { ...zhCN_antd, ...zhCN_X } : { ...enUS_antd, ...enUS_X };
@@ -598,6 +612,7 @@ const Independent: React.FC = () => {
       };
     },
   });
+  console.log(messages, 'messages');
 
   // ==================== Event ====================
   const onSubmit = (val: string) => {
