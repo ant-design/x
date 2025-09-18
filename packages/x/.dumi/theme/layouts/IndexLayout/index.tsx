@@ -11,12 +11,11 @@ interface IndexLayoutProps {
 
 const IndexLayout: React.FC<PropsWithChildren<IndexLayoutProps>> = (props) => {
   const { children, title, desc } = props;
+  console.log(title);
   return (
     <>
       <Helmet>
-        <title>
-          {title} - {desc}
-        </title>
+        <title>{title}</title>
         <meta property="og:title" content={title} />
         {desc && <meta name="description" content={desc} />}
       </Helmet>
