@@ -617,8 +617,6 @@ const Independent: React.FC = () => {
       };
     },
   });
-  console.log(messages, 'messages');
-
   // ==================== Event ====================
   const onSubmit = (val: string) => {
     if (!val) return;
