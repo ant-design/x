@@ -17,7 +17,7 @@ const Item: React.FC<ActionsItemProps> = (props) => {
   }
 
   if (item.actionRender) {
-    return typeof item.actionRender === 'function' ? item?.actionRender(item) : item?.actionRender;
+    return typeof item.actionRender === 'function' ? item.actionRender(item) : item.actionRender;
   }
 
   if (item.subItems) {
