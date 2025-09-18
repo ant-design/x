@@ -10,7 +10,7 @@ This guide introduces how to integrate TBox agent services into applications bui
 
 ## Related Documentation
 
-- Tbox Official Website - [https://tbox.cn](https://tbox.cn)
+- Tbox Open Platform Official Website - [https://tbox.cn/open](https://tbox.cn/open)
 - TBox Open Platform Overview - [https://alipaytbox.yuque.com/sxs0ba/doc/tbox_open_overview](https://alipaytbox.yuque.com/sxs0ba/doc/tbox_open_overview)
 - Authorization Management - [https://alipaytbox.yuque.com/sxs0ba/doc/tbox_open_token](https://alipaytbox.yuque.com/sxs0ba/doc/tbox_open_token)
 - OpenAPI - [https://alipaytbox.yuque.com/sxs0ba/doc/tbox_openapi_overview](https://alipaytbox.yuque.com/sxs0ba/doc/tbox_openapi_overview)
