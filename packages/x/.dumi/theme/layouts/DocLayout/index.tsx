@@ -96,13 +96,13 @@ const DocLayout: React.FC = () => {
         />
         <link
           sizes="144x144"
-          href="https://gw.alipayobjects.com/zos/antfincdn/UmVnt3t4T0/antd.png"
+          href="https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/MGdkQ6iLuXEAAAAAQDAAAAgADtFMAQFr/original"
         />
         <meta property="og:description" content={locale.description} />
         <meta property="og:type" content="website" />
         <meta
           property="og:image"
-          content="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*eco6RrQhxbMAAAAAAAAAAAAADgCCAQ/original"
+          content="https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/MGdkQ6iLuXEAAAAAQDAAAAgADtFMAQFr/original"
         />
       </Helmet>
       <XProvider direction={direction} locale={lang === 'cn' ? zhCN : undefined}>
