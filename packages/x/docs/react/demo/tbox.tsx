@@ -12,22 +12,22 @@ import { Flex } from 'antd';
 import React, { useState } from 'react';
 import { TboxClient } from 'tbox-nodejs-sdk';
 
-interface TBoxMessage {
+interface TboxMessage {
   content: string;
   role: string;
 }
 
-interface TBoxInput {
-  message: TBoxMessage;
+interface TboxInput {
+  message: TboxMessage;
 }
 
-interface TBoxOutput {
+interface TboxOutput {
   text?: string;
 }
 
-class TBoxRequest<
-  Input extends TBoxInput = TBoxInput,
-  Output extends TBoxOutput = TBoxOutput,
+class TboxRequest<
+  Input extends TboxInput = TboxInput,
+  Output extends TboxOutput = TboxOutput,
 > extends AbstractXRequestClass<Input, Output> {
   tboxClient: TboxClient;
   tboxStream: any;
@@ -104,10 +104,10 @@ class TBoxRequest<
   }
 }
 
-class TBoxProvider<
-  ChatMessage extends TBoxMessage = TBoxMessage,
-  Input extends TBoxInput = TBoxInput,
-  Output extends TBoxOutput = TBoxOutput,
+class TboxProvider<
+  ChatMessage extends TboxMessage = TboxMessage,
+  Input extends TboxInput = TboxInput,
+  Output extends TboxOutput = TboxOutput,
 > extends AbstractChatProvider<ChatMessage, Input, Output> {
   transformParams(requestParams: Partial<Input>, options: XRequestOptions<Input, Output>): Input {
     if (typeof requestParams !== 'object') {
@@ -138,8 +138,8 @@ class TBoxProvider<
   }
 }
 
-const provider = new TBoxProvider({
-  request: new TBoxRequest('TBox Client', {}),
+const provider = new TboxProvider({
+  request: new TboxRequest('Tbox Client', {}),
 });
 
 const role: BubbleListProps['role'] = {
