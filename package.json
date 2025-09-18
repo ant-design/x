@@ -210,7 +210,7 @@
     "node-fetch": "^3.3.2",
     "node-notifier": "^10.0.1",
     "open": "^10.1.0",
-    "ora": "^8.1.0",
+    "ora": "^9.0.0",
     "pixelmatch": "^7.1.0",
     "pngjs": "^7.0.0",
     "prettier": "^3.3.3",
