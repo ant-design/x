@@ -113,7 +113,7 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
               `${feedbackCls}-item-like`,
               classNames.like,
               {
-                [`${classNames.liked}`]: value === 'like',
+                [`${classNames.liked}`]: classNames.liked && value === 'like',
                 [`${feedbackCls}-item-like-active`]: value === 'like',
               },
             )}
@@ -134,6 +134,7 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
               `${feedbackCls}-item-dislike`,
               classNames.dislike,
               {
+                [`${classNames.disliked}`]: classNames.disliked && value === 'like',
                 [`${feedbackCls}-item-dislike-active`]: value === 'dislike',
               },
             )}
