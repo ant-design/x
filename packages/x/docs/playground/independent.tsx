@@ -14,6 +14,7 @@ import {
   ScheduleOutlined,
   ShareAltOutlined,
   SmileOutlined,
+  SyncOutlined,
 } from '@ant-design/icons';
 import type { ActionsProps, BubbleListProps, ThoughtChainItemProps } from '@ant-design/x';
 import {
@@ -288,11 +289,27 @@ const ThoughtChainConfig = {
   },
 };
 
-const getActionsItems = (content: string, key?: string | number): ActionsProps['items'] => {
+const getActionsItems = (
+  content: string,
+  onReload: (key: string | number, info: any) => any,
+  key?: string | number,
+): ActionsProps['items'] => {
   return [
     {
       key: 'pagination',
       actionRender: <Pagination simple total={1} pageSize={1} />,
+    },
+    {
+      key: 'retry',
+      label: '重新生成',
+      icon: <SyncOutlined />,
+      onItemClick: () => {
+        if (key) {
+          onReload(key, {
+            userAction: 'retry',
+          });
+        }
+      },
     },
     {
       key: 'feedback',
@@ -316,7 +333,10 @@ const getActionsItems = (content: string, key?: string | number): ActionsProps['
   ];
 };
 
-const getRole = (className: string): BubbleListProps['role'] => ({
+const getRole = (
+  className: string,
+  onReload: (key: string | number, info: any) => any,
+): BubbleListProps['role'] => ({
   assistant: {
     placement: 'start',
     components: {
@@ -337,7 +357,7 @@ const getRole = (className: string): BubbleListProps['role'] => ({
       footer: (content, { status, key }) => {
         return status !== 'updating' && status !== 'loading' ? (
           <div style={{ display: 'flex' }}>
-            <Actions items={getActionsItems(content, key)} />
+            <Actions items={getActionsItems(content, onReload, key)} />
           </div>
         ) : null;
       },
@@ -567,7 +587,7 @@ const Independent: React.FC = () => {
 
   // ==================== Runtime ====================
 
-  const { onRequest, messages, isRequesting, abort } = useXChat({
+  const { onRequest, messages, isRequesting, abort, onReload } = useXChat({
     provider: providerFactory(curConversation), // every conversation has its own provider
     conversationKey: curConversation,
     defaultMessages: historyMessageFactory(curConversation),
@@ -678,7 +698,7 @@ const Independent: React.FC = () => {
               width: 700,
             },
           }}
-          role={getRole(className)}
+          role={getRole(className, onReload)}
         />
       ) : (
         <Space orientation="vertical" size={16} align="center" className={styles.placeholder}>
