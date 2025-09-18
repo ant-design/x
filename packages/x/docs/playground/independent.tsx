@@ -51,6 +51,7 @@ import dayjs from 'dayjs';
 import React, { useState } from 'react';
 import { useMarkdownTheme } from '../x-markdown/demo/_utils';
 
+// ==================== Local ====================
 const zhCN = {
   whatIsAntDesignX: '什么是 Ant Design X？',
   today: '今天',
@@ -148,6 +149,7 @@ const enUS = {
 const isZhCN = window.parent?.location?.pathname?.includes('-cn');
 const t = isZhCN ? zhCN : enUS;
 
+// ==================== Style ====================
 const useStyle = createStyles(({ token, css }) => {
   return {
     layout: css`
@@ -254,6 +256,7 @@ const useStyle = createStyles(({ token, css }) => {
   };
 });
 
+// ==================== Static Config ====================
 const HISTORY_MESSAGES: {
   [key: string]: DefaultMessageInfo<ChatMessage>[];
 } = {
@@ -386,25 +389,7 @@ const SENDER_PROMPTS: GetProp<typeof Prompts, 'items'> = [
   },
 ];
 
-const ThinkComponent = React.memo((props: { children: string; streamStatus: string }) => {
-  const [title, setTitle] = React.useState(t.DeepThinking + '...');
-  const [loading, setLoading] = React.useState(true);
-
-  React.useEffect(() => {
-    if (props.streamStatus === 'done') {
-      setTitle(t.CompleteThinking);
-      setLoading(false);
-    }
-  }, [props.streamStatus]);
-
-  return (
-    <Think title={title} loading={loading}>
-      {props.children}
-    </Think>
-  );
-});
-
-const ThoughtChainConfig = {
+const THOUGHT_CHAIN_CONFIG = {
   loading: {
     title: t.modelIsRunning,
     status: 'loading',
@@ -427,12 +412,14 @@ const ThoughtChainConfig = {
   },
 };
 
+// ==================== Type ====================
 interface ChatMessage extends XModelMessage {
   extra?: {
     feedback: ActionsFeedbackProps['value'];
   };
 }
 
+// ==================== Context ====================
 const ChatContext = React.createContext<{
   onReload?: (key: string | number, info: any) => any;
   setMessage?: (
@@ -442,6 +429,26 @@ const ChatContext = React.createContext<{
       | ((message: MessageInfo<XModelMessage>) => Partial<MessageInfo<XModelMessage>>),
   ) => boolean;
 }>({});
+
+// ==================== Sub Component ====================
+
+const ThinkComponent = React.memo((props: { children: string; streamStatus: string }) => {
+  const [title, setTitle] = React.useState(t.DeepThinking + '...');
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    if (props.streamStatus === 'done') {
+      setTitle(t.CompleteThinking);
+      setLoading(false);
+    }
+  }, [props.streamStatus]);
+
+  return (
+    <Think title={title} loading={loading}>
+      {props.children}
+    </Think>
+  );
+});
 
 const Footer: React.FC<{
   id?: string;
@@ -516,12 +523,42 @@ const Footer: React.FC<{
   ) : null;
 };
 
+// ==================== Chat Provider ====================
+/**
+ * 🔔 Please replace the BASE_URL, MODEL with your own values.
+ */
+const providerCaches = new Map<string, DeepSeekChatProvider>();
+const providerFactory = (conversationKey: string) => {
+  if (!providerCaches.get(conversationKey)) {
+    providerCaches.set(
+      conversationKey,
+      new DeepSeekChatProvider({
+        request: XRequest<XModelParams, Partial<Record<SSEFields, XModelResponse>>>(
+          'https://api.x.ant.design/api/llm_siliconflow_deepSeek-r1-distill-1wen-7b',
+          {
+            manual: true,
+            params: {
+              stream: true,
+              model: 'DeepSeek-R1-Distill-Qwen-7B',
+            },
+          },
+        ),
+      }),
+    );
+  }
+  return providerCaches.get(conversationKey);
+};
+
+const historyMessageFactory = (conversationKey: string): DefaultMessageInfo<ChatMessage>[] => {
+  return HISTORY_MESSAGES[conversationKey] || [];
+};
+
 const getRole = (className: string): BubbleListProps['role'] => ({
   assistant: {
     placement: 'start',
     components: {
       header: (_, { status }) => {
-        const config = ThoughtChainConfig[status as keyof typeof ThoughtChainConfig];
+        const config = THOUGHT_CHAIN_CONFIG[status as keyof typeof THOUGHT_CHAIN_CONFIG];
         return config ? (
           <ThoughtChain.Item
             style={{
@@ -554,6 +591,7 @@ const getRole = (className: string): BubbleListProps['role'] => ({
           className={className}
           streaming={{
             hasNextChunk: status === 'updating',
+            enableAnimation: true,
           }}
         >
           {newContent}
@@ -564,39 +602,9 @@ const getRole = (className: string): BubbleListProps['role'] => ({
   user: { placement: 'end' },
 });
 
-/**
- * 🔔 Please replace the BASE_URL, MODEL with your own values.
- */
-const providerCaches = new Map<string, DeepSeekChatProvider>();
-const providerFactory = (conversationKey: string) => {
-  if (!providerCaches.get(conversationKey)) {
-    providerCaches.set(
-      conversationKey,
-      new DeepSeekChatProvider({
-        request: XRequest<XModelParams, Partial<Record<SSEFields, XModelResponse>>>(
-          'https://api.x.ant.design/api/llm_siliconflow_deepSeek-r1-distill-1wen-7b',
-          {
-            manual: true,
-            params: {
-              stream: true,
-              model: 'DeepSeek-R1-Distill-Qwen-7B',
-            },
-          },
-        ),
-      }),
-    );
-  }
-  return providerCaches.get(conversationKey);
-};
-
-const historyMessageFactory = (conversationKey: string): DefaultMessageInfo<ChatMessage>[] => {
-  return HISTORY_MESSAGES[conversationKey] || [];
-};
-
 const Independent: React.FC = () => {
   const { styles } = useStyle();
   const locale = isZhCN ? { ...zhCN_antd, ...zhCN_X } : { ...enUS_antd, ...enUS_X };
-
   // ==================== State ====================
 
   const { conversations, addConversation, setConversations } = useXConversations({

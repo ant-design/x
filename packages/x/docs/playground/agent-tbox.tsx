@@ -13,12 +13,7 @@ import {
   SmileOutlined,
   SyncOutlined,
 } from '@ant-design/icons';
-import type {
-  ActionsFeedbackProps,
-  ActionsProps,
-  BubbleListProps,
-  ThoughtChainItemProps,
-} from '@ant-design/x';
+import type { ActionsFeedbackProps, BubbleListProps, ThoughtChainItemProps } from '@ant-design/x';
 import {
   Actions,
   Bubble,
@@ -49,13 +44,7 @@ import dayjs from 'dayjs';
 import React, { useState } from 'react';
 import { TboxClient } from 'tbox-nodejs-sdk';
 
-const tboxClient = new TboxClient({
-  httpClientConfig: {
-    authorization: 'your-api-key', // Replace with your API key
-    isAntdXDemo: true, // Only for Ant Design X demo
-  },
-});
-
+// ==================== Local ====================
 const zhCN = {
   whatIsTbox: '什么是百宝箱 Tbox.cn?',
   whatCanTboxDo: '百宝箱可以做什么?',
@@ -133,6 +122,7 @@ const enUS = {
 const isZhCN = window.parent?.location?.pathname?.includes('-cn');
 const t = isZhCN ? zhCN : enUS;
 
+// ==================== Static Config ====================
 const DEFAULT_CONVERSATIONS_ITEMS = [
   {
     key: 'default-0',
@@ -205,6 +195,7 @@ const SENDER_PROMPTS: GetProp<typeof Prompts, 'items'> = [
   },
 ];
 
+// ==================== Style ====================
 const useStyle = createStyles(({ token, css }) => {
   return {
     layout: css`
@@ -317,6 +308,7 @@ const useStyle = createStyles(({ token, css }) => {
   };
 });
 
+// ==================== TboxProvider ====================
 interface TboxMessage {
   content: string;
   role: string;
@@ -329,7 +321,12 @@ interface TboxInput {
 interface TboxOutput {
   text?: string;
 }
-
+const tboxClient = new TboxClient({
+  httpClientConfig: {
+    authorization: 'your-api-key', // Replace with your API key
+    isAntdXDemo: true, // Only for Ant Design X demo
+  },
+});
 class TboxRequest<
   Input extends TboxInput = TboxInput,
   Output extends TboxOutput = TboxOutput,
@@ -462,6 +459,12 @@ const providerFactory = (conversationKey: string) => {
   return providerCaches.get(conversationKey);
 };
 
+// ==================== Context ====================
+const ChatContext = React.createContext<{
+  onReload?: (key: string | number, info: any) => any;
+}>({});
+
+// ==================== Sub Component====================
 const ThinkComponent = React.memo((props: { children: string; streamStatus: string }) => {
   const [title, setTitle] = React.useState(`${t.DeepThinking}...`);
   const [loading, setLoading] = React.useState(true);
@@ -480,16 +483,14 @@ const ThinkComponent = React.memo((props: { children: string; streamStatus: stri
   );
 });
 
-const getActionsItems = (
-  content: string,
-  onReload: (key: string | number, info: any) => any,
-  key: string | number,
-  feedBackValue: ActionsFeedbackProps['value'],
-  onFeedBackChange: React.Dispatch<
-    React.SetStateAction<'default' | 'like' | 'dislike' | undefined>
-  >,
-): ActionsProps['items'] => {
-  return [
+const Footer: React.FC<{
+  id?: number | string;
+  content: string;
+  status?: string;
+}> = ({ id, content, status }) => {
+  const context = React.useContext(ChatContext);
+  const [mockFeedback, setMockFeedback] = useState<ActionsFeedbackProps['value']>('default');
+  const Items = [
     {
       key: 'pagination',
       actionRender: <Pagination simple total={1} pageSize={1} />,
@@ -499,8 +500,8 @@ const getActionsItems = (
       label: t.retry,
       icon: <SyncOutlined />,
       onItemClick: () => {
-        if (key) {
-          onReload(key, {
+        if (id) {
+          context?.onReload?.(id, {
             userAction: 'retry',
           });
         }
@@ -529,31 +530,19 @@ const getActionsItems = (
               color: '#f759ab',
             },
           }}
-          value={feedBackValue || 'default'}
+          value={mockFeedback || 'default'}
           key="feedback"
           onChange={(val) => {
-            onFeedBackChange(val);
-            message.success(`${key}: ${val}`);
+            setMockFeedback(val);
+            message.success(`${id}: ${val}`);
           }}
         />
       ),
     },
   ];
-};
 
-const Footer: React.FC<{
-  id?: number | string;
-  content: string;
-  onReload: (key: string | number, info: any) => any;
-  status?: string;
-}> = ({ id, content, onReload, status }) => {
-  const [mockFeedback, setMockFeedback] = useState<ActionsFeedbackProps['value']>('default');
   return status !== 'updating' && status !== 'loading' ? (
-    <div style={{ display: 'flex' }}>
-      {id && (
-        <Actions items={getActionsItems(content, onReload, id, mockFeedback, setMockFeedback)} />
-      )}
-    </div>
+    <div style={{ display: 'flex' }}>{id && <Actions items={Items} />}</div>
   ) : null;
 };
 
@@ -836,14 +825,16 @@ const AgentTbox: React.FC = () => {
   // ==================== Render =================
   return (
     <XProvider locale={locale}>
-      {contextHolder}
-      <div className={styles.layout}>
-        {chatSide}
-        <div className={styles.chat}>
-          {chatList}
-          {chatSender}
+      <ChatContext.Provider value={{ onReload }}>
+        {contextHolder}
+        <div className={styles.layout}>
+          {chatSide}
+          <div className={styles.chat}>
+            {chatList}
+            {chatSender}
+          </div>
         </div>
-      </div>
+      </ChatContext.Provider>
     </XProvider>
   );
 };
