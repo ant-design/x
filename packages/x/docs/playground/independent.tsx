@@ -342,6 +342,11 @@ const getActionsItems = (
       key: 'feedback',
       actionRender: (
         <Actions.Feedback
+          styles={{
+            liked: {
+              color: '#f759ab',
+            },
+          }}
           value={feedBackValue || 'default'}
           key="feedback"
           onChange={(val) => {

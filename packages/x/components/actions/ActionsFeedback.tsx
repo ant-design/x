@@ -15,6 +15,7 @@ enum FEEDBACK_VALUE {
   default = 'default',
 }
 
+export type SemanticType = 'like' | 'liked' | 'dislike' | 'disliked' | 'root';
 export interface ActionsFeedbackProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /**
@@ -38,6 +39,16 @@ export interface ActionsFeedbackProps
    * @descEN Root node style class.
    */
   rootClassName?: string;
+  /**
+   * @desc 语义化结构 className
+   * @descEN Semantic structure class names
+   */
+  classNames?: Partial<Record<SemanticType, string>>;
+  /**
+   * @desc 语义化结构 style
+   * @descEN Semantic structure styles
+   */
+  styles?: Partial<Record<SemanticType, React.CSSProperties>>;
 }
 
 const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
@@ -46,6 +57,8 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
     onChange,
     className,
     style,
+    classNames = {},
+    styles = {},
     prefixCls: customizePrefixCls,
     rootClassName,
     ...otherHtmlProps
@@ -73,6 +86,7 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
     hashId,
     cssVarCls,
     rootClassName,
+    classNames.root,
     `${prefixCls}-list`,
     className,
     {
@@ -83,7 +97,7 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
   const onFeedBacKClick = () =>
     onChange?.(value === FEEDBACK_VALUE.dislike ? FEEDBACK_VALUE.default : FEEDBACK_VALUE.dislike);
   return (
-    <div {...domProps} className={mergedCls} style={style}>
+    <div {...domProps} className={mergedCls} style={{ ...style, ...styles.root }}>
       {[FEEDBACK_VALUE.default, FEEDBACK_VALUE.like].includes(value as FEEDBACK_VALUE) && (
         <Tooltip title={contextLocale.feedbackLike}>
           <span
@@ -92,11 +106,14 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
                 value === FEEDBACK_VALUE.like ? FEEDBACK_VALUE.default : FEEDBACK_VALUE.like,
               )
             }
+            style={{ ...styles.like, ...(value === 'like' ? styles.liked : {}) }}
             className={classnames(
               `${feedbackCls}-item`,
               `${prefixCls}-item`,
               `${feedbackCls}-item-like`,
+              classNames.like,
               {
+                [`${classNames.liked}`]: value === 'like',
                 [`${feedbackCls}-item-like-active`]: value === 'like',
               },
             )}
@@ -110,10 +127,12 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
         <Tooltip title={contextLocale.feedbackDislike}>
           <span
             onClick={onFeedBacKClick}
+            style={{ ...styles.dislike, ...(value === 'dislike' ? styles.disliked : {}) }}
             className={classnames(
               `${feedbackCls}-item`,
               `${prefixCls}-item`,
               `${feedbackCls}-item-dislike`,
+              classNames.dislike,
               {
                 [`${feedbackCls}-item-dislike-active`]: value === 'dislike',
               },
