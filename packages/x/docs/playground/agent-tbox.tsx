@@ -702,9 +702,7 @@ const AgentTbox: React.FC = () => {
             />
           ) : null;
         },
-        footer: (content, { status, key }) => (
-          <Footer content={content} onReload={onReload} status={status} id={key} />
-        ),
+        footer: (content, { status, key }) => <Footer content={content} status={status} id={key} />,
       },
       contentRender: (content, { status }) => (
         <XMarkdown
