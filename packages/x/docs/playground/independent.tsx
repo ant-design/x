@@ -16,12 +16,7 @@ import {
   SmileOutlined,
   SyncOutlined,
 } from '@ant-design/icons';
-import type {
-  ActionsFeedbackProps,
-  ActionsProps,
-  BubbleListProps,
-  ThoughtChainItemProps,
-} from '@ant-design/x';
+import type { ActionsFeedbackProps, BubbleListProps, ThoughtChainItemProps } from '@ant-design/x';
 import {
   Actions,
   Attachments,
@@ -37,7 +32,7 @@ import {
 import enUS_X from '@ant-design/x/locale/en_US';
 import zhCN_X from '@ant-design/x/locale/zh_CN';
 import XMarkdown from '@ant-design/x-markdown';
-import type { DefaultMessageInfo } from '@ant-design/x-sdk';
+import type { DefaultMessageInfo, MessageInfo } from '@ant-design/x-sdk';
 import {
   DeepSeekChatProvider,
   SSEFields,
@@ -152,6 +147,140 @@ const enUS = {
 
 const isZhCN = window.parent?.location?.pathname?.includes('-cn');
 const t = isZhCN ? zhCN : enUS;
+
+const useStyle = createStyles(({ token, css }) => {
+  return {
+    layout: css`
+      width: 100%;
+      min-width: 1000px;
+      height: 100vh;
+      display: flex;
+      background: ${token.colorBgContainer};
+      font-family: AlibabaPuHuiTi, ${token.fontFamily}, sans-serif;
+    `,
+    // side 样式
+    side: css`
+      background: ${token.colorBgLayout}80;
+      width: 280px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 0 12px;
+      box-sizing: border-box;
+    `,
+    logo: css`
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      padding: 0 24px;
+      box-sizing: border-box;
+      gap: 8px;
+      margin: 24px 0;
+
+      span {
+        font-weight: bold;
+        color: ${token.colorText};
+        font-size: 16px;
+      }
+    `,
+    conversations: css`
+      overflow-y: auto;
+      margin-top: 12px;
+      padding: 0;
+    flex:1;
+      .ant-conversations-list {
+        padding-inline-start: 0;
+      }
+    `,
+    sideFooter: css`
+      border-top: 1px solid ${token.colorBorderSecondary};
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    `,
+    // chat list 样式
+    chat: css`
+      height: 100%;
+      width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      padding-block: ${token.paddingLG}px;
+      gap: 16px;
+      .ant-bubble-content-updating {
+        background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
+        background-size: 100% 2px;
+        background-repeat: no-repeat;
+        background-position: bottom;
+      }
+    `,
+    chatPrompt: css`
+      .ant-prompts-label {
+        color: #000000e0 !important;
+      }
+      .ant-prompts-desc {
+        color: #000000a6 !important;
+        width: 100%;
+      }
+      .ant-prompts-icon {
+        color: #000000a6 !important;
+      }
+    `,
+    chatList: css`
+      display: flex;
+      height: calc(100% - 120px);
+      flex-direction: column;
+    `,
+    placeholder: css`
+      padding-top: 32px;
+    `,
+    // sender 样式
+    sender: css`
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+    `,
+    speechButton: css`
+      font-size: 18px;
+      color: ${token.colorText} !important;
+    `,
+    senderPrompt: css`
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+      color: ${token.colorText};
+    `,
+  };
+});
+
+const HISTORY_MESSAGES: {
+  [key: string]: DefaultMessageInfo<ChatMessage>[];
+} = {
+  'default-1': [
+    {
+      message: { role: 'user', content: t.howToQuicklyInstallAndImportComponents },
+      status: 'success',
+    },
+    {
+      message: {
+        role: 'assistant',
+        content: `# 快速安装和导入组件 \n \`npm install @ant-design/x --save \` \n [查看详情](/components/introduce${isZhCN ? '-cn' : ''}/)`,
+      },
+      status: 'success',
+    },
+  ],
+  'default-2': [
+    { message: { role: 'user', content: t.newAgiHybridInterface }, status: 'success' },
+    {
+      message: {
+        role: 'assistant',
+        content: `RICH 设计范式 \n [查看详情](/docs/spec/introduce${isZhCN ? '-cn' : ''}/)`,
+      },
+      status: 'success',
+    },
+  ],
+};
 
 const DEFAULT_CONVERSATIONS_ITEMS = [
   {
@@ -298,16 +427,30 @@ const ThoughtChainConfig = {
   },
 };
 
-const getActionsItems = (
-  content: string,
-  onReload: (key: string | number, info: any) => any,
-  key: string | number,
-  feedBackValue: ActionsFeedbackProps['value'],
-  onFeedBackChange: React.Dispatch<
-    React.SetStateAction<'default' | 'like' | 'dislike' | undefined>
-  >,
-): ActionsProps['items'] => {
-  return [
+interface ChatMessage extends XModelMessage {
+  extra?: {
+    feedback: ActionsFeedbackProps['value'];
+  };
+}
+
+const ChatContext = React.createContext<{
+  onReload?: (key: string | number, info: any) => any;
+  setMessage?: (
+    id: string,
+    message:
+      | Partial<MessageInfo<XModelMessage>>
+      | ((message: MessageInfo<XModelMessage>) => Partial<MessageInfo<XModelMessage>>),
+  ) => boolean;
+}>({});
+
+const Footer: React.FC<{
+  id?: string;
+  content: string;
+  status?: string;
+  extra?: ChatMessage['extra'];
+}> = ({ id, content, extra, status }) => {
+  const context = React.useContext(ChatContext);
+  const Items = [
     {
       key: 'pagination',
       actionRender: <Pagination simple total={1} pageSize={1} />,
@@ -317,8 +460,8 @@ const getActionsItems = (
       label: t.retry,
       icon: <SyncOutlined />,
       onItemClick: () => {
-        if (key) {
-          onReload(key, {
+        if (id) {
+          context?.onReload?.(id, {
             userAction: 'retry',
           });
         }
@@ -347,37 +490,33 @@ const getActionsItems = (
               color: '#f759ab',
             },
           }}
-          value={feedBackValue || 'default'}
+          value={extra?.feedback || 'default'}
           key="feedback"
           onChange={(val) => {
-            onFeedBackChange(val);
-            message.success(`${key}: ${val}`);
+            if (id) {
+              context?.setMessage?.(id, (originMsg) => ({
+                message: {
+                  ...originMsg.message,
+                  extra: {
+                    feedback: val,
+                  },
+                },
+              }));
+              message.success(`${id}: ${val}`);
+            } else {
+              message.error('has no id!');
+            }
           }}
         />
       ),
     },
   ];
-};
-const Footer: React.FC<{
-  id?: number | string;
-  content: string;
-  onReload: (key: string | number, info: any) => any;
-  status?: string;
-}> = ({ id, content, onReload, status }) => {
-  const [mockFeedback, setMockFeedback] = useState<ActionsFeedbackProps['value']>('default');
   return status !== 'updating' && status !== 'loading' ? (
-    <div style={{ display: 'flex' }}>
-      {id && (
-        <Actions items={getActionsItems(content, onReload, id, mockFeedback, setMockFeedback)} />
-      )}
-    </div>
+    <div style={{ display: 'flex' }}>{id && <Actions items={Items} />}</div>
   ) : null;
 };
 
-const getRole = (
-  className: string,
-  onReload: (key: string | number, info: any) => any,
-): BubbleListProps['role'] => ({
+const getRole = (className: string): BubbleListProps['role'] => ({
   assistant: {
     placement: 'start',
     components: {
@@ -395,8 +534,13 @@ const getRole = (
           />
         ) : null;
       },
-      footer: (content, { status, key }) => (
-        <Footer content={content} onReload={onReload} status={status} id={key} />
+      footer: (content, { status, key, extra }) => (
+        <Footer
+          content={content}
+          status={status}
+          extra={extra as ChatMessage['extra']}
+          id={key as string}
+        />
       ),
     },
     contentRender: (content: any, { status }) => {
@@ -419,140 +563,6 @@ const getRole = (
   },
   user: { placement: 'end' },
 });
-
-const useStyle = createStyles(({ token, css }) => {
-  return {
-    layout: css`
-      width: 100%;
-      min-width: 1000px;
-      height: 100vh;
-      display: flex;
-      background: ${token.colorBgContainer};
-      font-family: AlibabaPuHuiTi, ${token.fontFamily}, sans-serif;
-    `,
-    // side 样式
-    side: css`
-      background: ${token.colorBgLayout}80;
-      width: 280px;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      padding: 0 12px;
-      box-sizing: border-box;
-    `,
-    logo: css`
-      display: flex;
-      align-items: center;
-      justify-content: start;
-      padding: 0 24px;
-      box-sizing: border-box;
-      gap: 8px;
-      margin: 24px 0;
-
-      span {
-        font-weight: bold;
-        color: ${token.colorText};
-        font-size: 16px;
-      }
-    `,
-    conversations: css`
-      overflow-y: auto;
-      margin-top: 12px;
-      padding: 0;
-    flex:1;
-      .ant-conversations-list {
-        padding-inline-start: 0;
-      }
-    `,
-    sideFooter: css`
-      border-top: 1px solid ${token.colorBorderSecondary};
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    `,
-    // chat list 样式
-    chat: css`
-      height: 100%;
-      width: 100%;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      padding-block: ${token.paddingLG}px;
-      gap: 16px;
-      .ant-bubble-content-updating {
-        background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
-        background-size: 100% 2px;
-        background-repeat: no-repeat;
-        background-position: bottom;
-      }
-    `,
-    chatPrompt: css`
-      .ant-prompts-label {
-        color: #000000e0 !important;
-      }
-      .ant-prompts-desc {
-        color: #000000a6 !important;
-        width: 100%;
-      }
-      .ant-prompts-icon {
-        color: #000000a6 !important;
-      }
-    `,
-    chatList: css`
-      display: flex;
-      height: calc(100% - 120px);
-      flex-direction: column;
-    `,
-    placeholder: css`
-      padding-top: 32px;
-    `,
-    // sender 样式
-    sender: css`
-      width: 100%;
-      max-width: 700px;
-      margin: 0 auto;
-    `,
-    speechButton: css`
-      font-size: 18px;
-      color: ${token.colorText} !important;
-    `,
-    senderPrompt: css`
-      width: 100%;
-      max-width: 700px;
-      margin: 0 auto;
-      color: ${token.colorText};
-    `,
-  };
-});
-
-const HISTORY_MESSAGES: {
-  [key: string]: DefaultMessageInfo<XModelMessage>[];
-} = {
-  'default-1': [
-    {
-      message: { role: 'user', content: t.howToQuicklyInstallAndImportComponents },
-      status: 'success',
-    },
-    {
-      message: {
-        role: 'assistant',
-        content: `# 快速安装和导入组件 \n \`npm install @ant-design/x --save \` \n [查看详情](/components/introduce${isZhCN ? '-cn' : ''}/)`,
-      },
-      status: 'success',
-    },
-  ],
-  'default-2': [
-    { message: { role: 'user', content: t.newAgiHybridInterface }, status: 'success' },
-    {
-      message: {
-        role: 'assistant',
-        content: `RICH 设计范式 \n [查看详情](/docs/spec/introduce${isZhCN ? '-cn' : ''}/)`,
-      },
-      status: 'success',
-    },
-  ],
-};
 
 /**
  * 🔔 Please replace the BASE_URL, MODEL with your own values.
@@ -579,7 +589,7 @@ const providerFactory = (conversationKey: string) => {
   return providerCaches.get(conversationKey);
 };
 
-const historyMessageFactory = (conversationKey: string): DefaultMessageInfo<XModelMessage>[] => {
+const historyMessageFactory = (conversationKey: string): DefaultMessageInfo<ChatMessage>[] => {
   return HISTORY_MESSAGES[conversationKey] || [];
 };
 
@@ -606,7 +616,7 @@ const Independent: React.FC = () => {
 
   // ==================== Runtime ====================
 
-  const { onRequest, messages, isRequesting, abort, onReload } = useXChat({
+  const { onRequest, messages, isRequesting, abort, onReload, setMessage } = useXChat<ChatMessage>({
     provider: providerFactory(curConversation), // every conversation has its own provider
     conversationKey: curConversation,
     defaultMessages: historyMessageFactory(curConversation),
@@ -620,7 +630,6 @@ const Independent: React.FC = () => {
   // ==================== Event ====================
   const onSubmit = (val: string) => {
     if (!val) return;
-
     onRequest({
       messages: [{ role: 'user', content: val }],
     });
@@ -710,13 +719,14 @@ const Independent: React.FC = () => {
             key: i.id,
             status: i.status,
             loading: i.status === 'loading',
+            extra: i.message.extra,
           }))}
           styles={{
             bubble: {
               width: 700,
             },
           }}
-          role={getRole(className, onReload)}
+          role={getRole(className)}
         />
       ) : (
         <Space orientation="vertical" size={16} align="center" className={styles.placeholder}>
@@ -844,14 +854,16 @@ const Independent: React.FC = () => {
 
   return (
     <XProvider locale={locale}>
-      {contextHolder}
-      <div className={styles.layout}>
-        {chatSide}
-        <div className={styles.chat}>
-          {chatList}
-          {chatSender}
+      <ChatContext.Provider value={{ onReload, setMessage }}>
+        {contextHolder}
+        <div className={styles.layout}>
+          {chatSide}
+          <div className={styles.chat}>
+            {chatList}
+            {chatSender}
+          </div>
         </div>
-      </div>
+      </ChatContext.Provider>
     </XProvider>
   );
 };

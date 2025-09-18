@@ -88,7 +88,7 @@ If you do not want to use flex layout, you can set `max-height` for **Bubble.Lis
 
 | Attribute | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| items | Bubble data list, `key` and `role` required. When used with X SDK [`useXChat`](/sdks/use-x-chat), you can pass `status` to help Bubble manage configuration | (BubbleProps & { key: string \| number, role: string , status: MessageStatus})[] | - | - |
+| items | Bubble data list, `key` and `role` required. When used with X SDK [`useXChat`](/sdks/use-x-chat), you can pass `status` to help Bubble manage configuration | (BubbleProps & { key: string \| number, role: string , status: MessageStatus, extra?: AnyObject })[] | - | - |
 | autoScroll | Auto-scroll | boolean | `true` | - |
 | role | Role default configuration | [RoleType](#roletype) | - | - |
 
@@ -126,12 +126,13 @@ type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error' | 'a
 
 #### InfoType
 
-When used in conjunction with [`useXChat`](/sdks/use-x-chat), `key` can be used as `MessageId`.
+When used in conjunction with [`useXChat`](/sdks/use-x-chat), `key` can be used as `MessageId`,and `extra` can be used as a custom parameter.
 
 ```typescript
 type InfoType = {
   status?: MessageStatus;
   key?: string | number;
+  extra? AnyObject;
 };
 ```
 

@@ -89,7 +89,7 @@ demo:
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| items | 气泡数据列表，`key`，`role` 必填 ，当结合X SDK [`useXChat`](/sdks/use-x-chat-cn) 使用时可传入`status` 帮助 Bubble 对配置进行管理 | (BubbleProps & { key: string \| number, role: string , status: MessageStatus})[] | - | - |
+| items | 气泡数据列表，`key`，`role` 必填 ，当结合X SDK [`useXChat`](/sdks/use-x-chat-cn) 使用时可传入`status` 帮助 Bubble 对配置进行管理 | (BubbleProps & { key: string \| number, role: string , status: MessageStatus, extra?: AnyObject})[] | - | - |
 | autoScroll | 是否自动滚动 | boolean | `true` | - |
 | role | 角色默认配置 | [RoleType](#roletype) | - | - |
 
@@ -127,12 +127,13 @@ type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error' | 'a
 
 #### InfoType
 
-配合 [`useXChat`](/sdks/use-x-chat-cn) 使用 ，`key` 可做为 `MessageId`。
+配合 [`useXChat`](/sdks/use-x-chat-cn) 使用 ，`key` 可做为 `MessageId`，`extra` 可作为自定义参数。
 
 ```typescript
 type InfoType = {
   status?: MessageStatus;
   key?: string | number;
+  extra? AnyObject;
 };
 ```
 

@@ -67,6 +67,7 @@ export enum MessageStatus {
 export type Info = {
   status?: `${MessageStatus}`;
   key?: string | number;
+  extra?: AnyObject;
 };
 export interface BubbleProps<ContentType extends BubbleContentType = string>
   extends Omit<
