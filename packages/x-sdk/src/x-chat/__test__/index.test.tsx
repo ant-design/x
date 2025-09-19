@@ -48,9 +48,16 @@ describe('useXChat', () => {
         <pre>{JSON.stringify(parsedMessages)}</pre>
         <input
           onChange={(e) => {
-            onRequest({
-              query: e.target.value,
-            } as Input);
+            onRequest(
+              {
+                query: e.target.value,
+              } as Input,
+              {
+                extra: {
+                  feedback: 'like',
+                },
+              },
+            );
           }}
         />
       </>
@@ -229,9 +236,17 @@ describe('useXChat', () => {
     );
 
     expect(() => result.current?.onRequest({ query: 'Hello' })).toThrow('provider is required');
-    expect(() => result.current?.onReload('key1', { query: 'Hello' })).toThrow(
-      'provider is required',
-    );
+    expect(() =>
+      result.current?.onReload(
+        'key1',
+        { query: 'Hello' },
+        {
+          extra: {
+            feedback: 'dislike',
+          },
+        },
+      ),
+    ).toThrow('provider is required');
     expect(() => result.current?.abort()).toThrow('provider is required');
   });
 
@@ -241,7 +256,7 @@ describe('useXChat', () => {
         defaultMessages: [{ message: 'Hello' }],
       }),
     );
-    result.current?.setMessage('default_0', { message: 'Hello2' });
+    result.current?.setMessage('default_0', { message: 'Hello2', extra: { feedback: 'like' } });
     result.current?.setMessage('default_1', { message: 'Hello3' });
     await sleep(100);
     expect(result.current?.messages.length).toBe(1);
