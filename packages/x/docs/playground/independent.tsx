@@ -204,7 +204,7 @@ const useStyle = createStyles(({ token, css }) => {
     // chat list 样式
     chat: css`
       height: 100%;
-      width: 100%;
+      width: calc(100% - 280px);
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
