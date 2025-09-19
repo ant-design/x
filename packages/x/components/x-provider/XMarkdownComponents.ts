@@ -1,15 +1,15 @@
 import type { KatexOptions } from 'katex';
-import { TokenizerAndRendererExtension } from 'marked';
-import { ReactNode } from 'react';
-import { SyntaxHighlighterProps } from 'react-syntax-highlighter';
+import type { TokenizerAndRendererExtension } from 'marked';
+import type { ReactNode } from 'react';
+import type { SyntaxHighlighterProps } from 'react-syntax-highlighter';
 
-type LatexOption = {
+export type LatexOption = {
   katexOptions?: KatexOptions;
   replaceAlignStart?: boolean;
 };
 
 type HighlightCodeType = 'root' | 'header' | 'headerTitle' | 'code';
-type HighlightCodeProps = {
+export type HighlightCodeProps = {
   lang?: string;
   children: string;
   header?: ReactNode | null;
@@ -23,7 +23,7 @@ type HighlightCodeProps = {
 };
 
 type MermaidType = 'root' | 'header' | 'graph' | 'code';
-type MermaidProps = {
+export type MermaidProps = {
   children: string;
   header?: ReactNode | null;
   prefixCls?: string;
@@ -33,24 +33,6 @@ type MermaidProps = {
   // Semantic
   classNames?: Partial<Record<MermaidType, string>>;
   styles?: Partial<Record<MermaidType, React.CSSProperties>>;
-};
-
-export type PluginsType = {
-  /**
-   * @desc 渲染数学公式Latex语法。
-   * @descEN Rendering mathematical formulas using Latex syntax.
-   */
-  Latex: (options?: LatexOption) => TokenizerAndRendererExtension[];
-  /**
-   * @desc 渲染代码高亮。
-   * @descEN Highlight the rendering code.
-   */
-  HighlightCode: (props: HighlightCodeProps) => React.ReactNode;
-  /**
-   * @desc 渲染 Mermaid 图表。
-   * @descEN Rendering the Mermaid Chart.
-   */
-  Mermaid: (props: MermaidProps) => React.ReactNode;
 };
 
 interface BaseComponentConfig {
@@ -69,3 +51,21 @@ export interface MarkdownComponentsConfig {
   highlightCode?: ComponentConfig<HighlightCodeProps>;
   mermaid?: ComponentConfig<MermaidProps>;
 }
+
+export type PluginsType = {
+  /**
+   * @desc 渲染数学公式Latex语法。
+   * @descEN Rendering mathematical formulas using Latex syntax.
+   */
+  Latex: (options?: LatexOption) => TokenizerAndRendererExtension[];
+  /**
+   * @desc 渲染代码高亮。
+   * @descEN Highlight the rendering code.
+   */
+  HighlightCode: (props: HighlightCodeProps) => React.ReactNode;
+  /**
+   * @desc 渲染 Mermaid 图表。
+   * @descEN Rendering the Mermaid Chart.
+   */
+  Mermaid: (props: MermaidProps) => React.ReactNode;
+};

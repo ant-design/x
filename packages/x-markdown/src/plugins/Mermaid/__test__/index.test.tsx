@@ -23,13 +23,34 @@ const mockMessageApi = {
 };
 
 jest.mock('antd', () => {
-  const actual = jest.requireActual('antd');
-  return {
-    ...actual,
-    message: {
-      useMessage: jest.fn(() => [mockMessageApi]),
-    },
-  };
+  try {
+    const actual = jest.requireActual('antd');
+    return {
+      ...actual,
+      message: {
+        useMessage: jest.fn(() => [mockMessageApi]),
+      },
+    };
+  } catch (_error) {
+    // 如果requireActual失败，返回一个基础mock
+    return {
+      message: {
+        useMessage: jest.fn(() => [mockMessageApi]),
+      },
+      Button: jest.fn(({ children }) => <button type="button">{children}</button>),
+      Segmented: jest.fn(({ options, value: _value, onChange }) => (
+        <div>
+          {options.map((opt: any) => (
+            <button type="button" key={opt.value} onClick={() => onChange(opt.value)}>
+              {opt.label}
+            </button>
+          ))}
+        </div>
+      )),
+      Space: jest.fn(({ children }) => <div>{children}</div>),
+      Tooltip: jest.fn(({ children }) => <div>{children}</div>),
+    };
+  }
 });
 
 const mermaidContent = 'graph TD; A-->B;';

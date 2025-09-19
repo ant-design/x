@@ -19,6 +19,7 @@ const XMarkdown: React.FC<XMarkdownProps> = (props) => {
     className,
     style,
     openLinksInNewTab,
+    dompurifyConfig,
   } = props;
 
   // ============================ style ============================
@@ -51,6 +52,7 @@ const XMarkdown: React.FC<XMarkdownProps> = (props) => {
   const renderComponents = { ...animationComponents, ...(components || {}) };
   const renderer = new Renderer({
     components: renderComponents,
+    dompurifyConfig,
   });
 
   const htmlString = parser.parse(displayContent);

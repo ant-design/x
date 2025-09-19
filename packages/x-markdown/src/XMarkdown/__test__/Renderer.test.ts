@@ -1,3 +1,4 @@
+import DOMPurify from 'dompurify';
 import React from 'react';
 import Renderer from '../core/Renderer';
 
@@ -188,7 +189,10 @@ describe('Renderer', () => {
         'test-component': MockComponent,
       };
 
-      const renderer = new Renderer({ components });
+      const renderer = new Renderer({
+        components,
+        dompurifyConfig: { ALLOWED_ATTR: ['class', 'className'] },
+      });
 
       // Mock createElement to capture props
       const createElementSpy = jest.spyOn(React, 'createElement');
@@ -292,7 +296,10 @@ describe('Renderer', () => {
         'test-component': MockComponent,
       };
 
-      const renderer = new Renderer({ components });
+      const renderer = new Renderer({
+        components,
+        dompurifyConfig: { ALLOWED_ATTR: ['class', 'className'] },
+      });
 
       // Mock createElement to capture props
       const createElementSpy = jest.spyOn(React, 'createElement');
@@ -317,14 +324,17 @@ describe('Renderer', () => {
         'test-component': MockComponent,
       };
 
-      const renderer = new Renderer({ components });
+      const renderer = new Renderer({
+        components,
+        dompurifyConfig: { ALLOWED_ATTR: ['class', 'classname', 'id', 'data-test'] },
+      });
 
       // Mock createElement to capture props
       const createElementSpy = jest.spyOn(React, 'createElement');
 
       // Test case: Multiple attributes including class and className
       const html =
-        '<test-component id="test-id" class="custom-class" className="existing-class" data-test="value">content</test-component>';
+        '<test-component id="test-id" class="custom-class" classname="existing-class" data-test="value">content</test-component>';
       renderer.processHtml(html);
 
       expect(createElementSpy).toHaveBeenCalledWith(
@@ -337,6 +347,427 @@ describe('Renderer', () => {
       );
 
       createElementSpy.mockRestore();
+    });
+  });
+
+  describe('configureDOMPurify', () => {
+    it('should configure DOMPurify with custom components', () => {
+      const renderer = new Renderer({
+        components: {
+          'custom-tag': MockComponent,
+          'another-tag': MockComponent,
+        },
+      });
+
+      // Access private method for testing
+      const configureDOMPurify = (renderer as any).configureDOMPurify.bind(renderer);
+      const config = configureDOMPurify();
+
+      expect(config.ADD_TAGS).toContain('custom-tag');
+      expect(config.ADD_TAGS).toContain('another-tag');
+    });
+
+    it('should merge with user provided dompurifyConfig', () => {
+      const userConfig = {
+        ALLOWED_TAGS: ['div', 'span'],
+        ALLOWED_ATTR: ['class', 'id'],
+      };
+
+      const renderer = new Renderer({
+        components: {
+          'custom-tag': MockComponent,
+        },
+        dompurifyConfig: userConfig,
+      });
+
+      // Access private method for testing
+      const configureDOMPurify = (renderer as any).configureDOMPurify.bind(renderer);
+      const config = configureDOMPurify();
+
+      expect(config.ADD_TAGS).toContain('custom-tag');
+      expect(config.ALLOWED_TAGS).toContain('div');
+      expect(config.ALLOWED_TAGS).toContain('span');
+      expect(config.ALLOWED_ATTR).toContain('class');
+      expect(config.ALLOWED_ATTR).toContain('id');
+    });
+
+    it('should handle empty components', () => {
+      const renderer = new Renderer({});
+
+      // Access private method for testing
+      const configureDOMPurify = (renderer as any).configureDOMPurify.bind(renderer);
+      const config = configureDOMPurify();
+
+      expect(config.ADD_TAGS).toEqual([]);
+    });
+
+    it('should deduplicate tags in ADD_TAGS', () => {
+      const userConfig = {
+        ALLOWED_TAGS: ['custom-tag'],
+      };
+
+      const renderer = new Renderer({
+        components: {
+          'custom-tag': MockComponent,
+        },
+        dompurifyConfig: userConfig,
+      });
+
+      // Access private method for testing
+      const configureDOMPurify = (renderer as any).configureDOMPurify.bind(renderer);
+      const config = configureDOMPurify();
+
+      const customTagCount = config.ADD_TAGS.filter((tag: string) => tag === 'custom-tag').length;
+      expect(customTagCount).toBe(1);
+    });
+  });
+
+  describe('detectUnclosedTags edge cases', () => {
+    it('should handle nested tags correctly', () => {
+      const renderer = new Renderer({
+        components: {
+          'outer-tag': MockComponent,
+          'inner-tag': MockComponent,
+        },
+      });
+
+      // Access private method for testing
+      const detectUnclosedTags = (renderer as any).detectUnclosedTags.bind(renderer);
+
+      // Test case: Properly nested and closed tags
+      const html1 = '<outer-tag><inner-tag>content</inner-tag></outer-tag>';
+      const result1 = detectUnclosedTags(html1);
+      expect(result1.size).toBe(0);
+
+      // Test case: Inner tag unclosed
+      const html2 = '<outer-tag><inner-tag>content</outer-tag>';
+      const result2 = detectUnclosedTags(html2);
+      expect(result2.has('inner-tag')).toBe(true);
+      expect(result2.has('outer-tag')).toBe(false);
+
+      // Test case: Outer tag unclosed
+      const html3 = '<outer-tag><inner-tag>content</inner-tag>';
+      const result3 = detectUnclosedTags(html3);
+      expect(result3.has('outer-tag')).toBe(true);
+      expect(result3.has('inner-tag')).toBe(false);
+    });
+
+    it('should handle case insensitive tag names', () => {
+      const renderer = new Renderer({
+        components: {
+          'test-tag': MockComponent,
+        },
+      });
+
+      // Access private method for testing
+      const detectUnclosedTags = (renderer as any).detectUnclosedTags.bind(renderer);
+
+      // Test case: Mixed case tags
+      const html1 = '<Test-Tag>content';
+      const result1 = detectUnclosedTags(html1);
+      expect(result1.has('test-tag')).toBe(true);
+
+      const html2 = '<TEST-TAG>content</TEST-TAG>';
+      const result2 = detectUnclosedTags(html2);
+      expect(result2.has('test-tag')).toBe(false);
+    });
+
+    it('should handle tags with attributes', () => {
+      const renderer = new Renderer({
+        components: {
+          'custom-tag': MockComponent,
+        },
+      });
+
+      // Access private method for testing
+      const detectUnclosedTags = (renderer as any).detectUnclosedTags.bind(renderer);
+
+      // Test case: Tag with attributes, unclosed
+      const html1 = '<custom-tag class="test" id="my-id">content';
+      const result1 = detectUnclosedTags(html1);
+      expect(result1.has('custom-tag')).toBe(true);
+
+      // Test case: Tag with attributes, closed
+      const html2 = '<custom-tag class="test" id="my-id">content</custom-tag>';
+      const result2 = detectUnclosedTags(html2);
+      expect(result2.has('custom-tag')).toBe(false);
+    });
+
+    it('should handle malformed HTML gracefully', () => {
+      const renderer = new Renderer({
+        components: {
+          'custom-tag': MockComponent,
+        },
+      });
+
+      // Access private method for testing
+      const detectUnclosedTags = (renderer as any).detectUnclosedTags.bind(renderer);
+
+      // Test case: Malformed closing tag
+      const html1 = '<custom-tag>content</custom-tag';
+      const result1 = detectUnclosedTags(html1);
+      expect(result1.has('custom-tag')).toBe(true);
+
+      // Test case: Missing closing bracket
+      const html2 = '<custom-tag>content';
+      const result2 = detectUnclosedTags(html2);
+      expect(result2.has('custom-tag')).toBe(true);
+
+      // Test case: Extra closing tags
+      const html3 = '<custom-tag>content</custom-tag></custom-tag>';
+      const result3 = detectUnclosedTags(html3);
+      expect(result3.has('custom-tag')).toBe(false);
+    });
+
+    it('should handle empty string', () => {
+      const renderer = new Renderer({
+        components: {
+          'custom-tag': MockComponent,
+        },
+      });
+
+      // Access private method for testing
+      const detectUnclosedTags = (renderer as any).detectUnclosedTags.bind(renderer);
+
+      const result = detectUnclosedTags('');
+      expect(result.size).toBe(0);
+    });
+
+    it('should handle same tag multiple times', () => {
+      const renderer = new Renderer({
+        components: {
+          'custom-tag': MockComponent,
+        },
+      });
+
+      // Access private method for testing
+      const detectUnclosedTags = (renderer as any).detectUnclosedTags.bind(renderer);
+
+      // Test case: Multiple instances, some closed, some not
+      const html = '<custom-tag>first</custom-tag><custom-tag>second';
+      const result = detectUnclosedTags(html);
+      expect(result.has('custom-tag')).toBe(true);
+    });
+  });
+
+  describe('streamStatus integration', () => {
+    it('should set streamStatus to loading for unclosed tags in processHtml', () => {
+      const components = {
+        'streaming-tag': MockComponent,
+      };
+
+      const renderer = new Renderer({ components });
+
+      // Mock createElement to capture props
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      // Note: Due to html-react-parser behavior, we need to simulate the scenario
+      // where we have valid HTML but want to test the streamStatus logic
+      // We'll use a mock to control the detectUnclosedTags result
+      const mockUnclosedTags = new Set(['streaming-tag']);
+      jest.spyOn(renderer as any, 'detectUnclosedTags').mockReturnValue(mockUnclosedTags);
+
+      const html = '<streaming-tag>content</streaming-tag>';
+      renderer.processHtml(html);
+
+      expect(createElementSpy).toHaveBeenCalledWith(
+        MockComponent,
+        expect.objectContaining({
+          streamStatus: 'loading',
+        }),
+      );
+
+      createElementSpy.mockRestore();
+      jest.restoreAllMocks();
+    });
+
+    it('should set streamStatus to done for closed tags in processHtml', () => {
+      const components = {
+        'streaming-tag': MockComponent,
+      };
+
+      const renderer = new Renderer({ components });
+
+      // Mock createElement to capture props
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      // Mock detectUnclosedTags to return empty set (all tags closed)
+      jest.spyOn(renderer as any, 'detectUnclosedTags').mockReturnValue(new Set());
+
+      const html = '<streaming-tag>content</streaming-tag>';
+      renderer.processHtml(html);
+
+      expect(createElementSpy).toHaveBeenCalledWith(
+        MockComponent,
+        expect.objectContaining({
+          streamStatus: 'done',
+        }),
+      );
+
+      createElementSpy.mockRestore();
+      jest.restoreAllMocks();
+    });
+  });
+
+  describe('className merging edge cases', () => {
+    it('should handle undefined class attributes', () => {
+      const components = {
+        'test-component': MockComponent,
+      };
+
+      const renderer = new Renderer({ components });
+
+      // Mock createElement to capture props
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      // Test case: Only other attributes, no class or className
+      const html = '<test-component id="test-id" data-value="test">content</test-component>';
+      renderer.processHtml(html);
+
+      expect(createElementSpy).toHaveBeenCalledWith(
+        MockComponent,
+        expect.objectContaining({
+          id: 'test-id',
+          'data-value': 'test',
+          className: '',
+        }),
+      );
+
+      createElementSpy.mockRestore();
+    });
+
+    it('should handle whitespace in class attributes', () => {
+      const components = {
+        'test-component': MockComponent,
+      };
+
+      const renderer = new Renderer({
+        components,
+        dompurifyConfig: { ALLOWED_ATTR: ['class', 'classname'] },
+      });
+
+      // Mock createElement to capture props
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      // Test case: Extra whitespace in class attributes
+      const html =
+        '<test-component class="  class1   class2  " classname="  existing  ">content</test-component>';
+      renderer.processHtml(html);
+
+      expect(createElementSpy).toHaveBeenCalledWith(
+        MockComponent,
+        expect.objectContaining({
+          className: 'existing class1   class2',
+        }),
+      );
+
+      createElementSpy.mockRestore();
+    });
+
+    it('should handle classname attribute (lowercase)', () => {
+      const components = {
+        'test-component': MockComponent,
+      };
+
+      const renderer = new Renderer({
+        components,
+        dompurifyConfig: { ALLOWED_ATTR: ['classname'] },
+      });
+
+      // Mock createElement to capture props
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      // Test case: Using "classname" (lowercase) instead of "className"
+      const html = '<test-component classname="test-class">content</test-component>';
+      renderer.processHtml(html);
+
+      expect(createElementSpy).toHaveBeenCalledWith(
+        MockComponent,
+        expect.objectContaining({
+          className: 'test-class',
+        }),
+      );
+
+      createElementSpy.mockRestore();
+    });
+  });
+
+  describe('DOMPurify integration', () => {
+    it('should use DOMPurify with correct configuration', () => {
+      const components = {
+        'custom-tag': MockComponent,
+      };
+
+      const renderer = new Renderer({ components });
+
+      // Spy on DOMPurify.sanitize
+      const sanitizeSpy = jest.spyOn(DOMPurify, 'sanitize');
+
+      const html = '<custom-tag>content</custom-tag><script>alert("xss")</script>';
+      renderer.processHtml(html);
+
+      expect(sanitizeSpy).toHaveBeenCalledWith(
+        html,
+        expect.objectContaining({
+          ADD_TAGS: expect.arrayContaining(['custom-tag']),
+        }),
+      );
+
+      sanitizeSpy.mockRestore();
+    });
+
+    it('should respect user dompurifyConfig', () => {
+      const components = {
+        'custom-tag': MockComponent,
+      };
+
+      const userConfig = {
+        ALLOWED_TAGS: ['custom-tag'],
+        ALLOWED_ATTR: ['class'],
+      };
+
+      const renderer = new Renderer({
+        components,
+        dompurifyConfig: userConfig,
+      });
+
+      // Spy on DOMPurify.sanitize
+      const sanitizeSpy = jest.spyOn(DOMPurify, 'sanitize');
+
+      const html = '<custom-tag class="test" id="test-id">content</custom-tag>';
+      renderer.processHtml(html);
+
+      expect(sanitizeSpy).toHaveBeenCalledWith(
+        html,
+        expect.objectContaining({
+          ALLOWED_TAGS: expect.arrayContaining(['custom-tag']),
+          ALLOWED_ATTR: expect.arrayContaining(['class']),
+          ADD_TAGS: expect.arrayContaining(['custom-tag']),
+        }),
+      );
+
+      sanitizeSpy.mockRestore();
+    });
+  });
+
+  describe('render method', () => {
+    it('should be an alias for processHtml', () => {
+      const components = {
+        'test-component': MockComponent,
+      };
+
+      const renderer = new Renderer({ components });
+
+      // Spy on processHtml
+      const processHtmlSpy = jest.spyOn(renderer, 'processHtml');
+
+      const html = '<test-component>content</test-component>';
+      const result = renderer.render(html);
+
+      expect(processHtmlSpy).toHaveBeenCalledWith(html);
+      expect(result).toBeDefined();
+
+      processHtmlSpy.mockRestore();
     });
   });
 });

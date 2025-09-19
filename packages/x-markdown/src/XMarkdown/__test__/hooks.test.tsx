@@ -1,6 +1,6 @@
 import { render, renderHook } from '@testing-library/react';
 import React from 'react';
-import { useStreaming, useAnimation } from '../hooks';
+import { useAnimation, useStreaming } from '../hooks';
 import { XMarkdownProps } from '../interface';
 
 const testCases = [
@@ -255,7 +255,7 @@ describe('XMarkdown hooks', () => {
     });
 
     it('useAnimation should memoize components based on animationConfig', () => {
-      const animationConfig = { duration: 1000 };
+      const animationConfig = { fadeDuration: 1000 };
       const { result, rerender } = renderHook(
         ({ config }) => useAnimation({ enableAnimation: true, animationConfig: config }),
         { initialProps: { config: animationConfig } },
@@ -265,7 +265,7 @@ describe('XMarkdown hooks', () => {
       rerender({ config: { ...animationConfig } }); // Same config
       expect(result.current).toBe(firstResult);
 
-      rerender({ config: { duration: 2000 } }); // Different config
+      rerender({ config: { fadeDuration: 2000 } }); // Different config
       expect(result.current).not.toBe(firstResult);
     });
   });

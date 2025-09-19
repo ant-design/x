@@ -1,18 +1,20 @@
-import { Button, Row, Col, Card, Typography, Input } from 'antd';
-import React, { useState, useEffect, useRef } from 'react';
+import { Button, Card, Col, Input, Row, Typography } from 'antd';
+import React, { useEffect, useRef, useState } from 'react';
 import '@ant-design/x-markdown/themes/light.css';
-import XMarkdown from '@ant-design/x-markdown';
+import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
 import HighlightCode from '@ant-design/x-markdown/plugins/HighlightCode';
 import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
+import remarkGfm from 'remark-gfm';
 
 const { Title, Text } = Typography;
 const { TextArea } = Input;
 
-const Code = (props: { className: string; children: string }) => {
+const Code: React.FC<ComponentProps> = (props) => {
   const { className, children } = props;
   const lang = className?.match(/language-(\w+)/)?.[1] || '';
+
+  if (typeof children !== 'string') return null;
   return <HighlightCode lang={lang}>{children}</HighlightCode>;
 };
 

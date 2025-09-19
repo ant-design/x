@@ -1,4 +1,4 @@
-import { Token, XMarkdown } from '@ant-design/x-markdown';
+import { type ComponentProps, type Token, XMarkdown } from '@ant-design/x-markdown';
 import React from 'react';
 import './plugin.css';
 import '@ant-design/x-markdown/themes/light.css';
@@ -19,10 +19,10 @@ const referenceList = [
   { url: 'https://x.ant.design', title: 'link9' },
 ];
 
-const Footnote = (props: { children: string; href: string; title: string }) => (
-  <Popover content={props?.title} title="Footnote" trigger="hover">
+const Footnote: React.FC<ComponentProps<{ href?: string; title?: string }>> = (props) => (
+  <Popover content={props.title} title="Footnote" trigger="hover">
     <span onClick={() => window.open(props.href)} className="markdown-cite">
-      {props?.children}
+      {props.children}
     </span>
   </Popover>
 );

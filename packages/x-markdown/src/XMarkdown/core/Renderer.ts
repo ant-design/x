@@ -1,11 +1,12 @@
+import type { Config as DOMPurifyConfig } from 'dompurify';
 import DOMPurify from 'dompurify';
 import parseHtml, { DOMNode, domToReact, Element } from 'html-react-parser';
-import htmlTags from 'html-tags';
 import React, { ReactNode } from 'react';
-import type { XMarkdownProps } from '../interface';
+import type { ComponentProps, XMarkdownProps } from '../interface';
 
 interface RendererOptions {
   components?: XMarkdownProps['components'];
+  dompurifyConfig?: DOMPurifyConfig;
 }
 
 class Renderer {
@@ -54,47 +55,14 @@ class Renderer {
   /**
    * Configure DOMPurify to preserve components and target attributes, filter everything else
    */
-  private configureDOMPurify() {
-    // Get all custom component tag names
+  private configureDOMPurify(): DOMPurifyConfig {
     const customComponents = Object.keys(this.options.components || {});
+    const userConfig = this.options.dompurifyConfig || {};
 
-    // Get all standard HTML tags using html-tags
-    const standardHtmlTags = htmlTags as string[];
-
-    // Configure DOMPurify - only preserve custom components and standard HTML tags
-    const purifyConfig = {
-      // Allow custom components and standard HTML tags
-      ALLOWED_TAGS: [...standardHtmlTags, ...customComponents],
-      // Allow basic attributes and target attribute
-      ALLOWED_ATTR: [
-        'target',
-        'href',
-        'class',
-        'id',
-        'style',
-        'title',
-        'alt',
-        'src',
-        'width',
-        'height',
-        'type',
-        'disabled',
-      ],
-      // Custom component handling
-      CUSTOM_ELEMENT_HANDLING: {
-        tagNameCheck: (tagName: string) => {
-          // Allow custom components to pass through
-          return customComponents.includes(tagName.toLowerCase());
-        },
-        attributeNameCheck: () => {
-          // Allow all attributes for custom components
-          return true;
-        },
-        allowCustomizedBuiltInElements: true,
-      },
+    return {
+      ...userConfig,
+      ADD_TAGS: [...new Set([...customComponents, ...(userConfig.ALLOWED_TAGS || [])])],
     };
-
-    return purifyConfig;
   }
 
   public processHtml(htmlString: string): React.ReactNode {
@@ -112,7 +80,7 @@ class Renderer {
 
         if (renderElement) {
           const streamStatus = unclosedTags.has(name) ? 'loading' : 'done';
-          const props: Record<string, unknown> = {
+          const props: ComponentProps = {
             domNode,
             streamStatus,
             ...attribs,

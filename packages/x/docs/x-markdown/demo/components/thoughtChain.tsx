@@ -1,7 +1,7 @@
 import { CheckCircleOutlined, InfoCircleOutlined, LoadingOutlined } from '@ant-design/icons';
 import type { ThoughtChainItemType } from '@ant-design/x';
 import { Bubble, ThoughtChain } from '@ant-design/x';
-import XMarkdown from '@ant-design/x-markdown';
+import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
 import { Avatar, Button, Card, Flex, Spin } from 'antd';
 import React from 'react';
 
@@ -82,9 +82,13 @@ const Thought = (props: { items: ThoughtChainItemType[] }) => {
 const text = `<div><thought>[{"title":"Thought Chain Item - 1","status":"success","description":"status: success"},{"title":"Thought Chain Item - 2","status":"error","description":"status: error"}]</thought></div>
 `;
 
-const ThoughtComponent = (props: { children: string; streamStatus: string }) => {
+const ThoughtComponent = (props: ComponentProps) => {
   if (props.streamStatus === 'loading') {
     return <Spin />;
+  }
+
+  if (typeof props.children !== 'string') {
+    return null;
   }
 
   const data = JSON.parse(props.children) as ThoughtChainItemType[];

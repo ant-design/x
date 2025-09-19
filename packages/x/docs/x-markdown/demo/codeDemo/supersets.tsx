@@ -1,4 +1,4 @@
-import XMarkdown from '@ant-design/x-markdown';
+import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
 import HighlightCode from '@ant-design/x-markdown/plugins/HighlightCode';
 import Latex from '@ant-design/x-markdown/plugins/Latex';
 import Mermaid from '@ant-design/x-markdown/plugins/Mermaid';
@@ -22,9 +22,11 @@ block: \n
 
 `;
 
-const Code = (props: { className: string; children: string }) => {
+const Code: React.FC<ComponentProps> = (props) => {
   const { className, children } = props;
   const lang = className?.match(/language-(\w+)/)?.[1] || '';
+
+  if (typeof children !== 'string') return null;
   if (lang === 'mermaid') {
     return <Mermaid>{children}</Mermaid>;
   }

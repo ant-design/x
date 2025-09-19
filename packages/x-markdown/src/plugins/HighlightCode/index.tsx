@@ -8,10 +8,10 @@ import classnames from 'classnames';
 import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-import type { PluginsType } from '../type';
+import type { HighlightCodeProps } from '../type';
 import useStyle from './style';
 
-const HighlightCode: PluginsType['HighlightCode'] = (props) => {
+const HighlightCode: React.FC<HighlightCodeProps> = (props) => {
   const {
     lang,
     children,

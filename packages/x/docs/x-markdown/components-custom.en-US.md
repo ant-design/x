@@ -15,4 +15,4 @@ XMarkdown supports a highly flexible business component rendering mechanism, all
 ## Code Examples
 
 <!-- prettier-ignore -->
-<code src="./demo/components/custom.tsx" description="Rendering charts with GPT-VIS">Thinking Process</code>
+<code src="./demo/components/custom.tsx">Custom Component</code>

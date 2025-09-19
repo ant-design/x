@@ -63,7 +63,7 @@ interface MessageInfo<ChatMessage> {
   id: number | string;
   message: ChatMessage;
   status: MessageStatus;
-  extra: AnyObject;
+  extra?: AnyObject;
 }
 ```
 
