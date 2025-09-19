@@ -3,7 +3,7 @@ group:
   title: Components
   order: 2
 title: Custom Component
-order: 3
+order: 4
 ---
 
 XMarkdown supports a highly flexible business component rendering mechanism, allowing developers to implement customized functionality through the following approaches:
