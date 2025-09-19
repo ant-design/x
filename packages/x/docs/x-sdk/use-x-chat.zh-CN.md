@@ -49,12 +49,23 @@ type useXChat<
 | --- | --- | --- | --- | --- |
 | abort | 取消请求 | () => void | - | - |
 | isRequesting | 是否在请求中 | boolean | - | - |
-| messages | 当前管理消息列表的内容 | ChatMessage[] | - | - |
-| parsedMessages | 经过 `parser` 转译过的内容 | ParsedMessages[] | - | - |
-| onReload | 重新生成，会发送请求到后台，使用新返回数据更新该条消息 | (id: string \| number, requestParams: Partial\<Input\>) => void | - | - |
-| onRequest | 添加一条 Message，并且触发请求 | (requestParams: Partial\<Input\>) => void | - | - |
-| setMessages | 直接修改 messages，不会触发请求 | (messages: { message: ChatMessage, status: MessageStatus }[]) => void | - | - |
-| setMessage | 直接修改单条 message，不会触发请求 | (id: string \| number, data: { message: ChatMessage, status: MessageStatus }) => void | - | - |
+| messages | 当前管理消息列表的内容 | MessageInfo\<ChatMessage\>[] | - | - |
+| parsedMessages | 经过 `parser` 转译过的内容 | MessageInfo\<ParsedMessages\>[] | - | - |
+| onReload | 重新生成，会发送请求到后台，使用新返回数据更新该条消息 | (id: string \| number, requestParams: Partial\<Input\>,opts: { extra: AnyObject }) => void | - | - |
+| onRequest | 添加一条 Message，并且触发请求 | (requestParams: Partial\<Input\>,opts: { extra: AnyObject }) => void | - | - |
+| setMessages | 直接修改 messages，不会触发请求 | (messages: Partial\<MessageInfo\<ChatMessage\>\>[]) => void | - | - |
+| setMessage | 直接修改单条 message，不会触发请求 | (id: string \| number, info: Partial\<MessageInfo\<ChatMessage\>\>) => void | - | - |
+
+#### MessageInfo
+
+```ts
+interface MessageInfo<ChatMessage> {
+  id: number | string;
+  message: ChatMessage;
+  status: MessageStatus;
+  extra: AnyObject;
+}
+```
 
 #### MessageStatus
 

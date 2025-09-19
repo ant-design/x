@@ -635,19 +635,11 @@ const Independent: React.FC = () => {
   // ==================== Event ====================
   const onSubmit = (val: string) => {
     if (!val) return;
-    onRequest(
-      {
-        messages: [{ role: 'user', content: val }],
-      },
-      {
-        extra: {
-          nihao: 'nihao1',
-        },
-      },
-    );
+    onRequest({
+      messages: [{ role: 'user', content: val }],
+    });
   };
 
-  console.log(messages, 'messages');
   // ==================== Nodes ====================
   const chatSide = (
     <div className={styles.side}>

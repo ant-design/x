@@ -338,7 +338,7 @@ export default function useXChat<
     provider.request.run(provider.transformParams(requestParams, provider.request.options));
   };
 
-  const onRequest = useEvent((requestParams: Partial<Input>, opts: { extra: AnyObject }) => {
+  const onRequest = useEvent((requestParams: Partial<Input>, opts?: { extra: AnyObject }) => {
     if (!provider) {
       throw new Error('provider is required');
     }

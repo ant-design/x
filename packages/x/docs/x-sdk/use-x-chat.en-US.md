@@ -49,12 +49,23 @@ type useXChat<
 | --- | --- | --- | --- | --- |
 | abort | Cancel request | () => void | - | - |
 | isRequesting | Is requesting | boolean | - | - |
-| messages | Current managed message list | ChatMessage[] | - | - |
-| parsedMessages | Content converted by `parser` | ParsedMessages[] | - | - |
-| onReload | Regenerate, sends a request to the backend and updates the message with new data | (id: string \| number, requestParams: Partial\<Input\>) => void | - | - |
-| onRequest | Add a Message and trigger a request | (requestParams: Partial\<Input\>) => void | - | - |
-| setMessages | Directly modify messages without triggering a request | (messages: { message: ChatMessage, status:MessageStatus }[]) => void | - | - |
-| setMessage | Directly modify a single message without triggering a request | (id: string \| number, data: { message: ChatMessage, status: MessageStatus }) => void | - | - |
+| messages | Current managed message list content | MessageInfo\<ChatMessage\>[] | - | - |
+| parsedMessages | Content converted by `parser` | MessageInfo\<ParsedMessages\>[] | - | - |
+| onReload | Regenerate, sends a request to the backend and updates the message with new data | (id: string \| number, requestParams: Partial\<Input\>,opts: { extra: AnyObject }) => void | - | - |
+| onRequest | Add a Message and trigger a request | (requestParams: Partial\<Input\>,opts: { extra: AnyObject }) => void | - | - |
+| setMessages | Directly modify messages without triggering a request | (messages: Partial\<MessageInfo\<ChatMessage\>\>[]) => void | - | - |
+| setMessage | Directly modify a single message without triggering a request | (id: string \| number, info: Partial\<MessageInfo\<ChatMessage\>\>) => void | - | - |
+
+#### MessageInfo
+
+```ts
+interface MessageInfo<ChatMessage> {
+  id: number | string;
+  message: ChatMessage;
+  status: MessageStatus;
+  extra: AnyObject;
+}
+```
 
 #### MessageStatus
 
