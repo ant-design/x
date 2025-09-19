@@ -451,7 +451,7 @@ const ThinkComponent = React.memo((props: { children: string; streamStatus: stri
 });
 
 const Footer: React.FC<{
-  id?: string;
+  id?: string | number;
   content: string;
   status?: string;
   extra?: ChatMessage['extra'];
