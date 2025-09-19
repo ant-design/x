@@ -111,9 +111,10 @@ export default function useXChat<
       id: `msg_${idRef.current}`,
       message,
       status,
-      extra: extra || {},
     };
-
+    if (extra) {
+      msg.extra = extra;
+    }
     idRef.current += 1;
 
     return msg;
@@ -358,7 +359,7 @@ export default function useXChat<
     innerOnRequest(requestParams, {
       updatingId: id,
       reload: true,
-      extra: opts.extra,
+      extra: opts?.extra,
     });
   };
 
