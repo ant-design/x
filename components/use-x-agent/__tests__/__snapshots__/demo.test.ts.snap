@@ -7,7 +7,7 @@ Array [
     class="ant-form ant-form-vertical"
   >
     <div
-      class="ant-form-item"
+      class="ant-form-item ant-form-item-vertical"
     >
       <div
         class="ant-row ant-form-item-row"
