@@ -298,7 +298,15 @@ describe('useXChat', () => {
       expectMessage({ content: 'bamboo' }, 'success'),
     ]);
 
-    ref.current.onReload(ref.current.parsedMessages[1].id, {});
+    ref.current.onReload(
+      ref.current.parsedMessages[1].id,
+      {},
+      {
+        extra: {
+          feedback: 'dislike',
+        },
+      },
+    );
     expect(() => ref.current?.onReload('fake id', { query: 'Hello' })).toThrow(
       'message [fake id] is not found',
     );
