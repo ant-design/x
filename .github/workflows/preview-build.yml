@@ -20,12 +20,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: oven-sh/setup-bun@v2
-      - run: bun install
-      - run: npm run prestart --workspaces
-      - name: npm run site
+      - uses: utooland/setup-utoo@v1
+      - run: ut
+      - run: ut prestart --workspaces
+      - name: ut site
         id: site
-        run: npm run site --workspace packages/x
+        run: ut site --workspace packages/x
         env:
           NODE_OPTIONS: '--max_old_space_size=4096'
       - name: upload site artifact

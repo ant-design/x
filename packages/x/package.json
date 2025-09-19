@@ -94,7 +94,6 @@
     "tbox-nodejs-sdk": "^0.0.13",
     "openai": "^5.20.0",
     "@ant-design/v5-patch-for-react-19": "^1.0.3",
-    "@ant-design/x-markdown": "*",
     "@ant-design/x-sdk": "*",
     "@antv/gpt-vis": "^0.4.1",
     "@codesandbox/sandpack-react": "^2.19.8",
