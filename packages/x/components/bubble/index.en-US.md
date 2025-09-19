@@ -29,10 +29,11 @@ Often used in chat scenarios.
 <code src="./demo/custom-content.tsx">Custom Rendered Content</code>
 <code src="./demo/markdown.tsx">Render Markdown Content</code>
 <code src="./demo/editable.tsx">Editable Bubble</code>
-<code src="./demo/list.tsx">Bubble List</code>
-<code src="./demo/list-ref.tsx">Bubble List Ref</code>
-<code src="./demo/semantic-list-custom.tsx">Semantic Customization</code>
 <code src="./demo/gpt-vis.tsx">Render Charts Using GPT-Vis</code>
+
+## Bubble.List Examples
+
+<code src="./demo/list.tsx">Bubble List</code> <code src="./demo/list-ref.tsx">Bubble List Ref</code> <code src="./demo/semantic-list-custom.tsx">Semantic Customization</code> <code src="./demo/list-extra.tsx">List extra</code>
 
 ## API
 
@@ -88,7 +89,7 @@ If you do not want to use flex layout, you can set `max-height` for **Bubble.Lis
 
 | Attribute | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| items | Bubble data list, `key` and `role` required. When used with X SDK `useXChat`, you can pass `status` to help Bubble manage configuration | (BubbleProps & { key: string \| number, role: string , status: MessageStatus})[] | - | - |
+| items | Bubble data list, `key` and `role` required. When used with X SDK [`useXChat`](/sdks/use-x-chat), you can pass `status` to help Bubble manage configuration | (BubbleProps & { key: string \| number, role: string , status: MessageStatus, extra?: AnyObject })[] | - | - |
 | autoScroll | Auto-scroll | boolean | `true` | - |
 | role | Role default configuration | [RoleType](#roletype) | - | - |
 
@@ -126,9 +127,13 @@ type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error' | 'a
 
 #### InfoType
 
+When used in conjunction with [`useXChat`](/sdks/use-x-chat), `key` can be used as `MessageId`,and `extra` can be used as a custom parameter.
+
 ```typescript
 type InfoType = {
-  status: MessageStatus;
+  status?: MessageStatus;
+  key?: string | number;
+  extra?: AnyObject;
 };
 ```
 

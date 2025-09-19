@@ -16,12 +16,7 @@ import {
   SmileOutlined,
   SyncOutlined,
 } from '@ant-design/icons';
-import type {
-  ActionsFeedbackProps,
-  ActionsProps,
-  BubbleListProps,
-  ThoughtChainItemProps,
-} from '@ant-design/x';
+import type { ActionsFeedbackProps, BubbleListProps, ThoughtChainItemProps } from '@ant-design/x';
 import {
   Actions,
   Attachments,
@@ -36,8 +31,9 @@ import {
 } from '@ant-design/x';
 import enUS_X from '@ant-design/x/locale/en_US';
 import zhCN_X from '@ant-design/x/locale/zh_CN';
-import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
-import type { DefaultMessageInfo } from '@ant-design/x-sdk';
+import type { ComponentProps } from '@ant-design/x-markdown';
+import XMarkdown from '@ant-design/x-markdown';
+import type { DefaultMessageInfo, MessageInfo } from '@ant-design/x-sdk';
 import {
   DeepSeekChatProvider,
   SSEFields,
@@ -56,6 +52,7 @@ import dayjs from 'dayjs';
 import React, { useState } from 'react';
 import { useMarkdownTheme } from '../x-markdown/demo/_utils';
 
+// ==================== Local ====================
 const zhCN = {
   whatIsAntDesignX: '什么是 Ant Design X？',
   today: '今天',
@@ -152,6 +149,142 @@ const enUS = {
 
 const isZhCN = window.parent?.location?.pathname?.includes('-cn');
 const t = isZhCN ? zhCN : enUS;
+
+// ==================== Style ====================
+const useStyle = createStyles(({ token, css }) => {
+  return {
+    layout: css`
+      width: 100%;
+      min-width: 1000px;
+      height: 100vh;
+      display: flex;
+      background: ${token.colorBgContainer};
+      font-family: AlibabaPuHuiTi, ${token.fontFamily}, sans-serif;
+    `,
+    // side 样式
+    side: css`
+      background: ${token.colorBgLayout}80;
+      width: 280px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 0 12px;
+      box-sizing: border-box;
+    `,
+    logo: css`
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      padding: 0 24px;
+      box-sizing: border-box;
+      gap: 8px;
+      margin: 24px 0;
+
+      span {
+        font-weight: bold;
+        color: ${token.colorText};
+        font-size: 16px;
+      }
+    `,
+    conversations: css`
+      overflow-y: auto;
+      margin-top: 12px;
+      padding: 0;
+    flex:1;
+      .ant-conversations-list {
+        padding-inline-start: 0;
+      }
+    `,
+    sideFooter: css`
+      border-top: 1px solid ${token.colorBorderSecondary};
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    `,
+    // chat list 样式
+    chat: css`
+      height: 100%;
+      width: calc(100% - 280px);
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      padding-block: ${token.paddingLG}px;
+      justify-content:space-between;
+      .ant-bubble-content-updating {
+        background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
+        background-size: 100% 2px;
+        background-repeat: no-repeat;
+        background-position: bottom;
+      }
+    `,
+    chatPrompt: css`
+      .ant-prompts-label {
+        color: #000000e0 !important;
+      }
+      .ant-prompts-desc {
+        color: #000000a6 !important;
+        width: 100%;
+      }
+      .ant-prompts-icon {
+        color: #000000a6 !important;
+      }
+    `,
+    chatList: css`
+      display: flex;
+      height: calc(100% - 120px);
+      flex-direction: column;
+    `,
+    placeholder: css`
+      padding-top: 32px;
+    `,
+    // sender 样式
+    sender: css`
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+    `,
+    speechButton: css`
+      font-size: 18px;
+      color: ${token.colorText} !important;
+    `,
+    senderPrompt: css`
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+      color: ${token.colorText};
+    `,
+  };
+});
+
+// ==================== Static Config ====================
+const HISTORY_MESSAGES: {
+  [key: string]: DefaultMessageInfo<ChatMessage>[];
+} = {
+  'default-1': [
+    {
+      message: { role: 'user', content: t.howToQuicklyInstallAndImportComponents },
+      status: 'success',
+    },
+    {
+      message: {
+        role: 'assistant',
+        content: `# 快速安装和导入组件 \n \`npm install @ant-design/x --save \` \n [查看详情](/components/introduce${isZhCN ? '-cn' : ''}/)`,
+      },
+      status: 'success',
+    },
+  ],
+  'default-2': [
+    { message: { role: 'user', content: t.newAgiHybridInterface }, status: 'success' },
+    {
+      message: {
+        role: 'assistant',
+        content: `RICH 设计范式 \n [查看详情](/docs/spec/introduce${isZhCN ? '-cn' : ''}/)`,
+      },
+      status: 'success',
+    },
+  ],
+};
 
 const DEFAULT_CONVERSATIONS_ITEMS = [
   {
@@ -257,25 +390,7 @@ const SENDER_PROMPTS: GetProp<typeof Prompts, 'items'> = [
   },
 ];
 
-const ThinkComponent = React.memo((props: ComponentProps) => {
-  const [title, setTitle] = React.useState(t.DeepThinking + '...');
-  const [loading, setLoading] = React.useState(true);
-
-  React.useEffect(() => {
-    if (props.streamStatus === 'done') {
-      setTitle(t.CompleteThinking);
-      setLoading(false);
-    }
-  }, [props.streamStatus]);
-
-  return (
-    <Think title={title} loading={loading}>
-      {props.children}
-    </Think>
-  );
-});
-
-const ThoughtChainConfig = {
+const THOUGHT_CHAIN_CONFIG = {
   loading: {
     title: t.modelIsRunning,
     status: 'loading',
@@ -298,16 +413,52 @@ const ThoughtChainConfig = {
   },
 };
 
-const getActionsItems = (
-  content: string,
-  onReload: (key: string | number, info: any) => any,
-  key: string | number,
-  feedBackValue: ActionsFeedbackProps['value'],
-  onFeedBackChange: React.Dispatch<
-    React.SetStateAction<'default' | 'like' | 'dislike' | undefined>
-  >,
-): ActionsProps['items'] => {
-  return [
+// ==================== Type ====================
+interface ChatMessage extends XModelMessage {
+  extra?: {
+    feedback: ActionsFeedbackProps['value'];
+  };
+}
+
+// ==================== Context ====================
+const ChatContext = React.createContext<{
+  onReload?: (key: string | number, info?: any) => any;
+  setMessage?: (
+    id: string | number,
+    message:
+      | Partial<MessageInfo<XModelMessage>>
+      | ((message: MessageInfo<XModelMessage>) => Partial<MessageInfo<XModelMessage>>),
+  ) => boolean;
+}>({});
+
+// ==================== Sub Component ====================
+
+const ThinkComponent = React.memo((props: ComponentProps) => {
+  const [title, setTitle] = React.useState(t.DeepThinking + '...');
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    if (props.streamStatus === 'done') {
+      setTitle(t.CompleteThinking);
+      setLoading(false);
+    }
+  }, [props.streamStatus]);
+
+  return (
+    <Think title={title} loading={loading}>
+      {props.children}
+    </Think>
+  );
+});
+
+const Footer: React.FC<{
+  id?: string | number;
+  content: string;
+  status?: string;
+  extra?: ChatMessage['extra'];
+}> = ({ id, content, extra, status }) => {
+  const context = React.useContext(ChatContext);
+  const Items = [
     {
       key: 'pagination',
       actionRender: <Pagination simple total={1} pageSize={1} />,
@@ -317,8 +468,8 @@ const getActionsItems = (
       label: t.retry,
       icon: <SyncOutlined />,
       onItemClick: () => {
-        if (key) {
-          onReload(key, {
+        if (id) {
+          context?.onReload?.(id, {
             userAction: 'retry',
           });
         }
@@ -347,213 +498,30 @@ const getActionsItems = (
               color: '#f759ab',
             },
           }}
-          value={feedBackValue || 'default'}
+          value={extra?.feedback || 'default'}
           key="feedback"
           onChange={(val) => {
-            onFeedBackChange(val);
-            message.success(`${key}: ${val}`);
+            if (id) {
+              context?.setMessage?.(id, () => ({
+                extra: {
+                  feedback: val,
+                },
+              }));
+              message.success(`${id}: ${val}`);
+            } else {
+              message.error('has no id!');
+            }
           }}
         />
       ),
     },
   ];
-};
-const Footer: React.FC<{
-  id?: number | string;
-  content: string;
-  onReload: (key: string | number, info: any) => any;
-  status?: string;
-}> = ({ id, content, onReload, status }) => {
-  const [mockFeedback, setMockFeedback] = useState<ActionsFeedbackProps['value']>('default');
   return status !== 'updating' && status !== 'loading' ? (
-    <div style={{ display: 'flex' }}>
-      {id && (
-        <Actions items={getActionsItems(content, onReload, id, mockFeedback, setMockFeedback)} />
-      )}
-    </div>
+    <div style={{ display: 'flex' }}>{id && <Actions items={Items} />}</div>
   ) : null;
 };
 
-const getRole = (
-  className: string,
-  onReload: (key: string | number, info: any) => any,
-): BubbleListProps['role'] => ({
-  assistant: {
-    placement: 'start',
-    components: {
-      header: (_, { status }) => {
-        const config = ThoughtChainConfig[status as keyof typeof ThoughtChainConfig];
-        return config ? (
-          <ThoughtChain.Item
-            style={{
-              marginBottom: 8,
-            }}
-            status={config.status as ThoughtChainItemProps['status']}
-            variant="solid"
-            icon={<GlobalOutlined />}
-            title={config.title}
-          />
-        ) : null;
-      },
-      footer: (content, { status, key }) => (
-        <Footer content={content} onReload={onReload} status={status} id={key} />
-      ),
-    },
-    contentRender: (content: any, { status }) => {
-      const newContent = content.replaceAll('\n\n', '<br/>');
-      return (
-        <XMarkdown
-          paragraphTag="div"
-          components={{
-            think: ThinkComponent,
-          }}
-          className={className}
-          streaming={{
-            hasNextChunk: status === 'updating',
-          }}
-        >
-          {newContent}
-        </XMarkdown>
-      );
-    },
-  },
-  user: { placement: 'end' },
-});
-
-const useStyle = createStyles(({ token, css }) => {
-  return {
-    layout: css`
-      width: 100%;
-      min-width: 1000px;
-      height: 100vh;
-      display: flex;
-      background: ${token.colorBgContainer};
-      font-family: AlibabaPuHuiTi, ${token.fontFamily}, sans-serif;
-    `,
-    // side 样式
-    side: css`
-      background: ${token.colorBgLayout}80;
-      width: 280px;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      padding: 0 12px;
-      box-sizing: border-box;
-    `,
-    logo: css`
-      display: flex;
-      align-items: center;
-      justify-content: start;
-      padding: 0 24px;
-      box-sizing: border-box;
-      gap: 8px;
-      margin: 24px 0;
-
-      span {
-        font-weight: bold;
-        color: ${token.colorText};
-        font-size: 16px;
-      }
-    `,
-    conversations: css`
-      overflow-y: auto;
-      margin-top: 12px;
-      padding: 0;
-      flex: 1;
-      .ant-conversations-list {
-        padding-inline-start: 0;
-      }
-    `,
-    sideFooter: css`
-      border-top: 1px solid ${token.colorBorderSecondary};
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    `,
-    // chat list 样式
-    chat: css`
-      height: 100%;
-      width: 100%;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      padding-block: ${token.paddingLG}px;
-      gap: 16px;
-      .ant-bubble-content-updating {
-        background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
-        background-size: 100% 2px;
-        background-repeat: no-repeat;
-        background-position: bottom;
-      }
-    `,
-    chatPrompt: css`
-      .ant-prompts-label {
-        color: #000000e0 !important;
-      }
-      .ant-prompts-desc {
-        color: #000000a6 !important;
-        width: 100%;
-      }
-      .ant-prompts-icon {
-        color: #000000a6 !important;
-      }
-    `,
-    chatList: css`
-      display: flex;
-      height: calc(100% - 120px);
-      flex-direction: column;
-    `,
-    placeholder: css`
-      padding-top: 32px;
-    `,
-    // sender 样式
-    sender: css`
-      width: 100%;
-      max-width: 700px;
-      margin: 0 auto;
-    `,
-    speechButton: css`
-      font-size: 18px;
-      color: ${token.colorText} !important;
-    `,
-    senderPrompt: css`
-      width: 100%;
-      max-width: 700px;
-      margin: 0 auto;
-      color: ${token.colorText};
-    `,
-  };
-});
-
-const HISTORY_MESSAGES: {
-  [key: string]: DefaultMessageInfo<XModelMessage>[];
-} = {
-  'default-1': [
-    {
-      message: { role: 'user', content: t.howToQuicklyInstallAndImportComponents },
-      status: 'success',
-    },
-    {
-      message: {
-        role: 'assistant',
-        content: `# 快速安装和导入组件 \n \`npm install @ant-design/x --save \` \n [查看详情](/components/introduce${isZhCN ? '-cn' : ''}/)`,
-      },
-      status: 'success',
-    },
-  ],
-  'default-2': [
-    { message: { role: 'user', content: t.newAgiHybridInterface }, status: 'success' },
-    {
-      message: {
-        role: 'assistant',
-        content: `RICH 设计范式 \n [查看详情](/docs/spec/introduce${isZhCN ? '-cn' : ''}/)`,
-      },
-      status: 'success',
-    },
-  ],
-};
-
+// ==================== Chat Provider ====================
 /**
  * 🔔 Please replace the BASE_URL, MODEL with your own values.
  */
@@ -579,14 +547,62 @@ const providerFactory = (conversationKey: string) => {
   return providerCaches.get(conversationKey);
 };
 
-const historyMessageFactory = (conversationKey: string): DefaultMessageInfo<XModelMessage>[] => {
+const historyMessageFactory = (conversationKey: string): DefaultMessageInfo<ChatMessage>[] => {
   return HISTORY_MESSAGES[conversationKey] || [];
 };
+
+const getRole = (className: string): BubbleListProps['role'] => ({
+  assistant: {
+    placement: 'start',
+    components: {
+      header: (_, { status }) => {
+        const config = THOUGHT_CHAIN_CONFIG[status as keyof typeof THOUGHT_CHAIN_CONFIG];
+        return config ? (
+          <ThoughtChain.Item
+            style={{
+              marginBottom: 8,
+            }}
+            status={config.status as ThoughtChainItemProps['status']}
+            variant="solid"
+            icon={<GlobalOutlined />}
+            title={config.title}
+          />
+        ) : null;
+      },
+      footer: (content, { status, key, extra }) => (
+        <Footer
+          content={content}
+          status={status}
+          extra={extra as ChatMessage['extra']}
+          id={key as string}
+        />
+      ),
+    },
+    contentRender: (content: any, { status }) => {
+      const newContent = content.replaceAll('\n\n', '<br/>');
+      return (
+        <XMarkdown
+          paragraphTag="div"
+          components={{
+            think: ThinkComponent,
+          }}
+          className={className}
+          streaming={{
+            hasNextChunk: status === 'updating',
+            enableAnimation: true,
+          }}
+        >
+          {newContent}
+        </XMarkdown>
+      );
+    },
+  },
+  user: { placement: 'end' },
+});
 
 const Independent: React.FC = () => {
   const { styles } = useStyle();
   const locale = isZhCN ? { ...zhCN_antd, ...zhCN_X } : { ...enUS_antd, ...enUS_X };
-
   // ==================== State ====================
 
   const { conversations, addConversation, setConversations } = useXConversations({
@@ -606,7 +622,7 @@ const Independent: React.FC = () => {
 
   // ==================== Runtime ====================
 
-  const { onRequest, messages, isRequesting, abort, onReload } = useXChat({
+  const { onRequest, messages, isRequesting, abort, onReload, setMessage } = useXChat<ChatMessage>({
     provider: providerFactory(curConversation), // every conversation has its own provider
     conversationKey: curConversation,
     defaultMessages: historyMessageFactory(curConversation),
@@ -620,7 +636,6 @@ const Independent: React.FC = () => {
   // ==================== Event ====================
   const onSubmit = (val: string) => {
     if (!val) return;
-
     onRequest({
       messages: [{ role: 'user', content: val }],
     });
@@ -710,13 +725,14 @@ const Independent: React.FC = () => {
             key: i.id,
             status: i.status,
             loading: i.status === 'loading',
+            extra: i.extra,
           }))}
           styles={{
             bubble: {
               width: 700,
             },
           }}
-          role={getRole(className, onReload)}
+          role={getRole(className)}
         />
       ) : (
         <Space orientation="vertical" size={16} align="center" className={styles.placeholder}>
@@ -803,16 +819,18 @@ const Independent: React.FC = () => {
   const chatSender = (
     <Flex vertical gap={12}>
       {/* 🌟 提示词 */}
-      <Prompts
-        items={SENDER_PROMPTS}
-        onItemClick={(info) => {
-          onSubmit(info.data.description as string);
-        }}
-        styles={{
-          item: { padding: '6px 12px' },
-        }}
-        className={styles.senderPrompt}
-      />
+      {!attachmentsOpen && (
+        <Prompts
+          items={SENDER_PROMPTS}
+          onItemClick={(info) => {
+            onSubmit(info.data.description as string);
+          }}
+          styles={{
+            item: { padding: '6px 12px' },
+          }}
+          className={styles.senderPrompt}
+        />
+      )}
       {/* 🌟 输入框 */}
       <Sender
         value={inputValue}
@@ -844,14 +862,16 @@ const Independent: React.FC = () => {
 
   return (
     <XProvider locale={locale}>
-      {contextHolder}
-      <div className={styles.layout}>
-        {chatSide}
-        <div className={styles.chat}>
-          {chatList}
-          {chatSender}
+      <ChatContext.Provider value={{ onReload, setMessage }}>
+        {contextHolder}
+        <div className={styles.layout}>
+          {chatSide}
+          <div className={styles.chat}>
+            {chatList}
+            {chatSender}
+          </div>
         </div>
-      </div>
+      </ChatContext.Provider>
     </XProvider>
   );
 };

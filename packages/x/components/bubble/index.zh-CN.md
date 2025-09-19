@@ -29,11 +29,12 @@ demo:
 <code src="./demo/stream.tsx">流式传输</code>
 <code src="./demo/custom-content.tsx">自定义渲染内容</code>
 <code src="./demo/markdown.tsx">渲染markdown内容</code>
-<code src="./demo/editable.tsx">可编辑气泡</code>
-<code src="./demo/list.tsx">气泡列表</code>
-<code src="./demo/list-ref.tsx">气泡列表 Ref</code>
-<code src="./demo/semantic-list-custom.tsx">语义化自定义</code>
 <code src="./demo/gpt-vis.tsx">使用 GPT-Vis 渲染图表</code>
+<code src="./demo/editable.tsx">可编辑气泡</code>
+
+## 列表演示
+
+<code src="./demo/list.tsx">气泡列表</code> <code src="./demo/list-ref.tsx">气泡列表 Ref</code> <code src="./demo/semantic-list-custom.tsx">语义化自定义</code> <code src="./demo/list-extra.tsx">列表扩展参数</code>
 
 ## API
 
@@ -89,7 +90,7 @@ demo:
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| items | 气泡数据列表，`key`，`role` 必填 ，当结合X SDK `useXChat`使用时可传入`status` 帮助 Bubble 对配置进行管理 | (BubbleProps & { key: string \| number, role: string , status: MessageStatus})[] | - | - |
+| items | 气泡数据列表，`key`，`role` 必填 ，当结合X SDK [`useXChat`](/sdks/use-x-chat-cn) 使用时可传入`status` 帮助 Bubble 对配置进行管理 | (BubbleProps & { key: string \| number, role: string , status: MessageStatus, extra?: AnyObject})[] | - | - |
 | autoScroll | 是否自动滚动 | boolean | `true` | - |
 | role | 角色默认配置 | [RoleType](#roletype) | - | - |
 
@@ -127,9 +128,13 @@ type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error' | 'a
 
 #### InfoType
 
+配合 [`useXChat`](/sdks/use-x-chat-cn) 使用 ，`key` 可做为 `MessageId`，`extra` 可作为自定义参数。
+
 ```typescript
 type InfoType = {
-  status: MessageStatus;
+  status?: MessageStatus;
+  key?: string | number;
+  extra?: AnyObject;
 };
 ```
 

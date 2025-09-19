@@ -98,11 +98,11 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
     data: true,
   });
 
-  const info = { key: context?.key, status: context?.status };
+  const info = { key: context?.key, status: context?.status, extra: context?.extra };
   // ============================= process content ==============================
   const memoedContent = React.useMemo(
     () => (contentRender ? contentRender(content, info) : content),
-    [content, contentRender, info.key, info.status],
+    [content, contentRender, info.key, info.status, info.extra],
   );
 
   const mergeTyping = typeof typing === 'function' ? typing(content, info) : typing;

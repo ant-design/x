@@ -11,7 +11,6 @@ import {
   BubbleListRef,
   BubbleRef,
   FuncRoleProps,
-  MessageStatus,
   RoleProps,
 } from './interface';
 import useBubbleListStyle from './style';
@@ -31,10 +30,9 @@ const BubbleListItem: React.FC<
     bubblesRef: React.RefObject<BubblesRecord>;
     // BubbleItemType.key 会在 BubbleList 内渲染时被吞掉，使得 BubbleListItem.props 无法获取到 key
     _key: string | number;
-    status?: `${MessageStatus}`;
   }
 > = (props) => {
-  const { _key, bubblesRef, status, ...restProps } = props;
+  const { _key, bubblesRef, extra, status, ...restProps } = props;
 
   const initBubbleRef = React.useCallback(
     (node: BubbleRef) => {
@@ -48,7 +46,7 @@ const BubbleListItem: React.FC<
   );
 
   return (
-    <BubbleContext.Provider value={{ key: _key, status }}>
+    <BubbleContext.Provider value={{ key: _key, status, extra }}>
       <MemoedBubble ref={initBubbleRef} {...omit(restProps, ['role'])} />
     </BubbleContext.Provider>
   );

@@ -63,7 +63,7 @@ const { onRequest, messages, isRequesting } = useXChat({
 
 <code src="./demos/x-chat/deepSeek.tsx">DeepSeekChatProvider</code>
 
-### 自定义Request
+## 自定义Request
 
 当使用一些sdk（例如：`openai-node`,`@openrouter/ai-sdk-provider`）请求模型或者智能体时需要使用内置的Provider处理数据，需要自定义Request，可参考。
 

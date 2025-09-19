@@ -67,10 +67,11 @@ export class ChatMessagesStore<T extends { id: number | string }> {
     return false;
   };
 
-  setMessage = (id: string, message: Partial<T>) => {
-    const exist = this.getMessage(id);
-    if (exist) {
-      Object.assign(exist, message);
+  setMessage = (id: string | number, message: Partial<T> | ((message: T) => Partial<T>)) => {
+    const originMessage = this.getMessage(id);
+    if (originMessage) {
+      const mergeMessage = typeof message === 'function' ? message(originMessage) : message;
+      Object.assign(originMessage, mergeMessage);
       this.setMessages([...this.messages]);
       return true;
     }

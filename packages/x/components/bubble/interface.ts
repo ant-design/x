@@ -67,6 +67,7 @@ export enum MessageStatus {
 export type Info = {
   status?: `${MessageStatus}`;
   key?: string | number;
+  extra?: AnyObject;
 };
 export interface BubbleProps<ContentType extends BubbleContentType = string>
   extends Omit<
@@ -173,6 +174,7 @@ export type BubbleItemType = BubbleProps<any> & {
    */
   role?: RemainRole | AnyStr;
   status?: `${MessageStatus}`;
+  extra?: AnyObject;
 };
 
 export type RoleProps = Pick<
