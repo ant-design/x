@@ -174,6 +174,7 @@ export type BubbleItemType = BubbleProps<any> & {
    */
   role?: RemainRole | AnyStr;
   status?: `${MessageStatus}`;
+  extra?: AnyObject;
 };
 
 export type RoleProps = Pick<

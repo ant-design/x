@@ -14,7 +14,7 @@ const genSenderHeaderStyle: GenerateStyle<SenderToken> = (token) => {
       [headerCls]: {
         borderBottomWidth: token.lineWidth,
         borderBottomStyle: 'solid',
-        borderBottomColor: token.colorBorder,
+        borderBottomColor: token.colorBorderInput,
 
         // ======================== Header ========================
         '&-header': {

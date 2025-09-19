@@ -53,6 +53,7 @@ export interface MessageInfo<Message extends SimpleType> {
   id: number | string;
   message: Message;
   status: MessageStatus;
+  extra?: AnyObject;
 }
 
 export type DefaultMessageInfo<Message extends SimpleType> = Pick<MessageInfo<Message>, 'message'> &
@@ -105,11 +106,12 @@ export default function useXChat<
     conversationKey,
   );
 
-  const createMessage = (message: ChatMessage, status: MessageStatus) => {
+  const createMessage = (message: ChatMessage, status: MessageStatus, extra?: AnyObject) => {
     const msg: MessageInfo<ChatMessage> = {
       id: `msg_${idRef.current}`,
       message,
       status,
+      extra: extra || {},
     };
 
     idRef.current += 1;
@@ -156,8 +158,9 @@ export default function useXChat<
   const innerOnRequest = (
     requestParams: Partial<Input>,
     opts?: {
-      updatingId: number | string;
-      reload: boolean;
+      updatingId?: number | string;
+      reload?: boolean;
+      extra?: AnyObject;
     },
   ) => {
     if (!provider) {
@@ -184,6 +187,9 @@ export default function useXChat<
             if (info.id === updatingId) {
               info.status = 'loading';
               info.message = placeholderMsg;
+              if (opts?.extra) {
+                info.extra = opts?.extra;
+              }
             }
           });
         }
@@ -192,7 +198,7 @@ export default function useXChat<
     } else {
       // Add placeholder message
       setMessages((ori: MessageInfo<ChatMessage>[]) => {
-        let nextMessages = [...ori, createMessage(message, 'local')];
+        let nextMessages = [...ori, createMessage(message, 'local', opts?.extra)];
         if (requestPlaceholder) {
           let placeholderMsg: ChatMessage;
           if (typeof requestPlaceholder === 'function') {
@@ -331,14 +337,18 @@ export default function useXChat<
     provider.request.run(provider.transformParams(requestParams, provider.request.options));
   };
 
-  const onRequest = useEvent((requestParams: Partial<Input>) => {
+  const onRequest = useEvent((requestParams: Partial<Input>, opts: { extra: AnyObject }) => {
     if (!provider) {
       throw new Error('provider is required');
     }
-    innerOnRequest(requestParams);
+    innerOnRequest(requestParams, opts);
   });
 
-  const onReload = (id: string | number, requestParams: Partial<Input>) => {
+  const onReload = (
+    id: string | number,
+    requestParams: Partial<Input>,
+    opts?: { extra: AnyObject },
+  ) => {
     if (!provider) {
       throw new Error('provider is required');
     }
@@ -348,6 +358,7 @@ export default function useXChat<
     innerOnRequest(requestParams, {
       updatingId: id,
       reload: true,
+      extra: opts.extra,
     });
   };
 

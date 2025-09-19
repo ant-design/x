@@ -29,11 +29,12 @@ demo:
 <code src="./demo/stream.tsx">流式传输</code>
 <code src="./demo/custom-content.tsx">自定义渲染内容</code>
 <code src="./demo/markdown.tsx">渲染markdown内容</code>
-<code src="./demo/editable.tsx">可编辑气泡</code>
-<code src="./demo/list.tsx">气泡列表</code>
-<code src="./demo/list-ref.tsx">气泡列表 Ref</code>
-<code src="./demo/semantic-list-custom.tsx">语义化自定义</code>
 <code src="./demo/gpt-vis.tsx">使用 GPT-Vis 渲染图表</code>
+<code src="./demo/editable.tsx">可编辑气泡</code>
+
+## 列表演示
+
+<code src="./demo/list.tsx">气泡列表</code> <code src="./demo/list-ref.tsx">气泡列表 Ref</code> <code src="./demo/semantic-list-custom.tsx">语义化自定义</code> <code src="./demo/list-extra.tsx">列表扩展参数</code>
 
 ## API
 
@@ -133,7 +134,7 @@ type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error' | 'a
 type InfoType = {
   status?: MessageStatus;
   key?: string | number;
-  extra? AnyObject;
+  extra?: AnyObject;
 };
 ```
 

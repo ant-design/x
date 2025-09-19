@@ -209,7 +209,7 @@ const useStyle = createStyles(({ token, css }) => {
       display: flex;
       flex-direction: column;
       padding-block: ${token.paddingLG}px;
-      gap: 16px;
+      justify-content:space-between;
       .ant-bubble-content-updating {
         background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
         background-size: 100% 2px;
@@ -421,9 +421,9 @@ interface ChatMessage extends XModelMessage {
 
 // ==================== Context ====================
 const ChatContext = React.createContext<{
-  onReload?: (key: string | number, info: any) => any;
+  onReload?: (key: string | number, info?: any) => any;
   setMessage?: (
-    id: string,
+    id: string | number,
     message:
       | Partial<MessageInfo<XModelMessage>>
       | ((message: MessageInfo<XModelMessage>) => Partial<MessageInfo<XModelMessage>>),
@@ -501,12 +501,9 @@ const Footer: React.FC<{
           key="feedback"
           onChange={(val) => {
             if (id) {
-              context?.setMessage?.(id, (originMsg) => ({
-                message: {
-                  ...originMsg.message,
-                  extra: {
-                    feedback: val,
-                  },
+              context?.setMessage?.(id, () => ({
+                extra: {
+                  feedback: val,
                 },
               }));
               message.success(`${id}: ${val}`);
@@ -638,11 +635,19 @@ const Independent: React.FC = () => {
   // ==================== Event ====================
   const onSubmit = (val: string) => {
     if (!val) return;
-    onRequest({
-      messages: [{ role: 'user', content: val }],
-    });
+    onRequest(
+      {
+        messages: [{ role: 'user', content: val }],
+      },
+      {
+        extra: {
+          nihao: 'nihao1',
+        },
+      },
+    );
   };
 
+  console.log(messages, 'messages');
   // ==================== Nodes ====================
   const chatSide = (
     <div className={styles.side}>
@@ -727,7 +732,7 @@ const Independent: React.FC = () => {
             key: i.id,
             status: i.status,
             loading: i.status === 'loading',
-            extra: i.message.extra,
+            extra: i.extra,
           }))}
           styles={{
             bubble: {
@@ -821,16 +826,18 @@ const Independent: React.FC = () => {
   const chatSender = (
     <Flex vertical gap={12}>
       {/* 🌟 提示词 */}
-      <Prompts
-        items={SENDER_PROMPTS}
-        onItemClick={(info) => {
-          onSubmit(info.data.description as string);
-        }}
-        styles={{
-          item: { padding: '6px 12px' },
-        }}
-        className={styles.senderPrompt}
-      />
+      {!attachmentsOpen && (
+        <Prompts
+          items={SENDER_PROMPTS}
+          onItemClick={(info) => {
+            onSubmit(info.data.description as string);
+          }}
+          styles={{
+            item: { padding: '6px 12px' },
+          }}
+          className={styles.senderPrompt}
+        />
+      )}
       {/* 🌟 输入框 */}
       <Sender
         value={inputValue}

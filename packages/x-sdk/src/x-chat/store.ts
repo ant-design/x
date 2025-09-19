@@ -67,7 +67,7 @@ export class ChatMessagesStore<T extends { id: number | string }> {
     return false;
   };
 
-  setMessage = (id: string, message: Partial<T> | ((message: T) => Partial<T>)) => {
+  setMessage = (id: string | number, message: Partial<T> | ((message: T) => Partial<T>)) => {
     const originMessage = this.getMessage(id);
     if (originMessage) {
       const mergeMessage = typeof message === 'function' ? message(originMessage) : message;

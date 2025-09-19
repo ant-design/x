@@ -29,10 +29,11 @@ Often used in chat scenarios.
 <code src="./demo/custom-content.tsx">Custom Rendered Content</code>
 <code src="./demo/markdown.tsx">Render Markdown Content</code>
 <code src="./demo/editable.tsx">Editable Bubble</code>
-<code src="./demo/list.tsx">Bubble List</code>
-<code src="./demo/list-ref.tsx">Bubble List Ref</code>
-<code src="./demo/semantic-list-custom.tsx">Semantic Customization</code>
 <code src="./demo/gpt-vis.tsx">Render Charts Using GPT-Vis</code>
+
+## Bubble.List Examples
+
+<code src="./demo/list.tsx">Bubble List</code> <code src="./demo/list-ref.tsx">Bubble List Ref</code> <code src="./demo/semantic-list-custom.tsx">Semantic Customization</code> <code src="./demo/list-extra.tsx">List extra</code>
 
 ## API
 
@@ -132,7 +133,7 @@ When used in conjunction with [`useXChat`](/sdks/use-x-chat), `key` can be used 
 type InfoType = {
   status?: MessageStatus;
   key?: string | number;
-  extra? AnyObject;
+  extra?: AnyObject;
 };
 ```
 
