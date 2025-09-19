@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Conversations Component Conversations component work 1`] = `
 <ul
@@ -109,26 +109,28 @@ exports[`Conversations Component rtl render component should be rendered correct
         >
           What is Ant Design X ?
         </span>
-        <span
-          aria-label="ellipsis"
-          class="anticon anticon-ellipsis ant-dropdown-trigger ant-dropdown-rtl ant-conversations-menu-icon"
-          role="img"
-          tabindex="-1"
-        >
-          <svg
-            aria-hidden="true"
-            data-icon="ellipsis"
-            fill="currentColor"
-            focusable="false"
-            height="1em"
-            viewBox="64 64 896 896"
-            width="1em"
+        <div>
+          <span
+            aria-label="ellipsis"
+            class="anticon anticon-ellipsis ant-dropdown-trigger ant-dropdown-rtl ant-conversations-menu-icon"
+            role="img"
+            tabindex="-1"
           >
-            <path
-              d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
-            />
-          </svg>
-        </span>
+            <svg
+              aria-hidden="true"
+              data-icon="ellipsis"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+              />
+            </svg>
+          </span>
+        </div>
       </li>
     </ul>
   </li>
@@ -156,26 +158,28 @@ exports[`Conversations Component rtl render component should be rendered correct
             </a>
           </div>
         </span>
-        <span
-          aria-label="ellipsis"
-          class="anticon anticon-ellipsis ant-dropdown-trigger ant-dropdown-rtl ant-conversations-menu-icon"
-          role="img"
-          tabindex="-1"
-        >
-          <svg
-            aria-hidden="true"
-            data-icon="ellipsis"
-            fill="currentColor"
-            focusable="false"
-            height="1em"
-            viewBox="64 64 896 896"
-            width="1em"
+        <div>
+          <span
+            aria-label="ellipsis"
+            class="anticon anticon-ellipsis ant-dropdown-trigger ant-dropdown-rtl ant-conversations-menu-icon"
+            role="img"
+            tabindex="-1"
           >
-            <path
-              d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
-            />
-          </svg>
-        </span>
+            <svg
+              aria-hidden="true"
+              data-icon="ellipsis"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+              />
+            </svg>
+          </span>
+        </div>
       </li>
       <li
         class="ant-conversations-item"
@@ -186,26 +190,28 @@ exports[`Conversations Component rtl render component should be rendered correct
         >
           In Docker, use 🐑 Ollama and initialize
         </span>
-        <span
-          aria-label="ellipsis"
-          class="anticon anticon-ellipsis ant-dropdown-trigger ant-dropdown-rtl ant-conversations-menu-icon"
-          role="img"
-          tabindex="-1"
-        >
-          <svg
-            aria-hidden="true"
-            data-icon="ellipsis"
-            fill="currentColor"
-            focusable="false"
-            height="1em"
-            viewBox="64 64 896 896"
-            width="1em"
+        <div>
+          <span
+            aria-label="ellipsis"
+            class="anticon anticon-ellipsis ant-dropdown-trigger ant-dropdown-rtl ant-conversations-menu-icon"
+            role="img"
+            tabindex="-1"
           >
-            <path
-              d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
-            />
-          </svg>
-        </span>
+            <svg
+              aria-hidden="true"
+              data-icon="ellipsis"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+              />
+            </svg>
+          </span>
+        </div>
       </li>
       <li
         class="ant-conversations-item ant-conversations-item-disabled"

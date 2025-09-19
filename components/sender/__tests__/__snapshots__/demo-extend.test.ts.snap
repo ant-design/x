@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`renders components/sender/demo/actions.tsx extend context correctly 1`] = `
 <div
@@ -223,55 +223,59 @@ exports[`renders components/sender/demo/basic.tsx extend context correctly 1`] =
             class="ant-sender-actions-list-presets ant-flex"
           >
             <button
-              class="ant-btn ant-btn-circle ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-sender-actions-btn ant-sender-actions-btn-loading-button"
+              class="ant-btn ant-btn-circle ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-loading-button"
               type="button"
             >
-              <svg
-                class="ant-sender-actions-btn-loading-icon"
-                color="currentColor"
-                viewBox="0 0 1000 1000"
-                xmlns="http://www.w3.org/2000/svg"
+              <span
+                class="ant-btn-icon"
               >
-                <title>
-                  Stop Loading
-                </title>
-                <rect
-                  fill="currentColor"
-                  height="250"
-                  rx="24"
-                  ry="24"
-                  width="250"
-                  x="375"
-                  y="375"
-                />
-                <circle
-                  cx="500"
-                  cy="500"
-                  fill="none"
-                  opacity="0.45"
-                  r="450"
-                  stroke="currentColor"
-                  stroke-width="100"
-                />
-                <circle
-                  cx="500"
-                  cy="500"
-                  fill="none"
-                  r="450"
-                  stroke="currentColor"
-                  stroke-dasharray="600 9999999"
-                  stroke-width="100"
+                <svg
+                  class="ant-sender-actions-btn-loading-icon"
+                  color="currentColor"
+                  viewBox="0 0 1000 1000"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <animatetransform
-                    attributeName="transform"
-                    dur="1s"
-                    from="0 500 500"
-                    repeatCount="indefinite"
-                    to="360 500 500"
-                    type="rotate"
+                  <title>
+                    Stop Loading
+                  </title>
+                  <rect
+                    fill="currentColor"
+                    height="250"
+                    rx="24"
+                    ry="24"
+                    width="250"
+                    x="375"
+                    y="375"
                   />
-                </circle>
-              </svg>
+                  <circle
+                    cx="500"
+                    cy="500"
+                    fill="none"
+                    opacity="0.45"
+                    r="450"
+                    stroke="currentColor"
+                    stroke-width="100"
+                  />
+                  <circle
+                    cx="500"
+                    cy="500"
+                    fill="none"
+                    r="450"
+                    stroke="currentColor"
+                    stroke-dasharray="600 9999999"
+                    stroke-width="100"
+                  >
+                    <animatetransform
+                      attributeName="transform"
+                      dur="1s"
+                      from="0 500 500"
+                      repeatCount="indefinite"
+                      to="360 500 500"
+                      type="rotate"
+                    />
+                  </circle>
+                </svg>
+              </span>
             </button>
           </div>
         </div>

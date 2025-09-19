@@ -16,6 +16,38 @@ tag: vVERSION
 
 ---
 
+## 1.6.1
+
+`2025-09-12`
+
+- 🐛 Fixed ThoughtChain component `title` could not display the collapsed title when passing `ReactNode`. [#1172](https://github.com/ant-design/x/pull/1172) by [@IsDyh01](https://github.com/IsDyh01).
+- 🐛 Fixed Sender component `LoadingButton` would display two icons when the `icon ` property is passed. [#1145](https://github.com/ant-design/x/pull/1145) by [@IsDyh01](https://github.com/IsDyh01).
+- 🐛 Fixed semantic loss in Sender component `content`. [#703](https://github.com/ant-design/x/pull/703) by [@HomyeeKing](https://github.com/HomyeeKing).
+- 🐛 Removed redundant condition checks in Bubble component typing effect prefix logic. [#1091](https://github.com/ant-design/x/pull/1091) by [@AqingCyan](https://github.com/AqingCyan).
+- 🐛 Fixed missing `updating` status in useXChat. [#833](https://github.com/ant-design/x/pull/833) by [@wzc520pyfm](https://github.com/wzc520pyfm).
+- 🐛 Fixed the exception in Suggestion component when items is an empty array in `useActive`. [#824](https://github.com/ant-design/x/pull/824) by [@LengYXin](https://github.com/LengYXin).
+- 📖 Improved the official site for better user experience. [#960](https://github.com/ant-design/x/pull/960) by [@wzc520pyfm](https://github.com/wzc520pyfm), [#1048](https://github.com/ant-design/x/pull/1048) by [@wzc520pyfm](https://github.com/wzc520pyfm), [#1118](https://github.com/ant-design/x/pull/1118) by [@afc163](https://github.com/afc163), [#1122](https://github.com/ant-design/x/pull/1122) by [@fireairforce](https://github.com/fireairforce), [#1120](https://github.com/ant-design/x/pull/1120) by [@IsDyh01](https://github.com/IsDyh01).
+
+## 1.6.0
+
+`2025-07-30`
+
+- 🆕 Attachments component `FileCard` adds icon and type configuration. [#1006](https://github.com/ant-design/x/pull/1006) by [@kieranwv](https://github.com/kieranwv).
+- 📖 Added documentation and demo for Toolbox Agent integration. [#1063](https://github.com/ant-design/x/pull/1063) by [iamkun-2](https://github.com/iamkun-2).
+- 📖 Improved official site for better user experience. [#1054](https://github.com/ant-design/x/pull/1054) by [@hylin](https://github.com/hylin), [#1056](https://github.com/hylin).
+
+## 1.5.0
+
+`2025-07-16`
+
+- 🆕 Added Bubble component support for `onScroll` event listener. [#1021](https://github.com/ant-design/x/pull/1021) by [@QdabuliuQ](https://github.com/QdabuliuQ).
+- 🐛 Removed duplicate TypeScript type declaration in Bubble component. [#1032](https://github.com/ant-design/x/pull/1032) by [@wzc520pyfm](https://github.com/wzc520pyfm).
+- 🐛 Fixed Conversations `onActiveChange` being triggered when a disabled `menu` item is clicked. [#1024](https://github.com/ant-design/x/pull/1024) by [@QdabuliuQ](https://github.com/QdabuliuQ).
+- 🐛 Fixed semantic configuration for Attachments component `FileList`. [#1017](https://github.com/ant-design/x/pull/1017) by [@kimteayon](https://github.com/kimteayon).
+- 🐛 Added html configuration for Actions component. [#995](https://github.com/ant-design/x/pull/995) by [@vanndxh](https://github.com/vanndxh).
+- 🐛 Fixed Conversations label display issue and improved semantic configuration. [#898](https://github.com/ant-design/x/pull/898) by [@yuanliu147](https://github.com/yuanliu147).
+- 📖 Improved official site for better user experience. [#940](https://github.com/ant-design/x/pull/940) by [@coding-ice](https://github.com/coding-ice), [#969](https://github.com/ant-design/x/pull/969) by [@afc163](https://github.com/afc163), [#968](https://github.com/ant-design/x/pull/968) by [@afc163](https://github.com/afc163), [#1019](https://github.com/ant-design/x/pull/1019) by [hylin](https://github.com/hylin),[#1036](https://github.com/ant-design/x/pull/1036) by [@kimteayon](https://github.com/kimteayon).
+
 ## 1.4.0
 
 `2025-05-30`
@@ -23,7 +55,7 @@ tag: vVERSION
 - 🔥 New Component Actions.[#768](https://github.com/ant-design/x/pull/768) by [vanndxh](https://github.com/vanndxh)
 - 🐛 Fix the issue where Bubble.List `footer` and `header` cannot retrieve keys.[#876](https://github.com/ant-design/x/pull/876) by [kimteayon](https://github.com/kimteayon)
 - 🐛 Fix the issue of overflow and ellipsis of Conversations list titles.[#877](https://github.com/ant-design/x/pull/877) by [kimteayon](https://github.com/kimteayon)
-- 📖 Enhance the official website to improve user experience.[#816](https://github.com/ant-design/x/pull/816) by [@Rain120](https://github.com/Rain120) 提交、[#880](https://github.com/ant-design/x/pull/880) by [@kimteayon](https://github.com/kimteayon)
+- 📖 Enhance the official website to improve user experience.[#816](https://github.com/ant-design/x/pull/816) by [@Rain120](https://github.com/Rain120)、[#880](https://github.com/ant-design/x/pull/880) by [@kimteayon](https://github.com/kimteayon)
 
 ## 1.3.0
 

@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`renders components/conversations/demo/basic.tsx correctly 1`] = `
 <ul
@@ -433,29 +433,31 @@ exports[`renders components/conversations/demo/menu-trigger.tsx correctly 1`] = 
     >
       Conversation Item 1
     </span>
-    <span
-      aria-label="plus-square"
-      class="anticon anticon-plus-square ant-dropdown-trigger"
-      role="img"
-      tabindex="-1"
-    >
-      <svg
-        aria-hidden="true"
-        data-icon="plus-square"
-        fill="currentColor"
-        focusable="false"
-        height="1em"
-        viewBox="64 64 896 896"
-        width="1em"
+    <div>
+      <span
+        aria-label="plus-square"
+        class="anticon anticon-plus-square ant-dropdown-trigger"
+        role="img"
+        tabindex="-1"
       >
-        <path
-          d="M328 544h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8z"
-        />
-        <path
-          d="M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 728H184V184h656v656z"
-        />
-      </svg>
-    </span>
+        <svg
+          aria-hidden="true"
+          data-icon="plus-square"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M328 544h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8z"
+          />
+          <path
+            d="M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 728H184V184h656v656z"
+          />
+        </svg>
+      </span>
+    </div>
   </li>
   <li
     class="ant-conversations-item"
@@ -466,29 +468,31 @@ exports[`renders components/conversations/demo/menu-trigger.tsx correctly 1`] = 
     >
       Conversation Item 2
     </span>
-    <span
-      aria-label="plus-square"
-      class="anticon anticon-plus-square ant-dropdown-trigger"
-      role="img"
-      tabindex="-1"
-    >
-      <svg
-        aria-hidden="true"
-        data-icon="plus-square"
-        fill="currentColor"
-        focusable="false"
-        height="1em"
-        viewBox="64 64 896 896"
-        width="1em"
+    <div>
+      <span
+        aria-label="plus-square"
+        class="anticon anticon-plus-square ant-dropdown-trigger"
+        role="img"
+        tabindex="-1"
       >
-        <path
-          d="M328 544h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8z"
-        />
-        <path
-          d="M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 728H184V184h656v656z"
-        />
-      </svg>
-    </span>
+        <svg
+          aria-hidden="true"
+          data-icon="plus-square"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M328 544h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8z"
+          />
+          <path
+            d="M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 728H184V184h656v656z"
+          />
+        </svg>
+      </span>
+    </div>
   </li>
   <li
     class="ant-conversations-item"
@@ -499,29 +503,31 @@ exports[`renders components/conversations/demo/menu-trigger.tsx correctly 1`] = 
     >
       Conversation Item 3
     </span>
-    <span
-      aria-label="plus-square"
-      class="anticon anticon-plus-square ant-dropdown-trigger"
-      role="img"
-      tabindex="-1"
-    >
-      <svg
-        aria-hidden="true"
-        data-icon="plus-square"
-        fill="currentColor"
-        focusable="false"
-        height="1em"
-        viewBox="64 64 896 896"
-        width="1em"
+    <div>
+      <span
+        aria-label="plus-square"
+        class="anticon anticon-plus-square ant-dropdown-trigger"
+        role="img"
+        tabindex="-1"
       >
-        <path
-          d="M328 544h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8z"
-        />
-        <path
-          d="M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 728H184V184h656v656z"
-        />
-      </svg>
-    </span>
+        <svg
+          aria-hidden="true"
+          data-icon="plus-square"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M328 544h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8z"
+          />
+          <path
+            d="M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 728H184V184h656v656z"
+          />
+        </svg>
+      </span>
+    </div>
   </li>
   <li
     class="ant-conversations-item ant-conversations-item-disabled"
@@ -553,26 +559,28 @@ exports[`renders components/conversations/demo/with-menu.tsx correctly 1`] = `
       >
         Conversation Item 1
       </span>
-      <span
-        aria-label="ellipsis"
-        class="anticon anticon-ellipsis ant-dropdown-trigger ant-conversations-menu-icon"
-        role="img"
-        tabindex="-1"
-      >
-        <svg
-          aria-hidden="true"
-          data-icon="ellipsis"
-          fill="currentColor"
-          focusable="false"
-          height="1em"
-          viewBox="64 64 896 896"
-          width="1em"
+      <div>
+        <span
+          aria-label="ellipsis"
+          class="anticon anticon-ellipsis ant-dropdown-trigger ant-conversations-menu-icon"
+          role="img"
+          tabindex="-1"
         >
-          <path
-            d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
-          />
-        </svg>
-      </span>
+          <svg
+            aria-hidden="true"
+            data-icon="ellipsis"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+            />
+          </svg>
+        </span>
+      </div>
     </li>
     <li
       class="ant-conversations-item"
@@ -583,26 +591,28 @@ exports[`renders components/conversations/demo/with-menu.tsx correctly 1`] = `
       >
         Conversation Item 2
       </span>
-      <span
-        aria-label="ellipsis"
-        class="anticon anticon-ellipsis ant-dropdown-trigger ant-conversations-menu-icon"
-        role="img"
-        tabindex="-1"
-      >
-        <svg
-          aria-hidden="true"
-          data-icon="ellipsis"
-          fill="currentColor"
-          focusable="false"
-          height="1em"
-          viewBox="64 64 896 896"
-          width="1em"
+      <div>
+        <span
+          aria-label="ellipsis"
+          class="anticon anticon-ellipsis ant-dropdown-trigger ant-conversations-menu-icon"
+          role="img"
+          tabindex="-1"
         >
-          <path
-            d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
-          />
-        </svg>
-      </span>
+          <svg
+            aria-hidden="true"
+            data-icon="ellipsis"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+            />
+          </svg>
+        </span>
+      </div>
     </li>
     <li
       class="ant-conversations-item"
@@ -613,26 +623,28 @@ exports[`renders components/conversations/demo/with-menu.tsx correctly 1`] = `
       >
         Conversation Item 3
       </span>
-      <span
-        aria-label="ellipsis"
-        class="anticon anticon-ellipsis ant-dropdown-trigger ant-conversations-menu-icon"
-        role="img"
-        tabindex="-1"
-      >
-        <svg
-          aria-hidden="true"
-          data-icon="ellipsis"
-          fill="currentColor"
-          focusable="false"
-          height="1em"
-          viewBox="64 64 896 896"
-          width="1em"
+      <div>
+        <span
+          aria-label="ellipsis"
+          class="anticon anticon-ellipsis ant-dropdown-trigger ant-conversations-menu-icon"
+          role="img"
+          tabindex="-1"
         >
-          <path
-            d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
-          />
-        </svg>
-      </span>
+          <svg
+            aria-hidden="true"
+            data-icon="ellipsis"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+            />
+          </svg>
+        </span>
+      </div>
     </li>
     <li
       class="ant-conversations-item ant-conversations-item-disabled"

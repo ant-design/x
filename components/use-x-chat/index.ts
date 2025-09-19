@@ -8,7 +8,7 @@ import useSyncState from './useSyncState';
 
 export type SimpleType = string | number | boolean | object;
 
-export type MessageStatus = 'local' | 'loading' | 'success' | 'error';
+export type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error';
 
 type RequestPlaceholderFn<Message extends SimpleType> = (
   message: Message,
@@ -189,8 +189,8 @@ export default function useXChat<
     // Add placeholder message
     setMessages((ori) => {
       let nextMessages = [...ori, createMessage(message, 'local')];
+      let placeholderMsg = '' as AgentMessage;
       if (requestPlaceholder) {
-        let placeholderMsg: AgentMessage;
         if (typeof requestPlaceholder === 'function') {
           // typescript has bug that not get real return type when use `typeof function` check
           placeholderMsg = (requestPlaceholder as RequestPlaceholderFn<AgentMessage>)(message, {
@@ -199,11 +199,11 @@ export default function useXChat<
         } else {
           placeholderMsg = requestPlaceholder;
         }
-        const loadingMsg = createMessage(placeholderMsg, 'loading');
-        loadingMsgId = loadingMsg.id;
-
-        nextMessages = [...nextMessages, loadingMsg];
       }
+      const loadingMsg = createMessage(placeholderMsg, 'loading');
+      loadingMsgId = loadingMsg.id;
+
+      nextMessages = [...nextMessages, loadingMsg];
 
       return nextMessages;
     });
@@ -253,7 +253,7 @@ export default function useXChat<
       } as Input,
       {
         onUpdate: (chunk) => {
-          updateMessage('loading', chunk, []);
+          updateMessage('updating', chunk, []);
         },
         onSuccess: (chunks) => {
           updateMessage('success', undefined as Output, chunks);

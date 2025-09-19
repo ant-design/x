@@ -7,6 +7,20 @@ function isString(str: any): str is string {
 }
 
 /**
+ * Find the longest common prefix between two strings
+ */
+function findCommonPrefix(str1: string, str2: string): number {
+  let i = 0;
+  const minLength = Math.min(str1.length, str2.length);
+
+  while (i < minLength && str1[i] === str2[i]) {
+    i++;
+  }
+
+  return i;
+}
+
+/**
  * Return typed content and typing status when typing is enabled.
  * Or return content directly.
  */
@@ -31,7 +45,24 @@ const useTypedEffect = (
       isString(prevContentRef.current) &&
       content.indexOf(prevContentRef.current) !== 0
     ) {
-      setTypingIndex(1);
+      // Handle empty strings
+      if (!content || !prevContentRef.current) {
+        setTypingIndex(1);
+        return;
+      }
+
+      // Find the longest common prefix between new and old content
+      const commonPrefixLength = findCommonPrefix(content, prevContentRef.current);
+
+      // If there's no common prefix, start from beginning
+      // If there's a common prefix, start from the point where they differ
+      if (commonPrefixLength === 0) {
+        // Scenario 1: No common prefix, start from the beginning (AI completely changes the thinking process of the answer).
+        setTypingIndex(1);
+      } else {
+        // Scenario 2: There is a common prefix, start from the point where they differ (common streaming output scenario)
+        setTypingIndex(commonPrefixLength + 1);
+      }
     }
     prevContentRef.current = content;
   }, [content]);

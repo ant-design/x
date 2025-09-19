@@ -2,8 +2,8 @@ import React from 'react';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
 import { fireEvent, render } from '../../../tests/utils';
-import Conversations from '../index';
 import type { Conversation } from '../index';
+import Conversations from '../index';
 
 const items: Conversation[] = [
   {
@@ -49,6 +49,11 @@ const menu = jest.fn().mockReturnValue({
       label: '删除',
       key: 'delete',
       danger: true,
+    },
+    {
+      label: '禁用',
+      key: 'disabled',
+      disabled: true,
     },
   ],
 });
@@ -162,5 +167,23 @@ describe('Conversations Component', () => {
   it('should not group items when groupable is false', () => {
     const { queryByText } = render(<Conversations items={items} groupable={false} />);
     expect(queryByText('pinned')).not.toBeInTheDocument();
+  });
+
+  it('should not trigger onActiveChange when disabled menu item is clicked', () => {
+    const onActiveChange = jest.fn();
+    const { container } = render(
+      <Conversations items={items} menu={menu} onActiveChange={onActiveChange} />,
+    );
+    const menuItem = container.querySelector('.ant-conversations-item') as HTMLElement;
+    const menuIcon = menuItem.querySelector('.ant-conversations-menu-icon') as HTMLElement;
+    fireEvent.click(menuIcon);
+    const dropdownMenu = document.querySelector('.ant-dropdown');
+    const menuItems = dropdownMenu ? dropdownMenu.querySelectorAll('.ant-dropdown-menu-item') : [];
+    // click not disabled menu item
+    fireEvent.click(menuItems[0] as HTMLElement);
+    expect(onActiveChange).not.toHaveBeenCalled();
+    // click disabled menu item
+    fireEvent.click(menuItems[2] as HTMLElement);
+    expect(onActiveChange).not.toHaveBeenCalled();
   });
 });

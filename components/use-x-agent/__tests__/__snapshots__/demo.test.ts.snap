@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`renders components/use-x-agent/demo/custom.tsx correctly 1`] = `
 Array [
@@ -182,14 +182,16 @@ exports[`renders components/use-x-agent/demo/model.tsx correctly 1`] = `
           <div
             class="ant-thought-chain-item-header-box"
           >
-            <span
+            <div
               aria-describedby="test-id"
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+              class="ant-thought-chain-item-title"
             >
-              <strong>
+              <div
+                class="ant-thought-chain-item-title-content"
+              >
                 Agent Request Log
-              </strong>
-            </span>
+              </div>
+            </div>
             <span
               aria-describedby="test-id"
               class="ant-typography ant-typography-secondary ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-desc"
@@ -338,14 +340,16 @@ exports[`renders components/use-x-agent/demo/preset.tsx correctly 1`] = `
           <div
             class="ant-thought-chain-item-header-box"
           >
-            <span
+            <div
               aria-describedby="test-id"
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+              class="ant-thought-chain-item-title"
             >
-              <strong>
+              <div
+                class="ant-thought-chain-item-title-content"
+              >
                 Agent Request Log
-              </strong>
-            </span>
+              </div>
+            </div>
           </div>
         </div>
         <div
@@ -540,14 +544,16 @@ exports[`renders components/use-x-agent/demo/request-options.tsx correctly 1`] =
           <div
             class="ant-thought-chain-item-header-box"
           >
-            <span
+            <div
               aria-describedby="test-id"
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+              class="ant-thought-chain-item-title"
             >
-              <strong>
+              <div
+                class="ant-thought-chain-item-title-content"
+              >
                 Agent Request Log
-              </strong>
-            </span>
+              </div>
+            </div>
           </div>
         </div>
         <div
@@ -690,14 +696,16 @@ exports[`renders components/use-x-agent/demo/requestParams.tsx correctly 1`] = `
           <div
             class="ant-thought-chain-item-header-box"
           >
-            <span
+            <div
               aria-describedby="test-id"
-              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line ant-thought-chain-item-title"
+              class="ant-thought-chain-item-title"
             >
-              <strong>
+              <div
+                class="ant-thought-chain-item-title-content"
+              >
                 Agent Request Log
-              </strong>
-            </span>
+              </div>
+            </div>
           </div>
         </div>
         <div

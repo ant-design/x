@@ -35,6 +35,7 @@ demo:
 <code src="./demo/reference.tsx">参考</code>
 <code src="./demo/debug.tsx" debug>debug</code>
 <code src="./demo/debug-list.tsx" debug>debug list</code>
+<code src="./demo/onScroll.tsx">监听滚动</code>
 
 ## API
 
@@ -57,7 +58,7 @@ demo:
 | typing | 设置聊天内容打字动画 | boolean \| { step?: number, interval?: number } | false |  |
 | variant | 气泡样式变体 | `filled` \| `borderless` \| `outlined` \| `shadow` | `filled` |  |
 | loadingRender | 自定义渲染加载态内容 | () => ReactNode | - |  |
-| messageRender | 自定义渲染内容 | (content?: ContentType) => ReactNode | - |  |
+| messageRender | 自定义渲染内容 | <ContentType extends [BubbleContentType](https://github.com/ant-design/x/blob/fc7a000f5ee0c3c75def63d2e47a328486b66465/components/bubble/interface.ts#L21) = string>(content?: ContentType) => ReactNode | - |  |
 | onTypingComplete | 打字效果完成时的回调，如果没有设置 typing 将在渲染时立刻触发 | () => void | - |  |
 | references | 引用源链接数组（包含标题、URL 和可选描述）；渲染信息图标以触发悬浮提示，并通过模态框列表展示。 | [聊天引用](#聊天引用)[] | - | |
 
@@ -72,7 +73,7 @@ type ContentType = React.ReactNode | AnyObject | string | number;
 自定义类型使用
 
 ```tsx
-type CustomContentType {
+type CustomContentType = {
   ...
 }
 
@@ -86,6 +87,7 @@ type CustomContentType {
 | autoScroll | 当内容更新时，自动滚动到最新位置。如果用户滚动，则会暂停自动滚动。 | boolean | true |  |
 | items | 气泡数据列表 | (BubbleProps & { key?: string \| number, role?: string })[] | - |  |
 | roles | 设置气泡默认属性，`items` 中的 `role` 会进行自动对应 | Record<string, BubbleProps> \| (bubble, index) => BubbleProps | - |  |
+| onScroll | 监听 `Bubble.List` 滚动 | (e: React.UIEvent<HTMLDivElement, UIEvent>) => void | - | 1.5.0 |
 
 ## Semantic DOM
 

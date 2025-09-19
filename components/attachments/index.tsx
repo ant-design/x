@@ -1,11 +1,10 @@
 import { type GetProp, GetRef, Upload, type UploadProps } from 'antd';
 import classnames from 'classnames';
+import { useEvent, useMergedState } from 'rc-util';
 import React from 'react';
-
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
-
-import { useEvent, useMergedState } from 'rc-util';
+import { AttachmentContext } from './context';
 import DropArea from './DropArea';
 import FileList, { type FileListProps } from './FileList';
 import FileListCard from './FileList/FileListCard';
@@ -14,10 +13,9 @@ import PlaceholderUploader, {
   type PlaceholderType,
 } from './PlaceholderUploader';
 import SilentUploader from './SilentUploader';
-import { AttachmentContext } from './context';
 import useStyle from './style';
 
-export type SemanticType = 'list' | 'item' | 'placeholder';
+export type SemanticType = 'list' | 'item' | 'placeholder' | 'upload';
 
 export type Attachment = GetProp<UploadProps, 'fileList'>[number] & {
   description?: React.ReactNode;
@@ -70,6 +68,7 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
     overflow,
     imageProps,
     disabled,
+    maxCount,
     classNames = {},
     styles = {},
     ...uploadProps
@@ -124,6 +123,7 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
   const mergedUploadProps: UploadProps = {
     ...uploadProps,
     fileList,
+    maxCount,
     onChange: triggerChange,
   };
 
@@ -215,6 +215,8 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
             ...styles.list,
             ...(!hasFileList && { display: 'none' }),
           }}
+          uploadClassName={classnames(contextClassNames.upload, classNames.upload)}
+          uploadStyle={{ ...contextStyles.upload, ...styles.upload }}
           itemClassName={classnames(contextClassNames.item, classNames.item)}
           itemStyle={{
             ...contextStyles.item,

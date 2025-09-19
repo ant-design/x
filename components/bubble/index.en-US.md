@@ -34,6 +34,7 @@ Often used when chatting.
 <code src="./demo/reference.tsx">Reference</code>
 <code src="./demo/debug.tsx" debug>debug</code>
 <code src="./demo/debug-list.tsx" debug>debug list</code>
+<code src="./demo/onScroll.tsx">onScroll</code>
 
 ## API
 
@@ -56,7 +57,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | typing | Show message with typing motion | boolean \| { step?: number, interval?: number } | false |  |
 | variant | Style variant | `filled` \| `borderless` \| `outlined` \| `shadow` | `filled` |  |
 | loadingRender | Customize loading content | () => ReactNode | - |  |
-| messageRender | Customize display content | <ContentType extends [BubbleContentType](https://github.com/ant-design/x/blob/d3232c925a0dc61ad763c6664e16f07323ebca4a/components/bubble/interface.ts#L21) = string>(content?: ContentType) => ReactNode | - |  |
+| messageRender | Customize display content | <ContentType extends [BubbleContentType](https://github.com/ant-design/x/blob/fc7a000f5ee0c3c75def63d2e47a328486b66465/components/bubble/interface.ts#L21) = string>(content?: ContentType) => ReactNode | - |  |
 | onTypingComplete | Callback when typing effect is completed. If typing is not set, it will be triggered immediately when rendering. | () => void | - |  |
 | references       | Array of source links (title, url, optional description); displays an info-icon trigger with popover/modal listing. | [ChatReference](#chat-reference) []  | - | |
 
@@ -71,7 +72,7 @@ type ContentType = React.ReactNode | AnyObject | string | number;
 Custom type usage
 
 ```tsx
-type CustomContentType {
+type CustomContentType = {
   ...
 }
 
@@ -85,6 +86,7 @@ type CustomContentType {
 | autoScroll | When the content is updated, scroll to the latest position automatically. If the user scrolls, the automatic scrolling will be paused. | boolean | true |  |
 | items | Bubble items list | (BubbleProps & { key?: string \| number, role?: string })[] | - |  |
 | roles | Set the default properties of the bubble. The `role` in `items` will be automatically matched. | Record<string, BubbleProps> \| (bubble, index) => BubbleProps | - |  |
+| onScroll | Listen to `Bubble.List` scroll event | (e: React.UIEvent<HTMLDivElement, UIEvent>) => void | - | 1.5.0 |
 
 ## Semantic DOM
 
