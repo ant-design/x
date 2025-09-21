@@ -1,4 +1,4 @@
-import { Button, Divider, Tabs, Typography } from 'antd';
+import { Button, Tabs, Typography } from 'antd';
 import { createStyles } from 'antd-style';
 import JsonML from 'jsonml.js/lib/utils';
 import toReactElement from 'jsonml-to-react-element';
