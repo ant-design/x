@@ -59,7 +59,7 @@ const defaultItems = [
     key: 'sdk',
   },
   {
-    path: '/docs/playground/independent',
+    path: '/docs/playground/ultramodern',
     basePath: '/playground',
     key: 'playground',
   },
