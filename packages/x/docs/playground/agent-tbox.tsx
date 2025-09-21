@@ -200,7 +200,6 @@ const useStyle = createStyles(({ token, css }) => {
   return {
     layout: css`
       width: 100%;
-      min-width: 1000px;
       height: 100vh;
       display: flex;
       background: ${token.colorBgContainer};
@@ -729,7 +728,7 @@ const AgentTbox: React.FC = () => {
           }))}
           styles={{
             bubble: {
-              width: 700,
+              maxWidth: 700,
             },
           }}
           role={role}
@@ -737,7 +736,7 @@ const AgentTbox: React.FC = () => {
       ) : (
         <Space orientation="vertical" size={16} align="center" className={styles.placeholder}>
           <Welcome
-            style={{ width: 700 }}
+            style={{ maxWidth: 700 }}
             variant="borderless"
             icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
             title={t.helloAntdXTboxAgent}
@@ -749,7 +748,7 @@ const AgentTbox: React.FC = () => {
               </Space>
             }
           />
-          <Flex style={{ width: 700 }} gap={16}>
+          <Flex style={{ maxWidth: 700 }} gap={16}>
             <Prompts
               items={[HOT_TOPICS]}
               styles={{

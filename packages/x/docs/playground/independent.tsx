@@ -139,7 +139,7 @@ const useStyle = createStyles(({ token, css }) => {
     // sender 样式
     sender: css`
       width: 100%;
-      max-width: 700px;
+      max-width: 840px;
     `,
     speechButton: css`
       font-size: 18px;
@@ -147,7 +147,7 @@ const useStyle = createStyles(({ token, css }) => {
     `,
     senderPrompt: css`
       width: 100%;
-      max-width: 700px;
+      max-width: 840px;
       margin: 0 auto;
       color: ${token.colorText};
     `,
@@ -529,6 +529,7 @@ const Independent: React.FC = () => {
       };
     },
   });
+
   // ==================== Event ====================
   const onSubmit = (val: string) => {
     if (!val) return;
@@ -626,7 +627,7 @@ const Independent: React.FC = () => {
           }))}
           styles={{
             bubble: {
-              maxWidth: 700,
+              maxWidth: 840,
             },
           }}
           role={getRole(className)}
@@ -648,7 +649,7 @@ const Independent: React.FC = () => {
           <Flex
             gap={16}
             style={{
-              maxWidth: 700,
+              maxWidth: 840,
               minWidth: '100%',
             }}
           >
@@ -718,6 +719,7 @@ const Independent: React.FC = () => {
     <Flex
       vertical
       gap={12}
+      align="center"
       style={{
         marginInline: 24,
       }}

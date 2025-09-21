@@ -469,7 +469,7 @@ const Copilot = (props: CopilotProps) => {
 const useWorkareaStyle = createStyles(({ token, css }) => {
   return {
     copilotWrapper: css`
-      min-width: 1000px;
+      width: 100%;
       height: 100vh;
       display: flex;
     `,
