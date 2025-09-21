@@ -35,7 +35,7 @@ import {
   XModelResponse,
   XRequest,
 } from '@ant-design/x-sdk';
-import { Button, GetProp, GetRef, Image, message, Popover, Space } from 'antd';
+import { Button, Flex, GetProp, GetRef, Image, message, Popover, Space } from 'antd';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
 import React, { useRef, useState } from 'react';
@@ -141,12 +141,7 @@ const useCopilotStyle = createStyles(({ token, css }) => {
     // chatSend 样式
     chatSend: css`
       padding: ${token.padding}px;
-    `,
-    sendAction: css`
-      display: flex;
-      align-items: center;
-      margin-bottom: 12px;
-      justify-content: space-between;
+      
     `,
     speechButton: css`
       font-size: 18px;
@@ -400,8 +395,8 @@ const Copilot = (props: CopilotProps) => {
     </Sender.Header>
   );
   const chatSender = (
-    <div className={styles.chatSend}>
-      <div className={styles.sendAction}>
+    <Flex vertical gap={12} className={styles.chatSend}>
+      <Flex gap={12} align="center">
         <Button
           icon={<ScheduleOutlined />}
           onClick={() => handleUserSubmit('What has Ant Design X upgraded?')}
@@ -415,8 +410,7 @@ const Copilot = (props: CopilotProps) => {
           {locale.components}
         </Button>
         <Button icon={<AppstoreAddOutlined />}>{locale.more}</Button>
-      </div>
-
+      </Flex>
       {/** 输入框 */}
       <Suggestion items={MOCK_SUGGESTIONS} onSelect={(itemVal) => setInputValue(`[${itemVal}]:`)}>
         {({ onTrigger, onKeyDown }) => (
@@ -449,7 +443,7 @@ const Copilot = (props: CopilotProps) => {
           />
         )}
       </Suggestion>
-    </div>
+    </Flex>
   );
 
   return (
