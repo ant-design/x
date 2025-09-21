@@ -789,7 +789,15 @@ const AgentTbox: React.FC = () => {
     </div>
   );
   const chatSender = (
-    <>
+    <div
+      style={{
+        marginInline: 24,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        gap: 12,
+      }}
+    >
       {/* 🌟 提示词 */}
       <Prompts
         items={SENDER_PROMPTS}
@@ -816,7 +824,7 @@ const AgentTbox: React.FC = () => {
         className={styles.sender}
         placeholder={t.askMeAnything}
       />
-    </>
+    </div>
   );
 
   // ==================== Render =================
