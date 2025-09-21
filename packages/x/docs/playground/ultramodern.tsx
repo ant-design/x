@@ -32,10 +32,10 @@ const useStyle = createStyles(({ token, css }) => {
   return {
     layout: css`
       width: 100%;
-      min-width: 1000px;
       height: 100vh;
       display: flex;
       background: ${token.colorBgContainer};
+      overflow:hidden;
     `,
     side: css`
       background: ${token.colorBgLayout};
@@ -80,6 +80,7 @@ const useStyle = createStyles(({ token, css }) => {
     chat: css`
       height: 100%;
       width: calc(100% - 240px);
+      overflow: auto;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
@@ -370,7 +371,7 @@ const App = () => {
                       marginBlockEnd: 24,
                     },
                     bubble: {
-                      width: 840,
+                      maxWidth: 840,
                     },
                   }}
                   role={getRole(className)}

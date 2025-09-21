@@ -54,7 +54,6 @@ const useStyle = createStyles(({ token, css }) => {
   return {
     layout: css`
       width: 100%;
-      min-width: 1000px;
       height: 100vh;
       display: flex;
       background: ${token.colorBgContainer};
@@ -141,7 +140,6 @@ const useStyle = createStyles(({ token, css }) => {
     sender: css`
       width: 100%;
       max-width: 700px;
-      margin: 0 auto;
     `,
     speechButton: css`
       font-size: 18px;
@@ -628,7 +626,7 @@ const Independent: React.FC = () => {
           }))}
           styles={{
             bubble: {
-              width: 700,
+              maxWidth: 700,
             },
           }}
           role={getRole(className)}
@@ -650,7 +648,8 @@ const Independent: React.FC = () => {
           <Flex
             gap={16}
             style={{
-              width: 700,
+              maxWidth: 700,
+              minWidth: '100%',
             }}
           >
             <Prompts
@@ -716,7 +715,13 @@ const Independent: React.FC = () => {
     </Sender.Header>
   );
   const chatSender = (
-    <Flex vertical gap={12}>
+    <Flex
+      vertical
+      gap={12}
+      style={{
+        marginInline: 24,
+      }}
+    >
       {/* 🌟 提示词 */}
       {!attachmentsOpen && (
         <Prompts
