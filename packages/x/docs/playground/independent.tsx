@@ -249,19 +249,19 @@ const DESIGN_GUIDE = {
       key: '2-2',
       icon: <SmileOutlined />,
       label: locale.role,
-      description: locale.AIPublicPersonAndImage,
+      description: locale.aiPublicPersonAndImage,
     },
     {
       key: '2-3',
       icon: <CommentOutlined />,
       label: locale.chat,
-      description: locale.HowAICanExpressItselfWayUsersUnderstand,
+      description: locale.howAICanExpressItselfWayUsersUnderstand,
     },
     {
       key: '2-4',
       icon: <PaperClipOutlined />,
       label: locale.interface,
-      description: locale.AIBalances,
+      description: locale.aiBalances,
     },
   ],
 };
@@ -333,12 +333,12 @@ const ChatContext = React.createContext<{
 // ==================== Sub Component ====================
 
 const ThinkComponent = React.memo((props: ComponentProps) => {
-  const [title, setTitle] = React.useState(locale.DeepThinking + '...');
+  const [title, setTitle] = React.useState(locale.deepThinking + '...');
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     if (props.streamStatus === 'done') {
-      setTitle(locale.CompleteThinking);
+      setTitle(locale.completeThinking);
       setLoading(false);
     }
   }, [props.streamStatus]);
@@ -558,13 +558,13 @@ const Independent: React.FC = () => {
         creation={{
           onClick: () => {
             if (messages.length === 0) {
-              messageApi.error(locale.nowNenConversation);
+              messageApi.error(locale.itIsNowANewConversation);
               return;
             }
             const now = dayjs().valueOf().toString();
             addConversation({
               key: now,
-              label: `${locale.NewConversation} ${conversations.length + 1}`,
+              label: `${locale.newConversation} ${conversations.length + 1}`,
               group: locale.today,
             });
             setCurConversation(now);
@@ -638,8 +638,8 @@ const Independent: React.FC = () => {
           <Welcome
             variant="borderless"
             icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
-            title="Hello, I'm Ant Design X"
-            description="Base on Ant Design, AGI product interface solution, create a better intelligent vision~"
+            title={locale.welcome}
+            description={locale.welcomeDescription}
             extra={
               <Space>
                 <Button icon={<ShareAltOutlined />} />

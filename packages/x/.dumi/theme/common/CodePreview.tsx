@@ -1,4 +1,4 @@
-import { Button, Tabs, Typography } from 'antd';
+import { Button, Divider, Tabs, Typography } from 'antd';
 import { createStyles } from 'antd-style';
 import JsonML from 'jsonml.js/lib/utils';
 import toReactElement from 'jsonml-to-react-element';
@@ -26,8 +26,18 @@ const useStyle = createStyles(({ token, css }) => {
       top: 16px;
       inset-inline-end: ${token.padding}px;
       width: 32px;
+      height: 32px;
       text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: ${token.borderRadiusLG}px;
+      transition: background-color ${token.motionDurationMid} ease-in-out;
       padding: 0;
+      &:hover{
+        background-color: ${token.colorFillSecondary};
+
+      }
     `,
 
     copyIcon: css`
@@ -156,9 +166,9 @@ const CodePreview: React.FC<CodePreviewProps> = ({
             ) : (
               toReactComponent(['pre', { lang, highlighted: highlightedCodes[lang] }])
             )}
-            <Button type="text" className={styles.copyButton}>
+            <div className={styles.copyButton}>
               <Typography.Text className={styles.copyIcon} copyable={{ text: sourceCodes[lang] }} />
-            </Button>
+            </div>
           </div>
         ),
       })),

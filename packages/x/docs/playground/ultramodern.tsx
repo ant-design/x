@@ -313,13 +313,13 @@ const App = () => {
               creation={{
                 onClick: () => {
                   if (messages.length === 0) {
-                    messageApi.error(locale.nowNenConversation);
+                    messageApi.error(locale.itIsNowANewConversation);
                     return;
                   }
                   const now = dayjs().valueOf().toString();
                   addConversation({
                     key: now,
-                    label: `${locale.NewConversation} ${conversations.length + 1}`,
+                    label: `${locale.newConversation} ${conversations.length + 1}`,
                     group: locale.today,
                   });
                   setCurConversation(now);
@@ -411,7 +411,7 @@ const App = () => {
                             }}
                             icon={<OpenAIOutlined />}
                           >
-                            {locale.DeepThink}
+                            {locale.deepThink}
                           </Sender.Switch>
                         </Flex>
                         <Flex align="center">{actionNode}</Flex>
