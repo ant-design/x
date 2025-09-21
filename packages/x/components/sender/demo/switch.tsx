@@ -9,11 +9,10 @@ const App: React.FC = () => {
   return (
     <Flex vertical gap="middle">
       <Flex align="center" gap="small">
-        {' '}
         Default: <Sender.Switch icon={<SearchOutlined />}>Deep Search</Sender.Switch>
       </Flex>
       <Flex align="center" gap="small">
-        Custom checked/unchecked content:{' '}
+        Custom checked/unchecked content:
         <Sender.Switch
           checkedChildren={'Deep Search: on'}
           unCheckedChildren={'Deep Search: off'}
@@ -27,13 +26,13 @@ const App: React.FC = () => {
         </Sender.Switch>
       </Flex>
       <Flex align="center" gap="small">
-        Loading:{' '}
+        Loading:
         <Sender.Switch loading icon={<SearchOutlined />}>
           Deep Search
         </Sender.Switch>
       </Flex>
       <Flex align="center" gap="small">
-        DefaultValue:{' '}
+        DefaultValue:
         <Sender.Switch
           icon={<SearchOutlined />}
           defaultValue={true}
@@ -45,7 +44,7 @@ const App: React.FC = () => {
         </Sender.Switch>
       </Flex>
       <Flex align="center" gap="small">
-        Controlled mode:{' '}
+        Controlled mode:
         <Sender.Switch icon={<SearchOutlined />} value={value} onChange={setValue}>
           Deep Search
         </Sender.Switch>

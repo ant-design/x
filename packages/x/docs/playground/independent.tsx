@@ -29,8 +29,6 @@ import {
   Welcome,
   XProvider,
 } from '@ant-design/x';
-import enUS_X from '@ant-design/x/locale/en_US';
-import zhCN_X from '@ant-design/x/locale/zh_CN';
 import type { ComponentProps } from '@ant-design/x-markdown';
 import XMarkdown from '@ant-design/x-markdown';
 import type { DefaultMessageInfo, MessageInfo } from '@ant-design/x-sdk';
@@ -45,110 +43,11 @@ import {
   XRequest,
 } from '@ant-design/x-sdk';
 import { Avatar, Button, Flex, type GetProp, message, Pagination, Space } from 'antd';
-import enUS_antd from 'antd/locale/en_US';
-import zhCN_antd from 'antd/locale/zh_CN';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
 import React, { useState } from 'react';
 import { useMarkdownTheme } from '../x-markdown/demo/_utils';
-
-// ==================== Local ====================
-const zhCN = {
-  whatIsAntDesignX: '什么是 Ant Design X？',
-  today: '今天',
-  howToQuicklyInstallAndImportComponents: '如何快速安装和导入组件？',
-  newAgiHybridInterface: '新的 AGI 混合界面',
-  yesterday: '昨天',
-  hotTopics: '热门话题',
-  designGuide: '设计指南',
-  intention: '意图',
-  role: '角色',
-  chat: '对话',
-  interface: '界面',
-  upgrades: '升级',
-  components: '组件',
-  richGuide: 'RICH 指南',
-  installationIntroduction: '安装介绍',
-  whatHasAntDesignXUpgraded: 'Ant Design X 有哪些升级？',
-  whatComponentsAreInAntDesignX: 'Ant Design X 中有哪些组件？',
-  comeAndDiscoverNewDesignParadigm: '快来发现 AI 时代的新设计范式。',
-  requestIsAborted: '请求已中止',
-  requestFailedPleaseTryAgain: '请求失败，请重试！',
-  requestIsInProgress: '请求正在进行中，请等待请求完成。',
-  rename: '重命名',
-  delete: '删除',
-  uploadFile: '上传文件',
-  dropFileHere: '将文件拖到此处',
-  uploadFiles: '上传文件',
-  clickOrDragFilesToUpload: '点击或将文件拖到此处上传',
-  askOrInputUseSkills: '提问或输入 / 使用技能',
-  aiUnderstandsUserNeedsAndProvidesSolutions: 'AI理解用户需求并提供解决方案',
-  AIPublicPersonAndImage: 'AI的公众形象',
-  HowAICanExpressItselfWayUsersUnderstand: 'AI如何以用户理解的方式表达自己',
-  AIBalances: 'AI平衡"聊天"和"执行"行为',
-  DeepThinking: '深度思考中',
-  CompleteThinking: '深度思考完成',
-  modelIsRunning: '正在调用模型',
-  modelExecutionCompleted: '大模型执行完成',
-  executionFailed: '执行失败',
-  aborted: '已经终止',
-  noData: '暂无数据',
-  NewConversation: '新对话',
-  curConversation: '当前对话',
-  nowNenConversation: '当前已经是新会话',
-  isMock: '当前为模拟功能',
-  retry: '重新生成',
-};
-
-const enUS = {
-  whatIsAntDesignX: 'What is Ant Design X?',
-  today: 'Today',
-  howToQuicklyInstallAndImportComponents: 'How to quickly install and import components?',
-  newAgiHybridInterface: 'New AGI Hybrid Interface',
-  yesterday: 'Yesterday',
-  hotTopics: 'Hot Topics',
-  designGuide: 'Design Guide',
-  intention: 'Intention',
-  role: 'Role',
-  chat: 'Chat',
-  interface: 'Interface',
-  upgrades: 'Upgrades',
-  components: 'Components',
-  richGuide: 'RICH Guide',
-  installationIntroduction: 'Installation Introduction',
-  whatHasAntDesignXUpgraded: 'What has Ant Design X upgraded?',
-  whatComponentsAreInAntDesignX: 'What components are in Ant Design X?',
-  comeAndDiscoverNewDesignParadigm: 'Come and discover the new design paradigm of the AI era.',
-  requestIsAborted: 'Request is aborted',
-  requestFailedPleaseTryAgain: 'Request failed, please try again!',
-  requestIsInProgress: 'Request is in progress, please wait for the request to complete.',
-  rename: 'Rename',
-  delete: 'Delete',
-  uploadFile: 'Upload File',
-  dropFileHere: 'Drop file here',
-  uploadFiles: 'Upload files',
-  clickOrDragFilesToUpload: 'Click or drag files to this area to upload',
-  askOrInputUseSkills: 'Ask or input / use skills',
-  aiUnderstandsUserNeedsAndProvidesSolutions: 'AI understands user needs and provides solutions.',
-  AIPublicPersonAndImage: "AI's public persona and image",
-  HowAICanExpressItselfWayUsersUnderstand: 'How AI Can Express Itself in a Way Users Understand',
-  AIBalances: 'AI balances "chat" & "do" behaviors.',
-  DeepThinking: 'Deep Thinking',
-  CompleteThinking: 'Complete Thinking',
-  modelIsRunning: 'Model is running',
-  modelExecutionCompleted: 'Model execution completed',
-  executionFailed: 'Execution failed',
-  aborted: 'Aborted',
-  noData: 'No Data',
-  NewConversation: 'New Conversation',
-  curConversation: 'Current Conversation',
-  nowNenConversation: 'It is now a new conversation.',
-  isMock: 'It is Mock',
-  retry: 'retry',
-};
-
-const isZhCN = window.parent?.location?.pathname?.includes('-cn');
-const t = isZhCN ? zhCN : enUS;
+import locale from './_utils/local';
 
 // ==================== Style ====================
 const useStyle = createStyles(({ token, css }) => {
@@ -263,23 +162,23 @@ const HISTORY_MESSAGES: {
 } = {
   'default-1': [
     {
-      message: { role: 'user', content: t.howToQuicklyInstallAndImportComponents },
+      message: { role: 'user', content: locale.howToQuicklyInstallAndImportComponents },
       status: 'success',
     },
     {
       message: {
         role: 'assistant',
-        content: `# 快速安装和导入组件 \n \`npm install @ant-design/x --save \` \n [查看详情](/components/introduce${isZhCN ? '-cn' : ''}/)`,
+        content: locale.aiMessage_2,
       },
       status: 'success',
     },
   ],
   'default-2': [
-    { message: { role: 'user', content: t.newAgiHybridInterface }, status: 'success' },
+    { message: { role: 'user', content: locale.newAgiHybridInterface }, status: 'success' },
     {
       message: {
         role: 'assistant',
-        content: `RICH 设计范式 \n [查看详情](/docs/spec/introduce${isZhCN ? '-cn' : ''}/)`,
+        content: locale.aiMessage_1,
       },
       status: 'success',
     },
@@ -289,48 +188,48 @@ const HISTORY_MESSAGES: {
 const DEFAULT_CONVERSATIONS_ITEMS = [
   {
     key: 'default-0',
-    label: t.whatIsAntDesignX,
-    group: t.today,
+    label: locale.whatIsAntDesignX,
+    group: locale.today,
   },
   {
     key: 'default-1',
-    label: t.howToQuicklyInstallAndImportComponents,
-    group: t.today,
+    label: locale.howToQuicklyInstallAndImportComponents,
+    group: locale.today,
   },
   {
     key: 'default-2',
-    label: t.newAgiHybridInterface,
-    group: t.yesterday,
+    label: locale.newAgiHybridInterface,
+    group: locale.yesterday,
   },
 ];
 
 const HOT_TOPICS = {
   key: '1',
-  label: t.hotTopics,
+  label: locale.hotTopics,
   children: [
     {
       key: '1-1',
-      description: t.whatComponentsAreInAntDesignX,
+      description: locale.whatComponentsAreInAntDesignX,
       icon: <span style={{ color: '#f93a4a', fontWeight: 700 }}>1</span>,
     },
     {
       key: '1-2',
-      description: t.newAgiHybridInterface,
+      description: locale.newAgiHybridInterface,
       icon: <span style={{ color: '#ff6565', fontWeight: 700 }}>2</span>,
     },
     {
       key: '1-3',
-      description: t.whatComponentsAreInAntDesignX,
+      description: locale.whatComponentsAreInAntDesignX,
       icon: <span style={{ color: '#ff8f1f', fontWeight: 700 }}>3</span>,
     },
     {
       key: '1-4',
-      description: t.comeAndDiscoverNewDesignParadigm,
+      description: locale.comeAndDiscoverNewDesignParadigm,
       icon: <span style={{ color: '#00000040', fontWeight: 700 }}>4</span>,
     },
     {
       key: '1-5',
-      description: t.howToQuicklyInstallAndImportComponents,
+      description: locale.howToQuicklyInstallAndImportComponents,
       icon: <span style={{ color: '#00000040', fontWeight: 700 }}>5</span>,
     },
   ],
@@ -338,31 +237,31 @@ const HOT_TOPICS = {
 
 const DESIGN_GUIDE = {
   key: '2',
-  label: t.designGuide,
+  label: locale.designGuide,
   children: [
     {
       key: '2-1',
       icon: <HeartOutlined />,
-      label: t.intention,
-      description: t.aiUnderstandsUserNeedsAndProvidesSolutions,
+      label: locale.intention,
+      description: locale.aiUnderstandsUserNeedsAndProvidesSolutions,
     },
     {
       key: '2-2',
       icon: <SmileOutlined />,
-      label: t.role,
-      description: t.AIPublicPersonAndImage,
+      label: locale.role,
+      description: locale.AIPublicPersonAndImage,
     },
     {
       key: '2-3',
       icon: <CommentOutlined />,
-      label: t.chat,
-      description: t.HowAICanExpressItselfWayUsersUnderstand,
+      label: locale.chat,
+      description: locale.HowAICanExpressItselfWayUsersUnderstand,
     },
     {
       key: '2-4',
       icon: <PaperClipOutlined />,
-      label: t.interface,
-      description: t.AIBalances,
+      label: locale.interface,
+      description: locale.AIBalances,
     },
   ],
 };
@@ -370,45 +269,45 @@ const DESIGN_GUIDE = {
 const SENDER_PROMPTS: GetProp<typeof Prompts, 'items'> = [
   {
     key: '1',
-    description: t.upgrades,
+    description: locale.upgrades,
     icon: <ScheduleOutlined />,
   },
   {
     key: '2',
-    description: t.components,
+    description: locale.components,
     icon: <ProductOutlined />,
   },
   {
     key: '3',
-    description: t.richGuide,
+    description: locale.richGuide,
     icon: <FileSearchOutlined />,
   },
   {
     key: '4',
-    description: t.installationIntroduction,
+    description: locale.installationIntroduction,
     icon: <AppstoreAddOutlined />,
   },
 ];
 
 const THOUGHT_CHAIN_CONFIG = {
   loading: {
-    title: t.modelIsRunning,
+    title: locale.modelIsRunning,
     status: 'loading',
   },
   updating: {
-    title: t.modelIsRunning,
+    title: locale.modelIsRunning,
     status: 'loading',
   },
   success: {
-    title: t.modelExecutionCompleted,
+    title: locale.modelExecutionCompleted,
     status: 'success',
   },
   error: {
-    title: t.executionFailed,
+    title: locale.executionFailed,
     status: 'error',
   },
   abort: {
-    title: t.aborted,
+    title: locale.aborted,
     status: 'abort',
   },
 };
@@ -434,12 +333,12 @@ const ChatContext = React.createContext<{
 // ==================== Sub Component ====================
 
 const ThinkComponent = React.memo((props: ComponentProps) => {
-  const [title, setTitle] = React.useState(t.DeepThinking + '...');
+  const [title, setTitle] = React.useState(locale.DeepThinking + '...');
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     if (props.streamStatus === 'done') {
-      setTitle(t.CompleteThinking);
+      setTitle(locale.CompleteThinking);
       setLoading(false);
     }
   }, [props.streamStatus]);
@@ -465,7 +364,7 @@ const Footer: React.FC<{
     },
     {
       key: 'retry',
-      label: t.retry,
+      label: locale.retry,
       icon: <SyncOutlined />,
       onItemClick: () => {
         if (id) {
@@ -484,7 +383,7 @@ const Footer: React.FC<{
       actionRender: (
         <Actions.Audio
           onClick={() => {
-            message.info(t.isMock);
+            message.info(locale.isMock);
           }}
         />
       ),
@@ -602,7 +501,6 @@ const getRole = (className: string): BubbleListProps['role'] => ({
 
 const Independent: React.FC = () => {
   const { styles } = useStyle();
-  const locale = isZhCN ? { ...zhCN_antd, ...zhCN_X } : { ...enUS_antd, ...enUS_X };
   // ==================== State ====================
 
   const { conversations, addConversation, setConversations } = useXConversations({
@@ -628,7 +526,7 @@ const Independent: React.FC = () => {
     defaultMessages: historyMessageFactory(curConversation),
     requestPlaceholder: () => {
       return {
-        content: t.noData,
+        content: locale.noData,
         role: 'assistant',
       };
     },
@@ -660,21 +558,22 @@ const Independent: React.FC = () => {
         creation={{
           onClick: () => {
             if (messages.length === 0) {
-              messageApi.error(t.nowNenConversation);
+              messageApi.error(locale.nowNenConversation);
               return;
             }
             const now = dayjs().valueOf().toString();
             addConversation({
               key: now,
-              label: `${t.NewConversation} ${conversations.length + 1}`,
-              group: t.today,
+              label: `${locale.NewConversation} ${conversations.length + 1}`,
+              group: locale.today,
             });
             setCurConversation(now);
           },
         }}
-        items={conversations.map(({ key, label }) => ({
+        items={conversations.map(({ key, label, ...other }) => ({
           key,
-          label: key === curConversation ? `[${t.curConversation}]${label}` : label,
+          label: key === curConversation ? `[${locale.curConversation}]${label}` : label,
+          ...other,
         }))}
         className={styles.conversations}
         activeKey={curConversation}
@@ -686,12 +585,12 @@ const Independent: React.FC = () => {
         menu={(conversation) => ({
           items: [
             {
-              label: t.rename,
+              label: locale.rename,
               key: 'rename',
               icon: <EditOutlined />,
             },
             {
-              label: t.delete,
+              label: locale.delete,
               key: 'delete',
               icon: <DeleteOutlined />,
               danger: true,
@@ -795,7 +694,7 @@ const Independent: React.FC = () => {
   );
   const senderHeader = (
     <Sender.Header
-      title={t.uploadFile}
+      title={locale.uploadFile}
       open={attachmentsOpen}
       onOpenChange={setAttachmentsOpen}
       styles={{ content: { padding: 0 } }}
@@ -806,11 +705,11 @@ const Independent: React.FC = () => {
         onChange={(info) => setAttachedFiles(info.fileList)}
         placeholder={(type) =>
           type === 'drop'
-            ? { title: t.dropFileHere }
+            ? { title: locale.dropFileHere }
             : {
                 icon: <CloudUploadOutlined />,
-                title: t.uploadFiles,
-                description: t.clickOrDragFilesToUpload,
+                title: locale.uploadFiles,
+                description: locale.clickOrDragFilesToUpload,
               }
         }
       />
@@ -853,7 +752,7 @@ const Independent: React.FC = () => {
         loading={isRequesting}
         className={styles.sender}
         allowSpeech
-        placeholder={t.askOrInputUseSkills}
+        placeholder={locale.askOrInputUseSkills}
       />
     </Flex>
   );

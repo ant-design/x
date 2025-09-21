@@ -1,5 +1,7 @@
 import { theme } from 'antd';
 import React from 'react';
+import '@ant-design/x-markdown/themes/light.css';
+import '@ant-design/x-markdown/themes/dark.css';
 
 const splitIntoChunks = (str: string, chunkSize: number) => {
   const chunks = [];

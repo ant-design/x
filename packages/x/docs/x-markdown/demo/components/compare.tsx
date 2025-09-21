@@ -148,7 +148,9 @@ export default App;
           <Card
             title="React-Markdown"
             style={{ height: 850 }}
-            bodyStyle={{ height: 'calc(850px - 57px)', overflow: 'auto' }}
+            styles={{
+              body: { height: 'calc(850px - 57px)', overflow: 'auto' },
+            }}
           >
             <div style={{ padding: 16 }} className={className}>
               <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>

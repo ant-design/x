@@ -1,8 +1,7 @@
 import { Bubble } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
-import React from 'react';
-import '@ant-design/x-markdown/themes/light.css';
 import { Button, Flex } from 'antd';
+import React from 'react';
 import { useIntl } from 'react-intl';
 import { useMarkdownTheme } from '../_utils';
 import { Adx_Markdown_En, Adx_Markdown_Zh } from '../_utils/adx-markdown';

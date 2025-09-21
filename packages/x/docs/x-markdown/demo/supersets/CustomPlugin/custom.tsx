@@ -1,7 +1,6 @@
 import { type ComponentProps, type Token, XMarkdown } from '@ant-design/x-markdown';
 import React from 'react';
 import './plugin.css';
-import '@ant-design/x-markdown/themes/light.css';
 import { Popover } from 'antd';
 import { useIntl } from 'react-intl';
 import { useMarkdownTheme } from '../../_utils';

@@ -1,10 +1,9 @@
+import type { BubbleListProps } from '@ant-design/x';
 import { Bubble, Sender } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
 import { DefaultChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';
 import { Button, Row } from 'antd';
 import React, { useMemo, useState } from 'react';
-import '@ant-design/x-markdown/themes/light.css';
-import type { BubbleListProps } from '@ant-design/x';
 import { mockFetch, useMarkdownTheme } from '../_utils';
 
 const fullContent = `

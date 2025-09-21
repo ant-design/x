@@ -17,7 +17,7 @@ const items: ItemType[] = [
     key: 'demo2',
     label: (
       <div>
-        Getting Started:{' '}
+        Getting Started:
         <a target="_blank" href="https://ant-design.antgroup.com/index-cn" rel="noreferrer">
           Ant Design !
         </a>

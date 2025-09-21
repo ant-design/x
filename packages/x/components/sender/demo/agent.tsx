@@ -210,7 +210,7 @@ const App: React.FC = () => {
                   }
                   unCheckedChildren={
                     <>
-                      Deep Think:<span style={SwitchTextStyle}>off</span>{' '}
+                      Deep Think:<span style={SwitchTextStyle}>off</span>
                     </>
                   }
                   onChange={(checked: boolean) => {
