@@ -284,14 +284,19 @@ const useStyle = createStyles(({ token, css }) => {
       display: flex;
       height: calc(100% - 120px);
       flex-direction: column;
+       align-items: center;
+      width: 100%;
     `,
     placeholder: css`
       padding-top: 32px;
+      width: 100%;
+      padding-inline: ${token.paddingLG}px;
+      box-sizing: border-box;
     `,
     // sender 样式
     sender: css`
       width: 100%;
-      max-width: 700px;
+      max-width: 840px;
       margin: 0 auto;
     `,
     speechButton: css`
@@ -300,7 +305,7 @@ const useStyle = createStyles(({ token, css }) => {
     `,
     senderPrompt: css`
       width: 100%;
-      max-width: 700px;
+      max-width: 840px;
       margin: 0 auto;
       color: ${token.colorText};
     `,
@@ -728,15 +733,22 @@ const AgentTbox: React.FC = () => {
           }))}
           styles={{
             bubble: {
-              maxWidth: 700,
+              maxWidth: 840,
             },
           }}
           role={role}
         />
       ) : (
-        <Space orientation="vertical" size={16} align="center" className={styles.placeholder}>
+        <Flex
+          vertical
+          style={{
+            maxWidth: 840,
+          }}
+          gap={16}
+          align="center"
+          className={styles.placeholder}
+        >
           <Welcome
-            style={{ maxWidth: 700 }}
             variant="borderless"
             icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
             title={t.helloAntdXTboxAgent}
@@ -748,7 +760,7 @@ const AgentTbox: React.FC = () => {
               </Space>
             }
           />
-          <Flex style={{ maxWidth: 700 }} gap={16}>
+          <Flex gap={16}>
             <Prompts
               items={[HOT_TOPICS]}
               styles={{
@@ -784,18 +796,17 @@ const AgentTbox: React.FC = () => {
               className={styles.chatPrompt}
             />
           </Flex>
-        </Space>
+        </Flex>
       )}
     </div>
   );
   const chatSender = (
-    <div
+    <Flex
+      vertical
+      gap={12}
+      justify="center"
       style={{
         marginInline: 24,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        gap: 12,
       }}
     >
       {/* 🌟 提示词 */}
@@ -824,7 +835,7 @@ const AgentTbox: React.FC = () => {
         className={styles.sender}
         placeholder={t.askMeAnything}
       />
-    </div>
+    </Flex>
   );
 
   // ==================== Render =================

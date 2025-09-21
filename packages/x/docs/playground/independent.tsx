@@ -132,9 +132,14 @@ const useStyle = createStyles(({ token, css }) => {
       display: flex;
       height: calc(100% - 120px);
       flex-direction: column;
+      align-items: center;
+      width: 100%;
     `,
     placeholder: css`
       padding-top: 32px;
+      width: 100%;
+      padding-inline: ${token.paddingLG}px;
+     box-sizing: border-box;
     `,
     // sender 样式
     sender: css`
@@ -633,8 +638,19 @@ const Independent: React.FC = () => {
           role={getRole(className)}
         />
       ) : (
-        <Space orientation="vertical" size={16} align="center" className={styles.placeholder}>
+        <Flex
+          vertical
+          style={{
+            maxWidth: 840,
+          }}
+          gap={16}
+          align="center"
+          className={styles.placeholder}
+        >
           <Welcome
+            style={{
+              width: '100%',
+            }}
             variant="borderless"
             icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
             title={locale.welcome}
@@ -648,9 +664,9 @@ const Independent: React.FC = () => {
           />
           <Flex
             gap={16}
+            justify="space-around"
             style={{
-              maxWidth: 840,
-              minWidth: '100%',
+              width: '100%',
             }}
           >
             <Prompts
@@ -688,7 +704,7 @@ const Independent: React.FC = () => {
               className={styles.chatPrompt}
             />
           </Flex>
-        </Space>
+        </Flex>
       )}
     </div>
   );
