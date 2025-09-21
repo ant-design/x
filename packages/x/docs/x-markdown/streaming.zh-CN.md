@@ -18,11 +18,18 @@ order: 3
 
 ### streaming
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| hasNextChunk | 是否还有流式数据 | `boolean` | `false` |
-| enableAnimation | 是否开启文字渐显 | `boolean` | `false` |
-| animationConfig | 文字动画配置 | [`ControllerUpdate`](https://react-spring.dev/docs/typescript#controllerupdate) | `{ from: { opacity: 0 }, to: { opacity: 1 }, config: { tension: 170, friction: 26 } }` |
+| 参数            | 说明             | 类型              | 默认值                                |
+| --------------- | ---------------- | ----------------- | ------------------------------------- |
+| hasNextChunk    | 是否还有流式数据 | `boolean`         | `false`                               |
+| enableAnimation | 是否开启文字渐显 | `boolean`         | `false`                               |
+| animationConfig | 文字动画配置     | `AnimationConfig` | `{ fadeDuration: 200, opacity: 0.2 }` |
+
+#### AnimationConfig
+
+| 属性         | 说明                      | 类型     | 默认值 |
+| ------------ | ------------------------- | -------- | ------ |
+| fadeDuration | 淡入动画持续时间（毫秒）  | `number` | `200`  |
+| opacity      | 淡入字符的透明度值（0-1） | `number` | `0.2`  |
 
 ### 使用示例
 

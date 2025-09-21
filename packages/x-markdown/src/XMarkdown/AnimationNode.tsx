@@ -1,68 +1,79 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { animated, ControllerUpdate, useSpring } from '@react-spring/web';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { HTMLTag } from './hooks/useAnimation';
-
-interface AnimationTextProps {
-  text: string;
-  animationConfig?: ControllerUpdate;
-}
+import { AnimationConfig } from './interface';
 
 export interface AnimationNodeProps extends React.HTMLAttributes<HTMLElement> {
   children?: React.ReactNode | React.ReactNode[];
   nodeTag: HTMLTag;
-  animationConfig?: ControllerUpdate;
+  animationConfig?: AnimationConfig;
   [key: string]: unknown;
 }
 
-const DEFAULT_ANIMATION_CONFIG: ControllerUpdate = {
-  from: { opacity: 0 },
-  to: { opacity: 1 },
-  config: { tension: 170, friction: 26 },
-};
+export interface AnimationTextProps {
+  text: string;
+  animationConfig?: AnimationConfig;
+}
 
-const AnimationText: React.FC<AnimationTextProps> = React.memo((props) => {
+const AnimationText = React.memo<AnimationTextProps>((props) => {
   const { text, animationConfig } = props;
-  const [displayText, setDisplayText] = useState({
-    base: '',
-    animated: '',
-  });
+  const [displayText, setDisplayText] = useState('');
   const prevTextRef = useRef('');
+  const fadingCharsRef = useRef<string>('');
+  const startTimeRef = useRef<number | null>(null);
 
-  const mergedAnimationConfig = useMemo(
-    () => ({ ...DEFAULT_ANIMATION_CONFIG, ...animationConfig }),
-    [animationConfig],
+  const fadeDuration = useMemo(
+    () => animationConfig?.fadeDuration ?? 200,
+    [animationConfig?.fadeDuration],
   );
-  const [springs, api] = useSpring(() => mergedAnimationConfig);
+  const opacity = useMemo(() => animationConfig?.opacity ?? 0.2, [animationConfig?.opacity]);
+
+  const animate = useCallback(
+    (timestamp: number) => {
+      if (!startTimeRef.current) return;
+      const elapsed = timestamp - startTimeRef.current;
+      if (elapsed < fadeDuration) {
+        requestAnimationFrame(animate);
+      } else {
+        setDisplayText(text);
+        fadingCharsRef.current = '';
+      }
+    },
+    [text, fadeDuration],
+  );
 
   useEffect(() => {
     if (text === prevTextRef.current) return;
 
-    const newChars = text.slice(prevTextRef.current.length);
-    setDisplayText({
-      base: prevTextRef.current,
-      animated: newChars,
-    });
-    prevTextRef.current = text;
-  }, [text]);
-
-  useEffect(() => {
-    if (displayText.animated) {
-      api.start(mergedAnimationConfig);
+    if (!(prevTextRef.current && text.indexOf(prevTextRef.current) === 0)) {
+      setDisplayText(text);
+      fadingCharsRef.current = '';
+      prevTextRef.current = text;
+      return;
     }
-  }, [displayText.animated, mergedAnimationConfig]);
+
+    const prevText = prevTextRef.current;
+    const newChars = text.slice(prevText.length);
+    setDisplayText(prevText);
+
+    fadingCharsRef.current = newChars;
+    prevTextRef.current = text;
+
+    startTimeRef.current = performance.now();
+    requestAnimationFrame(animate);
+  }, [text, animate]);
 
   return (
     <>
-      {displayText.base}
-      {displayText.animated ? (
-        <animated.span style={springs}>{displayText.animated}</animated.span>
+      {displayText}
+      {fadingCharsRef.current ? (
+        <span style={{ opacity: opacity }}>{fadingCharsRef.current}</span>
       ) : null}
     </>
   );
 });
 
 const AnimationNode: React.FC<AnimationNodeProps> = (props) => {
-  const { nodeTag, children, animationConfig, ...restProps } = props;
+  const { nodeTag, children, animationConfig, _domNode, _streamStatus, ...restProps } = props;
 
   const renderChildren = (): React.ReactNode | React.ReactNode[] => {
     if (!children) return null;

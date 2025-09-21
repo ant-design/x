@@ -2,7 +2,7 @@ import type { Config as DOMPurifyConfig } from 'dompurify';
 import DOMPurify from 'dompurify';
 import parseHtml, { DOMNode, domToReact, Element } from 'html-react-parser';
 import React, { ReactNode } from 'react';
-import type { XMarkdownProps } from '../interface';
+import type { ComponentProps, XMarkdownProps } from '../interface';
 
 interface RendererOptions {
   components?: XMarkdownProps['components'];
@@ -80,7 +80,7 @@ class Renderer {
 
         if (renderElement) {
           const streamStatus = unclosedTags.has(name) ? 'loading' : 'done';
-          const props: Record<string, unknown> = {
+          const props: ComponentProps = {
             domNode,
             streamStatus,
             ...attribs,

@@ -2,7 +2,7 @@ import type { XProviderProps } from '@ant-design/x';
 import { XProvider } from '@ant-design/x';
 import enUS_X from '@ant-design/x/locale/en_US';
 import zhCN_X from '@ant-design/x/locale/zh_CN';
-import XMarkdown from '@ant-design/x-markdown';
+import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
 import Mermaid from '@ant-design/x-markdown/plugins/Mermaid';
 import { Card, Flex, Radio, RadioChangeEvent, Typography } from 'antd';
 import enUS from 'antd/locale/en_US';
@@ -30,9 +30,11 @@ quadrantChart
 \`\`\`
 `;
 
-const Code = (props: { className: string; children: string }) => {
+const Code: React.FC<ComponentProps> = (props) => {
   const { className, children } = props;
   const lang = className?.match(/language-(\w+)/)?.[1] || '';
+
+  if (typeof children !== 'string') return null;
   if (lang === 'mermaid') {
     return <Mermaid>{children}</Mermaid>;
   }

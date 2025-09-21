@@ -25,7 +25,7 @@ import {
   Think,
   Welcome,
 } from '@ant-design/x';
-import XMarkdown from '@ant-design/x-markdown';
+import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
 import type { SSEFields } from '@ant-design/x-sdk';
 import {
   DeepSeekChatProvider,
@@ -223,7 +223,7 @@ const useCopilotStyle = createStyles(({ token, css }) => {
       display: flex;
       align-items: center;
       margin-bottom: 12px;
-      justify-content:space-between;
+      justify-content: space-between;
     `,
     speechButton: css`
       font-size: 18px;
@@ -232,7 +232,7 @@ const useCopilotStyle = createStyles(({ token, css }) => {
   };
 });
 
-const ThinkComponent = React.memo((props: { children: string; streamStatus: string }) => {
+const ThinkComponent = React.memo((props: ComponentProps) => {
   const [title, setTitle] = React.useState(t['Deep thinking'] + '...');
   const [loading, setLoading] = React.useState(true);
 

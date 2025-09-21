@@ -36,7 +36,7 @@ import {
 } from '@ant-design/x';
 import enUS_X from '@ant-design/x/locale/en_US';
 import zhCN_X from '@ant-design/x/locale/zh_CN';
-import XMarkdown from '@ant-design/x-markdown';
+import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
 import type { DefaultMessageInfo } from '@ant-design/x-sdk';
 import {
   DeepSeekChatProvider,
@@ -257,7 +257,7 @@ const SENDER_PROMPTS: GetProp<typeof Prompts, 'items'> = [
   },
 ];
 
-const ThinkComponent = React.memo((props: { children: string; streamStatus: string }) => {
+const ThinkComponent = React.memo((props: ComponentProps) => {
   const [title, setTitle] = React.useState(t.DeepThinking + '...');
   const [loading, setLoading] = React.useState(true);
 
@@ -459,7 +459,7 @@ const useStyle = createStyles(({ token, css }) => {
       overflow-y: auto;
       margin-top: 12px;
       padding: 0;
-    flex:1;
+      flex: 1;
       .ant-conversations-list {
         padding-inline-start: 0;
       }

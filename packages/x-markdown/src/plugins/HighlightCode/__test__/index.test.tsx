@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import HighlightCode from '..';
 import XMarkdown from '../../../XMarkdown';
+import HighlightCode from '..';
 
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
@@ -18,7 +18,7 @@ console.log("javascript");
       <XMarkdown
         content={content}
         components={{
-          code: (props: { class: string; children: string }) => {
+          code: (props: Record<string, any>) => {
             const { class: className, children } = props;
             const lang = className?.match(/language-(\w+)/)?.[1] || '';
             return <HighlightCode lang={lang}>{children}</HighlightCode>;
@@ -40,7 +40,7 @@ console.log("javascript");
       <XMarkdown
         content={content}
         components={{
-          code: (props: { class: string; children: string }) => {
+          code: (props: Record<string, any>) => {
             const { class: className, children } = props;
             const lang = className?.match(/language-(\w+)/)?.[1] || '';
             return <HighlightCode lang={lang}>{children}</HighlightCode>;
@@ -63,7 +63,7 @@ console.log("javascript");
       <XMarkdown
         content={content}
         components={{
-          code: (props: { class: string; children: string }) => {
+          code: (props: Record<string, any>) => {
             const { class: className, children } = props;
             const lang = className?.match(/language-(\w+)/)?.[1] || '';
             return (
@@ -87,7 +87,7 @@ console.log("javascript");
       <XMarkdown
         content={content}
         components={{
-          code: (props: { class: string; children: string }) => {
+          code: (props: Record<string, any>) => {
             const { class: className, children } = props;
             const lang = className?.match(/language-(\w+)/)?.[1] || '';
             return (
@@ -115,7 +115,7 @@ console.log("javascript");
       <XMarkdown
         content={content}
         components={{
-          code: (props: { class: string; children: string }) => {
+          code: (props: Record<string, any>) => {
             const { class: className, children } = props;
             const lang = className?.match(/language-(\w+)/)?.[1] || '';
             return (
@@ -144,7 +144,7 @@ graph TD; A-->B;
       <XMarkdown
         content={content}
         components={{
-          code: (props: { class: string; children: string }) => {
+          code: (props: Record<string, any>) => {
             const { class: className, children } = props;
             const lang = className?.match(/language-(\w+)/)?.[1] || '';
             return <HighlightCode lang={lang}>{children}</HighlightCode>;
@@ -166,8 +166,8 @@ plain text
       <XMarkdown
         content={content}
         components={{
-          code: (props: { class: string; children: string }) => {
-            const { class: className, children } = props;
+          code: (props: Record<string, any>) => {
+            const { className, children } = props;
             const lang = className?.match(/language-(\w+)/)?.[1] || '';
             return <HighlightCode lang={lang}>{children}</HighlightCode>;
           },

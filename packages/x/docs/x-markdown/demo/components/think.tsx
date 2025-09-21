@@ -1,5 +1,5 @@
 import { Bubble, Think } from '@ant-design/x';
-import XMarkdown from '@ant-design/x-markdown';
+import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
 import { Button, Flex } from 'antd';
 import React from 'react';
 
@@ -14,7 +14,7 @@ This mode of thinking helps individuals avoid cognitive biases in complex scenar
 # Hello Deep Thinking\n Deep thinking is over.\n\n You can use the think tag to package your thoughts.
 `;
 
-const ThinkComponent = React.memo((props: { streamStatus: string; children: string }) => {
+const ThinkComponent = React.memo((props: ComponentProps) => {
   const [title, setTitle] = React.useState('Deep thinking...');
   const [loading, setLoading] = React.useState(true);
   const [expand, setExpand] = React.useState(true);

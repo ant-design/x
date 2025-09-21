@@ -1,5 +1,5 @@
 import { XProvider } from '@ant-design/x';
-import XMarkdown from '@ant-design/x-markdown';
+import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
 import HighlightCode from '@ant-design/x-markdown/plugins/HighlightCode';
 import { Card, ColorPicker, Flex, Typography } from 'antd';
 import React from 'react';
@@ -53,9 +53,11 @@ This code includes:
 You can modify the parameters or output format as needed. The Fibonacci sequence here starts with fib(1) = 1, fib(2) = 1.
 `;
 
-const Code = (props: { className: string; children: string }) => {
+const Code: React.FC<ComponentProps> = (props) => {
   const { className, children } = props;
   const lang = className?.match(/language-(\w+)/)?.[1] || '';
+
+  if (typeof children !== 'string') return null;
   return <HighlightCode lang={lang}>{children}</HighlightCode>;
 };
 

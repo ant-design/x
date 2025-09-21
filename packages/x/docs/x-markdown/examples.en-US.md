@@ -23,33 +23,40 @@ Used for rendering streaming Markdown format returned by LLMs.
 <!-- prettier-ignore -->
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
-| content | Markdown content | `string` | - |
-| children | Markdown content, same as content | `string` | - |
-| components | Custom components | `Record<string, React.FC<ComponentProps>>`, see [details](/markdowns/components) | - |
-| paragraphTag | Custom paragraph rendering tag. Avoids errors from p tags wrapping divs in custom components. | `string` | `p` |
-| streaming | Streaming rendering configuration | `SteamingOption`, see [details](/markdowns/streaming) | - |
-| config | Marked.js extension | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |
-| openLinksInNewTab | Whether to open links in new tab | `boolean` | `false` |
-| dompurifyConfig | DOMPurify configuration options for customizing HTML sanitization rules | [`DOMPurify.Config`](https://github.com/cure53/DOMPurify#can-i-configure-dompurify) | - |
-| className | Custom className | `string` | - |
-| rootClassName | Root node custom className, same as className | `string` | - |
-| style | Custom styles | `CSSProperties` | - |
+| content | Markdown content to be rendered | `string` | - |
+| children | Markdown content, alias for `content` property | `string` | - |
+| components | Custom React components to replace HTML elements | `Record<string, React.ComponentType<ComponentProps> \| keyof JSX.IntrinsicElements>`, see [details](/markdowns/components) | - |
+| paragraphTag | Custom HTML tag for paragraph elements. Prevents validation errors when custom components contain block-level elements | `keyof JSX.IntrinsicElements` | `'p'` |
+| streaming | Configuration for streaming rendering behavior | `SteamingOption`, see [details](/markdowns/streaming) | - |
+| config | Marked.js configuration for Markdown parsing and extensions | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |
+| openLinksInNewTab | Whether to add `target="_blank"` to all anchor tags | `boolean` | `false` |
+| dompurifyConfig | DOMPurify configuration for HTML sanitization and XSS protection | [`DOMPurify.Config`](https://github.com/cure53/DOMPurify#can-i-configure-dompurify) | - |
+| className | Additional CSS class name for the root container | `string` | - |
+| rootClassName | Alias for `className`, additional CSS class for the root element | `string` | - |
+| style | Inline styles for the root container | `CSSProperties` | - |
 
 ### SteamingOption
 
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
-| hasNextChunk | Whether there is another chunk. If false, clears all cache and renders. | `boolean` | `false` |
-| enableAnimation | Whether to enable text animation, supports `p, li, h1, h2, h3, h4` | `boolean` | `false` |
-| animationConfig | Text animation configuration | [`ControllerUpdate`](https://react-spring.dev/docs/typescript#controllerupdate) | `{ from: { opacity: 0 }, to: { opacity: 1 }, config: { tension: 170, friction: 26 } }` |
+| hasNextChunk | Indicates whether more content chunks are expected. When false, flushes all cached content and completes rendering | `boolean` | `false` |
+| enableAnimation | Enables text fade-in animation for block elements (`p`, `li`, `h1`, `h2`, `h3`, `h4`) | `boolean` | `false` |
+| animationConfig | Configuration for text appearance animation effects | `AnimationConfig` | `{ fadeDuration: 200, opacity: 0.2 }` |
+
+#### AnimationConfig
+
+| Property     | Description                                                 | Type     | Default |
+| ------------ | ----------------------------------------------------------- | -------- | ------- |
+| fadeDuration | Duration of the fade-in animation in milliseconds           | `number` | `200`   |
+| opacity      | Initial opacity value for characters during animation (0-1) | `number` | `0.2`   |
 
 ### ComponentProps
 
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
-| domNode | Component Element | [`DomNode`](https://github.com/remarkablemark/html-react-parser?tab=readme-ov-file#replace) | - |
-| children | Content wrapped in component | `string` | - |
-| **rest** | Component properties, supports standard HTML attributes (e.g. `a`(link) href, title) and custom attributes | `Record<string,unknown>` | - |
+| domNode | Component Element from html-react-parser, contains the parsed DOM node information | [`DOMNode`](https://github.com/remarkablemark/html-react-parser?tab=readme-ov-file#replace) | - |
+| streamStatus | Streaming status, `loading` indicates streaming in progress, `done` indicates streaming complete | `'loading' \| 'done'` | - |
+| **rest** | Component properties, supports all standard HTML attributes (e.g. `href`, `title`, `className`, etc.) and custom data attributes | `Record<string, any>` | - |
 
 ## FAQ
 
