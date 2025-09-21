@@ -108,9 +108,9 @@ const useStyle = createStyles(({ token, css }) => {
     height: 100%;
     `,
     agentName: css`
-    margin-block-start: 20%;
+    margin-block-start: 25%;
     font-size: 32px;
-    margin-block-end: 36px;
+    margin-block-end: 38px;
     font-weight: 600;
     `,
     chatList: css`
