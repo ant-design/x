@@ -278,6 +278,8 @@ const App = () => {
     DEFAULT_CONVERSATIONS_ITEMS[0].key,
   );
 
+  const [activeConversation, setActiveConversation] = useState<string>();
+
   // ==================== Runtime ====================
 
   const { onRequest, messages, isRequesting, abort, onReload } = useXChat({
@@ -288,6 +290,12 @@ const App = () => {
       return {
         content: locale.noData,
         role: 'assistant',
+      };
+    },
+    requestFallback: (e) => {
+      return {
+        ...e,
+        content: e.content || locale.requestFailedPleaseTryAgain,
       };
     },
   });
@@ -328,7 +336,13 @@ const App = () => {
                   setCurConversation(now);
                 },
               }}
-              items={conversations}
+              items={conversations
+                .map(({ key, label, ...other }) => ({
+                  key,
+                  label: key === activeConversation ? `[${locale.curConversation}]${label}` : label,
+                  ...other,
+                }))
+                .sort(({ key }) => (key === activeConversation ? -1 : 0))}
               className={styles.conversations}
               activeKey={curConversation}
               onActiveChange={async (val) => {
@@ -396,7 +410,7 @@ const App = () => {
                     onRequest({
                       messages: [{ role: 'user', content: val }],
                     });
-
+                    setActiveConversation(curConversation);
                     senderRef.current?.clear?.();
                   }}
                   onCancel={() => {

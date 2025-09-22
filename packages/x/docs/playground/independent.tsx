@@ -515,6 +515,7 @@ const Independent: React.FC = () => {
   const [curConversation, setCurConversation] = useState<string>(
     DEFAULT_CONVERSATIONS_ITEMS[0].key,
   );
+  const [activeConversation, setActiveConversation] = useState<string>();
 
   const [className] = useMarkdownTheme();
   const [messageApi, contextHolder] = message.useMessage();
@@ -535,6 +536,12 @@ const Independent: React.FC = () => {
         role: 'assistant',
       };
     },
+    requestFallback: (e) => {
+      return {
+        ...e,
+        content: e.content || locale.requestFailedPleaseTryAgain,
+      };
+    },
   });
 
   // ==================== Event ====================
@@ -543,6 +550,7 @@ const Independent: React.FC = () => {
     onRequest({
       messages: [{ role: 'user', content: val }],
     });
+    setActiveConversation(curConversation);
   };
 
   // ==================== Nodes ====================
@@ -576,11 +584,13 @@ const Independent: React.FC = () => {
             setCurConversation(now);
           },
         }}
-        items={conversations.map(({ key, label, ...other }) => ({
-          key,
-          label: key === curConversation ? `[${locale.curConversation}]${label}` : label,
-          ...other,
-        }))}
+        items={conversations
+          .map(({ key, label, ...other }) => ({
+            key,
+            label: key === activeConversation ? `[${locale.curConversation}]${label}` : label,
+            ...other,
+          }))
+          .sort(({ key }) => (key === activeConversation ? -1 : 0))}
         className={styles.conversations}
         activeKey={curConversation}
         onActiveChange={async (val) => {
