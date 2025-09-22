@@ -143,6 +143,6 @@ const enUS = {
   iCanHelp: 'I can help:',
 };
 
-export const isZhCN = window.parent?.location?.pathname?.includes('-cn');
+export const isZhCN = window?.parent?.location?.pathname?.includes('-cn');
 
 export default isZhCN ? { ...zhCN_antd, ...zhCN, ...zhCN_X } : { ...enUS_antd, ...enUS, ...enUS_X };
