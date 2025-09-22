@@ -2176,7 +2176,6 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
   <div
     class="ant-flex css-var-«R0» ant-flex-align-center ant-flex-gap-small"
   >
-    <!-- -->
     Default: 
     <div
       class="ant-sender-switch css-var-«R0»"
@@ -2218,7 +2217,6 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
     class="ant-flex css-var-«R0» ant-flex-align-center ant-flex-gap-small"
   >
     Custom checked/unchecked content:
-    <!-- -->
     <div
       class="ant-sender-switch css-var-«R0»"
     >
@@ -2300,7 +2298,6 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
     class="ant-flex css-var-«R0» ant-flex-align-center ant-flex-gap-small"
   >
     Loading:
-    <!-- -->
     <div
       class="ant-sender-switch css-var-«R0»"
     >
@@ -2341,7 +2338,6 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
     class="ant-flex css-var-«R0» ant-flex-align-center ant-flex-gap-small"
   >
     DefaultValue:
-    <!-- -->
     <div
       class="ant-sender-switch css-var-«R0» ant-sender-switch-checked"
     >
@@ -2382,7 +2378,6 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
     class="ant-flex css-var-«R0» ant-flex-align-center ant-flex-gap-small"
   >
     Controlled mode:
-    <!-- -->
     <div
       class="ant-sender-switch css-var-«R0»"
     >
