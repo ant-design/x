@@ -30,7 +30,7 @@ tag: vVERSION
 
 ### @ant-design/x-markdown
 
-- 🛠 重构动画相关实现。[#1198](https://github.com/ant-design/x/pull/1198) 由 [@Div627](https://github.com/Div627) 提交。
+- 🛠 重构动画相关实现。[#1198](https://github.com/ant-design/x/pull/1198) 由 [@Div627](https://github.com/Div627) 提交、[#1204](https://github.com/ant-design/x/pull/1204) 由 [@Div627](https://github.com/Div627) 提交。。
 - 🐛 修复插件导出类型错误问题，以及新增示例和文档[#1187](https://github.com/ant-design/x/pull/1187) 由 [@Div627](https://github.com/Div627) 提交。
 - 🐛 修复 Mermaid 插件切换时渲染异常。[#1175](https://github.com/ant-design/x/pull/1175) 由 [@Div627](https://github.com/Div627) 提交。
 - 🆕 补充 HighlightCode 插件和 Mermaid 插件语义化实现。[#1178](https://github.com/ant-design/x/pull/1178) 由 [@kimteayon](https://github.com/kimteayon) 提交。
