@@ -4,6 +4,8 @@ import { Line } from '@antv/gpt-vis';
 import { Button, Flex, Skeleton } from 'antd';
 import React from 'react';
 import { useMarkdownTheme } from '../_utils';
+import '@ant-design/x-markdown/themes/light.css';
+import '@ant-design/x-markdown/themes/dark.css';
 
 const text = `
 **GPT-Vis**, Components for GPTs, generative AI, and LLM projects. Not only UI Components. [more...](https://github.com/antvis/GPT-Vis) \n\n

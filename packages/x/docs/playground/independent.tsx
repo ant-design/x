@@ -46,6 +46,8 @@ import { Avatar, Button, Flex, type GetProp, message, Pagination, Space } from '
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
 import React, { useState } from 'react';
+import '@ant-design/x-markdown/themes/light.css';
+import '@ant-design/x-markdown/themes/dark.css';
 import { useMarkdownTheme } from '../x-markdown/demo/_utils';
 import locale from './_utils/local';
 

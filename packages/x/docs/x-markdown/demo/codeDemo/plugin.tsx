@@ -4,7 +4,8 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { useMarkdownTheme } from '../_utils';
 import { Adx_Markdown_En, Adx_Markdown_Zh } from '../_utils/adx-markdown';
-
+import '@ant-design/x-markdown/themes/light.css';
+import '@ant-design/x-markdown/themes/dark.css';
 const referenceList = [
   { url: 'https://x.ant.design', title: 'link1' },
   { url: 'https://x.ant.design', title: 'link2' },

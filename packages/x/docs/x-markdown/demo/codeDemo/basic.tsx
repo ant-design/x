@@ -1,6 +1,8 @@
 import { XMarkdown } from '@ant-design/x-markdown';
 import React from 'react';
 import { useMarkdownTheme } from '../_utils';
+import '@ant-design/x-markdown/themes/light.css';
+import '@ant-design/x-markdown/themes/dark.css';
 
 const content = `
 # h1 Heading 

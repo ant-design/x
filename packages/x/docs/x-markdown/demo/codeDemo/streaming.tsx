@@ -5,6 +5,8 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { useMarkdownTheme } from '../_utils';
 import { Adx_Markdown_En, Adx_Markdown_Zh } from '../_utils/adx-markdown';
+import '@ant-design/x-markdown/themes/light.css';
+import '@ant-design/x-markdown/themes/dark.css';
 
 const App = () => {
   const [index, setIndex] = React.useState(0);

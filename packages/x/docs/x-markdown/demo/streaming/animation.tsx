@@ -5,6 +5,8 @@ import { DefaultChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';
 import { Button, Row } from 'antd';
 import React, { useMemo, useState } from 'react';
 import { mockFetch, useMarkdownTheme } from '../_utils';
+import '@ant-design/x-markdown/themes/light.css';
+import '@ant-design/x-markdown/themes/dark.css';
 
 const fullContent = `
 # 杭州城市介绍
