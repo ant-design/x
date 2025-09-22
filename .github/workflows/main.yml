@@ -7,9 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
-      - run: bun i
-      - run: npm i -g utoo
+      - uses: utooland/setup-utoo@v1
+      - run: ut
       - run: ut prestart
       - run: ut lint
       - run: ut tsc
