@@ -14,7 +14,7 @@ const fullContent = `
 
 邮箱链接：<contact@example.com>
 
-### Image 🔗
+### Image 🖼️
 
 ![示例图片](https://mdn.alipayobjects.com/huamei_yz9z7c/afts/img/0lMhRYbo0-8AAAAAQDAAAAgADlJoAQFr/original)
 
