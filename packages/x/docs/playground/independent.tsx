@@ -676,7 +676,7 @@ const Independent: React.FC = () => {
           />
           <Flex
             gap={16}
-            justify="space-around"
+            justify="center"
             style={{
               width: '100%',
             }}
