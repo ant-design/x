@@ -5,7 +5,7 @@ import { Alert, Badge, Flex, Tooltip } from 'antd';
 import { createStyles, css } from 'antd-style';
 import classNames from 'classnames';
 import { FormattedMessage, useLiveDemo, useSiteData } from 'dumi';
-import { pick, pickBy } from 'lodash';
+import { pickBy } from 'lodash';
 import LZString from 'lz-string';
 /* eslint-disable react-hooks-extra/no-direct-set-state-in-use-effect */
 import React, { useEffect, useRef, useState } from 'react';
