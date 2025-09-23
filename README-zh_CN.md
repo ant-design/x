@@ -16,8 +16,8 @@
 
 [更新日志](./CHANGELOG.zh-CN.md) · [报告一个 Bug][github-issues-bug-report] · [想新增特性？][github-issues-feature-request] · [English](./README.md) · 中文
 
-[x-version-image]: https://img.shields.io/npm/v/@ant-design/x.svg?style=flat
-[x-version-url]: https://www.npmjs.com/package/@ant-design/x
+[x-version-image]: https://img.shields.io/npm/v/@ant-design/x/alpha.svg?style=flat-square
+[x-version-url]: https://www.npmjs.com/package/@ant-design/x/v/alpha
 [x-downloads-image]: https://img.shields.io/npm/dm/@ant-design/x.svg?style=flat
 [x-downloads-url]: https://www.npmjs.com/package/@ant-design/x
 [x-bundle-size-image]: https://img.shields.io/bundlephobia/minzip/@ant-design/x
