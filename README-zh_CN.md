@@ -6,7 +6,7 @@
 
 打造卓越 AI 界面解决方案，引领智能新体验。
 
-[![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] ![GitHub contributors]([github-contributors])
+[![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] ![GitHub contributors][github-contributors]
 
 | Package | Latest Version | Download stats | Bundle Size | Package Size | JSDelivr |
 | :--- | :--- | :--- | :--- | :--- | :--- |
