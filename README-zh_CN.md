@@ -65,7 +65,7 @@
 [antd-url]: https://ant.design
 [zhihu-image]: https://img.shields.io/badge/-Ant%20Design-white?logo=zhihu
 [zhihu-url]: https://www.zhihu.com/column/c_1564262000561106944
-[github-contributors]: https://img.shields.io/github/contributors-anon/ant-design/ant-design
+[github-contributors]: https://img.shields.io/github/contributors-anon/ant-design/x
 
 </div>
 
