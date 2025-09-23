@@ -16,8 +16,8 @@ Build excellent AI interfaces and pioneer intelligent new experiences.
 
 [Changelog](./CHANGELOG.en-US.md) · [Report a Bug][github-issues-bug-report] · [Request a Feature][github-issues-feature-request] · English · [中文](./README-zh_CN.md)
 
-[x-version-image]: https://img.shields.io/npm/v/@ant-design/x.svg?style=flat
-[x-version-url]: https://www.npmjs.com/package/@ant-design/x
+[x-version-image]: https://img.shields.io/npm/v/@ant-design/x/alpha.svg?style=flat-square
+[x-version-url]: https://www.npmjs.com/package/@ant-design/x/v/alpha
 [x-downloads-image]: https://img.shields.io/npm/dm/@ant-design/x.svg?style=flat
 [x-downloads-url]: https://www.npmjs.com/package/@ant-design/x
 [x-bundle-size-image]: https://img.shields.io/bundlephobia/minzip/@ant-design/x
