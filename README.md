@@ -6,11 +6,48 @@
 
 Build excellent AI interfaces and pioneer intelligent new experiences.
 
-[![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] [![NPM version][npm-image]][npm-url]
+[![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] [![antd][antd-image]][antd-url] [![Follow zhihu][zhihu-image]][zhihu-url]
 
-[![NPM downloads][download-image]][download-url] [![][bundlephobia-image]][bundlephobia-url] [![antd][antd-image]][antd-url] [![Follow zhihu][zhihu-image]][zhihu-url]
+| Package | Latest Version | Download stats | Bundle Size | Package Size | JSDelivr |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `@ant-design/x` | [![npm version][x-version-image]][x-version-url] | [![npm downloads][x-downloads-image]][x-downloads-url] | [![bundle size][x-bundle-size-image]][x-bundle-size-url] | [![package size][x-package-size-image]][x-package-size-url] | [![jsdelivr][x-jsdelivr-image]][x-jsdelivr-url] |
+| `@ant-design/x-markdown` | [![npm version][x-markdown-version-image]][x-markdown-version-url] | [![npm downloads][x-markdown-downloads-image]][x-markdown-downloads-url] | [![bundle size][x-markdown-bundle-size-image]][x-markdown-bundle-size-url] | [![package size][x-markdown-package-size-image]][x-markdown-package-size-url] | [![jsdelivr][x-markdown-jsdelivr-image]][x-markdown-jsdelivr-url] |
+| `@ant-design/x-sdk` | [![npm version][x-sdk-version-image]][x-sdk-version-url] | [![npm downloads][x-sdk-downloads-image]][x-sdk-downloads-url] | [![bundle size][x-sdk-bundle-size-image]][x-sdk-bundle-size-url] | [![package size][x-sdk-package-size-image]][x-sdk-package-size-url] | [![jsdelivr][x-sdk-jsdelivr-image]][x-sdk-jsdelivr-url] |
 
-[Changelog](./CHANGELOG.md) · [Report a Bug][github-issues-bug-report] · [Request a Feature][github-issues-feature-request] · English · [中文](./README-zh_CN.md)
+[Changelog](./CHANGELOG.en-US.md) · [Report a Bug][github-issues-bug-report] · [Request a Feature][github-issues-feature-request] · English · [中文](./README-zh_CN.md)
+
+[x-version-image]: https://img.shields.io/npm/v/@ant-design/x.svg?style=flat
+[x-version-url]: https://www.npmjs.com/package/@ant-design/x
+[x-downloads-image]: https://img.shields.io/npm/dm/@ant-design/x.svg?style=flat
+[x-downloads-url]: https://www.npmjs.com/package/@ant-design/x
+[x-bundle-size-image]: https://img.shields.io/bundlephobia/minzip/@ant-design/x
+[x-bundle-size-url]: https://bundlephobia.com/result?p=@ant-design/x
+[x-package-size-image]: https://packagephobia.com/badge?p=@ant-design/x
+[x-package-size-url]: https://packagephobia.com/result?p=@ant-design/x
+[x-jsdelivr-image]: https://data.jsdelivr.com/v1/package/npm/@ant-design/x/badge
+[x-jsdelivr-url]: https://www.jsdelivr.com/package/npm/@ant-design/x
+
+[x-markdown-version-image]: https://img.shields.io/npm/v/@ant-design/x-markdown.svg?style=flat
+[x-markdown-version-url]: https://www.npmjs.com/package/@ant-design/x-markdown
+[x-markdown-downloads-image]: https://img.shields.io/npm/dm/@ant-design/x-markdown.svg?style=flat
+[x-markdown-downloads-url]: https://www.npmjs.com/package/@ant-design/x-markdown
+[x-markdown-bundle-size-image]: https://img.shields.io/bundlephobia/minzip/@ant-design/x-markdown
+[x-markdown-bundle-size-url]: https://bundlephobia.com/result?p=@ant-design/x-markdown
+[x-markdown-package-size-image]: https://packagephobia.com/badge?p=@ant-design/x-markdown
+[x-markdown-package-size-url]: https://packagephobia.com/result?p=@ant-design/x-markdown
+[x-markdown-jsdelivr-image]: https://data.jsdelivr.com/v1/package/npm/@ant-design/x-markdown/badge
+[x-markdown-jsdelivr-url]: https://www.jsdelivr.com/package/npm/@ant-design/x-markdown
+
+[x-sdk-version-image]: https://img.shields.io/npm/v/@ant-design/x-sdk.svg?style=flat
+[x-sdk-version-url]: https://www.npmjs.com/package/@ant-design/x-sdk
+[x-sdk-downloads-image]: https://img.shields.io/npm/dm/@ant-design/x-sdk.svg?style=flat
+[x-sdk-downloads-url]: https://www.npmjs.com/package/@ant-design/x-sdk
+[x-sdk-bundle-size-image]: https://img.shields.io/bundlephobia/minzip/@ant-design/x-sdk
+[x-sdk-bundle-size-url]: https://bundlephobia.com/result?p=@ant-design/x-sdk
+[x-sdk-package-size-image]: https://packagephobia.com/badge?p=@ant-design/x-sdk
+[x-sdk-package-size-url]: https://packagephobia.com/result?p=@ant-design/x-sdk
+[x-sdk-jsdelivr-image]: https://data.jsdelivr.com/v1/package/npm/@ant-design/x-sdk/badge
+[x-sdk-jsdelivr-url]: https://www.jsdelivr.com/package/npm/@ant-design/x-sdk
 
 [npm-image]: https://img.shields.io/npm/v/@ant-design/x.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/@ant-design/x
