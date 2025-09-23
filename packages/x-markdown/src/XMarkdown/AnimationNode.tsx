@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { HTMLTag } from './hooks/useAnimation';
 import { AnimationConfig } from './interface';
 
@@ -16,58 +16,40 @@ export interface AnimationTextProps {
 
 const AnimationText = React.memo<AnimationTextProps>((props) => {
   const { text, animationConfig } = props;
-  const [displayText, setDisplayText] = useState('');
+  const { fadeDuration = 200, easing = 'ease-in-out' } = animationConfig || {};
+  const [chunks, setChunks] = useState<string[]>([]);
   const prevTextRef = useRef('');
-  const fadingCharsRef = useRef<string>('');
-  const startTimeRef = useRef<number | null>(null);
-
-  const fadeDuration = useMemo(
-    () => animationConfig?.fadeDuration ?? 200,
-    [animationConfig?.fadeDuration],
-  );
-  const opacity = useMemo(() => animationConfig?.opacity ?? 0.2, [animationConfig?.opacity]);
-
-  const animate = useCallback(
-    (timestamp: number) => {
-      if (!startTimeRef.current) return;
-      const elapsed = timestamp - startTimeRef.current;
-      if (elapsed < fadeDuration) {
-        requestAnimationFrame(animate);
-      } else {
-        setDisplayText(text);
-        fadingCharsRef.current = '';
-      }
-    },
-    [text, fadeDuration],
-  );
 
   useEffect(() => {
     if (text === prevTextRef.current) return;
 
     if (!(prevTextRef.current && text.indexOf(prevTextRef.current) === 0)) {
-      setDisplayText(text);
-      fadingCharsRef.current = '';
+      setChunks([text]);
       prevTextRef.current = text;
       return;
     }
 
-    const prevText = prevTextRef.current;
-    const newChars = text.slice(prevText.length);
-    setDisplayText(prevText);
+    const newText = text.slice(prevTextRef.current.length);
+    if (!newText) return;
 
-    fadingCharsRef.current = newChars;
+    setChunks((prev) => [...prev, newText]);
     prevTextRef.current = text;
-
-    startTimeRef.current = performance.now();
-    requestAnimationFrame(animate);
-  }, [text, animate]);
+  }, [text]);
 
   return (
     <>
-      {displayText}
-      {fadingCharsRef.current ? (
-        <span style={{ opacity: opacity }}>{fadingCharsRef.current}</span>
-      ) : null}
+      {chunks.map((text, index) => {
+        return (
+          <span
+            style={{
+              animation: `x-markdown-fadeIn ${fadeDuration}ms ${easing} forwards`,
+            }}
+            key={`${index}-${text}`}
+          >
+            {text}
+          </span>
+        );
+      })}
     </>
   );
 });

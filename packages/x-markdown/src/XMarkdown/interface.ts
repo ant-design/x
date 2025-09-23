@@ -11,11 +11,11 @@ export interface AnimationConfig {
    */
   fadeDuration?: number;
   /**
-   * @description 动画期间字符的初始透明度值（0-1）
-   * @description Initial opacity value for characters during animation (0-1)
-   * @default 0.2
+   * @description 动画的缓动函数
+   * @description Easing function for the animation
+   * @default 'ease-in-out'
    */
-  opacity?: number;
+  easing?: string;
 }
 
 type Token = Tokens.Generic;

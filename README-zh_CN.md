@@ -31,7 +31,7 @@
 
 </div>
 
-<img width="100%" src="https://mdn.alipayobjects.com/huamei_35zehm/afts/img/A*DfJHS4rP4SgAAAAAgGAAAAgAejCDAQ/original">
+<img width="100%" src="https://github.com/user-attachments/assets/1a44d1dd-5c7b-41a1-b617-7b9594581aeb">
 
 ## 🌈 开箱即用的大模型企业级组件
 

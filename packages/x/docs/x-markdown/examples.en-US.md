@@ -41,14 +41,14 @@ Used for rendering streaming Markdown format returned by LLMs.
 | --- | --- | --- | --- |
 | hasNextChunk | Indicates whether more content chunks are expected. When false, flushes all cached content and completes rendering | `boolean` | `false` |
 | enableAnimation | Enables text fade-in animation for block elements (`p`, `li`, `h1`, `h2`, `h3`, `h4`) | `boolean` | `false` |
-| animationConfig | Configuration for text appearance animation effects | `AnimationConfig` | `{ fadeDuration: 200, opacity: 0.2 }` |
+| animationConfig | Configuration for text appearance animation effects | `AnimationConfig` | `{ fadeDuration: 200, easing: 'ease-in-out' }` |
 
 #### AnimationConfig
 
-| Property     | Description                                                 | Type     | Default |
-| ------------ | ----------------------------------------------------------- | -------- | ------- |
-| fadeDuration | Duration of the fade-in animation in milliseconds           | `number` | `200`   |
-| opacity      | Initial opacity value for characters during animation (0-1) | `number` | `0.2`   |
+| Property     | Description                                       | Type     | Default         |
+| ------------ | ------------------------------------------------- | -------- | --------------- |
+| fadeDuration | Duration of the fade-in animation in milliseconds | `number` | `200`           |
+| easing       | Easing function for the animation                 | `string` | `'ease-in-out'` |
 
 ### ComponentProps
 

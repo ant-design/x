@@ -18,18 +18,18 @@ order: 3
 
 ### streaming
 
-| 参数            | 说明             | 类型              | 默认值                                |
-| --------------- | ---------------- | ----------------- | ------------------------------------- |
-| hasNextChunk    | 是否还有流式数据 | `boolean`         | `false`                               |
-| enableAnimation | 是否开启文字渐显 | `boolean`         | `false`                               |
-| animationConfig | 文字动画配置     | `AnimationConfig` | `{ fadeDuration: 200, opacity: 0.2 }` |
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| hasNextChunk | 是否还有流式数据 | `boolean` | `false` |
+| enableAnimation | 是否开启文字渐显 | `boolean` | `false` |
+| animationConfig | 文字动画配置 | `AnimationConfig` | `{ fadeDuration: 200, easing: 'ease-in-out' }` |
 
 #### AnimationConfig
 
-| 属性         | 说明                      | 类型     | 默认值 |
-| ------------ | ------------------------- | -------- | ------ |
-| fadeDuration | 淡入动画持续时间（毫秒）  | `number` | `200`  |
-| opacity      | 淡入字符的透明度值（0-1） | `number` | `0.2`  |
+| 属性         | 说明                     | 类型     | 默认值          |
+| ------------ | ------------------------ | -------- | --------------- |
+| fadeDuration | 淡入动画持续时间（毫秒） | `number` | `200`           |
+| easing       | 动画的缓动函数           | `string` | `'ease-in-out'` |
 
 ### 使用示例
 
@@ -44,8 +44,8 @@ const App = () => {
         hasNextChunk: true,
         enableAnimation: true,
         animationConfig: {
-          from: { opacity: 0 },
-          to: { opacity: 1 },
+          fadeDuration: 200,
+          easing: 'ease-in-out',
         },
       }}
     />
