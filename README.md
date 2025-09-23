@@ -6,7 +6,7 @@
 
 Build excellent AI interfaces and pioneer intelligent new experiences.
 
-[![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] [![Follow zhihu][zhihu-image]][zhihu-url]
+[![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] ![GitHub contributors][github-contributors]
 
 | Package | Latest Version | Download stats | Bundle Size | Package Size | JSDelivr |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -65,6 +65,7 @@ Build excellent AI interfaces and pioneer intelligent new experiences.
 [antd-url]: https://ant.design
 [zhihu-image]: https://img.shields.io/badge/-Ant%20Design-white?logo=zhihu
 [zhihu-url]: https://www.zhihu.com/column/c_1564262000561106944
+[github-contributors]: https://img.shields.io/github/contributors-anon/ant-design/x
 
 </div>
 
