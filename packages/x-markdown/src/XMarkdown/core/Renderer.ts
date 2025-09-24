@@ -65,6 +65,43 @@ class Renderer {
     };
   }
 
+  private replaceElement(unclosedTags?: Set<string>) {
+    return (domNode: DOMNode) => {
+      if (!('name' in domNode)) return;
+
+      const { name, attribs, children } = domNode as Element;
+      const renderElement = this.options.components?.[name];
+
+      if (renderElement) {
+        const streamStatus = unclosedTags?.has(name) ? 'loading' : 'done';
+        const props: ComponentProps = {
+          domNode,
+          streamStatus,
+          ...attribs,
+        };
+
+        // Handle class and className merging
+        const classes = [props.className, props.classname, props.class]
+          .filter(Boolean)
+          .join(' ')
+          .trim();
+        props.className = classes || '';
+
+        if (children) {
+          props.children = this.processChildren(children as DOMNode[], unclosedTags);
+        }
+
+        return React.createElement(renderElement, props);
+      }
+    };
+  }
+
+  private processChildren(children: DOMNode[], unclosedTags?: Set<string>): ReactNode {
+    return domToReact(children as DOMNode[], {
+      replace: this.replaceElement(unclosedTags),
+    });
+  }
+
   public processHtml(htmlString: string): React.ReactNode {
     const unclosedTags = this.detectUnclosedTags(htmlString);
     // Use DOMPurify to clean HTML while preserving custom components and target attributes
@@ -72,34 +109,7 @@ class Renderer {
     const cleanHtml = DOMPurify.sanitize(htmlString, purifyConfig);
 
     return parseHtml(cleanHtml, {
-      replace: (domNode) => {
-        if (!('name' in domNode)) return;
-
-        const { name, attribs, children } = domNode as Element;
-        const renderElement = this.options.components?.[name];
-
-        if (renderElement) {
-          const streamStatus = unclosedTags.has(name) ? 'loading' : 'done';
-          const props: ComponentProps = {
-            domNode,
-            streamStatus,
-            ...attribs,
-          };
-
-          // Handle class and className merging
-          const classes = [props.className, props.classname, props.class]
-            .filter(Boolean)
-            .join(' ')
-            .trim();
-          props.className = classes || '';
-
-          if (children) {
-            props.children = domToReact(children as DOMNode[]);
-          }
-
-          return React.createElement(renderElement, props);
-        }
-      },
+      replace: this.replaceElement(unclosedTags),
     });
   }
 

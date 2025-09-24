@@ -16,6 +16,14 @@ tag: vVERSION
 
 ---
 
+## 2.0.0-alpha.9
+
+`2025-09-24`
+
+### @ant-design/x-markdown
+
+- 🐛 Fixed code highlighting plugin style loss, resolved component matching issues with nested child elements, and removed table text-align attribute from default styles. [#1212](https://github.com/ant-design/x/pull/1212) by [@Div627](https://github.com/Div627).
+
 ## 2.0.0-alpha.8
 
 `2025-09-22`
