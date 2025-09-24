@@ -28,8 +28,6 @@ const genHighlightCodeStyle: GenerateStyle<HighlightCodeToken> = (token) => {
         background: token.colorBgContainer,
         border: `1px solid ${token.colorBgTitle}`,
         borderTop: 'none',
-        paddingInline: token.paddingSM,
-        paddingBlock: token.paddingSM,
         overflow: 'hidden',
         'pre,code': {
           whiteSpace: 'pre',
