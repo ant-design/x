@@ -21,9 +21,7 @@ tag: vVERSION
 
 ### @ant-design/x-markdown
 
-- 🐛 修复代码高亮插件样式丢失，以及样式调整。[#1212](https://github.com/ant-design/x/pull/1212) 由 [@Div627](https://github.com/Div627) 提交。
-- 🐛 修复 components 无法匹配到被嵌套的子元素。[#1212](https://github.com/ant-design/x/pull/1212) 由 [@Div627](https://github.com/Div627) 提交。
-- 🐛 移除默认样式里的 table text-align 属性。[#1212](https://github.com/ant-design/x/pull/1212) 由 [@Div627](https://github.com/Div627) 提交。
+- 🐛 修复代码高亮插件样式丢失、组件无法匹配嵌套子元素的问题，并移除默认样式中的 table text-align 属性。[#1212](https://github.com/ant-design/x/pull/1212) 由 [@Div627](https://github.com/Div627) 提交。
 
 ## 2.0.0-alpha.8
 
