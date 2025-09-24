@@ -2,12 +2,13 @@ import {
   CommentOutlined,
   FireOutlined,
   HeartOutlined,
+  OpenAIOutlined,
   ReadOutlined,
   RocketOutlined,
   SmileOutlined,
 } from '@ant-design/icons';
 import { Conversations, Prompts, PromptsProps, Sender, Suggestion, XProvider } from '@ant-design/x';
-import { Card, ColorPicker, Divider, Flex, message, Space, Typography } from 'antd';
+import { Card, ColorPicker, Divider, Flex, message, Slider, Space, Typography } from 'antd';
 import React from 'react';
 
 type ThemeData = {
@@ -87,7 +88,6 @@ const items: PromptsProps['items'] = [
 ];
 
 export default () => {
-  const [value, setValue] = React.useState('');
   const [data, setData] = React.useState<ThemeData>(defaultData);
 
   return (
@@ -156,15 +156,72 @@ export default () => {
               <Suggestion items={[{ label: 'Write a report', value: 'report' }]}>
                 {({ onTrigger, onKeyDown }) => (
                   <Sender
-                    value={value}
+                    autoSize={{
+                      maxRows: 3,
+                      minRows: 2,
+                    }}
+                    suffix={false}
+                    initialSlotConfig={[
+                      { type: 'text', value: 'I want to go to' },
+                      {
+                        type: 'select',
+                        key: 'destination',
+                        props: {
+                          defaultValue: 'Beijing',
+                          options: ['Beijing', 'Shanghai', 'Guangzhou'],
+                          placeholder: 'Please select a destination',
+                        },
+                      },
+                      { type: 'text', value: 'for a trip with ' },
+                      { type: 'tag', key: 'tag', props: { label: '@ Chuck', value: 'a man' } },
+                      { type: 'text', value: ', the date is ' },
+                      {
+                        type: 'input',
+                        key: 'date',
+                        props: {
+                          placeholder: 'Please enter a date',
+                        },
+                      },
+                      { type: 'text', value: ', and the price should be ' },
+                      {
+                        type: 'custom',
+                        key: 'priceRange',
+                        props: {
+                          defaultValue: [20, 50],
+                        },
+                        customRender: (value: any, onChange: (value: any) => void, props) => {
+                          return (
+                            <div style={{ width: '100px' }}>
+                              <Slider
+                                {...props}
+                                style={{ margin: 0 }}
+                                range
+                                value={value}
+                                onChange={onChange}
+                              />
+                            </div>
+                          );
+                        },
+                        formatResult: (value: any) => {
+                          return `between ${value[0]} and ${value[1]} RMB.`;
+                        },
+                      },
+                    ]}
                     onChange={(nextVal) => {
                       if (nextVal === '/') {
                         onTrigger();
                       } else if (!nextVal) {
                         onTrigger(false);
                       }
-                      setValue(nextVal);
                     }}
+                    footer={(actions) => (
+                      <Flex justify="space-between" align="center">
+                        <Sender.Switch value={true} icon={<OpenAIOutlined />}>
+                          Deep Think
+                        </Sender.Switch>
+                        {actions}
+                      </Flex>
+                    )}
                     onKeyDown={onKeyDown}
                     placeholder='Type "/" to trigger suggestion'
                   />
