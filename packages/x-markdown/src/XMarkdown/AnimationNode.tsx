@@ -1,3 +1,4 @@
+import type { DOMNode } from 'html-react-parser';
 import React, { useEffect, useRef, useState } from 'react';
 import { HTMLTag } from './hooks/useAnimation';
 import { AnimationConfig } from './interface';
@@ -6,6 +7,8 @@ export interface AnimationNodeProps extends React.HTMLAttributes<HTMLElement> {
   children?: React.ReactNode | React.ReactNode[];
   nodeTag: HTMLTag;
   animationConfig?: AnimationConfig;
+  streamStatus?: 'loading' | 'done';
+  domNode?: DOMNode;
   [key: string]: unknown;
 }
 
@@ -55,7 +58,7 @@ const AnimationText = React.memo<AnimationTextProps>((props) => {
 });
 
 const AnimationNode: React.FC<AnimationNodeProps> = (props) => {
-  const { nodeTag, children, animationConfig, _domNode, _streamStatus, ...restProps } = props;
+  const { nodeTag, children, animationConfig, domNode, streamStatus, ...restProps } = props;
 
   const renderChildren = (): React.ReactNode | React.ReactNode[] => {
     if (!children) return null;

@@ -607,6 +607,81 @@ describe('Renderer', () => {
       createElementSpy.mockRestore();
       jest.restoreAllMocks();
     });
+
+    it('should handle complex nested structures with partial component mapping', () => {
+      const ArticleComponent: React.FC<any> = (props) => React.createElement('article', props);
+      const SectionComponent: React.FC<any> = (props) => React.createElement('section', props);
+      // Only map article and section, not div or p
+
+      const components = {
+        article: ArticleComponent,
+        section: SectionComponent,
+      };
+
+      const renderer = new Renderer({ components });
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      const html = '<article><section><div><p>mixed content</p></div></section></article>';
+      renderer.processHtml(html);
+
+      // Only article and section should be matched as components
+      const articleCalls = createElementSpy.mock.calls.filter(
+        (call) => call[0] === ArticleComponent,
+      );
+      const sectionCalls = createElementSpy.mock.calls.filter(
+        (call) => call[0] === SectionComponent,
+      );
+
+      expect(articleCalls).toHaveLength(1);
+      expect(sectionCalls).toHaveLength(1);
+
+      createElementSpy.mockRestore();
+    });
+
+    it('should handle recursive nesting with same component type', () => {
+      const DivComponent: React.FC<any> = (props) => React.createElement('div', props);
+
+      const components = {
+        div: DivComponent,
+      };
+
+      const renderer = new Renderer({ components });
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      const html = '<div><div><div>deeply nested divs</div></div></div>';
+      renderer.processHtml(html);
+
+      // Should create 3 div components
+      const divCalls = createElementSpy.mock.calls.filter((call) => call[0] === DivComponent);
+      expect(divCalls).toHaveLength(3);
+
+      createElementSpy.mockRestore();
+    });
+
+    it('should preserve component hierarchy in children prop', () => {
+      const ParentComponent: React.FC<any> = (props) => React.createElement('div', props);
+      const ChildComponent: React.FC<any> = (props) => React.createElement('span', props);
+      const GrandchildComponent: React.FC<any> = (props) => React.createElement('strong', props);
+
+      const components = {
+        div: ParentComponent,
+        span: ChildComponent,
+        strong: GrandchildComponent,
+      };
+
+      const renderer = new Renderer({ components });
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      const html = '<div><span><strong>deep content</strong></span></div>';
+      renderer.processHtml(html);
+
+      // Verify the hierarchy is preserved in children
+      const parentCall = createElementSpy.mock.calls.find((call) => call[0] === ParentComponent);
+      expect(parentCall).toBeDefined();
+      expect(parentCall![1]).toHaveProperty('children');
+
+      createElementSpy.mockRestore();
+    });
   });
 
   describe('className merging edge cases', () => {
@@ -768,6 +843,256 @@ describe('Renderer', () => {
       expect(result).toBeDefined();
 
       processHtmlSpy.mockRestore();
+    });
+  });
+
+  describe('nested components matching', () => {
+    it('should match both parent and child components when both are provided in components', () => {
+      const ParentComponent: React.FC<any> = (props) => {
+        return React.createElement('div', { 'data-testid': 'parent', ...props });
+      };
+      const ChildComponent: React.FC<any> = (props) => {
+        return React.createElement('span', { 'data-testid': 'child', ...props });
+      };
+
+      const components = {
+        p: ParentComponent,
+        a: ChildComponent,
+      };
+
+      const renderer = new Renderer({ components });
+
+      // Mock createElement to capture all component calls
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      const html = '<p><a>link text</a></p>';
+      renderer.processHtml(html);
+
+      // Verify both p and a components were called
+      const parentCall = createElementSpy.mock.calls.find((call) => call[0] === ParentComponent);
+      const childCall = createElementSpy.mock.calls.find((call) => call[0] === ChildComponent);
+
+      expect(parentCall).toBeDefined();
+      expect(childCall).toBeDefined();
+
+      // Verify parent contains child
+      expect(parentCall![1]).toHaveProperty('children');
+
+      createElementSpy.mockRestore();
+    });
+
+    it('should match deeply nested components', () => {
+      const DivComponent: React.FC<any> = (props) => React.createElement('div', props);
+      const SpanComponent: React.FC<any> = (props) => React.createElement('span', props);
+      const StrongComponent: React.FC<any> = (props) => React.createElement('strong', props);
+
+      const components = {
+        div: DivComponent,
+        span: SpanComponent,
+        strong: StrongComponent,
+      };
+
+      const renderer = new Renderer({ components });
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      const html = '<div><span><strong>deeply nested</strong></span></div>';
+      renderer.processHtml(html);
+
+      // Verify all components were matched
+      expect(createElementSpy).toHaveBeenCalledWith(DivComponent, expect.any(Object));
+      expect(createElementSpy).toHaveBeenCalledWith(SpanComponent, expect.any(Object));
+      expect(createElementSpy).toHaveBeenCalledWith(StrongComponent, expect.any(Object));
+
+      createElementSpy.mockRestore();
+    });
+
+    it('should handle mixed custom and standard HTML tags', () => {
+      const CustomP: React.FC<any> = (props) => React.createElement('p', props);
+      const CustomA: React.FC<any> = (props) => React.createElement('a', props);
+
+      const components = {
+        p: CustomP,
+        a: CustomA,
+      };
+
+      const renderer = new Renderer({ components });
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      const html = '<p><a href="/test">link</a> and <span>standard span</span></p>';
+      renderer.processHtml(html);
+
+      // Verify custom components were used
+      expect(createElementSpy).toHaveBeenCalledWith(CustomP, expect.any(Object));
+      expect(createElementSpy).toHaveBeenCalledWith(CustomA, expect.any(Object));
+
+      createElementSpy.mockRestore();
+    });
+
+    it('should handle sibling components at same level', () => {
+      const LiComponent: React.FC<any> = (props) => React.createElement('li', props);
+      const StrongComponent: React.FC<any> = (props) => React.createElement('strong', props);
+
+      const components = {
+        li: LiComponent,
+        strong: StrongComponent,
+      };
+
+      const renderer = new Renderer({ components });
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      const html = '<ul><li><strong>item1</strong></li><li><strong>item2</strong></li></ul>';
+      renderer.processHtml(html);
+
+      // Count how many times each component was called
+      const liCalls = createElementSpy.mock.calls.filter((call) => call[0] === LiComponent);
+      const strongCalls = createElementSpy.mock.calls.filter((call) => call[0] === StrongComponent);
+
+      expect(liCalls).toHaveLength(2);
+      expect(strongCalls).toHaveLength(2);
+
+      createElementSpy.mockRestore();
+    });
+  });
+
+  describe('unclosed tags scenarios', () => {
+    it('should handle unclosed parent tags with closed child tags', () => {
+      const ParentComponent: React.FC<any> = (props) => React.createElement('div', props);
+      const ChildComponent: React.FC<any> = (props) => React.createElement('span', props);
+
+      const components = {
+        div: ParentComponent,
+        span: ChildComponent,
+      };
+
+      const renderer = new Renderer({ components });
+
+      // Mock detectUnclosedTags to simulate unclosed div
+      const mockUnclosedTags = new Set(['div']);
+      jest.spyOn(renderer as any, 'detectUnclosedTags').mockReturnValue(mockUnclosedTags);
+
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      const html = '<div><span>child content</span>'; // div is unclosed
+      renderer.processHtml(html);
+
+      // Verify both components are still matched
+      const parentCall = createElementSpy.mock.calls.find((call) => call[0] === ParentComponent);
+      const childCall = createElementSpy.mock.calls.find((call) => call[0] === ChildComponent);
+
+      expect(parentCall).toBeDefined();
+      expect(childCall).toBeDefined();
+
+      // Verify parent has loading status due to unclosed tag
+      expect(parentCall![1]).toHaveProperty('streamStatus', 'loading');
+      // Child should have done status as it's properly closed
+      expect(childCall![1]).toHaveProperty('streamStatus', 'done');
+
+      createElementSpy.mockRestore();
+      jest.restoreAllMocks();
+    });
+
+    it('should handle unclosed child tags within closed parent tags', () => {
+      const ParentComponent: React.FC<any> = (props) => React.createElement('div', props);
+      const ChildComponent: React.FC<any> = (props) => React.createElement('span', props);
+
+      const components = {
+        div: ParentComponent,
+        span: ChildComponent,
+      };
+
+      const renderer = new Renderer({ components });
+
+      // Mock detectUnclosedTags to simulate unclosed span
+      const mockUnclosedTags = new Set(['span']);
+      jest.spyOn(renderer as any, 'detectUnclosedTags').mockReturnValue(mockUnclosedTags);
+
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      const html = '<div><span>child content</div>'; // span is unclosed
+      renderer.processHtml(html);
+
+      const parentCall = createElementSpy.mock.calls.find((call) => call[0] === ParentComponent);
+      const childCall = createElementSpy.mock.calls.find((call) => call[0] === ChildComponent);
+
+      expect(parentCall).toBeDefined();
+      expect(childCall).toBeDefined();
+
+      // Parent should have done status as it's properly closed
+      expect(parentCall![1]).toHaveProperty('streamStatus', 'done');
+      // Child should have loading status due to unclosed tag
+      expect(childCall![1]).toHaveProperty('streamStatus', 'loading');
+
+      createElementSpy.mockRestore();
+      jest.restoreAllMocks();
+    });
+
+    it('should handle multiple unclosed tags at different levels', () => {
+      const DivComponent: React.FC<any> = (props) => React.createElement('div', props);
+      const PComponent: React.FC<any> = (props) => React.createElement('p', props);
+      const SpanComponent: React.FC<any> = (props) => React.createElement('span', props);
+
+      const components = {
+        div: DivComponent,
+        p: PComponent,
+        span: SpanComponent,
+      };
+
+      const renderer = new Renderer({ components });
+
+      // Mock detectUnclosedTags to simulate unclosed div and span
+      const mockUnclosedTags = new Set(['div', 'span']);
+      jest.spyOn(renderer as any, 'detectUnclosedTags').mockReturnValue(mockUnclosedTags);
+
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      const html = '<div><p><span>content</p>'; // div and span are unclosed
+      renderer.processHtml(html);
+
+      const divCall = createElementSpy.mock.calls.find((call) => call[0] === DivComponent);
+      const pCall = createElementSpy.mock.calls.find((call) => call[0] === PComponent);
+      const spanCall = createElementSpy.mock.calls.find((call) => call[0] === SpanComponent);
+
+      expect(divCall![1]).toHaveProperty('streamStatus', 'loading');
+      expect(pCall![1]).toHaveProperty('streamStatus', 'done');
+      expect(spanCall![1]).toHaveProperty('streamStatus', 'loading');
+
+      createElementSpy.mockRestore();
+      jest.restoreAllMocks();
+    });
+
+    it('should handle completely unclosed nested structure', () => {
+      const DivComponent: React.FC<any> = (props) => React.createElement('div', props);
+      const PComponent: React.FC<any> = (props) => React.createElement('p', props);
+      const AComponent: React.FC<any> = (props) => React.createElement('a', props);
+
+      const components = {
+        div: DivComponent,
+        p: PComponent,
+        a: AComponent,
+      };
+
+      const renderer = new Renderer({ components });
+
+      // Mock detectUnclosedTags to simulate all tags unclosed
+      const mockUnclosedTags = new Set(['div', 'p', 'a']);
+      jest.spyOn(renderer as any, 'detectUnclosedTags').mockReturnValue(mockUnclosedTags);
+
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      const html = '<div><p><a>unclosed content'; // All tags unclosed
+      renderer.processHtml(html);
+
+      const calls = createElementSpy.mock.calls;
+      const divCall = calls.find((call) => call[0] === DivComponent);
+      const pCall = calls.find((call) => call[0] === PComponent);
+      const aCall = calls.find((call) => call[0] === AComponent);
+
+      expect(divCall![1]).toHaveProperty('streamStatus', 'loading');
+      expect(pCall![1]).toHaveProperty('streamStatus', 'loading');
+      expect(aCall![1]).toHaveProperty('streamStatus', 'loading');
+
+      createElementSpy.mockRestore();
+      jest.restoreAllMocks();
     });
   });
 });
