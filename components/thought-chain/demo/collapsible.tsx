@@ -1,8 +1,7 @@
-import { ThoughtChain } from '@ant-design/x';
 import type { ThoughtChainProps } from '@ant-design/x';
-import React, { useState } from 'react';
-
+import { ThoughtChain } from '@ant-design/x';
 import { Card, Typography } from 'antd';
+import React, { useState } from 'react';
 
 const { Paragraph, Text } = Typography;
 
