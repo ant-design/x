@@ -7,9 +7,17 @@ import { Button, message, Tooltip } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import type { HighlightCodeProps } from '../type';
 import useStyle from './style';
+
+const customOneLight = {
+  ...oneLight,
+  'pre[class*="language-"]': {
+    ...oneLight['pre[class*="language-"]'],
+    margin: 0,
+  },
+};
 
 const HighlightCode: React.FC<HighlightCodeProps> = (props) => {
   const {
@@ -115,13 +123,9 @@ const HighlightCode: React.FC<HighlightCodeProps> = (props) => {
         style={{ ...contextConfig.styles.code, ...styles.code }}
       >
         <SyntaxHighlighter
-          customStyle={{
-            padding: 0,
-            background: 'transparent',
-          }}
           language={lang}
           wrapLines={true}
-          style={tomorrow}
+          style={customOneLight}
           {...highlightProps}
         >
           {children.replace(/\n$/, '')}

@@ -16,6 +16,14 @@ tag: vVERSION
 
 ---
 
+## 2.0.0-alpha.9
+
+`2025-09-24`
+
+### @ant-design/x-markdown
+
+- 🐛 Fixed code highlighting plugin style loss, resolved component matching issues with nested child elements, and removed table text-align attribute from default styles. [#1212](https://github.com/ant-design/x/pull/1212) by [@Div627](https://github.com/Div627).
+
 ## 2.0.0-alpha.8
 
 `2025-09-22`
@@ -31,7 +39,7 @@ tag: vVERSION
 
 ### @ant-design/x-markdown
 
-- 🛠 Refactored animation-related implementation. [#1198](https://github.com/ant-design/x/pull/1198) by [@Div627](https://github.com/Div627).
+- 🛠 Refactored animation-related implementation. [#1198](https://github.com/ant-design/x/pull/1198) by [@Div627](https://github.com/Div627), [#1204](https://github.com/ant-design/x/pull/1204) by [@Div627](https://github.com/Div627).
 - 🐛 Fixed plugin export type error, and added examples and documentation. [#1187](https://github.com/ant-design/x/pull/1187) by [@Div627](https://github.com/Div627).
 - 🐛 Fixed rendering exception when switching Mermaid plugin. [#1175](https://github.com/ant-design/x/pull/1175) by [@Div627](https://github.com/Div627).
 - 🆕 Added semantic implementation for HighlightCode and Mermaid plugins. [#1178](https://github.com/ant-design/x/pull/1178) by [@kimteayon](https://github.com/kimteayon).
@@ -44,7 +52,7 @@ tag: vVERSION
 ### Others
 
 - 🆕 Updated the overall site documentation. [#1194](https://github.com/ant-design/x/pull/1194) by [@kimteayon](https://github.com/kimteayon).
-- 🆕 Updated the showcase functionality. [#1184](https://github.com/ant-design/x/pull/1184) by [@kimteayon](https://github.com/kimteayon), [#1195](https://github.com/ant-design/x/pull/1195) by [@kimteayon](https://github.com/kimteayon), [#1194](https://github.com/ant-design/x/pull/1194) by [@kimteayon](https://github.com/kimteayon).
+- 🆕 Updated the showcase functionality, added 'Ultramodern' showcase. [#1184](https://github.com/ant-design/x/pull/1184) by [@kimteayon](https://github.com/kimteayon), [#1195](https://github.com/ant-design/x/pull/1195) by [@kimteayon](https://github.com/kimteayon), [#1194](https://github.com/ant-design/x/pull/1194) by [@kimteayon](https://github.com/kimteayon).
 - 📖 Optimized the official site to enhance user experience. [#1170](https://github.com/ant-design/x/pull/1170) by [@jinyang](https://github.com/jinyang), [#1186](https://github.com/ant-design/x/pull/1186) by [@jinyang](https://github.com/jinyang), [#1192](https://github.com/ant-design/x/pull/1192) by [@iamkun-2](https://github.com/iamkun-2), [#1193](https://github.com/ant-design/x/pull/1193) by [@iamkun-2](https://github.com/iamkun-2), [#1197](https://github.com/ant-design/x/pull/1197) by [@elrrrrrrr](https://github.com/elrrrrrrr), [#1199](https://github.com/ant-design/x/pull/1199) by [@Div627](https://github.com/Div627).
 
 ## 2.0.0-alpha.7
