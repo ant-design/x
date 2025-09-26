@@ -24,7 +24,7 @@ import { Flex, GetRef, message } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '@ant-design/x-markdown/themes/light.css';
 import '@ant-design/x-markdown/themes/dark.css';
 import { useMarkdownTheme } from '../x-markdown/demo/_utils';
@@ -304,6 +304,11 @@ const App = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const [deepThink, setDeepThink] = useState<boolean>(true);
 
+  useEffect(() => {
+    senderRef.current!.focus({
+      cursor: 'end',
+    });
+  }, [senderRef.current]);
   return (
     <XProvider locale={locale}>
       {contextHolder}
@@ -403,6 +408,7 @@ const App = () => {
                 <Sender
                   suffix={false}
                   ref={senderRef}
+                  key={curConversation}
                   initialSlotConfig={initialSlotConfig}
                   loading={isRequesting}
                   onSubmit={(val) => {
