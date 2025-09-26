@@ -21,7 +21,7 @@ const App: React.FC = () => {
 
   return (
     <SemanticPreview
-      componentName="Sender"
+      componentName="Think"
       semantics={[
         { name: 'root', desc: locale.root },
         { name: 'status', desc: locale.status },
