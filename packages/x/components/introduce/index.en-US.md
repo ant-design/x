@@ -84,7 +84,7 @@ With [X SDK](/sdks/introduce), you can easily integrate models and agent service
 
 ## ✨ High-performance Markdown Streaming Engine
 
-We provide an optimized [X Markdown](/markdowns/introduce) rendering solution for streaming content, with powerful extension capabilities. It supports formulas, code highlighting, mermaid charts, and delivers excellent performance for smooth content display.
+We provide an optimized [X Markdown](/x-markdowns/introduce) rendering solution for streaming content, with powerful extension capabilities. It supports formulas, code highlighting, mermaid charts, and delivers excellent performance for smooth content display.
 
 ## On-demand Loading
 

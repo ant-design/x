@@ -12,7 +12,7 @@ Ant Design X 是一款AI应用复合工具集，融合了 UI 组件库、流式 
 
 **`@ant-design/x-markdown` - 高性能流式渲染引擎**
 
-专为流式内容优化的 Markdown 渲染解决方案、强大的扩展能力，支持公式、代码高亮、mermaid 图表等极致性能表现，确保流畅的内容展示体验。查看详情请点击[这里](/markdowns/introduce-cn)。
+专为流式内容优化的 Markdown 渲染解决方案、强大的扩展能力，支持公式、代码高亮、mermaid 图表等极致性能表现，确保流畅的内容展示体验。查看详情请点击[这里](/x-markdowns/introduce-cn)。
 
 **`@ant-design/x-sdk` - AI 对话数据流管理**
 

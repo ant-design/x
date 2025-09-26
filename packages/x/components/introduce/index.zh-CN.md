@@ -84,7 +84,7 @@ export default App;
 
 ## ✨ Markdown 高性能流式渲染引擎
 
-我们提供专为流式内容优化的 [X Markdown](/markdowns/introduce-cn) 渲染解决方案、强大的扩展能力，支持公式、代码高亮、mermaid 图表等、极致性能表现，确保流畅的内容展示体验。
+我们提供专为流式内容优化的 [X Markdown](/x-markdowns/introduce-cn) 渲染解决方案、强大的扩展能力，支持公式、代码高亮、mermaid 图表等、极致性能表现，确保流畅的内容展示体验。
 
 ## 按需加载
 

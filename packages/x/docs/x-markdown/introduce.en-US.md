@@ -74,8 +74,8 @@ export default App;
 
 ## Plugins
 
-`@ant-design/x-markdown` provides a rich set of plugins that can be used via the `plugins` property. See [Plugin Collection](/markdowns/plugins) for details.
+`@ant-design/x-markdown` provides a rich set of plugins that can be used via the `plugins` property. See [Plugin Collection](/x-markdowns/plugins) for details.
 
 ## Themes
 
-`@ant-design/x-markdown` offers a variety of themes to choose from. See [Themes](/markdowns/themes) for details.
+`@ant-design/x-markdown` offers a variety of themes to choose from. See [Themes](/x-markdowns/themes) for details.

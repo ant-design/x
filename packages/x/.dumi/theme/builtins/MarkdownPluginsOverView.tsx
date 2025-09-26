@@ -44,7 +44,7 @@ const MarkdownPluginsOverView: React.FC<null> = () => {
     const description = lang === 'cn' ? item?.desc : item?.descEn;
     const hrefBase = item?.plugin?.toLowerCase();
     const href =
-      lang === 'cn' ? `/markdowns/plugin-${hrefBase}-cn` : `/markdowns/plugin-${hrefBase}`;
+      lang === 'cn' ? `/x-markdowns/plugin-${hrefBase}-cn` : `/x-markdowns/plugin-${hrefBase}`;
     return {
       description,
       href,

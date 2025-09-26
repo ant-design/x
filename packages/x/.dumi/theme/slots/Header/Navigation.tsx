@@ -49,8 +49,8 @@ const defaultItems = [
     key: 'components',
   },
   {
-    path: '/markdowns/introduce',
-    basePath: '/markdown',
+    path: '/x-markdowns/introduce',
+    basePath: '/x-markdown',
     key: 'markdown',
   },
   {

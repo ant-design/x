@@ -5,7 +5,7 @@ order: 3
 
 ## 介绍
 
-通过缓存隐藏markdown格式和动画效果，优化 LLM 场景下流式 Markdown 渲染效果。
+通过缓存隐藏 markdown 格式和动画效果，优化 LLM 场景下流式 Markdown 渲染效果。
 
 ## 代码演示
 

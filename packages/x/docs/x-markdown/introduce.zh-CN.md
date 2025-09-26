@@ -7,20 +7,20 @@ title: 介绍
 
 ## ✨ 特性
 
-使用 [`marked`](https://github.com/markedjs/marked) 作为基础 markdown 渲染器，具备marked的所有特性。
+使用 [`marked`](https://github.com/markedjs/marked) 作为基础 markdown 渲染器，具备 marked 的所有特性。
 
 - 🚀 为速度而生。
-- 🤖 流式友好，大模型Markdown渲染解决方案。
+- 🤖 流式友好，大模型 Markdown 渲染解决方案。
 - ⬇️ 低级编译器，用于解析 Markdown，无需长时间缓存或阻塞。
 - ⚖️ 轻量级，同时实现所有支持的风格和规范的 markdown 功能。
-- 🔐 默认安全，无dangerouslySetInnerHTML XSS 攻击。
-- 🎨 可自定义组件，传递你自己的组件来代替\<h2\>for## hi。
+- 🔐 默认安全，无 dangerouslySetInnerHTML XSS 攻击。
+- 🎨 可自定义组件，传递你自己的组件来代替 \<h2\> for ## hi。
 - 🔧 丰富的插件，有很多插件可供选择。
 - 😊 兼容，100% 符合 CommonMark，100% 符合 GFM 插件。
 
 ## 兼容环境
 
-与 [`marked`](https://github.com/markedjs/marked) 保持一致。为了提高整体markdown对于系统的兼容性支持，可以自定义polyfill，来提高兼容性。
+与 [`marked`](https://github.com/markedjs/marked) 保持一致。为了提高整体 markdown 对于系统的兼容性支持，可以自定义 polyfill，来提高兼容性。
 
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="Edge" width="24px" height="24px" />](https://godban.github.io/browsers-support-badges/)</br>Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](https://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](https://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](https://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](https://godban.github.io/browsers-support-badges/)</br>Opera |
 | --- | --- | --- | --- | --- |
@@ -74,8 +74,8 @@ export default App;
 
 ## 插件
 
-`@ant-design/x-markdown` 提供了丰富的插件，你可以通过 `plugins` 属性来使用这些插件。插件详情查看[插件集](/markdowns/plugins-cn)。
+`@ant-design/x-markdown` 提供了丰富的插件，你可以通过 `plugins` 属性来使用这些插件。插件详情查看[插件集](/x-markdowns/plugins-cn)。
 
 ## 主题
 
-`@ant-design/x-markdown` 提供了主题可供选择。主题详情查看[主题](/markdowns/themes-cn)。
+`@ant-design/x-markdown` 提供了主题可供选择。主题详情查看[主题](/x-markdowns/themes-cn)。

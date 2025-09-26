@@ -36,6 +36,7 @@ return <XMarkdown className="x-markdown-light" content="Hello XMarkdown!" />;
 ### 主题命名规范
 
 主题文件应遵循以下命名规则：
+
 - 文件名：`主题名.css`
 - 类名前缀：`x-markdown-主题名`
 - 示例：`x-markdown-ocean.css` 对应类名 `x-markdown-ocean`
@@ -43,6 +44,7 @@ return <XMarkdown className="x-markdown-light" content="Hello XMarkdown!" />;
 ### 主题开发规范
 
 #### 1. 文件结构
+
 将你的主题文件放置在 `packages/x-markdown/src/themes/` 目录下：
 
 ```
@@ -64,14 +66,14 @@ packages/x-markdown/src/themes/
   --x-markdown-color-text: #333;
   --x-markdown-color-bg: #fff;
   --x-markdown-color-border: #e8e8e8;
-  
+
   /* 代码块样式 */
   --x-markdown-color-code-bg: #f5f5f5;
   --x-markdown-color-code-text: #333;
-  
+
   /* 标题样式 */
   --x-markdown-color-heading: #262626;
-  
+
   /* 链接样式 */
   --x-markdown-color-link: #1890ff;
   --x-markdown-color-link-hover: #40a9ff;
@@ -97,15 +99,14 @@ packages/x-markdown/src/themes/
 #### 3. 开发步骤
 
 1. **创建主题文件**：
+
    ```bash
    touch packages/x-markdown/src/themes/你的主题名.css
    ```
 
-2. **定义基础变量**：
-   使用CSS变量定义颜色、间距等基础样式。
+2. **定义基础变量**：使用 CSS 变量定义颜色、间距等基础样式。
 
-3. **实现组件样式**：
-   为各个Markdown元素实现样式：
+3. **实现组件样式**：为各个 Markdown 元素实现样式：
    - 标题 (h1-h6)
    - 代码块
    - 表格
@@ -114,12 +115,12 @@ packages/x-markdown/src/themes/
    - 链接
    - 图片
 
-4. **测试主题**：
-   在demo中测试你的主题：
+4. **测试主题**：在 demo 中测试你的主题：
+
    ```tsx
    import '@ant-design/x-markdown/themes/你的主题名.css';
-   
-   <XMarkdown className="x-markdown-你的主题名" content="# 测试内容" />
+
+   <XMarkdown className="x-markdown-你的主题名" content="# 测试内容" />;
    ```
 
 #### 4. 提交规范
@@ -134,12 +135,12 @@ packages/x-markdown/src/themes/
 2. **文档完善**：
    - 在 `themes.zh-CN.md` 中添加你的主题说明
    - 提供主题预览截图
-   - 创建对应的demo文件
+   - 创建对应的 demo 文件
 
 3. **Pull Request**：
    - 基于 `master` 分支创建新分支
-   - 提交清晰的commit信息
-   - 在PR描述中说明主题特点和使用场景
+   - 提交清晰的 commit 信息
+   - 在 PR 描述中说明主题特点和使用场景
 
 ### 主题示例
 
@@ -154,11 +155,11 @@ packages/x-markdown/src/themes/
   --x-markdown-color-border: #e2e8f0;
   --x-markdown-color-primary: #0ea5e9;
   --x-markdown-color-secondary: #64748b;
-  
+
   /* 代码块 */
   --x-markdown-color-code-bg: #f1f5f9;
   --x-markdown-color-code-border: #cbd5e1;
-  
+
   /* 标题 */
   --x-markdown-color-h1: #0f172a;
   --x-markdown-color-h2: #1e293b;
@@ -180,6 +181,7 @@ packages/x-markdown/src/themes/
 ### 社区主题
 
 我们欢迎社区贡献各种风格的主题，如：
+
 - 科技风格主题
 - 极简主义主题
 - 复古风格主题
