@@ -84,7 +84,7 @@ type ActionsComponents = {
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | nativeElement | Outer container | `HTMLDivElement` | - | - |
-| focus | Set focus | (option?: { preventScroll?: boolean, cursor?: 'start' \| 'end' \| 'all' }) | - | - |
+| focus | Set focus, when `cursor = 'slot'` the focus will be in the first input slot, if no corresponding `input` exists it will behave like `end` | (option?: { preventScroll?: boolean, cursor?: 'start' \| 'end' \| 'all' \| 'slot' }) | - | - |
 | blur | Remove focus | () => void | - | - |
 | insert | Insert text or slot(s). When using slot(s), make sure initialSlotConfig is set. | (value: string) => void \| (slotConfig: SlotConfigType[], position?: insertPosition) => void; | - | - |
 | clear | Clear content | () => void | - | - |
@@ -182,8 +182,8 @@ type ActionsComponents = {
   key={key}
   initialSlotConfig={config}
   onChange={(value, _e, config) => {
-    // Only used to get structured content, use key to force re-render
-    setKey('new_key');
+    // Only used to get structured content, use key to force re-render component
+    setKey('new_key')
     console.log(value, config);
   }}
 />

@@ -327,7 +327,7 @@ const ComponentChangelog: React.FC<Readonly<React.PropsWithChildren>> = (props) 
           onClick: () => setShow(true),
         })}
       <Drawer
-        destroyOnClose
+        destroyOnHidden
         className={styles.drawerContent}
         title={locale.changelog}
         extra={
@@ -336,7 +336,9 @@ const ComponentChangelog: React.FC<Readonly<React.PropsWithChildren>> = (props) 
           </Link>
         }
         open={show}
-        width={width}
+        style={{
+          width,
+        }}
         onClose={() => setShow(false)}
       >
         <Timeline items={timelineItems} />

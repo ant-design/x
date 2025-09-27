@@ -465,7 +465,7 @@ const providerFactory = (conversationKey: string) => {
 
 // ==================== Context ====================
 const ChatContext = React.createContext<{
-  onReload?: (key: string | number, info: any) => any;
+  onReload?: ReturnType<typeof useXChat>['onReload'];
 }>({});
 
 // ==================== Sub Component====================

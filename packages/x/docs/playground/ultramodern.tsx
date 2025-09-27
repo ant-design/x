@@ -129,7 +129,7 @@ const useStyle = createStyles(({ token, css }) => {
 
 // ==================== Context ====================
 const ChatContext = React.createContext<{
-  onReload?: (key: string | number, info: any) => any;
+  onReload?: ReturnType<typeof useXChat>['onReload'];
 }>({});
 const DEFAULT_CONVERSATIONS_ITEMS = [
   {
