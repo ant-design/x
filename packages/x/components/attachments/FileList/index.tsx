@@ -1,30 +1,32 @@
 import { PlusOutlined } from '@ant-design/icons';
+import omit from '@rc-component/util/lib/omit';
 import { Button, type ImageProps, type UploadProps } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
-import omit from '@rc-component/util/lib/omit';
 import FileCard, { FileCardProps } from '../../file-card';
+import { SemanticType as FileCardSemanticType } from '../../file-card/FileCard';
+import { SemanticType as FileCardListSemanticType } from '../../file-card/List';
 import type { Attachment } from '..';
 import { AttachmentContext } from '../context';
 import SilentUploader from '../SilentUploader';
 import { previewImage } from '../util';
 import Progress from './Progress';
 
+type SemanticType = 'list' | 'placeholder' | 'upload';
 export interface FileListProps {
   prefixCls: string;
   items: Attachment[];
+  style?: React.CSSProperties;
   onRemove: (item: Attachment) => void;
   overflow?: 'scrollX' | 'scrollY' | 'wrap';
   upload: UploadProps;
-
   // Semantic
-  listClassName?: string;
-  listStyle?: React.CSSProperties;
-  itemClassName?: string;
-  itemStyle?: React.CSSProperties;
-
-  uploadClassName?: string;
-  uploadStyle?: React.CSSProperties;
+  classNames?: Partial<
+    Record<SemanticType | FileCardSemanticType | FileCardListSemanticType, string>
+  >;
+  styles?: Partial<
+    Record<SemanticType | FileCardSemanticType | FileCardListSemanticType, React.CSSProperties>
+  >;
 }
 
 export default function FileList(props: FileListProps) {
@@ -34,16 +36,15 @@ export default function FileList(props: FileListProps) {
     onRemove,
     overflow,
     upload,
-    listClassName,
-    listStyle,
-    itemClassName,
-    uploadClassName,
-    uploadStyle,
-    itemStyle,
+    classNames = {},
+    styles = {},
+    style,
   } = props;
 
   const listCls = `${prefixCls}-list`;
 
+  const { list: listClassName, upload: uploadClassName, ...otherClassNames } = classNames;
+  const { list: listStyle, upload: uploadStyle, ...otherStyles } = styles;
   const { disabled } = React.useContext(AttachmentContext);
 
   const [list, setList] = React.useState<FileCardProps[]>([]);
@@ -95,7 +96,10 @@ export default function FileList(props: FileListProps) {
         key: items[i].uid || i,
         description: desc,
         src: previewUrl,
-        classNames: { file: `${cardCls}-status-${status}`, description: `${cardCls}-desc` },
+        classNames: {
+          file: classnames(`${cardCls}-status-${status}`, classNames.file),
+          description: classnames(`${cardCls}-desc`, classNames.description),
+        },
         byte: items[i].size,
         ...(omit(items[i], ['type']) as FileCardProps),
         size: undefined,
@@ -118,8 +122,9 @@ export default function FileList(props: FileListProps) {
   return (
     <FileCard.List
       items={list}
-      classNames={{ root: `${prefixCls}-list ${listClassName}`, file: itemClassName }}
-      styles={{ root: listStyle, file: itemStyle }}
+      classNames={{ root: classnames(`${prefixCls}-list`, listClassName), ...otherClassNames }}
+      styles={{ root: styles.list, ...otherStyles }}
+      style={style}
       removable={!disabled}
       onRemove={handleRemove}
       overflow={overflow}

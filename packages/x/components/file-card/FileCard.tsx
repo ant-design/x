@@ -238,6 +238,7 @@ const FileCard: React.FC<FileCardProps> = (props) => {
   }, [nameSuffix, customType]);
 
   let ContentNode: React.ReactNode = null;
+
   if (fileType === 'image') {
     const preview = mask ? { mask } : undefined;
     ContentNode = (

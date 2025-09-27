@@ -6,12 +6,13 @@ import { AttachmentContext } from './context';
 export interface DropUploaderProps {
   prefixCls: string;
   className: string;
+  style?: React.CSSProperties;
   getDropContainer?: null | (() => HTMLElement | null | undefined);
   children?: React.ReactNode;
 }
 
 export default function DropArea(props: DropUploaderProps) {
-  const { getDropContainer, className, prefixCls, children } = props;
+  const { getDropContainer, className, prefixCls, children, style } = props;
   const { disabled } = React.useContext(AttachmentContext);
 
   const [container, setContainer] = React.useState<HTMLElement | null | undefined>();
@@ -76,7 +77,7 @@ export default function DropArea(props: DropUploaderProps) {
       className={classnames(areaCls, className, {
         [`${areaCls}-on-body`]: container.tagName === 'BODY',
       })}
-      style={{ display: showArea ? 'block' : 'none' }}
+      style={{ display: showArea ? 'block' : 'none', ...style }}
     >
       {children}
     </div>,

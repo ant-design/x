@@ -87,9 +87,9 @@ describe('bubble', () => {
       expect(bubbleElement).toHaveStyle({ backgroundColor: 'red' });
     });
 
-    it('应该支持 rootClassName 和 rootStyle', () => {
+    it('应该支持 rootClassName 和 style', () => {
       const { container } = render(
-        <Bubble content="测试" rootClassName="root-class" rootStyle={{ margin: '10px' }} />,
+        <Bubble content="测试" rootClassName="root-class" style={{ margin: '10px' }} />,
       );
       const bubbleElement = container.querySelector('.ant-bubble');
 

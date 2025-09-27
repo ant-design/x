@@ -22,7 +22,6 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
   {
     prefixCls: customizePrefixCls,
     rootClassName,
-    rootStyle,
     style,
     className,
     styles = {},
@@ -72,7 +71,6 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
     ...contextConfig.style,
     ...contextConfig.styles.root,
     ...styles.root,
-    ...rootStyle,
     ...style,
   };
   const rootMergedCls = classnames(

@@ -69,9 +69,9 @@ describe('Bubble.List', () => {
       expect(listElement).toHaveStyle({ backgroundColor: 'red' });
     });
 
-    it('应该支持 rootClassName 和 rootStyle', () => {
+    it('应该支持 rootClassName 和 style', () => {
       const { container } = render(
-        <BubbleList items={mockItems} rootClassName="root-class" rootStyle={{ margin: '10px' }} />,
+        <BubbleList items={mockItems} rootClassName="root-class" style={{ margin: '10px' }} />,
       );
       const listElement = container.querySelector('.ant-bubble-list');
 

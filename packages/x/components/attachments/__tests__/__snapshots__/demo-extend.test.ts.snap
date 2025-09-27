@@ -338,7 +338,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
       class="ant-file-card-list-wrapper"
     >
       <div
-        class="ant-file-card-list ant-attachment-list  css-var-«r3» ant-file-card-list-overflow-wrap"
+        class="ant-file-card-list ant-attachment-list css-var-«r3» ant-file-card-list-overflow-wrap"
       >
         <div
           class="ant-file-card-list-item"
@@ -1999,7 +1999,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
         class="ant-file-card-list-wrapper"
       >
         <div
-          class="ant-file-card-list ant-attachment-list  css-var-«r2»"
+          class="ant-file-card-list ant-attachment-list css-var-«r2»"
           style="display: none;"
         >
           <span
@@ -2180,7 +2180,7 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
         class="ant-file-card-list-wrapper"
       >
         <div
-          class="ant-file-card-list ant-attachment-list  css-var-«r2»"
+          class="ant-file-card-list ant-attachment-list css-var-«r2»"
           style="display: none;"
         >
           <span
@@ -2454,7 +2454,7 @@ exports[`renders components/attachments/demo/with-sender.tsx extend context corr
               class="ant-file-card-list-wrapper"
             >
               <div
-                class="ant-file-card-list ant-attachment-list  css-var-«r0»"
+                class="ant-file-card-list ant-attachment-list css-var-«r0»"
                 style="display: none;"
               >
                 <span
