@@ -65,7 +65,7 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
             class="ant-file-card-list-wrapper"
           >
             <div
-              class="ant-file-card-list ant-attachment-list  css-var-«R0»"
+              class="ant-file-card-list ant-attachment-list css-var-«R0»"
               style="display:none"
             >
               <span
@@ -1140,7 +1140,7 @@ exports[`renders components/sender/demo/paste-image.tsx correctly 1`] = `
               class="ant-file-card-list-wrapper"
             >
               <div
-                class="ant-file-card-list ant-attachment-list  css-var-«R0»"
+                class="ant-file-card-list ant-attachment-list css-var-«R0»"
                 style="display:none"
               >
                 <span
