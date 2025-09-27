@@ -14,7 +14,9 @@ import type { EventType, insertPosition, SlotConfigType } from './interface';
 
 export interface SlotTextAreaRef {
   focus: (
-    options?: Parameters<InputRef['focus']>[0] & { cursor?: 'start' | 'end' | 'all' | 'slot' },
+    options?: Omit<Parameters<InputRef['focus']>[0], 'cursor'> & {
+      cursor?: 'start' | 'end' | 'all' | 'slot';
+    },
   ) => void;
   blur: InputRef['blur'];
   nativeElement: InputRef['nativeElement'];
