@@ -496,33 +496,41 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   };
 
   const focus = (options?: InputFocusOptions) => {
+    let isSuccessSlot = false;
+    if (options?.cursor === 'slot') {
+      for (const dom of Array.from(slotDomMap.current.values())) {
+        if (dom.querySelector('input')) {
+          dom.querySelector('input')?.focus();
+          isSuccessSlot = true;
+          break;
+        }
+      }
+    }
+    if (isSuccessSlot) return;
+
     const editor = editableRef.current;
     if (options?.cursor && editor) {
       editor.focus();
       const selection = window.getSelection();
       if (!selection) return;
-      if (options.cursor) {
-        const range = document.createRange();
-        range.selectNodeContents(editor);
-        switch (options.cursor) {
-          case 'start': {
-            range.collapse(true);
-            break;
-          }
-          case 'all': {
-            break;
-          }
-          default: {
-            // 光标移到最后面
-            range.collapse(false);
-            break;
-          }
+      const range = document.createRange();
+      range.selectNodeContents(editor);
+      switch (options?.cursor) {
+        case 'start': {
+          range.collapse(true);
+          break;
         }
-        selection.removeAllRanges();
-        selection.addRange(range);
+        case 'all': {
+          break;
+        }
+        default: {
+          // 光标移到最后面
+          range.collapse(false);
+          break;
+        }
       }
-    } else {
-      editor?.focus();
+      selection.removeAllRanges();
+      selection.addRange(range);
     }
   };
 
