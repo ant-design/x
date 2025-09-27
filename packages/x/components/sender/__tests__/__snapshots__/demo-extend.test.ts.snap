@@ -2249,6 +2249,14 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
       type="button"
     >
       <span>
+        Focus at slot
+      </span>
+    </button>
+    <button
+      class="ant-btn css-var-«rf» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      type="button"
+    >
+      <span>
         Focus to select all
       </span>
     </button>
