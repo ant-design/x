@@ -57,7 +57,6 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
     prefixCls: customizePrefixCls,
     rootClassName,
     className,
-    rootStyle,
     styles,
     classNames,
     style,
@@ -102,7 +101,6 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
 
   const mergedStyle = {
     ...styles?.root,
-    ...rootStyle,
     ...style,
   };
 

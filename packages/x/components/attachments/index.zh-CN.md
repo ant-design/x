@@ -41,7 +41,6 @@ Attachments 组件用于需要展示一组附件信息集合的场景。
 | overflow | 文件列表超出时样式 | 'wrap' \| 'scrollX' \| 'scrollY' | - | - |
 | placeholder | 没有文件时的占位信息 | PlaceholderType \| ((type: 'inline' \| 'drop') => PlaceholderType) | - | - |
 | rootClassName | 根节点的样式类名 | string | - | - |
-| rootStyle | 根节点的样式对象 | React.CSSProperties | - | - |
 | styles | 自定义样式对象，[见下](#semantic-dom) | Record<string, React.CSSProperties> | - | - |
 | imageProps | 图片属性，同 antd [Image](https://ant.design/components/image) 属性 | ImageProps | - | - |
 
