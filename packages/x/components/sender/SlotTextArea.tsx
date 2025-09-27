@@ -13,7 +13,9 @@ import useInputHeight from './hooks/use-input-height';
 import type { EventType, insertPosition, SlotConfigType } from './interface';
 
 export interface SlotTextAreaRef {
-  focus: InputRef['focus'];
+  focus: (
+    options?: Parameters<InputRef['focus']>[0] & { cursor?: 'start' | 'end' | 'all' | 'slot' },
+  ) => void;
   blur: InputRef['blur'];
   nativeElement: InputRef['nativeElement'];
   insert: (slotConfig: SlotConfigType[], position?: insertPosition) => void;
@@ -24,7 +26,10 @@ export interface SlotTextAreaRef {
   };
 }
 
-type InputFocusOptions = Parameters<InputRef['focus']>[0];
+type InputFocusOptions = {
+  preventScroll?: boolean;
+  cursor?: 'start' | 'end' | 'all' | 'slot';
+};
 type SlotNode = Text | Document | HTMLSpanElement;
 const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const {
