@@ -12,11 +12,11 @@ A React UI library based on the Ant Design system, designed for AI-driven interf
 
 **`@ant-design/x-markdown` - High-performance Streaming Rendering Engine**
 
-An optimized Markdown rendering solution for streaming content, with powerful extension capabilities. Supports formulas, code highlighting, mermaid charts, and delivers excellent performance for smooth content display. For details, click [here](/markdowns/introduce).
+An optimized Markdown rendering solution for streaming content, with powerful extension capabilities. Supports formulas, code highlighting, mermaid charts, and delivers excellent performance for smooth content display. For details, click [here](/x-markdowns/introduce).
 
 **`@ant-design/x-sdk` - AI Conversation Data Flow Management**
 
-Provides a complete set of tool APIs, out-of-the-box AI conversation data flow management, simplifying development and improving efficiency. For details, click [here](/sdks/introduce).
+Provides a complete set of tool APIs, out-of-the-box AI conversation data flow management, simplifying development and improving efficiency. For details, click [here](/x-sdks/introduce).
 
 <div class="pic-plus">
   <img width="150" src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*eco6RrQhxbMAAAAAAAAAAAAADgCCAQ/original"/>

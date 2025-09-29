@@ -47,7 +47,7 @@ stream.on('error', (error) => {
 
 ## 使用 X SDK 接入 tbox-nodejs-sdk
 
-使用URL接入智能体是 X SDK提供的基础能力，详情请查看[X SDK](/sdks/introduce-cn)，百宝箱完整样板间请查看[样板间-百宝箱](/docs/playground/agent-tbox-cn)。
+使用URL接入智能体是 X SDK提供的基础能力，详情请查看[X SDK](/x-sdks/introduce-cn)，百宝箱完整样板间请查看[样板间-百宝箱](/docs/playground/agent-tbox-cn)。
 
 ### 示例
 

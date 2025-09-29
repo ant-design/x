@@ -9,11 +9,11 @@ Ant Design X 是一款AI应用复合工具集，融合了 UI 组件库、流式 
 
 **\`@ant-design/x-markdown\` - 高性能流式渲染引擎**
 
-专为流式内容优化的 Markdown 渲染解决方案、强大的扩展能力，支持公式、代码高亮、mermaid 图表等极致性能表现，确保流畅的内容展示体验。查看详情请点击[这里](/markdowns/introduce-cn)。
+专为流式内容优化的 Markdown 渲染解决方案、强大的扩展能力，支持公式、代码高亮、mermaid 图表等极致性能表现，确保流畅的内容展示体验。查看详情请点击[这里](/x-markdowns/introduce-cn)。
 
 **\`@ant-design/x-sdk\` - AI 对话数据流管理**
 
-提供完整的工具 API 集合、开箱即用的 AI 对话应用数据流管理、简化开发流程，提升开发效率。查看详情请点击[这里](/sdks/introduce-cn)。
+提供完整的工具 API 集合、开箱即用的 AI 对话应用数据流管理、简化开发流程，提升开发效率。查看详情请点击[这里](/x-sdks/introduce-cn)。
 
 ---
 
@@ -23,7 +23,7 @@ Ant Design X 是一款AI应用复合工具集，融合了 UI 组件库、流式 
 
 - 🌈 **源自企业级 AI 产品的最佳实践**：基于 RICH 交互范式，提供卓越的 AI 交互体验
 - 🧩 **灵活多样的原子组件**：覆盖绝大部分 AI 对话场景，助力快速构建个性化 AI 交互页面
-- ⚡ **开箱即用的模型对接能力**：配合[X SDK](/sdks/introduce-cn) 轻松对接模型和智能体服务
+- ⚡ **开箱即用的模型对接能力**：配合[X SDK](/x-sdks/introduce-cn) 轻松对接模型和智能体服务
 - 📦 **丰富的样板间支持**：提供多种模板，快速启动 LUI 应用开发
 - 🛡 **TypeScript 全覆盖**：采用 TypeScript 开发，提供完整类型支持，提升开发体验与可靠性
 - 🎨 **深度主题定制能力**：支持细粒度的样式调整，满足各种场景的个性化需求 
@@ -136,11 +136,11 @@ A React UI library based on the Ant Design system, designed for AI-driven interf
 
 **\`@ant-design/x-markdown\` - High-performance Streaming Renderer**
 
-A Markdown rendering solution optimized for streaming content, with powerful extensibility. Supports formulas, code highlighting, mermaid diagrams, and more for excellent performance and smooth content display. See details [here](/markdowns/introduce).
+A Markdown rendering solution optimized for streaming content, with powerful extensibility. Supports formulas, code highlighting, mermaid diagrams, and more for excellent performance and smooth content display. See details [here](/x-markdowns/introduce).
 
 **\`@ant-design/x-sdk\` - AI Conversation Data Flow Management**
 
-Provides a complete set of tool APIs for out-of-the-box AI conversation data flow management, simplifying development and improving efficiency. See details [here](/sdks/introduce).
+Provides a complete set of tool APIs for out-of-the-box AI conversation data flow management, simplifying development and improving efficiency. See details [here](/x-sdks/introduce).
 
 ---
 
@@ -150,7 +150,7 @@ Provides a complete set of tool APIs for out-of-the-box AI conversation data flo
 
 - 🌈 **Best practices from enterprise-level AI products**: Based on RICH interaction paradigms, providing excellent AI interaction experience
 - 🧩 **Flexible atomic components**: Covering most AI conversation scenarios, helping you quickly build personalized AI interaction pages
-- ⚡ **Out-of-the-box model integration**: Easily connect models and agents with [X SDK](/sdks/introduce)
+- ⚡ **Out-of-the-box model integration**: Easily connect models and agents with [X SDK](/x-sdks/introduce)
 - 📦 **Rich template support**: Multiple templates for quick LUI app development
 - 🛡 **Full TypeScript coverage**: Developed with TypeScript, providing complete type support for better experience and reliability
 - 🎨 **Deep theme customization**: Fine-grained style adjustments for personalized needs in various scenarios 

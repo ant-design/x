@@ -1,7 +1,7 @@
 {
   "name": "@ant-design/x-sdk",
   "version": "2.0.0-alpha.9",
-  "homepage": "https://x.ant.design/sdks/introduce",
+  "homepage": "https://x.ant.design/x-sdks/introduce",
   "bugs": {
     "url": "https://github.com/ant-design/x/issues"
   },
