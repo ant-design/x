@@ -1,7 +1,6 @@
-import { fireEvent, render } from '../../../tests/utils';
 import { GetRef } from 'antd';
 import React from 'react';
-import { act } from '../../../tests/utils';
+import { act, fireEvent, render } from '../../../tests/utils';
 import Sender, { SlotConfigType } from '../index';
 import SlotTextArea from '../SlotTextArea';
 
@@ -222,6 +221,7 @@ describe('Sender.SlotTextArea', () => {
     ref?.current?.focus({ cursor: 'start' });
     ref?.current?.focus({ cursor: 'end' });
     ref?.current?.focus({ cursor: 'all' });
+    ref?.current?.focus({ cursor: 'slot' });
     ref?.current?.blur();
   });
 
