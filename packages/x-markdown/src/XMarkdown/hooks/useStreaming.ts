@@ -156,80 +156,6 @@ const useStreaming = (input: string, config?: XMarkdownProps['streaming']) => {
           break;
         }
 
-        case TokenType.MaybeEmphasis: {
-          /**
-           * /* / *\/n
-              ^     ^
-           */
-          const shouldFlushOutput = char === ' ' || char === '\n';
-
-          if (shouldFlushOutput) {
-            flushOutput();
-          } else if (char === '*' || char === '_') {
-            buffer.emphasisCount++;
-          } else {
-            popToken();
-
-            switch (emphasisCount) {
-              case 1:
-                /**
-                 * _token_ / *token*
-                 * ^         ^
-                 */
-                pushToken(TokenType.Emphasis);
-                break;
-              case 2:
-                /**
-                 * __token__ / **token**
-                 *  ^           ^
-                 */
-                pushToken(TokenType.Strong);
-                break;
-              case 3:
-                /**
-                 * ___token___ / ***token***
-                 *   ^             ^
-                 */
-                pushToken(TokenType.Emphasis);
-                pushToken(TokenType.Strong);
-                break;
-              default:
-                buffer.emphasisCount = 0;
-            }
-          }
-          break;
-        }
-
-        case TokenType.Strong: {
-          /**
-           * __token__ / **token**
-           *         ^           ^
-           */
-          if (char === '\n') {
-            flushOutput();
-          } else if (buffer.pending.endsWith('**') || buffer.pending.endsWith('__')) {
-            if (tokens[tokens.length - 2] === TokenType.Emphasis) {
-              popToken();
-            } else {
-              flushOutput();
-            }
-          }
-          break;
-        }
-
-        case TokenType.Emphasis: {
-          /**
-           * _token_ / *token*
-           *       ^         ^
-           */
-          if (char === '\n' || char === '*' || char === '_') {
-            flushOutput();
-            buffer.emphasisCount = 0;
-          }
-
-          break;
-        }
-
         case TokenType.XML: {
           /**
            * <XML /> /<XML></XML>
@@ -293,9 +219,6 @@ const useStreaming = (input: string, config?: XMarkdownProps['streaming']) => {
             pushToken(TokenType.Link);
           } else if (char === '#') {
             pushToken(TokenType.Heading);
-          } else if (char === '_' || char === '*') {
-            pushToken(TokenType.MaybeEmphasis);
-            buffer.emphasisCount = 1;
           } else if (char === '<') {
             pushToken(TokenType.XML);
           } else if (char === '`') {

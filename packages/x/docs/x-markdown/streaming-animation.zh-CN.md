@@ -14,7 +14,7 @@ order: 2
 
 ## 功能演示
 
-<code src="./demo/streaming/animation.tsx">流式动画效果</code> <code src="./demo/streaming/typing.tsx">打字机效果演示</code>
+<code src="./demo/streaming/animation.tsx">流式动画效果</code>
 
 ## 配置参数
 

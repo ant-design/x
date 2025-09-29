@@ -103,7 +103,7 @@ const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
           <XMarkdown
             content={displayText}
             components={{ 'incomplete-image': ImageSkeleton, 'incomplete-link': LinkSkeleton }}
-            streaming={{ hasNextChunk: true }}
+            streaming={{ hasNextChunk: isStreaming }}
           />
         </div>
       </Card>

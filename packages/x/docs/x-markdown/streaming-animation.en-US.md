@@ -14,7 +14,7 @@ Streaming animation effects are designed for real-time content rendering, using 
 
 ## Feature Demo
 
-<code src="./demo/streaming/animation.tsx">Streaming Animation Effects</code> <code src="./demo/streaming/typing.tsx">Typing Effect Demonstration</code>
+<code src="./demo/streaming/animation.tsx">Streaming Animation Effects</code>
 
 ## Configuration Parameters
 

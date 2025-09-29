@@ -70,62 +70,6 @@ const testCases = [
     output: '#######',
   },
   {
-    title: 'incomplete emphasis',
-    input: '*emphasis',
-    output: '',
-  },
-  {
-    title: 'incomplete emphasis with \n',
-    input: '*emphasis\n',
-    output: '*emphasis\n',
-  },
-  {
-    title: 'complete emphasis',
-    input: '*emphasis*',
-    output: '*emphasis*',
-  },
-  {
-    title: 'incomplete strong',
-    input: '**strong',
-    output: '',
-  },
-  {
-    title: 'complete strong',
-    input: '**strong**',
-    output: '**strong**',
-  },
-  {
-    title: 'incomplete strong with \n',
-    input: '**strong\n',
-    output: '**strong\n',
-  },
-  {
-    title: 'incomplete strong emphasis',
-    input: '***strong emph**',
-    output: '',
-  },
-  {
-    title: 'incomplete strong emphasis and hasNext is false',
-    input: '***strong emph**',
-    output: '***strong emph**',
-    config: { hasNextChunk: false },
-  },
-  {
-    title: 'complete strong emphasis',
-    input: '***strong emph***',
-    output: '***strong emph***',
-  },
-  {
-    title: '* is hr',
-    input: '***\n',
-    output: '***\n',
-  },
-  {
-    title: 'more than 3 ***',
-    input: '****Test',
-    output: '',
-  },
-  {
     title: 'incomplete Html',
     input: '<div',
     output: '',
