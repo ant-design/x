@@ -1,18 +1,15 @@
 ---
-title: 流式渲染
-order: 3
+title: 流式动画效果
+order: 4
 ---
 
 ## 介绍
 
-通过缓存隐藏 markdown 格式和动画效果，优化 LLM 场景下流式 Markdown 渲染效果。
+为流式渲染的内容添加优雅的动画效果，支持文字渐显动画，提升用户体验。
 
 ## 代码演示
 
-<!-- prettier-ignore -->
-<!-- <code src="./demo/streaming/typing.tsx" description="配合`Bubble`渲染">打字机效果</code> -->
-
-<code src="./demo/streaming/format.tsx"  description="通过缓存隐藏 Markdown 格式">缓存</code> <code src="./demo/streaming/animation.tsx">动画效果</code>
+<code src="./demo/streaming/animation.tsx">动画效果</code>
 
 ## 配置说明
 
@@ -52,3 +49,14 @@ const App = () => {
   );
 };
 ```
+
+## 动画效果说明
+
+文字渐显动画提供了以下特性：
+
+- **平滑过渡**：文字以淡入的方式逐步显示
+- **可配置时长**：支持自定义动画持续时间
+- **缓动函数**：支持多种缓动效果（ease-in-out、linear、ease-in、ease-out）
+- **性能优化**：使用 CSS3 transform 和 opacity 实现高性能动画
+
+当 `enableAnimation` 设置为 `true` 时，新接收到的内容会以淡入动画的方式显示，为用户提供更流畅的阅读体验。

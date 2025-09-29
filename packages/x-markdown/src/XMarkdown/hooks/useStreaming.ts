@@ -16,13 +16,18 @@ enum TokenType {
   MaybeList = 11,
 }
 
-const Markdown_Symbols = {
-  emphasis: ['*', '_'],
-  code: ['`'],
-  list: ['-', '+', '*'],
-};
+interface StreamBuffer {
+  processedLength: number;
+  rawStream: string;
+  pending: string;
+  token: TokenType;
+  tokens: TokenType[];
+  headingLevel: number;
+  emphasisCount: number;
+  backtickCount: number;
+}
 
-const STREAM_BUFFER_INIT = {
+const STREAM_BUFFER_INIT: StreamBuffer = {
   processedLength: 0,
   rawStream: '',
   pending: '',
@@ -34,128 +39,167 @@ const STREAM_BUFFER_INIT = {
 };
 
 const useStreaming = (input: string, config?: XMarkdownProps['streaming']) => {
-  const { hasNextChunk = false } = config || {};
+  const { hasNextChunk = false, incompleteMarkdownComponentMap } = config || {};
 
   const [output, setOutput] = useState('');
-  const streamBuffer = useRef({ ...STREAM_BUFFER_INIT });
+  const streamBuffer = useRef<StreamBuffer>({ ...STREAM_BUFFER_INIT });
 
   const pushToken = useCallback((type: TokenType) => {
-    streamBuffer.current.tokens = [...streamBuffer.current.tokens, type];
-    streamBuffer.current.token = type;
+    const buffer = streamBuffer.current;
+    buffer.tokens.push(type);
+    buffer.token = type;
   }, []);
 
   const popToken = useCallback(() => {
-    const { tokens } = streamBuffer.current;
-    if (tokens.length <= 1) return;
+    const buffer = streamBuffer.current;
+    if (buffer.tokens.length <= 1) return;
 
-    const newTokens = [...tokens.slice(0, -1)];
-    streamBuffer.current.tokens = newTokens;
-    streamBuffer.current.token = newTokens[newTokens.length - 1];
+    buffer.tokens.pop();
+    buffer.token = buffer.tokens[buffer.tokens.length - 1];
   }, []);
 
-  const flushOutput = (needPopToken = true) => {
-    if (needPopToken) popToken();
+  const flushOutput = useCallback(
+    (needPopToken = true) => {
+      if (needPopToken) {
+        popToken();
+      }
 
-    streamBuffer.current.pending = '';
-    const renderText = streamBuffer.current.rawStream;
-    if (renderText) {
+      streamBuffer.current.pending = '';
+      const renderText = streamBuffer.current.rawStream;
+      if (!renderText) return;
+
       setOutput(renderText);
-    }
-  };
+    },
+    [popToken],
+  );
 
-  const handleChunk = (chunk: string) => {
-    const buffer = streamBuffer.current;
-    for (const char of chunk) {
-      buffer.rawStream += char;
-      buffer.pending += char;
+  // 替换不完整的 Markdown 语义为自定义加载组件
+  const replaceInCompleteFormat = useCallback(() => {
+    const finalComponentMap = {
+      link: `<${incompleteMarkdownComponentMap?.link || 'incomplete-link'} />`,
+      image: `<${incompleteMarkdownComponentMap?.image || 'incomplete-image'} />`,
+    };
 
-      const { token, pending, tokens, emphasisCount } = buffer;
+    const renderText = streamBuffer.current.rawStream;
+    if (!renderText) return;
+
+    // 使用更精确的正则表达式，避免误匹配
+    const replacedOutput = renderText
+      .replace(/!\[([^\]]*?)\](?!\([^)]*\)$)(?![^[]*\]\([^)]*\))$/, finalComponentMap.image)
+      .replace(/\[([^\]]*?)\](?!\([^)]*\)$)(?![^[]*\]\([^)]*\))$/, finalComponentMap.link)
+      .replace(/!\[([^\]]*?)\]\([^)]*$/, finalComponentMap.image)
+      .replace(/\[([^\]]*?)\]\([^)]*$/, finalComponentMap.link);
+
+    setOutput(replacedOutput);
+  }, [incompleteMarkdownComponentMap]);
+
+  const handleTokenProcessing = useCallback(
+    (char: string) => {
+      const buffer = streamBuffer.current;
+      const { token, tokens, emphasisCount } = buffer;
+
       switch (token) {
         case TokenType.Image: {
           /**
            * \![
            *   ^
            */
-          const isInvalidStart = pending.indexOf('![') === -1;
+          const isInvalidStart = !buffer.pending.includes('![');
           /**
            * \![image]()
            *           ^
            */
           const isImageEnd = char === ')' || char === '\n';
+
           if (isInvalidStart || isImageEnd) {
             if (tokens[tokens.length - 2] === TokenType.Link) {
               popToken();
             } else {
               flushOutput();
             }
+          } else {
+            // replace loading component
+            replaceInCompleteFormat();
           }
           break;
         }
+
         case TokenType.Link: {
           // not support link reference definitions, [foo]: /url "title" \n[foo]
-          const isReferenceLink = pending.endsWith(']:');
+          const isReferenceLink = buffer.pending.endsWith(']:');
           const isLinkEnd = char === ')' || char === '\n';
           const isImageInLink = char === '!';
+
           if (isImageInLink) {
             pushToken(TokenType.Image);
           } else if (isLinkEnd || isReferenceLink) {
             flushOutput();
+          } else {
+            // replace loading component
+            replaceInCompleteFormat();
           }
           break;
         }
+
         case TokenType.Heading: {
           /**
            * # token / ## token / #####token
            *  ^         ^              ^
            */
           buffer.headingLevel++;
-
           const shouldFlushOutput = char !== '#' || buffer.headingLevel >= 6;
+
           if (shouldFlushOutput) {
             flushOutput();
             buffer.headingLevel = 0;
           }
           break;
         }
+
         case TokenType.MaybeEmphasis: {
           /**
-             * /* / *\/n
-                ^     ^
-             */
+           * /* / *\/n
+              ^     ^
+           */
           const shouldFlushOutput = char === ' ' || char === '\n';
+
           if (shouldFlushOutput) {
             flushOutput();
-          } else if (Markdown_Symbols.emphasis.includes(char)) {
+          } else if (char === '*' || char === '_') {
             buffer.emphasisCount++;
           } else {
             popToken();
-            if (emphasisCount === 1) {
-              /**
-               * _token_ / *token*
-               * ^         ^
-               */
-              pushToken(TokenType.Emphasis);
-            } else if (emphasisCount === 2) {
-              /**
-               * __token__ / **token**
-               *  ^           ^
-               */
-              pushToken(TokenType.Strong);
-            } else if (emphasisCount === 3) {
-              /**
-               * ___token___ / ***token***
-               *   ^             ^
-               */
-              pushToken(TokenType.Emphasis);
-              pushToken(TokenType.Strong);
-            } else {
-              // no more than 3
-              buffer.emphasisCount = 0;
+
+            switch (emphasisCount) {
+              case 1:
+                /**
+                 * _token_ / *token*
+                 * ^         ^
+                 */
+                pushToken(TokenType.Emphasis);
+                break;
+              case 2:
+                /**
+                 * __token__ / **token**
+                 *  ^           ^
+                 */
+                pushToken(TokenType.Strong);
+                break;
+              case 3:
+                /**
+                 * ___token___ / ***token***
+                 *   ^             ^
+                 */
+                pushToken(TokenType.Emphasis);
+                pushToken(TokenType.Strong);
+                break;
+              default:
+                buffer.emphasisCount = 0;
             }
           }
-
           break;
         }
+
         case TokenType.Strong: {
           /**
            * __token__ / **token**
@@ -163,88 +207,83 @@ const useStreaming = (input: string, config?: XMarkdownProps['streaming']) => {
            */
           if (char === '\n') {
             flushOutput();
-          } else if (pending.endsWith('**') || pending.endsWith('__')) {
+          } else if (buffer.pending.endsWith('**') || buffer.pending.endsWith('__')) {
             if (tokens[tokens.length - 2] === TokenType.Emphasis) {
               popToken();
             } else {
               flushOutput();
             }
           }
-
           break;
         }
+
         case TokenType.Emphasis: {
           /**
            * _token_ / *token*
            *       ^         ^
            */
-          if (char === '\n') {
-            flushOutput();
-            buffer.emphasisCount = 0;
-          } else if (Markdown_Symbols.emphasis.includes(char)) {
+          if (char === '\n' || char === '*' || char === '_') {
             flushOutput();
             buffer.emphasisCount = 0;
           }
 
           break;
         }
+
         case TokenType.XML: {
           /**
            * <XML /> /<XML></XML>
            *       ^      ^
            */
-          const shouldFlushOutput = char === '>' || pending === '< ' || char === '\n';
+          const shouldFlushOutput = char === '>' || buffer.pending === '< ' || char === '\n';
           if (shouldFlushOutput) {
             flushOutput();
-            continue;
           }
           break;
         }
+
         case TokenType.MaybeCode: {
+          /**
+           * ```
+           *   ^
+           */
           if (char === '`') {
             buffer.backtickCount++;
           } else {
-            if (buffer.backtickCount > 2) {
-              /**
-               * ```
-               *   ^
-               */
-              flushOutput();
-              buffer.backtickCount = 0;
-            } else {
-              /**
-               * ``
-               *  ^
-               */
-              popToken();
-              pushToken(TokenType.Code);
-            }
+            flushOutput();
+            pushToken(TokenType.Code);
           }
           break;
         }
-        case TokenType.Code: {
-          if (char === '`') {
-            buffer.backtickCount--;
-          }
 
-          if (buffer.backtickCount === 0) {
-            flushOutput();
-            buffer.backtickCount = 0;
+        case TokenType.Code: {
+          flushOutput(false);
+          if (char === '`' && --buffer.backtickCount === 0) {
+            popToken();
           }
           break;
         }
+
         case TokenType.MaybeHr: {
-          if (char !== '-' && char !== '=') {
+          /**
+           * avoid Setext headings
+           * Foo
+           * -
+           *  ^
+           */
+          if (char !== '-' && char !== '=' && char !== ' ') {
             flushOutput();
           }
           break;
         }
+
         case TokenType.MaybeList: {
           if (char !== ' ') {
             flushOutput();
           }
           break;
         }
+
         default: {
           buffer.pending = char;
 
@@ -264,15 +303,28 @@ const useStreaming = (input: string, config?: XMarkdownProps['streaming']) => {
             buffer.backtickCount = 1;
           } else if (char === '-' || char === '=') {
             pushToken(TokenType.MaybeHr);
-          } else if (Markdown_Symbols.list.includes(char)) {
+          } else if ((char === '+' || char === '*') && buffer.pending.length === 1) {
             pushToken(TokenType.MaybeList);
           } else {
             flushOutput(false);
           }
         }
       }
-    }
-  };
+    },
+    [pushToken, popToken, flushOutput, replaceInCompleteFormat],
+  );
+
+  const handleChunk = useCallback(
+    (chunk: string) => {
+      const buffer = streamBuffer.current;
+      for (const char of chunk) {
+        buffer.rawStream += char;
+        buffer.pending += char;
+        handleTokenProcessing(char);
+      }
+    },
+    [handleTokenProcessing],
+  );
 
   useEffect(() => {
     if (!input) {
@@ -286,17 +338,23 @@ const useStreaming = (input: string, config?: XMarkdownProps['streaming']) => {
       return;
     }
 
+    // 如果输入完全改变，重置状态
+    const currentRaw = streamBuffer.current.rawStream;
+    if (!input.startsWith(currentRaw)) {
+      streamBuffer.current = { ...STREAM_BUFFER_INIT };
+    }
+
     if (!hasNextChunk) {
       setOutput(input);
       return;
     }
 
     const chunk = input.slice(streamBuffer.current.processedLength);
-    if (chunk.length) {
+    if (chunk.length > 0) {
       streamBuffer.current.processedLength += chunk.length;
       handleChunk(chunk);
     }
-  }, [input, hasNextChunk]);
+  }, [input, hasNextChunk, handleChunk]);
 
   return output;
 };
