@@ -23,7 +23,6 @@ interface StreamBuffer {
   token: TokenType;
   tokens: TokenType[];
   headingLevel: number;
-  emphasisCount: number;
   backtickCount: number;
 }
 
@@ -34,7 +33,6 @@ const STREAM_BUFFER_INIT: StreamBuffer = {
   token: TokenType.Text,
   tokens: [TokenType.Text],
   headingLevel: 0,
-  emphasisCount: 0,
   backtickCount: 0,
 };
 
@@ -96,7 +94,7 @@ const useStreaming = (input: string, config?: XMarkdownProps['streaming']) => {
   const handleTokenProcessing = useCallback(
     (char: string) => {
       const buffer = streamBuffer.current;
-      const { token, tokens, emphasisCount } = buffer;
+      const { token, tokens } = buffer;
 
       switch (token) {
         case TokenType.Image: {
