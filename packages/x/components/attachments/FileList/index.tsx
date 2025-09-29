@@ -3,6 +3,7 @@ import omit from '@rc-component/util/lib/omit';
 import { Button, type ImageProps, type UploadProps } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
+import useXComponentConfig from '../../_util/hooks/use-x-component-config';
 import FileCard, { FileCardProps } from '../../file-card';
 import { SemanticType as FileCardSemanticType } from '../../file-card/FileCard';
 import { SemanticType as FileCardListSemanticType } from '../../file-card/List';
@@ -20,7 +21,7 @@ export interface FileListProps {
   onRemove: (item: Attachment) => void;
   overflow?: 'scrollX' | 'scrollY' | 'wrap';
   upload: UploadProps;
-  // Semantic
+  className?: string;
   classNames?: Partial<
     Record<SemanticType | FileCardSemanticType | FileCardListSemanticType, string>
   >;
@@ -36,6 +37,7 @@ export default function FileList(props: FileListProps) {
     onRemove,
     overflow,
     upload,
+    className,
     classNames = {},
     styles = {},
     style,
@@ -43,8 +45,10 @@ export default function FileList(props: FileListProps) {
 
   const listCls = `${prefixCls}-list`;
 
-  const { list: listClassName, upload: uploadClassName, ...otherClassNames } = classNames;
-  const { list: listStyle, upload: uploadStyle, ...otherStyles } = styles;
+  // ===================== Component Config =========================
+  const contextConfig = useXComponentConfig('attachments');
+
+  const { classNames: contextClassNames, styles: contextStyles } = contextConfig;
   const { disabled } = React.useContext(AttachmentContext);
 
   const [list, setList] = React.useState<FileCardProps[]>([]);
@@ -122,8 +126,23 @@ export default function FileList(props: FileListProps) {
   return (
     <FileCard.List
       items={list}
-      classNames={{ root: classnames(`${prefixCls}-list`, listClassName), ...otherClassNames }}
-      styles={{ root: styles.list, ...otherStyles }}
+      className={classnames(`${prefixCls}-list`, className)}
+      classNames={{
+        root: classnames(classNames.list, contextClassNames.list),
+        card: classnames(classNames.card, contextClassNames.card),
+        file: classnames(classNames.file, contextClassNames.file),
+        description: classnames(classNames.description, contextClassNames.description),
+        icon: classnames(classNames.icon, contextClassNames.icon),
+        name: classnames(classNames.name, contextClassNames.title),
+      }}
+      styles={{
+        root: { ...styles.list, ...contextStyles.list },
+        card: { ...styles.card, ...contextStyles.card },
+        file: { ...styles.file, ...contextStyles.file },
+        description: { ...styles.description, ...contextStyles.description },
+        icon: { ...styles.icon, ...contextStyles.icon },
+        name: { ...styles.name, ...contextStyles.title },
+      }}
       style={style}
       removable={!disabled}
       onRemove={handleRemove}
@@ -132,8 +151,12 @@ export default function FileList(props: FileListProps) {
         !disabled && (
           <SilentUploader upload={upload}>
             <Button
-              className={classnames(uploadClassName, `${listCls}-upload-btn`)}
-              style={uploadStyle}
+              className={classnames(
+                classNames.upload,
+                contextClassNames.upload,
+                `${listCls}-upload-btn`,
+              )}
+              style={{ ...styles.upload, ...contextStyles.upload }}
               type="dashed"
             >
               <PlusOutlined className={`${listCls}-upload-btn-icon`} />
