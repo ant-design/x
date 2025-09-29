@@ -30,11 +30,15 @@ describe('attachments', () => {
     return (
       <Attachments
         styles={{
+          placeholder: {
+            color: 'blue',
+          },
           upload: {
             color: 'red',
           },
         }}
         classNames={{
+          placeholder: 'placeholder',
           upload: 'upload',
         }}
         beforeUpload={() => false}
