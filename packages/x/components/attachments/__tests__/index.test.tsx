@@ -27,24 +27,7 @@ describe('attachments', () => {
   );
 
   const renderAttachments = (props?: AttachmentsProps) => {
-    return (
-      <Attachments
-        styles={{
-          placeholder: {
-            color: 'blue',
-          },
-          upload: {
-            color: 'red',
-          },
-        }}
-        classNames={{
-          placeholder: 'placeholder',
-          upload: 'upload',
-        }}
-        beforeUpload={() => false}
-        {...props}
-      />
-    );
+    return <Attachments beforeUpload={() => false} {...props} />;
   };
 
   it('add and remove file', async () => {
@@ -68,7 +51,25 @@ describe('attachments', () => {
     await waitFakeTimer();
     expect(onChange.mock.calls[0][0].fileList).toHaveLength(0);
   });
-
+  it('support classnames and styles', () => {
+    render(
+      renderAttachments({
+        styles: {
+          placeholder: {
+            color: 'blue',
+          },
+          upload: {
+            color: 'red',
+          },
+        },
+        classNames: {
+          placeholder: 'placeholder',
+          upload: 'upload',
+        },
+        items: mockItems,
+      }),
+    );
+  });
   it('add and remove file but can stop remove', async () => {
     const onChange = jest.fn();
     const { container } = render(
