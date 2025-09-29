@@ -13,7 +13,7 @@ showImport: false
 
 - 🌈 **Best practices from enterprise-level AI products**: Based on the RICH interaction paradigm, delivering an exceptional AI experience
 - 🧩 **Flexible and diverse atomic components**: Covering most AI conversation scenarios, enabling rapid construction of personalized AI interaction pages
-- ⚡ **Out-of-the-box model integration**: Easily connect models and agent services with [X SDK](/sdks/introduce)
+- ⚡ **Out-of-the-box model integration**: Easily connect models and agent services with [X SDK](/x-sdks/introduce)
 - 📦 **Rich template support**: Multiple templates for quickly starting LUI application development
 - 🛡 **Full TypeScript support**: Developed with TypeScript, providing complete type definitions for a better development experience and reliability
 - 🎨 **Advanced theme customization**: Supports fine-grained style adjustments to meet diverse and personalized needs
@@ -80,11 +80,11 @@ export default App;
 
 ## ⚡️ Model/Agent Integration & AI Conversation Data Flow
 
-With [X SDK](/sdks/introduce), you can easily integrate models and agent services, along with useful utilities.
+With [X SDK](/x-sdks/introduce), you can easily integrate models and agent services, along with useful utilities.
 
 ## ✨ High-performance Markdown Streaming Engine
 
-We provide an optimized [X Markdown](/markdowns/introduce) rendering solution for streaming content, with powerful extension capabilities. It supports formulas, code highlighting, mermaid charts, and delivers excellent performance for smooth content display.
+We provide an optimized [X Markdown](/x-markdowns/introduce) rendering solution for streaming content, with powerful extension capabilities. It supports formulas, code highlighting, mermaid charts, and delivers excellent performance for smooth content display.
 
 ## On-demand Loading
 

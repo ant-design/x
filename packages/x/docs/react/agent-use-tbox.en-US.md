@@ -47,7 +47,7 @@ stream.on('error', (error) => {
 
 ## Integrate tbox-nodejs-sdk with X SDK
 
-Using URL to integrate agents is a basic capability provided by X SDK. For details, see [X SDK](/sdks/introduce). For the complete Tbox template, see [Template - Tbox](/docs/playground/agent-tbox).
+Using URL to integrate agents is a basic capability provided by X SDK. For details, see [X SDK](/x-sdks/introduce). For the complete Tbox template, see [Template - Tbox](/docs/playground/agent-tbox).
 
 ### Example
 

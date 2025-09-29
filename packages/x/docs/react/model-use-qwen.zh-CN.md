@@ -24,7 +24,7 @@ Qwen 的模型推理服务支持「兼容 OpenAI 模式」。详见官方文档:
 
 ## 使用 X SDK 接入
 
-使用URL接入模型是 X SDK提供的基础能力，详情请查看[X SDK](/sdks/introduce-cn)。
+使用URL接入模型是 X SDK提供的基础能力，详情请查看[X SDK](/x-sdks/introduce-cn)。
 
 ### 示例
 

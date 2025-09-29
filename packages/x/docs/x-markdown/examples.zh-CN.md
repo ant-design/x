@@ -25,11 +25,11 @@ order: 2
 | --- | --- | --- | --- |
 | content | 需要渲染的 Markdown 内容 | `string` | - |
 | children | Markdown 内容，作为 `content` 属性的别名 | `string` | - |
-| components | 用于替换 HTML 元素的自定义 React 组件 | `Record<string, React.ComponentType<ComponentProps> \| keyof JSX.IntrinsicElements>`，查看[详情](/markdowns/components-cn) | - |
+| components | 用于替换 HTML 元素的自定义 React 组件 | `Record<string, React.ComponentType<ComponentProps> \| keyof JSX.IntrinsicElements>`，查看[详情](/x-markdowns/components-cn) | - |
 | paragraphTag | 段落元素的自定义 HTML 标签，防止自定义组件包含块级元素时的验证错误 | `keyof JSX.IntrinsicElements` | `'p'` |
-| streaming | 流式渲染行为的配置 | `SteamingOption`，查看[详情](/markdowns/streaming-cn) | - |
+| streaming | 流式渲染行为的配置 | `SteamingOption`，查看[详情](/x-markdowns/streaming-cn) | - |
 | config | Markdown 解析和扩展的 Marked.js 配置 | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |
-| openLinksInNewTab | 是否为所有a标签添加 `target="_blank"` | `boolean` | `false` |
+| openLinksInNewTab | 是否为所有 a 标签添加 `target="_blank"` | `boolean` | `false` |
 | dompurifyConfig | HTML 净化和 XSS 防护的 DOMPurify 配置 | [`DOMPurify.Config`](https://github.com/cure53/DOMPurify#can-i-configure-dompurify) | - |
 | className | 根容器的额外 CSS 类名 | `string` | - |
 | rootClassName | `className` 的别名，根元素的额外 CSS 类 | `string` | - |
