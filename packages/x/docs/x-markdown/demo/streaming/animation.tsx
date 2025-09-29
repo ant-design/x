@@ -1,14 +1,14 @@
-import type { BubbleListProps } from '@ant-design/x';
-import { Bubble, Sender } from '@ant-design/x';
+import { Bubble } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
-import { DefaultChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';
-import { Button, Row } from 'antd';
-import React, { useMemo, useState } from 'react';
-import { mockFetch, useMarkdownTheme } from '../_utils';
+import { Button, Flex, Space, Switch, Typography } from 'antd';
+import React, { useState } from 'react';
+import { useMarkdownTheme } from '../_utils';
 import '@ant-design/x-markdown/themes/light.css';
 import '@ant-design/x-markdown/themes/dark.css';
 
-const fullContent = `
+const { Text } = Typography;
+
+const text = `
 # 《诗经》之美：千年风雅颂
 
 > **关关雎鸠，在河之洲。窈窕淑女，君子好逑。**
@@ -27,19 +27,6 @@ const fullContent = `
 > **蒹葭苍苍，白露为霜。所谓伊人，在水一方。**
 >
 > 这首《蒹葭》以其朦胧唯美的意境，成为中国古典诗歌中描写爱情的千古绝唱。
-
-## 🖼️ 相关资源
-
-### 经典文献
-1. [《诗经》全文在线阅读](https://www.gutenberg.org/ebooks/11120)
-2. [《诗经》译注及赏析](https://ctext.org/book-of-poetry)
-3. [中国古代文学史](https://zh.wikipedia.org/wiki/中国文学史)
-4. [诗经音乐专辑](https://music.163.com/#/album?id=12345)
-5. [诗经舞蹈演出](https://www.youtube.com/watch?v=example)
-6. [诗经文化展览](https://www.dpm.org.cn/exhibition/shijing)
-
-### 学术图片
-![诗经古籍版本](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Shijing.jpg/800px-Shijing.jpg)
 
 ### 现代演绎
 
@@ -128,105 +115,51 @@ const fullContent = `
 > 在快节奏的现代生活中，让我们重新聆听这些来自远古的声音，感受那份跨越千年的情感共鸣。
 `;
 
-interface MessageType {
-  role: 'ai' | 'user';
-  content: string;
-}
-
-const roles: BubbleListProps['role'] = {
-  ai: {
-    placement: 'start',
-  },
-  user: {
-    placement: 'end',
-  },
-};
-
 const App = () => {
   const [enableAnimation, setEnableAnimation] = useState(true);
-  const [content, setContent] = React.useState('');
   const [className] = useMarkdownTheme();
+  const [index, setIndex] = React.useState(0);
+  const timer = React.useRef<any>(-1);
 
-  let chunks = '';
-  const provider = useMemo(
-    () =>
-      new DefaultChatProvider<MessageType, MessageType, MessageType>({
-        request: XRequest('https://api.example.com/chat', {
-          manual: true,
-          fetch: () => mockFetch(fullContent),
-          transformStream: new TransformStream<string, MessageType>({
-            transform(chunk, controller) {
-              chunks += chunk;
-              controller.enqueue({
-                content: chunks,
-                role: 'ai',
-              });
-            },
-          }),
-        }),
-      }),
-    [content],
-  );
+  const renderStream = () => {
+    if (index >= text.length) {
+      clearTimeout(timer.current);
+      return;
+    }
+    timer.current = setTimeout(() => {
+      setIndex((prev) => prev + 2);
+      renderStream();
+    }, 80);
+  };
 
-  const { onRequest, messages, isRequesting } = useXChat({
-    provider: provider,
-  });
+  React.useEffect(() => {
+    if (index === text.length) return;
+    renderStream();
+    return () => {
+      clearTimeout(timer.current);
+    };
+  }, [index]);
 
   return (
-    <>
-      <Row justify="end" style={{ marginBottom: 24 }}>
-        <Button
-          onClick={() => {
-            setEnableAnimation(!enableAnimation);
-          }}
-        >
-          Animation: {enableAnimation ? 'On' : 'Off'}
-        </Button>
-      </Row>
+    <Flex vertical gap="small">
+      <Space align="center" style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Space>
+          <Text>Animation</Text>
+          <Switch checked={enableAnimation} onChange={setEnableAnimation} />
+        </Space>
 
-      <div
-        style={{
-          height: 400,
-          paddingBlock: 20,
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-        }}
-      >
-        <Bubble.List
-          role={roles}
-          items={messages.map(({ id, message, status }) => ({
-            key: id,
-            role: message.role,
-            content: message.content,
-            status,
-            contentRender:
-              message.role === 'user'
-                ? (content) => content
-                : (content) => (
-                    <XMarkdown
-                      className={className}
-                      content={content as string}
-                      streaming={{ enableAnimation }}
-                    />
-                  ),
-          }))}
-        />
-        <Sender
-          loading={isRequesting}
-          value={content}
-          onChange={setContent}
-          style={{ marginTop: 48 }}
-          onSubmit={(nextContent) => {
-            onRequest({
-              content: nextContent,
-              role: 'user',
-            });
-            setContent('');
-          }}
-        />
-      </div>
-    </>
+        <Button onClick={() => setIndex(0)}>Re-Render</Button>
+      </Space>
+
+      <Bubble
+        content={text.slice(0, index)}
+        className={className}
+        contentRender={(content) => (
+          <XMarkdown streaming={{ enableAnimation }}>{content}</XMarkdown>
+        )}
+        variant="outlined"
+      />
+    </Flex>
   );
 };
 

@@ -2,10 +2,10 @@ import React, { useMemo } from 'react';
 import AnimationNode from '../AnimationNode';
 import { XMarkdownProps } from '../interface';
 
-export type HTMLTag = 'div' | 'p' | 'li' | 'h1' | 'h2' | 'h3' | 'h4' | 'strong';
+export type HTMLTag = 'p';
 type AnimationComponents = Record<HTMLTag, React.FC<React.ComponentProps<HTMLTag>>>;
 
-const ANIMATION_TAGS: HTMLTag[] = ['div', 'p', 'li', 'h1', 'h2', 'h3', 'h4', 'strong'];
+const ANIMATION_TAGS: HTMLTag[] = ['p'];
 
 const useAnimation = (streaming: XMarkdownProps['streaming']) => {
   const { enableAnimation = false, animationConfig } = streaming || {};
