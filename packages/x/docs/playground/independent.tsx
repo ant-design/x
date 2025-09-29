@@ -31,7 +31,7 @@ import {
 } from '@ant-design/x';
 import type { ComponentProps } from '@ant-design/x-markdown';
 import XMarkdown from '@ant-design/x-markdown';
-import type { DefaultMessageInfo, MessageInfo } from '@ant-design/x-sdk';
+import type { DefaultMessageInfo } from '@ant-design/x-sdk';
 import {
   DeepSeekChatProvider,
   SSEFields,
@@ -326,13 +326,8 @@ interface ChatMessage extends XModelMessage {
 
 // ==================== Context ====================
 const ChatContext = React.createContext<{
-  onReload?: (key: string | number, info?: any) => any;
-  setMessage?: (
-    id: string | number,
-    message:
-      | Partial<MessageInfo<XModelMessage>>
-      | ((message: MessageInfo<XModelMessage>) => Partial<MessageInfo<XModelMessage>>),
-  ) => boolean;
+  onReload?: ReturnType<typeof useXChat>['onReload'];
+  setMessage?: ReturnType<typeof useXChat<ChatMessage>>['setMessage'];
 }>({});
 
 // ==================== Sub Component ====================

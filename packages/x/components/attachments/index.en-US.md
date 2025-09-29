@@ -38,7 +38,6 @@ For more properties, see [Upload](https://ant.design/components/upload).
 | overflow | Behavior when the file list overflows | 'wrap' \| 'scrollX' \| 'scrollY' | - | - |
 | placeholder | Placeholder information when there is no file | PlaceholderType \| ((type: 'inline' \| 'drop') => PlaceholderType) | - | - |
 | rootClassName | Root node className | React.CSSProperties | - | - |
-| rootStyle | Root node style object | React.CSSProperties | - | - |
 | styles | Custom style object, [see below](#semantic-dom) | Record<string, React.CSSProperties> | - | - |
 | imageProps | Image config, same as [Image](https://ant.design/components/image) | ImageProps | - | - |
 

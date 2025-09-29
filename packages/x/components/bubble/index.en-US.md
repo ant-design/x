@@ -69,22 +69,6 @@ In [this example](#bubble-demo-stream), you can try to force the streaming flag 
 - If you enable input animation and perform **slow loading**, multiple triggers of `onTypingComplete` may occur because streaming speed cannot keep up with animation speed.
 - If you disable input animation, each streaming input will trigger `onTypingComplete`.
 
-#### Bubble.List autoScroll Top Alignment
-
-**Bubble.List** auto-scroll is a simple reverse sorting scheme. In a fixed-height **Bubble.List**, if the message content is insufficient to fill the height, the content is bottom-aligned. It is recommended not to set a fixed height for **Bubble.List**, but to set a fixed height for its parent container and use flex layout (`display: flex` and `flex-direction: column`). This way, **Bubble.List** adapts its height and aligns content to the top when content is sparse, as shown in the [Bubble List demo](#bubble-demo-list).
-
-```tsx
-<div style={{ height: 600, display: 'flex', flexDirection: 'column' }}>
-  <Bubble.List items={items} autoScroll />
-</div>
-```
-
-If you do not want to use flex layout, you can set `max-height` for **Bubble.List**. When content is sparse, the height adapts and aligns to the top.
-
-```tsx
-<Bubble.List items={items} autoScroll rootStyle={{ maxHeight: 600 }} />
-```
-
 ### Bubble.List Component API
 
 | Attribute | Description | Type | Default | Version |
@@ -200,7 +184,6 @@ type RoleProps = Pick<
   | 'rootClassName'
   | 'classNames'
   | 'className'
-  | 'rootStyle'
   | 'styles'
   | 'style'
   | 'loading'
@@ -214,6 +197,22 @@ export type FuncRoleProps = (data: BubbleItemType) => RoleProps;
 
 export type RoleType = Partial<Record<'ai' | 'system' | 'user', RoleProps | FuncRoleProps>> &
   Record<string, RoleProps | FuncRoleProps>;
+```
+
+#### Bubble.List autoScroll Top Alignment
+
+**Bubble.List** auto-scroll is a simple reverse sorting scheme. In a fixed-height **Bubble.List**, if the message content is insufficient to fill the height, the content is bottom-aligned. It is recommended not to set a fixed height for **Bubble.List**, but to set a fixed height for its parent container and use flex layout (`display: flex` and `flex-direction: column`). This way, **Bubble.List** adapts its height and aligns content to the top when content is sparse, as shown in the [Bubble List demo](#bubble-demo-list).
+
+```tsx
+<div style={{ height: 600, display: 'flex', flexDirection: 'column' }}>
+  <Bubble.List items={items} autoScroll />
+</div>
+```
+
+If you do not want to use flex layout, you can set `max-height` for **Bubble.List**. When content is sparse, the height adapts and aligns to the top.
+
+```tsx
+<Bubble.List items={items} autoScroll style={{ maxHeight: 600 }} />
 ```
 
 ## Semantic DOM

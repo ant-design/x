@@ -70,22 +70,6 @@ demo:
 - 若你启用了输入动画，进行 **慢速加载** 时，会因为流式传输的速度跟不上动画速度而导致多次触发 `onTypingComplete`。
 - 若你关闭了输入动画，每一次的流式输入都会触发 `onTypingComplete`。
 
-#### Bubble.List autoScroll 顶对齐
-
-**Bubble.List** 的自动滚动方案其实是一个很简单的倒序排序方案，因此在固定高度的 **Bubble.List** 中，如果消息内容较少，没有撑满 **Bubble.List** 的高度，那么你会发现消息内容是底对齐的。故不推荐给 **Bubble.List** 设置固定高度，而是为 **Bubble.List** 的父容器添加固定高度，并把父容器设置为弹性布局 `display: flex` 且 `flex-direction: column`，这样 **Bubble.List** 在内容较少时会使用自适应高度且顶对齐。正如 [气泡列表](#bubble-demo-list) 中体现的一样。
-
-```tsx
-<div style={{ height: 600, display: 'flex', flexDirection: 'column' }}>
-  <Bubble.List items={items} autoScroll />
-</div>
-```
-
-如果你不想使用弹性布局，那么你可以为 **Bubble.List** 设置最大高度 `max-height`，这样在内容较少时，**Bubble.List** 的高度会自适应，呈现顶对齐效果。
-
-```tsx
-<Bubble.List items={items} autoScroll rootStyle={{ maxHeight: 600 }} />
-```
-
 ### Bubble.List 组件 API
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
@@ -201,7 +185,6 @@ type RoleProps = Pick<
   | 'rootClassName'
   | 'classNames'
   | 'className'
-  | 'rootStyle'
   | 'styles'
   | 'style'
   | 'loading'
@@ -215,6 +198,22 @@ export type FuncRoleProps = (data: BubbleItemType) => RoleProps;
 
 export type RoleType = Partial<Record<'ai' | 'system' | 'user', RoleProps | FuncRoleProps>> &
   Record<string, RoleProps | FuncRoleProps>;
+```
+
+#### Bubble.List autoScroll 顶对齐
+
+**Bubble.List** 的自动滚动方案其实是一个很简单的倒序排序方案，因此在固定高度的 **Bubble.List** 中，如果消息内容较少，没有撑满 **Bubble.List** 的高度，那么你会发现消息内容是底对齐的。故不推荐给 **Bubble.List** 设置固定高度，而是为 **Bubble.List** 的父容器添加固定高度，并把父容器设置为弹性布局 `display: flex` 且 `flex-direction: column`，这样 **Bubble.List** 在内容较少时会使用自适应高度且顶对齐。正如 [气泡列表](#bubble-demo-list) 中体现的一样。
+
+```tsx
+<div style={{ height: 600, display: 'flex', flexDirection: 'column' }}>
+  <Bubble.List items={items} autoScroll />
+</div>
+```
+
+如果你不想使用弹性布局，那么你可以为 **Bubble.List** 设置最大高度 `max-height`，这样在内容较少时，**Bubble.List** 的高度会自适应，呈现顶对齐效果。
+
+```tsx
+<Bubble.List items={items} autoScroll style={{ maxHeight: 600 }} />
 ```
 
 ## Semantic DOM

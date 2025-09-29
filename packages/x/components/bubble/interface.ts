@@ -75,7 +75,6 @@ export interface BubbleProps<ContentType extends BubbleContentType = string>
     'content' | 'onAnimationStart' | 'onAnimationEnd'
   > {
   prefixCls?: string;
-  rootStyle?: React.CSSProperties;
   styles?: Partial<Record<BubbleSlotType | 'root', React.CSSProperties>>;
   rootClassName?: string;
   classNames?: Partial<Record<BubbleSlotType | 'root', string>>;
@@ -186,7 +185,6 @@ export type RoleProps = Pick<
   | 'rootClassName'
   | 'classNames'
   | 'className'
-  | 'rootStyle'
   | 'styles'
   | 'style'
   | 'loading'
@@ -209,7 +207,6 @@ export type RoleType = Partial<Record<RemainRole, RoleProps | FuncRoleProps>> &
 export interface BubbleListProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'role'> {
   prefixCls?: string;
   rootClassName?: string;
-  rootStyle?: React.CSSProperties;
   styles?: Partial<Record<BubbleSlotType | 'bubble' | 'root', React.CSSProperties>>;
   classNames?: Partial<Record<BubbleSlotType | 'bubble' | 'root', string>>;
   items: BubbleItemType[];

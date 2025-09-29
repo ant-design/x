@@ -51,7 +51,25 @@ describe('attachments', () => {
     await waitFakeTimer();
     expect(onChange.mock.calls[0][0].fileList).toHaveLength(0);
   });
-
+  it('support classnames and styles', () => {
+    render(
+      renderAttachments({
+        styles: {
+          placeholder: {
+            color: 'blue',
+          },
+          upload: {
+            color: 'red',
+          },
+        },
+        classNames: {
+          placeholder: 'placeholder',
+          upload: 'upload',
+        },
+        items: mockItems,
+      }),
+    );
+  });
   it('add and remove file but can stop remove', async () => {
     const onChange = jest.fn();
     const { container } = render(
@@ -98,7 +116,7 @@ describe('attachments', () => {
     expect(container.querySelector('.ant-file-card-list-overflow-scrollY')).toBeTruthy();
   });
 
-  it ('card list description done', () => {
+  it('card list description done', () => {
     const { container } = render(
       renderAttachments({
         items: [
@@ -112,10 +130,12 @@ describe('attachments', () => {
       }),
     );
 
-    expect(container.querySelector('.ant-file-card-file-description')?.textContent).toBe('test description');
+    expect(container.querySelector('.ant-file-card-file-description')?.textContent).toBe(
+      'test description',
+    );
   });
 
-  it ('card list description uploading', () => {
+  it('card list description uploading', () => {
     const { container } = render(
       renderAttachments({
         items: [
@@ -132,7 +152,7 @@ describe('attachments', () => {
     expect(container.querySelector('.ant-file-card-file-description')?.textContent).toBe('50%');
   });
 
-  it ('card list description error', () => {
+  it('card list description error', () => {
     const { container } = render(
       renderAttachments({
         items: [
@@ -146,10 +166,12 @@ describe('attachments', () => {
       }),
     );
 
-    expect(container.querySelector('.ant-file-card-file-description')?.textContent).toBe('Error message');
+    expect(container.querySelector('.ant-file-card-file-description')?.textContent).toBe(
+      'Error message',
+    );
   });
 
-  it ('image list mask', () => {
+  it('image list mask', () => {
     const { container } = render(
       renderAttachments({
         items: [
@@ -158,7 +180,8 @@ describe('attachments', () => {
             name: 'image uploading preview.png',
             status: 'uploading',
             percent: 33,
-            thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+            thumbUrl:
+              'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
             url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
           },
           {
@@ -166,7 +189,8 @@ describe('attachments', () => {
             name: 'image error preview.png',
             status: 'error',
             response: 'Server Error 500',
-            thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+            thumbUrl:
+              'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
             url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
           },
         ],
@@ -175,7 +199,9 @@ describe('attachments', () => {
 
     expect(container.querySelector('.ant-attachment-list-card-file-img-mask')).toBeTruthy();
     expect(container.querySelector('.ant-progress')).toBeTruthy();
-    expect(container.querySelector('.ant-attachment-list-card-ellipsis')?.textContent).toBe('Server Error 500');
+    expect(container.querySelector('.ant-attachment-list-card-ellipsis')?.textContent).toBe(
+      'Server Error 500',
+    );
   });
 
   it('maxCount', async () => {
