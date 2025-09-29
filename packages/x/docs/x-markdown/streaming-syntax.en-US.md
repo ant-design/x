@@ -1,41 +1,40 @@
 ---
-title: Streaming Format Processing
-order: 3
+group:
+  title: Streaming Processing
+  order: 4
+title: Syntax Processing
+order: 1
 ---
 
-## Overview
-
-The streaming format processing mechanism is designed for real-time rendering scenarios, intelligently handling incomplete Markdown syntax structures to prevent rendering anomalies caused by syntax fragments.
+Streaming syntax processing mechanism is designed for real-time rendering scenarios, capable of intelligently handling incomplete Markdown syntax structures to avoid rendering anomalies caused by syntax fragments.
 
 ## Core Issues
-
-### 1. Syntax Fragment Problems
 
 During streaming transmission, Markdown syntax may be in an incomplete state:
 
 ```markdown
-// Link in transmission Click to visit [example website](https://example // Incomplete image syntax ![product image](https://cdn.example.com/images/produc
+// Incomplete link during transmission Click to visit [example website](https://example // Incomplete image syntax ![product image](https://cdn.example.com/images/produc
 ```
 
-### 2. Rendering Anomaly Risks
+### Rendering Anomaly Risks
 
-Incomplete syntax structures may cause:
+Incomplete syntax structures may lead to:
 
-- Links to fail proper navigation
-- Images to fail loading
-- Format markers to display directly in content
+- Links unable to jump correctly
+- Image loading failures
+- Format markers displaying directly in content
 
 ## Feature Demo
 
-<code src="./demo/streaming/format.tsx" description="Streaming format processing effect demonstration">Streaming Format Processing</code>
+<code src="./demo/streaming/format.tsx" description="Streaming syntax processing effect demonstration">Streaming Syntax Processing</code>
 
 ## Configuration Guide
 
-### streaming Configuration Items
+### streaming Configuration
 
 | Parameter | Description | Type | Default |
 | --- | --- | --- | --- |
-| hasNextChunk | Whether there is subsequent data | `boolean` | `false` |
+| hasNextChunk | Whether there is more streaming data | `boolean` | `false` |
 | incompleteMarkdownComponentMap | Mapping configuration for converting incomplete Markdown formats to custom loading components, used to provide custom loading components for unclosed links and images during streaming rendering | `{ link?: string; image?: string }` | `{ link: 'incomplete-link', image: 'incomplete-image' }` |
 
 ### Usage Example
@@ -61,17 +60,17 @@ const App = () => {
 
 ## Supported Syntax Types
 
-Streaming format processing supports completeness checks for the following Markdown syntax:
+Streaming syntax processing supports integrity checks for the following Markdown syntax:
 
 | Syntax Type | Format Example | Processing Mechanism |
 | --- | --- | --- |
-| **Link** | `[text](url)` | Detects unclosed link markers like `[text](` |
-| **Image** | `![alt](src)` | Detects unclosed image markers like `![alt](` |
-| **Heading** | `# ## ###` etc. | Supports progressive rendering for 1-6 level headings |
+| **Links** | `[text](url)` | Detects unclosed link markers like `[text](` |
+| **Images** | `![alt](src)` | Detects unclosed image markers like `![alt](` |
+| **Headings** | `# ## ###` etc. | Supports progressive rendering for 1-6 level headings |
 | **Emphasis** | `*italic*` `**bold**` | Handles emphasis syntax with `*` and `_` |
-| **Code** | `inline code` and `code blocks` | Supports backtick code block completeness checks |
-| **List** | `- + *` list markers | Detects spaces after list markers |
-| **Horizontal Rule** | `---` `===` | Avoids Setext heading and horizontal rule conflicts |
+| **Code** | `inline code` and `code blocks` | Supports backtick code block integrity checks |
+| **Lists** | `- + *` list markers | Detects spaces after list markers |
+| **Dividers** | `---` `===` | Avoids conflicts between Setext headings and dividers |
 | **XML Tags** | `<tag>` | Handles HTML/XML tag closure states |
 
 ## How It Works
@@ -83,23 +82,6 @@ When `hasNextChunk=true`, the component will:
 3. **Smart Truncation**: Pauses rendering when syntax is incomplete to avoid displaying fragments
 4. **Progressive Rendering**: Gradually completes syntax rendering as content is supplemented
 5. **Error Recovery**: Automatically falls back to safe state when syntax errors are detected
-
-### Token Type System
-
-The component internally defines the following token types to handle different Markdown syntax:
-
-- `Text`: Plain text
-- `Link`: Link syntax `[text](url)`
-- `Image`: Image syntax `![alt](src)`
-- `Heading`: Heading syntax `# ## ###`
-- `MaybeEmphasis`: Possible emphasis syntax
-- `Emphasis`: Emphasis syntax `*text*` or `_text_`
-- `Strong`: Bold syntax `**text**` or `__text__`
-- `XML`: XML/HTML tags `<tag>`
-- `MaybeCode`: Possible code syntax
-- `Code`: Code syntax `` `code` `` or `code block`
-- `MaybeHr`: Possible horizontal rule
-- `MaybeList`: Possible list syntax
 
 ## Advanced Configuration
 
@@ -137,7 +119,7 @@ const App = () => {
 
 ### State Reset Mechanism
 
-When the input content changes fundamentally (non-incremental update), the component will automatically reset the parsing state:
+When input content changes fundamentally (non-incremental update), the component automatically resets the parsing state:
 
 ```tsx
 // Old content: "Hello "
@@ -151,9 +133,9 @@ When the input content changes fundamentally (non-incremental update), the compo
 
 `hasNextChunk` should not always be `true`, otherwise it will cause:
 
-1. **Syntax Suspension**: Unclosed links, images and other syntax will remain in loading state
-2. **Poor User Experience**: Users see continuous loading animations without getting complete content
-3. **Memory Leaks**: State data accumulates continuously and cannot be properly cleaned up
+1. **Syntax Hanging**: Unclosed links, images and other syntax will remain in loading state
+2. **Poor User Experience**: Users see continuous loading animations
+3. **Memory Leaks**: State data accumulates continuously and cannot be cleaned properly
 
 ### Correct Usage Example
 
@@ -173,7 +155,7 @@ const StreamingExample = () => {
       ' showing how to handle',
       '[incomplete links](https://example',
       '.com) and images',
-      '![example image](https://picsum.photos/200)',
+      '![Example Image](https://picsum.photos/200)',
       '\n\nContent completed!',
     ];
 
@@ -209,14 +191,6 @@ const StreamingExample = () => {
   );
 };
 ```
-
-## Notes
-
-- This feature only affects rendering timing and will not change the final content
-- Recommended for scenarios with obvious network delays
-- For static content, keep `hasNextChunk=false` for optimal performance
-- Custom loading components need to be used with the `components` prop
-- State reset mechanism is based on content prefix matching to ensure correct incremental updates
 
 ## Performance Optimization
 

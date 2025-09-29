@@ -1,7 +1,7 @@
 ---
 group:
   title: Components
-  order: 2
+  order: 5
 title: DataChart
 order: 3
 ---

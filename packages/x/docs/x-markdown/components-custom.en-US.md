@@ -1,7 +1,7 @@
 ---
 group:
   title: Components
-  order: 2
+  order: 5
 title: Custom Component
 order: 4
 ---

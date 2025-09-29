@@ -1,23 +1,22 @@
 ---
-title: 流式语法处理
-order: 3
+group:
+  title: 流式处理
+  order: 4
+title: 语法处理
+order: 1
 ---
-
-## 概述
 
 流式语法处理机制专为实时渲染场景设计，能够智能处理不完整的Markdown语法结构，避免因语法片段导致的渲染异常。
 
 ## 核心问题
 
-### 1. 语法片段问题
-
 在流式传输过程中，Markdown语法可能处于不完整状态：
 
 ```markdown
-// 传输中的链接点击访问[示例网站](https://example // 不完整的图片语法 ![产品图](https://cdn.example.com/images/produc
+// 不完整的链接语法 [示例网站](https://example // 不完整的图片语法 ![产品图](https://cdn.example.com/images/produc
 ```
 
-### 2. 渲染异常风险
+### 渲染异常风险
 
 不完整的语法结构可能导致：
 
