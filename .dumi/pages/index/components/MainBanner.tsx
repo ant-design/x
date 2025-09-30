@@ -112,7 +112,8 @@ const useStyle = createStyles(({ token, css }) => {
     `,
     seeConf: css`
     position: absolute;
-    bottom: 20px;
+    bottom: 32px;
+    font-size:16px;
     cursor: pointer;
     background: linear-gradient(90deg, #fe8aff 0%, rgb(111, 179, 226) 46% ,rgb(108, 87, 255) 100%);
     background-clip: text;
@@ -341,14 +342,19 @@ const MainBanner: React.FC = () => {
           className={classnames(styles.lottie, direction === 'rtl' && styles.lottie_rtl)}
         />
       </Container>
-      <div
+      <a
+        href="https://seeconf.antgroup.com/"
+        target="_blank"
+        rel="noopener noreferrer"
         className={styles.seeConf}
-        onClick={() => {
-          window.open('https://seeconf.antgroup.com/', '_blank');
-        }}
+        aria-label={
+          isZhCN(pathname)
+            ? '前往 SEE Conf 2025 官网（新窗口打开）'
+            : 'Go to SEE Conf 2025 website (opens in a new tab)'
+        }
       >
         {locale.seeConf}
-      </div>
+      </a>
     </section>
   );
 };
