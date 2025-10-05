@@ -1,6 +1,6 @@
 import type { BubbleListProps } from '@ant-design/x';
 import { Bubble, ThoughtChain } from '@ant-design/x';
-import XMarkdown from '@ant-design/x-markdown';
+import XMarkdown, { ComponentProps } from '@ant-design/x-markdown';
 import '@ant-design/x-markdown/themes/dark.css';
 import HighlightCode from '@ant-design/x-markdown/plugins/HighlightCode';
 import type { XRequestOptions } from '@ant-design/x-sdk';
@@ -49,32 +49,34 @@ const useStyle = createStyles(({ token, css }, isOnAgent: any) => {
         display: flex;
         flex-direction:column;
         align-items: center;
-           .x-markdown-dark code:not(pre code){
-            border: 1px solid ##fafafa!important;
+          .x-markdown-dark code:not(pre code){
+            border: 1px solid #fafafa!important;
           };
-           .x-markdown-dark blockquote{
-           border-left:4px solid #ffffff;
-           };
-        .ant-highlightCode-code{
-          code {
-            color: rgba(255,255,255,.85);
+          .x-markdown-dark blockquote{
+            border-left:4px solid #ffffff;
+          };
+          .ant-highlightCode-code{
+            code {
+              color: rgba(255,255,255,.85);
+            }
+            pre {
+              border-top-right-radius: 0!important;
+              border-top-left-radius: 0!important;
             }
           };
-        .ant-bubble-content-updating {
-          background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
-          background-size: 100% 2px;
-          background-repeat: no-repeat;
-          background-position: bottom;
-      };
-          .ant-x-markdown{
-          a{
-          color: #91caff;
-          &:hover{
-          color: #e6f4ff;
-          }
+          .ant-bubble-content-updating {
+            background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
+            background-size: 100% 2px;
+            background-repeat: no-repeat;
+            background-position: bottom;
           };
-       
-
+          .ant-x-markdown{
+            a{
+              color: #91caff;
+              &:hover{
+                color: #e6f4ff;
+              }
+          };
           }
     `,
     sender: css`
@@ -85,9 +87,11 @@ const useStyle = createStyles(({ token, css }, isOnAgent: any) => {
   };
 });
 
-const Code = (props: { className: string; children: string }) => {
+const Code: React.FC<ComponentProps> = (props) => {
   const { className, children } = props;
   const lang = className?.match(/language-(\w+)/)?.[1] || '';
+
+  if (typeof children !== 'string') return null;
   return <HighlightCode lang={lang}>{children}</HighlightCode>;
 };
 
@@ -95,7 +99,7 @@ const tboxClient = new TboxClient({
   httpClientConfig: {
     authorization: 'your-api-key', // Replace with your API key
     isAntdXDemo: true, // Only for Ant Design X demo
-  },
+  } as any,
 });
 
 class TBoxProvider<
@@ -174,7 +178,8 @@ class TBoxRequest<
       appId: 'your-app-id', // Replace with your app ID
       query: params?.message.content || '',
       userId: 'antd-x',
-    });
+      version: 'v3',
+    } as any);
     this.tboxStream = stream;
     const { callbacks } = this.options;
 

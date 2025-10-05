@@ -1,4 +1,4 @@
-import { PromptProps } from '@ant-design/x';
+import type { PromptsProps } from '@ant-design/x';
 import { createStyles } from 'antd-style';
 import classnames from 'classnames';
 import React, { useContext, useRef } from 'react';
@@ -43,7 +43,7 @@ const PortalScene: React.FC = () => {
   const agentRef = useRef<{
     senderRef: any;
   }>(null);
-  const onPromptClick = ({ data }: { data: PromptProps }) => {
+  const onPromptClick = ({ data }: { data: any }) => {
     agentRef?.current?.senderRef.setPrompt?.(data.description as string);
   };
 

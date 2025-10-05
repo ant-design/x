@@ -30,7 +30,7 @@ const useStyle = createStyles(({ token, css }) => {
         text-align: center;
         display: flex;
         flex-direction: column;
-        height: 30%;
+        min-height: 30%;
         justify-content: space-around;
         `,
     x: css`

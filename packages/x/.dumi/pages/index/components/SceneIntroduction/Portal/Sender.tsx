@@ -64,7 +64,7 @@ const CustomizationSender: React.FC<{
   const [locale] = useLocale(locales);
   const [mergeLoading, setMergeLoading] = useState(false);
   const senderRef = useRef<GetRef<typeof Sender>>(null);
-  const [activeKey, setActiveKey] = useState('');
+  const [activeKey, setActiveKey] = useState('text');
   const [value, setValue] = useState('');
   const options = Object.keys(tokenData) || [];
   options.push('Notification', 'XProvider');
@@ -101,6 +101,7 @@ const CustomizationSender: React.FC<{
           key: 'components',
           props: {
             options,
+            defaultValue: 'Sender',
             placeholder: locale.componentsPromptPlaceholder,
           },
         },
@@ -146,6 +147,11 @@ const CustomizationSender: React.FC<{
     <Sender
       ref={senderRef}
       value={value}
+      onChange={(val) => {
+        if (activeKey === 'text') {
+          setValue(val);
+        }
+      }}
       placeholder={locale.placeholder}
       loading={mergeLoading}
       className={styles.sender}
