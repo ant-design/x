@@ -19,9 +19,6 @@ const roles: GetProp<typeof Bubble.List, 'role'> = {
   ai: {
     placement: 'start',
     typing: { effect: 'typing', step: 5, interval: 20 },
-    style: {
-      maxWidth: 600,
-    },
     styles: {
       content: {
         borderRadius: 16,

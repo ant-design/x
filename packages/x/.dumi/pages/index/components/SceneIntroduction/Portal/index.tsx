@@ -46,6 +46,7 @@ const PortalScene: React.FC = () => {
   const onPromptClick = ({ data }: { data: any }) => {
     agentRef?.current?.senderRef.setPrompt?.(data.description as string);
   };
+  console.log(isOnAgent, 'isOnAgent');
 
   return (
     <Provider>

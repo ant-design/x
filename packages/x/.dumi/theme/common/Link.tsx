@@ -1,6 +1,6 @@
 import { Link as DumiLink, useAppData, useLocation, useNavigate } from 'dumi';
 import type { MouseEvent, MouseEventHandler } from 'react';
-import React, { useMemo, forwardRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 
 export interface LinkProps {
   to: string | { pathname?: string; search?: string; hash?: string };
@@ -45,6 +45,7 @@ const Link = forwardRef<HTMLAnchorElement, React.PropsWithChildren<LinkProps>>(
         children,
       );
     }
+
     return (
       <DumiLink ref={ref} {...rest} to={href} prefetch>
         {children}

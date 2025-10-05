@@ -6,7 +6,7 @@ import 'dayjs/locale/zh-cn';
 import { XProvider } from '@ant-design/x';
 import zhCN from 'antd/es/locale/zh_CN';
 import { Helmet, useOutlet, useSiteData } from 'dumi';
-import React, { useEffect, useLayoutEffect, useRef } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import useLocale from '../../../hooks/useLocale';
 import useLocation from '../../../hooks/useLocation';
@@ -17,6 +17,7 @@ import SiteContext from '../../slots/SiteContext';
 import '../../static/style';
 
 import IndexLayout from '../IndexLayout';
+import Provider from '../IndexLayout/Provider';
 import SidebarLayout from '../SidebarLayout';
 
 const locales = {
@@ -86,6 +87,8 @@ const DocLayout: React.FC = () => {
     return <SidebarLayout>{outlet}</SidebarLayout>;
   }, [pathname, outlet]);
 
+  const [isOnAgent, setIsOnAgent] = useState<boolean>(false);
+
   return (
     <>
       <Helmet encodeSpecialCharacters={false}>
@@ -105,11 +108,18 @@ const DocLayout: React.FC = () => {
           content="https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/MGdkQ6iLuXEAAAAAQDAAAAgADtFMAQFr/original"
         />
       </Helmet>
-      <XProvider direction={direction} locale={lang === 'cn' ? zhCN : undefined}>
-        <GlobalStyles />
-        <Header />
-        {content}
-      </XProvider>
+      <Provider
+        agentInfo={{
+          setIsOnAgent,
+          isOnAgent,
+        }}
+      >
+        <XProvider direction={direction} locale={lang === 'cn' ? zhCN : undefined}>
+          <GlobalStyles />
+          <Header />
+          {content}
+        </XProvider>
+      </Provider>
     </>
   );
 };

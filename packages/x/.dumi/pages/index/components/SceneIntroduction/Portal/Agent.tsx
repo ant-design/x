@@ -227,6 +227,7 @@ const provider = new TBoxProvider({
 const Agent: React.FC<AgentProps> = ({ setIsOnAgent, isOnAgent, ref }) => {
   const { styles } = useStyle(isOnAgent);
   const [locale] = useLocale(locales);
+
   // ==================== Event ====================
   const onSubmit = (val: string) => {
     if (!val) return;
@@ -236,6 +237,7 @@ const Agent: React.FC<AgentProps> = ({ setIsOnAgent, isOnAgent, ref }) => {
         content: val,
       },
     });
+    setIsOnAgent(true);
   };
   const senderRef = useRef(null);
   useImperativeHandle(ref, () => {
@@ -287,12 +289,10 @@ const Agent: React.FC<AgentProps> = ({ setIsOnAgent, isOnAgent, ref }) => {
   });
 
   useEffect(() => {
-    if (messages.length) {
-      setIsOnAgent(true);
-    } else {
-      setIsOnAgent(false);
+    if (!isOnAgent) {
+      abort?.();
     }
-  }, [messages]);
+  }, [isOnAgent]);
 
   const items: BubbleListProps['items'] = messages?.map((i) => ({
     content: i.message.content,

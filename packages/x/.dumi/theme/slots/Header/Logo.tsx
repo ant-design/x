@@ -4,6 +4,7 @@ import { useLocation } from 'dumi';
 import * as React from 'react';
 
 import Link from '../../common/Link';
+import Context from '../../layouts/IndexLayout/Context';
 import * as utils from '../../utils';
 import { SharedProps } from './interface';
 
@@ -67,12 +68,16 @@ const logoSrc =
 
 const Logo: React.FC<LogoProps> = ({ isZhCN, isMobile, isMini }) => {
   const { search } = useLocation();
-
   const { styles } = useStyle();
-
+  const { setIsOnAgent, isOnAgent } = React.useContext(Context);
   return (
     <h1>
       <Link
+        onClick={() => {
+          if (isOnAgent) {
+            setIsOnAgent(false);
+          }
+        }}
         to={utils.getLocalizedPathname('/', isZhCN, search)}
         className={classnames(styles.logo, (isMobile || isMini) && styles.mobile)}
       >

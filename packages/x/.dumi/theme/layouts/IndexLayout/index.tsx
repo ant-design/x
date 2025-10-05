@@ -1,8 +1,9 @@
 import { Helmet } from 'dumi';
 import type { PropsWithChildren } from 'react';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import Footer from '../../slots/Footer';
+import Context from './Context';
 import Provider from './Provider';
 
 interface IndexLayoutProps {
@@ -12,14 +13,9 @@ interface IndexLayoutProps {
 
 const IndexLayout: React.FC<PropsWithChildren<IndexLayoutProps>> = (props) => {
   const { children, title, desc } = props;
-  const [isOnAgent, setIsOnAgent] = useState<boolean>(false);
+  const { isOnAgent } = useContext(Context);
   return (
-    <Provider
-      agentInfo={{
-        setIsOnAgent,
-        isOnAgent,
-      }}
-    >
+    <>
       <Helmet>
         <title>{title}</title>
         <meta property="og:title" content={title} />
@@ -27,7 +23,7 @@ const IndexLayout: React.FC<PropsWithChildren<IndexLayoutProps>> = (props) => {
       </Helmet>
       <div style={{ minHeight: 'calc(100vh - 80px)' }}>{children}</div>
       {isOnAgent ? null : <Footer />}
-    </Provider>
+    </>
   );
 };
 
