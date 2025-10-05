@@ -24,7 +24,6 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
     lineHeightLG,
     marginXXS,
     fontSizeHeading1,
-    borderRadiusLG,
     fontSizeHeading4,
     controlHeightLG,
     marginXS,
@@ -39,7 +38,7 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
         alignItems: 'center',
         padding: `${paddingSM} ${padding}`,
         backgroundColor: colorFillTertiary,
-        borderRadius: paddingSM,
+        borderRadius: token.borderRadius,
         position: 'relative',
         overflow: 'hidden',
         boxSizing: 'border-box',
@@ -113,7 +112,7 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
       },
 
       [`${componentCls}-file-small`]: {
-        borderRadius: borderRadiusLG,
+        borderRadius: token.borderRadius,
         padding: `0 ${paddingSM}`,
         height: controlHeightLG,
 
@@ -129,7 +128,7 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
 
       [`${componentCls}-image`]: {
         width: 268,
-        borderRadius: paddingSM,
+        borderRadius: token.borderRadius,
         overflow: 'hidden',
 
         img: {
@@ -144,7 +143,7 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
       [`${componentCls}-video`]: {
         width: 268,
         aspectRatio: '16 / 9',
-        borderRadius: paddingSM,
+        borderRadius: token.borderRadius,
       },
 
       [`&${componentCls}-rtl`]: {

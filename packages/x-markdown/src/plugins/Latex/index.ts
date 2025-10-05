@@ -1,6 +1,5 @@
 import katex, { type KatexOptions } from 'katex';
 import { TokenizerAndRendererExtension } from 'marked';
-import { PluginsType } from '../type';
 
 import 'katex/dist/katex.min.css';
 
@@ -95,7 +94,7 @@ function blockKatex(renderer: Render, replaceAlignStart: boolean) {
   };
 }
 
-const Latex: PluginsType['Latex'] = (options?: LatexOption): TokenizerAndRendererExtension[] => {
+const Latex = (options?: LatexOption): TokenizerAndRendererExtension[] => {
   const { replaceAlignStart = true, katexOptions = { output: 'html' } } = options || {};
 
   const inlineRenderer = createRenderer(katexOptions, false);

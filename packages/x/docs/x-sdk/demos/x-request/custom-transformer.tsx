@@ -1,5 +1,5 @@
 import { TagsOutlined } from '@ant-design/icons';
-import type { ThoughtChainItem } from '@ant-design/x';
+import type { ThoughtChainItemType } from '@ant-design/x';
 import { ThoughtChain } from '@ant-design/x';
 import { XRequest } from '@ant-design/x-sdk';
 import { Button, Splitter } from 'antd';
@@ -40,7 +40,7 @@ async function mockFetch() {
 }
 
 const App = () => {
-  const [status, setStatus] = React.useState<ThoughtChainItem['status']>();
+  const [status, setStatus] = React.useState<ThoughtChainItemType['status']>();
   const [lines, setLines] = React.useState<string[]>([]);
 
   function request() {

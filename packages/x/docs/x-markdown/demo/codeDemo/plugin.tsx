@@ -1,12 +1,11 @@
-import { Token, XMarkdown } from '@ant-design/x-markdown';
-import React from 'react';
-import '@ant-design/x-markdown/themes/light.css';
-import '@ant-design/x-markdown/themes/dark.css';
+import { type ComponentProps, type Token, XMarkdown } from '@ant-design/x-markdown';
 import { Popover } from 'antd';
+import React from 'react';
 import { useIntl } from 'react-intl';
 import { useMarkdownTheme } from '../_utils';
 import { Adx_Markdown_En, Adx_Markdown_Zh } from '../_utils/adx-markdown';
-
+import '@ant-design/x-markdown/themes/light.css';
+import '@ant-design/x-markdown/themes/dark.css';
 const referenceList = [
   { url: 'https://x.ant.design', title: 'link1' },
   { url: 'https://x.ant.design', title: 'link2' },
@@ -19,8 +18,8 @@ const referenceList = [
   { url: 'https://x.ant.design', title: 'link9' },
 ];
 
-const Footnote = (props: { children: string; href: string; title: string }) => (
-  <Popover content={props?.title} title="Footnote" trigger="hover">
+const Footnote: React.FC<ComponentProps<{ href?: string; title?: string }>> = (props) => (
+  <Popover content={props.title} title="Footnote" trigger="hover">
     <span
       onClick={() => window.open(props.href)}
       style={{
@@ -37,7 +36,7 @@ const Footnote = (props: { children: string; href: string; title: string }) => (
         cursor: 'pointer',
       }}
     >
-      {props?.children}
+      {props.children}
     </span>
   </Popover>
 );

@@ -10,6 +10,7 @@ order: 1
 
 ## 相关文档
 
+- 百宝箱开放平台官网 - [https://tbox.cn/open](https://tbox.cn/open)
 - 百宝箱开放平台概述 - [https://alipaytbox.yuque.com/sxs0ba/doc/tbox_open_overview](https://alipaytbox.yuque.com/sxs0ba/doc/tbox_open_overview)
 - 授权管理 - [https://alipaytbox.yuque.com/sxs0ba/doc/tbox_open_token](https://alipaytbox.yuque.com/sxs0ba/doc/tbox_open_token)
 - OpenAPI - [https://alipaytbox.yuque.com/sxs0ba/doc/tbox_openapi_overview](https://alipaytbox.yuque.com/sxs0ba/doc/tbox_openapi_overview)
@@ -21,7 +22,7 @@ import { TboxClient } from 'tbox-nodejs-sdk';
 
 const client = new TboxClient({
   httpClientConfig: {
-    authorization: 'TBox-your-token-xxx',
+    authorization: 'Tbox-your-token-xxx',
   },
 });
 
@@ -46,7 +47,7 @@ stream.on('error', (error) => {
 
 ## 使用 X SDK 接入 tbox-nodejs-sdk
 
-使用URL接入智能体是 X SDK提供的基础能力，详情请查看[X SDK](/sdks/introduce-cn)，百宝箱完整样板间请查看[样板间-百宝箱](/docs/playground/agent-tbox-cn)。
+使用URL接入智能体是 X SDK提供的基础能力，详情请查看[X SDK](/x-sdks/introduce-cn)，百宝箱完整样板间请查看[样板间-百宝箱](/docs/playground/agent-tbox-cn)。
 
 ### 示例
 

@@ -5,10 +5,10 @@ import { Alert, Badge, Flex, Tooltip } from 'antd';
 import { createStyles, css } from 'antd-style';
 import classNames from 'classnames';
 import { FormattedMessage, useLiveDemo, useSiteData } from 'dumi';
+import { pickBy } from 'lodash';
 import LZString from 'lz-string';
 /* eslint-disable react-hooks-extra/no-direct-set-state-in-use-effect */
 import React, { useEffect, useRef, useState } from 'react';
-
 import useLocation from '../../../hooks/useLocation';
 import BrowserFrame from '../../common/BrowserFrame';
 import ClientOnly from '../../common/ClientOnly';
@@ -87,6 +87,7 @@ const CodePreviewer: React.FC<AntdPreviewerProps> = (props) => {
     pkgDependencyList,
     pkgPeerDependencies,
   } = props;
+
   const { codeType } = React.use(DemoContext);
 
   const { pkg } = useSiteData();
@@ -96,6 +97,7 @@ const CodePreviewer: React.FC<AntdPreviewerProps> = (props) => {
 
   const entryName = 'index.tsx';
   const entryCode = asset.dependencies[entryName].value;
+  const otherCodeObject = pickBy(asset.dependencies, (_, key) => key.startsWith('.'));
 
   const previewDemo = useRef<React.ReactNode>(null);
   const demoContainer = useRef<HTMLElement>(null);
@@ -497,6 +499,7 @@ createRoot(document.getElementById('container')).render(<Demo />);
         <section className={highlightClass} key="code">
           <CodePreview
             sourceCode={entryCode}
+            otherCode={otherCodeObject}
             jsxCode={jsx}
             styleCode={style}
             error={liveDemoError}

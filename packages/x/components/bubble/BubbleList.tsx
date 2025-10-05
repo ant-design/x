@@ -4,8 +4,9 @@ import pickAttrs from 'rc-util/es/pickAttrs';
 import * as React from 'react';
 import { useXProviderContext } from '../x-provider';
 import Bubble from './Bubble';
+import { BubbleContext } from './context';
 import {
-  BubbleData,
+  BubbleItemType,
   BubbleListProps,
   BubbleListRef,
   BubbleRef,
@@ -25,13 +26,13 @@ function roleCfgIsFunction(roleCfg: RoleProps | FuncRoleProps): roleCfg is FuncR
 const MemoedBubble = React.memo(Bubble);
 
 const BubbleListItem: React.FC<
-  BubbleData & {
+  BubbleItemType & {
     bubblesRef: React.RefObject<BubblesRecord>;
-    // BubbleData.key 会在 BubbleList 内渲染时被吞掉，使得 BubbleListItem.props 无法获取到 key
+    // BubbleItemType.key 会在 BubbleList 内渲染时被吞掉，使得 BubbleListItem.props 无法获取到 key
     _key: string | number;
   }
 > = (props) => {
-  const { _key, bubblesRef, ...restProps } = props;
+  const { _key, bubblesRef, extra, status, ...restProps } = props;
 
   const initBubbleRef = React.useCallback(
     (node: BubbleRef) => {
@@ -44,7 +45,11 @@ const BubbleListItem: React.FC<
     [_key],
   );
 
-  return <MemoedBubble ref={initBubbleRef} {...omit(restProps, ['role'])} />;
+  return (
+    <BubbleContext.Provider value={{ key: _key, status, extra }}>
+      <MemoedBubble ref={initBubbleRef} {...omit(restProps, ['role'])} />
+    </BubbleContext.Provider>
+  );
 };
 
 const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps> = (props, ref) => {
@@ -52,7 +57,6 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
     prefixCls: customizePrefixCls,
     rootClassName,
     className,
-    rootStyle,
     styles,
     classNames,
     style,
@@ -97,7 +101,6 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
 
   const mergedStyle = {
     ...styles?.root,
-    ...rootStyle,
     ...style,
   };
 
@@ -145,7 +148,7 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
       onScroll={onScroll}
     >
       {renderData.map((item) => {
-        let mergedProps: BubbleData;
+        let mergedProps: BubbleItemType;
         if (item.role && role) {
           const cfg = role[item.role];
           mergedProps = { ...(roleCfgIsFunction(cfg) ? cfg(item) : cfg), ...item };

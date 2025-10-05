@@ -18,9 +18,7 @@ const DemoFallback = () => {
       active
       className={styles.skeletonWrapper}
       style={{ width: '100%', height: '100%' }}
-    >
-      {' '}
-    </Skeleton.Node>
+    />
   );
 };
 

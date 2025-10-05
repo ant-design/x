@@ -5,7 +5,7 @@ order: 3
 
 ## 介绍
 
-通过缓存隐藏markdown格式和动画效果，优化 LLM 场景下流式 Markdown 渲染效果。
+通过缓存隐藏 markdown 格式和动画效果，优化 LLM 场景下流式 Markdown 渲染效果。
 
 ## 代码演示
 
@@ -22,7 +22,14 @@ order: 3
 | --- | --- | --- | --- |
 | hasNextChunk | 是否还有流式数据 | `boolean` | `false` |
 | enableAnimation | 是否开启文字渐显 | `boolean` | `false` |
-| animationConfig | 文字动画配置 | [`ControllerUpdate`](https://react-spring.dev/docs/typescript#controllerupdate) | `{ from: { opacity: 0 }, to: { opacity: 1 }, config: { tension: 170, friction: 26 } }` |
+| animationConfig | 文字动画配置 | `AnimationConfig` | `{ fadeDuration: 200, easing: 'ease-in-out' }` |
+
+#### AnimationConfig
+
+| 属性         | 说明                     | 类型     | 默认值          |
+| ------------ | ------------------------ | -------- | --------------- |
+| fadeDuration | 淡入动画持续时间（毫秒） | `number` | `200`           |
+| easing       | 动画的缓动函数           | `string` | `'ease-in-out'` |
 
 ### 使用示例
 
@@ -37,8 +44,8 @@ const App = () => {
         hasNextChunk: true,
         enableAnimation: true,
         animationConfig: {
-          from: { opacity: 0 },
-          to: { opacity: 1 },
+          fadeDuration: 200,
+          easing: 'ease-in-out',
         },
       }}
     />

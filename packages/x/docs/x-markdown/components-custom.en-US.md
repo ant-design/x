@@ -3,7 +3,7 @@ group:
   title: Components
   order: 2
 title: Custom Component
-order: 3
+order: 4
 ---
 
 XMarkdown supports a highly flexible business component rendering mechanism, allowing developers to implement customized functionality through the following approaches:
@@ -15,4 +15,4 @@ XMarkdown supports a highly flexible business component rendering mechanism, all
 ## Code Examples
 
 <!-- prettier-ignore -->
-<code src="./demo/components/custom.tsx" description="Rendering charts with GPT-VIS">Thinking Process</code>
+<code src="./demo/components/custom.tsx">Custom Component</code>

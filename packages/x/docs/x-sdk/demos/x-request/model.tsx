@@ -1,5 +1,5 @@
 import { LoadingOutlined, TagsOutlined } from '@ant-design/icons';
-import type { ThoughtChainItem } from '@ant-design/x';
+import type { ThoughtChainItemType } from '@ant-design/x';
 import { ThoughtChain } from '@ant-design/x';
 import { AbstractXRequestClass, XRequest } from '@ant-design/x-sdk';
 import { Button, Descriptions, Flex, Input, Splitter, Typography } from 'antd';
@@ -30,7 +30,7 @@ const MODEL = 'Qwen3-8B';
 
 const App = () => {
   const [status, setStatus] = useState<string>();
-  const [thoughtChainStatus, setThoughtChainStatus] = useState<ThoughtChainItem['status']>();
+  const [thoughtChainStatus, setThoughtChainStatus] = useState<ThoughtChainItemType['status']>();
   const [lines, setLines] = useState<Record<string, string>[]>([]);
   const [questionText, setQuestionText] = useState<string>('hello, who are u?');
 

@@ -3,8 +3,9 @@ import { Bubble } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
 import { Avatar, Flex, Slider, Space, Typography } from 'antd';
 import React from 'react';
-import '@ant-design/x-markdown/themes/light.css';
 import { useMarkdownTheme } from '../_utils';
+import '@ant-design/x-markdown/themes/light.css';
+import '@ant-design/x-markdown/themes/dark.css';
 
 const { Text } = Typography;
 

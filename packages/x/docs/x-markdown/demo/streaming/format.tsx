@@ -1,11 +1,12 @@
+import type { BubbleListProps } from '@ant-design/x';
 import { Bubble, Sender } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
 import { DefaultChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';
 import { Button, Row } from 'antd';
 import React, { useMemo, useState } from 'react';
-import '@ant-design/x-markdown/themes/light.css';
-import type { BubbleListProps } from '@ant-design/x';
 import { mockFetch, useMarkdownTheme } from '../_utils';
+import '@ant-design/x-markdown/themes/light.css';
+import '@ant-design/x-markdown/themes/dark.css';
 
 const fullContent = `
 ### Link链接 🔗
@@ -13,7 +14,8 @@ const fullContent = `
 
 邮箱链接：<contact@example.com>
 
-### Image图片 🖼️
+### Image 🖼️
+
 ![示例图片](https://mdn.alipayobjects.com/huamei_yz9z7c/afts/img/0lMhRYbo0-8AAAAAQDAAAAgADlJoAQFr/original)
 
 ### Heading标题  📑

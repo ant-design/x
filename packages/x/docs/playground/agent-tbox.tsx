@@ -6,14 +6,14 @@ import {
   FileSearchOutlined,
   GlobalOutlined,
   HeartOutlined,
-  PlusOutlined,
   ProductOutlined,
   QuestionCircleOutlined,
   ScheduleOutlined,
   ShareAltOutlined,
   SmileOutlined,
+  SyncOutlined,
 } from '@ant-design/icons';
-import type { BubbleListProps, ThoughtChainItemProps } from '@ant-design/x';
+import type { ActionsFeedbackProps, BubbleListProps, ThoughtChainItemProps } from '@ant-design/x';
 import {
   Actions,
   Bubble,
@@ -23,8 +23,11 @@ import {
   Think,
   ThoughtChain,
   Welcome,
+  XProvider,
 } from '@ant-design/x';
-import XMarkdown from '@ant-design/x-markdown';
+import enUS_X from '@ant-design/x/locale/en_US';
+import zhCN_X from '@ant-design/x/locale/zh_CN';
+import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
 import type { TransformMessage } from '@ant-design/x-sdk';
 import {
   AbstractChatProvider,
@@ -33,19 +36,15 @@ import {
   useXConversations,
   XRequestOptions,
 } from '@ant-design/x-sdk';
-import { Avatar, Button, Flex, type GetProp, Pagination, Space } from 'antd';
+import { Avatar, Button, Flex, type GetProp, message, Pagination, Space } from 'antd';
+import enUS_antd from 'antd/locale/en_US';
+import zhCN_antd from 'antd/locale/zh_CN';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
 import React, { useState } from 'react';
 import { TboxClient } from 'tbox-nodejs-sdk';
 
-const tboxClient = new TboxClient({
-  httpClientConfig: {
-    authorization: 'your-api-key', // Replace with your API key
-    isAntdXDemo: true, // Only for Ant Design X demo
-  },
-});
-
+// ==================== Local ====================
 const zhCN = {
   whatIsTbox: '什么是百宝箱 Tbox.cn?',
   whatCanTboxDo: '百宝箱可以做什么?',
@@ -77,6 +76,10 @@ const zhCN = {
   modelExecutionCompleted: '大模型执行完成',
   executionFailed: '执行失败',
   aborted: '已经终止',
+  curConversation: '当前对话',
+  nowNenConversation: '当前已经是新会话',
+  isMock: '当前为模拟功能',
+  retry: '重新生成',
 };
 
 const enUS = {
@@ -110,11 +113,16 @@ const enUS = {
   modelExecutionCompleted: 'Model execution completed',
   executionFailed: 'Execution failed',
   aborted: 'Aborted',
+  curConversation: 'Current Conversation',
+  nowNenConversation: 'It is now a new conversation.',
+  retry: 'retry',
+  isMock: 'It is Mock',
 };
 
 const isZhCN = window.parent?.location?.pathname?.includes('-cn');
 const t = isZhCN ? zhCN : enUS;
 
+// ==================== Static Config ====================
 const DEFAULT_CONVERSATIONS_ITEMS = [
   {
     key: 'default-0',
@@ -187,11 +195,11 @@ const SENDER_PROMPTS: GetProp<typeof Prompts, 'items'> = [
   },
 ];
 
+// ==================== Style ====================
 const useStyle = createStyles(({ token, css }) => {
   return {
     layout: css`
       width: 100%;
-      min-width: 1000px;
       height: 100vh;
       display: flex;
       background: ${token.colorBgContainer};
@@ -222,11 +230,6 @@ const useStyle = createStyles(({ token, css }) => {
         font-size: 16px;
       }
     `,
-    addBtn: css`
-      background: #1677ff0f;
-      border: 1px solid #1677ff34;
-      height: 40px;
-    `,
     conversations: css`
       flex: 1;
       overflow-y: auto;
@@ -252,12 +255,12 @@ const useStyle = createStyles(({ token, css }) => {
     // chat list 样式
     chat: css`
       height: 100%;
-      width: 100%;
+      width: calc(100% - 280px);
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
       padding-block: ${token.paddingLG}px;
-      gap: 16px;
+      justify-content:space-between;
       .ant-bubble-content-updating {
         background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
         background-size: 100% 2px;
@@ -281,14 +284,19 @@ const useStyle = createStyles(({ token, css }) => {
       display: flex;
       height: calc(100% - 120px);
       flex-direction: column;
+       align-items: center;
+      width: 100%;
     `,
     placeholder: css`
       padding-top: 32px;
+      width: 100%;
+      padding-inline: ${token.paddingLG}px;
+      box-sizing: border-box;
     `,
     // sender 样式
     sender: css`
       width: 100%;
-      max-width: 700px;
+      max-width: 840px;
       margin: 0 auto;
     `,
     speechButton: css`
@@ -297,29 +305,35 @@ const useStyle = createStyles(({ token, css }) => {
     `,
     senderPrompt: css`
       width: 100%;
-      max-width: 700px;
+      max-width: 840px;
       margin: 0 auto;
       color: ${token.colorText};
     `,
   };
 });
 
-interface TBoxMessage {
+// ==================== TboxProvider ====================
+interface TboxMessage {
   content: string;
   role: string;
 }
 
-interface TBoxInput {
-  message: TBoxMessage;
+interface TboxInput {
+  message: TboxMessage;
 }
 
-interface TBoxOutput {
+interface TboxOutput {
   text?: string;
 }
-
-class TBoxRequest<
-  Input extends TBoxInput = TBoxInput,
-  Output extends TBoxOutput = TBoxOutput,
+const tboxClient = new TboxClient({
+  httpClientConfig: {
+    authorization: 'your-api-key', // Replace with your API key
+    isAntdXDemo: true, // Only for Ant Design X demo
+  },
+});
+class TboxRequest<
+  Input extends TboxInput = TboxInput,
+  Output extends TboxOutput = TboxOutput,
 > extends AbstractXRequestClass<Input, Output> {
   tboxClient: TboxClient;
   tboxStream: any;
@@ -356,8 +370,9 @@ class TBoxRequest<
     const stream = tboxClient.chat({
       appId: 'your-app-id', // Replace with your app ID
       query: params?.message.content || '',
+      version: 'v2', // only for antd-x v2
       userId: 'antd-x',
-    });
+    } as any);
     this.tboxStream = stream;
     const { callbacks } = this.options;
 
@@ -398,10 +413,10 @@ class TBoxRequest<
   }
 }
 
-class TBoxProvider<
-  ChatMessage extends TBoxMessage = TBoxMessage,
-  Input extends TBoxInput = TBoxInput,
-  Output extends TBoxOutput = TBoxOutput,
+class TboxProvider<
+  ChatMessage extends TboxMessage = TboxMessage,
+  Input extends TboxInput = TboxInput,
+  Output extends TboxOutput = TboxOutput,
 > extends AbstractChatProvider<ChatMessage, Input, Output> {
   transformParams(requestParams: Partial<Input>, options: XRequestOptions<Input, Output>): Input {
     if (typeof requestParams !== 'object') {
@@ -435,20 +450,26 @@ class TBoxProvider<
 /**
  * 🔔 Please replace the BASE_URL, MODEL with your own values.
  */
-const providerCaches = new Map<string, TBoxProvider>();
+const providerCaches = new Map<string, TboxProvider>();
 const providerFactory = (conversationKey: string) => {
   if (!providerCaches.get(conversationKey)) {
     providerCaches.set(
       conversationKey,
-      new TBoxProvider({
-        request: new TBoxRequest('TBox Client', {}),
+      new TboxProvider({
+        request: new TboxRequest('Tbox Client', {}),
       }),
     );
   }
   return providerCaches.get(conversationKey);
 };
 
-const ThinkComponent = React.memo((props: { children: string; streamStatus: string }) => {
+// ==================== Context ====================
+const ChatContext = React.createContext<{
+  onReload?: ReturnType<typeof useXChat>['onReload'];
+}>({});
+
+// ==================== Sub Component====================
+const ThinkComponent = React.memo((props: ComponentProps) => {
   const [title, setTitle] = React.useState(t.DeepThinking + '...');
   const [loading, setLoading] = React.useState(true);
 
@@ -466,9 +487,72 @@ const ThinkComponent = React.memo((props: { children: string; streamStatus: stri
   );
 });
 
-const AgentTBox: React.FC = () => {
-  const { styles } = useStyle();
+const Footer: React.FC<{
+  id?: number | string;
+  content: string;
+  status?: string;
+}> = ({ id, content, status }) => {
+  const context = React.useContext(ChatContext);
+  const [mockFeedback, setMockFeedback] = useState<ActionsFeedbackProps['value']>('default');
+  const Items = [
+    {
+      key: 'pagination',
+      actionRender: <Pagination simple total={1} pageSize={1} />,
+    },
+    {
+      key: 'retry',
+      label: t.retry,
+      icon: <SyncOutlined />,
+      onItemClick: () => {
+        if (id) {
+          context?.onReload?.(id, {
+            userAction: 'retry',
+          });
+        }
+      },
+    },
+    {
+      key: 'copy',
+      actionRender: <Actions.Copy text={content} />,
+    },
+    {
+      key: 'audio',
+      actionRender: (
+        <Actions.Audio
+          onClick={() => {
+            message.info(t.isMock);
+          }}
+        />
+      ),
+    },
+    {
+      key: 'feedback',
+      actionRender: (
+        <Actions.Feedback
+          styles={{
+            liked: {
+              color: '#f759ab',
+            },
+          }}
+          value={mockFeedback || 'default'}
+          key="feedback"
+          onChange={(val) => {
+            setMockFeedback(val);
+            message.success(`${id}: ${val}`);
+          }}
+        />
+      ),
+    },
+  ];
 
+  return status !== 'updating' && status !== 'loading' ? (
+    <div style={{ display: 'flex' }}>{id && <Actions items={Items} />}</div>
+  ) : null;
+};
+
+const AgentTbox: React.FC = () => {
+  const { styles } = useStyle();
+  const locale = isZhCN ? { ...zhCN_antd, ...zhCN_X } : { ...enUS_antd, ...enUS_X };
   // ==================== State ====================
 
   const { conversations, addConversation, setConversations } = useXConversations({
@@ -478,6 +562,8 @@ const AgentTBox: React.FC = () => {
     DEFAULT_CONVERSATIONS_ITEMS[0].key,
   );
 
+  const [messageApi, contextHolder] = message.useMessage();
+
   const [inputValue, setInputValue] = useState('');
 
   /**
@@ -486,7 +572,7 @@ const AgentTBox: React.FC = () => {
 
   // ==================== Runtime ====================
 
-  const { onRequest, messages, isRequesting, abort } = useXChat({
+  const { onRequest, messages, isRequesting, abort, onReload } = useXChat({
     provider: providerFactory(curConversation), // every conversation has its own provider
     conversationKey: curConversation,
     requestPlaceholder: () => {
@@ -520,28 +606,27 @@ const AgentTBox: React.FC = () => {
         />
         <span>Ant Design X</span>
       </div>
-
-      {/* 🌟 添加会话 */}
-      <Button
-        onClick={() => {
-          const now = dayjs().valueOf().toString();
-          addConversation({
-            key: now,
-            label: `${t.newConversation} ${conversations.length + 1}`,
-            group: t.today,
-          });
-          setCurConversation(now);
-        }}
-        type="link"
-        className={styles.addBtn}
-        icon={<PlusOutlined />}
-      >
-        {t.newConversation}
-      </Button>
-
       {/* 🌟 会话管理 */}
       <Conversations
-        items={conversations}
+        creation={{
+          onClick: () => {
+            if (messages.length === 0) {
+              messageApi.error(t.nowNenConversation);
+              return;
+            }
+            const now = dayjs().valueOf().toString();
+            addConversation({
+              key: now,
+              label: `${t.newConversation} ${conversations.length + 1}`,
+              group: t.today,
+            });
+            setCurConversation(now);
+          },
+        }}
+        items={conversations.map(({ key, label }) => ({
+          key,
+          label: key === curConversation ? `[${t.curConversation}]${label}` : label,
+        }))}
         className={styles.conversations}
         activeKey={curConversation}
         onActiveChange={async (val) => {
@@ -602,36 +687,12 @@ const AgentTBox: React.FC = () => {
       status: 'abort',
     },
   };
-  const actionsItems = [
-    {
-      key: 'pagination',
-      actionRender: () => <Pagination simple total={5} pageSize={1} />,
-    },
-    {
-      key: 'feedback',
-      actionRender: () => <Actions.Feedback key="feedback" />,
-    },
-    {
-      key: 'copy',
-      label: 'copy',
-      actionRender: () => {
-        return <Actions.Copy text="copy value" />;
-      },
-    },
-    {
-      key: 'audio',
-      label: 'audio',
-      actionRender: () => {
-        return <Actions.Audio />;
-      },
-    },
-  ];
+
   const role: BubbleListProps['role'] = {
     assistant: {
       placement: 'start',
       components: {
         header: (_, { status }) => {
-          console.log(status, '1111');
           const config = ThoughtChainConfig[status as keyof typeof ThoughtChainConfig];
           return config ? (
             <ThoughtChain.Item
@@ -645,13 +706,7 @@ const AgentTBox: React.FC = () => {
             />
           ) : null;
         },
-        footer: (_, { status }) => {
-          return status !== 'updating' && status !== 'loading' ? (
-            <div style={{ display: 'flex' }}>
-              <Actions items={actionsItems} />
-            </div>
-          ) : null;
-        },
+        footer: (content, { status, key }) => <Footer content={content} status={status} id={key} />,
       },
       contentRender: (content, { status }) => (
         <XMarkdown
@@ -662,25 +717,6 @@ const AgentTBox: React.FC = () => {
           streaming={{ hasNextChunk: status === 'updating', enableAnimation: true }}
         />
       ),
-      typing: (_, { status }) =>
-        status === 'updating'
-          ? {
-              effect: 'typing',
-              step: 5,
-              interval: 20,
-              suffix: (
-                <div
-                  style={{
-                    position: 'absolute',
-                    right: 20,
-                    bottom: 10,
-                  }}
-                >
-                  💗
-                </div>
-              ),
-            }
-          : false,
     },
     user: { placement: 'end' },
   };
@@ -697,15 +733,22 @@ const AgentTBox: React.FC = () => {
           }))}
           styles={{
             bubble: {
-              width: 700,
+              maxWidth: 840,
             },
           }}
           role={role}
         />
       ) : (
-        <Space orientation="vertical" size={16} align="center" className={styles.placeholder}>
+        <Flex
+          vertical
+          style={{
+            maxWidth: 840,
+          }}
+          gap={16}
+          align="center"
+          className={styles.placeholder}
+        >
           <Welcome
-            style={{ width: 700 }}
             variant="borderless"
             icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
             title={t.helloAntdXTboxAgent}
@@ -717,7 +760,7 @@ const AgentTBox: React.FC = () => {
               </Space>
             }
           />
-          <Flex style={{ width: 700 }} gap={16}>
+          <Flex gap={16}>
             <Prompts
               items={[HOT_TOPICS]}
               styles={{
@@ -753,12 +796,19 @@ const AgentTBox: React.FC = () => {
               className={styles.chatPrompt}
             />
           </Flex>
-        </Space>
+        </Flex>
       )}
     </div>
   );
   const chatSender = (
-    <>
+    <Flex
+      vertical
+      gap={12}
+      justify="center"
+      style={{
+        marginInline: 24,
+      }}
+    >
       {/* 🌟 提示词 */}
       <Prompts
         items={SENDER_PROMPTS}
@@ -785,19 +835,24 @@ const AgentTBox: React.FC = () => {
         className={styles.sender}
         placeholder={t.askMeAnything}
       />
-    </>
+    </Flex>
   );
 
   // ==================== Render =================
   return (
-    <div className={styles.layout}>
-      {chatSide}
-      <div className={styles.chat}>
-        {chatList}
-        {chatSender}
-      </div>
-    </div>
+    <XProvider locale={locale}>
+      <ChatContext.Provider value={{ onReload }}>
+        {contextHolder}
+        <div className={styles.layout}>
+          {chatSide}
+          <div className={styles.chat}>
+            {chatList}
+            {chatSender}
+          </div>
+        </div>
+      </ChatContext.Provider>
+    </XProvider>
   );
 };
 
-export default AgentTBox;
+export default AgentTbox;

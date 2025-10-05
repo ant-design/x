@@ -3,6 +3,9 @@ import classnames from 'classnames';
 import { useEvent, useMergedState } from 'rc-util';
 import React from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
+import { FileCardProps } from '../file-card';
+import { SemanticType as FileCardSemanticType } from '../file-card/FileCard';
+import { SemanticType as FileCardListSemanticType } from '../file-card/List';
 import { useXProviderContext } from '../x-provider';
 import { AttachmentContext } from './context';
 import DropArea from './DropArea';
@@ -13,25 +16,27 @@ import PlaceholderUploader, {
 } from './PlaceholderUploader';
 import SilentUploader from './SilentUploader';
 import useStyle from './style';
-import { FileCardProps } from '../file-card';
+export type SemanticType = 'list' | 'placeholder' | 'upload';
 
-export type SemanticType = 'list' | 'item' | 'placeholder' | 'upload';
-
-export type Attachment = GetProp<UploadProps, 'fileList'>[number] & Omit<FileCardProps,'size'|'byte'> & {
-  description?: React.ReactNode;
-};
+export type Attachment = GetProp<UploadProps, 'fileList'>[number] &
+  Omit<FileCardProps, 'size' | 'byte'> & {
+    description?: React.ReactNode;
+  };
 
 export interface AttachmentsProps extends Omit<UploadProps, 'fileList'> {
   prefixCls?: string;
 
   rootClassName?: string;
-  rootStyle?: React.CSSProperties;
 
   style?: React.CSSProperties;
   className?: string;
 
-  classNames?: Partial<Record<SemanticType, string>>;
-  styles?: Partial<Record<SemanticType, React.CSSProperties>>;
+  classNames?: Partial<
+    Record<SemanticType | FileCardSemanticType | FileCardListSemanticType, string>
+  >;
+  styles?: Partial<
+    Record<SemanticType | FileCardSemanticType | FileCardListSemanticType, React.CSSProperties>
+  >;
 
   children?: React.ReactElement;
 
@@ -55,7 +60,6 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
   const {
     prefixCls: customizePrefixCls,
     rootClassName,
-    rootStyle,
     className,
     style,
     items,
@@ -81,6 +85,9 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
   const contextConfig = useXComponentConfig('attachments');
 
   const { classNames: contextClassNames, styles: contextStyles } = contextConfig;
+
+  const { root: rootOfClassNames, ...otherClassNames } = classNames;
+  const { root: rootOfStyles, ...otherStyles } = styles;
 
   // ============================= Ref =============================
   const containerRef = React.useRef<HTMLDivElement>(null);
@@ -168,13 +175,19 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
   if (children) {
     renderChildren = (
       <>
-        <SilentUploader upload={mergedUploadProps} rootClassName={rootClassName} ref={uploadRef}>
+        <SilentUploader
+          upload={mergedUploadProps}
+          style={rootOfStyles}
+          className={classnames(rootClassName, rootOfClassNames)}
+          ref={uploadRef}
+        >
           {children}
         </SilentUploader>
         <DropArea
           getDropContainer={getDropContainer}
           prefixCls={prefixCls}
-          className={classnames(cssinjsCls, rootClassName)}
+          style={rootOfStyles}
+          className={classnames(cssinjsCls, rootClassName, rootOfClassNames)}
         >
           {getPlaceholderNode('drop')}
         </DropArea>
@@ -193,9 +206,10 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
           },
           className,
           rootClassName,
+          rootOfClassNames,
         )}
         style={{
-          ...rootStyle,
+          ...styles.root,
           ...style,
         }}
         dir={direction || 'ltr'}
@@ -207,19 +221,9 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
           onRemove={onItemRemove}
           overflow={overflow}
           upload={mergedUploadProps}
-          listClassName={classnames(contextClassNames.list, classNames.list)}
-          listStyle={{
-            ...contextStyles.list,
-            ...styles.list,
-            ...(!hasFileList && { display: 'none' }),
-          }}
-          uploadClassName={classnames(contextClassNames.upload, classNames.upload)}
-          uploadStyle={{ ...contextStyles.upload, ...styles.upload }}
-          itemClassName={classnames(contextClassNames.item, classNames.item)}
-          itemStyle={{
-            ...contextStyles.item,
-            ...styles.item,
-          }}
+          classNames={otherClassNames}
+          style={!hasFileList ? { display: 'none' } : {}}
+          styles={otherStyles}
         />
         {getPlaceholderNode('inline', hasFileList ? { style: { display: 'none' } } : {}, uploadRef)}
         <DropArea

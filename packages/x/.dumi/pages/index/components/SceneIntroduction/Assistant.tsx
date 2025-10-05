@@ -1,4 +1,4 @@
-import type { BubbleData } from '@ant-design/x';
+import type { BubbleItemType } from '@ant-design/x';
 import { Bubble, Prompts, Welcome } from '@ant-design/x';
 import { DefaultChatProvider, useXChat, XRequest, XRequestOptions } from '@ant-design/x-sdk';
 
@@ -145,7 +145,7 @@ const AssistantScene: React.FC = () => {
     requestFallback: 'Mock failed return. Please try again later.',
   });
 
-  const placeholderMessage: BubbleData = {
+  const placeholderMessage: BubbleItemType = {
     role: '',
     key: 'placeholder',
     variant: 'borderless',

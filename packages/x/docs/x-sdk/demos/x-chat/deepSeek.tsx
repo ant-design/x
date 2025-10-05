@@ -1,7 +1,7 @@
 import { SyncOutlined } from '@ant-design/icons';
 import type { BubbleListProps } from '@ant-design/x';
 import { Bubble, Sender, Think } from '@ant-design/x';
-import XMarkdown from '@ant-design/x-markdown';
+import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
 import {
   DeepSeekChatProvider,
   useXChat,
@@ -24,7 +24,7 @@ const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow_deepSeek-r1-disti
 
 const MODEL = 'DeepSeek-R1-Distill-Qwen-7B';
 
-const ThinkComponent = React.memo((props: { children: string; streamStatus: string }) => {
+const ThinkComponent = React.memo((props: ComponentProps) => {
   const [title, setTitle] = React.useState('Deep thinking...');
   const [loading, setLoading] = React.useState(true);
 

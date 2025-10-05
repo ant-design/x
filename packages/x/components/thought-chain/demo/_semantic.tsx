@@ -1,12 +1,12 @@
 import { CheckCircleOutlined } from '@ant-design/icons';
-import type { ThoughtChainItem, ThoughtChainProps } from '@ant-design/x';
+import type { ThoughtChainItemType, ThoughtChainProps } from '@ant-design/x';
 import { ThoughtChain } from '@ant-design/x';
 import { Button } from 'antd';
 import React from 'react';
 import SemanticPreview from '../../../.dumi/components/SemanticPreview';
 import useLocale from '../../../.dumi/hooks/useLocale';
 
-const customizationProps: ThoughtChainItem = {
+const customizationProps: ThoughtChainItemType = {
   title: 'Thought Chain Item Title',
   description: 'description',
   icon: <CheckCircleOutlined />,

@@ -16,6 +16,7 @@
   color: var(--text-color);
   word-wrap: break-word;
   user-select: text;
+  line-height: 1.5714285714285714;
 }
 
 .x-markdown-dark h1,
@@ -179,7 +180,8 @@
   background-color: var(--dark-bg) !important;
   color: var(--text-color) !important;
   border-radius: var(--border-radius-small);
-  padding: 4px 8px;
+  padding: 2px 6px;
+  margin-inline: 3px;
   font-size: 14px;
   border: 1px solid var(--border-color);
 }

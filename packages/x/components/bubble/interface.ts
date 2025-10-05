@@ -49,21 +49,32 @@ export interface EditableBubbleOption {
 
 export type BubbleSlot<ContentType> =
   | React.ReactNode
-  | ((content: ContentType, info: { status?: MessageStatus }) => React.ReactNode);
+  | ((content: ContentType, info: Info) => React.ReactNode);
 
 export interface BubbleRef {
   nativeElement: HTMLElement;
 }
 
-type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error' | 'abort';
+export enum MessageStatus {
+  local = 'local',
+  loading = 'loading',
+  updating = 'updating',
+  success = 'success',
+  error = 'error',
+  abort = 'abort',
+}
 
+export type Info = {
+  status?: `${MessageStatus}`;
+  key?: string | number;
+  extra?: AnyObject;
+};
 export interface BubbleProps<ContentType extends BubbleContentType = string>
   extends Omit<
     React.HTMLAttributes<HTMLDivElement>,
     'content' | 'onAnimationStart' | 'onAnimationEnd'
   > {
   prefixCls?: string;
-  rootStyle?: React.CSSProperties;
   styles?: Partial<Record<BubbleSlotType | 'root', React.CSSProperties>>;
   rootClassName?: string;
   classNames?: Partial<Record<BubbleSlotType | 'root', string>>;
@@ -71,8 +82,7 @@ export interface BubbleProps<ContentType extends BubbleContentType = string>
   loading?: boolean;
   loadingRender?: () => React.ReactNode;
   content: ContentType;
-  status?: MessageStatus;
-  contentRender?: (content: ContentType, info: { status?: MessageStatus }) => React.ReactNode;
+  contentRender?: (content: ContentType, info: Info) => React.ReactNode;
   /**
    * @description 是否可编辑，提供一个仅针对 content 为 string 的编辑应用场景
    */
@@ -83,7 +93,7 @@ export interface BubbleProps<ContentType extends BubbleContentType = string>
   typing?:
     | boolean
     | BubbleAnimationOption
-    | ((content: ContentType, info: { status?: MessageStatus }) => boolean | BubbleAnimationOption);
+    | ((content: ContentType, info: Info) => boolean | BubbleAnimationOption);
   /**
    * @description 是否为流式传输 content
    * @default false
@@ -153,7 +163,7 @@ type RemainRole = 'ai' | 'system' | 'user';
 
 type AnyStr = string;
 
-export type BubbleData = BubbleProps<any> & {
+export type BubbleItemType = BubbleProps<any> & {
   /**
    * @description 数据项唯一标识
    */
@@ -162,10 +172,12 @@ export type BubbleData = BubbleProps<any> & {
    * @description Bubble.List.role key 映射
    */
   role?: RemainRole | AnyStr;
+  status?: `${MessageStatus}`;
+  extra?: AnyObject;
 };
 
 export type RoleProps = Pick<
-  BubbleData,
+  BubbleItemType,
   | 'typing'
   | 'variant'
   | 'shape'
@@ -173,7 +185,6 @@ export type RoleProps = Pick<
   | 'rootClassName'
   | 'classNames'
   | 'className'
-  | 'rootStyle'
   | 'styles'
   | 'style'
   | 'loading'
@@ -188,7 +199,7 @@ export type RoleProps = Pick<
   | 'onEditCancel'
 >;
 
-export type FuncRoleProps = (data: BubbleData) => RoleProps;
+export type FuncRoleProps = (data: BubbleItemType) => RoleProps;
 
 export type RoleType = Partial<Record<RemainRole, RoleProps | FuncRoleProps>> &
   Record<AnyStr, RoleProps | FuncRoleProps>;
@@ -196,10 +207,9 @@ export type RoleType = Partial<Record<RemainRole, RoleProps | FuncRoleProps>> &
 export interface BubbleListProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'role'> {
   prefixCls?: string;
   rootClassName?: string;
-  rootStyle?: React.CSSProperties;
   styles?: Partial<Record<BubbleSlotType | 'bubble' | 'root', React.CSSProperties>>;
   classNames?: Partial<Record<BubbleSlotType | 'bubble' | 'root', string>>;
-  items: BubbleData[];
+  items: BubbleItemType[];
   autoScroll?: boolean;
   /**
    * @description 数据类别基础配置项，优先级低，会被 items 配置覆盖。默认 ai、system、user 三类，允许自定义类别

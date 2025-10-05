@@ -22,7 +22,7 @@ It refers to model inference services that keep the API design and usage consist
 
 ## Integrate with X SDK
 
-Using URL to integrate Model is a basic capability provided by X SDK. For details, see [X SDK](/sdks/introduce).
+Using URL to integrate Model is a basic capability provided by X SDK. For details, see [X SDK](/x-sdks/introduce).
 
 ### Example
 

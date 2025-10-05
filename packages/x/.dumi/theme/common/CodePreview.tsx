@@ -1,7 +1,7 @@
 import { Button, Tabs, Typography } from 'antd';
 import { createStyles } from 'antd-style';
-import toReactElement from 'jsonml-to-react-element';
 import JsonML from 'jsonml.js/lib/utils';
+import toReactElement from 'jsonml-to-react-element';
 import Prism from 'prismjs';
 /* eslint-disable react-hooks-extra/no-direct-set-state-in-use-effect */
 import type { ComponentProps } from 'react';
@@ -26,8 +26,18 @@ const useStyle = createStyles(({ token, css }) => {
       top: 16px;
       inset-inline-end: ${token.padding}px;
       width: 32px;
+      height: 32px;
       text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: ${token.borderRadiusLG}px;
+      transition: background-color ${token.motionDurationMid} ease-in-out;
       padding: 0;
+      &:hover{
+        background-color: ${token.colorFillSecondary};
+
+      }
     `,
 
     copyIcon: css`
@@ -69,6 +79,7 @@ interface CodePreviewProps
   jsxCode?: string;
   styleCode?: string;
   entryName: string;
+  otherCode?: Record<string, { value: string }>;
   onSourceChange?: (source: Record<string, string>) => void;
 }
 
@@ -92,6 +103,7 @@ function toReactComponent(jsonML: any[]) {
 const CodePreview: React.FC<CodePreviewProps> = ({
   sourceCode = '',
   jsxCode = '',
+  otherCode = {},
   styleCode = '',
   entryName,
   onSourceChange,
@@ -154,14 +166,38 @@ const CodePreview: React.FC<CodePreviewProps> = ({
             ) : (
               toReactComponent(['pre', { lang, highlighted: highlightedCodes[lang] }])
             )}
-            <Button type="text" className={styles.copyButton}>
+            <div className={styles.copyButton}>
               <Typography.Text className={styles.copyIcon} copyable={{ text: sourceCodes[lang] }} />
-            </Button>
+            </div>
           </div>
         ),
       })),
-    [JSON.stringify(highlightedCodes), styles.code, styles.copyButton, styles.copyIcon],
+    [JSON.stringify(highlightedCodes), styles.code, styles.copyButton, styles.copyIcon, otherCode],
   );
+
+  const otherItems = Object.keys(otherCode).map((key) => {
+    const lang = key.split('.')[key.split('.').length - 1];
+    const codeString = otherCode[key].value;
+    return {
+      label: key,
+      key,
+      children: (
+        <div className={styles.code}>
+          <LiveCode
+            error={error}
+            lang={lang}
+            initialValue={codeString}
+            onChange={(code: string) => {
+              onSourceChange?.({ [entryName]: code });
+            }}
+          />
+          <Button type="text" className={styles.copyButton}>
+            <Typography.Text className={styles.copyIcon} copyable={{ text: codeString }} />
+          </Button>
+        </div>
+      ),
+    };
+  });
 
   if (!langList.length) {
     return null;
@@ -186,7 +222,7 @@ const CodePreview: React.FC<CodePreviewProps> = ({
       className="highlight"
       activeKey={codeType}
       onChange={setCodeType}
-      items={items}
+      items={[...items, ...otherItems]}
     />
   );
 };

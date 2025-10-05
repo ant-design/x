@@ -1,5 +1,5 @@
 import { Bubble, Think } from '@ant-design/x';
-import XMarkdown from '@ant-design/x-markdown';
+import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
 import React, { useCallback, useEffect, useState } from 'react';
 import '@ant-design/x-markdown/themes/light.css';
 import {
@@ -45,45 +45,32 @@ interface SalesData {
 }
 
 // 自定义业务组件 - 从模型数据获取的销售仪表板
-const Salesdashboard = React.memo(
-  ({ children, streamStatus }: { children?: any; streamStatus: string }) => {
-    const [salesData, setSalesData] = useState<SalesData[]>([]);
-    const [totalSales, setTotalSales] = useState(0);
-    const [totalOrders, setTotalOrders] = useState(0);
-    const [newCustomers, setNewCustomers] = useState(0);
+const Salesdashboard = React.memo(({ children, streamStatus }: ComponentProps) => {
+  const [salesData, setSalesData] = useState<SalesData[]>([]);
+  const [totalSales, setTotalSales] = useState(0);
+  const [totalOrders, setTotalOrders] = useState(0);
+  const [newCustomers, setNewCustomers] = useState(0);
 
-    useEffect(() => {
-      if (children) {
-        // 从模型返回的数据中解析销售信息
-        try {
-          const parsedData = typeof children === 'string' ? JSON.parse(children) : children;
+  useEffect(() => {
+    if (children) {
+      // 从模型返回的数据中解析销售信息
+      try {
+        const parsedData = typeof children === 'string' ? JSON.parse(children) : children;
 
-          if (parsedData.sales) {
-            setSalesData(parsedData.sales);
-          }
-          if (parsedData.totalSales) {
-            setTotalSales(parsedData.totalSales);
-          }
-          if (parsedData.totalOrders) {
-            setTotalOrders(parsedData.totalOrders);
-          }
-          if (parsedData.newCustomers) {
-            setNewCustomers(parsedData.newCustomers);
-          }
-        } catch (error) {
-          // 如果解析失败，使用默认数据
-          const defaultData = [
-            { name: '电子产品', value: 45000, color: '#3b82f6' },
-            { name: '服装', value: 32000, color: '#8b5cf6' },
-            { name: '家居用品', value: 28000, color: '#10b981' },
-          ];
-          setSalesData(defaultData);
-          setTotalSales(115000);
-          setTotalOrders(342);
-          setNewCustomers(67);
+        if (parsedData.sales) {
+          setSalesData(parsedData.sales);
         }
-      } else {
-        // 默认数据
+        if (parsedData.totalSales) {
+          setTotalSales(parsedData.totalSales);
+        }
+        if (parsedData.totalOrders) {
+          setTotalOrders(parsedData.totalOrders);
+        }
+        if (parsedData.newCustomers) {
+          setNewCustomers(parsedData.newCustomers);
+        }
+      } catch (error) {
+        // 如果解析失败，使用默认数据
         const defaultData = [
           { name: '电子产品', value: 45000, color: '#3b82f6' },
           { name: '服装', value: 32000, color: '#8b5cf6' },
@@ -94,72 +81,83 @@ const Salesdashboard = React.memo(
         setTotalOrders(342);
         setNewCustomers(67);
       }
-    }, [children]);
+    } else {
+      // 默认数据
+      const defaultData = [
+        { name: '电子产品', value: 45000, color: '#3b82f6' },
+        { name: '服装', value: 32000, color: '#8b5cf6' },
+        { name: '家居用品', value: 28000, color: '#10b981' },
+      ];
+      setSalesData(defaultData);
+      setTotalSales(115000);
+      setTotalOrders(342);
+      setNewCustomers(67);
+    }
+  }, [children]);
 
-    if (streamStatus === 'loading') return;
-    return (
-      <div style={{ padding: '20px' }}>
-        <Flex vertical gap="large">
-          <Flex justify="space-between" align="center">
-            销售仪表板 (从模型数据获取)
-            <Tag color="blue">实时数据</Tag>
-          </Flex>
-
-          <Flex gap="middle" wrap>
-            <Card style={{ flex: 1, minWidth: 200 }}>
-              <Statistic
-                title="总销售额"
-                value={totalSales}
-                prefix={<DollarOutlined />}
-                precision={2}
-                valueStyle={{ color: '#3f8600' }}
-              />
-            </Card>
-            <Card style={{ flex: 1, minWidth: 200 }}>
-              <Statistic
-                title="订单总数"
-                value={totalOrders}
-                prefix={<ShoppingCartOutlined />}
-                valueStyle={{ color: '#1890ff' }}
-              />
-            </Card>
-            <Card style={{ flex: 1, minWidth: 200 }}>
-              <Statistic
-                title="新增客户"
-                value={newCustomers}
-                prefix={<UserOutlined />}
-                valueStyle={{ color: '#722ed1' }}
-              />
-            </Card>
-          </Flex>
-
-          <Flex gap="large" wrap>
-            <Card title="销售分布" style={{ flex: 1, minWidth: 300 }}>
-              <div style={{ padding: '20px' }}>
-                {salesData.map((item, index) => (
-                  <div key={index} style={{ marginBottom: 12 }}>
-                    <Flex justify="space-between" align="center">
-                      <span>{item.name}</span>
-                      <Tag color={item.color}>¥{item.value.toLocaleString()}</Tag>
-                    </Flex>
-                  </div>
-                ))}
-              </div>
-            </Card>
-
-            <Card title="数据说明" style={{ flex: 1, minWidth: 300 }}>
-              <div style={{ padding: '20px' }}>
-                <p>🤖 以上数据由AI模型实时生成</p>
-                <p>📊 数据格式: JSON格式，包含sales、totalSales、totalOrders、newCustomers字段</p>
-                <p>💡 示例格式: sales数组包含name和value字段</p>
-              </div>
-            </Card>
-          </Flex>
+  if (streamStatus === 'loading') return;
+  return (
+    <div style={{ padding: '20px' }}>
+      <Flex vertical gap="large">
+        <Flex justify="space-between" align="center">
+          销售仪表板 (从模型数据获取)
+          <Tag color="blue">实时数据</Tag>
         </Flex>
-      </div>
-    );
-  },
-);
+
+        <Flex gap="middle" wrap>
+          <Card style={{ flex: 1, minWidth: 200 }}>
+            <Statistic
+              title="总销售额"
+              value={totalSales}
+              prefix={<DollarOutlined />}
+              precision={2}
+              valueStyle={{ color: '#3f8600' }}
+            />
+          </Card>
+          <Card style={{ flex: 1, minWidth: 200 }}>
+            <Statistic
+              title="订单总数"
+              value={totalOrders}
+              prefix={<ShoppingCartOutlined />}
+              valueStyle={{ color: '#1890ff' }}
+            />
+          </Card>
+          <Card style={{ flex: 1, minWidth: 200 }}>
+            <Statistic
+              title="新增客户"
+              value={newCustomers}
+              prefix={<UserOutlined />}
+              valueStyle={{ color: '#722ed1' }}
+            />
+          </Card>
+        </Flex>
+
+        <Flex gap="large" wrap>
+          <Card title="销售分布" style={{ flex: 1, minWidth: 300 }}>
+            <div style={{ padding: '20px' }}>
+              {salesData.map((item, index) => (
+                <div key={index} style={{ marginBottom: 12 }}>
+                  <Flex justify="space-between" align="center">
+                    <span>{item.name}</span>
+                    <Tag color={item.color}>¥{item.value.toLocaleString()}</Tag>
+                  </Flex>
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          <Card title="数据说明" style={{ flex: 1, minWidth: 300 }}>
+            <div style={{ padding: '20px' }}>
+              <p>🤖 以上数据由AI模型实时生成</p>
+              <p>📊 数据格式: JSON格式，包含sales、totalSales、totalOrders、newCustomers字段</p>
+              <p>💡 示例格式: sales数组包含name和value字段</p>
+            </div>
+          </Card>
+        </Flex>
+      </Flex>
+    </div>
+  );
+});
 
 // 自定义业务组件 - 订单管理表格
 const OrderManager = React.memo(() => {
@@ -377,29 +375,31 @@ const OrderManager = React.memo(() => {
 });
 
 // 思考组件
-const ThinkComponent = React.memo(
-  (props: { streamStatus: string; children: string; status: string }) => {
-    const [title, setTitle] = React.useState('正在分析业务数据...');
-    const [loading, setLoading] = React.useState(true);
-    const [expand, setExpand] = React.useState(true);
+const ThinkComponent = React.memo((props: ComponentProps) => {
+  const [title, setTitle] = React.useState('正在分析业务数据...');
+  const [loading, setLoading] = React.useState(true);
+  const [expand, setExpand] = React.useState(true);
 
-    React.useEffect(() => {
-      if (props.streamStatus === 'done') {
-        setTitle('业务分析完成');
-        setLoading(false);
-        setExpand(false);
-      }
-    }, [props.streamStatus]);
+  React.useEffect(() => {
+    if (props.streamStatus === 'done') {
+      setTitle('业务分析完成');
+      setLoading(false);
+      setExpand(false);
+    }
+  }, [props.streamStatus]);
 
-    return (
-      <div style={{ padding: '12px 0' }}>
-        <Think title={title} loading={loading} expanded={expand} onClick={() => setExpand(!expand)}>
-          {props.children.trim()}
-        </Think>
-      </div>
-    );
-  },
-);
+  if (typeof props.children !== 'string') {
+    return null;
+  }
+
+  return (
+    <div style={{ padding: '12px 0' }}>
+      <Think title={title} loading={loading} expanded={expand} onClick={() => setExpand(!expand)}>
+        {props?.children?.trim()}
+      </Think>
+    </div>
+  );
+});
 
 const text = `
 <think>

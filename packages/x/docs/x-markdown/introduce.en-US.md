@@ -14,7 +14,7 @@ Built on [`marked`](https://github.com/markedjs/marked) as the base Markdown ren
 - ⬇️ Low-level compiler for parsing Markdown without long-term caching or blocking.
 - ⚖️ Lightweight while implementing all supported Markdown styles and specifications.
 - 🔐 Secure by default, no dangerouslySetInnerHTML XSS attacks.
-- 🎨 Customizable components - pass your own components to replace default ones like \<h2\> for ## hi.
+- 🎨 Customizable components - replace any Markdown element with your own, e.g. `<h2>` for `## hi`.
 - 🔧 Rich plugin ecosystem with many plugins to choose from.
 - 😊 Compatible - 100% CommonMark compliant, 100% GFM plugin compliant.
 
@@ -74,8 +74,8 @@ export default App;
 
 ## Plugins
 
-`@ant-design/x-markdown` provides a rich set of plugins that can be used via the `plugins` property. See [Plugin Collection](/markdowns/plugins) for details.
+`@ant-design/x-markdown` provides a rich set of plugins that can be used via the `plugins` property. See [Plugin Collection](/x-markdowns/plugins) for details.
 
 ## Themes
 
-`@ant-design/x-markdown` offers a variety of themes to choose from. See [Themes](/markdowns/themes) for details.
+`@ant-design/x-markdown` offers a variety of themes to choose from. See [Themes](/x-markdowns/themes) for details.

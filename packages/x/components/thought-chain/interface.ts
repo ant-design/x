@@ -1,7 +1,7 @@
 import type { CollapsibleOptions } from '../_util/hooks/use-collapsible';
 import { THOUGHT_CHAIN_ITEM_STATUS } from './Status';
 
-export interface ThoughtChainItem {
+export interface ThoughtChainItemType {
   /**
    * @desc 思维节点唯一标识符
    * @descEN Unique identifier
@@ -62,7 +62,7 @@ export interface ThoughtChainProps extends Omit<React.HTMLAttributes<HTMLDivElem
    * @desc 思维节点集合
    * @descEN chain items
    */
-  items?: ThoughtChainItem[];
+  items?: ThoughtChainItemType[];
   /**
    * @desc 初始化展开的节点
    * @descEN default expanded keys

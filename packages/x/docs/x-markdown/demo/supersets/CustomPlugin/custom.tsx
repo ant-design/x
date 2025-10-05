@@ -1,11 +1,12 @@
-import { Token, XMarkdown } from '@ant-design/x-markdown';
+import { type ComponentProps, type Token, XMarkdown } from '@ant-design/x-markdown';
 import React from 'react';
 import './plugin.css';
-import '@ant-design/x-markdown/themes/light.css';
 import { Popover } from 'antd';
 import { useIntl } from 'react-intl';
 import { useMarkdownTheme } from '../../_utils';
 import { Adx_Markdown_En, Adx_Markdown_Zh } from '../../_utils/adx-markdown';
+import '@ant-design/x-markdown/themes/light.css';
+import '@ant-design/x-markdown/themes/dark.css';
 
 const referenceList = [
   { url: 'https://x.ant.design', title: 'link1' },
@@ -18,6 +19,14 @@ const referenceList = [
   { url: 'https://x.ant.design', title: 'link8' },
   { url: 'https://x.ant.design', title: 'link9' },
 ];
+
+const Footnote: React.FC<ComponentProps<{ href?: string; title?: string }>> = (props) => (
+  <Popover content={props.title} title="Footnote" trigger="hover">
+    <span onClick={() => window.open(props.href)} className="markdown-cite">
+      {props.children}
+    </span>
+  </Popover>
+);
 
 const App = () => {
   const [className] = useMarkdownTheme();
@@ -49,7 +58,7 @@ const App = () => {
       if (!currentUrl) {
         return null;
       }
-      return `<footnote href="${currentUrl}" title="${currentTitle}" >${text}</footnote>`;
+      return `<footnote href="${currentUrl}" title="${currentTitle}">${text}</footnote>`;
     },
   };
 
@@ -58,15 +67,7 @@ const App = () => {
       className={className}
       config={{ extensions: [footNoteExtension] }}
       components={{
-        footnote: (props: { children: string; href: string; title: string }) => {
-          return (
-            <Popover content={props?.title} title="Footnote" trigger="hover">
-              <span onClick={() => window.open(props.href)} className="markdown-cite">
-                {props?.children}
-              </span>
-            </Popover>
-          );
-        },
+        footnote: Footnote,
       }}
     >
       {content}

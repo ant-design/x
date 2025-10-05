@@ -29,11 +29,12 @@ demo:
 <code src="./demo/stream.tsx">流式传输</code>
 <code src="./demo/custom-content.tsx">自定义渲染内容</code>
 <code src="./demo/markdown.tsx">渲染markdown内容</code>
-<code src="./demo/editable.tsx">可编辑气泡</code>
-<code src="./demo/list.tsx">气泡列表</code>
-<code src="./demo/list-ref.tsx">气泡列表 Ref</code>
-<code src="./demo/semantic-list-custom.tsx">语义化自定义</code>
 <code src="./demo/gpt-vis.tsx">使用 GPT-Vis 渲染图表</code>
+<code src="./demo/editable.tsx">可编辑气泡</code>
+
+## 列表演示
+
+<code src="./demo/list.tsx">气泡列表</code> <code src="./demo/list-ref.tsx">气泡列表 Ref</code> <code src="./demo/semantic-list-custom.tsx">语义化自定义</code> <code src="./demo/list-extra.tsx">列表扩展参数</code>
 
 ## API
 
@@ -69,27 +70,11 @@ demo:
 - 若你启用了输入动画，进行 **慢速加载** 时，会因为流式传输的速度跟不上动画速度而导致多次触发 `onTypingComplete`。
 - 若你关闭了输入动画，每一次的流式输入都会触发 `onTypingComplete`。
 
-#### Bubble.List autoScroll 顶对齐
-
-**Bubble.List** 的自动滚动方案其实是一个很简单的倒序排序方案，因此在固定高度的 **Bubble.List** 中，如果消息内容较少，没有撑满 **Bubble.List** 的高度，那么你会发现消息内容是底对齐的。故不推荐给 **Bubble.List** 设置固定高度，而是为 **Bubble.List** 的父容器添加固定高度，并把父容器设置为弹性布局 `display: flex` 且 `flex-direction: column`，这样 **Bubble.List** 在内容较少时会使用自适应高度且顶对齐。正如 [气泡列表](#bubble-demo-list) 中体现的一样。
-
-```tsx
-<div style={{ height: 600, display: 'flex', flexDirection: 'column' }}>
-  <Bubble.List items={items} autoScroll />
-</div>
-```
-
-如果你不想使用弹性布局，那么你可以为 **Bubble.List** 设置最大高度 `max-height`，这样在内容较少时，**Bubble.List** 的高度会自适应，呈现顶对齐效果。
-
-```tsx
-<Bubble.List items={items} autoScroll rootStyle={{ maxHeight: 600 }} />
-```
-
 ### Bubble.List 组件 API
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| items | 气泡数据列表，`key`，`role` 必填 ，当结合X SDK `useXChat`使用时可传入`status` 帮助 Bubble 对配置进行管理 | (BubbleProps & { key: string \| number, role: string , status: MessageStatus})[] | - | - |
+| items | 气泡数据列表，`key`，`role` 必填 ，当结合X SDK [`useXChat`](/x-sdks/use-x-chat-cn) 使用时可传入`status` 帮助 Bubble 对配置进行管理 | (BubbleProps & { key: string \| number, role: string , status: MessageStatus, extra?: AnyObject})[] | - | - |
 | autoScroll | 是否自动滚动 | boolean | `true` | - |
 | role | 角色默认配置 | [RoleType](#roletype) | - | - |
 
@@ -127,9 +112,13 @@ type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error' | 'a
 
 #### InfoType
 
+配合 [`useXChat`](/x-sdks/use-x-chat-cn) 使用 ，`key` 可做为 `MessageId`，`extra` 可作为自定义参数。
+
 ```typescript
 type InfoType = {
-  status: MessageStatus;
+  status?: MessageStatus;
+  key?: string | number;
+  extra?: AnyObject;
 };
 ```
 
@@ -196,7 +185,6 @@ type RoleProps = Pick<
   | 'rootClassName'
   | 'classNames'
   | 'className'
-  | 'rootStyle'
   | 'styles'
   | 'style'
   | 'loading'
@@ -206,10 +194,26 @@ type RoleProps = Pick<
   | 'components'
 > & { key: string | number; role: string };
 
-export type FuncRoleProps = (data: BubbleData) => RoleProps;
+export type FuncRoleProps = (data: BubbleItemType) => RoleProps;
 
 export type RoleType = Partial<Record<'ai' | 'system' | 'user', RoleProps | FuncRoleProps>> &
   Record<string, RoleProps | FuncRoleProps>;
+```
+
+#### Bubble.List autoScroll 顶对齐
+
+**Bubble.List** 的自动滚动方案其实是一个很简单的倒序排序方案，因此在固定高度的 **Bubble.List** 中，如果消息内容较少，没有撑满 **Bubble.List** 的高度，那么你会发现消息内容是底对齐的。故不推荐给 **Bubble.List** 设置固定高度，而是为 **Bubble.List** 的父容器添加固定高度，并把父容器设置为弹性布局 `display: flex` 且 `flex-direction: column`，这样 **Bubble.List** 在内容较少时会使用自适应高度且顶对齐。正如 [气泡列表](#bubble-demo-list) 中体现的一样。
+
+```tsx
+<div style={{ height: 600, display: 'flex', flexDirection: 'column' }}>
+  <Bubble.List items={items} autoScroll />
+</div>
+```
+
+如果你不想使用弹性布局，那么你可以为 **Bubble.List** 设置最大高度 `max-height`，这样在内容较少时，**Bubble.List** 的高度会自适应，呈现顶对齐效果。
+
+```tsx
+<Bubble.List items={items} autoScroll style={{ maxHeight: 600 }} />
 ```
 
 ## Semantic DOM

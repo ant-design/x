@@ -16,6 +16,45 @@ tag: vVERSION
 
 ---
 
+## 2.0.0-alpha.9
+
+`2025-09-24`
+
+### @ant-design/x-markdown
+
+- 🐛 Fixed code highlighting plugin style loss, resolved component matching issues with nested child elements, and removed table text-align attribute from default styles. [#1212](https://github.com/ant-design/x/pull/1212) by [@Div627](https://github.com/Div627).
+
+## 2.0.0-alpha.8
+
+`2025-09-22`
+
+### @ant-design/x
+
+- Bubble
+  - 🆕 Bubble.List adds `extra` parameter, which supports custom functions with useXChat. [#1195](https://github.com/ant-design/x/pull/1195) by [@kimteayon](https://github.com/kimteayon).
+  - 🐛 Fixed the issue where the content height was fixed in the `loading` state. [#1178](https://github.com/ant-design/x/pull/1178) by [@kimteayon](https://github.com/kimteayon).
+  - 🐛 Fixed component type export naming error. [#1182](https://github.com/ant-design/x/pull/1182) by [@kimteayon](https://github.com/kimteayon).
+- 🐛 Fixed ThoughtChain.Item component type export naming error. [#1178](https://github.com/ant-design/x/pull/1178) by [@kimteayon](https://github.com/kimteayon).
+- 🐛 Fixed the issue of missing listening components in XProvider. [#1178](https://github.com/ant-design/x/pull/1178) by [@kimteayon](https://github.com/kimteayon).
+
+### @ant-design/x-markdown
+
+- 🛠 Refactored animation-related implementation. [#1198](https://github.com/ant-design/x/pull/1198) by [@Div627](https://github.com/Div627), [#1204](https://github.com/ant-design/x/pull/1204) by [@Div627](https://github.com/Div627).
+- 🐛 Fixed plugin export type error, and added examples and documentation. [#1187](https://github.com/ant-design/x/pull/1187) by [@Div627](https://github.com/Div627).
+- 🐛 Fixed rendering exception when switching Mermaid plugin. [#1175](https://github.com/ant-design/x/pull/1175) by [@Div627](https://github.com/Div627).
+- 🆕 Added semantic implementation for HighlightCode and Mermaid plugins. [#1178](https://github.com/ant-design/x/pull/1178) by [@kimteayon](https://github.com/kimteayon).
+- 🐛 Fixed incomplete theme style override in XMarkdown. [#1182](https://github.com/ant-design/x/pull/1182) by [@kimteayon](https://github.com/kimteayon).
+
+### @ant-design/x-sdk
+
+- 🆕 useXChat `setMessage` now supports a callback function to get the original message, and `onRequest` and `onReload` add an `extra` parameter to support custom functions. [#1195](https://github.com/ant-design/x/pull/1195) by [@kimteayon](https://github.com/kimteayon).
+
+### Others
+
+- 🆕 Updated the overall site documentation. [#1194](https://github.com/ant-design/x/pull/1194) by [@kimteayon](https://github.com/kimteayon).
+- 🆕 Updated the showcase functionality, added 'Ultramodern' showcase. [#1184](https://github.com/ant-design/x/pull/1184) by [@kimteayon](https://github.com/kimteayon), [#1195](https://github.com/ant-design/x/pull/1195) by [@kimteayon](https://github.com/kimteayon), [#1194](https://github.com/ant-design/x/pull/1194) by [@kimteayon](https://github.com/kimteayon).
+- 📖 Optimized the official site to enhance user experience. [#1170](https://github.com/ant-design/x/pull/1170) by [@jinyang](https://github.com/jinyang), [#1186](https://github.com/ant-design/x/pull/1186) by [@jinyang](https://github.com/jinyang), [#1192](https://github.com/ant-design/x/pull/1192) by [@iamkun-2](https://github.com/iamkun-2), [#1193](https://github.com/ant-design/x/pull/1193) by [@iamkun-2](https://github.com/iamkun-2), [#1197](https://github.com/ant-design/x/pull/1197) by [@elrrrrrrr](https://github.com/elrrrrrrr), [#1199](https://github.com/ant-design/x/pull/1199) by [@Div627](https://github.com/Div627).
+
 ## 2.0.0-alpha.7
 
 `2025-09-14`
@@ -24,6 +63,7 @@ tag: vVERSION
 
 - Bubble
   - 💄 Fixed the default `white-space` style issue. [#1147](https://github.com/ant-design/x/pull/1147) by [@kimteayon](https://github.com/kimteayon).
+  - 💄 Fixed missing semantics and incorrect height in `loading` state under Bubble.List. [#1162](https://github.com/ant-design/x/pull/1162) by [@kimteayon](https://github.com/kimteayon).
   - 🐛 Fixed type export and documentation import errors. [#1160](https://github.com/ant-design/x/pull/1160) by [@kimteayon](https://github.com/kimteayon).
 - 📖 Removed deprecated tools `useXAgent` and `useXChat`, and updated or replaced related documentation with `X SDK`. [#1148](https://github.com/ant-design/x/pull/1148) by [@kimteayon](https://github.com/kimteayon).
 - 🐛 Fixed the missing `status` display issue in the FileCard component. [#1156](https://github.com/ant-design/x/pull/1156) by [@hy993658052](https://github.com/hy993658052).
@@ -346,8 +386,6 @@ tag: vVERSION
 - 📦 **Rich Template Support**: Offers multiple templates for quickly starting LUI application development.
 - 🛡 **Complete TypeScript Support**: Developed with TypeScript, ensuring robust type coverage to improve the development experience and reliability.
 - 🎨 **Advanced Theme Customization**: Supports fine-grained style adjustments to meet diverse use cases and personalization needs.
-
-![demos](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*UAEeSbJfuM8AAAAAAAAAAAAADgCCAQ/fmt.webp)
 
 ## 1.0.0-alpha.12
 

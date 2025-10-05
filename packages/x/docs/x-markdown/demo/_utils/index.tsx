@@ -10,7 +10,7 @@ const splitIntoChunks = (str: string, chunkSize: number) => {
 };
 
 export const mockFetch = async (fullContent: string, onFinish?: () => void) => {
-  const chunks = splitIntoChunks(fullContent, 3);
+  const chunks = splitIntoChunks(fullContent, 7);
   const response = new Response(
     new ReadableStream({
       async start(controller) {
@@ -22,7 +22,6 @@ export const mockFetch = async (fullContent: string, onFinish?: () => void) => {
               // 流已满或关闭，避免写入
               return;
             }
-
             controller.enqueue(new TextEncoder().encode(chunk));
           }
           onFinish?.();

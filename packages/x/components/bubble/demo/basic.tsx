@@ -1,18 +1,20 @@
-import { AntDesignOutlined, CopyOutlined, RedoOutlined } from '@ant-design/icons';
+import { AntDesignOutlined, RedoOutlined } from '@ant-design/icons';
 import { Actions, Bubble } from '@ant-design/x';
 import { Avatar } from 'antd';
 import React from 'react';
 
-const actionItems = [
+const actionItems = (content: string) => [
+  {
+    key: 'copy',
+    label: 'copy',
+    actionRender: () => {
+      return <Actions.Copy text={content} />;
+    },
+  },
   {
     key: 'retry',
     icon: <RedoOutlined />,
     label: 'Retry',
-  },
-  {
-    key: 'copy',
-    icon: <CopyOutlined />,
-    label: 'Copy',
   },
 ];
 
@@ -24,7 +26,9 @@ const App = () => (
     typing={{ effect: 'fade-in', suffix: '...' }}
     components={{
       header: <h5>Ant Design X</h5>,
-      footer: (content) => <Actions items={actionItems} onClick={() => console.log(content)} />,
+      footer: (content) => (
+        <Actions items={actionItems(content)} onClick={() => console.log(content)} />
+      ),
       avatar: <Avatar icon={<AntDesignOutlined />} />,
     }}
   />

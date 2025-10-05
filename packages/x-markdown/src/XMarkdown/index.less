@@ -3,7 +3,7 @@
 
 .x-markdown {
   // Base styles
-  line-height: 1.6;
+  line-height: 1.5714285714285714;
   word-wrap: break-word;
   overflow-wrap: break-word;
 
@@ -137,10 +137,18 @@
   td {
     padding: 0.5em;
     border: 1px solid #ddd;
-    text-align: left;
   }
 
   th {
     font-weight: bold;
+  }
+}
+
+@keyframes x-markdown-fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

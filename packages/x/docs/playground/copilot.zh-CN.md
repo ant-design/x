@@ -3,7 +3,7 @@ group:
   title: 模型样板间
   order: 0
 title: 助手式
-order: 1
+order: 2
 ---
 
 <code src="./copilot.tsx" title='助手式' compact iframe='1200'></code>

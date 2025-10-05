@@ -4,7 +4,7 @@ group:
   order: 2
 title: Custom
 subtitle: 自定义组件
-order: 3
+order: 4
 ---
 
 XMarkdown 支持高度灵活的业务组件渲染机制，开发者可通过以下方式实现定制化功能：
@@ -16,4 +16,4 @@ XMarkdown 支持高度灵活的业务组件渲染机制，开发者可通过以�
 ## 代码演示
 
 <!-- prettier-ignore -->
-<code src="./demo/components/custom.tsx" description="配合 `GPT-VIS` 渲染图表">思考过程</code>
+<code src="./demo/components/custom.tsx">自定义组件</code>

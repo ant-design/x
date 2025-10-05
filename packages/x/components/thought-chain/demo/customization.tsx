@@ -1,11 +1,11 @@
 import { CodeOutlined, EditOutlined, HeartTwoTone, SmileTwoTone } from '@ant-design/icons';
-import type { ThoughtChainItem } from '@ant-design/x';
+import type { ThoughtChainItemType } from '@ant-design/x';
 import { Think, ThoughtChain } from '@ant-design/x';
 import { Button, Card, Flex, Typography } from 'antd';
 import React from 'react';
 
 const { Text } = Typography;
-const items: ThoughtChainItem[] = [
+const items: ThoughtChainItemType[] = [
   {
     title: 'Create Task',
     description: 'description',

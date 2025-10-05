@@ -22,7 +22,14 @@ Optimize streaming Markdown rendering in LLM scenarios by caching to hide markdo
 | --- | --- | --- | --- |
 | hasNextChunk | Whether there is more streaming data | `boolean` | `false` |
 | enableAnimation | Enable text fade-in animation | `boolean` | `false` |
-| animationConfig | Text animation configuration | [`ControllerUpdate`](https://react-spring.dev/docs/typescript#controllerupdate) | `{ from: { opacity: 0 }, to: { opacity: 1 }, config: { tension: 170, friction: 26 } }` |
+| animationConfig | Text animation configuration | `AnimationConfig` | `{ fadeDuration: 200, opacity: 0.2 }` |
+
+#### AnimationConfig
+
+| Property     | Description                               | Type     | Default |
+| ------------ | ----------------------------------------- | -------- | ------- |
+| fadeDuration | Fade animation duration in milliseconds   | `number` | `200`   |
+| opacity      | Opacity value for fading characters (0-1) | `number` | `0.2`   |
 
 ### Usage Example
 
@@ -37,8 +44,8 @@ const App = () => {
         hasNextChunk: true,
         enableAnimation: true,
         animationConfig: {
-          from: { opacity: 0 },
-          to: { opacity: 1 },
+          fadeDuration: 300,
+          opacity: 0.3,
         },
       }}
     />

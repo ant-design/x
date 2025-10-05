@@ -1,5 +1,5 @@
 import { AntDesignOutlined, CopyOutlined, RedoOutlined, UserOutlined } from '@ant-design/icons';
-import type { BubbleData, BubbleListProps } from '@ant-design/x';
+import type { BubbleItemType, BubbleListProps } from '@ant-design/x';
 import { Actions, Bubble } from '@ant-design/x';
 import type { GetRef } from 'antd';
 import { Avatar, Button, Flex } from 'antd';
@@ -22,7 +22,7 @@ let id = 0;
 
 const getKey = () => `bubble_${id++}`;
 
-const genItem = (isAI: boolean, config?: Partial<BubbleData>) => {
+const genItem = (isAI: boolean, config?: Partial<BubbleItemType>) => {
   return {
     key: getKey(),
     role: isAI ? 'ai' : 'user',
@@ -32,10 +32,10 @@ const genItem = (isAI: boolean, config?: Partial<BubbleData>) => {
   };
 };
 
-function useBubbleList(initialItems: BubbleData[] = []) {
-  const [items, setItems] = React.useState<BubbleData[]>(initialItems);
+function useBubbleList(initialItems: BubbleItemType[] = []) {
+  const [items, setItems] = React.useState<BubbleItemType[]>(initialItems);
 
-  const appendItem = useCallback((item: BubbleData) => {
+  const appendItem = useCallback((item: BubbleItemType) => {
     setItems((prev) => [...prev, item]);
   }, []);
 
@@ -108,7 +108,12 @@ const App = () => {
 
       <Bubble.List
         ref={listRef}
-        style={{ maxHeight: 300 }}
+        style={{ maxHeight: 400 }}
+        styles={{
+          bubble: {
+            maxWidth: '90%',
+          },
+        }}
         role={memoRole}
         items={items}
         onScroll={(e) => {

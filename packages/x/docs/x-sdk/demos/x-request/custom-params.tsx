@@ -1,5 +1,5 @@
 import { LoadingOutlined, TagsOutlined } from '@ant-design/icons';
-import type { ThoughtChainItem } from '@ant-design/x';
+import type { ThoughtChainItemType } from '@ant-design/x';
 import { ThoughtChain } from '@ant-design/x';
 import { XRequest } from '@ant-design/x-sdk';
 import { Button, Descriptions, Splitter } from 'antd';
@@ -12,7 +12,7 @@ const BASE_URL = 'https://api.example.com';
 const PATH = '/chat';
 
 const App = () => {
-  const [status, setStatus] = React.useState<ThoughtChainItem['status']>();
+  const [status, setStatus] = React.useState<ThoughtChainItemType['status']>();
   const [lines, setLines] = React.useState<Record<string, string>[]>([]);
 
   function request() {

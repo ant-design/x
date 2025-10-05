@@ -3,7 +3,7 @@ group:
   title: Components
   order: 2
 title: Think
-order: 1
+order: 2
 ---
 
 Works with [`Think`](../../components/think/index.en-US.md) to automatically open during streaming and automatically close after streaming ends.

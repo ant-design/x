@@ -1,5 +1,5 @@
 import { LoadingOutlined, TagsOutlined } from '@ant-design/icons';
-import type { ThoughtChainItem } from '@ant-design/x';
+import type { ThoughtChainItemType } from '@ant-design/x';
 import { ThoughtChain } from '@ant-design/x';
 import { XRequest } from '@ant-design/x-sdk';
 import { Button, Descriptions, Splitter } from 'antd';
@@ -26,7 +26,7 @@ async function mockFetch() {
 
 const App = () => {
   const [status, setStatus] = useState<string>('');
-  const [thoughtChainStatus, setThoughtChainStatus] = useState<ThoughtChainItem['status']>();
+  const [thoughtChainStatus, setThoughtChainStatus] = useState<ThoughtChainItemType['status']>();
 
   function request() {
     setStatus('pending');

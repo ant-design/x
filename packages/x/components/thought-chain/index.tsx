@@ -7,7 +7,7 @@ import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 import type { ThoughtChainItemProps } from './Item';
 import Item from './Item';
-import type { ThoughtChainItem, ThoughtChainProps } from './interface';
+import type { ThoughtChainItemType, ThoughtChainProps } from './interface';
 import ThoughtChainNode, { ThoughtChainContext } from './Node';
 import useStyle from './style';
 
@@ -142,5 +142,5 @@ if (process.env.NODE_ENV !== 'production') {
   ThoughtChain.displayName = 'ThoughtChain';
 }
 
-export type { ThoughtChainProps, ThoughtChainItem, ThoughtChainItemProps };
+export type { ThoughtChainProps, ThoughtChainItemType, ThoughtChainItemProps };
 export default ThoughtChain;

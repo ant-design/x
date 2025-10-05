@@ -16,13 +16,13 @@ import React from 'react';
  * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
  */
 
-const BASE_URL = 'https://api.x.ant.design/api/llm_cloudflare_llama-3.3-70b-instruct-fp8-fast';
+const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow_Qwen2.5-7B-Instruct';
 
 /**
  * 🔔 The MODEL is fixed in the current request, please replace it with your BASE_UR and MODEL
  */
 
-const MODEL = 'llama-3.3-70b-instruct-fp8-fast';
+const MODEL = 'Qwen2.5-7B-Instruct';
 
 const role: BubbleListProps['role'] = {
   assistant: {

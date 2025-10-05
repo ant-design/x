@@ -1,11 +1,12 @@
+import type { Config as DOMPurifyConfig } from 'dompurify';
 import DOMPurify from 'dompurify';
 import parseHtml, { DOMNode, domToReact, Element } from 'html-react-parser';
-import htmlTags from 'html-tags';
 import React, { ReactNode } from 'react';
-import type { XMarkdownProps } from '../interface';
+import type { ComponentProps, XMarkdownProps } from '../interface';
 
 interface RendererOptions {
   components?: XMarkdownProps['components'];
+  dompurifyConfig?: DOMPurifyConfig;
 }
 
 class Renderer {
@@ -54,47 +55,51 @@ class Renderer {
   /**
    * Configure DOMPurify to preserve components and target attributes, filter everything else
    */
-  private configureDOMPurify() {
-    // Get all custom component tag names
+  private configureDOMPurify(): DOMPurifyConfig {
     const customComponents = Object.keys(this.options.components || {});
+    const userConfig = this.options.dompurifyConfig || {};
 
-    // Get all standard HTML tags using html-tags
-    const standardHtmlTags = htmlTags as string[];
-
-    // Configure DOMPurify - only preserve custom components and standard HTML tags
-    const purifyConfig = {
-      // Allow custom components and standard HTML tags
-      ALLOWED_TAGS: [...standardHtmlTags, ...customComponents],
-      // Allow basic attributes and target attribute
-      ALLOWED_ATTR: [
-        'target',
-        'href',
-        'class',
-        'id',
-        'style',
-        'title',
-        'alt',
-        'src',
-        'width',
-        'height',
-        'type',
-        'disabled',
-      ],
-      // Custom component handling
-      CUSTOM_ELEMENT_HANDLING: {
-        tagNameCheck: (tagName: string) => {
-          // Allow custom components to pass through
-          return customComponents.includes(tagName.toLowerCase());
-        },
-        attributeNameCheck: () => {
-          // Allow all attributes for custom components
-          return true;
-        },
-        allowCustomizedBuiltInElements: true,
-      },
+    return {
+      ...userConfig,
+      ADD_TAGS: [...new Set([...customComponents, ...(userConfig.ALLOWED_TAGS || [])])],
     };
+  }
 
-    return purifyConfig;
+  private replaceElement(unclosedTags?: Set<string>) {
+    return (domNode: DOMNode) => {
+      if (!('name' in domNode)) return;
+
+      const { name, attribs, children } = domNode as Element;
+      const renderElement = this.options.components?.[name];
+
+      if (renderElement) {
+        const streamStatus = unclosedTags?.has(name) ? 'loading' : 'done';
+        const props: ComponentProps = {
+          domNode,
+          streamStatus,
+          ...attribs,
+        };
+
+        // Handle class and className merging
+        const classes = [props.className, props.classname, props.class]
+          .filter(Boolean)
+          .join(' ')
+          .trim();
+        props.className = classes || '';
+
+        if (children) {
+          props.children = this.processChildren(children as DOMNode[], unclosedTags);
+        }
+
+        return React.createElement(renderElement, props);
+      }
+    };
+  }
+
+  private processChildren(children: DOMNode[], unclosedTags?: Set<string>): ReactNode {
+    return domToReact(children as DOMNode[], {
+      replace: this.replaceElement(unclosedTags),
+    });
   }
 
   public processHtml(htmlString: string): React.ReactNode {
@@ -104,34 +109,7 @@ class Renderer {
     const cleanHtml = DOMPurify.sanitize(htmlString, purifyConfig);
 
     return parseHtml(cleanHtml, {
-      replace: (domNode) => {
-        if (!('name' in domNode)) return;
-
-        const { name, attribs, children } = domNode as Element;
-        const renderElement = this.options.components?.[name];
-
-        if (renderElement) {
-          const streamStatus = unclosedTags.has(name) ? 'loading' : 'done';
-          const props: Record<string, unknown> = {
-            domNode,
-            streamStatus,
-            ...attribs,
-          };
-
-          // Handle class and className merging
-          const classes = [props.className, props.classname, props.class]
-            .filter(Boolean)
-            .join(' ')
-            .trim();
-          props.className = classes || '';
-
-          if (children) {
-            props.children = domToReact(children as DOMNode[]);
-          }
-
-          return React.createElement(renderElement, props);
-        }
-      },
+      replace: this.replaceElement(unclosedTags),
     });
   }
 

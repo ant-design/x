@@ -1,68 +1,64 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { animated, ControllerUpdate, useSpring } from '@react-spring/web';
+import type { DOMNode } from 'html-react-parser';
+import React, { useEffect, useRef, useState } from 'react';
 import { HTMLTag } from './hooks/useAnimation';
-
-interface AnimationTextProps {
-  text: string;
-  animationConfig?: ControllerUpdate;
-}
+import { AnimationConfig } from './interface';
 
 export interface AnimationNodeProps extends React.HTMLAttributes<HTMLElement> {
   children?: React.ReactNode | React.ReactNode[];
   nodeTag: HTMLTag;
-  animationConfig?: ControllerUpdate;
+  animationConfig?: AnimationConfig;
+  streamStatus?: 'loading' | 'done';
+  domNode?: DOMNode;
   [key: string]: unknown;
 }
 
-const DEFAULT_ANIMATION_CONFIG: ControllerUpdate = {
-  from: { opacity: 0 },
-  to: { opacity: 1 },
-  config: { tension: 170, friction: 26 },
-};
+export interface AnimationTextProps {
+  text: string;
+  animationConfig?: AnimationConfig;
+}
 
-const AnimationText: React.FC<AnimationTextProps> = React.memo((props) => {
+const AnimationText = React.memo<AnimationTextProps>((props) => {
   const { text, animationConfig } = props;
-  const [displayText, setDisplayText] = useState({
-    base: '',
-    animated: '',
-  });
+  const { fadeDuration = 200, easing = 'ease-in-out' } = animationConfig || {};
+  const [chunks, setChunks] = useState<string[]>([]);
   const prevTextRef = useRef('');
-
-  const mergedAnimationConfig = useMemo(
-    () => ({ ...DEFAULT_ANIMATION_CONFIG, ...animationConfig }),
-    [animationConfig],
-  );
-  const [springs, api] = useSpring(() => mergedAnimationConfig);
 
   useEffect(() => {
     if (text === prevTextRef.current) return;
 
-    const newChars = text.slice(prevTextRef.current.length);
-    setDisplayText({
-      base: prevTextRef.current,
-      animated: newChars,
-    });
+    if (!(prevTextRef.current && text.indexOf(prevTextRef.current) === 0)) {
+      setChunks([text]);
+      prevTextRef.current = text;
+      return;
+    }
+
+    const newText = text.slice(prevTextRef.current.length);
+    if (!newText) return;
+
+    setChunks((prev) => [...prev, newText]);
     prevTextRef.current = text;
   }, [text]);
 
-  useEffect(() => {
-    if (displayText.animated) {
-      api.start(mergedAnimationConfig);
-    }
-  }, [displayText.animated, mergedAnimationConfig]);
-
   return (
     <>
-      {displayText.base}
-      {displayText.animated ? (
-        <animated.span style={springs}>{displayText.animated}</animated.span>
-      ) : null}
+      {chunks.map((text, index) => {
+        return (
+          <span
+            style={{
+              animation: `x-markdown-fadeIn ${fadeDuration}ms ${easing} forwards`,
+            }}
+            key={`${index}-${text}`}
+          >
+            {text}
+          </span>
+        );
+      })}
     </>
   );
 });
 
 const AnimationNode: React.FC<AnimationNodeProps> = (props) => {
-  const { nodeTag, children, animationConfig, ...restProps } = props;
+  const { nodeTag, children, animationConfig, domNode, streamStatus, ...restProps } = props;
 
   const renderChildren = (): React.ReactNode | React.ReactNode[] => {
     if (!children) return null;

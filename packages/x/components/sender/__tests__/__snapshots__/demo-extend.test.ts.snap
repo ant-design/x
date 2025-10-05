@@ -65,7 +65,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
             class="ant-file-card-list-wrapper"
           >
             <div
-              class="ant-file-card-list ant-attachment-list  css-var-«r1f»"
+              class="ant-file-card-list ant-attachment-list css-var-«r1f»"
               style="display: none;"
             >
               <span
@@ -1583,7 +1583,7 @@ exports[`renders components/sender/demo/paste-image.tsx extend context correctly
               class="ant-file-card-list-wrapper"
             >
               <div
-                class="ant-file-card-list ant-attachment-list  css-var-«r13»"
+                class="ant-file-card-list ant-attachment-list css-var-«r13»"
                 style="display: none;"
               >
                 <span
@@ -2242,6 +2242,14 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
     >
       <span>
         Focus at last
+      </span>
+    </button>
+    <button
+      class="ant-btn css-var-«rf» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      type="button"
+    >
+      <span>
+        Focus at slot
       </span>
     </button>
     <button
@@ -2962,7 +2970,7 @@ exports[`renders components/sender/demo/switch.tsx extend context correctly 1`] 
   <div
     class="ant-flex css-var-«r0» ant-flex-align-center ant-flex-gap-small"
   >
-     Default: 
+    Default: 
     <div
       class="ant-sender-switch css-var-«r0»"
     >
@@ -3002,7 +3010,7 @@ exports[`renders components/sender/demo/switch.tsx extend context correctly 1`] 
   <div
     class="ant-flex css-var-«r0» ant-flex-align-center ant-flex-gap-small"
   >
-    Custom checked/unchecked content: 
+    Custom checked/unchecked content:
     <div
       class="ant-sender-switch css-var-«r0»"
     >
@@ -3083,7 +3091,7 @@ exports[`renders components/sender/demo/switch.tsx extend context correctly 1`] 
   <div
     class="ant-flex css-var-«r0» ant-flex-align-center ant-flex-gap-small"
   >
-    Loading: 
+    Loading:
     <div
       class="ant-sender-switch css-var-«r0»"
     >
@@ -3123,7 +3131,7 @@ exports[`renders components/sender/demo/switch.tsx extend context correctly 1`] 
   <div
     class="ant-flex css-var-«r0» ant-flex-align-center ant-flex-gap-small"
   >
-    DefaultValue: 
+    DefaultValue:
     <div
       class="ant-sender-switch css-var-«r0» ant-sender-switch-checked"
     >
@@ -3163,7 +3171,7 @@ exports[`renders components/sender/demo/switch.tsx extend context correctly 1`] 
   <div
     class="ant-flex css-var-«r0» ant-flex-align-center ant-flex-gap-small"
   >
-    Controlled mode: 
+    Controlled mode:
     <div
       class="ant-sender-switch css-var-«r0»"
     >

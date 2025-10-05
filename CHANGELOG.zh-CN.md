@@ -15,6 +15,45 @@ tag: vVERSION
 
 ---
 
+## 2.0.0-alpha.9
+
+`2025-09-24`
+
+### @ant-design/x-markdown
+
+- 🐛 修复代码高亮插件样式丢失、组件无法匹配嵌套子元素的问题，并移除默认样式中的 table text-align 属性。[#1212](https://github.com/ant-design/x/pull/1212) 由 [@Div627](https://github.com/Div627) 提交。
+
+## 2.0.0-alpha.8
+
+`2025-09-22`
+
+### @ant-design/x
+
+- Bubble
+  - 🆕 Bubble.List 新增 `extra` 参数，配合 useXChat 已支持自定义功能。[#1195](https://github.com/ant-design/x/pull/1195) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+  - 🐛 修复 `loading` 状态下内容高度被固定问题。[#1178](https://github.com/ant-design/x/pull/1178) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+  - 🐛 修复组件类型导出命名错误问题。[#1182](https://github.com/ant-design/x/pull/1182) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🐛 修复 ThoughtChain.Item 组件类型导出命名错误问题。[#1178](https://github.com/ant-design/x/pull/1178) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🐛 修复 XProvider 监听组件缺少问题。[#1178](https://github.com/ant-design/x/pull/1178) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+
+### @ant-design/x-markdown
+
+- 🛠 重构动画相关实现。[#1198](https://github.com/ant-design/x/pull/1198) 由 [@Div627](https://github.com/Div627) 提交、[#1204](https://github.com/ant-design/x/pull/1204) 由 [@Div627](https://github.com/Div627) 提交。
+- 🐛 修复插件导出类型错误问题，以及新增示例和文档[#1187](https://github.com/ant-design/x/pull/1187) 由 [@Div627](https://github.com/Div627) 提交。
+- 🐛 修复 Mermaid 插件切换时渲染异常。[#1175](https://github.com/ant-design/x/pull/1175) 由 [@Div627](https://github.com/Div627) 提交。
+- 🆕 补充 HighlightCode 插件和 Mermaid 插件语义化实现。[#1178](https://github.com/ant-design/x/pull/1178) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🐛 修复 XMarkdown 主题样式覆盖不全问题。 [#1182](https://github.com/ant-design/x/pull/1182) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+
+### @ant-design/x-sdk
+
+- 🆕 useXChat `setMessage`支持使用回调函数支持获取原始消息，同时 `onRequest` 和 `onReload` 新增 `extra` 参数以支持自定义功能。 [#1195](https://github.com/ant-design/x/pull/1195) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+
+### 其他
+
+- 🆕 更新站点整体文档。 [#1194](https://github.com/ant-design/x/pull/1194) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🆕 更新样板间功能，新增'现代感'样板间。 [#1184](https://github.com/ant-design/x/pull/1184) 由 [@kimteayon](https://github.com/kimteayon) 提交、[#1195](https://github.com/ant-design/x/pull/1195) 由 [@kimteayon](https://github.com/kimteayon) 提交、 [#1194](https://github.com/ant-design/x/pull/1194) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 📖 优化官网站点提升用户体验。[#1170](https://github.com/ant-design/x/pull/1170) 由 [@jinyang](https://github.com/jinyang) 提交、[#1186](https://github.com/ant-design/x/pull/1186) 由 [@jinyang](https://github.com/jinyang) 提交、[#1192](https://github.com/ant-design/x/pull/1192) 由 [@iamkun-2](https://github.com/iamkun-2) 提交、[#1193](https://github.com/ant-design/x/pull/1193) 由 [@iamkun-2](https://github.com/iamkun-2) 提交、[#1197](https://github.com/ant-design/x/pull/1197) 由 [@elrrrrrrr](https://github.com/elrrrrrrr) 提交、[#1199](https://github.com/ant-design/x/pull/1199) 由 [@Div627](https://github.com/Div627) 提交。
+
 ## 2.0.0-alpha.7
 
 `2025-09-14`

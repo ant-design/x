@@ -7,7 +7,7 @@ import { useXProviderContext } from '../x-provider';
 
 import useStyle from './style';
 
-export interface BasePromptItem {
+export interface BasePromptsItemType {
   /**
    * @desc 唯一标识用于区分每个提示项。
    * @descEN Unique identifier used to distinguish each prompt item.
@@ -39,8 +39,8 @@ export interface BasePromptItem {
   disabled?: boolean;
 }
 
-export interface PromptProps extends BasePromptItem {
-  children?: BasePromptItem[];
+export interface PromptsItemType extends BasePromptsItemType {
+  children?: BasePromptsItemType[];
 }
 
 export type SemanticType =
@@ -58,7 +58,7 @@ export interface PromptsProps
    * @desc 包含多个提示项的列表。
    * @descEN List containing multiple prompt items.
    */
-  items?: PromptProps[];
+  items?: PromptsItemType[];
 
   /**
    * @desc 显示在提示列表顶部的标题。
@@ -70,7 +70,7 @@ export interface PromptsProps
    * @desc Item 提示项被点击时的回调函数。
    * @descEN Callback function when a prompt item is clicked.
    */
-  onItemClick?: (info: { data: PromptProps }) => void;
+  onItemClick?: (info: { data: PromptsItemType }) => void;
 
   /**
    * @desc 提示列表是否垂直排列。

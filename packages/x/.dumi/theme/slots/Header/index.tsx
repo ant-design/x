@@ -2,19 +2,16 @@ import { CloseOutlined, MenuOutlined } from '@ant-design/icons';
 import { Button, Drawer } from 'antd';
 import { createStyles } from 'antd-style';
 import classnames from 'classnames';
+import { useLocation } from 'dumi';
 import React, { useEffect } from 'react';
-
 import useLocale from '../../../hooks/useLocale';
 import useScrollY from '../../../hooks/useScrollY';
+import type { SiteContextProps } from '../SiteContext';
 import SiteContext from '../SiteContext';
-
 import HeaderActions from './Actions';
+import type { SharedProps } from './interface';
 import Logo from './Logo';
 import Navigation from './Navigation';
-
-import { useLocation } from 'dumi';
-import type { SiteContextProps } from '../SiteContext';
-import type { SharedProps } from './interface';
 
 const useStyle = createStyles(({ token, css }) => {
   return {
@@ -113,13 +110,14 @@ const Header: React.FC = () => {
   let innerHeight = 1080;
 
   if (typeof window !== 'undefined') {
-    clientHeight = document.body.clientHeight
+    clientHeight = document.body.clientHeight;
     innerHeight = window.innerHeight;
   }
 
   const isMini = scrollY > Math.min(innerHeight * 0.5, clientHeight * 0.25) && !isMobile;
 
-  const isHidden = scrollY > Math.min(innerHeight * 1.5, clientHeight * 0.5) && scrollYDirection === 'down';
+  const isHidden =
+    scrollY > Math.min(innerHeight * 1.5, clientHeight * 0.5) && scrollYDirection === 'down';
 
   const isActionHidden = scrollY > 200;
 
@@ -144,14 +142,15 @@ const Header: React.FC = () => {
         onClose={() => setOpen(false)}
         open={open}
         placement="top"
-        height="100%"
+        style={{
+          height: '100%',
+        }}
         zIndex={999}
       >
         <Navigation {...sharedProps} />
       </Drawer>
     );
   } else {
-
     content = (
       <>
         <Navigation
@@ -162,8 +161,6 @@ const Header: React.FC = () => {
       </>
     );
   }
-
-
 
   return (
     <header

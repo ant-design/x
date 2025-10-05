@@ -1,11 +1,11 @@
 import { CheckCircleOutlined, InfoCircleOutlined, LoadingOutlined } from '@ant-design/icons';
-import type { ThoughtChainItem } from '@ant-design/x';
+import type { ThoughtChainItemType } from '@ant-design/x';
 import { Bubble, ThoughtChain } from '@ant-design/x';
-import XMarkdown from '@ant-design/x-markdown';
+import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
 import { Avatar, Button, Card, Flex, Spin } from 'antd';
 import React from 'react';
 
-function getStatusIcon(status: ThoughtChainItem['status']) {
+function getStatusIcon(status: ThoughtChainItemType['status']) {
   switch (status) {
     case 'success':
       return <CheckCircleOutlined />;
@@ -27,11 +27,11 @@ const delay = (ms: number) => {
   });
 };
 
-const Thought = (props: { items: ThoughtChainItem[] }) => {
-  const [items, setItems] = React.useState<ThoughtChainItem[]>(props.items);
+const Thought = (props: { items: ThoughtChainItemType[] }) => {
+  const [items, setItems] = React.useState<ThoughtChainItemType[]>(props.items);
   const [loading, setLoading] = React.useState<boolean>(false);
 
-  function addChainItem(): ThoughtChainItem {
+  function addChainItem(): ThoughtChainItemType {
     return {
       title: `Thought Chain Item - ${items.length + 1}`,
       status: 'loading',
@@ -40,7 +40,7 @@ const Thought = (props: { items: ThoughtChainItem[] }) => {
     };
   }
 
-  async function updateChainItem(status: ThoughtChainItem['status']) {
+  async function updateChainItem(status: ThoughtChainItemType['status']) {
     await delay(800);
     setItems((prevItems) => {
       const newItems = [...prevItems];
@@ -82,12 +82,16 @@ const Thought = (props: { items: ThoughtChainItem[] }) => {
 const text = `<div><thought>[{"title":"Thought Chain Item - 1","status":"success","description":"status: success"},{"title":"Thought Chain Item - 2","status":"error","description":"status: error"}]</thought></div>
 `;
 
-const ThoughtComponent = (props: { children: string; streamStatus: string }) => {
+const ThoughtComponent = (props: ComponentProps) => {
   if (props.streamStatus === 'loading') {
     return <Spin />;
   }
 
-  const data = JSON.parse(props.children) as ThoughtChainItem[];
+  if (typeof props.children !== 'string') {
+    return null;
+  }
+
+  const data = JSON.parse(props.children) as ThoughtChainItemType[];
   return <Thought items={data} />;
 };
 

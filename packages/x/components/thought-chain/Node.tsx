@@ -5,7 +5,7 @@ import CSSMotion from 'rc-motion';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
 import { useXProviderContext } from '../x-provider';
-import type { ThoughtChainItem, ThoughtChainProps } from './interface';
+import type { ThoughtChainItemType, ThoughtChainProps } from './interface';
 import Status from './Status';
 
 // ================= ThoughtChainContext ====================
@@ -20,7 +20,7 @@ export const ThoughtChainContext = React.createContext<{
 }>(null!);
 
 interface ThoughtChainNodeProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick'> {
-  info?: ThoughtChainItem;
+  info?: ThoughtChainItemType;
   line?: ThoughtChainProps['line'];
   index: number;
 }
