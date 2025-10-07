@@ -58,6 +58,7 @@ const useStyle = createStyles(({ token, css }) => {
         `,
     name: css`
       font-size: 64px !important;
+      margin-block-start: 20px;
       white-space: nowrap;
       line-height: 1.3;
       color: ${token.colorText};
