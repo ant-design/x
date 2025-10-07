@@ -2,9 +2,8 @@ import { Button } from 'antd';
 import { createStyles } from 'antd-style';
 import classnames from 'classnames';
 import { useLocation } from 'dumi';
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import useLocale from '../../../hooks/useLocale';
-import useLottie from '../../../hooks/useLottie';
 import Link from '../../../theme/common/Link';
 import { getLocalizedPathname, isZhCN } from '../../../theme/utils';
 import Container from '../common/Container';
@@ -217,83 +216,16 @@ const MainBanner: React.FC = () => {
 
   const { styles } = useStyle();
 
-  const [bgLottieRef, bgAnimation] = useLottie({
-    renderer: 'svg',
-    loop: false,
-    autoplay: false,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
-    },
-    path: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*3QcuQpaOguQAAAAAAAAAAAAADgCCAQ',
-  });
-
-  const [ipLottieRef, ipAnimation] = useLottie({
-    renderer: 'svg',
-    loop: false,
-    autoplay: true,
-    disabled: isMobile,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid meet',
-    },
-    path: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*YbV2QqZdDQ0AAAAAAAAAAAAADgCCAQ',
-  });
-
-  React.useEffect(() => {
-    if (!bgAnimation) return;
-
-    let isReverse = false;
-
-    function playAnimation() {
-      if (!bgAnimation) return;
-
-      if (isReverse) {
-        bgAnimation.setDirection(-1);
-        bgAnimation.goToAndPlay(bgAnimation.totalFrames - 1, true);
-      } else {
-        bgAnimation.setDirection(1);
-        bgAnimation.goToAndPlay(0, true);
-      }
-      isReverse = !isReverse;
-    }
-
-    bgAnimation.addEventListener('data_ready', playAnimation);
-
-    playAnimation();
-
-    return () => {
-      bgAnimation.destroy();
-    };
-  }, [!!bgAnimation]);
-
-  React.useEffect(() => {
-    if (!ipAnimation) return;
-
-    let reverseFrameInterval: NodeJS.Timeout;
-
-    ipAnimation.addEventListener('data_ready', () => {
-      let currentFrame = ipAnimation.totalFrames;
-      const reverseFrames = 30;
-
-      reverseFrameInterval = setInterval(() => {
-        currentFrame--;
-        ipAnimation.goToAndStop(currentFrame, true);
-
-        if (currentFrame <= ipAnimation.totalFrames - reverseFrames) {
-          clearInterval(reverseFrameInterval);
-          ipAnimation.play();
-        }
-      }, 1000 / 30);
-    });
-
-    return () => {
-      ipAnimation.destroy();
-      window.clearInterval(reverseFrameInterval);
-    };
-  }, [!!ipAnimation]);
+  const LottieComponent = lazy(() => import('./Lottie'));
 
   return (
     <section className={styles.banner}>
-      <div ref={bgLottieRef} className={styles.background} />
+      <Suspense fallback={<></>}>
+        <LottieComponent
+          className={styles.background}
+          path="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*3QcuQpaOguQAAAAAAAAAAAAADgCCAQ"
+        />
+      </Suspense>
       <Container className={styles.container}>
         <div className={styles.title}>
           <h1 className={styles.name}>
@@ -319,10 +251,14 @@ const MainBanner: React.FC = () => {
             </Link>
           </div>
         </div>
-        <div
-          ref={ipLottieRef}
-          className={classnames(styles.lottie, direction === 'rtl' && styles.lottie_rtl)}
-        />
+        {!isMobile && (
+          <Suspense fallback={<></>}>
+            <LottieComponent
+              className={classnames(styles.lottie, direction === 'rtl' && styles.lottie_rtl)}
+              path="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*YbV2QqZdDQ0AAAAAAAAAAAAADgCCAQ"
+            />
+          </Suspense>
+        )}
       </Container>
     </section>
   );

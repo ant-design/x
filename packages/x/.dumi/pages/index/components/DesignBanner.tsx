@@ -1,11 +1,8 @@
 import { createStyles } from 'antd-style';
-import React from 'react';
-
 import { useLocation, useNavigate } from 'dumi';
-import { getLocalizedPathname, isZhCN } from '../../../theme/utils';
-
+import React, { lazy, Suspense } from 'react';
 import useLocale from '../../../hooks/useLocale';
-import useLottie from '../../../hooks/useLottie';
+import { getLocalizedPathname, isZhCN } from '../../../theme/utils';
 import Container from '../common/Container';
 
 const locales = {
@@ -42,14 +39,7 @@ const DesignBanner: React.FC = () => {
   const navigate = useNavigate();
 
   const { styles } = useStyle();
-
-  const [lottieRef] = useLottie({
-    renderer: 'svg',
-    loop: false,
-    autoplay: true,
-    path: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*eZsQT5KKBtIAAAAAAAAAAAAADgCCAQ',
-  });
-
+  const LottieComponent = lazy(() => import('./Lottie'));
   return (
     <Container
       className={styles.container}
@@ -59,7 +49,12 @@ const DesignBanner: React.FC = () => {
         navigate(getLocalizedPathname('docs/spec/introduce', isZhCN(pathname), search))
       }
     >
-      <div ref={lottieRef} className={styles.lottie} />
+      <Suspense fallback={<></>}>
+        <LottieComponent
+          className={styles.lottie}
+          path="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*eZsQT5KKBtIAAAAAAAAAAAAADgCCAQ"
+        />
+      </Suspense>
     </Container>
   );
 };

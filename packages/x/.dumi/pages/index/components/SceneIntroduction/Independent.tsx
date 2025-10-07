@@ -18,9 +18,6 @@ const roles: GetProp<typeof Bubble.List, 'role'> = {
   ai: {
     placement: 'start',
     typing: { effect: 'typing', step: 5, interval: 20 },
-    style: {
-      maxWidth: 600,
-    },
     styles: {
       content: {
         borderRadius: 16,
@@ -49,7 +46,7 @@ const useStyle = createStyles(({ token, css }) => {
       flex-direction: column;
       gap: ${token.padding}px;
       height: 100%;
-      padding: ${token.paddingXL}px ${token.paddingLG * 2}px;
+      padding-block: ${token.paddingXL}px;
    `,
     bubble_list: css`
       flex: 1;
@@ -251,6 +248,9 @@ const IndependentScene: React.FC = () => {
         <Bubble.List
           className={styles.bubble_list}
           role={roles}
+          style={{
+            paddingInline: 40,
+          }}
           items={[
             placeholderMessage,
             ...messages.map(({ id, message, status }) => ({
