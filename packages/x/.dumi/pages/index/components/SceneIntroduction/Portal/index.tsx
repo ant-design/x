@@ -1,4 +1,3 @@
-import type { PromptsProps } from '@ant-design/x';
 import { createStyles } from 'antd-style';
 import classnames from 'classnames';
 import React, { useContext, useRef } from 'react';

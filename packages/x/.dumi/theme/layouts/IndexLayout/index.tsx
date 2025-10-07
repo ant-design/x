@@ -1,10 +1,9 @@
 import { Helmet } from 'dumi';
 import type { PropsWithChildren } from 'react';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
 import Footer from '../../slots/Footer';
 import Context from './Context';
-import Provider from './Provider';
 
 interface IndexLayoutProps {
   title?: string;
