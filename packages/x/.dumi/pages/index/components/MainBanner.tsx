@@ -4,7 +4,7 @@ import useLottie from '../../../hooks/useLottie';
 import Context from '../../../theme/layouts/IndexLayout/Context';
 import Portal from './SceneIntroduction/Portal';
 
-const useStyle = createStyles(({ token, css }, isOnAgent: any) => {
+const useStyle = createStyles(({ token, css }, isOnAgent: boolean) => {
   return {
     banner: css`
       width: 100vw;

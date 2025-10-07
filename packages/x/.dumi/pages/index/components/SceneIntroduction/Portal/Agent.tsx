@@ -31,7 +31,7 @@ const locales = {
   },
 };
 
-const useStyle = createStyles(({ token, css }, isOnAgent: any) => {
+const useStyle = createStyles(({ token, css }, isOnAgent: boolean) => {
   return {
     container: css`
         display: flex;
