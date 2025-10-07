@@ -27,6 +27,8 @@ const useStyle = createStyles(({ token, css }) => {
     justify-content: space-around;
     align-items:center;
     max-width: 1000px;
+    box-sizing: border-box;
+    width:100%;
     padding-inline: ${token.paddingXL * 2}px;
    `,
     agentPage: css`

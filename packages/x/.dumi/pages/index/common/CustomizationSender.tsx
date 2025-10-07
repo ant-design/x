@@ -10,7 +10,7 @@ export const useStyle = createStyles(({ css }) => {
       position: relative;
       border: none;
       cursor: pointer;
-
+      height: auto;
       :hover {
         opacity: 0.85;
       }
