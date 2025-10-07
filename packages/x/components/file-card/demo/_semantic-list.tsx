@@ -27,7 +27,7 @@ const App: React.FC = () => {
 
   return (
     <SemanticPreview
-      componentName="FileCard"
+      componentName="FileCard.List"
       semantics={[
         { name: 'root', desc: locale.root },
         { name: 'card', desc: locale.card },

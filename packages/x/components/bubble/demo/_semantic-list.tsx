@@ -62,7 +62,7 @@ const App: React.FC = () => {
   );
   return (
     <SemanticPreview
-      componentName="Bubble"
+      componentName="Bubble.List"
       semantics={[
         { name: 'root', desc: locale.root },
         { name: 'bubble', desc: locale.bubble },
