@@ -2,7 +2,7 @@
 
 exports[`renders components/actions/demo/basic.tsx correctly 1`] = `
 <div
-  class="ant-actions css-var-«R0»"
+  class="ant-actions css-var-_R_0_"
 >
   <div
     class="ant-actions-list ant-actions-variant-borderless"
@@ -69,13 +69,13 @@ exports[`renders components/actions/demo/basic.tsx correctly 1`] = `
 
 exports[`renders components/actions/demo/preset.tsx correctly 1`] = `
 <div
-  class="ant-actions css-var-«R0»"
+  class="ant-actions css-var-_R_0_"
 >
   <div
     class="ant-actions-list ant-actions-variant-borderless"
   >
     <ul
-      class="ant-pagination css-var-«R0» ant-pagination-simple"
+      class="ant-pagination css-var-_R_0_ ant-pagination-simple"
     >
       <li
         aria-disabled="true"
@@ -159,7 +159,7 @@ exports[`renders components/actions/demo/preset.tsx correctly 1`] = `
       </li>
     </ul>
     <div
-      class="ant-actions-feedback css-var-«R0» ant-actions-list"
+      class="ant-actions-feedback css-var-_R_0_ ant-actions-list"
     >
       <span
         aria-describedby="test-id"
@@ -211,7 +211,7 @@ exports[`renders components/actions/demo/preset.tsx correctly 1`] = `
       </span>
     </div>
     <span
-      class="ant-actions-copy ant-actions-copy css-var-«R0» ant-actions-item css-var-«R0»"
+      class="ant-actions-copy ant-actions-copy css-var-_R_0_ ant-actions-item css-var-_R_0_"
     >
       <button
         aria-describedby="test-id"
@@ -242,7 +242,7 @@ exports[`renders components/actions/demo/preset.tsx correctly 1`] = `
     </span>
     <div
       aria-describedby="test-id"
-      class="ant-actions-button-item css-var-«R0» ant-actions-audio css-var-«R0» ant-actions-audio-default ant-actions-item"
+      class="ant-actions-button-item css-var-_R_0_ ant-actions-audio css-var-_R_0_ ant-actions-audio-default ant-actions-item"
     >
       <span
         aria-label="muted"
@@ -267,7 +267,7 @@ exports[`renders components/actions/demo/preset.tsx correctly 1`] = `
     </div>
     <div
       aria-describedby="test-id"
-      class="ant-actions-button-item css-var-«R0» ant-actions-item"
+      class="ant-actions-button-item css-var-_R_0_ ant-actions-item"
     >
       <span
         aria-label="share-alt"
@@ -295,7 +295,7 @@ exports[`renders components/actions/demo/preset.tsx correctly 1`] = `
 
 exports[`renders components/actions/demo/sub.tsx correctly 1`] = `
 <div
-  class="ant-actions css-var-«R0»"
+  class="ant-actions css-var-_R_0_"
 >
   <div
     class="ant-actions-list ant-actions-variant-borderless"
@@ -417,16 +417,16 @@ exports[`renders components/actions/demo/sub.tsx correctly 1`] = `
 
 exports[`renders components/actions/demo/variant.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-actions css-var-«R0»"
+    class="ant-actions css-var-_R_0_"
   >
     <div
       class="ant-actions-list ant-actions-variant-outlined"
     >
       <ul
-        class="ant-pagination css-var-«R0» ant-pagination-simple"
+        class="ant-pagination css-var-_R_0_ ant-pagination-simple"
       >
         <li
           aria-disabled="true"
@@ -538,7 +538,7 @@ exports[`renders components/actions/demo/variant.tsx correctly 1`] = `
         </div>
       </div>
       <span
-        class="ant-actions-copy ant-actions-copy css-var-«R0» ant-actions-item css-var-«R0»"
+        class="ant-actions-copy ant-actions-copy css-var-_R_0_ ant-actions-item css-var-_R_0_"
       >
         <button
           aria-describedby="test-id"
@@ -570,13 +570,13 @@ exports[`renders components/actions/demo/variant.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-actions css-var-«R0»"
+    class="ant-actions css-var-_R_0_"
   >
     <div
       class="ant-actions-list ant-actions-variant-filled"
     >
       <ul
-        class="ant-pagination css-var-«R0» ant-pagination-simple"
+        class="ant-pagination css-var-_R_0_ ant-pagination-simple"
       >
         <li
           aria-disabled="true"
@@ -688,7 +688,7 @@ exports[`renders components/actions/demo/variant.tsx correctly 1`] = `
         </div>
       </div>
       <span
-        class="ant-actions-copy ant-actions-copy css-var-«R0» ant-actions-item css-var-«R0»"
+        class="ant-actions-copy ant-actions-copy css-var-_R_0_ ant-actions-item css-var-_R_0_"
       >
         <button
           aria-describedby="test-id"
@@ -720,13 +720,13 @@ exports[`renders components/actions/demo/variant.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-actions css-var-«R0»"
+    class="ant-actions css-var-_R_0_"
   >
     <div
       class="ant-actions-list ant-actions-variant-borderless"
     >
       <ul
-        class="ant-pagination css-var-«R0» ant-pagination-simple"
+        class="ant-pagination css-var-_R_0_ ant-pagination-simple"
       >
         <li
           aria-disabled="true"
@@ -838,7 +838,7 @@ exports[`renders components/actions/demo/variant.tsx correctly 1`] = `
         </div>
       </div>
       <span
-        class="ant-actions-copy ant-actions-copy css-var-«R0» ant-actions-item css-var-«R0»"
+        class="ant-actions-copy ant-actions-copy css-var-_R_0_ ant-actions-item css-var-_R_0_"
       >
         <button
           aria-describedby="test-id"

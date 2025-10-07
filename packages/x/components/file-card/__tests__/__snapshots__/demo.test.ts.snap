@@ -2,10 +2,10 @@
 
 exports[`renders components/file-card/demo/audio.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-file-card css-var-«R0»"
+    class="ant-file-card css-var-_R_0_"
   >
     <audio
       class="ant-file-card-audio"
@@ -14,7 +14,7 @@ exports[`renders components/file-card/demo/audio.tsx correctly 1`] = `
     />
   </div>
   <div
-    class="ant-file-card css-var-«R0»"
+    class="ant-file-card css-var-_R_0_"
   >
     <video
       class="ant-file-card-video"
@@ -23,7 +23,7 @@ exports[`renders components/file-card/demo/audio.tsx correctly 1`] = `
     />
   </div>
   <div
-    class="ant-file-card css-var-«R0»"
+    class="ant-file-card css-var-_R_0_"
   >
     <div
       class="ant-file-card-file"
@@ -85,7 +85,7 @@ exports[`renders components/file-card/demo/audio.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-file-card css-var-«R0»"
+    class="ant-file-card css-var-_R_0_"
   >
     <div
       class="ant-file-card-file"
@@ -151,10 +151,10 @@ exports[`renders components/file-card/demo/audio.tsx correctly 1`] = `
 
 exports[`renders components/file-card/demo/basic.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-file-card css-var-«R0»"
+    class="ant-file-card css-var-_R_0_"
   >
     <div
       class="ant-file-card-file"
@@ -209,7 +209,7 @@ exports[`renders components/file-card/demo/basic.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-file-card css-var-«R0»"
+    class="ant-file-card css-var-_R_0_"
   >
     <div
       class="ant-file-card-file"
@@ -264,7 +264,7 @@ exports[`renders components/file-card/demo/basic.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-file-card css-var-«R0»"
+    class="ant-file-card css-var-_R_0_"
   >
     <div
       class="ant-file-card-file"
@@ -319,7 +319,7 @@ exports[`renders components/file-card/demo/basic.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-file-card css-var-«R0»"
+    class="ant-file-card css-var-_R_0_"
   >
     <div
       class="ant-file-card-file"
@@ -374,7 +374,7 @@ exports[`renders components/file-card/demo/basic.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-file-card css-var-«R0»"
+    class="ant-file-card css-var-_R_0_"
   >
     <div
       class="ant-file-card-file"
@@ -429,7 +429,7 @@ exports[`renders components/file-card/demo/basic.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-file-card css-var-«R0»"
+    class="ant-file-card css-var-_R_0_"
   >
     <div
       class="ant-file-card-file"
@@ -484,7 +484,7 @@ exports[`renders components/file-card/demo/basic.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-file-card css-var-«R0»"
+    class="ant-file-card css-var-_R_0_"
   >
     <div
       class="ant-file-card-file"
@@ -539,7 +539,7 @@ exports[`renders components/file-card/demo/basic.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-file-card css-var-«R0»"
+    class="ant-file-card css-var-_R_0_"
   >
     <div
       class="ant-file-card-file"
@@ -595,7 +595,7 @@ exports[`renders components/file-card/demo/basic.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-file-card css-var-«R0»"
+    class="ant-file-card css-var-_R_0_"
   >
     <div
       class="ant-file-card-file"
@@ -651,7 +651,7 @@ exports[`renders components/file-card/demo/basic.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-file-card css-var-«R0»"
+    class="ant-file-card css-var-_R_0_"
   >
     <div
       class="ant-file-card-file"
@@ -710,7 +710,7 @@ exports[`renders components/file-card/demo/basic.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-file-card css-var-«R0»"
+    class="ant-file-card css-var-_R_0_"
   >
     <div
       class="ant-file-card-file"
@@ -770,10 +770,10 @@ exports[`renders components/file-card/demo/basic.tsx correctly 1`] = `
 
 exports[`renders components/file-card/demo/icon.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-file-card css-var-«R0»"
+    class="ant-file-card css-var-_R_0_"
   >
     <div
       class="ant-file-card-file"
@@ -828,7 +828,7 @@ exports[`renders components/file-card/demo/icon.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-file-card css-var-«R0»"
+    class="ant-file-card css-var-_R_0_"
   >
     <div
       class="ant-file-card-file"
@@ -894,13 +894,13 @@ Array [
     rel="preload"
   />,
   <div
-    class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+    class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
   >
     <div
-      class="ant-file-card css-var-«R0»"
+      class="ant-file-card css-var-_R_0_"
     >
       <div
-        class="ant-image ant-file-card-image css-var-«R0» ant-image-css-var"
+        class="ant-image ant-file-card-image css-var-_R_0_ ant-image-css-var"
       >
         <img
           alt="image-file.png"
@@ -913,10 +913,10 @@ Array [
       </div>
     </div>
     <div
-      class="ant-file-card css-var-«R0»"
+      class="ant-file-card css-var-_R_0_"
     >
       <div
-        class="ant-image ant-file-card-image css-var-«R0» ant-image-css-var"
+        class="ant-image ant-file-card-image css-var-_R_0_ ant-image-css-var"
         style="width:100px;height:100px"
       >
         <img
@@ -933,7 +933,7 @@ Array [
       </div>
     </div>
     <div
-      class="ant-file-card css-var-«R0»"
+      class="ant-file-card css-var-_R_0_"
     >
       <div
         class="ant-file-card-file"
@@ -993,35 +993,35 @@ Array [
 
 exports[`renders components/file-card/demo/list.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
   style="width:900px"
 >
   <div
     class="ant-file-card-list-wrapper"
   >
     <div
-      class="ant-file-card-list css-var-«R0»"
+      class="ant-file-card-list css-var-_R_0_"
     />
   </div>
   <div
     class="ant-file-card-list-wrapper"
   >
     <div
-      class="ant-file-card-list css-var-«R0» ant-file-card-list-small"
+      class="ant-file-card-list css-var-_R_0_ ant-file-card-list-small"
     />
   </div>
   <div
     class="ant-file-card-list-wrapper"
   >
     <div
-      class="ant-file-card-list css-var-«R0»"
+      class="ant-file-card-list css-var-_R_0_"
     />
   </div>
   <div
     class="ant-file-card-list-wrapper"
   >
     <div
-      class="ant-file-card-list css-var-«R0»"
+      class="ant-file-card-list css-var-_R_0_"
     />
   </div>
 </div>
@@ -1029,7 +1029,7 @@ exports[`renders components/file-card/demo/list.tsx correctly 1`] = `
 
 exports[`renders components/file-card/demo/mask.tsx correctly 1`] = `
 <div
-  class="ant-file-card css-var-«R0»"
+  class="ant-file-card css-var-_R_0_"
 >
   <div
     class="ant-file-card-file"
@@ -1116,11 +1116,11 @@ exports[`renders components/file-card/demo/mask.tsx correctly 1`] = `
 
 exports[`renders components/file-card/demo/overflow.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
     aria-label="segmented control"
-    class="ant-segmented css-var-«R0»"
+    class="ant-segmented css-var-_R_0_"
     role="radiogroup"
     style="margin-inline-end:auto"
     tabindex="0"
@@ -1186,7 +1186,7 @@ exports[`renders components/file-card/demo/overflow.tsx correctly 1`] = `
     class="ant-file-card-list-wrapper"
   >
     <div
-      class="ant-file-card-list css-var-«R0» ant-file-card-list-overflow-wrap"
+      class="ant-file-card-list css-var-_R_0_ ant-file-card-list-overflow-wrap"
     />
   </div>
 </div>
@@ -1194,10 +1194,10 @@ exports[`renders components/file-card/demo/overflow.tsx correctly 1`] = `
 
 exports[`renders components/file-card/demo/size.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-file-card css-var-«R0»"
+    class="ant-file-card css-var-_R_0_"
   >
     <div
       class="ant-file-card-file ant-file-card-file-small"
@@ -1252,7 +1252,7 @@ exports[`renders components/file-card/demo/size.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-file-card css-var-«R0»"
+    class="ant-file-card css-var-_R_0_"
   >
     <div
       class="ant-file-card-file"
