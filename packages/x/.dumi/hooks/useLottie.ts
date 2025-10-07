@@ -108,7 +108,7 @@ const useLottie = (options: UseLottieOptions) => {
 
   return [
     containerRef,
-    animationInstanceRef.current,
+    animationInstanceRef,
     {
       isIntersected,
       error,

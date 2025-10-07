@@ -1,6 +1,6 @@
 import { createStyles } from 'antd-style';
 import { useLocation, useNavigate } from 'dumi';
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useEffect, useRef } from 'react';
 import useLocale from '../../../hooks/useLocale';
 import { getLocalizedPathname, isZhCN } from '../../../theme/utils';
 import Container from '../common/Container';
@@ -40,6 +40,15 @@ const DesignBanner: React.FC = () => {
 
   const { styles } = useStyle();
   const LottieComponent = lazy(() => import('./Lottie'));
+  const lottieRef = useRef<{ animation: any }>(null);
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      if (scrollY > 600) {
+        lottieRef?.current?.animation?.current?.play?.();
+      }
+    });
+  }, []);
   return (
     <Container
       className={styles.container}
@@ -51,6 +60,10 @@ const DesignBanner: React.FC = () => {
     >
       <Suspense fallback={<></>}>
         <LottieComponent
+          config={{
+            autoplay: false,
+          }}
+          ref={lottieRef}
           className={styles.lottie}
           path="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*eZsQT5KKBtIAAAAAAAAAAAAADgCCAQ"
         />
