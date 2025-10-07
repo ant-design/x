@@ -10,19 +10,19 @@ const locales = {
     root: '根节点',
     prefix: '前缀',
     input: '输入框',
-    content: '内容',
     suffix: '后缀',
     footer: '底部',
     switch: '开关',
+    content: '内容',
   },
   en: {
     root: 'Root',
     prefix: 'Prefix',
-    content: 'Content',
     input: 'Input',
     suffix: 'Suffix',
     footer: 'Footer',
     switch: 'Switch',
+    content: 'Content',
   },
 };
 
@@ -49,7 +49,6 @@ const App: React.FC = () => {
         semantics={[
           { name: 'root', desc: locale.root },
           { name: 'prefix', desc: locale.prefix },
-          { name: 'content', desc: locale.content },
           { name: 'input', desc: locale.input },
           { name: 'suffix', desc: locale.suffix },
           { name: 'footer', desc: locale.footer },

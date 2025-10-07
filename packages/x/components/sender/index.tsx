@@ -301,6 +301,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
       inputRef.current?.focus();
     }
   };
+
   // ============================ Render ============================
   return (
     <div
