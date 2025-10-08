@@ -39,7 +39,9 @@ const DesignBanner: React.FC = () => {
   const navigate = useNavigate();
 
   const { styles } = useStyle();
+
   const LottieComponent = lazy(() => import('./Lottie'));
+
   const lottieRef = useRef<{ animation: any }>(null);
   useEffect(() => {
     window.addEventListener('scroll', () => {
