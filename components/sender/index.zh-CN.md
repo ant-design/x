@@ -46,6 +46,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 | loading | 是否加载中 | boolean | false | - |
 | header | 头部面板 | ReactNode | - | - |
 | prefix | 前缀内容 | ReactNode | - | - |
+| suffix | 后缀内容 | ReactNode | - | - |
 | footer | 底部内容 | ReactNode \| (info: { components: ActionsComponents }) => ReactNode | - | - |
 | readOnly | 是否让输入框只读 | boolean | false | - |
 | rootClassName | 根元素样式类 | string | - | - |
