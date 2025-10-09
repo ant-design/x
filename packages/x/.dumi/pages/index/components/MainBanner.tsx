@@ -2,7 +2,8 @@ import { Button } from 'antd';
 import { createStyles } from 'antd-style';
 import classnames from 'classnames';
 import { useLocation } from 'dumi';
-import React, { lazy, Suspense } from 'react';
+import type { AnimationDirection, AnimationItem } from 'lottie-web';
+import React, { lazy, Suspense, useRef } from 'react';
 import useLocale from '../../../hooks/useLocale';
 import Link from '../../../theme/common/Link';
 import { getLocalizedPathname, isZhCN } from '../../../theme/utils';
@@ -218,10 +219,29 @@ const MainBanner: React.FC = () => {
 
   const LottieComponent = lazy(() => import('./Lottie'));
 
+  const animationDirection = useRef<AnimationDirection>(1);
+
+  const onLoad = (animation: AnimationItem) => {
+    animation?.addEventListener('complete', () => {
+      animation.loop = true;
+      animation.setSpeed(0.7);
+      animation.playSegments([100, 150], false);
+    });
+  };
+  const onBackgroundLoad = (animation: AnimationItem) => {
+    animation?.addEventListener('complete', () => {
+      animationDirection.current = animationDirection.current === -1 ? 1 : -1;
+      animation.setDirection(animationDirection.current);
+      animation.setSpeed(0.6);
+      animation.play();
+    });
+  };
+
   return (
     <section className={styles.banner}>
       <Suspense>
         <LottieComponent
+          onLoad={onBackgroundLoad}
           className={styles.background}
           path="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*3QcuQpaOguQAAAAAAAAAAAAADgCCAQ"
         />
@@ -254,8 +274,9 @@ const MainBanner: React.FC = () => {
         {!isMobile && (
           <Suspense>
             <LottieComponent
+              onLoad={onLoad}
               className={classnames(styles.lottie, direction === 'rtl' && styles.lottie_rtl)}
-              path="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*YbV2QqZdDQ0AAAAAAAAAAAAADgCCAQ"
+              path="https://mdn.alipayobjects.com/huamei_lkxviz/afts/file/fy4QS4amXA4AAAAAQPAAAAgADtFMAQFr"
             />
           </Suspense>
         )}

@@ -153,8 +153,13 @@ const useStyle = createStyles(({ token, css }) => {
       width: 40px;
       height: 40px;
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       img {
+        width: auto;
+        height: 40px;
         position: absolute;
       }
     `,
@@ -169,7 +174,7 @@ const DesignGuide: React.FC = () => {
 
   const items = [
     {
-      icon: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*NBliSL6_YIsAAAAAAAAAAAAADgCCAQ/original',
+      icon: 'https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/f14LTKOFxRsAAAAAQbAAAAgADtFMAQFr/original',
       label: locale.awaken,
       title: locale.awaken_title,
       desc: locale.awaken_desc,
@@ -179,7 +184,7 @@ const DesignGuide: React.FC = () => {
       path: 'components/welcome',
     },
     {
-      icon: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*3XXESYNxPNkAAAAAAAAAAAAADgCCAQ/original',
+      icon: 'https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/dGfqSaM9ZxoAAAAAQaAAAAgADtFMAQFr/original',
       label: locale.express,
       title: locale.express_title,
       desc: locale.express_desc,
@@ -189,7 +194,7 @@ const DesignGuide: React.FC = () => {
       path: 'components/attachments',
     },
     {
-      icon: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*pX3DR5MaxE8AAAAAAAAAAAAADgCCAQ/original',
+      icon: 'https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/BQaCTIUU-CkAAAAAQZAAAAgADtFMAQFr/original',
       label: locale.confirm,
       title: locale.confirm_title,
       desc: locale.confirm_desc,
@@ -199,7 +204,7 @@ const DesignGuide: React.FC = () => {
       path: 'components/think',
     },
     {
-      icon: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*jVNbRLytvWMAAAAAAAAAAAAADgCCAQ/original',
+      icon: 'https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/r-DuSZG-9NIAAAAAQdAAAAgADtFMAQFr/original',
       label: locale.feedback,
       title: locale.feedback_title,
       desc: locale.feedback_desc,

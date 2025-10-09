@@ -21,7 +21,6 @@ const useStyle = createStyles(({ css }) => {
     container: css`
       height: 500px;
       overflow: hidden;
-
       cursor: pointer;
     `,
     lottie: css`
@@ -43,13 +42,17 @@ const DesignBanner: React.FC = () => {
   const LottieComponent = lazy(() => import('./Lottie'));
 
   const lottieRef = useRef<{ animation: any }>(null);
+
+  const onScrollFn = () => {
+    if (window?.scrollY > 600) {
+      lottieRef?.current?.animation?.play?.();
+    }
+  };
   useEffect(() => {
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      if (scrollY > 600) {
-        lottieRef?.current?.animation?.current?.play?.();
-      }
-    });
+    window.addEventListener('scroll', onScrollFn);
+    return () => {
+      window.removeEventListener('scroll', onScrollFn);
+    };
   }, []);
   return (
     <Container
@@ -67,7 +70,7 @@ const DesignBanner: React.FC = () => {
           }}
           ref={lottieRef}
           className={styles.lottie}
-          path="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*eZsQT5KKBtIAAAAAAAAAAAAADgCCAQ"
+          path="https://mdn.alipayobjects.com/huamei_lkxviz/afts/file/nLaTTqe5cMAAAAAAQiAAAAgADtFMAQFr"
         />
       </Suspense>
     </Container>
