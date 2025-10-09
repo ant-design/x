@@ -60,7 +60,7 @@ const DesignBanner: React.FC = () => {
         navigate(getLocalizedPathname('docs/spec/introduce', isZhCN(pathname), search))
       }
     >
-      <Suspense fallback={<></>}>
+      <Suspense>
         <LottieComponent
           config={{
             autoplay: false,

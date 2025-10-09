@@ -220,7 +220,7 @@ const MainBanner: React.FC = () => {
 
   return (
     <section className={styles.banner}>
-      <Suspense fallback={<></>}>
+      <Suspense>
         <LottieComponent
           className={styles.background}
           path="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*3QcuQpaOguQAAAAAAAAAAAAADgCCAQ"
@@ -252,7 +252,7 @@ const MainBanner: React.FC = () => {
           </div>
         </div>
         {!isMobile && (
-          <Suspense fallback={<></>}>
+          <Suspense>
             <LottieComponent
               className={classnames(styles.lottie, direction === 'rtl' && styles.lottie_rtl)}
               path="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*YbV2QqZdDQ0AAAAAAAAAAAAADgCCAQ"
