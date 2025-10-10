@@ -100,7 +100,7 @@
     "@codesandbox/sandpack-react": "^2.19.8",
     "@emotion/react": "^11.13.5",
     "@emotion/server": "^11.11.0",
-    "@happy-dom/jest-environment": "^19.0.2",
+    "@happy-dom/jest-environment": "^20.0.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.3.1",
     "@madccc/duplicate-package-checker-webpack-plugin": "^1.0.0",
     "@microflash/rehype-figure": "^2.1.1",
