@@ -1,12 +1,8 @@
 import { createStyles } from 'antd-style';
 import classnames from 'classnames';
-import React from 'react';
-import CompIntroduction from './components/CompIntroduction';
+import React, { lazy, Suspense } from 'react';
 import DesignBanner from './components/DesignBanner';
-import DesignFramework from './components/DesignFramework';
-import DesignGuide from './components/DesignGuide';
 import MainBanner from './components/MainBanner';
-import SceneIntroduction from './components/SceneIntroduction';
 
 const useStyle = createStyles(({ token, css }) => {
   return {
@@ -32,6 +28,14 @@ const useStyle = createStyles(({ token, css }) => {
 const Homepage: React.FC = () => {
   const { styles } = useStyle();
 
+  const DesignFramework = lazy(() => import('./components/DesignFramework'));
+
+  const CompIntroduction = lazy(() => import('./components/CompIntroduction'));
+
+  const SceneIntroduction = lazy(() => import('./components/SceneIntroduction'));
+
+  const DesignGuide = lazy(() => import('./components/DesignGuide'));
+
   return (
     <main>
       <MainBanner />
@@ -39,14 +43,22 @@ const Homepage: React.FC = () => {
         <DesignBanner />
       </section>
       <section className={classnames(styles.section, styles.container)}>
-        <DesignGuide />
+        <Suspense>
+          <DesignGuide />
+        </Suspense>
       </section>
       <section className={classnames(styles.section, styles.container)}>
-        <SceneIntroduction />
-        <CompIntroduction />
+        <Suspense>
+          <SceneIntroduction />
+        </Suspense>
+        <Suspense>
+          <CompIntroduction />
+        </Suspense>
       </section>
       <section className={classnames(styles.section, styles.framework, styles.container)}>
-        <DesignFramework />
+        <Suspense>
+          <DesignFramework />
+        </Suspense>
       </section>
     </main>
   );

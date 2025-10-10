@@ -1,8 +1,7 @@
 import { Helmet } from 'dumi';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
-
-import Footer from '../../slots/Footer';
+import InViewSuspense from '../../slots/Content/InViewSuspense';
 
 interface IndexLayoutProps {
   title?: string;
@@ -11,6 +10,7 @@ interface IndexLayoutProps {
 
 const IndexLayout: React.FC<PropsWithChildren<IndexLayoutProps>> = (props) => {
   const { children, title, desc } = props;
+  const Footer = React.lazy(() => import('../../slots/Footer'));
   return (
     <>
       <Helmet>
@@ -19,7 +19,9 @@ const IndexLayout: React.FC<PropsWithChildren<IndexLayoutProps>> = (props) => {
         {desc && <meta name="description" content={desc} />}
       </Helmet>
       <div style={{ minHeight: '100vh' }}>{children}</div>
-      <Footer />
+      <InViewSuspense>
+        <Footer />
+      </InViewSuspense>
     </>
   );
 };

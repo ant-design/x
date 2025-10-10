@@ -2,16 +2,16 @@
 
 exports[`renders components/bubble/demo/animation.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-«r3s» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+  class="ant-flex css-var-_r_3s_ ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
 >
   <div
-    class="ant-flex css-var-«r3s» ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-_r_3s_ ant-flex-align-center ant-flex-gap-small"
   >
     <span>
       非流式数据 / Non-streaming data:
     </span>
     <button
-      class="ant-btn css-var-«r3s» ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
+      class="ant-btn css-var-_r_3s_ ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
       type="button"
     >
       <span>
@@ -19,7 +19,7 @@ exports[`renders components/bubble/demo/animation.tsx extend context correctly 1
       </span>
     </button>
     <button
-      class="ant-btn css-var-«r3s» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-_r_3s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -28,16 +28,16 @@ exports[`renders components/bubble/demo/animation.tsx extend context correctly 1
     </button>
   </div>
   <div
-    class="ant-flex css-var-«r3s» ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-_r_3s_ ant-flex-align-center ant-flex-gap-small"
   >
     <span>
       动画效果 / Animation effects:
     </span>
     <div
-      class="ant-radio-group ant-radio-group-outline css-var-«r3s» ant-radio-css-var"
+      class="ant-radio-group ant-radio-group-outline css-var-_r_3s_ ant-radio-css-var"
     >
       <label
-        class="ant-radio-wrapper ant-radio-wrapper-checked css-var-«r3s» ant-radio-css-var"
+        class="ant-radio-wrapper ant-radio-wrapper-checked css-var-_r_3s_ ant-radio-css-var"
       >
         <span
           class="ant-radio ant-wave-target ant-radio-checked"
@@ -60,7 +60,7 @@ exports[`renders components/bubble/demo/animation.tsx extend context correctly 1
         </span>
       </label>
       <label
-        class="ant-radio-wrapper css-var-«r3s» ant-radio-css-var"
+        class="ant-radio-wrapper css-var-_r_3s_ ant-radio-css-var"
       >
         <span
           class="ant-radio ant-wave-target"
@@ -84,14 +84,14 @@ exports[`renders components/bubble/demo/animation.tsx extend context correctly 1
     </div>
   </div>
   <div
-    class="ant-flex css-var-«r3s» ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-_r_3s_ ant-flex-align-center ant-flex-gap-small"
   >
     <span>
       保留公共前缀 / Preserve common prefix:
     </span>
     <button
       aria-checked="false"
-      class="ant-switch css-var-«r3s»"
+      class="ant-switch css-var-_r_3s_"
       role="switch"
       type="button"
     >
@@ -111,20 +111,20 @@ exports[`renders components/bubble/demo/animation.tsx extend context correctly 1
     </button>
   </div>
   <div
-    class="ant-divider css-var-«r3s» ant-divider-horizontal ant-divider-rail"
+    class="ant-divider css-var-_r_3s_ ant-divider-horizontal ant-divider-rail"
     role="separator"
   />
   <div
-    class="ant-flex css-var-«r3s» ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-_r_3s_ ant-flex-align-center ant-flex-gap-small"
   >
     <div
-      class="ant-bubble css-var-«r3s» ant-bubble-start ant-bubble-loading"
+      class="ant-bubble css-var-_r_3s_ ant-bubble-start ant-bubble-loading"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r3s» ant-avatar-css-var"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_3s_ ant-avatar-css-var"
         >
           <span
             aria-label="user"
@@ -169,13 +169,13 @@ exports[`renders components/bubble/demo/animation.tsx extend context correctly 2
 
 exports[`renders components/bubble/demo/basic.tsx extend context correctly 1`] = `
 <div
-  class="ant-bubble css-var-«r3l» ant-bubble-start"
+  class="ant-bubble css-var-_r_3l_ ant-bubble-start"
 >
   <div
     class="ant-bubble-avatar"
   >
     <span
-      class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r3l» ant-avatar-css-var"
+      class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_3l_ ant-avatar-css-var"
     >
       <span
         aria-label="ant-design"
@@ -219,13 +219,13 @@ exports[`renders components/bubble/demo/basic.tsx extend context correctly 1`] =
       class="ant-bubble-footer ant-bubble-footer-start"
     >
       <div
-        class="ant-actions css-var-«r3l»"
+        class="ant-actions css-var-_r_3l_"
       >
         <div
           class="ant-actions-list ant-actions-variant-borderless"
         >
           <span
-            class="ant-actions-copy ant-actions-copy css-var-«r3l» ant-actions-item css-var-«r3l»"
+            class="ant-actions-copy ant-actions-copy css-var-_r_3l_ ant-actions-item css-var-_r_3l_"
           >
             <button
               aria-describedby="test-id"
@@ -254,7 +254,7 @@ exports[`renders components/bubble/demo/basic.tsx extend context correctly 1`] =
               </span>
             </button>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r3l» ant-tooltip-placement-top"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_3l_ ant-tooltip-placement-top"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -302,7 +302,7 @@ exports[`renders components/bubble/demo/basic.tsx extend context correctly 1`] =
               </span>
             </div>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r3l» ant-tooltip-placement-top"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_3l_ ant-tooltip-placement-top"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -336,7 +336,7 @@ exports[`renders components/bubble/demo/custom-content.tsx extend context correc
   style="height: 100px;"
 >
   <div
-    class="ant-bubble css-var-«r3k» ant-bubble-start"
+    class="ant-bubble css-var-_r_3k_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -345,10 +345,10 @@ exports[`renders components/bubble/demo/custom-content.tsx extend context correc
         class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
       >
         <div
-          class="ant-flex css-var-«r3k» ant-flex-align-center ant-flex-gap-middle"
+          class="ant-flex css-var-_r_3k_ ant-flex-align-center ant-flex-gap-middle"
         >
           <div
-            class="ant-image css-var-«r3k» ant-image-css-var"
+            class="ant-image css-var-_r_3k_ ant-image-css-var"
             style="height: 50px;"
           >
             <img
@@ -372,7 +372,7 @@ exports[`renders components/bubble/demo/custom-content.tsx extend context correc
         class="ant-bubble-footer ant-bubble-footer-start"
       >
         <button
-          class="ant-btn css-var-«r3k» ant-btn-text ant-btn-color-default ant-btn-variant-text"
+          class="ant-btn css-var-_r_3k_ ant-btn-text ant-btn-color-default ant-btn-variant-text"
           type="button"
         >
           <span>
@@ -389,20 +389,20 @@ exports[`renders components/bubble/demo/custom-content.tsx extend context correc
 
 exports[`renders components/bubble/demo/editable.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-«r3d» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+  class="ant-flex css-var-_r_3d_ ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
   style="min-height: 200px;"
 >
   <div
-    class="ant-flex css-var-«r3d»"
+    class="ant-flex css-var-_r_3d_"
   >
     <div
-      class="ant-bubble css-var-«r3d» ant-bubble-start"
+      class="ant-bubble css-var-_r_3d_ ant-bubble-start"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r3d» ant-avatar-css-var"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_3d_ ant-avatar-css-var"
         >
           <span
             aria-label="user"
@@ -437,7 +437,7 @@ exports[`renders components/bubble/demo/editable.tsx extend context correctly 1`
           class="ant-bubble-footer ant-bubble-footer-start"
         >
           <div
-            class="ant-actions css-var-«r3d»"
+            class="ant-actions css-var-_r_3d_"
           >
             <div
               class="ant-actions-list ant-actions-variant-borderless"
@@ -470,7 +470,7 @@ exports[`renders components/bubble/demo/editable.tsx extend context correctly 1`
                   </span>
                 </div>
                 <div
-                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r3d» ant-tooltip-placement-top"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_3d_ ant-tooltip-placement-top"
                   style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                 >
                   <div
@@ -497,17 +497,17 @@ exports[`renders components/bubble/demo/editable.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-flex css-var-«r3d»"
+    class="ant-flex css-var-_r_3d_"
   >
     <div
-      class="ant-bubble css-var-«r3d» ant-bubble-end"
+      class="ant-bubble css-var-_r_3d_ ant-bubble-end"
       style="width: 100%;"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r3d» ant-avatar-css-var"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_3d_ ant-avatar-css-var"
         >
           <span
             aria-label="user"
@@ -542,7 +542,7 @@ exports[`renders components/bubble/demo/editable.tsx extend context correctly 1`
           class="ant-bubble-footer ant-bubble-footer-end"
         >
           <div
-            class="ant-actions css-var-«r3d»"
+            class="ant-actions css-var-_r_3d_"
           >
             <div
               class="ant-actions-list ant-actions-variant-borderless"
@@ -575,7 +575,7 @@ exports[`renders components/bubble/demo/editable.tsx extend context correctly 1`
                   </span>
                 </div>
                 <div
-                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r3d» ant-tooltip-placement-top"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_3d_ ant-tooltip-placement-top"
                   style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                 >
                   <div
@@ -608,22 +608,22 @@ exports[`renders components/bubble/demo/editable.tsx extend context correctly 2`
 
 exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-«r2k» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+  class="ant-flex css-var-_r_2k_ ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
 >
   <div
-    class="ant-flex css-var-«r2k» ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex css-var-_r_2k_ ant-flex-wrap-wrap ant-flex-gap-small"
   >
     <div
       style="width: 100%;"
     >
       <div
-        class="ant-bubble css-var-«r2k» ant-bubble-start"
+        class="ant-bubble css-var-_r_2k_ ant-bubble-start"
       >
         <div
           class="ant-bubble-avatar"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r2k» ant-avatar-css-var"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_2k_ ant-avatar-css-var"
           >
             <span
               aria-label="user"
@@ -663,7 +663,7 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
             class="ant-bubble-footer ant-bubble-footer-start"
           >
             <div
-              class="ant-actions css-var-«r2k»"
+              class="ant-actions css-var-_r_2k_"
             >
               <div
                 class="ant-actions-list ant-actions-variant-borderless"
@@ -696,7 +696,7 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
                     </span>
                   </div>
                   <div
-                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r2k» ant-tooltip-placement-top"
+                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_2k_ ant-tooltip-placement-top"
                     style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                   >
                     <div
@@ -744,7 +744,7 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
                     </span>
                   </div>
                   <div
-                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r2k» ant-tooltip-placement-top"
+                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_2k_ ant-tooltip-placement-top"
                     style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                   >
                     <div
@@ -772,19 +772,19 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
     </div>
   </div>
   <div
-    class="ant-flex css-var-«r2k» ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex css-var-_r_2k_ ant-flex-wrap-wrap ant-flex-gap-small"
   >
     <div
       style="width: 100%;"
     >
       <div
-        class="ant-bubble css-var-«r2k» ant-bubble-end"
+        class="ant-bubble css-var-_r_2k_ ant-bubble-end"
       >
         <div
           class="ant-bubble-avatar"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r2k» ant-avatar-css-var"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_2k_ ant-avatar-css-var"
           >
             <span
               aria-label="user"
@@ -827,7 +827,7 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
               class="ant-bubble-footer ant-bubble-footer-end"
             >
               <div
-                class="ant-actions css-var-«r2k»"
+                class="ant-actions css-var-_r_2k_"
               >
                 <div
                   class="ant-actions-list ant-actions-variant-borderless"
@@ -860,7 +860,7 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
                       </span>
                     </div>
                     <div
-                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r2k» ant-tooltip-placement-top"
+                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_2k_ ant-tooltip-placement-top"
                       style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                     >
                       <div
@@ -908,7 +908,7 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
                       </span>
                     </div>
                     <div
-                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r2k» ant-tooltip-placement-top"
+                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_2k_ ant-tooltip-placement-top"
                       style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                     >
                       <div
@@ -937,19 +937,19 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
     </div>
   </div>
   <div
-    class="ant-flex css-var-«r2k» ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex css-var-_r_2k_ ant-flex-wrap-wrap ant-flex-gap-small"
   >
     <div
       style="width: 100%;"
     >
       <div
-        class="ant-bubble css-var-«r2k» ant-bubble-start"
+        class="ant-bubble css-var-_r_2k_ ant-bubble-start"
       >
         <div
           class="ant-bubble-avatar"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r2k» ant-avatar-css-var"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_2k_ ant-avatar-css-var"
           >
             <span
               aria-label="user"
@@ -989,7 +989,7 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
             class="ant-bubble-footer ant-bubble-footer-end"
           >
             <div
-              class="ant-actions css-var-«r2k»"
+              class="ant-actions css-var-_r_2k_"
             >
               <div
                 class="ant-actions-list ant-actions-variant-borderless"
@@ -1022,7 +1022,7 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
                     </span>
                   </div>
                   <div
-                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r2k» ant-tooltip-placement-top"
+                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_2k_ ant-tooltip-placement-top"
                     style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                   >
                     <div
@@ -1070,7 +1070,7 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
                     </span>
                   </div>
                   <div
-                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r2k» ant-tooltip-placement-top"
+                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_2k_ ant-tooltip-placement-top"
                     style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                   >
                     <div
@@ -1098,19 +1098,19 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
     </div>
   </div>
   <div
-    class="ant-flex css-var-«r2k» ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex css-var-_r_2k_ ant-flex-wrap-wrap ant-flex-gap-small"
   >
     <div
       style="width: 100%;"
     >
       <div
-        class="ant-bubble css-var-«r2k» ant-bubble-end"
+        class="ant-bubble css-var-_r_2k_ ant-bubble-end"
       >
         <div
           class="ant-bubble-avatar"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r2k» ant-avatar-css-var"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_2k_ ant-avatar-css-var"
           >
             <span
               aria-label="user"
@@ -1153,7 +1153,7 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
               class="ant-bubble-footer ant-bubble-footer-start"
             >
               <div
-                class="ant-actions css-var-«r2k»"
+                class="ant-actions css-var-_r_2k_"
               >
                 <div
                   class="ant-actions-list ant-actions-variant-borderless"
@@ -1186,7 +1186,7 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
                       </span>
                     </div>
                     <div
-                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r2k» ant-tooltip-placement-top"
+                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_2k_ ant-tooltip-placement-top"
                       style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                     >
                       <div
@@ -1234,7 +1234,7 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
                       </span>
                     </div>
                     <div
-                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r2k» ant-tooltip-placement-top"
+                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_2k_ ant-tooltip-placement-top"
                       style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                     >
                       <div
@@ -1269,22 +1269,22 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 2`] 
 
 exports[`renders components/bubble/demo/header.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-«r2j» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+  class="ant-flex css-var-_r_2j_ ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
 >
   <div
-    class="ant-flex css-var-«r2j» ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex css-var-_r_2j_ ant-flex-wrap-wrap ant-flex-gap-small"
   >
     <div
       style="width: 100%;"
     >
       <div
-        class="ant-bubble css-var-«r2j» ant-bubble-start"
+        class="ant-bubble css-var-_r_2j_ ant-bubble-start"
       >
         <div
           class="ant-bubble-avatar"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r2j» ant-avatar-css-var"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_2j_ ant-avatar-css-var"
           >
             <span
               aria-label="user"
@@ -1325,19 +1325,19 @@ exports[`renders components/bubble/demo/header.tsx extend context correctly 1`] 
     </div>
   </div>
   <div
-    class="ant-flex css-var-«r2j» ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex css-var-_r_2j_ ant-flex-wrap-wrap ant-flex-gap-small"
   >
     <div
       style="width: 100%;"
     >
       <div
-        class="ant-bubble css-var-«r2j» ant-bubble-end"
+        class="ant-bubble css-var-_r_2j_ ant-bubble-end"
       >
         <div
           class="ant-bubble-avatar"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r2j» ant-avatar-css-var"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_2j_ ant-avatar-css-var"
           >
             <span
               aria-label="user"
@@ -1384,17 +1384,17 @@ exports[`renders components/bubble/demo/header.tsx extend context correctly 2`] 
 
 exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-«re» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+  class="ant-flex css-var-_r_e_ ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
   style="height: 650px;"
 >
   <div
-    class="ant-flex css-var-«re» ant-flex-justify-space-between ant-flex-gap-small"
+    class="ant-flex css-var-_r_e_ ant-flex-justify-space-between ant-flex-gap-small"
   >
     <div
-      class="ant-flex css-var-«re» ant-flex-gap-small"
+      class="ant-flex css-var-_r_e_ ant-flex-gap-small"
     >
       <button
-        class="ant-btn css-var-«re» ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
+        class="ant-btn css-var-_r_e_ ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
         type="button"
       >
         <span>
@@ -1402,7 +1402,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
         </span>
       </button>
       <button
-        class="ant-btn css-var-«re» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+        class="ant-btn css-var-_r_e_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
         type="button"
       >
         <span>
@@ -1410,7 +1410,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
         </span>
       </button>
       <button
-        class="ant-btn css-var-«re» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+        class="ant-btn css-var-_r_e_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
         type="button"
       >
         <span>
@@ -1418,7 +1418,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
         </span>
       </button>
       <button
-        class="ant-btn css-var-«re» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+        class="ant-btn css-var-_r_e_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
         type="button"
       >
         <span>
@@ -1426,7 +1426,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
         </span>
       </button>
       <button
-        class="ant-btn css-var-«re» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+        class="ant-btn css-var-_r_e_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
         type="button"
       >
         <span>
@@ -1434,7 +1434,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
         </span>
       </button>
       <button
-        class="ant-btn css-var-«re» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+        class="ant-btn css-var-_r_e_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
         type="button"
       >
         <span>
@@ -1444,16 +1444,16 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
     </div>
   </div>
   <div
-    class="ant-bubble-list css-var-«re» ant-bubble-list-autoscroll"
+    class="ant-bubble-list css-var-_r_e_ ant-bubble-list-autoscroll"
   >
     <div
-      class="ant-bubble css-var-«re» ant-bubble-start ant-bubble-loading"
+      class="ant-bubble css-var-_r_e_ ant-bubble-start ant-bubble-loading"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«re» ant-avatar-css-var"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_e_ ant-avatar-css-var"
         >
           <span
             aria-label="ant-design"
@@ -1491,13 +1491,13 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
       </span>
     </div>
     <div
-      class="ant-bubble css-var-«re» ant-bubble-end"
+      class="ant-bubble css-var-_r_e_ ant-bubble-end"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«re» ant-avatar-css-var"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_e_ ant-avatar-css-var"
         >
           <span
             aria-label="user"
@@ -1537,7 +1537,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
           class="ant-bubble-footer ant-bubble-footer-end"
         >
           <div
-            class="ant-actions css-var-«re»"
+            class="ant-actions css-var-_r_e_"
           >
             <div
               class="ant-actions-list ant-actions-variant-borderless"
@@ -1570,7 +1570,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
                   </span>
                 </div>
                 <div
-                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«re» ant-tooltip-placement-top"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_e_ ant-tooltip-placement-top"
                   style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                 >
                   <div
@@ -1596,13 +1596,13 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«re» ant-bubble-start"
+      class="ant-bubble css-var-_r_e_ ant-bubble-start"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«re» ant-avatar-css-var"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_e_ ant-avatar-css-var"
         >
           <span
             aria-label="ant-design"
@@ -1642,7 +1642,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
           class="ant-bubble-footer ant-bubble-footer-start"
         >
           <div
-            class="ant-actions css-var-«re»"
+            class="ant-actions css-var-_r_e_"
           >
             <div
               class="ant-actions-list ant-actions-variant-borderless"
@@ -1675,7 +1675,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
                   </span>
                 </div>
                 <div
-                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«re» ant-tooltip-placement-top"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_e_ ant-tooltip-placement-top"
                   style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                 >
                   <div
@@ -1723,7 +1723,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
                   </span>
                 </div>
                 <div
-                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«re» ant-tooltip-placement-top"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_e_ ant-tooltip-placement-top"
                   style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                 >
                   <div
@@ -1749,13 +1749,13 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«re» ant-bubble-end"
+      class="ant-bubble css-var-_r_e_ ant-bubble-end"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«re» ant-avatar-css-var"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_e_ ant-avatar-css-var"
         >
           <span
             aria-label="user"
@@ -1795,7 +1795,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
           class="ant-bubble-footer ant-bubble-footer-end"
         >
           <div
-            class="ant-actions css-var-«re»"
+            class="ant-actions css-var-_r_e_"
           >
             <div
               class="ant-actions-list ant-actions-variant-borderless"
@@ -1828,7 +1828,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
                   </span>
                 </div>
                 <div
-                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«re» ant-tooltip-placement-top"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_e_ ant-tooltip-placement-top"
                   style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                 >
                   <div
@@ -1861,20 +1861,20 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 2`] = 
 
 exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 1`] = `
 <div
-  class="ant-bubble-list css-var-«r1q» ant-bubble-list-autoscroll"
+  class="ant-bubble-list css-var-_r_1q_ ant-bubble-list-autoscroll"
   style="max-height: 500px;"
 >
   <div
-    class="ant-bubble css-var-«r1q» ant-bubble-start ant-bubble-loading"
+    class="ant-bubble css-var-_r_1q_ ant-bubble-start ant-bubble-loading"
     style="max-width: 90%;"
   >
     <div
-      class="ant-flex css-var-«r1q» ant-flex-align-center ant-flex-gap-small"
+      class="ant-flex css-var-_r_1q_ ant-flex-align-center ant-flex-gap-small"
     >
       <div
         aria-busy="true"
         aria-live="polite"
-        class="ant-spin ant-spin-sm ant-spin-spinning css-var-«r1q»"
+        class="ant-spin ant-spin-sm ant-spin-spinning css-var-_r_1q_"
       >
         <span
           class="ant-spin-dot-holder"
@@ -1901,7 +1901,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
     </div>
   </div>
   <div
-    class="ant-bubble css-var-«r1q» ant-bubble-end"
+    class="ant-bubble css-var-_r_1q_ ant-bubble-end"
     style="max-width: 90%;"
   >
     <div
@@ -1915,7 +1915,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
     </div>
   </div>
   <div
-    class="ant-bubble css-var-«r1q» ant-bubble-start ant-bubble-success"
+    class="ant-bubble css-var-_r_1q_ ant-bubble-start ant-bubble-success"
     style="max-width: 90%;"
   >
     <div
@@ -1930,13 +1930,13 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
         class="ant-bubble-footer ant-bubble-footer-start"
       >
         <div
-          class="ant-actions css-var-«r1q»"
+          class="ant-actions css-var-_r_1q_"
         >
           <div
             class="ant-actions-list ant-actions-variant-borderless"
           >
             <span
-              class="ant-actions-copy ant-actions-copy css-var-«r1q» ant-actions-item css-var-«r1q»"
+              class="ant-actions-copy ant-actions-copy css-var-_r_1q_ ant-actions-item css-var-_r_1q_"
             >
               <button
                 aria-describedby="test-id"
@@ -1965,7 +1965,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
                 </span>
               </button>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r1q» ant-tooltip-placement-top"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_1q_ ant-tooltip-placement-top"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
               >
                 <div
@@ -1986,7 +1986,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
               </div>
             </span>
             <div
-              class="ant-actions-feedback css-var-«r1q» ant-actions-list"
+              class="ant-actions-feedback css-var-_r_1q_ ant-actions-list"
             >
               <span
                 aria-describedby="test-id"
@@ -2014,7 +2014,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
                 </span>
               </span>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r1q» ant-tooltip-placement-top"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_1q_ ant-tooltip-placement-top"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
               >
                 <div
@@ -2040,7 +2040,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
     </div>
   </div>
   <div
-    class="ant-bubble css-var-«r1q» ant-bubble-end"
+    class="ant-bubble css-var-_r_1q_ ant-bubble-end"
     style="max-width: 90%;"
   >
     <div
@@ -2054,7 +2054,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
     </div>
   </div>
   <div
-    class="ant-bubble css-var-«r1q» ant-bubble-start ant-bubble-success"
+    class="ant-bubble css-var-_r_1q_ ant-bubble-start ant-bubble-success"
     style="max-width: 90%;"
   >
     <div
@@ -2069,13 +2069,13 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
         class="ant-bubble-footer ant-bubble-footer-start"
       >
         <div
-          class="ant-actions css-var-«r1q»"
+          class="ant-actions css-var-_r_1q_"
         >
           <div
             class="ant-actions-list ant-actions-variant-borderless"
           >
             <span
-              class="ant-actions-copy ant-actions-copy css-var-«r1q» ant-actions-item css-var-«r1q»"
+              class="ant-actions-copy ant-actions-copy css-var-_r_1q_ ant-actions-item css-var-_r_1q_"
             >
               <button
                 aria-describedby="test-id"
@@ -2104,7 +2104,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
                 </span>
               </button>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r1q» ant-tooltip-placement-top"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_1q_ ant-tooltip-placement-top"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
               >
                 <div
@@ -2125,7 +2125,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
               </div>
             </span>
             <div
-              class="ant-actions-feedback css-var-«r1q» ant-actions-list"
+              class="ant-actions-feedback css-var-_r_1q_ ant-actions-list"
             >
               <span
                 aria-describedby="test-id"
@@ -2152,7 +2152,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
                 </span>
               </span>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r1q» ant-tooltip-placement-top"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_1q_ ant-tooltip-placement-top"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
               >
                 <div
@@ -2178,7 +2178,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
     </div>
   </div>
   <div
-    class="ant-bubble css-var-«r1q» ant-bubble-end"
+    class="ant-bubble css-var-_r_1q_ ant-bubble-end"
     style="max-width: 90%;"
   >
     <div
@@ -2192,7 +2192,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
     </div>
   </div>
   <div
-    class="ant-bubble css-var-«r1q» ant-bubble-start ant-bubble-success"
+    class="ant-bubble css-var-_r_1q_ ant-bubble-start ant-bubble-success"
     style="max-width: 90%;"
   >
     <div
@@ -2207,13 +2207,13 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
         class="ant-bubble-footer ant-bubble-footer-start"
       >
         <div
-          class="ant-actions css-var-«r1q»"
+          class="ant-actions css-var-_r_1q_"
         >
           <div
             class="ant-actions-list ant-actions-variant-borderless"
           >
             <span
-              class="ant-actions-copy ant-actions-copy css-var-«r1q» ant-actions-item css-var-«r1q»"
+              class="ant-actions-copy ant-actions-copy css-var-_r_1q_ ant-actions-item css-var-_r_1q_"
             >
               <button
                 aria-describedby="test-id"
@@ -2242,7 +2242,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
                 </span>
               </button>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r1q» ant-tooltip-placement-top"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_1q_ ant-tooltip-placement-top"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
               >
                 <div
@@ -2263,7 +2263,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
               </div>
             </span>
             <div
-              class="ant-actions-feedback css-var-«r1q» ant-actions-list"
+              class="ant-actions-feedback css-var-_r_1q_ ant-actions-list"
             >
               <span
                 aria-describedby="test-id"
@@ -2290,7 +2290,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
                 </span>
               </span>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r1q» ant-tooltip-placement-top"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_1q_ ant-tooltip-placement-top"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
               >
                 <div
@@ -2316,7 +2316,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
     </div>
   </div>
   <div
-    class="ant-bubble css-var-«r1q» ant-bubble-end"
+    class="ant-bubble css-var-_r_1q_ ant-bubble-end"
     style="max-width: 90%;"
   >
     <div
@@ -2330,7 +2330,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
     </div>
   </div>
   <div
-    class="ant-bubble css-var-«r1q» ant-bubble-start ant-bubble-success"
+    class="ant-bubble css-var-_r_1q_ ant-bubble-start ant-bubble-success"
     style="max-width: 90%;"
   >
     <div
@@ -2345,13 +2345,13 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
         class="ant-bubble-footer ant-bubble-footer-start"
       >
         <div
-          class="ant-actions css-var-«r1q»"
+          class="ant-actions css-var-_r_1q_"
         >
           <div
             class="ant-actions-list ant-actions-variant-borderless"
           >
             <span
-              class="ant-actions-copy ant-actions-copy css-var-«r1q» ant-actions-item css-var-«r1q»"
+              class="ant-actions-copy ant-actions-copy css-var-_r_1q_ ant-actions-item css-var-_r_1q_"
             >
               <button
                 aria-describedby="test-id"
@@ -2380,7 +2380,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
                 </span>
               </button>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r1q» ant-tooltip-placement-top"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_1q_ ant-tooltip-placement-top"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
               >
                 <div
@@ -2401,7 +2401,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
               </div>
             </span>
             <div
-              class="ant-actions-feedback css-var-«r1q» ant-actions-list"
+              class="ant-actions-feedback css-var-_r_1q_ ant-actions-list"
             >
               <span
                 aria-describedby="test-id"
@@ -2429,7 +2429,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
                 </span>
               </span>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r1q» ant-tooltip-placement-top"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_1q_ ant-tooltip-placement-top"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
               >
                 <div
@@ -2461,16 +2461,16 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
 
 exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-«rr» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+  class="ant-flex css-var-_r_r_ ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
 >
   <div
-    class="ant-flex css-var-«rr» ant-flex-justify-space-between ant-flex-gap-small"
+    class="ant-flex css-var-_r_r_ ant-flex-justify-space-between ant-flex-gap-small"
   >
     <div
-      class="ant-flex css-var-«rr» ant-flex-gap-small"
+      class="ant-flex css-var-_r_r_ ant-flex-gap-small"
     >
       <button
-        class="ant-btn css-var-«rr» ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
+        class="ant-btn css-var-_r_r_ ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
         type="button"
       >
         <span>
@@ -2478,7 +2478,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
         </span>
       </button>
       <button
-        class="ant-btn css-var-«rr» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+        class="ant-btn css-var-_r_r_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
         type="button"
       >
         <span>
@@ -2486,7 +2486,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
         </span>
       </button>
       <button
-        class="ant-btn css-var-«rr» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+        class="ant-btn css-var-_r_r_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
         type="button"
       >
         <span>
@@ -2494,7 +2494,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
         </span>
       </button>
       <button
-        class="ant-btn css-var-«rr» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+        class="ant-btn css-var-_r_r_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
         type="button"
       >
         <span>
@@ -2502,7 +2502,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
         </span>
       </button>
       <button
-        class="ant-btn css-var-«rr» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+        class="ant-btn css-var-_r_r_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
         type="button"
       >
         <span>
@@ -2512,18 +2512,18 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-bubble-list css-var-«rr» ant-bubble-list-autoscroll"
+    class="ant-bubble-list css-var-_r_r_ ant-bubble-list-autoscroll"
     style="max-height: 400px;"
   >
     <div
-      class="ant-bubble css-var-«rr» ant-bubble-end"
+      class="ant-bubble css-var-_r_r_ ant-bubble-end"
       style="max-width: 90%;"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«rr» ant-avatar-css-var"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_r_ ant-avatar-css-var"
         >
           <span
             aria-label="user"
@@ -2562,14 +2562,14 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«rr» ant-bubble-start"
+      class="ant-bubble css-var-_r_r_ ant-bubble-start"
       style="max-width: 90%;"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«rr» ant-avatar-css-var"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_r_ ant-avatar-css-var"
         >
           <span
             aria-label="ant-design"
@@ -2609,7 +2609,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
           class="ant-bubble-footer ant-bubble-footer-start"
         >
           <div
-            class="ant-actions css-var-«rr»"
+            class="ant-actions css-var-_r_r_"
           >
             <div
               class="ant-actions-list ant-actions-variant-borderless"
@@ -2642,7 +2642,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
                   </span>
                 </div>
                 <div
-                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«rr» ant-tooltip-placement-top"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_r_ ant-tooltip-placement-top"
                   style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                 >
                   <div
@@ -2690,7 +2690,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
                   </span>
                 </div>
                 <div
-                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«rr» ant-tooltip-placement-top"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_r_ ant-tooltip-placement-top"
                   style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                 >
                   <div
@@ -2716,14 +2716,14 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«rr» ant-bubble-end"
+      class="ant-bubble css-var-_r_r_ ant-bubble-end"
       style="max-width: 90%;"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«rr» ant-avatar-css-var"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_r_ ant-avatar-css-var"
         >
           <span
             aria-label="user"
@@ -2762,14 +2762,14 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«rr» ant-bubble-start"
+      class="ant-bubble css-var-_r_r_ ant-bubble-start"
       style="max-width: 90%;"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«rr» ant-avatar-css-var"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_r_ ant-avatar-css-var"
         >
           <span
             aria-label="ant-design"
@@ -2809,7 +2809,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
           class="ant-bubble-footer ant-bubble-footer-start"
         >
           <div
-            class="ant-actions css-var-«rr»"
+            class="ant-actions css-var-_r_r_"
           >
             <div
               class="ant-actions-list ant-actions-variant-borderless"
@@ -2842,7 +2842,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
                   </span>
                 </div>
                 <div
-                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«rr» ant-tooltip-placement-top"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_r_ ant-tooltip-placement-top"
                   style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                 >
                   <div
@@ -2890,7 +2890,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
                   </span>
                 </div>
                 <div
-                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«rr» ant-tooltip-placement-top"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_r_ ant-tooltip-placement-top"
                   style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                 >
                   <div
@@ -2916,14 +2916,14 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«rr» ant-bubble-end"
+      class="ant-bubble css-var-_r_r_ ant-bubble-end"
       style="max-width: 90%;"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«rr» ant-avatar-css-var"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_r_ ant-avatar-css-var"
         >
           <span
             aria-label="user"
@@ -2962,14 +2962,14 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«rr» ant-bubble-start"
+      class="ant-bubble css-var-_r_r_ ant-bubble-start"
       style="max-width: 90%;"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«rr» ant-avatar-css-var"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_r_ ant-avatar-css-var"
         >
           <span
             aria-label="ant-design"
@@ -3009,7 +3009,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
           class="ant-bubble-footer ant-bubble-footer-start"
         >
           <div
-            class="ant-actions css-var-«rr»"
+            class="ant-actions css-var-_r_r_"
           >
             <div
               class="ant-actions-list ant-actions-variant-borderless"
@@ -3042,7 +3042,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
                   </span>
                 </div>
                 <div
-                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«rr» ant-tooltip-placement-top"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_r_ ant-tooltip-placement-top"
                   style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                 >
                   <div
@@ -3090,7 +3090,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
                   </span>
                 </div>
                 <div
-                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«rr» ant-tooltip-placement-top"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_r_ ant-tooltip-placement-top"
                   style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                 >
                   <div
@@ -3116,14 +3116,14 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«rr» ant-bubble-end"
+      class="ant-bubble css-var-_r_r_ ant-bubble-end"
       style="max-width: 90%;"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«rr» ant-avatar-css-var"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_r_ ant-avatar-css-var"
         >
           <span
             aria-label="user"
@@ -3162,14 +3162,14 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«rr» ant-bubble-start"
+      class="ant-bubble css-var-_r_r_ ant-bubble-start"
       style="max-width: 90%;"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«rr» ant-avatar-css-var"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_r_ ant-avatar-css-var"
         >
           <span
             aria-label="ant-design"
@@ -3209,7 +3209,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
           class="ant-bubble-footer ant-bubble-footer-start"
         >
           <div
-            class="ant-actions css-var-«rr»"
+            class="ant-actions css-var-_r_r_"
           >
             <div
               class="ant-actions-list ant-actions-variant-borderless"
@@ -3242,7 +3242,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
                   </span>
                 </div>
                 <div
-                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«rr» ant-tooltip-placement-top"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_r_ ant-tooltip-placement-top"
                   style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                 >
                   <div
@@ -3290,7 +3290,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
                   </span>
                 </div>
                 <div
-                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«rr» ant-tooltip-placement-top"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_r_ ant-tooltip-placement-top"
                   style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                 >
                   <div
@@ -3316,14 +3316,14 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«rr» ant-bubble-end"
+      class="ant-bubble css-var-_r_r_ ant-bubble-end"
       style="max-width: 90%;"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«rr» ant-avatar-css-var"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_r_ ant-avatar-css-var"
         >
           <span
             aria-label="user"
@@ -3362,14 +3362,14 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«rr» ant-bubble-start"
+      class="ant-bubble css-var-_r_r_ ant-bubble-start"
       style="max-width: 90%;"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«rr» ant-avatar-css-var"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_r_ ant-avatar-css-var"
         >
           <span
             aria-label="ant-design"
@@ -3409,7 +3409,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
           class="ant-bubble-footer ant-bubble-footer-start"
         >
           <div
-            class="ant-actions css-var-«rr»"
+            class="ant-actions css-var-_r_r_"
           >
             <div
               class="ant-actions-list ant-actions-variant-borderless"
@@ -3442,7 +3442,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
                   </span>
                 </div>
                 <div
-                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«rr» ant-tooltip-placement-top"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_r_ ant-tooltip-placement-top"
                   style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                 >
                   <div
@@ -3490,7 +3490,7 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
                   </span>
                 </div>
                 <div
-                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«rr» ant-tooltip-placement-top"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_r_ ant-tooltip-placement-top"
                   style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                 >
                   <div
@@ -3516,14 +3516,14 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«rr» ant-bubble-end"
+      class="ant-bubble css-var-_r_r_ ant-bubble-end"
       style="max-width: 90%;"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«rr» ant-avatar-css-var"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_r_ ant-avatar-css-var"
         >
           <span
             aria-label="user"
@@ -3569,10 +3569,10 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 2`
 
 exports[`renders components/bubble/demo/loading.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-«rd» ant-flex-align-stretch ant-flex-gap-large ant-flex-vertical"
+  class="ant-flex css-var-_r_d_ ant-flex-align-stretch ant-flex-gap-large ant-flex-vertical"
 >
   <div
-    class="ant-bubble css-var-«rd» ant-bubble-start ant-bubble-loading"
+    class="ant-bubble css-var-_r_d_ ant-bubble-start ant-bubble-loading"
   >
     <span
       class="ant-bubble-dot"
@@ -3589,12 +3589,12 @@ exports[`renders components/bubble/demo/loading.tsx extend context correctly 1`]
     </span>
   </div>
   <div
-    class="ant-flex css-var-«rd» ant-flex-wrap-wrap ant-flex-gap-large"
+    class="ant-flex css-var-_r_d_ ant-flex-wrap-wrap ant-flex-gap-large"
   >
     Loading state:
     <button
       aria-checked="true"
-      class="ant-switch css-var-«rd» ant-switch-checked"
+      class="ant-switch css-var-_r_d_ ant-switch-checked"
       role="switch"
       type="button"
     >
@@ -3620,14 +3620,14 @@ exports[`renders components/bubble/demo/loading.tsx extend context correctly 2`]
 
 exports[`renders components/bubble/demo/markdown.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-«rc» ant-flex-align-stretch ant-flex-vertical"
+  class="ant-flex css-var-_r_c_ ant-flex-align-stretch ant-flex-vertical"
   style="height: 150px; gap: 16px;"
 >
   <div
-    class="ant-flex css-var-«rc»"
+    class="ant-flex css-var-_r_c_"
   >
     <button
-      class="ant-btn css-var-«rc» ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
+      class="ant-btn css-var-_r_c_ ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
       type="button"
     >
       <span>
@@ -3636,10 +3636,10 @@ exports[`renders components/bubble/demo/markdown.tsx extend context correctly 1`
     </button>
   </div>
   <div
-    class="ant-flex css-var-«rc»"
+    class="ant-flex css-var-_r_c_"
   >
     <div
-      class="ant-bubble css-var-«rc» ant-bubble-start"
+      class="ant-bubble css-var-_r_c_ ant-bubble-start"
     >
       <div
         class="ant-bubble-body"
@@ -3648,7 +3648,7 @@ exports[`renders components/bubble/demo/markdown.tsx extend context correctly 1`
           class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
         >
           <article
-            class="ant-typography css-var-«rc»"
+            class="ant-typography css-var-_r_c_"
           >
             <div
               class="ant-x-markdown x-markdown"
@@ -3680,20 +3680,20 @@ exports[`renders components/bubble/demo/markdown.tsx extend context correctly 2`
 
 exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context correctly 1`] = `
 <div
-  class="ant-bubble-list css-var-«rb» ant-bubble-list-autoscroll"
+  class="ant-bubble-list css-var-_r_b_ ant-bubble-list-autoscroll"
   style="max-height: 300px;"
 >
   <div
-    class="ant-bubble css-var-«rb» ant-bubble-start ant-bubble-loading"
+    class="ant-bubble css-var-_r_b_ ant-bubble-start ant-bubble-loading"
     style="max-width: 600px; margin-inline-end: 44px;"
   >
     <div
-      class="ant-flex css-var-«rb» ant-flex-align-center ant-flex-gap-small"
+      class="ant-flex css-var-_r_b_ ant-flex-align-center ant-flex-gap-small"
     >
       <div
         aria-busy="true"
         aria-live="polite"
-        class="ant-spin ant-spin-sm ant-spin-spinning css-var-«rb»"
+        class="ant-spin ant-spin-sm ant-spin-spinning css-var-_r_b_"
       >
         <span
           class="ant-spin-dot-holder"
@@ -3720,7 +3720,7 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context 
     </div>
   </div>
   <div
-    class="ant-bubble css-var-«rb» ant-bubble-end"
+    class="ant-bubble css-var-_r_b_ ant-bubble-end"
   >
     <div
       class="ant-bubble-body"
@@ -3733,7 +3733,7 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context 
     </div>
   </div>
   <div
-    class="ant-bubble css-var-«rb» ant-bubble-start"
+    class="ant-bubble css-var-_r_b_ ant-bubble-start"
     style="max-width: 600px; margin-inline-end: 44px;"
   >
     <div
@@ -3750,10 +3750,10 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context 
         class="ant-bubble-footer ant-bubble-footer-start"
       >
         <div
-          class="ant-flex css-var-«rb»"
+          class="ant-flex css-var-_r_b_"
         >
           <button
-            class="ant-btn css-var-«rb» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+            class="ant-btn css-var-_r_b_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
             style="margin-inline-end: auto;"
             type="button"
           >
@@ -3782,7 +3782,7 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context 
             </span>
           </button>
           <button
-            class="ant-btn css-var-«rb» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+            class="ant-btn css-var-_r_b_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
             type="button"
           >
             <span
@@ -3810,7 +3810,7 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context 
             </span>
           </button>
           <button
-            class="ant-btn css-var-«rb» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+            class="ant-btn css-var-_r_b_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
             type="button"
           >
             <span
@@ -3848,23 +3848,23 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context 
 
 exports[`renders components/bubble/demo/sider-and-placement.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-«r2» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+  class="ant-flex css-var-_r_2_ ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
 >
   <div
-    class="ant-flex css-var-«r2» ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex css-var-_r_2_ ant-flex-wrap-wrap ant-flex-gap-small"
   >
     <div
       style="width: 100%;"
     >
       <div
-        class="ant-bubble css-var-«r2» ant-bubble-start"
+        class="ant-bubble css-var-_r_2_ ant-bubble-start"
       >
         <div
           class="ant-bubble-avatar"
         >
           <span
             aria-describedby="test-id"
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r2» ant-avatar-css-var"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_2_ ant-avatar-css-var"
           >
             <span
               aria-label="user"
@@ -3887,7 +3887,7 @@ exports[`renders components/bubble/demo/sider-and-placement.tsx extend context c
             </span>
           </span>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r2» ant-tooltip-placement-top"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_2_ ant-tooltip-placement-top"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
@@ -3940,7 +3940,7 @@ exports[`renders components/bubble/demo/sider-and-placement.tsx extend context c
             </svg>
           </span>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r2» ant-tooltip-placement-top"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_2_ ant-tooltip-placement-top"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
@@ -3964,20 +3964,20 @@ exports[`renders components/bubble/demo/sider-and-placement.tsx extend context c
     </div>
   </div>
   <div
-    class="ant-flex css-var-«r2» ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex css-var-_r_2_ ant-flex-wrap-wrap ant-flex-gap-small"
   >
     <div
       style="width: 100%;"
     >
       <div
-        class="ant-bubble css-var-«r2» ant-bubble-end"
+        class="ant-bubble css-var-_r_2_ ant-bubble-end"
       >
         <div
           class="ant-bubble-avatar"
         >
           <span
             aria-describedby="test-id"
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r2» ant-avatar-css-var"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_2_ ant-avatar-css-var"
           >
             <span
               aria-label="user"
@@ -4000,7 +4000,7 @@ exports[`renders components/bubble/demo/sider-and-placement.tsx extend context c
             </span>
           </span>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r2» ant-tooltip-placement-top"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_2_ ant-tooltip-placement-top"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
@@ -4053,7 +4053,7 @@ exports[`renders components/bubble/demo/sider-and-placement.tsx extend context c
             </svg>
           </span>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r2» ant-tooltip-placement-top"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_2_ ant-tooltip-placement-top"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
@@ -4083,16 +4083,16 @@ exports[`renders components/bubble/demo/sider-and-placement.tsx extend context c
 
 exports[`renders components/bubble/demo/stream.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-«r1» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+  class="ant-flex css-var-_r_1_ ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
 >
   <div
-    class="ant-flex css-var-«r1» ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-_r_1_ ant-flex-align-center ant-flex-gap-small"
   >
     <span>
       流式数据 / steaming data:
     </span>
     <button
-      class="ant-btn css-var-«r1» ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
+      class="ant-btn css-var-_r_1_ ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
       type="button"
     >
       <span>
@@ -4100,7 +4100,7 @@ exports[`renders components/bubble/demo/stream.tsx extend context correctly 1`] 
       </span>
     </button>
     <button
-      class="ant-btn css-var-«r1» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-_r_1_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -4108,7 +4108,7 @@ exports[`renders components/bubble/demo/stream.tsx extend context correctly 1`] 
       </span>
     </button>
     <button
-      class="ant-btn css-var-«r1» ant-btn-link ant-btn-color-link ant-btn-variant-link"
+      class="ant-btn css-var-_r_1_ ant-btn-link ant-btn-color-link ant-btn-variant-link"
       type="button"
     >
       <span>
@@ -4117,14 +4117,14 @@ exports[`renders components/bubble/demo/stream.tsx extend context correctly 1`] 
     </button>
   </div>
   <div
-    class="ant-flex css-var-«r1» ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-_r_1_ ant-flex-align-center ant-flex-gap-small"
   >
     <span>
       强制关闭流式标志 / Force close the streaming flag: 
     </span>
     <button
       aria-checked="false"
-      class="ant-switch css-var-«r1»"
+      class="ant-switch css-var-_r_1_"
       role="switch"
       type="button"
     >
@@ -4144,14 +4144,14 @@ exports[`renders components/bubble/demo/stream.tsx extend context correctly 1`] 
     </button>
   </div>
   <div
-    class="ant-flex css-var-«r1» ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-_r_1_ ant-flex-align-center ant-flex-gap-small"
   >
     <span>
       启用动画 / Enable animation:
     </span>
     <button
       aria-checked="false"
-      class="ant-switch css-var-«r1»"
+      class="ant-switch css-var-_r_1_"
       role="switch"
       type="button"
     >
@@ -4171,32 +4171,32 @@ exports[`renders components/bubble/demo/stream.tsx extend context correctly 1`] 
     </button>
   </div>
   <div
-    class="ant-flex css-var-«r1» ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-_r_1_ ant-flex-align-center ant-flex-gap-small"
   >
     <span>
       onTypingComplete 触发次数 / trigger times: 
       <span
-        class="ant-typography ant-typography-danger css-var-«r1»"
+        class="ant-typography ant-typography-danger css-var-_r_1_"
       >
         0
       </span>
     </span>
   </div>
   <div
-    class="ant-divider css-var-«r1» ant-divider-horizontal ant-divider-rail"
+    class="ant-divider css-var-_r_1_ ant-divider-horizontal ant-divider-rail"
     role="separator"
   />
   <div
-    class="ant-flex css-var-«r1» ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-_r_1_ ant-flex-align-center ant-flex-gap-small"
   >
     <div
-      class="ant-bubble css-var-«r1» ant-bubble-start ant-bubble-loading"
+      class="ant-bubble css-var-_r_1_ ant-bubble-start ant-bubble-loading"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«r1» ant-avatar-css-var"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_1_ ant-avatar-css-var"
         >
           <span
             aria-label="user"
@@ -4241,13 +4241,13 @@ exports[`renders components/bubble/demo/stream.tsx extend context correctly 2`] 
 
 exports[`renders components/bubble/demo/variant-and-shape.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-«r0» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+  class="ant-flex css-var-_r_0_ ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
 >
   <div
-    class="ant-flex css-var-«r0» ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex css-var-_r_0_ ant-flex-wrap-wrap ant-flex-gap-small"
   >
     <div
-      class="ant-bubble css-var-«r0» ant-bubble-start"
+      class="ant-bubble css-var-_r_0_ ant-bubble-start"
     >
       <div
         class="ant-bubble-body"
@@ -4260,7 +4260,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx extend context cor
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«r0» ant-bubble-start"
+      class="ant-bubble css-var-_r_0_ ant-bubble-start"
     >
       <div
         class="ant-bubble-body"
@@ -4273,7 +4273,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx extend context cor
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«r0» ant-bubble-start"
+      class="ant-bubble css-var-_r_0_ ant-bubble-start"
     >
       <div
         class="ant-bubble-body"
@@ -4286,7 +4286,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx extend context cor
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«r0» ant-bubble-end"
+      class="ant-bubble css-var-_r_0_ ant-bubble-end"
     >
       <div
         class="ant-bubble-body"
@@ -4300,10 +4300,10 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx extend context cor
     </div>
   </div>
   <div
-    class="ant-flex css-var-«r0» ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex css-var-_r_0_ ant-flex-wrap-wrap ant-flex-gap-small"
   >
     <div
-      class="ant-bubble css-var-«r0» ant-bubble-start"
+      class="ant-bubble css-var-_r_0_ ant-bubble-start"
     >
       <div
         class="ant-bubble-body"
@@ -4316,7 +4316,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx extend context cor
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«r0» ant-bubble-start"
+      class="ant-bubble css-var-_r_0_ ant-bubble-start"
     >
       <div
         class="ant-bubble-body"
@@ -4329,7 +4329,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx extend context cor
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«r0» ant-bubble-start"
+      class="ant-bubble css-var-_r_0_ ant-bubble-start"
     >
       <div
         class="ant-bubble-body"
@@ -4342,7 +4342,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx extend context cor
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«r0» ant-bubble-end"
+      class="ant-bubble css-var-_r_0_ ant-bubble-end"
     >
       <div
         class="ant-bubble-body"
@@ -4356,10 +4356,10 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx extend context cor
     </div>
   </div>
   <div
-    class="ant-flex css-var-«r0» ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex css-var-_r_0_ ant-flex-wrap-wrap ant-flex-gap-small"
   >
     <div
-      class="ant-bubble css-var-«r0» ant-bubble-start"
+      class="ant-bubble css-var-_r_0_ ant-bubble-start"
     >
       <div
         class="ant-bubble-body"
@@ -4372,7 +4372,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx extend context cor
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«r0» ant-bubble-start"
+      class="ant-bubble css-var-_r_0_ ant-bubble-start"
     >
       <div
         class="ant-bubble-body"
@@ -4385,7 +4385,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx extend context cor
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«r0» ant-bubble-start"
+      class="ant-bubble css-var-_r_0_ ant-bubble-start"
     >
       <div
         class="ant-bubble-body"
@@ -4398,7 +4398,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx extend context cor
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«r0» ant-bubble-end"
+      class="ant-bubble css-var-_r_0_ ant-bubble-end"
     >
       <div
         class="ant-bubble-body"
@@ -4412,11 +4412,11 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx extend context cor
     </div>
   </div>
   <div
-    class="ant-flex css-var-«r0» ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex css-var-_r_0_ ant-flex-wrap-wrap ant-flex-gap-small"
     style="margin-top: 8px;"
   >
     <div
-      class="ant-bubble css-var-«r0» ant-bubble-start"
+      class="ant-bubble css-var-_r_0_ ant-bubble-start"
     >
       <div
         class="ant-bubble-body"

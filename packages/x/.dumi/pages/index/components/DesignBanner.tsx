@@ -1,11 +1,8 @@
 import { createStyles } from 'antd-style';
-import React from 'react';
-
 import { useLocation, useNavigate } from 'dumi';
-import { getLocalizedPathname, isZhCN } from '../../../theme/utils';
-
+import React, { lazy, Suspense, useEffect, useRef } from 'react';
 import useLocale from '../../../hooks/useLocale';
-import useLottie from '../../../hooks/useLottie';
+import { getLocalizedPathname, isZhCN } from '../../../theme/utils';
 import Container from '../common/Container';
 
 const locales = {
@@ -24,7 +21,6 @@ const useStyle = createStyles(({ css }) => {
     container: css`
       height: 500px;
       overflow: hidden;
-
       cursor: pointer;
     `,
     lottie: css`
@@ -43,13 +39,21 @@ const DesignBanner: React.FC = () => {
 
   const { styles } = useStyle();
 
-  const [lottieRef] = useLottie({
-    renderer: 'svg',
-    loop: false,
-    autoplay: true,
-    path: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*eZsQT5KKBtIAAAAAAAAAAAAADgCCAQ',
-  });
+  const LottieComponent = lazy(() => import('./Lottie'));
 
+  const lottieRef = useRef<{ animation: any }>(null);
+
+  const onScrollFn = () => {
+    if (window?.scrollY > 600) {
+      lottieRef?.current?.animation?.play?.();
+    }
+  };
+  useEffect(() => {
+    window.addEventListener('scroll', onScrollFn);
+    return () => {
+      window.removeEventListener('scroll', onScrollFn);
+    };
+  }, []);
   return (
     <Container
       className={styles.container}
@@ -59,7 +63,16 @@ const DesignBanner: React.FC = () => {
         navigate(getLocalizedPathname('docs/spec/introduce', isZhCN(pathname), search))
       }
     >
-      <div ref={lottieRef} className={styles.lottie} />
+      <Suspense>
+        <LottieComponent
+          config={{
+            autoplay: false,
+          }}
+          ref={lottieRef}
+          className={styles.lottie}
+          path="https://mdn.alipayobjects.com/huamei_lkxviz/afts/file/nLaTTqe5cMAAAAAAQiAAAAgADtFMAQFr"
+        />
+      </Suspense>
     </Container>
   );
 };
