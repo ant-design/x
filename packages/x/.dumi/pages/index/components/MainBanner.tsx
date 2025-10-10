@@ -276,7 +276,7 @@ const MainBanner: React.FC = () => {
             <LottieComponent
               onLoad={onLoad}
               className={classnames(styles.lottie, direction === 'rtl' && styles.lottie_rtl)}
-              path="https://mdn.alipayobjects.com/huamei_lkxviz/afts/file/fy4QS4amXA4AAAAAQPAAAAgADtFMAQFr"
+              path="https://mdn.alipayobjects.com/huamei_lkxviz/afts/file/n25_R7prS_0AAAAAQPAAAAgADtFMAQFr"
             />
           </Suspense>
         )}
