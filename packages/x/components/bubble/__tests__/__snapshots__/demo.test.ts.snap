@@ -348,6 +348,192 @@ Array [
 ]
 `;
 
+exports[`renders components/bubble/demo/divider.tsx correctly 1`] = `
+<div
+  class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-vertical"
+  style="gap:16px"
+>
+  <div
+    class="ant-bubble css-var-«R0» ant-bubble-start"
+  >
+    <div
+      class="ant-bubble-body"
+    >
+      <div
+        class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
+      >
+        message 1
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-divider css-var-«R0» ant-bubble-start"
+  >
+    <div
+      class="ant-bubble-body"
+    >
+      <div
+        class="ant-bubble-content ant-bubble-content-borderless"
+      >
+        <div
+          class="ant-divider css-var-«R0» ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center"
+          role="separator"
+          style="background:red"
+        >
+          <div
+            class="ant-divider-rail ant-divider-rail-start"
+          />
+          <span
+            class="ant-divider-inner-text"
+          >
+            Solid
+          </span>
+          <div
+            class="ant-divider-rail ant-divider-rail-end"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-bubble css-var-«R0» ant-bubble-end"
+  >
+    <div
+      class="ant-bubble-body"
+    >
+      <div
+        class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
+      >
+        message 2
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-divider css-var-«R0» ant-bubble-start"
+  >
+    <div
+      class="ant-bubble-body"
+    >
+      <div
+        class="ant-bubble-content ant-bubble-content-borderless"
+      >
+        <div
+          class="ant-divider css-var-«R0» ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center ant-divider-dashed"
+          role="separator"
+        >
+          <div
+            class="ant-divider-rail ant-divider-rail-start"
+          />
+          <span
+            class="ant-divider-inner-text"
+          >
+            Dashed
+          </span>
+          <div
+            class="ant-divider-rail ant-divider-rail-end"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-bubble css-var-«R0» ant-bubble-start"
+  >
+    <div
+      class="ant-bubble-body"
+    >
+      <div
+        class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
+      >
+        message 3
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-divider css-var-«R0» ant-bubble-start"
+  >
+    <div
+      class="ant-bubble-body"
+    >
+      <div
+        class="ant-bubble-content ant-bubble-content-borderless"
+      >
+        <div
+          class="ant-divider css-var-«R0» ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center ant-divider-dotted"
+          role="separator"
+        >
+          <div
+            class="ant-divider-rail ant-divider-rail-start"
+          />
+          <span
+            class="ant-divider-inner-text"
+          >
+            Dotted
+          </span>
+          <div
+            class="ant-divider-rail ant-divider-rail-end"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-bubble css-var-«R0» ant-bubble-end"
+  >
+    <div
+      class="ant-bubble-body"
+    >
+      <div
+        class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
+      >
+        message 4
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-divider css-var-«R0» ant-bubble-start"
+  >
+    <div
+      class="ant-bubble-body"
+    >
+      <div
+        class="ant-bubble-content ant-bubble-content-borderless"
+      >
+        <div
+          class="ant-divider css-var-«R0» ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center ant-divider-plain"
+          role="separator"
+        >
+          <div
+            class="ant-divider-rail ant-divider-rail-start"
+          />
+          <span
+            class="ant-divider-inner-text"
+          >
+            Plain Text
+          </span>
+          <div
+            class="ant-divider-rail ant-divider-rail-end"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-bubble css-var-«R0» ant-bubble-start"
+  >
+    <div
+      class="ant-bubble-body"
+    >
+      <div
+        class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
+      >
+        message 5
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`renders components/bubble/demo/editable.tsx correctly 1`] = `
 <div
   class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
@@ -2260,6 +2446,83 @@ exports[`renders components/bubble/demo/stream.tsx correctly 1`] = `
           class="ant-bubble-dot-item"
         />
       </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders components/bubble/demo/system.tsx correctly 1`] = `
+<div
+  class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-vertical"
+  style="gap:16px"
+>
+  <div
+    class="ant-bubble ant-bubble-system css-var-«R0» ant-bubble-start"
+  >
+    <div
+      class="ant-bubble-body"
+    >
+      <div
+        class="ant-bubble-content ant-bubble-content-shadow ant-bubble-content-default"
+      >
+        <div
+          class="ant-bubble-system-content"
+        >
+          Hello, this is a system message
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-system css-var-«R0» ant-bubble-start"
+  >
+    <div
+      class="ant-bubble-body"
+    >
+      <div
+        class="ant-bubble-content ant-bubble-content-outlined ant-bubble-content-round"
+      >
+        <div
+          class="ant-bubble-system-content"
+        >
+          Hello, this is a system message
+        </div>
+        <div
+          class="ant-bubble-system-extra"
+        >
+          <a
+            class="ant-typography css-var-«R0»"
+          >
+            ok
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-bubble ant-bubble-system css-var-«R0» ant-bubble-start"
+  >
+    <div
+      class="ant-bubble-body"
+    >
+      <div
+        class="ant-bubble-content ant-bubble-content-borderless"
+      >
+        <div
+          class="ant-bubble-system-content"
+        >
+          Hello, this is a system message
+        </div>
+        <div
+          class="ant-bubble-system-extra"
+        >
+          <a
+            class="ant-typography css-var-«R0»"
+          >
+            cancel
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </div>

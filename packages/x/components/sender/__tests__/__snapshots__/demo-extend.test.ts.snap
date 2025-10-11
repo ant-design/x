@@ -2,10 +2,10 @@
 
 exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-«r1f» ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-«r1e» ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-sender css-var-«r1f»"
+    class="ant-sender css-var-«r1e»"
   >
     <div
       class="ant-sender-header"
@@ -23,7 +23,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
           class="ant-sender-header-close"
         >
           <button
-            class="ant-btn css-var-«r1f» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+            class="ant-btn css-var-«r1e» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
             type="button"
           >
             <span
@@ -58,18 +58,18 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
         style="padding: 0px;"
       >
         <div
-          class="ant-attachment css-var-«r1f»"
+          class="ant-attachment css-var-«r1e»"
           dir="ltr"
         >
           <div
             class="ant-file-card-list-wrapper"
           >
             <div
-              class="ant-file-card-list ant-attachment-list css-var-«r1f»"
+              class="ant-file-card-list ant-attachment-list css-var-«r1e»"
               style="display: none;"
             >
               <span
-                class="ant-upload-wrapper css-var-«r1f»"
+                class="ant-upload-wrapper css-var-«r1e»"
               >
                 <div
                   class="ant-upload ant-upload-select"
@@ -84,7 +84,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
                       type="file"
                     />
                     <button
-                      class="ant-btn css-var-«r1f» ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
+                      class="ant-btn css-var-«r1e» ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
                       type="button"
                     >
                       <span
@@ -119,7 +119,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
             class="ant-attachment-placeholder"
           >
             <span
-              class="ant-upload-wrapper css-var-«r1f»"
+              class="ant-upload-wrapper css-var-«r1e»"
             >
               <div
                 class="ant-upload ant-upload-drag"
@@ -140,16 +140,16 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
                     class="ant-upload-drag-container"
                   >
                     <div
-                      class="ant-attachment-placeholder-inner ant-flex css-var-«r1f» ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
+                      class="ant-attachment-placeholder-inner ant-flex css-var-«r1e» ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
                     >
                       <span
-                        class="ant-typography ant-attachment-placeholder-icon css-var-«r1f»"
+                        class="ant-typography ant-attachment-placeholder-icon css-var-«r1e»"
                       />
                       <h5
-                        class="ant-typography ant-attachment-placeholder-title css-var-«r1f»"
+                        class="ant-typography ant-attachment-placeholder-title css-var-«r1e»"
                       />
                       <span
-                        class="ant-typography ant-typography-secondary ant-attachment-placeholder-description css-var-«r1f»"
+                        class="ant-typography ant-typography-secondary ant-attachment-placeholder-description css-var-«r1e»"
                       />
                     </div>
                   </div>
@@ -211,11 +211,11 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
             </span>
           </span>
           <div
-            class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-«r1f» ant-dropdown-css-var ant-dropdown-placement-bottomLeft"
+            class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-«r1e» ant-dropdown-css-var ant-dropdown-placement-bottomLeft"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <ul
-              class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-«r1f» ant-dropdown-css-var css-var-«r1f» ant-dropdown-menu-css-var"
+              class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-«r1e» ant-dropdown-css-var css-var-«r1e» ant-dropdown-menu-css-var"
               data-menu-list="true"
               role="menu"
               tabindex="0"
@@ -223,7 +223,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-AI"
+                data-menu-id="rc-menu-uuid-test-AI"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -234,7 +234,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
                 </span>
               </li>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r1f» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r1e» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
               >
                 <div
@@ -254,7 +254,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-Technology"
+                data-menu-id="rc-menu-uuid-test-Technology"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -265,7 +265,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
                 </span>
               </li>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r1f» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r1e» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
               >
                 <div
@@ -285,7 +285,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-Entertainment"
+                data-menu-id="rc-menu-uuid-test-Entertainment"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -296,7 +296,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
                 </span>
               </li>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r1f» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r1e» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
               >
                 <div
@@ -331,13 +331,13 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
       class="ant-sender-footer"
     >
       <div
-        class="ant-flex css-var-«r1f» ant-flex-align-center ant-flex-justify-space-between"
+        class="ant-flex css-var-«r1e» ant-flex-align-center ant-flex-justify-space-between"
       >
         <div
-          class="ant-flex css-var-«r1f» ant-flex-align-center ant-flex-gap-small"
+          class="ant-flex css-var-«r1e» ant-flex-align-center ant-flex-gap-small"
         >
           <button
-            class="ant-btn css-var-«r1f» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+            class="ant-btn css-var-«r1e» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
             style="font-size: 16px;"
             type="button"
           >
@@ -366,10 +366,10 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
             </span>
           </button>
           <div
-            class="ant-sender-switch css-var-«r1f» ant-sender-switch-checked"
+            class="ant-sender-switch css-var-«r1e» ant-sender-switch-checked"
           >
             <button
-              class="ant-btn css-var-«r1f» ant-btn-default ant-btn-color-primary ant-btn-variant-outlined ant-sender-switch-content"
+              class="ant-btn css-var-«r1e» ant-btn-default ant-btn-color-primary ant-btn-variant-outlined ant-sender-switch-content"
               type="button"
             >
               <span
@@ -407,10 +407,10 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
             </button>
           </div>
           <div
-            class="ant-sender-switch ant-dropdown-trigger css-var-«r1f»"
+            class="ant-sender-switch ant-dropdown-trigger css-var-«r1e»"
           >
             <button
-              class="ant-btn css-var-«r1f» ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
+              class="ant-btn css-var-«r1e» ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
               type="button"
             >
               <span
@@ -442,11 +442,11 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
             </button>
           </div>
           <div
-            class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-«r1f» ant-dropdown-css-var ant-dropdown-placement-bottomLeft"
+            class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-«r1e» ant-dropdown-css-var ant-dropdown-placement-bottomLeft"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <ul
-              class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-«r1f» ant-dropdown-css-var css-var-«r1f» ant-dropdown-menu-css-var"
+              class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-«r1e» ant-dropdown-css-var css-var-«r1e» ant-dropdown-menu-css-var"
               data-menu-list="true"
               role="menu"
               tabindex="0"
@@ -454,7 +454,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-selected"
-                data-menu-id="rc-menu-uuid-deep_search"
+                data-menu-id="rc-menu-uuid-test-deep_search"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -484,7 +484,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
                 </span>
               </li>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r1f» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r1e» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
               >
                 <div
@@ -504,7 +504,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item"
-                data-menu-id="rc-menu-uuid-ai_code"
+                data-menu-id="rc-menu-uuid-test-ai_code"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -534,7 +534,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
                 </span>
               </li>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r1f» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r1e» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
               >
                 <div
@@ -554,7 +554,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item"
-                data-menu-id="rc-menu-uuid-ai_writing"
+                data-menu-id="rc-menu-uuid-test-ai_writing"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -584,7 +584,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
                 </span>
               </li>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r1f» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r1e» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
               >
                 <div
@@ -608,10 +608,10 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
             />
           </div>
           <div
-            class="ant-sender-switch ant-dropdown-trigger css-var-«r1f»"
+            class="ant-sender-switch ant-dropdown-trigger css-var-«r1e»"
           >
             <button
-              class="ant-btn css-var-«r1f» ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
+              class="ant-btn css-var-«r1e» ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
               type="button"
             >
               <span
@@ -643,11 +643,11 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
             </button>
           </div>
           <div
-            class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-«r1f» ant-dropdown-css-var ant-dropdown-placement-bottomLeft"
+            class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-«r1e» ant-dropdown-css-var ant-dropdown-placement-bottomLeft"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <ul
-              class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-«r1f» ant-dropdown-css-var css-var-«r1f» ant-dropdown-menu-css-var"
+              class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-«r1e» ant-dropdown-css-var css-var-«r1e» ant-dropdown-menu-css-var"
               data-menu-list="true"
               role="menu"
               tabindex="0"
@@ -655,7 +655,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item"
-                data-menu-id="rc-menu-uuid-file_image"
+                data-menu-id="rc-menu-uuid-test-file_image"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -685,7 +685,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
                 </span>
               </li>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r1f» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r1e» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
               >
                 <div
@@ -710,10 +710,10 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
           </div>
         </div>
         <div
-          class="ant-flex css-var-«r1f» ant-flex-align-center"
+          class="ant-flex css-var-«r1e» ant-flex-align-center"
         >
           <button
-            class="ant-btn css-var-«r1f» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+            class="ant-btn css-var-«r1e» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
             style="font-size: 16px;"
             type="button"
           >
@@ -742,14 +742,14 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
             </span>
           </button>
           <div
-            class="ant-divider css-var-«r1f» ant-divider-vertical ant-divider-rail"
+            class="ant-divider css-var-«r1e» ant-divider-vertical ant-divider-rail"
             role="separator"
           />
           <div
-            class="ant-sender-actions-list-presets ant-flex css-var-«r1f»"
+            class="ant-sender-actions-list-presets ant-flex css-var-«r1e»"
           >
             <button
-              class="ant-btn css-var-«r1f» ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
+              class="ant-btn css-var-«r1e» ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
               type="button"
             >
               <span
@@ -781,14 +781,14 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
       </div>
     </div>
     <div
-      class="ant-attachment-drop-area css-var-«r1f»"
+      class="ant-attachment-drop-area css-var-«r1e»"
       style="display: none;"
     >
       <div
         class="ant-attachment-placeholder"
       >
         <span
-          class="ant-upload-wrapper css-var-«r1f»"
+          class="ant-upload-wrapper css-var-«r1e»"
         >
           <div
             class="ant-upload ant-upload-drag"
@@ -809,16 +809,16 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
                 class="ant-upload-drag-container"
               >
                 <div
-                  class="ant-attachment-placeholder-inner ant-flex css-var-«r1f» ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
+                  class="ant-attachment-placeholder-inner ant-flex css-var-«r1e» ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
                 >
                   <span
-                    class="ant-typography ant-attachment-placeholder-icon css-var-«r1f»"
+                    class="ant-typography ant-attachment-placeholder-icon css-var-«r1e»"
                   />
                   <h5
-                    class="ant-typography ant-attachment-placeholder-title css-var-«r1f»"
+                    class="ant-typography ant-attachment-placeholder-title css-var-«r1e»"
                   />
                   <span
-                    class="ant-typography ant-typography-secondary ant-attachment-placeholder-description css-var-«r1f»"
+                    class="ant-typography ant-typography-secondary ant-attachment-placeholder-description css-var-«r1e»"
                   />
                 </div>
               </div>
@@ -835,19 +835,19 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 2`] =
 
 exports[`renders components/sender/demo/basic.tsx extend context correctly 1`] = `
 <div
-  class="ant-app css-var-«r1b»"
+  class="ant-app css-var-«r1a»"
 >
   <div
-    class="ant-flex css-var-«r1b» ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+    class="ant-flex css-var-«r1a» ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
   >
     <div
-      class="ant-sender css-var-«r1b»"
+      class="ant-sender css-var-«r1a»"
     >
       <div
         class="ant-sender-content"
       >
         <textarea
-          class="ant-input ant-input-borderless css-var-«r1b» ant-input-css-var ant-sender-input"
+          class="ant-input ant-input-borderless css-var-«r1a» ant-input-css-var ant-sender-input"
           style="overflow-y: hidden; resize: none;"
         >
           Hello? this is X!
@@ -856,10 +856,10 @@ exports[`renders components/sender/demo/basic.tsx extend context correctly 1`] =
           class="ant-sender-actions-list"
         >
           <div
-            class="ant-sender-actions-list-presets ant-flex css-var-«r1b»"
+            class="ant-sender-actions-list-presets ant-flex css-var-«r1a»"
           >
             <button
-              class="ant-btn css-var-«r1b» ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
+              class="ant-btn css-var-«r1a» ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
               type="button"
             >
               <span
@@ -891,13 +891,13 @@ exports[`renders components/sender/demo/basic.tsx extend context correctly 1`] =
       </div>
     </div>
     <div
-      class="ant-sender css-var-«r1b»"
+      class="ant-sender css-var-«r1a»"
     >
       <div
         class="ant-sender-content"
       >
         <textarea
-          class="ant-input ant-input-borderless css-var-«r1b» ant-input-css-var ant-sender-input"
+          class="ant-input ant-input-borderless css-var-«r1a» ant-input-css-var ant-sender-input"
           readonly=""
           style="resize: none;"
         >
@@ -907,10 +907,10 @@ exports[`renders components/sender/demo/basic.tsx extend context correctly 1`] =
           class="ant-sender-actions-list"
         >
           <div
-            class="ant-sender-actions-list-presets ant-flex css-var-«r1b»"
+            class="ant-sender-actions-list-presets ant-flex css-var-«r1a»"
           >
             <button
-              class="ant-btn css-var-«r1b» ant-btn-circle ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-loading-button"
+              class="ant-btn css-var-«r1a» ant-btn-circle ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-loading-button"
               type="button"
             >
               <span
@@ -969,13 +969,13 @@ exports[`renders components/sender/demo/basic.tsx extend context correctly 1`] =
       </div>
     </div>
     <div
-      class="ant-sender css-var-«r1b» ant-sender-disabled"
+      class="ant-sender css-var-«r1a» ant-sender-disabled"
     >
       <div
         class="ant-sender-content"
       >
         <textarea
-          class="ant-input ant-input-borderless css-var-«r1b» ant-input-css-var ant-sender-input ant-input-disabled"
+          class="ant-input ant-input-borderless css-var-«r1a» ant-input-css-var ant-sender-input ant-input-disabled"
           disabled=""
           style="overflow-y: hidden; resize: none;"
         >
@@ -985,10 +985,10 @@ exports[`renders components/sender/demo/basic.tsx extend context correctly 1`] =
           class="ant-sender-actions-list"
         >
           <div
-            class="ant-sender-actions-list-presets ant-flex css-var-«r1b»"
+            class="ant-sender-actions-list-presets ant-flex css-var-«r1a»"
           >
             <button
-              class="ant-btn css-var-«r1b» ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              class="ant-btn css-var-«r1a» ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
               disabled=""
               type="button"
             >
@@ -1028,13 +1028,13 @@ exports[`renders components/sender/demo/basic.tsx extend context correctly 2`] =
 
 exports[`renders components/sender/demo/footer.tsx extend context correctly 1`] = `
 <div
-  class="ant-sender css-var-«r19»"
+  class="ant-sender css-var-«r18»"
 >
   <div
     class="ant-sender-content"
   >
     <textarea
-      class="ant-input ant-input-borderless css-var-«r19» ant-input-css-var ant-sender-input"
+      class="ant-input ant-input-borderless css-var-«r18» ant-input-css-var ant-sender-input"
       placeholder="Press Enter to send message"
       style="overflow-y: hidden; resize: none;"
     />
@@ -1043,13 +1043,13 @@ exports[`renders components/sender/demo/footer.tsx extend context correctly 1`] 
     class="ant-sender-footer"
   >
     <div
-      class="ant-flex css-var-«r19» ant-flex-align-center ant-flex-justify-space-between"
+      class="ant-flex css-var-«r18» ant-flex-align-center ant-flex-justify-space-between"
     >
       <div
-        class="ant-flex css-var-«r19» ant-flex-align-center ant-flex-gap-small"
+        class="ant-flex css-var-«r18» ant-flex-align-center ant-flex-gap-small"
       >
         <button
-          class="ant-btn css-var-«r19» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+          class="ant-btn css-var-«r18» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
           style="font-size: 18px; color: rgba(0, 0, 0, 0.88);"
           type="button"
         >
@@ -1078,13 +1078,13 @@ exports[`renders components/sender/demo/footer.tsx extend context correctly 1`] 
           </span>
         </button>
         <div
-          class="ant-divider css-var-«r19» ant-divider-vertical ant-divider-rail"
+          class="ant-divider css-var-«r18» ant-divider-vertical ant-divider-rail"
           role="separator"
         />
         Deep Thinking
         <button
           aria-checked="false"
-          class="ant-switch ant-switch-small css-var-«r19»"
+          class="ant-switch ant-switch-small css-var-«r18»"
           role="switch"
           type="button"
         >
@@ -1103,11 +1103,11 @@ exports[`renders components/sender/demo/footer.tsx extend context correctly 1`] 
           </span>
         </button>
         <div
-          class="ant-divider css-var-«r19» ant-divider-vertical ant-divider-rail"
+          class="ant-divider css-var-«r18» ant-divider-vertical ant-divider-rail"
           role="separator"
         />
         <button
-          class="ant-btn css-var-«r19» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+          class="ant-btn css-var-«r18» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
           type="button"
         >
           <span
@@ -1139,10 +1139,10 @@ exports[`renders components/sender/demo/footer.tsx extend context correctly 1`] 
         </button>
       </div>
       <div
-        class="ant-flex css-var-«r19» ant-flex-align-center"
+        class="ant-flex css-var-«r18» ant-flex-align-center"
       >
         <button
-          class="ant-btn css-var-«r19» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+          class="ant-btn css-var-«r18» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
           style="font-size: 18px; color: rgba(0, 0, 0, 0.88);"
           type="button"
         >
@@ -1171,11 +1171,11 @@ exports[`renders components/sender/demo/footer.tsx extend context correctly 1`] 
           </span>
         </button>
         <div
-          class="ant-divider css-var-«r19» ant-divider-vertical ant-divider-rail"
+          class="ant-divider css-var-«r18» ant-divider-vertical ant-divider-rail"
           role="separator"
         />
         <button
-          class="ant-btn css-var-«r19» ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+          class="ant-btn css-var-«r18» ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
           disabled=""
           style="font-size: 18px; color: rgba(0, 0, 0, 0.88);"
           type="button"
@@ -1211,11 +1211,11 @@ exports[`renders components/sender/demo/footer.tsx extend context correctly 1`] 
           </span>
         </button>
         <div
-          class="ant-divider css-var-«r19» ant-divider-vertical ant-divider-rail"
+          class="ant-divider css-var-«r18» ant-divider-vertical ant-divider-rail"
           role="separator"
         />
         <button
-          class="ant-btn css-var-«r19» ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
+          class="ant-btn css-var-«r18» ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
           type="button"
         >
           <span
@@ -1252,14 +1252,14 @@ exports[`renders components/sender/demo/footer.tsx extend context correctly 2`] 
 
 exports[`renders components/sender/demo/header.tsx extend context correctly 1`] = `
 <div
-  class="ant-app css-var-«r15»"
+  class="ant-app css-var-«r14»"
 >
   <div
-    class="ant-flex css-var-«r15» ant-flex-align-end"
+    class="ant-flex css-var-«r14» ant-flex-align-end"
     style="height: 350px;"
   >
     <div
-      class="ant-sender css-var-«r15»"
+      class="ant-sender css-var-«r14»"
     >
       <div
         class="ant-sender-content"
@@ -1268,7 +1268,7 @@ exports[`renders components/sender/demo/header.tsx extend context correctly 1`] 
           class="ant-sender-prefix"
         >
           <button
-            class="ant-btn css-var-«r15» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+            class="ant-btn css-var-«r14» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
             style="font-size: 16px;"
             type="button"
           >
@@ -1298,7 +1298,7 @@ exports[`renders components/sender/demo/header.tsx extend context correctly 1`] 
           </button>
         </div>
         <textarea
-          class="ant-input ant-input-borderless css-var-«r15» ant-input-css-var ant-sender-input"
+          class="ant-input ant-input-borderless css-var-«r14» ant-input-css-var ant-sender-input"
           placeholder="← Click to open"
           style="overflow-y: hidden; resize: none;"
         />
@@ -1306,10 +1306,10 @@ exports[`renders components/sender/demo/header.tsx extend context correctly 1`] 
           class="ant-sender-actions-list"
         >
           <div
-            class="ant-sender-actions-list-presets ant-flex css-var-«r15»"
+            class="ant-sender-actions-list-presets ant-flex css-var-«r14»"
           >
             <button
-              class="ant-btn css-var-«r15» ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              class="ant-btn css-var-«r14» ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
               disabled=""
               type="button"
             >
@@ -1349,14 +1349,14 @@ exports[`renders components/sender/demo/header.tsx extend context correctly 2`] 
 
 exports[`renders components/sender/demo/header-fixed.tsx extend context correctly 1`] = `
 <div
-  class="ant-app css-var-«r17»"
+  class="ant-app css-var-«r16»"
 >
   <div
-    class="ant-flex css-var-«r17» ant-flex-align-flex-start ant-flex-gap-middle ant-flex-vertical"
+    class="ant-flex css-var-«r16» ant-flex-align-flex-start ant-flex-gap-middle ant-flex-vertical"
   >
     <button
       aria-checked="true"
-      class="ant-switch css-var-«r17» ant-switch-checked"
+      class="ant-switch css-var-«r16» ant-switch-checked"
       role="switch"
       type="button"
     >
@@ -1379,7 +1379,7 @@ exports[`renders components/sender/demo/header-fixed.tsx extend context correctl
       </span>
     </button>
     <div
-      class="ant-sender css-var-«r17»"
+      class="ant-sender css-var-«r16»"
     >
       <div
         class="ant-sender-header ant-sender-header-motion-appear ant-sender-header-motion-appear-start ant-sender-header-motion"
@@ -1391,7 +1391,7 @@ exports[`renders components/sender/demo/header-fixed.tsx extend context correctl
             class="ant-sender-header-title"
           >
             <div
-              class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-«r17»"
+              class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-«r16»"
             >
               <div
                 class="ant-space-item"
@@ -1420,7 +1420,7 @@ exports[`renders components/sender/demo/header-fixed.tsx extend context correctl
                 class="ant-space-item"
               >
                 <span
-                  class="ant-typography ant-typography-secondary css-var-«r17»"
+                  class="ant-typography ant-typography-secondary css-var-«r16»"
                 >
                   "Tell more about Ant Design X"
                 </span>
@@ -1431,7 +1431,7 @@ exports[`renders components/sender/demo/header-fixed.tsx extend context correctl
             class="ant-sender-header-close"
           >
             <button
-              class="ant-btn css-var-«r17» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+              class="ant-btn css-var-«r16» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
               type="button"
             >
               <span
@@ -1466,17 +1466,17 @@ exports[`renders components/sender/demo/header-fixed.tsx extend context correctl
         class="ant-sender-content"
       >
         <textarea
-          class="ant-input ant-input-borderless css-var-«r17» ant-input-css-var ant-sender-input"
+          class="ant-input ant-input-borderless css-var-«r16» ant-input-css-var ant-sender-input"
           style="overflow-y: hidden; resize: none;"
         />
         <div
           class="ant-sender-actions-list"
         >
           <div
-            class="ant-sender-actions-list-presets ant-flex css-var-«r17»"
+            class="ant-sender-actions-list-presets ant-flex css-var-«r16»"
           >
             <button
-              class="ant-btn css-var-«r17» ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              class="ant-btn css-var-«r16» ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
               disabled=""
               type="button"
             >
@@ -1516,14 +1516,14 @@ exports[`renders components/sender/demo/header-fixed.tsx extend context correctl
 
 exports[`renders components/sender/demo/paste-image.tsx extend context correctly 1`] = `
 <div
-  class="ant-app css-var-«r13»"
+  class="ant-app css-var-«r12»"
 >
   <div
-    class="ant-flex css-var-«r13» ant-flex-align-end"
+    class="ant-flex css-var-«r12» ant-flex-align-end"
     style="height: 220px;"
   >
     <div
-      class="ant-sender css-var-«r13»"
+      class="ant-sender css-var-«r12»"
     >
       <div
         class="ant-sender-header"
@@ -1541,7 +1541,7 @@ exports[`renders components/sender/demo/paste-image.tsx extend context correctly
             class="ant-sender-header-close"
           >
             <button
-              class="ant-btn css-var-«r13» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+              class="ant-btn css-var-«r12» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
               type="button"
             >
               <span
@@ -1576,18 +1576,18 @@ exports[`renders components/sender/demo/paste-image.tsx extend context correctly
           style="padding: 0px;"
         >
           <div
-            class="ant-attachment css-var-«r13»"
+            class="ant-attachment css-var-«r12»"
             dir="ltr"
           >
             <div
               class="ant-file-card-list-wrapper"
             >
               <div
-                class="ant-file-card-list ant-attachment-list css-var-«r13»"
+                class="ant-file-card-list ant-attachment-list css-var-«r12»"
                 style="display: none;"
               >
                 <span
-                  class="ant-upload-wrapper css-var-«r13»"
+                  class="ant-upload-wrapper css-var-«r12»"
                 >
                   <div
                     class="ant-upload ant-upload-select"
@@ -1602,7 +1602,7 @@ exports[`renders components/sender/demo/paste-image.tsx extend context correctly
                         type="file"
                       />
                       <button
-                        class="ant-btn css-var-«r13» ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
+                        class="ant-btn css-var-«r12» ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
                         type="button"
                       >
                         <span
@@ -1637,7 +1637,7 @@ exports[`renders components/sender/demo/paste-image.tsx extend context correctly
               class="ant-attachment-placeholder"
             >
               <span
-                class="ant-upload-wrapper css-var-«r13»"
+                class="ant-upload-wrapper css-var-«r12»"
               >
                 <div
                   class="ant-upload ant-upload-drag"
@@ -1658,10 +1658,10 @@ exports[`renders components/sender/demo/paste-image.tsx extend context correctly
                       class="ant-upload-drag-container"
                     >
                       <div
-                        class="ant-attachment-placeholder-inner ant-flex css-var-«r13» ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
+                        class="ant-attachment-placeholder-inner ant-flex css-var-«r12» ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
                       >
                         <span
-                          class="ant-typography ant-attachment-placeholder-icon css-var-«r13»"
+                          class="ant-typography ant-attachment-placeholder-icon css-var-«r12»"
                         >
                           <span
                             aria-label="cloud-upload"
@@ -1687,12 +1687,12 @@ exports[`renders components/sender/demo/paste-image.tsx extend context correctly
                           </span>
                         </span>
                         <h5
-                          class="ant-typography ant-attachment-placeholder-title css-var-«r13»"
+                          class="ant-typography ant-attachment-placeholder-title css-var-«r12»"
                         >
                           Upload files
                         </h5>
                         <span
-                          class="ant-typography ant-typography-secondary ant-attachment-placeholder-description css-var-«r13»"
+                          class="ant-typography ant-typography-secondary ant-attachment-placeholder-description css-var-«r12»"
                         >
                           Click or drag files to this area to upload
                         </span>
@@ -1712,7 +1712,7 @@ exports[`renders components/sender/demo/paste-image.tsx extend context correctly
           class="ant-sender-prefix"
         >
           <button
-            class="ant-btn css-var-«r13» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+            class="ant-btn css-var-«r12» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
             style="font-size: 16px;"
             type="button"
           >
@@ -1742,17 +1742,17 @@ exports[`renders components/sender/demo/paste-image.tsx extend context correctly
           </button>
         </div>
         <textarea
-          class="ant-input ant-input-borderless css-var-«r13» ant-input-css-var ant-sender-input"
+          class="ant-input ant-input-borderless css-var-«r12» ant-input-css-var ant-sender-input"
           style="overflow-y: hidden; resize: none;"
         />
         <div
           class="ant-sender-actions-list"
         >
           <div
-            class="ant-sender-actions-list-presets ant-flex css-var-«r13»"
+            class="ant-sender-actions-list-presets ant-flex css-var-«r12»"
           >
             <button
-              class="ant-btn css-var-«r13» ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              class="ant-btn css-var-«r12» ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
               disabled=""
               type="button"
             >
@@ -1784,14 +1784,14 @@ exports[`renders components/sender/demo/paste-image.tsx extend context correctly
         </div>
       </div>
       <div
-        class="ant-attachment-drop-area css-var-«r13»"
+        class="ant-attachment-drop-area css-var-«r12»"
         style="display: none;"
       >
         <div
           class="ant-attachment-placeholder"
         >
           <span
-            class="ant-upload-wrapper css-var-«r13»"
+            class="ant-upload-wrapper css-var-«r12»"
           >
             <div
               class="ant-upload ant-upload-drag"
@@ -1812,18 +1812,18 @@ exports[`renders components/sender/demo/paste-image.tsx extend context correctly
                   class="ant-upload-drag-container"
                 >
                   <div
-                    class="ant-attachment-placeholder-inner ant-flex css-var-«r13» ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
+                    class="ant-attachment-placeholder-inner ant-flex css-var-«r12» ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
                   >
                     <span
-                      class="ant-typography ant-attachment-placeholder-icon css-var-«r13»"
+                      class="ant-typography ant-attachment-placeholder-icon css-var-«r12»"
                     />
                     <h5
-                      class="ant-typography ant-attachment-placeholder-title css-var-«r13»"
+                      class="ant-typography ant-attachment-placeholder-title css-var-«r12»"
                     >
                       Drop file here
                     </h5>
                     <span
-                      class="ant-typography ant-typography-secondary ant-attachment-placeholder-description css-var-«r13»"
+                      class="ant-typography ant-typography-secondary ant-attachment-placeholder-description css-var-«r12»"
                     />
                   </div>
                 </div>
@@ -1841,11 +1841,11 @@ exports[`renders components/sender/demo/paste-image.tsx extend context correctly
 
 exports[`renders components/sender/demo/ref-action.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-«r11» ant-flex-wrap-wrap"
+  class="ant-flex css-var-«r10» ant-flex-wrap-wrap"
   style="gap: 12px;"
 >
   <button
-    class="ant-btn css-var-«r11» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-«r10» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     type="button"
   >
     <span>
@@ -1853,7 +1853,7 @@ exports[`renders components/sender/demo/ref-action.tsx extend context correctly 
     </span>
   </button>
   <button
-    class="ant-btn css-var-«r11» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-«r10» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     type="button"
   >
     <span>
@@ -1861,7 +1861,7 @@ exports[`renders components/sender/demo/ref-action.tsx extend context correctly 
     </span>
   </button>
   <button
-    class="ant-btn css-var-«r11» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-«r10» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     type="button"
   >
     <span>
@@ -1869,7 +1869,7 @@ exports[`renders components/sender/demo/ref-action.tsx extend context correctly 
     </span>
   </button>
   <button
-    class="ant-btn css-var-«r11» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-«r10» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     type="button"
   >
     <span>
@@ -1877,7 +1877,7 @@ exports[`renders components/sender/demo/ref-action.tsx extend context correctly 
     </span>
   </button>
   <button
-    class="ant-btn css-var-«r11» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-«r10» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     type="button"
   >
     <span>
@@ -1885,7 +1885,7 @@ exports[`renders components/sender/demo/ref-action.tsx extend context correctly 
     </span>
   </button>
   <button
-    class="ant-btn css-var-«r11» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-«r10» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     type="button"
   >
     <span>
@@ -1893,7 +1893,7 @@ exports[`renders components/sender/demo/ref-action.tsx extend context correctly 
     </span>
   </button>
   <button
-    class="ant-btn css-var-«r11» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-«r10» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     type="button"
   >
     <span>
@@ -1901,7 +1901,7 @@ exports[`renders components/sender/demo/ref-action.tsx extend context correctly 
     </span>
   </button>
   <button
-    class="ant-btn css-var-«r11» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-«r10» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     type="button"
   >
     <span>
@@ -1909,13 +1909,13 @@ exports[`renders components/sender/demo/ref-action.tsx extend context correctly 
     </span>
   </button>
   <div
-    class="ant-sender css-var-«r11»"
+    class="ant-sender css-var-«r10»"
   >
     <div
       class="ant-sender-content"
     >
       <textarea
-        class="ant-input ant-input-borderless css-var-«r11» ant-input-css-var ant-sender-input"
+        class="ant-input ant-input-borderless css-var-«r10» ant-input-css-var ant-sender-input"
         style="overflow-y: hidden; resize: none;"
       >
         Hello, welcome to use Ant Design X!
@@ -1924,10 +1924,10 @@ exports[`renders components/sender/demo/ref-action.tsx extend context correctly 
         class="ant-sender-actions-list"
       >
         <div
-          class="ant-sender-actions-list-presets ant-flex css-var-«r11»"
+          class="ant-sender-actions-list-presets ant-flex css-var-«r10»"
         >
           <button
-            class="ant-btn css-var-«r11» ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
+            class="ant-btn css-var-«r10» ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
             type="button"
           >
             <span
@@ -1965,19 +1965,19 @@ exports[`renders components/sender/demo/ref-action.tsx extend context correctly 
 
 exports[`renders components/sender/demo/send-style.tsx extend context correctly 1`] = `
 <div
-  class="ant-app css-var-«rp»"
+  class="ant-app css-var-«ro»"
 >
   <div
-    class="ant-flex css-var-«rp» ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+    class="ant-flex css-var-«ro» ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
   >
     <div
-      class="ant-sender css-var-«rp»"
+      class="ant-sender css-var-«ro»"
     >
       <div
         class="ant-sender-content"
       >
         <textarea
-          class="ant-input ant-input-borderless css-var-«rp» ant-input-css-var ant-sender-input"
+          class="ant-input ant-input-borderless css-var-«ro» ant-input-css-var ant-sender-input"
           placeholder="Change button border radius"
           style="overflow-y: hidden; resize: none;"
         >
@@ -1988,7 +1988,7 @@ exports[`renders components/sender/demo/send-style.tsx extend context correctly 
         >
           <button
             aria-describedby="test-id"
-            class="ant-btn css-var-«rp» ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
+            class="ant-btn css-var-«ro» ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
             style="border-radius: 12px;"
             type="button"
           >
@@ -2017,7 +2017,7 @@ exports[`renders components/sender/demo/send-style.tsx extend context correctly 
             </span>
           </button>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«rp» ant-tooltip-placement-top"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«ro» ant-tooltip-placement-top"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
@@ -2040,13 +2040,13 @@ exports[`renders components/sender/demo/send-style.tsx extend context correctly 
       </div>
     </div>
     <div
-      class="ant-sender css-var-«rp»"
+      class="ant-sender css-var-«ro»"
     >
       <div
         class="ant-sender-content"
       >
         <textarea
-          class="ant-input ant-input-borderless css-var-«rp» ant-input-css-var ant-sender-input"
+          class="ant-input ant-input-borderless css-var-«ro» ant-input-css-var ant-sender-input"
           placeholder="Change button icon"
           style="overflow-y: hidden; resize: none;"
         >
@@ -2057,7 +2057,7 @@ exports[`renders components/sender/demo/send-style.tsx extend context correctly 
         >
           <button
             aria-describedby="test-id"
-            class="ant-btn css-var-«rp» ant-btn-primary ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn"
+            class="ant-btn css-var-«ro» ant-btn-primary ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn"
             type="button"
           >
             <span
@@ -2088,7 +2088,7 @@ exports[`renders components/sender/demo/send-style.tsx extend context correctly 
             </span>
           </button>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«rp» ant-tooltip-placement-top"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«ro» ant-tooltip-placement-top"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
@@ -2111,13 +2111,13 @@ exports[`renders components/sender/demo/send-style.tsx extend context correctly 
       </div>
     </div>
     <div
-      class="ant-sender css-var-«rp»"
+      class="ant-sender css-var-«ro»"
     >
       <div
         class="ant-sender-content"
       >
         <textarea
-          class="ant-input ant-input-borderless css-var-«rp» ant-input-css-var ant-sender-input"
+          class="ant-input ant-input-borderless css-var-«ro» ant-input-css-var ant-sender-input"
           placeholder="Loading not change button"
           style="overflow-y: hidden; resize: none;"
         >
@@ -2127,7 +2127,7 @@ exports[`renders components/sender/demo/send-style.tsx extend context correctly 
           class="ant-sender-actions-list"
         >
           <button
-            class="ant-btn css-var-«rp» ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
+            class="ant-btn css-var-«ro» ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
             type="button"
           >
             <span
@@ -2344,7 +2344,7 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-selected ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-Beijing"
+                data-menu-id="rc-menu-uuid-test-Beijing"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -2375,7 +2375,7 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-Shanghai"
+                data-menu-id="rc-menu-uuid-test-Shanghai"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -2406,7 +2406,7 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-Guangzhou"
+                data-menu-id="rc-menu-uuid-test-Guangzhou"
                 role="menuitem"
                 tabindex="-1"
               >

@@ -3,8 +3,10 @@ import type { GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
 import genBubbleStyle, { BubbleToken } from './bubble';
 import { genShapeStyle, genVariantStyle } from './content';
+import { genDividerBubbleStyle } from './divider';
 import genBubbleListStyle from './list';
 import { genSlotStyle } from './slot';
+import { genSystemBubbleStyle } from './system';
 export const prepareComponentToken: GetDefaultToken<'Bubble'> = () => ({});
 
 // biome-ignore lint/suspicious/noEmptyInterface: ComponentToken need to be empty by default
@@ -21,6 +23,8 @@ export default genStyleHooks<'Bubble'>(
       genShapeStyle(bubbleToken),
       genSlotStyle(bubbleToken),
       genBubbleListStyle(bubbleToken),
+      genSystemBubbleStyle(bubbleToken),
+      genDividerBubbleStyle(bubbleToken),
     ];
   },
   prepareComponentToken,

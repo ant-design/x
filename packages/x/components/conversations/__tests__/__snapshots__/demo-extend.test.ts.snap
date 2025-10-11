@@ -2,7 +2,7 @@
 
 exports[`renders components/conversations/demo/basic.tsx extend context correctly 1`] = `
 <ul
-  class="ant-conversations css-var-«r1u»"
+  class="ant-conversations css-var-«r1o»"
   style="width: 256px; background: #ffffff; border-radius: 6px;"
 >
   <li
@@ -34,7 +34,7 @@ exports[`renders components/conversations/demo/basic.tsx extend context correctl
       </span>
     </div>
     <span
-      class="ant-typography ant-conversations-label css-var-«r1u»"
+      class="ant-typography ant-conversations-label css-var-«r1o»"
     >
       Help Me Write
     </span>
@@ -67,7 +67,7 @@ exports[`renders components/conversations/demo/basic.tsx extend context correctl
       </span>
     </div>
     <span
-      class="ant-typography ant-conversations-label css-var-«r1u»"
+      class="ant-typography ant-conversations-label css-var-«r1o»"
     >
       AI Coding
     </span>
@@ -100,7 +100,7 @@ exports[`renders components/conversations/demo/basic.tsx extend context correctl
       </span>
     </div>
     <span
-      class="ant-typography ant-conversations-label css-var-«r1u»"
+      class="ant-typography ant-conversations-label css-var-«r1o»"
     >
       Create Image
     </span>
@@ -132,15 +132,15 @@ exports[`renders components/conversations/demo/basic.tsx extend context correctl
       </span>
     </div>
     <span
-      class="ant-typography ant-conversations-label css-var-«r1u»"
+      class="ant-typography ant-conversations-label css-var-«r1o»"
     >
       <div
-        class="ant-flex css-var-«r1u» ant-flex-align-center ant-flex-gap-small"
+        class="ant-flex css-var-«r1o» ant-flex-align-center ant-flex-gap-small"
       >
         Deep Search
         <button
           aria-checked="false"
-          class="ant-switch ant-switch-small css-var-«r1u»"
+          class="ant-switch ant-switch-small css-var-«r1o»"
           role="switch"
           type="button"
         >
@@ -168,7 +168,7 @@ exports[`renders components/conversations/demo/basic.tsx extend context correctl
 
 exports[`renders components/conversations/demo/controlled-collapsible.tsx extend context correctly 1`] = `
 <ul
-  class="ant-conversations css-var-«r1t»"
+  class="ant-conversations css-var-«r1n»"
   style="width: 256px; background: #ffffff; border-radius: 6px;"
 >
   <li
@@ -181,7 +181,7 @@ exports[`renders components/conversations/demo/controlled-collapsible.tsx extend
         class="ant-conversations-group-label"
       >
         <div
-          class="ant-flex css-var-«r1t» ant-flex-gap-small"
+          class="ant-flex css-var-«r1n» ant-flex-gap-small"
         >
           <span
             aria-label="field-time"
@@ -223,7 +223,7 @@ exports[`renders components/conversations/demo/controlled-collapsible.tsx extend
           title="Conversation Item 1"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«r1t»"
+            class="ant-typography ant-conversations-label css-var-«r1n»"
           >
             Conversation Item 1
           </span>
@@ -233,7 +233,7 @@ exports[`renders components/conversations/demo/controlled-collapsible.tsx extend
           title="Conversation Item 4"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«r1t»"
+            class="ant-typography ant-conversations-label css-var-«r1n»"
           >
             Conversation Item 4
           </span>
@@ -243,7 +243,7 @@ exports[`renders components/conversations/demo/controlled-collapsible.tsx extend
           title="Conversation Item 7"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«r1t»"
+            class="ant-typography ant-conversations-label css-var-«r1n»"
           >
             Conversation Item 7
           </span>
@@ -261,7 +261,7 @@ exports[`renders components/conversations/demo/controlled-collapsible.tsx extend
         class="ant-conversations-group-label"
       >
         <div
-          class="ant-flex css-var-«r1t» ant-flex-gap-small"
+          class="ant-flex css-var-«r1n» ant-flex-gap-small"
         >
           <span
             aria-label="field-time"
@@ -326,7 +326,7 @@ exports[`renders components/conversations/demo/controlled-collapsible.tsx extend
           title="Conversation Item 2"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«r1t»"
+            class="ant-typography ant-conversations-label css-var-«r1n»"
           >
             Conversation Item 2
           </span>
@@ -336,7 +336,7 @@ exports[`renders components/conversations/demo/controlled-collapsible.tsx extend
           title="Conversation Item 5"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«r1t»"
+            class="ant-typography ant-conversations-label css-var-«r1n»"
           >
             Conversation Item 5
           </span>
@@ -346,7 +346,7 @@ exports[`renders components/conversations/demo/controlled-collapsible.tsx extend
           title="Conversation Item 8"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«r1t»"
+            class="ant-typography ant-conversations-label css-var-«r1n»"
           >
             Conversation Item 8
           </span>
@@ -364,7 +364,7 @@ exports[`renders components/conversations/demo/controlled-collapsible.tsx extend
         class="ant-conversations-group-label"
       >
         <div
-          class="ant-flex css-var-«r1t» ant-flex-gap-small"
+          class="ant-flex css-var-«r1n» ant-flex-gap-small"
         >
           <span
             aria-label="field-time"
@@ -426,10 +426,10 @@ exports[`renders components/conversations/demo/controlled-collapsible.tsx extend
 
 exports[`renders components/conversations/demo/controlled-mode.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-«r1s» ant-flex-align-flex-start ant-flex-gap-small ant-flex-vertical"
+  class="ant-flex css-var-«r1m» ant-flex-align-flex-start ant-flex-gap-small ant-flex-vertical"
 >
   <ul
-    class="ant-conversations css-var-«r1s»"
+    class="ant-conversations css-var-«r1m»"
     style="width: 256px; background: #ffffff; border-radius: 6px;"
   >
     <li
@@ -461,7 +461,7 @@ exports[`renders components/conversations/demo/controlled-mode.tsx extend contex
         </span>
       </div>
       <span
-        class="ant-typography ant-conversations-label css-var-«r1s»"
+        class="ant-typography ant-conversations-label css-var-«r1m»"
       >
         Help Me Write
       </span>
@@ -494,7 +494,7 @@ exports[`renders components/conversations/demo/controlled-mode.tsx extend contex
         </span>
       </div>
       <span
-        class="ant-typography ant-conversations-label css-var-«r1s»"
+        class="ant-typography ant-conversations-label css-var-«r1m»"
       >
         AI Coding
       </span>
@@ -527,7 +527,7 @@ exports[`renders components/conversations/demo/controlled-mode.tsx extend contex
         </span>
       </div>
       <span
-        class="ant-typography ant-conversations-label css-var-«r1s»"
+        class="ant-typography ant-conversations-label css-var-«r1m»"
       >
         Create Image
       </span>
@@ -560,17 +560,17 @@ exports[`renders components/conversations/demo/controlled-mode.tsx extend contex
         </span>
       </div>
       <span
-        class="ant-typography ant-conversations-label css-var-«r1s»"
+        class="ant-typography ant-conversations-label css-var-«r1m»"
       >
         Deep Search
       </span>
     </li>
   </ul>
   <div
-    class="ant-flex css-var-«r1s» ant-flex-gap-small"
+    class="ant-flex css-var-«r1m» ant-flex-gap-small"
   >
     <button
-      class="ant-btn css-var-«r1s» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-«r1m» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -578,7 +578,7 @@ exports[`renders components/conversations/demo/controlled-mode.tsx extend contex
       </span>
     </button>
     <button
-      class="ant-btn css-var-«r1s» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-«r1m» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -593,7 +593,7 @@ exports[`renders components/conversations/demo/controlled-mode.tsx extend contex
 
 exports[`renders components/conversations/demo/custom-new-chat.tsx extend context correctly 1`] = `
 <ul
-  class="ant-conversations css-var-«r1r»"
+  class="ant-conversations css-var-«r1l»"
   style="width: 256px; background: #ffffff; border-radius: 6px;"
 >
   <button
@@ -653,7 +653,7 @@ exports[`renders components/conversations/demo/custom-new-chat.tsx extend contex
       </span>
     </div>
     <span
-      class="ant-typography ant-conversations-label css-var-«r1r»"
+      class="ant-typography ant-conversations-label css-var-«r1l»"
     >
       Help Me Write
     </span>
@@ -686,7 +686,7 @@ exports[`renders components/conversations/demo/custom-new-chat.tsx extend contex
       </span>
     </div>
     <span
-      class="ant-typography ant-conversations-label css-var-«r1r»"
+      class="ant-typography ant-conversations-label css-var-«r1l»"
     >
       AI Coding
     </span>
@@ -719,7 +719,7 @@ exports[`renders components/conversations/demo/custom-new-chat.tsx extend contex
       </span>
     </div>
     <span
-      class="ant-typography ant-conversations-label css-var-«r1r»"
+      class="ant-typography ant-conversations-label css-var-«r1l»"
     >
       Create Image
     </span>
@@ -752,13 +752,13 @@ exports[`renders components/conversations/demo/custom-new-chat.tsx extend contex
       </span>
     </div>
     <span
-      class="ant-typography ant-conversations-label css-var-«r1r»"
+      class="ant-typography ant-conversations-label css-var-«r1l»"
     >
       Deep Search
     </span>
   </li>
   <div
-    class="ant-divider css-var-«r1r» ant-divider-horizontal ant-divider-rail ant-conversations-divider"
+    class="ant-divider css-var-«r1l» ant-divider-horizontal ant-divider-rail ant-conversations-divider"
     role="separator"
   />
   <li
@@ -784,7 +784,7 @@ exports[`renders components/conversations/demo/custom-new-chat.tsx extend contex
           title="Conversation Item 1"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«r1r»"
+            class="ant-typography ant-conversations-label css-var-«r1l»"
           >
             Conversation Item 1
           </span>
@@ -799,7 +799,7 @@ exports[`renders components/conversations/demo/custom-new-chat.tsx extend contex
 
 exports[`renders components/conversations/demo/group.tsx extend context correctly 1`] = `
 <ul
-  class="ant-conversations css-var-«r1p»"
+  class="ant-conversations css-var-«r1j»"
   style="width: 256px; background: #ffffff; border-radius: 6px;"
 >
   <li
@@ -825,7 +825,7 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
           title="This's Conversation Item 1, you can click me!"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«r1p»"
+            class="ant-typography ant-conversations-label css-var-«r1j»"
           >
             This's Conversation Item 1, you can click me!
           </span>
@@ -835,7 +835,7 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
           title="Conversation Item 2"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«r1p»"
+            class="ant-typography ant-conversations-label css-var-«r1j»"
           >
             Conversation Item 2
           </span>
@@ -845,7 +845,7 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
           title="Conversation Item 3"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«r1p»"
+            class="ant-typography ant-conversations-label css-var-«r1j»"
           >
             Conversation Item 3
           </span>
@@ -876,7 +876,7 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
           title="Conversation Item 4"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«r1p»"
+            class="ant-typography ant-conversations-label css-var-«r1j»"
           >
             Conversation Item 4
           </span>
@@ -886,7 +886,7 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
           title="Conversation Item 5"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«r1p»"
+            class="ant-typography ant-conversations-label css-var-«r1j»"
           >
             Conversation Item 5
           </span>
@@ -896,7 +896,7 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
           title="Conversation Item 6"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«r1p»"
+            class="ant-typography ant-conversations-label css-var-«r1j»"
           >
             Conversation Item 6
           </span>
@@ -911,7 +911,7 @@ exports[`renders components/conversations/demo/group.tsx extend context correctl
 
 exports[`renders components/conversations/demo/group-collapsible.tsx extend context correctly 1`] = `
 <ul
-  class="ant-conversations css-var-«r1q»"
+  class="ant-conversations css-var-«r1k»"
   style="width: 256px; background: #ffffff; border-radius: 6px;"
 >
   <li
@@ -1004,7 +1004,7 @@ exports[`renders components/conversations/demo/infinite-load.tsx extend context 
       style="height: auto; overflow: hidden;"
     >
       <ul
-        class="ant-conversations css-var-«r1o»"
+        class="ant-conversations css-var-«r1i»"
       />
       <div
         style="text-align: center;"
@@ -1012,7 +1012,7 @@ exports[`renders components/conversations/demo/infinite-load.tsx extend context 
         <div
           aria-busy="true"
           aria-live="polite"
-          class="ant-spin ant-spin-sm ant-spin-spinning css-var-«r1o»"
+          class="ant-spin ant-spin-sm ant-spin-spinning css-var-«r1i»"
         >
           <span
             aria-label="redo"
@@ -1044,7 +1044,7 @@ exports[`renders components/conversations/demo/infinite-load.tsx extend context 
 
 exports[`renders components/conversations/demo/menu-trigger.tsx extend context correctly 1`] = `
 <ul
-  class="ant-conversations css-var-«r11»"
+  class="ant-conversations css-var-«ru»"
   style="width: 256px; background: #ffffff; border-radius: 6px;"
 >
   <li
@@ -1052,7 +1052,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
     title="Conversation Item 1"
   >
     <span
-      class="ant-typography ant-conversations-label css-var-«r11»"
+      class="ant-typography ant-conversations-label css-var-«ru»"
     >
       Conversation Item 1
     </span>
@@ -1081,11 +1081,11 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
         </svg>
       </span>
       <div
-        class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-«r11» ant-dropdown-css-var ant-dropdown-placement-bottomRight"
+        class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-«ru» ant-dropdown-css-var ant-dropdown-placement-bottomRight"
         style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
       >
         <ul
-          class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-«r11» ant-dropdown-css-var css-var-«r11» ant-dropdown-menu-css-var"
+          class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-«ru» ant-dropdown-css-var css-var-«ru» ant-dropdown-menu-css-var"
           data-menu-list="true"
           role="menu"
           tabindex="0"
@@ -1093,7 +1093,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
           <li
             aria-describedby="test-id"
             class="ant-dropdown-menu-item"
-            data-menu-id="rc-menu-uuid-Rename"
+            data-menu-id="rc-menu-uuid-test-Rename"
             role="menuitem"
             tabindex="-1"
           >
@@ -1123,7 +1123,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
             </span>
           </li>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r11» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«ru» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
@@ -1143,7 +1143,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
           <li
             aria-describedby="test-id"
             class="ant-dropdown-menu-item"
-            data-menu-id="rc-menu-uuid-Share"
+            data-menu-id="rc-menu-uuid-test-Share"
             role="menuitem"
             tabindex="-1"
           >
@@ -1173,7 +1173,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
             </span>
           </li>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r11» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«ru» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
@@ -1198,7 +1198,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
             aria-describedby="test-id"
             aria-disabled="true"
             class="ant-dropdown-menu-item ant-dropdown-menu-item-disabled"
-            data-menu-id="rc-menu-uuid-Archive"
+            data-menu-id="rc-menu-uuid-test-Archive"
             role="menuitem"
           >
             <span
@@ -1227,7 +1227,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
             </span>
           </li>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r11» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«ru» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
@@ -1247,7 +1247,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
           <li
             aria-describedby="test-id"
             class="ant-dropdown-menu-item ant-dropdown-menu-item-danger"
-            data-menu-id="rc-menu-uuid-deleteChat"
+            data-menu-id="rc-menu-uuid-test-deleteChat"
             role="menuitem"
             tabindex="-1"
           >
@@ -1277,7 +1277,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
             </span>
           </li>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r11» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«ru» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
@@ -1307,7 +1307,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
     title="Conversation Item 2"
   >
     <span
-      class="ant-typography ant-conversations-label css-var-«r11»"
+      class="ant-typography ant-conversations-label css-var-«ru»"
     >
       Conversation Item 2
     </span>
@@ -1333,11 +1333,11 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
         </svg>
       </span>
       <div
-        class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-«r11» ant-dropdown-css-var ant-dropdown-placement-bottomRight"
+        class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-«ru» ant-dropdown-css-var ant-dropdown-placement-bottomRight"
         style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
       >
         <ul
-          class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-«r11» ant-dropdown-css-var css-var-«r11» ant-dropdown-menu-css-var"
+          class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-«ru» ant-dropdown-css-var css-var-«ru» ant-dropdown-menu-css-var"
           data-menu-list="true"
           role="menu"
           tabindex="0"
@@ -1354,7 +1354,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
     title="Conversation Item 3"
   >
     <span
-      class="ant-typography ant-conversations-label css-var-«r11»"
+      class="ant-typography ant-conversations-label css-var-«ru»"
     >
       Conversation Item 3
     </span>
@@ -1383,11 +1383,11 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
         </svg>
       </span>
       <div
-        class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-«r11» ant-dropdown-css-var ant-dropdown-placement-bottomRight"
+        class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-«ru» ant-dropdown-css-var ant-dropdown-placement-bottomRight"
         style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
       >
         <ul
-          class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-«r11» ant-dropdown-css-var css-var-«r11» ant-dropdown-menu-css-var"
+          class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-«ru» ant-dropdown-css-var css-var-«ru» ant-dropdown-menu-css-var"
           data-menu-list="true"
           role="menu"
           tabindex="0"
@@ -1395,7 +1395,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
           <li
             aria-describedby="test-id"
             class="ant-dropdown-menu-item"
-            data-menu-id="rc-menu-uuid-Rename"
+            data-menu-id="rc-menu-uuid-test-Rename"
             role="menuitem"
             tabindex="-1"
           >
@@ -1425,7 +1425,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
             </span>
           </li>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r11» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«ru» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
@@ -1445,7 +1445,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
           <li
             aria-describedby="test-id"
             class="ant-dropdown-menu-item"
-            data-menu-id="rc-menu-uuid-Share"
+            data-menu-id="rc-menu-uuid-test-Share"
             role="menuitem"
             tabindex="-1"
           >
@@ -1475,7 +1475,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
             </span>
           </li>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r11» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«ru» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
@@ -1500,7 +1500,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
             aria-describedby="test-id"
             aria-disabled="true"
             class="ant-dropdown-menu-item ant-dropdown-menu-item-disabled"
-            data-menu-id="rc-menu-uuid-Archive"
+            data-menu-id="rc-menu-uuid-test-Archive"
             role="menuitem"
           >
             <span
@@ -1529,7 +1529,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
             </span>
           </li>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r11» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«ru» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
@@ -1549,7 +1549,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
           <li
             aria-describedby="test-id"
             class="ant-dropdown-menu-item ant-dropdown-menu-item-danger"
-            data-menu-id="rc-menu-uuid-deleteChat"
+            data-menu-id="rc-menu-uuid-test-deleteChat"
             role="menuitem"
             tabindex="-1"
           >
@@ -1579,7 +1579,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
             </span>
           </li>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«r11» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-«ru» ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
@@ -1609,7 +1609,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
     title="Conversation Item 4"
   >
     <span
-      class="ant-typography ant-conversations-label css-var-«r11»"
+      class="ant-typography ant-conversations-label css-var-«ru»"
     >
       Conversation Item 4
     </span>
@@ -1621,7 +1621,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx extend context c
 
 exports[`renders components/conversations/demo/new-chat.tsx extend context correctly 1`] = `
 <ul
-  class="ant-conversations css-var-«r10»"
+  class="ant-conversations css-var-«rt»"
   style="width: 256px; background: #ffffff; border-radius: 6px;"
 >
   <button
@@ -1687,7 +1687,7 @@ exports[`renders components/conversations/demo/new-chat.tsx extend context corre
       </span>
     </div>
     <span
-      class="ant-typography ant-conversations-label css-var-«r10»"
+      class="ant-typography ant-conversations-label css-var-«rt»"
     >
       Help Me Write
     </span>
@@ -1720,7 +1720,7 @@ exports[`renders components/conversations/demo/new-chat.tsx extend context corre
       </span>
     </div>
     <span
-      class="ant-typography ant-conversations-label css-var-«r10»"
+      class="ant-typography ant-conversations-label css-var-«rt»"
     >
       AI Coding
     </span>
@@ -1753,7 +1753,7 @@ exports[`renders components/conversations/demo/new-chat.tsx extend context corre
       </span>
     </div>
     <span
-      class="ant-typography ant-conversations-label css-var-«r10»"
+      class="ant-typography ant-conversations-label css-var-«rt»"
     >
       Create Image
     </span>
@@ -1786,13 +1786,13 @@ exports[`renders components/conversations/demo/new-chat.tsx extend context corre
       </span>
     </div>
     <span
-      class="ant-typography ant-conversations-label css-var-«r10»"
+      class="ant-typography ant-conversations-label css-var-«rt»"
     >
       Deep Search
     </span>
   </li>
   <div
-    class="ant-divider css-var-«r10» ant-divider-horizontal ant-divider-rail ant-conversations-divider"
+    class="ant-divider css-var-«rt» ant-divider-horizontal ant-divider-rail ant-conversations-divider"
     role="separator"
   />
   <li
@@ -1818,7 +1818,7 @@ exports[`renders components/conversations/demo/new-chat.tsx extend context corre
           title="Conversation Item 1"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«r10»"
+            class="ant-typography ant-conversations-label css-var-«rt»"
           >
             Conversation Item 1
           </span>
@@ -1838,32 +1838,32 @@ Array [
   >
     You can switch sessions using the shortcut key: 
     <span
-      class="ant-tag ant-tag-filled css-var-«rv»"
+      class="ant-tag ant-tag-filled css-var-«rs»"
     >
       Alt/⌥
     </span>
      + 
     <span
-      class="ant-tag ant-tag-filled css-var-«rv»"
+      class="ant-tag ant-tag-filled css-var-«rs»"
     >
       number
     </span>
     , and create new chat using the shortcut key: 
     <span
-      class="ant-tag ant-tag-filled css-var-«rv»"
+      class="ant-tag ant-tag-filled css-var-«rs»"
     >
       Win/⌘
     </span>
      + 
     <span
-      class="ant-tag ant-tag-filled css-var-«rv»"
+      class="ant-tag ant-tag-filled css-var-«rs»"
     >
       K
     </span>
     .
   </div>,
   <ul
-    class="ant-conversations css-var-«rv»"
+    class="ant-conversations css-var-«rs»"
     style="width: 256px; background: #ffffff; border-radius: 6px;"
   >
     <button
@@ -1939,7 +1939,7 @@ Array [
         </span>
       </div>
       <span
-        class="ant-typography ant-conversations-label css-var-«rv»"
+        class="ant-typography ant-conversations-label css-var-«rs»"
       >
         Help Me Write
       </span>
@@ -1972,7 +1972,7 @@ Array [
         </span>
       </div>
       <span
-        class="ant-typography ant-conversations-label css-var-«rv»"
+        class="ant-typography ant-conversations-label css-var-«rs»"
       >
         AI Coding
       </span>
@@ -2005,7 +2005,7 @@ Array [
         </span>
       </div>
       <span
-        class="ant-typography ant-conversations-label css-var-«rv»"
+        class="ant-typography ant-conversations-label css-var-«rs»"
       >
         Create Image
       </span>
@@ -2038,7 +2038,7 @@ Array [
         </span>
       </div>
       <span
-        class="ant-typography ant-conversations-label css-var-«rv»"
+        class="ant-typography ant-conversations-label css-var-«rs»"
       >
         Deep Search
       </span>
@@ -2053,7 +2053,7 @@ Array [
           class="ant-conversations-group-label"
         >
           <div
-            class="ant-flex css-var-«rv» ant-flex-gap-small"
+            class="ant-flex css-var-«rs» ant-flex-gap-small"
           >
             <span
               aria-label="code-sandbox"
@@ -2103,7 +2103,7 @@ Array [
       </div>
     </li>
     <div
-      class="ant-divider css-var-«rv» ant-divider-horizontal ant-divider-rail ant-conversations-divider"
+      class="ant-divider css-var-«rs» ant-divider-horizontal ant-divider-rail ant-conversations-divider"
       role="separator"
     />
     <li
@@ -2129,7 +2129,7 @@ Array [
             title="Conversation Item 1"
           >
             <span
-              class="ant-typography ant-conversations-label css-var-«rv»"
+              class="ant-typography ant-conversations-label css-var-«rs»"
             >
               Conversation Item 1
             </span>
@@ -2191,7 +2191,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
           <li
             aria-describedby="test-id"
             class="ant-dropdown-menu-item"
-            data-menu-id="rc-menu-uuid-Rename"
+            data-menu-id="rc-menu-uuid-test-Rename"
             role="menuitem"
             tabindex="-1"
           >
@@ -2241,7 +2241,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
           <li
             aria-describedby="test-id"
             class="ant-dropdown-menu-item"
-            data-menu-id="rc-menu-uuid-Share"
+            data-menu-id="rc-menu-uuid-test-Share"
             role="menuitem"
             tabindex="-1"
           >
@@ -2296,7 +2296,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
             aria-describedby="test-id"
             aria-disabled="true"
             class="ant-dropdown-menu-item ant-dropdown-menu-item-disabled"
-            data-menu-id="rc-menu-uuid-Archive"
+            data-menu-id="rc-menu-uuid-test-Archive"
             role="menuitem"
           >
             <span
@@ -2345,7 +2345,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
           <li
             aria-describedby="test-id"
             class="ant-dropdown-menu-item ant-dropdown-menu-item-danger"
-            data-menu-id="rc-menu-uuid-deleteChat"
+            data-menu-id="rc-menu-uuid-test-deleteChat"
             role="menuitem"
             tabindex="-1"
           >
@@ -2443,7 +2443,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
           <li
             aria-describedby="test-id"
             class="ant-dropdown-menu-item"
-            data-menu-id="rc-menu-uuid-Rename"
+            data-menu-id="rc-menu-uuid-test-Rename"
             role="menuitem"
             tabindex="-1"
           >
@@ -2493,7 +2493,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
           <li
             aria-describedby="test-id"
             class="ant-dropdown-menu-item"
-            data-menu-id="rc-menu-uuid-Share"
+            data-menu-id="rc-menu-uuid-test-Share"
             role="menuitem"
             tabindex="-1"
           >
@@ -2548,7 +2548,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
             aria-describedby="test-id"
             aria-disabled="true"
             class="ant-dropdown-menu-item ant-dropdown-menu-item-disabled"
-            data-menu-id="rc-menu-uuid-Archive"
+            data-menu-id="rc-menu-uuid-test-Archive"
             role="menuitem"
           >
             <span
@@ -2597,7 +2597,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
           <li
             aria-describedby="test-id"
             class="ant-dropdown-menu-item ant-dropdown-menu-item-danger"
-            data-menu-id="rc-menu-uuid-deleteChat"
+            data-menu-id="rc-menu-uuid-test-deleteChat"
             role="menuitem"
             tabindex="-1"
           >
@@ -2695,7 +2695,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
           <li
             aria-describedby="test-id"
             class="ant-dropdown-menu-item"
-            data-menu-id="rc-menu-uuid-Rename"
+            data-menu-id="rc-menu-uuid-test-Rename"
             role="menuitem"
             tabindex="-1"
           >
@@ -2745,7 +2745,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
           <li
             aria-describedby="test-id"
             class="ant-dropdown-menu-item"
-            data-menu-id="rc-menu-uuid-Share"
+            data-menu-id="rc-menu-uuid-test-Share"
             role="menuitem"
             tabindex="-1"
           >
@@ -2800,7 +2800,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
             aria-describedby="test-id"
             aria-disabled="true"
             class="ant-dropdown-menu-item ant-dropdown-menu-item-disabled"
-            data-menu-id="rc-menu-uuid-Archive"
+            data-menu-id="rc-menu-uuid-test-Archive"
             role="menuitem"
           >
             <span
@@ -2849,7 +2849,7 @@ exports[`renders components/conversations/demo/with-menu.tsx extend context corr
           <li
             aria-describedby="test-id"
             class="ant-dropdown-menu-item ant-dropdown-menu-item-danger"
-            data-menu-id="rc-menu-uuid-deleteChat"
+            data-menu-id="rc-menu-uuid-test-deleteChat"
             role="menuitem"
             tabindex="-1"
           >

@@ -55,7 +55,6 @@ export const genShapeStyle: GenerateStyle<BubbleToken> = (token) => {
             _skip_check_: true,
             value: halfRadius,
           },
-          paddingInline: calc(padding).mul(1.25).equal(),
         },
 
         '&-corner': {

@@ -216,3 +216,22 @@ export interface BubbleListProps extends Omit<React.HTMLAttributes<HTMLDivElemen
    */
   role?: RoleType;
 }
+
+export interface SystemBubbleProps
+  extends Pick<
+    BubbleProps,
+    | 'prefixCls'
+    | 'content'
+    | 'style'
+    | 'className'
+    | 'styles'
+    | 'classNames'
+    | 'rootClassName'
+    | 'variant'
+    | 'shape'
+  > {
+  /**
+   * @description 扩展插槽渲染
+   */
+  extra?: React.ReactNode | ((content: BubbleContentType) => React.ReactNode);
+}

@@ -22,6 +22,8 @@ demo:
 <code src="./demo/basic.tsx">基本</code>
 <code src="./demo/variant-and-shape.tsx">变体与形状</code>
 <code src="./demo/sider-and-placement.tsx">边栏与位置</code>
+<code src="./demo/system.tsx">系统信息气泡</code>
+<code src="./demo/divider.tsx">分割线气泡</code>
 <code src="./demo/header.tsx">气泡头</code>
 <code src="./demo/footer.tsx">气泡尾</code>
 <code src="./demo/loading.tsx">加载中</code>
