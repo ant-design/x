@@ -42,6 +42,7 @@ Used for rendering streaming Markdown format returned by LLMs.
 | hasNextChunk | Indicates whether more content chunks are expected. When false, flushes all cached content and completes rendering | `boolean` | `false` |
 | enableAnimation | Enables text fade-in animation for block elements (`p`, `li`, `h1`, `h2`, `h3`, `h4`) | `boolean` | `false` |
 | animationConfig | Configuration for text appearance animation effects | `AnimationConfig` | `{ fadeDuration: 200, easing: 'ease-in-out' }` |
+| incompletePlaceholderMap | Placeholder mapping for unclosed Markdown elements, supports custom placeholder components for links and images | `{ link?: string; image?: string }` | `{ link: 'incomplete-link', image: 'incomplete-image' }` |
 
 #### AnimationConfig
 

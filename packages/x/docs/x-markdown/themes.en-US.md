@@ -1,6 +1,6 @@
 ---
 title: Themes
-order: 5
+order: 3
 ---
 
 ## How to Import Themes
@@ -36,6 +36,7 @@ We welcome community contributions for new themes! Please follow these specifica
 ### Theme Naming Conventions
 
 Theme files should follow these naming rules:
+
 - File name: `theme-name.css`
 - Class name prefix: `x-markdown-theme-name`
 - Example: `x-markdown-ocean.css` corresponds to class name `x-markdown-ocean`
@@ -43,6 +44,7 @@ Theme files should follow these naming rules:
 ### Theme Development Specifications
 
 #### 1. File Structure
+
 Place your theme files in the `packages/x-markdown/src/themes/` directory:
 
 ```
@@ -64,14 +66,14 @@ Theme styles must follow these naming conventions:
   --x-markdown-color-text: #333;
   --x-markdown-color-bg: #fff;
   --x-markdown-color-border: #e8e8e8;
-  
+
   /* Code block styles */
   --x-markdown-color-code-bg: #f5f5f5;
   --x-markdown-color-code-text: #333;
-  
+
   /* Heading styles */
   --x-markdown-color-heading: #262626;
-  
+
   /* Link styles */
   --x-markdown-color-link: #1890ff;
   --x-markdown-color-link-hover: #40a9ff;
@@ -97,15 +99,14 @@ Theme styles must follow these naming conventions:
 #### 3. Development Steps
 
 1. **Create Theme File**:
+
    ```bash
    touch packages/x-markdown/src/themes/your-theme-name.css
    ```
 
-2. **Define Base Variables**:
-   Use CSS variables to define colors, spacing, and other base styles.
+2. **Define Base Variables**: Use CSS variables to define colors, spacing, and other base styles.
 
-3. **Implement Component Styles**:
-   Implement styles for various Markdown elements:
+3. **Implement Component Styles**: Implement styles for various Markdown elements:
    - Headings (h1-h6)
    - Code blocks
    - Tables
@@ -114,12 +115,12 @@ Theme styles must follow these naming conventions:
    - Links
    - Images
 
-4. **Test Theme**:
-   Test your theme in the demo:
+4. **Test Theme**: Test your theme in the demo:
+
    ```tsx
    import '@ant-design/x-markdown/themes/your-theme-name.css';
-   
-   <XMarkdown className="x-markdown-your-theme-name" content="# Test Content" />
+
+   <XMarkdown className="x-markdown-your-theme-name" content="# Test Content" />;
    ```
 
 #### 4. Submission Guidelines
@@ -154,11 +155,11 @@ Here is a complete theme example:
   --x-markdown-color-border: #e2e8f0;
   --x-markdown-color-primary: #0ea5e9;
   --x-markdown-color-secondary: #64748b;
-  
+
   /* Code blocks */
   --x-markdown-color-code-bg: #f1f5f9;
   --x-markdown-color-code-border: #cbd5e1;
-  
+
   /* Headings */
   --x-markdown-color-h1: #0f172a;
   --x-markdown-color-h2: #1e293b;
@@ -180,6 +181,7 @@ Here is a complete theme example:
 ### Community Themes
 
 We welcome community contributions for various theme styles, such as:
+
 - Tech-style themes
 - Minimalist themes
 - Retro-style themes

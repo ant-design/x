@@ -1,196 +1,136 @@
-import type { BubbleListProps } from '@ant-design/x';
-import { Bubble, Sender } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
-import { DefaultChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';
-import { Button, Row } from 'antd';
-import React, { useMemo, useState } from 'react';
-import { mockFetch, useMarkdownTheme } from '../_utils';
-import '@ant-design/x-markdown/themes/light.css';
-import '@ant-design/x-markdown/themes/dark.css';
+import { Button, Card, Skeleton } from 'antd';
+import React, { useState } from 'react';
 
-const fullContent = `
-### Link链接 🔗
-内部链接：[Ant Design X](https://github.com/ant-design/x)
-
-邮箱链接：<contact@example.com>
-
-### Image 🖼️
-
-![示例图片](https://mdn.alipayobjects.com/huamei_yz9z7c/afts/img/0lMhRYbo0-8AAAAAQDAAAAgADlJoAQFr/original)
-
-### Heading标题  📑
-# 一级标题
-## 二级标题
-### 三级标题
-#### 四级标题
-##### 五级标题
-###### 六级标题
-
-### Emphasis强调 ✨
-*斜体文本*
-
-**粗体文本**
-
-***粗斜体文本***
-
-###  Strong强调
-**这是strong标签的效果**
-
-__这也是strong的效果__
-
-### XML标签
-\`\`\`xml
-<user>
-  <name>张三</name>
-  <age>25</age>
-  <email>zhangsan@example.com</email>
-</user>
-\`\`\`
-
-### Code代码 💻
-\`console.log('Hello World')\`
-
-#### 行内代码
-使用 \`console.log('Hello World')\` 输出信息
-
-#### 代码块
-\`\`\`javascript
-function greet(name) {
-  return \`Hello, \${name}!\`;
-}
-console.log(greet('World'));
-\`\`\`
-
-\`\`\`python
-def fibonacci(n):
-    if n <= 1:
-        return n
-    return fibonacci(n-1) + fibonacci(n-2)
-\`\`\`
-
-### Hr水平线 📏
----
-***
-___
-
-#### 有序列表
-1. 第一步
-2. 第二步
-   1. 子步骤2.1
-   2. 子步骤2.2
-3. 第三步
-
-#### 混合列表
-1. 主要任务
-   - 子任务1
-   - 子任务2
-     - [x] 已完成子任务
-     - [ ] 未完成子任务
-
----
-
-*以上展示了所有支持的Markdown格式*
-`;
-
-const roles: BubbleListProps['role'] = {
-  ai: {
-    placement: 'start',
+const demos = [
+  {
+    title: 'Mixed Syntax',
+    content:
+      '# Complex Mixed Syntax\n\nThis is a **comprehensive example** with:\n\n- **Bold items** with [Ant Design X](https://github.com/ant-design/x)\n- *Italic text* with `inline code`\n- Images: ![Ant Design X](https://mdn.alipayobjects.com/huamei_yz9z7c/afts/img/0lMhRYbo0-8AAAAAQDAAAAgADlJoAQFr/original)\n\n## Code Example\n\n```javascript\nconst mixed = "Hello **world** with [link](https://example.com)";\n```\n\n> **Note**: This is a *blockquote* with **mixed** syntax.',
   },
-  user: {
-    placement: 'end',
+  {
+    title: 'Image Syntax',
+    content:
+      "Here's an image: \n\n![Ant Design X](https://mdn.alipayobjects.com/huamei_yz9z7c/afts/img/0lMhRYbo0-8AAAAAQDAAAAgADlJoAQFr/original)",
   },
-};
+  {
+    title: 'Link Syntax',
+    content: 'Visit [Ant Design X](https://github.com/ant-design/x) for more details.',
+  },
+  {
+    title: 'Emphasis',
+    content:
+      'This is **bold text** and this is *italic text*. You can also use ***bold and italic***.',
+  },
+  {
+    title: 'Code Block',
+    content:
+      '```typescript\nconst greet = (name: string) => {\n  console.log(`Hello, ${name}!`);\n};\n```\n\nInline code: `const x = 1`',
+  },
+];
 
-interface MessageType {
-  role: 'ai' | 'user';
-  content: string;
-}
+const ImageSkeleton = () => <Skeleton.Image active style={{ width: 60, height: 60 }} />;
 
-const App = () => {
-  const [enableStreaming, setEnableStreaming] = useState(true);
-  const [content, setContent] = React.useState('');
-  const [className] = useMarkdownTheme();
+const LinkSkeleton = () => (
+  <Skeleton.Button active size="small" style={{ margin: '4px 0', width: 16, height: 16 }} />
+);
 
-  let chunks = '';
-  const provider = useMemo(
-    () =>
-      new DefaultChatProvider<MessageType, MessageType, MessageType>({
-        request: XRequest('https://api.example.com/chat', {
-          manual: true,
-          fetch: () => mockFetch(fullContent),
-          transformStream: new TransformStream<string, MessageType>({
-            transform(chunk, controller) {
-              chunks += chunk;
-              controller.enqueue({
-                content: chunks,
-                role: 'ai',
-              });
-            },
-          }),
-        }),
-      }),
-    [content],
-  );
+const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
+  const [displayText, setDisplayText] = useState('');
+  const [isStreaming, setIsStreaming] = useState(false);
 
-  const { onRequest, messages, isRequesting } = useXChat({
-    provider: provider,
-  });
+  const startStream = React.useCallback(() => {
+    setDisplayText('');
+    setIsStreaming(true);
+    let index = 0;
+
+    const stream = () => {
+      if (index <= content.length) {
+        setDisplayText(content.slice(0, index));
+        index++;
+        setTimeout(stream, 30);
+      } else {
+        setIsStreaming(false);
+      }
+    };
+
+    stream();
+  }, [content]);
+
+  React.useEffect(() => {
+    startStream();
+  }, [startStream]);
 
   return (
-    <>
-      <Row justify="end" style={{ marginBottom: 24 }}>
-        <Button
-          style={{ marginRight: 8 }}
-          onClick={() => {
-            setEnableStreaming(!enableStreaming);
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, maxHeight: 300 }}>
+      <Card title="Markdown Source" size="small">
+        <div
+          style={{
+            background: '#f5f5f5',
+            padding: 12,
+            borderRadius: 4,
+            fontSize: 13,
+            fontFamily: 'monospace',
+            whiteSpace: 'pre-wrap',
+            wordBreak: 'break-word',
+            margin: 0,
+            height: 200,
+            overflow: 'auto',
           }}
         >
-          Streaming: {enableStreaming ? 'On' : 'Off'}
-        </Button>
-      </Row>
-      <div
-        style={{
-          height: 400,
-          paddingBlock: 20,
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-        }}
+          {displayText || 'Click Stream to start'}
+        </div>
+      </Card>
+
+      <Card
+        title="Rendered Output"
+        size="small"
+        extra={
+          <Button type="primary" onClick={startStream} loading={isStreaming}>
+            Re-Render
+          </Button>
+        }
       >
-        <Bubble.List
-          role={roles}
-          items={messages.map(({ id, message, status }) => ({
-            key: id,
-            role: message.role,
-            content: message.content,
-            status,
-            contentRender:
-              message.role === 'user'
-                ? (content) => content
-                : (content, { status }) => (
-                    <XMarkdown
-                      className={className}
-                      content={content as string}
-                      streaming={{ hasNextChunk: enableStreaming && status === 'updating' }}
-                    />
-                  ),
-          }))}
-        />
-        <Sender
-          loading={isRequesting}
-          value={content}
-          onChange={setContent}
-          style={{ marginTop: 48 }}
-          onSubmit={(nextContent) => {
-            onRequest({
-              content: nextContent,
-              role: 'user',
-            });
-            setContent('');
+        <div
+          style={{
+            border: '1px solid #f0f0f0',
+            borderRadius: 4,
+            padding: 12,
+            height: 200,
+            overflow: 'auto',
           }}
-        />
+        >
+          <XMarkdown
+            content={displayText}
+            components={{ 'incomplete-image': ImageSkeleton, 'incomplete-link': LinkSkeleton }}
+            streaming={{ hasNextChunk: isStreaming }}
+          />
+        </div>
+      </Card>
+    </div>
+  );
+};
+
+const App = () => {
+  const [currentDemo, setCurrentDemo] = useState(0);
+
+  return (
+    <div style={{ padding: 24, maxWidth: 800, margin: '0 auto' }}>
+      <div style={{ marginBottom: 16 }}>
+        {demos.map((demo, index) => (
+          <Button
+            key={index}
+            type={currentDemo === index ? 'primary' : 'default'}
+            onClick={() => setCurrentDemo(index)}
+            style={{ marginRight: 8, marginBottom: 8 }}
+          >
+            {demo.title}
+          </Button>
+        ))}
       </div>
-    </>
+
+      <StreamDemo key={currentDemo} content={demos[currentDemo].content} />
+    </div>
   );
 };
 

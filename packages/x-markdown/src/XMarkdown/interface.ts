@@ -38,6 +38,15 @@ interface SteamingOption {
    * @description Configuration for text appearance animation effects
    */
   animationConfig?: AnimationConfig;
+  /**
+   * @description 未完成的 Markdown 格式转换为自定义加载组件的映射配置，用于在流式渲染过程中为未闭合的链接和图片提供自定义loading组件
+   * @description Mapping configuration to convert incomplete Markdown formats to custom loading components, used to provide custom loading components for unclosed links and images during streaming rendering
+   * @default { link: 'incomplete-link', image: 'incomplete-image' }
+   */
+  incompleteMarkdownComponentMap?: {
+    link?: string;
+    image?: string;
+  };
 }
 
 type StreamStatus = 'loading' | 'done';
