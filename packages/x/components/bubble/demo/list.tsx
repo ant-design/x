@@ -73,7 +73,7 @@ const App = () => {
       { key: getKey(), role: 'system', content: 'Welcome to use Ant Design X' },
       genItem(false, { typing: false }),
       genItem(true, { typing: false }),
-      { key: getKey(), role: 'divider', content: new Date().toLocaleString() },
+      { key: getKey(), role: 'divider', content: 'divider' },
       genItem(false, { typing: false }),
       genItem(true, { typing: false, loading: true }),
     ]);

@@ -1805,7 +1805,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
             <span
               class="ant-divider-inner-text"
             >
-              2016/11/22 08:00:00
+              divider
             </span>
             <div
               class="ant-divider-rail ant-divider-rail-end"
