@@ -47,7 +47,7 @@ const SystemBubble: React.ForwardRefRenderFunction<BubbleRef, SystemBubbleProps>
 };
 
 type ForwardSystemBubbleType = <T extends BubbleContentType = string>(
-  props: BubbleProps<T> & { ref?: React.Ref<BubbleRef> },
+  props: SystemBubbleProps<T> & { ref?: React.Ref<BubbleRef> },
 ) => React.ReactElement;
 
 const ForwardSystemBubble = React.forwardRef(SystemBubble);

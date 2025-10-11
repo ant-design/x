@@ -2,16 +2,16 @@
 
 exports[`renders components/bubble/demo/animation.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+  class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
 >
   <div
-    class="ant-flex css-var-«R0» ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-gap-small"
   >
     <span>
       非流式数据 / Non-streaming data:
     </span>
     <button
-      class="ant-btn css-var-«R0» ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
+      class="ant-btn css-var-_R_0_ ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
       type="button"
     >
       <span>
@@ -19,7 +19,7 @@ exports[`renders components/bubble/demo/animation.tsx correctly 1`] = `
       </span>
     </button>
     <button
-      class="ant-btn css-var-«R0» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -28,16 +28,16 @@ exports[`renders components/bubble/demo/animation.tsx correctly 1`] = `
     </button>
   </div>
   <div
-    class="ant-flex css-var-«R0» ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-gap-small"
   >
     <span>
       动画效果 / Animation effects:
     </span>
     <div
-      class="ant-radio-group ant-radio-group-outline css-var-«R0» ant-radio-css-var"
+      class="ant-radio-group ant-radio-group-outline css-var-_R_0_ ant-radio-css-var"
     >
       <label
-        class="ant-radio-wrapper ant-radio-wrapper-checked css-var-«R0» ant-radio-css-var"
+        class="ant-radio-wrapper ant-radio-wrapper-checked css-var-_R_0_ ant-radio-css-var"
       >
         <span
           class="ant-radio ant-wave-target ant-radio-checked"
@@ -60,7 +60,7 @@ exports[`renders components/bubble/demo/animation.tsx correctly 1`] = `
         </span>
       </label>
       <label
-        class="ant-radio-wrapper css-var-«R0» ant-radio-css-var"
+        class="ant-radio-wrapper css-var-_R_0_ ant-radio-css-var"
       >
         <span
           class="ant-radio ant-wave-target"
@@ -84,14 +84,14 @@ exports[`renders components/bubble/demo/animation.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-flex css-var-«R0» ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-gap-small"
   >
     <span>
       保留公共前缀 / Preserve common prefix:
     </span>
     <button
       aria-checked="false"
-      class="ant-switch css-var-«R0»"
+      class="ant-switch css-var-_R_0_"
       role="switch"
       type="button"
     >
@@ -111,20 +111,20 @@ exports[`renders components/bubble/demo/animation.tsx correctly 1`] = `
     </button>
   </div>
   <div
-    class="ant-divider css-var-«R0» ant-divider-horizontal ant-divider-rail"
+    class="ant-divider css-var-_R_0_ ant-divider-horizontal ant-divider-rail"
     role="separator"
   />
   <div
-    class="ant-flex css-var-«R0» ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-gap-small"
   >
     <div
-      class="ant-bubble css-var-«R0» ant-bubble-start ant-bubble-loading"
+      class="ant-bubble css-var-_R_0_ ant-bubble-start ant-bubble-loading"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«R0» ant-avatar-css-var"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_R_0_ ant-avatar-css-var"
         >
           <span
             aria-label="user"
@@ -167,13 +167,13 @@ exports[`renders components/bubble/demo/animation.tsx correctly 1`] = `
 
 exports[`renders components/bubble/demo/basic.tsx correctly 1`] = `
 <div
-  class="ant-bubble css-var-«R0» ant-bubble-start"
+  class="ant-bubble css-var-_R_0_ ant-bubble-start"
 >
   <div
     class="ant-bubble-avatar"
   >
     <span
-      class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«R0» ant-avatar-css-var"
+      class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_R_0_ ant-avatar-css-var"
     >
       <span
         aria-label="ant-design"
@@ -217,13 +217,13 @@ exports[`renders components/bubble/demo/basic.tsx correctly 1`] = `
       class="ant-bubble-footer ant-bubble-footer-start"
     >
       <div
-        class="ant-actions css-var-«R0»"
+        class="ant-actions css-var-_R_0_"
       >
         <div
           class="ant-actions-list ant-actions-variant-borderless"
         >
           <span
-            class="ant-actions-copy ant-actions-copy css-var-«R0» ant-actions-item css-var-«R0»"
+            class="ant-actions-copy ant-actions-copy css-var-_R_0_ ant-actions-item css-var-_R_0_"
           >
             <button
               aria-describedby="test-id"
@@ -298,7 +298,7 @@ Array [
     style="height:100px"
   >
     <div
-      class="ant-bubble css-var-«R0» ant-bubble-start"
+      class="ant-bubble css-var-_R_0_ ant-bubble-start"
     >
       <div
         class="ant-bubble-body"
@@ -307,10 +307,10 @@ Array [
           class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
         >
           <div
-            class="ant-flex css-var-«R0» ant-flex-align-center ant-flex-gap-middle"
+            class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-gap-middle"
           >
             <div
-              class="ant-image css-var-«R0» ant-image-css-var"
+              class="ant-image css-var-_R_0_ ant-image-css-var"
               style="height:50px"
             >
               <img
@@ -334,7 +334,7 @@ Array [
           class="ant-bubble-footer ant-bubble-footer-start"
         >
           <button
-            class="ant-btn css-var-«R0» ant-btn-text ant-btn-color-default ant-btn-variant-text"
+            class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text"
             type="button"
           >
             <span>
@@ -350,11 +350,11 @@ Array [
 
 exports[`renders components/bubble/demo/divider.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-vertical"
+  class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-vertical"
   style="gap:16px"
 >
   <div
-    class="ant-bubble css-var-«R0» ant-bubble-start"
+    class="ant-bubble css-var-_R_0_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -367,7 +367,7 @@ exports[`renders components/bubble/demo/divider.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-divider css-var-«R0» ant-bubble-start"
+    class="ant-bubble ant-bubble-divider css-var-_R_0_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -376,7 +376,7 @@ exports[`renders components/bubble/demo/divider.tsx correctly 1`] = `
         class="ant-bubble-content ant-bubble-content-borderless"
       >
         <div
-          class="ant-divider css-var-«R0» ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center"
+          class="ant-divider css-var-_R_0_ ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center"
           role="separator"
         >
           <div
@@ -395,7 +395,7 @@ exports[`renders components/bubble/demo/divider.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-bubble css-var-«R0» ant-bubble-end"
+    class="ant-bubble css-var-_R_0_ ant-bubble-end"
   >
     <div
       class="ant-bubble-body"
@@ -408,7 +408,7 @@ exports[`renders components/bubble/demo/divider.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-divider css-var-«R0» ant-bubble-start"
+    class="ant-bubble ant-bubble-divider css-var-_R_0_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -417,7 +417,7 @@ exports[`renders components/bubble/demo/divider.tsx correctly 1`] = `
         class="ant-bubble-content ant-bubble-content-borderless"
       >
         <div
-          class="ant-divider css-var-«R0» ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center ant-divider-dashed"
+          class="ant-divider css-var-_R_0_ ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center ant-divider-dashed"
           role="separator"
         >
           <div
@@ -436,7 +436,7 @@ exports[`renders components/bubble/demo/divider.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-bubble css-var-«R0» ant-bubble-start"
+    class="ant-bubble css-var-_R_0_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -449,7 +449,7 @@ exports[`renders components/bubble/demo/divider.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-divider css-var-«R0» ant-bubble-start"
+    class="ant-bubble ant-bubble-divider css-var-_R_0_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -458,7 +458,7 @@ exports[`renders components/bubble/demo/divider.tsx correctly 1`] = `
         class="ant-bubble-content ant-bubble-content-borderless"
       >
         <div
-          class="ant-divider css-var-«R0» ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center ant-divider-dotted"
+          class="ant-divider css-var-_R_0_ ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center ant-divider-dotted"
           role="separator"
         >
           <div
@@ -477,7 +477,7 @@ exports[`renders components/bubble/demo/divider.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-bubble css-var-«R0» ant-bubble-end"
+    class="ant-bubble css-var-_R_0_ ant-bubble-end"
   >
     <div
       class="ant-bubble-body"
@@ -490,7 +490,7 @@ exports[`renders components/bubble/demo/divider.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-divider css-var-«R0» ant-bubble-start"
+    class="ant-bubble ant-bubble-divider css-var-_R_0_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -499,7 +499,7 @@ exports[`renders components/bubble/demo/divider.tsx correctly 1`] = `
         class="ant-bubble-content ant-bubble-content-borderless"
       >
         <div
-          class="ant-divider css-var-«R0» ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center ant-divider-plain"
+          class="ant-divider css-var-_R_0_ ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center ant-divider-plain"
           role="separator"
         >
           <div
@@ -518,7 +518,7 @@ exports[`renders components/bubble/demo/divider.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-bubble css-var-«R0» ant-bubble-start"
+    class="ant-bubble css-var-_R_0_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -535,20 +535,20 @@ exports[`renders components/bubble/demo/divider.tsx correctly 1`] = `
 
 exports[`renders components/bubble/demo/editable.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+  class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
   style="min-height:200px"
 >
   <div
-    class="ant-flex css-var-«R0»"
+    class="ant-flex css-var-_R_0_"
   >
     <div
-      class="ant-bubble css-var-«R0» ant-bubble-start"
+      class="ant-bubble css-var-_R_0_ ant-bubble-start"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«R0» ant-avatar-css-var"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_R_0_ ant-avatar-css-var"
         >
           <span
             aria-label="user"
@@ -583,7 +583,7 @@ exports[`renders components/bubble/demo/editable.tsx correctly 1`] = `
           class="ant-bubble-footer ant-bubble-footer-start"
         >
           <div
-            class="ant-actions css-var-«R0»"
+            class="ant-actions css-var-_R_0_"
           >
             <div
               class="ant-actions-list ant-actions-variant-borderless"
@@ -623,17 +623,17 @@ exports[`renders components/bubble/demo/editable.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-flex css-var-«R0»"
+    class="ant-flex css-var-_R_0_"
   >
     <div
-      class="ant-bubble css-var-«R0» ant-bubble-end"
+      class="ant-bubble css-var-_R_0_ ant-bubble-end"
       style="width:100%"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«R0» ant-avatar-css-var"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_R_0_ ant-avatar-css-var"
         >
           <span
             aria-label="user"
@@ -668,7 +668,7 @@ exports[`renders components/bubble/demo/editable.tsx correctly 1`] = `
           class="ant-bubble-footer ant-bubble-footer-end"
         >
           <div
-            class="ant-actions css-var-«R0»"
+            class="ant-actions css-var-_R_0_"
           >
             <div
               class="ant-actions-list ant-actions-variant-borderless"
@@ -712,22 +712,22 @@ exports[`renders components/bubble/demo/editable.tsx correctly 1`] = `
 
 exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+  class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
 >
   <div
-    class="ant-flex css-var-«R0» ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex css-var-_R_0_ ant-flex-wrap-wrap ant-flex-gap-small"
   >
     <div
       style="width:100%"
     >
       <div
-        class="ant-bubble css-var-«R0» ant-bubble-start"
+        class="ant-bubble css-var-_R_0_ ant-bubble-start"
       >
         <div
           class="ant-bubble-avatar"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«R0» ant-avatar-css-var"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_R_0_ ant-avatar-css-var"
           >
             <span
               aria-label="user"
@@ -767,7 +767,7 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
             class="ant-bubble-footer ant-bubble-footer-start"
           >
             <div
-              class="ant-actions css-var-«R0»"
+              class="ant-actions css-var-_R_0_"
             >
               <div
                 class="ant-actions-list ant-actions-variant-borderless"
@@ -836,19 +836,19 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-flex css-var-«R0» ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex css-var-_R_0_ ant-flex-wrap-wrap ant-flex-gap-small"
   >
     <div
       style="width:100%"
     >
       <div
-        class="ant-bubble css-var-«R0» ant-bubble-end"
+        class="ant-bubble css-var-_R_0_ ant-bubble-end"
       >
         <div
           class="ant-bubble-avatar"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«R0» ant-avatar-css-var"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_R_0_ ant-avatar-css-var"
           >
             <span
               aria-label="user"
@@ -891,7 +891,7 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
               class="ant-bubble-footer ant-bubble-footer-end"
             >
               <div
-                class="ant-actions css-var-«R0»"
+                class="ant-actions css-var-_R_0_"
               >
                 <div
                   class="ant-actions-list ant-actions-variant-borderless"
@@ -961,19 +961,19 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-flex css-var-«R0» ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex css-var-_R_0_ ant-flex-wrap-wrap ant-flex-gap-small"
   >
     <div
       style="width:100%"
     >
       <div
-        class="ant-bubble css-var-«R0» ant-bubble-start"
+        class="ant-bubble css-var-_R_0_ ant-bubble-start"
       >
         <div
           class="ant-bubble-avatar"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«R0» ant-avatar-css-var"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_R_0_ ant-avatar-css-var"
           >
             <span
               aria-label="user"
@@ -1013,7 +1013,7 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
             class="ant-bubble-footer ant-bubble-footer-end"
           >
             <div
-              class="ant-actions css-var-«R0»"
+              class="ant-actions css-var-_R_0_"
             >
               <div
                 class="ant-actions-list ant-actions-variant-borderless"
@@ -1082,19 +1082,19 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-flex css-var-«R0» ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex css-var-_R_0_ ant-flex-wrap-wrap ant-flex-gap-small"
   >
     <div
       style="width:100%"
     >
       <div
-        class="ant-bubble css-var-«R0» ant-bubble-end"
+        class="ant-bubble css-var-_R_0_ ant-bubble-end"
       >
         <div
           class="ant-bubble-avatar"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«R0» ant-avatar-css-var"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_R_0_ ant-avatar-css-var"
           >
             <span
               aria-label="user"
@@ -1137,7 +1137,7 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
               class="ant-bubble-footer ant-bubble-footer-start"
             >
               <div
-                class="ant-actions css-var-«R0»"
+                class="ant-actions css-var-_R_0_"
               >
                 <div
                   class="ant-actions-list ant-actions-variant-borderless"
@@ -1211,22 +1211,22 @@ exports[`renders components/bubble/demo/footer.tsx correctly 1`] = `
 
 exports[`renders components/bubble/demo/header.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+  class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
 >
   <div
-    class="ant-flex css-var-«R0» ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex css-var-_R_0_ ant-flex-wrap-wrap ant-flex-gap-small"
   >
     <div
       style="width:100%"
     >
       <div
-        class="ant-bubble css-var-«R0» ant-bubble-start"
+        class="ant-bubble css-var-_R_0_ ant-bubble-start"
       >
         <div
           class="ant-bubble-avatar"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«R0» ant-avatar-css-var"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_R_0_ ant-avatar-css-var"
           >
             <span
               aria-label="user"
@@ -1267,19 +1267,19 @@ exports[`renders components/bubble/demo/header.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-flex css-var-«R0» ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex css-var-_R_0_ ant-flex-wrap-wrap ant-flex-gap-small"
   >
     <div
       style="width:100%"
     >
       <div
-        class="ant-bubble css-var-«R0» ant-bubble-end"
+        class="ant-bubble css-var-_R_0_ ant-bubble-end"
       >
         <div
           class="ant-bubble-avatar"
         >
           <span
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«R0» ant-avatar-css-var"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_R_0_ ant-avatar-css-var"
           >
             <span
               aria-label="user"
@@ -1324,14 +1324,14 @@ exports[`renders components/bubble/demo/header.tsx correctly 1`] = `
 
 exports[`renders components/bubble/demo/list.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-vertical"
+  class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-vertical"
   style="height:720px;gap:20px"
 >
   <div
-    class="ant-flex css-var-«R0» ant-flex-gap-small"
+    class="ant-flex css-var-_R_0_ ant-flex-gap-small"
   >
     <button
-      class="ant-btn css-var-«R0» ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
+      class="ant-btn css-var-_R_0_ ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
       type="button"
     >
       <span>
@@ -1339,7 +1339,7 @@ exports[`renders components/bubble/demo/list.tsx correctly 1`] = `
       </span>
     </button>
     <button
-      class="ant-btn css-var-«R0» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -1347,7 +1347,7 @@ exports[`renders components/bubble/demo/list.tsx correctly 1`] = `
       </span>
     </button>
     <button
-      class="ant-btn css-var-«R0» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -1355,7 +1355,7 @@ exports[`renders components/bubble/demo/list.tsx correctly 1`] = `
       </span>
     </button>
     <button
-      class="ant-btn css-var-«R0» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -1363,7 +1363,7 @@ exports[`renders components/bubble/demo/list.tsx correctly 1`] = `
       </span>
     </button>
     <button
-      class="ant-btn css-var-«R0» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -1371,7 +1371,7 @@ exports[`renders components/bubble/demo/list.tsx correctly 1`] = `
       </span>
     </button>
     <button
-      class="ant-btn css-var-«R0» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -1379,7 +1379,7 @@ exports[`renders components/bubble/demo/list.tsx correctly 1`] = `
       </span>
     </button>
     <button
-      class="ant-btn css-var-«R0» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -1388,26 +1388,26 @@ exports[`renders components/bubble/demo/list.tsx correctly 1`] = `
     </button>
   </div>
   <div
-    class="ant-bubble-list css-var-«R0» ant-bubble-list-autoscroll"
+    class="ant-bubble-list css-var-_R_0_ ant-bubble-list-autoscroll"
   />
 </div>
 `;
 
 exports[`renders components/bubble/demo/list-extra.tsx correctly 1`] = `
 <div
-  class="ant-bubble-list css-var-«R0» ant-bubble-list-autoscroll"
+  class="ant-bubble-list css-var-_R_0_ ant-bubble-list-autoscroll"
   style="max-height:500px"
 >
   <div
-    class="ant-bubble css-var-«R0» ant-bubble-start ant-bubble-loading"
+    class="ant-bubble css-var-_R_0_ ant-bubble-start ant-bubble-loading"
   >
     <div
-      class="ant-flex css-var-«R0» ant-flex-align-center ant-flex-gap-small"
+      class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-gap-small"
     >
       <div
         aria-busy="true"
         aria-live="polite"
-        class="ant-spin ant-spin-sm ant-spin-spinning css-var-«R0»"
+        class="ant-spin ant-spin-sm ant-spin-spinning css-var-_R_0_"
       >
         <span
           class="ant-spin-dot-holder"
@@ -1434,7 +1434,7 @@ exports[`renders components/bubble/demo/list-extra.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-bubble css-var-«R0» ant-bubble-end"
+    class="ant-bubble css-var-_R_0_ ant-bubble-end"
   >
     <div
       class="ant-bubble-body"
@@ -1447,7 +1447,7 @@ exports[`renders components/bubble/demo/list-extra.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-bubble css-var-«R0» ant-bubble-start ant-bubble-success"
+    class="ant-bubble css-var-_R_0_ ant-bubble-start ant-bubble-success"
   >
     <div
       class="ant-bubble-body"
@@ -1461,13 +1461,13 @@ exports[`renders components/bubble/demo/list-extra.tsx correctly 1`] = `
         class="ant-bubble-footer ant-bubble-footer-start"
       >
         <div
-          class="ant-actions css-var-«R0»"
+          class="ant-actions css-var-_R_0_"
         >
           <div
             class="ant-actions-list ant-actions-variant-borderless"
           >
             <span
-              class="ant-actions-copy ant-actions-copy css-var-«R0» ant-actions-item css-var-«R0»"
+              class="ant-actions-copy ant-actions-copy css-var-_R_0_ ant-actions-item css-var-_R_0_"
             >
               <button
                 aria-describedby="test-id"
@@ -1497,7 +1497,7 @@ exports[`renders components/bubble/demo/list-extra.tsx correctly 1`] = `
               </button>
             </span>
             <div
-              class="ant-actions-feedback css-var-«R0» ant-actions-list"
+              class="ant-actions-feedback css-var-_R_0_ ant-actions-list"
             >
               <span
                 aria-describedby="test-id"
@@ -1531,7 +1531,7 @@ exports[`renders components/bubble/demo/list-extra.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-bubble css-var-«R0» ant-bubble-end"
+    class="ant-bubble css-var-_R_0_ ant-bubble-end"
   >
     <div
       class="ant-bubble-body"
@@ -1544,7 +1544,7 @@ exports[`renders components/bubble/demo/list-extra.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-bubble css-var-«R0» ant-bubble-start ant-bubble-success"
+    class="ant-bubble css-var-_R_0_ ant-bubble-start ant-bubble-success"
   >
     <div
       class="ant-bubble-body"
@@ -1558,13 +1558,13 @@ exports[`renders components/bubble/demo/list-extra.tsx correctly 1`] = `
         class="ant-bubble-footer ant-bubble-footer-start"
       >
         <div
-          class="ant-actions css-var-«R0»"
+          class="ant-actions css-var-_R_0_"
         >
           <div
             class="ant-actions-list ant-actions-variant-borderless"
           >
             <span
-              class="ant-actions-copy ant-actions-copy css-var-«R0» ant-actions-item css-var-«R0»"
+              class="ant-actions-copy ant-actions-copy css-var-_R_0_ ant-actions-item css-var-_R_0_"
             >
               <button
                 aria-describedby="test-id"
@@ -1594,7 +1594,7 @@ exports[`renders components/bubble/demo/list-extra.tsx correctly 1`] = `
               </button>
             </span>
             <div
-              class="ant-actions-feedback css-var-«R0» ant-actions-list"
+              class="ant-actions-feedback css-var-_R_0_ ant-actions-list"
             >
               <span
                 aria-describedby="test-id"
@@ -1627,7 +1627,7 @@ exports[`renders components/bubble/demo/list-extra.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-bubble css-var-«R0» ant-bubble-end"
+    class="ant-bubble css-var-_R_0_ ant-bubble-end"
   >
     <div
       class="ant-bubble-body"
@@ -1640,7 +1640,7 @@ exports[`renders components/bubble/demo/list-extra.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-bubble css-var-«R0» ant-bubble-start ant-bubble-success"
+    class="ant-bubble css-var-_R_0_ ant-bubble-start ant-bubble-success"
   >
     <div
       class="ant-bubble-body"
@@ -1654,13 +1654,13 @@ exports[`renders components/bubble/demo/list-extra.tsx correctly 1`] = `
         class="ant-bubble-footer ant-bubble-footer-start"
       >
         <div
-          class="ant-actions css-var-«R0»"
+          class="ant-actions css-var-_R_0_"
         >
           <div
             class="ant-actions-list ant-actions-variant-borderless"
           >
             <span
-              class="ant-actions-copy ant-actions-copy css-var-«R0» ant-actions-item css-var-«R0»"
+              class="ant-actions-copy ant-actions-copy css-var-_R_0_ ant-actions-item css-var-_R_0_"
             >
               <button
                 aria-describedby="test-id"
@@ -1690,7 +1690,7 @@ exports[`renders components/bubble/demo/list-extra.tsx correctly 1`] = `
               </button>
             </span>
             <div
-              class="ant-actions-feedback css-var-«R0» ant-actions-list"
+              class="ant-actions-feedback css-var-_R_0_ ant-actions-list"
             >
               <span
                 aria-describedby="test-id"
@@ -1723,7 +1723,7 @@ exports[`renders components/bubble/demo/list-extra.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-bubble css-var-«R0» ant-bubble-end"
+    class="ant-bubble css-var-_R_0_ ant-bubble-end"
   >
     <div
       class="ant-bubble-body"
@@ -1736,7 +1736,7 @@ exports[`renders components/bubble/demo/list-extra.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-bubble css-var-«R0» ant-bubble-start ant-bubble-success"
+    class="ant-bubble css-var-_R_0_ ant-bubble-start ant-bubble-success"
   >
     <div
       class="ant-bubble-body"
@@ -1750,13 +1750,13 @@ exports[`renders components/bubble/demo/list-extra.tsx correctly 1`] = `
         class="ant-bubble-footer ant-bubble-footer-start"
       >
         <div
-          class="ant-actions css-var-«R0»"
+          class="ant-actions css-var-_R_0_"
         >
           <div
             class="ant-actions-list ant-actions-variant-borderless"
           >
             <span
-              class="ant-actions-copy ant-actions-copy css-var-«R0» ant-actions-item css-var-«R0»"
+              class="ant-actions-copy ant-actions-copy css-var-_R_0_ ant-actions-item css-var-_R_0_"
             >
               <button
                 aria-describedby="test-id"
@@ -1786,7 +1786,7 @@ exports[`renders components/bubble/demo/list-extra.tsx correctly 1`] = `
               </button>
             </span>
             <div
-              class="ant-actions-feedback css-var-«R0» ant-actions-list"
+              class="ant-actions-feedback css-var-_R_0_ ant-actions-list"
             >
               <span
                 aria-describedby="test-id"
@@ -1824,16 +1824,16 @@ exports[`renders components/bubble/demo/list-extra.tsx correctly 1`] = `
 
 exports[`renders components/bubble/demo/list-ref.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+  class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
 >
   <div
-    class="ant-flex css-var-«R0» ant-flex-justify-space-between ant-flex-gap-small"
+    class="ant-flex css-var-_R_0_ ant-flex-justify-space-between ant-flex-gap-small"
   >
     <div
-      class="ant-flex css-var-«R0» ant-flex-gap-small"
+      class="ant-flex css-var-_R_0_ ant-flex-gap-small"
     >
       <button
-        class="ant-btn css-var-«R0» ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
+        class="ant-btn css-var-_R_0_ ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
         type="button"
       >
         <span>
@@ -1841,7 +1841,7 @@ exports[`renders components/bubble/demo/list-ref.tsx correctly 1`] = `
         </span>
       </button>
       <button
-        class="ant-btn css-var-«R0» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+        class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
         type="button"
       >
         <span>
@@ -1849,7 +1849,7 @@ exports[`renders components/bubble/demo/list-ref.tsx correctly 1`] = `
         </span>
       </button>
       <button
-        class="ant-btn css-var-«R0» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+        class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
         type="button"
       >
         <span>
@@ -1857,7 +1857,7 @@ exports[`renders components/bubble/demo/list-ref.tsx correctly 1`] = `
         </span>
       </button>
       <button
-        class="ant-btn css-var-«R0» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+        class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
         type="button"
       >
         <span>
@@ -1865,7 +1865,7 @@ exports[`renders components/bubble/demo/list-ref.tsx correctly 1`] = `
         </span>
       </button>
       <button
-        class="ant-btn css-var-«R0» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+        class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
         type="button"
       >
         <span>
@@ -1875,7 +1875,7 @@ exports[`renders components/bubble/demo/list-ref.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-bubble-list css-var-«R0» ant-bubble-list-autoscroll"
+    class="ant-bubble-list css-var-_R_0_ ant-bubble-list-autoscroll"
     style="max-height:400px"
   />
 </div>
@@ -1883,10 +1883,10 @@ exports[`renders components/bubble/demo/list-ref.tsx correctly 1`] = `
 
 exports[`renders components/bubble/demo/loading.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-gap-large ant-flex-vertical"
+  class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-gap-large ant-flex-vertical"
 >
   <div
-    class="ant-bubble css-var-«R0» ant-bubble-start ant-bubble-loading"
+    class="ant-bubble css-var-_R_0_ ant-bubble-start ant-bubble-loading"
   >
     <span
       class="ant-bubble-dot"
@@ -1903,12 +1903,12 @@ exports[`renders components/bubble/demo/loading.tsx correctly 1`] = `
     </span>
   </div>
   <div
-    class="ant-flex css-var-«R0» ant-flex-wrap-wrap ant-flex-gap-large"
+    class="ant-flex css-var-_R_0_ ant-flex-wrap-wrap ant-flex-gap-large"
   >
     Loading state:
     <button
       aria-checked="true"
-      class="ant-switch css-var-«R0» ant-switch-checked"
+      class="ant-switch css-var-_R_0_ ant-switch-checked"
       role="switch"
       type="button"
     >
@@ -1932,14 +1932,14 @@ exports[`renders components/bubble/demo/loading.tsx correctly 1`] = `
 
 exports[`renders components/bubble/demo/markdown.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-vertical"
+  class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-vertical"
   style="height:150px;gap:16px"
 >
   <div
-    class="ant-flex css-var-«R0»"
+    class="ant-flex css-var-_R_0_"
   >
     <button
-      class="ant-btn css-var-«R0» ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
+      class="ant-btn css-var-_R_0_ ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
       type="button"
     >
       <span>
@@ -1948,10 +1948,10 @@ exports[`renders components/bubble/demo/markdown.tsx correctly 1`] = `
     </button>
   </div>
   <div
-    class="ant-flex css-var-«R0»"
+    class="ant-flex css-var-_R_0_"
   >
     <div
-      class="ant-bubble css-var-«R0» ant-bubble-start"
+      class="ant-bubble css-var-_R_0_ ant-bubble-start"
     >
       <div
         class="ant-bubble-body"
@@ -1960,7 +1960,7 @@ exports[`renders components/bubble/demo/markdown.tsx correctly 1`] = `
           class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default"
         >
           <article
-            class="ant-typography css-var-«R0»"
+            class="ant-typography css-var-_R_0_"
           />
         </div>
       </div>
@@ -1971,19 +1971,19 @@ exports[`renders components/bubble/demo/markdown.tsx correctly 1`] = `
 
 exports[`renders components/bubble/demo/semantic-list-custom.tsx correctly 1`] = `
 <div
-  class="ant-bubble-list css-var-«R0» ant-bubble-list-autoscroll"
+  class="ant-bubble-list css-var-_R_0_ ant-bubble-list-autoscroll"
   style="max-height:300px"
 >
   <div
-    class="ant-bubble css-var-«R0» ant-bubble-start ant-bubble-loading"
+    class="ant-bubble css-var-_R_0_ ant-bubble-start ant-bubble-loading"
   >
     <div
-      class="ant-flex css-var-«R0» ant-flex-align-center ant-flex-gap-small"
+      class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-gap-small"
     >
       <div
         aria-busy="true"
         aria-live="polite"
-        class="ant-spin ant-spin-sm ant-spin-spinning css-var-«R0»"
+        class="ant-spin ant-spin-sm ant-spin-spinning css-var-_R_0_"
       >
         <span
           class="ant-spin-dot-holder"
@@ -2010,7 +2010,7 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx correctly 1`] =
     </div>
   </div>
   <div
-    class="ant-bubble css-var-«R0» ant-bubble-end"
+    class="ant-bubble css-var-_R_0_ ant-bubble-end"
   >
     <div
       class="ant-bubble-body"
@@ -2023,7 +2023,7 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx correctly 1`] =
     </div>
   </div>
   <div
-    class="ant-bubble css-var-«R0» ant-bubble-start"
+    class="ant-bubble css-var-_R_0_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -2039,10 +2039,10 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx correctly 1`] =
         class="ant-bubble-footer ant-bubble-footer-start"
       >
         <div
-          class="ant-flex css-var-«R0»"
+          class="ant-flex css-var-_R_0_"
         >
           <button
-            class="ant-btn css-var-«R0» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+            class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
             style="margin-inline-end:auto"
             type="button"
           >
@@ -2071,7 +2071,7 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx correctly 1`] =
             </span>
           </button>
           <button
-            class="ant-btn css-var-«R0» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+            class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
             type="button"
           >
             <span
@@ -2099,7 +2099,7 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx correctly 1`] =
             </span>
           </button>
           <button
-            class="ant-btn css-var-«R0» ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+            class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
             type="button"
           >
             <span
@@ -2135,23 +2135,23 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx correctly 1`] =
 
 exports[`renders components/bubble/demo/sider-and-placement.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+  class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
 >
   <div
-    class="ant-flex css-var-«R0» ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex css-var-_R_0_ ant-flex-wrap-wrap ant-flex-gap-small"
   >
     <div
       style="width:100%"
     >
       <div
-        class="ant-bubble css-var-«R0» ant-bubble-start"
+        class="ant-bubble css-var-_R_0_ ant-bubble-start"
       >
         <div
           class="ant-bubble-avatar"
         >
           <span
             aria-describedby="test-id"
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«R0» ant-avatar-css-var"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_R_0_ ant-avatar-css-var"
           >
             <span
               aria-label="user"
@@ -2211,20 +2211,20 @@ exports[`renders components/bubble/demo/sider-and-placement.tsx correctly 1`] = 
     </div>
   </div>
   <div
-    class="ant-flex css-var-«R0» ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex css-var-_R_0_ ant-flex-wrap-wrap ant-flex-gap-small"
   >
     <div
       style="width:100%"
     >
       <div
-        class="ant-bubble css-var-«R0» ant-bubble-end"
+        class="ant-bubble css-var-_R_0_ ant-bubble-end"
       >
         <div
           class="ant-bubble-avatar"
         >
           <span
             aria-describedby="test-id"
-            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«R0» ant-avatar-css-var"
+            class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_R_0_ ant-avatar-css-var"
           >
             <span
               aria-label="user"
@@ -2288,16 +2288,16 @@ exports[`renders components/bubble/demo/sider-and-placement.tsx correctly 1`] = 
 
 exports[`renders components/bubble/demo/stream.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+  class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
 >
   <div
-    class="ant-flex css-var-«R0» ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-gap-small"
   >
     <span>
       流式数据 / steaming data:
     </span>
     <button
-      class="ant-btn css-var-«R0» ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
+      class="ant-btn css-var-_R_0_ ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
       type="button"
     >
       <span>
@@ -2305,7 +2305,7 @@ exports[`renders components/bubble/demo/stream.tsx correctly 1`] = `
       </span>
     </button>
     <button
-      class="ant-btn css-var-«R0» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -2313,7 +2313,7 @@ exports[`renders components/bubble/demo/stream.tsx correctly 1`] = `
       </span>
     </button>
     <button
-      class="ant-btn css-var-«R0» ant-btn-link ant-btn-color-link ant-btn-variant-link"
+      class="ant-btn css-var-_R_0_ ant-btn-link ant-btn-color-link ant-btn-variant-link"
       type="button"
     >
       <span>
@@ -2322,14 +2322,14 @@ exports[`renders components/bubble/demo/stream.tsx correctly 1`] = `
     </button>
   </div>
   <div
-    class="ant-flex css-var-«R0» ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-gap-small"
   >
     <span>
       强制关闭流式标志 / Force close the streaming flag: 
     </span>
     <button
       aria-checked="false"
-      class="ant-switch css-var-«R0»"
+      class="ant-switch css-var-_R_0_"
       role="switch"
       type="button"
     >
@@ -2349,14 +2349,14 @@ exports[`renders components/bubble/demo/stream.tsx correctly 1`] = `
     </button>
   </div>
   <div
-    class="ant-flex css-var-«R0» ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-gap-small"
   >
     <span>
       启用动画 / Enable animation:
     </span>
     <button
       aria-checked="false"
-      class="ant-switch css-var-«R0»"
+      class="ant-switch css-var-_R_0_"
       role="switch"
       type="button"
     >
@@ -2376,33 +2376,33 @@ exports[`renders components/bubble/demo/stream.tsx correctly 1`] = `
     </button>
   </div>
   <div
-    class="ant-flex css-var-«R0» ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-gap-small"
   >
     <span>
       onTypingComplete 触发次数 / trigger times:
       <!-- -->
       <span
-        class="ant-typography ant-typography-danger css-var-«R0»"
+        class="ant-typography ant-typography-danger css-var-_R_0_"
       >
         0
       </span>
     </span>
   </div>
   <div
-    class="ant-divider css-var-«R0» ant-divider-horizontal ant-divider-rail"
+    class="ant-divider css-var-_R_0_ ant-divider-horizontal ant-divider-rail"
     role="separator"
   />
   <div
-    class="ant-flex css-var-«R0» ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-gap-small"
   >
     <div
-      class="ant-bubble css-var-«R0» ant-bubble-start ant-bubble-loading"
+      class="ant-bubble css-var-_R_0_ ant-bubble-start ant-bubble-loading"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-«R0» ant-avatar-css-var"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_R_0_ ant-avatar-css-var"
         >
           <span
             aria-label="user"
@@ -2445,11 +2445,11 @@ exports[`renders components/bubble/demo/stream.tsx correctly 1`] = `
 
 exports[`renders components/bubble/demo/system.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-vertical"
+  class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-vertical"
   style="gap:16px"
 >
   <div
-    class="ant-bubble ant-bubble-system css-var-«R0» ant-bubble-start"
+    class="ant-bubble ant-bubble-system css-var-_R_0_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -2466,7 +2466,7 @@ exports[`renders components/bubble/demo/system.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-system css-var-«R0» ant-bubble-start"
+    class="ant-bubble ant-bubble-system css-var-_R_0_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -2478,7 +2478,7 @@ exports[`renders components/bubble/demo/system.tsx correctly 1`] = `
           class="ant-bubble-system-content"
         >
           <div
-            class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-«R0»"
+            class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-_R_0_"
           >
             <div
               class="ant-space-item"
@@ -2489,7 +2489,7 @@ exports[`renders components/bubble/demo/system.tsx correctly 1`] = `
               class="ant-space-item"
             >
               <a
-                class="ant-typography css-var-«R0»"
+                class="ant-typography css-var-_R_0_"
               >
                 ok
               </a>
@@ -2500,7 +2500,7 @@ exports[`renders components/bubble/demo/system.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-system css-var-«R0» ant-bubble-start"
+    class="ant-bubble ant-bubble-system css-var-_R_0_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -2512,7 +2512,7 @@ exports[`renders components/bubble/demo/system.tsx correctly 1`] = `
           class="ant-bubble-system-content"
         >
           <div
-            class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-«R0»"
+            class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-_R_0_"
           >
             <div
               class="ant-space-item"
@@ -2523,7 +2523,7 @@ exports[`renders components/bubble/demo/system.tsx correctly 1`] = `
               class="ant-space-item"
             >
               <a
-                class="ant-typography css-var-«R0»"
+                class="ant-typography css-var-_R_0_"
               >
                 cancel
               </a>
@@ -2538,13 +2538,13 @@ exports[`renders components/bubble/demo/system.tsx correctly 1`] = `
 
 exports[`renders components/bubble/demo/variant-and-shape.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+  class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
 >
   <div
-    class="ant-flex css-var-«R0» ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex css-var-_R_0_ ant-flex-wrap-wrap ant-flex-gap-small"
   >
     <div
-      class="ant-bubble css-var-«R0» ant-bubble-start"
+      class="ant-bubble css-var-_R_0_ ant-bubble-start"
     >
       <div
         class="ant-bubble-body"
@@ -2557,7 +2557,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx correctly 1`] = `
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«R0» ant-bubble-start"
+      class="ant-bubble css-var-_R_0_ ant-bubble-start"
     >
       <div
         class="ant-bubble-body"
@@ -2570,7 +2570,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx correctly 1`] = `
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«R0» ant-bubble-start"
+      class="ant-bubble css-var-_R_0_ ant-bubble-start"
     >
       <div
         class="ant-bubble-body"
@@ -2583,7 +2583,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx correctly 1`] = `
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«R0» ant-bubble-end"
+      class="ant-bubble css-var-_R_0_ ant-bubble-end"
     >
       <div
         class="ant-bubble-body"
@@ -2597,10 +2597,10 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-flex css-var-«R0» ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex css-var-_R_0_ ant-flex-wrap-wrap ant-flex-gap-small"
   >
     <div
-      class="ant-bubble css-var-«R0» ant-bubble-start"
+      class="ant-bubble css-var-_R_0_ ant-bubble-start"
     >
       <div
         class="ant-bubble-body"
@@ -2613,7 +2613,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx correctly 1`] = `
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«R0» ant-bubble-start"
+      class="ant-bubble css-var-_R_0_ ant-bubble-start"
     >
       <div
         class="ant-bubble-body"
@@ -2626,7 +2626,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx correctly 1`] = `
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«R0» ant-bubble-start"
+      class="ant-bubble css-var-_R_0_ ant-bubble-start"
     >
       <div
         class="ant-bubble-body"
@@ -2639,7 +2639,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx correctly 1`] = `
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«R0» ant-bubble-end"
+      class="ant-bubble css-var-_R_0_ ant-bubble-end"
     >
       <div
         class="ant-bubble-body"
@@ -2653,10 +2653,10 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-flex css-var-«R0» ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex css-var-_R_0_ ant-flex-wrap-wrap ant-flex-gap-small"
   >
     <div
-      class="ant-bubble css-var-«R0» ant-bubble-start"
+      class="ant-bubble css-var-_R_0_ ant-bubble-start"
     >
       <div
         class="ant-bubble-body"
@@ -2669,7 +2669,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx correctly 1`] = `
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«R0» ant-bubble-start"
+      class="ant-bubble css-var-_R_0_ ant-bubble-start"
     >
       <div
         class="ant-bubble-body"
@@ -2682,7 +2682,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx correctly 1`] = `
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«R0» ant-bubble-start"
+      class="ant-bubble css-var-_R_0_ ant-bubble-start"
     >
       <div
         class="ant-bubble-body"
@@ -2695,7 +2695,7 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx correctly 1`] = `
       </div>
     </div>
     <div
-      class="ant-bubble css-var-«R0» ant-bubble-end"
+      class="ant-bubble css-var-_R_0_ ant-bubble-end"
     >
       <div
         class="ant-bubble-body"
@@ -2709,11 +2709,11 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-flex css-var-«R0» ant-flex-wrap-wrap ant-flex-gap-small"
+    class="ant-flex css-var-_R_0_ ant-flex-wrap-wrap ant-flex-gap-small"
     style="margin-top:8px"
   >
     <div
-      class="ant-bubble css-var-«R0» ant-bubble-start"
+      class="ant-bubble css-var-_R_0_ ant-bubble-start"
     >
       <div
         class="ant-bubble-body"
