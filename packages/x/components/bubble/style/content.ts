@@ -32,7 +32,7 @@ export const genVariantStyle: GenerateStyle<BubbleToken> = (token) => {
 };
 
 export const genShapeStyle: GenerateStyle<BubbleToken> = (token) => {
-  const { componentCls, fontSize, lineHeight, paddingSM, padding, borderRadius, calc } = token;
+  const { componentCls, fontSize, lineHeight, paddingSM, borderRadius, calc } = token;
 
   const halfRadius = calc(fontSize).mul(lineHeight).div(2).add(paddingSM).equal();
   // 12px
