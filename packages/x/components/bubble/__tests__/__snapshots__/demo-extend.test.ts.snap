@@ -1571,64 +1571,68 @@ exports[`renders components/bubble/demo/header.tsx extend context correctly 2`] 
 
 exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-«rf» ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
-  style="height: 650px;"
+  class="ant-flex css-var-«rf» ant-flex-align-stretch ant-flex-vertical"
+  style="height: 720px; gap: 20px;"
 >
   <div
-    class="ant-flex css-var-«rf» ant-flex-justify-space-between ant-flex-gap-small"
+    class="ant-flex css-var-«rf» ant-flex-gap-small"
   >
-    <div
-      class="ant-flex css-var-«rf» ant-flex-gap-small"
+    <button
+      class="ant-btn css-var-«rf» ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
+      type="button"
     >
-      <button
-        class="ant-btn css-var-«rf» ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
-        type="button"
-      >
-        <span>
-          Add Bubble
-        </span>
-      </button>
-      <button
-        class="ant-btn css-var-«rf» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
-        type="button"
-      >
-        <span>
-          Add Markdown Msg
-        </span>
-      </button>
-      <button
-        class="ant-btn css-var-«rf» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
-        type="button"
-      >
-        <span>
-          Add Divider
-        </span>
-      </button>
-      <button
-        class="ant-btn css-var-«rf» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
-        type="button"
-      >
-        <span>
-          Add To Pre
-        </span>
-      </button>
-      <button
-        class="ant-btn css-var-«rf» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
-        type="button"
-      >
-        <span>
-          Add With Ref
-        </span>
-      </button>
-      <button
-        class="ant-btn css-var-«rf» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
-        type="button"
-      >
-        <span>
-          Scroll To Second
-        </span>
-      </button>
-    </div>
+      <span>
+        Add Bubble
+      </span>
+    </button>
+    <button
+      class="ant-btn css-var-«rf» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      type="button"
+    >
+      <span>
+        Add Markdown Msg
+      </span>
+    </button>
+    <button
+      class="ant-btn css-var-«rf» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      type="button"
+    >
+      <span>
+        Add Divider
+      </span>
+    </button>
+    <button
+      class="ant-btn css-var-«rf» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      type="button"
+    >
+      <span>
+        Add System
+      </span>
+    </button>
+    <button
+      class="ant-btn css-var-«rf» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      type="button"
+    >
+      <span>
+        Add To Pre
+      </span>
+    </button>
+    <button
+      class="ant-btn css-var-«rf» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      type="button"
+    >
+      <span>
+        Add With Ref
+      </span>
+    </button>
+    <button
+      class="ant-btn css-var-«rf» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      type="button"
+    >
+      <span>
+        Scroll To Second
+      </span>
+    </button>
   </div>
   <div
     class="ant-bubble-list css-var-«rf» ant-bubble-list-autoscroll"
@@ -1713,12 +1717,12 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
         <div
           class="ant-bubble-header"
         >
-          User-bubble_6
+          User-bubble_10
         </div>
         <div
           class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
         >
-          7 : Mock user content.
+          11 : Mock user content.
         </div>
         <div
           class="ant-bubble-footer ant-bubble-footer-end"
@@ -1783,6 +1787,34 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
       </div>
     </div>
     <div
+      class="ant-bubble ant-bubble-divider css-var-«rf» ant-bubble-start"
+    >
+      <div
+        class="ant-bubble-body"
+      >
+        <div
+          class="ant-bubble-content ant-bubble-content-borderless"
+        >
+          <div
+            class="ant-divider css-var-«rf» ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center"
+            role="separator"
+          >
+            <div
+              class="ant-divider-rail ant-divider-rail-start"
+            />
+            <span
+              class="ant-divider-inner-text"
+            >
+              2016/11/22 08:00:00
+            </span>
+            <div
+              class="ant-divider-rail ant-divider-rail-end"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
       class="ant-bubble css-var-«rf» ant-bubble-start"
     >
       <div
@@ -1823,7 +1855,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
         <div
           class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
         >
-          6 : Mock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI content
+          9 : Mock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI content
         </div>
         <div
           class="ant-bubble-footer ant-bubble-footer-start"
@@ -1971,12 +2003,12 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
         <div
           class="ant-bubble-header"
         >
-          User-bubble_4
+          User-bubble_7
         </div>
         <div
           class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
         >
-          5 : Mock user content.
+          8 : Mock user content.
         </div>
         <div
           class="ant-bubble-footer ant-bubble-footer-end"
@@ -2036,6 +2068,23 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-bubble ant-bubble-system css-var-«rf» ant-bubble-start"
+    >
+      <div
+        class="ant-bubble-body"
+      >
+        <div
+          class="ant-bubble-content ant-bubble-content-shadow ant-bubble-content-default"
+        >
+          <div
+            class="ant-bubble-system-content"
+          >
+            Welcome to use Ant Design X
           </div>
         </div>
       </div>
@@ -4438,16 +4487,24 @@ exports[`renders components/bubble/demo/system.tsx extend context correctly 1`] 
         <div
           class="ant-bubble-system-content"
         >
-          Hello, this is a system message
-        </div>
-        <div
-          class="ant-bubble-system-extra"
-        >
-          <a
-            class="ant-typography css-var-«r1»"
+          <div
+            class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-«r1»"
           >
-            ok
-          </a>
+            <div
+              class="ant-space-item"
+            >
+              Hello, this is a system message
+            </div>
+            <div
+              class="ant-space-item"
+            >
+              <a
+                class="ant-typography css-var-«r1»"
+              >
+                ok
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -4464,16 +4521,24 @@ exports[`renders components/bubble/demo/system.tsx extend context correctly 1`] 
         <div
           class="ant-bubble-system-content"
         >
-          Hello, this is a system message
-        </div>
-        <div
-          class="ant-bubble-system-extra"
-        >
-          <a
-            class="ant-typography css-var-«r1»"
+          <div
+            class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-«r1»"
           >
-            cancel
-          </a>
+            <div
+              class="ant-space-item"
+            >
+              Hello, this is a system message
+            </div>
+            <div
+              class="ant-space-item"
+            >
+              <a
+                class="ant-typography css-var-«r1»"
+              >
+                cancel
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>

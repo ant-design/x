@@ -153,9 +153,9 @@ interface BubbleAnimationOption {
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| items | 气泡数据列表，`key`，`role` 必填 ，当结合X SDK [`useXChat`](/x-sdks/use-x-chat-cn) 使用时可传入`status` 帮助 Bubble 对配置进行管理 | (BubbleProps & { key: string \| number, role: string , status: MessageStatus, extra?: AnyObject})[] | - | - |
+| items | 气泡数据列表，`key`，`role` 必填 ，当结合X SDK [`useXChat`](/x-sdks/use-x-chat-cn) 使用时可传入`status` 帮助 Bubble 对配置进行管理 | (([BubbleProps](#bubble) & [DividerBubbleProps](#bubbledivider)) & { key: string \| number, role: string , status: MessageStatus, extra?: AnyObject})[] | - | - |
 | autoScroll | 是否自动滚动 | boolean | `true` | - |
-| role | 角色默认配置 | [RoleType](#roletype) | - | - |
+| role | 气泡角色默认配置 | [RoleType](#roletype) | - | - |
 
 #### MessageStatus
 
@@ -178,8 +178,8 @@ type InfoType = {
 #### RoleType
 
 ```typescript
-type RoleProps = Pick<
-  BubbleProps,
+export type RoleProps = Pick<
+  BubbleProps<any>,
   | 'typing'
   | 'variant'
   | 'shape'
@@ -194,12 +194,23 @@ type RoleProps = Pick<
   | 'contentRender'
   | 'footerPlacement'
   | 'components'
-> & { key: string | number; role: string };
-
+  | 'editable'
+  | 'onTyping'
+  | 'onTypingComplete'
+  | 'onEditConfirm'
+  | 'onEditCancel'
+>;
 export type FuncRoleProps = (data: BubbleItemType) => RoleProps;
 
-export type RoleType = Partial<Record<'ai' | 'system' | 'user', RoleProps | FuncRoleProps>> &
-  Record<string, RoleProps | FuncRoleProps>;
+export type DividerRoleProps = Partial<DividerBubbleProps>;
+export type FuncDividerRoleProps = (data: BubbleItemType) => DividerRoleProps;
+
+export type RoleType = Partial<
+  'ai' | 'system' | 'user', RoleProps | FuncRoleProps>
+> & { divider: DividerRoleProps | FuncDividerRoleProps } & Record<
+    string,
+    RoleProps | FuncRoleProps
+  >;
 ```
 
 #### Bubble.List autoScroll 顶对齐
@@ -218,6 +229,16 @@ export type RoleType = Partial<Record<'ai' | 'system' | 'user', RoleProps | Func
 <Bubble.List items={items} autoScroll style={{ maxHeight: 600 }} />
 ```
 
+#### Bubble.List role 与自定义 Bubble
+
+**Bubble.List** 的 `role` 和 `items` 两个属性都可以配置气泡，其中 `role` 的配置作为默认配置使用，可缺省。`item.role` 用于指明该条数据的气泡角色，会与 `Bubble.List.role` 进行匹配。`items` 本身也可配置气泡属性，优先级高于 `role` 的配置，最终的气泡配置为：`{ ...role[item.role], ...item }`。
+
+特别说明，我们为 `role` 提供了四个默认字段，`ai`、`user`、`system`、`divider`。其中，`system`、`divider` 是保留字段，如果 `item.role` 赋值为它们俩之一，**Bubble.List** 会把这条气泡数据渲染为 **Bubble.System (role = 'system')** 或 **Bubble.Divider (role = 'divider')**。
+
+因此，若你想自定义渲染系统消息或分割线时，应该使用其他的命名。
+
+自定义渲染消息，可以参考[这个例子](#bubble-demo-list)中 reference 的渲染方式。
+
 ### Bubble.System
 
 通用属性参考：[通用属性](/docs/react/common-props)
@@ -230,12 +251,11 @@ export type RoleType = Partial<Record<'ai' | 'system' | 'user', RoleProps | Func
 
 ### Bubble.Divider
 
-继承 ant-design [Divider](https://ant.design/components/divider-cn) 组件除 `children` 外的所有属性。给 **Bubble.Divider** 传递的 `style` 或 `className` 都会应用在 **Divider** 组件上。
-
-| 属性      | 说明                            | 类型                        | 默认值 | 版本 |
-| --------- | ------------------------------- | --------------------------- | ------ | ---- |
-| content   | 气泡内容，等效 Divider.children | [ContentType](#contenttype) | -      | -    |
-| prefixCls | 自定义 class 前缀               | string                      | -      | -    |
+| 属性 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| content | 气泡内容，等效 Divider.children | [ContentType](#contenttype) | - | - |
+| prefixCls | 自定义 class 前缀 | string | - | - |
+| dividerProps | Divider 组件属性 | [Divider](https://ant.design/components/divider-cn) | - | - |
 
 ## Semantic DOM
 

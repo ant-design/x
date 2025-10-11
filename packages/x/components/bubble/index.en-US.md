@@ -177,8 +177,8 @@ type InfoType = {
 #### RoleType
 
 ```typescript
-type RoleProps = Pick<
-  BubbleProps,
+export type RoleProps = Pick<
+  BubbleProps<any>,
   | 'typing'
   | 'variant'
   | 'shape'
@@ -193,12 +193,23 @@ type RoleProps = Pick<
   | 'contentRender'
   | 'footerPlacement'
   | 'components'
-> & { key: string | number; role: string };
-
+  | 'editable'
+  | 'onTyping'
+  | 'onTypingComplete'
+  | 'onEditConfirm'
+  | 'onEditCancel'
+>;
 export type FuncRoleProps = (data: BubbleItemType) => RoleProps;
 
-export type RoleType = Partial<Record<'ai' | 'system' | 'user', RoleProps | FuncRoleProps>> &
-  Record<string, RoleProps | FuncRoleProps>;
+export type DividerRoleProps = Partial<DividerBubbleProps>;
+export type FuncDividerRoleProps = (data: BubbleItemType) => DividerRoleProps;
+
+export type RoleType = Partial<
+  'ai' | 'system' | 'user', RoleProps | FuncRoleProps>
+> & { divider: DividerRoleProps | FuncDividerRoleProps } & Record<
+    string,
+    RoleProps | FuncRoleProps
+  >;
 ```
 
 #### Bubble.List autoScroll Top Alignment
@@ -217,6 +228,16 @@ If you do not want to use flex layout, you can set `max-height` for **Bubble.Lis
 <Bubble.List items={items} autoScroll style={{ maxHeight: 600 }} />
 ```
 
+#### Bubble.List role and Custom Bubble
+
+Both the `role` and `items` attributes of **Bubble.List** can be configured for bubbles, where the `role` configuration is used as the default and can be omitted. `item.role` is used to specify the bubble role for the data item, which will be matched with `Bubble.List.role`. The `items` itself can also be configured with bubble attributes, with higher priority than the `role` configuration. The final bubble configuration is: `{ ...role[item.role], ...item }`.
+
+Special note: We provide four default fields for `role`, `ai`, `user`, `system`, `divider`. Among these, `system` and `divider` are reserved fields. If `item.role` is assigned either of them, **Bubble.List** will render this bubble data as **Bubble.System (role = 'system')** or **Bubble.Divider (role = 'divider')**.
+
+Therefore, if you want to customize the rendering of system Bubble or divider Bubble, you should use other names.
+
+Customize the rendering Bubble, you can refer to the rendering method of reference in [this example](#bubble-demo-list).
+
 ### Bubble.System
 
 Common Props Reference: [Common Props](/docs/react/common-props)
@@ -229,12 +250,11 @@ Common Props Reference: [Common Props](/docs/react/common-props)
 
 ### Bubble.Divider
 
-Inherits all attributes of the ant-design [Divider](https://ant.design/components/divider-cn) component except `children`. `style` or `className` passed to **Bubble.Divider** will be applied to the **Divider** component.
-
 | Attribute | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | content | Bubble content，same as Divider.children | [ContentType](#contenttype) | - | - |
 | prefixCls | custom prefix of class | string | - | - |
+| dividerProps | Divider props | [Divider](https://ant.design/components/divider-cn) | - | - |
 
 ## Semantic DOM
 

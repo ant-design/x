@@ -7,11 +7,11 @@ const App = () => (
     <Bubble content="message 1" />
     <Bubble.Divider content="Solid" />
     <Bubble content="message 2" placement="end" />
-    <Bubble.Divider content="Dashed" variant="dashed" />
+    <Bubble.Divider content="Dashed" dividerProps={{ variant: 'dashed' }} />
     <Bubble content="message 3" />
-    <Bubble.Divider content="Dotted" variant="dotted" />
+    <Bubble.Divider content="Dotted" dividerProps={{ variant: 'dotted' }} />
     <Bubble content="message 4" placement="end" />
-    <Bubble.Divider content="Plain Text" plain />
+    <Bubble.Divider content="Plain Text" dividerProps={{ plain: true }} />
     <Bubble content="message 5" />
   </Flex>
 );

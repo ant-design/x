@@ -1,14 +1,13 @@
 import { Divider } from 'antd';
 import React from 'react';
 import { useXProviderContext } from '../x-provider';
-import Bubble, { BubbleProps } from '.';
-import { DividerBubbleProps } from './interface';
+import Bubble from './Bubble';
+import type { BubbleContentType, BubbleProps, BubbleRef, DividerBubbleProps } from './interface';
 
-const DividerBubble: React.FC<DividerBubbleProps> = ({
-  prefixCls: customizePrefixCls,
-  content = '',
-  ...dividerProps
-}) => {
+const DividerBubble: React.ForwardRefRenderFunction<BubbleRef, DividerBubbleProps> = (
+  { prefixCls: customizePrefixCls, content = '', dividerProps },
+  ref,
+) => {
   // ============================ Prefix ============================
   const { getPrefixCls } = useXProviderContext();
 
@@ -24,6 +23,7 @@ const DividerBubble: React.FC<DividerBubbleProps> = ({
 
   return (
     <Bubble
+      ref={ref}
       prefixCls={customizePrefixCls}
       className={`${prefixCls}-divider`}
       variant="borderless"
@@ -33,4 +33,14 @@ const DividerBubble: React.FC<DividerBubbleProps> = ({
   );
 };
 
-export default DividerBubble;
+type ForwardDividerBubbleType = <T extends BubbleContentType = string>(
+  props: DividerBubbleProps<T> & { ref?: React.Ref<BubbleRef> },
+) => React.ReactElement;
+
+const ForwardDividerBubble = React.forwardRef(DividerBubble);
+
+if (process.env.NODE_ENV !== 'production') {
+  ForwardDividerBubble.displayName = 'DividerBubble';
+}
+
+export default ForwardDividerBubble as ForwardDividerBubbleType;

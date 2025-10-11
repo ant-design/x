@@ -42,7 +42,9 @@ describe('Bubble.Divider', () => {
 
   describe('Divider 属性传递', () => {
     it('应该正确传递 Divider 属性', () => {
-      const { container } = render(<DividerBubble content="分割线" dashed plain />);
+      const { container } = render(
+        <DividerBubble content="分割线" dividerProps={{ dashed: true, plain: true }} />,
+      );
 
       const dividerElement = container.querySelector('.ant-divider');
       expect(dividerElement).toHaveClass('ant-divider-horizontal');
@@ -54,7 +56,9 @@ describe('Bubble.Divider', () => {
 
   describe('样式和类名', () => {
     it('应该支持自定义 className', () => {
-      const { container } = render(<DividerBubble content="测试" className="custom-class" />);
+      const { container } = render(
+        <DividerBubble content="测试" dividerProps={{ className: 'custom-class' }} />,
+      );
 
       const bubbleElement = container.querySelector('.ant-divider');
       expect(bubbleElement).toBeInTheDocument();
@@ -63,7 +67,7 @@ describe('Bubble.Divider', () => {
 
     it('应该支持自定义 style', () => {
       const { container } = render(
-        <DividerBubble content="测试" style={{ backgroundColor: 'red' }} />,
+        <DividerBubble content="测试" dividerProps={{ style: { backgroundColor: 'red' } }} />,
       );
 
       const divierElm = container.querySelector('.ant-bubble-divider .ant-divider');

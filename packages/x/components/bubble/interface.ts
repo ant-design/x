@@ -160,11 +160,11 @@ export interface BubbleListRef {
   }) => void;
 }
 
-type RemainRole = 'ai' | 'system' | 'user';
+type RemainRole = 'ai' | 'system' | 'user' | 'divider';
 
 type AnyStr = string;
 
-export type BubbleItemType = BubbleProps<any> & {
+export type BubbleItemType = (BubbleProps<any> & DividerBubbleProps<any>) & {
   /**
    * @description 数据项唯一标识
    */
@@ -172,13 +172,13 @@ export type BubbleItemType = BubbleProps<any> & {
   /**
    * @description Bubble.List.role key 映射
    */
-  role?: RemainRole | AnyStr;
+  role: RemainRole | AnyStr;
   status?: `${MessageStatus}`;
   extra?: AnyObject;
 };
 
 export type RoleProps = Pick<
-  BubbleItemType,
+  BubbleProps<any>,
   | 'typing'
   | 'variant'
   | 'shape'
@@ -199,11 +199,17 @@ export type RoleProps = Pick<
   | 'onEditConfirm'
   | 'onEditCancel'
 >;
-
 export type FuncRoleProps = (data: BubbleItemType) => RoleProps;
 
-export type RoleType = Partial<Record<RemainRole, RoleProps | FuncRoleProps>> &
-  Record<AnyStr, RoleProps | FuncRoleProps>;
+export type DividerRoleProps = Partial<DividerBubbleProps>;
+export type FuncDividerRoleProps = (data: BubbleItemType) => DividerRoleProps;
+
+export type RoleType = Partial<
+  Record<Exclude<RemainRole, 'divider'>, RoleProps | FuncRoleProps>
+> & { divider?: DividerRoleProps | FuncDividerRoleProps } & Record<
+    AnyStr,
+    RoleProps | FuncRoleProps
+  >;
 
 export interface BubbleListProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'role'> {
   prefixCls?: string;
@@ -213,14 +219,14 @@ export interface BubbleListProps extends Omit<React.HTMLAttributes<HTMLDivElemen
   items: BubbleItemType[];
   autoScroll?: boolean;
   /**
-   * @description 数据类别基础配置项，优先级低，会被 items 配置覆盖。默认 ai、system、user 三类，允许自定义类别
+   * @description 数据类别基础配置项，优先级低，会被 items 配置覆盖。默认 ai、system、user、divider 四类，允许自定义类别
    */
   role?: RoleType;
 }
 
-export interface SystemBubbleProps
+export interface SystemBubbleProps<ContentType extends BubbleContentType = string>
   extends Pick<
-    BubbleProps,
+    BubbleProps<ContentType>,
     | 'prefixCls'
     | 'content'
     | 'style'
@@ -230,15 +236,10 @@ export interface SystemBubbleProps
     | 'rootClassName'
     | 'variant'
     | 'shape'
-  > {
-  /**
-   * @description 扩展插槽渲染
-   */
-  extra?: React.ReactNode | ((content: BubbleContentType) => React.ReactNode);
-}
+  > {}
 
-export interface DividerBubbleProps<ContentType extends BubbleContentType = string>
-  extends Omit<DividerProps, 'children'> {
+export interface DividerBubbleProps<ContentType extends BubbleContentType = string> {
   prefixCls?: string;
   content?: ContentType;
+  dividerProps?: Omit<DividerProps, 'children'>;
 }

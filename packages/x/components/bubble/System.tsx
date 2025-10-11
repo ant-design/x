@@ -1,21 +1,23 @@
 import classnames from 'classnames';
 import React from 'react';
 import { useXProviderContext } from '../x-provider';
-import Bubble, { BubbleProps } from '.';
-import { SystemBubbleProps } from './interface';
+import Bubble from './Bubble';
+import type { BubbleContentType, BubbleProps, BubbleRef, SystemBubbleProps } from './interface';
 
-const SystemBubble: React.FC<SystemBubbleProps> = ({
-  prefixCls: customizePrefixCls,
-  content,
-  variant = 'shadow',
-  shape,
-  style,
-  className,
-  styles,
-  classNames,
-  rootClassName,
-  extra,
-}) => {
+const SystemBubble: React.ForwardRefRenderFunction<BubbleRef, SystemBubbleProps> = (
+  {
+    prefixCls: customizePrefixCls,
+    content,
+    variant = 'shadow',
+    shape,
+    style,
+    className,
+    styles,
+    classNames,
+    rootClassName,
+  },
+  ref,
+) => {
   // ============================ Prefix ============================
   const { getPrefixCls } = useXProviderContext();
 
@@ -24,20 +26,12 @@ const SystemBubble: React.FC<SystemBubbleProps> = ({
   const cls = `${prefixCls}-system`;
 
   const systemContentRender: BubbleProps['contentRender'] = (content) => {
-    return (
-      <>
-        <div className={`${cls}-content`}>{content}</div>
-        {extra && (
-          <div className={`${cls}-extra`}>
-            {typeof extra === 'function' ? extra(content) : extra}
-          </div>
-        )}
-      </>
-    );
+    return <div className={`${cls}-content`}>{content}</div>;
   };
 
   return (
     <Bubble
+      ref={ref}
       prefixCls={customizePrefixCls}
       style={style}
       className={classnames(className, cls)}
@@ -52,4 +46,14 @@ const SystemBubble: React.FC<SystemBubbleProps> = ({
   );
 };
 
-export default SystemBubble;
+type ForwardSystemBubbleType = <T extends BubbleContentType = string>(
+  props: BubbleProps<T> & { ref?: React.Ref<BubbleRef> },
+) => React.ReactElement;
+
+const ForwardSystemBubble = React.forwardRef(SystemBubble);
+
+if (process.env.NODE_ENV !== 'production') {
+  ForwardSystemBubble.displayName = 'SystemBubble';
+}
+
+export default ForwardSystemBubble as ForwardSystemBubbleType;

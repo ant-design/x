@@ -75,37 +75,6 @@ describe('Bubble.System', () => {
     });
   });
 
-  describe('扩展插槽', () => {
-    it('应该支持 extra 插槽', () => {
-      const extra = <div className="custom-extra">额外信息</div>;
-      const { container } = render(<SystemBubble content="系统消息" extra={extra} />);
-
-      const extraElement = container.querySelector('.ant-bubble-system-extra');
-      expect(extraElement).toBeInTheDocument();
-      expect(extraElement).toHaveTextContent('额外信息');
-    });
-
-    it('应该支持函数形式的 extra 插槽', () => {
-      const { container } = render(
-        <SystemBubble
-          content="系统通知"
-          extra={(content) => <span className="dynamic-extra">关于: {content as string}</span>}
-        />,
-      );
-
-      const extraElement = container.querySelector('.ant-bubble-system-extra');
-      expect(extraElement).toBeInTheDocument();
-      expect(extraElement).toHaveTextContent('关于: 系统通知');
-    });
-
-    it('应该在没有 extra 时不渲染 extra 容器', () => {
-      const { container } = render(<SystemBubble content="系统消息" />);
-
-      const extraElement = container.querySelector('.ant-bubble-system-extra');
-      expect(extraElement).not.toBeInTheDocument();
-    });
-  });
-
   describe('内容类型支持', () => {
     it('应该支持 React 节点内容', () => {
       const content = <div className="custom-content">自定义内容</div>;

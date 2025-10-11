@@ -143,12 +143,11 @@ describe('Bubble.List', () => {
       const { container } = render(<BubbleList items={mockItems} />);
       const bubbles = container.querySelectorAll('.ant-bubble');
 
-      // autoScroll 启用情况下，数据渲染是倒序的
       expect(bubbles[1]).toHaveClass('ant-bubble-start'); // user role
       expect(bubbles[0]).toHaveClass('ant-bubble-start'); // ai role
     });
 
-    it('应该支持 items 不配置 role 属性', () => {
+    it('不支持 items 忽略 role 属性', () => {
       const roleConfig = {
         user: {
           placement: 'end' as const,
@@ -166,15 +165,15 @@ describe('Bubble.List', () => {
           key: 'item1',
           content: '消息',
           placement: 'end', // 覆盖 role 配置
-        },
+        } as any,
       ];
 
       const { container } = render(<BubbleList items={itemsWithOverride} role={roleConfig} />);
       const bubbles = container.querySelectorAll('.ant-bubble');
 
-      expect(bubbles.length).toBe(2);
-      expect(bubbles[1].textContent).toBe('用户消息'); // user role
-      expect(bubbles[0].textContent).toBe('消息');
+      // item1 不渲染
+      expect(bubbles.length).toBe(1);
+      expect(bubbles[0].textContent).toBe('用户消息'); // user role
     });
 
     it('应该支持 items 中的属性覆盖 role 配置', () => {
@@ -197,6 +196,52 @@ describe('Bubble.List', () => {
       const bubble = container.querySelector('.ant-bubble');
 
       expect(bubble).toHaveClass('ant-bubble-start'); // 应该使用 item 中的配置
+    });
+
+    it('应该支持默认渲染 divider role', () => {
+      const itemsWithOverride: BubbleItemType[] = [
+        {
+          key: 'item1',
+          role: 'divider',
+          content: '分割线',
+        },
+        {
+          key: 'item2',
+          role: 'user',
+          content: '用户消息',
+        },
+      ];
+
+      // 即便不配置 role，也支持渲染 item.role = 'divider' 的分割线
+      const { container } = render(<BubbleList items={itemsWithOverride} />);
+      const listElement = container.querySelector('.ant-bubble-list') as HTMLDivElement;
+      const divider = container.querySelector('.ant-bubble-divider');
+
+      expect(listElement.childNodes.length).toBe(2);
+      expect(divider).toBeInTheDocument();
+    });
+
+    it('应该支持默认渲染 system role', () => {
+      const itemsWithOverride: BubbleItemType[] = [
+        {
+          key: 'item1',
+          role: 'system',
+          content: '系统消息',
+        },
+        {
+          key: 'item2',
+          role: 'user',
+          content: '用户消息',
+        },
+      ];
+
+      // 即便不配置 role，也支持渲染 item.role = 'system' 的系统消息
+      const { container } = render(<BubbleList items={itemsWithOverride} />);
+      const listElement = container.querySelector('.ant-bubble-list') as HTMLDivElement;
+      const system = container.querySelector('.ant-bubble-system');
+
+      expect(listElement.childNodes.length).toBe(2);
+      expect(system).toBeInTheDocument();
     });
   });
 

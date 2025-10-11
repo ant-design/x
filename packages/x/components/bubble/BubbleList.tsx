@@ -1,10 +1,12 @@
 import classnames from 'classnames';
+import { warning } from 'rc-util';
 import omit from 'rc-util/es/omit';
 import pickAttrs from 'rc-util/es/pickAttrs';
 import * as React from 'react';
 import { useXProviderContext } from '../x-provider';
 import Bubble from './Bubble';
 import { BubbleContext } from './context';
+import DividerBubble from './Divider';
 import {
   BubbleItemType,
   BubbleListProps,
@@ -13,6 +15,7 @@ import {
   FuncRoleProps,
   RoleProps,
 } from './interface';
+import SystemBubble from './System';
 import useBubbleListStyle from './style';
 
 interface BubblesRecord {
@@ -24,6 +27,8 @@ function roleCfgIsFunction(roleCfg: RoleProps | FuncRoleProps): roleCfg is FuncR
 }
 
 const MemoedBubble = React.memo(Bubble);
+const MemoedDividerBubble = React.memo(DividerBubble);
+const MemoedSystemBubble = React.memo(SystemBubble);
 
 const BubbleListItem: React.FC<
   BubbleItemType & {
@@ -32,7 +37,7 @@ const BubbleListItem: React.FC<
     _key: string | number;
   }
 > = (props) => {
-  const { _key, bubblesRef, extra, status, ...restProps } = props;
+  const { _key, bubblesRef, extra, status, role, ...restProps } = props;
 
   const initBubbleRef = React.useCallback(
     (node: BubbleRef) => {
@@ -45,10 +50,20 @@ const BubbleListItem: React.FC<
     [_key],
   );
 
+  if (!role) {
+    warning(false, `BubbleListItem[key - ${_key}] role is required`);
+    return null;
+  }
+
+  let bubble = <MemoedBubble ref={initBubbleRef} {...restProps} />;
+  if (role === 'divider') {
+    bubble = <MemoedDividerBubble ref={initBubbleRef} {...restProps} />;
+  } else if (role === 'system') {
+    bubble = <MemoedSystemBubble ref={initBubbleRef} {...restProps} />;
+  }
+
   return (
-    <BubbleContext.Provider value={{ key: _key, status, extra }}>
-      <MemoedBubble ref={initBubbleRef} {...omit(restProps, ['role'])} />
-    </BubbleContext.Provider>
+    <BubbleContext.Provider value={{ key: _key, status, extra }}>{bubble}</BubbleContext.Provider>
   );
 };
 
@@ -75,9 +90,6 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   const listRef = React.useRef<HTMLDivElement>(null);
 
   const bubblesRef = React.useRef<BubblesRecord>({});
-
-  const latestItems = React.useRef(items);
-  latestItems.current = items;
 
   // ============================ Prefix ============================
   const { getPrefixCls } = useXProviderContext();
