@@ -5,7 +5,7 @@ import React from 'react';
 const App = () => (
   <Flex gap={16} vertical>
     <Bubble content="message 1" />
-    <Bubble.Divider content="Solid" style={{ background: 'red' }} />
+    <Bubble.Divider content="Solid" />
     <Bubble content="message 2" placement="end" />
     <Bubble.Divider content="Dashed" variant="dashed" />
     <Bubble content="message 3" />

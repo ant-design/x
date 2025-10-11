@@ -417,7 +417,6 @@ exports[`renders components/bubble/demo/divider.tsx extend context correctly 1`]
         <div
           class="ant-divider css-var-«r3l» ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center"
           role="separator"
-          style="background: red;"
         >
           <div
             class="ant-divider-rail ant-divider-rail-start"
@@ -2054,7 +2053,6 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
 >
   <div
     class="ant-bubble css-var-«r1r» ant-bubble-start ant-bubble-loading"
-    style="max-width: 90%;"
   >
     <div
       class="ant-flex css-var-«r1r» ant-flex-align-center ant-flex-gap-small"
@@ -2090,7 +2088,6 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
   </div>
   <div
     class="ant-bubble css-var-«r1r» ant-bubble-end"
-    style="max-width: 90%;"
   >
     <div
       class="ant-bubble-body"
@@ -2104,7 +2101,6 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
   </div>
   <div
     class="ant-bubble css-var-«r1r» ant-bubble-start ant-bubble-success"
-    style="max-width: 90%;"
   >
     <div
       class="ant-bubble-body"
@@ -2229,7 +2225,6 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
   </div>
   <div
     class="ant-bubble css-var-«r1r» ant-bubble-end"
-    style="max-width: 90%;"
   >
     <div
       class="ant-bubble-body"
@@ -2243,7 +2238,6 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
   </div>
   <div
     class="ant-bubble css-var-«r1r» ant-bubble-start ant-bubble-success"
-    style="max-width: 90%;"
   >
     <div
       class="ant-bubble-body"
@@ -2367,7 +2361,6 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
   </div>
   <div
     class="ant-bubble css-var-«r1r» ant-bubble-end"
-    style="max-width: 90%;"
   >
     <div
       class="ant-bubble-body"
@@ -2381,7 +2374,6 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
   </div>
   <div
     class="ant-bubble css-var-«r1r» ant-bubble-start ant-bubble-success"
-    style="max-width: 90%;"
   >
     <div
       class="ant-bubble-body"
@@ -2505,7 +2497,6 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
   </div>
   <div
     class="ant-bubble css-var-«r1r» ant-bubble-end"
-    style="max-width: 90%;"
   >
     <div
       class="ant-bubble-body"
@@ -2519,7 +2510,6 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
   </div>
   <div
     class="ant-bubble css-var-«r1r» ant-bubble-start ant-bubble-success"
-    style="max-width: 90%;"
   >
     <div
       class="ant-bubble-body"
@@ -2705,7 +2695,6 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
   >
     <div
       class="ant-bubble css-var-«rs» ant-bubble-end"
-      style="max-width: 90%;"
     >
       <div
         class="ant-bubble-avatar"
@@ -2751,7 +2740,6 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
     </div>
     <div
       class="ant-bubble css-var-«rs» ant-bubble-start"
-      style="max-width: 90%;"
     >
       <div
         class="ant-bubble-avatar"
@@ -2905,7 +2893,6 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
     </div>
     <div
       class="ant-bubble css-var-«rs» ant-bubble-end"
-      style="max-width: 90%;"
     >
       <div
         class="ant-bubble-avatar"
@@ -2951,7 +2938,6 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
     </div>
     <div
       class="ant-bubble css-var-«rs» ant-bubble-start"
-      style="max-width: 90%;"
     >
       <div
         class="ant-bubble-avatar"
@@ -3105,7 +3091,6 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
     </div>
     <div
       class="ant-bubble css-var-«rs» ant-bubble-end"
-      style="max-width: 90%;"
     >
       <div
         class="ant-bubble-avatar"
@@ -3151,7 +3136,6 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
     </div>
     <div
       class="ant-bubble css-var-«rs» ant-bubble-start"
-      style="max-width: 90%;"
     >
       <div
         class="ant-bubble-avatar"
@@ -3305,7 +3289,6 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
     </div>
     <div
       class="ant-bubble css-var-«rs» ant-bubble-end"
-      style="max-width: 90%;"
     >
       <div
         class="ant-bubble-avatar"
@@ -3351,7 +3334,6 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
     </div>
     <div
       class="ant-bubble css-var-«rs» ant-bubble-start"
-      style="max-width: 90%;"
     >
       <div
         class="ant-bubble-avatar"
@@ -3505,7 +3487,6 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
     </div>
     <div
       class="ant-bubble css-var-«rs» ant-bubble-end"
-      style="max-width: 90%;"
     >
       <div
         class="ant-bubble-avatar"
@@ -3551,7 +3532,6 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
     </div>
     <div
       class="ant-bubble css-var-«rs» ant-bubble-start"
-      style="max-width: 90%;"
     >
       <div
         class="ant-bubble-avatar"
@@ -3705,7 +3685,6 @@ exports[`renders components/bubble/demo/list-ref.tsx extend context correctly 1`
     </div>
     <div
       class="ant-bubble css-var-«rs» ant-bubble-end"
-      style="max-width: 90%;"
     >
       <div
         class="ant-bubble-avatar"
@@ -3873,7 +3852,6 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context 
 >
   <div
     class="ant-bubble css-var-«rc» ant-bubble-start ant-bubble-loading"
-    style="max-width: 600px; margin-inline-end: 44px;"
   >
     <div
       class="ant-flex css-var-«rc» ant-flex-align-center ant-flex-gap-small"
@@ -3922,7 +3900,6 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context 
   </div>
   <div
     class="ant-bubble css-var-«rc» ant-bubble-start"
-    style="max-width: 600px; margin-inline-end: 44px;"
   >
     <div
       class="ant-bubble-body"

@@ -1,3 +1,4 @@
+import type { DividerProps } from 'antd';
 import type { AnyObject } from '../_util/type';
 
 export type BubbleContentType = React.ReactNode | AnyObject;
@@ -234,4 +235,10 @@ export interface SystemBubbleProps
    * @description 扩展插槽渲染
    */
   extra?: React.ReactNode | ((content: BubbleContentType) => React.ReactNode);
+}
+
+export interface DividerBubbleProps<ContentType extends BubbleContentType = string>
+  extends Omit<DividerProps, 'children'> {
+  prefixCls?: string;
+  content?: ContentType;
 }

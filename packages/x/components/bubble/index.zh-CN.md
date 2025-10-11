@@ -63,23 +63,6 @@ demo:
 | onTypingComplete | 动画结束回调 | (content: string) => void | - | - |
 | onEditing | 编辑态下内容变化时回调 | (content: string) => void | - | - |
 
-#### streaming
-
-`streaming` 用于通知 Bubble 当前的 `content` 是否属于流式输入的当处于流式传输模。当处于流式传输模式，无论是否启用 Bubble 输入动画，在 `streaming` 变为 `false` 之前，Bubble 不会因为把当前 `content` 全部输出完毕就触发 `onTypingComplete` 回调，只有当 `streaming` 变为 `false`，且 `content` 全部输出完毕后，Bubble 才会触发 `onTypingComplete` 回调。这样可以避免由于流式传输不稳定而导致多次触发 `onTypingComplete` 回调的问题，保证一次流式传输过程仅触发一次 `onTypingComplete`。
-
-在[这个例子](#bubble-demo-stream)中，你可以尝试强制关闭流式标志，同时
-
-- 若你启用了输入动画，进行 **慢速加载** 时，会因为流式传输的速度跟不上动画速度而导致多次触发 `onTypingComplete`。
-- 若你关闭了输入动画，每一次的流式输入都会触发 `onTypingComplete`。
-
-### Bubble.List 组件 API
-
-| 属性 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- |
-| items | 气泡数据列表，`key`，`role` 必填 ，当结合X SDK [`useXChat`](/x-sdks/use-x-chat-cn) 使用时可传入`status` 帮助 Bubble 对配置进行管理 | (BubbleProps & { key: string \| number, role: string , status: MessageStatus, extra?: AnyObject})[] | - | - |
-| autoScroll | 是否自动滚动 | boolean | `true` | - |
-| role | 角色默认配置 | [RoleType](#roletype) | - | - |
-
 #### ContentType
 
 默认类型
@@ -104,24 +87,6 @@ type CustomContentType {
 type BubbleSlot<ContentType> =
   | React.ReactNode
   | ((content: ContentType, info: InfoType) => React.ReactNode);
-```
-
-#### MessageStatus
-
-```typescript
-type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error' | 'abort';
-```
-
-#### InfoType
-
-配合 [`useXChat`](/x-sdks/use-x-chat-cn) 使用 ，`key` 可做为 `MessageId`，`extra` 可作为自定义参数。
-
-```typescript
-type InfoType = {
-  status?: MessageStatus;
-  key?: string | number;
-  extra?: AnyObject;
-};
 ```
 
 #### EditableBubbleOption
@@ -175,6 +140,41 @@ interface BubbleAnimationOption {
 }
 ```
 
+#### streaming
+
+`streaming` 用于通知 Bubble 当前的 `content` 是否属于流式输入的当处于流式传输模。当处于流式传输模式，无论是否启用 Bubble 输入动画，在 `streaming` 变为 `false` 之前，Bubble 不会因为把当前 `content` 全部输出完毕就触发 `onTypingComplete` 回调，只有当 `streaming` 变为 `false`，且 `content` 全部输出完毕后，Bubble 才会触发 `onTypingComplete` 回调。这样可以避免由于流式传输不稳定而导致多次触发 `onTypingComplete` 回调的问题，保证一次流式传输过程仅触发一次 `onTypingComplete`。
+
+在[这个例子](#bubble-demo-stream)中，你可以尝试强制关闭流式标志，同时
+
+- 若你启用了输入动画，进行 **慢速加载** 时，会因为流式传输的速度跟不上动画速度而导致多次触发 `onTypingComplete`。
+- 若你关闭了输入动画，每一次的流式输入都会触发 `onTypingComplete`。
+
+### Bubble.List
+
+| 属性 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| items | 气泡数据列表，`key`，`role` 必填 ，当结合X SDK [`useXChat`](/x-sdks/use-x-chat-cn) 使用时可传入`status` 帮助 Bubble 对配置进行管理 | (BubbleProps & { key: string \| number, role: string , status: MessageStatus, extra?: AnyObject})[] | - | - |
+| autoScroll | 是否自动滚动 | boolean | `true` | - |
+| role | 角色默认配置 | [RoleType](#roletype) | - | - |
+
+#### MessageStatus
+
+```typescript
+type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error' | 'abort';
+```
+
+#### InfoType
+
+配合 [`useXChat`](/x-sdks/use-x-chat-cn) 使用 ，`key` 可做为 `MessageId`，`extra` 可作为自定义参数。
+
+```typescript
+type InfoType = {
+  status?: MessageStatus;
+  key?: string | number;
+  extra?: AnyObject;
+};
+```
+
 #### RoleType
 
 ```typescript
@@ -217,6 +217,25 @@ export type RoleType = Partial<Record<'ai' | 'system' | 'user', RoleProps | Func
 ```tsx
 <Bubble.List items={items} autoScroll style={{ maxHeight: 600 }} />
 ```
+
+### Bubble.System
+
+通用属性参考：[通用属性](/docs/react/common-props)
+
+| 属性    | 说明         | 类型                                               | 默认值    | 版本 |
+| ------- | ------------ | -------------------------------------------------- | --------- | ---- |
+| content | 气泡内容     | [ContentType](#contenttype)                        | -         | -    |
+| variant | 气泡样式变体 | `filled` \| `outlined` \| `shadow` \| `borderless` | `shadow`  | -    |
+| shape   | 气泡形状     | `default` \| `round` \| `corner`                   | `default` | -    |
+
+### Bubble.Divider
+
+继承 ant-design [Divider](https://ant.design/components/divider-cn) 组件除 `children` 外的所有属性。给 **Bubble.Divider** 传递的 `style` 或 `className` 都会应用在 **Divider** 组件上。
+
+| 属性      | 说明                            | 类型                        | 默认值 | 版本 |
+| --------- | ------------------------------- | --------------------------- | ------ | ---- |
+| content   | 气泡内容，等效 Divider.children | [ContentType](#contenttype) | -      | -    |
+| prefixCls | 自定义 class 前缀               | string                      | -      | -    |
 
 ## Semantic DOM
 

@@ -1,14 +1,8 @@
-import { Divider, DividerProps } from 'antd';
+import { Divider } from 'antd';
 import React from 'react';
 import { useXProviderContext } from '../x-provider';
 import Bubble, { BubbleProps } from '.';
-import { BubbleContentType } from './interface';
-
-interface DividerBubbleProps<ContentType extends BubbleContentType = string>
-  extends Omit<DividerProps, 'children'> {
-  prefixCls?: string;
-  content?: ContentType;
-}
+import { DividerBubbleProps } from './interface';
 
 const DividerBubble: React.FC<DividerBubbleProps> = ({
   prefixCls: customizePrefixCls,

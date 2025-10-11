@@ -21,6 +21,8 @@ Often used in chat scenarios.
 <code src="./demo/basic.tsx">Basic</code>
 <code src="./demo/variant-and-shape.tsx">Variants and Shapes</code>
 <code src="./demo/sider-and-placement.tsx">Sidebar and Placement</code>
+<code src="./demo/system.tsx">System Bubble</code>
+<code src="./demo/divider.tsx">Divider Bubble</code>
 <code src="./demo/header.tsx">Bubble Header</code>
 <code src="./demo/footer.tsx">Bubble Footer</code>
 <code src="./demo/loading.tsx">Loading</code>
@@ -60,23 +62,6 @@ Common Props Reference: [Common Props](/docs/react/common-props)
 | onTypingComplete | Typing animation complete callback | (content: string) => void | - | - |
 | onEditing | Callback when content changes in editing mode | (content: string) => void | - | - |
 
-#### streaming
-
-`streaming` notifies Bubble whether the current `content` is streaming input. In streaming mode, regardless of whether Bubble input animation is enabled, Bubble will not trigger the `onTypingComplete` callback until `streaming` becomes `false`, even if the current `content` is fully output. Only when `streaming` becomes `false` and the content is fully output will Bubble trigger `onTypingComplete`. This avoids multiple triggers due to unstable streaming and ensures only one trigger per streaming process.
-
-In [this example](#bubble-demo-stream), you can try to force the streaming flag off:
-
-- If you enable input animation and perform **slow loading**, multiple triggers of `onTypingComplete` may occur because streaming speed cannot keep up with animation speed.
-- If you disable input animation, each streaming input will trigger `onTypingComplete`.
-
-### Bubble.List Component API
-
-| Attribute | Description | Type | Default | Version |
-| --- | --- | --- | --- | --- |
-| items | Bubble data list, `key` and `role` required. When used with X SDK [`useXChat`](/x-sdks/use-x-chat), you can pass `status` to help Bubble manage configuration | (BubbleProps & { key: string \| number, role: string , status: MessageStatus, extra?: AnyObject })[] | - | - |
-| autoScroll | Auto-scroll | boolean | `true` | - |
-| role | Role default configuration | [RoleType](#roletype) | - | - |
-
 #### ContentType
 
 Default type
@@ -101,24 +86,6 @@ type CustomContentType {
 type BubbleSlot<ContentType> =
   | React.ReactNode
   | ((content: ContentType, info: InfoType) => React.ReactNode);
-```
-
-#### MessageStatus
-
-```typescript
-type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error' | 'abort';
-```
-
-#### InfoType
-
-When used in conjunction with [`useXChat`](/x-sdks/use-x-chat), `key` can be used as `MessageId`,and `extra` can be used as a custom parameter.
-
-```typescript
-type InfoType = {
-  status?: MessageStatus;
-  key?: string | number;
-  extra?: AnyObject;
-};
 ```
 
 #### EditableBubbleOption
@@ -172,6 +139,41 @@ interface BubbleAnimationOption {
 }
 ```
 
+#### streaming
+
+`streaming` notifies Bubble whether the current `content` is streaming input. In streaming mode, regardless of whether Bubble input animation is enabled, Bubble will not trigger the `onTypingComplete` callback until `streaming` becomes `false`, even if the current `content` is fully output. Only when `streaming` becomes `false` and the content is fully output will Bubble trigger `onTypingComplete`. This avoids multiple triggers due to unstable streaming and ensures only one trigger per streaming process.
+
+In [this example](#bubble-demo-stream), you can try to force the streaming flag off:
+
+- If you enable input animation and perform **slow loading**, multiple triggers of `onTypingComplete` may occur because streaming speed cannot keep up with animation speed.
+- If you disable input animation, each streaming input will trigger `onTypingComplete`.
+
+### Bubble.List
+
+| Attribute | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| items | Bubble data list, `key` and `role` required. When used with X SDK [`useXChat`](/x-sdks/use-x-chat), you can pass `status` to help Bubble manage configuration | (BubbleProps & { key: string \| number, role: string , status: MessageStatus, extra?: AnyObject })[] | - | - |
+| autoScroll | Auto-scroll | boolean | `true` | - |
+| role | Role default configuration | [RoleType](#roletype) | - | - |
+
+#### MessageStatus
+
+```typescript
+type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error' | 'abort';
+```
+
+#### InfoType
+
+When used in conjunction with [`useXChat`](/x-sdks/use-x-chat), `key` can be used as `MessageId`,and `extra` can be used as a custom parameter.
+
+```typescript
+type InfoType = {
+  status?: MessageStatus;
+  key?: string | number;
+  extra?: AnyObject;
+};
+```
+
 #### RoleType
 
 ```typescript
@@ -214,6 +216,25 @@ If you do not want to use flex layout, you can set `max-height` for **Bubble.Lis
 ```tsx
 <Bubble.List items={items} autoScroll style={{ maxHeight: 600 }} />
 ```
+
+### Bubble.System
+
+Common Props Reference: [Common Props](/docs/react/common-props)
+
+| Attribute | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| content | Bubble content | [ContentType](#contenttype) | - | - |
+| variant | Bubble style variant | `filled` \| `outlined` \| `shadow` \| `borderless` | `shadow` | - |
+| shape | Bubble shape | `default` \| `round` \| `corner` | `default` | - |
+
+### Bubble.Divider
+
+Inherits all attributes of the ant-design [Divider](https://ant.design/components/divider-cn) component except `children`. `style` or `className` passed to **Bubble.Divider** will be applied to the **Divider** component.
+
+| Attribute | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| content | Bubble content，same as Divider.children | [ContentType](#contenttype) | - | - |
+| prefixCls | custom prefix of class | string | - | - |
 
 ## Semantic DOM
 
