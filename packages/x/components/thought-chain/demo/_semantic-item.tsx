@@ -23,7 +23,7 @@ const App: React.FC = () => {
   const [locale] = useLocale(locales);
   return (
     <SemanticPreview
-      componentName="ThoughtChain"
+      componentName="ThoughtChain.Item"
       semantics={[
         {
           name: 'root',

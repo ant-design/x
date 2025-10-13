@@ -1,15 +1,12 @@
 import { Button } from 'antd';
 import { createStyles } from 'antd-style';
-import React from 'react';
-import useLocale from '../../../hooks/useLocale';
-
 import classnames from 'classnames';
 import { useLocation, useNavigate } from 'dumi';
-import useLottie from '../../../hooks/useLottie';
+import React from 'react';
+import useLocale from '../../../hooks/useLocale';
 import { getLocalizedPathname, isZhCN } from '../../../theme/utils';
 import Container from '../common/Container';
 import { DESIGN_STAGE_COLOR } from '../common/CustomizationProvider';
-import SiteContext from './SiteContext';
 
 const comma = '\u00A0,\u00A0\u00A0\u00A0';
 
@@ -83,23 +80,6 @@ const useStyle = createStyles(({ token, css }) => {
       width: 100%;
       max-width: 540px;
     `,
-    lottie: css`
-      position: relative;
-      top: 0;
-      right: 0;
-      width: 540px;
-      z-index: 100;
-
-      & :first-child {
-        position: sticky;
-        top: ${token.pcContainerMargin}px;
-      }
-
-      @media only screen and (max-width: ${token.mobileMaxWidth}px) {
-        display: none;
-      }
-    `,
-
     chain_item: css`
       display: flex;
       gap: ${token.paddingLG}px;
@@ -114,7 +94,7 @@ const useStyle = createStyles(({ token, css }) => {
       
     `,
     chain_item_line: css`
-      height: 630px;
+      height: 300px;
       width: 4px;
       margin: 0 auto;
     `,
@@ -173,8 +153,13 @@ const useStyle = createStyles(({ token, css }) => {
       width: 40px;
       height: 40px;
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       img {
+        width: auto;
+        height: 40px;
         position: absolute;
       }
     `,
@@ -187,72 +172,9 @@ const DesignGuide: React.FC = () => {
   const { pathname, search } = useLocation();
   const navigate = useNavigate();
 
-  const { isMobile } = React.useContext(SiteContext);
-
-  const [lottieRef, animation] = useLottie({
-    renderer: 'svg',
-    loop: false,
-    autoplay: false,
-    disabled: isMobile,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
-    },
-    path: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*OjRsQZWTEcQAAAAAAAAAAAAADgCCAQ',
-  });
-
-  React.useEffect(() => {
-    if (!animation) return;
-
-    const segments: [number, number][] = [
-      [0, 20],
-      [20, 55],
-      [55, 120],
-      [120, 157],
-    ];
-
-    const triggerPoints = [600, 1000, 1600, 2300].map((i) => i + window.innerHeight);
-
-    let currentSegment = -1;
-    let hasPlayedFirstSegment = false;
-
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      let newSegment = -1;
-
-      if (scrollY >= triggerPoints[0] && scrollY < triggerPoints[1]) {
-        newSegment = 0;
-      } else if (scrollY >= triggerPoints[1] && scrollY < triggerPoints[2]) {
-        newSegment = 1;
-      } else if (scrollY >= triggerPoints[2] && scrollY < triggerPoints[3]) {
-        newSegment = 2;
-      } else if (scrollY >= triggerPoints[3]) {
-        newSegment = 3;
-      }
-
-      if (newSegment !== currentSegment) {
-        currentSegment = newSegment;
-
-        if (currentSegment === 0) {
-          if (!hasPlayedFirstSegment) {
-            animation.playSegments(segments[0], true);
-            hasPlayedFirstSegment = true;
-          } else {
-            animation.goToAndStop(segments[0][0], true);
-          }
-        } else {
-          animation.playSegments(segments[currentSegment], true);
-        }
-      }
-    });
-
-    return () => {
-      animation.destroy();
-    };
-  }, [animation]);
-
   const items = [
     {
-      icon: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*NBliSL6_YIsAAAAAAAAAAAAADgCCAQ/original',
+      icon: 'https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/f14LTKOFxRsAAAAAQbAAAAgADtFMAQFr/original',
       label: locale.awaken,
       title: locale.awaken_title,
       desc: locale.awaken_desc,
@@ -262,7 +184,7 @@ const DesignGuide: React.FC = () => {
       path: 'components/welcome',
     },
     {
-      icon: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*3XXESYNxPNkAAAAAAAAAAAAADgCCAQ/original',
+      icon: 'https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/dGfqSaM9ZxoAAAAAQaAAAAgADtFMAQFr/original',
       label: locale.express,
       title: locale.express_title,
       desc: locale.express_desc,
@@ -272,24 +194,24 @@ const DesignGuide: React.FC = () => {
       path: 'components/attachments',
     },
     {
-      icon: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*pX3DR5MaxE8AAAAAAAAAAAAADgCCAQ/original',
+      icon: 'https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/BQaCTIUU-CkAAAAAQZAAAAgADtFMAQFr/original',
       label: locale.confirm,
       title: locale.confirm_title,
       desc: locale.confirm_desc,
       action: locale.confirm_action,
       startColor: DESIGN_STAGE_COLOR.CONFIRM.START,
       endColor: DESIGN_STAGE_COLOR.CONFIRM.END,
-      path: 'components/thought-chain',
+      path: 'components/think',
     },
     {
-      icon: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*jVNbRLytvWMAAAAAAAAAAAAADgCCAQ/original',
+      icon: 'https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/r-DuSZG-9NIAAAAAQdAAAAgADtFMAQFr/original',
       label: locale.feedback,
       title: locale.feedback_title,
       desc: locale.feedback_desc,
       action: locale.feedback_action,
       startColor: DESIGN_STAGE_COLOR.FEEDBACK.START,
       endColor: DESIGN_STAGE_COLOR.FEEDBACK.END,
-      path: 'components/bubble',
+      path: 'components/actions',
     },
   ];
 
@@ -299,7 +221,6 @@ const DesignGuide: React.FC = () => {
         <div className={styles.chain}>
           {items.map((item, index) => {
             const titleParts = item.title.split(item.label);
-
             return (
               <div className={styles.chain_item} key={item.label}>
                 <div>
@@ -358,9 +279,6 @@ const DesignGuide: React.FC = () => {
               </div>
             );
           })}
-        </div>
-        <div className={styles.lottie}>
-          <div ref={lottieRef} />
         </div>
       </div>
     </Container>
