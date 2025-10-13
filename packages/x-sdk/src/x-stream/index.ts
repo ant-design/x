@@ -75,6 +75,12 @@ export type SSEFields = 'data' | 'event' | 'id' | 'retry';
  */
 export type SSEOutput = Partial<Record<SSEFields, any>>;
 
+export interface JSONOutPut extends Partial<Record<SSEFields, any>> {
+  success: boolean;
+  message?: string;
+  name?: any;
+}
+
 /**
  * @description A TransformStream inst that transforms a part string into {@link SSEOutput}
  * @example part string

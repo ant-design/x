@@ -1,5 +1,5 @@
 import type { AnyObject } from '../_util/type';
-import type { SSEOutput, XReadableStream, XStreamOptions } from '../x-stream';
+import type { JSONOutPut, SSEOutput, XReadableStream, XStreamOptions } from '../x-stream';
 import XStream from '../x-stream';
 import type { XFetchMiddlewares } from './x-fetch';
 import xFetch from './x-fetch';
@@ -8,7 +8,7 @@ export interface XRequestCallbacks<Output> {
   /**
    * @description Callback when the request is successful
    */
-  onSuccess: (chunks: Output[], responseHeaders: Headers) => void;
+  onSuccess: (chunks: (Output | JSONOutPut)[], responseHeaders: Headers) => void;
 
   /**
    * @description Callback when the request fails
@@ -18,7 +18,7 @@ export interface XRequestCallbacks<Output> {
   /**
    * @description Callback when the request is updated
    */
-  onUpdate?: (chunk: Output, responseHeaders: Headers) => void;
+  onUpdate?: (chunk: Output | JSONOutPut, responseHeaders: Headers) => void;
 }
 
 export interface XRequestOptions<Input = AnyObject, Output = SSEOutput> extends RequestInit {
@@ -224,6 +224,7 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
     })
       .then(async (response) => {
         clearTimeout(this.timeoutHandler);
+
         if (this.isTimeout) return;
 
         if (transformStream) {
@@ -331,15 +332,23 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
     callbacks?.onSuccess?.(chunks, response.headers);
   }
 
-  private jsonResponseHandler = async <Output = SSEOutput>(
+  private jsonResponseHandler = async <Output = JSONOutPut>(
     response: Response,
     callbacks?: XRequestCallbacks<Output>,
   ) => {
-    const chunk: Output = await response.json();
-    callbacks?.onUpdate?.(chunk, response.headers);
-    this.finishRequest();
-    // keep type consistency with stream mode
-    callbacks?.onSuccess?.([chunk], response.headers);
+    const chunk: JSONOutPut = await response.json();
+
+    if (chunk?.success === false) {
+      callbacks?.onError?.({
+        name: chunk.name || 'SystemError',
+        message: chunk.message || 'System is error',
+      });
+    } else {
+      callbacks?.onUpdate?.(chunk, response.headers);
+      this.finishRequest();
+      // keep type consistency with stream mode
+      callbacks?.onSuccess?.([chunk], response.headers);
+    }
   };
 }
 
