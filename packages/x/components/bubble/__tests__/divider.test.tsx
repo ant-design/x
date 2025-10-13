@@ -56,21 +56,19 @@ describe('Bubble.Divider', () => {
 
   describe('样式和类名', () => {
     it('应该支持自定义 className', () => {
-      const { container } = render(
-        <DividerBubble content="测试" dividerProps={{ className: 'custom-class' }} />,
-      );
+      const { container } = render(<DividerBubble content="测试" className="custom-class" />);
 
-      const bubbleElement = container.querySelector('.ant-divider');
+      const bubbleElement = container.querySelector('.ant-bubble-divider');
       expect(bubbleElement).toBeInTheDocument();
       expect(bubbleElement).toHaveClass('custom-class');
     });
 
     it('应该支持自定义 style', () => {
       const { container } = render(
-        <DividerBubble content="测试" dividerProps={{ style: { backgroundColor: 'red' } }} />,
+        <DividerBubble content="测试" style={{ backgroundColor: 'red' }} />,
       );
 
-      const divierElm = container.querySelector('.ant-bubble-divider .ant-divider');
+      const divierElm = container.querySelector('.ant-bubble-divider');
       expect(divierElm).toBeInTheDocument();
       expect(divierElm).toHaveStyle({ backgroundColor: 'red' });
     });

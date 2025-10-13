@@ -9,23 +9,37 @@ import { BubbleListProps } from '../interface';
 const locales = {
   cn: {
     root: '对话列表根节点',
-    bubble: '对话气泡容器',
-    body: '对话气泡的主体容器',
-    avatar: '对话气泡的头像的外层容器',
-    header: '对话气泡的头部的容器',
-    content: '对话气泡的聊天内容的容器',
-    footer: '对话气泡的底部的容器',
-    extra: '对话气泡的尾边栏容器',
+    'bubble.root': '对话气泡容器',
+    'bubble.body': '对话气泡的主体容器',
+    'bubble.avatar': '对话气泡的头像的外层容器',
+    'bubble.header': '对话气泡的头部的容器',
+    'bubble.content': '对话气泡的聊天内容的容器',
+    'bubble.footer': '对话气泡的底部的容器',
+    'bubble.extra': '对话气泡的尾边栏容器',
+    'system.root': '系统气泡容器',
+    'system.body': '系统气泡的主体容器',
+    'system.content': '系统气泡的聊天内容的容器',
+    'divider.root': '分割线气泡容器',
+    'divider.divider.root': '分割线容器',
+    'divider.divider.rail': '分割线的背景条元素',
+    'divider.divider.content': '分割线的内容元素',
   },
   en: {
     root: 'Bubble list root node',
-    bubble: 'Bubble container',
-    body: 'Bubble main body container',
-    avatar: 'Bubble avatar outer container',
-    header: 'Bubble header container',
-    content: 'Bubble chat content container',
-    footer: 'Bubble footer container',
-    extra: 'Bubble sidebar container',
+    'bubble.root': 'Bubble container',
+    'bubble.body': 'Bubble main body container',
+    'bubble.avatar': 'Bubble avatar outer container',
+    'bubble.header': 'Bubble header container',
+    'bubble.content': 'Bubble chat content container',
+    'bubble.footer': 'Bubble footer container',
+    'bubble.extra': 'Bubble sidebar container',
+    'system.root': 'Bubble.System container',
+    'system.body': 'Bubble.System main body container',
+    'system.content': 'Bubble.System content container',
+    'divider.root': 'Bubble root element of Bubble.Divider',
+    'divider.divider.root': 'Divider root element in Bubble.Divider',
+    'divider.divider.rail': 'Content element of Divider in Bubble.Divider',
+    'divider.divider.content': 'Background rail element of Divider in Bubble.Divider',
   },
 };
 
@@ -51,12 +65,6 @@ const App: React.FC = () => {
       user: () => ({
         placement: 'end',
       }),
-      reference: {
-        variant: 'borderless',
-        // 16px for list item gap
-        styles: { root: { margin: 0, marginBottom: -12 } },
-        components: { avatar: () => '' },
-      },
     }),
     [],
   );
@@ -65,18 +73,27 @@ const App: React.FC = () => {
       componentName="Bubble.List"
       semantics={[
         { name: 'root', desc: locale.root },
-        { name: 'bubble', desc: locale.bubble },
-        { name: 'body', desc: locale.body },
-        { name: 'avatar', desc: locale.avatar },
-        { name: 'header', desc: locale.header },
-        { name: 'content', desc: locale.content },
-        { name: 'footer', desc: locale.footer },
-        { name: 'extra', desc: locale.extra },
+        { name: 'bubble.root', desc: locale['bubble.root'] },
+        { name: 'bubble.body', desc: locale['bubble.body'] },
+        { name: 'bubble.avatar', desc: locale['bubble.avatar'] },
+        { name: 'bubble.header', desc: locale['bubble.header'] },
+        { name: 'bubble.content', desc: locale['bubble.content'] },
+        { name: 'bubble.footer', desc: locale['bubble.footer'] },
+        { name: 'bubble.extra', desc: locale['bubble.extra'] },
+        { name: 'system.root', desc: locale['bubble.root'] },
+        { name: 'system.body', desc: locale['bubble.body'] },
+        { name: 'system.content', desc: locale['bubble.content'] },
+        { name: 'divider.root', desc: locale['bubble.root'] },
+        { name: 'divider.divider.root', desc: locale['divider.divider.root'] },
+        { name: 'divider.divider.rail', desc: locale['divider.divider.rail'] },
+        { name: 'divider.divider.content', desc: locale['divider.divider.content'] },
       ]}
     >
       <Bubble.List
         role={memoRole}
         items={[
+          { role: 'system', content: 'Welcome to Ant Design X', key: 'system' },
+          { role: 'divider', content: 'divider', key: 'divider' },
           {
             role: 'user',
             content: 'hello, Ant Design X',

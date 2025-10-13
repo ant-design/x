@@ -250,10 +250,11 @@ Common Props Reference: [Common Props](/docs/react/common-props)
 
 ### Bubble.Divider
 
+Common Props Reference: [Common Props](/docs/react/common-props)
+
 | Attribute | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | content | Bubble content，same as Divider.children | [ContentType](#contenttype) | - | - |
-| prefixCls | custom prefix of class | string | - | - |
 | dividerProps | Divider props | [Divider](https://ant.design/components/divider-cn) | - | - |
 
 ## Semantic DOM
@@ -265,6 +266,14 @@ Common Props Reference: [Common Props](/docs/react/common-props)
 ### Bubble.List
 
 <code src="./demo/_semantic-list.tsx" simplify="true"></code>
+
+### Bubble.System
+
+<code src="./demo/_semantic-system.tsx" simplify="true"></code>
+
+### Bubble.Divider
+
+<code src="./demo/_semantic-divider.tsx" simplify="true"></code>
 
 ## Design Token
 

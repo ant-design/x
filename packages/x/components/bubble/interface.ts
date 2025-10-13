@@ -5,6 +5,7 @@ export type BubbleContentType = React.ReactNode | AnyObject;
 
 export type BubbleSlotType = 'content' | 'body' | 'header' | 'footer' | 'avatar' | 'extra';
 
+type BubbleSemanticName = BubbleSlotType | 'root';
 export interface BubbleAnimationOption {
   /**
    * @description 动画效果类型，打字机，渐入
@@ -76,9 +77,9 @@ export interface BubbleProps<ContentType extends BubbleContentType = string>
     'content' | 'onAnimationStart' | 'onAnimationEnd'
   > {
   prefixCls?: string;
-  styles?: Partial<Record<BubbleSlotType | 'root', React.CSSProperties>>;
+  styles?: Partial<Record<BubbleSemanticName, React.CSSProperties>>;
   rootClassName?: string;
-  classNames?: Partial<Record<BubbleSlotType | 'root', string>>;
+  classNames?: Partial<Record<BubbleSemanticName, string>>;
   placement?: 'start' | 'end';
   loading?: boolean;
   loadingRender?: () => React.ReactNode;
@@ -144,6 +145,36 @@ export interface BubbleProps<ContentType extends BubbleContentType = string>
   onEditCancel?: () => void;
 }
 
+type SystemBubbleSemanticName = 'root' | 'body' | 'content';
+
+export interface SystemBubbleProps<ContentType extends BubbleContentType = string>
+  extends Pick<
+    BubbleProps<ContentType>,
+    'prefixCls' | 'content' | 'style' | 'className' | 'rootClassName' | 'variant' | 'shape'
+  > {
+  styles?: Partial<Record<SystemBubbleSemanticName, React.CSSProperties>>;
+  classNames?: Partial<Record<SystemBubbleSemanticName, string>>;
+}
+
+type DividerBubbleSemanticName = 'root' | 'rail' | 'content';
+
+export interface DividerBubbleProps<ContentType extends BubbleContentType = string> {
+  prefixCls?: string;
+  rootClassName?: string;
+  style?: React.CSSProperties;
+  className?: string;
+  styles?: {
+    root?: React.CSSProperties;
+    divider?: Partial<Record<DividerBubbleSemanticName, React.CSSProperties>>;
+  };
+  classNames?: {
+    root?: string;
+    divider?: Partial<Record<DividerBubbleSemanticName, string>>;
+  };
+  content?: ContentType;
+  dividerProps?: Omit<DividerProps, 'children'>;
+}
+
 export interface BubbleListRef {
   nativeElement: HTMLDivElement;
   scrollTo: (options: {
@@ -164,18 +195,20 @@ type RemainRole = 'ai' | 'system' | 'user' | 'divider';
 
 type AnyStr = string;
 
-export type BubbleItemType = (BubbleProps<any> & DividerBubbleProps<any>) & {
-  /**
-   * @description 数据项唯一标识
-   */
-  key: string | number;
-  /**
-   * @description Bubble.List.role key 映射
-   */
-  role: RemainRole | AnyStr;
-  status?: `${MessageStatus}`;
-  extra?: AnyObject;
-};
+export type BubbleItemType = (Omit<BubbleProps<any>, 'styles' | 'classNames'> &
+  Omit<DividerBubbleProps<any>, 'styles' | 'classNames'>) &
+  BubbleListSemantic & {
+    /**
+     * @description 数据项唯一标识
+     */
+    key: string | number;
+    /**
+     * @description Bubble.List.role key 映射
+     */
+    role: RemainRole | AnyStr;
+    status?: `${MessageStatus}`;
+    extra?: AnyObject;
+  };
 
 export type RoleProps = Pick<
   BubbleProps<any>,
@@ -211,35 +244,42 @@ export type RoleType = Partial<
     RoleProps | FuncRoleProps
   >;
 
-export interface BubbleListProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'role'> {
+interface BubbleListSemantic {
+  styles?: {
+    /**
+     * @description List 根容器
+     */
+    root?: React.CSSProperties;
+    /**
+     * @description List 下的 Bubble
+     */
+    bubble?: BubbleProps['styles'];
+    /**
+     * @description List 下的 Bubble.System
+     */
+    system?: SystemBubbleProps['styles'];
+    /**
+     * @description List 下的 Bubble.Divider
+     */
+    divider?: DividerBubbleProps['styles'];
+  };
+  classNames?: {
+    root?: string;
+    bubble?: BubbleProps['classNames'];
+    system?: SystemBubbleProps['classNames'];
+    divider?: DividerBubbleProps['classNames'];
+  };
+}
+
+export interface BubbleListProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'role'>,
+    BubbleListSemantic {
   prefixCls?: string;
   rootClassName?: string;
-  styles?: Partial<Record<BubbleSlotType | 'bubble' | 'root', React.CSSProperties>>;
-  classNames?: Partial<Record<BubbleSlotType | 'bubble' | 'root', string>>;
   items: BubbleItemType[];
   autoScroll?: boolean;
   /**
    * @description 数据类别基础配置项，优先级低，会被 items 配置覆盖。默认 ai、system、user、divider 四类，允许自定义类别
    */
   role?: RoleType;
-}
-
-export interface SystemBubbleProps<ContentType extends BubbleContentType = string>
-  extends Pick<
-    BubbleProps<ContentType>,
-    | 'prefixCls'
-    | 'content'
-    | 'style'
-    | 'className'
-    | 'styles'
-    | 'classNames'
-    | 'rootClassName'
-    | 'variant'
-    | 'shape'
-  > {}
-
-export interface DividerBubbleProps<ContentType extends BubbleContentType = string> {
-  prefixCls?: string;
-  content?: ContentType;
-  dividerProps?: Omit<DividerProps, 'children'>;
 }

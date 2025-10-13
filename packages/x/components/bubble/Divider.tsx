@@ -1,11 +1,21 @@
-import { Divider } from 'antd';
+import { Divider, DividerProps } from 'antd';
+import classnames from 'classnames';
 import React from 'react';
 import { useXProviderContext } from '../x-provider';
 import Bubble from './Bubble';
 import type { BubbleContentType, BubbleProps, BubbleRef, DividerBubbleProps } from './interface';
 
 const DividerBubble: React.ForwardRefRenderFunction<BubbleRef, DividerBubbleProps> = (
-  { prefixCls: customizePrefixCls, content = '', dividerProps },
+  {
+    prefixCls: customizePrefixCls,
+    content = '',
+    rootClassName,
+    style,
+    className,
+    styles,
+    classNames,
+    dividerProps,
+  },
   ref,
 ) => {
   // ============================ Prefix ============================
@@ -13,19 +23,24 @@ const DividerBubble: React.ForwardRefRenderFunction<BubbleRef, DividerBubbleProp
 
   const prefixCls = getPrefixCls('bubble', customizePrefixCls);
 
+  const mergeDividerProps: DividerProps = {
+    ...dividerProps,
+    prefixCls: customizePrefixCls,
+    styles: styles?.divider,
+    classNames: classNames?.divider,
+  };
+
   const dividerContentRender: BubbleProps['contentRender'] = (content) => {
-    return (
-      <Divider prefixCls={customizePrefixCls} {...dividerProps}>
-        {content}
-      </Divider>
-    );
+    return <Divider {...mergeDividerProps}>{content}</Divider>;
   };
 
   return (
     <Bubble
       ref={ref}
+      style={{ ...style, ...styles?.root }}
+      className={classnames(`${prefixCls}-divider`, className)}
+      rootClassName={classnames(rootClassName, classNames?.root)}
       prefixCls={customizePrefixCls}
-      className={`${prefixCls}-divider`}
       variant="borderless"
       content={content}
       contentRender={dividerContentRender}

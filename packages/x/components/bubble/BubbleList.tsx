@@ -37,7 +37,7 @@ const BubbleListItem: React.FC<
     _key: string | number;
   }
 > = (props) => {
-  const { _key, bubblesRef, extra, status, role, ...restProps } = props;
+  const { _key, bubblesRef, extra, status, role, classNames, styles, ...restProps } = props;
 
   const initBubbleRef = React.useCallback(
     (node: BubbleRef) => {
@@ -55,11 +55,32 @@ const BubbleListItem: React.FC<
     return null;
   }
 
-  let bubble = <MemoedBubble ref={initBubbleRef} {...restProps} />;
+  let bubble = (
+    <MemoedBubble
+      ref={initBubbleRef}
+      styles={styles?.bubble}
+      classNames={classNames?.bubble}
+      {...restProps}
+    />
+  );
   if (role === 'divider') {
-    bubble = <MemoedDividerBubble ref={initBubbleRef} {...restProps} />;
+    bubble = (
+      <MemoedDividerBubble
+        ref={initBubbleRef}
+        styles={styles?.divider}
+        classNames={classNames?.divider}
+        {...restProps}
+      />
+    );
   } else if (role === 'system') {
-    bubble = <MemoedSystemBubble ref={initBubbleRef} {...restProps} />;
+    bubble = (
+      <MemoedSystemBubble
+        ref={initBubbleRef}
+        styles={styles?.system}
+        classNames={classNames?.system}
+        {...restProps}
+      />
+    );
   }
 
   return (
@@ -169,14 +190,8 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
         }
         return (
           <BubbleListItem
-            classNames={{
-              ...classNames,
-              root: classNames?.bubble,
-            }}
-            styles={{
-              ...styles,
-              root: styles?.bubble,
-            }}
+            classNames={classNames}
+            styles={styles}
             {...omit(mergedProps, ['key'])}
             key={item.key}
             _key={item.key}
