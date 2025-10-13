@@ -112,7 +112,7 @@ export interface SenderProps
   onCancel?: VoidFunction;
   onKeyDown?: React.KeyboardEventHandler<any>;
   onPaste?: React.ClipboardEventHandler<HTMLElement>;
-  onPasteFile?: (firstFile: File, files: FileList) => void;
+  onPasteFile?: (files: FileList) => void;
   components?: SenderComponents;
   classNames?: Partial<Record<SemanticType, string>>;
   styles?: Partial<Record<SemanticType, React.CSSProperties>>;

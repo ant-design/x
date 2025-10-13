@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { useLocale } from '../../../locale';
+import enUS from '../../../locale/en_US';
 export interface RecordingIconProps {
   className?: string;
 }
@@ -13,15 +14,15 @@ const RECT_HEIGHT_MAX = 500;
 const DURATION = 0.8;
 
 export default function RecordingIcon({ className }: RecordingIconProps) {
+  const [contextLocale] = useLocale('Sender', enUS.Sender);
   return (
     <svg
       color="currentColor"
       viewBox={`0 0 ${SIZE} ${SIZE}`}
       xmlns="http://www.w3.org/2000/svg"
-      // xmlnsXlink="http://www.w3.org/1999/xlink"
       className={className}
     >
-      <title>Speech Recording</title>
+      <title>{contextLocale.speechRecording}</title>
 
       {Array.from({ length: COUNT }).map((_, index) => {
         const dest = (SIZE - RECT_WIDTH * COUNT) / (COUNT - 1);

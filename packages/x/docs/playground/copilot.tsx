@@ -274,7 +274,7 @@ const Copilot = (props: CopilotProps) => {
     }
   };
 
-  const onPasteFile = (_: File, files: FileList) => {
+  const onPasteFile = (files: FileList) => {
     for (const file of files) {
       attachmentsRef.current?.upload(file);
     }
