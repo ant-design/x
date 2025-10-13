@@ -57,7 +57,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | onSubmit | Callback when click send button | (message: string, slotConfig?: SlotConfigType[]) => void | - | - |
 | onChange | Callback when input value changes | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`>, slotConfig?: SlotConfigType[]) => void | - | - |
 | onCancel | Callback when click cancel button | () => void | - | - |
-| onPasteFile | Callback when paste files | (firstFile: File, files: FileList) => void | - | - |
+| onPasteFile | Callback when paste files | (files: FileList) => void | - | - |
 | autoSize | Height auto size feature, can be set to true \| false or an object: { minRows: 2, maxRows: 6 } | boolean \| { minRows?: number; maxRows?: number } | { maxRows: 8 } | - |
 | initialSlotConfig | Slot configuration, after configuration, the input box will become slot mode, supporting structured input. In this mode, `value` and `defaultValue` are invalid. | SlotConfigType[] | - | - |
 
