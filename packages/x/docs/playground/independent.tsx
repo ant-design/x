@@ -90,7 +90,7 @@ const useStyle = createStyles(({ token, css }) => {
       overflow-y: auto;
       margin-top: 12px;
       padding: 0;
-    flex:1;
+      flex: 1;
       .ant-conversations-list {
         padding-inline-start: 0;
       }
@@ -110,7 +110,7 @@ const useStyle = createStyles(({ token, css }) => {
       display: flex;
       flex-direction: column;
       padding-block: ${token.paddingLG}px;
-      justify-content:space-between;
+      justify-content: space-between;
       .ant-bubble-content-updating {
         background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
         background-size: 100% 2px;
@@ -141,7 +141,7 @@ const useStyle = createStyles(({ token, css }) => {
       padding-top: 32px;
       width: 100%;
       padding-inline: ${token.paddingLG}px;
-     box-sizing: border-box;
+      box-sizing: border-box;
     `,
     // sender 样式
     sender: css`
@@ -639,7 +639,9 @@ const Independent: React.FC = () => {
           }))}
           styles={{
             bubble: {
-              maxWidth: 840,
+              root: {
+                maxWidth: 840,
+              },
             },
           }}
           role={getRole(className)}
