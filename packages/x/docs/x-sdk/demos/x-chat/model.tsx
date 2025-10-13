@@ -62,7 +62,7 @@ const App = () => {
         };
       }
       return {
-        content: error?.message || 'Request failed, please try again!',
+        content: error.message || 'Request failed, please try again!',
         role: 'assistant',
       };
     },
