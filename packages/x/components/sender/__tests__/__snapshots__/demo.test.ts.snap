@@ -492,7 +492,7 @@ exports[`renders components/sender/demo/basic.tsx correctly 1`] = `
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <title>
-                    Stop Loading
+                    Stop loading
                   </title>
                   <rect
                     fill="currentColor"

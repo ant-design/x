@@ -21,6 +21,10 @@ export interface xLocale {
     audioError: string;
     audioLoading: string;
   };
+  Sender?: {
+    stopLoading: string;
+    speechRecording: string;
+  };
   Bubble?: {
     editableOk: string;
     editableCancel: string;
