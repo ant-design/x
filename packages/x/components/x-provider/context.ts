@@ -48,7 +48,7 @@ export interface XComponentsConfig {
   actions?: ComponentConfig<ActionsProps>;
   think?: ComponentConfig<ThinkProps>;
   fileCard?: ComponentConfig<FileCardProps>;
-  sources: ComponentConfig<SourcesProps>;
+  sources?: ComponentConfig<SourcesProps>;
 }
 
 type ComponentsConfig = {
