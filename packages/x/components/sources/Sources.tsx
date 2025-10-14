@@ -82,10 +82,10 @@ const Sources: React.ForwardRefRenderFunction<SourcesRef, SourcesProps> = (props
   });
 
   // ============================= Refs =============================
-  const thinkRef = React.useRef<HTMLDivElement>(null);
+  const sourcesRef = React.useRef<HTMLDivElement>(null);
   useProxyImperativeHandle(ref, () => {
     return {
-      nativeElement: thinkRef.current!,
+      nativeElement: sourcesRef.current!,
     };
   });
 
@@ -124,7 +124,12 @@ const Sources: React.ForwardRefRenderFunction<SourcesRef, SourcesProps> = (props
           className={`${prefixCls}-list-item`}
           onClick={() => props.onClick?.(item)}
         >
-          <a className={`${prefixCls}-link`} href={item.url} target="_blank">
+          <a
+            className={`${prefixCls}-link`}
+            href={item.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {item.icon && <span className={`${prefixCls}-link-icon`}>{item.icon}</span>}
             <span className={`${prefixCls}-link-title`}>{item.title}</span>
           </a>
@@ -137,7 +142,7 @@ const Sources: React.ForwardRefRenderFunction<SourcesRef, SourcesProps> = (props
 
   return (
     <div
-      ref={thinkRef}
+      ref={sourcesRef}
       {...domProps}
       className={mergedCls}
       style={{

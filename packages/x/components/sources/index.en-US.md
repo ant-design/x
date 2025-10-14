@@ -45,8 +45,9 @@ Common props ref：[Common props](/docs/react/common-props)
 interface SourcesItem {
   key?: React.Key;
   title: React.ReactNode;
-  href?: string;
+  url?: string;
   icon?: React.ReactNode;
+  description?: React.ReactNode;
 }
 ```
 

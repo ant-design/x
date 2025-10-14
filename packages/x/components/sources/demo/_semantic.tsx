@@ -21,21 +21,21 @@ const App: React.FC = () => {
   const items = [
     {
       title: '1. Data source',
-      href: 'https://x.ant.design/components/overview',
+      url: 'https://x.ant.design/components/overview',
     },
     {
       title: '2. Data source',
-      href: 'https://x.ant.design/components/overview',
+      url: 'https://x.ant.design/components/overview',
     },
     {
       title: '3. Data source',
-      href: 'https://x.ant.design/components/overview',
+      url: 'https://x.ant.design/components/overview',
     },
   ];
 
   return (
     <SemanticPreview
-      componentName="Sender"
+      componentName="Sources"
       semantics={[
         { name: 'root', desc: locale.root },
         { name: 'title', desc: locale.title },

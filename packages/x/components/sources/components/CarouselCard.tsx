@@ -18,7 +18,7 @@ const CarouselCard: React.FC<CarouselCardProps> = (props) => {
   const carouselRef = React.useRef<React.ComponentRef<typeof Carousel>>(null);
 
   const handleClick = (item: SourcesItem) => {
-    item.url && window.open(item.url);
+    item.url && window.open(item.url, '_blank', 'noopener,noreferrer');
     props.onClick?.(item);
   };
 
@@ -43,7 +43,7 @@ const CarouselCard: React.FC<CarouselCardProps> = (props) => {
             <RightOutlined />
           </span>
         </div>
-        <div className={`${compCls}-page`}>{`${slide + 1}/${items?.length}`}</div>
+        <div className={`${compCls}-page`}>{`${slide + 1}/${items?.length || 1}`}</div>
       </div>
       <Carousel
         className={`${compCls}`}
@@ -53,8 +53,12 @@ const CarouselCard: React.FC<CarouselCardProps> = (props) => {
         dots={false}
         beforeChange={(_, nextSlide) => setSlide(nextSlide)}
       >
-        {items?.map((item) => (
-          <div key={item.key} className={`${compCls}-item`} onClick={() => handleClick(item)}>
+        {items?.map((item, index) => (
+          <div
+            key={item.key || index}
+            className={`${compCls}-item`}
+            onClick={() => handleClick(item)}
+          >
             <div className={`${compCls}-item-title-wrapper`}>
               {item.icon && <span className={`${compCls}-item-icon`}>{item.icon}</span>}
               <span className={`${compCls}-item-title`}>{item.title}</span>
