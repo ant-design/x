@@ -45,6 +45,7 @@ exports[`Sources Component Sources component work 1`] = `
         <a
           class="ant-sources-link"
           href="https://x.ant.design/components/overview"
+          rel="noopener noreferrer"
           target="_blank"
         >
           <span
@@ -60,6 +61,7 @@ exports[`Sources Component Sources component work 1`] = `
         <a
           class="ant-sources-link"
           href="https://x.ant.design/components/overview"
+          rel="noopener noreferrer"
           target="_blank"
         >
           <span
@@ -75,6 +77,7 @@ exports[`Sources Component Sources component work 1`] = `
         <a
           class="ant-sources-link"
           href="https://x.ant.design/components/overview"
+          rel="noopener noreferrer"
           target="_blank"
         >
           <span
@@ -134,6 +137,7 @@ exports[`Sources Component rtl render component should be rendered correctly in 
         <a
           class="ant-sources-link"
           href="https://x.ant.design/components/overview"
+          rel="noopener noreferrer"
           target="_blank"
         >
           <span
@@ -149,6 +153,7 @@ exports[`Sources Component rtl render component should be rendered correctly in 
         <a
           class="ant-sources-link"
           href="https://x.ant.design/components/overview"
+          rel="noopener noreferrer"
           target="_blank"
         >
           <span
@@ -164,6 +169,7 @@ exports[`Sources Component rtl render component should be rendered correctly in 
         <a
           class="ant-sources-link"
           href="https://x.ant.design/components/overview"
+          rel="noopener noreferrer"
           target="_blank"
         >
           <span
