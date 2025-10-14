@@ -215,17 +215,44 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
 
   // ============================ Submit ============================
   const isCompositionRef = React.useRef(false);
+  const isCompositionEndRef = React.useRef(false);
+  const pendingKeyDownRef = React.useRef<React.KeyboardEvent<HTMLElement> | null>(null);
 
   const onInternalCompositionStart = () => {
     isCompositionRef.current = true;
   };
 
   const onInternalCompositionEnd = () => {
-    isCompositionRef.current = false;
+    if (isCompositionRef.current) {
+      isCompositionEndRef.current = true;
+      isCompositionRef.current = false;
+    }
+    // After processing the input Chinese, use CapsLock
+    if (pendingKeyDownRef.current?.key === 'CapsLock') {
+      isCompositionEndRef.current = false;
+    }
   };
 
   const onInternalKeyPress: TextareaProps['onKeyPress'] = (e) => {
-    const canSubmit = e.key === 'Enter' && !isCompositionRef.current;
+    if (isCompositionRef.current || isCompositionEndRef.current) {
+      // Parameter isCompositionRef.current is the event execution: onInternalCompositionStart -> onInternalKeyPress -> onInternalCompositionEnd
+      // Parameter isCompositionEndRef.current is the event execution: onInternalCompositionStart -> onInternalCompositionEnd -> onInternalKeyPress
+      handleActualKeyPress(e, false);
+      isCompositionRef.current = false;
+      if (isCompositionEndRef.current) {
+        isCompositionEndRef.current = false;
+        pendingKeyDownRef.current = null;
+      }
+    } else {
+      handleActualKeyPress(e, true);
+    }
+  };
+
+  const handleActualKeyPress = (
+    e: React.KeyboardEvent<HTMLTextAreaElement>,
+    isCanSubmit: boolean,
+  ) => {
+    const canSubmit = e.key === 'Enter' && isCanSubmit;
 
     // Check for `submitType` to submit
     switch (submitType) {
@@ -245,6 +272,16 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     }
 
     onKeyPress?.(e);
+  };
+
+  const onInternalKeyDown: React.KeyboardEventHandler<HTMLElement> = (e) => {
+    if (e.key !== 'Unidentified') {
+      // Record e in the keydown event
+      pendingKeyDownRef.current = e;
+    }
+    if (onKeyDown) {
+      onKeyDown(e);
+    }
   };
 
   // ============================ Paste =============================
@@ -356,7 +393,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
             onPressEnter={onInternalKeyPress}
             onCompositionStart={onInternalCompositionStart}
             onCompositionEnd={onInternalCompositionEnd}
-            onKeyDown={onKeyDown}
+            onKeyDown={onInternalKeyDown}
             onPaste={onInternalPaste}
             variant="borderless"
             readOnly={readOnly}
