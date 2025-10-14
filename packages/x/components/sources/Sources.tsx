@@ -198,4 +198,10 @@ const Sources: React.ForwardRefRenderFunction<SourcesRef, SourcesProps> = (props
   );
 };
 
-export default React.forwardRef(Sources);
+const ForwardSources = React.forwardRef(Sources);
+
+if (process.env.NODE_ENV !== 'production') {
+  ForwardSources.displayName = 'Sources';
+}
+
+export default ForwardSources;
