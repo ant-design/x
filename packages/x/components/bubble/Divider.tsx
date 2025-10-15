@@ -1,4 +1,4 @@
-import { Divider, DividerProps } from 'antd';
+import { Divider } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
