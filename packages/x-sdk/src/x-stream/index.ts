@@ -78,7 +78,7 @@ export type SSEOutput = Partial<Record<SSEFields, any>>;
 export interface JSONOutPut extends Partial<Record<SSEFields, any>> {
   success: boolean;
   message?: string;
-  name?: any;
+  name?: string;
 }
 
 /**
