@@ -21,7 +21,7 @@ const App: React.FC = () => {
 
   return (
     <SemanticPreview
-      componentName="Bubble"
+      componentName="Bubble.Divider"
       semantics={[
         { name: 'root', desc: locale.root },
         { name: 'body', desc: locale.body },
