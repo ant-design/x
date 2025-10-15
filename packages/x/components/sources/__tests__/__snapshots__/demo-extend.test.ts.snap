@@ -2,7 +2,7 @@
 
 exports[`renders components/sources/demo/basic.tsx extend context correctly 1`] = `
 <div
-  class="ant-sources css-var-«r5»"
+  class="ant-sources css-var-_r_5_"
 >
   <div
     class="ant-sources-title-wrapper ant-sources-icon-position-start"
@@ -97,7 +97,7 @@ exports[`renders components/sources/demo/basic.tsx extend context correctly 2`] 
 exports[`renders components/sources/demo/expand.tsx extend context correctly 1`] = `
 Array [
   <button
-    class="ant-btn css-var-«r4» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-_r_4_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     style="margin-bottom: 8px;"
     type="button"
   >
@@ -107,7 +107,7 @@ Array [
   </button>,
   <br />,
   <div
-    class="ant-sources css-var-«r4»"
+    class="ant-sources css-var-_r_4_"
   >
     <div
       class="ant-sources-title-wrapper ant-sources-icon-position-start"
@@ -202,7 +202,7 @@ exports[`renders components/sources/demo/expand.tsx extend context correctly 2`]
 
 exports[`renders components/sources/demo/icon.tsx extend context correctly 1`] = `
 <div
-  class="ant-sources css-var-«r3»"
+  class="ant-sources css-var-_r_3_"
 >
   <div
     class="ant-sources-title-wrapper ant-sources-icon-position-end"
@@ -369,7 +369,7 @@ Array [
     Use the inline mode in the text
   </span>,
   <div
-    class="ant-sources css-var-«r0» ant-sources-inline"
+    class="ant-sources css-var-_r_0_ ant-sources-inline"
   >
     <div
       aria-describedby="test-id"
@@ -382,7 +382,7 @@ Array [
       </span>
     </div>
     <div
-      class="ant-popover ant-zoom-big-appear ant-zoom-big-appear-prepare ant-zoom-big css-var-«r0» css-var-«r0» ant-popover-placement-top"
+      class="ant-popover ant-zoom-big-appear ant-zoom-big-appear-prepare ant-zoom-big css-var-_r_0_ css-var-_r_0_ ant-popover-placement-top"
       style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
     >
       <div
@@ -464,7 +464,7 @@ Array [
                 </div>
               </div>
               <div
-                class="ant-carousel css-var-«r0»"
+                class="ant-carousel css-var-_r_0_"
               >
                 <div
                   class="slick-slider ant-sources-carousel slick-initialized"
