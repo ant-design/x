@@ -117,10 +117,9 @@ describe('XRequest Class', () => {
     await request.asyncHandler;
     expect(callbacks.onSuccess).not.toHaveBeenCalled();
     expect(callbacks.onUpdate).not.toHaveBeenCalled();
-    expect(callbacks.onError).toHaveBeenCalledWith({
-      name: 'ValidationError',
-      message: 'Invalid input parameters',
-    });
+    const error = new Error('Invalid input parameters');
+    error.name = 'ValidationError';
+    expect(callbacks.onError).toHaveBeenCalledWith(error);
   });
 
   test('should handle JSON response with success false and default error fields', async () => {
@@ -140,10 +139,9 @@ describe('XRequest Class', () => {
     await request.asyncHandler;
     expect(callbacks.onSuccess).not.toHaveBeenCalled();
     expect(callbacks.onUpdate).not.toHaveBeenCalled();
-    expect(callbacks.onError).toHaveBeenCalledWith({
-      name: 'SystemError',
-      message: 'System is error',
-    });
+    const error = new Error('System error');
+    error.name = 'SystemError';
+    expect(callbacks.onError).toHaveBeenCalledWith(error);
   });
 
   test('should handle JSON response with success false and partial error fields', async () => {
@@ -164,10 +162,9 @@ describe('XRequest Class', () => {
     await request.asyncHandler;
     expect(callbacks.onSuccess).not.toHaveBeenCalled();
     expect(callbacks.onUpdate).not.toHaveBeenCalled();
-    expect(callbacks.onError).toHaveBeenCalledWith({
-      name: 'SystemError',
-      message: 'Custom error message',
-    });
+    const error = new Error('Custom error message');
+    error.name = 'SystemError';
+    expect(callbacks.onError).toHaveBeenCalledWith(error);
   });
 
   test('should create request and handle streaming response', async () => {
