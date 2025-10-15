@@ -1,5 +1,5 @@
 import type { AnyObject } from '../_util/type';
-import type { SSEOutput, XReadableStream, XStreamOptions } from '../x-stream';
+import type { JSONOutPut, SSEOutput, XReadableStream, XStreamOptions } from '../x-stream';
 import XStream from '../x-stream';
 import type { XFetchMiddlewares } from './x-fetch';
 import xFetch from './x-fetch';
@@ -224,6 +224,7 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
     })
       .then(async (response) => {
         clearTimeout(this.timeoutHandler);
+
         if (this.isTimeout) return;
 
         if (transformStream) {
@@ -331,15 +332,22 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
     callbacks?.onSuccess?.(chunks, response.headers);
   }
 
-  private jsonResponseHandler = async <Output = SSEOutput>(
+  private jsonResponseHandler = async <Output = JSONOutPut>(
     response: Response,
     callbacks?: XRequestCallbacks<Output>,
   ) => {
     const chunk: Output = await response.json();
-    callbacks?.onUpdate?.(chunk, response.headers);
-    this.finishRequest();
-    // keep type consistency with stream mode
-    callbacks?.onSuccess?.([chunk], response.headers);
+
+    if ((chunk as JSONOutPut)?.success === false) {
+      const error = new Error((chunk as JSONOutPut).message || 'System error');
+      error.name = (chunk as JSONOutPut).name || 'SystemError';
+      callbacks?.onError?.(error);
+    } else {
+      callbacks?.onUpdate?.(chunk, response.headers);
+      this.finishRequest();
+      // keep type consistency with stream mode
+      callbacks?.onSuccess?.([chunk], response.headers);
+    }
   };
 }
 

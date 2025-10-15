@@ -51,14 +51,13 @@ Based on the RICH interaction paradigm, we provide a variety of atomic component
 
 Here is a simple example of building a chat box using atomic components:
 
-```tsx
+```sandpack
+const sandpackConfig = {
+  autorun: true,
+};
+
 import React from 'react';
-import {
-  // Message bubble
-  Bubble,
-  // Input box
-  Sender,
-} from '@ant-design/x';
+import { Bubble, Sender} from '@ant-design/x';
 
 const messages = [
   {
@@ -69,7 +68,7 @@ const messages = [
 ];
 
 const App = () => (
-  <div>
+  <div style={{ height: '400px',display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
     <Bubble.List items={messages} />
     <Sender />
   </div>

@@ -260,7 +260,7 @@ const useStyle = createStyles(({ token, css }) => {
       display: flex;
       flex-direction: column;
       padding-block: ${token.paddingLG}px;
-      justify-content:space-between;
+      justify-content: space-between;
       .ant-bubble-content-updating {
         background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
         background-size: 100% 2px;
@@ -284,7 +284,7 @@ const useStyle = createStyles(({ token, css }) => {
       display: flex;
       height: calc(100% - 120px);
       flex-direction: column;
-       align-items: center;
+      align-items: center;
       width: 100%;
     `,
     placeholder: css`

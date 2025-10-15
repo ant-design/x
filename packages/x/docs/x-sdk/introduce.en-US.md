@@ -29,13 +29,17 @@ We provide `x-sdk.js`, `x-sdk.min.js` and `x-sdk.min.js.map` in the dist directo
 
 ## Example
 
-```tsx
-import React from 'react';
+```sandpack
+const sandpackConfig = {
+  autorun: true,
+};
+
+import React,{ useEffect, useState } from 'react';
 import { XRequest } from '@ant-design/x-sdk';
 
 export default () => {
-  const [status, setStatus] = React.useState<'string'>('');
-  const [lines, setLines] = React.useState<Record<string, string>[]>([]);
+  const [status, setStatus] = useState<'string'>('');
+  const [lines, setLines] = useState<Record<string, string>[]>([]);
 
   useEffect(() => {
     setStatus('pending');

@@ -69,7 +69,8 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
         minWidth: 0,
         maxWidth: '100%',
         minHeight: calc(paddingSM).mul(2).add(calc(lineHeight).mul(fontSize)).equal(),
-        padding: `${unit(paddingSM)} ${unit(token.padding)}`,
+        paddingInline: `${unit(token.padding)}`,
+        paddingBlock: `${unit(paddingSM)}`,
 
         color: colorText,
         fontSize: token.fontSize,

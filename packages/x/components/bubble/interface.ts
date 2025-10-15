@@ -1,8 +1,18 @@
+import type { DividerProps } from 'antd';
 import type { AnyObject } from '../_util/type';
 
 export type BubbleContentType = React.ReactNode | AnyObject;
 
-export type BubbleSlotType = 'content' | 'body' | 'header' | 'footer' | 'avatar' | 'extra';
+export type SemanticType =
+  | 'root'
+  | 'content'
+  | 'body'
+  | 'header'
+  | 'footer'
+  | 'avatar'
+  | 'extra'
+  | 'system'
+  | 'divider';
 
 export interface BubbleAnimationOption {
   /**
@@ -75,9 +85,9 @@ export interface BubbleProps<ContentType extends BubbleContentType = string>
     'content' | 'onAnimationStart' | 'onAnimationEnd'
   > {
   prefixCls?: string;
-  styles?: Partial<Record<BubbleSlotType | 'root', React.CSSProperties>>;
+  styles?: Partial<Record<SemanticType, React.CSSProperties>>;
   rootClassName?: string;
-  classNames?: Partial<Record<BubbleSlotType | 'root', string>>;
+  classNames?: Partial<Record<SemanticType, string>>;
   placement?: 'start' | 'end';
   loading?: boolean;
   loadingRender?: () => React.ReactNode;
@@ -143,6 +153,28 @@ export interface BubbleProps<ContentType extends BubbleContentType = string>
   onEditCancel?: () => void;
 }
 
+type SystemBubbleSemanticName = 'root' | 'body' | 'content';
+
+export interface SystemBubbleProps<ContentType extends BubbleContentType = string>
+  extends Pick<
+    BubbleProps<ContentType>,
+    'prefixCls' | 'content' | 'style' | 'className' | 'rootClassName' | 'variant' | 'shape'
+  > {
+  styles?: Partial<Record<SystemBubbleSemanticName, React.CSSProperties>>;
+  classNames?: Partial<Record<SystemBubbleSemanticName, string>>;
+}
+
+export interface DividerBubbleProps<ContentType extends BubbleContentType = string> {
+  prefixCls?: string;
+  rootClassName?: string;
+  style?: React.CSSProperties;
+  className?: string;
+  styles?: Partial<Record<SemanticType, React.CSSProperties>>;
+  classNames?: Partial<Record<SemanticType, string>>;
+  content?: ContentType;
+  dividerProps?: Omit<DividerProps, 'children'>;
+}
+
 export interface BubbleListRef {
   nativeElement: HTMLDivElement;
   scrollTo: (options: {
@@ -159,11 +191,12 @@ export interface BubbleListRef {
   }) => void;
 }
 
-type RemainRole = 'ai' | 'system' | 'user';
+type RemainRole = 'ai' | 'system' | 'user' | 'divider';
 
 type AnyStr = string;
 
-export type BubbleItemType = BubbleProps<any> & {
+export type BubbleItemType = (Omit<BubbleProps<any>, 'styles' | 'classNames'> &
+  Omit<DividerBubbleProps<any>, 'styles' | 'classNames'>) & {
   /**
    * @description 数据项唯一标识
    */
@@ -171,13 +204,15 @@ export type BubbleItemType = BubbleProps<any> & {
   /**
    * @description Bubble.List.role key 映射
    */
-  role?: RemainRole | AnyStr;
+  role: RemainRole | AnyStr;
   status?: `${MessageStatus}`;
   extra?: AnyObject;
+  styles?: Partial<Record<'bubble' | 'system' | 'divider', React.CSSProperties>>;
+  classNames?: Partial<Record<'bubble' | 'system' | 'divider', string>>;
 };
 
 export type RoleProps = Pick<
-  BubbleItemType,
+  BubbleProps<any>,
   | 'typing'
   | 'variant'
   | 'shape'
@@ -198,21 +233,26 @@ export type RoleProps = Pick<
   | 'onEditConfirm'
   | 'onEditCancel'
 >;
-
 export type FuncRoleProps = (data: BubbleItemType) => RoleProps;
 
-export type RoleType = Partial<Record<RemainRole, RoleProps | FuncRoleProps>> &
-  Record<AnyStr, RoleProps | FuncRoleProps>;
+export type DividerRoleProps = Partial<DividerBubbleProps>;
+export type FuncDividerRoleProps = (data: BubbleItemType) => DividerRoleProps;
 
+export type RoleType = Partial<
+  Record<Exclude<RemainRole, 'divider'>, RoleProps | FuncRoleProps>
+> & { divider?: DividerRoleProps | FuncDividerRoleProps } & Record<
+    AnyStr,
+    RoleProps | FuncRoleProps
+  >;
 export interface BubbleListProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'role'> {
   prefixCls?: string;
+  styles?: Partial<Record<SemanticType | 'bubble' | 'system' | 'divider', React.CSSProperties>>;
+  classNames?: Partial<Record<SemanticType | 'bubble' | 'system' | 'divider', string>>;
   rootClassName?: string;
-  styles?: Partial<Record<BubbleSlotType | 'bubble' | 'root', React.CSSProperties>>;
-  classNames?: Partial<Record<BubbleSlotType | 'bubble' | 'root', string>>;
   items: BubbleItemType[];
   autoScroll?: boolean;
   /**
-   * @description 数据类别基础配置项，优先级低，会被 items 配置覆盖。默认 ai、system、user 三类，允许自定义类别
+   * @description 数据类别基础配置项，优先级低，会被 items 配置覆盖。默认 ai、system、user、divider 四类，允许自定义类别
    */
   role?: RoleType;
 }

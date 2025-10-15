@@ -1,10 +1,12 @@
 import classnames from 'classnames';
+import { warning } from 'rc-util';
 import omit from 'rc-util/es/omit';
 import pickAttrs from 'rc-util/es/pickAttrs';
 import * as React from 'react';
 import { useXProviderContext } from '../x-provider';
 import Bubble from './Bubble';
 import { BubbleContext } from './context';
+import DividerBubble from './Divider';
 import {
   BubbleItemType,
   BubbleListProps,
@@ -13,6 +15,7 @@ import {
   FuncRoleProps,
   RoleProps,
 } from './interface';
+import SystemBubble from './System';
 import useBubbleListStyle from './style';
 
 interface BubblesRecord {
@@ -24,6 +27,8 @@ function roleCfgIsFunction(roleCfg: RoleProps | FuncRoleProps): roleCfg is FuncR
 }
 
 const MemoedBubble = React.memo(Bubble);
+const MemoedDividerBubble = React.memo(DividerBubble);
+const MemoedSystemBubble = React.memo(SystemBubble);
 
 const BubbleListItem: React.FC<
   BubbleItemType & {
@@ -32,7 +37,16 @@ const BubbleListItem: React.FC<
     _key: string | number;
   }
 > = (props) => {
-  const { _key, bubblesRef, extra, status, ...restProps } = props;
+  const {
+    _key,
+    bubblesRef,
+    extra,
+    status,
+    role,
+    classNames = {},
+    styles = {},
+    ...restProps
+  } = props;
 
   const initBubbleRef = React.useCallback(
     (node: BubbleRef) => {
@@ -45,10 +59,59 @@ const BubbleListItem: React.FC<
     [_key],
   );
 
+  if (!role) {
+    warning(false, `BubbleListItem[key - ${_key}] role is required`);
+    return null;
+  }
+  const {
+    bubble: bubbleClassName,
+    divider: dividerClassName,
+    system: systemClassName,
+    ...otherClassNames
+  } = classNames;
+  const {
+    bubble: bubbleStyle,
+    divider: dividerStyle,
+    system: systemStyle,
+    ...otherStyles
+  } = styles;
+
+  let bubble = (
+    <MemoedBubble
+      ref={initBubbleRef}
+      style={bubbleStyle}
+      className={bubbleClassName}
+      classNames={otherClassNames}
+      styles={otherStyles}
+      {...restProps}
+    />
+  );
+  if (role === 'divider') {
+    bubble = (
+      <MemoedDividerBubble
+        ref={initBubbleRef}
+        style={dividerStyle}
+        className={dividerClassName}
+        classNames={otherClassNames}
+        styles={otherStyles}
+        {...restProps}
+      />
+    );
+  } else if (role === 'system') {
+    bubble = (
+      <MemoedSystemBubble
+        ref={initBubbleRef}
+        style={systemStyle}
+        className={systemClassName}
+        classNames={otherClassNames}
+        styles={otherStyles}
+        {...restProps}
+      />
+    );
+  }
+
   return (
-    <BubbleContext.Provider value={{ key: _key, status, extra }}>
-      <MemoedBubble ref={initBubbleRef} {...omit(restProps, ['role'])} />
-    </BubbleContext.Provider>
+    <BubbleContext.Provider value={{ key: _key, status, extra }}>{bubble}</BubbleContext.Provider>
   );
 };
 
@@ -75,9 +138,6 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   const listRef = React.useRef<HTMLDivElement>(null);
 
   const bubblesRef = React.useRef<BubblesRecord>({});
-
-  const latestItems = React.useRef(items);
-  latestItems.current = items;
 
   // ============================ Prefix ============================
   const { getPrefixCls } = useXProviderContext();
@@ -157,14 +217,8 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
         }
         return (
           <BubbleListItem
-            classNames={{
-              ...classNames,
-              root: classNames?.bubble,
-            }}
-            styles={{
-              ...styles,
-              root: styles?.bubble,
-            }}
+            classNames={classNames}
+            styles={styles}
             {...omit(mergedProps, ['key'])}
             key={item.key}
             _key={item.key}

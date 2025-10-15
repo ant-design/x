@@ -1,7 +1,7 @@
-import React, { Suspense } from 'react';
 import { Skeleton } from 'antd';
 import { createStyles } from 'antd-style';
 import { useSearchParams } from 'dumi';
+import React, { Suspense } from 'react';
 
 const OriginSandpack = React.lazy(() => import('./Sandpack'));
 
@@ -57,14 +57,17 @@ const Sandpack: React.FC<React.PropsWithChildren<SandpackProps>> = ({
 
   const setup = {
     dependencies: {
-      react: '^18.0.0',
-      'react-dom': '^18.0.0',
-      antd: '^5.0.0',
+      react: '^19.0.2',
+      'react-dom': '^19.0.2',
+      antd: '^6.0.0-alpha.3',
+      '@ant-design/x': '^2.0.0-alpha.9',
+      '@ant-design/x-markdown': '^2.0.0-alpha.9',
+      '@ant-design/x-sdk': '^2.0.0-alpha.9',
       ...dependencies,
     },
     devDependencies: {
-      '@types/react': '^18.0.0',
-      '@types/react-dom': '^18.0.0',
+      '@types/react': '^19.0.2',
+      '@types/react-dom': '^19.0.2',
       typescript: '^5',
     },
     entry: 'index.tsx',

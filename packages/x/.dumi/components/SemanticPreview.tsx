@@ -2,6 +2,7 @@ import { XProvider } from '@ant-design/x';
 import { Col, Flex, Popover, Row, Tag, Typography, theme } from 'antd';
 import { createStyles, css } from 'antd-style';
 import classnames from 'classnames';
+import set from 'rc-util/lib/utils/set';
 /* eslint-disable react-hooks-extra/no-direct-set-state-in-use-effect */
 import React from 'react';
 
@@ -66,6 +67,13 @@ const useStyle = createStyles(({ token }, markPos: [number, number, number, numb
   `,
 }));
 
+function getSemanticCells(semanticPath: string) {
+  return semanticPath.split('.');
+}
+
+const getMarkClassName = (semanticKey: string) =>
+  `semantic-mark-${semanticKey}`.replace(/\./g, '-');
+
 export interface SemanticPreviewProps {
   componentName: string;
   semantics: { name: string; desc: string; version?: string }[];
@@ -78,16 +86,13 @@ const SemanticPreview: React.FC<SemanticPreviewProps> = (props) => {
   const { token } = theme.useToken();
 
   // ======================= Semantic =======================
-  const getMarkClassName = React.useCallback(
-    (semanticKey: string) => `semantic-mark-${semanticKey}`,
-    [],
-  );
 
   const semanticClassNames = React.useMemo<Record<string, string>>(() => {
-    const classNames: Record<string, string> = {};
+    let classNames: Record<string, string> = {};
 
     semantics.forEach((semantic) => {
-      classNames[semantic.name] = getMarkClassName(semantic.name);
+      const pathCell = getSemanticCells(semantic.name);
+      classNames = set(classNames, pathCell, getMarkClassName(semantic.name));
     });
 
     return classNames;
