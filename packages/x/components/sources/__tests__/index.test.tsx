@@ -125,4 +125,98 @@ describe('Sources Component', () => {
     render(<Sources ref={ref} title={'Test'} items={items} />);
     expect(ref.current).not.toBeNull();
   });
+
+  it('Sources should support CarouselCard left/right navigation', async () => {
+    const carouselItems = [
+      {
+        key: '1',
+        title: 'First Item',
+        url: 'https://first.com',
+        description: 'First description',
+      },
+      {
+        key: '2',
+        title: 'Second Item',
+        url: 'https://second.com',
+        description: 'Second description',
+      },
+      {
+        key: '3',
+        title: 'Third Item',
+        url: 'https://third.com',
+        description: 'Third description',
+      },
+    ];
+
+    const { container } = render(<Sources title="Test" items={carouselItems} inline />);
+
+    const titleWrapper = container.querySelector('.ant-sources-title-wrapper');
+    expect(titleWrapper).toBeTruthy();
+    const carouselCard = container.querySelector('.ant-sources-carousel');
+    expect(carouselCard).toBeTruthy();
+
+    const leftBtn = container.querySelector(
+      '.ant-sources-carousel-btn-wrapper .ant-sources-carousel-left-btn',
+    );
+    const rightBtn = container.querySelector(
+      '.ant-sources-carousel-btn-wrapper .ant-sources-carousel-right-btn',
+    );
+
+    // 点击右按钮切换到下一项
+    fireEvent.click(rightBtn!);
+    await waitFakeTimer();
+    const pageIndicator = container.querySelector('.ant-sources-carousel-page');
+    expect(pageIndicator).toHaveTextContent('2/3');
+
+    fireEvent.click(leftBtn!);
+    await waitFakeTimer();
+    const pageIndicator2 = container.querySelector('.ant-sources-carousel-page');
+    expect(pageIndicator2).toHaveTextContent('1/3');
+  });
+
+  it('Sources should support onClick', () => {
+    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+
+    const { container } = render(
+      <Sources
+        title="Test"
+        items={items}
+        onClick={(item) => {
+          console.log(`Clicked: ${item.title}`);
+        }}
+        defaultExpanded={true}
+      />,
+    );
+
+    const firstItem = container.querySelector('.ant-sources-list-item');
+    expect(firstItem).toBeTruthy();
+
+    fireEvent.click(firstItem!);
+    expect(consoleSpy).toHaveBeenCalledWith('Clicked: 1. Data source');
+
+    consoleSpy.mockRestore();
+  });
+
+  it('Sources should support onClick on line mode', () => {
+    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+
+    const { container } = render(
+      <Sources
+        title="Test"
+        items={items}
+        onClick={(item) => {
+          console.log(`Clicked: ${item.title}`);
+        }}
+        inline
+      />,
+    );
+
+    const firstItem = container.querySelector('.ant-sources-carousel-item');
+    expect(firstItem).toBeTruthy();
+
+    fireEvent.click(firstItem!);
+    expect(consoleSpy).toHaveBeenCalledWith('Clicked: 1. Data source');
+
+    consoleSpy.mockRestore();
+  });
 });

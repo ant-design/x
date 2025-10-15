@@ -27,7 +27,7 @@ const CarouselCard: React.FC<CarouselCardProps> = (props) => {
       <div className={`${compCls}-title`}>
         <div className={`${compCls}-btn-wrapper`}>
           <span
-            className={classnames(`${compCls}-btn`, {
+            className={classnames(`${compCls}-btn`, `${compCls}-left-btn`, {
               [`${compCls}-btn-disabled`]: slide === 0,
             })}
             onClick={() => carouselRef.current?.prev()}
@@ -35,7 +35,7 @@ const CarouselCard: React.FC<CarouselCardProps> = (props) => {
             <LeftOutlined />
           </span>
           <span
-            className={classnames(`${compCls}-btn`, {
+            className={classnames(`${compCls}-btn`, `${compCls}-right-btn`, {
               [`${compCls}-btn-disabled`]: slide === (items?.length || 1) - 1,
             })}
             onClick={() => carouselRef.current?.next()}

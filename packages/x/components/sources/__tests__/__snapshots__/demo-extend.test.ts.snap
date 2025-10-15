@@ -411,7 +411,7 @@ Array [
                   class="ant-sources-carousel-btn-wrapper"
                 >
                   <span
-                    class="ant-sources-carousel-btn ant-sources-carousel-btn-disabled"
+                    class="ant-sources-carousel-btn ant-sources-carousel-left-btn ant-sources-carousel-btn-disabled"
                   >
                     <span
                       aria-label="left"
@@ -434,7 +434,7 @@ Array [
                     </span>
                   </span>
                   <span
-                    class="ant-sources-carousel-btn"
+                    class="ant-sources-carousel-btn ant-sources-carousel-right-btn"
                   >
                     <span
                       aria-label="right"
