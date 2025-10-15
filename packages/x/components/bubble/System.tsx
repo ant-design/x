@@ -1,8 +1,9 @@
 import classnames from 'classnames';
 import React from 'react';
+import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 import Bubble from './Bubble';
-import type { BubbleContentType, BubbleProps, BubbleRef, SystemBubbleProps } from './interface';
+import type { BubbleContentType, BubbleRef, SystemBubbleProps } from './interface';
 
 const SystemBubble: React.ForwardRefRenderFunction<BubbleRef, SystemBubbleProps> = (
   {
@@ -12,36 +13,43 @@ const SystemBubble: React.ForwardRefRenderFunction<BubbleRef, SystemBubbleProps>
     shape,
     style,
     className,
-    styles,
-    classNames,
+    styles = {},
+    classNames = {},
     rootClassName,
+    ...restProps
   },
   ref,
 ) => {
+  // ===================== Component Config =========================
+  const contextConfig = useXComponentConfig('bubble');
+
   // ============================ Prefix ============================
   const { getPrefixCls } = useXProviderContext();
-
   const prefixCls = getPrefixCls('bubble', customizePrefixCls);
 
+  // ============================ Styles ============================
   const cls = `${prefixCls}-system`;
-
-  const systemContentRender: BubbleProps['contentRender'] = (content) => {
-    return <div className={`${cls}-content`}>{content}</div>;
-  };
+  const rootMergedCls = classnames(
+    cls,
+    prefixCls,
+    contextConfig.className,
+    contextConfig.classNames.root,
+    classNames.root,
+    className,
+    rootClassName,
+  );
 
   return (
     <Bubble
       ref={ref}
-      prefixCls={customizePrefixCls}
       style={style}
-      className={classnames(className, cls)}
+      className={rootMergedCls}
       styles={styles}
       classNames={classNames}
-      rootClassName={rootClassName}
       variant={variant}
       shape={shape}
       content={content}
-      contentRender={systemContentRender}
+      {...restProps}
     />
   );
 };

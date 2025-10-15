@@ -263,10 +263,6 @@ Common Props Reference: [Common Props](/docs/react/common-props)
 
 <code src="./demo/_semantic.tsx" simplify="true"></code>
 
-### Bubble.List
-
-<code src="./demo/_semantic-list.tsx" simplify="true"></code>
-
 ### Bubble.System
 
 <code src="./demo/_semantic-system.tsx" simplify="true"></code>
@@ -274,6 +270,10 @@ Common Props Reference: [Common Props](/docs/react/common-props)
 ### Bubble.Divider
 
 <code src="./demo/_semantic-divider.tsx" simplify="true"></code>
+
+### Bubble.List
+
+<code src="./demo/_semantic-list.tsx" simplify="true"></code>
 
 ## Design Token
 

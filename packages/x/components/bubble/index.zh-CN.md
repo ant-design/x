@@ -264,19 +264,17 @@ export type RoleType = Partial<
 
 <code src="./demo/_semantic.tsx" simplify="true"></code>
 
-### Bubble.List
-
-<code src="./demo/_semantic-list.tsx" simplify="true"></code>
-
 ### Bubble.System
 
 <code src="./demo/_semantic-system.tsx" simplify="true"></code>
 
 ### Bubble.Divider
 
-等同于 [Divider](https://ant.design/components/divider-cn#semantic-dom)
-
 <code src="./demo/_semantic-divider.tsx" simplify="true"></code>
+
+### Bubble.List
+
+<code src="./demo/_semantic-list.tsx" simplify="true"></code>
 
 ## 主题变量（Design Token）
 

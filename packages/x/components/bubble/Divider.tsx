@@ -1,6 +1,7 @@
 import { Divider, DividerProps } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
+import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 import Bubble from './Bubble';
 import type { BubbleContentType, BubbleProps, BubbleRef, DividerBubbleProps } from './interface';
@@ -12,38 +13,48 @@ const DividerBubble: React.ForwardRefRenderFunction<BubbleRef, DividerBubbleProp
     rootClassName,
     style,
     className,
-    styles,
-    classNames,
+    styles = {},
+    classNames = {},
     dividerProps,
+    ...restProps
   },
   ref,
 ) => {
   // ============================ Prefix ============================
   const { getPrefixCls } = useXProviderContext();
 
+  // ===================== Component Config =========================
+  const contextConfig = useXComponentConfig('bubble');
   const prefixCls = getPrefixCls('bubble', customizePrefixCls);
 
-  const mergeDividerProps: DividerProps = {
-    ...dividerProps,
-    prefixCls: customizePrefixCls,
-    styles: styles?.divider,
-    classNames: classNames?.divider,
-  };
+  // ============================ Styles ============================
+
+  const rootMergedCls = classnames(
+    prefixCls,
+    `${prefixCls}-divider`,
+    contextConfig.className,
+    contextConfig.classNames.root,
+    className,
+    classNames.root,
+    rootClassName,
+  );
 
   const dividerContentRender: BubbleProps['contentRender'] = (content) => {
-    return <Divider {...mergeDividerProps}>{content}</Divider>;
+    return <Divider {...dividerProps}>{content}</Divider>;
   };
 
   return (
     <Bubble
       ref={ref}
-      style={{ ...style, ...styles?.root }}
-      className={classnames(`${prefixCls}-divider`, className)}
-      rootClassName={classnames(rootClassName, classNames?.root)}
-      prefixCls={customizePrefixCls}
+      style={style}
+      styles={styles}
+      className={rootMergedCls}
+      classNames={classNames}
+      prefixCls={prefixCls}
       variant="borderless"
       content={content}
       contentRender={dividerContentRender}
+      {...restProps}
     />
   );
 };

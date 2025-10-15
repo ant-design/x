@@ -37,7 +37,16 @@ const BubbleListItem: React.FC<
     _key: string | number;
   }
 > = (props) => {
-  const { _key, bubblesRef, extra, status, role, classNames, styles, ...restProps } = props;
+  const {
+    _key,
+    bubblesRef,
+    extra,
+    status,
+    role,
+    classNames = {},
+    styles = {},
+    ...restProps
+  } = props;
 
   const initBubbleRef = React.useCallback(
     (node: BubbleRef) => {
@@ -54,12 +63,26 @@ const BubbleListItem: React.FC<
     warning(false, `BubbleListItem[key - ${_key}] role is required`);
     return null;
   }
+  const {
+    bubble: bubbleClassName,
+    divider: dividerClassName,
+    system: systemClassName,
+    ...otherClassNames
+  } = classNames;
+  const {
+    bubble: bubbleStyle,
+    divider: dividerStyle,
+    system: systemStyle,
+    ...otherStyles
+  } = styles;
 
   let bubble = (
     <MemoedBubble
       ref={initBubbleRef}
-      styles={styles?.bubble}
-      classNames={classNames?.bubble}
+      style={bubbleStyle}
+      className={bubbleClassName}
+      classNames={otherClassNames}
+      styles={otherStyles}
       {...restProps}
     />
   );
@@ -67,8 +90,10 @@ const BubbleListItem: React.FC<
     bubble = (
       <MemoedDividerBubble
         ref={initBubbleRef}
-        styles={styles?.divider}
-        classNames={classNames?.divider}
+        style={dividerStyle}
+        className={dividerClassName}
+        classNames={otherClassNames}
+        styles={otherStyles}
         {...restProps}
       />
     );
@@ -76,8 +101,10 @@ const BubbleListItem: React.FC<
     bubble = (
       <MemoedSystemBubble
         ref={initBubbleRef}
-        styles={styles?.system}
-        classNames={classNames?.system}
+        style={systemStyle}
+        className={systemClassName}
+        classNames={otherClassNames}
+        styles={otherStyles}
         {...restProps}
       />
     );
