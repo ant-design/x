@@ -340,7 +340,7 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
 
     if ((chunk as JSONOutPut)?.success === false) {
       const error = new Error((chunk as JSONOutPut).message || 'System error');
-      error.name = (chunk as JSONOutPut).message || 'SystemError';
+      error.name = (chunk as JSONOutPut).name || 'SystemError';
       callbacks?.onError?.(error);
     } else {
       callbacks?.onUpdate?.(chunk, response.headers);
