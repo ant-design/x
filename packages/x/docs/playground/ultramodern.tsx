@@ -386,7 +386,7 @@ const App = () => {
                     root: {
                       marginBlockEnd: 24,
                     },
-                    bubble: { root: { maxWidth: 840 } },
+                    bubble: { maxWidth: 840 },
                   }}
                   role={getRole(className)}
                 />

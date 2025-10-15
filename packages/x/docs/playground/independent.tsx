@@ -639,9 +639,7 @@ const Independent: React.FC = () => {
           }))}
           styles={{
             bubble: {
-              root: {
-                maxWidth: 840,
-              },
+              maxWidth: 840,
             },
           }}
           role={getRole(className)}
