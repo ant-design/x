@@ -8,7 +8,7 @@ describe('Bubble.System', () => {
       const { container } = render(<SystemBubble content="系统消息" />);
 
       const bubbleElement = container.querySelector('.ant-bubble');
-      const contentElement = container.querySelector('.ant-bubble-system-content');
+      const contentElement = container.querySelector('.ant-bubble-content');
 
       expect(bubbleElement).toBeInTheDocument();
       expect(bubbleElement).toHaveClass('ant-bubble-system');
@@ -19,7 +19,7 @@ describe('Bubble.System', () => {
     it('应该支持空内容', () => {
       const { container } = render(<SystemBubble content="" />);
 
-      const contentElement = container.querySelector('.ant-bubble-system-content');
+      const contentElement = container.querySelector('.ant-bubble-content');
       expect(contentElement).toBeInTheDocument();
       expect(contentElement).toHaveTextContent('');
     });
@@ -113,7 +113,7 @@ describe('Bubble.System', () => {
         <SystemBubble content="测试" styles={{ content: { color: 'red' } }} />,
       );
 
-      const contentElement = container.querySelector('.ant-bubble-system-content');
+      const contentElement = container.querySelector('.ant-bubble-content');
       expect(contentElement).toBeInTheDocument();
     });
 

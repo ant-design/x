@@ -406,7 +406,7 @@ exports[`renders components/bubble/demo/divider.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-divider css-var-_r_3l_ ant-bubble-start"
+    class="ant-bubble ant-bubble ant-bubble-divider css-var-_r_3l_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -447,7 +447,7 @@ exports[`renders components/bubble/demo/divider.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-divider css-var-_r_3l_ ant-bubble-start"
+    class="ant-bubble ant-bubble ant-bubble-divider css-var-_r_3l_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -488,7 +488,7 @@ exports[`renders components/bubble/demo/divider.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-divider css-var-_r_3l_ ant-bubble-start"
+    class="ant-bubble ant-bubble ant-bubble-divider css-var-_r_3l_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -529,7 +529,7 @@ exports[`renders components/bubble/demo/divider.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-divider css-var-_r_3l_ ant-bubble-start"
+    class="ant-bubble ant-bubble ant-bubble-divider css-var-_r_3l_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -1787,7 +1787,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
       </div>
     </div>
     <div
-      class="ant-bubble ant-bubble-divider css-var-_r_f_ ant-bubble-start"
+      class="ant-bubble ant-bubble ant-bubble-divider css-var-_r_f_ ant-bubble-start"
     >
       <div
         class="ant-bubble-body"
@@ -2073,19 +2073,15 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
       </div>
     </div>
     <div
-      class="ant-bubble ant-bubble-system css-var-_r_f_ ant-bubble-start"
+      class="ant-bubble ant-bubble-system ant-bubble css-var-_r_f_ ant-bubble-start"
     >
       <div
         class="ant-bubble-body"
       >
         <div
-          class="ant-bubble-content ant-bubble-content-shadow ant-bubble-content-default"
+          class="ant-bubble-content ant-bubble-content-shadow ant-bubble-content-default ant-bubble-content-string"
         >
-          <div
-            class="ant-bubble-system-content"
-          >
-            Welcome to use Ant Design X
-          </div>
+          Welcome to use Ant Design X
         </div>
       </div>
     </div>
@@ -4459,24 +4455,20 @@ exports[`renders components/bubble/demo/system.tsx extend context correctly 1`] 
   style="gap: 16px;"
 >
   <div
-    class="ant-bubble ant-bubble-system css-var-_r_1_ ant-bubble-start"
+    class="ant-bubble ant-bubble-system ant-bubble css-var-_r_1_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
     >
       <div
-        class="ant-bubble-content ant-bubble-content-shadow ant-bubble-content-default"
+        class="ant-bubble-content ant-bubble-content-shadow ant-bubble-content-default ant-bubble-content-string"
       >
-        <div
-          class="ant-bubble-system-content"
-        >
-          Hello, this is a system message
-        </div>
+        Hello, this is a system message
       </div>
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-system css-var-_r_1_ ant-bubble-start"
+    class="ant-bubble ant-bubble-system ant-bubble css-var-_r_1_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -4485,32 +4477,28 @@ exports[`renders components/bubble/demo/system.tsx extend context correctly 1`] 
         class="ant-bubble-content ant-bubble-content-outlined ant-bubble-content-round"
       >
         <div
-          class="ant-bubble-system-content"
+          class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-_r_1_"
         >
           <div
-            class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-_r_1_"
+            class="ant-space-item"
           >
-            <div
-              class="ant-space-item"
+            Hello, this is a system message
+          </div>
+          <div
+            class="ant-space-item"
+          >
+            <a
+              class="ant-typography css-var-_r_1_"
             >
-              Hello, this is a system message
-            </div>
-            <div
-              class="ant-space-item"
-            >
-              <a
-                class="ant-typography css-var-_r_1_"
-              >
-                ok
-              </a>
-            </div>
+              ok
+            </a>
           </div>
         </div>
       </div>
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-system css-var-_r_1_ ant-bubble-start"
+    class="ant-bubble ant-bubble-system ant-bubble css-var-_r_1_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -4519,25 +4507,21 @@ exports[`renders components/bubble/demo/system.tsx extend context correctly 1`] 
         class="ant-bubble-content ant-bubble-content-borderless"
       >
         <div
-          class="ant-bubble-system-content"
+          class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-_r_1_"
         >
           <div
-            class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-_r_1_"
+            class="ant-space-item"
           >
-            <div
-              class="ant-space-item"
+            Hello, this is a system message
+          </div>
+          <div
+            class="ant-space-item"
+          >
+            <a
+              class="ant-typography css-var-_r_1_"
             >
-              Hello, this is a system message
-            </div>
-            <div
-              class="ant-space-item"
-            >
-              <a
-                class="ant-typography css-var-_r_1_"
-              >
-                cancel
-              </a>
-            </div>
+              cancel
+            </a>
           </div>
         </div>
       </div>
