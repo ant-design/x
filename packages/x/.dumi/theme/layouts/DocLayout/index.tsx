@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
 
 import { XProvider } from '@ant-design/x';
+import zhCN_X from '@ant-design/x/locale/zh_CN';
 import zhCN from 'antd/es/locale/zh_CN';
 import { Helmet, useOutlet, useSiteData } from 'dumi';
 import React, { useEffect, useLayoutEffect, useRef } from 'react';
@@ -105,7 +106,7 @@ const DocLayout: React.FC = () => {
           content="https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/MGdkQ6iLuXEAAAAAQDAAAAgADtFMAQFr/original"
         />
       </Helmet>
-      <XProvider direction={direction} locale={lang === 'cn' ? zhCN : undefined}>
+      <XProvider direction={direction} locale={lang === 'cn' ? { ...zhCN, ...zhCN_X } : undefined}>
         <GlobalStyles />
         <Header />
         {content}

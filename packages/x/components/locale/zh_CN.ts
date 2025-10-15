@@ -5,6 +5,10 @@ const localeValues: Required<xLocale & xMarkdownLocale> = {
   Conversations: {
     create: '新对话',
   },
+  Sender: {
+    stopLoading: '停止请求',
+    speechRecording: '正在录音',
+  },
   Actions: {
     feedbackLike: '喜欢',
     feedbackDislike: '不喜欢',

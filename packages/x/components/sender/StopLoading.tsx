@@ -1,17 +1,18 @@
 import React, { memo } from 'react';
+import { useLocale } from '../locale';
+import enUS from '../locale/en_US';
 
 const StopLoadingIcon = memo((props: { className?: string }) => {
   const { className } = props;
-
+  const [contextLocale] = useLocale('Sender', enUS.Sender);
   return (
     <svg
       color="currentColor"
       viewBox="0 0 1000 1000"
       xmlns="http://www.w3.org/2000/svg"
-      //xmlnsXlink="http://www.w3.org/1999/xlink"
       className={className}
     >
-      <title>Stop Loading</title>
+      <title>{contextLocale.stopLoading}</title>
       <rect fill="currentColor" height="250" rx="24" ry="24" width="250" x="375" y="375" />
 
       <circle
