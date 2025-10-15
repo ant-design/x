@@ -19,6 +19,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cahuSJ4VxvoAAA
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">基本用法</code>
 <code src="./demo/block.tsx">整行宽度</code>
+<code src="./demo/open.tsx">获取打开状态</code>
 <code src="./demo/trigger.tsx">自定义</code>
 
 ## API
@@ -30,7 +31,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cahuSJ4VxvoAAA
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
 | block | 是否整行宽度 | boolean | false | - |
-| children | 自定义输入框 | ({ onTrigger, onKeyDown }) => ReactElement | - | - |
+| children | 自定义输入框 | ({ onTrigger, onKeyDown, open }) => ReactElement | - | - |
 | items | 建议项列表 | SuggestionItem[] \| ((info: T) => SuggestionItem[]) | - | - |
 | open | 受控打开面板 | boolean | - | - |
 | rootClassName | 根元素样式类名 | string | - | - |

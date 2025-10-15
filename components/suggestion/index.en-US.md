@@ -18,6 +18,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cahuSJ4VxvoAAA
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">Basic</code>
 <code src="./demo/block.tsx">Block</code>
+<code src="./demo/open.tsx">Get Open State</code>
 <code src="./demo/trigger.tsx">Customize</code>
 
 ## API
@@ -29,7 +30,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | block | Take up the full width | boolean | false | - |
-| children | Custom input box | ({ onTrigger, onKeyDown }) => ReactElement | - | - |
+| children | Custom input box | ({ onTrigger, onKeyDown, open }) => ReactElement | - | - |
 | items | Suggestion list | SuggestionItem[] \| ((info: T) => SuggestionItem[]) | - | - |
 | open | Controlled open panel | boolean | - | - |
 | rootClassName | Root element class name | string | - | - |

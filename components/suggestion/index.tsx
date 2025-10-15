@@ -26,6 +26,7 @@ export type SuggestionItem = {
 export interface RenderChildrenProps<T> {
   onTrigger: (info?: T | false) => void;
   onKeyDown: (e: React.KeyboardEvent) => void;
+  open: boolean;
 }
 
 export interface SuggestionProps<T = any> {
@@ -122,7 +123,7 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
   const [activePath, onKeyDown] = useActive(itemList, mergedOpen, isRTL, onInternalChange, onClose);
 
   // =========================== Children ===========================
-  const childNode = children?.({ onTrigger, onKeyDown });
+  const childNode = children?.({ onTrigger, onKeyDown, open: mergedOpen });
 
   // ============================ Render ============================
   const onInternalOpenChange = (nextOpen: boolean) => {
