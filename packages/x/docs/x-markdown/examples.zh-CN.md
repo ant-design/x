@@ -11,7 +11,7 @@ order: 2
 
 <!-- prettier-ignore -->
 <code src="./demo/codeDemo/basic.tsx" description="markdown基础语法渲染。" title="基础用法"></code>
-<code src="./demo/codeDemo/streaming.tsx" description="配合 `Bubble` 实现流式对话。" title="流式渲染"></code>
+<code src="./demo/streaming/combined.tsx" description="未完成语法处理、动画效果" title="流式处理"></code>
 <code src="./demo/codeDemo/components.tsx" description="自定义组件渲染标签。" title="自定义组件"></code>
 <code src="./demo/codeDemo/supersets.tsx" description="使用插件渲染。" title="插件使用"></code>
 <code src="./demo/codeDemo/plugin.tsx" title="自定义拓展插件"></code>
@@ -42,6 +42,7 @@ order: 2
 | hasNextChunk | 指示是否还有后续内容块，为 false 时刷新所有缓存并完成渲染 | `boolean` | `false` |
 | enableAnimation | 为块级元素（`p`、`li`、`h1`、`h2`、`h3`、`h4`）启用文字淡入动画 | `boolean` | `false` |
 | animationConfig | 文字出现动画效果的配置 | `AnimationConfig` | `{ fadeDuration: 200, opacity: 0.2 }` |
+| incompletePlaceholderMap | 未闭合Markdown元素的占位符映射，支持自定义链接和图片的占位符组件 | `{ link?: string; image?: string }` | `{ link: 'incomplete-link', image: 'incomplete-image' }` |
 
 #### AnimationConfig
 

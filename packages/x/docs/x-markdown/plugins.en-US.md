@@ -1,6 +1,7 @@
 ---
 group:
   title: Plugins
+  order: 6
 title: Overview
 order: 1
 ---

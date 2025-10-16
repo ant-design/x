@@ -1,7 +1,7 @@
 ---
 group:
   title: 组件
-  order: 2
+  order: 5
 title: 总览
 order: 1
 ---
