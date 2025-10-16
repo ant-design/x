@@ -20,10 +20,10 @@ const App = () => {
   ];
 
   return (
-    <>
+    <div style={{ display: 'flex', alignItems: 'center' }}>
       <span>Use the inline mode in the text</span>
       <Sources title={'1'} items={items} inline={true} />
-    </>
+    </div>
   );
 };
 

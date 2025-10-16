@@ -81,7 +81,9 @@ const genSourcesStyle: GenerateStyle<SourcesToken> = (token) => {
           color: colorTextSecondary,
           fontWeight: 400,
           paddingInline: calc(paddingXXS).add(2).equal(),
+          paddingBlock: 0,
           marginInline: marginXXS,
+          marginBlock: 0,
         },
       },
 
