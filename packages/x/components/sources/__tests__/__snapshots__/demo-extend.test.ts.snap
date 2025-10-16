@@ -364,10 +364,12 @@ exports[`renders components/sources/demo/icon.tsx extend context correctly 1`] =
 exports[`renders components/sources/demo/icon.tsx extend context correctly 2`] = `[]`;
 
 exports[`renders components/sources/demo/inline.tsx extend context correctly 1`] = `
-Array [
+<div
+  style="display: flex; align-items: center;"
+>
   <span>
     Use the inline mode in the text
-  </span>,
+  </span>
   <div
     class="ant-sources css-var-_r_0_ ant-sources-inline"
   >
@@ -566,8 +568,8 @@ Array [
         </div>
       </div>
     </div>
-  </div>,
-]
+  </div>
+</div>
 `;
 
 exports[`renders components/sources/demo/inline.tsx extend context correctly 2`] = `[]`;
