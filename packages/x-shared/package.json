@@ -1,0 +1,10 @@
+{
+	"name": "@ant-design/x-shared",
+	"version": "0.0.0",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"license": "MIT",
+	"description": "placeholder for @ant-design/x-shared"
+}
