@@ -61,6 +61,11 @@ const App = () => {
         status: 'success',
       },
       {
+        id: '0',
+        message: { role: 'user', content: 'Hello!' },
+        status: 'success',
+      },
+      {
         id: '1',
         message: { role: 'assistant', content: 'Hello, I am a chatbot' },
         status: 'success',
