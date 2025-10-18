@@ -16,7 +16,6 @@ Manage conversation data via Agent and produce data for page rendering.
 ## Code Demo
 
 <!-- prettier-ignore -->
-<code src="./demos/x-chat/basic.tsx">Basic</code>
 <code src="./demos/x-chat/model.tsx">Model Integration</code>
 
 ## API

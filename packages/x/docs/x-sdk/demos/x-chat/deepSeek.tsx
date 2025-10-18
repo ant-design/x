@@ -77,7 +77,7 @@ const App = () => {
     }),
   );
   // Chat messages
-  const { onRequest, messages, isRequesting, abort, onReload } = useXChat({
+  const { onRequest, messages, setMessages, setMessage, isRequesting, abort, onReload } = useXChat({
     provider,
     requestFallback: (_, { error }) => {
       if (error.name === 'AbortError') {
@@ -98,8 +98,70 @@ const App = () => {
       };
     },
   });
+
+  const addUserMessage = () => {
+    setMessages([
+      ...messages,
+      {
+        id: messages.length,
+        message: { role: 'user', content: 'Add a new user message' },
+        status: 'success',
+      },
+    ]);
+  };
+
+  const addAIMessage = () => {
+    setMessages([
+      ...messages,
+      {
+        id: messages.length,
+        message: { role: 'assistant', content: 'Add a new AI response' },
+        status: 'success',
+      },
+    ]);
+  };
+
+  const addSystemMessage = () => {
+    setMessages([
+      ...messages,
+      {
+        id: messages.length,
+        message: { role: 'system', content: 'Add a new system message' },
+        status: 'success',
+      },
+    ]);
+  };
+
+  const editLastMessage = () => {
+    const lastMessage = messages[messages.length - 1];
+    setMessage(lastMessage.id, {
+      message: { role: lastMessage.message.role, content: 'Edit a message' },
+    });
+  };
+
   return (
     <Flex vertical gap="middle">
+      <Flex vertical gap="middle">
+        <div>
+          Current status:{' '}
+          {isRequesting
+            ? 'Requesting'
+            : messages.length === 0
+              ? 'No messages yet, please enter a question and send'
+              : 'Q&A completed'}
+        </div>
+        <Flex align="center" gap="middle">
+          <Button disabled={!isRequesting} onClick={abort}>
+            abort
+          </Button>
+          <Button onClick={addUserMessage}>Add a user message</Button>
+          <Button onClick={addAIMessage}>Add an AI message</Button>
+          <Button onClick={addSystemMessage}>Add a system message</Button>
+          <Button disabled={!messages.length} onClick={editLastMessage}>
+            Edit the last message
+          </Button>
+        </Flex>
+      </Flex>
       <Bubble.List
         role={role}
         style={{ maxHeight: 300 }}

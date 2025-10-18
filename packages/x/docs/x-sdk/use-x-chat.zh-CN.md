@@ -16,8 +16,10 @@ demo:
 ## 代码演示
 
 <!-- prettier-ignore -->
-<code src="./demos/x-chat/basic.tsx">基本</code>
 <code src="./demos/x-chat/model.tsx">模型接入</code>
+<code src="./demos/x-chat/deepSeek.tsx">思考模型接入</code>
+<code src="./demos/x-chat/custom-request.tsx">自定义request</code>
+<code src="./demos/x-chat/openai-node.tsx">使用openai-node自定义request</code>
 
 ## API
 
