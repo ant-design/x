@@ -1,9 +1,9 @@
 import { SyncOutlined } from '@ant-design/icons';
 import type { BubbleListProps } from '@ant-design/x';
-import { Bubble, Sender, Think } from '@ant-design/x';
-import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
+import { Bubble, Sender } from '@ant-design/x';
+import XMarkdown from '@ant-design/x-markdown';
 import {
-  DeepSeekChatProvider,
+  OpenAIChatProvider,
   useXChat,
   XModelParams,
   XModelResponse,
@@ -16,31 +16,13 @@ import React from 'react';
  * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
  */
 
-const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow_deepSeek-r1-distill-1wen-7b';
+const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow_Hunyuan-MT-7B';
 
 /**
  * 🔔 The MODEL is fixed in the current request, please replace it with your BASE_UR and MODEL
  */
 
-const MODEL = 'DeepSeek-R1-Distill-Qwen-7B';
-
-const ThinkComponent = React.memo((props: ComponentProps) => {
-  const [title, setTitle] = React.useState('Deep thinking...');
-  const [loading, setLoading] = React.useState(true);
-
-  React.useEffect(() => {
-    if (props.streamStatus === 'done') {
-      setTitle('Complete thinking');
-      setLoading(false);
-    }
-  }, [props.streamStatus]);
-
-  return (
-    <Think title={title} loading={loading}>
-      {props.children}
-    </Think>
-  );
-});
+const MODEL = 'tencent/Hunyuan-MT-7B';
 
 const role: BubbleListProps['role'] = {
   assistant: {
@@ -48,14 +30,7 @@ const role: BubbleListProps['role'] = {
     contentRender(content: any) {
       // Double '\n' in a mark will causes markdown parse as a new paragraph, so we need to replace it with a single '\n'
       const newContent = content.replaceAll('\n\n', '<br/><br/>');
-      return (
-        <XMarkdown
-          content={newContent}
-          components={{
-            think: ThinkComponent,
-          }}
-        />
-      );
+      return <XMarkdown content={newContent} />;
     },
   },
   user: {
@@ -66,7 +41,7 @@ const role: BubbleListProps['role'] = {
 const App = () => {
   const [content, setContent] = React.useState('');
   const [provider] = React.useState(
-    new DeepSeekChatProvider({
+    new OpenAIChatProvider({
       request: XRequest<XModelParams, XModelResponse>(BASE_URL, {
         manual: true,
         params: {
@@ -79,6 +54,18 @@ const App = () => {
   // Chat messages
   const { onRequest, messages, setMessages, setMessage, isRequesting, abort, onReload } = useXChat({
     provider,
+    defaultMessages: [
+      {
+        id: 'developer',
+        message: { role: 'developer', content: 'You are a helpful chatbot' },
+        status: 'success',
+      },
+      {
+        id: '1',
+        message: { role: 'assistant', content: 'Hello, I am a chatbot' },
+        status: 'success',
+      },
+    ],
     requestFallback: (_, { error }) => {
       if (error.name === 'AbortError') {
         return {
@@ -87,7 +74,7 @@ const App = () => {
         };
       }
       return {
-        content: 'Request failed, please try again!',
+        content: error.message || 'Request failed, please try again!',
         role: 'assistant',
       };
     },
@@ -98,6 +85,8 @@ const App = () => {
       };
     },
   });
+
+  const chatMessages = messages.filter((m) => m.message.role !== 'developer');
 
   const addUserMessage = () => {
     setMessages([
@@ -133,9 +122,15 @@ const App = () => {
   };
 
   const editLastMessage = () => {
-    const lastMessage = messages[messages.length - 1];
+    const lastMessage = chatMessages[chatMessages.length - 1];
     setMessage(lastMessage.id, {
       message: { role: lastMessage.message.role, content: 'Edit a message' },
+    });
+  };
+
+  const editDeveloper = () => {
+    setMessage('developer', {
+      message: { role: 'developer', content: 'Modified system prompt' },
     });
   };
 
@@ -143,22 +138,29 @@ const App = () => {
     <Flex vertical gap="middle">
       <Flex vertical gap="middle">
         <div>
-          Current status:{' '}
+          Current status:
           {isRequesting
             ? 'Requesting'
-            : messages.length === 0
+            : chatMessages.length === 0
               ? 'No messages yet, please enter a question and send'
               : 'Q&A completed'}
         </div>
-        <Flex align="center" gap="middle">
+        <div>
+          Current system prompt:{' '}
+          {`${messages.find((m) => m.message.role === 'developer')?.message.content || 'None'}`}
+        </div>
+        <Flex wrap align="center" gap="middle">
           <Button disabled={!isRequesting} onClick={abort}>
             abort
           </Button>
           <Button onClick={addUserMessage}>Add a user message</Button>
           <Button onClick={addAIMessage}>Add an AI message</Button>
           <Button onClick={addSystemMessage}>Add a system message</Button>
-          <Button disabled={!messages.length} onClick={editLastMessage}>
+          <Button disabled={!chatMessages.length} onClick={editLastMessage}>
             Edit the last message
+          </Button>
+          <Button disabled={!chatMessages.length} onClick={editDeveloper}>
+            Edit system prompt
           </Button>
         </Flex>
       </Flex>
@@ -166,9 +168,11 @@ const App = () => {
       <Bubble.List
         role={role}
         style={{ maxHeight: 300 }}
-        items={messages.map(({ id, message }) => ({
+        items={chatMessages.map(({ id, message, status }) => ({
           key: id,
           role: message.role,
+          status: status,
+          loading: status === 'loading',
           content: message.content,
           components:
             message.role === 'assistant'
