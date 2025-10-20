@@ -8,8 +8,6 @@ order: 2
 description: 转换可读数据流
 demo:
   cols: 1
-cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*OD9kTJOmGdsAAAAAAAAAAAAADgCCAQ/original
-coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*PxJISo5t2YgAAAAAAAAAAAAADgCCAQ/original
 ---
 
 ## 何时使用

@@ -28,9 +28,9 @@ const role: BubbleListProps['role'] = {
   assistant: {
     placement: 'start',
 
-    contentRender(content: any) {
+    contentRender(content: string) {
       // Double '\n' in a mark will causes markdown parse as a new paragraph, so we need to replace it with a single '\n'
-      const newContent = content.replaceAll('\n\n', '<br/><br/>');
+      const newContent = content.replace('/\n\n/g', '<br/><br/>');
       return <XMarkdown content={newContent} />;
     },
   },

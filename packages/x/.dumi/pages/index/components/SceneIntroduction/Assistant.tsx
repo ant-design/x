@@ -35,7 +35,7 @@ const roles: GetProp<typeof Bubble.List, 'role'> = {
         background: '#3877FF',
       },
     },
-    contentRender(content: any) {
+    contentRender(content: ChatInput) {
       return content?.query;
     },
   },

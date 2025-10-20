@@ -9,7 +9,7 @@ import {
   XModelResponse,
   XRequest,
 } from '@ant-design/x-sdk';
-import { Button, Flex, Tooltip } from 'antd';
+import { Button, Divider, Flex, Tooltip } from 'antd';
 import React from 'react';
 
 /**
@@ -54,6 +54,18 @@ const App = () => {
   // Chat messages
   const { onRequest, messages, setMessages, setMessage, isRequesting, abort, onReload } = useXChat({
     provider,
+    defaultMessages: [
+      {
+        id: '0',
+        message: { role: 'user', content: 'Hello!' },
+        status: 'success',
+      },
+      {
+        id: '1',
+        message: { role: 'assistant', content: 'Hello, I am a chatbot' },
+        status: 'success',
+      },
+    ],
     requestFallback: (_, { error }) => {
       if (error.name === 'AbortError') {
         return {
@@ -78,7 +90,7 @@ const App = () => {
     setMessages([
       ...messages,
       {
-        id: Date.now(),
+        id: messages.length,
         message: { role: 'user', content: 'Add a new user message' },
         status: 'success',
       },
@@ -89,7 +101,7 @@ const App = () => {
     setMessages([
       ...messages,
       {
-        id: Date.now(),
+        id: messages.length,
         message: { role: 'assistant', content: 'Add a new AI response' },
         status: 'success',
       },
@@ -100,7 +112,7 @@ const App = () => {
     setMessages([
       ...messages,
       {
-        id: Date.now(),
+        id: messages.length,
         message: { role: 'system', content: 'Add a new system message' },
         status: 'success',
       },
@@ -118,7 +130,7 @@ const App = () => {
     <Flex vertical gap="middle">
       <Flex vertical gap="middle">
         <div>
-          Current status:{' '}
+          Current status:
           {isRequesting
             ? 'Requesting'
             : messages.length === 0
@@ -137,7 +149,7 @@ const App = () => {
           </Button>
         </Flex>
       </Flex>
-
+      <Divider />
       <Bubble.List
         role={role}
         style={{ maxHeight: 300 }}

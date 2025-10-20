@@ -9,7 +9,7 @@ import {
   XModelResponse,
   XRequest,
 } from '@ant-design/x-sdk';
-import { Button, Flex, Tooltip } from 'antd';
+import { Button, Divider, Flex, Tooltip } from 'antd';
 import React from 'react';
 
 /**
@@ -54,6 +54,23 @@ const App = () => {
   // Chat messages
   const { onRequest, messages, setMessages, setMessage, isRequesting, abort, onReload } = useXChat({
     provider,
+    defaultMessages: [
+      {
+        id: 'developer',
+        message: { role: 'developer', content: 'You are a helpful chatbot' },
+        status: 'success',
+      },
+      {
+        id: '0',
+        message: { role: 'user', content: 'Hello!' },
+        status: 'success',
+      },
+      {
+        id: '1',
+        message: { role: 'assistant', content: 'Hello, I am a chatbot' },
+        status: 'success',
+      },
+    ],
     requestFallback: (_, { error }) => {
       if (error.name === 'AbortError') {
         return {
@@ -73,6 +90,8 @@ const App = () => {
       };
     },
   });
+
+  const chatMessages = messages.filter((m) => m.message.role !== 'developer');
 
   const addUserMessage = () => {
     setMessages([
@@ -108,9 +127,15 @@ const App = () => {
   };
 
   const editLastMessage = () => {
-    const lastMessage = messages[messages.length - 1];
+    const lastMessage = chatMessages[chatMessages.length - 1];
     setMessage(lastMessage.id, {
       message: { role: lastMessage.message.role, content: 'Edit a message' },
+    });
+  };
+
+  const editDeveloper = () => {
+    setMessage('developer', {
+      message: { role: 'developer', content: 'Modified system prompt' },
     });
   };
 
@@ -118,30 +143,37 @@ const App = () => {
     <Flex vertical gap="middle">
       <Flex vertical gap="middle">
         <div>
-          Current status:{' '}
+          Current status:
           {isRequesting
             ? 'Requesting'
-            : messages.length === 0
+            : chatMessages.length === 0
               ? 'No messages yet, please enter a question and send'
               : 'Q&A completed'}
         </div>
-        <Flex align="center" gap="middle">
+        <div>
+          Current system prompt:{' '}
+          {`${messages.find((m) => m.message.role === 'developer')?.message.content || 'None'}`}
+        </div>
+        <Flex wrap align="center" gap="middle">
           <Button disabled={!isRequesting} onClick={abort}>
             abort
           </Button>
           <Button onClick={addUserMessage}>Add a user message</Button>
           <Button onClick={addAIMessage}>Add an AI message</Button>
           <Button onClick={addSystemMessage}>Add a system message</Button>
-          <Button disabled={!messages.length} onClick={editLastMessage}>
+          <Button disabled={!chatMessages.length} onClick={editLastMessage}>
             Edit the last message
+          </Button>
+          <Button disabled={!chatMessages.length} onClick={editDeveloper}>
+            Edit system prompt
           </Button>
         </Flex>
       </Flex>
-
+      <Divider />
       <Bubble.List
         role={role}
         style={{ maxHeight: 300 }}
-        items={messages.map(({ id, message, status }) => ({
+        items={chatMessages.map(({ id, message, status }) => ({
           key: id,
           role: message.role,
           status: status,
