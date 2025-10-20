@@ -195,4 +195,41 @@ describe('XMarkdown', () => {
     expect(wrapper).toHaveClass('ant-x-markdown');
     expect(wrapper.innerHTML).toBe('<div>This is a paragraph.</div>\n');
   });
+
+  describe('openLinksInNewTab', () => {
+    it('should add target="_blank" and rel="noopener noreferrer" to links with title when openLinksInNewTab is true', () => {
+      const { container } = render(
+        <XMarkdown content='[Google](https://www.google.com "Google Search")' openLinksInNewTab />,
+      );
+
+      const link = container.querySelector('a');
+      expect(link).toHaveAttribute('href', 'https://www.google.com');
+      expect(link).toHaveAttribute('target', '_blank');
+      expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+      expect(link).toHaveAttribute('title', 'Google Search');
+      expect(link).toHaveTextContent('Google');
+    });
+
+    it('should not add target="_blank" when openLinksInNewTab is false', () => {
+      const { container } = render(
+        <XMarkdown content="[Google](https://www.google.com)" openLinksInNewTab={false} />,
+      );
+
+      const link = container.querySelector('a');
+      expect(link).toHaveAttribute('href', 'https://www.google.com');
+      expect(link).not.toHaveAttribute('target');
+      expect(link).not.toHaveAttribute('rel');
+      expect(link).toHaveTextContent('Google');
+    });
+
+    it('should not add target="_blank" when openLinksInNewTab is not provided', () => {
+      const { container } = render(<XMarkdown content="[Google](https://www.google.com)" />);
+
+      const link = container.querySelector('a');
+      expect(link).toHaveAttribute('href', 'https://www.google.com');
+      expect(link).not.toHaveAttribute('target');
+      expect(link).not.toHaveAttribute('rel');
+      expect(link).toHaveTextContent('Google');
+    });
+  });
 });

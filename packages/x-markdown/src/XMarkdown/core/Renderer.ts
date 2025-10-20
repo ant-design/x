@@ -62,6 +62,7 @@ class Renderer {
     return {
       ...userConfig,
       ADD_TAGS: [...new Set([...customComponents, ...(userConfig.ALLOWED_TAGS || [])])],
+      ADD_ATTR: [...new Set(['target', 'rel', ...(userConfig.ADD_ATTR || [])])],
     };
   }
 
