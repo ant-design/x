@@ -11,7 +11,7 @@ const demos = [
   {
     title: 'Image Syntax',
     content:
-      "Here's an image: \n\n![Ant Design X](https://mdn.alipayobjects.com/huamei_yz9z7c/afts/img/0lMhRYbo0-8AAAAAQDAAAAgADlJoAQFr/original)",
+      '![Ant Design X](https://mdn.alipayobjects.com/huamei_yz9z7c/afts/img/0lMhRYbo0-8AAAAAQDAAAAgADlJoAQFr/original) ',
   },
   {
     title: 'Link Syntax',
@@ -24,8 +24,7 @@ const demos = [
   },
   {
     title: 'Code Block',
-    content:
-      '```typescript\nconst greet = (name: string) => {\n  console.log(`Hello, ${name}!`);\n};\n```\n\nInline code: `const x = 1`',
+    content: '- *code*',
   },
 ];
 
@@ -103,7 +102,7 @@ const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
           <XMarkdown
             content={displayText}
             components={{ 'incomplete-image': ImageSkeleton, 'incomplete-link': LinkSkeleton }}
-            streaming={{ hasNextChunk: isStreaming }}
+            streaming={{ hasNextChunk: true }}
           />
         </div>
       </Card>

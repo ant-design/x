@@ -132,4 +132,4 @@ interface XMarkdownProps {
   dompurifyConfig?: DOMPurifyConfig;
 }
 
-export type { XMarkdownProps, Token, Tokens, StreamStatus, ComponentProps };
+export type { XMarkdownProps, Token, Tokens, StreamStatus, ComponentProps, SteamingOption };
