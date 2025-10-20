@@ -7,8 +7,6 @@ order: 4
 subtitle: Data Provider
 demo:
   cols: 1
-cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*22A2Qqn7OrEAAAAAAAAAAAAADgCCAQ/original
-coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*lQydTrtLz9YAAAAAAAAAAAAADgCCAQ/original
 ---
 
 `Chat Provider` is used to provide unified request management and data format conversion for `useXChat`. By implementing `AbstractChatProvider`, you can convert data from different model providers or Agent services into a unified format that `useXChat` can consume, enabling seamless integration and switching between different models and Agents.
@@ -45,21 +43,21 @@ const { onRequest, messages, isRequesting } = useXChat({
 
 ### DefaultChatProvider
 
-`DefaultChatProvider` is a default `Chat Provider` that performs minimal data transformation, directly returning request parameters and response data to `useXChat`. It supports both regular requests and stream request data formats, and can be used directly.
+`DefaultChatProvider` is a default `Chat Provider` that performs minimal data transformation, directly returning request parameters and response data to `useXChat`. It supports both regular requests and stream request data formats and can be used directly.
 
-<code src="./demos/x-chat/custom-request.tsx">DefaultChatProvider</code>
+<code src="./demos/x-chat/custom-request.tsx">DefaultChatProvider Usage</code>
 
 ### OpenAIChatProvider
 
 `OpenAIChatProvider` is an `OpenAI`-compatible `Chat Provider` that converts request parameters and response data into formats compatible with the OpenAI API.
 
-`XModelMessage`, `XModelParams`, and `XModelResponse` are type definitions for `OpenAIChatProvider` input and output, which can be directly used in the generic types `ChatMessage`, `Input`, and `Output` of `useXChat`.
+`XModelMessage`, `XModelParams`, and `XModelResponse` are type definitions for the input and output of `OpenAIChatProvider`, which can be directly used as generic types `ChatMessage`, `Input`, and `Output` in `useXChat`.
 
-<code src="./demos/x-chat/model.tsx">Using OpenAIChatProvider</code>
+<code src="./demos/x-chat/model.tsx">OpenAIChatProvider Usage</code>
 
 ### DeepSeekChatProvider
 
-`DeepSeekChatProvider` is a `DeepSeek`-compatible `Chat Provider` that is very similar to `OpenAIChatProvider`. The only difference is that this Provider automatically parses DeepSeek's unique `reasoning_content` field as the model's thought process output. When used with the `Think` component, it can quickly display the model's thinking process. For detailed usage examples, please refer to the [independent showcase](https://x.ant.design/docs/playground/independent-en) code.
+`DeepSeekChatProvider` is a `DeepSeek`-compatible `Chat Provider`, similar to `OpenAIChatProvider` with one key difference: this Provider automatically parses DeepSeek's unique `reasoning_content` field as the model's thinking process output. When used with the `Think` component, it can quickly display the model's thinking process. For detailed usage examples, please refer to the [Independent Playground](https://x.ant.design/docs/playground/independent) code.
 
 <code src="./demos/x-chat/deepSeek.tsx">DeepSeekChatProvider</code>
 
@@ -67,7 +65,7 @@ const { onRequest, messages, isRequesting } = useXChat({
 
 ### AbstractChatProvider
 
-`AbstractChatProvider` is an abstract class used to define the interface for `Chat Provider`. When you need to use custom data services, you can inherit from `AbstractChatProvider` and implement its methods. Please refer to [showcase - toolbox](/docs/playground/agent-tbox-en).
+`AbstractChatProvider` is an abstract class used to define the interface for `Chat Provider`. When you need to use custom data services, you can inherit from `AbstractChatProvider` and implement its methods. Refer to [Playground - Toolbox](/docs/playground/agent-tbox) for examples.
 
 ```ts
 type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error';
@@ -87,9 +85,9 @@ abstract class AbstractChatProvider<ChatMessage, Input, Output> {
   constructor(config: ChatProviderConfig<Input, Output>): void;
 
   /**
-   * Transform parameters passed to onRequest. You can merge them with params in the request configuration during Provider instantiation or perform additional processing
+   * Transform parameters passed to onRequest, you can merge or additionally process with params in the request configuration when instantiating the Provider
    * @param requestParams Request parameters
-   * @param options Request configuration from the request configuration during Provider instantiation
+   * @param options Request configuration from the request configuration when instantiating the Provider
    */
   abstract transformParams(
     requestParams: Partial<Input>,
@@ -97,7 +95,7 @@ abstract class AbstractChatProvider<ChatMessage, Input, Output> {
   ): Input;
 
   /**
-   * Convert parameters passed to onRequest into a local (user-sent) ChatMessage for message rendering
+   * Convert parameters passed to onRequest into local (user-sent) ChatMessage for message rendering
    * @param requestParams Parameters passed to onRequest
    */
   abstract transformLocalMessage(requestParams: Partial<Input>): ChatMessage;
@@ -107,5 +105,43 @@ abstract class AbstractChatProvider<ChatMessage, Input, Output> {
    * @param info
    */
   abstract transformMessage(info: TransformMessage<ChatMessage, Output>): ChatMessage;
+}
+```
+
+### Custom TboxProvider
+
+```ts
+class TboxProvider<
+  ChatMessage extends TboxMessage = TboxMessage,
+  Input extends TboxInput = TboxInput,
+  Output extends TboxOutput = TboxOutput,
+> extends AbstractChatProvider<ChatMessage, Input, Output> {
+  transformParams(requestParams: Partial<Input>, options: XRequestOptions<Input, Output>): Input {
+    if (typeof requestParams !== 'object') {
+      throw new Error('requestParams must be an object');
+    }
+    return {
+      ...(options?.params || {}),
+      ...(requestParams || {}),
+    } as Input;
+  }
+  transformLocalMessage(requestParams: Partial<Input>): ChatMessage {
+    return requestParams.message as unknown as ChatMessage;
+  }
+  transformMessage(info: TransformMessage<ChatMessage, Output>): ChatMessage {
+    const { originMessage, chunk } = info || {};
+    if (!chunk) {
+      return {
+        content: originMessage?.content || '',
+        role: 'assistant',
+      } as ChatMessage;
+    }
+
+    const content = originMessage?.content || '';
+    return {
+      content: content + chunk.text,
+      role: 'assistant',
+    } as ChatMessage;
+  }
 }
 ```
