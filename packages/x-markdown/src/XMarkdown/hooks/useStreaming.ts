@@ -1,4 +1,3 @@
-import { marked } from 'marked';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { XMarkdownProps } from '../interface';
 
@@ -9,12 +8,8 @@ enum TokenType {
   IncompleteImage = 2,
   IncompleteHeading = 3,
   IncompleteHtml = 4,
-  IncompleteCode = 5,
-  IncompleteHr = 6,
-  IncompleteList = 7,
-  IncompleteEmphasis = 8,
-  CompleteCode = 9,
-  MaybeImage = 10,
+  IncompleteEmphasis = 5,
+  MaybeImage = 6,
 }
 
 interface StreamCache {
@@ -22,7 +17,6 @@ interface StreamCache {
   token: TokenType;
   processedLength: number;
   completeMarkdown: string;
-  codeStartSymbols: string;
 }
 
 /* ------------ tools ------------ */
@@ -31,7 +25,6 @@ const getInitialCache = (): StreamCache => ({
   token: TokenType.Text,
   processedLength: 0,
   completeMarkdown: '',
-  codeStartSymbols: '',
 });
 
 // 清空 pending
@@ -44,153 +37,134 @@ const commitCache = (cache: StreamCache) => {
   cache.token = TokenType.Text;
 };
 
-const isTokenClose = (markdown: string, tokenType: string) => {
-  try {
-    const tokens = marked.lexer(markdown);
-    if (!tokens || !Array.isArray(tokens) || tokens.length === 0) {
-      return false;
-    }
+const isInCodeBlock = (text: string): boolean => {
+  const lines = text.split('\n');
+  let inFenced = false;
+  let fenceChar = '';
+  let fenceLen = 0;
 
-    const firstToken = tokens[0];
-    return (
-      firstToken?.type === 'paragraph' &&
-      'tokens' in firstToken &&
-      Array.isArray(firstToken.tokens) &&
-      firstToken.tokens?.[0]?.type === tokenType
-    );
-  } catch (error) {
-    console.error('Error parsing markdown:', error);
-    return false;
-  }
-};
-
-const isInCode = (text: string): boolean => {
-  let inFenced = false; // 是否在 ``` 块内
-  let fenceChar = ''; // 记录开启栅栏的字符 (` or ~)
-  let fenceLen = 0; // 开启栅栏的长度
-  let inIndent = false; // 是否在缩进代码块内
-  let tickRun = 0; // 连续反引号计数（行内）
-  let afterFence = false; // 栅栏行后是否立即接内容
-  let escaped = false; // 转义标志
-
-  const lines = text.split(/\n/);
   for (const rawLine of lines) {
     const line = rawLine.endsWith('\r') ? rawLine.slice(0, -1) : rawLine;
 
-    /* ---------- 1. fence code ---------- */
-    if (!inIndent) {
-      const m = line.match(/^(`{3,}|~{3,})([^`\s]*)\s*$/);
-      if (m) {
-        if (!inFenced) {
-          // 开启
-          inFenced = true;
-          fenceChar = m[1][0];
-          fenceLen = m[1].length;
-          afterFence = true;
-          continue;
-        }
-        if (m[1][0] === fenceChar && m[1].length >= fenceLen) {
-          // 闭合
-          inFenced = false;
-          fenceChar = '';
-          fenceLen = 0;
-          afterFence = false;
-          continue;
-        }
-      }
-    }
-    if (inFenced) {
-      afterFence = false;
-      continue;
-    }
+    // 检查 fenced 代码块（``` 或 ~~~）
+    const fenceMatch = line.match(/^(`{3,}|~{3,})/);
+    if (fenceMatch) {
+      const currentFence = fenceMatch[1];
+      const char = currentFence[0];
+      const len = currentFence.length;
 
-    /* ---------- 2. 缩进代码块 ---------- */
-    const indentMatch = line.match(/^([ \t]*)(.*)/)!;
-    const indent = indentMatch[1];
-    const content = indentMatch[2];
-    const isIndent = indent.length >= 4 || indent.includes('\t');
-
-    if (!inIndent && isIndent && content) {
-      inIndent = true;
-    } else if (inIndent && !isIndent && content) {
-      inIndent = false;
-    }
-    if (inIndent) continue;
-
-    /* ---------- 3. inline code ---------- */
-    for (const ch of line) {
-      if (escaped) {
-        escaped = false;
-        continue;
-      }
-      if (ch === '\\') {
-        escaped = true;
-        continue;
-      }
-      if (ch === '`') {
-        tickRun++;
-      } else {
-        if (tickRun > 0 && tickRun % 2 === 1) {
-          // 奇数个 ` 会切换行内代码状态
-          // 这里简化：只要遇到未配对的 ` 就认为“仍在行内代码”
-          return true;
-        }
-        tickRun = 0;
+      if (!inFenced) {
+        inFenced = true;
+        fenceChar = char;
+        fenceLen = len;
+      } else if (char === fenceChar && len >= fenceLen) {
+        inFenced = false;
+        fenceChar = '';
+        fenceLen = 0;
       }
     }
   }
 
-  return inFenced || inIndent;
+  return inFenced;
 };
 
 /* ------------ recognizer ------------ */
+const isTokenIncomplete = {
+  image: (markdown: string) =>
+    [/^!\[[^\]\r\n]*$/, /^!\[[^\r\n]*\]\(*[^)\r\n]*$/].some((re) => re.test(markdown)),
+  link: (markdown: string) =>
+    [/^\[[^\]\r\n]*$/, /^\[[^\r\n]*\]\(*[^)\r\n]*$/].some((re) => re.test(markdown)),
+  atxHeading: (markdown: string) =>
+    [/^#{1,6}$/, /^#{1,6}(?=\s)[^\r\n]*$/].some((re) => re.test(markdown)),
+  html: (markdown: string) => [/^<[a-zA-Z][a-zA-Z0-9-]*[^>\r\n]*$/].some((re) => re.test(markdown)),
+  commonEmphasis: (markdown: string) =>
+    [
+      /^\*(?!\s)[^*\r\n]*$/,
+      /^\*\*(?!\s)[^**\r\n]*$/,
+      /^_(?!\s)[^_\r\n]*$/,
+      /^__(?!\s)[^__\r\n]*$/,
+    ].some((re) => re.test(markdown)),
+};
+
 const recognizeImage = (cache: StreamCache) => {
   const { token, pending } = cache;
-  if (token !== TokenType.Text && token !== TokenType.IncompleteImage) return;
+  if (token === TokenType.Text && pending.startsWith('!')) {
+    cache.token = TokenType.MaybeImage;
+    return;
+  }
 
-  const isIncomplete = /!\[[^\]\r\n]*?(?:\[|$)|!\[[^\]\r\n]*\]\([^)\r\n]*$/g.test(pending);
-  if (!isIncomplete) {
-    commitCache(cache);
+  if (token === TokenType.IncompleteImage || token === TokenType.MaybeImage) {
+    const isIncomplete = isTokenIncomplete.image(pending);
+    if (isIncomplete) {
+      cache.token = TokenType.IncompleteImage;
+    } else {
+      commitCache(cache);
+    }
   }
 };
 
 const recognizeLink = (cache: StreamCache) => {
   const { token, pending } = cache;
-  if (token !== TokenType.Text && token !== TokenType.IncompleteLink) return;
+  if (token === TokenType.Text && pending.startsWith('[')) {
+    cache.token = TokenType.IncompleteLink;
+    return;
+  }
 
-  const isIncomplete = /^\[[^\]\r\n]*\]\([^)\r\n]*$|^\[[^\]\r\n]*$/m.test(pending);
-  if (!isIncomplete) {
-    commitCache(cache);
+  if (token === TokenType.IncompleteLink) {
+    const isIncomplete = isTokenIncomplete.link(pending);
+    if (isIncomplete) {
+      cache.token = TokenType.IncompleteLink;
+    } else {
+      commitCache(cache);
+    }
   }
 };
 
-const recognizeHeading = (cache: StreamCache) => {
+const recognizeAtxHeading = (cache: StreamCache) => {
   const { token, pending } = cache;
-  if (token !== TokenType.Text && token !== TokenType.IncompleteHeading) return;
+  if (token === TokenType.Text && pending.startsWith('#')) {
+    cache.token = TokenType.IncompleteHeading;
+    return;
+  }
 
-  const isIncomplete = /^#{1,6}(?:[^#\r\n]|#{1,6}(?!\s*$))*#{0,5}$/m.test(pending);
-  if (!isIncomplete) {
-    commitCache(cache);
+  if (token === TokenType.IncompleteHeading) {
+    const isIncomplete = isTokenIncomplete.atxHeading(pending);
+    if (isIncomplete) {
+      cache.token = TokenType.IncompleteHeading;
+    } else {
+      commitCache(cache);
+    }
   }
 };
 
 const recognizeHtml = (cache: StreamCache) => {
   const { token, pending } = cache;
-  if (token !== TokenType.Text && token !== TokenType.IncompleteHtml) return;
+  if (token === TokenType.Text && pending.startsWith('<')) {
+    cache.token = TokenType.IncompleteHtml;
+    return;
+  }
 
-  const isIncomplete = /^<([a-zA-Z][a-zA-Z0-9]*)[^>]*>(?:(?!<\/\1>)[\s\S])*$/m.test(pending);
-  if (!isIncomplete) {
-    commitCache(cache);
+  if (token === TokenType.IncompleteHtml) {
+    const isIncomplete = isTokenIncomplete.html(pending);
+    if (!isIncomplete) {
+      commitCache(cache);
+    }
   }
 };
 
 const recognizeEmphasis = (cache: StreamCache) => {
   const { token, pending } = cache;
-  if (token !== TokenType.Text && token !== TokenType.IncompleteEmphasis) return;
+  const isEmphasisStart = pending.startsWith('*') || pending.startsWith('_');
+  if (token === TokenType.Text && isEmphasisStart) {
+    cache.token = TokenType.IncompleteEmphasis;
+    return;
+  }
 
-  const isIncomplete = /^(?:\*{1,2}|_{1,2})(?:(?!\\1)[\s\S])*$/m.test(pending);
-  if (!isIncomplete) {
-    commitCache(cache);
+  if (token === TokenType.IncompleteEmphasis) {
+    const isIncomplete = isTokenIncomplete.commonEmphasis(pending);
+    if (!isIncomplete) {
+      commitCache(cache);
+    }
   }
 };
 
@@ -204,8 +178,8 @@ const recognizeText = (cache: StreamCache) => {
 const recognizers = [
   recognizeImage,
   recognizeLink,
+  recognizeAtxHeading,
   recognizeEmphasis,
-  recognizeHeading,
   recognizeHtml,
   recognizeText,
 ];
@@ -246,21 +220,16 @@ const useStreaming = (input: string, config?: XMarkdownProps['streaming']) => {
         cacheRef.current = getInitialCache();
       }
 
-      if (isInCode(text)) {
-        setOutput(text);
-        return;
-      }
+      if (!isInCodeBlock(text)) {
+        // handle new chunk
+        const chunk = text.slice(cache.processedLength);
+        if (!chunk) return;
 
-      // handle new chunk
-      const chunk = text.slice(cache.processedLength);
-      if (!chunk) {
-        return;
-      }
-      cache.processedLength += chunk.length;
-
-      cache.pending += chunk;
-      for (const recognizer of recognizers) {
-        recognizer(cache);
+        cache.processedLength += chunk.length;
+        cache.pending += chunk;
+        for (const recognizer of recognizers) {
+          recognizer(cache);
+        }
       }
 
       const incompletePlaceholder = handleIncompleteMarkdown(cache, incompleteMarkdownComponentMap);
