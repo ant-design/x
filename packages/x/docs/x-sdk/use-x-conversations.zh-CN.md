@@ -18,7 +18,11 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*lQydTrtLz9YAAA
 
 ## 代码演示
 
-<code src="./demos/x-conversations/basic.tsx">基础使用</code> <code src="./demos/x-conversations/operations.tsx">会话操作</code> <code src="./demos/x-conversations/multi-instances.tsx">多实例</code>
+<!-- prettier-ignore -->
+<code src="./demos/x-conversations/basic.tsx">基础使用</code> 
+<code src="./demos/x-conversations/operations.tsx">会话操作</code> 
+<code src="./demos/x-conversations/multi-instances.tsx">多实例</code>
+<code src="./demos/x-conversations/with-x-chat.tsx">配合`useXChat`对话消息管理</code>
 
 ## API
 
