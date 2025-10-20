@@ -16,7 +16,7 @@ const role: BubbleListProps['role'] = {
   },
   local: {
     placement: 'end',
-    contentRender(content: any) {
+    contentRender(content: ChatInput) {
       return content?.query;
     },
   },
