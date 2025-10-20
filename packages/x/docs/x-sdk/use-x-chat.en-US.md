@@ -41,7 +41,7 @@ type useXChat<
 <!-- prettier-ignore -->
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| provider | Data provider used to convert data and requests of different structures into formats that useXChat can consume. The platform includes built-in `DefaultChatProvider` and `OpenAIChatProvider`, and you can also implement your own Provider by inheriting `AbstractChatProvider`. See: [Chat Provider Documentation](/x-sdks/chat-provider-en) | AbstractChatProvider<ChatMessage, Input, Output> | - | - |
+| provider | Data provider used to convert data and requests of different structures into formats that useXChat can consume. The platform includes built-in `DefaultChatProvider` and `OpenAIChatProvider`, and you can also implement your own Provider by inheriting `AbstractChatProvider`. See: [Chat Provider Documentation](/x-sdks/chat-provider-en) | AbstractChatProvider\<ChatMessage, Input, Output\> | - | - |
 | defaultMessages | Default display messages | { message: ChatMessage, status: MessageStatus }[] | - | - |
 | parser | Converts ChatMessage into ParsedMessage for consumption. When not set, ChatMessage is consumed directly. Supports converting one ChatMessage into multiple ParsedMessages | (message: ChatMessage) => BubbleMessage \| BubbleMessage[] | - | - |
 | requestFallback | Fallback message for failed requests. When not provided, no message will be displayed | ChatMessage \| () => ChatMessage | - | - |
@@ -53,12 +53,12 @@ type useXChat<
 | --- | --- | --- | --- | --- |
 | abort | Cancel request | () => void | - | - |
 | isRequesting | Whether a request is in progress | boolean | - | - |
-| messages | Current managed message list content | MessageInfo<ChatMessage>[] | - | - |
-| parsedMessages | Content translated through `parser` | MessageInfo<ParsedMessages>[] | - | - |
-| onReload | Regenerate, will send request to backend and update the message with new returned data | (id: string \| number, requestParams: Partial<Input>, opts: { extra: AnyObject }) => void | - | - |
-| onRequest | Add a Message and trigger request | (requestParams: Partial<Input>, opts: { extra: AnyObject }) => void | - | - |
-| setMessages | Directly modify messages without triggering requests | (messages: Partial<MessageInfo<ChatMessage>>[]) => void | - | - |
-| setMessage | Directly modify a single message without triggering requests | (id: string \| number, info: Partial<MessageInfo<ChatMessage>>) => void | - | - |
+| messages | Current managed message list content | MessageInfo\<ChatMessage\>[] | - | - |
+| parsedMessages | Content translated through `parser` | MessageInfo\<ParsedMessages\>[] | - | - |
+| onReload | Regenerate, will send request to backend and update the message with new returned data | (id: string \| number, requestParams: Partial\<Input\>, opts: { extra: AnyObject }) => void | - | - |
+| onRequest | Add a Message and trigger request | (requestParams: Partial\<Input\>, opts: { extra: AnyObject }) => void | - | - |
+| setMessages | Directly modify messages without triggering requests | (messages: Partial\<MessageInfo\<ChatMessage\>\>[]) => void | - | - |
+| setMessage | Directly modify a single message without triggering requests | (id: string \| number, info: Partial\<MessageInfo\<ChatMessage\>\>) => void | - | - |
 
 #### MessageInfo
 

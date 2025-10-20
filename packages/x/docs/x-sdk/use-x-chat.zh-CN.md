@@ -21,7 +21,7 @@ demo:
 <code src="./demos/x-chat/defaultMessages.tsx">历史消息设置</code>
 <code src="./demos/x-chat/developer.tsx">系统提示词设置</code>
 <code src="./demos/x-chat/custom-request.tsx">自定义request</code>
-<code src="./demos/x-chat/openai-node.tsx">使用openai-node自定义request</code>
+<code src="./demos/x-chat/openai-node.tsx">自定义request(使用openai-node)</code>
 
 ## API
 
