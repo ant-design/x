@@ -44,6 +44,7 @@ type useXConversations = (config: XConversationConfig) => {
 ```tsx | pure
 interface XConversationConfig {
   defaultConversations?: ConversationData[];
+  defaultActiveConversationKey?: string;
 }
 ```
 
