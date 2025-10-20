@@ -7,8 +7,6 @@ order: 4
 subtitle: 数据提供
 demo:
   cols: 1
-cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*22A2Qqn7OrEAAAAAAAAAAAAADgCCAQ/original
-coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*lQydTrtLz9YAAAAAAAAAAAAADgCCAQ/original
 ---
 
 `Chat Provider` 用于为 `useXChat` 提供统一的请求管理和数据格式转换，通过实现`AbstractChatProvider`，你可以将不同的模型提供商、或者Agent服务数据转换为统一的 `useXChat` 可消费的格式，从而实现不同模型、Agent之间的无缝接入和切换。
@@ -39,7 +37,7 @@ const { onRequest, messages, isRequesting } = useXChat({
 });
 ```
 
-## 内置Provider
+## 内置 Provider
 
 `x-sdk` 内置了一些常用模型服务商的 `Chat Provider`，你可以直接使用。
 
@@ -47,7 +45,7 @@ const { onRequest, messages, isRequesting } = useXChat({
 
 `DefaultChatProvider` 是一个默认的 `Chat Provider`，几乎没有对数据进行转换，直接将请求参数和响应数据返回给 `useXChat`。它兼容了普通请求和stream请求的数据格式，你可以直接使用。
 
-<code src="./demos/x-chat/basic.tsx">DefaultChatProvider使用</code>
+<code src="./demos/x-chat/custom-request.tsx">DefaultChatProvider使用</code>
 
 ### OpenAIChatProvider
 
@@ -62,12 +60,6 @@ const { onRequest, messages, isRequesting } = useXChat({
 `DeepSeekChatProvider` 是 `DeepSeek` 兼容的 `Chat Provider`，和`OpenAIChatProvider`相差不大，唯一的差异点是，该Provider会自动解析DeepSeek特有的`reasoning_content`字段，作为模型思考过程的输出，配合`Think`组件可以快捷展示模型思考过程。详细的使用示例，可以参考[独立式样板间](https://x.ant.design/docs/playground/independent-cn)代码。
 
 <code src="./demos/x-chat/deepSeek.tsx">DeepSeekChatProvider</code>
-
-## 自定义Request
-
-当使用一些sdk（例如：`openai-node`,`@openrouter/ai-sdk-provider`）请求模型或者智能体时需要使用内置的Provider处理数据，需要自定义Request，可参考。
-
-<code src="../react/demo/openai-node.tsx" title="接入 openai" description="此示例仅展示使用X SDK接入 openai 的逻辑参考，并未对模型数据进行处理，需填写正确的apiKey再进行数据调试"></code>
 
 ## 自定义 Provider
 
@@ -113,5 +105,43 @@ abstract class AbstractChatProvider<ChatMessage, Input, Output> {
    * @param info
    */
   abstract transformMessage(info: TransformMessage<ChatMessage, Output>): ChatMessage;
+}
+```
+
+### 自定义TboxProvider
+
+```ts
+class TboxProvider<
+  ChatMessage extends TboxMessage = TboxMessage,
+  Input extends TboxInput = TboxInput,
+  Output extends TboxOutput = TboxOutput,
+> extends AbstractChatProvider<ChatMessage, Input, Output> {
+  transformParams(requestParams: Partial<Input>, options: XRequestOptions<Input, Output>): Input {
+    if (typeof requestParams !== 'object') {
+      throw new Error('requestParams must be an object');
+    }
+    return {
+      ...(options?.params || {}),
+      ...(requestParams || {}),
+    } as Input;
+  }
+  transformLocalMessage(requestParams: Partial<Input>): ChatMessage {
+    return requestParams.message as unknown as ChatMessage;
+  }
+  transformMessage(info: TransformMessage<ChatMessage, Output>): ChatMessage {
+    const { originMessage, chunk } = info || {};
+    if (!chunk) {
+      return {
+        content: originMessage?.content || '',
+        role: 'assistant',
+      } as ChatMessage;
+    }
+
+    const content = originMessage?.content || '';
+    return {
+      content: content + chunk.text,
+      role: 'assistant',
+    } as ChatMessage;
+  }
 }
 ```

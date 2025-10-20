@@ -8,11 +8,15 @@ export interface ConversationData extends AnyObject {
 
 interface XConversationConfig {
   defaultConversations?: ConversationData[];
+  defaultActiveConversationKey?: string;
 }
 
 export default function useXConversations(config: XConversationConfig) {
   const [store] = useState(() => {
-    const store = new ConversationStore(config?.defaultConversations || []);
+    const store = new ConversationStore(
+      config?.defaultConversations || [],
+      config?.defaultActiveConversationKey || '',
+    );
     return store;
   });
 
@@ -23,9 +27,16 @@ export default function useXConversations(config: XConversationConfig) {
   }, []);
 
   const conversations = useSyncExternalStore(store.subscribe, store.getSnapshot, store.getSnapshot);
+  const activeConversationKey = useSyncExternalStore(
+    store.subscribe,
+    store.getActiveConversationKey,
+    store.getActiveConversationKey,
+  );
 
   return {
     conversations,
+    activeConversationKey: activeConversationKey,
+    setActiveConversationKey: store.setActiveConversationKey,
     addConversation: store.addConversation,
     removeConversation: store.removeConversation,
     setConversation: store.setConversation,

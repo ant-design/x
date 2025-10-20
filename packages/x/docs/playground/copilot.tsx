@@ -211,8 +211,8 @@ const role: BubbleListProps['role'] = {
         </div>
       ),
     },
-    contentRender(content: any) {
-      const newContent = content.replaceAll('\n\n', '<br/><br/>');
+    contentRender(content: string) {
+      const newContent = content.replace('/\n\n/g', '<br/><br/>');
       return (
         <XMarkdown
           content={newContent}
@@ -232,13 +232,17 @@ const Copilot = (props: CopilotProps) => {
   const attachmentsRef = useRef<GetRef<typeof Attachments>>(null);
 
   // ==================== State ====================
-  const { conversations, addConversation, getConversation, setConversation } = useXConversations({
+  const {
+    conversations,
+    activeConversationKey,
+    setActiveConversationKey,
+    addConversation,
+    getConversation,
+    setConversation,
+  } = useXConversations({
     defaultConversations: DEFAULT_CONVERSATIONS_ITEMS,
+    defaultActiveConversationKey: DEFAULT_CONVERSATIONS_ITEMS[0].key,
   });
-  const [curConversation, setCurConversation] = useState<string>(
-    DEFAULT_CONVERSATIONS_ITEMS[0].key,
-  );
-
   const [attachmentsOpen, setAttachmentsOpen] = useState(false);
   const [files, setFiles] = useState<GetProp<AttachmentsProps, 'items'>>([]);
 
@@ -247,8 +251,8 @@ const Copilot = (props: CopilotProps) => {
   // ==================== Runtime ====================
 
   const { onRequest, messages, isRequesting, abort } = useXChat({
-    provider: providerFactory(curConversation), // every conversation has its own provider
-    conversationKey: curConversation,
+    provider: providerFactory(activeConversationKey), // every conversation has its own provider
+    conversationKey: activeConversationKey,
     requestPlaceholder: () => {
       return {
         content: locale.noData,
@@ -268,9 +272,9 @@ const Copilot = (props: CopilotProps) => {
     });
 
     // session title mock
-    const conversation = getConversation(curConversation);
+    const conversation = getConversation(activeConversationKey);
     if (conversation?.label === locale.newSession) {
-      setConversation(curConversation, { ...conversation, label: val?.slice(0, 20) });
+      setConversation(activeConversationKey, { ...conversation, label: val?.slice(0, 20) });
     }
   };
 
@@ -293,7 +297,7 @@ const Copilot = (props: CopilotProps) => {
             if (messages?.length) {
               const timeNow = dayjs().valueOf().toString();
               addConversation({ key: timeNow, label: 'New session', group: 'Today' });
-              setCurConversation(timeNow);
+              setActiveConversationKey(timeNow);
             } else {
               message.error(locale.itIsNowANewConversation);
             }
@@ -306,13 +310,11 @@ const Copilot = (props: CopilotProps) => {
           content={
             <Conversations
               items={conversations?.map((i) =>
-                i.key === curConversation ? { ...i, label: `[current] ${i.label}` } : i,
+                i.key === activeConversationKey ? { ...i, label: `[current] ${i.label}` } : i,
               )}
-              activeKey={curConversation}
+              activeKey={activeConversationKey}
               groupable
-              onActiveChange={async (val) => {
-                setCurConversation(val);
-              }}
+              onActiveChange={setActiveConversationKey}
               styles={{ item: { padding: '0 8px' } }}
               className={styles.conversations}
             />
