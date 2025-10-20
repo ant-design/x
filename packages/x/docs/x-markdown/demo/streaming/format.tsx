@@ -1,6 +1,7 @@
 import XMarkdown from '@ant-design/x-markdown';
 import { Button, Card, Skeleton } from 'antd';
 import React, { useState } from 'react';
+import { useMarkdownTheme } from '../_utils';
 
 const demos = [
   {
@@ -24,7 +25,7 @@ const demos = [
   },
   {
     title: 'Code Block',
-    content: '- *code*',
+    content: '1\n- *code*',
   },
 ];
 
@@ -37,6 +38,7 @@ const LinkSkeleton = () => (
 const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
   const [displayText, setDisplayText] = useState('');
   const [isStreaming, setIsStreaming] = useState(false);
+  const [className] = useMarkdownTheme();
 
   const startStream = React.useCallback(() => {
     setDisplayText('');
@@ -101,6 +103,7 @@ const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
         >
           <XMarkdown
             content={displayText}
+            className={className}
             components={{ 'incomplete-image': ImageSkeleton, 'incomplete-link': LinkSkeleton }}
             streaming={{ hasNextChunk: true }}
           />
