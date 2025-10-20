@@ -58,7 +58,7 @@ const AnimationText = React.memo<AnimationTextProps>((props) => {
 });
 
 const AnimationNode: React.FC<AnimationNodeProps> = (props) => {
-  const { nodeTag, children, animationConfig, domNode, streamStatus, ...restProps } = props;
+  const { nodeTag, children, animationConfig, ...restProps } = props;
 
   const renderChildren = (): React.ReactNode | React.ReactNode[] => {
     if (!children) return null;
