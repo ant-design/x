@@ -59,10 +59,13 @@ class Renderer {
     const customComponents = Object.keys(this.options.components || {});
     const userConfig = this.options.dompurifyConfig || {};
 
+    const allowedTags = Array.isArray(userConfig.ALLOWED_TAGS) ? userConfig.ALLOWED_TAGS : [];
+    const addAttr = Array.isArray(userConfig.ADD_ATTR) ? userConfig.ADD_ATTR : [];
+
     return {
       ...userConfig,
-      ADD_TAGS: [...new Set([...customComponents, ...(userConfig.ALLOWED_TAGS || [])])],
-      ADD_ATTR: [...new Set(['target', 'rel', ...(userConfig.ADD_ATTR || [])])],
+      ADD_TAGS: Array.from(new Set([...customComponents, ...allowedTags])),
+      ADD_ATTR: Array.from(new Set(['target', 'rel', ...addAttr])),
     };
   }
 
