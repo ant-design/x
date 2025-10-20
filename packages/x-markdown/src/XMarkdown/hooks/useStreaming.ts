@@ -178,7 +178,7 @@ const recognizeHtml = (cache: StreamCache) => {
   const { token, pending } = cache;
   if (token !== TokenType.Text && token !== TokenType.IncompleteHtml) return;
 
-  const isIncomplete = /^#{1,6}(?:[^#\r\n]|#{1,6}(?!\s*$))*#{0,5}$/m.test(pending);
+  const isIncomplete = /^<([a-zA-Z][a-zA-Z0-9]*)[^>]*>(?:(?!<\/\1>)[\s\S])*$/m.test(pending);
   if (!isIncomplete) {
     commitCache(cache);
   }
@@ -186,30 +186,11 @@ const recognizeHtml = (cache: StreamCache) => {
 
 const recognizeEmphasis = (cache: StreamCache) => {
   const { token, pending } = cache;
+  if (token !== TokenType.Text && token !== TokenType.IncompleteEmphasis) return;
 
-  const isEmphasisStart = char === '_' || char === '*';
-  if (token === TokenType.Text && isEmphasisStart) {
-    cache.token = TokenType.IncompleteEmphasis;
-    return;
-  }
-
-  if (token === TokenType.IncompleteEmphasis) {
-    /**
-     * _ list
-     *  ^
-     */
-    const isInvalidStart = /[*_][ \n]$/.test(pending);
-    /**
-     * _list_
-     *      ^
-     */
-    const isCompleteEmphasis = isTokenClose(pending, 'strong') || isTokenClose(pending, 'em');
-    const isEmphasisBreak = char === '\n';
-
-    const shouldCommit = isInvalidStart || isCompleteEmphasis || isEmphasisBreak;
-    if (shouldCommit) {
-      commitCache(cache);
-    }
+  const isIncomplete = /^(?:\*{1,2}|_{1,2})(?:(?!\\1)[\s\S])*$/m.test(pending);
+  if (!isIncomplete) {
+    commitCache(cache);
   }
 };
 
