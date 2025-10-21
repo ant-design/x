@@ -1,7 +1,7 @@
 import { Bubble } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
 import { Button, Flex, Space, Switch, Typography } from 'antd';
-import React, { useState } from 'react';
+import React from 'react';
 import { useMarkdownTheme } from '../_utils';
 import '@ant-design/x-markdown/themes/light.css';
 import '@ant-design/x-markdown/themes/dark.css';
@@ -116,7 +116,8 @@ const text = `
 `;
 
 const App = () => {
-  const [enableAnimation, setEnableAnimation] = useState(true);
+  const [enableAnimation, setEnableAnimation] = React.useState(true);
+  const [hasNextChunk, setHasNextChunk] = React.useState(false);
   const [className] = useMarkdownTheme();
   const [index, setIndex] = React.useState(0);
   const timer = React.useRef<any>(-1);
@@ -124,6 +125,7 @@ const App = () => {
   const renderStream = () => {
     if (index >= text.length) {
       clearTimeout(timer.current);
+      setHasNextChunk(false);
       return;
     }
     timer.current = setTimeout(() => {
@@ -134,6 +136,8 @@ const App = () => {
 
   React.useEffect(() => {
     if (index === text.length) return;
+
+    setHasNextChunk(true);
     renderStream();
     return () => {
       clearTimeout(timer.current);
@@ -155,7 +159,7 @@ const App = () => {
         content={text.slice(0, index)}
         className={className}
         contentRender={(content) => (
-          <XMarkdown streaming={{ enableAnimation }}>{content}</XMarkdown>
+          <XMarkdown streaming={{ enableAnimation, hasNextChunk }}>{content}</XMarkdown>
         )}
         variant="outlined"
       />

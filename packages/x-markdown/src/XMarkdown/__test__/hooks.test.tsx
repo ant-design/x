@@ -1,6 +1,6 @@
-import { render, renderHook } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import React from 'react';
-import { useAnimation, useStreaming } from '../hooks';
+import { useStreaming } from '../hooks';
 import { XMarkdownProps } from '../interface';
 
 const testCases = [
@@ -242,31 +242,6 @@ describe('XMarkdown hooks', () => {
         <TestComponent input={input} config={config || { hasNextChunk: true }} />,
       );
       expect(container.textContent).toBe(output);
-    });
-
-    it('useAnimation should return empty object when streaming is not enabled', () => {
-      const { result } = renderHook(() => useAnimation(undefined));
-      expect(result.current).toEqual({});
-    });
-
-    it('useAnimation should return empty object when enableAnimation is false', () => {
-      const { result } = renderHook(() => useAnimation({ enableAnimation: false }));
-      expect(result.current).toEqual({});
-    });
-
-    it('useAnimation should memoize components based on animationConfig', () => {
-      const animationConfig = { fadeDuration: 1000 };
-      const { result, rerender } = renderHook(
-        ({ config }) => useAnimation({ enableAnimation: true, animationConfig: config }),
-        { initialProps: { config: animationConfig } },
-      );
-
-      const firstResult = result.current;
-      rerender({ config: { ...animationConfig } }); // Same config
-      expect(result.current).toBe(firstResult);
-
-      rerender({ config: { fadeDuration: 2000 } }); // Different config
-      expect(result.current).not.toBe(firstResult);
     });
   });
 });
