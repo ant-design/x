@@ -44,8 +44,8 @@ type useXChat<
 | provider | Data provider used to convert data and requests of different structures into formats that useXChat can consume. The platform includes built-in `DefaultChatProvider` and `OpenAIChatProvider`, and you can also implement your own Provider by inheriting `AbstractChatProvider`. See: [Chat Provider Documentation](/x-sdks/chat-provider-en) | AbstractChatProvider\<ChatMessage, Input, Output\> | - | - |
 | defaultMessages | Default display messages | { message: ChatMessage, status: MessageStatus }[] | - | - |
 | parser | Converts ChatMessage into ParsedMessage for consumption. When not set, ChatMessage is consumed directly. Supports converting one ChatMessage into multiple ParsedMessages | (message: ChatMessage) => BubbleMessage \| BubbleMessage[] | - | - |
-| requestFallback | Fallback message for failed requests. When not provided, no message will be displayed | ChatMessage \| () => ChatMessage | - | - |
-| requestPlaceholder | Placeholder message during requests. When not provided, no message will be displayed | ChatMessage \| () => ChatMessage | - | - |
+| requestFallback | Fallback message for failed requests. When not provided, no message will be displayed | ChatMessage \| (requestParams: Partial\<Input\>,info: { error: Error; messages: ChatMessage[], message: ChatMessage }) => ChatMessage\|Promise\<ChatMessage\> | - | - |
+| requestPlaceholder | Placeholder message during requests. When not provided, no message will be displayed | ChatMessage \| (requestParams: Partial\<Input\>, info: { error: Error; messages: ChatMessage[], message: ChatMessage }) => ChatMessage \|Promise<\Message\> | - | - |
 
 ### XChatConfigReturnType
 

@@ -20,14 +20,14 @@ enum MessageStatusEnum {
 
 export type MessageStatus = `${MessageStatusEnum}`;
 
-type RequestPlaceholderFn<Message extends SimpleType> = (
-  message: Message,
+type RequestPlaceholderFn<Input, Message> = (
+  requestParams: Partial<Input>,
   info: { messages: Message[] },
 ) => Message;
 
-type RequestFallbackFn<Message extends SimpleType> = (
-  message: Message,
-  info: { error: Error; messages: Message[] },
+type RequestFallbackFn<Input, Message extends SimpleType> = (
+  requestParams: Partial<Input>,
+  info: { error: Error; messages: Message[]; message: Message },
 ) => Message | Promise<Message>;
 
 export type RequestParams<Message> = {
@@ -45,8 +45,8 @@ export interface XChatConfig<
   defaultMessages?: DefaultMessageInfo<ChatMessage>[];
   /** Convert agent message to bubble usage message type */
   parser?: (message: ChatMessage) => BubbleMessage | BubbleMessage[];
-  requestPlaceholder?: ChatMessage | RequestPlaceholderFn<ChatMessage>;
-  requestFallback?: ChatMessage | RequestFallbackFn<ChatMessage>;
+  requestPlaceholder?: ChatMessage | RequestPlaceholderFn<Input, ChatMessage>;
+  requestFallback?: ChatMessage | RequestFallbackFn<Input, ChatMessage>;
 }
 
 export interface MessageInfo<Message extends SimpleType> {
@@ -75,6 +75,8 @@ export type StandardRequestResult<Message extends SimpleType> = Omit<
 function toArray<T>(item: T | T[]): T[] {
   return Array.isArray(item) ? item : [item];
 }
+
+const IsRequestingMap = new Map<string, boolean>();
 
 export default function useXChat<
   ChatMessage extends SimpleType = string,
@@ -169,7 +171,9 @@ export default function useXChat<
     }
     const { updatingId, reload } = opts || {};
     let loadingMsgId: number | string | null | undefined = null;
-    const message = provider.transformLocalMessage(requestParams);
+    const messages = (provider.transformLocalMessage(requestParams) as ChatMessage[]).map(
+      (message) => createMessage(message, 'local', opts?.extra),
+    );
     if (reload) {
       loadingMsgId = updatingId;
       setMessages((ori: MessageInfo<ChatMessage>[]) => {
@@ -178,9 +182,12 @@ export default function useXChat<
           let placeholderMsg: ChatMessage;
           if (typeof requestPlaceholder === 'function') {
             // typescript has bug that not get real return type when use `typeof function` check
-            placeholderMsg = (requestPlaceholder as RequestPlaceholderFn<ChatMessage>)(message, {
-              messages: getFilteredMessages(nextMessages),
-            });
+            placeholderMsg = (requestPlaceholder as RequestPlaceholderFn<Input, ChatMessage>)(
+              requestParams,
+              {
+                messages: getFilteredMessages(nextMessages),
+              },
+            );
           } else {
             placeholderMsg = requestPlaceholder;
           }
@@ -199,14 +206,17 @@ export default function useXChat<
     } else {
       // Add placeholder message
       setMessages((ori: MessageInfo<ChatMessage>[]) => {
-        let nextMessages = [...ori, createMessage(message, 'local', opts?.extra)];
+        let nextMessages = [...ori, ...messages];
         if (requestPlaceholder) {
           let placeholderMsg: ChatMessage;
           if (typeof requestPlaceholder === 'function') {
             // typescript has bug that not get real return type when use `typeof function` check
-            placeholderMsg = (requestPlaceholder as RequestPlaceholderFn<ChatMessage>)(message, {
-              messages: getFilteredMessages(nextMessages),
-            });
+            placeholderMsg = (requestPlaceholder as RequestPlaceholderFn<Input, ChatMessage>)(
+              requestParams,
+              {
+                messages: getFilteredMessages(nextMessages),
+              },
+            );
           } else {
             placeholderMsg = requestPlaceholder;
           }
@@ -288,10 +298,12 @@ export default function useXChat<
       },
       onSuccess: (chunks: Output[], headers: Headers) => {
         setIsRequesting(false);
+        conversationKey && IsRequestingMap.delete(conversationKey);
         updateMessage('success', undefined as Output, chunks, headers);
       },
       onError: async (error: Error) => {
         setIsRequesting(false);
+        conversationKey && IsRequestingMap.delete(conversationKey);
         if (requestFallback) {
           let fallbackMsg: ChatMessage;
           // Update as error
@@ -300,11 +312,12 @@ export default function useXChat<
             const messages = getRequestMessages();
             const msg = getMessages().find(
               (info) => info.id === loadingMsgId || info.id === updatingMsgId,
-            );
-            fallbackMsg = await (requestFallback as RequestFallbackFn<ChatMessage>)(
-              msg?.message || message,
+            ) as MessageInfo<ChatMessage>;
+            fallbackMsg = await (requestFallback as RequestFallbackFn<Input, ChatMessage>)(
+              requestParams,
               {
                 error,
+                message: msg.message as ChatMessage,
                 messages,
               },
             );
@@ -334,7 +347,9 @@ export default function useXChat<
         }
       },
     });
+
     setIsRequesting(true);
+    conversationKey && IsRequestingMap.set(conversationKey, true);
     provider.request.run(provider.transformParams(requestParams, provider.request.options));
   };
 
@@ -375,7 +390,7 @@ export default function useXChat<
       }
       requestHandlerRef.current?.abort();
     },
-    isRequesting,
+    isRequesting: conversationKey ? IsRequestingMap?.get(conversationKey) || false : isRequesting,
     onReload,
   } as const;
 }

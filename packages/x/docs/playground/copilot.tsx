@@ -259,8 +259,7 @@ const Copilot = (props: CopilotProps) => {
         role: 'assistant',
       };
     },
-    requestFallback: (message, info) => {
-      console.log(message, info);
+    requestFallback: (_, { message }) => {
       return message;
     },
   });

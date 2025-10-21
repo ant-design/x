@@ -81,10 +81,10 @@ export default () => {
         role: 'assistant',
       };
     },
-    requestFallback: (e) => {
+    requestFallback: (_, { error, message }) => {
       return {
-        ...e,
-        content: e.content,
+        role: message?.role,
+        content: error.message,
       };
     },
   });
