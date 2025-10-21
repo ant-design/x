@@ -171,8 +171,9 @@ export default function useXChat<
     }
     const { updatingId, reload } = opts || {};
     let loadingMsgId: number | string | null | undefined = null;
-    const messages = (provider.transformLocalMessage(requestParams) as ChatMessage[]).map(
-      (message) => createMessage(message, 'local', opts?.extra),
+    const localMessage = provider.transformLocalMessage(requestParams);
+    const messages = (Array.isArray(localMessage) ? localMessage : [localMessage]).map((message) =>
+      createMessage(message, 'local', opts?.extra),
     );
     if (reload) {
       loadingMsgId = updatingId;

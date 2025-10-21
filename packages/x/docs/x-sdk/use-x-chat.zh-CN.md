@@ -45,7 +45,7 @@ type useXChat<
 | defaultMessages | 默认展示信息 | { message: ChatMessage ,status: MessageStatus}[] | - | - |
 | parser | 将 ChatMessage 转换成消费使用的 ParsedMessage，不设置时则直接消费 ChatMessage。支持将一条 ChatMessage 转换成多条 ParsedMessage | (message: ChatMessage) => BubbleMessage \| BubbleMessage[] | - | - |
 | requestFallback | 请求失败的兜底信息，不提供则不会展示 | ChatMessage \| (requestParams: Partial\<Input\>,info: { error: Error; messages: ChatMessage[], message: ChatMessage }) => ChatMessage\|Promise\<ChatMessage\> | - | - |
-| requestPlaceholder | 请求中的占位信息，不提供则不会展示 | ChatMessage \| (requestParams: Partial\<Input\>, info: { error: Error; messages: ChatMessage[], message: ChatMessage }) => ChatMessage \|Promise<\Message\>| - | - |
+| requestPlaceholder | 请求中的占位信息，不提供则不会展示 | ChatMessage \| (requestParams: Partial\<Input\>, info: { error: Error; messagesInfo: { id: string \| number; message: ChatMessage; status: MessageStatus; }, message: ChatMessage }) => ChatMessage \|Promise<\Message\>| - | - |
 
 ### XChatConfigReturnType
 

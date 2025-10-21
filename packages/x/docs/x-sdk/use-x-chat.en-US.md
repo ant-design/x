@@ -45,7 +45,7 @@ type useXChat<
 | defaultMessages | Default display messages | { message: ChatMessage, status: MessageStatus }[] | - | - |
 | parser | Converts ChatMessage into ParsedMessage for consumption. When not set, ChatMessage is consumed directly. Supports converting one ChatMessage into multiple ParsedMessages | (message: ChatMessage) => BubbleMessage \| BubbleMessage[] | - | - |
 | requestFallback | Fallback message for failed requests. When not provided, no message will be displayed | ChatMessage \| (requestParams: Partial\<Input\>,info: { error: Error; messages: ChatMessage[], message: ChatMessage }) => ChatMessage\|Promise\<ChatMessage\> | - | - |
-| requestPlaceholder | Placeholder message during requests. When not provided, no message will be displayed | ChatMessage \| (requestParams: Partial\<Input\>, info: { error: Error; messages: ChatMessage[], message: ChatMessage }) => ChatMessage \|Promise<\Message\> | - | - |
+| requestPlaceholder | Placeholder message during requests. When not provided, no message will be displayed | ChatMessage \| (requestParams: Partial\<Input\>, info: { error: Error; messages: ChatMessage[], messagesInfo: { id: string \| number; message: ChatMessage; status: MessageStatus; } }) => ChatMessage \|Promise<\Message\> | - | - |
 
 ### XChatConfigReturnType
 

@@ -76,7 +76,7 @@ describe('DefaultChatProvider test', () => {
       }),
     });
     const defaultMsg = defaultProvider.transformLocalMessage({ test: 'test' });
-    expect(defaultMsg).toEqual([{ test: 'test' }]);
+    expect(defaultMsg).toEqual({ test: 'test' });
   });
 
   it('should transformMessage work successfully', () => {
