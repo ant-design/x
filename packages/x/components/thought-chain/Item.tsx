@@ -1,7 +1,9 @@
 import classnames from 'classnames';
+import CSSMotion from 'rc-motion';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
+import { initMoveMotion } from '../style/motion';
 import { useXProviderContext } from '../x-provider';
 import Status, { THOUGHT_CHAIN_ITEM_STATUS } from './Status';
 import useStyle from './style';
@@ -113,14 +115,14 @@ const Item = React.forwardRef<ItemRef, ThoughtChainItemProps>((props, ref) => {
   const prefixCls = getPrefixCls('thought-chain', customizePrefixCls);
   const [hashId, cssVarCls] = useStyle(prefixCls);
   const itemCls = `${prefixCls}-item`;
-
+  const motionClassName = `${prefixCls}-motion`;
   // ============================ Render ============================
   return (
     <div
       ref={itemRef}
       key={key || id}
       onClick={onClick}
-      style={style}
+      style={{ ...style }}
       className={classnames(
         prefixCls,
         hashId,
@@ -151,7 +153,7 @@ const Item = React.forwardRef<ItemRef, ThoughtChainItemProps>((props, ref) => {
         {title && (
           <div
             style={styles?.title}
-            className={classnames(`${itemCls}-title`, classNames?.title, {
+            className={classnames(`${itemCls}-title`, motionClassName, classNames?.title, {
               [`${itemCls}-title-with-description`]: description,
             })}
           >

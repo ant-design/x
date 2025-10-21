@@ -1,9 +1,11 @@
 import { unit } from '@ant-design/cssinjs/lib/util';
+import { initFadeMotion } from 'antd/es/style/motion';
 import type { GenerateStyle } from '../../theme/cssinjs-utils';
 import type { ThoughtChainToken } from '.';
 
 const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (token) => {
   const { componentCls, calc } = token;
+  console.log(initFadeMotion(token), 11111);
   const itemCls = `${componentCls}-item`;
   return {
     [componentCls]: {
@@ -20,6 +22,7 @@ const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (token) => {
         color: token.colorPrimary,
       },
     },
+    [`${itemCls}-root`]: initFadeMotion(token),
     [itemCls]: {
       display: 'inline-flex',
       gap: unit(calc(token.marginXXS).add(1).equal()),

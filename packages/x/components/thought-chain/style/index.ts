@@ -5,6 +5,7 @@ import { genCollapseMotion } from '../../style/motion';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
 import genThoughtChainItemStyle from './item';
+import genMotionStyle from './motion';
 
 export interface ComponentToken {
   /**
@@ -159,6 +160,7 @@ export default genStyleHooks<'ThoughtChain'>(
       genThoughtChainStyle(compToken),
       genThoughtChainItemStyle(compToken),
       genCollapseMotion(compToken),
+      genMotionStyle(compToken),
     ];
   },
   prepareComponentToken,
