@@ -105,6 +105,7 @@ const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
           <XMarkdown
             content={displayText}
             className={className}
+            paragraphTag="div"
             components={{ 'incomplete-image': ImageSkeleton, 'incomplete-link': LinkSkeleton }}
             streaming={{ hasNextChunk: isStreaming }}
           />

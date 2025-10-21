@@ -237,7 +237,6 @@ const useStreaming = (input: string, config?: XMarkdownProps['streaming']) => {
 
       const cache = cacheRef.current;
       const expectedPrefix = cache.completeMarkdown + cache.pending;
-
       // Reset cache if input doesn't continue from previous state
       if (!text.startsWith(expectedPrefix)) {
         cacheRef.current = getInitialCache();
@@ -247,19 +246,16 @@ const useStreaming = (input: string, config?: XMarkdownProps['streaming']) => {
       if (!chunk) return;
 
       cache.processedLength += chunk.length;
-
+      const isTextInBlock = isInCodeBlock(text);
       // Skip processing if inside code block
-
       for (const char of chunk) {
         cache.pending += char;
-
-        if (isInCodeBlock(text)) {
+        if (isTextInBlock) {
           commitCache(cache);
         } else {
-          // Process all recognizers
-          for (const recognizer of recognizers) {
-            recognizer(cache);
-          }
+          recognizers.forEach((recognize) => {
+            recognize(cache);
+          });
         }
       }
 
@@ -276,11 +272,7 @@ const useStreaming = (input: string, config?: XMarkdownProps['streaming']) => {
       return;
     }
 
-    if (enableCache) {
-      processStreaming(input);
-    } else {
-      setOutput(input);
-    }
+    enableCache ? processStreaming(input) : setOutput(input);
   }, [input, enableCache, processStreaming]);
 
   return output;
