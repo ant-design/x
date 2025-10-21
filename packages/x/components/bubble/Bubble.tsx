@@ -11,8 +11,8 @@ import type {
   BubbleProps,
   BubbleRef,
   BubbleSlot,
-  BubbleSlotType,
   EditableBubbleOption,
+  SemanticType,
 } from './interface';
 import Loading from './loading';
 import useBubbleStyle from './style';
@@ -22,7 +22,6 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
   {
     prefixCls: customizePrefixCls,
     rootClassName,
-    rootStyle,
     style,
     className,
     styles = {},
@@ -72,7 +71,6 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
     ...contextConfig.style,
     ...contextConfig.styles.root,
     ...styles.root,
-    ...rootStyle,
     ...style,
   };
   const rootMergedCls = classnames(
@@ -197,14 +195,14 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
     );
   };
 
-  const getSlotClassName = (slotType: BubbleSlotType) =>
+  const getSlotClassName = (slotType: SemanticType) =>
     classnames(
       `${prefixCls}-${slotType}`,
       contextConfig.classNames[slotType],
       classNames[slotType],
     );
 
-  const getSlotStyle = (slotType: BubbleSlotType) => ({
+  const getSlotStyle = (slotType: SemanticType) => ({
     ...contextConfig.styles[slotType],
     ...styles[slotType],
   });

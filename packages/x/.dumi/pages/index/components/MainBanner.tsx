@@ -2,9 +2,9 @@ import { Button } from 'antd';
 import { createStyles } from 'antd-style';
 import classnames from 'classnames';
 import { useLocation } from 'dumi';
-import React from 'react';
+import type { AnimationDirection, AnimationItem } from 'lottie-web';
+import React, { lazy, Suspense, useRef } from 'react';
 import useLocale from '../../../hooks/useLocale';
-import useLottie from '../../../hooks/useLottie';
 import Link from '../../../theme/common/Link';
 import { getLocalizedPathname, isZhCN } from '../../../theme/utils';
 import Container from '../common/Container';
@@ -217,83 +217,35 @@ const MainBanner: React.FC = () => {
 
   const { styles } = useStyle();
 
-  const [bgLottieRef, bgAnimation] = useLottie({
-    renderer: 'svg',
-    loop: false,
-    autoplay: false,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
-    },
-    path: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*3QcuQpaOguQAAAAAAAAAAAAADgCCAQ',
-  });
+  const LottieComponent = lazy(() => import('./Lottie'));
 
-  const [ipLottieRef, ipAnimation] = useLottie({
-    renderer: 'svg',
-    loop: false,
-    autoplay: true,
-    disabled: isMobile,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid meet',
-    },
-    path: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*YbV2QqZdDQ0AAAAAAAAAAAAADgCCAQ',
-  });
+  const animationDirection = useRef<AnimationDirection>(1);
 
-  React.useEffect(() => {
-    if (!bgAnimation) return;
-
-    let isReverse = false;
-
-    function playAnimation() {
-      if (!bgAnimation) return;
-
-      if (isReverse) {
-        bgAnimation.setDirection(-1);
-        bgAnimation.goToAndPlay(bgAnimation.totalFrames - 1, true);
-      } else {
-        bgAnimation.setDirection(1);
-        bgAnimation.goToAndPlay(0, true);
-      }
-      isReverse = !isReverse;
-    }
-
-    bgAnimation.addEventListener('data_ready', playAnimation);
-
-    playAnimation();
-
-    return () => {
-      bgAnimation.destroy();
-    };
-  }, [!!bgAnimation]);
-
-  React.useEffect(() => {
-    if (!ipAnimation) return;
-
-    let reverseFrameInterval: NodeJS.Timeout;
-
-    ipAnimation.addEventListener('data_ready', () => {
-      let currentFrame = ipAnimation.totalFrames;
-      const reverseFrames = 30;
-
-      reverseFrameInterval = setInterval(() => {
-        currentFrame--;
-        ipAnimation.goToAndStop(currentFrame, true);
-
-        if (currentFrame <= ipAnimation.totalFrames - reverseFrames) {
-          clearInterval(reverseFrameInterval);
-          ipAnimation.play();
-        }
-      }, 1000 / 30);
+  const onLoad = (animation: AnimationItem) => {
+    animation?.addEventListener('complete', () => {
+      animation.loop = true;
+      animation.setSpeed(0.7);
+      animation.playSegments([100, 150], false);
     });
-
-    return () => {
-      ipAnimation.destroy();
-      window.clearInterval(reverseFrameInterval);
-    };
-  }, [!!ipAnimation]);
+  };
+  const onBackgroundLoad = (animation: AnimationItem) => {
+    animation?.addEventListener('complete', () => {
+      animationDirection.current = animationDirection.current === -1 ? 1 : -1;
+      animation.setDirection(animationDirection.current);
+      animation.setSpeed(0.6);
+      animation.play();
+    });
+  };
 
   return (
     <section className={styles.banner}>
-      <div ref={bgLottieRef} className={styles.background} />
+      <Suspense>
+        <LottieComponent
+          onLoad={onBackgroundLoad}
+          className={styles.background}
+          path="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*3QcuQpaOguQAAAAAAAAAAAAADgCCAQ"
+        />
+      </Suspense>
       <Container className={styles.container}>
         <div className={styles.title}>
           <h1 className={styles.name}>
@@ -319,10 +271,15 @@ const MainBanner: React.FC = () => {
             </Link>
           </div>
         </div>
-        <div
-          ref={ipLottieRef}
-          className={classnames(styles.lottie, direction === 'rtl' && styles.lottie_rtl)}
-        />
+        {!isMobile && (
+          <Suspense>
+            <LottieComponent
+              onLoad={onLoad}
+              className={classnames(styles.lottie, direction === 'rtl' && styles.lottie_rtl)}
+              path="https://mdn.alipayobjects.com/huamei_lkxviz/afts/file/n25_R7prS_0AAAAAQPAAAAgADtFMAQFr"
+            />
+          </Suspense>
+        )}
       </Container>
     </section>
   );

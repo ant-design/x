@@ -40,7 +40,7 @@ const useLottie = (options: UseLottieOptions) => {
   const [isIntersected, setIsIntersected] = React.useState(!lazyLoad);
   const animationInstanceRef = React.useRef<AnimationItem | null>(null);
   const [error, setError] = React.useState<Error | null>(null);
-
+  const [animationInstance, setAnimationInstance] = React.useState<AnimationItem>();
   React.useEffect(() => {
     if (disabled) return;
     let mounted = true;
@@ -59,7 +59,7 @@ const useLottie = (options: UseLottieOptions) => {
             renderer: 'svg', // 默认使用 SVG 渲染，性能更好
             ...stableLottieOptions,
           });
-
+          setAnimationInstance(animation);
           animationInstanceRef.current = animation;
         } catch (err) {
           if (mounted) {
@@ -108,7 +108,7 @@ const useLottie = (options: UseLottieOptions) => {
 
   return [
     containerRef,
-    animationInstanceRef.current,
+    animationInstance,
     {
       isIntersected,
       error,

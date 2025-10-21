@@ -145,8 +145,8 @@ const provider = new TboxProvider({
 const role: BubbleListProps['role'] = {
   assistant: {
     placement: 'start',
-    contentRender(content: any) {
-      const newContent = content.replaceAll('\n\n', '<br/><br/>');
+    contentRender(content: string) {
+      const newContent = content.replace('/\n\n/g', '<br/><br/>');
       return <XMarkdown content={newContent} />;
     },
   },

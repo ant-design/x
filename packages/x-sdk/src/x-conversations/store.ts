@@ -28,6 +28,7 @@ export class ConversationStore {
   private conversations: ConversationData[] = [];
   private listeners: (() => void)[] = [];
   private storeKey: string;
+  private activeConversationKey: string;
 
   private emitListeners() {
     this.listeners.forEach((listener) => {
@@ -35,12 +36,18 @@ export class ConversationStore {
     });
   }
 
-  constructor(defaultConversations: ConversationData[]) {
+  constructor(defaultConversations: ConversationData[], defaultActiveConversationKey: string) {
     this.setConversations(defaultConversations);
     this.storeKey = Math.random().toString();
     conversationStoreHelper.set(this.storeKey, this);
+    this.activeConversationKey = defaultActiveConversationKey;
   }
 
+  setActiveConversationKey = (key: string) => {
+    this.activeConversationKey = key;
+    this.emitListeners();
+    return true;
+  };
   setConversations = (list: ConversationData[]) => {
     this.conversations = [...list];
     this.emitListeners();
@@ -55,9 +62,9 @@ export class ConversationStore {
     const exist = this.getConversation(conversation.key);
     if (!exist) {
       this.setConversations(
-        placement === 'append'
-          ? [...this.conversations, conversation]
-          : [conversation, ...this.conversations],
+        placement === 'prepend'
+          ? [conversation, ...this.conversations]
+          : [...this.conversations, conversation],
       );
       return true;
     }
@@ -90,6 +97,10 @@ export class ConversationStore {
 
   getSnapshot = () => {
     return this.conversations;
+  };
+
+  getActiveConversationKey = () => {
+    return this.activeConversationKey;
   };
 
   subscribe = (callback: () => void) => {

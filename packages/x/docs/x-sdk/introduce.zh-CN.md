@@ -35,13 +35,17 @@ title: 介绍
 
 ## 示例
 
-```tsx
-import React from 'react';
+```sandpack
+const sandpackConfig = {
+  autorun: true,
+};
+
+import React,{ useEffect, useState } from 'react';
 import { XRequest } from '@ant-design/x-sdk';
 
 export default () => {
-  const [status, setStatus] = React.useState<'string'>('');
-  const [lines, setLines] = React.useState<Record<string, string>[]>([]);
+  const [status, setStatus] = useState<'string'>('');
+  const [lines, setLines] = useState<Record<string, string>[]>([]);
 
   useEffect(() => {
     setStatus('pending');

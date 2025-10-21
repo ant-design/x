@@ -30,11 +30,11 @@ const genBubbleListStyle: GenerateStyle<BubbleToken> = (token) => {
         width: '100%',
         boxSizing: 'border-box',
       },
-      [`& ${componentCls}-start`]: {
+      [`& ${componentCls}-start:not(${componentCls}-divider):not(${componentCls}-system)`]: {
         paddingInlineEnd: '15%',
       },
 
-      [`& ${componentCls}-end`]: {
+      [`& ${componentCls}-end:not(${componentCls}-divider):not(${componentCls}-system)`]: {
         paddingInlineStart: '15%',
       },
     },
