@@ -12,20 +12,21 @@ const demos = [
   {
     title: 'Image Syntax',
     content:
-      '![Ant Design X](https://mdn.alipayobjects.com/huamei_yz9z7c/afts/img/0lMhRYbo0-8AAAAAQDAAAAgADlJoAQFr/original) ',
+      'This is Image:\n\n ![Ant Design X](https://mdn.alipayobjects.com/huamei_yz9z7c/afts/img/0lMhRYbo0-8AAAAAQDAAAAgADlJoAQFr/original)',
   },
   {
     title: 'Link Syntax',
     content: 'Visit [Ant Design X](https://github.com/ant-design/x) for more details.',
   },
   {
+    title: 'Atx Heading',
+    content:
+      '# Heading1 \n ## Heading2 \n ### Heading3 \n #### Heading4 \n ##### Heading5 \n ###### Heading6',
+  },
+  {
     title: 'Emphasis',
     content:
       'This is **bold text** and this is *italic text*. You can also use ***bold and italic***.',
-  },
-  {
-    title: 'Code Block',
-    content: '1\n- *code*',
   },
 ];
 
@@ -36,7 +37,7 @@ const LinkSkeleton = () => (
 );
 
 const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
-  const [displayText, setDisplayText] = useState('');
+  const [displayText, setDisplayText] = useState(content);
   const [isStreaming, setIsStreaming] = useState(false);
   const [className] = useMarkdownTheme();
 
@@ -105,7 +106,7 @@ const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
             content={displayText}
             className={className}
             components={{ 'incomplete-image': ImageSkeleton, 'incomplete-link': LinkSkeleton }}
-            streaming={{ hasNextChunk: true }}
+            streaming={{ hasNextChunk: isStreaming }}
           />
         </div>
       </Card>

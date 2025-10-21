@@ -24,7 +24,7 @@ export interface StreamCache {
 const INCOMPLETE_REGEX = {
   image: [/^!\[[^\]\r\n]*$/, /^!\[[^\r\n]*\]\(*[^)\r\n]*$/],
   link: [/^\[[^\]\r\n]*$/, /^\[[^\r\n]*\]\(*[^)\r\n]*$/],
-  atxHeading: [/^#{1,6}$/, /^#{1,6}(?=\s)[^\r\n]*$/],
+  atxHeading: [/^#{1,6}(?=\s)*$/],
   html: [/^<[a-zA-Z][a-zA-Z0-9-]*[^>\r\n]*$/],
   commonEmphasis: [/^(\*+|_+)(?!\s)(?!.*\1$)[\s\S]*$/],
   list: [/^[-+*]\s*$/],
@@ -117,9 +117,7 @@ const recognizeLink = (cache: StreamCache): void => {
 
   if (token !== TokenType.IncompleteLink) return;
 
-  if (isTokenIncomplete.link(pending)) {
-    cache.token = TokenType.IncompleteLink;
-  } else {
+  if (!isTokenIncomplete.link(pending)) {
     commitCache(cache);
   }
 };
@@ -134,9 +132,7 @@ const recognizeAtxHeading = (cache: StreamCache): void => {
 
   if (token !== TokenType.IncompleteHeading) return;
 
-  if (isTokenIncomplete.atxHeading(pending)) {
-    cache.token = TokenType.IncompleteHeading;
-  } else {
+  if (!isTokenIncomplete.atxHeading(pending)) {
     commitCache(cache);
   }
 };
@@ -253,16 +249,18 @@ const useStreaming = (input: string, config?: XMarkdownProps['streaming']) => {
       cache.processedLength += chunk.length;
 
       // Skip processing if inside code block
-      if (isInCodeBlock(text)) {
-        setOutput(text);
-        return;
-      }
 
-      cache.pending += chunk;
+      for (const char of chunk) {
+        cache.pending += char;
 
-      // Process all recognizers
-      for (const recognizer of recognizers) {
-        recognizer(cache);
+        if (isInCodeBlock(text)) {
+          commitCache(cache);
+        } else {
+          // Process all recognizers
+          for (const recognizer of recognizers) {
+            recognizer(cache);
+          }
+        }
       }
 
       const incompletePlaceholder = handleIncompleteMarkdown(cache);

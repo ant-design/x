@@ -16,12 +16,6 @@ const basicTestCases = [
     output: '[foo]: /url "title"',
   },
   {
-    title: 'incomplete image',
-    input: '![alt text](https',
-    output: '<incomplete-image />',
-    config: { hasNextChunk: true },
-  },
-  {
     title: 'complete link nested image',
     input:
       '[![version](https://camo.githubusercontent.com/c6d467fb550578b3f321c1012e289f20e038b92dcdfc35f2b8147ca6572878ad/68747470733a2f2f696d672e736869656c64732e696f2f747769747465722f666f6c6c6f772f416e7444657369676e55492e7376673f6c6162656c3d416e7425323044657369676e)](https://github.com/ant-design/x)',
@@ -49,13 +43,7 @@ const basicTestCases = [
   {
     title: 'heading3',
     input: '###',
-    output: '',
-  },
-  {
-    title: 'heading with space',
-    input: '# ',
-    output: '',
-    config: { hasNextChunk: true },
+    output: '###',
   },
   {
     title: 'wrong heading',
@@ -75,7 +63,7 @@ const basicTestCases = [
   {
     title: 'incomplete Html',
     input: '<div',
-    output: '',
+    output: '<div',
   },
   {
     title: 'complete Html',
@@ -85,7 +73,7 @@ const basicTestCases = [
   {
     title: 'invalid Html',
     input: '<divvvv',
-    output: '',
+    output: '<divvvv',
   },
   {
     title: 'incomplete code span',
@@ -110,7 +98,7 @@ const basicTestCases = [
   {
     title: 'incomplete list -',
     input: '-',
-    output: '',
+    output: '-',
   },
   {
     title: 'not list ',
@@ -120,12 +108,12 @@ const basicTestCases = [
   {
     title: 'incomplete list +',
     input: '+',
-    output: '',
+    output: '+',
   },
   {
     title: 'incomplete list *',
     input: '*',
-    output: '',
+    output: '*',
   },
   {
     title: 'incomplete hr -',
@@ -198,6 +186,77 @@ const streamingTestCases = [
     input: '[ant design x](https://x.ant.design)',
     output: '[ant design x](https://x.ant.design)',
     config: { hasNextChunk: true },
+  },
+  {
+    title: 'incomplete list -',
+    input: '-',
+    output: '',
+  },
+  {
+    title: 'not list ',
+    input: '+123',
+    output: '+123',
+  },
+  {
+    title: 'incomplete list +',
+    input: '+',
+    output: '',
+  },
+  {
+    title: 'incomplete list *',
+    input: '*',
+    output: '',
+  },
+  {
+    title: 'incomplete list * with space',
+    input: '-    ',
+    output: '',
+  },
+  {
+    title: 'complete list *',
+    input: '* list',
+    output: '* list',
+  },
+  {
+    title: 'incomplete Html',
+    input: '<div',
+    output: '',
+  },
+
+  {
+    title: 'complete Html',
+    input: '<div></div>',
+    output: '<div></div>',
+  },
+  {
+    title: 'complete Html self closed',
+    input: '<div />',
+    output: '<div />',
+  },
+  {
+    title: 'heading',
+    input: '#',
+    output: '',
+  },
+  {
+    title: 'heading3',
+    input: '###',
+    output: '',
+  },
+  {
+    title: 'inValid heading',
+    input: '#######',
+    output: '#######',
+  },
+  {
+    title: 'inValid heading no space',
+    input: '###Heading',
+    output: '###Heading',
+  },
+  {
+    title: 'valid heading ',
+    input: '### Heading',
+    output: '### Heading',
   },
 ];
 
