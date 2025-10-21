@@ -12,6 +12,7 @@ import type { FileCardProps } from '../file-card';
 import { Locale } from '../locale';
 import type { PromptsProps } from '../prompts';
 import type { SenderProps } from '../sender';
+import type { SourcesProps } from '../sources';
 import type { SuggestionProps } from '../suggestion';
 import { OverrideToken } from '../theme/cssinjs-utils';
 import { MappingAlgorithm } from '../theme/interface';
@@ -47,6 +48,7 @@ export interface XComponentsConfig {
   actions?: ComponentConfig<ActionsProps>;
   think?: ComponentConfig<ThinkProps>;
   fileCard?: ComponentConfig<FileCardProps>;
+  sources?: ComponentConfig<SourcesProps>;
 }
 
 type ComponentsConfig = {

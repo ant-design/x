@@ -98,6 +98,75 @@ describe('XRequest Class', () => {
     expect(callbacks.onUpdate).toHaveBeenCalledWith(options.params, headers);
   });
 
+  test('should handle JSON response with success false and custom error fields', async () => {
+    const headers = {
+      get: jest.fn().mockReturnValue('application/json; charset=utf-8'),
+    };
+    const errorResponse = {
+      success: false,
+      name: 'ValidationError',
+      message: 'Invalid input parameters',
+    };
+    mockedXFetch.mockResolvedValueOnce({
+      ok: true,
+      status: 400,
+      headers,
+      json: jest.fn().mockResolvedValueOnce(errorResponse),
+    });
+    const request = XRequest(baseURL, options);
+    await request.asyncHandler;
+    expect(callbacks.onSuccess).not.toHaveBeenCalled();
+    expect(callbacks.onUpdate).not.toHaveBeenCalled();
+    const error = new Error('Invalid input parameters');
+    error.name = 'ValidationError';
+    expect(callbacks.onError).toHaveBeenCalledWith(error);
+  });
+
+  test('should handle JSON response with success false and default error fields', async () => {
+    const headers = {
+      get: jest.fn().mockReturnValue('application/json; charset=utf-8'),
+    };
+    const errorResponse = {
+      success: false,
+    };
+    mockedXFetch.mockResolvedValueOnce({
+      ok: true,
+      status: 500,
+      headers,
+      json: jest.fn().mockResolvedValueOnce(errorResponse),
+    });
+    const request = XRequest(baseURL, options);
+    await request.asyncHandler;
+    expect(callbacks.onSuccess).not.toHaveBeenCalled();
+    expect(callbacks.onUpdate).not.toHaveBeenCalled();
+    const error = new Error('System error');
+    error.name = 'SystemError';
+    expect(callbacks.onError).toHaveBeenCalledWith(error);
+  });
+
+  test('should handle JSON response with success false and partial error fields', async () => {
+    const headers = {
+      get: jest.fn().mockReturnValue('application/json; charset=utf-8'),
+    };
+    const errorResponse = {
+      success: false,
+      message: 'Custom error message',
+    };
+    mockedXFetch.mockResolvedValueOnce({
+      ok: true,
+      status: 422,
+      headers,
+      json: jest.fn().mockResolvedValueOnce(errorResponse),
+    });
+    const request = XRequest(baseURL, options);
+    await request.asyncHandler;
+    expect(callbacks.onSuccess).not.toHaveBeenCalled();
+    expect(callbacks.onUpdate).not.toHaveBeenCalled();
+    const error = new Error('Custom error message');
+    error.name = 'SystemError';
+    expect(callbacks.onError).toHaveBeenCalledWith(error);
+  });
+
   test('should create request and handle streaming response', async () => {
     const headers = {
       get: jest.fn().mockReturnValue('text/event-stream'),

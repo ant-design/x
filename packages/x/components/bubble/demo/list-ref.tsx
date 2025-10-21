@@ -109,11 +109,6 @@ const App = () => {
       <Bubble.List
         ref={listRef}
         style={{ maxHeight: 400 }}
-        styles={{
-          bubble: {
-            maxWidth: '90%',
-          },
-        }}
         role={memoRole}
         items={items}
         onScroll={(e) => {

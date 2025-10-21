@@ -51,14 +51,13 @@ showImport: false
 
 下面是使用原子组件搭建一个最简单的对话框的代码示例:
 
-```tsx
+```sandpack
+const sandpackConfig = {
+  autorun: true,
+};
+
 import React from 'react';
-import {
-  // 消息气泡
-  Bubble,
-  // 发送框
-  Sender,
-} from '@ant-design/x';
+import { Bubble, Sender} from '@ant-design/x';
 
 const messages = [
   {
@@ -69,7 +68,7 @@ const messages = [
 ];
 
 const App = () => (
-  <div>
+  <div style={{ height: '400px',display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
     <Bubble.List items={messages} />
     <Sender />
   </div>

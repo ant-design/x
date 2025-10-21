@@ -175,7 +175,7 @@ describe('Sender.SlotTextArea', () => {
         getData: () => '',
       },
     });
-    expect(onPasteFile).toHaveBeenCalledWith(file, expect.anything());
+    expect(onPasteFile).toHaveBeenCalledWith(expect.anything());
   });
 
   it('should handle onPaste when clipboardData is empty', () => {

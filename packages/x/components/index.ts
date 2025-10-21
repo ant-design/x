@@ -16,6 +16,8 @@ export type { PromptsItemType, PromptsProps } from './prompts';
 export { default as Prompts } from './prompts';
 export type { SenderProps } from './sender';
 export { default as Sender } from './sender';
+export type { SourcesProps } from './sources';
+export { default as Sources } from './sources';
 export { default as SenderSwitch } from './sender/SenderSwitch';
 export type { SuggestionProps } from './suggestion';
 export { default as Suggestion } from './suggestion';

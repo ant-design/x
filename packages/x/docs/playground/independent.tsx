@@ -90,7 +90,7 @@ const useStyle = createStyles(({ token, css }) => {
       overflow-y: auto;
       margin-top: 12px;
       padding: 0;
-    flex:1;
+      flex: 1;
       .ant-conversations-list {
         padding-inline-start: 0;
       }
@@ -110,7 +110,7 @@ const useStyle = createStyles(({ token, css }) => {
       display: flex;
       flex-direction: column;
       padding-block: ${token.paddingLG}px;
-      justify-content:space-between;
+      justify-content: space-between;
       .ant-bubble-content-updating {
         background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
         background-size: 100% 2px;
@@ -141,7 +141,7 @@ const useStyle = createStyles(({ token, css }) => {
       padding-top: 32px;
       width: 100%;
       padding-inline: ${token.paddingLG}px;
-     box-sizing: border-box;
+      box-sizing: border-box;
     `,
     // sender 样式
     sender: css`
@@ -478,7 +478,7 @@ const getRole = (className: string): BubbleListProps['role'] => ({
       ),
     },
     contentRender: (content: any, { status }) => {
-      const newContent = content.replaceAll('\n\n', '<br/>');
+      const newContent = content.replace('/\n\n/g', '<br/><br/>');
       return (
         <XMarkdown
           paragraphTag="div"
@@ -503,14 +503,16 @@ const Independent: React.FC = () => {
   const { styles } = useStyle();
   // ==================== State ====================
 
-  const { conversations, addConversation, setConversations } = useXConversations({
+  const {
+    conversations,
+    activeConversationKey,
+    setActiveConversationKey,
+    addConversation,
+    setConversations,
+  } = useXConversations({
     defaultConversations: DEFAULT_CONVERSATIONS_ITEMS,
+    defaultActiveConversationKey: DEFAULT_CONVERSATIONS_ITEMS[0].key,
   });
-
-  const [curConversation, setCurConversation] = useState<string>(
-    DEFAULT_CONVERSATIONS_ITEMS[0].key,
-  );
-  const [activeConversation, setActiveConversation] = useState<string>();
 
   const [className] = useMarkdownTheme();
   const [messageApi, contextHolder] = message.useMessage();
@@ -522,9 +524,9 @@ const Independent: React.FC = () => {
   // ==================== Runtime ====================
 
   const { onRequest, messages, isRequesting, abort, onReload, setMessage } = useXChat<ChatMessage>({
-    provider: providerFactory(curConversation), // every conversation has its own provider
-    conversationKey: curConversation,
-    defaultMessages: historyMessageFactory(curConversation),
+    provider: providerFactory(activeConversationKey), // every conversation has its own provider
+    conversationKey: activeConversationKey,
+    defaultMessages: historyMessageFactory(activeConversationKey),
     requestPlaceholder: () => {
       return {
         content: locale.noData,
@@ -545,7 +547,7 @@ const Independent: React.FC = () => {
     onRequest({
       messages: [{ role: 'user', content: val }],
     });
-    setActiveConversation(curConversation);
+    setActiveConversationKey(activeConversationKey);
   };
 
   // ==================== Nodes ====================
@@ -576,21 +578,17 @@ const Independent: React.FC = () => {
               label: `${locale.newConversation} ${conversations.length + 1}`,
               group: locale.today,
             });
-            setCurConversation(now);
+            setActiveConversationKey(now);
           },
         }}
-        items={conversations
-          .map(({ key, label, ...other }) => ({
-            key,
-            label: key === activeConversation ? `[${locale.curConversation}]${label}` : label,
-            ...other,
-          }))
-          .sort(({ key }) => (key === activeConversation ? -1 : 0))}
+        items={conversations.map(({ key, label, ...other }) => ({
+          key,
+          label: key === activeConversationKey ? `[${locale.curConversation}]${label}` : label,
+          ...other,
+        }))}
         className={styles.conversations}
-        activeKey={curConversation}
-        onActiveChange={async (val) => {
-          setCurConversation(val);
-        }}
+        activeKey={activeConversationKey}
+        onActiveChange={setActiveConversationKey}
         groupable
         styles={{ item: { padding: '0 8px' } }}
         menu={(conversation) => ({
@@ -609,8 +607,8 @@ const Independent: React.FC = () => {
                 const newList = conversations.filter((item) => item.key !== conversation.key);
                 const newKey = newList?.[0]?.key;
                 setConversations(newList);
-                if (conversation.key === curConversation) {
-                  setCurConversation(newKey);
+                if (conversation.key === activeConversationKey) {
+                  setActiveConversationKey(newKey);
                 }
               },
             },

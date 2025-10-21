@@ -8,17 +8,17 @@ Array [
     rel="preload"
   />,
   <div
-    class="ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-vertical"
+    class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-vertical"
   >
     <div
-      class="ant-card ant-card-bordered css-var-«Rd»"
+      class="ant-card ant-card-bordered css-var-_R_d_"
       style="border-radius:0"
     >
       <div
         class="ant-card-body"
       >
         <div
-          class="ant-welcome css-var-«Rd» ant-welcome-filled ant-flex css-var-«Rd»"
+          class="ant-welcome css-var-_R_d_ ant-welcome-filled ant-flex css-var-_R_d_"
           style="background-image:linear-gradient(97deg, #f2f9fe 0%, #f7f3ff 100%);border-start-start-radius:4px"
         >
           <div
@@ -30,15 +30,15 @@ Array [
             />
           </div>
           <div
-            class="ant-welcome-content-wrapper ant-flex css-var-«Rd» ant-flex-align-stretch ant-flex-vertical"
+            class="ant-welcome-content-wrapper ant-flex css-var-_R_d_ ant-flex-align-stretch ant-flex-vertical"
           >
             <h4
-              class="ant-typography ant-welcome-title css-var-«Rd»"
+              class="ant-typography ant-welcome-title css-var-_R_d_"
             >
               Hello, I'm Ant Design X
             </h4>
             <span
-              class="ant-typography ant-welcome-description css-var-«Rd»"
+              class="ant-typography ant-welcome-description css-var-_R_d_"
             >
               Base on Ant Design, AGI product interface solution, create a better intelligent vision~
             </span>
@@ -47,14 +47,14 @@ Array [
       </div>
     </div>
     <div
-      class="ant-card ant-card-bordered css-var-«Rl»"
+      class="ant-card ant-card-bordered css-var-_R_l_"
       style="border-radius:0"
     >
       <div
         class="ant-card-body"
       >
         <div
-          class="ant-welcome css-var-«Rl» ant-welcome-filled ant-flex css-var-«Rl»"
+          class="ant-welcome css-var-_R_l_ ant-welcome-filled ant-flex css-var-_R_l_"
           style="background-image:linear-gradient(97deg, rgba(90,196,255,0.12) 0%, rgba(174,136,255,0.12) 100%);border-start-start-radius:4px"
         >
           <div
@@ -66,15 +66,15 @@ Array [
             />
           </div>
           <div
-            class="ant-welcome-content-wrapper ant-flex css-var-«Rl» ant-flex-align-stretch ant-flex-vertical"
+            class="ant-welcome-content-wrapper ant-flex css-var-_R_l_ ant-flex-align-stretch ant-flex-vertical"
           >
             <h4
-              class="ant-typography ant-welcome-title css-var-«Rl»"
+              class="ant-typography ant-welcome-title css-var-_R_l_"
             >
               Hello, I'm Ant Design X
             </h4>
             <span
-              class="ant-typography ant-welcome-description css-var-«Rl»"
+              class="ant-typography ant-welcome-description css-var-_R_l_"
             >
               Base on Ant Design, AGI product interface solution, create a better intelligent vision~
             </span>
@@ -94,7 +94,7 @@ Array [
     rel="preload"
   />,
   <div
-    class="ant-welcome css-var-«R0» ant-welcome-filled ant-flex css-var-«R0»"
+    class="ant-welcome css-var-_R_0_ ant-welcome-filled ant-flex css-var-_R_0_"
   >
     <div
       class="ant-welcome-icon"
@@ -105,15 +105,15 @@ Array [
       />
     </div>
     <div
-      class="ant-welcome-content-wrapper ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-vertical"
+      class="ant-welcome-content-wrapper ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-vertical"
     >
       <h4
-        class="ant-typography ant-welcome-title css-var-«R0»"
+        class="ant-typography ant-welcome-title css-var-_R_0_"
       >
         Hello, I'm Ant Design X
       </h4>
       <span
-        class="ant-typography ant-welcome-description css-var-«R0»"
+        class="ant-typography ant-welcome-description css-var-_R_0_"
       >
         Base on Ant Design, AGI product interface solution, create a better intelligent vision~
       </span>
@@ -130,7 +130,7 @@ Array [
     rel="preload"
   />,
   <div
-    class="ant-welcome css-var-«R0» ant-welcome-borderless ant-flex css-var-«R0»"
+    class="ant-welcome css-var-_R_0_ ant-welcome-borderless ant-flex css-var-_R_0_"
   >
     <div
       class="ant-welcome-icon"
@@ -141,13 +141,13 @@ Array [
       />
     </div>
     <div
-      class="ant-welcome-content-wrapper ant-flex css-var-«R0» ant-flex-align-stretch ant-flex-vertical"
+      class="ant-welcome-content-wrapper ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-vertical"
     >
       <div
-        class="ant-welcome-title-wrapper ant-flex css-var-«R0» ant-flex-align-flex-start"
+        class="ant-welcome-title-wrapper ant-flex css-var-_R_0_ ant-flex-align-flex-start"
       >
         <h4
-          class="ant-typography ant-welcome-title css-var-«R0»"
+          class="ant-typography ant-welcome-title css-var-_R_0_"
         >
           Hello, I'm Ant Design X
         </h4>
@@ -155,13 +155,13 @@ Array [
           class="ant-welcome-extra"
         >
           <div
-            class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-«R0»"
+            class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-_R_0_"
           >
             <div
               class="ant-space-item"
             >
               <button
-                class="ant-btn css-var-«R0» ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-icon-only"
+                class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-icon-only"
                 type="button"
               >
                 <span
@@ -193,7 +193,7 @@ Array [
               class="ant-space-item"
             >
               <button
-                class="ant-btn css-var-«R0» ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-icon-only"
+                class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-icon-only"
                 type="button"
               >
                 <span
@@ -225,7 +225,7 @@ Array [
         </div>
       </div>
       <span
-        class="ant-typography ant-welcome-description css-var-«R0»"
+        class="ant-typography ant-welcome-description css-var-_R_0_"
       >
         Base on Ant Design, AGI product interface solution, create a better intelligent vision~
       </span>

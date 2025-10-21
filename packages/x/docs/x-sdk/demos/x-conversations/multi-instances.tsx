@@ -3,7 +3,7 @@ import type { ConversationItemType, ConversationsProps } from '@ant-design/x';
 import { Conversations } from '@ant-design/x';
 import { useXConversations } from '@ant-design/x-sdk';
 import { Button, Col, Flex, Row, theme } from 'antd';
-import React, { useState } from 'react';
+import React from 'react';
 
 const items: ConversationItemType[] = Array.from({ length: 4 }).map((_, index) => ({
   key: `item${index + 1}`,
@@ -27,24 +27,20 @@ let otherIdx = 3;
 
 export default () => {
   const { token } = theme.useToken();
-  const [active, setActive] = useState('item1');
-  const [otherActive, setOtherActive] = useState('other2');
-  const handler = useXConversations({ defaultConversations: items as any });
-  const otherHandler = useXConversations({ defaultConversations: others as any });
+  const handler = useXConversations({
+    defaultConversations: items as any,
+    defaultActiveConversationKey: items[0].key,
+  });
+  const otherHandler = useXConversations({
+    defaultConversations: others as any,
+    defaultActiveConversationKey: others[0].key,
+  });
 
   // Customize the style of the container
   const style = {
     width: 256,
     background: token.colorBgContainer,
     borderRadius: token.borderRadius,
-  };
-
-  const onActiveChange = (value: string, type?: string) => {
-    if (type === 'other') {
-      setOtherActive(value);
-    } else {
-      setActive(value);
-    }
   };
 
   const onAdd = (type?: string) => {
@@ -62,7 +58,8 @@ export default () => {
 
   const onUpdate = (type?: string) => {
     const instance = type === 'other' ? otherHandler : handler;
-    const realActive = type === 'other' ? otherActive : active;
+    const realActive =
+      type === 'other' ? otherHandler.activeConversationKey : handler.activeConversationKey;
     instance.setConversation(realActive, { key: realActive, label: 'Updated Conversation Item' });
   };
 
@@ -101,9 +98,9 @@ export default () => {
           <h3>List 1</h3>
           <Conversations
             items={handler.conversations as ConversationItemType[]}
-            activeKey={active}
+            activeKey={handler.activeConversationKey}
             style={style}
-            onActiveChange={(active) => onActiveChange(active)}
+            onActiveChange={handler.setActiveConversationKey}
             menu={menuConfig}
           />
           <Flex gap="small">
@@ -115,9 +112,9 @@ export default () => {
           <h3>List 2</h3>
           <Conversations
             items={otherHandler.conversations as ConversationItemType[]}
-            activeKey={otherActive}
+            activeKey={otherHandler.activeConversationKey}
             style={style}
-            onActiveChange={(active) => onActiveChange(active, 'other')}
+            onActiveChange={otherHandler.setActiveConversationKey}
             menu={otherMenuConfig}
           />
           <Flex gap="small">

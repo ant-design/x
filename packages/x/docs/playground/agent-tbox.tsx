@@ -260,7 +260,7 @@ const useStyle = createStyles(({ token, css }) => {
       display: flex;
       flex-direction: column;
       padding-block: ${token.paddingLG}px;
-      justify-content:space-between;
+      justify-content: space-between;
       .ant-bubble-content-updating {
         background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
         background-size: 100% 2px;
@@ -284,7 +284,7 @@ const useStyle = createStyles(({ token, css }) => {
       display: flex;
       height: calc(100% - 120px);
       flex-direction: column;
-       align-items: center;
+      align-items: center;
       width: 100%;
     `,
     placeholder: css`
@@ -555,12 +555,16 @@ const AgentTbox: React.FC = () => {
   const locale = isZhCN ? { ...zhCN_antd, ...zhCN_X } : { ...enUS_antd, ...enUS_X };
   // ==================== State ====================
 
-  const { conversations, addConversation, setConversations } = useXConversations({
+  const {
+    conversations,
+    activeConversationKey,
+    setActiveConversationKey,
+    addConversation,
+    setConversations,
+  } = useXConversations({
     defaultConversations: DEFAULT_CONVERSATIONS_ITEMS,
+    defaultActiveConversationKey: DEFAULT_CONVERSATIONS_ITEMS[0].key,
   });
-  const [curConversation, setCurConversation] = useState<string>(
-    DEFAULT_CONVERSATIONS_ITEMS[0].key,
-  );
 
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -573,8 +577,8 @@ const AgentTbox: React.FC = () => {
   // ==================== Runtime ====================
 
   const { onRequest, messages, isRequesting, abort, onReload } = useXChat({
-    provider: providerFactory(curConversation), // every conversation has its own provider
-    conversationKey: curConversation,
+    provider: providerFactory(activeConversationKey), // every conversation has its own provider
+    conversationKey: activeConversationKey,
     requestPlaceholder: () => {
       return {
         content: t.noData,
@@ -620,18 +624,16 @@ const AgentTbox: React.FC = () => {
               label: `${t.newConversation} ${conversations.length + 1}`,
               group: t.today,
             });
-            setCurConversation(now);
+            setActiveConversationKey(now);
           },
         }}
         items={conversations.map(({ key, label }) => ({
           key,
-          label: key === curConversation ? `[${t.curConversation}]${label}` : label,
+          label: key === activeConversationKey ? `[${t.curConversation}]${label}` : label,
         }))}
         className={styles.conversations}
-        activeKey={curConversation}
-        onActiveChange={async (val) => {
-          setCurConversation(val);
-        }}
+        activeKey={activeConversationKey}
+        onActiveChange={setActiveConversationKey}
         groupable
         styles={{ item: { padding: '0 8px' } }}
         menu={(conversation) => ({
@@ -650,8 +652,8 @@ const AgentTbox: React.FC = () => {
                 const newList = conversations.filter((item) => item.key !== conversation.key);
                 const newKey = newList?.[0]?.key;
                 setConversations(newList);
-                if (conversation.key === curConversation) {
-                  setCurConversation(newKey);
+                if (conversation.key === activeConversationKey) {
+                  setActiveConversationKey(newKey);
                 }
               },
             },
