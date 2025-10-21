@@ -9,7 +9,7 @@ import type { ComponentProps, XMarkdownProps } from '../interface';
 interface RendererOptions {
   components?: XMarkdownProps['components'];
   dompurifyConfig?: DOMPurifyConfig;
-  enableAnimation?: NonNullable<XMarkdownProps['streaming']>['enableAnimation'];
+  streaming?: XMarkdownProps['streaming'];
 }
 
 class Renderer {
@@ -74,7 +74,7 @@ class Renderer {
   }
 
   private createReplaceElement(unclosedTags: Set<string> | undefined, cidRef: { current: number }) {
-    const enableAnimation = this.options.enableAnimation;
+    const { enableAnimation, animationConfig } = this.options.streaming || {};
     return (domNode: DOMNode) => {
       const key = cidRef.current++;
 
@@ -82,7 +82,7 @@ class Renderer {
       const isValidTextNode =
         domNode.type === 'text' && domNode.data && Renderer.NON_WHITESPACE_REGEX.test(domNode.data);
       if (enableAnimation && isValidTextNode) {
-        return React.createElement(AnimationText, { text: domNode.data, key });
+        return React.createElement(AnimationText, { text: domNode.data, key, animationConfig });
       }
 
       if (!('name' in domNode)) return;

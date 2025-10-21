@@ -49,7 +49,7 @@ const XMarkdown: React.FC<XMarkdownProps> = (props) => {
   const renderer = new Renderer({
     components: components,
     dompurifyConfig,
-    enableAnimation: streaming?.enableAnimation,
+    streaming,
   });
 
   const htmlString = parser.parse(displayContent);

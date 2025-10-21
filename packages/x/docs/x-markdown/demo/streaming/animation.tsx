@@ -159,7 +159,11 @@ const App = () => {
         content={text.slice(0, index)}
         className={className}
         contentRender={(content) => (
-          <XMarkdown streaming={{ enableAnimation, hasNextChunk }}>{content}</XMarkdown>
+          <XMarkdown
+            streaming={{ enableAnimation, hasNextChunk, animationConfig: { fadeDuration: 400 } }}
+          >
+            {content}
+          </XMarkdown>
         )}
         variant="outlined"
       />
