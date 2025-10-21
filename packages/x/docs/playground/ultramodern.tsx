@@ -287,10 +287,10 @@ const App = () => {
         role: 'assistant',
       };
     },
-    requestFallback: (_, { message }) => {
+    requestFallback: (_, { messageInfo }) => {
       return {
-        ...message,
-        content: message.content || locale.requestFailedPleaseTryAgain,
+        ...messageInfo?.message,
+        content: messageInfo?.message.content || locale.requestFailedPleaseTryAgain,
       };
     },
   });

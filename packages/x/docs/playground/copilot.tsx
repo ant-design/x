@@ -259,8 +259,8 @@ const Copilot = (props: CopilotProps) => {
         role: 'assistant',
       };
     },
-    requestFallback: (_, { message }) => {
-      return message;
+    requestFallback: (_, { messageInfo }) => {
+      return messageInfo?.message;
     },
   });
 

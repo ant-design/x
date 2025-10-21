@@ -81,13 +81,14 @@ export default () => {
         role: 'assistant',
       };
     },
-    requestFallback: (_, { error, message }) => {
+    requestFallback: (_, { error }) => {
       return {
-        role: message?.role,
+        role: 'assistant',
         content: error.message,
       };
     },
   });
+
   useEffect(() => {
     senderRef.current?.clear();
   }, [activeConversationKey]);

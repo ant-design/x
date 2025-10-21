@@ -76,7 +76,7 @@ describe('DefaultChatProvider test', () => {
       }),
     });
     const defaultMsg = defaultProvider.transformLocalMessage({ test: 'test' });
-    expect(defaultMsg).toEqual({ test: 'test' });
+    expect(defaultMsg).toEqual([{ test: 'test' }]);
   });
 
   it('should transformMessage work successfully', () => {
@@ -855,10 +855,12 @@ describe('DeepSeekChatProvider test', () => {
         },
       ],
     });
-    expect(openAIMsg).toEqual({
-      role: 'user',
-      content: 'test',
-    });
+    expect(openAIMsg).toEqual([
+      {
+        role: 'user',
+        content: 'test',
+      },
+    ]);
   });
 
   it('should transformMessage not throw error', () => {

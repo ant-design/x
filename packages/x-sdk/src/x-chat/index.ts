@@ -25,9 +25,9 @@ type RequestPlaceholderFn<Input, Message> = (
   info: { messages: Message[] },
 ) => Message;
 
-type RequestFallbackFn<Input, Message extends SimpleType> = (
+type RequestFallbackFn<Input, MessageInfo, Message> = (
   requestParams: Partial<Input>,
-  info: { error: Error; messages: Message[]; message: Message },
+  info: { error: Error; messages: Message[]; messageInfo: MessageInfo },
 ) => Message | Promise<Message>;
 
 export type RequestParams<Message> = {
@@ -46,7 +46,7 @@ export interface XChatConfig<
   /** Convert agent message to bubble usage message type */
   parser?: (message: ChatMessage) => BubbleMessage | BubbleMessage[];
   requestPlaceholder?: ChatMessage | RequestPlaceholderFn<Input, ChatMessage>;
-  requestFallback?: ChatMessage | RequestFallbackFn<Input, ChatMessage>;
+  requestFallback?: ChatMessage | RequestFallbackFn<Input, MessageInfo<ChatMessage>, ChatMessage>;
 }
 
 export interface MessageInfo<Message extends SimpleType> {
@@ -312,15 +312,15 @@ export default function useXChat<
             const messages = getRequestMessages();
             const msg = getMessages().find(
               (info) => info.id === loadingMsgId || info.id === updatingMsgId,
-            ) as MessageInfo<ChatMessage>;
-            fallbackMsg = await (requestFallback as RequestFallbackFn<Input, ChatMessage>)(
-              requestParams,
-              {
-                error,
-                message: msg.message as ChatMessage,
-                messages,
-              },
             );
+
+            fallbackMsg = await (
+              requestFallback as RequestFallbackFn<Input, MessageInfo<ChatMessage>, ChatMessage>
+            )(requestParams, {
+              error,
+              messageInfo: msg as MessageInfo<ChatMessage>,
+              messages,
+            });
           } else {
             fallbackMsg = requestFallback;
           }

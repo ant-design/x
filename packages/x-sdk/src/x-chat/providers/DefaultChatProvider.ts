@@ -19,8 +19,8 @@ export default class DefaultChatProvider<ChatMessage, Input, Output> extends Abs
     } as Input;
   }
 
-  transformLocalMessage(requestParams: Partial<Input>): ChatMessage {
-    return requestParams as unknown as ChatMessage;
+  transformLocalMessage(requestParams: Partial<Input>): ChatMessage[] {
+    return [requestParams as unknown as ChatMessage];
   }
 
   transformMessage(info: TransformMessage<ChatMessage, Output>): ChatMessage {
