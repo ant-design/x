@@ -5,14 +5,6 @@ import XMarkdown from '../../../XMarkdown';
 // Mock CSS import to avoid Jest issues
 jest.mock('katex/dist/katex.min.css', () => ({}));
 
-// Mock katex to return HTML instead of MathML
-jest.mock('katex', () => ({
-  renderToString: (text: string, options: any) => {
-    const displayClass = options?.displayMode ? 'katex-display' : 'katex';
-    return `<span class="${displayClass}"><span class="katex-mathml">${text}</span><span class="katex-html" aria-hidden="true">${text}</span></span>`;
-  },
-}));
-
 // Import the actual plugin after mocking
 import latexPlugin from '../index';
 
@@ -22,8 +14,15 @@ describe('LaTeX Plugin', () => {
       <XMarkdown config={{ extensions: latexPlugin() }}>{'$E=mc^2$'}</XMarkdown>,
     );
 
-    expect(container.innerHTML).toContain('katex');
-    expect(container.innerHTML).toContain('E=mc^2');
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should render inline LaTeX with $$\n..\n$$ syntax', () => {
+    const { container } = render(
+      <XMarkdown config={{ extensions: latexPlugin() }}>{'latex: \n$$\nE=mc^2\n$$'}</XMarkdown>,
+    );
+
+    expect(container).toMatchSnapshot();
   });
 
   it('should render block LaTeX with $$..$$ syntax', () => {
@@ -31,8 +30,7 @@ describe('LaTeX Plugin', () => {
       <XMarkdown config={{ extensions: latexPlugin() }}>{'$$\\frac{a}{b}$$'}</XMarkdown>,
     );
 
-    expect(container.innerHTML).toContain('katex');
-    expect(container.innerHTML).toContain('\\frac{a}{b}');
+    expect(container).toMatchSnapshot();
   });
 
   it('should render block LaTeX with \\[..\\] syntax', () => {
@@ -40,8 +38,7 @@ describe('LaTeX Plugin', () => {
       <XMarkdown config={{ extensions: latexPlugin() }}>{'\\[\\frac{a}{b}\\]'}</XMarkdown>,
     );
 
-    expect(container.innerHTML).toContain('katex');
-    expect(container.innerHTML).toContain('\\frac{a}{b}');
+    expect(container).toMatchSnapshot();
   });
 
   it('should handle LaTeX with surrounding text', () => {
@@ -51,8 +48,7 @@ describe('LaTeX Plugin', () => {
       </XMarkdown>,
     );
 
-    expect(container.innerHTML).toContain('katex');
-    expect(container.innerHTML).toContain('E=mc^2');
+    expect(container).toMatchSnapshot();
   });
 
   it('should handle multiple LaTeX formulas', () => {
@@ -60,9 +56,7 @@ describe('LaTeX Plugin', () => {
       <XMarkdown config={{ extensions: latexPlugin() }}>{'$a+b$ and $$\\frac{c}{d}$$'}</XMarkdown>,
     );
 
-    expect(container.innerHTML).toContain('katex');
-    expect(container.innerHTML).toContain('a+b');
-    expect(container.innerHTML).toContain('\\frac{c}{d}');
+    expect(container).toMatchSnapshot();
   });
 
   it('should handle align* syntax replacement', () => {
@@ -72,8 +66,7 @@ describe('LaTeX Plugin', () => {
       </XMarkdown>,
     );
 
-    expect(container.innerHTML).toContain('katex');
-    expect(container.innerHTML).toContain('aligned');
+    expect(container).toMatchSnapshot();
   });
 
   it('should handle empty content', () => {
@@ -81,7 +74,7 @@ describe('LaTeX Plugin', () => {
       <XMarkdown config={{ extensions: latexPlugin() }}>{''}</XMarkdown>,
     );
 
-    expect(container).toBeTruthy();
+    expect(container).toMatchSnapshot();
   });
 
   it('should handle content without LaTeX', () => {
@@ -89,7 +82,7 @@ describe('LaTeX Plugin', () => {
       <XMarkdown config={{ extensions: latexPlugin() }}>{'Just plain text'}</XMarkdown>,
     );
 
-    expect(container.innerHTML).not.toContain('katex');
+    expect(container).toMatchSnapshot();
   });
 
   it('should handle complex LaTeX expressions', () => {
@@ -99,8 +92,7 @@ describe('LaTeX Plugin', () => {
       </XMarkdown>,
     );
 
-    expect(container.innerHTML).toContain('katex');
-    expect(container.innerHTML).toContain('\\sum_{i=1}^{n} x_i');
+    expect(container).toMatchSnapshot();
   });
 
   it('should handle mixed LaTeX syntaxes', () => {
@@ -110,8 +102,6 @@ describe('LaTeX Plugin', () => {
       </XMarkdown>,
     );
 
-    expect(container.innerHTML).toContain('katex');
-    expect(container.innerHTML).toContain('x^2');
-    expect(container.innerHTML).toContain('\\int_0^1 f(x)dx');
+    expect(container).toMatchSnapshot();
   });
 });

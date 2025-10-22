@@ -3,7 +3,7 @@ import { TokenizerAndRendererExtension } from 'marked';
 
 import 'katex/dist/katex.min.css';
 
-const inlineRuleNonStandard = /^(?:\${1,2}([^$\n]+?)\${1,2}|\\\((.+?)\\\))/;
+const inlineRuleNonStandard = /^(?:\${1,2}([^$]+?)\${1,2}|\\\((.+?)\\\))/;
 const blockRule = /^(\${1,2})\n([\s\S]+?)\n\1(?:\n|$)|^\\\[((?:\\.|[^\\])+?)\\\]/;
 
 type LatexOption = {
