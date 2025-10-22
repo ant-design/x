@@ -19,7 +19,23 @@ describe('LaTeX Plugin', () => {
 
   it('should render inline LaTeX with $$\n..\n$$ syntax', () => {
     const { container } = render(
-      <XMarkdown config={{ extensions: latexPlugin() }}>{'latex: \n$$\nE=mc^2\n$$'}</XMarkdown>,
+      <XMarkdown config={{ extensions: latexPlugin() }}>
+        {
+          'latex: \n$$ \n f(\\lambda x + (1-\\lambda)y) \\leq \\lambda f(x) + (1-\\lambda) f(y) \n $$ '
+        }
+      </XMarkdown>,
+    );
+
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should render inline LaTeX with [\n..\n] syntax', () => {
+    const { container } = render(
+      <XMarkdown config={{ extensions: latexPlugin() }}>
+        {
+          'latex: \n\\[L^{CLIP}(\\theta) = \\mathbb{E}_t \\left[ \\min\\left( r_t(\\theta) \\hat{A}_t, \\text{clip}(r_t(\\theta), 1-\\epsilon, 1+\\epsilon) \\hat{A}_t \\right) \\right]\\]\n end'
+        }
+      </XMarkdown>,
     );
 
     expect(container).toMatchSnapshot();
