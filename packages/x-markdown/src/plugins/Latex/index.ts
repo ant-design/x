@@ -3,7 +3,8 @@ import { TokenizerAndRendererExtension } from 'marked';
 
 import 'katex/dist/katex.min.css';
 
-const inlineRuleNonStandard = /^(?:\${1,2}([^$]+?)\${1,2}|\\\((.+?)\\\))/;
+const inlineRuleNonStandard =
+  /^(?:\${1,2}([^$]+?)\${1,2}|\\\(([\s\S]*?)\\\)|\\\[((?:\\.|[^\\])*?)\\\])/;
 const blockRule = /^(\${1,2})\n([\s\S]+?)\n\1(?:\n|$)|^\\\[((?:\\.|[^\\])+?)\\\]/;
 
 type LatexOption = {
@@ -34,38 +35,30 @@ function createRenderer(options: KatexOptions, newlineAfter: boolean) {
 }
 
 function inlineKatex(renderer: Render, replaceAlignStart: boolean) {
-  const ruleReg = inlineRuleNonStandard;
   return {
     name: 'inlineKatex',
     level: 'inline' as ILevel,
     start(src: string) {
-      if (!src.includes('$') && !src.includes('\\(')) return;
+      const dollarIndex = src.indexOf('$');
+      const parenIndex = src.indexOf('\\(');
+      const bracketIndex = src.indexOf('\\[');
 
-      const indices = [src.indexOf('$'), src.indexOf('\\(')].filter((idx) => idx !== -1);
-
-      if (indices.length === 0) return;
-
-      const katexIndex = Math.min(...indices);
-      const possibleKatex = src.slice(katexIndex);
-
-      if (possibleKatex.match(ruleReg)) {
-        return katexIndex;
-      }
+      const indices = [dollarIndex, parenIndex, bracketIndex].filter((idx) => idx !== -1);
+      return indices.length > 0 ? Math.min(...indices) : undefined;
     },
     tokenizer(src: string) {
       const match = src.match(inlineRuleNonStandard);
-      if (match) {
-        let text = (match[1] || match[2]).trim();
-        if (replaceAlignStart) {
-          text = replaceAlign(text);
-        }
-        return {
-          type: 'inlineKatex',
-          raw: match[0],
-          text,
-          displayMode: false,
-        };
-      }
+      if (!match) return;
+
+      const rawText = (match[1] || match[2] || match[3] || '').trim();
+      const text = replaceAlignStart ? replaceAlign(rawText) : rawText;
+
+      return {
+        type: 'inlineKatex',
+        raw: match[0],
+        text,
+        displayMode: false,
+      };
     },
     renderer,
   };
