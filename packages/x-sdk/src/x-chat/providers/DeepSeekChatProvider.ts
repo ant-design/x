@@ -22,9 +22,8 @@ export default class DeepSeekChatProvider<
     } as unknown as Input;
   }
 
-  transformLocalMessage(requestParams: Partial<Input>): ChatMessage {
-    const lastMessage = requestParams?.messages?.[requestParams?.messages?.length - 1];
-    return lastMessage as unknown as ChatMessage;
+  transformLocalMessage(requestParams: Partial<Input>): ChatMessage[] {
+    return (requestParams?.messages || []) as ChatMessage[];
   }
 
   transformMessage(info: TransformMessage<ChatMessage, Output>): ChatMessage {

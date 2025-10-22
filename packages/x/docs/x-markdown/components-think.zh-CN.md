@@ -1,7 +1,7 @@
 ---
 group:
   title: 组件
-  order: 2
+  order: 5
 title: Think
 subtitle: 思考过程
 order: 2
