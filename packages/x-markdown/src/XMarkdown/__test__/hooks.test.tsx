@@ -1,6 +1,6 @@
 import { act, render, renderHook } from '@testing-library/react';
 import React from 'react';
-import { useAnimation, useStreaming } from '../hooks';
+import { useStreaming } from '../hooks';
 import type { XMarkdownProps } from '../interface';
 
 // 基础功能测试 - 只测试实际能工作的功能
@@ -483,33 +483,6 @@ describe('XMarkdown hooks', () => {
       });
 
       expect(result.current).toBe(firstResult);
-    });
-  });
-
-  describe('useAnimation', () => {
-    it('should return empty object when streaming is not enabled', () => {
-      const { result } = renderHook(() => useAnimation(undefined));
-      expect(result.current).toEqual({});
-    });
-
-    it('should return empty object when enableAnimation is false', () => {
-      const { result } = renderHook(() => useAnimation({ enableAnimation: false }));
-      expect(result.current).toEqual({});
-    });
-
-    it('should memoize components based on animationConfig', () => {
-      const animationConfig = { fadeDuration: 1000 };
-      const { result, rerender } = renderHook(
-        ({ config }) => useAnimation({ enableAnimation: true, animationConfig: config }),
-        { initialProps: { config: animationConfig } },
-      );
-
-      const firstResult = result.current;
-      rerender({ config: { ...animationConfig } }); // Same config
-      expect(result.current).toBe(firstResult);
-
-      rerender({ config: { fadeDuration: 2000 } }); // Different config
-      expect(result.current).not.toBe(firstResult);
     });
   });
 
