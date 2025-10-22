@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimationConfig } from './interface';
 
 export interface AnimationTextProps {
@@ -28,20 +28,20 @@ const AnimationText = React.memo<AnimationTextProps>((props) => {
     prevTextRef.current = text;
   }, [text]);
 
+  const animationStyle = useMemo(
+    () => ({
+      animation: `x-markdown-fadeIn ${fadeDuration}ms ${easing} forwards`,
+    }),
+    [fadeDuration, easing],
+  );
+
   return (
     <>
-      {chunks.map((text, index) => {
-        return (
-          <span
-            style={{
-              animation: `x-markdown-fadeIn ${fadeDuration}ms ${easing} forwards`,
-            }}
-            key={`${index}-${text}`}
-          >
-            {text}
-          </span>
-        );
-      })}
+      {chunks.map((text, index) => (
+        <span style={animationStyle} key={`${index}-${text}`}>
+          {text}
+        </span>
+      ))}
     </>
   );
 });
