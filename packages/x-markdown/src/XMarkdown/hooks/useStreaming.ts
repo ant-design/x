@@ -27,7 +27,7 @@ const INCOMPLETE_REGEX = {
   atxHeading: [/^#{1,6}(?=\s)*$/],
   html: [/^<[a-zA-Z][a-zA-Z0-9-]*[^>\r\n]*$/],
   commonEmphasis: [/^(\*+|_+)(?!\s)(?!.*\1$)[^\r\n]*$/],
-  list: [/^[-+*]\s*$/, /^[-+*]\s*(\*+|_+)(?!\s)(?!.*\1$)[^\r\n]*$$/],
+  list: [/^[-+*]\s*$/, /^[-+*]\s*(\*+|_+)(?!\s)(?!.*\1$)[^\r\n]*$/],
 } as const;
 
 const FENCED_CODE_REGEX = /^(`{3,}|~{3,})/;
