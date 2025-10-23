@@ -215,7 +215,7 @@ describe('Sender Component', () => {
         },
       });
 
-      expect(onPasteFile).toHaveBeenCalledWith(file, fileList);
+      expect(onPasteFile).toHaveBeenCalledWith(fileList);
     });
 
     it('should not trigger onPasteFile when no files', () => {
@@ -254,7 +254,7 @@ describe('Sender Component', () => {
         },
       });
 
-      expect(onPasteFile).toHaveBeenCalledWith(file1, fileList);
+      expect(onPasteFile).toHaveBeenCalledWith(fileList);
     });
   });
 });

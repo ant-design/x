@@ -1,7 +1,7 @@
 ---
 group:
   title: 组件
-  order: 2
+  order: 5
 title: DataChart
 subtitle: 数据图表
 order: 3

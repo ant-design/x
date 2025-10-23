@@ -1,6 +1,7 @@
 ---
 group:
   title: 插件集
+  order: 6
 title: 总览
 order: 1
 ---
@@ -34,4 +35,4 @@ import Latex from '@ant-design/x-markdown/plugins/latex';
 
 ## 自定义插件
 
-### 支持基于实现 Marked 所有插件，也可通过自定义方式来插件 [参考](/markdowns/custom-plugin-cn)
+### 支持基于实现 Marked 所有插件，也可通过自定义方式来插件 [参考](/x-markdowns/custom-plugin-cn)

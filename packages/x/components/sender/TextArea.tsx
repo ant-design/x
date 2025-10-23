@@ -142,7 +142,7 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
     const files = e.clipboardData?.files;
     const text = e.clipboardData?.getData('text/plain');
     if (!text && files?.length && onPasteFile) {
-      onPasteFile(files[0], files);
+      onPasteFile(files);
       e.preventDefault();
     }
 

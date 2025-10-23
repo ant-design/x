@@ -11,7 +11,7 @@ import type { MappingAlgorithm } from 'antd';
 import { App, theme as antdTheme } from 'antd';
 import type { DirectionType, ThemeConfig } from 'antd/es/config-provider';
 import { createSearchParams, useOutlet, useSearchParams, useServerInsertedHTML } from 'dumi';
-import React, {  useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 import { DarkContext } from '../../hooks/useDark';
 import useLayoutState from '../../hooks/useLayoutState';
@@ -26,7 +26,7 @@ import '@ant-design/v5-patch-for-react-19';
 type Entries<T> = { [K in keyof T]: [K, T[K]] }[keyof T][];
 type SiteState = Partial<Omit<SiteContextProps, 'updateSiteContext'>>;
 
-const RESPONSIVE_MOBILE = 768;
+const RESPONSIVE_MOBILE = 870;
 export const ANT_DESIGN_NOT_SHOW_BANNER = 'ANT_DESIGN_NOT_SHOW_BANNER';
 
 const getAlgorithm = (themes: ThemeName[] = []) =>

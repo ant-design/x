@@ -1,302 +1,279 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { XMarkdownProps } from '../interface';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import type { XMarkdownProps } from '../interface';
 
-enum TokenType {
+/* ------------ Type ------------ */
+export enum TokenType {
   Text = 0,
-  Link = 1,
-  Image = 2,
-  Heading = 3,
-  MaybeEmphasis = 4,
-  Emphasis = 5,
-  Strong = 6,
-  XML = 7,
-  MaybeCode = 8,
-  Code = 9,
-  MaybeHr = 10,
-  MaybeList = 11,
+  IncompleteLink = 1,
+  IncompleteImage = 2,
+  IncompleteHeading = 3,
+  IncompleteHtml = 4,
+  IncompleteEmphasis = 5,
+  IncompleteList = 6,
+  MaybeImage = 7,
 }
 
-const Markdown_Symbols = {
-  emphasis: ['*', '_'],
-  code: ['`'],
-  list: ['-', '+', '*'],
-};
+export interface StreamCache {
+  pending: string;
+  token: TokenType;
+  processedLength: number;
+  completeMarkdown: string;
+}
 
-const STREAM_BUFFER_INIT = {
-  processedLength: 0,
-  rawStream: '',
+/* ------------ Constants ------------ */
+const INCOMPLETE_REGEX = {
+  image: [/^!\[[^\]\r\n]*$/, /^!\[[^\r\n]*\]\(*[^)\r\n]*$/],
+  link: [/^\[[^\]\r\n]*$/, /^\[[^\r\n]*\]\(*[^)\r\n]*$/],
+  atxHeading: [/^#{1,6}(?=\s)*$/],
+  html: [/^<[a-zA-Z][a-zA-Z0-9-]*[^>\r\n]*$/],
+  commonEmphasis: [/^(\*+|_+)(?!\s)(?!.*\1$)[\s\S]*$/],
+  list: [/^[-+*]\s*$/],
+} as const;
+
+const FENCED_CODE_REGEX = /^(`{3,}|~{3,})/;
+
+/* ------------ Utils ------------ */
+const getInitialCache = (): StreamCache => ({
   pending: '',
   token: TokenType.Text,
-  tokens: [TokenType.Text],
-  headingLevel: 0,
-  emphasisCount: 0,
-  backtickCount: 0,
+  processedLength: 0,
+  completeMarkdown: '',
+});
+
+const commitCache = (cache: StreamCache): void => {
+  if (cache.pending) {
+    cache.completeMarkdown += cache.pending;
+    cache.pending = '';
+  }
+  cache.token = TokenType.Text;
 };
 
-const useStreaming = (input: string, config?: XMarkdownProps['streaming']) => {
-  const { hasNextChunk = false } = config || {};
+const isInCodeBlock = (text: string): boolean => {
+  const lines = text.split('\n');
+  let inFenced = false;
+  let fenceChar = '';
+  let fenceLen = 0;
 
-  const [output, setOutput] = useState('');
-  const streamBuffer = useRef({ ...STREAM_BUFFER_INIT });
+  for (const rawLine of lines) {
+    const line = rawLine.endsWith('\r') ? rawLine.slice(0, -1) : rawLine;
 
-  const pushToken = useCallback((type: TokenType) => {
-    streamBuffer.current.tokens = [...streamBuffer.current.tokens, type];
-    streamBuffer.current.token = type;
-  }, []);
+    const fenceMatch = line.match(FENCED_CODE_REGEX);
+    if (fenceMatch) {
+      const currentFence = fenceMatch[1];
+      const char = currentFence[0];
+      const len = currentFence.length;
 
-  const popToken = useCallback(() => {
-    const { tokens } = streamBuffer.current;
-    if (tokens.length <= 1) return;
-
-    const newTokens = [...tokens.slice(0, -1)];
-    streamBuffer.current.tokens = newTokens;
-    streamBuffer.current.token = newTokens[newTokens.length - 1];
-  }, []);
-
-  const flushOutput = (needPopToken = true) => {
-    if (needPopToken) popToken();
-
-    streamBuffer.current.pending = '';
-    const renderText = streamBuffer.current.rawStream;
-    if (renderText) {
-      setOutput(renderText);
-    }
-  };
-
-  const handleChunk = (chunk: string) => {
-    const buffer = streamBuffer.current;
-    for (const char of chunk) {
-      buffer.rawStream += char;
-      buffer.pending += char;
-
-      const { token, pending, tokens, emphasisCount } = buffer;
-      switch (token) {
-        case TokenType.Image: {
-          /**
-           * \![
-           *   ^
-           */
-          const isInvalidStart = pending.indexOf('![') === -1;
-          /**
-           * \![image]()
-           *           ^
-           */
-          const isImageEnd = char === ')' || char === '\n';
-          if (isInvalidStart || isImageEnd) {
-            if (tokens[tokens.length - 2] === TokenType.Link) {
-              popToken();
-            } else {
-              flushOutput();
-            }
-          }
-          break;
-        }
-        case TokenType.Link: {
-          // not support link reference definitions, [foo]: /url "title" \n[foo]
-          const isReferenceLink = pending.endsWith(']:');
-          const isLinkEnd = char === ')' || char === '\n';
-          const isImageInLink = char === '!';
-          if (isImageInLink) {
-            pushToken(TokenType.Image);
-          } else if (isLinkEnd || isReferenceLink) {
-            flushOutput();
-          }
-          break;
-        }
-        case TokenType.Heading: {
-          /**
-           * # token / ## token / #####token
-           *  ^         ^              ^
-           */
-          buffer.headingLevel++;
-
-          const shouldFlushOutput = char !== '#' || buffer.headingLevel >= 6;
-          if (shouldFlushOutput) {
-            flushOutput();
-            buffer.headingLevel = 0;
-          }
-          break;
-        }
-        case TokenType.MaybeEmphasis: {
-          /**
-             * /* / *\/n
-                ^     ^
-             */
-          const shouldFlushOutput = char === ' ' || char === '\n';
-          if (shouldFlushOutput) {
-            flushOutput();
-          } else if (Markdown_Symbols.emphasis.includes(char)) {
-            buffer.emphasisCount++;
-          } else {
-            popToken();
-            if (emphasisCount === 1) {
-              /**
-               * _token_ / *token*
-               * ^         ^
-               */
-              pushToken(TokenType.Emphasis);
-            } else if (emphasisCount === 2) {
-              /**
-               * __token__ / **token**
-               *  ^           ^
-               */
-              pushToken(TokenType.Strong);
-            } else if (emphasisCount === 3) {
-              /**
-               * ___token___ / ***token***
-               *   ^             ^
-               */
-              pushToken(TokenType.Emphasis);
-              pushToken(TokenType.Strong);
-            } else {
-              // no more than 3
-              buffer.emphasisCount = 0;
-            }
-          }
-
-          break;
-        }
-        case TokenType.Strong: {
-          /**
-           * __token__ / **token**
-           *         ^           ^
-           */
-          if (char === '\n') {
-            flushOutput();
-          } else if (pending.endsWith('**') || pending.endsWith('__')) {
-            if (tokens[tokens.length - 2] === TokenType.Emphasis) {
-              popToken();
-            } else {
-              flushOutput();
-            }
-          }
-
-          break;
-        }
-        case TokenType.Emphasis: {
-          /**
-           * _token_ / *token*
-           *       ^         ^
-           */
-          if (char === '\n') {
-            flushOutput();
-            buffer.emphasisCount = 0;
-          } else if (Markdown_Symbols.emphasis.includes(char)) {
-            flushOutput();
-            buffer.emphasisCount = 0;
-          }
-
-          break;
-        }
-        case TokenType.XML: {
-          /**
-           * <XML /> /<XML></XML>
-           *       ^      ^
-           */
-          const shouldFlushOutput = char === '>' || pending === '< ' || char === '\n';
-          if (shouldFlushOutput) {
-            flushOutput();
-            continue;
-          }
-          break;
-        }
-        case TokenType.MaybeCode: {
-          if (char === '`') {
-            buffer.backtickCount++;
-          } else {
-            if (buffer.backtickCount > 2) {
-              /**
-               * ```
-               *   ^
-               */
-              flushOutput();
-              buffer.backtickCount = 0;
-            } else {
-              /**
-               * ``
-               *  ^
-               */
-              popToken();
-              pushToken(TokenType.Code);
-            }
-          }
-          break;
-        }
-        case TokenType.Code: {
-          if (char === '`') {
-            buffer.backtickCount--;
-          }
-
-          if (buffer.backtickCount === 0) {
-            flushOutput();
-            buffer.backtickCount = 0;
-          }
-          break;
-        }
-        case TokenType.MaybeHr: {
-          if (char !== '-' && char !== '=') {
-            flushOutput();
-          }
-          break;
-        }
-        case TokenType.MaybeList: {
-          if (char !== ' ') {
-            flushOutput();
-          }
-          break;
-        }
-        default: {
-          buffer.pending = char;
-
-          if (char === '!') {
-            pushToken(TokenType.Image);
-          } else if (char === '[') {
-            pushToken(TokenType.Link);
-          } else if (char === '#') {
-            pushToken(TokenType.Heading);
-          } else if (char === '_' || char === '*') {
-            pushToken(TokenType.MaybeEmphasis);
-            buffer.emphasisCount = 1;
-          } else if (char === '<') {
-            pushToken(TokenType.XML);
-          } else if (char === '`') {
-            pushToken(TokenType.MaybeCode);
-            buffer.backtickCount = 1;
-          } else if (char === '-' || char === '=') {
-            pushToken(TokenType.MaybeHr);
-          } else if (Markdown_Symbols.list.includes(char)) {
-            pushToken(TokenType.MaybeList);
-          } else {
-            flushOutput(false);
-          }
-        }
+      if (!inFenced) {
+        inFenced = true;
+        fenceChar = char;
+        fenceLen = len;
+      } else if (char === fenceChar && len >= fenceLen) {
+        inFenced = false;
+        fenceChar = '';
+        fenceLen = 0;
       }
     }
-  };
+  }
+
+  return inFenced;
+};
+
+/* ------------ Recognizers ------------ */
+const isTokenIncomplete = {
+  image: (markdown: string): boolean => INCOMPLETE_REGEX.image.some((re) => re.test(markdown)),
+  link: (markdown: string): boolean => INCOMPLETE_REGEX.link.some((re) => re.test(markdown)),
+  atxHeading: (markdown: string): boolean =>
+    INCOMPLETE_REGEX.atxHeading.some((re) => re.test(markdown)),
+  html: (markdown: string): boolean => INCOMPLETE_REGEX.html.some((re) => re.test(markdown)),
+  commonEmphasis: (markdown: string): boolean =>
+    INCOMPLETE_REGEX.commonEmphasis.some((re) => re.test(markdown)),
+  list: (markdown: string): boolean => INCOMPLETE_REGEX.list.some((re) => re.test(markdown)),
+};
+
+const recognizeImage = (cache: StreamCache): void => {
+  const { token, pending } = cache;
+
+  if (token === TokenType.Text && pending.startsWith('!')) {
+    cache.token = TokenType.MaybeImage;
+    return;
+  }
+
+  if (token !== TokenType.IncompleteImage && token !== TokenType.MaybeImage) return;
+
+  if (isTokenIncomplete.image(pending)) {
+    cache.token = TokenType.IncompleteImage;
+  } else {
+    commitCache(cache);
+  }
+};
+
+const recognizeLink = (cache: StreamCache): void => {
+  const { token, pending } = cache;
+
+  if (token === TokenType.Text && pending.startsWith('[')) {
+    cache.token = TokenType.IncompleteLink;
+    return;
+  }
+
+  if (token !== TokenType.IncompleteLink) return;
+
+  if (!isTokenIncomplete.link(pending)) {
+    commitCache(cache);
+  }
+};
+
+const recognizeAtxHeading = (cache: StreamCache): void => {
+  const { token, pending } = cache;
+
+  if (token === TokenType.Text && pending.startsWith('#')) {
+    cache.token = TokenType.IncompleteHeading;
+    return;
+  }
+
+  if (token !== TokenType.IncompleteHeading) return;
+
+  if (!isTokenIncomplete.atxHeading(pending)) {
+    commitCache(cache);
+  }
+};
+
+const recognizeHtml = (cache: StreamCache): void => {
+  const { token, pending } = cache;
+
+  if (token === TokenType.Text && pending.startsWith('<')) {
+    cache.token = TokenType.IncompleteHtml;
+    return;
+  }
+
+  if (token !== TokenType.IncompleteHtml) return;
+
+  if (!isTokenIncomplete.html(pending)) {
+    commitCache(cache);
+  }
+};
+
+const recognizeEmphasis = (cache: StreamCache): void => {
+  const { token, pending } = cache;
+  const isEmphasisStart = pending.startsWith('*') || pending.startsWith('_');
+
+  if (token === TokenType.Text && isEmphasisStart) {
+    cache.token = TokenType.IncompleteEmphasis;
+    return;
+  }
+
+  if (token !== TokenType.IncompleteEmphasis) return;
+
+  if (!isTokenIncomplete.commonEmphasis(pending)) {
+    commitCache(cache);
+  }
+};
+
+const recognizeList = (cache: StreamCache): void => {
+  const { token, pending } = cache;
+
+  if (token === TokenType.Text && /^[-+*]/.test(pending)) {
+    cache.token = TokenType.IncompleteList;
+    return;
+  }
+
+  if (token !== TokenType.IncompleteList) return;
+
+  if (!isTokenIncomplete.list(pending)) {
+    commitCache(cache);
+  }
+};
+
+const recognizeText = (cache: StreamCache): void => {
+  if (cache.token === TokenType.Text) {
+    commitCache(cache);
+  }
+};
+
+/* ------------ Main Hook ------------ */
+const useStreaming = (input: string, config?: XMarkdownProps['streaming']) => {
+  const { hasNextChunk: enableCache = false, incompleteMarkdownComponentMap } = config || {};
+  const [output, setOutput] = useState('');
+  const cacheRef = useRef<StreamCache>(getInitialCache());
+
+  // Memoize recognizers to avoid recreation on each render
+  const recognizers = useMemo(
+    () => [
+      recognizeImage,
+      recognizeLink,
+      recognizeAtxHeading,
+      recognizeEmphasis,
+      recognizeHtml,
+      recognizeList,
+      recognizeText,
+    ],
+    [],
+  );
+
+  const handleIncompleteMarkdown = useCallback(
+    (cache: StreamCache): string | undefined => {
+      if (cache.token === TokenType.Text) return;
+
+      const componentMap = incompleteMarkdownComponentMap || {};
+
+      switch (cache.token) {
+        case TokenType.IncompleteImage:
+          return `<${componentMap.image || 'incomplete-image'} />`;
+        case TokenType.IncompleteLink:
+          return `<${componentMap.link || 'incomplete-link'} />`;
+        default:
+          return undefined;
+      }
+    },
+    [incompleteMarkdownComponentMap],
+  );
+
+  const processStreaming = useCallback(
+    (text: string): void => {
+      if (!text) {
+        setOutput('');
+        cacheRef.current = getInitialCache();
+        return;
+      }
+
+      const cache = cacheRef.current;
+      const expectedPrefix = cache.completeMarkdown + cache.pending;
+      // Reset cache if input doesn't continue from previous state
+      if (!text.startsWith(expectedPrefix)) {
+        cacheRef.current = getInitialCache();
+      }
+
+      const chunk = text.slice(cache.processedLength);
+      if (!chunk) return;
+
+      cache.processedLength += chunk.length;
+      const isTextInBlock = isInCodeBlock(text);
+      // Skip processing if inside code block
+      for (const char of chunk) {
+        cache.pending += char;
+        if (isTextInBlock) {
+          commitCache(cache);
+        } else {
+          recognizers.forEach((recognize) => {
+            recognize(cache);
+          });
+        }
+      }
+
+      const incompletePlaceholder = handleIncompleteMarkdown(cache);
+      setOutput(cache.completeMarkdown + (incompletePlaceholder || ''));
+    },
+    [recognizers, handleIncompleteMarkdown],
+  );
 
   useEffect(() => {
-    if (!input) {
-      setOutput('');
-      streamBuffer.current = { ...STREAM_BUFFER_INIT };
-      return;
-    }
-
     if (typeof input !== 'string') {
       console.error(`X-Markdown: input must be string, not ${typeof input}.`);
+      setOutput('');
       return;
     }
 
-    if (!hasNextChunk) {
-      setOutput(input);
-      return;
-    }
-
-    const chunk = input.slice(streamBuffer.current.processedLength);
-    if (chunk.length) {
-      streamBuffer.current.processedLength += chunk.length;
-      handleChunk(chunk);
-    }
-  }, [input, hasNextChunk]);
+    enableCache ? processStreaming(input) : setOutput(input);
+  }, [input, enableCache, processStreaming]);
 
   return output;
 };

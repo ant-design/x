@@ -2,7 +2,7 @@
 
 exports[`renders components/conversations/demo/basic.tsx correctly 1`] = `
 <ul
-  class="ant-conversations css-var-«R0»"
+  class="ant-conversations css-var-_R_0_"
   style="width:256px;background:#ffffff;border-radius:6px"
 >
   <li
@@ -34,7 +34,7 @@ exports[`renders components/conversations/demo/basic.tsx correctly 1`] = `
       </span>
     </div>
     <span
-      class="ant-typography ant-conversations-label css-var-«R0»"
+      class="ant-typography ant-conversations-label css-var-_R_0_"
     >
       Help Me Write
     </span>
@@ -67,7 +67,7 @@ exports[`renders components/conversations/demo/basic.tsx correctly 1`] = `
       </span>
     </div>
     <span
-      class="ant-typography ant-conversations-label css-var-«R0»"
+      class="ant-typography ant-conversations-label css-var-_R_0_"
     >
       AI Coding
     </span>
@@ -100,7 +100,7 @@ exports[`renders components/conversations/demo/basic.tsx correctly 1`] = `
       </span>
     </div>
     <span
-      class="ant-typography ant-conversations-label css-var-«R0»"
+      class="ant-typography ant-conversations-label css-var-_R_0_"
     >
       Create Image
     </span>
@@ -132,15 +132,15 @@ exports[`renders components/conversations/demo/basic.tsx correctly 1`] = `
       </span>
     </div>
     <span
-      class="ant-typography ant-conversations-label css-var-«R0»"
+      class="ant-typography ant-conversations-label css-var-_R_0_"
     >
       <div
-        class="ant-flex css-var-«R0» ant-flex-align-center ant-flex-gap-small"
+        class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-gap-small"
       >
         Deep Search
         <button
           aria-checked="false"
-          class="ant-switch ant-switch-small css-var-«R0»"
+          class="ant-switch ant-switch-small css-var-_R_0_"
           role="switch"
           type="button"
         >
@@ -166,7 +166,7 @@ exports[`renders components/conversations/demo/basic.tsx correctly 1`] = `
 
 exports[`renders components/conversations/demo/controlled-collapsible.tsx correctly 1`] = `
 <ul
-  class="ant-conversations css-var-«R0»"
+  class="ant-conversations css-var-_R_0_"
   style="width:256px;background:#ffffff;border-radius:6px"
 >
   <li
@@ -179,7 +179,7 @@ exports[`renders components/conversations/demo/controlled-collapsible.tsx correc
         class="ant-conversations-group-label"
       >
         <div
-          class="ant-flex css-var-«R0» ant-flex-gap-small"
+          class="ant-flex css-var-_R_0_ ant-flex-gap-small"
         >
           <span
             aria-label="field-time"
@@ -221,7 +221,7 @@ exports[`renders components/conversations/demo/controlled-collapsible.tsx correc
           title="Conversation Item 1"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«R0»"
+            class="ant-typography ant-conversations-label css-var-_R_0_"
           >
             Conversation Item 1
           </span>
@@ -231,7 +231,7 @@ exports[`renders components/conversations/demo/controlled-collapsible.tsx correc
           title="Conversation Item 4"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«R0»"
+            class="ant-typography ant-conversations-label css-var-_R_0_"
           >
             Conversation Item 4
           </span>
@@ -241,7 +241,7 @@ exports[`renders components/conversations/demo/controlled-collapsible.tsx correc
           title="Conversation Item 7"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«R0»"
+            class="ant-typography ant-conversations-label css-var-_R_0_"
           >
             Conversation Item 7
           </span>
@@ -259,7 +259,7 @@ exports[`renders components/conversations/demo/controlled-collapsible.tsx correc
         class="ant-conversations-group-label"
       >
         <div
-          class="ant-flex css-var-«R0» ant-flex-gap-small"
+          class="ant-flex css-var-_R_0_ ant-flex-gap-small"
         >
           <span
             aria-label="field-time"
@@ -324,7 +324,7 @@ exports[`renders components/conversations/demo/controlled-collapsible.tsx correc
           title="Conversation Item 2"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«R0»"
+            class="ant-typography ant-conversations-label css-var-_R_0_"
           >
             Conversation Item 2
           </span>
@@ -334,7 +334,7 @@ exports[`renders components/conversations/demo/controlled-collapsible.tsx correc
           title="Conversation Item 5"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«R0»"
+            class="ant-typography ant-conversations-label css-var-_R_0_"
           >
             Conversation Item 5
           </span>
@@ -344,7 +344,7 @@ exports[`renders components/conversations/demo/controlled-collapsible.tsx correc
           title="Conversation Item 8"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«R0»"
+            class="ant-typography ant-conversations-label css-var-_R_0_"
           >
             Conversation Item 8
           </span>
@@ -362,7 +362,7 @@ exports[`renders components/conversations/demo/controlled-collapsible.tsx correc
         class="ant-conversations-group-label"
       >
         <div
-          class="ant-flex css-var-«R0» ant-flex-gap-small"
+          class="ant-flex css-var-_R_0_ ant-flex-gap-small"
         >
           <span
             aria-label="field-time"
@@ -422,10 +422,10 @@ exports[`renders components/conversations/demo/controlled-collapsible.tsx correc
 
 exports[`renders components/conversations/demo/controlled-mode.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-«R0» ant-flex-align-flex-start ant-flex-gap-small ant-flex-vertical"
+  class="ant-flex css-var-_R_0_ ant-flex-align-flex-start ant-flex-gap-small ant-flex-vertical"
 >
   <ul
-    class="ant-conversations css-var-«R0»"
+    class="ant-conversations css-var-_R_0_"
     style="width:256px;background:#ffffff;border-radius:6px"
   >
     <li
@@ -457,7 +457,7 @@ exports[`renders components/conversations/demo/controlled-mode.tsx correctly 1`]
         </span>
       </div>
       <span
-        class="ant-typography ant-conversations-label css-var-«R0»"
+        class="ant-typography ant-conversations-label css-var-_R_0_"
       >
         Help Me Write
       </span>
@@ -490,7 +490,7 @@ exports[`renders components/conversations/demo/controlled-mode.tsx correctly 1`]
         </span>
       </div>
       <span
-        class="ant-typography ant-conversations-label css-var-«R0»"
+        class="ant-typography ant-conversations-label css-var-_R_0_"
       >
         AI Coding
       </span>
@@ -523,7 +523,7 @@ exports[`renders components/conversations/demo/controlled-mode.tsx correctly 1`]
         </span>
       </div>
       <span
-        class="ant-typography ant-conversations-label css-var-«R0»"
+        class="ant-typography ant-conversations-label css-var-_R_0_"
       >
         Create Image
       </span>
@@ -556,17 +556,17 @@ exports[`renders components/conversations/demo/controlled-mode.tsx correctly 1`]
         </span>
       </div>
       <span
-        class="ant-typography ant-conversations-label css-var-«R0»"
+        class="ant-typography ant-conversations-label css-var-_R_0_"
       >
         Deep Search
       </span>
     </li>
   </ul>
   <div
-    class="ant-flex css-var-«R0» ant-flex-gap-small"
+    class="ant-flex css-var-_R_0_ ant-flex-gap-small"
   >
     <button
-      class="ant-btn css-var-«R0» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -574,7 +574,7 @@ exports[`renders components/conversations/demo/controlled-mode.tsx correctly 1`]
       </span>
     </button>
     <button
-      class="ant-btn css-var-«R0» ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -587,7 +587,7 @@ exports[`renders components/conversations/demo/controlled-mode.tsx correctly 1`]
 
 exports[`renders components/conversations/demo/custom-new-chat.tsx correctly 1`] = `
 <ul
-  class="ant-conversations css-var-«R0»"
+  class="ant-conversations css-var-_R_0_"
   style="width:256px;background:#ffffff;border-radius:6px"
 >
   <button
@@ -647,7 +647,7 @@ exports[`renders components/conversations/demo/custom-new-chat.tsx correctly 1`]
       </span>
     </div>
     <span
-      class="ant-typography ant-conversations-label css-var-«R0»"
+      class="ant-typography ant-conversations-label css-var-_R_0_"
     >
       Help Me Write
     </span>
@@ -680,7 +680,7 @@ exports[`renders components/conversations/demo/custom-new-chat.tsx correctly 1`]
       </span>
     </div>
     <span
-      class="ant-typography ant-conversations-label css-var-«R0»"
+      class="ant-typography ant-conversations-label css-var-_R_0_"
     >
       AI Coding
     </span>
@@ -713,7 +713,7 @@ exports[`renders components/conversations/demo/custom-new-chat.tsx correctly 1`]
       </span>
     </div>
     <span
-      class="ant-typography ant-conversations-label css-var-«R0»"
+      class="ant-typography ant-conversations-label css-var-_R_0_"
     >
       Create Image
     </span>
@@ -746,13 +746,13 @@ exports[`renders components/conversations/demo/custom-new-chat.tsx correctly 1`]
       </span>
     </div>
     <span
-      class="ant-typography ant-conversations-label css-var-«R0»"
+      class="ant-typography ant-conversations-label css-var-_R_0_"
     >
       Deep Search
     </span>
   </li>
   <div
-    class="ant-divider css-var-«R0» ant-divider-horizontal ant-divider-rail ant-conversations-divider"
+    class="ant-divider css-var-_R_0_ ant-divider-horizontal ant-divider-rail ant-conversations-divider"
     role="separator"
   />
   <li
@@ -778,7 +778,7 @@ exports[`renders components/conversations/demo/custom-new-chat.tsx correctly 1`]
           title="Conversation Item 1"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«R0»"
+            class="ant-typography ant-conversations-label css-var-_R_0_"
           >
             Conversation Item 1
           </span>
@@ -791,7 +791,7 @@ exports[`renders components/conversations/demo/custom-new-chat.tsx correctly 1`]
 
 exports[`renders components/conversations/demo/group.tsx correctly 1`] = `
 <ul
-  class="ant-conversations css-var-«R0»"
+  class="ant-conversations css-var-_R_0_"
   style="width:256px;background:#ffffff;border-radius:6px"
 >
   <li
@@ -817,7 +817,7 @@ exports[`renders components/conversations/demo/group.tsx correctly 1`] = `
           title="This's Conversation Item 1, you can click me!"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«R0»"
+            class="ant-typography ant-conversations-label css-var-_R_0_"
           >
             This's Conversation Item 1, you can click me!
           </span>
@@ -827,7 +827,7 @@ exports[`renders components/conversations/demo/group.tsx correctly 1`] = `
           title="Conversation Item 2"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«R0»"
+            class="ant-typography ant-conversations-label css-var-_R_0_"
           >
             Conversation Item 2
           </span>
@@ -837,7 +837,7 @@ exports[`renders components/conversations/demo/group.tsx correctly 1`] = `
           title="Conversation Item 3"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«R0»"
+            class="ant-typography ant-conversations-label css-var-_R_0_"
           >
             Conversation Item 3
           </span>
@@ -868,7 +868,7 @@ exports[`renders components/conversations/demo/group.tsx correctly 1`] = `
           title="Conversation Item 4"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«R0»"
+            class="ant-typography ant-conversations-label css-var-_R_0_"
           >
             Conversation Item 4
           </span>
@@ -878,7 +878,7 @@ exports[`renders components/conversations/demo/group.tsx correctly 1`] = `
           title="Conversation Item 5"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«R0»"
+            class="ant-typography ant-conversations-label css-var-_R_0_"
           >
             Conversation Item 5
           </span>
@@ -888,7 +888,7 @@ exports[`renders components/conversations/demo/group.tsx correctly 1`] = `
           title="Conversation Item 6"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«R0»"
+            class="ant-typography ant-conversations-label css-var-_R_0_"
           >
             Conversation Item 6
           </span>
@@ -901,7 +901,7 @@ exports[`renders components/conversations/demo/group.tsx correctly 1`] = `
 
 exports[`renders components/conversations/demo/group-collapsible.tsx correctly 1`] = `
 <ul
-  class="ant-conversations css-var-«R0»"
+  class="ant-conversations css-var-_R_0_"
   style="width:256px;background:#ffffff;border-radius:6px"
 >
   <li
@@ -1004,7 +1004,7 @@ exports[`renders components/conversations/demo/infinite-load.tsx correctly 1`] =
       style="height:auto;overflow:hidden;-webkit-overflow-scrolling:touch"
     >
       <ul
-        class="ant-conversations css-var-«R0»"
+        class="ant-conversations css-var-_R_0_"
       />
       <div
         style="text-align:center"
@@ -1012,7 +1012,7 @@ exports[`renders components/conversations/demo/infinite-load.tsx correctly 1`] =
         <div
           aria-busy="true"
           aria-live="polite"
-          class="ant-spin ant-spin-sm ant-spin-spinning css-var-«R0»"
+          class="ant-spin ant-spin-sm ant-spin-spinning css-var-_R_0_"
         >
           <span
             aria-label="redo"
@@ -1042,7 +1042,7 @@ exports[`renders components/conversations/demo/infinite-load.tsx correctly 1`] =
 
 exports[`renders components/conversations/demo/menu-trigger.tsx correctly 1`] = `
 <ul
-  class="ant-conversations css-var-«R0»"
+  class="ant-conversations css-var-_R_0_"
   style="width:256px;background:#ffffff;border-radius:6px"
 >
   <li
@@ -1050,7 +1050,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx correctly 1`] = 
     title="Conversation Item 1"
   >
     <span
-      class="ant-typography ant-conversations-label css-var-«R0»"
+      class="ant-typography ant-conversations-label css-var-_R_0_"
     >
       Conversation Item 1
     </span>
@@ -1085,7 +1085,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx correctly 1`] = 
     title="Conversation Item 2"
   >
     <span
-      class="ant-typography ant-conversations-label css-var-«R0»"
+      class="ant-typography ant-conversations-label css-var-_R_0_"
     >
       Conversation Item 2
     </span>
@@ -1117,7 +1117,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx correctly 1`] = 
     title="Conversation Item 3"
   >
     <span
-      class="ant-typography ant-conversations-label css-var-«R0»"
+      class="ant-typography ant-conversations-label css-var-_R_0_"
     >
       Conversation Item 3
     </span>
@@ -1152,7 +1152,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx correctly 1`] = 
     title="Conversation Item 4"
   >
     <span
-      class="ant-typography ant-conversations-label css-var-«R0»"
+      class="ant-typography ant-conversations-label css-var-_R_0_"
     >
       Conversation Item 4
     </span>
@@ -1162,7 +1162,7 @@ exports[`renders components/conversations/demo/menu-trigger.tsx correctly 1`] = 
 
 exports[`renders components/conversations/demo/new-chat.tsx correctly 1`] = `
 <ul
-  class="ant-conversations css-var-«R0»"
+  class="ant-conversations css-var-_R_0_"
   style="width:256px;background:#ffffff;border-radius:6px"
 >
   <button
@@ -1228,7 +1228,7 @@ exports[`renders components/conversations/demo/new-chat.tsx correctly 1`] = `
       </span>
     </div>
     <span
-      class="ant-typography ant-conversations-label css-var-«R0»"
+      class="ant-typography ant-conversations-label css-var-_R_0_"
     >
       Help Me Write
     </span>
@@ -1261,7 +1261,7 @@ exports[`renders components/conversations/demo/new-chat.tsx correctly 1`] = `
       </span>
     </div>
     <span
-      class="ant-typography ant-conversations-label css-var-«R0»"
+      class="ant-typography ant-conversations-label css-var-_R_0_"
     >
       AI Coding
     </span>
@@ -1294,7 +1294,7 @@ exports[`renders components/conversations/demo/new-chat.tsx correctly 1`] = `
       </span>
     </div>
     <span
-      class="ant-typography ant-conversations-label css-var-«R0»"
+      class="ant-typography ant-conversations-label css-var-_R_0_"
     >
       Create Image
     </span>
@@ -1327,13 +1327,13 @@ exports[`renders components/conversations/demo/new-chat.tsx correctly 1`] = `
       </span>
     </div>
     <span
-      class="ant-typography ant-conversations-label css-var-«R0»"
+      class="ant-typography ant-conversations-label css-var-_R_0_"
     >
       Deep Search
     </span>
   </li>
   <div
-    class="ant-divider css-var-«R0» ant-divider-horizontal ant-divider-rail ant-conversations-divider"
+    class="ant-divider css-var-_R_0_ ant-divider-horizontal ant-divider-rail ant-conversations-divider"
     role="separator"
   />
   <li
@@ -1359,7 +1359,7 @@ exports[`renders components/conversations/demo/new-chat.tsx correctly 1`] = `
           title="Conversation Item 1"
         >
           <span
-            class="ant-typography ant-conversations-label css-var-«R0»"
+            class="ant-typography ant-conversations-label css-var-_R_0_"
           >
             Conversation Item 1
           </span>
@@ -1377,32 +1377,32 @@ Array [
   >
     You can switch sessions using the shortcut key: 
     <span
-      class="ant-tag ant-tag-filled css-var-«R0»"
+      class="ant-tag ant-tag-filled css-var-_R_0_"
     >
       Alt/⌥
     </span>
      + 
     <span
-      class="ant-tag ant-tag-filled css-var-«R0»"
+      class="ant-tag ant-tag-filled css-var-_R_0_"
     >
       number
     </span>
     , and create new chat using the shortcut key: 
     <span
-      class="ant-tag ant-tag-filled css-var-«R0»"
+      class="ant-tag ant-tag-filled css-var-_R_0_"
     >
       Win/⌘
     </span>
      + 
     <span
-      class="ant-tag ant-tag-filled css-var-«R0»"
+      class="ant-tag ant-tag-filled css-var-_R_0_"
     >
       K
     </span>
     .
   </div>,
   <ul
-    class="ant-conversations css-var-«R0»"
+    class="ant-conversations css-var-_R_0_"
     style="width:256px;background:#ffffff;border-radius:6px"
   >
     <button
@@ -1478,7 +1478,7 @@ Array [
         </span>
       </div>
       <span
-        class="ant-typography ant-conversations-label css-var-«R0»"
+        class="ant-typography ant-conversations-label css-var-_R_0_"
       >
         Help Me Write
       </span>
@@ -1511,7 +1511,7 @@ Array [
         </span>
       </div>
       <span
-        class="ant-typography ant-conversations-label css-var-«R0»"
+        class="ant-typography ant-conversations-label css-var-_R_0_"
       >
         AI Coding
       </span>
@@ -1544,7 +1544,7 @@ Array [
         </span>
       </div>
       <span
-        class="ant-typography ant-conversations-label css-var-«R0»"
+        class="ant-typography ant-conversations-label css-var-_R_0_"
       >
         Create Image
       </span>
@@ -1577,7 +1577,7 @@ Array [
         </span>
       </div>
       <span
-        class="ant-typography ant-conversations-label css-var-«R0»"
+        class="ant-typography ant-conversations-label css-var-_R_0_"
       >
         Deep Search
       </span>
@@ -1592,7 +1592,7 @@ Array [
           class="ant-conversations-group-label"
         >
           <div
-            class="ant-flex css-var-«R0» ant-flex-gap-small"
+            class="ant-flex css-var-_R_0_ ant-flex-gap-small"
           >
             <span
               aria-label="code-sandbox"
@@ -1642,7 +1642,7 @@ Array [
       </div>
     </li>
     <div
-      class="ant-divider css-var-«R0» ant-divider-horizontal ant-divider-rail ant-conversations-divider"
+      class="ant-divider css-var-_R_0_ ant-divider-horizontal ant-divider-rail ant-conversations-divider"
       role="separator"
     />
     <li
@@ -1668,7 +1668,7 @@ Array [
             title="Conversation Item 1"
           >
             <span
-              class="ant-typography ant-conversations-label css-var-«R0»"
+              class="ant-typography ant-conversations-label css-var-_R_0_"
             >
               Conversation Item 1
             </span>
@@ -1682,7 +1682,7 @@ Array [
 
 exports[`renders components/conversations/demo/with-menu.tsx correctly 1`] = `
 <ul
-  class="ant-conversations css-var-«R0»"
+  class="ant-conversations css-var-_R_0_"
   style="width:256px;background:#ffffff;border-radius:6px"
 >
   <li
@@ -1690,7 +1690,7 @@ exports[`renders components/conversations/demo/with-menu.tsx correctly 1`] = `
     title="Conversation Item 1"
   >
     <span
-      class="ant-typography ant-conversations-label css-var-«R0»"
+      class="ant-typography ant-conversations-label css-var-_R_0_"
     >
       Conversation Item 1
     </span>
@@ -1722,7 +1722,7 @@ exports[`renders components/conversations/demo/with-menu.tsx correctly 1`] = `
     title="Conversation Item 2"
   >
     <span
-      class="ant-typography ant-conversations-label css-var-«R0»"
+      class="ant-typography ant-conversations-label css-var-_R_0_"
     >
       Conversation Item 2
     </span>
@@ -1754,7 +1754,7 @@ exports[`renders components/conversations/demo/with-menu.tsx correctly 1`] = `
     title="Conversation Item 3"
   >
     <span
-      class="ant-typography ant-conversations-label css-var-«R0»"
+      class="ant-typography ant-conversations-label css-var-_R_0_"
     >
       Conversation Item 3
     </span>
@@ -1786,7 +1786,7 @@ exports[`renders components/conversations/demo/with-menu.tsx correctly 1`] = `
     title="Conversation Item 4"
   >
     <span
-      class="ant-typography ant-conversations-label css-var-«R0»"
+      class="ant-typography ant-conversations-label css-var-_R_0_"
     >
       Conversation Item 4
     </span>

@@ -24,7 +24,7 @@ import { Flex, GetRef, message } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '@ant-design/x-markdown/themes/light.css';
 import '@ant-design/x-markdown/themes/dark.css';
 import { useMarkdownTheme } from '../x-markdown/demo/_utils';
@@ -37,7 +37,7 @@ const useStyle = createStyles(({ token, css }) => {
       height: 100vh;
       display: flex;
       background: ${token.colorBgContainer};
-      overflow:hidden;
+      overflow: hidden;
     `,
     side: css`
       background: ${token.colorBgLayout};
@@ -87,38 +87,33 @@ const useStyle = createStyles(({ token, css }) => {
       display: flex;
       flex-direction: column;
       padding-block: ${token.paddingLG}px;
-       padding-inline: ${token.paddingLG}px;
+      padding-inline: ${token.paddingLG}px;
       gap: 16px;
       .ant-bubble-content-updating {
-        background-image: linear-gradient(
-          90deg,
-          #ff6b23 0%,
-          #af3cb8 31%,
-          #53b6ff 89%
-        );
+        background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
         background-size: 100% 2px;
         background-repeat: no-repeat;
         background-position: bottom;
       }
     `,
     startPage: css`
-    display:flex;
-    width: 100%;
-    max-width: 840px;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
+      display: flex;
+      width: 100%;
+      max-width: 840px;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
     `,
     agentName: css`
-    margin-block-start: 25%;
-    font-size: 32px;
-    margin-block-end: 38px;
-    font-weight: 600;
+      margin-block-start: 25%;
+      font-size: 32px;
+      margin-block-end: 38px;
+      font-weight: 600;
     `,
     chatList: css`
       display: flex;
       align-items: center;
-      width:100%;
+      width: 100%;
       height: calc(100% - 120px);
       flex-direction: column;
       height: 100%;
@@ -129,7 +124,7 @@ const useStyle = createStyles(({ token, css }) => {
 
 // ==================== Context ====================
 const ChatContext = React.createContext<{
-  onReload?: (key: string | number, info: any) => any;
+  onReload?: ReturnType<typeof useXChat>['onReload'];
 }>({});
 const DEFAULT_CONVERSATIONS_ITEMS = [
   {
@@ -250,7 +245,7 @@ const getRole = (className: string): BubbleListProps['role'] => ({
       ),
     },
     contentRender: (content: any, { status }) => {
-      const newContent = content.replaceAll('\n\n', '<br/>');
+      const newContent = content.replace('/\n\n/g', '<br/><br/>');
       return (
         <XMarkdown
           paragraphTag="div"
@@ -292,10 +287,10 @@ const App = () => {
         role: 'assistant',
       };
     },
-    requestFallback: (e) => {
+    requestFallback: (_, { messageInfo }) => {
       return {
-        ...e,
-        content: e.content || locale.requestFailedPleaseTryAgain,
+        ...messageInfo?.message,
+        content: messageInfo?.message.content || locale.requestFailedPleaseTryAgain,
       };
     },
   });
@@ -304,6 +299,11 @@ const App = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const [deepThink, setDeepThink] = useState<boolean>(true);
 
+  useEffect(() => {
+    senderRef.current!.focus({
+      cursor: 'end',
+    });
+  }, [senderRef.current]);
   return (
     <XProvider locale={locale}>
       {contextHolder}
@@ -386,9 +386,7 @@ const App = () => {
                     root: {
                       marginBlockEnd: 24,
                     },
-                    bubble: {
-                      maxWidth: 840,
-                    },
+                    bubble: { maxWidth: 840 },
                   }}
                   role={getRole(className)}
                 />
@@ -403,6 +401,7 @@ const App = () => {
                 <Sender
                   suffix={false}
                   ref={senderRef}
+                  key={curConversation}
                   initialSlotConfig={initialSlotConfig}
                   loading={isRequesting}
                   onSubmit={(val) => {

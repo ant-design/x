@@ -194,6 +194,7 @@ describe('useXChat', () => {
       expect(requestFallback).toHaveBeenCalledWith(
         { query: 'little' },
         {
+          message: undefined,
           error: new Error('failed'),
           messages: [{ query: 'little' }],
         },

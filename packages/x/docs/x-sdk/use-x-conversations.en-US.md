@@ -8,8 +8,6 @@ subtitle: Conversation Management
 description:
 demo:
   cols: 1
-cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*22A2Qqn7OrEAAAAAAAAAAAAADgCCAQ/original
-coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*lQydTrtLz9YAAAAAAAAAAAAADgCCAQ/original
 ---
 
 ## When To Use
@@ -18,7 +16,11 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*lQydTrtLz9YAAA
 
 ## Code Demo
 
-<code src="./demos/x-conversations/basic.tsx">Basic Usage</code> <code src="./demos/x-conversations/operations.tsx">Conversation Operations</code> <code src="./demos/x-conversations/multi-instances.tsx">Multiple Instances</code>
+<!-- prettier-ignore -->
+<code src="./demos/x-conversations/basic.tsx">Basic Usage</code> 
+<code src="./demos/x-conversations/operations.tsx">Conversation Operations</code> 
+<code src="./demos/x-conversations/multi-instances.tsx">Multiple Instances</code>
+<code src="./demos/x-conversations/with-x-chat.tsx">Integration with `useXChat` for message management</code>
 
 ## API
 
@@ -27,11 +29,14 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*lQydTrtLz9YAAA
 ```tsx | pure
 type useXConversations = (config: XConversationConfig) => {
   conversations: ConversationData[];
-  addConversation: (conversation: ConversationData) => boolean;
+  activeConversationKey: string;
+  setActiveConversationKey: (key: string) => boolean;
+  addConversation: (conversation: ConversationData, placement?: 'prepend' | 'append') => boolean;
   removeConversation: (key: string) => boolean;
   setConversation: (key: string, conversation: ConversationData) => boolean;
   getConversation: (key: string) => ConversationData;
   setConversations: (conversations: ConversationData[]) => boolean;
+  getMessages: (conversationKey: string) => any[];
 };
 ```
 
@@ -40,6 +45,7 @@ type useXConversations = (config: XConversationConfig) => {
 ```tsx | pure
 interface XConversationConfig {
   defaultConversations?: ConversationData[];
+  defaultActiveConversationKey?: string;
 }
 ```
 

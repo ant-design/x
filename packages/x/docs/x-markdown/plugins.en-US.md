@@ -1,6 +1,7 @@
 ---
 group:
   title: Plugins
+  order: 6
 title: Overview
 order: 1
 ---
@@ -34,4 +35,4 @@ We provide built plugin files in the `dist/plugins` directory of the npm package
 
 ## Custom Plugins
 
-### Supports implementing all Marked plugins, or creating custom plugins [Reference](/markdowns/custom-plugin)
+### Supports implementing all Marked plugins, or creating custom plugins [Reference](/x-markdowns/custom-plugin)

@@ -35,7 +35,7 @@ const initialSlotConfig: SlotConfig = [
     customRender: (value: any, onChange: (value: any) => void, props) => {
       return (
         <div style={{ width: '100px' }}>
-          <Slider  {...props} style={{ margin: 0 }} range value={value} onChange={onChange} />
+          <Slider {...props} style={{ margin: 0 }} range value={value} onChange={onChange} />
         </div>
       );
     },
@@ -172,6 +172,15 @@ const App: React.FC = () => {
           }}
         >
           Focus at last
+        </Button>
+        <Button
+          onClick={() => {
+            senderRef.current!.focus({
+              cursor: 'slot',
+            });
+          }}
+        >
+          Focus at slot
         </Button>
         <Button
           onClick={() => {

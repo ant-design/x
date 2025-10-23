@@ -11,7 +11,7 @@ import type { BubbleItemType, BubbleListProps } from '@ant-design/x';
 import { Actions, Bubble, FileCard, FileCardProps } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
 import type { GetRef } from 'antd';
-import { Avatar, Button, Divider, Flex, Space, Typography } from 'antd';
+import { Avatar, Button, Flex, Space, Typography } from 'antd';
 import React, { useCallback, useEffect } from 'react';
 
 const actionItems = [
@@ -70,8 +70,10 @@ const App = () => {
 
   useEffect(() => {
     set([
+      { key: getKey(), role: 'system', content: 'Welcome to use Ant Design X' },
       genItem(false, { typing: false }),
       genItem(true, { typing: false }),
+      { key: getKey(), role: 'divider', content: 'divider' },
       genItem(false, { typing: false }),
       genItem(true, { typing: false, loading: true }),
     ]);
@@ -116,11 +118,6 @@ const App = () => {
           update(data.key, { editable: false });
         },
       }),
-      divider: {
-        variant: 'borderless',
-        styles: { root: { margin: 0 }, body: { width: '100%' } },
-        contentRender: (content: string) => <Divider>{content}</Divider>,
-      },
       reference: {
         variant: 'borderless',
         // 16px for list item gap
@@ -138,75 +135,82 @@ const App = () => {
   );
 
   return (
-    <Flex style={{ height: 650 }} vertical gap="small">
-      <Flex gap="small" justify="space-between">
-        <Flex gap="small">
-          <Button
-            type="primary"
-            onClick={() => {
-              const chatItems = items.filter((item) => item.role === 'ai' || item.role === 'user');
-              const isAI = !!(chatItems.length % 2);
-              add(genItem(isAI, { typing: { effect: 'fade-in', step: [20, 50] } }));
-            }}
-          >
-            Add Bubble
-          </Button>
-          <Button
-            onClick={() => {
-              add({
+    <Flex style={{ height: 720 }} vertical gap={20}>
+      <Flex gap="small">
+        <Button
+          type="primary"
+          onClick={() => {
+            const chatItems = items.filter((item) => item.role === 'ai' || item.role === 'user');
+            const isAI = !!(chatItems.length % 2);
+            add(genItem(isAI, { typing: { effect: 'fade-in', step: [20, 50] } }));
+          }}
+        >
+          Add Bubble
+        </Button>
+        <Button
+          onClick={() => {
+            add({
+              key: getKey(),
+              role: 'ai',
+              typing: { effect: 'fade-in', step: 6 },
+              content: text,
+              contentRender: (content: string) => (
+                <Typography>
+                  <XMarkdown content={content} />
+                </Typography>
+              ),
+            });
+          }}
+        >
+          Add Markdown Msg
+        </Button>
+        <Button
+          onClick={() => {
+            set([...items, { key: getKey(), role: 'divider', content: 'Divider' }]);
+          }}
+        >
+          Add Divider
+        </Button>
+        <Button
+          onClick={() => {
+            set([...items, { key: getKey(), role: 'system', content: 'This is a system message' }]);
+          }}
+        >
+          Add System
+        </Button>
+        <Button
+          onClick={() => {
+            set((pre) => [genItem(false), genItem(true), genItem(false), ...pre]);
+          }}
+        >
+          Add To Pre
+        </Button>
+        <Button
+          onClick={() => {
+            set((pre) => [
+              ...pre,
+              // use a bubble to mock reference
+              {
                 key: getKey(),
-                role: 'ai',
-                typing: { effect: 'fade-in', step: 6 },
-                content: text,
-                contentRender: (content: string) => (
-                  <Typography>
-                    <XMarkdown content={content} />
-                  </Typography>
-                ),
-              });
-            }}
-          >
-            Add Markdown Msg
-          </Button>
-          <Button
-            onClick={() => {
-              set([...items, { key: getKey(), role: 'divider', content: 'Divider' }]);
-            }}
-          >
-            Add Divider
-          </Button>
-          <Button
-            onClick={() => {
-              set((pre) => [genItem(false), genItem(true), genItem(false), ...pre]);
-            }}
-          >
-            Add To Pre
-          </Button>
-          <Button
-            onClick={() => {
-              set((pre) => [
-                ...pre,
-                {
-                  key: getKey(),
-                  role: 'reference',
-                  placement: 'end',
-                  content: { name: 'Ant-Design-X.pdf' },
-                },
-                genItem(false),
-              ]);
-            }}
-          >
-            Add With Ref
-          </Button>
+                role: 'reference',
+                placement: 'end',
+                content: { name: 'Ant-Design-X.pdf' },
+              },
+              // message bubble
+              genItem(false),
+            ]);
+          }}
+        >
+          Add With Ref
+        </Button>
 
-          <Button
-            onClick={() => {
-              listRef.current?.scrollTo({ key: items[1].key, block: 'nearest' });
-            }}
-          >
-            Scroll To Second
-          </Button>
-        </Flex>
+        <Button
+          onClick={() => {
+            listRef.current?.scrollTo({ key: items[1].key, block: 'nearest' });
+          }}
+        >
+          Scroll To Second
+        </Button>
       </Flex>
 
       <Bubble.List

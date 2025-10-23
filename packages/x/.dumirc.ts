@@ -35,8 +35,8 @@ export default defineConfig({
   resolve: {
     docDirs: [
       { type: 'doc', dir: 'docs' },
-      { type: 'sdk', dir: 'docs/x-sdk' },
-      { type: 'markdown', dir: 'docs/x-markdown' },
+      { type: 'x-sdk', dir: 'docs/x-sdk' },
+      { type: 'x-markdown', dir: 'docs/x-markdown' },
     ],
     atomDirs: [{ type: 'component', dir: 'components' }],
     codeBlockMode: 'passive',

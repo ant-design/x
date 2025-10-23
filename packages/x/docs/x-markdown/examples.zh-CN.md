@@ -11,7 +11,7 @@ order: 2
 
 <!-- prettier-ignore -->
 <code src="./demo/codeDemo/basic.tsx" description="markdown基础语法渲染。" title="基础用法"></code>
-<code src="./demo/codeDemo/streaming.tsx" description="配合 `Bubble` 实现流式对话。" title="流式渲染"></code>
+<code src="./demo/streaming/combined.tsx" description="未完成语法处理、动画效果" title="流式处理"></code>
 <code src="./demo/codeDemo/components.tsx" description="自定义组件渲染标签。" title="自定义组件"></code>
 <code src="./demo/codeDemo/supersets.tsx" description="使用插件渲染。" title="插件使用"></code>
 <code src="./demo/codeDemo/plugin.tsx" title="自定义拓展插件"></code>
@@ -25,11 +25,11 @@ order: 2
 | --- | --- | --- | --- |
 | content | 需要渲染的 Markdown 内容 | `string` | - |
 | children | Markdown 内容，作为 `content` 属性的别名 | `string` | - |
-| components | 用于替换 HTML 元素的自定义 React 组件 | `Record<string, React.ComponentType<ComponentProps> \| keyof JSX.IntrinsicElements>`，查看[详情](/markdowns/components-cn) | - |
+| components | 用于替换 HTML 元素的自定义 React 组件 | `Record<string, React.ComponentType<ComponentProps> \| keyof JSX.IntrinsicElements>`，查看[详情](/x-markdowns/components-cn) | - |
 | paragraphTag | 段落元素的自定义 HTML 标签，防止自定义组件包含块级元素时的验证错误 | `keyof JSX.IntrinsicElements` | `'p'` |
-| streaming | 流式渲染行为的配置 | `SteamingOption`，查看[详情](/markdowns/streaming-cn) | - |
+| streaming | 流式渲染行为的配置 | `SteamingOption`，查看[详情](/x-markdowns/streaming-cn) | - |
 | config | Markdown 解析和扩展的 Marked.js 配置 | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |
-| openLinksInNewTab | 是否为所有a标签添加 `target="_blank"` | `boolean` | `false` |
+| openLinksInNewTab | 是否为所有 a 标签添加 `target="_blank"` | `boolean` | `false` |
 | dompurifyConfig | HTML 净化和 XSS 防护的 DOMPurify 配置 | [`DOMPurify.Config`](https://github.com/cure53/DOMPurify#can-i-configure-dompurify) | - |
 | className | 根容器的额外 CSS 类名 | `string` | - |
 | rootClassName | `className` 的别名，根元素的额外 CSS 类 | `string` | - |
@@ -42,6 +42,7 @@ order: 2
 | hasNextChunk | 指示是否还有后续内容块，为 false 时刷新所有缓存并完成渲染 | `boolean` | `false` |
 | enableAnimation | 为块级元素（`p`、`li`、`h1`、`h2`、`h3`、`h4`）启用文字淡入动画 | `boolean` | `false` |
 | animationConfig | 文字出现动画效果的配置 | `AnimationConfig` | `{ fadeDuration: 200, opacity: 0.2 }` |
+| incompletePlaceholderMap | 未闭合Markdown元素的占位符映射，支持自定义链接和图片的占位符组件 | `{ link?: string; image?: string }` | `{ link: 'incomplete-link', image: 'incomplete-image' }` |
 
 #### AnimationConfig
 

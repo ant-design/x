@@ -3,14 +3,14 @@ import { Button } from 'antd';
 import { createStyles } from 'antd-style';
 import React from 'react';
 
-export const useStyle = createStyles(({ css }) => {
+export const useStyle = createStyles(({ css, token }) => {
   return {
     sender: css`
+      margin-inline: ${token.paddingMD * 2}px;
       background: linear-gradient(135deg, #ffffff26 14%, #ffffff0d 59%);
       position: relative;
       border: none;
       cursor: pointer;
-
       :hover {
         opacity: 0.85;
       }
@@ -23,6 +23,9 @@ const CustomizationSender: React.FC<SenderProps> = (props) => {
   return (
     <Sender
       className={styles.sender}
+      style={{
+        width: `calc(100% - ${20 * 4}px)`,
+      }}
       suffix={() => {
         return (
           <Button

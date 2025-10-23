@@ -16,16 +16,20 @@ const locales = {
     content: '对话气泡的聊天内容的容器',
     footer: '对话气泡的底部的容器',
     extra: '对话气泡的尾边栏容器',
+    system: '系统气泡容器',
+    divider: '分割线气泡容器',
   },
   en: {
     root: 'Bubble list root node',
-    bubble: 'Bubble container',
+    bubble: 'Bubble root',
     body: 'Bubble main body container',
     avatar: 'Bubble avatar outer container',
     header: 'Bubble header container',
     content: 'Bubble chat content container',
     footer: 'Bubble footer container',
     extra: 'Bubble sidebar container',
+    system: 'Bubble.System root',
+    divider: 'Bubble.Divider root',
   },
 };
 
@@ -51,18 +55,12 @@ const App: React.FC = () => {
       user: () => ({
         placement: 'end',
       }),
-      reference: {
-        variant: 'borderless',
-        // 16px for list item gap
-        styles: { root: { margin: 0, marginBottom: -12 } },
-        components: { avatar: () => '' },
-      },
     }),
     [],
   );
   return (
     <SemanticPreview
-      componentName="Bubble"
+      componentName="Bubble.List"
       semantics={[
         { name: 'root', desc: locale.root },
         { name: 'bubble', desc: locale.bubble },
@@ -72,11 +70,15 @@ const App: React.FC = () => {
         { name: 'content', desc: locale.content },
         { name: 'footer', desc: locale.footer },
         { name: 'extra', desc: locale.extra },
+        { name: 'system', desc: locale.system },
+        { name: 'divider', desc: locale.divider },
       ]}
     >
       <Bubble.List
         role={memoRole}
         items={[
+          { role: 'system', content: 'Welcome to Ant Design X', key: 'system' },
+          { role: 'divider', content: 'divider', key: 'divider' },
           {
             role: 'user',
             content: 'hello, Ant Design X',

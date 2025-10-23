@@ -1,16 +1,20 @@
 import type { Config as DOMPurifyConfig } from 'dompurify';
 import DOMPurify from 'dompurify';
-import parseHtml, { DOMNode, domToReact, Element } from 'html-react-parser';
+import type { DOMNode, Element } from 'html-react-parser';
+import parseHtml, { domToReact } from 'html-react-parser';
 import React, { ReactNode } from 'react';
+import AnimationText from '../AnimationText';
 import type { ComponentProps, XMarkdownProps } from '../interface';
 
 interface RendererOptions {
   components?: XMarkdownProps['components'];
   dompurifyConfig?: DOMPurifyConfig;
+  streaming?: XMarkdownProps['streaming'];
 }
 
 class Renderer {
   private readonly options: RendererOptions;
+  private static readonly NON_WHITESPACE_REGEX = /[^\r\n\s]+/;
 
   constructor(options: RendererOptions) {
     this.options = options;
@@ -59,24 +63,38 @@ class Renderer {
     const customComponents = Object.keys(this.options.components || {});
     const userConfig = this.options.dompurifyConfig || {};
 
+    const allowedTags = Array.isArray(userConfig.ALLOWED_TAGS) ? userConfig.ALLOWED_TAGS : [];
+    const addAttr = Array.isArray(userConfig.ADD_ATTR) ? userConfig.ADD_ATTR : [];
+
     return {
       ...userConfig,
-      ADD_TAGS: [...new Set([...customComponents, ...(userConfig.ALLOWED_TAGS || [])])],
+      ADD_TAGS: Array.from(new Set([...customComponents, ...allowedTags])),
+      ADD_ATTR: Array.from(new Set(['target', 'rel', ...addAttr])),
     };
   }
 
-  private replaceElement(unclosedTags?: Set<string>) {
+  private createReplaceElement(unclosedTags: Set<string> | undefined, cidRef: { current: number }) {
+    const { enableAnimation, animationConfig } = this.options.streaming || {};
     return (domNode: DOMNode) => {
+      const key = cidRef.current++;
+
+      // Check if it's a text node with data
+      const isValidTextNode =
+        domNode.type === 'text' && domNode.data && Renderer.NON_WHITESPACE_REGEX.test(domNode.data);
+      if (enableAnimation && isValidTextNode) {
+        return React.createElement(AnimationText, { text: domNode.data, key, animationConfig });
+      }
+
       if (!('name' in domNode)) return;
 
       const { name, attribs, children } = domNode as Element;
       const renderElement = this.options.components?.[name];
-
       if (renderElement) {
         const streamStatus = unclosedTags?.has(name) ? 'loading' : 'done';
         const props: ComponentProps = {
           domNode,
           streamStatus,
+          key,
           ...attribs,
         };
 
@@ -88,7 +106,7 @@ class Renderer {
         props.className = classes || '';
 
         if (children) {
-          props.children = this.processChildren(children as DOMNode[], unclosedTags);
+          props.children = this.processChildren(children as DOMNode[], unclosedTags, cidRef);
         }
 
         return React.createElement(renderElement, props);
@@ -96,20 +114,26 @@ class Renderer {
     };
   }
 
-  private processChildren(children: DOMNode[], unclosedTags?: Set<string>): ReactNode {
+  private processChildren(
+    children: DOMNode[],
+    unclosedTags: Set<string> | undefined,
+    cidRef: { current: number },
+  ): ReactNode {
     return domToReact(children as DOMNode[], {
-      replace: this.replaceElement(unclosedTags),
+      replace: this.createReplaceElement(unclosedTags, cidRef),
     });
   }
 
   public processHtml(htmlString: string): React.ReactNode {
     const unclosedTags = this.detectUnclosedTags(htmlString);
+    const cidRef = { current: 0 };
+
     // Use DOMPurify to clean HTML while preserving custom components and target attributes
     const purifyConfig = this.configureDOMPurify();
     const cleanHtml = DOMPurify.sanitize(htmlString, purifyConfig);
 
     return parseHtml(cleanHtml, {
-      replace: this.replaceElement(unclosedTags),
+      replace: this.createReplaceElement(unclosedTags, cidRef),
     });
   }
 

@@ -61,6 +61,7 @@ export default () => {
                   items={[
                     {
                       key: '1',
+                      role: 'user',
                       placement: 'end',
                       content: 'Hello Ant Design X!',
                       components: {
@@ -69,10 +70,12 @@ export default () => {
                     },
                     {
                       key: '2',
+                      role: 'ai',
                       content: 'Hello World!',
                     },
                     {
                       key: '3',
+                      role: 'ai',
                       content: '',
                       loading: true,
                     },

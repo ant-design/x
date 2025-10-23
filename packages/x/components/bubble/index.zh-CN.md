@@ -22,6 +22,8 @@ demo:
 <code src="./demo/basic.tsx">基本</code>
 <code src="./demo/variant-and-shape.tsx">变体与形状</code>
 <code src="./demo/sider-and-placement.tsx">边栏与位置</code>
+<code src="./demo/system.tsx">系统信息气泡</code>
+<code src="./demo/divider.tsx">分割线气泡</code>
 <code src="./demo/header.tsx">气泡头</code>
 <code src="./demo/footer.tsx">气泡尾</code>
 <code src="./demo/loading.tsx">加载中</code>
@@ -61,39 +63,6 @@ demo:
 | onTypingComplete | 动画结束回调 | (content: string) => void | - | - |
 | onEditing | 编辑态下内容变化时回调 | (content: string) => void | - | - |
 
-#### streaming
-
-`streaming` 用于通知 Bubble 当前的 `content` 是否属于流式输入的当处于流式传输模。当处于流式传输模式，无论是否启用 Bubble 输入动画，在 `streaming` 变为 `false` 之前，Bubble 不会因为把当前 `content` 全部输出完毕就触发 `onTypingComplete` 回调，只有当 `streaming` 变为 `false`，且 `content` 全部输出完毕后，Bubble 才会触发 `onTypingComplete` 回调。这样可以避免由于流式传输不稳定而导致多次触发 `onTypingComplete` 回调的问题，保证一次流式传输过程仅触发一次 `onTypingComplete`。
-
-在[这个例子](#bubble-demo-stream)中，你可以尝试强制关闭流式标志，同时
-
-- 若你启用了输入动画，进行 **慢速加载** 时，会因为流式传输的速度跟不上动画速度而导致多次触发 `onTypingComplete`。
-- 若你关闭了输入动画，每一次的流式输入都会触发 `onTypingComplete`。
-
-#### Bubble.List autoScroll 顶对齐
-
-**Bubble.List** 的自动滚动方案其实是一个很简单的倒序排序方案，因此在固定高度的 **Bubble.List** 中，如果消息内容较少，没有撑满 **Bubble.List** 的高度，那么你会发现消息内容是底对齐的。故不推荐给 **Bubble.List** 设置固定高度，而是为 **Bubble.List** 的父容器添加固定高度，并把父容器设置为弹性布局 `display: flex` 且 `flex-direction: column`，这样 **Bubble.List** 在内容较少时会使用自适应高度且顶对齐。正如 [气泡列表](#bubble-demo-list) 中体现的一样。
-
-```tsx
-<div style={{ height: 600, display: 'flex', flexDirection: 'column' }}>
-  <Bubble.List items={items} autoScroll />
-</div>
-```
-
-如果你不想使用弹性布局，那么你可以为 **Bubble.List** 设置最大高度 `max-height`，这样在内容较少时，**Bubble.List** 的高度会自适应，呈现顶对齐效果。
-
-```tsx
-<Bubble.List items={items} autoScroll rootStyle={{ maxHeight: 600 }} />
-```
-
-### Bubble.List 组件 API
-
-| 属性 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- |
-| items | 气泡数据列表，`key`，`role` 必填 ，当结合X SDK [`useXChat`](/sdks/use-x-chat-cn) 使用时可传入`status` 帮助 Bubble 对配置进行管理 | (BubbleProps & { key: string \| number, role: string , status: MessageStatus, extra?: AnyObject})[] | - | - |
-| autoScroll | 是否自动滚动 | boolean | `true` | - |
-| role | 角色默认配置 | [RoleType](#roletype) | - | - |
-
 #### ContentType
 
 默认类型
@@ -118,24 +87,6 @@ type CustomContentType {
 type BubbleSlot<ContentType> =
   | React.ReactNode
   | ((content: ContentType, info: InfoType) => React.ReactNode);
-```
-
-#### MessageStatus
-
-```typescript
-type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error' | 'abort';
-```
-
-#### InfoType
-
-配合 [`useXChat`](/sdks/use-x-chat-cn) 使用 ，`key` 可做为 `MessageId`，`extra` 可作为自定义参数。
-
-```typescript
-type InfoType = {
-  status?: MessageStatus;
-  key?: string | number;
-  extra?: AnyObject;
-};
 ```
 
 #### EditableBubbleOption
@@ -189,11 +140,46 @@ interface BubbleAnimationOption {
 }
 ```
 
+#### streaming
+
+`streaming` 用于通知 Bubble 当前的 `content` 是否属于流式输入的当处于流式传输模。当处于流式传输模式，无论是否启用 Bubble 输入动画，在 `streaming` 变为 `false` 之前，Bubble 不会因为把当前 `content` 全部输出完毕就触发 `onTypingComplete` 回调，只有当 `streaming` 变为 `false`，且 `content` 全部输出完毕后，Bubble 才会触发 `onTypingComplete` 回调。这样可以避免由于流式传输不稳定而导致多次触发 `onTypingComplete` 回调的问题，保证一次流式传输过程仅触发一次 `onTypingComplete`。
+
+在[这个例子](#bubble-demo-stream)中，你可以尝试强制关闭流式标志，同时
+
+- 若你启用了输入动画，进行 **慢速加载** 时，会因为流式传输的速度跟不上动画速度而导致多次触发 `onTypingComplete`。
+- 若你关闭了输入动画，每一次的流式输入都会触发 `onTypingComplete`。
+
+### Bubble.List
+
+| 属性 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| items | 气泡数据列表，`key`，`role` 必填 ，当结合X SDK [`useXChat`](/x-sdks/use-x-chat-cn) 使用时可传入`status` 帮助 Bubble 对配置进行管理 | (([BubbleProps](#bubble) & [DividerBubbleProps](#bubbledivider)) & { key: string \| number, role: string , status: MessageStatus, extra?: AnyObject})[] | - | - |
+| autoScroll | 是否自动滚动 | boolean | `true` | - |
+| role | 气泡角色默认配置 | [RoleType](#roletype) | - | - |
+
+#### MessageStatus
+
+```typescript
+type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error' | 'abort';
+```
+
+#### InfoType
+
+配合 [`useXChat`](/x-sdks/use-x-chat-cn) 使用 ，`key` 可做为 `MessageId`，`extra` 可作为自定义参数。
+
+```typescript
+type InfoType = {
+  status?: MessageStatus;
+  key?: string | number;
+  extra?: AnyObject;
+};
+```
+
 #### RoleType
 
 ```typescript
-type RoleProps = Pick<
-  BubbleProps,
+export type RoleProps = Pick<
+  BubbleProps<any>,
   | 'typing'
   | 'variant'
   | 'shape'
@@ -201,7 +187,6 @@ type RoleProps = Pick<
   | 'rootClassName'
   | 'classNames'
   | 'className'
-  | 'rootStyle'
   | 'styles'
   | 'style'
   | 'loading'
@@ -209,19 +194,83 @@ type RoleProps = Pick<
   | 'contentRender'
   | 'footerPlacement'
   | 'components'
-> & { key: string | number; role: string };
-
+  | 'editable'
+  | 'onTyping'
+  | 'onTypingComplete'
+  | 'onEditConfirm'
+  | 'onEditCancel'
+>;
 export type FuncRoleProps = (data: BubbleItemType) => RoleProps;
 
-export type RoleType = Partial<Record<'ai' | 'system' | 'user', RoleProps | FuncRoleProps>> &
-  Record<string, RoleProps | FuncRoleProps>;
+export type DividerRoleProps = Partial<DividerBubbleProps>;
+export type FuncDividerRoleProps = (data: BubbleItemType) => DividerRoleProps;
+
+export type RoleType = Partial<
+  'ai' | 'system' | 'user', RoleProps | FuncRoleProps>
+> & { divider: DividerRoleProps | FuncDividerRoleProps } & Record<
+    string,
+    RoleProps | FuncRoleProps
+  >;
 ```
+
+#### Bubble.List autoScroll 顶对齐
+
+**Bubble.List** 的自动滚动方案其实是一个很简单的倒序排序方案，因此在固定高度的 **Bubble.List** 中，如果消息内容较少，没有撑满 **Bubble.List** 的高度，那么你会发现消息内容是底对齐的。故不推荐给 **Bubble.List** 设置固定高度，而是为 **Bubble.List** 的父容器添加固定高度，并把父容器设置为弹性布局 `display: flex` 且 `flex-direction: column`，这样 **Bubble.List** 在内容较少时会使用自适应高度且顶对齐。正如 [气泡列表](#bubble-demo-list) 中体现的一样。
+
+```tsx
+<div style={{ height: 600, display: 'flex', flexDirection: 'column' }}>
+  <Bubble.List items={items} autoScroll />
+</div>
+```
+
+如果你不想使用弹性布局，那么你可以为 **Bubble.List** 设置最大高度 `max-height`，这样在内容较少时，**Bubble.List** 的高度会自适应，呈现顶对齐效果。
+
+```tsx
+<Bubble.List items={items} autoScroll style={{ maxHeight: 600 }} />
+```
+
+#### Bubble.List role 与自定义 Bubble
+
+**Bubble.List** 的 `role` 和 `items` 两个属性都可以配置气泡，其中 `role` 的配置作为默认配置使用，可缺省。`item.role` 用于指明该条数据的气泡角色，会与 `Bubble.List.role` 进行匹配。`items` 本身也可配置气泡属性，优先级高于 `role` 的配置，最终的气泡配置为：`{ ...role[item.role], ...item }`。
+
+特别说明，我们为 `role` 提供了四个默认字段，`ai`、`user`、`system`、`divider`。其中，`system`、`divider` 是保留字段，如果 `item.role` 赋值为它们俩之一，**Bubble.List** 会把这条气泡数据渲染为 **Bubble.System (role = 'system')** 或 **Bubble.Divider (role = 'divider')**。
+
+因此，若你想自定义渲染系统消息或分割线时，应该使用其他的命名。
+
+自定义渲染消息，可以参考[这个例子](#bubble-demo-list)中 reference 的渲染方式。
+
+### Bubble.System
+
+通用属性参考：[通用属性](/docs/react/common-props)
+
+| 属性    | 说明         | 类型                                               | 默认值    | 版本 |
+| ------- | ------------ | -------------------------------------------------- | --------- | ---- |
+| content | 气泡内容     | [ContentType](#contenttype)                        | -         | -    |
+| variant | 气泡样式变体 | `filled` \| `outlined` \| `shadow` \| `borderless` | `shadow`  | -    |
+| shape   | 气泡形状     | `default` \| `round` \| `corner`                   | `default` | -    |
+
+### Bubble.Divider
+
+通用属性参考：[通用属性](/docs/react/common-props)
+
+| 属性 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| content | 气泡内容，等效 Divider.children | [ContentType](#contenttype) | - | - |
+| dividerProps | Divider 组件属性 | [Divider](https://ant.design/components/divider-cn) | - | - |
 
 ## Semantic DOM
 
 ### Bubble
 
 <code src="./demo/_semantic.tsx" simplify="true"></code>
+
+### Bubble.System
+
+<code src="./demo/_semantic-system.tsx" simplify="true"></code>
+
+### Bubble.Divider
+
+<code src="./demo/_semantic-divider.tsx" simplify="true"></code>
 
 ### Bubble.List
 
