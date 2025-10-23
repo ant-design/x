@@ -16,6 +16,37 @@ tag: vVERSION
 
 ---
 
+## 2.0.0-alpha.10
+
+`2025-10-23`
+
+### @ant-design/x
+
+- 🔥 New component Sources. [#1250](https://github.com/ant-design/x/pull/1250) by [@hy993658052](https://github.com/hy993658052).
+- 🆕 Bubble adds two subcomponents: Bubble.System and Bubble.Divider. [#1239](https://github.com/ant-design/x/pull/1239) by [@anxLiang](https://github.com/anxLiang) and [@kimteayon](https://github.com/kimteayon).
+- Sender
+  - 🆕 Added slot focus event functionality. [#1221](https://github.com/ant-design/x/pull/1221) by [@kimteayon](https://github.com/kimteayon).
+  - 🐛 Fixed the issue where `onPasteFile` callback data was incorrect when pasting multiple files in the input box. [#1221](https://github.com/ant-design/x/pull/1221) by [@kimteayon](https://github.com/kimteayon).
+  - 🐛 Fixed accessibility issues caused by SVG not being internationalized. [#1243](https://github.com/ant-design/x/pull/1230) by [@kimteayon](https://github.com/kimteayon).
+- FileCard
+  - 🆕 Added semantic implementation. [#1220](https://github.com/ant-design/x/pull/1220) by [@kimteayon](https://github.com/kimteayon).
+  - 🆕 Added support for `jfif` type. [#1248](https://github.com/ant-design/x/pull/1248) by [@IsDyh01](https://github.com/IsDyh01).
+- 🆕 Attachments added semantic implementation. [#1220](https://github.com/ant-design/x/pull/1220) by [@kimteayon](https://github.com/kimteayon).
+- 📖 Optimized the official site to enhance user experience. [#1216](https://github.com/ant-design/x/pull/1216) by [@kimteayon](https://github.com/kimteayon), [#1217](https://github.com/ant-design/x/pull/1212) by [@Div627](https://github.com/Div627), [#1218](https://github.com/ant-design/x/pull/1218) by [@IsDyh01](https://github.com/IsDyh01), [#1224](https://github.com/ant-design/x/pull/1224) by [@kimteayon](https://github.com/kimteayon), [#1232](https://github.com/ant-design/x/pull/1232) by [@IsDyh01](https://github.com/IsDyh01), [#1233](https://github.com/ant-design/x/pull/1233) by [@kimteayon](https://github.com/kimteayon), [#1243](https://github.com/ant-design/x/pull/1243) by [@kimteayon](https://github.com/kimteayon), [#1247](https://github.com/ant-design/x/pull/1247) by [@elrrrrrrr](https://github.com/elrrrrrrr).
+
+### @ant-design/x-markdown
+
+- 🆕 XMarkdown adds rendering component configuration `incomplete` for tags that need to be closed during the rendering process and corresponding functionality. [#1223](https://github.com/ant-design/x/pull/1223) by [@Div627](https://github.com/Div627).
+- 🐛 Fixed the issue where XMarkdown `openLinksInNewTab` property configuration was ineffective. [#1253](https://github.com/ant-design/x/pull/1253) by [@Div627](https://github.com/Div627).
+- 🐛 Fixed the issue of repeated rendering in XMarkdown animations. [#1255](https://github.com/ant-design/x/pull/1255) by [@Div627](https://github.com/Div627).
+- 🆕 Enhanced XMarkdown's ability to identify formula rendering tags. [#1255](https://github.com/ant-design/x/pull/1255) by [@Div627](https://github.com/Div627).
+
+### @ant-design/x-sdk
+
+- 🐛 Fixed the issue where useXChat handling stream data server errors caused parameter problems in the `requestFallback` callback. [#1224](https://github.com/ant-design/x/pull/1224) by [@kimteayon](https://github.com/kimteayon).
+- 🆕 Added implementation for activeConversationKey in useXConversations. [#1252](https://github.com/ant-design/x/pull/1252) by [@kimteayon](https://github.com/kimteayon).
+- 🐛 Fixed the non-multi-instance issue of useXChat `isRequesting`, and optimized the callback parameters for `requestPlaceholder` and `requestFallback`. [#1254](https://github.com/ant-design/x/pull/1254) by [@kimteayon](https://github.com/kimteayon).
+
 ## 2.0.0-alpha.9
 
 `2025-09-24`
