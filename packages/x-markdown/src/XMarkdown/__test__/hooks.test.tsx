@@ -193,6 +193,21 @@ const streamingTestCases = [
     output: '',
   },
   {
+    title: 'incomplete list - with incomplete bold',
+    input: '- **',
+    output: '',
+  },
+  {
+    title: 'incomplete list - with complete bold',
+    input: '- **text**',
+    output: '- **text**',
+  },
+  {
+    title: 'setext heading',
+    input: 'text \n- ',
+    output: 'text \n',
+  },
+  {
     title: 'not list ',
     input: '+123',
     output: '+123',
