@@ -425,7 +425,7 @@ class TboxProvider<
     }
     if (requestParams.userAction === 'retry') {
       const messages = this.getMessages();
-      const queryMessage = messages.findLast(({ role }) => {
+      const queryMessage = (messages || [])?.reverse().find(({ role }) => {
         return role === 'user';
       });
       return {
