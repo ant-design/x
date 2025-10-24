@@ -328,6 +328,7 @@ describe('Sender.SlotTextArea', () => {
     const ref = React.createRef<GetRef<typeof Sender>>();
     const testSlotConfig = [
       { type: 'input' as const, key: 'input1', props: { placeholder: 'Please enter content' } },
+      { type: 'text' as const, value: 'text1' },
     ];
     render(<Sender slotConfig={testSlotConfig} allowSpeech ref={ref} />);
     ref?.current?.insert([{ type: 'text', value: 'Speech content' }], 'cursor', '@');
