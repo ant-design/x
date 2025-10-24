@@ -26,10 +26,17 @@ describe('FileCard Component', () => {
   });
 
   it('FileCard support classnames and styles', () => {
-    const { container } = render(<FileCard name="test-file.txt" byte={1024} classNames={{ name: 'custom-class' }} styles={{ name: { color: 'red' } }} />);
+    const { container } = render(
+      <FileCard
+        name="test-file.txt"
+        byte={1024}
+        classNames={{ name: 'custom-class' }}
+        styles={{ name: { color: 'red' } }}
+      />,
+    );
     const namePrefix = container.querySelector<HTMLDivElement>('.ant-file-card-file-name');
     expect(namePrefix).toHaveClass('custom-class');
-    expect(namePrefix).toHaveStyle({color: 'red'});
+    expect(namePrefix).toHaveStyle({ color: 'red' });
   });
 
   it('FileCard support name and byte', () => {
@@ -108,14 +115,16 @@ describe('FileCard Component', () => {
   it('FileCard support list', () => {
     const { container } = render(
       <FileCard.List
-        items={[{
-          name: 'excel-file.xlsx',
-          byte: 1024,
-        },
-        {
-          name: 'word-file.docx',
-          byte: 1024,
-        }]}
+        items={[
+          {
+            name: 'excel-file.xlsx',
+            byte: 1024,
+          },
+          {
+            name: 'word-file.docx',
+            byte: 1024,
+          },
+        ]}
         removable
       />,
     );
@@ -127,14 +136,16 @@ describe('FileCard Component', () => {
   it('FileCard support list remove', async () => {
     const { container } = render(
       <FileCard.List
-        items={[{
-          name: 'excel-file.xlsx',
-          byte: 1024,
-        },
-        {
-          name: 'word-file.docx',
-          byte: 1024,
-        }]}
+        items={[
+          {
+            name: 'excel-file.xlsx',
+            byte: 1024,
+          },
+          {
+            name: 'word-file.docx',
+            byte: 1024,
+          },
+        ]}
         removable
       />,
     );
@@ -147,16 +158,18 @@ describe('FileCard Component', () => {
   it('overflow: scrollX', () => {
     const { container } = render(
       <FileCard.List
-        items={[{
-          name: 'excel-file.xlsx',
-          byte: 1024,
-        },
-        {
-          name: 'word-file.docx',
-          byte: 1024,
-        }]}
+        items={[
+          {
+            name: 'excel-file.xlsx',
+            byte: 1024,
+          },
+          {
+            name: 'word-file.docx',
+            byte: 1024,
+          },
+        ]}
         removable
-        overflow='scrollX'
+        overflow="scrollX"
       />,
     );
 
@@ -166,16 +179,18 @@ describe('FileCard Component', () => {
   it('FileCard list support overflow: scrollY', () => {
     const { container } = render(
       <FileCard.List
-        items={[{
-          name: 'excel-file.xlsx',
-          byte: 1024,
-        },
-        {
-          name: 'word-file.docx',
-          byte: 1024,
-        }]}
+        items={[
+          {
+            name: 'excel-file.xlsx',
+            byte: 1024,
+          },
+          {
+            name: 'word-file.docx',
+            byte: 1024,
+          },
+        ]}
         removable
-        overflow='scrollY'
+        overflow="scrollY"
       />,
     );
 
@@ -185,16 +200,18 @@ describe('FileCard Component', () => {
   it('FileCard list support overflow: scrollY', () => {
     const { container } = render(
       <FileCard.List
-        items={[{
-          name: 'excel-file.xlsx',
-          byte: 1024,
-        },
-        {
-          name: 'word-file.docx',
-          byte: 1024,
-        }]}
+        items={[
+          {
+            name: 'excel-file.xlsx',
+            byte: 1024,
+          },
+          {
+            name: 'word-file.docx',
+            byte: 1024,
+          },
+        ]}
         removable
-        overflow='scrollY'
+        overflow="scrollY"
       />,
     );
 
@@ -204,18 +221,18 @@ describe('FileCard Component', () => {
   it('FileCard list support extension', () => {
     const { container } = render(
       <FileCard.List
-        items={[{
-          name: 'excel-file.xlsx',
-          byte: 1024,
-        },
-        {
-          name: 'word-file.docx',
-          byte: 1024,
-        }]}
+        items={[
+          {
+            name: 'excel-file.xlsx',
+            byte: 1024,
+          },
+          {
+            name: 'word-file.docx',
+            byte: 1024,
+          },
+        ]}
         removable
-        extension={
-          <div className="test-extension">test</div>
-        }
+        extension={<div className="test-extension">test</div>}
       />,
     );
 

@@ -1,8 +1,7 @@
-import React from 'react';
-import { Prompts } from '@ant-design/x';
-import { FireOutlined, CoffeeOutlined, SmileOutlined } from '@ant-design/icons';
-
+import { CoffeeOutlined, FireOutlined, SmileOutlined } from '@ant-design/icons';
 import type { PromptsProps } from '@ant-design/x';
+import { Prompts } from '@ant-design/x';
+import React from 'react';
 
 const items: PromptsProps['items'] = [
   {

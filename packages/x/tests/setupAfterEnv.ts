@@ -1,12 +1,11 @@
 import '@testing-library/jest-dom';
 
+import { defaultConfig as defaultConfigES } from 'antd/es/theme/internal';
+import { defaultConfig as defaultConfigLib } from 'antd/lib/theme/internal';
 import { toHaveNoViolations } from 'jest-axe';
 import jsdom from 'jsdom';
 import format, { plugins } from 'pretty-format';
 import { spyElementPrototypes } from 'rc-util/lib/test/domHook';
-
-import { defaultConfig as defaultConfigLib } from 'antd/lib/theme/internal';
-import { defaultConfig as defaultConfigES } from 'antd/es/theme/internal';
 
 // Mock `scrollTo` since jsdom do not support it
 spyElementPrototypes(HTMLElement, {

@@ -1,5 +1,5 @@
 import { FastColor } from '@ant-design/fast-color';
-import { Global, css } from '@emotion/react';
+import { css, Global } from '@emotion/react';
 import { useTheme } from 'antd-style';
 import React from 'react';
 

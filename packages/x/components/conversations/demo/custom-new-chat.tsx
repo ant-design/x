@@ -5,8 +5,8 @@ import {
   FileSearchOutlined,
   SignatureOutlined,
 } from '@ant-design/icons';
-import { Conversations } from '@ant-design/x';
 import type { ConversationsProps } from '@ant-design/x';
+import { Conversations } from '@ant-design/x';
 import type { GetProp } from 'antd';
 import { theme } from 'antd';
 import React, { useState } from 'react';

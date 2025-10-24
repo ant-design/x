@@ -1,7 +1,7 @@
 import { FastColor } from '@ant-design/fast-color';
 import { Flex, theme } from 'antd';
-import { createStyles } from 'antd-style';
 import tokenMeta from 'antd/es/version/token-meta.json';
+import { createStyles } from 'antd-style';
 import classNames from 'classnames';
 // 用于 color.md 中的颜色对比
 import React from 'react';

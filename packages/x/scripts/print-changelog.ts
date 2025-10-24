@@ -1,13 +1,14 @@
 /* eslint-disable no-await-in-loop, no-console */
-import { spawn } from 'child_process';
-import path from 'path';
+
 import chalk from 'chalk';
+import { spawn } from 'child_process';
 import fs from 'fs-extra';
 import inquirer from 'inquirer';
 import fetch from 'isomorphic-fetch';
 import jQuery from 'jquery';
 import jsdom from 'jsdom';
 import openWindow from 'open';
+import path from 'path';
 import simpleGit from 'simple-git';
 
 const { JSDOM } = jsdom;

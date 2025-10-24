@@ -4,8 +4,8 @@ import { useIntl } from 'dumi';
 import * as React from 'react';
 
 import CopyableIcon from './CopyableIcon';
-import type { ThemeType } from './IconSearch';
 import type { CategoriesKeys } from './fields';
+import type { ThemeType } from './IconSearch';
 
 const useStyle = createStyles(({ token, css }) => ({
   anticonsList: css`

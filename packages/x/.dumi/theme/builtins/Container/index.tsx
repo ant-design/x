@@ -1,8 +1,9 @@
 /**
  * copied: https://github.com/arvinxx/dumi-theme-antd-style/tree/master/src/builtins/Container
  */
-import * as React from 'react';
+
 import { Alert } from 'antd';
+import * as React from 'react';
 
 import useStyles from './style';
 

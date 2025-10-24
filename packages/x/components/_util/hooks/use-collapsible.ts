@@ -1,8 +1,7 @@
+import type { CSSMotionProps } from 'rc-motion';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import React from 'react';
 import initCollapseMotion from '../../_util/motion';
-
-import type { CSSMotionProps } from 'rc-motion';
 
 export type CollapsibleOptions = {
   /**

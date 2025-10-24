@@ -1,7 +1,7 @@
 import Icon, * as AntdIcons from '@ant-design/icons';
 import { Affix, Empty, Input, Segmented } from 'antd';
-import { createStyles, useTheme } from 'antd-style';
 import type { SegmentedOptions } from 'antd/es/segmented';
+import { createStyles, useTheme } from 'antd-style';
 import { useIntl } from 'dumi';
 import debounce from 'lodash/debounce';
 import type { CSSProperties } from 'react';
