@@ -401,6 +401,7 @@ const App = () => {
                 <Sender
                   suffix={false}
                   ref={senderRef}
+                  key={curConversation}
                   slotConfig={slotConfig}
                   loading={isRequesting}
                   onSubmit={(val) => {
