@@ -527,6 +527,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
   const focus = (options?: FocusOptions) => {
     if (options?.cursor === 'slot') {
+      console.log(slotConfigMap, slotDomMap, 'slotDomMap');
       let inputDom = null;
       if (options?.key) {
         if (
@@ -538,9 +539,9 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
           );
         }
       } else {
-        for (const dom of Array.from(slotDomMap.current.values())) {
-          if (dom.querySelector('input')) {
-            inputDom = dom.querySelector('input');
+        for (const node of Array.from(editableRef.current?.childNodes || [])) {
+          if (node.nodeType === Node.ELEMENT_NODE && (node as Element).querySelector('input')) {
+            inputDom = (node as Element).querySelector('input');
             break;
           }
         }
