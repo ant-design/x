@@ -114,9 +114,8 @@ const useStyle = createStyles(({ token, css }) => {
       display: flex;
       align-items: center;
       width: 100%;
-      height: calc(100% - 120px);
-      flex-direction: column;
       height: 100%;
+      flex-direction: column;
       justify-content: space-between;
     `,
   };
@@ -375,6 +374,9 @@ const App = () => {
               {messages?.length !== 0 && (
                 /* 🌟 消息列表 */
                 <Bubble.List
+                  style={{
+                    height: 'calc(100% - 160px)',
+                  }}
                   items={messages?.map((i) => ({
                     ...i.message,
                     key: i.id,

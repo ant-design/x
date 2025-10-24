@@ -92,7 +92,7 @@ const App = () => {
             Get Dom
           </Button>
           <Button onClick={() => listRef.current?.scrollTo({ top: 'top' })}>Scroll To Top</Button>
-          <Button onClick={() => listRef.current?.scrollTo({ top: 'bottom', behavior: 'instant' })}>
+          <Button onClick={() => listRef.current?.scrollTo({ top: 'bottom', behavior: 'smooth' })}>
             Scroll To Bottom
           </Button>
           <Button onClick={() => listRef.current?.scrollTo({ top: Math.random() * 1000 })}>
@@ -108,7 +108,7 @@ const App = () => {
 
       <Bubble.List
         ref={listRef}
-        style={{ maxHeight: 400 }}
+        style={{ height: 400 }}
         role={memoRole}
         items={items}
         onScroll={(e) => {

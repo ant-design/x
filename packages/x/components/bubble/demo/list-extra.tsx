@@ -129,12 +129,7 @@ const App = () => {
     },
   ]);
   return (
-    <Bubble.List
-      ref={listRef}
-      style={{ maxHeight: 500 }}
-      role={roles(setMessage)}
-      items={message}
-    />
+    <Bubble.List ref={listRef} style={{ height: 500 }} role={roles(setMessage)} items={message} />
   );
 };
 

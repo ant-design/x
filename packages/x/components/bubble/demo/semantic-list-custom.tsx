@@ -25,7 +25,7 @@ const App = () => {
   return (
     <Bubble.List
       ref={listRef}
-      style={{ maxHeight: 300 }}
+      style={{ height: 500 }}
       role={roles}
       items={[
         {

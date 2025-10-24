@@ -3,6 +3,7 @@ import { warning } from 'rc-util';
 import omit from 'rc-util/es/omit';
 import pickAttrs from 'rc-util/es/pickAttrs';
 import * as React from 'react';
+import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import { useXProviderContext } from '../x-provider';
 import Bubble from './Bubble';
 import { BubbleContext } from './context';
@@ -136,6 +137,7 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
 
   // ============================= Refs =============================
   const listRef = React.useRef<HTMLDivElement>(null);
+  const scrollBoxRef = React.useRef<HTMLDivElement>(null);
 
   const bubblesRef = React.useRef<BubblesRecord>({});
 
@@ -154,9 +156,6 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
     classNames?.root,
     hashId,
     cssVarCls,
-    {
-      [`${listPrefixCls}-autoscroll`]: autoScroll,
-    },
   );
 
   const mergedStyle = {
@@ -165,67 +164,83 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   };
 
   // ============================ Scroll ============================
-  // Always scroll to bottom when data change
+  // 只有最后一条数据变更才需要滚动到底部
+  const lastItemKey = items[items.length - 1]?.key || items.length;
   React.useEffect(() => {
-    listRef.current?.scrollTo({ top: autoScroll ? 0 : listRef.current.scrollHeight });
-  }, [items.length, autoScroll]);
+    scrollBoxRef.current?.scrollTo({ top: autoScroll ? 0 : scrollBoxRef.current.scrollHeight });
+  }, [lastItemKey, autoScroll]);
 
-  // ========================== Ref ===========================
-  React.useImperativeHandle(
-    ref,
-    () => ({
+  // ============================= Refs =============================
+  useProxyImperativeHandle(ref, () => {
+    return {
       nativeElement: listRef.current!,
-      scrollTo: ({ key, top, behavior = 'smooth', block }) => {
-        const { scrollHeight, clientHeight } = listRef.current!;
+      scrollBoxNativeElement: scrollBoxRef.current!,
+      scrollTo: ({
+        key,
+        top,
+        behavior = 'smooth',
+        block,
+      }: {
+        key: string | number;
+        top: number | 'bottom' | 'top';
+        behavior?: ScrollBehavior;
+        block?: ScrollLogicalPosition;
+      }) => {
+        const { scrollHeight, clientHeight } = scrollBoxRef.current!;
         if (typeof top === 'number') {
-          listRef.current?.scrollTo({
+          scrollBoxRef.current?.scrollTo({
             top: autoScroll ? -scrollHeight + clientHeight + top : top,
             behavior,
           });
         } else if (top === 'bottom') {
           const bottomOffset = autoScroll ? 0 : scrollHeight;
-          listRef.current?.scrollTo({ top: bottomOffset, behavior });
+          scrollBoxRef.current?.scrollTo({ top: bottomOffset, behavior });
         } else if (top === 'top') {
           const topOffset = autoScroll ? -scrollHeight : 0;
-          listRef.current?.scrollTo({ top: topOffset, behavior });
+          scrollBoxRef.current?.scrollTo({ top: topOffset, behavior });
         } else if (key && bubblesRef.current[key]) {
           bubblesRef.current[key].nativeElement.scrollIntoView({ behavior, block });
         }
       },
-    }),
-    [autoScroll],
-  );
+    };
+  });
 
   const renderData = autoScroll ? [...items].reverse() : items;
 
+  const mergeOnScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
+    console.log(scrollBoxRef.current?.scrollTop);
+    onScroll?.(e);
+  };
   // ============================ Render ============================
   return (
-    <div
-      {...domProps}
-      className={mergedClassNames}
-      style={mergedStyle}
-      ref={listRef}
-      onScroll={onScroll}
-    >
-      {renderData.map((item) => {
-        let mergedProps: BubbleItemType;
-        if (item.role && role) {
-          const cfg = role[item.role];
-          mergedProps = { ...(roleCfgIsFunction(cfg) ? cfg(item) : cfg), ...item };
-        } else {
-          mergedProps = item;
-        }
-        return (
-          <BubbleListItem
-            classNames={classNames}
-            styles={styles}
-            {...omit(mergedProps, ['key'])}
-            key={item.key}
-            _key={item.key}
-            bubblesRef={bubblesRef}
-          />
-        );
-      })}
+    <div {...domProps} className={mergedClassNames} style={mergedStyle} ref={listRef}>
+      <div
+        className={classnames(`${listPrefixCls}-scroll-box`, {
+          [`${listPrefixCls}-autoscroll`]: autoScroll,
+        })}
+        ref={scrollBoxRef}
+        onScroll={mergeOnScroll}
+      >
+        {renderData.map((item) => {
+          let mergedProps: BubbleItemType;
+          if (item.role && role) {
+            const cfg = role[item.role];
+            mergedProps = { ...(roleCfgIsFunction(cfg) ? cfg(item) : cfg), ...item };
+          } else {
+            mergedProps = item;
+          }
+          return (
+            <BubbleListItem
+              classNames={classNames}
+              styles={styles}
+              {...omit(mergedProps, ['key'])}
+              key={item.key}
+              _key={item.key}
+              bubblesRef={bubblesRef}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };
