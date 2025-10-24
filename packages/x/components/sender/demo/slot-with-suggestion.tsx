@@ -120,7 +120,7 @@ const App: React.FC = () => {
     };
   });
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState('');
+
   const attachmentsRef = React.useRef<GetRef<typeof Attachments>>(null);
   const fileItems = Object.keys(FileInfo).map((file) => {
     const { icon, label } = FileInfo[file];

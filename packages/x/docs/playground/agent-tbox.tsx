@@ -470,7 +470,7 @@ const ChatContext = React.createContext<{
 
 // ==================== Sub Component====================
 const ThinkComponent = React.memo((props: ComponentProps) => {
-  const [title, setTitle] = React.useState(t.DeepThinking + '...');
+  const [title, setTitle] = React.useState(`${t.DeepThinking}...`);
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {

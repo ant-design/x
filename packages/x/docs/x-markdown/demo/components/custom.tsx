@@ -69,7 +69,7 @@ const Salesdashboard = React.memo(({ children, streamStatus }: ComponentProps) =
         if (parsedData.newCustomers) {
           setNewCustomers(parsedData.newCustomers);
         }
-      } catch (error) {
+      } catch (_error) {
         // 如果解析失败，使用默认数据
         const defaultData = [
           { name: '电子产品', value: 45000, color: '#3b82f6' },
@@ -212,7 +212,7 @@ const OrderManager = React.memo(() => {
       ];
 
       setOrders(mockOrders);
-    } catch (error) {
+    } catch (_error) {
       message.error('获取订单失败');
     } finally {
       setLoading(false);
@@ -228,7 +228,7 @@ const OrderManager = React.memo(() => {
       await new Promise((resolve) => setTimeout(resolve, 500));
       setOrders((prev) => prev.filter((order) => order.id !== id));
       message.success('订单已删除');
-    } catch (error) {
+    } catch (_error) {
       message.error('删除失败');
     }
   };
@@ -265,7 +265,7 @@ const OrderManager = React.memo(() => {
       setModalVisible(false);
       form.resetFields();
       setEditingOrder(null);
-    } catch (error) {
+    } catch (_error) {
       message.error('操作失败');
     }
   };
