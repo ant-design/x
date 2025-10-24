@@ -88,7 +88,7 @@ type ActionsComponents = {
 | nativeElement | 外层容器 | `HTMLDivElement` | - | - |
 | focus | 获取焦点，当 `cursor = 'slot'` 时焦点会在第一个插槽类型为 `input` 的输入框内，若不存在对应的 `input` 则效果会和 `end` 一致。 | (option?: { preventScroll?: boolean, cursor?: 'start' \| 'end' \| 'all' \| 'slot' }) | - | - |
 | blur | 取消焦点 | () => void | - | - |
-| insert | 插入文本或者插槽，使用插槽时需确保 slotConfig 已配置 | (value: string) => void \| (slotConfig: SlotConfigType[], position?: insertPosition) => void; | - | - |
+| insert | 插入文本或者插槽，使用插槽时需确保 slotConfig 已配置 | (value: string) => void \| (slotConfig: SlotConfigType[], position?: insertPosition, replaceCharacters?: string) => void; | - | - |
 | clear | 清空内容 | () => void | - | - |
 | getValue | 获取当前内容和结构化配置 | () => { value: string; config: SlotConfigType[] } | - | - |
 

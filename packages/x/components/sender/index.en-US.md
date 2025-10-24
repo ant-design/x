@@ -4,20 +4,19 @@ group:
   title: Express
   order: 2
 title: Sender
-subtitle: Input Box
-description: An input component for chat scenarios.
+description: A input component for chat.
 cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*OwTOS6wqFIsAAAAAAAAAAAAADgCCAQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAAAAAAAAAAAADgCCAQ/original
 ---
 
 ## When To Use
 
-- When you need to build an input box for chat scenarios
+- Need to build an input box for a dialogue scenario
 
 ## Examples
 
 <!-- prettier-ignore -->
-<code src="./demo/agent.tsx">Agent Input</code>
+<code src="./demo/agent.tsx">Agent Sender</code>
 <code src="./demo/basic.tsx">Basic Usage</code>
 <code src="./demo/switch.tsx">Feature Switch</code>
 <code src="./demo/slot-filling.tsx">Slot Mode</code>
@@ -88,7 +87,7 @@ type ActionsComponents = {
 | nativeElement | Outer container | `HTMLDivElement` | - | - |
 | focus | Set focus, when `cursor = 'slot'` the focus will be in the first input slot, if no corresponding `input` exists it will behave like `end` | (option?: { preventScroll?: boolean, cursor?: 'start' \| 'end' \| 'all' \| 'slot' }) | - | - |
 | blur | Remove focus | () => void | - | - |
-| insert | Insert text or slot(s). When using slot(s), make sure slotConfig is set. | (value: string) => void \| (slotConfig: SlotConfigType[], position?: insertPosition) => void; | - | - |
+| insert | Insert text or slot(s). When using slot(s), make sure slotConfig is set. | (value: string) => void \| (slotConfig: SlotConfigType[], position?: insertPosition, replaceCharacters?: string) => void; | - | - |
 | clear | Clear content | () => void | - | - |
 | getValue | Get current content and structured configuration | () => { value: string; config: SlotConfigType[] } | - | - |
 
