@@ -27,7 +27,7 @@ const ThinkComponent = React.memo((props: ComponentProps) => {
   ];
   return (
     <Sources
-      activeKey={parseInt(`${props?.children}` || '0')}
+      activeKey={parseInt(`${props?.children}` || '0', 10)}
       title={props.children}
       items={items}
       inline={true}
