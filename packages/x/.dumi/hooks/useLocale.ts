@@ -1,4 +1,4 @@
-import dumi from 'dumi';
+import { useIntl } from 'dumi';
 
 export interface LocaleMap<
   K extends PropertyKey = PropertyKey,
@@ -14,7 +14,8 @@ const useLocale = <
 >(
   localeMap?: LocaleMap<K, V>,
 ): [Record<K, V>, 'cn' | 'en'] => {
-  const { locale } = (dumi as any).useIntl();
+  const { locale } = useIntl();
+
   const localeType = locale === 'zh-CN' ? 'cn' : 'en';
   return [localeMap?.[localeType]!, localeType] as const;
 };
