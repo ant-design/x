@@ -32,7 +32,7 @@ export interface SourcesProps
   classNames?: Partial<Record<SemanticType, string>>;
   rootClassName?: string;
   inline?: boolean;
-  items: Array<SourcesItem>;
+  items?: Array<SourcesItem>;
   title?: React.ReactNode;
   expandIconPosition?: 'start' | 'end';
   onClick?: (item: SourcesItem) => void;
