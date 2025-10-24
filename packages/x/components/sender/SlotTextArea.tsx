@@ -502,7 +502,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       const cursorPosition = textBeforeCursor.length; // 光标位置前的字符数
 
       if (cursorPosition >= replaceCharacters.length) {
-        if (textBeforeCursor.lastIndexOf(replaceCharacters) === textBeforeCursor.length - 1) {
+        if (textBeforeCursor.endsWith(replaceCharacters)) {
           range.setStart(container, startOffset - replaceCharacters.length);
           range.setEnd(container, startOffset);
           range.deleteContents();
@@ -588,7 +588,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
   useEffect(() => {
     slotConfigRef.current = [...(slotConfig || [])];
-    if (slotConfigRef?.current.length === 0) return;
+    if (slotConfigRef.current.length === 0) return;
     if (editableRef.current && slotConfigRef.current) {
       editableRef.current.innerHTML = '';
       slotDomMap?.current?.clear();

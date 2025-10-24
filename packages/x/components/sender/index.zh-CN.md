@@ -170,7 +170,7 @@ type ActionsComponents = {
 **示例：**
 
 ```jsx
-// ❌ 错误用法 slotConfig 为不受控用法*/
+// ❌ 错误用法 slotConfig 为不受控用法
 const [config, setConfig] = useState([]);
 <Sender
   slotConfig={config}
