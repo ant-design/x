@@ -51,11 +51,11 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     placeholder,
     onFocus,
     onBlur,
-    initialSlotConfig,
+    slotConfig,
     ...restProps
   } = React.useContext(SenderContext);
+  const slotConfigRef = useRef<SlotConfigType[]>([...(slotConfig || [])]);
 
-  const mergeInitialSlotConfig = [...(initialSlotConfig || [])];
   // ============================= MISC =============================
   const { direction, getPrefixCls } = useXProviderContext();
   const prefixCls = `${getPrefixCls('sender', customizePrefixCls)}`;
@@ -88,11 +88,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
   // ============================ State =============================
 
-  const [slotConfig, setSlotConfig] = useState<SlotConfigType[]>(
-    mergeInitialSlotConfig as SlotConfigType[],
-  );
-
-  const [slotConfigMap, getSlotValues, setSlotValues] = useGetState(slotConfig);
+  const [slotConfigMap, getSlotValues, setSlotValues] = useGetState(slotConfigRef.current);
 
   const [slotPlaceholders, setSlotPlaceholders] = useState<Map<string, React.ReactNode>>(new Map());
 
@@ -115,9 +111,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
   const updateSlot = (key: string, value: any, e?: EventType) => {
     const slotDom = getSlotDom(key);
-    const node = slotConfig?.find((item) => item.key === key);
+    const node = slotConfigRef.current?.find((item) => item.key === key);
     setSlotValues((prev) => ({ ...prev, [key]: value }));
-
     if (slotDom && node) {
       const newReactNode = renderSlot(node, slotDom);
       setSlotPlaceholders((prev) => {
@@ -460,11 +455,11 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const slotNode = getSlotListNode(slotConfig);
     const { type, range: lastRage } = getInsertPosition(position);
     let range: Range = document.createRange();
-
-    setSlotConfig((ori) => {
-      ori?.push(...slotConfig);
-      return [...ori];
-    });
+    slotConfigRef.current = [...slotConfigRef.current, ...slotConfig];
+    // setSlotConfig((ori) => {
+    //   ori?.push(...slotConfig);
+    //   return [...ori];
+    // });
 
     setSlotValues(slotConfig);
     // 光标不在输入框内，将内容插入最末位
@@ -550,18 +545,20 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   };
 
   // ============================ Effects =============================
+
   useEffect(() => {
-    if (mergeInitialSlotConfig?.length === 0) return;
-    if (editableRef.current && mergeInitialSlotConfig) {
+    slotConfigRef.current = [...(slotConfig || [])];
+    if (slotConfigRef?.current.length === 0) return;
+    if (editableRef.current && slotConfigRef.current) {
       editableRef.current.innerHTML = '';
       slotDomMap?.current?.clear();
-      const slotNodeList = getSlotListNode(mergeInitialSlotConfig);
+      const slotNodeList = getSlotListNode(slotConfigRef.current);
       slotNodeList.forEach((element) => {
         editableRef.current?.appendChild(element);
       });
       onChange?.(getEditorValue().value, undefined, getEditorValue().config);
     }
-  }, []);
+  }, [slotConfig]);
 
   useImperativeHandle(ref, () => {
     return {

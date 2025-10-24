@@ -2,7 +2,7 @@ import { Sender, type SenderProps } from '@ant-design/x';
 import { Button, Flex, GetRef, Slider } from 'antd';
 import React, { useRef, useState } from 'react';
 
-type SlotConfig = SenderProps['initialSlotConfig'];
+type SlotConfig = SenderProps['slotConfig'];
 
 const initialSlotConfig: SlotConfig = [
   { type: 'text', value: 'I want to go to' },
@@ -90,6 +90,14 @@ const App: React.FC = () => {
           }}
         >
           Get Value
+        </Button>
+        <Button
+          onClick={() => {
+            const val = senderRef.current?.getValue();
+            setValue(val?.config ? JSON.stringify(val.config) : 'No value');
+          }}
+        >
+          Get Slot
         </Button>
         <Button
           onClick={() => {
@@ -210,12 +218,11 @@ const App: React.FC = () => {
       </Flex>
       {/* Sender 词槽填空示例 */}
       <Sender
-        key={slotConfigKey || 'default'}
         onSubmit={(value) => {
           setValue(value);
           setSlotConfigKey(false);
         }}
-        initialSlotConfig={slotConfigKey ? slotConfig?.[slotConfigKey] : []}
+        slotConfig={slotConfigKey ? slotConfig?.[slotConfigKey] : []}
         ref={senderRef}
       />
       {value ? `value:${value}` : null}
