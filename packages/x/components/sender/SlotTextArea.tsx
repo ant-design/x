@@ -527,7 +527,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
   const focus = (options?: FocusOptions) => {
     if (options?.cursor === 'slot') {
-      console.log(slotConfigMap, slotDomMap, 'slotDomMap');
       let inputDom = null;
       if (options?.key) {
         if (
