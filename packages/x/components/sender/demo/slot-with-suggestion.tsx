@@ -4,13 +4,14 @@ import {
   CodeOutlined,
   EditOutlined,
   FileImageOutlined,
+  OpenAIFilled,
   OpenAIOutlined,
   PaperClipOutlined,
   ProfileOutlined,
   SearchOutlined,
 } from '@ant-design/icons';
-import { Attachments, AttachmentsProps, Sender, SenderProps } from '@ant-design/x';
-import { Button, Divider, Dropdown, Flex, GetRef, MenuProps, message } from 'antd';
+import { Attachments, AttachmentsProps, Sender, SenderProps, Suggestion } from '@ant-design/x';
+import { Button, Divider, Dropdown, Flex, GetProp, GetRef, MenuProps, message } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 
 const Switch = Sender.Switch;
@@ -106,6 +107,7 @@ const FileInfo: {
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
+  type SuggestionItems = Exclude<GetProp<typeof Suggestion, 'items'>, () => void>;
   const [deepThink, setDeepThink] = useState<boolean>(true);
   const [activeAgentKey, setActiveAgentKey] = useState('deep_search');
   const [fileList, setFileList] = useState<AttachmentsProps['items']>([]);
@@ -118,6 +120,7 @@ const App: React.FC = () => {
     };
   });
   const [open, setOpen] = React.useState(false);
+  const [value, setValue] = React.useState('');
   const attachmentsRef = React.useRef<GetRef<typeof Attachments>>(null);
   const fileItems = Object.keys(FileInfo).map((file) => {
     const { icon, label } = FileInfo[file];
@@ -188,75 +191,123 @@ const App: React.FC = () => {
     </Sender.Header>
   );
 
+  const suggestions: SuggestionItems = [
+    { label: 'Write a report', value: 'report' },
+    { label: 'Draw a picture', value: 'draw' },
+    {
+      label: 'Check some knowledge',
+      value: 'knowledge',
+      icon: <OpenAIFilled />,
+      children: [
+        {
+          label: 'About React',
+          value: 'react',
+        },
+        {
+          label: 'About Ant Design',
+          value: 'antd',
+        },
+      ],
+    },
+  ];
+
   return (
     <Flex vertical gap="middle">
-      <Sender
-        loading={loading}
-        ref={senderRef}
-        placeholder="Press Enter to send message"
-        header={senderHeader}
-        footer={(actionNode) => {
-          return (
-            <Flex justify="space-between" align="center">
-              <Flex gap="small" align="center">
-                <Button style={IconStyle} type="text" icon={<PaperClipOutlined />} />
-                <Switch
-                  value={deepThink}
-                  checkedChildren={
-                    <>
-                      Deep Think:<span style={SwitchTextStyle}>on</span>
-                    </>
-                  }
-                  unCheckedChildren={
-                    <>
-                      Deep Think:<span style={SwitchTextStyle}>off</span>
-                    </>
-                  }
-                  onChange={(checked: boolean) => {
-                    setDeepThink(checked);
-                  }}
-                  icon={<OpenAIOutlined />}
-                />
-                <Dropdown
-                  menu={{
-                    selectedKeys: [activeAgentKey],
-                    onClick: agentItemClick,
-                    items: agentItems,
-                  }}
-                >
-                  <Switch value={false} icon={<AntDesignOutlined />}>
-                    Agent
-                  </Switch>
-                </Dropdown>
-                {fileItems?.length ? (
-                  <Dropdown menu={{ onClick: fileItemClick, items: fileItems }}>
-                    <Switch value={false} icon={<ProfileOutlined />}>
-                      Files
-                    </Switch>
-                  </Dropdown>
-                ) : null}
-              </Flex>
-              <Flex align="center">
-                <Button type="text" style={IconStyle} icon={<ApiOutlined />} />
-                <Divider orientation="vertical" />
-                {actionNode}
-              </Flex>
-            </Flex>
+      <Suggestion
+        items={suggestions}
+        onSelect={() => {
+          senderRef.current?.insert?.(
+            [
+              {
+                type: 'input',
+                key: `partner_2_${Date.now()}`,
+                props: { placeholder: 'Enter a name' },
+              },
+            ],
+            'cursor',
+            '@',
           );
         }}
-        suffix={false}
-        onSubmit={(v) => {
-          setLoading(true);
-          message.info(`Send message: ${v}`);
-          senderRef.current?.clear?.();
+      >
+        {({ onTrigger }) => {
+          return (
+            <Sender
+              loading={loading}
+              ref={senderRef}
+              placeholder="Press Enter to send message"
+              header={senderHeader}
+              footer={(actionNode) => {
+                return (
+                  <Flex justify="space-between" align="center">
+                    <Flex gap="small" align="center">
+                      <Button style={IconStyle} type="text" icon={<PaperClipOutlined />} />
+                      <Switch
+                        value={deepThink}
+                        checkedChildren={
+                          <>
+                            Deep Think:<span style={SwitchTextStyle}>on</span>
+                          </>
+                        }
+                        unCheckedChildren={
+                          <>
+                            Deep Think:<span style={SwitchTextStyle}>off</span>
+                          </>
+                        }
+                        onChange={(checked: boolean) => {
+                          setDeepThink(checked);
+                        }}
+                        icon={<OpenAIOutlined />}
+                      />
+                      <Dropdown
+                        menu={{
+                          selectedKeys: [activeAgentKey],
+                          onClick: agentItemClick,
+                          items: agentItems,
+                        }}
+                      >
+                        <Switch value={false} icon={<AntDesignOutlined />}>
+                          Agent
+                        </Switch>
+                      </Dropdown>
+                      {fileItems?.length ? (
+                        <Dropdown menu={{ onClick: fileItemClick, items: fileItems }}>
+                          <Switch value={false} icon={<ProfileOutlined />}>
+                            Files
+                          </Switch>
+                        </Dropdown>
+                      ) : null}
+                    </Flex>
+                    <Flex align="center">
+                      <Button type="text" style={IconStyle} icon={<ApiOutlined />} />
+                      <Divider orientation="vertical" />
+                      {actionNode}
+                    </Flex>
+                  </Flex>
+                );
+              }}
+              onKeyDown={(e) => {
+                if (e.key === '@') {
+                  onTrigger();
+                } else {
+                  onTrigger(false);
+                }
+              }}
+              suffix={false}
+              onSubmit={(v) => {
+                setLoading(true);
+                message.info(`Send message: ${v}`);
+                senderRef.current?.clear?.();
+              }}
+              onCancel={() => {
+                setLoading(false);
+                message.error('Cancel sending!');
+              }}
+              slotConfig={AgentInfo[activeAgentKey].slotConfig}
+              autoSize={{ minRows: 3, maxRows: 6 }}
+            />
+          );
         }}
-        onCancel={() => {
-          setLoading(false);
-          message.error('Cancel sending!');
-        }}
-        slotConfig={AgentInfo[activeAgentKey].slotConfig}
-        autoSize={{ minRows: 3, maxRows: 6 }}
-      />
+      </Suggestion>
     </Flex>
   );
 };

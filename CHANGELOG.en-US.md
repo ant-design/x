@@ -27,12 +27,12 @@ tag: vVERSION
 - Sender
   - 🆕 Added slot focus event functionality. [#1221](https://github.com/ant-design/x/pull/1221) by [@kimteayon](https://github.com/kimteayon).
   - 🐛 Fixed the issue where `onPasteFile` callback data was incorrect when pasting multiple files in the input box. [#1221](https://github.com/ant-design/x/pull/1221) by [@kimteayon](https://github.com/kimteayon).
-  - 🐛 Fixed accessibility issues caused by SVG not being internationalized. [#1243](https://github.com/ant-design/x/pull/1230) by [@kimteayon](https://github.com/kimteayon).
+  - 🐛 Fixed accessibility issues caused by SVG not being internationalized. [#1243](https://github.com/ant-design/x/pull/1243) by [@kimteayon](https://github.com/kimteayon).
 - FileCard
   - 🆕 Added semantic implementation. [#1220](https://github.com/ant-design/x/pull/1220) by [@kimteayon](https://github.com/kimteayon).
   - 🆕 Added support for `jfif` type. [#1248](https://github.com/ant-design/x/pull/1248) by [@IsDyh01](https://github.com/IsDyh01).
 - 🆕 Attachments added semantic implementation. [#1220](https://github.com/ant-design/x/pull/1220) by [@kimteayon](https://github.com/kimteayon).
-- 📖 Optimized the official site to enhance user experience. [#1216](https://github.com/ant-design/x/pull/1216) by [@kimteayon](https://github.com/kimteayon), [#1217](https://github.com/ant-design/x/pull/1212) by [@Div627](https://github.com/Div627), [#1218](https://github.com/ant-design/x/pull/1218) by [@IsDyh01](https://github.com/IsDyh01), [#1224](https://github.com/ant-design/x/pull/1224) by [@kimteayon](https://github.com/kimteayon), [#1232](https://github.com/ant-design/x/pull/1232) by [@IsDyh01](https://github.com/IsDyh01), [#1233](https://github.com/ant-design/x/pull/1233) by [@kimteayon](https://github.com/kimteayon), [#1243](https://github.com/ant-design/x/pull/1243) by [@kimteayon](https://github.com/kimteayon), [#1247](https://github.com/ant-design/x/pull/1247) by [@elrrrrrrr](https://github.com/elrrrrrrr).
+- 📖 Optimized the official site to enhance user experience. [#1216](https://github.com/ant-design/x/pull/1216) by [@kimteayon](https://github.com/kimteayon), [#1217](https://github.com/ant-design/x/pull/1217) by [@Div627](https://github.com/Div627), [#1218](https://github.com/ant-design/x/pull/1218) by [@IsDyh01](https://github.com/IsDyh01), [#1224](https://github.com/ant-design/x/pull/1224) by [@kimteayon](https://github.com/kimteayon), [#1232](https://github.com/ant-design/x/pull/1232) by [@IsDyh01](https://github.com/IsDyh01), [#1233](https://github.com/ant-design/x/pull/1233) by [@kimteayon](https://github.com/kimteayon), [#1243](https://github.com/ant-design/x/pull/1243) by [@kimteayon](https://github.com/kimteayon), [#1247](https://github.com/ant-design/x/pull/1247) by [@elrrrrrrr](https://github.com/elrrrrrrr).
 
 ### @ant-design/x-markdown
 

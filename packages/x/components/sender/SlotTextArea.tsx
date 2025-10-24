@@ -13,14 +13,14 @@ import useInputHeight from './hooks/use-input-height';
 import type { EventType, insertPosition, SlotConfigType } from './interface';
 
 export interface SlotTextAreaRef {
-  focus: (
-    options?: Omit<Parameters<InputRef['focus']>[0], 'cursor'> & {
-      cursor?: 'start' | 'end' | 'all' | 'slot';
-    },
-  ) => void;
+  focus: (options?: FocusOptions) => void;
   blur: InputRef['blur'];
   nativeElement: InputRef['nativeElement'];
-  insert: (slotConfig: SlotConfigType[], position?: insertPosition) => void;
+  insert: (
+    slotConfig: SlotConfigType[],
+    position?: insertPosition,
+    replaceCharacters?: string,
+  ) => void;
   clear: () => void;
   getValue: () => {
     value: string;
@@ -30,9 +30,19 @@ export interface SlotTextAreaRef {
 
 type InputFocusOptions = {
   preventScroll?: boolean;
-  cursor?: 'start' | 'end' | 'all' | 'slot';
+  cursor?: 'start' | 'end' | 'all';
 };
+
+type SlotFocusOptions = {
+  preventScroll?: boolean;
+  cursor?: 'slot';
+  key?: string;
+};
+
+type FocusOptions = SlotFocusOptions | InputFocusOptions;
+
 type SlotNode = Text | Document | HTMLSpanElement;
+
 const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const {
     onChange,
@@ -448,7 +458,11 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   };
 
   // ============================ Ref Method ============================
-  const insert: SlotTextAreaRef['insert'] = (slotConfig, position = 'cursor') => {
+  const insert: SlotTextAreaRef['insert'] = (
+    slotConfig,
+    position = 'cursor',
+    replaceCharacters?: string,
+  ) => {
     const editableDom = editableRef.current;
     const selection = window.getSelection();
     if (!editableDom || !selection) return;
@@ -456,11 +470,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const { type, range: lastRage } = getInsertPosition(position);
     let range: Range = document.createRange();
     slotConfigRef.current = [...slotConfigRef.current, ...slotConfig];
-    // setSlotConfig((ori) => {
-    //   ori?.push(...slotConfig);
-    //   return [...ori];
-    // });
-
     setSlotValues(slotConfig);
     // 光标不在输入框内，将内容插入最末位
     if (type === 'end') {
@@ -480,7 +489,26 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         range.setStartBefore(selection.focusNode.nextSibling);
       }
     }
+    const startOffset = range.startOffset;
+    const container = range.startContainer;
 
+    // 如果光标前有字符
+    if (replaceCharacters?.length) {
+      const preCaretRange = range.cloneRange();
+      preCaretRange.selectNodeContents(editableDom);
+      preCaretRange.setEnd(range.endContainer, range.endOffset);
+      preCaretRange.setStart(editableDom, 0);
+      const textBeforeCursor = preCaretRange.toString();
+      const cursorPosition = textBeforeCursor.length; // 光标位置前的字符数
+
+      if (cursorPosition >= replaceCharacters.length) {
+        if (textBeforeCursor.lastIndexOf(replaceCharacters) === textBeforeCursor.length - 1) {
+          range.setStart(container, startOffset - replaceCharacters.length);
+          range.setEnd(container, startOffset);
+          range.deleteContents();
+        }
+      }
+    }
     slotNode.forEach((node) => {
       range.insertNode(node);
       range.setStartAfter(node);
@@ -497,19 +525,31 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }, 0);
   };
 
-  const focus = (options?: InputFocusOptions) => {
-    let isSuccessSlot = false;
+  const focus = (options?: FocusOptions) => {
     if (options?.cursor === 'slot') {
-      for (const dom of Array.from(slotDomMap.current.values())) {
-        if (dom.querySelector('input')) {
-          dom.querySelector('input')?.focus();
-          isSuccessSlot = true;
-          break;
+      let inputDom = null;
+      if (options?.key) {
+        if (
+          slotDomMap.current.has(options.key) &&
+          (slotDomMap.current.get(options.key) as HTMLSpanElement).querySelector('input')
+        ) {
+          inputDom = (slotDomMap.current.get(options.key) as HTMLSpanElement).querySelector(
+            'input',
+          );
+        }
+      } else {
+        for (const dom of Array.from(slotDomMap.current.values())) {
+          if (dom.querySelector('input')) {
+            inputDom = dom.querySelector('input');
+            break;
+          }
         }
       }
+      if (inputDom) {
+        inputDom?.focus();
+        return;
+      }
     }
-    if (isSuccessSlot) return;
-
     const editor = editableRef.current;
     if (options?.cursor && editor) {
       editor.focus();

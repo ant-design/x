@@ -43,6 +43,14 @@ const initialSlotConfig: SlotConfig = [
       return `between ${value[0]} and ${value[1]} RMB.`;
     },
   },
+  { type: 'text', value: ', and the number of people is ' },
+  {
+    type: 'input',
+    key: 'numberOfPeople',
+    props: {
+      placeholder: 'Please enter a number',
+    },
+  },
 ];
 
 const altSlotConfig: SlotConfig = [
@@ -189,6 +197,16 @@ const App: React.FC = () => {
           }}
         >
           Focus at slot
+        </Button>
+        <Button
+          onClick={() => {
+            senderRef.current!.focus({
+              cursor: 'slot',
+              key: 'numberOfPeople',
+            });
+          }}
+        >
+          Focus at slot with key
         </Button>
         <Button
           onClick={() => {
