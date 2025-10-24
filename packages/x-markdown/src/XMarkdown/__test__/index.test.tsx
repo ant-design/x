@@ -120,6 +120,8 @@ const testCases = [
   },
 ];
 
+const CustomParagraph = (props: any) => <p>{props.children}</p>;
+
 type ITestCase = {
   markdown: string;
   html: string;
@@ -230,6 +232,26 @@ describe('XMarkdown', () => {
       expect(link).not.toHaveAttribute('target');
       expect(link).not.toHaveAttribute('rel');
       expect(link).toHaveTextContent('Google');
+    });
+  });
+
+  describe('animation', () => {
+    it('parent is not custom components', () => {
+      const { container } = render(
+        <XMarkdown content="This is Text." streaming={{ enableAnimation: true }} />,
+      );
+      expect(container).toMatchSnapshot();
+    });
+
+    it('parent is custom components', () => {
+      const { container } = render(
+        <XMarkdown
+          content="This is Text."
+          components={{ p: CustomParagraph }}
+          streaming={{ enableAnimation: true }}
+        />,
+      );
+      expect(container).toMatchSnapshot();
     });
   });
 });
