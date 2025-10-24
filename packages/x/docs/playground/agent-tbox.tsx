@@ -320,6 +320,7 @@ interface TboxMessage {
 
 interface TboxInput {
   message: TboxMessage;
+  userAction?: string;
 }
 
 interface TboxOutput {
@@ -369,7 +370,7 @@ class TboxRequest<
   run(params?: Input | undefined): void {
     const stream = tboxClient.chat({
       appId: 'your-app-id', // Replace with your app ID
-      query: params?.message.content || '',
+      query: params?.message?.content,
       version: 'v2', // only for antd-x v2
       userId: 'antd-x',
     } as any);
@@ -422,6 +423,18 @@ class TboxProvider<
     if (typeof requestParams !== 'object') {
       throw new Error('requestParams must be an object');
     }
+    if (requestParams.userAction === 'retry') {
+      const messages = this.getMessages();
+      const queryMessage = messages.findLast(({ role }) => {
+        return role === 'user';
+      });
+      return {
+        message: queryMessage,
+        ...(options?.params || {}),
+        ...(requestParams || {}),
+      } as Input;
+    }
+
     return {
       ...(options?.params || {}),
       ...(requestParams || {}),

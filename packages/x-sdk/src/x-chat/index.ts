@@ -348,7 +348,6 @@ export default function useXChat<
         }
       },
     });
-
     setIsRequesting(true);
     conversationKey && IsRequestingMap.set(conversationKey, true);
     provider.request.run(provider.transformParams(requestParams, provider.request.options));
