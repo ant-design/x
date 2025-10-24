@@ -93,11 +93,20 @@ const genSourcesStyle: GenerateStyle<SourcesToken> = (token) => {
       },
 
       '&-carousel-btn': {
+        display: 'inline-flex',
         cursor: 'pointer',
+        height: token.controlHeight,
+        borderRadius: token.borderRadius,
+        paddingInline: paddingXS,
+        transition: `background ${token.motionDurationMid} ${token.motionEaseInOut}`,
+        [`&:not(${componentCls}-carousel-btn-disabled):hover`]: {
+          background: colorFillSecondary,
+        },
       },
 
       '&-carousel-btn-disabled': {
         opacity: 0.4,
+        cursor: 'text',
       },
 
       '&-carousel-item': {

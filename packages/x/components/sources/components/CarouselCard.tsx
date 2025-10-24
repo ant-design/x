@@ -1,44 +1,61 @@
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { Carousel } from 'antd';
 import classnames from 'classnames';
-import React from 'react';
-import { SourcesItem } from '../Sources';
+import React, { useEffect } from 'react';
+import type { SourcesItem, SourcesProps } from '../Sources';
 
 export interface CarouselCardProps {
+  activeKey?: SourcesProps['activeKey'];
   prefixCls: string;
   items?: Array<SourcesItem>;
+  className?: string;
+  style?: React.CSSProperties;
   onClick?: (item: SourcesItem) => void;
 }
 
 const CarouselCard: React.FC<CarouselCardProps> = (props) => {
-  const { prefixCls, items } = props;
+  const { prefixCls, items, activeKey, className, style } = props;
 
   const compCls = `${prefixCls}-carousel`;
-  const [slide, setSlide] = React.useState<number>(0);
+  const [slide, setSlide] = React.useState<number>(
+    items?.findIndex(({ key }) => key === activeKey) ?? 0,
+  );
   const carouselRef = React.useRef<React.ComponentRef<typeof Carousel>>(null);
 
   const handleClick = (item: SourcesItem) => {
     item.url && window.open(item.url, '_blank', 'noopener,noreferrer');
     props.onClick?.(item);
   };
+  useEffect(() => {
+    carouselRef.current?.goTo(slide);
+  }, [slide]);
 
   return (
-    <div className={`${compCls}-wrapper`}>
+    <div style={style} className={classnames(`${compCls}-wrapper`, className)}>
       <div className={`${compCls}-title`}>
         <div className={`${compCls}-btn-wrapper`}>
           <span
             className={classnames(`${compCls}-btn`, `${compCls}-left-btn`, {
               [`${compCls}-btn-disabled`]: slide === 0,
             })}
-            onClick={() => carouselRef.current?.prev()}
+            onClick={() => {
+              if (slide > 0) {
+                setSlide((pre) => pre - 1);
+              }
+            }}
           >
             <LeftOutlined />
           </span>
           <span
             className={classnames(`${compCls}-btn`, `${compCls}-right-btn`, {
               [`${compCls}-btn-disabled`]: slide === (items?.length || 1) - 1,
+              [`${compCls}-btn-disabled`]: slide === (items?.length || 1) - 1,
             })}
-            onClick={() => carouselRef.current?.next()}
+            onClick={() => {
+              if (slide < (items?.length || 1) - 1) {
+                setSlide((pre) => pre + 1);
+              }
+            }}
           >
             <RightOutlined />
           </span>
@@ -46,12 +63,11 @@ const CarouselCard: React.FC<CarouselCardProps> = (props) => {
         <div className={`${compCls}-page`}>{`${slide + 1}/${items?.length || 1}`}</div>
       </div>
       <Carousel
-        className={`${compCls}`}
+        className={`${compCls}-carousel`}
         ref={carouselRef}
         arrows={false}
         infinite={false}
         dots={false}
-        beforeChange={(_, nextSlide) => setSlide(nextSlide)}
       >
         {items?.map((item, index) => (
           <div

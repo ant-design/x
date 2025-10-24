@@ -40,6 +40,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_b00jk5/afts/img/A*_7mMRrQVcXcAAA
 | onExpand | 展开事件 | (expand: boolean) => void | - | - |
 | onClick | 点击事件 | (item: SourcesItem) => void | - | - |
 | inline | 行内模式 | boolean | false | - |
+| activeKey | 行内模式，激活的 key | React.Key | - | - |
 | popoverOverlayWidth | 弹出层宽度 | number \| string | 300 | - |
 
 ```typescript

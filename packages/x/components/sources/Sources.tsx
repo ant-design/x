@@ -31,15 +31,16 @@ export interface SourcesProps
   className?: string;
   classNames?: Partial<Record<SemanticType, string>>;
   rootClassName?: string;
+  inline?: boolean;
+  items: Array<SourcesItem>;
   title?: React.ReactNode;
   expandIconPosition?: 'start' | 'end';
-  items?: Array<SourcesItem>;
-  defaultExpanded?: boolean;
+  onClick?: (item: SourcesItem) => void;
+  popoverOverlayWidth?: number | string;
+  activeKey?: React.Key;
   expanded?: boolean;
   onExpand?: (expand: boolean) => void;
-  onClick?: (item: SourcesItem) => void;
-  inline?: boolean;
-  popoverOverlayWidth?: number | string;
+  defaultExpanded?: boolean;
 }
 
 type SourcesRef = {
@@ -56,15 +57,18 @@ const Sources: React.ForwardRefRenderFunction<SourcesRef, SourcesProps> = (props
     classNames = {},
     title,
     expandIconPosition = 'start',
-    items,
-    defaultExpanded = true,
-    expanded,
-    onExpand,
     children,
     inline = false,
     popoverOverlayWidth = 300,
     ...restProps
   } = props;
+
+  // 使用类型保护来处理联合类型中的属性
+  const items = 'items' in props ? props.items : undefined;
+  const defaultExpanded = 'defaultExpanded' in props ? props.defaultExpanded : true;
+  const expanded = 'expanded' in props ? props.expanded : undefined;
+  const onExpand = 'onExpand' in props ? props.onExpand : undefined;
+  const activeKey = 'activeKey' in props ? props.activeKey : undefined;
 
   // ============================ Prefix ============================
 
@@ -105,7 +109,7 @@ const Sources: React.ForwardRefRenderFunction<SourcesRef, SourcesProps> = (props
 
   // ============================  Collapsible ============================
 
-  const [isExpand, setIsExpand] = useMergedState(defaultExpanded, {
+  const [isExpand, setIsExpand] = useMergedState<boolean>(defaultExpanded ?? true, {
     value: expanded,
     onChange: onExpand,
   });
@@ -154,7 +158,16 @@ const Sources: React.ForwardRefRenderFunction<SourcesRef, SourcesProps> = (props
     >
       {inline ? (
         <Popover
-          content={<CarouselCard prefixCls={prefixCls} items={items} onClick={props.onClick} />}
+          content={
+            <CarouselCard
+              className={classNames.content}
+              style={styles.content}
+              activeKey={activeKey}
+              prefixCls={prefixCls}
+              items={items}
+              onClick={props.onClick}
+            />
+          }
           open={inline ? undefined : false}
           styles={{ body: { width: popoverOverlayWidth } }}
           placement="top"
