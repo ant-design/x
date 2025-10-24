@@ -331,6 +331,7 @@ describe('Sender.SlotTextArea', () => {
     ];
     render(<Sender slotConfig={testSlotConfig} allowSpeech ref={ref} />);
     ref?.current?.insert([{ type: 'text', value: 'Speech content' }], 'cursor', '@');
+
     expect(ref?.current?.getValue().value).toContain('Speech content');
   });
 
@@ -339,6 +340,7 @@ describe('Sender.SlotTextArea', () => {
     const testSlotConfig = [
       { type: 'input' as const, key: 'input1', props: { placeholder: 'Please enter content' } },
     ];
+
     (globalThis.getSelection as any) = () => null;
 
     render(<Sender slotConfig={testSlotConfig} ref={senderRef} />);
@@ -346,6 +348,7 @@ describe('Sender.SlotTextArea', () => {
       [{ type: 'tag', key: 'tag_1', props: { label: 'Tag_1', value: 'Tag1' } }],
       'end',
     );
+    senderRef?.current?.focus({ cursor: 'slot', key: 'tag_1' });
   });
   it('should call triggerValueChange when speech input and slotConfig does not exist', () => {
     const onChange = jest.fn();
