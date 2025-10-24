@@ -81,7 +81,11 @@ class Renderer {
       // Check if it's a text node with data
       const isValidTextNode =
         domNode.type === 'text' && domNode.data && Renderer.NON_WHITESPACE_REGEX.test(domNode.data);
-      if (enableAnimation && isValidTextNode) {
+      // Skip animation for text nodes inside custom components to preserve their internal structure
+      const parentTagName = (domNode.parent as Element)?.name;
+      const isParentCustomComponent = parentTagName && this.options.components?.[parentTagName];
+      const shouldReplaceText = enableAnimation && isValidTextNode && !isParentCustomComponent;
+      if (shouldReplaceText) {
         return React.createElement(AnimationText, { text: domNode.data, key, animationConfig });
       }
 
