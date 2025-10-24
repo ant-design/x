@@ -330,7 +330,7 @@ describe('Sender.SlotTextArea', () => {
       { type: 'input' as const, key: 'input1', props: { placeholder: 'Please enter content' } },
     ];
     render(<Sender slotConfig={testSlotConfig} allowSpeech ref={ref} />);
-    ref?.current?.insert([{ type: 'text', value: 'Speech content' }]);
+    ref?.current?.insert([{ type: 'text', value: 'Speech content' }], 'cursor', '@');
     expect(ref?.current?.getValue().value).toContain('Speech content');
   });
 
