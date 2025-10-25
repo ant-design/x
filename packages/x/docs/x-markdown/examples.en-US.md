@@ -11,10 +11,13 @@ Used for rendering streaming Markdown format returned by LLMs.
 
 <!-- prettier-ignore -->
 <code src="./demo/codeDemo/basic.tsx" description="Basic Markdown syntax rendering." title="Basic Usage"></code>
-<code src="./demo/codeDemo/streaming.tsx" description="Streaming conversation with `Bubble`." title="Streaming Rendering"></code>
-<code src="./demo/codeDemo/components.tsx" description="Custom component rendering tags." title="Custom Components"></code>
+<code src="./demo/streaming/combined.tsx" description="Incomplete syntax processing and animation effects." title="Streaming Rendering"></code>
 <code src="./demo/codeDemo/supersets.tsx" description="Rendering with plugins." title="Plugin Usage"></code>
+<code src="./demo/codeDemo/components.tsx" description="Custom component rendering tags." title="Custom Components"></code>
 <code src="./demo/codeDemo/plugin.tsx" title="Custom Extension Plugin"></code>
+<code src="./demo/codeDemo/tokenizer.tsx" title="Custom Markers"></code>
+<code src="./demo/codeDemo/walkTokens.tsx" title="Token Processing"></code>
+<code src="./demo/codeDemo/renderer.tsx" title="Pre-rendering Processing"></code>
 <code src="./demo/codeDemo/xss.tsx" title="XSS Protection"></code>
 <code src="./demo/codeDemo/open-links-in-new-tab.tsx" description="Open links in new tab." title="Open Links in New Tab"></code>
 
@@ -41,15 +44,15 @@ Used for rendering streaming Markdown format returned by LLMs.
 | --- | --- | --- | --- |
 | hasNextChunk | Indicates whether more content chunks are expected. When false, flushes all cached content and completes rendering | `boolean` | `false` |
 | enableAnimation | Enables text fade-in animation for block elements (`p`, `li`, `h1`, `h2`, `h3`, `h4`) | `boolean` | `false` |
-| animationConfig | Configuration for text appearance animation effects | `AnimationConfig` | `{ fadeDuration: 200, easing: 'ease-in-out' }` |
+| animationConfig | Configuration for text appearance animation effects | `AnimationConfig` | `{ fadeDuration: 200, opacity: 0.2 }` |
 | incompletePlaceholderMap | Placeholder mapping for unclosed Markdown elements, supports custom placeholder components for links and images | `{ link?: string; image?: string }` | `{ link: 'incomplete-link', image: 'incomplete-image' }` |
 
 #### AnimationConfig
 
-| Property     | Description                                       | Type     | Default         |
-| ------------ | ------------------------------------------------- | -------- | --------------- |
-| fadeDuration | Duration of the fade-in animation in milliseconds | `number` | `200`           |
-| easing       | Easing function for the animation                 | `string` | `'ease-in-out'` |
+| Property     | Description                                                 | Type     | Default |
+| ------------ | ----------------------------------------------------------- | -------- | ------- |
+| fadeDuration | Duration of the fade-in animation in milliseconds           | `number` | `200`   |
+| opacity      | Initial opacity value for characters during animation (0-1) | `number` | `0.2`   |
 
 ### ComponentProps
 
