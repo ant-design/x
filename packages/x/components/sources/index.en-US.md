@@ -2,7 +2,7 @@
 category: Components
 group:
   title: Confirmation
-  order: 1
+  order: 3
 title: Sources
 description: Show the source address of the referenced data.
 cover: https://mdn.alipayobjects.com/huamei_b00jk5/afts/img/A*3nEPRYJbNQgAAAAAQFAAAAgAegitAQ/original
