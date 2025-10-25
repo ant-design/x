@@ -162,16 +162,33 @@ describe('Sources Component', () => {
       '.ant-sources-carousel-btn-wrapper .ant-sources-carousel-right-btn',
     );
 
-    // 点击右按钮切换到下一项
+    // 验证按钮存在
+    expect(leftBtn).toBeTruthy();
+    expect(rightBtn).toBeTruthy();
+
+    // 验证初始状态
+    const pageIndicator = container.querySelector('.ant-sources-carousel-page');
+    expect(pageIndicator).toHaveTextContent('1/3');
+
+    // 验证按钮状态
+    expect(leftBtn).toHaveClass('ant-sources-carousel-btn-disabled');
+    expect(rightBtn).not.toHaveClass('ant-sources-carousel-btn-disabled');
+
+    // 点击右按钮
     fireEvent.click(rightBtn!);
     await waitFakeTimer();
-    const pageIndicator = container.querySelector('.ant-sources-carousel-page');
-    expect(pageIndicator).toHaveTextContent('2/3');
 
+    // 验证状态更新
+    expect(pageIndicator).toHaveTextContent('2/3');
+    expect(leftBtn).not.toHaveClass('ant-sources-carousel-btn-disabled');
+
+    // 点击左按钮
     fireEvent.click(leftBtn!);
     await waitFakeTimer();
-    const pageIndicator2 = container.querySelector('.ant-sources-carousel-page');
-    expect(pageIndicator2).toHaveTextContent('1/3');
+
+    // 验证状态更新
+    expect(pageIndicator).toHaveTextContent('1/3');
+    expect(leftBtn).toHaveClass('ant-sources-carousel-btn-disabled');
   });
 
   it('Sources should support onClick', () => {

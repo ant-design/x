@@ -120,7 +120,7 @@ const testCases = [
   },
 ];
 
-const CustomParagraph = (props: any) => <p>{props.children}</p>;
+const CustomParagraph = (props: React.PropsWithChildren) => <p>{props.children}</p>;
 
 type ITestCase = {
   markdown: string;

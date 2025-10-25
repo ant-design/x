@@ -7,7 +7,7 @@ import type { SourcesItem, SourcesProps } from '../Sources';
 export interface CarouselCardProps {
   activeKey?: SourcesProps['activeKey'];
   prefixCls: string;
-  items?: Array<SourcesItem>;
+  items?: SourcesProps['items'];
   className?: string;
   style?: React.CSSProperties;
   onClick?: (item: SourcesItem) => void;
@@ -18,7 +18,7 @@ const CarouselCard: React.FC<CarouselCardProps> = (props) => {
 
   const compCls = `${prefixCls}-carousel`;
   const [slide, setSlide] = React.useState<number>(
-    items?.findIndex(({ key }) => key === activeKey) ?? 0,
+    Math.max(0, items?.findIndex(({ key }) => key === activeKey) ?? 0),
   );
   const carouselRef = React.useRef<React.ComponentRef<typeof Carousel>>(null);
 
@@ -27,7 +27,9 @@ const CarouselCard: React.FC<CarouselCardProps> = (props) => {
     props.onClick?.(item);
   };
   useEffect(() => {
-    carouselRef.current?.goTo(slide);
+    if (carouselRef.current) {
+      carouselRef.current.goTo(slide, false);
+    }
   }, [slide]);
 
   return (
@@ -49,7 +51,6 @@ const CarouselCard: React.FC<CarouselCardProps> = (props) => {
           <span
             className={classnames(`${compCls}-btn`, `${compCls}-right-btn`, {
               [`${compCls}-btn-disabled`]: slide === (items?.length || 1) - 1,
-              [`${compCls}-btn-disabled`]: slide === (items?.length || 1) - 1,
             })}
             onClick={() => {
               if (slide < (items?.length || 1) - 1) {
@@ -63,11 +64,12 @@ const CarouselCard: React.FC<CarouselCardProps> = (props) => {
         <div className={`${compCls}-page`}>{`${slide + 1}/${items?.length || 1}`}</div>
       </div>
       <Carousel
-        className={`${compCls}-carousel`}
+        className={compCls}
         ref={carouselRef}
         arrows={false}
         infinite={false}
         dots={false}
+        beforeChange={(_, nextSlide) => setSlide(nextSlide)}
       >
         {items?.map((item, index) => (
           <div
