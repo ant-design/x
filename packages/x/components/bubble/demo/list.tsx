@@ -135,7 +135,7 @@ const App = () => {
   );
 
   return (
-    <Flex vertical gap={20}>
+    <Flex vertical style={{ height: 720 }} gap={20}>
       <Flex gap="small">
         <Button
           type="primary"
@@ -208,8 +208,7 @@ const App = () => {
           Add With Ref
         </Button>
       </Flex>
-
-      <Bubble.List style={{ height: 500 }} ref={listRef} role={memoRole} items={items} />
+      <Bubble.List ref={listRef} role={memoRole} items={items} />
     </Flex>
   );
 };

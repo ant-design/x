@@ -85,7 +85,7 @@ const App = () => {
   );
 
   return (
-    <Flex vertical gap="small">
+    <Flex vertical style={{ height: 720 }} gap="small">
       <Flex gap="small" justify="space-between">
         <Flex gap="small">
           <Button type="primary" onClick={() => console.log(listRef.current?.nativeElement)}>
@@ -108,7 +108,6 @@ const App = () => {
 
       <Bubble.List
         ref={listRef}
-        style={{ height: 400 }}
         role={memoRole}
         items={items}
         onScroll={(e) => {

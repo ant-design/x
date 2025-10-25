@@ -121,8 +121,8 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
     prefixCls: customizePrefixCls,
     rootClassName,
     className,
-    styles,
-    classNames,
+    styles = {},
+    classNames = {},
     style,
     items,
     autoScroll = true,
@@ -153,13 +153,13 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
     listPrefixCls,
     rootClassName,
     className,
-    classNames?.root,
+    classNames.root,
     hashId,
     cssVarCls,
   );
 
   const mergedStyle = {
-    ...styles?.root,
+    ...styles.root,
     ...style,
   };
 
@@ -215,9 +215,10 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   return (
     <div {...domProps} className={mergedClassNames} style={mergedStyle} ref={listRef}>
       <div
-        className={classnames(`${listPrefixCls}-scroll-box`, {
+        className={classnames(`${listPrefixCls}-scroll-box`, classNames.scroll, {
           [`${listPrefixCls}-autoscroll`]: autoScroll,
         })}
+        style={styles.scroll}
         ref={scrollBoxRef}
         onScroll={mergeOnScroll}
       >

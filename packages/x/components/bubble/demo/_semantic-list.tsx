@@ -9,6 +9,7 @@ import { BubbleListProps } from '../interface';
 const locales = {
   cn: {
     root: '对话列表根节点',
+    scroll: '对话列表滚动容器',
     bubble: '对话气泡容器',
     body: '对话气泡的主体容器',
     avatar: '对话气泡的头像的外层容器',
@@ -21,6 +22,7 @@ const locales = {
   },
   en: {
     root: 'Bubble list root node',
+    scroll: 'Bubble list scroll container',
     bubble: 'Bubble root',
     body: 'Bubble main body container',
     avatar: 'Bubble avatar outer container',
@@ -63,6 +65,7 @@ const App: React.FC = () => {
       componentName="Bubble.List"
       semantics={[
         { name: 'root', desc: locale.root },
+        { name: 'scroll', desc: locale.scroll },
         { name: 'bubble', desc: locale.bubble },
         { name: 'body', desc: locale.body },
         { name: 'avatar', desc: locale.avatar },
@@ -75,20 +78,29 @@ const App: React.FC = () => {
       ]}
     >
       <Bubble.List
+        style={{
+          height: 400,
+        }}
         role={memoRole}
         items={[
           { role: 'system', content: 'Welcome to Ant Design X', key: 'system' },
-          { role: 'divider', content: 'divider', key: 'divider' },
           {
             role: 'user',
             content: 'hello, Ant Design X',
             key: 'user',
           },
+          { role: 'divider', content: 'divider', key: 'divider' },
           {
             role: 'ai',
-            content: 'hello',
+            content: 'hello, how can I help you?',
             key: 'ai',
           },
+          {
+            role: 'user',
+            content: 'show me the code of Bubble.List demo with semantic styles',
+            key: 'user2',
+          },
+          { role: 'ai', content: 'ok, here is the code:', key: 'ai2' },
         ]}
         onScroll={(e) => {
           console.log('scroll', (e.target as HTMLDivElement).scrollTop);
