@@ -2,7 +2,7 @@
 
 exports[`renders components/sources/demo/basic.tsx extend context correctly 1`] = `
 <div
-  class="ant-sources css-var-_r_5_"
+  class="ant-sources css-var-_r_7_"
 >
   <div
     class="ant-sources-title-wrapper ant-sources-icon-position-start"
@@ -97,7 +97,7 @@ exports[`renders components/sources/demo/basic.tsx extend context correctly 2`] 
 exports[`renders components/sources/demo/expand.tsx extend context correctly 1`] = `
 Array [
   <button
-    class="ant-btn css-var-_r_4_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-_r_6_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     style="margin-bottom: 8px;"
     type="button"
   >
@@ -107,7 +107,7 @@ Array [
   </button>,
   <br />,
   <div
-    class="ant-sources css-var-_r_4_"
+    class="ant-sources css-var-_r_6_"
   >
     <div
       class="ant-sources-title-wrapper ant-sources-icon-position-start"
@@ -202,7 +202,7 @@ exports[`renders components/sources/demo/expand.tsx extend context correctly 2`]
 
 exports[`renders components/sources/demo/icon.tsx extend context correctly 1`] = `
 <div
-  class="ant-sources css-var-_r_3_"
+  class="ant-sources css-var-_r_5_"
 >
   <div
     class="ant-sources-title-wrapper ant-sources-icon-position-end"
@@ -463,6 +463,208 @@ exports[`renders components/sources/demo/inline.tsx extend context correctly 1`]
                   class="ant-sources-carousel-page"
                 >
                   1/3
+                </div>
+              </div>
+              <div
+                class="ant-carousel css-var-_r_0_"
+              >
+                <div
+                  class="slick-slider ant-sources-carousel slick-initialized"
+                  dir="ltr"
+                >
+                  <div
+                    class="slick-list"
+                  >
+                    <div
+                      class="slick-track"
+                      style="opacity: 1; transform: translate3d(0px, 0px, 0px);"
+                    >
+                      <div
+                        aria-hidden="false"
+                        class="slick-slide slick-active slick-current"
+                        data-index="0"
+                        style="width: 0px; outline-color: none; outline-style: none; outline-width: initial;"
+                        tabindex="-1"
+                      >
+                        <div>
+                          <div
+                            class="ant-sources-carousel-item"
+                            style="width: 100%; display: inline-block;"
+                            tabindex="-1"
+                          >
+                            <div
+                              class="ant-sources-carousel-item-title-wrapper"
+                            >
+                              <span
+                                class="ant-sources-carousel-item-title"
+                              >
+                                1. Data source
+                              </span>
+                            </div>
+                            <div
+                              class="ant-sources-carousel-item-description"
+                            >
+                              Artificial Intelligence, often abbreviated as AI, is a broad branch of computer science concerned with building smart machines capable of performing tasks that typically require human intelligence.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        aria-hidden="true"
+                        class="slick-slide"
+                        data-index="1"
+                        style="width: 0px; outline-color: none; outline-style: none; outline-width: initial;"
+                        tabindex="-1"
+                      >
+                        <div>
+                          <div
+                            class="ant-sources-carousel-item"
+                            style="width: 100%; display: inline-block;"
+                            tabindex="-1"
+                          >
+                            <div
+                              class="ant-sources-carousel-item-title-wrapper"
+                            >
+                              <span
+                                class="ant-sources-carousel-item-title"
+                              >
+                                2. Data source
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        aria-hidden="true"
+                        class="slick-slide"
+                        data-index="2"
+                        style="width: 0px; outline-color: none; outline-style: none; outline-width: initial;"
+                        tabindex="-1"
+                      >
+                        <div>
+                          <div
+                            class="ant-sources-carousel-item"
+                            style="width: 100%; display: inline-block;"
+                            tabindex="-1"
+                          >
+                            <div
+                              class="ant-sources-carousel-item-title-wrapper"
+                            >
+                              <span
+                                class="ant-sources-carousel-item-title"
+                              >
+                                3. Data source
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span>
+    Use the inline mode in the text
+  </span>
+  <div
+    class="ant-sources css-var-_r_0_ ant-sources-inline"
+  >
+    <div
+      aria-describedby="test-id"
+      class="ant-sources-title-wrapper"
+    >
+      <span
+        class="ant-sources-title"
+      >
+        2
+      </span>
+    </div>
+    <div
+      class="ant-popover ant-zoom-big-appear ant-zoom-big-appear-prepare ant-zoom-big css-var-_r_0_ css-var-_r_0_ ant-popover-placement-top"
+      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+    >
+      <div
+        class="ant-popover-arrow"
+        style="position: absolute; bottom: 0px; left: 0px;"
+      />
+      <div
+        class="ant-popover-content"
+      >
+        <div
+          class="ant-popover-inner"
+          id="test-id"
+          role="tooltip"
+          style="width: 300px;"
+        >
+          <div
+            class="ant-popover-inner-content"
+          >
+            <div
+              class="ant-sources-carousel-wrapper"
+            >
+              <div
+                class="ant-sources-carousel-title"
+              >
+                <div
+                  class="ant-sources-carousel-btn-wrapper"
+                >
+                  <span
+                    class="ant-sources-carousel-btn ant-sources-carousel-left-btn"
+                  >
+                    <span
+                      aria-label="left"
+                      class="anticon anticon-left"
+                      role="img"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        data-icon="left"
+                        fill="currentColor"
+                        focusable="false"
+                        height="1em"
+                        viewBox="64 64 896 896"
+                        width="1em"
+                      >
+                        <path
+                          d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"
+                        />
+                      </svg>
+                    </span>
+                  </span>
+                  <span
+                    class="ant-sources-carousel-btn ant-sources-carousel-right-btn"
+                  >
+                    <span
+                      aria-label="right"
+                      class="anticon anticon-right"
+                      role="img"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        data-icon="right"
+                        fill="currentColor"
+                        focusable="false"
+                        height="1em"
+                        viewBox="64 64 896 896"
+                        width="1em"
+                      >
+                        <path
+                          d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+                        />
+                      </svg>
+                    </span>
+                  </span>
+                </div>
+                <div
+                  class="ant-sources-carousel-page"
+                >
+                  2/3
                 </div>
               </div>
               <div
