@@ -59,16 +59,14 @@ const Sources: React.ForwardRefRenderFunction<SourcesRef, SourcesProps> = (props
     expandIconPosition = 'start',
     children,
     inline = false,
+    expanded,
+    defaultExpanded,
+    onExpand,
+    activeKey,
+    items,
     popoverOverlayWidth = 300,
     ...restProps
   } = props;
-
-  // 使用类型保护来处理联合类型中的属性
-  const items = 'items' in props ? props.items : undefined;
-  const defaultExpanded = 'defaultExpanded' in props ? props.defaultExpanded : true;
-  const expanded = 'expanded' in props ? props.expanded : undefined;
-  const onExpand = 'onExpand' in props ? props.onExpand : undefined;
-  const activeKey = 'activeKey' in props ? props.activeKey : undefined;
 
   // ============================ Prefix ============================
 
