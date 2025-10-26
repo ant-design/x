@@ -5,10 +5,10 @@ import {
   ShareAltOutlined,
   StopOutlined,
 } from '@ant-design/icons';
-import { Conversations } from '@ant-design/x';
 import type { ConversationsProps } from '@ant-design/x';
-import { theme } from 'antd';
+import { Conversations } from '@ant-design/x';
 import type { GetProp, MenuProps } from 'antd';
+import { theme } from 'antd';
 
 import React from 'react';
 

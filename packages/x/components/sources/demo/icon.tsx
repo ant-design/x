@@ -21,11 +21,7 @@ const App = () => {
     },
   ];
 
-  return (
-    <>
-      <Sources title={'Used 3 sources'} items={items} expandIconPosition={'end'} />
-    </>
-  );
+  return <Sources title={'Used 3 sources'} items={items} expandIconPosition={'end'} />;
 };
 
 export default App;

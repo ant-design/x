@@ -1,8 +1,8 @@
-import path from 'path';
-import { StyleProvider, createCache } from '@ant-design/cssinjs';
+import { createCache, StyleProvider } from '@ant-design/cssinjs';
 import { XProvider } from '@ant-design/x';
 import { globSync } from 'glob';
 import kebabCase from 'lodash/kebabCase';
+import path from 'path';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 

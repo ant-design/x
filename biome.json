@@ -14,7 +14,9 @@
       "!**/coverage",
       "!**/package.json",
       "!**/x-markdown/plugins/**/*",
-      "!**/x-markdown/themes/**/*"
+      "!**/x-markdown/themes/**/*",
+      "!**/tests/index.html",
+      "!**/scripts/visual-regression/report-template.html"
     ]
   },
   "formatter": {
@@ -43,15 +45,18 @@
         "useSelfClosingElements": "error",
         "useSingleVarDeclarator": "error",
         "noInferrableTypes": "error",
-        "noUselessElse": "error"
+        "noUselessElse": "error",
+        "noParameterAssign": "off"
       },
       "complexity": {
         "noUselessTypeConstraint": "off",
-        "noForEach": "off"
+        "noForEach": "off",
+        "noUselessFragments": "off"
       },
       "correctness": {
         "useExhaustiveDependencies": "off",
-        "useUniqueElementIds": "off"
+        "useUniqueElementIds": "off",
+        "noVoidTypeReturn": "off"
       },
       "suspicious": {
         "noGlobalIsNan": "off",
@@ -60,7 +65,9 @@
         "noArrayIndexKey": "off",
         "noConfusingVoidType": "off",
         "noThenProperty": "off",
-        "noTsIgnore": "off"
+        "noTsIgnore": "off",
+        "noImplicitAnyLet": "off",
+        "noNonNullAssertedOptionalChain": "off"
       },
       "performance": {
         "noDelete": "off",
@@ -70,7 +77,9 @@
         "noAriaHiddenOnFocusable": "off",
         "useSemanticElements": "off",
         "useKeyWithClickEvents": "off",
-        "noStaticElementInteractions": "off"
+        "noStaticElementInteractions": "off",
+        "useValidAnchor": "off",
+        "useAnchorContent": "off"
       }
     }
   },

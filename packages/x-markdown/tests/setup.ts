@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
-import util from 'util';
+
 import type { DOMWindow } from 'jsdom';
+import util from 'util';
 
 const originConsoleErr = console.error;
 

@@ -123,7 +123,7 @@ const List: React.FC<FileCardListProps> = (props) => {
     setList(newList);
     onRemove?.(item);
   };
-  const { root, card, ...other } = styles;
+  const { root, card: _, ...other } = styles;
 
   return (
     <div className={`${compCls}-wrapper`}>

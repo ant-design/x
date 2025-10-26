@@ -15,6 +15,37 @@ tag: vVERSION
 
 ---
 
+## 2.0.0-alpha.10
+
+`2025-10-23`
+
+### @ant-design/x
+
+- 🔥 新组件 Sources。[#1250](https://github.com/ant-design/x/pull/1250) 由 [@hy993658052](https://github.com/hy993658052) 提交。
+- 🆕 Bubble 新增 Bubble.System 和 Bubble.Divider 两个子组件。[#1239](https://github.com/ant-design/x/pull/1239) 由 [@anxLiang](https://github.com/anxLiang) 和 [@kimteayon](https://github.com/kimteayon) 提交。
+- Sender
+- 🆕 新增词槽焦点事件功能。[#1221](https://github.com/ant-design/x/pull/1221) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🐛 修复输入框 `onPasteFile` 粘贴多文件回调数据错误问题。[#1221](https://github.com/ant-design/x/pull/1221) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🐛 修复svg未做国际化导致的无障碍问题。[#1243](https://github.com/ant-design/x/pull/1243) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- FileCard
+- 🆕 新增语义化实现。[#1220](https://github.com/ant-design/x/pull/1220) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🆕 新增 `jfif` 类型支持。[#1248](https://github.com/ant-design/x/pull/1248) 由 [@IsDyh01](https://github.com/IsDyh01) 提交。
+- 🆕 Attachments 新增语义化实现。[#1220](https://github.com/ant-design/x/pull/1220) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 📖 优化官网站点提升用户体验。[#1216](https://github.com/ant-design/x/pull/1216) 由 [@kimteayon](https://github.com/kimteayon) 提交， [#1217](https://github.com/ant-design/x/pull/1217) 由 [@Div627](https://github.com/Div627) 提交，[#1218](https://github.com/ant-design/x/pull/1218) 由 [@IsDyh01](https://github.com/IsDyh01) 提交，[#1224](https://github.com/ant-design/x/pull/1224) 由 [@kimteayon](https://github.com/ kimteayon) 提交，[#1232](https://github.com/ant-design/x/pull/1232) 由 [@IsDyh01](https://github.com/IsDyh01) 提交，[#1233](https://github.com/ant-design/x/pull/1233) 由 [@kimteayon](https://github.com/kimteayon) 提交，[#1243](https://github.com/ant-design/x/pull/1243) 由 [@kimteayon](https://github.com/kimteayon) 提交，[#1247](https://github.com/ant-design/x/pull/1247) 由 [@elrrrrrrr](https://github.com/elrrrrrrr) 提交。
+
+### @ant-design/x-markdown
+
+- 🆕 XMarkdown 新增需闭合标签语法的过程中的渲染组件配置 `incomplete` 以及对应功能。[#1223](https://github.com/ant-design/x/pull/1223) 由 [@Div627](https://github.com/Div627) 提交。
+- 🐛 修复 XMarkdown openLinksInNewTab 属性配置失效问题。[#1253](https://github.com/ant-design/x/pull/1253) 由 [@Div627](https://github.com/Div627) 提交。
+- 🐛 修复 XMarkdown 动画重复渲染问题。[#1255](https://github.com/ant-design/x/pull/1255) 由 [@Div627](https://github.com/Div627) 提交。
+- 🆕 健壮 XMarkdown 对公式渲染标签识别能力。[#1255](https://github.com/ant-design/x/pull/1255) 由 [@Div627](https://github.com/Div627) 提交。
+
+### @ant-design/x-sdk
+
+- 🐛 修复 useXChat 处理流数据服务器错误导致`requestFallback`回调入参问题。[#1224](https://github.com/ant-design/x/pull/1224) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🆕 useXConversations 新增 activeConversationKey 的实现。[#1252](https://github.com/ant-design/x/pull/1252) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🐛 修复 useXChat `isRequesting` 非多实例问题， 以及优化 `requestPlaceholder` 和 `requestFallback` 回调入参。[#1254](https://github.com/ant-design/x/pull/1254) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+
 ## 2.0.0-alpha.9
 
 `2025-09-24`

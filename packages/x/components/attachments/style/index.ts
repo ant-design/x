@@ -178,10 +178,7 @@ export default genStyleHooks(
   'Attachments',
   (token) => {
     const compToken = mergeToken<AttachmentsToken>(token, {});
-    return [
-      genAttachmentsStyle(compToken),
-      genFileListStyle(compToken),
-    ];
+    return [genAttachmentsStyle(compToken), genFileListStyle(compToken)];
   },
   prepareComponentToken,
 );

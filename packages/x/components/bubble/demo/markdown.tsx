@@ -35,12 +35,13 @@ const App = () => {
   };
 
   React.useEffect(() => {
-    if (index === text.length) return;
-    renderStream();
-    return () => {
-      clearTimeout(timer.current);
-    };
-  }, [index]);
+    if (index < text.length) {
+      const timerId = setTimeout(() => {
+        setIndex((prevIndex) => prevIndex + 5);
+      }, 20);
+      return () => clearTimeout(timerId);
+    }
+  }, [index, text.length]);
 
   return (
     <Flex vertical style={{ height: 150 }} gap={16}>

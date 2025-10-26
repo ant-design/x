@@ -26,6 +26,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/speech-custom.tsx">Custom Speech Input</code>
 <code src="./demo/suffix.tsx">Custom Suffix</code>
 <code src="./demo/header.tsx">Expandable Panel</code>
+<code src="./demo/slot-with-suggestion.tsx">Quick Commands</code>
 <code src="./demo/header-fixed.tsx">Reference</code>
 <code src="./demo/footer.tsx">Custom Footer</code>
 <code src="./demo/send-style.tsx">Adjust Style</code>
@@ -59,7 +60,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | onCancel | Callback when click cancel button | () => void | - | - |
 | onPasteFile | Callback when paste files | (files: FileList) => void | - | - |
 | autoSize | Height auto size feature, can be set to true \| false or an object: { minRows: 2, maxRows: 6 } | boolean \| { minRows?: number; maxRows?: number } | { maxRows: 8 } | - |
-| initialSlotConfig | Slot configuration, after configuration, the input box will become slot mode, supporting structured input. In this mode, `value` and `defaultValue` are invalid. | SlotConfigType[] | - | - |
+| slotConfig | Slot configuration, after configuration, the input box will become slot mode, supporting structured input. In this mode, `value` and `defaultValue` configuration will be invalid. | SlotConfigType[] | - | - |
 
 ```typescript | pure
 type SpeechConfig = {
@@ -86,7 +87,7 @@ type ActionsComponents = {
 | nativeElement | Outer container | `HTMLDivElement` | - | - |
 | focus | Set focus, when `cursor = 'slot'` the focus will be in the first input slot, if no corresponding `input` exists it will behave like `end` | (option?: { preventScroll?: boolean, cursor?: 'start' \| 'end' \| 'all' \| 'slot' }) | - | - |
 | blur | Remove focus | () => void | - | - |
-| insert | Insert text or slot(s). When using slot(s), make sure initialSlotConfig is set. | (value: string) => void \| (slotConfig: SlotConfigType[], position?: insertPosition) => void; | - | - |
+| insert | Insert text or slot(s). When using slot(s), make sure slotConfig is set. | (value: string) => void \| (slotConfig: SlotConfigType[], position?: insertPosition, replaceCharacters?: string) => void; | - | - |
 | clear | Clear content | () => void | - | - |
 | getValue | Get current content and structured configuration | () => { value: string; config: SlotConfigType[] } | - | - |
 
@@ -164,14 +165,14 @@ type ActionsComponents = {
 
 - **In slot mode, `value` and `defaultValue` are invalid.** Please use `ref` and callback events to get the value and slot configuration.
 - **In slot mode, the third parameter `config` of the `onChange`/`onSubmit` callback** is only for getting the current structured content.
-- `initialSlotConfig` should only be set once during initialization or when the structure changes. If you need to force re-render the component, use a different `key` prop.
 
 **Example:**
 
 ```jsx
-// ❌ Wrong usage (initialSlotConfig is for initialization only)
+// ❌ Wrong usage (slotConfig is for initialization only)
+const [config, setConfig] = useState([]);
 <Sender
-  initialSlotConfig={config}
+  slotConfig={config}
   onChange={(value, e, config) => {
     setConfig(config);
   }}
@@ -180,7 +181,7 @@ type ActionsComponents = {
 // ✅ Correct usage
 <Sender
   key={key}
-  initialSlotConfig={config}
+  slotConfig={config}
   onChange={(value, _e, config) => {
     // Only used to get structured content, use key to force re-render component
     setKey('new_key')

@@ -1,7 +1,7 @@
-import React from 'react';
-import { Prompts } from '@ant-design/x';
-import type { PromptsProps } from '@ant-design/x';
 import { CheckCircleOutlined, CoffeeOutlined } from '@ant-design/icons';
+import type { PromptsProps } from '@ant-design/x';
+import { Prompts } from '@ant-design/x';
+import React from 'react';
 
 const items: PromptsProps['items'] = [
   {

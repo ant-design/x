@@ -1,7 +1,7 @@
-import { fireEvent, render } from '../../../tests/utils';
 import React from 'react';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
+import { fireEvent, render } from '../../../tests/utils';
 import Sender from '../index';
 
 describe('Sender.Header', () => {
@@ -46,7 +46,9 @@ describe('Sender.Header', () => {
   it('should call onOpenChange with toggled value when close button is clicked', () => {
     const onOpenChange = jest.fn();
     // open 为 true，点击后应变为 false
-    const { container } = render(<Sender.Header title="title" closable open={true} onOpenChange={onOpenChange} />);
+    const { container } = render(
+      <Sender.Header title="title" closable open={true} onOpenChange={onOpenChange} />,
+    );
     const closeBtn = container.querySelector('.ant-sender-header-close button');
     expect(closeBtn).toBeTruthy();
     if (closeBtn) {

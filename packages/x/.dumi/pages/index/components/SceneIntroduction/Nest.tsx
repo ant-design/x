@@ -1,9 +1,8 @@
 import { createStyles } from 'antd-style';
 import React from 'react';
-import CustomizationSender from '../../common/CustomizationSender';
-
 import useLocale from '../../../../hooks/useLocale';
 import { LOCALES, useCustomizationBgStyle } from '../../common/CustomizationProvider';
+import CustomizationSender from '../../common/CustomizationSender';
 
 const useStyle = createStyles(({ token, css }) => {
   return {

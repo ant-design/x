@@ -1,7 +1,6 @@
 import React from 'react';
-
-import Attachments, { type AttachmentsProps } from '..';
 import { fireEvent, render } from '../../../tests/utils';
+import Attachments, { type AttachmentsProps } from '..';
 
 describe('attachments.drag', () => {
   beforeAll(() => {

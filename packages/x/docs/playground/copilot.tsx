@@ -151,7 +151,7 @@ const useCopilotStyle = createStyles(({ token, css }) => {
 });
 
 const ThinkComponent = React.memo((props: ComponentProps) => {
-  const [title, setTitle] = React.useState(locale.deepThinking + '...');
+  const [title, setTitle] = React.useState(`${locale.deepThinking}...`);
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {

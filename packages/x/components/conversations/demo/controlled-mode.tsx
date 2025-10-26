@@ -5,8 +5,8 @@ import {
   SignatureOutlined,
 } from '@ant-design/icons';
 import { Conversations, type ConversationsProps } from '@ant-design/x';
-import { Button, Flex, theme } from 'antd';
 import type { GetProp } from 'antd';
+import { Button, Flex, theme } from 'antd';
 import React, { useState } from 'react';
 
 const items: GetProp<ConversationsProps, 'items'> = [

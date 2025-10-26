@@ -1,8 +1,7 @@
 import React from 'react';
-
-import Welcome from '..';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
+import Welcome from '..';
 
 describe('welcome', () => {
   mountTest(() => <Welcome />);
