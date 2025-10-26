@@ -68,6 +68,7 @@ const App = () => {
       status: 'success',
       key: 'welcome',
       role: 'ai',
+      variant: 'borderless',
       content: 'Mock welcome content. '.repeat(10),
       extra: {
         feedback: 'like',
@@ -82,6 +83,7 @@ const App = () => {
       key: 'ai_0',
       role: 'ai',
       status: 'success',
+      variant: 'borderless',
       content: 'Mock welcome content. '.repeat(10),
       extra: {
         feedback: 'dislike',
@@ -95,6 +97,7 @@ const App = () => {
     {
       key: 'ai_1',
       role: 'ai',
+      variant: 'borderless',
       status: 'success',
       content: 'Mock welcome content. '.repeat(10),
       extra: {
@@ -109,6 +112,7 @@ const App = () => {
     {
       key: 'ai_2',
       role: 'ai',
+      variant: 'borderless',
       status: 'success',
       content: 'Mock welcome content. '.repeat(10),
       extra: {

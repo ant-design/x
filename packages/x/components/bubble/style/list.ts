@@ -2,17 +2,23 @@ import type { GenerateStyle } from '../../theme/cssinjs-utils';
 import type { BubbleToken } from './bubble';
 
 const genBubbleListStyle: GenerateStyle<BubbleToken> = (token) => {
-  const { componentCls, padding } = token;
+  const { componentCls, calc, padding } = token;
   return {
     [`${componentCls}-list`]: {
       gap: padding,
       maxHeight: '100%',
       width: '100%',
       boxSizing: 'border-box',
+
       [`& ${componentCls}`]: {
         width: '100%',
         boxSizing: 'border-box',
-        paddingBlock: token.paddingXS,
+        paddingBlock: token.padding,
+      },
+      [`:last-child`]: {
+        [`& ${componentCls}`]: {
+          paddingBlockEnd: calc(token.padding).mul(2).equal(),
+        },
       },
 
       [`& ${componentCls}-start:not(${componentCls}-divider):not(${componentCls}-system)`]: {

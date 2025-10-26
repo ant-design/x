@@ -156,6 +156,7 @@ const App = () => {
       </Space>
 
       <Bubble
+        variant="borderless"
         content={text.slice(0, index)}
         className={className}
         contentRender={(content) => (
@@ -165,7 +166,6 @@ const App = () => {
             {content}
           </XMarkdown>
         )}
-        variant="outlined"
       />
     </Flex>
   );
