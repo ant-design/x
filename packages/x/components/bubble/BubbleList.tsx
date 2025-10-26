@@ -208,7 +208,6 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   const renderData = autoScroll ? [...items].reverse() : items;
 
   const mergeOnScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
-    console.log(scrollBoxRef.current?.scrollTop);
     onScroll?.(e);
   };
   // ============================ Render ============================

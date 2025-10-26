@@ -59,7 +59,6 @@ const genThinkStyle: GenerateStyle<ThinkToken> = (token) => {
         marginTop: marginSM,
         width: '100%',
         color: colorTextDescription,
-        whiteSpace: 'pre-wrap',
         paddingInlineStart: paddingSM,
         borderInlineStart: `${calc(lineWidth).mul(2).equal()} solid ${colorBorder}`,
       },

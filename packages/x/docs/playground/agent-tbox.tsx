@@ -43,6 +43,7 @@ import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
 import React, { useState } from 'react';
 import { TboxClient } from 'tbox-nodejs-sdk';
+import { useMarkdownTheme } from '../x-markdown/demo/_utils';
 
 // ==================== Local ====================
 const zhCN = {
@@ -313,19 +314,24 @@ const useStyle = createStyles(({ token, css }) => {
 });
 
 // ==================== TboxProvider ====================
-interface TboxMessage {
-  content: string;
-  role: string;
-}
 
 interface TboxInput {
-  message: TboxMessage;
+  message: {
+    role: string;
+    content: string;
+  };
   userAction?: string;
 }
 
 interface TboxOutput {
   text?: string;
+  ext_text?: string;
 }
+interface TboxMessage {
+  content: TboxOutput;
+  role: string;
+}
+
 const tboxClient = new TboxClient({
   httpClientConfig: {
     authorization: 'your-api-key', // Replace with your API key
@@ -380,7 +386,7 @@ class TboxRequest<
     const dataArr: Output[] = [];
 
     stream.on('data', (data) => {
-      let parsedPayload: Output;
+      let parsedPayload: any;
       try {
         const payload = (data as any).data?.payload || '{}';
         parsedPayload = JSON.parse(payload);
@@ -389,9 +395,13 @@ class TboxRequest<
         return;
       }
 
-      if (parsedPayload?.text) {
-        dataArr.push(parsedPayload);
-        callbacks?.onUpdate?.(parsedPayload, new Headers());
+      if (parsedPayload?.text || parsedPayload?.ext_data?.text) {
+        const data = {
+          text: parsedPayload?.text,
+          ext_text: parsedPayload?.ext_data?.text,
+        } as Output;
+        dataArr.push(data);
+        callbacks?.onUpdate?.(data, new Headers());
       }
     });
 
@@ -447,14 +457,17 @@ class TboxProvider<
     const { originMessage, chunk } = info || {};
     if (!chunk) {
       return {
-        content: originMessage?.content || '',
+        content: originMessage?.content || {},
         role: 'assistant',
       } as ChatMessage;
     }
 
-    const content = originMessage?.content || '';
+    const content = originMessage?.content || {};
     return {
-      content: content + chunk.text,
+      content: {
+        text: (content.text || '') + (chunk.text || ''),
+        ext_text: (content.ext_text || '') + (chunk.ext_text || ''),
+      },
       role: 'assistant',
     } as ChatMessage;
   }
@@ -565,6 +578,7 @@ const Footer: React.FC<{
 
 const AgentTbox: React.FC = () => {
   const { styles } = useStyle();
+  const [className] = useMarkdownTheme();
   const locale = isZhCN ? { ...zhCN_antd, ...zhCN_X } : { ...enUS_antd, ...enUS_X };
   // ==================== State ====================
 
@@ -594,7 +608,7 @@ const AgentTbox: React.FC = () => {
     conversationKey: activeConversationKey,
     requestPlaceholder: () => {
       return {
-        content: t.noData,
+        content: { text: t.noData },
         role: 'assistant',
       };
     },
@@ -723,15 +737,19 @@ const AgentTbox: React.FC = () => {
         },
         footer: (content, { status, key }) => <Footer content={content} status={status} id={key} />,
       },
-      contentRender: (content, { status }) => (
-        <XMarkdown
-          content={content as string}
-          components={{
-            think: ThinkComponent,
-          }}
-          streaming={{ hasNextChunk: status === 'updating', enableAnimation: true }}
-        />
-      ),
+      contentRender: (content, { status }) => {
+        const markdownText = `${content.ext_text ? '<think>\n\n' + content.ext_text + `${content.text ? '\n\n</think>\n\n' : ''}` : ''}${content.text || ''}`;
+        return (
+          <XMarkdown
+            content={markdownText as string}
+            className={className}
+            components={{
+              think: ThinkComponent,
+            }}
+            streaming={{ hasNextChunk: status === 'updating', enableAnimation: true }}
+          />
+        );
+      },
     },
     user: { placement: 'end' },
   };

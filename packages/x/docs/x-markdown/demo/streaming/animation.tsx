@@ -145,7 +145,7 @@ const App = () => {
   }, [index]);
 
   return (
-    <Flex vertical gap="small">
+    <Flex style={{ width: '100%' }} vertical gap="small">
       <Space align="center" style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Space>
           <Text>Animation</Text>
@@ -156,6 +156,10 @@ const App = () => {
       </Space>
 
       <Bubble
+        style={{ width: '100%' }}
+        styles={{
+          body: { width: '100%' },
+        }}
         variant="borderless"
         content={text.slice(0, index)}
         className={className}
