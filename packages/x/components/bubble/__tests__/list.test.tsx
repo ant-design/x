@@ -162,7 +162,7 @@ describe('Bubble.List', () => {
           placement: 'start', // 覆盖 role 配置
         },
         {
-          key: 'item1',
+          key: 'item2',
           content: '消息',
           placement: 'end', // 覆盖 role 配置
         } as any,
@@ -213,11 +213,12 @@ describe('Bubble.List', () => {
       ];
 
       // 即便不配置 role，也支持渲染 item.role = 'divider' 的分割线
-      const { container } = render(<BubbleList items={itemsWithOverride} />);
-      const listElement = container.querySelector('.ant-bubble-list') as HTMLDivElement;
+      const { container } = render(<BubbleList items={itemsWithOverride} autoScroll={false} />);
       const divider = container.querySelector('.ant-bubble-divider');
+      const bubbles = container.querySelectorAll('.ant-bubble');
 
-      expect(listElement.childNodes.length).toBe(2);
+      // 由于autoScroll=false，items不会被反转，应该有2个元素
+      expect(bubbles).toHaveLength(2);
       expect(divider).toBeInTheDocument();
     });
 
@@ -237,7 +238,7 @@ describe('Bubble.List', () => {
 
       // 即便不配置 role，也支持渲染 item.role = 'system' 的系统消息
       const { container } = render(<BubbleList items={itemsWithOverride} />);
-      const listElement = container.querySelector('.ant-bubble-list') as HTMLDivElement;
+      const listElement = container.querySelector('.ant-bubble-list-scroll-box') as HTMLDivElement;
       const system = container.querySelector('.ant-bubble-system');
 
       expect(listElement.childNodes.length).toBe(2);
@@ -282,8 +283,10 @@ describe('Bubble.List', () => {
 
     it('应该在 items 长度变化时自动滚动到底部', () => {
       const { rerender, container } = render(<BubbleList items={mockItems} />);
-      const listElement = container.querySelector('.ant-bubble-list') as HTMLDivElement;
-      listElement.scrollTo = mockScrollTo;
+      const scrollBoxElement = container.querySelector(
+        '.ant-bubble-list-scroll-box',
+      ) as HTMLDivElement;
+      scrollBoxElement.scrollTo = mockScrollTo;
 
       // 清除初始渲染时的调用
       mockScrollTo.mockClear();
@@ -296,19 +299,21 @@ describe('Bubble.List', () => {
 
     it('应该支持禁用自动滚动', async () => {
       const { container, rerender } = render(<BubbleList items={mockItems} autoScroll />);
-      const listElement = container.querySelector('.ant-bubble-list') as HTMLDivElement;
-      listElement.scrollTo = mockScrollTo;
+      const scrollBoxElement = container.querySelector(
+        '.ant-bubble-list-scroll-box',
+      ) as HTMLDivElement;
+      scrollBoxElement.scrollTo = mockScrollTo;
       // 清除初始渲染时的调用
       mockScrollTo.mockClear();
 
-      expect(listElement).toHaveClass('ant-bubble-list-autoscroll');
+      expect(scrollBoxElement).toHaveClass('ant-bubble-list-autoscroll');
 
       const newItems = [
         ...mockItems,
         { key: 'item4', role: 'user', content: '一段非常长的文本'.repeat(30), typing: true },
       ];
       rerender(<BubbleList items={newItems} autoScroll={false} />);
-      expect(listElement).not.toHaveClass('ant-bubble-list-autoscroll');
+      expect(scrollBoxElement).not.toHaveClass('ant-bubble-list-autoscroll');
       // 仅在添加消息时滚动到底部，后续动画过程不触发滚动
       expect(mockScrollTo).toHaveBeenCalledTimes(1);
 
@@ -319,9 +324,9 @@ describe('Bubble.List', () => {
     it('应该支持 onScroll 回调', () => {
       const onScroll = jest.fn();
       const { container } = render(<BubbleList items={mockItems} onScroll={onScroll} />);
-      const listElement = container.querySelector('.ant-bubble-list');
+      const scrollBoxElement = container.querySelector('.ant-bubble-list-scroll-box');
 
-      fireEvent.scroll(listElement!);
+      fireEvent.scroll(scrollBoxElement!);
 
       expect(onScroll).toHaveBeenCalled();
     });
@@ -348,10 +353,12 @@ describe('Bubble.List', () => {
       const { container, rerender } = render(
         <BubbleList items={mockItems} ref={ref} autoScroll={false} />,
       );
-      const listElement = container.querySelector('.ant-bubble-list') as HTMLDivElement;
+      const scrollBoxElement = container.querySelector(
+        '.ant-bubble-list-scroll-box',
+      ) as HTMLDivElement;
 
-      // 确保 listElement 有 scrollTo 方法
-      listElement.scrollTo = mockScrollTo;
+      // 确保 scrollBoxElement 有 scrollTo 方法
+      scrollBoxElement.scrollTo = mockScrollTo;
 
       act(() => {
         ref.current!.scrollTo({ top: 100, behavior: 'smooth' });
@@ -378,10 +385,12 @@ describe('Bubble.List', () => {
     it('应该支持通过 ref.scrollTo 快速滚动到顶部或底部', () => {
       const ref = React.createRef<BubbleListRef>();
       const { container, rerender } = render(<BubbleList items={mockItems} ref={ref} />);
-      const listElement = container.querySelector('.ant-bubble-list') as HTMLDivElement;
+      const scrollBoxElement = container.querySelector(
+        '.ant-bubble-list-scroll-box',
+      ) as HTMLDivElement;
 
-      // 确保 listElement 有 scrollTo 方法
-      listElement.scrollTo = mockScrollTo;
+      // 确保 scrollBoxElement 有 scrollTo 方法
+      scrollBoxElement.scrollTo = mockScrollTo;
 
       act(() => {
         ref.current!.scrollTo({ top: 'bottom' });
