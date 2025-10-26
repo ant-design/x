@@ -3,9 +3,21 @@ import { Popover } from 'antd';
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { useMarkdownTheme } from '../_utils';
-import { Adx_Markdown_En, Adx_Markdown_Zh } from '../_utils/adx-markdown';
 import '@ant-design/x-markdown/themes/light.css';
 import '@ant-design/x-markdown/themes/dark.css';
+
+const ZH_Markdown = `| 组件          | 功能                                |  
+|---------------|-------------------------------------|  
+| Bubble      | 消息气泡，支持用户/AI 消息布局        |  
+| Conversations  [^1][^3][^9] | 管理多轮对话历史记录                |
+| Notification | 系统通知|`;
+
+const EN_Markdown = `| Component      | Function                                 |  
+|---------------|------------------------------------------|  
+| Bubble        | Message bubble, supports user/AI layout   |  
+| Conversations [^1][^3][^9] | Manage multi-turn conversation history |
+| Notification  | System notification |`;
+
 const referenceList = [
   { url: 'https://x.ant.design', title: 'link1' },
   { url: 'https://x.ant.design', title: 'link2' },
@@ -44,7 +56,7 @@ const Footnote: React.FC<ComponentProps<{ href?: string; title?: string }>> = (p
 const App: React.FC = () => {
   const [className] = useMarkdownTheme();
   const { locale } = useIntl();
-  const content = locale === 'zh-CN' ? Adx_Markdown_Zh : Adx_Markdown_En;
+  const content = locale === 'zh-CN' ? ZH_Markdown : EN_Markdown;
   const footNoteExtension = {
     name: 'footnote',
     level: 'inline' as const,
