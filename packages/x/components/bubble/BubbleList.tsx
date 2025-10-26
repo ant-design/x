@@ -207,9 +207,6 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
 
   const renderData = autoScroll ? [...items].reverse() : items;
 
-  const mergeOnScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
-    onScroll?.(e);
-  };
   // ============================ Render ============================
   return (
     <div {...domProps} className={mergedClassNames} style={mergedStyle} ref={listRef}>
@@ -219,7 +216,7 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
         })}
         style={styles.scroll}
         ref={scrollBoxRef}
-        onScroll={mergeOnScroll}
+        onScroll={onScroll}
       >
         {renderData.map((item) => {
           let mergedProps: BubbleItemType;
