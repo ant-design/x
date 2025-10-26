@@ -145,7 +145,7 @@ const App = () => {
   }, [index]);
 
   return (
-    <Flex style={{ width: '100%' }} vertical gap="small">
+    <Flex style={{ width: '100%', margin: 32 }} vertical gap="small">
       <Space align="center" style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Space>
           <Text>Animation</Text>
