@@ -15,6 +15,21 @@ tag: vVERSION
 
 ---
 
+## 2.0.0-alpha.11
+
+`2025-10-27`
+
+### @ant-design/x
+
+- 🆕 Sender 词槽配置改为可变属性，词槽模式下 `insert` 方法新增 `replaceCharacters` 属性入参，支持新增替换功能，同时 `focus` 方法新增词槽 `key` 的配置以支持制定词槽的 `focus` 功能。[#1259](https://github.com/ant-design/x/pull/1259) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🆕 Sources 行内模式支持指定当前激活的面板，新增 `activeKey` 属性，同时优化面板切换的交互样式，使体验更好。[#1261](https://github.com/ant-design/x/pull/1261) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🆕 Bubble.List 对滚动条布局和实现以及语义化进行了优化。[#1261](https://github.com/ant-design/x/pull/1261) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+
+### @ant-design/x-markdown
+
+- 🐛 修复 XMarkDown 自定义组件不同状态下入参结构不一致问题。[#1260](https://github.com/ant-design/x/pull/1260) 由 [@Div627](https://github.com/Div627) 提交。
+- 📖 新增 XMarkDown 代码示例。[#1262](https://github.com/ant-design/x/pull/1262) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+
 ## 2.0.0-alpha.10
 
 `2025-10-23`
