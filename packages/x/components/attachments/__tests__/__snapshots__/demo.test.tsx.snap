@@ -262,53 +262,7 @@ exports[`renders components/attachments/demo/overflow.tsx correctly 1`] = `
     >
       <div
         class="ant-file-card-list ant-attachment-list css-var-_R_0_ ant-file-card-list-overflow-wrap"
-      >
-        <span
-          class="ant-upload-wrapper css-var-_R_0_"
-        >
-          <div
-            class="ant-upload ant-upload-select"
-          >
-            <span
-              class="ant-upload"
-            >
-              <input
-                accept=""
-                name="file"
-                style="display:none"
-                type="file"
-              />
-              <button
-                class="ant-btn css-var-_R_0_ ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
-                type="button"
-              >
-                <span
-                  aria-label="plus"
-                  class="anticon anticon-plus ant-attachment-list-upload-btn-icon"
-                  role="img"
-                >
-                  <svg
-                    aria-hidden="true"
-                    data-icon="plus"
-                    fill="currentColor"
-                    focusable="false"
-                    height="1em"
-                    viewBox="64 64 896 896"
-                    width="1em"
-                  >
-                    <path
-                      d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
-                    />
-                    <path
-                      d="M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
-                    />
-                  </svg>
-                </span>
-              </button>
-            </span>
-          </div>
-        </span>
-      </div>
+      />
     </div>
     <div
       aria-hidden="false"
@@ -403,53 +357,7 @@ exports[`renders components/attachments/demo/placeholder.tsx correctly 1`] = `
         <div
           class="ant-file-card-list ant-attachment-list css-var-_R_0_"
           style="display:none"
-        >
-          <span
-            class="ant-upload-wrapper css-var-_R_0_"
-          >
-            <div
-              class="ant-upload ant-upload-select"
-            >
-              <span
-                class="ant-upload"
-              >
-                <input
-                  accept=""
-                  name="file"
-                  style="display:none"
-                  type="file"
-                />
-                <button
-                  class="ant-btn css-var-_R_0_ ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
-                  type="button"
-                >
-                  <span
-                    aria-label="plus"
-                    class="anticon anticon-plus ant-attachment-list-upload-btn-icon"
-                    role="img"
-                  >
-                    <svg
-                      aria-hidden="true"
-                      data-icon="plus"
-                      fill="currentColor"
-                      focusable="false"
-                      height="1em"
-                      viewBox="64 64 896 896"
-                      width="1em"
-                    >
-                      <path
-                        d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
-                      />
-                      <path
-                        d="M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
-                      />
-                    </svg>
-                  </span>
-                </button>
-              </span>
-            </div>
-          </span>
-        </div>
+        />
       </div>
       <div
         class="ant-attachment-placeholder"
@@ -535,53 +443,7 @@ exports[`renders components/attachments/demo/placeholder.tsx correctly 1`] = `
         <div
           class="ant-file-card-list ant-attachment-list css-var-_R_0_"
           style="display:none"
-        >
-          <span
-            class="ant-upload-wrapper css-var-_R_0_"
-          >
-            <div
-              class="ant-upload ant-upload-select"
-            >
-              <span
-                class="ant-upload"
-              >
-                <input
-                  accept=""
-                  name="file"
-                  style="display:none"
-                  type="file"
-                />
-                <button
-                  class="ant-btn css-var-_R_0_ ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
-                  type="button"
-                >
-                  <span
-                    aria-label="plus"
-                    class="anticon anticon-plus ant-attachment-list-upload-btn-icon"
-                    role="img"
-                  >
-                    <svg
-                      aria-hidden="true"
-                      data-icon="plus"
-                      fill="currentColor"
-                      focusable="false"
-                      height="1em"
-                      viewBox="64 64 896 896"
-                      width="1em"
-                    >
-                      <path
-                        d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
-                      />
-                      <path
-                        d="M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
-                      />
-                    </svg>
-                  </span>
-                </button>
-              </span>
-            </div>
-          </span>
-        </div>
+        />
       </div>
       <div
         class="ant-attachment-placeholder"
@@ -688,6 +550,251 @@ exports[`renders components/attachments/demo/placeholder.tsx correctly 1`] = `
 </div>
 `;
 
+exports[`renders components/attachments/demo/select-files.tsx correctly 1`] = `
+<div
+  class="ant-app css-var-_R_0_"
+>
+  <div
+    class="ant-flex css-var-_R_0_ ant-flex-align-flex-end"
+    style="min-height:250px"
+  >
+    <div
+      class="ant-sender css-var-_R_0_"
+    >
+      <div
+        class="ant-sender-header"
+        style="display:none"
+      >
+        <div
+          class="ant-sender-header-header"
+        >
+          <div
+            class="ant-sender-header-title"
+          >
+            Attachments
+          </div>
+        </div>
+        <div
+          class="ant-sender-header-content"
+          style="padding:0"
+        >
+          <div
+            class="ant-attachment css-var-_R_0_"
+            dir="ltr"
+          >
+            <div
+              class="ant-file-card-list-wrapper"
+            >
+              <div
+                class="ant-file-card-list ant-attachment-list css-var-_R_0_"
+                style="display:none"
+              >
+                <span
+                  class="ant-upload-wrapper css-var-_R_0_"
+                >
+                  <div
+                    class="ant-upload ant-upload-select"
+                  >
+                    <span
+                      class="ant-upload"
+                    >
+                      <input
+                        accept=""
+                        multiple=""
+                        name="file"
+                        style="display:none"
+                        type="file"
+                      />
+                      <button
+                        class="ant-btn css-var-_R_0_ ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
+                        type="button"
+                      >
+                        <span
+                          aria-label="plus"
+                          class="anticon anticon-plus ant-attachment-list-upload-btn-icon"
+                          role="img"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            data-icon="plus"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
+                            />
+                            <path
+                              d="M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+                            />
+                          </svg>
+                        </span>
+                      </button>
+                    </span>
+                  </div>
+                </span>
+              </div>
+            </div>
+            <div
+              class="ant-attachment-placeholder"
+            >
+              <span
+                class="ant-upload-wrapper css-var-_R_0_"
+              >
+                <div
+                  class="ant-upload ant-upload-drag"
+                  style="padding:0;border:0;background:transparent"
+                >
+                  <span
+                    class="ant-upload ant-upload-btn"
+                    role="button"
+                    tabindex="0"
+                  >
+                    <input
+                      accept=""
+                      multiple=""
+                      name="file"
+                      style="display:none"
+                      type="file"
+                    />
+                    <div
+                      class="ant-upload-drag-container"
+                    >
+                      <div
+                        class="ant-attachment-placeholder-inner ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
+                      >
+                        <span
+                          class="ant-typography ant-attachment-placeholder-icon css-var-_R_0_"
+                        >
+                          <span
+                            aria-label="cloud-upload"
+                            class="anticon anticon-cloud-upload"
+                            role="img"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              data-icon="cloud-upload"
+                              fill="currentColor"
+                              focusable="false"
+                              height="1em"
+                              viewBox="64 64 896 896"
+                              width="1em"
+                            >
+                              <path
+                                d="M518.3 459a8 8 0 00-12.6 0l-112 141.7a7.98 7.98 0 006.3 12.9h73.9V856c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V613.7H624c6.7 0 10.4-7.7 6.3-12.9L518.3 459z"
+                              />
+                              <path
+                                d="M811.4 366.7C765.6 245.9 648.9 160 512.2 160S258.8 245.8 213 366.6C127.3 389.1 64 467.2 64 560c0 110.5 89.5 200 199.9 200H304c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8h-40.1c-33.7 0-65.4-13.4-89-37.7-23.5-24.2-36-56.8-34.9-90.6.9-26.4 9.9-51.2 26.2-72.1 16.7-21.3 40.1-36.8 66.1-43.7l37.9-9.9 13.9-36.6c8.6-22.8 20.6-44.1 35.7-63.4a245.6 245.6 0 0152.4-49.9c41.1-28.9 89.5-44.2 140-44.2s98.9 15.3 140 44.2c19.9 14 37.5 30.8 52.4 49.9 15.1 19.3 27.1 40.7 35.7 63.4l13.8 36.5 37.8 10C846.1 454.5 884 503.8 884 560c0 33.1-12.9 64.3-36.3 87.7a123.07 123.07 0 01-87.6 36.3H720c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h40.1C870.5 760 960 670.5 960 560c0-92.7-63.1-170.7-148.6-193.3z"
+                              />
+                            </svg>
+                          </span>
+                        </span>
+                        <h5
+                          class="ant-typography ant-attachment-placeholder-title css-var-_R_0_"
+                        >
+                          Upload files
+                        </h5>
+                        <span
+                          class="ant-typography ant-typography-secondary ant-attachment-placeholder-description css-var-_R_0_"
+                        >
+                          Click or drag files to this area to upload
+                        </span>
+                      </div>
+                    </div>
+                  </span>
+                </div>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ant-sender-content"
+      >
+        <div
+          class="ant-sender-prefix"
+        >
+          <span
+            class="ant-badge css-var-_R_0_"
+          >
+            <button
+              class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only ant-dropdown-trigger"
+              type="button"
+            >
+              <span
+                class="ant-btn-icon"
+              >
+                <span
+                  aria-label="link"
+                  class="anticon anticon-link"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="link"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M574 665.4a8.03 8.03 0 00-11.3 0L446.5 781.6c-53.8 53.8-144.6 59.5-204 0-59.5-59.5-53.8-150.2 0-204l116.2-116.2c3.1-3.1 3.1-8.2 0-11.3l-39.8-39.8a8.03 8.03 0 00-11.3 0L191.4 526.5c-84.6 84.6-84.6 221.5 0 306s221.5 84.6 306 0l116.2-116.2c3.1-3.1 3.1-8.2 0-11.3L574 665.4zm258.6-474c-84.6-84.6-221.5-84.6-306 0L410.3 307.6a8.03 8.03 0 000 11.3l39.7 39.7c3.1 3.1 8.2 3.1 11.3 0l116.2-116.2c53.8-53.8 144.6-59.5 204 0 59.5 59.5 53.8 150.2 0 204L665.3 562.6a8.03 8.03 0 000 11.3l39.8 39.8c3.1 3.1 8.2 3.1 11.3 0l116.2-116.2c84.5-84.6 84.5-221.5 0-306.1zM610.1 372.3a8.03 8.03 0 00-11.3 0L372.3 598.7a8.03 8.03 0 000 11.3l39.6 39.6c3.1 3.1 8.2 3.1 11.3 0l226.4-226.4c3.1-3.1 3.1-8.2 0-11.3l-39.5-39.6z"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </button>
+          </span>
+        </div>
+        <textarea
+          class="ant-input ant-input-borderless css-var-_R_0_ ant-input-css-var ant-sender-input"
+        />
+        <div
+          class="ant-sender-actions-list"
+        >
+          <div
+            class="ant-sender-actions-list-presets ant-flex css-var-_R_0_"
+          >
+            <button
+              class="ant-btn css-var-_R_0_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              disabled=""
+              type="button"
+            >
+              <span
+                class="ant-btn-icon"
+              >
+                <span
+                  aria-label="arrow-up"
+                  class="anticon anticon-arrow-up"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="arrow-up"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M868 545.5L536.1 163a31.96 31.96 0 00-48.3 0L156 545.5a7.97 7.97 0 006 13.2h81c4.6 0 9-2 12.1-5.5L474 300.9V864c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V300.9l218.9 252.3c3 3.5 7.4 5.5 12.1 5.5h81c6.8 0 10.5-8 6-13.2z"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`renders components/attachments/demo/with-sender.tsx correctly 1`] = `
 <div
   class="ant-app css-var-_R_0_"
@@ -758,53 +865,7 @@ exports[`renders components/attachments/demo/with-sender.tsx correctly 1`] = `
               <div
                 class="ant-file-card-list ant-attachment-list css-var-_R_0_"
                 style="display:none"
-              >
-                <span
-                  class="ant-upload-wrapper css-var-_R_0_"
-                >
-                  <div
-                    class="ant-upload ant-upload-select"
-                  >
-                    <span
-                      class="ant-upload"
-                    >
-                      <input
-                        accept=""
-                        name="file"
-                        style="display:none"
-                        type="file"
-                      />
-                      <button
-                        class="ant-btn css-var-_R_0_ ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
-                        type="button"
-                      >
-                        <span
-                          aria-label="plus"
-                          class="anticon anticon-plus ant-attachment-list-upload-btn-icon"
-                          role="img"
-                        >
-                          <svg
-                            aria-hidden="true"
-                            data-icon="plus"
-                            fill="currentColor"
-                            focusable="false"
-                            height="1em"
-                            viewBox="64 64 896 896"
-                            width="1em"
-                          >
-                            <path
-                              d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
-                            />
-                            <path
-                              d="M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
-                            />
-                          </svg>
-                        </span>
-                      </button>
-                    </span>
-                  </div>
-                </span>
-              </div>
+              />
             </div>
             <div
               class="ant-attachment-placeholder"

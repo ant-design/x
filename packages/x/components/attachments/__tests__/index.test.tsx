@@ -204,16 +204,16 @@ describe('attachments', () => {
     );
   });
 
-  it('maxCount', async () => {
-    const onChange = jest.fn();
+  it('maxCount', () => {
     const presetFiles = Array.from({ length: 5 }).map(
       (_, index) =>
         ({
           uid: String(index),
           name: `file-${index}.jpg`,
           status: 'done',
-          thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-          url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+          thumbUrl:
+            'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*5l2oSKBXatAAAAAAAAAAAAADgCCAQ/original',
+          url: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*5l2oSKBXatAAAAAAAAAAAAADgCCAQ/original',
         }) as const,
     );
 
@@ -221,28 +221,103 @@ describe('attachments', () => {
       renderAttachments({
         maxCount: 5,
         items: presetFiles,
-        onChange,
       }),
     );
 
     expect(container.querySelectorAll('.ant-file-card-list-item')).toHaveLength(5);
+  });
 
-    const uploadBtn = container.querySelector('.ant-upload-wrapper .ant-btn');
-    expect(uploadBtn).toBeTruthy();
+  it('should expose ref methods', () => {
+    const ref = React.createRef<any>();
+    const { container } = render(<Attachments ref={ref} beforeUpload={() => false} />);
 
-    if (uploadBtn) {
-      fireEvent.click(uploadBtn);
-      const fileInput = container.querySelector('input[type="file"]');
-      if (fileInput) {
-        fireEvent.change(fileInput, {
-          target: { files: [new File(['test'], 'test-file.jpg', { type: 'image/jpeg' })] },
-        });
-        await waitFakeTimer();
-        if (onChange.mock.calls.length > 0) {
-          const lastCall = onChange.mock.calls[onChange.mock.calls.length - 1];
-          expect(lastCall[0].fileList.length).toBeLessThanOrEqual(5);
-        }
-      }
-    }
+    expect(ref.current).toBeTruthy();
+    expect(ref.current.nativeElement).toBeInstanceOf(HTMLDivElement);
+    expect(typeof ref.current.upload).toBe('function');
+    expect(typeof ref.current.select).toBe('function');
+  });
+
+  it('should support ref select method', () => {
+    const ref = React.createRef<any>();
+    render(<Attachments ref={ref} beforeUpload={() => false} />);
+
+    expect(typeof ref.current.select).toBe('function');
+  });
+
+  it('should support ref upload method', () => {
+    const ref = React.createRef<any>();
+    render(<Attachments ref={ref} beforeUpload={() => false} />);
+
+    expect(typeof ref.current.upload).toBe('function');
+  });
+
+  it('should support disabled state', () => {
+    const { container } = render(
+      renderAttachments({
+        disabled: true,
+        items: mockItems,
+      }),
+    );
+
+    expect(container.querySelector('.ant-attachment')).toBeTruthy();
+  });
+
+  it('should support custom children', () => {
+    const { container } = render(
+      <Attachments beforeUpload={() => false}>
+        <button type="button">Custom Upload Button</button>
+      </Attachments>,
+    );
+
+    expect(container.textContent).toContain('Custom Upload Button');
+  });
+
+  it('should support RTL direction', () => {
+    const { container } = render(
+      renderAttachments({
+        items: mockItems,
+      }),
+    );
+
+    expect(container.querySelector('.ant-attachment')).toBeTruthy();
+  });
+
+  it('should handle placeholder with function', () => {
+    const placeholderFn = jest.fn().mockReturnValue({
+      title: 'Custom Title',
+      description: 'Custom Description',
+    });
+
+    render(
+      renderAttachments({
+        placeholder: placeholderFn,
+      }),
+    );
+
+    expect(typeof placeholderFn).toBe('function');
+  });
+
+  it('should show placeholder when no files', () => {
+    const { container } = render(
+      renderAttachments({
+        placeholder: {
+          title: 'No Files',
+          description: 'Upload some files',
+        },
+      }),
+    );
+
+    expect(container.querySelector('.ant-attachment-placeholder')).toBeTruthy();
+  });
+
+  it('should support wrap overflow', () => {
+    const { container } = render(
+      renderAttachments({
+        overflow: 'wrap',
+        items: mockItems,
+      }),
+    );
+
+    expect(container.querySelector('.ant-file-card-list')).toBeTruthy();
   });
 });

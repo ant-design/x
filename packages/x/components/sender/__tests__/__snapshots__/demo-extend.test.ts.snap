@@ -67,53 +67,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
             <div
               class="ant-file-card-list ant-attachment-list css-var-_r_2a_"
               style="display: none;"
-            >
-              <span
-                class="ant-upload-wrapper css-var-_r_2a_"
-              >
-                <div
-                  class="ant-upload ant-upload-select"
-                >
-                  <span
-                    class="ant-upload"
-                  >
-                    <input
-                      accept=""
-                      name="file"
-                      style="display: none;"
-                      type="file"
-                    />
-                    <button
-                      class="ant-btn css-var-_r_2a_ ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
-                      type="button"
-                    >
-                      <span
-                        aria-label="plus"
-                        class="anticon anticon-plus ant-attachment-list-upload-btn-icon"
-                        role="img"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          data-icon="plus"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
-                        >
-                          <path
-                            d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
-                          />
-                          <path
-                            d="M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
-                          />
-                        </svg>
-                      </span>
-                    </button>
-                  </span>
-                </div>
-              </span>
-            </div>
+            />
           </div>
           <div
             class="ant-attachment-placeholder"
@@ -1585,53 +1539,7 @@ exports[`renders components/sender/demo/paste-image.tsx extend context correctly
               <div
                 class="ant-file-card-list ant-attachment-list css-var-_r_1u_"
                 style="display: none;"
-              >
-                <span
-                  class="ant-upload-wrapper css-var-_r_1u_"
-                >
-                  <div
-                    class="ant-upload ant-upload-select"
-                  >
-                    <span
-                      class="ant-upload"
-                    >
-                      <input
-                        accept=""
-                        name="file"
-                        style="display: none;"
-                        type="file"
-                      />
-                      <button
-                        class="ant-btn css-var-_r_1u_ ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
-                        type="button"
-                      >
-                        <span
-                          aria-label="plus"
-                          class="anticon anticon-plus ant-attachment-list-upload-btn-icon"
-                          role="img"
-                        >
-                          <svg
-                            aria-hidden="true"
-                            data-icon="plus"
-                            fill="currentColor"
-                            focusable="false"
-                            height="1em"
-                            viewBox="64 64 896 896"
-                            width="1em"
-                          >
-                            <path
-                              d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
-                            />
-                            <path
-                              d="M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
-                            />
-                          </svg>
-                        </span>
-                      </button>
-                    </span>
-                  </div>
-                </span>
-              </div>
+              />
             </div>
             <div
               class="ant-attachment-placeholder"
@@ -2667,53 +2575,7 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx extend context 
               <div
                 class="ant-file-card-list ant-attachment-list css-var-_r_f_"
                 style="display: none;"
-              >
-                <span
-                  class="ant-upload-wrapper css-var-_r_f_"
-                >
-                  <div
-                    class="ant-upload ant-upload-select"
-                  >
-                    <span
-                      class="ant-upload"
-                    >
-                      <input
-                        accept=""
-                        name="file"
-                        style="display: none;"
-                        type="file"
-                      />
-                      <button
-                        class="ant-btn css-var-_r_f_ ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
-                        type="button"
-                      >
-                        <span
-                          aria-label="plus"
-                          class="anticon anticon-plus ant-attachment-list-upload-btn-icon"
-                          role="img"
-                        >
-                          <svg
-                            aria-hidden="true"
-                            data-icon="plus"
-                            fill="currentColor"
-                            focusable="false"
-                            height="1em"
-                            viewBox="64 64 896 896"
-                            width="1em"
-                          >
-                            <path
-                              d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
-                            />
-                            <path
-                              d="M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
-                            />
-                          </svg>
-                        </span>
-                      </button>
-                    </span>
-                  </div>
-                </span>
-              </div>
+              />
             </div>
             <div
               class="ant-attachment-placeholder"
