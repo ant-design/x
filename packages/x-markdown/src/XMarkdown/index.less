@@ -152,3 +152,27 @@
     opacity: 1;
   }
 }
+
+.inline-katex {
+  .katex-display {
+    display: inline-block;
+    margin: 0;
+    text-align: initial;
+    vertical-align: middle;
+
+    > .katex {
+      display: inline-block;
+      text-align: initial;
+      white-space: normal;
+
+      > .katex-html {
+        display: inline-block;
+        position: static;
+
+        > .tag {
+          position: static;
+        }
+      }
+    }
+  }
+}

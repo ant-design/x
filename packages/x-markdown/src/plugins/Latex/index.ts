@@ -57,10 +57,10 @@ function inlineKatex(renderer: Render, replaceAlignStart: boolean) {
         type: 'inlineKatex',
         raw: match[0],
         text,
-        displayMode: false,
+        displayMode: true,
       };
     },
-    renderer,
+    renderer: (token: Token) => `<span class="inline-katex">${renderer(token)}</span>`,
   };
 }
 
@@ -91,7 +91,7 @@ const Latex = (options?: LatexOption): TokenizerAndRendererExtension[] => {
   const { replaceAlignStart = true, katexOptions = { output: 'html', throwOnError: false } } =
     options || {};
 
-  const inlineRenderer = createRenderer(katexOptions, false);
+  const inlineRenderer = createRenderer(katexOptions, true);
   const blockRenderer = createRenderer(katexOptions, true);
   return [
     inlineKatex(inlineRenderer, replaceAlignStart),
