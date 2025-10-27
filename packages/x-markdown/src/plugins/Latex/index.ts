@@ -93,7 +93,7 @@ const Latex = (options?: LatexOption): TokenizerAndRendererExtension[] => {
   const katexOptions = {
     output: 'html' as const,
     throwOnError: false,
-    ...customKatexOptions,
+    ...(customKatexOptions || {}),
   };
 
   const inlineRenderer = createRenderer(katexOptions, true);
