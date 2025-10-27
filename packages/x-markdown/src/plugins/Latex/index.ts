@@ -4,8 +4,8 @@ import { TokenizerAndRendererExtension } from 'marked';
 import 'katex/dist/katex.min.css';
 
 const inlineRuleNonStandard =
-  /^(?:\${1,2}([^$]+?)\${1,2}|\\\(([\s\S]*?)\\\)|\\\[((?:\\.|[^\\])*?)\\\])/;
-const blockRule = /^(\${1,2})\n([\s\S]+?)\n\1(?:\n|$)|^\\\[((?:\\.|[^\\])+?)\\\]/;
+  /^(?:\${1,2}([^$]{1,10000}?)\${1,2}|\\\(([\s\S]{1,10000}?)\\\)|\\\[((?:\\.|[^\\]){1,10000}?)\\\])/;
+const blockRule = /^(\${1,2})\n([\s\S]{1,10000}?)\n\1(?:\n|$)|^\\\[((?:\\.|[^\\]){1,10000}?)\\\]/;
 
 type LatexOption = {
   katexOptions?: KatexOptions;
@@ -57,10 +57,10 @@ function inlineKatex(renderer: Render, replaceAlignStart: boolean) {
         type: 'inlineKatex',
         raw: match[0],
         text,
-        displayMode: false,
+        displayMode: true,
       };
     },
-    renderer,
+    renderer: (token: Token) => `<span class="inline-katex">${renderer(token)}</span>`,
   };
 }
 
@@ -88,9 +88,15 @@ function blockKatex(renderer: Render, replaceAlignStart: boolean) {
 }
 
 const Latex = (options?: LatexOption): TokenizerAndRendererExtension[] => {
-  const { replaceAlignStart = true, katexOptions = { output: 'html' } } = options || {};
+  const { replaceAlignStart = true, katexOptions: customKatexOptions } = options || {};
 
-  const inlineRenderer = createRenderer(katexOptions, false);
+  const katexOptions = {
+    output: 'html' as const,
+    throwOnError: false,
+    ...(customKatexOptions || {}),
+  };
+
+  const inlineRenderer = createRenderer(katexOptions, true);
   const blockRenderer = createRenderer(katexOptions, true);
   return [
     inlineKatex(inlineRenderer, replaceAlignStart),

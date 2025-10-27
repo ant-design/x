@@ -120,4 +120,48 @@ describe('LaTeX Plugin', () => {
 
     expect(container).toMatchSnapshot();
   });
+
+  it('should not throw error by default', () => {
+    const { container } = render(
+      <XMarkdown config={{ extensions: latexPlugin() }}>
+        {'latex: \n\n $$\n\\begin{align\n$$\n\n'}
+      </XMarkdown>,
+    );
+
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should throw error when config katexOption.throwOnError is true', () => {
+    expect(() =>
+      render(
+        <XMarkdown config={{ extensions: latexPlugin({ katexOptions: { throwOnError: true } }) }}>
+          {'latex: \n\n $$\n\\begin{align\n$$\n\n'}
+        </XMarkdown>,
+      ),
+    ).toThrowErrorMatchingSnapshot();
+  });
+
+  it('should support inline block katex render: $$\n..\n$$', () => {
+    expect(() =>
+      render(
+        <XMarkdown config={{ extensions: latexPlugin({ katexOptions: { throwOnError: true } }) }}>
+          {
+            'latex: \n\\[\n\\begin{align*}\n\\text{minimize}  \\quad & f_0(x) \\\\n\\text{subject to} \\quad & f_i(x) \\leq 0, \\quad i = 1, \\dots, m \\ \n& a_j^T x = b_j, \\quad j = 1, \\dots, p\n\\end{align*}\n\\]'
+          }
+        </XMarkdown>,
+      ),
+    ).toMatchSnapshot();
+  });
+
+  it('should support inline block katex render: \\[\n..\n\\]', () => {
+    expect(() =>
+      render(
+        <XMarkdown config={{ extensions: latexPlugin({ katexOptions: { throwOnError: true } }) }}>
+          {
+            'latex: \n\\[\n\\begin{align*}\n\\text{minimize}  \\quad & f_0(x) \\\\n\\text{subject to} \\quad & f_i(x) \\leq 0, \\quad i = 1, \\dots, m \\ \n& a_j^T x = b_j, \\quad j = 1, \\dots, p\n\\end{align*}\n\\]'
+          }
+        </XMarkdown>,
+      ),
+    ).toMatchSnapshot();
+  });
 });
