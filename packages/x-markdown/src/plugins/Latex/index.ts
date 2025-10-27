@@ -88,8 +88,13 @@ function blockKatex(renderer: Render, replaceAlignStart: boolean) {
 }
 
 const Latex = (options?: LatexOption): TokenizerAndRendererExtension[] => {
-  const { replaceAlignStart = true, katexOptions = { output: 'html', throwOnError: false } } =
-    options || {};
+  const { replaceAlignStart = true, katexOptions: customKatexOptions } = options || {};
+
+  const katexOptions = {
+    output: 'html' as const,
+    throwOnError: false,
+    ...customKatexOptions,
+  };
 
   const inlineRenderer = createRenderer(katexOptions, true);
   const blockRenderer = createRenderer(katexOptions, true);
