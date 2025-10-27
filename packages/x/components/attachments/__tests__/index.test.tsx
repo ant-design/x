@@ -229,8 +229,7 @@ describe('attachments', () => {
 
   it('should expose ref methods', () => {
     const ref = React.createRef<any>();
-    const { container } = render(<Attachments ref={ref} beforeUpload={() => false} />);
-
+    render(<Attachments ref={ref} beforeUpload={() => false} />);
     expect(ref.current).toBeTruthy();
     expect(ref.current.nativeElement).toBeInstanceOf(HTMLDivElement);
     expect(typeof ref.current.upload).toBe('function');
