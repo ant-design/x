@@ -120,4 +120,24 @@ describe('LaTeX Plugin', () => {
 
     expect(container).toMatchSnapshot();
   });
+
+  it('should not throw error by default', () => {
+    const { container } = render(
+      <XMarkdown config={{ extensions: latexPlugin() }}>
+        {'latex: \n\n $$\n\\begin{align\n$$\n\n'}
+      </XMarkdown>,
+    );
+
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should throw error when config katexOption.throwOnError is true', () => {
+    expect(() =>
+      render(
+        <XMarkdown config={{ extensions: latexPlugin({ katexOptions: { throwOnError: true } }) }}>
+          {'latex: \n\n $$\n\\begin{align\n$$\n\n'}
+        </XMarkdown>,
+      ),
+    ).toThrowErrorMatchingSnapshot();
+  });
 });

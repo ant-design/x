@@ -1087,6 +1087,28 @@ exports[`LaTeX Plugin should handle multiple LaTeX formulas 1`] = `
 </div>
 `;
 
+exports[`LaTeX Plugin should not throw error by default 1`] = `
+<div>
+  <div
+    class="ant-x-markdown x-markdown"
+    style="direction: ltr;"
+  >
+    <p>
+      latex: 
+    </p>
+    <p>
+      <span
+        class="katex-error"
+        style="color: #cc0000;"
+        title="ParseError: KaTeX parse error: Unexpected end of input in a macro argument, expected &#x27;}&#x27; at end of input: \\\\begin{align"
+      >
+        \\begin{align
+      </span>
+    </p>
+  </div>
+</div>
+`;
+
 exports[`LaTeX Plugin should render block LaTeX with $$..$$ syntax 1`] = `
 <div>
   <div
@@ -2384,4 +2406,9 @@ exports[`LaTeX Plugin should render inline LaTeX with [\\n..\\n] syntax 1`] = `
     </p>
   </div>
 </div>
+`;
+
+exports[`LaTeX Plugin should throw error when config katexOption.throwOnError is true 1`] = `
+"KaTeX parse error: Unexpected end of input in a macro argument, expected '}' at end of input: \\begin{align
+Please report this to https://github.com/markedjs/marked."
 `;
