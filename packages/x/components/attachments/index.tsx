@@ -53,7 +53,9 @@ export interface AttachmentsProps extends Omit<UploadProps, 'fileList'> {
 
 export interface AttachmentsRef {
   nativeElement: HTMLDivElement | null;
+  fileNativeElement: HTMLInputElement | null;
   upload: (file: File) => void;
+  select: (options: { accept?: string; multiple?: boolean }) => void;
 }
 
 function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
@@ -96,9 +98,9 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
 
   React.useImperativeHandle(ref, () => ({
     nativeElement: containerRef.current,
+    fileNativeElement: uploadRef.current?.nativeElement?.querySelector('input[type="file"]'),
     upload: (file) => {
       const fileInput = uploadRef.current?.nativeElement?.querySelector('input[type="file"]');
-
       // Trigger native change event
       if (fileInput) {
         const dataTransfer = new DataTransfer();
@@ -106,6 +108,14 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
         fileInput.files = dataTransfer.files;
 
         fileInput.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+    },
+    select: ({ accept, multiple = false }) => {
+      const fileInput = uploadRef.current?.nativeElement?.querySelector('input[type="file"]');
+      if (fileInput) {
+        fileInput.multiple = multiple;
+        fileInput.accept = accept || props.accept;
+        fileInput.click();
       }
     },
   }));
