@@ -80,6 +80,7 @@
   pre {
     margin: 1em 0;
     overflow-x: auto;
+
     &:first-child {
       margin-top: 0;
     }
@@ -120,7 +121,7 @@
   }
 
   // Table styles
-  table {
+  table:not(pre code) {
     margin: 1em 0;
     border-collapse: collapse;
 
@@ -134,12 +135,12 @@
   }
 
   th,
-  td {
+  td:not(pre code) {
     padding: 0.5em;
     border: 1px solid #ddd;
   }
 
-  th {
+  th:not(pre code) {
     font-weight: bold;
   }
 }
@@ -148,6 +149,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }

@@ -32,6 +32,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       alignItems: 'center',
       marginBlock: unit(calc(token.marginXXS).div(2).equal()),
       minHeight: token.controlHeightSM,
+      wordBreak: 'break-all',
     },
 
     [`${antInputCls}${slotInputCls}`]: {
