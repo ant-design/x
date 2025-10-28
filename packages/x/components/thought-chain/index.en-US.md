@@ -41,9 +41,9 @@ Reference: [Common API](/docs/react/common-props)
 | expandedKeys | Currently expanded nodes | string[] | - | - |
 | onExpand | Callback for when expanded nodes change | (expandedKeys: string[]) => void; | - | - |
 | line | Line style, no line is shown when `false` | boolean \| 'solid' \| 'dashed' \| 'dotted‌' | 'solid' | - |
-| classNames | Class names for semantic structure | Record<'root'\|'item' \| 'itemIcon'\|'itemHeader' \| 'itemContent' \| 'itemFooter', string> | - | - |
+| classNames | Class names for semantic structure | [Record<SemanticDOM, string>](#semantic-dom) | - | - |
 | prefixCls | Custom prefix | string | - | - |
-| styles | Styles for semantic structure | Record<'root'\|'item' \|'itemIcon'\| 'itemHeader' \| 'itemContent' \| 'itemFooter', React.CSSProperties> | - | - |
+| styles | Styles for semantic structure | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - | - |
 | rootClassName | Root element class name | string | - | - |
 
 ### ThoughtChainItemType

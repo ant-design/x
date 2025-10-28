@@ -32,21 +32,15 @@ The Prompts component is used to display a predefined set of questions or sugges
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| classNames | Custom style class names for different parts of each prompt item. | Record<SemanticType, string> | - | - |
+| classNames | Custom style class names for different parts of each prompt item. | [Record<SemanticDOM, string>](#semantic-dom) | - | - |
 | items | List containing multiple prompt items. | PromptProps[] | - | - |
 | prefixCls | Prefix for style class names. | string | - | - |
 | rootClassName | Style class name for the root node. | string | - | - |
-| styles | Custom styles for different parts of each prompt item. | Record<SemanticType, React.CSSProperties> | - | - |
+| styles | Custom styles for different parts of each prompt item. | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - | - |
 | title | Title displayed at the top of the prompt list. | React.ReactNode | - | - |
 | vertical | When set to `true`, the Prompts will be arranged vertically. | boolean | `false` | - |
 | wrap | When set to `true`, the Prompts will automatically wrap. | boolean | `false` | - |
 | onItemClick | Callback function when a prompt item is clicked. | (info: { data: PromptProps }) => void | - | - |
-
-#### SemanticType
-
-```typescript | pure
-type SemanticType = 'list' | 'item' | 'content' | 'title' | 'subList' | 'subItem';
-```
 
 ### PromptProps
 

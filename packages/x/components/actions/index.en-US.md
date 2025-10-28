@@ -31,6 +31,8 @@ Common props ref：[Common props](/docs/react/common-props)
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
+| classNames | Custom class names | [Record<SemanticDOM, string>](#semantic-dom) | - | - |
+| styles | Custom style object | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - | - |
 | items | A list containing multiple action items | ([ItemType](#itemtype) \| ReactNode)[] | - | - |
 | onClick | Callback function when an action item is clicked | function({ item, key, keyPath, domEvent }) | - | - |
 | dropdownProps | Configuration properties for dropdown menu | DropdownProps | - | - |

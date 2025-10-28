@@ -50,8 +50,8 @@ demo:
 | groupable | 是否支持分组, 开启后默认按 `Conversation.group` 字段分组 | boolean \| GroupableProps | - | - |
 | shortcutKeys | 快捷键操作 | { creation?: ShortcutKeys\<number\>; items?:ShortcutKeys\<'number'\> \| ShortcutKeys\<number\>[];} | - | - |
 | creation | 新会话操作配置 | CreationProps | - | - |
-| styles | 语义化结构 style | styles?: {creation?: React.CSSProperties;item?: React.CSSProperties;} | - | - |
-| classNames | 语义化结构 className | classNames?: { creation?: string; item?:string;} | - | - |
+| styles | 语义化结构 style | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - | - |
+| classNames | 语义化结构 className | [Record<SemanticDOM, string>](#semantic-dom) | - | - |
 | rootClassName | 根节点类名 | string | - | - |
 
 ### ItemType

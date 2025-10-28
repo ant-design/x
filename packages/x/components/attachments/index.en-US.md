@@ -31,14 +31,14 @@ For more properties, see [Upload](https://ant.design/components/upload).
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| classNames | Custom class names, [see below](#semantic-dom) | Record<string, string> | - | - |
+| classNames | Custom class names | [Record<SemanticDOM, string>](#semantic-dom) | - | - |
 | disabled | Whether to disable | boolean | false | - |
 | getDropContainer | Config the area where files can be dropped | () => HTMLElement | - | - |
 | items | Attachment list, same as Upload `fileList` | Attachment[] | - | - |
 | overflow | Behavior when the file list overflows | 'wrap' \| 'scrollX' \| 'scrollY' | - | - |
 | placeholder | Placeholder information when there is no file | PlaceholderType \| ((type: 'inline' \| 'drop') => PlaceholderType) | - | - |
 | rootClassName | Root node className | React.CSSProperties | - | - |
-| styles | Custom style object, [see below](#semantic-dom) | Record<string, React.CSSProperties> | - | - |
+| styles | Custom style object | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - | - |
 | imageProps | Image config, same as [Image](https://ant.design/components/image) | ImageProps | - | - |
 
 ```tsx | pure

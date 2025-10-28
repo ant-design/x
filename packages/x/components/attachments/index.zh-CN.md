@@ -34,14 +34,14 @@ Attachments 组件用于需要展示一组附件信息集合的场景。
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| classNames | 自定义样式类名，[见下](#semantic-dom) | Record<string, string> | - | - |
+| classNames | 自定义样式类名 | [Record<SemanticDOM, string>](#semantic-dom) | - | - |
 | disabled | 是否禁用 | boolean | false | - |
 | getDropContainer | 设置拖拽时，可以释放文件的区域 | () => HTMLElement | - | - |
 | items | 附件列表，同 Upload `fileList` | Attachment[] | - | - |
 | overflow | 文件列表超出时样式 | 'wrap' \| 'scrollX' \| 'scrollY' | - | - |
 | placeholder | 没有文件时的占位信息 | PlaceholderType \| ((type: 'inline' \| 'drop') => PlaceholderType) | - | - |
 | rootClassName | 根节点的样式类名 | string | - | - |
-| styles | 自定义样式对象，[见下](#semantic-dom) | Record<string, React.CSSProperties> | - | - |
+| styles | 自定义样式对象 | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - | - |
 | imageProps | 图片属性，同 antd [Image](https://ant.design/components/image) 属性 | ImageProps | - | - |
 
 ```tsx | pure

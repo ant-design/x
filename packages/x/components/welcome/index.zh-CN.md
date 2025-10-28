@@ -32,12 +32,12 @@ demo:
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| classNames | 自定义样式类名，用于各个提示项的不同部分。 | Record<'icon' \| 'title' \| 'description' \| 'extra', string> | - | - |
+| classNames | 自定义样式类名，用于各个提示项的不同部分。 | [Record<SemanticDOM, string>](#semantic-dom) | - | - |
 | description | 显示在提示列表中的描述。 | React.ReactNode | - | - |
 | extra | 显示在提示列表末尾的额外操作。 | React.ReactNode | - | - |
 | icon | 显示在提示列表前侧的图标。 | React.ReactNode | - | - |
 | rootClassName | 根节点的样式类名。 | string | - | - |
-| styles | 自定义样式，用于各个提示项的不同部分。 | Record<'icon' \| 'title' \| 'description' \| 'extra', React.CSSProperties> | - | - |
+| styles | 自定义样式，用于各个提示项的不同部分。 | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - | - |
 | title | 显示在提示列表顶部的标题。 | React.ReactNode | - | - |
 | variant | 变体类型。 | 'filled' \| 'borderless' | 'filled' | - |
 

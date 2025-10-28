@@ -35,11 +35,11 @@ Prompts 组件用于显示一组与当前上下文相关的预定义的问题或
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| classNames | 自定义样式类名，用于各个提示项的不同部分 | Record<SemanticType, string> | - | - |
+| classNames | 自定义样式类名，用于各个提示项的不同部分 | [Record<SemanticDOM, string>](#semantic-dom) | - | - |
 | items | 包含多个提示项的列表 | PromptProps[] | - | - |
 | prefixCls | 样式类名的前缀 | string | - | - |
 | rootClassName | 根节点的样式类名 | string | - | - |
-| styles | 自定义样式，用于各个提示项的不同部分 | Record<SemanticType, React.CSSProperties> | - | - |
+| styles | 自定义样式，用于各个提示项的不同部分 | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - | - |
 | title | 显示在提示列表顶部的标题 | React.ReactNode | - | - |
 | vertical | 设置为 `true` 时, 提示列表将垂直排列 | boolean | `false` | - |
 | wrap | 设置为 `true` 时, 提示列表将自动换行 | boolean | `false` | - |

@@ -68,6 +68,8 @@ type PresetIcons =
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
+| classNames | DOM class | [Record<SemanticDOM, string>](#semantic-dom) | - | - |
+| styles | DOM style | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - | - |
 | items | File lists | FileCardProps[] | - | - |
 | size | Card size | 'small' \| 'default' | default | - |
 | removable | Can be removed | boolean \| ((item: FileCardProps) => boolean) | false | - |

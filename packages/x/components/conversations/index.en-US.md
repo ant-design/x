@@ -49,8 +49,8 @@ Common props ref：[Common props](/docs/react/common-props)
 | groupable | If grouping is supported, it defaults to the `Conversation.group` field | boolean \| GroupableProps | - | - |
 | shortcutKeys | Shortcut key operations | { creation?: ShortcutKeys<number>; items?:ShortcutKeys<'number'> \| ShortcutKeys<number>[];} | - | - |
 | creation | New conversation configuration | CreationProps | - | - |
-| styles | Semantic structure styles | styles?: {creation?: React.CSSProperties;item?: React.CSSProperties;} | - | - |
-| classNames | Semantic structure class names | classNames?: { creation?: string; item?:string;} | - | - |
+| styles | Semantic structure styles | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - | - |
+| classNames | Semantic structure class names | [Record<SemanticDOM, string>](#semantic-dom) | - | - |
 | rootClassName | Root node className | string | - | - |
 
 ### ItemType

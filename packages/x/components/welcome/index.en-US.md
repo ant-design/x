@@ -29,12 +29,12 @@ Use the appropriate welcome recommendation component to effectively reduce the u
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| classNames | Custom style class names for different parts of each prompt item. | Record<'icon' \| 'title' \| 'description' \| 'extra', string> | - | - |
+| classNames | Custom style class names for different parts of each prompt item. | [Record<SemanticDOM, string>](#semantic-dom) | - | - |
 | description | The description displayed in the prompt list. | React.ReactNode | - | - |
 | extra | The extra operation displayed at the end of the prompt list. | React.ReactNode | - | - |
 | icon | The icon displayed on the front side of the prompt list. | React.ReactNode | - | - |
 | rootClassName | The style class name of the root node. | string | - | - |
-| styles | Custom styles for different parts of each prompt item. | Record<'icon' \| 'title' \| 'description' \| 'extra', React.CSSProperties> | - | - |
+| styles | Custom styles for different parts of each prompt item. | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - | - |
 | title | The title displayed at the top of the prompt list. | React.ReactNode | - | - |
 | variant | Variant type. | 'filled' \| 'borderless' | 'filled' | - |
 

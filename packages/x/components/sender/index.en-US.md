@@ -41,7 +41,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | allowSpeech | Whether to allow speech input | boolean \| SpeechConfig | false | - |
-| classNames | Class name | [See below](#semantic-dom) | - | - |
+| classNames | Class name | [Record<SemanticDOM, string>](#semantic-dom) | - | - |
 | components | Custom components | Record<'input', ComponentType> | - | - |
 | defaultValue | Default value of input | string | - | - |
 | disabled | Whether to disable | boolean | false | - |
@@ -52,7 +52,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | footer | Footer content | React.ReactNode \| false \| (oriNode: React.ReactNode, info: { components: ActionsComponents; }) => React.ReactNode \| false | false | - |
 | readOnly | Whether to make the input box read-only | boolean | false | - |
 | rootClassName | Root element class name | string | - | - |
-| styles | Semantic DOM style | [See below](#semantic-dom) | - | - |
+| styles | Semantic DOM style | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - | - |
 | submitType | Submit type | SubmitType | `enter` \| `shiftEnter` | - |
 | value | Input value | string | - | - |
 | onSubmit | Callback when click send button | (message: string, slotConfig?: SlotConfigType[]) => void | - | - |
