@@ -149,7 +149,8 @@ export default function FileList(props: FileListProps) {
       overflow={overflow}
       extension={
         !disabled &&
-        upload.maxCount! > items.length && (
+        upload.maxCount &&
+        upload.maxCount > items.length && (
           <SilentUploader upload={upload}>
             <Button
               className={classnames(
