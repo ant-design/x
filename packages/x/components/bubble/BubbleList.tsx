@@ -60,10 +60,6 @@ const BubbleListItem: React.FC<
     [_key],
   );
 
-  if (!role) {
-    warning(false, `BubbleListItem[key - ${_key}] role is required`);
-    return null;
-  }
   const {
     bubble: bubbleClassName,
     divider: dividerClassName,
