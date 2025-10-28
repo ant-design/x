@@ -18,8 +18,7 @@ Used for rendering streaming Markdown format returned by LLMs.
 <code src="./demo/codeDemo/tokenizer.tsx" title="Custom Markers"></code>
 <code src="./demo/codeDemo/walkTokens.tsx" title="Token Processing"></code>
 <code src="./demo/codeDemo/renderer.tsx" title="Pre-rendering Processing"></code>
-<code src="./demo/codeDemo/link.tsx" title="Chinese Link Processing
-"></code>
+<code src="./demo/codeDemo/link.tsx" title="Chinese Link Processing"></code>
 <code src="./demo/codeDemo/xss.tsx" title="XSS Protection"></code>
 <code src="./demo/codeDemo/open-links-in-new-tab.tsx" description="Open links in new tab." title="Open Links in New Tab"></code>
 

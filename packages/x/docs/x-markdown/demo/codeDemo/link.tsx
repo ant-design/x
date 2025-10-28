@@ -5,8 +5,8 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 const content =
-  '**AntDesign的官网是：https://ant.design/index-cn/在官网上，您可以了解更多AntDesign的信息**\n\nAntDesign的官网是：https://ant.design/index-cn/1?a=1&b=2。在官网上，您可以了解更多AntDesign的信息\n\nAntDesign的官网是：https://ant.design/index-cn/。在官网上，您可以了解更多AntDesign的信息\n\nAntDesign的官网是：https://ant.design/index-cn/1?a=1&b=2，在官网上，您可以了解更多AntDesign的信息';
-const Locale_Markdown = {
+  'https://www.abc.com(abc)\n\n**AntDesign的官网是：https://ant.design/index-cn/在官网上，您可以了解更多AntDesign的信息**\n\nAntDesign的官网是：https://ant.design/index-cn/1?a=1&b=2。在官网上，您可以了解更多AntDesign的信息\n\nAntDesign的官网是：https://ant.design/index-cn/。在官网上，您可以了解更多AntDesign的信息\n\nAntDesign的官网是：https://ant.design/index-cn/1?a=1&b=2，在官网上，您可以了解更多AntDesign的信息';
+const LOCALE_MARKDOWN = {
   'en-US': {
     reRender: 'Re-Render',
   },
@@ -55,7 +55,7 @@ const App = () => {
   return (
     <Flex vertical gap="small">
       <Button style={{ alignSelf: 'flex-end' }} onClick={() => setIndex(0)}>
-        {Locale_Markdown[locale as keyof typeof Locale_Markdown].reRender}
+        {LOCALE_MARKDOWN[locale as keyof typeof LOCALE_MARKDOWN].reRender}
       </Button>
       <Flex gap="middle">
         <Bubble
