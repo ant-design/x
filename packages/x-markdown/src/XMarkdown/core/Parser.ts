@@ -25,7 +25,7 @@ const escapeReplacements: { [index: string]: string } = {
 };
 const getEscapeReplacement = (ch: string) => escapeReplacements[ch];
 
-export function escape(html: string, encode?: boolean) {
+export function escapeHtml(html: string, encode?: boolean) {
   if (encode) {
     if (other.escapeTest.test(html)) {
       return html.replace(other.escapeReplace, getEscapeReplacement);
@@ -85,9 +85,9 @@ class Parser {
         const isIndentedCode = codeBlockStyle === 'indented';
         // if code is indented, it's done because it has no end tag
         const streamStatus = isIndentedCode || raw.endsWith('```') ? 'done' : 'loading';
-        const escapedCode = escaped ? code : escape(code, true);
+        const escapedCode = escaped ? code : escapeHtml(code, true);
 
-        const classAttr = langString ? ` class="language-${escape(langString)}"` : '';
+        const classAttr = langString ? ` class="language-${escapeHtml(langString)}"` : '';
 
         return `<pre><code data-block="true" data-state="${streamStatus}"${classAttr}>${escapedCode}</code></pre>\n`;
       },
