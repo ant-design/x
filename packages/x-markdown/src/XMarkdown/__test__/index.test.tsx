@@ -41,7 +41,7 @@ const testCases = [
   {
     title: 'Render code block',
     markdown: "```javascript\nconsole.log('hello');\n```",
-    html: '<pre><code class="language-javascript">console.log(\'hello\');\n</code></pre>\n',
+    html: '<pre><code data-block="true" data-state="done" class="language-javascript">console.log(\'hello\');\n</code></pre>\n',
   },
   {
     title: 'Render link',
@@ -253,5 +253,49 @@ describe('XMarkdown', () => {
       );
       expect(container).toMatchSnapshot();
     });
+  });
+
+  it('should pass block and streamStatus props to custom code component', () => {
+    const CodeComponent = jest.fn(() => null);
+    const markdownInlineCodeFinished = 'Inline `code` here';
+    const markdownFenceCodeUnfinished = '```js\nconst a';
+    const markdownFencedCodeBlockFinished = '```js\nconst a = 1;\n```';
+    const markdownIndentedCodeBlockUnfinished = '    const a = 1';
+
+    render(<XMarkdown content={markdownInlineCodeFinished} components={{ code: CodeComponent }} />);
+    expect(CodeComponent).toHaveBeenCalledWith(
+      expect.objectContaining({ block: false, streamStatus: 'done' }),
+      undefined,
+    );
+
+    CodeComponent.mockClear();
+    render(
+      <XMarkdown content={markdownFenceCodeUnfinished} components={{ code: CodeComponent }} />,
+    );
+    expect(CodeComponent).toHaveBeenCalledWith(
+      expect.objectContaining({ block: true, streamStatus: 'loading' }),
+      undefined,
+    );
+
+    CodeComponent.mockClear();
+    render(
+      <XMarkdown content={markdownFencedCodeBlockFinished} components={{ code: CodeComponent }} />,
+    );
+    expect(CodeComponent).toHaveBeenCalledWith(
+      expect.objectContaining({ block: true, streamStatus: 'done' }),
+      undefined,
+    );
+
+    CodeComponent.mockClear();
+    render(
+      <XMarkdown
+        content={markdownIndentedCodeBlockUnfinished}
+        components={{ code: CodeComponent }}
+      />,
+    );
+    expect(CodeComponent).toHaveBeenCalledWith(
+      expect.objectContaining({ block: true, streamStatus: 'done' }),
+      undefined,
+    );
   });
 });
