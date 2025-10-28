@@ -16,6 +16,21 @@ tag: vVERSION
 
 ---
 
+## 2.0.0-alpha.11
+
+`2025-10-27`
+
+### @ant-design/x
+
+- 🆕 Sender slot configuration changed to mutable properties, in slot mode the `insert` method adds `replaceCharacters` parameter to support replacement functionality, and the `focus` method adds slot `key` configuration to support focusing on specific slots. [#1259](https://github.com/ant-design/x/pull/1259) by [@kimteayon](https://github.com/kimteayon).
+- 🆕 Sources inline mode supports specifying the currently active panel, adds `activeKey` property, and optimizes panel switching interaction styles for better experience. [#1261](https://github.com/ant-design/x/pull/1261) by [@kimteayon](https://github.com/kimteayon).
+- 🆕 Bubble.List optimized scrollbar layout, implementation, and semantics. [#1261](https://github.com/ant-design/x/pull/1261) by [@kimteayon](https://github.com/kimteayon).
+
+### @ant-design/x-markdown
+
+- 🐛 Fixed inconsistent parameter structure issue for XMarkDown custom components under different states. [#1260](https://github.com/ant-design/x/pull/1260) by [@Div627](https://github.com/Div627).
+- 📖 Added XMarkDown code examples. [#1262](https://github.com/ant-design/x/pull/1262) by [@kimteayon](https://github.com/kimteayon).
+
 ## 2.0.0-alpha.10
 
 `2025-10-23`

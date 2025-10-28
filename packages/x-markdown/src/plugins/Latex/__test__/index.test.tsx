@@ -146,7 +146,7 @@ describe('LaTeX Plugin', () => {
       render(
         <XMarkdown config={{ extensions: latexPlugin({ katexOptions: { throwOnError: true } }) }}>
           {
-            'latex: \n\\[\n\\begin{align*}\n\\text{minimize}  \\quad & f_0(x) \\\\n\\text{subject to} \\quad & f_i(x) \\leq 0, \\quad i = 1, \\dots, m \\\ \n& a_j^T x = b_j, \\quad j = 1, \\dots, p\n\\end{align*}\n\\]'
+            'latex: \n\\[\n\\begin{align*}\n\\text{minimize}  \\quad & f_0(x) \\\\n\\text{subject to} \\quad & f_i(x) \\leq 0, \\quad i = 1, \\dots, m \\ \n& a_j^T x = b_j, \\quad j = 1, \\dots, p\n\\end{align*}\n\\]'
           }
         </XMarkdown>,
       ),
@@ -158,7 +158,7 @@ describe('LaTeX Plugin', () => {
       render(
         <XMarkdown config={{ extensions: latexPlugin({ katexOptions: { throwOnError: true } }) }}>
           {
-            'latex: \n\\[\n\\begin{align*}\n\\text{minimize}  \\quad & f_0(x) \\\\n\\text{subject to} \\quad & f_i(x) \\leq 0, \\quad i = 1, \\dots, m \\\ \n& a_j^T x = b_j, \\quad j = 1, \\dots, p\n\\end{align*}\n\\]'
+            'latex: \n\\[\n\\begin{align*}\n\\text{minimize}  \\quad & f_0(x) \\\\n\\text{subject to} \\quad & f_i(x) \\leq 0, \\quad i = 1, \\dots, m \\ \n& a_j^T x = b_j, \\quad j = 1, \\dots, p\n\\end{align*}\n\\]'
           }
         </XMarkdown>,
       ),
