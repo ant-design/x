@@ -55,7 +55,7 @@ const App = () => {
     <Flex vertical gap="middle">
       <Bubble.List
         role={role}
-        style={{ maxHeight: 300 }}
+        style={{ height: 500 }}
         items={messages.map(({ id, message, status }) => ({
           key: id,
           loading: status === 'loading',

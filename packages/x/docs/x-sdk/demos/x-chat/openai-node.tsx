@@ -115,11 +115,10 @@ const Demo: React.FC = () => {
       gap={16}
       justify="space-between"
       style={{
-        height: 400,
         padding: 16,
       }}
     >
-      <Bubble.List role={role} items={items} />
+      <Bubble.List style={{ height: 500 }} role={role} items={items} />
       <Sender
         value={content}
         onChange={setContent}

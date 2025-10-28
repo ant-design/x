@@ -54,7 +54,7 @@ export default class OpenAIChatProvider<
       console.error('transformMessage error', error);
     }
 
-    const content = `${originMessage?.content || ''}${currentContent}`;
+    const content = `${originMessage?.content || ''}${currentContent || ''}`;
 
     return {
       content,

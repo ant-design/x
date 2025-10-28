@@ -37,7 +37,7 @@ const { onRequest, messages, isRequesting } = useXChat({
 });
 ```
 
-## 内置 Provider
+## 内置 Provider(用于标准模型请求)
 
 `x-sdk` 内置了一些常用模型服务商的 `Chat Provider`，你可以直接使用。
 
@@ -108,13 +108,13 @@ abstract class AbstractChatProvider<ChatMessage, Input, Output> {
 }
 ```
 
-### 自定义TboxProvider
+### 自定义Provider示例
 
 ```ts
-class TboxProvider<
-  ChatMessage extends TboxMessage = TboxMessage,
-  Input extends TboxInput = TboxInput,
-  Output extends TboxOutput = TboxOutput,
+class CustomProvider<
+  ChatMessage extends CustomMessage = CustomMessage,
+  Input extends CustomInput = CustomInput,
+  Output extends CustomOutput = CustomOutput,
 > extends AbstractChatProvider<ChatMessage, Input, Output> {
   transformParams(requestParams: Partial<Input>, options: XRequestOptions<Input, Output>): Input {
     if (typeof requestParams !== 'object') {
@@ -126,7 +126,10 @@ class TboxProvider<
     } as Input;
   }
   transformLocalMessage(requestParams: Partial<Input>): ChatMessage {
-    return requestParams.message as unknown as ChatMessage;
+    return {
+      content: requestParams.query,
+      role: 'user',
+    } as unknown as ChatMessage;
   }
   transformMessage(info: TransformMessage<ChatMessage, Output>): ChatMessage {
     const { originMessage, chunk } = info || {};
@@ -136,12 +139,90 @@ class TboxProvider<
         role: 'assistant',
       } as ChatMessage;
     }
-
+    const chunkJson = JSON.parse(chunk.data);
     const content = originMessage?.content || '';
     return {
-      content: content + chunk.text,
+      content: `${content || ''}${chunkJson.data || ''}`,
       role: 'assistant',
     } as ChatMessage;
   }
 }
+```
+
+#### 自定义 Provider 解析
+
+1、`Agentic` 服务流式接口 `https://xxx.agent.com/api/stream`。
+
+接口入参
+
+```json
+{
+  "query": "帮我总结今天的科技新闻"
+}
+```
+
+接口出参
+
+```json
+id:1
+data: "好的，"
+
+id:2
+data: "我将为您"
+
+id:3
+data: "总结今天"
+
+id:4
+data: "的科技新闻，"
+
+```
+
+2、那么根据接口可以明确 `CustomInput` 和 `CustomOutput` 类型。 `CustomOutput`
+
+```ts
+{
+  query: string;
+}
+```
+
+由于输出数据字符串只需要将data字符串转为JSON，然后将内部的data字段拼接，那么 `CustomOutput` 类型如下
+
+```ts
+{
+  data: string;
+}
+```
+
+3、我们期望 `useXChat` 生产的 messages 数据可以直接给 Bubble.List 消费，那么可以将 `CustomMessage` 定义如下：
+
+```ts
+{
+  content: string;
+  role: 'user' | 'assistant';
+}
+```
+
+4、最后我们可以将 `CustomProvider` 实例化并传入 `useXChat` 中，即可完成自定义 Provider 的使用。
+
+```tsx
+const [provider] = React.useState(
+  new CustomProvider({
+    request: XRequest<CustomInput, CustomOutput>('https://xxx.agent.com/api/stream', {
+      manual: true,
+    }),
+  }),
+);
+
+const { onRequest, messages, setMessages, setMessage, isRequesting, abort, onReload } = useXChat({
+  provider,
+});
+```
+
+5、发送请求
+
+```tsx
+onRequest({
+  query: '帮我总结今天的科技新闻',
+});
 ```

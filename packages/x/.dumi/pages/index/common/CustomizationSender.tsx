@@ -6,7 +6,7 @@ import React from 'react';
 export const useStyle = createStyles(({ css, token }) => {
   return {
     sender: css`
-      margin-inline: ${token.paddingMD * 2}px;
+      margin-inline: ${token.paddingSM * 2}px;
       background: linear-gradient(135deg, #ffffff26 14%, #ffffff0d 59%);
       position: relative;
       border: none;
@@ -24,7 +24,7 @@ const CustomizationSender: React.FC<SenderProps> = (props) => {
     <Sender
       className={styles.sender}
       style={{
-        width: `calc(100% - ${20 * 4}px)`,
+        width: `calc(100% - ${12 * 4}px)`,
       }}
       suffix={() => {
         return (

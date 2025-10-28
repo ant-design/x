@@ -23,6 +23,7 @@ Attachments 组件用于需要展示一组附件信息集合的场景。
 <code src="./demo/placeholder.tsx">占位信息</code>
 <code src="./demo/overflow.tsx">超出样式</code>
 <code src="./demo/with-sender.tsx">组合示例</code>
+<code src="./demo/select-files.tsx">分类型选择文件</code>
 
 ## API
 
@@ -54,10 +55,12 @@ interface PlaceholderType {
 
 ### AttachmentsRef
 
-| 属性          | 说明             | 类型                 | 版本 |
-| ------------- | ---------------- | -------------------- | ---- |
-| nativeElement | 获取原生节点     | HTMLElement          | -    |
-| upload        | 手工调用上传文件 | (file: File) => void | -    |
+| 属性 | 说明 | 类型 | 版本 |
+| --- | --- | --- | --- |
+| nativeElement | 获取原生节点 | HTMLElement | - |
+| fileNativeElement | 获取文件上传原生节点 | HTMLElement | - |
+| upload | 手工调用上传文件 | (file: File) => void | - |
+| select | 手工调用选择文件 | (options: { accept?: string; multiple?: boolean; }) => void | - |
 
 ## Semantic DOM
 
