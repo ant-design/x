@@ -1,5 +1,4 @@
 import classnames from 'classnames';
-import { warning } from 'rc-util';
 import omit from 'rc-util/es/omit';
 import pickAttrs from 'rc-util/es/pickAttrs';
 import * as React from 'react';
