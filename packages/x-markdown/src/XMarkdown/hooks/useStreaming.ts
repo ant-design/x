@@ -11,6 +11,7 @@ export enum TokenType {
   IncompleteEmphasis = 5,
   IncompleteList = 6,
   MaybeImage = 7,
+  IncompleteMath = 8,
 }
 
 export interface StreamCache {
@@ -28,6 +29,11 @@ const INCOMPLETE_REGEX = {
   html: [/^<[a-zA-Z][a-zA-Z0-9-]*[^>\r\n]*$/],
   commonEmphasis: [/^(\*+|_+)(?!\s)(?!.*\1$)[^\r\n]*$/],
   list: [/^[-+*]\s*$/, /^[-+*]\s*(\*+|_+)(?!\s)(?!.*\1$)[^\r\n]*$/],
+  math: [
+    /^(\${1,2})(?![\s\S]*\1$)(?![\s\S]*\n\n)[\s\S]*$/,
+    /^\\\((?:(?!\n\n|\\\))[\s\S])*$/,
+    /^\\\[(?:(?!\n\n|\\\])[\s\S])*$/,
+  ],
 } as const;
 
 const FENCED_CODE_REGEX = /^(`{3,}|~{3,})/;
@@ -88,6 +94,7 @@ const isTokenIncomplete = {
   commonEmphasis: (markdown: string): boolean =>
     INCOMPLETE_REGEX.commonEmphasis.some((re) => re.test(markdown)),
   list: (markdown: string): boolean => INCOMPLETE_REGEX.list.some((re) => re.test(markdown)),
+  math: (markdown: string): boolean => INCOMPLETE_REGEX.math.some((re) => re.test(markdown)),
 };
 
 const recognizeImage = (cache: StreamCache): void => {
@@ -183,6 +190,21 @@ const recognizeList = (cache: StreamCache): void => {
   }
 };
 
+const recognizeMath = (cache: StreamCache): void => {
+  const { token, pending } = cache;
+
+  if (token === TokenType.Text && /^[$|/|]/.test(pending)) {
+    cache.token = TokenType.IncompleteMath;
+    return;
+  }
+
+  if (token !== TokenType.IncompleteMath) return;
+
+  if (!isTokenIncomplete.math(pending)) {
+    commitCache(cache);
+  }
+};
+
 const recognizeText = (cache: StreamCache): void => {
   if (cache.token === TokenType.Text) {
     commitCache(cache);
@@ -204,6 +226,7 @@ const useStreaming = (input: string, config?: XMarkdownProps['streaming']) => {
       recognizeEmphasis,
       recognizeHtml,
       recognizeList,
+      recognizeMath,
       recognizeText,
     ],
     [],
