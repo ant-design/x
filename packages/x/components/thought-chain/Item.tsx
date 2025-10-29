@@ -1,9 +1,7 @@
 import classnames from 'classnames';
-import CSSMotion from 'rc-motion';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
-import { initMoveMotion } from '../style/motion';
 import { useXProviderContext } from '../x-provider';
 import Status, { THOUGHT_CHAIN_ITEM_STATUS } from './Status';
 import useStyle from './style';
@@ -64,6 +62,11 @@ export interface ThoughtChainItemProps
    * @descEN Thought chain item variant
    */
   variant?: `${VARIANT}`;
+  /**
+   * @desc 闪烁
+   * @descEN blink
+   */
+  blink?: boolean;
   className?: string;
   classNames?: Partial<Record<SemanticType, string>>;
   style?: React.CSSProperties;
@@ -77,6 +80,7 @@ const Item = React.forwardRef<ItemRef, ThoughtChainItemProps>((props, ref) => {
   // ============================ Info ============================
   const {
     key,
+    blink,
     variant = 'solid',
     prefixCls: customizePrefixCls,
     rootClassName,
@@ -149,11 +153,15 @@ const Item = React.forwardRef<ItemRef, ThoughtChainItemProps>((props, ref) => {
           status={status}
         />
       )}
-      <div className={classnames(`${itemCls}-content`)}>
+      <div
+        className={classnames(`${itemCls}-content`, {
+          [motionClassName]: blink,
+        })}
+      >
         {title && (
           <div
             style={styles?.title}
-            className={classnames(`${itemCls}-title`, motionClassName, classNames?.title, {
+            className={classnames(`${itemCls}-title`, classNames?.title, {
               [`${itemCls}-title-with-description`]: description,
             })}
           >

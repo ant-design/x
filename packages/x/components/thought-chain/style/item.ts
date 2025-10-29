@@ -5,7 +5,6 @@ import type { ThoughtChainToken } from '.';
 
 const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (token) => {
   const { componentCls, calc } = token;
-  console.log(initFadeMotion(token), 11111);
   const itemCls = `${componentCls}-item`;
   return {
     [componentCls]: {

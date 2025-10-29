@@ -6,9 +6,25 @@ import { ThoughtChainToken } from '.';
 const genMotionStyle: GenerateStyle<ThoughtChainToken> = (token) => {
   const { componentCls } = token;
   const uploadAnimateInlineIn = new Keyframes('uploadAnimateInlineIn', {
-    from: {
-      // backgroundPositionX: "100%",
-      // backgroundPositionY: "100%",
+    '0%': {
+      backgroundPositionX: '-200%',
+      backgroundPositionY: '100%',
+    },
+    '25%': {
+      backgroundPositionX: '-100%',
+      backgroundPositionY: '100%',
+    },
+    '50%': {
+      backgroundPositionX: '-0%',
+      backgroundPositionY: '100%',
+    },
+    '75%': {
+      backgroundPositionX: '100%',
+      backgroundPositionY: '100%',
+    },
+    '100%': {
+      backgroundPositionX: '200%',
+      backgroundPositionY: '100%',
     },
   });
 
@@ -29,12 +45,12 @@ const genMotionStyle: GenerateStyle<ThoughtChainToken> = (token) => {
         backgroundPositionY: '100%',
         backgroundClip: 'text',
         color: token.colorTextDescription,
-        backgroundImage: `linear-gradient(90deg,transparent,#000,transparent)`,
-        animationDuration: token.motionDurationSlow,
-        animationTimingFunction: token.motionEaseInOutCirc,
+        backgroundImage: `linear-gradient(90deg,transparent,${token.colorTextBase},transparent)`,
+        animationDuration: '1s',
+        animationIterationCount: 'infinite',
+        animationTimingFunction: 'linear',
         animationFillMode: 'forwards',
-        backgroundSizeX: '50%',
-        backgroundSizeY: '50%',
+        backgroundSize: '50%',
         backgroundRepeat: 'no-repeat',
         animationName: 'uploadAnimateInlineIn',
       },
