@@ -113,7 +113,7 @@ class Renderer {
           const { 'data-block': block = 'false', 'data-state': codeStreamStatus = 'done' } =
             attribs || {};
           props.block = block === 'true';
-          props.streamStatus = codeStreamStatus as ComponentProps['streamStatus'];
+          props.streamStatus = codeStreamStatus === 'loading' ? 'loading' : 'done';
         }
 
         if (children) {

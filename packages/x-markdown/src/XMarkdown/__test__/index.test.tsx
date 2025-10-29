@@ -254,21 +254,26 @@ describe('XMarkdown', () => {
       expect(container).toMatchSnapshot();
     });
   });
+});
 
-  it('should pass block and streamStatus props to custom code component', () => {
-    const CodeComponent = jest.fn(() => null);
+describe('custom code component props', () => {
+  const CodeComponent = jest.fn(() => null);
+
+  beforeEach(() => {
+    CodeComponent.mockClear();
+  });
+
+  it('should pass block=false and streamStatus=done for inline code', () => {
     const markdownInlineCodeFinished = 'Inline `code` here';
-    const markdownFenceCodeUnfinished = '```js\nconst a';
-    const markdownFencedCodeBlockFinished = '```js\nconst a = 1;\n```';
-    const markdownIndentedCodeBlockUnfinished = '    const a = 1';
-
     render(<XMarkdown content={markdownInlineCodeFinished} components={{ code: CodeComponent }} />);
     expect(CodeComponent).toHaveBeenCalledWith(
       expect.objectContaining({ block: false, streamStatus: 'done' }),
       undefined,
     );
+  });
 
-    CodeComponent.mockClear();
+  it('should pass block=true and streamStatus=loading for unfinished fenced code blocks start ```', () => {
+    const markdownFenceCodeUnfinished = '```';
     render(
       <XMarkdown content={markdownFenceCodeUnfinished} components={{ code: CodeComponent }} />,
     );
@@ -276,8 +281,21 @@ describe('XMarkdown', () => {
       expect.objectContaining({ block: true, streamStatus: 'loading' }),
       undefined,
     );
+  });
 
-    CodeComponent.mockClear();
+  it('should pass block=true and streamStatus=loading for unfinished fenced code blocks', () => {
+    const markdownFenceCodeUnfinished = '```js\nconst a';
+    render(
+      <XMarkdown content={markdownFenceCodeUnfinished} components={{ code: CodeComponent }} />,
+    );
+    expect(CodeComponent).toHaveBeenCalledWith(
+      expect.objectContaining({ block: true, streamStatus: 'loading' }),
+      undefined,
+    );
+  });
+
+  it('should pass block=true and streamStatus=done for finished fenced code blocks', () => {
+    const markdownFencedCodeBlockFinished = '```js\nconst a = 1;\n```';
     render(
       <XMarkdown content={markdownFencedCodeBlockFinished} components={{ code: CodeComponent }} />,
     );
@@ -285,8 +303,10 @@ describe('XMarkdown', () => {
       expect.objectContaining({ block: true, streamStatus: 'done' }),
       undefined,
     );
+  });
 
-    CodeComponent.mockClear();
+  it('should pass block=true and streamStatus=done for indented code blocks', () => {
+    const markdownIndentedCodeBlockUnfinished = '    const a = 1';
     render(
       <XMarkdown
         content={markdownIndentedCodeBlockUnfinished}

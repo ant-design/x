@@ -84,7 +84,8 @@ class Parser {
         const code = text.replace(other.endingNewline, '') + '\n';
         const isIndentedCode = codeBlockStyle === 'indented';
         // if code is indented, it's done because it has no end tag
-        const streamStatus = isIndentedCode || raw.endsWith('```') ? 'done' : 'loading';
+        const streamStatus =
+          isIndentedCode || /(`{3,})([^`]*)\1/m.test(raw.trim()) ? 'done' : 'loading';
         const escapedCode = escaped ? code : escapeHtml(code, true);
 
         const classAttr = langString ? ` class="language-${escapeHtml(langString)}"` : '';
