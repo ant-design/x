@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import React from 'react';
 import useXProviderContext from '../hooks/use-x-provider-context';
 import { Parser, Renderer } from './core';
-import { useAnimation, useStreaming } from './hooks';
+import { useStreaming } from './hooks';
 import { XMarkdownProps } from './interface';
 import './index.less';
 
@@ -37,9 +37,6 @@ const XMarkdown: React.FC<XMarkdownProps> = (props) => {
   // ============================ Streaming ============================
   const displayContent = useStreaming(content || children || '', streaming);
 
-  // ============================ animation ============================
-  const animationComponents = useAnimation(streaming);
-
   // ============================ Render ============================
   if (!displayContent) return null;
 
@@ -49,13 +46,14 @@ const XMarkdown: React.FC<XMarkdownProps> = (props) => {
     openLinksInNewTab,
   });
 
-  const renderComponents = { ...animationComponents, ...(components || {}) };
   const renderer = new Renderer({
-    components: renderComponents,
+    components: components,
     dompurifyConfig,
+    streaming,
   });
 
   const htmlString = parser.parse(displayContent);
+
   return (
     <div className={mergedCls} style={mergedStyle}>
       {renderer.render(htmlString)}

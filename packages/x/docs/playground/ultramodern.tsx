@@ -114,9 +114,8 @@ const useStyle = createStyles(({ token, css }) => {
       display: flex;
       align-items: center;
       width: 100%;
-      height: calc(100% - 120px);
-      flex-direction: column;
       height: 100%;
+      flex-direction: column;
       justify-content: space-between;
     `,
   };
@@ -171,7 +170,7 @@ const HISTORY_MESSAGES: {
   ],
 };
 
-const initialSlotConfig: SenderProps['initialSlotConfig'] = [
+const slotConfig: SenderProps['slotConfig'] = [
   { type: 'text', value: locale.slotTextStart },
   {
     type: 'select',
@@ -245,7 +244,7 @@ const getRole = (className: string): BubbleListProps['role'] => ({
       ),
     },
     contentRender: (content: any, { status }) => {
-      const newContent = content.replaceAll('\n\n', '<br/>');
+      const newContent = content.replace('/\n\n/g', '<br/><br/>');
       return (
         <XMarkdown
           paragraphTag="div"
@@ -287,10 +286,10 @@ const App = () => {
         role: 'assistant',
       };
     },
-    requestFallback: (e) => {
+    requestFallback: (_, { messageInfo }) => {
       return {
-        ...e,
-        content: e.content || locale.requestFailedPleaseTryAgain,
+        ...messageInfo?.message,
+        content: messageInfo?.message.content || locale.requestFailedPleaseTryAgain,
       };
     },
   });
@@ -375,6 +374,9 @@ const App = () => {
               {messages?.length !== 0 && (
                 /* 🌟 消息列表 */
                 <Bubble.List
+                  style={{
+                    height: 'calc(100% - 160px)',
+                  }}
                   items={messages?.map((i) => ({
                     ...i.message,
                     key: i.id,
@@ -402,7 +404,7 @@ const App = () => {
                   suffix={false}
                   ref={senderRef}
                   key={curConversation}
-                  initialSlotConfig={initialSlotConfig}
+                  slotConfig={slotConfig}
                   loading={isRequesting}
                   onSubmit={(val) => {
                     if (!val) return;

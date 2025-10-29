@@ -23,7 +23,7 @@ const App = () => (
       <Bubble content="shadow - corner right" variant="shadow" shape="corner" placement="end" />
     </Flex>
     <Flex gap="small" wrap style={{ marginTop: 8 }}>
-      <Bubble content={<h3>borderless bubble</h3>} variant="borderless" />
+      <Bubble content={<span>borderless bubble</span>} variant="borderless" />
     </Flex>
   </Flex>
 );

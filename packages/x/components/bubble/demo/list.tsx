@@ -135,7 +135,7 @@ const App = () => {
   );
 
   return (
-    <Flex style={{ height: 720 }} vertical gap={20}>
+    <Flex vertical style={{ height: 720 }} gap={20}>
       <Flex gap="small">
         <Button
           type="primary"
@@ -180,7 +180,11 @@ const App = () => {
         </Button>
         <Button
           onClick={() => {
-            set((pre) => [genItem(false), genItem(true), genItem(false), ...pre]);
+            const item = genItem(false);
+            set((pre) => [item, genItem(true), genItem(false), ...pre]);
+            setTimeout(() => {
+              listRef.current?.scrollTo({ key: item.key });
+            }, 0);
           }}
         >
           Add To Pre
@@ -203,24 +207,8 @@ const App = () => {
         >
           Add With Ref
         </Button>
-
-        <Button
-          onClick={() => {
-            listRef.current?.scrollTo({ key: items[1].key, block: 'nearest' });
-          }}
-        >
-          Scroll To Second
-        </Button>
       </Flex>
-
-      <Bubble.List
-        ref={listRef}
-        role={memoRole}
-        items={items}
-        onScroll={(e) => {
-          console.log('scroll', (e.target as HTMLDivElement).scrollTop);
-        }}
-      />
+      <Bubble.List ref={listRef} role={memoRole} items={items} />
     </Flex>
   );
 };

@@ -57,7 +57,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     style,
     defaultValue,
     value,
-    initialSlotConfig,
+    slotConfig,
     readOnly,
     submitType = 'enter',
     onSubmit,
@@ -89,8 +89,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   });
 
   const id = React.useId();
-
-  const isSlotMode = Array.isArray(initialSlotConfig);
+  const isSlotMode = Array.isArray(slotConfig);
   // ============================= MISC =============================
   const { direction, getPrefixCls } = useXProviderContext();
   const prefixCls = getPrefixCls('sender', customizePrefixCls);
@@ -246,7 +245,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     () => ({
       value: innerValue,
       onChange: triggerValueChange,
-      initialSlotConfig,
+      slotConfig,
       onKeyUp,
       onKeyDown,
       onPaste,
@@ -268,7 +267,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     [
       innerValue,
       triggerValueChange,
-      initialSlotConfig,
+      slotConfig,
       onKeyUp,
       onKeyDown,
       onPaste,

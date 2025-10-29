@@ -1,6 +1,6 @@
+import { Alert, theme } from 'antd';
 import type { FC } from 'react';
 import React from 'react';
-import { Alert, theme } from 'antd';
 
 const LiveError: FC<{ error: Error | null }> = ({ error }) => {
   const { token } = theme.useToken();

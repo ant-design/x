@@ -43,6 +43,7 @@ import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
 import React, { useState } from 'react';
 import { TboxClient } from 'tbox-nodejs-sdk';
+import { useMarkdownTheme } from '../x-markdown/demo/_utils';
 
 // ==================== Local ====================
 const zhCN = {
@@ -313,18 +314,24 @@ const useStyle = createStyles(({ token, css }) => {
 });
 
 // ==================== TboxProvider ====================
-interface TboxMessage {
-  content: string;
-  role: string;
-}
 
 interface TboxInput {
-  message: TboxMessage;
+  message: {
+    role: string;
+    content: string;
+  };
+  userAction?: string;
 }
 
 interface TboxOutput {
   text?: string;
+  ext_text?: string;
 }
+interface TboxMessage {
+  content: TboxOutput;
+  role: string;
+}
+
 const tboxClient = new TboxClient({
   httpClientConfig: {
     authorization: 'your-api-key', // Replace with your API key
@@ -369,7 +376,7 @@ class TboxRequest<
   run(params?: Input | undefined): void {
     const stream = tboxClient.chat({
       appId: 'your-app-id', // Replace with your app ID
-      query: params?.message.content || '',
+      query: params?.message?.content,
       version: 'v2', // only for antd-x v2
       userId: 'antd-x',
     } as any);
@@ -379,7 +386,7 @@ class TboxRequest<
     const dataArr: Output[] = [];
 
     stream.on('data', (data) => {
-      let parsedPayload: Output;
+      let parsedPayload: any;
       try {
         const payload = (data as any).data?.payload || '{}';
         parsedPayload = JSON.parse(payload);
@@ -388,9 +395,13 @@ class TboxRequest<
         return;
       }
 
-      if (parsedPayload?.text) {
-        dataArr.push(parsedPayload);
-        callbacks?.onUpdate?.(parsedPayload, new Headers());
+      if (parsedPayload?.text || parsedPayload?.ext_data?.text) {
+        const data = {
+          text: parsedPayload?.text,
+          ext_text: parsedPayload?.ext_data?.text,
+        } as Output;
+        dataArr.push(data);
+        callbacks?.onUpdate?.(data, new Headers());
       }
     });
 
@@ -422,6 +433,18 @@ class TboxProvider<
     if (typeof requestParams !== 'object') {
       throw new Error('requestParams must be an object');
     }
+    if (requestParams.userAction === 'retry') {
+      const messages = this.getMessages();
+      const queryMessage = (messages || [])?.reverse().find(({ role }) => {
+        return role === 'user';
+      });
+      return {
+        message: queryMessage,
+        ...(options?.params || {}),
+        ...(requestParams || {}),
+      } as Input;
+    }
+
     return {
       ...(options?.params || {}),
       ...(requestParams || {}),
@@ -434,14 +457,17 @@ class TboxProvider<
     const { originMessage, chunk } = info || {};
     if (!chunk) {
       return {
-        content: originMessage?.content || '',
+        content: originMessage?.content || {},
         role: 'assistant',
       } as ChatMessage;
     }
 
-    const content = originMessage?.content || '';
+    const content = originMessage?.content || {};
     return {
-      content: content + chunk.text,
+      content: {
+        text: (content.text || '') + (chunk.text || ''),
+        ext_text: (content.ext_text || '') + (chunk.ext_text || ''),
+      },
       role: 'assistant',
     } as ChatMessage;
   }
@@ -470,7 +496,7 @@ const ChatContext = React.createContext<{
 
 // ==================== Sub Component====================
 const ThinkComponent = React.memo((props: ComponentProps) => {
-  const [title, setTitle] = React.useState(t.DeepThinking + '...');
+  const [title, setTitle] = React.useState(`${t.DeepThinking}...`);
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
@@ -552,15 +578,20 @@ const Footer: React.FC<{
 
 const AgentTbox: React.FC = () => {
   const { styles } = useStyle();
+  const [className] = useMarkdownTheme();
   const locale = isZhCN ? { ...zhCN_antd, ...zhCN_X } : { ...enUS_antd, ...enUS_X };
   // ==================== State ====================
 
-  const { conversations, addConversation, setConversations } = useXConversations({
+  const {
+    conversations,
+    activeConversationKey,
+    setActiveConversationKey,
+    addConversation,
+    setConversations,
+  } = useXConversations({
     defaultConversations: DEFAULT_CONVERSATIONS_ITEMS,
+    defaultActiveConversationKey: DEFAULT_CONVERSATIONS_ITEMS[0].key,
   });
-  const [curConversation, setCurConversation] = useState<string>(
-    DEFAULT_CONVERSATIONS_ITEMS[0].key,
-  );
 
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -573,11 +604,11 @@ const AgentTbox: React.FC = () => {
   // ==================== Runtime ====================
 
   const { onRequest, messages, isRequesting, abort, onReload } = useXChat({
-    provider: providerFactory(curConversation), // every conversation has its own provider
-    conversationKey: curConversation,
+    provider: providerFactory(activeConversationKey), // every conversation has its own provider
+    conversationKey: activeConversationKey,
     requestPlaceholder: () => {
       return {
-        content: t.noData,
+        content: { text: t.noData },
         role: 'assistant',
       };
     },
@@ -620,18 +651,16 @@ const AgentTbox: React.FC = () => {
               label: `${t.newConversation} ${conversations.length + 1}`,
               group: t.today,
             });
-            setCurConversation(now);
+            setActiveConversationKey(now);
           },
         }}
         items={conversations.map(({ key, label }) => ({
           key,
-          label: key === curConversation ? `[${t.curConversation}]${label}` : label,
+          label: key === activeConversationKey ? `[${t.curConversation}]${label}` : label,
         }))}
         className={styles.conversations}
-        activeKey={curConversation}
-        onActiveChange={async (val) => {
-          setCurConversation(val);
-        }}
+        activeKey={activeConversationKey}
+        onActiveChange={setActiveConversationKey}
         groupable
         styles={{ item: { padding: '0 8px' } }}
         menu={(conversation) => ({
@@ -650,8 +679,8 @@ const AgentTbox: React.FC = () => {
                 const newList = conversations.filter((item) => item.key !== conversation.key);
                 const newKey = newList?.[0]?.key;
                 setConversations(newList);
-                if (conversation.key === curConversation) {
-                  setCurConversation(newKey);
+                if (conversation.key === activeConversationKey) {
+                  setActiveConversationKey(newKey);
                 }
               },
             },
@@ -708,15 +737,19 @@ const AgentTbox: React.FC = () => {
         },
         footer: (content, { status, key }) => <Footer content={content} status={status} id={key} />,
       },
-      contentRender: (content, { status }) => (
-        <XMarkdown
-          content={content as string}
-          components={{
-            think: ThinkComponent,
-          }}
-          streaming={{ hasNextChunk: status === 'updating', enableAnimation: true }}
-        />
-      ),
+      contentRender: (content, { status }) => {
+        const markdownText = `${content.ext_text ? '<think>\n\n' + content.ext_text + `${content.text ? '\n\n</think>\n\n' : ''}` : ''}${content.text || ''}`;
+        return (
+          <XMarkdown
+            content={markdownText as string}
+            className={className}
+            components={{
+              think: ThinkComponent,
+            }}
+            streaming={{ hasNextChunk: status === 'updating', enableAnimation: true }}
+          />
+        );
+      },
     },
     user: { placement: 'end' },
   };

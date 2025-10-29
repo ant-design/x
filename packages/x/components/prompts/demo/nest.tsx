@@ -6,8 +6,8 @@ import {
   RocketOutlined,
   SmileOutlined,
 } from '@ant-design/icons';
-import { Prompts } from '@ant-design/x';
 import type { PromptsProps } from '@ant-design/x';
+import { Prompts } from '@ant-design/x';
 import { App, Card, ConfigProvider, Space, theme } from 'antd';
 import React from 'react';
 

@@ -2,7 +2,7 @@
 category: Components
 group:
   title: Confirmation
-  order: 1
+  order: 3
 title: Sources
 description: Show the source address of the referenced data.
 cover: https://mdn.alipayobjects.com/huamei_b00jk5/afts/img/A*3nEPRYJbNQgAAAAAQFAAAAgAegitAQ/original
@@ -13,7 +13,7 @@ demo:
 
 ## When To Use
 
-Show the referenced data source address in online search mode.
+- Show the referenced data source address in online search mode.
 
 ## Examples
 
@@ -34,14 +34,15 @@ Common props ref：[Common props](/docs/react/common-props)
 | classNames | DOM class | [Record<SemanticDOM, string>](#semantic-dom) | - | - |
 | styles | DOM style | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - | - |
 | title | Title content | React.ReactNode | - | - |
-| items | Sources Content list | SourcesItem[] | - | - |
-| expandIconPosition | Icon position | 'start' \| 'end' | 'start' | - |
-| defaultExpanded | Default Expand state | boolean | true | - |
+| items | Sources content list | SourcesItem[] | - | - |
+| expandIconPosition | Expand icon position | 'start' \| 'end' | 'start' | - |
+| defaultExpanded | Default expand state | boolean | true | - |
 | expanded | Expand state | boolean | - | - |
 | onExpand | Callback when expand changes | (expand: boolean) => void | - | - |
 | onClick | Callback when click | (item: SourcesItem) => void | - | - |
 | inline | Inline mode | boolean | false | - |
-| popoverOverlayWidth | popover overlay width | number \| string | 300 | - |
+| activeKey | Active key in inline mode | React.Key | - | - |
+| popoverOverlayWidth | Popover overlay width | number \| string | 300 | - |
 
 ```typescript
 interface SourcesItem {

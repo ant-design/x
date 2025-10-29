@@ -1,6 +1,6 @@
-import React from 'react';
 import { Sender } from '@ant-design/x';
 import { App } from 'antd';
+import React from 'react';
 
 const Demo: React.FC = () => {
   const { message } = App.useApp();

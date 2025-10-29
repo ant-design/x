@@ -1,6 +1,7 @@
 ---
 group:
   title: 插件集
+  order: 6
 title: 总览
 order: 1
 ---

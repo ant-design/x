@@ -1,10 +1,11 @@
 import katex, { type KatexOptions } from 'katex';
-import { TokenizerAndRendererExtension } from 'marked';
+import type { TokenizerAndRendererExtension } from 'marked';
 
 import 'katex/dist/katex.min.css';
 
-const inlineRuleNonStandard = /^(?:\${1,2}([^$\n]+?)\${1,2}|\\\((.+?)\\\))/;
-const blockRule = /^(\${1,2})\n([\s\S]+?)\n\1(?:\n|$)|^\\\[((?:\\.|[^\\])+?)\\\]/;
+const inlineRuleNonStandard =
+  /^(?:\${1,2}([^$]{1,10000}?)\${1,2}|\\\(([\s\S]{1,10000}?)\\\)|\\\[((?:\\.|[^\\]){1,10000}?)\\\])/;
+const blockRule = /^(\${1,2})\n([\s\S]{1,10000}?)\n\1(?:\n|$)|^\\\[((?:\\.|[^\\]){1,10000}?)\\\]/;
 
 type LatexOption = {
   katexOptions?: KatexOptions;
@@ -34,40 +35,32 @@ function createRenderer(options: KatexOptions, newlineAfter: boolean) {
 }
 
 function inlineKatex(renderer: Render, replaceAlignStart: boolean) {
-  const ruleReg = inlineRuleNonStandard;
   return {
     name: 'inlineKatex',
     level: 'inline' as ILevel,
     start(src: string) {
-      if (!src.includes('$') && !src.includes('\\(')) return;
+      const dollarIndex = src.indexOf('$');
+      const parenIndex = src.indexOf('\\(');
+      const bracketIndex = src.indexOf('\\[');
 
-      const indices = [src.indexOf('$'), src.indexOf('\\(')].filter((idx) => idx !== -1);
-
-      if (indices.length === 0) return;
-
-      const katexIndex = Math.min(...indices);
-      const possibleKatex = src.slice(katexIndex);
-
-      if (possibleKatex.match(ruleReg)) {
-        return katexIndex;
-      }
+      const indices = [dollarIndex, parenIndex, bracketIndex].filter((idx) => idx !== -1);
+      return indices.length > 0 ? Math.min(...indices) : undefined;
     },
     tokenizer(src: string) {
       const match = src.match(inlineRuleNonStandard);
-      if (match) {
-        let text = (match[1] || match[2]).trim();
-        if (replaceAlignStart) {
-          text = replaceAlign(text);
-        }
-        return {
-          type: 'inlineKatex',
-          raw: match[0],
-          text,
-          displayMode: false,
-        };
-      }
+      if (!match) return;
+
+      const rawText = (match[1] || match[2] || match[3] || '').trim();
+      const text = replaceAlignStart ? replaceAlign(rawText) : rawText;
+
+      return {
+        type: 'inlineKatex',
+        raw: match[0],
+        text,
+        displayMode: true,
+      };
     },
-    renderer,
+    renderer: (token: Token) => `<span class="inline-katex">${renderer(token)}</span>`,
   };
 }
 
@@ -95,9 +88,15 @@ function blockKatex(renderer: Render, replaceAlignStart: boolean) {
 }
 
 const Latex = (options?: LatexOption): TokenizerAndRendererExtension[] => {
-  const { replaceAlignStart = true, katexOptions = { output: 'html' } } = options || {};
+  const { replaceAlignStart = true, katexOptions: customKatexOptions } = options || {};
 
-  const inlineRenderer = createRenderer(katexOptions, false);
+  const katexOptions = {
+    output: 'html' as const,
+    throwOnError: false,
+    ...(customKatexOptions || {}),
+  };
+
+  const inlineRenderer = createRenderer(katexOptions, true);
   const blockRenderer = createRenderer(katexOptions, true);
   return [
     inlineKatex(inlineRenderer, replaceAlignStart),

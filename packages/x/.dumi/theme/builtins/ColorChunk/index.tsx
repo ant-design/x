@@ -1,5 +1,5 @@
-import { FastColor } from '@ant-design/fast-color';
 import type { ColorInput } from '@ant-design/fast-color';
+import { FastColor } from '@ant-design/fast-color';
 import { Popover } from 'antd';
 import { createStyles } from 'antd-style';
 import * as React from 'react';

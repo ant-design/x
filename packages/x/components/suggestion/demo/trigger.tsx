@@ -1,6 +1,6 @@
-import React from 'react';
 import { Suggestion } from '@ant-design/x';
 import { Select } from 'antd';
+import React from 'react';
 
 let uuid = 0;
 

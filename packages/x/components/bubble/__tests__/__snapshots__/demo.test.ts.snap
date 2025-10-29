@@ -1378,441 +1378,441 @@ exports[`renders components/bubble/demo/list.tsx correctly 1`] = `
         Add With Ref
       </span>
     </button>
-    <button
-      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
-      type="button"
-    >
-      <span>
-        Scroll To Second
-      </span>
-    </button>
   </div>
   <div
-    class="ant-bubble-list css-var-_R_0_ ant-bubble-list-autoscroll"
-  />
+    class="ant-bubble-list css-var-_R_0_"
+  >
+    <div
+      class="ant-bubble-list-scroll-box ant-bubble-list-autoscroll"
+    />
+  </div>
 </div>
 `;
 
 exports[`renders components/bubble/demo/list-extra.tsx correctly 1`] = `
 <div
-  class="ant-bubble-list css-var-_R_0_ ant-bubble-list-autoscroll"
-  style="max-height:500px"
+  class="ant-bubble-list css-var-_R_0_"
+  style="height:500px"
 >
   <div
-    class="ant-bubble css-var-_R_0_ ant-bubble-start ant-bubble-loading"
+    class="ant-bubble-list-scroll-box ant-bubble-list-autoscroll"
   >
     <div
-      class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-gap-small"
+      class="ant-bubble css-var-_R_0_ ant-bubble-start ant-bubble-loading"
     >
       <div
-        aria-busy="true"
-        aria-live="polite"
-        class="ant-spin ant-spin-sm ant-spin-spinning css-var-_R_0_"
+        class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-gap-small"
       >
-        <span
-          class="ant-spin-dot-holder"
+        <div
+          aria-busy="true"
+          aria-live="polite"
+          class="ant-spin ant-spin-sm ant-spin-spinning css-var-_R_0_"
         >
           <span
-            class="ant-spin-dot ant-spin-dot-spin"
+            class="ant-spin-dot-holder"
           >
-            <i
-              class="ant-spin-dot-item"
-            />
-            <i
-              class="ant-spin-dot-item"
-            />
-            <i
-              class="ant-spin-dot-item"
-            />
-            <i
-              class="ant-spin-dot-item"
-            />
+            <span
+              class="ant-spin-dot ant-spin-dot-spin"
+            >
+              <i
+                class="ant-spin-dot-item"
+              />
+              <i
+                class="ant-spin-dot-item"
+              />
+              <i
+                class="ant-spin-dot-item"
+              />
+              <i
+                class="ant-spin-dot-item"
+              />
+            </span>
           </span>
-        </span>
-      </div>
-      Custom loading...
-    </div>
-  </div>
-  <div
-    class="ant-bubble css-var-_R_0_ ant-bubble-end"
-  >
-    <div
-      class="ant-bubble-body"
-    >
-      <div
-        class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
-      >
-        Mock user content.
+        </div>
+        Custom loading...
       </div>
     </div>
-  </div>
-  <div
-    class="ant-bubble css-var-_R_0_ ant-bubble-start ant-bubble-success"
-  >
     <div
-      class="ant-bubble-body"
+      class="ant-bubble css-var-_R_0_ ant-bubble-end"
     >
       <div
-        class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-success ant-bubble-content-default ant-bubble-content-string"
-      >
-        Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. 
-      </div>
-      <div
-        class="ant-bubble-footer ant-bubble-footer-start"
+        class="ant-bubble-body"
       >
         <div
-          class="ant-actions css-var-_R_0_"
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
+        >
+          Mock user content.
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-_R_0_ ant-bubble-start ant-bubble-success"
+    >
+      <div
+        class="ant-bubble-body"
+      >
+        <div
+          class="ant-bubble-content ant-bubble-content-borderless ant-bubble-content-success ant-bubble-content-string"
+        >
+          Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. 
+        </div>
+        <div
+          class="ant-bubble-footer ant-bubble-footer-start"
         >
           <div
-            class="ant-actions-list ant-actions-variant-borderless"
+            class="ant-actions css-var-_R_0_"
           >
-            <span
-              class="ant-actions-copy ant-actions-copy css-var-_R_0_ ant-actions-item css-var-_R_0_"
-            >
-              <button
-                aria-describedby="test-id"
-                aria-label="Copy"
-                class="ant-actions-copy-copy ant-actions-copy-copy-icon-only"
-                type="button"
-              >
-                <span
-                  aria-label="copy"
-                  class="anticon anticon-copy"
-                  role="img"
-                >
-                  <svg
-                    aria-hidden="true"
-                    data-icon="copy"
-                    fill="currentColor"
-                    focusable="false"
-                    height="1em"
-                    viewBox="64 64 896 896"
-                    width="1em"
-                  >
-                    <path
-                      d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
-                    />
-                  </svg>
-                </span>
-              </button>
-            </span>
             <div
-              class="ant-actions-feedback css-var-_R_0_ ant-actions-list"
+              class="ant-actions-list ant-actions-variant-borderless"
             >
               <span
-                aria-describedby="test-id"
-                class="ant-actions-feedback-item ant-actions-item ant-actions-feedback-item-like ant-actions-feedback-item-like-active"
-                style="color:#f759ab"
+                class="ant-actions-copy ant-actions-copy css-var-_R_0_ ant-actions-item css-var-_R_0_"
+              >
+                <button
+                  aria-describedby="test-id"
+                  aria-label="Copy"
+                  class="ant-actions-copy-copy ant-actions-copy-copy-icon-only"
+                  type="button"
+                >
+                  <span
+                    aria-label="copy"
+                    class="anticon anticon-copy"
+                    role="img"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      data-icon="copy"
+                      fill="currentColor"
+                      focusable="false"
+                      height="1em"
+                      viewBox="64 64 896 896"
+                      width="1em"
+                    >
+                      <path
+                        d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
+                      />
+                    </svg>
+                  </span>
+                </button>
+              </span>
+              <div
+                class="ant-actions-feedback css-var-_R_0_ ant-actions-list"
               >
                 <span
-                  aria-label="like"
-                  class="anticon anticon-like"
-                  role="img"
+                  aria-describedby="test-id"
+                  class="ant-actions-feedback-item ant-actions-item ant-actions-feedback-item-like ant-actions-feedback-item-like-active"
+                  style="color:#f759ab"
                 >
-                  <svg
-                    aria-hidden="true"
-                    data-icon="like"
-                    fill="currentColor"
-                    focusable="false"
-                    height="1em"
-                    viewBox="64 64 896 896"
-                    width="1em"
+                  <span
+                    aria-label="like"
+                    class="anticon anticon-like"
+                    role="img"
                   >
-                    <path
-                      d="M885.9 533.7c16.8-22.2 26.1-49.4 26.1-77.7 0-44.9-25.1-87.4-65.5-111.1a67.67 67.67 0 00-34.3-9.3H572.4l6-122.9c1.4-29.7-9.1-57.9-29.5-79.4A106.62 106.62 0 00471 99.9c-52 0-98 35-111.8 85.1l-85.9 311h-.3v428h472.3c9.2 0 18.2-1.8 26.5-5.4 47.6-20.3 78.3-66.8 78.3-118.4 0-12.6-1.8-25-5.4-37 16.8-22.2 26.1-49.4 26.1-77.7 0-12.6-1.8-25-5.4-37 16.8-22.2 26.1-49.4 26.1-77.7-.2-12.6-2-25.1-5.6-37.1zM112 528v364c0 17.7 14.3 32 32 32h65V496h-65c-17.7 0-32 14.3-32 32z"
-                    />
-                  </svg>
+                    <svg
+                      aria-hidden="true"
+                      data-icon="like"
+                      fill="currentColor"
+                      focusable="false"
+                      height="1em"
+                      viewBox="64 64 896 896"
+                      width="1em"
+                    >
+                      <path
+                        d="M885.9 533.7c16.8-22.2 26.1-49.4 26.1-77.7 0-44.9-25.1-87.4-65.5-111.1a67.67 67.67 0 00-34.3-9.3H572.4l6-122.9c1.4-29.7-9.1-57.9-29.5-79.4A106.62 106.62 0 00471 99.9c-52 0-98 35-111.8 85.1l-85.9 311h-.3v428h472.3c9.2 0 18.2-1.8 26.5-5.4 47.6-20.3 78.3-66.8 78.3-118.4 0-12.6-1.8-25-5.4-37 16.8-22.2 26.1-49.4 26.1-77.7 0-12.6-1.8-25-5.4-37 16.8-22.2 26.1-49.4 26.1-77.7-.2-12.6-2-25.1-5.6-37.1zM112 528v364c0 17.7 14.3 32 32 32h65V496h-65c-17.7 0-32 14.3-32 32z"
+                      />
+                    </svg>
+                  </span>
                 </span>
-              </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div
-    class="ant-bubble css-var-_R_0_ ant-bubble-end"
-  >
     <div
-      class="ant-bubble-body"
+      class="ant-bubble css-var-_R_0_ ant-bubble-end"
     >
       <div
-        class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
-      >
-        Mock user content.
-      </div>
-    </div>
-  </div>
-  <div
-    class="ant-bubble css-var-_R_0_ ant-bubble-start ant-bubble-success"
-  >
-    <div
-      class="ant-bubble-body"
-    >
-      <div
-        class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-success ant-bubble-content-default ant-bubble-content-string"
-      >
-        Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. 
-      </div>
-      <div
-        class="ant-bubble-footer ant-bubble-footer-start"
+        class="ant-bubble-body"
       >
         <div
-          class="ant-actions css-var-_R_0_"
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
+        >
+          Mock user content.
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-_R_0_ ant-bubble-start ant-bubble-success"
+    >
+      <div
+        class="ant-bubble-body"
+      >
+        <div
+          class="ant-bubble-content ant-bubble-content-borderless ant-bubble-content-success ant-bubble-content-string"
+        >
+          Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. 
+        </div>
+        <div
+          class="ant-bubble-footer ant-bubble-footer-start"
         >
           <div
-            class="ant-actions-list ant-actions-variant-borderless"
+            class="ant-actions css-var-_R_0_"
           >
-            <span
-              class="ant-actions-copy ant-actions-copy css-var-_R_0_ ant-actions-item css-var-_R_0_"
-            >
-              <button
-                aria-describedby="test-id"
-                aria-label="Copy"
-                class="ant-actions-copy-copy ant-actions-copy-copy-icon-only"
-                type="button"
-              >
-                <span
-                  aria-label="copy"
-                  class="anticon anticon-copy"
-                  role="img"
-                >
-                  <svg
-                    aria-hidden="true"
-                    data-icon="copy"
-                    fill="currentColor"
-                    focusable="false"
-                    height="1em"
-                    viewBox="64 64 896 896"
-                    width="1em"
-                  >
-                    <path
-                      d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
-                    />
-                  </svg>
-                </span>
-              </button>
-            </span>
             <div
-              class="ant-actions-feedback css-var-_R_0_ ant-actions-list"
+              class="ant-actions-list ant-actions-variant-borderless"
             >
               <span
-                aria-describedby="test-id"
-                class="ant-actions-feedback-item ant-actions-item ant-actions-feedback-item-dislike ant-actions-feedback-item-dislike-active"
+                class="ant-actions-copy ant-actions-copy css-var-_R_0_ ant-actions-item css-var-_R_0_"
+              >
+                <button
+                  aria-describedby="test-id"
+                  aria-label="Copy"
+                  class="ant-actions-copy-copy ant-actions-copy-copy-icon-only"
+                  type="button"
+                >
+                  <span
+                    aria-label="copy"
+                    class="anticon anticon-copy"
+                    role="img"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      data-icon="copy"
+                      fill="currentColor"
+                      focusable="false"
+                      height="1em"
+                      viewBox="64 64 896 896"
+                      width="1em"
+                    >
+                      <path
+                        d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
+                      />
+                    </svg>
+                  </span>
+                </button>
+              </span>
+              <div
+                class="ant-actions-feedback css-var-_R_0_ ant-actions-list"
               >
                 <span
-                  aria-label="dislike"
-                  class="anticon anticon-dislike"
-                  role="img"
+                  aria-describedby="test-id"
+                  class="ant-actions-feedback-item ant-actions-item ant-actions-feedback-item-dislike ant-actions-feedback-item-dislike-active"
                 >
-                  <svg
-                    aria-hidden="true"
-                    data-icon="dislike"
-                    fill="currentColor"
-                    focusable="false"
-                    height="1em"
-                    viewBox="64 64 896 896"
-                    width="1em"
+                  <span
+                    aria-label="dislike"
+                    class="anticon anticon-dislike"
+                    role="img"
                   >
-                    <path
-                      d="M885.9 490.3c3.6-12 5.4-24.4 5.4-37 0-28.3-9.3-55.5-26.1-77.7 3.6-12 5.4-24.4 5.4-37 0-28.3-9.3-55.5-26.1-77.7 3.6-12 5.4-24.4 5.4-37 0-51.6-30.7-98.1-78.3-118.4a66.1 66.1 0 00-26.5-5.4H273v428h.3l85.8 310.8C372.9 889 418.9 924 470.9 924c29.7 0 57.4-11.8 77.9-33.4 20.5-21.5 31-49.7 29.5-79.4l-6-122.9h239.9c12.1 0 23.9-3.2 34.3-9.3 40.4-23.5 65.5-66.1 65.5-111 0-28.3-9.3-55.5-26.1-77.7zM112 132v364c0 17.7 14.3 32 32 32h65V100h-65c-17.7 0-32 14.3-32 32z"
-                    />
-                  </svg>
+                    <svg
+                      aria-hidden="true"
+                      data-icon="dislike"
+                      fill="currentColor"
+                      focusable="false"
+                      height="1em"
+                      viewBox="64 64 896 896"
+                      width="1em"
+                    >
+                      <path
+                        d="M885.9 490.3c3.6-12 5.4-24.4 5.4-37 0-28.3-9.3-55.5-26.1-77.7 3.6-12 5.4-24.4 5.4-37 0-28.3-9.3-55.5-26.1-77.7 3.6-12 5.4-24.4 5.4-37 0-51.6-30.7-98.1-78.3-118.4a66.1 66.1 0 00-26.5-5.4H273v428h.3l85.8 310.8C372.9 889 418.9 924 470.9 924c29.7 0 57.4-11.8 77.9-33.4 20.5-21.5 31-49.7 29.5-79.4l-6-122.9h239.9c12.1 0 23.9-3.2 34.3-9.3 40.4-23.5 65.5-66.1 65.5-111 0-28.3-9.3-55.5-26.1-77.7zM112 132v364c0 17.7 14.3 32 32 32h65V100h-65c-17.7 0-32 14.3-32 32z"
+                      />
+                    </svg>
+                  </span>
                 </span>
-              </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div
-    class="ant-bubble css-var-_R_0_ ant-bubble-end"
-  >
     <div
-      class="ant-bubble-body"
+      class="ant-bubble css-var-_R_0_ ant-bubble-end"
     >
       <div
-        class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
-      >
-        Mock user content.
-      </div>
-    </div>
-  </div>
-  <div
-    class="ant-bubble css-var-_R_0_ ant-bubble-start ant-bubble-success"
-  >
-    <div
-      class="ant-bubble-body"
-    >
-      <div
-        class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-success ant-bubble-content-default ant-bubble-content-string"
-      >
-        Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. 
-      </div>
-      <div
-        class="ant-bubble-footer ant-bubble-footer-start"
+        class="ant-bubble-body"
       >
         <div
-          class="ant-actions css-var-_R_0_"
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
+        >
+          Mock user content.
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-_R_0_ ant-bubble-start ant-bubble-success"
+    >
+      <div
+        class="ant-bubble-body"
+      >
+        <div
+          class="ant-bubble-content ant-bubble-content-borderless ant-bubble-content-success ant-bubble-content-string"
+        >
+          Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. 
+        </div>
+        <div
+          class="ant-bubble-footer ant-bubble-footer-start"
         >
           <div
-            class="ant-actions-list ant-actions-variant-borderless"
+            class="ant-actions css-var-_R_0_"
           >
-            <span
-              class="ant-actions-copy ant-actions-copy css-var-_R_0_ ant-actions-item css-var-_R_0_"
-            >
-              <button
-                aria-describedby="test-id"
-                aria-label="Copy"
-                class="ant-actions-copy-copy ant-actions-copy-copy-icon-only"
-                type="button"
-              >
-                <span
-                  aria-label="copy"
-                  class="anticon anticon-copy"
-                  role="img"
-                >
-                  <svg
-                    aria-hidden="true"
-                    data-icon="copy"
-                    fill="currentColor"
-                    focusable="false"
-                    height="1em"
-                    viewBox="64 64 896 896"
-                    width="1em"
-                  >
-                    <path
-                      d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
-                    />
-                  </svg>
-                </span>
-              </button>
-            </span>
             <div
-              class="ant-actions-feedback css-var-_R_0_ ant-actions-list"
+              class="ant-actions-list ant-actions-variant-borderless"
             >
               <span
-                aria-describedby="test-id"
-                class="ant-actions-feedback-item ant-actions-item ant-actions-feedback-item-dislike ant-actions-feedback-item-dislike-active"
+                class="ant-actions-copy ant-actions-copy css-var-_R_0_ ant-actions-item css-var-_R_0_"
+              >
+                <button
+                  aria-describedby="test-id"
+                  aria-label="Copy"
+                  class="ant-actions-copy-copy ant-actions-copy-copy-icon-only"
+                  type="button"
+                >
+                  <span
+                    aria-label="copy"
+                    class="anticon anticon-copy"
+                    role="img"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      data-icon="copy"
+                      fill="currentColor"
+                      focusable="false"
+                      height="1em"
+                      viewBox="64 64 896 896"
+                      width="1em"
+                    >
+                      <path
+                        d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
+                      />
+                    </svg>
+                  </span>
+                </button>
+              </span>
+              <div
+                class="ant-actions-feedback css-var-_R_0_ ant-actions-list"
               >
                 <span
-                  aria-label="dislike"
-                  class="anticon anticon-dislike"
-                  role="img"
+                  aria-describedby="test-id"
+                  class="ant-actions-feedback-item ant-actions-item ant-actions-feedback-item-dislike ant-actions-feedback-item-dislike-active"
                 >
-                  <svg
-                    aria-hidden="true"
-                    data-icon="dislike"
-                    fill="currentColor"
-                    focusable="false"
-                    height="1em"
-                    viewBox="64 64 896 896"
-                    width="1em"
+                  <span
+                    aria-label="dislike"
+                    class="anticon anticon-dislike"
+                    role="img"
                   >
-                    <path
-                      d="M885.9 490.3c3.6-12 5.4-24.4 5.4-37 0-28.3-9.3-55.5-26.1-77.7 3.6-12 5.4-24.4 5.4-37 0-28.3-9.3-55.5-26.1-77.7 3.6-12 5.4-24.4 5.4-37 0-51.6-30.7-98.1-78.3-118.4a66.1 66.1 0 00-26.5-5.4H273v428h.3l85.8 310.8C372.9 889 418.9 924 470.9 924c29.7 0 57.4-11.8 77.9-33.4 20.5-21.5 31-49.7 29.5-79.4l-6-122.9h239.9c12.1 0 23.9-3.2 34.3-9.3 40.4-23.5 65.5-66.1 65.5-111 0-28.3-9.3-55.5-26.1-77.7zM112 132v364c0 17.7 14.3 32 32 32h65V100h-65c-17.7 0-32 14.3-32 32z"
-                    />
-                  </svg>
+                    <svg
+                      aria-hidden="true"
+                      data-icon="dislike"
+                      fill="currentColor"
+                      focusable="false"
+                      height="1em"
+                      viewBox="64 64 896 896"
+                      width="1em"
+                    >
+                      <path
+                        d="M885.9 490.3c3.6-12 5.4-24.4 5.4-37 0-28.3-9.3-55.5-26.1-77.7 3.6-12 5.4-24.4 5.4-37 0-28.3-9.3-55.5-26.1-77.7 3.6-12 5.4-24.4 5.4-37 0-51.6-30.7-98.1-78.3-118.4a66.1 66.1 0 00-26.5-5.4H273v428h.3l85.8 310.8C372.9 889 418.9 924 470.9 924c29.7 0 57.4-11.8 77.9-33.4 20.5-21.5 31-49.7 29.5-79.4l-6-122.9h239.9c12.1 0 23.9-3.2 34.3-9.3 40.4-23.5 65.5-66.1 65.5-111 0-28.3-9.3-55.5-26.1-77.7zM112 132v364c0 17.7 14.3 32 32 32h65V100h-65c-17.7 0-32 14.3-32 32z"
+                      />
+                    </svg>
+                  </span>
                 </span>
-              </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div
-    class="ant-bubble css-var-_R_0_ ant-bubble-end"
-  >
     <div
-      class="ant-bubble-body"
+      class="ant-bubble css-var-_R_0_ ant-bubble-end"
     >
       <div
-        class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
-      >
-        Mock user content.
-      </div>
-    </div>
-  </div>
-  <div
-    class="ant-bubble css-var-_R_0_ ant-bubble-start ant-bubble-success"
-  >
-    <div
-      class="ant-bubble-body"
-    >
-      <div
-        class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-success ant-bubble-content-default ant-bubble-content-string"
-      >
-        Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. 
-      </div>
-      <div
-        class="ant-bubble-footer ant-bubble-footer-start"
+        class="ant-bubble-body"
       >
         <div
-          class="ant-actions css-var-_R_0_"
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
+        >
+          Mock user content.
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-_R_0_ ant-bubble-start ant-bubble-success"
+    >
+      <div
+        class="ant-bubble-body"
+      >
+        <div
+          class="ant-bubble-content ant-bubble-content-borderless ant-bubble-content-success ant-bubble-content-string"
+        >
+          Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. Mock welcome content. 
+        </div>
+        <div
+          class="ant-bubble-footer ant-bubble-footer-start"
         >
           <div
-            class="ant-actions-list ant-actions-variant-borderless"
+            class="ant-actions css-var-_R_0_"
           >
-            <span
-              class="ant-actions-copy ant-actions-copy css-var-_R_0_ ant-actions-item css-var-_R_0_"
-            >
-              <button
-                aria-describedby="test-id"
-                aria-label="Copy"
-                class="ant-actions-copy-copy ant-actions-copy-copy-icon-only"
-                type="button"
-              >
-                <span
-                  aria-label="copy"
-                  class="anticon anticon-copy"
-                  role="img"
-                >
-                  <svg
-                    aria-hidden="true"
-                    data-icon="copy"
-                    fill="currentColor"
-                    focusable="false"
-                    height="1em"
-                    viewBox="64 64 896 896"
-                    width="1em"
-                  >
-                    <path
-                      d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
-                    />
-                  </svg>
-                </span>
-              </button>
-            </span>
             <div
-              class="ant-actions-feedback css-var-_R_0_ ant-actions-list"
+              class="ant-actions-list ant-actions-variant-borderless"
             >
               <span
-                aria-describedby="test-id"
-                class="ant-actions-feedback-item ant-actions-item ant-actions-feedback-item-like ant-actions-feedback-item-like-active"
-                style="color:#f759ab"
+                class="ant-actions-copy ant-actions-copy css-var-_R_0_ ant-actions-item css-var-_R_0_"
+              >
+                <button
+                  aria-describedby="test-id"
+                  aria-label="Copy"
+                  class="ant-actions-copy-copy ant-actions-copy-copy-icon-only"
+                  type="button"
+                >
+                  <span
+                    aria-label="copy"
+                    class="anticon anticon-copy"
+                    role="img"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      data-icon="copy"
+                      fill="currentColor"
+                      focusable="false"
+                      height="1em"
+                      viewBox="64 64 896 896"
+                      width="1em"
+                    >
+                      <path
+                        d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
+                      />
+                    </svg>
+                  </span>
+                </button>
+              </span>
+              <div
+                class="ant-actions-feedback css-var-_R_0_ ant-actions-list"
               >
                 <span
-                  aria-label="like"
-                  class="anticon anticon-like"
-                  role="img"
+                  aria-describedby="test-id"
+                  class="ant-actions-feedback-item ant-actions-item ant-actions-feedback-item-like ant-actions-feedback-item-like-active"
+                  style="color:#f759ab"
                 >
-                  <svg
-                    aria-hidden="true"
-                    data-icon="like"
-                    fill="currentColor"
-                    focusable="false"
-                    height="1em"
-                    viewBox="64 64 896 896"
-                    width="1em"
+                  <span
+                    aria-label="like"
+                    class="anticon anticon-like"
+                    role="img"
                   >
-                    <path
-                      d="M885.9 533.7c16.8-22.2 26.1-49.4 26.1-77.7 0-44.9-25.1-87.4-65.5-111.1a67.67 67.67 0 00-34.3-9.3H572.4l6-122.9c1.4-29.7-9.1-57.9-29.5-79.4A106.62 106.62 0 00471 99.9c-52 0-98 35-111.8 85.1l-85.9 311h-.3v428h472.3c9.2 0 18.2-1.8 26.5-5.4 47.6-20.3 78.3-66.8 78.3-118.4 0-12.6-1.8-25-5.4-37 16.8-22.2 26.1-49.4 26.1-77.7 0-12.6-1.8-25-5.4-37 16.8-22.2 26.1-49.4 26.1-77.7-.2-12.6-2-25.1-5.6-37.1zM112 528v364c0 17.7 14.3 32 32 32h65V496h-65c-17.7 0-32 14.3-32 32z"
-                    />
-                  </svg>
+                    <svg
+                      aria-hidden="true"
+                      data-icon="like"
+                      fill="currentColor"
+                      focusable="false"
+                      height="1em"
+                      viewBox="64 64 896 896"
+                      width="1em"
+                    >
+                      <path
+                        d="M885.9 533.7c16.8-22.2 26.1-49.4 26.1-77.7 0-44.9-25.1-87.4-65.5-111.1a67.67 67.67 0 00-34.3-9.3H572.4l6-122.9c1.4-29.7-9.1-57.9-29.5-79.4A106.62 106.62 0 00471 99.9c-52 0-98 35-111.8 85.1l-85.9 311h-.3v428h472.3c9.2 0 18.2-1.8 26.5-5.4 47.6-20.3 78.3-66.8 78.3-118.4 0-12.6-1.8-25-5.4-37 16.8-22.2 26.1-49.4 26.1-77.7 0-12.6-1.8-25-5.4-37 16.8-22.2 26.1-49.4 26.1-77.7-.2-12.6-2-25.1-5.6-37.1zM112 528v364c0 17.7 14.3 32 32 32h65V496h-65c-17.7 0-32 14.3-32 32z"
+                      />
+                    </svg>
+                  </span>
                 </span>
-              </span>
+              </div>
             </div>
           </div>
         </div>
@@ -1822,9 +1822,10 @@ exports[`renders components/bubble/demo/list-extra.tsx correctly 1`] = `
 </div>
 `;
 
-exports[`renders components/bubble/demo/list-ref.tsx correctly 1`] = `
+exports[`renders components/bubble/demo/list-scroll.tsx correctly 1`] = `
 <div
   class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+  style="height:720px"
 >
   <div
     class="ant-flex css-var-_R_0_ ant-flex-justify-space-between ant-flex-gap-small"
@@ -1875,9 +1876,12 @@ exports[`renders components/bubble/demo/list-ref.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-bubble-list css-var-_R_0_ ant-bubble-list-autoscroll"
-    style="max-height:400px"
-  />
+    class="ant-bubble-list css-var-_R_0_"
+  >
+    <div
+      class="ant-bubble-list-scroll-box ant-bubble-list-autoscroll"
+    />
+  </div>
 </div>
 `;
 
@@ -1971,161 +1975,165 @@ exports[`renders components/bubble/demo/markdown.tsx correctly 1`] = `
 
 exports[`renders components/bubble/demo/semantic-list-custom.tsx correctly 1`] = `
 <div
-  class="ant-bubble-list css-var-_R_0_ ant-bubble-list-autoscroll"
-  style="max-height:300px"
+  class="ant-bubble-list css-var-_R_0_"
+  style="height:500px"
 >
   <div
-    class="ant-bubble css-var-_R_0_ ant-bubble-start ant-bubble-loading"
+    class="ant-bubble-list-scroll-box ant-bubble-list-autoscroll"
   >
     <div
-      class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-gap-small"
+      class="ant-bubble css-var-_R_0_ ant-bubble-start ant-bubble-loading"
     >
       <div
-        aria-busy="true"
-        aria-live="polite"
-        class="ant-spin ant-spin-sm ant-spin-spinning css-var-_R_0_"
+        class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-gap-small"
       >
-        <span
-          class="ant-spin-dot-holder"
+        <div
+          aria-busy="true"
+          aria-live="polite"
+          class="ant-spin ant-spin-sm ant-spin-spinning css-var-_R_0_"
         >
           <span
-            class="ant-spin-dot ant-spin-dot-spin"
+            class="ant-spin-dot-holder"
           >
-            <i
-              class="ant-spin-dot-item"
-            />
-            <i
-              class="ant-spin-dot-item"
-            />
-            <i
-              class="ant-spin-dot-item"
-            />
-            <i
-              class="ant-spin-dot-item"
-            />
+            <span
+              class="ant-spin-dot ant-spin-dot-spin"
+            >
+              <i
+                class="ant-spin-dot-item"
+              />
+              <i
+                class="ant-spin-dot-item"
+              />
+              <i
+                class="ant-spin-dot-item"
+              />
+              <i
+                class="ant-spin-dot-item"
+              />
+            </span>
           </span>
-        </span>
-      </div>
-      Custom loading...
-    </div>
-  </div>
-  <div
-    class="ant-bubble css-var-_R_0_ ant-bubble-end"
-  >
-    <div
-      class="ant-bubble-body"
-    >
-      <div
-        class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
-      >
-        Mock user content.
+        </div>
+        Custom loading...
       </div>
     </div>
-  </div>
-  <div
-    class="ant-bubble css-var-_R_0_ ant-bubble-start"
-  >
     <div
-      class="ant-bubble-body"
+      class="ant-bubble css-var-_R_0_ ant-bubble-end"
     >
       <div
-        class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
+        class="ant-bubble-body"
       >
         <div
-          class=""
-        />
-      </div>
-      <div
-        class="ant-bubble-footer ant-bubble-footer-start"
-      >
-        <div
-          class="ant-flex css-var-_R_0_"
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
         >
-          <button
-            class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
-            style="margin-inline-end:auto"
-            type="button"
+          Mock user content.
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-bubble css-var-_R_0_ ant-bubble-start"
+    >
+      <div
+        class="ant-bubble-body"
+      >
+        <div
+          class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
+        >
+          <div
+            class=""
+          />
+        </div>
+        <div
+          class="ant-bubble-footer ant-bubble-footer-start"
+        >
+          <div
+            class="ant-flex css-var-_R_0_"
           >
-            <span
-              class="ant-btn-icon"
+            <button
+              class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+              style="margin-inline-end:auto"
+              type="button"
             >
               <span
-                aria-label="sync"
-                class="anticon anticon-sync"
-                role="img"
+                class="ant-btn-icon"
               >
-                <svg
-                  aria-hidden="true"
-                  data-icon="sync"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
+                <span
+                  aria-label="sync"
+                  class="anticon anticon-sync"
+                  role="img"
                 >
-                  <path
-                    d="M168 504.2c1-43.7 10-86.1 26.9-126 17.3-41 42.1-77.7 73.7-109.4S337 212.3 378 195c42.4-17.9 87.4-27 133.9-27s91.5 9.1 133.8 27A341.5 341.5 0 01755 268.8c9.9 9.9 19.2 20.4 27.8 31.4l-60.2 47a8 8 0 003 14.1l175.7 43c5 1.2 9.9-2.6 9.9-7.7l.8-180.9c0-6.7-7.7-10.5-12.9-6.3l-56.4 44.1C765.8 155.1 646.2 92 511.8 92 282.7 92 96.3 275.6 92 503.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8zm756 7.8h-60c-4.4 0-7.9 3.5-8 7.8-1 43.7-10 86.1-26.9 126-17.3 41-42.1 77.8-73.7 109.4A342.45 342.45 0 01512.1 856a342.24 342.24 0 01-243.2-100.8c-9.9-9.9-19.2-20.4-27.8-31.4l60.2-47a8 8 0 00-3-14.1l-175.7-43c-5-1.2-9.9 2.6-9.9 7.7l-.7 181c0 6.7 7.7 10.5 12.9 6.3l56.4-44.1C258.2 868.9 377.8 932 512.2 932c229.2 0 415.5-183.7 419.8-411.8a8 8 0 00-8-8.2z"
-                  />
-                </svg>
+                  <svg
+                    aria-hidden="true"
+                    data-icon="sync"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M168 504.2c1-43.7 10-86.1 26.9-126 17.3-41 42.1-77.7 73.7-109.4S337 212.3 378 195c42.4-17.9 87.4-27 133.9-27s91.5 9.1 133.8 27A341.5 341.5 0 01755 268.8c9.9 9.9 19.2 20.4 27.8 31.4l-60.2 47a8 8 0 003 14.1l175.7 43c5 1.2 9.9-2.6 9.9-7.7l.8-180.9c0-6.7-7.7-10.5-12.9-6.3l-56.4 44.1C765.8 155.1 646.2 92 511.8 92 282.7 92 96.3 275.6 92 503.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8zm756 7.8h-60c-4.4 0-7.9 3.5-8 7.8-1 43.7-10 86.1-26.9 126-17.3 41-42.1 77.8-73.7 109.4A342.45 342.45 0 01512.1 856a342.24 342.24 0 01-243.2-100.8c-9.9-9.9-19.2-20.4-27.8-31.4l60.2-47a8 8 0 00-3-14.1l-175.7-43c-5-1.2-9.9 2.6-9.9 7.7l-.7 181c0 6.7 7.7 10.5 12.9 6.3l56.4-44.1C258.2 868.9 377.8 932 512.2 932c229.2 0 415.5-183.7 419.8-411.8a8 8 0 00-8-8.2z"
+                    />
+                  </svg>
+                </span>
               </span>
-            </span>
-          </button>
-          <button
-            class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
-            type="button"
-          >
-            <span
-              class="ant-btn-icon"
+            </button>
+            <button
+              class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+              type="button"
             >
               <span
-                aria-label="smile"
-                class="anticon anticon-smile"
-                role="img"
+                class="ant-btn-icon"
               >
-                <svg
-                  aria-hidden="true"
-                  data-icon="smile"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
+                <span
+                  aria-label="smile"
+                  class="anticon anticon-smile"
+                  role="img"
                 >
-                  <path
-                    d="M288 421a48 48 0 1096 0 48 48 0 10-96 0zm352 0a48 48 0 1096 0 48 48 0 10-96 0zM512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm263 711c-34.2 34.2-74 61-118.3 79.8C611 874.2 562.3 884 512 884c-50.3 0-99-9.8-144.8-29.2A370.4 370.4 0 01248.9 775c-34.2-34.2-61-74-79.8-118.3C149.8 611 140 562.3 140 512s9.8-99 29.2-144.8A370.4 370.4 0 01249 248.9c34.2-34.2 74-61 118.3-79.8C413 149.8 461.7 140 512 140c50.3 0 99 9.8 144.8 29.2A370.4 370.4 0 01775.1 249c34.2 34.2 61 74 79.8 118.3C874.2 413 884 461.7 884 512s-9.8 99-29.2 144.8A368.89 368.89 0 01775 775zM664 533h-48.1c-4.2 0-7.8 3.2-8.1 7.4C604 589.9 562.5 629 512 629s-92.1-39.1-95.8-88.6c-.3-4.2-3.9-7.4-8.1-7.4H360a8 8 0 00-8 8.4c4.4 84.3 74.5 151.6 160 151.6s155.6-67.3 160-151.6a8 8 0 00-8-8.4z"
-                  />
-                </svg>
+                  <svg
+                    aria-hidden="true"
+                    data-icon="smile"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M288 421a48 48 0 1096 0 48 48 0 10-96 0zm352 0a48 48 0 1096 0 48 48 0 10-96 0zM512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm263 711c-34.2 34.2-74 61-118.3 79.8C611 874.2 562.3 884 512 884c-50.3 0-99-9.8-144.8-29.2A370.4 370.4 0 01248.9 775c-34.2-34.2-61-74-79.8-118.3C149.8 611 140 562.3 140 512s9.8-99 29.2-144.8A370.4 370.4 0 01249 248.9c34.2-34.2 74-61 118.3-79.8C413 149.8 461.7 140 512 140c50.3 0 99 9.8 144.8 29.2A370.4 370.4 0 01775.1 249c34.2 34.2 61 74 79.8 118.3C874.2 413 884 461.7 884 512s-9.8 99-29.2 144.8A368.89 368.89 0 01775 775zM664 533h-48.1c-4.2 0-7.8 3.2-8.1 7.4C604 589.9 562.5 629 512 629s-92.1-39.1-95.8-88.6c-.3-4.2-3.9-7.4-8.1-7.4H360a8 8 0 00-8 8.4c4.4 84.3 74.5 151.6 160 151.6s155.6-67.3 160-151.6a8 8 0 00-8-8.4z"
+                    />
+                  </svg>
+                </span>
               </span>
-            </span>
-          </button>
-          <button
-            class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
-            type="button"
-          >
-            <span
-              class="ant-btn-icon"
+            </button>
+            <button
+              class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+              type="button"
             >
               <span
-                aria-label="frown"
-                class="anticon anticon-frown"
-                role="img"
+                class="ant-btn-icon"
               >
-                <svg
-                  aria-hidden="true"
-                  data-icon="frown"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
+                <span
+                  aria-label="frown"
+                  class="anticon anticon-frown"
+                  role="img"
                 >
-                  <path
-                    d="M288 421a48 48 0 1096 0 48 48 0 10-96 0zm352 0a48 48 0 1096 0 48 48 0 10-96 0zM512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm263 711c-34.2 34.2-74 61-118.3 79.8C611 874.2 562.3 884 512 884c-50.3 0-99-9.8-144.8-29.2A370.4 370.4 0 01248.9 775c-34.2-34.2-61-74-79.8-118.3C149.8 611 140 562.3 140 512s9.8-99 29.2-144.8A370.4 370.4 0 01249 248.9c34.2-34.2 74-61 118.3-79.8C413 149.8 461.7 140 512 140c50.3 0 99 9.8 144.8 29.2A370.4 370.4 0 01775.1 249c34.2 34.2 61 74 79.8 118.3C874.2 413 884 461.7 884 512s-9.8 99-29.2 144.8A368.89 368.89 0 01775 775zM512 533c-85.5 0-155.6 67.3-160 151.6a8 8 0 008 8.4h48.1c4.2 0 7.8-3.2 8.1-7.4C420 636.1 461.5 597 512 597s92.1 39.1 95.8 88.6c.3 4.2 3.9 7.4 8.1 7.4H664a8 8 0 008-8.4C667.6 600.3 597.5 533 512 533z"
-                  />
-                </svg>
+                  <svg
+                    aria-hidden="true"
+                    data-icon="frown"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M288 421a48 48 0 1096 0 48 48 0 10-96 0zm352 0a48 48 0 1096 0 48 48 0 10-96 0zM512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm263 711c-34.2 34.2-74 61-118.3 79.8C611 874.2 562.3 884 512 884c-50.3 0-99-9.8-144.8-29.2A370.4 370.4 0 01248.9 775c-34.2-34.2-61-74-79.8-118.3C149.8 611 140 562.3 140 512s9.8-99 29.2-144.8A370.4 370.4 0 01249 248.9c34.2-34.2 74-61 118.3-79.8C413 149.8 461.7 140 512 140c50.3 0 99 9.8 144.8 29.2A370.4 370.4 0 01775.1 249c34.2 34.2 61 74 79.8 118.3C874.2 413 884 461.7 884 512s-9.8 99-29.2 144.8A368.89 368.89 0 01775 775zM512 533c-85.5 0-155.6 67.3-160 151.6a8 8 0 008 8.4h48.1c4.2 0 7.8-3.2 8.1-7.4C420 636.1 461.5 597 512 597s92.1 39.1 95.8 88.6c.3 4.2 3.9 7.4 8.1 7.4H664a8 8 0 008-8.4C667.6 600.3 597.5 533 512 533z"
+                    />
+                  </svg>
+                </span>
               </span>
-            </span>
-          </button>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -2709,9 +2717,9 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx correctly 1`] = `
         <div
           class="ant-bubble-content ant-bubble-content-borderless"
         >
-          <h3>
+          <span>
             borderless bubble
-          </h3>
+          </span>
         </div>
       </div>
     </div>

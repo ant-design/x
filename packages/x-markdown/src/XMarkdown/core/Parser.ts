@@ -7,20 +7,56 @@ type ParserOptions = {
   openLinksInNewTab?: boolean;
 };
 
+export const other = {
+  escapeTestNoEncode: /[<>"']|&(?!(#\d{1,7}|#[Xx][a-fA-F0-9]{1,6}|\w+);)/,
+  escapeTest: /[&<>"']/,
+  notSpaceStart: /^\S*/,
+  endingNewline: /\n$/,
+  escapeReplace: /[&<>"']/g,
+  escapeReplaceNoEncode: /[<>"']|&(?!(#\d{1,7}|#[Xx][a-fA-F0-9]{1,6}|\w+);)/g,
+};
+
+const escapeReplacements: { [index: string]: string } = {
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&#39;',
+};
+const getEscapeReplacement = (ch: string) => escapeReplacements[ch];
+
+export function escapeHtml(html: string, encode?: boolean) {
+  if (encode) {
+    if (other.escapeTest.test(html)) {
+      return html.replace(other.escapeReplace, getEscapeReplacement);
+    }
+  } else {
+    if (other.escapeTestNoEncode.test(html)) {
+      return html.replace(other.escapeReplaceNoEncode, getEscapeReplacement);
+    }
+  }
+
+  return html;
+}
+
 class Parser {
   options: ParserOptions;
   markdownInstance: Marked;
 
   constructor(options: ParserOptions = {}) {
-    const { markedConfig = {}, openLinksInNewTab } = options;
+    const { markedConfig = {} } = options;
     this.options = options;
-    this.markdownInstance = new Marked(markedConfig);
-    this.configureRenderer(openLinksInNewTab);
-    this.configureParagraph();
+    this.markdownInstance = new Marked();
+
+    this.configureLinkRenderer();
+    this.configureParagraphRenderer();
+    this.configureCodeRenderer();
+    // user config at last
+    this.markdownInstance.use(markedConfig);
   }
 
-  private configureRenderer(openLinksInNewTab?: boolean) {
-    if (!openLinksInNewTab) return;
+  private configureLinkRenderer() {
+    if (!this.options.openLinksInNewTab) return;
 
     const renderer = {
       link(this: Renderer, { href, title, tokens }: Tokens.Link) {
@@ -32,13 +68,32 @@ class Parser {
     this.markdownInstance.use({ renderer });
   }
 
-  public configureParagraph() {
+  public configureParagraphRenderer() {
     const { paragraphTag } = this.options;
     if (!paragraphTag) return;
 
     const renderer = {
       paragraph(this: Renderer, { tokens }: Tokens.Paragraph) {
         return `<${paragraphTag}>${this.parser.parseInline(tokens)}</${paragraphTag}>\n`;
+      },
+    };
+    this.markdownInstance.use({ renderer });
+  }
+
+  public configureCodeRenderer() {
+    const renderer = {
+      code({ text, raw, lang, escaped, codeBlockStyle }: Tokens.Code): string {
+        const langString = (lang || '').match(other.notSpaceStart)?.[0];
+        const code = text.replace(other.endingNewline, '') + '\n';
+        const isIndentedCode = codeBlockStyle === 'indented';
+        // if code is indented, it's done because it has no end tag
+        const streamStatus =
+          isIndentedCode || /(`{3,})([^`]*)\1/m.test(raw.trim()) ? 'done' : 'loading';
+        const escapedCode = escaped ? code : escapeHtml(code, true);
+
+        const classAttr = langString ? ` class="language-${escapeHtml(langString)}"` : '';
+
+        return `<pre><code data-block="true" data-state="${streamStatus}"${classAttr}>${escapedCode}</code></pre>\n`;
       },
     };
     this.markdownInstance.use({ renderer });

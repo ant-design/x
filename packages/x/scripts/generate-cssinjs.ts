@@ -1,7 +1,7 @@
 import url from 'node:url';
+import { globSync } from 'glob';
 import path from 'path';
 import React from 'react';
-import { globSync } from 'glob';
 
 type StyleFn = (prefix?: string) => void;
 

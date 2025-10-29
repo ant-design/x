@@ -11,10 +11,14 @@ order: 2
 
 <!-- prettier-ignore -->
 <code src="./demo/codeDemo/basic.tsx" description="markdown基础语法渲染。" title="基础用法"></code>
-<code src="./demo/codeDemo/streaming.tsx" description="配合 `Bubble` 实现流式对话。" title="流式渲染"></code>
-<code src="./demo/codeDemo/components.tsx" description="自定义组件渲染标签。" title="自定义组件"></code>
+<code src="./demo/streaming/combined.tsx" description="未完成语法处理、动画效果" title="流式处理"></code>
 <code src="./demo/codeDemo/supersets.tsx" description="使用插件渲染。" title="插件使用"></code>
+<code src="./demo/codeDemo/components.tsx" description="自定义组件渲染标签。" title="自定义组件"></code>
 <code src="./demo/codeDemo/plugin.tsx" title="自定义拓展插件"></code>
+<code src="./demo/codeDemo/tokenizer.tsx" title="自定义标记"></code>
+<code src="./demo/codeDemo/walkTokens.tsx" title="标记处理"></code>
+<code src="./demo/codeDemo/renderer.tsx" title="渲染前处理"></code>
+<code src="./demo/codeDemo/link.tsx" title="中文链接处理"></code>
 <code src="./demo/codeDemo/xss.tsx"  title="XSS 防御"></code>
 <code src="./demo/codeDemo/open-links-in-new-tab.tsx" description="链接在新标签页打开。" title="新标签页打开链接"></code>
 
@@ -42,6 +46,7 @@ order: 2
 | hasNextChunk | 指示是否还有后续内容块，为 false 时刷新所有缓存并完成渲染 | `boolean` | `false` |
 | enableAnimation | 为块级元素（`p`、`li`、`h1`、`h2`、`h3`、`h4`）启用文字淡入动画 | `boolean` | `false` |
 | animationConfig | 文字出现动画效果的配置 | `AnimationConfig` | `{ fadeDuration: 200, opacity: 0.2 }` |
+| incompletePlaceholderMap | 未闭合Markdown元素的占位符映射，支持自定义链接和图片的占位符组件 | `{ link?: string; image?: string }` | `{ link: 'incomplete-link', image: 'incomplete-image' }` |
 
 #### AnimationConfig
 
@@ -55,7 +60,7 @@ order: 2
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | domNode | 来自 html-react-parser 的组件 DOM 节点，包含解析后的 DOM 节点信息 | [`DOMNode`](https://github.com/remarkablemark/html-react-parser?tab=readme-ov-file#replace) | - |
-| streamStatus | 流式状态，`loading` 表示正在加载，`done` 表示加载完成 | `'loading' \| 'done'` | - |
+| streamStatus |流式渲染支持两种状态：`loading` 表示内容正在加载中，`done` 表示加载已完成。当前仅支持 HTML 格式以及带围栏的代码块（fenced code）。由于缩进代码块（indented code）没有明确的结束符，因此始终返回 `done` 状态 | `'loading' \| 'done'` | - |
 | rest | 组件属性，支持所有标准 HTML 属性（如 `href`、`title`、`className` 等）和自定义数据属性 | `Record<string, any>` | - |
 
 ## FAQ

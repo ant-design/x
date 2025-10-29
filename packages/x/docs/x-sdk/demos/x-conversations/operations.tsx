@@ -3,7 +3,7 @@ import type { ConversationItemType, ConversationsProps } from '@ant-design/x';
 import { Conversations } from '@ant-design/x';
 import { useXConversations } from '@ant-design/x-sdk';
 import { Button, Flex, Typography, theme } from 'antd';
-import React, { useState } from 'react';
+import React from 'react';
 
 const { Paragraph } = Typography;
 
@@ -21,15 +21,20 @@ let idx = 5;
 
 export default () => {
   const { token } = theme.useToken();
-  const [active, setActive] = useState('item1');
+
   const {
     conversations,
     addConversation,
+    activeConversationKey,
+    setActiveConversationKey,
     setConversation,
     removeConversation,
     getConversation,
     setConversations,
-  } = useXConversations({ defaultConversations: createItems() });
+  } = useXConversations({
+    defaultConversations: createItems(),
+    defaultActiveConversationKey: 'item1',
+  });
 
   // Customize the style of the container
   const style = {
@@ -38,22 +43,21 @@ export default () => {
     borderRadius: token.borderRadius,
   };
 
-  const onActiveChange = (value: string) => {
-    setActive(value);
-  };
-
   const onAdd = () => {
     addConversation({ key: `item${idx}`, label: `Conversation Item ${idx}` });
     idx = idx + 1;
   };
 
   const onUpdate = () => {
-    setConversation(active, { key: active, label: 'Updated Conversation Item' });
+    setConversation(activeConversationKey, {
+      key: activeConversationKey,
+      label: 'Updated Conversation Item',
+    });
   };
 
   const onReset = () => {
     setConversations(createItems());
-    setActive('item1');
+    setActiveConversationKey('item1');
   };
 
   const menuConfig: ConversationsProps['menu'] = (conversation) => ({
@@ -73,10 +77,13 @@ export default () => {
   return (
     <Flex vertical gap="small" align="flex-start">
       <Conversations
+        creation={{
+          onClick: onAdd,
+        }}
         items={conversations as ConversationItemType[]}
-        activeKey={active}
+        activeKey={activeConversationKey}
         style={style}
-        onActiveChange={onActiveChange}
+        onActiveChange={setActiveConversationKey}
         menu={menuConfig}
       />
       <Flex gap="small">
@@ -86,7 +93,7 @@ export default () => {
       </Flex>
       <Paragraph>
         Current Conversation Data:
-        <pre>{JSON.stringify(getConversation(active), null, 2)}</pre>
+        <pre>{JSON.stringify(getConversation(activeConversationKey), null, 2)}</pre>
       </Paragraph>
     </Flex>
   );

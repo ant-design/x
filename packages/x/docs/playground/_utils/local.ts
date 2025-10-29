@@ -123,7 +123,7 @@ const enUS = {
   slotTextStart: 'Please help me introduce the usage of ',
   slotTextEnd: 'in Ant Design X.',
   aiMessage_1: `RICH Design Paradigm \n [View Details](/docs/spec/induction})`,
-  aiMessage_2: `#Quickly install and import components \n \`npm install @ ant design/x -- save\` \n [View details](/components/import)`,
+  aiMessage_2: `# Quickly install and import components \n \`npm install @ ant design/x -- save\` \n [View details](/components/import)`,
   welcome: `Hello,I'm Ant Design X`,
   welcomeDescription: `Base on Ant Design, AGI product interface solution, create a better intelligent vision~`,
   aiCopilot: 'AI Copilot',

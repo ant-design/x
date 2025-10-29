@@ -16,6 +16,68 @@ tag: vVERSION
 
 ---
 
+## 2.0.0-alpha.12
+
+`2025-10-29`
+
+### @ant-design/x
+
+- 🆕 Attachments Ref adds `select` method to support file selection capability, while fixing the issue where the upload button still appears after reaching the maximum quantity when a maximum limit is set. [#1266](https://github.com/ant-design/x/pull/1266) by [@kimteayon](https://github.com/kimteayon).
+- 📖 Optimized the official site to enhance user experience. [#1269](https://github.com/ant-design/x/pull/1269) by [@kimteayon](https://github.com/kimteayon), [#1274](https://github.com/ant-design/x/pull/1274) by [@kimteayon](https://github.com/kimteayon).
+
+### @ant-design/x-markdown
+
+- 🐛 Fixed KaTeX plugin rendering failure and exception throwing issues, modified formula rendering rules to reduce rendering exceptions. [#1265](https://github.com/ant-design/x/pull/1265) by [@Div627](https://github.com/Div627).
+- 📖 Added code examples for XMarkdown handling Chinese links. [#1270](https://github.com/ant-design/x/pull/1270) by [@kimteayon](https://github.com/kimteayon).
+- 🆕 `code` and `pre` tags now return rendering status `streamStatus` and block-level identifier `block` during rendering. [#1272](https://github.com/ant-design/x/pull/1272) by [@Div627](https://github.com/Div627).
+- 🐛 Fixed duplicate DOM keys when rendering markdown. [#1273](https://github.com/ant-design/x/pull/1273) by [@Div627](https://github.com/Div627).
+
+## 2.0.0-alpha.11
+
+`2025-10-27`
+
+### @ant-design/x
+
+- 🆕 Sender slot configuration changed to mutable properties, in slot mode the `insert` method adds `replaceCharacters` parameter to support replacement functionality, and the `focus` method adds slot `key` configuration to support focusing on specific slots. [#1259](https://github.com/ant-design/x/pull/1259) by [@kimteayon](https://github.com/kimteayon).
+- 🆕 Sources inline mode supports specifying the currently active panel, adds `activeKey` property, and optimizes panel switching interaction styles for better experience. [#1261](https://github.com/ant-design/x/pull/1261) by [@kimteayon](https://github.com/kimteayon).
+- 🆕 Bubble.List optimized scrollbar layout, implementation, and semantics. [#1263](https://github.com/ant-design/x/pull/1263) by [@kimteayon](https://github.com/kimteayon).
+
+### @ant-design/x-markdown
+
+- 🐛 Fixed inconsistent parameter structure issue for XMarkdown custom components under different states. [#1260](https://github.com/ant-design/x/pull/1260) by [@Div627](https://github.com/Div627).
+- 📖 Added XMarkdown code examples. [#1262](https://github.com/ant-design/x/pull/1262) by [@kimteayon](https://github.com/kimteayon).
+
+## 2.0.0-alpha.10
+
+`2025-10-23`
+
+### @ant-design/x
+
+- 🔥 New component Sources. [#1250](https://github.com/ant-design/x/pull/1250) by [@hy993658052](https://github.com/hy993658052).
+- 🆕 Bubble adds two subcomponents: Bubble.System and Bubble.Divider. [#1239](https://github.com/ant-design/x/pull/1239) by [@anxLiang](https://github.com/anxLiang) and [@kimteayon](https://github.com/kimteayon).
+- Sender
+  - 🆕 Added slot focus event functionality. [#1221](https://github.com/ant-design/x/pull/1221) by [@kimteayon](https://github.com/kimteayon).
+  - 🐛 Fixed the issue where `onPasteFile` callback data was incorrect when pasting multiple files in the input box. [#1221](https://github.com/ant-design/x/pull/1221) by [@kimteayon](https://github.com/kimteayon).
+  - 🐛 Fixed accessibility issues caused by SVG not being internationalized. [#1243](https://github.com/ant-design/x/pull/1243) by [@kimteayon](https://github.com/kimteayon).
+- FileCard
+  - 🆕 Added semantic implementation. [#1220](https://github.com/ant-design/x/pull/1220) by [@kimteayon](https://github.com/kimteayon).
+  - 🆕 Added support for `jfif` type. [#1248](https://github.com/ant-design/x/pull/1248) by [@IsDyh01](https://github.com/IsDyh01).
+- 🆕 Attachments added semantic implementation. [#1220](https://github.com/ant-design/x/pull/1220) by [@kimteayon](https://github.com/kimteayon).
+- 📖 Optimized the official site to enhance user experience. [#1216](https://github.com/ant-design/x/pull/1216) by [@kimteayon](https://github.com/kimteayon), [#1217](https://github.com/ant-design/x/pull/1217) by [@Div627](https://github.com/Div627), [#1218](https://github.com/ant-design/x/pull/1218) by [@IsDyh01](https://github.com/IsDyh01), [#1224](https://github.com/ant-design/x/pull/1224) by [@kimteayon](https://github.com/kimteayon), [#1232](https://github.com/ant-design/x/pull/1232) by [@IsDyh01](https://github.com/IsDyh01), [#1233](https://github.com/ant-design/x/pull/1233) by [@kimteayon](https://github.com/kimteayon), [#1243](https://github.com/ant-design/x/pull/1243) by [@kimteayon](https://github.com/kimteayon), [#1247](https://github.com/ant-design/x/pull/1247) by [@elrrrrrrr](https://github.com/elrrrrrrr).
+
+### @ant-design/x-markdown
+
+- 🆕 XMarkdown adds rendering component configuration `incomplete` for tags that need to be closed during the rendering process and corresponding functionality. [#1223](https://github.com/ant-design/x/pull/1223) by [@Div627](https://github.com/Div627).
+- 🐛 Fixed the issue where XMarkdown `openLinksInNewTab` property configuration was ineffective. [#1253](https://github.com/ant-design/x/pull/1253) by [@Div627](https://github.com/Div627).
+- 🐛 Fixed the issue of repeated rendering in XMarkdown animations. [#1255](https://github.com/ant-design/x/pull/1255) by [@Div627](https://github.com/Div627).
+- 🆕 Enhanced XMarkdown's ability to identify formula rendering tags. [#1255](https://github.com/ant-design/x/pull/1255) by [@Div627](https://github.com/Div627).
+
+### @ant-design/x-sdk
+
+- 🐛 Fixed the issue where useXChat handling stream data server errors caused parameter problems in the `requestFallback` callback. [#1224](https://github.com/ant-design/x/pull/1224) by [@kimteayon](https://github.com/kimteayon).
+- 🆕 Added implementation for activeConversationKey in useXConversations. [#1252](https://github.com/ant-design/x/pull/1252) by [@kimteayon](https://github.com/kimteayon).
+- 🐛 Fixed the non-multi-instance issue of useXChat `isRequesting`, and optimized the callback parameters for `requestPlaceholder` and `requestFallback`. [#1254](https://github.com/ant-design/x/pull/1254) by [@kimteayon](https://github.com/kimteayon).
+
 ## 2.0.0-alpha.9
 
 `2025-09-24`

@@ -85,14 +85,14 @@ const App = () => {
   );
 
   return (
-    <Flex vertical gap="small">
+    <Flex vertical style={{ height: 720 }} gap="small">
       <Flex gap="small" justify="space-between">
         <Flex gap="small">
           <Button type="primary" onClick={() => console.log(listRef.current?.nativeElement)}>
             Get Dom
           </Button>
           <Button onClick={() => listRef.current?.scrollTo({ top: 'top' })}>Scroll To Top</Button>
-          <Button onClick={() => listRef.current?.scrollTo({ top: 'bottom', behavior: 'instant' })}>
+          <Button onClick={() => listRef.current?.scrollTo({ top: 'bottom', behavior: 'smooth' })}>
             Scroll To Bottom
           </Button>
           <Button onClick={() => listRef.current?.scrollTo({ top: Math.random() * 1000 })}>
@@ -108,7 +108,6 @@ const App = () => {
 
       <Bubble.List
         ref={listRef}
-        style={{ maxHeight: 400 }}
         role={memoRole}
         items={items}
         onScroll={(e) => {

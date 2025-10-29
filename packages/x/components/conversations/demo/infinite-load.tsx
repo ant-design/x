@@ -1,9 +1,10 @@
 import { RedoOutlined } from '@ant-design/icons';
 import { Conversations, type ConversationsProps } from '@ant-design/x';
-import { Avatar, Divider, Spin, theme } from 'antd';
 import type { GetProp } from 'antd';
+import { Avatar, Divider, Spin, theme } from 'antd';
 import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
+
 const App: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<GetProp<ConversationsProps, 'items'>>([]);

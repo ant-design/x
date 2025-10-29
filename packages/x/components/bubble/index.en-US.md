@@ -35,7 +35,11 @@ Often used in chat scenarios.
 
 ## Bubble.List Examples
 
-<code src="./demo/list.tsx">Bubble List</code> <code src="./demo/list-ref.tsx">Bubble List Ref</code> <code src="./demo/semantic-list-custom.tsx">Semantic Customization</code> <code src="./demo/list-extra.tsx">List extra</code>
+<!-- prettier-ignore -->
+<code src="./demo/list.tsx">Bubble List</code> 
+<code src="./demo/list-scroll.tsx">Bubble List Ref</code>
+<code src="./demo/semantic-list-custom.tsx">Semantic Customization</code>
+<code src="./demo/list-extra.tsx">List extra</code>
 
 ## API
 

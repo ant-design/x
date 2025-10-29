@@ -161,7 +161,7 @@ export default () => {
                       minRows: 2,
                     }}
                     suffix={false}
-                    initialSlotConfig={[
+                    slotConfig={[
                       { type: 'text', value: 'I want to go to' },
                       {
                         type: 'select',

@@ -19,7 +19,7 @@ const AgentInfo: {
   [key: string]: {
     icon: React.ReactNode;
     label: string;
-    slotConfig: SenderProps['initialSlotConfig'];
+    slotConfig: SenderProps['slotConfig'];
   };
 } = {
   deep_search: {
@@ -192,7 +192,6 @@ const App: React.FC = () => {
     <Flex vertical gap="middle">
       <Sender
         loading={loading}
-        key={activeAgentKey}
         ref={senderRef}
         placeholder="Press Enter to send message"
         header={senderHeader}
@@ -255,7 +254,7 @@ const App: React.FC = () => {
           setLoading(false);
           message.error('Cancel sending!');
         }}
-        initialSlotConfig={AgentInfo[activeAgentKey].slotConfig}
+        slotConfig={AgentInfo[activeAgentKey].slotConfig}
         autoSize={{ minRows: 3, maxRows: 6 }}
       />
     </Flex>

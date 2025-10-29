@@ -7,11 +7,9 @@ order: 4
 subtitle: 数据提供
 demo:
   cols: 1
-cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*22A2Qqn7OrEAAAAAAAAAAAAADgCCAQ/original
-coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*lQydTrtLz9YAAAAAAAAAAAAADgCCAQ/original
 ---
 
-`Chat Provider` 用于为 `useXChat` 提供统一的请求管理和数据格式转换，通过实现`AbstractChatProvider`，你可以将不同的模型提供商、或者Agent服务数据转换为统一的 `useXChat` 可消费的格式，从而实现不同模型、Agent之间的无缝接入和切换。
+`Chat Provider` 用于为 `useXChat` 提供统一的请求管理和数据格式转换，通过实现 抽象类 `AbstractChatProvider` (仅包含三个抽象方法)，你可以将不同的模型提供商、或者 Agentic 服务数据转换为统一的 `useXChat` 可消费的格式，从而实现不同模型、Agent之间的无缝接入和切换。
 
 ## 使用示例
 
@@ -39,7 +37,7 @@ const { onRequest, messages, isRequesting } = useXChat({
 });
 ```
 
-## 内置Provider
+## 内置 Provider(用于标准模型请求)
 
 `x-sdk` 内置了一些常用模型服务商的 `Chat Provider`，你可以直接使用。
 
@@ -47,7 +45,7 @@ const { onRequest, messages, isRequesting } = useXChat({
 
 `DefaultChatProvider` 是一个默认的 `Chat Provider`，几乎没有对数据进行转换，直接将请求参数和响应数据返回给 `useXChat`。它兼容了普通请求和stream请求的数据格式，你可以直接使用。
 
-<code src="./demos/x-chat/basic.tsx">DefaultChatProvider使用</code>
+<code src="./demos/x-chat/custom-request.tsx">DefaultChatProvider使用</code>
 
 ### OpenAIChatProvider
 
@@ -62,12 +60,6 @@ const { onRequest, messages, isRequesting } = useXChat({
 `DeepSeekChatProvider` 是 `DeepSeek` 兼容的 `Chat Provider`，和`OpenAIChatProvider`相差不大，唯一的差异点是，该Provider会自动解析DeepSeek特有的`reasoning_content`字段，作为模型思考过程的输出，配合`Think`组件可以快捷展示模型思考过程。详细的使用示例，可以参考[独立式样板间](https://x.ant.design/docs/playground/independent-cn)代码。
 
 <code src="./demos/x-chat/deepSeek.tsx">DeepSeekChatProvider</code>
-
-## 自定义Request
-
-当使用一些sdk（例如：`openai-node`,`@openrouter/ai-sdk-provider`）请求模型或者智能体时需要使用内置的Provider处理数据，需要自定义Request，可参考。
-
-<code src="../react/demo/openai-node.tsx" title="接入 openai" description="此示例仅展示使用X SDK接入 openai 的逻辑参考，并未对模型数据进行处理，需填写正确的apiKey再进行数据调试"></code>
 
 ## 自定义 Provider
 
@@ -114,4 +106,147 @@ abstract class AbstractChatProvider<ChatMessage, Input, Output> {
    */
   abstract transformMessage(info: TransformMessage<ChatMessage, Output>): ChatMessage;
 }
+```
+
+### 自定义Provider示例
+
+这是一个自定义Provider示例，用于展示如何自定义 `Chat Provider`，代码示例后有详细解析。
+
+```ts
+// 类型定义
+type CustomInput = {
+  query: string;
+};
+
+type CustomOutput = {
+  data: string;
+};
+
+type CustomMessage = {
+  content: string;
+  role: 'user' | 'assistant';
+};
+
+class CustomProvider<
+  ChatMessage extends CustomMessage = CustomMessage,
+  Input extends CustomInput = CustomInput,
+  Output extends CustomOutput = CustomOutput,
+> extends AbstractChatProvider<ChatMessage, Input, Output> {
+  transformParams(requestParams: Partial<Input>, options: XRequestOptions<Input, Output>): Input {
+    if (typeof requestParams !== 'object') {
+      throw new Error('requestParams must be an object');
+    }
+    return {
+      ...(options?.params || {}),
+      ...(requestParams || {}),
+    } as Input;
+  }
+  transformLocalMessage(requestParams: Partial<Input>): ChatMessage {
+    return {
+      content: requestParams.query,
+      role: 'user',
+    } as unknown as ChatMessage;
+  }
+  transformMessage(info: TransformMessage<ChatMessage, Output>): ChatMessage {
+    const { originMessage, chunk } = info || {};
+    if (!chunk) {
+      return {
+        content: originMessage?.content || '',
+        role: 'assistant',
+      } as ChatMessage;
+    }
+    const chunkJson = JSON.parse(chunk.data);
+    const content = originMessage?.content || '';
+    return {
+      content: `${content || ''}${chunkJson.data || ''}`,
+      role: 'assistant',
+    } as ChatMessage;
+  }
+}
+```
+
+#### 自定义 Provider 解析
+
+1、`Agentic` 服务流式接口 `https://xxx.agent.com/api/stream`。
+
+接口入参
+
+```json
+{
+  "query": "帮我总结今天的科技新闻"
+}
+```
+
+接口出参
+
+```json
+id:1
+data: "好的，"
+
+id:2
+data: "我将为您"
+
+id:3
+data: "总结今天"
+
+id:4
+data: "的科技新闻，"
+
+```
+
+2、那么根据接口可以明确 `CustomInput` 和 `CustomOutput` 类型。 `CustomOutput`
+
+```ts
+{
+  query: string;
+}
+```
+
+由于输出数据字符串只需要将data字符串转为JSON，然后将内部的data字段拼接，那么 `CustomOutput` 类型如下
+
+```ts
+{
+  data: string;
+}
+```
+
+3、我们期望 `useXChat` 生产的 messages 数据可以直接给 Bubble.List 消费，那么可以将 `CustomMessage` 定义如下：
+
+```ts
+{
+  content: string;
+  role: 'user' | 'assistant';
+}
+```
+
+4、然后继承 `AbstractChatProvider` 并实现其方法，得到 `CustomProvider`，`AbstractChatProvider` 内有且仅有三个方法需要实现。
+
+- `transformParams` 用于转换onRequest传入的参数，你可以和Provider实例化时request配置中的params进行合并或者额外处理。
+- `transformLocalMessage` 将onRequest传入的参数转换为本地（用户发送）的ChatMessage，用于用户发送消息渲染，同时会更新到messages，用于消息列表渲染。
+- `transformMessage` 可在更新返回数据时将数据做转换为ChatMessage数据类型，同时会更新到messages，用于消息列表渲染。
+
+代码可查看 [CustomProvider](/x-sdks/chat-provider-cn#自定义provider示例)
+
+5、最后我们可以将 `CustomProvider` 实例化并传入 `useXChat` 中，即可完成自定义 Provider 的使用。
+
+```tsx
+const [provider] = React.useState(
+  new CustomProvider({
+    request: XRequest<CustomInput, CustomOutput>('https://xxx.agent.com/api/stream', {
+      manual: true,
+    }),
+  }),
+);
+
+const { onRequest, messages, setMessages, setMessage, isRequesting, abort, onReload } = useXChat({
+  provider,
+});
+```
+
+6、发送请求
+
+```tsx
+onRequest({
+  query: '帮我总结今天的科技新闻',
+});
 ```

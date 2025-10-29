@@ -1,5 +1,5 @@
-import { unistUtilVisit } from 'dumi';
 import type { UnifiedTransformer } from 'dumi';
+import { unistUtilVisit } from 'dumi';
 
 let toSlug: typeof import('github-slugger').slug;
 

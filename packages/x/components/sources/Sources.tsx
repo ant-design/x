@@ -31,15 +31,16 @@ export interface SourcesProps
   className?: string;
   classNames?: Partial<Record<SemanticType, string>>;
   rootClassName?: string;
+  inline?: boolean;
+  items?: Array<SourcesItem>;
   title?: React.ReactNode;
   expandIconPosition?: 'start' | 'end';
-  items?: Array<SourcesItem>;
-  defaultExpanded?: boolean;
+  onClick?: (item: SourcesItem) => void;
+  popoverOverlayWidth?: number | string;
+  activeKey?: React.Key;
   expanded?: boolean;
   onExpand?: (expand: boolean) => void;
-  onClick?: (item: SourcesItem) => void;
-  inline?: boolean;
-  popoverOverlayWidth?: number | string;
+  defaultExpanded?: boolean;
 }
 
 type SourcesRef = {
@@ -56,12 +57,13 @@ const Sources: React.ForwardRefRenderFunction<SourcesRef, SourcesProps> = (props
     classNames = {},
     title,
     expandIconPosition = 'start',
-    items,
-    defaultExpanded = true,
-    expanded,
-    onExpand,
     children,
     inline = false,
+    expanded,
+    defaultExpanded,
+    onExpand,
+    activeKey,
+    items,
     popoverOverlayWidth = 300,
     ...restProps
   } = props;
@@ -105,7 +107,7 @@ const Sources: React.ForwardRefRenderFunction<SourcesRef, SourcesProps> = (props
 
   // ============================  Collapsible ============================
 
-  const [isExpand, setIsExpand] = useMergedState(defaultExpanded, {
+  const [isExpand, setIsExpand] = useMergedState<boolean>(defaultExpanded ?? true, {
     value: expanded,
     onChange: onExpand,
   });
@@ -154,7 +156,16 @@ const Sources: React.ForwardRefRenderFunction<SourcesRef, SourcesProps> = (props
     >
       {inline ? (
         <Popover
-          content={<CarouselCard prefixCls={prefixCls} items={items} onClick={props.onClick} />}
+          content={
+            <CarouselCard
+              className={classNames.content}
+              style={styles.content}
+              activeKey={activeKey}
+              prefixCls={prefixCls}
+              items={items}
+              onClick={props.onClick}
+            />
+          }
           open={inline ? undefined : false}
           styles={{ body: { width: popoverOverlayWidth } }}
           placement="top"

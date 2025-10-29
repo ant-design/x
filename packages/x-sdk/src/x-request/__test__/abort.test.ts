@@ -1,6 +1,6 @@
 import { enableFetchMocks } from 'jest-fetch-mock';
-import XRequest from '../index';
 import type { XRequestCallbacks, XRequestOptions } from '../index';
+import XRequest from '../index';
 
 enableFetchMocks();
 

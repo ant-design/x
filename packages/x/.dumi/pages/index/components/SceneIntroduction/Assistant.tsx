@@ -35,7 +35,7 @@ const roles: GetProp<typeof Bubble.List, 'role'> = {
         background: '#3877FF',
       },
     },
-    contentRender(content: any) {
+    contentRender(content: ChatInput) {
       return content?.query;
     },
   },
@@ -45,7 +45,7 @@ const useStyle = createStyles(({ token, css }) => {
   return {
     container: css`
       display: flex;
-      padding: ${token.paddingXL}px ${token.paddingMD}px;
+      padding: ${token.paddingXL}px 0px;
       box-sizing: border-box;
       flex-direction: column;
       gap: ${token.paddingSM}px;
@@ -145,7 +145,7 @@ const AssistantScene: React.FC = () => {
   });
 
   const placeholderMessage: BubbleItemType = {
-    role: '',
+    role: 'system',
     key: 'placeholder',
     variant: 'borderless',
     className: styles.placeholder_bubble,
@@ -205,6 +205,12 @@ const AssistantScene: React.FC = () => {
           <Bubble.List
             className={styles.bubble_list}
             role={roles}
+            styles={{
+              root: { height: 'calc(100% - 56px)' },
+              scroll: {
+                paddingInline: 20,
+              },
+            }}
             items={[
               placeholderMessage,
               ...messages.map(({ id, message, status }) => ({

@@ -207,8 +207,8 @@ export type BubbleItemType = (Omit<BubbleProps<any>, 'styles' | 'classNames'> &
   role: RemainRole | AnyStr;
   status?: `${MessageStatus}`;
   extra?: AnyObject;
-  styles?: Partial<Record<'bubble' | 'system' | 'divider', React.CSSProperties>>;
-  classNames?: Partial<Record<'bubble' | 'system' | 'divider', string>>;
+  styles?: Partial<Record<SemanticType | 'bubble' | 'system' | 'divider', React.CSSProperties>>;
+  classNames?: Partial<Record<SemanticType | 'bubble' | 'system' | 'divider', string>>;
 };
 
 export type RoleProps = Pick<
@@ -246,8 +246,10 @@ export type RoleType = Partial<
   >;
 export interface BubbleListProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'role'> {
   prefixCls?: string;
-  styles?: Partial<Record<SemanticType | 'bubble' | 'system' | 'divider', React.CSSProperties>>;
-  classNames?: Partial<Record<SemanticType | 'bubble' | 'system' | 'divider', string>>;
+  styles?: Partial<
+    Record<SemanticType | 'scroll' | 'bubble' | 'system' | 'divider', React.CSSProperties>
+  >;
+  classNames?: Partial<Record<SemanticType | 'scroll' | 'bubble' | 'system' | 'divider', string>>;
   rootClassName?: string;
   items: BubbleItemType[];
   autoScroll?: boolean;

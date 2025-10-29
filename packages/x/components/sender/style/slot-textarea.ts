@@ -3,7 +3,7 @@ import type { GenerateStyle } from '../../theme/cssinjs-utils';
 import type { SenderToken } from '.';
 
 const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
-  const { componentCls, antCls } = token;
+  const { componentCls, antCls, calc } = token;
   const slotCls = `${componentCls}-slot`;
   const antInputCls = `${antCls}-input`;
 
@@ -30,7 +30,9 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       margin: `0 ${unit(token.marginXXS)}`,
       verticalAlign: 'bottom',
       alignItems: 'center',
+      marginBlock: unit(calc(token.marginXXS).div(2).equal()),
       minHeight: token.controlHeightSM,
+      wordBreak: 'break-all',
     },
 
     [`${antInputCls}${slotInputCls}`]: {

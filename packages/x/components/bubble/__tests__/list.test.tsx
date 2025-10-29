@@ -147,7 +147,7 @@ describe('Bubble.List', () => {
       expect(bubbles[0]).toHaveClass('ant-bubble-start'); // ai role
     });
 
-    it('不支持 items 忽略 role 属性', () => {
+    it('支持 items 忽略 role 属性', () => {
       const roleConfig = {
         user: {
           placement: 'end' as const,
@@ -162,7 +162,7 @@ describe('Bubble.List', () => {
           placement: 'start', // 覆盖 role 配置
         },
         {
-          key: 'item1',
+          key: 'item2',
           content: '消息',
           placement: 'end', // 覆盖 role 配置
         } as any,
@@ -171,9 +171,8 @@ describe('Bubble.List', () => {
       const { container } = render(<BubbleList items={itemsWithOverride} role={roleConfig} />);
       const bubbles = container.querySelectorAll('.ant-bubble');
 
-      // item1 不渲染
-      expect(bubbles.length).toBe(1);
-      expect(bubbles[0].textContent).toBe('用户消息'); // user role
+      expect(bubbles.length).toBe(2);
+      expect(bubbles[0].textContent).toBe('消息'); // user role
     });
 
     it('应该支持 items 中的属性覆盖 role 配置', () => {
@@ -213,11 +212,12 @@ describe('Bubble.List', () => {
       ];
 
       // 即便不配置 role，也支持渲染 item.role = 'divider' 的分割线
-      const { container } = render(<BubbleList items={itemsWithOverride} />);
-      const listElement = container.querySelector('.ant-bubble-list') as HTMLDivElement;
+      const { container } = render(<BubbleList items={itemsWithOverride} autoScroll={false} />);
       const divider = container.querySelector('.ant-bubble-divider');
+      const bubbles = container.querySelectorAll('.ant-bubble');
 
-      expect(listElement.childNodes.length).toBe(2);
+      // 由于autoScroll=false，items不会被反转，应该有2个元素
+      expect(bubbles).toHaveLength(2);
       expect(divider).toBeInTheDocument();
     });
 
@@ -237,7 +237,7 @@ describe('Bubble.List', () => {
 
       // 即便不配置 role，也支持渲染 item.role = 'system' 的系统消息
       const { container } = render(<BubbleList items={itemsWithOverride} />);
-      const listElement = container.querySelector('.ant-bubble-list') as HTMLDivElement;
+      const listElement = container.querySelector('.ant-bubble-list-scroll-box') as HTMLDivElement;
       const system = container.querySelector('.ant-bubble-system');
 
       expect(listElement.childNodes.length).toBe(2);
@@ -282,8 +282,10 @@ describe('Bubble.List', () => {
 
     it('应该在 items 长度变化时自动滚动到底部', () => {
       const { rerender, container } = render(<BubbleList items={mockItems} />);
-      const listElement = container.querySelector('.ant-bubble-list') as HTMLDivElement;
-      listElement.scrollTo = mockScrollTo;
+      const scrollBoxElement = container.querySelector(
+        '.ant-bubble-list-scroll-box',
+      ) as HTMLDivElement;
+      scrollBoxElement.scrollTo = mockScrollTo;
 
       // 清除初始渲染时的调用
       mockScrollTo.mockClear();
@@ -296,19 +298,21 @@ describe('Bubble.List', () => {
 
     it('应该支持禁用自动滚动', async () => {
       const { container, rerender } = render(<BubbleList items={mockItems} autoScroll />);
-      const listElement = container.querySelector('.ant-bubble-list') as HTMLDivElement;
-      listElement.scrollTo = mockScrollTo;
+      const scrollBoxElement = container.querySelector(
+        '.ant-bubble-list-scroll-box',
+      ) as HTMLDivElement;
+      scrollBoxElement.scrollTo = mockScrollTo;
       // 清除初始渲染时的调用
       mockScrollTo.mockClear();
 
-      expect(listElement).toHaveClass('ant-bubble-list-autoscroll');
+      expect(scrollBoxElement).toHaveClass('ant-bubble-list-autoscroll');
 
       const newItems = [
         ...mockItems,
         { key: 'item4', role: 'user', content: '一段非常长的文本'.repeat(30), typing: true },
       ];
       rerender(<BubbleList items={newItems} autoScroll={false} />);
-      expect(listElement).not.toHaveClass('ant-bubble-list-autoscroll');
+      expect(scrollBoxElement).not.toHaveClass('ant-bubble-list-autoscroll');
       // 仅在添加消息时滚动到底部，后续动画过程不触发滚动
       expect(mockScrollTo).toHaveBeenCalledTimes(1);
 
@@ -319,9 +323,9 @@ describe('Bubble.List', () => {
     it('应该支持 onScroll 回调', () => {
       const onScroll = jest.fn();
       const { container } = render(<BubbleList items={mockItems} onScroll={onScroll} />);
-      const listElement = container.querySelector('.ant-bubble-list');
+      const scrollBoxElement = container.querySelector('.ant-bubble-list-scroll-box');
 
-      fireEvent.scroll(listElement!);
+      fireEvent.scroll(scrollBoxElement!);
 
       expect(onScroll).toHaveBeenCalled();
     });
@@ -348,10 +352,12 @@ describe('Bubble.List', () => {
       const { container, rerender } = render(
         <BubbleList items={mockItems} ref={ref} autoScroll={false} />,
       );
-      const listElement = container.querySelector('.ant-bubble-list') as HTMLDivElement;
+      const scrollBoxElement = container.querySelector(
+        '.ant-bubble-list-scroll-box',
+      ) as HTMLDivElement;
 
-      // 确保 listElement 有 scrollTo 方法
-      listElement.scrollTo = mockScrollTo;
+      // 确保 scrollBoxElement 有 scrollTo 方法
+      scrollBoxElement.scrollTo = mockScrollTo;
 
       act(() => {
         ref.current!.scrollTo({ top: 100, behavior: 'smooth' });
@@ -378,10 +384,12 @@ describe('Bubble.List', () => {
     it('应该支持通过 ref.scrollTo 快速滚动到顶部或底部', () => {
       const ref = React.createRef<BubbleListRef>();
       const { container, rerender } = render(<BubbleList items={mockItems} ref={ref} />);
-      const listElement = container.querySelector('.ant-bubble-list') as HTMLDivElement;
+      const scrollBoxElement = container.querySelector(
+        '.ant-bubble-list-scroll-box',
+      ) as HTMLDivElement;
 
-      // 确保 listElement 有 scrollTo 方法
-      listElement.scrollTo = mockScrollTo;
+      // 确保 scrollBoxElement 有 scrollTo 方法
+      scrollBoxElement.scrollTo = mockScrollTo;
 
       act(() => {
         ref.current!.scrollTo({ top: 'bottom' });
@@ -623,6 +631,268 @@ describe('Bubble.List', () => {
       rerender(<BubbleList items={mockItems} autoScroll={false} />);
 
       expect(container.querySelector('.ant-bubble-list')).toBeInTheDocument();
+    });
+  });
+
+  describe('高级测试覆盖率', () => {
+    describe('BubbleListItem 组件详细测试', () => {
+      it('不处理 role 为 undefined 的情况', () => {
+        const itemsWithoutRole: BubbleItemType[] = [
+          {
+            key: 'item1',
+            content: '无角色消息',
+          } as any,
+        ];
+
+        const { container } = render(<BubbleList items={itemsWithoutRole} />);
+        expect(container.querySelectorAll('.ant-bubble')).toHaveLength(1);
+      });
+
+      it('应该正确传递 styles 和 classNames 到 divider', () => {
+        const items: BubbleItemType[] = [
+          {
+            key: 'item1',
+            role: 'divider',
+            content: '分割线',
+            styles: { root: { color: 'red' } },
+            classNames: { root: 'custom-divider' },
+          },
+        ];
+
+        const { container } = render(<BubbleList items={items} autoScroll={false} />);
+        const divider = container.querySelector('.ant-bubble-divider');
+
+        expect(divider).toBeInTheDocument();
+        expect(divider).toHaveClass('custom-divider');
+      });
+
+      it('应该正确传递 styles 和 classNames 到 system', () => {
+        const items: BubbleItemType[] = [
+          {
+            key: 'item1',
+            role: 'system',
+            content: '系统消息',
+            styles: { root: { color: 'blue' } },
+            classNames: { root: 'custom-system' },
+          },
+        ];
+
+        const { container } = render(<BubbleList items={items} autoScroll={false} />);
+        const system = container.querySelector('.ant-bubble-system');
+
+        expect(system).toBeInTheDocument();
+        expect(system).toHaveClass('custom-system');
+      });
+
+      it('应该处理复杂的 styles 和 classNames 结构', () => {
+        const items: BubbleItemType[] = [
+          {
+            key: 'item1',
+            role: 'user',
+            content: '测试消息',
+            styles: {
+              root: { margin: '10px' },
+              bubble: { padding: '5px' },
+            },
+            classNames: {
+              root: 'custom-root',
+              bubble: 'custom-bubble',
+            },
+          },
+        ];
+
+        const { container } = render(<BubbleList items={items} autoScroll={false} />);
+        const bubble = container.querySelector('.ant-bubble');
+
+        expect(bubble).toBeInTheDocument();
+        expect(bubble).toHaveClass('custom-bubble');
+      });
+    });
+
+    describe('边界情况和错误处理', () => {
+      it('应该处理空数组的情况', () => {
+        const { container } = render(<BubbleList items={[]} />);
+        expect(container.querySelector('.ant-bubble-list')).toBeInTheDocument();
+        expect(container.querySelectorAll('.ant-bubble')).toHaveLength(0);
+      });
+
+      it('应该处理 role 配置为 null 的情况', () => {
+        const { container } = render(<BubbleList items={mockItems} role={null as any} />);
+        const bubbles = container.querySelectorAll('.ant-bubble');
+
+        expect(bubbles).toHaveLength(2);
+      });
+
+      it('应该处理 role 配置为 undefined 的情况', () => {
+        const { container } = render(<BubbleList items={mockItems} role={undefined as any} />);
+        const bubbles = container.querySelectorAll('.ant-bubble');
+
+        expect(bubbles).toHaveLength(2);
+      });
+
+      it('应该处理 role 配置函数返回空对象的情况', () => {
+        const roleConfig: RoleType = {
+          user: () => ({}) as any,
+          ai: () => ({ placement: 'start' as const }),
+        };
+
+        const items: BubbleItemType[] = [
+          { key: 'item1', role: 'user', content: '用户消息' },
+          { key: 'item2', role: 'ai', content: 'AI回复' },
+        ];
+
+        const { container } = render(
+          <BubbleList items={items} role={roleConfig} autoScroll={false} />,
+        );
+        const bubbles = container.querySelectorAll('.ant-bubble');
+
+        expect(bubbles).toHaveLength(2);
+      });
+    });
+
+    describe('样式和主题测试', () => {
+      it('应该正确应用自定义前缀的样式', () => {
+        const { container } = render(
+          <BubbleList
+            items={mockItems}
+            prefixCls="custom-prefix"
+            classNames={{ root: 'custom-root-class' }}
+            styles={{ root: { backgroundColor: 'yellow' } }}
+          />,
+        );
+
+        const listElement = container.querySelector('.custom-prefix-list');
+        expect(listElement).toBeInTheDocument();
+        expect(listElement).toHaveClass('custom-root-class');
+        expect(listElement).toHaveStyle({ backgroundColor: 'yellow' });
+      });
+
+      it('应该正确合并 classNames 和 styles', () => {
+        const { container } = render(
+          <BubbleList
+            items={mockItems}
+            className="global-class"
+            rootClassName="root-class"
+            style={{ color: 'red' }}
+            styles={{ root: { backgroundColor: 'blue' } }}
+            classNames={{ root: 'component-class' }}
+          />,
+        );
+
+        const listElement = container.querySelector('.ant-bubble-list');
+        expect(listElement).toHaveClass('global-class');
+        expect(listElement).toHaveClass('root-class');
+        expect(listElement).toHaveClass('component-class');
+        expect(listElement).toHaveStyle({ color: 'red', backgroundColor: 'blue' });
+      });
+    });
+
+    describe('事件处理和交互', () => {
+      it('应该处理滚动事件', () => {
+        const onScroll = jest.fn();
+        const { container } = render(
+          <BubbleList items={mockItems} onScroll={onScroll} autoScroll={false} />,
+        );
+
+        const scrollBox = container.querySelector('.ant-bubble-list-scroll-box');
+
+        // 模拟滚动事件
+        fireEvent.scroll(scrollBox!);
+
+        expect(onScroll).toHaveBeenCalled();
+      });
+
+      it('应该处理 ref 方法的边界情况', () => {
+        const ref = React.createRef<BubbleListRef>();
+        render(<BubbleList items={[]} ref={ref} />);
+
+        // 测试空列表时的滚动行为
+        act(() => {
+          ref.current!.scrollTo({ key: 'nonexistent', behavior: 'smooth' });
+        });
+
+        // 不应该抛出错误
+        expect(ref.current).toBeTruthy();
+      });
+    });
+
+    describe('性能和大规模数据测试', () => {
+      it('应该正确处理大量 items', () => {
+        const largeItems: BubbleItemType[] = Array.from({ length: 100 }, (_, i) => ({
+          key: `item-${i}`,
+          role: i % 2 === 0 ? 'user' : 'ai',
+          content: `消息 ${i}`,
+        }));
+
+        const { container } = render(<BubbleList items={largeItems} autoScroll={false} />);
+        const bubbles = container.querySelectorAll('.ant-bubble');
+
+        expect(bubbles).toHaveLength(100);
+      });
+
+      it('应该正确处理频繁更新的 items', () => {
+        const { container, rerender } = render(<BubbleList items={mockItems} />);
+
+        // 模拟频繁更新
+        for (let i = 0; i < 5; i++) {
+          const newItems: BubbleItemType[] = [
+            ...mockItems,
+            { key: `new-${i}`, role: 'user', content: `新消息 ${i}` },
+          ];
+          rerender(<BubbleList items={newItems} />);
+        }
+
+        const bubbles = container.querySelectorAll('.ant-bubble');
+        expect(bubbles.length).toBeGreaterThanOrEqual(2);
+      });
+    });
+
+    describe('role 配置函数测试', () => {
+      it('应该处理 role 配置函数返回空对象的情况', () => {
+        const roleConfig: RoleType = {
+          user: () => ({}) as any,
+          ai: () => ({ placement: 'start' as const }),
+        };
+
+        const items: BubbleItemType[] = [
+          { key: 'item1', role: 'user', content: '用户消息' },
+          { key: 'item2', role: 'ai', content: 'AI回复' },
+        ];
+
+        const { container } = render(
+          <BubbleList items={items} role={roleConfig} autoScroll={false} />,
+        );
+        const bubbles = container.querySelectorAll('.ant-bubble');
+
+        expect(bubbles).toHaveLength(2);
+      });
+
+      it('应该处理 role 配置函数返回复杂配置的情况', () => {
+        const roleConfig: RoleType = {
+          user: (item) => ({
+            placement: 'end' as const,
+            variant: 'outlined' as const,
+            ...item,
+          }),
+          ai: (item) => ({
+            placement: 'start' as const,
+            variant: 'filled' as const,
+            ...item,
+          }),
+        };
+
+        const items: BubbleItemType[] = [
+          { key: 'item1', role: 'user', content: '用户消息' },
+          { key: 'item2', role: 'ai', content: 'AI回复' },
+        ];
+
+        const { container } = render(
+          <BubbleList items={items} role={roleConfig} autoScroll={false} />,
+        );
+        const bubbles = container.querySelectorAll('.ant-bubble');
+
+        expect(bubbles).toHaveLength(2);
+      });
     });
   });
 });

@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
-import util from 'util';
+
 import type { DOMWindow } from 'jsdom';
+import util from 'util';
 import { setupStreamsPolyfill } from './setup-streams';
 
 const originConsoleErr = console.error;

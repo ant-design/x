@@ -41,7 +41,7 @@ const testCases = [
   {
     title: 'Render code block',
     markdown: "```javascript\nconsole.log('hello');\n```",
-    html: '<pre><code class="language-javascript">console.log(\'hello\');\n</code></pre>\n',
+    html: '<pre><code data-block="true" data-state="done" class="language-javascript">console.log(\'hello\');\n</code></pre>\n',
   },
   {
     title: 'Render link',
@@ -120,6 +120,8 @@ const testCases = [
   },
 ];
 
+const CustomParagraph = (props: React.PropsWithChildren) => <p>{props.children}</p>;
+
 type ITestCase = {
   markdown: string;
   html: string;
@@ -194,5 +196,251 @@ describe('XMarkdown', () => {
     const wrapper = container.firstChild as HTMLElement;
     expect(wrapper).toHaveClass('ant-x-markdown');
     expect(wrapper.innerHTML).toBe('<div>This is a paragraph.</div>\n');
+  });
+
+  describe('openLinksInNewTab', () => {
+    it('should add target="_blank" and rel="noopener noreferrer" to links with title when openLinksInNewTab is true', () => {
+      const { container } = render(
+        <XMarkdown content='[Google](https://www.google.com "Google Search")' openLinksInNewTab />,
+      );
+
+      const link = container.querySelector('a');
+      expect(link).toHaveAttribute('href', 'https://www.google.com');
+      expect(link).toHaveAttribute('target', '_blank');
+      expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+      expect(link).toHaveAttribute('title', 'Google Search');
+      expect(link).toHaveTextContent('Google');
+    });
+
+    it('should not add target="_blank" when openLinksInNewTab is false', () => {
+      const { container } = render(
+        <XMarkdown content="[Google](https://www.google.com)" openLinksInNewTab={false} />,
+      );
+
+      const link = container.querySelector('a');
+      expect(link).toHaveAttribute('href', 'https://www.google.com');
+      expect(link).not.toHaveAttribute('target');
+      expect(link).not.toHaveAttribute('rel');
+      expect(link).toHaveTextContent('Google');
+    });
+
+    it('should not add target="_blank" when openLinksInNewTab is not provided', () => {
+      const { container } = render(<XMarkdown content="[Google](https://www.google.com)" />);
+
+      const link = container.querySelector('a');
+      expect(link).toHaveAttribute('href', 'https://www.google.com');
+      expect(link).not.toHaveAttribute('target');
+      expect(link).not.toHaveAttribute('rel');
+      expect(link).toHaveTextContent('Google');
+    });
+  });
+
+  describe('animation', () => {
+    it('parent is not custom components', () => {
+      const { container } = render(
+        <XMarkdown content="This is Text." streaming={{ enableAnimation: true }} />,
+      );
+      expect(container).toMatchSnapshot();
+    });
+
+    it('parent is custom components', () => {
+      const { container } = render(
+        <XMarkdown
+          content="This is Text."
+          components={{ p: CustomParagraph }}
+          streaming={{ enableAnimation: true }}
+        />,
+      );
+      expect(container).toMatchSnapshot();
+    });
+  });
+});
+
+describe('custom code component props', () => {
+  const CodeComponent = jest.fn(() => null);
+
+  beforeEach(() => {
+    CodeComponent.mockClear();
+  });
+
+  it('should pass block=false and streamStatus=done for inline code', () => {
+    const markdownInlineCodeFinished = 'Inline `code` here';
+    render(<XMarkdown content={markdownInlineCodeFinished} components={{ code: CodeComponent }} />);
+    expect(CodeComponent).toHaveBeenCalledWith(
+      expect.objectContaining({ block: false, streamStatus: 'done' }),
+      undefined,
+    );
+  });
+
+  it('should pass block=true and streamStatus=loading for unfinished fenced code blocks start ```', () => {
+    const markdownFenceCodeUnfinished = '```';
+    render(
+      <XMarkdown content={markdownFenceCodeUnfinished} components={{ code: CodeComponent }} />,
+    );
+    expect(CodeComponent).toHaveBeenCalledWith(
+      expect.objectContaining({ block: true, streamStatus: 'loading' }),
+      undefined,
+    );
+  });
+
+  it('should pass block=true and streamStatus=loading for unfinished fenced code blocks', () => {
+    const markdownFenceCodeUnfinished = '```js\nconst a';
+    render(
+      <XMarkdown content={markdownFenceCodeUnfinished} components={{ code: CodeComponent }} />,
+    );
+    expect(CodeComponent).toHaveBeenCalledWith(
+      expect.objectContaining({ block: true, streamStatus: 'loading' }),
+      undefined,
+    );
+  });
+
+  it('should pass block=true and streamStatus=done for finished fenced code blocks', () => {
+    const markdownFencedCodeBlockFinished = '```js\nconst a = 1;\n```';
+    render(
+      <XMarkdown content={markdownFencedCodeBlockFinished} components={{ code: CodeComponent }} />,
+    );
+    expect(CodeComponent).toHaveBeenCalledWith(
+      expect.objectContaining({ block: true, streamStatus: 'done' }),
+      undefined,
+    );
+  });
+
+  it('should pass block=true and streamStatus=done for indented code blocks', () => {
+    const markdownIndentedCodeBlockUnfinished = '    const a = 1';
+    render(
+      <XMarkdown
+        content={markdownIndentedCodeBlockUnfinished}
+        components={{ code: CodeComponent }}
+      />,
+    );
+    expect(CodeComponent).toHaveBeenCalledWith(
+      expect.objectContaining({ block: true, streamStatus: 'done' }),
+      undefined,
+    );
+  });
+});
+
+describe('extensions', () => {
+  it('user extension should be called before default extension', () => {});
+
+  it('should use default link renderer when user renderer returns false', () => {
+    const { container } = render(
+      <XMarkdown
+        content="[Google](https://google.com)"
+        openLinksInNewTab
+        config={{
+          renderer: {
+            link() {
+              return false as any;
+            },
+          },
+        }}
+      />,
+    );
+    const link = container.querySelector('a');
+    expect(link).toBeInTheDocument();
+    expect(link).toHaveAttribute('href', 'https://google.com');
+    expect(link).toHaveAttribute('target', '_blank');
+    expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+    expect(link).toHaveTextContent('Google');
+  });
+
+  it('should use user link renderer when it returns non-false', () => {
+    const { container } = render(
+      <XMarkdown
+        content="[Google](https://google.com)"
+        config={{
+          renderer: {
+            link({ href, text }) {
+              return `<a href="${href}" class="custom-link">${text}</a>`;
+            },
+          },
+        }}
+      />,
+    );
+    const link = container.querySelector('a');
+    expect(link).toBeInTheDocument();
+    expect(link).toHaveClass('custom-link');
+    expect(link).not.toHaveAttribute('target');
+    expect(link).not.toHaveAttribute('rel');
+    expect(link).toHaveTextContent('Google');
+  });
+
+  it('should use default paragraph renderer when user renderer returns false', () => {
+    const { container } = render(
+      <XMarkdown
+        content="Hello"
+        paragraphTag="div"
+        config={{
+          renderer: {
+            paragraph() {
+              return false as any;
+            },
+          },
+        }}
+      />,
+    );
+    expect(container.querySelector('div')).toHaveTextContent('Hello');
+  });
+
+  it('should use user paragraph renderer when it returns non-false', () => {
+    const { container } = render(
+      <XMarkdown
+        content="Hello"
+        config={{
+          renderer: {
+            paragraph({ text }) {
+              return `<section>${text}</section>`;
+            },
+          },
+        }}
+      />,
+    );
+    expect(container.querySelector('section')).toHaveTextContent('Hello');
+  });
+
+  it('should use default code renderer when user renderer returns false', async () => {
+    const content = `\`\`\`javascript
+console.log("javascript");
+\`\`\``;
+    const { container } = render(
+      <XMarkdown
+        content={content}
+        config={{
+          renderer: {
+            code() {
+              return false as any;
+            },
+          },
+        }}
+      />,
+    );
+    const codeElement = container.querySelector('code');
+    expect(codeElement).toBeInTheDocument();
+    expect(codeElement).toHaveAttribute('data-block', 'true');
+    expect(codeElement).toHaveAttribute('data-state', 'done');
+  });
+
+  it('should use user code renderer when it returns non-false', () => {
+    const content = `\`\`\`js
+console.log(1);
+\`\`\``;
+    const { container } = render(
+      <XMarkdown
+        content={content}
+        config={{
+          renderer: {
+            code({ lang, text }) {
+              return `<pre><code class="lang-${lang}">${text.trim()}</code></pre>`;
+            },
+          },
+        }}
+      />,
+    );
+    const code = container.querySelector('pre code');
+    expect(code).toHaveClass('lang-js');
+    expect(code).toHaveTextContent('console.log(1);');
+    expect(code).not.toHaveAttribute('data-block');
+    expect(code).not.toHaveAttribute('data-state');
   });
 });

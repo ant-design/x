@@ -9,7 +9,7 @@ import {
   XModelResponse,
   XRequest,
 } from '@ant-design/x-sdk';
-import { Button, Flex, Tooltip } from 'antd';
+import { Button, Divider, Flex, Tooltip } from 'antd';
 import React from 'react';
 
 /**
@@ -45,9 +45,9 @@ const ThinkComponent = React.memo((props: ComponentProps) => {
 const role: BubbleListProps['role'] = {
   assistant: {
     placement: 'start',
-    contentRender(content: any) {
+    contentRender(content: string) {
       // Double '\n' in a mark will causes markdown parse as a new paragraph, so we need to replace it with a single '\n'
-      const newContent = content.replaceAll('\n\n', '<br/><br/>');
+      const newContent = content.replace('/\n\n/g', '<br/><br/>');
       return (
         <XMarkdown
           content={newContent}
@@ -77,7 +77,7 @@ const App = () => {
     }),
   );
   // Chat messages
-  const { onRequest, messages, isRequesting, abort, onReload } = useXChat({
+  const { onRequest, messages, setMessages, setMessage, isRequesting, abort, onReload } = useXChat({
     provider,
     requestFallback: (_, { error }) => {
       if (error.name === 'AbortError') {
@@ -98,11 +98,74 @@ const App = () => {
       };
     },
   });
+
+  const addUserMessage = () => {
+    setMessages([
+      ...messages,
+      {
+        id: Date.now(),
+        message: { role: 'user', content: 'Add a new user message' },
+        status: 'success',
+      },
+    ]);
+  };
+
+  const addAIMessage = () => {
+    setMessages([
+      ...messages,
+      {
+        id: Date.now(),
+        message: { role: 'assistant', content: 'Add a new AI response' },
+        status: 'success',
+      },
+    ]);
+  };
+
+  const addSystemMessage = () => {
+    setMessages([
+      ...messages,
+      {
+        id: Date.now(),
+        message: { role: 'system', content: 'Add a new system message' },
+        status: 'success',
+      },
+    ]);
+  };
+
+  const editLastMessage = () => {
+    const lastMessage = messages[messages.length - 1];
+    setMessage(lastMessage.id, {
+      message: { role: lastMessage.message.role, content: 'Edit a message' },
+    });
+  };
+
   return (
     <Flex vertical gap="middle">
+      <Flex vertical gap="middle">
+        <div>
+          Current status:{' '}
+          {isRequesting
+            ? 'Requesting'
+            : messages.length === 0
+              ? 'No messages yet, please enter a question and send'
+              : 'Q&A completed'}
+        </div>
+        <Flex align="center" gap="middle">
+          <Button disabled={!isRequesting} onClick={abort}>
+            abort
+          </Button>
+          <Button onClick={addUserMessage}>Add a user message</Button>
+          <Button onClick={addAIMessage}>Add an AI message</Button>
+          <Button onClick={addSystemMessage}>Add a system message</Button>
+          <Button disabled={!messages.length} onClick={editLastMessage}>
+            Edit the last message
+          </Button>
+        </Flex>
+      </Flex>
+      <Divider />
       <Bubble.List
         role={role}
-        style={{ maxHeight: 300 }}
+        style={{ height: 500 }}
         items={messages.map(({ id, message }) => ({
           key: id,
           role: message.role,

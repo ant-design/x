@@ -5,8 +5,8 @@ import {
   SmileOutlined,
   WarningOutlined,
 } from '@ant-design/icons';
-import { Prompts } from '@ant-design/x';
 import type { PromptsProps } from '@ant-design/x';
+import { Prompts } from '@ant-design/x';
 import React from 'react';
 
 const items: PromptsProps['items'] = [

@@ -2,9 +2,9 @@ import { Sender, type SenderProps } from '@ant-design/x';
 import { Button, Flex, GetRef, Slider } from 'antd';
 import React, { useRef, useState } from 'react';
 
-type SlotConfig = SenderProps['initialSlotConfig'];
+type SlotConfig = SenderProps['slotConfig'];
 
-const initialSlotConfig: SlotConfig = [
+const otherSlotConfig: SlotConfig = [
   { type: 'text', value: 'I want to go to' },
   {
     type: 'select',
@@ -43,6 +43,14 @@ const initialSlotConfig: SlotConfig = [
       return `between ${value[0]} and ${value[1]} RMB.`;
     },
   },
+  { type: 'text', value: ', and the number of people is ' },
+  {
+    type: 'input',
+    key: 'numberOfPeople',
+    props: {
+      placeholder: 'Please enter a number',
+    },
+  },
 ];
 
 const altSlotConfig: SlotConfig = [
@@ -61,13 +69,13 @@ const altSlotConfig: SlotConfig = [
 ];
 
 const slotConfig = {
-  initialSlotConfig,
+  otherSlotConfig,
   altSlotConfig,
 };
 
 const App: React.FC = () => {
   const [slotConfigKey, setSlotConfigKey] = useState<keyof typeof slotConfig | false>(
-    'initialSlotConfig',
+    'otherSlotConfig',
   );
   const senderRef = useRef<GetRef<typeof Sender>>(null);
   const [value, setValue] = useState<string>('');
@@ -90,6 +98,14 @@ const App: React.FC = () => {
           }}
         >
           Get Value
+        </Button>
+        <Button
+          onClick={() => {
+            const val = senderRef.current?.getValue();
+            setValue(val?.config ? JSON.stringify(val.config) : 'No value');
+          }}
+        >
+          Get Slot
         </Button>
         <Button
           onClick={() => {
@@ -146,10 +162,10 @@ const App: React.FC = () => {
         <Button
           onClick={() => {
             setSlotConfigKey((prev) => {
-              if (prev === 'initialSlotConfig') {
+              if (prev === 'otherSlotConfig') {
                 return 'altSlotConfig';
               }
-              return 'initialSlotConfig';
+              return 'otherSlotConfig';
             });
           }}
         >
@@ -185,6 +201,16 @@ const App: React.FC = () => {
         <Button
           onClick={() => {
             senderRef.current!.focus({
+              cursor: 'slot',
+              key: 'numberOfPeople',
+            });
+          }}
+        >
+          Focus at slot with key
+        </Button>
+        <Button
+          onClick={() => {
+            senderRef.current!.focus({
               cursor: 'all',
             });
           }}
@@ -210,12 +236,11 @@ const App: React.FC = () => {
       </Flex>
       {/* Sender 词槽填空示例 */}
       <Sender
-        key={slotConfigKey || 'default'}
         onSubmit={(value) => {
           setValue(value);
           setSlotConfigKey(false);
         }}
-        initialSlotConfig={slotConfigKey ? slotConfig?.[slotConfigKey] : []}
+        slotConfig={slotConfigKey ? slotConfig?.[slotConfigKey] : []}
         ref={senderRef}
       />
       {value ? `value:${value}` : null}

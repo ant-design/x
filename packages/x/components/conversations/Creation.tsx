@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import * as React from 'react';
 import type { ShortcutKeyInfoType } from '../_util/hooks/use-shortcut-keys';
 import useCreation, { CreationLabelProps } from './hooks/useCreation';
+
 type CreationLabelInfo = {
   shortcutKeyInfo?: ShortcutKeyInfoType;
   components: { CreationLabel: React.ComponentType<CreationLabelProps> };

@@ -1,7 +1,7 @@
+import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
-import { fireEvent, render, screen } from '@testing-library/react';
 import Suggestion, { type SuggestionProps } from '../index';
 
 describe('Sender Component', () => {

@@ -13,8 +13,8 @@ import {
   UsergroupAddOutlined,
   ZhihuOutlined,
 } from '@ant-design/icons';
-import { createStyles } from 'antd-style';
 import getAlphaColor from 'antd/es/theme/util/getAlphaColor';
+import { createStyles } from 'antd-style';
 import { FormattedMessage, Link } from 'dumi';
 import RcFooter from 'rc-footer';
 import type { FooterColumn } from 'rc-footer/lib/column';

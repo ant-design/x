@@ -1,9 +1,7 @@
+import type { ThemeConfig } from 'antd';
 import React from 'react';
 import { XProvider } from '../../components';
-
 import { render } from '../utils';
-
-import type { ThemeConfig } from 'antd';
 
 const themeOptions: ThemeConfig = {
   components: {

@@ -46,7 +46,7 @@ export default abstract class AbstractChatProvider<ChatMessage, Input, Output> {
    * 将onRequest传入的参数转换为本地（用户发送）的ChatMessage，用于消息渲染
    * @param requestParams onRequest传入的参数
    */
-  abstract transformLocalMessage(requestParams: Partial<Input>): ChatMessage;
+  abstract transformLocalMessage(requestParams: Partial<Input>): ChatMessage | ChatMessage[];
 
   /**
    * 可在更新返回数据时对messages做转换，同时会更新到messages

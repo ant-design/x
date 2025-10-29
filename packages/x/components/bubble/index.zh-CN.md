@@ -36,7 +36,11 @@ demo:
 
 ## 列表演示
 
-<code src="./demo/list.tsx">气泡列表</code> <code src="./demo/list-ref.tsx">气泡列表 Ref</code> <code src="./demo/semantic-list-custom.tsx">语义化自定义</code> <code src="./demo/list-extra.tsx">列表扩展参数</code>
+<!-- prettier-ignore -->
+<code src="./demo/list.tsx">气泡列表</code> 
+<code src="./demo/list-scroll.tsx">滚动条控制</code>
+<code src="./demo/semantic-list-custom.tsx">语义化自定义</code>
+<code src="./demo/list-extra.tsx">列表扩展参数</code>
 
 ## API
 
@@ -213,20 +217,12 @@ export type RoleType = Partial<
   >;
 ```
 
-#### Bubble.List autoScroll 顶对齐
+#### Bubble.List autoScroll
 
-**Bubble.List** 的自动滚动方案其实是一个很简单的倒序排序方案，因此在固定高度的 **Bubble.List** 中，如果消息内容较少，没有撑满 **Bubble.List** 的高度，那么你会发现消息内容是底对齐的。故不推荐给 **Bubble.List** 设置固定高度，而是为 **Bubble.List** 的父容器添加固定高度，并把父容器设置为弹性布局 `display: flex` 且 `flex-direction: column`，这样 **Bubble.List** 在内容较少时会使用自适应高度且顶对齐。正如 [气泡列表](#bubble-demo-list) 中体现的一样。
-
-```tsx
-<div style={{ height: 600, display: 'flex', flexDirection: 'column' }}>
-  <Bubble.List items={items} autoScroll />
-</div>
-```
-
-如果你不想使用弹性布局，那么你可以为 **Bubble.List** 设置最大高度 `max-height`，这样在内容较少时，**Bubble.List** 的高度会自适应，呈现顶对齐效果。
+**Bubble.List** 滚动托管需要设置 `height`，否则无法滚动。
 
 ```tsx
-<Bubble.List items={items} autoScroll style={{ maxHeight: 600 }} />
+<Bubble.List items={items} style={{ height: 500 }} autoScroll />
 ```
 
 #### Bubble.List role 与自定义 Bubble
