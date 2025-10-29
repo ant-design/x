@@ -1,5 +1,5 @@
 import katex, { type KatexOptions } from 'katex';
-import { TokenizerAndRendererExtension } from 'marked';
+import type { TokenizerAndRendererExtension } from 'marked';
 
 import 'katex/dist/katex.min.css';
 

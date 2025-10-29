@@ -38,7 +38,7 @@ const AnimationText = React.memo<AnimationTextProps>((props) => {
   return (
     <>
       {chunks.map((text, index) => (
-        <span style={animationStyle} key={`${index}-${text}`}>
+        <span style={animationStyle} key={`animation-text-${index}`}>
           {text}
         </span>
       ))}
