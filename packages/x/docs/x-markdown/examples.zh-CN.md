@@ -18,6 +18,7 @@ order: 2
 <code src="./demo/codeDemo/tokenizer.tsx" title="自定义标记"></code>
 <code src="./demo/codeDemo/walkTokens.tsx" title="标记处理"></code>
 <code src="./demo/codeDemo/renderer.tsx" title="渲染前处理"></code>
+<code src="./demo/codeDemo/link.tsx" title="中文链接处理"></code>
 <code src="./demo/codeDemo/xss.tsx"  title="XSS 防御"></code>
 <code src="./demo/codeDemo/open-links-in-new-tab.tsx" description="链接在新标签页打开。" title="新标签页打开链接"></code>
 
