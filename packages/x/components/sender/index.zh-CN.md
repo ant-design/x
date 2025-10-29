@@ -170,7 +170,7 @@ type ActionsComponents = {
 **示例：**
 
 ```jsx
-// ❌ 错误用法 slotConfig 为不受控用法
+// ❌ 错误用法, slotConfig 为不受控用法
 const [config, setConfig] = useState([]);
 <Sender
   slotConfig={config}
@@ -184,7 +184,7 @@ const [config, setConfig] = useState([]);
   key={key}
   slotConfig={config}
   onChange={(value, _e, config) => {
-    // 仅用于获取结构化内容,通过key控制重新渲染组件
+    // 仅用于获取结构化内容
     setKey('new_key')
   }}
 />

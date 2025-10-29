@@ -9,7 +9,7 @@ demo:
   cols: 1
 ---
 
-`Chat Provider` 用于为 `useXChat` 提供统一的请求管理和数据格式转换，通过实现`AbstractChatProvider`，你可以将不同的模型提供商、或者Agent服务数据转换为统一的 `useXChat` 可消费的格式，从而实现不同模型、Agent之间的无缝接入和切换。
+`Chat Provider` 用于为 `useXChat` 提供统一的请求管理和数据格式转换，通过实现 抽象类 `AbstractChatProvider` (仅包含三个抽象方法)，你可以将不同的模型提供商、或者 Agentic 服务数据转换为统一的 `useXChat` 可消费的格式，从而实现不同模型、Agent之间的无缝接入和切换。
 
 ## 使用示例
 
@@ -110,7 +110,23 @@ abstract class AbstractChatProvider<ChatMessage, Input, Output> {
 
 ### 自定义Provider示例
 
+这是一个自定义Provider示例，用于展示如何自定义 `Chat Provider`，代码示例后有详细解析。
+
 ```ts
+// 类型定义
+type CustomInput = {
+  query: string;
+};
+
+type CustomOutput = {
+  data: string;
+};
+
+type CustomMessage = {
+  content: string;
+  role: 'user' | 'assistant';
+};
+
 class CustomProvider<
   ChatMessage extends CustomMessage = CustomMessage,
   Input extends CustomInput = CustomInput,
@@ -203,7 +219,15 @@ data: "的科技新闻，"
 }
 ```
 
-4、最后我们可以将 `CustomProvider` 实例化并传入 `useXChat` 中，即可完成自定义 Provider 的使用。
+4、然后继承 `AbstractChatProvider` 并实现其方法，得到 `CustomProvider`，`AbstractChatProvider` 内有且仅有三个方法需要实现。
+
+- `transformParams` 用于转换onRequest传入的参数，你可以和Provider实例化时request配置中的params进行合并或者额外处理。
+- `transformLocalMessage` 将onRequest传入的参数转换为本地（用户发送）的ChatMessage，用于用户发送消息渲染，同时会更新到messages，用于消息列表渲染。
+- `transformMessage` 可在更新返回数据时将数据做转换为ChatMessage数据类型，同时会更新到messages，用于消息列表渲染。
+
+代码可查看 [CustomProvider](/x-sdks/chat-provider-cn#自定义provider示例)
+
+5、最后我们可以将 `CustomProvider` 实例化并传入 `useXChat` 中，即可完成自定义 Provider 的使用。
 
 ```tsx
 const [provider] = React.useState(
@@ -219,7 +243,7 @@ const { onRequest, messages, setMessages, setMessage, isRequesting, abort, onRel
 });
 ```
 
-5、发送请求
+6、发送请求
 
 ```tsx
 onRequest({

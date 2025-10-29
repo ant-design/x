@@ -9,7 +9,7 @@ demo:
   cols: 1
 ---
 
-`Chat Provider` is used to provide unified request management and data format conversion for `useXChat`. By implementing `AbstractChatProvider`, you can convert data from different model providers or Agent services into a unified format that `useXChat` can consume, enabling seamless integration and switching between different models and Agents.
+`Chat Provider` is used to provide unified request management and data format conversion for `useXChat`. By implementing `AbstractChatProvider`, you can convert data from different model providers or Agentic services into a unified format that `useXChat` can consume, enabling seamless integration and switching between different models and Agents.
 
 ## Usage Example
 
@@ -37,7 +37,7 @@ const { onRequest, messages, isRequesting } = useXChat({
 });
 ```
 
-## Built-in Providers
+## Built-in Providers (for standard model requests)
 
 `x-sdk` includes built-in `Chat Provider` implementations for common model service providers that you can use directly.
 
@@ -110,7 +110,23 @@ abstract class AbstractChatProvider<ChatMessage, Input, Output> {
 
 ### Custom Provider Example
 
+This is a custom Provider example to demonstrate how to create a custom `Chat Provider`. Detailed analysis follows the code example.
+
 ```ts
+// Type definitions
+type CustomInput = {
+  query: string;
+};
+
+type CustomOutput = {
+  data: string;
+};
+
+type CustomMessage = {
+  content: string;
+  role: 'user' | 'assistant';
+};
+
 class CustomProvider<
   ChatMessage extends CustomMessage = CustomMessage,
   Input extends CustomInput = CustomInput,
@@ -178,6 +194,8 @@ data: "tech news,"
 
 ```
 
+# `CustomInput`:
+
 2. Based on the interface, we can define `CustomInput` and `CustomOutput` types. `CustomOutput`:
 
 ```ts
@@ -203,7 +221,15 @@ Since the output data string only needs to convert the data string to JSON and t
 }
 ```
 
-4. Finally, we can instantiate `CustomProvider` and pass it to `useXChat` to complete the custom Provider usage.
+4. Then inherit `AbstractChatProvider` and implement its three required methods:
+
+- `transformParams`: Used to transform parameters passed to onRequest, you can merge or additionally process with params in the request configuration when instantiating the Provider.
+- `transformLocalMessage`: Converts parameters passed to onRequest into local (user-sent) ChatMessage for user-sent message rendering, and will also update to messages for message list rendering.
+- `transformMessage`: Can transform data into ChatMessage data type when updating return data, and will also update to messages for message list rendering.
+
+Code can be viewed at [CustomProvider](/x-sdks/chat-provider#custom-provider-example)
+
+5. Finally, we can instantiate `CustomProvider` and pass it to `useXChat` to complete the custom Provider usage.
 
 ```tsx
 const [provider] = React.useState(
@@ -219,7 +245,7 @@ const { onRequest, messages, setMessages, setMessage, isRequesting, abort, onRel
 });
 ```
 
-5.  Send request
+6. Send request
 
 ```tsx
 onRequest({
