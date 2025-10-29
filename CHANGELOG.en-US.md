@@ -16,6 +16,22 @@ tag: vVERSION
 
 ---
 
+## 2.0.0-alpha.12
+
+`2025-10-29`
+
+### @ant-design/x
+
+- 🆕 Attachments Ref adds `select` method to support file selection capability, while fixing the issue where the upload button still appears after reaching the maximum quantity when a maximum limit is set. [#1266](https://github.com/ant-design/x/pull/1266) by [@kimteayon](https://github.com/kimteayon).
+- 📖 Optimized the official site to enhance user experience. [#1269](https://github.com/ant-design/x/pull/1269) by [@kimteayon](https://github.com/kimteayon), [#1274](https://github.com/ant-design/x/pull/1274) by [@kimteayon](https://github.com/kimteayon).
+
+### @ant-design/x-markdown
+
+- 🐛 Fixed KaTeX plugin rendering failure and exception throwing issues, modified formula rendering rules to reduce rendering exceptions. [#1265](https://github.com/ant-design/x/pull/1265) by [@Div627](https://github.com/Div627).
+- 📖 Added code examples for XMarkDown handling Chinese links. [#1270](https://github.com/ant-design/x/pull/1270) by [@kimteayon](https://github.com/kimteayon).
+- 🆕 `code` and `pre` tags now return rendering status `streamStatus` and block-level identifier `block` during rendering. [#1272](https://github.com/ant-design/x/pull/1272) by [@Div627](https://github.com/Div627).
+- 🐛 Fixed duplicate DOM keys when rendering markdown. [#1273](https://github.com/ant-design/x/pull/1273) by [@Div627](https://github.com/Div627).
+
 ## 2.0.0-alpha.11
 
 `2025-10-27`
@@ -24,7 +40,7 @@ tag: vVERSION
 
 - 🆕 Sender slot configuration changed to mutable properties, in slot mode the `insert` method adds `replaceCharacters` parameter to support replacement functionality, and the `focus` method adds slot `key` configuration to support focusing on specific slots. [#1259](https://github.com/ant-design/x/pull/1259) by [@kimteayon](https://github.com/kimteayon).
 - 🆕 Sources inline mode supports specifying the currently active panel, adds `activeKey` property, and optimizes panel switching interaction styles for better experience. [#1261](https://github.com/ant-design/x/pull/1261) by [@kimteayon](https://github.com/kimteayon).
-- 🆕 Bubble.List optimized scrollbar layout, implementation, and semantics. [#1261](https://github.com/ant-design/x/pull/1261) by [@kimteayon](https://github.com/kimteayon).
+- 🆕 Bubble.List optimized scrollbar layout, implementation, and semantics. [#1263](https://github.com/ant-design/x/pull/1263) by [@kimteayon](https://github.com/kimteayon).
 
 ### @ant-design/x-markdown
 

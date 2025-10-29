@@ -15,6 +15,22 @@ tag: vVERSION
 
 ---
 
+## 2.0.0-alpha.12
+
+`2025-10-29`
+
+### @ant-design/x
+
+- 🆕 Attachments Ref 新增 `select` 方法支持选择文件的能力，同时修复设置了最大数量，并达到了最大数量后仍显示上传按钮的问题。[#1266](https://github.com/ant-design/x/pull/1266) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 📖 优化官网站点提升用户体验。[#1269](https://github.com/ant-design/x/pull/1269) 由 [@kimteayon](https://github.com/kimteayon) 提交、[#1274](https://github.com/ant-design/x/pull/1274) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+
+### @ant-design/x-markdown
+
+- 🐛 修复 KaTeX 插件渲染失败抛出异常的问题，修改公式渲染规则减少渲染异常。[#1265](https://github.com/ant-design/x/pull/1265) 由 [@Div627](https://github.com/Div627) 提交。
+- 📖 新增 XMarkDown 处理中文链接的代码示例。[#1270](https://github.com/ant-design/x/pull/1270) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🆕 `code` 和 `pre` 标签渲染时返回渲染状态 `streamStatus` 以及块级标识 `block`。[#1272](https://github.com/ant-design/x/pull/1272) 由 [@Div627](https://github.com/Div627) 提交。
+- 🐛 修复渲染 markdown 时重复的 dom key。[#1273](https://github.com/ant-design/x/pull/1273) 由 [@Div627](https://github.com/Div627) 提交。
+
 ## 2.0.0-alpha.11
 
 `2025-10-27`
@@ -23,7 +39,7 @@ tag: vVERSION
 
 - 🆕 Sender 词槽配置改为可变属性，词槽模式下 `insert` 方法新增 `replaceCharacters` 属性入参，支持新增替换功能，同时 `focus` 方法新增词槽 `key` 的配置以支持指定词槽的 `focus` 功能。[#1259](https://github.com/ant-design/x/pull/1259) 由 [@kimteayon](https://github.com/kimteayon) 提交。
 - 🆕 Sources 行内模式支持指定当前激活的面板，新增 `activeKey` 属性，同时优化面板切换的交互样式，使体验更好。[#1261](https://github.com/ant-design/x/pull/1261) 由 [@kimteayon](https://github.com/kimteayon) 提交。
-- 🆕 Bubble.List 对滚动条布局和实现以及语义化进行了优化。[#1261](https://github.com/ant-design/x/pull/1261) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🆕 Bubble.List 对滚动条布局和实现以及语义化进行了优化。[#1263](https://github.com/ant-design/x/pull/1263) 由 [@kimteayon](https://github.com/kimteayon) 提交。
 
 ### @ant-design/x-markdown
 
