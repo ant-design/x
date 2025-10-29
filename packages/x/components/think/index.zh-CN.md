@@ -38,6 +38,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/OMCvQZVW3eUAAAAA
 | defaultExpanded | 默认是否展开 | boolean | true | - |
 | expanded | 是否展开 | boolean | - | - |
 | onExpand | 展开事件 | (expand: boolean) => void | - | - |
+| blink | 闪动模式 | boolean | - | - |
 
 ## Semantic DOM
 

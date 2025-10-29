@@ -23,7 +23,7 @@ const App = () => {
         <Button onClick={handleClick}>Run</Button>
       </div>
       <br />
-      <Think title={title} loading={loading}>
+      <Think title={title} blink loading={loading}>
         This is deep thinking content.
       </Think>
       <br />

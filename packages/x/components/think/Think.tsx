@@ -40,6 +40,7 @@ export interface ThinkProps extends Omit<React.HTMLAttributes<HTMLDivElement>, '
   defaultExpanded?: boolean;
   expanded?: boolean;
   onExpand?: (expand: boolean) => void;
+  blink?: boolean;
 }
 
 type ThinkRef = {
@@ -61,6 +62,7 @@ const Think = React.forwardRef<ThinkRef, ThinkProps>((props, ref) => {
     defaultExpanded = true,
     expanded,
     onExpand,
+    blink,
     ...restProps
   } = props;
 
@@ -134,7 +136,13 @@ const Think = React.forwardRef<ThinkRef, ThinkProps>((props, ref) => {
         <div className={`${prefixCls}-status-icon`}>
           <StatusIcon loading={loading} icon={icon} />
         </div>
-        <div className={`${prefixCls}-status-text`}>{title}</div>
+        <div
+          className={classnames(`${prefixCls}-status-text`, {
+            [`${prefixCls}-motion-blink`]: blink,
+          })}
+        >
+          {title}
+        </div>
         <RightOutlined className={`${prefixCls}-status-down-icon`} rotate={isExpand ? 90 : 0} />
       </div>
       <CSSMotion {...collapseMotion} visible={isExpand}>

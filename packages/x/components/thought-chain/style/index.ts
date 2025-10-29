@@ -1,11 +1,10 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import { unit } from '@ant-design/cssinjs/lib/util';
 import { mergeToken } from '@ant-design/cssinjs-utils';
-import { genCollapseMotion } from '../../style/motion';
+import { blinkMotion, genCollapseMotion } from '../../style/motion';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
 import genThoughtChainItemStyle from './item';
-import genMotionStyle from './motion';
 
 export interface ComponentToken {
   /**
@@ -156,11 +155,12 @@ export default genStyleHooks<'ThoughtChain'>(
   'ThoughtChain',
   (token) => {
     const compToken = mergeToken<ThoughtChainToken>(token, {});
+    const { componentCls } = token;
     return [
       genThoughtChainStyle(compToken),
       genThoughtChainItemStyle(compToken),
       genCollapseMotion(compToken),
-      genMotionStyle(compToken),
+      blinkMotion(compToken, `${componentCls}-motion-blink`),
     ];
   },
   prepareComponentToken,
