@@ -109,6 +109,13 @@ class Renderer {
           .trim();
         props.className = classes || '';
 
+        if (name === 'code') {
+          const { 'data-block': block = 'false', 'data-state': codeStreamStatus = 'done' } =
+            attribs || {};
+          props.block = block === 'true';
+          props.streamStatus = codeStreamStatus === 'loading' ? 'loading' : 'done';
+        }
+
         if (children) {
           props.children = this.processChildren(children as DOMNode[], unclosedTags, cidRef);
         }
