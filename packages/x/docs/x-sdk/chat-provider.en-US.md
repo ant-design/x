@@ -194,9 +194,12 @@ data: "tech news,"
 
 ```
 
-2. Based on the interface, we can define `CustomInput` and `CustomOutput` types:
+<<<<<<< HEAD 2. Based on the interface, we can define `CustomInput` and `CustomOutput` types:
 
-`CustomInput`:
+# `CustomInput`:
+
+2. Based on the interface, we can define `CustomInput` and `CustomOutput` types. `CustomOutput`:
+   > > > > > > > 619b72aec8fcbcf17d57f50f64f899239f90cfd2
 
 ```ts
 {

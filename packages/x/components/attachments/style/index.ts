@@ -23,6 +23,9 @@ const genAttachmentsStyle: GenerateStyle<AttachmentsToken> = (token) => {
   const placeholderCls = `${componentCls}-placeholder`;
 
   return {
+    [`${componentCls}-rtl`]: {
+      direction: 'rtl',
+    },
     // ============================== Full Screen ==============================
     [dropAreaCls]: {
       position: 'absolute',
