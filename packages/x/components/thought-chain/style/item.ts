@@ -9,7 +9,7 @@ const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (token) => {
   return {
     [componentCls]: {
       [`& ${componentCls}-status`]: {
-        color: token.colorText,
+        color: 'inherit',
       },
       [`& ${componentCls}-status-error`]: {
         color: token.colorError,

@@ -70,6 +70,7 @@ demo:
 | description | 思维链描述 | React.ReactNode                             | -      | -    |
 | status      | 思维链状态 | 'loading' \| 'success' \| 'error'\| 'abort' | -      | -    |
 | variant     | 变体配置   | 'solid' \| 'outlined' \| 'text'             | -      | -    |
+| blink       | 闪动模式   | boolean                                     | -      | -    |
 
 ## Semantic DOM
 

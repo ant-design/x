@@ -119,7 +119,6 @@ const Item = React.forwardRef<ItemRef, ThoughtChainItemProps>((props, ref) => {
   const prefixCls = getPrefixCls('thought-chain', customizePrefixCls);
   const [hashId, cssVarCls] = useStyle(prefixCls);
   const itemCls = `${prefixCls}-item`;
-  const motionClassName = `${prefixCls}-motion`;
   // ============================ Render ============================
   return (
     <div
@@ -155,7 +154,7 @@ const Item = React.forwardRef<ItemRef, ThoughtChainItemProps>((props, ref) => {
       )}
       <div
         className={classnames(`${itemCls}-content`, {
-          [motionClassName]: blink,
+          [`${prefixCls}-motion-blink`]: blink,
         })}
       >
         {title && (

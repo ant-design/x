@@ -40,7 +40,7 @@ const genMotionStyle: GenerateStyle<ThoughtChainToken> = (token) => {
 
   return [
     {
-      [`${componentCls}-motion`]: {
+      [`${componentCls}-motion-blink`]: {
         backgroundPositionX: '9%',
         backgroundPositionY: '100%',
         backgroundClip: 'text',
