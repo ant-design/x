@@ -147,7 +147,7 @@ describe('Bubble.List', () => {
       expect(bubbles[0]).toHaveClass('ant-bubble-start'); // ai role
     });
 
-    it('不支持 items 忽略 role 属性', () => {
+    it('支持 items 忽略 role 属性', () => {
       const roleConfig = {
         user: {
           placement: 'end' as const,
@@ -171,9 +171,8 @@ describe('Bubble.List', () => {
       const { container } = render(<BubbleList items={itemsWithOverride} role={roleConfig} />);
       const bubbles = container.querySelectorAll('.ant-bubble');
 
-      // item1 不渲染
-      expect(bubbles.length).toBe(1);
-      expect(bubbles[0].textContent).toBe('用户消息'); // user role
+      expect(bubbles.length).toBe(2);
+      expect(bubbles[0].textContent).toBe('消息'); // user role
     });
 
     it('应该支持 items 中的属性覆盖 role 配置', () => {
@@ -637,7 +636,7 @@ describe('Bubble.List', () => {
 
   describe('高级测试覆盖率', () => {
     describe('BubbleListItem 组件详细测试', () => {
-      it('应该处理 role 为 undefined 的情况', () => {
+      it('不处理 role 为 undefined 的情况', () => {
         const itemsWithoutRole: BubbleItemType[] = [
           {
             key: 'item1',
@@ -646,7 +645,7 @@ describe('Bubble.List', () => {
         ];
 
         const { container } = render(<BubbleList items={itemsWithoutRole} />);
-        expect(container.querySelectorAll('.ant-bubble')).toHaveLength(0);
+        expect(container.querySelectorAll('.ant-bubble')).toHaveLength(1);
       });
 
       it('应该正确传递 styles 和 classNames 到 divider', () => {

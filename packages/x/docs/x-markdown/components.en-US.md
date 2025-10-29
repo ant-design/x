@@ -118,6 +118,6 @@ const UserCard = ({ domNode, streamStatus }) => {
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
 | domNode | Component DOM node from html-react-parser, containing parsed DOM node information | [`DOMNode`](https://github.com/remarkablemark/html-react-parser?tab=readme-ov-file#replace) | - |
-| streamStatus | Streaming status, `loading` indicates loading in progress, `done` indicates loading completed | `'loading' \| 'done'` | - |
+| streamStatus | Streaming rendering supports two states: `loading` indicates content is being loaded, and `done` indicates loading is complete. Currently, only HTML format and fenced code blocks are supported. Since indented code blocks lack a clear end delimiter, they always return the `done` state. | `'loading' \| 'done'` | - |
 | children | Content wrapped in the component, containing text content of DOM nodes | `React.ReactNode` | - |
 | rest | Component properties, supports all standard HTML attributes (such as `href`, `title`, `className`, etc.) and custom data attributes | `Record<string, any>` | - |

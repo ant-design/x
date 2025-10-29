@@ -32,6 +32,7 @@ const genBubbleListStyle: GenerateStyle<BubbleToken> = (token) => {
       scrollbarWidth: 'thin',
       maxHeight: '100%',
       flexDirection: 'column',
+      boxSizing: 'border-box',
       paddingInline: token.paddingXS,
       scrollbarColor: `${token.colorTextTertiary} transparent`,
       '&::-webkit-scrollbar': {

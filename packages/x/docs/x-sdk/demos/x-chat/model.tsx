@@ -139,8 +139,8 @@ const App = () => {
       </Flex>
 
       <Bubble.List
+        style={{ height: 500 }}
         role={role}
-        style={{ maxHeight: 300 }}
         items={messages.map(({ id, message, status }) => ({
           key: id,
           role: message.role,

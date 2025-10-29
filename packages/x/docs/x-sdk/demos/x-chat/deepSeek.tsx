@@ -165,7 +165,7 @@ const App = () => {
       <Divider />
       <Bubble.List
         role={role}
-        style={{ maxHeight: 300 }}
+        style={{ height: 500 }}
         items={messages.map(({ id, message }) => ({
           key: id,
           role: message.role,

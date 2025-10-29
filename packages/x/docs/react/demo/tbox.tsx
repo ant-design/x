@@ -132,7 +132,7 @@ class TboxProvider<
 
     const content = originMessage?.content || '';
     return {
-      content: content + chunk.text,
+      content: `${content || ''}${chunk.text || ''}`,
       role: 'assistant',
     } as ChatMessage;
   }
