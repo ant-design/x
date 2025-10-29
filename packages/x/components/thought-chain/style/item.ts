@@ -1,4 +1,5 @@
 import { unit } from '@ant-design/cssinjs/lib/util';
+import { FastColor } from '@ant-design/fast-color';
 import { initFadeMotion } from 'antd/es/style/motion';
 import type { GenerateStyle } from '../../theme/cssinjs-utils';
 import type { ThoughtChainToken } from '.';
@@ -103,6 +104,11 @@ const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (token) => {
         color: token.colorTextDescription,
         display: 'inline-block',
         whiteSpace: 'break-spaces',
+      },
+      [`& ${componentCls}-motion-blink`]: {
+        [`& ${itemCls}-description`]: {
+          color: new FastColor(token.colorTextDescription).setA(0.25).toHexString(),
+        },
       },
     },
   };
