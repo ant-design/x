@@ -28,7 +28,7 @@ tag: vVERSION
 ### @ant-design/x-markdown
 
 - 🐛 Fixed KaTeX plugin rendering failure and exception throwing issues, modified formula rendering rules to reduce rendering exceptions. [#1265](https://github.com/ant-design/x/pull/1265) by [@Div627](https://github.com/Div627).
-- 📖 Added code examples for XMarkDown handling Chinese links. [#1270](https://github.com/ant-design/x/pull/1270) by [@kimteayon](https://github.com/kimteayon).
+- 📖 Added code examples for XMarkdown handling Chinese links. [#1270](https://github.com/ant-design/x/pull/1270) by [@kimteayon](https://github.com/kimteayon).
 - 🆕 `code` and `pre` tags now return rendering status `streamStatus` and block-level identifier `block` during rendering. [#1272](https://github.com/ant-design/x/pull/1272) by [@Div627](https://github.com/Div627).
 - 🐛 Fixed duplicate DOM keys when rendering markdown. [#1273](https://github.com/ant-design/x/pull/1273) by [@Div627](https://github.com/Div627).
 
@@ -44,8 +44,8 @@ tag: vVERSION
 
 ### @ant-design/x-markdown
 
-- 🐛 Fixed inconsistent parameter structure issue for XMarkDown custom components under different states. [#1260](https://github.com/ant-design/x/pull/1260) by [@Div627](https://github.com/Div627).
-- 📖 Added XMarkDown code examples. [#1262](https://github.com/ant-design/x/pull/1262) by [@kimteayon](https://github.com/kimteayon).
+- 🐛 Fixed inconsistent parameter structure issue for XMarkdown custom components under different states. [#1260](https://github.com/ant-design/x/pull/1260) by [@Div627](https://github.com/Div627).
+- 📖 Added XMarkdown code examples. [#1262](https://github.com/ant-design/x/pull/1262) by [@kimteayon](https://github.com/kimteayon).
 
 ## 2.0.0-alpha.10
 

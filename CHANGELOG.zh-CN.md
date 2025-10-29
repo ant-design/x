@@ -27,9 +27,9 @@ tag: vVERSION
 ### @ant-design/x-markdown
 
 - 🐛 修复 KaTeX 插件渲染失败抛出异常的问题，修改公式渲染规则减少渲染异常。[#1265](https://github.com/ant-design/x/pull/1265) 由 [@Div627](https://github.com/Div627) 提交。
-- 📖 新增 XMarkDown 处理中文链接的代码示例。[#1270](https://github.com/ant-design/x/pull/1270) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 📖 新增 XMarkdown 处理中文链接的代码示例。[#1270](https://github.com/ant-design/x/pull/1270) 由 [@kimteayon](https://github.com/kimteayon) 提交。
 - 🆕 `code` 和 `pre` 标签渲染时返回渲染状态 `streamStatus` 以及块级标识 `block`。[#1272](https://github.com/ant-design/x/pull/1272) 由 [@Div627](https://github.com/Div627) 提交。
-- 🐛 修复渲染 markdown 时重复的 dom key。[#1273](https://github.com/ant-design/x/pull/1273) 由 [@Div627](https://github.com/Div627) 提交。
+- 🐛 修复渲染 markdown 时重复的 DOM key。[#1273](https://github.com/ant-design/x/pull/1273) 由 [@Div627](https://github.com/Div627) 提交。
 
 ## 2.0.0-alpha.11
 
@@ -43,8 +43,8 @@ tag: vVERSION
 
 ### @ant-design/x-markdown
 
-- 🐛 修复 XMarkDown 自定义组件不同状态下入参结构不一致问题。[#1260](https://github.com/ant-design/x/pull/1260) 由 [@Div627](https://github.com/Div627) 提交。
-- 📖 新增 XMarkDown 代码示例。[#1262](https://github.com/ant-design/x/pull/1262) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🐛 修复 XMarkdown 自定义组件不同状态下入参结构不一致问题。[#1260](https://github.com/ant-design/x/pull/1260) 由 [@Div627](https://github.com/Div627) 提交。
+- 📖 新增 XMarkdown 代码示例。[#1262](https://github.com/ant-design/x/pull/1262) 由 [@kimteayon](https://github.com/kimteayon) 提交。
 
 ## 2.0.0-alpha.10
 
