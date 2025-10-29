@@ -46,10 +46,13 @@ class Parser {
   constructor(options: ParserOptions = {}) {
     const { markedConfig = {} } = options;
     this.options = options;
-    this.markdownInstance = new Marked(markedConfig);
+    this.markdownInstance = new Marked();
+
     this.configureLinkRenderer();
     this.configureParagraphRenderer();
     this.configureCodeRenderer();
+    // user config at last
+    this.markdownInstance.use(markedConfig);
   }
 
   private configureLinkRenderer() {
