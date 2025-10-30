@@ -110,7 +110,12 @@ const ForwardActions = React.forwardRef<ActionsRef, ActionsProps>((props, ref) =
               >
                 {items.map((item, idx) => {
                   return (
-                    <Item item={item} onClick={onClick} dropdownProps={dropdownProps} key={idx} />
+                    <Item
+                      item={item}
+                      onClick={onClick}
+                      dropdownProps={dropdownProps}
+                      key={item.key || idx}
+                    />
                   );
                 })}
               </div>
