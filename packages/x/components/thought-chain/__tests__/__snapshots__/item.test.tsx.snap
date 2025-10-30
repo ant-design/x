@@ -47,3 +47,35 @@ exports[`ThoughtChain.Item Component test theme component should be rendered cor
   </div>
 </div>
 `;
+
+exports[`ThoughtChain.Item rtl render component should be rendered correctly in RTL direction 1`] = `
+<div
+  class="ant-thought-chain css-var-root ant-thought-chain-item ant-thought-chain-item-solid ant-thought-chain-item-rtl"
+>
+  <div
+    class="ant-thought-chain-item-content"
+  >
+    <div
+      class="ant-thought-chain-item-title"
+    >
+      Test
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ThoughtChain.Item test theme component should be rendered correctly when configuring the theme.components 1`] = `
+<div
+  class="ant-thought-chain css-var-_r_3_ ant-thought-chain-item ant-thought-chain-item-solid"
+>
+  <div
+    class="ant-thought-chain-item-content"
+  >
+    <div
+      class="ant-thought-chain-item-title"
+    >
+      Test
+    </div>
+  </div>
+</div>
+`;
