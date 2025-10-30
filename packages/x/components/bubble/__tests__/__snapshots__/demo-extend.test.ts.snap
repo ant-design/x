@@ -165,7 +165,11 @@ exports[`renders components/bubble/demo/animation.tsx extend context correctly 1
 </div>
 `;
 
-exports[`renders components/bubble/demo/animation.tsx extend context correctly 2`] = `[]`;
+exports[`renders components/bubble/demo/animation.tsx extend context correctly 2`] = `
+[
+  "Warning: [Ant Design CSS-in-JS] Error in Bubble-Bubble-ant-bubble-anticon: You seem to be using a value for 'content' without quotes, try replacing it with \`content: '"var(--ant-bubble-typing-content)"'\`. Selector: .ant-bubble | &-typing:last-child::after",
+]
+`;
 
 exports[`renders components/bubble/demo/basic.tsx extend context correctly 1`] = `
 <div
@@ -329,7 +333,11 @@ exports[`renders components/bubble/demo/basic.tsx extend context correctly 1`] =
 </div>
 `;
 
-exports[`renders components/bubble/demo/basic.tsx extend context correctly 2`] = `[]`;
+exports[`renders components/bubble/demo/basic.tsx extend context correctly 2`] = `
+[
+  "Warning: [Ant Design CSS-in-JS] Error in Bubble-Bubble-ant-bubble-anticon: You seem to be using a value for 'content' without quotes, try replacing it with \`content: '"var(--ant-bubble-typing-content)"'\`. Selector: .ant-bubble | &-typing:last-child::after",
+]
+`;
 
 exports[`renders components/bubble/demo/custom-content.tsx extend context correctly 1`] = `
 <div
@@ -385,7 +393,11 @@ exports[`renders components/bubble/demo/custom-content.tsx extend context correc
 </div>
 `;
 
-exports[`renders components/bubble/demo/custom-content.tsx extend context correctly 2`] = `[]`;
+exports[`renders components/bubble/demo/custom-content.tsx extend context correctly 2`] = `
+[
+  "Warning: [Ant Design CSS-in-JS] Error in Bubble-Bubble-ant-bubble-anticon: You seem to be using a value for 'content' without quotes, try replacing it with \`content: '"var(--ant-bubble-typing-content)"'\`. Selector: .ant-bubble | &-typing:last-child::after",
+]
+`;
 
 exports[`renders components/bubble/demo/divider.tsx extend context correctly 1`] = `
 <div
@@ -572,7 +584,11 @@ exports[`renders components/bubble/demo/divider.tsx extend context correctly 1`]
 </div>
 `;
 
-exports[`renders components/bubble/demo/divider.tsx extend context correctly 2`] = `[]`;
+exports[`renders components/bubble/demo/divider.tsx extend context correctly 2`] = `
+[
+  "Warning: [Ant Design CSS-in-JS] Error in Bubble-Bubble-ant-bubble-anticon: You seem to be using a value for 'content' without quotes, try replacing it with \`content: '"var(--ant-bubble-typing-content)"'\`. Selector: .ant-bubble | &-typing:last-child::after",
+]
+`;
 
 exports[`renders components/bubble/demo/editable.tsx extend context correctly 1`] = `
 <div
@@ -791,7 +807,11 @@ exports[`renders components/bubble/demo/editable.tsx extend context correctly 1`
 </div>
 `;
 
-exports[`renders components/bubble/demo/editable.tsx extend context correctly 2`] = `[]`;
+exports[`renders components/bubble/demo/editable.tsx extend context correctly 2`] = `
+[
+  "Warning: [Ant Design CSS-in-JS] Error in Bubble-Bubble-ant-bubble-anticon: You seem to be using a value for 'content' without quotes, try replacing it with \`content: '"var(--ant-bubble-typing-content)"'\`. Selector: .ant-bubble | &-typing:last-child::after",
+]
+`;
 
 exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] = `
 <div
@@ -1452,7 +1472,11 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
 </div>
 `;
 
-exports[`renders components/bubble/demo/footer.tsx extend context correctly 2`] = `[]`;
+exports[`renders components/bubble/demo/footer.tsx extend context correctly 2`] = `
+[
+  "Warning: [Ant Design CSS-in-JS] Error in Bubble-Bubble-ant-bubble-anticon: You seem to be using a value for 'content' without quotes, try replacing it with \`content: '"var(--ant-bubble-typing-content)"'\`. Selector: .ant-bubble | &-typing:last-child::after",
+]
+`;
 
 exports[`renders components/bubble/demo/header.tsx extend context correctly 1`] = `
 <div
@@ -1567,7 +1591,11 @@ exports[`renders components/bubble/demo/header.tsx extend context correctly 1`] 
 </div>
 `;
 
-exports[`renders components/bubble/demo/header.tsx extend context correctly 2`] = `[]`;
+exports[`renders components/bubble/demo/header.tsx extend context correctly 2`] = `
+[
+  "Warning: [Ant Design CSS-in-JS] Error in Bubble-Bubble-ant-bubble-anticon: You seem to be using a value for 'content' without quotes, try replacing it with \`content: '"var(--ant-bubble-typing-content)"'\`. Selector: .ant-bubble | &-typing:last-child::after",
+]
+`;
 
 exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = `
 <div
@@ -2085,7 +2113,11 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
 </div>
 `;
 
-exports[`renders components/bubble/demo/list.tsx extend context correctly 2`] = `[]`;
+exports[`renders components/bubble/demo/list.tsx extend context correctly 2`] = `
+[
+  "Warning: [Ant Design CSS-in-JS] Error in Bubble-Bubble-ant-bubble-anticon: You seem to be using a value for 'content' without quotes, try replacing it with \`content: '"var(--ant-bubble-typing-content)"'\`. Selector: .ant-bubble | &-typing:last-child::after",
+]
+`;
 
 exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 1`] = `
 <div
@@ -2680,7 +2712,11 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
 </div>
 `;
 
-exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 2`] = `[]`;
+exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 2`] = `
+[
+  "Warning: [Ant Design CSS-in-JS] Error in Bubble-Bubble-ant-bubble-anticon: You seem to be using a value for 'content' without quotes, try replacing it with \`content: '"var(--ant-bubble-typing-content)"'\`. Selector: .ant-bubble | &-typing:last-child::after",
+]
+`;
 
 exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly 1`] = `
 <div
@@ -3781,7 +3817,11 @@ exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly
 </div>
 `;
 
-exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly 2`] = `[]`;
+exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly 2`] = `
+[
+  "Warning: [Ant Design CSS-in-JS] Error in Bubble-Bubble-ant-bubble-anticon: You seem to be using a value for 'content' without quotes, try replacing it with \`content: '"var(--ant-bubble-typing-content)"'\`. Selector: .ant-bubble | &-typing:last-child::after",
+]
+`;
 
 exports[`renders components/bubble/demo/loading.tsx extend context correctly 1`] = `
 <div
@@ -3832,7 +3872,11 @@ exports[`renders components/bubble/demo/loading.tsx extend context correctly 1`]
 </div>
 `;
 
-exports[`renders components/bubble/demo/loading.tsx extend context correctly 2`] = `[]`;
+exports[`renders components/bubble/demo/loading.tsx extend context correctly 2`] = `
+[
+  "Warning: [Ant Design CSS-in-JS] Error in Bubble-Bubble-ant-bubble-anticon: You seem to be using a value for 'content' without quotes, try replacing it with \`content: '"var(--ant-bubble-typing-content)"'\`. Selector: .ant-bubble | &-typing:last-child::after",
+]
+`;
 
 exports[`renders components/bubble/demo/markdown.tsx extend context correctly 1`] = `
 <div
@@ -3892,7 +3936,11 @@ exports[`renders components/bubble/demo/markdown.tsx extend context correctly 1`
 </div>
 `;
 
-exports[`renders components/bubble/demo/markdown.tsx extend context correctly 2`] = `[]`;
+exports[`renders components/bubble/demo/markdown.tsx extend context correctly 2`] = `
+[
+  "Warning: [Ant Design CSS-in-JS] Error in Bubble-Bubble-ant-bubble-anticon: You seem to be using a value for 'content' without quotes, try replacing it with \`content: '"var(--ant-bubble-typing-content)"'\`. Selector: .ant-bubble | &-typing:last-child::after",
+]
+`;
 
 exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context correctly 1`] = `
 <div
@@ -4062,7 +4110,11 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context 
 </div>
 `;
 
-exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context correctly 2`] = `[]`;
+exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context correctly 2`] = `
+[
+  "Warning: [Ant Design CSS-in-JS] Error in Bubble-Bubble-ant-bubble-anticon: You seem to be using a value for 'content' without quotes, try replacing it with \`content: '"var(--ant-bubble-typing-content)"'\`. Selector: .ant-bubble | &-typing:last-child::after",
+]
+`;
 
 exports[`renders components/bubble/demo/sider-and-placement.tsx extend context correctly 1`] = `
 <div
@@ -4297,7 +4349,11 @@ exports[`renders components/bubble/demo/sider-and-placement.tsx extend context c
 </div>
 `;
 
-exports[`renders components/bubble/demo/sider-and-placement.tsx extend context correctly 2`] = `[]`;
+exports[`renders components/bubble/demo/sider-and-placement.tsx extend context correctly 2`] = `
+[
+  "Warning: [Ant Design CSS-in-JS] Error in Bubble-Bubble-ant-bubble-anticon: You seem to be using a value for 'content' without quotes, try replacing it with \`content: '"var(--ant-bubble-typing-content)"'\`. Selector: .ant-bubble | &-typing:last-child::after",
+]
+`;
 
 exports[`renders components/bubble/demo/stream.tsx extend context correctly 1`] = `
 <div
@@ -4455,7 +4511,11 @@ exports[`renders components/bubble/demo/stream.tsx extend context correctly 1`] 
 </div>
 `;
 
-exports[`renders components/bubble/demo/stream.tsx extend context correctly 2`] = `[]`;
+exports[`renders components/bubble/demo/stream.tsx extend context correctly 2`] = `
+[
+  "Warning: [Ant Design CSS-in-JS] Error in Bubble-Bubble-ant-bubble-anticon: You seem to be using a value for 'content' without quotes, try replacing it with \`content: '"var(--ant-bubble-typing-content)"'\`. Selector: .ant-bubble | &-typing:last-child::after",
+]
+`;
 
 exports[`renders components/bubble/demo/system.tsx extend context correctly 1`] = `
 <div
@@ -4538,7 +4598,11 @@ exports[`renders components/bubble/demo/system.tsx extend context correctly 1`] 
 </div>
 `;
 
-exports[`renders components/bubble/demo/system.tsx extend context correctly 2`] = `[]`;
+exports[`renders components/bubble/demo/system.tsx extend context correctly 2`] = `
+[
+  "Warning: [Ant Design CSS-in-JS] Error in Bubble-Bubble-ant-bubble-anticon: You seem to be using a value for 'content' without quotes, try replacing it with \`content: '"var(--ant-bubble-typing-content)"'\`. Selector: .ant-bubble | &-typing:last-child::after",
+]
+`;
 
 exports[`renders components/bubble/demo/variant-and-shape.tsx extend context correctly 1`] = `
 <div
@@ -4735,4 +4799,8 @@ exports[`renders components/bubble/demo/variant-and-shape.tsx extend context cor
 </div>
 `;
 
-exports[`renders components/bubble/demo/variant-and-shape.tsx extend context correctly 2`] = `[]`;
+exports[`renders components/bubble/demo/variant-and-shape.tsx extend context correctly 2`] = `
+[
+  "Warning: [Ant Design CSS-in-JS] Error in Bubble-Bubble-ant-bubble-anticon: You seem to be using a value for 'content' without quotes, try replacing it with \`content: '"var(--ant-bubble-typing-content)"'\`. Selector: .ant-bubble | &-typing:last-child::after",
+]
+`;

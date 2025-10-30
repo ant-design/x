@@ -7,10 +7,30 @@ import { genDividerBubbleStyle } from './divider';
 import genBubbleListStyle from './list';
 import { genSlotStyle } from './slot';
 import { genSystemBubbleStyle } from './system';
-export const prepareComponentToken: GetDefaultToken<'Bubble'> = () => ({});
 
-// biome-ignore lint/suspicious/noEmptyInterface: ComponentToken need to be empty by default
-export interface ComponentToken {}
+export const prepareComponentToken: GetDefaultToken<'Bubble'> = () => ({
+  typingContent: '"|"',
+  typingAnimationName: 'cursorBlink',
+  typingAnimationDuration: '0.8s',
+});
+
+export interface ComponentToken {
+  /**
+   * @desc 打字动画内容
+   * @descEN Typing animation content
+   */
+  typingContent: string;
+  /**
+   * @desc 打字动画持续时间
+   * @descEN Typing animation duration
+   */
+  typingAnimationDuration: string;
+  /**
+   * @desc 打字动画名称
+   * @descEN Typing animation name
+   */
+  typingAnimationName: string;
+}
 
 export default genStyleHooks<'Bubble'>(
   'Bubble',

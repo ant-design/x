@@ -135,11 +135,6 @@ interface BubbleAnimationOption {
    * @default true
    */
   keepPrefix?: boolean;
-  /**
-   * @description Suffix UI for typewriter effect
-   * @default undefined
-   */
-  suffix?: React.ReactNode;
 }
 ```
 

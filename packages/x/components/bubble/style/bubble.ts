@@ -43,113 +43,126 @@ const fadeIn = new Keyframes('fadeIn', {
 export interface BubbleToken extends FullToken<'Bubble'> {}
 
 const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
-  const { componentCls, fontSize, lineHeight, paddingSM, colorText, calc } = token;
-  return {
-    [componentCls]: {
-      display: 'flex',
-      columnGap: paddingSM,
+  const {
+    componentCls,
+    fontSize,
+    typingAnimationDuration,
+    typingAnimationName,
+    lineHeight,
+    paddingSM,
+    colorText,
+    calc,
+    typingContent,
+  } = token;
 
-      [`&${componentCls}-rtl`]: {
-        direction: 'rtl',
-      },
-      [`&${componentCls}-loading`]: {
-        alignItems: 'center',
-      },
-
-      [`& ${componentCls}-body`]: {
+  return [
+    {
+      [componentCls]: {
         display: 'flex',
-        flexDirection: 'column',
-      },
+        columnGap: paddingSM,
 
-      // =========================== Content =============================
-      [`& ${componentCls}-content`]: {
-        position: 'relative',
-        boxSizing: 'border-box',
-        minWidth: 0,
-        maxWidth: '100%',
-        minHeight: calc(paddingSM).mul(2).add(calc(lineHeight).mul(fontSize)).equal(),
-        paddingInline: `${unit(token.padding)}`,
-        paddingBlock: `${unit(paddingSM)}`,
-
-        color: colorText,
-        fontSize: token.fontSize,
-        lineHeight: token.lineHeight,
-        wordBreak: 'break-word',
-        '&-string': {
-          whiteSpace: 'pre-wrap',
+        [`&${componentCls}-rtl`]: {
+          direction: 'rtl',
         },
-      },
-      '&-typing:last-child::after': {
-        content: '"|"',
-        fontWeight: 900,
-        userSelect: 'none',
-        opacity: 1,
-        marginInlineStart: '0.1em',
-        animationName: cursorBlink,
-        animationDuration: '0.8s',
-        animationIterationCount: 'infinite',
-        animationTimingFunction: 'linear',
-      },
+        [`&${componentCls}-loading`]: {
+          alignItems: 'center',
+        },
 
-      '&-fade-in .fade-in': {
-        display: 'inline',
-        animationName: fadeIn,
-        animationDuration: '1s',
-        animationTimingFunction: 'linear',
-      },
+        [`& ${componentCls}-body`]: {
+          display: 'flex',
+          flexDirection: 'column',
+        },
 
-      [`& ${componentCls}-dot`]: {
-        position: 'relative',
-        height: token.controlHeight,
-        display: 'flex',
-        alignItems: 'center',
-        columnGap: token.marginXS,
-        padding: `0 ${unit(token.paddingXXS)}`,
-        alignSelf: 'center',
-        '&-item': {
-          backgroundColor: token.colorPrimary,
-          borderRadius: '100%',
-          width: 4,
-          height: 4,
-          animationName: loadingMove,
-          animationDuration: '2s',
+        // =========================== Content =============================
+        [`& ${componentCls}-content`]: {
+          position: 'relative',
+          boxSizing: 'border-box',
+          minWidth: 0,
+          maxWidth: '100%',
+          minHeight: calc(paddingSM).mul(2).add(calc(lineHeight).mul(fontSize)).equal(),
+          paddingInline: `${unit(token.padding)}`,
+          paddingBlock: `${unit(paddingSM)}`,
+          color: colorText,
+          fontSize: token.fontSize,
+          lineHeight: token.lineHeight,
+          wordBreak: 'break-word',
+          '&-string': {
+            whiteSpace: 'pre-wrap',
+          },
+        },
+        '&-typing:last-child::after': {
+          content: typingContent,
+          fontWeight: 900,
+          userSelect: 'none',
+          opacity: 1,
+          marginInlineStart: '0.1em',
+          animationName: typingAnimationName,
+          animationDuration: unit(typingAnimationDuration),
           animationIterationCount: 'infinite',
           animationTimingFunction: 'linear',
-          '&:nth-child(1)': {
-            animationDelay: '0s',
-          },
-          '&:nth-child(2)': {
-            animationDelay: '0.2s',
-          },
-          '&:nth-child(3)': {
-            animationDelay: '0.4s',
+        },
+
+        '&-fade-in .fade-in': {
+          display: 'inline',
+          animationName: fadeIn,
+          animationDuration: '1s',
+          animationTimingFunction: 'linear',
+        },
+
+        [`& ${componentCls}-dot`]: {
+          position: 'relative',
+          height: token.controlHeight,
+          display: 'flex',
+          alignItems: 'center',
+          columnGap: token.marginXS,
+          padding: `0 ${unit(token.paddingXXS)}`,
+          alignSelf: 'center',
+          '&-item': {
+            backgroundColor: token.colorPrimary,
+            borderRadius: '100%',
+            width: 4,
+            height: 4,
+            animationName: loadingMove,
+            animationDuration: '2s',
+            animationIterationCount: 'infinite',
+            animationTimingFunction: 'linear',
+            '&:nth-child(1)': {
+              animationDelay: '0s',
+            },
+            '&:nth-child(2)': {
+              animationDelay: '0.2s',
+            },
+            '&:nth-child(3)': {
+              animationDelay: '0.4s',
+            },
           },
         },
-      },
 
-      // ======================== placement ============================
-      '&-start': {
-        flexDirection: 'row',
-
-        [`& ${componentCls}-header`]: {
+        // ======================== placement ============================
+        '&-start': {
           flexDirection: 'row',
-        },
-      },
 
-      '&-end': {
-        flexDirection: 'row-reverse',
-        justifySelf: 'flex-end',
-
-        [`& ${componentCls}-header`]: {
-          flexDirection: 'row-reverse',
+          [`& ${componentCls}-header`]: {
+            flexDirection: 'row',
+          },
         },
 
-        [`& ${componentCls}-editing-opts`]: {
+        '&-end': {
           flexDirection: 'row-reverse',
+          justifySelf: 'flex-end',
+
+          [`& ${componentCls}-header`]: {
+            flexDirection: 'row-reverse',
+          },
+
+          [`& ${componentCls}-editing-opts`]: {
+            flexDirection: 'row-reverse',
+          },
         },
       },
     },
-  };
+    cursorBlink,
+  ];
 };
 
 export default genBubbleStyle;
