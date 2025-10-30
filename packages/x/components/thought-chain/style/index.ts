@@ -1,7 +1,8 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import { unit } from '@ant-design/cssinjs/lib/util';
 import { mergeToken } from '@ant-design/cssinjs-utils';
-import { blinkMotion, genCollapseMotion } from '../../style/motion';
+import { FastColor } from '@ant-design/fast-color';
+import { blinkMotion, genCollapseMotion } from '../../style';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
 import genThoughtChainItemStyle from './item';
@@ -37,6 +38,11 @@ export interface ComponentToken {
    * @descEN ThoughtChain.Item `outlined`'s hover background color
    */
   iconSize: number;
+  /**
+   * @desc 思维链节点描述文字的动画颜色
+   * @descEN ThoughtChain node description text animation color
+   */
+  itemMotionDescription: string;
 }
 
 export interface ThoughtChainToken extends FullToken<'ThoughtChain'> {}
@@ -141,13 +147,25 @@ const genThoughtChainStyle: GenerateStyle<ThoughtChainToken, CSSObject> = (token
 };
 
 export const prepareComponentToken: GetDefaultToken<'ThoughtChain'> = (token) => {
+  const itemMotionDescription = new FastColor(token.colorTextDescription).setA(0.25).toHexString();
+
   return {
+    itemMotionDescription,
     itemSolidBg: token.colorFillTertiary,
     itemSolidHoverBg: token.colorBgTextHover,
     itemOutlinedBg: token.colorBgContainer,
     itemOutlinedHoverBg: token.colorBgTextHover,
     itemBorderRadius: token.borderRadius,
     iconSize: token.fontSize,
+    titleFontSize: token.fontSize,
+    descriptionFontSize: token.fontSize,
+    nodePadding: token.paddingSM,
+    titleFontWeight: 500,
+    borderColor: token.colorBorder,
+    borderWidth: token.lineWidth,
+    connectorColor: token.colorFillContent,
+    connectorWidth: token.lineWidth,
+    hoverTransitionDuration: `${token.motionDurationMid} ${token.motionEaseInOut}`,
   };
 };
 

@@ -1,5 +1,6 @@
 import { unit } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
+import { initFadeLeftMotion } from '../../style/fade';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
 import genActionsAudioStyle from './audio';
@@ -93,6 +94,7 @@ export default genStyleHooks(
       genActionsCopyStyle(compToken),
       genActionsFeedbackStyle(compToken),
       genActionsAudioStyle(compToken),
+      initFadeLeftMotion(compToken),
     ];
   },
   prepareComponentToken,

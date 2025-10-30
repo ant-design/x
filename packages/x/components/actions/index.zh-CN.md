@@ -23,6 +23,7 @@ Actions 组件用于快速配置一些 AI 场景下所需要的操作按钮/功�
 <code src="./demo/sub.tsx">更多菜单项</code>
 <code src="./demo/preset.tsx">预设模板</code>
 <code src="./demo/variant.tsx">使用变体</code>
+<code src="./demo/fadeIn.tsx">渐入效果</code>
 
 ## API
 
@@ -36,6 +37,7 @@ Actions 组件用于快速配置一些 AI 场景下所需要的操作按钮/功�
 | onClick | 组件被点击时的回调函数 | function({ item, key, keyPath, domEvent }) | - | - |
 | dropdownProps | 下拉菜单的配置属性 | DropdownProps | - | - |
 | variant | 变体 | `borderless` \| `outlined` \|`filled` | `borderless` | - |
+| fadeIn | 渐入效果 | boolean | - | - |
 
 ### ItemType
 

@@ -1,5 +1,5 @@
 import { mergeToken } from '@ant-design/cssinjs-utils';
-import { blinkMotion, genCollapseMotion } from '../../style/motion';
+import { blinkMotion, genCollapseMotion } from '../../style';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
 

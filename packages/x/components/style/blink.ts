@@ -2,7 +2,7 @@ import { CSSInterpolation, Keyframes } from '@ant-design/cssinjs';
 import { TokenWithCommonCls } from '@ant-design/cssinjs-utils';
 import { AliasToken } from '../theme/cssinjs-utils';
 
-export const blinkAnimate = new Keyframes('blinkAnimate', {
+export const blink = new Keyframes('antXBlink', {
   '0%': {
     backgroundPositionX: '-200%',
     backgroundPositionY: '100%',
@@ -31,7 +31,7 @@ export const blinkMotion = (
 ): CSSInterpolation => {
   const motionCls = motionName;
   return [
-    blinkAnimate,
+    blink,
     {
       [motionCls]: {
         backgroundClip: 'text',
@@ -44,7 +44,7 @@ export const blinkMotion = (
         animationFillMode: 'forwards',
         backgroundSize: '50%',
         backgroundRepeat: 'no-repeat',
-        animationName: 'blinkAnimate',
+        animationName: blink,
       },
     },
   ];

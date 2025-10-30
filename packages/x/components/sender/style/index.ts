@@ -173,6 +173,7 @@ export const prepareComponentToken: GetDefaultToken<'Sender'> = (token) => {
   const switchUncheckedHoverBg = new FastColor(colorFillTertiary).setA(0.04).toRgbString();
   const switchCheckedHoverBg = new FastColor(colorPrimary).setA(0.1).toRgbString();
   const colorBorderInput = new FastColor(colorFillTertiary).setA(0.1).toRgbString();
+
   const boxShadowInput = `0 4px 12px 0 ${new FastColor(colorPrimary).setA(0.1).toRgbString()}`;
   return {
     colorBgSlot,
