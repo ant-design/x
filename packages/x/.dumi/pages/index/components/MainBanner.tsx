@@ -17,12 +17,15 @@ const locales = {
     desc: 'Ant Design 团队匠心呈现 RICH 设计范式，打造卓越 AI 界面解决方案，引领智能新体验。',
     start: '开始使用',
     design: '设计语言',
+    seeConf: '🔥 SEE Conf 2025 来啦，一起探索 AI 时代的用户体验与工程实践！',
   },
   en: {
     slogan: 'New AI Experience',
     desc: 'The Ant Design team presents the RICH paradigm, crafting superior AI interface solutions and pioneering intelligent experiences.',
     start: 'Get Started',
     design: 'Get Design',
+    seeConf:
+      "🔥 SEE Conf 2025 is here! Let's explore user experience and engineering practices in the AI era together!",
   },
 };
 
@@ -106,6 +109,21 @@ const useStyle = createStyles(({ token, css }) => {
       opacity: 0.65;
       margin: ${token.marginLG}px 0 ${token.marginLG * 2}px 0;
       
+    `,
+    seeConf: css`
+    position: absolute;
+    bottom: 32px;
+    font-size:16px;
+    cursor: pointer;
+    background: linear-gradient(90deg, #fe8aff 0%, rgb(111, 179, 226) 46% ,rgb(108, 87, 255) 100%);
+    background-clip: text;
+    color: transparent;
+    transition: all 0.2s;
+    &:hover{
+      background: linear-gradient(90deg, rgb(108, 87, 255) 0%, rgb(111, 179, 226) 46% , #fe8aff 100%);
+      background-clip: text;
+      color: transparent;
+    }
     `,
     iAlphabet: css`
       position: relative;
@@ -281,6 +299,19 @@ const MainBanner: React.FC = () => {
           </Suspense>
         )}
       </Container>
+      <a
+        href="https://seeconf.antgroup.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className={styles.seeConf}
+        aria-label={
+          isZhCN(pathname)
+            ? '前往 SEE Conf 2025 官网（新窗口打开）'
+            : 'Go to SEE Conf 2025 website (opens in a new tab)'
+        }
+      >
+        {locale.seeConf}
+      </a>
     </section>
   );
 };

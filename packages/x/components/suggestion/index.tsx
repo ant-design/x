@@ -28,7 +28,25 @@ export interface RenderChildrenProps<T> {
   onKeyDown: (e: React.KeyboardEvent) => void;
 }
 
-export interface SuggestionProps<T = any> {
+export interface SuggestionProps<T = any>
+  extends Omit<
+    CascaderProps,
+    | 'children'
+    | 'onChange'
+    | 'optionRender'
+    | 'value'
+    | 'options'
+    | 'multiple'
+    | 'showSearch'
+    | 'defaultValue'
+    | 'fieldNames'
+    | 'onOpenChange'
+    | 'onDropdownVisibleChange'
+    | 'dropdownMatchSelectWidth'
+    | 'open'
+    | 'rootClassName'
+    | 'placement'
+  > {
   prefixCls?: string;
   className?: string;
   rootClassName?: string;
@@ -55,6 +73,7 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
     items,
     onSelect,
     block,
+    ...otherProps
   } = props;
 
   // ============================= MISC =============================
@@ -145,9 +164,11 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
 
   return (
     <Cascader
+      {...otherProps}
       options={itemList}
       open={mergedOpen}
       value={activePath}
+      multiple={false}
       placement={isRTL ? 'topRight' : 'topLeft'}
       {...compatibleProps}
       optionRender={optionRender}
