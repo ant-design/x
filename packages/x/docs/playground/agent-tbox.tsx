@@ -738,7 +738,7 @@ const AgentTbox: React.FC = () => {
         footer: (content, { status, key }) => <Footer content={content} status={status} id={key} />,
       },
       contentRender: (content, { status }) => {
-        const markdownText = `${content.ext_text ? '<think>\n\n' + content.ext_text + `${content.text ? '\n\n</think>\n\n' : ''}` : ''}${content.text || ''}`;
+        const markdownText = `${content.ext_text ? `<think>\n\n${content.ext_text}${content.text ? '\n\n</think>\n\n' : ''}` : ''}${content.text || ''}`;
         return (
           <XMarkdown
             content={markdownText as string}

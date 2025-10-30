@@ -9,7 +9,7 @@ import { genSlotStyle } from './slot';
 import { genSystemBubbleStyle } from './system';
 
 export const prepareComponentToken: GetDefaultToken<'Bubble'> = () => ({
-  typingContent: '"|"',
+  typingContent: '|',
   typingAnimationName: 'cursorBlink',
   typingAnimationDuration: '0.8s',
 });
