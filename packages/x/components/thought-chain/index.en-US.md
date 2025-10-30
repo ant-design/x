@@ -58,6 +58,7 @@ Reference: [Common API](/docs/react/common-props)
 | status | Status of the thought node | 'loading' \| 'success' \| 'error'\| 'abort' | - | - |
 | title | Title of the thought node | React.ReactNode | - | - |
 | collapsible | Whether the thought node is collapsible | boolean | false | - |
+| blink | Blink mode | boolean | - | - |
 
 ### ThoughtChain.Item
 
