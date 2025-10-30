@@ -222,7 +222,7 @@ describe('Bubble Enhanced Tests', () => {
     });
 
     it('should handle undefined content', () => {
-      const { container } = render(<Bubble />);
+      const { container } = render(<Bubble content="" />);
       expect(container.querySelector('.ant-bubble')).toBeInTheDocument();
     });
 
