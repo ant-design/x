@@ -36,6 +36,7 @@ export const blinkMotion = (
       [motionCls]: {
         backgroundClip: 'text',
         color: token.colorTextDescription,
+        WebkitBackgroundClip: 'text', // For Safari
         backgroundImage: `linear-gradient(90deg,transparent,${token.colorTextBase},transparent)`,
         animationDuration: '1s',
         animationIterationCount: 'infinite',

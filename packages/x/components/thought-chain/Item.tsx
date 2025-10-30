@@ -125,7 +125,7 @@ const Item = React.forwardRef<ItemRef, ThoughtChainItemProps>((props, ref) => {
       ref={itemRef}
       key={key || id}
       onClick={onClick}
-      style={{ ...style }}
+      style={style}
       className={classnames(
         prefixCls,
         hashId,
