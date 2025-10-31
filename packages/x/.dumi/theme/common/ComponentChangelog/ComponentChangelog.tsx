@@ -336,9 +336,6 @@ const ComponentChangelog: React.FC<Readonly<React.PropsWithChildren>> = (props) 
           </Link>
         }
         open={show}
-        style={{
-          width,
-        }}
         width={width}
         onClose={() => setShow(false)}
       >
