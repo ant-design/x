@@ -1,7 +1,9 @@
 import { Typography } from 'antd';
 import classnames from 'classnames';
 import CSSMotion from 'rc-motion';
+import { composeRef } from 'rc-util/lib/ref';
 import React from 'react';
+import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 import useStyle from './style';
@@ -118,7 +120,11 @@ export interface PromptsProps
   fadeInLeft?: boolean;
 }
 
-const Prompts: React.FC<PromptsProps> = (props) => {
+type ActionsRef = {
+  nativeElement: HTMLDivElement;
+};
+
+const ForwardPrompts = React.forwardRef<ActionsRef, PromptsProps>((props, ref) => {
   const {
     prefixCls: customizePrefixCls,
     title,
@@ -168,6 +174,14 @@ const Prompts: React.FC<PromptsProps> = (props) => {
     { [`${prefixCls}-list-vertical`]: vertical },
   );
 
+  // ============================= Refs =============================
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  useProxyImperativeHandle(ref, () => {
+    return {
+      nativeElement: containerRef.current!,
+    };
+  });
+
   // ============================= Motion =============================
   const rootPrefixCls = getPrefixCls();
 
@@ -181,7 +195,7 @@ const Prompts: React.FC<PromptsProps> = (props) => {
         return (
           <div
             {...htmlProps}
-            ref={ref}
+            ref={composeRef(containerRef, ref)}
             className={classnames(mergedCls, motionClassName)}
             style={{ ...style, ...contextConfig.style, ...styles.root }}
           >
@@ -218,7 +232,7 @@ const Prompts: React.FC<PromptsProps> = (props) => {
                       },
                     )}
                     onClick={() => {
-                      if (!isNest && onItemClick) {
+                      if (!isNest && !info.disabled && onItemClick) {
                         onItemClick({ data: info });
                       }
                     }}
@@ -269,7 +283,11 @@ const Prompts: React.FC<PromptsProps> = (props) => {
       }}
     </CSSMotion>
   );
-};
+});
+
+type CompoundedPrompts = typeof ForwardPrompts;
+
+const Prompts = ForwardPrompts as CompoundedPrompts;
 
 if (process.env.NODE_ENV !== 'production') {
   Prompts.displayName = 'Prompts';
