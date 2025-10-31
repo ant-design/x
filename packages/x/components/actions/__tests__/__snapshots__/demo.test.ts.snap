@@ -67,6 +67,172 @@ exports[`renders components/actions/demo/basic.tsx correctly 1`] = `
 </div>
 `;
 
+exports[`renders components/actions/demo/fadeIn.tsx correctly 1`] = `
+<div
+  class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+>
+  <button
+    class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    style="align-self:flex-end"
+    type="button"
+  >
+    <span>
+      Re-Render
+    </span>
+  </button>
+  <div
+    class="ant-actions css-var-_R_0_"
+  >
+    <div
+      class="ant-actions-list ant-actions-variant-borderless"
+    >
+      <ul
+        class="ant-pagination css-var-_R_0_ ant-pagination-simple"
+      >
+        <li
+          aria-disabled="true"
+          class="ant-pagination-prev ant-pagination-disabled"
+          title="Previous Page"
+        >
+          <button
+            class="ant-pagination-item-link"
+            disabled=""
+            tabindex="-1"
+            type="button"
+          >
+            <span
+              aria-label="left"
+              class="anticon anticon-left"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="left"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"
+                />
+              </svg>
+            </span>
+          </button>
+        </li>
+        <li
+          class="ant-pagination-simple-pager"
+          title="1/5"
+        >
+          <input
+            aria-label="Go to"
+            size="3"
+            type="text"
+            value="1"
+          />
+          <span
+            class="ant-pagination-slash"
+          >
+            /
+          </span>
+          5
+        </li>
+        <li
+          aria-disabled="false"
+          class="ant-pagination-next"
+          title="Next Page"
+        >
+          <button
+            class="ant-pagination-item-link"
+            tabindex="-1"
+            type="button"
+          >
+            <span
+              aria-label="right"
+              class="anticon anticon-right"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="right"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+                />
+              </svg>
+            </span>
+          </button>
+        </li>
+      </ul>
+      <div
+        class="ant-actions-item"
+      >
+        <div
+          aria-describedby="test-id"
+          class="ant-actions-icon"
+        >
+          <span
+            aria-label="redo"
+            class="anticon anticon-redo"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="redo"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M758.2 839.1C851.8 765.9 912 651.9 912 523.9 912 303 733.5 124.3 512.6 124 291.4 123.7 112 302.8 112 523.9c0 125.2 57.5 236.9 147.6 310.2 3.5 2.8 8.6 2.2 11.4-1.3l39.4-50.5c2.7-3.4 2.1-8.3-1.2-11.1-8.1-6.6-15.9-13.7-23.4-21.2a318.64 318.64 0 01-68.6-101.7C200.4 609 192 567.1 192 523.9s8.4-85.1 25.1-124.5c16.1-38.1 39.2-72.3 68.6-101.7 29.4-29.4 63.6-52.5 101.7-68.6C426.9 212.4 468.8 204 512 204s85.1 8.4 124.5 25.1c38.1 16.1 72.3 39.2 101.7 68.6 29.4 29.4 52.5 63.6 68.6 101.7 16.7 39.4 25.1 81.3 25.1 124.5s-8.4 85.1-25.1 124.5a318.64 318.64 0 01-68.6 101.7c-9.3 9.3-19.1 18-29.3 26L668.2 724a8 8 0 00-14.1 3l-39.6 162.2c-1.2 5 2.6 9.9 7.7 9.9l167 .8c6.7 0 10.5-7.7 6.3-12.9l-37.3-47.9z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <span
+        class="ant-actions-copy ant-actions-copy css-var-_R_0_ ant-actions-item css-var-_R_0_"
+      >
+        <button
+          aria-describedby="test-id"
+          aria-label="Copy"
+          class="ant-actions-copy-copy ant-actions-copy-copy-icon-only"
+          type="button"
+        >
+          <span
+            aria-label="copy"
+            class="anticon anticon-copy"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="copy"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
+              />
+            </svg>
+          </span>
+        </button>
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`renders components/actions/demo/preset.tsx correctly 1`] = `
 <div
   class="ant-actions css-var-_R_0_"

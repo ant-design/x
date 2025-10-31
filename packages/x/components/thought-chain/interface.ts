@@ -48,7 +48,13 @@ export interface ThoughtChainItemType {
    * @descEN Whether collapsible
    */
   collapsible?: boolean;
+  /**
+   * @desc 闪烁
+   * @descEN blink
+   */
+  blink?: boolean;
 }
+
 export type SemanticType =
   | 'root'
   | 'item'

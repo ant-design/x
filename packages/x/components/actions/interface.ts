@@ -52,6 +52,11 @@ export interface ActionsProps
    * @descEN Semantic structure styles
    */
   styles?: Partial<Record<SemanticType, React.CSSProperties>>;
+  /**
+   * @desc 是否开启渲染渐入
+   * @descEN Whether to enable fade-in rendering.
+   */
+  fadeIn?: boolean;
 }
 
 export interface ActionsItemProps extends Omit<ActionsProps, 'items' | 'variant'> {

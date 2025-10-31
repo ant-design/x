@@ -58,6 +58,7 @@ Reference: [Common API](/docs/react/common-props)
 | status | Status of the thought node | 'loading' \| 'success' \| 'error'\| 'abort' | - | - |
 | title | Title of the thought node | React.ReactNode | - | - |
 | collapsible | Whether the thought node is collapsible | boolean | false | - |
+| blink | Blink mode | boolean | - | - |
 
 ### ThoughtChain.Item
 
@@ -69,10 +70,17 @@ Reference: [Common API](/docs/react/common-props)
 | description | Description of the thought chain | React.ReactNode | - | - |
 | status | Status of the thought chain | 'loading' \| 'success' \| 'error'\| 'abort' | - | - |
 | variant | Variant configuration | 'solid' \| 'outlined' \| 'text' | - | - |
+| blink | Blink mode | boolean | - | - |
 
 ## Semantic DOM
 
+## ThoughtChain
+
 <code src="./demo/_semantic.tsx" simplify="true"></code>
+
+## ThoughtChain.Item
+
+<code src="./demo/_semantic-item.tsx" simplify="true"></code>
 
 ## Design Token
 

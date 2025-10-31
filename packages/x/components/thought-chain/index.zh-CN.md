@@ -59,6 +59,7 @@ demo:
 | status | 思维节点状态 | 'loading' \| 'success' \| 'error'\| 'abort' | - | - |
 | title | 思维节点标题 | React.ReactNode | - | - |
 | collapsible | 思维节点是否可折叠 | boolean | false | - |
+| blink | 闪动效果 | boolean | - | - |
 
 ### ThoughtChain.Item
 
@@ -70,6 +71,7 @@ demo:
 | description | 思维链描述 | React.ReactNode                             | -      | -    |
 | status      | 思维链状态 | 'loading' \| 'success' \| 'error'\| 'abort' | -      | -    |
 | variant     | 变体配置   | 'solid' \| 'outlined' \| 'text'             | -      | -    |
+| blink       | 闪动效果   | boolean                                     | -      | -    |
 
 ## Semantic DOM
 

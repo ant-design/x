@@ -20,6 +20,7 @@ const items: ThoughtChainProps['items'] = [
   {
     title: 'Response Complete',
     description: 'Task completed',
+    blink: true,
   },
 ];
 

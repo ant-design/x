@@ -206,7 +206,7 @@ Array [
         </span>
       </div>
       <div
-        class="ant-think-status-text"
+        class="ant-think-status-text ant-think-motion-blink"
       >
         Complete thinking
       </div>

@@ -46,7 +46,7 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
 
   const { direction } = useXProviderContext();
 
-  const { collapsible, key = id, icon, title, content, footer, status, description } = info;
+  const { collapsible, key = id, icon, blink, title, content, footer, status, description } = info;
 
   // ============================ Style ============================
   const nodeCls = `${prefixCls}-node`;
@@ -85,7 +85,10 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
         >
           {/* Header */}
           <div
-            className={classnames(`${nodeCls}-title`, { [`${nodeCls}-collapsible`]: collapsible })}
+            className={classnames(`${nodeCls}-title`, {
+              [`${nodeCls}-collapsible`]: collapsible,
+              [`${prefixCls}-motion-blink`]: blink,
+            })}
             onClick={collapsible ? () => onItemExpand?.(key) : undefined}
           >
             {title}
