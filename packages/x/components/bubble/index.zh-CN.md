@@ -136,11 +136,6 @@ interface BubbleAnimationOption {
    * @default true
    */
   keepPrefix?: boolean;
-  /**
-   * @description 打字机效果下步进UI
-   * @default undefined
-   */
-  suffix?: React.ReactNode;
 }
 ```
 

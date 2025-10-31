@@ -76,7 +76,7 @@ class Renderer {
   private createReplaceElement(unclosedTags: Set<string> | undefined, cidRef: { current: number }) {
     const { enableAnimation, animationConfig } = this.options.streaming || {};
     return (domNode: DOMNode) => {
-      const key = 'x-markdown-component' + cidRef.current++;
+      const key = `x-markdown-component-${cidRef.current++}`;
 
       // Check if it's a text node with data
       const isValidTextNode =

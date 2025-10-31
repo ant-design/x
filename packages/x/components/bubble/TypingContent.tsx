@@ -18,7 +18,7 @@ export const TypingContent: React.FC<{
     onTyping,
     onTypingComplete,
   });
-  const { effect, suffix } = memoedAnimationCfg;
+  const { effect } = memoedAnimationCfg;
   // 渲染元素
   const elements: string | React.ReactNode[] = renderedData.map((item) =>
     effect === 'fade-in' && !item.done ? (
@@ -39,7 +39,6 @@ export const TypingContent: React.FC<{
       })}
     >
       {elements}
-      {effect === 'typing' && suffix}
     </div>
   );
 };
