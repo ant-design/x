@@ -2,13 +2,13 @@
 
 exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] = `
 <div
-  class="ant-app css-var-_r_6_"
+  class="ant-app css-var-_r_7_"
 >
   <div
-    class="ant-prompts css-var-_r_6_"
+    class="ant-prompts css-var-_r_7_"
   >
     <h5
-      class="ant-typography ant-prompts-title css-var-_r_6_"
+      class="ant-typography ant-prompts-title css-var-_r_7_"
     >
       ✨ Inspirational Sparks and Marvelous Tips
     </h5>
@@ -237,10 +237,10 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 2`] 
 
 exports[`renders components/prompts/demo/disabled.tsx extend context correctly 1`] = `
 <div
-  class="ant-prompts css-var-_r_5_"
+  class="ant-prompts css-var-_r_6_"
 >
   <h5
-    class="ant-typography ant-prompts-title css-var-_r_5_"
+    class="ant-typography ant-prompts-title css-var-_r_6_"
   >
     ☕️ It's time to relax!
   </h5>
