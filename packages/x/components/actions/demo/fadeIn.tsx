@@ -1,12 +1,14 @@
 import { RedoOutlined } from '@ant-design/icons';
-import { Actions, ActionsProps } from '@ant-design/x';
-import { Button, Flex, message, Pagination } from 'antd';
+import type { ActionsProps } from '@ant-design/x';
+import { Actions } from '@ant-design/x';
+import { Button, Flex, message, Pagination, Switch } from 'antd';
 import React, { useState } from 'react';
 
 const App: React.FC = () => {
   // pagination
   const [curPage, setCurPage] = useState(1);
   const [key, setKey] = useState(0);
+  const [fadeInLeft, setFadeInLeft] = useState(true);
 
   const actionItems = [
     {
@@ -40,11 +42,26 @@ const App: React.FC = () => {
   };
   return (
     <Flex gap="middle" vertical>
-      <Button style={{ alignSelf: 'flex-end' }} onClick={() => setKey(key + 1)}>
-        Re-Render
-      </Button>
-
-      <Actions key={key} fadeIn items={actionItems} onClick={onClick} variant="borderless" />
+      <Flex gap="middle" align="center">
+        <Switch
+          style={{ alignSelf: 'flex-end' }}
+          checkedChildren="fadeInLeft"
+          unCheckedChildren="fadeIn"
+          value={fadeInLeft}
+          onChange={setFadeInLeft}
+        />
+        <Button style={{ alignSelf: 'flex-end' }} onClick={() => setKey(key + 1)}>
+          Re-Render
+        </Button>
+      </Flex>
+      <Actions
+        key={key}
+        fadeIn={!fadeInLeft}
+        fadeInLeft={fadeInLeft}
+        items={actionItems}
+        onClick={onClick}
+        variant="borderless"
+      />
     </Flex>
   );
 };

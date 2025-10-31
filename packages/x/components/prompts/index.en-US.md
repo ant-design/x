@@ -25,6 +25,7 @@ The Prompts component is used to display a predefined set of questions or sugges
 <code src="./demo/flex-wrap.tsx">Wrap</code>
 <code src="./demo/flex-wrap-fixed.tsx">Responsive Size</code>
 <code src="./demo/nest.tsx">Nest Usage</code>
+<code src="./demo/fadeIn.tsx">Fade In Effect</code>
 
 ## API
 
@@ -41,6 +42,8 @@ The Prompts component is used to display a predefined set of questions or sugges
 | vertical | When set to `true`, the Prompts will be arranged vertically. | boolean | `false` | - |
 | wrap | When set to `true`, the Prompts will automatically wrap. | boolean | `false` | - |
 | onItemClick | Callback function when a prompt item is clicked. | (info: { data: PromptProps }) => void | - | - |
+| fadeIn | Fade in effect | boolean | - | - |
+| fadeInLeft | Fade left in effect | boolean | - | - |
 
 #### SemanticType
 

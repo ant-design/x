@@ -24,6 +24,7 @@ const ForwardActions = React.forwardRef<ActionsRef, ActionsProps>((props, ref) =
     onClick,
     dropdownProps = {},
     fadeIn,
+    fadeInLeft,
     variant = 'borderless',
     prefixCls: customizePrefixCls,
     classNames = {},
@@ -45,7 +46,13 @@ const ForwardActions = React.forwardRef<ActionsRef, ActionsProps>((props, ref) =
   const prefixCls = getPrefixCls('actions', customizePrefixCls);
   const contextConfig = useXComponentConfig('actions');
   const [hashId, cssVarCls] = useStyle(prefixCls);
+
+  // ============================= Motion =============================
+
   const rootPrefixCls = getPrefixCls();
+  const motionName =
+    fadeIn || fadeInLeft ? `${rootPrefixCls}-x-fade${fadeInLeft ? '-left' : ''}` : '';
+
   // ============================= Class =============================
   const mergedCls = classnames(
     prefixCls,
@@ -76,7 +83,7 @@ const ForwardActions = React.forwardRef<ActionsRef, ActionsProps>((props, ref) =
 
   // ============================= Render =============================
   return (
-    <CSSMotion motionName={fadeIn ? `${rootPrefixCls}-x-fade-left` : ''}>
+    <CSSMotion motionName={motionName}>
       {({ className: motionClassName }, ref) => {
         return (
           <div

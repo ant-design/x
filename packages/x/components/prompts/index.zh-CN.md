@@ -26,6 +26,7 @@ Prompts 组件用于显示一组与当前上下文相关的预定义的问题或
 <code src="./demo/flex-wrap.tsx">可换行</code>
 <code src="./demo/flex-wrap-fixed.tsx">响应式宽度</code>
 <code src="./demo/nest.tsx">嵌套组合</code>
+<code src="./demo/fadeIn.tsx">渐入效果</code>
 
 ## API
 
@@ -44,6 +45,8 @@ Prompts 组件用于显示一组与当前上下文相关的预定义的问题或
 | vertical | 设置为 `true` 时, 提示列表将垂直排列 | boolean | `false` | - |
 | wrap | 设置为 `true` 时, 提示列表将自动换行 | boolean | `false` | - |
 | onItemClick | 提示项被点击时的回调函数 | (info: { data: PromptProps }) => void | - | - |
+| fadeIn | 渐入效果 | boolean | - | - |
+| fadeInLeft | 从左到右渐入效果 | boolean | - | - |
 
 #### SemanticType
 
