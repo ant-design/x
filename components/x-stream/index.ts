@@ -159,13 +159,13 @@ function XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
          * Uint8Array binary -> string -> Output
          */
         readableStream
-          .pipeThrough(decoderStream)
+          .pipeThrough(decoderStream as TransformStream<Uint8Array, string>)
           .pipeThrough(transformStream)
       : /**
          * Uint8Array binary -> string -> SSE part string -> Default Output {@link SSEOutput}
          */
         readableStream
-          .pipeThrough(decoderStream)
+          .pipeThrough(decoderStream as TransformStream<Uint8Array, string>)
           .pipeThrough(splitStream())
           .pipeThrough(splitPart())
   ) as XReadableStream<Output>;

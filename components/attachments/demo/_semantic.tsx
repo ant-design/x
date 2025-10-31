@@ -12,10 +12,11 @@ const placeholderLocales = {
   },
 };
 const withItemLocales = {
-  cn: { list: '列表容器', item: '列表项' },
+  cn: { list: '列表容器', item: '列表项', upload: '上传按钮' },
   en: {
     list: 'List container',
     item: 'List item',
+    upload: 'Upload Btn',
   },
 };
 
@@ -51,6 +52,7 @@ const App: React.FC = () => {
         semantics={[
           { name: 'list', desc: withItemLocale.list },
           { name: 'item', desc: withItemLocale.item },
+          { name: 'upload', desc: withItemLocale.upload },
         ]}
       >
         <Attachments items={items} />

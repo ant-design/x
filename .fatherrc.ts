@@ -29,17 +29,39 @@ export default defineConfig({
   umd: {
     entry: 'components/index.ts',
     name: 'antdx',
+    bundler: 'utoopack',
     output: {
       path: 'dist/',
       filename: 'antdx',
     },
     sourcemap: true,
     generateUnminified: true,
+    concatenateModules: true,
     externals: {
-      react: 'React',
-      'react-dom': 'ReactDOM',
-      '@ant-design/cssinjs': 'antdCssinjs',
-      antd: 'antd',
+      react: {
+        root: 'React',
+        commonjs: 'react',
+      },
+      'react-dom': {
+        root: 'ReactDOM',
+        commonjs: 'react-dom',
+      },
+      '@ant-design/cssinjs': {
+        root: 'antdCssinjs',
+        commonjs: 'antdCssinjs',
+      },
+      '@ant-design/icons': {
+        root: 'icons',
+        commonjs: 'icons',
+      },
+      dayjs: {
+        root: 'dayjs',
+        commonjs: 'dayjs',
+      },
+      antd: {
+        root: 'antd',
+        commonjs: 'antd',
+      },
     },
     transformRuntime: {
       absoluteRuntime: process.cwd(),

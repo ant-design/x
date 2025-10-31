@@ -53,10 +53,10 @@ type useXChat<
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| messages | 当前管理的内容 | AgentMessages[] | - | - |
-| parsedMessages | 经过 `parser` 转译过的内容 | ParsedMessages[] | - | - |
+| messages | 当前管理的内容 | {id: string \| number; message: AgentMessage; status: MessageStatus;}[] | - | - |
+| parsedMessages | 经过 `parser` 转译过的内容 | {id: string \| number; message: ParsedMessage; status: MessageStatus;}[] | - | - |
 | onRequest | 添加一条 Message，并且触发请求，若无`key`为`message`的数据则会将整个数据做为消息处理 | (requestParams: AgentMessage \| RequestParams) => void | - | - |
-| setMessages | 直接修改 messages，不会触发请求 | (messages: { message, status }[]) => void | - | - |
+| setMessages | 直接修改 messages，不会触发请求 | (messages: {id: string \| number; message: AgentMessage; status: MessageStatus;}[]) => void | - | - |
 
 ### RequestParams
 

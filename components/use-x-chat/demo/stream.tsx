@@ -46,6 +46,7 @@ const App = () => {
         style={{ maxHeight: 300 }}
         items={messages.map(({ id, message, status }) => ({
           key: id,
+          loading: status === 'loading',
           role: status === 'local' ? 'local' : 'ai',
           content: message,
         }))}

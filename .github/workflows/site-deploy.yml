@@ -16,7 +16,7 @@ jobs:
     if: (startsWith(github.ref, 'refs/tags/') && (contains(github.ref_name, '-') == false)) || github.event_name == 'workflow_dispatch'
     steps:
       - name: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - uses: oven-sh/setup-bun@v2
 
@@ -59,7 +59,7 @@ jobs:
           bunx surge --project ./_site --domain $DEPLOY_DOMAIN --token ${{ secrets.SURGE_TOKEN }}
 
       - name: Create Commit Comment
-        uses: peter-evans/commit-comment@v3
+        uses: peter-evans/commit-comment@v4
         with:
           body: |
             - Documentation site for this release: https://ant-design-x-${{ steps.publish-version.outputs.VERSION }}.surge.sh

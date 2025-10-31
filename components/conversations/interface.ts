@@ -8,7 +8,9 @@ type GroupType = string;
  * @desc 会话数据
  * @descEN Conversation data
  */
-export interface Conversation extends AnyObject {
+export interface Conversation
+  extends AnyObject,
+    Omit<React.HTMLAttributes<HTMLLIElement>, 'onClick'> {
   /**
    * @desc 唯一标识
    * @descEN Unique identifier

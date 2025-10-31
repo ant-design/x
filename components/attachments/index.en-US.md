@@ -23,6 +23,7 @@ The Attachments component is used in scenarios where a set of attachment informa
 <code src="./demo/overflow.tsx">Overflow</code>
 <code src="./demo/with-sender.tsx">Combination</code>
 <code src="./demo/files.tsx">File Card</code>
+<code src="./demo/files-custom.tsx">Custom Card Icon</code>
 
 ## API
 
@@ -51,6 +52,15 @@ interface PlaceholderType {
 }
 ```
 
+### Attachment
+
+```ts
+interface Attachment extends UploadFile {
+  type?: 'image' | 'file' | 'other';
+  previewText?: React.ReactNode;
+}
+```
+
 ### AttachmentsRef
 
 | Property      | Description            | Type                 | Version |
@@ -68,6 +78,22 @@ interface PlaceholderType {
 | item | Attachment, same as Upload `UploadFile` | Attachment | - | - |
 | onRemove | A callback function, will be executed when removing file button is clicked, remove event will be prevented when the return value is false or a Promise which resolve(false) or reject | (item: Attachment) => boolean \| Promise | - | - |
 | imageProps | Image config, same as [Image](https://ant.design/components/image) | ImageProps | - | - |
+| icon | Custom Icon | React.ReactNode \| PresetIcons | - | 1.6.0 |
+| type | Defines file type, when type is `image`, it will display in image preview mode | 'file' \| 'image' | `file` | 1.6.0 |
+
+```ts
+type PresetIcons =
+  | 'default'
+  | 'excel'
+  | 'image'
+  | 'markdown'
+  | 'pdf'
+  | 'ppt'
+  | 'word'
+  | 'zip'
+  | 'video'
+  | 'audio';
+```
 
 ## Semantic DOM
 

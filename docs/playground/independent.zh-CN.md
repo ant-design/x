@@ -1,6 +1,6 @@
 ---
 group:
-  title: 样板间
+  title: 模型样板间
   order: 0
 title: 独立式
 order: 0
