@@ -89,6 +89,7 @@ const App: React.FC = () => {
             <XMarkdown
               className={className}
               content={content as string}
+              paragraphTag="div"
               streaming={{
                 hasNextChunk: isStreaming && enableCache,
                 enableAnimation,

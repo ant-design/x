@@ -62,6 +62,11 @@ export interface ThoughtChainItemProps
    * @descEN Thought chain item variant
    */
   variant?: `${VARIANT}`;
+  /**
+   * @desc 闪烁
+   * @descEN blink
+   */
+  blink?: boolean;
   className?: string;
   classNames?: Partial<Record<SemanticType, string>>;
   style?: React.CSSProperties;
@@ -75,6 +80,7 @@ const Item = React.forwardRef<ItemRef, ThoughtChainItemProps>((props, ref) => {
   // ============================ Info ============================
   const {
     key,
+    blink,
     variant = 'solid',
     prefixCls: customizePrefixCls,
     rootClassName,
@@ -113,7 +119,6 @@ const Item = React.forwardRef<ItemRef, ThoughtChainItemProps>((props, ref) => {
   const prefixCls = getPrefixCls('thought-chain', customizePrefixCls);
   const [hashId, cssVarCls] = useStyle(prefixCls);
   const itemCls = `${prefixCls}-item`;
-
   // ============================ Render ============================
   return (
     <div
@@ -147,7 +152,11 @@ const Item = React.forwardRef<ItemRef, ThoughtChainItemProps>((props, ref) => {
           status={status}
         />
       )}
-      <div className={classnames(`${itemCls}-content`)}>
+      <div
+        className={classnames(`${itemCls}-content`, {
+          [`${prefixCls}-motion-blink`]: blink,
+        })}
+      >
         {title && (
           <div
             style={styles?.title}

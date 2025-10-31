@@ -39,6 +39,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | defaultExpanded | Default Expand state | boolean | true | - |
 | expanded | Expand state | boolean | - | - |
 | onExpand | Callback when expand changes | (expand: boolean) => void | - | - |
+| blink | Blink mode | boolean | - | - |
 
 ## Semantic DOM
 

@@ -21,18 +21,6 @@ const renderMarkdown: BubbleProps['contentRender'] = (content) => {
 
 const App = () => {
   const [index, setIndex] = React.useState(text.length);
-  const timer = React.useRef<any>(-1);
-
-  const renderStream = () => {
-    if (index >= text.length) {
-      clearTimeout(timer.current);
-      return;
-    }
-    timer.current = setTimeout(() => {
-      setIndex((prev) => prev + 1);
-      renderStream();
-    }, 20);
-  };
 
   React.useEffect(() => {
     if (index < text.length) {

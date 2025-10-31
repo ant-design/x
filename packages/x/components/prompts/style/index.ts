@@ -1,5 +1,6 @@
 import { unit } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
+import { initFadeLeftMotion, initFadeMotion } from '../../style';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
 
@@ -166,7 +167,12 @@ export default genStyleHooks(
   'Prompts',
   (token) => {
     const compToken = mergeToken<PromptsToken>(token, {});
-    return [genPromptsStyle(compToken), genNestStyle(compToken)];
+    return [
+      genPromptsStyle(compToken),
+      genNestStyle(compToken),
+      initFadeLeftMotion(compToken),
+      initFadeMotion(compToken),
+    ];
   },
   prepareComponentToken,
 );

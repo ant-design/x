@@ -1,5 +1,7 @@
 import classnames from 'classnames';
+import CSSMotion from 'rc-motion';
 import pickAttrs from 'rc-util/lib/pickAttrs';
+import { composeRef } from 'rc-util/lib/ref';
 import React from 'react';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
@@ -21,6 +23,8 @@ const ForwardActions = React.forwardRef<ActionsRef, ActionsProps>((props, ref) =
     items = [],
     onClick,
     dropdownProps = {},
+    fadeIn,
+    fadeInLeft,
     variant = 'borderless',
     prefixCls: customizePrefixCls,
     classNames = {},
@@ -42,6 +46,12 @@ const ForwardActions = React.forwardRef<ActionsRef, ActionsProps>((props, ref) =
   const prefixCls = getPrefixCls('actions', customizePrefixCls);
   const contextConfig = useXComponentConfig('actions');
   const [hashId, cssVarCls] = useStyle(prefixCls);
+
+  // ============================= Motion =============================
+
+  const rootPrefixCls = getPrefixCls();
+  const motionName =
+    fadeIn || fadeInLeft ? `${rootPrefixCls}-x-fade${fadeInLeft ? '-left' : ''}` : '';
 
   // ============================= Class =============================
   const mergedCls = classnames(
@@ -73,30 +83,54 @@ const ForwardActions = React.forwardRef<ActionsRef, ActionsProps>((props, ref) =
 
   // ============================= Render =============================
   return (
-    <div ref={containerRef} {...domProps} className={mergedCls} style={mergedStyle}>
-      <ActionsContext.Provider
-        value={{
-          prefixCls,
-          classNames: {
-            item: classnames(contextConfig.classNames.item, classNames.item),
-            itemDropdown: classnames(
-              contextConfig.classNames.itemDropdown,
-              classNames.itemDropdown,
-            ),
-          },
-          styles: {
-            item: { ...contextConfig.styles.item, ...styles.item },
-            itemDropdown: { ...contextConfig.styles.itemDropdown, ...styles.itemDropdown },
-          },
-        }}
-      >
-        <div className={classnames(`${prefixCls}-list`, `${prefixCls}-variant-${variant}`)}>
-          {items.map((item, idx) => {
-            return <Item item={item} onClick={onClick} dropdownProps={dropdownProps} key={idx} />;
-          })}
-        </div>
-      </ActionsContext.Provider>
-    </div>
+    <CSSMotion motionName={motionName}>
+      {({ className: motionClassName }, ref) => {
+        return (
+          <div
+            ref={composeRef(containerRef, ref)}
+            {...domProps}
+            className={mergedCls}
+            style={mergedStyle}
+          >
+            <ActionsContext.Provider
+              value={{
+                prefixCls,
+                classNames: {
+                  item: classnames(contextConfig.classNames.item, classNames.item),
+                  itemDropdown: classnames(
+                    contextConfig.classNames.itemDropdown,
+                    classNames.itemDropdown,
+                  ),
+                },
+                styles: {
+                  item: { ...contextConfig.styles.item, ...styles.item },
+                  itemDropdown: { ...contextConfig.styles.itemDropdown, ...styles.itemDropdown },
+                },
+              }}
+            >
+              <div
+                className={classnames(
+                  `${prefixCls}-list`,
+                  `${prefixCls}-variant-${variant}`,
+                  motionClassName,
+                )}
+              >
+                {items.map((item, idx) => {
+                  return (
+                    <Item
+                      item={item}
+                      onClick={onClick}
+                      dropdownProps={dropdownProps}
+                      key={item.key || idx}
+                    />
+                  );
+                })}
+              </div>
+            </ActionsContext.Provider>
+          </div>
+        );
+      }}
+    </CSSMotion>
   );
 });
 

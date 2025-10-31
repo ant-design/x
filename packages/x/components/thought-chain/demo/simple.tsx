@@ -70,5 +70,17 @@ export default () => (
         description="Route Information"
       />
     </Flex>
+    <Flex gap="small" wrap align="center">
+      <Text>blink:</Text>
+      <ThoughtChain.Item blink variant="solid" icon={<SunOutlined />} title="Task Completed" />
+      <ThoughtChain.Item blink variant="outlined" icon={<SunOutlined />} title="Task Completed" />
+      <ThoughtChain.Item
+        blink
+        variant="text"
+        icon={<SunOutlined />}
+        title="Task Completed"
+        description="Route Information"
+      />
+    </Flex>
   </Flex>
 );
