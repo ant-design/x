@@ -6,7 +6,6 @@ import { useXProviderContext } from '../x-provider';
 import { BubbleContext } from './context';
 import { EditableContent } from './EditableContent';
 import type {
-  BubbleAnimationOption,
   BubbleContentType,
   BubbleProps,
   BubbleRef,
@@ -141,11 +140,6 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
         ) : (
           memoedContent
         )}
-        {!usingInnerAnimation &&
-        (mergeTyping as BubbleAnimationOption)?.effect === 'typing' &&
-        (mergeTyping as BubbleAnimationOption)?.suffix
-          ? (mergeTyping as BubbleAnimationOption).suffix
-          : null}
       </>
     );
     const isFooterIn = _footerPlacement.includes('inner');
