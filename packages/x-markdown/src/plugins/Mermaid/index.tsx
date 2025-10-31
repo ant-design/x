@@ -265,7 +265,7 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
     },
     {
       key: 'zoomIn',
-      label: contextLocale.zoomOut,
+      label: contextLocale.zoomIn,
       icon: <ZoomOutOutlined />,
     },
     {
