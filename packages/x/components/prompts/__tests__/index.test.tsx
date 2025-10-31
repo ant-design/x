@@ -2,11 +2,10 @@ import React from 'react';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
 import { fireEvent, render } from '../../../tests/utils';
-import type { PromptsItemType } from '..';
-import Prompts, { type PromptsProps } from '..';
+import Prompts from '..';
 
 // Mock data
-const mockData: PromptsItemType[] = [
+const mockData = [
   {
     key: '1',
     label: 'Label 1',
@@ -23,7 +22,7 @@ const mockData: PromptsItemType[] = [
   },
 ];
 
-const nestedData: PromptsItemType[] = [
+const nestedData = [
   {
     key: 'parent',
     label: 'Parent Label',
@@ -44,7 +43,7 @@ const nestedData: PromptsItemType[] = [
   },
 ];
 
-const mockProps: PromptsProps = {
+const mockProps = {
   title: 'Test Title',
   items: mockData,
   onItemClick: jest.fn(),
@@ -54,6 +53,7 @@ const mockProps: PromptsProps = {
 describe('prompts', () => {
   mountTest(() => <Prompts />);
   rtlTest(() => <Prompts />);
+
   beforeAll(() => {
     jest.useFakeTimers();
   });
@@ -76,8 +76,8 @@ describe('prompts', () => {
   it('should render the labels and descriptions', () => {
     const { getByText } = render(<Prompts {...mockProps} />);
     mockData.forEach((item) => {
-      const label = getByText(item.label as string);
-      const description = getByText(item.description as string);
+      const label = getByText(item.label);
+      const description = getByText(item.description);
       expect(label).toBeInTheDocument();
       expect(description).toBeInTheDocument();
     });
@@ -118,15 +118,11 @@ describe('prompts', () => {
   it('should render nested children correctly', () => {
     const { container, getByText } = render(<Prompts items={nestedData} />);
 
-    // 检查父项
     expect(getByText('Parent Label')).toBeInTheDocument();
     expect(getByText('Parent Description')).toBeInTheDocument();
-
-    // 检查子项
     expect(getByText('Child 1')).toBeInTheDocument();
     expect(getByText('Child 2')).toBeInTheDocument();
 
-    // 检查嵌套结构
     expect(container.querySelector('.ant-prompts-item-has-nest')).toBeTruthy();
     expect(container.querySelector('.ant-prompts-nested')).toBeTruthy();
   });
@@ -145,7 +141,7 @@ describe('prompts', () => {
 
     fireEvent.click(getByText('Child 1'));
     expect(handleClick).toHaveBeenCalledWith({
-      data: nestedData[0].children![0],
+      data: nestedData[0].children[0],
     });
   });
 
