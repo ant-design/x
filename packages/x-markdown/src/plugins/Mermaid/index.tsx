@@ -259,13 +259,13 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
       icon: <CopyOutlined />,
     },
     {
-      key: 'zoomOut',
-      label: contextLocale.zoomOut,
+      key: 'zoomIn',
+      label: contextLocale.zoomIn,
       icon: <ZoomInOutlined />,
     },
     {
-      key: 'zoomIn',
-      label: contextLocale.zoomIn,
+      key: 'zoomOut',
+      label: contextLocale.zoomOut,
       icon: <ZoomOutOutlined />,
     },
     {
