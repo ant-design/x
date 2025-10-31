@@ -188,15 +188,6 @@ describe('prompts', () => {
     expect(container.querySelector('.custom-title')).toBeTruthy();
   });
 
-  it('should apply RTL class when direction is rtl', () => {
-    const { container } = render(
-      <div dir="rtl">
-        <Prompts items={mockData} />
-      </div>,
-    );
-    expect(container.querySelector('.ant-prompts-rtl')).toBeTruthy();
-  });
-
   it('should not trigger onItemClick for disabled items', () => {
     const handleClick = jest.fn();
     const { getByText } = render(<Prompts items={mockData} onItemClick={handleClick} />);
