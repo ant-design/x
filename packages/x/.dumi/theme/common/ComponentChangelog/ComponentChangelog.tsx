@@ -339,6 +339,7 @@ const ComponentChangelog: React.FC<Readonly<React.PropsWithChildren>> = (props) 
         style={{
           width,
         }}
+        width={width}
         onClose={() => setShow(false)}
       >
         <Timeline items={timelineItems} />
