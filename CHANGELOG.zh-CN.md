@@ -27,7 +27,7 @@ tag: vVERSION
 - 🆕 ThoughtChain 组件新增闪动效果。[#1286](https://github.com/ant-design/x/pull/1286) 由 [@kimteayon](https://github.com/kimteayon) 提交。
 - 🆕 Actions 新增 fadeIn 和 fadeInLeft 效果。[#1288](https://github.com/ant-design/x/pull/1288) 由 [@kimteayon](https://github.com/kimteayon) 提交、[#1289](https://github.com/ant-design/x/pull/1289) 由 [@kimteayon](https://github.com/kimteayon) 提交。
 - 🆕 Prompts 新增 fadeIn 和 fadeInLeft 效果。[#1289](https://github.com/ant-design/x/pull/1289) 由 [@kimteayon](https://github.com/kimteayon) 提交。
-- 📖 优化官网站点提升用户体验。[#1290](https://github.com/ant-design/x/pull/1269) 由 [@Rain120](https://github.com/Rain120)。
+- 📖 优化官网站点提升用户体验。[#1290](https://github.com/ant-design/x/pull/1290) 由 [@Rain120](https://github.com/Rain120)。
 
 ### @ant-design/x-markdown
 
