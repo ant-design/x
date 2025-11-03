@@ -224,8 +224,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
               {!readOnly && (
                 <span
                   className={`${prefixCls}-slot-tag-remove`}
-                  role="button"
-                  aria-label="remove"
                   onMouseDown={(e) => e.preventDefault()}
                   onClick={(e) => {
                     removeTagSlot(node.key as string, e as unknown as EventType);

@@ -66,8 +66,7 @@
         "noConfusingVoidType": "off",
         "noThenProperty": "off",
         "noTsIgnore": "off",
-        "noImplicitAnyLet": "off",
-        "noNonNullAssertedOptionalChain": "off"
+        "noImplicitAnyLet": "off"
       },
       "performance": {
         "noDelete": "off",
