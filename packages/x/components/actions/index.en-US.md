@@ -37,6 +37,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | dropdownProps | Configuration properties for dropdown menu | DropdownProps | - | - |
 | variant | Variant | `borderless` \| `outlined` \|`filled` | `borderless` | - |
 | fadeIn | Fade in effect | boolean | - | - |
+| fadeInLeft | Fade left in effect | boolean | - | - |
 
 ### ItemType
 

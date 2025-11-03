@@ -57,6 +57,11 @@ export interface ActionsProps
    * @descEN Whether to enable fade-in rendering.
    */
   fadeIn?: boolean;
+  /**
+   * @desc 是否开启渲染从左到右渐入
+   * @descEN Whether to enable fade-in rendering from left to right.
+   */
+  fadeInLeft?: boolean;
 }
 
 export interface ActionsItemProps extends Omit<ActionsProps, 'items' | 'variant'> {

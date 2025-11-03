@@ -1,10 +1,11 @@
 import { Typography } from 'antd';
 import classnames from 'classnames';
+import CSSMotion from 'rc-motion';
+import { composeRef } from 'rc-util/lib/ref';
 import React from 'react';
-
+import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
-
 import useStyle from './style';
 
 export interface BasePromptsItemType {
@@ -107,9 +108,23 @@ export interface PromptsProps
    * @descEN Style class name for the root node.
    */
   rootClassName?: string;
+  /**
+   * @desc 是否开启渲染渐入
+   * @descEN Whether to enable fade-in rendering.
+   */
+  fadeIn?: boolean;
+  /**
+   * @desc 是否开启渲染从左到右渐入
+   * @descEN Whether to enable fade-in rendering from left to right.
+   */
+  fadeInLeft?: boolean;
 }
 
-const Prompts: React.FC<PromptsProps> = (props) => {
+type ActionsRef = {
+  nativeElement: HTMLDivElement;
+};
+
+const ForwardPrompts = React.forwardRef<ActionsRef, PromptsProps>((props, ref) => {
   const {
     prefixCls: customizePrefixCls,
     title,
@@ -122,6 +137,8 @@ const Prompts: React.FC<PromptsProps> = (props) => {
     styles = {},
     classNames = {},
     style,
+    fadeIn,
+    fadeInLeft,
     ...htmlProps
   } = props;
 
@@ -157,93 +174,120 @@ const Prompts: React.FC<PromptsProps> = (props) => {
     { [`${prefixCls}-list-vertical`]: vertical },
   );
 
+  // ============================= Refs =============================
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  useProxyImperativeHandle(ref, () => {
+    return {
+      nativeElement: containerRef.current!,
+    };
+  });
+
+  // ============================= Motion =============================
+  const rootPrefixCls = getPrefixCls();
+
+  const motionName =
+    fadeInLeft || fadeIn ? `${rootPrefixCls}-x-fade${fadeInLeft ? '-left' : ''}` : '';
+
   // ============================ Render ============================
   return (
-    <div
-      {...htmlProps}
-      className={mergedCls}
-      style={{ ...style, ...contextConfig.style, ...styles.root }}
-    >
-      {/* Title */}
-      {title && (
-        <Typography.Title
-          level={5}
-          className={classnames(
-            `${prefixCls}-title`,
-            contextConfig.classNames.title,
-            classNames.title,
-          )}
-          style={{ ...contextConfig.styles.title, ...styles.title }}
-        >
-          {title}
-        </Typography.Title>
-      )}
-      {/* Prompt List */}
-      <div className={mergedListCls} style={{ ...contextConfig.styles.list, ...styles.list }}>
-        {items?.map((info, index) => {
-          const isNest = info.children && info.children.length > 0;
-
-          return (
-            <div
-              key={info.key || `key_${index}`}
-              style={{ ...contextConfig.styles.item, ...styles.item }}
-              className={classnames(
-                `${prefixCls}-item`,
-                contextConfig.classNames.item,
-                classNames.item,
-                {
-                  [`${prefixCls}-item-disabled`]: info.disabled,
-                  [`${prefixCls}-item-has-nest`]: isNest,
-                },
-              )}
-              onClick={() => {
-                if (!isNest && onItemClick) {
-                  onItemClick({ data: info });
-                }
-              }}
-            >
-              {/* Icon */}
-              {info.icon && <div className={`${prefixCls}-icon`}>{info.icon}</div>}
-              {/* Content */}
-              <div
+    <CSSMotion motionName={motionName}>
+      {({ className: motionClassName }, ref) => {
+        return (
+          <div
+            {...htmlProps}
+            ref={composeRef(containerRef, ref)}
+            className={classnames(mergedCls, motionClassName)}
+            style={{ ...style, ...contextConfig.style, ...styles.root }}
+          >
+            {/* Title */}
+            {title && (
+              <Typography.Title
+                level={5}
                 className={classnames(
-                  `${prefixCls}-content`,
-                  contextConfig.classNames.itemContent,
-                  classNames.itemContent,
+                  `${prefixCls}-title`,
+                  contextConfig.classNames.title,
+                  classNames.title,
                 )}
-                style={{ ...contextConfig.styles.itemContent, ...styles.itemContent }}
+                style={{ ...contextConfig.styles.title, ...styles.title }}
               >
-                {/* Label */}
-                {info.label && <h6 className={`${prefixCls}-label`}>{info.label}</h6>}
+                {title}
+              </Typography.Title>
+            )}
+            {/* Prompt List */}
+            <div className={mergedListCls} style={{ ...contextConfig.styles.list, ...styles.list }}>
+              {items?.map((info, index) => {
+                const isNest = info.children && info.children.length > 0;
 
-                {/* Description */}
-                {info.description && <p className={`${prefixCls}-desc`}>{info.description}</p>}
+                return (
+                  <div
+                    key={info.key || `key_${index}`}
+                    style={{ ...contextConfig.styles.item, ...styles.item }}
+                    className={classnames(
+                      `${prefixCls}-item`,
+                      contextConfig.classNames.item,
+                      classNames.item,
+                      {
+                        [`${prefixCls}-item-disabled`]: info.disabled,
+                        [`${prefixCls}-item-has-nest`]: isNest,
+                      },
+                    )}
+                    onClick={() => {
+                      if (!isNest && !info.disabled && onItemClick) {
+                        onItemClick({ data: info });
+                      }
+                    }}
+                  >
+                    {/* Icon */}
+                    {info.icon && <div className={`${prefixCls}-icon`}>{info.icon}</div>}
+                    {/* Content */}
+                    <div
+                      className={classnames(
+                        `${prefixCls}-content`,
+                        contextConfig.classNames.itemContent,
+                        classNames.itemContent,
+                      )}
+                      style={{ ...contextConfig.styles.itemContent, ...styles.itemContent }}
+                    >
+                      {/* Label */}
+                      {info.label && <h6 className={`${prefixCls}-label`}>{info.label}</h6>}
 
-                {/* Children */}
-                {isNest && (
-                  <Prompts
-                    className={`${prefixCls}-nested`}
-                    items={info.children}
-                    vertical
-                    onItemClick={onItemClick}
-                    classNames={{
-                      list: classNames.subList,
-                      item: classNames.subItem,
-                    }}
-                    styles={{
-                      list: styles.subList,
-                      item: styles.subItem,
-                    }}
-                  />
-                )}
-              </div>
+                      {/* Description */}
+                      {info.description && (
+                        <p className={`${prefixCls}-desc`}>{info.description}</p>
+                      )}
+
+                      {/* Children */}
+                      {isNest && (
+                        <Prompts
+                          className={`${prefixCls}-nested`}
+                          items={info.children}
+                          vertical
+                          onItemClick={onItemClick}
+                          classNames={{
+                            list: classNames.subList,
+                            item: classNames.subItem,
+                          }}
+                          styles={{
+                            list: styles.subList,
+                            item: styles.subItem,
+                          }}
+                        />
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          );
-        })}
-      </div>
-    </div>
+          </div>
+        );
+      }}
+    </CSSMotion>
   );
-};
+});
+
+type CompoundedPrompts = typeof ForwardPrompts;
+
+const Prompts = ForwardPrompts as CompoundedPrompts;
 
 if (process.env.NODE_ENV !== 'production') {
   Prompts.displayName = 'Prompts';

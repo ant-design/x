@@ -38,6 +38,7 @@ Actions 组件用于快速配置一些 AI 场景下所需要的操作按钮/功�
 | dropdownProps | 下拉菜单的配置属性 | DropdownProps | - | - |
 | variant | 变体 | `borderless` \| `outlined` \|`filled` | `borderless` | - |
 | fadeIn | 渐入效果 | boolean | - | - |
+| fadeInLeft | 从左到右渐入效果 | boolean | - | - |
 
 ### ItemType
 
