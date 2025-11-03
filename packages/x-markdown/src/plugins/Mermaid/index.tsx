@@ -247,8 +247,6 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
       case 'download':
         handleDownload();
         break;
-      default:
-        break;
     }
   };
 
