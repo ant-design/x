@@ -29,7 +29,7 @@ const XMarkdown: React.FC<XMarkdownProps> = (props) => {
       },
       props?.components ?? {},
     );
-  }, [footer, props]);
+  }, [footer, props?.components]);
 
   // ============================ style ============================
   const { direction: contextDirection, getPrefixCls } = useXProviderContext();
@@ -47,7 +47,7 @@ const XMarkdown: React.FC<XMarkdownProps> = (props) => {
   const output = useStreaming(content || children || '', streaming);
 
   const displayContent = useMemo(() => {
-    if (streaming) {
+    if (streaming?.hasNextChunk) {
       return output + '<xmd-footer></xmd-footer>';
     }
 

@@ -16,14 +16,15 @@ const App = () => {
   const [index, setIndex] = React.useState(0);
   const [speed, setSpeed] = React.useState(10);
   const [hasNextChunk, setHasNextChunk] = React.useState(false);
-  const timer = React.useRef<any>(-1);
+  const timer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
   const [className] = useMarkdownTheme();
   const { locale } = useIntl();
   const content = locale === 'zh-CN' ? Adx_Markdown_Zh : Adx_Markdown_En;
 
   const renderStream = React.useCallback(() => {
     if (index >= content.length) {
-      clearTimeout(timer.current);
+      if (timer.current) clearTimeout(timer.current);
+
       setHasNextChunk(false);
       return;
     }
@@ -46,7 +47,7 @@ const App = () => {
 
     renderStream();
     return () => {
-      clearTimeout(timer.current);
+      if (timer.current) clearTimeout(timer.current);
     };
   }, [index, hasNextChunk, content.length, renderStream]);
 
