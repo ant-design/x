@@ -28,8 +28,9 @@ const App = () => {
       setHasNextChunk(false);
       return;
     }
+
     timer.current = setTimeout(() => {
-      setIndex((prev) => prev + 5);
+      setIndex((prev) => prev + 10);
       renderStream();
     }, 20 * speed);
   }, [index, content.length, speed]);

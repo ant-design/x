@@ -51,8 +51,8 @@ const XMarkdown: React.FC<XMarkdownProps> = (props) => {
       return output + '<xmd-footer></xmd-footer>';
     }
 
-    return output;
-  }, [streaming, output]);
+    return !footer ? output : output.replace(/<xmd-footer><\/xmd-footer>/g, '') || '';
+  }, [streaming?.hasNextChunk, output, footer]);
 
   // ============================ Render ============================
   if (!displayContent) return null;
@@ -61,6 +61,13 @@ const XMarkdown: React.FC<XMarkdownProps> = (props) => {
     markedConfig: config,
     paragraphTag,
     openLinksInNewTab,
+    configureRenderCleaner: (code: string, type) => {
+      if (type === 'code') {
+        return !footer ? code : code.replace(/<xmd-footer><\/xmd-footer>/g, '') || '';
+      }
+
+      return code;
+    },
   });
 
   const renderer = new Renderer({
