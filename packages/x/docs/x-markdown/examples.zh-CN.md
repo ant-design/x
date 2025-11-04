@@ -21,6 +21,7 @@ order: 2
 <code src="./demo/codeDemo/link.tsx" title="中文链接处理"></code>
 <code src="./demo/codeDemo/xss.tsx"  title="XSS 防御"></code>
 <code src="./demo/codeDemo/open-links-in-new-tab.tsx" description="链接在新标签页打开。" title="新标签页打开链接"></code>
+<code src="./demo/codeDemo/md-footer.tsx"  title="流式渲染 Footer"></code>
 
 ## API
 
@@ -30,6 +31,7 @@ order: 2
 | content | 需要渲染的 Markdown 内容 | `string` | - |
 | children | Markdown 内容，作为 `content` 属性的别名 | `string` | - |
 | components | 用于替换 HTML 元素的自定义 React 组件 | `Record<string, React.ComponentType<ComponentProps> \| keyof JSX.IntrinsicElements>`，查看[详情](/x-markdowns/components-cn) | - |
+| footer | 用于在流式渲染过程中自定义渲染尾部内容的 React 组件 | `React.ComponentType<ComponentProps> \| keyof JSX.IntrinsicElements` | - |
 | paragraphTag | 段落元素的自定义 HTML 标签，防止自定义组件包含块级元素时的验证错误 | `keyof JSX.IntrinsicElements` | `'p'` |
 | streaming | 流式渲染行为的配置 | `SteamingOption`，查看[详情](/x-markdowns/streaming-cn) | - |
 | config | Markdown 解析和扩展的 Marked.js 配置 | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |
@@ -60,7 +62,7 @@ order: 2
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | domNode | 来自 html-react-parser 的组件 DOM 节点，包含解析后的 DOM 节点信息 | [`DOMNode`](https://github.com/remarkablemark/html-react-parser?tab=readme-ov-file#replace) | - |
-| streamStatus |流式渲染支持两种状态：`loading` 表示内容正在加载中，`done` 表示加载已完成。当前仅支持 HTML 格式以及带围栏的代码块（fenced code）。由于缩进代码块（indented code）没有明确的结束符，因此始终返回 `done` 状态 | `'loading' \| 'done'` | - |
+| streamStatus | 流式渲染支持两种状态：`loading` 表示内容正在加载中，`done` 表示加载已完成。当前仅支持 HTML 格式以及带围栏的代码块（fenced code）。由于缩进代码块（indented code）没有明确的结束符，因此始终返回 `done` 状态 | `'loading' \| 'done'` | - |
 | rest | 组件属性，支持所有标准 HTML 属性（如 `href`、`title`、`className` 等）和自定义数据属性 | `Record<string, any>` | - |
 
 ## FAQ

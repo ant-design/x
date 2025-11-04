@@ -21,6 +21,7 @@ Used for rendering streaming Markdown format returned by LLMs.
 <code src="./demo/codeDemo/link.tsx" title="Chinese Link Processing"></code>
 <code src="./demo/codeDemo/xss.tsx" title="XSS Protection"></code>
 <code src="./demo/codeDemo/open-links-in-new-tab.tsx" description="Open links in new tab." title="Open Links in New Tab"></code>
+<code src="./demo/codeDemo/md-footer.tsx"  title="Streaming Footer"></code>
 
 ## API
 
@@ -30,6 +31,7 @@ Used for rendering streaming Markdown format returned by LLMs.
 | content | Markdown content to be rendered | `string` | - |
 | children | Markdown content, alias for `content` property | `string` | - |
 | components | Custom React components to replace HTML elements | `Record<string, React.ComponentType<ComponentProps> \| keyof JSX.IntrinsicElements>`, see [details](/x-markdowns/components) | - |
+| footer | React component for customizing the rendering of footer content during streaming rendering | `Record<string, React.ComponentType<ComponentProps> \| keyof JSX.IntrinsicElements>` | - |
 | paragraphTag | Custom HTML tag for paragraph elements. Prevents validation errors when custom components contain block-level elements | `keyof JSX.IntrinsicElements` | `'p'` |
 | streaming | Configuration for streaming rendering behavior | `SteamingOption`, see [details](/x-markdowns/streaming) | - |
 | config | Marked.js configuration for Markdown parsing and extensions | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |

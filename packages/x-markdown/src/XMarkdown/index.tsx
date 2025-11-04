@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import React from 'react';
+import React, { useMemo } from 'react';
 import useXProviderContext from '../hooks/use-x-provider-context';
 import { Parser, Renderer } from './core';
 import { useStreaming } from './hooks';
@@ -10,7 +10,6 @@ const XMarkdown: React.FC<XMarkdownProps> = (props) => {
   const {
     streaming,
     config,
-    components,
     paragraphTag,
     content,
     children,
@@ -20,7 +19,17 @@ const XMarkdown: React.FC<XMarkdownProps> = (props) => {
     style,
     openLinksInNewTab,
     dompurifyConfig,
+    footer,
   } = props;
+
+  const components = useMemo(() => {
+    return Object.assign(
+      {
+        'xmd-footer': footer,
+      },
+      props?.components ?? {},
+    );
+  }, [footer, props]);
 
   // ============================ style ============================
   const { direction: contextDirection, getPrefixCls } = useXProviderContext();
@@ -35,7 +44,15 @@ const XMarkdown: React.FC<XMarkdownProps> = (props) => {
   };
 
   // ============================ Streaming ============================
-  const displayContent = useStreaming(content || children || '', streaming);
+  const output = useStreaming(content || children || '', streaming);
+
+  const displayContent = useMemo(() => {
+    if (streaming) {
+      return output + '<xmd-footer></xmd-footer>';
+    }
+
+    return output;
+  }, [streaming, output]);
 
   // ============================ Render ============================
   if (!displayContent) return null;

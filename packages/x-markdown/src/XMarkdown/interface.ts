@@ -130,6 +130,11 @@ interface XMarkdownProps {
    * @description DOMPurify configuration for HTML sanitization and XSS protection
    */
   dompurifyConfig?: DOMPurifyConfig;
+  /**
+   * @description 用于在流式渲染过程中自定义渲染尾部内容的 React 组件
+   * @description Custom footer content
+   */
+  footer?: React.ComponentType<ComponentProps> | keyof JSX.IntrinsicElements;
 }
 
 export type { XMarkdownProps, Token, Tokens, StreamStatus, ComponentProps, SteamingOption };
