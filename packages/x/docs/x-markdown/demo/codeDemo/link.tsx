@@ -16,49 +16,47 @@ const LOCALE_MARKDOWN = {
   },
 };
 
-const findFirstForbiddenCharIndex = (str: string): number => {
-  if (typeof str !== 'string' || str.length === 0) {
-    return -1;
-  }
+const findFirstForbiddenCharIndex = (() => {
+  let _markdownSegmenter: any;
 
-  const forbiddenChars = new Set(['(', ')', '[', ']', '{', '}', '（', '）', '「', '」']);
-
-  if (
-    typeof window !== 'undefined' &&
-    'Intl' in window &&
-    typeof (Intl as any).Segmenter === 'function'
-  ) {
-    try {
-      if (!(window as any)._markdownSegmenter) {
-        (window as any)._markdownSegmenter = new (Intl as any).Segmenter('zh', {
-          granularity: 'grapheme',
-        });
-      }
-      const segmenter = (window as any)._markdownSegmenter;
-
-      let index = 0;
-      for (const segment of segmenter.segment(str)) {
-        const char = segment.segment;
-        if (forbiddenChars.has(char)) {
-          return index;
-        }
-        index += char.length;
-      }
+  return (str: string): number => {
+    if (typeof str !== 'string' || str.length === 0) {
       return -1;
-    } catch {
-      // 降级到字符遍历方法
     }
-  }
 
-  // 优化的字符遍历方法，避免正则表达式开销
-  for (let i = 0; i < str.length; i++) {
-    const char = str[i];
-    if (forbiddenChars.has(char)) {
-      return i;
+    const forbiddenChars = new Set(['(', ')', '[', ']', '{', '}', '（', '）', '「', '」']);
+
+    if ('Intl' in window && 'Segmenter' in Intl) {
+      try {
+        if (!_markdownSegmenter) {
+          _markdownSegmenter = new (Intl as any).Segmenter('zh', { granularity: 'grapheme' });
+        }
+        const segmenter = _markdownSegmenter;
+
+        let index = 0;
+        for (const segment of segmenter.segment(str)) {
+          const char = segment.segment;
+          if (forbiddenChars.has(char)) {
+            return index;
+          }
+          index += char.length;
+        }
+        return -1;
+      } catch {
+        // 降级到字符遍历方法
+      }
     }
-  }
-  return -1;
-};
+
+    // 优化的字符遍历方法，避免正则表达式开销
+    for (let i = 0; i < str.length; i++) {
+      const char = str[i];
+      if (forbiddenChars.has(char)) {
+        return i;
+      }
+    }
+    return -1;
+  };
+})();
 
 const LinkSkeleton = () => (
   <Skeleton.Button active size="small" style={{ margin: '4px 0', width: 16, height: 16 }} />
