@@ -95,7 +95,7 @@ const App = () => {
         {LOCALE_MARKDOWN[locale as keyof typeof LOCALE_MARKDOWN].reRender}
       </Button>
       <Flex gap="middle">
-        {/* <Bubble
+        <Bubble
           style={{
             width: '50%',
           }}
@@ -104,7 +104,7 @@ const App = () => {
             <XMarkdown paragraphTag="div">{`### 未处理\n\n${content}`}</XMarkdown>
           )}
           variant="outlined"
-        /> */}
+        />
         <Bubble
           style={{
             width: '50%',
