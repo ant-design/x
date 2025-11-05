@@ -23,10 +23,16 @@ const findFirstForbiddenCharIndex = (str: string): number => {
 
   const forbiddenChars = new Set(['(', ')', '[', ']', '{', '}', '（', '）', '「', '」']);
 
-  if ('Intl' in window && 'Segmenter' in Intl) {
+  if (
+    typeof window !== 'undefined' &&
+    'Intl' in window &&
+    typeof (Intl as any).Segmenter === 'function'
+  ) {
     try {
       if (!(window as any)._markdownSegmenter) {
-        (window as any)._markdownSegmenter = new Intl.Segmenter('zh', { granularity: 'grapheme' });
+        (window as any)._markdownSegmenter = new (Intl as any).Segmenter('zh', {
+          granularity: 'grapheme',
+        });
       }
       const segmenter = (window as any)._markdownSegmenter;
 
