@@ -90,9 +90,9 @@ const App = () => {
     link: (token: Token) => {
       const markdownLinkRegex = /\[[^\]]+\]\([^\s()<>]+(?:\([^\s()<>]*\))?\)/;
       if (!markdownLinkRegex.test(token.raw)) {
-        const firstChineseIndex = findFirstForbiddenCharIndex(token.href);
-        if (firstChineseIndex > 0) {
-          return `<a href=${token.href.slice(0, firstChineseIndex)} target="_blank">${token.href.slice(0, firstChineseIndex)}</a>${token.href.slice(firstChineseIndex)}`;
+        const firstForbiddenCharIndex = findFirstForbiddenCharIndex(token.href);
+        if (firstForbiddenCharIndex > 0) {
+          return `<a href=${token.href.slice(0, firstForbiddenCharIndex)} target="_blank">${token.href.slice(0, firstForbiddenCharIndex)}</a>${token.href.slice(firstForbiddenCharIndex)}`;
         }
       }
       return `<a href=${token.href} target="_blank">${token?.text || token.href}</a>`;
