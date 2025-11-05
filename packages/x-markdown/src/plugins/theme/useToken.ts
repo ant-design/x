@@ -86,7 +86,7 @@ export const getComputedToken = (
           {
             override: componentTokens,
           },
-          componentTheme,
+          componentTheme as unknown as Theme<any, any>,
         );
       }
       mergedDerivativeToken[key] = mergedComponentToken;
