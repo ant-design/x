@@ -143,12 +143,9 @@ const enUS = {
   iCanHelp: 'I can help:',
 };
 
-type LocaleObject = Record<string, any>;
+export const isZhCN =
+  typeof window !== 'undefined' && window?.parent?.location?.pathname?.includes('-cn');
 
-const isZhCN = typeof window !== 'undefined' && window?.parent?.location?.pathname?.includes('-cn');
-
-const locale: LocaleObject = isZhCN
-  ? { ...zhCN_antd, ...zhCN, ...zhCN_X }
-  : { ...enUS_antd, ...enUS, ...enUS_X };
+const locale = isZhCN ? { ...zhCN_antd, ...zhCN, ...zhCN_X } : { ...enUS_antd, ...enUS, ...enUS_X };
 
 export default locale;
