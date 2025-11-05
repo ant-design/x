@@ -16,6 +16,24 @@ tag: vVERSION
 
 ---
 
+## 2.0.0-alpha.13
+
+`2025-10-30`
+
+### @ant-design/x
+
+- 🐛 Removed Bubble.List `suffix` property and modified typing through CSS Token. [#1285](https://github.com/ant-design/x/pull/1285) by [@kimteayon](https://github.com/kimteayon).
+- 🆕 Added flashing animation effect to ThoughtChain.Item component. [#1278](https://github.com/ant-design/x/pull/1278) by [@kimteayon](https://github.com/kimteayon).
+- 🆕 Added flashing animation effect to Think component. [#1278](https://github.com/ant-design/x/pull/1278) by [@kimteayon](https://github.com/kimteayon).
+- 🆕 Added flashing animation effect to ThoughtChain component. [#1286](https://github.com/ant-design/x/pull/1286) by [@kimteayon](https://github.com/kimteayon).
+- 🆕 Added fadeIn and fadeInLeft effects to Actions. [#1288](https://github.com/ant-design/x/pull/1288) by [@kimteayon](https://github.com/kimteayon), [#1289](https://github.com/ant-design/x/pull/1289) by [@kimteayon](https://github.com/kimteayon).
+- 🆕 Added fadeIn and fadeInLeft effects to Prompts. [#1289](https://github.com/ant-design/x/pull/1289) by [@kimteayon](https://github.com/kimteayon).
+- 📖 Optimized the official site to enhance user experience. [#1290](https://github.com/ant-design/x/pull/1290) by [@Rain120](https://github.com/Rain120).
+
+### @ant-design/x-markdown
+
+- 🐛 Fixed the issue where the renderer link passed in was overwritten. [#1276](https://github.com/ant-design/x/pull/1276) by [@Div627](https://github.com/Div627).
+
 ## 2.0.0-alpha.12
 
 `2025-10-29`
