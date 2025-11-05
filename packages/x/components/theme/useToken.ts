@@ -97,7 +97,7 @@ export function useInternalToken(): [
   const mergedTheme = theme || defaultTheme;
 
   const [token, hashId, realToken] = useCacheToken<GlobalToken, SeedToken>(
-    mergedTheme,
+    mergedTheme as Theme<any, any>,
     [antdTheme.defaultSeed, rootDesignToken],
     {
       salt: `${version}-${hashed || ''}`,
