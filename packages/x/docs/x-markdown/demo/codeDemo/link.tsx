@@ -21,31 +21,37 @@ const findFirstForbiddenCharIndex = (str: string): number => {
     return -1;
   }
 
-  // 定义不允许的字符集合
-  const forbiddenChars = /[()[\]{}（）「」]/u;
+  const forbiddenChars = new Set(['(', ')', '[', ']', '{', '}', '（', '）', '「', '」']);
 
-  // 使用Intl.Segmenter进行高效的中文分词（现代浏览器支持）
   if ('Intl' in window && 'Segmenter' in Intl) {
     try {
-      const segmenter = new Intl.Segmenter('zh', { granularity: 'grapheme' });
+      if (!(window as any)._markdownSegmenter) {
+        (window as any)._markdownSegmenter = new Intl.Segmenter('zh', { granularity: 'grapheme' });
+      }
+      const segmenter = (window as any)._markdownSegmenter;
+
       let index = 0;
       for (const segment of segmenter.segment(str)) {
         const char = segment.segment;
-        // 如果遇到不允许的字符，返回其位置
-        if (forbiddenChars.test(char)) {
+        if (forbiddenChars.has(char)) {
           return index;
         }
-        index += segment.segment.length;
+        index += char.length;
       }
       return -1;
     } catch {
-      // 降级到正则表达式方法
+      // 降级到字符遍历方法
     }
   }
 
-  // 高性能正则表达式方法，检查不允许的字符
-  const match = str.match(forbiddenChars);
-  return match ? match.index! : -1;
+  // 优化的字符遍历方法，避免正则表达式开销
+  for (let i = 0; i < str.length; i++) {
+    const char = str[i];
+    if (forbiddenChars.has(char)) {
+      return i;
+    }
+  }
+  return -1;
 };
 
 const LinkSkeleton = () => (
