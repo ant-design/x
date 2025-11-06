@@ -1,5 +1,5 @@
-// XMarkdown default styles
-// Note: No theme colors included, only basic layout and typography styles
+/* XMarkdown default styles */
+/* Note: No theme colors included, only basic layout and typography styles */
 @keyframes x-markdown-fade-in {
   from {
     opacity: 0;
@@ -29,7 +29,7 @@
   --hr-margin: 1.5em 0;
   --table-margin: 1em 0;
 
-  // Base styles
+  /* Base styles */
   font-size: var(--font-size);
   line-height: 1.5714285714285714;
   word-wrap: break-word;
@@ -37,7 +37,7 @@
   width: 100%;
   color: var(--text-color);
 
-  // Long content wrapping
+  /* Long content wrapping */
   p,
   div,
   span,
@@ -48,7 +48,7 @@
     overflow-wrap: break-word;
   }
 
-  // Code block wrapping
+  /* Code block wrapping */
   pre,
   code {
     word-break: break-word;
@@ -56,7 +56,7 @@
     white-space: pre-wrap;
   }
 
-  // Table overflow handling
+  /* Table overflow handling */
   table {
     word-break: break-word;
     overflow-wrap: break-word;
@@ -75,7 +75,6 @@
 
   pre,
   code {
-
     td,
     th {
       padding: var(--pre-th-td-padding);
@@ -84,73 +83,73 @@
     }
   }
 
-
-
-  // Paragraph styles optimization
+  /* Paragraph styles optimization */
   p {
     margin: var(--margin-block);
-
-    // First paragraph has no top margin
-    &:first-child {
-      margin-top: 0;
-    }
-
-    // Last paragraph has no bottom margin
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 
-  // List styles optimization
+  /* First paragraph has no top margin */
+  p:first-child {
+    margin-top: 0;
+  }
+
+  /* Last paragraph has no bottom margin */
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* List styles optimization */
   ul,
   ol {
     margin: var(--margin-ul-ol);
     padding: var(--padding-ul-ol);
-
-    &:first-child {
-      margin-top: 0;
-    }
-
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 
-  ol>li {
+  ul:first-child,
+  ol:first-child {
+    margin-top: 0;
+  }
+
+  ul:last-child,
+  ol:last-child {
+    margin-bottom: 0;
+  }
+
+  ol > li {
     list-style: decimal;
   }
 
-  ul>li {
+  ul > li {
     list-style: disc;
   }
 
   li {
     margin: var(--margin-li);
-
-    &:first-child {
-      margin-top: 0;
-    }
-
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 
-  // Code block styles
+  li:first-child {
+    margin-top: 0;
+  }
+
+  li:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Code block styles */
   pre {
     margin: var(--margin-pre);
     overflow-x: auto;
-
-    &:first-child {
-      margin-top: 0;
-    }
-
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 
-  // Inline code styles
+  pre:first-child {
+    margin-top: 0;
+  }
+
+  pre:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Inline code styles */
   code {
     padding: var(--padding-code-inline);
     margin: var(--margin-code-inline);
@@ -166,30 +165,30 @@
     line-height: 2;
   }
 
-  // Image styles
+  /* Image styles */
   img {
     max-width: 100%;
     height: auto;
     margin: var(--image-margin);
   }
 
-  // Horizontal rule
+  /* Horizontal rule */
   hr {
     margin: var(--hr-margin);
   }
 
-  // Table styles
+  /* Table styles */
   table:not(pre, code) {
     margin: var(--table-margin);
     border-collapse: collapse;
+  }
 
-    &:first-child {
-      margin-top: 0;
-    }
+  table:not(pre, code):first-child {
+    margin-top: 0;
+  }
 
-    &:last-child {
-      margin-bottom: 0;
-    }
+  table:not(pre, code):last-child {
+    margin-bottom: 0;
   }
 }
 
@@ -199,20 +198,20 @@
     margin: 0;
     text-align: initial;
     vertical-align: middle;
+  }
 
-    >.katex {
-      display: inline-block;
-      text-align: initial;
-      white-space: normal;
+  .katex-display > .katex {
+    display: inline-block;
+    text-align: initial;
+    white-space: normal;
+  }
 
-      >.katex-html {
-        display: inline-block;
-        position: static;
+  .katex-display > .katex > .katex-html {
+    display: inline-block;
+    position: static;
+  }
 
-        >.tag {
-          position: static;
-        }
-      }
-    }
+  .katex-display > .katex > .katex-html > .tag {
+    position: static;
   }
 }
