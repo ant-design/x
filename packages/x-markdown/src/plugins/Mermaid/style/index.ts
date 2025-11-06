@@ -1,7 +1,7 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
-import { GenerateStyle } from '../../theme/interface';
+import type { GenerateStyle } from '../../theme/interface';
 import type { FullToken, GetDefaultToken } from '../../theme/useToken';
 
 export interface MermaidToken extends FullToken<'Mermaid'> {}
@@ -82,7 +82,7 @@ export default genStyleHooks<'Mermaid'>(
   'Mermaid',
   (token) => {
     const mermaidToken = mergeToken<MermaidToken>(token, {});
-    return genMermaidStyle(mermaidToken);
+    return [genMermaidStyle(mermaidToken)];
   },
   prepareComponentToken,
 );

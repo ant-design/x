@@ -1,7 +1,7 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
-import { GenerateStyle } from '../../theme/interface';
+import type { GenerateStyle } from '../../theme/interface';
 import type { FullToken, GetDefaultToken } from '../../theme/useToken';
 
 export interface HighlightCodeToken extends FullToken<'HighlightCode'> {}
@@ -63,7 +63,7 @@ export default genStyleHooks<'HighlightCode'>(
   'HighlightCode',
   (token) => {
     const highlightCodeToken = mergeToken<HighlightCodeToken>(token, {});
-    return genHighlightCodeStyle(highlightCodeToken);
+    return [genHighlightCodeStyle(highlightCodeToken)];
   },
   prepareComponentToken,
 );
