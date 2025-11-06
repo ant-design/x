@@ -40,8 +40,8 @@ const testCases = [
   },
   {
     title: 'Render code block',
-    markdown: "```javascript\nconsole.log('hello');\n```",
-    html: '<pre><code data-block="true" data-state="done" class="language-javascript">console.log(\'hello\');\n</code></pre>\n',
+    markdown: '```javascript\nconsole.log(`hello`);\n```\n',
+    html: '<pre><code data-block="true" data-state="done" class="language-javascript">console.log(`hello`);\n</code></pre>\n',
   },
   {
     title: 'Render link',
@@ -263,60 +263,84 @@ describe('custom code component props', () => {
     CodeComponent.mockClear();
   });
 
-  it('should pass block=false and streamStatus=done for inline code', () => {
-    const markdownInlineCodeFinished = 'Inline `code` here';
-    render(<XMarkdown content={markdownInlineCodeFinished} components={{ code: CodeComponent }} />);
-    expect(CodeComponent).toHaveBeenCalledWith(
-      expect.objectContaining({ block: false, streamStatus: 'done' }),
-      undefined,
-    );
-  });
+  const codeTestCases = [
+    {
+      title: 'should pass block=false and streamStatus=done for inline code',
+      markdown: 'Inline `code` here',
+      block: false,
+      streamStatus: 'done',
+    },
+    {
+      title: 'should pass block=false and streamStatus=loading for finished inline code',
+      markdown: '``` inline code ```',
+      block: false,
+      streamStatus: 'done',
+    },
+    {
+      title:
+        'should pass block=true and streamStatus=loading for unfinished fenced code blocks start ```',
+      markdown: '```',
+      block: true,
+      streamStatus: 'loading',
+    },
+    {
+      title:
+        'should pass block=true and streamStatus=loading for unfinished fenced code blocks with ```',
+      markdown: '```js\nconsole.log(`log`);',
+      block: true,
+      streamStatus: 'loading',
+    },
+    {
+      title:
+        'should pass block=true and streamStatus=loading for unfinished fenced code blocks with ```',
+      markdown: '```js\nconsole.log(`log`);\n```',
+      block: true,
+      streamStatus: 'loading',
+    },
+    {
+      title:
+        'should pass block=true and streamStatus=done for finished fenced code blocks with ```',
+      markdown: '```js\n console.log(`log`);\n```\n',
+      block: true,
+      streamStatus: 'done',
+    },
+    {
+      title:
+        'should pass block=true and streamStatus=loading for unfinished fenced code blocks start ~~~',
+      markdown: '~~~',
+      block: true,
+      streamStatus: 'loading',
+    },
+    {
+      title:
+        'should pass block=true and streamStatus=loading for unfinished fenced code blocks with ~~~',
+      markdown: '~~~js\nconsole.log(`log`);',
+      block: true,
+      streamStatus: 'loading',
+    },
+    {
+      title:
+        'should pass block=true and streamStatus=done for finished fenced code blocks with ~~~',
+      markdown: '~~~js\n console.log(`log`);\n~~~\n',
+      block: true,
+      streamStatus: 'done',
+    },
+    {
+      title: 'should pass block=true and streamStatus=done for indented code blocks',
+      markdown: '    console.log(`log`);',
+      block: true,
+      streamStatus: 'done',
+    },
+  ];
 
-  it('should pass block=true and streamStatus=loading for unfinished fenced code blocks start ```', () => {
-    const markdownFenceCodeUnfinished = '```';
-    render(
-      <XMarkdown content={markdownFenceCodeUnfinished} components={{ code: CodeComponent }} />,
-    );
-    expect(CodeComponent).toHaveBeenCalledWith(
-      expect.objectContaining({ block: true, streamStatus: 'loading' }),
-      undefined,
-    );
-  });
-
-  it('should pass block=true and streamStatus=loading for unfinished fenced code blocks', () => {
-    const markdownFenceCodeUnfinished = '```js\nconst a';
-    render(
-      <XMarkdown content={markdownFenceCodeUnfinished} components={{ code: CodeComponent }} />,
-    );
-    expect(CodeComponent).toHaveBeenCalledWith(
-      expect.objectContaining({ block: true, streamStatus: 'loading' }),
-      undefined,
-    );
-  });
-
-  it('should pass block=true and streamStatus=done for finished fenced code blocks', () => {
-    const markdownFencedCodeBlockFinished = '```js\nconst a = 1;\n```';
-    render(
-      <XMarkdown content={markdownFencedCodeBlockFinished} components={{ code: CodeComponent }} />,
-    );
-    expect(CodeComponent).toHaveBeenCalledWith(
-      expect.objectContaining({ block: true, streamStatus: 'done' }),
-      undefined,
-    );
-  });
-
-  it('should pass block=true and streamStatus=done for indented code blocks', () => {
-    const markdownIndentedCodeBlockUnfinished = '    const a = 1';
-    render(
-      <XMarkdown
-        content={markdownIndentedCodeBlockUnfinished}
-        components={{ code: CodeComponent }}
-      />,
-    );
-    expect(CodeComponent).toHaveBeenCalledWith(
-      expect.objectContaining({ block: true, streamStatus: 'done' }),
-      undefined,
-    );
+  codeTestCases.forEach(({ title, markdown, block, streamStatus }) => {
+    it(title, () => {
+      render(<XMarkdown content={markdown} components={{ code: CodeComponent }} />);
+      expect(CodeComponent).toHaveBeenCalledWith(
+        expect.objectContaining({ block, streamStatus }),
+        undefined,
+      );
+    });
   });
 });
 
@@ -402,7 +426,7 @@ describe('extensions', () => {
   it('should use default code renderer when user renderer returns false', async () => {
     const content = `\`\`\`javascript
 console.log("javascript");
-\`\`\``;
+\`\`\`\n`;
     const { container } = render(
       <XMarkdown
         content={content}

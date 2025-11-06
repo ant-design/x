@@ -14,6 +14,8 @@ export const other = {
   endingNewline: /\n$/,
   escapeReplace: /[&<>"']/g,
   escapeReplaceNoEncode: /[<>"']|&(?!(#\d{1,7}|#[Xx][a-fA-F0-9]{1,6}|\w+);)/g,
+  completeFencedCode:
+    /^ {0,3}(`{3,}(?=[^`\n]*(?:\n|$))|~{3,})(?:[^\n]*)(?:\n|$)([\s\S]*?)(?:\n|$) {0,3}\1[~`]* *\n/,
 };
 
 const escapeReplacements: { [index: string]: string } = {
@@ -88,7 +90,7 @@ class Parser {
         const isIndentedCode = codeBlockStyle === 'indented';
         // if code is indented, it's done because it has no end tag
         const streamStatus =
-          isIndentedCode || /(`{3,})([^`]*)\1/m.test(raw.trim()) ? 'done' : 'loading';
+          isIndentedCode || other.completeFencedCode.test(raw) ? 'done' : 'loading';
         const escapedCode = escaped ? code : escapeHtml(code, true);
 
         const classAttr = langString ? ` class="language-${escapeHtml(langString)}"` : '';
