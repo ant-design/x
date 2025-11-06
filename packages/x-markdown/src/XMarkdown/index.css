@@ -14,7 +14,7 @@
   --text-color: inherit;
   --font-size: inherit;
   --margin-block: 0 0 1em 0;
-  --td-th-padding: 0.85em 1;
+  --td-th-padding: 0.85em 1em;
   --pre-th-td-padding: 2px 0;
   --border-font-weight: 600;
   --padding-ul-ol: 0 0 0 1em;
