@@ -254,23 +254,23 @@ exports[`renders components/bubble/demo/basic.tsx extend context correctly 1`] =
               </span>
             </button>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_3n_ ant-tooltip-placement-top"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_3n_ ant-tooltip-placement-top"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
                 class="ant-tooltip-arrow"
                 style="position: absolute; bottom: 0px; left: 0px;"
-              >
-                <span
-                  class="ant-tooltip-arrow-content"
-                />
-              </div>
+              />
               <div
-                class="ant-tooltip-container"
-                id="test-id"
-                role="tooltip"
+                class="ant-tooltip-content"
               >
-                Copy
+                <div
+                  class="ant-tooltip-inner"
+                  id="test-id"
+                  role="tooltip"
+                >
+                  Copy
+                </div>
               </div>
             </div>
           </span>
@@ -302,23 +302,23 @@ exports[`renders components/bubble/demo/basic.tsx extend context correctly 1`] =
               </span>
             </div>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_3n_ ant-tooltip-placement-top"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_3n_ ant-tooltip-placement-top"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
                 class="ant-tooltip-arrow"
                 style="position: absolute; bottom: 0px; left: 0px;"
-              >
-                <span
-                  class="ant-tooltip-arrow-content"
-                />
-              </div>
+              />
               <div
-                class="ant-tooltip-container"
-                id="test-id"
-                role="tooltip"
+                class="ant-tooltip-content"
               >
-                Retry
+                <div
+                  class="ant-tooltip-inner"
+                  id="test-id"
+                  role="tooltip"
+                >
+                  Retry
+                </div>
               </div>
             </div>
           </div>
@@ -657,23 +657,23 @@ exports[`renders components/bubble/demo/editable.tsx extend context correctly 1`
                   </span>
                 </div>
                 <div
-                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_3e_ ant-tooltip-placement-top"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_3e_ ant-tooltip-placement-top"
                   style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                 >
                   <div
                     class="ant-tooltip-arrow"
                     style="position: absolute; bottom: 0px; left: 0px;"
-                  >
-                    <span
-                      class="ant-tooltip-arrow-content"
-                    />
-                  </div>
+                  />
                   <div
-                    class="ant-tooltip-container"
-                    id="test-id"
-                    role="tooltip"
+                    class="ant-tooltip-content"
                   >
-                    edit
+                    <div
+                      class="ant-tooltip-inner"
+                      id="test-id"
+                      role="tooltip"
+                    >
+                      edit
+                    </div>
                   </div>
                 </div>
               </div>
@@ -762,23 +762,23 @@ exports[`renders components/bubble/demo/editable.tsx extend context correctly 1`
                   </span>
                 </div>
                 <div
-                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_3e_ ant-tooltip-placement-top"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_3e_ ant-tooltip-placement-top"
                   style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                 >
                   <div
                     class="ant-tooltip-arrow"
                     style="position: absolute; bottom: 0px; left: 0px;"
-                  >
-                    <span
-                      class="ant-tooltip-arrow-content"
-                    />
-                  </div>
+                  />
                   <div
-                    class="ant-tooltip-container"
-                    id="test-id"
-                    role="tooltip"
+                    class="ant-tooltip-content"
                   >
-                    edit
+                    <div
+                      class="ant-tooltip-inner"
+                      id="test-id"
+                      role="tooltip"
+                    >
+                      edit
+                    </div>
                   </div>
                 </div>
               </div>
@@ -883,23 +883,23 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
                     </span>
                   </div>
                   <div
-                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2l_ ant-tooltip-placement-top"
+                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_2l_ ant-tooltip-placement-top"
                     style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                   >
                     <div
                       class="ant-tooltip-arrow"
                       style="position: absolute; bottom: 0px; left: 0px;"
-                    >
-                      <span
-                        class="ant-tooltip-arrow-content"
-                      />
-                    </div>
+                    />
                     <div
-                      class="ant-tooltip-container"
-                      id="test-id"
-                      role="tooltip"
+                      class="ant-tooltip-content"
                     >
-                      Retry
+                      <div
+                        class="ant-tooltip-inner"
+                        id="test-id"
+                        role="tooltip"
+                      >
+                        Retry
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -931,23 +931,23 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
                     </span>
                   </div>
                   <div
-                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2l_ ant-tooltip-placement-top"
+                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_2l_ ant-tooltip-placement-top"
                     style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                   >
                     <div
                       class="ant-tooltip-arrow"
                       style="position: absolute; bottom: 0px; left: 0px;"
-                    >
-                      <span
-                        class="ant-tooltip-arrow-content"
-                      />
-                    </div>
+                    />
                     <div
-                      class="ant-tooltip-container"
-                      id="test-id"
-                      role="tooltip"
+                      class="ant-tooltip-content"
                     >
-                      Copy
+                      <div
+                        class="ant-tooltip-inner"
+                        id="test-id"
+                        role="tooltip"
+                      >
+                        Copy
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1047,23 +1047,23 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
                       </span>
                     </div>
                     <div
-                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2l_ ant-tooltip-placement-top"
+                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_2l_ ant-tooltip-placement-top"
                       style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                     >
                       <div
                         class="ant-tooltip-arrow"
                         style="position: absolute; bottom: 0px; left: 0px;"
-                      >
-                        <span
-                          class="ant-tooltip-arrow-content"
-                        />
-                      </div>
+                      />
                       <div
-                        class="ant-tooltip-container"
-                        id="test-id"
-                        role="tooltip"
+                        class="ant-tooltip-content"
                       >
-                        Retry
+                        <div
+                          class="ant-tooltip-inner"
+                          id="test-id"
+                          role="tooltip"
+                        >
+                          Retry
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1095,23 +1095,23 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
                       </span>
                     </div>
                     <div
-                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2l_ ant-tooltip-placement-top"
+                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_2l_ ant-tooltip-placement-top"
                       style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                     >
                       <div
                         class="ant-tooltip-arrow"
                         style="position: absolute; bottom: 0px; left: 0px;"
-                      >
-                        <span
-                          class="ant-tooltip-arrow-content"
-                        />
-                      </div>
+                      />
                       <div
-                        class="ant-tooltip-container"
-                        id="test-id"
-                        role="tooltip"
+                        class="ant-tooltip-content"
                       >
-                        Copy
+                        <div
+                          class="ant-tooltip-inner"
+                          id="test-id"
+                          role="tooltip"
+                        >
+                          Copy
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1209,23 +1209,23 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
                     </span>
                   </div>
                   <div
-                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2l_ ant-tooltip-placement-top"
+                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_2l_ ant-tooltip-placement-top"
                     style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                   >
                     <div
                       class="ant-tooltip-arrow"
                       style="position: absolute; bottom: 0px; left: 0px;"
-                    >
-                      <span
-                        class="ant-tooltip-arrow-content"
-                      />
-                    </div>
+                    />
                     <div
-                      class="ant-tooltip-container"
-                      id="test-id"
-                      role="tooltip"
+                      class="ant-tooltip-content"
                     >
-                      Retry
+                      <div
+                        class="ant-tooltip-inner"
+                        id="test-id"
+                        role="tooltip"
+                      >
+                        Retry
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1257,23 +1257,23 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
                     </span>
                   </div>
                   <div
-                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2l_ ant-tooltip-placement-top"
+                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_2l_ ant-tooltip-placement-top"
                     style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                   >
                     <div
                       class="ant-tooltip-arrow"
                       style="position: absolute; bottom: 0px; left: 0px;"
-                    >
-                      <span
-                        class="ant-tooltip-arrow-content"
-                      />
-                    </div>
+                    />
                     <div
-                      class="ant-tooltip-container"
-                      id="test-id"
-                      role="tooltip"
+                      class="ant-tooltip-content"
                     >
-                      Copy
+                      <div
+                        class="ant-tooltip-inner"
+                        id="test-id"
+                        role="tooltip"
+                      >
+                        Copy
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1373,23 +1373,23 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
                       </span>
                     </div>
                     <div
-                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2l_ ant-tooltip-placement-top"
+                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_2l_ ant-tooltip-placement-top"
                       style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                     >
                       <div
                         class="ant-tooltip-arrow"
                         style="position: absolute; bottom: 0px; left: 0px;"
-                      >
-                        <span
-                          class="ant-tooltip-arrow-content"
-                        />
-                      </div>
+                      />
                       <div
-                        class="ant-tooltip-container"
-                        id="test-id"
-                        role="tooltip"
+                        class="ant-tooltip-content"
                       >
-                        Retry
+                        <div
+                          class="ant-tooltip-inner"
+                          id="test-id"
+                          role="tooltip"
+                        >
+                          Retry
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1421,23 +1421,23 @@ exports[`renders components/bubble/demo/footer.tsx extend context correctly 1`] 
                       </span>
                     </div>
                     <div
-                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2l_ ant-tooltip-placement-top"
+                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_2l_ ant-tooltip-placement-top"
                       style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                     >
                       <div
                         class="ant-tooltip-arrow"
                         style="position: absolute; bottom: 0px; left: 0px;"
-                      >
-                        <span
-                          class="ant-tooltip-arrow-content"
-                        />
-                      </div>
+                      />
                       <div
-                        class="ant-tooltip-container"
-                        id="test-id"
-                        role="tooltip"
+                        class="ant-tooltip-content"
                       >
-                        Copy
+                        <div
+                          class="ant-tooltip-inner"
+                          id="test-id"
+                          role="tooltip"
+                        >
+                          Copy
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1756,23 +1756,23 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
                     </span>
                   </div>
                   <div
-                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_f_ ant-tooltip-placement-top"
+                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_f_ ant-tooltip-placement-top"
                     style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                   >
                     <div
                       class="ant-tooltip-arrow"
                       style="position: absolute; bottom: 0px; left: 0px;"
-                    >
-                      <span
-                        class="ant-tooltip-arrow-content"
-                      />
-                    </div>
+                    />
                     <div
-                      class="ant-tooltip-container"
-                      id="test-id"
-                      role="tooltip"
+                      class="ant-tooltip-content"
                     >
-                      edit
+                      <div
+                        class="ant-tooltip-inner"
+                        id="test-id"
+                        role="tooltip"
+                      >
+                        edit
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1889,23 +1889,23 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
                     </span>
                   </div>
                   <div
-                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_f_ ant-tooltip-placement-top"
+                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_f_ ant-tooltip-placement-top"
                     style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                   >
                     <div
                       class="ant-tooltip-arrow"
                       style="position: absolute; bottom: 0px; left: 0px;"
-                    >
-                      <span
-                        class="ant-tooltip-arrow-content"
-                      />
-                    </div>
+                    />
                     <div
-                      class="ant-tooltip-container"
-                      id="test-id"
-                      role="tooltip"
+                      class="ant-tooltip-content"
                     >
-                      Retry
+                      <div
+                        class="ant-tooltip-inner"
+                        id="test-id"
+                        role="tooltip"
+                      >
+                        Retry
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1937,23 +1937,23 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
                     </span>
                   </div>
                   <div
-                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_f_ ant-tooltip-placement-top"
+                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_f_ ant-tooltip-placement-top"
                     style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                   >
                     <div
                       class="ant-tooltip-arrow"
                       style="position: absolute; bottom: 0px; left: 0px;"
-                    >
-                      <span
-                        class="ant-tooltip-arrow-content"
-                      />
-                    </div>
+                    />
                     <div
-                      class="ant-tooltip-container"
-                      id="test-id"
-                      role="tooltip"
+                      class="ant-tooltip-content"
                     >
-                      Copy
+                      <div
+                        class="ant-tooltip-inner"
+                        id="test-id"
+                        role="tooltip"
+                      >
+                        Copy
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -2042,23 +2042,23 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
                     </span>
                   </div>
                   <div
-                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_f_ ant-tooltip-placement-top"
+                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_f_ ant-tooltip-placement-top"
                     style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                   >
                     <div
                       class="ant-tooltip-arrow"
                       style="position: absolute; bottom: 0px; left: 0px;"
-                    >
-                      <span
-                        class="ant-tooltip-arrow-content"
-                      />
-                    </div>
+                    />
                     <div
-                      class="ant-tooltip-container"
-                      id="test-id"
-                      role="tooltip"
+                      class="ant-tooltip-content"
                     >
-                      edit
+                      <div
+                        class="ant-tooltip-inner"
+                        id="test-id"
+                        role="tooltip"
+                      >
+                        edit
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -2193,23 +2193,23 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
                   </span>
                 </button>
                 <div
-                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1r_ ant-tooltip-placement-top"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_1r_ ant-tooltip-placement-top"
                   style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                 >
                   <div
                     class="ant-tooltip-arrow"
                     style="position: absolute; bottom: 0px; left: 0px;"
-                  >
-                    <span
-                      class="ant-tooltip-arrow-content"
-                    />
-                  </div>
+                  />
                   <div
-                    class="ant-tooltip-container"
-                    id="test-id"
-                    role="tooltip"
+                    class="ant-tooltip-content"
                   >
-                    Copy
+                    <div
+                      class="ant-tooltip-inner"
+                      id="test-id"
+                      role="tooltip"
+                    >
+                      Copy
+                    </div>
                   </div>
                 </div>
               </span>
@@ -2242,23 +2242,23 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
                   </span>
                 </span>
                 <div
-                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1r_ ant-tooltip-placement-top"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_1r_ ant-tooltip-placement-top"
                   style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                 >
                   <div
                     class="ant-tooltip-arrow"
                     style="position: absolute; bottom: 0px; left: 0px;"
-                  >
-                    <span
-                      class="ant-tooltip-arrow-content"
-                    />
-                  </div>
+                  />
                   <div
-                    class="ant-tooltip-container"
-                    id="test-id"
-                    role="tooltip"
+                    class="ant-tooltip-content"
                   >
-                    Like
+                    <div
+                      class="ant-tooltip-inner"
+                      id="test-id"
+                      role="tooltip"
+                    >
+                      Like
+                    </div>
                   </div>
                 </div>
               </div>
@@ -2330,23 +2330,23 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
                   </span>
                 </button>
                 <div
-                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1r_ ant-tooltip-placement-top"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_1r_ ant-tooltip-placement-top"
                   style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                 >
                   <div
                     class="ant-tooltip-arrow"
                     style="position: absolute; bottom: 0px; left: 0px;"
-                  >
-                    <span
-                      class="ant-tooltip-arrow-content"
-                    />
-                  </div>
+                  />
                   <div
-                    class="ant-tooltip-container"
-                    id="test-id"
-                    role="tooltip"
+                    class="ant-tooltip-content"
                   >
-                    Copy
+                    <div
+                      class="ant-tooltip-inner"
+                      id="test-id"
+                      role="tooltip"
+                    >
+                      Copy
+                    </div>
                   </div>
                 </div>
               </span>
@@ -2378,23 +2378,23 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
                   </span>
                 </span>
                 <div
-                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1r_ ant-tooltip-placement-top"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_1r_ ant-tooltip-placement-top"
                   style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                 >
                   <div
                     class="ant-tooltip-arrow"
                     style="position: absolute; bottom: 0px; left: 0px;"
-                  >
-                    <span
-                      class="ant-tooltip-arrow-content"
-                    />
-                  </div>
+                  />
                   <div
-                    class="ant-tooltip-container"
-                    id="test-id"
-                    role="tooltip"
+                    class="ant-tooltip-content"
                   >
-                    Dislike
+                    <div
+                      class="ant-tooltip-inner"
+                      id="test-id"
+                      role="tooltip"
+                    >
+                      Dislike
+                    </div>
                   </div>
                 </div>
               </div>
@@ -2466,23 +2466,23 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
                   </span>
                 </button>
                 <div
-                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1r_ ant-tooltip-placement-top"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_1r_ ant-tooltip-placement-top"
                   style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                 >
                   <div
                     class="ant-tooltip-arrow"
                     style="position: absolute; bottom: 0px; left: 0px;"
-                  >
-                    <span
-                      class="ant-tooltip-arrow-content"
-                    />
-                  </div>
+                  />
                   <div
-                    class="ant-tooltip-container"
-                    id="test-id"
-                    role="tooltip"
+                    class="ant-tooltip-content"
                   >
-                    Copy
+                    <div
+                      class="ant-tooltip-inner"
+                      id="test-id"
+                      role="tooltip"
+                    >
+                      Copy
+                    </div>
                   </div>
                 </div>
               </span>
@@ -2514,23 +2514,23 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
                   </span>
                 </span>
                 <div
-                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1r_ ant-tooltip-placement-top"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_1r_ ant-tooltip-placement-top"
                   style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                 >
                   <div
                     class="ant-tooltip-arrow"
                     style="position: absolute; bottom: 0px; left: 0px;"
-                  >
-                    <span
-                      class="ant-tooltip-arrow-content"
-                    />
-                  </div>
+                  />
                   <div
-                    class="ant-tooltip-container"
-                    id="test-id"
-                    role="tooltip"
+                    class="ant-tooltip-content"
                   >
-                    Dislike
+                    <div
+                      class="ant-tooltip-inner"
+                      id="test-id"
+                      role="tooltip"
+                    >
+                      Dislike
+                    </div>
                   </div>
                 </div>
               </div>
@@ -2602,23 +2602,23 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
                   </span>
                 </button>
                 <div
-                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1r_ ant-tooltip-placement-top"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_1r_ ant-tooltip-placement-top"
                   style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                 >
                   <div
                     class="ant-tooltip-arrow"
                     style="position: absolute; bottom: 0px; left: 0px;"
-                  >
-                    <span
-                      class="ant-tooltip-arrow-content"
-                    />
-                  </div>
+                  />
                   <div
-                    class="ant-tooltip-container"
-                    id="test-id"
-                    role="tooltip"
+                    class="ant-tooltip-content"
                   >
-                    Copy
+                    <div
+                      class="ant-tooltip-inner"
+                      id="test-id"
+                      role="tooltip"
+                    >
+                      Copy
+                    </div>
                   </div>
                 </div>
               </span>
@@ -2651,23 +2651,23 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
                   </span>
                 </span>
                 <div
-                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1r_ ant-tooltip-placement-top"
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_1r_ ant-tooltip-placement-top"
                   style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                 >
                   <div
                     class="ant-tooltip-arrow"
                     style="position: absolute; bottom: 0px; left: 0px;"
-                  >
-                    <span
-                      class="ant-tooltip-arrow-content"
-                    />
-                  </div>
+                  />
                   <div
-                    class="ant-tooltip-container"
-                    id="test-id"
-                    role="tooltip"
+                    class="ant-tooltip-content"
                   >
-                    Like
+                    <div
+                      class="ant-tooltip-inner"
+                      id="test-id"
+                      role="tooltip"
+                    >
+                      Like
+                    </div>
                   </div>
                 </div>
               </div>
@@ -2866,23 +2866,23 @@ exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly
                     </span>
                   </div>
                   <div
-                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
+                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_s_ ant-tooltip-placement-top"
                     style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                   >
                     <div
                       class="ant-tooltip-arrow"
                       style="position: absolute; bottom: 0px; left: 0px;"
-                    >
-                      <span
-                        class="ant-tooltip-arrow-content"
-                      />
-                    </div>
+                    />
                     <div
-                      class="ant-tooltip-container"
-                      id="test-id"
-                      role="tooltip"
+                      class="ant-tooltip-content"
                     >
-                      Retry
+                      <div
+                        class="ant-tooltip-inner"
+                        id="test-id"
+                        role="tooltip"
+                      >
+                        Retry
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -2914,23 +2914,23 @@ exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly
                     </span>
                   </div>
                   <div
-                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
+                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_s_ ant-tooltip-placement-top"
                     style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                   >
                     <div
                       class="ant-tooltip-arrow"
                       style="position: absolute; bottom: 0px; left: 0px;"
-                    >
-                      <span
-                        class="ant-tooltip-arrow-content"
-                      />
-                    </div>
+                    />
                     <div
-                      class="ant-tooltip-container"
-                      id="test-id"
-                      role="tooltip"
+                      class="ant-tooltip-content"
                     >
-                      Copy
+                      <div
+                        class="ant-tooltip-inner"
+                        id="test-id"
+                        role="tooltip"
+                      >
+                        Copy
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -3064,23 +3064,23 @@ exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly
                     </span>
                   </div>
                   <div
-                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
+                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_s_ ant-tooltip-placement-top"
                     style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                   >
                     <div
                       class="ant-tooltip-arrow"
                       style="position: absolute; bottom: 0px; left: 0px;"
-                    >
-                      <span
-                        class="ant-tooltip-arrow-content"
-                      />
-                    </div>
+                    />
                     <div
-                      class="ant-tooltip-container"
-                      id="test-id"
-                      role="tooltip"
+                      class="ant-tooltip-content"
                     >
-                      Retry
+                      <div
+                        class="ant-tooltip-inner"
+                        id="test-id"
+                        role="tooltip"
+                      >
+                        Retry
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -3112,23 +3112,23 @@ exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly
                     </span>
                   </div>
                   <div
-                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
+                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_s_ ant-tooltip-placement-top"
                     style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                   >
                     <div
                       class="ant-tooltip-arrow"
                       style="position: absolute; bottom: 0px; left: 0px;"
-                    >
-                      <span
-                        class="ant-tooltip-arrow-content"
-                      />
-                    </div>
+                    />
                     <div
-                      class="ant-tooltip-container"
-                      id="test-id"
-                      role="tooltip"
+                      class="ant-tooltip-content"
                     >
-                      Copy
+                      <div
+                        class="ant-tooltip-inner"
+                        id="test-id"
+                        role="tooltip"
+                      >
+                        Copy
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -3262,23 +3262,23 @@ exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly
                     </span>
                   </div>
                   <div
-                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
+                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_s_ ant-tooltip-placement-top"
                     style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                   >
                     <div
                       class="ant-tooltip-arrow"
                       style="position: absolute; bottom: 0px; left: 0px;"
-                    >
-                      <span
-                        class="ant-tooltip-arrow-content"
-                      />
-                    </div>
+                    />
                     <div
-                      class="ant-tooltip-container"
-                      id="test-id"
-                      role="tooltip"
+                      class="ant-tooltip-content"
                     >
-                      Retry
+                      <div
+                        class="ant-tooltip-inner"
+                        id="test-id"
+                        role="tooltip"
+                      >
+                        Retry
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -3310,23 +3310,23 @@ exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly
                     </span>
                   </div>
                   <div
-                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
+                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_s_ ant-tooltip-placement-top"
                     style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                   >
                     <div
                       class="ant-tooltip-arrow"
                       style="position: absolute; bottom: 0px; left: 0px;"
-                    >
-                      <span
-                        class="ant-tooltip-arrow-content"
-                      />
-                    </div>
+                    />
                     <div
-                      class="ant-tooltip-container"
-                      id="test-id"
-                      role="tooltip"
+                      class="ant-tooltip-content"
                     >
-                      Copy
+                      <div
+                        class="ant-tooltip-inner"
+                        id="test-id"
+                        role="tooltip"
+                      >
+                        Copy
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -3460,23 +3460,23 @@ exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly
                     </span>
                   </div>
                   <div
-                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
+                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_s_ ant-tooltip-placement-top"
                     style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                   >
                     <div
                       class="ant-tooltip-arrow"
                       style="position: absolute; bottom: 0px; left: 0px;"
-                    >
-                      <span
-                        class="ant-tooltip-arrow-content"
-                      />
-                    </div>
+                    />
                     <div
-                      class="ant-tooltip-container"
-                      id="test-id"
-                      role="tooltip"
+                      class="ant-tooltip-content"
                     >
-                      Retry
+                      <div
+                        class="ant-tooltip-inner"
+                        id="test-id"
+                        role="tooltip"
+                      >
+                        Retry
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -3508,23 +3508,23 @@ exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly
                     </span>
                   </div>
                   <div
-                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
+                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_s_ ant-tooltip-placement-top"
                     style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                   >
                     <div
                       class="ant-tooltip-arrow"
                       style="position: absolute; bottom: 0px; left: 0px;"
-                    >
-                      <span
-                        class="ant-tooltip-arrow-content"
-                      />
-                    </div>
+                    />
                     <div
-                      class="ant-tooltip-container"
-                      id="test-id"
-                      role="tooltip"
+                      class="ant-tooltip-content"
                     >
-                      Copy
+                      <div
+                        class="ant-tooltip-inner"
+                        id="test-id"
+                        role="tooltip"
+                      >
+                        Copy
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -3658,23 +3658,23 @@ exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly
                     </span>
                   </div>
                   <div
-                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
+                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_s_ ant-tooltip-placement-top"
                     style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                   >
                     <div
                       class="ant-tooltip-arrow"
                       style="position: absolute; bottom: 0px; left: 0px;"
-                    >
-                      <span
-                        class="ant-tooltip-arrow-content"
-                      />
-                    </div>
+                    />
                     <div
-                      class="ant-tooltip-container"
-                      id="test-id"
-                      role="tooltip"
+                      class="ant-tooltip-content"
                     >
-                      Retry
+                      <div
+                        class="ant-tooltip-inner"
+                        id="test-id"
+                        role="tooltip"
+                      >
+                        Retry
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -3706,23 +3706,23 @@ exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly
                     </span>
                   </div>
                   <div
-                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
+                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_s_ ant-tooltip-placement-top"
                     style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                   >
                     <div
                       class="ant-tooltip-arrow"
                       style="position: absolute; bottom: 0px; left: 0px;"
-                    >
-                      <span
-                        class="ant-tooltip-arrow-content"
-                      />
-                    </div>
+                    />
                     <div
-                      class="ant-tooltip-container"
-                      id="test-id"
-                      role="tooltip"
+                      class="ant-tooltip-content"
                     >
-                      Copy
+                      <div
+                        class="ant-tooltip-inner"
+                        id="test-id"
+                        role="tooltip"
+                      >
+                        Copy
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -4105,23 +4105,23 @@ exports[`renders components/bubble/demo/sider-and-placement.tsx extend context c
             </span>
           </span>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_3_ ant-tooltip-placement-top"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_3_ ant-tooltip-placement-top"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
               class="ant-tooltip-arrow"
               style="position: absolute; bottom: 0px; left: 0px;"
-            >
-              <span
-                class="ant-tooltip-arrow-content"
-              />
-            </div>
+            />
             <div
-              class="ant-tooltip-container"
-              id="test-id"
-              role="tooltip"
+              class="ant-tooltip-content"
             >
-              main side
+              <div
+                class="ant-tooltip-inner"
+                id="test-id"
+                role="tooltip"
+              >
+                main side
+              </div>
             </div>
           </div>
         </div>
@@ -4158,23 +4158,23 @@ exports[`renders components/bubble/demo/sider-and-placement.tsx extend context c
             </svg>
           </span>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_3_ ant-tooltip-placement-top"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_3_ ant-tooltip-placement-top"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
               class="ant-tooltip-arrow"
               style="position: absolute; bottom: 0px; left: 0px;"
-            >
-              <span
-                class="ant-tooltip-arrow-content"
-              />
-            </div>
+            />
             <div
-              class="ant-tooltip-container"
-              id="test-id"
-              role="tooltip"
+              class="ant-tooltip-content"
             >
-              extra side
+              <div
+                class="ant-tooltip-inner"
+                id="test-id"
+                role="tooltip"
+              >
+                extra side
+              </div>
             </div>
           </div>
         </div>
@@ -4218,23 +4218,23 @@ exports[`renders components/bubble/demo/sider-and-placement.tsx extend context c
             </span>
           </span>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_3_ ant-tooltip-placement-top"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_3_ ant-tooltip-placement-top"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
               class="ant-tooltip-arrow"
               style="position: absolute; bottom: 0px; left: 0px;"
-            >
-              <span
-                class="ant-tooltip-arrow-content"
-              />
-            </div>
+            />
             <div
-              class="ant-tooltip-container"
-              id="test-id"
-              role="tooltip"
+              class="ant-tooltip-content"
             >
-              main side
+              <div
+                class="ant-tooltip-inner"
+                id="test-id"
+                role="tooltip"
+              >
+                main side
+              </div>
             </div>
           </div>
         </div>
@@ -4271,23 +4271,23 @@ exports[`renders components/bubble/demo/sider-and-placement.tsx extend context c
             </svg>
           </span>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_3_ ant-tooltip-placement-top"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast css-var-_r_3_ ant-tooltip-placement-top"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
               class="ant-tooltip-arrow"
               style="position: absolute; bottom: 0px; left: 0px;"
-            >
-              <span
-                class="ant-tooltip-arrow-content"
-              />
-            </div>
+            />
             <div
-              class="ant-tooltip-container"
-              id="test-id"
-              role="tooltip"
+              class="ant-tooltip-content"
             >
-              extra side
+              <div
+                class="ant-tooltip-inner"
+                id="test-id"
+                role="tooltip"
+              >
+                extra side
+              </div>
             </div>
           </div>
         </div>
