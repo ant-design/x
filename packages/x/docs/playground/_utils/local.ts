@@ -1,7 +1,10 @@
+import type { XProviderProps } from '@ant-design/x';
 import enUS_X from '@ant-design/x/locale/en_US';
 import zhCN_X from '@ant-design/x/locale/zh_CN';
 import enUS_antd from 'antd/locale/en_US';
 import zhCN_antd from 'antd/locale/zh_CN';
+
+type BaseLocale = XProviderProps['locale'];
 
 const zhCN = {
   whatIsAntDesignX: '什么是 Ant Design X？',
@@ -143,7 +146,15 @@ const enUS = {
   iCanHelp: 'I can help:',
 };
 
+type CustomLocaleFields = typeof zhCN;
+
+export type ExtendedLocale = BaseLocale & CustomLocaleFields;
+
 export const isZhCN =
   typeof window !== 'undefined' && window?.parent?.location?.pathname?.includes('-cn');
 
-export default isZhCN ? { ...zhCN_antd, ...zhCN, ...zhCN_X } : { ...enUS_antd, ...enUS, ...enUS_X };
+const locale: ExtendedLocale = isZhCN
+  ? ({ ...zhCN_antd, ...zhCN, ...zhCN_X } as ExtendedLocale)
+  : ({ ...enUS_antd, ...enUS, ...enUS_X } as ExtendedLocale);
+
+export default locale;
