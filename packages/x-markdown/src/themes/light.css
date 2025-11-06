@@ -12,12 +12,6 @@
   --cite-hover-bg: rgba(0, 0, 0, 0.2);
   --border-radius-middle: 6px;
   --border-radius-small: 4px;
-
-  width: 100%;
-  color: var(--text-color);
-  word-wrap: break-word;
-  user-select: text;
-  line-height: 1.5714285714285714;
 }
 
 .x-markdown-light h1,

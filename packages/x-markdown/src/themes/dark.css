@@ -12,11 +12,7 @@
   --cite-hover-bg: rgba(255, 255, 255, 0.2);
   --border-radius-middle: 6px;
   --border-radius-small: 4px;
-  width: 100%;
-  color: var(--text-color);
-  word-wrap: break-word;
-  user-select: text;
-  line-height: 1.5714285714285714;
+  --td-th-padding: 10px 12px;
 }
 
 .x-markdown-dark h1,
@@ -39,7 +35,8 @@
 }
 
 .x-markdown-dark h3 {
-  font-size: 18px; /* 18px */
+  font-size: 18px;
+  /* 18px */
   line-height: 30px;
 }
 
@@ -138,17 +135,16 @@
 
 .x-markdown-dark th,
 .x-markdown-dark td {
-  padding: 10px 12px;
+  padding: var(--td-th-padding);
   border: 1px solid var(--border-color);
 }
 
 .x-markdown-dark th {
-  color: var(--heading-color) !important;
-  font-weight: 600;
+  color: var(--heading-color);
 }
 
 .x-markdown-dark td {
-  color: var(--text-color) !important;
+  color: var(--text-color);
 }
 
 .x-markdown-dark blockquote {

@@ -1,11 +1,28 @@
 // XMarkdown default styles
 // Note: No theme colors included, only basic layout and typography styles
+@keyframes x-markdown-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
 
 .x-markdown {
+  --text-color: inherit;
+  --border-color: #f0f0f0;
+  --line-color: rgba(5, 5, 5, 0.06);
+  --td-th-padding: 10px 12px;
+  --heading-color: #000;
   // Base styles
   line-height: 1.5714285714285714;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  width: 100%;
+  color: var(--text-color);
+
 
   // Long content wrapping
   p,
@@ -32,6 +49,21 @@
     overflow-wrap: break-word;
     table-layout: fixed;
     width: 100%;
+  }
+
+  th,
+  td {
+    padding: var(--td-th-padding);
+    border: 1px solid var(--border-color);
+  }
+  td{
+    color: var(--text-color);
+  }
+
+
+  th {
+    color: var(--heading-color);
+    font-weight: 600;
   }
 
   // Paragraph styles optimization
@@ -106,6 +138,18 @@
     line-height: 2;
   }
 
+  pre,
+  code {
+
+    td,
+    th {
+      padding-inline: 0;
+      padding-block: 2px;
+      border: none;
+      text-align: left;
+    }
+  }
+
   // Image styles
   img {
     max-width: 100%;
@@ -117,11 +161,11 @@
   hr {
     margin: 1.5em 0;
     border: none;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid var(--line-color);
   }
 
   // Table styles
-  table:not(pre code) {
+  table:not(pre, code) {
     margin: 1em 0;
     border-collapse: collapse;
 
@@ -133,45 +177,25 @@
       margin-bottom: 0;
     }
   }
-
-  th,
-  td:not(pre code) {
-    padding: 0.5em;
-    border: 1px solid #ddd;
-  }
-
-  th:not(pre code) {
-    font-weight: bold;
-  }
 }
 
-@keyframes x-markdown-fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-.inline-katex {
+.x-markdown .inline-katex {
   .katex-display {
     display: inline-block;
     margin: 0;
     text-align: initial;
     vertical-align: middle;
 
-    > .katex {
+    >.katex {
       display: inline-block;
       text-align: initial;
       white-space: normal;
 
-      > .katex-html {
+      >.katex-html {
         display: inline-block;
         position: static;
 
-        > .tag {
+        >.tag {
           position: static;
         }
       }
