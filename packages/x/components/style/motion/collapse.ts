@@ -1,7 +1,7 @@
 import { TokenWithCommonCls } from '@ant-design/cssinjs-utils';
-import { AliasToken, GenerateStyle } from '../theme/cssinjs-utils';
+import { AliasToken, GenerateStyle } from '../../theme/cssinjs-utils';
 
-const genCollapseMotion: GenerateStyle<TokenWithCommonCls<AliasToken>> = (token) => ({
+export const genCollapseMotion: GenerateStyle<TokenWithCommonCls<AliasToken>> = (token) => ({
   [token.componentCls]: {
     [`${token.antCls}-motion-collapse-legacy`]: {
       overflow: 'hidden',
@@ -18,5 +18,3 @@ const genCollapseMotion: GenerateStyle<TokenWithCommonCls<AliasToken>> = (token)
     },
   },
 });
-
-export default genCollapseMotion;

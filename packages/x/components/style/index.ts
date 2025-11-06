@@ -1,3 +1,3 @@
-export { blinkMotion } from './blink';
-export { default as genCollapseMotion } from './collapse';
-export { initFadeLeftMotion, initFadeMotion } from './fade';
+export { blinkMotion } from './motion/blink';
+export { genCollapseMotion } from './motion/collapse';
+export { initFadeLeftMotion, initFadeMotion } from './motion/fade';

@@ -1,6 +1,6 @@
 import { CSSInterpolation, Keyframes } from '@ant-design/cssinjs';
 import { TokenWithCommonCls } from '@ant-design/cssinjs-utils';
-import { AliasToken } from '../theme/cssinjs-utils';
+import { AliasToken } from '../../theme/cssinjs-utils';
 
 export const blink = new Keyframes('antXBlink', {
   '0%': {
