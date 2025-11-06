@@ -1,10 +1,11 @@
-/* XMarkdown default styles */
-/* Note: No theme colors included, only basic layout and typography styles */
+/* ==========================================
+   XMarkdown – default css
+   ========================================== */
+
 @keyframes x-markdown-fade-in {
   from {
     opacity: 0;
   }
-
   to {
     opacity: 1;
   }
@@ -29,189 +30,159 @@
   --hr-margin: 1.5em 0;
   --table-margin: 1em 0;
 
-  /* Base styles */
   font-size: var(--font-size);
   line-height: 1.5714285714285714;
   word-wrap: break-word;
   overflow-wrap: break-word;
   width: 100%;
   color: var(--text-color);
-
-  /* Long content wrapping */
-  p,
-  div,
-  span,
-  li,
-  td,
-  th {
-    word-break: break-word;
-    overflow-wrap: break-word;
-  }
-
-  /* Code block wrapping */
-  pre,
-  code {
-    word-break: break-word;
-    overflow-wrap: break-word;
-    white-space: pre-wrap;
-  }
-
-  /* Table overflow handling */
-  table {
-    word-break: break-word;
-    overflow-wrap: break-word;
-    table-layout: fixed;
-    width: 100%;
-  }
-
-  th,
-  td {
-    padding: var(--td-th-padding);
-  }
-
-  th {
-    font-weight: var(--border-font-weight);
-  }
-
-  pre,
-  code {
-    td,
-    th {
-      padding: var(--pre-th-td-padding);
-      border: none;
-      text-align: left;
-    }
-  }
-
-  /* Paragraph styles optimization */
-  p {
-    margin: var(--margin-block);
-  }
-
-  /* First paragraph has no top margin */
-  p:first-child {
-    margin-top: 0;
-  }
-
-  /* Last paragraph has no bottom margin */
-  p:last-child {
-    margin-bottom: 0;
-  }
-
-  /* List styles optimization */
-  ul,
-  ol {
-    margin: var(--margin-ul-ol);
-    padding: var(--padding-ul-ol);
-  }
-
-  ul:first-child,
-  ol:first-child {
-    margin-top: 0;
-  }
-
-  ul:last-child,
-  ol:last-child {
-    margin-bottom: 0;
-  }
-
-  ol > li {
-    list-style: decimal;
-  }
-
-  ul > li {
-    list-style: disc;
-  }
-
-  li {
-    margin: var(--margin-li);
-  }
-
-  li:first-child {
-    margin-top: 0;
-  }
-
-  li:last-child {
-    margin-bottom: 0;
-  }
-
-  /* Code block styles */
-  pre {
-    margin: var(--margin-pre);
-    overflow-x: auto;
-  }
-
-  pre:first-child {
-    margin-top: 0;
-  }
-
-  pre:last-child {
-    margin-bottom: 0;
-  }
-
-  /* Inline code styles */
-  code {
-    padding: var(--padding-code-inline);
-    margin: var(--margin-code-inline);
-    font-size: var(--code-inline-text);
-    border-radius: var(--small-border-radius);
-  }
-
-  pre code {
-    padding: 0;
-    margin: 0;
-    font-size: inherit;
-    border-radius: 0;
-    line-height: 2;
-  }
-
-  /* Image styles */
-  img {
-    max-width: 100%;
-    height: auto;
-    margin: var(--image-margin);
-  }
-
-  /* Horizontal rule */
-  hr {
-    margin: var(--hr-margin);
-  }
-
-  /* Table styles */
-  table:not(pre, code) {
-    margin: var(--table-margin);
-    border-collapse: collapse;
-  }
-
-  table:not(pre, code):first-child {
-    margin-top: 0;
-  }
-
-  table:not(pre, code):last-child {
-    margin-bottom: 0;
-  }
 }
 
-.x-markdown .inline-katex {
-  .katex-display {
-    display: inline-block;
-    margin: 0;
-    text-align: initial;
-    vertical-align: middle;
-  }
+.x-markdown p,
+.x-markdown div,
+.x-markdown span,
+.x-markdown li,
+.x-markdown td,
+.x-markdown th {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
 
-  .katex-display > .katex {
-    display: inline-block;
-    text-align: initial;
-    white-space: normal;
-  }
+.x-markdown pre,
+.x-markdown code {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
 
-  .katex-display > .katex > .katex-html {
-    display: inline-block;
-    position: static;
-  }
+.x-markdown table {
+  table-layout: fixed;
+  width: 100%;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
 
-  .katex-display > .katex > .katex-html > .tag {
-    position: static;
-  }
+.x-markdown th,
+.x-markdown td {
+  padding: var(--td-th-padding);
+}
+
+.x-markdown th {
+  font-weight: var(--border-font-weight);
+}
+
+.x-markdown pre td,
+.x-markdown pre th {
+  padding: var(--pre-th-td-padding);
+  border: none;
+  text-align: left;
+}
+
+.x-markdown p {
+  margin: var(--margin-block);
+}
+.x-markdown p:first-child {
+  margin-top: 0;
+}
+.x-markdown p:last-child {
+  margin-bottom: 0;
+}
+
+.x-markdown ul,
+.x-markdown ol {
+  margin: var(--margin-ul-ol);
+  padding: var(--padding-ul-ol);
+}
+.x-markdown ul:first-child,
+.x-markdown ol:first-child {
+  margin-top: 0;
+}
+.x-markdown ul:last-child,
+.x-markdown ol:last-child {
+  margin-bottom: 0;
+}
+
+.x-markdown ol > li {
+  list-style: decimal;
+}
+.x-markdown ul > li {
+  list-style: disc;
+}
+.x-markdown li {
+  margin: var(--margin-li);
+}
+.x-markdown li:first-child {
+  margin-top: 0;
+}
+.x-markdown li:last-child {
+  margin-bottom: 0;
+}
+
+.x-markdown pre {
+  margin: var(--margin-pre);
+  overflow-x: auto;
+}
+.x-markdown pre:first-child {
+  margin-top: 0;
+}
+.x-markdown pre:last-child {
+  margin-bottom: 0;
+}
+
+.x-markdown code {
+  padding: var(--padding-code-inline);
+  margin: var(--margin-code-inline);
+  font-size: var(--code-inline-text);
+  border-radius: var(--small-border-radius);
+}
+
+.x-markdown pre code {
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  border-radius: 0;
+  line-height: 2;
+}
+
+.x-markdown img {
+  max-width: 100%;
+  height: auto;
+  margin: var(--image-margin);
+}
+
+.x-markdown hr {
+  margin: var(--hr-margin);
+}
+
+.x-markdown table:not(pre) {
+  margin: var(--table-margin);
+  border-collapse: collapse;
+}
+.x-markdown table:not(pre):first-child {
+  margin-top: 0;
+}
+.x-markdown table:not(pre):last-child {
+  margin-bottom: 0;
+}
+
+.x-markdown .inline-katex .katex-display {
+  display: inline-block;
+  margin: 0;
+  text-align: initial;
+  vertical-align: middle;
+}
+
+.x-markdown .inline-katex .katex-display > .katex {
+  display: inline-block;
+  text-align: initial;
+  white-space: normal;
+}
+
+.x-markdown .inline-katex .katex-display > .katex > .katex-html {
+  display: inline-block;
+  position: static;
+}
+
+.x-markdown .inline-katex .katex-display > .katex > .katex-html > .tag {
+  position: static;
 }
