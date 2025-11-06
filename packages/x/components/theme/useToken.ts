@@ -65,7 +65,7 @@ export const getComputedToken = (
           {
             override: componentTokens,
           },
-          componentTheme,
+          componentTheme as unknown as Theme<any, any>,
         );
       }
       mergedDerivativeToken[key] = mergedComponentToken;
@@ -97,7 +97,7 @@ export function useInternalToken(): [
   const mergedTheme = theme || defaultTheme;
 
   const [token, hashId, realToken] = useCacheToken<GlobalToken, SeedToken>(
-    mergedTheme,
+    mergedTheme as Theme<any, any>,
     [antdTheme.defaultSeed, rootDesignToken],
     {
       salt: `${version}-${hashed || ''}`,
