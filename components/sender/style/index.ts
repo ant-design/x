@@ -102,11 +102,9 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
         minHeight: 'auto',
       },
       [`${componentCls}-count`]: {
-        insetInlineEnd: 0,
         color: colorTextDescription,
         whiteSpace: 'nowrap',
         pointerEvents: 'none',
-        display: 'flex',
         lineHeight: '2.2em',
       },
 

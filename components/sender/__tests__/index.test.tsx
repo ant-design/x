@@ -264,7 +264,7 @@ describe('Sender Component', () => {
         const { container } = render(<Sender maxLength={5} showCount value="12345" />);
         expect(container.querySelector('textarea')?.value).toBe('12345');
         expect(
-          container.querySelector('.ant-sender-count')?.getAttribute('data-count'),
+          container.querySelector('.ant-sender-count')?.textContent,
         ).toBe('5 / 5');
       });
 
@@ -272,7 +272,7 @@ describe('Sender Component', () => {
         const { container } = render(<Sender maxLength={5} showCount value="12345678" />);
         expect(container.querySelector('textarea')?.value).toBe('12345678');
         expect(
-          container.querySelector('.ant-sender-count')?.getAttribute('data-count'),
+          container.querySelector('.ant-sender-count')?.textContent,
         ).toBe('8 / 5');
       });
 
@@ -288,7 +288,7 @@ describe('Sender Component', () => {
         );
         expect(container.querySelector('textarea')?.value).toBe('12345');
         expect(
-          container.querySelector('.ant-sender-count')?.getAttribute('data-count'),
+          container.querySelector('.ant-sender-count')?.textContent,
         ).toBe('12345, 5, 5');
       });
     });

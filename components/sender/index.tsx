@@ -201,13 +201,17 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
 
     if (!shouldShowCount) return null;
 
+    let countNode: React.ReactNode;
+
     // 对象形式：使用用户自定义 formatter
     if (typeof showCount === 'object' && showCount.formatter) {
-      return showCount.formatter({
+      countNode = showCount.formatter({
         value: innerValue,
         count: innerValue.length,
         maxLength,
       });
+    } else {
+      countNode = `${innerValue.length} / ${maxLength}`;
     }
 
     // 布尔/真值形式：默认渲染
@@ -216,8 +220,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
         className={classnames(`${prefixCls}-count`, contextConfig.classNames?.count)}
         style={contextConfig.styles?.count}
       >
-        {innerValue.length}
-        {maxLength !== 0 && `/${maxLength}`}
+        {countNode}
       </div>
     );
   };

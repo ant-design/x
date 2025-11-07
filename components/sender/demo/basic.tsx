@@ -24,8 +24,6 @@ const Demo: React.FC = () => {
   return (
     <Flex vertical gap="middle">
       <Sender
-        showCount
-        maxLength={100}
         loading={loading}
         value={value}
         onChange={(v) => {
@@ -43,10 +41,6 @@ const Demo: React.FC = () => {
         autoSize={{ minRows: 2, maxRows: 6 }}
       />
       <Sender
-        maxLength={5}
-        showCount={{
-          formatter: ({ value, count, maxLength }) => `${value}, ${count}, ${maxLength}`,
-        }}
         value="Force as loading" loading readOnly />
       <Sender disabled value="Set to disabled" />
     </Flex>
