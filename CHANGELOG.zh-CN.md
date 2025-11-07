@@ -27,7 +27,7 @@ tag: vVERSION
 ### @ant-design/x-markdown
 
 - 🛠 重构 markdown 主题样式。[#1305](https://github.com/ant-design/x/pull/1305) 由 [@kimteayon](https://github.com/kimteayon) 提交。
-- 修复 `code` 标签 `streamStatus` 状态错误问题。[#1307](https://github.com/ant-design/x/pull/1307) 由 [@Div627](https://github.com/Div627) 提交。
+- 🐛 修复 `code` 标签 `streamStatus` 状态错误问题。[#1307](https://github.com/ant-design/x/pull/1307) 由 [@Div627](https://github.com/Div627) 提交。
 - 🛠 将 `index.less` 改造为 `index.css`。[#1306](https://github.com/ant-design/x/pull/1306) 由 [@Div627](https://github.com/Div627) 提交。
 - 🐛 修复 `SteamingOption` 为 `StreamingOption`。[#1301](https://github.com/ant-design/x/pull/1301) 由 [@Div627](https://github.com/Div627) 提交。
 - 🐛 修复 dompurifyConfig.ALLOWED_TAGS 被错误合并到 ADD_TAGS的问题。[#1297](https://github.com/ant-design/x/pull/1297) 由 [@Div627](https://github.com/Div627) 提交。
