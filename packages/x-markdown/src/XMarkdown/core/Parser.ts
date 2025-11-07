@@ -14,8 +14,7 @@ export const other = {
   endingNewline: /\n$/,
   escapeReplace: /[&<>"']/g,
   escapeReplaceNoEncode: /[<>"']|&(?!(#\d{1,7}|#[Xx][a-fA-F0-9]{1,6}|\w+);)/g,
-  completeFencedCode:
-    /^ {0,3}(`{3,}(?=[^`\n]*(?:\n|$))|~{3,})(?:[^\n]*)(?:\n|$)([\s\S]*?)(?:\n|$) {0,3}\1[~`]* *\n/,
+  completeFencedCode: /^ {0,3}(`{3,}|~{3,})([\s\S]*?)\n {0,3}\1[ \n\t]*$/,
 };
 
 const escapeReplacements: { [index: string]: string } = {
