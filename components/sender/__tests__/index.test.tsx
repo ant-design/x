@@ -259,5 +259,38 @@ describe('Sender Component', () => {
 
       expect(onPasteFile).toHaveBeenCalledWith(file1, fileList);
     });
+    describe('should support showCount', () => {
+      it('maxLength', () => {
+        const { container } = render(<Sender maxLength={5} showCount value="12345" />);
+        expect(container.querySelector('textarea')?.value).toBe('12345');
+        expect(
+          container.querySelector('.ant-sender-count')?.textContent,
+        ).toBe('5 / 5');
+      });
+
+      it('control exceed maxLength', () => {
+        const { container } = render(<Sender maxLength={5} showCount value="12345678" />);
+        expect(container.querySelector('textarea')?.value).toBe('12345678');
+        expect(
+          container.querySelector('.ant-sender-count')?.textContent,
+        ).toBe('8 / 5');
+      });
+
+      it('count formatter', () => {
+        const { container } = render(
+          <Sender
+            maxLength={5}
+            showCount={{
+              formatter: ({ value, count, maxLength }) => `${value}, ${count}, ${maxLength}`,
+            }}
+            value="12345"
+          />,
+        );
+        expect(container.querySelector('textarea')?.value).toBe('12345');
+        expect(
+          container.querySelector('.ant-sender-count')?.textContent,
+        ).toBe('12345, 5, 5');
+      });
+    });
   });
 });
