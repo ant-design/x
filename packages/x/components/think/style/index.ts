@@ -4,7 +4,18 @@ import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssi
 import { genStyleHooks } from '../../theme/genStyleUtils';
 
 // biome-ignore lint/suspicious/noEmptyInterface: ComponentToken need to be empty by default
-export interface ComponentToken {}
+export interface ComponentToken {
+  /**
+   * @desc 默认打字动画颜色
+   * @descEN Default typing animation color
+   */
+  colorTextBlinkDefault: string;
+  /**
+   * @desc 打字动画颜色
+   * @descEN Typing animation color
+   */
+  colorTextBlink: string;
+}
 
 export interface ThinkToken extends FullToken<'Think'> {}
 
@@ -70,7 +81,16 @@ const genThinkStyle: GenerateStyle<ThinkToken> = (token) => {
   };
 };
 
-export const prepareComponentToken: GetDefaultToken<'Think'> = () => ({});
+export const prepareComponentToken: GetDefaultToken<'Think'> = (token) => {
+  const { colorTextDescription, colorTextBase } = token;
+
+  const colorTextBlinkDefault = colorTextDescription;
+  const colorTextBlink = colorTextBase;
+  return {
+    colorTextBlinkDefault,
+    colorTextBlink,
+  };
+};
 
 export default genStyleHooks<'Think'>(
   'Think',
