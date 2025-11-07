@@ -16,7 +16,7 @@ import SpeechButton from './components/SpeechButton';
 import useStyle from './style';
 import useSpeech, { type AllowSpeech } from './useSpeech';
 
-import type { InputRef as AntdInputRef, ButtonProps, GetProps } from 'antd';
+import type { InputRef as AntdInputRef, ButtonProps, GetProps, InputProps } from 'antd';
 
 export type SubmitType = 'enter' | 'shiftEnter' | false;
 
@@ -81,6 +81,8 @@ export interface SenderProps
   footer?: React.ReactNode | FooterRender;
   header?: React.ReactNode;
   autoSize?: boolean | { minRows?: number; maxRows?: number };
+  maxLength?: number;
+  showCount?: InputProps['showCount'];
 }
 
 export type SenderRef = {
@@ -131,6 +133,8 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     onPaste,
     onPasteFile,
     autoSize = { maxRows: 8 },
+    maxLength,
+    showCount,
     ...rest
   } = props;
 
@@ -190,6 +194,33 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
 
   // ========================== Components ==========================
   const InputTextArea = getComponent(components, ['input'], Input.TextArea);
+
+  // 计算字数文案
+  const renderCount = () => {
+    const shouldShowCount = showCount && typeof maxLength === 'number';
+
+    if (!shouldShowCount) return null;
+
+    // 对象形式：使用用户自定义 formatter
+    if (typeof showCount === 'object' && showCount.formatter) {
+      return showCount.formatter({
+        value: innerValue,
+        count: innerValue.length,
+        maxLength,
+      });
+    }
+
+    // 布尔/真值形式：默认渲染
+    return (
+      <div
+        className={classnames(`${prefixCls}-count`, contextConfig.classNames?.count)}
+        style={contextConfig.styles?.count}
+      >
+        {innerValue.length}
+        {maxLength !== 0 && `/${maxLength}`}
+      </div>
+    );
+  };
 
   const domProps = pickAttrs(rest, {
     attr: true,
@@ -360,7 +391,12 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
             onPaste={onInternalPaste}
             variant="borderless"
             readOnly={readOnly}
+            maxLength={maxLength}
           />
+
+          {/* Count */}
+          {renderCount()}
+
           {/* Action List */}
           {actionNode && (
             <div

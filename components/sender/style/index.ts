@@ -19,6 +19,7 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
     paddingXXS,
     lineWidth,
     lineWidthBold,
+    colorTextDescription,
     calc,
   } = token;
 
@@ -99,6 +100,14 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
         flex: 'auto',
         alignSelf: 'center',
         minHeight: 'auto',
+      },
+      [`${componentCls}-count`]: {
+        insetInlineEnd: 0,
+        color: colorTextDescription,
+        whiteSpace: 'nowrap',
+        pointerEvents: 'none',
+        display: 'flex',
+        lineHeight: '2.2em',
       },
 
       // ============================ Actions ============================
