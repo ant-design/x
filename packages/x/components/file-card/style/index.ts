@@ -9,6 +9,7 @@ export interface FileCardToken extends FullToken<'FileCard'> {}
 
 const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
   const {
+    antCls,
     componentCls,
     paddingSM,
     padding,
@@ -43,6 +44,7 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
         overflow: 'hidden',
         boxSizing: 'border-box',
         width: 268,
+        height: 'auto',
         '&-pointer': {
           cursor: 'pointer',
         },
@@ -130,13 +132,58 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
         width: 268,
         borderRadius: token.borderRadius,
         overflow: 'hidden',
-
+      },
+      [`${componentCls}-image-img`]: {
+        width: '100%',
         img: {
-          height: '100%',
+          width: '100%',
+          height: 'auto',
           objectFit: 'cover',
           borderRadius: 'inherit',
         },
       },
+      [`${componentCls}-loading`]: {
+        width: 268,
+        aspectRatio: '1',
+        position: 'relative',
+        borderRadius: token.borderRadius,
+        overflow: 'hidden',
+      },
+      [`${componentCls}-image-loading`]: {
+        width: '100%',
+        height: '100%',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        background: token.colorBgBase,
+      },
+
+      [`${componentCls}-image-skeleton`]: {
+        width: '100%',
+        height: '100%',
+        position: 'relative',
+        [`${antCls}-skeleton-node`]: {
+          width: '100%',
+          height: '100%',
+        },
+      },
+      [`${componentCls}-image-spin`]: {
+        position: 'absolute',
+        top: token.margin,
+        left: token.margin,
+        color: token.colorText,
+        lineHeight: token.lineHeight,
+        '&-default': {
+          fontSize: token.fontSize,
+        },
+        '&-small': {
+          fontSize: token.fontSizeSM,
+        },
+        '&-large': {
+          fontSize: token.fontSizeLG,
+        },
+      },
+
       [`${componentCls}-audio`]: {
         width: 268,
       },

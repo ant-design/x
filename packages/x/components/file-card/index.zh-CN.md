@@ -20,6 +20,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*6ySvTqb7XhkAAA
 <code src="./demo/basic.tsx">基础用法</code>
 <code src="./demo/size.tsx">卡片大小</code>
 <code src="./demo/image.tsx">图片文件</code>
+<code src="./demo/image-loading.tsx">图片加载</code>
 <code src="./demo/audio.tsx">音视频类型</code>
 <code src="./demo/mask.tsx">使用遮罩</code>
 <code src="./demo/icon.tsx">自定义图标</code>
@@ -34,47 +35,56 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*6ySvTqb7XhkAAA
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| classNames | 样式类名 | [Record<SemanticDOM, string>](#semantic-dom) | - | - |
-| styles | 样式 style | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - | - |
 | name | 文件名称 | string | - | - |
-| byte | 文件大小 | number \| string | - | - |
-| description | 文件描述 | ReactNode | - | - |
-| type | 文件类型 | 'file' \| 'image' \| 'audio' \| 'video' | - | - |
+| byte | 文件大小（字节） | number | - | - |
+| size | 卡片大小 | 'small' \| 'default' | 'default' | - |
+| description | 文件描述 | React.ReactNode | - | - |
+| loading | 是否处于加载状态 | boolean | false | - |
+| type | 文件类型 | 'file' \| 'image' \| 'audio' \| 'video' \| string | - | - |
 | src | 图片或文件地址 | string | - | - |
-| mask | 遮罩 | ReactNode | - | - |
+| mask | 遮罩内容 | React.ReactNode | - | - |
 | icon | 自定义图标 | React.ReactNode \| PresetIcons | - | - |
-| onClick | 点击事件 | () => void | - | - |
-| size | 展示卡片大小 | 'small' \| 'default' | default | - |
+| imageProps | 图片属性，同 antd [Image](https://ant.design/components/image-cn#api) 属性 | ImageProps | - | - |
+| videoProps | 视频属性配置 | Partial<React.JSX.IntrinsicElements['video']> | - | - |
+| audioProps | 音频属性配置 | Partial<React.JSX.IntrinsicElements['audio']> | - | - |
+| spinProps | 加载中属性 | [SpinProps](https://ant.design/components/spin-cn#api) & { showText?: boolean; icon?: React.ReactNode } | - | - |
+| onClick | 点击事件回调 | () => void | - | - |
+
+### PresetIcons
+
+预设图标类型，支持以下值：
 
 ```typescript
 type PresetIcons =
-  | 'default'
-  | 'excel'
-  | 'image'
-  | 'markdown'
-  | 'pdf'
-  | 'ppt'
-  | 'word'
-  | 'zip'
-  | 'video'
-  | 'audio'
-  | 'java'
-  | 'javascript'
-  | 'python';
+  | 'default' // 默认文件图标
+  | 'excel' // Excel 文件图标
+  | 'image' // 图片文件图标
+  | 'markdown' // Markdown 文件图标
+  | 'pdf' // PDF 文件图标
+  | 'ppt' // PowerPoint 文件图标
+  | 'word' // Word 文件图标
+  | 'zip' // 压缩文件图标
+  | 'video' // 视频文件图标
+  | 'audio' // 音频文件图标
+  | 'java' // Java 文件图标
+  | 'javascript' // JavaScript 文件图标
+  | 'python'; // Python 文件图标
 ```
 
 ### FileCard.List
 
-| 属性      | 说明       | 类型                                                  | 默认值  | 版本 |
-| --------- | ---------- | ----------------------------------------------------- | ------- | ---- |
-| items     | 文件列表   | FileCardProps[]                                       | -       | -    |
-| size      | 卡片大小   | 'small' \| 'default'                                  | default | -    |
-| removable | 是否可删除 | boolean \| ((item: FileCardProps) => boolean)         | false   | -    |
-| onRemove  | 删除事件   | (item: FileCardProps, list?: FileCardProps[]) => void | -       | -    |
-| extension | 扩展       | React.ReactNode                                       | -       | -    |
-| overflow  | 超出展示   | 'scrollX' \| 'scrollY' \| 'wrap'                      | wrap    | -    |
+文件列表组件，用于展示多个文件卡片。
 
-## Semantic DOM
+| 属性      | 说明         | 类型                                          | 默认值    | 版本 |
+| --------- | ------------ | --------------------------------------------- | --------- | ---- |
+| items     | 文件列表数据 | FileCardProps[]                               | -         | -    |
+| size      | 卡片大小     | 'small' \| 'default'                          | 'default' | -    |
+| removable | 是否可删除   | boolean \| ((item: FileCardProps) => boolean) | false     | -    |
+| onRemove  | 删除事件回调 | (item: FileCardProps) => void                 | -         | -    |
+| extension | 扩展内容     | React.ReactNode                               | -         | -    |
+| overflow  | 超出展示方式 | 'scrollX' \| 'scrollY' \| 'wrap'              | 'wrap'    | -    |
+
+## 语义化 DOM
 
 ### FileCard
 
