@@ -310,11 +310,12 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   // ============================ Count =============================
   // 计算字数文案
   const renderCount = () => {
-    const shouldShowCount = showCount && typeof maxLength === 'number';
-
-    if (!shouldShowCount) return null;
+    if (!showCount) {
+      return null;
+    }
 
     let countNode: React.ReactNode;
+    const hasMaxLength = typeof maxLength === 'number';
 
     // 对象形式：使用用户自定义 formatter
     if (typeof showCount === 'object' && showCount.formatter) {
@@ -323,13 +324,15 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
         count: innerValue.length,
         maxLength,
       });
-    } else {
+    } else if (hasMaxLength) {
       countNode = `${innerValue.length} / ${maxLength}`;
       if (maxLength && innerValue.length > maxLength) {
         console.warn(
           `[SlotTextArea] 当前内容长度(${innerValue.length})已超过最大长度(${maxLength})`,
         );
       }
+    } else {
+      countNode = innerValue.length;
     }
 
     // 布尔/真值形式：默认渲染
