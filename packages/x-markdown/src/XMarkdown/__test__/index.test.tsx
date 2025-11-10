@@ -279,7 +279,7 @@ describe('custom code component props', () => {
     {
       title:
         'should pass block=true and streamStatus=loading for unfinished fenced code blocks start ```',
-      markdown: '```',
+      markdown: '   ```',
       block: true,
       streamStatus: 'loading',
     },
@@ -295,12 +295,19 @@ describe('custom code component props', () => {
         'should pass block=true and streamStatus=loading for unfinished fenced code blocks with ```',
       markdown: '```js\nconsole.log(`log`);\n```',
       block: true,
-      streamStatus: 'loading',
+      streamStatus: 'done',
     },
     {
       title:
         'should pass block=true and streamStatus=done for finished fenced code blocks with ```',
-      markdown: '```js\n console.log(`log`);\n```\n',
+      markdown: 'start text\n```js\n console.log(`log`);\n```\n end text',
+      block: true,
+      streamStatus: 'done',
+    },
+    {
+      title:
+        'should pass block=true and streamStatus=done for finished fenced code blocks with ```\n\n',
+      markdown: 'start text\n```js\n console.log(`log`);\n```\n\n end text',
       block: true,
       streamStatus: 'done',
     },
@@ -321,7 +328,14 @@ describe('custom code component props', () => {
     {
       title:
         'should pass block=true and streamStatus=done for finished fenced code blocks with ~~~',
-      markdown: '~~~js\n console.log(`log`);\n~~~\n',
+      markdown: 'start text\n ~~~js\n console.log(`log`);\n~~~\n end text',
+      block: true,
+      streamStatus: 'done',
+    },
+    {
+      title:
+        'should pass block=true and streamStatus=done for finished fenced code blocks with ~~~\n\n',
+      markdown: 'start text\n\n ~~~js\n console.log(`log`);\n~~~\n\n end text',
       block: true,
       streamStatus: 'done',
     },

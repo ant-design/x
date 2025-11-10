@@ -1,4 +1,5 @@
 .x-markdown-dark {
+  --font-size: 14px;
   --primary-color: #1677ff;
   --primary-color-hover: #4096ff;
   --heading-color: #ffffff;
@@ -12,11 +13,14 @@
   --cite-hover-bg: rgba(255, 255, 255, 0.2);
   --border-radius-middle: 6px;
   --border-radius-small: 4px;
-  width: 100%;
-  color: var(--text-color);
-  word-wrap: break-word;
-  user-select: text;
-  line-height: 1.5714285714285714;
+  --td-th-padding: 10px 12px;
+  --border-font-weight: 600;
+  --margin-block: 0 0 16px 0;
+  --padding-ul-ol: 0 0 0 16px;
+  --margin-ul-ol: 0 0 16px 28px;
+  --margin-li: 0 0 14px 0;
+  --hr-margin: 24px 0;
+  --table-margin: 0 0 24px 0;
 }
 
 .x-markdown-dark h1,
@@ -24,8 +28,8 @@
 .x-markdown-dark h3,
 .x-markdown-dark h4 {
   color: var(--heading-color);
-  font-weight: 600;
-  margin-bottom: 16px;
+  font-weight: var(--border-font-weight);
+  margin-bottom: var(--margin-block);
 }
 
 .x-markdown-dark h1 {
@@ -39,7 +43,8 @@
 }
 
 .x-markdown-dark h3 {
-  font-size: 18px; /* 18px */
+  font-size: 18px;
+  /* 18px */
   line-height: 30px;
 }
 
@@ -50,27 +55,11 @@
 .x-markdown-dark p,
 .x-markdown-dark li {
   color: var(--text-color);
-  margin-bottom: 16px;
-}
-
-.x-markdown-dark ol,
-.x-markdown-dark ul {
-  margin-left: 28px;
-  padding-left: 8px;
-  margin-bottom: 16px;
-}
-
-.x-markdown-dark ol > li {
-  list-style: decimal;
-}
-
-.x-markdown-dark ul > li {
-  list-style: disc;
+  margin: var(--margin-block);
 }
 
 /* 列表项通用样式 */
 .x-markdown-dark li {
-  margin-bottom: 14px;
   position: relative;
 }
 
@@ -108,13 +97,10 @@
 .x-markdown-dark hr {
   border: 0;
   border-top: 1px solid var(--line-color);
-  margin: 24px 0;
 }
 
 .x-markdown-dark table {
-  width: 100%;
   border-collapse: collapse;
-  margin-bottom: 1.5rem;
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(255, 255, 255, 0.05);
 }
@@ -138,23 +124,22 @@
 
 .x-markdown-dark th,
 .x-markdown-dark td {
-  padding: 10px 12px;
+  padding: var(--td-th-padding);
   border: 1px solid var(--border-color);
 }
 
 .x-markdown-dark th {
-  color: var(--heading-color) !important;
-  font-weight: 600;
+  color: var(--heading-color);
 }
 
 .x-markdown-dark td {
-  color: var(--text-color) !important;
+  color: var(--text-color);
 }
 
 .x-markdown-dark blockquote {
   border-left: 4px solid var(--border-color);
-  padding: 0.5rem 1rem;
-  margin: 1.25rem 0;
+  padding: 4px 12px;
+  margin: 16px 0;
   background-color: var(--cite-bg);
   border-radius: 0 var(--border-radius-middle) var(--border-radius-middle) 0;
   transition: background-color 0.2s ease;
@@ -170,9 +155,9 @@
   padding: 16px;
   color: var(--text-color) !important;
   line-height: 24px;
-  font-size: 14px;
+  font-size: var(--font-size);
   border-radius: var(--border-radius-middle);
-  margin-bottom: 16px;
+  margin: var(--margin-pre);
 }
 
 .x-markdown-dark code:not([class$="-highlightCode-code"] code):not(pre code) {
@@ -181,7 +166,7 @@
   border-radius: var(--border-radius-small);
   padding: 2px 6px;
   margin-inline: 3px;
-  font-size: 14px;
+  font-size: var(--font-size);
   border: 1px solid var(--border-color);
 }
 

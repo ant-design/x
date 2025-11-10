@@ -20,7 +20,7 @@ export interface AnimationConfig {
 
 type Token = Tokens.Generic;
 
-interface SteamingOption {
+interface StreamingOption {
   /**
    * @description 指示是否还有后续内容块，为 false 时刷新所有缓存并完成渲染
    * @description Indicates whether more content chunks are expected. When false, flushes all cached content and completes rendering
@@ -87,7 +87,7 @@ interface XMarkdownProps {
    * @description 流式渲染行为的配置
    * @description Configuration for streaming rendering behavior
    */
-  streaming?: SteamingOption;
+  streaming?: StreamingOption;
   /**
    * @description Markdown 解析和扩展的 Marked.js 配置
    * @description Marked.js configuration for Markdown parsing and extensions
@@ -132,4 +132,4 @@ interface XMarkdownProps {
   dompurifyConfig?: DOMPurifyConfig;
 }
 
-export type { XMarkdownProps, Token, Tokens, StreamStatus, ComponentProps, SteamingOption };
+export type { XMarkdownProps, Token, Tokens, StreamStatus, ComponentProps, StreamingOption };

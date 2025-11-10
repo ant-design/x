@@ -31,7 +31,7 @@ Used for rendering streaming Markdown format returned by LLMs.
 | children | Markdown content, alias for `content` property | `string` | - |
 | components | Custom React components to replace HTML elements | `Record<string, React.ComponentType<ComponentProps> \| keyof JSX.IntrinsicElements>`, see [details](/x-markdowns/components) | - |
 | paragraphTag | Custom HTML tag for paragraph elements. Prevents validation errors when custom components contain block-level elements | `keyof JSX.IntrinsicElements` | `'p'` |
-| streaming | Configuration for streaming rendering behavior | `SteamingOption`, see [details](/x-markdowns/streaming) | - |
+| streaming | Configuration for streaming rendering behavior | `StreamingOption`, see [syntax processing](/x-markdowns/streaming-syntax) and [animation effects](/x-markdowns/streaming-animation) | - |
 | config | Marked.js configuration for Markdown parsing and extensions | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |
 | openLinksInNewTab | Whether to add `target="_blank"` to all anchor tags | `boolean` | `false` |
 | dompurifyConfig | DOMPurify configuration for HTML sanitization and XSS protection | [`DOMPurify.Config`](https://github.com/cure53/DOMPurify#can-i-configure-dompurify) | - |
@@ -39,14 +39,14 @@ Used for rendering streaming Markdown format returned by LLMs.
 | rootClassName | Alias for `className`, additional CSS class for the root element | `string` | - |
 | style | Inline styles for the root container | `CSSProperties` | - |
 
-### SteamingOption
+### StreamingOption
 
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
 | hasNextChunk | Indicates whether more content chunks are expected. When false, flushes all cached content and completes rendering | `boolean` | `false` |
 | enableAnimation | Enables text fade-in animation for block elements (`p`, `li`, `h1`, `h2`, `h3`, `h4`) | `boolean` | `false` |
 | animationConfig | Configuration for text appearance animation effects | `AnimationConfig` | `{ fadeDuration: 200, opacity: 0.2 }` |
-| incompletePlaceholderMap | Placeholder mapping for unclosed Markdown elements, supports custom placeholder components for links and images | `{ link?: string; image?: string }` | `{ link: 'incomplete-link', image: 'incomplete-image' }` |
+| incompleteMarkdownComponentMap | Placeholder mapping for unclosed Markdown elements, supports custom placeholder components for links and images | `{ link?: string; image?: string }` | `{ link: 'incomplete-link', image: 'incomplete-image' }` |
 
 #### AnimationConfig
 
