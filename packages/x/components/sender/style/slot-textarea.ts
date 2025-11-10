@@ -134,6 +134,12 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       position: 'relative',
       cursor: 'default',
     },
+    [`${slotTagCls}-remove`]: {
+      marginInlineStart: token.marginXXS,
+      fontSize: token.fontSize,
+      lineHeight: token.lineHeight,
+      cursor: 'pointer',
+    },
   };
 };
 
