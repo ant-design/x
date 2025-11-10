@@ -34,6 +34,7 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
     onPasteFile,
     disabled,
     readOnly,
+    maxLength,
     submitType = 'enter',
     prefixCls,
     styles = {},
@@ -188,6 +189,7 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
       placeholder={placeholder}
       onFocus={onFocus}
       onBlur={onBlur}
+      maxLength={maxLength}
     />
   );
 });

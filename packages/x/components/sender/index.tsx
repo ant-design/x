@@ -79,6 +79,8 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     placeholder,
     onFocus,
     onBlur,
+    maxLength,
+    showCount,
     ...restProps
   } = props;
 
@@ -262,6 +264,8 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
       placeholder,
       onFocus,
       onBlur,
+      maxLength,
+      showCount,
       ...restProps,
     }),
     [
@@ -284,6 +288,8 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
       placeholder,
       onFocus,
       onBlur,
+      maxLength,
+      showCount,
       restProps,
     ],
   );
@@ -299,6 +305,42 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     if (e.target === containerRef.current?.querySelector(`.${inputCls}`)) {
       inputRef.current?.focus();
     }
+  };
+
+  // ============================ Count =============================
+  // 计算字数文案
+  const renderCount = () => {
+    const shouldShowCount = showCount && typeof maxLength === 'number';
+
+    if (!shouldShowCount) return null;
+
+    let countNode: React.ReactNode;
+
+    // 对象形式：使用用户自定义 formatter
+    if (typeof showCount === 'object' && showCount.formatter) {
+      countNode = showCount.formatter({
+        value: innerValue,
+        count: innerValue.length,
+        maxLength,
+      });
+    } else {
+      countNode = `${innerValue.length} / ${maxLength}`;
+      if (maxLength && innerValue.length > maxLength) {
+        console.warn(
+          `[SlotTextArea] 当前内容长度(${innerValue.length})已超过最大长度(${maxLength})`,
+        );
+      }
+    }
+
+    // 布尔/真值形式：默认渲染
+    return (
+      <div
+        className={classnames(`${prefixCls}-count`, contextConfig.classNames?.count)}
+        style={contextConfig.styles?.count}
+      >
+        {countNode}
+      </div>
+    );
   };
 
   // ============================ Render ============================
@@ -348,6 +390,9 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
             ) : (
               <TextArea ref={inputRef as React.Ref<TextAreaRef>} />
             )}
+
+            {/* Count */}
+            {renderCount()}
 
             {/* Action List */}
             {suffixNode && (

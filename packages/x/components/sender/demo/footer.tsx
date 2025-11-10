@@ -28,6 +28,8 @@ const App: React.FC = () => {
 
   return (
     <Sender
+      showCount={true}
+      maxLength={100}
       value={value}
       onChange={setValue}
       autoSize={{ minRows: 2, maxRows: 6 }}

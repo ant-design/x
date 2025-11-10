@@ -125,6 +125,8 @@ export interface SenderProps
   suffix?: BaseNode | NodeRender;
   header?: BaseNode | NodeRender;
   autoSize?: boolean | { minRows?: number; maxRows?: number };
+  maxLength?: number;
+  showCount?: InputProps['showCount'];
 }
 
 export type SenderRef = Omit<TextAreaRef, 'nativeElement'> &
