@@ -1,5 +1,6 @@
-import { CopyOutlined, DownloadOutlined, ZoomInOutlined, ZoomOutOutlined } from '@ant-design/icons';
+import { DownloadOutlined, ZoomInOutlined, ZoomOutOutlined } from '@ant-design/icons';
 import useXComponentConfig from '@ant-design/x/es/_util/hooks/use-x-component-config';
+import Actions from '@ant-design/x/es/actions';
 import useLocale from '@ant-design/x/es/locale/useLocale';
 import useXProviderContext from '@ant-design/x/es/x-provider/hooks/use-x-provider-context';
 import locale_EN from '@ant-design/x/locale/en_US';
@@ -245,35 +246,44 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
           onChange={setRenderType}
         />
         <Space>
-          <Tooltip title={contextLocale.copy}>
-            <Button type="text" size="small" icon={<CopyOutlined />} onClick={handleCopyCode} />
-          </Tooltip>
+          <Actions.Copy title={contextLocale.copy} onClick={handleCopyCode} />
           {renderType === RenderType.Image ? (
             <>
-              <Tooltip title={contextLocale.zoomOut}>
-                <Button type="text" size="small" icon={<ZoomInOutlined />} onClick={handleZoomIn} />
-              </Tooltip>
-              <Tooltip title={contextLocale.zoomIn}>
-                <Button
-                  type="text"
-                  size="small"
-                  icon={<ZoomOutOutlined />}
-                  onClick={handleZoomOut}
-                />
-              </Tooltip>
-              <Tooltip title={contextLocale.zoomReset}>
-                <Button type="text" size="small" onClick={handleReset}>
-                  {contextLocale.zoomReset}
-                </Button>
-              </Tooltip>
-              <Tooltip title={contextLocale.download}>
-                <Button
-                  type="text"
-                  size="small"
-                  icon={<DownloadOutlined />}
-                  onClick={handleDownload}
-                />
-              </Tooltip>
+              <Actions
+                items={[
+                  {
+                    label: contextLocale.zoomOut,
+                    key: 'zoomOut',
+                    icon: <ZoomInOutlined />,
+                    onItemClick: handleZoomIn,
+                  },
+                  {
+                    label: contextLocale.zoomIn,
+                    key: 'zoomIn',
+                    icon: <ZoomOutOutlined />,
+                    onItemClick: handleZoomOut,
+                  },
+                  {
+                    label: contextLocale.zoomReset,
+                    key: 'zoomReset',
+                    actionRender: (item) => {
+                      return (
+                        <Tooltip title={item.label}>
+                          <Button type="text" size="small" onClick={handleReset}>
+                            {item.label}
+                          </Button>
+                        </Tooltip>
+                      );
+                    },
+                  },
+                  {
+                    label: contextLocale.download,
+                    key: 'download',
+                    icon: <DownloadOutlined />,
+                    onItemClick: handleDownload,
+                  },
+                ]}
+              />
             </>
           ) : null}
         </Space>
