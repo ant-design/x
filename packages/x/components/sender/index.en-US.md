@@ -122,11 +122,11 @@ type ActionsComponents = {
 
 ##### tag node properties
 
-| Property         | Description              | Type      | Default                  | Version |
-| ---------------- | ------------------------ | --------- | ------------------------ | ------- | --- |
-| props.label      | Tag content, required    | ReactNode | -                        | -       |
-| props.value      | Tag value                | string    | -                        | -       |
-| props.allowClear | Whether it can be closed | boolean   | { clearIcon: ReactNode } | false   | -   |
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| props.label | Tag content, required | ReactNode | - | - |
+| props.value | Tag value | string | - | - |
+| props.allowClear | Whether it can be closed | boolean \| { clearIcon: ReactNode } | false | - |
 
 ##### custom node properties
 

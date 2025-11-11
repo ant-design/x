@@ -123,11 +123,11 @@ type ActionsComponents = {
 
 ##### tag 节点属性
 
-| 属性             | 说明           | 类型      | 默认值                   | 版本  |
-| ---------------- | -------------- | --------- | ------------------------ | ----- | --- |
-| props.label      | 标签内容，必填 | ReactNode | -                        | -     |
-| props.value      | 标签值         | string    | -                        | -     |
-| props.allowClear | 是否可关闭     | boolean   | { clearIcon: ReactNode } | false | -   |
+| 属性             | 说明           | 类型                                | 默认值 | 版本 |
+| ---------------- | -------------- | ----------------------------------- | ------ | ---- |
+| props.label      | 标签内容，必填 | ReactNode                           | -      | -    |
+| props.value      | 标签值         | string                              | -      | -    |
+| props.allowClear | 是否可关闭     | boolean \| { clearIcon: ReactNode } | false  | -    |
 
 ##### custom 节点属性
 
