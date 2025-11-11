@@ -196,6 +196,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
           );
         case 'tag':
           return <div className={`${prefixCls}-slot-tag`}>{node.props?.label || ''}</div>;
+        case 'content':
+          return <div className={`${prefixCls}-slot-text`}>{node.value || ''}</div>;
         case 'custom':
           return node.customRender?.(
             value,

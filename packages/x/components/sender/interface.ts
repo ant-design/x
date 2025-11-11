@@ -31,14 +31,26 @@ export type NodeRender = (
 ) => BaseNode;
 
 interface SlotConfigBaseType {
-  type: 'text' | 'input' | 'select' | 'tag' | 'custom';
+  type: 'text' | 'input' | 'select' | 'tag' | 'custom' | 'content';
   formatResult?: (value: any) => string;
 }
 
 interface SlotConfigTextType extends SlotConfigBaseType {
   type: 'text';
-  value: string;
+  value?: string;
+  editable?: boolean;
+  placeholder?: string;
   key?: string;
+}
+
+interface SlotConfigContentType extends SlotConfigBaseType {
+  type: 'content';
+  value?: string;
+  key: string;
+  props?: {
+    defaultValue?: any;
+    [key: string]: any;
+  };
 }
 
 interface SlotConfigInputType extends SlotConfigBaseType {
@@ -92,7 +104,8 @@ export type SlotConfigType =
   | SlotConfigInputType
   | SlotConfigSelectType
   | SlotConfigTagType
-  | SlotConfigCustomType;
+  | SlotConfigCustomType
+  | SlotConfigContentType;
 
 export type EventType =
   | React.FormEvent<HTMLTextAreaElement>
