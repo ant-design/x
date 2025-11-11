@@ -29,7 +29,7 @@
 .x-markdown-dark h4 {
   color: var(--heading-color);
   font-weight: var(--border-font-weight);
-  margin-bottom: var(--margin-block);
+  margin: var(--margin-block);
 }
 
 .x-markdown-dark h1 {
