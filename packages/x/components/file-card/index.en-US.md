@@ -48,7 +48,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | imageProps | Image props configuration | [Image](https://ant.design/components/image-cn#api) | - | - |
 | videoProps | Video props configuration | Partial<React.JSX.IntrinsicElements['video']> | - | - |
 | audioProps | Audio props configuration | Partial<React.JSX.IntrinsicElements['audio']> | - | - |
-| spinProps | Loading animation props configuration | [SpinProps](https://ant.design/components/spin-cn#api) & { showText?: boolean; icon?: React.ReactNode } & { showText?: boolean; icon?: React.ReactNode } | - | - |
+| spinProps | Loading animation props configuration | [SpinProps](https://ant.design/components/spin-cn#api) & { showText?: boolean; icon?: React.ReactNode } | - | - |
 | onClick | Click event callback | () => void | - | - |
 
 ### PresetIcons
