@@ -4,7 +4,7 @@ import Actions from '@ant-design/x/es/actions';
 import useLocale from '@ant-design/x/es/locale/useLocale';
 import useXProviderContext from '@ant-design/x/es/x-provider/hooks/use-x-provider-context';
 import locale_EN from '@ant-design/x/locale/en_US';
-import { Button, message, Segmented, Space, Tooltip } from 'antd';
+import { Button, Segmented, Space, Tooltip } from 'antd';
 import classnames from 'classnames';
 import throttle from 'lodash.throttle';
 import mermaid from 'mermaid';
@@ -45,7 +45,6 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
   const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
   const id = `mermaid-${uuid++}-${children?.length || 0}`;
-  const [messageApi, contextHolder] = message.useMessage();
 
   // ============================ locale ============================
   const [contextLocale] = useLocale('Mermaid', locale_EN.Mermaid);
@@ -209,20 +208,6 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
     setScale((prev) => Math.max(prev - 0.2, 0.5));
   };
 
-  const handleCopyCode = async () => {
-    if (!children) return;
-
-    try {
-      await navigator.clipboard.writeText(children.trim());
-      messageApi.open({
-        type: 'success',
-        content: contextLocale.copySuccess,
-      });
-    } catch (error) {
-      console.error('Failed to copy code:', error);
-    }
-  };
-
   const renderHeader = () => {
     if (header === null) return null;
     if (header) return header;
@@ -236,7 +221,6 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
         )}
         style={{ ...contextConfig.styles.header, ...styles.header }}
       >
-        {contextHolder}
         <Segmented
           options={[
             { label: contextLocale.image, value: RenderType.Image },
@@ -246,7 +230,7 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
           onChange={setRenderType}
         />
         <Space>
-          <Actions.Copy title={contextLocale.copy} onClick={handleCopyCode} />
+          <Actions.Copy text={children.trim()} />
           {renderType === RenderType.Image ? (
             <>
               <Actions
