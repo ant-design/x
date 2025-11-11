@@ -1,3 +1,4 @@
+import type { InputRef as AntdInputRef, ButtonProps, GetProps } from 'antd';
 import { Flex, Input } from 'antd';
 import classnames from 'classnames';
 import { useMergedState } from 'rc-util';
@@ -7,16 +8,14 @@ import React from 'react';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
-import SenderHeader, { SendHeaderContext } from './SenderHeader';
 import { ActionButtonContext } from './components/ActionButton';
 import ClearButton from './components/ClearButton';
 import LoadingButton from './components/LoadingButton';
 import SendButton from './components/SendButton';
 import SpeechButton from './components/SpeechButton';
+import SenderHeader, { SendHeaderContext } from './SenderHeader';
 import useStyle from './style';
 import useSpeech, { type AllowSpeech } from './useSpeech';
-
-import type { InputRef as AntdInputRef, ButtonProps, GetProps } from 'antd';
 
 export type SubmitType = 'enter' | 'shiftEnter' | false;
 
@@ -133,6 +132,8 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     onPaste,
     onPasteFile,
     autoSize = { maxRows: 8 },
+    maxLength,
+    showCount,
     ...rest
   } = props;
 
@@ -146,8 +147,8 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
 
   useProxyImperativeHandle(ref, () => ({
     nativeElement: containerRef.current!,
-    focus: inputRef.current?.focus!,
-    blur: inputRef.current?.blur!,
+    focus: inputRef.current?.focus,
+    blur: inputRef.current?.blur,
   }));
 
   // ======================= Component Config =======================
@@ -362,11 +363,11 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
             onPaste={onInternalPaste}
             variant="borderless"
             readOnly={readOnly}
-            maxLength={props.maxLength}
+            maxLength={maxLength}
           />
-          {props.showCount && typeof props.maxLength === 'number' && (
+          {showCount && typeof maxLength === 'number' && (
             <div className={`${prefixCls}-count`}>
-              {innerValue.length}/{props.maxLength}
+              {innerValue.length}/{maxLength}
             </div>
           )}
           {/* Action List */}

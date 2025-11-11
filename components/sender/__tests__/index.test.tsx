@@ -1,10 +1,9 @@
-import React from 'react';
-
 import { fireEvent, render } from '@testing-library/react';
+import userEvent from '@texting-library/user-event';
+import React from 'react';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
 import Sender from '../index';
-import { values } from 'lodash';
 
 describe('Sender Component', () => {
   mountTest(() => <Sender />);
@@ -263,10 +262,10 @@ describe('Sender Component', () => {
   });
 });
 describe('maxLength and showCount', () => {
-  it('should limit input length when maxLength is set', () => {
+  it('should limit input length when maxLength is set', async () => {
     const { container } = render(<Sender maxLength={5} />);
     const textarea = container.querySelector('textarea')!;
-    fireEvent.change(textarea, { target: { value: 'abcdefgh' } });
+    await userEvent.type(textarea, 'abcdefgh');
     expect(textarea).toHaveValue('abcde');
   });
 
@@ -284,10 +283,10 @@ describe('maxLength and showCount', () => {
     const { container } = render(<Sender maxLength={20} showCount />);
     const textarea = container.querySelector('textarea')!;
     fireEvent.change(textarea, { target: { value: 'hello' } });
-    expect(container.querySelector('.ant-sender-count')?.textContent).toBe('5 / 20');
+    expect(container.querySelector('.ant-sender-count')?.textContent).toBe('5/20');
 
     fireEvent.change(textarea, { target: { value: 'hello world' } });
-    expect(container.querySelector('.ant-sender-count')?.textContent).toBe('11 / 20');
+    expect(container.querySelector('.ant-sender-count')?.textContent).toBe('11/20');
   });
 
   it('should work with controlled component', () => {
@@ -295,9 +294,9 @@ describe('maxLength and showCount', () => {
     const { container, rerender } = render(
       <Sender maxLength={10} showCount value="initial" onChange={onChange} />,
     );
-    expect(container.querySelector('.ant-sender-count')?.textContent).toBe('7 / 10');
+    expect(container.querySelector('.ant-sender-count')?.textContent).toBe('7/10');
 
     rerender(<Sender maxLength={10} showCount value="update" onChange={onChange} />);
-    expect(container.querySelector('.ant-sender-count')?.textContent).toBe('7 / 10');
+    expect(container.querySelector('.ant-sender-count')?.textContent).toBe('6/10');
   });
 });
