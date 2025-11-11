@@ -2380,7 +2380,7 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
               @ Chuck
             </span>
             <span
-              class="ant-sender-slot-tag-remove"
+              class="ant-sender-slot-tag-clear-icon"
             >
               <span
                 aria-label="close"

@@ -217,23 +217,38 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
               </span>
             </Dropdown>
           );
-        case 'tag':
+        case 'tag': {
+          const allowClear =
+            typeof node.props?.allowClear === 'boolean'
+              ? node.props?.allowClear
+              : node.props?.allowClear?.clearIcon;
+          const clearIcon =
+            typeof node.props?.allowClear === 'object' ? (
+              node.props?.allowClear?.clearIcon ? (
+                node.props?.allowClear?.clearIcon
+              ) : (
+                <CloseOutlined />
+              )
+            ) : (
+              <CloseOutlined />
+            );
           return (
             <div className={`${prefixCls}-slot-tag`}>
               <span className={`${prefixCls}-slot-tag-label`}>{node.props?.label || ''}</span>
-              {!readOnly && (
+              {!readOnly && allowClear && (
                 <span
-                  className={`${prefixCls}-slot-tag-remove`}
+                  className={`${prefixCls}-slot-tag-clear-icon`}
                   onMouseDown={(e) => e.preventDefault()}
                   onClick={(e) => {
                     removeTagSlot(node.key as string, e as unknown as EventType);
                   }}
                 >
-                  <CloseOutlined />
+                  {clearIcon}
                 </span>
               )}
             </div>
           );
+        }
         case 'custom':
           return node.customRender?.(
             value,
@@ -356,6 +371,10 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
     const currentRange = selection?.rangeCount > 0 ? selection?.getRangeAt?.(0) : null;
     const range = lastSelectionRef.current || currentRange;
+    console.log(range);
+
+    console.log(range?.endContainer, '-------');
+
     if (range) {
       if ((range.endContainer as HTMLElement)?.className?.includes(`${prefixCls}-slot`)) {
         return {
@@ -506,6 +525,9 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     if (!editableDom || !selection) return;
     const slotNode = getSlotListNode(slotConfig);
     const { type, range: lastRage } = getInsertPosition(position);
+    console.log(type, '-------');
+    console.log(lastRage, '-------');
+
     let range: Range = document.createRange();
     slotConfigRef.current = [...slotConfigRef.current, ...slotConfig];
     setSlotValues(slotConfig);

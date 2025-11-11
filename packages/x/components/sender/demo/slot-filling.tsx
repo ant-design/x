@@ -16,7 +16,7 @@ const otherSlotConfig: SlotConfig = [
     },
   },
   { type: 'text', value: 'for a trip with ' },
-  { type: 'tag', key: 'tag', props: { label: '@ Chuck', value: 'a man' } },
+  { type: 'tag', key: 'tag', props: { label: '@ Chuck', value: 'a man', allowClear: true } },
   { type: 'text', value: ', the date is ' },
   {
     type: 'input',
