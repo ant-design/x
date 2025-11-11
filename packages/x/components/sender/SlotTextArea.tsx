@@ -371,9 +371,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
     const currentRange = selection?.rangeCount > 0 ? selection?.getRangeAt?.(0) : null;
     const range = lastSelectionRef.current || currentRange;
-    console.log(range);
-
-    console.log(range?.endContainer, '-------');
 
     if (range) {
       if ((range.endContainer as HTMLElement)?.className?.includes(`${prefixCls}-slot`)) {
@@ -525,8 +522,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     if (!editableDom || !selection) return;
     const slotNode = getSlotListNode(slotConfig);
     const { type, range: lastRage } = getInsertPosition(position);
-    console.log(type, '-------');
-    console.log(lastRage, '-------');
 
     let range: Range = document.createRange();
     slotConfigRef.current = [...slotConfigRef.current, ...slotConfig];
