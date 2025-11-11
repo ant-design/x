@@ -689,6 +689,89 @@ describe('Sender.SlotTextArea', () => {
     });
 
     describe('Tag allowClear', () => {
+      it('renders clear icon and removes tag when allowClear=true', () => {
+        const onChange = jest.fn();
+        const ref = React.createRef<GetRef<typeof Sender>>();
+        const { container, getByText } = render(
+          <Sender
+            ref={ref}
+            onChange={onChange}
+            slotConfig={[
+              { type: 'text', value: 'A ' },
+              { type: 'tag', key: 't1', props: { label: 'T1', value: 'v1', allowClear: true } },
+              { type: 'text', value: ' B' },
+            ]}
+          />,
+        );
+        // 标签与清除按钮
+        expect(getByText('T1')).toBeInTheDocument();
+        const clear = container.querySelector('.ant-sender-slot-tag-clear-icon') as HTMLElement;
+        expect(clear).toBeInTheDocument();
+        // 点击清除
+        fireEvent.click(clear);
+        // 触发变更，且配置中不再包含该 tag
+        expect(onChange).toHaveBeenCalled();
+        const last = onChange.mock.calls[onChange.mock.calls.length - 1];
+        expect((last[2] as any[]).some((c) => c.key === 't1')).toBeFalsy();
+      });
+
+      it('renders custom clearIcon when allowClear is object with clearIcon', () => {
+        const onChange = jest.fn();
+        const CustomIcon = () => <span data-testid="custom-x">X</span>;
+        const { container, getByTestId } = render(
+          <Sender
+            onChange={onChange}
+            slotConfig={[
+              {
+                type: 'tag',
+                key: 't2',
+                props: { label: 'T2', value: 'v2', allowClear: { clearIcon: <CustomIcon /> } },
+              },
+            ]}
+          />,
+        );
+        expect(getByTestId('custom-x')).toBeInTheDocument();
+        const clear = container.querySelector('.ant-sender-slot-tag-clear-icon') as HTMLElement;
+        fireEvent.click(clear);
+        expect(onChange).toHaveBeenCalled();
+        const last = onChange.mock.calls[onChange.mock.calls.length - 1];
+        expect((last[2] as any[]).some((c) => c.key === 't2')).toBeFalsy();
+      });
+
+      it('does not render clear icon when allowClear is object without clearIcon', () => {
+        const { container, getByText } = render(
+          <Sender
+            slotConfig={[
+              {
+                type: 'tag',
+                key: 't3',
+                props: { label: 'T3', value: 'v3', allowClear: {} },
+              },
+            ]}
+          />,
+        );
+        expect(getByText('T3')).toBeInTheDocument();
+        expect(container.querySelector('.ant-sender-slot-tag-clear-icon')).toBeNull();
+      });
+
+      it('does not render clear icon when readOnly=true even if allowClear=true', () => {
+        const { container } = render(
+          <Sender
+            readOnly
+            slotConfig={[
+              {
+                type: 'tag',
+                key: 't4',
+                props: { label: 'T4', value: 'v4', allowClear: true },
+              },
+            ]}
+          />,
+        );
+        expect(container.querySelector('.ant-sender-slot-tag-clear-icon')).toBeNull();
+      });
+    });
+
+    describe('Tag allowClear', () => {
       it('should render remove when allowClear=true and remove tag on click', () => {
         const onChange = jest.fn();
         const ref = React.createRef<GetRef<typeof Sender>>();
