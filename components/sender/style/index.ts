@@ -87,6 +87,18 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
         boxSizing: 'border-box',
         alignItems: 'flex-end',
       },
+      // ============================ Count =============================
+      [`${componentCls}-count`]: {
+        flex: 'none',
+        fontSize: token.fontSizeSM,
+        color: token.colorTextDescription,
+        lineHeight: token.lineHeight,
+        paddingInlineStart: 0,
+        paddingInlineEnd: token.paddingSM,
+        alignSelf: 'flex-end',
+        userSelect: 'none',
+        pointerEvents: 'none',
+      },
       // ============================ Prefix =============================
       [`${componentCls}-prefix`]: {
         flex: 'none',

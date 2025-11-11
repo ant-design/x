@@ -48,6 +48,8 @@ export interface SenderProps
   readOnly?: boolean;
   submitType?: SubmitType;
   disabled?: boolean;
+  maxLength?: number;
+  showCount?: boolean;
   onSubmit?: (message: string) => void;
   onChange?: (
     value: string,
@@ -360,7 +362,13 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
             onPaste={onInternalPaste}
             variant="borderless"
             readOnly={readOnly}
+            maxLength={props.maxLength}
           />
+          {props.showCount && typeof props.maxLength === 'number' && (
+            <div className={`${prefixCls}-count`}>
+              {innerValue.length}/{props.maxLength}
+            </div>
+          )}
           {/* Action List */}
           {actionNode && (
             <div

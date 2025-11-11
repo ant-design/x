@@ -270,5 +270,8 @@
       "path": "./dist/antdx.min.js",
       "limit": "350 KiB"
     }
-  ]
+  ],
+  "volta": {
+    "node": "18.20.8"
+  }
 }
