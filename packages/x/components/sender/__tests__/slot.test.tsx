@@ -688,6 +688,84 @@ describe('Sender.SlotTextArea', () => {
       });
     });
 
+    describe('Tag allowClear', () => {
+      it('should render remove when allowClear=true and remove tag on click', () => {
+        const onChange = jest.fn();
+        const ref = React.createRef<GetRef<typeof Sender>>();
+        const { container, getByText } = render(
+          <Sender
+            ref={ref}
+            onChange={onChange}
+            slotConfig={[
+              { type: 'text', value: 'A ' },
+              { type: 'tag', key: 't1', props: { label: 'T1', value: 'v1', allowClear: true } },
+              { type: 'text', value: ' B' },
+            ]}
+          />,
+        );
+
+        expect(getByText('T1')).toBeInTheDocument();
+        const clear = container.querySelector('.ant-sender-slot-tag-clear-icon') as HTMLElement;
+        expect(clear).toBeInTheDocument();
+
+        fireEvent.click(clear);
+
+        expect(onChange).toHaveBeenCalled();
+        const lastCall = onChange.mock.calls[onChange.mock.calls.length - 1];
+        expect(lastCall[0]).toContain('A ');
+        expect(lastCall[0]).toContain(' B');
+        expect((lastCall[2] as any[]).some((c) => c.key === 't1')).toBeFalsy();
+      });
+
+      it('should render custom clearIcon and work when allowClear is object', () => {
+        const onChange = jest.fn();
+        const CustomIcon = () => <span data-testid="custom-x">X</span>;
+        const { container, getByTestId } = render(
+          <Sender
+            onChange={onChange}
+            slotConfig={[
+              {
+                type: 'tag',
+                key: 't2',
+                props: { label: 'T2', value: 'v2', allowClear: { clearIcon: <CustomIcon /> } },
+              },
+            ]}
+          />,
+        );
+
+        expect(getByTestId('custom-x')).toBeInTheDocument();
+        const clear = container.querySelector('.ant-sender-slot-tag-clear-icon') as HTMLElement;
+        fireEvent.click(clear);
+
+        expect(onChange).toHaveBeenCalled();
+        const lastCall = onChange.mock.calls[onChange.mock.calls.length - 1];
+        expect((lastCall[2] as any[]).some((c) => c.key === 't2')).toBeFalsy();
+      });
+
+      it('should not render clear when readOnly', () => {
+        const { container } = render(
+          <Sender
+            readOnly
+            slotConfig={[
+              { type: 'tag', key: 't3', props: { label: 'T3', value: 'v3', allowClear: true } },
+            ]}
+          />,
+        );
+        expect(container.querySelector('.ant-sender-slot-tag-clear-icon')).toBeNull();
+      });
+
+      it('should not render clear when allowClear is false', () => {
+        const { container } = render(
+          <Sender
+            slotConfig={[
+              { type: 'tag', key: 't4', props: { label: 'T4', value: 'v4', allowClear: false } },
+            ]}
+          />,
+        );
+        expect(container.querySelector('.ant-sender-slot-tag-clear-icon')).toBeNull();
+      });
+    });
+
     describe('Edge Cases & Error Handling', () => {
       it('should handle null/undefined slotConfig', () => {
         const { rerender } = render(<Sender slotConfig={undefined} />);
