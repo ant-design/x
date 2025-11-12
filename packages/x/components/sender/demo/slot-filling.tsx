@@ -5,12 +5,8 @@ import React, { useRef, useState } from 'react';
 type SlotConfig = SenderProps['slotConfig'];
 
 const otherSlotConfig: SlotConfig = [
-  {
-    type: 'content',
-    key: 'user',
-    props: { defaultValue: 'asdsad', placeholder: 'Please enter the occupation' },
-  },
   { type: 'text', value: 'want to go to' },
+
   {
     type: 'select',
     key: 'destination',
@@ -19,6 +15,11 @@ const otherSlotConfig: SlotConfig = [
       options: ['Beijing', 'Shanghai', 'Guangzhou'],
       placeholder: 'Please select a destination',
     },
+  },
+  {
+    type: 'content',
+    key: 'user',
+    props: { defaultValue: 'asdsad', placeholder: 'Please enter the occupation' },
   },
   { type: 'text', value: 'for a trip with ' },
   { type: 'tag', key: 'tag', props: { label: '@ Chuck', value: 'a man' } },

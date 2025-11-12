@@ -76,7 +76,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   // ============================ Style =============================
 
   const mergeStyle = { ...contextConfig.styles?.input, ...styles.input };
-  console.log(styles, 11111);
   const inputHeightStyle = useInputHeight(autoSize, mergeStyle);
 
   // ============================ Refs =============================
@@ -100,8 +99,14 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
   // ============================ State =============================
 
-  const [slotConfigMap, slotConfigInfo, getSlotValues, setSlotValues, setSlotConfigMap] =
-    useSlotConfigState(slotConfigRef.current);
+  const [
+    slotConfigMap,
+    editSlotConfigMap,
+    slotConfigInfo,
+    getSlotValues,
+    setSlotValues,
+    setSlotConfigMap,
+  ] = useSlotConfigState(slotConfigRef.current);
 
   const [slotPlaceholders, setSlotPlaceholders] = useState<Map<string, React.ReactNode>>(new Map());
 
@@ -112,6 +117,14 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     span.dataset.slotKey = key;
     span.className = `${prefixCls}-slot`;
 
+    return span;
+  };
+
+  const buildEditSlotSpan = (config: SlotConfigType) => {
+    const span = document.createElement('span');
+    span.setAttribute('contenteditable', 'true');
+    span.dataset.slotKey = config.key;
+    span.className = `${prefixCls}-slot`;
     return span;
   };
 
@@ -152,6 +165,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
               onChange={(e) => {
                 updateSlot(node.key as string, e.value);
               }}
+              data-slot-content={node.key}
               prefixCls={prefixCls}
               {...node?.props}
               className={`${prefixCls}-slot-content`}
@@ -238,11 +252,16 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       if (config.type === 'text') {
         nodeList.push(document.createTextNode(config.value || ''));
       }
-      if (config.key) {
-        const slotKey = config.key;
-        warning(!getSlotDom(slotKey), 'sender', `Duplicate slot key: ${slotKey}`);
-        const slotSpan = buildSlotSpan(slotKey);
-        saveSlotDom(config.key, slotSpan);
+      const slotKey = config.key;
+      warning(!!slotKey, 'sender', `Duplicate slot key: ${slotKey}`);
+      if (slotKey) {
+        let slotSpan;
+        if (config.type === 'content') {
+          slotSpan = buildEditSlotSpan(config);
+        } else {
+          slotSpan = buildSlotSpan(slotKey);
+        }
+        saveSlotDom(slotKey, slotSpan);
         if (slotSpan) {
           const reactNode = renderSlot(config, slotSpan);
           if (reactNode) {
@@ -466,7 +485,35 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
   };
 
+  const editDomEmpty = () => {
+    Array.from(editSlotConfigMap.keys()).forEach((key) => {
+      const dom = getSlotDom(key);
+      if (dom) {
+        const contentDom = dom.querySelector(`[data-slot-content='${key}']`);
+        const placeholderDom = dom.querySelector(`[data-slot-placeholder='${key}']`);
+        if (!dom?.innerText.trim()) {
+          if (contentDom && placeholderDom) {
+            contentDom.className = classnames(
+              `${prefixCls}-content-editable-edit`,
+              `${prefixCls}-content-editable-edit-empty-value`,
+            );
+            placeholderDom.className = classnames(
+              `${prefixCls}-content-editable-placeholder`,
+              `${prefixCls}-content-editable-placeholder-visible`,
+            );
+          }
+        } else {
+          if (contentDom && placeholderDom) {
+            contentDom.className = classnames(`${prefixCls}-content-editable-edit`);
+            placeholderDom.className = classnames(`${prefixCls}-content-editable-placeholder`);
+          }
+        }
+      }
+    });
+  };
   const onInternalInput = (e: React.FormEvent<HTMLDivElement>) => {
+    console.log(slotConfigInfo, editSlotConfigMap.keys(), 1111);
+    editDomEmpty();
     const newValue = getEditorValue();
     removeSpecificBRs(editableRef?.current);
     onChange?.(

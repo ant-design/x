@@ -98,6 +98,7 @@ interface SlotConfigCustomType extends SlotConfigBaseType {
   ) => React.ReactNode;
 }
 
+export type EditSlotConfigType = SlotConfigContentType;
 export type SlotConfigType =
   | SlotConfigTextType
   | SlotConfigInputType
