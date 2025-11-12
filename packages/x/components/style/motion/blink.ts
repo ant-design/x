@@ -1,6 +1,5 @@
 import { CSSInterpolation, Keyframes } from '@ant-design/cssinjs';
 import { TokenWithCommonCls } from '@ant-design/cssinjs-utils';
-import { AliasToken } from '../../theme/cssinjs-utils';
 
 export const blink = new Keyframes('antXBlink', {
   '0%': {
@@ -26,7 +25,7 @@ export const blink = new Keyframes('antXBlink', {
 });
 
 export const blinkMotion = (
-  token: TokenWithCommonCls<AliasToken>,
+  token: TokenWithCommonCls<{ colorTextBlinkDefault: string; colorTextBlink: string }>,
   motionName: string,
 ): CSSInterpolation => {
   const motionCls = motionName;
@@ -35,9 +34,9 @@ export const blinkMotion = (
     {
       [motionCls]: {
         backgroundClip: 'text',
-        color: token.colorTextDescription,
+        color: token.colorTextBlinkDefault,
         WebkitBackgroundClip: 'text', // For Safari
-        backgroundImage: `linear-gradient(90deg,transparent,${token.colorTextBase},transparent)`,
+        backgroundImage: `linear-gradient(90deg,transparent,${token.colorTextBlink},transparent)`,
         animationDuration: '1s',
         animationIterationCount: 'infinite',
         animationTimingFunction: 'linear',

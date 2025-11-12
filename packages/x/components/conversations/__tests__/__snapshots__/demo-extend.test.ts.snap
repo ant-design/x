@@ -1901,10 +1901,14 @@ Array [
         <span
           class="ant-conversations-creation-label-shortcut-keys"
         >
-          <span>
+          <span
+            class="ant-conversations-creation-label-shortcut-key"
+          >
             Win
           </span>
-          <span>
+          <span
+            class="ant-conversations-creation-label-shortcut-key"
+          >
             K
           </span>
         </span>

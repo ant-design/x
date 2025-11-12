@@ -43,6 +43,16 @@ export interface ComponentToken {
    * @descEN ThoughtChain node description text animation color
    */
   itemMotionDescription: string;
+  /**
+   * @desc 默认打字动画颜色
+   * @descEN Default typing animation color
+   */
+  colorTextBlinkDefault: string;
+  /**
+   * @desc 打字动画颜色
+   * @descEN Typing animation color
+   */
+  colorTextBlink: string;
 }
 
 export interface ThoughtChainToken extends FullToken<'ThoughtChain'> {}
@@ -148,9 +158,12 @@ const genThoughtChainStyle: GenerateStyle<ThoughtChainToken, CSSObject> = (token
 
 export const prepareComponentToken: GetDefaultToken<'ThoughtChain'> = (token) => {
   const itemMotionDescription = new FastColor(token.colorTextDescription).setA(0.25).toHexString();
-
+  const colorTextBlinkDefault = token.colorTextDescription;
+  const colorTextBlink = token.colorTextBase;
   return {
     itemMotionDescription,
+    colorTextBlinkDefault,
+    colorTextBlink,
     itemSolidBg: token.colorFillTertiary,
     itemSolidHoverBg: token.colorBgTextHover,
     itemOutlinedBg: token.colorBgContainer,

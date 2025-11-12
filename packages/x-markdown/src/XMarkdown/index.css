@@ -6,6 +6,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -71,6 +72,10 @@
   font-weight: var(--border-font-weight);
 }
 
+.x-markdown pre table {
+  box-shadow: none;
+}
+
 .x-markdown pre td,
 .x-markdown pre th {
   padding: var(--pre-th-td-padding);
@@ -81,9 +86,11 @@
 .x-markdown p {
   margin: var(--margin-block);
 }
+
 .x-markdown p:first-child {
   margin-top: 0;
 }
+
 .x-markdown p:last-child {
   margin-bottom: 0;
 }
@@ -93,10 +100,12 @@
   margin: var(--margin-ul-ol);
   padding: var(--padding-ul-ol);
 }
+
 .x-markdown ul:first-child,
 .x-markdown ol:first-child {
   margin-top: 0;
 }
+
 .x-markdown ul:last-child,
 .x-markdown ol:last-child {
   margin-bottom: 0;
@@ -105,15 +114,19 @@
 .x-markdown ol > li {
   list-style: decimal;
 }
+
 .x-markdown ul > li {
   list-style: disc;
 }
+
 .x-markdown li {
   margin: var(--margin-li);
 }
+
 .x-markdown li:first-child {
   margin-top: 0;
 }
+
 .x-markdown li:last-child {
   margin-bottom: 0;
 }
@@ -122,9 +135,11 @@
   margin: var(--margin-pre);
   overflow-x: auto;
 }
+
 .x-markdown pre:first-child {
   margin-top: 0;
 }
+
 .x-markdown pre:last-child {
   margin-bottom: 0;
 }
@@ -158,9 +173,11 @@
   margin: var(--table-margin);
   border-collapse: collapse;
 }
+
 .x-markdown table:not(pre):first-child {
   margin-top: 0;
 }
+
 .x-markdown table:not(pre):last-child {
   margin-bottom: 0;
 }
