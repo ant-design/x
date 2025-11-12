@@ -23,7 +23,7 @@ export interface StreamCache {
 interface Recognizer {
   tokenType: TokenType;
   isStartOfToken: (markdown: string) => boolean;
-  isInComplete: (markdown: string) => boolean;
+  isStreamingValid: (markdown: string) => boolean;
 }
 
 /* ------------ Constants ------------ */
@@ -69,43 +69,43 @@ const tokenRecognizerMap: Partial<Record<TokenType, Recognizer>> = {
   [TokenType.IncompleteLink]: {
     tokenType: TokenType.IncompleteLink,
     isStartOfToken: (markdown: string) => markdown.startsWith('['),
-    isInComplete: (markdown: string) =>
+    isStreamingValid: (markdown: string) =>
       STREAM_INCOMPLETE_REGEX.link.some((re) => re.test(markdown)),
   },
   [TokenType.IncompleteImage]: {
     tokenType: TokenType.IncompleteImage,
     isStartOfToken: (markdown: string) => markdown.startsWith('!'),
-    isInComplete: (markdown: string) =>
+    isStreamingValid: (markdown: string) =>
       STREAM_INCOMPLETE_REGEX.image.some((re) => re.test(markdown)),
   },
   [TokenType.IncompleteHeading]: {
     tokenType: TokenType.IncompleteHeading,
     isStartOfToken: (markdown: string) => markdown.startsWith('#'),
-    isInComplete: (markdown: string) =>
+    isStreamingValid: (markdown: string) =>
       STREAM_INCOMPLETE_REGEX.atxHeading.some((re) => re.test(markdown)),
   },
   [TokenType.IncompleteHtml]: {
     tokenType: TokenType.IncompleteHtml,
     isStartOfToken: (markdown: string) => markdown.startsWith('<'),
-    isInComplete: (markdown: string) =>
+    isStreamingValid: (markdown: string) =>
       STREAM_INCOMPLETE_REGEX.html.some((re) => re.test(markdown)),
   },
   [TokenType.IncompleteEmphasis]: {
     tokenType: TokenType.IncompleteEmphasis,
     isStartOfToken: (markdown: string) => markdown.startsWith('*') || markdown.startsWith('_'),
-    isInComplete: (markdown: string) =>
+    isStreamingValid: (markdown: string) =>
       STREAM_INCOMPLETE_REGEX.commonEmphasis.some((re) => re.test(markdown)),
   },
   [TokenType.IncompleteList]: {
     tokenType: TokenType.IncompleteList,
     isStartOfToken: (markdown: string) => /^[-+*]/.test(markdown),
-    isInComplete: (markdown: string) =>
+    isStreamingValid: (markdown: string) =>
       STREAM_INCOMPLETE_REGEX.list.some((re) => re.test(markdown)),
   },
   [TokenType.IncompleteTable]: {
     tokenType: TokenType.IncompleteTable,
     isStartOfToken: (markdown: string) => markdown.startsWith('|'),
-    isInComplete: isTableInComplete,
+    isStreamingValid: isTableInComplete,
   },
 };
 
@@ -119,7 +119,7 @@ const recognize = (cache: StreamCache, tokenType: TokenType): void => {
     return;
   }
 
-  if (token === tokenType && !recognizer.isInComplete(pending)) {
+  if (token === tokenType && !recognizer.isStreamingValid(pending)) {
     commitCache(cache);
   }
 };
