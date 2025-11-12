@@ -46,6 +46,8 @@ interface StreamingOption {
   incompleteMarkdownComponentMap?: {
     link?: string;
     image?: string;
+    table?: string;
+    html?: string;
   };
 }
 

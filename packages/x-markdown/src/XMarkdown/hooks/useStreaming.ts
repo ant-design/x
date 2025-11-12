@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { XMarkdownProps } from '../interface';
 
 /* ------------ Type ------------ */
@@ -10,7 +10,7 @@ export enum TokenType {
   IncompleteHtml = 4,
   IncompleteEmphasis = 5,
   IncompleteList = 6,
-  MaybeImage = 7,
+  IncompleteTable = 7,
 }
 
 export interface StreamCache {
@@ -20,17 +20,102 @@ export interface StreamCache {
   completeMarkdown: string;
 }
 
+interface Recognizer {
+  tokenType: TokenType;
+  isStartOfToken: (markdown: string) => boolean;
+  isInComplete: (markdown: string) => boolean;
+}
+
 /* ------------ Constants ------------ */
+const FENCED_CODE_REGEX = /^(`{3,}|~{3,})/;
+
 const INCOMPLETE_REGEX = {
   image: [/^!\[[^\]\r\n]*$/, /^!\[[^\r\n]*\]\(*[^)\r\n]*$/],
   link: [/^\[[^\]\r\n]*$/, /^\[[^\r\n]*\]\(*[^)\r\n]*$/],
   atxHeading: [/^#{1,6}(?=\s)*$/],
-  html: [/^<[a-zA-Z][a-zA-Z0-9-]*[^>\r\n]*$/],
+  html: [/^<\/$/, /^<\/?[a-zA-Z][a-zA-Z0-9-]*[^>\r\n]{0,1000}$/],
   commonEmphasis: [/^(\*+|_+)(?!\s)(?!.*\1$)[^\r\n]*$/],
   list: [/^[-+*]\s*$/, /^[-+*]\s*(\*+|_+)(?!\s)(?!.*\1$)[^\r\n]*$/],
 } as const;
 
-const FENCED_CODE_REGEX = /^(`{3,}|~{3,})/;
+const isTableInComplete = (markdown: string) => {
+  if (markdown.includes('\n\n')) return false;
+
+  const lines = markdown.split('\n');
+  if (lines.length <= 1) return true;
+
+  const [header, separator] = lines;
+  const trimmedHeader = header.trim();
+  if (!/^\|.*\|$/.test(trimmedHeader)) return false;
+
+  const trimmedSeparator = separator.trim();
+  const columns = trimmedSeparator
+    .split('|')
+    .map((col) => col.trim())
+    .filter(Boolean);
+
+  const separatorRegex = [/^:$/, /^:?-+:?$/];
+  return columns.every((col) => separatorRegex.some((re) => re.test(col)));
+};
+
+const tokenRecognizerMap: Partial<Record<TokenType, Recognizer>> = {
+  [TokenType.IncompleteLink]: {
+    tokenType: TokenType.IncompleteLink,
+    isStartOfToken: (markdown: string) => markdown.startsWith('['),
+    isInComplete: (markdown: string) => INCOMPLETE_REGEX.link.some((re) => re.test(markdown)),
+  },
+  [TokenType.IncompleteImage]: {
+    tokenType: TokenType.IncompleteImage,
+    isStartOfToken: (markdown: string) => markdown.startsWith('!'),
+    isInComplete: (markdown: string) => INCOMPLETE_REGEX.image.some((re) => re.test(markdown)),
+  },
+  [TokenType.IncompleteHeading]: {
+    tokenType: TokenType.IncompleteHeading,
+    isStartOfToken: (markdown: string) => markdown.startsWith('#'),
+    isInComplete: (markdown: string) => INCOMPLETE_REGEX.atxHeading.some((re) => re.test(markdown)),
+  },
+  [TokenType.IncompleteHtml]: {
+    tokenType: TokenType.IncompleteHtml,
+    isStartOfToken: (markdown: string) => markdown.startsWith('<'),
+    isInComplete: (markdown: string) => INCOMPLETE_REGEX.html.some((re) => re.test(markdown)),
+  },
+  [TokenType.IncompleteEmphasis]: {
+    tokenType: TokenType.IncompleteEmphasis,
+    isStartOfToken: (markdown: string) => markdown.startsWith('*') || markdown.startsWith('_'),
+    isInComplete: (markdown: string) =>
+      INCOMPLETE_REGEX.commonEmphasis.some((re) => re.test(markdown)),
+  },
+  [TokenType.IncompleteList]: {
+    tokenType: TokenType.IncompleteList,
+    isStartOfToken: (markdown: string) => /^[-+*]/.test(markdown),
+    isInComplete: (markdown: string) => INCOMPLETE_REGEX.list.some((re) => re.test(markdown)),
+  },
+  [TokenType.IncompleteTable]: {
+    tokenType: TokenType.IncompleteTable,
+    isStartOfToken: (markdown: string) => markdown.startsWith('|'),
+    isInComplete: isTableInComplete,
+  },
+};
+
+const recognize = (cache: StreamCache, tokenType: TokenType): void => {
+  const recognizer = tokenRecognizerMap[tokenType];
+  if (!recognizer) return;
+
+  const { token, pending } = cache;
+  if (token === TokenType.Text && recognizer.isStartOfToken(pending)) {
+    cache.token = tokenType;
+    return;
+  }
+
+  if (token === tokenType && !recognizer.isInComplete(pending)) {
+    commitCache(cache);
+  }
+};
+
+const recognizeHandlers = Object.values(tokenRecognizerMap).map((rec) => ({
+  tokenType: rec.tokenType,
+  recognize: (cache: StreamCache) => recognize(cache, rec.tokenType),
+}));
 
 /* ------------ Utils ------------ */
 const getInitialCache = (): StreamCache => ({
@@ -78,148 +163,28 @@ const isInCodeBlock = (text: string): boolean => {
   return inFenced;
 };
 
-/* ------------ Recognizers ------------ */
-const isTokenIncomplete = {
-  image: (markdown: string): boolean => INCOMPLETE_REGEX.image.some((re) => re.test(markdown)),
-  link: (markdown: string): boolean => INCOMPLETE_REGEX.link.some((re) => re.test(markdown)),
-  atxHeading: (markdown: string): boolean =>
-    INCOMPLETE_REGEX.atxHeading.some((re) => re.test(markdown)),
-  html: (markdown: string): boolean => INCOMPLETE_REGEX.html.some((re) => re.test(markdown)),
-  commonEmphasis: (markdown: string): boolean =>
-    INCOMPLETE_REGEX.commonEmphasis.some((re) => re.test(markdown)),
-  list: (markdown: string): boolean => INCOMPLETE_REGEX.list.some((re) => re.test(markdown)),
-};
-
-const recognizeImage = (cache: StreamCache): void => {
-  const { token, pending } = cache;
-
-  if (token === TokenType.Text && pending.startsWith('!')) {
-    cache.token = TokenType.MaybeImage;
-    return;
-  }
-
-  if (token !== TokenType.IncompleteImage && token !== TokenType.MaybeImage) return;
-
-  if (isTokenIncomplete.image(pending)) {
-    cache.token = TokenType.IncompleteImage;
-  } else {
-    commitCache(cache);
-  }
-};
-
-const recognizeLink = (cache: StreamCache): void => {
-  const { token, pending } = cache;
-
-  if (token === TokenType.Text && pending.startsWith('[')) {
-    cache.token = TokenType.IncompleteLink;
-    return;
-  }
-
-  if (token !== TokenType.IncompleteLink) return;
-
-  if (!isTokenIncomplete.link(pending)) {
-    commitCache(cache);
-  }
-};
-
-const recognizeAtxHeading = (cache: StreamCache): void => {
-  const { token, pending } = cache;
-
-  if (token === TokenType.Text && pending.startsWith('#')) {
-    cache.token = TokenType.IncompleteHeading;
-    return;
-  }
-
-  if (token !== TokenType.IncompleteHeading) return;
-
-  if (!isTokenIncomplete.atxHeading(pending)) {
-    commitCache(cache);
-  }
-};
-
-const recognizeHtml = (cache: StreamCache): void => {
-  const { token, pending } = cache;
-
-  if (token === TokenType.Text && pending.startsWith('<')) {
-    cache.token = TokenType.IncompleteHtml;
-    return;
-  }
-
-  if (token !== TokenType.IncompleteHtml) return;
-
-  if (!isTokenIncomplete.html(pending)) {
-    commitCache(cache);
-  }
-};
-
-const recognizeEmphasis = (cache: StreamCache): void => {
-  const { token, pending } = cache;
-  const isEmphasisStart = pending.startsWith('*') || pending.startsWith('_');
-
-  if (token === TokenType.Text && isEmphasisStart) {
-    cache.token = TokenType.IncompleteEmphasis;
-    return;
-  }
-
-  if (token !== TokenType.IncompleteEmphasis) return;
-
-  if (!isTokenIncomplete.commonEmphasis(pending)) {
-    commitCache(cache);
-  }
-};
-
-const recognizeList = (cache: StreamCache): void => {
-  const { token, pending } = cache;
-
-  if (token === TokenType.Text && /^[-+*]/.test(pending)) {
-    cache.token = TokenType.IncompleteList;
-    return;
-  }
-
-  if (token !== TokenType.IncompleteList) return;
-
-  if (!isTokenIncomplete.list(pending)) {
-    commitCache(cache);
-  }
-};
-
-const recognizeText = (cache: StreamCache): void => {
-  if (cache.token === TokenType.Text) {
-    commitCache(cache);
-  }
-};
-
 /* ------------ Main Hook ------------ */
 const useStreaming = (input: string, config?: XMarkdownProps['streaming']) => {
   const { hasNextChunk: enableCache = false, incompleteMarkdownComponentMap } = config || {};
   const [output, setOutput] = useState('');
   const cacheRef = useRef<StreamCache>(getInitialCache());
 
-  // Memoize recognizers to avoid recreation on each render
-  const recognizers = useMemo(
-    () => [
-      recognizeImage,
-      recognizeLink,
-      recognizeAtxHeading,
-      recognizeEmphasis,
-      recognizeHtml,
-      recognizeList,
-      recognizeText,
-    ],
-    [],
-  );
-
   const handleIncompleteMarkdown = useCallback(
     (cache: StreamCache): string | undefined => {
       if (cache.token === TokenType.Text) return;
 
       const componentMap = incompleteMarkdownComponentMap || {};
-
       switch (cache.token) {
         case TokenType.IncompleteImage:
           return `<${componentMap.image || 'incomplete-image'} />`;
         case TokenType.IncompleteLink:
           return `<${componentMap.link || 'incomplete-link'} />`;
+        case TokenType.IncompleteTable:
+          return cache.pending.split('\n').length <= 2
+            ? `<${componentMap.table || 'incomplete-table'} />`
+            : cache.pending;
+        case TokenType.IncompleteHtml:
+          return `<${componentMap.html || 'incomplete-html'} />`;
         default:
           return undefined;
       }
@@ -247,22 +212,30 @@ const useStreaming = (input: string, config?: XMarkdownProps['streaming']) => {
 
       cache.processedLength += chunk.length;
       const isTextInBlock = isInCodeBlock(text);
-      // Skip processing if inside code block
       for (const char of chunk) {
         cache.pending += char;
+        // Skip processing if inside code block
         if (isTextInBlock) {
           commitCache(cache);
+          continue;
+        }
+
+        if (cache.token === TokenType.Text) {
+          for (const handler of recognizeHandlers) handler.recognize(cache);
         } else {
-          recognizers.forEach((recognize) => {
-            recognize(cache);
-          });
+          const handler = recognizeHandlers.find((handler) => handler.tokenType === cache.token);
+          handler?.recognize(cache);
+        }
+
+        if (cache.token === TokenType.Text) {
+          commitCache(cache);
         }
       }
 
       const incompletePlaceholder = handleIncompleteMarkdown(cache);
       setOutput(cache.completeMarkdown + (incompletePlaceholder || ''));
     },
-    [recognizers, handleIncompleteMarkdown],
+    [handleIncompleteMarkdown],
   );
 
   useEffect(() => {

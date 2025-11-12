@@ -233,22 +233,6 @@ const streamingTestCases = [
     output: '* list',
   },
   {
-    title: 'incomplete Html',
-    input: '<div',
-    output: '',
-  },
-
-  {
-    title: 'complete Html',
-    input: '<div></div>',
-    output: '<div></div>',
-  },
-  {
-    title: 'complete Html self closed',
-    input: '<div />',
-    output: '<div />',
-  },
-  {
     title: 'heading',
     input: '#',
     output: '',
@@ -272,6 +256,114 @@ const streamingTestCases = [
     title: 'valid heading ',
     input: '### Heading',
     output: '### Heading',
+  },
+  {
+    title: 'incomplete table - only header',
+    input: '| Header 1 | Header 2 |',
+    output: '<incomplete-table />',
+    config: { hasNextChunk: true },
+  },
+  {
+    title: 'incomplete table - only header with title',
+    input: 'table \n | Header 1 | Header 2 |',
+    output: 'table \n <incomplete-table />',
+    config: { hasNextChunk: true },
+  },
+  {
+    title: 'incomplete table - header and separator',
+    input: '| Header 1 | Header 2 |\n| --- | --- |',
+    output: '<incomplete-table />',
+    config: { hasNextChunk: true },
+  },
+  {
+    title: 'complete table',
+    input: '| Header 1 | Header 2 |\n| --- | --- |\n| Cell 1 | Cell 2 |',
+    output: '| Header 1 | Header 2 |\n| --- | --- |\n| Cell 1 | Cell 2 |',
+    config: { hasNextChunk: false },
+  },
+  {
+    title: 'incomplete table with custom component',
+    input: '| Header 1 | Header 2 |',
+    output: '<custom-table-placeholder />',
+    config: {
+      hasNextChunk: true,
+      incompleteMarkdownComponentMap: { table: 'custom-table-placeholder' },
+    },
+  },
+  {
+    title: 'malformed table - no closing pipe',
+    input: '| Header 1 | Header 2 \n',
+    output: '| Header 1 | Header 2 \n',
+    config: { hasNextChunk: true },
+  },
+  {
+    title: 'table with incomplete separator',
+    input: '| Header 1 | Header 2 |\n| --- |',
+    output: '<incomplete-table />',
+    config: { hasNextChunk: true },
+  },
+  {
+    title: 'table with left align separator',
+    input: '| Header 1 | Header 2 |\n| :--- |',
+    output: '<incomplete-table />',
+    config: { hasNextChunk: true },
+  },
+  {
+    title: 'table with right align separator',
+    input: '| Header 1 | Header 2 |\n| ---: |',
+    output: '<incomplete-table />',
+    config: { hasNextChunk: true },
+  },
+  {
+    title: 'table with center separator',
+    input: '| Header 1 | Header 2 |\n| :---: |',
+    output: '<incomplete-table />',
+    config: { hasNextChunk: true },
+  },
+  {
+    title: 'incomplete Html - open tag',
+    input: '<div ',
+    output: '<incomplete-html />',
+    config: { hasNextChunk: true },
+  },
+  {
+    title: 'incomplete Html - close tag',
+    input: '</div ',
+    output: '<incomplete-html />',
+    config: { hasNextChunk: true },
+  },
+  {
+    title: 'incomplete Html - self close tag',
+    input: '<img src="" / ',
+    output: '<incomplete-html />',
+    config: { hasNextChunk: true },
+  },
+  {
+    title: 'incomplete html with custom component',
+    input: '<img src="" /',
+    output: '<custom-html-placeholder />',
+    config: {
+      hasNextChunk: true,
+      incompleteMarkdownComponentMap: { html: 'custom-html-placeholder' },
+    },
+  },
+  {
+    title: 'complete Html - open tag',
+    input: '<div>Div</div> ',
+    output: '<div>Div</div> ',
+    config: { hasNextChunk: true },
+  },
+  {
+    title: 'complete Html - self close tag',
+    input: '<br />',
+    output: '<br />',
+    config: { hasNextChunk: true },
+  },
+  {
+    title: 'complete Html - nested tags',
+    input: '<div><span>text</span></div>',
+    output: '<div><span>text</span></div>',
+    config: { hasNextChunk: true },
   },
 ];
 

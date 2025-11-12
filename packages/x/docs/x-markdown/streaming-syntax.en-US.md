@@ -51,7 +51,7 @@ Incomplete syntax structures may cause:
 Streaming syntax processing supports integrity checks for the following Markdown syntax:
 
 | Syntax Type | Format Example | Processing Mechanism |
-| --- | --- | --- |
+| --- | --- | --- | --- | --- | --- |
 | **Link** | `[text](url)` | Detect unclosed link markers, such as `[text](` |
 | **Image** | `![alt](src)` | Detect unclosed image markers, such as `![alt](` |
 | **Heading** | `# ## ###` etc. | Support progressive rendering of 1-6 level headings |
@@ -59,6 +59,7 @@ Streaming syntax processing supports integrity checks for the following Markdown
 | **Code** | `Inline code` and `Code blocks` | Support integrity checks for backtick code blocks |
 | **List** | `- + *` list markers | Detect spaces after list markers |
 | **Horizontal Rule** | `---` `===` | Avoid conflicts between Setext headings and horizontal rules |
+| **Table** | ` | col1 | col2 | ` | Detect unclosed table rows and cells |
 | **XML Tags** | `<tag>` | Handle closing state of HTML/XML tags |
 
 ### Custom Loading Components
