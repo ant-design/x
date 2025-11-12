@@ -29,7 +29,7 @@ The streaming syntax processing mechanism is designed for real-time rendering sc
 During streaming transmission, Markdown syntax may be in an incomplete state:
 
 ```markdown
-// Incomplete link syntax [Example Website](https://example // Incomplete image syntax ![Product Image](https://cdn.example.com/images/produc
+// Incomplete link syntax: [Example Website](https://example // Incomplete image syntax: ![Product Image](https://cdn.example.com/images/produc
 ```
 
 Incomplete syntax structures may cause:
@@ -51,7 +51,7 @@ Incomplete syntax structures may cause:
 Streaming syntax processing supports integrity checks for the following Markdown syntax:
 
 | Syntax Type | Format Example | Processing Mechanism |
-| --- | --- | --- | --- | --- | --- |
+| --- | --- | --- |
 | **Link** | `[text](url)` | Detect unclosed link markers, such as `[text](` |
 | **Image** | `![alt](src)` | Detect unclosed image markers, such as `![alt](` |
 | **Heading** | `# ## ###` etc. | Support progressive rendering of 1-6 level headings |
@@ -59,7 +59,7 @@ Streaming syntax processing supports integrity checks for the following Markdown
 | **Code** | `Inline code` and `Code blocks` | Support integrity checks for backtick code blocks |
 | **List** | `- + *` list markers | Detect spaces after list markers |
 | **Horizontal Rule** | `---` `===` | Avoid conflicts between Setext headings and horizontal rules |
-| **Table** | ` | col1 | col2 | ` | Detect unclosed table rows and cells |
+| **Table** | [`table`](https://github.github.com/gfm/#tables-extension-) | Detect unclosed table rows and cells |
 | **XML Tags** | `<tag>` | Handle closing state of HTML/XML tags |
 
 ### Custom Loading Components
