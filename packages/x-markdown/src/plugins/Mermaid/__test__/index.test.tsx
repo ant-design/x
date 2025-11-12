@@ -135,7 +135,8 @@ describe('Mermaid Plugin', () => {
 
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const copyButton = screen.getByRole('button', { name: 'copy' });
+      const copyIcon = screen.getByLabelText('copy');
+      const copyButton = copyIcon.closest('.ant-actions-item') as HTMLElement;
       fireEvent.click(copyButton);
 
       await waitFor(() => {
@@ -154,7 +155,8 @@ describe('Mermaid Plugin', () => {
 
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const copyButton = screen.getByRole('button', { name: 'copy' });
+      const copyIcon = screen.getByLabelText('copy');
+      const copyButton = copyIcon.closest('.ant-actions-item') as HTMLElement;
 
       // 确保点击不会抛出错误
       expect(() => fireEvent.click(copyButton)).not.toThrow();
@@ -177,7 +179,8 @@ describe('Mermaid Plugin', () => {
 
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const copyButton = screen.getByRole('button', { name: 'copy' });
+      const copyIcon = screen.getByLabelText('copy');
+      const copyButton = copyIcon.closest('.ant-actions-item') as HTMLElement;
       fireEvent.click(copyButton);
 
       await waitFor(() => {
@@ -192,23 +195,25 @@ describe('Mermaid Plugin', () => {
     it('should show zoom controls only in image mode', () => {
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      expect(screen.getByRole('button', { name: 'zoom-in' })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: 'zoom-out' })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: 'Reset' })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: 'download' })).toBeInTheDocument();
+      expect(screen.getByLabelText('zoom-in')).toBeInTheDocument();
+      expect(screen.getByLabelText('zoom-out')).toBeInTheDocument();
+      expect(screen.getByLabelText('undo')).toBeInTheDocument();
+      expect(screen.getByLabelText('download')).toBeInTheDocument();
 
       const codeButton = screen.getByText('Code');
       fireEvent.click(codeButton);
 
-      expect(screen.queryByRole('button', { name: 'zoom-in' })).not.toBeInTheDocument();
-      expect(screen.queryByRole('button', { name: 'zoom-out' })).not.toBeInTheDocument();
+      expect(screen.queryByLabelText('zoom-in')).not.toBeInTheDocument();
+      expect(screen.queryByLabelText('zoom-out')).not.toBeInTheDocument();
     });
 
     it('should handle zoom in/out', () => {
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const zoomInButton = screen.getByRole('button', { name: 'zoom-in' });
-      const zoomOutButton = screen.getByRole('button', { name: 'zoom-out' });
+      const zoomInIcon = screen.getByLabelText('zoom-in');
+      const zoomOutIcon = screen.getByLabelText('zoom-out');
+      const zoomInButton = zoomInIcon.closest('.ant-actions-item') as HTMLElement;
+      const zoomOutButton = zoomOutIcon.closest('.ant-actions-item') as HTMLElement;
 
       fireEvent.click(zoomInButton);
       fireEvent.click(zoomOutButton);
@@ -217,7 +222,8 @@ describe('Mermaid Plugin', () => {
     it('should handle reset functionality', () => {
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const resetButton = screen.getByRole('button', { name: 'Reset' });
+      const resetIcon = screen.getByLabelText('undo');
+      const resetButton = resetIcon.closest('.ant-actions-item') as HTMLElement;
       fireEvent.click(resetButton);
     });
   });
@@ -500,7 +506,8 @@ describe('Mermaid Plugin', () => {
         container.querySelector = mockQuerySelector;
       }
 
-      const downloadButton = screen.getByRole('button', { name: 'download' });
+      const downloadIcon = screen.getByLabelText('download');
+      const downloadButton = downloadIcon.closest('.ant-actions-item') as HTMLElement;
       fireEvent.click(downloadButton);
 
       // Wait for async operations
@@ -542,7 +549,8 @@ describe('Mermaid Plugin', () => {
         container.querySelector = mockQuerySelector;
       }
 
-      const downloadButton = screen.getByRole('button', { name: 'download' });
+      const downloadIcon = screen.getByLabelText('download');
+      const downloadButton = downloadIcon.closest('.ant-actions-item') as HTMLElement;
       fireEvent.click(downloadButton);
 
       // Should not throw and should return early

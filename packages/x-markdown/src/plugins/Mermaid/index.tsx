@@ -1,9 +1,17 @@
-import { CopyOutlined, DownloadOutlined, ZoomInOutlined, ZoomOutOutlined } from '@ant-design/icons';
+import {
+  CopyOutlined,
+  DownloadOutlined,
+  UndoOutlined,
+  ZoomInOutlined,
+  ZoomOutOutlined,
+} from '@ant-design/icons';
 import useXComponentConfig from '@ant-design/x/es/_util/hooks/use-x-component-config';
+import Actions from '@ant-design/x/es/actions';
+import type { ItemType } from '@ant-design/x/es/actions/interface';
 import useLocale from '@ant-design/x/es/locale/useLocale';
 import useXProviderContext from '@ant-design/x/es/x-provider/hooks/use-x-provider-context';
 import locale_EN from '@ant-design/x/locale/en_US';
-import { Button, message, Segmented, Space, Tooltip } from 'antd';
+import { message, Segmented } from 'antd';
 import classnames from 'classnames';
 import throttle from 'lodash.throttle';
 import mermaid from 'mermaid';
@@ -222,6 +230,46 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
     }
   };
 
+  // ============================ Action Items ============================
+  const baseItems: ItemType[] = [
+    {
+      key: 'copy',
+      icon: <CopyOutlined />,
+      label: contextLocale.copy,
+      onItemClick: handleCopyCode,
+    },
+  ];
+
+  const imageItems: ItemType[] = [
+    ...baseItems,
+    {
+      key: 'zoomIn',
+      icon: <ZoomInOutlined />,
+      label: contextLocale.zoomIn,
+      onItemClick: handleZoomIn,
+    },
+    {
+      key: 'zoomOut',
+      icon: <ZoomOutOutlined />,
+      label: contextLocale.zoomOut,
+      onItemClick: handleZoomOut,
+    },
+    {
+      key: 'zoomReset',
+      icon: <UndoOutlined />,
+      label: contextLocale.zoomReset,
+      onItemClick: handleReset,
+    },
+    {
+      key: 'download',
+      icon: <DownloadOutlined />,
+      label: contextLocale.download,
+      onItemClick: handleDownload,
+    },
+  ];
+
+  const actionItems = renderType === RenderType.Image ? imageItems : baseItems;
+
   const renderHeader = () => {
     if (header === null) return null;
     if (header) return header;
@@ -244,39 +292,7 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
           value={renderType}
           onChange={setRenderType}
         />
-        <Space>
-          <Tooltip title={contextLocale.copy}>
-            <Button type="text" size="small" icon={<CopyOutlined />} onClick={handleCopyCode} />
-          </Tooltip>
-          {renderType === RenderType.Image ? (
-            <>
-              <Tooltip title={contextLocale.zoomOut}>
-                <Button type="text" size="small" icon={<ZoomInOutlined />} onClick={handleZoomIn} />
-              </Tooltip>
-              <Tooltip title={contextLocale.zoomIn}>
-                <Button
-                  type="text"
-                  size="small"
-                  icon={<ZoomOutOutlined />}
-                  onClick={handleZoomOut}
-                />
-              </Tooltip>
-              <Tooltip title={contextLocale.zoomReset}>
-                <Button type="text" size="small" onClick={handleReset}>
-                  {contextLocale.zoomReset}
-                </Button>
-              </Tooltip>
-              <Tooltip title={contextLocale.download}>
-                <Button
-                  type="text"
-                  size="small"
-                  icon={<DownloadOutlined />}
-                  onClick={handleDownload}
-                />
-              </Tooltip>
-            </>
-          ) : null}
-        </Space>
+        <Actions items={actionItems} variant="borderless" />
       </div>
     );
   };
