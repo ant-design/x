@@ -134,9 +134,9 @@ const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
               'incomplete-image': ImageSkeleton,
               'incomplete-link': LinkSkeleton,
               'incomplete-table': TableSkeleton,
-              'incomplete-html': LinkSkeleton,
+              'incomplete-html': HtmlSkeleton,
             }}
-            streaming={{ hasNextChunk: true }}
+            streaming={{ hasNextChunk: isStreaming }}
           />
         </div>
       </Card>
