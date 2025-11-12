@@ -13,7 +13,8 @@
       "!server",
       "!coverage",
       "!scripts/previewEditor/**/*",
-      "!package.json"
+      "!package.json",
+      "!scripts/visual-regression/report-template.html"
     ]
   },
   "formatter": {
@@ -57,7 +58,8 @@
         "noArrayIndexKey": "off",
         "noConfusingVoidType": "off",
         "noThenProperty": "off",
-        "noTemplateCurlyInString": "off"
+        "noTemplateCurlyInString": "off",
+        "noNonNullAssertedOptionalChain": "off"
       },
       "performance": {
         "noDelete": "off",
