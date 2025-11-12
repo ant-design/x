@@ -42,6 +42,7 @@ const Demo: React.FC = () => {
       />
       <Sender value="Force as loading" loading readOnly />
       <Sender disabled value="Set to disabled" />
+      <Sender maxLength={20} showCount placeholder="最多20字" />
     </Flex>
   );
 };
