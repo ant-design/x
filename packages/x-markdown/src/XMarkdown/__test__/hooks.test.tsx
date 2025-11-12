@@ -146,6 +146,12 @@ const streamingTestCases = [
     config: { hasNextChunk: true },
   },
   {
+    title: 'incomplete image only start should not show',
+    input: '!',
+    output: '',
+    config: { hasNextChunk: true },
+  },
+  {
     title: 'incomplete image with streaming enabled',
     input: '![alt text](https://example',
     output: '<incomplete-image />',

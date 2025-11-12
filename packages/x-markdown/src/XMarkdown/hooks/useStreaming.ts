@@ -54,8 +54,12 @@ const isTableInComplete = (markdown: string) => {
     .map((col) => col.trim())
     .filter(Boolean);
 
-  const separatorRegex = [/^:$/, /^:?-+:?$/];
-  return columns.every((col) => separatorRegex.some((re) => re.test(col)));
+  const separatorRegex = /^:?-+:?$/;
+  return columns.every((col, index) =>
+    index === columns.length - 1
+      ? col === ':' || separatorRegex.test(col)
+      : separatorRegex.test(col),
+  );
 };
 
 const tokenRecognizerMap: Partial<Record<TokenType, Recognizer>> = {
@@ -171,18 +175,19 @@ const useStreaming = (input: string, config?: XMarkdownProps['streaming']) => {
 
   const handleIncompleteMarkdown = useCallback(
     (cache: StreamCache): string | undefined => {
-      if (cache.token === TokenType.Text) return;
+      const { token, pending } = cache;
+      if (token === TokenType.Text) return;
 
       const componentMap = incompleteMarkdownComponentMap || {};
-      switch (cache.token) {
+      switch (token) {
         case TokenType.IncompleteImage:
-          return `<${componentMap.image || 'incomplete-image'} />`;
+          return pending === '!' ? undefined : `<${componentMap.image || 'incomplete-image'} />`;
         case TokenType.IncompleteLink:
           return `<${componentMap.link || 'incomplete-link'} />`;
         case TokenType.IncompleteTable:
-          return cache.pending.split('\n').length <= 2
+          return pending.split('\n').length <= 2
             ? `<${componentMap.table || 'incomplete-table'} />`
-            : cache.pending;
+            : pending;
         case TokenType.IncompleteHtml:
           return `<${componentMap.html || 'incomplete-html'} />`;
         default:
