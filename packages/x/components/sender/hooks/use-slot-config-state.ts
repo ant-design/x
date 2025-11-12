@@ -25,21 +25,25 @@ const buildSlotValues = (
   return {};
 };
 
-function useGetState(
+function useSlotConfigState(
   slotConfig: SlotConfigType[],
 ): [
   Map<string, SlotConfigType>,
+  SlotConfigType[],
   () => Record<string, any>,
   React.Dispatch<React.SetStateAction<Record<string, any>>>,
+  (slotConfigs: SlotConfigType[]) => void,
 ] {
   const [state, _setState] = useState({});
   const stateRef = useRef(state);
   const slotConfigMap = useRef<Map<string, SlotConfigType>>(new Map());
+  const slotConfigRef = useRef<SlotConfigType[]>(slotConfig);
 
   useEffect(() => {
     const slotValue = buildSlotValues(slotConfig, slotConfigMap);
     _setState(slotValue);
     stateRef.current = slotValue;
+    slotConfigRef.current = slotConfig;
   }, [slotConfig]);
 
   const setState = useCallback((newValue: React.SetStateAction<Record<string, any>>) => {
@@ -48,11 +52,19 @@ function useGetState(
     _setState(value);
   }, []);
 
+  const setSlotConfigMap = useCallback((slotConfigs: SlotConfigType[]) => {
+    slotConfigs.forEach((config) => {
+      if (config.key) {
+        slotConfigMap.current.set(config.key, config);
+      }
+    });
+  }, []);
+
   const getState = useCallback(() => {
     return stateRef.current;
   }, []);
 
-  return [slotConfigMap.current, getState, setState];
+  return [slotConfigMap.current, slotConfigRef.current, getState, setState, setSlotConfigMap];
 }
 
-export default useGetState;
+export default useSlotConfigState;

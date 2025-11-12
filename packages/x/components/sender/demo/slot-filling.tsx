@@ -5,7 +5,12 @@ import React, { useRef, useState } from 'react';
 type SlotConfig = SenderProps['slotConfig'];
 
 const otherSlotConfig: SlotConfig = [
-  { type: 'text', value: 'I want to go to' },
+  {
+    type: 'content',
+    key: 'user',
+    props: { defaultValue: 'asdsad', placeholder: 'Please enter the occupation' },
+  },
+  { type: 'text', value: 'want to go to' },
   {
     type: 'select',
     key: 'destination',
@@ -236,6 +241,11 @@ const App: React.FC = () => {
       </Flex>
       {/* Sender 词槽填空示例 */}
       <Sender
+        styles={{
+          input: {
+            fontSize: 16,
+          },
+        }}
         onSubmit={(value) => {
           setValue(value);
           setSlotConfigKey(false);

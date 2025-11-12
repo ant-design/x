@@ -3,6 +3,7 @@ import { mergeToken } from '@ant-design/cssinjs-utils';
 import { FastColor } from '@ant-design/fast-color';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
+import genSlotContentEditableStyle from './content-editable';
 import genSenderHeaderStyle from './header';
 import genSlotTextAreaStyle from './slot-textarea';
 import genSenderSwitchStyle from './switch';
@@ -200,6 +201,7 @@ export default genStyleHooks<'Sender'>(
       genSenderHeaderStyle(SenderToken),
       genSenderSwitchStyle(SenderToken),
       genSlotTextAreaStyle(SenderToken),
+      genSlotContentEditableStyle(SenderToken),
     ];
   },
   prepareComponentToken,

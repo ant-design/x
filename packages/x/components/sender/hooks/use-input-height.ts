@@ -1,10 +1,10 @@
 import useToken from '../../theme/useToken';
 import { SenderProps } from '../interface';
 
-const useInputHeight = (styles: React.CSSProperties, autoSize: SenderProps['autoSize']) => {
+const useInputHeight = (autoSize: SenderProps['autoSize'], styles?: React.CSSProperties) => {
   const { token } = useToken();
-  const lineHeight = parseFloat(`${styles.lineHeight || token.lineHeight}`);
-  const fontSize = parseFloat(`${styles.fontSize || token.fontSize}`);
+  const lineHeight = parseFloat(`${styles?.lineHeight || token.lineHeight}`);
+  const fontSize = parseFloat(`${styles?.fontSize || token.fontSize}`);
   if (autoSize === false || !autoSize) {
     return {};
   }

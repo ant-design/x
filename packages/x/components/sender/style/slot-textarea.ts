@@ -6,11 +6,11 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
   const { componentCls, antCls, calc } = token;
   const slotCls = `${componentCls}-slot`;
   const antInputCls = `${antCls}-input`;
-
   const antDropdownCls = `${antCls}-dropdown-trigger`;
   const slotInputCls = `${componentCls}-slot-input`;
   const slotSelectCls = `${componentCls}-slot-select`;
   const slotTagCls = `${componentCls}-slot-tag`;
+  const slotContentCls = `${componentCls}-slot-content`;
   return {
     [`${componentCls}-input-slot`]: {
       outline: 'none',
@@ -27,12 +27,11 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
     },
     [slotCls]: {
       display: 'inline-flex',
-      margin: `0 ${unit(token.marginXXS)}`,
       verticalAlign: 'bottom',
       alignItems: 'center',
-      marginBlock: unit(calc(token.marginXXS).div(2).equal()),
       minHeight: token.controlHeightSM,
       wordBreak: 'break-all',
+      marginInline: unit(calc(token.marginXXS).div(2).equal()),
     },
 
     [`${antInputCls}${slotInputCls}`]: {
@@ -42,21 +41,21 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       color: token.colorTextSlot,
       borderRadius: token.borderRadius,
       padding: `0 ${unit(token.paddingXXS)}`,
-      fontSize: token.fontSize,
-      lineHeight: token.lineHeight,
+      fontSize: 'inherit',
+      lineHeight: 'inherit',
       position: 'relative',
       '&::placeholder': {
         color: token.colorTextSlotPlaceholder,
-        fontSize: token.fontSize,
-        lineHeight: token.lineHeight,
+        fontSize: 'inherit',
+        lineHeight: 'inherit',
       },
       '&:hover, &:focus': {
         borderColor: token.colorBorderSlotHover,
       },
     },
     [`${slotSelectCls}`]: {
-      fontSize: token.fontSize,
-      lineHeight: token.lineHeight,
+      fontSize: 'inherit',
+      lineHeight: 'inherit',
       padding: `0 ${unit(token.paddingXXS)}`,
       transition: `border-color  ${token.motionDurationMid}`,
       position: 'relative',
@@ -77,8 +76,8 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
     },
     [`${slotSelectCls}-value`]: {
       flex: 1,
-      fontSize: token.fontSize,
-      lineHeight: token.lineHeight,
+      fontSize: 'inherit',
+      lineHeight: 'inherit',
       '&:empty::before': {
         content: 'attr(data-placeholder)',
       },
@@ -86,7 +85,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
     [`${slotSelectCls}-arrow`]: {
       marginInlineStart: token.marginXXS,
       fontSize: token.fontSize,
-      lineHeight: token.lineHeight,
+      lineHeight: 'inherit',
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -104,7 +103,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       listStyle: 'none',
       zIndex: 1050,
       fontSize: token.fontSize,
-      lineHeight: token.lineHeight,
+      lineHeight: 'inherit',
       width: 'max-content',
     },
     [`${slotSelectCls}-dropdown li`]: {
@@ -122,15 +121,27 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       background: token.controlItemBgHover,
       color: token.colorText,
     },
-    [`${slotTagCls}`]: {
+    [slotTagCls]: {
       background: token.colorBgSlot,
       border: `1px solid ${token.colorBorderSlot}`,
       outline: 'none',
       color: token.colorTextSlot,
       borderRadius: token.borderRadius,
       padding: `0 ${unit(token.paddingXXS)}`,
-      fontSize: token.fontSize,
-      lineHeight: token.lineHeight,
+      fontSize: 'inherit',
+      lineHeight: 'inherit',
+      position: 'relative',
+      cursor: 'default',
+    },
+    [slotContentCls]: {
+      background: token.colorBgSlot,
+      outline: 'none',
+      color: token.colorTextSlot,
+      borderRadius: token.borderRadius,
+      paddingInline: token.paddingXXS,
+      boxSizing: 'border-box',
+      fontSize: 'inherit',
+      lineHeight: 'inherit',
       position: 'relative',
       cursor: 'default',
     },

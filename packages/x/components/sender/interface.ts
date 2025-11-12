@@ -45,7 +45,6 @@ interface SlotConfigTextType extends SlotConfigBaseType {
 
 interface SlotConfigContentType extends SlotConfigBaseType {
   type: 'content';
-  value?: string;
   key: string;
   props?: {
     defaultValue?: any;

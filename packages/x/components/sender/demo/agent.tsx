@@ -35,11 +35,6 @@ const AgentInfo: {
           placeholder: 'Please select a category',
         },
       },
-      {
-        type: 'content',
-        key: 'search_result',
-        props: { placeholder: 'Please enter the search content.' },
-      },
       { type: 'text', key: '', value: 'Please help me search for news about ' },
     ],
   },

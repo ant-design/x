@@ -7,9 +7,10 @@ import { createPortal } from 'react-dom';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import warning from '../_util/warning';
 import { useXProviderContext } from '../x-provider';
+import ContentEditable from './components/ContentEditable';
 import { SenderContext } from './context';
-import useGetState from './hooks/use-get-state';
 import useInputHeight from './hooks/use-input-height';
+import useSlotConfigState from './hooks/use-slot-config-state';
 import type { EventType, insertPosition, SlotConfigType } from './interface';
 
 export interface SlotTextAreaRef {
@@ -75,7 +76,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   // ============================ Style =============================
 
   const mergeStyle = { ...contextConfig.styles?.input, ...styles.input };
-  const inputHeightStyle = useInputHeight(mergeStyle, autoSize);
+  console.log(styles, 11111);
+  const inputHeightStyle = useInputHeight(autoSize, mergeStyle);
 
   // ============================ Refs =============================
   const editableRef = useRef<HTMLDivElement>(null);
@@ -98,7 +100,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
   // ============================ State =============================
 
-  const [slotConfigMap, getSlotValues, setSlotValues] = useGetState(slotConfigRef.current);
+  const [slotConfigMap, slotConfigInfo, getSlotValues, setSlotValues, setSlotConfigMap] =
+    useSlotConfigState(slotConfigRef.current);
 
   const [slotPlaceholders, setSlotPlaceholders] = useState<Map<string, React.ReactNode>>(new Map());
 
@@ -108,6 +111,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     span.setAttribute('contenteditable', 'false');
     span.dataset.slotKey = key;
     span.className = `${prefixCls}-slot`;
+
     return span;
   };
 
@@ -115,13 +119,13 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     slotDomMap.current.set(key, dom);
   };
 
-  const getSlotDom = (key: string) => {
+  const getSlotDom = (key: string): HTMLSpanElement | undefined => {
     return slotDomMap.current.get(key);
   };
 
   const updateSlot = (key: string, value: any, e?: EventType) => {
     const slotDom = getSlotDom(key);
-    const node = slotConfigRef.current?.find((item) => item.key === key);
+    const node = slotConfigMap.get(key);
     setSlotValues((prev) => ({ ...prev, [key]: value }));
     if (slotDom && node) {
       const newReactNode = renderSlot(node, slotDom);
@@ -142,6 +146,17 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const value = getSlotValues()[node.key];
     const renderContent = () => {
       switch (node.type) {
+        case 'content':
+          return (
+            <ContentEditable
+              onChange={(e) => {
+                updateSlot(node.key as string, e.value);
+              }}
+              prefixCls={prefixCls}
+              {...node?.props}
+              className={`${prefixCls}-slot-content`}
+            />
+          );
         case 'input':
           return (
             <Input
@@ -195,9 +210,12 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
             </Dropdown>
           );
         case 'tag':
-          return <div className={`${prefixCls}-slot-tag`}>{node.props?.label || ''}</div>;
-        case 'content':
-          return <div className={`${prefixCls}-slot-text`}>{node.value || ''}</div>;
+          return (
+            <div className={`${prefixCls}-slot-tag`}>
+              {node.props?.label || node.props?.value || ''}
+            </div>
+          );
+
         case 'custom':
           return node.customRender?.(
             value,
@@ -222,7 +240,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       }
       if (config.key) {
         const slotKey = config.key;
-
         warning(!getSlotDom(slotKey), 'sender', `Duplicate slot key: ${slotKey}`);
         const slotSpan = buildSlotSpan(slotKey);
         saveSlotDom(config.key, slotSpan);
@@ -241,7 +258,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }, [] as SlotNode[]);
   };
 
-  const getNodeTextValue = (node: Node, currentValues: Record<string, any>): string => {
+  const getNodeTextValue = (node: Node): string => {
     if (node.nodeType === Node.TEXT_NODE) {
       return node.textContent || '';
     }
@@ -250,7 +267,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       const slotKey = el.getAttribute('data-slot-key');
       if (slotKey) {
         const nodeConfig = slotConfigMap.get(slotKey);
-        const slotValue = currentValues[slotKey] || '';
+        const slotValue = getSlotValues()[slotKey] || '';
         const tagValue =
           nodeConfig?.type === 'tag' && nodeConfig.props?.value ? nodeConfig.props.value : null;
         const slotResult = nodeConfig?.formatResult?.(slotValue) || tagValue || slotValue;
@@ -268,7 +285,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const result: string[] = [];
     const currentConfig: (SlotConfigType & { value: string })[] = [];
     editableRef.current?.childNodes.forEach((node) => {
-      const textValue = getNodeTextValue(node, getSlotValues());
+      const textValue = getNodeTextValue(node);
       if (node.nodeType === Node.TEXT_NODE) {
         result.push(textValue);
         currentConfig.push({
@@ -471,8 +488,9 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const slotNode = getSlotListNode(slotConfig);
     const { type, range: lastRage } = getInsertPosition(position);
     let range: Range = document.createRange();
-    slotConfigRef.current = [...slotConfigRef.current, ...slotConfig];
-    setSlotValues(slotConfig);
+    setSlotValues((prev) => ({ ...prev, ...slotConfig }));
+    setSlotConfigMap(slotConfig);
+
     // 光标不在输入框内，将内容插入最末位
     if (type === 'end') {
       selection.removeAllRanges();
@@ -531,14 +549,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     if (options?.cursor === 'slot') {
       let inputDom = null;
       if (options?.key) {
-        if (
-          slotDomMap.current.has(options.key) &&
-          (slotDomMap.current.get(options.key) as HTMLSpanElement).querySelector('input')
-        ) {
-          inputDom = (slotDomMap.current.get(options.key) as HTMLSpanElement).querySelector(
-            'input',
-          );
-        }
+        inputDom = getSlotDom(options.key)?.querySelector('input') || null;
       } else {
         for (const node of Array.from(editableRef.current?.childNodes || [])) {
           if (node.nodeType === Node.ELEMENT_NODE && (node as Element).querySelector('input')) {
@@ -585,16 +596,14 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     setSlotValues({});
     onInternalInput(null as unknown as React.FormEvent<HTMLDivElement>);
   };
-
   // ============================ Effects =============================
 
   useEffect(() => {
-    slotConfigRef.current = [...(slotConfig || [])];
-    if (slotConfigRef.current.length === 0) return;
-    if (editableRef.current && slotConfigRef.current) {
+    if (slotConfigInfo.length === 0) return;
+    if (editableRef.current && slotConfigInfo) {
       editableRef.current.innerHTML = '';
       slotDomMap?.current?.clear();
-      const slotNodeList = getSlotListNode(slotConfigRef.current);
+      const slotNodeList = getSlotListNode(slotConfigInfo);
       slotNodeList.forEach((element) => {
         editableRef.current?.appendChild(element);
       });
@@ -616,7 +625,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       },
     };
   });
-
   // ============================ Render =============================
   return (
     <>
