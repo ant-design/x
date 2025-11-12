@@ -13,7 +13,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*6ySvTqb7XhkAAA
 
 ## When To Use
 
-Used to display files during conversations or input.
+- Used to display files during conversations or input.
 
 ## Examples
 
@@ -21,6 +21,7 @@ Used to display files during conversations or input.
 <code src="./demo/basic.tsx">Basic</code>
 <code src="./demo/size.tsx">Size</code>
 <code src="./demo/image.tsx">Image</code>
+<code src="./demo/image-loading.tsx">Image Load</code>
 <code src="./demo/audio.tsx">Audio/Video</code>
 <code src="./demo/mask.tsx">Mask</code>
 <code src="./demo/icon.tsx">Icon</code>
@@ -31,49 +32,58 @@ Used to display files during conversations or input.
 
 Common props ref：[Common props](/docs/react/common-props)
 
-### ThinkProps
+### FileCardProps
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| classNames | DOM class | [Record<SemanticDOM, string>](#semantic-dom) | - | - |
-| styles | DOM style | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - | - |
 | name | File name | string | - | - |
-| byte | File size | number \| string | - | - |
-| description | File description | ReactNode | - | - |
-| type | File type | 'file' \| 'image' \| 'audio' \| 'video' | - | - |
-| src | link of image or file | string | - | - |
-| mask | Custom mask | ReactNode | - | - |
+| byte | File size (bytes) | number | - | - |
+| size | Card size | 'small' \| 'default' | 'default' | - |
+| description | File description | React.ReactNode | - | - |
+| loading | Loading state | boolean | false | - |
+| type | File type | 'file' \| 'image' \| 'audio' \| 'video' \| string | - | - |
+| src | Image or file URL | string | - | - |
+| mask | Mask content | React.ReactNode | - | - |
 | icon | Custom icon | React.ReactNode \| PresetIcons | - | - |
-| onClick | Callback when click | () => void | - | - |
-| size | Show card size | 'small' \| 'default' | default | - |
+| imageProps | Image props configuration | [Image](https://ant.design/components/image-cn#api) | - | - |
+| videoProps | Video props configuration | Partial<React.JSX.IntrinsicElements['video']> | - | - |
+| audioProps | Audio props configuration | Partial<React.JSX.IntrinsicElements['audio']> | - | - |
+| spinProps | Loading animation props configuration | [SpinProps](https://ant.design/components/spin-cn#api) & { showText?: boolean; icon?: React.ReactNode } | - | - |
+| onClick | Click event callback | () => void | - | - |
+
+### PresetIcons
+
+Preset icon types, supports the following values:
 
 ```typescript
 type PresetIcons =
-  | 'default'
-  | 'excel'
-  | 'image'
-  | 'markdown'
-  | 'pdf'
-  | 'ppt'
-  | 'word'
-  | 'zip'
-  | 'video'
-  | 'audio'
-  | 'java'
-  | 'javascript'
-  | 'python';
+  | 'default' // Default file icon
+  | 'excel' // Excel file icon
+  | 'image' // Image file icon
+  | 'markdown' // Markdown file icon
+  | 'pdf' // PDF file icon
+  | 'ppt' // PowerPoint file icon
+  | 'word' // Word file icon
+  | 'zip' // Archive file icon
+  | 'video' // Video file icon
+  | 'audio' // Audio file icon
+  | 'java' // Java file icon
+  | 'javascript' // JavaScript file icon
+  | 'python'; // Python file icon
 ```
 
 ### FileCard.List
 
+File list component for displaying multiple file cards.
+
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| items | File lists | FileCardProps[] | - | - |
-| size | Card size | 'small' \| 'default' | default | - |
-| removable | Can be removed | boolean \| ((item: FileCardProps) => boolean) | false | - |
-| onRemove | Callback when remove | (item: FileCardProps, list?: FileCardProps[]) => void | - | - |
-| extension | Show extension | React.ReactNode | - | - |
-| overflow | Style when overflow | 'scrollX' \| 'scrollY' \| 'wrap' | wrap | - |
+| items | File list data | FileCardProps[] | - | - |
+| size | Card size | 'small' \| 'default' | 'default' | - |
+| removable | Whether removable | boolean \| ((item: FileCardProps) => boolean) | false | - |
+| onRemove | Remove event callback | (item: FileCardProps) => void | - | - |
+| extension | Extension content | React.ReactNode | - | - |
+| overflow | Overflow display style | 'scrollX' \| 'scrollY' \| 'wrap' | 'wrap' | - |
 
 ## Semantic DOM
 
@@ -85,6 +95,6 @@ type PresetIcons =
 
 <code src="./demo/_semantic-list.tsx" simplify="true"></code>
 
-## 主题变量（Design Token）
+## Design Token
 
 <ComponentTokenTable component="FileCard"></ComponentTokenTable>

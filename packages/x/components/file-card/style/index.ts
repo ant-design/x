@@ -9,6 +9,7 @@ export interface FileCardToken extends FullToken<'FileCard'> {}
 
 const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
   const {
+    antCls,
     componentCls,
     paddingSM,
     padding,
@@ -43,6 +44,7 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
         overflow: 'hidden',
         boxSizing: 'border-box',
         width: 268,
+        height: 'auto',
         '&-pointer': {
           cursor: 'pointer',
         },
@@ -130,13 +132,58 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
         width: 268,
         borderRadius: token.borderRadius,
         overflow: 'hidden',
-
+      },
+      [`${componentCls}-image-img`]: {
+        width: '100%',
         img: {
-          height: '100%',
+          width: '100%',
+          height: 'auto',
           objectFit: 'cover',
           borderRadius: 'inherit',
         },
       },
+      [`${componentCls}-loading`]: {
+        width: 268,
+        aspectRatio: '1',
+        position: 'relative',
+        borderRadius: token.borderRadius,
+        overflow: 'hidden',
+      },
+      [`${componentCls}-image-loading`]: {
+        width: '100%',
+        height: '100%',
+        position: 'absolute',
+        insetBlockStart: 0,
+        insetInlineStart: 0,
+        background: token.colorBgBase,
+      },
+
+      [`${componentCls}-image-skeleton`]: {
+        width: '100%',
+        height: '100%',
+        position: 'relative',
+        [`${antCls}-skeleton-node`]: {
+          width: '100%',
+          height: '100%',
+        },
+      },
+      [`${componentCls}-image-spin`]: {
+        position: 'absolute',
+        insetBlockStart: token.margin,
+        insetInlineStart: token.margin,
+        color: token.colorText,
+        lineHeight: token.lineHeight,
+        '&-default': {
+          fontSize: token.fontSize,
+        },
+        '&-small': {
+          fontSize: token.fontSizeSM,
+        },
+        '&-large': {
+          fontSize: token.fontSizeLG,
+        },
+      },
+
       [`${componentCls}-audio`]: {
         width: 268,
       },
@@ -241,7 +288,7 @@ const genFileCardListStyle: GenerateStyle<FileCardToken> = (token) => {
 
       [`${componentCls}-list-remove`]: {
         position: 'absolute',
-        top: 0,
+        insetBlockStart: 0,
         insetInlineEnd: 0,
         transform: 'translate(50%, -50%)',
         fontSize: fontSizeLG,
@@ -329,7 +376,7 @@ const genFileCardListStyle: GenerateStyle<FileCardToken> = (token) => {
       // prev/next btn
       '&-prev-btn, &-next-btn': {
         position: 'absolute',
-        top: '50%',
+        insetBlockStart: '50%',
         transform: 'translateY(-50%)',
         boxShadow: token.boxShadowTertiary,
         opacity: 0,
