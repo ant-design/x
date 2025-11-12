@@ -2,6 +2,13 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import Mermaid from '../index';
 
+const getActionButtonByLabel = (label: string): HTMLElement => {
+  const icon = screen.getByLabelText(label);
+  const button = icon.closest('.ant-actions-item');
+  if (!button) throw new Error(`Action button with label '${label}' not found.`);
+  return button as HTMLElement;
+};
+
 // Mock mermaid
 jest.mock('mermaid', () => ({
   initialize: jest.fn(),
@@ -135,8 +142,7 @@ describe('Mermaid Plugin', () => {
 
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const copyIcon = screen.getByLabelText('copy');
-      const copyButton = copyIcon.closest('.ant-actions-item') as HTMLElement;
+      const copyButton = getActionButtonByLabel('copy');
       fireEvent.click(copyButton);
 
       await waitFor(() => {
@@ -155,8 +161,7 @@ describe('Mermaid Plugin', () => {
 
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const copyIcon = screen.getByLabelText('copy');
-      const copyButton = copyIcon.closest('.ant-actions-item') as HTMLElement;
+      const copyButton = getActionButtonByLabel('copy');
 
       // 确保点击不会抛出错误
       expect(() => fireEvent.click(copyButton)).not.toThrow();
@@ -179,8 +184,7 @@ describe('Mermaid Plugin', () => {
 
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const copyIcon = screen.getByLabelText('copy');
-      const copyButton = copyIcon.closest('.ant-actions-item') as HTMLElement;
+      const copyButton = getActionButtonByLabel('copy');
       fireEvent.click(copyButton);
 
       await waitFor(() => {
@@ -210,10 +214,8 @@ describe('Mermaid Plugin', () => {
     it('should handle zoom in/out', () => {
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const zoomInIcon = screen.getByLabelText('zoom-in');
-      const zoomOutIcon = screen.getByLabelText('zoom-out');
-      const zoomInButton = zoomInIcon.closest('.ant-actions-item') as HTMLElement;
-      const zoomOutButton = zoomOutIcon.closest('.ant-actions-item') as HTMLElement;
+      const zoomInButton = getActionButtonByLabel('zoom-in');
+      const zoomOutButton = getActionButtonByLabel('zoom-out');
 
       fireEvent.click(zoomInButton);
       fireEvent.click(zoomOutButton);
@@ -222,8 +224,7 @@ describe('Mermaid Plugin', () => {
     it('should handle reset functionality', () => {
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const resetIcon = screen.getByLabelText('undo');
-      const resetButton = resetIcon.closest('.ant-actions-item') as HTMLElement;
+      const resetButton = getActionButtonByLabel('undo');
       fireEvent.click(resetButton);
     });
   });
@@ -506,8 +507,7 @@ describe('Mermaid Plugin', () => {
         container.querySelector = mockQuerySelector;
       }
 
-      const downloadIcon = screen.getByLabelText('download');
-      const downloadButton = downloadIcon.closest('.ant-actions-item') as HTMLElement;
+      const downloadButton = getActionButtonByLabel('download');
       fireEvent.click(downloadButton);
 
       // Wait for async operations
@@ -549,8 +549,7 @@ describe('Mermaid Plugin', () => {
         container.querySelector = mockQuerySelector;
       }
 
-      const downloadIcon = screen.getByLabelText('download');
-      const downloadButton = downloadIcon.closest('.ant-actions-item') as HTMLElement;
+      const downloadButton = getActionButtonByLabel('download');
       fireEvent.click(downloadButton);
 
       // Should not throw and should return early
