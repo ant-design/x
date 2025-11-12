@@ -29,13 +29,16 @@ interface Recognizer {
 /* ------------ Constants ------------ */
 const FENCED_CODE_REGEX = /^(`{3,}|~{3,})/;
 
-const INCOMPLETE_REGEX = {
-  image: [/^!\[[^\]\r\n]*$/, /^!\[[^\r\n]*\]\(*[^)\r\n]*$/],
-  link: [/^\[[^\]\r\n]*$/, /^\[[^\r\n]*\]\(*[^)\r\n]*$/],
-  atxHeading: [/^#{1,6}(?=\s)*$/],
-  html: [/^<\/$/, /^<\/?[a-zA-Z][a-zA-Z0-9-]*[^>\r\n]{0,1000}$/],
-  commonEmphasis: [/^(\*+|_+)(?!\s)(?!.*\1$)[^\r\n]*$/],
-  list: [/^[-+*]\s*$/, /^[-+*]\s*(\*+|_+)(?!\s)(?!.*\1$)[^\r\n]*$/],
+// Validates whether a token is still incomplete in the streaming context.
+// Returns true if the token is syntactically incomplete; false if it is complete or invalid.
+const STREAM_INCOMPLETE_REGEX = {
+  image: [/^!\[[^\]\r\n]{0,1000}$/, /^!\[[^\r\n]{0,1000}\]\(*[^)\r\n]{0,1000}$/],
+  link: [/^\[[^\]\r\n]{0,1000}$/, /^\[[^\r\n]{0,1000}\]\(*[^)\r\n]{0,1000}$/],
+  atxHeading: [/^#{1,6}\s*$/],
+  html: [/^<\/$/, /^<\/?[a-zA-Z][a-zA-Z0-9-]{0,100}[^>\r\n]{0,1000}$/],
+  commonEmphasis: [/^(\*{1,3}|_{1,3})(?!\s)(?!.*\1$)[^\r\n]{0,1000}$/],
+  // regex2 matches cases like "- **"
+  list: [/^[-+*]\s{0,3}$/, /^[-+*]\s{1,3}(\*{1,3}|_{1,3})(?!\s)(?!.*\1$)[^\r\n]{0,1000}$/],
 } as const;
 
 const isTableInComplete = (markdown: string) => {
@@ -66,33 +69,38 @@ const tokenRecognizerMap: Partial<Record<TokenType, Recognizer>> = {
   [TokenType.IncompleteLink]: {
     tokenType: TokenType.IncompleteLink,
     isStartOfToken: (markdown: string) => markdown.startsWith('['),
-    isInComplete: (markdown: string) => INCOMPLETE_REGEX.link.some((re) => re.test(markdown)),
+    isInComplete: (markdown: string) =>
+      STREAM_INCOMPLETE_REGEX.link.some((re) => re.test(markdown)),
   },
   [TokenType.IncompleteImage]: {
     tokenType: TokenType.IncompleteImage,
     isStartOfToken: (markdown: string) => markdown.startsWith('!'),
-    isInComplete: (markdown: string) => INCOMPLETE_REGEX.image.some((re) => re.test(markdown)),
+    isInComplete: (markdown: string) =>
+      STREAM_INCOMPLETE_REGEX.image.some((re) => re.test(markdown)),
   },
   [TokenType.IncompleteHeading]: {
     tokenType: TokenType.IncompleteHeading,
     isStartOfToken: (markdown: string) => markdown.startsWith('#'),
-    isInComplete: (markdown: string) => INCOMPLETE_REGEX.atxHeading.some((re) => re.test(markdown)),
+    isInComplete: (markdown: string) =>
+      STREAM_INCOMPLETE_REGEX.atxHeading.some((re) => re.test(markdown)),
   },
   [TokenType.IncompleteHtml]: {
     tokenType: TokenType.IncompleteHtml,
     isStartOfToken: (markdown: string) => markdown.startsWith('<'),
-    isInComplete: (markdown: string) => INCOMPLETE_REGEX.html.some((re) => re.test(markdown)),
+    isInComplete: (markdown: string) =>
+      STREAM_INCOMPLETE_REGEX.html.some((re) => re.test(markdown)),
   },
   [TokenType.IncompleteEmphasis]: {
     tokenType: TokenType.IncompleteEmphasis,
     isStartOfToken: (markdown: string) => markdown.startsWith('*') || markdown.startsWith('_'),
     isInComplete: (markdown: string) =>
-      INCOMPLETE_REGEX.commonEmphasis.some((re) => re.test(markdown)),
+      STREAM_INCOMPLETE_REGEX.commonEmphasis.some((re) => re.test(markdown)),
   },
   [TokenType.IncompleteList]: {
     tokenType: TokenType.IncompleteList,
     isStartOfToken: (markdown: string) => /^[-+*]/.test(markdown),
-    isInComplete: (markdown: string) => INCOMPLETE_REGEX.list.some((re) => re.test(markdown)),
+    isInComplete: (markdown: string) =>
+      STREAM_INCOMPLETE_REGEX.list.some((re) => re.test(markdown)),
   },
   [TokenType.IncompleteTable]: {
     tokenType: TokenType.IncompleteTable,

@@ -231,12 +231,22 @@ const streamingTestCases = [
   {
     title: 'incomplete list * with space',
     input: '-    ',
-    output: '',
+    output: '-    ',
   },
   {
     title: 'complete list *',
     input: '* list',
     output: '* list',
+  },
+  {
+    title: 'complete list - with incomplete bold',
+    input: '- **',
+    output: '',
+  },
+  {
+    title: 'complete list - with complete bold',
+    input: '- **bold**',
+    output: '- **bold**',
   },
   {
     title: 'heading',
