@@ -33,7 +33,6 @@
 
   font-size: var(--font-size);
   line-height: 1.5714285714285714;
-  word-wrap: break-word;
   width: 100%;
   color: var(--text-color);
 }
