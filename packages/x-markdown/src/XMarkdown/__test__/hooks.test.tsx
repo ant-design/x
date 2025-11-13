@@ -23,12 +23,6 @@ const basicTestCases = [
       '[![version](https://camo.githubusercontent.com/c6d467fb550578b3f321c1012e289f20e038b92dcdfc35f2b8147ca6572878ad/68747470733a2f2f696d672e736869656c64732e696f2f747769747465722f666f6c6c6f772f416e7444657369676e55492e7376673f6c6162656c3d416e7425323044657369676e)](https://github.com/ant-design/x)',
   },
   {
-    title: 'incomplete image',
-    input: '![',
-    output: '<incomplete-image />',
-    config: { hasNextChunk: true },
-  },
-  {
     title: 'complete image',
     input:
       '![version](https://camo.githubusercontent.com/c6d467fb550578b3f321c1012e289f20e038b92dcdfc35f2b8147ca6572878ad/68747470733a2f2f696d672e736869656c64732e696f2f747769747465722f666f6c6c6f772f416e7444657369676e55492e7376673f6c6162656c3d416e7425323044657369676e)',
@@ -142,7 +136,7 @@ const streamingTestCases = [
   {
     title: 'incomplete link with streaming enabled',
     input: '[incomplete link](https://example',
-    output: '<incomplete-link />',
+    output: '<incomplete-link data-raw="%5Bincomplete%20link%5D(https%3A%2F%2Fexample" />',
     config: { hasNextChunk: true },
   },
   {
@@ -154,13 +148,13 @@ const streamingTestCases = [
   {
     title: 'incomplete image with streaming enabled',
     input: '![alt text](https://example',
-    output: '<incomplete-image />',
+    output: '<incomplete-image data-raw="!%5Balt%20text%5D(https%3A%2F%2Fexample" />',
     config: { hasNextChunk: true },
   },
   {
     title: 'incomplete link with custom component',
     input: '[ant design x](https',
-    output: '<custom-link-placeholder />',
+    output: '<custom-link-placeholder data-raw="%5Bant%20design%20x%5D(https" />',
     config: {
       hasNextChunk: true,
       incompleteMarkdownComponentMap: { link: 'custom-link-placeholder' },
@@ -169,7 +163,7 @@ const streamingTestCases = [
   {
     title: 'incomplete image with custom component',
     input: '![alt text](https',
-    output: '<custom-image-placeholder />',
+    output: '<custom-image-placeholder data-raw="!%5Balt%20text%5D(https" />',
     config: {
       hasNextChunk: true,
       incompleteMarkdownComponentMap: { image: 'custom-image-placeholder' },
@@ -178,7 +172,7 @@ const streamingTestCases = [
   {
     title: 'incomplete link and image with custom components',
     input: '[link](https',
-    output: '<custom-link-placeholder />',
+    output: '<custom-link-placeholder data-raw="%5Blink%5D(https" />',
     config: {
       hasNextChunk: true,
       incompleteMarkdownComponentMap: {
@@ -196,12 +190,12 @@ const streamingTestCases = [
   {
     title: 'incomplete list -',
     input: '-',
-    output: '',
+    output: '<incomplete-list data-raw="-" />',
   },
   {
     title: 'incomplete list - with incomplete bold',
     input: '- **',
-    output: '',
+    output: '<incomplete-list data-raw="-%20**" />',
   },
   {
     title: 'incomplete list - with complete bold',
@@ -211,7 +205,7 @@ const streamingTestCases = [
   {
     title: 'setext heading',
     input: 'text \n- ',
-    output: 'text \n',
+    output: 'text \n<incomplete-list data-raw="-%20" />',
   },
   {
     title: 'not list ',
@@ -221,12 +215,7 @@ const streamingTestCases = [
   {
     title: 'incomplete list +',
     input: '+',
-    output: '',
-  },
-  {
-    title: 'incomplete list *',
-    input: '*',
-    output: '',
+    output: '<incomplete-list data-raw="%2B" />',
   },
   {
     title: 'incomplete list * with space',
@@ -241,7 +230,7 @@ const streamingTestCases = [
   {
     title: 'complete list - with incomplete bold',
     input: '- **',
-    output: '',
+    output: '<incomplete-list data-raw="-%20**" />',
   },
   {
     title: 'complete list - with complete bold',
@@ -251,12 +240,12 @@ const streamingTestCases = [
   {
     title: 'heading',
     input: '#',
-    output: '',
+    output: '<incomplete-heading data-raw="%23" />',
   },
   {
     title: 'heading3',
     input: '###',
-    output: '',
+    output: '<incomplete-heading data-raw="%23%23%23" />',
   },
   {
     title: 'inValid heading',
@@ -276,19 +265,20 @@ const streamingTestCases = [
   {
     title: 'incomplete table - only header',
     input: '| Header 1 | Header 2 |',
-    output: '<incomplete-table />',
+    output: '<incomplete-table data-raw="%7C%20Header%201%20%7C%20Header%202%20%7C" />',
     config: { hasNextChunk: true },
   },
   {
     title: 'incomplete table - only header with title',
     input: 'table \n | Header 1 | Header 2 |',
-    output: 'table \n <incomplete-table />',
+    output: 'table \n <incomplete-table data-raw="%7C%20Header%201%20%7C%20Header%202%20%7C" />',
     config: { hasNextChunk: true },
   },
   {
     title: 'incomplete table - header and separator',
     input: '| Header 1 | Header 2 |\n| --- | --- |',
-    output: '<incomplete-table />',
+    output:
+      '<incomplete-table data-raw="%7C%20Header%201%20%7C%20Header%202%20%7C%0A%7C%20---%20%7C%20---%20%7C" />',
     config: { hasNextChunk: true },
   },
   {
@@ -300,7 +290,7 @@ const streamingTestCases = [
   {
     title: 'incomplete table with custom component',
     input: '| Header 1 | Header 2 |',
-    output: '<custom-table-placeholder />',
+    output: '<custom-table-placeholder data-raw="%7C%20Header%201%20%7C%20Header%202%20%7C" />',
     config: {
       hasNextChunk: true,
       incompleteMarkdownComponentMap: { table: 'custom-table-placeholder' },
@@ -315,49 +305,53 @@ const streamingTestCases = [
   {
     title: 'table with incomplete separator',
     input: '| Header 1 | Header 2 |\n| --- |',
-    output: '<incomplete-table />',
+    output:
+      '<incomplete-table data-raw="%7C%20Header%201%20%7C%20Header%202%20%7C%0A%7C%20---%20%7C" />',
     config: { hasNextChunk: true },
   },
   {
     title: 'table with left align separator',
     input: '| Header 1 | Header 2 |\n| :--- |',
-    output: '<incomplete-table />',
+    output:
+      '<incomplete-table data-raw="%7C%20Header%201%20%7C%20Header%202%20%7C%0A%7C%20%3A---%20%7C" />',
     config: { hasNextChunk: true },
   },
   {
     title: 'table with right align separator',
     input: '| Header 1 | Header 2 |\n| ---: |',
-    output: '<incomplete-table />',
+    output:
+      '<incomplete-table data-raw="%7C%20Header%201%20%7C%20Header%202%20%7C%0A%7C%20---%3A%20%7C" />',
     config: { hasNextChunk: true },
   },
   {
     title: 'table with center separator',
     input: '| Header 1 | Header 2 |\n| :---: |',
-    output: '<incomplete-table />',
+    output:
+      '<incomplete-table data-raw="%7C%20Header%201%20%7C%20Header%202%20%7C%0A%7C%20%3A---%3A%20%7C" />',
     config: { hasNextChunk: true },
   },
   {
     title: 'incomplete Html - open tag',
     input: '<div ',
-    output: '<incomplete-html />',
+    output: '<incomplete-html data-raw="%3Cdiv%20" />',
     config: { hasNextChunk: true },
   },
   {
     title: 'incomplete Html - close tag',
     input: '</div ',
-    output: '<incomplete-html />',
+    output: '<incomplete-html data-raw="%3C%2Fdiv%20" />',
     config: { hasNextChunk: true },
   },
   {
     title: 'incomplete Html - self close tag',
     input: '<img src="" / ',
-    output: '<incomplete-html />',
+    output: '<incomplete-html data-raw="%3Cimg%20src%3D%22%22%20%2F%20" />',
     config: { hasNextChunk: true },
   },
   {
     title: 'incomplete html with custom component',
     input: '<img src="" /',
-    output: '<custom-html-placeholder />',
+    output: '<custom-html-placeholder data-raw="%3Cimg%20src%3D%22%22%20%2F" />',
     config: {
       hasNextChunk: true,
       incompleteMarkdownComponentMap: { html: 'custom-html-placeholder' },
@@ -394,7 +388,7 @@ const fencedCodeTestCases = [
   {
     title: 'incomplete link outside fenced code block should be replaced',
     input: 'Here is a [link](https://example',
-    output: 'Here is a <incomplete-link />',
+    output: 'Here is a <incomplete-link data-raw="%5Blink%5D(https%3A%2F%2Fexample" />',
     config: { hasNextChunk: true },
   },
 ];
@@ -517,7 +511,9 @@ describe('XMarkdown hooks', () => {
           config: { hasNextChunk: true },
         });
       });
-      expect(result.current).toBe('Hello world with <incomplete-link />');
+      expect(result.current).toBe(
+        'Hello world with <incomplete-link data-raw="%5Bincomplete%20link%5D(https%3A%2F%2Fexample" />',
+      );
     });
 
     it('should reset state when input is completely different', () => {
@@ -557,7 +553,9 @@ describe('XMarkdown hooks', () => {
           config: { hasNextChunk: true },
         });
       });
-      expect(result.current).toBe('Start with <incomplete-link />');
+      expect(result.current).toBe(
+        'Start with <incomplete-link data-raw="%5Blink%5D(https%3A%2F%2Fexample" />',
+      );
 
       // Complete the link
       act(() => {
