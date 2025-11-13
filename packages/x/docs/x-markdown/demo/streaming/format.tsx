@@ -1,4 +1,4 @@
-import XMarkdown from '@ant-design/x-markdown';
+import XMarkdown, { ComponentProps } from '@ant-design/x-markdown';
 import { Button, Card, Skeleton } from 'antd';
 import React, { useState } from 'react';
 import { useMarkdownTheme } from '../_utils';
@@ -50,15 +50,50 @@ const demos = [
 
 const ImageSkeleton = () => <Skeleton.Image active style={{ width: 60, height: 60 }} />;
 
-const LinkSkeleton = () => (
-  <Skeleton.Button active size="small" style={{ margin: '4px 0', width: 16, height: 16 }} />
-);
+const IncompleteLink = (props: ComponentProps) => {
+  const text = decodeURIComponent(String(props['data-raw'] || ''));
+
+  // 提取链接文本，格式为 [text](url)
+  const linkTextMatch = text.match(/^\[([^\]]*)\]/);
+  const displayText = linkTextMatch ? linkTextMatch[1] : text.slice(1);
+
+  return (
+    <a style={{ pointerEvents: 'none' }} href="#">
+      {displayText}
+    </a>
+  );
+};
 
 const TableSkeleton = () => <Skeleton.Node active style={{ width: 160 }} />;
 
 const HtmlSkeleton = () => (
   <Skeleton.Button active size="small" style={{ margin: '4px 0', width: 16, height: 16 }} />
 );
+
+const IncompleteEmphasis = (props: ComponentProps) => {
+  const text = decodeURIComponent(String(props['data-raw'] || ''));
+
+  const match = text.match(/^([*_]{1,3})([^*_]*)/);
+  if (!match || !match[2]) return null;
+
+  const [, symbols, content] = match;
+  const level = symbols.length;
+
+  switch (level) {
+    case 1:
+      return <em>{content}</em>;
+    case 2:
+      return <strong>{content}</strong>;
+    case 3:
+      return (
+        <em>
+          <strong>{content}</strong>
+        </em>
+      );
+    default:
+      return null;
+  }
+};
 
 const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
   const [displayText, setDisplayText] = useState(content);
@@ -130,11 +165,13 @@ const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
             content={displayText}
             className={className}
             paragraphTag="div"
+            openLinksInNewTab
             components={{
               'incomplete-image': ImageSkeleton,
-              'incomplete-link': LinkSkeleton,
+              'incomplete-link': IncompleteLink,
               'incomplete-table': TableSkeleton,
               'incomplete-html': HtmlSkeleton,
+              'incomplete-emphasis': IncompleteEmphasis,
             }}
             streaming={{ hasNextChunk: isStreaming }}
           />

@@ -1,27 +1,17 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { XMarkdownProps } from '../interface';
+import { StreamCacheTokenType, XMarkdownProps } from '../interface';
 
 /* ------------ Type ------------ */
-export enum TokenType {
-  Text = 0,
-  IncompleteLink = 1,
-  IncompleteImage = 2,
-  IncompleteHeading = 3,
-  IncompleteHtml = 4,
-  IncompleteEmphasis = 5,
-  IncompleteList = 6,
-  IncompleteTable = 7,
-}
 
 export interface StreamCache {
   pending: string;
-  token: TokenType;
+  token: StreamCacheTokenType;
   processedLength: number;
   completeMarkdown: string;
 }
 
 interface Recognizer {
-  tokenType: TokenType;
+  tokenType: StreamCacheTokenType;
   isStartOfToken: (markdown: string) => boolean;
   isStreamingValid: (markdown: string) => boolean;
 }
@@ -65,56 +55,56 @@ const isTableInComplete = (markdown: string) => {
   );
 };
 
-const tokenRecognizerMap: Partial<Record<TokenType, Recognizer>> = {
-  [TokenType.IncompleteLink]: {
-    tokenType: TokenType.IncompleteLink,
+const tokenRecognizerMap: Partial<Record<StreamCacheTokenType, Recognizer>> = {
+  [StreamCacheTokenType.Link]: {
+    tokenType: StreamCacheTokenType.Link,
     isStartOfToken: (markdown: string) => markdown.startsWith('['),
     isStreamingValid: (markdown: string) =>
       STREAM_INCOMPLETE_REGEX.link.some((re) => re.test(markdown)),
   },
-  [TokenType.IncompleteImage]: {
-    tokenType: TokenType.IncompleteImage,
+  [StreamCacheTokenType.Image]: {
+    tokenType: StreamCacheTokenType.Image,
     isStartOfToken: (markdown: string) => markdown.startsWith('!'),
     isStreamingValid: (markdown: string) =>
       STREAM_INCOMPLETE_REGEX.image.some((re) => re.test(markdown)),
   },
-  [TokenType.IncompleteHeading]: {
-    tokenType: TokenType.IncompleteHeading,
+  [StreamCacheTokenType.Heading]: {
+    tokenType: StreamCacheTokenType.Heading,
     isStartOfToken: (markdown: string) => markdown.startsWith('#'),
     isStreamingValid: (markdown: string) =>
       STREAM_INCOMPLETE_REGEX.atxHeading.some((re) => re.test(markdown)),
   },
-  [TokenType.IncompleteHtml]: {
-    tokenType: TokenType.IncompleteHtml,
+  [StreamCacheTokenType.Html]: {
+    tokenType: StreamCacheTokenType.Html,
     isStartOfToken: (markdown: string) => markdown.startsWith('<'),
     isStreamingValid: (markdown: string) =>
       STREAM_INCOMPLETE_REGEX.html.some((re) => re.test(markdown)),
   },
-  [TokenType.IncompleteEmphasis]: {
-    tokenType: TokenType.IncompleteEmphasis,
+  [StreamCacheTokenType.Emphasis]: {
+    tokenType: StreamCacheTokenType.Emphasis,
     isStartOfToken: (markdown: string) => markdown.startsWith('*') || markdown.startsWith('_'),
     isStreamingValid: (markdown: string) =>
       STREAM_INCOMPLETE_REGEX.commonEmphasis.some((re) => re.test(markdown)),
   },
-  [TokenType.IncompleteList]: {
-    tokenType: TokenType.IncompleteList,
+  [StreamCacheTokenType.List]: {
+    tokenType: StreamCacheTokenType.List,
     isStartOfToken: (markdown: string) => /^[-+*]/.test(markdown),
     isStreamingValid: (markdown: string) =>
       STREAM_INCOMPLETE_REGEX.list.some((re) => re.test(markdown)),
   },
-  [TokenType.IncompleteTable]: {
-    tokenType: TokenType.IncompleteTable,
+  [StreamCacheTokenType.Table]: {
+    tokenType: StreamCacheTokenType.Table,
     isStartOfToken: (markdown: string) => markdown.startsWith('|'),
     isStreamingValid: isTableInComplete,
   },
 };
 
-const recognize = (cache: StreamCache, tokenType: TokenType): void => {
+const recognize = (cache: StreamCache, tokenType: StreamCacheTokenType): void => {
   const recognizer = tokenRecognizerMap[tokenType];
   if (!recognizer) return;
 
   const { token, pending } = cache;
-  if (token === TokenType.Text && recognizer.isStartOfToken(pending)) {
+  if (token === StreamCacheTokenType.Text && recognizer.isStartOfToken(pending)) {
     cache.token = tokenType;
     return;
   }
@@ -132,7 +122,7 @@ const recognizeHandlers = Object.values(tokenRecognizerMap).map((rec) => ({
 /* ------------ Utils ------------ */
 const getInitialCache = (): StreamCache => ({
   pending: '',
-  token: TokenType.Text,
+  token: StreamCacheTokenType.Text,
   processedLength: 0,
   completeMarkdown: '',
 });
@@ -142,7 +132,7 @@ const commitCache = (cache: StreamCache): void => {
     cache.completeMarkdown += cache.pending;
     cache.pending = '';
   }
-  cache.token = TokenType.Text;
+  cache.token = StreamCacheTokenType.Text;
 };
 
 const isInCodeBlock = (text: string): boolean => {
@@ -184,22 +174,21 @@ const useStreaming = (input: string, config?: XMarkdownProps['streaming']) => {
   const handleIncompleteMarkdown = useCallback(
     (cache: StreamCache): string | undefined => {
       const { token, pending } = cache;
-      if (token === TokenType.Text) return;
+      if (token === StreamCacheTokenType.Text) return;
 
       const componentMap = incompleteMarkdownComponentMap || {};
+      const encodedPending = encodeURIComponent(pending);
       switch (token) {
-        case TokenType.IncompleteImage:
-          return pending === '!' ? undefined : `<${componentMap.image || 'incomplete-image'} />`;
-        case TokenType.IncompleteLink:
-          return `<${componentMap.link || 'incomplete-link'} />`;
-        case TokenType.IncompleteTable:
+        case StreamCacheTokenType.Image:
+          return pending === '!'
+            ? undefined
+            : `<${componentMap.image || 'incomplete-image'} data-raw="${encodedPending}" />`;
+        case StreamCacheTokenType.Table:
           return pending.split('\n').length <= 2
-            ? `<${componentMap.table || 'incomplete-table'} />`
+            ? `<${componentMap.table || 'incomplete-table'} data-raw="${encodedPending}" />`
             : pending;
-        case TokenType.IncompleteHtml:
-          return `<${componentMap.html || 'incomplete-html'} />`;
         default:
-          return undefined;
+          return `<${componentMap[token] || `incomplete-${token}`} data-raw="${encodedPending}" />`;
       }
     },
     [incompleteMarkdownComponentMap],
@@ -233,14 +222,14 @@ const useStreaming = (input: string, config?: XMarkdownProps['streaming']) => {
           continue;
         }
 
-        if (cache.token === TokenType.Text) {
+        if (cache.token === StreamCacheTokenType.Text) {
           for (const handler of recognizeHandlers) handler.recognize(cache);
         } else {
           const handler = recognizeHandlers.find((handler) => handler.tokenType === cache.token);
           handler?.recognize(cache);
         }
 
-        if (cache.token === TokenType.Text) {
+        if (cache.token === StreamCacheTokenType.Text) {
           commitCache(cache);
         }
       }
