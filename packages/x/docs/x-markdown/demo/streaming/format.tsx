@@ -38,7 +38,7 @@ const demos = [
     content: `Table: 
 
 | 特性维度 | 说明 |
-|:----------|------:|
+|----------|------|
 | **定位** | 基于 Ant Design 的 React 扩展库，专注企业级中后台交互与视觉一致性 |
 | **核心能力** | 提供高级组件（如高级表格、表单、图表、权限控制等）与业务模板，弥补 Ant Design 基础组件的覆盖盲区 |
 | **技术栈** | React + TypeScript，完全兼容 Ant Design 设计体系与工程化方案 |
@@ -123,8 +123,8 @@ const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
   }, [startStream]);
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-      <Card title="Markdown Source" size="small">
+    <div style={{ display: 'flex', gap: 16, width: '100%' }}>
+      <Card title="Markdown Source" size="small" style={{ flex: 1 }}>
         <div
           style={{
             background: '#f5f5f5',
@@ -146,6 +146,7 @@ const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
       <Card
         title="Rendered Output"
         size="small"
+        style={{ flex: 1, overflow: 'scroll' }}
         extra={
           <Button type="primary" onClick={startStream} loading={isStreaming}>
             Re-Render
@@ -158,7 +159,7 @@ const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
             borderRadius: 4,
             padding: 12,
             maxHeight: 800,
-            overflow: 'auto',
+            overflow: 'scroll',
           }}
         >
           <XMarkdown
@@ -185,19 +186,17 @@ const App = () => {
   const [currentDemo, setCurrentDemo] = useState(0);
 
   return (
-    <div style={{ padding: 24, maxWidth: 800, margin: '0 auto' }}>
-      <div style={{ marginBottom: 16 }}>
-        {demos.map((demo, index) => (
-          <Button
-            key={index}
-            type={currentDemo === index ? 'primary' : 'default'}
-            onClick={() => setCurrentDemo(index)}
-            style={{ marginRight: 8, marginBottom: 8 }}
-          >
-            {demo.title}
-          </Button>
-        ))}
-      </div>
+    <div style={{ padding: 24 }}>
+      {demos.map((demo, index) => (
+        <Button
+          key={index}
+          type={currentDemo === index ? 'primary' : 'default'}
+          onClick={() => setCurrentDemo(index)}
+          style={{ marginRight: 8, marginBottom: 8 }}
+        >
+          {demo.title}
+        </Button>
+      ))}
 
       <StreamDemo key={currentDemo} content={demos[currentDemo].content} />
     </div>
