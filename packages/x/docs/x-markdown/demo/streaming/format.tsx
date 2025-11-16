@@ -1,3 +1,4 @@
+import { Welcome } from '@ant-design/x';
 import XMarkdown, { ComponentProps } from '@ant-design/x-markdown';
 import { Button, Card, Skeleton } from 'antd';
 import React, { useState } from 'react';
@@ -6,22 +7,57 @@ import { useMarkdownTheme } from '../_utils';
 const demos = [
   {
     title: 'Mixed Syntax',
-    content:
-      "# Complex Mixed Syntax\n\nThis is a **comprehensive example** with:\n\n- **Bold items** with [Ant Design X](https://github.com/ant-design/x)\n- *Italic text* with `inline code`\n- Images: ![Ant Design X](https://mdn.alipayobjects.com/huamei_yz9z7c/afts/img/0lMhRYbo0-8AAAAAQDAAAAgADlJoAQFr/original)\n\n## Code Example\n\n```javascript\nimport { XProvider } from '@ant-design/x';\n\nconst App = () => (\n  <XProvider>\n    <YourComponent />\n  </XProvider>\n);\n```\n\n> **Note**: This is a *blockquote* with **mixed** syntax. \n\n ## Table: \n | 特性维度 | 说明 |\n|----------|------|\n| **定位** | 基于 Ant Design 的 React 扩展库，专注企业级中后台交互与视觉一致性 |\n| **核心能力** | 提供高级组件（如高级表格、表单、图表、权限控制等）与业务模板，弥补 Ant Design 基础组件的覆盖盲区 |\n| **技术栈** | React + TypeScript，完全兼容 Ant Design 设计体系与工程化方案 |\n| **设计原则** | 延续 Ant Design 的「自然」「确定性」「意义感」「生长性」四大设计价值观，保持交互与视觉一致性 |\n| **安装使用** | `npm i @ant-design/x` 或 `yarn add @ant-design/x`，引入后即可与 Ant Design 组件混合使用 |\n| **开源协议** | MIT |",
+    content: `## Ant Design X｜AI interface solution 
+![Ant Design X](https://mdn.alipayobjects.com/huamei_yz9z7c/afts/img/0lMhRYbo0-8AAAAAQDAAAAgADlJoAQFr/original)
+    
+Ant Design X is a comprehensive toolkit for AI applications, integrating a UI component library, streaming Markdown rendering engine, and AI SDK.
+
+### @ant-design/x
+
+A React UI library based on the Ant Design system, designed for **AI-driven interfaces**. [Click here for details.](/components/introduce/).
+
+### @ant-design/x-markdown
+
+An optimized Markdown rendering solution for **streaming content**. [Click here for details.](/x-markdowns/introduce).
+
+### @ant-design/x-sdk
+
+Provides a complete set of **tool APIs**. [Click here for details.](/x-sdks/introduce).
+<Welcome data-icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp" title="Hello, I'm Ant Design X" data-description="Base on Ant Design, AGI product interface solution, create a better intelligent vision~"></welcome>
+
+| Option | Description |
+| ------ | ----------- |
+| data   | path to data files to supply the data that will be passed into templates. |
+| engine | engine to be used for processing templates. Handlebars is the default. |
+| ext    | extension to be used for dest files. |
+`,
+  },
+  {
+    title: 'Link Syntax',
+    content: 'Visit [Ant Design X](https://github.com/ant-design/x)  for more details.',
   },
   {
     title: 'Image Syntax',
     content:
-      'This is Image:\n\n ![Ant Design X](https://mdn.alipayobjects.com/huamei_yz9z7c/afts/img/0lMhRYbo0-8AAAAAQDAAAAgADlJoAQFr/original)',
+      '![Ant Design X](https://mdn.alipayobjects.com/huamei_yz9z7c/afts/img/0lMhRYbo0-8AAAAAQDAAAAgADlJoAQFr/original)',
   },
   {
-    title: 'Link Syntax',
-    content: 'Visit [Ant Design X](https://github.com/ant-design/x) for more details.',
+    title: 'Html',
+    content: `<Welcome data-icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp" title="Hello, I'm Ant Design X" data-description="Base on Ant Design, AGI product interface solution, create a better intelligent vision~" />
+      
+| Option | Description |
+| ------ | ----------- |
+| data   | path to data files to supply the data that will be passed into templates. |
+| engine | engine to be used for processing templates. Handlebars is the default. |
+| ext    | extension to be used for dest files. |`,
   },
   {
-    title: 'Atx Heading',
-    content:
-      '# Heading1 \n ## Heading2 \n ### Heading3 \n #### Heading4 \n ##### Heading5 \n ###### Heading6',
+    title: 'Table',
+    content: `| Option | Description |
+| ------ | ----------- |
+| data   | path to data files to supply the data that will be passed into templates. |
+| engine | engine to be used for processing templates. Handlebars is the default. |
+| ext    | extension to be used for dest files. |`,
   },
   {
     title: 'Emphasis',
@@ -29,22 +65,9 @@ const demos = [
       'This is **bold text** and this is *italic text*. You can also use ***bold and italic***.',
   },
   {
-    title: 'Html',
+    title: 'Atx Heading',
     content:
-      'Html: <div data-title="XComponent"><Conversations placeholder="欢迎使用 Ant Design X" />欢迎使用 Ant Design X</div>',
-  },
-  {
-    title: 'Table',
-    content: `Table: 
-
-| 特性维度 | 说明 |
-|----------|------|
-| **定位** | 基于 Ant Design 的 React 扩展库，专注企业级中后台交互与视觉一致性 |
-| **核心能力** | 提供高级组件（如高级表格、表单、图表、权限控制等）与业务模板，弥补 Ant Design 基础组件的覆盖盲区 |
-| **技术栈** | React + TypeScript，完全兼容 Ant Design 设计体系与工程化方案 |
-| **设计原则** | 延续 Ant Design 的「自然」「确定性」「意义感」「生长性」四大设计价值观，保持交互与视觉一致性 |
-| **安装使用** | \`npm i @ant-design/x\` 或 \`yarn add @ant-design/x\`，引入后即可与 Ant Design 组件混合使用 |
-| **开源协议** | MIT |`,
+      '# Heading1 \n## Heading2 \n### Heading3 \n#### Heading4 \n##### Heading5 \n###### Heading6',
   },
 ];
 
@@ -66,9 +89,7 @@ const IncompleteLink = (props: ComponentProps) => {
 
 const TableSkeleton = () => <Skeleton.Node active style={{ width: 160 }} />;
 
-const HtmlSkeleton = () => (
-  <Skeleton.Button active size="small" style={{ margin: '4px 0', width: 16, height: 16 }} />
-);
+const HtmlSkeleton = () => <Skeleton.Node active style={{ width: 383, height: 93 }} />;
 
 const IncompleteEmphasis = (props: ComponentProps) => {
   const text = decodeURIComponent(String(props['data-raw'] || ''));
@@ -94,6 +115,15 @@ const IncompleteEmphasis = (props: ComponentProps) => {
       return null;
   }
 };
+
+const WelcomeCard = (props: Record<string, any>) => (
+  <Welcome
+    styles={{ icon: { flexShrink: 0 } }}
+    icon={props['data-icon']}
+    title={props.title}
+    description={props['data-description']}
+  />
+);
 
 const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
   const [displayText, setDisplayText] = useState(content);
@@ -165,14 +195,16 @@ const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
           <XMarkdown
             content={displayText}
             className={className}
-            paragraphTag="div"
+            // paragraphTag="div"
             openLinksInNewTab
+            dompurifyConfig={{ ADD_ATTR: ['icon', 'description'] }}
             components={{
               'incomplete-image': ImageSkeleton,
               'incomplete-link': IncompleteLink,
               'incomplete-table': TableSkeleton,
               'incomplete-html': HtmlSkeleton,
               'incomplete-emphasis': IncompleteEmphasis,
+              welcome: WelcomeCard,
             }}
             streaming={{ hasNextChunk: isStreaming }}
           />

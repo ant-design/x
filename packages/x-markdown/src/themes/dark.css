@@ -171,8 +171,7 @@
 }
 
 .x-markdown-dark img {
-  max-width: 30%;
-  height: auto;
+  max-width: 100%;
 }
 
 .x-markdown-dark a {
