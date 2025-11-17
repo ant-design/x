@@ -3,7 +3,7 @@ import type { GenerateStyle } from '../../theme/cssinjs-utils';
 import type { SenderToken } from '.';
 
 const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
-  const { componentCls, antCls, calc } = token;
+  const { componentCls, antCls } = token;
   const slotCls = `${componentCls}-slot`;
   const antInputCls = `${antCls}-input`;
   const antDropdownCls = `${antCls}-dropdown-trigger`;
@@ -25,13 +25,13 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
         color: token.colorTextPlaceholder,
       },
     },
-    [slotCls]: {
+    [`${slotCls}:not(${slotContentCls})`]: {
       display: 'inline-block',
-      verticalAlign: 'bottom',
+      verticalAlign: 'middle',
       alignItems: 'center',
       minHeight: token.controlHeightSM,
       wordBreak: 'break-all',
-      marginInline: unit(calc(token.marginXXS).div(2).equal()),
+      marginInline: token.marginXXS,
     },
 
     [`${antInputCls}${slotInputCls}`]: {
@@ -62,8 +62,8 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       display: 'inline-block',
       cursor: 'pointer',
       background: token.colorBgSlot,
-      alignItems: 'center',
-      justifyContent: 'center',
+      height: '100%',
+      boxSizing: 'border-box',
       borderRadius: token.borderRadius,
       color: token.colorTextSlot,
       border: `1px solid ${token.colorBorderSlot}`,
@@ -86,7 +86,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       marginInlineStart: token.marginXXS,
       fontSize: token.fontSize,
       lineHeight: 'inherit',
-      display: 'inline-block',
+      display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -110,7 +110,9 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       borderRadius: token.borderRadius,
       paddingInline: token.paddingXXS,
       boxSizing: 'border-box',
-      minHeight: 20,
+      paddingBlock: 1,
+      verticalAlign: 'middle',
+      minHeight: token.controlHeightSM,
       fontSize: 'inherit',
       lineHeight: 'inherit',
       display: 'inline-block',
@@ -118,8 +120,6 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       cursor: 'text',
       '&:empty': {
         width: 'fit-content',
-        lineHeight: 'inherit',
-        fontSize: 'inherit',
         '&::after': {
           display: 'inline-block',
           content: 'attr(data-placeholder)',

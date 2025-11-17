@@ -124,8 +124,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     span.setAttribute('contenteditable', 'true');
     span.dataset.slotKey = config.key;
     span.dataset.slotType = 'content';
-    span.className = `${prefixCls}-slot`;
-    span.classList.add(`${prefixCls}-slot-content`);
+    span.className = classnames(`${prefixCls}-slot`, `${prefixCls}-slot-content`);
     return span;
   };
 
