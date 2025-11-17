@@ -26,7 +26,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       },
     },
     [`${slotCls}:not(${slotContentCls})`]: {
-      display: 'inline-block',
+      display: 'inline-flex',
       verticalAlign: 'middle',
       alignItems: 'center',
       minHeight: token.controlHeightSM,
