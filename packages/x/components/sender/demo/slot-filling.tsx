@@ -19,7 +19,7 @@ const otherSlotConfig: SlotConfig = [
   {
     type: 'content',
     key: 'user',
-    props: { defaultValue: 'asdsad', placeholder: 'Please enter the occupation' },
+    props: { defaultValue: '', placeholder: 'Please enter the occupation' },
   },
   { type: 'text', value: 'for a trip with ' },
   { type: 'tag', key: 'tag', props: { label: '@ Chuck', value: 'a man' } },
@@ -85,7 +85,6 @@ const App: React.FC = () => {
   );
   const senderRef = useRef<GetRef<typeof Sender>>(null);
   const [value, setValue] = useState<string>('');
-
   return (
     <Flex vertical gap={16}>
       {/* 操作按钮区 */}
