@@ -101,7 +101,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const [
     slotConfigMap,
     editSlotConfigMap,
-    slotConfigInfo,
+    currentSlotConfig,
     getSlotValues,
     setSlotValues,
     setSlotConfigMap,
@@ -123,7 +123,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const span = document.createElement('span');
     span.setAttribute('contenteditable', 'true');
     span.dataset.slotKey = config.key;
-    span.dataset.slotType = 'content';
     span.className = classnames(`${prefixCls}-slot`, `${prefixCls}-slot-content`);
     return span;
   };
@@ -131,9 +130,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const buildSpan = (positions: 'before' | 'after') => {
     const span = document.createElement('span');
     span.setAttribute('contenteditable', 'false');
-
+    span.dataset.slotKey = 'nbsp';
     span.className = classnames(`${prefixCls}-slot-${positions}`, `${prefixCls}-slot-no-width`);
-
     span.innerHTML = '&nbsp;';
 
     return span;
@@ -170,7 +168,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const renderContent = () => {
       switch (node.type) {
         case 'content':
-          slotSpan.innerHTML = node.props?.defaultValue;
+          slotSpan.innerHTML = value;
           slotSpan.setAttribute('data-placeholder', node.props?.placeholder || '');
           return null;
 
@@ -287,11 +285,18 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       const el = node as HTMLElement;
       const slotKey = el.getAttribute('data-slot-key');
       if (slotKey) {
+        if (slotKey === 'nbsp') {
+          return ' ';
+        }
         const nodeConfig = slotConfigMap.get(slotKey);
-        const slotValue = getSlotValues()[slotKey] || '';
-        const tagValue =
-          nodeConfig?.type === 'tag' && nodeConfig.props?.value ? nodeConfig.props.value : null;
-        const slotResult = nodeConfig?.formatResult?.(slotValue) || tagValue || slotValue;
+        let slotResult = '';
+        if (nodeConfig?.type === 'content') {
+          slotResult = el?.innerText || '';
+        } else {
+          const slotValue = getSlotValues()[slotKey] || '';
+          slotResult = nodeConfig?.formatResult?.(slotValue) || slotValue;
+        }
+
         return slotResult;
       }
       return el?.innerText || '';
@@ -307,8 +312,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const currentConfig: (SlotConfigType & { value: string })[] = [];
     editableRef.current?.childNodes.forEach((node) => {
       const textValue = getNodeTextValue(node);
+      result.push(textValue);
       if (node.nodeType === Node.TEXT_NODE) {
-        result.push(textValue);
         currentConfig.push({
           type: 'text',
           value: textValue,
@@ -318,7 +323,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         const slotKey = el.getAttribute('data-slot-key');
         if (slotKey) {
           const nodeConfig = slotConfigMap.get(slotKey);
-          result.push(textValue);
           if (nodeConfig) {
             currentConfig.push({ ...nodeConfig, value: textValue });
           }
@@ -337,7 +341,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     };
   };
 
-  // ============================ Insert Position ============================
   const getInsertPosition = (
     position: insertPosition,
   ): {
@@ -375,6 +378,20 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     return {
       type: 'end',
     };
+  };
+
+  const appendNodeList = (slotNodeList: HTMLElement[]) => {
+    slotNodeList.forEach((element) => {
+      const slotKey = element?.getAttribute?.('data-slot-key') || '';
+      const nodeConfig = slotConfigMap.get(slotKey);
+      if (nodeConfig?.type === 'content') {
+        editableRef.current?.appendChild(buildSpan('before'));
+        editableRef.current?.appendChild(element);
+        editableRef.current?.appendChild(buildSpan('after'));
+      } else {
+        editableRef.current?.appendChild(element);
+      }
+    });
   };
   // ============================ Events =============================
   const onInternalCompositionStart = () => {
@@ -420,63 +437,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     onKeyDown?.(e as unknown as React.KeyboardEvent<HTMLTextAreaElement>);
   };
 
-  const onInternalKeyUp = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    // 只在松开 Enter 键时解除锁定
-    if (e.key === 'Enter') {
-      keyLockRef.current = false;
-    }
-    // 只处理外部传入的 onKeyUp 回调
-    onKeyUp?.(e as unknown as React.KeyboardEvent<HTMLTextAreaElement>);
-  };
-
-  const onInternalPaste: React.ClipboardEventHandler<HTMLDivElement> = (e) => {
-    e.preventDefault();
-    const files = e.clipboardData?.files;
-    const text = e.clipboardData?.getData('text/plain');
-    if (!text && files?.length && onPasteFile) {
-      onPasteFile(files);
-      return;
-    }
-
-    if (text) {
-      insert([{ type: 'text', value: text.replace(/\n/g, '') }]);
-    }
-
-    onPaste?.(e as unknown as React.ClipboardEvent<HTMLTextAreaElement>);
-  };
-
-  const onInternalFocus = (e: React.FocusEvent<HTMLDivElement>) => {
-    const selection = window.getSelection();
-    if (selection) {
-      const range = document.createRange();
-      range.selectNodeContents(editableRef.current!);
-      range.collapse(true);
-      selection.removeAllRanges();
-      selection.addRange(range);
-    }
-
-    onFocus?.(e as unknown as React.FocusEvent<HTMLTextAreaElement>);
-  };
-
-  const onInternalBlur = (e: React.FocusEvent<HTMLDivElement>) => {
-    if (keyLockRef.current) {
-      keyLockRef.current = false;
-    }
-    const selection = window.getSelection();
-
-    if (selection) {
-      lastSelectionRef.current = selection.rangeCount ? selection?.getRangeAt?.(0) : null;
-    }
-
-    const timer = setTimeout(() => {
-      lastSelectionRef.current = null;
-      clearTimeout(timer);
-      // 清除光标位置
-    }, 200);
-
-    onBlur?.(e as unknown as React.FocusEvent<HTMLTextAreaElement>);
-  };
-
   // 移除<br>
   const removeSpecificBRs = (element: HTMLDivElement | null) => {
     if (submitType === 'enter') {
@@ -513,10 +473,42 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       }
     });
   };
+
+  // ============================ Input Event ============================
+
+  const onInternalFocus = (e: React.FocusEvent<HTMLDivElement>) => {
+    const selection = window.getSelection();
+    if (selection) {
+      const range = document.createRange();
+      range.selectNodeContents(editableRef.current!);
+      range.collapse(true);
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+
+    onFocus?.(e as unknown as React.FocusEvent<HTMLTextAreaElement>);
+  };
+
+  const onInternalBlur = (e: React.FocusEvent<HTMLDivElement>) => {
+    if (keyLockRef.current) {
+      keyLockRef.current = false;
+    }
+    const selection = window.getSelection();
+
+    if (selection) {
+      lastSelectionRef.current = selection.rangeCount ? selection?.getRangeAt?.(0) : null;
+    }
+
+    const timer = setTimeout(() => {
+      lastSelectionRef.current = null;
+      clearTimeout(timer);
+      // 清除光标位置
+    }, 200);
+
+    onBlur?.(e as unknown as React.FocusEvent<HTMLTextAreaElement>);
+  };
+
   const onInternalInput = (e: React.FormEvent<HTMLDivElement>) => {
-    Array.from(editSlotConfigMap.keys()).forEach((key) => {
-      console.log(key, slotDomMap, 1111);
-    });
     editDomEmpty();
     const newValue = getEditorValue();
     removeSpecificBRs(editableRef?.current);
@@ -527,6 +519,30 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     );
   };
 
+  const onInternalPaste: React.ClipboardEventHandler<HTMLDivElement> = (e) => {
+    e.preventDefault();
+    const files = e.clipboardData?.files;
+    const text = e.clipboardData?.getData('text/plain');
+    if (!text && files?.length && onPasteFile) {
+      onPasteFile(files);
+      return;
+    }
+
+    if (text) {
+      insert([{ type: 'text', value: text.replace(/\n/g, '') }]);
+    }
+
+    onPaste?.(e as unknown as React.ClipboardEvent<HTMLTextAreaElement>);
+  };
+
+  const onInternalKeyUp = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    // 只在松开 Enter 键时解除锁定
+    if (e.key === 'Enter') {
+      keyLockRef.current = false;
+    }
+    // 只处理外部传入的 onKeyUp 回调
+    onKeyUp?.(e as unknown as React.KeyboardEvent<HTMLTextAreaElement>);
+  };
   // ============================ Ref Method ============================
   const insert: SlotTextAreaRef['insert'] = (
     slotConfig,
@@ -650,21 +666,11 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   // ============================ Effects =============================
 
   useEffect(() => {
-    if (slotConfigInfo.length === 0) return;
-    if (editableRef.current && slotConfigInfo) {
+    if (currentSlotConfig.length === 0) return;
+    if (editableRef.current && currentSlotConfig) {
       editableRef.current.innerHTML = '';
       slotDomMap?.current?.clear();
-      const slotNodeList = getSlotListNode(slotConfigInfo);
-      slotNodeList.forEach((element) => {
-        const slotType = (element as HTMLSpanElement)?.getAttribute?.('data-slot-type') || '';
-        if (slotType === 'content') {
-          editableRef.current?.appendChild(buildSpan('before'));
-          editableRef.current?.appendChild(element);
-          editableRef.current?.appendChild(buildSpan('after'));
-        } else {
-          editableRef.current?.appendChild(element);
-        }
-      });
+      appendNodeList(getSlotListNode(currentSlotConfig) as HTMLElement[]);
       onChange?.(getEditorValue().value, undefined, getEditorValue().config);
     }
   }, [slotConfig]);
@@ -678,9 +684,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       },
       insert,
       clear,
-      getValue: () => {
-        return getEditorValue();
-      },
+      getValue: getEditorValue,
     };
   });
   // ============================ Render =============================
