@@ -19,7 +19,9 @@ const CreationLabel: React.FC<CreationLabelProps> = ({ shortcutKeysIcon, prefixC
       {showShortcutKeys && (
         <span className={classNames(`${prefixCls}-shortcut-keys`)}>
           {shortcutKeysIcon.map((keyIcon) => (
-            <span key={keyIcon}>{keyIcon}</span>
+            <span className={classNames(`${prefixCls}-shortcut-key`)} key={keyIcon}>
+              {keyIcon}
+            </span>
           ))}
         </span>
       )}

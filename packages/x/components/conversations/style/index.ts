@@ -30,8 +30,7 @@ export interface ComponentToken {
 export interface ConversationsToken extends FullToken<'Conversations'> {}
 
 const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
-  const { componentCls } = token;
-
+  const { componentCls, calc } = token;
   return {
     [componentCls]: {
       display: 'flex',
@@ -86,16 +85,22 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
           flex: 1,
         },
         '&-label-shortcut-keys': {
-          borderRadius: token.borderRadiusSM,
           height: token.controlHeightXS,
-          fontSize: token.fontSizeSM,
-          paddingInline: token.paddingXXS,
-          color: token.shortcutKeyTextColor,
           display: 'flex',
-          border: `${unit(token.lineWidth)} ${token.lineType}, ${token.creationBorderColor}`,
-          justifyContent: 'center',
           alignItems: 'center',
           gap: unit(4),
+        },
+        '&-label-shortcut-key': {
+          borderRadius: token.borderRadiusSM,
+          height: '100%',
+          boxSizing: 'border-box',
+          fontSize: token.fontSizeIcon,
+          paddingInline: `${unit(calc(token.paddingXXS).sub(1).equal())}`,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          color: token.shortcutKeyTextColor,
+          border: `${unit(token.lineWidth)} ${token.lineType}, ${token.creationBorderColor}`,
         },
         '&-disabled': {
           cursor: 'not-allowed',

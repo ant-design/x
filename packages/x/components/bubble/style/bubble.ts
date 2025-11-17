@@ -52,7 +52,6 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
     paddingSM,
     colorText,
     calc,
-    typingContent,
   } = token;
 
   return [
@@ -91,7 +90,7 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
           },
         },
         '&-typing:last-child::after': {
-          content: unit(typingContent),
+          content: '"|"',
           fontWeight: 900,
           userSelect: 'none',
           opacity: 1,

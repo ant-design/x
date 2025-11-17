@@ -403,7 +403,7 @@ describe('Renderer', () => {
 
     it('should deduplicate tags in ADD_TAGS', () => {
       const userConfig = {
-        ALLOWED_TAGS: ['custom-tag'],
+        ADD_TAGS: ['custom-tag', 'custom-tag2'],
       };
 
       const renderer = new Renderer({
@@ -417,8 +417,8 @@ describe('Renderer', () => {
       const configureDOMPurify = (renderer as any).configureDOMPurify.bind(renderer);
       const config = configureDOMPurify();
 
-      const customTagCount = config.ADD_TAGS.filter((tag: string) => tag === 'custom-tag').length;
-      expect(customTagCount).toBe(1);
+      expect(config.ADD_TAGS).toEqual(['custom-tag', 'custom-tag2']);
+      expect(config.ALLOWED_TAGS).toBeUndefined();
     });
   });
 

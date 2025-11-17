@@ -82,7 +82,6 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
       '&-disabled': {
         background: token.colorBgContainerDisabled,
       },
-
       // ============================== RTL ==============================
       [`&${componentCls}-rtl`]: {
         direction: 'rtl',

@@ -305,7 +305,7 @@ const Copilot = (props: CopilotProps) => {
         />
         <Popover
           placement="bottom"
-          styles={{ body: { padding: 0, maxHeight: 600 } }}
+          styles={{ container: { padding: 0, maxHeight: 600 } }}
           content={
             <Conversations
               items={conversations?.map((i) =>

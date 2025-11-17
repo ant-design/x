@@ -16,6 +16,41 @@ tag: vVERSION
 
 ---
 
+## 2.0.0-alpha.15
+
+`2025-11-07`
+
+### @ant-design/x
+
+- 🛠 Upgraded antd dependency version to `6.00-alpha.4`. [#1300](https://github.com/ant-design/x/pull/1300) by [@kimteayon](https://github.com/kimteayon).
+- 📖 Optimized the official site to enhance user experience. [#1303](https://github.com/ant-design/x/pull/1303) by [@kimteayon](https://github.com/kimteayon).
+
+### @ant-design/x-markdown
+
+- 🛠 Refactored markdown theme styles. [#1305](https://github.com/ant-design/x/pull/1305) by [@kimteayon](https://github.com/kimteayon).
+- 🐛 Fixed the issue where `code` tag `streamStatus` state was incorrect. [#1307](https://github.com/ant-design/x/pull/1307) by [@Div627](https://github.com/Div627).
+- 🛠 Transformed `index.less` to `index.css`. [#1306](https://github.com/ant-design/x/pull/1306) by [@Div627](https://github.com/Div627).
+- 🐛 Fixed `SteamingOption` to `StreamingOption`. [#1301](https://github.com/ant-design/x/pull/1301) by [@Div627](https://github.com/Div627).
+- 🐛 Fixed the issue where dompurifyConfig.ALLOWED_TAGS was incorrectly merged into ADD_TAGS. [#1297](https://github.com/ant-design/x/pull/1297) by [@Div627](https://github.com/Div627).
+
+## 2.0.0-alpha.13
+
+`2025-10-30`
+
+### @ant-design/x
+
+- 🐛 Removed Bubble.List `suffix` property and modified typing through CSS Token. [#1285](https://github.com/ant-design/x/pull/1285) by [@kimteayon](https://github.com/kimteayon).
+- 🆕 Added flashing animation effect to ThoughtChain.Item component. [#1278](https://github.com/ant-design/x/pull/1278) by [@kimteayon](https://github.com/kimteayon).
+- 🆕 Added flashing animation effect to Think component. [#1278](https://github.com/ant-design/x/pull/1278) by [@kimteayon](https://github.com/kimteayon).
+- 🆕 Added flashing animation effect to ThoughtChain component. [#1286](https://github.com/ant-design/x/pull/1286) by [@kimteayon](https://github.com/kimteayon).
+- 🆕 Added fadeIn and fadeInLeft effects to Actions. [#1288](https://github.com/ant-design/x/pull/1288) by [@kimteayon](https://github.com/kimteayon), [#1289](https://github.com/ant-design/x/pull/1289) by [@kimteayon](https://github.com/kimteayon).
+- 🆕 Added fadeIn and fadeInLeft effects to Prompts. [#1289](https://github.com/ant-design/x/pull/1289) by [@kimteayon](https://github.com/kimteayon).
+- 📖 Optimized the official site to enhance user experience. [#1290](https://github.com/ant-design/x/pull/1290) by [@Rain120](https://github.com/Rain120).
+
+### @ant-design/x-markdown
+
+- 🐛 Fixed the issue where the renderer link passed in was overwritten. [#1276](https://github.com/ant-design/x/pull/1276) by [@Div627](https://github.com/Div627).
+
 ## 2.0.0-alpha.12
 
 `2025-10-29`
@@ -360,10 +395,10 @@ tag: vVERSION
   - 📖 Add the declarations for `onFocus` and `onBlur` types.[#625](https://github.com/ant-design/x/pull/625) by [@aojunhao123](https://github.com/aojunhao123)
 - 🆕 Extended Conversations `menu.trigger` to support custom menu trigger.[#630](https://github.com/ant-design/x/pull/630) by [@kimteayon](https://github.com/kimteayon)
 - Attachments
-  - 🆕 Extended `ImageProps` to support custom image configuration.[#613](https://github.com/ant-design/x/pull/613) by [@hy993658052 ](https://github.com/hy993658052)
+  - 🆕 Extended `ImageProps` to support custom image configuration.[#613](https://github.com/ant-design/x/pull/613) by [@hy993658052](https://github.com/hy993658052)
   - 📖 Add Attachments `onRemove` API documentation[#608](https://github.com/ant-design/x/pull/608) by [@kimteayon](https://github.com/kimteayon)
 - 📖 Extended `GPT-Vis` rendering chart example.[#603](https://github.com/ant-design/x/pull/603) by [@lvisei](https://github.com/lvisei)
-- 📦 Improved Chat Design X `peerDependencies`.[#611](https://github.com/ant-design/x/pull/611) by [@pokerface9830 ](https://github.com/pokerface9830)
+- 📦 Improved Chat Design X `peerDependencies`.[#611](https://github.com/ant-design/x/pull/611) by [@pokerface9830](https://github.com/pokerface9830)
 - 📖 Enhance the official website to improve user experience.[#626](https://github.com/ant-design/x/pull/626) by [@aojunhao123](https://github.com/aojunhao123),[#648](https://github.com/ant-design/x/pull/648) by [@kimteayon](https://github.com/kimteayon),[#659](https://github.com/ant-design/x/pull/659) by [@afc163](https://github.com/afc163),[#667](https://github.com/ant-design/x/pull/667) by [@jin19980928](https://github.com/jin19980928)
 
 ## 1.0.6

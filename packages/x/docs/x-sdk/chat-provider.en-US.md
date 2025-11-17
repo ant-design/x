@@ -196,7 +196,7 @@ data: "tech news,"
 
 # `CustomInput`:
 
-2. Based on the interface, we can define `CustomInput` and `CustomOutput` types. `CustomOutput`:
+2. Based on the interface, we can define `CustomInput` and `CustomOutput` types. `CustomInput` is the input type of the request:
 
 ```ts
 {

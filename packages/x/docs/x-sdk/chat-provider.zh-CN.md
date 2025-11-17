@@ -194,7 +194,9 @@ data: "的科技新闻，"
 
 ```
 
-2、那么根据接口可以明确 `CustomInput` 和 `CustomOutput` 类型。 `CustomOutput`
+2、那么根据接口可以明确 `CustomInput` 和 `CustomOutput` 类型。
+
+`CustomInput`类型如下
 
 ```ts
 {

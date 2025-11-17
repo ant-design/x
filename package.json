@@ -1,6 +1,6 @@
 {
   "name": "x-mono",
-  "version": "2.0.0-alpha.12",
+  "version": "2.0.0-alpha.15",
   "private": true,
   "scripts": {
     "presite": "npm run prestart --workspaces",
@@ -32,7 +32,7 @@
     "@codecov/webpack-plugin": "^1.4.0",
     "@madccc/duplicate-package-checker-webpack-plugin": "^1.0.0",
     "@size-limit/file": "^11.1.5",
-    "antd": "^6.0.0-alpha.3",
+    "antd": "^6.0.0-alpha.4",
     "circular-dependency-plugin": "^5.2.2",
     "dekko": "^0.2.1",
     "father": "^4.6.0",

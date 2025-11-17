@@ -332,12 +332,10 @@ createRoot(document.getElementById('container')).render(<Demo />);
       'react-dom': '^19.0.0',
       '@types/react': '^19.0.0',
       '@types/react-dom': '^19.0.0',
-      '@ant-design/v5-patch-for-react-19': '^1.0.3',
     },
     description: '',
     files: {
       'index.css': indexCssContent,
-      [`index.${suffix}`]: `import '@ant-design/v5-patch-for-react-19';\n${indexJsContent}`,
       [`index.${suffix}`]: indexJsContent,
       [`demo.${suffix}`]: demoJsContent,
       'index.html': html,

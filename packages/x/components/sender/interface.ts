@@ -106,7 +106,7 @@ export interface SenderProps
   readOnly?: boolean;
   submitType?: SubmitType;
   disabled?: boolean;
-  slotConfig?: SlotConfigType[];
+  slotConfig?: Readonly<SlotConfigType[]>;
   onSubmit?: (message: string, slotConfig?: SlotConfigType[]) => void;
   onChange?: (value: string, event?: EventType, slotConfig?: SlotConfigType[]) => void;
   onCancel?: VoidFunction;
