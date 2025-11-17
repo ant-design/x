@@ -14,7 +14,7 @@ const buildSlotValues = (
           if (node.type === 'input' || node.type === 'select' || node.type === 'custom') {
             acc[node.key] = node.props?.defaultValue || '';
           } else if (node.type === 'tag') {
-            acc[node.key] = node.props?.value || '';
+            acc[node.key] = node.props?.value || node.props?.label || '';
           } else {
             acc[node.key] = '';
           }
