@@ -1,9 +1,11 @@
 import { CopyOutlined } from '@ant-design/icons';
+import { ActionsProps } from '@ant-design/x';
 import useXComponentConfig from '@ant-design/x/es/_util/hooks/use-x-component-config';
+import Actions from '@ant-design/x/es/actions';
 import useLocale from '@ant-design/x/es/locale/useLocale';
 import useXProviderContext from '@ant-design/x/es/x-provider/hooks/use-x-provider-context';
 import locale_EN from '@ant-design/x/locale/en_US';
-import { Button, message, Tooltip } from 'antd';
+import { message, Tooltip } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -74,6 +76,22 @@ const HighlightCode: React.FC<HighlightCodeProps> = (props) => {
     }
   };
 
+  const handleActionsClick: ActionsProps['onClick'] = ({ keyPath }) => {
+    switch (keyPath[0]) {
+      case 'copy':
+        handleCopyCode();
+        break;
+    }
+  };
+
+  const actionItems = [
+    {
+      key: 'copy',
+      label: contextLocale.copy,
+      icon: <CopyOutlined />,
+    },
+  ];
+
   const renderTitle = () => {
     if (header === null) return null;
 
@@ -99,9 +117,7 @@ const HighlightCode: React.FC<HighlightCodeProps> = (props) => {
         >
           {lang}
         </span>
-        <Tooltip title={contextLocale.copy}>
-          <Button type="text" size="small" icon={<CopyOutlined />} onClick={handleCopyCode} />
-        </Tooltip>
+        <Actions items={actionItems} onClick={handleActionsClick} />
       </div>
     );
   };

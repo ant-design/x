@@ -230,7 +230,7 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
     }
   };
 
-  const onClick: ActionsProps['onClick'] = ({ keyPath }) => {
+  const handleActionsClick: ActionsProps['onClick'] = ({ keyPath }) => {
     switch (keyPath[0]) {
       case 'copy':
         handleCopyCode();
@@ -304,7 +304,7 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
           value={renderType}
           onChange={setRenderType}
         />
-        <Actions items={activeActions} onClick={onClick} />
+        <Actions items={activeActions} onClick={handleActionsClick} />
       </div>
     );
   };
