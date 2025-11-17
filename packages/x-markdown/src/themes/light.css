@@ -174,8 +174,7 @@
 }
 
 .x-markdown-light img {
-  max-width: 30%;
-  height: auto;
+  max-width: 100%;
 }
 
 .x-markdown-light a {
