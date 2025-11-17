@@ -1095,4 +1095,42 @@ describe('Renderer', () => {
       jest.restoreAllMocks();
     });
   });
+
+  describe('support checkbox disabled and checked props', () => {
+    it('disabled and checked are true', () => {
+      const components = { input: MockComponent };
+      const renderer = new Renderer({ components });
+      const createElementSpy = jest.spyOn(React, 'createElement');
+      const html1 = '<ul><li> <input checked="" disabled="" type="checkbox"/>checkbox</li></ul>';
+      renderer.processHtml(html1);
+
+      expect(createElementSpy).toHaveBeenCalledWith(
+        MockComponent,
+        expect.objectContaining({
+          disabled: true,
+          checked: true,
+        }),
+      );
+
+      createElementSpy.mockClear();
+    });
+
+    it('disabled is true and no checked props', () => {
+      const components = { input: MockComponent };
+      const renderer = new Renderer({ components });
+      const createElementSpy = jest.spyOn(React, 'createElement');
+      const html = '<ul><li> <input disabled="" type="checkbox"/>checkbox</li></ul>';
+      renderer.processHtml(html);
+
+      expect(createElementSpy).toHaveBeenCalledWith(
+        MockComponent,
+        expect.objectContaining({ disabled: true }),
+      );
+
+      // 再确认这次调用里确实没有 checked
+      const targetCall = createElementSpy.mock.calls.find((call) => call[0] === MockComponent);
+      expect(targetCall?.[1]).not.toHaveProperty('checked');
+      createElementSpy.mockClear();
+    });
+  });
 });

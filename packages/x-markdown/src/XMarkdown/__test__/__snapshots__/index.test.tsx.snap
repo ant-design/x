@@ -29,3 +29,42 @@ exports[`XMarkdown animation parent is not custom components 1`] = `
   </div>
 </div>
 `;
+
+exports[`XMarkdown should checkbox props disabled and checked are true 1`] = `
+<div>
+  <div
+    class="ant-x-markdown x-markdown"
+    style="direction: ltr;"
+  >
+    <ul>
+      <li>
+        <input
+          checked=""
+          disabled=""
+          type="checkbox"
+        />
+         checkbox
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`XMarkdown should checkbox props disabled is true and checked is false 1`] = `
+<div>
+  <div
+    class="ant-x-markdown x-markdown"
+    style="direction: ltr;"
+  >
+    <ul>
+      <li>
+        <input
+          disabled=""
+          type="checkbox"
+        />
+         checkbox
+      </li>
+    </ul>
+  </div>
+</div>
+`;

@@ -100,6 +100,8 @@ class Renderer {
           streamStatus,
           key,
           ...attribs,
+          ...(attribs.disabled !== undefined && { disabled: true }),
+          ...(attribs.checked !== undefined && { checked: true }),
         };
 
         // Handle class and className merging
