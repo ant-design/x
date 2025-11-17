@@ -15,6 +15,23 @@ tag: vVERSION
 
 ---
 
+## 2.0.0-alpha.15
+
+`2025-11-07`
+
+### @ant-design/x
+
+- 🛠 升级 antd 依赖版本到 `6.00-alpha.4`。[#1300](https://github.com/ant-design/x/pull/1300) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 📖 优化官网站点提升用户体验。[#1303](https://github.com/ant-design/x/pull/1303) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+
+### @ant-design/x-markdown
+
+- 🛠 重构 markdown 主题样式。[#1305](https://github.com/ant-design/x/pull/1305) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🐛 修复 `code` 标签 `streamStatus` 状态错误问题。[#1307](https://github.com/ant-design/x/pull/1307) 由 [@Div627](https://github.com/Div627) 提交。
+- 🛠 将 `index.less` 改造为 `index.css`。[#1306](https://github.com/ant-design/x/pull/1306) 由 [@Div627](https://github.com/Div627) 提交。
+- 🐛 修复 `SteamingOption` 为 `StreamingOption`。[#1301](https://github.com/ant-design/x/pull/1301) 由 [@Div627](https://github.com/Div627) 提交。
+- 🐛 修复 dompurifyConfig.ALLOWED_TAGS 被错误合并到 ADD_TAGS的问题。[#1297](https://github.com/ant-design/x/pull/1297) 由 [@Div627](https://github.com/Div627) 提交。
+
 ## 2.0.0-alpha.13
 
 `2025-10-30`
@@ -152,7 +169,7 @@ tag: vVERSION
 
 - 🆕 新增 Mermaid 插件操作功能。[#1135](https://github.com/ant-design/x/pull/1135) 由 [@Div627](https://github.com/Div627) 提交。
 - 🐛 修复 XMarkdown 流式效果。[#1135](https://github.com/ant-design/x/pull/1135) 由 [@Div627](https://github.com/Div627) 提交。
-- 🆕 新增插件国际化和主题定制功能，以及文档升级。[#1135](https://github.com/ant-design/x/pull/1135) 由 [@kimteayon ](https://github.com/kimteayon) 提交。
+- 🆕 新增插件国际化和主题定制功能，以及文档升级。[#1135](https://github.com/ant-design/x/pull/1135) 由 [@kimteayon](https://github.com/kimteayon) 提交。
 - 🆕 新增 XMarkdown 链接 `openLinksInNewTab` 配置、以及主题颜色调整。[#1164](https://github.com/ant-design/x/pull/1164) 由 [@Div627](https://github.com/Div627) 提交。
 - 🐛 修复 XMarkdown 与文档 markdown 样式冲突问题。[#1161](https://github.com/ant-design/x/pull/1161) 由 [@kimteayon](https://github.com/kimteayon) 提交。
 
@@ -280,7 +297,7 @@ tag: vVERSION
 - 🐛 修复 Sender 组件 `content` 语义化缺失问题。[#703](https://github.com/ant-design/x/pull/703) 由 [@HomyeeKing](https://github.com/HomyeeKing) 提交。
 - 🐛 移除 Bubble 组件打字效果公共前缀逻辑中的冗余条件判断。[#1091](https://github.com/ant-design/x/pull/1091) 由 [@AqingCyan](https://github.com/AqingCyan) 提交。
 - 🐛 修复 useXChat `updating` 状态缺失问题。[#833](https://github.com/ant-design/x/pull/833) 由 [@wzc520pyfm](https://github.com/wzc520pyfm)提交。
-- 🐛 修复 Suggestion 组件 `useActive` 中 items 为空数组导致的异常。[#824](https://github.com/ant-design/x/pull/824) 由 [@LengYXin ](https://github.com/LengYXin) 提交。
+- 🐛 修复 Suggestion 组件 `useActive` 中 items 为空数组导致的异常。[#824](https://github.com/ant-design/x/pull/824) 由 [@LengYXin](https://github.com/LengYXin) 提交。
 - 📖 优化官网站点提升用户体验。[#960](https://github.com/ant-design/x/pull/960) 由 [@wzc520pyfm](https://github.com/wzc520pyfm) 提交、[#1048](https://github.com/ant-design/x/pull/1048) 由 [@wzc520pyfm](https://github.com/wzc520pyfm) 提交、[#1118](https://github.com/ant-design/x/pull/1118) 由 [@afc163](https://github.com/afc163) 提交、[#1122](https://github.com/ant-design/x/pull/1122) 由 [@fireairforce](https://github.com/fireairforce) 提交、[#1120](https://github.com/ant-design/x/pull/1120) 由 [@IsDyh01](https://github.com/IsDyh01) 提交。
 
 ## 1.6.0
@@ -377,10 +394,10 @@ tag: vVERSION
   - 📖 补充 `onFocus`和`onBlur` 类型声明。[#625](https://github.com/ant-design/x/pull/625) 由 [@aojunhao123](https://github.com/aojunhao123) 提交
 - 🆕 扩展 Conversations 组件 `menu.trigger` 支持自定义菜单触发器。[#630](https://github.com/ant-design/x/pull/630) 由 [@kimteayon](https://github.com/kimteayon) 提交
 - Attachments
-  - 🆕 扩展 `ImageProps` 支持自定义图像展示配置。[#613](https://github.com/ant-design/x/pull/613) 由 [@hy993658052 ](https://github.com/hy993658052) 提交
+  - 🆕 扩展 `ImageProps` 支持自定义图像展示配置。[#613](https://github.com/ant-design/x/pull/613) 由 [@hy993658052](https://github.com/hy993658052) 提交
   - 📖 补充 Attachments 组件 `onRemove` API文档。[#608](https://github.com/ant-design/x/pull/608) 由 [@kimteayon](https://github.com/kimteayon) 提交
 - 📖 补充 `GPT-Vis` 渲染图表示例。 [#603](https://github.com/ant-design/x/pull/603) 由 [@lvisei](https://github.com/lvisei) 提交
-- 📦 优化 Chat Design X `peerDependencies`。[#611](https://github.com/ant-design/x/pull/611) 由 [@pokerface9830 ](https://github.com/pokerface9830) 提交
+- 📦 优化 Chat Design X `peerDependencies`。[#611](https://github.com/ant-design/x/pull/611) 由 [@pokerface9830](https://github.com/pokerface9830) 提交
 - 📖 优化官网站点提升用户体验。[#626](https://github.com/ant-design/x/pull/626) 由 [@aojunhao123](https://github.com/aojunhao123) 提交、[#648](https://github.com/ant-design/x/pull/648) 由 [@kimteayon](https://github.com/kimteayon) 提交、[#659](https://github.com/ant-design/x/pull/659) 由 [@afc163](https://github.com/afc163) 提交、[#667](https://github.com/ant-design/x/pull/667) 由 [@jin19980928](https://github.com/jin19980928) 提交
 
 ## 1.0.6
@@ -389,10 +406,10 @@ tag: vVERSION
 
 - 🆕 扩展 `Sender` 文件粘贴可处理多个文件。[#505](https://github.com/ant-design/x/pull/500) 由 [@ztkuaikuai](https://github.com/ztkuaikuai) 提交
 - 🆕 扩展 `BubbleList`角色定义功能。[#485](https://github.com/ant-design/x/pull/500) 由 [@chenluda](https://github.com/chenluda) 提交
-- 🐛 修复 `Attachments`组件 多文件横向滚动条展示。[#556](https://github.com/ant-design/x/pull/556) 由 [@onefeng123 ](https://github.com/onefeng123) 提交
-- 🐛 修复 `Attachments`组件 onRemove 不生效问题。[#555](https://github.com/ant-design/x/pull/555) 由 [@edison-tianhe ](https://github.com/edison-tianhe) 提交
-- 🐛 修复 `Sender`组件 actions 缺少 SpeechButton 组件的问题。[#549](https://github.com/ant-design/x/pull/549) 由 [@zombieJ ](https://github.com/zombieJ) 提交
-- 🐛 修复 `Attachments`组件文件初始化展示问题。[#524](https://github.com/ant-design/x/pull/524) 由 [@ztkuaikuai ](https://github.com/ztkuaikuai) 提交
+- 🐛 修复 `Attachments`组件 多文件横向滚动条展示。[#556](https://github.com/ant-design/x/pull/556) 由 [@onefeng123](https://github.com/onefeng123) 提交
+- 🐛 修复 `Attachments`组件 onRemove 不生效问题。[#555](https://github.com/ant-design/x/pull/555) 由 [@edison-tianhe](https://github.com/edison-tianhe) 提交
+- 🐛 修复 `Sender`组件 actions 缺少 SpeechButton 组件的问题。[#549](https://github.com/ant-design/x/pull/549) 由 [@zombieJ](https://github.com/zombieJ) 提交
+- 🐛 修复 `Attachments`组件文件初始化展示问题。[#524](https://github.com/ant-design/x/pull/524) 由 [@ztkuaikuai](https://github.com/ztkuaikuai) 提交
 - 🐛 修复 `Conversations`组件滚动条问题。[#485](https://github.com/ant-design/x/pull/485) 由 [@LofiSu](https://github.com/LofiSu) 提交
 - 📖 优化`Bubble` 组件typing 减少不必要的渲染。[#477](https://github.com/ant-design/x/pull/477) 由 [@kxcy001123](https://github.com/kxcy001123) 提交
 - 📦 优化 Chat Design X 构建 [#578](https://github.com/ant-design/x/pull/578)，[#584](https://github.com/ant-design/x/pull/584) 由 [@kimteayon](https://github.com/kimteayon) 提交、 [#578](https://github.com/ant-design/x/pull/578) 由 [@kimteayon](https://github.com/kimteayon) 提交、[#587](https://github.com/ant-design/x/pull/587) 由 [@afc163](https://github.com/afc163) 提交

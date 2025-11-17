@@ -4,7 +4,7 @@ import useXProviderContext from '../hooks/use-x-provider-context';
 import { Parser, Renderer } from './core';
 import { useStreaming } from './hooks';
 import { XMarkdownProps } from './interface';
-import './index.less';
+import './index.css';
 
 const XMarkdown: React.FC<XMarkdownProps> = (props) => {
   const {

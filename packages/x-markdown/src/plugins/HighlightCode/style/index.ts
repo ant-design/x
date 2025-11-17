@@ -1,11 +1,14 @@
+import type { CSSObject } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
-import type { GenerateStyle } from 'antd/es/theme/internal';
 import { genStyleHooks } from '../../theme/genStyleUtils';
+import type { GenerateStyle } from '../../theme/interface';
 import type { FullToken, GetDefaultToken } from '../../theme/useToken';
 
 export interface HighlightCodeToken extends FullToken<'HighlightCode'> {}
 
-const genHighlightCodeStyle: GenerateStyle<HighlightCodeToken> = (token) => {
+const genHighlightCodeStyle: GenerateStyle<HighlightCodeToken> = (
+  token: HighlightCodeToken,
+): CSSObject => {
   const { componentCls } = token;
 
   return {

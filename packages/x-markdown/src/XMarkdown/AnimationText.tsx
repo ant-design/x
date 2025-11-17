@@ -30,7 +30,7 @@ const AnimationText = React.memo<AnimationTextProps>((props) => {
 
   const animationStyle = useMemo(
     () => ({
-      animation: `x-markdown-fadeIn ${fadeDuration}ms ${easing} forwards`,
+      animation: `x-markdown-fade-in ${fadeDuration}ms ${easing} forwards`,
     }),
     [fadeDuration, easing],
   );

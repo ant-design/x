@@ -84,7 +84,7 @@ export function useInternalToken(): [
   const {
     token: rootDesignToken,
     hashed,
-    theme = defaultTheme,
+    theme,
     override,
     cssVar: ctxCssVar,
   } = React.useContext(antdTheme._internalContext);
@@ -111,7 +111,7 @@ export function useInternalToken(): [
       },
     },
   );
-  return [theme as Theme<SeedToken, AliasToken>, realToken, hashed ? hashId : '', token, cssVar];
+  return [mergedTheme as Theme<any, any>, realToken, hashed ? hashId : '', token, cssVar];
 }
 
 export default function useToken() {

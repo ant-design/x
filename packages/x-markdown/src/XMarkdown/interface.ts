@@ -18,9 +18,20 @@ export interface AnimationConfig {
   easing?: string;
 }
 
+export enum StreamCacheTokenType {
+  Text = 'text',
+  Link = 'link',
+  Image = 'image',
+  Heading = 'heading',
+  Html = 'html',
+  Emphasis = 'emphasis',
+  List = 'list',
+  Table = 'table',
+}
+
 type Token = Tokens.Generic;
 
-interface SteamingOption {
+interface StreamingOption {
   /**
    * @description 指示是否还有后续内容块，为 false 时刷新所有缓存并完成渲染
    * @description Indicates whether more content chunks are expected. When false, flushes all cached content and completes rendering
@@ -43,10 +54,12 @@ interface SteamingOption {
    * @description Mapping configuration to convert incomplete Markdown formats to custom loading components, used to provide custom loading components for unclosed links and images during streaming rendering
    * @default { link: 'incomplete-link', image: 'incomplete-image' }
    */
-  incompleteMarkdownComponentMap?: {
-    link?: string;
-    image?: string;
-  };
+  incompleteMarkdownComponentMap?: Partial<
+    Record<
+      Exclude<(typeof StreamCacheTokenType)[keyof typeof StreamCacheTokenType], 'text'>,
+      string
+    >
+  >;
 }
 
 type StreamStatus = 'loading' | 'done';
@@ -87,7 +100,7 @@ interface XMarkdownProps {
    * @description 流式渲染行为的配置
    * @description Configuration for streaming rendering behavior
    */
-  streaming?: SteamingOption;
+  streaming?: StreamingOption;
   /**
    * @description Markdown 解析和扩展的 Marked.js 配置
    * @description Marked.js configuration for Markdown parsing and extensions
@@ -137,4 +150,4 @@ interface XMarkdownProps {
   footer?: React.ComponentType<ComponentProps> | keyof JSX.IntrinsicElements;
 }
 
-export type { XMarkdownProps, Token, Tokens, StreamStatus, ComponentProps, SteamingOption };
+export type { XMarkdownProps, Token, Tokens, StreamStatus, ComponentProps, StreamingOption };

@@ -3,11 +3,37 @@ import { Flex, Segmented } from 'antd';
 import React from 'react';
 
 const App = () => {
-  const images = Array.from({ length: 20 }).map((_, index) => ({
+  const images = Array.from({ length: 11 }).map((_, index) => ({
     name: `image-file-${index}.png`,
     src: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
     byte: 1024,
   }));
+  const files = [
+    {
+      name: 'excel-file.xlsx',
+      byte: 1024,
+    },
+    {
+      name: 'word-file.docx',
+      byte: 1024,
+    },
+    {
+      name: 'pdf-file.pdf',
+      byte: 1024,
+    },
+    {
+      name: 'ppt-file.pptx',
+      byte: 1024,
+    },
+    {
+      name: 'zip-file.zip',
+      byte: 1024,
+    },
+    {
+      name: 'txt-file.txt',
+      byte: 1024,
+    },
+  ];
 
   const [overflow, setOverflow] = React.useState<FileCardListProps['overflow']>('wrap');
 
@@ -23,7 +49,7 @@ const App = () => {
         onChange={setOverflow}
         style={{ marginInlineEnd: 'auto' }}
       />
-      <FileCard.List items={images} removable overflow={overflow} />
+      <FileCard.List items={[...images, ...files]} removable overflow={overflow} />
     </Flex>
   );
 };

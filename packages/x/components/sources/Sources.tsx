@@ -167,7 +167,7 @@ const Sources: React.ForwardRefRenderFunction<SourcesRef, SourcesProps> = (props
             />
           }
           open={inline ? undefined : false}
-          styles={{ body: { width: popoverOverlayWidth } }}
+          styles={{ container: { width: popoverOverlayWidth } }}
           placement="top"
           forceRender
         >

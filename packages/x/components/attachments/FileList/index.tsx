@@ -107,7 +107,9 @@ export default function FileList(props: FileListProps) {
         byte: items[i].size,
         ...(omit(items[i], ['type']) as FileCardProps),
         size: undefined,
-        preview: preview,
+        imageProps: {
+          preview: preview,
+        },
       });
     }
     setList(fileCardMap);
