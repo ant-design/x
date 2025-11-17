@@ -30,7 +30,7 @@ exports[`XMarkdown animation parent is not custom components 1`] = `
 </div>
 `;
 
-exports[`XMarkdown should checkbox props disabled and checked are true 1`] = `
+exports[`XMarkdown support checkbox is checked 1`] = `
 <div>
   <div
     class="ant-x-markdown x-markdown"
@@ -50,7 +50,7 @@ exports[`XMarkdown should checkbox props disabled and checked are true 1`] = `
 </div>
 `;
 
-exports[`XMarkdown should checkbox props disabled is true and checked is false 1`] = `
+exports[`XMarkdown support checkbox not checked 1`] = `
 <div>
   <div
     class="ant-x-markdown x-markdown"
