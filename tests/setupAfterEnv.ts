@@ -1,12 +1,10 @@
 import '@testing-library/jest-dom';
 
+import { defaultConfig as defaultConfigES } from 'antd/es/theme/internal';
+import { defaultConfig as defaultConfigLib } from 'antd/lib/theme/internal';
 import { toHaveNoViolations } from 'jest-axe';
-import jsdom from 'jsdom';
 import format, { plugins } from 'pretty-format';
 import { spyElementPrototypes } from 'rc-util/lib/test/domHook';
-
-import { defaultConfig as defaultConfigLib } from 'antd/lib/theme/internal';
-import { defaultConfig as defaultConfigES } from 'antd/es/theme/internal';
 
 // Mock `scrollTo` since jsdom do not support it
 spyElementPrototypes(HTMLElement, {
@@ -98,11 +96,9 @@ expect.addSnapshotSerializer({
   test: (node) => node && typeof node === 'object' && node.type === 'demo' && node.html,
   // @ts-ignore
   print: ({ html }) => {
-    const { JSDOM } = jsdom;
-    const { document } = new JSDOM().window;
-    document.body.innerHTML = html;
-
-    const children = Array.from(document.body.childNodes);
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const children = Array.from(doc.body.childNodes);
 
     // Clean up `data-reactroot` since React 18 do not have this
     // @ts-ignore
