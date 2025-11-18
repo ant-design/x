@@ -34,7 +34,7 @@ const locales = {
   en: {
     content:
       'Participate in the WeaveFox "AI Artist" contest to win SEE Conf tickets and thousands of prizes',
-    link: '',
+    link: 'Go to',
   },
 };
 
