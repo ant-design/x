@@ -1,7 +1,7 @@
 import { CopyOutlined } from '@ant-design/icons';
-import { ActionsProps } from '@ant-design/x';
 import useXComponentConfig from '@ant-design/x/es/_util/hooks/use-x-component-config';
 import Actions from '@ant-design/x/es/actions';
+import type { ActionsProps } from '@ant-design/x/es/actions/interface';
 import useLocale from '@ant-design/x/es/locale/useLocale';
 import useXProviderContext from '@ant-design/x/es/x-provider/hooks/use-x-provider-context';
 import locale_EN from '@ant-design/x/locale/en_US';
