@@ -11,7 +11,7 @@ import type { MappingAlgorithm } from 'antd';
 import { App, theme as antdTheme } from 'antd';
 import type { DirectionType, ThemeConfig } from 'antd/es/config-provider';
 import { createSearchParams, useOutlet, useSearchParams, useServerInsertedHTML } from 'dumi';
-import React, { Suspense, useCallback, useEffect } from 'react';
+import React, { Suspense, useCallback, useEffect, useState } from 'react';
 
 import { DarkContext } from '../../hooks/useDark';
 import useLayoutState from '../../hooks/useLayoutState';
@@ -23,17 +23,13 @@ import type { SiteContextProps } from '../slots/SiteContext';
 import SiteContext from '../slots/SiteContext';
 
 import '@ant-design/v5-patch-for-react-19';
+import Alert from '../slots/Alert';
 
 type Entries<T> = { [K in keyof T]: [K, T[K]] }[keyof T][];
 type SiteState = Partial<Omit<SiteContextProps, 'updateSiteContext'>>;
 
 const RESPONSIVE_MOBILE = 768;
 export const ANT_DESIGN_NOT_SHOW_BANNER = 'ANT_DESIGN_NOT_SHOW_BANNER';
-
-// const styleCache = createCache();
-// if (typeof global !== 'undefined') {
-//   (global as any).styleCache = styleCache;
-// }
 
 const getAlgorithm = (themes: ThemeName[] = []) =>
   themes
@@ -69,7 +65,6 @@ const GlobalLayout: React.FC = () => {
     (props: SiteState) => {
       setSiteState((prev) => ({ ...prev, ...props }));
 
-      // updating `searchParams` will clear the hash
       const oldSearchStr = searchParams.toString();
 
       let nextSearchParams: URLSearchParams = searchParams;
@@ -112,6 +107,8 @@ const GlobalLayout: React.FC = () => {
     }
   }, [theme.length, isIndexPage]);
 
+  const [alertVisible, setAlertVisible] = useState(true);
+
   useEffect(() => {
     const _theme = searchParams.getAll('theme') as ThemeName[];
     const _direction = searchParams.get('direction') as DirectionType;
@@ -140,8 +137,9 @@ const GlobalLayout: React.FC = () => {
       theme: theme!,
       isMobile: isMobile!,
       bannerVisible,
+      alertVisible,
     }),
-    [isMobile, direction, updateSiteConfig, theme],
+    [isMobile, direction, updateSiteConfig, alertVisible, theme],
   );
 
   const themeConfig = React.useMemo<ThemeConfig>(
@@ -199,6 +197,11 @@ const GlobalLayout: React.FC = () => {
       >
         <SiteContext value={siteContextValue}>
           <SiteThemeProvider theme={themeConfig}>
+            <Alert
+              afterClose={() => {
+                setAlertVisible(false);
+              }}
+            />
             <App>
               {outlet}
               <Suspense>{pathname.startsWith('/~demos') ? <PeterCat /> : null}</Suspense>

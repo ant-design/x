@@ -2,31 +2,26 @@ import { CloseOutlined, MenuOutlined } from '@ant-design/icons';
 import { Button, Drawer } from 'antd';
 import { createStyles } from 'antd-style';
 import classnames from 'classnames';
+import { useLocation } from 'dumi';
 import React, { useEffect } from 'react';
-
 import useLocale from '../../../hooks/useLocale';
 import useScrollY from '../../../hooks/useScrollY';
+import type { SiteContextProps } from '../SiteContext';
 import SiteContext from '../SiteContext';
-
 import HeaderActions from './Actions';
+import type { SharedProps } from './interface';
 import Logo from './Logo';
 import Navigation from './Navigation';
 
-import { useLocation } from 'dumi';
-import type { SiteContextProps } from '../SiteContext';
-import type { SharedProps } from './interface';
-
-const useStyle = createStyles(({ token, css }) => {
+const useStyle = createStyles(({ token, css }, { alertVisible }: { alertVisible: boolean }) => {
   return {
     header: css`
       height: ${token.headerHeight}px;
       width: 100%;
       box-sizing: border-box;
-
       position: fixed;
-      top: 0;
+      top: ${alertVisible ? token.alertHeight : '0'}px;
       z-index: 1000;
-
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -37,10 +32,8 @@ const useStyle = createStyles(({ token, css }) => {
       width: calc(100% - ${token.paddingLG * 2}px);
       padding: 0 ${token.paddingLG}px;
       margin: 0 ${token.paddingLG}px;
-      
-      top: ${(token.headerHeight - token.paddingLG * 2) / 2}px;
+      top: ${(token.headerHeight - token.paddingLG * 2) / 2 + (alertVisible ? token.alertHeight : 0)}px;
       overflow: hidden;
-      
       border-radius: ${token.indexRadius}px;
     `,
     mini: css`
@@ -103,9 +96,9 @@ const Header: React.FC = () => {
   const [, lang] = useLocale();
   const { pathname } = useLocation();
 
-  const { direction, isMobile } = React.useContext<SiteContextProps>(SiteContext);
+  const { direction, isMobile, alertVisible } = React.useContext<SiteContextProps>(SiteContext);
 
-  const { styles } = useStyle();
+  const { styles } = useStyle({ alertVisible });
 
   const { scrollY, scrollYDirection } = useScrollY();
 
