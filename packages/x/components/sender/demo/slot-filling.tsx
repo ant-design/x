@@ -250,6 +250,9 @@ const App: React.FC = () => {
           setValue(value);
           setSlotConfigKey(false);
         }}
+        onChange={(value, event, slotConfig) => {
+          console.log(value, event, slotConfig);
+        }}
         slotConfig={slotConfigKey ? slotConfig?.[slotConfigKey] : []}
         ref={senderRef}
       />

@@ -619,16 +619,30 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         inputDom = getSlotDom(options.key)?.querySelector('input') || null;
       } else {
         for (const node of Array.from(editableRef.current?.childNodes || [])) {
-          if (node.nodeType === Node.ELEMENT_NODE && (node as Element).querySelector('input')) {
+          const slotKey = (node as Element)?.getAttribute?.('data-slot-key') || '';
+          const nodeConfig = slotConfigMap.get(slotKey);
+          if (node.nodeType === Node.ELEMENT_NODE && nodeConfig?.type === 'input') {
             inputDom = (node as Element).querySelector('input');
+            inputDom?.focus();
+            break;
+          }
+          if (node.nodeType === Node.ELEMENT_NODE && nodeConfig?.type === 'content') {
+            inputDom = editableRef.current;
+            inputDom?.focus();
+            const range = document.createRange();
+            const selection = window.getSelection();
+            if (selection) {
+              const textNode = node;
+              range.setStart(textNode, 0);
+              range.setEnd(textNode, 0);
+              selection.removeAllRanges();
+              selection.addRange(range);
+            }
             break;
           }
         }
       }
-      if (inputDom) {
-        inputDom?.focus();
-        return;
-      }
+      if (inputDom) return;
     }
     const editor = editableRef.current;
     if (options?.cursor && editor) {
