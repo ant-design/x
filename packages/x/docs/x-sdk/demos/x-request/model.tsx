@@ -20,13 +20,13 @@ interface ChatInput {
  * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
  */
 
-const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow_qwen3-8b';
+const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow_Qwen2.5-7B-Instruct';
 
 /**
  * 🔔 The MODEL is fixed in the current request, please replace it with your BASE_UR and MODEL
  */
 
-const MODEL = 'Qwen3-8B';
+const MODEL = 'Qwen/Qwen2.5-7B-Instruct';
 
 const App = () => {
   const [status, setStatus] = useState<string>();

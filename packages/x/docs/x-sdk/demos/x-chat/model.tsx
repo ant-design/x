@@ -16,13 +16,13 @@ import React from 'react';
  * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
  */
 
-const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow_Hunyuan-MT-7B';
+const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow_THUDM_glm-4-9b-chat';
 
 /**
  * 🔔 The MODEL is fixed in the current request, please replace it with your BASE_UR and MODEL
  */
 
-const MODEL = 'tencent/Hunyuan-MT-7B';
+const MODEL = 'THUDM/glm-4-9b-chat';
 
 const role: BubbleListProps['role'] = {
   assistant: {
@@ -184,6 +184,8 @@ const App = () => {
                 content: nextContent,
               },
             ],
+            frequency_penalty: 0,
+            max_tokens: 1024,
           });
           setContent('');
         }}
