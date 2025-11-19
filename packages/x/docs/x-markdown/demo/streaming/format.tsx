@@ -23,13 +23,13 @@ An optimized Markdown rendering solution for **streaming content**. [Click here 
 ### @ant-design/x-sdk
 
 Provides a complete set of **tool APIs**. [Click here for details.](/x-sdks/introduce).
-<Welcome data-icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp" title="Hello, I'm Ant Design X" data-description="Base on Ant Design, AGI product interface solution, create a better intelligent vision~"></welcome>
+<welcome data-icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp" title="Hello, I'm Ant Design X" data-description="Base on Ant Design, AGI product interface solution, create a better intelligent vision~"></welcome>
 
-| Option | Description |
+| Repo | Description |
 | ------ | ----------- |
-| data   | path to data files to supply the data that will be passed into templates. |
-| engine | engine to be used for processing templates. Handlebars is the default. |
-| ext    | extension to be used for dest files. |
+| @ant-design/x   | A React UI library based on the Ant Design system. |
+| @ant-design/x-markdown | An optimized Markdown rendering solution for **streaming content**. |
+| @ant-design/x-sdk    | Provides a complete set of **tool APIs**. |
 `,
   },
   {
@@ -43,31 +43,21 @@ Provides a complete set of **tool APIs**. [Click here for details.](/x-sdks/intr
   },
   {
     title: 'Html',
-    content: `<Welcome data-icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp" title="Hello, I'm Ant Design X" data-description="Base on Ant Design, AGI product interface solution, create a better intelligent vision~" />
-      
-| Option | Description |
-| ------ | ----------- |
-| data   | path to data files to supply the data that will be passed into templates. |
-| engine | engine to be used for processing templates. Handlebars is the default. |
-| ext    | extension to be used for dest files. |`,
+    content: `<welcome data-icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp" title="Hello, I'm Ant Design X" data-description="Base on Ant Design, AGI product interface solution, create a better intelligent vision~"></welcome>`,
   },
   {
     title: 'Table',
-    content: `| Option | Description |
+    content: `
+| Repo | Description |
 | ------ | ----------- |
-| data   | path to data files to supply the data that will be passed into templates. |
-| engine | engine to be used for processing templates. Handlebars is the default. |
-| ext    | extension to be used for dest files. |`,
+| @ant-design/x   | A React UI library based on the Ant Design system. |
+| @ant-design/x-markdown | An optimized Markdown rendering solution for streaming content. |
+| @ant-design/x-sdk    | Provides a complete set of tool APIs. |`,
   },
   {
     title: 'Emphasis',
     content:
       'This is **bold text** and this is *italic text*. You can also use ***bold and italic***.',
-  },
-  {
-    title: 'Atx Heading',
-    content:
-      '# Heading1 \n## Heading2 \n### Heading3 \n#### Heading4 \n##### Heading5 \n###### Heading6',
   },
 ];
 
@@ -89,7 +79,7 @@ const IncompleteLink = (props: ComponentProps) => {
 
 const TableSkeleton = () => <Skeleton.Node active style={{ width: 160 }} />;
 
-const HtmlSkeleton = () => <Skeleton.Node active style={{ width: 383, height: 93 }} />;
+const HtmlSkeleton = () => <Skeleton.Node active style={{ width: 383, height: 120 }} />;
 
 const IncompleteEmphasis = (props: ComponentProps) => {
   const text = decodeURIComponent(String(props['data-raw'] || ''));

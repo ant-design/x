@@ -30,12 +30,15 @@ const providerFactory = (conversationKey: string) => {
       conversationKey,
       new DeepSeekChatProvider({
         request: XRequest<XModelParams, Partial<Record<SSEFields, XModelResponse>>>(
-          'https://api.x.ant.design/api/llm_siliconflow_deepSeek-r1-distill-1wen-7b',
+          'https://api.x.ant.design/api/big_model_glm-4.5-flash',
           {
             manual: true,
             params: {
+              thinking: {
+                type: 'disabled',
+              },
               stream: true,
-              model: 'DeepSeek-R1-Distill-Qwen-7B',
+              model: 'glm-4.5-flash',
             },
           },
         ),
@@ -43,6 +46,83 @@ const providerFactory = (conversationKey: string) => {
     );
   }
   return providerCaches.get(conversationKey);
+};
+
+// Provide different default messages based on activeConversationKey
+const getDefaultMessages = (conversationKey: string) => {
+  const messagesMap: Record<string, any[]> = {
+    item1: [
+      {
+        message: { role: 'user', content: 'Hello, this is Conversation 1!' },
+        status: 'success',
+      },
+      {
+        message: {
+          role: 'assistant',
+          content:
+            'Hello! This is the welcome message for Conversation 1. I can help you answer various questions.',
+        },
+        status: 'success',
+      },
+    ],
+    item2: [
+      {
+        message: { role: 'user', content: 'Conversation 2 has started' },
+        status: 'success',
+      },
+      {
+        message: {
+          role: 'assistant',
+          content: 'Welcome to Conversation 2! Here we can discuss technology-related topics.',
+        },
+        status: 'success',
+      },
+    ],
+    item3: [
+      {
+        message: { role: 'user', content: 'Clicked on Conversation 3' },
+        status: 'success',
+      },
+      {
+        message: {
+          role: 'assistant',
+          content:
+            'You selected Conversation 3! This is a special conversation. How can I help you?',
+        },
+        status: 'success',
+      },
+    ],
+    item4: [
+      {
+        message: { role: 'user', content: 'Conversation 4 initialized' },
+        status: 'success',
+      },
+      {
+        message: {
+          role: 'assistant',
+          content:
+            'This is Conversation 4. Although it is disabled, you can still view historical messages.',
+        },
+        status: 'success',
+      },
+    ],
+  };
+
+  return (
+    messagesMap[conversationKey] || [
+      {
+        message: { role: 'user', content: 'hello!' },
+        status: 'success',
+      },
+      {
+        message: {
+          role: 'assistant',
+          content: 'Hello! How can I assist you today?',
+        },
+        status: 'success',
+      },
+    ]
+  );
 };
 
 export default () => {
@@ -62,19 +142,7 @@ export default () => {
   const { onRequest, messages, isRequesting, abort } = useXChat({
     provider: providerFactory(activeConversationKey), // every conversation has its own provider
     conversationKey: activeConversationKey,
-    defaultMessages: [
-      {
-        message: { role: 'user', content: 'hello!' },
-        status: 'success',
-      },
-      {
-        message: {
-          role: 'assistant',
-          content: 'Hello! How can I assist you today?',
-        },
-        status: 'success',
-      },
-    ],
+    defaultMessages: getDefaultMessages(activeConversationKey),
     requestPlaceholder: () => {
       return {
         content: 'Thinking',

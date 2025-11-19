@@ -192,12 +192,12 @@ const providerFactory = (conversationKey: string) => {
       conversationKey,
       new DeepSeekChatProvider({
         request: XRequest<XModelParams, Partial<Record<SSEFields, XModelResponse>>>(
-          'https://api.x.ant.design/api/llm_siliconflow_deepSeek-r1-distill-1wen-7b',
+          'https://api.x.ant.design/api/big_model_glm-4.5-flash',
           {
             manual: true,
             params: {
               stream: true,
-              model: 'DeepSeek-R1-Distill-Qwen-7B',
+              model: 'glm-4.5-flash',
             },
           },
         ),
@@ -410,6 +410,9 @@ const App = () => {
                     if (!val) return;
                     onRequest({
                       messages: [{ role: 'user', content: val }],
+                      thinking: {
+                        type: 'disabled',
+                      },
                     });
                     setActiveConversation(curConversation);
                     senderRef.current?.clear?.();

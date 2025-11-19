@@ -238,16 +238,6 @@ const streamingTestCases = [
     output: '- **bold**',
   },
   {
-    title: 'heading',
-    input: '#',
-    output: '<incomplete-heading data-raw="%23" />',
-  },
-  {
-    title: 'heading3',
-    input: '###',
-    output: '<incomplete-heading data-raw="%23%23%23" />',
-  },
-  {
     title: 'inValid heading',
     input: '#######',
     output: '#######',

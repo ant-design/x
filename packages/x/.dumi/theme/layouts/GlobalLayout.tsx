@@ -11,13 +11,14 @@ import type { MappingAlgorithm } from 'antd';
 import { App, theme as antdTheme } from 'antd';
 import type { DirectionType, ThemeConfig } from 'antd/es/config-provider';
 import { createSearchParams, useOutlet, useSearchParams, useServerInsertedHTML } from 'dumi';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { DarkContext } from '../../hooks/useDark';
 import useLayoutState from '../../hooks/useLayoutState';
 import useLocation from '../../hooks/useLocation';
 import type { ThemeName } from '../common/ThemeSwitch';
 import SiteThemeProvider from '../SiteThemeProvider';
+import Alert from '../slots/Alert';
 import type { SiteContextProps } from '../slots/SiteContext';
 import SiteContext from '../slots/SiteContext';
 
@@ -61,7 +62,6 @@ const GlobalLayout: React.FC = () => {
     (props: SiteState) => {
       setSiteState((prev) => ({ ...prev, ...props }));
 
-      // updating `searchParams` will clear the hash
       const oldSearchStr = searchParams.toString();
 
       let nextSearchParams: URLSearchParams = searchParams;
@@ -104,6 +104,8 @@ const GlobalLayout: React.FC = () => {
     }
   }, [theme.length, isIndexPage]);
 
+  const [alertVisible, setAlertVisible] = useState(true);
+
   useEffect(() => {
     const _theme = searchParams.getAll('theme') as ThemeName[];
     const _direction = searchParams.get('direction') as DirectionType;
@@ -132,8 +134,9 @@ const GlobalLayout: React.FC = () => {
       theme: theme!,
       isMobile: isMobile!,
       bannerVisible,
+      alertVisible,
     }),
-    [isMobile, direction, updateSiteConfig, theme],
+    [isMobile, direction, updateSiteConfig, alertVisible, theme],
   );
 
   const themeConfig = React.useMemo<ThemeConfig>(
@@ -190,6 +193,11 @@ const GlobalLayout: React.FC = () => {
       >
         <SiteContext value={siteContextValue}>
           <SiteThemeProvider theme={themeConfig}>
+            <Alert
+              afterClose={() => {
+                setAlertVisible(false);
+              }}
+            />
             <App>{outlet}</App>
           </SiteThemeProvider>
         </SiteContext>

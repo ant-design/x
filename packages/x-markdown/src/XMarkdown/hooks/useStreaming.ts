@@ -24,7 +24,6 @@ const FENCED_CODE_REGEX = /^(`{3,}|~{3,})/;
 const STREAM_INCOMPLETE_REGEX = {
   image: [/^!\[[^\]\r\n]{0,1000}$/, /^!\[[^\r\n]{0,1000}\]\(*[^)\r\n]{0,1000}$/],
   link: [/^\[[^\]\r\n]{0,1000}$/, /^\[[^\r\n]{0,1000}\]\(*[^)\r\n]{0,1000}$/],
-  atxHeading: [/^#{1,6}\s*$/],
   html: [/^<\/$/, /^<\/?[a-zA-Z][a-zA-Z0-9-]{0,100}[^>\r\n]{0,1000}$/],
   commonEmphasis: [/^(\*{1,3}|_{1,3})(?!\s)(?!.*\1$)[^\r\n]{0,1000}$/],
   // regex2 matches cases like "- **"
@@ -67,12 +66,6 @@ const tokenRecognizerMap: Partial<Record<StreamCacheTokenType, Recognizer>> = {
     isStartOfToken: (markdown: string) => markdown.startsWith('!'),
     isStreamingValid: (markdown: string) =>
       STREAM_INCOMPLETE_REGEX.image.some((re) => re.test(markdown)),
-  },
-  [StreamCacheTokenType.Heading]: {
-    tokenType: StreamCacheTokenType.Heading,
-    isStartOfToken: (markdown: string) => markdown.startsWith('#'),
-    isStreamingValid: (markdown: string) =>
-      STREAM_INCOMPLETE_REGEX.atxHeading.some((re) => re.test(markdown)),
   },
   [StreamCacheTokenType.Html]: {
     tokenType: StreamCacheTokenType.Html,
