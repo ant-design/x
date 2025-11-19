@@ -16,7 +16,7 @@ import React from 'react';
  * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
  */
 
-const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow_THUDM_glm-4-9b-chat';
+const BASE_URL = 'https://api.x.ant.design/api/big_model_glm-4.5-flash';
 
 /**
  * 🔔 The MODEL is fixed in the current request, please replace it with your BASE_UR and MODEL
@@ -186,6 +186,9 @@ const App = () => {
             ],
             frequency_penalty: 0,
             max_tokens: 1024,
+            thinking: {
+              type: 'disabled',
+            },
           });
           setContent('');
         }}

@@ -13,7 +13,6 @@ export interface XModelMessage extends AnyObject {
 export interface XModelParams extends AnyObject {
   model?: string;
   messages?: XModelMessage[];
-
   frequency_penalty?: number;
   logit_bias?: AnyObject;
   logprobs?: boolean;
