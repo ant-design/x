@@ -25,9 +25,11 @@ tag: vVERSION
 - 🆕 FileCard adds image generation process and loading/rendering capabilities. [#1311](https://github.com/ant-design/x/pull/1311) by [@kimteayon](https://github.com/kimteayon).
 - 🆕 Think upgrades `blink` animation styles to css token. [#1318](https://github.com/ant-design/x/pull/1318) by [@kimteayon](https://github.com/kimteayon).
 - 🆕 ThoughtChain upgrades `blink` animation styles to css token. [#1318](https://github.com/ant-design/x/pull/1318) by [@kimteayon](https://github.com/kimteayon).
+- 📖 Optimized the official site to enhance user experience. [#1335](https://github.com/ant-design/x/pull/1335) by [@kimteayon](https://github.com/kimteayon), [#1329](https://github.com/ant-design/x/pull/1329) by [@kimteayon](https://github.com/kimteayon).
 
 ### @ant-design/x-markdown
 
+- 🆕 XMarkdown renders HTML tags with `disabled` and `checked` attributes exposed. [#1328](https://github.com/ant-design/x/pull/1328) by [@Div627](https://github.com/Div627).
 - 🆕 XMarkdown `hasNextChunk` adds table rendering processing capability. [#1322](https://github.com/ant-design/x/pull/1322) by [@Div627](https://github.com/Div627).
 - 🐛 Fixed XMarkdown default table rendering styles. [#1324](https://github.com/ant-design/x/pull/1324) by [@Div627](https://github.com/Div627).
 - 🆕 XMarkdown `incompleteMarkdownComponentMap` adds multiple type renderings. [#1325](https://github.com/ant-design/x/pull/1325) by [@Div627](https://github.com/Div627).

@@ -195,7 +195,7 @@ const GlobalLayout: React.FC = () => {
           <SiteThemeProvider theme={themeConfig}>
             {alertVisible && (
               <Alert
-                afterClose={() => {
+                onClose={() => {
                   setAlertVisible(false);
                 }}
               />

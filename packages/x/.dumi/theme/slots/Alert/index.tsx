@@ -1,7 +1,7 @@
+import { CloseOutlined } from '@ant-design/icons';
 import { Alert, Button, Space } from 'antd';
 import { createStyles } from 'antd-style';
 import React from 'react';
-
 import useLocale from '../../../hooks/useLocale';
 
 const useStyle = createStyles(({ token, css }) => {
@@ -38,7 +38,7 @@ const locales = {
   },
 };
 
-const Index: React.FC<{ afterClose: () => void }> = ({ afterClose }) => {
+const Index: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const { styles } = useStyle();
   const [locale] = useLocale(locales);
 
@@ -49,7 +49,8 @@ const Index: React.FC<{ afterClose: () => void }> = ({ afterClose }) => {
         title: styles.message,
       }}
       closable={{
-        afterClose,
+        closeIcon: <CloseOutlined />,
+        onClose,
       }}
       title={
         <Space>
