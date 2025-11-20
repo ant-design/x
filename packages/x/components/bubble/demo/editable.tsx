@@ -16,21 +16,19 @@ const App = () => {
         <Bubble
           editable={editable[0]}
           content={content[0]}
-          components={{
-            avatar: <Avatar icon={<UserOutlined />} />,
-            footer: (
-              <Actions
-                items={[
-                  {
-                    key: 'edit',
-                    icon: <EditOutlined />,
-                    label: 'edit',
-                  },
-                ]}
-                onClick={({ key }) => setEditable([key === 'edit', editable[1]])}
-              />
-            ),
-          }}
+          avatar={<Avatar icon={<UserOutlined />} />}
+          footer={
+            <Actions
+              items={[
+                {
+                  key: 'edit',
+                  icon: <EditOutlined />,
+                  label: 'edit',
+                },
+              ]}
+              onClick={({ key }) => setEditable([key === 'edit', editable[1]])}
+            />
+          }
           onEditCancel={() => setEditable([false, editable[1]])}
           onEditConfirm={(val) => {
             setContent([val, content[1]]);
@@ -44,23 +42,21 @@ const App = () => {
           placement="end"
           editable={editable[1]}
           content={content[1]}
-          components={{
-            avatar: <Avatar icon={<UserOutlined />} />,
-            footer: (
-              <Actions
-                items={[
-                  {
-                    key: 'edit',
-                    icon: <EditOutlined />,
-                    label: 'edit',
-                  },
-                ]}
-                onClick={({ key }) =>
-                  setEditable([editable[0], { ...(editable[1] as any), editing: key === 'edit' }])
-                }
-              />
-            ),
-          }}
+          avatar={<Avatar icon={<UserOutlined />} />}
+          footer={
+            <Actions
+              items={[
+                {
+                  key: 'edit',
+                  icon: <EditOutlined />,
+                  label: 'edit',
+                },
+              ]}
+              onClick={({ key }) =>
+                setEditable([editable[0], { ...(editable[1] as any), editing: key === 'edit' }])
+              }
+            />
+          }
           onEditCancel={() => setEditable([editable[0], false])}
           onEditConfirm={(val) => {
             setContent([content[0], val]);

@@ -204,16 +204,14 @@ interface CopilotProps {
 const role: BubbleListProps['role'] = {
   assistant: {
     placement: 'start',
-    components: {
-      footer: (
-        <div style={{ display: 'flex' }}>
-          <Button type="text" size="small" icon={<ReloadOutlined />} />
-          <Button type="text" size="small" icon={<CopyOutlined />} />
-          <Button type="text" size="small" icon={<LikeOutlined />} />
-          <Button type="text" size="small" icon={<DislikeOutlined />} />
-        </div>
-      ),
-    },
+    footer: (
+      <div style={{ display: 'flex' }}>
+        <Button type="text" size="small" icon={<ReloadOutlined />} />
+        <Button type="text" size="small" icon={<CopyOutlined />} />
+        <Button type="text" size="small" icon={<LikeOutlined />} />
+        <Button type="text" size="small" icon={<DislikeOutlined />} />
+      </div>
+    ),
     contentRender(content: string) {
       const newContent = content.replace('/\n\n/g', '<br/><br/>');
       return (

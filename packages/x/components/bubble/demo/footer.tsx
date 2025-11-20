@@ -22,13 +22,9 @@ const App = () => (
       <div style={{ width: '100%' }}>
         <Bubble
           content="outer footer"
-          components={{
-            header: 'footer',
-            avatar: <Avatar icon={<UserOutlined />} />,
-            footer: (content) => (
-              <Actions items={actionItems} onClick={() => console.log(content)} />
-            ),
-          }}
+          header="footer"
+          avatar={<Avatar icon={<UserOutlined />} />}
+          footer={(content) => <Actions items={actionItems} onClick={() => console.log(content)} />}
         />
       </div>
     </Flex>
@@ -38,13 +34,9 @@ const App = () => (
           content="inner footer"
           placement="end"
           footerPlacement="inner-end"
-          components={{
-            header: 'footer',
-            avatar: <Avatar icon={<UserOutlined />} />,
-            footer: (content) => (
-              <Actions items={actionItems} onClick={() => console.log(content)} />
-            ),
-          }}
+          header="footer"
+          avatar={<Avatar icon={<UserOutlined />} />}
+          footer={(content) => <Actions items={actionItems} onClick={() => console.log(content)} />}
         />
       </div>
     </Flex>
@@ -53,13 +45,9 @@ const App = () => (
         <Bubble
           content="outer footer and align right"
           footerPlacement="outer-end"
-          components={{
-            header: 'footer',
-            avatar: <Avatar icon={<UserOutlined />} />,
-            footer: (content) => (
-              <Actions items={actionItems} onClick={() => console.log(content)} />
-            ),
-          }}
+          header="footer"
+          avatar={<Avatar icon={<UserOutlined />} />}
+          footer={(content) => <Actions items={actionItems} onClick={() => console.log(content)} />}
         />
       </div>
     </Flex>
@@ -69,13 +57,9 @@ const App = () => (
           content="inner footer and align left"
           placement="end"
           footerPlacement="inner-start"
-          components={{
-            header: 'footer',
-            avatar: <Avatar icon={<UserOutlined />} />,
-            footer: (content) => (
-              <Actions items={actionItems} onClick={() => console.log(content)} />
-            ),
-          }}
+          header="footer"
+          avatar={<Avatar icon={<UserOutlined />} />}
+          footer={(content) => <Actions items={actionItems} onClick={() => console.log(content)} />}
         />
       </div>
     </Flex>

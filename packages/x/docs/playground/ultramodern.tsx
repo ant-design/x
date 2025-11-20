@@ -238,11 +238,9 @@ const Footer: React.FC<{
 const getRole = (className: string): BubbleListProps['role'] => ({
   assistant: {
     placement: 'start',
-    components: {
-      footer: (content, { status, key }) => (
-        <Footer content={content} status={status} id={key as string} />
-      ),
-    },
+    footer: (content, { status, key }) => (
+      <Footer content={content} status={status} id={key as string} />
+    ),
     contentRender: (content: any, { status }) => {
       const newContent = content.replace('/\n\n/g', '<br/><br/>');
       return (
@@ -382,7 +380,7 @@ const App = () => {
                     key: i.id,
                     status: i.status,
                     loading: i.status === 'loading',
-                    extra: i.message.extra,
+                    extraInfo: i.message.extraInfo,
                   }))}
                   styles={{
                     root: {

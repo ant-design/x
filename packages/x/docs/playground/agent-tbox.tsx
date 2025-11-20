@@ -720,23 +720,21 @@ const AgentTbox: React.FC = () => {
   const role: BubbleListProps['role'] = {
     assistant: {
       placement: 'start',
-      components: {
-        header: (_, { status }) => {
-          const config = ThoughtChainConfig[status as keyof typeof ThoughtChainConfig];
-          return config ? (
-            <ThoughtChain.Item
-              style={{
-                marginBottom: 8,
-              }}
-              status={config.status as ThoughtChainItemProps['status']}
-              variant="solid"
-              icon={<GlobalOutlined />}
-              title={config.title}
-            />
-          ) : null;
-        },
-        footer: (content, { status, key }) => <Footer content={content} status={status} id={key} />,
+      header: (_, { status }) => {
+        const config = ThoughtChainConfig[status as keyof typeof ThoughtChainConfig];
+        return config ? (
+          <ThoughtChain.Item
+            style={{
+              marginBottom: 8,
+            }}
+            status={config.status as ThoughtChainItemProps['status']}
+            variant="solid"
+            icon={<GlobalOutlined />}
+            title={config.title}
+          />
+        ) : null;
       },
+      footer: (content, { status, key }) => <Footer content={content} status={status} id={key} />,
       contentRender: (content, { status }) => {
         const markdownText = `${content.ext_text ? `<think>\n\n${content.ext_text}${content.text ? '\n\n</think>\n\n' : ''}` : ''}${content.text || ''}`;
         return (

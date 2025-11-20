@@ -176,7 +176,7 @@ export default () => {
               key: i.id,
               status: i.status,
               loading: i.status === 'loading',
-              extra: i.extra,
+              extraInfo: i.extraInfo,
             }))}
             styles={{
               bubble: {

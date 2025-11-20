@@ -319,7 +319,7 @@ const THOUGHT_CHAIN_CONFIG = {
 
 // ==================== Type ====================
 interface ChatMessage extends XModelMessage {
-  extra?: {
+  extraInfo?: {
     feedback: ActionsFeedbackProps['value'];
   };
 }
@@ -354,8 +354,8 @@ const Footer: React.FC<{
   id?: string | number;
   content: string;
   status?: string;
-  extra?: ChatMessage['extra'];
-}> = ({ id, content, extra, status }) => {
+  extraInfo?: ChatMessage['extraInfo'];
+}> = ({ id, content, extraInfo, status }) => {
   const context = React.useContext(ChatContext);
   const Items = [
     {
@@ -397,12 +397,12 @@ const Footer: React.FC<{
               color: '#f759ab',
             },
           }}
-          value={extra?.feedback || 'default'}
+          value={extraInfo?.feedback || 'default'}
           key="feedback"
           onChange={(val) => {
             if (id) {
               context?.setMessage?.(id, () => ({
-                extra: {
+                extraInfo: {
                   feedback: val,
                 },
               }));
@@ -456,30 +456,28 @@ const historyMessageFactory = (conversationKey: string): DefaultMessageInfo<Chat
 const getRole = (className: string): BubbleListProps['role'] => ({
   assistant: {
     placement: 'start',
-    components: {
-      header: (_, { status }) => {
-        const config = THOUGHT_CHAIN_CONFIG[status as keyof typeof THOUGHT_CHAIN_CONFIG];
-        return config ? (
-          <ThoughtChain.Item
-            style={{
-              marginBottom: 8,
-            }}
-            status={config.status as ThoughtChainItemProps['status']}
-            variant="solid"
-            icon={<GlobalOutlined />}
-            title={config.title}
-          />
-        ) : null;
-      },
-      footer: (content, { status, key, extra }) => (
-        <Footer
-          content={content}
-          status={status}
-          extra={extra as ChatMessage['extra']}
-          id={key as string}
+    header: (_, { status }) => {
+      const config = THOUGHT_CHAIN_CONFIG[status as keyof typeof THOUGHT_CHAIN_CONFIG];
+      return config ? (
+        <ThoughtChain.Item
+          style={{
+            marginBottom: 8,
+          }}
+          status={config.status as ThoughtChainItemProps['status']}
+          variant="solid"
+          icon={<GlobalOutlined />}
+          title={config.title}
         />
-      ),
+      ) : null;
     },
+    footer: (content, { status, key, extraInfo }) => (
+      <Footer
+        content={content}
+        status={status}
+        extraInfo={extraInfo as ChatMessage['extraInfo']}
+        id={key as string}
+      />
+    ),
     contentRender: (content: any, { status }) => {
       const newContent = content.replace('/\n\n/g', '<br/><br/>');
       return (
@@ -636,7 +634,7 @@ const Independent: React.FC = () => {
             key: i.id,
             status: i.status,
             loading: i.status === 'loading',
-            extra: i.extra,
+            extraInfo: i.extraInfo,
           }))}
           styles={{
             bubble: {

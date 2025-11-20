@@ -62,7 +62,10 @@ demo:
 | variant | 气泡样式变体 | `filled` \| `outlined` \| `shadow` \| `borderless` | `filled` | - | 
 | shape | 气泡形状 | `default` \| `round` \| `corner` | `default` | - | 
 | footerPlacement | 底部插槽位置 | `outer-start` \| `outer-end` \| `inner-start` \| `inner-end` | `outer-start` | - | 
-| components | 扩展槽位配置 | { header?: [BubbleSlot](#bubbleslot); footer?: BubbleSlot; avatar?: BubbleSlot; extra?: BubbleSlot; } | - | - | 
+| header | 头部插槽 | [BubbleSlot](#bubbleslot) | - | - |
+| footer | 底部插槽 | [BubbleSlot](#bubbleslot) | - | - |
+| avatar | 头像插槽 | [BubbleSlot](#bubbleslot) | - | - |
+| extra | 额外插槽 | [BubbleSlot](#bubbleslot) | - | - |
 | onTyping | 动画执行回调 | (rendererContent: string, currentContent: string) => void | - | - | 
 | onTypingComplete | 动画结束回调 | (content: string) => void | - | - |
 | onEditing | 编辑态下内容变化时回调 | (content: string) => void | - | - |
@@ -152,7 +155,7 @@ interface BubbleAnimationOption {
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| items | 气泡数据列表，`key`，`role` 必填 ，当结合X SDK [`useXChat`](/x-sdks/use-x-chat-cn) 使用时可传入`status` 帮助 Bubble 对配置进行管理 | (([BubbleProps](#bubble) & [DividerBubbleProps](#bubbledivider)) & { key: string \| number, role: string , status: MessageStatus, extra?: AnyObject})[] | - | - |
+| items | 气泡数据列表，`key`，`role` 必填 ，当结合X SDK [`useXChat`](/x-sdks/use-x-chat-cn) 使用时可传入`status` 帮助 Bubble 对配置进行管理 | (([BubbleProps](#bubble) & [DividerBubbleProps](#bubbledivider)) & { key: string \| number, role: string , status: MessageStatus, extraInfo?: AnyObject})[] | - | - |
 | autoScroll | 是否自动滚动 | boolean | `true` | - |
 | role | 气泡角色默认配置 | [RoleType](#roletype) | - | - |
 
@@ -164,13 +167,13 @@ type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error' | 'a
 
 #### InfoType
 
-配合 [`useXChat`](/x-sdks/use-x-chat-cn) 使用 ，`key` 可做为 `MessageId`，`extra` 可作为自定义参数。
+配合 [`useXChat`](/x-sdks/use-x-chat-cn) 使用 ，`key` 可做为 `MessageId`，`extraInfo` 可作为自定义参数。
 
 ```typescript
 type InfoType = {
   status?: MessageStatus;
   key?: string | number;
-  extra?: AnyObject;
+  extraInfo?: AnyObject;
 };
 ```
 
@@ -192,7 +195,10 @@ export type RoleProps = Pick<
   | 'loadingRender'
   | 'contentRender'
   | 'footerPlacement'
-  | 'components'
+  | 'header'
+  | 'footer'
+  | 'avatar'
+  | 'extra'
   | 'editable'
   | 'onTyping'
   | 'onTypingComplete'

@@ -179,26 +179,22 @@ const App = () => {
           status: status,
           loading: status === 'loading',
           content: message.content,
-          components:
-            message.role === 'assistant'
-              ? {
-                  footer: (
-                    <Tooltip title="Retry">
-                      <Button
-                        size="small"
-                        type="text"
-                        icon={<SyncOutlined />}
-                        style={{ marginInlineEnd: 'auto' }}
-                        onClick={() =>
-                          onReload(id, {
-                            userAction: 'retry',
-                          })
-                        }
-                      />
-                    </Tooltip>
-                  ),
-                }
-              : {},
+          footer:
+            message.role === 'assistant' ? (
+              <Tooltip title="Retry">
+                <Button
+                  size="small"
+                  type="text"
+                  icon={<SyncOutlined />}
+                  style={{ marginInlineEnd: 'auto' }}
+                  onClick={() =>
+                    onReload(id, {
+                      userAction: 'retry',
+                    })
+                  }
+                />
+              </Tooltip>
+            ) : undefined,
         }))}
       />
       <Sender
