@@ -148,9 +148,9 @@
     "@umijs/fabric": "^4.0.1",
     "adm-zip": "^0.5.16",
     "ali-oss": "^6.21.0",
-    "antd": "6.0.0-alpha.4",
+    "antd": "6.0.0-alpha.5",
     "antd-style": "^4.0.0-alpha.1",
-    "antd-token-previewer": "^3.0.0-alpha.3",
+    "antd-token-previewer": "^3.0.0",
     "axios": "^1.7.7",
     "browserslist": "^4.23.3",
     "browserslist-to-esbuild": "^2.1.1",
@@ -243,7 +243,7 @@
     "webpack-bundle-analyzer": "^4.10.2"
   },
   "peerDependencies": {
-    "antd": "6.0.0-alpha.4",
+    "antd": "6.0.0-alpha.5",
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
   },
