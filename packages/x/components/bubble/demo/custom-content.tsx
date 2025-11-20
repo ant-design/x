@@ -28,22 +28,20 @@ const App = () => {
             </Flex>
           );
         }}
-        components={{
-          footer: (content) => {
-            return (
-              <Button
-                onClick={() => {
-                  setContent((ori) => ({
-                    ...ori,
-                    actionNode: <>🎉 Happy Ant Design X !</>,
-                  }));
-                }}
-                type="text"
-              >
-                {content?.actionNode}
-              </Button>
-            );
-          },
+        footer={(content) => {
+          return (
+            <Button
+              onClick={() => {
+                setContent((ori) => ({
+                  ...ori,
+                  actionNode: <>🎉 Happy Ant Design X !</>,
+                }));
+              }}
+              type="text"
+            >
+              {content?.actionNode}
+            </Button>
+          );
         }}
       />
     </div>

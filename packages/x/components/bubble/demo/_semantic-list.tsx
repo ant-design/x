@@ -43,16 +43,14 @@ const App: React.FC = () => {
     () => ({
       ai: {
         typing: true,
-        components: {
-          header: 'AI',
-          extra: <Button color="default" variant="text" size="small" icon={<CopyOutlined />} />,
-          avatar: () => <Avatar icon={<AntDesignOutlined />} />,
-          footer: (
-            <Space size={token.paddingXXS}>
-              <Button color="default" variant="text" size="small" icon={<SyncOutlined />} />
-            </Space>
-          ),
-        },
+        header: 'AI',
+        extra: <Button color="default" variant="text" size="small" icon={<CopyOutlined />} />,
+        avatar: () => <Avatar icon={<AntDesignOutlined />} />,
+        footer: (
+          <Space size={token.paddingXXS}>
+            <Button color="default" variant="text" size="small" icon={<SyncOutlined />} />
+          </Space>
+        ),
       },
       user: () => ({
         placement: 'end',

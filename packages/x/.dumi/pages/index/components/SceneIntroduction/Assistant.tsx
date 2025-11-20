@@ -162,35 +162,33 @@ const AssistantScene: React.FC = () => {
         description={locale.description_short}
       />
     ),
-    components: {
-      footer: (
-        <Prompts
-          title={locale.help_text}
-          onItemClick={(item) => {
-            onRequest({ query: item.data.description as string });
-          }}
-          vertical
-          items={[
-            {
-              key: '1-1',
-              description: locale.question1,
-            },
-            {
-              key: '1-2',
-              description: locale.question2,
-            },
-            {
-              key: '1-3',
-              description: locale.question3,
-            },
-            {
-              key: '1-4',
-              description: locale.question4,
-            },
-          ]}
-        />
-      ),
-    },
+    footer: (
+      <Prompts
+        title={locale.help_text}
+        onItemClick={(item) => {
+          onRequest({ query: item.data.description as string });
+        }}
+        vertical
+        items={[
+          {
+            key: '1-1',
+            description: locale.question1,
+          },
+          {
+            key: '1-2',
+            description: locale.question2,
+          },
+          {
+            key: '1-3',
+            description: locale.question3,
+          },
+          {
+            key: '1-4',
+            description: locale.question4,
+          },
+        ]}
+      />
+    ),
   };
 
   return (
