@@ -25,34 +25,6 @@ This document will help you upgrade from `@ant-design/x 1.x` to `@ant-design/x 2
 
 1. `messageRender` replaced with `contentRender`, and supports receiving extended parameters.
 
-#### Migration Example
-
-**Before (v1):**
-
-```tsx
-<Bubble
-  content="Hello World"
-  components={{
-    header: 'Header',
-    footer: 'Footer',
-    avatar: <Avatar icon={<UserOutlined />} />,
-    extra: <Button icon={<MoreOutlined />} />,
-  }}
-/>
-```
-
-**After (v2):**
-
-```tsx
-<Bubble
-  content="Hello World"
-  header="Header"
-  footer="Footer"
-  avatar={<Avatar icon={<UserOutlined />} />}
-  extra={<Button icon={<MoreOutlined />} />}
-/>
-```
-
 ### Bubble.List
 
 1. Scroll hosting implementation requires explicit Bubble.List height.

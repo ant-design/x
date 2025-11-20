@@ -25,7 +25,7 @@ tag: vVERSION
 - 🆕 FileCard 新增图片生成过程以及加载、渲染能力。[#1311](https://github.com/ant-design/x/pull/1311) 由 [@kimteayon](https://github.com/kimteayon) 提交。
 - 🆕 Think 将 `blink` 动画样式升级为 css token。[#1318](https://github.com/ant-design/x/pull/1318) 由 [@kimteayon](https://github.com/kimteayon) 提交。
 - 🆕 ThoughtChain 将 `blink` 动画样式升级为 css token。[#1318](https://github.com/ant-design/x/pull/1318) 由 [@kimteayon](https://github.com/kimteayon) 提交。
-- 📖 优化官网站点提升用户体验。[#1335](https://github.com/ant-design/x/pull/1335) 由 [@kimteayon](https://github.com/kimteayon)、[#1329](https://github.com/ant-design/x/pull/1329) 由 [@kimteayon](https://github.com/kimteayon)
+- 📖 优化官网站点提升用户体验。[#1335](https://github.com/ant-design/x/pull/1335) 由 [@kimteayon](https://github.com/kimteayon)、[#1329](https://github.com/ant-design/x/pull/1329) 由 [@kimteayon](https://github.com/kimteayon) 提交。
 
 ### @ant-design/x-markdown
 
