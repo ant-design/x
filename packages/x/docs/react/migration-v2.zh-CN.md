@@ -39,7 +39,7 @@ title: 从 v1 到 v2
 
 1. 移除了 Attachments.FileCard 的实现，升级为 FileCard 组件。
 2. 同时原 `size` 更名为 `byte` 用于文件大小（字节）的展示。
-3. `size` 作为卡片的大小配置，可选值 'small' | 'default'。
+3. `size` 作为卡片的大小配置，可选值 `'small' | 'default'`。
 
 ### ThoughtChain
 

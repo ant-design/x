@@ -67,7 +67,7 @@ This document will help you upgrade from `@ant-design/x 1.x` to `@ant-design/x 2
 
 1. Removed Attachments.FileCard implementation, upgraded to FileCard component.
 2. Original `size` renamed to `byte` for displaying file size (bytes).
-3. `size` as card size configuration, optional values 'small' | 'default'.
+3. `size` as card size configuration, optional values `'small' | 'default'`.
 
 ### ThoughtChain
 
