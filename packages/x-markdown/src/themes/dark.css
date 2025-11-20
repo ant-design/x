@@ -21,6 +21,7 @@
   --margin-li: 0 0 14px 0;
   --hr-margin: 24px 0;
   --table-margin: 0 0 24px 0;
+  --padding-code: 16px;
 }
 
 .x-markdown-dark h1,
@@ -152,9 +153,9 @@
 .x-markdown-dark pre code:not([class$="-highlightCode-code"] pre code) {
   display: block;
   background: var(--dark-bg) !important;
-  padding: 16px;
+  padding: var(--padding-code);
   color: var(--text-color) !important;
-  line-height: 24px;
+  line-height: 1.3;
   font-size: var(--font-size);
   border-radius: var(--border-radius-middle);
   margin: var(--margin-pre);

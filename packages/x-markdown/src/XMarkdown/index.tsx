@@ -1,12 +1,12 @@
 import classnames from 'classnames';
-import React from 'react';
+import React, { useMemo } from 'react';
 import useXProviderContext from '../hooks/use-x-provider-context';
 import { Parser, Renderer } from './core';
 import { useStreaming } from './hooks';
 import { XMarkdownProps } from './interface';
 import './index.css';
 
-const XMarkdown: React.FC<XMarkdownProps> = (props) => {
+const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
   const {
     streaming,
     config,
@@ -29,37 +29,51 @@ const XMarkdown: React.FC<XMarkdownProps> = (props) => {
 
   const mergedCls = classnames(prefixCls, 'x-markdown', rootClassName, className);
 
-  const mergedStyle: React.CSSProperties = {
-    direction: contextDirection === 'rtl' ? 'rtl' : 'ltr',
-    ...style,
-  };
+  const mergedStyle: React.CSSProperties = useMemo(
+    () => ({
+      direction: contextDirection === 'rtl' ? 'rtl' : 'ltr',
+      ...style,
+    }),
+    [contextDirection, style],
+  );
 
   // ============================ Streaming ============================
   const displayContent = useStreaming(content || children || '', streaming);
 
   // ============================ Render ============================
+  const parser = useMemo(
+    () =>
+      new Parser({
+        markedConfig: config,
+        paragraphTag,
+        openLinksInNewTab,
+      }),
+    [config, paragraphTag, openLinksInNewTab],
+  );
+
+  const renderer = useMemo(
+    () =>
+      new Renderer({
+        components: components,
+        dompurifyConfig,
+        streaming,
+      }),
+    [components, dompurifyConfig, streaming],
+  );
+
+  const htmlString = useMemo(() => {
+    if (!displayContent) return '';
+    return parser.parse(displayContent);
+  }, [displayContent, parser]);
+
   if (!displayContent) return null;
-
-  const parser = new Parser({
-    markedConfig: config,
-    paragraphTag,
-    openLinksInNewTab,
-  });
-
-  const renderer = new Renderer({
-    components: components,
-    dompurifyConfig,
-    streaming,
-  });
-
-  const htmlString = parser.parse(displayContent);
 
   return (
     <div className={mergedCls} style={mergedStyle}>
       {renderer.render(htmlString)}
     </div>
   );
-};
+});
 
 if (process.env.NODE_ENV !== 'production') {
   XMarkdown.displayName = 'XMarkdown';

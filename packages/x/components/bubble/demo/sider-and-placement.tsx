@@ -9,18 +9,16 @@ const App = () => (
       <div style={{ width: '100%' }}>
         <Bubble
           content="align left"
-          components={{
-            avatar: (
-              <Tooltip title="main side">
-                <Avatar icon={<UserOutlined />} />
-              </Tooltip>
-            ),
-            extra: () => (
-              <Tooltip title="extra side">
-                <CopyOutlined />
-              </Tooltip>
-            ),
-          }}
+          avatar={
+            <Tooltip title="main side">
+              <Avatar icon={<UserOutlined />} />
+            </Tooltip>
+          }
+          extra={
+            <Tooltip title="extra side">
+              <CopyOutlined />
+            </Tooltip>
+          }
         />
       </div>
     </Flex>
@@ -29,18 +27,16 @@ const App = () => (
         <Bubble
           content="align right"
           placement="end"
-          components={{
-            avatar: (
-              <Tooltip title="main side">
-                <Avatar icon={<UserOutlined />} />
-              </Tooltip>
-            ),
-            extra: () => (
-              <Tooltip title="extra side">
-                <CopyOutlined />
-              </Tooltip>
-            ),
-          }}
+          avatar={
+            <Tooltip title="main side">
+              <Avatar icon={<UserOutlined />} />
+            </Tooltip>
+          }
+          extra={
+            <Tooltip title="extra side">
+              <CopyOutlined />
+            </Tooltip>
+          }
         />
       </div>
     </Flex>

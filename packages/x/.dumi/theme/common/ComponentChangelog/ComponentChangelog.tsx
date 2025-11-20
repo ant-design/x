@@ -1,6 +1,6 @@
 import { BugOutlined } from '@ant-design/icons';
 import type { TimelineItemProps } from 'antd';
-import { Button, Drawer, Flex, Grid, Popover, Tag, Timeline, Typography } from 'antd';
+import { Button, Drawer, Flex, Popover, Tag, Timeline, Typography } from 'antd';
 import { createStyles } from 'antd-style';
 import React, { cloneElement, isValidElement } from 'react';
 import semver from 'semver';
@@ -265,7 +265,7 @@ const ComponentChangelog: React.FC<Readonly<React.PropsWithChildren>> = (props) 
       const changelogList = changelogMap[version];
       const bugVersionInfo = matchDeprecated(version);
       return {
-        children: (
+        content: (
           <Typography>
             <Flex className={styles.versionWrap} justify="flex-start" align="center" gap="middle">
               <Button
@@ -313,9 +313,6 @@ const ComponentChangelog: React.FC<Readonly<React.PropsWithChildren>> = (props) 
     });
   }, [list]);
 
-  const screens = Grid.useBreakpoint();
-  const width = screens.md ? '48vw' : '90vw';
-
   if (!pathname.startsWith('/components/') || !list || !list.length) {
     return null;
   }
@@ -336,7 +333,7 @@ const ComponentChangelog: React.FC<Readonly<React.PropsWithChildren>> = (props) 
           </Link>
         }
         open={show}
-        width={width}
+        size="large"
         onClose={() => setShow(false)}
       >
         <Timeline items={timelineItems} />

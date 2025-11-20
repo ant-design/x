@@ -17,43 +17,70 @@ const LOCALE_MARKDOWN = {
 };
 
 const findFirstForbiddenCharIndex = (() => {
-  let _markdownSegmenter: any;
+  // 预定义常量，避免重复创建
+  const FORBIDDEN_CHARS = new Set([
+    '(',
+    ')',
+    '[',
+    ']',
+    '{',
+    '}',
+    '（',
+    '）',
+    '「',
+    '」',
+    '。',
+    '，',
+  ]);
+  const CHINESE_REGEX = /[\u4e00-\u9fa5]/;
+
+  let segmenter: any = null;
+
+  // 检查是否支持 Intl.Segmenter
+  const isSegmenterSupported = (): boolean => {
+    return typeof window !== 'undefined' && 'Intl' in window && 'Segmenter' in (Intl as any);
+  };
+
+  // 获取或初始化 segmenter
+  const getSegmenter = (): any => {
+    if (segmenter !== null) return segmenter;
+
+    if (isSegmenterSupported()) {
+      try {
+        segmenter = new (Intl as any).Segmenter('zh', { granularity: 'grapheme' });
+      } catch {
+        segmenter = null;
+      }
+    }
+    return segmenter;
+  };
+
+  // 检查字符是否为禁止字符
+  const isForbiddenChar = (char: string): boolean => {
+    return FORBIDDEN_CHARS.has(char) || CHINESE_REGEX.test(char);
+  };
 
   return (str: string): number => {
-    if (typeof str !== 'string' || str.length === 0) {
-      return -1;
-    }
+    // 简化的空值检查
+    if (!str) return -1;
 
-    const forbiddenChars = new Set(['(', ')', '[', ']', '{', '}', '（', '）', '「', '」']);
+    const seg = getSegmenter();
 
-    if ('Intl' in window && 'Segmenter' in Intl) {
-      try {
-        if (!_markdownSegmenter) {
-          _markdownSegmenter = new (Intl as any).Segmenter('zh', { granularity: 'grapheme' });
-        }
-        const segmenter = _markdownSegmenter;
-
-        let index = 0;
-        for (const segment of segmenter.segment(str)) {
-          const char = segment.segment;
-          if (forbiddenChars.has(char)) {
-            return index;
-          }
-          index += char.length;
-        }
-        return -1;
-      } catch {
-        // 降级到字符遍历方法
+    // 使用 Intl.Segmenter 进行 Unicode 感知处理
+    if (seg) {
+      let index = 0;
+      for (const segment of seg.segment(str)) {
+        const char = segment.segment;
+        if (isForbiddenChar(char)) return index;
+        index += char.length;
+      }
+    } else {
+      // 降级到直接字符遍历
+      for (let i = 0; i < str.length; i++) {
+        if (isForbiddenChar(str[i])) return i;
       }
     }
 
-    // 优化的字符遍历方法，避免正则表达式开销
-    for (let i = 0; i < str.length; i++) {
-      const char = str[i];
-      if (forbiddenChars.has(char)) {
-        return i;
-      }
-    }
     return -1;
   };
 })();

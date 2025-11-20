@@ -40,7 +40,11 @@ export type PresetIcons =
   | 'java'
   | 'javascript'
   | 'python';
-export interface FileCardProps {
+export interface FileCardProps
+  extends Omit<
+    React.HTMLAttributes<HTMLDivElement>,
+    'content' | 'onAnimationStart' | 'onAnimationEnd'
+  > {
   prefixCls?: string;
   style?: React.CSSProperties;
   styles?: Partial<Record<SemanticType, React.CSSProperties>>;

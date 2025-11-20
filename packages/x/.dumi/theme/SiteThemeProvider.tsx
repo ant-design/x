@@ -7,6 +7,7 @@ import React, { useContext } from 'react';
 interface NewToken {
   bannerHeight: number;
   headerHeight: number;
+  alertHeight: number;
   menuItemBorder: number;
   mobileMaxWidth: number;
   siteMarkdownCodeBg: string;
@@ -27,7 +28,7 @@ interface NewToken {
 declare module 'antd-style' {
   export interface CustomToken extends NewToken {}
 }
-
+const alertHeight = 40;
 const headerHeight = 80;
 const bannerHeight = 38;
 const indexRadius = 24;
@@ -48,6 +49,7 @@ const SiteThemeProvider: React.FC<ThemeProviderProps<any>> = ({ children, theme,
       theme={theme}
       customToken={{
         headerHeight,
+        alertHeight,
         bannerHeight,
         indexRadius,
         pcMaxWidth,
