@@ -20,6 +20,10 @@ class Renderer {
     this.options = options;
   }
 
+  private static isBrowserEnvironment(): boolean {
+    return typeof window !== 'undefined' && typeof document !== 'undefined';
+  }
+
   /**
    * Detect unclosed tags using regular expressions
    */
@@ -137,13 +141,31 @@ class Renderer {
     });
   }
 
+  private safeSanitize(htmlString: string, config: DOMPurifyConfig): string {
+    if (!Renderer.isBrowserEnvironment()) {
+      return htmlString;
+    }
+
+    if (!DOMPurify || typeof DOMPurify.sanitize !== 'function') {
+      console.warn('DOMPurify is not available, skipping HTML sanitization');
+      return htmlString;
+    }
+
+    try {
+      return DOMPurify.sanitize(htmlString, config);
+    } catch (error) {
+      console.warn('DOMPurify sanitization failed:', error);
+      return htmlString;
+    }
+  }
+
   public processHtml(htmlString: string): React.ReactNode {
     const unclosedTags = this.detectUnclosedTags(htmlString);
     const cidRef = { current: 0 };
 
     // Use DOMPurify to clean HTML while preserving custom components and target attributes
     const purifyConfig = this.configureDOMPurify();
-    const cleanHtml = DOMPurify.sanitize(htmlString, purifyConfig);
+    const cleanHtml = this.safeSanitize(htmlString, purifyConfig);
 
     return parseHtml(cleanHtml, {
       replace: this.createReplaceElement(unclosedTags, cidRef),
