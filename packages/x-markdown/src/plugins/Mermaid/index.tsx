@@ -233,9 +233,7 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
         key: 'copy',
         icon: <CopyOutlined />,
         label: contextLocale.copy,
-        onItemClick: () => {
-          handleCopyCode();
-        },
+        onItemClick: handleCopyCode,
       },
       ...(renderType === RenderType.Image
         ? [
@@ -243,17 +241,13 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
               key: 'zoomIn',
               icon: <ZoomInOutlined />,
               label: contextLocale.zoomIn,
-              onItemClick: () => {
-                handleZoomIn();
-              },
+              onItemClick: handleZoomIn,
             },
             {
               key: 'zoomOut',
               icon: <ZoomOutOutlined />,
               label: contextLocale.zoomOut,
-              onItemClick: () => {
-                handleZoomOut();
-              },
+              onItemClick: handleZoomOut,
             },
             {
               key: 'zoomReset',
@@ -269,9 +263,7 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
               key: 'download',
               icon: <DownloadOutlined />,
               label: contextLocale.download,
-              onItemClick: () => {
-                handleDownload();
-              },
+              onItemClick: handleDownload,
             },
           ]
         : []),
