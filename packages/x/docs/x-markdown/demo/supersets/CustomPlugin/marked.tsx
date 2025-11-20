@@ -5,7 +5,7 @@ import React from 'react';
 const content = `
 ### Use [marked extensions](https://marked.js.org/using_advanced#extensions)
 
-I :heart: marked! :tada:`;
+I :heart: XMarkdown! :tada:`;
 
 const options = {
   emojis: {

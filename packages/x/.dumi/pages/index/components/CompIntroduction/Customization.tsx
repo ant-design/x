@@ -130,15 +130,13 @@ export const CustomizationBubble: React.FC<BubbleProps> = (props) => {
       classNames={{
         content: background,
       }}
-      components={{
-        footer: (
-          <div className={styles.actions}>
-            <EditOutlined />
-            <DeleteOutlined />
-            <EnterOutlined />
-          </div>
-        ),
-      }}
+      footer={
+        <div className={styles.actions}>
+          <EditOutlined />
+          <DeleteOutlined />
+          <EnterOutlined />
+        </div>
+      }
       {...props}
       content={props.content || locale.question1}
     />

@@ -6,7 +6,7 @@ import { useStreaming } from './hooks';
 import { XMarkdownProps } from './interface';
 import './index.css';
 
-const XMarkdown: React.FC<XMarkdownProps> = (props) => {
+const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
   const {
     streaming,
     config,
@@ -38,10 +38,13 @@ const XMarkdown: React.FC<XMarkdownProps> = (props) => {
 
   const mergedCls = classnames(prefixCls, 'x-markdown', rootClassName, className);
 
-  const mergedStyle: React.CSSProperties = {
-    direction: contextDirection === 'rtl' ? 'rtl' : 'ltr',
-    ...style,
-  };
+  const mergedStyle: React.CSSProperties = useMemo(
+    () => ({
+      direction: contextDirection === 'rtl' ? 'rtl' : 'ltr',
+      ...style,
+    }),
+    [contextDirection, style],
+  );
 
   // ============================ Streaming ============================
   const output = useStreaming(content || children || '', streaming);
@@ -55,8 +58,6 @@ const XMarkdown: React.FC<XMarkdownProps> = (props) => {
   }, [streaming?.hasNextChunk, output, footer]);
 
   // ============================ Render ============================
-  if (!displayContent) return null;
-
   const parser = new Parser({
     markedConfig: config,
     paragraphTag,
@@ -70,20 +71,34 @@ const XMarkdown: React.FC<XMarkdownProps> = (props) => {
     },
   });
 
-  const renderer = new Renderer({
-    components: components,
-    dompurifyConfig,
-    streaming,
-  });
+  const renderer = useMemo(
+    () =>
+      new Renderer({
+        components: components,
+        dompurifyConfig,
+        streaming,
+      }),
+    [components, dompurifyConfig, streaming],
+  );
 
-  const htmlString = parser.parse(displayContent);
+  const htmlString = useMemo(() => {
+    if (!displayContent) {
+      return '';
+    }
+
+    return parser.parse(displayContent);
+  }, [displayContent, parser]);
+
+  if (!displayContent) {
+    return null;
+  }
 
   return (
     <div className={mergedCls} style={mergedStyle}>
       {renderer.render(htmlString)}
     </div>
   );
-};
+});
 
 if (process.env.NODE_ENV !== 'production') {
   XMarkdown.displayName = 'XMarkdown';

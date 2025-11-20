@@ -22,7 +22,6 @@ export enum StreamCacheTokenType {
   Text = 'text',
   Link = 'link',
   Image = 'image',
-  Heading = 'heading',
   Html = 'html',
   Emphasis = 'emphasis',
   List = 'list',

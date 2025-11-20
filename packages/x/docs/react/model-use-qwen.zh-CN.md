@@ -3,6 +3,7 @@ group:
   title: 模型接入
   order: 1
 title: 通义千问
+tag: Updated
 order: 1
 ---
 

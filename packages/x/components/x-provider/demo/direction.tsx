@@ -64,9 +64,7 @@ export default () => {
                       role: 'user',
                       placement: 'end',
                       content: 'Hello Ant Design X!',
-                      components: {
-                        avatar: <UserOutlined />,
-                      },
+                      avatar: <UserOutlined />,
                     },
                     {
                       key: '2',

@@ -53,7 +53,7 @@ export interface MessageInfo<Message extends SimpleType> {
   id: number | string;
   message: Message;
   status: MessageStatus;
-  extra?: AnyObject;
+  extraInfo?: AnyObject;
 }
 
 export type DefaultMessageInfo<Message extends SimpleType> = Pick<MessageInfo<Message>, 'message'> &
@@ -108,14 +108,14 @@ export default function useXChat<
     conversationKey,
   );
 
-  const createMessage = (message: ChatMessage, status: MessageStatus, extra?: AnyObject) => {
+  const createMessage = (message: ChatMessage, status: MessageStatus, extraInfo?: AnyObject) => {
     const msg: MessageInfo<ChatMessage> = {
       id: `msg_${idRef.current}`,
       message,
       status,
     };
-    if (extra) {
-      msg.extra = extra;
+    if (extraInfo) {
+      msg.extraInfo = extraInfo;
     }
     idRef.current += 1;
 
@@ -163,7 +163,7 @@ export default function useXChat<
     opts?: {
       updatingId?: number | string;
       reload?: boolean;
-      extra?: AnyObject;
+      extraInfo?: AnyObject;
     },
   ) => {
     if (!provider) {
@@ -173,7 +173,7 @@ export default function useXChat<
     let loadingMsgId: number | string | null | undefined = null;
     const localMessage = provider.transformLocalMessage(requestParams);
     const messages = (Array.isArray(localMessage) ? localMessage : [localMessage]).map((message) =>
-      createMessage(message, 'local', opts?.extra),
+      createMessage(message, 'local', opts?.extraInfo),
     );
     if (reload) {
       loadingMsgId = updatingId;
@@ -196,8 +196,8 @@ export default function useXChat<
             if (info.id === updatingId) {
               info.status = 'loading';
               info.message = placeholderMsg;
-              if (opts?.extra) {
-                info.extra = opts?.extra;
+              if (opts?.extraInfo) {
+                info.extraInfo = opts?.extraInfo;
               }
             }
           });
@@ -353,7 +353,7 @@ export default function useXChat<
     provider.request.run(provider.transformParams(requestParams, provider.request.options));
   };
 
-  const onRequest = useEvent((requestParams: Partial<Input>, opts?: { extra: AnyObject }) => {
+  const onRequest = useEvent((requestParams: Partial<Input>, opts?: { extraInfo: AnyObject }) => {
     if (!provider) {
       throw new Error('provider is required');
     }
@@ -363,7 +363,7 @@ export default function useXChat<
   const onReload = (
     id: string | number,
     requestParams: Partial<Input>,
-    opts?: { extra: AnyObject },
+    opts?: { extraInfo: AnyObject },
   ) => {
     if (!provider) {
       throw new Error('provider is required');
@@ -374,7 +374,7 @@ export default function useXChat<
     innerOnRequest(requestParams, {
       updatingId: id,
       reload: true,
-      extra: opts?.extra,
+      extraInfo: opts?.extraInfo,
     });
   };
 

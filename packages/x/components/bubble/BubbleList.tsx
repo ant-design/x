@@ -40,7 +40,7 @@ const BubbleListItem: React.FC<
   const {
     _key,
     bubblesRef,
-    extra,
+    extraInfo,
     status,
     role,
     classNames = {},
@@ -107,7 +107,9 @@ const BubbleListItem: React.FC<
   }
 
   return (
-    <BubbleContext.Provider value={{ key: _key, status, extra }}>{bubble}</BubbleContext.Provider>
+    <BubbleContext.Provider value={{ key: _key, status, extraInfo }}>
+      {bubble}
+    </BubbleContext.Provider>
   );
 };
 

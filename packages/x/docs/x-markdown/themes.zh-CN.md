@@ -63,20 +63,30 @@ packages/x-markdown/src/themes/
 /* 基础容器 */
 .x-markdown-主题名 {
   /* 基础样式变量 */
-  --x-markdown-color-text: #333;
-  --x-markdown-color-bg: #fff;
-  --x-markdown-color-border: #e8e8e8;
-
-  /* 代码块样式 */
-  --x-markdown-color-code-bg: #f5f5f5;
-  --x-markdown-color-code-text: #333;
-
-  /* 标题样式 */
-  --x-markdown-color-heading: #262626;
-
-  /* 链接样式 */
-  --x-markdown-color-link: #1890ff;
-  --x-markdown-color-link-hover: #40a9ff;
+  --font-size: 14px;
+  --primary-color: #1677ff;
+  --primary-color-hover: #4096ff;
+  --heading-color: #000000;
+  --text-color: rgba(0, 0, 0, 0.85);
+  --border-color: rgba(240, 240, 240, 1);
+  --line-color: rgba(5, 5, 5, 0.06);
+  --light-bg: rgba(0, 0, 0, 0.04);
+  --table-head-bg: rgba(250, 250, 250, 1);
+  --table-body-bg: rgba(255, 255, 255, 1);
+  --cite-bg: rgba(0, 0, 0, 0.1);
+  --cite-hover-bg: rgba(0, 0, 0, 0.2);
+  --border-radius-middle: 6px;
+  --border-radius-small: 4px;
+  --td-th-padding: 10px 12px;
+  --border-font-weight: 600;
+  --margin-block: 0 0 16px 0;
+  --padding-ul-ol: 0 0 0 16px;
+  --margin-ul-ol: 0 0 16px 28px;
+  --margin-li: 0 0 14px 0;
+  --hr-margin: 24px 0;
+  --table-margin: 0 0 24px 0;
+  --margin-pre: 0 0 16px 0;
+  --padding-code: 16px;
 }
 
 /* 代码块高亮 */

@@ -53,7 +53,7 @@ describe('useXChat', () => {
                 query: e.target.value,
               } as Input,
               {
-                extra: {
+                extraInfo: {
                   feedback: 'like',
                 },
               },
@@ -242,7 +242,7 @@ describe('useXChat', () => {
         'key1',
         { query: 'Hello' },
         {
-          extra: {
+          extraInfo: {
             feedback: 'dislike',
           },
         },
@@ -257,7 +257,7 @@ describe('useXChat', () => {
         defaultMessages: [{ message: 'Hello' }],
       }),
     );
-    result.current?.setMessage('default_0', { message: 'Hello2', extra: { feedback: 'like' } });
+    result.current?.setMessage('default_0', { message: 'Hello2', extraInfo: { feedback: 'like' } });
     result.current?.setMessage('default_1', { message: 'Hello3' });
     await sleep(100);
     expect(result.current?.messages.length).toBe(1);
@@ -303,7 +303,7 @@ describe('useXChat', () => {
       ref.current.parsedMessages[1].id,
       {},
       {
-        extra: {
+        extraInfo: {
           feedback: 'dislike',
         },
       },

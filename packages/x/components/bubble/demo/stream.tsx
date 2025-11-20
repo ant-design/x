@@ -81,10 +81,8 @@ const App = () => {
 
   const props = useMemo(
     () => ({
-      components: {
-        header: <h5>ADX</h5>,
-        avatar: <Avatar icon={<UserOutlined />} />,
-      },
+      header: <h5>ADX</h5>,
+      avatar: <Avatar icon={<UserOutlined />} />,
       // 动画函数的更新会使得动画重新触发，应该保证动画函数稳定。
       onTyping: () => console.log('typing'),
       onTypingComplete: () => {

@@ -5,126 +5,56 @@ import '@ant-design/x-markdown/themes/light.css';
 import '@ant-design/x-markdown/themes/dark.css';
 
 const content = `
-# h1 Heading 
-## h2 Heading
-### h3 Heading
-#### h4 Heading
-##### h5 Heading
-###### h6 Heading
+# Ant Design X: The Ultimate AI Conversation UI Framework
 
+> "Easily build AI-driven interfaces"
+>
+> — Ant Design X Team
 
-## Horizontal Rules
+## ✨ Features
 
-___
+- 🌈 Best practices from enterprise-level AI products: Based on RICH interaction paradigms, providing excellent AI interaction experience
+- 🧩 Flexible atomic components: Covering most AI scenarios, helping you quickly build personalized AI interaction pages
+- ✨ Stream-friendly, extensible, and high-performance Markdown renderer: Supports streaming formulas, code highlighting, mermaid diagrams, etc.
+- 🚀 Out-of-the-box model/agent integration: Easily connect to OpenAI-compatible model/agent services
+- ⚡️ Efficient management of large model data streams: Provides handy data stream management features for more efficient development
+- 📦 Rich template support: Multiple templates for quick LUI app development
+- 🛡 Full TypeScript coverage: Developed with TypeScript, providing complete type support for better experience and reliability
+- 🎨 Deep theme customization: Fine-grained style adjustments for personalized needs in various scenarios
 
----
+## 🧩 Atomic Components
 
-***
+Based on the RICH interaction paradigm, we provide many atomic components for different interaction stages to help you flexibly build your AI application:
 
+### Core Components
+- **Bubble**: Message bubble for displaying chat messages
+- **Bubble.List**: Virtualized message list for handling large datasets
+- **Sender**: Input box for sending messages
+- **Conversations**: Conversation history management
+- **Welcome**: Welcome screen component
 
-## Emphasis
+### Input Components
+- **Prompts**: Quick suggestion prompts
+- **Attachments**: File upload and preview
 
-**This is bold text**
+### Display Components
+- **ThoughtChain**: AI reasoning process display
+- **Sources**: Reference and citation display
+- **FileCard**: File preview cards
 
-__This is bold text__
+## 🔗 Ecosystem
 
-*This is italic text*
+### Related Packages
+- **@ant-design/x-markdown**: Advanced markdown rendering with streaming support
+- **@ant-design/x-sdk**: AI model integration and data stream management
 
-_This is italic text_
+### Framework Integrations
+- **Next.js**: Server-side rendering support
+- **Vite**: Fast development experience
+- **Create React App**: Zero configuration setup
+- **Umi**: Enterprise-grade framework
 
-~~Strikethrough~~
-
-
-## Blockquotes
-
-
-> Blockquotes can also be nested...
->> ...by using additional greater-than signs right next to each other...
-> > > ...or with spaces between arrows.
-
-
-## Lists
-
-Unordered
-
-+ Create a list by starting a line with \`+\`, \`-\`, or \`*\`
-+ Sub-lists are made by indenting 2 spaces:
-  - Marker character change forces new list start:
-    * Ac tristique libero volutpat at
-    + Facilisis in pretium nisl aliquet
-    - Nulla volutpat aliquam velit
-+ Very easy!
-
-Ordered
-
-1. Lorem ipsum dolor sit amet
-2. Consectetur adipiscing elit
-3. Integer molestie lorem at massa
-
-
-1. You can use sequential numbers...
-1. ...or keep all the numbers as \`1.\`
-
-Start numbering with offset:
-
-57. foo
-1. bar
-
-
-## Code
-
-Inline \`code\`
-
-Indented code
-
-    // Some comments
-    line 1 of code
-    line 2 of code
-    line 3 of code
-
-
-Block code "fences"
-
-\`\`\`
-Sample text here...
-\`\`\`
-
-## Tables
-
-| Option | Description |
-| ------ | ----------- |
-| data   | path to data files to supply the data that will be passed into templates. |
-| engine | engine to be used for processing templates. Handlebars is the default. |
-| ext    | extension to be used for dest files. |
-
-Right aligned columns
-
-| Option | Description |
-| ------:| -----------:|
-| data   | path to data files to supply the data that will be passed into templates. |
-| engine | engine to be used for processing templates. Handlebars is the default. |
-| ext    | extension to be used for dest files. |
-
-
-## Links
-
-[link text](http://dev.nodeca.com)
-
-[link with title](http://nodeca.github.io/pica/demo/ "title text!")
-
-Autoconverted link https://github.com/nodeca/pica
-
-
-## Images
-
-![Minion](https://octodex.github.com/images/minion.png)
-![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat")
-
-Like links, Images also have a footnote style syntax
-
-![Alt text][id]
-
-[id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
+> Ant Design X is more than just a component library—it's a complete solution for building the next generation of AI-powered applications. Start building today and create experiences that delight your users.
 `;
 
 const App: React.FC = () => {

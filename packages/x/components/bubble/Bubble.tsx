@@ -33,7 +33,10 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
     streaming = false,
     variant = 'filled',
     shape = 'default',
-    components,
+    header,
+    footer,
+    avatar,
+    extra,
     footerPlacement,
     loading,
     loadingRender,
@@ -95,11 +98,11 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
     data: true,
   });
 
-  const info = { key: context?.key, status: context?.status, extra: context?.extra };
+  const info = { key: context?.key, status: context?.status, extraInfo: context?.extraInfo };
   // ============================= process content ==============================
   const memoedContent = React.useMemo(
     () => (contentRender ? contentRender(content, info) : content),
-    [content, contentRender, info.key, info.status, info.extra],
+    [content, contentRender, info.key, info.status, info.extraInfo],
   );
 
   const mergeTyping = typeof typing === 'function' ? typing(content, info) : typing;
@@ -205,41 +208,41 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
     typeof slot === 'function' ? slot(content, info) : slot;
 
   const renderAvatar = () => {
-    if (!components?.avatar) return null;
+    if (!avatar) return null;
     return (
       <div className={getSlotClassName('avatar')} style={getSlotStyle('avatar')}>
-        {renderSlot(components.avatar)}
+        {renderSlot(avatar)}
       </div>
     );
   };
 
   const renderExtra = () => {
-    if (!components?.extra) return null;
+    if (!extra) return null;
     return (
       <div className={getSlotClassName('extra')} style={getSlotStyle('extra')}>
-        {renderSlot(components.extra)}
+        {renderSlot(extra)}
       </div>
     );
   };
 
   const renderHeader = () => {
-    if (!components?.header) return null;
+    if (!header) return null;
     return (
       <div className={getSlotClassName('header')} style={getSlotStyle('header')}>
-        {renderSlot(components.header)}
+        {renderSlot(header)}
       </div>
     );
   };
 
   const renderFooter = () => {
-    if (!components?.footer) return null;
+    if (!footer) return null;
     const cls = classnames(getSlotClassName('footer'), {
       [`${prefixCls}-footer-start`]: _footerPlacement.includes('start'),
       [`${prefixCls}-footer-end`]: _footerPlacement.includes('end'),
     });
     return (
       <div className={cls} style={getSlotStyle('footer')}>
-        {renderSlot(components.footer)}
+        {renderSlot(footer)}
       </div>
     );
   };

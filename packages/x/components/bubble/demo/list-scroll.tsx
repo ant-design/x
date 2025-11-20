@@ -66,19 +66,15 @@ const App = () => {
     () => ({
       ai: {
         typing: true,
-        components: {
-          header: 'AI',
-          avatar: () => <Avatar icon={<AntDesignOutlined />} />,
-          footer: (content) => <Actions items={actionItems} onClick={() => console.log(content)} />,
-        },
+        header: 'AI',
+        avatar: () => <Avatar icon={<AntDesignOutlined />} />,
+        footer: (content) => <Actions items={actionItems} onClick={() => console.log(content)} />,
       },
       user: {
         placement: 'end',
         typing: false,
-        components: {
-          header: 'User',
-          avatar: () => <Avatar icon={<UserOutlined />} />,
-        },
+        header: 'User',
+        avatar: () => <Avatar icon={<UserOutlined />} />,
       },
     }),
     [],

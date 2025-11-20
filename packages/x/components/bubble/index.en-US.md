@@ -61,7 +61,10 @@ Common Props Reference: [Common Props](/docs/react/common-props)
 | variant | Bubble style variant | `filled` \| `outlined` \| `shadow` \| `borderless` | `filled` | - |
 | shape | Bubble shape | `default` \| `round` \| `corner` | `default` | - |
 | footerPlacement | Footer slot position | `outer-start` \| `outer-end` \| `inner-start` \| `inner-end` | `outer-start` | - |
-| components | Slot configuration | { header?: [BubbleSlot](#bubbleslot); footer?: BubbleSlot; avatar?: BubbleSlot; extra?: BubbleSlot; } | - | - |
+| header | Header slot | [BubbleSlot](#bubbleslot) | - | - |
+| footer | Footer slot | [BubbleSlot](#bubbleslot) | - | - |
+| avatar | Avatar slot | [BubbleSlot](#bubbleslot) | - | - |
+| extra | Extra slot | [BubbleSlot](#bubbleslot) | - | - |
 | onTyping | Typing animation callback | (rendererContent: string, currentContent: string) => void | - | - |
 | onTypingComplete | Typing animation complete callback | (content: string) => void | - | - |
 | onEditing | Callback when content changes in editing mode | (content: string) => void | - | - |
@@ -151,7 +154,7 @@ In [this example](#bubble-demo-stream), you can try to force the streaming flag 
 
 | Attribute | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| items | Bubble data list, `key` and `role` required. When used with X SDK [`useXChat`](/x-sdks/use-x-chat), you can pass `status` to help Bubble manage configuration | (BubbleProps & { key: string \| number, role: string , status: MessageStatus, extra?: AnyObject })[] | - | - |
+| items | Bubble data list, `key` and `role` required. When used with X SDK [`useXChat`](/x-sdks/use-x-chat), you can pass `status` to help Bubble manage configuration | (BubbleProps & { key: string \| number, role: string , status: MessageStatus, extraInfo?: AnyObject })[] | - | - |
 | autoScroll | Auto-scroll | boolean | `true` | - |
 | role | Role default configuration | [RoleType](#roletype) | - | - |
 
@@ -163,13 +166,13 @@ type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error' | 'a
 
 #### InfoType
 
-When used in conjunction with [`useXChat`](/x-sdks/use-x-chat), `key` can be used as `MessageId`,and `extra` can be used as a custom parameter.
+When used in conjunction with [`useXChat`](/x-sdks/use-x-chat), `key` can be used as `MessageId`,and `extraInfo` can be used as a custom parameter.
 
 ```typescript
 type InfoType = {
   status?: MessageStatus;
   key?: string | number;
-  extra?: AnyObject;
+  extraInfo?: AnyObject;
 };
 ```
 
@@ -191,7 +194,10 @@ export type RoleProps = Pick<
   | 'loadingRender'
   | 'contentRender'
   | 'footerPlacement'
-  | 'components'
+  | 'header'
+  | 'footer'
+  | 'avatar'
+  | 'extra'
   | 'editable'
   | 'onTyping'
   | 'onTypingComplete'
