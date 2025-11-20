@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import XMarkdown from '../../../XMarkdown';
 import HighlightCode from '..';
@@ -176,5 +176,39 @@ plain text
     );
     expect(container.querySelector('pre')).toBeInTheDocument();
     expect(container.textContent).toContain('plain text');
+  });
+
+  it('should handle copy action click', async () => {
+    const content = `\`\`\`javascript
+console.log("test copy");
+\`\`\``;
+    const mockClipboard = {
+      writeText: jest.fn().mockResolvedValue(undefined),
+    };
+
+    Object.defineProperty(navigator, 'clipboard', {
+      writable: true,
+      value: mockClipboard,
+    });
+
+    render(
+      <XMarkdown
+        content={content}
+        components={{
+          code: (props: Record<string, any>) => {
+            const { class: className, children } = props;
+            const lang = className?.match(/language-(\w+)/)?.[1] || '';
+            return <HighlightCode lang={lang}>{children}</HighlightCode>;
+          },
+        }}
+      />,
+    );
+
+    const copyButton = screen.getByRole('img', { name: 'copy' });
+    fireEvent.click(copyButton);
+
+    await waitFor(() => {
+      expect(mockClipboard.writeText).toHaveBeenCalledWith('console.log("test copy");');
+    });
   });
 });
