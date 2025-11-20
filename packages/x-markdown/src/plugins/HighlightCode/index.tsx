@@ -1,5 +1,5 @@
 import useXComponentConfig from '@ant-design/x/es/_util/hooks/use-x-component-config';
-import Acitons from '@ant-design/x/es/actions';
+import Actions from '@ant-design/x/es/actions';
 import useLocale from '@ant-design/x/es/locale/useLocale';
 import useXProviderContext from '@ant-design/x/es/x-provider/hooks/use-x-provider-context';
 import locale_EN from '@ant-design/x/locale/en_US';
@@ -99,7 +99,7 @@ const HighlightCode: React.FC<HighlightCodeProps> = (props) => {
         >
           {lang}
         </span>
-        <Acitons.Copy text={contextLocale.copy} onClick={handleCopyCode} />
+        <Actions.Copy text={contextLocale.copy} onClick={handleCopyCode} />
       </div>
     );
   };

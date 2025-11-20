@@ -1,6 +1,6 @@
 import { CopyOutlined, DownloadOutlined, ZoomInOutlined, ZoomOutOutlined } from '@ant-design/icons';
 import useXComponentConfig from '@ant-design/x/es/_util/hooks/use-x-component-config';
-import Acitons from '@ant-design/x/es/actions';
+import Actions from '@ant-design/x/es/actions';
 import { ItemType } from '@ant-design/x/es/actions/interface';
 import useLocale from '@ant-design/x/es/locale/useLocale';
 import useXProviderContext from '@ant-design/x/es/x-provider/hooks/use-x-provider-context';
@@ -295,7 +295,7 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
           value={renderType}
           onChange={setRenderType}
         />
-        <Acitons items={items} />
+        <Actions items={items} />
       </div>
     );
   };
