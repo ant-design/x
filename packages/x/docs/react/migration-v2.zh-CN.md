@@ -17,13 +17,14 @@ title: 从 v1 到 v2
 
 ### 运行时相关工具迁移到 `@ant-design/x-sdk`，并进行了全面重构
 
-1、删除了 `useXAgent` 用于模型调度的 Agent 钩子，同时升级了 `useXChat` 作为会话数据管理的钩子工具，用于产出供页面渲染需要的数据，整个实现逻辑都做了重构需要根据新的文档对代码进行修改。
+1. 删除了 `useXAgent` 用于模型调度的 Agent 钩子，同时升级了 `useXChat` 作为会话数据管理的钩子工具，用于产出供页面渲染需要的数据，整个实现逻辑都做了重构需要根据新的文档对代码进行修改。
+2. 新增 `useXConversations` 会话列表管理的钩子，提供包括会话创建、删除、更新等操作，多会话保持等能力。
+3. 新增 `Chat Provider` 接口实现为 useXChat 提供统一的请求管理和数据格式转换。
 
-2、新增 `useXConversations` 会话列表管理的钩子，提供包括会话创建、删除、更新等操作，多会话保持等能力。
+### Bubble 的不兼容变更
 
-3、新增 `Chat Provider` 接口实现为 useXChat 提供统一的请求管理和数据格式转换。
-
-### Bubble
+1. 将 `avatar`、`footer`、`header` 属性迁移到 `components` 统一配置，并新增了 `extra` 属性用于配置额外的组件，同时提供了 `footerPlacement` 可控制底部组件的位置。
+2.
 
 ### Bubble.List
 
