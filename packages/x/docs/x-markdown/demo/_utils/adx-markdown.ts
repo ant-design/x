@@ -70,7 +70,7 @@ Ant Design X 是一款AI应用复合工具集，融合了 UI 组件库、流式 
 npm install @ant-design/x --save  # React 版本
 \`\`\`
 
-## @ant-design/-sdk
+## @ant-design/x-sdk
 
 ### 特性
 

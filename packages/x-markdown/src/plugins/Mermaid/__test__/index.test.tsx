@@ -135,7 +135,7 @@ describe('Mermaid Plugin', () => {
 
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const copyButton = screen.getByRole('button', { name: 'copy' });
+      const copyButton = screen.getByRole('img', { name: 'copy' });
       fireEvent.click(copyButton);
 
       await waitFor(() => {
@@ -154,7 +154,7 @@ describe('Mermaid Plugin', () => {
 
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const copyButton = screen.getByRole('button', { name: 'copy' });
+      const copyButton = screen.getByRole('img', { name: 'copy' });
 
       // 确保点击不会抛出错误
       expect(() => fireEvent.click(copyButton)).not.toThrow();
@@ -177,7 +177,7 @@ describe('Mermaid Plugin', () => {
 
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const copyButton = screen.getByRole('button', { name: 'copy' });
+      const copyButton = screen.getByRole('img', { name: 'copy' });
       fireEvent.click(copyButton);
 
       await waitFor(() => {
@@ -192,23 +192,23 @@ describe('Mermaid Plugin', () => {
     it('should show zoom controls only in image mode', () => {
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      expect(screen.getByRole('button', { name: 'zoom-in' })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: 'zoom-out' })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: 'Reset' })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: 'download' })).toBeInTheDocument();
+      expect(screen.getByRole('img', { name: 'zoom-in' })).toBeInTheDocument();
+      expect(screen.getByRole('img', { name: 'zoom-out' })).toBeInTheDocument();
+      expect(screen.getByRole('img', { name: 'undo' })).toBeInTheDocument();
+      expect(screen.getByRole('img', { name: 'download' })).toBeInTheDocument();
 
       const codeButton = screen.getByText('Code');
       fireEvent.click(codeButton);
 
-      expect(screen.queryByRole('button', { name: 'zoom-in' })).not.toBeInTheDocument();
-      expect(screen.queryByRole('button', { name: 'zoom-out' })).not.toBeInTheDocument();
+      expect(screen.queryByRole('img', { name: 'zoom-in' })).not.toBeInTheDocument();
+      expect(screen.queryByRole('img', { name: 'zoom-out' })).not.toBeInTheDocument();
     });
 
     it('should handle zoom in/out', () => {
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const zoomInButton = screen.getByRole('button', { name: 'zoom-in' });
-      const zoomOutButton = screen.getByRole('button', { name: 'zoom-out' });
+      const zoomInButton = screen.getByRole('img', { name: 'zoom-in' });
+      const zoomOutButton = screen.getByRole('img', { name: 'zoom-out' });
 
       fireEvent.click(zoomInButton);
       fireEvent.click(zoomOutButton);
@@ -217,7 +217,7 @@ describe('Mermaid Plugin', () => {
     it('should handle reset functionality', () => {
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const resetButton = screen.getByRole('button', { name: 'Reset' });
+      const resetButton = screen.getByRole('img', { name: 'undo' });
       fireEvent.click(resetButton);
     });
   });
@@ -500,7 +500,7 @@ describe('Mermaid Plugin', () => {
         container.querySelector = mockQuerySelector;
       }
 
-      const downloadButton = screen.getByRole('button', { name: 'download' });
+      const downloadButton = screen.getByRole('img', { name: 'download' });
       fireEvent.click(downloadButton);
 
       // Wait for async operations
@@ -542,7 +542,7 @@ describe('Mermaid Plugin', () => {
         container.querySelector = mockQuerySelector;
       }
 
-      const downloadButton = screen.getByRole('button', { name: 'download' });
+      const downloadButton = screen.getByRole('img', { name: 'download' });
       fireEvent.click(downloadButton);
 
       // Should not throw and should return early
