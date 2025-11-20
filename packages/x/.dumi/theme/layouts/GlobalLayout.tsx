@@ -104,7 +104,7 @@ const GlobalLayout: React.FC = () => {
     }
   }, [theme.length, isIndexPage]);
 
-  const [alertVisible, setAlertVisible] = useState(!location.pathname.includes('~demos'));
+  const [alertVisible, setAlertVisible] = useState(!pathname?.includes?.('~demos'));
 
   useEffect(() => {
     const _theme = searchParams.getAll('theme') as ThemeName[];
