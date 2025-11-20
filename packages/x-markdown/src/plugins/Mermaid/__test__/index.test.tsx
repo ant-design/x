@@ -2,6 +2,13 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import Mermaid from '../index';
 
+const getActionButtonByLabel = (label: string): HTMLElement => {
+  const icon = screen.getByLabelText(label);
+  const button = icon.closest('.ant-actions-item');
+  if (!button) throw new Error(`Action button with label '${label}' not found.`);
+  return button as HTMLElement;
+};
+
 // Mock mermaid
 jest.mock('mermaid', () => ({
   initialize: jest.fn(),
@@ -135,7 +142,7 @@ describe('Mermaid Plugin', () => {
 
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const copyButton = screen.getByRole('button', { name: 'copy' });
+      const copyButton = getActionButtonByLabel('copy');
       fireEvent.click(copyButton);
 
       await waitFor(() => {
@@ -154,7 +161,7 @@ describe('Mermaid Plugin', () => {
 
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const copyButton = screen.getByRole('button', { name: 'copy' });
+      const copyButton = getActionButtonByLabel('copy');
 
       // 确保点击不会抛出错误
       expect(() => fireEvent.click(copyButton)).not.toThrow();
@@ -177,7 +184,7 @@ describe('Mermaid Plugin', () => {
 
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const copyButton = screen.getByRole('button', { name: 'copy' });
+      const copyButton = getActionButtonByLabel('copy');
       fireEvent.click(copyButton);
 
       await waitFor(() => {
@@ -192,23 +199,23 @@ describe('Mermaid Plugin', () => {
     it('should show zoom controls only in image mode', () => {
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      expect(screen.getByRole('button', { name: 'zoom-in' })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: 'zoom-out' })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: 'Reset' })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: 'download' })).toBeInTheDocument();
+      expect(screen.getByLabelText('zoom-in')).toBeInTheDocument();
+      expect(screen.getByLabelText('zoom-out')).toBeInTheDocument();
+      expect(screen.getByLabelText('undo')).toBeInTheDocument();
+      expect(screen.getByLabelText('download')).toBeInTheDocument();
 
       const codeButton = screen.getByText('Code');
       fireEvent.click(codeButton);
 
-      expect(screen.queryByRole('button', { name: 'zoom-in' })).not.toBeInTheDocument();
-      expect(screen.queryByRole('button', { name: 'zoom-out' })).not.toBeInTheDocument();
+      expect(screen.queryByLabelText('zoom-in')).not.toBeInTheDocument();
+      expect(screen.queryByLabelText('zoom-out')).not.toBeInTheDocument();
     });
 
     it('should handle zoom in/out', () => {
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const zoomInButton = screen.getByRole('button', { name: 'zoom-in' });
-      const zoomOutButton = screen.getByRole('button', { name: 'zoom-out' });
+      const zoomInButton = getActionButtonByLabel('zoom-in');
+      const zoomOutButton = getActionButtonByLabel('zoom-out');
 
       fireEvent.click(zoomInButton);
       fireEvent.click(zoomOutButton);
@@ -217,7 +224,7 @@ describe('Mermaid Plugin', () => {
     it('should handle reset functionality', () => {
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const resetButton = screen.getByRole('button', { name: 'Reset' });
+      const resetButton = getActionButtonByLabel('undo');
       fireEvent.click(resetButton);
     });
   });
@@ -500,7 +507,7 @@ describe('Mermaid Plugin', () => {
         container.querySelector = mockQuerySelector;
       }
 
-      const downloadButton = screen.getByRole('button', { name: 'download' });
+      const downloadButton = getActionButtonByLabel('download');
       fireEvent.click(downloadButton);
 
       // Wait for async operations
@@ -542,7 +549,7 @@ describe('Mermaid Plugin', () => {
         container.querySelector = mockQuerySelector;
       }
 
-      const downloadButton = screen.getByRole('button', { name: 'download' });
+      const downloadButton = getActionButtonByLabel('download');
       fireEvent.click(downloadButton);
 
       // Should not throw and should return early
