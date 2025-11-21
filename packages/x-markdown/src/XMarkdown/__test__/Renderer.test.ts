@@ -1133,4 +1133,22 @@ describe('Renderer', () => {
       createElementSpy.mockClear();
     });
   });
+
+  describe('Renderer when window is undefined', () => {
+    it('use safeSanitize when window is undefined', () => {
+      const originalWindow = global.window;
+
+      // @ts-ignore
+      delete global.window;
+
+      const renderer = new Renderer({});
+
+      const testHtml = '<div><script>alert("xss")</script>content</div>';
+      const result = (renderer as any).safeSanitize(testHtml, {});
+
+      expect(result).toBe(testHtml);
+
+      global.window = originalWindow;
+    });
+  });
 });
