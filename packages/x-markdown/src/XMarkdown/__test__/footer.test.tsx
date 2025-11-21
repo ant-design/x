@@ -18,10 +18,10 @@ describe('XMarkdown Footer', () => {
     );
 
     const markdownContainer = container.firstChild;
-    expect(markdownContainer).toHaveClass('ant-x-markdown-container');
+    expect(markdownContainer).toHaveClass('x-markdown');
 
-    const content = container.querySelector('.ant-x-markdown-content');
-    const footer = container.querySelector('.ant-x-markdown-footer');
+    const content = container.querySelector('.x-markdown-content');
+    const footer = container.querySelector('.x-markdown-footer');
 
     expect(content).toBeInTheDocument();
     expect(footer).toBeInTheDocument();
@@ -31,7 +31,7 @@ describe('XMarkdown Footer', () => {
   it('should not render footer when not provided', () => {
     const { container } = render(<XMarkdown content="# Hello World" />);
 
-    expect(container.querySelector('.ant-x-markdown-footer')).not.toBeInTheDocument();
+    expect(container.querySelector('.x-markdown-footer')).not.toBeInTheDocument();
   });
 
   it('should render footer with empty content', () => {
@@ -95,21 +95,20 @@ describe('XMarkdown Footer', () => {
     const footerContent = <div style={{ color: 'red' }}>Styled Footer</div>;
     const { container } = render(<XMarkdown content="# Test" footer={footerContent} />);
 
-    const footer = container.querySelector('.ant-x-markdown-footer');
+    const footer = container.querySelector('.x-markdown-footer');
     expect(footer).toBeInTheDocument();
     // Check CSS classes instead of computed styles
-    expect(footer).toHaveClass('ant-x-markdown-footer');
+    expect(footer).toHaveClass('x-markdown-footer');
   });
 
   it('should work with custom prefixCls', () => {
     const footerContent = <div data-testid="custom-prefix-footer">Custom Prefix</div>;
     const { container } = render(
-      <XMarkdown content="# Test" footer={footerContent} prefixCls="custom-markdown" />,
+      <XMarkdown content="# Test" footer={footerContent} prefixCls="custom" />,
     );
 
-    expect(container.querySelector('.custom-markdown-container')).toBeInTheDocument();
-    expect(container.querySelector('.custom-markdown-content')).toBeInTheDocument();
-    expect(container.querySelector('.custom-markdown-footer')).toBeInTheDocument();
+    expect(container.querySelector('.custom .x-markdown-content')).toBeInTheDocument();
+    expect(container.querySelector('.custom .x-markdown-footer')).toBeInTheDocument();
   });
 
   it('should not render anything when both content and footer are empty', () => {

@@ -3,11 +3,11 @@
 exports[`XMarkdown animation parent is custom components 1`] = `
 <div>
   <div
-    class="ant-x-markdown-container ant-x-markdown x-markdown"
+    class="ant-x-markdown x-markdown"
     style="direction: ltr;"
   >
     <div
-      class="ant-x-markdown-content"
+      class="x-markdown-content"
     >
       <p>
         This is Text.
@@ -20,11 +20,11 @@ exports[`XMarkdown animation parent is custom components 1`] = `
 exports[`XMarkdown animation parent is not custom components 1`] = `
 <div>
   <div
-    class="ant-x-markdown-container ant-x-markdown x-markdown"
+    class="ant-x-markdown x-markdown"
     style="direction: ltr;"
   >
     <div
-      class="ant-x-markdown-content"
+      class="x-markdown-content"
     >
       <p>
         <span
@@ -41,11 +41,11 @@ exports[`XMarkdown animation parent is not custom components 1`] = `
 exports[`XMarkdown support checkbox is checked 1`] = `
 <div>
   <div
-    class="ant-x-markdown-container ant-x-markdown x-markdown"
+    class="ant-x-markdown x-markdown"
     style="direction: ltr;"
   >
     <div
-      class="ant-x-markdown-content"
+      class="x-markdown-content"
     >
       <ul>
         <li>
@@ -65,11 +65,11 @@ exports[`XMarkdown support checkbox is checked 1`] = `
 exports[`XMarkdown support checkbox not checked 1`] = `
 <div>
   <div
-    class="ant-x-markdown-container ant-x-markdown x-markdown"
+    class="ant-x-markdown x-markdown"
     style="direction: ltr;"
   >
     <div
-      class="ant-x-markdown-content"
+      class="x-markdown-content"
     >
       <ul>
         <li>
