@@ -99,7 +99,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   // ============================ State =============================
 
   const [slotConfigMap, __, currentSlotConfig, getSlotValues, setSlotValues, setSlotConfigMap] =
-    useSlotConfigState(slotConfigRef.current);
+    useSlotConfigState(slotConfig || []);
 
   const [slotPlaceholders, setSlotPlaceholders] = useState<Map<string, React.ReactNode>>(new Map());
 
@@ -242,7 +242,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     return createPortal(renderContent(), slotSpan);
   };
 
-  const getSlotListNode = (slotConfig: SlotConfigType[]): SlotNode[] => {
+  const getSlotListNode = (slotConfig: readonly SlotConfigType[]): SlotNode[] => {
     return slotConfig.reduce((nodeList, config) => {
       if (config.type === 'text') {
         nodeList.push(document.createTextNode(config.value || ''));
@@ -711,7 +711,13 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     selection.removeAllRanges();
     selection.addRange(range);
   };
-
+  const initClear = () => {
+    const div = editableRef.current;
+    if (!div) return;
+    div.innerHTML = '';
+    slotDomMap?.current?.clear();
+    onInternalInput(null as unknown as React.FormEvent<HTMLDivElement>);
+  };
   const clear = () => {
     const div = editableRef.current;
     if (!div) return;
@@ -723,10 +729,10 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   // ============================ Effects =============================
 
   useEffect(() => {
-    if (currentSlotConfig.length === 0) return;
-    if (editableRef.current && currentSlotConfig) {
-      clear();
-      appendNodeList(getSlotListNode(currentSlotConfig) as HTMLElement[]);
+    if (slotConfig && slotConfig.length === 0) return;
+    if (editableRef.current && slotConfig) {
+      initClear();
+      appendNodeList(getSlotListNode(slotConfig) as HTMLElement[]);
       onChange?.(getEditorValue().value, undefined, getEditorValue().config);
     }
   }, [slotConfig]);

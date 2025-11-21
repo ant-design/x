@@ -3,7 +3,7 @@ import type { SlotConfigType } from '../../sender';
 import type { EditSlotConfigType } from '../interface';
 
 const buildSlotValues = (
-  slotConfig: SlotConfigType[],
+  slotConfig: readonly SlotConfigType[],
   slotConfigMap: { current: Map<string, SlotConfigType> },
   editSlotConfigMap: { current: Map<string, EditSlotConfigType> },
 ) => {
@@ -33,11 +33,11 @@ const buildSlotValues = (
 };
 
 function useSlotConfigState(
-  slotConfig: SlotConfigType[],
+  slotConfig: readonly SlotConfigType[],
 ): [
   Map<string, SlotConfigType>,
   Map<string, EditSlotConfigType>,
-  SlotConfigType[],
+  readonly SlotConfigType[],
   () => Record<string, any>,
   React.Dispatch<React.SetStateAction<Record<string, any>>>,
   (slotConfigs: SlotConfigType[]) => void,
@@ -46,7 +46,7 @@ function useSlotConfigState(
   const stateRef = useRef(state);
   const slotConfigMap = useRef<Map<string, SlotConfigType>>(new Map());
   const editSlotConfigMap = useRef<Map<string, EditSlotConfigType>>(new Map());
-  const slotConfigRef = useRef<SlotConfigType[]>(slotConfig);
+  const slotConfigRef = useRef<readonly SlotConfigType[]>(slotConfig);
 
   useEffect(() => {
     const slotValue = buildSlotValues(slotConfig, slotConfigMap, editSlotConfigMap);

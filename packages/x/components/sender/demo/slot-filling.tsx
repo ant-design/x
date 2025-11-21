@@ -29,7 +29,6 @@ const otherSlotConfig: SlotConfig = [
       defaultValue: [3000, 6000],
     },
     customRender: (value: any, onChange: (value: any) => void, props) => {
-      console.log(props, '1111');
       return (
         <div
           style={{
@@ -39,7 +38,15 @@ const otherSlotConfig: SlotConfig = [
             alignItems: 'center',
           }}
         >
-          <Slider {...props} style={{ margin: 0 }} range value={value} onChange={onChange} />
+          <Slider
+            {...props}
+            max={8000}
+            min={1000}
+            style={{ margin: 0 }}
+            range
+            value={value}
+            onChange={onChange}
+          />
         </div>
       );
     },
@@ -250,7 +257,6 @@ const App: React.FC = () => {
           },
         }}
       >
-        {' '}
         <Sender
           autoSize={{ minRows: 4, maxRows: 4 }}
           onSubmit={(value) => {
