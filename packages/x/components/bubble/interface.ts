@@ -72,13 +72,10 @@ export enum MessageStatus {
 export type Info = {
   status?: `${MessageStatus}`;
   key?: string | number;
-  extra?: AnyObject;
+  extraInfo?: AnyObject;
 };
 export interface BubbleProps<ContentType extends BubbleContentType = string>
-  extends Omit<
-    React.HTMLAttributes<HTMLDivElement>,
-    'content' | 'onAnimationStart' | 'onAnimationEnd'
-  > {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'content'> {
   prefixCls?: string;
   styles?: Partial<Record<SemanticType, React.CSSProperties>>;
   rootClassName?: string;
@@ -122,12 +119,10 @@ export interface BubbleProps<ContentType extends BubbleContentType = string>
   /**
    * @description bubble 扩展槽位渲染配置
    */
-  components?: {
-    header?: BubbleSlot<ContentType>;
-    footer?: BubbleSlot<ContentType>;
-    avatar?: BubbleSlot<ContentType>;
-    extra?: BubbleSlot<ContentType>;
-  };
+  header?: BubbleSlot<ContentType>;
+  footer?: BubbleSlot<ContentType>;
+  avatar?: BubbleSlot<ContentType>;
+  extra?: BubbleSlot<ContentType>;
   /**
    * @description 动画执行时回调
    * @param rendererContent 已渲染内容
@@ -201,7 +196,7 @@ export type BubbleItemType = (Omit<BubbleProps<any>, 'styles' | 'classNames'> &
    */
   role: RemainRole | AnyStr;
   status?: `${MessageStatus}`;
-  extra?: AnyObject;
+  extraInfo?: AnyObject;
   styles?: Partial<Record<SemanticType | 'bubble' | 'system' | 'divider', React.CSSProperties>>;
   classNames?: Partial<Record<SemanticType | 'bubble' | 'system' | 'divider', string>>;
 };
@@ -221,7 +216,10 @@ export type RoleProps = Pick<
   | 'loadingRender'
   | 'contentRender'
   | 'footerPlacement'
-  | 'components'
+  | 'header'
+  | 'footer'
+  | 'extra'
+  | 'avatar'
   | 'editable'
   | 'onTyping'
   | 'onTypingComplete'

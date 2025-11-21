@@ -1,5 +1,4 @@
 {
-  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
     "ignoreUnknown": true,
     "includes": [
@@ -117,7 +116,8 @@
       "linter": {
         "rules": {
           "correctness": {
-            "noVoidTypeReturn": "off"
+            "noVoidTypeReturn": "off",
+            "noUnusedPrivateClassMembers": "off"
           },
           "a11y": {
             "useValidAnchor": "off",
@@ -141,6 +141,16 @@
             "useValidAnchor": "off",
             "useAnchorContent": "off",
             "useKeyWithClickEvents": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["**/packages/x/components/notification/**/*"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUnusedPrivateClassMembers": "off"
           }
         }
       }

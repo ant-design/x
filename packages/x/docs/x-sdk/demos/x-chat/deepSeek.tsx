@@ -16,13 +16,13 @@ import React from 'react';
  * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
  */
 
-const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow_deepSeek-r1-distill-1wen-7b';
+const BASE_URL = 'https://api.x.ant.design/api/big_model_glm-4.5-flash';
 
 /**
  * 🔔 The MODEL is fixed in the current request, please replace it with your BASE_UR and MODEL
  */
 
-const MODEL = 'DeepSeek-R1-Distill-Qwen-7B';
+const MODEL = 'glm-4.5-flash';
 
 const ThinkComponent = React.memo((props: ComponentProps) => {
   const [title, setTitle] = React.useState('Deep thinking...');

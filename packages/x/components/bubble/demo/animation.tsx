@@ -62,13 +62,9 @@ const App = () => {
           loading={loading}
           content={data}
           typing={{ effect, interval: 50, step: 3, keepPrefix }}
-          components={{
-            header: <h5>ADX</h5>,
-            footer: (content) => (
-              <Actions items={actionItems} onClick={() => console.log(content)} />
-            ),
-            avatar: <Avatar icon={<UserOutlined />} />,
-          }}
+          header={<h5>ADX</h5>}
+          footer={(content) => <Actions items={actionItems} onClick={() => console.log(content)} />}
+          avatar={<Avatar icon={<UserOutlined />} />}
           onTyping={() => console.log('typing')}
           onTypingComplete={() => console.log('typing complete')}
         />

@@ -32,20 +32,18 @@ const App = () => {
           key: 'welcome',
           role: 'ai',
           content: 'Mock welcome content. '.repeat(10),
-          components: {
-            footer: (
-              <Flex>
-                <Button
-                  size="small"
-                  type="text"
-                  icon={<SyncOutlined />}
-                  style={{ marginInlineEnd: 'auto' }}
-                />
-                <Button size="small" type="text" icon={<SmileOutlined />} />
-                <Button size="small" type="text" icon={<FrownOutlined />} />
-              </Flex>
-            ),
-          },
+          footer: (
+            <Flex>
+              <Button
+                size="small"
+                type="text"
+                icon={<SyncOutlined />}
+                style={{ marginInlineEnd: 'auto' }}
+              />
+              <Button size="small" type="text" icon={<SmileOutlined />} />
+              <Button size="small" type="text" icon={<FrownOutlined />} />
+            </Flex>
+          ),
         },
         {
           key: 'ask',
