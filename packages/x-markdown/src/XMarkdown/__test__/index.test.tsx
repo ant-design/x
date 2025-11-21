@@ -144,7 +144,7 @@ describe('XMarkdown', () => {
     it(`common markdown case: ${title}`, () => {
       const { container } = render(<XMarkdown content={markdown} />);
 
-      expect((container.firstChild as HTMLElement)?.innerHTML).toBe(html);
+      expect((container.firstChild as HTMLElement)?.innerHTML).toContain(html);
     });
   });
 
@@ -162,7 +162,7 @@ describe('XMarkdown', () => {
       />,
     );
 
-    expect((container.firstChild as HTMLElement)?.innerHTML).toBe(html);
+    expect((container.firstChild as HTMLElement)?.innerHTML).toContain(html);
   });
 
   it('walkToken', () => {
@@ -195,7 +195,7 @@ describe('XMarkdown', () => {
     // XMarkdown wraps content in a div with class "ant-x-markdown"
     const wrapper = container.firstChild as HTMLElement;
     expect(wrapper).toHaveClass('ant-x-markdown');
-    expect(wrapper.innerHTML).toBe('<div>This is a paragraph.</div>\n');
+    expect(wrapper.innerHTML).toContain('<div>This is a paragraph.</div>\n');
   });
 
   it('support checkbox is checked', () => {

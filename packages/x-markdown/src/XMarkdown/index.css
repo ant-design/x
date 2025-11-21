@@ -16,6 +16,8 @@
   --text-color: inherit;
   --font-size: inherit;
   --margin-block: 0 0 1em 0;
+  --foter-top-margin: 0.85rem;
+  --footer-padding: 0.85em 0;
   --td-th-padding: 0.85em 1em;
   --pre-th-td-padding: 2px 0;
   --border-font-weight: 600;
@@ -195,4 +197,22 @@
 
 .x-markdown .inline-katex .katex-display > .katex > .katex-html > .tag {
   position: static;
+}
+
+/* ==========================================
+   XMarkdown – footer css
+   ========================================== */
+
+.x-markdown .x-markdown-content {
+  width: 100%;
+}
+
+.x-markdown .x-markdown-footer {
+  width: 100%;
+  padding: var(--footer-padding);
+  border-top: 1px solid rgb(240, 240, 240);
+}
+
+.x-markdown-content:not(:empty) + .x-markdown-footer {
+  margin-top: var(--foter-top-margin);
 }
