@@ -3870,19 +3870,23 @@ exports[`renders components/bubble/demo/markdown.tsx extend context correctly 1`
               class="ant-x-markdown x-markdown"
               style="direction: ltr;"
             >
-              <blockquote>
+              <div
+                class="x-markdown-content"
+              >
+                <blockquote>
+                  <p>
+                    Render as markdown content to show rich text!
+                  </p>
+                </blockquote>
                 <p>
-                  Render as markdown content to show rich text!
+                  Link: 
+                  <a
+                    href="https://x.ant.design"
+                  >
+                    Ant Design X
+                  </a>
                 </p>
-              </blockquote>
-              <p>
-                Link: 
-                <a
-                  href="https://x.ant.design"
-                >
-                  Ant Design X
-                </a>
-              </p>
+              </div>
             </div>
           </article>
         </div>
