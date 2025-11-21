@@ -6,7 +6,7 @@
 
 打造卓越 AI 界面解决方案，引领智能新体验。
 
-[![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] ![GitHub contributors][github-contributors]
+[![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] ![GitHub contributors][github-contributors] [![Follow zhihu][zhihu-image]][zhihu-url]
 
 | Package | Latest Version | Download stats | Bundle Size | Package Size | JSDelivr |
 | :-- | :-- | :-- | :-- | :-- | :-- |
@@ -70,15 +70,15 @@
 
 ## 🌈 开箱即用的大模型企业级组件
 
-`@ant-design/x` 基于 RICH 交互范式，在不同的交互阶段提供了大量的原子组件，帮助你灵活搭建你的 AI 应用，详情点击[这里](../x/README-zh_CN.md)。
+`@ant-design/x` 基于 RICH 交互范式，在不同的交互阶段提供了大量的原子组件，帮助你灵活搭建你的 AI 应用，详情点击[这里](packages/x/README-zh_CN.md)。
 
 ## ⚡️ 对接模型智能体服务 & 高效管理数据流
 
-`@ant-design/x-sdk` 提供了一系列的工具API，旨在提供开发者开箱即用的管理AI应用数据流，详情点击[这里](../x-sdk/README-zh_CN.md)。
+`@ant-design/x-sdk` 提供了一系列的工具API，旨在提供开发者开箱即用的管理AI应用数据流，详情点击[这里](packages/x-sdk/README-zh_CN.md)。
 
 ## ✨ Markdown 渲染器
 
-`@ant-design/x-markdown` 旨在提供流式友好、强拓展性和高性能的 Markdown 渲染器。提供流式渲染公式、代码高亮、mermaid 等能力，详情点击[这里](../x-markdown/README-zh_CN.md)。
+`@ant-design/x-markdown` 旨在提供流式友好、强拓展性和高性能的 Markdown 渲染器。提供流式渲染公式、代码高亮、mermaid 等能力，详情点击[这里](packages/x-markdown/README-zh_CN.md)。
 
 ## 谁在使用
 

@@ -6,7 +6,7 @@
 
 Build excellent AI interfaces and pioneer intelligent new experiences.
 
-[![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] ![GitHub contributors][github-contributors]
+[![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] ![GitHub contributors][github-contributors] [![Follow zhihu][zhihu-image]][zhihu-url]
 
 | Package | Latest Version | Download stats | Bundle Size | Package Size | JSDelivr |
 | :-- | :-- | :-- | :-- | :-- | :-- |
