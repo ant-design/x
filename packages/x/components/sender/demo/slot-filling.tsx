@@ -5,7 +5,7 @@ import React, { useRef, useState } from 'react';
 type SlotConfig = SenderProps['slotConfig'];
 
 const otherSlotConfig: SlotConfig = [
-  { type: 'text', value: 'want to go to' },
+  { type: 'text', value: 'want to go towant to go towant to go towant to go towant to go to' },
 
   {
     type: 'select',
@@ -40,7 +40,7 @@ const otherSlotConfig: SlotConfig = [
     },
     customRender: (value: any, onChange: (value: any) => void, props) => {
       return (
-        <div style={{ width: '100px' }}>
+        <div style={{ width: '100px', display: 'inline-block', alignItems: 'center' }}>
           <Slider {...props} style={{ margin: 0 }} range value={value} onChange={onChange} />
         </div>
       );
@@ -241,11 +241,7 @@ const App: React.FC = () => {
       </Flex>
       {/* Sender 词槽填空示例 */}
       <Sender
-        styles={{
-          input: {
-            fontSize: 16,
-          },
-        }}
+        autoSize={{ minRows: 4, maxRows: 4 }}
         onSubmit={(value) => {
           setValue(value);
           setSlotConfigKey(false);

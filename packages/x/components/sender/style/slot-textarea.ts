@@ -3,7 +3,7 @@ import type { GenerateStyle } from '../../theme/cssinjs-utils';
 import type { SenderToken } from '.';
 
 const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
-  const { componentCls, antCls } = token;
+  const { componentCls, antCls, calc } = token;
   const slotCls = `${componentCls}-slot`;
   const antInputCls = `${antCls}-input`;
   const antDropdownCls = `${antCls}-dropdown-trigger`;
@@ -26,17 +26,18 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       },
     },
     [`${slotCls}:not(${slotContentCls})`]: {
-      display: 'inline-flex',
+      display: 'inline-block',
       verticalAlign: 'baseline',
       alignItems: 'center',
-      minHeight: token.controlHeightSM,
+      marginBlock: 1,
+      height: calc(token.fontSize).mul(token.lineHeight).add(2).equal(),
       wordBreak: 'break-all',
       marginInline: token.marginXXS,
     },
 
     [`${antInputCls}${slotInputCls}`]: {
+      height: 'inherit',
       background: token.colorBgSlot,
-      border: `1px solid ${token.colorBorderSlot}`,
       outline: 'none',
       color: token.colorTextSlot,
       borderRadius: token.borderRadius,
@@ -59,7 +60,8 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       paddingInline: token.paddingXXS,
       transition: `border-color  ${token.motionDurationMid}`,
       position: 'relative',
-      display: 'inline-block',
+      display: 'inline-flex',
+      alignItems: 'center',
       cursor: 'pointer',
       background: token.colorBgSlot,
       height: '100%',
@@ -99,10 +101,13 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       padding: `0 ${unit(token.paddingXXS)}`,
       fontSize: 'inherit',
       lineHeight: 'inherit',
+      height: '100%',
+      boxSizing: 'border-box',
       position: 'relative',
       cursor: 'default',
     },
     [slotContentCls]: {
+      height: calc(token.fontSize).mul(token.lineHeight).add(2).equal(),
       caretColor: token.colorPrimary,
       background: token.colorBgSlot,
       outline: 'none',
@@ -110,9 +115,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       borderRadius: token.borderRadius,
       paddingInline: token.paddingXXS,
       boxSizing: 'border-box',
-      paddingBlock: 1,
-      verticalAlign: 'middle',
-      minHeight: token.controlHeightSM,
+      verticalAlign: 'baseline',
       fontSize: 'inherit',
       lineHeight: 'inherit',
       display: 'inline-block',
@@ -122,6 +125,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
         width: 'fit-content',
         '&::after': {
           display: 'inline-block',
+          height: 'inherit',
           content: 'attr(data-placeholder)',
           color: token.colorTextSlotPlaceholder,
         },

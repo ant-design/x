@@ -16,7 +16,9 @@ const useInputHeight = (autoSize: SenderProps['autoSize'], styles?: React.CSSPro
 
   return {
     minHeight: autoSize.minRows ? lineHeight * fontSize * autoSize.minRows : 'auto',
-    maxHeight: autoSize.maxRows ? lineHeight * fontSize * autoSize.maxRows : 'auto',
+    maxHeight: autoSize.maxRows
+      ? lineHeight * fontSize * autoSize.maxRows + autoSize.maxRows * 4.5
+      : 'auto',
     overflowY: 'auto' as React.CSSProperties['overflowY'],
   };
 };
