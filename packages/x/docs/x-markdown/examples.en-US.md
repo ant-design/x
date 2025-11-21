@@ -14,6 +14,7 @@ Used for rendering streaming Markdown format returned by LLM.
 <code src="./demo/streaming/combined.tsx" description="Incomplete syntax handling and animation effects" title="Streaming Processing"></code>
 <code src="./demo/codeDemo/supersets.tsx" description="Rendering with plugins." title="Plugin Usage"></code>
 <code src="./demo/codeDemo/components.tsx" description="Custom component rendering tags." title="Custom Components"></code>
+<code src="./demo/codeDemo/footer.tsx" description="Display loading indicators or status information at the end" title="Footer Support"></code>
 <code src="./demo/codeDemo/plugin.tsx" title="Custom Extension Plugin"></code>
 <code src="./demo/codeDemo/tokenizer.tsx" title="Custom Tokens"></code>
 <code src="./demo/codeDemo/walkTokens.tsx" title="Token Processing"></code>
@@ -32,6 +33,9 @@ Used for rendering streaming Markdown format returned by LLM.
 | components | Custom React components to replace HTML elements | `Record<string, React.ComponentType<ComponentProps> \| keyof JSX.IntrinsicElements>`, see [details](/x-markdowns/components) | - |
 | paragraphTag | Custom HTML tag for paragraph elements to prevent validation errors when custom components contain block-level elements | `keyof JSX.IntrinsicElements` | `'p'` |
 | streaming | Configuration for streaming rendering behavior | `StreamingOption`, see [syntax processing](/x-markdowns/streaming-syntax) and [animation effects](/x-markdowns/streaming-animation) | - |
+| footer | React node displayed at the end | `React.ReactNode` | - |
+| footerClassName | The CSS class for the footer | `string` | - |
+| footerStyle | The styles for the footer | `CSSProperties` | - |
 | config | Marked.js configuration for Markdown parsing and extensions | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |
 | openLinksInNewTab | Whether to add `target="_blank"` to all a tags | `boolean` | `false` |
 | dompurifyConfig | DOMPurify configuration for HTML sanitization and XSS protection | [`DOMPurify.Config`](https://github.com/cure53/DOMPurify#can-i-configure-dompurify) | - |

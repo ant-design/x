@@ -196,3 +196,22 @@
 .x-markdown .inline-katex .katex-display > .katex > .katex-html > .tag {
   position: static;
 }
+
+/* ==========================================
+   XMarkdown – footer css
+   ========================================== */
+
+.x-markdown-container {
+  position: relative;
+  width: 100%;
+}
+
+.x-markdown-content {
+  width: 100%;
+}
+
+.x-markdown-footer {
+  margin-top: 16px;
+  width: 100%;
+  /* 用户可完全自定义样式 */
+}

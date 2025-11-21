@@ -142,6 +142,21 @@ interface XMarkdownProps {
    * @description DOMPurify configuration for HTML sanitization and XSS protection
    */
   dompurifyConfig?: DOMPurifyConfig;
+  /**
+   * @description 显示在文档末尾的 React 节点
+   * @description React node displayed at the end of document
+   */
+  footer?: React.ReactNode;
+  /**
+   * @description 文档末尾的 React 节点的 CSS 类名
+   * @description CSS class name for the footer React node
+   */
+  footerClassName?: string;
+  /**
+   * @description 文档末尾的 React 节点的内联样式
+   * @description Inline styles for the footer React node
+   */
+  footerStyle?: React.CSSProperties;
 }
 
 export type { XMarkdownProps, Token, Tokens, StreamStatus, ComponentProps, StreamingOption };

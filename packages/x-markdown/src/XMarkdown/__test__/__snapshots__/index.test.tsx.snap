@@ -3,12 +3,16 @@
 exports[`XMarkdown animation parent is custom components 1`] = `
 <div>
   <div
-    class="ant-x-markdown x-markdown"
+    class="ant-x-markdown-container ant-x-markdown x-markdown"
     style="direction: ltr;"
   >
-    <p>
-      This is Text.
-    </p>
+    <div
+      class="ant-x-markdown-content"
+    >
+      <p>
+        This is Text.
+      </p>
+    </div>
   </div>
 </div>
 `;
@@ -16,16 +20,20 @@ exports[`XMarkdown animation parent is custom components 1`] = `
 exports[`XMarkdown animation parent is not custom components 1`] = `
 <div>
   <div
-    class="ant-x-markdown x-markdown"
+    class="ant-x-markdown-container ant-x-markdown x-markdown"
     style="direction: ltr;"
   >
-    <p>
-      <span
-        style="animation: x-markdown-fade-in 200ms ease-in-out forwards;"
-      >
-        This is Text.
-      </span>
-    </p>
+    <div
+      class="ant-x-markdown-content"
+    >
+      <p>
+        <span
+          style="animation: x-markdown-fade-in 200ms ease-in-out forwards;"
+        >
+          This is Text.
+        </span>
+      </p>
+    </div>
   </div>
 </div>
 `;
@@ -33,19 +41,23 @@ exports[`XMarkdown animation parent is not custom components 1`] = `
 exports[`XMarkdown support checkbox is checked 1`] = `
 <div>
   <div
-    class="ant-x-markdown x-markdown"
+    class="ant-x-markdown-container ant-x-markdown x-markdown"
     style="direction: ltr;"
   >
-    <ul>
-      <li>
-        <input
-          checked=""
-          disabled=""
-          type="checkbox"
-        />
-         checkbox
-      </li>
-    </ul>
+    <div
+      class="ant-x-markdown-content"
+    >
+      <ul>
+        <li>
+          <input
+            checked=""
+            disabled=""
+            type="checkbox"
+          />
+           checkbox
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 `;
@@ -53,18 +65,22 @@ exports[`XMarkdown support checkbox is checked 1`] = `
 exports[`XMarkdown support checkbox not checked 1`] = `
 <div>
   <div
-    class="ant-x-markdown x-markdown"
+    class="ant-x-markdown-container ant-x-markdown x-markdown"
     style="direction: ltr;"
   >
-    <ul>
-      <li>
-        <input
-          disabled=""
-          type="checkbox"
-        />
-         checkbox
-      </li>
-    </ul>
+    <div
+      class="ant-x-markdown-content"
+    >
+      <ul>
+        <li>
+          <input
+            disabled=""
+            type="checkbox"
+          />
+           checkbox
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 `;

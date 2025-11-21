@@ -14,6 +14,7 @@ order: 2
 <code src="./demo/streaming/combined.tsx" description="未完成语法处理、动画效果" title="流式处理"></code>
 <code src="./demo/codeDemo/supersets.tsx" description="使用插件渲染。" title="插件使用"></code>
 <code src="./demo/codeDemo/components.tsx" description="自定义组件渲染标签。" title="自定义组件"></code>
+<code src="./demo/codeDemo/footer.tsx" description="在Markdown末尾显示加载指示器或状态信息。" title="Footer支持"></code>
 <code src="./demo/codeDemo/plugin.tsx" title="自定义拓展插件"></code>
 <code src="./demo/codeDemo/tokenizer.tsx" title="自定义标记"></code>
 <code src="./demo/codeDemo/walkTokens.tsx" title="标记处理"></code>
@@ -32,6 +33,9 @@ order: 2
 | components | 用于替换 HTML 元素的自定义 React 组件 | `Record<string, React.ComponentType<ComponentProps> \| keyof JSX.IntrinsicElements>`，查看[详情](/x-markdowns/components-cn) | - |
 | paragraphTag | 段落元素的自定义 HTML 标签，防止自定义组件包含块级元素时的验证错误 | `keyof JSX.IntrinsicElements` | `'p'` |
 | streaming | 流式渲染行为的配置 | `StreamingOption`，查看[语法处理](/x-markdowns/streaming-syntax)和[动画效果](/x-markdowns/streaming-animation) | - |
+| footer | 显示在文档末尾的 React 节点 | `React.ReactNode` | - |
+| footerClassName | 为`footer`设置CSS类 | `string` | - |
+| footerStyle | 为`footer`设置内联样式 | `CSSProperties` | - |
 | config | Markdown 解析和扩展的 Marked.js 配置 | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |
 | openLinksInNewTab | 是否为所有 a 标签添加 `target="_blank"` | `boolean` | `false` |
 | dompurifyConfig | HTML 净化和 XSS 防护的 DOMPurify 配置 | [`DOMPurify.Config`](https://github.com/cure53/DOMPurify#can-i-configure-dompurify) | - |
