@@ -246,6 +246,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     return slotConfig.reduce((nodeList, config) => {
       if (config.type === 'text') {
         nodeList.push(document.createTextNode(config.value || ''));
+        return nodeList;
       }
       const slotKey = config.key;
       warning(!!slotKey, 'sender', `Duplicate slot key: ${slotKey}`);
@@ -444,6 +445,16 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     // 处理退格键删除slot
     if (key === 'Backspace' && target === editableRef.current) {
       const selection = window.getSelection();
+      if (selection?.focusOffset === 1) {
+        const slotKey = (selection.anchorNode?.parentNode as Element)?.getAttribute?.(
+          'data-slot-key',
+        );
+        if (slotKey && selection.anchorNode?.parentNode) {
+          e.preventDefault();
+          (selection.anchorNode.parentNode as HTMLElement).innerHTML = '';
+          return;
+        }
+      }
       if (selection?.focusOffset === 0) {
         const slotKey = (selection.anchorNode?.previousSibling as Element)?.getAttribute?.(
           'data-slot-key',

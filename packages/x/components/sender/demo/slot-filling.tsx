@@ -1,46 +1,44 @@
-import { Sender, type SenderProps } from '@ant-design/x';
+import { Sender, type SenderProps, XProvider } from '@ant-design/x';
 import { Button, Flex, GetRef, Slider } from 'antd';
 import React, { useRef, useState } from 'react';
 
 type SlotConfig = SenderProps['slotConfig'];
 
 const otherSlotConfig: SlotConfig = [
-  { type: 'text', value: 'want to go towant to go towant to go towant to go towant to go to' },
-
-  {
-    type: 'select',
-    key: 'destination',
-    props: {
-      defaultValue: 'Beijing',
-      options: ['Beijing', 'Shanghai', 'Guangzhou'],
-      placeholder: 'Please select a destination',
-    },
-  },
+  { type: 'text', value: 'I want to travel to ' },
   {
     type: 'content',
-    key: 'user',
-    props: { defaultValue: '', placeholder: 'Please enter the occupation' },
+    key: 'location',
+    props: { defaultValue: '', placeholder: '[Please enter the location]' },
   },
-  { type: 'text', value: 'for a trip with ' },
-  { type: 'tag', key: 'tag', props: { label: '@ Chuck', value: 'a man' } },
-  { type: 'text', value: ', the date is ' },
+  { type: 'text', value: 'by' },
   {
-    type: 'input',
-    key: 'date',
+    type: 'select',
+    key: 'transportation',
     props: {
-      placeholder: 'Please enter a date',
+      defaultValue: 'airplane',
+      options: ['airplane', 'high-speed rail', 'cruise ship'],
+      placeholder: 'Please choose a mode of transportation',
     },
   },
-  { type: 'text', value: ', and the price should be ' },
+  { type: 'text', value: 'with a group of 3 people, and each person has a budget of' },
   {
     type: 'custom',
     key: 'priceRange',
     props: {
-      defaultValue: [20, 50],
+      defaultValue: [3000, 6000],
     },
     customRender: (value: any, onChange: (value: any) => void, props) => {
+      console.log(props, '1111');
       return (
-        <div style={{ width: '100px', display: 'inline-block', alignItems: 'center' }}>
+        <div
+          style={{
+            width: '200px',
+            paddingInline: 20,
+            display: 'inline-block',
+            alignItems: 'center',
+          }}
+        >
           <Slider {...props} style={{ margin: 0 }} range value={value} onChange={onChange} />
         </div>
       );
@@ -49,14 +47,17 @@ const otherSlotConfig: SlotConfig = [
       return `between ${value[0]} and ${value[1]} RMB.`;
     },
   },
-  { type: 'text', value: ', and the number of people is ' },
+  { type: 'text', value: 'Please' },
+  { type: 'tag', key: 'tag', props: { label: '@Travel Planner ', value: 'travelTool' } },
+  { type: 'text', value: 'help me create a travel itinerary,Use account' },
   {
     type: 'input',
-    key: 'numberOfPeople',
+    key: 'account',
     props: {
-      placeholder: 'Please enter a number',
+      placeholder: 'Please enter a account',
     },
   },
+  { type: 'text', value: '.' },
 ];
 
 const altSlotConfig: SlotConfig = [
@@ -240,18 +241,30 @@ const App: React.FC = () => {
         </Button>
       </Flex>
       {/* Sender 词槽填空示例 */}
-      <Sender
-        autoSize={{ minRows: 4, maxRows: 4 }}
-        onSubmit={(value) => {
-          setValue(value);
-          setSlotConfigKey(false);
+      <XProvider
+        theme={{
+          components: {
+            Sender: {
+              fontSize: 16,
+            },
+          },
         }}
-        onChange={(value, event, slotConfig) => {
-          console.log(value, event, slotConfig);
-        }}
-        slotConfig={slotConfigKey ? slotConfig?.[slotConfigKey] : []}
-        ref={senderRef}
-      />
+      >
+        {' '}
+        <Sender
+          autoSize={{ minRows: 4, maxRows: 4 }}
+          onSubmit={(value) => {
+            setValue(value);
+            setSlotConfigKey(false);
+          }}
+          onChange={(value, event, slotConfig) => {
+            console.log(value, event, slotConfig);
+          }}
+          slotConfig={slotConfigKey ? slotConfig?.[slotConfigKey] : []}
+          ref={senderRef}
+        />
+      </XProvider>
+
       {value ? `value:${value}` : null}
     </Flex>
   );

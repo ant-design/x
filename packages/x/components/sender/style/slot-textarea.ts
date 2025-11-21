@@ -36,7 +36,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
     },
 
     [`${antInputCls}${slotInputCls}`]: {
-      height: 'inherit',
+      height: '100%',
       background: token.colorBgSlot,
       outline: 'none',
       color: token.colorTextSlot,
@@ -55,8 +55,8 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       },
     },
     [slotSelectCls]: {
-      fontSize: 'inherit',
-      lineHeight: 'inherit',
+      fontSize: token.fontSize,
+      lineHeight: token.lineHeight,
       paddingInline: token.paddingXXS,
       transition: `border-color  ${token.motionDurationMid}`,
       position: 'relative',
@@ -78,8 +78,8 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
     },
     [`${slotSelectCls}-value`]: {
       flex: 1,
-      fontSize: 'inherit',
-      lineHeight: 'inherit',
+      fontSize: token.fontSize,
+      lineHeight: token.lineHeight,
       '&:empty::before': {
         content: 'attr(data-placeholder)',
       },
@@ -87,7 +87,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
     [`${slotSelectCls}-arrow`]: {
       marginInlineStart: token.marginXXS,
       fontSize: token.fontSize,
-      lineHeight: 'inherit',
+      lineHeight: token.lineHeight,
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -99,8 +99,8 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       color: token.colorTextSlot,
       borderRadius: token.borderRadius,
       padding: `0 ${unit(token.paddingXXS)}`,
-      fontSize: 'inherit',
-      lineHeight: 'inherit',
+      fontSize: token.fontSize,
+      lineHeight: token.lineHeight,
       height: '100%',
       boxSizing: 'border-box',
       position: 'relative',
@@ -116,8 +116,8 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       paddingInline: token.paddingXXS,
       boxSizing: 'border-box',
       verticalAlign: 'baseline',
-      fontSize: 'inherit',
-      lineHeight: 'inherit',
+      fontSize: token.fontSize,
+      lineHeight: token.lineHeight,
       display: 'inline-block',
       position: 'relative',
       cursor: 'text',
