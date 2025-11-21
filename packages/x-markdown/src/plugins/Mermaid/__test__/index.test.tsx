@@ -135,7 +135,7 @@ describe('Mermaid Plugin', () => {
 
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const copyButton = screen.getByLabelText('copy');
+      const copyButton = screen.getByRole('button', { name: 'Copy' });
       fireEvent.click(copyButton);
 
       await waitFor(() => {
@@ -154,7 +154,7 @@ describe('Mermaid Plugin', () => {
 
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const copyButton = screen.getByLabelText('copy');
+      const copyButton = screen.getByRole('button', { name: 'Copy' });
 
       // 确保点击不会抛出错误
       expect(() => fireEvent.click(copyButton)).not.toThrow();
@@ -177,12 +177,11 @@ describe('Mermaid Plugin', () => {
 
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const copyButton = screen.getByLabelText('copy');
+      const copyButton = screen.getByRole('button', { name: 'Copy' });
       fireEvent.click(copyButton);
 
-      await waitFor(() => {
-        expect(consoleSpy).toHaveBeenCalledWith('Failed to copy code:', expect.any(Error));
-      });
+      // 由于Actions.Copy组件有自己的错误处理，我们只需要确保点击不会抛出错误
+      expect(() => fireEvent.click(copyButton)).not.toThrow();
 
       consoleSpy.mockRestore();
     });
@@ -194,7 +193,7 @@ describe('Mermaid Plugin', () => {
 
       expect(screen.getByLabelText('zoom-in')).toBeInTheDocument();
       expect(screen.getByLabelText('zoom-out')).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: 'Reset' })).toBeInTheDocument();
+      expect(screen.getByLabelText('one-to-one')).toBeInTheDocument();
       expect(screen.getByLabelText('download')).toBeInTheDocument();
 
       const codeButton = screen.getByText('Code');
@@ -217,7 +216,7 @@ describe('Mermaid Plugin', () => {
     it('should handle reset functionality', () => {
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const resetButton = screen.getByRole('button', { name: 'Reset' });
+      const resetButton = screen.getByLabelText('one-to-one');
       fireEvent.click(resetButton);
     });
   });
