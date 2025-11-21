@@ -13,7 +13,8 @@
       "!server",
       "!coverage",
       "!scripts/previewEditor/**/*",
-      "!package.json"
+      "!package.json",
+      "!tests/index.html"
     ]
   },
   "formatter": {
@@ -57,7 +58,8 @@
         "noArrayIndexKey": "off",
         "noConfusingVoidType": "off",
         "noThenProperty": "off",
-        "noTemplateCurlyInString": "off"
+        "noTemplateCurlyInString": "off",
+        "noNonNullAssertedOptionalChain": "off"
       },
       "performance": {
         "noDelete": "off",
@@ -79,6 +81,14 @@
   "css": {
     "formatter": {
       "quoteStyle": "single"
+    }
+  },
+  "html": {
+    "formatter": {
+      "enabled": true
+    },
+    "parser": {
+      "interpolation": true
     }
   },
   "overrides": [

@@ -31,7 +31,7 @@ Craft AI-driven interfaces effortlessly.
 
 </div>
 
-![demos](https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*UAEeSbJfuM8AAAAAAAAAAAAADgCCAQ/fmt.webp)
+![demos](https://github.com/user-attachments/assets/8f6b56b9-3619-4ddc-9105-ca0eb7af070f)
 
 ## ✨ Features
 
