@@ -66,6 +66,7 @@ interface SlotConfigTagType extends SlotConfigBaseType {
   props?: {
     label: React.ReactNode;
     value?: string;
+    allowClear?: boolean | { clearIcon?: React.ReactNode };
   };
 }
 
