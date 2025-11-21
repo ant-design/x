@@ -215,7 +215,7 @@ const App: React.FC = () => {
           onClick={() => {
             senderRef.current!.focus({
               cursor: 'slot',
-              key: 'numberOfPeople',
+              key: 'account',
             });
           }}
         >
