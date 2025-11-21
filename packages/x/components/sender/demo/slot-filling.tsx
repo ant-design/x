@@ -56,7 +56,7 @@ const otherSlotConfig: SlotConfig = [
   },
   { type: 'text', value: 'Please' },
   { type: 'tag', key: 'tag', props: { label: '@Travel Planner ', value: 'travelTool' } },
-  { type: 'text', value: 'help me create a travel itinerary,Use account' },
+  { type: 'text', value: 'help me create a travel itinerary,Use account ' },
   {
     type: 'input',
     key: 'account',

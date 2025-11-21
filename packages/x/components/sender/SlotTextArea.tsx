@@ -98,7 +98,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
   // ============================ State =============================
 
-  const [slotConfigMap, __, currentSlotConfig, getSlotValues, setSlotValues, setSlotConfigMap] =
+  const [slotConfigMap, __, ___, getSlotValues, setSlotValues, setSlotConfigMap] =
     useSlotConfigState(slotConfig || []);
 
   const [slotPlaceholders, setSlotPlaceholders] = useState<Map<string, React.ReactNode>>(new Map());
