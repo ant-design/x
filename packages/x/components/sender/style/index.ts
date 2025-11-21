@@ -61,7 +61,7 @@ export interface SenderToken extends FullToken<'Sender'> {
   SenderContentMaxWidth: number | string;
 }
 const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
-  const { componentCls, paddingSM, paddingXS, paddingXXS, lineWidth, calc } = token;
+  const { componentCls, paddingSM, paddingXS, paddingXXS, lineWidth, calc, colorTextDescription } = token;
 
   return {
     [`${componentCls}:not(${componentCls}-switch):not(${componentCls}-header)`]: {
@@ -111,6 +111,14 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
         alignSelf: 'center',
         minHeight: 'auto',
         caretColor: token.colorPrimary,
+      },
+
+      // ============================= Count =============================
+      [`${componentCls}-count`]: {
+        color: colorTextDescription,
+        whiteSpace: 'nowrap',
+        pointerEvents: 'none',
+        lineHeight: '2.2em',
       },
 
       // ============================ Actions ============================
