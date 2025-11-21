@@ -3,6 +3,7 @@ group:
   title: Model Integration
   order: 1
 title: OpenAI
+tag: Updated
 order: 0
 ---
 

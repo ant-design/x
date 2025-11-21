@@ -2,10 +2,10 @@
 
 exports[`renders components/file-card/demo/audio.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-_r_8_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_r_9_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-file-card css-var-_r_8_"
+    class="ant-file-card css-var-_r_9_"
   >
     <audio
       class="ant-file-card-audio"
@@ -14,7 +14,7 @@ exports[`renders components/file-card/demo/audio.tsx extend context correctly 1`
     />
   </div>
   <div
-    class="ant-file-card css-var-_r_8_"
+    class="ant-file-card css-var-_r_9_"
   >
     <video
       class="ant-file-card-video"
@@ -23,7 +23,7 @@ exports[`renders components/file-card/demo/audio.tsx extend context correctly 1`
     />
   </div>
   <div
-    class="ant-file-card css-var-_r_8_"
+    class="ant-file-card css-var-_r_9_"
   >
     <div
       class="ant-file-card-file"
@@ -85,7 +85,7 @@ exports[`renders components/file-card/demo/audio.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_8_"
+    class="ant-file-card css-var-_r_9_"
   >
     <div
       class="ant-file-card-file"
@@ -153,10 +153,10 @@ exports[`renders components/file-card/demo/audio.tsx extend context correctly 2`
 
 exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-_r_7_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_r_8_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-file-card css-var-_r_7_"
+    class="ant-file-card css-var-_r_8_"
   >
     <div
       class="ant-file-card-file"
@@ -211,7 +211,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_7_"
+    class="ant-file-card css-var-_r_8_"
   >
     <div
       class="ant-file-card-file"
@@ -266,7 +266,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_7_"
+    class="ant-file-card css-var-_r_8_"
   >
     <div
       class="ant-file-card-file"
@@ -321,7 +321,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_7_"
+    class="ant-file-card css-var-_r_8_"
   >
     <div
       class="ant-file-card-file"
@@ -376,7 +376,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_7_"
+    class="ant-file-card css-var-_r_8_"
   >
     <div
       class="ant-file-card-file"
@@ -431,7 +431,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_7_"
+    class="ant-file-card css-var-_r_8_"
   >
     <div
       class="ant-file-card-file"
@@ -486,7 +486,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_7_"
+    class="ant-file-card css-var-_r_8_"
   >
     <div
       class="ant-file-card-file"
@@ -541,7 +541,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_7_"
+    class="ant-file-card css-var-_r_8_"
   >
     <div
       class="ant-file-card-file"
@@ -597,7 +597,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_7_"
+    class="ant-file-card css-var-_r_8_"
   >
     <div
       class="ant-file-card-file"
@@ -653,7 +653,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_7_"
+    class="ant-file-card css-var-_r_8_"
   >
     <div
       class="ant-file-card-file"
@@ -712,7 +712,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_7_"
+    class="ant-file-card css-var-_r_8_"
   >
     <div
       class="ant-file-card-file"
@@ -774,10 +774,10 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 2`
 
 exports[`renders components/file-card/demo/icon.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-_r_6_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_r_7_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-file-card css-var-_r_6_"
+    class="ant-file-card css-var-_r_7_"
   >
     <div
       class="ant-file-card-file"
@@ -832,7 +832,7 @@ exports[`renders components/file-card/demo/icon.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_6_"
+    class="ant-file-card css-var-_r_7_"
   >
     <div
       class="ant-file-card-file"
@@ -900,36 +900,45 @@ exports[`renders components/file-card/demo/image.tsx extend context correctly 1`
     class="ant-file-card css-var-_r_5_"
   >
     <div
-      class="ant-image ant-file-card-image css-var-_r_5_ ant-image-css-var"
+      class="ant-file-card-image"
     >
-      <img
-        alt="image-file.png"
-        class="ant-image-img"
-        src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-      />
       <div
-        class="ant-image-cover ant-image-cover-center"
-      />
+        class="ant-image ant-file-card-image-img css-var-_r_5_ ant-image-css-var"
+      >
+        <img
+          alt="image-file.png"
+          class="ant-image-img"
+          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+        />
+        <div
+          class="ant-image-cover ant-image-cover-center"
+        />
+      </div>
     </div>
   </div>
   <div
     class="ant-file-card css-var-_r_5_"
   >
     <div
-      class="ant-image ant-file-card-image css-var-_r_5_ ant-image-css-var"
+      class="ant-file-card-image"
       style="width: 100px; height: 100px;"
     >
-      <img
-        alt="image-file.png"
-        class="ant-image-img"
-        height="100"
-        src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        style="height: 100px; width: 100px;"
-        width="100"
-      />
       <div
-        class="ant-image-cover ant-image-cover-center"
-      />
+        class="ant-image ant-file-card-image-img css-var-_r_5_ ant-image-css-var"
+        style="width: 100px; height: 100px;"
+      >
+        <img
+          alt="image-file.png"
+          class="ant-image-img"
+          height="100"
+          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+          style="height: 100px;"
+          width="100"
+        />
+        <div
+          class="ant-image-cover ant-image-cover-center"
+        />
+      </div>
     </div>
   </div>
   <div
@@ -991,6 +1000,198 @@ exports[`renders components/file-card/demo/image.tsx extend context correctly 1`
 `;
 
 exports[`renders components/file-card/demo/image.tsx extend context correctly 2`] = `[]`;
+
+exports[`renders components/file-card/demo/image-loading.tsx extend context correctly 1`] = `
+<div
+  class="ant-flex css-var-_r_6_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+>
+  <div
+    class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-_r_6_"
+  >
+    <div
+      class="ant-space-item"
+    >
+      <button
+        class="ant-btn css-var-_r_6_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+        disabled=""
+        type="button"
+      >
+        <span>
+          Start Loading
+        </span>
+      </button>
+    </div>
+    <div
+      class="ant-space-item"
+    >
+      <button
+        class="ant-btn css-var-_r_6_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+        type="button"
+      >
+        <span>
+          Load Complete
+        </span>
+      </button>
+    </div>
+  </div>
+  <div
+    class="ant-file-card css-var-_r_6_"
+  >
+    <div
+      class="ant-file-card-image ant-file-card-loading"
+      style="width: 200px;"
+    >
+      <div
+        class="ant-file-card-image-loading"
+        style="width: 200px;"
+      >
+        <div
+          class="ant-skeleton ant-skeleton-element ant-skeleton-active ant-file-card-image-skeleton css-var-_r_6_"
+        >
+          <div
+            class="ant-skeleton-node"
+          >
+            <div
+              class="ant-file-card-image-spin ant-file-card-image-spin-small ant-flex css-var-_r_6_ ant-flex-align-center ant-flex-gap-small"
+            >
+              <div
+                aria-busy="true"
+                aria-live="polite"
+                class="ant-spin ant-spin-sm ant-spin-spinning css-var-_r_6_"
+              >
+                <span
+                  class="ant-spin-dot-holder"
+                >
+                  <span
+                    class="ant-spin-dot ant-spin-dot-spin"
+                  >
+                    <i
+                      class="ant-spin-dot-item"
+                    />
+                    <i
+                      class="ant-spin-dot-item"
+                    />
+                    <i
+                      class="ant-spin-dot-item"
+                    />
+                    <i
+                      class="ant-spin-dot-item"
+                    />
+                  </span>
+                </span>
+              </div>
+              <div
+                class="ant-file-card-image-spin-text"
+              >
+                0%
+              </div>
+            </div>
+            <span
+              class="anticon"
+              color="rgba(0,0,0,.45)"
+              role="img"
+            >
+              <svg
+                fill="rgba(0,0,0,.45)"
+                height="32px"
+                style="transform: scaleX(-1);"
+                viewBox="0 0 1098 1024"
+                width="32px"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>
+                  Image placeholder
+                </title>
+                <path
+                  d="M365.714286 329.142857q0 45.714286-32.036571 77.677714t-77.677714 32.036571-77.677714-32.036571-32.036571-77.677714 32.036571-77.677714 77.677714-32.036571 77.677714 32.036571 32.036571 77.677714zM950.857143 548.571429l0 256-804.571429 0 0-109.714286 182.857143-182.857143 91.428571 91.428571 292.571429-292.571429zM1005.714286 146.285714l-914.285714 0q-7.460571 0-12.873143 5.412571t-5.412571 12.873143l0 694.857143q0 7.460571 5.412571 12.873143t12.873143 5.412571l914.285714 0q7.460571 0 12.873143-5.412571t5.412571-12.873143l0-694.857143q0-7.460571-5.412571-12.873143t-12.873143-5.412571zM1097.142857 164.571429l0 694.857143q0 37.741714-26.843429 64.585143t-64.585143 26.843429l-914.285714 0q-37.741714 0-64.585143-26.843429t-26.843429-64.585143l0-694.857143q0-37.741714 26.843429-64.585143t64.585143-26.843429l914.285714 0q37.741714 0 64.585143 26.843429t26.843429 64.585143z"
+                />
+              </svg>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-file-card css-var-_r_6_"
+  >
+    <div
+      class="ant-file-card-image ant-file-card-loading"
+    >
+      <div
+        class="ant-file-card-image-loading"
+      >
+        <div
+          class="ant-skeleton ant-skeleton-element ant-skeleton-active ant-file-card-image-skeleton css-var-_r_6_"
+        >
+          <div
+            class="ant-skeleton-node"
+          >
+            <div
+              class="ant-file-card-image-spin ant-file-card-image-spin-default ant-flex css-var-_r_6_ ant-flex-align-center ant-flex-gap-small"
+            >
+              <div
+                aria-busy="true"
+                aria-live="polite"
+                class="ant-spin ant-spin-spinning css-var-_r_6_"
+              >
+                <span
+                  class="ant-spin-dot-holder"
+                >
+                  <span
+                    class="ant-spin-dot ant-spin-dot-spin"
+                  >
+                    <i
+                      class="ant-spin-dot-item"
+                    />
+                    <i
+                      class="ant-spin-dot-item"
+                    />
+                    <i
+                      class="ant-spin-dot-item"
+                    />
+                    <i
+                      class="ant-spin-dot-item"
+                    />
+                  </span>
+                </span>
+              </div>
+              <div
+                class="ant-file-card-image-spin-text"
+              >
+                0%
+              </div>
+            </div>
+            <span
+              class="anticon"
+              color="rgba(0,0,0,.45)"
+              role="img"
+            >
+              <svg
+                fill="rgba(0,0,0,.45)"
+                height="46px"
+                style="transform: scaleX(-1);"
+                viewBox="0 0 1098 1024"
+                width="46px"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>
+                  Image placeholder
+                </title>
+                <path
+                  d="M365.714286 329.142857q0 45.714286-32.036571 77.677714t-77.677714 32.036571-77.677714-32.036571-32.036571-77.677714 32.036571-77.677714 77.677714-32.036571 77.677714 32.036571 32.036571 77.677714zM950.857143 548.571429l0 256-804.571429 0 0-109.714286 182.857143-182.857143 91.428571 91.428571 292.571429-292.571429zM1005.714286 146.285714l-914.285714 0q-7.460571 0-12.873143 5.412571t-5.412571 12.873143l0 694.857143q0 7.460571 5.412571 12.873143t12.873143 5.412571l914.285714 0q7.460571 0 12.873143-5.412571t5.412571-12.873143l0-694.857143q0-7.460571-5.412571-12.873143t-12.873143-5.412571zM1097.142857 164.571429l0 694.857143q0 37.741714-26.843429 64.585143t-64.585143 26.843429l-914.285714 0q-37.741714 0-64.585143-26.843429t-26.843429-64.585143l0-694.857143q0-37.741714 26.843429-64.585143t64.585143-26.843429l914.285714 0q37.741714 0 64.585143 26.843429t26.843429 64.585143z"
+                />
+              </svg>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders components/file-card/demo/image-loading.tsx extend context correctly 2`] = `[]`;
 
 exports[`renders components/file-card/demo/list.tsx extend context correctly 1`] = `
 <div
@@ -2022,16 +2223,20 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
           class="ant-file-card css-var-_r_4_"
         >
           <div
-            class="ant-image ant-file-card-image css-var-_r_4_ ant-image-css-var"
+            class="ant-file-card-image"
           >
-            <img
-              alt="image-file.png"
-              class="ant-image-img"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
             <div
-              class="ant-image-cover ant-image-cover-center"
-            />
+              class="ant-image ant-file-card-image-img css-var-_r_4_ ant-image-css-var"
+            >
+              <img
+                alt="image-file.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -2042,16 +2247,20 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
           class="ant-file-card css-var-_r_4_"
         >
           <div
-            class="ant-image ant-file-card-image css-var-_r_4_ ant-image-css-var"
+            class="ant-file-card-image"
           >
-            <img
-              alt="image-file.png"
-              class="ant-image-img"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
             <div
-              class="ant-image-cover ant-image-cover-center"
-            />
+              class="ant-image ant-file-card-image-img css-var-_r_4_ ant-image-css-var"
+            >
+              <img
+                alt="image-file.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -2062,16 +2271,20 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
           class="ant-file-card css-var-_r_4_"
         >
           <div
-            class="ant-image ant-file-card-image css-var-_r_4_ ant-image-css-var"
+            class="ant-file-card-image"
           >
-            <img
-              alt="image-file.png"
-              class="ant-image-img"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
             <div
-              class="ant-image-cover ant-image-cover-center"
-            />
+              class="ant-image ant-file-card-image-img css-var-_r_4_ ant-image-css-var"
+            >
+              <img
+                alt="image-file.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -2082,16 +2295,20 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
           class="ant-file-card css-var-_r_4_"
         >
           <div
-            class="ant-image ant-file-card-image css-var-_r_4_ ant-image-css-var"
+            class="ant-file-card-image"
           >
-            <img
-              alt="image-file.png"
-              class="ant-image-img"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
             <div
-              class="ant-image-cover ant-image-cover-center"
-            />
+              class="ant-image ant-file-card-image-img css-var-_r_4_ ant-image-css-var"
+            >
+              <img
+                alt="image-file.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -2102,16 +2319,20 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
           class="ant-file-card css-var-_r_4_"
         >
           <div
-            class="ant-image ant-file-card-image css-var-_r_4_ ant-image-css-var"
+            class="ant-file-card-image"
           >
-            <img
-              alt="image-file.png"
-              class="ant-image-img"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
             <div
-              class="ant-image-cover ant-image-cover-center"
-            />
+              class="ant-image ant-file-card-image-img css-var-_r_4_ ant-image-css-var"
+            >
+              <img
+                alt="image-file.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -2122,16 +2343,20 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
           class="ant-file-card css-var-_r_4_"
         >
           <div
-            class="ant-image ant-file-card-image css-var-_r_4_ ant-image-css-var"
+            class="ant-file-card-image"
           >
-            <img
-              alt="image-file.png"
-              class="ant-image-img"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
             <div
-              class="ant-image-cover ant-image-cover-center"
-            />
+              class="ant-image ant-file-card-image-img css-var-_r_4_ ant-image-css-var"
+            >
+              <img
+                alt="image-file.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -2150,20 +2375,25 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
           class="ant-file-card css-var-_r_4_"
         >
           <div
-            class="ant-image ant-file-card-image css-var-_r_4_ ant-image-css-var"
+            class="ant-file-card-image"
             style="width: 230px; height: 230px;"
           >
-            <img
-              alt="image-file.png"
-              class="ant-image-img"
-              height="230"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-              style="height: 230px; width: 230px;"
-              width="230"
-            />
             <div
-              class="ant-image-cover ant-image-cover-center"
-            />
+              class="ant-image ant-file-card-image-img css-var-_r_4_ ant-image-css-var"
+              style="width: 230px; height: 230px;"
+            >
+              <img
+                alt="image-file.png"
+                class="ant-image-img"
+                height="230"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+                style="height: 230px;"
+                width="230"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -2174,20 +2404,25 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
           class="ant-file-card css-var-_r_4_"
         >
           <div
-            class="ant-image ant-file-card-image css-var-_r_4_ ant-image-css-var"
+            class="ant-file-card-image"
             style="width: 230px; height: 230px;"
           >
-            <img
-              alt="image-file.png"
-              class="ant-image-img"
-              height="230"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-              style="height: 230px; width: 230px;"
-              width="230"
-            />
             <div
-              class="ant-image-cover ant-image-cover-center"
-            />
+              class="ant-image ant-file-card-image-img css-var-_r_4_ ant-image-css-var"
+              style="width: 230px; height: 230px;"
+            >
+              <img
+                alt="image-file.png"
+                class="ant-image-img"
+                height="230"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+                style="height: 230px;"
+                width="230"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -2198,20 +2433,25 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
           class="ant-file-card css-var-_r_4_"
         >
           <div
-            class="ant-image ant-file-card-image css-var-_r_4_ ant-image-css-var"
+            class="ant-file-card-image"
             style="width: 230px; height: 230px;"
           >
-            <img
-              alt="image-file.png"
-              class="ant-image-img"
-              height="230"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-              style="height: 230px; width: 230px;"
-              width="230"
-            />
             <div
-              class="ant-image-cover ant-image-cover-center"
-            />
+              class="ant-image ant-file-card-image-img css-var-_r_4_ ant-image-css-var"
+              style="width: 230px; height: 230px;"
+            >
+              <img
+                alt="image-file.png"
+                class="ant-image-img"
+                height="230"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+                style="height: 230px;"
+                width="230"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -2392,16 +2632,20 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
           class="ant-file-card css-var-_r_1_"
         >
           <div
-            class="ant-image ant-file-card-image css-var-_r_1_ ant-image-css-var"
+            class="ant-file-card-image"
           >
-            <img
-              alt="image-file-0.png"
-              class="ant-image-img"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
             <div
-              class="ant-image-cover ant-image-cover-center"
-            />
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-0.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
           </div>
         </div>
         <div
@@ -2436,16 +2680,20 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
           class="ant-file-card css-var-_r_1_"
         >
           <div
-            class="ant-image ant-file-card-image css-var-_r_1_ ant-image-css-var"
+            class="ant-file-card-image"
           >
-            <img
-              alt="image-file-1.png"
-              class="ant-image-img"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
             <div
-              class="ant-image-cover ant-image-cover-center"
-            />
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-1.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
           </div>
         </div>
         <div
@@ -2480,16 +2728,20 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
           class="ant-file-card css-var-_r_1_"
         >
           <div
-            class="ant-image ant-file-card-image css-var-_r_1_ ant-image-css-var"
+            class="ant-file-card-image"
           >
-            <img
-              alt="image-file-2.png"
-              class="ant-image-img"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
             <div
-              class="ant-image-cover ant-image-cover-center"
-            />
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-2.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
           </div>
         </div>
         <div
@@ -2524,16 +2776,20 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
           class="ant-file-card css-var-_r_1_"
         >
           <div
-            class="ant-image ant-file-card-image css-var-_r_1_ ant-image-css-var"
+            class="ant-file-card-image"
           >
-            <img
-              alt="image-file-3.png"
-              class="ant-image-img"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
             <div
-              class="ant-image-cover ant-image-cover-center"
-            />
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-3.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
           </div>
         </div>
         <div
@@ -2568,16 +2824,20 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
           class="ant-file-card css-var-_r_1_"
         >
           <div
-            class="ant-image ant-file-card-image css-var-_r_1_ ant-image-css-var"
+            class="ant-file-card-image"
           >
-            <img
-              alt="image-file-4.png"
-              class="ant-image-img"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
             <div
-              class="ant-image-cover ant-image-cover-center"
-            />
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-4.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
           </div>
         </div>
         <div
@@ -2612,16 +2872,20 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
           class="ant-file-card css-var-_r_1_"
         >
           <div
-            class="ant-image ant-file-card-image css-var-_r_1_ ant-image-css-var"
+            class="ant-file-card-image"
           >
-            <img
-              alt="image-file-5.png"
-              class="ant-image-img"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
             <div
-              class="ant-image-cover ant-image-cover-center"
-            />
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-5.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
           </div>
         </div>
         <div
@@ -2656,16 +2920,20 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
           class="ant-file-card css-var-_r_1_"
         >
           <div
-            class="ant-image ant-file-card-image css-var-_r_1_ ant-image-css-var"
+            class="ant-file-card-image"
           >
-            <img
-              alt="image-file-6.png"
-              class="ant-image-img"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
             <div
-              class="ant-image-cover ant-image-cover-center"
-            />
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-6.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
           </div>
         </div>
         <div
@@ -2700,16 +2968,20 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
           class="ant-file-card css-var-_r_1_"
         >
           <div
-            class="ant-image ant-file-card-image css-var-_r_1_ ant-image-css-var"
+            class="ant-file-card-image"
           >
-            <img
-              alt="image-file-7.png"
-              class="ant-image-img"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
             <div
-              class="ant-image-cover ant-image-cover-center"
-            />
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-7.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
           </div>
         </div>
         <div
@@ -2744,16 +3016,20 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
           class="ant-file-card css-var-_r_1_"
         >
           <div
-            class="ant-image ant-file-card-image css-var-_r_1_ ant-image-css-var"
+            class="ant-file-card-image"
           >
-            <img
-              alt="image-file-8.png"
-              class="ant-image-img"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
             <div
-              class="ant-image-cover ant-image-cover-center"
-            />
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-8.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
           </div>
         </div>
         <div
@@ -2788,16 +3064,20 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
           class="ant-file-card css-var-_r_1_"
         >
           <div
-            class="ant-image ant-file-card-image css-var-_r_1_ ant-image-css-var"
+            class="ant-file-card-image"
           >
-            <img
-              alt="image-file-9.png"
-              class="ant-image-img"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
             <div
-              class="ant-image-cover ant-image-cover-center"
-            />
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-9.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
           </div>
         </div>
         <div
@@ -2832,16 +3112,20 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
           class="ant-file-card css-var-_r_1_"
         >
           <div
-            class="ant-image ant-file-card-image css-var-_r_1_ ant-image-css-var"
+            class="ant-file-card-image"
           >
-            <img
-              alt="image-file-10.png"
-              class="ant-image-img"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
             <div
-              class="ant-image-cover ant-image-cover-center"
-            />
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-10.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
           </div>
         </div>
         <div
@@ -2876,16 +3160,55 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
           class="ant-file-card css-var-_r_1_"
         >
           <div
-            class="ant-image ant-file-card-image css-var-_r_1_ ant-image-css-var"
+            class="ant-file-card-file"
           >
-            <img
-              alt="image-file-11.png"
-              class="ant-image-img"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
             <div
-              class="ant-image-cover ant-image-cover-center"
-            />
+              class="ant-file-card-file-icon"
+              style="color: #22b35e;"
+            >
+              <span
+                aria-label="file-excel"
+                class="anticon anticon-file-excel"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="file-excel"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M854.6 288.7c6 6 9.4 14.1 9.4 22.6V928c0 17.7-14.3 32-32 32H192c-17.7 0-32-14.3-32-32V96c0-17.7 14.3-32 32-32h424.7c8.5 0 16.7 3.4 22.7 9.4l215.2 215.3zM790.2 326L602 137.8V326h188.2zM575.34 477.84l-61.22 102.3L452.3 477.8a12 12 0 00-10.27-5.79h-38.44a12 12 0 00-6.4 1.85 12 12 0 00-3.75 16.56l82.34 130.42-83.45 132.78a12 12 0 00-1.84 6.39 12 12 0 0012 12h34.46a12 12 0 0010.21-5.7l62.7-101.47 62.3 101.45a12 12 0 0010.23 5.72h37.48a12 12 0 006.48-1.9 12 12 0 003.62-16.58l-83.83-130.55 85.3-132.47a12 12 0 001.9-6.5 12 12 0 00-12-12h-35.7a12 12 0 00-10.29 5.84z"
+                  />
+                </svg>
+              </span>
+            </div>
+            <div
+              class="ant-file-card-file-content"
+            >
+              <div
+                class="ant-file-card-file-name"
+              >
+                <span
+                  class="ant-file-card-file-name-prefix"
+                >
+                  excel-file
+                </span>
+                <span
+                  class="ant-file-card-file-name-suffix"
+                >
+                  .xlsx
+                </span>
+              </div>
+              <div
+                class="ant-file-card-file-description"
+              >
+                1 KB
+              </div>
+            </div>
           </div>
         </div>
         <div
@@ -2920,16 +3243,55 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
           class="ant-file-card css-var-_r_1_"
         >
           <div
-            class="ant-image ant-file-card-image css-var-_r_1_ ant-image-css-var"
+            class="ant-file-card-file"
           >
-            <img
-              alt="image-file-12.png"
-              class="ant-image-img"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
             <div
-              class="ant-image-cover ant-image-cover-center"
-            />
+              class="ant-file-card-file-icon"
+              style="color: #1677ff;"
+            >
+              <span
+                aria-label="file-word"
+                class="anticon anticon-file-word"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="file-word"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M854.6 288.7c6 6 9.4 14.1 9.4 22.6V928c0 17.7-14.3 32-32 32H192c-17.7 0-32-14.3-32-32V96c0-17.7 14.3-32 32-32h424.7c8.5 0 16.7 3.4 22.7 9.4l215.2 215.3zM790.2 326L602 137.8V326h188.2zM512 566.1l52.81 197a12 12 0 0011.6 8.9h31.77a12 12 0 0011.6-8.88l74.37-276a12 12 0 00.4-3.12 12 12 0 00-12-12h-35.57a12 12 0 00-11.7 9.31l-45.78 199.1-49.76-199.32A12 12 0 00528.1 472h-32.2a12 12 0 00-11.64 9.1L434.6 680.01 388.5 481.3a12 12 0 00-11.68-9.29h-35.39a12 12 0 00-3.11.41 12 12 0 00-8.47 14.7l74.17 276A12 12 0 00415.6 772h31.99a12 12 0 0011.59-8.9l52.81-197z"
+                  />
+                </svg>
+              </span>
+            </div>
+            <div
+              class="ant-file-card-file-content"
+            >
+              <div
+                class="ant-file-card-file-name"
+              >
+                <span
+                  class="ant-file-card-file-name-prefix"
+                >
+                  word-file
+                </span>
+                <span
+                  class="ant-file-card-file-name-suffix"
+                >
+                  .docx
+                </span>
+              </div>
+              <div
+                class="ant-file-card-file-description"
+              >
+                1 KB
+              </div>
+            </div>
           </div>
         </div>
         <div
@@ -2964,16 +3326,55 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
           class="ant-file-card css-var-_r_1_"
         >
           <div
-            class="ant-image ant-file-card-image css-var-_r_1_ ant-image-css-var"
+            class="ant-file-card-file"
           >
-            <img
-              alt="image-file-13.png"
-              class="ant-image-img"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
             <div
-              class="ant-image-cover ant-image-cover-center"
-            />
+              class="ant-file-card-file-icon"
+              style="color: #ff4d4f;"
+            >
+              <span
+                aria-label="file-pdf"
+                class="anticon anticon-file-pdf"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="file-pdf"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M854.6 288.7c6 6 9.4 14.1 9.4 22.6V928c0 17.7-14.3 32-32 32H192c-17.7 0-32-14.3-32-32V96c0-17.7 14.3-32 32-32h424.7c8.5 0 16.7 3.4 22.7 9.4l215.2 215.3zM790.2 326L602 137.8V326h188.2zM633.22 637.26c-15.18-.5-31.32.67-49.65 2.96-24.3-14.99-40.66-35.58-52.28-65.83l1.07-4.38 1.24-5.18c4.3-18.13 6.61-31.36 7.3-44.7.52-10.07-.04-19.36-1.83-27.97-3.3-18.59-16.45-29.46-33.02-30.13-15.45-.63-29.65 8-33.28 21.37-5.91 21.62-2.45 50.07 10.08 98.59-15.96 38.05-37.05 82.66-51.2 107.54-18.89 9.74-33.6 18.6-45.96 28.42-16.3 12.97-26.48 26.3-29.28 40.3-1.36 6.49.69 14.97 5.36 21.92 5.3 7.88 13.28 13 22.85 13.74 24.15 1.87 53.83-23.03 86.6-79.26 3.29-1.1 6.77-2.26 11.02-3.7l11.9-4.02c7.53-2.54 12.99-4.36 18.39-6.11 23.4-7.62 41.1-12.43 57.2-15.17 27.98 14.98 60.32 24.8 82.1 24.8 17.98 0 30.13-9.32 34.52-23.99 3.85-12.88.8-27.82-7.48-36.08-8.56-8.41-24.3-12.43-45.65-13.12zM385.23 765.68v-.36l.13-.34a54.86 54.86 0 015.6-10.76c4.28-6.58 10.17-13.5 17.47-20.87 3.92-3.95 8-7.8 12.79-12.12 1.07-.96 7.91-7.05 9.19-8.25l11.17-10.4-8.12 12.93c-12.32 19.64-23.46 33.78-33 43-3.51 3.4-6.6 5.9-9.1 7.51a16.43 16.43 0 01-2.61 1.42c-.41.17-.77.27-1.13.3a2.2 2.2 0 01-1.12-.15 2.07 2.07 0 01-1.27-1.91zM511.17 547.4l-2.26 4-1.4-4.38c-3.1-9.83-5.38-24.64-6.01-38-.72-15.2.49-24.32 5.29-24.32 6.74 0 9.83 10.8 10.07 27.05.22 14.28-2.03 29.14-5.7 35.65zm-5.81 58.46l1.53-4.05 2.09 3.8c11.69 21.24 26.86 38.96 43.54 51.31l3.6 2.66-4.39.9c-16.33 3.38-31.54 8.46-52.34 16.85 2.17-.88-21.62 8.86-27.64 11.17l-5.25 2.01 2.8-4.88c12.35-21.5 23.76-47.32 36.05-79.77zm157.62 76.26c-7.86 3.1-24.78.33-54.57-12.39l-7.56-3.22 8.2-.6c23.3-1.73 39.8-.45 49.42 3.07 4.1 1.5 6.83 3.39 8.04 5.55a4.64 4.64 0 01-1.36 6.31 6.7 6.7 0 01-2.17 1.28z"
+                  />
+                </svg>
+              </span>
+            </div>
+            <div
+              class="ant-file-card-file-content"
+            >
+              <div
+                class="ant-file-card-file-name"
+              >
+                <span
+                  class="ant-file-card-file-name-prefix"
+                >
+                  pdf-file
+                </span>
+                <span
+                  class="ant-file-card-file-name-suffix"
+                >
+                  .pdf
+                </span>
+              </div>
+              <div
+                class="ant-file-card-file-description"
+              >
+                1 KB
+              </div>
+            </div>
           </div>
         </div>
         <div
@@ -3008,16 +3409,55 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
           class="ant-file-card css-var-_r_1_"
         >
           <div
-            class="ant-image ant-file-card-image css-var-_r_1_ ant-image-css-var"
+            class="ant-file-card-file"
           >
-            <img
-              alt="image-file-14.png"
-              class="ant-image-img"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
             <div
-              class="ant-image-cover ant-image-cover-center"
-            />
+              class="ant-file-card-file-icon"
+              style="color: #ff6e31;"
+            >
+              <span
+                aria-label="file-ppt"
+                class="anticon anticon-file-ppt"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="file-ppt"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M854.6 288.7c6 6 9.4 14.1 9.4 22.6V928c0 17.7-14.3 32-32 32H192c-17.7 0-32-14.3-32-32V96c0-17.7 14.3-32 32-32h424.7c8.5 0 16.7 3.4 22.7 9.4l215.2 215.3zM790.2 326L602 137.8V326h188.2zM468.53 760v-91.54h59.27c60.57 0 100.2-39.65 100.2-98.12 0-58.22-39.58-98.34-99.98-98.34H424a12 12 0 00-12 12v276a12 12 0 0012 12h32.53a12 12 0 0012-12zm0-139.33h34.9c47.82 0 67.19-12.93 67.19-50.33 0-32.05-18.12-50.12-49.87-50.12h-52.22v100.45z"
+                  />
+                </svg>
+              </span>
+            </div>
+            <div
+              class="ant-file-card-file-content"
+            >
+              <div
+                class="ant-file-card-file-name"
+              >
+                <span
+                  class="ant-file-card-file-name-prefix"
+                >
+                  ppt-file
+                </span>
+                <span
+                  class="ant-file-card-file-name-suffix"
+                >
+                  .pptx
+                </span>
+              </div>
+              <div
+                class="ant-file-card-file-description"
+              >
+                1 KB
+              </div>
+            </div>
           </div>
         </div>
         <div
@@ -3052,16 +3492,55 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
           class="ant-file-card css-var-_r_1_"
         >
           <div
-            class="ant-image ant-file-card-image css-var-_r_1_ ant-image-css-var"
+            class="ant-file-card-file"
           >
-            <img
-              alt="image-file-15.png"
-              class="ant-image-img"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
             <div
-              class="ant-image-cover ant-image-cover-center"
-            />
+              class="ant-file-card-file-icon"
+              style="color: #fab714;"
+            >
+              <span
+                aria-label="file-zip"
+                class="anticon anticon-file-zip"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="file-zip"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M854.6 288.7c6 6 9.4 14.1 9.4 22.6V928c0 17.7-14.3 32-32 32H192c-17.7 0-32-14.3-32-32V96c0-17.7 14.3-32 32-32h424.7c8.5 0 16.7 3.4 22.7 9.4l215.2 215.3zM790.2 326L602 137.8V326h188.2zM296 136v64h64v-64h-64zm64 64v64h64v-64h-64zm-64 64v64h64v-64h-64zm64 64v64h64v-64h-64zm-64 64v64h64v-64h-64zm64 64v64h64v-64h-64zm-64 64v64h64v-64h-64zm0 64v160h128V584H296zm48 48h32v64h-32v-64z"
+                  />
+                </svg>
+              </span>
+            </div>
+            <div
+              class="ant-file-card-file-content"
+            >
+              <div
+                class="ant-file-card-file-name"
+              >
+                <span
+                  class="ant-file-card-file-name-prefix"
+                >
+                  zip-file
+                </span>
+                <span
+                  class="ant-file-card-file-name-suffix"
+                >
+                  .zip
+                </span>
+              </div>
+              <div
+                class="ant-file-card-file-description"
+              >
+                1 KB
+              </div>
+            </div>
           </div>
         </div>
         <div
@@ -3096,148 +3575,55 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
           class="ant-file-card css-var-_r_1_"
         >
           <div
-            class="ant-image ant-file-card-image css-var-_r_1_ ant-image-css-var"
+            class="ant-file-card-file"
           >
-            <img
-              alt="image-file-16.png"
-              class="ant-image-img"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
             <div
-              class="ant-image-cover ant-image-cover-center"
-            />
-          </div>
-        </div>
-        <div
-          class="ant-file-card-list-remove"
-        >
-          <span
-            aria-label="close-circle"
-            class="anticon anticon-close-circle"
-            role="img"
-          >
-            <svg
-              aria-hidden="true"
-              data-icon="close-circle"
-              fill="currentColor"
-              fill-rule="evenodd"
-              focusable="false"
-              height="1em"
-              viewBox="64 64 896 896"
-              width="1em"
+              class="ant-file-card-file-icon"
+              style="color: #8c8c8c;"
             >
-              <path
-                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
-              />
-            </svg>
-          </span>
-        </div>
-      </div>
-      <div
-        class="ant-file-card-list-item"
-      >
-        <div
-          class="ant-file-card css-var-_r_1_"
-        >
-          <div
-            class="ant-image ant-file-card-image css-var-_r_1_ ant-image-css-var"
-          >
-            <img
-              alt="image-file-17.png"
-              class="ant-image-img"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
+              <span
+                aria-label="file-text"
+                class="anticon anticon-file-text"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="file-text"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M854.6 288.7c6 6 9.4 14.1 9.4 22.6V928c0 17.7-14.3 32-32 32H192c-17.7 0-32-14.3-32-32V96c0-17.7 14.3-32 32-32h424.7c8.5 0 16.7 3.4 22.7 9.4l215.2 215.3zM790.2 326L602 137.8V326h188.2zM320 482a8 8 0 00-8 8v48a8 8 0 008 8h384a8 8 0 008-8v-48a8 8 0 00-8-8H320zm0 136a8 8 0 00-8 8v48a8 8 0 008 8h184a8 8 0 008-8v-48a8 8 0 00-8-8H320z"
+                  />
+                </svg>
+              </span>
+            </div>
             <div
-              class="ant-image-cover ant-image-cover-center"
-            />
-          </div>
-        </div>
-        <div
-          class="ant-file-card-list-remove"
-        >
-          <span
-            aria-label="close-circle"
-            class="anticon anticon-close-circle"
-            role="img"
-          >
-            <svg
-              aria-hidden="true"
-              data-icon="close-circle"
-              fill="currentColor"
-              fill-rule="evenodd"
-              focusable="false"
-              height="1em"
-              viewBox="64 64 896 896"
-              width="1em"
+              class="ant-file-card-file-content"
             >
-              <path
-                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
-              />
-            </svg>
-          </span>
-        </div>
-      </div>
-      <div
-        class="ant-file-card-list-item"
-      >
-        <div
-          class="ant-file-card css-var-_r_1_"
-        >
-          <div
-            class="ant-image ant-file-card-image css-var-_r_1_ ant-image-css-var"
-          >
-            <img
-              alt="image-file-18.png"
-              class="ant-image-img"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
-            <div
-              class="ant-image-cover ant-image-cover-center"
-            />
-          </div>
-        </div>
-        <div
-          class="ant-file-card-list-remove"
-        >
-          <span
-            aria-label="close-circle"
-            class="anticon anticon-close-circle"
-            role="img"
-          >
-            <svg
-              aria-hidden="true"
-              data-icon="close-circle"
-              fill="currentColor"
-              fill-rule="evenodd"
-              focusable="false"
-              height="1em"
-              viewBox="64 64 896 896"
-              width="1em"
-            >
-              <path
-                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
-              />
-            </svg>
-          </span>
-        </div>
-      </div>
-      <div
-        class="ant-file-card-list-item"
-      >
-        <div
-          class="ant-file-card css-var-_r_1_"
-        >
-          <div
-            class="ant-image ant-file-card-image css-var-_r_1_ ant-image-css-var"
-          >
-            <img
-              alt="image-file-19.png"
-              class="ant-image-img"
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
-            <div
-              class="ant-image-cover ant-image-cover-center"
-            />
+              <div
+                class="ant-file-card-file-name"
+              >
+                <span
+                  class="ant-file-card-file-name-prefix"
+                >
+                  txt-file
+                </span>
+                <span
+                  class="ant-file-card-file-name-suffix"
+                >
+                  .txt
+                </span>
+              </div>
+              <div
+                class="ant-file-card-file-description"
+              >
+                1 KB
+              </div>
+            </div>
           </div>
         </div>
         <div

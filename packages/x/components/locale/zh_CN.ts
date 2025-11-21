@@ -24,8 +24,8 @@ const localeValues: Required<xLocale & xMarkdownLocale> = {
   Mermaid: {
     copySuccess: '复制成功',
     copy: '复制代码',
-    zoomIn: '缩小',
-    zoomOut: '放大',
+    zoomIn: '放大',
+    zoomOut: '缩小',
     zoomReset: '重置',
     download: '下载',
     code: '代码',

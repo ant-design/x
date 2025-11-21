@@ -192,12 +192,12 @@ const providerFactory = (conversationKey: string) => {
       conversationKey,
       new DeepSeekChatProvider({
         request: XRequest<XModelParams, Partial<Record<SSEFields, XModelResponse>>>(
-          'https://api.x.ant.design/api/llm_siliconflow_deepSeek-r1-distill-1wen-7b',
+          'https://api.x.ant.design/api/big_model_glm-4.5-flash',
           {
             manual: true,
             params: {
               stream: true,
-              model: 'DeepSeek-R1-Distill-Qwen-7B',
+              model: 'glm-4.5-flash',
             },
           },
         ),
@@ -238,11 +238,9 @@ const Footer: React.FC<{
 const getRole = (className: string): BubbleListProps['role'] => ({
   assistant: {
     placement: 'start',
-    components: {
-      footer: (content, { status, key }) => (
-        <Footer content={content} status={status} id={key as string} />
-      ),
-    },
+    footer: (content, { status, key }) => (
+      <Footer content={content} status={status} id={key as string} />
+    ),
     contentRender: (content: any, { status }) => {
       const newContent = content.replace('/\n\n/g', '<br/><br/>');
       return (
@@ -382,7 +380,7 @@ const App = () => {
                     key: i.id,
                     status: i.status,
                     loading: i.status === 'loading',
-                    extra: i.message.extra,
+                    extraInfo: i.message.extraInfo,
                   }))}
                   styles={{
                     root: {
@@ -410,6 +408,9 @@ const App = () => {
                     if (!val) return;
                     onRequest({
                       messages: [{ role: 'user', content: val }],
+                      thinking: {
+                        type: 'disabled',
+                      },
                     });
                     setActiveConversation(curConversation);
                     senderRef.current?.clear?.();

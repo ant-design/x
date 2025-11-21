@@ -1,9 +1,5 @@
 import React from 'react';
-import { AnyObject } from '../_util/type';
-import { MessageStatus } from './interface';
-
-export const BubbleContext = React.createContext<{
-  key?: string | number;
-  status?: `${MessageStatus}`;
-  extra?: AnyObject;
-}>({});
+import type { BubbleItemType } from './interface';
+export const BubbleContext = React.createContext<
+  Partial<Pick<BubbleItemType, 'key' | 'status' | 'extraInfo'>>
+>({});

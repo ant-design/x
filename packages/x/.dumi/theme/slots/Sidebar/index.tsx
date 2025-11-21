@@ -8,7 +8,7 @@ import React from 'react';
 import useMenu from '../../../hooks/useMenu';
 import SiteContext from '../SiteContext';
 
-const useStyle = createStyles(({ token, css }) => {
+const useStyle = createStyles(({ token, css }, { alertVisible }: { alertVisible: boolean }) => {
   const { antCls, fontFamily, colorSplit, marginXXL, paddingXXS } = token;
 
   return {
@@ -94,9 +94,9 @@ const useStyle = createStyles(({ token, css }) => {
     mainMenu: css`
       z-index: 1;
       position: sticky;
-      top: ${token.headerHeight}px;
+      top: ${token.headerHeight + (alertVisible ? token.alertHeight : 0)}px;
       width: 100%;
-      max-height: calc(100vh - ${token.headerHeight}px);
+      max-height: calc(100vh - ${token.headerHeight + (alertVisible ? token.alertHeight : 0)}px);
       overflow: hidden;
       scrollbar-width: thin;
       scrollbar-gutter: stable;
@@ -110,13 +110,12 @@ const useStyle = createStyles(({ token, css }) => {
 
 const Sidebar: React.FC = () => {
   const sidebarData = useSidebarData();
-  const { isMobile, theme } = React.use(SiteContext);
-  const { styles } = useStyle();
+  const { isMobile, theme, alertVisible } = React.use(SiteContext);
+  const { styles } = useStyle({ alertVisible });
 
   const [menuItems, selectedKey] = useMenu();
   const isDark = theme.includes('dark');
   const { colorBgContainer } = useTheme();
-
   const menuChild = (
     <XProvider
       theme={{ components: { Menu: { itemBg: colorBgContainer, darkItemBg: colorBgContainer } } }}

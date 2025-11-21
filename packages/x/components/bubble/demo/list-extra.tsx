@@ -10,45 +10,43 @@ const roles = (
     placement: 'start',
     typing: (_, { status }) =>
       status === 'updating' ? { effect: 'typing', step: 5, interval: 20 } : false,
-    components: {
-      footer: (content, { key, extra }) => (
-        <Actions
-          items={[
-            {
-              key: 'copy',
-              label: 'copy',
-              actionRender: () => {
-                return <Actions.Copy text={content} />;
-              },
+    footer: (content, { key, extraInfo }) => (
+      <Actions
+        items={[
+          {
+            key: 'copy',
+            label: 'copy',
+            actionRender: () => {
+              return <Actions.Copy text={content} />;
             },
-            {
-              key: 'feedback',
-              actionRender: () => (
-                <Actions.Feedback
-                  value={extra?.feedback || 'default'}
-                  styles={{
-                    liked: {
-                      color: '#f759ab',
-                    },
-                  }}
-                  onChange={(val) => {
-                    setMessage((messages) =>
-                      messages.map((message) => {
-                        if (message.key === key) {
-                          message.extra = { feedback: val };
-                        }
-                        return message;
-                      }),
-                    );
-                  }}
-                  key="feedback"
-                />
-              ),
-            },
-          ]}
-        />
-      ),
-    },
+          },
+          {
+            key: 'feedback',
+            actionRender: () => (
+              <Actions.Feedback
+                value={extraInfo?.feedback || 'default'}
+                styles={{
+                  liked: {
+                    color: '#f759ab',
+                  },
+                }}
+                onChange={(val) => {
+                  setMessage((messages) =>
+                    messages.map((message) => {
+                      if (message.key === key) {
+                        message.extraInfo = { feedback: val };
+                      }
+                      return message;
+                    }),
+                  );
+                }}
+                key="feedback"
+              />
+            ),
+          },
+        ]}
+      />
+    ),
     loadingRender: () => (
       <Flex align="center" gap="small">
         <Spin size="small" />
@@ -70,7 +68,7 @@ const App = () => {
       role: 'ai',
       variant: 'borderless',
       content: 'Mock welcome content. '.repeat(10),
-      extra: {
+      extraInfo: {
         feedback: 'like',
       },
     },
@@ -85,7 +83,7 @@ const App = () => {
       status: 'success',
       variant: 'borderless',
       content: 'Mock welcome content. '.repeat(10),
-      extra: {
+      extraInfo: {
         feedback: 'dislike',
       },
     },
@@ -100,7 +98,7 @@ const App = () => {
       variant: 'borderless',
       status: 'success',
       content: 'Mock welcome content. '.repeat(10),
-      extra: {
+      extraInfo: {
         feedback: 'dislike',
       },
     },
@@ -115,7 +113,7 @@ const App = () => {
       variant: 'borderless',
       status: 'success',
       content: 'Mock welcome content. '.repeat(10),
-      extra: {
+      extraInfo: {
         feedback: 'like',
       },
     },

@@ -6,6 +6,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -32,8 +33,6 @@
 
   font-size: var(--font-size);
   line-height: 1.5714285714285714;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
   width: 100%;
   color: var(--text-color);
 }
@@ -41,9 +40,7 @@
 .x-markdown p,
 .x-markdown div,
 .x-markdown span,
-.x-markdown li,
-.x-markdown td,
-.x-markdown th {
+.x-markdown li {
   word-break: break-word;
   overflow-wrap: break-word;
 }
@@ -55,13 +52,6 @@
   white-space: pre-wrap;
 }
 
-.x-markdown table {
-  table-layout: fixed;
-  width: 100%;
-  word-break: break-word;
-  overflow-wrap: break-word;
-}
-
 .x-markdown th,
 .x-markdown td {
   padding: var(--td-th-padding);
@@ -69,6 +59,10 @@
 
 .x-markdown th {
   font-weight: var(--border-font-weight);
+}
+
+.x-markdown pre table {
+  box-shadow: none;
 }
 
 .x-markdown pre td,
@@ -81,9 +75,11 @@
 .x-markdown p {
   margin: var(--margin-block);
 }
+
 .x-markdown p:first-child {
   margin-top: 0;
 }
+
 .x-markdown p:last-child {
   margin-bottom: 0;
 }
@@ -93,10 +89,12 @@
   margin: var(--margin-ul-ol);
   padding: var(--padding-ul-ol);
 }
+
 .x-markdown ul:first-child,
 .x-markdown ol:first-child {
   margin-top: 0;
 }
+
 .x-markdown ul:last-child,
 .x-markdown ol:last-child {
   margin-bottom: 0;
@@ -105,15 +103,19 @@
 .x-markdown ol > li {
   list-style: decimal;
 }
+
 .x-markdown ul > li {
   list-style: disc;
 }
+
 .x-markdown li {
   margin: var(--margin-li);
 }
+
 .x-markdown li:first-child {
   margin-top: 0;
 }
+
 .x-markdown li:last-child {
   margin-bottom: 0;
 }
@@ -122,9 +124,11 @@
   margin: var(--margin-pre);
   overflow-x: auto;
 }
+
 .x-markdown pre:first-child {
   margin-top: 0;
 }
+
 .x-markdown pre:last-child {
   margin-bottom: 0;
 }
@@ -157,10 +161,16 @@
 .x-markdown table:not(pre) {
   margin: var(--table-margin);
   border-collapse: collapse;
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  overflow: auto;
 }
+
 .x-markdown table:not(pre):first-child {
   margin-top: 0;
 }
+
 .x-markdown table:not(pre):last-child {
   margin-bottom: 0;
 }

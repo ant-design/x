@@ -24,12 +24,10 @@ describe('Bubble Enhanced Tests', () => {
           editable={false}
           streaming={false}
           footerPlacement="inner-start"
-          components={{
-            avatar: <div className="custom-avatar">头像</div>,
-            header: <div className="custom-header">头部</div>,
-            footer: <div className="custom-footer">底部</div>,
-            extra: <div className="custom-extra">附加</div>,
-          }}
+          avatar={<div className="custom-avatar">头像</div>}
+          header={<div className="custom-header">头部</div>}
+          footer={<div className="custom-footer">底部</div>}
+          extra={<div className="custom-extra">附加</div>}
           data-testid="bubble-test"
         />,
       );
@@ -51,12 +49,10 @@ describe('Bubble Enhanced Tests', () => {
       const { container } = render(
         <Bubble
           content="Main Content"
-          components={{
-            avatar: <div className="custom-avatar">Avatar</div>,
-            header: <div className="custom-header">Header</div>,
-            footer: <div className="custom-footer">Footer</div>,
-            extra: <div className="custom-extra">Extra</div>,
-          }}
+          avatar={<div className="custom-avatar">Avatar</div>}
+          header={<div className="custom-header">Header</div>}
+          footer={<div className="custom-footer">Footer</div>}
+          extra={<div className="custom-extra">Extra</div>}
         />,
       );
 
@@ -68,18 +64,14 @@ describe('Bubble Enhanced Tests', () => {
 
     it('should handle function slots', () => {
       const headerFn = (content: string) => <div>Header: {content}</div>;
-      const { container } = render(<Bubble content="Test" components={{ header: headerFn }} />);
+      const { container } = render(<Bubble content="Test" header={headerFn} />);
 
       expect(container).toHaveTextContent('Header: Test');
     });
 
     it('should handle footer placement', () => {
       const { container } = render(
-        <Bubble
-          content="Test"
-          footerPlacement="inner-start"
-          components={{ footer: <div>Footer</div> }}
-        />,
+        <Bubble content="Test" footerPlacement="inner-start" footer={<div>Footer</div>} />,
       );
 
       expect(container.querySelector('.ant-bubble-footer-start')).toBeInTheDocument();

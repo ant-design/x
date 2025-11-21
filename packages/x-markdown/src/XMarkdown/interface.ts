@@ -18,6 +18,16 @@ export interface AnimationConfig {
   easing?: string;
 }
 
+export enum StreamCacheTokenType {
+  Text = 'text',
+  Link = 'link',
+  Image = 'image',
+  Html = 'html',
+  Emphasis = 'emphasis',
+  List = 'list',
+  Table = 'table',
+}
+
 type Token = Tokens.Generic;
 
 interface StreamingOption {
@@ -43,10 +53,12 @@ interface StreamingOption {
    * @description Mapping configuration to convert incomplete Markdown formats to custom loading components, used to provide custom loading components for unclosed links and images during streaming rendering
    * @default { link: 'incomplete-link', image: 'incomplete-image' }
    */
-  incompleteMarkdownComponentMap?: {
-    link?: string;
-    image?: string;
-  };
+  incompleteMarkdownComponentMap?: Partial<
+    Record<
+      Exclude<(typeof StreamCacheTokenType)[keyof typeof StreamCacheTokenType], 'text'>,
+      string
+    >
+  >;
 }
 
 type StreamStatus = 'loading' | 'done';

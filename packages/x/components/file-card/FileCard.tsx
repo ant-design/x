@@ -11,13 +11,15 @@ import {
   JavaScriptOutlined,
   PythonOutlined,
 } from '@ant-design/icons';
-import { Image, type ImageProps } from 'antd';
+import type { ImageProps, SpinProps } from 'antd';
+import { Image } from 'antd';
 import classnames from 'classnames';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React, { useMemo } from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 import File from './components/File';
+import ImageLoading from './components/ImageLoading';
 import AudioIcon from './icons/audio';
 import VideoIcon from './icons/video';
 import useStyle from './style';
@@ -38,13 +40,11 @@ export type PresetIcons =
   | 'java'
   | 'javascript'
   | 'python';
-
-type FileExtendsProps =
-  | ImageProps
-  | Partial<React.JSX.IntrinsicElements['video']>
-  | Partial<React.JSX.IntrinsicElements['audio']>;
-
-export type FileCardProps = FileExtendsProps & {
+export interface FileCardProps
+  extends Omit<
+    React.HTMLAttributes<HTMLDivElement>,
+    'content' | 'onAnimationStart' | 'onAnimationEnd'
+  > {
   prefixCls?: string;
   style?: React.CSSProperties;
   styles?: Partial<Record<SemanticType, React.CSSProperties>>;
@@ -56,12 +56,20 @@ export type FileCardProps = FileExtendsProps & {
   byte?: number;
   size?: 'small' | 'default';
   description?: React.ReactNode;
+  loading?: boolean;
   src?: string;
   mask?: React.ReactNode;
   icon?: React.ReactNode | PresetIcons;
   type?: 'file' | 'image' | 'audio' | 'video' | string;
+  imageProps?: ImageProps;
+  spinProps?: SpinProps & {
+    showText?: boolean;
+    icon?: React.ReactNode;
+  };
+  videoProps?: Partial<React.JSX.IntrinsicElements['video']>;
+  audioProps?: Partial<React.JSX.IntrinsicElements['audio']>;
   onClick?: () => void;
-};
+}
 
 const IMAGE_EXT = ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp', 'svg', 'jfif'];
 const AUDIO_EXT = ['mp3', 'wav', 'flac', 'ape', 'aac', 'ogg'];
@@ -169,8 +177,13 @@ const FileCard: React.FC<FileCardProps> = (props) => {
     icon: customIcon,
     src,
     mask,
+    loading,
     type: customType,
     onClick,
+    imageProps,
+    videoProps,
+    audioProps,
+    spinProps,
     ...restProps
   } = props;
 
@@ -242,16 +255,27 @@ const FileCard: React.FC<FileCardProps> = (props) => {
   if (fileType === 'image') {
     const preview = mask ? { mask } : undefined;
     ContentNode = (
-      <Image
-        rootClassName={classnames(`${prefixCls}-image`, classNames.file)}
-        width={styles?.file?.width}
-        height={styles?.file?.height}
+      <div
+        className={classnames(`${prefixCls}-image`, classNames.file, {
+          [`${prefixCls}-loading`]: loading,
+        })}
         style={styles.file}
-        alt={name}
-        src={src}
-        preview={preview}
-        {...(restProps as ImageProps)}
-      />
+      >
+        {src && (
+          <Image
+            rootClassName={classnames(`${prefixCls}-image-img`)}
+            width={styles?.file?.width}
+            height={styles?.file?.height}
+            alt={name}
+            src={src}
+            preview={preview}
+            {...(imageProps as ImageProps)}
+          />
+        )}
+        {loading && (
+          <ImageLoading spinProps={spinProps} prefixCls={prefixCls} style={styles.file} />
+        )}
+      </div>
     );
   } else if (fileType === 'video') {
     ContentNode = (
@@ -260,7 +284,7 @@ const FileCard: React.FC<FileCardProps> = (props) => {
         controls
         style={styles.file}
         className={classnames(`${prefixCls}-video`, classNames.file)}
-        {...(restProps as React.JSX.IntrinsicElements['video'])}
+        {...(videoProps as React.JSX.IntrinsicElements['video'])}
       />
     );
   } else if (fileType === 'audio') {
@@ -270,7 +294,7 @@ const FileCard: React.FC<FileCardProps> = (props) => {
         controls
         style={styles.file}
         className={classnames(`${prefixCls}-audio`, classNames.file)}
-        {...(restProps as React.JSX.IntrinsicElements['audio'])}
+        {...(audioProps as React.JSX.IntrinsicElements['audio'])}
       />
     );
   } else {

@@ -1,7 +1,7 @@
 ## zh-CN
 
-可使用 [Image](https://ant-design.antgroup.com/components/image-cn#api) 属性。
+图片\文件卡片。
 
 ## en-US
 
-Can use [Image](https://ant-design.antgroup.com/components/image#api) props.
+Image\File card.
