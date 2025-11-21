@@ -146,17 +146,7 @@ class Renderer {
       return htmlString;
     }
 
-    if (!DOMPurify || typeof DOMPurify.sanitize !== 'function') {
-      console.warn('DOMPurify is not available, skipping HTML sanitization');
-      return htmlString;
-    }
-
-    try {
-      return DOMPurify.sanitize(htmlString, config);
-    } catch (error) {
-      console.warn('DOMPurify sanitization failed:', error);
-      return htmlString;
-    }
+    return DOMPurify.sanitize(htmlString, config);
   }
 
   public processHtml(htmlString: string): React.ReactNode {
