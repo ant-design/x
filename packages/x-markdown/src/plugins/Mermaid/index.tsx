@@ -1,10 +1,15 @@
-import { DownloadOutlined, ZoomInOutlined, ZoomOutOutlined } from '@ant-design/icons';
+import {
+  DownloadOutlined,
+  OneToOneOutlined,
+  ZoomInOutlined,
+  ZoomOutOutlined,
+} from '@ant-design/icons';
 import useXComponentConfig from '@ant-design/x/es/_util/hooks/use-x-component-config';
 import Actions from '@ant-design/x/es/actions';
 import useLocale from '@ant-design/x/es/locale/useLocale';
 import useXProviderContext from '@ant-design/x/es/x-provider/hooks/use-x-provider-context';
 import locale_EN from '@ant-design/x/locale/en_US';
-import { Button, Segmented, Space, Tooltip } from 'antd';
+import { Segmented, Space } from 'antd';
 import classnames from 'classnames';
 import throttle from 'lodash.throttle';
 import mermaid from 'mermaid';
@@ -250,15 +255,8 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
                   {
                     label: contextLocale.zoomReset,
                     key: 'zoomReset',
-                    actionRender: (item) => {
-                      return (
-                        <Tooltip title={item.label}>
-                          <Button type="text" size="small" onClick={handleReset}>
-                            {item.label}
-                          </Button>
-                        </Tooltip>
-                      );
-                    },
+                    icon: <OneToOneOutlined />,
+                    onItemClick: handleReset,
                   },
                   {
                     label: contextLocale.download,
