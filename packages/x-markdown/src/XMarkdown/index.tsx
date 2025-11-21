@@ -40,6 +40,8 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
     [contextDirection, style],
   );
 
+  const mergedFooterCls = classnames('x-markdown-footer', footerClassName);
+
   const mergedFooterStyle: React.CSSProperties = useMemo(
     () => ({
       direction: contextDirection === 'rtl' ? 'rtl' : 'ltr',
@@ -81,11 +83,7 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
   const footerElement = useMemo(() => {
     if (!footer) return null;
     return (
-      <div
-        className={classnames(`${prefixCls}-footer`, footerClassName)}
-        style={mergedFooterStyle}
-        key="x-markdown-footer"
-      >
+      <div className={mergedFooterCls} style={mergedFooterStyle} key="x-markdown-footer">
         {footer}
       </div>
     );
@@ -94,8 +92,8 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
   if (!displayContent && !footer) return null;
 
   return (
-    <div className={classnames(`${prefixCls}-container`, mergedCls)} style={mergedStyle}>
-      <div className={`${prefixCls}-content`}>
+    <div className={mergedCls} style={mergedStyle}>
+      <div className={'x-markdown-content'}>
         {displayContent ? renderer.render(htmlString) : null}
       </div>
       {footerElement}
