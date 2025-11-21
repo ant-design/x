@@ -1,11 +1,13 @@
 import { XMarkdown } from '@ant-design/x-markdown';
 import { Button, Card, Spin } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
+import { useIntl } from 'react-intl';
 
 const FooterDemo = () => {
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(true);
   const timer = useRef<NodeJS.Timeout | null>(null);
+  const { locale } = useIntl();
 
   const text = `
 # AI Assistant Response
@@ -18,12 +20,9 @@ Let me provide you with a comprehensive answer about how footer works in streami
 
 ## Key Features
 
-- **Real-time Updates**: Footer updates as content streams
 - **Loading Indicators**: Show processing status
 - **Completion Status**: Display when content is fully loaded
 - **Custom Styling**: Fully customizable appearance
-
-This demonstrates how the footer parameter enhances the streaming experience.
   `;
 
   const startStreaming = () => {
@@ -62,7 +61,7 @@ This demonstrates how the footer parameter enhances the streaming experience.
 
   return (
     <Card
-      title="Footer Streaming Example"
+      title={locale === 'zh-CN' ? `Footer示例` : `Footer Example`}
       extra={<Button onClick={handleReRender}>Re-Render</Button>}
     >
       <XMarkdown
