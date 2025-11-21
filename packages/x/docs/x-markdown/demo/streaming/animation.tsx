@@ -6,8 +6,6 @@ import { useMarkdownTheme } from '../_utils';
 import '@ant-design/x-markdown/themes/light.css';
 import '@ant-design/x-markdown/themes/dark.css';
 
-const { Text } = Typography;
-
 const text = `
 # Ant Design X: The Ultimate AI Conversation UI Framework
 
@@ -60,6 +58,8 @@ Based on the RICH interaction paradigm, we provide many atomic components for di
 
 > Ant Design X is more than just a component library—it's a complete solution for building the next generation of AI-powered applications. Start building today and create experiences that delight your users.
 `;
+
+const { Text } = Typography;
 
 const App = () => {
   const [enableAnimation, setEnableAnimation] = React.useState(true);

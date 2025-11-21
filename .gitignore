@@ -96,3 +96,10 @@ packages/x-markdown/src/plugins/version/token.json
 packages/x-markdown/src/version/version.ts
 
 packages/x-sdk/src/version/version.ts
+
+# Playwright (from benchmark)
+packages/x-markdown/test-results/
+packages/x-markdown/benchmark/playwright-report/
+packages/x-markdown/benchmark/blob-report/
+packages/x-markdown/benchmark/playwright/.cache/
+packages/x-markdown/benchmark/playwright/.auth/
