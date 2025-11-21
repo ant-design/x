@@ -120,11 +120,11 @@ export default App;
 
 ## 🌈 开箱即用的大模型企业级组件
 
-`@ant-design/x` 基于 RICH 交互范式，在不同的交互阶段提供了大量的原子组件，帮助你灵活搭建你的 AI 应用，详情点击[这里](../x/README-zh_CN.md)。
+`@ant-design/x` 基于 RICH 交互范式，在不同的交互阶段提供了大量的原子组件，帮助你灵活搭建你的 AI 应用，详情点击[这里](packages/x/README-zh_CN.md)。
 
 ## ⚡️ 对接模型智能体服务 & 高效管理数据流
 
-`@ant-design/x-sdk` 提供了一系列的工具API，旨在提供开发者开箱即用的管理AI应用数据流，详情点击[这里](../x-sdk/README-zh_CN.md)。
+`@ant-design/x-sdk` 提供了一系列的工具API，旨在提供开发者开箱即用的管理AI应用数据流，详情点击[这里](packages/x-sdk/README-zh_CN.md)。
 
 ## 如何贡献
 
