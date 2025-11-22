@@ -93,7 +93,6 @@ jobs:
         continue-on-error: true
         env:
           PR_ID: ${{ steps.pr.outputs.id }}
-        working-directory: ./packages/x
         run: |
           export DEPLOY_DOMAIN=https://preview-${PR_ID}-antd-x.surge.sh
           npx surge --project ./ --domain $DEPLOY_DOMAIN --token ${{ secrets.SURGE_TOKEN }}
