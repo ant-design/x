@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "presite": "npm run prestart --workspaces",
-    "site": "npm run site --workspace packages/x && cp -rf packages/x/_site ./_site",
+    "predeploy": "npm run site",
+    "deploy": "gh-pages -d _site -b gh-pages -f",
+    "site": "npm run site --workspace packages/x && cp -rf packages/x/_site ./_site && cp CNAME _site",
     "compile": "npm run compile --workspaces",
     "version": "npm run version --workspaces",
     "start": "npm run start --workspace packages/x",
