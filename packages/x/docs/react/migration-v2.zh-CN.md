@@ -11,7 +11,7 @@ title: 从 v1 到 v2
 
 ## 升级准备
 
-1. 请先将项目中依赖的 antd 升级到 6.x 的最新版本，按照控制台 warning 信息移除/修改相关的 API。
+1. 请先将项目中依赖的 antd 升级到 6.x 的最新版本，详情请查看(升级文档)[https://ant.design/docs/react/migration-v6-cn]。
 
 ## 2.0 有哪些不兼容的变化
 
