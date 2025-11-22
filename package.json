@@ -40,6 +40,7 @@
     "father": "^4.6.0",
     "husky": "^9.1.6",
     "lint-staged": "^16.1.5",
+    "gh-pages": "^6.3.0",
     "marked-emoji": "^2.0.1",
     "prettier": "^3.3.3",
     "react-markdown": "^10.1.0",
