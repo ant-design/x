@@ -25,7 +25,7 @@ jobs:
           NODE_OPTIONS: --max_old_space_size=4096
 
       - name: build dist and bundle analyzer report
-        run: ut run compile
+        run: ut compile
         env:
           ANALYZER: 1
           NODE_OPTIONS: --max_old_space_size=4096
