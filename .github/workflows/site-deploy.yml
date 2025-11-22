@@ -57,7 +57,7 @@ jobs:
         working-directory: ./packages/x
         run: |
           export DEPLOY_DOMAIN=ant-design-x-${{ steps.publish-version.outputs.VERSION }}.surge.sh
-          bunx surge --project ./_site --domain $DEPLOY_DOMAIN --token ${{ secrets.SURGE_TOKEN }}
+          npx surge --project ./_site --domain $DEPLOY_DOMAIN --token ${{ secrets.SURGE_TOKEN }}
 
       - name: Create Commit Comment
         uses: peter-evans/commit-comment@v4
