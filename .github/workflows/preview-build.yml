@@ -29,7 +29,7 @@ jobs:
         env:
           NODE_OPTIONS: '--max_old_space_size=4096'
       - name: upload site artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: site
           path: packages/x/_site/
@@ -41,7 +41,7 @@ jobs:
 
       - name: Upload PR number
         if: ${{ always() }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: pr
           path: ./pr-id.txt
