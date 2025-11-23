@@ -16,7 +16,7 @@
   --text-color: inherit;
   --font-size: inherit;
   --margin-block: 0 0 1em 0;
-  --foter-top-margin: 0.85rem;
+  --footer-top-margin: 0.85rem;
   --footer-padding: 0.85em 0;
   --td-th-padding: 0.85em 1em;
   --pre-th-td-padding: 2px 0;
@@ -210,9 +210,9 @@
 .x-markdown .x-markdown-footer {
   width: 100%;
   padding: var(--footer-padding);
-  border-top: 1px solid rgb(240, 240, 240);
+  border-top: 1px solid var(--border-color, #f0f0f0);
 }
 
 .x-markdown-content:not(:empty) + .x-markdown-footer {
-  margin-top: var(--foter-top-margin);
+  margin-top: var(--footer-top-margin);
 }
