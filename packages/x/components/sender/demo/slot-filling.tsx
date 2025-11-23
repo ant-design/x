@@ -258,7 +258,8 @@ const App: React.FC = () => {
         }}
       >
         <Sender
-          autoSize={{ minRows: 4, maxRows: 4 }}
+          skill={{ value: 'travelId', label: 'Travel Planner' }}
+          autoSize={{ minRows: 2, maxRows: 4 }}
           onSubmit={(value) => {
             setValue(value);
             setSlotConfigKey(false);

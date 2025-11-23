@@ -63,7 +63,6 @@ export interface SenderToken extends FullToken<'Sender'> {
 }
 const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
   const { componentCls, paddingSM, paddingXS, paddingXXS, lineWidth, calc } = token;
-
   return {
     [`${componentCls}:not(${componentCls}-switch):not(${componentCls}-header)`]: {
       position: 'relative',
@@ -110,8 +109,19 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
         borderRadius: 0,
         flex: 'auto',
         alignSelf: 'center',
-        minHeight: 'auto',
         caretColor: token.colorPrimary,
+        fontSize: token.fontSize,
+        minHeight: calc(unit(token.fontSize))
+          .mul(unit(token.lineHeight))
+          .add(2)
+          .mul(unit('attr(data-minrows number)'))
+          .equal(),
+        maxHeight: calc(unit(token.fontSize))
+          .mul(unit(token.lineHeight))
+          .add(2)
+          .mul(unit('attr(data-maxrows number)'))
+          .equal(),
+        overflowY: 'auto',
       },
 
       // ============================ Actions ============================

@@ -1,4 +1,4 @@
-import type { ButtonProps, GetProps, InputProps } from 'antd';
+import type { ButtonProps, GetProps, InputProps, TooltipProps } from 'antd';
 import type React from 'react';
 import type { SlotTextAreaRef } from './SlotTextArea';
 import type { TextAreaRef } from './TextArea';
@@ -31,7 +31,7 @@ export type NodeRender = (
 ) => BaseNode;
 
 interface SlotConfigBaseType {
-  type: 'text' | 'input' | 'select' | 'tag' | 'custom' | 'content';
+  type: 'text' | 'input' | 'select' | 'tag' | 'custom' | 'content' | 'skill';
   formatResult?: (value: any) => string;
 }
 
@@ -50,6 +50,12 @@ interface SlotConfigContentType extends SlotConfigBaseType {
     defaultValue?: any;
     [key: string]: any;
   };
+}
+
+interface SkillType {
+  label?: string;
+  value: string;
+  closable?: boolean | { closeIcon?: React.ReactNode; disabled?: boolean; toolTip?: TooltipProps };
 }
 
 interface SlotConfigInputType extends SlotConfigBaseType {
@@ -98,7 +104,6 @@ interface SlotConfigCustomType extends SlotConfigBaseType {
   ) => React.ReactNode;
 }
 
-export type EditSlotConfigType = SlotConfigContentType;
 export type SlotConfigType =
   | SlotConfigTextType
   | SlotConfigInputType
@@ -138,6 +143,7 @@ export interface SenderProps
   suffix?: BaseNode | NodeRender;
   header?: BaseNode | NodeRender;
   autoSize?: boolean | { minRows?: number; maxRows?: number };
+  skill?: SkillType;
 }
 
 export type SenderRef = Omit<TextAreaRef, 'nativeElement'> &

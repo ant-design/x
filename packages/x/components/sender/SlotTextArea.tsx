@@ -1,5 +1,5 @@
 import { CaretDownFilled } from '@ant-design/icons';
-import { Dropdown, Input, InputRef } from 'antd';
+import { Button, Dropdown, Input, InputRef } from 'antd';
 import classnames from 'classnames';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
@@ -8,7 +8,6 @@ import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import warning from '../_util/warning';
 import { useXProviderContext } from '../x-provider';
 import { SenderContext } from './context';
-import useInputHeight from './hooks/use-input-height';
 import useSlotConfigState from './hooks/use-slot-config-state';
 import type { EventType, insertPosition, SlotConfigType } from './interface';
 
@@ -62,6 +61,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     onFocus,
     onBlur,
     slotConfig,
+    skill,
     ...restProps
   } = React.useContext(SenderContext);
   const slotConfigRef = useRef<SlotConfigType[]>([...(slotConfig || [])]);
@@ -72,17 +72,23 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const contextConfig = useXComponentConfig('sender');
   const inputCls = `${prefixCls}-input`;
 
-  // ============================ Style =============================
-
-  const mergeStyle = { ...contextConfig.styles?.input, ...styles.input };
-  const inputHeightStyle = useInputHeight(autoSize, mergeStyle);
-
   // ============================ Refs =============================
   const editableRef = useRef<HTMLDivElement>(null);
   const slotDomMap = useRef<Map<string, HTMLSpanElement>>(new Map());
-  const isCompositionRef = useRef(false);
-  const keyLockRef = useRef(false);
+  const isCompositionRef = useRef<boolean>(false);
+  const keyLockRef = useRef<boolean>(false);
   const lastSelectionRef = useRef<Range | null>(null);
+  const slotInnerRef = useRef<boolean>(false);
+  const skillDom = useRef<HTMLSpanElement>(null);
+
+  // ============================ Style =============================
+
+  const mergeStyle = { ...contextConfig.styles?.input, ...styles.input };
+
+  const rowsAttr =
+    autoSize && typeof autoSize !== 'boolean'
+      ? { minRows: autoSize.minRows, maxRows: autoSize.maxRows }
+      : {};
 
   // ============================ Attrs =============================
   const domProps = pickAttrs(restProps, {
@@ -98,8 +104,9 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
   // ============================ State =============================
 
-  const [slotConfigMap, __, ___, getSlotValues, setSlotValues, setSlotConfigMap] =
-    useSlotConfigState(slotConfig || []);
+  const [slotConfigMap, getSlotValues, setSlotValues, setSlotConfigMap] = useSlotConfigState(
+    slotConfig || [],
+  );
 
   const [slotPlaceholders, setSlotPlaceholders] = useState<Map<string, React.ReactNode>>(new Map());
 
@@ -112,7 +119,14 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
     return span;
   };
+  const buildSkillSpan = (key: string) => {
+    const span = document.createElement('span');
+    span.setAttribute('contenteditable', 'false');
+    span.dataset.skillKey = key;
+    span.className = `${prefixCls}-skill`;
 
+    return span;
+  };
   const buildEditSlotSpan = (config: SlotConfigType) => {
     const span = document.createElement('span');
     span.setAttribute('contenteditable', 'true');
@@ -131,6 +145,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
     return span;
   };
+
   const saveSlotDom = (key: string, dom: HTMLSpanElement) => {
     slotDomMap.current.set(key, dom);
   };
@@ -242,6 +257,25 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     return createPortal(renderContent(), slotSpan);
   };
 
+  const setCursorPosition = (element: Node, position?: number) => {
+    // 创建一个range对象
+    const range = document.createRange();
+    // 设置range的起始点和结束点
+    if (typeof position === 'number') {
+      range.setStart(element, position);
+      range.setEnd(element, position);
+    }
+    // 创建一个selection对象
+    const selection = window.getSelection();
+    if (selection) {
+      // 清除之前的selection
+      selection.removeAllRanges();
+      // 添加新的range到selection
+      range.collapse(false);
+      selection.addRange(range);
+    }
+  };
+
   const getSlotListNode = (slotConfig: readonly SlotConfigType[]): SlotNode[] => {
     return slotConfig.reduce((nodeList, config) => {
       if (config.type === 'text') {
@@ -318,7 +352,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       } else if (node.nodeType === Node.ELEMENT_NODE) {
         const el = node as HTMLElement;
         const slotKey = el.getAttribute('data-slot-key');
-        if (slotKey) {
+        const slotType = el.getAttribute('data-node-type');
+        if (slotKey && slotType !== 'nbsp') {
           const nodeConfig = slotConfigMap.get(slotKey);
           if (nodeConfig) {
             currentConfig.push({ ...nodeConfig, value: textValue });
@@ -422,6 +457,41 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     onChange?.(newValue.value, e, newValue.config);
   };
 
+  const insertSkill = () => {
+    slotInnerRef.current = true;
+    if (slotInnerRef.current && skill) {
+      removeSkill();
+      const skillSpan = buildSkillSpan(skill.value);
+      const reactNode = createPortal(<div>{skill.label}</div>, skillSpan);
+      setSlotPlaceholders((ori) => {
+        ori.set(skill.value, reactNode);
+        return ori;
+      });
+      const range: Range = document.createRange();
+      const editableDom = editableRef.current;
+      if (!editableDom) return;
+      range.setStart(editableDom, 0);
+      range.insertNode(skillSpan);
+      skillDom.current = skillSpan;
+    }
+  };
+
+  const removeSkill = () => {
+    const editableDom = editableRef.current;
+    if (!editableDom) return;
+    // 直接移除所有相关的DOM元素
+    editableDom.querySelectorAll(`[data-skill-key]`).forEach((element) => {
+      element.remove();
+    });
+  };
+  // 移除<br>标签（仅在enter模式下）
+  const removeSpecificBRs = (element: HTMLDivElement | null) => {
+    if (submitType !== 'enter' || !element) return;
+    element.querySelectorAll('br').forEach((br) => {
+      br.remove();
+    });
+  };
+
   // ============================ Events =============================
   const onInternalCompositionStart = () => {
     isCompositionRef.current = true;
@@ -484,14 +554,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
 
     onKeyDown?.(e as unknown as React.KeyboardEvent<HTMLTextAreaElement>);
-  };
-
-  // 移除<br>标签（仅在enter模式下）
-  const removeSpecificBRs = (element: HTMLDivElement | null) => {
-    if (submitType !== 'enter' || !element) return;
-    element.querySelectorAll('br').forEach((br) => {
-      br.remove();
-    });
   };
 
   // ============================ Input Event ============================
@@ -562,7 +624,17 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     // 只处理外部传入的 onKeyUp 回调
     onKeyUp?.(e as unknown as React.KeyboardEvent<HTMLTextAreaElement>);
   };
+
+  const onInternalSelect: React.ReactEventHandler<HTMLDivElement> = (e) => {
+    const editableDom = editableRef.current;
+    const selection = window.getSelection();
+    if (selection?.focusNode === editableDom) {
+      console.log(selection.focusNode, skillDom.current?.nextSibling, 111);
+      setCursorPosition(skillDom.current?.nextSibling!, 0);
+    }
+  };
   // ============================ Ref Method ============================
+
   const insert: SlotTextAreaRef['insert'] = (
     slotConfig,
     position = 'cursor',
@@ -711,13 +783,16 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     selection.removeAllRanges();
     selection.addRange(range);
   };
+
   const initClear = () => {
     const div = editableRef.current;
     if (!div) return;
     div.innerHTML = '';
+    slotInnerRef.current = false;
     slotDomMap?.current?.clear();
     onInternalInput(null as unknown as React.FormEvent<HTMLDivElement>);
   };
+
   const clear = () => {
     const div = editableRef.current;
     if (!div) return;
@@ -734,8 +809,13 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       initClear();
       appendNodeList(getSlotListNode(slotConfig) as HTMLElement[]);
       onChange?.(getEditorValue().value, undefined, getEditorValue().config);
+      slotInnerRef.current = true;
     }
   }, [slotConfig]);
+
+  useEffect(() => {
+    insertSkill();
+  }, [skill, slotInnerRef.current]);
 
   useImperativeHandle(ref, () => {
     return {
@@ -754,7 +834,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         {...inputProps}
         role="textbox"
         tabIndex={0}
-        style={{ ...mergeStyle, ...inputHeightStyle }}
+        style={{ ...mergeStyle, ...(!rowsAttr.maxRows ? { maxHeight: 'none' } : {}) }}
         className={classnames(
           inputCls,
           `${inputCls}-slot`,
@@ -764,6 +844,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
             [`${prefixCls}-rtl`]: direction === 'rtl',
           },
         )}
+        data-minrows={rowsAttr.minRows || 1}
+        data-maxrows={rowsAttr.maxRows}
         data-placeholder={placeholder}
         contentEditable={!readOnly}
         suppressContentEditableWarning
@@ -775,6 +857,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         onCompositionEnd={onInternalCompositionEnd}
         onFocus={onInternalFocus}
         onBlur={onInternalBlur}
+        onSelect={onInternalSelect}
         onInput={onInternalInput}
         {...(restProps as React.HTMLAttributes<HTMLDivElement>)}
       />

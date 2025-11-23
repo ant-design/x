@@ -34,12 +34,23 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       wordBreak: 'break-all',
       marginInline: token.marginXXS,
     },
-
+    [`${componentCls}-skill`]: {
+      display: 'inline-block',
+      verticalAlign: 'baseline',
+      alignItems: 'center',
+      marginBlock: 1,
+      height: calc(token.fontSize).mul(token.lineHeight).add(2).equal(),
+      wordBreak: 'break-all',
+      paddingInlineEnd: token.marginXXS,
+      paddingInlineStart: calc(token.marginXXS).add(1),
+      marginInlineStart: -1,
+    },
     [`${antInputCls}${slotInputCls}`]: {
       height: '100%',
       background: token.colorBgSlot,
       outline: 'none',
       color: token.colorTextSlot,
+
       borderRadius: token.borderRadius,
       paddingInline: token.paddingXXS,
       fontSize: 'inherit',

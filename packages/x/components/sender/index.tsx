@@ -79,6 +79,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     placeholder,
     onFocus,
     onBlur,
+    skill,
     ...restProps
   } = props;
 
@@ -262,6 +263,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
       placeholder,
       onFocus,
       onBlur,
+      skill,
       ...restProps,
     }),
     [
@@ -284,6 +286,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
       placeholder,
       onFocus,
       onBlur,
+      skill,
       restProps,
     ],
   );

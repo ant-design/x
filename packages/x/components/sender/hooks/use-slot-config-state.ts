@@ -1,11 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { SlotConfigType } from '../../sender';
-import type { EditSlotConfigType } from '../interface';
 
 const buildSlotValues = (
   slotConfig: readonly SlotConfigType[],
   slotConfigMap: { current: Map<string, SlotConfigType> },
-  editSlotConfigMap: { current: Map<string, EditSlotConfigType> },
 ) => {
   if (Array.isArray(slotConfig)) {
     return slotConfig?.reduce(
@@ -17,9 +15,6 @@ const buildSlotValues = (
             acc[node.key] = node.props?.value || node.props?.label || '';
           } else {
             acc[node.key] = '';
-          }
-          if (node.type === 'content') {
-            editSlotConfigMap.current.set(node.key, node);
           }
           slotConfigMap.current.set(node.key, node);
         }
@@ -36,8 +31,6 @@ function useSlotConfigState(
   slotConfig: readonly SlotConfigType[],
 ): [
   Map<string, SlotConfigType>,
-  Map<string, EditSlotConfigType>,
-  readonly SlotConfigType[],
   () => Record<string, any>,
   React.Dispatch<React.SetStateAction<Record<string, any>>>,
   (slotConfigs: SlotConfigType[]) => void,
@@ -45,14 +38,11 @@ function useSlotConfigState(
   const [state, _setState] = useState({});
   const stateRef = useRef(state);
   const slotConfigMap = useRef<Map<string, SlotConfigType>>(new Map());
-  const editSlotConfigMap = useRef<Map<string, EditSlotConfigType>>(new Map());
-  const slotConfigRef = useRef<readonly SlotConfigType[]>(slotConfig);
 
   useEffect(() => {
-    const slotValue = buildSlotValues(slotConfig, slotConfigMap, editSlotConfigMap);
+    const slotValue = buildSlotValues(slotConfig, slotConfigMap);
     _setState(slotValue);
     stateRef.current = slotValue;
-    slotConfigRef.current = slotConfig;
   }, [slotConfig]);
 
   const setState = useCallback((newValue: React.SetStateAction<Record<string, any>>) => {
@@ -73,14 +63,7 @@ function useSlotConfigState(
     return stateRef.current;
   }, []);
 
-  return [
-    slotConfigMap.current,
-    editSlotConfigMap.current,
-    slotConfigRef.current,
-    getState,
-    setState,
-    setSlotConfigMap,
-  ];
+  return [slotConfigMap.current, getState, setState, setSlotConfigMap];
 }
 
 export default useSlotConfigState;
