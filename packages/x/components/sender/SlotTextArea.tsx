@@ -62,6 +62,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     onFocus,
     onBlur,
     slotConfig,
+    maxLength,
     ...restProps
   } = React.useContext(SenderContext);
   const slotConfigRef = useRef<SlotConfigType[]>([...(slotConfig || [])]);
@@ -399,7 +400,28 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
 
     if (text) {
-      insert([{ type: 'text', value: text.replace(/\n/g, '') }]);
+      const currentValue = getEditorValue().value;
+      const newText = text.replace(/\n/g, '');
+
+      // 检查最大长度限制
+      if (maxLength !== undefined) {
+        const selection = window.getSelection();
+        let selectedLength = 0;
+
+        if (selection && selection.rangeCount > 0) {
+          const range = selection.getRangeAt(0);
+          selectedLength = range.toString().length;
+        }
+
+        const remainingLength = maxLength - (currentValue.length - selectedLength);
+        if (remainingLength <= 0) {
+          return; // 已达到最大长度，不再插入
+        }
+        const truncatedText = newText.slice(0, remainingLength);
+        insert([{ type: 'text', value: truncatedText }]);
+      } else {
+        insert([{ type: 'text', value: newText }]);
+      }
     }
 
     onPaste?.(e as unknown as React.ClipboardEvent<HTMLTextAreaElement>);
@@ -466,6 +488,39 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const editableDom = editableRef.current;
     const selection = window.getSelection();
     if (!editableDom || !selection) return;
+
+    // 检查最大长度限制
+    if (maxLength !== undefined) {
+      const currentValue = getEditorValue().value;
+      const selectionObj = window.getSelection();
+      let selectedLength = 0;
+
+      if (selectionObj && selectionObj.rangeCount > 0) {
+        const range = selectionObj.getRangeAt(0);
+        selectedLength = range.toString().length;
+      }
+
+      const textContent = slotConfig
+        .filter((item) => item.type === 'text')
+        .map((item) => item.value || '')
+        .join('');
+
+      const newTotalLength = currentValue.length - selectedLength + textContent.length;
+
+      if (newTotalLength > maxLength) {
+        const remainingLength = maxLength - (currentValue.length - selectedLength);
+        if (remainingLength <= 0) {
+          return;
+        }
+
+        // 截断文本内容
+        const truncatedText = textContent.slice(0, remainingLength);
+        slotConfig = slotConfig.map((item) =>
+          item.type === 'text' ? { ...item, value: truncatedText } : item,
+        );
+      }
+    }
+
     const slotNode = getSlotListNode(slotConfig);
     const { type, range: lastRage } = getInsertPosition(position);
     let range: Range = document.createRange();
@@ -644,6 +699,30 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         onFocus={onInternalFocus}
         onBlur={onInternalBlur}
         onInput={onInternalInput}
+        onBeforeInput={(e) => {
+          if (maxLength !== undefined) {
+            const currentValue = getEditorValue().value;
+            const selection = window.getSelection();
+
+            if (selection && selection.rangeCount > 0) {
+              const range = selection.getRangeAt(0);
+              // 计算选中的文本长度（将被替换的文本）
+              const selectedText = range.toString();
+              const selectedLength = selectedText.length;
+
+              // 计算新输入后的总长度
+              const newLength = currentValue.length - selectedLength + (e as any).data?.length || 0;
+
+              if (newLength > maxLength) {
+                e.preventDefault();
+                return;
+              }
+            } else if (currentValue.length >= maxLength) {
+              e.preventDefault();
+              return;
+            }
+          }
+        }}
         {...(restProps as React.HTMLAttributes<HTMLDivElement>)}
       />
       <div

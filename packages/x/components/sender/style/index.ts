@@ -155,6 +155,15 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
         paddingBlockStart: paddingXXS,
         boxSizing: 'border-box',
       },
+      // ============================ Count ============================
+      [`${componentCls}-count`]: {
+        color: token.colorTextDescription,
+        fontSize: token.fontSizeSM,
+        lineHeight: token.lineHeightSM,
+        textAlign: 'right',
+        position: 'absolute',
+        width: '100%',
+      },
     },
   };
 };

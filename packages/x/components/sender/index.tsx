@@ -79,6 +79,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     placeholder,
     onFocus,
     onBlur,
+    showCount,
     ...restProps
   } = props;
 
@@ -140,7 +141,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   const [innerValue, setInnerValue] = useMergedState(defaultValue || '', {
     value,
   });
-
+  const currentCount = innerValue.length;
   const triggerValueChange: SenderProps['onChange'] = (nextValue, event, slotConfig) => {
     if (slotConfig) {
       setInnerValue(nextValue);
@@ -220,6 +221,26 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
       : header || null;
 
   // ============================ Footer ============================
+  const renderCount = () => {
+    if (!showCount) return null;
+
+    const countInfo = {
+      value: innerValue,
+      count: currentCount,
+      maxLength: restProps.maxLength,
+    };
+
+    if (typeof showCount === 'function') {
+      return showCount(countInfo);
+    }
+
+    return (
+      <div className={`${prefixCls}-count`}>
+        {restProps.maxLength ? `${currentCount}/${restProps.maxLength}` : currentCount}
+      </div>
+    );
+  };
+
   const footerNode =
     typeof footer === 'function'
       ? footer(actionNode, { components: sharedRenderComponents })
@@ -380,6 +401,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
           )}
         </ActionButtonContext.Provider>
       </SenderContext.Provider>
+      {showCount && renderCount()}
     </div>
   );
 });
