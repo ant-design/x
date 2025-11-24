@@ -3,7 +3,6 @@ import { mergeToken } from '@ant-design/cssinjs-utils';
 import { FastColor } from '@ant-design/fast-color';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
-import genSlotContentEditableStyle from './content-editable';
 import genSenderHeaderStyle from './header';
 import genSlotTextAreaStyle from './slot-textarea';
 import genSenderSwitchStyle from './switch';
@@ -56,6 +55,8 @@ export interface ComponentToken {
    * @descEN Input border color
    */
   colorBorderInput: string;
+  colorBgSkill: string;
+  colorBgSkillHover: string;
 }
 
 export interface SenderToken extends FullToken<'Sender'> {
@@ -174,6 +175,8 @@ export const prepareComponentToken: GetDefaultToken<'Sender'> = (token) => {
   const { colorPrimary, colorFillTertiary } = token;
 
   const colorBgSlot = new FastColor(colorPrimary).setA(0.06).toRgbString();
+  const colorBgSkill = new FastColor(colorPrimary).setA(0.08).toRgbString();
+  const colorBgSkillHover = new FastColor(colorPrimary).setA(0.15).toRgbString();
   const colorTextSlot = colorPrimary;
   const colorTextSlotPlaceholder = new FastColor(colorPrimary).setA(0.25).toRgbString();
   const colorBorderSlotHover = new FastColor(colorPrimary).setA(0.1).toRgbString();
@@ -187,6 +190,8 @@ export const prepareComponentToken: GetDefaultToken<'Sender'> = (token) => {
   const boxShadowInput = `0 4px 12px 0 ${new FastColor(colorPrimary).setA(0.1).toRgbString()}`;
   return {
     colorBgSlot,
+    colorBgSkill,
+    colorBgSkillHover,
     colorTextSlot,
     colorTextSlotPlaceholder,
     colorBorderSlotHover,
@@ -211,7 +216,6 @@ export default genStyleHooks<'Sender'>(
       genSenderHeaderStyle(SenderToken),
       genSenderSwitchStyle(SenderToken),
       genSlotTextAreaStyle(SenderToken),
-      genSlotContentEditableStyle(SenderToken),
     ];
   },
   prepareComponentToken,

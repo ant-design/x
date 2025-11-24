@@ -7,6 +7,7 @@ import { createPortal } from 'react-dom';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import warning from '../_util/warning';
 import { useXProviderContext } from '../x-provider';
+import Skill from './components/Skill';
 import { SenderContext } from './context';
 import useSlotConfigState from './hooks/use-slot-config-state';
 import type { EventType, insertPosition, SlotConfigType } from './interface';
@@ -119,6 +120,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
     return span;
   };
+
   const buildSkillSpan = (key: string) => {
     const span = document.createElement('span');
     span.setAttribute('contenteditable', 'false');
@@ -127,6 +129,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
     return span;
   };
+
   const buildEditSlotSpan = (config: SlotConfigType) => {
     const span = document.createElement('span');
     span.setAttribute('contenteditable', 'true');
@@ -462,7 +465,10 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     if (slotInnerRef.current && skill) {
       removeSkill();
       const skillSpan = buildSkillSpan(skill.value);
-      const reactNode = createPortal(<div>{skill.label}</div>, skillSpan);
+      const reactNode = createPortal(
+        <Skill removeSkill={removeSkill} {...skill} prefixCls={prefixCls} />,
+        skillSpan,
+      );
       setSlotPlaceholders((ori) => {
         ori.set(skill.value, reactNode);
         return ori;

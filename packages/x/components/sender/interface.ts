@@ -51,11 +51,17 @@ interface SlotConfigContentType extends SlotConfigBaseType {
     [key: string]: any;
   };
 }
-
-interface SkillType {
-  label?: string;
+export interface SkillType {
+  title?: React.ReactNode;
   value: string;
-  closable?: boolean | { closeIcon?: React.ReactNode; disabled?: boolean; toolTip?: TooltipProps };
+  toolTip?: TooltipProps;
+  closable?:
+    | boolean
+    | {
+        closeIcon?: React.ReactNode;
+        onClose?: React.MouseEventHandler<HTMLDivElement>;
+        disabled?: boolean;
+      };
 }
 
 interface SlotConfigInputType extends SlotConfigBaseType {

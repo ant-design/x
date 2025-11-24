@@ -11,6 +11,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
   const slotSelectCls = `${componentCls}-slot-select`;
   const slotTagCls = `${componentCls}-slot-tag`;
   const slotContentCls = `${componentCls}-slot-content`;
+  const skillCls = `${componentCls}-skill`;
   return {
     [`${componentCls}-input-slot`]: {
       outline: 'none',
@@ -33,17 +34,6 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       height: calc(token.fontSize).mul(token.lineHeight).add(2).equal(),
       wordBreak: 'break-all',
       marginInline: token.marginXXS,
-    },
-    [`${componentCls}-skill`]: {
-      display: 'inline-block',
-      verticalAlign: 'baseline',
-      alignItems: 'center',
-      marginBlock: 1,
-      height: calc(token.fontSize).mul(token.lineHeight).add(2).equal(),
-      wordBreak: 'break-all',
-      paddingInlineEnd: token.marginXXS,
-      paddingInlineStart: calc(token.marginXXS).add(1),
-      marginInlineStart: -1,
     },
     [`${antInputCls}${slotInputCls}`]: {
       height: '100%',
@@ -147,6 +137,43 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       width: '3px',
       display: 'inline-block',
       lineHeight: 'inherit',
+    },
+    [skillCls]: {
+      display: 'inline-block',
+      verticalAlign: 'baseline',
+      alignItems: 'center',
+      marginBlock: 1,
+      height: calc(token.fontSize).mul(token.lineHeight).add(2).equal(),
+      wordBreak: 'break-all',
+      paddingInlineEnd: 0,
+      paddingInlineStart: 1,
+      marginInlineEnd: token.marginXS,
+      marginInlineStart: -1,
+    },
+    [`${skillCls}-tag`]: {
+      paddingInline: token.paddingXS,
+      backgroundColor: token.colorBgSkill,
+      borderRadius: token.borderRadius,
+      color: token.colorPrimary,
+      fontWeight: 500,
+      position: 'relative',
+      display: 'inline-flex',
+      cursor: 'pointer',
+      alignItems: 'center',
+      gap: token.marginXXS,
+      transition: `background-color ${token.motionDurationMid}`,
+      '&:hover': {
+        backgroundColor: token.colorBgSkillHover,
+        [`${skillCls}-tag-close`]: {
+          color: token.colorPrimaryHover,
+        },
+      },
+      '&-close': {
+        fontSize: token.fontSizeSM,
+        display: 'inline-flex',
+        transition: `color ${token.motionDurationMid}`,
+        color: token.colorPrimary,
+      },
     },
   };
 };

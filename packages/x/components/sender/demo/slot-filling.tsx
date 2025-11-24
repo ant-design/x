@@ -258,7 +258,18 @@ const App: React.FC = () => {
         }}
       >
         <Sender
-          skill={{ value: 'travelId', label: 'Travel Planner' }}
+          skill={{
+            value: 'travelId',
+            title: 'Travel Planner',
+            toolTip: {
+              title: 'Travel Skill',
+            },
+            closable: {
+              onClose: () => {
+                console.log('close');
+              },
+            },
+          }}
           autoSize={{ minRows: 2, maxRows: 4 }}
           onSubmit={(value) => {
             setValue(value);
