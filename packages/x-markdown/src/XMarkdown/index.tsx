@@ -10,7 +10,6 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
   const {
     streaming,
     config,
-    components,
     paragraphTag,
     content,
     children,
@@ -20,7 +19,17 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
     style,
     openLinksInNewTab,
     dompurifyConfig,
+    footer,
   } = props;
+
+  const components = useMemo(() => {
+    return Object.assign(
+      {
+        'xmd-footer': footer,
+      },
+      props?.components ?? {},
+    );
+  }, [footer, props?.components]);
 
   // ============================ style ============================
   const { direction: contextDirection, getPrefixCls } = useXProviderContext();
@@ -38,18 +47,29 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
   );
 
   // ============================ Streaming ============================
-  const displayContent = useStreaming(content || children || '', streaming);
+  const output = useStreaming(content || children || '', streaming);
+
+  const displayContent = useMemo(() => {
+    if (streaming?.hasNextChunk) {
+      return output + '<xmd-footer></xmd-footer>';
+    }
+
+    return !footer ? output : output.replace(/<xmd-footer><\/xmd-footer>/g, '') || '';
+  }, [streaming?.hasNextChunk, output, footer]);
 
   // ============================ Render ============================
-  const parser = useMemo(
-    () =>
-      new Parser({
-        markedConfig: config,
-        paragraphTag,
-        openLinksInNewTab,
-      }),
-    [config, paragraphTag, openLinksInNewTab],
-  );
+  const parser = new Parser({
+    markedConfig: config,
+    paragraphTag,
+    openLinksInNewTab,
+    configureRenderCleaner: (code: string, type) => {
+      if (type === 'code') {
+        return !footer ? code : code.replace(/<xmd-footer><\/xmd-footer>/g, '') || '';
+      }
+
+      return code;
+    },
+  });
 
   const renderer = useMemo(
     () =>
@@ -62,11 +82,16 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
   );
 
   const htmlString = useMemo(() => {
-    if (!displayContent) return '';
+    if (!displayContent) {
+      return '';
+    }
+
     return parser.parse(displayContent);
   }, [displayContent, parser]);
 
-  if (!displayContent) return null;
+  if (!displayContent) {
+    return null;
+  }
 
   return (
     <div className={mergedCls} style={mergedStyle}>
