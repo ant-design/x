@@ -6,18 +6,18 @@
 
 打造卓越 AI 界面解决方案，引领智能新体验。
 
-[![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] ![GitHub contributors][github-contributors]
+[![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] ![GitHub contributors][github-contributors] [![Follow zhihu][zhihu-image]][zhihu-url]
 
-| Package | Latest Version | Download stats | Bundle Size | Package Size | JSDelivr |
-| :-- | :-- | :-- | :-- | :-- | :-- |
-| `@ant-design/x` | [![npm version][x-version-image]][x-version-url] | [![npm downloads][x-downloads-image]][x-downloads-url] | [![bundle size][x-bundle-size-image]][x-bundle-size-url] | [![package size][x-package-size-image]][x-package-size-url] | [![jsdelivr][x-jsdelivr-image]][x-jsdelivr-url] |
-| `@ant-design/x-markdown` | [![npm version][x-markdown-version-image]][x-markdown-version-url] | [![npm downloads][x-markdown-downloads-image]][x-markdown-downloads-url] | [![bundle size][x-markdown-bundle-size-image]][x-markdown-bundle-size-url] | [![package size][x-markdown-package-size-image]][x-markdown-package-size-url] | [![jsdelivr][x-markdown-jsdelivr-image]][x-markdown-jsdelivr-url] |
-| `@ant-design/x-sdk` | [![npm version][x-sdk-version-image]][x-sdk-version-url] | [![npm downloads][x-sdk-downloads-image]][x-sdk-downloads-url] | [![bundle size][x-sdk-bundle-size-image]][x-sdk-bundle-size-url] | [![package size][x-sdk-package-size-image]][x-sdk-package-size-url] | [![jsdelivr][x-sdk-jsdelivr-image]][x-sdk-jsdelivr-url] |
+| Package | Latest Version | Download stats | Bundle Size | JSDelivr |
+| :-- | :-- | :-- | :-- | :-- |
+| `@ant-design/x` | [![npm version][x-version-image]][x-version-url] | [![npm downloads][x-downloads-image]][x-downloads-url] | [![bundle size][x-bundle-size-image]][x-bundle-size-url] | [![jsdelivr][x-jsdelivr-image]][x-jsdelivr-url] |
+| `@ant-design/x-markdown` | [![npm version][x-markdown-version-image]][x-markdown-version-url] | [![npm downloads][x-markdown-downloads-image]][x-markdown-downloads-url] | [![bundle size][x-markdown-bundle-size-image]][x-markdown-bundle-size-url] | [![jsdelivr][x-markdown-jsdelivr-image]][x-markdown-jsdelivr-url] |
+| `@ant-design/x-sdk` | [![npm version][x-sdk-version-image]][x-sdk-version-url] | [![npm downloads][x-sdk-downloads-image]][x-sdk-downloads-url] | [![bundle size][x-sdk-bundle-size-image]][x-sdk-bundle-size-url] | [![jsdelivr][x-sdk-jsdelivr-image]][x-sdk-jsdelivr-url] |
 
 [更新日志](./CHANGELOG.zh-CN.md) · [报告一个 Bug][github-issues-bug-report] · [想新增特性？][github-issues-feature-request] · [English](./README.md) · 中文
 
-[x-version-image]: https://img.shields.io/npm/v/@ant-design/x/alpha.svg?style=flat-square
-[x-version-url]: https://www.npmjs.com/package/@ant-design/x/v/alpha
+[x-version-image]: https://img.shields.io/npm/v/@ant-design/x.svg?style=flat-square
+[x-version-url]: https://www.npmjs.com/package/@ant-design/x
 [x-downloads-image]: https://img.shields.io/npm/dm/@ant-design/x.svg?style=flat
 [x-downloads-url]: https://www.npmjs.com/package/@ant-design/x
 [x-bundle-size-image]: https://img.shields.io/bundlephobia/minzip/@ant-design/x
@@ -70,15 +70,15 @@
 
 ## 🌈 开箱即用的大模型企业级组件
 
-`@ant-design/x` 基于 RICH 交互范式，在不同的交互阶段提供了大量的原子组件，帮助你灵活搭建你的 AI 应用，详情点击[这里](../x/README-zh_CN.md)。
+`@ant-design/x` 基于 RICH 交互范式，在不同的交互阶段提供了大量的原子组件，帮助你灵活搭建你的 AI 应用，详情点击[这里](packages/x/README-zh_CN.md)。
 
 ## ⚡️ 对接模型智能体服务 & 高效管理数据流
 
-`@ant-design/x-sdk` 提供了一系列的工具API，旨在提供开发者开箱即用的管理AI应用数据流，详情点击[这里](../x-sdk/README-zh_CN.md)。
+`@ant-design/x-sdk` 提供了一系列的工具API，旨在提供开发者开箱即用的管理AI应用数据流，详情点击[这里](packages/x-sdk/README-zh_CN.md)。
 
 ## ✨ Markdown 渲染器
 
-`@ant-design/x-markdown` 旨在提供流式友好、强拓展性和高性能的 Markdown 渲染器。提供流式渲染公式、代码高亮、mermaid 等能力，详情点击[这里](../x-markdown/README-zh_CN.md)。
+`@ant-design/x-markdown` 旨在提供流式友好、强拓展性和高性能的 Markdown 渲染器。提供流式渲染公式、代码高亮、mermaid 等能力，详情点击[这里](packages/x-markdown/README-zh_CN.md)。
 
 ## 谁在使用
 

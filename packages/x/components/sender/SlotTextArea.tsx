@@ -1,5 +1,5 @@
 import { CaretDownFilled } from '@ant-design/icons';
-import { Button, Dropdown, Input, InputRef } from 'antd';
+import { Dropdown, Input, InputRef } from 'antd';
 import classnames from 'classnames';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';

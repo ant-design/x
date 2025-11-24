@@ -4,7 +4,7 @@ import { createStyles, useTheme } from 'antd-style';
 import { useSidebarData } from 'dumi';
 import MobileMenu from 'rc-drawer';
 import React from 'react';
-
+import useLocation from '../../../hooks/useLocation';
 import useMenu from '../../../hooks/useMenu';
 import SiteContext from '../SiteContext';
 
@@ -112,7 +112,7 @@ const Sidebar: React.FC = () => {
   const sidebarData = useSidebarData();
   const { isMobile, theme, alertVisible } = React.use(SiteContext);
   const { styles } = useStyle({ alertVisible });
-
+  const { pathname } = useLocation();
   const [menuItems, selectedKey] = useMenu();
   const isDark = theme.includes('dark');
   const { colorBgContainer } = useTheme();
@@ -121,6 +121,7 @@ const Sidebar: React.FC = () => {
       theme={{ components: { Menu: { itemBg: colorBgContainer, darkItemBg: colorBgContainer } } }}
     >
       <Menu
+        key={pathname}
         items={menuItems}
         inlineIndent={30}
         className={styles.asideContainer}

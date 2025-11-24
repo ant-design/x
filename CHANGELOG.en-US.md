@@ -16,6 +16,28 @@ tag: vVERSION
 
 ---
 
+## 2.0.0
+
+`2025-11-22`
+
+🏆 Ant Design X 2.0.0 has been released!
+
+`@ant-design/x` - Smart UI Construction Framework
+
+A React UI library based on the Ant Design system, specifically designed for AI-driven interfaces. It includes ready-to-use intelligent chat components and seamless integration with API services, enabling rapid development of smart application interfaces.
+
+`@ant-design/x-markdown` - High-performance streaming rendering engine
+
+A Markdown rendering solution optimized for streaming content, featuring robust extensibility and exceptional performance with support for formulas, code highlighting, Mermaid diagrams, and more, ensuring a seamless content display experience.
+
+`@ant-design/x-sdk` - AI Chat Data Flow Management
+
+Provide a complete set of tool APIs, out-of-the-box AI chat application data flow management, simplify development processes, and enhance development efficiency.
+
+##### Upgrade Required
+
+🌟 We have prepared an upgrade guide. Please check the [details](/docs/react/migration-v2-cn).
+
 ## 2.0.0-alpha.16
 
 `2025-11-17`
