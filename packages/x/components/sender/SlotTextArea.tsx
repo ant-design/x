@@ -405,14 +405,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
       // 检查最大长度限制
       if (maxLength !== undefined) {
-        const selection = window.getSelection();
-        let selectedLength = 0;
-
-        if (selection && selection.rangeCount > 0) {
-          const range = selection.getRangeAt(0);
-          selectedLength = range.toString().length;
-        }
-
+        const selectedLength = getSelectedTextLength();
         const remainingLength = maxLength - (currentValue.length - selectedLength);
         if (remainingLength <= 0) {
           return; // 已达到最大长度，不再插入
@@ -469,6 +462,16 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
   };
 
+  // 获取当前选中文本长度
+  const getSelectedTextLength = (): number => {
+    const selection = window.getSelection();
+    if (selection && selection.rangeCount > 0) {
+      const range = selection.getRangeAt(0);
+      return range.toString().length;
+    }
+    return 0;
+  };
+
   const onInternalInput = (e: React.FormEvent<HTMLDivElement>) => {
     const newValue = getEditorValue();
     removeSpecificBRs(editableRef?.current);
@@ -492,33 +495,31 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     // 检查最大长度限制
     if (maxLength !== undefined) {
       const currentValue = getEditorValue().value;
-      const selectionObj = window.getSelection();
-      let selectedLength = 0;
+      const selectedLength = getSelectedTextLength();
+      const remainingLength = maxLength - (currentValue.length - selectedLength);
 
-      if (selectionObj && selectionObj.rangeCount > 0) {
-        const range = selectionObj.getRangeAt(0);
-        selectedLength = range.toString().length;
+      if (remainingLength <= 0) {
+        return;
       }
 
-      const textContent = slotConfig
-        .filter((item) => item.type === 'text')
-        .map((item) => item.value || '')
-        .join('');
-
-      const newTotalLength = currentValue.length - selectedLength + textContent.length;
-
-      if (newTotalLength > maxLength) {
-        const remainingLength = maxLength - (currentValue.length - selectedLength);
-        if (remainingLength <= 0) {
-          return;
+      // 渐进式截断文本slot
+      let remainingChars = remainingLength;
+      slotConfig = slotConfig.map((item) => {
+        if (item.type === 'text' && remainingChars > 0) {
+          const textLength = (item.value || '').length;
+          if (textLength <= remainingChars) {
+            remainingChars -= textLength;
+            return item;
+          }
+          const truncated = (item.value || '').slice(0, remainingChars);
+          remainingChars = 0;
+          return { ...item, value: truncated };
         }
-
-        // 截断文本内容
-        const truncatedText = textContent.slice(0, remainingLength);
-        slotConfig = slotConfig.map((item) =>
-          item.type === 'text' ? { ...item, value: truncatedText } : item,
-        );
-      }
+        if (item.type === 'text') {
+          return { ...item, value: '' };
+        }
+        return item;
+      });
     }
 
     const slotNode = getSlotListNode(slotConfig);
@@ -702,22 +703,10 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         onBeforeInput={(e) => {
           if (maxLength !== undefined) {
             const currentValue = getEditorValue().value;
-            const selection = window.getSelection();
-
-            if (selection && selection.rangeCount > 0) {
-              const range = selection.getRangeAt(0);
-              // 计算选中的文本长度（将被替换的文本）
-              const selectedText = range.toString();
-              const selectedLength = selectedText.length;
-
-              // 计算新输入后的总长度
-              const newLength = currentValue.length - selectedLength + (e as any).data?.length || 0;
-
-              if (newLength > maxLength) {
-                e.preventDefault();
-                return;
-              }
-            } else if (currentValue.length >= maxLength) {
+            const selectedLength = getSelectedTextLength();
+            const inputLength = (e as any).data?.length ?? 0;
+            const newLength = currentValue.length - selectedLength + inputLength;
+            if (newLength > maxLength) {
               e.preventDefault();
               return;
             }

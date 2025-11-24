@@ -160,9 +160,9 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
         color: token.colorTextDescription,
         fontSize: token.fontSizeSM,
         lineHeight: token.lineHeightSM,
-        textAlign: 'right',
         position: 'absolute',
-        width: '100%',
+        bottom: -token.paddingXXS,
+        right: token.paddingSM,
       },
     },
   };
