@@ -635,7 +635,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const editableDom = editableRef.current;
     const selection = window.getSelection();
     if (selection?.focusNode === editableDom) {
-      console.log(selection.focusNode, skillDom.current?.nextSibling, 111);
       setCursorPosition(skillDom.current?.nextSibling!, 0);
     }
   };
