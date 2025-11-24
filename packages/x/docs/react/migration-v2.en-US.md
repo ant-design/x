@@ -11,7 +11,7 @@ This document will help you upgrade from `@ant-design/x 1.x` to `@ant-design/x 2
 
 ## Upgrade Preparation
 
-1. Please upgrade antd in your project to the latest version of 6.x first, and remove/modify related APIs according to the console warning messages.
+1. Please upgrade antd in your project to the latest version of 6.x first. For details, please check the [upgrade documentation](https://ant.design/docs/react/migration-v6).
 
 ## Incompatible Changes in 2.0
 

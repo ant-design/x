@@ -4,7 +4,7 @@ name: Deploy website
 on:
   push:
     tags:
-      - '1.*'
+      - '2.*'
   workflow_dispatch:
 
 permissions:
@@ -16,19 +16,16 @@ jobs:
     if: (startsWith(github.ref, 'refs/tags/') && (contains(github.ref_name, '-') == false)) || github.event_name == 'workflow_dispatch'
     steps:
       - name: checkout
-        uses: actions/checkout@v5
-
+        uses: actions/checkout@v6
       - uses: utooland/setup-utoo@v1
-
       - run: ut
-
       - name: build site
-        run: ut predeploy --workspace packages/x
+        run: ut run predeploy
         env:
           NODE_OPTIONS: --max_old_space_size=4096
 
       - name: build dist and bundle analyzer report
-        run: ut compile --workspace packages/x
+        run: ut compile
         env:
           ANALYZER: 1
           NODE_OPTIONS: --max_old_space_size=4096
@@ -41,7 +38,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./packages/x/_site
+          publish_dir: ./_site
           force_orphan: true
 
       # Since force_orphan will not trigger Sync to Gitee, we need to force run it here
@@ -57,7 +54,7 @@ jobs:
         working-directory: ./packages/x
         run: |
           export DEPLOY_DOMAIN=ant-design-x-${{ steps.publish-version.outputs.VERSION }}.surge.sh
-          bunx surge --project ./_site --domain $DEPLOY_DOMAIN --token ${{ secrets.SURGE_TOKEN }}
+          npx surge --project ./_site --domain $DEPLOY_DOMAIN --token ${{ secrets.SURGE_TOKEN }}
 
       - name: Create Commit Comment
         uses: peter-evans/commit-comment@v4
