@@ -137,9 +137,21 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
       [`${componentCls}-footer`]: {
         paddingInlineStart: padding,
         paddingInlineEnd: paddingSM,
-        paddingBlockEnd: paddingSM,
-        paddingBlockStart: paddingXXS,
+        paddingBlockBottom: paddingSM,
+        paddingBlockTop: paddingXXS,
         boxSizing: 'border-box',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+      },
+
+      // ============================ Count ============================
+      [`${componentCls}-count`]: {
+        color: token.colorTextDescription,
+        fontSize: token.fontSizeSM,
+        lineHeight: token.lineHeightSM,
+        flex: 1,
+        textAlign: 'right',
       },
     },
   };

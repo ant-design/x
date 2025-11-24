@@ -27,6 +27,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/send-style.tsx">Adjust style</code>
 <code src="./demo/paste-image.tsx">Paste files</code>
 <code src="./demo/focus.tsx">Focus</code>
+<code src="./demo/maxLength.tsx">Max Length</code>
 
 ## API
 
@@ -44,10 +45,12 @@ Common props ref：[Common props](/docs/react/common-props)
 | disabled | Whether to disable | boolean | false | - |
 | loading | Whether it is loading | boolean | false | - |
 | header | Header panel | ReactNode | - | - |
+| maxLength | Maximum length of input content | number | - | - |
 | prefix | Prefix content | ReactNode | - | - |
 | footer | Footer content | ReactNode \| (info: { components: ActionsComponents }) => ReactNode | - | - |
 | readOnly | Whether to make the input box read-only | boolean | false | - |
 | rootClassName | Root element class name | string | - | - |
+| showCount | Whether to display character count, supports custom rendering | boolean \| ((info: { value: string; count: number; maxLength?: number }) => React.ReactNode) | false | - |
 | styles | Semantic DOM style | [See below](#semantic-dom) | - | - |
 | submitType | Submit type | SubmitType | `enter` \| `shiftEnter` | - |
 | value | Input value | string | - | - |

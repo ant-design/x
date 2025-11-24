@@ -28,6 +28,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/send-style.tsx">调整样式</code>
 <code src="./demo/paste-image.tsx">黏贴文件</code>
 <code src="./demo/focus.tsx">聚焦</code>
+<code src="./demo/maxLength.tsx">长度限制</code>
 
 ## API
 
@@ -47,8 +48,10 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 | header | 头部面板 | ReactNode | - | - |
 | prefix | 前缀内容 | ReactNode | - | - |
 | footer | 底部内容 | ReactNode \| (info: { components: ActionsComponents }) => ReactNode | - | - |
+| maxLength | 输入内容最大长度 | number | - | - |
 | readOnly | 是否让输入框只读 | boolean | false | - |
 | rootClassName | 根元素样式类 | string | - | - |
+| showCount | 是否显示字符计数，支持自定义渲染 | boolean \| ((info: { value: string; count: number; maxLength?: number }) => React.ReactNode) | false | - |
 | styles | 语义化定义样式 | [见下](#semantic-dom) | - | - |
 | submitType | 提交模式 | SubmitType | `enter` \| `shiftEnter` | - |
 | value | 输入框值 | string | - | - |

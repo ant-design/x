@@ -1,3 +1,4 @@
+import type { InputRef as AntdInputRef, ButtonProps, GetProps } from 'antd';
 import { Flex, Input } from 'antd';
 import classnames from 'classnames';
 import { useMergedState } from 'rc-util';
@@ -7,16 +8,14 @@ import React from 'react';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
-import SenderHeader, { SendHeaderContext } from './SenderHeader';
 import { ActionButtonContext } from './components/ActionButton';
 import ClearButton from './components/ClearButton';
 import LoadingButton from './components/LoadingButton';
 import SendButton from './components/SendButton';
 import SpeechButton from './components/SpeechButton';
+import SenderHeader, { SendHeaderContext } from './SenderHeader';
 import useStyle from './style';
 import useSpeech, { type AllowSpeech } from './useSpeech';
-
-import type { InputRef as AntdInputRef, ButtonProps, GetProps } from 'antd';
 
 export type SubmitType = 'enter' | 'shiftEnter' | false;
 
@@ -81,6 +80,10 @@ export interface SenderProps
   footer?: React.ReactNode | FooterRender;
   header?: React.ReactNode;
   autoSize?: boolean | { minRows?: number; maxRows?: number };
+  maxLength?: number;
+  showCount?:
+    | boolean
+    | ((info: { value: string; count: number; maxLength?: number }) => React.ReactNode);
 }
 
 export type SenderRef = {
@@ -131,6 +134,8 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     onPaste,
     onPasteFile,
     autoSize = { maxRows: 8 },
+    maxLength,
+    showCount,
     ...rest
   } = props;
 
@@ -144,8 +149,8 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
 
   useProxyImperativeHandle(ref, () => ({
     nativeElement: containerRef.current!,
-    focus: inputRef.current?.focus!,
-    blur: inputRef.current?.blur!,
+    focus: () => inputRef.current?.focus?.(),
+    blur: () => inputRef.current?.blur?.(),
   }));
 
   // ======================= Component Config =======================
@@ -175,7 +180,13 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     value,
   });
 
+  const currentCount = innerValue.length;
+
   const triggerValueChange: SenderProps['onChange'] = (nextValue, event) => {
+    if (maxLength && nextValue.length > maxLength) {
+      nextValue = nextValue.slice(0, maxLength);
+    }
+
     setInnerValue(nextValue);
 
     if (onChange) {
@@ -304,6 +315,26 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   };
 
   // ============================ Footer ============================
+  const renderCount = () => {
+    if (!showCount) return null;
+
+    const countInfo = {
+      value: innerValue,
+      count: currentCount,
+      maxLength,
+    };
+
+    if (typeof showCount === 'function') {
+      return showCount(countInfo);
+    }
+
+    return (
+      <div className={`${prefixCls}-count`}>
+        {maxLength ? `${currentCount}/${maxLength}` : currentCount}
+      </div>
+    );
+  };
+
   const footerNode =
     typeof footer === 'function' ? footer({ components: sharedRenderComponents }) : footer || null;
 
@@ -346,6 +377,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
             className={classnames(inputCls, contextConfig.classNames.input, classNames.input)}
             autoSize={autoSize}
             value={innerValue}
+            maxLength={maxLength}
             onChange={(event) => {
               triggerValueChange(
                 (event.target as HTMLTextAreaElement).value,
@@ -360,6 +392,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
             onPaste={onInternalPaste}
             variant="borderless"
             readOnly={readOnly}
+            showCount={false}
           />
           {/* Action List */}
           {actionNode && (
@@ -375,7 +408,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
             </div>
           )}
         </div>
-        {footerNode && (
+        {(footerNode || showCount) && (
           <div
             className={classnames(
               `${prefixCls}-footer`,
@@ -388,6 +421,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
             }}
           >
             {footerNode}
+            {renderCount()}
           </div>
         )}
       </ActionButtonContext.Provider>
