@@ -3,6 +3,7 @@ group:
   title: 模型接入
   order: 1
 title: OpenAI
+tag: Updated
 order: 0
 ---
 

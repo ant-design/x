@@ -46,16 +46,14 @@ const App: React.FC = () => {
     >
       <Bubble
         content="Feel free to use Ant Design !"
-        components={{
-          avatar: <Avatar size={32} icon={<UserOutlined />} />,
-          header: 'Ant Design X',
-          extra: <Button color="default" variant="text" size="small" icon={<CopyOutlined />} />,
-          footer: (
-            <Space size={token.paddingXXS}>
-              <Button color="default" variant="text" size="small" icon={<SyncOutlined />} />
-            </Space>
-          ),
-        }}
+        avatar={<Avatar size={32} icon={<UserOutlined />} />}
+        header="Ant Design X"
+        extra={<Button color="default" variant="text" size="small" icon={<CopyOutlined />} />}
+        footer={
+          <Space size={token.paddingXXS}>
+            <Button color="default" variant="text" size="small" icon={<SyncOutlined />} />
+          </Space>
+        }
       />
     </SemanticPreview>
   );

@@ -24,13 +24,11 @@ const App = () => (
   <Bubble
     content={text}
     typing={{ effect: 'fade-in' }}
-    components={{
-      header: <h5>Ant Design X</h5>,
-      footer: (content) => (
-        <Actions items={actionItems(content)} onClick={() => console.log(content)} />
-      ),
-      avatar: <Avatar icon={<AntDesignOutlined />} />,
-    }}
+    header={<h5>Ant Design X</h5>}
+    footer={(content) => (
+      <Actions items={actionItems(content)} onClick={() => console.log(content)} />
+    )}
+    avatar={<Avatar icon={<AntDesignOutlined />} />}
   />
 );
 

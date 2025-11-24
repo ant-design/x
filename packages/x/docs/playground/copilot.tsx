@@ -178,12 +178,15 @@ const providerFactory = (conversationKey: string) => {
       conversationKey,
       new DeepSeekChatProvider({
         request: XRequest<XModelParams, Partial<Record<SSEFields, XModelResponse>>>(
-          'https://api.x.ant.design/api/llm_siliconflow_deepSeek-r1-distill-1wen-7b',
+          'https://api.x.ant.design/api/big_model_glm-4.5-flash',
           {
             manual: true,
             params: {
               stream: true,
-              model: 'DeepSeek-R1-Distill-Qwen-7B',
+              thinking: {
+                type: 'disabled',
+              },
+              model: 'glm-4.5-flash',
             },
           },
         ),
@@ -201,16 +204,14 @@ interface CopilotProps {
 const role: BubbleListProps['role'] = {
   assistant: {
     placement: 'start',
-    components: {
-      footer: (
-        <div style={{ display: 'flex' }}>
-          <Button type="text" size="small" icon={<ReloadOutlined />} />
-          <Button type="text" size="small" icon={<CopyOutlined />} />
-          <Button type="text" size="small" icon={<LikeOutlined />} />
-          <Button type="text" size="small" icon={<DislikeOutlined />} />
-        </div>
-      ),
-    },
+    footer: (
+      <div style={{ display: 'flex' }}>
+        <Button type="text" size="small" icon={<ReloadOutlined />} />
+        <Button type="text" size="small" icon={<CopyOutlined />} />
+        <Button type="text" size="small" icon={<LikeOutlined />} />
+        <Button type="text" size="small" icon={<DislikeOutlined />} />
+      </div>
+    ),
     contentRender(content: string) {
       const newContent = content.replace('/\n\n/g', '<br/><br/>');
       return (

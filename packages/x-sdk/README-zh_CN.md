@@ -116,11 +116,11 @@ export default () => {
 
 ## 🌈 开箱即用的大模型企业级组件
 
-`@ant-design/x` 基于 RICH 交互范式，在不同的交互阶段提供了大量的原子组件，帮助你灵活搭建你的 AI 应用，详情点击[这里](../x/README-zh_CN.md)。
+`@ant-design/x` 基于 RICH 交互范式，在不同的交互阶段提供了大量的原子组件，帮助你灵活搭建你的 AI 应用，详情点击[这里](packages/x/README-zh_CN.md)。
 
 ## ✨ Markdown 渲染器
 
-`@ant-design/x-markdown` 旨在提供流式友好、强拓展性和高性能的 Markdown 渲染器。提供流式渲染公式、代码高亮、mermaid 等能力，详情点击[这里](../x-markdown/README-zh_CN.md)。
+`@ant-design/x-markdown` 旨在提供流式友好、强拓展性和高性能的 Markdown 渲染器。提供流式渲染公式、代码高亮、mermaid 等能力，详情点击[这里](packages/x-markdown/README-zh_CN.md)。
 
 ## 如何贡献
 

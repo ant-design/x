@@ -198,6 +198,16 @@ describe('XMarkdown', () => {
     expect(wrapper.innerHTML).toBe('<div>This is a paragraph.</div>\n');
   });
 
+  it('support checkbox is checked', () => {
+    const { container } = render(<XMarkdown content="- [x] checkbox" />);
+    expect(container).toMatchSnapshot();
+  });
+
+  it('support checkbox not checked', () => {
+    const { container } = render(<XMarkdown content="- [ ] checkbox" />);
+    expect(container).toMatchSnapshot();
+  });
+
   describe('openLinksInNewTab', () => {
     it('should add target="_blank" and rel="noopener noreferrer" to links with title when openLinksInNewTab is true', () => {
       const { container } = render(

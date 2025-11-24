@@ -110,11 +110,9 @@ const App = () => {
             {content}
           </XMarkdown>
         )}
-        components={{
-          avatar: (
-            <Avatar src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp" />
-          ),
-        }}
+        avatar={
+          <Avatar src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp" />
+        }
         variant="outlined"
       />
     </Flex>

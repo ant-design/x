@@ -83,33 +83,29 @@ const App = () => {
     () => ({
       ai: {
         typing: true,
-        components: {
-          header: 'AI',
-          avatar: () => <Avatar icon={<AntDesignOutlined />} />,
-          footer: (content) => <Actions items={actionItems} onClick={() => console.log(content)} />,
-        },
+        header: 'AI',
+        avatar: () => <Avatar icon={<AntDesignOutlined />} />,
+        footer: (content) => <Actions items={actionItems} onClick={() => console.log(content)} />,
       },
       user: (data) => ({
         placement: 'end',
         typing: false,
-        components: {
-          header: `User-${data.key}`,
-          avatar: () => <Avatar icon={<UserOutlined />} />,
-          footer: () => (
-            <Actions
-              items={[
-                data.editable
-                  ? { key: 'done', icon: <CheckOutlined />, label: 'done' }
-                  : {
-                      key: 'edit',
-                      icon: <EditOutlined />,
-                      label: 'edit',
-                    },
-              ]}
-              onClick={({ key }) => update(data.key, { editable: key === 'edit' })}
-            />
-          ),
-        },
+        header: `User-${data.key}`,
+        avatar: () => <Avatar icon={<UserOutlined />} />,
+        footer: () => (
+          <Actions
+            items={[
+              data.editable
+                ? { key: 'done', icon: <CheckOutlined />, label: 'done' }
+                : {
+                    key: 'edit',
+                    icon: <EditOutlined />,
+                    label: 'edit',
+                  },
+            ]}
+            onClick={({ key }) => update(data.key, { editable: key === 'edit' })}
+          />
+        ),
         onEditConfirm: (content) => {
           console.log(`editing User-${data.key}: `, content);
           update(data.key, { content, editable: false });
@@ -122,7 +118,7 @@ const App = () => {
         variant: 'borderless',
         // 16px for list item gap
         styles: { root: { margin: 0, marginBottom: -12 } },
-        components: { avatar: () => '' },
+        avatar: () => '',
         contentRender: (content: FileCardProps) => (
           <Space>
             <LinkOutlined />

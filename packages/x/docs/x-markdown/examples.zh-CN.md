@@ -46,7 +46,7 @@ order: 2
 | hasNextChunk | 指示是否还有后续内容块，为 false 时刷新所有缓存并完成渲染 | `boolean` | `false` |
 | enableAnimation | 为块级元素（`p`、`li`、`h1`、`h2`、`h3`、`h4`）启用文字淡入动画 | `boolean` | `false` |
 | animationConfig | 文字出现动画效果的配置 | `AnimationConfig` | `{ fadeDuration: 200, opacity: 0.2 }` |
-| incompleteMarkdownComponentMap | 未闭合Markdown元素的占位符映射，支持自定义链接和图片的占位符组件 | `{ link?: string; image?: string }` | `{ link: 'incomplete-link', image: 'incomplete-image' }` |
+| incompleteMarkdownComponentMap | 未完成语法对应的自定义组件名。当流式输出出现未闭合的 Markdown 语法（如半截表格、未收尾代码块）时，可手动指定用于包裹该片段的组件名称，实现占位或加载态。 | `{ link?: string; image?: string; table?: string; html?: string }` | `{}` |
 
 #### AnimationConfig
 
@@ -131,4 +131,28 @@ const CustomFootnote = ({ children, ...props }) => (
   content="<footnote>1</footnote>"
   components={{ footnote: CustomFootnote }}
 />
+```
+
+### 未完成语法标记转换
+
+当 `hasNextChunk` 为 `true` 时，所有未完成的语法标记会被自动转换为 `incomplete-token` 形式，并将未完成的语法通过 `data-raw` 属性返回，支持的 token 类型为 `StreamCacheTokenType`。例如：
+
+- 未完成的链接 `[示例](https://example.com` 会被转换为 `<incomplete-link data-raw="[示例](https://example.com">`
+- 未完成的图片 `![产品图](https://cdn.example.com/images/produc` 会被转换为 `<incomplete-image data-raw="![产品图](https://cdn.example.com/images/produc">`
+- 未完成的标题 `###` 会被转换为 `<incomplete-heading data-raw="###">`
+
+#### StreamCacheTokenType 类型
+
+`StreamCacheTokenType` 是一个枚举类型，定义了流式处理过程中支持的所有 Markdown 语法标记类型：
+
+```typescript
+type StreamCacheTokenType =
+  | 'text' // 普通文本
+  | 'link' // 链接语法 [text](url)
+  | 'image' // 图片语法 ![alt](src)
+  | 'heading' // 标题语法 # ## ###
+  | 'emphasis' // 强调语法 *斜体* **粗体**
+  | 'list' // 列表语法 - + *
+  | 'table' // 表格语法 | 标题 | 内容 |
+  | 'xml'; // XML/HTML 标签 <tag>
 ```

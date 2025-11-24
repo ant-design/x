@@ -37,9 +37,9 @@
 
 - 🌈 **源自企业级 AI 产品的最佳实践**：基于 RICH 交互范式，提供卓越的 AI 交互体验
 - 🧩 **灵活多样的原子组件**：覆盖绝大部分 AI 场景，助力快速构建个性化 AI 交互页面
-- ✨ **流式友好、强拓展性和高性能的 Markdown 渲染器**:提供流式渲染公式、代码高亮、mermaid 等能力 [@ant-design/x-markdown](../x-markdown/README-zh_CN.md)
-- 🚀 **开箱即用的模型/智能体对接能力**：轻松对接符合 OpenAI 标准的模型/智能体服务 [@ant-design/x-sdk](../x-sdk/README-zh_CN.md)
-- ⚡️ **高效管理大模型数据流**：提供好用的数据流管理功能，让开发更高效 [@ant-design/x-sdk](../x-sdk/README-zh_CN.md)
+- ✨ **流式友好、强拓展性和高性能的 Markdown 渲染器**:提供流式渲染公式、代码高亮、mermaid 等能力 [@ant-design/x-markdown](packages/x-markdown/README-zh_CN.md)
+- 🚀 **开箱即用的模型/智能体对接能力**：轻松对接符合 OpenAI 标准的模型/智能体服务 [@ant-design/x-sdk](packages/x-sdk/README-zh_CN.md)
+- ⚡️ **高效管理大模型数据流**：提供好用的数据流管理功能，让开发更高效 [@ant-design/x-sdk](packages/x-sdk/README-zh_CN.md)
 - 📦 **丰富的样板间支持**：提供多种模板，快速启动 LUI 应用开发[样板间](https://github.com/ant-design/x/tree/main/packages/x/docs/playground/)
 - 🛡 **TypeScript 全覆盖**：采用 TypeScript 开发，提供完整类型支持，提升开发体验与可靠性
 - 🎨 **深度主题定制能力**：支持细粒度的样式调整，满足各种场景的个性化需求
@@ -122,11 +122,11 @@ export default App;
 
 ## ⚡️ 对接模型智能体服务 & 高效管理数据流
 
-`@ant-design/x-sdk` 提供了一系列的工具API，旨在提供开发者开箱即用的管理AI应用数据流，详情点击[这里](../x-sdk/README-zh_CN.md)。
+`@ant-design/x-sdk` 提供了一系列的工具API，旨在提供开发者开箱即用的管理AI应用数据流，详情点击[这里](packages/x-sdk/README-zh_CN.md)。
 
 ## ✨ Markdown 渲染器
 
-`@ant-design/x-markdown` 旨在提供流式友好、强拓展性和高性能的 Markdown 渲染器。提供流式渲染公式、代码高亮、mermaid 等能力，详情点击[这里](../x-markdown/README-zh_CN.md)。
+`@ant-design/x-markdown` 旨在提供流式友好、强拓展性和高性能的 Markdown 渲染器。提供流式渲染公式、代码高亮、mermaid 等能力，详情点击[这里](packages/x-markdown/README-zh_CN.md)。
 
 ## 按需加载
 

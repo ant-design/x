@@ -54,10 +54,11 @@ const zhCN = {
   slotTextStart: '请帮我介绍Ant Design X 中',
   slotTextEnd: '的用法。',
   aiMessage_1: `RICH 设计范式 \n [查看详情](/docs/spec/introduce-cn})`,
-  aiMessage_2: `# 快速安装和导入组件 \n \`npm install @ant-design/x --save \` \n [查看详情](/components/introduce-cn}/)`,
+  aiMessage_2: `# 快速安装和导入组件 \n\n \`npm install @ant-design/x --save \` \n [查看详情](/components/introduce-cn}/)\n \n\n <br />\n\n## 导入方式 \n\n \`\`\`tsx \n\n import { Bubble } from '@ant-design/x';\n\n \`\`\`\n\n ## 组件使用 \n\n \`\`\`tsx\n\n import React from 'react';\n\nimport { Bubble } from '@ant-design/x';\n\nconst App: React.FC = () => ( \n\n <div className="App"> \n\n  <Bubble content="Hello world!" />\n\n </div>\n\n  );\n\n export default App;`,
   welcome: `你好，我是 Ant Design X`,
   welcomeDescription: `基于蚂蚁设计，AGI产品界面解决方案，打造更好的智能视觉~~`,
   aiCopilot: 'AI 助手',
+
   newSession: '新会话',
   writeAReport: '写报告',
   drawAPicture: '画图',
@@ -123,7 +124,7 @@ const enUS = {
   slotTextStart: 'Please help me introduce the usage of ',
   slotTextEnd: 'in Ant Design X.',
   aiMessage_1: `RICH Design Paradigm \n [View Details](/docs/spec/induction})`,
-  aiMessage_2: `# Quickly install and import components \n \`npm install @ ant design/x -- save\` \n [View details](/components/import)`,
+  aiMessage_2: `# Quickly install and import components \n\n \`npm install @ant-design/x --save\` \n [View details](/components/introduce)\n\n <br /> \n\n ## Import Method \n\n \`\`\`tsx \n\n import { Bubble } from '@ant-design/x';\n\n \`\`\`\n\n ## Component Usage \n\n \`\`\`tsx\n\n import React from 'react';\n\nimport { Bubble } from '@ant-design/x';\n\nconst App: React.FC = () => ( \n\n <div className="App"> \n\n  <Bubble content="Hello world!" />\n\n </div>\n\n  );\n\n export default App;`,
   welcome: `Hello,I'm Ant Design X`,
   welcomeDescription: `Base on Ant Design, AGI product interface solution, create a better intelligent vision~`,
   aiCopilot: 'AI Copilot',
@@ -146,4 +147,6 @@ const enUS = {
 export const isZhCN =
   typeof window !== 'undefined' && window?.parent?.location?.pathname?.includes('-cn');
 
-export default isZhCN ? { ...zhCN_antd, ...zhCN, ...zhCN_X } : { ...enUS_antd, ...enUS, ...enUS_X };
+export default isZhCN
+  ? ({ ...zhCN_antd, ...zhCN, ...zhCN_X } as typeof zhCN_antd & typeof zhCN & typeof zhCN_X)
+  : ({ ...enUS_antd, ...enUS, ...enUS_X } as typeof enUS_antd & typeof enUS & typeof enUS_X);

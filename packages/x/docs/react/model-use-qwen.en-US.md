@@ -3,6 +3,7 @@ group:
   title: Model Integration
   order: 1
 title: Qwen
+tag: Updated
 order: 1
 ---
 
