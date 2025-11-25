@@ -1,6 +1,7 @@
 import useToken from '../../theme/useToken';
 import { SenderProps } from '../interface';
 
+const SENDER_INPUT_PADDING_HEIGHT = 4.35;
 const useInputHeight = (
   styles: React.CSSProperties,
   autoSize: SenderProps['autoSize'],
@@ -25,8 +26,12 @@ const useInputHeight = (
   }
 
   return {
-    minHeight: autoSize.minRows ? (height + 4.35) * autoSize.minRows : 'auto',
-    maxHeight: autoSize.maxRows ? (height + 4.35) * autoSize.maxRows : 'auto',
+    minHeight: autoSize.minRows
+      ? (height + SENDER_INPUT_PADDING_HEIGHT) * autoSize.minRows
+      : 'auto',
+    maxHeight: autoSize.maxRows
+      ? (height + SENDER_INPUT_PADDING_HEIGHT) * autoSize.maxRows
+      : 'auto',
     overflowY: 'auto' as React.CSSProperties['overflowY'],
   };
 };

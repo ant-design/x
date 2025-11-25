@@ -264,7 +264,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         return nodeList;
       }
       const slotKey = config.key;
-      warning(!!slotKey, 'sender', `Duplicate slot key: ${slotKey}`);
+      warning(!!slotKey, 'sender', `Slot key is missing: ${slotKey}`);
       if (slotKey) {
         let slotSpan;
         if (config.type === 'content') {
