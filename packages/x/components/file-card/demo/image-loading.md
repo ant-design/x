@@ -4,4 +4,4 @@
 
 ## en-US
 
-Can use loading、[Image](https://ant-design.antgroup.com/components/image#api)、[Spin](https://ant-design.antgroup.com/components/spin#api) props.
+Can use loading,[Image](https://ant-design.antgroup.com/components/image#api),[Spin](https://ant-design.antgroup.com/components/spin#api) props.

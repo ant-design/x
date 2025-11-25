@@ -116,6 +116,7 @@ const Sidebar: React.FC = () => {
   const [menuItems, selectedKey] = useMenu();
   const isDark = theme.includes('dark');
   const { colorBgContainer } = useTheme();
+
   const menuChild = (
     <XProvider
       theme={{ components: { Menu: { itemBg: colorBgContainer, darkItemBg: colorBgContainer } } }}
