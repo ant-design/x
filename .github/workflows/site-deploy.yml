@@ -38,7 +38,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./packages/x/_site
+          publish_dir: ./_site
           force_orphan: true
 
       # Since force_orphan will not trigger Sync to Gitee, we need to force run it here
