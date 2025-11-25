@@ -9,7 +9,7 @@ const otherSlotConfig: SlotConfig = [
   {
     type: 'content',
     key: 'location',
-    props: { defaultValue: '', placeholder: '[Please enter the location]' },
+    props: { defaultValue: 'Beijing', placeholder: '[Please enter the location]' },
   },
   { type: 'text', value: 'by' },
   {
@@ -93,6 +93,18 @@ const App: React.FC = () => {
   );
   const senderRef = useRef<GetRef<typeof Sender>>(null);
   const [value, setValue] = useState<string>('');
+  const [skill, setSkill] = useState<SenderProps['skill']>({
+    value: 'travelId',
+    title: 'Travel Planner',
+    toolTip: {
+      title: 'Travel Skill',
+    },
+    closable: {
+      onClose: () => {
+        console.log('close');
+      },
+    },
+  });
   return (
     <Flex vertical gap={16}>
       {/* 操作按钮区 */}
@@ -186,6 +198,13 @@ const App: React.FC = () => {
         </Button>
         <Button
           onClick={() => {
+            senderRef.current!.focus();
+          }}
+        >
+          Focus
+        </Button>
+        <Button
+          onClick={() => {
             senderRef.current!.focus({
               cursor: 'start',
             });
@@ -246,6 +265,24 @@ const App: React.FC = () => {
         >
           Blur
         </Button>
+        <Button
+          onClick={() => {
+            setSkill({
+              value: 'travelId_1',
+              title: 'Travel Planner2',
+              toolTip: {
+                title: 'Travel Skill2',
+              },
+              closable: {
+                onClose: () => {
+                  console.log('close');
+                },
+              },
+            });
+          }}
+        >
+          Change Skill
+        </Button>
       </Flex>
       {/* Sender 词槽填空示例 */}
       <XProvider
@@ -258,19 +295,8 @@ const App: React.FC = () => {
         }}
       >
         <Sender
-          skill={{
-            value: 'travelId',
-            title: 'Travel Planner',
-            toolTip: {
-              title: 'Travel Skill',
-            },
-            closable: {
-              onClose: () => {
-                console.log('close');
-              },
-            },
-          }}
-          autoSize={{ minRows: 2, maxRows: 4 }}
+          skill={skill}
+          autoSize={{ minRows: 3, maxRows: 4 }}
           onSubmit={(value) => {
             setValue(value);
             setSlotConfigKey(false);

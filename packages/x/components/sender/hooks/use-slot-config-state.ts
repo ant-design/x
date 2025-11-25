@@ -9,7 +9,12 @@ const buildSlotValues = (
     return slotConfig?.reduce(
       (acc, node) => {
         if (node.key) {
-          if (node.type === 'input' || node.type === 'select' || node.type === 'custom') {
+          if (
+            node.type === 'input' ||
+            node.type === 'select' ||
+            node.type === 'custom' ||
+            node.type === 'content'
+          ) {
             acc[node.key] = node.props?.defaultValue || '';
           } else if (node.type === 'tag') {
             acc[node.key] = node.props?.value || node.props?.label || '';

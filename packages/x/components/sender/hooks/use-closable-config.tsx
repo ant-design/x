@@ -1,4 +1,4 @@
-import { CloseCircleFilled } from '@ant-design/icons';
+import { CloseOutlined } from '@ant-design/icons';
 import React, { useMemo } from 'react';
 import type { SkillType } from '../interface';
 
@@ -34,7 +34,7 @@ const useClosableConfig = (
     };
 
     const closeIcon = config.closeIcon || (
-      <CloseCircleFilled className={`${componentCls}-close-icon`} />
+      <CloseOutlined className={`${componentCls}-close-icon`} />
     );
 
     const closeNode = (

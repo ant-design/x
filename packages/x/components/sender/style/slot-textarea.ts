@@ -118,6 +118,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       boxSizing: 'border-box',
       verticalAlign: 'baseline',
       fontSize: token.fontSize,
+      marginBlock: 1,
       lineHeight: token.lineHeight,
       display: 'inline-block',
       position: 'relative',
@@ -140,7 +141,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
     },
     [skillCls]: {
       display: 'inline-block',
-      verticalAlign: 'baseline',
+      verticalAlign: 'top',
       alignItems: 'center',
       marginBlock: 1,
       height: calc(token.fontSize).mul(token.lineHeight).add(2).equal(),
@@ -152,6 +153,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
     },
     [`${skillCls}-tag`]: {
       paddingInline: token.paddingXS,
+      height: '100%',
       backgroundColor: token.colorBgSkill,
       borderRadius: token.borderRadius,
       color: token.colorPrimary,
