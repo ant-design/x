@@ -180,6 +180,10 @@ describe('Sender.SlotTextArea', () => {
       slotKey: 'content1',
     });
     ref.current?.focus({
+      cursor: 'slot',
+      slotKey: 'content2',
+    });
+    ref.current?.focus({
       cursor: 'end',
     });
     ref.current?.insert?.(
@@ -193,7 +197,6 @@ describe('Sender.SlotTextArea', () => {
       'cursor',
       '@',
     );
-
     ref.current?.clear();
   });
 
