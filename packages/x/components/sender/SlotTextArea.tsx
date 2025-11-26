@@ -411,9 +411,9 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
           return; // 已达到最大长度，不再插入
         }
         const truncatedText = newText.slice(0, remainingLength);
-        insert([{ type: 'text', value: truncatedText }]);
+        insert([{ type: 'text', value: truncatedText.replace(/\n/g, '') }]);
       } else {
-        insert([{ type: 'text', value: newText }]);
+        insert([{ type: 'text', value: newText.replace(/\n/g, '') }]);
       }
     }
 
