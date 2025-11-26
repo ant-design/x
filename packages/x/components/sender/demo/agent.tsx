@@ -330,9 +330,10 @@ const App: React.FC = () => {
           );
         }}
         suffix={false}
-        onSubmit={(v) => {
+        onSubmit={(v, _, skill) => {
           setLoading(true);
-          message.info(`Send message: ${v}`);
+          message.info(`Send message: ${skill?.value} | ${v}`);
+
           senderRef.current?.clear?.();
         }}
         onCancel={() => {
@@ -399,10 +400,10 @@ const App: React.FC = () => {
           );
         }}
         suffix={false}
-        onSubmit={(v) => {
+        onSubmit={(v, _, skill) => {
           setLoading(true);
-          message.info(`Send message: ${v}`);
-          senderRef.current?.clear?.();
+          message.info(`Send message: ${skill?.value} | ${v}`);
+          senderZhRef.current?.clear?.();
         }}
         onCancel={() => {
           setLoading(false);
