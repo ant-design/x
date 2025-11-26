@@ -357,11 +357,6 @@ describe('Sender Component', () => {
       global.window = originalWindow;
       global.navigator = originalNavigator;
     });
-    // it('should test SpeechButton component directly', () => {
-    //   // 测试加载状态
-    //   const { container: container3 } = render(<Sender allowSpeech loading />);
-    //   expect(container3.querySelector('.ant-sender')).toBeTruthy();
-    // });
     it('should render speech button when allowSpeech is true', () => {
       const { container } = render(<Sender allowSpeech />);
       const speechButton = container.querySelectorAll('.ant-sender-actions-btn');
@@ -387,15 +382,5 @@ describe('Sender Component', () => {
       expect(speechButton).toHaveLength(2);
       expect(container.querySelector('.ant-sender')).toBeTruthy();
     });
-    // it('should not render speech button when allowSpeech is false', () => {
-    //   const { container } = render(<Sender allowSpeech={false} />);
-    //   expect(container.querySelector('.ant-sender')).toBeTruthy();
-    // });
-
-    // it('should render speech button with disabled state', () => {
-    //   const { container } = render(<Sender allowSpeech disabled />);
-    //   const speechButton = container.querySelector('.anticon-audio');
-    //   expect(speechButton).toBeTruthy();
-    // });
   });
 });
