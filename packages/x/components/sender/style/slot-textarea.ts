@@ -166,7 +166,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       transition: `background-color ${token.motionDurationMid}`,
       '&:hover': {
         backgroundColor: token.colorBgSkillHover,
-        [`${skillCls}-tag-close`]: {
+        [`${skillCls}-tag-close:not(${skillCls}-tag-close-disabled)`]: {
           color: token.colorPrimaryHover,
         },
       },
@@ -175,6 +175,10 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
         display: 'inline-flex',
         transition: `color ${token.motionDurationMid}`,
         color: token.colorPrimary,
+      },
+      '&-close-disabled': {
+        cursor: 'not-allowed',
+        color: token.colorTextDisabled,
       },
     },
   };
