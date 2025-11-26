@@ -10,12 +10,18 @@ interface ClosableConfig {
   disabled?: boolean;
 }
 
-export interface SkillProps extends Omit<SkillType, 'value'> {
+export interface SkillProps extends SkillType {
   prefixCls: string;
   removeSkill: () => void;
 }
-
-const Skill: React.FC<SkillProps> = ({ removeSkill, prefixCls, toolTip, closable, title }) => {
+const Skill: React.FC<SkillProps> = ({
+  removeSkill,
+  prefixCls,
+  toolTip,
+  closable,
+  title,
+  value,
+}) => {
   const componentCls = `${prefixCls}-skill-tag`;
 
   const closeNode = useMemo(() => {
@@ -54,7 +60,7 @@ const Skill: React.FC<SkillProps> = ({ removeSkill, prefixCls, toolTip, closable
 
     return closeNode;
   }, [closable, removeSkill]);
-  const titleNode = toolTip ? <Tooltip {...toolTip}>{title}</Tooltip> : title;
+  const titleNode = toolTip ? <Tooltip {...toolTip}>{title || value}</Tooltip> : title || value;
   return (
     <div className={componentCls} role="button" aria-label={`Skill: ${title}`} tabIndex={0}>
       <span className={`${componentCls}-text`}>{titleNode}</span>
