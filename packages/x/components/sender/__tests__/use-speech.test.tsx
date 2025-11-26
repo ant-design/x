@@ -221,4 +221,301 @@ describe('useSpeech', () => {
       }, 0);
     });
   });
+
+  it('should handle SpeechRecognition events properly', () => {
+    const mockRecognition = {
+      start: jest.fn(),
+      stop: jest.fn(),
+      onstart: null as any,
+      onend: null as any,
+      onresult: null as any,
+    };
+
+    mockSpeechRecognition.mockImplementation(() => mockRecognition);
+
+    (global as any).window = {
+      SpeechRecognition: mockSpeechRecognition,
+    };
+    (global as any).navigator = {
+      permissions: {
+        query: jest.fn().mockResolvedValue({ state: 'granted' }),
+      },
+    };
+
+    const onSpeech = jest.fn();
+    const { result } = renderHook(() => useSpeech(onSpeech, true));
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const [, triggerSpeech] = result.current;
+
+        // Trigger speech to initialize recognition
+        act(() => {
+          triggerSpeech(false);
+        });
+
+        // Test onstart event
+        expect(mockRecognition.onstart).toBeDefined();
+        act(() => {
+          if (mockRecognition.onstart) mockRecognition.onstart();
+        });
+
+        // Test onend event
+        expect(mockRecognition.onend).toBeDefined();
+        act(() => {
+          if (mockRecognition.onend) mockRecognition.onend();
+        });
+
+        // Test onresult event
+        expect(mockRecognition.onresult).toBeDefined();
+        const mockEvent = {
+          results: [[{ transcript: 'Hello world' }]],
+        };
+        act(() => {
+          if (mockRecognition.onresult) mockRecognition.onresult(mockEvent);
+        });
+
+        expect(onSpeech).toHaveBeenCalledWith('Hello world');
+        resolve(undefined);
+      }, 0);
+    });
+  });
+
+  it('should handle permission state changes', () => {
+    const mockPermissionStatus = {
+      state: 'granted',
+      onchange: null,
+    };
+
+    (global as any).window = {
+      SpeechRecognition: mockSpeechRecognition,
+    };
+    (global as any).navigator = {
+      permissions: {
+        query: jest.fn().mockImplementation(() => {
+          return Promise.resolve(mockPermissionStatus);
+        }),
+      },
+    };
+
+    const onSpeech = jest.fn();
+    renderHook(() => useSpeech(onSpeech, true));
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        // Test permission state change
+        expect(mockPermissionStatus.onchange).toBeDefined();
+
+        act(() => {
+          mockPermissionStatus.state = 'denied';
+          if (mockPermissionStatus.onchange) (mockPermissionStatus as any).onchange();
+        });
+
+        resolve(undefined);
+      }, 0);
+    });
+  });
+
+  it('should handle force break when recording', () => {
+    const mockRecognition = {
+      start: jest.fn(),
+      stop: jest.fn(),
+      onstart: null as any,
+      onend: null as any,
+      onresult: null as any,
+    };
+
+    mockSpeechRecognition.mockImplementation(() => mockRecognition);
+
+    (global as any).window = {
+      SpeechRecognition: mockSpeechRecognition,
+    };
+    (global as any).navigator = {
+      permissions: {
+        query: jest.fn().mockResolvedValue({ state: 'granted' }),
+      },
+    };
+
+    const onSpeech = jest.fn();
+    const { result } = renderHook(() => useSpeech(onSpeech, true));
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const [, triggerSpeech] = result.current;
+
+        // Just verify the function exists and can be called
+        expect(typeof triggerSpeech).toBe('function');
+        act(() => {
+          triggerSpeech(false);
+        });
+
+        act(() => {
+          triggerSpeech(true);
+        });
+
+        resolve(undefined);
+      }, 0);
+    });
+  });
+
+  it('should ignore force break when not recording', () => {
+    const mockRecognition = {
+      start: jest.fn(),
+      stop: jest.fn(),
+    };
+
+    mockSpeechRecognition.mockImplementation(() => mockRecognition);
+
+    (global as any).window = {
+      SpeechRecognition: mockSpeechRecognition,
+    };
+    (global as any).navigator = {
+      permissions: {
+        query: jest.fn().mockResolvedValue({ state: 'granted' }),
+      },
+    };
+
+    const onSpeech = jest.fn();
+    const { result } = renderHook(() => useSpeech(onSpeech, true));
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const [, triggerSpeech] = result.current;
+
+        // Test force break without starting recording
+        act(() => {
+          triggerSpeech(true);
+        });
+
+        // Should not call stop since we're not recording
+        expect(mockRecognition.stop).not.toHaveBeenCalled();
+        resolve(undefined);
+      }, 0);
+    });
+  });
+
+  it('should handle controlled mode triggerSpeech', () => {
+    (global as any).window = {
+      SpeechRecognition: mockSpeechRecognition,
+    };
+    (global as any).navigator = {
+      permissions: {
+        query: jest.fn().mockResolvedValue({ state: 'granted' }),
+      },
+    };
+
+    const onSpeech = jest.fn();
+    const onRecordingChange = jest.fn();
+    const { result } = renderHook(() =>
+      useSpeech(onSpeech, {
+        recording: false,
+        onRecordingChange,
+      }),
+    );
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const [, triggerSpeech] = result.current;
+
+        act(() => {
+          triggerSpeech(false);
+        });
+
+        expect(onRecordingChange).toHaveBeenCalledWith(true);
+        resolve(undefined);
+      }, 0);
+    });
+  });
+
+  it('should handle transcript extraction from SpeechRecognitionEvent', () => {
+    const mockRecognition = {
+      start: jest.fn(),
+      stop: jest.fn(),
+      onstart: null as any,
+      onend: null as any,
+      onresult: null as any,
+    };
+
+    mockSpeechRecognition.mockImplementation(() => mockRecognition);
+
+    (global as any).window = {
+      SpeechRecognition: mockSpeechRecognition,
+    };
+    (global as any).navigator = {
+      permissions: {
+        query: jest.fn().mockResolvedValue({ state: 'granted' }),
+      },
+    };
+
+    const onSpeech = jest.fn();
+    const { result } = renderHook(() => useSpeech(onSpeech, true));
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const [, triggerSpeech] = result.current;
+
+        act(() => {
+          triggerSpeech(false);
+        });
+
+        // Test with valid transcript
+        const mockEvent = {
+          results: [[{ transcript: 'Test transcript' }]],
+        };
+        act(() => {
+          if (mockRecognition.onresult) mockRecognition.onresult(mockEvent);
+        });
+
+        expect(onSpeech).toHaveBeenCalledWith('Test transcript');
+        resolve(undefined);
+      }, 0);
+    });
+  });
+
+  it('should handle force break ref in onresult', () => {
+    const mockRecognition = {
+      start: jest.fn(),
+      stop: jest.fn(),
+      onstart: null as any,
+      onend: null as any,
+      onresult: null as any,
+    };
+
+    mockSpeechRecognition.mockImplementation(() => mockRecognition);
+
+    (global as any).window = {
+      SpeechRecognition: mockSpeechRecognition,
+    };
+    (global as any).navigator = {
+      permissions: {
+        query: jest.fn().mockResolvedValue({ state: 'granted' }),
+      },
+    };
+
+    const onSpeech = jest.fn();
+    const { result } = renderHook(() => useSpeech(onSpeech, true));
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const [, triggerSpeech] = result.current;
+
+        // Just verify the function works without complex timing
+        expect(typeof triggerSpeech).toBe('function');
+        act(() => {
+          triggerSpeech(false);
+        });
+
+        // Test normal transcript processing
+        const mockEvent = {
+          results: [[{ transcript: 'Test transcript' }]],
+        };
+        act(() => {
+          if (mockRecognition.onresult) mockRecognition.onresult(mockEvent);
+        });
+
+        expect(onSpeech).toHaveBeenCalledWith('Test transcript');
+        resolve(undefined);
+      }, 0);
+    });
+  });
 });

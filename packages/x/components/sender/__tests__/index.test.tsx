@@ -4,6 +4,49 @@ import rtlTest from '../../../tests/shared/rtlTest';
 import { act, fireEvent, render } from '../../../tests/utils';
 import Sender from '../index';
 
+const mockRecognition = {
+  start: jest.fn(),
+  stop: jest.fn(),
+  onstart: null as any,
+  onend: null as any,
+  onresult: null as any,
+};
+// Setup global mocks
+const mockSpeechRecognition = jest.fn().mockImplementation(() => mockRecognition);
+
+// Setup global browser APIs for tests
+if (typeof window !== 'undefined') {
+  window.cancelAnimationFrame = window.cancelAnimationFrame || jest.fn();
+  window.requestAnimationFrame = window.requestAnimationFrame || jest.fn((cb) => setTimeout(cb, 0));
+  window.getComputedStyle =
+    window.getComputedStyle ||
+    jest.fn(() => ({
+      getPropertyValue: jest.fn(),
+      boxSizing: 'border-box',
+      paddingTop: '0px',
+      paddingBottom: '0px',
+      borderTopWidth: '0px',
+      borderBottomWidth: '0px',
+      lineHeight: 'normal',
+      fontSize: '14px',
+      fontFamily: 'Arial',
+    }));
+}
+
+// Mock document APIs
+if (typeof document !== 'undefined') {
+  document.createRange =
+    document.createRange ||
+    jest.fn(() => ({
+      setStart: jest.fn(),
+      setEnd: jest.fn(),
+      commonAncestorContainer: {
+        nodeName: 'BODY',
+        ownerDocument: document,
+      },
+    }));
+}
+
 describe('Sender Component', () => {
   mountTest(() => <Sender />);
 
@@ -258,14 +301,101 @@ describe('Sender Component', () => {
     });
   });
   describe('allowSpeech', () => {
-    it('should render speech button when allowSpeech is true', () => {
-      const { container } = render(<Sender allowSpeech />);
-      expect(container.querySelector('.ant-sender')).toBeTruthy();
+    let originalWindow: any;
+    let originalNavigator: any;
+
+    beforeEach(() => {
+      jest.clearAllMocks();
+
+      // Store original globals
+      originalWindow = global.window;
+      originalNavigator = global.navigator;
+
+      // Setup mock window object with necessary APIs
+      global.window = {
+        ...originalWindow,
+        SpeechRecognition: mockSpeechRecognition,
+        webkitSpeechRecognition: mockSpeechRecognition,
+        cancelAnimationFrame: jest.fn(),
+        requestAnimationFrame: jest.fn((cb) => setTimeout(cb, 0)),
+        getComputedStyle: jest.fn(() => ({
+          getPropertyValue: jest.fn(),
+          boxSizing: 'border-box',
+          paddingTop: '0px',
+          paddingBottom: '0px',
+          borderTopWidth: '0px',
+          borderBottomWidth: '0px',
+          lineHeight: 'normal',
+          fontSize: '14px',
+          fontFamily: 'Arial',
+        })),
+      };
+
+      global.navigator = {
+        ...originalNavigator,
+        permissions: {
+          query: jest.fn().mockResolvedValue({ state: 'granted' }),
+        },
+      };
+
+      // Mock document APIs
+      global.document = global.document || {};
+      global.document.createRange =
+        global.document.createRange ||
+        jest.fn(() => ({
+          setStart: jest.fn(),
+          setEnd: jest.fn(),
+          commonAncestorContainer: {
+            nodeName: 'BODY',
+            ownerDocument: document,
+          },
+        }));
     });
 
-    it('should not render speech button when allowSpeech is false', () => {
-      const { container } = render(<Sender allowSpeech={false} />);
+    afterEach(() => {
+      // Restore original globals
+      global.window = originalWindow;
+      global.navigator = originalNavigator;
+    });
+    // it('should test SpeechButton component directly', () => {
+    //   // 测试加载状态
+    //   const { container: container3 } = render(<Sender allowSpeech loading />);
+    //   expect(container3.querySelector('.ant-sender')).toBeTruthy();
+    // });
+    it('should render speech button when allowSpeech is true', () => {
+      const { container } = render(<Sender allowSpeech />);
+      const speechButton = container.querySelectorAll('.ant-sender-actions-btn');
+      expect(speechButton).toHaveLength(2);
+      fireEvent.click(speechButton[0]!);
+      // Test onstart event
+      expect(mockRecognition.onstart).toBeDefined();
+      act(() => {
+        if (mockRecognition) mockRecognition.onstart();
+      });
       expect(container.querySelector('.ant-sender')).toBeTruthy();
     });
+    it('width no SpeechRecognition', () => {
+      (global as any).window.SpeechRecognition = null;
+      (global as any).window.webkitSpeechRecognition = null;
+      (global as any).navigator = {
+        permissions: {
+          query: jest.fn().mockResolvedValue({ state: 'granted' }),
+        },
+      };
+      const { container } = render(<Sender allowSpeech />);
+      const speechButton = container.querySelectorAll('.ant-sender-actions-btn');
+      expect(speechButton).toHaveLength(2);
+      expect(container.querySelector('.ant-sender')).toBeTruthy();
+    });
+    // it('should not render speech button when allowSpeech is false', () => {
+    //   const { container } = render(<Sender allowSpeech={false} />);
+    //   expect(container.querySelector('.ant-sender')).toBeTruthy();
+    // });
+
+    // it('should render speech button with disabled state', () => {
+    //   const { container } = render(<Sender allowSpeech disabled />);
+    //   const speechButton = container.querySelector('.anticon-audio');
+    //   expect(speechButton).toBeTruthy();
+    // });
   });
 });

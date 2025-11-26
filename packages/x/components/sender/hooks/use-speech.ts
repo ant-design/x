@@ -1,13 +1,6 @@
 import { useEvent, useMergedState } from 'rc-util';
 import React from 'react';
 
-// Ensure that the SpeechRecognition API is available in the browser
-let SpeechRecognition: any;
-
-if (!SpeechRecognition && typeof window !== 'undefined') {
-  SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-}
-
 export type ControlledSpeechConfig = {
   recording?: boolean;
   onRecordingChange: (recording: boolean) => void;
@@ -64,9 +57,17 @@ export default function useSpeech(
     }
   }, []);
 
-  // Convert permission state to a simple type
-  const mergedAllowSpeech = !!(SpeechRecognition && permissionState !== 'denied');
+  // Ensure that the SpeechRecognition API is available in the browser
+  let SpeechRecognition: any;
 
+  if (!SpeechRecognition && typeof window !== 'undefined') {
+    SpeechRecognition =
+      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+  }
+
+  // Convert permission state to a simple type
+
+  const mergedAllowSpeech = !!(SpeechRecognition && permissionState !== 'denied');
   // ========================== Speech Events ==========================
   const recognitionRef = React.useRef<any | null>(null);
   const [recording, setRecording] = useMergedState(false, {
@@ -78,7 +79,6 @@ export default function useSpeech(
   const ensureRecognition = () => {
     if (mergedAllowSpeech && !recognitionRef.current) {
       const recognition = new SpeechRecognition();
-
       recognition.onstart = () => {
         setRecording(true);
       };
@@ -107,7 +107,6 @@ export default function useSpeech(
     }
 
     forceBreakRef.current = forceBreak;
-
     if (speechInControlled) {
       // If in controlled mode, do nothing
       onControlledRecordingChange?.(!recording);
