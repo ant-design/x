@@ -387,27 +387,74 @@ describe('Sender.SlotTextArea', () => {
     }
   });
 
-  it('should handle skill insertion and removal', () => {
-    const ref = React.createRef<any>();
-    const skillConfig = {
-      value: 'test-skill',
-      label: 'Test Skill',
-    };
-
-    render(
+  it('should render skill', () => {
+    const mockClose = jest.fn();
+    const { getByText } = render(
       <Sender
         key="text"
-        slotConfig={[{ type: 'text', value: 'Hello' }]}
-        skill={skillConfig}
-        ref={ref}
+        skill={{
+          value: 'skill',
+          title: 'skill_title',
+          closable: {
+            closeIcon: 'skill关闭',
+            onClose: mockClose,
+          },
+        }}
       />,
     );
-
-    // Test skill insertion
-    expect(ref.current).toBeDefined();
-
-    // Test clear with skill
-    ref.current?.clear();
+    expect(getByText('skill_title')).toBeInTheDocument();
+    expect(getByText('skill关闭')).toBeInTheDocument();
+    const clearButton = getByText('skill关闭');
+    fireEvent.click(clearButton);
+    expect(mockClose).toHaveBeenCalled();
+  });
+  it('should render skill no closable', () => {
+    const { getByText } = render(
+      <Sender
+        key="text"
+        skill={{
+          value: 'skill',
+          title: 'skill_title',
+          closable: false,
+        }}
+      />,
+    );
+    expect(getByText('skill_title')).toBeInTheDocument();
+  });
+  it('should render skill default closable', () => {
+    const { getByText } = render(
+      <Sender
+        key="text"
+        skill={{
+          value: 'skill',
+          title: 'skill_title',
+          closable: true,
+        }}
+      />,
+    );
+    expect(getByText('skill_title')).toBeInTheDocument();
+  });
+  it('should render skill closable disabled', () => {
+    const mockClose = jest.fn();
+    const { getByText } = render(
+      <Sender
+        key="text"
+        skill={{
+          value: 'skill',
+          title: 'skill_title',
+          closable: {
+            closeIcon: 'skill关闭',
+            disabled: true,
+            onClose: mockClose,
+          },
+        }}
+      />,
+    );
+    expect(getByText('skill关闭')).toBeInTheDocument();
+    const clearButton = getByText('skill关闭');
+    // check custom onClick
+    fireEvent.click(clearButton);
+    expect(mockClose).not.toHaveBeenCalled();
   });
 
   it('should handle edge cases in getInsertPosition', () => {
@@ -551,21 +598,6 @@ describe('Sender.SlotTextArea', () => {
 
     // Restore getSelection
     window.getSelection = originalGetSelection;
-  });
-
-  it('should handle onInternalSelect edge cases', () => {
-    const { container } = render(
-      <Sender
-        key="text"
-        slotConfig={[{ type: 'text', value: 'Test' }]}
-        skill={{ value: 'test-skill', title: 'Test Skill' }}
-      />,
-    );
-
-    const inputArea = container.querySelector('[role="textbox"]') as HTMLElement;
-
-    // Test select event with skill present
-    fireEvent.select(inputArea);
   });
 
   it('should handle initClear and clear methods', () => {
