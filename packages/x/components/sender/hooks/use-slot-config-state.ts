@@ -33,7 +33,7 @@ const buildSlotValues = (
 };
 
 function useSlotConfigState(
-  slotConfig: readonly SlotConfigType[],
+  slotConfig?: readonly SlotConfigType[],
 ): [
   Map<string, SlotConfigType>,
   () => Record<string, any>,
@@ -45,6 +45,7 @@ function useSlotConfigState(
   const slotConfigMap = useRef<Map<string, SlotConfigType>>(new Map());
 
   useEffect(() => {
+    if (!slotConfig) return;
     const slotValue = buildSlotValues(slotConfig, slotConfigMap);
     _setState(slotValue);
     stateRef.current = slotValue;

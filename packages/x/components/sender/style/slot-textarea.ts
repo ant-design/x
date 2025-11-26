@@ -141,7 +141,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
     },
     [skillCls]: {
       display: 'inline-block',
-      verticalAlign: 'top',
+      verticalAlign: 'baseline',
       alignItems: 'center',
       marginBlock: 1,
       height: calc(token.fontSize).mul(token.lineHeight).add(2).equal(),

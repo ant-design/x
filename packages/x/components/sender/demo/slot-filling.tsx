@@ -105,6 +105,8 @@ const App: React.FC = () => {
       },
     },
   });
+  const [skillValue, setSkillValue] = useState<string>('');
+  const [slotValue, setSlotValue] = useState<string>('');
   return (
     <Flex vertical gap={16}>
       {/* 操作按钮区 */}
@@ -119,18 +121,14 @@ const App: React.FC = () => {
         <Button
           onClick={() => {
             const val = senderRef.current?.getValue?.();
+            if (val?.skill) {
+              setSkillValue(val?.skill?.value);
+            }
             setValue(val?.value ? val.value : 'No value');
+            setSlotValue(val?.slotConfig ? JSON.stringify(val.slotConfig) : 'No value');
           }}
         >
           Get Value
-        </Button>
-        <Button
-          onClick={() => {
-            const val = senderRef.current?.getValue();
-            setValue(val?.config ? JSON.stringify(val.config) : 'No value');
-          }}
-        >
-          Get Slot
         </Button>
         <Button
           onClick={() => {
@@ -308,8 +306,11 @@ const App: React.FC = () => {
           ref={senderRef}
         />
       </XProvider>
-
-      {value ? `value:${value}` : null}
+      <Flex vertical gap="middle">
+        <div> {skillValue ? `skill:${skillValue}` : null}</div>
+        <div> {value ? `value:${value}` : null}</div>
+        <div> {slotValue ? `slotValue:${slotValue}` : null}</div>
+      </Flex>
     </Flex>
   );
 };

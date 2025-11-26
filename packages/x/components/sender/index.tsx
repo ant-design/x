@@ -90,7 +90,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   });
 
   const id = React.useId();
-  const isSlotMode = Array.isArray(slotConfig);
+  const isSlotMode = Array.isArray(slotConfig) || skill?.value;
   // ============================= MISC =============================
   const { direction, getPrefixCls } = useXProviderContext();
   const prefixCls = getPrefixCls('sender', customizePrefixCls);
