@@ -74,6 +74,9 @@ module.exports = {
     '!components/*/demo/*.tsx',
     '!components/*/design/**',
     '!components/theme/interface/**',
+    '!components/version/**',
+    '!components/style/**',
+    '!components/index.ts',
   ],
   transformIgnorePatterns,
   globals: {
