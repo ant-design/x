@@ -286,6 +286,220 @@ describe('Sender.SlotTextArea', () => {
     ref.current?.insert([{ type: 'text', value: 'end text' }], 'end');
   });
 
+  it('should handle insert with replaceCharacters', () => {
+    const ref = React.createRef<any>();
+    render(<Sender key="text" slotConfig={[{ type: 'text', value: 'Hello @world' }]} ref={ref} />);
+
+    // Test replaceCharacters functionality
+    const inputArea = document.querySelector('[role="textbox"]') as HTMLElement;
+    inputArea.focus();
+
+    // Set cursor at the end
+    const selection = window.getSelection();
+    if (selection) {
+      const range = document.createRange();
+      range.selectNodeContents(inputArea);
+      range.collapse(false);
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+
+    ref.current?.insert(
+      [{ type: 'input', key: 'name', props: { placeholder: 'Enter name' } }],
+      'cursor',
+      '@world',
+    );
+  });
+
+  it('should handle focus with different cursor options', () => {
+    const ref = React.createRef<any>();
+    render(<Sender key="text" slotConfig={slotConfig} ref={ref} />);
+
+    // Test focus with different cursor options
+    ref.current?.focus({ cursor: 'start' });
+    ref.current?.focus({ cursor: 'end' });
+    ref.current?.focus({ cursor: 'all' });
+    ref.current?.focus({ cursor: 'slot', key: 'input1' });
+    ref.current?.focus({ cursor: 'slot', key: 'nonexistent' });
+  });
+
+  it('should handle removeSpecificBRs with different submitType', () => {
+    const { container } = render(
+      <Sender key="text" slotConfig={[{ type: 'text', value: 'Test' }]} submitType="shiftEnter" />,
+    );
+
+    const inputArea = container.querySelector('[role="textbox"]') as HTMLElement;
+    expect(inputArea).toBeInTheDocument();
+
+    // Add a br tag and test removal
+    inputArea.innerHTML = 'Test<br>';
+    fireEvent.input(inputArea);
+  });
+
+  it('should handle Backspace key with slot deletion', () => {
+    const onChange = jest.fn();
+    const { container } = render(
+      <Sender
+        slotConfig={[
+          {
+            type: 'input',
+            key: 'test-input',
+            props: { placeholder: 'Test input' },
+          },
+        ]}
+        onChange={onChange}
+      />,
+    );
+
+    const inputArea = container.querySelector('[role="textbox"]') as HTMLElement;
+
+    // Test Backspace with composition
+    fireEvent.compositionStart(inputArea);
+    fireEvent.keyDown(inputArea, { key: 'Backspace' });
+    fireEvent.compositionEnd(inputArea);
+
+    // Test Backspace with key lock
+    fireEvent.keyDown(inputArea, { key: 'Backspace' });
+  });
+
+  it('should handle select slot dropdown interaction', () => {
+    const { container, getByText } = render(
+      <Sender
+        slotConfig={[
+          {
+            type: 'select',
+            key: 'select-test',
+            props: { options: ['Option A', 'Option B'], placeholder: 'Select option' },
+          },
+        ]}
+      />,
+    );
+
+    const selectTrigger = container.querySelector('.ant-sender-slot-select');
+    expect(selectTrigger).toBeInTheDocument();
+
+    if (selectTrigger) {
+      fireEvent.click(selectTrigger);
+
+      // Test dropdown option selection
+      const optionA = getByText('Option A');
+      fireEvent.click(optionA);
+    }
+  });
+
+  it('should handle skill insertion and removal', () => {
+    const ref = React.createRef<any>();
+    const skillConfig = {
+      value: 'test-skill',
+      label: 'Test Skill',
+    };
+
+    render(
+      <Sender
+        key="text"
+        slotConfig={[{ type: 'text', value: 'Hello' }]}
+        skill={skillConfig}
+        ref={ref}
+      />,
+    );
+
+    // Test skill insertion
+    expect(ref.current).toBeDefined();
+
+    // Test clear with skill
+    ref.current?.clear();
+  });
+
+  it('should handle edge cases in getInsertPosition', () => {
+    const ref = React.createRef<any>();
+    render(<Sender key="text" slotConfig={[{ type: 'text', value: 'Test' }]} ref={ref} />);
+
+    // Test insert with no selection
+    Object.defineProperty(window, 'getSelection', {
+      value: () => null,
+      writable: true,
+    });
+
+    ref.current?.insert([{ type: 'text', value: 'insert' }]);
+
+    // Restore getSelection
+    Object.defineProperty(window, 'getSelection', {
+      value: () => ({
+        rangeCount: 0,
+        getRangeAt: () => null,
+      }),
+      writable: true,
+    });
+  });
+
+  it('should handle empty slotConfig and missing keys', () => {
+    const { container } = render(
+      <Sender
+        key="text"
+        slotConfig={[
+          { type: 'input' } as any, // Missing key
+          { type: 'tag' }, // Missing props
+          { type: 'custom' } as any, // Missing customRender
+        ]}
+      />,
+    );
+
+    const inputArea = container.querySelector('[role="textbox"]');
+    expect(inputArea).toBeInTheDocument();
+  });
+
+  it('should handle onPaste with files', () => {
+    const mockPasteFile = jest.fn();
+    const { container } = render(
+      <Sender key="text" slotConfig={slotConfig} onPasteFile={mockPasteFile} />,
+    );
+
+    const inputArea = container.querySelector('[role="textbox"]') as HTMLElement;
+
+    // Test paste with files
+    const mockFile = new File(['test'], 'test.txt', { type: 'text/plain' });
+    fireEvent.paste(inputArea, {
+      clipboardData: {
+        getData: () => '',
+        files: [mockFile],
+      },
+    });
+
+    expect(mockPasteFile).toHaveBeenCalledWith([mockFile]);
+  });
+
+  it('should handle keyboard events with modifiers', () => {
+    const mockSubmit = jest.fn();
+    const { container } = render(
+      <Sender key="text" slotConfig={slotConfig} onSubmit={mockSubmit} submitType="enter" />,
+    );
+
+    const inputArea = container.querySelector('[role="textbox"]') as HTMLElement;
+
+    // Test Enter with Ctrl modifier
+    fireEvent.keyDown(inputArea, { key: 'Enter', ctrlKey: true });
+    expect(mockSubmit).not.toHaveBeenCalled();
+
+    // Test Enter with Alt modifier
+    fireEvent.keyDown(inputArea, { key: 'Enter', altKey: true });
+    expect(mockSubmit).not.toHaveBeenCalled();
+
+    // Test Enter with Meta modifier
+    fireEvent.keyDown(inputArea, { key: 'Enter', metaKey: true });
+    expect(mockSubmit).not.toHaveBeenCalled();
+  });
+
+  it('should handle shift+Enter with submitType="shiftEnter"', () => {
+    const mockSubmit = jest.fn();
+    const { container } = render(
+      <Sender key="text" slotConfig={slotConfig} onSubmit={mockSubmit} submitType="shiftEnter" />,
+    );
+
+    const inputArea = container.querySelector('[role="textbox"]') as HTMLElement;
+    fireEvent.keyDown(inputArea, { key: 'Enter', shiftKey: true });
+    expect(mockSubmit).toHaveBeenCalled();
+  });
+
   it('should handle complex slot interactions', () => {
     const ref = React.createRef<any>();
     const complexConfig: SlotConfigType[] = [
@@ -300,5 +514,165 @@ describe('Sender.SlotTextArea', () => {
     const value = ref.current?.getValue();
     expect(value).toBeDefined();
     expect(Array.isArray(value?.slotConfig)).toBe(true);
+  });
+
+  it('should handle slotFocus with edge cases', () => {
+    const ref = React.createRef<any>();
+    render(
+      <Sender
+        key="text"
+        slotConfig={[
+          {
+            type: 'content',
+            key: 'content-test',
+            props: { placeholder: 'Test content' },
+          },
+        ]}
+        ref={ref}
+      />,
+    );
+
+    // Test slotFocus with no editor
+    ref.current?.focus({ cursor: 'slot', key: 'content-test' });
+
+    // Test slotFocus with non-existent key
+    ref.current?.focus({ cursor: 'slot', key: 'nonexistent' });
+  });
+
+  it('should handle getInsertPosition edge cases', () => {
+    const ref = React.createRef<any>();
+    render(<Sender key="text" slotConfig={[{ type: 'text', value: 'Test' }]} ref={ref} />);
+
+    // Test insert with cursor position when no selection available
+    const originalGetSelection = window.getSelection;
+    delete (window as any).getSelection;
+
+    ref.current?.insert([{ type: 'text', value: 'insert' }]);
+
+    // Restore getSelection
+    window.getSelection = originalGetSelection;
+  });
+
+  it('should handle onInternalSelect edge cases', () => {
+    const { container } = render(
+      <Sender
+        key="text"
+        slotConfig={[{ type: 'text', value: 'Test' }]}
+        skill={{ value: 'test-skill', title: 'Test Skill' }}
+      />,
+    );
+
+    const inputArea = container.querySelector('[role="textbox"]') as HTMLElement;
+
+    // Test select event with skill present
+    fireEvent.select(inputArea);
+  });
+
+  it('should handle initClear and clear methods', () => {
+    const ref = React.createRef<any>();
+    const { container } = render(
+      <Sender
+        key="text"
+        slotConfig={[
+          {
+            type: 'input',
+            key: 'test-input',
+            props: { placeholder: 'Test input' },
+          },
+        ]}
+        ref={ref}
+      />,
+    );
+
+    // Test clear method
+    ref.current?.clear();
+
+    // Test clear with no editableRef
+    const inputArea = container.querySelector('[role="textbox"]') as HTMLElement;
+    expect(inputArea).toBeInTheDocument();
+  });
+
+  it('should handle onInternalBlur with keyLock', () => {
+    const mockBlur = jest.fn();
+    const { container } = render(
+      <Sender key="text" slotConfig={[{ type: 'text', value: 'Test' }]} onBlur={mockBlur} />,
+    );
+
+    const inputArea = container.querySelector('[role="textbox"]') as HTMLElement;
+
+    // Test blur with key lock
+    fireEvent.blur(inputArea);
+    expect(mockBlur).toHaveBeenCalled();
+  });
+
+  it('should handle onInternalKeyUp with Enter key', () => {
+    const mockKeyUp = jest.fn();
+    const { container } = render(
+      <Sender key="text" slotConfig={[{ type: 'text', value: 'Test' }]} onKeyUp={mockKeyUp} />,
+    );
+
+    const inputArea = container.querySelector('[role="textbox"]') as HTMLElement;
+
+    // Test key up with Enter
+    fireEvent.keyUp(inputArea, { key: 'Enter' });
+    expect(mockKeyUp).toHaveBeenCalled();
+  });
+  it('should handle onPaste with text', () => {
+    const onChange = jest.fn();
+    const { container } = render(<Sender slotConfig={slotConfig} onChange={onChange} />);
+    const editable = container.querySelector('.ant-sender-input')!;
+    fireEvent.paste(editable, {
+      clipboardData: {
+        getData: () => 'Paste content',
+        files: { length: 0 },
+      },
+    });
+    // After pasting, content should change
+    expect(onChange).toHaveBeenCalled();
+  });
+
+  it('should handle buildEditSlotSpan and buildSpan', () => {
+    const ref = React.createRef<any>();
+    render(
+      <Sender
+        key="text"
+        slotConfig={[
+          {
+            type: 'content',
+            key: 'content-test',
+            props: { placeholder: 'Test content', defaultValue: 'Default' },
+          },
+        ]}
+        ref={ref}
+      />,
+    );
+
+    // Test content type slot
+    const value = ref.current?.getValue();
+    expect(value).toBeDefined();
+  });
+
+  it('should handle getNodeTextValue with different node types', () => {
+    const ref = React.createRef<any>();
+    render(
+      <Sender
+        key="text"
+        slotConfig={[
+          { type: 'text', value: 'Text 1' },
+          {
+            type: 'input',
+            key: 'input1',
+            props: { placeholder: 'Input 1', defaultValue: 'Value 1' },
+          },
+          { type: 'text', value: 'Text 2' },
+        ]}
+        ref={ref}
+      />,
+    );
+
+    const value = ref.current?.getValue();
+    expect(value?.value).toContain('Text 1');
+    expect(value?.value).toContain('Value 1');
+    expect(value?.value).toContain('Text 2');
   });
 });
