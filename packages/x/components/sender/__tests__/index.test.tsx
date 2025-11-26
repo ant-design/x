@@ -226,6 +226,28 @@ describe('Sender Component', () => {
     });
   });
 
+  it('should handle ref methods correctly', () => {
+    const ref = React.createRef<any>();
+    render(<Sender key="text" ref={ref} />);
+
+    const value = ref.current?.getValue();
+    expect(value).toBeDefined();
+    expect(typeof value?.value).toBe('string');
+    expect(Array.isArray(value?.slotConfig)).toBe(true);
+
+    ref.current?.focus();
+    ref.current?.focus({
+      cursor: 'slot',
+      slotKey: 'input1',
+    });
+    ref.current?.focus({
+      cursor: 'end',
+    });
+    ref.current?.insert?.('text1', 'start');
+    ref.current?.insert?.('text1');
+    ref.current?.clear();
+  });
+
   describe('paste events', () => {
     it('onPaste callback', () => {
       const onPaste = jest.fn();
@@ -359,6 +381,20 @@ describe('Sender Component', () => {
     });
     it('should render speech button when allowSpeech is true', () => {
       const { container } = render(<Sender allowSpeech />);
+      const speechButton = container.querySelectorAll('.ant-sender-actions-btn');
+      expect(speechButton).toHaveLength(2);
+      fireEvent.click(speechButton[0]!);
+      // Test onstart event
+      expect(mockRecognition.onstart).toBeDefined();
+      act(() => {
+        if (mockRecognition) mockRecognition.onstart();
+      });
+      expect(container.querySelector('.ant-sender')).toBeTruthy();
+    });
+    it('should render speech button when allowSpeech is true with slot', () => {
+      const { container } = render(
+        <Sender allowSpeech slotConfig={[{ type: 'text', value: 'Prefix text' }]} />,
+      );
       const speechButton = container.querySelectorAll('.ant-sender-actions-btn');
       expect(speechButton).toHaveLength(2);
       fireEvent.click(speechButton[0]!);

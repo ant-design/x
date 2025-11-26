@@ -44,6 +44,20 @@ describe('Sender.SlotTextArea', () => {
     expect(getByTestId('custom-btn')).toBeInTheDocument();
   });
 
+  it('autoSize', () => {
+    render(<Sender autoSize slotConfig={slotConfig} />);
+    render(<Sender autoSize={false} slotConfig={slotConfig} />);
+    render(
+      <Sender
+        autoSize={{
+          minRows: 2,
+          maxRows: 6,
+        }}
+        slotConfig={slotConfig}
+      />,
+    );
+  });
+
   it('should render skill', () => {
     const mockClose = jest.fn();
     const { getByText } = render(

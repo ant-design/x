@@ -294,6 +294,7 @@ const App: React.FC = () => {
       >
         <Sender
           skill={skill}
+          allowSpeech
           autoSize={{ minRows: 3, maxRows: 4 }}
           onSubmit={(value) => {
             setValue(value);
