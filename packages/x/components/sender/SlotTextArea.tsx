@@ -310,7 +310,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
         return slotResult;
       }
-      return '';
     }
     return '';
   };

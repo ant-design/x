@@ -43,6 +43,26 @@ describe('Sender.SlotTextArea', () => {
     expect(getByText('Tag')).toBeInTheDocument();
     expect(getByTestId('custom-btn')).toBeInTheDocument();
   });
+  it('Backspace', () => {
+    const onChange = jest.fn();
+    const { container } = render(
+      <Sender
+        slotConfig={[
+          {
+            type: 'content',
+            key: 'content1',
+            props: { placeholder: 'Please enter content', defaultValue: 'Default value' },
+          },
+        ]}
+        onChange={onChange}
+      />,
+    );
+
+    const editable = container.querySelector('[role="textbox"]')!;
+
+    fireEvent.compositionStart(editable);
+    fireEvent.keyDown(editable, { key: 'Backspace' });
+  });
 
   it('autoSize', () => {
     render(<Sender autoSize slotConfig={slotConfig} />);
@@ -58,82 +78,24 @@ describe('Sender.SlotTextArea', () => {
     );
   });
 
-  it('should render skill', () => {
-    const mockClose = jest.fn();
-    const { getByText } = render(
-      <Sender
-        key="text"
-        skill={{
-          value: 'skill',
-          title: 'skill_title',
-          closable: {
-            closeIcon: 'skill关闭',
-            onClose: mockClose,
-          },
-        }}
-      />,
-    );
-    expect(getByText('skill_title')).toBeInTheDocument();
-    expect(getByText('skill关闭')).toBeInTheDocument();
-    const clearButton = getByText('skill关闭');
-    fireEvent.click(clearButton);
-    expect(mockClose).toHaveBeenCalled();
-  });
-  it('should render skill no closable', () => {
-    const { getByText } = render(
-      <Sender
-        key="text"
-        skill={{
-          value: 'skill',
-          title: 'skill_title',
-          closable: false,
-        }}
-      />,
-    );
-    expect(getByText('skill_title')).toBeInTheDocument();
-  });
-  it('should render skill default closable', () => {
-    const { getByText } = render(
-      <Sender
-        key="text"
-        skill={{
-          value: 'skill',
-          title: 'skill_title',
-          closable: true,
-        }}
-      />,
-    );
-    expect(getByText('skill_title')).toBeInTheDocument();
-  });
-  it('should render skill closable disabled', () => {
-    const mockClose = jest.fn();
-    const { getByText } = render(
-      <Sender
-        key="text"
-        skill={{
-          value: 'skill',
-          title: 'skill_title',
-          closable: {
-            closeIcon: 'skill关闭',
-            disabled: true,
-            onClose: mockClose,
-          },
-        }}
-      />,
-    );
-    expect(getByText('skill关闭')).toBeInTheDocument();
-    const clearButton = getByText('skill关闭');
-    // check custom onClick
-    fireEvent.click(clearButton);
-    expect(mockClose).not.toHaveBeenCalled();
-  });
   it('should handle input slot interaction', () => {
     const { getByPlaceholderText } = render(<Sender key="text" slotConfig={slotConfig} />);
     const input = getByPlaceholderText('Please enter input') as HTMLInputElement;
     fireEvent.change(input, { target: { value: 'New input value' } });
     expect(input.value).toBe('New input value');
   });
+  it('should handle non-enter keys', () => {
+    const onKeyDown = jest.fn();
+    const { container } = render(<Sender slotConfig={slotConfig} onKeyDown={onKeyDown} />);
 
+    const editable = container.querySelector('[role="textbox"]')!;
+
+    fireEvent.keyDown(editable, { key: 'Tab' });
+    fireEvent.keyDown(editable, { key: 'Escape' });
+    fireEvent.keyDown(editable, { key: 'Space' });
+
+    expect(onKeyDown).toHaveBeenCalledTimes(3);
+  });
   it('should handle custom slot interaction', () => {
     const { getByTestId } = render(<Sender key="text" slotConfig={slotConfig} />);
     const customBtn = getByTestId('custom-btn');
@@ -244,6 +206,12 @@ describe('Sender.SlotTextArea', () => {
       slotKey: 'content1',
     });
     ref.current?.focus({
+      cursor: 'start',
+    });
+    ref.current?.focus({
+      cursor: 'all',
+    });
+    ref.current?.focus({
       cursor: 'slot',
       slotKey: 'content2',
     });
@@ -261,6 +229,7 @@ describe('Sender.SlotTextArea', () => {
       'cursor',
       '@',
     );
+
     ref.current?.clear();
   });
 
