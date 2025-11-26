@@ -100,7 +100,6 @@ const App: React.FC = () => {
       title: 'Travel Skill',
     },
     closable: {
-      disabled: true,
       onClose: () => {
         console.log('close');
       },
