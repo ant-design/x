@@ -257,4 +257,38 @@ describe('Sender Component', () => {
       expect(onPasteFile).toHaveBeenCalledWith(fileList);
     });
   });
+  describe('allowSpeech', () => {
+    it('width allowSpeech', () => {
+      const { container } = render(<Sender allowSpeech />);
+      expect(container.querySelector('.ant-sender')).toBeTruthy();
+    });
+
+    it('should render speech button when allowSpeech is true', () => {
+      const { container } = render(<Sender allowSpeech />);
+      expect(container.querySelector('.ant-sender')).toBeTruthy();
+    });
+
+    it('should not render speech button when allowSpeech is false', () => {
+      const { container } = render(<Sender allowSpeech={false} />);
+      expect(container.querySelector('.ant-sender')).toBeTruthy();
+    });
+
+    it('should handle speech button click', () => {
+      const { container } = render(<Sender allowSpeech />);
+      const textarea = container.querySelector('textarea');
+      expect(textarea).toBeTruthy();
+    });
+
+    it('should handle speech with custom configuration', () => {
+      const { container } = render(
+        <Sender
+          allowSpeech={{
+            lang: 'zh-CN',
+            continuous: true,
+          }}
+        />,
+      );
+      expect(container.querySelector('.ant-sender')).toBeTruthy();
+    });
+  });
 });

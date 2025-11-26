@@ -65,7 +65,7 @@ export default function useSpeech(
   }, []);
 
   // Convert permission state to a simple type
-  const mergedAllowSpeech = SpeechRecognition && permissionState !== 'denied';
+  const mergedAllowSpeech = !!(SpeechRecognition && permissionState !== 'denied');
 
   // ========================== Speech Events ==========================
   const recognitionRef = React.useRef<any | null>(null);

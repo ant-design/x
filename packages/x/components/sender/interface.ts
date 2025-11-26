@@ -1,8 +1,8 @@
 import type { ButtonProps, GetProps, InputProps, TooltipProps } from 'antd';
 import type React from 'react';
+import type { AllowSpeech } from './hooks/use-speech';
 import type { SlotTextAreaRef } from './SlotTextArea';
 import type { TextAreaRef } from './TextArea';
-import type { AllowSpeech } from './useSpeech';
 
 type TextareaProps = GetProps<typeof import('antd').Input.TextArea>;
 

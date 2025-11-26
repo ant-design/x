@@ -61,8 +61,58 @@ describe('Sender.SlotTextArea', () => {
     );
     expect(getByText('skill_title')).toBeInTheDocument();
     expect(getByText('skill关闭')).toBeInTheDocument();
+    const clearButton = getByText('skill关闭');
+    fireEvent.click(clearButton);
+    expect(mockClose).toHaveBeenCalled();
   });
-
+  it('should render skill no closable', () => {
+    const { getByText } = render(
+      <Sender
+        key="text"
+        skill={{
+          value: 'skill',
+          title: 'skill_title',
+          closable: false,
+        }}
+      />,
+    );
+    expect(getByText('skill_title')).toBeInTheDocument();
+  });
+  it('should render skill default closable', () => {
+    const { getByText } = render(
+      <Sender
+        key="text"
+        skill={{
+          value: 'skill',
+          title: 'skill_title',
+          closable: true,
+        }}
+      />,
+    );
+    expect(getByText('skill_title')).toBeInTheDocument();
+  });
+  it('should render skill closable disabled', () => {
+    const mockClose = jest.fn();
+    const { getByText } = render(
+      <Sender
+        key="text"
+        skill={{
+          value: 'skill',
+          title: 'skill_title',
+          closable: {
+            closeIcon: 'skill关闭',
+            disabled: true,
+            onClose: mockClose,
+          },
+        }}
+      />,
+    );
+    expect(getByText('skill关闭')).toBeInTheDocument();
+    const clearButton = getByText('skill关闭');
+    // check custom onClick
+    fireEvent.click(clearButton);
+    expect(mockClose).not.toHaveBeenCalled();
+  });
   it('should handle input slot interaction', () => {
     const { getByPlaceholderText } = render(<Sender key="text" slotConfig={slotConfig} />);
     const input = getByPlaceholderText('Please enter input') as HTMLInputElement;

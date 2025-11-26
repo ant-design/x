@@ -12,6 +12,7 @@ import LoadingButton from './components/LoadingButton';
 import SendButton from './components/SendButton';
 import SpeechButton from './components/SpeechButton';
 import { SenderContext } from './context';
+import useSpeech from './hooks/use-speech';
 import type {
   ActionsComponents,
   BaseNode,
@@ -26,7 +27,6 @@ import SenderSwitch from './SenderSwitch';
 import SlotTextArea, { type SlotTextAreaRef } from './SlotTextArea';
 import useStyle from './style';
 import TextArea, { type TextAreaRef } from './TextArea';
-import useSpeech from './useSpeech';
 
 export type {
   ActionsComponents,
