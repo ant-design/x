@@ -5,7 +5,7 @@ import pickAttrs from 'rc-util/lib/pickAttrs';
 import getValue from 'rc-util/lib/utils/get';
 import React from 'react';
 import { SenderContext } from './context';
-import { insertPosition } from './interface';
+import type { InsertPosition, SkillType } from './interface';
 
 function getComponent<T>(
   components: { input?: React.ComponentType<T> } | undefined,
@@ -19,9 +19,9 @@ export interface TextAreaRef {
   nativeElement: InputRef['nativeElement'];
   focus: InputRef['focus'];
   blur: InputRef['blur'];
-  insert: (value: string, position?: insertPosition) => void;
+  insert: (value: string, position?: InsertPosition) => void;
   clear: () => void;
-  getValue: () => { value: string; config: any[] };
+  getValue: () => { value: string; slotConfig: any[]; skill?: SkillType };
 }
 
 const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
@@ -85,7 +85,7 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
   };
 
   const getValue = () => {
-    return { value: value || '', config: [] };
+    return { value: value || '', slotConfig: [] };
   };
 
   React.useImperativeHandle(ref, () => {

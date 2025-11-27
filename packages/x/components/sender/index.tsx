@@ -12,6 +12,7 @@ import LoadingButton from './components/LoadingButton';
 import SendButton from './components/SendButton';
 import SpeechButton from './components/SpeechButton';
 import { SenderContext } from './context';
+import useSpeech from './hooks/use-speech';
 import type {
   ActionsComponents,
   BaseNode,
@@ -26,7 +27,6 @@ import SenderSwitch from './SenderSwitch';
 import SlotTextArea, { type SlotTextAreaRef } from './SlotTextArea';
 import useStyle from './style';
 import TextArea, { type TextAreaRef } from './TextArea';
-import useSpeech from './useSpeech';
 
 export type {
   ActionsComponents,
@@ -80,6 +80,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     onFocus,
     onBlur,
     showCount,
+    skill,
     ...restProps
   } = props;
 
@@ -90,7 +91,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   });
 
   const id = React.useId();
-  const isSlotMode = Array.isArray(slotConfig);
+  const isSlotMode = Array.isArray(slotConfig) || skill?.value;
   // ============================= MISC =============================
   const { direction, getPrefixCls } = useXProviderContext();
   const prefixCls = getPrefixCls('sender', customizePrefixCls);
@@ -283,6 +284,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
       placeholder,
       onFocus,
       onBlur,
+      skill,
       ...restProps,
     }),
     [
@@ -305,6 +307,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
       placeholder,
       onFocus,
       onBlur,
+      skill,
       restProps,
     ],
   );

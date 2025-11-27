@@ -6,7 +6,7 @@ import { FileCardProps } from '../FileCard';
 import ImageIcon from './ImageIcon';
 import usePercent from './usePercent';
 
-export type ImageLoadingProps = SpinProps & {
+export type ImageLoadingProps = {
   prefixCls?: string;
   style?: React.CSSProperties;
   className?: string;
@@ -14,8 +14,11 @@ export type ImageLoadingProps = SpinProps & {
 };
 
 const ImageLoading: React.FC<ImageLoadingProps> = (props) => {
-  const { style, className, prefixCls, percent = 'auto', spinProps } = props;
-  const [mergedPercent, percentText] = usePercent(true, percent);
+  const { style, className, prefixCls, spinProps } = props;
+  const [mergedPercent, percentText] = usePercent(
+    true,
+    typeof spinProps?.percent === 'undefined' ? 'auto' : spinProps?.percent,
+  );
   const mergeSinkProps = {
     size: 'default',
     showText: true,

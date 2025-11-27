@@ -55,6 +55,8 @@ export interface ComponentToken {
    * @descEN Input border color
    */
   colorBorderInput: string;
+  colorBgSkill: string;
+  colorBgSkillHover: string;
 }
 
 export interface SenderToken extends FullToken<'Sender'> {
@@ -62,7 +64,6 @@ export interface SenderToken extends FullToken<'Sender'> {
 }
 const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
   const { componentCls, paddingSM, paddingXS, paddingXXS, lineWidth, calc } = token;
-
   return {
     [`${componentCls}:not(${componentCls}-switch):not(${componentCls}-header)`]: {
       position: 'relative',
@@ -109,8 +110,8 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
         borderRadius: 0,
         flex: 'auto',
         alignSelf: 'center',
-        minHeight: 'auto',
         caretColor: token.colorPrimary,
+        fontSize: token.fontSize,
       },
 
       // ============================ Actions ============================
@@ -172,6 +173,8 @@ export const prepareComponentToken: GetDefaultToken<'Sender'> = (token) => {
   const { colorPrimary, colorFillTertiary } = token;
 
   const colorBgSlot = new FastColor(colorPrimary).setA(0.06).toRgbString();
+  const colorBgSkill = new FastColor(colorPrimary).setA(0.08).toRgbString();
+  const colorBgSkillHover = new FastColor(colorPrimary).setA(0.15).toRgbString();
   const colorTextSlot = colorPrimary;
   const colorTextSlotPlaceholder = new FastColor(colorPrimary).setA(0.25).toRgbString();
   const colorBorderSlotHover = new FastColor(colorPrimary).setA(0.1).toRgbString();
@@ -185,6 +188,8 @@ export const prepareComponentToken: GetDefaultToken<'Sender'> = (token) => {
   const boxShadowInput = `0 4px 12px 0 ${new FastColor(colorPrimary).setA(0.1).toRgbString()}`;
   return {
     colorBgSlot,
+    colorBgSkill,
+    colorBgSkillHover,
     colorTextSlot,
     colorTextSlotPlaceholder,
     colorBorderSlotHover,

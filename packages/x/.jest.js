@@ -73,6 +73,10 @@ module.exports = {
     '!components/__tests__/node.test.tsx',
     '!components/*/demo/*.tsx',
     '!components/*/design/**',
+    '!components/theme/interface/**',
+    '!components/version/**',
+    '!components/style/**',
+    '!components/index.ts',
   ],
   transformIgnorePatterns,
   globals: {
