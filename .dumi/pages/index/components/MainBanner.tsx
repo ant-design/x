@@ -342,19 +342,6 @@ const MainBanner: React.FC = () => {
           className={classnames(styles.lottie, direction === 'rtl' && styles.lottie_rtl)}
         />
       </Container>
-      <a
-        href="https://seeconf.antgroup.com/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className={styles.seeConf}
-        aria-label={
-          isZhCN(pathname)
-            ? '前往 SEE Conf 2025 官网（新窗口打开）'
-            : 'Go to SEE Conf 2025 website (opens in a new tab)'
-        }
-      >
-        {locale.seeConf}
-      </a>
     </section>
   );
 };
