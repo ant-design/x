@@ -107,7 +107,7 @@ const GlobalLayout: React.FC = () => {
     }
   }, [theme.length, isIndexPage]);
 
-  const [alertVisible, setAlertVisible] = useState(true);
+  const [alertVisible, setAlertVisible] = useState(false);
 
   useEffect(() => {
     const _theme = searchParams.getAll('theme') as ThemeName[];
@@ -197,11 +197,13 @@ const GlobalLayout: React.FC = () => {
       >
         <SiteContext value={siteContextValue}>
           <SiteThemeProvider theme={themeConfig}>
-            <Alert
-              afterClose={() => {
-                setAlertVisible(false);
-              }}
-            />
+            {alertVisible && (
+              <Alert
+                afterClose={() => {
+                  setAlertVisible(false);
+                }}
+              />
+            )}
             <App>
               {outlet}
               <Suspense>{pathname.startsWith('/~demos') ? <PeterCat /> : null}</Suspense>

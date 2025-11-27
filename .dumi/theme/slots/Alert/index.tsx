@@ -28,12 +28,11 @@ const useStyle = createStyles(({ token, css }) => {
 
 const locales = {
   cn: {
-    content: '参与 WeaveFox「AI艺术家」大赛，赢 SEE Conf 门票与千元好礼',
+    content: '',
     link: '立即前往',
   },
   en: {
-    content:
-      'Participate in the WeaveFox "AI Artist" contest to win SEE Conf tickets and thousands of prizes',
+    content: '',
     link: 'Go to',
   },
 };
@@ -49,7 +48,6 @@ const Index: React.FC<{ afterClose: () => void }> = ({ afterClose }) => {
       afterClose={afterClose}
       message={
         <Space>
-          {' '}
           {locale.content}
           <Button
             type="link"
