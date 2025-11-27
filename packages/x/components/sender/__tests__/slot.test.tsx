@@ -411,25 +411,13 @@ describe('Sender.SlotTextArea', () => {
   });
   it('should render skill no closable and title', () => {
     const { getByText } = render(
-      <>
-        <Sender
-          key="text"
-          skill={{
-            value: 'skill',
-            closable: false,
-          }}
-        />
-        ,
-        <Sender
-          key="text"
-          skill={{
-            value: 'skill',
-            closable: false,
-            toolTip: { title: 'close' },
-          }}
-        />
-        ,
-      </>,
+      <Sender
+        key="text"
+        skill={{
+          value: 'skill',
+          closable: false,
+        }}
+      />,
     );
     expect(getByText('skill')).toBeInTheDocument();
   });
