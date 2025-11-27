@@ -53,7 +53,7 @@ const Contributors: React.FC<ContributorsProps> = ({ filename }) => {
         cache
         repo="x"
         owner="ant-design"
-        branch="main"
+        branch="1.x-stable"
         fileName={filename}
         className={styles.list}
         renderItem={(item, loading) => (
