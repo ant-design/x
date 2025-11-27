@@ -409,18 +409,17 @@ describe('Sender.SlotTextArea', () => {
     fireEvent.click(clearButton);
     expect(mockClose).toHaveBeenCalled();
   });
-  it('should render skill no closable', () => {
+  it('should render skill no closable and title', () => {
     const { getByText } = render(
       <Sender
         key="text"
         skill={{
           value: 'skill',
-          title: 'skill_title',
           closable: false,
         }}
       />,
     );
-    expect(getByText('skill_title')).toBeInTheDocument();
+    expect(getByText('skill')).toBeInTheDocument();
   });
   it('should render skill default closable', () => {
     const { getByText } = render(
