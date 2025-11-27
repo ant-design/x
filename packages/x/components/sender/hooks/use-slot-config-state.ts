@@ -5,31 +5,26 @@ const buildSlotValues = (
   slotConfig: readonly SlotConfigType[],
   slotConfigMap: { current: Map<string, SlotConfigType> },
 ) => {
-  if (Array.isArray(slotConfig)) {
-    return slotConfig?.reduce(
-      (acc, node) => {
-        if (node.key) {
-          if (
-            node.type === 'input' ||
-            node.type === 'select' ||
-            node.type === 'custom' ||
-            node.type === 'content'
-          ) {
-            acc[node.key] = node.props?.defaultValue || '';
-          } else if (node.type === 'tag') {
-            acc[node.key] = node.props?.value || node.props?.label || '';
-          } else {
-            acc[node.key] = '';
-          }
-          slotConfigMap.current.set(node.key, node);
+  return slotConfig?.reduce(
+    (acc, node) => {
+      if (node.key) {
+        if (
+          node.type === 'input' ||
+          node.type === 'select' ||
+          node.type === 'custom' ||
+          node.type === 'content'
+        ) {
+          acc[node.key] = node.props?.defaultValue || '';
+        } else if (node.type === 'tag') {
+          acc[node.key] = node.props?.value || node.props?.label || '';
         }
+        slotConfigMap.current.set(node.key, node);
+      }
 
-        return acc;
-      },
-      {} as Record<string, any>,
-    );
-  }
-  return {};
+      return acc;
+    },
+    {} as Record<string, any>,
+  );
 };
 
 function useSlotConfigState(

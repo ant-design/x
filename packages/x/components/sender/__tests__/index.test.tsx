@@ -418,5 +418,11 @@ describe('Sender Component', () => {
       expect(speechButton).toHaveLength(2);
       expect(container.querySelector('.ant-sender')).toBeTruthy();
     });
+    it('width disabled', () => {
+      const { container } = render(<Sender allowSpeech disabled />);
+      const speechButton = container.querySelectorAll('.ant-sender-actions-btn');
+      expect(speechButton).toHaveLength(2);
+      expect(container.querySelector('.ant-sender')).toBeTruthy();
+    });
   });
 });

@@ -395,6 +395,7 @@ describe('Sender.SlotTextArea', () => {
         skill={{
           value: 'skill',
           title: 'skill_title',
+          toolTip: { title: 'close' },
           closable: {
             closeIcon: 'skill关闭',
             onClose: mockClose,
