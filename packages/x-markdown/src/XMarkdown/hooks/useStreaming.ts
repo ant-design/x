@@ -157,6 +157,18 @@ const isInCodeBlock = (text: string): boolean => {
 
   return inFenced;
 };
+const safeEncodeURIComponent = (str: string): string => {
+  try {
+    return encodeURIComponent(str);
+  } catch (e) {
+    if (e instanceof URIError) {
+      const cleanedStr = str.replace(/[\uD800-\uDFFF]/g, '');
+      return encodeURIComponent(cleanedStr);
+    }
+
+    return '';
+  }
+};
 
 /* ------------ Main Hook ------------ */
 const useStreaming = (input: string, config?: XMarkdownProps['streaming']) => {
@@ -170,7 +182,7 @@ const useStreaming = (input: string, config?: XMarkdownProps['streaming']) => {
       if (token === StreamCacheTokenType.Text) return;
 
       const componentMap = incompleteMarkdownComponentMap || {};
-      const encodedPending = encodeURIComponent(pending);
+      const encodedPending = safeEncodeURIComponent(pending);
       switch (token) {
         case StreamCacheTokenType.Image:
           return pending === '!'

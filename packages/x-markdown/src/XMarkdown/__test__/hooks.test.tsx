@@ -645,4 +645,38 @@ describe('XMarkdown hooks', () => {
       });
     });
   });
+
+  describe('useStreaming streaming execution with character-by-character rendering', () => {
+    it('should handle streaming table content character by character', async () => {
+      const tableText =
+        '| 模块 | 当前值 | 可修改项 |\n|---|---|---|\n| 支持保单豁免 | ❗不支持 |  🔲 可改为支持 |';
+      const { result, rerender } = renderHook(({ input, config }) => useStreaming(input, config), {
+        initialProps: {
+          input: '',
+          config: { hasNextChunk: true },
+        },
+      });
+
+      // Stream character by character
+      for (let i = 0; i <= tableText.length; i++) {
+        const partialText = tableText.slice(0, i);
+
+        act(() => {
+          rerender({
+            input: partialText,
+            config: {
+              hasNextChunk: i < tableText.length,
+            },
+          });
+        });
+
+        if (i < tableText.length) {
+          await new Promise((resolve) => setTimeout(resolve, 10));
+        }
+      }
+
+      // Verify final table is rendered correctly
+      expect(result.current).toBe(tableText);
+    });
+  });
 });
