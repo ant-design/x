@@ -163,7 +163,7 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
         lineHeight: token.lineHeightSM,
         position: 'absolute',
         bottom: -token.paddingXXS,
-        right: token.paddingSM,
+        insetInlineEnd: token.paddingSM,
       },
     },
   };
