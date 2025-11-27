@@ -187,7 +187,7 @@ const HeaderNavigation: React.FC<HeaderNavigationProps> = (props) => {
       {items.map((item) => (
         <Link
           key={item.key}
-          to={getLocalizedPathname(item.path!, isZhCN, search)}
+          to={getLocalizedPathname(item.path, isZhCN, search)}
           onClick={makeHandleActiveKeyChange(item.key)}
           className={activeKey === item.key ? styles.item_active : ''}
         >
