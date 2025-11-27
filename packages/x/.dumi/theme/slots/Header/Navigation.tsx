@@ -144,6 +144,8 @@ const HeaderNavigation: React.FC<HeaderNavigationProps> = (props) => {
 
   const blogList = sidebarData['/docs/blog']?.[0]?.children || [];
 
+  const origin = typeof location !== 'undefined' ? location.origin : '';
+
   const items = React.useMemo(() => {
     const navItems = [...defaultItems];
 
@@ -192,7 +194,7 @@ const HeaderNavigation: React.FC<HeaderNavigationProps> = (props) => {
           {locale[item.key as keyof typeof locale]}
         </Link>
       ))}
-      {isZhCN && location.origin !== zhHrefOrigin && (
+      {isZhCN && origin !== zhHrefOrigin && (
         <a href={`${zhHrefOrigin}/index-cn`}>{locale['zhUrl']}</a>
       )}
     </nav>
