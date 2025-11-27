@@ -60,9 +60,12 @@ const Skill: React.FC<SkillProps> = ({
 
     return closeNode;
   }, [closable, removeSkill]);
-  const titleNode = toolTip ? <Tooltip {...toolTip}>{title || value}</Tooltip> : title || value;
+
+  const mergeTitle = title || value;
+  const titleNode = toolTip ? <Tooltip {...toolTip}>{mergeTitle}</Tooltip> : mergeTitle;
+
   return (
-    <div className={componentCls} role="button" aria-label={`Skill: ${title}`} tabIndex={0}>
+    <div className={componentCls} role="button" aria-label={`Skill: ${mergeTitle}`} tabIndex={0}>
       <span className={`${componentCls}-text`}>{titleNode}</span>
       {closeNode}
     </div>
