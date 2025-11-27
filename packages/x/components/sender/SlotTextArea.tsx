@@ -575,24 +575,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       }
     }
 
-    if (text) {
-      const currentValue = getEditorValue().value;
-      const newText = text.replace(/\n/g, '');
-
-      // 检查最大长度限制
-      if (maxLength !== undefined) {
-        const selectedLength = getSelectedTextLength();
-        const remainingLength = maxLength - (currentValue.length - selectedLength);
-        if (remainingLength <= 0) {
-          return; // 已达到最大长度，不再插入
-        }
-        const truncatedText = newText.slice(0, remainingLength);
-        insert([{ type: 'text', value: truncatedText.replace(/\n/g, '') }]);
-      } else {
-        insert([{ type: 'text', value: newText.replace(/\n/g, '') }]);
-      }
-    }
-        
     // 处理Enter键提交
     if (key === 'Enter') {
       const isModifierPressed = ctrlKey || altKey || metaKey;
@@ -646,16 +628,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     onBlur?.(e as unknown as React.FocusEvent<HTMLTextAreaElement>);
   };
 
-  // 移除<br>
-  const removeSpecificBRs = (element: HTMLDivElement | null) => {
-    if (submitType === 'enter') {
-      const brElements = element?.querySelectorAll('br');
-      brElements?.forEach((br) => {
-        br.remove();
-      });
-    }
-  };
-
   // 获取当前选中文本长度
   const getSelectedTextLength = (): number => {
     const selection = window.getSelection();
@@ -686,7 +658,21 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
 
     if (text) {
-      insert([{ type: 'text', value: text.replace(/\n/g, '') }]);
+      const currentValue = getEditorValue().value;
+      const newText = text.replace(/\n/g, '');
+
+      // 检查最大长度限制
+      if (maxLength !== undefined) {
+        const selectedLength = getSelectedTextLength();
+        const remainingLength = maxLength - (currentValue.length - selectedLength);
+        if (remainingLength <= 0) {
+          return; // 已达到最大长度，不再插入
+        }
+        const truncatedText = newText.slice(0, remainingLength);
+        insert([{ type: 'text', value: truncatedText.replace(/\n/g, '') }]);
+      } else {
+        insert([{ type: 'text', value: newText.replace(/\n/g, '') }]);
+      }
     }
 
     onPaste?.(e as unknown as React.ClipboardEvent<HTMLTextAreaElement>);
