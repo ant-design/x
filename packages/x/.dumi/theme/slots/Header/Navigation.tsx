@@ -9,12 +9,15 @@ import { getLocalizedPathname } from '../../utils';
 
 import type { SharedProps } from './interface';
 
+const zhHrefOrigin = 'https://ant-design-x.antgroup.com';
+
 const locales = {
   cn: {
     design: '设计',
     development: '研发',
     components: '组件',
     playground: '演示',
+    zhUrl: '国内镜像',
     blog: '博客',
     sdk: 'X SDK',
     markdown: 'X Markdown',
@@ -25,6 +28,7 @@ const locales = {
     development: 'Development',
     components: 'Components',
     playground: 'Playground',
+    zhUrl: '',
     blog: 'Blog',
     sdk: 'X SDK',
     markdown: 'X Markdown',
@@ -157,7 +161,7 @@ const HeaderNavigation: React.FC<HeaderNavigationProps> = (props) => {
   React.useEffect(() => {
     if (!items.length || !pathname) return;
 
-    const activeIndex = items.findIndex((item) => pathname.includes(item.basePath));
+    const activeIndex = items.findIndex((item) => pathname.includes(item.basePath!));
 
     if (activeIndex === -1) {
       setActiveKey(undefined);
@@ -181,13 +185,16 @@ const HeaderNavigation: React.FC<HeaderNavigationProps> = (props) => {
       {items.map((item) => (
         <Link
           key={item.key}
-          to={getLocalizedPathname(item.path, isZhCN, search)}
+          to={getLocalizedPathname(item.path!, isZhCN, search)}
           onClick={makeHandleActiveKeyChange(item.key)}
           className={activeKey === item.key ? styles.item_active : ''}
         >
           {locale[item.key as keyof typeof locale]}
         </Link>
       ))}
+      {isZhCN && location.origin !== zhHrefOrigin && (
+        <a href={`${zhHrefOrigin}/index-cn`}>{locale['zhUrl']}</a>
+      )}
     </nav>
   );
 };

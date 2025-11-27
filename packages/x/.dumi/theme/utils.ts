@@ -142,7 +142,6 @@ export function getLocalizedPathname(
     fullPath = `${pathname}-cn`;
     fullPath = fullPath.replace(/(-cn)+/, '-cn');
   }
-
   if (hash) {
     const localHash = hash[zhCN ? 'zhCN' : 'enUS'];
     fullPath += `#${localHash}`;
