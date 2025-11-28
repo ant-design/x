@@ -31,6 +31,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/footer.tsx">Custom Footer Content</code>
 <code src="./demo/send-style.tsx">Style Adjustment</code>
 <code src="./demo/paste-image.tsx">Paste Files</code>
+<code src="./demo/max-length.tsx">Max Length</code>
 
 ## API
 
@@ -50,6 +51,8 @@ Common props ref：[Common props](/docs/react/common-props)
 | header | Header panel | React.ReactNode \| false \| (oriNode: React.ReactNode, info: { components: ActionsComponents; }) => React.ReactNode \| false | false | - |
 | prefix | Prefix content | React.ReactNode \| false \| (oriNode: React.ReactNode, info: { components: ActionsComponents; }) => React.ReactNode \| false | false | - |
 | footer | Footer content | React.ReactNode \| false \| (oriNode: React.ReactNode, info: { components: ActionsComponents; }) => React.ReactNode \| false | false | - |
+| maxLength | Maximum length of input content | number | - | - |
+| showCount | Whether to display character count, supports custom rendering | boolean \| ((info: { value: string; count: number; maxLength?: number }) => React.ReactNode) | false | - |
 | readOnly | Whether to make the input box read-only | boolean | false | - |
 | rootClassName | Root element style class | string | - | - |
 | styles | Semantic style definition | [See below](#semantic-dom) | - | - |

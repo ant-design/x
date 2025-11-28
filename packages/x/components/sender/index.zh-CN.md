@@ -32,6 +32,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/footer.tsx">自定义底部内容</code>
 <code src="./demo/send-style.tsx">调整样式</code>
 <code src="./demo/paste-image.tsx">黏贴文件</code>
+<code src="./demo/max-length.tsx">长度限制</code>
 
 ## API
 
@@ -51,6 +52,8 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 | header | 头部面板 | React.ReactNode \| false \|(oriNode: React.ReactNode,info: { components: ActionsComponents;}) => React.ReactNode \| false; | false | - |
 | prefix | 前缀内容 | React.ReactNode \| false \|(oriNode: React.ReactNode,info: { components: ActionsComponents;}) => React.ReactNode \| false; | false | - |
 | footer | 底部内容 | React.ReactNode \| false \|(oriNode: React.ReactNode,info: { components: ActionsComponents;}) => React.ReactNode \| false; | false | - |
+| maxLength | 输入内容最大长度 | number | - | - |
+| showCount | 是否显示字符计数，支持自定义渲染 | boolean \| ((info: { value: string; count: number; maxLength?: number }) => React.ReactNode) | false | - |
 | readOnly | 是否让输入框只读 | boolean | false | - |
 | rootClassName | 根元素样式类 | string | - | - |
 | styles | 语义化定义样式 | [见下](#semantic-dom) | - | - |
