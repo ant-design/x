@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { AttachmentContext } from './context';
@@ -74,7 +74,7 @@ export default function DropArea(props: DropUploaderProps) {
 
   return createPortal(
     <div
-      className={classnames(areaCls, className, {
+      className={clsx(areaCls, className, {
         [`${areaCls}-on-body`]: container.tagName === 'BODY',
       })}
       style={{ display: showArea ? 'block' : 'none', ...style }}

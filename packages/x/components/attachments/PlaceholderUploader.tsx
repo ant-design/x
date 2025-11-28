@@ -1,5 +1,5 @@
 import { Flex, GetRef, Typography, Upload, type UploadProps } from 'antd';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import React from 'react';
 import { AttachmentContext } from './context';
 
@@ -65,7 +65,7 @@ function Placeholder(props: PlaceholderProps, ref: React.Ref<GetRef<typeof Uploa
 
   return (
     <div
-      className={classNames(
+      className={clsx(
         placeholderCls,
         {
           [`${placeholderCls}-drag-in`]: dragIn,

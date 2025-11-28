@@ -34,7 +34,7 @@ export interface ActionsProps
 
   /**
    * @desc 样式类名的前缀。
-   * @descEN Prefix for style classnames.
+   * @descEN Prefix for style classname.
    */
   prefixCls?: string;
   /**

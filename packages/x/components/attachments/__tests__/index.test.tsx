@@ -51,7 +51,7 @@ describe('attachments', () => {
     await waitFakeTimer();
     expect(onChange.mock.calls[0][0].fileList).toHaveLength(0);
   });
-  it('support classnames and styles', () => {
+  it('support clsx and styles', () => {
     render(
       renderAttachments({
         styles: {
