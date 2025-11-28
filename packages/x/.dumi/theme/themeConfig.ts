@@ -1,4 +1,4 @@
-const antGroupUrl = location.hostname.includes('localhost');
+const antGroupUrl = location.hostname.includes('.antgroup.com');
 
 export default {
   categoryOrder: {
