@@ -1,4 +1,4 @@
-const antGroupUrl = window?.location && window.location.hostname.includes('.antgroup.com');
+const antGroupUrl = window && window.location.hostname.includes('.antgroup.com');
 
 export default {
   categoryOrder: {
