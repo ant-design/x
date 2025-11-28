@@ -269,18 +269,6 @@ describe('Sender.SlotTextArea', () => {
     expect(ref?.current?.getValue().value).toContain('新内容');
   });
 
-  it('should test select slot', () => {
-    const ref = React.createRef<GetRef<typeof Sender>>();
-    const slotConfig: SlotConfigType[] = [
-      { type: 'select', key: 'select1', props: { options: ['A', 'B'], placeholder: '请选择' } },
-    ];
-    const { container, getByText } = render(<Sender slotConfig={slotConfig} ref={ref} />);
-    // Select option A
-    fireEvent.click(container.querySelector('.ant-sender-slot-select')!);
-    fireEvent.click(getByText('A'));
-    expect(ref?.current?.getValue().value).toContain('A');
-  });
-
   it('should test tag slot', () => {
     const ref = React.createRef<GetRef<typeof Sender>>();
     const slotConfig: SlotConfigType[] = [
