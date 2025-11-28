@@ -1,6 +1,16 @@
 import { act, renderHook } from '@testing-library/react';
 import { isSafari, useCompatibleScroll } from '../hooks/useCompatibleScroll';
 
+// Browser user agents
+const SAFARI_UA =
+  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15';
+const CHROME_UA =
+  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36';
+const EDGE_UA =
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 Edg/91.0.864.59';
+const FIREFOX_UA =
+  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:89.0) Gecko/20100101 Firefox/89.0';
+
 // Mock navigator.userAgent
 const mockUserAgent = (userAgent: string) => {
   Object.defineProperty(navigator, 'userAgent', {
@@ -9,39 +19,66 @@ const mockUserAgent = (userAgent: string) => {
   });
 };
 
+// Create a DOM element with column-reverse flex direction
+const createColumnReverseDom = () => {
+  const dom = document.createElement('div');
+  dom.style.cssText =
+    'height: 400px; overflow: auto; display: flex; flex-direction: column-reverse;';
+  return dom;
+};
+
+// Create a DOM element with column flex direction
+const createColumnDom = () => {
+  const dom = document.createElement('div');
+  dom.style.cssText = 'height: 400px; overflow: auto; display: flex; flex-direction: column;';
+  return dom;
+};
+
+// Setup scroll properties for a DOM element
+const setupScrollProperties = (
+  dom: HTMLElement,
+  scrollHeight = 1000,
+  scrollTop = 0,
+  clientHeight = 400,
+) => {
+  Object.defineProperty(dom, 'scrollHeight', {
+    value: scrollHeight,
+    writable: true,
+  });
+  Object.defineProperty(dom, 'scrollTop', {
+    value: scrollTop,
+    writable: true,
+  });
+  Object.defineProperty(dom, 'clientHeight', {
+    value: clientHeight,
+    writable: true,
+  });
+};
+
 describe('isSafari', () => {
   it('should return true for Safari browser', () => {
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15',
-    );
+    mockUserAgent(SAFARI_UA);
     expect(isSafari()).toBe(true);
   });
 
   it('should return false for Chrome browser', () => {
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-    );
+    mockUserAgent(CHROME_UA);
     expect(isSafari()).toBe(false);
   });
 
   it('should return false for Edge browser', () => {
-    mockUserAgent(
-      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 Edg/91.0.864.59',
-    );
+    mockUserAgent(EDGE_UA);
     expect(isSafari()).toBe(false);
   });
 
   it('should return false for Firefox browser', () => {
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:89.0) Gecko/20100101 Firefox/89.0',
-    );
+    mockUserAgent(FIREFOX_UA);
     expect(isSafari()).toBe(false);
   });
 });
 
 describe('useCompatibleScroll', () => {
   let mockDom: HTMLElement;
-  let mockSentinel: HTMLElement;
   let intersectionCallback: (entries: any[]) => void;
   let mutationCallback: () => void;
 
@@ -55,28 +92,10 @@ describe('useCompatibleScroll', () => {
     document.body.innerHTML = '';
 
     // Create mock DOM element with proper scroll properties
-    mockDom = document.createElement('div');
-    mockDom.style.cssText =
-      'height: 400px; overflow: auto; display: flex; flex-direction: column-reverse;';
-
-    // Mock scroll properties
-    Object.defineProperty(mockDom, 'scrollHeight', {
-      value: 1000,
-      writable: true,
-    });
-    Object.defineProperty(mockDom, 'scrollTop', {
-      value: 0,
-      writable: true,
-    });
-    Object.defineProperty(mockDom, 'clientHeight', {
-      value: 400,
-      writable: true,
-    });
+    mockDom = createColumnReverseDom();
+    setupScrollProperties(mockDom);
 
     document.body.appendChild(mockDom);
-
-    // Setup mock sentinel
-    mockSentinel = document.createElement('div');
 
     // Setup IntersectionObserver mock
     mockIntersectionObserver.mockImplementation((callback) => {
@@ -128,9 +147,7 @@ describe('useCompatibleScroll', () => {
   });
 
   it('should not initialize observers when onlySafari is true and not Safari', () => {
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-    );
+    mockUserAgent(CHROME_UA);
 
     renderHook(() => useCompatibleScroll(mockDom, { onlySafari: true }));
 
@@ -138,10 +155,22 @@ describe('useCompatibleScroll', () => {
     expect(mockMutationObserver).not.toHaveBeenCalled();
   });
 
+  it('should not initialize observers when flexDirection is not column-reverse', () => {
+    mockUserAgent(SAFARI_UA);
+
+    // Create a DOM element with flexDirection other than column-reverse
+    const nonReverseDom = createColumnDom();
+    setupScrollProperties(nonReverseDom);
+    document.body.appendChild(nonReverseDom);
+
+    renderHook(() => useCompatibleScroll(nonReverseDom));
+
+    expect(mockIntersectionObserver).not.toHaveBeenCalled();
+    expect(mockMutationObserver).not.toHaveBeenCalled();
+  });
+
   it('should initialize observers when dom is provided and is Safari', () => {
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15',
-    );
+    mockUserAgent(SAFARI_UA);
 
     renderHook(() => useCompatibleScroll(mockDom));
 
@@ -149,10 +178,36 @@ describe('useCompatibleScroll', () => {
     expect(mockMutationObserver).toHaveBeenCalled();
   });
 
+  it('should configure MutationObserver with correct options', () => {
+    mockUserAgent(SAFARI_UA);
+
+    // Track the options passed to MutationObserver
+    let mutationObserverOptions: MutationObserverInit | undefined;
+    const mockMutationObserverWithConfig = jest.fn((callback) => {
+      mutationCallback = callback;
+      return {
+        observe: jest.fn((target, options) => {
+          mutationObserverOptions = options;
+        }),
+        disconnect: jest.fn(),
+        takeRecords: jest.fn(),
+      };
+    });
+
+    global.MutationObserver = mockMutationObserverWithConfig;
+
+    renderHook(() => useCompatibleScroll(mockDom));
+
+    // Verify MutationObserver configuration
+    expect(mutationObserverOptions).toEqual({
+      childList: true,
+      subtree: true,
+      attributes: false,
+    });
+  });
+
   it('should initialize observers when onlySafari is false', () => {
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-    );
+    mockUserAgent(CHROME_UA);
 
     renderHook(() => useCompatibleScroll(mockDom, { onlySafari: false }));
 
@@ -161,9 +216,7 @@ describe('useCompatibleScroll', () => {
   });
 
   it('should create sentinel element and insert it into DOM', () => {
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15',
-    );
+    mockUserAgent(SAFARI_UA);
 
     renderHook(() => useCompatibleScroll(mockDom));
 
@@ -179,9 +232,7 @@ describe('useCompatibleScroll', () => {
   });
 
   it('should not set position style on sentinel element', () => {
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15',
-    );
+    mockUserAgent(SAFARI_UA);
 
     renderHook(() => useCompatibleScroll(mockDom));
 
@@ -191,9 +242,7 @@ describe('useCompatibleScroll', () => {
   });
 
   it('should handle intersection observer callback correctly', () => {
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15',
-    );
+    mockUserAgent(SAFARI_UA);
 
     renderHook(() => useCompatibleScroll(mockDom));
 
@@ -207,14 +256,11 @@ describe('useCompatibleScroll', () => {
   });
 
   it('should handle scroll event and update locked position', () => {
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15',
-    );
+    mockUserAgent(SAFARI_UA);
 
     renderHook(() => useCompatibleScroll(mockDom));
 
     // Setup initial state
-    Object.defineProperty(mockDom, 'scrollHeight', { value: 1000, writable: true });
     Object.defineProperty(mockDom, 'scrollTop', { value: -500, writable: true }); // Inverted for column-reverse
 
     // Simulate scroll away from bottom
@@ -228,10 +274,34 @@ describe('useCompatibleScroll', () => {
     expect(mockDom.scrollTop).toBe(-500);
   });
 
+  it('should add scroll event listener with capture option', () => {
+    mockUserAgent(SAFARI_UA);
+
+    // Track event listener options
+    let addEventListenerOptions: boolean | AddEventListenerOptions | undefined;
+    const mockAddEventListener = jest.fn((event, handler, options) => {
+      addEventListenerOptions = options;
+    });
+    const mockRemoveEventListener = jest.fn();
+
+    // Create a new mock DOM element for this specific test
+    const testDom = createColumnReverseDom();
+    setupScrollProperties(testDom);
+    testDom.addEventListener = mockAddEventListener;
+    testDom.removeEventListener = mockRemoveEventListener;
+
+    document.body.appendChild(testDom);
+
+    renderHook(() => useCompatibleScroll(testDom));
+
+    // Verify addEventListener was called with capture option
+    expect(mockAddEventListener).toHaveBeenCalledWith('scroll', expect.any(Function), {
+      capture: true,
+    });
+  });
+
   it('should not directly set scrollTop in handleScroll (based on implementation comment)', () => {
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15',
-    );
+    mockUserAgent(SAFARI_UA);
 
     // Create a new mock DOM element for this specific test
     const testDom = document.createElement('div');
@@ -277,9 +347,7 @@ describe('useCompatibleScroll', () => {
   });
 
   it('should reset to bottom correctly', () => {
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15',
-    );
+    mockUserAgent(SAFARI_UA);
 
     const { result } = renderHook(() => useCompatibleScroll(mockDom));
 
@@ -296,9 +364,7 @@ describe('useCompatibleScroll', () => {
   });
 
   it('should cleanup observers on unmount', () => {
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15',
-    );
+    mockUserAgent(SAFARI_UA);
 
     const { unmount } = renderHook(() => useCompatibleScroll(mockDom));
 
@@ -310,16 +376,13 @@ describe('useCompatibleScroll', () => {
   });
 
   it('should handle enforceScrollLock correctly', () => {
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15',
-    );
+    mockUserAgent(SAFARI_UA);
 
     renderHook(() => useCompatibleScroll(mockDom));
 
     // Setup scroll position away from bottom
     act(() => {
       intersectionCallback([{ isIntersecting: false }]);
-      Object.defineProperty(mockDom, 'scrollHeight', { value: 1000, writable: true });
       Object.defineProperty(mockDom, 'scrollTop', { value: -300, writable: true });
       mockDom.dispatchEvent(new Event('scroll'));
     });
@@ -335,9 +398,7 @@ describe('useCompatibleScroll', () => {
   });
 
   it('should use requestAnimationFrame in enforceScrollLock', () => {
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15',
-    );
+    mockUserAgent(SAFARI_UA);
 
     // Create a mock for requestAnimationFrame that tracks calls
     const mockRaf = jest.fn((callback) => {
@@ -351,7 +412,6 @@ describe('useCompatibleScroll', () => {
     // Setup scroll position away from bottom
     act(() => {
       intersectionCallback([{ isIntersecting: false }]);
-      Object.defineProperty(mockDom, 'scrollHeight', { value: 1000, writable: true });
       Object.defineProperty(mockDom, 'scrollTop', { value: -200, writable: true });
       mockDom.dispatchEvent(new Event('scroll'));
     });
@@ -371,10 +431,47 @@ describe('useCompatibleScroll', () => {
     expect(mockDom.scrollTop).toBe(-500);
   });
 
+  it('should not set scrollTop when dom is null in enforceScrollLock', () => {
+    mockUserAgent(SAFARI_UA);
+
+    // Create a mock for requestAnimationFrame
+    const mockRaf = jest.fn((callback) => {
+      callback();
+      return 1;
+    });
+    global.requestAnimationFrame = mockRaf;
+
+    // Create a new mock DOM element for this specific test
+    const testDom = createColumnReverseDom();
+    setupScrollProperties(testDom, 1000, -200, 400);
+
+    document.body.appendChild(testDom);
+
+    const { unmount } = renderHook(() => useCompatibleScroll(testDom));
+
+    // Setup scroll position away from bottom
+    act(() => {
+      intersectionCallback([{ isIntersecting: false }]);
+      testDom.dispatchEvent(new Event('scroll'));
+    });
+
+    // Unmount to set dom to undefined
+    unmount();
+
+    // Trigger mutation to invoke enforceScrollLock
+    act(() => {
+      mutationCallback();
+    });
+
+    // Verify requestAnimationFrame was called
+    expect(mockRaf).toHaveBeenCalled();
+
+    // Verify that scrollTop was not modified (since dom is null)
+    expect(testDom.scrollTop).toBe(-200);
+  });
+
   it('should handle edge case when dom is undefined in callbacks', () => {
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15',
-    );
+    mockUserAgent(SAFARI_UA);
 
     const { result, unmount } = renderHook(() => useCompatibleScroll(mockDom));
 
@@ -390,9 +487,7 @@ describe('useCompatibleScroll', () => {
   });
 
   it('should skip initialization when disable is true (dom is null)', () => {
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15',
-    );
+    mockUserAgent(SAFARI_UA);
 
     renderHook(() => useCompatibleScroll(null));
 
@@ -401,9 +496,7 @@ describe('useCompatibleScroll', () => {
   });
 
   it('should skip initialization when disable is true (onlySafari=true and not Safari)', () => {
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-    );
+    mockUserAgent(CHROME_UA);
 
     renderHook(() => useCompatibleScroll(mockDom, { onlySafari: true }));
 
@@ -412,9 +505,7 @@ describe('useCompatibleScroll', () => {
   });
 
   it('should skip enforceScrollLock when disable is true', () => {
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-    );
+    mockUserAgent(CHROME_UA);
 
     renderHook(() => useCompatibleScroll(mockDom, { onlySafari: true }));
 
@@ -423,9 +514,7 @@ describe('useCompatibleScroll', () => {
   });
 
   it('should skip resetToBottom when disable is true', () => {
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-    );
+    mockUserAgent(CHROME_UA);
 
     const { result } = renderHook(() => useCompatibleScroll(mockDom, { onlySafari: true }));
 
@@ -438,9 +527,7 @@ describe('useCompatibleScroll', () => {
   });
 
   it('should verify disable branch coverage for useEffect initialization', () => {
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-    );
+    mockUserAgent(CHROME_UA);
 
     // Test disable=true case for useEffect
     const { unmount } = renderHook(() => useCompatibleScroll(mockDom, { onlySafari: true }));
@@ -453,9 +540,7 @@ describe('useCompatibleScroll', () => {
   });
 
   it('should verify disable branch coverage for enforceScrollLock', () => {
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-    );
+    mockUserAgent(CHROME_UA);
 
     // Test disable=true case for enforceScrollLock
     renderHook(() => useCompatibleScroll(mockDom, { onlySafari: true }));
@@ -471,9 +556,7 @@ describe('useCompatibleScroll', () => {
   });
 
   it('should handle multiple rapid mutations', () => {
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15',
-    );
+    mockUserAgent(SAFARI_UA);
 
     renderHook(() => useCompatibleScroll(mockDom));
 
@@ -502,9 +585,7 @@ describe('useCompatibleScroll', () => {
   });
 
   it('should handle scroll event when at bottom', () => {
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15',
-    );
+    mockUserAgent(SAFARI_UA);
 
     renderHook(() => useCompatibleScroll(mockDom));
 
@@ -528,9 +609,7 @@ describe('useCompatibleScroll', () => {
 
   it('should cover disable branch in useEffect (line 36)', () => {
     // Test when disable is true (dom is null)
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15',
-    );
+    mockUserAgent(SAFARI_UA);
 
     renderHook(() => useCompatibleScroll(null));
 
@@ -541,9 +620,7 @@ describe('useCompatibleScroll', () => {
 
   it('should cover disable branch in useEffect (line 36) with onlySafari=true and not Safari', () => {
     // Test when disable is true (onlySafari=true and not Safari)
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-    );
+    mockUserAgent(CHROME_UA);
 
     renderHook(() => useCompatibleScroll(mockDom, { onlySafari: true }));
 
@@ -553,9 +630,7 @@ describe('useCompatibleScroll', () => {
 
   it('should cover disable branch in handleScroll (line 78)', () => {
     // Test when disable is true for handleScroll
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-    );
+    mockUserAgent(CHROME_UA);
 
     const { result } = renderHook(() => useCompatibleScroll(mockDom, { onlySafari: true }));
 
@@ -569,9 +644,7 @@ describe('useCompatibleScroll', () => {
 
   it('should cover disable branch in enforceScrollLock (line 92)', () => {
     // Test when disable is true for enforceScrollLock
-    mockUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-    );
+    mockUserAgent(CHROME_UA);
 
     const { result } = renderHook(() => useCompatibleScroll(mockDom, { onlySafari: true }));
 
