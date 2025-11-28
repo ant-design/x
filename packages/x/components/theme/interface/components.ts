@@ -1,6 +1,7 @@
 import type { ComponentToken as ActionsToken } from '../../actions/style';
 import type { ComponentToken as AttachmentsToken } from '../../attachments/style';
 import type { ComponentToken as BubbleComponentToken } from '../../bubble/style';
+import type { ComponentToken as CodeHighlighterComponentToken } from '../../code-highlighter/style';
 import type { ComponentToken as ConversationsComponentToken } from '../../conversations/style';
 import type { ComponentToken as FileCardComponentToken } from '../../file-card/style';
 import type { ComponentToken as PromptsComponentToken } from '../../prompts/style';
@@ -25,4 +26,5 @@ export interface ComponentTokenMap extends XMarkdownToken {
   Actions?: ActionsToken;
   FileCard?: FileCardComponentToken;
   Sources?: SourcesComponentToken;
+  CodeHighlighter: CodeHighlighterComponentToken;
 }

@@ -6,6 +6,8 @@ export type { AttachmentsProps } from './attachments';
 export { default as Attachments } from './attachments';
 export type { BubbleItemType, BubbleListProps, BubbleProps } from './bubble';
 export { default as Bubble } from './bubble';
+export type { CodeHighlighterProps } from './code-highlighter';
+export { default as CodeHighlighter } from './code-highlighter';
 export type { ConversationItemType, ConversationsProps } from './conversations';
 export { default as Conversations } from './conversations';
 export type { FileCardListProps, FileCardProps } from './file-card';

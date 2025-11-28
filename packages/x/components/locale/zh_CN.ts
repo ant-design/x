@@ -35,6 +35,10 @@ const localeValues: Required<xLocale & xMarkdownLocale> = {
     copySuccess: '复制成功',
     copy: '复制代码',
   },
+  CodeHighlighter: {
+    copySuccess: '复制成功',
+    copy: '复制代码',
+  },
 };
 
 export default localeValues;

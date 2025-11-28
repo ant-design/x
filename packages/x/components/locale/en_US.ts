@@ -35,6 +35,10 @@ const localeValues: Required<xLocale & xMarkdownLocale> = {
     copySuccess: 'Copied',
     copy: 'Copy code',
   },
+  CodeHighlighter: {
+    copySuccess: 'Copied',
+    copy: 'Copy code',
+  },
 };
 
 export default localeValues;

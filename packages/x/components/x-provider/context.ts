@@ -7,6 +7,7 @@ import type { AnyObject, ShortcutKeys } from '../_util/type';
 import type { ActionsProps } from '../actions/interface';
 import { AttachmentsProps } from '../attachments';
 import type { BubbleProps } from '../bubble';
+import type { CodeHighlighterProps } from '../code-highlighter';
 import type { ConversationsProps } from '../conversations';
 import type { FileCardProps } from '../file-card';
 import { Locale } from '../locale';
@@ -49,6 +50,7 @@ export interface XComponentsConfig {
   think?: ComponentConfig<ThinkProps>;
   fileCard?: ComponentConfig<FileCardProps>;
   sources?: ComponentConfig<SourcesProps>;
+  codeHighlighter?: ComponentConfig<CodeHighlighterProps>;
 }
 
 type ComponentsConfig = {

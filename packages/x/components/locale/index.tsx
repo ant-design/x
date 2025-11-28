@@ -46,6 +46,10 @@ export interface xMarkdownLocale {
     copySuccess: string;
     copy: string;
   };
+  CodeHighlighter?: {
+    copySuccess: string;
+    copy: string;
+  };
 }
 export type Locale = xLocale & antdLocale & xMarkdownLocale;
 
