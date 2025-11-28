@@ -202,12 +202,6 @@ describe('Actions.Menu Component', () => {
     expect(getByText('🍔')).toBeInTheDocument();
   });
 
-  it('should support click trigger', () => {
-    // This test is simplified to avoid DOM interaction issues
-    // The click trigger functionality is tested through component behavior
-    expect(true).toBe(true);
-  });
-
   it('should call item.onItemClick when it exists', async () => {
     const mockOnItemClick = jest.fn();
     const mockOnClick = jest.fn();
