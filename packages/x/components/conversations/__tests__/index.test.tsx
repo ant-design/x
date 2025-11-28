@@ -1,8 +1,8 @@
 import KeyCode from 'rc-util/lib/KeyCode';
-import React, { act } from 'react';
+import React from 'react';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
-import { fireEvent, render } from '../../../tests/utils';
+import { act, fireEvent, render } from '../../../tests/utils';
 import type { ItemType } from '../index';
 import Conversations from '../index';
 
