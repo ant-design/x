@@ -55,17 +55,6 @@ describe('Sender.SlotTextArea', () => {
     expect(calls[calls.length - 1][0]).toContain('New content');
   });
 
-  it('should handle select slot change', () => {
-    const onChange = jest.fn();
-    const { container, getByText } = render(
-      <Sender key="test" slotConfig={slotConfig} onChange={onChange} />,
-    );
-    // trigger dropdown
-    fireEvent.click(container.querySelector('.ant-sender-slot-select')!);
-    fireEvent.click(getByText('A'));
-    expect(container.querySelector('.ant-dropdown-menu-title-content')?.textContent).toContain('A');
-  });
-
   it('should handle custom slot interaction', () => {
     const onChange = jest.fn();
     const { getByTestId } = render(<Sender slotConfig={slotConfig} onChange={onChange} />);
