@@ -124,6 +124,10 @@ export default function FileList(props: FileListProps) {
     onRemove(items[index]);
   };
 
+  const showExtension =
+    !disabled &&
+    (typeof upload.maxCount === 'undefined' || (upload.maxCount && upload.maxCount > items.length));
+
   // ================================= Render =================================
   return (
     <FileCard.List
@@ -150,9 +154,7 @@ export default function FileList(props: FileListProps) {
       onRemove={handleRemove}
       overflow={overflow}
       extension={
-        !disabled &&
-        upload.maxCount &&
-        upload.maxCount > items.length && (
+        showExtension ? (
           <SilentUploader upload={upload}>
             <Button
               className={classnames(
@@ -166,7 +168,7 @@ export default function FileList(props: FileListProps) {
               <PlusOutlined className={`${listCls}-upload-btn-icon`} />
             </Button>
           </SilentUploader>
-        )
+        ) : null
       }
     />
   );
