@@ -78,12 +78,30 @@ Common props ref：[Common props](/docs/react/common-props)
 | --- | --- | --- | --- | --- |
 | status | Status | 'loading'\|'error'\|'running'\|'default' | default | - |
 | label | Display label for custom action | string | - | - |
-| defaultIcon | Default status icon | React.ReactNode | - | - |
-| runningIcon | Running status icon | React.ReactNode | - | - |
+| default | Default status icon | React.ReactNode | - | - |
+| running | Running status icon | React.ReactNode | - | - |
 
 ## Semantic DOM
 
+### Actions
+
 <code src="./demo/_semantic.tsx" simplify="true"></code>
+
+### Actions.Copy
+
+<code src="./demo/_semantic-copy.tsx" simplify="true"></code>
+
+### Actions.Feedback
+
+<code src="./demo/_semantic-feedback.tsx" simplify="true"></code>
+
+### Actions.Audio
+
+<code src="./demo/_semantic-audio.tsx" simplify="true"></code>
+
+### Actions.Item
+
+<code src="./demo/_semantic-item.tsx" simplify="true"></code>
 
 ## Design Token
 
