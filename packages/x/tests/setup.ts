@@ -59,6 +59,35 @@ export function fillWindowEnv(window: Window | DOMWindow) {
   });
 
   setupStreamsPolyfill(win);
+
+  // Mock selection API for tests
+  if (!win.getSelection) {
+    win.getSelection = () =>
+      ({
+        rangeCount: 0,
+        getRangeAt: () => null,
+        removeAllRanges: () => {},
+        addRange: () => {},
+        focusNode: null,
+        focusOffset: 0,
+      }) as any;
+  }
+
+  // Mock document.createRange
+  if (!win.document.createRange) {
+    win.document.createRange = () =>
+      ({
+        setStart: () => {},
+        setEnd: () => {},
+        collapse: () => {},
+        selectNodeContents: () => {},
+        commonAncestorContainer: win.document.body,
+        startContainer: null,
+        endContainer: null,
+        startOffset: 0,
+        endOffset: 0,
+      }) as any;
+  }
 }
 
 /* eslint-disable global-require */
