@@ -1,5 +1,5 @@
 import { MutedOutlined } from '@ant-design/icons';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import React from 'react';
 import { useLocale } from '../locale';
 import enUS from '../locale/en_US';
@@ -49,7 +49,7 @@ const ActionsAudio: React.FC<ActionsAudioProps> = (props) => {
 
   // ============================ Classname ============================
 
-  const mergedCls = classnames(audioCls, hashId, cssVarCls, rootClassName, className, {
+  const mergedCls = clsx(audioCls, hashId, cssVarCls, rootClassName, className, {
     [`${audioCls}-rtl`]: direction === 'rtl',
     [`${audioCls}-${status}`]: status,
   });

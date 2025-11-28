@@ -1,5 +1,5 @@
 import { Typography } from 'antd';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
 import { useXProviderContext } from '../x-provider';
@@ -59,7 +59,7 @@ const ActionsCopy: React.FC<ActionsCopyProps> = (props) => {
 
   // ============================ Classname ============================
 
-  const mergedCls = classnames(
+  const mergedCls = clsx(
     copyCls,
     hashId,
     cssVarCls,

@@ -1,6 +1,6 @@
 import { CloseCircleOutlined, LoadingOutlined } from '@ant-design/icons';
 import { Tooltip } from 'antd';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React from 'react';
 import { useXProviderContext } from '../x-provider';
@@ -88,7 +88,7 @@ const ActionsItem: React.FC<ActionsItemProps> = (props) => {
 
   // ============================ Classname ============================
 
-  const mergedCls = classnames(
+  const mergedCls = clsx(
     itemCls,
     hashId,
     cssVarCls,

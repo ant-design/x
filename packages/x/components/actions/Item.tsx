@@ -1,5 +1,5 @@
 import { Tooltip } from 'antd';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import React from 'react';
 import ActionsMenu from './ActionsMenu';
 import { ActionsContext } from './context';
@@ -28,7 +28,7 @@ const Item: React.FC<ActionsItemProps> = (props) => {
 
   return (
     <div
-      className={classnames(`${prefixCls}-item`, classNames.item, {
+      className={clsx(`${prefixCls}-item`, classNames.item, {
         [`${prefixCls}-list-danger`]: item?.danger,
       })}
       style={styles.item}

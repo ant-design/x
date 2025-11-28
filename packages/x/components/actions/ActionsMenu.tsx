@@ -1,6 +1,6 @@
 import { EllipsisOutlined } from '@ant-design/icons';
 import { Dropdown, type MenuProps } from 'antd';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import React from 'react';
 import { ActionsContext } from './context';
 import type { ActionsItemProps, ItemType } from './interface';
@@ -49,7 +49,7 @@ const ActionsMenu: React.FC<ActionsItemProps> = (props) => {
     <Dropdown
       menu={menuProps}
       classNames={{
-        root: classnames(`${prefixCls}-dropdown`, classNames?.itemDropdown),
+        root: clsx(`${prefixCls}-dropdown`, classNames?.itemDropdown),
       }}
       styles={{
         root: styles?.itemDropdown,
@@ -59,7 +59,7 @@ const ActionsMenu: React.FC<ActionsItemProps> = (props) => {
       {...dropdownProps}
     >
       <div
-        className={classnames(`${prefixCls}-item`, `${prefixCls}-sub-item`, classNames?.item)}
+        className={clsx(`${prefixCls}-item`, `${prefixCls}-sub-item`, classNames?.item)}
         style={styles?.item}
       >
         <div className={`${prefixCls}-icon`}>{icon}</div>
