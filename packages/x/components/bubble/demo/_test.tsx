@@ -1,18 +1,9 @@
-import {
-  AntDesignOutlined,
-  CheckOutlined,
-  CopyOutlined,
-  EditOutlined,
-  LinkOutlined,
-  RedoOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
+import { AntDesignOutlined, CopyOutlined, RedoOutlined, UserOutlined } from '@ant-design/icons';
 import type { BubbleItemType, BubbleListProps } from '@ant-design/x';
-import { Actions, Bubble, FileCard, FileCardProps } from '@ant-design/x';
-import XMarkdown from '@ant-design/x-markdown';
+import { Actions, Bubble } from '@ant-design/x';
 import type { GetRef } from 'antd';
-import { Avatar, Button, Flex, Space, Typography } from 'antd';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Avatar, Button, Flex } from 'antd';
+import React, { useCallback, useRef, useState } from 'react';
 
 const actionItems = [
   {
@@ -41,12 +32,6 @@ const genItem = (isAI: boolean, config?: Partial<BubbleItemType>): BubbleItemTyp
     // cache: true,
   };
 };
-
-const text = `
-> Render as markdown content to show rich text!
-
-Link: [Ant Design X](https://x.ant.design)
-`.trim();
 
 function useBubbleList(initialItems: BubbleItemType[] = []) {
   const [items, setItems] = React.useState<BubbleItemType[]>(initialItems);
@@ -77,7 +62,7 @@ function useBubbleList(initialItems: BubbleItemType[] = []) {
 
 const App = () => {
   const listRef = React.useRef<GetRef<typeof Bubble.List>>(null);
-  const [items, set, add, update] = useBubbleList();
+  const [items, set] = useBubbleList();
   const [autoScroll, setAutoScroll] = useState(true);
 
   const timer = useRef<any>(null);

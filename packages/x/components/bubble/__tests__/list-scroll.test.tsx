@@ -186,7 +186,7 @@ describe('useCompatibleScroll', () => {
     const mockMutationObserverWithConfig = jest.fn((callback) => {
       mutationCallback = callback;
       return {
-        observe: jest.fn((target, options) => {
+        observe: jest.fn((_, options) => {
           mutationObserverOptions = options;
         }),
         disconnect: jest.fn(),
@@ -277,11 +277,7 @@ describe('useCompatibleScroll', () => {
   it('should add scroll event listener with capture option', () => {
     mockUserAgent(SAFARI_UA);
 
-    // Track event listener options
-    let addEventListenerOptions: boolean | AddEventListenerOptions | undefined;
-    const mockAddEventListener = jest.fn((event, handler, options) => {
-      addEventListenerOptions = options;
-    });
+    const mockAddEventListener = jest.fn();
     const mockRemoveEventListener = jest.fn();
 
     // Create a new mock DOM element for this specific test
