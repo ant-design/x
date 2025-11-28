@@ -10,7 +10,6 @@ export function previewImage(file: File | Blob): Promise<string> {
       resolve('');
       return;
     }
-
     const img = new Image();
     img.onload = () => {
       const { width, height } = img;

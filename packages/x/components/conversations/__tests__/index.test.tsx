@@ -123,7 +123,7 @@ describe('Conversations Component', () => {
     expect(onActiveChange).toHaveBeenCalledWith('demo4');
   });
 
-  it.only('should handle menu function', () => {
+  it('should handle menu function', () => {
     jest.useFakeTimers();
     const { container } = render(
       <Conversations items={items} menu={menu} defaultActiveKey="demo1" />,
@@ -140,6 +140,7 @@ describe('Conversations Component', () => {
     const element = container.querySelector('.ant-dropdown-open');
     expect(element).not.toBeInTheDocument();
   });
+
   describe('should handle menu trigger function', () => {
     it('render node', async () => {
       const { findAllByText, container } = render(
@@ -163,22 +164,24 @@ describe('Conversations Component', () => {
     });
   });
 
-  it('should group items when groupable is true', () => {
-    const { getByText } = render(<Conversations items={items} groupable />);
-    expect(getByText('pinned')).toBeInTheDocument();
+  describe('group', () => {
+    it('should group items when groupable is true', () => {
+      const { getByText } = render(<Conversations items={items} groupable />);
+      expect(getByText('pinned')).toBeInTheDocument();
+    });
+    it('should use custom group title component', () => {
+      const { getByText } = render(
+        <Conversations items={items} groupable={{ label: (group) => <div>{group}</div> }} />,
+      );
+      expect(getByText('pinned')).toBeInTheDocument();
+    });
+
+    it('should not group items when groupable is false', () => {
+      const { queryByText } = render(<Conversations items={items} groupable={false} />);
+      expect(queryByText('pinned')).not.toBeInTheDocument();
+    });
   });
 
-  it('should use custom group title component', () => {
-    const { getByText } = render(
-      <Conversations items={items} groupable={{ label: (group) => <div>{group}</div> }} />,
-    );
-    expect(getByText('pinned')).toBeInTheDocument();
-  });
-
-  it('should not group items when groupable is false', () => {
-    const { queryByText } = render(<Conversations items={items} groupable={false} />);
-    expect(queryByText('pinned')).not.toBeInTheDocument();
-  });
   describe('with shortcut keys', () => {
     it('shortcut keys of items width "number"', async () => {
       const onActiveChange = jest.fn();
@@ -259,6 +262,55 @@ describe('Conversations Component', () => {
         />,
       );
     });
+    it('with Creation shortcutKeys', async () => {
+      const onClick = jest.fn();
+      const { getByText, container } = render(
+        <Conversations
+          items={items}
+          shortcutKeys={{
+            creation: ['Meta', KeyCode.K],
+          }}
+          creation={{
+            onClick,
+          }}
+          menu={menu}
+          defaultActiveKey="demo1"
+        />,
+      );
+      fireEvent.keyDown(container, {
+        key: '™',
+        keyCode: KeyCode.K,
+        code: 'Digit3',
+        metaKey: true,
+      });
+      expect(getByText('New chat')).toBeTruthy();
+      expect(onClick).toHaveBeenCalledTimes(1);
+    });
+    it('should disable shortcutKeys', async () => {
+      const onClick = jest.fn();
+      const { getByText, container } = render(
+        <Conversations
+          items={items}
+          shortcutKeys={{
+            creation: ['Meta', KeyCode.K],
+          }}
+          creation={{
+            disabled: true,
+            onClick,
+          }}
+          menu={menu}
+          defaultActiveKey="demo1"
+        />,
+      );
+      fireEvent.keyDown(container, {
+        key: '™',
+        keyCode: KeyCode.K,
+        code: 'Digit3',
+        metaKey: true,
+      });
+      expect(getByText('New chat')).toBeTruthy();
+      expect(onClick).toHaveBeenCalledTimes(0);
+    });
   });
   describe('Creation', () => {
     it('with Creation', async () => {
@@ -277,72 +329,22 @@ describe('Conversations Component', () => {
       fireEvent.click(getByText('New chat'));
       expect(onClick).toHaveBeenCalled();
     });
-  });
-
-  it('with Creation disable', async () => {
-    const onClick = jest.fn();
-    const { getByText } = render(
-      <Conversations
-        items={items}
-        creation={{
-          onClick,
-          disabled: true,
-        }}
-        menu={menu}
-        defaultActiveKey="demo1"
-      />,
-    );
-    expect(getByText('New chat')).toBeTruthy();
-    fireEvent.click(getByText('New chat'));
-    expect(onClick).toHaveBeenCalledTimes(0);
-  });
-  it('with Creation shortcutKeys', async () => {
-    const onClick = jest.fn();
-    const { getByText, container } = render(
-      <Conversations
-        items={items}
-        shortcutKeys={{
-          creation: ['Meta', KeyCode.K],
-        }}
-        creation={{
-          onClick,
-        }}
-        menu={menu}
-        defaultActiveKey="demo1"
-      />,
-    );
-    fireEvent.keyDown(container, {
-      key: '™',
-      keyCode: KeyCode.K,
-      code: 'Digit3',
-      metaKey: true,
+    it('with Creation disable', async () => {
+      const onClick = jest.fn();
+      const { getByText } = render(
+        <Conversations
+          items={items}
+          creation={{
+            onClick,
+            disabled: true,
+          }}
+          menu={menu}
+          defaultActiveKey="demo1"
+        />,
+      );
+      expect(getByText('New chat')).toBeTruthy();
+      fireEvent.click(getByText('New chat'));
+      expect(onClick).toHaveBeenCalledTimes(0);
     });
-    expect(getByText('New chat')).toBeTruthy();
-    expect(onClick).toHaveBeenCalledTimes(1);
-  });
-  it('should disable shortcutKeys', async () => {
-    const onClick = jest.fn();
-    const { getByText, container } = render(
-      <Conversations
-        items={items}
-        shortcutKeys={{
-          creation: ['Meta', KeyCode.K],
-        }}
-        creation={{
-          disabled: true,
-          onClick,
-        }}
-        menu={menu}
-        defaultActiveKey="demo1"
-      />,
-    );
-    fireEvent.keyDown(container, {
-      key: '™',
-      keyCode: KeyCode.K,
-      code: 'Digit3',
-      metaKey: true,
-    });
-    expect(getByText('New chat')).toBeTruthy();
-    expect(onClick).toHaveBeenCalledTimes(0);
   });
 });
