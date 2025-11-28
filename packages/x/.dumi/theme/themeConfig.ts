@@ -1,6 +1,3 @@
-const chineseMirror =
-  typeof location !== 'undefined' && location.hostname.includes('.antgroup.com');
-
 export default {
   categoryOrder: {
     'Ant Design': 0,
@@ -50,6 +47,6 @@ export default {
     'Template Document': 3,
   },
   docVersions: {
-    '1.x': chineseMirror ? 'https://1x-ant-design-x.antgroup.com' : '',
+    '1.x': 'https://1x-ant-design-x.antgroup.com',
   },
 };
