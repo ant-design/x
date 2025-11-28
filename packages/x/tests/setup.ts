@@ -6,12 +6,7 @@ import { setupStreamsPolyfill } from './setup-streams';
 
 const originConsoleErr = console.error;
 
-const ignoreWarns = [
-  'validateDOMNesting',
-  'on an unmounted component',
-  'not wrapped in act',
-  'NaN is an invalid value for the height css style property',
-];
+const ignoreWarns = ['validateDOMNesting', 'on an unmounted component', 'not wrapped in act'];
 
 // Hack off React warning to avoid too large log in CI.
 console.error = (...args) => {
