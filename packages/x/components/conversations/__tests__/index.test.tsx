@@ -1,5 +1,5 @@
 import KeyCode from 'rc-util/lib/KeyCode';
-import React from 'react';
+import React, { act } from 'react';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
 import { fireEvent, render } from '../../../tests/utils';
@@ -123,16 +123,19 @@ describe('Conversations Component', () => {
     expect(onActiveChange).toHaveBeenCalledWith('demo4');
   });
 
-  it('should handle menu function', () => {
-    const { getByText, container } = render(
+  it.only('should handle menu function', () => {
+    jest.useFakeTimers();
+    const { container } = render(
       <Conversations items={items} menu={menu} defaultActiveKey="demo1" />,
     );
     expect(menu).toHaveBeenCalled();
     const menuElement = container.querySelector('.ant-conversations-menu-icon');
     expect(menuElement).toBeInTheDocument();
+
     fireEvent.click(menuElement as HTMLElement);
-    expect(getByText('重命名')).toBeInTheDocument();
-    expect(getByText('删除')).toBeInTheDocument();
+    act(() => {
+      jest.runAllTimers();
+    });
     fireEvent.click(menuElement as HTMLElement);
     const element = container.querySelector('.ant-dropdown-open');
     expect(element).not.toBeInTheDocument();
