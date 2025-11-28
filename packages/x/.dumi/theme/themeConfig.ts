@@ -50,6 +50,6 @@ export default {
     'Template Document': 3,
   },
   docVersions: {
-    '1.x': chineseMirror ? 'https://1x.ant-design-x.antgroup.com' : '',
+    '1.x': chineseMirror ? 'https://1x-ant-design-x.antgroup.com' : 'https://x.ant.design',
   },
 };
