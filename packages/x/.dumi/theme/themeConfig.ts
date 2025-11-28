@@ -1,5 +1,4 @@
-const chineseMirror =
-  typeof location !== 'undefined' && location.hostname.includes('.antgroup.com');
+const antGroupUrl = location.hostname.includes('localhost');
 
 export default {
   categoryOrder: {
@@ -50,6 +49,6 @@ export default {
     'Template Document': 3,
   },
   docVersions: {
-    '1.x': chineseMirror ? 'https://1x.ant-design-x.antgroup.com' : '',
+    '1.x': antGroupUrl ? 'https://1x-ant-design-x.antgroup.com' : '',
   },
 };
