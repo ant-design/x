@@ -171,6 +171,28 @@ describe('attachments', () => {
     );
   });
 
+  it('image originFileObj', () => {
+    const file = new File(['test content'], '1.png', { type: 'image/png' }) as any;
+    file.uid = 'rc-upload-1764338695629-39';
+    file.lastModifiedDate = new Date('2025-11-23T11:13:14.951Z');
+
+    render(
+      renderAttachments({
+        items: [
+          {
+            originFileObj: file,
+            uid: '1',
+            name: 'image uploading preview.png',
+            status: 'uploading',
+            percent: 33,
+            thumbUrl:
+              'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+            url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+          },
+        ],
+      }),
+    );
+  });
   it('image list mask', () => {
     const { container } = render(
       renderAttachments({
