@@ -125,9 +125,7 @@ export default function FileList(props: FileListProps) {
   };
 
   const showExtension =
-    !disabled &&
-    (typeof upload.maxCount === 'undefined' || (upload.maxCount && upload.maxCount > items.length));
-
+    !disabled && (typeof upload.maxCount === 'undefined' || upload.maxCount > items.length);
   // ================================= Render =================================
   return (
     <FileCard.List
