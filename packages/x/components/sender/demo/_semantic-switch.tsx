@@ -27,7 +27,7 @@ const App: React.FC = () => {
     <Flex vertical>
       {/* Basic */}
       <SemanticPreview
-        componentName="Sender"
+        componentName="Sender.Switch"
         semantics={[
           { name: 'root', desc: locale.root },
           { name: 'icon', desc: locale.icon },
