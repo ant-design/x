@@ -38,11 +38,7 @@ export default function useSpeech(
   const [permissionState, setPermissionState] = React.useState<PermissionState | null>(null);
 
   React.useEffect(() => {
-    if (
-      typeof allowSpeech !== 'object' &&
-      typeof navigator !== 'undefined' &&
-      'permissions' in navigator
-    ) {
+    if (!speechInControlled && typeof navigator !== 'undefined' && 'permissions' in navigator) {
       let lastPermission: PermissionStatus | null = null;
 
       (navigator as any).permissions
@@ -65,11 +61,11 @@ export default function useSpeech(
         }
       };
     }
-  }, []);
+  }, [speechInControlled]);
 
   // Convert permission state to a simple type
   const mergedAllowSpeech =
-    typeof allowSpeech !== 'object' ? SpeechRecognition && permissionState !== 'denied' : true;
+    speechInControlled || (SpeechRecognition && permissionState !== 'denied');
 
   // ========================== Speech Events ==========================
   const recognitionRef = React.useRef<any | null>(null);
