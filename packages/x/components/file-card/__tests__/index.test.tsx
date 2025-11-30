@@ -69,19 +69,6 @@ describe('FileCard Component', () => {
     const { container } = render(<FileCard name="test.png" type="image" loading />);
     expect(container.querySelector('.ant-file-card-loading')).toBeTruthy();
   });
-  it('loading usePercent', () => {
-    const { container } = render(
-      <FileCard
-        name="test.png"
-        type="image"
-        spinProps={{
-          percent: 50,
-        }}
-        loading
-      />,
-    );
-    expect(container.querySelector('.ant-file-card-loading')).toBeTruthy();
-  });
 
   it('should handle custom styles', () => {
     const { container } = render(

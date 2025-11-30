@@ -61,10 +61,13 @@ const HeaderActions: React.FC<HeaderActionsProps> = (props) => {
     [pkg.version]: pkg.version,
     ...themeConfig?.docVersions,
   };
-  const versionOptions = Object.keys(docVersions).map((version) => ({
-    value: docVersions[version],
-    label: version,
-  }));
+
+  const versionOptions = Object.keys(docVersions)
+    .map((version) => ({
+      value: docVersions[version],
+      label: version,
+    }))
+    .filter((item) => item.value);
 
   const onDirectionChange = () => {
     updateSiteConfig({ direction: direction !== 'rtl' ? 'rtl' : 'ltr' });

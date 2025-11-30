@@ -106,7 +106,7 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
 
       // ============================= Input =============================
       [`${componentCls}-input`]: {
-        padding: 0,
+        paddingInline: 0,
         borderRadius: 0,
         flex: 'auto',
         alignSelf: 'center',
