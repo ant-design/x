@@ -124,7 +124,6 @@ const SubTokenTable: React.FC<SubTokenTableProps> = (props) => {
         return null as unknown as TokenData;
       }
 
-      console.log('TokenData[component]', component, xTokenData, xTokenData[component!]);
       return {
         name,
         desc: lang === 'cn' ? meta.desc : meta.descEn,
