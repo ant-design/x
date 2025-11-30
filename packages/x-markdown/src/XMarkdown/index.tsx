@@ -1,6 +1,5 @@
 import classnames from 'classnames';
 import React, { useMemo } from 'react';
-import useXProviderContext from '../hooks/use-x-provider-context';
 import { Parser, Renderer } from './core';
 import { useStreaming } from './hooks';
 import { XMarkdownProps } from './interface';
@@ -15,7 +14,6 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
     content,
     children,
     rootClassName,
-    prefixCls: customizePrefixCls,
     className,
     style,
     openLinksInNewTab,
@@ -23,19 +21,7 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
   } = props;
 
   // ============================ style ============================
-  const { direction: contextDirection, getPrefixCls } = useXProviderContext();
-
-  const prefixCls = getPrefixCls('x-markdown', customizePrefixCls);
-
-  const mergedCls = classnames(prefixCls, 'x-markdown', rootClassName, className);
-
-  const mergedStyle: React.CSSProperties = useMemo(
-    () => ({
-      direction: contextDirection === 'rtl' ? 'rtl' : 'ltr',
-      ...style,
-    }),
-    [contextDirection, style],
-  );
+  const mergedCls = classnames('x-markdown', rootClassName, className);
 
   // ============================ Streaming ============================
   const displayContent = useStreaming(content || children || '', streaming);
@@ -69,7 +55,7 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
   if (!displayContent) return null;
 
   return (
-    <div className={mergedCls} style={mergedStyle}>
+    <div className={mergedCls} style={style}>
       {renderer.render(htmlString)}
     </div>
   );

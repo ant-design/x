@@ -4,6 +4,7 @@ import type { ComponentToken as BubbleComponentToken } from '../../bubble/style'
 import type { ComponentToken as CodeHighlighterComponentToken } from '../../code-highlighter/style';
 import type { ComponentToken as ConversationsComponentToken } from '../../conversations/style';
 import type { ComponentToken as FileCardComponentToken } from '../../file-card/style';
+import type { ComponentToken as MermaidComponentToken } from '../../mermaid/style';
 import type { ComponentToken as PromptsComponentToken } from '../../prompts/style';
 import type { ComponentToken as SenderComponentToken } from '../../sender/style';
 import type { ComponentToken as SourcesComponentToken } from '../../sources/style';
@@ -11,9 +12,8 @@ import type { ComponentToken as SuggestionComponentToken } from '../../suggestio
 import type { ComponentToken as ThinkComponentToken } from '../../think/style';
 import type { ComponentToken as ThoughtChainComponentToken } from '../../thought-chain/style';
 import type { ComponentToken as WelcomeComponentToken } from '../../welcome/style';
-import type { ComponentTokenMap as XMarkdownToken } from './XMarkdownComponents';
 
-export interface ComponentTokenMap extends XMarkdownToken {
+export interface ComponentTokenMap {
   Attachments?: AttachmentsToken;
   Bubble?: BubbleComponentToken;
   Conversations?: ConversationsComponentToken;
@@ -26,5 +26,6 @@ export interface ComponentTokenMap extends XMarkdownToken {
   Actions?: ActionsToken;
   FileCard?: FileCardComponentToken;
   Sources?: SourcesComponentToken;
-  CodeHighlighter: CodeHighlighterComponentToken;
+  CodeHighlighter?: CodeHighlighterComponentToken;
+  Mermaid?: MermaidComponentToken;
 }

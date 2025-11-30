@@ -3,9 +3,9 @@ category: Components
 group:
   title: Expression
   order: 2
-title: CodeHighlighter
-subtitle: Code Highlighting
-description: Used to highlight code formatting.
+title: Mermaid
+subtitle: Diagram Tool
+description: Used to render diagrams with Mermaid.
 cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*OwTOS6wqFIsAAAAAAAAAAAAADgCCAQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAAAAAAAAAAAADgCCAQ/original
 demo:
@@ -14,13 +14,11 @@ demo:
 
 ## When to Use
 
-The CodeHighlighter component is used in scenarios where you need to display code snippets with syntax highlighting.
+- Need to render Mermaid diagrams in the application
+- Want to provide interactive features like zoom, pan, and code view
+- Need to support both image and code view modes
 
-- When you need to display code snippets with syntax highlighting
-- When you want to provide a copy function for the code block
-- When you need to display code language information in the header
-
-## Code Examples
+## Code Demo
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">Basic</code>
@@ -29,24 +27,14 @@ The CodeHighlighter component is used in scenarios where you need to display cod
 
 ## API
 
-For common properties, refer to: [Common Properties](/docs/react/common-props).
-
-### CodeHighlighterProps
-
+<!-- prettier-ignore -->
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
-| lang | Language | `string` | - |
 | children | Code content | `string` | - |
 | header | Header | `React.ReactNode \| null` | React.ReactNode |
-| className | Style class name | `string` |  |
-| classNames | Style class names | `string` | - |
+| className | Style class name | `string` | |
+| classNames | Style class name | `string` | - |
 | highlightProps | Code highlighting configuration | [`highlightProps`](https://github.com/react-syntax-highlighter/react-syntax-highlighter?tab=readme-ov-file#props) | - |
-
-### CodeHighlighterRef
-
-| Property      | Description        | Type        | Version |
-| ------------- | ------------------ | ----------- | ------- |
-| nativeElement | Get native element | HTMLElement | -       |
 
 ## Semantic DOM
 
@@ -54,4 +42,4 @@ For common properties, refer to: [Common Properties](/docs/react/common-props).
 
 ## Theme Variables (Design Token)
 
-<ComponentTokenTable component="CodeHighlighter"></ComponentTokenTable>
+<XMarkdownComponentTokenTable component="Mermaid"></XMarkdownComponentTokenTable>

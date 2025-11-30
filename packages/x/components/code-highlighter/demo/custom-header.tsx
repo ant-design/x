@@ -1,37 +1,60 @@
-import { Tag } from 'antd';
+import { CodeHighlighter } from '@ant-design/x';
+import { Button, Space } from 'antd';
 import React from 'react';
-import CodeHighlighter from '../index';
 
-const App: React.FC = () => {
-  const code = `const greeting = "Hello, World!";
-console.log(greeting);`;
+const App = () => {
+  const code = `import { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <p>当前计数：{count}</p>
+      <button onClick={() => setCount(count + 1)}>增加</button>
+    </div>
+  );
+}`;
 
   const customHeader = (
     <div
       style={{
         display: 'flex',
-        alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '8px 12px',
-        background: '#f0f0f0',
-        borderRadius: '6px 6px 0 0',
+        alignItems: 'center',
+        padding: '8px 16px',
+        background: '#f5f5f5',
+        borderBottom: '1px solid #d9d9d9',
       }}
     >
-      <div>
-        <Tag color="blue">JavaScript</Tag>
-        <span style={{ marginLeft: 8 }}>Example Code</span>
-      </div>
-      <span style={{ fontSize: 12, color: '#666' }}>2 lines</span>
+      <Space>
+        <span style={{ fontWeight: 500 }}>React 计数器示例</span>
+        <span
+          style={{
+            padding: '2px 8px',
+            background: '#e6f7ff',
+            borderRadius: '4px',
+            fontSize: '12px',
+            color: '#1890ff',
+          }}
+        >
+          JavaScript
+        </span>
+      </Space>
+      <Space>
+        <Button size="small" type="text">
+          运行
+        </Button>
+        <Button size="small" type="text">
+          分享
+        </Button>
+      </Space>
     </div>
   );
 
   return (
-    <div>
-      <h3>Custom Header Example</h3>
-      <CodeHighlighter lang="javascript" header={customHeader}>
-        {code}
-      </CodeHighlighter>
-    </div>
+    <CodeHighlighter lang="javascript" header={customHeader}>
+      {code}
+    </CodeHighlighter>
   );
 };
 

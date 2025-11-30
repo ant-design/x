@@ -31,10 +31,6 @@ const localeValues: Required<xLocale & xMarkdownLocale> = {
     code: 'Code',
     image: 'Image',
   },
-  HighlightCode: {
-    copySuccess: 'Copied',
-    copy: 'Copy code',
-  },
   CodeHighlighter: {
     copySuccess: 'Copied',
     copy: 'Copy code',

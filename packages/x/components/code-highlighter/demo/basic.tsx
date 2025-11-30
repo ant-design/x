@@ -15,10 +15,10 @@ export default App;`;
 
   return (
     <div>
-      <h3>JavaScript Code</h3>
+      <h3 style={{ marginBottom: 8 }}>JavaScript Code</h3>
       <CodeHighlighter lang="javascript">{code}</CodeHighlighter>
 
-      <h3>CSS Code</h3>
+      <h3 style={{ margin: '8px 0' }}>CSS Code</h3>
       <CodeHighlighter lang="css">
         {`.container {
   display: flex;
@@ -28,7 +28,7 @@ export default App;`;
 }`}
       </CodeHighlighter>
 
-      <h3>HTML Code</h3>
+      <h3 style={{ margin: '8px 0' }}>HTML Code</h3>
       <CodeHighlighter lang="html">
         {`<!DOCTYPE html>
 <html>

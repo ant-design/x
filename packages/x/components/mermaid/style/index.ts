@@ -9,23 +9,29 @@ export interface ComponentToken {
    * @descEN Title background color
    */
   colorBgTitle: string;
+
   /**
    * @desc 标题文本颜色
    * @descEN Title text color
    */
   colorTextTitle: string;
+
   /**
    * @desc 代码块边框颜色
    * @descEN Code block border color
    */
   colorBorderCode: string;
+
+  /**
+   * @desc 图表边框颜色
+   * @descEN Graph border color
+   */
+  colorBorderGraph: string;
 }
 
-export interface CodeHighlighterToken extends FullToken<'CodeHighlighter'> {}
+export interface MermaidToken extends FullToken<'Mermaid'> {}
 
-const genCodeHighlighterStyle: GenerateStyle<CodeHighlighterToken> = (
-  token: CodeHighlighterToken,
-): CSSObject => {
+const genMermaidStyle: GenerateStyle<MermaidToken> = (token: MermaidToken): CSSObject => {
   const { componentCls } = token;
 
   return {
@@ -34,24 +40,40 @@ const genCodeHighlighterStyle: GenerateStyle<CodeHighlighterToken> = (
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        color: token.colorText,
-        background: token.colorFillContent,
+        background: token.colorBgTitle,
+        color: token.colorTextTitle,
         padding: token.paddingSM,
         borderTopLeftRadius: token.borderRadius,
         borderTopRightRadius: token.borderRadius,
       },
-      '&-header-title': {
-        fontSize: token.fontSize,
-        fontWeight: token.fontWeightStrong,
+      '&-graph': {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        border: `1px solid ${token.colorBgTitle}`,
+        borderTop: 'none',
+        padding: token.paddingSM,
+        background: token.colorBgContainer,
+        overflow: 'auto',
+        borderBottomRightRadius: token.borderRadius,
+        borderBottomLeftRadius: token.borderRadius,
+      },
+      '&-graph-hidden': {
+        display: 'none',
+      },
+      '&-graph svg': {
+        maxWidth: '100%',
+        height: 'auto',
       },
       '&-code': {
         borderBottomRightRadius: token.borderRadius,
         borderBottomLeftRadius: token.borderRadius,
-        borderTopLeftRadius: 0,
-        borderTopRightRadius: 0,
+        borderBottom: `1px solid ${token.colorBgTitle}`,
+        borderLeft: `1px solid ${token.colorBgTitle}`,
+        borderRight: `1px solid ${token.colorBgTitle}`,
         background: token.colorBgContainer,
-        border: `1px solid ${token.colorBorderSecondary}`,
-        borderTop: 'none',
+        paddingInline: token.paddingSM,
+        paddingBlock: token.paddingSM,
         overflow: 'hidden',
         'pre,code': {
           whiteSpace: 'pre',
@@ -72,17 +94,18 @@ const genCodeHighlighterStyle: GenerateStyle<CodeHighlighterToken> = (
   };
 };
 
-export const prepareComponentToken: GetDefaultToken<'CodeHighlighter'> = (token) => ({
+export const prepareComponentToken: GetDefaultToken<'Mermaid'> = (token) => ({
   colorBgTitle: token.colorFillContent,
   colorBorderCode: token.colorBorderSecondary,
+  colorBorderGraph: token.colorBorderSecondary,
   colorTextTitle: token.colorText,
 });
 
-export default genStyleHooks(
-  'CodeHighlighter',
+export default genStyleHooks<'Mermaid'>(
+  'Mermaid',
   (token) => {
-    const codeHighlighterToken = mergeToken<CodeHighlighterToken>(token, {});
-    return [genCodeHighlighterStyle(codeHighlighterToken)];
+    const mermaidToken = mergeToken<MermaidToken>(token, {});
+    return [genMermaidStyle(mermaidToken)];
   },
   prepareComponentToken,
 );

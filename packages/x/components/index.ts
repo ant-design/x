@@ -12,6 +12,8 @@ export type { ConversationItemType, ConversationsProps } from './conversations';
 export { default as Conversations } from './conversations';
 export type { FileCardListProps, FileCardProps } from './file-card';
 export { default as FileCard } from './file-card';
+export type { MermaidProps } from './mermaid';
+export { default as Mermaid } from './mermaid';
 export type { XNotificationOpenArgs } from './notification';
 export { default as notification } from './notification';
 export type { PromptsItemType, PromptsProps } from './prompts';

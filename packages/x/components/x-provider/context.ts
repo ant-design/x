@@ -11,6 +11,7 @@ import type { CodeHighlighterProps } from '../code-highlighter';
 import type { ConversationsProps } from '../conversations';
 import type { FileCardProps } from '../file-card';
 import { Locale } from '../locale';
+import type { MermaidProps } from '../mermaid';
 import type { PromptsProps } from '../prompts';
 import type { SenderProps } from '../sender';
 import type { SourcesProps } from '../sources';
@@ -51,6 +52,7 @@ export interface XComponentsConfig {
   fileCard?: ComponentConfig<FileCardProps>;
   sources?: ComponentConfig<SourcesProps>;
   codeHighlighter?: ComponentConfig<CodeHighlighterProps>;
+  mermaid?: ComponentConfig<MermaidProps>;
 }
 
 type ComponentsConfig = {

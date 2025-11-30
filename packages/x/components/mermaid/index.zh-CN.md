@@ -3,9 +3,9 @@ category: Components
 group:
   title: 表达
   order: 2
-title: CodeHighlighter
-subtitle: 代码高亮
-description: 用于高亮代码格式。
+title: Mermaid
+subtitle: 图表工具
+description: 用于渲染图表工具 Mermaid。
 cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*OwTOS6wqFIsAAAAAAAAAAAAADgCCAQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAAAAAAAAAAAADgCCAQ/original
 demo:
@@ -14,11 +14,9 @@ demo:
 
 ## 何时使用
 
-CodeHighlighter 组件用于需要展示带有语法高亮的代码片段的场景。
-
-- 需要显示带有语法高亮的代码片段时
-- 想要为代码块提供复制功能时
-- 需要在头部显示代码语言信息时
+- 需要在应用中渲染 Mermaid 图表
+- 希望提供缩放、平移和代码视图等交互功能
+- 需要支持图像和代码两种视图模式
 
 ## 代码演示
 
@@ -29,24 +27,14 @@ CodeHighlighter 组件用于需要展示带有语法高亮的代码片段的场�
 
 ## API
 
-通用属性参考：[通用属性](/docs/react/common-props)。
-
-### CodeHighlighterProps
-
+<!-- prettier-ignore -->
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| lang | 语言 | `string` | - |
 | children | 代码内容 | `string` | - |
 | header | 顶部 | `React.ReactNode \| null` | React.ReactNode |
-| className | 样式类名 | `string` |  |
+| className | 样式类名 | `string` | |
 | classNames | 样式类名 | `string` | - |
 | highlightProps | 代码高亮配置 | [`highlightProps`](https://github.com/react-syntax-highlighter/react-syntax-highlighter?tab=readme-ov-file#props) | - |
-
-### CodeHighlighterRef
-
-| 属性          | 说明         | 类型        | 版本 |
-| ------------- | ------------ | ----------- | ---- |
-| nativeElement | 获取原生节点 | HTMLElement | -    |
 
 ## Semantic DOM
 
@@ -54,4 +42,4 @@ CodeHighlighter 组件用于需要展示带有语法高亮的代码片段的场�
 
 ## 主题变量（Design Token）
 
-<ComponentTokenTable component="CodeHighlighter"></ComponentTokenTable>
+<XMarkdownComponentTokenTable component="Mermaid"></XMarkdownComponentTokenTable>
