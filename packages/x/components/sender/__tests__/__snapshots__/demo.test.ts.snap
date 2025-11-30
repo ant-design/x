@@ -201,14 +201,14 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
                   </svg>
                 </span>
               </span>
-              <span>
+              <div>
                 Deep Think:
                 <span
                   style="display:inline-flex;width:28px;justify-content:center;align-items:center"
                 >
                   on
                 </span>
-              </span>
+              </div>
             </button>
           </div>
           <div
@@ -241,7 +241,9 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
                   </svg>
                 </span>
               </span>
-              <span>
+              <span
+                class=""
+              >
                 Agent
               </span>
             </button>
@@ -276,7 +278,9 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
                   </svg>
                 </span>
               </span>
-              <span>
+              <span
+                class=""
+              >
                 Files
               </span>
             </button>
@@ -1923,7 +1927,9 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx correctly 1`] =
                     </svg>
                   </span>
                 </span>
-                <span>
+                <span
+                  class=""
+                >
                   Deep Think:
                   <span
                     style="display:inline-flex;width:28px;justify-content:center;align-items:center"
@@ -1963,7 +1969,9 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx correctly 1`] =
                     </svg>
                   </span>
                 </span>
-                <span>
+                <span
+                  class=""
+                >
                   Agent
                 </span>
               </button>
@@ -1998,7 +2006,9 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx correctly 1`] =
                     </svg>
                   </span>
                 </span>
-                <span>
+                <span
+                  class=""
+                >
                   Files
                 </span>
               </button>
@@ -2501,7 +2511,9 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
             </svg>
           </span>
         </span>
-        <span>
+        <span
+          class=""
+        >
           Deep Search
         </span>
       </button>
@@ -2541,7 +2553,9 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
             </svg>
           </span>
         </span>
-        <span>
+        <span
+          class=""
+        >
           Deep Search: off
         </span>
       </button>
@@ -2582,7 +2596,9 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
             </svg>
           </span>
         </span>
-        <span>
+        <span
+          class=""
+        >
           Deep Search
         </span>
       </button>
@@ -2622,7 +2638,9 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
             </svg>
           </span>
         </span>
-        <span>
+        <span
+          class=""
+        >
           Deep Search
         </span>
       </button>
@@ -2662,7 +2680,9 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
             </svg>
           </span>
         </span>
-        <span>
+        <span
+          class=""
+        >
           Deep Search
         </span>
       </button>
@@ -2702,7 +2722,9 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
             </svg>
           </span>
         </span>
-        <span>
+        <span
+          class=""
+        >
           Deep Search
         </span>
       </button>
