@@ -24,7 +24,7 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
   const mergedCls = classnames('x-markdown', rootClassName, className);
 
   // ============================ Streaming ============================
-  const displayContent = useStreaming(content || children || '', streaming);
+  const displayContent = useStreaming(content || children || '', { streaming, components });
 
   // ============================ Render ============================
   const parser = useMemo(
