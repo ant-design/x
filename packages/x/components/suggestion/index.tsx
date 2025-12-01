@@ -2,7 +2,7 @@ import type { CascaderProps } from 'antd';
 import { Cascader, Flex } from 'antd';
 import classnames from 'classnames';
 import { useEvent, useMergedState } from 'rc-util';
-import React, { useState } from 'react';
+import React from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { AnyObject } from '../_util/type';
 import { useXProviderContext } from '../x-provider';
@@ -92,7 +92,11 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
   const [mergedOpen, setOpen] = useMergedState(false, {
     value: open,
   });
-  const [info, setInfo] = useState<T | undefined>();
+
+  const [itemList, setItemList] = useMergedState<SuggestionItem[]>([], {
+    value: typeof items === 'function' ? undefined : items,
+    defaultValue: typeof items === 'function' ? items() : items,
+  });
 
   const triggerOpen = (nextOpen: boolean) => {
     setOpen(nextOpen);
@@ -103,7 +107,9 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
     if (nextInfo === false) {
       triggerOpen(false);
     } else {
-      setInfo(nextInfo);
+      if (typeof items === 'function') {
+        setItemList(items(nextInfo));
+      }
       triggerOpen(true);
     }
   });
@@ -113,10 +119,6 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
   };
 
   // ============================ Items =============================
-  const itemList = React.useMemo(
-    () => (typeof items === 'function' ? items(info) : items),
-    [items, info],
-  );
 
   // =========================== Cascader ===========================
   const optionRender: CascaderProps<SuggestionItem>['optionRender'] = (node) => {
