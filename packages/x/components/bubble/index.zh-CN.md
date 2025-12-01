@@ -18,10 +18,22 @@ demo:
 
 ## 代码演示
 
-<!-- prettier-ignore -->
 <!-- <code src="./demo/_test.tsx">测试</code> -->
-
-<code src="./demo/basic.tsx">基本</code> <code src="./demo/variant-and-shape.tsx">变体与形状</code> <code src="./demo/sider-and-placement.tsx">边栏与位置</code> <code src="./demo/system.tsx">系统信息气泡</code> <code src="./demo/divider.tsx">分割线气泡</code> <code src="./demo/header.tsx">气泡头</code> <code src="./demo/footer.tsx">气泡尾</code> <code src="./demo/loading.tsx">加载中</code> <code src="./demo/animation.tsx">动画</code> <code src="./demo/stream.tsx">流式传输</code> <code src="./demo/custom-content.tsx">自定义渲染内容</code> <code src="./demo/markdown.tsx">渲染markdown内容</code> <code src="./demo/gpt-vis.tsx">使用 GPT-Vis 渲染图表</code> <code src="./demo/editable.tsx">可编辑气泡</code>
+<!-- prettier-ignore -->
+<code src="./demo/basic.tsx">基本</code> 
+<code src="./demo/variant-and-shape.tsx">变体与形状</code> 
+<code src="./demo/sider-and-placement.tsx">边栏与位置</code> 
+<code src="./demo/system.tsx">系统信息气泡</code> 
+<code src="./demo/divider.tsx">分割线气泡</code> 
+<code src="./demo/header.tsx">气泡头</code> 
+<code src="./demo/footer.tsx">气泡尾</code> 
+<code src="./demo/loading.tsx">加载中</code> 
+<code src="./demo/animation.tsx">动画</code> 
+<code src="./demo/stream.tsx">流式传输</code> 
+<code src="./demo/custom-content.tsx">自定义渲染内容</code> 
+<code src="./demo/markdown.tsx">渲染markdown内容</code> 
+<code src="./demo/gpt-vis.tsx">使用 GPT-Vis 渲染图表</code> 
+<code src="./demo/editable.tsx">可编辑气泡</code>
 
 ## 列表演示
 
