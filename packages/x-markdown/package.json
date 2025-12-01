@@ -12,15 +12,12 @@
     "predist": "npm run prestart",
     "test": "jest --config .jest.js --no-cache --collect-coverage",
     "coverage": "jest --config .jest.js --no-cache --collect-coverage --coverage",
-    "plugin:meta": "tsx scripts/generate-plugin-meta.ts",
-    "prestart": "npm run version &&  npm run token:statistic && npm run plugin:meta && npm run token:meta",
+    "prestart": "npm run version",
     "precompile": "npm run prestart",
     "version": "tsx scripts/generate-version.ts",
     "test:dekko": "tsx ./tests/dekko/index.test.ts",
     "clean": "rm -rf es lib coverage plugins dist themes",
-    "test:package-diff": "antd-tools run package-diff",
-    "token:meta": "tsx scripts/generate-token-meta.ts",
-    "token:statistic": "tsx scripts/collect-token-statistic.ts"
+    "test:package-diff": "antd-tools run package-diff"
   },
   "sideEffects": false,
   "main": "lib/index.js",

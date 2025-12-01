@@ -124,7 +124,7 @@ const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((
     <div ref={ref} className={mergedCls} style={mergedStyle} {...restProps}>
       {renderTitle()}
       <div
-        className={classnames(`${prefixCls}-code`, contextConfig.classNames.code, classNames.code)}
+        className={classnames(`${prefixCls}-code`, contextConfig.classNames?.code, classNames.code)}
         style={{ ...contextConfig.styles.code, ...styles.code }}
       >
         <SyntaxHighlighter
