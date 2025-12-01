@@ -191,7 +191,13 @@ const [config, setConfig] = useState([]);
 
 ## Semantic DOM
 
+### Sender
+
 <code src="./demo/_semantic.tsx" simplify="true"></code>
+
+### Sender.Switch
+
+<code src="./demo/_semantic-switch.tsx" simplify="true"></code>
 
 ## Theme Variables (Design Token)
 
