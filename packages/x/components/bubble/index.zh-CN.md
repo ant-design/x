@@ -18,7 +18,6 @@ demo:
 
 ## 代码演示
 
-<!-- <code src="./demo/_test.tsx">测试</code> -->
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">基本</code> 
 <code src="./demo/variant-and-shape.tsx">变体与形状</code> 
