@@ -42,4 +42,4 @@ demo:
 
 ## 主题变量（Design Token）
 
-<XMarkdownComponentTokenTable component="Mermaid"></XMarkdownComponentTokenTable>
+<ComponentTokenTable component="Mermaid"></ComponentTokenTable>

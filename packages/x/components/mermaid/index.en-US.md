@@ -42,4 +42,4 @@ demo:
 
 ## Theme Variables (Design Token)
 
-<XMarkdownComponentTokenTable component="Mermaid"></XMarkdownComponentTokenTable>
+<ComponentTokenTable component="Mermaid"></ComponentTokenTable>
