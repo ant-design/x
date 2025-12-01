@@ -7,6 +7,18 @@ jest.mock('react', () => ({
   useId: () => 'mock-id-123',
 }));
 
+// Mock mermaid to avoid Jest transform issues with ES6+ syntax
+jest.mock('mermaid', () => ({
+  initialize: jest.fn(),
+  render: jest.fn().mockResolvedValue({ svg: '<svg></svg>' }),
+}));
+
+// Mock the mermaid component to avoid issues
+jest.mock('../../mermaid', () => ({
+  __esModule: true,
+  default: () => <div data-testid="mock-mermaid">Mermaid Diagram</div>,
+}));
+
 describe('CodeHighlighter', () => {
   it('render normal code', () => {
     const { container } = render(
