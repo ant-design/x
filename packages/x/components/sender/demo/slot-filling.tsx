@@ -1,41 +1,52 @@
-import { Sender, type SenderProps } from '@ant-design/x';
+import { Sender, type SenderProps, XProvider } from '@ant-design/x';
 import { Button, Flex, GetRef, Slider } from 'antd';
 import React, { useRef, useState } from 'react';
 
 type SlotConfig = SenderProps['slotConfig'];
 
 const otherSlotConfig: SlotConfig = [
-  { type: 'text', value: 'I want to go to' },
+  { type: 'text', value: 'I want to travel to ' },
+  {
+    type: 'content',
+    key: 'location',
+    props: { defaultValue: 'Beijing', placeholder: '[Please enter the location]' },
+  },
+  { type: 'text', value: 'by' },
   {
     type: 'select',
-    key: 'destination',
+    key: 'transportation',
     props: {
-      defaultValue: 'Beijing',
-      options: ['Beijing', 'Shanghai', 'Guangzhou'],
-      placeholder: 'Please select a destination',
+      defaultValue: 'airplane',
+      options: ['airplane', 'high-speed rail', 'cruise ship'],
+      placeholder: 'Please choose a mode of transportation',
     },
   },
-  { type: 'text', value: 'for a trip with ' },
-  { type: 'tag', key: 'tag', props: { label: '@ Chuck', value: 'a man' } },
-  { type: 'text', value: ', the date is ' },
-  {
-    type: 'input',
-    key: 'date',
-    props: {
-      placeholder: 'Please enter a date',
-    },
-  },
-  { type: 'text', value: ', and the price should be ' },
+  { type: 'text', value: 'with a group of 3 people, and each person has a budget of' },
   {
     type: 'custom',
     key: 'priceRange',
     props: {
-      defaultValue: [20, 50],
+      defaultValue: [3000, 6000],
     },
     customRender: (value: any, onChange: (value: any) => void, props) => {
       return (
-        <div style={{ width: '100px' }}>
-          <Slider {...props} style={{ margin: 0 }} range value={value} onChange={onChange} />
+        <div
+          style={{
+            width: '200px',
+            paddingInline: 20,
+            display: 'inline-block',
+            alignItems: 'center',
+          }}
+        >
+          <Slider
+            {...props}
+            max={8000}
+            min={1000}
+            style={{ margin: 0 }}
+            range
+            value={value}
+            onChange={onChange}
+          />
         </div>
       );
     },
@@ -43,14 +54,17 @@ const otherSlotConfig: SlotConfig = [
       return `between ${value[0]} and ${value[1]} RMB.`;
     },
   },
-  { type: 'text', value: ', and the number of people is ' },
+  { type: 'text', value: 'Please' },
+  { type: 'tag', key: 'tag', props: { label: '@Travel Planner ', value: 'travelTool' } },
+  { type: 'text', value: 'help me create a travel itinerary,Use account ' },
   {
     type: 'input',
-    key: 'numberOfPeople',
+    key: 'account',
     props: {
-      placeholder: 'Please enter a number',
+      placeholder: 'Please enter a account',
     },
   },
+  { type: 'text', value: '.' },
 ];
 
 const altSlotConfig: SlotConfig = [
@@ -79,7 +93,20 @@ const App: React.FC = () => {
   );
   const senderRef = useRef<GetRef<typeof Sender>>(null);
   const [value, setValue] = useState<string>('');
-
+  const [skill, setSkill] = useState<SenderProps['skill']>({
+    value: 'travelId',
+    title: 'Travel Planner',
+    toolTip: {
+      title: 'Travel Skill',
+    },
+    closable: {
+      onClose: () => {
+        console.log('close');
+      },
+    },
+  });
+  const [skillValue, setSkillValue] = useState<string>('');
+  const [slotValue, setSlotValue] = useState<string>('');
   return (
     <Flex vertical gap={16}>
       {/* 操作按钮区 */}
@@ -94,18 +121,14 @@ const App: React.FC = () => {
         <Button
           onClick={() => {
             const val = senderRef.current?.getValue?.();
+            if (val?.skill) {
+              setSkillValue(val?.skill?.value);
+            }
             setValue(val?.value ? val.value : 'No value');
+            setSlotValue(val?.slotConfig ? JSON.stringify(val.slotConfig) : 'No value');
           }}
         >
           Get Value
-        </Button>
-        <Button
-          onClick={() => {
-            const val = senderRef.current?.getValue();
-            setValue(val?.config ? JSON.stringify(val.config) : 'No value');
-          }}
-        >
-          Get Slot
         </Button>
         <Button
           onClick={() => {
@@ -173,6 +196,13 @@ const App: React.FC = () => {
         </Button>
         <Button
           onClick={() => {
+            senderRef.current!.focus();
+          }}
+        >
+          Focus
+        </Button>
+        <Button
+          onClick={() => {
             senderRef.current!.focus({
               cursor: 'start',
             });
@@ -202,7 +232,7 @@ const App: React.FC = () => {
           onClick={() => {
             senderRef.current!.focus({
               cursor: 'slot',
-              key: 'numberOfPeople',
+              key: 'account',
             });
           }}
         >
@@ -233,17 +263,55 @@ const App: React.FC = () => {
         >
           Blur
         </Button>
+        <Button
+          onClick={() => {
+            setSkill({
+              value: 'travelId_1',
+              title: 'Travel Planner2',
+              toolTip: {
+                title: 'Travel Skill2',
+              },
+              closable: {
+                onClose: () => {
+                  console.log('close');
+                },
+              },
+            });
+          }}
+        >
+          Change Skill
+        </Button>
       </Flex>
       {/* Sender 词槽填空示例 */}
-      <Sender
-        onSubmit={(value) => {
-          setValue(value);
-          setSlotConfigKey(false);
+      <XProvider
+        theme={{
+          components: {
+            Sender: {
+              fontSize: 16,
+            },
+          },
         }}
-        slotConfig={slotConfigKey ? slotConfig?.[slotConfigKey] : []}
-        ref={senderRef}
-      />
-      {value ? `value:${value}` : null}
+      >
+        <Sender
+          skill={skill}
+          allowSpeech
+          autoSize={{ minRows: 3, maxRows: 4 }}
+          onSubmit={(value) => {
+            setValue(value);
+            setSlotConfigKey(false);
+          }}
+          onChange={(value, event, slotConfig) => {
+            console.log(value, event, slotConfig);
+          }}
+          slotConfig={slotConfigKey ? slotConfig?.[slotConfigKey] : []}
+          ref={senderRef}
+        />
+      </XProvider>
+      <Flex vertical gap="middle">
+        <div> {skillValue ? `skill:${skillValue}` : null}</div>
+        <div> {value ? `value:${value}` : null}</div>
+        <div> {slotValue ? `slotValue:${slotValue}` : null}</div>
+      </Flex>
     </Flex>
   );
 };

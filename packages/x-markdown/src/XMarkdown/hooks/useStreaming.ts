@@ -158,9 +158,26 @@ const isInCodeBlock = (text: string): boolean => {
   return inFenced;
 };
 
+const safeEncodeURIComponent = (str: string): string => {
+  try {
+    return encodeURIComponent(str);
+  } catch (e) {
+    if (e instanceof URIError) {
+      const cleanedStr = str.replace(/[\uD800-\uDFFF]/g, '');
+      return encodeURIComponent(cleanedStr);
+    }
+
+    return '';
+  }
+};
+
 /* ------------ Main Hook ------------ */
-const useStreaming = (input: string, config?: XMarkdownProps['streaming']) => {
-  const { hasNextChunk: enableCache = false, incompleteMarkdownComponentMap } = config || {};
+const useStreaming = (
+  input: string,
+  config?: { streaming: XMarkdownProps['streaming']; components?: XMarkdownProps['components'] },
+) => {
+  const { streaming, components = {} } = config || {};
+  const { hasNextChunk: enableCache = false, incompleteMarkdownComponentMap } = streaming || {};
   const [output, setOutput] = useState('');
   const cacheRef = useRef<StreamCache>(getInitialCache());
 
@@ -168,23 +185,29 @@ const useStreaming = (input: string, config?: XMarkdownProps['streaming']) => {
     (cache: StreamCache): string | undefined => {
       const { token, pending } = cache;
       if (token === StreamCacheTokenType.Text) return;
+      /**
+       * ！
+       * ^
+       */
+      if (token === StreamCacheTokenType.Image && pending === '!') return undefined;
+
+      /**
+       * | column1 | column2 |\n| -- | --|\n
+       *                                   ^
+       */
+      if (token === StreamCacheTokenType.Table && pending.split('\n').length > 2) {
+        return pending;
+      }
 
       const componentMap = incompleteMarkdownComponentMap || {};
-      const encodedPending = encodeURIComponent(pending);
-      switch (token) {
-        case StreamCacheTokenType.Image:
-          return pending === '!'
-            ? undefined
-            : `<${componentMap.image || 'incomplete-image'} data-raw="${encodedPending}" />`;
-        case StreamCacheTokenType.Table:
-          return pending.split('\n').length <= 2
-            ? `<${componentMap.table || 'incomplete-table'} data-raw="${encodedPending}" />`
-            : pending;
-        default:
-          return `<${componentMap[token] || `incomplete-${token}`} data-raw="${encodedPending}" />`;
-      }
+      const componentName = componentMap[token] || `incomplete-${token}`;
+      const encodedPending = safeEncodeURIComponent(pending);
+
+      return components?.[componentName]
+        ? `<${componentName} data-raw="${encodedPending}" />`
+        : undefined;
     },
-    [incompleteMarkdownComponentMap],
+    [incompleteMarkdownComponentMap, components],
   );
 
   const processStreaming = useCallback(
