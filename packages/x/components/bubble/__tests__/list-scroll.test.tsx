@@ -372,7 +372,7 @@ describe('useCompatibleScroll', () => {
           }) as any,
       );
 
-      const { result } = renderHook(() => useCompatibleScroll(mockDom));
+      renderHook(() => useCompatibleScroll(mockDom));
 
       // Set up initial state
       act(() => {
@@ -383,10 +383,6 @@ describe('useCompatibleScroll', () => {
         mockDom.dispatchEvent(new Event('scroll'));
         // lockedScrollBottomPos should now be 1000 + (-300) = 700
       });
-
-      // Simulate that scrolling is in progress
-      // @ts-ignore - accessing private ref for testing
-      result.current.scrolling = setTimeout(() => {}, 100);
 
       // Change scrollHeight to simulate content being added
       Object.defineProperty(mockDom, 'scrollHeight', { value: 1200, writable: true });

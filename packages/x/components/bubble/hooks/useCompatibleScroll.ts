@@ -100,6 +100,7 @@ export function useCompatibleScroll(dom?: HTMLElement | null) {
      * 2、仅内容变化，表现为 chrome 行为（无论是否贴底）
      **/
     // requestAnimationFrame(() => {
+    if (scrolling.current) return;
     const targetScroll = lockedScrollBottomPos.current - dom!.scrollHeight;
     dom!.scrollTop = targetScroll;
     // 赋值 scrollTop 会立即触发 onScroll
