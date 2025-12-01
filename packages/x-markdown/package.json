@@ -12,6 +12,7 @@
     "predist": "npm run prestart",
     "test": "jest --config .jest.js --no-cache --collect-coverage",
     "coverage": "jest --config .jest.js --no-cache --collect-coverage --coverage",
+    "plugin:meta": "tsx scripts/generate-plugin-meta.ts  && npm run plugin:meta",
     "prestart": "npm run version",
     "precompile": "npm run prestart",
     "version": "tsx scripts/generate-version.ts",
