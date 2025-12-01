@@ -1,6 +1,6 @@
-import type { xLocale, xMarkdownLocale } from '.';
+import type { xLocale } from '.';
 
-const localeValues: Required<xLocale & xMarkdownLocale> = {
+const localeValues: Required<xLocale> = {
   locale: 'en',
   Conversations: {
     create: 'New chat',
@@ -22,18 +22,12 @@ const localeValues: Required<xLocale & xMarkdownLocale> = {
     editableCancel: 'Cancel',
   },
   Mermaid: {
-    copySuccess: 'Copied',
-    copy: 'Copy code',
     zoomIn: 'Zoom in',
     zoomOut: 'Zoom out',
     zoomReset: 'Reset',
     download: 'Download',
     code: 'Code',
     image: 'Image',
-  },
-  CodeHighlighter: {
-    copySuccess: 'Copied',
-    copy: 'Copy code',
   },
 };
 

@@ -1,12 +1,9 @@
 import { Actions } from '@ant-design/x';
-import { message } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
-import locale_EN from '../locale/en_US';
-import useLocale from '../locale/useLocale';
 import { useXProviderContext } from '../x-provider';
 import type { CodeHighlighterProps } from './interface';
 import useStyle from './style';
@@ -32,9 +29,6 @@ const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((
     highlightProps,
     ...restProps
   } = props;
-
-  // ============================ locale ============================
-  const [contextLocale] = useLocale('CodeHighlighter', locale_EN.CodeHighlighter);
 
   // ============================ Prefix ============================
   const { getPrefixCls, direction } = useXProviderContext();
@@ -64,23 +58,7 @@ const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((
     ...style,
   };
 
-  // ============================ locale ============================
-  const [messageApi, contextHolder] = message.useMessage();
-
-  const handleCopyCode = async () => {
-    if (!children) return;
-
-    try {
-      await navigator.clipboard.writeText(children.trim());
-      messageApi.open({
-        type: 'success',
-        content: contextLocale.copySuccess,
-      });
-    } catch (error) {
-      console.error('Failed to copy code:', error);
-    }
-  };
-
+  // ============================ render content ============================
   const renderTitle = () => {
     if (header === null) return null;
 
@@ -95,7 +73,6 @@ const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((
         )}
         style={{ ...contextConfig.styles?.header, ...styles.header }}
       >
-        {contextHolder}
         <span
           className={classnames(
             `${prefixCls}-header-title`,

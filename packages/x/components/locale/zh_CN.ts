@@ -1,6 +1,6 @@
-import type { xLocale, xMarkdownLocale } from './index';
+import type { xLocale } from './index';
 
-const localeValues: Required<xLocale & xMarkdownLocale> = {
+const localeValues: Required<xLocale> = {
   locale: 'zh-cn',
   Conversations: {
     create: '新对话',
@@ -22,22 +22,12 @@ const localeValues: Required<xLocale & xMarkdownLocale> = {
     editableCancel: '取消',
   },
   Mermaid: {
-    copySuccess: '复制成功',
-    copy: '复制代码',
     zoomIn: '放大',
     zoomOut: '缩小',
     zoomReset: '重置',
     download: '下载',
     code: '代码',
     image: '图片',
-  },
-  HighlightCode: {
-    copySuccess: '复制成功',
-    copy: '复制代码',
-  },
-  CodeHighlighter: {
-    copySuccess: '复制成功',
-    copy: '复制代码',
   },
 };
 

@@ -261,7 +261,6 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
         : [
             {
               key: 'copy',
-              label: contextLocale.copy,
               actionRender: () => {
                 return <Actions.Copy text={children} />;
               },

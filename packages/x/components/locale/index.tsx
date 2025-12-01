@@ -29,12 +29,7 @@ export interface xLocale {
     editableOk: string;
     editableCancel: string;
   };
-}
-
-export interface xMarkdownLocale {
   Mermaid?: {
-    copySuccess: string;
-    copy: string;
     zoomIn: string;
     zoomOut: string;
     zoomReset: string;
@@ -42,16 +37,9 @@ export interface xMarkdownLocale {
     code: string;
     image: string;
   };
-  HighlightCode?: {
-    copySuccess: string;
-    copy: string;
-  };
-  CodeHighlighter?: {
-    copySuccess: string;
-    copy: string;
-  };
 }
-export type Locale = xLocale & antdLocale & xMarkdownLocale;
+
+export type Locale = xLocale & antdLocale;
 
 export interface LocaleProviderProps {
   locale: Locale;
