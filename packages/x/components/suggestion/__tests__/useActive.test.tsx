@@ -9,7 +9,7 @@ describe('useActive', () => {
       { label: 'Item 2', value: 'item2' },
     ];
 
-    const { result } = renderHook(() => useActive(items, true, false, jest.fn(), jest.fn()));
+    const { result } = renderHook(() => useActive(items, true, false, jest.fn()));
 
     const [activePaths] = result.current;
     expect(activePaths).toEqual(['item1']);
@@ -18,14 +18,14 @@ describe('useActive', () => {
   it('should not initialize activePaths when open is false', () => {
     const items: SuggestionItem[] = [{ label: 'Item 1', value: 'item1' }];
 
-    const { result } = renderHook(() => useActive(items, false, false, jest.fn(), jest.fn()));
+    const { result } = renderHook(() => useActive(items, false, false, jest.fn()));
 
     const [activePaths] = result.current;
     expect(activePaths).toEqual([]);
   });
 
   it('should not initialize activePaths when items is empty array', () => {
-    const { result } = renderHook(() => useActive([], true, false, jest.fn(), jest.fn()));
+    const { result } = renderHook(() => useActive([], true, false, jest.fn()));
 
     const [activePaths] = result.current;
     expect(activePaths).toEqual([]);
@@ -33,16 +33,14 @@ describe('useActive', () => {
 
   it('should not initialize activePaths when items is not a valid array', () => {
     // Test with null
-    const { result: result1 } = renderHook(() =>
-      useActive(null as any, true, false, jest.fn(), jest.fn()),
-    );
+    const { result: result1 } = renderHook(() => useActive(null as any, true, false, jest.fn()));
 
     const [activePaths1] = result1.current;
     expect(activePaths1).toEqual([]);
 
     // Test with undefined
     const { result: result2 } = renderHook(() =>
-      useActive(undefined as any, true, false, jest.fn(), jest.fn()),
+      useActive(undefined as any, true, false, jest.fn()),
     );
 
     const [activePaths2] = result2.current;
@@ -50,7 +48,7 @@ describe('useActive', () => {
 
     // Test with non-array value
     const { result: result3 } = renderHook(() =>
-      useActive('not-an-array' as any, true, false, jest.fn(), jest.fn()),
+      useActive('not-an-array' as any, true, false, jest.fn()),
     );
 
     const [activePaths3] = result3.current;
