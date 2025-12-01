@@ -31,7 +31,7 @@ export default function useSpeech(
   const [permissionState, setPermissionState] = React.useState<PermissionState | null>(null);
 
   React.useEffect(() => {
-    if (!speechInControlled && typeof navigator !== 'undefined' && 'permissions' in navigator) {
+    if (!speechInControlled && 'permissions' in navigator) {
       let lastPermission: PermissionStatus | null = null;
       (navigator as any).permissions
         .query({ name: 'microphone' })
