@@ -84,6 +84,7 @@ describe('useCompatibleScroll', () => {
 
   afterEach(() => {
     document.body.innerHTML = '';
+    jest.restoreAllMocks();
     jest.clearAllMocks();
   });
 
@@ -277,8 +278,7 @@ describe('useCompatibleScroll', () => {
       renderHook(() => useCompatibleScroll(mockDom));
 
       // Set up a timeout to simulate existing scrolling.current
-      const mockClearTimeout = jest.fn();
-      global.clearTimeout = mockClearTimeout;
+      const mockClearTimeout = jest.spyOn(global, 'clearTimeout');
 
       // Mock scrolling.current to be defined
       act(() => {
