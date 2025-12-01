@@ -3,7 +3,7 @@ import type { BubbleItemType, BubbleListProps } from '@ant-design/x';
 import { Actions, Bubble } from '@ant-design/x';
 import type { GetRef } from 'antd';
 import { Avatar, Button, Flex } from 'antd';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 const actionItems = [
   {
@@ -67,6 +67,8 @@ const App = () => {
 
   const timer = useRef<any>(null);
 
+  useEffect(() => () => clearInterval(timer.current), []);
+
   const memoRole: BubbleListProps['role'] = React.useMemo(
     () => ({
       ai: {
@@ -91,6 +93,7 @@ const App = () => {
         <Button
           type="primary"
           onClick={() => {
+            clearInterval(timer.current);
             timer.current = setInterval(() => {
               set((items) => {
                 const chatItems = items.filter(

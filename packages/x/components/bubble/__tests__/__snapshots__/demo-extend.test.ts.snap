@@ -1686,6 +1686,9 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
       class="ant-bubble-list-scroll-box ant-bubble-list-autoscroll"
     >
       <div
+        style="bottom: 0px; flex-shrink: 0; pointer-events: none; height: 10px; visibility: hidden;"
+      />
+      <div
         class="ant-bubble css-var-_r_f_ ant-bubble-start ant-bubble-loading"
       >
         <div
@@ -2794,6 +2797,9 @@ exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly
     <div
       class="ant-bubble-list-scroll-box ant-bubble-list-autoscroll"
     >
+      <div
+        style="bottom: 0px; flex-shrink: 0; pointer-events: none; height: 10px; visibility: hidden;"
+      />
       <div
         class="ant-bubble css-var-_r_s_ ant-bubble-end"
       >

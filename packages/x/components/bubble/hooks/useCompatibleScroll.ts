@@ -1,35 +1,19 @@
 import { useCallback, useEffect, useRef } from 'react';
 
-export function isSafari() {
-  const ua = navigator.userAgent;
-  return (
-    /Safari/.test(ua) &&
-    !/Chrome/.test(ua) &&
-    !/Edge/.test(ua) &&
-    !/Edg/.test(ua) &&
-    !/Opera/.test(ua)
-  );
-}
-
 /**
  * Safari 兼容的倒序滚动视窗锁定
  * @param {HTMLElement} dom - 倒序滚动容器元素（flex-direction: column-reverse）
  */
-export function useCompatibleScroll(
-  dom?: HTMLElement | null,
-  options?: {
-    onlySafari?: boolean;
-  },
-) {
-  const { onlySafari = true } = options || {};
+export function useCompatibleScroll(dom?: HTMLElement | null) {
   // 底部哨兵
   const sentinelRef = useRef<HTMLElement>(null);
   const isAtBottom = useRef(true);
   const shouldLock = useRef(false);
   const lockedScrollBottomPos = useRef(0);
+  const scrolling = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const callOnScrollNotNative = useRef(false);
 
-  const disable =
-    !dom || getComputedStyle(dom).flexDirection !== 'column-reverse' || (onlySafari && !isSafari());
+  const disable = !dom || getComputedStyle(dom).flexDirection !== 'column-reverse';
 
   // 初始化哨兵元素
   useEffect(() => {
@@ -71,6 +55,11 @@ export function useCompatibleScroll(
     return () => {
       intersectionObserver.disconnect();
       mutationObserver.disconnect();
+      clearTimeout(scrolling.current);
+      if (sentinelRef.current && sentinelRef.current.parentNode) {
+        sentinelRef.current.parentNode.removeChild(sentinelRef.current);
+        sentinelRef.current = null;
+      }
     };
   }, [dom, disable]);
 
@@ -78,7 +67,19 @@ export function useCompatibleScroll(
     const { scrollTop, scrollHeight } = dom!;
     // 倒序， top 在变化，但 bottom 固定
     lockedScrollBottomPos.current = scrollHeight + scrollTop;
-  }, [disable]);
+    // 检测并恢复自然触发状态
+    if (callOnScrollNotNative.current) {
+      callOnScrollNotNative.current = false;
+      return;
+    }
+    if (scrolling.current) {
+      clearTimeout(scrolling.current);
+    }
+    scrolling.current = setTimeout(() => {
+      clearTimeout(scrolling.current);
+      scrolling.current = undefined;
+    }, 50);
+  }, [dom]);
 
   useEffect(() => {
     if (!disable) {
@@ -90,15 +91,21 @@ export function useCompatibleScroll(
   // 强制锁定滚动位置
   const enforceScrollLock = useCallback(() => {
     const targetScroll = lockedScrollBottomPos.current - dom!.scrollHeight;
-
-    // why: 同步设置 dom.scrollTop 会意外得到不符合 targetScroll - dom.scrollHeight 预期的值，导致视窗贴顶
-    // dom.scrollTop = targetScroll - dom.scrollHeight;
-
-    // TODO: 同时在滚动的话，存在较为明显的微小抖动
-    requestAnimationFrame(() => {
-      if (!dom) return;
-      dom.scrollTop = targetScroll;
-    });
+    /**
+     * 同时发生滚动+内容变化，有两种可选行为：
+     * 1、强制锁定视窗，可视内容不变，但会造成滚动抖动。
+     * 2、不锁定视窗，内容会变化（safari行为）。
+     * 出于鲁棒性考虑，选择行为2，在滚动结束后再锁视窗
+     * 最终效果：
+     * 1、滚动+内容变化同时发生，表现为 safari 行为
+     * 2、仅内容变化，表现为 chrome 行为（无论是否贴底）
+     **/
+    // requestAnimationFrame(() => {
+    if (!dom || scrolling.current) return;
+    dom.scrollTop = targetScroll;
+    // 赋值 scrollTop 会立即触发 onScroll
+    callOnScrollNotNative.current = true;
+    // });
   }, [dom]);
 
   const resetToBottom = useCallback(() => {
