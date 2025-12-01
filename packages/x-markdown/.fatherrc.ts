@@ -46,15 +46,6 @@ export default defineConfig({
           filename: 'x-markdown',
         },
       },
-      'src/plugins/HighlightCode/index.tsx': {
-        name: 'HighlightCode',
-        sourcemap: true,
-        generateUnminified: true,
-        output: {
-          path: 'dist/plugins',
-          filename: 'code-high-light',
-        },
-      },
       'src/plugins/Latex/index.ts': {
         name: 'Latex',
         sourcemap: true,
@@ -62,15 +53,6 @@ export default defineConfig({
         output: {
           path: 'dist/plugins',
           filename: 'latex',
-        },
-      },
-      'src/plugins/Mermaid/index.tsx': {
-        name: 'Mermaid',
-        sourcemap: true,
-        generateUnminified: true,
-        output: {
-          path: 'dist/plugins',
-          filename: 'mermaid',
         },
       },
     },
@@ -89,17 +71,7 @@ export default defineConfig({
         commonjs: 'react-dom',
         commonjs2: 'react-dom',
       },
-      '@ant-design/cssinjs': {
-        root: 'antdCssinjs',
-        commonjs: 'antdCssinjs',
-        commonjs2: 'antdCssinjs',
-      },
     },
-    // externals: {
-    //   react: 'React',
-    //   'react-dom': 'ReactDOM',
-    //   '@ant-design/cssinjs': 'antdCssinjs',
-    // },
     transformRuntime: {
       absoluteRuntime: process.cwd(),
     },
