@@ -2147,7 +2147,7 @@ exports[`renders components/sender/demo/paste-image.tsx extend context correctly
                 style="display: none;"
               >
                 <span
-                  class="ant-upload-wrapper css-var-_r_1u_"
+                  class="ant-upload-wrapper css-var-_r_23_"
                 >
                   <div
                     class="ant-upload ant-upload-select"
@@ -2162,7 +2162,7 @@ exports[`renders components/sender/demo/paste-image.tsx extend context correctly
                         type="file"
                       />
                       <button
-                        class="ant-btn css-var-_r_1u_ ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
+                        class="ant-btn css-var-_r_23_ ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
                         type="button"
                       >
                         <span
@@ -3292,7 +3292,7 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx extend context 
   class="ant-flex css-var-_r_f_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-suggestion ant-suggestion-wrapper css-var-_r_f_"
+    class="ant-suggestion ant-suggestion-content css-var-_r_f_"
   >
     <div
       class="ant-sender css-var-_r_f_"
