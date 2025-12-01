@@ -139,7 +139,7 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
 
   const bubblesRef = React.useRef<BubblesRecord>({});
 
-  const { resetToBottom } = useCompatibleScroll(autoScroll ? scrollBoxRef.current : null);
+  const { reset } = useCompatibleScroll(autoScroll ? scrollBoxRef.current : null);
 
   // ============================ Prefix ============================
   const { getPrefixCls } = useXProviderContext();
@@ -168,9 +168,9 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   const lastItemKey = items[items.length - 1]?.key || items.length;
   React.useEffect(() => {
     if (!scrollBoxRef.current) return;
-    resetToBottom();
+    reset();
     scrollBoxRef.current?.scrollTo({ top: autoScroll ? 0 : scrollBoxRef.current.scrollHeight });
-  }, [lastItemKey, autoScroll, resetToBottom]);
+  }, [lastItemKey, autoScroll, reset]);
 
   // ============================= Refs =============================
   useProxyImperativeHandle(ref, () => {

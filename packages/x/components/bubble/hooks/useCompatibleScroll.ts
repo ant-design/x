@@ -108,7 +108,7 @@ export function useCompatibleScroll(dom?: HTMLElement | null) {
     // });
   }, [dom]);
 
-  const resetToBottom = useCallback(() => {
+  const reset = useCallback(() => {
     if (disable) return;
     isAtBottom.current = true;
     shouldLock.current = false;
@@ -116,6 +116,6 @@ export function useCompatibleScroll(dom?: HTMLElement | null) {
   }, [dom, disable]);
 
   return {
-    resetToBottom,
+    reset,
   };
 }
