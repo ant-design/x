@@ -21,7 +21,6 @@ import { MappingAlgorithm } from '../theme/interface';
 import type { ThinkProps } from '../think';
 import type { ThoughtChainProps } from '../thought-chain';
 import type { WelcomeProps } from '../welcome';
-import { MarkdownComponentsConfig as XMarkdownComponentsConfig } from './XMarkdownComponents';
 
 interface BaseComponentConfig {
   style: React.CSSProperties;
@@ -63,7 +62,6 @@ type ComponentsConfig = {
 
 export interface XProviderProps
   extends XComponentsConfig,
-    XMarkdownComponentsConfig,
     Omit<AntdConfigProviderProps, 'theme' | 'locale'> {
   theme?: Omit<ThemeConfig, 'components'> & {
     components?: ThemeConfig['components'] & ComponentsConfig;

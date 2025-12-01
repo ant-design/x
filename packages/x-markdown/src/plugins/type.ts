@@ -6,8 +6,6 @@ export type LatexOption = {
   replaceAlignStart?: boolean;
 };
 
-export type MarkdownComponentsConfig = {};
-
 export type PluginsType = {
   /**
    * @desc 渲染数学公式Latex语法。
