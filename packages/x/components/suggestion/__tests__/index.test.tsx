@@ -23,7 +23,7 @@ describe('Suggestion Component', () => {
         <input
           onKeyDown={(e) => {
             if (e.key === '/') {
-              onTrigger();
+              onTrigger(e.key);
             } else if (e.key === 'Delete') {
               onTrigger(false);
             }
@@ -35,24 +35,18 @@ describe('Suggestion Component', () => {
   );
 
   it('should display Suggestion when trigger character is typed', () => {
+    const onSelect = jest.fn();
+
     const items = [
       { label: 'Suggestion 1', value: 'suggestion1' },
       { label: 'Suggestion 2', value: 'suggestion2' },
     ];
-    const { container } = render(<MockSuggestion items={items} />);
+    const { container } = render(<MockSuggestion items={items} onSelect={onSelect} />);
 
     fireEvent.keyDown(container.querySelector('input')!, { key: '/' });
 
     expect(screen.getByText('Suggestion 1')).toBeInTheDocument();
     expect(screen.getByText('Suggestion 2')).toBeInTheDocument();
-  });
-
-  it('trigger onSelect', () => {
-    const onSelect = jest.fn();
-    const items = [{ label: 'Suggestion 1', value: 'suggestion1' }];
-    const { container } = render(<MockSuggestion items={items} onSelect={onSelect} />);
-
-    fireEvent.keyDown(container.querySelector('input')!, { key: '/' });
 
     const suggestionItem = screen.getByText('Suggestion 1');
     fireEvent.click(suggestionItem);
@@ -60,6 +54,17 @@ describe('Suggestion Component', () => {
     expect(onSelect).toHaveBeenCalledWith('suggestion1', [
       { label: 'Suggestion 1', value: 'suggestion1' },
     ]);
+  });
+
+  it('trigger onSelect', async () => {
+    const onSelect = jest.fn();
+    const onOpenChange = jest.fn();
+    const items = (key: string) => [{ label: `Suggestion ${key}`, value: `suggestion${key}` }];
+    const { container } = render(
+      <MockSuggestion items={items} onSelect={onSelect} onOpenChange={onOpenChange} />,
+    );
+    fireEvent.keyDown(container.querySelector('input')!, { key: '/' });
+    expect(screen.getByText('Suggestion /')).toBeInTheDocument();
   });
 
   it('onTrigger support false to close', () => {
