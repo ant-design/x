@@ -49,7 +49,7 @@ const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((
     prefixCls,
     contextConfig.className,
     className,
-    contextConfig.classNames.root,
+    contextConfig.classNames?.root,
     classNames.root,
     hashId,
     cssVarCls,
@@ -90,19 +90,19 @@ const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((
       <div
         className={classnames(
           `${prefixCls}-header`,
-          contextConfig.classNames.header,
+          contextConfig.classNames?.header,
           classNames.header,
         )}
-        style={{ ...contextConfig.styles.header, ...styles.header }}
+        style={{ ...contextConfig.styles?.header, ...styles.header }}
       >
         {contextHolder}
         <span
           className={classnames(
             `${prefixCls}-header-title`,
             classNames.headerTitle,
-            contextConfig.classNames.headerTitle,
+            contextConfig.classNames?.headerTitle,
           )}
-          style={{ ...contextConfig.styles.headerTitle, ...styles.headerTitle }}
+          style={{ ...contextConfig.styles?.headerTitle, ...styles.headerTitle }}
         >
           {lang}
         </span>
