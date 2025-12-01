@@ -26,10 +26,10 @@ demo:
 ## 列表演示
 
 <!-- prettier-ignore -->
-<!-- <code src="./demo/list.tsx">气泡列表</code> 
+<code src="./demo/list.tsx">气泡列表</code> 
 <code src="./demo/list-scroll.tsx">滚动条控制</code>
 <code src="./demo/semantic-list-custom.tsx">语义化自定义</code>
-<code src="./demo/list-extra.tsx">列表扩展参数</code> -->
+<code src="./demo/list-extra.tsx">列表扩展参数</code>
 
 ## API
 
