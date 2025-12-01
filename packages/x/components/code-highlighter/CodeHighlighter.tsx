@@ -106,7 +106,7 @@ const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((
         >
           {lang}
         </span>
-        <Actions.Copy text={contextLocale.copy} onClick={handleCopyCode} />
+        <Actions.Copy text={children} />
       </div>
     );
   };

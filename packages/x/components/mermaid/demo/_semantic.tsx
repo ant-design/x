@@ -18,8 +18,7 @@ const locales = {
   },
 };
 
-const content = `
-graph TD
+const content = `graph TD
     A[Start] --> B{Data Valid?}
     B -->|Yes| C[Process Data]
     B -->|No| D[Error Handling]
