@@ -1,27 +1,22 @@
 import type { CascaderProps } from 'antd';
-import { Cascader, Flex, version } from 'antd';
+import { Cascader, Flex } from 'antd';
 import classnames from 'classnames';
 import { useEvent, useMergedState } from 'rc-util';
 import React, { useState } from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
+import { AnyObject } from '../_util/type';
 import { useXProviderContext } from '../x-provider';
 import useStyle from './style';
 import useActive from './useActive';
 
-const antdVersionCells = version.split('.').map(Number);
-const isNewAPI =
-  antdVersionCells[0] > 5 || (antdVersionCells[0] === 5 && antdVersionCells[1] >= 25);
-
-export type SuggestionItem = {
+type SemanticType = 'root' | 'content' | 'popup';
+export interface SuggestionItem extends AnyObject {
   label: React.ReactNode;
   value: string;
-
   icon?: React.ReactNode;
-
   children?: SuggestionItem[];
-
   extra?: React.ReactNode;
-};
+}
 
 export interface RenderChildrenProps<T> {
   onTrigger: (info?: T | false) => void;
@@ -46,6 +41,8 @@ export interface SuggestionProps<T = any>
     | 'open'
     | 'rootClassName'
     | 'placement'
+    | 'styles'
+    | 'classNames'
   > {
   prefixCls?: string;
   className?: string;
@@ -55,10 +52,10 @@ export interface SuggestionProps<T = any>
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   items: SuggestionItem[] | ((info?: T) => SuggestionItem[]);
-  onSelect?: (value: string) => void;
+  onSelect?: (value: string, info: SuggestionItem[]) => void;
   block?: boolean;
-  styles?: Partial<Record<string, React.CSSProperties>>;
-  classNames?: Partial<Record<string, string>>;
+  styles?: Partial<Record<SemanticType, React.CSSProperties>>;
+  classNames?: Partial<Record<SemanticType, string>>;
 }
 
 function Suggestion<T = any>(props: SuggestionProps<T>) {
@@ -66,6 +63,8 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
     prefixCls: customizePrefixCls,
     className,
     rootClassName,
+    classNames = {},
+    styles = {},
     style,
     children,
     open,
@@ -130,15 +129,15 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
     );
   };
 
-  const onInternalChange = (valuePath: string[]) => {
+  const onInternalChange = (valuePath: string[], selectedOptions: SuggestionItem[]) => {
     if (onSelect) {
-      onSelect(valuePath[valuePath.length - 1]);
+      onSelect(valuePath[valuePath.length - 1], selectedOptions);
     }
     triggerOpen(false);
   };
 
   // ============================= a11y =============================
-  const [activePath, onKeyDown] = useActive(itemList, mergedOpen, isRTL, onInternalChange, onClose);
+  const [activePath, onKeyDown] = useActive(itemList, mergedOpen, isRTL, onClose);
 
   // =========================== Children ===========================
   const childNode = children?.({ onTrigger, onKeyDown });
@@ -156,11 +155,8 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
   > = {};
 
   /* istanbul ignore else */
-  if (isNewAPI) {
-    compatibleProps.onOpenChange = onInternalOpenChange;
-  } else {
-    compatibleProps.onDropdownVisibleChange = onInternalOpenChange;
-  }
+
+  compatibleProps.onOpenChange = onInternalOpenChange;
 
   return (
     <Cascader
@@ -172,25 +168,37 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
       placement={isRTL ? 'topRight' : 'topLeft'}
       {...compatibleProps}
       optionRender={optionRender}
-      rootClassName={classnames(rootClassName, prefixCls, hashId, cssVarCls, {
+      rootClassName={classnames(rootClassName, classNames.root, prefixCls, hashId, cssVarCls, {
         [`${prefixCls}-block`]: block,
       })}
+      classNames={{
+        root: classNames.root,
+        popup: {
+          root: classNames.popup,
+        },
+      }}
+      styles={{
+        popup: {
+          root: styles.popup,
+        },
+      }}
+      style={{ ...contextConfig.style, ...styles.root, ...style }}
       onChange={onInternalChange}
       popupMatchSelectWidth={block}
     >
       <div
         className={classnames(
           prefixCls,
-          contextConfig.className,
           rootClassName,
-          className,
-          `${prefixCls}-wrapper`,
+          contextConfig.classNames.content,
+          classNames.content,
+          `${prefixCls}-content`,
           hashId,
           cssVarCls,
         )}
         style={{
-          ...contextConfig.style,
-          ...style,
+          ...contextConfig.styles.content,
+          ...styles.content,
         }}
       >
         {childNode}

@@ -4,7 +4,7 @@ import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
 import Suggestion, { type SuggestionProps } from '../index';
 
-describe('Sender Component', () => {
+describe('Suggestion Component', () => {
   mountTest(() => <Suggestion items={[]} />);
 
   rtlTest(() => <Suggestion items={[]} />);
@@ -57,7 +57,9 @@ describe('Sender Component', () => {
     const suggestionItem = screen.getByText('Suggestion 1');
     fireEvent.click(suggestionItem);
 
-    expect(onSelect).toHaveBeenCalledWith('suggestion1');
+    expect(onSelect).toHaveBeenCalledWith('suggestion1', [
+      { label: 'Suggestion 1', value: 'suggestion1' },
+    ]);
   });
 
   it('onTrigger support false to close', () => {
@@ -100,12 +102,13 @@ describe('Sender Component', () => {
       const { container } = render(<MockSuggestion items={items} onSelect={onSelect} />);
 
       fireEvent.keyDown(container.querySelector('input')!, { key: '/' });
-
       fireEvent.keyDown(container.querySelector('input')!, { key: 'ArrowDown' });
       fireEvent.keyDown(container.querySelector('input')!, { key: 'ArrowRight' });
-      fireEvent.keyDown(container.querySelector('input')!, { key: 'Enter' });
-
-      expect(onSelect).toHaveBeenCalledWith('suggestion3');
+      expect(
+        document.querySelector(
+          '.ant-cascader-menu-item-active:not(.ant-cascader-menu-item-expand)',
+        )!.textContent,
+      ).toBe('Suggestion 3');
     });
 
     it('cancel', () => {

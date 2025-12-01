@@ -24,7 +24,9 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cahuSJ4VxvoAAA
 
 Common props ref：[Common props](/docs/react/common-props)
 
-### suggestionProps
+For more configuration, please check [CascaderProps](https://ant.design/components/cascader#api)
+
+### SuggestionsProps
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
@@ -33,8 +35,9 @@ Common props ref：[Common props](/docs/react/common-props)
 | items | Suggestion list | SuggestionItem[] \| ((info: T) => SuggestionItem[]) | - | - |
 | open | Controlled open panel | boolean | - | - |
 | rootClassName | Root element class name | string | - | - |
-| onSelect | Callback when the suggestion item is selected | (value: string) => void | - | - |
+| onSelect | Callback when the suggestion item is selected | (value: string, info: SuggestionItem[]) => void; | - | - |
 | onOpenChange | Callback when the panel open state changes | (open: boolean) => void | - | - |
+| getPopupContainer | The parent node of the menu. Default is to render to body. If you encounter menu scrolling positioning issues, try modifying it to the scrolling area and positioning relative to it | (triggerNode: HTMLElement) => HTMLElement | () => document.body | - |
 
 #### onTrigger
 
@@ -54,6 +57,10 @@ Suggestion accepts generics to customize the parameter type passed to `items` re
 | label    | Content to display for the suggestion | ReactNode        | -       | -       |
 | value    | Value of the suggestion item          | string           | -       | -       |
 
+## Semantic DOM
+
+<code src="./demo/_semantic.tsx" simplify="true"></code>
+
 ## Theme Variables (Design Token)
 
-<ComponentTokenTable component="suggestion"></ComponentTokenTable>
+<ComponentTokenTable component="Suggestion"></ComponentTokenTable>

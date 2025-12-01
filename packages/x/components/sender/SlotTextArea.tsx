@@ -350,9 +350,9 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const onInternalKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     const canSubmit = e.key === 'Enter';
     // 如果键盘被锁定或者正在组合输入，则跳过处理
+    const eventRes = onKeyDown?.(e);
 
-    if (keyLockRef.current || isCompositionRef.current || !canSubmit) {
-      onKeyDown?.(e as unknown as React.KeyboardEvent<HTMLTextAreaElement>);
+    if (keyLockRef.current || isCompositionRef.current || !canSubmit || eventRes === false) {
       return;
     }
 
@@ -377,7 +377,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         }
         break;
     }
-    onKeyDown?.(e as unknown as React.KeyboardEvent<HTMLTextAreaElement>);
   };
 
   const onInternalKeyUp = (e: React.KeyboardEvent<HTMLDivElement>) => {
