@@ -13,10 +13,9 @@ import {
   PromptsProps,
   Sender,
   type SenderProps,
-  Suggestion,
   XProvider,
 } from '@ant-design/x';
-import { Card, ColorPicker, Divider, Flex, message, Slider, Space, Typography } from 'antd';
+import { Card, ColorPicker, Divider, Flex, message, Space, Typography } from 'antd';
 import React from 'react';
 
 type ThemeData = {
