@@ -339,7 +339,7 @@ describe('useCompatibleScroll', () => {
           }) as any,
       );
 
-      const { result } = renderHook(() => useCompatibleScroll(mockDom));
+      renderHook(() => useCompatibleScroll(mockDom));
 
       // Set up initial state
       act(() => {
@@ -420,7 +420,7 @@ describe('useCompatibleScroll', () => {
           }) as any,
       );
 
-      const { result, unmount } = renderHook(() => useCompatibleScroll(testDom));
+      const { unmount } = renderHook(() => useCompatibleScroll(testDom));
 
       // Set up initial state
       act(() => {

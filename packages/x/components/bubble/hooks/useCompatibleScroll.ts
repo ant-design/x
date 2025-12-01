@@ -90,7 +90,6 @@ export function useCompatibleScroll(dom?: HTMLElement | null) {
 
   // 强制锁定滚动位置
   const enforceScrollLock = useCallback(() => {
-    const targetScroll = lockedScrollBottomPos.current - dom!.scrollHeight;
     /**
      * 同时发生滚动+内容变化，有两种可选行为：
      * 1、强制锁定视窗，可视内容不变，但会造成滚动抖动。
@@ -101,8 +100,8 @@ export function useCompatibleScroll(dom?: HTMLElement | null) {
      * 2、仅内容变化，表现为 chrome 行为（无论是否贴底）
      **/
     // requestAnimationFrame(() => {
-    if (!dom || scrolling.current) return;
-    dom.scrollTop = targetScroll;
+    const targetScroll = lockedScrollBottomPos.current - dom!.scrollHeight;
+    dom!.scrollTop = targetScroll;
     // 赋值 scrollTop 会立即触发 onScroll
     callOnScrollNotNative.current = true;
     // });
