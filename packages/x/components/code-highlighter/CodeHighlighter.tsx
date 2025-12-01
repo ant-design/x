@@ -1,9 +1,9 @@
-import { Actions } from '@ant-design/x';
 import classnames from 'classnames';
 import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
+import Actions from '../actions';
 import { useXProviderContext } from '../x-provider';
 import type { CodeHighlighterProps } from './interface';
 import useStyle from './style';

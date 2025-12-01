@@ -1,6 +1,4 @@
 import { DownloadOutlined, ZoomInOutlined, ZoomOutOutlined } from '@ant-design/icons';
-import { Actions } from '@ant-design/x';
-import type { ItemType } from '@ant-design/x/es/actions/interface';
 import { Button, Segmented, Tooltip } from 'antd';
 import classnames from 'classnames';
 import throttle from 'lodash.throttle';
@@ -8,6 +6,8 @@ import mermaid from 'mermaid';
 import React, { useEffect, useRef, useState } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
+import Actions from '../actions';
+import type { ItemType } from '../actions/interface';
 import locale_EN from '../locale/en_US';
 import useLocale from '../locale/useLocale';
 import { useXProviderContext } from '../x-provider';
