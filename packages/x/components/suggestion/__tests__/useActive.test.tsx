@@ -65,7 +65,7 @@ describe('useActive', () => {
       const { result } = renderHook(() => useActive(items, true, false, jest.fn()));
 
       // 通过内部实现测试 getItems 方法
-      const [activePaths, onKeyDown] = result.current;
+      const [activePaths] = result.current;
       expect(activePaths).toEqual(['item1']);
     });
 
