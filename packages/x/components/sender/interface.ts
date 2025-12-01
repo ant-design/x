@@ -63,6 +63,7 @@ interface SlotConfigSelectType extends SlotConfigBaseType {
 interface SlotConfigTagType extends SlotConfigBaseType {
   type: 'tag';
   key: string;
+  allowClose?: boolean;
   props?: {
     label: React.ReactNode;
     value?: string;
@@ -97,8 +98,10 @@ export type SlotConfigType =
 export type EventType =
   | React.FormEvent<HTMLTextAreaElement>
   | React.ChangeEvent<HTMLTextAreaElement>;
-export interface SenderProps
-  extends Pick<TextareaProps, 'placeholder' | 'onKeyUp' | 'onFocus' | 'onBlur'> {
+export interface SenderProps extends Pick<
+  TextareaProps,
+  'placeholder' | 'onKeyUp' | 'onFocus' | 'onBlur'
+> {
   prefixCls?: string;
   defaultValue?: string;
   value?: string;

@@ -36,6 +36,14 @@ const AgentInfo: {
         },
       },
       { type: 'text', value: ' and summarize it into a list.' },
+      {
+        type: 'tag',
+        key: 'tag_type',
+        props: {
+          value: 'tag1',
+          label: 'tag 1',
+        },
+      },
     ],
   },
   ai_code: {
@@ -52,6 +60,15 @@ const AgentInfo: {
         },
       },
       { type: 'text', value: ' to write a mini game.' },
+      {
+        type: 'tag',
+        key: 'tag_type',
+        allowClose: true,
+        props: {
+          value: 'tag2',
+          label: 'tag 2',
+        },
+      },
     ],
   },
   ai_writing: {
