@@ -13,7 +13,7 @@ const Demo: React.FC = () => {
       items={(info) => [{ label: `Trigger by '${info}'`, value: String(info) }]}
       onSelect={() => {
         uuid += 1;
-        setTags([...tags, `Cell_${value.replaceAll('/', '')}`]);
+        setTags([...tags, `Cell_${value.replace('/g', '')}`]);
         setValue('');
       }}
     >
