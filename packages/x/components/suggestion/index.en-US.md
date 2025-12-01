@@ -35,7 +35,7 @@ For more configuration, please check [CascaderProps](https://ant.design/componen
 | items | Suggestion list | SuggestionItem[] \| ((info: T) => SuggestionItem[]) | - | - |
 | open | Controlled open panel | boolean | - | - |
 | rootClassName | Root element class name | string | - | - |
-| onSelect | Callback when the suggestion item is selected | (value: string, info: SuggestionItem[]) => void; | - | - |
+| onSelect | Callback when the suggestion item is selected | (value: string, selectedOptions: SuggestionItem[]) => void; | - | - |
 | onOpenChange | Callback when the panel open state changes | (open: boolean) => void | - | - |
 | getPopupContainer | The parent node of the menu. Default is to render to body. If you encounter menu scrolling positioning issues, try modifying it to the scrolling area and positioning relative to it | (triggerNode: HTMLElement) => HTMLElement | () => document.body | - |
 

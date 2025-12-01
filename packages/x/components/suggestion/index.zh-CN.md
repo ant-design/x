@@ -36,7 +36,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cahuSJ4VxvoAAA
 | items | 建议项列表 | SuggestionItem[] \| ((info: T) => SuggestionItem[]) | - | - |
 | open | 受控打开面板 | boolean | - | - |
 | rootClassName | 根元素样式类名 | string | - | - |
-| onSelect | 选中建议项回调 | (value: string, info: SuggestionItem[]) => void; | - | - |
+| onSelect | 选中建议项回调 | (value: string, selectedOptions: SuggestionItem[]) => void; | - | - |
 | onOpenChange | 面板打开状态变化回调 | (open: boolean) => void | - | - |
 | getPopupContainer | 菜单渲染父节点。默认渲染到 body 上，如果你遇到菜单滚动定位问题，试试修改为滚动的区域，并相对其定位 | (triggerNode: HTMLElement) => HTMLElement | () => document.body | - |
 
