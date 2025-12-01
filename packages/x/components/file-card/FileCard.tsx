@@ -253,7 +253,6 @@ const FileCard: React.FC<FileCardProps> = (props) => {
   let ContentNode: React.ReactNode = null;
 
   if (fileType === 'image') {
-    const preview = mask ? { mask } : undefined;
     ContentNode = (
       <div
         className={classnames(`${prefixCls}-image`, classNames.file, {
@@ -268,7 +267,6 @@ const FileCard: React.FC<FileCardProps> = (props) => {
             height={styles?.file?.height}
             alt={name}
             src={src}
-            preview={preview}
             {...(imageProps as ImageProps)}
           />
         )}
