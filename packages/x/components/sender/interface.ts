@@ -141,7 +141,7 @@ export interface SenderProps extends Pick<
     skill?: SkillType,
   ) => void;
   onCancel?: VoidFunction;
-  onKeyDown?: React.KeyboardEventHandler<any>;
+  onKeyDown?: (event: React.KeyboardEvent) => void | false;
   onPaste?: React.ClipboardEventHandler<HTMLElement>;
   onPasteFile?: (files: FileList) => void;
   components?: SenderComponents;

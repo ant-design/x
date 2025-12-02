@@ -3302,7 +3302,7 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx extend context 
   class="ant-flex css-var-_r_f_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-suggestion ant-suggestion-wrapper css-var-_r_f_"
+    class="ant-suggestion ant-suggestion-content css-var-_r_f_"
   >
     <div
       class="ant-sender css-var-_r_f_"

@@ -1970,7 +1970,7 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx correctly 1`] =
   class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-suggestion ant-suggestion-wrapper css-var-_R_0_"
+    class="ant-suggestion ant-suggestion-content css-var-_R_0_"
   >
     <div
       class="ant-sender css-var-_R_0_"
