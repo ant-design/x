@@ -133,6 +133,19 @@ export class ChatMessagesStore<T extends { id: number | string }> {
       this.listeners = this.listeners.filter((listener) => listener !== callback);
     };
   };
+
+  /**
+   * Clean up resources (throttle timer) when the store is no longer needed.
+   * Should be called when the component unmounts or the store is disposed.
+   */
+  destroy = () => {
+    if (this.throttleTimer) {
+      clearTimeout(this.throttleTimer);
+      this.throttleTimer = null;
+    }
+    this.pendingEmit = false;
+    this.listeners = [];
+  };
 }
 
 type Getter<T> = () => T;
