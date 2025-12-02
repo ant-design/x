@@ -1,5 +1,5 @@
 import { Welcome } from '@ant-design/x';
-import XMarkdown, { ComponentProps } from '@ant-design/x-markdown';
+import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
 import { Button, Card, Skeleton } from 'antd';
 import React, { useState } from 'react';
 import { useMarkdownTheme } from '../_utils';

@@ -38,7 +38,7 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
   );
 
   // ============================ Streaming ============================
-  const displayContent = useStreaming(content || children || '', streaming);
+  const displayContent = useStreaming(content || children || '', { streaming, components });
 
   // ============================ Render ============================
   const parser = useMemo(
