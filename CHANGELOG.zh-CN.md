@@ -465,7 +465,7 @@ tag: vVERSION
 - 🐛 修复 `Attachment` 组件移除图标的样式问题。[#460](https://github.com/ant-design/x/pull/460) 由 [@Rain120](https://github.com/Rain120) 提交
 - 🛠 重构 `BubbleProps`，支持 `ContentType` 类型参数。[#403](https://github.com/ant-design/x/pull/403) 由 [@YumoImer](https://github.com/YumoImer) 提交
 - 🛠 开发环境和网站支持 React 19。[#432](https://github.com/ant-design/x/pull/432) 由 [@YumoImer](https://github.com/YumoImer) 提交
-- 📖 优化官网站点提升用户体验。[#456](https://github.com/ant-design/x/pull/456), [#446](https://github.com/ant-design/x/pull/446), [#448](https://github.com/ant-design/x/pull/448), [#444](https://github.com/ant-design/x/pull/444), [#414](https://github.com/ant-design/x/pull/414), [#406](https://github.com/ant-design/x/pull/406), [#404](https://github.com/ant-design/x/pull/404) 由 [@wzc520pyfm](https://github.com/wzc520pyfm), [@YumoImer](https://github.com/YumoImer), [@Rain120](https://github.com/Rain120), [@afc163](https://github.com/afc163) 提交
+- 📖 优化官网站点提升用户体验。[#456](https://github.com/ant-design/x/pull/456)， [#446](https://github.com/ant-design/x/pull/446)， [#448](https://github.com/ant-design/x/pull/448)， [#444](https://github.com/ant-design/x/pull/444)， [#414](https://github.com/ant-design/x/pull/414)， [#406](https://github.com/ant-design/x/pull/406)， [#404](https://github.com/ant-design/x/pull/404) 由 [@wzc520pyfm](https://github.com/wzc520pyfm)， [@YumoImer](https://github.com/YumoImer)， [@Rain120](https://github.com/Rain120)， [@afc163](https://github.com/afc163) 提交
 
 ## 1.0.4
 
@@ -509,7 +509,7 @@ tag: vVERSION
 - 🛠 修复使用 `pnpm` 启动项目时幽灵依赖导致无法启动的问题。[#223](https://github.com/ant-design/x/pull/223) 由 [@YumoImer](https://github.com/YumoImer) 提交
 - 🌈 独立式样板间支持附件上传功能演示。[#250](https://github.com/ant-design/x/pull/250)、[#265](https://github.com/ant-design/x/pull/265) 由 [@kelvinelove](https://github.com/kelvinelove) 提交
 - 📖 修复缺失的贡献者信息。[#212](https://github.com/ant-design/x/pull/212) 由 [@afc163](https://github.com/afc163) 提交
-- 📖 优化官网站点提升用户体验。[#277](https://github.com/ant-design/x/pull/277)、[#264](https://github.com/ant-design/x/pull/264)、[#263](https://github.com/ant-design/x/pull/263)、[#262](https://github.com/ant-design/x/pull/262)、[#261](https://github.com/ant-design/x/pull/261)、[#241](https://github.com/ant-design/x/pull/241)、[#246](https://github.com/ant-design/x/pull/246)、[#210](https://github.com/ant-design/x/pull/210)、[#211](https://github.com/ant-design/x/pull/211) 由 [@YumoImer](https://github.com/YumoImer)、[@afc163](https://github.com/afc163)、[@Rain-1214](https://github.com/Rain-1214)、[@kelvinelove](https://github.com/kelvinelove)、[@tabzzz1](https://github.com/tabzzz1) 完成
+- 📖 优化官网站点提升用户体验。[#277](https://github.com/ant-design/x/pull/277)、[#264](https://github.com/ant-design/x/pull/264)、[#263](https://github.com/ant-design/x/pull/263)、[#262](https://github.com/ant-design/x/pull/262)、[#261](https://github.com/ant-design/x/pull/261)、[#241](https://github.com/ant-design/x/pull/241)、[#246](https://github.com/ant-design/x/pull/246)、[#210](https://github.com/ant-design/x/pull/210)、[#211](https://github.com/ant-design/x/pull/211) 由 [@YumoImer](https://github.com/YumoImer)、[@afc163](https://github.com/afc163)、[@Rain-1214](https://github.com/Rain-1214)、[@kelvinelove](https://github.com/kelvinelove)、[@tabzzz1](https://github.com/tabzzz1) 提交
 - 📦 更新浏览器目标减少打包体积。[#234](https://github.com/ant-design/x/pull/234) 由 [@afc163](https://github.com/afc163) 提交
 
 ## 1.0.0
@@ -532,43 +532,43 @@ tag: vVERSION
 
 `2024-11-07`
 
-- 🔥 Sender 支持 `onPasteFile` 事件与 Attachments 支持 `ref.upload` 手动上传文件, 由 [@zombieJ](https://github.com/zombieJ) [#184](https://github.com/ant-design/x/pull/184)
-- 🔥 Sender `allowSpeech` 支持受控使用三方语音 SDK, 由 [@zombieJ](https://github.com/zombieJ) [#187](https://github.com/ant-design/x/pull/187)
+- 🔥 Sender 支持 `onPasteFile` 事件与 Attachments 支持 `ref.upload` 手动上传文件。[#184](https://github.com/ant-design/x/pull/184) 由 [@zombieJ](https://github.com/zombieJ) 提交
+- 🔥 Sender `allowSpeech` 支持受控使用三方语音 SDK。 [#187](https://github.com/ant-design/x/pull/187) 由 [@zombieJ](https://github.com/zombieJ) 提交
 
 ## 1.0.0-alpha.11
 
 `2024-11-06`
 
-- 🔥 新组件 欢迎 - Welcome, 由 [@zombieJ](https://github.com/zombieJ) [#179](https://github.com/ant-design/x/pull/179)
-- 🔥 Prompts 支持嵌套层级展示, 由 [@zombieJ](https://github.com/zombieJ) [#181](https://github.com/ant-design/x/pull/181)
-- 🔥 Attachments 支持 Attachments.FileCard 子组件, 由 [@zombieJ](https://github.com/zombieJ) [#182](https://github.com/ant-design/x/pull/182)
+- 🔥 新组件 欢迎 - Welcome。 [#179](https://github.com/ant-design/x/pull/179) 由 [@zombieJ](https://github.com/zombieJ) 提交
+- 🔥 Prompts 支持嵌套层级展示。[#181](https://github.com/ant-design/x/pull/181)由 [@zombieJ](https://github.com/zombieJ) 提交
+- 🔥 Attachments 支持 Attachments.FileCard 子组件。[#182](https://github.com/ant-design/x/pull/182) 由 [@zombieJ](https://github.com/zombieJ) 提交
 
 ## 1.0.0-alpha.10
 
 `2024-11-04`
 
-- 🐛 修复 Attachments 组件使用拖动上传时无法触发上传请求的问题, by [@YumoImer](https://github.com/YumoImer) [#178](https://github.com/ant-design/x/pull/178)
+- 🐛 修复 Attachments 组件使用拖动上传时无法触发上传请求的问题。[#178](https://github.com/ant-design/x/pull/178) 由 [@YumoImer](https://github.com/YumoImer) 提交
 
 ## 1.0.0-alpha.9
 
 `2024-11-01`
 
-- 🐛 修复 Attachments 组件内的代码逻辑问题, by [@YumoImer](https://github.com/YumoImer) [#174](https://github.com/ant-design/x/pull/174)
-- 🐛 修复 Sender.Header 内不可以聚焦的问题, by [@zombieJ](https://github.com/zombieJ) [#175](https://github.com/ant-design/x/pull/175)
+- 🐛 修复 Attachments 组件内的代码逻辑问题。[#174](https://github.com/ant-design/x/pull/174) 由 [@YumoImer](https://github.com/YumoImer) 提交
+- 🐛 修复 Sender.Header 内不可以聚焦的问题。[#175](https://github.com/ant-design/x/pull/175) 由[@zombieJ](https://github.com/zombieJ) 提交
 
 ## 1.0.0-alpha.7
 
 `2024-10-31`
 
-- 🐛 修复 Attachments 组件第一次上传时无法触发上传请求的问题, 由 [@YumoImer](https://github.com/YumoImer) [#172](https://github.com/ant-design/x/pull/172)
+- 🐛 修复 Attachments 组件第一次上传时无法触发上传请求的问题。 [#172](https://github.com/ant-design/x/pull/172) 由 [@YumoImer](https://github.com/YumoImer) 提交
 
 ## 1.0.0-alpha.6
 
 `2024-10-25`
 
-- 🔥 新组件 附件 - `Attachments`, 由 [@zombieJ](https://github.com/zombieJ) [#168](https://github.com/ant-design/x/pull/168)
-- 🔥 新工具 流 - `XStream`, 由 [@YumoImer](https://github.com/YumoImer) [#138](https://github.com/ant-design/x/pull/138)
-- 🔥 新工具 请求 - `XRequest`, 由 [@YumoImer](https://github.com/YumoImer) [#138](https://github.com/ant-design/x/pull/138)
+- 🔥 新组件 附件 - `Attachments`。[#168](https://github.com/ant-design/x/pull/168) 由 [@zombieJ](https://github.com/zombieJ) [#168](https://github.com/ant-design/x/pull/168) 提交
+- 🔥 新工具 流 - `XStream`。[#138](https://github.com/ant-design/x/pull/138) 由 [@YumoImer](https://github.com/YumoImer) 提交
+- 🔥 新工具 请求 - `XRequest`。[#138](https://github.com/ant-design/x/pull/138) 由 [@YumoImer](https://github.com/YumoImer) 提交
 
 ## 1.0.0-alpha.5
 
@@ -582,12 +582,12 @@ tag: vVERSION
 `2024-10-17`
 
 - Sender
-  - 🆕 Sender 支持 `speech` 语音功能，由 [@zombieJ](https://github.com/zombieJ) [#154](https://github.com/ant-design/x/pull/154)
-  - 🆕 Sender 支持 `Sender.Header`，由 [@zombieJ](https://github.com/zombieJ) [#156](https://github.com/ant-design/x/pull/156)
-  - 🆕 Sender 样式调整，由 [@zombieJ](https://github.com/zombieJ) [#151](https://github.com/ant-design/x/pull/151)
-- 📖 更新文档页面下的组配置，由 [@YumoImer](https://github.com/YumoImer) [#155](https://github.com/ant-design/x/pull/155)
-- 📖 调整示例切换按钮样式，由 [@afc163](https://github.com/afc163) [#146](https://github.com/ant-design/x/pull/146)
-- 📖 更新 README.md，由 [@afc163](https://github.com/afc163) [#142](https://github.com/ant-design/x/pull/142)
+  - 🆕 Sender 支持 `speech` 语音功能。[#154](https://github.com/ant-design/x/pull/154) 由 [@zombieJ](https://github.com/zombieJ) 提交
+  - 🆕 Sender 支持 `Sender.Header`。[#156](https://github.com/ant-design/x/pull/156) 由 [@zombieJ](https://github.com/zombieJ) 提交
+  - 🆕 Sender 样式调整。[#151](https://github.com/ant-design/x/pull/151) 由 [@zombieJ](https://github.com/zombieJ) 提交
+- 📖 更新文档页面下的组配置。[#155](https://github.com/ant-design/x/pull/155) 由 [@YumoImer](https://github.com/YumoImer) 提交
+- 📖 调整示例切换按钮样式。[#146](https://github.com/ant-design/x/pull/146) 由 [@afc163](https://github.com/afc163) 提交
+- 📖 更新 README.md。[#142](https://github.com/ant-design/x/pull/142) 由 [@afc163](https://github.com/afc163) 提交
 
 ## 1.0.0-alpha.3
 
@@ -606,8 +606,8 @@ tag: vVERSION
 - 🔥 新增 运行时钩子 `useXChat` 数据管理，由 [@zombieJ](https://github.com/zombieJ) 完成 [#125](https://github.com/ant-design/x/pull/125)
 - 🔥 新增 运行时钩子 `useXAgent` 模型调度，由 [@zombieJ](https://github.com/zombieJ) 完成 [#125](https://github.com/ant-design/x/pull/125)
 - 🆕 `ThoughtChain` 思维链组件支持 `size` 属性，由 [@YumoImer](https://github.com/YumoImer) 完成 [#123](https://github.com/ant-design/x/pull/123)
-- 🛠 更新 `.lintstagedrc.json`, 由 [@afc163](https://github.com/afc163) 完成 [#128](https://github.com/ant-design/x/pull/128)
-- 🛠 更新依赖 `cheerio` 至 `v1.0.0`, 由 [@afc163](https://github.com/afc163) 完成 [#121](https://github.com/ant-design/x/pull/121)
+- 🛠 更新 `.lintstagedrc.json`。 由 [@afc163](https://github.com/afc163) 完成 [#128](https://github.com/ant-design/x/pull/128)
+- 🛠 更新依赖 `cheerio` 至 `v1.0.0`。 由 [@afc163](https://github.com/afc163) 完成 [#121](https://github.com/ant-design/x/pull/121)
 
 ## 1.0.0-alpha.1
 
