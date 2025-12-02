@@ -1,58 +1,5 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`renders components/bubble/demo/_test.tsx extend context correctly 1`] = `
-<div
-  class="ant-flex css-var-_r_40_ ant-flex-align-stretch ant-flex-vertical"
-  style="height: 320px; gap: 20px;"
->
-  <div
-    class="ant-flex css-var-_r_40_ ant-flex-gap-small"
-  >
-    <button
-      class="ant-btn css-var-_r_40_ ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
-      type="button"
-    >
-      <span>
-        start
-      </span>
-    </button>
-    <button
-      class="ant-btn css-var-_r_40_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
-      type="button"
-    >
-      <span>
-        stop
-      </span>
-    </button>
-    <button
-      class="ant-btn css-var-_r_40_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
-      type="button"
-    >
-      <span>
-        clear
-      </span>
-    </button>
-    <button
-      class="ant-btn css-var-_r_40_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
-      type="button"
-    >
-      <span>
-        autoScroll
-      </span>
-    </button>
-  </div>
-  <div
-    class="ant-bubble-list css-var-_r_40_"
-  >
-    <div
-      class="ant-bubble-list-scroll-box ant-bubble-list-autoscroll"
-    />
-  </div>
-</div>
-`;
-
-exports[`renders components/bubble/demo/_test.tsx extend context correctly 2`] = `[]`;
-
 exports[`renders components/bubble/demo/animation.tsx extend context correctly 1`] = `
 <div
   class="ant-flex css-var-_r_3u_ ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
