@@ -981,6 +981,146 @@ describe('XMarkdown hooks', () => {
     });
   });
 
+  describe('useStreaming cache reset and state management', () => {
+    it('should reset cache when input does not continue from previous state', () => {
+      const { result, rerender } = renderHook(({ input, config }) => useStreaming(input, config), {
+        initialProps: {
+          input: 'Hello world',
+          config: { streaming: { hasNextChunk: true } },
+        },
+      });
+
+      expect(result.current).toBe('Hello world');
+
+      // 输入完全不连续，应该重置缓存
+      act(() => {
+        rerender({
+          input: 'Completely new content',
+          config: { streaming: { hasNextChunk: true } },
+        });
+      });
+      expect(result.current).toBe('Completely new content');
+    });
+
+    it('should maintain cache when input continues from previous state', () => {
+      const { result, rerender } = renderHook(({ input, config }) => useStreaming(input, config), {
+        initialProps: {
+          input: 'Hello',
+          config: { streaming: { hasNextChunk: true } },
+        },
+      });
+
+      expect(result.current).toBe('Hello');
+
+      // 输入是之前内容的延续，应该保持缓存
+      act(() => {
+        rerender({
+          input: 'Hello world',
+          config: { streaming: { hasNextChunk: true } },
+        });
+      });
+      expect(result.current).toBe('Hello world');
+    });
+
+    it('should handle rapid input changes with cache reset', () => {
+      const { result, rerender } = renderHook(({ input, config }) => useStreaming(input, config), {
+        initialProps: {
+          input: 'First content',
+          config: { streaming: { hasNextChunk: true } },
+        },
+      });
+
+      expect(result.current).toBe('First content');
+
+      // 快速切换到不相关的输入
+      act(() => {
+        rerender({
+          input: 'First \n\n content',
+          config: { streaming: { hasNextChunk: true } },
+        });
+      });
+      expect(result.current).toBe('First \n\n content');
+
+      // 再次快速切换
+      act(() => {
+        rerender({
+          input: 'Third completely different',
+          config: { streaming: { hasNextChunk: true } },
+        });
+      });
+      expect(result.current).toBe('Third completely different');
+    });
+
+    it('should handle partial prefix matching edge cases', () => {
+      const { result, rerender } = renderHook(({ input, config }) => useStreaming(input, config), {
+        initialProps: {
+          input: 'Hello',
+          config: { streaming: { hasNextChunk: true } },
+        },
+      });
+
+      expect(result.current).toBe('Hello');
+
+      // 测试部分匹配的情况
+      act(() => {
+        rerender({
+          input: 'Hell', // 比之前的短，应该重置
+          config: { streaming: { hasNextChunk: true } },
+        });
+      });
+      expect(result.current).toBe('Hell');
+    });
+
+    it('should handle empty string transitions correctly', () => {
+      const { result, rerender } = renderHook(({ input, config }) => useStreaming(input, config), {
+        initialProps: {
+          input: 'Some content',
+          config: { streaming: { hasNextChunk: true } },
+        },
+      });
+
+      expect(result.current).toBe('Some content');
+
+      // 切换到空字符串
+      act(() => {
+        rerender({
+          input: '',
+          config: { streaming: { hasNextChunk: true } },
+        });
+      });
+      expect(result.current).toBe('');
+    });
+
+    it('should handle streaming state transitions with incomplete elements', () => {
+      const { result, rerender } = renderHook(({ input, config }) => useStreaming(input, config), {
+        initialProps: {
+          input: 'Start with ',
+          config: { streaming: { hasNextChunk: true } },
+        },
+      });
+
+      expect(result.current).toBe('Start with ');
+
+      // 添加不完整的链接，应该被过滤
+      act(() => {
+        rerender({
+          input: 'Start with [incomplete',
+          config: { streaming: { hasNextChunk: true } },
+        });
+      });
+      expect(result.current).toBe('Start with ');
+
+      // 完全改变输入，应该重置并显示新内容
+      act(() => {
+        rerender({
+          input: 'New content completely',
+          config: { streaming: { hasNextChunk: true } },
+        });
+      });
+      expect(result.current).toBe('New content completely');
+    });
+  });
+
   describe('useStreaming components parameter tests', () => {
     // 使用简单的对象来避免类型检查问题
     const customComponents = {
