@@ -20,7 +20,7 @@ Manage conversation data through Agent and produce data for page rendering.
 <code src="./demos/x-chat/defaultMessages.tsx">Historical Messages Setup</code>
 <code src="./demos/x-chat/developer.tsx">System Prompt Setup</code>
 <code src="./demos/x-chat/custom-request.tsx">Custom Request</code>
-<code src="./demos/x-chat/openai-node.tsx">Custom Request with openai-node</code>
+<code src="./demos/x-chat/openai-node.tsx">openai-node</code>
 
 ## API
 

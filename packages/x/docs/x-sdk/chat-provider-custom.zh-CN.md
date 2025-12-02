@@ -144,7 +144,7 @@ data: "的科技新闻，"
 
 2、那么根据接口可以明确 `CustomInput` 和 `CustomOutput` 类型。
 
-`CustomInput`类型如下
+`CustomInput` 类型如下
 
 ```ts
 {
@@ -152,7 +152,7 @@ data: "的科技新闻，"
 }
 ```
 
-由于输出数据字符串只需要将data字符串转为JSON，然后将内部的data字段拼接，那么 `CustomOutput` 类型如下
+由于输出数据字符串只需要将 data 字符串转为 JSON，然后将内部的 data 字段拼接，那么 `CustomOutput` 类型如下
 
 ```ts
 {
@@ -171,9 +171,9 @@ data: "的科技新闻，"
 
 4、然后继承 `AbstractChatProvider` 并实现其方法，得到 `CustomProvider`，`AbstractChatProvider` 内有且仅有三个方法需要实现。
 
-- `transformParams` 用于转换onRequest传入的参数，你可以和Provider实例化时request配置中的params进行合并或者额外处理。
-- `transformLocalMessage` 将onRequest传入的参数转换为本地（用户发送）的ChatMessage，用于用户发送消息渲染，同时会更新到messages，用于消息列表渲染。
-- `transformMessage` 可在更新返回数据时将数据做转换为ChatMessage数据类型，同时会更新到messages，用于消息列表渲染。
+- `transformParams` 用于转换 onRequest 传入的参数，你可以和 Provider 实例化时 request 配置中的 params 进行合并或者额外处理。
+- `transformLocalMessage` 将 onRequest 传入的参数转换为本地（用户发送）的 ChatMessage，用于用户发送消息渲染，同时会更新到 messages，用于消息列表渲染。
+- `transformMessage` 可在更新返回数据时将数据做转换为 ChatMessage 数据类型，同时会更新到 messages，用于消息列表渲染。
 
 代码可查看 [CustomProvider](/x-sdks/chat-provider-cn#自定义provider示例)
 

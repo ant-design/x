@@ -7,11 +7,11 @@ tag: Updated
 order: 0
 ---
 
-这篇指南将介绍如何在使用 Ant Design X 搭建的应用中接入 OpenAI 提供的模型服务，详情请查看[X SDK](/sdks/introduce-cn)。
+这篇指南将介绍如何在使用 Ant Design X 搭建的应用中接入 OpenAI 提供的模型服务，详情请查看 [X SDK](/sdks/introduce-cn)。
 
 ## 使用 X SDK 接入
 
-使用URL接入模型是 X SDK提供的基础能力，详情请查看[X SDK](/sdks/introduce-cn)。
+使用URL接入模型是 X SDK提供的基础能力，详情请查看 [X SDK](/sdks/introduce-cn)。
 
 ### 示例
 
