@@ -894,6 +894,91 @@ describe('XMarkdown hooks', () => {
       expect(result.current).toBeDefined();
       expect(result.current).toContain('incomplete-link');
     });
+
+    it('should handle lone high surrogate at end of incomplete markdown', () => {
+      const { result } = renderHook(() =>
+        useStreaming('[incomplete link](https://example.com\uD800', {
+          streaming: {
+            hasNextChunk: true,
+            incompleteMarkdownComponentMap: { link: 'incomplete-link' },
+          },
+          components: {
+            'incomplete-link': () => null,
+          },
+        }),
+      );
+
+      expect(result.current).toBeDefined();
+      expect(result.current).toContain('incomplete-link');
+    });
+
+    it('should handle lone low surrogate at end of incomplete markdown', () => {
+      const { result } = renderHook(() =>
+        useStreaming('[incomplete link](https://example.com\uDFFF', {
+          streaming: {
+            hasNextChunk: true,
+            incompleteMarkdownComponentMap: { link: 'incomplete-link' },
+          },
+          components: {
+            'incomplete-link': () => null,
+          },
+        }),
+      );
+
+      expect(result.current).toBeDefined();
+      expect(result.current).toContain('incomplete-link');
+    });
+
+    it('should handle multiple consecutive lone surrogates', () => {
+      const { result } = renderHook(() =>
+        useStreaming('[incomplete link](https://example.com\uD800\uD800\uDFFF\uDFFF', {
+          streaming: {
+            hasNextChunk: true,
+            incompleteMarkdownComponentMap: { link: 'incomplete-link' },
+          },
+          components: {
+            'incomplete-link': () => null,
+          },
+        }),
+      );
+
+      expect(result.current).toBeDefined();
+      expect(result.current).toContain('incomplete-link');
+    });
+
+    it('should handle incomplete markdown with only lone high surrogate', () => {
+      const { result } = renderHook(() =>
+        useStreaming('\uD800', {
+          streaming: {
+            hasNextChunk: true,
+            incompleteMarkdownComponentMap: { link: 'incomplete-link' },
+          },
+          components: {
+            'incomplete-link': () => null,
+          },
+        }),
+      );
+
+      expect(result.current).toBeDefined();
+      expect(typeof result.current).toBe('string');
+    });
+
+    it('should handle incomplete markdown with only lone low surrogate', () => {
+      const { result } = renderHook(() =>
+        useStreaming('\uDFFF', {
+          streaming: {
+            hasNextChunk: true,
+            incompleteMarkdownComponentMap: { link: 'incomplete-link' },
+          },
+          components: {
+            'incomplete-link': () => null,
+          },
+        }),
+      );
+
+      expect(result.current).toBeDefined();
+      expect(typeof result.current).toBe('string');
+    });
   });
 
   describe('useStreaming components parameter tests', () => {
