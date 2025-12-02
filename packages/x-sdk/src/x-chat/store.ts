@@ -24,21 +24,48 @@ export class ChatMessagesStore<T extends { id: number | string }> {
   private listeners: (() => void)[] = [];
   private conversationKey: ConversationKey | undefined;
 
+  // Throttle state for preventing "Maximum update depth exceeded" during streaming
+  private throttleTimer: ReturnType<typeof setTimeout> | null = null;
+  private pendingEmit: boolean = false;
+  private readonly throttleInterval: number = 50;
+
   private emitListeners() {
     this.listeners.forEach((listener) => {
       listener();
     });
   }
 
+  private throttledEmitListeners() {
+    if (!this.throttleTimer) {
+      // Leading edge: execute immediately
+      this.emitListeners();
+      this.pendingEmit = false;
+
+      this.throttleTimer = setTimeout(() => {
+        this.throttleTimer = null;
+        // Trailing edge: flush pending updates
+        if (this.pendingEmit) {
+          this.emitListeners();
+          this.pendingEmit = false;
+        }
+      }, this.throttleInterval);
+    } else {
+      this.pendingEmit = true;
+    }
+  }
+
   constructor(defaultMessages: T[], conversationKey?: ConversationKey) {
-    this.setMessages(defaultMessages);
+    this.setMessagesInternal(defaultMessages, false);
     if (conversationKey) {
       this.conversationKey = conversationKey;
       chatMessagesStoreHelper.set(this.conversationKey, this);
     }
   }
 
-  setMessages = (messages: T[] | ((ori: T[]) => T[])) => {
+  private setMessagesInternal = (
+    messages: T[] | ((ori: T[]) => T[]),
+    throttle: boolean = true,
+  ) => {
     let list: T[];
     if (typeof messages === 'function') {
       list = messages(this.messages);
@@ -46,8 +73,16 @@ export class ChatMessagesStore<T extends { id: number | string }> {
       list = messages as T[];
     }
     this.messages = [...list];
-    this.emitListeners();
+    if (throttle) {
+      this.throttledEmitListeners();
+    } else {
+      this.emitListeners();
+    }
     return true;
+  };
+
+  setMessages = (messages: T[] | ((ori: T[]) => T[])) => {
+    return this.setMessagesInternal(messages, true);
   };
 
   getMessages = () => {
