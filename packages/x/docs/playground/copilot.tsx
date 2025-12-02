@@ -260,8 +260,17 @@ const Copilot = (props: CopilotProps) => {
         role: 'assistant',
       };
     },
-    requestFallback: (_, { messageInfo }) => {
-      return messageInfo?.message;
+    requestFallback: (_, { error, errorInfo, messageInfo }) => {
+      if (error.name === 'AbortError') {
+        return {
+          content: messageInfo?.message?.content || locale.requestAborted,
+          role: 'assistant',
+        };
+      }
+      return {
+        content: errorInfo?.error?.message || locale.requestFailed,
+        role: 'assistant',
+      };
     },
   });
 

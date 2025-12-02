@@ -1,7 +1,7 @@
 ## zh-CN
 
-接入云服务平台，可发送消息、处理数据、终止消息。
+使用 OpenAIChatProvider，接入 OpenAI 数据格式的模型，可发送消息、处理数据、终止消息。
 
 ## en-US
 
-Access to cloud service platform,can send messages, process data, abort stream.
+Use OpenAIChatProvider to integrate models with OpenAI data format, enabling message sending, data processing, and message termination.

@@ -149,10 +149,16 @@ export default () => {
         role: 'assistant',
       };
     },
-    requestFallback: (_, { error }) => {
+    requestFallback: (_, { error, errorInfo, messageInfo }) => {
+      if (error.name === 'AbortError') {
+        return {
+          content: messageInfo?.message?.content || 'Request aborted',
+          role: 'assistant',
+        };
+      }
       return {
+        content: errorInfo?.error?.message || 'Something went wrong',
         role: 'assistant',
-        content: error.message,
       };
     },
   });

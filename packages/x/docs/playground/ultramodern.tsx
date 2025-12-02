@@ -284,10 +284,16 @@ const App = () => {
         role: 'assistant',
       };
     },
-    requestFallback: (_, { messageInfo }) => {
+    requestFallback: (_, { error, errorInfo, messageInfo }) => {
+      if (error.name === 'AbortError') {
+        return {
+          content: messageInfo?.message?.content || locale.requestAborted,
+          role: 'assistant',
+        };
+      }
       return {
-        ...messageInfo?.message,
-        content: messageInfo?.message.content || locale.requestFailedPleaseTryAgain,
+        content: errorInfo?.error?.message || locale.requestFailed,
+        role: 'assistant',
       };
     },
   });

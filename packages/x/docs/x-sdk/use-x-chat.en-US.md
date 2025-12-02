@@ -1,10 +1,9 @@
 ---
 group:
   title: Data Flow
-  order: 2
+  order: 1
 title: useXChat
-order: 2
-subtitle: Conversation Data
+order: 1
 demo:
   cols: 1
 ---

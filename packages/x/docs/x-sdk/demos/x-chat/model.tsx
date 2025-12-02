@@ -5,8 +5,8 @@ import XMarkdown from '@ant-design/x-markdown';
 import {
   OpenAIChatProvider,
   useXChat,
-  XModelParams,
-  XModelResponse,
+  type XModelParams,
+  type XModelResponse,
   XRequest,
 } from '@ant-design/x-sdk';
 import { Button, Flex, Tooltip } from 'antd';
@@ -23,6 +23,34 @@ const BASE_URL = 'https://api.x.ant.design/api/big_model_glm-4.5-flash';
  */
 
 const MODEL = 'THUDM/glm-4-9b-chat';
+
+const useLocale = () => {
+  const isCN = location.pathname.endsWith('-cn');
+  return {
+    abort: isCN ? '中止' : 'abort',
+    addUserMessage: isCN ? '添加用户消息' : 'Add a user message',
+    addAIMessage: isCN ? '添加AI消息' : 'Add an AI message',
+    addSystemMessage: isCN ? '添加系统消息' : 'Add a system message',
+    editLastMessage: isCN ? '编辑最后一条消息' : 'Edit the last message',
+    placeholder: isCN
+      ? '请输入内容，按下 Enter 发送消息'
+      : 'Please enter content and press Enter to send message',
+    waiting: isCN ? '请稍候...' : 'Please wait...',
+    requestFailed: isCN ? '请求失败，请重试！' : 'Request failed, please try again!',
+    requestAborted: isCN ? '请求已中止' : 'Request is aborted',
+    noMessages: isCN
+      ? '暂无消息，请输入问题并发送'
+      : 'No messages yet, please enter a question and send',
+    requesting: isCN ? '请求中' : 'Requesting',
+    qaCompleted: isCN ? '问答完成' : 'Q&A completed',
+    retry: isCN ? '重试' : 'Retry',
+    currentStatus: isCN ? '当前状态：' : 'Current status:',
+    historyUserMessage: isCN ? '这是一条历史消息' : 'This is a historical message',
+    historyAIResponse: isCN
+      ? '这是一条历史回答消息，请发送新消息。'
+      : 'This is a historical response message, please send a new message.',
+  };
+};
 
 const role: BubbleListProps['role'] = {
   assistant: {
@@ -51,24 +79,38 @@ const App = () => {
       }),
     }),
   );
+  const locale = useLocale();
+
   // Chat messages
   const { onRequest, messages, setMessages, setMessage, isRequesting, abort, onReload } = useXChat({
     provider,
-    requestFallback: (_, { error }) => {
+    defaultMessages: [
+      {
+        id: '1',
+        message: { role: 'user', content: locale.historyUserMessage },
+        status: 'success',
+      },
+      {
+        id: '2',
+        message: { role: 'assistant', content: locale.historyAIResponse },
+        status: 'success',
+      },
+    ],
+    requestFallback: (_, { error, errorInfo, messageInfo }) => {
       if (error.name === 'AbortError') {
         return {
-          content: 'Request is aborted',
+          content: messageInfo?.message?.content || locale.requestAborted,
           role: 'assistant',
         };
       }
       return {
-        content: error.message || 'Request failed, please try again!',
+        content: errorInfo?.error?.message || locale.requestFailed,
         role: 'assistant',
       };
     },
     requestPlaceholder: () => {
       return {
-        content: 'Please wait...',
+        content: locale.waiting,
         role: 'assistant',
       };
     },
@@ -79,7 +121,7 @@ const App = () => {
       ...messages,
       {
         id: Date.now(),
-        message: { role: 'user', content: 'Add a new user message' },
+        message: { role: 'user', content: locale.addUserMessage },
         status: 'success',
       },
     ]);
@@ -90,7 +132,7 @@ const App = () => {
       ...messages,
       {
         id: Date.now(),
-        message: { role: 'assistant', content: 'Add a new AI response' },
+        message: { role: 'assistant', content: locale.addAIMessage },
         status: 'success',
       },
     ]);
@@ -101,7 +143,7 @@ const App = () => {
       ...messages,
       {
         id: Date.now(),
-        message: { role: 'system', content: 'Add a new system message' },
+        message: { role: 'system', content: locale.addSystemMessage },
         status: 'success',
       },
     ]);
@@ -110,7 +152,7 @@ const App = () => {
   const editLastMessage = () => {
     const lastMessage = messages[messages.length - 1];
     setMessage(lastMessage.id, {
-      message: { role: lastMessage.message.role, content: 'Edit a message' },
+      message: { role: lastMessage.message.role, content: locale.editLastMessage },
     });
   };
 
@@ -118,22 +160,22 @@ const App = () => {
     <Flex vertical gap="middle">
       <Flex vertical gap="middle">
         <div>
-          Current status:{' '}
+          {locale.currentStatus}{' '}
           {isRequesting
-            ? 'Requesting'
+            ? locale.requesting
             : messages.length === 0
-              ? 'No messages yet, please enter a question and send'
-              : 'Q&A completed'}
+              ? locale.noMessages
+              : locale.qaCompleted}
         </div>
         <Flex align="center" gap="middle">
           <Button disabled={!isRequesting} onClick={abort}>
-            abort
+            {locale.abort}
           </Button>
-          <Button onClick={addUserMessage}>Add a user message</Button>
-          <Button onClick={addAIMessage}>Add an AI message</Button>
-          <Button onClick={addSystemMessage}>Add a system message</Button>
+          <Button onClick={addUserMessage}>{locale.addUserMessage}</Button>
+          <Button onClick={addAIMessage}>{locale.addAIMessage}</Button>
+          <Button onClick={addSystemMessage}>{locale.addSystemMessage}</Button>
           <Button disabled={!messages.length} onClick={editLastMessage}>
-            Edit the last message
+            {locale.editLastMessage}
           </Button>
         </Flex>
       </Flex>
@@ -151,7 +193,7 @@ const App = () => {
             message.role === 'assistant'
               ? {
                   footer: (
-                    <Tooltip title="Retry">
+                    <Tooltip title={locale.retry}>
                       <Button
                         size="small"
                         type="text"
@@ -176,6 +218,7 @@ const App = () => {
           abort();
         }}
         onChange={setContent}
+        placeholder={locale.placeholder}
         onSubmit={(nextContent) => {
           onRequest({
             messages: [

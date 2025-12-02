@@ -13,4 +13,4 @@ subtitle: 内置数据提供
 
 ## 使用示例
 
-<code src="./demos/x-chat/model.tsx">基本</code>
+<code src="./demos/chat-provider/open-ai-chat-provider.tsx">基本</code> <code src="./demos/x-chat/model.tsx">配合组件</code>

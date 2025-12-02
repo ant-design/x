@@ -1,9 +1,9 @@
 ---
 group:
   title: 数据流
-  order: 2
+  order: 1
 title: useXChat
-order: 2
+order: 1
 subtitle: 会话数据
 demo:
   cols: 1
@@ -16,8 +16,8 @@ demo:
 ## 代码演示
 
 <!-- prettier-ignore -->
-<code src="./demos/x-chat/model.tsx">模型接入</code>
-<code src="./demos/x-chat/deepSeek.tsx">思考模型接入</code>
+<code src="./demos/x-chat/model.tsx">OpenAI 模型接入</code>
+<code src="./demos/x-chat/deepSeek.tsx">DeepSeek 思考模型接入</code>
 <code src="./demos/x-chat/defaultMessages.tsx">历史消息设置</code>
 <code src="./demos/x-chat/developer.tsx">系统提示词设置</code>
 <code src="./demos/x-chat/custom-request.tsx">自定义request</code>

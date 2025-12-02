@@ -27,7 +27,7 @@ type RequestPlaceholderFn<Input, Message> = (
 
 type RequestFallbackFn<Input, MessageInfo, Message> = (
   requestParams: Partial<Input>,
-  info: { error: Error; messages: Message[]; messageInfo: MessageInfo },
+  info: { error: Error; errorInfo?: any; messages: Message[]; messageInfo: MessageInfo },
 ) => Message | Promise<Message>;
 
 export type RequestParams<Message> = {
@@ -302,7 +302,7 @@ export default function useXChat<
         conversationKey && IsRequestingMap.delete(conversationKey);
         updateMessage('success', undefined as Output, chunks, headers);
       },
-      onError: async (error: Error) => {
+      onError: async (error: Error, errorInfo: any) => {
         setIsRequesting(false);
         conversationKey && IsRequestingMap.delete(conversationKey);
         if (requestFallback) {
@@ -319,6 +319,7 @@ export default function useXChat<
               requestFallback as RequestFallbackFn<Input, MessageInfo<ChatMessage>, ChatMessage>
             )(requestParams, {
               error,
+              errorInfo,
               messageInfo: msg as MessageInfo<ChatMessage>,
               messages,
             });
