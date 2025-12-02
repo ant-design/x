@@ -4,7 +4,7 @@ group:
   order: 2
 title: Custom Chat Provider
 order: 4
-subtitle: 自定义数据提供
+subtitle: 自定义
 ---
 
 当内置的 Chat Provider 不满足使用可以通过实现抽象类 `AbstractChatProvider` (仅包含三个抽象方法)，可以将不同的模型提供商、或者 Agentic 服务数据转换为统一的 `useXChat` 可消费的格式，从而实现不同模型、Agent之间的无缝接入和切换。

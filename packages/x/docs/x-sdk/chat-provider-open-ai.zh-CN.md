@@ -4,7 +4,6 @@ group:
   order: 2
 title: OpenAIChatProvider
 order: 2
-subtitle: 内置数据提供
 ---
 
 `OpenAIChatProvider` 是 `OpenAI` 兼容的 `Chat Provider`，它会将请求参数和响应数据转换为 `OpenAI` 接口兼容的格式。
