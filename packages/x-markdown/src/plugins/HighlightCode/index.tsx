@@ -99,7 +99,7 @@ const HighlightCode: React.FC<HighlightCodeProps> = (props) => {
         >
           {lang}
         </span>
-        <Actions.Copy text={contextLocale.copy} onClick={handleCopyCode} />
+        <Actions.Copy text={children} onClick={handleCopyCode} />
       </div>
     );
   };
