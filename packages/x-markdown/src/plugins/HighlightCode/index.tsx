@@ -1,9 +1,6 @@
 import useXComponentConfig from '@ant-design/x/es/_util/hooks/use-x-component-config';
 import Actions from '@ant-design/x/es/actions';
-import useLocale from '@ant-design/x/es/locale/useLocale';
 import useXProviderContext from '@ant-design/x/es/x-provider/hooks/use-x-provider-context';
-import locale_EN from '@ant-design/x/locale/en_US';
-import { message } from 'antd';
 import classnames from 'classnames';
 import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -32,9 +29,6 @@ const HighlightCode: React.FC<HighlightCodeProps> = (props) => {
     highlightProps,
   } = props;
 
-  // ============================ locale ============================
-  const [contextLocale] = useLocale('HighlightCode', locale_EN.HighlightCode);
-
   // ============================ Prefix ============================
   const { getPrefixCls, direction } = useXProviderContext();
   const prefixCls = getPrefixCls('highlightCode', customizePrefixCls);
@@ -57,23 +51,7 @@ const HighlightCode: React.FC<HighlightCodeProps> = (props) => {
     },
   );
 
-  // ============================ locale ============================
-  const [messageApi, contextHolder] = message.useMessage();
-
-  const handleCopyCode = async () => {
-    if (!children) return;
-
-    try {
-      await navigator.clipboard.writeText(children.trim());
-      messageApi.open({
-        type: 'success',
-        content: contextLocale.copySuccess,
-      });
-    } catch (error) {
-      console.error('Failed to copy code:', error);
-    }
-  };
-
+  // ============================ render content ============================
   const renderTitle = () => {
     if (header === null) return null;
 
@@ -88,7 +66,6 @@ const HighlightCode: React.FC<HighlightCodeProps> = (props) => {
         )}
         style={{ ...contextConfig.styles.header, ...styles.header }}
       >
-        {contextHolder}
         <span
           className={classnames(
             `${prefixCls}-header-title`,
@@ -99,7 +76,7 @@ const HighlightCode: React.FC<HighlightCodeProps> = (props) => {
         >
           {lang}
         </span>
-        <Actions.Copy text={children} onClick={handleCopyCode} />
+        <Actions.Copy text={children} />
       </div>
     );
   };
