@@ -1,4 +1,4 @@
-import { Flex } from 'antd';
+import { Flex, Typography } from 'antd';
 import classnames from 'classnames';
 import { useMergedState } from 'rc-util';
 import pickAttrs from 'rc-util/lib/pickAttrs';
@@ -80,6 +80,8 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     onFocus,
     onBlur,
     skill,
+    maxLength,
+    showCount = false,
     ...restProps
   } = props;
 
@@ -220,6 +222,12 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
       ? header(actionNode, { components: sharedRenderComponents })
       : header || null;
 
+  // ============================ Input ============================
+  const exceedLengthIsTrue =
+    maxLength !== undefined &&
+    maxLength > 0 &&
+    (inputRef.current?.getValue().value.length || 0) > maxLength;
+
   // ============================ Footer ============================
   const footerNode =
     typeof footer === 'function'
@@ -230,7 +238,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   const actionsButtonContextProps = {
     prefixCls: actionBtnCls,
     onSend: triggerSend,
-    onSendDisabled: !innerValue,
+    onSendDisabled: !innerValue || exceedLengthIsTrue,
     onClear: triggerClear,
     onClearDisabled: !innerValue,
     onCancel,
@@ -346,11 +354,24 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
             )}
 
             {/* Input */}
-            {isSlotMode ? (
-              <SlotTextArea ref={inputRef as React.Ref<SlotTextAreaRef>} />
-            ) : (
-              <TextArea ref={inputRef as React.Ref<TextAreaRef>} />
-            )}
+            <Flex orientation="vertical" flex={1} style={{ width: '100%' }}>
+              {isSlotMode ? (
+                <SlotTextArea ref={inputRef as React.Ref<SlotTextAreaRef>} />
+              ) : (
+                <TextArea ref={inputRef as React.Ref<TextAreaRef>} />
+              )}
+              {showCount && (
+                <Flex justify="flex-start">
+                  <Typography.Text type={exceedLengthIsTrue ? 'danger' : 'secondary'}>
+                    <small>
+                      {inputRef.current?.getValue().value.length || '0'}
+                      {maxLength && ' / ' + maxLength.toString()}
+                      {exceedLengthIsTrue && ' Exceeded maximum length'}
+                    </small>
+                  </Typography.Text>
+                </Flex>
+              )}
+            </Flex>
 
             {/* Action List */}
             {suffixNode && (
