@@ -48,45 +48,48 @@ const genAttachmentsStyle: GenerateStyle<AttachmentsToken> = (token) => {
         padding: 0,
       },
     },
-    // ============================= Placeholder =============================
-    [placeholderCls]: {
-      width: '100%',
-      height: '100%',
-      borderRadius: token.borderRadius,
-      borderWidth: token.lineWidthBold,
-      borderStyle: 'dashed',
-      borderColor: 'transparent',
-      padding: token.padding,
-      position: 'relative',
-      backdropFilter: 'blur(10px)',
-      background: token.colorBgPlaceholderHover,
-      ...anyBoxSizing,
 
-      [`${antCls}-upload-wrapper ${antCls}-upload${antCls}-upload-btn`]: {
-        padding: 0,
-      },
+    '&': {
+      // ============================= Placeholder =============================
+      [placeholderCls]: {
+        width: '100%',
+        height: '100%',
+        borderRadius: token.borderRadius,
+        borderWidth: token.lineWidthBold,
+        borderStyle: 'dashed',
+        borderColor: 'transparent',
+        padding: token.padding,
+        position: 'relative',
+        backdropFilter: 'blur(10px)',
+        background: token.colorBgPlaceholderHover,
+        ...anyBoxSizing,
 
-      [`&${placeholderCls}-drag-in`]: {
-        borderColor: token.colorPrimaryHover,
-      },
-      [`&${placeholderCls}-disabled`]: {
-        opacity: 0.25,
-        pointerEvents: 'none',
-      },
+        [`${antCls}-upload-wrapper ${antCls}-upload${antCls}-upload-btn`]: {
+          padding: 0,
+        },
 
-      [`${placeholderCls}-inner`]: {
-        gap: calc(token.paddingXXS).div(2).equal(),
+        [`&${placeholderCls}-drag-in`]: {
+          borderColor: token.colorPrimaryHover,
+        },
+        [`&${placeholderCls}-disabled`]: {
+          opacity: 0.25,
+          pointerEvents: 'none',
+        },
+
+        [`${placeholderCls}-inner`]: {
+          gap: calc(token.paddingXXS).div(2).equal(),
+        },
+        [`${placeholderCls}-icon`]: {
+          fontSize: token.fontSizeHeading2,
+          lineHeight: 1,
+        },
+        [`${placeholderCls}-title${placeholderCls}-title`]: {
+          margin: 0,
+          fontSize: token.fontSize,
+          lineHeight: token.lineHeight,
+        },
+        [`${placeholderCls}-description`]: {},
       },
-      [`${placeholderCls}-icon`]: {
-        fontSize: token.fontSizeHeading2,
-        lineHeight: 1,
-      },
-      [`${placeholderCls}-title${placeholderCls}-title`]: {
-        margin: 0,
-        fontSize: token.fontSize,
-        lineHeight: token.lineHeight,
-      },
-      [`${placeholderCls}-description`]: {},
     },
   };
 };
