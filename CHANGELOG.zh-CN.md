@@ -448,7 +448,7 @@ tag: vVERSION
 `2025-03-14`
 
 - 🆕 扩展 `Sender` 文件粘贴可处理多个文件。[#505](https://github.com/ant-design/x/pull/500) 由 [@ztkuaikuai](https://github.com/ztkuaikuai) 提交
-- 🆕 扩展 `BubbleList` 角色定义功能。[#485](https://github.com/ant-design/x/pull/500) 由 [@chenluda](https://github.com/chenluda) 提交
+- 🆕 扩展 `BubbleList` 角色定义功能。[#500](https://github.com/ant-design/x/pull/500) 由 [@chenluda](https://github.com/chenluda) 提交
 - 🐛 修复 `Attachments` 组件多文件横向滚动条展示。[#556](https://github.com/ant-design/x/pull/556) 由 [@onefeng123](https://github.com/onefeng123) 提交
 - 🐛 修复 `Attachments` 组件 onRemove 不生效问题。[#555](https://github.com/ant-design/x/pull/555) 由 [@edison-tianhe](https://github.com/edison-tianhe) 提交
 - 🐛 修复 `Sender` 组件 actions 缺少 SpeechButton 组件的问题。[#549](https://github.com/ant-design/x/pull/549) 由 [@zombieJ](https://github.com/zombieJ) 提交
