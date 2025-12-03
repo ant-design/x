@@ -89,12 +89,13 @@ export const prepareComponentToken: GetDefaultToken<'Think'> = (token) => {
 export default genStyleHooks<'Think'>(
   'Think',
   (token) => {
-    const ThinkToken = mergeToken<ThinkToken>(token, {});
+    const compToken = mergeToken<ThinkToken>(token, {});
     const { componentCls } = token;
+
     return [
-      genThinkStyle(ThinkToken),
-      genCollapseMotion(ThinkToken),
-      blinkMotion(ThinkToken, `${componentCls}-motion-blink`),
+      genThinkStyle(compToken),
+      genCollapseMotion(compToken),
+      blinkMotion(compToken, `${componentCls}-motion-blink`),
     ];
   },
   prepareComponentToken,
