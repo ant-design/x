@@ -88,26 +88,12 @@ export default defineConfig({
         memo.plugin('circular-dependency-checker').use(CircularDependencyPlugin, [
           {
             failOnError: true,
-            exclude: /node_modules[\\/](chevrotain|d3-.*|langium)/,
           },
         ]);
         memo.plugin('duplicate-package-checker').use(DuplicatePackageCheckerPlugin, [
           {
             verbose: true,
             emitError: true,
-            exclude: (instance: any) => {
-              // 排除特定包
-              if (
-                instance.name === 'cose-base' ||
-                instance.name === 'layout-base' ||
-                instance.name.startsWith('d3-') ||
-                instance.name === 'internmap'
-              ) {
-                return true;
-              }
-
-              return false;
-            },
           },
         ]);
       }
