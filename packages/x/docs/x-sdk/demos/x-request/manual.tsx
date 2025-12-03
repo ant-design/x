@@ -15,7 +15,7 @@ interface ChatInput {
 const QUERY_URL = 'https://api.x.ant.design/api/default_chat_provider_stream';
 
 const useLocale = () => {
-  const isCN = location.pathname.endsWith('-cn');
+  const isCN = typeof location !== 'undefined' ? location.pathname.endsWith('-cn') : false;
   return {
     request: isCN ? '请求' : 'Request',
     requestAbort: isCN ? '请求中止' : 'Request Abort',

@@ -46,7 +46,7 @@ const role: BubbleListProps['role'] = {
 };
 
 const useLocale = () => {
-  const isCN = location.pathname.endsWith('-cn');
+  const isCN = typeof location !== 'undefined' ? location.pathname.endsWith('-cn') : false;
   return {
     abort: isCN ? '中止' : 'abort',
     addUserMessage: isCN ? '添加用户消息' : 'Add a user message',

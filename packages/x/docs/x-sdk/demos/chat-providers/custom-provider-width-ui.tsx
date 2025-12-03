@@ -110,7 +110,7 @@ const role: BubbleListProps['role'] = {
 // 本地化钩子：根据当前语言环境返回对应的文本
 // Localization hook: return corresponding text based on current language environment
 const useLocale = () => {
-  const isCN = location.pathname.endsWith('-cn');
+  const isCN = typeof location !== 'undefined' ? location.pathname.endsWith('-cn') : false;
   return {
     abort: isCN ? '中止' : 'abort',
     addUserMessage: isCN ? '添加用户消息' : 'Add a user message',

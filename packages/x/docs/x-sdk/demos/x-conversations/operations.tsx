@@ -8,7 +8,7 @@ import React from 'react';
 const { Paragraph } = Typography;
 
 const useLocale = () => {
-  const isCN = location.pathname.endsWith('-cn');
+  const isCN = typeof location !== 'undefined' ? location.pathname.endsWith('-cn') : false;
   return {
     add: isCN ? '添加' : 'Add',
     update: isCN ? '更新' : 'Update',

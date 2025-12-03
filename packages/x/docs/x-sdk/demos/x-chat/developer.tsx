@@ -25,7 +25,7 @@ const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow_THUDM_glm-4-9b-ch
 const MODEL = 'THUDM/glm-4-9b-chat';
 
 const useLocale = () => {
-  const isCN = location.pathname.endsWith('-cn');
+  const isCN = typeof location !== 'undefined' ? location.pathname.endsWith('-cn') : false;
   return {
     abort: isCN ? '中止' : 'abort',
     addUserMessage: isCN ? '添加用户消息' : 'Add a user message',

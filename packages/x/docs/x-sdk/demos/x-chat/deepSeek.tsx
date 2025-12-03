@@ -29,7 +29,7 @@ const MODEL = 'glm-4.5-flash';
 // 本地化钩子：根据当前语言环境返回对应的文本
 // Localization hook: return corresponding text based on current language environment
 const useLocale = () => {
-  const isCN = location.pathname.endsWith('-cn');
+  const isCN = typeof location !== 'undefined' ? location.pathname.endsWith('-cn') : false;
   return {
     deepThinking: isCN ? '深度思考中...' : 'Deep thinking...',
     completeThinking: isCN ? '思考完成' : 'Complete thinking',

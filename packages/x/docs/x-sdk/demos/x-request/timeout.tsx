@@ -25,7 +25,7 @@ async function mockFetch() {
 }
 
 const useLocale = () => {
-  const isCN = location.pathname.endsWith('-cn');
+  const isCN = typeof location !== 'undefined' ? location.pathname.endsWith('-cn') : false;
   return {
     request: isCN ? '请求' : 'Request',
     requestLog: isCN ? '请求日志' : 'Request Log',

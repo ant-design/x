@@ -6,7 +6,7 @@ import { Button, Col, Flex, Row, theme } from 'antd';
 import React from 'react';
 
 const useLocale = () => {
-  const isCN = location.pathname.endsWith('-cn');
+  const isCN = typeof location !== 'undefined' ? location.pathname.endsWith('-cn') : false;
   return {
     list1: isCN ? '列表 1' : 'List 1',
     list2: isCN ? '列表 2' : 'List 2',

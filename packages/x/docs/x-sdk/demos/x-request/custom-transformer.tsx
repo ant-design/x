@@ -40,7 +40,7 @@ async function mockFetch() {
 }
 
 const useLocale = () => {
-  const isCN = location.pathname.endsWith('-cn');
+  const isCN = typeof location !== 'undefined' ? location.pathname.endsWith('-cn') : false;
   return {
     request: isCN ? '请求' : 'Request',
     mockCustomProtocolLog: isCN ? '模拟自定义协议 - 日志' : 'Mock Custom Protocol - Log',

@@ -14,7 +14,7 @@ import { Flex, GetRef, theme } from 'antd';
 import React, { useEffect, useRef } from 'react';
 
 const useLocale = () => {
-  const isCN = location.pathname.endsWith('-cn');
+  const isCN = typeof location !== 'undefined' ? location.pathname.endsWith('-cn') : false;
   return {
     conversationItem1: isCN ? '会话项目 1' : 'Conversation Item 1',
     conversationItem2: isCN ? '会话项目 2' : 'Conversation Item 2',

@@ -8,12 +8,11 @@ import {
 } from '@ant-design/x-sdk';
 import { Button, Divider, Flex, Typography } from 'antd';
 import React from 'react';
-import ReactJson from 'react-json-view';
 
 const { Title } = Typography;
 
 const useLocale = () => {
-  const isCN = location.pathname.endsWith('-cn');
+  const isCN = typeof location !== 'undefined' ? location.pathname.endsWith('-cn') : false;
   return {
     messages: isCN ? '消息数据（messages）' : 'Messages Data',
     requesting: isCN ? '是否在请求中' : 'Is Requesting',
@@ -130,9 +129,7 @@ const App = () => {
           {locale.length}：{`${messages.length}`}
         </div>
         <div>{locale.details}：</div>
-        <div style={{ height: 500, overflow: 'auto' }}>
-          <ReactJson src={messages} />
-        </div>
+        <div style={{ height: 500, overflow: 'auto' }}>{JSON.stringify(messages)}</div>
       </Flex>
       <Divider />
       <Flex vertical gap="small">
