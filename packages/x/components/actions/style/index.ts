@@ -14,37 +14,6 @@ export interface ActionsToken extends FullToken<'Actions'> {}
 const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
   const { componentCls, antCls, calc } = token;
   return {
-    [`${componentCls}-item`]: {
-      cursor: 'pointer',
-      fontSize: token.fontSize,
-      paddingInline: unit(calc(token.paddingXXS).add(1).equal()),
-      paddingBlock: token.paddingXXS,
-      borderRadius: token.borderRadiusSM,
-      height: token.controlHeightSM,
-      boxSizing: 'border-box',
-      display: 'inline-flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      lineHeight: token.lineHeight,
-      transition: `all ${token.motionDurationMid} ${token.motionEaseInOut}`,
-      '&-icon': {
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: token.fontSize,
-      },
-
-      '&:hover': {
-        background: token.colorBgTextHover,
-      },
-    },
-    [`${componentCls}-list`]: {
-      display: 'inline-flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      color: token.colorText,
-      gap: token.paddingXS,
-    },
     [componentCls]: {
       [`& ${antCls}-pagination-item-link`]: {
         width: token.controlHeightSM,
@@ -78,6 +47,37 @@ const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
       },
       '&-list-danger': {
         color: token.colorError,
+      },
+      [`${componentCls}-item`]: {
+        cursor: 'pointer',
+        fontSize: token.fontSize,
+        paddingInline: unit(calc(token.paddingXXS).add(1).equal()),
+        paddingBlock: token.paddingXXS,
+        borderRadius: token.borderRadiusSM,
+        height: token.controlHeightSM,
+        boxSizing: 'border-box',
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        lineHeight: token.lineHeight,
+        transition: `all ${token.motionDurationMid} ${token.motionEaseInOut}`,
+        '&-icon': {
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: token.fontSize,
+        },
+
+        '&:hover': {
+          background: token.colorBgTextHover,
+        },
+      },
+      [`${componentCls}-list`]: {
+        display: 'inline-flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        color: token.colorText,
+        gap: token.paddingXS,
       },
     },
   };

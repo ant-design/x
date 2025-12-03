@@ -5,6 +5,7 @@ import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 import Bubble from './Bubble';
 import type { BubbleContentType, BubbleProps, BubbleRef, DividerBubbleProps } from './interface';
+import useStyle from './style';
 
 const DividerBubble: React.ForwardRefRenderFunction<BubbleRef, DividerBubbleProps> = (
   {
@@ -23,13 +24,17 @@ const DividerBubble: React.ForwardRefRenderFunction<BubbleRef, DividerBubbleProp
   // ============================ Prefix ============================
   const { getPrefixCls } = useXProviderContext();
 
+  // ============================ Styles ============================
+
   // ===================== Component Config =========================
   const contextConfig = useXComponentConfig('bubble');
   const prefixCls = getPrefixCls('bubble', customizePrefixCls);
-
+  const [hashId, cssVarCls] = useStyle(prefixCls);
   // ============================ Styles ============================
 
   const rootMergedCls = classnames(
+    hashId,
+    cssVarCls,
     prefixCls,
     `${prefixCls}-divider`,
     contextConfig.className,
