@@ -1,6 +1,6 @@
-import { AnyObject } from '../../_util/type';
-import { AbstractXRequestClass, XRequestCallbacks, XRequestOptions } from '../../x-request';
-import { MessageStatus } from '..';
+import { AnyObject } from '../_util/type';
+import { MessageStatus } from '../x-chat';
+import { AbstractXRequestClass, XRequestCallbacks, XRequestOptions } from '../x-request';
 
 export interface ChatProviderConfig<Input, Output> extends AnyObject {
   request: AbstractXRequestClass<Input, Output> | (() => AbstractXRequestClass<Input, Output>);

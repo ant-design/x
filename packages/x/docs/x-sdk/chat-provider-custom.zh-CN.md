@@ -199,7 +199,7 @@ onRequest({
 });
 ```
 
-### 效果演示
+## 代码演示
 
 <!-- prettier-ignore -->
 <code src="./demos/chat-provider/custom-provider-width-ui.tsx">基础</code>

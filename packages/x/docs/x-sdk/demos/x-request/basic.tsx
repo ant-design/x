@@ -14,6 +14,8 @@ const App = () => {
   const [status, setStatus] = React.useState<ThoughtChainItemType['status']>();
   const [lines, setLines] = React.useState<Record<string, string>[]>([]);
 
+  // 发送请求：使用XRequest进行API调用
+  // Send request: use XRequest for API call
   const request = () => {
     setStatus('loading');
     XRequest(QUERY_URL, {

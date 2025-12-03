@@ -43,6 +43,8 @@ const App = () => {
   const [status, setStatus] = React.useState<ThoughtChainItemType['status']>();
   const [lines, setLines] = React.useState<string[]>([]);
 
+  // 发送请求：使用自定义转换器和模拟数据
+  // Send request: use custom transformer and mock data
   const request = () => {
     setStatus('loading');
 
@@ -67,6 +69,8 @@ const App = () => {
           console.log('onUpdate', msg);
         },
       },
+      // 自定义流转换器
+      // Custom stream transformer
       transformStream: new TransformStream<string, string>({
         transform(chunk, controller) {
           controller.enqueue(chunk);

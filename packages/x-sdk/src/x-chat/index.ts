@@ -1,10 +1,10 @@
 import { useEvent } from 'rc-util';
 import React, { useState } from 'react';
 import type { AnyObject } from '../_util/type';
+import { AbstractChatProvider } from '../providers';
 import { ConversationData } from '../x-conversations';
 import { AbstractXRequestClass } from '../x-request';
 import type { SSEOutput } from '../x-stream';
-import { AbstractChatProvider } from './providers';
 import { useChatStore } from './store';
 
 export type SimpleType = string | number | boolean | object;

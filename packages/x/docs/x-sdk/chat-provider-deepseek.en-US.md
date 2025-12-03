@@ -10,4 +10,6 @@ order: 3
 
 ## Usage Example
 
-<code src="./demos/x-chat/deepSeek.tsx">Basic</code> <code src="./demos/x-chat/deepSeek.tsx">With Components</code>
+<!-- prettier-ignore -->
+<code src="./demos/x-chat/deepSeek.tsx">Basic</code> 
+<code src="./demos/x-chat/deepSeek.tsx">With Components</code>

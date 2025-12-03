@@ -13,6 +13,7 @@ interface ChatInput {
 }
 
 /**
+ * 🔔 请替换 BASE_URL、PATH、MODEL、API_KEY 为您自己的值
  * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
  */
 

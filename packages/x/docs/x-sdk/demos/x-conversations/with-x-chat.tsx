@@ -49,9 +49,6 @@ const useLocale = () => {
 const App = () => {
   const locale = useLocale();
   const { token } = theme.useToken();
-
-  // 会话项目列表：定义基本的会话项目数据
-  // Conversation items list: define basic conversation item data
   const items: ConversationItemType[] = [
     {
       key: 'item1',
@@ -72,8 +69,6 @@ const App = () => {
     },
   ];
 
-  // ==================== 聊天提供者配置 ====================
-  // ==================== Chat Provider Configuration ====================
   // 提供者缓存：为每个会话缓存独立的聊天提供者实例
   // Provider cache: cache independent chat provider instances for each conversation
   const providerCaches = new Map<string, DeepSeekChatProvider>();
@@ -190,12 +185,8 @@ const App = () => {
     defaultActiveConversationKey: items[0].key,
   });
 
-  // 发送器引用：用于控制发送器组件
-  // Sender ref: used to control sender component
   const senderRef = useRef<GetRef<typeof Sender>>(null);
 
-  // 会话组件样式：使用Ant Design主题token
-  // Conversation component style: use Ant Design theme tokens
   const style = {
     width: 256,
     background: token.colorBgContainer,
@@ -250,8 +241,6 @@ const App = () => {
       {/* 聊天区域：右侧显示当前会话的聊天内容 */}
       {/* Chat area: display chat content for current conversation on the right */}
       <Flex style={{ width: 500 }} vertical gap="small" align="flex-start">
-        {/* 消息列表容器：固定高度，支持滚动 */}
-        {/* Message list container: fixed height, supports scrolling */}
         <div style={{ width: '100%', height: 300, display: 'flex', flexDirection: 'column' }}>
           <Bubble.List
             items={messages?.map((i) => ({
@@ -281,16 +270,12 @@ const App = () => {
           ref={senderRef}
           onSubmit={(val: string) => {
             if (!val) return;
-            // 发送用户消息：构建消息格式并清空输入框
-            // Send user message: build message format and clear input field
             onRequest({
               messages: [{ role: 'user', content: val }],
             });
             senderRef.current?.clear();
           }}
           onCancel={() => {
-            // 取消当前请求
-            // Cancel current request
             abort();
           }}
           loading={isRequesting}

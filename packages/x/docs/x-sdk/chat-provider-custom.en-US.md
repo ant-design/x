@@ -96,7 +96,7 @@ class CustomProvider<
   }
   transformMessage(info: TransformMessage<ChatMessage, Output>): ChatMessage {
     const { originMessage, chunk } = info || {};
-    if (!chunk) {
+    if (!chunk || !chunk?.data || (chunk?.data && chunk?.data?.includes('[DONE]'))) {
       return {
         content: originMessage?.content || '',
         role: 'assistant',
@@ -174,8 +174,6 @@ Since we only need to convert the data string to JSON and concatenate the intern
 - `transformLocalMessage` converts parameters passed to onRequest into a local (user-sent) ChatMessage for user message rendering, and will also update messages for message list rendering.
 - `transformMessage` can transform data into ChatMessage data type when updating returned data, and will also update messages for message list rendering.
 
-You can view the code at [CustomProvider](/x-sdks/chat-provider#custom-provider-example)
-
 5. Finally, we can instantiate `CustomProvider` and pass it to `useXChat` to complete the custom Provider usage.
 
 ```tsx
@@ -199,3 +197,8 @@ onRequest({
   query: "Help me summarize today's tech news",
 });
 ```
+
+## Usage Example
+
+<!-- prettier-ignore -->
+<code src="./demos/chat-provider/custom-provider-width-ui.tsx">Basic</code>
