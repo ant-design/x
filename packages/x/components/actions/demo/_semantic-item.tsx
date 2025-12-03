@@ -1,4 +1,4 @@
-import { ShareAltOutlined } from '@ant-design/icons';
+import { ShakeOutlined, ShareAltOutlined } from '@ant-design/icons';
 import { Actions } from '@ant-design/x';
 import { Divider } from 'antd';
 import React from 'react';
@@ -47,7 +47,11 @@ const App: React.FC = () => {
         componentName="Actions"
         semantics={[{ name: 'running', desc: locale.running }]}
       >
-        <Actions.Item defaultIcon={<ShareAltOutlined />} status="running" />
+        <Actions.Item
+          defaultIcon={<ShareAltOutlined />}
+          runningIcon={<ShakeOutlined />}
+          status="running"
+        />
       </SemanticPreview>
       <Divider style={{ margin: 0, padding: 0 }} />
       <SemanticPreview componentName="Actions" semantics={[{ name: 'error', desc: locale.error }]}>

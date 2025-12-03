@@ -91,8 +91,8 @@ const App: React.FC = () => {
             onClick={() => onClick('share')}
             label={shareStatus}
             status={shareStatus}
-            default={<ShareAltOutlined />}
-            running={<CheckOutlined />}
+            defaultIcon={<ShareAltOutlined />}
+            runningIcon={<CheckOutlined />}
           />
         );
       },

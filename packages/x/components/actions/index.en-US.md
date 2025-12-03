@@ -78,8 +78,8 @@ Common props ref：[Common props](/docs/react/common-props)
 | --- | --- | --- | --- | --- |
 | status | Status | 'loading'\|'error'\|'running'\|'default' | default | - |
 | label | Display label for custom action | string | - | - |
-| default | Default status icon | React.ReactNode | - | - |
-| running | Running status icon | React.ReactNode | - | - |
+| defaultIcon | Default status icon | React.ReactNode | - | - |
+| runningIcon | Running status icon | React.ReactNode | - | - |
 
 ## Semantic DOM
 
