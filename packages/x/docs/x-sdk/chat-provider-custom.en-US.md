@@ -201,4 +201,26 @@ onRequest({
 ## Usage Example
 
 <!-- prettier-ignore -->
-<code src="./demos/chat-provides/custom-provider-width-ui.tsx">Basic</code>
+<code src="./demos/chat-providers/custom-provider-width-ui.tsx">Basic</code>
+
+## Contributing Chat Provider
+
+We welcome community contributions for new Chat Providers! Please follow these specifications for Chat Provider development.
+
+### Contribution Guide
+
+This guide will help you contribute to Ant Design. Please take a few minutes to read this [contribution guide](/docs/react/contributing) before submitting an issue or pull request.
+
+### Contribution Standards
+
+Chat Providers should follow these specifications:
+
+- Chat Providers should be included in the `packages/x-sdk/src/chat-providers` directory.
+- Chat Provider types should be included in the `packages/x-sdk/src/chat-providers/type` directory.
+
+### Naming Conventions
+
+Chat Provider theme files should follow these naming rules:
+
+- Chat Provider theme files should be named in camelCase format as `[Vendor][Type][Version].ts`.
+- For specific models, they can be directly named in camelCase format as `[Vendor][ModelName].ts`.
