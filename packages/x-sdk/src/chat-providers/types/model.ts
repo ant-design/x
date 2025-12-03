@@ -1,4 +1,4 @@
-import { AnyObject } from '../../../_util/type';
+import { AnyObject } from '../../_util/type';
 
 export interface XModelMessage extends AnyObject {
   role: string;

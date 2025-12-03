@@ -1,6 +1,10 @@
 import { AnyObject } from '../../_util/type';
+import {
+  DeepSeekChatProvider,
+  DefaultChatProvider,
+  OpenAIChatProvider,
+} from '../../chat-providers';
 import XRequest, { XRequestClass } from '../../x-request';
-import { DeepSeekChatProvider, DefaultChatProvider, OpenAIChatProvider } from '../providers';
 
 const baseURL = 'http://localhost:3000';
 

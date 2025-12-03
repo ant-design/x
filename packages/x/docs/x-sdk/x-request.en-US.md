@@ -16,7 +16,12 @@ demo:
 
 ## Code Demo
 
-<code src="./demos/x-request/basic.tsx">Basic Usage</code> <code src="./demos/x-request/custom-params.tsx">Custom Parameters</code> <code src="./demos/x-request/custom-transformer.tsx">Custom Transformer</code> <code src="./demos/x-request/model.tsx">Model Integration</code> <code src="./demos/x-request/timeout.tsx">Timeout Configuration</code>
+<!-- prettier-ignore -->
+<code src="./demos/x-request/basic.tsx">Basic Usage</code> 
+<code src="./demos/x-request/custom-params-headers.tsx">Custom Parameters</code> 
+<code src="./demos/x-request/custom-transformer.tsx">Custom Transformer</code>
+<code src="./demos/x-request/manual.tsx">Manual Trigger</code> 
+<code src="./demos/x-request/timeout.tsx">Timeout Configuration</code>
 
 ## API
 
@@ -52,11 +57,11 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
 
 ### XRequestCallbacks
 
-| Property  | Description             | Type                       | Default | Version |
-| --------- | ----------------------- | -------------------------- | ------- | ------- |
-| onSuccess | Success callback        | (chunks: Output[]) => void | -       | -       |
-| onError   | Error handling callback | (error: Error) => void     | -       | -       |
-| onUpdate  | Message update callback | (chunk: Output) => void    | -       | -       |
+| Property  | Description             | Type                                   | Default | Version |
+| --------- | ----------------------- | -------------------------------------- | ------- | ------- |
+| onSuccess | Success callback        | (chunks: Output[]) => void             | -       | -       |
+| onError   | Error handling callback | (error: Error, errorInfo: any) => void | -       | -       |
+| onUpdate  | Message update callback | (chunk: Output) => void                | -       | -       |
 
 ### XRequestClass
 
