@@ -79,8 +79,8 @@
   ],
   "dependencies": {
     "@ant-design/colors": "^8.0.0",
-    "@ant-design/cssinjs": "^2.0.0",
-    "@ant-design/cssinjs-utils": "^2.0.0",
+    "@ant-design/cssinjs": "^2.0.1",
+    "@ant-design/cssinjs-utils": "^2.0.2",
     "@ant-design/fast-color": "^3.0.0",
     "@ant-design/icons": "^6.0.0",
     "@babel/runtime": "^7.25.6",
@@ -146,7 +146,7 @@
     "@umijs/fabric": "^4.0.1",
     "adm-zip": "^0.5.16",
     "ali-oss": "^6.21.0",
-    "antd": "^6.0.0",
+    "antd": "^6.0.1",
     "antd-style": "^4.0.0-alpha.1",
     "antd-token-previewer": "^3.0.0",
     "axios": "^1.7.7",
@@ -240,7 +240,7 @@
     "webpack-bundle-analyzer": "^5.0.1"
   },
   "peerDependencies": {
-    "antd": "^6.0.0",
+    "antd": "^6.0.1",
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
   },

@@ -13,7 +13,7 @@ const genHighlightCodeStyle: GenerateStyle<HighlightCodeToken> = (
 
   return {
     [componentCls]: {
-      '&-header': {
+      [`${componentCls}-header`]: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -23,7 +23,7 @@ const genHighlightCodeStyle: GenerateStyle<HighlightCodeToken> = (
         borderTopLeftRadius: token.borderRadius,
         borderTopRightRadius: token.borderRadius,
       },
-      '&-code': {
+      [`${componentCls}-code`]: {
         borderBottomRightRadius: token.borderRadius,
         borderBottomLeftRadius: token.borderRadius,
         borderTopLeftRadius: 0,

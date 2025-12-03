@@ -34,7 +34,7 @@
     "@codecov/webpack-plugin": "^1.4.0",
     "@madccc/duplicate-package-checker-webpack-plugin": "^1.0.0",
     "@size-limit/file": "^11.1.5",
-    "antd": "^6.0.0",
+    "antd": "^6.0.1",
     "circular-dependency-plugin": "^5.2.2",
     "dekko": "^0.2.1",
     "father": "^4.6.0",

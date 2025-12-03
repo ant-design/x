@@ -9,7 +9,7 @@ const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (
   const { componentCls, calc } = token;
   const itemCls = `${componentCls}-item`;
   return {
-    [componentCls]: {
+    [itemCls]: {
       [`& ${componentCls}-status`]: {
         color: 'inherit',
       },
@@ -22,8 +22,6 @@ const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (
       [`& ${componentCls}-status-loading`]: {
         color: token.colorPrimary,
       },
-    },
-    [itemCls]: {
       display: 'inline-flex',
       gap: unit(calc(token.marginXXS).add(1).equal()),
       whiteSpace: 'normal',
