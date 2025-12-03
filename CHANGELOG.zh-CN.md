@@ -15,6 +15,15 @@ tag: vVERSION
 
 ---
 
+## 2.0.1
+
+`2025-12-03`
+
+### @ant-design/x
+
+- 📖 新增 1.x 官网链接。[#1386](https://github.com/ant-design/x/pull/1386) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- 📖 优化官网站点提升用户体验。[#1384](https://github.com/ant-design/x/pull/1384) 由 [@kimteayon](https://github.com/kimteayon) 提交
+
 ## 2.0.0
 
 `2025-11-22`
@@ -43,19 +52,19 @@ tag: vVERSION
 
 ### @ant-design/x
 
-- 🛠 删除 components 属性，同时将内部属性提升。[#1338](https://github.com/ant-design/x/pull/1338) 由 [@kimteayon](https://github.com/kimteayon) 提交。
-- 🆕 FileCard 新增图片生成过程以及加载、渲染能力。[#1311](https://github.com/ant-design/x/pull/1311) 由 [@kimteayon](https://github.com/kimteayon) 提交。
-- 🆕 Think 将 `blink` 动画样式升级为 css token。[#1318](https://github.com/ant-design/x/pull/1318) 由 [@kimteayon](https://github.com/kimteayon) 提交。
-- 🆕 ThoughtChain 将 `blink` 动画样式升级为 css token。[#1318](https://github.com/ant-design/x/pull/1318) 由 [@kimteayon](https://github.com/kimteayon) 提交。
-- 📖 优化官网站点提升用户体验。[#1335](https://github.com/ant-design/x/pull/1335) 由 [@kimteayon](https://github.com/kimteayon)、[#1329](https://github.com/ant-design/x/pull/1329) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🛠 删除 components 属性，同时将内部属性提升。[#1338](https://github.com/ant-design/x/pull/1338) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- 🆕 FileCard 新增图片生成过程以及加载、渲染能力。[#1311](https://github.com/ant-design/x/pull/1311) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- 🆕 Think 将 `blink` 动画样式升级为 css token。[#1318](https://github.com/ant-design/x/pull/1318) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- 🆕 ThoughtChain 将 `blink` 动画样式升级为 css token。[#1318](https://github.com/ant-design/x/pull/1318) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- 📖 优化官网站点提升用户体验。[#1335](https://github.com/ant-design/x/pull/1335) 由 [@kimteayon](https://github.com/kimteayon)、[#1329](https://github.com/ant-design/x/pull/1329) 由 [@kimteayon](https://github.com/kimteayon) 提交
 
 ### @ant-design/x-markdown
 
-- 🛠 使用useMemo优化markdown渲染，同时修改基本演示文本和动画演示文本。[#1337](https://github.com/ant-design/x/pull/1337) 由 [@Div627](https://github.com/Div627) 提交。
-- 🆕 XMarkdown 渲染 HTML 标签对 `disabled` 和 `checked` 属性透出。[#1328](https://github.com/ant-design/x/pull/1328) 由 [@Div627](https://github.com/Div627) 提交。
-- 🆕 XMarkdown `hasNextChunk` 增加对表格渲染处理的能力。[#1322](https://github.com/ant-design/x/pull/1322) 由 [@Div627](https://github.com/Div627) 提交。
-- 🐛 修复 XMarkdown 默认的表格渲染的样式。[#1324](https://github.com/ant-design/x/pull/1324) 由 [@Div627](https://github.com/Div627) 提交。
-- 🆕 XMarkdown `incompleteMarkdownComponentMap` 新增多个类型渲染。[#1325](https://github.com/ant-design/x/pull/1325) 由 [@Div627](https://github.com/Div627) 提交。
+- 🛠 使用useMemo优化markdown渲染，同时修改基本演示文本和动画演示文本。[#1337](https://github.com/ant-design/x/pull/1337) 由 [@Div627](https://github.com/Div627) 提交
+- 🆕 XMarkdown 渲染 HTML 标签对 `disabled` 和 `checked` 属性透出。[#1328](https://github.com/ant-design/x/pull/1328) 由 [@Div627](https://github.com/Div627) 提交
+- 🆕 XMarkdown `hasNextChunk` 增加对表格渲染处理的能力。[#1322](https://github.com/ant-design/x/pull/1322) 由 [@Div627](https://github.com/Div627) 提交
+- 🐛 修复 XMarkdown 默认的表格渲染的样式。[#1324](https://github.com/ant-design/x/pull/1324) 由 [@Div627](https://github.com/Div627) 提交
+- 🆕 XMarkdown `incompleteMarkdownComponentMap` 新增多个类型渲染。[#1325](https://github.com/ant-design/x/pull/1325) 由 [@Div627](https://github.com/Div627) 提交
 - 📖 优化官网站点提升用户体验。[#1326](https://github.com/ant-design/x/pull/1326) 由 [@Div627](https://github.com/Div627)。
 
 ## 2.0.0-alpha.15
@@ -64,14 +73,14 @@ tag: vVERSION
 
 ### @ant-design/x
 
-- 🛠 升级 antd 依赖版本到 `6.00-alpha.4`。[#1300](https://github.com/ant-design/x/pull/1300) 由 [@kimteayon](https://github.com/kimteayon) 提交。
-- 📖 优化官网站点提升用户体验。[#1303](https://github.com/ant-design/x/pull/1303) 由 [@kimteayon](https://github.com/kimteayon) 提交。
+- 🛠 升级 antd 依赖版本到 `6.00-alpha.4`。[#1300](https://github.com/ant-design/x/pull/1300) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- 📖 优化官网站点提升用户体验。[#1303](https://github.com/ant-design/x/pull/1303) 由 [@kimteayon](https://github.com/kimteayon) 提交
 
 ### @ant-design/x-markdown
 
-- 🛠 重构 markdown 主题样式。[#1305](https://github.com/ant-design/x/pull/1305) 由 [@kimteayon](https://github.com/kimteayon) 提交。
-- 🐛 修复 `code` 标签 `streamStatus` 状态错误问题。[#1307](https://github.com/ant-design/x/pull/1307) 由 [@Div627](https://github.com/Div627) 提交。
-- 🛠 将 `index.less` 改造为 `index.css`。[#1306](https://github.com/ant-design/x/pull/1306) 由 [@Div627](https://github.com/Div627) 提交。
+- 🛠 重构 markdown 主题样式。[#1305](https://github.com/ant-design/x/pull/1305) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- 🐛 修复 `code` 标签 `streamStatus` 状态错误问题。[#1307](https://github.com/ant-design/x/pull/1307) 由 [@Div627](https://github.com/Div627) 提交
+- 🛠 将 `index.less` 改造为 `index.css`。[#1306](https://github.com/ant-design/x/pull/1306) 由 [@Div627](https://github.com/Div627) 提交
 - 🐛 修复 `SteamingOption` 为 `StreamingOption`。[#1301](https://github.com/ant-design/x/pull/1301) 由 [@Div627](https://github.com/Div627) 提交。
 - 🐛 修复 dompurifyConfig.ALLOWED_TAGS 被错误合并到 ADD_TAGS的问题。[#1297](https://github.com/ant-design/x/pull/1297) 由 [@Div627](https://github.com/Div627) 提交。
 
