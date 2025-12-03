@@ -55,12 +55,28 @@ Common props ref：[Common props](/docs/react/common-props)
 | styles | Semantic style definition | [See below](#semantic-dom) | - | - |
 | submitType | Submission mode | SubmitType | `enter` \| `shiftEnter` | - |
 | value | Input box value | string | - | - |
-| onSubmit | Callback for clicking the send button | (message: string, slotConfig?: SlotConfigType[]) => void | - | - |
-| onChange | Callback for input box value change | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`>, slotConfig?: SlotConfigType[]) => void | - | - |
+| onSubmit | Callback for clicking the send button | (message: string, slotConfig?: SlotConfigType[], skill: SkillType) => void | - | - |
+| onChange | Callback for input box value change | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`>, slotConfig: SlotConfigType[], skill: SkillType) => void | - | - |
 | onCancel | Callback for clicking the cancel button | () => void | - | - |
 | onPasteFile | Callback for pasting files | (files: FileList) => void | - | - |
 | autoSize | Auto-adjust content height, can be set to true \| false or object: { minRows: 2, maxRows: 6 } | boolean \| { minRows?: number; maxRows?: number } | { maxRows: 8 } | - |
 | slotConfig | Slot configuration, after configuration the input box will switch to slot mode, supporting structured input. In this mode, `value` and `defaultValue` configurations will be invalid. | SlotConfigType[] | - | - |
+| skill | Skill configuration, the input box will switch to slot mode, supporting structured input. In this mode, `value` and `defaultValue` configurations will be invalid. | SkillType | - | - |
+
+```typescript | pure
+interface SkillType {
+  title?: React.ReactNode;
+  value: string;
+  toolTip?: TooltipProps;
+  closable?:
+    | boolean
+    | {
+        closeIcon?: React.ReactNode;
+        onClose?: React.MouseEventHandler<HTMLDivElement>;
+        disabled?: boolean;
+      };
+}
+```
 
 ```typescript | pure
 type SpeechConfig = {
@@ -169,12 +185,15 @@ type ActionsComponents = {
 **Example:**
 
 ```jsx
-// ❌ Incorrect usage, slotConfig is for uncontrolled usage
+// ❌ Incorrect usage, slotConfig and skill are for uncontrolled usage
 const [config, setConfig] = useState([]);
+const [skill, setSkill] = useState([]);
 <Sender
   slotConfig={config}
-  onChange={(value, e, config) => {
+  skill={skill}
+  onChange={(value, e, config, skill) => {
     setConfig(config);
+    setSkill(skill)
   }}
 />
 
@@ -182,7 +201,8 @@ const [config, setConfig] = useState([]);
 <Sender
   key={key}
   slotConfig={config}
-  onChange={(value, _e, config) => {
+  skill={skill}
+  onChange={(value, _e, config, skill) => {
     // Only used to get structured content
     setKey('new_key')
   }}
@@ -191,7 +211,13 @@ const [config, setConfig] = useState([]);
 
 ## Semantic DOM
 
+### Sender
+
 <code src="./demo/_semantic.tsx" simplify="true"></code>
+
+### Sender.Switch
+
+<code src="./demo/_semantic-switch.tsx" simplify="true"></code>
 
 ## Theme Variables (Design Token)
 

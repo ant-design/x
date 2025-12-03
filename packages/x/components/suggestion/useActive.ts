@@ -9,7 +9,6 @@ export default function useActive(
   items: SuggestionItem[],
   open: boolean,
   rtl: boolean,
-  onSelect: (value: string[]) => void,
   onCancel: () => void,
 ) {
   const [activePaths, setActivePaths] = React.useState<string[]>([]);
@@ -30,15 +29,6 @@ export default function useActive(
     }
 
     return currentItems;
-  };
-
-  const getValues = (paths: string[]) => {
-    return paths.map((path, index) => {
-      const currentItems = getItems(index + 1, paths);
-      const currentItem = currentItems.find((item) => item.value === path);
-
-      return currentItem?.value;
-    }) as string[];
   };
 
   const offsetRow = (offset: number) => {
@@ -102,12 +92,8 @@ export default function useActive(
         break;
 
       case 'Enter':
-        // Submit if not have children
-        if (!getItems(activePaths.length + 1).length) {
-          onSelect(getValues(activePaths));
-        }
         e.preventDefault();
-        break;
+        return false;
 
       case 'Escape':
         onCancel();
