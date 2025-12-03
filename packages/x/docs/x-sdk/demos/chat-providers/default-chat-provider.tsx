@@ -105,14 +105,11 @@ const App = () => {
       setMessage(lastMessage.id, {
         message: { role: 'system', content: locale.editLastMsg },
       });
-    }
-    if (isUser) {
+    } else if (isUser) {
       setMessage(lastMessage.id, {
         message: { query: locale.editLastMsg },
       });
-    }
-
-    if (isAI) {
+    } else if (isAI) {
       setMessage(lastMessage.id, {
         message: { choices: [{ message: { content: locale.editLastMsg, role: 'assistant' } }] },
       });

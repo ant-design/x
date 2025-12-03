@@ -143,14 +143,11 @@ const App = () => {
       setMessage(lastMessage.id, {
         message: { role: 'system', content: locale.editSystemMessage },
       });
-    }
-    if (isUser) {
+    } else if (isUser) {
       setMessage(lastMessage.id, {
-        message: { query: locale.editUserMessage, role: 'user' },
+        message: { role: 'user', query: locale.editUserMessage },
       });
-    }
-
-    if (isAI) {
+    } else if (isAI) {
       setMessage(lastMessage.id, {
         message: { choices: [{ message: { content: locale.editAIResponse, role: 'assistant' } }] },
       });
