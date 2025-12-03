@@ -16,6 +16,31 @@ tag: vVERSION
 
 ---
 
+## 2.0.1
+
+`2025-12-03`
+
+### @ant-design/x
+
+- 🐛 Fixed multiple component style loss issues caused by antd upgrade to 6.0.1. [#1428](https://github.com/ant-design/x/pull/1428) by [@kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed antd error when using Attachments component. [#1395](https://github.com/ant-design/x/pull/1395) by [@kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed Sender component `allowSpeech` custom disable error. [#1398](https://github.com/ant-design/x/pull/1396) by [@kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed missing semantic configuration for Sender.Switch component. [#1396](https://github.com/ant-design/x/pull/1396) by [@kimteayon](https://github.com/kimteayon)
+- 🛠 Fixed test case failures caused by version upgrades. [#1393](https://github.com/ant-design/x/pull/1393) by [@kimteayon](https://github.com/kimteayon)
+- 📖 Added 1.x official website links. [#1386](https://github.com/ant-design/x/pull/1386) by [@kimteayon](https://github.com/kimteayon), [#1394](https://github.com/ant-design/x/pull/1394) by [@kimteayon](https://github.com/kimteayon)
+- 📖 Optimized official website to improve user experience. [#1384](https://github.com/ant-design/x/pull/1384) by [@kimteayon](https://github.com/kimteayon), [#1416](https://github.com/ant-design/x/pull/1416) by [@IsDyh01](https://github.com/IsDyh01)
+
+### @ant-design/x-sdk
+
+- 📖 Comprehensive updates to official website directory, documentation, and examples. [#1419](https://github.com/ant-design/x/pull/1419) by [@kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed useXChat `requestFallback` adding errorInfo parameter to resolve inability to get API error data. [#1419](https://github.com/ant-design/x/pull/1419) by [@kimteayon](https://github.com/kimteayon)
+
+### @ant-design/x-markdown
+
+- 🐛 Fixed HighlightCode plugin copy code error. [#1414](https://github.com/ant-design/x/pull/1414) by [@Jimi1126](https://github.com/DiJimi1126)
+- 🐛 Fixed XMarkdown rendering special characters failure. [#1413](https://github.com/ant-design/x/pull/1413) by [@Div627](https://github.com/Div627)
+- 🐛 Fixed XMarkdown cache reset logic not taking effect due to old references. [#1420](https://github.com/ant-design/x/pull/1420) by [@Div627](https://github.com/Div627)
+
 ## 2.0.0
 
 `2025-11-22`
