@@ -36,7 +36,7 @@ const genThinkStyle: GenerateStyle<ThinkToken> = (token) => {
 
   return {
     [componentCls]: {
-      '&-status-wrapper': {
+      [`${componentCls}-status-wrapper`]: {
         width: 'fit-content',
         display: 'flex',
         flexDirection: 'row',
@@ -47,31 +47,27 @@ const genThinkStyle: GenerateStyle<ThinkToken> = (token) => {
         lineHeight: lineHeight,
         cursor: 'pointer',
       },
-
-      '&-status-icon': {
+      [`${componentCls}-status-icon`]: {
         fontSize: fontSizeHeading5,
         display: 'flex',
       },
-      '&-status-text': {
+      [`${componentCls}-status-text`]: {
         lineHeight: token.lineHeight,
         fontSize: token.fontSize,
       },
-
-      '&-status-down-icon': {
+      [`${componentCls}-status-down-icon`]: {
         fontSize: fontSizeSM,
         svg: {
           transition: `all ${token.motionDurationMid} ${token.motionEaseInOut}`,
         },
       },
-
-      '&-content': {
+      [`${componentCls}-content`]: {
         marginTop: marginSM,
         width: '100%',
         color: colorTextDescription,
         paddingInlineStart: paddingSM,
         borderInlineStart: `${calc(lineWidth).mul(2).equal()} solid ${colorBorder}`,
       },
-
       [`&${componentCls}-rtl`]: {
         direction: 'rtl',
       },
