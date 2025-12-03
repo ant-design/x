@@ -42,5 +42,5 @@ const { onRequest, messages, isRequesting } = useXChat({
 `DefaultChatProvider` 是一个默认的 `Chat Provider`，几乎没有对数据进行转换，直接将请求参数和响应数据返回给 `useXChat`。它兼容了普通请求和stream请求（你需要做流拼接）的数据格式，你可以直接使用。
 
 <!-- prettier-ignore -->
-<code src="./demos/chat-provider/default-chat-provider.tsx">基本</code> 
-<code src="./demos/chat-provider/default-chat-provider-width-ui.tsx">配合组件</code>
+<code src="./demos/chat-providers/default-chat-provider.tsx">基本</code> 
+<code src="./demos/chat-providers/default-chat-provider-width-ui.tsx">配合组件</code>

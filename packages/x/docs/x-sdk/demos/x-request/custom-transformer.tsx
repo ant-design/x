@@ -39,12 +39,23 @@ async function mockFetch() {
   return response;
 }
 
+const useLocale = () => {
+  const isCN = location.pathname.endsWith('-cn');
+  return {
+    request: isCN ? '请求' : 'Request',
+    mockCustomProtocolLog: isCN ? '模拟自定义协议 - 日志' : 'Mock Custom Protocol - Log',
+    sendRequest: isCN
+      ? '发送请求：使用自定义转换器和模拟数据'
+      : 'Send request: use custom transformer and mock data',
+    customStreamTransformer: isCN ? '自定义流转换器' : 'Custom stream transformer',
+  };
+};
+
 const App = () => {
   const [status, setStatus] = React.useState<ThoughtChainItemType['status']>();
   const [lines, setLines] = React.useState<string[]>([]);
+  const locale = useLocale();
 
-  // 发送请求：使用自定义转换器和模拟数据
-  // Send request: use custom transformer and mock data
   const request = () => {
     setStatus('loading');
 
@@ -70,7 +81,6 @@ const App = () => {
         },
       },
       // 自定义流转换器
-      // Custom stream transformer
       transformStream: new TransformStream<string, string>({
         transform(chunk, controller) {
           controller.enqueue(chunk);
@@ -84,7 +94,7 @@ const App = () => {
     <Splitter>
       <Splitter.Panel>
         <Button type="primary" disabled={status === 'loading'} onClick={request}>
-          Request - {BASE_URL}
+          {locale.request} - {BASE_URL}
           {PATH}
         </Button>
       </Splitter.Panel>
@@ -92,7 +102,7 @@ const App = () => {
         <ThoughtChain
           items={[
             {
-              title: 'Mock Custom Protocol - Log',
+              title: locale.mockCustomProtocolLog,
               status: status,
               icon: <TagsOutlined />,
               content: (

@@ -202,4 +202,26 @@ onRequest({
 ## 代码演示
 
 <!-- prettier-ignore -->
-<code src="./demos/chat-provider/custom-provider-width-ui.tsx">基础</code>
+<code src="./demos/chat-providers/custom-provider-width-ui.tsx">基础</code>
+
+## 贡献 Chat Provider
+
+我们欢迎社区贡献新的 Chat Provider！请按照以下规范进行 Chat Provider 开发。
+
+### 贡献指南
+
+这篇指南会指导你如何为 Ant Design 贡献自己的一份力量，请你在提 issue 或者 pull request 之前花几分钟来阅读一遍这篇[贡献指南](/docs/react/contributing-cn)。
+
+### 贡献规范
+
+Chat Provider 应遵循以下规范：
+
+- Chat Provider 应包含在 `packages/x-sdk/src/chat-providers` 目录下。
+- Chat Provider Type 应包含在 `packages/x-sdk/src/chat-providers/type` 目录下。
+
+### 命名规范
+
+Chat Provider 主题文件应遵循以下命名规则：
+
+- Chat Provider 主题文件应以 `[供应商][类型][版本].ts` 驼峰格式的方式命名。
+- 如果是特定模型可直接以`[供应商][模型名称].ts` 驼峰格式的方式命名。

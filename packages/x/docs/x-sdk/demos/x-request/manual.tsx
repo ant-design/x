@@ -12,18 +12,26 @@ interface ChatInput {
   stream?: boolean;
 }
 
-/**
- * 🔔 请替换 BASE_URL、PATH、MODEL、API_KEY 为您自己的值
- * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
- */
-
 const QUERY_URL = 'https://api.x.ant.design/api/default_chat_provider_stream';
+
+const useLocale = () => {
+  const isCN = location.pathname.endsWith('-cn');
+  return {
+    request: isCN ? '请求' : 'Request',
+    requestAbort: isCN ? '请求中止' : 'Request Abort',
+    requestLog: isCN ? '请求日志' : 'Request Log',
+    status: isCN ? '状态' : 'Status',
+    updateTimes: isCN ? '更新次数' : 'Update Times',
+    requestStatus: (status: string) => `request ${status}`,
+  };
+};
 
 const App = () => {
   const [status, setStatus] = useState<string>();
   const [thoughtChainStatus, setThoughtChainStatus] = useState<ThoughtChainItemType['status']>();
   const [lines, setLines] = useState<Record<string, string>[]>([]);
   const [questionText, setQuestionText] = useState<string>('hello, who are u?');
+  const locale = useLocale();
 
   const requestHandlerRef = useRef<AbstractXRequestClass<ChatInput, Record<string, string>>>(null);
 
@@ -77,10 +85,10 @@ const App = () => {
               />
               <Flex gap="small">
                 <Button type="primary" disabled={status === 'pending'} onClick={request}>
-                  Request
+                  {locale.request}
                 </Button>
                 <Button type="primary" disabled={status !== 'pending'} onClick={abort}>
-                  Request Abort
+                  {locale.requestAbort}
                 </Button>
               </Flex>
             </Flex>
@@ -94,14 +102,14 @@ const App = () => {
         <ThoughtChain
           items={[
             {
-              title: 'Request Log',
+              title: locale.requestLog,
               status: thoughtChainStatus,
               icon: status === 'pending' ? <LoadingOutlined /> : <TagsOutlined />,
-              description: `request ${status}`,
+              description: locale.requestStatus(status || ''),
               content: (
                 <Descriptions column={1}>
-                  <Descriptions.Item label="Status">{status || '-'}</Descriptions.Item>
-                  <Descriptions.Item label="Update Times">{lines.length}</Descriptions.Item>
+                  <Descriptions.Item label={locale.status}>{status || '-'}</Descriptions.Item>
+                  <Descriptions.Item label={locale.updateTimes}>{lines.length}</Descriptions.Item>
                 </Descriptions>
               ),
             },

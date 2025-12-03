@@ -1,7 +1,7 @@
 import { useEvent } from 'rc-util';
 import React, { useState } from 'react';
 import type { AnyObject } from '../_util/type';
-import { AbstractChatProvider } from '../providers';
+import { AbstractChatProvider } from '../chat-providers';
 import { ConversationData } from '../x-conversations';
 import { AbstractXRequestClass } from '../x-request';
 import type { SSEOutput } from '../x-stream';

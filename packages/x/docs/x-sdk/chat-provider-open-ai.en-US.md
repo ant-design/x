@@ -13,5 +13,5 @@ order: 2
 ## Usage Example
 
 <!-- prettier-ignore -->
-<code src="./demos/chat-provider/open-ai-chat-provider.tsx">Basic</code> 
+<code src="./demos/chat-providers/open-ai-chat-provider.tsx">Basic</code> 
 <code src="./demos/x-chat/openai.tsx">With Components</code>

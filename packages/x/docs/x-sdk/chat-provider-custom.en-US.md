@@ -201,4 +201,4 @@ onRequest({
 ## Usage Example
 
 <!-- prettier-ignore -->
-<code src="./demos/chat-provider/custom-provider-width-ui.tsx">Basic</code>
+<code src="./demos/chat-provides/custom-provider-width-ui.tsx">Basic</code>

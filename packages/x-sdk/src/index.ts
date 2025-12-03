@@ -1,9 +1,9 @@
-export * from './providers';
+export * from './chat-providers';
 export type {
   XModelMessage,
   XModelParams,
   XModelResponse,
-} from './providers/types/model';
+} from './chat-providers/types/model';
 export type { DefaultMessageInfo, MessageInfo } from './x-chat';
 export { default as useXChat } from './x-chat';
 export type { ConversationData } from './x-conversations';

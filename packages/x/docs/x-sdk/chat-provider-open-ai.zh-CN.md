@@ -13,5 +13,5 @@ order: 2
 ## 使用示例
 
 <!-- prettier-ignore -->
-<code src="./demos/chat-provider/open-ai-chat-provider.tsx">基本</code> 
+<code src="./demos/chat-providers/open-ai-chat-provider.tsx">基本</code> 
 <code src="./demos/x-chat/openai.tsx">配合组件</code>
