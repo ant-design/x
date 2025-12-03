@@ -89,11 +89,8 @@ const ActionsAudio: React.FC<ActionsAudioProps> = (props) => {
   return (
     <Item
       label={status ? StatusLabel[status] : ''}
-      style={{ ...style, ...styles.root }}
-      styles={{
-        ...styles,
-        root: { ...style, ...styles.root },
-      }}
+      style={style}
+      styles={styles}
       classNames={{
         ...classNames,
         root: mergedCls,
