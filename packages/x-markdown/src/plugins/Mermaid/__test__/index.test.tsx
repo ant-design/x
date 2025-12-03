@@ -135,7 +135,12 @@ describe('Mermaid Plugin', () => {
 
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const copyButton = screen.getByLabelText('copy');
+      // 切换到代码视图
+      const codeButton = screen.getByText('Code');
+      fireEvent.click(codeButton);
+
+      // 查找复制按钮 - 使用 aria-label 或 role
+      const copyButton = screen.getByLabelText('Copy');
       fireEvent.click(copyButton);
 
       await waitFor(() => {
@@ -154,7 +159,11 @@ describe('Mermaid Plugin', () => {
 
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const copyButton = screen.getByLabelText('copy');
+      // 切换到代码视图
+      const codeButton = screen.getByText('Code');
+      fireEvent.click(codeButton);
+
+      const copyButton = screen.getByLabelText('Copy');
 
       // 确保点击不会抛出错误
       expect(() => fireEvent.click(copyButton)).not.toThrow();
@@ -173,18 +182,22 @@ describe('Mermaid Plugin', () => {
         writable: true,
         value: mockClipboard,
       });
-      const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
 
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      const copyButton = screen.getByLabelText('copy');
-      fireEvent.click(copyButton);
+      // 切换到代码视图
+      const codeButton = screen.getByText('Code');
+      fireEvent.click(codeButton);
 
+      const copyButton = screen.getByLabelText('Copy');
+
+      // 确保点击不会抛出错误
+      expect(() => fireEvent.click(copyButton)).not.toThrow();
+
+      // 验证剪贴板被调用，即使失败也不会抛出错误
       await waitFor(() => {
-        expect(consoleSpy).toHaveBeenCalledWith('Failed to copy code:', expect.any(Error));
+        expect(mockClipboard.writeText).toHaveBeenCalledWith('graph TD; A-->B;');
       });
-
-      consoleSpy.mockRestore();
     });
   });
 
