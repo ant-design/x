@@ -1,7 +1,7 @@
-import { XModelMessage, XModelParams } from '../../x-chat/providers/types/model';
-import { XRequestOptions } from '../../x-request';
-import { SSEFields } from '../../x-stream';
+import { XRequestOptions } from '../x-request';
+import { SSEFields } from '../x-stream';
 import AbstractChatProvider, { TransformMessage } from './AbstractChatProvider';
+import { XModelMessage, XModelParams } from './types/model';
 
 /**
  * DeepSeek Chat Provider

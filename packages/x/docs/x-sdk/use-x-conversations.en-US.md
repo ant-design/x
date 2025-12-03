@@ -1,13 +1,10 @@
 ---
 group:
   title: Data Flow
-  order: 2
+  order: 1
 title: useXConversations
-order: 3
-subtitle: Conversation Management
+order: 2
 description:
-demo:
-  cols: 1
 ---
 
 ## When To Use
