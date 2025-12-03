@@ -16,12 +16,12 @@ demo:
 ## 代码演示
 
 <!-- prettier-ignore -->
-<code src="./demos/x-chat/model.tsx">OpenAI 模型接入</code>
+<code src="./demos/x-chat/openai.tsx">OpenAI 模型接入</code>
 <code src="./demos/x-chat/deepSeek.tsx">DeepSeek 思考模型接入</code>
 <code src="./demos/x-chat/defaultMessages.tsx">历史消息设置</code>
 <code src="./demos/x-chat/developer.tsx">系统提示词设置</code>
-<code src="./demos/x-chat/custom-request.tsx">自定义 request</code>
-<code src="./demos/x-chat/openai-node.tsx"> 使用 openai-node </code>
+<code src="./demos/x-chat/custom-request-fetch.tsx">自定义 XRequest.fetch </code>
+<code src="./demos/x-chat/request-openai-node.tsx"> 自定义 request </code>
 
 ## API
 

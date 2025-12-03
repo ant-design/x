@@ -8,22 +8,25 @@ import React from 'react';
 /**
  * 🔔 Please replace the BASE_URL, PATH, with your own values.
  */
-const BASE_URL = 'https://api.example.com';
-const PATH = '/chat';
+const QUERY_URL = 'https://api.x.ant.design/api/default_chat_provider_stream';
 
 const App = () => {
   const [status, setStatus] = React.useState<ThoughtChainItemType['status']>();
   const [lines, setLines] = React.useState<Record<string, string>[]>([]);
 
-  function request() {
+  const request = () => {
     setStatus('loading');
 
-    XRequest(BASE_URL + PATH, {
+    XRequest(QUERY_URL, {
       params: {
+        query: 'gpt-3.5-turbo',
         model: 'gpt-3.5-turbo',
         messages: [{ role: 'user', content: 'hello, who are u?' }],
         stream: true,
         agentId: 111,
+      },
+      headers: {
+        'X-header': 'ADX',
       },
       callbacks: {
         onSuccess: (messages) => {
@@ -40,14 +43,13 @@ const App = () => {
         },
       },
     });
-  }
+  };
 
   return (
     <Splitter>
       <Splitter.Panel>
         <Button type="primary" disabled={status === 'loading'} onClick={request}>
-          Request - {BASE_URL}
-          {PATH}
+          Request - {QUERY_URL}
         </Button>
       </Splitter.Panel>
       <Splitter.Panel style={{ marginLeft: 16 }}>

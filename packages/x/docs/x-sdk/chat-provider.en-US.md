@@ -40,4 +40,4 @@ const { onRequest, messages, isRequesting } = useXChat({
 
 `DefaultChatProvider` is a default `Chat Provider` that performs minimal data transformation, directly returning request parameters and response data to `useXChat`. It is compatible with both regular requests and stream requests (you need to handle stream concatenation) data formats and can be used directly.
 
-<code src="./demos/chat-provider/default-chat-provider.tsx">Basic</code> <code src="./demos/chat-provider/default-chat-provider_width_ui.tsx">With Components</code>
+<code src="./demos/chat-provider/default-chat-provider.tsx">Basic</code> <code src="./demos/chat-provider/default-chat-provider-width-ui.tsx">With Components</code>

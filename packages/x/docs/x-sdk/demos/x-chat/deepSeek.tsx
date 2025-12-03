@@ -5,25 +5,29 @@ import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
 import {
   DeepSeekChatProvider,
   useXChat,
-  XModelParams,
-  XModelResponse,
+  type XModelParams,
+  type XModelResponse,
   XRequest,
 } from '@ant-design/x-sdk';
 import { Button, Divider, Flex, Tooltip } from 'antd';
 import React from 'react';
 
 /**
+ * 🔔 请替换 BASE_URL、PATH、MODEL、API_KEY 为您自己的值
  * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
  */
 
 const BASE_URL = 'https://api.x.ant.design/api/big_model_glm-4.5-flash';
 
 /**
- * 🔔 The MODEL is fixed in the current request, please replace it with your BASE_UR and MODEL
+ * 🔔 当前请求中 MODEL 是固定的，请替换为您自己的 BASE_URL 和 MODEL
+ * 🔔 The MODEL is fixed in the current request, please replace it with your BASE_URL and MODEL
  */
 
 const MODEL = 'glm-4.5-flash';
 
+// 本地化钩子：根据当前语言环境返回对应的文本
+// Localization hook: return corresponding text based on current language environment
 const useLocale = () => {
   const isCN = location.pathname.endsWith('-cn');
   return {
@@ -50,12 +54,16 @@ const useLocale = () => {
   };
 };
 
+// 思考组件：显示AI思考过程的加载状态
+// Thinking component: display AI thinking process loading status
 const ThinkComponent = React.memo((props: ComponentProps) => {
   const locale = useLocale();
   const [title, setTitle] = React.useState(locale.deepThinking);
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
+    // 当流状态完成时，更新标题和加载状态
+    // When stream status is complete, update title and loading status
     if (props.streamStatus === 'done') {
       setTitle(locale.completeThinking);
       setLoading(false);
@@ -69,10 +77,13 @@ const ThinkComponent = React.memo((props: ComponentProps) => {
   );
 });
 
+// 消息角色配置：定义助手和用户消息的布局和渲染方式
+// Message role configuration: define layout and rendering for assistant and user messages
 const role: BubbleListProps['role'] = {
   assistant: {
     placement: 'start',
     contentRender(content: string) {
+      // 双 '\n' 在markdown中会被解析为新段落，因此需要替换为单个 '\n'
       // Double '\n' in a mark will causes markdown parse as a new paragraph, so we need to replace it with a single '\n'
       const newContent = content.replace('/\n\n/g', '<br/><br/>');
       return (
@@ -93,6 +104,8 @@ const role: BubbleListProps['role'] = {
 const App = () => {
   const [content, setContent] = React.useState('');
   const locale = useLocale();
+  // 创建DeepSeek聊天提供者：配置请求参数和模型
+  // Create DeepSeek chat provider: configure request parameters and model
   const [provider] = React.useState(
     new DeepSeekChatProvider({
       request: XRequest<XModelParams, XModelResponse>(BASE_URL, {
@@ -104,10 +117,14 @@ const App = () => {
       }),
     }),
   );
-  // Chat messages
+
+  // 聊天消息管理：处理消息列表、请求状态、错误处理等
+  // Chat message management: handle message list, request status, error handling, etc.
   const { onRequest, messages, setMessages, setMessage, isRequesting, abort, onReload } = useXChat({
     provider,
     requestFallback: (_, { error, errorInfo, messageInfo }) => {
+      // 请求失败时的回退处理：区分中止错误和其他错误
+      // Fallback handling for request failure: distinguish between abort error and other errors
       if (error.name === 'AbortError') {
         return {
           content: messageInfo?.message?.content || locale.requestAborted,
@@ -120,6 +137,8 @@ const App = () => {
       };
     },
     requestPlaceholder: () => {
+      // 请求占位符：在等待响应时显示等待消息
+      // Request placeholder: display waiting message while waiting for response
       return {
         content: locale.waiting,
         role: 'assistant',
@@ -127,6 +146,8 @@ const App = () => {
     },
   });
 
+  // 添加用户消息：向消息列表中添加一条用户消息
+  // Add user message: add a user message to the message list
   const addUserMessage = () => {
     setMessages([
       ...messages,
@@ -138,6 +159,8 @@ const App = () => {
     ]);
   };
 
+  // 添加AI消息：向消息列表中添加一条AI助手消息
+  // Add AI message: add an AI assistant message to the message list
   const addAIMessage = () => {
     setMessages([
       ...messages,
@@ -149,6 +172,8 @@ const App = () => {
     ]);
   };
 
+  // 添加系统消息：向消息列表中添加一条系统消息
+  // Add system message: add a system message to the message list
   const addSystemMessage = () => {
     setMessages([
       ...messages,
@@ -160,6 +185,8 @@ const App = () => {
     ]);
   };
 
+  // 编辑最后一条消息：修改消息列表中最后一条消息的内容
+  // Edit last message: modify the content of the last message in the message list
   const editLastMessage = () => {
     const lastMessage = messages[messages.length - 1];
     setMessage(lastMessage.id, {
@@ -169,6 +196,8 @@ const App = () => {
 
   return (
     <Flex vertical gap="middle">
+      {/* 状态和控制区域：显示当前状态并提供操作按钮 */}
+      {/* Status and control area: display current status and provide action buttons */}
       <Flex vertical gap="middle">
         <div>
           {locale.currentStatus}
@@ -179,18 +208,24 @@ const App = () => {
               : locale.qaCompleted}
         </div>
         <Flex align="center" gap="middle">
+          {/* 中止按钮：仅在请求进行中时可用 */}
+          {/* Abort button: only available when request is in progress */}
           <Button disabled={!isRequesting} onClick={abort}>
             {locale.abort}
           </Button>
           <Button onClick={addUserMessage}>{locale.addUserMessage}</Button>
           <Button onClick={addAIMessage}>{locale.addAIMessage}</Button>
           <Button onClick={addSystemMessage}>{locale.addSystemMessage}</Button>
+          {/* 编辑按钮：仅在存在消息时可用 */}
+          {/* Edit button: only available when messages exist */}
           <Button disabled={!messages.length} onClick={editLastMessage}>
             {locale.editLastMessage}
           </Button>
         </Flex>
       </Flex>
       <Divider />
+      {/* 消息列表：显示所有聊天消息 */}
+      {/* Message list: display all chat messages */}
       <Bubble.List
         role={role}
         style={{ height: 500 }}
@@ -198,6 +233,8 @@ const App = () => {
           key: id,
           role: message.role,
           content: message.content,
+          // 为助手消息添加重试按钮
+          // Add retry button for assistant messages
           components:
             message.role === 'assistant'
               ? {
@@ -220,15 +257,21 @@ const App = () => {
               : {},
         }))}
       />
+      {/* 发送器：用户输入区域，支持发送消息和中止请求 */}
+      {/* Sender: user input area, supports sending messages and aborting requests */}
       <Sender
         loading={isRequesting}
         value={content}
         onCancel={() => {
+          // 取消当前请求
+          // Cancel current request
           abort();
         }}
         onChange={setContent}
         placeholder={locale.placeholder}
         onSubmit={(nextContent) => {
+          // 发送用户消息：构建消息格式并清空输入框
+          // Send user message: build message format and clear input field
           onRequest({
             messages: [
               {

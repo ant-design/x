@@ -6,6 +6,7 @@ import React from 'react';
 
 interface ChatInput {
   query: string;
+  role: 'user';
   stream?: boolean;
 }
 
@@ -13,6 +14,7 @@ interface ChatOutput {
   choices: Array<{
     message: {
       content: string;
+      role: string;
     };
   }>;
 }
@@ -23,13 +25,13 @@ interface SystemMessage {
 }
 
 const role: BubbleListProps['role'] = {
-  ai: {
+  assistant: {
     placement: 'start',
     contentRender(content: ChatOutput) {
       return content?.choices?.[0]?.message?.content;
     },
   },
-  local: {
+  user: {
     placement: 'end',
     contentRender(content: ChatInput) {
       return content?.query;
@@ -84,17 +86,19 @@ const App = () => {
     defaultMessages: [
       {
         id: '1',
-        message: { query: locale.historyUserMessage } as ChatInput,
+        message: { query: locale.historyUserMessage, role: 'user' },
         status: 'local',
       },
       {
         id: '2',
-        message: { choices: [{ message: { content: locale.historyAIResponse } }] } as ChatOutput,
+        message: {
+          choices: [{ message: { content: locale.historyAIResponse, role: 'assistant' } }],
+        },
         status: 'success',
       },
     ],
-    requestPlaceholder: { choices: [{ message: { content: locale.waiting } }] },
-    requestFallback: { choices: [{ message: { content: locale.mockFailed } }] },
+    requestPlaceholder: { choices: [{ message: { content: locale.waiting, role: 'assistant' } }] },
+    requestFallback: { choices: [{ message: { content: locale.mockFailed, role: 'assistant' } }] },
   });
 
   const addUserMessage = () => {
@@ -102,7 +106,7 @@ const App = () => {
       ...messages,
       {
         id: Date.now(),
-        message: { query: locale.addUserMessage },
+        message: { query: locale.addUserMessage, role: 'user' },
         status: 'local',
       },
     ]);
@@ -113,7 +117,7 @@ const App = () => {
       ...messages,
       {
         id: Date.now(),
-        message: { choices: [{ message: { content: locale.addAIMessage } }] },
+        message: { choices: [{ message: { content: locale.addAIMessage, role: 'assistant' } }] },
         status: 'success',
       },
     ]);
@@ -142,13 +146,13 @@ const App = () => {
     }
     if (isUser) {
       setMessage(lastMessage.id, {
-        message: { query: locale.editUserMessage },
+        message: { query: locale.editUserMessage, role: 'user' },
       });
     }
 
     if (isAI) {
       setMessage(lastMessage.id, {
-        message: { choices: [{ message: { content: locale.editAIResponse } }] },
+        message: { choices: [{ message: { content: locale.editAIResponse, role: 'assistant' } }] },
       });
     }
   };
@@ -172,11 +176,9 @@ const App = () => {
         items={messages.map(({ id, message, status }) => ({
           key: id,
           loading: status === 'loading',
-          role: (message as SystemMessage).role
-            ? (message as SystemMessage).role
-            : status === 'local'
-              ? 'local'
-              : 'ai',
+          role: (message as SystemMessage | ChatInput).role
+            ? (message as SystemMessage | ChatInput).role
+            : (message as ChatOutput)?.choices?.[0]?.message?.role,
           content: message,
         }))}
       />
@@ -189,6 +191,7 @@ const App = () => {
         onSubmit={(nextContent) => {
           onRequest({
             stream: false,
+            role: 'user',
             query: nextContent,
           });
           setContent('');

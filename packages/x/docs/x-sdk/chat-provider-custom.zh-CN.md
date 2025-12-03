@@ -7,7 +7,7 @@ order: 4
 subtitle: 自定义
 ---
 
-当内置的 Chat Provider 不满足使用可以通过实现抽象类 `AbstractChatProvider` (仅包含三个抽象方法)，可以将不同的模型提供商、或者 Agentic 服务数据转换为统一的 `useXChat` 可消费的格式，从而实现不同模型、Agent之间的无缝接入和切换。
+当内置的 Chat Provider 不满足需求时，可以通过实现抽象类 `AbstractChatProvider` (仅包含三个抽象方法)，可以将不同的模型提供商、或者 Agentic 服务数据转换为可被 `useXChat` 消费的格式，从而实现不同模型、Agent之间的无缝接入和切换。
 
 ## AbstractChatProvider
 
@@ -97,7 +97,7 @@ class CustomProvider<
   }
   transformMessage(info: TransformMessage<ChatMessage, Output>): ChatMessage {
     const { originMessage, chunk } = info || {};
-    if (!chunk) {
+    if (!chunk || !chunk?.data || (chunk?.data && chunk?.data?.includes('[DONE]'))) {
       return {
         content: originMessage?.content || '',
         role: 'assistant',
@@ -175,8 +175,6 @@ data: "的科技新闻，"
 - `transformLocalMessage` 将 onRequest 传入的参数转换为本地（用户发送）的 ChatMessage，用于用户发送消息渲染，同时会更新到 messages，用于消息列表渲染。
 - `transformMessage` 可在更新返回数据时将数据做转换为 ChatMessage 数据类型，同时会更新到 messages，用于消息列表渲染。
 
-代码可查看 [CustomProvider](/x-sdks/chat-provider-cn#自定义provider示例)
-
 5、最后我们可以将 `CustomProvider` 实例化并传入 `useXChat` 中，即可完成自定义 Provider 的使用。
 
 ```tsx
@@ -200,3 +198,8 @@ onRequest({
   query: '帮我总结今天的科技新闻',
 });
 ```
+
+### 效果演示
+
+<!-- prettier-ignore -->
+<code src="./demos/chat-provider/custom-provider-width-ui.tsx">基础</code>

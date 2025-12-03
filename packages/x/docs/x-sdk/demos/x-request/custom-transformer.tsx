@@ -43,7 +43,7 @@ const App = () => {
   const [status, setStatus] = React.useState<ThoughtChainItemType['status']>();
   const [lines, setLines] = React.useState<string[]>([]);
 
-  function request() {
+  const request = () => {
     setStatus('loading');
 
     XRequest(BASE_URL + PATH, {
@@ -74,7 +74,7 @@ const App = () => {
       }),
       fetch: mockFetch,
     });
-  }
+  };
 
   return (
     <Splitter>

@@ -10,4 +10,6 @@ order: 3
 
 ## 使用示例
 
-<code src="./demos/chat-provider/deep-seek-chat-provider.tsx">基础</code> <code src="./demos/x-chat/deepSeek.tsx">配合组件</code>
+<!-- prettier-ignore -->
+<code src="./demos/chat-provider/deep-seek-chat-provider.tsx">基础</code> 
+<code src="./demos/x-chat/deepSeek.tsx">配合组件</code>

@@ -16,7 +16,7 @@ demo:
 
 ## Code Demo
 
-<code src="./demos/x-request/basic.tsx">Basic Usage</code> <code src="./demos/x-request/custom-params.tsx">Custom Parameters</code> <code src="./demos/x-request/custom-transformer.tsx">Custom Transformer</code> <code src="./demos/x-request/model.tsx">Model Integration</code> <code src="./demos/x-request/timeout.tsx">Timeout Configuration</code>
+<code src="./demos/x-request/basic.tsx">Basic Usage</code> <code src="./demos/x-request/custom-params-headers.tsx">Custom Parameters</code> <code src="./demos/x-request/custom-transformer.tsx">Custom Transformer</code> <code src="./demos/x-request/manual.tsx">Model Integration</code> <code src="./demos/x-request/timeout.tsx">Timeout Configuration</code>
 
 ## API
 

@@ -3,30 +3,20 @@ import type { ThoughtChainItemType } from '@ant-design/x';
 import { ThoughtChain } from '@ant-design/x';
 import { AbstractXRequestClass, XRequest } from '@ant-design/x-sdk';
 import { Button, Descriptions, Flex, Input, Splitter, Typography } from 'antd';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const { Paragraph } = Typography;
 
 interface ChatInput {
-  model: string;
-  messages: {
-    role: 'user' | 'assistant';
-    content: string;
-  }[];
-  stream: boolean;
+  query?: string;
+  stream?: boolean;
 }
 
 /**
  * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
  */
 
-const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow_Qwen2.5-7B-Instruct';
-
-/**
- * 🔔 The MODEL is fixed in the current request, please replace it with your BASE_UR and MODEL
- */
-
-const MODEL = 'Qwen/Qwen2.5-7B-Instruct';
+const QUERY_URL = 'https://api.x.ant.design/api/default_chat_provider_stream';
 
 const App = () => {
   const [status, setStatus] = useState<string>();
@@ -36,16 +26,12 @@ const App = () => {
 
   const requestHandlerRef = useRef<AbstractXRequestClass<ChatInput, Record<string, string>>>(null);
 
-  function request() {
-    setStatus('pending');
-    setLines([]);
-
-    const requestHandler = XRequest<ChatInput, Record<string, string>>(BASE_URL, {
+  useEffect(() => {
+    requestHandlerRef.current = XRequest<ChatInput, Record<string, string>>(QUERY_URL, {
       params: {
-        model: MODEL,
-        messages: [{ role: 'user', content: questionText }],
         stream: true,
       },
+      manual: true,
       callbacks: {
         onSuccess: () => {
           setStatus('success');
@@ -62,8 +48,15 @@ const App = () => {
         },
       },
     });
-    requestHandlerRef.current = requestHandler;
-  }
+  }, []);
+
+  const request = () => {
+    setStatus('pending');
+    setLines([]);
+    requestHandlerRef?.current?.run({
+      query: questionText,
+    });
+  };
 
   const abort = () => {
     requestHandlerRef.current?.abort?.();

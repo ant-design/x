@@ -15,7 +15,7 @@ order: 0
 
 ### 示例
 
-<code src="../x-sdk/demos/x-chat/model.tsx" title="使用X SDK接入"></code>
+<code src="../x-sdk/demos/x-chat/openai.tsx" title="使用X SDK接入"></code>
 
 ## 使用 openai-node
 
@@ -166,4 +166,4 @@ export default Demo;
 
 ### 示例
 
-<code src="../x-sdk/demos/x-chat/openai-node.tsx" title="接入 openai" description="此示例仅展示使用X SDK接入 openai 的逻辑参考，并未对模型数据进行处理，需填写正确的apiKey再进行数据调试"></code>
+<code src="../x-sdk/demos/x-chat/request-openai-node.tsx" title="接入 openai" description="此示例仅展示使用X SDK接入 openai 的逻辑参考，并未对模型数据进行处理，需填写正确的apiKey再进行数据调试"></code>

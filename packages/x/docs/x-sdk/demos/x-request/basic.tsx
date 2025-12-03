@@ -8,17 +8,18 @@ import React from 'react';
 /**
  * 🔔 Please replace the BASE_URL, PATH with your own values.
  */
-const BASE_URL = 'https://api.example.com';
-const PATH = '/get-user-info';
+const QUERY_URL = 'https://api.x.ant.design/api/default_chat_provider_stream';
 
 const App = () => {
   const [status, setStatus] = React.useState<ThoughtChainItemType['status']>();
   const [lines, setLines] = React.useState<Record<string, string>[]>([]);
 
-  function request() {
+  const request = () => {
     setStatus('loading');
-
-    XRequest(BASE_URL + PATH, {
+    XRequest(QUERY_URL, {
+      params: {
+        query: 'X',
+      },
       callbacks: {
         onSuccess: (messages) => {
           setStatus('success');
@@ -34,14 +35,13 @@ const App = () => {
         },
       },
     });
-  }
+  };
 
   return (
     <Splitter>
       <Splitter.Panel>
         <Button type="primary" disabled={status === 'loading'} onClick={request}>
-          Request - {BASE_URL}
-          {PATH}
+          Request - {QUERY_URL}
         </Button>
       </Splitter.Panel>
       <Splitter.Panel style={{ marginLeft: 16 }}>

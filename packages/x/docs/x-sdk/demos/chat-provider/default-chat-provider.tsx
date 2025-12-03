@@ -36,6 +36,7 @@ interface ChatOutput {
   choices: Array<{
     message: {
       content: string;
+      role: string;
     };
   }>;
 }
@@ -58,8 +59,8 @@ const App = () => {
   // Chat messages
   const { onRequest, messages, abort, isRequesting, setMessages, setMessage } = useXChat({
     provider,
-    requestPlaceholder: { choices: [{ message: { content: locale.waiting } }] },
-    requestFallback: { choices: [{ message: { content: locale.mockFailed } }] },
+    requestPlaceholder: { choices: [{ message: { content: locale.waiting, role: 'assistant' } }] },
+    requestFallback: { choices: [{ message: { content: locale.mockFailed, role: 'assistant' } }] },
   });
 
   const addUserMessage = () => {
@@ -78,7 +79,7 @@ const App = () => {
       ...messages,
       {
         id: Date.now(),
-        message: { choices: [{ message: { content: locale.addAIMsg } }] },
+        message: { choices: [{ message: { content: locale.addAIMsg, role: 'assistant' } }] },
         status: 'success',
       },
     ]);
@@ -113,7 +114,7 @@ const App = () => {
 
     if (isAI) {
       setMessage(lastMessage.id, {
-        message: { choices: [{ message: { content: locale.editLastMsg } }] },
+        message: { choices: [{ message: { content: locale.editLastMsg, role: 'assistant' } }] },
       });
     }
   };

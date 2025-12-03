@@ -5,25 +5,29 @@ import XMarkdown from '@ant-design/x-markdown';
 import {
   OpenAIChatProvider,
   useXChat,
-  XModelParams,
-  XModelResponse,
+  type XModelParams,
+  type XModelResponse,
   XRequest,
 } from '@ant-design/x-sdk';
 import { Button, Divider, Flex, Tooltip } from 'antd';
 import React from 'react';
 
 /**
+ * 🔔 请替换 BASE_URL、PATH、MODEL、API_KEY 为您自己的值
  * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
  */
 
 const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow_THUDM_glm-4-9b-chat';
 
 /**
- * 🔔 The MODEL is fixed in the current request, please replace it with your BASE_UR and MODEL
+ * 🔔 当前请求中 MODEL 是固定的，请替换为您自己的 BASE_URL 和 MODEL
+ * 🔔 The MODEL is fixed in the current request, please replace it with your BASE_URL and MODEL
  */
 
 const MODEL = 'THUDM/glm-4-9b-chat';
 
+// 本地化钩子：根据当前语言环境返回对应的文本
+// Localization hook: return corresponding text based on current language environment
 const useLocale = () => {
   const isCN = location.pathname.endsWith('-cn');
   return {
@@ -59,10 +63,13 @@ const useLocale = () => {
   };
 };
 
+// 消息角色配置：定义助手和用户消息的布局和渲染方式
+// Message role configuration: define layout and rendering for assistant and user messages
 const role: BubbleListProps['role'] = {
   assistant: {
     placement: 'start',
     contentRender(content: string) {
+      // 双 '\n' 在markdown中会被解析为新段落，因此需要替换为单个 '\n'
       // Double '\n' in a mark will causes markdown parse as a new paragraph, so we need to replace it with a single '\n'
       const newContent = content.replace('/\n\n/g', '<br/><br/>');
       return <XMarkdown content={newContent} />;
@@ -75,6 +82,8 @@ const role: BubbleListProps['role'] = {
 
 const App = () => {
   const [content, setContent] = React.useState('');
+  // 创建OpenAI聊天提供者：配置请求参数和模型
+  // Create OpenAI chat provider: configure request parameters and model
   const [provider] = React.useState(
     new OpenAIChatProvider({
       request: XRequest<XModelParams, XModelResponse>(BASE_URL, {
@@ -88,9 +97,12 @@ const App = () => {
   );
   const locale = useLocale();
 
-  // Chat messages
+  // 聊天消息管理：处理消息列表、系统提示、错误处理等
+  // Chat message management: handle message list, system prompts, error handling, etc.
   const { onRequest, messages, setMessages, setMessage, isRequesting, abort, onReload } = useXChat({
     provider,
+    // 默认消息：包含开发者系统提示和欢迎对话
+    // Default messages: include developer system prompt and welcome conversation
     defaultMessages: [
       {
         id: 'developer',
@@ -109,6 +121,8 @@ const App = () => {
       },
     ],
     requestFallback: (_, { error, errorInfo, messageInfo }) => {
+      // 请求失败时的回退处理：区分中止错误和其他错误
+      // Fallback handling for request failure: distinguish between abort error and other errors
       if (error.name === 'AbortError') {
         return {
           content: messageInfo?.message?.content || locale.requestAborted,
@@ -121,6 +135,8 @@ const App = () => {
       };
     },
     requestPlaceholder: () => {
+      // 请求占位符：在等待响应时显示等待消息
+      // Request placeholder: display waiting message while waiting for response
       return {
         content: locale.waiting,
         role: 'assistant',
@@ -128,8 +144,12 @@ const App = () => {
     },
   });
 
+  // 过滤聊天消息：排除开发者系统提示消息，只显示用户可见的对话
+  // Filter chat messages: exclude developer system prompt messages, only show user-visible conversations
   const chatMessages = messages.filter((m) => m.message.role !== 'developer');
 
+  // 添加用户消息：向消息列表中添加一条用户消息
+  // Add user message: add a user message to the message list
   const addUserMessage = () => {
     setMessages([
       ...messages,
@@ -141,6 +161,8 @@ const App = () => {
     ]);
   };
 
+  // 添加AI消息：向消息列表中添加一条AI助手消息
+  // Add AI message: add an AI assistant message to the message list
   const addAIMessage = () => {
     setMessages([
       ...messages,
@@ -152,6 +174,8 @@ const App = () => {
     ]);
   };
 
+  // 添加系统消息：向消息列表中添加一条系统消息
+  // Add system message: add a system message to the message list
   const addSystemMessage = () => {
     setMessages([
       ...messages,
@@ -163,6 +187,8 @@ const App = () => {
     ]);
   };
 
+  // 编辑最后一条消息：修改消息列表中最后一条消息的内容
+  // Edit last message: modify the content of the last message in the message list
   const editLastMessage = () => {
     const lastMessage = chatMessages[chatMessages.length - 1];
     setMessage(lastMessage.id, {
@@ -170,6 +196,8 @@ const App = () => {
     });
   };
 
+  // 编辑开发者系统提示：修改系统级别的提示信息
+  // Edit developer system prompt: modify system-level prompt information
   const editDeveloper = () => {
     setMessage('developer', {
       message: { role: 'developer', content: locale.modifiedSystemPrompt },
@@ -178,6 +206,8 @@ const App = () => {
 
   return (
     <Flex vertical gap="middle">
+      {/* 状态和控制区域：显示当前状态、系统提示和操作按钮 */}
+      {/* Status and control area: display current status, system prompt and action buttons */}
       <Flex vertical gap="middle">
         <div>
           {locale.currentStatus}{' '}
@@ -187,26 +217,36 @@ const App = () => {
               ? locale.noMessages
               : locale.qaCompleted}
         </div>
+        {/* 显示当前系统提示：开发者角色的消息内容 */}
+        {/* Display current system prompt: content of developer role message */}
         <div>
           {locale.currentSystemPrompt}{' '}
           {`${messages.find((m) => m.message.role === 'developer')?.message.content || locale.none}`}
         </div>
         <Flex wrap align="center" gap="middle">
+          {/* 中止按钮：仅在请求进行中时可用 */}
+          {/* Abort button: only available when request is in progress */}
           <Button disabled={!isRequesting} onClick={abort}>
             {locale.abort}
           </Button>
           <Button onClick={addUserMessage}>{locale.addUserMessage}</Button>
           <Button onClick={addAIMessage}>{locale.addAIMessage}</Button>
           <Button onClick={addSystemMessage}>{locale.addSystemMessage}</Button>
+          {/* 编辑按钮：仅在存在消息时可用 */}
+          {/* Edit button: only available when messages exist */}
           <Button disabled={!chatMessages.length} onClick={editLastMessage}>
             {locale.editLastMessage}
           </Button>
+          {/* 编辑系统提示按钮：修改开发者角色的系统提示 */}
+          {/* Edit system prompt button: modify developer role system prompt */}
           <Button disabled={!chatMessages.length} onClick={editDeveloper}>
             {locale.editSystemPrompt}
           </Button>
         </Flex>
       </Flex>
       <Divider />
+      {/* 消息列表：显示过滤后的聊天消息，不包括开发者系统提示 */}
+      {/* Message list: display filtered chat messages, excluding developer system prompts */}
       <Bubble.List
         role={role}
         style={{ maxHeight: 300 }}
@@ -216,6 +256,8 @@ const App = () => {
           status: status,
           loading: status === 'loading',
           content: message.content,
+          // 为助手消息添加重试按钮
+          // Add retry button for assistant messages
           footer:
             message.role === 'assistant' ? (
               <Tooltip title={locale.retry}>
@@ -234,15 +276,21 @@ const App = () => {
             ) : undefined,
         }))}
       />
+      {/* 发送器：用户输入区域，支持发送消息和中止请求 */}
+      {/* Sender: user input area, supports sending messages and aborting requests */}
       <Sender
         loading={isRequesting}
         value={content}
         onCancel={() => {
+          // 取消当前请求
+          // Cancel current request
           abort();
         }}
         onChange={setContent}
         placeholder={locale.placeholder}
         onSubmit={(nextContent) => {
+          // 发送用户消息：构建消息格式并清空输入框
+          // Send user message: build message format and clear input field
           onRequest({
             messages: [
               {

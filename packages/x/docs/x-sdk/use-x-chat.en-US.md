@@ -15,12 +15,12 @@ Manage conversation data through Agent and produce data for page rendering.
 ## Code Examples
 
 <!-- prettier-ignore -->
-<code src="./demos/x-chat/model.tsx">Model Integration</code>
+<code src="./demos/x-chat/openai.tsx">OpenAI Model Integration</code>
 <code src="./demos/x-chat/deepSeek.tsx">Thinking Model Integration</code>
 <code src="./demos/x-chat/defaultMessages.tsx">Historical Messages Setup</code>
 <code src="./demos/x-chat/developer.tsx">System Prompt Setup</code>
-<code src="./demos/x-chat/custom-request.tsx">Custom Request</code>
-<code src="./demos/x-chat/openai-node.tsx">openai-node</code>
+<code src="./demos/x-chat/custom-request-fetch.tsx">Custom Request</code>
+<code src="./demos/x-chat/request-openai-node.tsx">openai-node</code>
 
 ## API
 
