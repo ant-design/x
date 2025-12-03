@@ -23,7 +23,7 @@ tag: vVERSION
 
 - 🐛 修复因 antd 升级到 6.0.1 导致多个组件样式丢失问题。[#1428](https://github.com/ant-design/x/pull/1428) 由 [@kimteayon](https://github.com/kimteayon) 提交
 - 🐛 修复 Attachments 组件使用时 antd 报错问题。[#1395](https://github.com/ant-design/x/pull/1395) 由 [@kimteayon](https://github.com/kimteayon) 提交
-- 🐛 修复 Sender 组件 `allowSpeech` 自定义时 disable 错误问题。[#1398](https://github.com/ant-design/x/pull/1396) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- 🐛 修复 Sender 组件 `allowSpeech` 自定义时 disable 错误问题。[#1398](https://github.com/ant-design/x/pull/1398) 由 [@kimteayon](https://github.com/kimteayon) 提交
 - 🐛 修复 Sender.Switch 组件语义化配置缺失问题。[#1396](https://github.com/ant-design/x/pull/1396) 由 [@kimteayon](https://github.com/kimteayon) 提交
 - 🛠 修复因版本升级导致的测试用例失败。[#1393](https://github.com/ant-design/x/pull/1393) 由 [@kimteayon](https://github.com/kimteayon) 提交
 - 📖 新增 1.x 官网链接。[#1386](https://github.com/ant-design/x/pull/1386) 由 [@kimteayon](https://github.com/kimteayon) 提交、[#1394](https://github.com/ant-design/x/pull/1394) 由 [@kimteayon](https://github.com/kimteayon) 提交
@@ -36,7 +36,7 @@ tag: vVERSION
 
 ### @ant-design/x-markdown
 
-- 🐛 修复插件 HighlightCode 复制代码错误问题。[#1414](https://github.com/ant-design/x/pull/1414) 由 [@Jimi1126](https://github.com/DiJimi1126) 提交
+- 🐛 修复插件 HighlightCode 复制代码错误问题。[#1414](https://github.com/ant-design/x/pull/1414) 由 [@Jimi1126](https://github.com/Jimi1126) 提交
 - 🐛 修复 XMarkdown 渲染特殊字符失败问题。[#1413](https://github.com/ant-design/x/pull/1413) 由 [@Div627](https://github.com/Div627) 提交
 - 🐛 修复 XMarkdown 缓存重置逻辑因旧引用未生效问题。[#1420](https://github.com/ant-design/x/pull/1420) 由 [@Div627](https://github.com/Div627) 提交
 
