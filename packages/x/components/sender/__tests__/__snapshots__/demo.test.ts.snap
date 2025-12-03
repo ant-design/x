@@ -94,14 +94,14 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
                   </svg>
                 </span>
               </span>
-              <span>
+              <div>
                 Deep Think:
                 <span
                   style="display:inline-flex;width:28px;justify-content:center;align-items:center"
                 >
                   on
                 </span>
-              </span>
+              </div>
             </button>
           </div>
           <div
@@ -134,7 +134,9 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
                   </svg>
                 </span>
               </span>
-              <span>
+              <span
+                class=""
+              >
                 Agent
               </span>
             </button>
@@ -169,7 +171,9 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
                   </svg>
                 </span>
               </span>
-              <span>
+              <span
+                class=""
+              >
                 Files
               </span>
             </button>
@@ -338,7 +342,9 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
                   </svg>
                 </span>
               </span>
-              <span>
+              <span
+                class=""
+              >
                 深度搜索：
                 <span
                   style="display:inline-flex;width:28px;justify-content:center;align-items:center"
@@ -378,7 +384,9 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
                   </svg>
                 </span>
               </span>
-              <span>
+              <span
+                class=""
+              >
                 功能应用
               </span>
             </button>
@@ -413,7 +421,9 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
                   </svg>
                 </span>
               </span>
-              <span>
+              <span
+                class=""
+              >
                 文件引用
               </span>
             </button>
@@ -1233,7 +1243,53 @@ exports[`renders components/sender/demo/paste-image.tsx correctly 1`] = `
               <div
                 class="ant-file-card-list ant-attachment-list css-var-_R_0_"
                 style="display:none"
-              />
+              >
+                <span
+                  class="ant-upload-wrapper css-var-_R_0_"
+                >
+                  <div
+                    class="ant-upload ant-upload-select"
+                  >
+                    <span
+                      class="ant-upload"
+                    >
+                      <input
+                        accept=""
+                        name="file"
+                        style="display:none"
+                        type="file"
+                      />
+                      <button
+                        class="ant-btn css-var-_R_0_ ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
+                        type="button"
+                      >
+                        <span
+                          aria-label="plus"
+                          class="anticon anticon-plus ant-attachment-list-upload-btn-icon"
+                          role="img"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            data-icon="plus"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
+                            />
+                            <path
+                              d="M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+                            />
+                          </svg>
+                        </span>
+                      </button>
+                    </span>
+                  </div>
+                </span>
+              </div>
             </div>
             <div
               class="ant-attachment-placeholder"
@@ -1914,7 +1970,7 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx correctly 1`] =
   class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-suggestion ant-suggestion-wrapper css-var-_R_0_"
+    class="ant-suggestion ant-suggestion-content css-var-_R_0_"
   >
     <div
       class="ant-sender css-var-_R_0_"
@@ -1979,7 +2035,53 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx correctly 1`] =
               <div
                 class="ant-file-card-list ant-attachment-list css-var-_R_0_"
                 style="display:none"
-              />
+              >
+                <span
+                  class="ant-upload-wrapper css-var-_R_0_"
+                >
+                  <div
+                    class="ant-upload ant-upload-select"
+                  >
+                    <span
+                      class="ant-upload"
+                    >
+                      <input
+                        accept=""
+                        name="file"
+                        style="display:none"
+                        type="file"
+                      />
+                      <button
+                        class="ant-btn css-var-_R_0_ ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
+                        type="button"
+                      >
+                        <span
+                          aria-label="plus"
+                          class="anticon anticon-plus ant-attachment-list-upload-btn-icon"
+                          role="img"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            data-icon="plus"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
+                            />
+                            <path
+                              d="M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+                            />
+                          </svg>
+                        </span>
+                      </button>
+                    </span>
+                  </div>
+                </span>
+              </div>
             </div>
             <div
               class="ant-attachment-placeholder"
@@ -2113,7 +2215,9 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx correctly 1`] =
                     </svg>
                   </span>
                 </span>
-                <span>
+                <span
+                  class=""
+                >
                   Deep Think:
                   <span
                     style="display:inline-flex;width:28px;justify-content:center;align-items:center"
@@ -2153,7 +2257,9 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx correctly 1`] =
                     </svg>
                   </span>
                 </span>
-                <span>
+                <span
+                  class=""
+                >
                   Agent
                 </span>
               </button>
@@ -2188,7 +2294,9 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx correctly 1`] =
                     </svg>
                   </span>
                 </span>
-                <span>
+                <span
+                  class=""
+                >
                   Files
                 </span>
               </button>
@@ -2381,35 +2489,28 @@ exports[`renders components/sender/demo/speech-custom.tsx correctly 1`] = `
           class="ant-sender-actions-list-presets ant-flex css-var-_R_0_"
         >
           <button
-            class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
-            disabled=""
+            class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn"
             type="button"
           >
             <span
               class="ant-btn-icon"
             >
               <span
-                aria-label="audio-muted"
-                class="anticon anticon-audio-muted"
+                aria-label="audio"
+                class="anticon anticon-audio"
                 role="img"
               >
                 <svg
                   aria-hidden="true"
-                  data-icon="audio-muted"
+                  data-icon="audio"
                   fill="currentColor"
                   focusable="false"
                   height="1em"
                   viewBox="64 64 896 896"
                   width="1em"
                 >
-                  <defs>
-                    <style />
-                  </defs>
                   <path
-                    d="M682 455V311l-76 76v68c-.1 50.7-42 92.1-94 92a95.8 95.8 0 01-52-15l-54 55c29.1 22.4 65.9 36 106 36 93.8 0 170-75.1 170-168z"
-                  />
-                  <path
-                    d="M833 446h-60c-4.4 0-8 3.6-8 8 0 140.3-113.7 254-254 254-63 0-120.7-23-165-61l-54 54a334.01 334.01 0 00179 81v102H326c-13.9 0-24.9 14.3-25 32v36c.1 4.4 2.9 8 6 8h408c3.2 0 6-3.6 6-8v-36c0-17.7-11-32-25-32H547V782c165.3-17.9 294-157.9 294-328 0-4.4-3.6-8-8-8zm13.1-377.7l-43.5-41.9a8 8 0 00-11.2.1l-129 129C634.3 101.2 577 64 511 64c-93.9 0-170 75.3-170 168v224c0 6.7.4 13.3 1.2 19.8l-68 68A252.33 252.33 0 01258 454c-.2-4.4-3.8-8-8-8h-60c-4.4 0-8 3.6-8 8 0 53 12.5 103 34.6 147.4l-137 137a8.03 8.03 0 000 11.3l42.7 42.7c3.1 3.1 8.2 3.1 11.3 0L846.2 79.8l.1-.1c3.1-3.2 3-8.3-.2-11.4zM417 401V232c0-50.6 41.9-92 94-92 46 0 84.1 32.3 92.3 74.7L417 401z"
+                    d="M842 454c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 140.3-113.7 254-254 254S258 594.3 258 454c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 168.7 126.6 307.9 290 327.6V884H326.7c-13.7 0-24.7 14.3-24.7 32v36c0 4.4 2.8 8 6.2 8h407.6c3.4 0 6.2-3.6 6.2-8v-36c0-17.7-11-32-24.7-32H548V782.1c165.3-18 294-158 294-328.1zM512 624c93.9 0 170-75.2 170-168V232c0-92.8-76.1-168-170-168s-170 75.2-170 168v224c0 92.8 76.1 168 170 168zm-94-392c0-50.6 41.9-92 94-92s94 41.4 94 92v224c0 50.6-41.9 92-94 92s-94-41.4-94-92V232z"
                   />
                 </svg>
               </span>
@@ -2691,7 +2792,9 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
             </svg>
           </span>
         </span>
-        <span>
+        <span
+          class=""
+        >
           Deep Search
         </span>
       </button>
@@ -2731,7 +2834,9 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
             </svg>
           </span>
         </span>
-        <span>
+        <span
+          class=""
+        >
           Deep Search: off
         </span>
       </button>
@@ -2772,7 +2877,9 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
             </svg>
           </span>
         </span>
-        <span>
+        <span
+          class=""
+        >
           Deep Search
         </span>
       </button>
@@ -2812,7 +2919,9 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
             </svg>
           </span>
         </span>
-        <span>
+        <span
+          class=""
+        >
           Deep Search
         </span>
       </button>
@@ -2852,7 +2961,9 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
             </svg>
           </span>
         </span>
-        <span>
+        <span
+          class=""
+        >
           Deep Search
         </span>
       </button>
@@ -2892,7 +3003,9 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
             </svg>
           </span>
         </span>
-        <span>
+        <span
+          class=""
+        >
           Deep Search
         </span>
       </button>

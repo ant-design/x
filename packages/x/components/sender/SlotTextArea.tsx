@@ -542,9 +542,10 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
   const onInternalKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     const { key, target, shiftKey, ctrlKey, altKey, metaKey } = e;
-
+    // 如果键盘被锁定或者正在组合输入，则跳过处理
+    const eventRes = onKeyDown?.(e);
     // 如果键盘被锁定或者正在组合输入，直接跳过处理
-    if (keyLockRef.current || isCompositionRef.current) {
+    if (keyLockRef.current || isCompositionRef.current || eventRes === false) {
       onKeyDown?.(e as unknown as React.KeyboardEvent<HTMLTextAreaElement>);
       return;
     }
@@ -589,8 +590,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         return;
       }
     }
-
-    onKeyDown?.(e as unknown as React.KeyboardEvent<HTMLTextAreaElement>);
   };
 
   // ============================ Input Event ============================

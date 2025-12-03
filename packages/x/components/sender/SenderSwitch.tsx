@@ -9,6 +9,7 @@ import { useXProviderContext } from '../x-provider';
 import { SenderContext } from './context';
 import useStyle from './style';
 
+type SemanticType = 'root' | 'content' | 'icon' | 'title';
 export interface SenderSwitchProps
   extends Omit<
     React.HTMLAttributes<HTMLLIElement>,
@@ -25,6 +26,8 @@ export interface SenderSwitchProps
   disabled?: boolean;
   children?: React.ReactNode;
   onChange?: (checked: boolean) => void;
+  classNames?: Partial<Record<SemanticType, string>>;
+  styles?: Partial<Record<SemanticType, React.CSSProperties>>;
 }
 
 type SenderSwitchRef = {
@@ -35,6 +38,8 @@ const SenderSwitch = React.forwardRef<SenderSwitchRef, SenderSwitchProps>((props
   const {
     children,
     className,
+    classNames = {},
+    styles = {},
     icon,
     style,
     onChange,
@@ -50,8 +55,8 @@ const SenderSwitch = React.forwardRef<SenderSwitchRef, SenderSwitchProps>((props
   } = props;
 
   const {
-    styles = {},
-    classNames = {},
+    styles: contextStyles = {},
+    classNames: contextClassNames = {},
     prefixCls: contextPrefixCls,
   } = React.useContext(SenderContext);
 
@@ -97,7 +102,8 @@ const SenderSwitch = React.forwardRef<SenderSwitchRef, SenderSwitchProps>((props
     className,
     rootClassName,
     contextConfig.classNames.switch,
-    classNames.switch,
+    contextClassNames.switch,
+    classNames.root,
     hashId,
     cssVarCls,
     {
@@ -114,14 +120,24 @@ const SenderSwitch = React.forwardRef<SenderSwitchRef, SenderSwitchProps>((props
       style={{
         ...style,
         ...contextConfig.styles.switch,
-        ...styles.switch,
+        ...contextStyles.switch,
+        ...styles.root,
       }}
       {...domProps}
     >
       <Button
         disabled={disabled}
         loading={loading}
-        className={classnames(`${switchCls}-content`)}
+        styles={{
+          icon: styles.icon,
+          root: styles.content,
+          content: styles.title,
+        }}
+        classNames={{
+          root: classnames(`${switchCls}-content`, classNames.content),
+          icon: classNames.icon,
+          content: classNames.title,
+        }}
         variant="outlined"
         color={mergedChecked ? 'primary' : 'default'}
         icon={icon}
