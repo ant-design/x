@@ -213,7 +213,7 @@ const role: BubbleListProps['role'] = {
       </div>
     ),
     contentRender(content: string) {
-      const newContent = content.replace('/\n\n/g', '<br/><br/>');
+      const newContent = content.replace(/\n\n/g, '<br/><br/>');
       return (
         <XMarkdown
           content={newContent}

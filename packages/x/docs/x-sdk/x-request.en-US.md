@@ -57,11 +57,11 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
 
 ### XRequestCallbacks
 
-| Property  | Description             | Type                       | Default | Version |
-| --------- | ----------------------- | -------------------------- | ------- | ------- |
-| onSuccess | Success callback        | (chunks: Output[]) => void | -       | -       |
-| onError   | Error handling callback | (error: Error) => void     | -       | -       |
-| onUpdate  | Message update callback | (chunk: Output) => void    | -       | -       |
+| Property  | Description             | Type                                   | Default | Version |
+| --------- | ----------------------- | -------------------------------------- | ------- | ------- |
+| onSuccess | Success callback        | (chunks: Output[]) => void             | -       | -       |
+| onError   | Error handling callback | (error: Error, errorInfo: any) => void | -       | -       |
+| onUpdate  | Message update callback | (chunk: Output) => void                | -       | -       |
 
 ### XRequestClass
 

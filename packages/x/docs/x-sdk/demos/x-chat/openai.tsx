@@ -64,7 +64,7 @@ const role: BubbleListProps['role'] = {
     contentRender(content: string) {
       // 双 '\n' 在markdown中会被解析为新段落，因此需要替换为单个 '\n'
       // Double '\n' in a mark will causes markdown parse as a new paragraph, so we need to replace it with a single '\n'
-      const newContent = content.replace('/\n\n/g', '<br/><br/>');
+      const newContent = content.replace(/\n\n/g, '<br/><br/>');
       return <XMarkdown content={newContent} />;
     },
   },

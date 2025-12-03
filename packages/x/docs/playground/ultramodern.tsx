@@ -242,7 +242,7 @@ const getRole = (className: string): BubbleListProps['role'] => ({
       <Footer content={content} status={status} id={key as string} />
     ),
     contentRender: (content: any, { status }) => {
-      const newContent = content.replace('/\n\n/g', '<br/><br/>');
+      const newContent = content.replace(/\n\n/g, '<br/><br/>');
       return (
         <XMarkdown
           paragraphTag="div"

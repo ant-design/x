@@ -57,11 +57,11 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
 
 ### XRequestCallbacks
 
-| 属性      | 描述           | 类型                       | 默认值 | 版本 |
-| --------- | -------------- | -------------------------- | ------ | ---- |
-| onSuccess | 成功时的回调   | (chunks: Output[]) => void | -      | -    |
-| onError   | 错误处理的回调 | (error: Error) => void     | -      | -    |
-| onUpdate  | 消息更新的回调 | (chunk: Output) => void    | -      | -    |
+| 属性      | 描述           | 类型                                   | 默认值 | 版本 |
+| --------- | -------------- | -------------------------------------- | ------ | ---- |
+| onSuccess | 成功时的回调   | (chunks: Output[]) => void             | -      | -    |
+| onError   | 错误处理的回调 | (error: Error, errorInfo: any) => void | -      | -    |
+| onUpdate  | 消息更新的回调 | (chunk: Output) => void                | -      | -    |
 
 ### XRequestClass
 

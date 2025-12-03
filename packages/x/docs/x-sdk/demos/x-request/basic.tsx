@@ -5,9 +5,6 @@ import { XRequest } from '@ant-design/x-sdk';
 import { Button, Descriptions, Splitter } from 'antd';
 import React from 'react';
 
-/**
- * 🔔 Please replace the BASE_URL, PATH with your own values.
- */
 const QUERY_URL = 'https://api.x.ant.design/api/default_chat_provider_stream';
 
 const useLocale = () => {
