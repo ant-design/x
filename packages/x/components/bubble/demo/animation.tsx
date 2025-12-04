@@ -50,7 +50,7 @@ const App = () => {
         <Radio.Group value={effect} onChange={(e) => setEffect(e.target.value)}>
           <Radio value="fade-in">fade-in</Radio>
           <Radio value="typing">typing</Radio>
-          <Radio value="custom-typing">typing width 💖 </Radio>
+          <Radio value="custom-typing">typing with 💖 </Radio>
         </Radio.Group>
       </Flex>
       <Flex gap="small" align="center">
