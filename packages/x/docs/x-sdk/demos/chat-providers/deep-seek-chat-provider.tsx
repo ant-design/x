@@ -43,7 +43,7 @@ const App = () => {
   const [provider] = React.useState(
     new DeepSeekChatProvider({
       request: XRequest<XModelParams, XModelResponse>(
-        'https://api.x.ant.design/api/big_model_glm-4.5-flash',
+        'https://api.x.ant.design/api/deepseek_chat_provider_stream',
         {
           manual: true,
           params: {
