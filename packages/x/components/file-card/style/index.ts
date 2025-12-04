@@ -216,26 +216,45 @@ const genFileCardListStyle: GenerateStyle<FileCardToken> = (token) => {
   } = token;
 
   return {
-    [`${componentCls}-list-wrapper`]: {
-      position: 'relative',
-    },
     [`${componentCls}-list`]: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      gap: marginXS,
-      paddingBlock: paddingSM,
-      paddingInline: padding,
+      position: 'relative',
+      [`${componentCls}-list-content`]: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        gap: marginXS,
+        paddingBlock: paddingSM,
+        paddingInline: padding,
 
-      // Scrollbar none
-      scrollbarWidth: 'none',
-      '-ms-overflow-style': 'none',
-      '&::-webkit-scrollbar': {
-        display: 'none',
+        // Scrollbar none
+        scrollbarWidth: 'none',
+        '-ms-overflow-style': 'none',
+        '&::-webkit-scrollbar': {
+          display: 'none',
+        },
+        '&:dir(ltr)': {
+          [`&${componentCls}-list-overflow-ping-start ${componentCls}-list-prev-btn`]: {
+            opacity: 1,
+            pointerEvents: 'auto',
+          },
+          [`&${componentCls}-list-overflow-ping-end ${componentCls}-list-next-btn`]: {
+            opacity: 1,
+            pointerEvents: 'auto',
+          },
+        },
+        '&:dir(rtl)': {
+          [`&${componentCls}-list-overflow-ping-end ${componentCls}-list-prev-btn`]: {
+            opacity: 1,
+            pointerEvents: 'auto',
+          },
+          [`&${componentCls}-list-overflow-ping-start ${componentCls}-list-next-btn`]: {
+            opacity: 1,
+            pointerEvents: 'auto',
+          },
+        },
       },
-
       // list item
       [`${componentCls}-list-item`]: {
         display: 'flex',
@@ -300,12 +319,12 @@ const genFileCardListStyle: GenerateStyle<FileCardToken> = (token) => {
         backgroundColor: colorFillTertiary,
       },
       // small size
-      [`&${componentCls}-list-small`]: {
+      [`${componentCls}-list-small`]: {
         [`${componentCls}-list-remove`]: {
           fontSize: fontSize,
         },
       },
-      [`&${componentCls}-list-overflow-scrollX, &${componentCls}-list-overflow-scrollY`]: {
+      [`${componentCls}-list-overflow-scrollX, ${componentCls}-list-overflow-scrollY`]: {
         '&:before, &:after': {
           content: '""',
           position: 'absolute',
@@ -314,13 +333,13 @@ const genFileCardListStyle: GenerateStyle<FileCardToken> = (token) => {
           zIndex: 1,
         },
       },
-      [`&${componentCls}-list-overflow-ping-start:before`]: {
+      [`${componentCls}-list-overflow-ping-start:before`]: {
         opacity: 1,
       },
-      [`&${componentCls}-list-overflow-ping-end:after`]: {
+      [`${componentCls}-list-overflow-ping-end:after`]: {
         opacity: 1,
       },
-      [`&${componentCls}-list-overflow-scrollX`]: {
+      [`${componentCls}-list-overflow-scrollX`]: {
         overflowX: 'auto',
         overflowY: 'hidden',
         flexWrap: 'nowrap',
@@ -346,10 +365,11 @@ const genFileCardListStyle: GenerateStyle<FileCardToken> = (token) => {
           },
         },
       },
-      [`&${componentCls}-list-overflow-scrollY`]: {
+      [`${componentCls}-list-overflow-scrollY`]: {
         overflowX: 'hidden',
         overflowY: 'auto',
         maxHeight: 68,
+        boxSizing: 'content-box',
 
         '&:before, &:after': {
           insetInline: 0,
@@ -384,26 +404,6 @@ const genFileCardListStyle: GenerateStyle<FileCardToken> = (token) => {
         right: {
           _skip_check_: true,
           value: token.padding,
-        },
-      },
-      '&:dir(ltr)': {
-        [`&${componentCls}-list-overflow-ping-start ${componentCls}-list-prev-btn`]: {
-          opacity: 1,
-          pointerEvents: 'auto',
-        },
-        [`&${componentCls}-list-overflow-ping-end ${componentCls}-list-next-btn`]: {
-          opacity: 1,
-          pointerEvents: 'auto',
-        },
-      },
-      '&:dir(rtl)': {
-        [`&${componentCls}-list-overflow-ping-end ${componentCls}-list-prev-btn`]: {
-          opacity: 1,
-          pointerEvents: 'auto',
-        },
-        [`&${componentCls}-list-overflow-ping-start ${componentCls}-list-next-btn`]: {
-          opacity: 1,
-          pointerEvents: 'auto',
         },
       },
     },
