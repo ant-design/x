@@ -65,6 +65,7 @@ export const initFadeMotion = (
   const { antCls } = token;
   const motionCls = `${antCls}-x-fade`;
   const sameLevelPrefix = sameLevel ? '&' : '';
+
   return [
     initMotion(motionCls, fadeIn, fadeOut, '1.2s', sameLevel),
     {
