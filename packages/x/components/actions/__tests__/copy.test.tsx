@@ -7,7 +7,10 @@ describe('ActionsCopy', () => {
     const { container } = render(<ActionsCopy text="hello" />);
     expect(container.querySelector('.ant-actions-copy')).toBeTruthy();
   });
-
+  it('renders with no text', () => {
+    const { container } = render(<ActionsCopy />);
+    expect(container.querySelector('.ant-actions-copy')).toBeTruthy();
+  });
   it('renders with icon', () => {
     const { container } = render(<ActionsCopy text="copy" icon={<span data-testid="icon" />} />);
     expect(container.querySelector('[data-testid="icon"]')).toBeTruthy();
