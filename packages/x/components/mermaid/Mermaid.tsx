@@ -12,8 +12,6 @@ import useLocale from '../locale/useLocale';
 import { useXProviderContext } from '../x-provider';
 import useStyle from './style';
 
-declare module 'mermaid' {}
-
 export type MermaidType = 'root' | 'header' | 'graph' | 'code';
 
 export interface MermaidProps {
