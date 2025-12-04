@@ -62,7 +62,7 @@ export default class DeepSeekChatProvider<
         ? originMessage?.content
         : originMessage?.content.text || '';
     if (!originMessageContent && currentThink) {
-      content = `\n\n<think>\n\n${currentThink?.replace?.(/^(\/n)+/, '')}`;
+      content = `\n\n<think>\n\n${currentThink?.replace?.(/^\n+/, '')}`;
     } else if (
       originMessageContent.includes('<think>') &&
       !originMessageContent.includes('</think>') &&
