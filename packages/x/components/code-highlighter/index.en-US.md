@@ -7,8 +7,7 @@ title: CodeHighlighter
 description: Used to highlight code formatting.
 cover: https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/_KKkTrXq7wcAAAAAKuAAAAgADtFMAQFr/original
 coverDark: https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/c62-S4SH1tUAAAAANuAAAAgADtFMAQFr/original
-demo:
-  cols: 1
+tag: 2.1.0
 ---
 
 ## When to Use

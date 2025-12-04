@@ -7,8 +7,7 @@ title: Mermaid
 description: Used to render diagrams with Mermaid.
 cover: https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/yTn9SILS900AAAAAPaAAAAgADtFMAQFr/original
 coverDark: https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/uYcMRYLDTCMAAAAAQBAAAAgADtFMAQFr/original
-demo:
-  cols: 1
+tag: 2.1.0
 ---
 
 ## When to Use
