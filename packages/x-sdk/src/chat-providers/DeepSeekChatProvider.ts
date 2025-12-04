@@ -69,7 +69,7 @@ export default class DeepSeekChatProvider<
       currentContent
     ) {
       originMessageContent = originMessageContent.replace('<think>', '<think status="done">');
-      content = `${originMessageContent?.replace(/[\s\n]+$/, '')}\n\n</think>\n\n${currentContent}`;
+      content = `${originMessageContent?.replace?.(/[\s\n]+$/, '')}\n\n</think>\n\n${currentContent}`;
     } else {
       content = `${originMessageContent || ''}${currentThink}${currentContent}`;
     }
