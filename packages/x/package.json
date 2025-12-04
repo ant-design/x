@@ -188,6 +188,7 @@
     "lottie-web": "^5.12.2",
     "lunar-typescript": "^1.7.5",
     "lz-string": "^1.5.0",
+    "mermaid": "^11.12.2",
     "minimist": "^1.2.8",
     "mockdate": "^3.0.5",
     "node-fetch": "^3.3.2",
@@ -242,12 +243,14 @@
   },
   "peerDependencies": {
     "antd": "^6.0.0",
+    "mermaid": "^11.12.1",
     "react": ">=18.0.0",
-    "react-dom": ">=18.0.0",
-    "mermaid": "^11.12.1"
+    "react-dom": ">=18.0.0"
   },
   "peerDependenciesMeta": {
-      "mermaid": { "optional": true }
+    "mermaid": {
+      "optional": true
+    }
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
