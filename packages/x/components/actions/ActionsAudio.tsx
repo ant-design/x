@@ -48,7 +48,6 @@ const ActionsAudio: React.FC<ActionsAudioProps> = (props) => {
   const audioCls = `${prefixCls}-audio`;
 
   // ============================ Classname ============================
-
   const mergedCls = classnames(audioCls, hashId, cssVarCls, rootClassName, className, {
     [`${audioCls}-rtl`]: direction === 'rtl',
     [`${audioCls}-${status}`]: status,

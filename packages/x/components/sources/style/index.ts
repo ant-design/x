@@ -29,7 +29,7 @@ const genSourcesStyle: GenerateStyle<SourcesToken> = (token) => {
 
   return {
     [componentCls]: {
-      '&-title-wrapper': {
+      [`${componentCls}-title-wrapper`]: {
         width: 'fit-content',
         display: 'flex',
         flexDirection: 'row',
@@ -41,37 +41,40 @@ const genSourcesStyle: GenerateStyle<SourcesToken> = (token) => {
         cursor: 'pointer',
         marginBottom: marginSM,
       },
-
-      '&-title-down-icon': {
+      [`${componentCls}-title-down-icon`]: {
         fontSize: fontSizeSM,
         svg: {
           transition: `all ${token.motionDurationMid} ${token.motionEaseInOut}`,
         },
       },
-
-      '&-icon-position-end': {
+      [`${componentCls}-icon-position-end`]: {
         [`${componentCls}-title-down-icon`]: {
           order: 1,
         },
       },
-
-      '&-list-item': {
+      [`${componentCls}-list`]: {
+        listStyle: 'none',
+        margin: 0,
+        padding: 0,
+        'ul, ol': {
+          margin: 0,
+          padding: 0,
+          listStyle: 'none',
+        },
+      },
+      [`${componentCls}-list-item`]: {
         marginBottom: marginXS,
       },
-
-      '&-link': {
+      [`${componentCls}-link`]: {
         color: colorText,
         display: 'flex',
         gap: marginXXS,
-
         '&:hover': {
           color: colorLink,
         },
       },
-
-      '&-inline': {
+      [`&${componentCls}-inline`]: {
         display: 'inline-flex',
-
         [`${componentCls}-title-wrapper`]: {
           background: colorFillSecondary,
           borderRadius: calc(controlHeightXS).div(2).equal(),
@@ -86,13 +89,11 @@ const genSourcesStyle: GenerateStyle<SourcesToken> = (token) => {
           marginBlock: 0,
         },
       },
-
-      '&-carousel-title': {
+      [`${componentCls}-carousel-title`]: {
         display: 'flex',
         justifyContent: 'space-between',
       },
-
-      '&-carousel-btn': {
+      [`${componentCls}-carousel-btn`]: {
         display: 'inline-flex',
         cursor: 'pointer',
         height: token.controlHeight,
@@ -103,13 +104,11 @@ const genSourcesStyle: GenerateStyle<SourcesToken> = (token) => {
           background: colorFillSecondary,
         },
       },
-
-      '&-carousel-btn-disabled': {
+      [`${componentCls}-carousel-btn-disabled`]: {
         opacity: 0.4,
         cursor: 'text',
       },
-
-      '&-carousel-item': {
+      [`${componentCls}-carousel-item`]: {
         padding: paddingXS,
         boxSizing: 'border-box',
         fontSize: fontSize,
