@@ -25,6 +25,7 @@ export interface MermaidProps {
   // Semantic
   classNames?: Partial<Record<MermaidType, string>>;
   styles?: Partial<Record<MermaidType, React.CSSProperties>>;
+  onRenderTypeChange?: (value: RenderType) => void;
 }
 
 enum RenderType {
@@ -51,6 +52,7 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
     header,
     children,
     highlightProps,
+    onRenderTypeChange,
   } = props;
   const [renderType, setRenderType] = useState(RenderType.Image);
   const [scale, setScale] = useState(1);
@@ -282,7 +284,10 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
             { label: contextLocale.code, value: RenderType.Code },
           ]}
           value={renderType}
-          onChange={(value) => setRenderType(value as RenderType)}
+          onChange={(value) => {
+            setRenderType(value as RenderType);
+            onRenderTypeChange?.(value as RenderType);
+          }}
         />
         <Actions items={items} />
       </div>

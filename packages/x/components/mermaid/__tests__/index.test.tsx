@@ -355,6 +355,66 @@ describe('Mermaid Component', () => {
     });
   });
 
+  describe('onChange Event', () => {
+    it('should trigger onChange when switching to code view', () => {
+      const onChangeMock = jest.fn();
+      render(<Mermaid onRenderTypeChange={onChangeMock}>{mermaidContent}</Mermaid>);
+
+      const codeButton = screen.getByText('Code');
+      fireEvent.click(codeButton);
+
+      expect(onChangeMock).toHaveBeenCalledTimes(1);
+      expect(onChangeMock).toHaveBeenCalledWith('code');
+    });
+
+    it('should trigger onChange when switching to image view', () => {
+      const onChangeMock = jest.fn();
+      render(<Mermaid onRenderTypeChange={onChangeMock}>{mermaidContent}</Mermaid>);
+
+      // 先切换到代码模式
+      const codeButton = screen.getByText('Code');
+      fireEvent.click(codeButton);
+      expect(onChangeMock).toHaveBeenCalledWith('code');
+
+      // 再切换回图片模式
+      const imageButton = screen.getByText('Image');
+      fireEvent.click(imageButton);
+
+      expect(onChangeMock).toHaveBeenCalledTimes(2);
+      expect(onChangeMock).toHaveBeenCalledWith('image');
+    });
+
+    it('should not trigger onChange when onChange prop is not provided', () => {
+      const { container } = render(<Mermaid>{mermaidContent}</Mermaid>);
+
+      const codeButton = screen.getByText('Code');
+      fireEvent.click(codeButton);
+
+      // 没有 onChange prop，不应该抛出错误
+      expect(container.querySelector('.ant-mermaid')).toBeInTheDocument();
+    });
+
+    it('should handle multiple mode switches with onChange', () => {
+      const onChangeMock = jest.fn();
+      render(<Mermaid onRenderTypeChange={onChangeMock}>{mermaidContent}</Mermaid>);
+
+      const codeButton = screen.getByText('Code');
+      const imageButton = screen.getByText('Image');
+
+      // 多次切换
+      fireEvent.click(codeButton);
+      fireEvent.click(imageButton);
+      fireEvent.click(codeButton);
+      fireEvent.click(imageButton);
+
+      expect(onChangeMock).toHaveBeenCalledTimes(4);
+      expect(onChangeMock).toHaveBeenNthCalledWith(1, 'code');
+      expect(onChangeMock).toHaveBeenNthCalledWith(2, 'image');
+      expect(onChangeMock).toHaveBeenNthCalledWith(3, 'code');
+      expect(onChangeMock).toHaveBeenNthCalledWith(4, 'image');
+    });
+  });
+
   describe('Error Handling', () => {
     it('should handle mermaid render errors', async () => {
       mockRender.mockRejectedValue(new Error('Render error'));

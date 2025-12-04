@@ -1,5 +1,5 @@
 import { Mermaid } from '@ant-design/x';
-import React from 'react';
+import React, { useState } from 'react';
 import SemanticPreview from '../../../.dumi/components/SemanticPreview';
 import useLocale from '../../../.dumi/hooks/useLocale';
 
@@ -30,6 +30,7 @@ const content = `graph TD
 
 const App: React.FC = () => {
   const [locale] = useLocale(locales);
+  const [renderType, setRenderType] = useState('image');
 
   return (
     <SemanticPreview
@@ -37,11 +38,12 @@ const App: React.FC = () => {
       semantics={[
         { name: 'root', desc: locale.root },
         { name: 'header', desc: locale.header },
-        { name: 'graph', desc: locale.graph },
-        { name: 'code', desc: locale.code },
+        renderType === 'image'
+          ? { name: 'graph', desc: locale.graph }
+          : { name: 'code', desc: locale.code },
       ]}
     >
-      <Mermaid>{content}</Mermaid>
+      <Mermaid onRenderTypeChange={(value) => setRenderType(value)}>{content}</Mermaid>
     </SemanticPreview>
   );
 };
