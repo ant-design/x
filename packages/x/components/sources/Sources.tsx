@@ -158,7 +158,7 @@ const Sources: React.ForwardRefRenderFunction<SourcesRef, SourcesProps> = (props
         <Popover
           content={
             <CarouselCard
-              className={classNames.content}
+              className={classnames(prefixCls, hashId, cssVarCls, classNames.content)}
               style={styles.content}
               activeKey={activeKey}
               prefixCls={prefixCls}
@@ -172,7 +172,7 @@ const Sources: React.ForwardRefRenderFunction<SourcesRef, SourcesProps> = (props
           forceRender
         >
           <div
-            className={classnames(`${prefixCls}-title-wrapper`, classNames.title)}
+            className={classnames(prefixCls, `${prefixCls}-title-wrapper`, classNames.title)}
             style={styles.title}
           >
             <span className={`${prefixCls}-title`}>{title}</span>
