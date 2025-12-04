@@ -62,14 +62,14 @@ export default class DeepSeekChatProvider<
         ? originMessage?.content
         : originMessage?.content.text || '';
     if (!originMessageContent && currentThink) {
-      content = `<think>${currentThink}`;
+      content = `\n\n<think>\n\n${currentThink?.replace?.(/^(\/n)+/, '')}`;
     } else if (
       originMessageContent.includes('<think>') &&
       !originMessageContent.includes('</think>') &&
       currentContent
     ) {
       originMessageContent = originMessageContent.replace('<think>', '<think status="done">');
-      content = `${originMessageContent}</think>${currentContent}`;
+      content = `${originMessageContent?.replace?.(/\n+$/, '')}\n\n</think>\n\n${currentContent}`;
     } else {
       content = `${originMessageContent || ''}${currentThink}${currentContent}`;
     }
