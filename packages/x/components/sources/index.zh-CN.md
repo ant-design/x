@@ -8,6 +8,7 @@ subtitle: 来源引用
 description: 展示引用的数据来源地址。
 cover: https://mdn.alipayobjects.com/huamei_b00jk5/afts/img/A*3nEPRYJbNQgAAAAAQFAAAAgAegitAQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_b00jk5/afts/img/A*_7mMRrQVcXcAAAAAQEAAAAgAegitAQ/original
+tag: 2.0.0
 ---
 
 ## 何时使用

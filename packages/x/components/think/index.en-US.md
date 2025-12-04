@@ -7,8 +7,7 @@ title: Think
 description: Show deep thinking process.
 cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*rHIYQIL1X-QAAAAAAAAAAAAADgCCAQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/OMCvQZVW3eUAAAAAQCAAAAgADtFMAQFr/original
-demo:
-  cols: 1
+tag: 2.0.0
 ---
 
 ## When To Use

@@ -8,8 +8,7 @@ subtitle: 系统通知
 description: 系统级别发送在页面外部显示的通知。
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*cRmqTY4nKPEAAAAAAAAAAAAADrJ8AQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*W3RmSov-xVMAAAAAAAAAAAAADrJ8AQ/original
-demo:
-  cols: 1
+tag: 2.0.0
 ---
 
 ## 何时使用

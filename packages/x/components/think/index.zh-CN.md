@@ -8,6 +8,7 @@ subtitle: 思考过程
 description: 展示大模型深度思考过程。
 cover: https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/kXURQYCTEncAAAAAQCAAAAgADtFMAQFr/original
 coverDark: https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/OMCvQZVW3eUAAAAAQCAAAAgADtFMAQFr/original
+tag: 2.0.0
 ---
 
 ## 何时使用

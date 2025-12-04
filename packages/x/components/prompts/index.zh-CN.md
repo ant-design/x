@@ -9,8 +9,6 @@ subtitle: 提示集
 description: 用于显示一组与当前上下文相关的预定义的问题或建议。
 cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*UfhXRamlAf0AAAAAAAAAAAAADgCCAQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*3CN5RLKP0X4AAAAAAAAAAAAADgCCAQ/original
-demo:
-  cols: 1
 ---
 
 ## 何时使用

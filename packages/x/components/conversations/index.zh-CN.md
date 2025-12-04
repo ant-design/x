@@ -8,8 +8,6 @@ subtitle: 管理对话
 description: 用于切换多个智能体，更新对话轮次，对话历史切换
 cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*Oj-bTbVXtpQAAAAAAAAAAAAADgCCAQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*qwdtSKWXeikAAAAAAAAAAAAADgCCAQ/original
-demo:
-  cols: 1
 ---
 
 ## 何时使用

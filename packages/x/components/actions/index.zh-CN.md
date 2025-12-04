@@ -9,7 +9,7 @@ description: 用于快速配置一些 AI 场景下所需要的操作按钮/功�
 cover: https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/DAQYQqFa5n0AAAAAQFAAAAgADtFMAQFr/original
 coverDark: https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/bcXhRphVOuIAAAAAQFAAAAgADtFMAQFr/original
 demo:
-  cols: 1
+  cols: 2
 ---
 
 ## 何时使用

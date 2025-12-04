@@ -8,7 +8,7 @@ description: Used for quickly configuring required action buttons or features in
 cover: https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/DAQYQqFa5n0AAAAAQFAAAAgADtFMAQFr/original
 coverDark: https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/bcXhRphVOuIAAAAAQFAAAAgADtFMAQFr/original
 demo:
-  cols: 1
+  cols: 2
 ---
 
 ## When to Use
