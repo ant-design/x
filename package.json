@@ -49,7 +49,7 @@
   "size-limit": [
     {
       "path": "./packages/x/dist/antdx.min.js",
-      "limit": "1000 KiB"
+      "limit": "350 KiB"
     },
     {
       "path": "./packages/x-sdk/dist/x-sdk.min.js",

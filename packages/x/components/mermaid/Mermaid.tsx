@@ -2,7 +2,7 @@ import { DownloadOutlined, ZoomInOutlined, ZoomOutOutlined } from '@ant-design/i
 import { Button, Segmented, Tooltip } from 'antd';
 import classnames from 'classnames';
 import throttle from 'lodash.throttle';
-import type mermaid from 'mermaid';
+import type { Mermaid as MermaidLib } from 'mermaid';
 import React, { useEffect, useRef, useState } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
@@ -12,6 +12,12 @@ import locale_EN from '../locale/en_US';
 import useLocale from '../locale/useLocale';
 import { useXProviderContext } from '../x-provider';
 import useStyle from './style';
+
+declare global {
+  interface Window {
+    mermaid?: MermaidLib;
+  }
+}
 
 export type MermaidType = 'root' | 'header' | 'graph' | 'code';
 
