@@ -2,36 +2,49 @@
 
 exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-_r_2a_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_r_2f_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-sender css-var-_r_2a_"
+    class="ant-sender css-var-_r_2f_"
   >
     <div
-      class="ant-sender-header"
-      style="display: none;"
+      class="ant-sender-content"
     >
       <div
-        class="ant-sender-header-header"
+        class="ant-sender-input ant-sender-input-slot"
+        contenteditable="true"
+        data-placeholder="Press Enter to send message"
+        role="textbox"
+        spellcheck="false"
+        style="min-height: 17.764287px; max-height: 35.528574px; overflow-y: auto;"
+        tabindex="0"
+        value="Please write an article about . The requirement is  800  words."
       >
-        <div
-          class="ant-sender-header-title"
+        <span
+          class="ant-sender-skill"
+          contenteditable="false"
+          data-skill-key="writing"
         >
-          Attachments
-        </div>
-        <div
-          class="ant-sender-header-close"
-        >
-          <button
-            class="ant-btn css-var-_r_2a_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
-            type="button"
+          <div
+            aria-label="Skill: Writing Assistant"
+            class="ant-sender-skill-tag"
+            role="button"
+            tabindex="0"
           >
             <span
-              class="ant-btn-icon"
+              class="ant-sender-skill-tag-text"
+            >
+              Writing Assistant
+            </span>
+            <div
+              aria-label="Close skill"
+              class="ant-sender-skill-tag-close"
+              role="button"
+              tabindex="0"
             >
               <span
                 aria-label="close"
-                class="anticon anticon-close"
+                class="anticon anticon-close ant-sender-skill-tag-close-icon"
                 role="img"
               >
                 <svg
@@ -49,96 +62,21 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
                   />
                 </svg>
               </span>
-            </span>
-          </button>
-        </div>
-      </div>
-      <div
-        class="ant-sender-header-content"
-        style="padding: 0px;"
-      >
-        <div
-          class="ant-attachment css-var-_r_2a_"
-          dir="ltr"
-        >
-          <div
-            class="ant-file-card-list-wrapper"
-          >
-            <div
-              class="ant-file-card-list ant-attachment-list css-var-_r_2a_"
-              style="display: none;"
-            />
+            </div>
           </div>
-          <div
-            class="ant-attachment-placeholder"
-          >
-            <span
-              class="ant-upload-wrapper css-var-_r_2a_"
-            >
-              <div
-                class="ant-upload ant-upload-drag"
-                style="padding: 0px; border: 0px; background: transparent;"
-              >
-                <span
-                  class="ant-upload ant-upload-btn"
-                  role="button"
-                  tabindex="0"
-                >
-                  <input
-                    accept=""
-                    name="file"
-                    style="display: none;"
-                    type="file"
-                  />
-                  <div
-                    class="ant-upload-drag-container"
-                  >
-                    <div
-                      class="ant-attachment-placeholder-inner ant-flex css-var-_r_2a_ ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
-                    >
-                      <span
-                        class="ant-typography ant-attachment-placeholder-icon css-var-_r_2a_"
-                      />
-                      <h5
-                        class="ant-typography ant-attachment-placeholder-title css-var-_r_2a_"
-                      />
-                      <span
-                        class="ant-typography ant-typography-secondary ant-attachment-placeholder-description css-var-_r_2a_"
-                      />
-                    </div>
-                  </div>
-                </span>
-              </div>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      class="ant-sender-content"
-    >
-      <div
-        class="ant-sender-input ant-sender-input-slot"
-        contenteditable="true"
-        data-placeholder="Press Enter to send message"
-        role="textbox"
-        spellcheck="false"
-        style="min-height: 66px; max-height: 132px; overflow-y: auto;"
-        tabindex="0"
-        value="Please help me search for news about  and summarize it into a list."
-      >
-        Please help me search for news about 
+        </span>
+        Please write an article about 
         <span
           class="ant-sender-slot"
           contenteditable="false"
-          data-slot-key="search_type"
+          data-slot-key="writing_type"
         >
           <span
             class="ant-dropdown-trigger ant-sender-slot-select placeholder"
           >
             <span
               class="ant-sender-slot-select-value"
-              data-placeholder="Please select a category"
+              data-placeholder="Please enter a topic"
             />
             <span
               class="ant-sender-slot-select-arrow"
@@ -165,11 +103,11 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
             </span>
           </span>
           <div
-            class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-_r_2a_ ant-dropdown-css-var ant-dropdown-placement-bottomLeft"
+            class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-_r_2f_ ant-dropdown-css-var ant-dropdown-placement-bottomLeft"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <ul
-              class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-_r_2a_ ant-dropdown-css-var css-var-_r_2a_ ant-dropdown-menu-css-var"
+              class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-_r_2f_ ant-dropdown-css-var css-var-_r_2f_ ant-dropdown-menu-css-var"
               data-menu-list="true"
               role="menu"
               tabindex="0"
@@ -177,18 +115,18 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-AI"
+                data-menu-id="rc-menu-uuid-Campus"
                 role="menuitem"
                 tabindex="-1"
               >
                 <span
                   class="ant-dropdown-menu-title-content"
                 >
-                  AI
+                  Campus
                 </span>
               </li>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2a_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2f_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
               >
                 <div
@@ -208,18 +146,18 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-Technology"
+                data-menu-id="rc-menu-uuid-Travel"
                 role="menuitem"
                 tabindex="-1"
               >
                 <span
                   class="ant-dropdown-menu-title-content"
                 >
-                  Technology
+                  Travel
                 </span>
               </li>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2a_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2f_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
               >
                 <div
@@ -239,18 +177,18 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-Entertainment"
+                data-menu-id="rc-menu-uuid-Reading"
                 role="menuitem"
                 tabindex="-1"
               >
                 <span
                   class="ant-dropdown-menu-title-content"
                 >
-                  Entertainment
+                  Reading
                 </span>
               </li>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2a_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2f_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
               >
                 <div
@@ -274,7 +212,30 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
             />
           </div>
         </span>
-         and summarize it into a list.
+        . The requirement is 
+        <span
+          class="ant-sender-slot-before ant-sender-slot-no-width"
+          contenteditable="false"
+          data-node-type="nbsp"
+          data-slot-key="writing_num"
+        >
+        </span>
+        <span
+          class="ant-sender-slot ant-sender-slot-content"
+          contenteditable="true"
+          data-placeholder="[Please enter the number of words]"
+          data-slot-key="writing_num"
+        >
+          800
+        </span>
+        <span
+          class="ant-sender-slot-after ant-sender-slot-no-width"
+          contenteditable="false"
+          data-node-type="nbsp"
+          data-slot-key="writing_num"
+        >
+        </span>
+         words.
       </div>
       <div
         id="ant-sender-slot-placeholders"
@@ -285,13 +246,13 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
       class="ant-sender-footer"
     >
       <div
-        class="ant-flex css-var-_r_2a_ ant-flex-align-center ant-flex-justify-space-between"
+        class="ant-flex css-var-_r_2f_ ant-flex-align-center ant-flex-justify-space-between"
       >
         <div
-          class="ant-flex css-var-_r_2a_ ant-flex-align-center ant-flex-gap-small"
+          class="ant-flex css-var-_r_2f_ ant-flex-align-center ant-flex-gap-small"
         >
           <button
-            class="ant-btn css-var-_r_2a_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+            class="ant-btn css-var-_r_2f_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
             style="font-size: 16px;"
             type="button"
           >
@@ -320,10 +281,10 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
             </span>
           </button>
           <div
-            class="ant-sender-switch css-var-_r_2a_ ant-sender-switch-checked"
+            class="ant-sender-switch css-var-_r_2f_ ant-sender-switch-checked"
           >
             <button
-              class="ant-btn css-var-_r_2a_ ant-btn-default ant-btn-color-primary ant-btn-variant-outlined ant-sender-switch-content"
+              class="ant-btn css-var-_r_2f_ ant-btn-default ant-btn-color-primary ant-btn-variant-outlined ant-sender-switch-content"
               type="button"
             >
               <span
@@ -350,21 +311,21 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
                   </svg>
                 </span>
               </span>
-              <span>
+              <div>
                 Deep Think:
                 <span
                   style="display: inline-flex; width: 28px; justify-content: center; align-items: center;"
                 >
                   on
                 </span>
-              </span>
+              </div>
             </button>
           </div>
           <div
-            class="ant-sender-switch ant-dropdown-trigger css-var-_r_2a_"
+            class="ant-sender-switch ant-dropdown-trigger css-var-_r_2f_"
           >
             <button
-              class="ant-btn css-var-_r_2a_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
+              class="ant-btn css-var-_r_2f_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
               type="button"
             >
               <span
@@ -390,24 +351,26 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
                   </svg>
                 </span>
               </span>
-              <span>
+              <span
+                class=""
+              >
                 Agent
               </span>
             </button>
           </div>
           <div
-            class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-_r_2a_ ant-dropdown-css-var ant-dropdown-placement-bottomLeft"
+            class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-_r_2f_ ant-dropdown-css-var ant-dropdown-placement-bottomLeft"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <ul
-              class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-_r_2a_ ant-dropdown-css-var css-var-_r_2a_ ant-dropdown-menu-css-var"
+              class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-_r_2f_ ant-dropdown-css-var css-var-_r_2f_ ant-dropdown-menu-css-var"
               data-menu-list="true"
               role="menu"
               tabindex="0"
             >
               <li
                 aria-describedby="test-id"
-                class="ant-dropdown-menu-item ant-dropdown-menu-item-selected"
+                class="ant-dropdown-menu-item"
                 data-menu-id="rc-menu-uuid-deep_search"
                 role="menuitem"
                 tabindex="-1"
@@ -438,7 +401,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
                 </span>
               </li>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2a_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2f_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
               >
                 <div
@@ -488,7 +451,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
                 </span>
               </li>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2a_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2f_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
               >
                 <div
@@ -507,7 +470,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
               </div>
               <li
                 aria-describedby="test-id"
-                class="ant-dropdown-menu-item"
+                class="ant-dropdown-menu-item ant-dropdown-menu-item-selected"
                 data-menu-id="rc-menu-uuid-ai_writing"
                 role="menuitem"
                 tabindex="-1"
@@ -538,7 +501,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
                 </span>
               </li>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2a_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2f_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
               >
                 <div
@@ -562,10 +525,10 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
             />
           </div>
           <div
-            class="ant-sender-switch ant-dropdown-trigger css-var-_r_2a_"
+            class="ant-sender-switch ant-dropdown-trigger css-var-_r_2f_"
           >
             <button
-              class="ant-btn css-var-_r_2a_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
+              class="ant-btn css-var-_r_2f_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
               type="button"
             >
               <span
@@ -591,17 +554,19 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
                   </svg>
                 </span>
               </span>
-              <span>
+              <span
+                class=""
+              >
                 Files
               </span>
             </button>
           </div>
           <div
-            class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-_r_2a_ ant-dropdown-css-var ant-dropdown-placement-bottomLeft"
+            class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-_r_2f_ ant-dropdown-css-var ant-dropdown-placement-bottomLeft"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <ul
-              class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-_r_2a_ ant-dropdown-css-var css-var-_r_2a_ ant-dropdown-menu-css-var"
+              class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-_r_2f_ ant-dropdown-css-var css-var-_r_2f_ ant-dropdown-menu-css-var"
               data-menu-list="true"
               role="menu"
               tabindex="0"
@@ -639,7 +604,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
                 </span>
               </li>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2a_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2f_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
               >
                 <div
@@ -664,10 +629,10 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
           </div>
         </div>
         <div
-          class="ant-flex css-var-_r_2a_ ant-flex-align-center"
+          class="ant-flex css-var-_r_2f_ ant-flex-align-center"
         >
           <button
-            class="ant-btn css-var-_r_2a_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+            class="ant-btn css-var-_r_2f_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
             style="font-size: 16px;"
             type="button"
           >
@@ -696,14 +661,14 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
             </span>
           </button>
           <div
-            class="ant-divider css-var-_r_2a_ ant-divider-vertical ant-divider-rail"
+            class="ant-divider css-var-_r_2f_ ant-divider-vertical ant-divider-rail"
             role="separator"
           />
           <div
-            class="ant-sender-actions-list-presets ant-flex css-var-_r_2a_"
+            class="ant-sender-actions-list-presets ant-flex css-var-_r_2f_"
           >
             <button
-              class="ant-btn css-var-_r_2a_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
+              class="ant-btn css-var-_r_2f_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
               type="button"
             >
               <span
@@ -734,51 +699,702 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
         </div>
       </div>
     </div>
+  </div>
+  <div
+    class="ant-sender css-var-_r_2f_"
+  >
     <div
-      class="ant-attachment-drop-area css-var-_r_2a_"
-      style="display: none;"
+      class="ant-sender-content"
     >
       <div
-        class="ant-attachment-placeholder"
+        class="ant-sender-input ant-sender-input-slot"
+        contenteditable="true"
+        data-placeholder=""
+        role="textbox"
+        spellcheck="false"
+        style="min-height: 17.764287px; max-height: 35.528574px; overflow-y: auto;"
+        tabindex="0"
+        value="请帮我写一篇关于的文章。要求是 800 字。"
       >
         <span
-          class="ant-upload-wrapper css-var-_r_2a_"
+          class="ant-sender-skill"
+          contenteditable="false"
+          data-skill-key="writing"
         >
           <div
-            class="ant-upload ant-upload-drag"
-            style="padding: 0px; border: 0px; background: transparent;"
+            aria-label="Skill: 写作助手"
+            class="ant-sender-skill-tag"
+            role="button"
+            tabindex="0"
           >
             <span
-              class="ant-upload ant-upload-btn"
+              class="ant-sender-skill-tag-text"
+            >
+              写作助手
+            </span>
+            <div
+              aria-label="Close skill"
+              class="ant-sender-skill-tag-close"
               role="button"
               tabindex="0"
             >
-              <input
-                accept=""
-                name="file"
-                style="display: none;"
-                type="file"
-              />
-              <div
-                class="ant-upload-drag-container"
+              <span
+                aria-label="close"
+                class="anticon anticon-close ant-sender-skill-tag-close-icon"
+                role="img"
               >
-                <div
-                  class="ant-attachment-placeholder-inner ant-flex css-var-_r_2a_ ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
+                <svg
+                  aria-hidden="true"
+                  data-icon="close"
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
                 >
-                  <span
-                    class="ant-typography ant-attachment-placeholder-icon css-var-_r_2a_"
+                  <path
+                    d="M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
                   />
-                  <h5
-                    class="ant-typography ant-attachment-placeholder-title css-var-_r_2a_"
-                  />
-                  <span
-                    class="ant-typography ant-typography-secondary ant-attachment-placeholder-description css-var-_r_2a_"
-                  />
-                </div>
-              </div>
-            </span>
+                </svg>
+              </span>
+            </div>
           </div>
         </span>
+        请帮我写一篇关于
+        <span
+          class="ant-sender-slot"
+          contenteditable="false"
+          data-slot-key="writing_type"
+        >
+          <span
+            class="ant-dropdown-trigger ant-sender-slot-select placeholder"
+          >
+            <span
+              class="ant-sender-slot-select-value"
+              data-placeholder="请输入主题"
+            />
+            <span
+              class="ant-sender-slot-select-arrow"
+            >
+              <span
+                aria-label="caret-down"
+                class="anticon anticon-caret-down"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="caret-down"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="0 0 1024 1024"
+                  width="1em"
+                >
+                  <path
+                    d="M840.4 300H183.6c-19.7 0-30.7 20.8-18.5 35l328.4 380.8c9.4 10.9 27.5 10.9 37 0L858.9 335c12.2-14.2 1.2-35-18.5-35z"
+                  />
+                </svg>
+              </span>
+            </span>
+          </span>
+          <div
+            class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-_r_2f_ ant-dropdown-css-var ant-dropdown-placement-bottomLeft"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+          >
+            <ul
+              class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-_r_2f_ ant-dropdown-css-var css-var-_r_2f_ ant-dropdown-menu-css-var"
+              data-menu-list="true"
+              role="menu"
+              tabindex="0"
+            >
+              <li
+                aria-describedby="test-id"
+                class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
+                data-menu-id="rc-menu-uuid-校园"
+                role="menuitem"
+                tabindex="-1"
+              >
+                <span
+                  class="ant-dropdown-menu-title-content"
+                >
+                  校园
+                </span>
+              </li>
+              <div
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2f_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+              >
+                <div
+                  class="ant-tooltip-arrow"
+                  style="position: absolute; top: 0px; left: 0px;"
+                >
+                  <span
+                    class="ant-tooltip-arrow-content"
+                  />
+                </div>
+                <div
+                  class="ant-tooltip-container"
+                  id="test-id"
+                  role="tooltip"
+                />
+              </div>
+              <li
+                aria-describedby="test-id"
+                class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
+                data-menu-id="rc-menu-uuid-旅行"
+                role="menuitem"
+                tabindex="-1"
+              >
+                <span
+                  class="ant-dropdown-menu-title-content"
+                >
+                  旅行
+                </span>
+              </li>
+              <div
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2f_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+              >
+                <div
+                  class="ant-tooltip-arrow"
+                  style="position: absolute; top: 0px; left: 0px;"
+                >
+                  <span
+                    class="ant-tooltip-arrow-content"
+                  />
+                </div>
+                <div
+                  class="ant-tooltip-container"
+                  id="test-id"
+                  role="tooltip"
+                />
+              </div>
+              <li
+                aria-describedby="test-id"
+                class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
+                data-menu-id="rc-menu-uuid-阅读"
+                role="menuitem"
+                tabindex="-1"
+              >
+                <span
+                  class="ant-dropdown-menu-title-content"
+                >
+                  阅读
+                </span>
+              </li>
+              <div
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2f_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+              >
+                <div
+                  class="ant-tooltip-arrow"
+                  style="position: absolute; top: 0px; left: 0px;"
+                >
+                  <span
+                    class="ant-tooltip-arrow-content"
+                  />
+                </div>
+                <div
+                  class="ant-tooltip-container"
+                  id="test-id"
+                  role="tooltip"
+                />
+              </div>
+            </ul>
+            <div
+              aria-hidden="true"
+              style="display: none;"
+            />
+          </div>
+        </span>
+        的文章。要求是
+        <span
+          class="ant-sender-slot-before ant-sender-slot-no-width"
+          contenteditable="false"
+          data-node-type="nbsp"
+          data-slot-key="writing_num"
+        >
+        </span>
+        <span
+          class="ant-sender-slot ant-sender-slot-content"
+          contenteditable="true"
+          data-placeholder="[请输入字数]"
+          data-slot-key="writing_num"
+        >
+          800
+        </span>
+        <span
+          class="ant-sender-slot-after ant-sender-slot-no-width"
+          contenteditable="false"
+          data-node-type="nbsp"
+          data-slot-key="writing_num"
+        >
+        </span>
+        字。
+      </div>
+      <div
+        id="ant-sender-slot-placeholders"
+        style="display: none;"
+      />
+    </div>
+    <div
+      class="ant-sender-footer"
+    >
+      <div
+        class="ant-flex css-var-_r_2f_ ant-flex-align-center ant-flex-justify-space-between"
+      >
+        <div
+          class="ant-flex css-var-_r_2f_ ant-flex-align-center ant-flex-gap-small"
+        >
+          <button
+            class="ant-btn css-var-_r_2f_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+            style="font-size: 16px;"
+            type="button"
+          >
+            <span
+              class="ant-btn-icon"
+            >
+              <span
+                aria-label="paper-clip"
+                class="anticon anticon-paper-clip"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="paper-clip"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M779.3 196.6c-94.2-94.2-247.6-94.2-341.7 0l-261 260.8c-1.7 1.7-2.6 4-2.6 6.4s.9 4.7 2.6 6.4l36.9 36.9a9 9 0 0012.7 0l261-260.8c32.4-32.4 75.5-50.2 121.3-50.2s88.9 17.8 121.2 50.2c32.4 32.4 50.2 75.5 50.2 121.2 0 45.8-17.8 88.8-50.2 121.2l-266 265.9-43.1 43.1c-40.3 40.3-105.8 40.3-146.1 0-19.5-19.5-30.2-45.4-30.2-73s10.7-53.5 30.2-73l263.9-263.8c6.7-6.6 15.5-10.3 24.9-10.3h.1c9.4 0 18.1 3.7 24.7 10.3 6.7 6.7 10.3 15.5 10.3 24.9 0 9.3-3.7 18.1-10.3 24.7L372.4 653c-1.7 1.7-2.6 4-2.6 6.4s.9 4.7 2.6 6.4l36.9 36.9a9 9 0 0012.7 0l215.6-215.6c19.9-19.9 30.8-46.3 30.8-74.4s-11-54.6-30.8-74.4c-41.1-41.1-107.9-41-149 0L463 364 224.8 602.1A172.22 172.22 0 00174 724.8c0 46.3 18.1 89.8 50.8 122.5 33.9 33.8 78.3 50.7 122.7 50.7 44.4 0 88.8-16.9 122.6-50.7l309.2-309C824.8 492.7 850 432 850 367.5c.1-64.6-25.1-125.3-70.7-170.9z"
+                  />
+                </svg>
+              </span>
+            </span>
+          </button>
+          <div
+            class="ant-sender-switch css-var-_r_2f_ ant-sender-switch-checked"
+          >
+            <button
+              class="ant-btn css-var-_r_2f_ ant-btn-default ant-btn-color-primary ant-btn-variant-outlined ant-sender-switch-content"
+              type="button"
+            >
+              <span
+                class="ant-btn-icon"
+              >
+                <span
+                  aria-label="open-a-i"
+                  class="anticon anticon-open-a-i"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="open-a-i"
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M482.88 128c-84.35 0-156.58 52.8-185.68 126.98-60.89 8.13-115.3 43.63-146.6 97.84-42.16 73-32.55 161.88 17.14 224.16-23.38 56.75-19.85 121.6 11.42 175.78 42.18 73.02 124.1 109.15 202.94 97.23C419.58 898.63 477.51 928 540.12 928c84.35 0 156.58-52.8 185.68-126.98 60.89-8.13 115.3-43.62 146.6-97.84 42.16-73 32.55-161.88-17.14-224.16 23.38-56.75 19.85-121.6-11.42-175.78-42.18-73.02-124.1-109.15-202.94-97.23C603.42 157.38 545.49 128 482.88 128m0 61.54c35.6 0 68.97 13.99 94.22 37.74-1.93 1.03-3.92 1.84-5.83 2.94l-136.68 78.91a46.11 46.11 0 00-23.09 39.78l-.84 183.6-65.72-38.34V327.4c0-76 61.9-137.86 137.94-137.86m197.7 75.9c44.19 3.14 86.16 27.44 109.92 68.57 17.8 30.8 22.38 66.7 14.43 100.42-1.88-1.17-3.6-2.49-5.53-3.6l-136.73-78.91a46.23 46.23 0 00-46-.06l-159.47 91.1.36-76.02 144.5-83.41a137.19 137.19 0 0178.53-18.09m-396.92 55.4c-.07 2.2-.3 4.35-.3 6.56v157.75a46.19 46.19 0 0022.91 39.9l158.68 92.5-66.02 37.67-144.55-83.35c-65.86-38-88.47-122.53-50.45-188.34 17.78-30.78 46.55-52.69 79.73-62.68m340.4 79.93l144.54 83.35c65.86 38 88.47 122.53 50.45 188.34-17.78 30.78-46.55 52.69-79.73 62.68.07-2.19.3-4.34.3-6.55V570.85a46.19 46.19 0 00-22.9-39.9l-158.69-92.5zM511.8 464.84l54.54 31.79-.3 63.22-54.84 31.31-54.54-31.85.3-63.16zm100.54 58.65l65.72 38.35V728.6c0 76-61.9 137.86-137.94 137.86-35.6 0-68.97-13.99-94.22-37.74 1.93-1.03 3.92-1.84 5.83-2.94l136.68-78.9a46.11 46.11 0 0023.09-39.8zm-46.54 89.55l-.36 76.02-144.5 83.41c-65.85 38-150.42 15.34-188.44-50.48-17.8-30.8-22.38-66.7-14.43-100.42 1.88 1.17 3.6 2.5 5.53 3.6l136.74 78.91a46.23 46.23 0 0046 .06z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                class=""
+              >
+                深度搜索：
+                <span
+                  style="display: inline-flex; width: 28px; justify-content: center; align-items: center;"
+                >
+                  开启
+                </span>
+              </span>
+            </button>
+          </div>
+          <div
+            class="ant-sender-switch ant-dropdown-trigger css-var-_r_2f_"
+          >
+            <button
+              class="ant-btn css-var-_r_2f_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
+              type="button"
+            >
+              <span
+                class="ant-btn-icon"
+              >
+                <span
+                  aria-label="ant-design"
+                  class="anticon anticon-ant-design"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="ant-design"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M716.3 313.8c19-18.9 19-49.7 0-68.6l-69.9-69.9.1.1c-18.5-18.5-50.3-50.3-95.3-95.2-21.2-20.7-55.5-20.5-76.5.5L80.9 474.2a53.84 53.84 0 000 76.4L474.6 944a54.14 54.14 0 0076.5 0l165.1-165c19-18.9 19-49.7 0-68.6a48.7 48.7 0 00-68.7 0l-125 125.2c-5.2 5.2-13.3 5.2-18.5 0L189.5 521.4c-5.2-5.2-5.2-13.3 0-18.5l314.4-314.2c.4-.4.9-.7 1.3-1.1 5.2-4.1 12.4-3.7 17.2 1.1l125.2 125.1c19 19 49.8 19 68.7 0zM408.6 514.4a106.3 106.2 0 10212.6 0 106.3 106.2 0 10-212.6 0zm536.2-38.6L821.9 353.5c-19-18.9-49.8-18.9-68.7.1a48.4 48.4 0 000 68.6l83 82.9c5.2 5.2 5.2 13.3 0 18.5l-81.8 81.7a48.4 48.4 0 000 68.6 48.7 48.7 0 0068.7 0l121.8-121.7a53.93 53.93 0 00-.1-76.4z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                class=""
+              >
+                功能应用
+              </span>
+            </button>
+          </div>
+          <div
+            class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-_r_2f_ ant-dropdown-css-var ant-dropdown-placement-bottomLeft"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+          >
+            <ul
+              class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-_r_2f_ ant-dropdown-css-var css-var-_r_2f_ ant-dropdown-menu-css-var"
+              data-menu-list="true"
+              role="menu"
+              tabindex="0"
+            >
+              <li
+                aria-describedby="test-id"
+                class="ant-dropdown-menu-item"
+                data-menu-id="rc-menu-uuid-deep_search"
+                role="menuitem"
+                tabindex="-1"
+              >
+                <span
+                  aria-label="search"
+                  class="anticon anticon-search ant-dropdown-menu-item-icon"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="search"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"
+                    />
+                  </svg>
+                </span>
+                <span
+                  class="ant-dropdown-menu-title-content"
+                >
+                  深度搜索
+                </span>
+              </li>
+              <div
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2f_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+              >
+                <div
+                  class="ant-tooltip-arrow"
+                  style="position: absolute; top: 0px; left: 0px;"
+                >
+                  <span
+                    class="ant-tooltip-arrow-content"
+                  />
+                </div>
+                <div
+                  class="ant-tooltip-container"
+                  id="test-id"
+                  role="tooltip"
+                />
+              </div>
+              <li
+                aria-describedby="test-id"
+                class="ant-dropdown-menu-item"
+                data-menu-id="rc-menu-uuid-ai_code"
+                role="menuitem"
+                tabindex="-1"
+              >
+                <span
+                  aria-label="code"
+                  class="anticon anticon-code ant-dropdown-menu-item-icon"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="code"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M516 673c0 4.4 3.4 8 7.5 8h185c4.1 0 7.5-3.6 7.5-8v-48c0-4.4-3.4-8-7.5-8h-185c-4.1 0-7.5 3.6-7.5 8v48zm-194.9 6.1l192-161c3.8-3.2 3.8-9.1 0-12.3l-192-160.9A7.95 7.95 0 00308 351v62.7c0 2.4 1 4.6 2.9 6.1L420.7 512l-109.8 92.2a8.1 8.1 0 00-2.9 6.1V673c0 6.8 7.9 10.5 13.1 6.1zM880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 728H184V184h656v656z"
+                    />
+                  </svg>
+                </span>
+                <span
+                  class="ant-dropdown-menu-title-content"
+                >
+                  写代码
+                </span>
+              </li>
+              <div
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2f_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+              >
+                <div
+                  class="ant-tooltip-arrow"
+                  style="position: absolute; top: 0px; left: 0px;"
+                >
+                  <span
+                    class="ant-tooltip-arrow-content"
+                  />
+                </div>
+                <div
+                  class="ant-tooltip-container"
+                  id="test-id"
+                  role="tooltip"
+                />
+              </div>
+              <li
+                aria-describedby="test-id"
+                class="ant-dropdown-menu-item ant-dropdown-menu-item-selected"
+                data-menu-id="rc-menu-uuid-ai_writing"
+                role="menuitem"
+                tabindex="-1"
+              >
+                <span
+                  aria-label="edit"
+                  class="anticon anticon-edit ant-dropdown-menu-item-icon"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="edit"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"
+                    />
+                  </svg>
+                </span>
+                <span
+                  class="ant-dropdown-menu-title-content"
+                >
+                  帮我写作
+                </span>
+              </li>
+              <div
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2f_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+              >
+                <div
+                  class="ant-tooltip-arrow"
+                  style="position: absolute; top: 0px; left: 0px;"
+                >
+                  <span
+                    class="ant-tooltip-arrow-content"
+                  />
+                </div>
+                <div
+                  class="ant-tooltip-container"
+                  id="test-id"
+                  role="tooltip"
+                />
+              </div>
+            </ul>
+            <div
+              aria-hidden="true"
+              style="display: none;"
+            />
+          </div>
+          <div
+            class="ant-sender-switch ant-dropdown-trigger css-var-_r_2f_"
+          >
+            <button
+              class="ant-btn css-var-_r_2f_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
+              type="button"
+            >
+              <span
+                class="ant-btn-icon"
+              >
+                <span
+                  aria-label="profile"
+                  class="anticon anticon-profile"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="profile"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 728H184V184h656v656zM492 400h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H492c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8zm0 144h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H492c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8zm0 144h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H492c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8zM340 368a40 40 0 1080 0 40 40 0 10-80 0zm0 144a40 40 0 1080 0 40 40 0 10-80 0zm0 144a40 40 0 1080 0 40 40 0 10-80 0z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                class=""
+              >
+                文件引用
+              </span>
+            </button>
+          </div>
+          <div
+            class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-_r_2f_ ant-dropdown-css-var ant-dropdown-placement-bottomLeft"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+          >
+            <ul
+              class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-_r_2f_ ant-dropdown-css-var css-var-_r_2f_ ant-dropdown-menu-css-var"
+              data-menu-list="true"
+              role="menu"
+              tabindex="0"
+            >
+              <li
+                aria-describedby="test-id"
+                class="ant-dropdown-menu-item"
+                data-menu-id="rc-menu-uuid-file_image"
+                role="menuitem"
+                tabindex="-1"
+              >
+                <span
+                  aria-label="file-image"
+                  class="anticon anticon-file-image ant-dropdown-menu-item-icon"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="file-image"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M553.1 509.1l-77.8 99.2-41.1-52.4a8 8 0 00-12.6 0l-99.8 127.2a7.98 7.98 0 006.3 12.9H696c6.7 0 10.4-7.7 6.3-12.9l-136.5-174a8.1 8.1 0 00-12.7 0zM360 442a40 40 0 1080 0 40 40 0 10-80 0zm494.6-153.4L639.4 73.4c-6-6-14.1-9.4-22.6-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.7-9.4-22.7zM790.2 326H602V137.8L790.2 326zm1.8 562H232V136h302v216a42 42 0 0042 42h216v494z"
+                    />
+                  </svg>
+                </span>
+                <span
+                  class="ant-dropdown-menu-title-content"
+                >
+                  x-图片
+                </span>
+              </li>
+              <div
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_2f_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+              >
+                <div
+                  class="ant-tooltip-arrow"
+                  style="position: absolute; top: 0px; left: 0px;"
+                >
+                  <span
+                    class="ant-tooltip-arrow-content"
+                  />
+                </div>
+                <div
+                  class="ant-tooltip-container"
+                  id="test-id"
+                  role="tooltip"
+                />
+              </div>
+            </ul>
+            <div
+              aria-hidden="true"
+              style="display: none;"
+            />
+          </div>
+        </div>
+        <div
+          class="ant-flex css-var-_r_2f_ ant-flex-align-center"
+        >
+          <button
+            class="ant-btn css-var-_r_2f_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+            style="font-size: 16px;"
+            type="button"
+          >
+            <span
+              class="ant-btn-icon"
+            >
+              <span
+                aria-label="api"
+                class="anticon anticon-api"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="api"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M917.7 148.8l-42.4-42.4c-1.6-1.6-3.6-2.3-5.7-2.3s-4.1.8-5.7 2.3l-76.1 76.1a199.27 199.27 0 00-112.1-34.3c-51.2 0-102.4 19.5-141.5 58.6L432.3 308.7a8.03 8.03 0 000 11.3L704 591.7c1.6 1.6 3.6 2.3 5.7 2.3 2 0 4.1-.8 5.7-2.3l101.9-101.9c68.9-69 77-175.7 24.3-253.5l76.1-76.1c3.1-3.2 3.1-8.3 0-11.4zM769.1 441.7l-59.4 59.4-186.8-186.8 59.4-59.4c24.9-24.9 58.1-38.7 93.4-38.7 35.3 0 68.4 13.7 93.4 38.7 24.9 24.9 38.7 58.1 38.7 93.4 0 35.3-13.8 68.4-38.7 93.4zm-190.2 105a8.03 8.03 0 00-11.3 0L501 613.3 410.7 523l66.7-66.7c3.1-3.1 3.1-8.2 0-11.3L441 408.6a8.03 8.03 0 00-11.3 0L363 475.3l-43-43a7.85 7.85 0 00-5.7-2.3c-2 0-4.1.8-5.7 2.3L206.8 534.2c-68.9 69-77 175.7-24.3 253.5l-76.1 76.1a8.03 8.03 0 000 11.3l42.4 42.4c1.6 1.6 3.6 2.3 5.7 2.3s4.1-.8 5.7-2.3l76.1-76.1c33.7 22.9 72.9 34.3 112.1 34.3 51.2 0 102.4-19.5 141.5-58.6l101.9-101.9c3.1-3.1 3.1-8.2 0-11.3l-43-43 66.7-66.7c3.1-3.1 3.1-8.2 0-11.3l-36.6-36.2zM441.7 769.1a131.32 131.32 0 01-93.4 38.7c-35.3 0-68.4-13.7-93.4-38.7a131.32 131.32 0 01-38.7-93.4c0-35.3 13.7-68.4 38.7-93.4l59.4-59.4 186.8 186.8-59.4 59.4z"
+                  />
+                </svg>
+              </span>
+            </span>
+          </button>
+          <div
+            class="ant-divider css-var-_r_2f_ ant-divider-vertical ant-divider-rail"
+            role="separator"
+          />
+          <div
+            class="ant-sender-actions-list-presets ant-flex css-var-_r_2f_"
+          >
+            <button
+              class="ant-btn css-var-_r_2f_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
+              type="button"
+            >
+              <span
+                class="ant-btn-icon"
+              >
+                <span
+                  aria-label="arrow-up"
+                  class="anticon anticon-arrow-up"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="arrow-up"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M868 545.5L536.1 163a31.96 31.96 0 00-48.3 0L156 545.5a7.97 7.97 0 006 13.2h81c4.6 0 9-2 12.1-5.5L474 300.9V864c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V300.9l218.9 252.3c3 3.5 7.4 5.5 12.1 5.5h81c6.8 0 10.5-8 6-13.2z"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -789,19 +1405,19 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 2`] =
 
 exports[`renders components/sender/demo/basic.tsx extend context correctly 1`] = `
 <div
-  class="ant-app css-var-_r_26_"
+  class="ant-app css-var-_r_2b_"
 >
   <div
-    class="ant-flex css-var-_r_26_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+    class="ant-flex css-var-_r_2b_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
   >
     <div
-      class="ant-sender css-var-_r_26_"
+      class="ant-sender css-var-_r_2b_"
     >
       <div
         class="ant-sender-content"
       >
         <textarea
-          class="ant-input ant-input-borderless css-var-_r_26_ ant-input-css-var ant-sender-input"
+          class="ant-input ant-input-borderless css-var-_r_2b_ ant-input-css-var ant-sender-input"
           style="overflow-y: hidden; resize: none;"
         >
           Hello? this is X!
@@ -810,10 +1426,10 @@ exports[`renders components/sender/demo/basic.tsx extend context correctly 1`] =
           class="ant-sender-actions-list"
         >
           <div
-            class="ant-sender-actions-list-presets ant-flex css-var-_r_26_"
+            class="ant-sender-actions-list-presets ant-flex css-var-_r_2b_"
           >
             <button
-              class="ant-btn css-var-_r_26_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
+              class="ant-btn css-var-_r_2b_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
               type="button"
             >
               <span
@@ -845,13 +1461,13 @@ exports[`renders components/sender/demo/basic.tsx extend context correctly 1`] =
       </div>
     </div>
     <div
-      class="ant-sender css-var-_r_26_"
+      class="ant-sender css-var-_r_2b_"
     >
       <div
         class="ant-sender-content"
       >
         <textarea
-          class="ant-input ant-input-borderless css-var-_r_26_ ant-input-css-var ant-sender-input"
+          class="ant-input ant-input-borderless css-var-_r_2b_ ant-input-css-var ant-sender-input"
           readonly=""
           style="resize: none;"
         >
@@ -861,10 +1477,10 @@ exports[`renders components/sender/demo/basic.tsx extend context correctly 1`] =
           class="ant-sender-actions-list"
         >
           <div
-            class="ant-sender-actions-list-presets ant-flex css-var-_r_26_"
+            class="ant-sender-actions-list-presets ant-flex css-var-_r_2b_"
           >
             <button
-              class="ant-btn css-var-_r_26_ ant-btn-circle ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-loading-button"
+              class="ant-btn css-var-_r_2b_ ant-btn-circle ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-loading-button"
               type="button"
             >
               <span
@@ -923,13 +1539,13 @@ exports[`renders components/sender/demo/basic.tsx extend context correctly 1`] =
       </div>
     </div>
     <div
-      class="ant-sender css-var-_r_26_ ant-sender-disabled"
+      class="ant-sender css-var-_r_2b_ ant-sender-disabled"
     >
       <div
         class="ant-sender-content"
       >
         <textarea
-          class="ant-input ant-input-borderless css-var-_r_26_ ant-input-css-var ant-sender-input ant-input-disabled"
+          class="ant-input ant-input-borderless css-var-_r_2b_ ant-input-css-var ant-sender-input ant-input-disabled"
           disabled=""
           style="overflow-y: hidden; resize: none;"
         >
@@ -939,10 +1555,10 @@ exports[`renders components/sender/demo/basic.tsx extend context correctly 1`] =
           class="ant-sender-actions-list"
         >
           <div
-            class="ant-sender-actions-list-presets ant-flex css-var-_r_26_"
+            class="ant-sender-actions-list-presets ant-flex css-var-_r_2b_"
           >
             <button
-              class="ant-btn css-var-_r_26_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              class="ant-btn css-var-_r_2b_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
               disabled=""
               type="button"
             >
@@ -982,13 +1598,13 @@ exports[`renders components/sender/demo/basic.tsx extend context correctly 2`] =
 
 exports[`renders components/sender/demo/footer.tsx extend context correctly 1`] = `
 <div
-  class="ant-sender css-var-_r_24_"
+  class="ant-sender css-var-_r_29_"
 >
   <div
     class="ant-sender-content"
   >
     <textarea
-      class="ant-input ant-input-borderless css-var-_r_24_ ant-input-css-var ant-sender-input"
+      class="ant-input ant-input-borderless css-var-_r_29_ ant-input-css-var ant-sender-input"
       placeholder="Press Enter to send message"
       style="overflow-y: hidden; resize: none;"
     />
@@ -997,13 +1613,13 @@ exports[`renders components/sender/demo/footer.tsx extend context correctly 1`] 
     class="ant-sender-footer"
   >
     <div
-      class="ant-flex css-var-_r_24_ ant-flex-align-center ant-flex-justify-space-between"
+      class="ant-flex css-var-_r_29_ ant-flex-align-center ant-flex-justify-space-between"
     >
       <div
-        class="ant-flex css-var-_r_24_ ant-flex-align-center ant-flex-gap-small"
+        class="ant-flex css-var-_r_29_ ant-flex-align-center ant-flex-gap-small"
       >
         <button
-          class="ant-btn css-var-_r_24_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+          class="ant-btn css-var-_r_29_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
           style="font-size: 18px; color: rgba(0, 0, 0, 0.88);"
           type="button"
         >
@@ -1032,13 +1648,13 @@ exports[`renders components/sender/demo/footer.tsx extend context correctly 1`] 
           </span>
         </button>
         <div
-          class="ant-divider css-var-_r_24_ ant-divider-vertical ant-divider-rail"
+          class="ant-divider css-var-_r_29_ ant-divider-vertical ant-divider-rail"
           role="separator"
         />
         Deep Thinking
         <button
           aria-checked="false"
-          class="ant-switch ant-switch-small css-var-_r_24_"
+          class="ant-switch ant-switch-small css-var-_r_29_"
           role="switch"
           type="button"
         >
@@ -1057,11 +1673,11 @@ exports[`renders components/sender/demo/footer.tsx extend context correctly 1`] 
           </span>
         </button>
         <div
-          class="ant-divider css-var-_r_24_ ant-divider-vertical ant-divider-rail"
+          class="ant-divider css-var-_r_29_ ant-divider-vertical ant-divider-rail"
           role="separator"
         />
         <button
-          class="ant-btn css-var-_r_24_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+          class="ant-btn css-var-_r_29_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
           type="button"
         >
           <span
@@ -1093,10 +1709,10 @@ exports[`renders components/sender/demo/footer.tsx extend context correctly 1`] 
         </button>
       </div>
       <div
-        class="ant-flex css-var-_r_24_ ant-flex-align-center"
+        class="ant-flex css-var-_r_29_ ant-flex-align-center"
       >
         <button
-          class="ant-btn css-var-_r_24_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+          class="ant-btn css-var-_r_29_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
           style="font-size: 18px; color: rgba(0, 0, 0, 0.88);"
           type="button"
         >
@@ -1125,11 +1741,11 @@ exports[`renders components/sender/demo/footer.tsx extend context correctly 1`] 
           </span>
         </button>
         <div
-          class="ant-divider css-var-_r_24_ ant-divider-vertical ant-divider-rail"
+          class="ant-divider css-var-_r_29_ ant-divider-vertical ant-divider-rail"
           role="separator"
         />
         <button
-          class="ant-btn css-var-_r_24_ ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+          class="ant-btn css-var-_r_29_ ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
           disabled=""
           style="font-size: 18px; color: rgba(0, 0, 0, 0.88);"
           type="button"
@@ -1165,11 +1781,11 @@ exports[`renders components/sender/demo/footer.tsx extend context correctly 1`] 
           </span>
         </button>
         <div
-          class="ant-divider css-var-_r_24_ ant-divider-vertical ant-divider-rail"
+          class="ant-divider css-var-_r_29_ ant-divider-vertical ant-divider-rail"
           role="separator"
         />
         <button
-          class="ant-btn css-var-_r_24_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
+          class="ant-btn css-var-_r_29_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
           type="button"
         >
           <span
@@ -1206,14 +1822,14 @@ exports[`renders components/sender/demo/footer.tsx extend context correctly 2`] 
 
 exports[`renders components/sender/demo/header.tsx extend context correctly 1`] = `
 <div
-  class="ant-app css-var-_r_20_"
+  class="ant-app css-var-_r_25_"
 >
   <div
-    class="ant-flex css-var-_r_20_ ant-flex-align-end"
+    class="ant-flex css-var-_r_25_ ant-flex-align-end"
     style="height: 350px;"
   >
     <div
-      class="ant-sender css-var-_r_20_"
+      class="ant-sender css-var-_r_25_"
     >
       <div
         class="ant-sender-content"
@@ -1222,7 +1838,7 @@ exports[`renders components/sender/demo/header.tsx extend context correctly 1`] 
           class="ant-sender-prefix"
         >
           <button
-            class="ant-btn css-var-_r_20_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+            class="ant-btn css-var-_r_25_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
             style="font-size: 16px;"
             type="button"
           >
@@ -1252,7 +1868,7 @@ exports[`renders components/sender/demo/header.tsx extend context correctly 1`] 
           </button>
         </div>
         <textarea
-          class="ant-input ant-input-borderless css-var-_r_20_ ant-input-css-var ant-sender-input"
+          class="ant-input ant-input-borderless css-var-_r_25_ ant-input-css-var ant-sender-input"
           placeholder="← Click to open"
           style="overflow-y: hidden; resize: none;"
         />
@@ -1260,10 +1876,10 @@ exports[`renders components/sender/demo/header.tsx extend context correctly 1`] 
           class="ant-sender-actions-list"
         >
           <div
-            class="ant-sender-actions-list-presets ant-flex css-var-_r_20_"
+            class="ant-sender-actions-list-presets ant-flex css-var-_r_25_"
           >
             <button
-              class="ant-btn css-var-_r_20_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              class="ant-btn css-var-_r_25_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
               disabled=""
               type="button"
             >
@@ -1303,14 +1919,14 @@ exports[`renders components/sender/demo/header.tsx extend context correctly 2`] 
 
 exports[`renders components/sender/demo/header-fixed.tsx extend context correctly 1`] = `
 <div
-  class="ant-app css-var-_r_22_"
+  class="ant-app css-var-_r_27_"
 >
   <div
-    class="ant-flex css-var-_r_22_ ant-flex-align-flex-start ant-flex-gap-middle ant-flex-vertical"
+    class="ant-flex css-var-_r_27_ ant-flex-align-flex-start ant-flex-gap-middle ant-flex-vertical"
   >
     <button
       aria-checked="true"
-      class="ant-switch css-var-_r_22_ ant-switch-checked"
+      class="ant-switch css-var-_r_27_ ant-switch-checked"
       role="switch"
       type="button"
     >
@@ -1333,7 +1949,7 @@ exports[`renders components/sender/demo/header-fixed.tsx extend context correctl
       </span>
     </button>
     <div
-      class="ant-sender css-var-_r_22_"
+      class="ant-sender css-var-_r_27_"
     >
       <div
         class="ant-sender-header ant-sender-header-motion-appear ant-sender-header-motion-appear-start ant-sender-header-motion"
@@ -1345,7 +1961,7 @@ exports[`renders components/sender/demo/header-fixed.tsx extend context correctl
             class="ant-sender-header-title"
           >
             <div
-              class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-_r_22_"
+              class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-_r_27_"
             >
               <div
                 class="ant-space-item"
@@ -1374,7 +1990,7 @@ exports[`renders components/sender/demo/header-fixed.tsx extend context correctl
                 class="ant-space-item"
               >
                 <span
-                  class="ant-typography ant-typography-secondary css-var-_r_22_"
+                  class="ant-typography ant-typography-secondary css-var-_r_27_"
                 >
                   "Tell more about Ant Design X"
                 </span>
@@ -1385,7 +2001,7 @@ exports[`renders components/sender/demo/header-fixed.tsx extend context correctl
             class="ant-sender-header-close"
           >
             <button
-              class="ant-btn css-var-_r_22_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+              class="ant-btn css-var-_r_27_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
               type="button"
             >
               <span
@@ -1420,17 +2036,17 @@ exports[`renders components/sender/demo/header-fixed.tsx extend context correctl
         class="ant-sender-content"
       >
         <textarea
-          class="ant-input ant-input-borderless css-var-_r_22_ ant-input-css-var ant-sender-input"
+          class="ant-input ant-input-borderless css-var-_r_27_ ant-input-css-var ant-sender-input"
           style="overflow-y: hidden; resize: none;"
         />
         <div
           class="ant-sender-actions-list"
         >
           <div
-            class="ant-sender-actions-list-presets ant-flex css-var-_r_22_"
+            class="ant-sender-actions-list-presets ant-flex css-var-_r_27_"
           >
             <button
-              class="ant-btn css-var-_r_22_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              class="ant-btn css-var-_r_27_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
               disabled=""
               type="button"
             >
@@ -1470,14 +2086,14 @@ exports[`renders components/sender/demo/header-fixed.tsx extend context correctl
 
 exports[`renders components/sender/demo/paste-image.tsx extend context correctly 1`] = `
 <div
-  class="ant-app css-var-_r_1u_"
+  class="ant-app css-var-_r_23_"
 >
   <div
-    class="ant-flex css-var-_r_1u_ ant-flex-align-end"
+    class="ant-flex css-var-_r_23_ ant-flex-align-end"
     style="height: 220px;"
   >
     <div
-      class="ant-sender css-var-_r_1u_"
+      class="ant-sender css-var-_r_23_"
     >
       <div
         class="ant-sender-header"
@@ -1495,7 +2111,7 @@ exports[`renders components/sender/demo/paste-image.tsx extend context correctly
             class="ant-sender-header-close"
           >
             <button
-              class="ant-btn css-var-_r_1u_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+              class="ant-btn css-var-_r_23_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
               type="button"
             >
               <span
@@ -1530,22 +2146,68 @@ exports[`renders components/sender/demo/paste-image.tsx extend context correctly
           style="padding: 0px;"
         >
           <div
-            class="ant-attachment css-var-_r_1u_"
+            class="ant-attachment css-var-_r_23_"
             dir="ltr"
           >
             <div
               class="ant-file-card-list-wrapper"
             >
               <div
-                class="ant-file-card-list ant-attachment-list css-var-_r_1u_"
+                class="ant-file-card-list ant-attachment-list css-var-_r_23_"
                 style="display: none;"
-              />
+              >
+                <span
+                  class="ant-upload-wrapper css-var-_r_23_"
+                >
+                  <div
+                    class="ant-upload ant-upload-select"
+                  >
+                    <span
+                      class="ant-upload"
+                    >
+                      <input
+                        accept=""
+                        name="file"
+                        style="display: none;"
+                        type="file"
+                      />
+                      <button
+                        class="ant-btn css-var-_r_23_ ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
+                        type="button"
+                      >
+                        <span
+                          aria-label="plus"
+                          class="anticon anticon-plus ant-attachment-list-upload-btn-icon"
+                          role="img"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            data-icon="plus"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
+                            />
+                            <path
+                              d="M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+                            />
+                          </svg>
+                        </span>
+                      </button>
+                    </span>
+                  </div>
+                </span>
+              </div>
             </div>
             <div
               class="ant-attachment-placeholder"
             >
               <span
-                class="ant-upload-wrapper css-var-_r_1u_"
+                class="ant-upload-wrapper css-var-_r_23_"
               >
                 <div
                   class="ant-upload ant-upload-drag"
@@ -1566,10 +2228,10 @@ exports[`renders components/sender/demo/paste-image.tsx extend context correctly
                       class="ant-upload-drag-container"
                     >
                       <div
-                        class="ant-attachment-placeholder-inner ant-flex css-var-_r_1u_ ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
+                        class="ant-attachment-placeholder-inner ant-flex css-var-_r_23_ ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
                       >
                         <span
-                          class="ant-typography ant-attachment-placeholder-icon css-var-_r_1u_"
+                          class="ant-typography ant-attachment-placeholder-icon css-var-_r_23_"
                         >
                           <span
                             aria-label="cloud-upload"
@@ -1595,12 +2257,12 @@ exports[`renders components/sender/demo/paste-image.tsx extend context correctly
                           </span>
                         </span>
                         <h5
-                          class="ant-typography ant-attachment-placeholder-title css-var-_r_1u_"
+                          class="ant-typography ant-attachment-placeholder-title css-var-_r_23_"
                         >
                           Upload files
                         </h5>
                         <span
-                          class="ant-typography ant-typography-secondary ant-attachment-placeholder-description css-var-_r_1u_"
+                          class="ant-typography ant-typography-secondary ant-attachment-placeholder-description css-var-_r_23_"
                         >
                           Click or drag files to this area to upload
                         </span>
@@ -1620,7 +2282,7 @@ exports[`renders components/sender/demo/paste-image.tsx extend context correctly
           class="ant-sender-prefix"
         >
           <button
-            class="ant-btn css-var-_r_1u_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+            class="ant-btn css-var-_r_23_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
             style="font-size: 16px;"
             type="button"
           >
@@ -1650,17 +2312,17 @@ exports[`renders components/sender/demo/paste-image.tsx extend context correctly
           </button>
         </div>
         <textarea
-          class="ant-input ant-input-borderless css-var-_r_1u_ ant-input-css-var ant-sender-input"
+          class="ant-input ant-input-borderless css-var-_r_23_ ant-input-css-var ant-sender-input"
           style="overflow-y: hidden; resize: none;"
         />
         <div
           class="ant-sender-actions-list"
         >
           <div
-            class="ant-sender-actions-list-presets ant-flex css-var-_r_1u_"
+            class="ant-sender-actions-list-presets ant-flex css-var-_r_23_"
           >
             <button
-              class="ant-btn css-var-_r_1u_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              class="ant-btn css-var-_r_23_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
               disabled=""
               type="button"
             >
@@ -1692,14 +2354,14 @@ exports[`renders components/sender/demo/paste-image.tsx extend context correctly
         </div>
       </div>
       <div
-        class="ant-attachment-drop-area css-var-_r_1u_"
+        class="ant-attachment-drop-area css-var-_r_23_"
         style="display: none;"
       >
         <div
           class="ant-attachment-placeholder"
         >
           <span
-            class="ant-upload-wrapper css-var-_r_1u_"
+            class="ant-upload-wrapper css-var-_r_23_"
           >
             <div
               class="ant-upload ant-upload-drag"
@@ -1720,18 +2382,18 @@ exports[`renders components/sender/demo/paste-image.tsx extend context correctly
                   class="ant-upload-drag-container"
                 >
                   <div
-                    class="ant-attachment-placeholder-inner ant-flex css-var-_r_1u_ ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
+                    class="ant-attachment-placeholder-inner ant-flex css-var-_r_23_ ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
                   >
                     <span
-                      class="ant-typography ant-attachment-placeholder-icon css-var-_r_1u_"
+                      class="ant-typography ant-attachment-placeholder-icon css-var-_r_23_"
                     />
                     <h5
-                      class="ant-typography ant-attachment-placeholder-title css-var-_r_1u_"
+                      class="ant-typography ant-attachment-placeholder-title css-var-_r_23_"
                     >
                       Drop file here
                     </h5>
                     <span
-                      class="ant-typography ant-typography-secondary ant-attachment-placeholder-description css-var-_r_1u_"
+                      class="ant-typography ant-typography-secondary ant-attachment-placeholder-description css-var-_r_23_"
                     />
                   </div>
                 </div>
@@ -1749,11 +2411,11 @@ exports[`renders components/sender/demo/paste-image.tsx extend context correctly
 
 exports[`renders components/sender/demo/ref-action.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-_r_1s_ ant-flex-wrap-wrap"
+  class="ant-flex css-var-_r_21_ ant-flex-wrap-wrap"
   style="gap: 12px;"
 >
   <button
-    class="ant-btn css-var-_r_1s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-_r_21_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     type="button"
   >
     <span>
@@ -1761,7 +2423,7 @@ exports[`renders components/sender/demo/ref-action.tsx extend context correctly 
     </span>
   </button>
   <button
-    class="ant-btn css-var-_r_1s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-_r_21_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     type="button"
   >
     <span>
@@ -1769,7 +2431,7 @@ exports[`renders components/sender/demo/ref-action.tsx extend context correctly 
     </span>
   </button>
   <button
-    class="ant-btn css-var-_r_1s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-_r_21_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     type="button"
   >
     <span>
@@ -1777,7 +2439,7 @@ exports[`renders components/sender/demo/ref-action.tsx extend context correctly 
     </span>
   </button>
   <button
-    class="ant-btn css-var-_r_1s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-_r_21_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     type="button"
   >
     <span>
@@ -1785,7 +2447,7 @@ exports[`renders components/sender/demo/ref-action.tsx extend context correctly 
     </span>
   </button>
   <button
-    class="ant-btn css-var-_r_1s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-_r_21_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     type="button"
   >
     <span>
@@ -1793,7 +2455,7 @@ exports[`renders components/sender/demo/ref-action.tsx extend context correctly 
     </span>
   </button>
   <button
-    class="ant-btn css-var-_r_1s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-_r_21_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     type="button"
   >
     <span>
@@ -1801,7 +2463,7 @@ exports[`renders components/sender/demo/ref-action.tsx extend context correctly 
     </span>
   </button>
   <button
-    class="ant-btn css-var-_r_1s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-_r_21_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     type="button"
   >
     <span>
@@ -1809,7 +2471,7 @@ exports[`renders components/sender/demo/ref-action.tsx extend context correctly 
     </span>
   </button>
   <button
-    class="ant-btn css-var-_r_1s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-_r_21_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     type="button"
   >
     <span>
@@ -1817,13 +2479,13 @@ exports[`renders components/sender/demo/ref-action.tsx extend context correctly 
     </span>
   </button>
   <div
-    class="ant-sender css-var-_r_1s_"
+    class="ant-sender css-var-_r_21_"
   >
     <div
       class="ant-sender-content"
     >
       <textarea
-        class="ant-input ant-input-borderless css-var-_r_1s_ ant-input-css-var ant-sender-input"
+        class="ant-input ant-input-borderless css-var-_r_21_ ant-input-css-var ant-sender-input"
         style="overflow-y: hidden; resize: none;"
       >
         Hello, welcome to use Ant Design X!
@@ -1832,10 +2494,10 @@ exports[`renders components/sender/demo/ref-action.tsx extend context correctly 
         class="ant-sender-actions-list"
       >
         <div
-          class="ant-sender-actions-list-presets ant-flex css-var-_r_1s_"
+          class="ant-sender-actions-list-presets ant-flex css-var-_r_21_"
         >
           <button
-            class="ant-btn css-var-_r_1s_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
+            class="ant-btn css-var-_r_21_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
             type="button"
           >
             <span
@@ -1873,19 +2535,19 @@ exports[`renders components/sender/demo/ref-action.tsx extend context correctly 
 
 exports[`renders components/sender/demo/send-style.tsx extend context correctly 1`] = `
 <div
-  class="ant-app css-var-_r_1k_"
+  class="ant-app css-var-_r_1p_"
 >
   <div
-    class="ant-flex css-var-_r_1k_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+    class="ant-flex css-var-_r_1p_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
   >
     <div
-      class="ant-sender css-var-_r_1k_"
+      class="ant-sender css-var-_r_1p_"
     >
       <div
         class="ant-sender-content"
       >
         <textarea
-          class="ant-input ant-input-borderless css-var-_r_1k_ ant-input-css-var ant-sender-input"
+          class="ant-input ant-input-borderless css-var-_r_1p_ ant-input-css-var ant-sender-input"
           placeholder="Change button border radius"
           style="overflow-y: hidden; resize: none;"
         >
@@ -1896,7 +2558,7 @@ exports[`renders components/sender/demo/send-style.tsx extend context correctly 
         >
           <button
             aria-describedby="test-id"
-            class="ant-btn css-var-_r_1k_ ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
+            class="ant-btn css-var-_r_1p_ ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
             style="border-radius: 12px;"
             type="button"
           >
@@ -1925,7 +2587,7 @@ exports[`renders components/sender/demo/send-style.tsx extend context correctly 
             </span>
           </button>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1k_ ant-tooltip-placement-top"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1p_ ant-tooltip-placement-top"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
@@ -1948,13 +2610,13 @@ exports[`renders components/sender/demo/send-style.tsx extend context correctly 
       </div>
     </div>
     <div
-      class="ant-sender css-var-_r_1k_"
+      class="ant-sender css-var-_r_1p_"
     >
       <div
         class="ant-sender-content"
       >
         <textarea
-          class="ant-input ant-input-borderless css-var-_r_1k_ ant-input-css-var ant-sender-input"
+          class="ant-input ant-input-borderless css-var-_r_1p_ ant-input-css-var ant-sender-input"
           placeholder="Change button icon"
           style="overflow-y: hidden; resize: none;"
         >
@@ -1965,7 +2627,7 @@ exports[`renders components/sender/demo/send-style.tsx extend context correctly 
         >
           <button
             aria-describedby="test-id"
-            class="ant-btn css-var-_r_1k_ ant-btn-primary ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn"
+            class="ant-btn css-var-_r_1p_ ant-btn-primary ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn"
             type="button"
           >
             <span
@@ -1996,7 +2658,7 @@ exports[`renders components/sender/demo/send-style.tsx extend context correctly 
             </span>
           </button>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1k_ ant-tooltip-placement-top"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1p_ ant-tooltip-placement-top"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
@@ -2019,13 +2681,13 @@ exports[`renders components/sender/demo/send-style.tsx extend context correctly 
       </div>
     </div>
     <div
-      class="ant-sender css-var-_r_1k_"
+      class="ant-sender css-var-_r_1p_"
     >
       <div
         class="ant-sender-content"
       >
         <textarea
-          class="ant-input ant-input-borderless css-var-_r_1k_ ant-input-css-var ant-sender-input"
+          class="ant-input ant-input-borderless css-var-_r_1p_ ant-input-css-var ant-sender-input"
           placeholder="Loading not change button"
           style="overflow-y: hidden; resize: none;"
         >
@@ -2035,7 +2697,7 @@ exports[`renders components/sender/demo/send-style.tsx extend context correctly 
           class="ant-sender-actions-list"
         >
           <button
-            class="ant-btn css-var-_r_1k_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
+            class="ant-btn css-var-_r_1p_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
             type="button"
           >
             <span
@@ -2101,14 +2763,6 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
       type="button"
     >
       <span>
-        Get Slot
-      </span>
-    </button>
-    <button
-      class="ant-btn css-var-_r_1a_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
-      type="button"
-    >
-      <span>
         Insert Text
       </span>
     </button>
@@ -2142,6 +2796,14 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
     >
       <span>
         Change SlotConfig
+      </span>
+    </button>
+    <button
+      class="ant-btn css-var-_r_1a_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      type="button"
+    >
+      <span>
+        Focus
       </span>
     </button>
     <button
@@ -2200,9 +2862,17 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
         Blur
       </span>
     </button>
+    <button
+      class="ant-btn css-var-_r_1a_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      type="button"
+    >
+      <span>
+        Change Skill
+      </span>
+    </button>
   </div>
   <div
-    class="ant-sender css-var-_r_1a_"
+    class="ant-sender css-var-_r_1b_"
   >
     <div
       class="ant-sender-content"
@@ -2212,24 +2882,116 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
         contenteditable="true"
         role="textbox"
         spellcheck="false"
-        style="min-height: auto; max-height: 176px; overflow-y: auto;"
+        style="min-height: 17.764287px; max-height: 23.685716px; overflow-y: auto;"
         tabindex="0"
-        value="I want to go toBeijingfor a trip with a man, the date is , and the price should be between 20 and 50 RMB., and the number of people is "
+        value="I want to travel to  Beijing byairplanewith a group of 3 people, and each person has a budget ofbetween 3000 and 6000 RMB.PleasetravelToolhelp me create a travel itinerary,Use account ."
       >
-        I want to go to
+        <span
+          class="ant-sender-skill"
+          contenteditable="false"
+          data-skill-key="travelId"
+        >
+          <div
+            aria-label="Skill: Travel Planner"
+            class="ant-sender-skill-tag"
+            role="button"
+            tabindex="0"
+          >
+            <span
+              class="ant-sender-skill-tag-text"
+            >
+              <span
+                aria-describedby="test-id"
+              >
+                Travel Planner
+              </span>
+              <div
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1b_ ant-tooltip-placement-top"
+                style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+              >
+                <div
+                  class="ant-tooltip-arrow"
+                  style="position: absolute; bottom: 0px; left: 0px;"
+                >
+                  <span
+                    class="ant-tooltip-arrow-content"
+                  />
+                </div>
+                <div
+                  class="ant-tooltip-container"
+                  id="test-id"
+                  role="tooltip"
+                >
+                  Travel Skill
+                </div>
+              </div>
+            </span>
+            <div
+              aria-label="Close skill"
+              class="ant-sender-skill-tag-close"
+              role="button"
+              tabindex="0"
+            >
+              <span
+                aria-label="close"
+                class="anticon anticon-close ant-sender-skill-tag-close-icon"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="close"
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </span>
+        I want to travel to 
+        <span
+          class="ant-sender-slot-before ant-sender-slot-no-width"
+          contenteditable="false"
+          data-node-type="nbsp"
+          data-slot-key="location"
+        >
+        </span>
+        <span
+          class="ant-sender-slot ant-sender-slot-content"
+          contenteditable="true"
+          data-placeholder="[Please enter the location]"
+          data-slot-key="location"
+        >
+          Beijing
+        </span>
+        <span
+          class="ant-sender-slot-after ant-sender-slot-no-width"
+          contenteditable="false"
+          data-node-type="nbsp"
+          data-slot-key="location"
+        >
+        </span>
+        by
         <span
           class="ant-sender-slot"
           contenteditable="false"
-          data-slot-key="destination"
+          data-slot-key="transportation"
         >
           <span
             class="ant-dropdown-trigger ant-sender-slot-select ant-sender-slot-select-selector-value"
           >
             <span
               class="ant-sender-slot-select-value"
-              data-placeholder="Please select a destination"
+              data-placeholder="Please choose a mode of transportation"
             >
-              Beijing
+              airplane
             </span>
             <span
               class="ant-sender-slot-select-arrow"
@@ -2256,11 +3018,11 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
             </span>
           </span>
           <div
-            class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-_r_1a_ ant-dropdown-css-var ant-dropdown-placement-bottomLeft"
+            class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-_r_1b_ ant-dropdown-css-var ant-dropdown-placement-bottomLeft"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <ul
-              class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-_r_1a_ ant-dropdown-css-var css-var-_r_1a_ ant-dropdown-menu-css-var"
+              class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-_r_1b_ ant-dropdown-css-var css-var-_r_1b_ ant-dropdown-menu-css-var"
               data-menu-list="true"
               role="menu"
               tabindex="0"
@@ -2268,18 +3030,18 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-selected ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-Beijing"
+                data-menu-id="rc-menu-uuid-airplane"
                 role="menuitem"
                 tabindex="-1"
               >
                 <span
                   class="ant-dropdown-menu-title-content"
                 >
-                  Beijing
+                  airplane
                 </span>
               </li>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1a_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1b_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
               >
                 <div
@@ -2299,18 +3061,18 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-Shanghai"
+                data-menu-id="rc-menu-uuid-high-speed rail"
                 role="menuitem"
                 tabindex="-1"
               >
                 <span
                   class="ant-dropdown-menu-title-content"
                 >
-                  Shanghai
+                  high-speed rail
                 </span>
               </li>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1a_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1b_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
               >
                 <div
@@ -2330,18 +3092,18 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-Guangzhou"
+                data-menu-id="rc-menu-uuid-cruise ship"
                 role="menuitem"
                 tabindex="-1"
               >
                 <span
                   class="ant-dropdown-menu-title-content"
                 >
-                  Guangzhou
+                  cruise ship
                 </span>
               </li>
               <div
-                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1a_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1b_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
                 style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
               >
                 <div
@@ -2365,7 +3127,55 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
             />
           </div>
         </span>
-        for a trip with 
+        with a group of 3 people, and each person has a budget of
+        <span
+          class="ant-sender-slot"
+          contenteditable="false"
+          data-slot-key="priceRange"
+        >
+          <div
+            style="width: 200px; display: inline-block; align-items: center;"
+          >
+            <div
+              class="ant-slider css-var-_r_1b_ ant-slider-horizontal"
+              style="margin: 0px;"
+            >
+              <div
+                class="ant-slider-rail"
+              />
+              <div
+                class="ant-slider-track ant-slider-track-1"
+                style="left: 28.57142857142857%; width: 42.85714285714286%;"
+              />
+              <div
+                class="ant-slider-step"
+              />
+              <div
+                aria-disabled="false"
+                aria-orientation="horizontal"
+                aria-valuemax="8000"
+                aria-valuemin="1000"
+                aria-valuenow="3000"
+                class="ant-slider-handle ant-slider-handle-1"
+                role="slider"
+                style="left: 28.57142857142857%; transform: translateX(-50%);"
+                tabindex="0"
+              />
+              <div
+                aria-disabled="false"
+                aria-orientation="horizontal"
+                aria-valuemax="8000"
+                aria-valuemin="1000"
+                aria-valuenow="6000"
+                class="ant-slider-handle ant-slider-handle-2"
+                role="slider"
+                style="left: 71.42857142857143%; transform: translateX(-50%);"
+                tabindex="0"
+              />
+            </div>
+          </div>
+        </span>
+        Please
         <span
           class="ant-sender-slot"
           contenteditable="false"
@@ -2374,89 +3184,26 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
           <div
             class="ant-sender-slot-tag"
           >
-            @ Chuck
+            @Travel Planner 
           </div>
         </span>
-        , the date is 
+        help me create a travel itinerary,Use account 
         <span
           class="ant-sender-slot"
           contenteditable="false"
-          data-slot-key="date"
+          data-slot-key="account"
         >
           <input
-            class="ant-input ant-input-sm ant-input-borderless ant-sender-slot-input css-var-_r_1a_ ant-input-css-var"
-            data-slot-input="date"
-            placeholder="Please enter a date"
+            class="ant-input ant-input-sm ant-input-borderless ant-sender-slot-input css-var-_r_1b_ ant-input-css-var"
+            data-slot-input="account"
+            placeholder="Please enter a account"
             spellcheck="false"
             tabindex="0"
             type="text"
             value=""
           />
         </span>
-        , and the price should be 
-        <span
-          class="ant-sender-slot"
-          contenteditable="false"
-          data-slot-key="priceRange"
-        >
-          <div
-            style="width: 100px;"
-          >
-            <div
-              class="ant-slider css-var-_r_1a_ ant-slider-horizontal"
-              style="margin: 0px;"
-            >
-              <div
-                class="ant-slider-rail"
-              />
-              <div
-                class="ant-slider-track ant-slider-track-1"
-                style="left: 20%; width: 30%;"
-              />
-              <div
-                class="ant-slider-step"
-              />
-              <div
-                aria-disabled="false"
-                aria-orientation="horizontal"
-                aria-valuemax="100"
-                aria-valuemin="0"
-                aria-valuenow="20"
-                class="ant-slider-handle ant-slider-handle-1"
-                role="slider"
-                style="left: 20%; transform: translateX(-50%);"
-                tabindex="0"
-              />
-              <div
-                aria-disabled="false"
-                aria-orientation="horizontal"
-                aria-valuemax="100"
-                aria-valuemin="0"
-                aria-valuenow="50"
-                class="ant-slider-handle ant-slider-handle-2"
-                role="slider"
-                style="left: 50%; transform: translateX(-50%);"
-                tabindex="0"
-              />
-            </div>
-          </div>
-        </span>
-        , and the number of people is 
-        <span
-          class="ant-sender-slot"
-          contenteditable="false"
-          data-slot-key="numberOfPeople"
-        >
-          <input
-            class="ant-input ant-input-sm ant-input-borderless ant-sender-slot-input css-var-_r_1a_ ant-input-css-var"
-            data-slot-input="numberOfPeople"
-            placeholder="Please enter a number"
-            spellcheck="false"
-            tabindex="0"
-            type="text"
-            value=""
-          />
-        </span>
+        .
       </div>
       <div
         id="ant-sender-slot-placeholders"
@@ -2466,10 +3213,45 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
         class="ant-sender-actions-list"
       >
         <div
-          class="ant-sender-actions-list-presets ant-flex css-var-_r_1a_"
+          class="ant-sender-actions-list-presets ant-flex css-var-_r_1b_"
         >
           <button
-            class="ant-btn css-var-_r_1a_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
+            class="ant-btn css-var-_r_1b_ ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+            disabled=""
+            type="button"
+          >
+            <span
+              class="ant-btn-icon"
+            >
+              <span
+                aria-label="audio-muted"
+                class="anticon anticon-audio-muted"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="audio-muted"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <defs>
+                    <style />
+                  </defs>
+                  <path
+                    d="M682 455V311l-76 76v68c-.1 50.7-42 92.1-94 92a95.8 95.8 0 01-52-15l-54 55c29.1 22.4 65.9 36 106 36 93.8 0 170-75.1 170-168z"
+                  />
+                  <path
+                    d="M833 446h-60c-4.4 0-8 3.6-8 8 0 140.3-113.7 254-254 254-63 0-120.7-23-165-61l-54 54a334.01 334.01 0 00179 81v102H326c-13.9 0-24.9 14.3-25 32v36c.1 4.4 2.9 8 6 8h408c3.2 0 6-3.6 6-8v-36c0-17.7-11-32-25-32H547V782c165.3-17.9 294-157.9 294-328 0-4.4-3.6-8-8-8zm13.1-377.7l-43.5-41.9a8 8 0 00-11.2.1l-129 129C634.3 101.2 577 64 511 64c-93.9 0-170 75.3-170 168v224c0 6.7.4 13.3 1.2 19.8l-68 68A252.33 252.33 0 01258 454c-.2-4.4-3.8-8-8-8h-60c-4.4 0-8 3.6-8 8 0 53 12.5 103 34.6 147.4l-137 137a8.03 8.03 0 000 11.3l42.7 42.7c3.1 3.1 8.2 3.1 11.3 0L846.2 79.8l.1-.1c3.1-3.2 3-8.3-.2-11.4zM417 401V232c0-50.6 41.9-92 94-92 46 0 84.1 32.3 92.3 74.7L417 401z"
+                  />
+                </svg>
+              </span>
+            </span>
+          </button>
+          <button
+            class="ant-btn css-var-_r_1b_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
             type="button"
           >
             <span
@@ -2500,6 +3282,16 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
       </div>
     </div>
   </div>
+  <div
+    class="ant-flex css-var-_r_1a_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  >
+    <div>
+    </div>
+    <div>
+    </div>
+    <div>
+    </div>
+  </div>
 </div>
 `;
 
@@ -2510,7 +3302,7 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx extend context 
   class="ant-flex css-var-_r_f_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-suggestion ant-suggestion-wrapper css-var-_r_f_"
+    class="ant-suggestion ant-suggestion-content css-var-_r_f_"
   >
     <div
       class="ant-sender css-var-_r_f_"
@@ -2575,7 +3367,53 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx extend context 
               <div
                 class="ant-file-card-list ant-attachment-list css-var-_r_f_"
                 style="display: none;"
-              />
+              >
+                <span
+                  class="ant-upload-wrapper css-var-_r_f_"
+                >
+                  <div
+                    class="ant-upload ant-upload-select"
+                  >
+                    <span
+                      class="ant-upload"
+                    >
+                      <input
+                        accept=""
+                        name="file"
+                        style="display: none;"
+                        type="file"
+                      />
+                      <button
+                        class="ant-btn css-var-_r_f_ ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-attachment-list-upload-btn"
+                        type="button"
+                      >
+                        <span
+                          aria-label="plus"
+                          class="anticon anticon-plus ant-attachment-list-upload-btn-icon"
+                          role="img"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            data-icon="plus"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
+                            />
+                            <path
+                              d="M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+                            />
+                          </svg>
+                        </span>
+                      </button>
+                    </span>
+                  </div>
+                </span>
+              </div>
             </div>
             <div
               class="ant-attachment-placeholder"
@@ -2631,7 +3469,7 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx extend context 
           data-placeholder="Press Enter to send message"
           role="textbox"
           spellcheck="false"
-          style="min-height: 66px; max-height: 132px; overflow-y: auto;"
+          style="min-height: 17.764287px; max-height: 35.528574px; overflow-y: auto;"
           tabindex="0"
           value="Please help me search for news about  and summarize it into a list."
         >
@@ -2858,7 +3696,9 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx extend context 
                     </svg>
                   </span>
                 </span>
-                <span>
+                <span
+                  class=""
+                >
                   Deep Think:
                   <span
                     style="display: inline-flex; width: 28px; justify-content: center; align-items: center;"
@@ -2898,7 +3738,9 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx extend context 
                     </svg>
                   </span>
                 </span>
-                <span>
+                <span
+                  class=""
+                >
                   Agent
                 </span>
               </button>
@@ -3099,7 +3941,9 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx extend context 
                     </svg>
                   </span>
                 </span>
-                <span>
+                <span
+                  class=""
+                >
                   Files
                 </span>
               </button>
@@ -3524,35 +4368,28 @@ exports[`renders components/sender/demo/speech-custom.tsx extend context correct
           class="ant-sender-actions-list-presets ant-flex css-var-_r_d_"
         >
           <button
-            class="ant-btn css-var-_r_d_ ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
-            disabled=""
+            class="ant-btn css-var-_r_d_ ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn"
             type="button"
           >
             <span
               class="ant-btn-icon"
             >
               <span
-                aria-label="audio-muted"
-                class="anticon anticon-audio-muted"
+                aria-label="audio"
+                class="anticon anticon-audio"
                 role="img"
               >
                 <svg
                   aria-hidden="true"
-                  data-icon="audio-muted"
+                  data-icon="audio"
                   fill="currentColor"
                   focusable="false"
                   height="1em"
                   viewBox="64 64 896 896"
                   width="1em"
                 >
-                  <defs>
-                    <style />
-                  </defs>
                   <path
-                    d="M682 455V311l-76 76v68c-.1 50.7-42 92.1-94 92a95.8 95.8 0 01-52-15l-54 55c29.1 22.4 65.9 36 106 36 93.8 0 170-75.1 170-168z"
-                  />
-                  <path
-                    d="M833 446h-60c-4.4 0-8 3.6-8 8 0 140.3-113.7 254-254 254-63 0-120.7-23-165-61l-54 54a334.01 334.01 0 00179 81v102H326c-13.9 0-24.9 14.3-25 32v36c.1 4.4 2.9 8 6 8h408c3.2 0 6-3.6 6-8v-36c0-17.7-11-32-25-32H547V782c165.3-17.9 294-157.9 294-328 0-4.4-3.6-8-8-8zm13.1-377.7l-43.5-41.9a8 8 0 00-11.2.1l-129 129C634.3 101.2 577 64 511 64c-93.9 0-170 75.3-170 168v224c0 6.7.4 13.3 1.2 19.8l-68 68A252.33 252.33 0 01258 454c-.2-4.4-3.8-8-8-8h-60c-4.4 0-8 3.6-8 8 0 53 12.5 103 34.6 147.4l-137 137a8.03 8.03 0 000 11.3l42.7 42.7c3.1 3.1 8.2 3.1 11.3 0L846.2 79.8l.1-.1c3.1-3.2 3-8.3-.2-11.4zM417 401V232c0-50.6 41.9-92 94-92 46 0 84.1 32.3 92.3 74.7L417 401z"
+                    d="M842 454c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 140.3-113.7 254-254 254S258 594.3 258 454c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 168.7 126.6 307.9 290 327.6V884H326.7c-13.7 0-24.7 14.3-24.7 32v36c0 4.4 2.8 8 6.2 8h407.6c3.4 0 6.2-3.6 6.2-8v-36c0-17.7-11-32-24.7-32H548V782.1c165.3-18 294-158 294-328.1zM512 624c93.9 0 170-75.2 170-168V232c0-92.8-76.1-168-170-168s-170 75.2-170 168v224c0 92.8 76.1 168 170 168zm-94-392c0-50.6 41.9-92 94-92s94 41.4 94 92v224c0 50.6-41.9 92-94 92s-94-41.4-94-92V232z"
                   />
                 </svg>
               </span>
@@ -3846,7 +4683,9 @@ exports[`renders components/sender/demo/switch.tsx extend context correctly 1`] 
             </svg>
           </span>
         </span>
-        <span>
+        <span
+          class=""
+        >
           Deep Search
         </span>
       </button>
@@ -3886,7 +4725,9 @@ exports[`renders components/sender/demo/switch.tsx extend context correctly 1`] 
             </svg>
           </span>
         </span>
-        <span>
+        <span
+          class=""
+        >
           Deep Search: off
         </span>
       </button>
@@ -3927,7 +4768,9 @@ exports[`renders components/sender/demo/switch.tsx extend context correctly 1`] 
             </svg>
           </span>
         </span>
-        <span>
+        <span
+          class=""
+        >
           Deep Search
         </span>
       </button>
@@ -3967,7 +4810,9 @@ exports[`renders components/sender/demo/switch.tsx extend context correctly 1`] 
             </svg>
           </span>
         </span>
-        <span>
+        <span
+          class=""
+        >
           Deep Search
         </span>
       </button>
@@ -4007,7 +4852,9 @@ exports[`renders components/sender/demo/switch.tsx extend context correctly 1`] 
             </svg>
           </span>
         </span>
-        <span>
+        <span
+          class=""
+        >
           Deep Search
         </span>
       </button>
@@ -4047,7 +4894,9 @@ exports[`renders components/sender/demo/switch.tsx extend context correctly 1`] 
             </svg>
           </span>
         </span>
-        <span>
+        <span
+          class=""
+        >
           Deep Search
         </span>
       </button>

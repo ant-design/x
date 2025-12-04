@@ -15,7 +15,7 @@ Using URL to integrate Model is a basic capability provided by X SDK. For detail
 
 ### Example
 
-<code src="../x-sdk/demos/x-chat/model.tsx" title="Integrate with X SDK"></code>
+<code src="../x-sdk/demos/x-chat/openai.tsx" title="Integrate with X SDK"></code>
 
 ## Using openai-node
 
@@ -164,4 +164,4 @@ export default Demo;
 
 ### Example
 
-<code src="../x-sdk/demos/x-chat/openai-node.tsx" title="Integrate openai" description="This example only shows the logic reference for integrating openai with X SDK. Model data is not processed, please fill in the correct apiKey for data debugging."></code>
+<code src="../x-sdk/demos/x-chat/request-openai-node.tsx" title="Integrate openai" description="This example only shows the logic reference for integrating openai with X SDK. Model data is not processed, please fill in the correct apiKey for data debugging."></code>

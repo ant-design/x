@@ -42,7 +42,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*6ySvTqb7XhkAAA
 | loading | 是否处于加载状态 | boolean | false | - |
 | type | 文件类型 | 'file' \| 'image' \| 'audio' \| 'video' \| string | - | - |
 | src | 图片或文件地址 | string | - | - |
-| mask | 遮罩内容 | React.ReactNode | - | - |
+| mask | 遮罩内容。对于 `type="image"`，可通过 `imageProps.preview.mask` 配置，此属性仅适用于非图像文件类型。 | React.ReactNode | - | - |
 | icon | 自定义图标 | React.ReactNode \| PresetIcons | - | - |
 | imageProps | 图片属性，同 antd [Image](https://ant.design/components/image-cn#api) 属性 | ImageProps | - | - |
 | videoProps | 视频属性配置 | Partial<React.JSX.IntrinsicElements['video']> | - | - |

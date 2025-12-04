@@ -406,7 +406,7 @@ exports[`renders components/bubble/demo/divider.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble ant-bubble-divider css-var-_r_3l_ ant-bubble-start"
+    class="ant-bubble css-var-_r_3l_ ant-bubble ant-bubble-divider css-var-_r_3l_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -447,7 +447,7 @@ exports[`renders components/bubble/demo/divider.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble ant-bubble-divider css-var-_r_3l_ ant-bubble-start"
+    class="ant-bubble css-var-_r_3l_ ant-bubble ant-bubble-divider css-var-_r_3l_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -488,7 +488,7 @@ exports[`renders components/bubble/demo/divider.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble ant-bubble-divider css-var-_r_3l_ ant-bubble-start"
+    class="ant-bubble css-var-_r_3l_ ant-bubble ant-bubble-divider css-var-_r_3l_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -529,7 +529,7 @@ exports[`renders components/bubble/demo/divider.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble ant-bubble-divider css-var-_r_3l_ ant-bubble-start"
+    class="ant-bubble css-var-_r_3l_ ant-bubble ant-bubble-divider css-var-_r_3l_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -1782,7 +1782,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
         </div>
       </div>
       <div
-        class="ant-bubble ant-bubble ant-bubble-divider css-var-_r_f_ ant-bubble-start"
+        class="ant-bubble css-var-_r_f_ ant-bubble ant-bubble-divider css-var-_r_f_ ant-bubble-start"
       >
         <div
           class="ant-bubble-body"
@@ -2068,7 +2068,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
         </div>
       </div>
       <div
-        class="ant-bubble ant-bubble-system ant-bubble css-var-_r_f_ ant-bubble-start"
+        class="ant-bubble css-var-_r_f_ ant-bubble-system ant-bubble css-var-_r_f_ ant-bubble-start"
       >
         <div
           class="ant-bubble-body"
@@ -4463,7 +4463,7 @@ exports[`renders components/bubble/demo/system.tsx extend context correctly 1`] 
   style="gap: 16px;"
 >
   <div
-    class="ant-bubble ant-bubble-system ant-bubble css-var-_r_1_ ant-bubble-start"
+    class="ant-bubble css-var-_r_1_ ant-bubble-system ant-bubble css-var-_r_1_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -4476,7 +4476,7 @@ exports[`renders components/bubble/demo/system.tsx extend context correctly 1`] 
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-system ant-bubble css-var-_r_1_ ant-bubble-start"
+    class="ant-bubble css-var-_r_1_ ant-bubble-system ant-bubble css-var-_r_1_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -4506,7 +4506,7 @@ exports[`renders components/bubble/demo/system.tsx extend context correctly 1`] 
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-system ant-bubble css-var-_r_1_ ant-bubble-start"
+    class="ant-bubble css-var-_r_1_ ant-bubble-system ant-bubble css-var-_r_1_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"

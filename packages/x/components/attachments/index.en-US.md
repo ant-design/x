@@ -36,6 +36,7 @@ Inherits antd [Upload](https://ant.design/components/upload) properties.
 | --- | --- | --- | --- | --- |
 | classNames | Custom class names, [see below](#semantic-dom) | Record<string, string> | - | - |
 | disabled | Whether to disable | boolean | false | - |
+| maxCount | Maximum number of files for upload | number \| - | - | - |
 | getDropContainer | Config the area where files can be dropped | () => HTMLElement | - | - |
 | items | Attachment list, same as Upload `fileList` | Attachment[] | - | - |
 | overflow | Behavior when the file list overflows | 'wrap' \| 'scrollX' \| 'scrollY' | - | - |
