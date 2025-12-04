@@ -267,9 +267,7 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
         : [
             {
               key: 'copy',
-              actionRender: () => {
-                return <Actions.Copy text={children} />;
-              },
+              actionRender: () => <Actions.Copy text={children} />,
             },
           ];
 

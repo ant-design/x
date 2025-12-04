@@ -146,7 +146,7 @@ const role: BubbleListProps['role'] = {
   assistant: {
     placement: 'start',
     contentRender(content: string) {
-      const newContent = content.replace('/\n\n/g', '<br/><br/>');
+      const newContent = content.replace(/\n\n/g, '<br/><br/>');
       return <XMarkdown content={newContent} />;
     },
   },

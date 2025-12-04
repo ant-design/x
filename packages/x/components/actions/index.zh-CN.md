@@ -84,7 +84,25 @@ Actions 组件用于快速配置一些 AI 场景下所需要的操作按钮/功�
 
 ## Semantic DOM
 
+### Actions
+
 <code src="./demo/_semantic.tsx" simplify="true"></code>
+
+### Actions.Copy
+
+<code src="./demo/_semantic-copy.tsx" simplify="true"></code>
+
+### Actions.Feedback
+
+<code src="./demo/_semantic-feedback.tsx" simplify="true"></code>
+
+### Actions.Audio
+
+<code src="./demo/_semantic-audio.tsx" simplify="true"></code>
+
+### Actions.Item
+
+<code src="./demo/_semantic-item.tsx" simplify="true"></code>
 
 ## 主题变量（Design Token）
 

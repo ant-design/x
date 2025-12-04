@@ -83,7 +83,25 @@ Common props ref：[Common props](/docs/react/common-props)
 
 ## Semantic DOM
 
+### Actions
+
 <code src="./demo/_semantic.tsx" simplify="true"></code>
+
+### Actions.Copy
+
+<code src="./demo/_semantic-copy.tsx" simplify="true"></code>
+
+### Actions.Feedback
+
+<code src="./demo/_semantic-feedback.tsx" simplify="true"></code>
+
+### Actions.Audio
+
+<code src="./demo/_semantic-audio.tsx" simplify="true"></code>
+
+### Actions.Item
+
+<code src="./demo/_semantic-item.tsx" simplify="true"></code>
 
 ## Design Token
 

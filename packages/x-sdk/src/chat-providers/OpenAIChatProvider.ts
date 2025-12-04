@@ -1,8 +1,8 @@
-import { XModelMessage, XModelParams } from '../../x-chat/providers/types/model';
-import { XRequestOptions } from '../../x-request';
-import { SSEFields } from '../../x-stream';
+import { XRequestOptions } from '../x-request';
+import { SSEFields } from '../x-stream';
 import type { TransformMessage } from './AbstractChatProvider';
 import AbstractChatProvider from './AbstractChatProvider';
+import { XModelMessage, XModelParams } from './types/model';
 /**
  * LLM OpenAI Compatible Chat Provider
  * @template ChatMessage 消息类型

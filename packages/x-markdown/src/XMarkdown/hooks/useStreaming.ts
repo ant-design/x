@@ -163,7 +163,10 @@ const safeEncodeURIComponent = (str: string): string => {
     return encodeURIComponent(str);
   } catch (e) {
     if (e instanceof URIError) {
-      const cleanedStr = str.replace(/[\uD800-\uDFFF]/g, '');
+      const cleanedStr = str.replace(
+        /[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]/g,
+        '',
+      );
       return encodeURIComponent(cleanedStr);
     }
 
@@ -186,12 +189,15 @@ const useStreaming = (
       const { token, pending } = cache;
       if (token === StreamCacheTokenType.Text) return;
       /**
+       * An image tag starts with '!', if it's the only character, it's incomplete and should be stripped.
        * ！
        * ^
        */
       if (token === StreamCacheTokenType.Image && pending === '!') return undefined;
 
       /**
+       * If a table has more than two lines (header, separator, and at least one row),
+       * it's considered complete enough to not be replaced by a placeholder.
        * | column1 | column2 |\n| -- | --|\n
        *                                   ^
        */
@@ -218,13 +224,13 @@ const useStreaming = (
         return;
       }
 
-      const cache = cacheRef.current;
-      const expectedPrefix = cache.completeMarkdown + cache.pending;
+      const expectedPrefix = cacheRef.current.completeMarkdown + cacheRef.current.pending;
       // Reset cache if input doesn't continue from previous state
       if (!text.startsWith(expectedPrefix)) {
         cacheRef.current = getInitialCache();
       }
 
+      const cache = cacheRef.current;
       const chunk = text.slice(cache.processedLength);
       if (!chunk) return;
 
