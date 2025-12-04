@@ -90,7 +90,7 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
             whiteSpace: 'pre-wrap',
           },
         },
-        '&-typing:last-child::after': {
+        [`${componentCls}-typing:last-child::after`]: {
           content: typingContent,
           fontWeight: 900,
           userSelect: 'none',
@@ -101,8 +101,7 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
           animationIterationCount: 'infinite',
           animationTimingFunction: 'linear',
         },
-
-        '&-fade-in .fade-in': {
+        [`${componentCls}-fade-in .fade-in`]: {
           display: 'inline',
           animationName: fadeIn,
           animationDuration: '1s',
