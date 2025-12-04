@@ -140,6 +140,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const renderSlot = (node: SlotConfigType, slotSpan: HTMLSpanElement) => {
     if (!node.key) return null;
     const value = getSlotValues()[node.key];
+    console.log(node, 'nodeqqqqq');
     const renderContent = () => {
       switch (node.type) {
         case 'input':
@@ -195,7 +196,31 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
             </Dropdown>
           );
         case 'tag':
-          return <div className={`${prefixCls}-slot-tag`}>{node.props?.label || ''}</div>;
+          return (
+            <div className={`${prefixCls}-slot-tag`}>
+              {node.props?.label || ''}
+              {node.allowClose && (
+                <span
+                  className={`${prefixCls}-slot-tag-close`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    // 从配置中移除
+                    slotConfigRef.current = slotConfigRef.current.filter(
+                      (item) => item.key !== node.key,
+                    );
+                    // 从DOM中移除
+                    const slotDom = getSlotDom(node.key as string);
+                    slotDom?.parentNode?.removeChild(slotDom);
+                    // 更新状态
+                    const newValue = getEditorValue();
+                    onChange?.(newValue.value, undefined, newValue.config);
+                  }}
+                >
+                  ×
+                </span>
+              )}
+            </div>
+          );
         case 'custom':
           return node.customRender?.(
             value,
