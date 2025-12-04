@@ -27,10 +27,10 @@ export enum ACTIONS_ITEM_STATUS {
 type SemanticType = 'root' | 'default' | 'running' | 'error' | 'loading';
 
 const IconStyle: Record<`${ACTIONS_ITEM_STATUS}`, SemanticType> = {
-  [`${ACTIONS_ITEM_STATUS.DEFAULT}`]: 'default',
-  [`${ACTIONS_ITEM_STATUS.RUNNING}`]: 'running',
-  [`${ACTIONS_ITEM_STATUS.ERROR}`]: 'error',
-  [`${ACTIONS_ITEM_STATUS.LOADING}`]: 'loading',
+  [ACTIONS_ITEM_STATUS.DEFAULT]: 'default',
+  [ACTIONS_ITEM_STATUS.RUNNING]: 'running',
+  [ACTIONS_ITEM_STATUS.ERROR]: 'error',
+  [ACTIONS_ITEM_STATUS.LOADING]: 'loading',
 };
 
 export interface ActionsItemProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
@@ -79,7 +79,7 @@ export interface ActionsItemProps extends Omit<React.HTMLAttributes<HTMLDivEleme
 
 const ActionsItem: React.FC<ActionsItemProps> = (props) => {
   const {
-    status = `${ACTIONS_ITEM_STATUS.DEFAULT}`,
+    status = 'default',
     defaultIcon,
     runningIcon,
     label,
@@ -118,7 +118,7 @@ const ActionsItem: React.FC<ActionsItemProps> = (props) => {
     `${prefixCls}-item`,
     {
       [`${itemCls}-rtl`]: direction === 'rtl',
-      [`${classNames[IconStyle[status]]}`]: status,
+      [`${classNames[status]}`]: classNames[status],
     },
   );
 

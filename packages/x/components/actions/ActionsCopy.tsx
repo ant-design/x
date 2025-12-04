@@ -73,18 +73,17 @@ const ActionsCopy: React.FC<ActionsCopyProps> = (props) => {
   // ============================ Classname ============================
 
   const mergedCls = classnames(
+    `${prefixCls}-item`,
     copyCls,
     hashId,
     cssVarCls,
     rootClassName,
     className,
     classNames.root,
-    `${prefixCls}-item`,
     {
       [`${copyCls}-rtl`]: direction === 'rtl',
     },
   );
-
   return (
     <Text
       {...domProps}
