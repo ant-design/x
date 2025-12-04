@@ -1,5 +1,5 @@
 import { CopyOutlined, RedoOutlined, UserOutlined } from '@ant-design/icons';
-import { Actions, Bubble } from '@ant-design/x';
+import { Actions, Bubble, XProvider } from '@ant-design/x';
 import { Avatar, Button, Divider, Flex, Radio, Switch } from 'antd';
 import React, { useState } from 'react';
 
@@ -23,7 +23,7 @@ const actionItems = [
 const App = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState('');
-  const [effect, setEffect] = useState<'fade-in' | 'typing'>('fade-in');
+  const [effect, setEffect] = useState<'fade-in' | 'typing' | 'custom-typing'>('fade-in');
   const [keepPrefix, setKeepPrefix] = useState(false);
 
   const loadAll = () => {
@@ -50,6 +50,7 @@ const App = () => {
         <Radio.Group value={effect} onChange={(e) => setEffect(e.target.value)}>
           <Radio value="fade-in">fade-in</Radio>
           <Radio value="typing">typing</Radio>
+          <Radio value="custom-typing">typing width 💖 </Radio>
         </Radio.Group>
       </Flex>
       <Flex gap="small" align="center">
@@ -58,16 +59,36 @@ const App = () => {
       </Flex>
       <Divider />
       <Flex gap="small" align="center">
-        <Bubble
-          loading={loading}
-          content={data}
-          typing={{ effect, interval: 50, step: 3, keepPrefix }}
-          header={<h5>ADX</h5>}
-          footer={(content) => <Actions items={actionItems} onClick={() => console.log(content)} />}
-          avatar={<Avatar icon={<UserOutlined />} />}
-          onTyping={() => console.log('typing')}
-          onTypingComplete={() => console.log('typing complete')}
-        />
+        <XProvider
+          theme={{
+            components: {
+              Bubble:
+                effect === 'custom-typing'
+                  ? {
+                      typingContent: '"💖"',
+                    }
+                  : {},
+            },
+          }}
+        >
+          <Bubble
+            loading={loading}
+            content={data}
+            typing={{
+              effect: effect === 'fade-in' ? 'fade-in' : 'typing',
+              interval: 50,
+              step: 3,
+              keepPrefix,
+            }}
+            header={<h5>ADX</h5>}
+            footer={(content) => (
+              <Actions items={actionItems} onClick={() => console.log(content)} />
+            )}
+            avatar={<Avatar icon={<UserOutlined />} />}
+            onTyping={() => console.log('typing')}
+            onTypingComplete={() => console.log('typing complete')}
+          />
+        </XProvider>
       </Flex>
     </Flex>
   );

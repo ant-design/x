@@ -34,7 +34,7 @@ export const TypingContent: React.FC<{
   return (
     <div
       className={classNames({
-        [`${prefixCls}-typing`]: isTyping && animating,
+        [`${prefixCls}-typing`]: true,
         [`${prefixCls}-fade-in`]: !isTyping,
       })}
     >
