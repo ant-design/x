@@ -42,19 +42,17 @@ export const initFadeLeftMotion = (
   return [
     initMotion(motionCls, fadeInLeft, fadeOut, '1s', sameLevel),
     {
-      [`
-        ${sameLevelPrefix}${motionCls}-enter,
-        ${sameLevelPrefix}${motionCls}-appear
-      `]: {
-        transitionProperty: 'mask-position',
-        animationTimingFunction: 'linear',
-        maskImage: `linear-gradient(90deg, ${token.colorTextBase} 33%, ${new FastColor(token.colorTextBase).setA(0)} 66%)`,
-        maskSize: '300% 100%',
-        maskPosition: '100% 0%',
-      },
-
-      [`${sameLevelPrefix}${motionCls}-leave`]: {
-        animationTimingFunction: 'linear',
+      [token.componentCls]: {
+        [`${sameLevelPrefix}${motionCls}-enter,${sameLevelPrefix}${motionCls}-appear`]: {
+          transitionProperty: 'mask-position',
+          animationTimingFunction: 'linear',
+          maskImage: `linear-gradient(90deg, ${token.colorTextBase} 33%, ${new FastColor(token.colorTextBase).setA(0)} 66%)`,
+          maskSize: '300% 100%',
+          maskPosition: '100% 0%',
+        },
+        [`${sameLevelPrefix}${motionCls}-leave`]: {
+          animationTimingFunction: 'linear',
+        },
       },
     },
   ];
@@ -71,15 +69,13 @@ export const initFadeMotion = (
   return [
     initMotion(motionCls, fadeIn, fadeOut, '1.2s', sameLevel),
     {
-      [`
-        ${sameLevelPrefix}${motionCls}-enter,
-        ${sameLevelPrefix}${motionCls}-appear
-      `]: {
-        opacity: 0,
-      },
-
-      [`${sameLevelPrefix}${motionCls}-leave`]: {
-        animationTimingFunction: 'linear',
+      [token.componentCls]: {
+        [`${sameLevelPrefix}${motionCls}-enter,${sameLevelPrefix}${motionCls}-appear`]: {
+          opacity: 0,
+        },
+        [`${sameLevelPrefix}${motionCls}-leave`]: {
+          animationTimingFunction: 'linear',
+        },
       },
     },
   ];
