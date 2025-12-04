@@ -290,7 +290,7 @@ exports[`renders components/actions/demo/fadeIn.tsx extend context correctly 1`]
         </div>
       </div>
       <span
-        class="ant-actions-copy ant-actions-copy css-var-_r_1p_ ant-actions-item css-var-_r_1p_"
+        class="ant-actions-copy ant-actions-item ant-actions-copy css-var-_r_1p_ css-var-_r_1p_"
       >
         <button
           aria-describedby="test-id"
@@ -530,7 +530,7 @@ exports[`renders components/actions/demo/preset.tsx extend context correctly 1`]
       </div>
     </div>
     <span
-      class="ant-actions-copy ant-actions-copy css-var-_r_19_ ant-actions-item css-var-_r_19_"
+      class="ant-actions-copy ant-actions-item ant-actions-copy css-var-_r_19_ css-var-_r_19_"
     >
       <button
         aria-describedby="test-id"
@@ -581,7 +581,7 @@ exports[`renders components/actions/demo/preset.tsx extend context correctly 1`]
     </span>
     <div
       aria-describedby="test-id"
-      class="ant-actions-button-item css-var-_r_19_ ant-actions-audio css-var-_r_19_ ant-actions-audio-default ant-actions-item undefined"
+      class="ant-actions-button-item css-var-_r_19_ ant-actions-audio css-var-_r_19_ ant-actions-audio-default ant-actions-item"
     >
       <span
         aria-label="muted"
@@ -626,7 +626,7 @@ exports[`renders components/actions/demo/preset.tsx extend context correctly 1`]
     </div>
     <div
       aria-describedby="test-id"
-      class="ant-actions-button-item css-var-_r_19_ ant-actions-item undefined"
+      class="ant-actions-button-item css-var-_r_19_ ant-actions-item"
     >
       <span
         aria-label="share-alt"
@@ -1155,7 +1155,7 @@ exports[`renders components/actions/demo/variant.tsx extend context correctly 1`
         </div>
       </div>
       <span
-        class="ant-actions-copy ant-actions-copy css-var-_r_0_ ant-actions-item css-var-_r_0_"
+        class="ant-actions-copy ant-actions-item ant-actions-copy css-var-_r_0_ css-var-_r_0_"
       >
         <button
           aria-describedby="test-id"
@@ -1345,7 +1345,7 @@ exports[`renders components/actions/demo/variant.tsx extend context correctly 1`
         </div>
       </div>
       <span
-        class="ant-actions-copy ant-actions-copy css-var-_r_0_ ant-actions-item css-var-_r_0_"
+        class="ant-actions-copy ant-actions-item ant-actions-copy css-var-_r_0_ css-var-_r_0_"
       >
         <button
           aria-describedby="test-id"
@@ -1535,7 +1535,7 @@ exports[`renders components/actions/demo/variant.tsx extend context correctly 1`
         </div>
       </div>
       <span
-        class="ant-actions-copy ant-actions-copy css-var-_r_0_ ant-actions-item css-var-_r_0_"
+        class="ant-actions-copy ant-actions-item ant-actions-copy css-var-_r_0_ css-var-_r_0_"
       >
         <button
           aria-describedby="test-id"
