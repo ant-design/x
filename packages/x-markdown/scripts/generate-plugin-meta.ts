@@ -17,6 +17,7 @@ function getPluginMeta(list?: DeclarationReflection[]) {
     };
   });
 }
+
 const main = async () => {
   const app = await (Application as any).bootstrap(
     {

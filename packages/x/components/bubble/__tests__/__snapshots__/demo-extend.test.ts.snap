@@ -247,7 +247,7 @@ exports[`renders components/bubble/demo/basic.tsx extend context correctly 1`] =
           class="ant-actions-list ant-actions-variant-borderless"
         >
           <span
-            class="ant-actions-copy ant-actions-copy css-var-_r_3n_ ant-actions-item css-var-_r_3n_"
+            class="ant-actions-copy ant-actions-item ant-actions-copy css-var-_r_3n_ css-var-_r_3n_"
           >
             <button
               aria-describedby="test-id"
@@ -2186,7 +2186,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
               class="ant-actions-list ant-actions-variant-borderless"
             >
               <span
-                class="ant-actions-copy ant-actions-copy css-var-_r_1r_ ant-actions-item css-var-_r_1r_"
+                class="ant-actions-copy ant-actions-item ant-actions-copy css-var-_r_1r_ css-var-_r_1r_"
               >
                 <button
                   aria-describedby="test-id"
@@ -2323,7 +2323,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
               class="ant-actions-list ant-actions-variant-borderless"
             >
               <span
-                class="ant-actions-copy ant-actions-copy css-var-_r_1r_ ant-actions-item css-var-_r_1r_"
+                class="ant-actions-copy ant-actions-item ant-actions-copy css-var-_r_1r_ css-var-_r_1r_"
               >
                 <button
                   aria-describedby="test-id"
@@ -2459,7 +2459,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
               class="ant-actions-list ant-actions-variant-borderless"
             >
               <span
-                class="ant-actions-copy ant-actions-copy css-var-_r_1r_ ant-actions-item css-var-_r_1r_"
+                class="ant-actions-copy ant-actions-item ant-actions-copy css-var-_r_1r_ css-var-_r_1r_"
               >
                 <button
                   aria-describedby="test-id"
@@ -2595,7 +2595,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
               class="ant-actions-list ant-actions-variant-borderless"
             >
               <span
-                class="ant-actions-copy ant-actions-copy css-var-_r_1r_ ant-actions-item css-var-_r_1r_"
+                class="ant-actions-copy ant-actions-item ant-actions-copy css-var-_r_1r_ css-var-_r_1r_"
               >
                 <button
                   aria-describedby="test-id"
@@ -3889,8 +3889,7 @@ exports[`renders components/bubble/demo/markdown.tsx extend context correctly 1`
             class="ant-typography css-var-_r_d_"
           >
             <div
-              class="ant-x-markdown x-markdown"
-              style="direction: ltr;"
+              class="x-markdown"
             >
               <blockquote>
                 <p>

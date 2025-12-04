@@ -24,6 +24,7 @@ export enum ACTIONS_ITEM_STATUS {
    */
   DEFAULT = 'default',
 }
+type SemanticType = 'root' | 'default' | 'running' | 'error' | 'loading';
 
 export interface ActionsItemProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /**
@@ -57,15 +58,27 @@ export interface ActionsItemProps extends Omit<React.HTMLAttributes<HTMLDivEleme
    * @descEN Root node style class.
    */
   rootClassName?: string;
+  /**
+   * @desc 语义化结构 className
+   * @descEN Semantic structure class names
+   */
+  classNames?: Partial<Record<SemanticType, string>>;
+  /**
+   * @desc 语义化结构 style
+   * @descEN Semantic structure styles
+   */
+  styles?: Partial<Record<SemanticType, React.CSSProperties>>;
 }
 
 const ActionsItem: React.FC<ActionsItemProps> = (props) => {
   const {
-    status = ACTIONS_ITEM_STATUS.DEFAULT,
+    status = 'default',
     defaultIcon,
     runningIcon,
     label,
     className,
+    classNames = {},
+    styles = {},
     style,
     prefixCls: customizePrefixCls,
     rootClassName,
@@ -94,9 +107,11 @@ const ActionsItem: React.FC<ActionsItemProps> = (props) => {
     cssVarCls,
     rootClassName,
     className,
+    classNames.root,
     `${prefixCls}-item`,
     {
       [`${itemCls}-rtl`]: direction === 'rtl',
+      [`${classNames[status]}`]: classNames[status],
     },
   );
 
@@ -111,7 +126,11 @@ const ActionsItem: React.FC<ActionsItemProps> = (props) => {
 
   return (
     <Tooltip title={label}>
-      <div {...domProps} className={mergedCls} style={style}>
+      <div
+        {...domProps}
+        className={mergedCls}
+        style={{ ...style, ...styles.root, ...styles?.[status] }}
+      >
         {iconNode}
       </div>
     </Tooltip>

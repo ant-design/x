@@ -245,7 +245,7 @@ exports[`renders components/bubble/demo/basic.tsx correctly 1`] = `
           class="ant-actions-list ant-actions-variant-borderless"
         >
           <span
-            class="ant-actions-copy ant-actions-copy css-var-_R_0_ ant-actions-item css-var-_R_0_"
+            class="ant-actions-copy ant-actions-item ant-actions-copy css-var-_R_0_ css-var-_R_0_"
           >
             <button
               aria-describedby="test-id"
@@ -1488,7 +1488,7 @@ exports[`renders components/bubble/demo/list-extra.tsx correctly 1`] = `
               class="ant-actions-list ant-actions-variant-borderless"
             >
               <span
-                class="ant-actions-copy ant-actions-copy css-var-_R_0_ ant-actions-item css-var-_R_0_"
+                class="ant-actions-copy ant-actions-item ant-actions-copy css-var-_R_0_ css-var-_R_0_"
               >
                 <button
                   aria-describedby="test-id"
@@ -1585,7 +1585,7 @@ exports[`renders components/bubble/demo/list-extra.tsx correctly 1`] = `
               class="ant-actions-list ant-actions-variant-borderless"
             >
               <span
-                class="ant-actions-copy ant-actions-copy css-var-_R_0_ ant-actions-item css-var-_R_0_"
+                class="ant-actions-copy ant-actions-item ant-actions-copy css-var-_R_0_ css-var-_R_0_"
               >
                 <button
                   aria-describedby="test-id"
@@ -1681,7 +1681,7 @@ exports[`renders components/bubble/demo/list-extra.tsx correctly 1`] = `
               class="ant-actions-list ant-actions-variant-borderless"
             >
               <span
-                class="ant-actions-copy ant-actions-copy css-var-_R_0_ ant-actions-item css-var-_R_0_"
+                class="ant-actions-copy ant-actions-item ant-actions-copy css-var-_R_0_ css-var-_R_0_"
               >
                 <button
                   aria-describedby="test-id"
@@ -1777,7 +1777,7 @@ exports[`renders components/bubble/demo/list-extra.tsx correctly 1`] = `
               class="ant-actions-list ant-actions-variant-borderless"
             >
               <span
-                class="ant-actions-copy ant-actions-copy css-var-_R_0_ ant-actions-item css-var-_R_0_"
+                class="ant-actions-copy ant-actions-item ant-actions-copy css-var-_R_0_ css-var-_R_0_"
               >
                 <button
                   aria-describedby="test-id"

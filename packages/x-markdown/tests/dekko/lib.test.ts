@@ -35,15 +35,11 @@ $('lib/plugins/*')
     (filename: string) =>
       !filename.endsWith('type.js') &&
       !filename.endsWith('type.d.ts') &&
-      !filename.endsWith('hooks') &&
-      !filename.endsWith('theme'),
+      !filename.endsWith('hooks'),
   )
   .isDirectory()
   .hasFile('index.js')
   .hasFile('index.d.ts');
-
-// theme
-$('lib/plugins/theme').isDirectory();
 
 // eslint-disable-next-line no-console
 console.log(chalk.green('✨ `lib/plugins` directory is valid.'));

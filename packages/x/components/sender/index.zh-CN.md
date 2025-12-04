@@ -56,12 +56,28 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 | styles | 语义化定义样式 | [见下](#semantic-dom) | - | - |
 | submitType | 提交模式 | SubmitType | `enter` \| `shiftEnter` | - |
 | value | 输入框值 | string | - | - |
-| onSubmit | 点击发送按钮的回调 | (message: string, slotConfig?: SlotConfigType[]) => void | - | - |
-| onChange | 输入框值改变的回调 | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`>, slotConfig?: SlotConfigType[]) => void | - | - |
+| onSubmit | 点击发送按钮的回调 | (message: string, slotConfig?: SlotConfigType[], skill: SkillType) => void | - | - |
+| onChange | 输入框值改变的回调 | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`>, slotConfig: SlotConfigType[],skill: SkillType) => void | - | - |
 | onCancel | 点击取消按钮的回调 | () => void | - | - |
 | onPasteFile | 黏贴文件的回调 | (files: FileList) => void | - | - |
 | autoSize | 自适应内容高度，可设置为 true \| false 或对象：{ minRows: 2, maxRows: 6 } | boolean \| { minRows?: number; maxRows?: number } | { maxRows: 8 } | - |
 | slotConfig | 词槽配置，配置后输入框将变为词槽模式，支持结构化输入，此模式`value` 和 `defaultValue` 配置将无效。 | SlotConfigType[] | - | - |
+| skill | 技能配置，输入框将变为词槽模式，支持结构化输入，此模式`value` 和 `defaultValue` 配置将无效。 | SkillType | - | - |
+
+```typescript | pure
+interface SkillType {
+  title?: React.ReactNode;
+  value: string;
+  toolTip?: TooltipProps;
+  closable?:
+    | boolean
+    | {
+        closeIcon?: React.ReactNode;
+        onClose?: React.MouseEventHandler<HTMLDivElement>;
+        disabled?: boolean;
+      };
+}
+```
 
 ```typescript | pure
 type SpeechConfig = {
@@ -90,7 +106,7 @@ type ActionsComponents = {
 | blur | 取消焦点 | () => void | - | - |
 | insert | 插入文本或者插槽，使用插槽时需确保 slotConfig 已配置 | (value: string) => void \| (slotConfig: SlotConfigType[], position?: insertPosition, replaceCharacters?: string) => void; | - | - |
 | clear | 清空内容 | () => void | - | - |
-| getValue | 获取当前内容和结构化配置 | () => { value: string; config: SlotConfigType[] } | - | - |
+| getValue | 获取当前内容和结构化配置 | () => { value: string; slotConfig: SlotConfigType[],skill: SkillType } | - | - |
 
 #### SlotConfigType
 
@@ -170,12 +186,15 @@ type ActionsComponents = {
 **示例：**
 
 ```jsx
-// ❌ 错误用法, slotConfig 为不受控用法
+// ❌ 错误用法, slotConfig 和 skill 为不受控用法
 const [config, setConfig] = useState([]);
+const [skill, setSkill] = useState([]);
 <Sender
   slotConfig={config}
-  onChange={(value, e, config) => {
+  skill={skill}
+  onChange={(value, e, config,skill) => {
     setConfig(config);
+    setSkill(skill)
   }}
 />
 
@@ -183,9 +202,11 @@ const [config, setConfig] = useState([]);
 <Sender
   key={key}
   slotConfig={config}
-  onChange={(value, _e, config) => {
+  skill={skill}
+  onChange={(value, _e, config, skill) => {
     // 仅用于获取结构化内容
     setKey('new_key')
+
   }}
 />
 ```
