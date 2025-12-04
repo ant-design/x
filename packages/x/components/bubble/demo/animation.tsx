@@ -75,7 +75,7 @@ const App = () => {
             loading={loading}
             content={data}
             typing={{
-              effect: effect === 'fade-in' ? 'fade-in' : 'typing',
+              effect: effect === 'fade-in' ? effect : 'typing',
               interval: 50,
               step: 3,
               keepPrefix,
