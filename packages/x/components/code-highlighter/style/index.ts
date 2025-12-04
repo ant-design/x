@@ -30,7 +30,7 @@ const genCodeHighlighterStyle: GenerateStyle<CodeHighlighterToken> = (
 
   return {
     [componentCls]: {
-      '&-header': {
+      [`${componentCls}-header`]: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -40,11 +40,11 @@ const genCodeHighlighterStyle: GenerateStyle<CodeHighlighterToken> = (
         borderStartStartRadius: token.borderRadius,
         borderStartEndRadius: token.borderRadius,
       },
-      '&-header-title': {
+      [`${componentCls}-header-title`]: {
         fontSize: token.fontSize,
         fontWeight: token.fontWeightStrong,
       },
-      '&-code': {
+      [`${componentCls}-code`]: {
         borderEndEndRadius: token.borderRadius,
         borderEndStartRadius: token.borderRadius,
         borderStartStartRadius: 0,

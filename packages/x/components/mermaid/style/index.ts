@@ -36,7 +36,7 @@ const genMermaidStyle: GenerateStyle<MermaidToken> = (token: MermaidToken): CSSO
 
   return {
     [componentCls]: {
-      '&-header': {
+      [`${componentCls}-header`]: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -46,7 +46,7 @@ const genMermaidStyle: GenerateStyle<MermaidToken> = (token: MermaidToken): CSSO
         borderStartStartRadius: token.borderRadius,
         borderStartEndRadius: token.borderRadius,
       },
-      '&-graph': {
+      [`${componentCls}-graph`]: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -58,14 +58,14 @@ const genMermaidStyle: GenerateStyle<MermaidToken> = (token: MermaidToken): CSSO
         borderEndEndRadius: token.borderRadius,
         borderEndStartRadius: token.borderRadius,
       },
-      '&-graph-hidden': {
+      [`${componentCls}-graph-hidden`]: {
         display: 'none',
       },
-      '&-graph svg': {
+      [`${componentCls}-graph svg`]: {
         maxWidth: '100%',
         height: 'auto',
       },
-      '&-code': {
+      [`${componentCls}-code`]: {
         borderEndEndRadius: token.borderRadius,
         borderEndStartRadius: token.borderRadius,
         borderBottom: `1px solid ${token.colorBgTitle}`,
