@@ -81,6 +81,28 @@ exports[`renders components/bubble/demo/animation.tsx extend context correctly 1
           typing
         </span>
       </label>
+      <label
+        class="ant-radio-wrapper css-var-_r_3u_ ant-radio-css-var"
+      >
+        <span
+          class="ant-radio ant-wave-target"
+        >
+          <input
+            class="ant-radio-input"
+            name="test-id"
+            type="radio"
+            value="custom-typing"
+          />
+          <span
+            class="ant-radio-inner"
+          />
+        </span>
+        <span
+          class="ant-radio-label"
+        >
+          typing with 💖 
+        </span>
+      </label>
     </div>
   </div>
   <div
@@ -118,13 +140,13 @@ exports[`renders components/bubble/demo/animation.tsx extend context correctly 1
     class="ant-flex css-var-_r_3u_ ant-flex-align-center ant-flex-gap-small"
   >
     <div
-      class="ant-bubble css-var-_r_3u_ ant-bubble-start ant-bubble-loading"
+      class="ant-bubble css-var-_r_40_ ant-bubble-start ant-bubble-loading"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_3u_ ant-avatar-css-var"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_40_ ant-avatar-css-var"
         >
           <span
             aria-label="user"
