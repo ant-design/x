@@ -26,13 +26,6 @@ export enum ACTIONS_ITEM_STATUS {
 }
 type SemanticType = 'root' | 'default' | 'running' | 'error' | 'loading';
 
-const IconStyle: Record<`${ACTIONS_ITEM_STATUS}`, SemanticType> = {
-  [ACTIONS_ITEM_STATUS.DEFAULT]: 'default',
-  [ACTIONS_ITEM_STATUS.RUNNING]: 'running',
-  [ACTIONS_ITEM_STATUS.ERROR]: 'error',
-  [ACTIONS_ITEM_STATUS.LOADING]: 'loading',
-};
-
 export interface ActionsItemProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /**
    * @desc 状态
@@ -136,7 +129,7 @@ const ActionsItem: React.FC<ActionsItemProps> = (props) => {
       <div
         {...domProps}
         className={mergedCls}
-        style={{ ...style, ...styles.root, ...styles[IconStyle[status]] }}
+        style={{ ...style, ...styles.root, ...styles?.[status] }}
       >
         {iconNode}
       </div>
