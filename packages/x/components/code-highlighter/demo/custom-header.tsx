@@ -23,7 +23,6 @@ function Counter() {
         alignItems: 'center',
         padding: '8px 16px',
         background: '#f5f5f5',
-        borderBottom: '1px solid #d9d9d9',
       }}
     >
       <Space>
