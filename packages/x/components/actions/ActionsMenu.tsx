@@ -48,11 +48,9 @@ const ActionsMenu: React.FC<ActionsItemProps> = (props) => {
   return (
     <Dropdown
       menu={menuProps}
-      classNames={{
-        root: classnames(`${prefixCls}-dropdown`, classNames?.itemDropdown),
-      }}
+      className={classnames(`${prefixCls}-dropdown`, classNames.itemDropdown)}
       styles={{
-        root: styles?.itemDropdown,
+        root: styles.itemDropdown,
       }}
       arrow
       trigger={[triggerSubMenuAction]}
