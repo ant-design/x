@@ -581,7 +581,7 @@ exports[`renders components/actions/demo/preset.tsx extend context correctly 1`]
     </span>
     <div
       aria-describedby="test-id"
-      class="ant-actions-button-item css-var-_r_19_ ant-actions-audio css-var-_r_19_ ant-actions-audio-default ant-actions-item"
+      class="ant-actions-button-item css-var-_r_19_ ant-actions-audio css-var-_r_19_ ant-actions-audio-default ant-actions-item undefined"
     >
       <span
         aria-label="muted"
@@ -626,7 +626,7 @@ exports[`renders components/actions/demo/preset.tsx extend context correctly 1`]
     </div>
     <div
       aria-describedby="test-id"
-      class="ant-actions-button-item css-var-_r_19_ ant-actions-item"
+      class="ant-actions-button-item css-var-_r_19_ ant-actions-item undefined"
     >
       <span
         aria-label="share-alt"
