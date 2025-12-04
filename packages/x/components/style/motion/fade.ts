@@ -68,15 +68,13 @@ export const initFadeMotion = (
   return [
     initMotion(motionCls, fadeIn, fadeOut, '1.2s', sameLevel),
     {
-      [`
-        ${sameLevelPrefix}${motionCls}-enter,
-        ${sameLevelPrefix}${motionCls}-appear
-      `]: {
-        opacity: 0,
-      },
-
-      [`${sameLevelPrefix}${motionCls}-leave`]: {
-        animationTimingFunction: 'linear',
+      [token.componentCls]: {
+        [`${sameLevelPrefix}${motionCls}-enter,${sameLevelPrefix}${motionCls}-appear`]: {
+          opacity: 0,
+        },
+        [`${sameLevelPrefix}${motionCls}-leave`]: {
+          animationTimingFunction: 'linear',
+        },
       },
     },
   ];
