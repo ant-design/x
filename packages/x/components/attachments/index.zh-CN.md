@@ -35,7 +35,7 @@ Attachments 组件用于需要展示一组附件信息集合的场景。
 | --- | --- | --- | --- | --- |
 | classNames | 自定义样式类名，[见下](#semantic-dom) | Record<string, string> | - | - |
 | disabled | 是否禁用 | boolean | false | - |
-| maxCount | 最大上传文件数量 | number \| - | - | - |
+| maxCount | 最大上传文件数量 | number \| - | - | 2.0.0 |
 | getDropContainer | 设置拖拽时，可以释放文件的区域 | () => HTMLElement | - | - |
 | items | 附件列表，同 Upload `fileList` | Attachment[] | - | - |
 | overflow | 文件列表超出时样式 | 'wrap' \| 'scrollX' \| 'scrollY' | - | - |
@@ -59,7 +59,7 @@ interface PlaceholderType {
 | nativeElement | 获取原生节点 | HTMLElement | - |
 | fileNativeElement | 获取文件上传原生节点 | HTMLElement | - |
 | upload | 手工调用上传文件 | (file: File) => void | - |
-| select | 手工调用选择文件 | (options: { accept?: string; multiple?: boolean; }) => void | - |
+| select | 手工调用选择文件 | (options: { accept?: string; multiple?: boolean; }) => void | 2.0.0 |
 
 ## Semantic DOM
 

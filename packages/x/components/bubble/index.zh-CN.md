@@ -54,19 +54,19 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*uaGhTY1-LL0AAA
 | loadingRender | 自定义加载内容渲染 | () => React.ReactNode | - | - | 
 | content | 气泡内容 | [ContentType](#contenttype) | - | - | 
 | contentRender | 自定义内容渲染 | (content: ContentType, info: InfoType ) => React.ReactNode | - | - | 
-| editable | 是否可编辑 | boolean \| [EditableBubbleOption](#editablebubbleoption) | `false` | - | 
+| editable | 是否可编辑 | boolean \| [EditableBubbleOption](#editablebubbleoption) | `false` | 2.0.0 | 
 | typing | 打字动画效果 |  boolean \| [BubbleAnimationOption](#bubbleanimationoption) \| ((content: ContentType, info: InfoType) => boolean \| [BubbleAnimationOption](#bubbleanimationoption)) | `false` | - | 
 | streaming | 是否为流式传输 | boolean | `false` | - | 
 | variant | 气泡样式变体 | `filled` \| `outlined` \| `shadow` \| `borderless` | `filled` | - | 
 | shape | 气泡形状 | `default` \| `round` \| `corner` | `default` | - | 
-| footerPlacement | 底部插槽位置 | `outer-start` \| `outer-end` \| `inner-start` \| `inner-end` | `outer-start` | - | 
+| footerPlacement | 底部插槽位置 | `outer-start` \| `outer-end` \| `inner-start` \| `inner-end` | `outer-start` | 2.0.0 | 
 | header | 头部插槽 | [BubbleSlot](#bubbleslot) | - | - |
 | footer | 底部插槽 | [BubbleSlot](#bubbleslot) | - | - |
 | avatar | 头像插槽 | [BubbleSlot](#bubbleslot) | - | - |
 | extra | 额外插槽 | [BubbleSlot](#bubbleslot) | - | - |
-| onTyping | 动画执行回调 | (rendererContent: string, currentContent: string) => void | - | - | 
+| onTyping | 动画执行回调 | (rendererContent: string, currentContent: string) => void | - | 2.0.0 | 
 | onTypingComplete | 动画结束回调 | (content: string) => void | - | - |
-| onEditing | 编辑态下内容变化时回调 | (content: string) => void | - | - |
+| onEditing | 编辑态下内容变化时回调 | (content: string) => void | - | 2.0.0 |
 
 #### ContentType
 

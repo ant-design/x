@@ -53,19 +53,19 @@ Common Props Reference: [Common Props](/docs/react/common-props)
 | loadingRender | Custom loading content renderer | () => React.ReactNode | - | - |
 | content | Bubble content | [ContentType](#contenttype) | - | - |
 | contentRender | Custom content renderer | (content: ContentType, info: InfoType ) => React.ReactNode | - | - |
-| editable | Editable | boolean \| [EditableBubbleOption](#editablebubbleoption) | `false` | - |
+| editable | Editable | boolean \| [EditableBubbleOption](#editablebubbleoption) | `false` | 2.0.0 |
 | typing | Typing animation effect | boolean \| [BubbleAnimationOption](#bubbleanimationoption) \| ((content: ContentType, info: InfoType) => boolean \| [BubbleAnimationOption](#bubbleanimationoption)) | `false` | - |
 | streaming | Streaming mode | boolean | `false` | - |
 | variant | Bubble style variant | `filled` \| `outlined` \| `shadow` \| `borderless` | `filled` | - |
 | shape | Bubble shape | `default` \| `round` \| `corner` | `default` | - |
-| footerPlacement | Footer slot position | `outer-start` \| `outer-end` \| `inner-start` \| `inner-end` | `outer-start` | - |
+| footerPlacement | Footer slot position | `outer-start` \| `outer-end` \| `inner-start` \| `inner-end` | `outer-start` | 2.0.0 |
 | header | Header slot | [BubbleSlot](#bubbleslot) | - | - |
 | footer | Footer slot | [BubbleSlot](#bubbleslot) | - | - |
 | avatar | Avatar slot | [BubbleSlot](#bubbleslot) | - | - |
 | extra | Extra slot | [BubbleSlot](#bubbleslot) | - | - |
-| onTyping | Typing animation callback | (rendererContent: string, currentContent: string) => void | - | - |
+| onTyping | Typing animation callback | (rendererContent: string, currentContent: string) => void | - | 2.0.0 |
+| onEditing | Callback when content changes in editing mode | (content: string) => void | - | 2.0.0 |
 | onTypingComplete | Typing animation complete callback | (content: string) => void | - | - |
-| onEditing | Callback when content changes in editing mode | (content: string) => void | - | - |
 
 #### ContentType
 

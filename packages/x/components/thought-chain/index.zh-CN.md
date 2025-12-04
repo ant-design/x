@@ -8,8 +8,7 @@ subtitle: 思维链
 description: 思维链组件用于可视化和追踪 Agent 对 Actions 和 Tools 的调用链。
 cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*GaspS5T6proAAAAAAAAAAAAADgCCAQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*siL-Qpl794sAAAAAAAAAAAAADgCCAQ/original
-demo:
-  cols: 1
+tag: 2.0.0
 ---
 
 ## 何时使用

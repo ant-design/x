@@ -46,7 +46,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | defaultValue | Default value of the input box | string | - | - |
 | disabled | Whether to disable | boolean | false | - |
 | loading | Whether in loading state | boolean | false | - |
-| suffix | Suffix content, displays action buttons by default. When you don't need the default action buttons, you can set `suffix={false}` | React.ReactNode \| false \| (oriNode: React.ReactNode, info: { components: ActionsComponents; }) => React.ReactNode \| false | oriNode | - |
+| suffix | Suffix content, displays action buttons by default. When you don't need the default action buttons, you can set `suffix={false}` | React.ReactNode \| false \| (oriNode: React.ReactNode, info: { components: ActionsComponents; }) => React.ReactNode \| false | oriNode | 2.0.0 |
 | header | Header panel | React.ReactNode \| false \| (oriNode: React.ReactNode, info: { components: ActionsComponents; }) => React.ReactNode \| false | false | - |
 | prefix | Prefix content | React.ReactNode \| false \| (oriNode: React.ReactNode, info: { components: ActionsComponents; }) => React.ReactNode \| false | false | - |
 | footer | Footer content | React.ReactNode \| false \| (oriNode: React.ReactNode, info: { components: ActionsComponents; }) => React.ReactNode \| false | false | - |
@@ -60,8 +60,8 @@ Common props ref：[Common props](/docs/react/common-props)
 | onCancel | Callback for clicking the cancel button | () => void | - | - |
 | onPasteFile | Callback for pasting files | (files: FileList) => void | - | - |
 | autoSize | Auto-adjust content height, can be set to true \| false or object: { minRows: 2, maxRows: 6 } | boolean \| { minRows?: number; maxRows?: number } | { maxRows: 8 } | - |
-| slotConfig | Slot configuration, after configuration the input box will switch to slot mode, supporting structured input. In this mode, `value` and `defaultValue` configurations will be invalid. | SlotConfigType[] | - | - |
-| skill | Skill configuration, the input box will switch to slot mode, supporting structured input. In this mode, `value` and `defaultValue` configurations will be invalid. | SkillType | - | - |
+| slotConfig | Slot configuration, after configuration the input box will switch to slot mode, supporting structured input. In this mode, `value` and `defaultValue` configurations will be invalid. | SlotConfigType[] | - | 2.0.0 |
+| skill | Skill configuration, the input box will switch to slot mode, supporting structured input. In this mode, `value` and `defaultValue` configurations will be invalid. | SkillType | - | 2.0.0 |
 
 ```typescript | pure
 interface SkillType {
@@ -105,50 +105,50 @@ type ActionsComponents = {
 | blur | Remove focus | () => void | - | - |
 | insert | Insert text or slots, when using slots ensure slotConfig is configured | (value: string) => void \| (slotConfig: SlotConfigType[], position?: insertPosition, replaceCharacters?: string) => void; | - | - |
 | clear | Clear content | () => void | - | - |
-| getValue | Get current content and structured configuration | () => { value: string; config: SlotConfigType[] } | - | - |
+| getValue | Get current content and structured configuration | () => { value: string; slotConfig: SlotConfigType[], skill: SkillType } | - | - |
 
 #### SlotConfigType
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| type | Node type, determines the rendering component type, required | 'text' \| 'input' \| 'select' \| 'tag' \| 'custom' | - | - |
+| type | Node type, determines the rendering component type, required | 'text' \| 'input' \| 'select' \| 'tag' \| 'custom' | - | 2.0.0 |
 | key | Unique identifier, can be omitted when type is text | string | - | - |
-| formatResult | Format the final result | (value: any) => string | - | - |
+| formatResult | Format the final result | (value: any) => string | - | 2.0.0 |
 
 ##### text node properties
 
 | Property | Description  | Type   | Default | Version |
 | -------- | ------------ | ------ | ------- | ------- |
-| text     | Text content | string | -       | -       |
+| text     | Text content | string | -       | 2.0.0   |
 
 ##### input node properties
 
 | Property           | Description   | Type                                  | Default | Version |
 | ------------------ | ------------- | ------------------------------------- | ------- | ------- |
-| props.placeholder  | Placeholder   | string                                | -       | -       |
-| props.defaultValue | Default value | string \| number \| readonly string[] | -       | -       |
+| props.placeholder  | Placeholder   | string                                | -       | 2.0.0   |
+| props.defaultValue | Default value | string \| number \| readonly string[] | -       | 2.0.0   |
 
 ##### select node properties
 
 | Property           | Description             | Type     | Default | Version |
 | ------------------ | ----------------------- | -------- | ------- | ------- |
-| props.options      | Options array, required | string[] | -       | -       |
-| props.placeholder  | Placeholder             | string   | -       | -       |
-| props.defaultValue | Default value           | string   | -       | -       |
+| props.options      | Options array, required | string[] | -       | 2.0.0   |
+| props.placeholder  | Placeholder             | string   | -       | 2.0.0   |
+| props.defaultValue | Default value           | string   | -       | 2.0.0   |
 
 ##### tag node properties
 
 | Property    | Description           | Type      | Default | Version |
 | ----------- | --------------------- | --------- | ------- | ------- |
-| props.label | Tag content, required | ReactNode | -       | -       |
-| props.value | Tag value             | string    | -       | -       |
+| props.label | Tag content, required | ReactNode | -       | 2.0.0   |
+| props.value | Tag value             | string    | -       | 2.0.0   |
 
 ##### custom node properties
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| props.defaultValue | Default value | any | - | - |
-| customRender | Custom rendering function | (value: any, onChange: (value: any) => void, props: { disabled?: boolean, readOnly?: boolean }, item: SlotConfigType) => React.ReactNode | - | - |
+| props.defaultValue | Default value | any | - | 2.0.0 |
+| customRender | Custom rendering function | (value: any, onChange: (value: any) => void, props: { disabled?: boolean, readOnly?: boolean }, item: SlotConfigType) => React.ReactNode | - | 2.0.0 |
 
 ### Sender.Header
 
@@ -167,15 +167,15 @@ type ActionsComponents = {
 
 | Property          | Description              | Type                       | Default | Version |
 | ----------------- | ------------------------ | -------------------------- | ------- | ------- |
-| children          | General content          | ReactNode                  | -       | -       |
-| checkedChildren   | Content when checked     | ReactNode                  | -       | -       |
-| unCheckedChildren | Content when unchecked   | ReactNode                  | -       | -       |
-| icon              | Set icon component       | ReactNode                  | -       | -       |
-| disabled          | Whether disabled         | boolean                    | false   | -       |
-| loading           | Loading switch           | boolean                    | -       | -       |
-| value             | Switch value             | boolean                    | false   | -       |
-| onChange          | Callback when changed    | function(checked: boolean) | -       | -       |
-| rootClassName     | Root element style class | string                     | -       | -       |
+| children          | General content          | ReactNode                  | -       | 2.0.0   |
+| checkedChildren   | Content when checked     | ReactNode                  | -       | 2.0.0   |
+| unCheckedChildren | Content when unchecked   | ReactNode                  | -       | 2.0.0   |
+| icon              | Set icon component       | ReactNode                  | -       | 2.0.0   |
+| disabled          | Whether disabled         | boolean                    | false   | 2.0.0   |
+| loading           | Loading switch           | boolean                    | -       | 2.0.0   |
+| value             | Switch value             | boolean                    | false   | 2.0.0   |
+| onChange          | Callback when changed    | function(checked: boolean) | -       | 2.0.0   |
+| rootClassName     | Root element style class | string                     | -       | 2.0.0   |
 
 ### ⚠️ Slot Mode Notes
 

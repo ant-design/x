@@ -45,8 +45,8 @@ Common props ref：[Common props](/docs/react/common-props)
 | onActiveChange | Callback for selection change | (value: string) => void | - | - |
 | menu | Operation menu for conversations | ItemMenuProps\| ((value: ConversationItemType) => ItemMenuProps) | - | - |
 | groupable | If grouping is supported, it defaults to the `Conversation.group` field | boolean \| GroupableProps | - | - |
-| shortcutKeys | Shortcut key operations | { creation?: ShortcutKeys<number>; items?:ShortcutKeys<'number'> \| ShortcutKeys<number>[];} | - | - |
-| creation | New conversation configuration | CreationProps | - | - |
+| shortcutKeys | Shortcut key operations | { creation?: ShortcutKeys<number>; items?:ShortcutKeys<'number'> \| ShortcutKeys<number>[];} | - | 2.0.0 |
+| creation | New conversation configuration | CreationProps | - | 2.0.0 |
 | styles | Semantic structure styles | styles?: {creation?: React.CSSProperties;item?: React.CSSProperties;} | - | - |
 | classNames | Semantic structure class names | classNames?: { creation?: string; item?:string;} | - | - |
 | rootClassName | Root node className | string | - | - |
@@ -100,10 +100,10 @@ MenuProps & {
   };
 ```
 
+## Semantic DOM
+
+<code src="./demo/_semantic.tsx" simplify="true"></code>
+
 ## Design Token
 
 <ComponentTokenTable component="Conversations"></ComponentTokenTable>
-
-```
-
-```

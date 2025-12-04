@@ -36,8 +36,8 @@ Common props ref：[Common props](/docs/react/common-props)
 | onClick | Callback function when component is clicked | function({ item, key, keyPath, domEvent }) | - | - |
 | dropdownProps | Configuration properties for dropdown menu | DropdownProps | - | - |
 | variant | Variant | `borderless` \| `outlined` \|`filled` | `borderless` | - |
-| fadeIn | Fade in effect | boolean | - | - |
-| fadeInLeft | Fade left in effect | boolean | - | - |
+| fadeIn | Fade in effect | boolean | - | 2.0.0 |
+| fadeInLeft | Fade left in effect | boolean | - | 2.0.0 |
 
 ### ItemType
 
@@ -56,30 +56,30 @@ Common props ref：[Common props](/docs/react/common-props)
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| value | Feedback status value | `like` \| `dislike` \| `default` | `default` | - |
-| onChange | Feedback status change callback | (value: `like` \| `dislike` \| `default`) => void | - | - |
+| value | Feedback status value | `like` \| `dislike` \| `default` | `default` | 2.0.0 |
+| onChange | Feedback status change callback | (value: `like` \| `dislike` \| `default`) => void | - | 2.0.0 |
 
 ### Actions.Copy
 
 | Property | Description       | Type            | Default | Version |
 | -------- | ----------------- | --------------- | ------- | ------- |
-| text     | Text to be copied | string          | ''      | -       |
-| icon     | Copy button       | React.ReactNode | -       | -       |
+| text     | Text to be copied | string          | ''      | 2.0.0   |
+| icon     | Copy button       | React.ReactNode | -       | 2.0.0   |
 
 ### Actions.Audio
 
 | Property | Description     | Type                                     | Default | Version |
 | -------- | --------------- | ---------------------------------------- | ------- | ------- |
-| status   | Playback status | 'loading'\|'error'\|'running'\|'default' | default | -       |
+| status   | Playback status | 'loading'\|'error'\|'running'\|'default' | default | 2.0.0   |
 
 ### Actions.Item
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| status | Status | 'loading'\|'error'\|'running'\|'default' | default | - |
-| label | Display label for custom action | string | - | - |
-| defaultIcon | Default status icon | React.ReactNode | - | - |
-| runningIcon | Running status icon | React.ReactNode | - | - |
+| status | Status | 'loading'\|'error'\|'running'\|'default' | default | 2.0.0 |
+| label | Display label for custom action | string | - | 2.0.0 |
+| defaultIcon | Default status icon | ReactNode | - | 2.0.0 |
+| runningIcon | Running status icon | ReactNode | - | 2.0.0 |
 
 ## Semantic DOM
 
