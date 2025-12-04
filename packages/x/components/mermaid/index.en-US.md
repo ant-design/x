@@ -1,10 +1,9 @@
 ---
 category: Components
 group:
-  title: Expression
-  order: 2
+  title: Feedback
+  order: 4
 title: Mermaid
-subtitle: Diagram Tool
 description: Used to render diagrams with Mermaid.
 cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*OwTOS6wqFIsAAAAAAAAAAAAADgCCAQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAAAAAAAAAAAADgCCAQ/original
@@ -14,9 +13,8 @@ demo:
 
 ## When to Use
 
-- Need to render Mermaid diagrams in the application
-- Want to provide interactive features like zoom, pan, and code view
-- Need to support both image and code view modes
+- Used to render interactive Mermaid diagrams that support zooming, panning, and switching between image and code views in applications.
+- When used together with XMarkdown, it can render Mermaid diagrams within Markdown content and enhance interactive features.
 
 ## Code Demo
 

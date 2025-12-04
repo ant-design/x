@@ -1,6 +1,6 @@
 ---
 group:
-  title: components
+  title: Components
   order: 5
 title: CodeHighlighter
 order: 2

@@ -1,8 +1,8 @@
 ---
 category: Components
 group:
-  title: 表达
-  order: 2
+  title: 反馈
+  order: 4
 title: Mermaid
 subtitle: 图表工具
 description: 用于渲染图表工具 Mermaid。
@@ -14,9 +14,8 @@ demo:
 
 ## 何时使用
 
-- 需要在应用中渲染 Mermaid 图表
-- 希望提供缩放、平移和代码视图等交互功能
-- 需要支持图像和代码两种视图模式
+- 用于在应用中渲染支持缩放、平移、图像/代码双视图切换的交互式 Mermaid 图表。
+- 与 XMarkdown 结合使用，可在 Markdown 内容中渲染 Mermaid，并增强交互功能。
 
 ## 代码演示
 

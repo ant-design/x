@@ -1,10 +1,9 @@
 ---
 category: Components
 group:
-  title: Expression
-  order: 2
+  title: Feedback
+  order: 4
 title: CodeHighlighter
-subtitle: Code Highlighting
 description: Used to highlight code formatting.
 cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*OwTOS6wqFIsAAAAAAAAAAAAADgCCAQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAAAAAAAAAAAADgCCAQ/original
@@ -16,9 +15,8 @@ demo:
 
 The CodeHighlighter component is used in scenarios where you need to display code snippets with syntax highlighting.
 
-- When you need to display code snippets with syntax highlighting
-- When you want to provide a copy function for the code block
-- When you need to display code language information in the header
+- Used to display code snippets with syntax highlighting, providing copy functionality and header language information.
+- When used in combination with XMarkdown, it can render code blocks within Markdown content and enhance highlighting display and interactive features.
 
 ## Code Examples
 

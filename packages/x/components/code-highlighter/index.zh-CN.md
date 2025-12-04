@@ -1,8 +1,8 @@
 ---
 category: Components
 group:
-  title: 表达
-  order: 2
+  title: 反馈
+  order: 4
 title: CodeHighlighter
 subtitle: 代码高亮
 description: 用于高亮代码格式。
@@ -16,9 +16,8 @@ demo:
 
 CodeHighlighter 组件用于需要展示带有语法高亮的代码片段的场景。
 
-- 需要显示带有语法高亮的代码片段时
-- 想要为代码块提供复制功能时
-- 需要在头部显示代码语言信息时
+- 用于展示带语法高亮的代码片段，并提供复制功能及头部语言信息。
+- 与 XMarkdown 结合使用，可在 Markdown 内容中渲染代码块，并增强高亮显示和交互功能。
 
 ## 代码演示
 
