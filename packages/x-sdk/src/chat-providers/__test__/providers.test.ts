@@ -926,6 +926,291 @@ describe('DeepSeekChatProvider test', () => {
     });
     expect(openAIMsg).toEqual({ role: 'assistant', content: 'testtest3' });
   });
+
+  describe('DeepSeekChatProvider advanced tests', () => {
+    const headers = new Headers();
+    headers.set('content-type', 'text/event-stream');
+    const jsonHeaders = new Headers();
+    jsonHeaders.set('content-type', 'application/json');
+
+    it('should handle reasoning_content in streaming response', () => {
+      const provider = new DeepSeekChatProvider({
+        request: XRequest(baseURL, {
+          manual: true,
+        }),
+      });
+
+      const chunk = {
+        data: '{"choices":[{"delta":{"role":"assistant","reasoning_content":"Let me think about this","content":"The answer is"}}]}',
+      };
+      const result = provider.transformMessage({
+        originMessage: {
+          role: 'assistant',
+          content: '',
+        } as any,
+        chunk,
+        chunks: [],
+        status: 'loading',
+        responseHeaders: headers,
+      });
+      expect(result).toEqual({
+        role: 'assistant',
+        content: '\n\n<think>\n\nLet me think about this',
+      });
+    });
+
+    it('should handle reasoning_content in normal response', () => {
+      const provider = new DeepSeekChatProvider({
+        request: XRequest(baseURL, {
+          manual: true,
+        }),
+      });
+
+      const chunk = {
+        choices: [
+          {
+            message: {
+              role: 'assistant',
+              reasoning_content: 'Step by step analysis',
+              content: 'Final conclusion',
+            },
+          },
+        ],
+      } as any;
+      const result = provider.transformMessage({
+        originMessage: {
+          role: 'assistant',
+          content: '',
+        } as any,
+        chunk,
+        chunks: [],
+        status: 'loading',
+        responseHeaders: jsonHeaders,
+      });
+      expect(result).toEqual({
+        role: 'assistant',
+        content: '\n\n<think>\n\nStep by step analysis',
+      });
+    });
+
+    it('should handle think tag completion', () => {
+      const provider = new DeepSeekChatProvider({
+        request: XRequest(baseURL, {
+          manual: true,
+        }),
+      });
+
+      const chunk = {
+        data: '{"choices":[{"delta":{"content":" and this is the final answer"}}]}',
+      };
+      const result = provider.transformMessage({
+        originMessage: {
+          role: 'assistant',
+          content: '<think>Initial thinking',
+        } as any,
+        chunk,
+        chunks: [],
+        status: 'loading',
+        responseHeaders: headers,
+      });
+      expect(result.content).toContain('<think status="done">');
+      expect(result.content).toContain('</think>');
+      expect(result.content).toContain('and this is the final answer');
+    });
+
+    it('should handle content as object type', () => {
+      const provider = new DeepSeekChatProvider({
+        request: XRequest(baseURL, {
+          manual: true,
+        }),
+      });
+
+      const chunk = {
+        data: '{"choices":[{"delta":{"content":"new content"}}]}',
+      };
+      const result = provider.transformMessage({
+        originMessage: {
+          role: 'assistant',
+          content: { text: 'existing ' } as any,
+        } as any,
+        chunk,
+        chunks: [],
+        status: 'loading',
+        responseHeaders: headers,
+      });
+      expect(result).toEqual({ role: 'assistant', content: 'existing new content' });
+    });
+
+    it('should handle missing responseHeaders', () => {
+      const provider = new DeepSeekChatProvider({
+        request: XRequest(baseURL, {
+          manual: true,
+        }),
+      });
+
+      const chunk = {
+        choices: [{ message: { role: 'assistant', content: 'test' } }],
+      } as any;
+      const result = provider.transformMessage({
+        originMessage: undefined,
+        chunk,
+        chunks: [],
+        status: 'loading',
+        responseHeaders: undefined as any,
+      });
+      expect(result).toEqual({ role: 'assistant', content: '' });
+    });
+
+    it('should handle empty responseHeaders', () => {
+      const provider = new DeepSeekChatProvider({
+        request: XRequest(baseURL, {
+          manual: true,
+        }),
+      });
+
+      const chunk = {
+        choices: [{ message: { role: 'assistant', content: 'test' } }],
+      } as any;
+      const emptyHeaders = new Headers();
+      const result = provider.transformMessage({
+        originMessage: undefined,
+        chunk,
+        chunks: [],
+        status: 'loading',
+        responseHeaders: emptyHeaders,
+      });
+      expect(result).toEqual({ role: 'assistant', content: 'test' });
+    });
+
+    it('should handle JSON parsing error gracefully', () => {
+      const provider = new DeepSeekChatProvider({
+        request: XRequest(baseURL, {
+          manual: true,
+        }),
+      });
+
+      const chunk = {
+        data: 'invalid json { broken',
+      };
+      const result = provider.transformMessage({
+        originMessage: {
+          role: 'assistant',
+          content: 'existing',
+        } as any,
+        chunk,
+        chunks: [],
+        status: 'loading',
+        responseHeaders: headers,
+      });
+      expect(result).toEqual({ role: 'assistant', content: 'existing' });
+    });
+
+    it('should handle null choices in response', () => {
+      const provider = new DeepSeekChatProvider({
+        request: XRequest(baseURL, {
+          manual: true,
+        }),
+      });
+
+      const chunk = {
+        choices: null,
+      } as any;
+      const result = provider.transformMessage({
+        originMessage: {
+          role: 'assistant',
+          content: 'existing',
+        } as any,
+        chunk,
+        chunks: [],
+        status: 'loading',
+        responseHeaders: jsonHeaders,
+      });
+      expect(result).toEqual({ role: 'assistant', content: 'existing' });
+    });
+
+    it('should handle undefined originMessage with reasoning', () => {
+      const provider = new DeepSeekChatProvider({
+        request: XRequest(baseURL, {
+          manual: true,
+        }),
+      });
+
+      const chunk = {
+        choices: [{ message: { reasoning_content: 'Deep reasoning', content: 'Answer' } }],
+      } as any;
+      const result = provider.transformMessage({
+        originMessage: undefined,
+        chunk,
+        chunks: [],
+        status: 'loading',
+        responseHeaders: jsonHeaders,
+      });
+      expect(result).toEqual({
+        role: 'assistant',
+        content: '\n\n<think>\n\nDeep reasoning',
+      });
+    });
+
+    it('should handle edge case with newlines in reasoning', () => {
+      const provider = new DeepSeekChatProvider({
+        request: XRequest(baseURL, {
+          manual: true,
+        }),
+      });
+
+      const chunk = {
+        choices: [{ message: { reasoning_content: '\n\nInitial analysis', content: 'result' } }],
+      } as any;
+      const result = provider.transformMessage({
+        originMessage: undefined,
+        chunk,
+        chunks: [],
+        status: 'loading',
+        responseHeaders: jsonHeaders,
+      });
+      expect(result.content).toBe('\n\n<think>\n\nInitial analysis');
+    });
+
+    it('should handle complete think workflow', () => {
+      const provider = new DeepSeekChatProvider({
+        request: XRequest(baseURL, {
+          manual: true,
+        }),
+      });
+
+      // Step 1: Start thinking
+      let result = provider.transformMessage({
+        originMessage: undefined,
+        chunk: { data: '{"choices":[{"delta":{"reasoning_content":"Let me analyze"}}]}' },
+        chunks: [],
+        status: 'loading',
+        responseHeaders: headers,
+      });
+      expect(result.content).toBe('\n\n<think>\n\nLet me analyze');
+
+      // Step 2: Continue thinking
+      result = provider.transformMessage({
+        originMessage: result,
+        chunk: { data: '{"choices":[{"delta":{"reasoning_content":" and process"}}]}' },
+        chunks: [],
+        status: 'loading',
+        responseHeaders: headers,
+      });
+      expect(result.content).toBe('\n\n<think>\n\nLet me analyze and process');
+
+      // Step 3: Complete thinking and provide answer
+      result = provider.transformMessage({
+        originMessage: result,
+        chunk: { data: '{"choices":[{"delta":{"content":"Final answer"}}]}' },
+        chunks: [],
+        status: 'loading',
+        responseHeaders: headers,
+      });
+      expect(result.content).toContain('<think status="done">');
+      expect(result.content).toContain('</think>');
+      expect(result.content).toContain('Final answer');
+    });
+  });
 });
 
 describe('AbstractChatProvider test', () => {
