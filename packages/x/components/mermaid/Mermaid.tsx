@@ -2,6 +2,7 @@ import { DownloadOutlined, ZoomInOutlined, ZoomOutOutlined } from '@ant-design/i
 import { Button, Segmented, Tooltip } from 'antd';
 import classnames from 'classnames';
 import throttle from 'lodash.throttle';
+import type mermaid from 'mermaid';
 import React, { useEffect, useRef, useState } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
