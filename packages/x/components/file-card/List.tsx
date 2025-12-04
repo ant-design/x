@@ -126,7 +126,7 @@ const List: React.FC<FileCardListProps> = (props) => {
   const { root, card: _, ...other } = styles;
 
   return (
-    <div className={`${compCls}-wrapper`}>
+    <div className={classnames(hashId, cssVarCls, `${compCls}-wrapper`)}>
       <div
         className={mergedCls}
         dir={direction}

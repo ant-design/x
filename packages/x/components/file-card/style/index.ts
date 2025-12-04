@@ -216,6 +216,9 @@ const genFileCardListStyle: GenerateStyle<FileCardToken> = (token) => {
   } = token;
 
   return {
+    [`${componentCls}-list-wrapper`]: {
+      position: 'relative',
+    },
     [`${componentCls}-list`]: {
       display: 'flex',
       alignItems: 'center',
@@ -231,10 +234,6 @@ const genFileCardListStyle: GenerateStyle<FileCardToken> = (token) => {
       '-ms-overflow-style': 'none',
       '&::-webkit-scrollbar': {
         display: 'none',
-      },
-
-      '&-wrapper': {
-        position: 'relative',
       },
 
       // list item
@@ -300,16 +299,13 @@ const genFileCardListStyle: GenerateStyle<FileCardToken> = (token) => {
         cursor: 'pointer',
         backgroundColor: colorFillTertiary,
       },
-
       // small size
-      '&-small': {
+      [`&${componentCls}-list-small`]: {
         [`${componentCls}-list-remove`]: {
           fontSize: fontSize,
         },
       },
-
-      // Scroll
-      '&-overflow-scrollX, &-overflow-scrollY': {
+      [`&${componentCls}-list-overflow-scrollX, &${componentCls}-list-overflow-scrollY`]: {
         '&:before, &:after': {
           content: '""',
           position: 'absolute',
@@ -318,18 +314,16 @@ const genFileCardListStyle: GenerateStyle<FileCardToken> = (token) => {
           zIndex: 1,
         },
       },
-      '&-overflow-ping-start:before': {
+      [`&${componentCls}-list-overflow-ping-start:before`]: {
         opacity: 1,
       },
-      '&-overflow-ping-end:after': {
+      [`&${componentCls}-list-overflow-ping-end:after`]: {
         opacity: 1,
       },
-
-      '&-overflow-scrollX': {
+      [`&${componentCls}-list-overflow-scrollX`]: {
         overflowX: 'auto',
         overflowY: 'hidden',
         flexWrap: 'nowrap',
-
         '&:before, &:after': {
           insetBlock: 0,
           width: 8,
@@ -352,8 +346,7 @@ const genFileCardListStyle: GenerateStyle<FileCardToken> = (token) => {
           },
         },
       },
-
-      '&-overflow-scrollY': {
+      [`&${componentCls}-list-overflow-scrollY`]: {
         overflowX: 'hidden',
         overflowY: 'auto',
         maxHeight: 68,
@@ -372,9 +365,8 @@ const genFileCardListStyle: GenerateStyle<FileCardToken> = (token) => {
           background: `linear-gradient(to top, rgba(0,0,0,0.06), rgba(0,0,0,0));`,
         },
       },
-
       // prev/next btn
-      '&-prev-btn, &-next-btn': {
+      [`${componentCls}-list-prev-btn,${componentCls}-list-next-btn`]: {
         position: 'absolute',
         insetBlockStart: '50%',
         transform: 'translateY(-50%)',
@@ -382,19 +374,18 @@ const genFileCardListStyle: GenerateStyle<FileCardToken> = (token) => {
         opacity: 0,
         pointerEvents: 'none',
       },
-      '&-prev-btn': {
+      [`${componentCls}-list-prev-btn`]: {
         left: {
           _skip_check_: true,
           value: token.padding,
         },
       },
-      '&-next-btn': {
+      [`${componentCls}-list-next-btn`]: {
         right: {
           _skip_check_: true,
           value: token.padding,
         },
       },
-
       '&:dir(ltr)': {
         [`&${componentCls}-list-overflow-ping-start ${componentCls}-list-prev-btn`]: {
           opacity: 1,
