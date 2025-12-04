@@ -75,6 +75,11 @@ export default defineConfig({
         commonjs: 'antd',
         commonjs2: 'antd',
       },
+      mermaid: {
+        root: 'mermaid',
+        commonjs: 'mermaid',
+        commonjs2: 'mermaid',
+      },
     },
     transformRuntime: {
       absoluteRuntime: process.cwd(),

@@ -25,7 +25,7 @@ const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((
     className,
     classNames = {},
     styles = {},
-    style,
+    style = {},
     highlightProps,
     ...restProps
   } = props;
@@ -54,7 +54,7 @@ const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((
 
   const mergedStyle = {
     ...contextConfig.style,
-    ...styles.root,
+    ...styles?.root,
     ...style,
   };
 
