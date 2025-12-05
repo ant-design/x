@@ -185,8 +185,8 @@ type RemainRole = 'ai' | 'system' | 'user' | 'divider';
 
 type AnyStr = string;
 
-export type BubbleItemType = (Omit<BubbleProps<any>, 'styles' | 'clsx'> &
-  Omit<DividerBubbleProps<any>, 'styles' | 'clsx'>) & {
+export type BubbleItemType = (Omit<BubbleProps<any>, 'styles' | 'classNames'> &
+  Omit<DividerBubbleProps<any>, 'styles' | 'classNames'>) & {
   /**
    * @description 数据项唯一标识
    */
@@ -208,7 +208,7 @@ export type RoleProps = Pick<
   | 'shape'
   | 'placement'
   | 'rootClassName'
-  | 'clsx'
+  | 'classNames'
   | 'className'
   | 'styles'
   | 'style'
