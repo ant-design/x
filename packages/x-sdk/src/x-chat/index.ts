@@ -5,7 +5,7 @@ import { AbstractChatProvider } from '../chat-providers';
 import { ConversationData } from '../x-conversations';
 import { AbstractXRequestClass } from '../x-request';
 import type { SSEOutput } from '../x-stream';
-import { useChatStore } from './store';
+import { ConversationKey, useChatStore } from './store';
 
 export type SimpleType = string | number | boolean | object;
 
@@ -76,8 +76,8 @@ function toArray<T>(item: T | T[]): T[] {
   return Array.isArray(item) ? item : [item];
 }
 
-const IsRequestingMap = new Map<string, boolean>();
-const generateConversationKey = () => 'AntDesignX_' + Math.random().toString(36).substring(2, 15);
+const IsRequestingMap = new Map<ConversationKey, boolean>();
+const generateConversationKey = () => Symbol('ConversationKey');
 
 export default function useXChat<
   ChatMessage extends SimpleType = string,
