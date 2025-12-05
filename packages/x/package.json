@@ -59,7 +59,7 @@
     "site": "dumi build && cp .surgeignore _site",
     "sort:api-table": "antd-tools run sort-api-table",
     "sort:package-json": "npx sort-package-json",
-    "prestart": "npm run version && npm run token:statistic && npm run token:meta && npm run lint:changelog && npm run token:markdown",
+    "prestart": "npm run version && npm run token:statistic && npm run token:meta && npm run lint:changelog",
     "start": "tsx ./scripts/set-node-options.ts cross-env PORT=8001 dumi dev",
     "pretest": "npm run prestart",
     "test": "jest --config .jest.js --no-cache --collect-coverage",
@@ -70,7 +70,6 @@
     "test:visual-regression": "tsx scripts/visual-regression/build.ts",
     "token:meta": "tsx scripts/generate-token-meta.ts",
     "token:statistic": "tsx scripts/collect-token-statistic.ts",
-    "token:markdown": "tsx scripts/markdown-config.ts",
     "tsc": "tsc --noEmit",
     "version": "tsx scripts/generate-version.ts"
   },
@@ -85,12 +84,12 @@
     "@ant-design/icons": "^6.0.0",
     "@babel/runtime": "^7.25.6",
     "classnames": "^2.5.1",
+    "lodash.throttle": "^4.1.1",
     "rc-motion": "^2.9.2",
-    "rc-util": "^5.43.0"
+    "rc-util": "^5.43.0",
+    "react-syntax-highlighter": "^16.1.0"
   },
   "devDependencies": {
-    "tbox-nodejs-sdk": "^0.0.13",
-    "openai": "^5.20.0",
     "@antv/gpt-vis": "^0.4.1",
     "@codesandbox/sandpack-react": "^2.19.8",
     "@emotion/react": "^11.13.5",
@@ -189,11 +188,13 @@
     "lottie-web": "^5.12.2",
     "lunar-typescript": "^1.7.5",
     "lz-string": "^1.5.0",
+    "mermaid": "^11.12.2",
     "minimist": "^1.2.8",
     "mockdate": "^3.0.5",
     "node-fetch": "^3.3.2",
     "node-notifier": "^10.0.1",
     "open": "^10.1.0",
+    "openai": "^5.20.0",
     "ora": "^8.1.0",
     "pixelmatch": "^7.1.0",
     "pngjs": "^7.0.0",
@@ -231,6 +232,7 @@
     "simple-git": "^3.26.0",
     "spinnies": "^0.5.1",
     "tar": "^7.4.3",
+    "tbox-nodejs-sdk": "^0.0.13",
     "tsx": "^4.19.1",
     "typedoc": "^0.28.0",
     "typescript": "~5.8.2",
@@ -242,7 +244,13 @@
   "peerDependencies": {
     "antd": "^6.0.1",
     "react": ">=18.0.0",
-    "react-dom": ">=18.0.0"
+    "react-dom": ">=18.0.0",
+    "mermaid": "^11.12.1"
+  },
+  "peerDependenciesMeta": {
+    "mermaid": {
+      "optional": true
+    }
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"

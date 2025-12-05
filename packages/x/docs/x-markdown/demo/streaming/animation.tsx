@@ -63,42 +63,58 @@ Based on the RICH interaction paradigm, we provide many atomic components for di
 
 const App = () => {
   const [enableAnimation, setEnableAnimation] = React.useState(true);
-  const [hasNextChunk, setHasNextChunk] = React.useState(false);
+  const [hasNextChunk, setHasNextChunk] = React.useState(true);
   const [className] = useMarkdownTheme();
   const [index, setIndex] = React.useState(0);
-  const timer = React.useRef<any>(-1);
+  const timer = React.useRef<NodeJS.Timeout | null>(null);
+  const contentRef = React.useRef<HTMLDivElement>(null);
 
-  const renderStream = () => {
+  React.useEffect(() => {
     if (index >= text.length) {
-      clearTimeout(timer.current);
       setHasNextChunk(false);
       return;
     }
+
     timer.current = setTimeout(() => {
-      setIndex((prev) => prev + 2);
-      renderStream();
-    }, 30);
-  };
+      setIndex(Math.min(index + 5, text.length));
+    }, 20);
 
-  React.useEffect(() => {
-    if (index === text.length) return;
-
-    setHasNextChunk(true);
-    renderStream();
     return () => {
-      clearTimeout(timer.current);
+      if (timer.current) {
+        clearTimeout(timer.current);
+        timer.current = null;
+      }
     };
   }, [index]);
 
+  React.useEffect(() => {
+    if (contentRef.current && index > 0 && index < text.length) {
+      const { scrollHeight, clientHeight } = contentRef.current;
+      if (scrollHeight > clientHeight) {
+        contentRef.current.scrollTo({
+          top: scrollHeight,
+          behavior: 'smooth',
+        });
+      }
+    }
+  }, [index]);
+
   return (
-    <Flex style={{ width: '100%' }} vertical gap="small">
+    <Flex vertical gap="small" style={{ height: 600, overflow: 'auto' }} ref={contentRef}>
       <Space align="center" style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Space>
           <Text>Animation</Text>
           <Switch checked={enableAnimation} onChange={setEnableAnimation} />
         </Space>
 
-        <Button onClick={() => setIndex(0)}>Re-Render</Button>
+        <Button
+          onClick={() => {
+            setIndex(0);
+            setHasNextChunk(true);
+          }}
+        >
+          Re-Render
+        </Button>
       </Space>
 
       <Bubble

@@ -1,7 +1,7 @@
 ---
 group:
   title: 🎭 Role 角色设计
-  order: 2
+  order: 1
 order: 2
 title: 流畅自然
 ---

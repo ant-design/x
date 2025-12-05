@@ -13,14 +13,12 @@
     "test": "jest --config .jest.js --no-cache --collect-coverage",
     "coverage": "jest --config .jest.js --no-cache --collect-coverage --coverage",
     "plugin:meta": "tsx scripts/generate-plugin-meta.ts",
-    "prestart": "npm run version &&  npm run token:statistic && npm run plugin:meta && npm run token:meta",
+    "prestart": "npm run version && npm run plugin:meta",
     "precompile": "npm run prestart",
     "version": "tsx scripts/generate-version.ts",
     "test:dekko": "tsx ./tests/dekko/index.test.ts",
     "clean": "rm -rf es lib coverage plugins dist themes",
-    "test:package-diff": "antd-tools run package-diff",
-    "token:meta": "tsx scripts/generate-token-meta.ts",
-    "token:statistic": "tsx scripts/collect-token-statistic.ts"
+    "test:package-diff": "antd-tools run package-diff"
   },
   "sideEffects": false,
   "main": "lib/index.js",
@@ -49,19 +47,11 @@
   "license": "MIT",
   "description": "placeholder for @ant-design/x-markdown",
   "dependencies": {
-    "@ant-design/cssinjs": "^2.0.1",
-    "@ant-design/cssinjs-utils": "^2.0.2",
-    "@ant-design/fast-color": "^3.0.0",
-    "@ant-design/icons": "^6.0.0",
-    "@ant-design/x": "*",
     "classnames": "^2.5.1",
     "dompurify": "^3.2.6",
     "html-react-parser": "^5.2.5",
     "katex": "^0.16.22",
-    "lodash.throttle": "^4.1.1",
-    "marked": "^15.0.12",
-    "mermaid": "^11.11.0",
-    "react-syntax-highlighter": "^15.6.1"
+    "marked": "^15.0.12"
   },
   "devDependencies": {
     "@types/dompurify": "^3.0.5",
@@ -76,7 +66,6 @@
     "react-dom": "^19.0.0"
   },
   "peerDependencies": {
-    "antd": "^6.0.1",
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
   },

@@ -3,7 +3,7 @@ group:
   title: Components
   order: 5
 title: Sources
-order: 2
+order: 6
 ---
 
 Use with [`sources`](../../components/sources/index.en-US.md) to render source references.

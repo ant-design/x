@@ -1,7 +1,7 @@
 ---
 group:
   title: ❤️ Intention 意图设计
-  order: 1
+  order: 2
 order: 2
 title: 提供意图预期
 ---

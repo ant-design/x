@@ -140,7 +140,6 @@ describe('Conversations Component', () => {
     const element = container.querySelector('.ant-dropdown-open');
     expect(element).not.toBeInTheDocument();
   });
-
   describe('should handle menu trigger function', () => {
     it('render node', async () => {
       const { findAllByText, container } = render(

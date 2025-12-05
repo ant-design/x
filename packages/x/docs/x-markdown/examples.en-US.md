@@ -13,7 +13,7 @@ Used for rendering streaming Markdown format returned by LLM.
 <code src="./demo/codeDemo/basic.tsx" description="Basic markdown syntax rendering." title="Basic Usage"></code>
 <code src="./demo/streaming/combined.tsx" description="Incomplete syntax handling and animation effects" title="Streaming Processing"></code>
 <code src="./demo/codeDemo/supersets.tsx" description="Rendering with plugins." title="Plugin Usage"></code>
-<code src="./demo/codeDemo/components.tsx" description="Custom component rendering tags." title="Custom Components"></code>
+<code src="./demo/components/dataChart.tsx" description="Custom component rendering tags." title="Custom Components"></code>
 <code src="./demo/codeDemo/plugin.tsx" title="Custom Extension Plugin"></code>
 <code src="./demo/codeDemo/tokenizer.tsx" title="Custom Tokens"></code>
 <code src="./demo/codeDemo/walkTokens.tsx" title="Token Processing"></code>

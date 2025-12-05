@@ -1,7 +1,6 @@
 import React from 'react';
 import type { XComponentConfig, XComponentsConfig } from '../../x-provider/context';
 import XProviderContext from '../../x-provider/context';
-import { MarkdownComponentsConfig as XMarkdownComponentsConfig } from '../../x-provider/XMarkdownComponents';
 
 const defaultXComponentStyleConfig: XComponentConfig = {
   classNames: {},
@@ -11,7 +10,7 @@ const defaultXComponentStyleConfig: XComponentConfig = {
   shortcutKeys: {},
 };
 
-type MergeXComponentsConfig = XComponentsConfig & XMarkdownComponentsConfig;
+type MergeXComponentsConfig = XComponentsConfig;
 const useXComponentConfig = <C extends keyof MergeXComponentsConfig>(
   component: C,
 ): Required<MergeXComponentsConfig>[C] & XComponentConfig => {

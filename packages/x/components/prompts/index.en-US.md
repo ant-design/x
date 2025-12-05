@@ -8,8 +8,6 @@ order: 1
 description: Display a predefined set of questions or suggestion.
 cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*UfhXRamlAf0AAAAAAAAAAAAADgCCAQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*3CN5RLKP0X4AAAAAAAAAAAAADgCCAQ/original
-demo:
-  cols: 1
 ---
 
 ## When To Use
