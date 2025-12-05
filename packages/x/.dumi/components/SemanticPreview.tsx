@@ -1,8 +1,8 @@
 import { XProvider } from '@ant-design/x';
+import set from '@rc-component/util/lib/utils/set';
 import { Col, Flex, Popover, Row, Tag, Typography, theme } from 'antd';
 import { createStyles, css } from 'antd-style';
-import classnames from 'classnames';
-import set from 'rc-util/lib/utils/set';
+import { clsx } from 'clsx';
 /* eslint-disable react-hooks-extra/no-direct-set-state-in-use-effect */
 import React from 'react';
 
@@ -149,13 +149,13 @@ const SemanticPreview: React.FC<SemanticPreviewProps> = (props) => {
 
   // ======================== Render ========================
   return (
-    <div className={classnames(styles.container)} ref={containerRef}>
+    <div className={clsx(styles.container)} ref={containerRef}>
       <Row style={{ minHeight: height }}>
-        <Col span={16} className={classnames(styles.colWrap)}>
+        <Col span={16} className={clsx(styles.colWrap)}>
           <XProvider theme={{ token: { motion: false } }}>{cloneNode}</XProvider>
         </Col>
         <Col span={8}>
-          <ul className={classnames(styles.listWrap)}>
+          <ul className={clsx(styles.listWrap)}>
             {semantics.map<React.ReactNode>((semantic) => (
               <Popover
                 key={semantic.name}
@@ -179,7 +179,7 @@ const SemanticPreview: React.FC<SemanticPreviewProps> = (props) => {
                 }
               >
                 <li
-                  className={classnames(styles.listItem)}
+                  className={clsx(styles.listItem)}
                   onMouseEnter={() => setHoverSemantic(semantic.name)}
                   onMouseLeave={() => setHoverSemantic(null)}
                 >
@@ -201,7 +201,7 @@ const SemanticPreview: React.FC<SemanticPreviewProps> = (props) => {
         </Col>
       </Row>
       <div
-        className={classnames(
+        className={clsx(
           styles.marker,
           hoverSemantic ? styles.markerActive : styles.markerNotActive,
           positionMotion ? styles.markerMotion : styles.markerNotMotion,

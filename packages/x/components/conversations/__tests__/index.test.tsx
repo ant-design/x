@@ -1,4 +1,4 @@
-import KeyCode from 'rc-util/lib/KeyCode';
+import KeyCode from '@rc-component/util/lib/KeyCode';
 import React from 'react';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';

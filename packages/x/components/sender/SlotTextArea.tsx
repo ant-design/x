@@ -1,7 +1,7 @@
 import { CaretDownFilled } from '@ant-design/icons';
+import pickAttrs from '@rc-component/util/lib/pickAttrs';
 import { Dropdown, Input, type InputRef } from 'antd';
-import classnames from 'classnames';
-import pickAttrs from 'rc-util/lib/pickAttrs';
+import { clsx } from 'clsx';
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
@@ -144,7 +144,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const span = document.createElement('span');
     span.setAttribute('contenteditable', 'true');
     span.dataset.slotKey = config.key;
-    span.className = classnames(`${prefixCls}-slot`, `${prefixCls}-slot-content`);
+    span.className = clsx(`${prefixCls}-slot`, `${prefixCls}-slot-content`);
     return span;
   };
 
@@ -153,7 +153,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     span.setAttribute('contenteditable', 'false');
     span.dataset.slotKey = slotKey;
     span.dataset.nodeType = 'nbsp';
-    span.className = classnames(`${prefixCls}-slot-${positions}`, `${prefixCls}-slot-no-width`);
+    span.className = clsx(`${prefixCls}-slot-${positions}`, `${prefixCls}-slot-no-width`);
     span.innerHTML = '&nbsp;';
 
     return span;
@@ -230,7 +230,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
               trigger={['click']}
             >
               <span
-                className={classnames(`${prefixCls}-slot-select`, {
+                className={clsx(`${prefixCls}-slot-select`, {
                   placeholder: !value,
                   [`${prefixCls}-slot-select-selector-value`]: value,
                 })}
@@ -919,7 +919,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         role="textbox"
         tabIndex={0}
         style={{ ...mergeStyle, ...inputHeightStyle }}
-        className={classnames(
+        className={clsx(
           inputCls,
           `${inputCls}-slot`,
           contextConfig.classNames.input,

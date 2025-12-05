@@ -44,7 +44,7 @@
   "license": "MIT",
   "description": "placeholder for @ant-design/x-sdk",
   "dependencies": {
-    "rc-util": "^5.43.0"
+    "@rc-component/util": "^1.4.0"
   },
   "devDependencies": {
     "@types/react": "^19.0.2",

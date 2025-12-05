@@ -184,7 +184,7 @@ export type RoleProps = Pick<
   | 'shape'
   | 'placement'
   | 'rootClassName'
-  | 'classNames'
+  | 'clsx'
   | 'className'
   | 'styles'
   | 'style'
