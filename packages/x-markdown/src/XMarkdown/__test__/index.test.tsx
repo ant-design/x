@@ -194,7 +194,7 @@ describe('XMarkdown', () => {
 
     // XMarkdown wraps content in a div with class "ant-x-markdown"
     const wrapper = container.firstChild as HTMLElement;
-    expect(wrapper).toHaveClass('ant-x-markdown');
+    expect(wrapper).toHaveClass('x-markdown');
     expect(wrapper.innerHTML).toBe('<div>This is a paragraph.</div>\n');
   });
 

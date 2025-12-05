@@ -38,9 +38,9 @@
     "circular-dependency-plugin": "^5.2.2",
     "dekko": "^0.2.1",
     "father": "^4.6.0",
+    "gh-pages": "^6.3.0",
     "husky": "^9.1.6",
     "lint-staged": "^16.1.5",
-    "gh-pages": "^6.3.0",
     "marked-emoji": "^2.0.1",
     "prettier": "^3.3.3",
     "react-markdown": "^10.1.0",
@@ -49,7 +49,7 @@
   "size-limit": [
     {
       "path": "./packages/x/dist/antdx.min.js",
-      "limit": "350 KiB"
+      "limit": "500 KiB"
     },
     {
       "path": "./packages/x-sdk/dist/x-sdk.min.js",
@@ -57,19 +57,11 @@
     },
     {
       "path": "./packages/x-markdown/dist/x-markdown.min.js",
-      "limit": "350 KiB"
-    },
-    {
-      "path": "./packages/x-markdown/dist/plugins/code-high-light.min.js",
-      "limit": "700 KiB"
+      "limit": "150 KiB"
     },
     {
       "path": "./packages/x-markdown/dist/plugins/latex.min.js",
-      "limit": "700 KiB"
-    },
-    {
-      "path": "./packages/x-markdown/dist/plugins/mermaid.min.js",
-      "limit": "900 KiB"
+      "limit": "300 KiB"
     }
   ],
   "description": "Craft AI-driven interfaces effortlessly",

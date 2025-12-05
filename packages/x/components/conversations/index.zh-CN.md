@@ -8,8 +8,6 @@ subtitle: 管理对话
 description: 用于切换多个智能体，更新对话轮次，对话历史切换
 cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*Oj-bTbVXtpQAAAAAAAAAAAAADgCCAQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*qwdtSKWXeikAAAAAAAAAAAAADgCCAQ/original
-demo:
-  cols: 1
 ---
 
 ## 何时使用
@@ -48,8 +46,8 @@ demo:
 | onActiveChange | 选中变更回调 | (value: string) => void | - | - |
 | menu | 会话操作菜单 | ItemMenuProps\| ((value: ConversationItemType) => ItemMenuProps) | - | - |
 | groupable | 是否支持分组, 开启后默认按 `Conversation.group` 字段分组 | boolean \| GroupableProps | - | - |
-| shortcutKeys | 快捷键操作 | { creation?: ShortcutKeys\<number\>; items?:ShortcutKeys\<'number'\> \| ShortcutKeys\<number\>[];} | - | - |
-| creation | 新会话操作配置 | CreationProps | - | - |
+| shortcutKeys | 快捷键操作 | { creation?: ShortcutKeys\<number\>; items?:ShortcutKeys\<'number'\> \| ShortcutKeys\<number\>[];} | - | 2.0.0 |
+| creation | 新会话操作配置 | CreationProps | - | 2.0.0 |
 | styles | 语义化结构 style | styles?: {creation?: React.CSSProperties;item?: React.CSSProperties;} | - | - |
 | classNames | 语义化结构 className | classNames?: { creation?: string; item?:string;} | - | - |
 | rootClassName | 根节点类名 | string | - | - |

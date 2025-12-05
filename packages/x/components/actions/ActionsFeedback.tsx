@@ -82,6 +82,7 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
 
   // ============================ Classname ============================
   const mergedCls = classnames(
+    prefixCls,
     feedbackCls,
     hashId,
     cssVarCls,

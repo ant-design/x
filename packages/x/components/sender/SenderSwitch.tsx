@@ -89,7 +89,7 @@ const SenderSwitch = React.forwardRef<SenderSwitchRef, SenderSwitchProps>((props
     {
       value: customValue,
       onChange: (key) => {
-        onChange?.(key || false);
+        onChange?.(key as boolean);
       },
     },
   );

@@ -44,7 +44,7 @@ const StaticContent = React.memo(({ children }) => <div className="static">{chil
 
 ## Streaming Rendering Handling
 
-XMarkdown will pass the `streamStatus` prop to components by default, which indicates whether the component is closed, making it easier to handle streaming rendering.
+XMarkdown will pass the `streamStatus` prop to components by default, indicating whether the component is closed, which is useful for handling streaming rendering.
 
 ### Status Determination
 
@@ -59,7 +59,7 @@ const StreamingComponent = ({ streamStatus, children }) => {
 
 ## Data Fetching Example
 
-Components support two data fetching methods: directly parsing data from Markdown or initiating network requests independently.
+Components support two data fetching methods: directly parsing data from Markdown, or initiating network requests independently.
 
 ### Data Fetching
 
@@ -87,7 +87,7 @@ const UserCard = ({ domNode, streamStatus }) => {
 };
 ```
 
-## Supported Tag Mappings
+## Supported Tag Mapping
 
 ### Standard HTML Tags
 
@@ -104,7 +104,7 @@ const UserCard = ({ domNode, streamStatus }) => {
 ### Custom Tags
 
 ```tsx
-// Support for any custom tags
+// Support any custom tags
 <XMarkdown
   components={{
     'my-component': MyComponent,
@@ -118,6 +118,63 @@ const UserCard = ({ domNode, streamStatus }) => {
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
 | domNode | Component DOM node from html-react-parser, containing parsed DOM node information | [`DOMNode`](https://github.com/remarkablemark/html-react-parser?tab=readme-ov-file#replace) | - |
-| streamStatus | Streaming rendering supports two states: `loading` indicates content is being loaded, and `done` indicates loading is complete. Currently, only HTML format and fenced code blocks are supported. Since indented code blocks lack a clear end delimiter, they always return the `done` state. | `'loading' \| 'done'` | - |
-| children | Content wrapped in the component, containing text content of DOM nodes | `React.ReactNode` | - |
+| streamStatus | Streaming rendering supports two states: `loading` indicates content is being loaded, `done` indicates loading is complete. Currently only supports HTML format and fenced code blocks. Since indented code has no clear end marker, it always returns `done` status | `'loading' \| 'done'` | - |
+| children | Content wrapped in the component, containing the text content of DOM nodes | `React.ReactNode` | - |
 | rest | Component properties, supports all standard HTML attributes (such as `href`, `title`, `className`, etc.) and custom data attributes | `Record<string, any>` | - |
+
+## FAQ
+
+### Block-level HTML Tags Not Properly Closed
+
+When block-level HTML tags contain empty lines (\n\n) internally, the Markdown parser treats empty lines as the start of new paragraphs, thereby interrupting recognition of the original HTML block. This causes closing tags to be incorrectly parsed as inline HTML or plain text, ultimately breaking the tag structure.
+
+**Example Problem:**
+
+Input Markdown:
+
+```markdown
+<think>
+This is thinking content
+
+The thinking content contains empty lines </think>
+
+This is main content
+```
+
+Incorrect Output:
+
+```html
+<think>
+  This is thinking content
+
+  <p>The thinking content contains empty lines</p>
+  <p>This is main content</p>
+</think>
+```
+
+**Root Cause:** According to [CommonMark](https://spec.commonmark.org/0.30/#html-blocks) specification, HTML block recognition depends on strict formatting rules. Once two consecutive line breaks (i.e., empty lines) appear inside an HTML block and do not meet specific HTML block type continuation conditions (such as <div>, <pre>, etc.), the parser will terminate the current HTML block and process subsequent content as Markdown paragraphs.
+
+Custom tags (like <think>) are typically not recognized as "paragraph-spanning" HTML block types, making them highly susceptible to empty line interference.
+
+**Solutions:**
+
+1. **Option 1**: Remove all empty lines inside tags
+
+```markdown
+<think>
+This is thinking content
+The thinking content has no empty lines
+</think>
+```
+
+2. **Option 2**: Add empty lines before, after, and inside HTML tags to make them independent blocks
+
+```markdown
+<think>
+
+This is thinking content
+
+The thinking content contains empty lines
+
+</think>
+```

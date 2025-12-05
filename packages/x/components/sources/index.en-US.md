@@ -1,14 +1,13 @@
 ---
 category: Components
 group:
-  title: Confirmation
-  order: 3
+  title: Feedback
+  order: 4
 title: Sources
 description: Show the source address of the referenced data.
 cover: https://mdn.alipayobjects.com/huamei_b00jk5/afts/img/A*3nEPRYJbNQgAAAAAQFAAAAgAegitAQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_b00jk5/afts/img/A*_7mMRrQVcXcAAAAAQEAAAAgAegitAQ/original
-demo:
-  cols: 1
+tag: 2.0.0
 ---
 
 ## When To Use

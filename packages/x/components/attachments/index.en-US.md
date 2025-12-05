@@ -7,8 +7,6 @@ title: Attachments
 description: Display the collection of attachment information.
 cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*5l2oSKBXatAAAAAAAAAAAAAADgCCAQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*N8QHQJhgfbEAAAAAAAAAAAAADgCCAQ/original
-demo:
-  cols: 1
 ---
 
 ## When To Use
@@ -36,7 +34,7 @@ Inherits antd [Upload](https://ant.design/components/upload) properties.
 | --- | --- | --- | --- | --- |
 | classNames | Custom class names, [see below](#semantic-dom) | Record<string, string> | - | - |
 | disabled | Whether to disable | boolean | false | - |
-| maxCount | Maximum number of files for upload | number \| - | - | - |
+| maxCount | Maximum number of files for upload | number \| - | - | 2.0.0 |
 | getDropContainer | Config the area where files can be dropped | () => HTMLElement | - | - |
 | items | Attachment list, same as Upload `fileList` | Attachment[] | - | - |
 | overflow | Behavior when the file list overflows | 'wrap' \| 'scrollX' \| 'scrollY' | - | - |
@@ -51,17 +49,16 @@ interface PlaceholderType {
   title?: React.ReactNode;
   description?: React.ReactNode;
 }
-
-
+```
 
 ### AttachmentsRef
 
-| Property      | Description            | Type                 | Version |
-| ------------- | ---------------------- | -------------------- | ------- |
-| nativeElement | Get the native node    | HTMLElement          | -       |
-| fileNativeElement | Get the file upload native node    | HTMLElement          | -    |
-| upload        | Manually upload a file | (file: File) => void | -       |
-| select        | Manually select files | (options: { accept?: string; multiple?: boolean; }) => void | -    |
+| Property | Description | Type | Version |
+| --- | --- | --- | --- |
+| nativeElement | Get the native node | HTMLElement | - |
+| fileNativeElement | Get the file upload native node | HTMLElement | - |
+| upload | Manually upload a file | (file: File) => void | - |
+| select | Manually select files | (options: { accept?: string; multiple?: boolean; }) => void | 2.0.0 |
 
 ## Semantic DOM
 
@@ -70,4 +67,3 @@ interface PlaceholderType {
 ## Design Token
 
 <ComponentTokenTable component="Attachments"></ComponentTokenTable>
-```
