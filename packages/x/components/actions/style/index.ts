@@ -18,7 +18,7 @@ const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
       [`&${componentCls}-rtl`]: {
         direction: 'rtl',
       },
-      [`& ${antCls}-pagination-item-link`]: {
+      [`${antCls}-pagination-item-link`]: {
         width: token.controlHeightSM,
       },
       [`${componentCls}-variant-outlined`]: {
