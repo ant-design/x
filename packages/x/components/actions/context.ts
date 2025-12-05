@@ -4,5 +4,5 @@ import type { ActionsProps } from './interface';
 export const ActionsContext = React.createContext<{
   prefixCls?: string;
   styles?: ActionsProps['styles'];
-  classNames?: ActionsProps['clsx'];
+  classNames?: ActionsProps['classNames'];
 }>(null!);
