@@ -72,7 +72,7 @@ const genThoughtChainStyle: GenerateStyle<ThoughtChainToken, CSSObject> = (token
           },
         },
       },
-      [`& ${componentCls}-node`]: {
+      [`${componentCls}-node`]: {
         position: 'relative',
         display: 'flex',
         alignItems: 'baseline',
@@ -87,38 +87,38 @@ const genThoughtChainStyle: GenerateStyle<ThoughtChainToken, CSSObject> = (token
           color: token.colorPrimary,
         },
       },
-      [`& ${componentCls}-node-header`]: {
+      [`${componentCls}-node-header`]: {
         display: 'flex',
         flexDirection: 'column',
       },
-      [`& ${componentCls}-node-title`]: {
+      [`${componentCls}-node-title`]: {
         fontWeight: 500,
         display: 'flex',
         gap: token.marginXS,
       },
-      [`& ${componentCls}-node-collapsible`]: {
+      [`${componentCls}-node-collapsible`]: {
         paddingInlineEnd: token.padding,
         cursor: 'pointer',
       },
-      [`& ${componentCls}-node-footer`]: {
+      [`${componentCls}-node-footer`]: {
         marginBottom: token.margin,
       },
-      [`& ${componentCls}-node-content`]: {
+      [`${componentCls}-node-content`]: {
         marginBottom: token.margin,
       },
-      [`& ${componentCls}-node-collapse-icon`]: {
+      [`${componentCls}-node-collapse-icon`]: {
         '& svg': {
           transition: `transform ${token.motionDurationMid} ${token.motionEaseInOut}`,
         },
       },
 
-      [`& ${componentCls}-node-description`]: {
+      [`${componentCls}-node-description`]: {
         color: token.colorTextDescription,
         fontSize: token.fontSize,
         lineHeight: token.lineHeight,
         marginBlockEnd: token.margin,
       },
-      [`& ${componentCls}-node-icon`]: {
+      [`${componentCls}-node-icon`]: {
         lineHeight: 1,
         fontSize: token.iconSize,
         '&:after': {
@@ -130,17 +130,17 @@ const genThoughtChainStyle: GenerateStyle<ThoughtChainToken, CSSObject> = (token
           top: unit(calc(token.iconSize).mul(token.lineHeight).equal()),
         },
       },
-      [`& ${componentCls}-node-icon-dashed`]: {
+      [`${componentCls}-node-icon-dashed`]: {
         '&:after': {
           borderInlineStart: `${unit(token.lineWidth)} dashed ${token.colorFillContent}`,
         },
       },
-      [`& ${componentCls}-node-icon-dotted‌`]: {
+      [`${componentCls}-node-icon-dotted‌`]: {
         '&:after': {
           borderInlineStart: `${unit(token.lineWidth)} dotted‌ ${token.colorFillContent}`,
         },
       },
-      [`& ${componentCls}-node-index-icon`]: {
+      [`${componentCls}-node-index-icon`]: {
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -154,7 +154,7 @@ const genThoughtChainStyle: GenerateStyle<ThoughtChainToken, CSSObject> = (token
       },
       [`&${componentCls}-rtl`]: {
         direction: 'rtl',
-        [`& ${componentCls}-node-icon`]: {
+        [`${componentCls}-node-icon`]: {
           '&:after': {
             insetInlineStart: 'unset',
             insetInlineEnd: unit(calc(token.iconSize).sub(1).div(2).equal()),

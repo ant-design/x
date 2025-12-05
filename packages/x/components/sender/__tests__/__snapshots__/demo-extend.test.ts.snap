@@ -62,10 +62,10 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
           dir="ltr"
         >
           <div
-            class="ant-file-card-list-wrapper"
+            class="ant-file-card-list ant-attachment-list css-var-_r_2a_"
           >
             <div
-              class="ant-file-card-list ant-attachment-list css-var-_r_2a_"
+              class="ant-file-card-list-content"
               style="display: none;"
             >
               <span
@@ -366,7 +366,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
             </span>
           </button>
           <div
-            class="ant-sender-switch css-var-_r_2a_ ant-sender-switch-checked"
+            class="ant-sender ant-sender-switch css-var-_r_2a_ ant-sender-switch-checked"
           >
             <button
               class="ant-btn css-var-_r_2a_ ant-btn-default ant-btn-color-primary ant-btn-variant-outlined ant-sender-switch-content"
@@ -407,7 +407,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
             </button>
           </div>
           <div
-            class="ant-sender-switch ant-dropdown-trigger css-var-_r_2a_"
+            class="ant-sender ant-sender-switch ant-dropdown-trigger css-var-_r_2a_"
           >
             <button
               class="ant-btn css-var-_r_2a_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
@@ -610,7 +610,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
             />
           </div>
           <div
-            class="ant-sender-switch ant-dropdown-trigger css-var-_r_2a_"
+            class="ant-sender ant-sender-switch ant-dropdown-trigger css-var-_r_2a_"
           >
             <button
               class="ant-btn css-var-_r_2a_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
@@ -1584,10 +1584,10 @@ exports[`renders components/sender/demo/paste-image.tsx extend context correctly
             dir="ltr"
           >
             <div
-              class="ant-file-card-list-wrapper"
+              class="ant-file-card-list ant-attachment-list css-var-_r_1u_"
             >
               <div
-                class="ant-file-card-list ant-attachment-list css-var-_r_1u_"
+                class="ant-file-card-list-content"
                 style="display: none;"
               >
                 <span
@@ -2666,10 +2666,10 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx extend context 
             dir="ltr"
           >
             <div
-              class="ant-file-card-list-wrapper"
+              class="ant-file-card-list ant-attachment-list css-var-_r_f_"
             >
               <div
-                class="ant-file-card-list ant-attachment-list css-var-_r_f_"
+                class="ant-file-card-list-content"
                 style="display: none;"
               >
                 <span
@@ -2970,7 +2970,7 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx extend context 
               </span>
             </button>
             <div
-              class="ant-sender-switch css-var-_r_f_ ant-sender-switch-checked"
+              class="ant-sender ant-sender-switch css-var-_r_f_ ant-sender-switch-checked"
             >
               <button
                 class="ant-btn css-var-_r_f_ ant-btn-default ant-btn-color-primary ant-btn-variant-outlined ant-sender-switch-content"
@@ -3013,7 +3013,7 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx extend context 
               </button>
             </div>
             <div
-              class="ant-sender-switch ant-dropdown-trigger css-var-_r_f_"
+              class="ant-sender ant-sender-switch ant-dropdown-trigger css-var-_r_f_"
             >
               <button
                 class="ant-btn css-var-_r_f_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
@@ -3216,7 +3216,7 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx extend context 
               />
             </div>
             <div
-              class="ant-sender-switch ant-dropdown-trigger css-var-_r_f_"
+              class="ant-sender ant-sender-switch ant-dropdown-trigger css-var-_r_f_"
             >
               <button
                 class="ant-btn css-var-_r_f_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
@@ -3958,7 +3958,7 @@ exports[`renders components/sender/demo/switch.tsx extend context correctly 1`] 
   >
     Default: 
     <div
-      class="ant-sender-switch css-var-_r_0_"
+      class="ant-sender ant-sender-switch css-var-_r_0_"
     >
       <button
         class="ant-btn css-var-_r_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
@@ -4000,7 +4000,7 @@ exports[`renders components/sender/demo/switch.tsx extend context correctly 1`] 
   >
     Custom checked/unchecked content:
     <div
-      class="ant-sender-switch css-var-_r_0_"
+      class="ant-sender ant-sender-switch css-var-_r_0_"
     >
       <button
         class="ant-btn css-var-_r_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
@@ -4042,7 +4042,7 @@ exports[`renders components/sender/demo/switch.tsx extend context correctly 1`] 
   >
     Disabled:
     <div
-      class="ant-sender-switch css-var-_r_0_"
+      class="ant-sender ant-sender-switch css-var-_r_0_"
     >
       <button
         class="ant-btn css-var-_r_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
@@ -4085,7 +4085,7 @@ exports[`renders components/sender/demo/switch.tsx extend context correctly 1`] 
   >
     Loading:
     <div
-      class="ant-sender-switch css-var-_r_0_"
+      class="ant-sender ant-sender-switch css-var-_r_0_"
     >
       <button
         class="ant-btn css-var-_r_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-loading ant-sender-switch-content"
@@ -4127,7 +4127,7 @@ exports[`renders components/sender/demo/switch.tsx extend context correctly 1`] 
   >
     DefaultValue:
     <div
-      class="ant-sender-switch css-var-_r_0_ ant-sender-switch-checked"
+      class="ant-sender ant-sender-switch css-var-_r_0_ ant-sender-switch-checked"
     >
       <button
         class="ant-btn css-var-_r_0_ ant-btn-default ant-btn-color-primary ant-btn-variant-outlined ant-sender-switch-content"
@@ -4169,7 +4169,7 @@ exports[`renders components/sender/demo/switch.tsx extend context correctly 1`] 
   >
     Controlled mode:
     <div
-      class="ant-sender-switch css-var-_r_0_"
+      class="ant-sender ant-sender-switch css-var-_r_0_"
     >
       <button
         class="ant-btn css-var-_r_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"

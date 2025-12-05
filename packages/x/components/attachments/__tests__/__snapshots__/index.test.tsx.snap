@@ -6,10 +6,10 @@ exports[`attachments rtl render component should be rendered correctly in RTL di
   dir="rtl"
 >
   <div
-    class="ant-file-card-list-wrapper"
+    class="ant-file-card-list ant-attachment-list css-var-root ant-file-card-rtl"
   >
     <div
-      class="ant-file-card-list ant-attachment-list css-var-root ant-file-card-rtl"
+      class="ant-file-card-list-content"
       dir="rtl"
       style="display: none;"
     >

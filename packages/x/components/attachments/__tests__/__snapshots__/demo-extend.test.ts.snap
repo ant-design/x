@@ -335,10 +335,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
     dir="ltr"
   >
     <div
-      class="ant-file-card-list-wrapper"
+      class="ant-file-card-list ant-attachment-list css-var-_r_b_"
     >
       <div
-        class="ant-file-card-list ant-attachment-list css-var-_r_b_ ant-file-card-list-overflow-wrap"
+        class="ant-file-card-list-content ant-file-card-list-overflow-wrap"
       >
         <div
           class="ant-file-card-list-item"
@@ -1992,10 +1992,10 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
       dir="ltr"
     >
       <div
-        class="ant-file-card-list-wrapper"
+        class="ant-file-card-list ant-attachment-list css-var-_r_a_"
       >
         <div
-          class="ant-file-card-list ant-attachment-list css-var-_r_a_"
+          class="ant-file-card-list-content"
           style="display: none;"
         >
           <span
@@ -2173,10 +2173,10 @@ exports[`renders components/attachments/demo/placeholder.tsx extend context corr
       dir="ltr"
     >
       <div
-        class="ant-file-card-list-wrapper"
+        class="ant-file-card-list ant-attachment-list css-var-_r_a_"
       >
         <div
-          class="ant-file-card-list ant-attachment-list css-var-_r_a_"
+          class="ant-file-card-list-content"
           style="display: none;"
         >
           <span
@@ -2415,10 +2415,10 @@ exports[`renders components/attachments/demo/select-files.tsx extend context cor
             dir="ltr"
           >
             <div
-              class="ant-file-card-list-wrapper"
+              class="ant-file-card-list ant-attachment-list css-var-_r_2_"
             >
               <div
-                class="ant-file-card-list ant-attachment-list css-var-_r_2_"
+                class="ant-file-card-list-content"
                 style="display: none;"
               >
                 <span
@@ -2876,10 +2876,10 @@ exports[`renders components/attachments/demo/with-sender.tsx extend context corr
             dir="ltr"
           >
             <div
-              class="ant-file-card-list-wrapper"
+              class="ant-file-card-list ant-attachment-list css-var-_r_0_"
             >
               <div
-                class="ant-file-card-list ant-attachment-list css-var-_r_0_"
+                class="ant-file-card-list-content"
                 style="display: none;"
               >
                 <span

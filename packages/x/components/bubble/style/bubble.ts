@@ -68,13 +68,14 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
           alignItems: 'center',
         },
 
-        [`& ${componentCls}-body`]: {
+        [`${componentCls}-body`]: {
           display: 'flex',
           flexDirection: 'column',
+          maxWidth: '100%',
         },
 
         // =========================== Content =============================
-        [`& ${componentCls}-content`]: {
+        [`${componentCls}-content`]: {
           position: 'relative',
           boxSizing: 'border-box',
           minWidth: 0,
@@ -108,7 +109,7 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
           animationTimingFunction: 'linear',
         },
 
-        [`& ${componentCls}-dot`]: {
+        [`${componentCls}-dot`]: {
           position: 'relative',
           height: token.controlHeight,
           display: 'flex',
@@ -138,7 +139,7 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
         },
 
         // ======================== placement ============================
-        '&-start': {
+        [`&${componentCls}-start`]: {
           flexDirection: 'row',
 
           [`& ${componentCls}-header`]: {
@@ -146,7 +147,7 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
           },
         },
 
-        '&-end': {
+        [`&${componentCls}-end`]: {
           flexDirection: 'row-reverse',
           justifySelf: 'flex-end',
 
