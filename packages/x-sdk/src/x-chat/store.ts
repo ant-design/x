@@ -105,17 +105,15 @@ type Getter<T> = () => T;
 
 export function useChatStore<T extends { id: number | string }>(
   defaultValue: T[] | Getter<T[]>,
-  conversationKey?: ConversationKey,
+  conversationKey: ConversationKey,
 ) {
   const createStore = () => {
-    // fix #1431, should give a default key to create unique store
-    const key = conversationKey || DefaultConversationKey;
-    if (chatMessagesStoreHelper.get(key)) {
-      return chatMessagesStoreHelper.get(key) as ChatMessagesStore<T>;
+    if (chatMessagesStoreHelper.get(conversationKey)) {
+      return chatMessagesStoreHelper.get(conversationKey) as ChatMessagesStore<T>;
     }
     const messages =
       typeof defaultValue === 'function' ? (defaultValue as Getter<T[]>)() : defaultValue;
-    const store = new ChatMessagesStore<T>(messages || [], key);
+    const store = new ChatMessagesStore<T>(messages || [], conversationKey);
     return store;
   };
   const [store, setStore] = useState(createStore);

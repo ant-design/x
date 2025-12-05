@@ -1,5 +1,5 @@
 import { useEvent } from 'rc-util';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { AnyObject } from '../_util/type';
 import { AbstractChatProvider } from '../chat-providers';
 import { ConversationData } from '../x-conversations';
@@ -77,6 +77,7 @@ function toArray<T>(item: T | T[]): T[] {
 }
 
 const IsRequestingMap = new Map<string, boolean>();
+const generateConversationKey = () => 'AntDesignX_' + Math.random().toString(36).substring(2, 15);
 
 export default function useXChat<
   ChatMessage extends SimpleType = string,
@@ -90,13 +91,23 @@ export default function useXChat<
     requestPlaceholder,
     parser,
     provider,
-    conversationKey,
+    conversationKey: originalConversationKey,
   } = config;
 
   // ========================= Agent Messages =========================
   const idRef = React.useRef(0);
   const requestHandlerRef = React.useRef<AbstractXRequestClass<Input, Output>>(undefined);
   const [isRequesting, setIsRequesting] = useState<boolean>(false);
+  // fix #1431, should give a default key to create store
+  const [conversationKey, setConversationKey] = useState(
+    originalConversationKey || generateConversationKey(),
+  );
+
+  useEffect(() => {
+    if (conversationKey) {
+      setConversationKey(conversationKey);
+    }
+  }, [originalConversationKey]);
 
   const { messages, setMessages, getMessages, setMessage } = useChatStore<MessageInfo<ChatMessage>>(
     () =>

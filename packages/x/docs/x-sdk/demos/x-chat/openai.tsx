@@ -10,7 +10,7 @@ import {
   XRequest,
 } from '@ant-design/x-sdk';
 import { Button, Flex, Tooltip } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 /**
  * 🔔 请替换 BASE_URL、PATH、MODEL、API_KEY 为您自己的值
@@ -90,24 +90,31 @@ const App = () => {
   );
   const locale = useLocale();
 
+  useEffect(() => {
+    setTimeout(() => {
+      setMessages([
+        {
+          id: '1',
+          message: { role: 'user', content: locale.historyUserMessage },
+          status: 'success',
+        },
+        {
+          id: '2',
+          message: { role: 'assistant', content: locale.historyAIResponse },
+          status: 'success',
+        },
+      ]);
+      console.log('setMessages');
+    }, 3000);
+  }, []);
+
   // 聊天消息管理：处理消息列表、历史消息、错误处理等
   // Chat message management: handle message list, historical messages, error handling, etc.
   const { onRequest, messages, setMessages, setMessage, isRequesting, abort, onReload } = useXChat({
     provider,
     // 默认消息：包含历史对话作为示例
     // Default messages: include historical conversation as examples
-    defaultMessages: [
-      {
-        id: '1',
-        message: { role: 'user', content: locale.historyUserMessage },
-        status: 'success',
-      },
-      {
-        id: '2',
-        message: { role: 'assistant', content: locale.historyAIResponse },
-        status: 'success',
-      },
-    ],
+    defaultMessages: [],
     requestFallback: (_, { error, errorInfo, messageInfo }) => {
       // 请求失败时的回退处理：区分中止错误和其他错误
       // Fallback handling for request failure: distinguish between abort error and other errors
