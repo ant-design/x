@@ -33,6 +33,8 @@ const Demo: React.FC = () => {
             onChange={(nextTags) => {
               if (nextTags.length > tags.length) {
                 setTags(nextTags);
+              } else if (nextTags.length < tags.length) {
+                setTags(nextTags);
               }
             }}
             onKeyDown={(e) => {
