@@ -170,7 +170,6 @@ The thinking content has no empty lines
 2. **Option 2**: Add empty lines before, after, and inside HTML tags to make them independent blocks
 
 ```markdown
-<!-- Option 1: Remove empty lines -->
 <think>
 
 This is thinking content

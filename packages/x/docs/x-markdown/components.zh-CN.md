@@ -170,7 +170,6 @@ const UserCard = ({ domNode, streamStatus }) => {
 2. **方案二**：在 HTML 标签前后及内部添加空行，使其成为独立块
 
 ```markdown
-<!-- 方案一：移除空行 -->
 <think>
 
 这是思考内容

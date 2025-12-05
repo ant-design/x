@@ -69,36 +69,23 @@ const App = () => {
   const timer = React.useRef<NodeJS.Timeout | null>(null);
   const contentRef = React.useRef<HTMLDivElement>(null);
 
-  const renderStream = React.useCallback(() => {
-    if (timer.current) {
-      clearTimeout(timer.current);
-    }
-
+  React.useEffect(() => {
     if (index >= text.length) {
       setHasNextChunk(false);
       return;
     }
 
     timer.current = setTimeout(() => {
-      setIndex((prev) => {
-        const next = Math.min(prev + 2, text.length);
-        if (next < text.length) {
-          renderStream();
-        }
-        return next;
-      });
-    }, 30);
-  }, [index]);
+      setIndex(Math.min(index + 5, text.length));
+    }, 20);
 
-  React.useEffect(() => {
-    renderStream();
     return () => {
       if (timer.current) {
         clearTimeout(timer.current);
         timer.current = null;
       }
     };
-  }, [renderStream]);
+  }, [index]);
 
   React.useEffect(() => {
     if (contentRef.current && index > 0 && index < text.length) {
