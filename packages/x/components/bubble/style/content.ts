@@ -83,11 +83,11 @@ export const genShapeStyle: GenerateStyle<BubbleToken> = (token) => {
         },
       },
 
-      [`&-start ${componentCls}-content-corner`]: {
+      [`&${componentCls}-start ${componentCls}-content-corner`]: {
         borderStartStartRadius: token.borderRadiusXS,
       },
 
-      [`&-end ${componentCls}-content-corner`]: {
+      [`&${componentCls}-end ${componentCls}-content-corner`]: {
         borderStartEndRadius: token.borderRadiusXS,
       },
     },

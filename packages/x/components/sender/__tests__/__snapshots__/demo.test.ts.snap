@@ -217,7 +217,7 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
             </span>
           </button>
           <div
-            class="ant-sender-switch css-var-_R_0_ ant-sender-switch-checked"
+            class="ant-sender ant-sender-switch css-var-_R_0_ ant-sender-switch-checked"
           >
             <button
               class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-primary ant-btn-variant-outlined ant-sender-switch-content"
@@ -258,7 +258,7 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
             </button>
           </div>
           <div
-            class="ant-sender-switch ant-dropdown-trigger css-var-_R_0_"
+            class="ant-sender ant-sender-switch ant-dropdown-trigger css-var-_R_0_"
           >
             <button
               class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
@@ -295,7 +295,7 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
             </button>
           </div>
           <div
-            class="ant-sender-switch ant-dropdown-trigger css-var-_R_0_"
+            class="ant-sender ant-sender-switch ant-dropdown-trigger css-var-_R_0_"
           >
             <button
               class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
@@ -2035,7 +2035,7 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx correctly 1`] =
               </span>
             </button>
             <div
-              class="ant-sender-switch css-var-_R_0_ ant-sender-switch-checked"
+              class="ant-sender ant-sender-switch css-var-_R_0_ ant-sender-switch-checked"
             >
               <button
                 class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-primary ant-btn-variant-outlined ant-sender-switch-content"
@@ -2078,7 +2078,7 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx correctly 1`] =
               </button>
             </div>
             <div
-              class="ant-sender-switch ant-dropdown-trigger css-var-_R_0_"
+              class="ant-sender ant-sender-switch ant-dropdown-trigger css-var-_R_0_"
             >
               <button
                 class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
@@ -2115,7 +2115,7 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx correctly 1`] =
               </button>
             </div>
             <div
-              class="ant-sender-switch ant-dropdown-trigger css-var-_R_0_"
+              class="ant-sender ant-sender-switch ant-dropdown-trigger css-var-_R_0_"
             >
               <button
                 class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
@@ -2613,7 +2613,7 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
   >
     Default: 
     <div
-      class="ant-sender-switch css-var-_R_0_"
+      class="ant-sender ant-sender-switch css-var-_R_0_"
     >
       <button
         class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
@@ -2655,7 +2655,7 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
   >
     Custom checked/unchecked content:
     <div
-      class="ant-sender-switch css-var-_R_0_"
+      class="ant-sender ant-sender-switch css-var-_R_0_"
     >
       <button
         class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
@@ -2697,7 +2697,7 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
   >
     Disabled:
     <div
-      class="ant-sender-switch css-var-_R_0_"
+      class="ant-sender ant-sender-switch css-var-_R_0_"
     >
       <button
         class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
@@ -2740,7 +2740,7 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
   >
     Loading:
     <div
-      class="ant-sender-switch css-var-_R_0_"
+      class="ant-sender ant-sender-switch css-var-_R_0_"
     >
       <button
         class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-loading ant-sender-switch-content"
@@ -2782,7 +2782,7 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
   >
     DefaultValue:
     <div
-      class="ant-sender-switch css-var-_R_0_ ant-sender-switch-checked"
+      class="ant-sender ant-sender-switch css-var-_R_0_ ant-sender-switch-checked"
     >
       <button
         class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-primary ant-btn-variant-outlined ant-sender-switch-content"
@@ -2824,7 +2824,7 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
   >
     Controlled mode:
     <div
-      class="ant-sender-switch css-var-_R_0_"
+      class="ant-sender ant-sender-switch css-var-_R_0_"
     >
       <button
         class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"

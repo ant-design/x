@@ -10,16 +10,16 @@ const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (
   const itemCls = `${componentCls}-item`;
   return {
     [itemCls]: {
-      [`& ${componentCls}-status`]: {
+      [`${componentCls}-status`]: {
         color: 'inherit',
       },
-      [`& ${componentCls}-status-error`]: {
+      [`${componentCls}-status-error`]: {
         color: token.colorError,
       },
-      [`& ${componentCls}-status-success`]: {
+      [`${componentCls}-status-success`]: {
         color: token.colorSuccess,
       },
-      [`& ${componentCls}-status-loading`]: {
+      [`${componentCls}-status-loading`]: {
         color: token.colorPrimary,
       },
       display: 'inline-flex',
@@ -91,20 +91,20 @@ const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (
         cursor: 'pointer',
         transition: `all ${token.motionDurationMid}  ${token.motionEaseInOut}`,
       },
-      [`& ${itemCls}-title`]: {
+      [`${itemCls}-title`]: {
         display: 'inline-block',
         whiteSpace: 'nowrap',
       },
-      [`& ${itemCls}-title-with-description`]: {
+      [`${itemCls}-title-with-description`]: {
         marginInlineEnd: token.marginXS,
       },
-      [`& ${itemCls}-description`]: {
+      [`${itemCls}-description`]: {
         color: token.colorTextDescription,
         display: 'inline-block',
         whiteSpace: 'break-spaces',
       },
-      [`& ${componentCls}-motion-blink`]: {
-        [`& ${itemCls}-description`]: {
+      [`${componentCls}-motion-blink`]: {
+        [`${itemCls}-description`]: {
           color: token.itemMotionDescription,
         },
       },

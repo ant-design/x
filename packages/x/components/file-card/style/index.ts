@@ -133,6 +133,7 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
         borderRadius: token.borderRadius,
         overflow: 'hidden',
       },
+
       [`${componentCls}-image-img`]: {
         width: '100%',
         img: {
@@ -142,6 +143,7 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
           borderRadius: 'inherit',
         },
       },
+
       [`${componentCls}-loading`]: {
         width: 268,
         aspectRatio: '1',
@@ -149,6 +151,7 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
         borderRadius: token.borderRadius,
         overflow: 'hidden',
       },
+
       [`${componentCls}-image-loading`]: {
         width: '100%',
         height: '100%',
@@ -167,6 +170,7 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
           height: '100%',
         },
       },
+
       [`${componentCls}-image-spin`]: {
         position: 'absolute',
         insetBlockStart: token.margin,
@@ -187,6 +191,7 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
       [`${componentCls}-audio`]: {
         width: 268,
       },
+
       [`${componentCls}-video`]: {
         width: 268,
         aspectRatio: '16 / 9',

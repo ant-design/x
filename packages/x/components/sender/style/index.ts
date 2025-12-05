@@ -79,7 +79,7 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
       borderWidth: lineWidth,
       borderStyle: 'solid',
 
-      '&-disabled': {
+      [`&${componentCls}-disabled`]: {
         background: token.colorBgContainerDisabled,
       },
       // ============================== RTL ==============================
