@@ -121,3 +121,61 @@ const UserCard = ({ domNode, streamStatus }) => {
 | streamStatus | 流式渲染支持两种状态：`loading` 表示内容正在加载中，`done` 表示加载已完成。当前仅支持 HTML 格式以及带围栏的代码块（fenced code）。由于缩进代码块（indented code）没有明确的结束符，因此始终返回 `done` 状态 | `'loading' \| 'done'` | - |
 | children | 包裹在组件中的内容，包含 DOM 节点的文本内容 | `React.ReactNode` | - |
 | rest | 组件属性，支持所有标准 HTML 属性（如 `href`、`title`、`className` 等）和自定义数据属性 | `Record<string, any>` | - |
+
+## FAQ
+
+### 块级 HTML 标签未正确闭合
+
+块级 HTML 标签内部包含空行（\n\n），Markdown 解析器将空行视为新段落的开始，从而中断对原始 HTML 块的识别。这会导致闭合标签被错误地解析为行内 HTML 或普通文本，最终破坏标签结构。
+
+**示例问题：**
+
+输入 Markdown：
+
+```markdown
+<think>
+这是思考内容
+
+思考内容包含空行 </think>
+
+这是正文内容
+```
+
+错误输出：
+
+```html
+<think>
+  这是思考内容
+
+  <p>思考内容包含空行</p>
+  <p>这是正文内容</p>
+</think>
+```
+
+**根本原因：** 根据 [CommonMark](https://spec.commonmark.org/0.30/#html-blocks) 规范，HTML 块的识别依赖于严格的格式规则。一旦在 HTML 块内部出现两个连续换行（即空行），且未满足特定 HTML 块类型（如 <div>、<pre> 等）的延续条件，解析器会终止当前 HTML 块，并将后续内容作为 Markdown 段落处理。
+
+自定义标签（如 <think>）通常不被识别为“可跨段落”的 HTML 块类型，因此极易受空行干扰。
+
+**解决方案：**
+
+1. **方案一**：移除标签内部所有空行
+
+```markdown
+<think>
+这是思考内容
+思考内容无空行
+</think>
+```
+
+2. **方案二**：在 HTML 标签前后及内部添加空行，使其成为独立块
+
+```markdown
+<!-- 方案一：移除空行 -->
+<think>
+
+这是思考内容
+
+思考内容包含空行
+
+</think>
+```
