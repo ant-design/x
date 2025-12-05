@@ -158,18 +158,35 @@ const isInCodeBlock = (text: string): boolean => {
   return inFenced;
 };
 
+const sanitizeForURIComponent = (input: string): string => {
+  let result = '';
+  for (let i = 0; i < input.length; i++) {
+    const charCode = input.charCodeAt(i);
+
+    // 处理代理对：保留合法，跳过孤立
+    if (charCode >= 0xd800 && charCode <= 0xdbff) {
+      if (i + 1 < input.length) {
+        const nextCharCode = input.charCodeAt(i + 1);
+        if (nextCharCode >= 0xdc00 && nextCharCode <= 0xdfff) {
+          result += input[i] + input[i + 1];
+          i++;
+        }
+      }
+    } else if (charCode >= 0xdc00 && charCode <= 0xdfff) {
+    } else {
+      result += input[i];
+    }
+  }
+  return result;
+};
+
 const safeEncodeURIComponent = (str: string): string => {
   try {
     return encodeURIComponent(str);
   } catch (e) {
     if (e instanceof URIError) {
-      const cleanedStr = str.replace(
-        /[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]/g,
-        '',
-      );
-      return encodeURIComponent(cleanedStr);
+      return encodeURIComponent(sanitizeForURIComponent(str));
     }
-
     return '';
   }
 };
