@@ -15,6 +15,18 @@ tag: vVERSION
 
 ---
 
+## 2.1.0
+
+`2025-12-05`
+
+### @ant-design/x
+
+- 🐛 修复因 antd 升级到 6.0.1 导致多个组件样式丢失问题。[#1428](https://github.com/ant-design/x/pull/1428) 由 [@kimteayon](https://github.com/kimteayon) 提交
+
+### @ant-design/x-sdk
+
+### @ant-design/x-markdown
+
 ## 2.0.1
 
 `2025-12-03`
