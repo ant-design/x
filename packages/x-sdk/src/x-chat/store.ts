@@ -1,7 +1,6 @@
 import { useEffect, useState, useSyncExternalStore } from 'react';
 
 type ConversationKey = string | number;
-const DefaultConversationKey = '__AntDesignX_DefaultConversationKey__';
 
 export const chatMessagesStoreHelper = {
   _chatMessagesStores: new Map<string | number, ChatMessagesStore<any>>(),
