@@ -1,6 +1,7 @@
 import { useEffect, useState, useSyncExternalStore } from 'react';
 
 type ConversationKey = string | number;
+const DefaultConversationKey = '__AntDesignX_DefaultConversationKey__';
 
 export const chatMessagesStoreHelper = {
   _chatMessagesStores: new Map<string | number, ChatMessagesStore<any>>(),
@@ -107,12 +108,14 @@ export function useChatStore<T extends { id: number | string }>(
   conversationKey?: ConversationKey,
 ) {
   const createStore = () => {
-    if (conversationKey && chatMessagesStoreHelper.get(conversationKey)) {
-      return chatMessagesStoreHelper.get(conversationKey) as ChatMessagesStore<T>;
+    // fix #1431, should give a default key to create unique store
+    const key = conversationKey || DefaultConversationKey;
+    if (chatMessagesStoreHelper.get(key)) {
+      return chatMessagesStoreHelper.get(key) as ChatMessagesStore<T>;
     }
     const messages =
       typeof defaultValue === 'function' ? (defaultValue as Getter<T[]>)() : defaultValue;
-    const store = new ChatMessagesStore<T>(messages || [], conversationKey);
+    const store = new ChatMessagesStore<T>(messages || [], key);
     return store;
   };
   const [store, setStore] = useState(createStore);
