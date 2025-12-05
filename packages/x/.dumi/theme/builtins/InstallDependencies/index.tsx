@@ -1,5 +1,5 @@
 import { XProvider } from '@ant-design/x';
-import type { Tab } from '@rc-component/table/lib/interface';
+import type { Tab } from '@rc-component/tabs/lib/interface';
 import { Tabs } from 'antd';
 import SourceCode from 'dumi/theme-default/builtins/SourceCode';
 import React from 'react';
