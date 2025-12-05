@@ -3,7 +3,7 @@ import type { Project } from '@stackblitz/sdk';
 import stackblitzSdk from '@stackblitz/sdk';
 import { Alert, Badge, Flex, Tooltip } from 'antd';
 import { createStyles, css } from 'antd-style';
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import { FormattedMessage, useLiveDemo, useSiteData } from 'dumi';
 import { pickBy } from 'lodash';
 import LZString from 'lz-string';
@@ -160,14 +160,14 @@ const CodePreviewer: React.FC<AntdPreviewerProps> = (props) => {
     );
   }
 
-  const codeBoxClass = classNames('code-box', {
+  const codeBoxClass = clsx('code-box', {
     expand: codeExpand,
     'code-box-debug': originDebug,
     'code-box-simplify': simplify,
   });
 
   const localizedTitle = title;
-  const highlightClass = classNames('highlight-wrapper', {
+  const highlightClass = clsx('highlight-wrapper', {
     'highlight-wrapper-expand': codeExpand,
   });
 
@@ -294,7 +294,7 @@ createRoot(document.getElementById('container')).render(<Demo />);
     main: 'index.js',
     dependencies: {
       ...dependencies,
-      'rc-util': pkgDependencyList['rc-util'],
+      '@rc-component/util': pkgDependencyList['@rc-component/util'],
       react: '^18.0.0',
       'react-dom': '^18.0.0',
       'react-scripts': '^5.0.0',

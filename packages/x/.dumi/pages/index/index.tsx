@@ -1,5 +1,5 @@
 import { createStyles } from 'antd-style';
-import classnames from 'classnames';
+import { clsx } from 'clsx';
 import React, { lazy, Suspense } from 'react';
 import DesignBanner from './components/DesignBanner';
 import MainBanner from './components/MainBanner';
@@ -42,12 +42,12 @@ const Homepage: React.FC = () => {
       <section className={styles.section}>
         <DesignBanner />
       </section>
-      <section className={classnames(styles.section, styles.container)}>
+      <section className={clsx(styles.section, styles.container)}>
         <Suspense>
           <DesignGuide />
         </Suspense>
       </section>
-      <section className={classnames(styles.section, styles.container)}>
+      <section className={clsx(styles.section, styles.container)}>
         <Suspense>
           <SceneIntroduction />
         </Suspense>
@@ -55,7 +55,7 @@ const Homepage: React.FC = () => {
           <CompIntroduction />
         </Suspense>
       </section>
-      <section className={classnames(styles.section, styles.framework, styles.container)}>
+      <section className={clsx(styles.section, styles.framework, styles.container)}>
         <Suspense>
           <DesignFramework />
         </Suspense>

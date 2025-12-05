@@ -1,4 +1,4 @@
-import rcWarning, { resetWarned as rcResetWarned } from 'rc-util/lib/warning';
+import rcWarning, { resetWarned as rcResetWarned } from '@rc-component/util/lib/warning';
 import * as React from 'react';
 
 /* istanbul ignore next */

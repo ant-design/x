@@ -1,7 +1,7 @@
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import type { GetProp, MenuProps } from 'antd';
 import { createStyles } from 'antd-style';
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import type { ReactElement } from 'react';
 import React, { useMemo } from 'react';
 
@@ -145,7 +145,7 @@ const PrevAndNext: React.FC<{ rtl?: boolean }> = ({ rtl }) => {
             className: string;
           }>,
           {
-            className: classNames(styles.pageNav, styles.prevNav, prev.className),
+            className: clsx(styles.pageNav, styles.prevNav, prev.className),
           },
         )}
       {next &&
@@ -154,7 +154,7 @@ const PrevAndNext: React.FC<{ rtl?: boolean }> = ({ rtl }) => {
             className: string;
           }>,
           {
-            className: classNames(styles.pageNav, styles.nextNav, next.className),
+            className: clsx(styles.pageNav, styles.nextNav, next.className),
           },
         )}
     </section>

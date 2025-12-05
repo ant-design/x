@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import { clsx } from 'clsx';
 import React, { useMemo } from 'react';
 import { Parser, Renderer } from './core';
 import { useStreaming } from './hooks';
@@ -21,7 +21,7 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
   } = props;
 
   // ============================ style ============================
-  const mergedCls = classnames('x-markdown', rootClassName, className);
+  const mergedCls = clsx('x-markdown', rootClassName, className);
 
   // ============================ Streaming ============================
   const displayContent = useStreaming(content || children || '', { streaming, components });

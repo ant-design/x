@@ -1,5 +1,5 @@
 import { Divider } from 'antd';
-import classnames from 'classnames';
+import { clsx } from 'clsx';
 import React from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
@@ -32,7 +32,7 @@ const DividerBubble: React.ForwardRefRenderFunction<BubbleRef, DividerBubbleProp
   const [hashId, cssVarCls] = useStyle(prefixCls);
   // ============================ Styles ============================
 
-  const rootMergedCls = classnames(
+  const rootMergedCls = clsx(
     hashId,
     cssVarCls,
     prefixCls,

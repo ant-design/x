@@ -1,7 +1,7 @@
-import classnames from 'classnames';
-import CSSMotion from 'rc-motion';
-import pickAttrs from 'rc-util/lib/pickAttrs';
-import { composeRef } from 'rc-util/lib/ref';
+import CSSMotion from '@rc-component/motion';
+import pickAttrs from '@rc-component/util/lib/pickAttrs';
+import { composeRef } from '@rc-component/util/lib/ref';
+import { clsx } from 'clsx';
 import React from 'react';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
@@ -54,7 +54,7 @@ const ForwardActions = React.forwardRef<ActionsRef, ActionsProps>((props, ref) =
     fadeIn || fadeInLeft ? `${rootPrefixCls}-x-fade${fadeInLeft ? '-left' : ''}` : '';
 
   // ============================= Class =============================
-  const mergedCls = classnames(
+  const mergedCls = clsx(
     prefixCls,
     contextConfig.className,
     contextConfig.classNames.root,
@@ -96,8 +96,8 @@ const ForwardActions = React.forwardRef<ActionsRef, ActionsProps>((props, ref) =
               value={{
                 prefixCls,
                 classNames: {
-                  item: classnames(contextConfig.classNames.item, classNames.item),
-                  itemDropdown: classnames(
+                  item: clsx(contextConfig.classNames.item, classNames.item),
+                  itemDropdown: clsx(
                     contextConfig.classNames.itemDropdown,
                     classNames.itemDropdown,
                   ),
@@ -109,7 +109,7 @@ const ForwardActions = React.forwardRef<ActionsRef, ActionsProps>((props, ref) =
               }}
             >
               <div
-                className={classnames(
+                className={clsx(
                   `${prefixCls}-list`,
                   `${prefixCls}-variant-${variant}`,
                   motionClassName,

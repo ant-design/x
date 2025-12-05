@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import { clsx } from 'clsx';
 import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -39,7 +39,7 @@ const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((
   const contextConfig = useXComponentConfig('codeHighlighter');
 
   // ============================ style ============================
-  const mergedCls = classnames(
+  const mergedCls = clsx(
     prefixCls,
     contextConfig.className,
     className,
@@ -66,7 +66,7 @@ const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((
 
     return (
       <div
-        className={classnames(
+        className={clsx(
           `${prefixCls}-header`,
           contextConfig.classNames?.header,
           classNames.header,
@@ -74,7 +74,7 @@ const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((
         style={{ ...contextConfig.styles?.header, ...styles.header }}
       >
         <span
-          className={classnames(
+          className={clsx(
             `${prefixCls}-header-title`,
             classNames.headerTitle,
             contextConfig.classNames?.headerTitle,
@@ -101,7 +101,7 @@ const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((
     <div ref={ref} className={mergedCls} style={mergedStyle} {...restProps}>
       {renderTitle()}
       <div
-        className={classnames(`${prefixCls}-code`, contextConfig.classNames?.code, classNames.code)}
+        className={clsx(`${prefixCls}-code`, contextConfig.classNames?.code, classNames.code)}
         style={{ ...contextConfig.styles.code, ...styles.code }}
       >
         <SyntaxHighlighter

@@ -1,5 +1,5 @@
-import classnames from 'classnames';
-import pickAttrs from 'rc-util/lib/pickAttrs';
+import pickAttrs from '@rc-component/util/lib/pickAttrs';
+import { clsx } from 'clsx';
 import React from 'react';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import { useXProviderContext } from '../x-provider';
@@ -126,7 +126,7 @@ const Item = React.forwardRef<ItemRef, ThoughtChainItemProps>((props, ref) => {
       key={key || id}
       onClick={onClick}
       style={style}
-      className={classnames(
+      className={clsx(
         prefixCls,
         hashId,
         className,
@@ -153,14 +153,14 @@ const Item = React.forwardRef<ItemRef, ThoughtChainItemProps>((props, ref) => {
         />
       )}
       <div
-        className={classnames(`${itemCls}-content`, {
+        className={clsx(`${itemCls}-content`, {
           [`${prefixCls}-motion-blink`]: blink,
         })}
       >
         {title && (
           <div
             style={styles?.title}
-            className={classnames(`${itemCls}-title`, classNames?.title, {
+            className={clsx(`${itemCls}-title`, classNames?.title, {
               [`${itemCls}-title-with-description`]: description,
             })}
           >
@@ -170,7 +170,7 @@ const Item = React.forwardRef<ItemRef, ThoughtChainItemProps>((props, ref) => {
         {description && (
           <div
             style={styles?.description}
-            className={classnames(`${itemCls}-description`, classNames?.description)}
+            className={clsx(`${itemCls}-description`, classNames?.description)}
           >
             {description}
           </div>

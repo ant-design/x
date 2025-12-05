@@ -6,9 +6,9 @@ import {
   SignatureOutlined,
 } from '@ant-design/icons';
 import { Conversations, ConversationsProps } from '@ant-design/x';
+import KeyCode from '@rc-component/util/lib/KeyCode';
 import type { GetProp } from 'antd';
 import { Flex, Tag, theme } from 'antd';
-import KeyCode from 'rc-util/lib/KeyCode';
 import React, { useState } from 'react';
 
 const agentItems: GetProp<ConversationsProps, 'items'> = [

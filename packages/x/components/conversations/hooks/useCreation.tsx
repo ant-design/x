@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import React from 'react';
 import { useLocale } from '../../locale';
 import enUS from '../../locale/en_US';
@@ -12,14 +12,12 @@ const CreationLabel: React.FC<CreationLabelProps> = ({ shortcutKeysIcon, prefixC
   const [contextLocale] = useLocale('Conversations', enUS.Conversations);
   const showShortcutKeys = !!shortcutKeysIcon?.length;
   return (
-    <div
-      className={classNames(prefixCls, { [`${prefixCls}-shortcut-keys-show`]: showShortcutKeys })}
-    >
+    <div className={clsx(prefixCls, { [`${prefixCls}-shortcut-keys-show`]: showShortcutKeys })}>
       <span>{contextLocale.create}</span>
       {showShortcutKeys && (
-        <span className={classNames(`${prefixCls}-shortcut-keys`)}>
+        <span className={clsx(`${prefixCls}-shortcut-keys`)}>
           {shortcutKeysIcon.map((keyIcon) => (
-            <span className={classNames(`${prefixCls}-shortcut-key`)} key={keyIcon}>
+            <span className={clsx(`${prefixCls}-shortcut-key`)} key={keyIcon}>
               {keyIcon}
             </span>
           ))}

@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import React from 'react';
 import { useTyping } from './hooks/useTyping';
 import { BubbleAnimationOption, BubbleProps } from './interface';
@@ -33,7 +33,7 @@ export const TypingContent: React.FC<{
 
   return (
     <div
-      className={classNames({
+      className={clsx({
         [`${prefixCls}-typing`]: isTyping && animating,
         [`${prefixCls}-fade-in`]: !isTyping,
       })}

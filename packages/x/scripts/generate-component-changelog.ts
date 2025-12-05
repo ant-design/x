@@ -48,7 +48,7 @@ const miscKeys = [
   '杂项：',
   '@ant-design/cssinjs',
   '@ant-design/icons',
-  'rc-motion',
+  '@rc-component/motion',
   ' IE ',
   'reset.css',
   '📖',

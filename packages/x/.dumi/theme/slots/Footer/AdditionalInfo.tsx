@@ -1,5 +1,5 @@
+import { removeCSS, updateCSS } from '@rc-component/util/lib/Dom/dynamicCSS';
 import { createStyles } from 'antd-style';
-import { removeCSS, updateCSS } from 'rc-util/lib/Dom/dynamicCSS';
 import * as React from 'react';
 
 import useLocale from '../../../hooks/useLocale';

@@ -1,6 +1,6 @@
+import pickAttrs from '@rc-component/util/lib/pickAttrs';
 import { Typography } from 'antd';
-import classnames from 'classnames';
-import pickAttrs from 'rc-util/lib/pickAttrs';
+import { clsx } from 'clsx';
 import React from 'react';
 import { useXProviderContext } from '../x-provider';
 import useStyle from './style';
@@ -72,7 +72,7 @@ const ActionsCopy: React.FC<ActionsCopyProps> = (props) => {
 
   // ============================ Classname ============================
 
-  const mergedCls = classnames(
+  const mergedCls = clsx(
     prefixCls,
     `${prefixCls}-item`,
     hashId,
