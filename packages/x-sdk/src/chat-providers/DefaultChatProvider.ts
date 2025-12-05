@@ -1,4 +1,4 @@
-import { XRequestOptions } from '../../x-request';
+import { XRequestOptions } from '../x-request';
 import type { TransformMessage } from './AbstractChatProvider';
 import AbstractChatProvider from './AbstractChatProvider';
 export default class DefaultChatProvider<ChatMessage, Input, Output> extends AbstractChatProvider<

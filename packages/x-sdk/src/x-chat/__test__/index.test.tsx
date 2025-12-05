@@ -1,8 +1,8 @@
 import React, { useImperativeHandle } from 'react';
 import { fireEvent, render, renderHook, sleep, waitFakeTimer } from '../../../tests/utils';
+import { DefaultChatProvider } from '../../chat-providers';
 import XRequest from '../../x-request';
 import useXChat, { MessageStatus, SimpleType, XChatConfig } from '../index';
-import { DefaultChatProvider } from '../providers';
 import { chatMessagesStoreHelper } from '../store';
 
 interface ChatInput {

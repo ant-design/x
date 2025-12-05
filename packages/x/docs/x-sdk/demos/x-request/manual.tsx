@@ -3,49 +3,44 @@ import type { ThoughtChainItemType } from '@ant-design/x';
 import { ThoughtChain } from '@ant-design/x';
 import { AbstractXRequestClass, XRequest } from '@ant-design/x-sdk';
 import { Button, Descriptions, Flex, Input, Splitter, Typography } from 'antd';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const { Paragraph } = Typography;
 
 interface ChatInput {
-  model: string;
-  messages: {
-    role: 'user' | 'assistant';
-    content: string;
-  }[];
-  stream: boolean;
+  query?: string;
+  stream?: boolean;
 }
 
-/**
- * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
- */
+const QUERY_URL = 'https://api.x.ant.design/api/default_chat_provider_stream';
 
-const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow_Qwen2.5-7B-Instruct';
-
-/**
- * 🔔 The MODEL is fixed in the current request, please replace it with your BASE_UR and MODEL
- */
-
-const MODEL = 'Qwen/Qwen2.5-7B-Instruct';
+const useLocale = () => {
+  const isCN = typeof location !== 'undefined' ? location.pathname.endsWith('-cn') : false;
+  return {
+    request: isCN ? '请求' : 'Request',
+    requestAbort: isCN ? '请求中止' : 'Request Abort',
+    requestLog: isCN ? '请求日志' : 'Request Log',
+    status: isCN ? '状态' : 'Status',
+    updateTimes: isCN ? '更新次数' : 'Update Times',
+    requestStatus: (status: string) => `request ${status}`,
+  };
+};
 
 const App = () => {
   const [status, setStatus] = useState<string>();
   const [thoughtChainStatus, setThoughtChainStatus] = useState<ThoughtChainItemType['status']>();
   const [lines, setLines] = useState<Record<string, string>[]>([]);
   const [questionText, setQuestionText] = useState<string>('hello, who are u?');
+  const locale = useLocale();
 
   const requestHandlerRef = useRef<AbstractXRequestClass<ChatInput, Record<string, string>>>(null);
 
-  function request() {
-    setStatus('pending');
-    setLines([]);
-
-    const requestHandler = XRequest<ChatInput, Record<string, string>>(BASE_URL, {
+  useEffect(() => {
+    requestHandlerRef.current = XRequest<ChatInput, Record<string, string>>(QUERY_URL, {
       params: {
-        model: MODEL,
-        messages: [{ role: 'user', content: questionText }],
         stream: true,
       },
+      manual: true,
       callbacks: {
         onSuccess: () => {
           setStatus('success');
@@ -62,8 +57,15 @@ const App = () => {
         },
       },
     });
-    requestHandlerRef.current = requestHandler;
-  }
+  }, []);
+
+  const request = () => {
+    setStatus('pending');
+    setLines([]);
+    requestHandlerRef?.current?.run({
+      query: questionText,
+    });
+  };
 
   const abort = () => {
     requestHandlerRef.current?.abort?.();
@@ -83,10 +85,10 @@ const App = () => {
               />
               <Flex gap="small">
                 <Button type="primary" disabled={status === 'pending'} onClick={request}>
-                  Request
+                  {locale.request}
                 </Button>
                 <Button type="primary" disabled={status !== 'pending'} onClick={abort}>
-                  Request Abort
+                  {locale.requestAbort}
                 </Button>
               </Flex>
             </Flex>
@@ -100,14 +102,14 @@ const App = () => {
         <ThoughtChain
           items={[
             {
-              title: 'Request Log',
+              title: locale.requestLog,
               status: thoughtChainStatus,
               icon: status === 'pending' ? <LoadingOutlined /> : <TagsOutlined />,
-              description: `request ${status}`,
+              description: locale.requestStatus(status || ''),
               content: (
                 <Descriptions column={1}>
-                  <Descriptions.Item label="Status">{status || '-'}</Descriptions.Item>
-                  <Descriptions.Item label="Update Times">{lines.length}</Descriptions.Item>
+                  <Descriptions.Item label={locale.status}>{status || '-'}</Descriptions.Item>
+                  <Descriptions.Item label={locale.updateTimes}>{lines.length}</Descriptions.Item>
                 </Descriptions>
               ),
             },

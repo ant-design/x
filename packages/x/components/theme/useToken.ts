@@ -88,7 +88,6 @@ export function useInternalToken(): [
     override,
     cssVar: ctxCssVar,
   } = React.useContext(antdTheme._internalContext);
-
   const cssVar = {
     prefix: ctxCssVar?.prefix || 'ant',
     key: ctxCssVar?.key || 'css-var-root',

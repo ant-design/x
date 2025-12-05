@@ -7,20 +7,50 @@ import React from 'react';
 
 const { Paragraph } = Typography;
 
-const createItems: () => ConversationItemType[] = () =>
-  Array.from({ length: 4 }).map((_, index) => ({
-    key: `item${index + 1}`,
-    label:
-      index + 1 === 3
-        ? "This's Conversation Item 3, you can click me!"
-        : `Conversation Item ${index + 1}`,
-    disabled: index === 3,
-  }));
+const useLocale = () => {
+  const isCN = typeof location !== 'undefined' ? location.pathname.endsWith('-cn') : false;
+  return {
+    add: isCN ? '添加' : 'Add',
+    update: isCN ? '更新' : 'Update',
+    reset: isCN ? '重置' : 'Reset',
+    delete: isCN ? '删除' : 'Delete',
+    conversationItem1: isCN ? '会话项目 1' : 'Conversation Item 1',
+    conversationItem2: isCN ? '会话项目 2' : 'Conversation Item 2',
+    conversationItem3: isCN
+      ? '会话项目 3，这是一个超长示例，你可以点击我！'
+      : "This's Conversation Item 3, you can click me!",
+    conversationItem4: isCN ? '会话项目 4' : 'Conversation Item 4',
+    updatedConversationItem: isCN ? '已更新的会话项目' : 'Updated Conversation Item',
+    currentConversationData: isCN ? '当前会话数据：' : 'Current Conversation Data:',
+    addConversation: isCN ? '添加会话' : 'Add Conversation',
+  };
+};
 
-let idx = 5;
-
-export default () => {
+const App = () => {
+  const locale = useLocale();
   const { token } = theme.useToken();
+
+  const createItems: () => ConversationItemType[] = () => [
+    {
+      key: 'item1',
+      label: locale.conversationItem1,
+    },
+    {
+      key: 'item2',
+      label: locale.conversationItem2,
+    },
+    {
+      key: 'item3',
+      label: locale.conversationItem3,
+    },
+    {
+      key: 'item4',
+      label: locale.conversationItem4,
+      disabled: true,
+    },
+  ];
+
+  let idx = 5;
 
   const {
     conversations,
@@ -44,14 +74,17 @@ export default () => {
   };
 
   const onAdd = () => {
-    addConversation({ key: `item${idx}`, label: `Conversation Item ${idx}` });
+    addConversation({
+      key: `item${idx}`,
+      label: `${locale.conversationItem1.replace('1', String(idx))}`,
+    });
     idx = idx + 1;
   };
 
   const onUpdate = () => {
     setConversation(activeConversationKey, {
       key: activeConversationKey,
-      label: 'Updated Conversation Item',
+      label: locale.updatedConversationItem,
     });
   };
 
@@ -63,7 +96,7 @@ export default () => {
   const menuConfig: ConversationsProps['menu'] = (conversation) => ({
     items: [
       {
-        label: 'Delete',
+        label: locale.delete,
         key: 'delete',
         icon: <DeleteOutlined />,
         danger: true,
@@ -87,14 +120,16 @@ export default () => {
         menu={menuConfig}
       />
       <Flex gap="small">
-        <Button onClick={onAdd}>Add</Button>
-        <Button onClick={onUpdate}>Update</Button>
-        <Button onClick={onReset}>Reset</Button>
+        <Button onClick={onAdd}>{locale.add}</Button>
+        <Button onClick={onUpdate}>{locale.update}</Button>
+        <Button onClick={onReset}>{locale.reset}</Button>
       </Flex>
       <Paragraph>
-        Current Conversation Data:
+        {locale.currentConversationData}
         <pre>{JSON.stringify(getConversation(activeConversationKey), null, 2)}</pre>
       </Paragraph>
     </Flex>
   );
 };
+
+export default App;

@@ -1,15 +1,15 @@
-import { XModelMessage, XModelParams } from '../../x-chat/providers/types/model';
-import { XRequestOptions } from '../../x-request';
-import { SSEFields } from '../../x-stream';
-import type { TransformMessage } from './AbstractChatProvider';
-import AbstractChatProvider from './AbstractChatProvider';
+import { XRequestOptions } from '../x-request';
+import { SSEFields } from '../x-stream';
+import AbstractChatProvider, { TransformMessage } from './AbstractChatProvider';
+import { XModelMessage, XModelParams } from './types/model';
+
 /**
- * LLM OpenAI Compatible Chat Provider
+ * DeepSeek Chat Provider
  * @template ChatMessage 消息类型
  * @template Input 请求参数类型
  * @template Output 响应数据类型
  */
-export default class OpenAIChatProvider<
+export default class DeepSeekChatProvider<
   ChatMessage extends XModelMessage = XModelMessage,
   Input extends XModelParams = XModelParams,
   Output extends Partial<Record<SSEFields, any>> = Partial<Record<SSEFields, any>>,
@@ -29,6 +29,7 @@ export default class OpenAIChatProvider<
   transformMessage(info: TransformMessage<ChatMessage, Output>): ChatMessage {
     const { originMessage, chunk, chunks, responseHeaders } = info;
     let currentContent = '';
+    let currentThink = '';
     let role = 'assistant';
     try {
       let message: any;
@@ -42,23 +43,42 @@ export default class OpenAIChatProvider<
       if (message) {
         message?.choices?.forEach((choice: any) => {
           if (choice?.delta) {
+            currentThink = choice.delta.reasoning_content || '';
             currentContent += choice.delta.content || '';
-            role = choice.delta.role || 'assistant';
+            role = choice.delta.role;
           } else if (choice?.message) {
+            currentThink = choice.message.reasoning_content || '';
             currentContent += choice.message.content || '';
-            role = choice.message.role || 'assistant';
+            role = choice.message.role;
           }
         });
       }
     } catch (error) {
       console.error('transformMessage error', error);
     }
-
-    const content = `${originMessage?.content || ''}${currentContent || ''}`;
+    let content = '';
+    let originMessageContent =
+      typeof originMessage?.content === 'string'
+        ? originMessage?.content
+        : originMessage?.content.text || '';
+    if (!originMessageContent && currentThink) {
+      // 仅匹配最多前两个换行符，避免性能问题
+      content = `\n\n<think>\n\n${currentThink?.replace?.(/^\n{0,2}/, '')}`;
+    } else if (
+      originMessageContent.includes('<think>') &&
+      !originMessageContent.includes('</think>') &&
+      currentContent
+    ) {
+      originMessageContent = originMessageContent.replace('<think>', '<think status="done">');
+      // 仅匹配最多结尾的两个空白字符和换行符
+      content = `${originMessageContent?.replace?.(/[\s\n]{0,2}$/, '')}\n\n</think>\n\n${currentContent}`;
+    } else {
+      content = `${originMessageContent || ''}${currentThink}${currentContent}`;
+    }
 
     return {
       content,
-      role,
+      role: role || 'assistant',
     } as ChatMessage;
   }
 }

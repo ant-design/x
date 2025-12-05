@@ -1,15 +1,15 @@
-import { XModelMessage, XModelParams } from '../../x-chat/providers/types/model';
-import { XRequestOptions } from '../../x-request';
-import { SSEFields } from '../../x-stream';
-import AbstractChatProvider, { TransformMessage } from './AbstractChatProvider';
-
+import { XRequestOptions } from '../x-request';
+import { SSEFields } from '../x-stream';
+import type { TransformMessage } from './AbstractChatProvider';
+import AbstractChatProvider from './AbstractChatProvider';
+import { XModelMessage, XModelParams } from './types/model';
 /**
- * DeepSeek Chat Provider
+ * LLM OpenAI Compatible Chat Provider
  * @template ChatMessage 消息类型
  * @template Input 请求参数类型
  * @template Output 响应数据类型
  */
-export default class DeepSeekChatProvider<
+export default class OpenAIChatProvider<
   ChatMessage extends XModelMessage = XModelMessage,
   Input extends XModelParams = XModelParams,
   Output extends Partial<Record<SSEFields, any>> = Partial<Record<SSEFields, any>>,
@@ -29,7 +29,6 @@ export default class DeepSeekChatProvider<
   transformMessage(info: TransformMessage<ChatMessage, Output>): ChatMessage {
     const { originMessage, chunk, chunks, responseHeaders } = info;
     let currentContent = '';
-    let currentThink = '';
     let role = 'assistant';
     try {
       let message: any;
@@ -43,40 +42,23 @@ export default class DeepSeekChatProvider<
       if (message) {
         message?.choices?.forEach((choice: any) => {
           if (choice?.delta) {
-            currentThink = choice.delta.reasoning_content || '';
             currentContent += choice.delta.content || '';
-            role = choice.delta.role;
+            role = choice.delta.role || 'assistant';
           } else if (choice?.message) {
-            currentThink = choice.message.reasoning_content || '';
             currentContent += choice.message.content || '';
-            role = choice.message.role;
+            role = choice.message.role || 'assistant';
           }
         });
       }
     } catch (error) {
       console.error('transformMessage error', error);
     }
-    let content = '';
-    let originMessageContent =
-      typeof originMessage?.content === 'string'
-        ? originMessage?.content
-        : originMessage?.content.text || '';
-    if (!originMessageContent && currentThink) {
-      content = `<think>${currentThink}`;
-    } else if (
-      originMessageContent.includes('<think>') &&
-      !originMessageContent.includes('</think>') &&
-      currentContent
-    ) {
-      originMessageContent = originMessageContent.replace('<think>', '<think status="done">');
-      content = `${originMessageContent}</think>${currentContent}`;
-    } else {
-      content = `${originMessageContent || ''}${currentThink}${currentContent}`;
-    }
+
+    const content = `${originMessage?.content || ''}${currentContent || ''}`;
 
     return {
       content,
-      role: role || 'assistant',
+      role,
     } as ChatMessage;
   }
 }

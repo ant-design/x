@@ -77,6 +77,15 @@ const genThoughtChainStyle: GenerateStyle<ThoughtChainToken, CSSObject> = (token
         display: 'flex',
         alignItems: 'baseline',
         gap: token.marginSM,
+        [`${componentCls}-status-error`]: {
+          color: token.colorError,
+        },
+        [`${componentCls}-status-success`]: {
+          color: token.colorSuccess,
+        },
+        [`${componentCls}-status-loading`]: {
+          color: token.colorPrimary,
+        },
       },
       [`& ${componentCls}-node-header`]: {
         display: 'flex',

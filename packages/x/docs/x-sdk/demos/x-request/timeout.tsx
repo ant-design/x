@@ -24,9 +24,20 @@ async function mockFetch() {
   });
 }
 
+const useLocale = () => {
+  const isCN = typeof location !== 'undefined' ? location.pathname.endsWith('-cn') : false;
+  return {
+    request: isCN ? '请求' : 'Request',
+    requestLog: isCN ? '请求日志' : 'Request Log',
+    status: isCN ? '状态' : 'Status',
+    requestStatus: (status: string) => `request ${status}`,
+  };
+};
+
 const App = () => {
   const [status, setStatus] = useState<string>('');
   const [thoughtChainStatus, setThoughtChainStatus] = useState<ThoughtChainItemType['status']>();
+  const locale = useLocale();
 
   function request() {
     setStatus('pending');
@@ -53,7 +64,7 @@ const App = () => {
     <Splitter>
       <Splitter.Panel>
         <Button type="primary" disabled={status === 'loading'} onClick={request}>
-          Request - {BASE_URL}
+          {locale.request} - {BASE_URL}
           {PATH}
         </Button>
       </Splitter.Panel>
@@ -61,13 +72,13 @@ const App = () => {
         <ThoughtChain
           items={[
             {
-              title: 'Request Log',
+              title: locale.requestLog,
               status: thoughtChainStatus,
               icon: status === 'pending' ? <LoadingOutlined /> : <TagsOutlined />,
-              description: `request ${status}`,
+              description: locale.requestStatus(status),
               content: (
                 <Descriptions column={1}>
-                  <Descriptions.Item label="Status">{status || '-'}</Descriptions.Item>
+                  <Descriptions.Item label={locale.status}>{status || '-'}</Descriptions.Item>
                 </Descriptions>
               ),
             },

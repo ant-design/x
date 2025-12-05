@@ -119,7 +119,11 @@ describe('XRequest Class', () => {
     expect(callbacks.onUpdate).not.toHaveBeenCalled();
     const error = new Error('Invalid input parameters');
     error.name = 'ValidationError';
-    expect(callbacks.onError).toHaveBeenCalledWith(error);
+    expect(callbacks.onError).toHaveBeenCalledWith(error, {
+      message: 'Invalid input parameters',
+      name: 'ValidationError',
+      success: false,
+    });
   });
 
   test('should handle JSON response with success false and default error fields', async () => {
@@ -141,7 +145,7 @@ describe('XRequest Class', () => {
     expect(callbacks.onUpdate).not.toHaveBeenCalled();
     const error = new Error('System error');
     error.name = 'SystemError';
-    expect(callbacks.onError).toHaveBeenCalledWith(error);
+    expect(callbacks.onError).toHaveBeenCalledWith(error, { success: false });
   });
 
   test('should handle JSON response with success false and partial error fields', async () => {
@@ -164,7 +168,10 @@ describe('XRequest Class', () => {
     expect(callbacks.onUpdate).not.toHaveBeenCalled();
     const error = new Error('Custom error message');
     error.name = 'SystemError';
-    expect(callbacks.onError).toHaveBeenCalledWith(error);
+    expect(callbacks.onError).toHaveBeenCalledWith(error, {
+      message: 'Custom error message',
+      success: false,
+    });
   });
 
   test('should create request and handle streaming response', async () => {

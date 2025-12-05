@@ -4,12 +4,13 @@ import type { ActionsToken } from '.';
 const genActionsAudioStyle: GenerateStyle<ActionsToken> = (token) => {
   const { componentCls } = token;
   const audioCls = `${componentCls}-audio`;
+
   return {
     [audioCls]: {
-      '&-rtl': {
+      [`&${audioCls}-rtl`]: {
         direction: 'rtl',
       },
-      '&-recording-icon': {
+      [`${audioCls}-recording-icon`]: {
         width: token.fontSize,
         height: token.fontSize,
       },

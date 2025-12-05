@@ -16,7 +16,12 @@ demo:
 
 ## 代码演示
 
-<code src="./demos/x-request/basic.tsx">基础使用</code> <code src="./demos/x-request/custom-params.tsx">自定义入参</code> <code src="./demos/x-request/custom-transformer.tsx">自定义转换器</code> <code src="./demos/x-request/model.tsx">模型接入</code> <code src="./demos/x-request/timeout.tsx">超时配置</code>
+<!-- prettier-ignore -->
+<code src="./demos/x-request/basic.tsx">基础使用</code> 
+<code src="./demos/x-request/custom-params-headers.tsx">请求定制</code> 
+<code src="./demos/x-request/custom-transformer.tsx">自定义转换器</code>
+ <code src="./demos/x-request/manual.tsx">手动触发</code> 
+ <code src="./demos/x-request/timeout.tsx">超时配置</code>
 
 ## API
 
@@ -52,11 +57,11 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
 
 ### XRequestCallbacks
 
-| 属性      | 描述           | 类型                       | 默认值 | 版本 |
-| --------- | -------------- | -------------------------- | ------ | ---- |
-| onSuccess | 成功时的回调   | (chunks: Output[]) => void | -      | -    |
-| onError   | 错误处理的回调 | (error: Error) => void     | -      | -    |
-| onUpdate  | 消息更新的回调 | (chunk: Output) => void    | -      | -    |
+| 属性      | 描述           | 类型                                   | 默认值 | 版本 |
+| --------- | -------------- | -------------------------------------- | ------ | ---- |
+| onSuccess | 成功时的回调   | (chunks: Output[]) => void             | -      | -    |
+| onError   | 错误处理的回调 | (error: Error, errorInfo: any) => void | -      | -    |
+| onUpdate  | 消息更新的回调 | (chunk: Output) => void                | -      | -    |
 
 ### XRequestClass
 

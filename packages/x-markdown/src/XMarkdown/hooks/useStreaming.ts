@@ -224,13 +224,13 @@ const useStreaming = (
         return;
       }
 
-      const cache = cacheRef.current;
-      const expectedPrefix = cache.completeMarkdown + cache.pending;
+      const expectedPrefix = cacheRef.current.completeMarkdown + cacheRef.current.pending;
       // Reset cache if input doesn't continue from previous state
       if (!text.startsWith(expectedPrefix)) {
         cacheRef.current = getInitialCache();
       }
 
+      const cache = cacheRef.current;
       const chunk = text.slice(cache.processedLength);
       if (!chunk) return;
 

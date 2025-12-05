@@ -242,7 +242,7 @@ const getRole = (className: string): BubbleListProps['role'] => ({
       <Footer content={content} status={status} id={key as string} />
     ),
     contentRender: (content: any, { status }) => {
-      const newContent = content.replace('/\n\n/g', '<br/><br/>');
+      const newContent = content.replace(/\n\n/g, '<br/><br/>');
       return (
         <XMarkdown
           paragraphTag="div"
@@ -284,10 +284,16 @@ const App = () => {
         role: 'assistant',
       };
     },
-    requestFallback: (_, { messageInfo }) => {
+    requestFallback: (_, { error, errorInfo, messageInfo }) => {
+      if (error.name === 'AbortError') {
+        return {
+          content: messageInfo?.message?.content || locale.requestAborted,
+          role: 'assistant',
+        };
+      }
       return {
-        ...messageInfo?.message,
-        content: messageInfo?.message.content || locale.requestFailedPleaseTryAgain,
+        content: errorInfo?.error?.message || locale.requestFailed,
+        role: 'assistant',
       };
     },
   });

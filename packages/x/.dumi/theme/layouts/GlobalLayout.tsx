@@ -144,7 +144,6 @@ const GlobalLayout: React.FC = () => {
       // index page should always use dark theme
       algorithm: isIndexPage ? getAlgorithm(['dark']) : getAlgorithm(theme),
       token: { motion: !theme.includes('motion-off') },
-      hashed: false,
     }),
     [theme, pathname, isIndexPage],
   );

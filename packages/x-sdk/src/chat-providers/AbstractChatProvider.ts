@@ -1,6 +1,6 @@
-import { AnyObject } from '../../_util/type';
-import { AbstractXRequestClass, XRequestCallbacks, XRequestOptions } from '../../x-request';
-import { MessageStatus } from '..';
+import { AnyObject } from '../_util/type';
+import { MessageStatus } from '../x-chat';
+import { AbstractXRequestClass, XRequestCallbacks, XRequestOptions } from '../x-request';
 
 export interface ChatProviderConfig<Input, Output> extends AnyObject {
   request: AbstractXRequestClass<Input, Output> | (() => AbstractXRequestClass<Input, Output>);
@@ -69,7 +69,7 @@ export default abstract class AbstractChatProvider<ChatMessage, Input, Output> {
   }: {
     onUpdate: (data: Output, responseHeaders: Headers) => void;
     onSuccess: (data: Output[], responseHeaders: Headers) => void;
-    onError: (error: any) => void;
+    onError: (error: any, errorInfo?: any) => void;
   }) {
     const originalOnUpdate = this._originalCallbacks?.onUpdate;
     const originalOnSuccess = this._originalCallbacks?.onSuccess;
@@ -83,9 +83,9 @@ export default abstract class AbstractChatProvider<ChatMessage, Input, Output> {
         onSuccess(data, responseHeaders);
         if (originalOnSuccess) originalOnSuccess(data, responseHeaders);
       },
-      onError: (error) => {
-        onError(error);
-        if (originalOnError) originalOnError(error);
+      onError: (error, errorInfo) => {
+        onError(error, errorInfo);
+        if (originalOnError) originalOnError(error, errorInfo);
       },
     } as XRequestCallbacks<Output>;
   }

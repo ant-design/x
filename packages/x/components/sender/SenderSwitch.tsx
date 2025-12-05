@@ -128,13 +128,13 @@ const SenderSwitch = React.forwardRef<SenderSwitchRef, SenderSwitchProps>((props
       <Button
         disabled={disabled}
         loading={loading}
+        className={classnames(`${switchCls}-content`, classNames.content)}
+        style={styles.content}
         styles={{
           icon: styles.icon,
-          root: styles.content,
           content: styles.title,
         }}
         classNames={{
-          root: classnames(`${switchCls}-content`, classNames.content),
           icon: classNames.icon,
           content: classNames.title,
         }}

@@ -5,20 +5,36 @@ import { XRequest } from '@ant-design/x-sdk';
 import { Button, Descriptions, Splitter } from 'antd';
 import React from 'react';
 
-/**
- * 🔔 Please replace the BASE_URL, PATH with your own values.
- */
-const BASE_URL = 'https://api.example.com';
-const PATH = '/get-user-info';
+const QUERY_URL = 'https://api.x.ant.design/api/default_chat_provider_stream';
+
+const useLocale = () => {
+  const isCN = typeof location !== 'undefined' ? location.pathname.endsWith('-cn') : false;
+  return {
+    request: isCN ? '请求' : 'Request',
+    requestLog: isCN ? '请求日志' : 'Request Log',
+    status: isCN ? '状态' : 'Status',
+    updateTimes: isCN ? '更新次数' : 'Update Times',
+    replaceNotice: isCN
+      ? '请替换 BASE_URL、PATH 为您自己的值'
+      : 'Please replace the BASE_URL, PATH, with your own values.',
+    sendRequest: isCN
+      ? '发送请求：使用XRequest进行API调用'
+      : 'Send request: use XRequest for API call',
+  };
+};
 
 const App = () => {
   const [status, setStatus] = React.useState<ThoughtChainItemType['status']>();
   const [lines, setLines] = React.useState<Record<string, string>[]>([]);
+  const locale = useLocale();
 
-  function request() {
+  // 发送请求：使用XRequest进行API调用
+  const request = () => {
     setStatus('loading');
-
-    XRequest(BASE_URL + PATH, {
+    XRequest(QUERY_URL, {
+      params: {
+        query: 'X',
+      },
       callbacks: {
         onSuccess: (messages) => {
           setStatus('success');
@@ -34,29 +50,27 @@ const App = () => {
         },
       },
     });
-  }
+  };
 
   return (
     <Splitter>
       <Splitter.Panel>
         <Button type="primary" disabled={status === 'loading'} onClick={request}>
-          Request - {BASE_URL}
-          {PATH}
+          {locale.request} - {QUERY_URL}
         </Button>
       </Splitter.Panel>
       <Splitter.Panel style={{ marginLeft: 16 }}>
         <ThoughtChain
           items={[
             {
-              title: 'Request Log',
+              title: locale.requestLog,
               status: status,
               icon: status === 'loading' ? <LoadingOutlined /> : <TagsOutlined />,
-              description:
-                status === 'error' && 'Please replace the BASE_URL, PATH, with your own values.',
+              description: status === 'error' && locale.replaceNotice,
               content: (
                 <Descriptions column={1}>
-                  <Descriptions.Item label="Status">{status || '-'}</Descriptions.Item>
-                  <Descriptions.Item label="Update Times">{lines.length}</Descriptions.Item>
+                  <Descriptions.Item label={locale.status}>{status || '-'}</Descriptions.Item>
+                  <Descriptions.Item label={locale.updateTimes}>{lines.length}</Descriptions.Item>
                 </Descriptions>
               ),
             },
