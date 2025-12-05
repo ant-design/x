@@ -21,7 +21,7 @@ tag: vVERSION
 
 ### @ant-design/x
 
-- 🐛 Bubble css token `typingContent` 配置不生效问题。[#1435](https://github.com/ant-design/x/pull/1435) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- 🐛 修复 Bubble css token `typingContent` 配置不生效问题。[#1435](https://github.com/ant-design/x/pull/1435) 由 [@kimteayon](https://github.com/kimteayon) 提交
 - 🐛 修复因 antd 升级到 6.0.1 导致多个组件样式丢失问题。[#1441](https://github.com/ant-design/x/pull/1441) 由 [@kimteayon](https://github.com/kimteayon) 提交、[#1446](https://github.com/ant-design/x/pull/1446) 由 [@kimteayon](https://github.com/kimteayon) 提交
 - 🐛 修复 Bubble.List 在 safari 浏览器滚动兼容性问题。[#1392](https://github.com/ant-design/x/pull/1392) 由 [@anxLiang](https://github.com/anxLiang) 提交
 - 🔥 新组件 HighlightCode 和 Mermaid。[#1402](https://github.com/ant-design/x/pull/1402) 由 [@Div627](https://github.com/Div627) 提交
