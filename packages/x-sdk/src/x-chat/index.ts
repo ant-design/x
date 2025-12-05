@@ -104,8 +104,8 @@ export default function useXChat<
   );
 
   useEffect(() => {
-    if (conversationKey) {
-      setConversationKey(conversationKey);
+    if (originalConversationKey) {
+      setConversationKey(originalConversationKey);
     }
   }, [originalConversationKey]);
 
