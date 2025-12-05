@@ -1,9 +1,9 @@
 import { useEffect, useState, useSyncExternalStore } from 'react';
 
-type ConversationKey = string | number;
+export type ConversationKey = string | number | symbol;
 
 export const chatMessagesStoreHelper = {
-  _chatMessagesStores: new Map<string | number, ChatMessagesStore<any>>(),
+  _chatMessagesStores: new Map<ConversationKey, ChatMessagesStore<any>>(),
   get: (conversationKey: ConversationKey) => {
     return chatMessagesStoreHelper._chatMessagesStores.get(conversationKey);
   },
@@ -104,10 +104,10 @@ type Getter<T> = () => T;
 
 export function useChatStore<T extends { id: number | string }>(
   defaultValue: T[] | Getter<T[]>,
-  conversationKey?: ConversationKey,
+  conversationKey: ConversationKey,
 ) {
   const createStore = () => {
-    if (conversationKey && chatMessagesStoreHelper.get(conversationKey)) {
+    if (chatMessagesStoreHelper.get(conversationKey)) {
       return chatMessagesStoreHelper.get(conversationKey) as ChatMessagesStore<T>;
     }
     const messages =

@@ -1,11 +1,11 @@
 import { useEvent } from 'rc-util';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { AnyObject } from '../_util/type';
 import { AbstractChatProvider } from '../chat-providers';
 import { ConversationData } from '../x-conversations';
 import { AbstractXRequestClass } from '../x-request';
 import type { SSEOutput } from '../x-stream';
-import { useChatStore } from './store';
+import { ConversationKey, useChatStore } from './store';
 
 export type SimpleType = string | number | boolean | object;
 
@@ -76,7 +76,8 @@ function toArray<T>(item: T | T[]): T[] {
   return Array.isArray(item) ? item : [item];
 }
 
-const IsRequestingMap = new Map<string, boolean>();
+const IsRequestingMap = new Map<ConversationKey, boolean>();
+const generateConversationKey = () => Symbol('ConversationKey');
 
 export default function useXChat<
   ChatMessage extends SimpleType = string,
@@ -90,13 +91,23 @@ export default function useXChat<
     requestPlaceholder,
     parser,
     provider,
-    conversationKey,
+    conversationKey: originalConversationKey,
   } = config;
 
   // ========================= Agent Messages =========================
   const idRef = React.useRef(0);
   const requestHandlerRef = React.useRef<AbstractXRequestClass<Input, Output>>(undefined);
   const [isRequesting, setIsRequesting] = useState<boolean>(false);
+  // fix #1431, should give a default key to create store
+  const [conversationKey, setConversationKey] = useState(
+    originalConversationKey || generateConversationKey(),
+  );
+
+  useEffect(() => {
+    if (originalConversationKey) {
+      setConversationKey(originalConversationKey);
+    }
+  }, [originalConversationKey]);
 
   const { messages, setMessages, getMessages, setMessage } = useChatStore<MessageInfo<ChatMessage>>(
     () =>
