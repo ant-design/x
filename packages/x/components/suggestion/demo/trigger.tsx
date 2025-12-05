@@ -31,7 +31,7 @@ const Demo: React.FC = () => {
               },
             }}
             onChange={(nextTags) => {
-              if (nextTags.length < tags.length) {
+              if (nextTags.length > tags.length) {
                 setTags(nextTags);
               }
             }}
