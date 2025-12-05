@@ -16,6 +16,33 @@ tag: vVERSION
 
 ---
 
+## 2.1.0
+
+`2025-12-05`
+
+### @ant-design/x
+
+- 🐛 Fixed Bubble css token `typingContent` configuration not taking effect. [#1435](https://github.com/ant-design/x/pull/1435) by [@kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed multiple component style loss issues caused by antd upgrade to 6.0.1. [#1441](https://github.com/ant-design/x/pull/1441) by [@kimteayon](https://github.com/kimteayon), [#1446](https://github.com/ant-design/x/pull/1446) by [@kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed Bubble.List scrolling compatibility issue in Safari browser. [#1392](https://github.com/ant-design/x/pull/1392) by [@anxLiang](https://github.com/anxLiang)
+- 🔥 New components HighlightCode and Mermaid. [#1402](https://github.com/ant-design/x/pull/1402) by [@Div627](https://github.com/Div627)
+- 🆕 Added semantic implementation for Actions. [#1443](https://github.com/ant-design/x/pull/1443) by [@kimteayon](https://github.com/kimteayon)
+- 🆕 Added semantic implementation for Suggestion, removed duplicate Enter trigger events, fixed the issue of `onSubmit` method being executed multiple times, added complete data return of `selectedOptions` to `onSelect` method, and refactored the option implementation using `useMergedState`. [#1406](https://github.com/ant-design/x/pull/1406) by [@kimteayon](https://github.com/kimteayon)
+- 📖 Optimized official website to improve user experience. [#1444](https://github.com/ant-design/x/pull/1444) by [@kimteayon](https://github.com/kimteayon)
+- 🆕 Added new slot type `content` and skill function `skill` for Sender. [#1377](https://github.com/ant-design/x/pull/1377) by [@kimteayon](https://github.com/kimteayon)
+
+### @ant-design/x-sdk
+
+- 🐛 Fixed DeepSeekChatProvider's improper handling of newline characters in `<think>` tag format causing XMarkdown rendering anomalies. [#1445](https://github.com/ant-design/x/pull/1445) by [@kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed useXChat `setMessages` method call not triggering re-rendering. [#1450](https://github.com/ant-design/x/pull/1450) by [@hylin](https://github.com/hylin)
+- 🐛 Fixed missing rc-util dependency declaration. [#1456](https://github.com/ant-design/x/pull/1456) by [@hylin](https://github.com/hylin)
+
+### @ant-design/x-markdown
+
+- 🐛 Replaced useStreaming regex to resolve iOS compatibility issues. [#1457](https://github.com/ant-design/x/pull/1457) by [@Div627](https://github.com/Div627)
+- 📖 Improved documentation to enhance user experience. [#1451](https://github.com/ant-design/x/pull/1451) by [@Div627](https://github.com/Div627)
+- 🛠 Migrated UI plugins HighlightCode and Mermaid to @ant-design/x to achieve more reasonable dependency relationships. [#1402](https://github.com/ant-design/x/pull/1402) by [@Div627](https://github.com/Div627)
+
 ## 2.0.1
 
 `2025-12-03`

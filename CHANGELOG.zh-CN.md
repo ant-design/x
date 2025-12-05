@@ -21,11 +21,26 @@ tag: vVERSION
 
 ### @ant-design/x
 
-- 🐛 修复因 antd 升级到 6.0.1 导致多个组件样式丢失问题。[#1428](https://github.com/ant-design/x/pull/1428) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- 🐛 Bubble css token `typingContent` 配置不生效问题。[#1435](https://github.com/ant-design/x/pull/1435) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- 🐛 修复因 antd 升级到 6.0.1 导致多个组件样式丢失问题。[#1441](https://github.com/ant-design/x/pull/1441) 由 [@kimteayon](https://github.com/kimteayon) 提交、[#1446](https://github.com/ant-design/x/pull/1446) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- 🐛 修复 Bubble.List 在 safari 浏览器滚动兼容性问题。[#1392](https://github.com/ant-design/x/pull/1392) 由 [@anxLiang](https://github.com/anxLiang) 提交
+- 🔥 新组件 HighlightCode 和 Mermaid。[#1402](https://github.com/ant-design/x/pull/1402) 由 [@Div627](https://github.com/Div627) 提交
+- 🆕 Actions 新增语义化实现。[#1443](https://github.com/ant-design/x/pull/1443) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- 🆕 Suggestion 新增语义化实现，移除重复的 Enter 触发事件，修复 `onSubmit` 方法多次执行的问题，`onSelect` 方法新增 `selectedOptions` 完整数据返回，同时对选项的实现使用 `useMergedState` 进行了重构。[#1406](https://github.com/ant-design/x/pull/1406) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- 📖 优化官网站点提升用户体验。[#1444](https://github.com/ant-design/x/pull/1444) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- 🆕 Sender 新的词槽类型 `content` 和技能功能 `skill`。[#1377](https://github.com/ant-design/x/pull/1377) 由 [@kimteayon](https://github.com/kimteayon) 提交
 
 ### @ant-design/x-sdk
 
+- 🐛 修复 DeepSeekChatProvider 对 `<think>` 标签格式换行处理不当导致 XMarkdown 格式渲染异常问题。[#1445](https://github.com/ant-design/x/pull/1445) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- 🐛 修复 useXChat `setMessages` 方法调用未触发渲染问题。[#1450](https://github.com/ant-design/x/pull/1450) 由 [@hylin](https://github.com/hylin) 提交
+- 🐛 修复 rc-util 依赖未声明问题。[#1456](https://github.com/ant-design/x/pull/1456) 由 [@hylin](https://github.com/hylin) 提交
+
 ### @ant-design/x-markdown
+
+- 🐛 替换 useStreaming 正则解决 ios 兼容性问题。[#1457](https://github.com/ant-design/x/pull/1457) 由 [@Div627](https://github.com/Div627) 提交
+- 📖 完善文档提升用户体验。[#1451](https://github.com/ant-design/x/pull/1451) 由 [@Div627](https://github.com/Div627) 提交
+- 🛠 迁移 UI 插件 HighlightCode 和 Mermaid 到 @ant-design/x 达成更合理的依赖关系。[#1402](https://github.com/ant-design/x/pull/1402) 由 [@Div627](https://github.com/Div627) 提交
 
 ## 2.0.1
 
