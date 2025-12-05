@@ -193,7 +193,7 @@
     "mockdate": "^3.0.5",
     "node-fetch": "^3.3.2",
     "node-notifier": "^10.0.1",
-    "open": "^10.1.0",
+    "open": "^11.0.0",
     "openai": "^5.20.0",
     "ora": "^8.1.0",
     "pixelmatch": "^7.1.0",
