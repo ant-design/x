@@ -49,7 +49,7 @@ Prompts 组件用于显示一组与当前上下文相关的预定义的问题或
 #### SemanticType
 
 ```typescript | pure
-type SemanticType = 'list' | 'item' | 'content' | 'title' | 'subList' | 'subItem';
+type SemanticType = 'root' | 'title' | 'list' | 'item' | 'itemContent' | 'subList' | 'subItem';
 ```
 
 ### PromptProps

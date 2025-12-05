@@ -46,7 +46,7 @@ The Prompts component is used to display a predefined set of questions or sugges
 #### SemanticType
 
 ```typescript | pure
-type SemanticType = 'list' | 'item' | 'content' | 'title' | 'subList' | 'subItem';
+type SemanticType = 'root' | 'title' | 'list' | 'item' | 'itemContent' | 'subList' | 'subItem';
 ```
 
 ### PromptProps
