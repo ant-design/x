@@ -130,7 +130,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const span = document.createElement('span');
     span.setAttribute('contenteditable', 'true');
     span.dataset.slotKey = config.key;
-    span.className = classnames(`${prefixCls}-slot`, `${prefixCls}-slot-content`);
+    span.className = clsx(`${prefixCls}-slot`, `${prefixCls}-slot-content`);
     return span;
   };
 
@@ -139,7 +139,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     span.setAttribute('contenteditable', 'false');
     span.dataset.slotKey = slotKey;
     span.dataset.nodeType = 'nbsp';
-    span.className = classnames(`${prefixCls}-slot-${positions}`, `${prefixCls}-slot-no-width`);
+    span.className = clsx(`${prefixCls}-slot-${positions}`, `${prefixCls}-slot-no-width`);
     span.innerHTML = '&nbsp;';
 
     return span;
