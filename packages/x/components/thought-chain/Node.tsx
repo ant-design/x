@@ -16,7 +16,7 @@ export const ThoughtChainContext = React.createContext<{
   collapseMotion?: CSSMotionProps;
   onItemExpand?: (curKey: string) => void;
   styles?: ThoughtChainProps['styles'];
-  classNames?: ThoughtChainProps['clsx'];
+  classNames?: ThoughtChainProps['classNames'];
 }>(null!);
 
 interface ThoughtChainNodeProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick'> {
