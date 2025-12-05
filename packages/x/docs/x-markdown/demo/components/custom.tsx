@@ -422,29 +422,53 @@ const text = `
 
 const App = () => {
   const [index, setIndex] = React.useState(0);
-  const timer = React.useRef<any>(-1);
+  const timer = React.useRef<NodeJS.Timeout | null>(null);
+  const contentRef = React.useRef<HTMLDivElement>(null);
 
-  const renderStream = () => {
-    if (index >= text.length) {
+  const renderStream = React.useCallback(() => {
+    if (timer.current) {
       clearTimeout(timer.current);
+    }
+
+    if (index >= text.length) {
       return;
     }
+
     timer.current = setTimeout(() => {
-      setIndex((prev) => prev + 10);
-      renderStream();
-    }, 30);
-  };
+      setIndex((prev) => {
+        const next = Math.min(prev + 5, text.length);
+        if (next < text.length) {
+          renderStream();
+        }
+        return next;
+      });
+    }, 20);
+  }, [index]);
 
   React.useEffect(() => {
-    if (index === text.length) return;
     renderStream();
     return () => {
-      clearTimeout(timer.current);
+      if (timer.current) {
+        clearTimeout(timer.current);
+        timer.current = null;
+      }
     };
+  }, [renderStream]);
+
+  React.useEffect(() => {
+    if (contentRef.current && index > 0 && index < text.length) {
+      const { scrollHeight, clientHeight } = contentRef.current;
+      if (scrollHeight > clientHeight) {
+        contentRef.current.scrollTo({
+          top: scrollHeight,
+          behavior: 'smooth',
+        });
+      }
+    }
   }, [index]);
 
   return (
-    <Flex vertical gap="small" style={{ maxWidth: 1200, margin: '0 auto', padding: 20 }}>
+    <Flex vertical gap="small" style={{ height: 600, overflow: 'auto' }} ref={contentRef}>
       <Button style={{ alignSelf: 'flex-end' }} onClick={() => setIndex(0)}>
         Re-render
       </Button>

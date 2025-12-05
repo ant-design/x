@@ -63,42 +63,71 @@ Based on the RICH interaction paradigm, we provide many atomic components for di
 
 const App = () => {
   const [enableAnimation, setEnableAnimation] = React.useState(true);
-  const [hasNextChunk, setHasNextChunk] = React.useState(false);
+  const [hasNextChunk, setHasNextChunk] = React.useState(true);
   const [className] = useMarkdownTheme();
   const [index, setIndex] = React.useState(0);
-  const timer = React.useRef<any>(-1);
+  const timer = React.useRef<NodeJS.Timeout | null>(null);
+  const contentRef = React.useRef<HTMLDivElement>(null);
 
-  const renderStream = () => {
-    if (index >= text.length) {
+  const renderStream = React.useCallback(() => {
+    if (timer.current) {
       clearTimeout(timer.current);
+    }
+
+    if (index >= text.length) {
       setHasNextChunk(false);
       return;
     }
+
     timer.current = setTimeout(() => {
-      setIndex((prev) => prev + 2);
-      renderStream();
+      setIndex((prev) => {
+        const next = Math.min(prev + 2, text.length);
+        if (next < text.length) {
+          renderStream();
+        }
+        return next;
+      });
     }, 30);
-  };
+  }, [index]);
 
   React.useEffect(() => {
-    if (index === text.length) return;
-
-    setHasNextChunk(true);
     renderStream();
     return () => {
-      clearTimeout(timer.current);
+      if (timer.current) {
+        clearTimeout(timer.current);
+        timer.current = null;
+      }
     };
+  }, [renderStream]);
+
+  React.useEffect(() => {
+    if (contentRef.current && index > 0 && index < text.length) {
+      const { scrollHeight, clientHeight } = contentRef.current;
+      if (scrollHeight > clientHeight) {
+        contentRef.current.scrollTo({
+          top: scrollHeight,
+          behavior: 'smooth',
+        });
+      }
+    }
   }, [index]);
 
   return (
-    <Flex style={{ width: '100%' }} vertical gap="small">
+    <Flex vertical gap="small" style={{ height: 600, overflow: 'auto' }} ref={contentRef}>
       <Space align="center" style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Space>
           <Text>Animation</Text>
           <Switch checked={enableAnimation} onChange={setEnableAnimation} />
         </Space>
 
-        <Button onClick={() => setIndex(0)}>Re-Render</Button>
+        <Button
+          onClick={() => {
+            setIndex(0);
+            setHasNextChunk(true);
+          }}
+        >
+          Re-Render
+        </Button>
       </Space>
 
       <Bubble

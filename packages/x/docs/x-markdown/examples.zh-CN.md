@@ -13,7 +13,7 @@ order: 2
 <code src="./demo/codeDemo/basic.tsx" description="markdown 基础语法渲染。" title="基础用法"></code>
 <code src="./demo/streaming/combined.tsx" description="未完成语法处理、动画效果" title="流式处理"></code>
 <code src="./demo/codeDemo/supersets.tsx" description="使用插件渲染。" title="插件使用"></code>
-<code src="./demo/codeDemo/components.tsx" description="自定义组件渲染标签。" title="自定义组件"></code>
+<code src="./demo/components/dataChart.tsx" description="自定义组件渲染标签。" title="自定义组件"></code>
 <code src="./demo/codeDemo/plugin.tsx" title="自定义拓展插件"></code>
 <code src="./demo/codeDemo/tokenizer.tsx" title="自定义标记"></code>
 <code src="./demo/codeDemo/walkTokens.tsx" title="标记处理"></code>
