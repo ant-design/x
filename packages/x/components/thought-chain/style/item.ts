@@ -83,7 +83,7 @@ const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (
       },
       [`&${itemCls}-click`]: {
         cursor: 'pointer',
-        transition: `all ${token.motionDurationMid}  ${token.motionEaseInOut}`,
+        transition: `all ${token.motionDurationMid} ${token.motionEaseInOut}`,
         [`&${itemCls}-solid:hover`]: {
           background: token.itemSolidHoverBg,
         },
