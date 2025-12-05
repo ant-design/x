@@ -11,10 +11,10 @@ const Demo: React.FC = () => {
   return (
     <Suggestion<string>
       items={(info) => [{ label: `Trigger by '${info}'`, value: String(info) }]}
-      onSelect={(info) => {
+      onSelect={() => {
         uuid += 1;
-        setTags([...tags, `Cell_${uuid}`]);
-        setValue(value.replace(info, ''));
+        setTags([...tags, `Cell_${value.replace('/g', '')}`]);
+        setValue('');
       }}
     >
       {({ onTrigger, onKeyDown }) => {
@@ -24,14 +24,16 @@ const Demo: React.FC = () => {
             style={{ width: '100%' }}
             mode="tags"
             open={false}
-            searchValue={value}
+            showSearch={{
+              searchValue: value,
+              onSearch: (nextVal) => {
+                setValue(nextVal);
+              },
+            }}
             onChange={(nextTags) => {
               if (nextTags.length < tags.length) {
                 setTags(nextTags);
               }
-            }}
-            onSearch={(nextVal) => {
-              setValue(nextVal);
             }}
             onKeyDown={(e) => {
               if (e.key === '/' || e.key === '#') {

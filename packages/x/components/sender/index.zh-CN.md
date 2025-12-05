@@ -47,7 +47,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 | defaultValue | 输入框默认值 | string | - | - |
 | disabled | 是否禁用 | boolean | false | - |
 | loading | 是否加载中 | boolean | false | - |
-| suffix | 后缀内容，默认展示操作按钮，当不需要默认操作按钮时，可以设为 `suffix={false}` | React.ReactNode \| false \|(oriNode: React.ReactNode,info: { components: ActionsComponents;}) => React.ReactNode \| false; | oriNode | - |
+| suffix | 后缀内容，默认展示操作按钮，当不需要默认操作按钮时，可以设为 `suffix={false}` | React.ReactNode \| false \|(oriNode: React.ReactNode,info: { components: ActionsComponents;}) => React.ReactNode \| false; | oriNode | 2.0.0 |
 | header | 头部面板 | React.ReactNode \| false \|(oriNode: React.ReactNode,info: { components: ActionsComponents;}) => React.ReactNode \| false; | false | - |
 | prefix | 前缀内容 | React.ReactNode \| false \|(oriNode: React.ReactNode,info: { components: ActionsComponents;}) => React.ReactNode \| false; | false | - |
 | footer | 底部内容 | React.ReactNode \| false \|(oriNode: React.ReactNode,info: { components: ActionsComponents;}) => React.ReactNode \| false; | false | - |
@@ -56,12 +56,28 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 | styles | 语义化定义样式 | [见下](#semantic-dom) | - | - |
 | submitType | 提交模式 | SubmitType | `enter` \| `shiftEnter` | - |
 | value | 输入框值 | string | - | - |
-| onSubmit | 点击发送按钮的回调 | (message: string, slotConfig?: SlotConfigType[]) => void | - | - |
-| onChange | 输入框值改变的回调 | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`>, slotConfig?: SlotConfigType[]) => void | - | - |
+| onSubmit | 点击发送按钮的回调 | (message: string, slotConfig?: SlotConfigType[], skill: SkillType) => void | - | - |
+| onChange | 输入框值改变的回调 | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`>, slotConfig: SlotConfigType[],skill: SkillType) => void | - | - |
 | onCancel | 点击取消按钮的回调 | () => void | - | - |
 | onPasteFile | 黏贴文件的回调 | (files: FileList) => void | - | - |
 | autoSize | 自适应内容高度，可设置为 true \| false 或对象：{ minRows: 2, maxRows: 6 } | boolean \| { minRows?: number; maxRows?: number } | { maxRows: 8 } | - |
-| slotConfig | 词槽配置，配置后输入框将变为词槽模式，支持结构化输入，此模式`value` 和 `defaultValue` 配置将无效。 | SlotConfigType[] | - | - |
+| slotConfig | 词槽配置，配置后输入框将变为词槽模式，支持结构化输入，此模式`value` 和 `defaultValue` 配置将无效。 | SlotConfigType[] | - | 2.0.0 |
+| skill | 技能配置，输入框将变为词槽模式，支持结构化输入，此模式`value` 和 `defaultValue` 配置将无效。 | SkillType | - | 2.0.0 |
+
+```typescript | pure
+interface SkillType {
+  title?: React.ReactNode;
+  value: string;
+  toolTip?: TooltipProps;
+  closable?:
+    | boolean
+    | {
+        closeIcon?: React.ReactNode;
+        onClose?: React.MouseEventHandler<HTMLDivElement>;
+        disabled?: boolean;
+      };
+}
+```
 
 ```typescript | pure
 type SpeechConfig = {
@@ -90,50 +106,50 @@ type ActionsComponents = {
 | blur | 取消焦点 | () => void | - | - |
 | insert | 插入文本或者插槽，使用插槽时需确保 slotConfig 已配置 | (value: string) => void \| (slotConfig: SlotConfigType[], position?: insertPosition, replaceCharacters?: string) => void; | - | - |
 | clear | 清空内容 | () => void | - | - |
-| getValue | 获取当前内容和结构化配置 | () => { value: string; config: SlotConfigType[] } | - | - |
+| getValue | 获取当前内容和结构化配置 | () => { value: string; slotConfig: SlotConfigType[],skill: SkillType } | - | - |
 
 #### SlotConfigType
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| type | 节点类型，决定渲染组件类型，必填 | 'text' \| 'input' \| 'select' \| 'tag' \| 'custom' | - | - |
+| type | 节点类型，决定渲染组件类型，必填 | 'text' \| 'input' \| 'select' \| 'tag' \| 'custom' | - | 2.0.0 |
 | key | 唯一标识，type 为 text 时可省略 | string | - | - |
-| formatResult | 格式化最终结果 | (value: any) => string | - | - |
+| formatResult | 格式化最终结果 | (value: any) => string | - | 2.0.0 |
 
 ##### text 节点属性
 
-| 属性 | 说明     | 类型   | 默认值 | 版本 |
-| ---- | -------- | ------ | ------ | ---- |
-| text | 文本内容 | string | -      | -    |
+| 属性 | 说明     | 类型   | 默认值 | 版本  |
+| ---- | -------- | ------ | ------ | ----- |
+| text | 文本内容 | string | -      | 2.0.0 |
 
 ##### input 节点属性
 
-| 属性               | 说明   | 类型                                  | 默认值 | 版本 |
-| ------------------ | ------ | ------------------------------------- | ------ | ---- |
-| props.placeholder  | 占位符 | string                                | -      | -    |
-| props.defaultValue | 默认值 | string \| number \| readonly string[] | -      | -    |
+| 属性               | 说明   | 类型                                  | 默认值 | 版本  |
+| ------------------ | ------ | ------------------------------------- | ------ | ----- |
+| props.placeholder  | 占位符 | string                                | -      | 2.0.0 |
+| props.defaultValue | 默认值 | string \| number \| readonly string[] | -      | 2.0.0 |
 
 ##### select 节点属性
 
-| 属性               | 说明           | 类型     | 默认值 | 版本 |
-| ------------------ | -------------- | -------- | ------ | ---- |
-| props.options      | 选项数组，必填 | string[] | -      | -    |
-| props.placeholder  | 占位符         | string   | -      | -    |
-| props.defaultValue | 默认值         | string   | -      | -    |
+| 属性               | 说明           | 类型     | 默认值 | 版本  |
+| ------------------ | -------------- | -------- | ------ | ----- |
+| props.options      | 选项数组，必填 | string[] | -      | 2.0.0 |
+| props.placeholder  | 占位符         | string   | -      | 2.0.0 |
+| props.defaultValue | 默认值         | string   | -      | 2.0.0 |
 
 ##### tag 节点属性
 
-| 属性        | 说明           | 类型      | 默认值 | 版本 |
-| ----------- | -------------- | --------- | ------ | ---- |
-| props.label | 标签内容，必填 | ReactNode | -      | -    |
-| props.value | 标签值         | string    | -      | -    |
+| 属性        | 说明           | 类型      | 默认值 | 版本  |
+| ----------- | -------------- | --------- | ------ | ----- |
+| props.label | 标签内容，必填 | ReactNode | -      | 2.0.0 |
+| props.value | 标签值         | string    | -      | 2.0.0 |
 
 ##### custom 节点属性
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| props.defaultValue | 默认值 | any | - | - |
-| customRender | 自定义渲染函数 | (value: any, onChange: (value: any) => void, props: { disabled？:boolean,readOnly？: boolean},item: SlotConfigType) => React.ReactNode | - | - |
+| props.defaultValue | 默认值 | any | - | 2.0.0 |
+| customRender | 自定义渲染函数 | (value: any, onChange: (value: any) => void, props: { disabled？:boolean,readOnly？: boolean},item: SlotConfigType) => React.ReactNode | - | 2.0.0 |
 
 ### Sender.Header
 
@@ -150,17 +166,17 @@ type ActionsComponents = {
 
 ### Sender.Switch
 
-| 属性              | 说明             | 类型                       | 默认值 | 版本 |
-| ----------------- | ---------------- | -------------------------- | ------ | ---- |
-| children          | 通用内容         | ReactNode                  | -      | -    |
-| checkedChildren   | 选中时的内容     | ReactNode                  | -      |
-| unCheckedChildren | 非选中时的内容   | ReactNode                  | -      |
-| icon              | 设置图标组件     | ReactNode                  | -      |
-| disabled          | 是否禁用         | boolean                    | false  | -    |
-| loading           | 加载中的开关     | boolean                    | -      | -    |
-| value             | 开关的值         | boolean                    | false  | -    |
-| onChange          | 变化时的回调函数 | function(checked: boolean) | -      | -    |
-| rootClassName     | 根元素样式类     | string                     | -      | -    |
+| 属性              | 说明             | 类型                       | 默认值 | 版本  |
+| ----------------- | ---------------- | -------------------------- | ------ | ----- |
+| children          | 通用内容         | ReactNode                  | -      | 2.0.0 |
+| checkedChildren   | 选中时的内容     | ReactNode                  | -      | 2.0.0 |
+| unCheckedChildren | 非选中时的内容   | ReactNode                  | -      | 2.0.0 |
+| icon              | 设置图标组件     | ReactNode                  | -      | 2.0.0 |
+| disabled          | 是否禁用         | boolean                    | false  | 2.0.0 |
+| loading           | 加载中的开关     | boolean                    | -      | 2.0.0 |
+| value             | 开关的值         | boolean                    | false  | 2.0.0 |
+| onChange          | 变化时的回调函数 | function(checked: boolean) | -      | 2.0.0 |
+| rootClassName     | 根元素样式类     | string                     | -      | 2.0.0 |
 
 ### ⚠️ 词槽模式注意事项
 
@@ -170,12 +186,15 @@ type ActionsComponents = {
 **示例：**
 
 ```jsx
-// ❌ 错误用法, slotConfig 为不受控用法
+// ❌ 错误用法, slotConfig 和 skill 为不受控用法
 const [config, setConfig] = useState([]);
+const [skill, setSkill] = useState([]);
 <Sender
   slotConfig={config}
-  onChange={(value, e, config) => {
+  skill={skill}
+  onChange={(value, e, config,skill) => {
     setConfig(config);
+    setSkill(skill)
   }}
 />
 
@@ -183,9 +202,11 @@ const [config, setConfig] = useState([]);
 <Sender
   key={key}
   slotConfig={config}
-  onChange={(value, _e, config) => {
+  skill={skill}
+  onChange={(value, _e, config, skill) => {
     // 仅用于获取结构化内容
     setKey('new_key')
+
   }}
 />
 ```

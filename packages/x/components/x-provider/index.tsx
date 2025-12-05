@@ -22,7 +22,7 @@ const XProvider: React.FC<XProviderProps> = (props) => {
     locale,
     children,
     mermaid,
-    highlightCode,
+    codeHighlighter,
     ...antdConfProps
   } = props;
 
@@ -39,7 +39,7 @@ const XProvider: React.FC<XProviderProps> = (props) => {
       fileCard,
       think,
       mermaid,
-      highlightCode,
+      codeHighlighter,
       welcome,
     };
   }, [
@@ -55,7 +55,7 @@ const XProvider: React.FC<XProviderProps> = (props) => {
     mermaid,
     think,
     fileCard,
-    highlightCode,
+    codeHighlighter,
   ]);
 
   let childNode = children;

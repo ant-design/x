@@ -9,6 +9,9 @@ demo:
   cols: 1
 cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*pJrtTaf-bWAAAAAAAAAAAAAADgCCAQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*6ySvTqb7XhkAAAAAAAAAAAAADgCCAQ/original
+tag: 2.0.0
+demo:
+  cols: 2
 ---
 
 ## When To Use
@@ -43,7 +46,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | loading | Loading state | boolean | false | - |
 | type | File type | 'file' \| 'image' \| 'audio' \| 'video' \| string | - | - |
 | src | Image or file URL | string | - | - |
-| mask | Mask content, image preview. This configuration is not effective. Please refer to the imageProps property | React.ReactNode | - | - |
+| mask | Mask content. For `type="image"`, this is configured via `imageProps.preview.mask`,This prop only applies to non-image file types. | React.ReactNode | - | - |
 | icon | Custom icon | React.ReactNode \| PresetIcons | - | - |
 | imageProps | Image props configuration | [Image](https://ant.design/components/image-cn#api) | - | - |
 | videoProps | Video props configuration | Partial<React.JSX.IntrinsicElements['video']> | - | - |

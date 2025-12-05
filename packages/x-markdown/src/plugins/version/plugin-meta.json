@@ -1,0 +1,7 @@
+[
+  {
+    "plugin": "Latex",
+    "desc": "渲染数学公式Latex语法。",
+    "descEn": "Rendering mathematical formulas using Latex syntax."
+  }
+]

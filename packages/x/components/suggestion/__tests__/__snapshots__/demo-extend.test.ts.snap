@@ -3,7 +3,7 @@
 exports[`renders components/suggestion/demo/basic.tsx extend context correctly 1`] = `
 Array [
   <div
-    class="ant-suggestion ant-suggestion-wrapper css-var-_r_9_"
+    class="ant-suggestion ant-suggestion-content css-var-_r_9_"
   >
     <div
       class="ant-sender css-var-_r_9_"
@@ -178,7 +178,7 @@ exports[`renders components/suggestion/demo/basic.tsx extend context correctly 2
 exports[`renders components/suggestion/demo/block.tsx extend context correctly 1`] = `
 Array [
   <div
-    class="ant-suggestion ant-suggestion-wrapper css-var-_r_5_"
+    class="ant-suggestion ant-suggestion-content css-var-_r_5_"
   >
     <div
       class="ant-sender css-var-_r_5_"
@@ -294,7 +294,11 @@ Array [
                 <div
                   class="ant-suggestion-item-extra"
                 >
-                  Extra Info
+                  <span
+                    class="ant-tag ant-tag-filled css-var-_r_5_"
+                  >
+                    Extra Info
+                  </span>
                 </div>
               </div>
             </div>
@@ -315,7 +319,7 @@ exports[`renders components/suggestion/demo/block.tsx extend context correctly 2
 exports[`renders components/suggestion/demo/trigger.tsx extend context correctly 1`] = `
 Array [
   <div
-    class="ant-suggestion ant-suggestion-wrapper css-var-_r_0_"
+    class="ant-suggestion ant-suggestion-content css-var-_r_0_"
   >
     <div
       class="ant-select ant-select-outlined css-var-_r_0_ ant-select-css-var ant-select-multiple ant-select-show-arrow ant-select-show-search"

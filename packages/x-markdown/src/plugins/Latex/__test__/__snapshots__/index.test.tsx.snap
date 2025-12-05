@@ -3,8 +3,7 @@
 exports[`LaTeX Plugin should handle LaTeX with surrounding text 1`] = `
 <div>
   <div
-    class="ant-x-markdown x-markdown"
-    style="direction: ltr;"
+    class="x-markdown"
   >
     <p>
       This is an equation: 
@@ -117,8 +116,7 @@ exports[`LaTeX Plugin should handle LaTeX with surrounding text 1`] = `
 exports[`LaTeX Plugin should handle align* syntax replacement 1`] = `
 <div>
   <div
-    class="ant-x-markdown x-markdown"
-    style="direction: ltr;"
+    class="x-markdown"
   >
     <p>
       <span
@@ -350,8 +348,7 @@ exports[`LaTeX Plugin should handle align* syntax replacement 1`] = `
 exports[`LaTeX Plugin should handle complex LaTeX expressions 1`] = `
 <div>
   <div
-    class="ant-x-markdown x-markdown"
-    style="direction: ltr;"
+    class="x-markdown"
   >
     <p>
       <span
@@ -733,8 +730,7 @@ exports[`LaTeX Plugin should handle complex LaTeX expressions 1`] = `
 exports[`LaTeX Plugin should handle content without LaTeX 1`] = `
 <div>
   <div
-    class="ant-x-markdown x-markdown"
-    style="direction: ltr;"
+    class="x-markdown"
   >
     <p>
       Just plain text
@@ -748,8 +744,7 @@ exports[`LaTeX Plugin should handle empty content 1`] = `<div />`;
 exports[`LaTeX Plugin should handle mixed LaTeX syntaxes 1`] = `
 <div>
   <div
-    class="ant-x-markdown x-markdown"
-    style="direction: ltr;"
+    class="x-markdown"
   >
     <p>
       Inline: 
@@ -966,8 +961,7 @@ exports[`LaTeX Plugin should handle mixed LaTeX syntaxes 1`] = `
 exports[`LaTeX Plugin should handle multiple LaTeX formulas 1`] = `
 <div>
   <div
-    class="ant-x-markdown x-markdown"
-    style="direction: ltr;"
+    class="x-markdown"
   >
     <p>
       <span
@@ -1148,8 +1142,7 @@ exports[`LaTeX Plugin should handle multiple LaTeX formulas 1`] = `
 exports[`LaTeX Plugin should not throw error by default 1`] = `
 <div>
   <div
-    class="ant-x-markdown x-markdown"
-    style="direction: ltr;"
+    class="x-markdown"
   >
     <p>
       latex: 
@@ -1174,8 +1167,7 @@ exports[`LaTeX Plugin should not throw error by default 1`] = `
 exports[`LaTeX Plugin should render block LaTeX with $$..$$ syntax 1`] = `
 <div>
   <div
-    class="ant-x-markdown x-markdown"
-    style="direction: ltr;"
+    class="x-markdown"
   >
     <p>
       <span
@@ -1299,8 +1291,7 @@ exports[`LaTeX Plugin should render block LaTeX with $$..$$ syntax 1`] = `
 exports[`LaTeX Plugin should render block LaTeX with \\[..\\] syntax 1`] = `
 <div>
   <div
-    class="ant-x-markdown x-markdown"
-    style="direction: ltr;"
+    class="x-markdown"
   >
     <span
       class="katex-display"
@@ -1418,8 +1409,7 @@ exports[`LaTeX Plugin should render block LaTeX with \\[..\\] syntax 1`] = `
 exports[`LaTeX Plugin should render inline LaTeX with $$\\n..\\n$$ syntax 1`] = `
 <div>
   <div
-    class="ant-x-markdown x-markdown"
-    style="direction: ltr;"
+    class="x-markdown"
   >
     <p>
       latex: 
@@ -1681,8 +1671,7 @@ exports[`LaTeX Plugin should render inline LaTeX with $$\\n..\\n$$ syntax 1`] = 
 exports[`LaTeX Plugin should render inline LaTeX with $..$ syntax 1`] = `
 <div>
   <div
-    class="ant-x-markdown x-markdown"
-    style="direction: ltr;"
+    class="x-markdown"
   >
     <p>
       <span
@@ -1793,8 +1782,7 @@ exports[`LaTeX Plugin should render inline LaTeX with $..$ syntax 1`] = `
 exports[`LaTeX Plugin should render inline LaTeX with [\\n..\\n] syntax 1`] = `
 <div>
   <div
-    class="ant-x-markdown x-markdown"
-    style="direction: ltr;"
+    class="x-markdown"
   >
     <p>
       latex: 
