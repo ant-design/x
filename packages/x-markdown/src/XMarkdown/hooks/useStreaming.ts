@@ -165,17 +165,22 @@ const sanitizeForURIComponent = (input: string): string => {
 
     // 处理代理对：保留合法，跳过孤立
     if (charCode >= 0xd800 && charCode <= 0xdbff) {
-      if (i + 1 < input.length) {
-        const nextCharCode = input.charCodeAt(i + 1);
-        if (nextCharCode >= 0xdc00 && nextCharCode <= 0xdfff) {
-          result += input[i] + input[i + 1];
-          i++;
-        }
+      // High surrogate
+      // Check for a following low surrogate to form a valid pair
+      if (
+        i + 1 < input.length &&
+        input.charCodeAt(i + 1) >= 0xdc00 &&
+        input.charCodeAt(i + 1) <= 0xdfff
+      ) {
+        result += input[i] + input[i + 1];
+        i++; // Skip the low surrogate as it's already processed
       }
-    } else if (charCode >= 0xdc00 && charCode <= 0xdfff) {
-    } else {
+      // Lone high surrogates are otherwise skipped
+    } else if (charCode < 0xdc00 || charCode > 0xdfff) {
+      // Append characters that are not lone low surrogates
       result += input[i];
     }
+    // Lone low surrogates are otherwise skipped
   }
   return result;
 };
