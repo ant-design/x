@@ -43,12 +43,6 @@ The Prompts component is used to display a predefined set of questions or sugges
 | fadeIn | Fade in effect | boolean | - | - |
 | fadeInLeft | Fade left in effect | boolean | - | - |
 
-#### SemanticType
-
-```typescript | pure
-type SemanticType = 'root' | 'title' | 'list' | 'item' | 'itemContent' | 'subList' | 'subItem';
-```
-
 ### PromptProps
 
 | Property | Description | Type | Default | Version |
