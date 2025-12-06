@@ -31,11 +31,7 @@ const Demo: React.FC = () => {
               },
             }}
             onChange={(nextTags) => {
-              if (nextTags.length > tags.length) {
-                setTags(nextTags);
-              } else if (nextTags.length < tags.length) {
-                setTags(nextTags);
-              }
+              setTags(nextTags);
             }}
             onKeyDown={(e) => {
               if (e.key === '/' || e.key === '#') {
