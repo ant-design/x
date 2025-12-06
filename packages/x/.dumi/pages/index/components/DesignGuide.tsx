@@ -1,6 +1,6 @@
 import { Button } from 'antd';
 import { createStyles } from 'antd-style';
-import classnames from 'classnames';
+import { clsx } from 'clsx';
 import { useLocation, useNavigate } from 'dumi';
 import React from 'react';
 import useLocale from '../../../hooks/useLocale';
@@ -224,7 +224,7 @@ const DesignGuide: React.FC = () => {
             return (
               <div className={styles.chain_item} key={item.label}>
                 <div>
-                  <div className={classnames(styles.chain_item_icon)}>
+                  <div className={clsx(styles.chain_item_icon)}>
                     <img alt="icon" src={item.icon} loading="lazy" />
                     <img
                       alt="icon"

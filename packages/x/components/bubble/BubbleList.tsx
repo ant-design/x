@@ -1,6 +1,6 @@
-import classnames from 'classnames';
-import omit from 'rc-util/es/omit';
-import pickAttrs from 'rc-util/es/pickAttrs';
+import omit from '@rc-component/util/es/omit';
+import pickAttrs from '@rc-component/util/es/pickAttrs';
+import { clsx } from 'clsx';
 import * as React from 'react';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import { useXProviderContext } from '../x-provider';
@@ -149,7 +149,7 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
 
   const [hashId, cssVarCls] = useBubbleListStyle(prefixCls);
 
-  const mergedClassNames = classnames(
+  const mergedClassNames = clsx(
     listPrefixCls,
     rootClassName,
     className,
@@ -213,7 +213,7 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   return (
     <div {...domProps} className={mergedClassNames} style={mergedStyle} ref={listRef}>
       <div
-        className={classnames(`${listPrefixCls}-scroll-box`, classNames.scroll, {
+        className={clsx(`${listPrefixCls}-scroll-box`, classNames.scroll, {
           [`${listPrefixCls}-autoscroll`]: autoScroll,
         })}
         style={styles.scroll}

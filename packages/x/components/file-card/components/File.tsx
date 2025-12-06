@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import { clsx } from 'clsx';
 import React, { useMemo } from 'react';
 import { SemanticType } from '../FileCard';
 import { getSize } from '../utils';
@@ -35,7 +35,7 @@ const File: React.FC<FileProps> = (props) => {
   } = props;
   const compCls = `${prefixCls}-file`;
 
-  const mergedCls = classnames(compCls, classNames.file, {
+  const mergedCls = clsx(compCls, classNames.file, {
     [`${compCls}-pointer`]: !!onClick,
     [`${compCls}-small`]: size === 'small',
   });
@@ -53,19 +53,19 @@ const File: React.FC<FileProps> = (props) => {
   return (
     <div className={mergedCls} style={styles.file} onClick={onClick}>
       <div
-        className={classnames(`${compCls}-icon`, classNames.icon)}
+        className={clsx(`${compCls}-icon`, classNames.icon)}
         style={{ color: iconColor, ...styles.icon }}
       >
         {icon}
       </div>
       <div className={`${compCls}-content`}>
-        <div className={classnames(`${compCls}-name`, classNames.name)} style={styles.name}>
+        <div className={clsx(`${compCls}-name`, classNames.name)} style={styles.name}>
           <span className={`${compCls}-name-prefix`}>{name}</span>
           <span className={`${compCls}-name-suffix`}>{ext}</span>
         </div>
         {desc && (
           <div
-            className={classnames(`${compCls}-description`, classNames.description)}
+            className={clsx(`${compCls}-description`, classNames.description)}
             style={styles.description}
           >
             {desc}

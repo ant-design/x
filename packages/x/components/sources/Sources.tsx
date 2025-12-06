@@ -1,10 +1,10 @@
 import { RightOutlined } from '@ant-design/icons';
+import type { CSSMotionProps } from '@rc-component/motion';
+import CSSMotion from '@rc-component/motion';
+import useMergedState from '@rc-component/util/lib/hooks/useMergedState';
+import pickAttrs from '@rc-component/util/lib/pickAttrs';
 import { Popover } from 'antd';
-import classnames from 'classnames';
-import type { CSSMotionProps } from 'rc-motion';
-import CSSMotion from 'rc-motion';
-import useMergedState from 'rc-util/lib/hooks/useMergedState';
-import pickAttrs from 'rc-util/lib/pickAttrs';
+import { clsx } from 'clsx';
 import React from 'react';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
@@ -91,7 +91,7 @@ const Sources: React.ForwardRefRenderFunction<SourcesRef, SourcesProps> = (props
     };
   });
 
-  const mergedCls = classnames(
+  const mergedCls = clsx(
     prefixCls,
     contextConfig.className,
     className,
@@ -158,7 +158,7 @@ const Sources: React.ForwardRefRenderFunction<SourcesRef, SourcesProps> = (props
         <Popover
           content={
             <CarouselCard
-              className={classnames(prefixCls, hashId, cssVarCls, classNames.content)}
+              className={clsx(prefixCls, hashId, cssVarCls, classNames.content)}
               style={styles.content}
               activeKey={activeKey}
               prefixCls={prefixCls}
@@ -172,7 +172,7 @@ const Sources: React.ForwardRefRenderFunction<SourcesRef, SourcesProps> = (props
           forceRender
         >
           <div
-            className={classnames(prefixCls, `${prefixCls}-title-wrapper`, classNames.title)}
+            className={clsx(prefixCls, `${prefixCls}-title-wrapper`, classNames.title)}
             style={styles.title}
           >
             <span className={`${prefixCls}-title`}>{title}</span>
@@ -181,7 +181,7 @@ const Sources: React.ForwardRefRenderFunction<SourcesRef, SourcesProps> = (props
       ) : (
         <>
           <div
-            className={classnames(
+            className={clsx(
               `${prefixCls}-title-wrapper`,
               `${prefixCls}-icon-position-${expandIconPosition}`,
               classNames.title,
@@ -195,7 +195,7 @@ const Sources: React.ForwardRefRenderFunction<SourcesRef, SourcesProps> = (props
           <CSSMotion {...collapseMotion} visible={isExpand}>
             {({ className: motionClassName, style }, motionRef) => (
               <div
-                className={classnames(`${prefixCls}-content`, motionClassName, classNames.content)}
+                className={clsx(`${prefixCls}-content`, motionClassName, classNames.content)}
                 ref={motionRef}
                 style={{ ...style, ...styles.content }}
               >

@@ -1,9 +1,9 @@
 import '@testing-library/jest-dom';
 
+import { spyElementPrototypes } from '@rc-component/util/lib/test/domHook';
 import { toHaveNoViolations } from 'jest-axe';
 import jsdom from 'jsdom';
 import format, { plugins } from 'pretty-format';
-import { spyElementPrototypes } from 'rc-util/lib/test/domHook';
 
 // Mock `scrollTo` since jsdom do not support it
 spyElementPrototypes(HTMLElement, {

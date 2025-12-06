@@ -1,7 +1,7 @@
 import { CloseCircleFilled, LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { CSSMotionList } from '@rc-component/motion';
 import { Button } from 'antd';
-import classnames from 'classnames';
-import { CSSMotionList } from 'rc-motion';
+import { clsx } from 'clsx';
 import React from 'react';
 import { useXProviderContext } from '../x-provider';
 import FileCard, { SemanticType as CardSemanticType, FileCardProps } from './FileCard';
@@ -60,7 +60,7 @@ const List: React.FC<FileCardListProps> = (props) => {
   const [pingEnd, setPingEnd] = React.useState(false);
 
   const { root: classNameRoot, card: classNameCard, ...classNameOther } = classNames;
-  const mergedCls = classnames(
+  const mergedCls = clsx(
     compCls,
     rootClassName,
     className,
@@ -122,9 +122,9 @@ const List: React.FC<FileCardListProps> = (props) => {
   const { root, card: _, ...other } = styles;
 
   return (
-    <div className={classnames(mergedCls)}>
+    <div className={clsx(mergedCls)}>
       <div
-        className={classnames(`${compCls}-content`, {
+        className={clsx(`${compCls}-content`, {
           [`${compCls}-overflow-${props.overflow}`]: overflow,
           [`${compCls}-overflow-ping-start`]: pingStart,
           [`${compCls}-overflow-ping-end`]: pingEnd,
@@ -146,7 +146,7 @@ const List: React.FC<FileCardListProps> = (props) => {
           {({ key, item, className: motionCls, style: motionStyle }) => {
             return (
               <div
-                className={classnames(`${compCls}-item`, motionCls)}
+                className={clsx(`${compCls}-item`, motionCls)}
                 style={{ ...motionStyle, ...root }}
                 key={key}
               >
@@ -154,7 +154,7 @@ const List: React.FC<FileCardListProps> = (props) => {
                   {...item}
                   size={size}
                   key={key}
-                  className={classnames(item.className, classNameCard)}
+                  className={clsx(item.className, classNameCard)}
                   classNames={{ ...classNameOther, ...item.classNames }}
                   style={{ ...item.style, ...styles?.card }}
                   styles={other}

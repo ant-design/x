@@ -1,8 +1,8 @@
 import { XProvider } from '@ant-design/x';
+import MobileMenu from '@rc-component/drawer';
 import { Col, Menu } from 'antd';
 import { createStyles, useTheme } from 'antd-style';
 import { useSidebarData } from 'dumi';
-import MobileMenu from 'rc-drawer';
 import React from 'react';
 import useLocation from '../../../hooks/useLocation';
 import useMenu from '../../../hooks/useMenu';

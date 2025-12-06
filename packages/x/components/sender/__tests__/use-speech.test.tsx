@@ -2,7 +2,7 @@ import { act, renderHook } from '@testing-library/react';
 import useSpeech from '../hooks/use-speech';
 
 // Mock dependencies
-jest.mock('rc-util', () => ({
+jest.mock('@rc-component/util', () => ({
   useEvent: (fn: any) => fn,
   useMergedState: (defaultValue: any, options: any) => {
     const React = require('react');

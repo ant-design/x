@@ -1,7 +1,7 @@
+import omit from '@rc-component/util/lib/omit';
 import { Button, Tooltip } from 'antd';
 import { createStyles } from 'antd-style';
-import classNames from 'classnames';
-import omit from 'rc-util/lib/omit';
+import { clsx } from 'clsx';
 import React from 'react';
 export interface LangBtnProps {
   label1: React.ReactNode;
@@ -84,10 +84,10 @@ const LangBtn: React.FC<LangBtnProps> = (props) => {
         {pure && (value === 1 ? label1 : label2)}
         {!pure && (
           <div className={innerDiv}>
-            <span className={classNames(labelStyle, value === 1 ? label1Style : label2Style)}>
+            <span className={clsx(labelStyle, value === 1 ? label1Style : label2Style)}>
               {label1}
             </span>
-            <span className={classNames(labelStyle, value === 1 ? label2Style : label1Style)}>
+            <span className={clsx(labelStyle, value === 1 ? label2Style : label1Style)}>
               {label2}
             </span>
           </div>

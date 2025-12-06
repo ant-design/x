@@ -1,8 +1,8 @@
+import { _rs as onEsResize } from '@rc-component/resize-observer/es/utils/observerUtil';
+import { _rs as onLibResize } from '@rc-component/resize-observer/lib/utils/observerUtil';
 import type { RenderOptions, RenderResult } from '@testing-library/react';
 import { act, render } from '@testing-library/react';
 import MockDate from 'mockdate';
-import { _rs as onEsResize } from 'rc-resize-observer/es/utils/observerUtil';
-import { _rs as onLibResize } from 'rc-resize-observer/lib/utils/observerUtil';
 import type { ReactElement } from 'react';
 import React, { createRef, StrictMode } from 'react';
 

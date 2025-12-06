@@ -1,9 +1,9 @@
 import { EllipsisOutlined } from '@ant-design/icons';
+import pickAttrs from '@rc-component/util/lib/pickAttrs';
 import type { MenuProps } from 'antd';
 import { Dropdown, Typography } from 'antd';
 import type { DirectionType } from 'antd/es/config-provider';
-import classnames from 'classnames';
-import pickAttrs from 'rc-util/lib/pickAttrs';
+import { clsx } from 'clsx';
 import React from 'react';
 import type { ConversationsProps } from '.';
 import type { ConversationItemType } from './interface';
@@ -43,7 +43,7 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
   const { disabled } = info;
 
   // ============================ Style =============================
-  const mergedCls = classnames(
+  const mergedCls = clsx(
     className,
     `${prefixCls}-item`,
     { [`${prefixCls}-item-active`]: active && !disabled },

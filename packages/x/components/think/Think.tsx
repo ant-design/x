@@ -1,9 +1,9 @@
 import { LoadingOutlined, RightOutlined } from '@ant-design/icons';
-import classnames from 'classnames';
-import type { CSSMotionProps } from 'rc-motion';
-import CSSMotion from 'rc-motion';
-import useMergedState from 'rc-util/lib/hooks/useMergedState';
-import pickAttrs from 'rc-util/lib/pickAttrs';
+import type { CSSMotionProps } from '@rc-component/motion';
+import CSSMotion from '@rc-component/motion';
+import useMergedState from '@rc-component/util/lib/hooks/useMergedState';
+import pickAttrs from '@rc-component/util/lib/pickAttrs';
+import { clsx } from 'clsx';
 import React from 'react';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
@@ -89,7 +89,7 @@ const Think = React.forwardRef<ThinkRef, ThinkProps>((props, ref) => {
     };
   });
 
-  const mergedCls = classnames(
+  const mergedCls = clsx(
     prefixCls,
     contextConfig.className,
     className,
@@ -129,7 +129,7 @@ const Think = React.forwardRef<ThinkRef, ThinkProps>((props, ref) => {
       }}
     >
       <div
-        className={classnames(`${prefixCls}-status-wrapper`, classNames.status)}
+        className={clsx(`${prefixCls}-status-wrapper`, classNames.status)}
         onClick={() => setIsExpand(!isExpand)}
         style={styles.status}
       >
@@ -137,7 +137,7 @@ const Think = React.forwardRef<ThinkRef, ThinkProps>((props, ref) => {
           <StatusIcon loading={loading} icon={icon} />
         </div>
         <div
-          className={classnames(`${prefixCls}-status-text`, {
+          className={clsx(`${prefixCls}-status-text`, {
             [`${prefixCls}-motion-blink`]: blink,
           })}
         >
@@ -148,7 +148,7 @@ const Think = React.forwardRef<ThinkRef, ThinkProps>((props, ref) => {
       <CSSMotion {...collapseMotion} visible={isExpand}>
         {({ className: motionClassName, style }, motionRef) => (
           <div
-            className={classnames(`${prefixCls}-content`, motionClassName, classNames.content)}
+            className={clsx(`${prefixCls}-content`, motionClassName, classNames.content)}
             ref={motionRef}
             style={{ ...style, ...styles.content }}
           >

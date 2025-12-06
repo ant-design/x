@@ -1,5 +1,5 @@
 import { Button, type ButtonProps } from 'antd';
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import * as React from 'react';
 
 export interface ActionButtonContextProps {
@@ -40,7 +40,7 @@ export function ActionButton(props: ActionButtonProps, ref: React.Ref<HTMLButton
         onClick?.(e);
       }}
       disabled={mergedDisabled}
-      className={classNames(prefixCls, className, {
+      className={clsx(prefixCls, className, {
         [`${prefixCls}-disabled`]: mergedDisabled,
       })}
     />
