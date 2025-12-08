@@ -583,14 +583,12 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         (submitType === 'enter' && !shiftKey && !isModifierPressed) ||
         (submitType === 'shiftEnter' && shiftKey && !isModifierPressed);
 
-      if (shouldSubmit && !submitDisabled) {
+      if (shouldSubmit) {
         e.preventDefault();
-        keyLockRef.current = true;
-        triggerSend?.();
-        return;
-      }
-      if (shouldSubmit && submitDisabled) {
-        e.preventDefault();
+        if (!submitDisabled) {
+          keyLockRef.current = true;
+          triggerSend?.();
+        }
         return;
       }
     }

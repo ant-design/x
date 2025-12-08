@@ -29,9 +29,12 @@ export function ActionButton(props: ActionButtonProps, ref: React.Ref<HTMLButton
   const { prefixCls, disabled: rootDisabled, setSubmitDisabled } = context;
   const mergedDisabled =
     restProps.disabled ?? rootDisabled ?? (context[`${action}Disabled`] as boolean);
+
   useEffect(() => {
-    setSubmitDisabled?.(mergedDisabled);
-  }, [mergedDisabled]);
+    if (action === 'onSend') {
+      setSubmitDisabled?.(mergedDisabled);
+    }
+  }, [mergedDisabled, action, setSubmitDisabled]);
 
   return (
     <Button

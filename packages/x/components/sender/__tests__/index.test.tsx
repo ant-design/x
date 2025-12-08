@@ -1,4 +1,3 @@
-import { unwatchFile } from 'fs';
 import React from 'react';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';

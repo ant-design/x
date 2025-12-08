@@ -120,7 +120,7 @@ type ActionsComponents = {
 
 | Property | Description  | Type   | Default | Version |
 | -------- | ------------ | ------ | ------- | ------- |
-| text     | Text content | string | -       | 2.0.0   |
+| value    | Text content | string | -       | 2.0.0   |
 
 ##### input node properties
 

@@ -126,13 +126,11 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
         (submitType === 'enter' && !shiftKey && !isModifierPressed) ||
         (submitType === 'shiftEnter' && shiftKey && !isModifierPressed);
 
-      if (shouldSubmit && !submitDisabled) {
+      if (shouldSubmit) {
         e.preventDefault();
-        triggerSend?.();
-        return;
-      }
-      if (shouldSubmit && submitDisabled) {
-        e.preventDefault();
+        if (!submitDisabled) {
+          triggerSend?.();
+        }
         return;
       }
     }
