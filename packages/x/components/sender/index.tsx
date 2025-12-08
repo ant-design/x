@@ -128,6 +128,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     classNames.root,
     hashId,
     cssVarCls,
+    `${prefixCls}-main`,
     {
       [`${prefixCls}-rtl`]: direction === 'rtl',
       [`${prefixCls}-disabled`]: disabled,

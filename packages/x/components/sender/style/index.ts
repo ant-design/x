@@ -65,20 +65,21 @@ export interface SenderToken extends FullToken<'Sender'> {
 const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
   const { componentCls, paddingSM, paddingXS, paddingXXS, lineWidth, calc } = token;
   return {
-    [`${componentCls}:not(${componentCls}-switch):not(${componentCls}-header)`]: {
-      position: 'relative',
-      width: '100%',
-      boxSizing: 'border-box',
-      boxShadow: `${token.boxShadowTertiary}`,
-      borderRadius: {
-        _skip_check_: true,
-        value: calc(token.borderRadius).mul(2).equal(),
+    [componentCls]: {
+      [`&${componentCls}-main`]: {
+        position: 'relative',
+        width: '100%',
+        boxSizing: 'border-box',
+        boxShadow: `${token.boxShadowTertiary}`,
+        borderRadius: {
+          _skip_check_: true,
+          value: calc(token.borderRadius).mul(2).equal(),
+        },
+
+        borderColor: token.colorBorderInput,
+        borderWidth: lineWidth,
+        borderStyle: 'solid',
       },
-
-      borderColor: token.colorBorderInput,
-      borderWidth: lineWidth,
-      borderStyle: 'solid',
-
       [`&${componentCls}-disabled`]: {
         background: token.colorBgContainerDisabled,
       },
@@ -101,7 +102,6 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
       [`${componentCls}-prefix`]: {
         flex: 'none',
       },
-
       // ============================= Input =============================
       [`${componentCls}-input`]: {
         paddingInline: 0,
@@ -111,7 +111,6 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
         caretColor: token.colorPrimary,
         fontSize: token.fontSize,
       },
-
       // ============================ Actions ============================
       [`${componentCls}-actions-list`]: {
         flex: 'none',
