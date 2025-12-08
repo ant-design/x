@@ -143,18 +143,13 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     value,
   });
 
-  const triggerValueChange: SenderProps['onChange'] = (nextValue, event, slotConfig) => {
-    if (slotConfig) {
-      setInnerValue(nextValue);
-      if (onChange) {
-        onChange(nextValue, event, slotConfig);
-      }
-      return;
-    }
-
+  const triggerValueChange: SenderProps['onChange'] = (nextValue, event, slotConfig, skill) => {
     setInnerValue(nextValue);
-
     if (onChange) {
+      if (slotConfig || skill) {
+        onChange(nextValue, event, slotConfig, skill);
+        return;
+      }
       onChange(nextValue, event);
     }
   };

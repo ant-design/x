@@ -635,6 +635,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       newValue.value,
       e as unknown as React.ChangeEvent<HTMLTextAreaElement>,
       newValue.slotConfig,
+      newValue.skill,
     );
   };
 
