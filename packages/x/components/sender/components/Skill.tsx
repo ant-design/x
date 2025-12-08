@@ -37,6 +37,7 @@ const Skill: React.FC<SkillProps> = ({
       }
       event.stopPropagation();
       removeSkill();
+
       config.onClose?.(event);
     };
 

@@ -82,7 +82,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const keyLockRef = useRef<boolean>(false);
   const lastSelectionRef = useRef<Range | null>(null);
   const slotInnerRef = useRef<boolean>(false);
-  const skillDom = useRef<HTMLSpanElement>(null);
+  const skillDomRef = useRef<HTMLSpanElement>(null);
+  const skillRef = useRef<SkillType>(null);
 
   // ============================ Style =============================
 
@@ -123,6 +124,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const span = document.createElement('span');
     span.setAttribute('contenteditable', 'false');
     span.dataset.skillKey = key;
+    span.dataset.placeholder = placeholder;
     span.className = `${prefixCls}-skill`;
     return span;
   };
@@ -350,7 +352,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       }
     }
     if (!currentSkillConfig) {
-      skillDom.current = null;
+      skillDomRef.current = null;
     }
     return {
       value: result.join(''),
@@ -457,6 +459,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
   const insertSkill = () => {
     if (slotInnerRef.current && skill) {
+      skillRef.current = skill;
       removeSkill();
       const skillSpan = buildSkillSpan(skill.value);
       const reactNode = createPortal(
@@ -469,15 +472,20 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       if (!editableDom) return;
       range.setStart(editableDom, 0);
       range.insertNode(skillSpan);
-      skillDom.current = skillSpan;
+      skillDomRef.current = skillSpan;
+      const editorValue = getEditorValue();
+      onChange?.(editorValue.value, undefined, editorValue.slotConfig, editorValue.skill);
     }
   };
 
   const removeSkill = () => {
     const editableDom = editableRef.current;
-    if (!editableDom) return;
-    skillDom.current?.remove();
-    skillDom.current = null;
+    if (!editableDom || !skillDomRef.current) return;
+    skillDomRef.current?.remove();
+    skillDomRef.current = null;
+    skillRef.current = null;
+    const editorValue = getEditorValue();
+    onChange?.(editorValue.value, undefined, editorValue.slotConfig, editorValue.skill);
   };
   // 移除<br>标签（仅在enter模式下）
   const removeSpecificBRs = (element: HTMLDivElement | null) => {
@@ -571,6 +579,15 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         if (slotKey) {
           e.preventDefault();
           removeSlot(slotKey, e as unknown as EventType);
+          return;
+        }
+        const skillKey = (selection.anchorNode?.previousSibling as Element)?.getAttribute?.(
+          'data-skill-key',
+        );
+        if (skillKey) {
+          e.preventDefault();
+          removeSkill();
+          skill?.closable;
           return;
         }
       }
@@ -809,7 +826,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     div.innerHTML = '';
     slotInnerRef.current = false;
     slotDomMap?.current?.clear();
-    onInternalInput(null as unknown as React.FormEvent<HTMLDivElement>);
   };
 
   const clear = () => {
@@ -828,17 +844,17 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     if (slotConfig && slotConfig.length > 0 && editableRef.current) {
       appendNodeList(getSlotListNode(slotConfig) as HTMLElement[]);
     }
-    onChange?.(
-      getEditorValue().value,
-      undefined,
-      getEditorValue().slotConfig,
-      getEditorValue().skill,
-    );
     slotInnerRef.current = true;
+    if (!skill) {
+      const editorValue = getEditorValue();
+      onChange?.(editorValue.value, undefined, editorValue.slotConfig, editorValue.skill);
+    }
   }, [slotConfig]);
 
   useEffect(() => {
-    insertSkill();
+    if (slotInnerRef.current && skillRef.current !== skill) {
+      insertSkill();
+    }
   }, [skill, slotInnerRef.current]);
 
   useImperativeHandle(ref, () => {
