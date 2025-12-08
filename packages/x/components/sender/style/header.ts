@@ -8,16 +8,16 @@ const genSenderHeaderStyle: GenerateStyle<SenderToken> = (token) => {
 
   return {
     [componentCls]: {
-      [`&${headerCls}-rtl`]: {
+      [`${headerCls}-rtl`]: {
         direction: 'rtl',
       },
-      [headerCls]: {
+      [`${headerCls}`]: {
         borderBottomWidth: token.lineWidth,
         borderBottomStyle: 'solid',
         borderBottomColor: token.colorBorderInput,
 
         // ======================== Header ========================
-        '&-header': {
+        [`${headerCls}-header`]: {
           background: token.colorFillAlter,
           fontSize: token.fontSize,
           lineHeight: token.lineHeight,
@@ -39,24 +39,23 @@ const genSenderHeaderStyle: GenerateStyle<SenderToken> = (token) => {
         },
 
         // ======================= Content ========================
-        '&-content': {
+        [`${headerCls}-content`]: {
           padding: token.padding,
         },
+      },
+      // ======================== Motion ========================
+      [`${headerCls}-motion`]: {
+        transition: ['height', 'border']
+          .map((prop) => `${prop} ${token.motionDurationSlow}`)
+          .join(','),
+        overflow: 'hidden',
 
-        // ======================== Motion ========================
-        '&-motion': {
-          transition: ['height', 'border']
-            .map((prop) => `${prop} ${token.motionDurationSlow}`)
-            .join(','),
-          overflow: 'hidden',
+        '&-enter-start, &-leave-active': {
+          borderBottomColor: 'transparent',
+        },
 
-          '&-enter-start, &-leave-active': {
-            borderBottomColor: 'transparent',
-          },
-
-          '&-hidden': {
-            display: 'none',
-          },
+        '&-hidden': {
+          display: 'none',
         },
       },
     },

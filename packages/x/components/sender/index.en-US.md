@@ -25,6 +25,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/speech.tsx">Voice Input</code>
 <code src="./demo/speech-custom.tsx">Custom Voice Input</code>
 <code src="./demo/suffix.tsx">Custom Suffix</code>
+<code src="./demo/disable-ctrl.tsx">Disable Ctrl</code>
 <code src="./demo/header.tsx">Expand Panel</code>
 <code src="./demo/slot-with-suggestion.tsx">Quick Commands</code>
 <code src="./demo/header-fixed.tsx">References</code>

@@ -70,7 +70,6 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
       width: '100%',
       boxSizing: 'border-box',
       boxShadow: `${token.boxShadowTertiary}`,
-      // Border
       borderRadius: {
         _skip_check_: true,
         value: calc(token.borderRadius).mul(2).equal(),
@@ -87,7 +86,6 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
       [`&${componentCls}-rtl`]: {
         direction: 'rtl',
       },
-
       // ============================ Content ============================
       [`${componentCls}-content`]: {
         display: 'flex',
@@ -118,7 +116,6 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
       [`${componentCls}-actions-list`]: {
         flex: 'none',
         display: 'flex',
-
         '&-presets': {
           gap: token.paddingXS,
         },

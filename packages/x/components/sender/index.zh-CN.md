@@ -26,6 +26,8 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/speech.tsx">语音输入</code>
 <code src="./demo/speech-custom.tsx">自定义语音输入</code>
 <code src="./demo/suffix.tsx">自定义后缀</code>
+<code src="./demo/disable-ctrl.tsx">发送控制</code>
+<code src="./demo/disable-ctrl-slot.tsx">词槽发送控制</code>
 <code src="./demo/header.tsx">展开面板</code>
 <code src="./demo/slot-with-suggestion.tsx">快捷指令</code>
 <code src="./demo/header-fixed.tsx">引用</code>

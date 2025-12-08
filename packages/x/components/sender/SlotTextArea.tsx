@@ -65,6 +65,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     onBlur,
     slotConfig,
     skill,
+    submitDisabled,
     ...restProps
   } = React.useContext(SenderContext);
 
@@ -582,11 +583,15 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         (submitType === 'enter' && !shiftKey && !isModifierPressed) ||
         (submitType === 'shiftEnter' && shiftKey && !isModifierPressed);
 
-      if (shouldSubmit) {
+      if (shouldSubmit && !submitDisabled) {
         e.preventDefault();
         keyLockRef.current = true;
         const result = getEditorValue();
         onSubmit?.(result.value, result.slotConfig, result.skill);
+        return;
+      }
+      if (shouldSubmit && submitDisabled) {
+        e.preventDefault();
         return;
       }
     }
