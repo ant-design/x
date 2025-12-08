@@ -2,6 +2,7 @@ import { DownloadOutlined, ZoomInOutlined, ZoomOutOutlined } from '@ant-design/i
 import { Button, Segmented, Tooltip } from 'antd';
 import classnames from 'classnames';
 import throttle from 'lodash.throttle';
+import mermaid from 'mermaid';
 import React, { useEffect, useRef, useState } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
@@ -11,6 +12,13 @@ import locale_EN from '../locale/en_US';
 import useLocale from '../locale/useLocale';
 import { useXProviderContext } from '../x-provider';
 import useStyle from './style';
+
+mermaid.initialize({
+  startOnLoad: false,
+  securityLevel: 'strict',
+  theme: 'default',
+  fontFamily: 'monospace',
+});
 
 export type MermaidType = 'root' | 'header' | 'graph' | 'code';
 
@@ -52,7 +60,6 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
   const [isDragging, setIsDragging] = useState(false);
   const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
-  const mermaidRef = useRef<any>(null);
   const id = `mermaid-${uuid++}-${children?.length || 0}`;
 
   // ============================ locale ============================
@@ -85,24 +92,11 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
     if (!children || !containerRef.current || renderType === RenderType.Code) return;
 
     try {
-      if (!mermaidRef.current) {
-        const mermaidModule = await import('mermaid');
-        mermaidRef.current = mermaidModule.default;
-        mermaidRef.current.initialize({
-          startOnLoad: false,
-          securityLevel: 'strict',
-          theme: 'default',
-          fontFamily: 'monospace',
-        });
-      }
-
-      const isValid = await mermaidRef.current.parse(children, { suppressErrors: true });
+      const isValid = await mermaid.parse(children, { suppressErrors: true });
       if (!isValid) throw new Error('Invalid Mermaid syntax');
 
       const newText = children.replace(/[`\s]+$/g, '');
-
-      const { svg } = await mermaidRef.current.render(id, newText, containerRef.current);
-
+      const { svg } = await mermaid.render(id, newText, containerRef.current);
       containerRef.current.innerHTML = svg;
     } catch (error) {
       console.warn(`Mermaid render failed: ${error}`);
