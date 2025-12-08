@@ -58,7 +58,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 | styles | 语义化定义样式 | [见下](#semantic-dom) | - | - |
 | submitType | 提交模式 | SubmitType | `enter` \| `shiftEnter` | - |
 | value | 输入框值 | string | - | - |
-| onSubmit | 点击发送按钮的回调 | (message: string, slotConfig?: SlotConfigType[], skill: SkillType) => void | - | - |
+| onSubmit | 点击发送按钮的回调 | (message: string, slotConfig: SlotConfigType[], skill: SkillType) => void | - | - |
 | onChange | 输入框值改变的回调 | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`>, slotConfig: SlotConfigType[],skill: SkillType) => void | - | - |
 | onCancel | 点击取消按钮的回调 | () => void | - | - |
 | onPasteFile | 黏贴文件的回调 | (files: FileList) => void | - | - |

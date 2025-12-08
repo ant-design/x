@@ -56,7 +56,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | styles | Semantic style definition | [See below](#semantic-dom) | - | - |
 | submitType | Submission mode | SubmitType | `enter` \| `shiftEnter` | - |
 | value | Input box value | string | - | - |
-| onSubmit | Callback for clicking the send button | (message: string, slotConfig?: SlotConfigType[], skill: SkillType) => void | - | - |
+| onSubmit | Callback for clicking the send button | (message: string, slotConfig: SlotConfigType[], skill: SkillType) => void | - | - |
 | onChange | Callback for input box value change | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`>, slotConfig: SlotConfigType[], skill: SkillType) => void | - | - |
 | onCancel | Callback for clicking the cancel button | () => void | - | - |
 | onPasteFile | Callback for pasting files | (files: FileList) => void | - | - |
