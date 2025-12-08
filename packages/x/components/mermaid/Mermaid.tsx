@@ -13,13 +13,6 @@ import useLocale from '../locale/useLocale';
 import { useXProviderContext } from '../x-provider';
 import useStyle from './style';
 
-mermaid.initialize({
-  startOnLoad: false,
-  securityLevel: 'strict',
-  theme: 'default',
-  fontFamily: 'monospace',
-});
-
 export type MermaidType = 'root' | 'header' | 'graph' | 'code';
 
 export interface MermaidProps {
@@ -61,6 +54,15 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
   const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
   const id = `mermaid-${uuid++}-${children?.length || 0}`;
+
+  useEffect(() => {
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: 'strict',
+      theme: 'default',
+      fontFamily: 'monospace',
+    });
+  }, []);
 
   // ============================ locale ============================
   const [contextLocale] = useLocale('Mermaid', locale_EN.Mermaid);
