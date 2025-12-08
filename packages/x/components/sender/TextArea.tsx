@@ -41,7 +41,7 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
     autoSize,
     components,
     submitDisabled,
-    onSubmit,
+    triggerSend,
     placeholder,
     onFocus,
     onBlur,
@@ -113,7 +113,7 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
 
   const onInternalKeyDown: React.KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
     const eventRes = onKeyDown?.(e);
-    const { key, target, shiftKey, ctrlKey, altKey, metaKey } = e;
+    const { key, shiftKey, ctrlKey, altKey, metaKey } = e;
 
     if (isCompositionRef.current || key !== 'Enter' || eventRes === false) {
       return;
@@ -128,7 +128,7 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
 
       if (shouldSubmit && !submitDisabled) {
         e.preventDefault();
-        onSubmit?.(value || '');
+        triggerSend?.();
         return;
       }
       if (shouldSubmit && submitDisabled) {

@@ -174,8 +174,9 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
 
   // ============================ Events ============================
   const triggerSend = () => {
-    if (onSubmit && !loading) {
-      onSubmit(innerValue);
+    if (inputRef?.current && onSubmit && !loading) {
+      const inputValue = inputRef.current.getValue();
+      onSubmit(inputValue.value, inputValue.slotConfig, inputValue.skill);
     }
   };
 
@@ -262,7 +263,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
       classNames,
       autoSize,
       components,
-      onSubmit,
+      triggerSend,
       placeholder,
       onFocus,
       onBlur,
@@ -286,7 +287,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
       classNames,
       autoSize,
       components,
-      onSubmit,
+      triggerSend,
       placeholder,
       onFocus,
       onBlur,
