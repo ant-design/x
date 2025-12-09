@@ -1,6 +1,6 @@
 import React from 'react';
-import { fireEvent, render } from '../../../../tests/utils';
-import Skill from '../Skill';
+import { fireEvent, render } from '../../../tests/utils';
+import Skill from '../components/Skill';
 
 describe('Skill Component', () => {
   const defaultProps = {
