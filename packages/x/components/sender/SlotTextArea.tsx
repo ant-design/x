@@ -328,8 +328,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         return el.innerText || '';
       }
 
-      const slotValue = getSlotValues()[dataset.slotKey] || '';
-      return nodeConfig.formatResult?.(slotValue) || slotValue;
+      const slotValue = getSlotValues()[dataset.slotKey] ?? '';
+      return nodeConfig.formatResult ? nodeConfig.formatResult(slotValue) : slotValue;
     }
 
     // 处理 skill 节点
@@ -620,7 +620,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         if (skillKey) {
           e.preventDefault();
           removeSkill();
-          skill?.closable;
           return;
         }
       }
@@ -881,10 +880,10 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   }, [slotConfig]);
 
   useEffect(() => {
-    if (slotInnerRef.current && skillRef.current !== skill) {
+    if (skillRef.current !== skill) {
       insertSkill();
     }
-  }, [skill, slotInnerRef.current]);
+  }, [skill]);
 
   useImperativeHandle(ref, () => {
     return {
