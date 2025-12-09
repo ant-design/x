@@ -91,7 +91,7 @@
     "mermaid": "^11.12.1"
   },
   "devDependencies": {
-    "@antv/gpt-vis": "^0.4.1",
+    "@antv/gpt-vis": "^0.5.10",
     "@codesandbox/sandpack-react": "^2.19.8",
     "@emotion/react": "^11.13.5",
     "@emotion/server": "^11.11.0",
