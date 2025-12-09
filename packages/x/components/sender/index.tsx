@@ -2,7 +2,7 @@ import { Flex } from 'antd';
 import classnames from 'classnames';
 import { useMergedState } from 'rc-util';
 import pickAttrs from 'rc-util/lib/pickAttrs';
-import React from 'react';
+import React, { useState } from 'react';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
@@ -128,6 +128,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     classNames.root,
     hashId,
     cssVarCls,
+    `${prefixCls}-main`,
     {
       [`${prefixCls}-rtl`]: direction === 'rtl',
       [`${prefixCls}-disabled`]: disabled,
@@ -174,8 +175,9 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
 
   // ============================ Events ============================
   const triggerSend = () => {
-    if (innerValue && onSubmit && !loading) {
-      onSubmit(innerValue);
+    if (inputRef?.current && onSubmit && !loading) {
+      const inputValue = inputRef.current.getValue();
+      onSubmit(inputValue.value, inputValue.slotConfig, inputValue.skill);
     }
   };
 
@@ -226,8 +228,10 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
       ? footer(actionNode, { components: sharedRenderComponents })
       : footer || null;
 
+  // ============================ Action context Data ============================
+  const [submitDisabled, setSubmitDisabled] = useState(!innerValue);
   // Custom actions context props
-  const actionsButtonContextProps = {
+  const actionsContextProps = {
     prefixCls: actionBtnCls,
     onSend: triggerSend,
     onSendDisabled: !innerValue,
@@ -239,6 +243,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     onSpeechDisabled: !speechPermission,
     speechRecording,
     disabled,
+    setSubmitDisabled,
   };
 
   // ============================ Context ============================
@@ -259,11 +264,12 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
       classNames,
       autoSize,
       components,
-      onSubmit,
+      triggerSend,
       placeholder,
       onFocus,
       onBlur,
       skill,
+      submitDisabled,
       ...restProps,
     }),
     [
@@ -282,11 +288,12 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
       classNames,
       autoSize,
       components,
-      onSubmit,
+      triggerSend,
       placeholder,
       onFocus,
       onBlur,
       skill,
+      submitDisabled,
       restProps,
     ],
   );
@@ -319,7 +326,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
       {...domProps}
     >
       <SenderContext.Provider value={contextValue}>
-        <ActionButtonContext.Provider value={actionsButtonContextProps}>
+        <ActionButtonContext.Provider value={actionsContextProps}>
           {/* Header */}
           {headerNode && (
             <SendHeaderContext.Provider value={{ prefixCls }}>

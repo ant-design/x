@@ -109,7 +109,7 @@ describe('Sender Component', () => {
     const onSubmit = jest.fn();
     const { container } = render(<Sender value="bamboo" onSubmit={onSubmit} />);
     fireEvent.click(container.querySelector('button')!);
-    expect(onSubmit).toHaveBeenCalledWith('bamboo');
+    expect(onSubmit).toHaveBeenCalledWith('bamboo', [], undefined);
   });
 
   it('onCancel', () => {
@@ -142,7 +142,7 @@ describe('Sender Component', () => {
       act(() => {
         fireEvent.keyDown(container.querySelector('textarea')!, { key: 'Enter', shiftKey: false });
       });
-      expect(onSubmit).toHaveBeenCalledWith('bamboo');
+      expect(onSubmit).toHaveBeenCalledWith('bamboo', [], undefined);
     });
 
     it('shiftEnter', () => {
@@ -153,7 +153,7 @@ describe('Sender Component', () => {
       act(() => {
         fireEvent.keyDown(container.querySelector('textarea')!, { key: 'Enter', shiftKey: true });
       });
-      expect(onSubmit).toHaveBeenCalledWith('bamboo');
+      expect(onSubmit).toHaveBeenCalledWith('bamboo', [], undefined);
     });
   });
 
