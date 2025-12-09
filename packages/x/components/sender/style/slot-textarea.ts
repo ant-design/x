@@ -29,7 +29,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       },
       [`${slotCls}:not(${slotContentCls})`]: {
         display: 'inline-block',
-        verticalAlign: 'baseline',
+        verticalAlign: 'middle',
         alignItems: 'center',
         marginBlock: 1,
         height: calc(token.fontSize).mul(token.lineHeight).add(2).equal(),
@@ -161,7 +161,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
         borderRadius: token.borderRadius,
         paddingInline: token.paddingXXS,
         boxSizing: 'border-box',
-        verticalAlign: 'baseline',
+        verticalAlign: 'middle',
         fontSize: token.fontSize,
         marginBlock: 1,
         lineHeight: token.lineHeight,
@@ -192,9 +192,22 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
         height: calc(token.fontSize).mul(token.lineHeight).add(2).equal(),
         wordBreak: 'break-all',
         paddingInlineEnd: 0,
-        paddingInlineStart: 1,
-        marginInlineEnd: token.marginXS,
+        paddingInlineStart: 0,
+        marginInlineEnd: 0,
         marginInlineStart: -1,
+        [`&${skillCls}-empty`]: {
+          '&::after': {
+            display: 'inline-block',
+            pointerEvents: 'none',
+            height: 'inherit',
+            content: 'attr(data-placeholder)',
+            color: token.colorTextPlaceholder,
+          },
+        },
+      },
+      [`${skillCls}-wrapper`]: {
+        height: '100%',
+        display: 'inline-flex',
       },
       [`${skillCls}-tag`]: {
         paddingInline: token.paddingXS,
@@ -202,11 +215,10 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
         backgroundColor: token.colorBgSkill,
         borderRadius: token.borderRadius,
         color: token.colorPrimary,
+        alignItems: 'center',
         fontWeight: 500,
-        position: 'relative',
         display: 'inline-flex',
         cursor: 'pointer',
-        alignItems: 'center',
         gap: token.marginXXS,
         transition: `background-color ${token.motionDurationMid}`,
         '&:hover': {
@@ -225,6 +237,10 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
           cursor: 'not-allowed',
           color: token.colorTextDisabled,
         },
+      },
+      [`${skillCls}-holder`]: {
+        width: token.marginXS,
+        height: '100%',
       },
     },
   };

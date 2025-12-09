@@ -26,6 +26,8 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/speech.tsx">语音输入</code>
 <code src="./demo/speech-custom.tsx">自定义语音输入</code>
 <code src="./demo/suffix.tsx">自定义后缀</code>
+<code src="./demo/disable-ctrl.tsx">发送控制</code>
+<code src="./demo/disable-ctrl-slot.tsx">词槽发送控制</code>
 <code src="./demo/header.tsx">展开面板</code>
 <code src="./demo/slot-with-suggestion.tsx">快捷指令</code>
 <code src="./demo/header-fixed.tsx">引用</code>
@@ -56,7 +58,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 | styles | 语义化定义样式 | [见下](#semantic-dom) | - | - |
 | submitType | 提交模式 | SubmitType | `enter` \| `shiftEnter` | - |
 | value | 输入框值 | string | - | - |
-| onSubmit | 点击发送按钮的回调 | (message: string, slotConfig?: SlotConfigType[], skill: SkillType) => void | - | - |
+| onSubmit | 点击发送按钮的回调 | (message: string, slotConfig: SlotConfigType[], skill: SkillType) => void | - | - |
 | onChange | 输入框值改变的回调 | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`>, slotConfig: SlotConfigType[],skill: SkillType) => void | - | - |
 | onCancel | 点击取消按钮的回调 | () => void | - | - |
 | onPasteFile | 黏贴文件的回调 | (files: FileList) => void | - | - |
@@ -118,9 +120,9 @@ type ActionsComponents = {
 
 ##### text 节点属性
 
-| 属性 | 说明     | 类型   | 默认值 | 版本  |
-| ---- | -------- | ------ | ------ | ----- |
-| text | 文本内容 | string | -      | 2.0.0 |
+| 属性  | 说明     | 类型   | 默认值 | 版本  |
+| ----- | -------- | ------ | ------ | ----- |
+| value | 文本内容 | string | -      | 2.0.0 |
 
 ##### input 节点属性
 

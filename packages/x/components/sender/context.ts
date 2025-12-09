@@ -1,4 +1,5 @@
 import React from 'react';
 import type { SenderProps } from './interface';
-
-export const SenderContext = React.createContext<SenderProps>({});
+export const SenderContext = React.createContext<
+  SenderProps & { submitDisabled?: boolean; triggerSend?: () => void }
+>({});

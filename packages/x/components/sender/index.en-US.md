@@ -25,6 +25,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/speech.tsx">Voice Input</code>
 <code src="./demo/speech-custom.tsx">Custom Voice Input</code>
 <code src="./demo/suffix.tsx">Custom Suffix</code>
+<code src="./demo/disable-ctrl.tsx">Disable Ctrl</code>
 <code src="./demo/header.tsx">Expand Panel</code>
 <code src="./demo/slot-with-suggestion.tsx">Quick Commands</code>
 <code src="./demo/header-fixed.tsx">References</code>
@@ -55,7 +56,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | styles | Semantic style definition | [See below](#semantic-dom) | - | - |
 | submitType | Submission mode | SubmitType | `enter` \| `shiftEnter` | - |
 | value | Input box value | string | - | - |
-| onSubmit | Callback for clicking the send button | (message: string, slotConfig?: SlotConfigType[], skill: SkillType) => void | - | - |
+| onSubmit | Callback for clicking the send button | (message: string, slotConfig: SlotConfigType[], skill: SkillType) => void | - | - |
 | onChange | Callback for input box value change | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`>, slotConfig: SlotConfigType[], skill: SkillType) => void | - | - |
 | onCancel | Callback for clicking the cancel button | () => void | - | - |
 | onPasteFile | Callback for pasting files | (files: FileList) => void | - | - |
@@ -119,7 +120,7 @@ type ActionsComponents = {
 
 | Property | Description  | Type   | Default | Version |
 | -------- | ------------ | ------ | ------- | ------- |
-| text     | Text content | string | -       | 2.0.0   |
+| value    | Text content | string | -       | 2.0.0   |
 
 ##### input node properties
 

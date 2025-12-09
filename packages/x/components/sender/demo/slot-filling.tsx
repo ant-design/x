@@ -86,25 +86,25 @@ const slotConfig = {
   otherSlotConfig,
   altSlotConfig,
 };
-
+const skillConfig = {
+  value: 'travelId',
+  title: 'Travel Planner',
+  toolTip: {
+    title: 'Travel Skill',
+  },
+  closable: {
+    onClose: () => {
+      console.log('close');
+    },
+  },
+};
 const App: React.FC = () => {
   const [slotConfigKey, setSlotConfigKey] = useState<keyof typeof slotConfig | false>(
     'otherSlotConfig',
   );
   const senderRef = useRef<GetRef<typeof Sender>>(null);
   const [value, setValue] = useState<string>('');
-  const [skill, setSkill] = useState<SenderProps['skill']>({
-    value: 'travelId',
-    title: 'Travel Planner',
-    toolTip: {
-      title: 'Travel Skill',
-    },
-    closable: {
-      onClose: () => {
-        console.log('close');
-      },
-    },
-  });
+  const [skill, setSkill] = useState<SenderProps['skill']>(skillConfig);
   const [skillValue, setSkillValue] = useState<string>('');
   const [slotValue, setSlotValue] = useState<string>('');
   return (
@@ -296,12 +296,16 @@ const App: React.FC = () => {
           skill={skill}
           allowSpeech
           autoSize={{ minRows: 3, maxRows: 4 }}
+          placeholder="Enter to send message"
           onSubmit={(value) => {
             setValue(value);
             setSlotConfigKey(false);
           }}
-          onChange={(value, event, slotConfig) => {
-            console.log(value, event, slotConfig);
+          onChange={(value, event, slotConfig, skill) => {
+            console.log(value, event, slotConfig, skill);
+            if (!skill) {
+              setSkill(undefined);
+            }
           }}
           slotConfig={slotConfigKey ? slotConfig?.[slotConfigKey] : []}
           ref={senderRef}

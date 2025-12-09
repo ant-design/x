@@ -22,7 +22,7 @@ const Skill: React.FC<SkillProps> = ({
   title,
   value,
 }) => {
-  const componentCls = `${prefixCls}-skill-tag`;
+  const componentCls = `${prefixCls}-skill`;
 
   const closeNode = useMemo(() => {
     if (!closable) {
@@ -37,6 +37,7 @@ const Skill: React.FC<SkillProps> = ({
       }
       event.stopPropagation();
       removeSkill();
+
       config.onClose?.(event);
     };
 
@@ -65,9 +66,12 @@ const Skill: React.FC<SkillProps> = ({
   const titleNode = toolTip ? <Tooltip {...toolTip}>{mergeTitle}</Tooltip> : mergeTitle;
 
   return (
-    <div className={componentCls} role="button" aria-label={`Skill: ${mergeTitle}`} tabIndex={0}>
-      <span className={`${componentCls}-text`}>{titleNode}</span>
-      {closeNode}
+    <div className={`${componentCls}-wrapper`} contentEditable={false}>
+      <div className={`${componentCls}-tag`} contentEditable={false} role="button" tabIndex={0}>
+        <span className={`${componentCls}-tag-text`}>{titleNode}</span>
+        {closeNode}
+      </div>
+      <div className={`${componentCls}-holder`} />
     </div>
   );
 };

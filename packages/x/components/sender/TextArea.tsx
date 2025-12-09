@@ -40,7 +40,8 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
     classNames = {},
     autoSize,
     components,
-    onSubmit,
+    submitDisabled,
+    triggerSend,
     placeholder,
     onFocus,
     onBlur,
@@ -112,25 +113,26 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
 
   const onInternalKeyDown: React.KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
     const eventRes = onKeyDown?.(e);
+    const { key, shiftKey, ctrlKey, altKey, metaKey } = e;
 
-    if (isCompositionRef.current || e.key !== 'Enter' || eventRes === false) {
+    if (isCompositionRef.current || key !== 'Enter' || eventRes === false) {
       return;
     }
 
-    switch (submitType) {
-      case 'enter':
-        if (!e.shiftKey && !e.ctrlKey && !e.altKey && !e.metaKey) {
-          e.preventDefault();
-          onSubmit?.(value || '');
-        }
-        break;
+    // 处理Enter键提交
+    if (key === 'Enter') {
+      const isModifierPressed = ctrlKey || altKey || metaKey;
+      const shouldSubmit =
+        (submitType === 'enter' && !shiftKey && !isModifierPressed) ||
+        (submitType === 'shiftEnter' && shiftKey && !isModifierPressed);
 
-      case 'shiftEnter':
-        if (e.shiftKey && !e.ctrlKey && !e.altKey && !e.metaKey) {
-          e.preventDefault();
-          onSubmit?.(value || '');
+      if (shouldSubmit) {
+        e.preventDefault();
+        if (!submitDisabled) {
+          triggerSend?.();
         }
-        break;
+        return;
+      }
     }
   };
 

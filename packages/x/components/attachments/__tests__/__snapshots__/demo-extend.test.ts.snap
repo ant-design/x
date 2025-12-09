@@ -8,7 +8,7 @@ exports[`renders components/attachments/demo/basic.tsx extend context correctly 
     class="ant-flex css-var-_r_d_ ant-flex-align-flex-start ant-flex-gap-middle ant-flex-vertical"
   >
     <div
-      class="ant-sender css-var-_r_d_"
+      class="ant-sender css-var-_r_d_ ant-sender-main"
     >
       <div
         class="ant-sender-content"
@@ -2391,10 +2391,10 @@ exports[`renders components/attachments/demo/select-files.tsx extend context cor
     style="min-height: 250px;"
   >
     <div
-      class="ant-sender css-var-_r_2_"
+      class="ant-sender css-var-_r_2_ ant-sender-main"
     >
       <div
-        class="ant-sender-header"
+        class="ant-sender ant-sender-header"
         style="display: none;"
       >
         <div
@@ -2820,10 +2820,10 @@ exports[`renders components/attachments/demo/with-sender.tsx extend context corr
     style="min-height: 250px;"
   >
     <div
-      class="ant-sender css-var-_r_0_"
+      class="ant-sender css-var-_r_0_ ant-sender-main"
     >
       <div
-        class="ant-sender-header ant-sender-header-motion-appear ant-sender-header-motion-appear-start ant-sender-header-motion"
+        class="ant-sender ant-sender-header ant-sender-header-motion-appear ant-sender-header-motion-appear-start ant-sender-header-motion"
       >
         <div
           class="ant-sender-header-header"

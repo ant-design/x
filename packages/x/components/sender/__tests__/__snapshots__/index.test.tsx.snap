@@ -3,7 +3,7 @@
 exports[`Sender Component loading state 1`] = `
 <DocumentFragment>
   <div
-    class="ant-sender css-var-root"
+    class="ant-sender css-var-root ant-sender-main"
   >
     <div
       class="ant-sender-content"
@@ -82,7 +82,7 @@ exports[`Sender Component loading state 1`] = `
 
 exports[`Sender Component rtl render component should be rendered correctly in RTL direction 1`] = `
 <div
-  class="ant-sender css-var-root ant-sender-rtl"
+  class="ant-sender css-var-root ant-sender-main ant-sender-rtl"
 >
   <div
     class="ant-sender-content"
