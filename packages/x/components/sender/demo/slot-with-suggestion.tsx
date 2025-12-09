@@ -203,7 +203,7 @@ const App: React.FC = () => {
           );
         }}
       >
-        {({ onTrigger }) => {
+        {({ onTrigger, onKeyDown }) => {
           return (
             <Sender
               loading={loading}
@@ -258,13 +258,14 @@ const App: React.FC = () => {
                   </Flex>
                 );
               }}
-              onKeyDown={(e) => {
-                if (e.key === '@') {
+              onChange={(value) => {
+                if (value?.endsWith('@')) {
                   onTrigger();
                 } else {
                   onTrigger(false);
                 }
               }}
+              onKeyDown={onKeyDown}
               suffix={false}
               onSubmit={(v) => {
                 setLoading(true);

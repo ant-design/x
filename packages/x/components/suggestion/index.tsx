@@ -21,6 +21,7 @@ export interface SuggestionItem extends AnyObject {
 export interface RenderChildrenProps<T> {
   onTrigger: (info?: T | false) => void;
   onKeyDown: (e: React.KeyboardEvent) => void;
+  open: boolean;
 }
 
 export interface SuggestionProps<T = any>
@@ -142,7 +143,7 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
   const [activePath, onKeyDown] = useActive(itemList, mergedOpen, isRTL, onClose);
 
   // =========================== Children ===========================
-  const childNode = children?.({ onTrigger, onKeyDown });
+  const childNode = children?.({ onTrigger, onKeyDown, open: mergedOpen });
 
   // ============================ Render ============================
   const onInternalOpenChange = (nextOpen: boolean) => {
@@ -170,9 +171,17 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
       placement={isRTL ? 'topRight' : 'topLeft'}
       {...compatibleProps}
       optionRender={optionRender}
-      rootClassName={classnames(rootClassName, classNames.root, prefixCls, hashId, cssVarCls, {
-        [`${prefixCls}-block`]: block,
-      })}
+      rootClassName={classnames(
+        rootClassName,
+        className,
+        classNames.root,
+        prefixCls,
+        hashId,
+        cssVarCls,
+        {
+          [`${prefixCls}-block`]: block,
+        },
+      )}
       classNames={{
         root: classNames.root,
         popup: {
