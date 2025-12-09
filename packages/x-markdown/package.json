@@ -20,7 +20,9 @@
     "clean": "rm -rf es lib coverage plugins dist themes",
     "test:package-diff": "antd-tools run package-diff"
   },
-  "sideEffects": false,
+  "sideEffects": [
+    "**/*.css"
+  ],
   "main": "lib/index.js",
   "module": "es/index.js",
   "typings": "es/index.d.ts",
