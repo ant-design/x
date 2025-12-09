@@ -778,7 +778,7 @@ exports[`renders components/actions/demo/sub.tsx extend context correctly 1`] = 
       </div>
     </div>
     <div
-      class="ant-dropdown-trigger ant-actions-item ant-actions-sub-item ant-actions-dropdown"
+      class="ant-dropdown-trigger ant-actions-item ant-actions-sub-item"
     >
       <div
         class="ant-actions-icon"

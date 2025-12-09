@@ -37,7 +37,8 @@ const Demo: React.FC = () => {
         setValue(`[${itemVal}]:`);
       }}
     >
-      {({ onTrigger, onKeyDown }) => {
+      {({ onTrigger, onKeyDown, open }) => {
+        console.log(open, 'suggestion open');
         return (
           <>
             {contextHolder}
