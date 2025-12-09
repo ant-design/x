@@ -21,7 +21,6 @@ export interface PlaceholderProps {
 
 function Placeholder(props: PlaceholderProps, ref: React.Ref<GetRef<typeof Upload>>) {
   const { prefixCls, placeholder = {}, upload, className, style } = props;
-  console.log(upload, 11111);
 
   const placeholderCls = `${prefixCls}-placeholder`;
 
