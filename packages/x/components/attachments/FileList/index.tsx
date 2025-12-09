@@ -152,21 +152,19 @@ export default function FileList(props: FileListProps) {
       onRemove={handleRemove}
       overflow={overflow}
       extension={
-        showExtension ? (
-          <SilentUploader upload={upload}>
-            <Button
-              className={classnames(
-                classNames.upload,
-                contextClassNames.upload,
-                `${listCls}-upload-btn`,
-              )}
-              style={{ ...styles.upload, ...contextStyles.upload }}
-              type="dashed"
-            >
-              <PlusOutlined className={`${listCls}-upload-btn-icon`} />
-            </Button>
-          </SilentUploader>
-        ) : null
+        <SilentUploader visible={showExtension} upload={upload}>
+          <Button
+            className={classnames(
+              classNames.upload,
+              contextClassNames.upload,
+              `${listCls}-upload-btn`,
+            )}
+            style={{ ...styles.upload, ...contextStyles.upload }}
+            type="dashed"
+          >
+            <PlusOutlined className={`${listCls}-upload-btn-icon`} />
+          </Button>
+        </SilentUploader>
       }
     />
   );
