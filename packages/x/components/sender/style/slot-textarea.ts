@@ -29,7 +29,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       },
       [`${slotCls}:not(${slotContentCls})`]: {
         display: 'inline-block',
-        verticalAlign: 'baseline',
+        verticalAlign: 'middle',
         alignItems: 'center',
         marginBlock: 1,
         height: calc(token.fontSize).mul(token.lineHeight).add(2).equal(),
@@ -161,7 +161,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
         borderRadius: token.borderRadius,
         paddingInline: token.paddingXXS,
         boxSizing: 'border-box',
-        verticalAlign: 'baseline',
+        verticalAlign: 'middle',
         fontSize: token.fontSize,
         marginBlock: 1,
         lineHeight: token.lineHeight,
@@ -186,7 +186,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
       },
       [skillCls]: {
         display: 'inline-block',
-        verticalAlign: 'baseline',
+        verticalAlign: 'middle',
         alignItems: 'center',
         marginBlock: 1,
         height: calc(token.fontSize).mul(token.lineHeight).add(2).equal(),
@@ -220,7 +220,6 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
         position: 'relative',
         display: 'inline-flex',
         cursor: 'pointer',
-        alignItems: 'center',
         gap: token.marginXXS,
         transition: `background-color ${token.motionDurationMid}`,
         '&:hover': {

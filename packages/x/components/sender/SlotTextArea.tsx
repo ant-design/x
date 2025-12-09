@@ -585,6 +585,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const { key, target, shiftKey, ctrlKey, altKey, metaKey } = e;
     // 如果键盘被锁定或者正在组合输入，则跳过处理
     const eventRes = onKeyDown?.(e);
+
     // 如果键盘被锁定或者正在组合输入，直接跳过处理
     if (keyLockRef.current || isCompositionRef.current || eventRes === false) {
       onKeyDown?.(e as unknown as React.KeyboardEvent<HTMLTextAreaElement>);
@@ -778,11 +779,11 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         range.setStartAfter(selection.focusNode);
       }
     }
-    const startOffset = range.startOffset;
-    const container = range.startContainer;
 
     // 如果光标前有字符
     if (replaceCharacters?.length) {
+      const startOffset = range.startOffset;
+      const container = range.startContainer;
       const preCaretRange = range.cloneRange();
       preCaretRange.selectNodeContents(editableDom);
       preCaretRange.setEnd(range.endContainer, range.endOffset);
@@ -798,6 +799,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         }
       }
     }
+
+    selection.deleteFromDocument();
     slotNode.forEach((node) => {
       range.insertNode(node);
       range.setStartAfter(node);
