@@ -81,7 +81,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const isCompositionRef = useRef<boolean>(false);
   const keyLockRef = useRef<boolean>(false);
   const lastSelectionRef = useRef<Range | null>(null);
-  const slotInnerRef = useRef<boolean>(false);
   const skillDomRef = useRef<HTMLSpanElement>(null);
   const skillRef = useRef<SkillType>(null);
 
@@ -490,11 +489,10 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     // 触发onChange回调
     triggerValueChange(e);
   };
-
   const insertSkill = () => {
-    if (slotInnerRef.current && skill) {
+    if (skill && skillRef.current !== skill) {
+      removeSkill(false);
       skillRef.current = skill;
-      removeSkill();
       const skillSpan = buildSkillSpan(skill.value);
       const reactNode = createPortal(
         <Skill removeSkill={removeSkill} {...skill} prefixCls={prefixCls} />,
@@ -511,13 +509,15 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
   };
 
-  const removeSkill = () => {
+  const removeSkill = (isChange = true) => {
     const editableDom = editableRef.current;
     if (!editableDom || !skillDomRef.current) return;
     skillDomRef.current?.remove();
     skillDomRef.current = null;
     skillRef.current = null;
-    triggerValueChange();
+    if (isChange) {
+      triggerValueChange();
+    }
   };
   // 移除<br>标签（仅在enter模式下）
   const removeSpecificBRs = (element: HTMLDivElement | null) => {
@@ -851,7 +851,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const div = editableRef.current;
     if (!div) return;
     div.innerHTML = '';
-    slotInnerRef.current = false;
     slotDomMap?.current?.clear();
   };
 
@@ -873,16 +872,13 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     if (slotConfig && slotConfig.length > 0 && editableRef.current) {
       appendNodeList(getSlotListNode(slotConfig) as HTMLElement[]);
     }
-    slotInnerRef.current = true;
     if (!skill) {
       triggerValueChange();
     }
   }, [slotConfig]);
 
   useEffect(() => {
-    if (skillRef.current !== skill) {
-      insertSkill();
-    }
+    insertSkill();
   }, [skill]);
 
   useImperativeHandle(ref, () => {
