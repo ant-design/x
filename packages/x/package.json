@@ -104,7 +104,7 @@
     "@qixian.cs/github-contributors-list": "^2.0.2",
     "@rc-component/father-plugin": "^2.0.4",
     "@rc-component/np": "^1.0.3",
-    "@rc-component/trigger": "^2.2.3",
+    "@rc-component/trigger": "^3.7.1",
     "@stackblitz/sdk": "^1.11.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.5.0",
@@ -146,7 +146,7 @@
     "@umijs/fabric": "^4.0.1",
     "adm-zip": "^0.5.16",
     "ali-oss": "^6.21.0",
-    "antd": "^6.0.1",
+    "antd": "^6.1.0",
     "antd-style": "^4.0.0-alpha.1",
     "antd-token-previewer": "^3.0.0",
     "axios": "^1.7.7",
@@ -242,7 +242,7 @@
     "webpack-bundle-analyzer": "^5.0.1"
   },
   "peerDependencies": {
-    "antd": "^6.0.1",
+    "antd": "^6.1.0",
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
   },

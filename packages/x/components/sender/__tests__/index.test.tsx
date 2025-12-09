@@ -129,10 +129,10 @@ describe('Sender Component', () => {
     );
 
     fireEvent.change(container.querySelector('textarea')!, { target: { value: 'bamboo' } });
-    expect(onChange).toHaveBeenCalledWith('bamboo', {});
+    expect(onChange).toHaveBeenCalledWith('bamboo', {}, [], undefined);
 
     fireEvent.click(container.querySelector('button')!);
-    expect(onChange).toHaveBeenCalledWith('', undefined);
+    expect(onChange).toHaveBeenCalledWith('', undefined, [], undefined);
   });
 
   describe('submitType', () => {

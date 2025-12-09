@@ -10,7 +10,7 @@ import {
   ProfileOutlined,
   SearchOutlined,
 } from '@ant-design/icons';
-import { Attachments, AttachmentsProps, Sender, SenderProps, Suggestion } from '@ant-design/x';
+import { Sender, SenderProps, Suggestion } from '@ant-design/x';
 import { Button, Divider, Dropdown, Flex, GetProp, GetRef, MenuProps, message } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -110,7 +110,6 @@ const App: React.FC = () => {
   type SuggestionItems = Exclude<GetProp<typeof Suggestion, 'items'>, () => void>;
   const [deepThink, setDeepThink] = useState<boolean>(true);
   const [activeAgentKey, setActiveAgentKey] = useState('deep_search');
-  const [fileList, setFileList] = useState<AttachmentsProps['items']>([]);
   const agentItems: MenuProps['items'] = Object.keys(AgentInfo).map((agent) => {
     const { icon, label } = AgentInfo[agent];
     return {
@@ -119,9 +118,7 @@ const App: React.FC = () => {
       label,
     };
   });
-  const [open, setOpen] = React.useState(false);
 
-  const attachmentsRef = React.useRef<GetRef<typeof Attachments>>(null);
   const fileItems = Object.keys(FileInfo).map((file) => {
     const { icon, label } = FileInfo[file];
     return {
@@ -168,29 +165,6 @@ const App: React.FC = () => {
     }
   }, [loading]);
 
-  const senderHeader = (
-    <Sender.Header
-      title="Attachments"
-      styles={{
-        content: {
-          padding: 0,
-        },
-      }}
-      open={open}
-      onOpenChange={setOpen}
-      forceRender
-    >
-      <Attachments
-        ref={attachmentsRef}
-        // Mock not real upload file
-        beforeUpload={() => false}
-        items={fileList}
-        onChange={({ fileList }) => setFileList(fileList)}
-        getDropContainer={() => senderRef.current?.nativeElement}
-      />
-    </Sender.Header>
-  );
-
   const suggestions: SuggestionItems = [
     { label: 'Write a report', value: 'report' },
     { label: 'Draw a picture', value: 'draw' },
@@ -219,7 +193,7 @@ const App: React.FC = () => {
           senderRef.current?.insert?.(
             [
               {
-                type: 'input',
+                type: 'content',
                 key: `partner_2_${Date.now()}`,
                 props: { placeholder: 'Enter a name' },
               },
@@ -229,13 +203,12 @@ const App: React.FC = () => {
           );
         }}
       >
-        {({ onTrigger }) => {
+        {({ onTrigger, onKeyDown }) => {
           return (
             <Sender
               loading={loading}
               ref={senderRef}
               placeholder="Press Enter to send message"
-              header={senderHeader}
               footer={(actionNode) => {
                 return (
                   <Flex justify="space-between" align="center">
@@ -285,13 +258,14 @@ const App: React.FC = () => {
                   </Flex>
                 );
               }}
-              onKeyDown={(e) => {
-                if (e.key === '@') {
+              onChange={(value) => {
+                if (value?.endsWith('@')) {
                   onTrigger();
                 } else {
                   onTrigger(false);
                 }
               }}
+              onKeyDown={onKeyDown}
               suffix={false}
               onSubmit={(v) => {
                 setLoading(true);
