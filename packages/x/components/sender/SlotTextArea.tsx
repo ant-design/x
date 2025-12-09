@@ -110,6 +110,18 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const [skillPlaceholders, setSkillPlaceholders] = useState<React.ReactNode>(null);
 
   // ============================ Methods =============================
+  const triggerValueChange = (e?: EventType) => {
+    const newValue = getEditorValue();
+    if (skillDomRef.current) {
+      if (!newValue?.value && newValue.slotConfig.length === 0) {
+        skillDomRef.current.classList.add(`${prefixCls}-skill-empty`);
+      } else {
+        skillDomRef.current.classList.remove(`${prefixCls}-skill-empty`);
+      }
+    }
+
+    onChange?.(newValue.value, e, newValue.slotConfig, newValue.skill);
+  };
   const buildSlotSpan = (key: string) => {
     const span = document.createElement('span');
 
@@ -122,7 +134,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
   const buildSkillSpan = (key: string) => {
     const span = document.createElement('span');
-    span.setAttribute('contenteditable', 'false');
+    span.setAttribute('contenteditable', 'true');
     span.dataset.skillKey = key;
     span.dataset.placeholder = placeholder;
     span.className = `${prefixCls}-skill`;
@@ -169,8 +181,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       });
 
       // 触发 onChange 回调
-      const newValue = getEditorValue();
-      onChange?.(newValue.value, e, newValue.slotConfig, newValue.skill);
+      triggerValueChange(e);
     }
   };
 
@@ -294,26 +305,46 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     if (node.nodeType === Node.TEXT_NODE) {
       return node.textContent || '';
     }
-    if (node.nodeType === Node.ELEMENT_NODE) {
-      const el = node as HTMLElement;
-      const slotKey = el.getAttribute('data-slot-key');
-      const nodeType = el.getAttribute('data-node-type');
-      if (slotKey) {
-        if (nodeType === 'nbsp') {
-          return ' ';
-        }
-        const nodeConfig = slotConfigMap.get(slotKey);
-        let slotResult = '';
-        if (nodeConfig?.type === 'content') {
-          slotResult = el?.innerText || '';
-        } else {
-          const slotValue = getSlotValues()[slotKey] || '';
-          slotResult = nodeConfig?.formatResult?.(slotValue) || slotValue;
-        }
 
-        return slotResult;
-      }
+    if (node.nodeType !== Node.ELEMENT_NODE) {
+      return '';
     }
+
+    const el = node as HTMLElement;
+    const { dataset } = el;
+
+    // 处理 slot 节点
+    if (dataset.slotKey) {
+      if (dataset.nodeType === 'nbsp') {
+        return ' ';
+      }
+
+      const nodeConfig = slotConfigMap.get(dataset.slotKey);
+      if (!nodeConfig) {
+        return '';
+      }
+
+      if (nodeConfig.type === 'content') {
+        return el.innerText || '';
+      }
+
+      const slotValue = getSlotValues()[dataset.slotKey] || '';
+      return nodeConfig.formatResult?.(slotValue) || slotValue;
+    }
+
+    // 处理 skill 节点
+    if (dataset.skillKey) {
+      const skillWrapper = el.querySelector(`.${prefixCls}-skill-wrapper`) as HTMLElement;
+      const fullText = el.innerText || '';
+
+      if (!skillWrapper) {
+        return fullText;
+      }
+
+      const skillText = skillWrapper.innerText || '';
+      return fullText.replace(skillText, '').replace(/\n/g, '');
+    }
+
     return '';
   };
 
@@ -399,7 +430,11 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
     // 检查是否在 slot 元素内
     const endContainer = range.endContainer as HTMLElement;
-    if (endContainer?.className?.includes(`${prefixCls}-slot`)) {
+
+    if (
+      endContainer?.className?.includes(`${prefixCls}-skill`) ||
+      endContainer?.className?.includes(`${prefixCls}-slot`)
+    ) {
       return { type: 'slot', range };
     }
 
@@ -453,8 +488,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     });
 
     // 触发onChange回调
-    const newValue = getEditorValue();
-    onChange?.(newValue.value, e, newValue.slotConfig, newValue.skill);
+    triggerValueChange(e);
   };
 
   const insertSkill = () => {
@@ -473,8 +507,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       range.setStart(editableDom, 0);
       range.insertNode(skillSpan);
       skillDomRef.current = skillSpan;
-      const editorValue = getEditorValue();
-      onChange?.(editorValue.value, undefined, editorValue.slotConfig, editorValue.skill);
+      triggerValueChange();
     }
   };
 
@@ -484,8 +517,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     skillDomRef.current?.remove();
     skillDomRef.current = null;
     skillRef.current = null;
-    const editorValue = getEditorValue();
-    onChange?.(editorValue.value, undefined, editorValue.slotConfig, editorValue.skill);
+    triggerValueChange();
   };
   // 移除<br>标签（仅在enter模式下）
   const removeSpecificBRs = (element: HTMLDivElement | null) => {
@@ -646,14 +678,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   };
 
   const onInternalInput = (e: React.FormEvent<HTMLDivElement>) => {
-    const newValue = getEditorValue();
     removeSpecificBRs(editableRef?.current);
-    onChange?.(
-      newValue.value,
-      e as unknown as React.ChangeEvent<HTMLTextAreaElement>,
-      newValue.slotConfig,
-      newValue.skill,
-    );
+    triggerValueChange(e as unknown as EventType);
   };
 
   const onInternalPaste: React.ClipboardEventHandler<HTMLDivElement> = (e) => {
@@ -729,7 +755,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     let range: Range = document.createRange();
     setSlotValues((prev) => ({ ...prev, ...slotConfig }));
     setSlotConfigMap(slotConfig);
-
     // 光标不在输入框内，将内容插入最末位
     if (type === 'end') {
       selection.removeAllRanges();
@@ -749,8 +774,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
     if (type === 'slot') {
       range = selection?.getRangeAt?.(0);
-      if (selection?.focusNode?.nextSibling) {
-        range.setStartBefore(selection.focusNode.nextSibling);
+      if (selection.focusNode) {
+        range.setStartAfter(selection.focusNode);
       }
     }
     const startOffset = range.startOffset;
@@ -832,6 +857,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const editableDom = editableRef.current;
     if (!editableDom) return;
     editableDom.innerHTML = '';
+    skillRef.current = null;
+    skillDomRef.current = null;
     insertSkill();
     setSlotValues({});
     slotDomMap?.current?.clear();
@@ -846,8 +873,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
     slotInnerRef.current = true;
     if (!skill) {
-      const editorValue = getEditorValue();
-      onChange?.(editorValue.value, undefined, editorValue.slotConfig, editorValue.skill);
+      triggerValueChange();
     }
   }, [slotConfig]);
 

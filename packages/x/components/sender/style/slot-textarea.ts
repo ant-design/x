@@ -192,9 +192,23 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
         height: calc(token.fontSize).mul(token.lineHeight).add(2).equal(),
         wordBreak: 'break-all',
         paddingInlineEnd: 0,
-        paddingInlineStart: 1,
-        marginInlineEnd: token.marginXS,
+        paddingInlineStart: 0,
+        marginInlineEnd: 0,
         marginInlineStart: -1,
+        [`&${skillCls}-empty`]: {
+          '&::after': {
+            display: 'inline-block',
+            pointerEvents: 'none',
+            height: 'inherit',
+            content: 'attr(data-placeholder)',
+            color: token.colorTextPlaceholder,
+          },
+        },
+      },
+      [`${skillCls}-wrapper`]: {
+        height: '100%',
+        display: 'inline-flex',
+        alignItems: 'center',
       },
       [`${skillCls}-tag`]: {
         paddingInline: token.paddingXS,
@@ -225,6 +239,10 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
           cursor: 'not-allowed',
           color: token.colorTextDisabled,
         },
+      },
+      [`${skillCls}-holder`]: {
+        width: token.marginXS,
+        height: '100%',
       },
     },
   };
