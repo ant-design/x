@@ -79,10 +79,7 @@ const Demo = () => {
   const sharedAttachmentProps: AttachmentsProps = {
     beforeUpload: () => false,
     items,
-    onChange: ({ fileList }) => {
-      console.log('onChange:', fileList);
-      setItems(fileList);
-    },
+    action: '/upload',
   };
 
   return (
@@ -97,25 +94,12 @@ const Demo = () => {
       <div style={sharedBorderStyle}>
         <Attachments
           {...sharedAttachmentProps}
+          maxCount={4}
           placeholder={getPlaceholderFn({
             icon: <CloudUploadOutlined />,
             title: 'Click or Drop files here',
             description: 'Support file type: image, video, audio, document, etc.',
           })}
-        />
-      </div>
-
-      <div style={sharedBorderStyle}>
-        <Attachments
-          {...sharedAttachmentProps}
-          placeholder={getPlaceholderFn(
-            <Result
-              title="Custom Placeholder Node"
-              icon={<CloudUploadOutlined />}
-              extra={<Button type="primary">Do Upload</Button>}
-              style={{ padding: 0 }}
-            />,
-          )}
         />
       </div>
 
