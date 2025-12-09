@@ -23,7 +23,7 @@ function SilentUploader(props: SilentUploaderProps, ref: React.Ref<GetRef<typeof
       {...upload}
       showUploadList={false}
       className={className}
-      style={{ ...style, display: visible === false ? 'none' : '' }}
+      style={{ ...style, ...(visible === false ? { display: 'none' } : {}) }}
       ref={uploadRef}
     >
       {children}
