@@ -362,12 +362,25 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
                 <Flex justify="flex-start">
                   <Typography.Text type={exceedLengthIsTrue ? 'danger' : 'secondary'}>
                     <small>
-                      {innerValue.length || '0'}
-                      {maxLength && ' / ' + maxLength.toString()}
-                      {exceedLengthIsTrue && ' Exceeded maximum length'}
+                      <span className={`sender-text-length`}>{innerValue.length || '0'}</span>
+                      {maxLength && (
+                        <>
+                          {' / '}
+                          <span className={`sender-text-max-length`}>{maxLength.toString()}</span>
+                        </>
+                      )}{' '}
                     </small>
                   </Typography.Text>
                 </Flex>
+              )}
+              {exceedLengthIsTrue && (
+                <Typography.Text type={exceedLengthIsTrue ? 'danger' : 'secondary'}>
+                  <small>
+                    <span className="sender-text-max-length-error">
+                      {'Exceeded maximum length'}
+                    </span>
+                  </small>
+                </Typography.Text>
               )}
             </Flex>
 
