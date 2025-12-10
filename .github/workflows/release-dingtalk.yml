@@ -42,3 +42,18 @@ jobs:
           msg-footer: '💬 前往 [**Ant Design X Releases**]({{url}}) 查看更新日志'
           prettier: true
           prerelease-filter: '-, a, b, A, B'
+      - name: Send to Ant Design X DingGroup XMarkdown
+        uses: actions-cool/release-helper@v2
+        with:
+          trigger: tag
+          changelogs: 'CHANGELOG.en-US.md, CHANGELOG.zh-CN.md'
+          branch: 'main'
+          tag: '2*'
+          latest: '2*'
+          dingding-token: ${{ secrets.DINGDING_BOT_XMARKDOWN_TOKEN }}
+          dingding-msg: CHANGELOG.zh-CN.md
+          msg-title: '# Ant Design X {{v}} 发布日志'
+          msg-poster: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*kjHUSYIdsnUAAAAAAAAAAAAADgCCAQ/original'
+          msg-footer: '💬 前往 [**Ant Design X Releases**]({{url}}) 查看更新日志'
+          prettier: true
+          prerelease-filter: '-, a, b, A, B'
