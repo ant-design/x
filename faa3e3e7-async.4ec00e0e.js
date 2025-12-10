@@ -1,0 +1,2 @@
+(("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@ant-design/x"]=("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@ant-design/x"]||[]).push([["faa3e3e7"],{faa3e3e7:function(n,a,e){n.exports=function(n){return{aliases:["pycon"],contains:[{className:"meta",starts:{end:/ |$/,starts:{end:"$",subLanguage:"python"}},variants:[{begin:/^>>>(?=[ ]|$)/},{begin:/^\.\.\.(?=[ ]|$)/}]}]};};}}]);
+//# sourceMappingURL=faa3e3e7-async.4ec00e0e.js.map

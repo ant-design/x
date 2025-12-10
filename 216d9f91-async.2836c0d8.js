@@ -1,0 +1,2 @@
+(("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@ant-design/x"]=("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@ant-design/x"]||[]).push([["216d9f91"],{"216d9f91":function(n,e,i){n.exports=function(n){return{name:"VBScript in HTML",subLanguage:"xml",contains:[{begin:"<%",end:"%>",subLanguage:"vbscript"}]};};}}]);
+//# sourceMappingURL=216d9f91-async.2836c0d8.js.map

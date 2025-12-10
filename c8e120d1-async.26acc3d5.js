@@ -1,0 +1,2 @@
+(("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@ant-design/x"]=("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@ant-design/x"]||[]).push([["c8e120d1"],{c8e120d1:function(e,n,a){e.exports=function(e){return{name:"LDIF",contains:[{className:"attribute",begin:"^dn",end:": ",excludeEnd:!0,starts:{end:"$",relevance:0},relevance:10},{className:"attribute",begin:"^\\w",end:": ",excludeEnd:!0,starts:{end:"$",relevance:0}},{className:"literal",begin:"^-",end:"$"},e.HASH_COMMENT_MODE]};};}}]);
+//# sourceMappingURL=c8e120d1-async.26acc3d5.js.map

@@ -1,0 +1,2 @@
+(("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@ant-design/x"]=("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@ant-design/x"]||[]).push([["85e7386b"],{"85e7386b":function(e,i,n){"use strict";n.d(i,"__esModule",{value:!0}),n.e(i,{PieModule:function(){return u.PieModule;},createPieServices:function(){return u.createPieServices;}});var u=n("93134a5d");n("dcc42dc4");}}]);
+//# sourceMappingURL=85e7386b-async.79614760.js.map
