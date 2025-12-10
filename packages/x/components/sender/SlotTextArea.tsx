@@ -278,12 +278,11 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       const slotKey = config.key;
       warning(!!slotKey, 'sender', `Slot key is missing: ${slotKey}`);
       if (slotKey) {
-        let slotSpan: any[];
-        let slotDom;
+        let slotSpan: HTMLElement[];
+        let slotDom: HTMLSpanElement;
         if (config.type === 'content') {
           slotDom = buildEditSlotSpan(config);
           slotSpan = [buildSpan(slotKey, 'before'), slotDom, buildSpan(slotKey, 'after')];
-          saveSlotDom(slotKey, slotDom);
         } else {
           slotDom = buildSlotSpan(slotKey);
           slotSpan = [slotDom];
