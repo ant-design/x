@@ -22,7 +22,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
       >
         <span
           class="ant-sender-skill"
-          contenteditable="true"
+          contenteditable="false"
           data-placeholder="Press Enter to send message"
           data-skill-key="writing"
         >
@@ -727,7 +727,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
       >
         <span
           class="ant-sender-skill"
-          contenteditable="true"
+          contenteditable="false"
           data-placeholder=""
           data-skill-key="writing"
         >
@@ -3249,7 +3249,7 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
       >
         <span
           class="ant-sender-skill"
-          contenteditable="true"
+          contenteditable="false"
           data-placeholder="Enter to send message"
           data-skill-key="travelId"
         >
