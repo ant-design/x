@@ -131,6 +131,15 @@ export class ChatMessagesStore<T extends { id: number | string }> {
     this.listeners.push(callback);
     return () => {
       this.listeners = this.listeners.filter((listener) => listener !== callback);
+      // Clean up throttle timer when no listeners remain to prevent memory leaks
+      // and "setState on unmounted component" warnings
+      if (this.listeners.length === 0) {
+        if (this.throttleTimer) {
+          clearTimeout(this.throttleTimer);
+          this.throttleTimer = null;
+        }
+        this.pendingEmit = false;
+      }
     };
   };
 
