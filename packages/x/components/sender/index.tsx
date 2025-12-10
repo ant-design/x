@@ -224,9 +224,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
 
   // ============================ Input ============================
   const exceedLengthIsTrue =
-    maxLength !== undefined &&
-    maxLength > 0 &&
-    (inputRef.current?.getValue().value.length || 0) > maxLength;
+    maxLength !== undefined && maxLength > 0 && (innerValue.length || 0) > maxLength;
 
   // ============================ Footer ============================
   const footerNode =
@@ -364,7 +362,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
                 <Flex justify="flex-start">
                   <Typography.Text type={exceedLengthIsTrue ? 'danger' : 'secondary'}>
                     <small>
-                      {inputRef.current?.getValue().value.length || '0'}
+                      {innerValue.length || '0'}
                       {maxLength && ' / ' + maxLength.toString()}
                       {exceedLengthIsTrue && ' Exceeded maximum length'}
                     </small>
