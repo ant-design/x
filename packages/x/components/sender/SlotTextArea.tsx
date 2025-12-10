@@ -836,9 +836,9 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     if (options?.cursor === 'slot') {
       return slotFocus(options?.key);
     }
-    const selection = window.getSelection();
-    if (!selection) return;
+
     const range = document.createRange();
+
     range.selectNodeContents(editor);
     switch (options.cursor) {
       case 'start':
@@ -851,7 +851,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         range.collapse(false);
         break;
     }
-
+    const selection = window.getSelection();
+    if (!selection) return;
     selection.removeAllRanges();
     selection.addRange(range);
   };

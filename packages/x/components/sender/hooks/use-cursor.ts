@@ -16,8 +16,13 @@ const useCursor = () => {
     selection.addRange(range);
   };
 
+  const focus = (selectNode: HTMLDivElement, preventScroll?: boolean) => {
+    selectNode.focus({ preventScroll: preventScroll ?? false });
+  };
+
   return {
-    setEndCursor: (selectNode: HTMLDivElement) => {
+    setEndCursor: (selectNode: HTMLDivElement, preventScroll?: boolean) => {
+      focus(selectNode, preventScroll);
       const { range, selection } = getRange();
       if (range && selection) {
         range.selectNodeContents(selectNode);
@@ -25,7 +30,8 @@ const useCursor = () => {
         setRange(range, selection);
       }
     },
-    setStartCursor: (selectNode: HTMLDivElement) => {
+    setStartCursor: (selectNode: HTMLDivElement, preventScroll?: boolean) => {
+      focus(selectNode, preventScroll);
       const { range, selection } = getRange();
       if (range && selection) {
         range.selectNodeContents(selectNode);
@@ -33,11 +39,31 @@ const useCursor = () => {
         setRange(range, selection);
       }
     },
-    setAllSelectCursor: (selectNode: HTMLDivElement) => {
+    setAllSelectCursor: (selectNode: HTMLDivElement, preventScroll?: boolean) => {
+      focus(selectNode, preventScroll);
       const { range, selection } = getRange();
       if (range && selection) {
         range.selectNodeContents(selectNode);
         setRange(range, selection);
+      }
+    },
+    setCursorPosition: (element: Node, position: number) => {
+      // 创建一个range对象
+
+      const range = document.createRange();
+      // 设置range的起始点和结束点
+
+      range.setStart(element, position);
+      range.setEnd(element, position);
+
+      // 创建一个selection对象
+      const selection = window.getSelection();
+      if (selection) {
+        // 清除之前的selection
+        selection.removeAllRanges();
+        // 添加新的range到selection
+        range.collapse(false);
+        selection.addRange(range);
       }
     },
   };
