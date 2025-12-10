@@ -292,8 +292,9 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
           const reactNode = renderSlot(config, slotDom);
           if (reactNode) {
             setSlotPlaceholders((ori) => {
-              ori.set(slotKey, reactNode);
-              return ori;
+              const newMap = new Map(ori);
+              newMap.set(slotKey, reactNode);
+              return newMap;
             });
             nodeList.push(...slotSpan);
           }
