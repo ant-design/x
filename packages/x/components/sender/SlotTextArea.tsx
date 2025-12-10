@@ -495,6 +495,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     // 触发onChange回调
     triggerValueChange(e);
   };
+
   const insertSkill = () => {
     if (skill && skillRef.current !== skill) {
       removeSkill(false);
@@ -550,13 +551,10 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         const slotKey = (node as Element)?.getAttribute?.('data-slot-key') || '';
         const nodeType = (node as Element)?.getAttribute?.('data-node-type') || '';
         const nodeConfig = slotConfigMap.get(slotKey);
-
         if (node.nodeType !== Node.ELEMENT_NODE) continue;
-
         if (nodeConfig?.type === 'input') {
           return (node as Element).querySelector<HTMLInputElement>('input');
         }
-
         if (nodeConfig?.type === 'content' && nodeType !== 'nbsp') {
           return node;
         }
@@ -879,6 +877,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     slotDomMap?.current?.clear();
     onInternalInput(null as unknown as React.FormEvent<HTMLDivElement>);
   };
+
   // ============================ Effects =============================
 
   useEffect(() => {
