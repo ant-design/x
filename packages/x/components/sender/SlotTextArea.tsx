@@ -845,11 +845,11 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const selection = window.getSelection();
     if (!selection) return;
     const range = document.createRange();
-    if (skillDomRef.current?.getAttribute('contenteditable') === 'true') {
-      range.selectNodeContents(skillDomRef.current);
-    } else {
-      range.selectNodeContents(editor);
-    }
+    const targetNode =
+      skillDomRef.current?.getAttribute('contenteditable') === 'true'
+        ? skillDomRef.current
+        : editor;
+    range.selectNodeContents(targetNode);
 
     switch (options.cursor) {
       case 'start':
