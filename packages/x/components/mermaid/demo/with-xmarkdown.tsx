@@ -67,32 +67,41 @@ const Code: React.FC<ComponentProps> = (props) => {
 
 const App = () => {
   const [index, setIndex] = React.useState(0);
-  const timer = React.useRef<any>(-1);
-
-  const renderStream = () => {
-    if (index >= text.length) {
-      clearTimeout(timer.current);
-      return;
-    }
-    timer.current = setTimeout(() => {
-      setIndex((prev) => prev + 5);
-      renderStream();
-    }, 20);
-  };
+  const timer = React.useRef<NodeJS.Timeout | null>(null);
+  const contentRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    if (index === text.length) return;
-    renderStream();
+    if (index >= text.length) return;
+
+    timer.current = setTimeout(() => {
+      setIndex(Math.min(index + 5, text.length));
+    }, 20);
+
     return () => {
-      clearTimeout(timer.current);
+      if (timer.current) {
+        clearTimeout(timer.current);
+        timer.current = null;
+      }
     };
   }, [index]);
 
+  React.useEffect(() => {
+    if (contentRef.current && index > 0 && index < text.length) {
+      const { scrollHeight, clientHeight } = contentRef.current;
+      if (scrollHeight > clientHeight) {
+        contentRef.current.scrollTo({
+          top: scrollHeight,
+          behavior: 'smooth',
+        });
+      }
+    }
+  }, [index]);
+
   return (
-    <Flex vertical gap="small">
-      <Button style={{ alignSelf: 'flex-end' }} onClick={() => setIndex(0)}>
-        Re-Render
-      </Button>
+    <Flex vertical gap="small" style={{ height: 600, overflow: 'auto' }} ref={contentRef}>
+      <Flex justify="flex-end">
+        <Button onClick={() => setIndex(0)}>Re-Render</Button>
+      </Flex>
 
       <Bubble
         content={text.slice(0, index)}
