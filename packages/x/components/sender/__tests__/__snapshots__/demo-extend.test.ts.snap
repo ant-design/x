@@ -20,6 +20,60 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
         tabindex="0"
         value="Please write an article about . The requirement is  800  words."
       >
+        <span
+          class="ant-sender-skill"
+          contenteditable="true"
+          data-placeholder="Press Enter to send message"
+          data-skill-key="writing"
+        >
+          <div
+            class="ant-sender-skill-wrapper"
+            contenteditable="false"
+          >
+            <div
+              class="ant-sender-skill-tag"
+              contenteditable="false"
+              role="button"
+              tabindex="0"
+            >
+              <span
+                class="ant-sender-skill-tag-text"
+              >
+                Writing Assistant
+              </span>
+              <div
+                aria-label="Close skill"
+                class="ant-sender-skill-close"
+                role="button"
+                tabindex="0"
+              >
+                <span
+                  aria-label="close"
+                  class="anticon anticon-close ant-sender-skill-close-icon"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="close"
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+                    />
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <div
+              class="ant-sender-skill-holder"
+            />
+          </div>
+        </span>
         Please write an article about 
         <span
           class="ant-sender-slot"
@@ -671,6 +725,60 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
         tabindex="0"
         value="请帮我写一篇关于的文章。要求是 800 字。"
       >
+        <span
+          class="ant-sender-skill"
+          contenteditable="true"
+          data-placeholder=""
+          data-skill-key="writing"
+        >
+          <div
+            class="ant-sender-skill-wrapper"
+            contenteditable="false"
+          >
+            <div
+              class="ant-sender-skill-tag"
+              contenteditable="false"
+              role="button"
+              tabindex="0"
+            >
+              <span
+                class="ant-sender-skill-tag-text"
+              >
+                写作助手
+              </span>
+              <div
+                aria-label="Close skill"
+                class="ant-sender-skill-close"
+                role="button"
+                tabindex="0"
+              >
+                <span
+                  aria-label="close"
+                  class="anticon anticon-close ant-sender-skill-close-icon"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="close"
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+                    />
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <div
+              class="ant-sender-skill-holder"
+            />
+          </div>
+        </span>
         请帮我写一篇关于
         <span
           class="ant-sender-slot"
@@ -3139,6 +3247,84 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
         tabindex="0"
         value="I want to travel to  Beijing byairplanewith a group of 3 people, and each person has a budget ofbetween 3000 and 6000 RMB.PleasetravelToolhelp me create a travel itinerary,Use account ."
       >
+        <span
+          class="ant-sender-skill"
+          contenteditable="true"
+          data-placeholder="Enter to send message"
+          data-skill-key="travelId"
+        >
+          <div
+            class="ant-sender-skill-wrapper"
+            contenteditable="false"
+          >
+            <div
+              class="ant-sender-skill-tag"
+              contenteditable="false"
+              role="button"
+              tabindex="0"
+            >
+              <span
+                class="ant-sender-skill-tag-text"
+              >
+                <span
+                  aria-describedby="test-id"
+                >
+                  Travel Planner
+                </span>
+                <div
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1b_ ant-tooltip-placement-top"
+                  style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                >
+                  <div
+                    class="ant-tooltip-arrow"
+                    style="position: absolute; bottom: 0px; left: 0px;"
+                  >
+                    <span
+                      class="ant-tooltip-arrow-content"
+                    />
+                  </div>
+                  <div
+                    class="ant-tooltip-container"
+                    id="test-id"
+                    role="tooltip"
+                  >
+                    Travel Skill
+                  </div>
+                </div>
+              </span>
+              <div
+                aria-label="Close skill"
+                class="ant-sender-skill-close"
+                role="button"
+                tabindex="0"
+              >
+                <span
+                  aria-label="close"
+                  class="anticon anticon-close ant-sender-skill-close-icon"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="close"
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+                    />
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <div
+              class="ant-sender-skill-holder"
+            />
+          </div>
+        </span>
         I want to travel to 
         <span
           class="ant-sender-slot-before ant-sender-slot-no-width"
@@ -3479,11 +3665,7 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
 </div>
 `;
 
-exports[`renders components/sender/demo/slot-filling.tsx extend context correctly 2`] = `
-[
-  "Warning: trigger element and popup element should in same shadow root.",
-]
-`;
+exports[`renders components/sender/demo/slot-filling.tsx extend context correctly 2`] = `[]`;
 
 exports[`renders components/sender/demo/slot-with-suggestion.tsx extend context correctly 1`] = `
 <div
