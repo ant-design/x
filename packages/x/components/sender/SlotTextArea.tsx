@@ -68,7 +68,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     submitDisabled,
     ...restProps
   } = React.useContext(SenderContext);
-
   // ============================= MISC =============================
   const { direction, getPrefixCls } = useXProviderContext();
   const prefixCls = `${getPrefixCls('sender', customizePrefixCls)}`;
@@ -83,6 +82,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const lastSelectionRef = useRef<Range | null>(null);
   const skillDomRef = useRef<HTMLSpanElement>(null);
   const skillRef = useRef<SkillType>(null);
+  const submitDisabledRef = useRef<boolean>(false);
 
   // ============================ Style =============================
 
@@ -123,7 +123,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   };
   const buildSlotSpan = (key: string) => {
     const span = document.createElement('span');
-
     span.setAttribute('contenteditable', 'false');
     span.dataset.slotKey = key;
     span.className = `${prefixCls}-slot`;
@@ -205,6 +204,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
               variant="borderless"
               value={value || ''}
               tabIndex={0}
+              onKeyDown={onInternalKeyDown}
               onChange={(e) => {
                 updateSlot(node.key as string, e.target.value, e as unknown as EventType);
               }}
@@ -278,21 +278,25 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       const slotKey = config.key;
       warning(!!slotKey, 'sender', `Slot key is missing: ${slotKey}`);
       if (slotKey) {
-        let slotSpan;
+        let slotSpan: HTMLElement[];
+        let slotDom: HTMLSpanElement;
         if (config.type === 'content') {
-          slotSpan = buildEditSlotSpan(config);
+          slotDom = buildEditSlotSpan(config);
+          slotSpan = [buildSpan(slotKey, 'before'), slotDom, buildSpan(slotKey, 'after')];
         } else {
-          slotSpan = buildSlotSpan(slotKey);
+          slotDom = buildSlotSpan(slotKey);
+          slotSpan = [slotDom];
         }
-        saveSlotDom(slotKey, slotSpan);
-        if (slotSpan) {
-          const reactNode = renderSlot(config, slotSpan);
+        saveSlotDom(slotKey, slotDom);
+        if (slotDom) {
+          const reactNode = renderSlot(config, slotDom);
           if (reactNode) {
             setSlotPlaceholders((ori) => {
-              ori.set(slotKey, reactNode);
-              return ori;
+              const newMap = new Map(ori);
+              newMap.set(slotKey, reactNode);
+              return newMap;
             });
-            nodeList.push(slotSpan);
+            nodeList.push(...slotSpan);
           }
         }
       }
@@ -391,6 +395,15 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     };
   };
 
+  const initClear = () => {
+    const div = editableRef.current;
+    if (!div) return;
+    div.innerHTML = '';
+    skillDomRef.current = null;
+    skillRef.current = null;
+    slotDomMap?.current?.clear();
+  };
+
   /**
    * 获取插入位置信息
    * @param position - 插入位置类型：'cursor' | 'end' | 'start'
@@ -451,15 +464,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
   const appendNodeList = (slotNodeList: HTMLElement[]) => {
     slotNodeList.forEach((element) => {
-      const slotKey = element?.getAttribute?.('data-slot-key') || '';
-      const nodeConfig = slotConfigMap.get(slotKey);
-      if (nodeConfig?.type === 'content') {
-        editableRef.current?.appendChild(buildSpan(slotKey, 'before'));
-        editableRef.current?.appendChild(element);
-        editableRef.current?.appendChild(buildSpan(slotKey, 'after'));
-      } else {
-        editableRef.current?.appendChild(element);
-      }
+      editableRef.current?.appendChild(element);
     });
   };
 
@@ -570,6 +575,13 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       setCursorPosition(targetElement, 0);
     }
   };
+  const initRenderSlot = () => {
+    if (slotConfig && slotConfig.length > 0 && editableRef.current) {
+      initClear();
+      appendNodeList(getSlotListNode(slotConfig) as HTMLElement[]);
+    }
+  };
+
   // ============================ Events =============================
   const onInternalCompositionStart = () => {
     isCompositionRef.current = true;
@@ -580,7 +592,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     // 组合输入结束后清除键盘锁定
     keyLockRef.current = false;
   };
-
   const onInternalKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     const { key, target, shiftKey, ctrlKey, altKey, metaKey } = e;
     // 如果键盘被锁定或者正在组合输入，则跳过处理
@@ -591,7 +602,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       onKeyDown?.(e as unknown as React.KeyboardEvent<HTMLTextAreaElement>);
       return;
     }
-
     // 处理退格键删除slot
     if (key === 'Backspace' && target === editableRef.current) {
       const selection = window.getSelection();
@@ -631,10 +641,9 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       const shouldSubmit =
         (submitType === 'enter' && !shiftKey && !isModifierPressed) ||
         (submitType === 'shiftEnter' && shiftKey && !isModifierPressed);
-
       if (shouldSubmit) {
         e.preventDefault();
-        if (!submitDisabled) {
+        if (!submitDisabledRef.current) {
           keyLockRef.current = true;
           triggerSend?.();
         }
@@ -847,19 +856,13 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     selection.addRange(range);
   };
 
-  const initClear = () => {
-    const div = editableRef.current;
-    if (!div) return;
-    div.innerHTML = '';
-    slotDomMap?.current?.clear();
-  };
-
   const clear = () => {
     const editableDom = editableRef.current;
     if (!editableDom) return;
     editableDom.innerHTML = '';
     skillRef.current = null;
     skillDomRef.current = null;
+    slotConfigMap.clear();
     insertSkill();
     setSlotValues({});
     slotDomMap?.current?.clear();
@@ -868,12 +871,15 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   // ============================ Effects =============================
 
   useEffect(() => {
-    initClear();
-    if (slotConfig && slotConfig.length > 0 && editableRef.current) {
-      appendNodeList(getSlotListNode(slotConfig) as HTMLElement[]);
-    }
+    submitDisabledRef.current = submitDisabled ?? false;
+  }, [submitDisabled]);
+
+  useEffect(() => {
+    initRenderSlot();
     if (!skill) {
       triggerValueChange();
+    } else {
+      insertSkill();
     }
   }, [slotConfig]);
 
