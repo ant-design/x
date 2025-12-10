@@ -26,7 +26,7 @@ export class ChatMessagesStore<T extends { id: number | string }> {
 
   // Throttle state for preventing "Maximum update depth exceeded" during streaming
   private throttleTimer: ReturnType<typeof setTimeout> | null = null;
-  private pendingEmit: boolean = false;
+  private pendingEmit = false;
   private readonly throttleInterval: number = 50;
 
   private emitListeners() {
@@ -62,10 +62,7 @@ export class ChatMessagesStore<T extends { id: number | string }> {
     }
   }
 
-  private setMessagesInternal = (
-    messages: T[] | ((ori: T[]) => T[]),
-    throttle: boolean = true,
-  ) => {
+  private setMessagesInternal = (messages: T[] | ((ori: T[]) => T[]), throttle = true) => {
     let list: T[];
     if (typeof messages === 'function') {
       list = messages(this.messages);
