@@ -725,6 +725,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
         tabindex="0"
         value="请帮我写一篇关于的文章。要求是 800 字。"
       >
+<<<<<<< HEAD
         <span
           class="ant-sender-skill"
           contenteditable="true"
@@ -779,6 +780,8 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
             />
           </div>
         </span>
+=======
+>>>>>>> 4321450ce2de37893dea0128aa26e4e417a37742
         请帮我写一篇关于
         <span
           class="ant-sender-slot"
@@ -3247,6 +3250,7 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
         tabindex="0"
         value="I want to travel to  Beijing byairplanewith a group of 3 people, and each person has a budget ofbetween 3000 and 6000 RMB.PleasetravelToolhelp me create a travel itinerary,Use account ."
       >
+<<<<<<< HEAD
         <span
           class="ant-sender-skill"
           contenteditable="true"
@@ -3325,6 +3329,8 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
             />
           </div>
         </span>
+=======
+>>>>>>> 4321450ce2de37893dea0128aa26e4e417a37742
         I want to travel to 
         <span
           class="ant-sender-slot-before ant-sender-slot-no-width"
@@ -3665,7 +3671,11 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
 </div>
 `;
 
-exports[`renders components/sender/demo/slot-filling.tsx extend context correctly 2`] = `[]`;
+exports[`renders components/sender/demo/slot-filling.tsx extend context correctly 2`] = `
+[
+  "Warning: trigger element and popup element should in same shadow root.",
+]
+`;
 
 exports[`renders components/sender/demo/slot-with-suggestion.tsx extend context correctly 1`] = `
 <div

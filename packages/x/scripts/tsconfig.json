@@ -11,7 +11,6 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
-    "allowJs": true,
     "noEmitOnError": false,
     "importHelpers": false,
     "types": ["node"]

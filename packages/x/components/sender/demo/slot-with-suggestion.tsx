@@ -258,12 +258,13 @@ const App: React.FC = () => {
                   </Flex>
                 );
               }}
-              onKeyDown={(e) => {
-                if (e.key === '@') {
+              onChange={(value) => {
+                if (value?.endsWith('@')) {
                   onTrigger();
                 }
                 return onKeyDown(e);
               }}
+              onKeyDown={onKeyDown}
               suffix={false}
               onSubmit={(v) => {
                 setLoading(true);
