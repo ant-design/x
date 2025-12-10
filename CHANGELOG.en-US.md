@@ -16,6 +16,31 @@ tag: vVERSION
 
 ---
 
+## 2.1.1
+
+`2025-12-10`
+
+### @ant-design/x
+
+- Sender
+  - 🐛 Fixed the issue where send shortcuts enter and shift + enter were not controlled by the disabled state of the submit button, and fixed the inconsistency between `onSubmit` shortcut keys and button parameters. [#1472](https://github.com/ant-design/x/pull/1472) by [@kimteayon](https://github.com/kimteayon)
+  - 🐛 Fixed the missing `skill` parameter in `onChange`, fixed the issue where placeholder was not displayed when slot mode only showed skill capabilities, and refactored `onChange` logic. [#1477](https://github.com/ant-design/x/pull/1477) by [@kimteayon](https://github.com/kimteayon)
+  - 🐛 Fixed the issue where send shortcuts enter and shift + enter were not triggered when `input` type slot was activated and focused in slot mode. [#1498](https://github.com/ant-design/x/pull/1498) by [@kimteayon](https://github.com/kimteayon)
+- Attachment
+  - 🐛 Fixed the issue where the last file was not uploaded after setting `maxCount`. [#1486](https://github.com/ant-design/x/pull/1486) by [@kimteayon](https://github.com/kimteayon)
+  - 🐛 Fixed the antd warning issue after uploading images. [#1492](https://github.com/ant-design/x/pull/1492) by [@kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed Mermaid rendering jitter issue. [#1497](https://github.com/ant-design/x/pull/1497) by [@kimteayon](https://github.com/kimteayon)
+- 📖 Optimized official website to improve user experience. [#1464](https://github.com/ant-design/x/pull/1464) by [@IsDyh01](https://github.com/IsDyh01), [#1483](https://github.com/ant-design/x/pull/1483) by [@Chiaki-xps](https://github.com/Chiaki-xps), [#1463](https://github.com/ant-design/x/pull/1463) by [@J-Da-Shi](https://github.com/J-Da-Shi), [#1489](https://github.com/ant-design/x/pull/1489) by [@Chiaki-xps](https://github.com/Chiaki-xps), [#1499](https://github.com/ant-design/x/pull/1499) by [@kimteayon](https://github.com/kimteayon), [#1500](https://github.com/ant-design/x/pull/1500) by [@kimteayon](https://github.com/kimteayon), [#1501](https://github.com/ant-design/x/pull/1501) by [@kimteayon](https://github.com/kimteayon)
+- 🛠 Modified dependency configuration for `mermaid`. [#1475](https://github.com/ant-design/x/pull/1475) by [@Div627](https://github.com/Div627)
+
+### @ant-design/x-sdk
+
+- 🐛 Optimized message flow throttling and emission logic to avoid deep update errors caused by high-frequency streaming updates, improving real-time message stability and performance. [#1418](https://github.com/ant-design/x/pull/1418) by [@Afee2019](https://github.com/Afee2019)
+
+### @ant-design/x-markdown
+
+- 🛠 Optimized `sideEffects` configuration. [#1408](https://github.com/ant-design/x/pull/1408) by [@hongxuWei](https://github.com/hongxuWei)
+
 ## 2.1.0
 
 `2025-12-05`

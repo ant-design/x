@@ -1,6 +1,6 @@
 {
   "name": "@ant-design/x",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Craft AI-driven interfaces effortlessly",
   "keywords": [
     "AI",
@@ -87,7 +87,7 @@
     "lodash.throttle": "^4.1.1",
     "rc-motion": "^2.9.2",
     "rc-util": "^5.43.0",
-    "react-syntax-highlighter": "^16.1.0",    
+    "react-syntax-highlighter": "^16.1.0",
     "mermaid": "^11.12.1"
   },
   "devDependencies": {
