@@ -515,12 +515,10 @@ const ThinkComponent = memo((props: ComponentProps) => {
     if (props.streamStatus === 'done') {
       setTitle(t.CompleteThinking);
       setLoading(false);
-    }
-    if (chatStatus === 'abort') {
+    } else if (chatStatus === 'abort') {
       setTitle(t.AbortThinking);
       setLoading(false);
-    }
-    if (chatStatus === 'error') {
+    } else if (chatStatus === 'error') {
       setTitle(t.ErrThinking);
       setLoading(false);
     }
