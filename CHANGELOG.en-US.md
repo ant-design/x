@@ -29,7 +29,7 @@ tag: vVERSION
 - Attachment
   - 🐛 Fixed the issue where the last file was not uploaded after setting `maxCount`. [#1486](https://github.com/ant-design/x/pull/1486) by [@kimteayon](https://github.com/kimteayon)
   - 🐛 Fixed the antd warning issue after uploading images. [#1492](https://github.com/ant-design/x/pull/1492) by [@kimteayon](https://github.com/kimteayon)
-- 🐛 Fixed Mermaid rendering jitter issue. [#1497](https://github.com/ant-design/x/pull/1497) by [@kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed Mermaid rendering jitter issue. [#1497](https://github.com/ant-design/x/pull/1497) by [@Div627](https://github.com/Div627)
 - 📖 Optimized official website to improve user experience. [#1464](https://github.com/ant-design/x/pull/1464) by [@IsDyh01](https://github.com/IsDyh01), [#1483](https://github.com/ant-design/x/pull/1483) by [@Chiaki-xps](https://github.com/Chiaki-xps), [#1463](https://github.com/ant-design/x/pull/1463) by [@J-Da-Shi](https://github.com/J-Da-Shi), [#1489](https://github.com/ant-design/x/pull/1489) by [@Chiaki-xps](https://github.com/Chiaki-xps), [#1499](https://github.com/ant-design/x/pull/1499) by [@kimteayon](https://github.com/kimteayon), [#1500](https://github.com/ant-design/x/pull/1500) by [@kimteayon](https://github.com/kimteayon), [#1501](https://github.com/ant-design/x/pull/1501) by [@Samoy](https://github.com/Samoy)
 - 🛠 Modified dependency configuration for `mermaid`. [#1475](https://github.com/ant-design/x/pull/1475) by [@Div627](https://github.com/Div627)
 
