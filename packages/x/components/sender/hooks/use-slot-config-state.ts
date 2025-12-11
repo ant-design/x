@@ -1,42 +1,76 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { SlotConfigType } from '../../sender';
 
+interface NodeInfo {
+  slotKey: string | undefined;
+  nodeType: 'nbsp' | undefined;
+  skillKey: string | undefined;
+  slotConfig: SlotConfigType | undefined;
+  targetNode: HTMLElement;
+}
+
+interface SlotValues {
+  [key: string]: any;
+}
+
 const buildSlotValues = (
   slotConfig: readonly SlotConfigType[],
   slotConfigMap: { current: Map<string, SlotConfigType> },
-) => {
-  return slotConfig?.reduce(
-    (acc, node) => {
-      if (node.key) {
-        if (
-          node.type === 'input' ||
-          node.type === 'select' ||
-          node.type === 'custom' ||
-          node.type === 'content'
-        ) {
-          acc[node.key] = node.props?.defaultValue || '';
-        } else if (node.type === 'tag') {
-          acc[node.key] = node.props?.value || node.props?.label || '';
-        }
-        slotConfigMap.current.set(node.key, node);
+): SlotValues => {
+  return slotConfig?.reduce<SlotValues>((acc, node) => {
+    if (node.key) {
+      if (
+        node.type === 'input' ||
+        node.type === 'select' ||
+        node.type === 'custom' ||
+        node.type === 'content'
+      ) {
+        acc[node.key] = node.props?.defaultValue || '';
+      } else if (node.type === 'tag') {
+        acc[node.key] = node.props?.value || node.props?.label || '';
       }
+      slotConfigMap.current.set(node.key, node);
+    }
 
-      return acc;
-    },
-    {} as Record<string, any>,
-  );
+    return acc;
+  }, {});
 };
 
-function useSlotConfigState(
-  slotConfig?: readonly SlotConfigType[],
-): [
+const getNodeInfoBySlotConfigMap = (
+  targetNode: HTMLElement,
+  slotConfigMap: Map<string, SlotConfigType>,
+): NodeInfo | null => {
+  if (!targetNode || !(targetNode instanceof HTMLElement)) {
+    return null;
+  }
+
+  const getAttr = (attr: string) => targetNode.getAttribute(attr) || undefined;
+
+  const slotKey = getAttr('data-slot-key');
+  const nodeType = getAttr('data-node-type') as 'nbsp' | undefined;
+  const skillKey = getAttr('data-skill-key');
+  const slotConfig = slotKey ? slotConfigMap.get(slotKey) : undefined;
+
+  return {
+    slotKey,
+    nodeType,
+    skillKey,
+    slotConfig,
+    targetNode,
+  };
+};
+
+function useSlotConfigState(slotConfig?: readonly SlotConfigType[]): [
   Map<string, SlotConfigType>,
-  () => Record<string, any>,
-  React.Dispatch<React.SetStateAction<Record<string, any>>>,
-  (slotConfigs: SlotConfigType[]) => void,
+  {
+    getSlotValues: () => SlotValues;
+    setSlotValues: React.Dispatch<React.SetStateAction<SlotValues>>;
+    setSlotConfigMap: (slotConfigs: SlotConfigType[]) => void;
+    getNodeInfo: (targetNode: HTMLElement) => NodeInfo | null;
+  },
 ] {
-  const [state, _setState] = useState({});
-  const stateRef = useRef(state);
+  const [state, _setState] = useState<SlotValues>({});
+  const stateRef = useRef<SlotValues>(state);
   const slotConfigMap = useRef<Map<string, SlotConfigType>>(new Map());
 
   useEffect(() => {
@@ -46,7 +80,7 @@ function useSlotConfigState(
     stateRef.current = slotValue;
   }, [slotConfig]);
 
-  const setState = useCallback((newValue: React.SetStateAction<Record<string, any>>) => {
+  const setState = useCallback((newValue: React.SetStateAction<SlotValues>) => {
     const value = typeof newValue === 'function' ? newValue(stateRef.current) : newValue;
     stateRef.current = value;
     _setState(value);
@@ -64,7 +98,13 @@ function useSlotConfigState(
     return stateRef.current;
   }, []);
 
-  return [slotConfigMap.current, getState, setState, setSlotConfigMap];
+  const getNodeInfo = useCallback((targetNode: HTMLElement) => {
+    return getNodeInfoBySlotConfigMap(targetNode, slotConfigMap.current);
+  }, []);
+  return [
+    slotConfigMap.current,
+    { getSlotValues: getState, setSlotValues: setState, setSlotConfigMap, getNodeInfo },
+  ];
 }
 
 export default useSlotConfigState;

@@ -104,12 +104,10 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   };
 
   // ============================ State =============================
-
-  const [slotConfigMap, getSlotValues, setSlotValues, setSlotConfigMap] =
+  const [slotConfigMap, { getSlotValues, setSlotValues, setSlotConfigMap, getNodeInfo }] =
     useSlotConfigState(slotConfig);
   const [slotPlaceholders, setSlotPlaceholders] = useState<Map<string, React.ReactNode>>(new Map());
   const [skillPlaceholders, setSkillPlaceholders] = useState<React.ReactNode>(null);
-
   // ============================ Cursor =============================
   const { setEndCursor, setStartCursor, setAllSelectCursor, setCursorPosition, focusSlot } =
     useCursor({
@@ -345,16 +343,17 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         });
       } else if (node.nodeType === Node.ELEMENT_NODE) {
         const el = node as HTMLElement;
-        const slotKey = el.getAttribute('data-slot-key');
-        const slotType = el.getAttribute('data-node-type');
-        const skillKey = el.getAttribute('data-skill-key');
-        if (skillKey && skill) {
-          currentSkillConfig = skill;
-        }
-        if (slotKey && slotType !== 'nbsp') {
-          const nodeConfig = slotConfigMap.get(slotKey);
-          if (nodeConfig) {
-            currentSlotConfig.push({ ...nodeConfig, value: textValue });
+        const nodeInfo = getNodeInfo(el);
+        if (nodeInfo) {
+          const { skillKey, slotKey, nodeType } = nodeInfo;
+          if (skillKey && skill) {
+            currentSkillConfig = skill;
+          }
+          if (slotKey && nodeType !== 'nbsp') {
+            const nodeConfig = slotConfigMap.get(slotKey);
+            if (nodeConfig) {
+              currentSlotConfig.push({ ...nodeConfig, value: textValue });
+            }
           }
         }
       }
@@ -553,21 +552,19 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         }
       }
       if (selection?.focusOffset === 0) {
-        const slotKey = (selection.anchorNode?.previousSibling as Element)?.getAttribute?.(
-          'data-slot-key',
-        );
-        if (slotKey) {
-          e.preventDefault();
-          removeSlot(slotKey, e as unknown as EventType);
-          return;
-        }
-        const skillKey = (selection.anchorNode?.previousSibling as Element)?.getAttribute?.(
-          'data-skill-key',
-        );
-        if (skillKey) {
-          e.preventDefault();
-          removeSkill();
-          return;
+        const nodeInfo = getNodeInfo(selection.anchorNode?.previousSibling as HTMLElement);
+        if (nodeInfo) {
+          const { slotKey, skillKey } = nodeInfo;
+          if (slotKey) {
+            e.preventDefault();
+            removeSlot(slotKey, e as unknown as EventType);
+            return;
+          }
+          if (skillKey) {
+            e.preventDefault();
+            removeSkill();
+            return;
+          }
         }
       }
     }
