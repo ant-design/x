@@ -1,20 +1,37 @@
 import { useCallback } from 'react';
+import warning from '../../_util/warning';
 
 interface CursorPosition {
   element: Node;
   position: number;
 }
 
+interface UseCursorOptions {
+  prefixCls: string;
+  getSlotDom: (key: string) => HTMLSpanElement | undefined;
+  slotConfigMap: Map<string, any>;
+}
+
 interface UseCursorReturn {
-  setEndCursor: (selectNode: HTMLDivElement, preventScroll?: boolean) => void;
-  setStartCursor: (selectNode: HTMLDivElement, preventScroll?: boolean) => void;
-  setAllSelectCursor: (selectNode: HTMLDivElement, preventScroll?: boolean) => void;
-  setCursorPosition: (element: Node, position: number) => void;
+  setEndCursor: (targetNode: HTMLDivElement | null, preventScroll?: boolean) => void;
+  setStartCursor: (targetNode: HTMLDivElement | null, preventScroll?: boolean) => void;
+  setAllSelectCursor: (targetNode: HTMLDivElement | null, preventScroll?: boolean) => void;
+  setCursorPosition: (
+    targetNode: HTMLDivElement | null,
+    editableNode: HTMLDivElement | null,
+    position: number,
+    preventScroll?: boolean,
+  ) => void;
+  focusSlot: (
+    editableRef: React.RefObject<HTMLDivElement | null>,
+    key?: string,
+    preventScroll?: boolean,
+  ) => void;
   getSelection: () => Selection | null;
   getRange: () => { range: Range | null; selection: Selection | null };
 }
 
-const useCursor = (): UseCursorReturn => {
+const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
   const getSelection = useCallback((): Selection | null => {
     if (typeof window === 'undefined') {
       return null;
@@ -47,108 +64,170 @@ const useCursor = (): UseCursorReturn => {
       selection.removeAllRanges();
       selection.addRange(range);
     } catch (error) {
-      console.warn('Failed to set range:', error);
+      warning(false, 'Sender', `Failed to set range: ${error}`);
     }
   }, []);
 
-  const focus = useCallback((selectNode: HTMLDivElement, preventScroll = false): void => {
-    if (!selectNode || typeof selectNode.focus !== 'function') {
+  const focus = useCallback((targetNode: HTMLDivElement, preventScroll = false): void => {
+    if (!targetNode || typeof targetNode.focus !== 'function') {
       return;
     }
 
     try {
-      selectNode.focus({ preventScroll });
+      targetNode.focus({ preventScroll });
     } catch (error) {
-      console.warn('Failed to focus element:', error);
+      warning(false, 'Sender', `Failed to focus element: ${error}`);
     }
   }, []);
 
-  const setEndCursor = useCallback(
-    (selectNode: HTMLDivElement, preventScroll?: boolean): void => {
-      if (!selectNode) {
+  const setEndCursor: UseCursorReturn['setEndCursor'] = useCallback(
+    (targetNode, preventScroll): void => {
+      if (!targetNode) {
         return;
       }
 
-      focus(selectNode, preventScroll);
+      focus(targetNode, preventScroll);
       const { range, selection } = getRange();
 
       if (range && selection) {
         try {
-          range.selectNodeContents(selectNode);
+          range.selectNodeContents(targetNode);
           range.collapse(false);
           setRange(range, selection);
         } catch (error) {
-          console.warn('Failed to set end cursor:', error);
+          warning(false, 'Sender', `Failed to set end cursor: ${error}`);
         }
       }
     },
     [focus, getRange, setRange],
   );
 
-  const setStartCursor = useCallback(
-    (selectNode: HTMLDivElement, preventScroll?: boolean): void => {
-      if (!selectNode) {
+  const setStartCursor: UseCursorReturn['setStartCursor'] = useCallback(
+    (targetNode, preventScroll): void => {
+      if (!targetNode) {
         return;
       }
 
-      focus(selectNode, preventScroll);
+      focus(targetNode, preventScroll);
       const { range, selection } = getRange();
 
       if (range && selection) {
         try {
-          range.selectNodeContents(selectNode);
+          range.selectNodeContents(targetNode);
           range.collapse(true);
           setRange(range, selection);
         } catch (error) {
-          console.warn('Failed to set start cursor:', error);
+          warning(false, 'Sender', `Failed to set start cursor: ${error}`);
         }
       }
     },
     [focus, getRange, setRange],
   );
 
-  const setAllSelectCursor = useCallback(
-    (selectNode: HTMLDivElement, preventScroll?: boolean): void => {
-      if (!selectNode) {
+  const setAllSelectCursor: UseCursorReturn['setAllSelectCursor'] = useCallback(
+    (targetNode, preventScroll): void => {
+      if (!targetNode) {
         return;
       }
 
-      focus(selectNode, preventScroll);
+      focus(targetNode, preventScroll);
       const { range, selection } = getRange();
 
       if (range && selection) {
         try {
-          range.selectNodeContents(selectNode);
+          range.selectNodeContents(targetNode);
           setRange(range, selection);
         } catch (error) {
-          console.warn('Failed to select all content:', error);
+          warning(false, 'Sender', `Failed to select all content: ${error}`);
         }
       }
     },
     [focus, getRange, setRange],
   );
 
-  const setCursorPosition = useCallback(
-    (element: Node, position: number): void => {
-      if (!element || typeof position !== 'number' || position < 0) {
+  const setCursorPosition: UseCursorReturn['setCursorPosition'] = useCallback(
+    (targetNode, editableNode, position, preventScroll): void => {
+      if (!targetNode || typeof position !== 'number' || position < 0 || !editableNode) {
         return;
       }
-
+      focus(editableNode, preventScroll);
       const { range, selection } = getRange();
 
       if (range && selection) {
         try {
-          const maxPosition = Math.min(position, element.textContent?.length || 0);
-          range.setStart(element, maxPosition);
-          range.setEnd(element, maxPosition);
+          const maxPosition = Math.min(position, targetNode.textContent?.length || 0);
+          range.setStart(targetNode, maxPosition);
+          range.setEnd(targetNode, maxPosition);
           range.collapse(false);
           setRange(range, selection);
         } catch (error) {
-          console.warn('Failed to set cursor position:', error);
+          warning(false, 'Sender', `Failed to set cursor position:: ${error}`);
         }
       }
     },
     [getRange, setRange],
+  );
+
+  const focusSlot = useCallback(
+    (editableRef: React.RefObject<HTMLDivElement | null>, key?: string, preventScroll = false) => {
+      if (!options || !editableRef?.current) return;
+
+      const { getSlotDom, slotConfigMap } = options;
+
+      const getFocusableElement = (slotKey: string): HTMLElement | null => {
+        const slotDom = getSlotDom(slotKey);
+        if (!slotDom) return null;
+
+        const slotConfig = slotConfigMap.get(slotKey);
+        if (!slotConfig) return null;
+
+        // 处理 input 类型的 slot
+        if (slotConfig.type === 'input') {
+          return (slotDom as Element).querySelector<HTMLInputElement>('input');
+        }
+
+        // 处理 content 类型的 slot（排除占位符节点）
+        const nodeType = (slotDom as Element)?.getAttribute?.('data-node-type') || '';
+        if (slotConfig.type === 'content' && nodeType !== 'nbsp') {
+          return slotDom;
+        }
+
+        return null;
+      };
+
+      const findFocusableSlot = (targetKey?: string): HTMLElement | null => {
+        const editor = editableRef.current;
+        if (!editor) return null;
+
+        // 如果指定了 key，直接查找对应的 slot
+        if (targetKey) {
+          return getFocusableElement(targetKey);
+        }
+
+        // 否则查找第一个可聚焦的 slot
+        for (const node of Array.from(editor.childNodes)) {
+          const slotKey = (node as Element)?.getAttribute?.('data-slot-key');
+          if (slotKey) {
+            const focusableElement = getFocusableElement(slotKey);
+            if (focusableElement) {
+              return focusableElement;
+            }
+          }
+        }
+
+        return null;
+      };
+
+      const targetElement = findFocusableSlot(key);
+      if (!targetElement) return;
+
+      if (targetElement.nodeName === 'INPUT') {
+        (targetElement as HTMLInputElement).focus({ preventScroll });
+      } else {
+        setCursorPosition(targetElement as HTMLDivElement, editableRef.current, 0, preventScroll);
+      }
+    },
+    [options, setCursorPosition],
   );
 
   return {
@@ -156,10 +235,11 @@ const useCursor = (): UseCursorReturn => {
     setStartCursor,
     setAllSelectCursor,
     setCursorPosition,
+    focusSlot,
     getSelection,
     getRange,
   };
 };
 
 export default useCursor;
-export type { CursorPosition, UseCursorReturn };
+export type { CursorPosition, UseCursorReturn, UseCursorOptions };
