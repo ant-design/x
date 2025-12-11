@@ -511,7 +511,6 @@ const ThinkComponent = memo((props: ComponentProps) => {
   const [title, setTitle] = useState(`${t.DeepThinking}...`);
   const [loading, setLoading] = useState(true);
   const { chatStatus } = useContext(MessageContext);
-  console.log('chatStatus', chatStatus);
   useEffect(() => {
     if (props.streamStatus === 'done') {
       setTitle(t.CompleteThinking);
