@@ -2,10 +2,11 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { SlotConfigType } from '../../sender';
 
 interface NodeInfo {
-  slotKey: string | undefined;
-  nodeType: 'nbsp' | undefined;
-  skillKey: string | undefined;
-  slotConfig: SlotConfigType | undefined;
+  slotKey?: string;
+  nodeType?: 'nbsp';
+  skillKey?: string;
+  slotConfig?: SlotConfigType;
+  placeholder?: string;
   targetNode: HTMLElement;
 }
 
@@ -43,18 +44,15 @@ const getNodeInfoBySlotConfigMap = (
   if (!targetNode || !(targetNode instanceof HTMLElement)) {
     return null;
   }
-
-  const getAttr = (attr: string) => targetNode.getAttribute(attr) || undefined;
-
-  const slotKey = getAttr('data-slot-key');
-  const nodeType = getAttr('data-node-type') as 'nbsp' | undefined;
-  const skillKey = getAttr('data-skill-key');
+  const { dataset } = targetNode;
+  const slotKey = dataset.slotKey;
   const slotConfig = slotKey ? slotConfigMap.get(slotKey) : undefined;
 
   return {
     slotKey,
-    nodeType,
-    skillKey,
+    placeholder: dataset.dataset,
+    nodeType: dataset.nodeType as 'nbsp' | undefined,
+    skillKey: dataset.skillKey,
     slotConfig,
     targetNode,
   };

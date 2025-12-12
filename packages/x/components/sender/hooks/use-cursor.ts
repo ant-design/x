@@ -21,14 +21,26 @@ interface UseCursorReturn {
     editableNode: HTMLDivElement | null,
     position: number,
     preventScroll?: boolean,
+  ) => { range: Range | null; selection: Selection | null };
+  setAfterNodeFocus: (
+    targetNode: HTMLDivElement,
+    editableNode: HTMLDivElement,
+    range: Range | null,
+    selection: Selection | null,
+    preventScroll?: boolean,
   ) => void;
-  focusSlot: (
+  setSlotFocus: (
     editableRef: React.RefObject<HTMLDivElement | null>,
     key?: string,
     preventScroll?: boolean,
   ) => void;
   getSelection: () => Selection | null;
   getRange: () => { range: Range | null; selection: Selection | null };
+  getTextBeforeCursor: (targetNode: HTMLDivElement | null) => {
+    value: string;
+    startContainer: Node | null;
+    startOffset: number;
+  };
 }
 
 const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
@@ -48,7 +60,7 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
     try {
       const range = selection.getRangeAt(0) || document.createRange();
       return { range, selection };
-    } catch (error) {
+    } catch (_error) {
       // 当没有选中范围时创建新的 Range
       const range = document.createRange();
       return { range, selection };
@@ -146,10 +158,11 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
   );
 
   const setCursorPosition: UseCursorReturn['setCursorPosition'] = useCallback(
-    (targetNode, editableNode, position, preventScroll): void => {
+    (targetNode, editableNode, position, preventScroll) => {
       if (!targetNode || typeof position !== 'number' || position < 0 || !editableNode) {
-        return;
+        return { range: null, selection: null };
       }
+
       focus(editableNode, preventScroll);
       const { range, selection } = getRange();
 
@@ -164,11 +177,16 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
           warning(false, 'Sender', `Failed to set cursor position:: ${error}`);
         }
       }
+
+      return {
+        range: range,
+        selection: selection,
+      };
     },
-    [getRange, setRange],
+    [focus, getRange, setRange],
   );
 
-  const focusSlot = useCallback(
+  const setSlotFocus = useCallback(
     (editableRef: React.RefObject<HTMLDivElement | null>, key?: string, preventScroll = false) => {
       if (!options || !editableRef?.current) return;
 
@@ -230,12 +248,67 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
     [options, setCursorPosition],
   );
 
+  const setAfterNodeFocus: UseCursorReturn['setAfterNodeFocus'] = useCallback(
+    (targetNode, editableNode, range, selection, preventScroll) => {
+      if (!range || !selection) return;
+      focus(editableNode, preventScroll);
+      range?.setStartAfter(targetNode);
+      const newRange = range?.cloneRange() || null;
+      newRange.collapse(false);
+      selection.removeAllRanges();
+      selection.addRange(range);
+    },
+    [],
+  );
+
+  const getTextBeforeCursor = useCallback(
+    (targetNode: HTMLDivElement | null) => {
+      // 快速路径：空节点直接返回
+      if (!targetNode) {
+        return { value: '', startContainer: null, startOffset: 0 };
+      }
+
+      const selection = getSelection();
+      if (!selection || selection.rangeCount === 0) {
+        return { value: '', startContainer: null, startOffset: 0 };
+      }
+
+      try {
+        const range = selection.getRangeAt(0);
+
+        // 验证光标位置是否在目标节点内
+        if (!targetNode.contains(range.startContainer)) {
+          return { value: '', startContainer: null, startOffset: 0 };
+        }
+
+        const clone = range.cloneRange();
+        clone.selectNodeContents(targetNode);
+        clone.setEnd(range.startContainer, range.startOffset);
+
+        // 清理并返回结果
+        const value = clone.toString().replace(/\u200B/g, ''); // 移除零宽空格
+
+        return {
+          value,
+          startContainer: range.startContainer,
+          startOffset: range.startOffset,
+        };
+      } catch (error) {
+        warning(false, 'Sender', `Failed to get text before cursor: ${error}`);
+        return { value: '', startContainer: null, startOffset: 0 };
+      }
+    },
+    [getSelection],
+  );
+
   return {
     setEndCursor,
     setStartCursor,
     setAllSelectCursor,
     setCursorPosition,
-    focusSlot,
+    setAfterNodeFocus,
+    setSlotFocus,
+    getTextBeforeCursor,
     getSelection,
     getRange,
   };
