@@ -1,5 +1,5 @@
 import { Sender } from '@ant-design/x';
-import { App, Flex } from 'antd';
+import { App } from 'antd';
 import React, { useState } from 'react';
 
 const Demo: React.FC = () => {
