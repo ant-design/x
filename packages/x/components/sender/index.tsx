@@ -1,7 +1,7 @@
+import { useMergedState } from '@rc-component/util';
+import pickAttrs from '@rc-component/util/lib/pickAttrs';
 import { Flex } from 'antd';
-import classnames from 'classnames';
-import { useMergedState } from 'rc-util';
-import pickAttrs from 'rc-util/lib/pickAttrs';
+import { clsx } from 'clsx';
 import React, { useState } from 'react';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
@@ -119,7 +119,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   // ============================ Styles ============================
   const [hashId, cssVarCls] = useStyle(prefixCls);
 
-  const mergedCls = classnames(
+  const mergedCls = clsx(
     prefixCls,
     contextConfig.className,
     className,
@@ -323,14 +323,14 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
             </SendHeaderContext.Provider>
           )}
           <div
-            className={classnames(`${prefixCls}-content`, classNames.content)}
+            className={clsx(`${prefixCls}-content`, classNames.content)}
             style={styles.content}
             onMouseDown={onContentMouseDown}
           >
             {/* Prefix */}
             {prefixNode && (
               <div
-                className={classnames(
+                className={clsx(
                   `${prefixCls}-prefix`,
                   contextConfig.classNames.prefix,
                   classNames.prefix,
@@ -351,11 +351,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
             {/* Action List */}
             {suffixNode && (
               <div
-                className={classnames(
-                  actionListCls,
-                  contextConfig.classNames.suffix,
-                  classNames.suffix,
-                )}
+                className={clsx(actionListCls, contextConfig.classNames.suffix, classNames.suffix)}
                 style={{ ...contextConfig.styles.suffix, ...styles.suffix }}
               >
                 {suffixNode}
@@ -364,7 +360,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
           </div>
           {footerNode && (
             <div
-              className={classnames(
+              className={clsx(
                 `${prefixCls}-footer`,
                 contextConfig.classNames.footer,
                 classNames.footer,

@@ -1,5 +1,5 @@
 import { createStyles, css } from 'antd-style';
-import classnames from 'classnames';
+import { clsx } from 'clsx';
 import { useFullSidebarData, useLocation } from 'dumi';
 import React from 'react';
 
@@ -176,7 +176,7 @@ const HeaderNavigation: React.FC<HeaderNavigationProps> = (props) => {
 
   return (
     <nav
-      className={classnames(
+      className={clsx(
         styles.nav,
         isMobile || isMini ? styles.mobile : styles.pc,
         isMini && styles.mini,

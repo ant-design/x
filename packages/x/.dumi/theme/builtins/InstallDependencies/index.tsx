@@ -1,7 +1,7 @@
 import { XProvider } from '@ant-design/x';
+import type { Tab } from '@rc-component/tabs/lib/interface';
 import { Tabs } from 'antd';
 import SourceCode from 'dumi/theme-default/builtins/SourceCode';
-import type { Tab } from 'rc-tabs/lib/interface';
 import React from 'react';
 
 import BunLogo from './bun';

@@ -1,5 +1,5 @@
 import { createStyles } from 'antd-style';
-import classnames from 'classnames';
+import { clsx } from 'clsx';
 import React from 'react';
 
 const useStyle = createStyles(({ token, css }) => {
@@ -48,7 +48,7 @@ const Container: React.FC<ContainerProps> = (props) => {
   const { styles } = useStyle();
   return (
     <div
-      className={classnames(styles.container, props.className)}
+      className={clsx(styles.container, props.className)}
       style={props.style}
       onClick={props.onClick}
     >

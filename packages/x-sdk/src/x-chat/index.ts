@@ -1,4 +1,4 @@
-import { useEvent } from 'rc-util';
+import { useEvent } from '@rc-component/util';
 import React, { useEffect, useState } from 'react';
 import type { AnyObject } from '../_util/type';
 import { AbstractChatProvider } from '../chat-providers';

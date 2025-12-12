@@ -22,7 +22,7 @@ import {
 } from '@ant-design/x-sdk';
 import { Flex, GetRef, message } from 'antd';
 import { createStyles } from 'antd-style';
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import dayjs from 'dayjs';
 import React, { useEffect, useRef, useState } from 'react';
 import '@ant-design/x-markdown/themes/light.css';
@@ -399,7 +399,7 @@ const App = () => {
               )}
               <div
                 style={{ width: '100%', maxWidth: 840 }}
-                className={classNames({ [styles.startPage]: messages.length === 0 })}
+                className={clsx({ [styles.startPage]: messages.length === 0 })}
               >
                 {messages.length === 0 && (
                   <div className={styles.agentName}>{locale.agentName}</div>

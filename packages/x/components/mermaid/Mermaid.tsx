@@ -1,6 +1,6 @@
 import { DownloadOutlined, ZoomInOutlined, ZoomOutOutlined } from '@ant-design/icons';
 import { Button, Segmented, Tooltip } from 'antd';
-import classnames from 'classnames';
+import { clsx } from 'clsx';
 import throttle from 'lodash.throttle';
 import mermaid from 'mermaid';
 import React, { useEffect, useRef, useState } from 'react';
@@ -77,7 +77,7 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
   const contextConfig = useXComponentConfig('mermaid');
 
   // ============================ style ============================
-  const mergedCls = classnames(
+  const mergedCls = clsx(
     prefixCls,
     contextConfig.className,
     contextConfig.classNames?.root,
@@ -270,7 +270,7 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
 
     return (
       <div
-        className={classnames(
+        className={clsx(
           `${prefixCls}-header`,
           contextConfig.classNames?.header,
           classNames?.header,
@@ -297,7 +297,7 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
     return (
       <>
         <div
-          className={classnames(
+          className={clsx(
             `${prefixCls}-graph`,
             contextConfig.classNames?.graph,
             renderType === RenderType.Code && `${prefixCls}-graph-hidden`,
@@ -312,11 +312,7 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
         />
         {renderType === RenderType.Code ? (
           <div
-            className={classnames(
-              `${prefixCls}-code`,
-              contextConfig.classNames?.code,
-              classNames?.code,
-            )}
+            className={clsx(`${prefixCls}-code`, contextConfig.classNames?.code, classNames?.code)}
             style={{ ...contextConfig.styles?.code, ...styles.code }}
           >
             <SyntaxHighlighter

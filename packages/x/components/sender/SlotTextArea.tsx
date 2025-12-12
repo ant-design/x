@@ -1,7 +1,7 @@
 import { CaretDownFilled } from '@ant-design/icons';
+import pickAttrs from '@rc-component/util/lib/pickAttrs';
 import { Dropdown, Input, type InputRef } from 'antd';
-import classnames from 'classnames';
-import pickAttrs from 'rc-util/lib/pickAttrs';
+import { clsx } from 'clsx';
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
@@ -135,12 +135,13 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const newValue = getEditorValue();
     if (skillDomRef.current) {
       if (!newValue?.value && newValue.slotConfig.length === 0) {
+        skillDomRef.current.setAttribute('contenteditable', 'true');
         skillDomRef.current.classList.add(`${prefixCls}-skill-empty`);
       } else {
+        skillDomRef.current.setAttribute('contenteditable', 'false');
         skillDomRef.current.classList.remove(`${prefixCls}-skill-empty`);
       }
     }
-
     onChange?.(newValue.value, e, newValue.slotConfig, newValue.skill);
   };
 
@@ -214,7 +215,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
               trigger={['click']}
             >
               <span
-                className={classnames(`${prefixCls}-slot-select`, {
+                className={clsx(`${prefixCls}-slot-select`, {
                   placeholder: !value,
                   [`${prefixCls}-slot-select-selector-value`]: value,
                 })}
@@ -566,9 +567,10 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       onKeyDown?.(e as unknown as React.KeyboardEvent<HTMLTextAreaElement>);
       return;
     }
+    const selection = window.getSelection();
+
     // 处理退格键删除slot
     if (key === 'Backspace' && target === editableRef.current) {
-      const selection = window.getSelection();
       if (selection?.focusOffset === 1) {
         const slotKey = (selection.anchorNode?.parentNode as Element)?.getAttribute?.(
           'data-slot-key',
@@ -611,6 +613,16 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         }
         return;
       }
+    }
+
+    if (
+      skillDomRef.current &&
+      selection?.anchorNode &&
+      skillDomRef.current.contains(selection.anchorNode)
+    ) {
+      skillDomRef.current.setAttribute('contenteditable', 'false');
+      skillDomRef.current.classList.remove(`${prefixCls}-skill-empty`);
+      focus({ cursor: 'end' });
     }
   };
 
@@ -797,6 +809,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     slotDomMap?.current?.clear();
     onInternalInput(null as unknown as React.FormEvent<HTMLDivElement>);
   };
+
   // ============================ Effects =============================
 
   useEffect(() => {
@@ -834,7 +847,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         role="textbox"
         tabIndex={0}
         style={{ ...mergeStyle, ...inputHeightStyle }}
-        className={classnames(
+        className={clsx(
           inputCls,
           `${inputCls}-slot`,
           contextConfig.classNames.input,

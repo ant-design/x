@@ -1,7 +1,7 @@
 import { CloseOutlined } from '@ant-design/icons';
+import CSSMotion, { type MotionEventHandler } from '@rc-component/motion';
 import { Button } from 'antd';
-import classNames from 'classnames';
-import CSSMotion, { type MotionEventHandler } from 'rc-motion';
+import { clsx } from 'clsx';
 import * as React from 'react';
 import { useXProviderContext } from '../x-provider';
 
@@ -79,7 +79,7 @@ export default function SenderHeader(props: SenderHeaderProps) {
       {({ className: motionClassName, style: motionStyle }) => {
         return (
           <div
-            className={classNames(prefixCls, headerCls, motionClassName, className, {
+            className={clsx(prefixCls, headerCls, motionClassName, className, {
               [`${headerCls}-rtl`]: direction === 'rtl',
             })}
             style={{
@@ -94,7 +94,7 @@ export default function SenderHeader(props: SenderHeaderProps) {
                   // We follow antd naming standard here.
                   // So the header part is use `-header` suffix.
                   // Though its little bit weird for double `-header`.
-                  classNames(`${headerCls}-header`, classes.header)
+                  clsx(`${headerCls}-header`, classes.header)
                 }
                 style={{
                   ...styles.header,
@@ -117,7 +117,7 @@ export default function SenderHeader(props: SenderHeaderProps) {
             {/* Content */}
             {children && (
               <div
-                className={classNames(`${headerCls}-content`, classes.content)}
+                className={clsx(`${headerCls}-content`, classes.content)}
                 style={{
                   ...styles.content,
                 }}

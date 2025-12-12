@@ -1,6 +1,6 @@
 import { CloseOutlined } from '@ant-design/icons';
 import { Tooltip } from 'antd';
-import classnames from 'classnames';
+import { clsx } from 'clsx';
 import React, { useMemo } from 'react';
 import type { SkillType } from '../interface';
 
@@ -47,7 +47,7 @@ const Skill: React.FC<SkillProps> = ({
 
     const closeNode = (
       <div
-        className={classnames(`${componentCls}-close`, {
+        className={clsx(`${componentCls}-close`, {
           [`${componentCls}-close-disabled`]: config.disabled,
         })}
         onClick={handleClose}
