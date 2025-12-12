@@ -74,7 +74,7 @@ const useSlotBuilder = (options: UseSlotBuilderOptions): UseSlotBuilderReturn =>
       span.dataset.slotKey = slotKey;
       span.dataset.nodeType = 'nbsp';
       span.className = classnames(`${prefixCls}-slot-${positions}`, `${prefixCls}-slot-no-width`);
-      span.innerHTML = '&nbsp;';
+      span.textContent = '\u00A0';
       return span;
     },
     [prefixCls],

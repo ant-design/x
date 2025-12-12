@@ -748,7 +748,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       } = getTextBeforeCursor(editableDom);
       const cursorPosition = textBeforeCursor.length; // 光标位置前的字符数
       if (cursorPosition >= replaceCharacters.length) {
-        if (textBeforeCursor.endsWith(replaceCharacters) && startContainer && startOffset) {
+        if (textBeforeCursor.endsWith(replaceCharacters) && startContainer && startOffset >= 0) {
           range.setStart(startContainer, startOffset - replaceCharacters.length);
           range.setEnd(startContainer, startOffset);
           range.deleteContents();

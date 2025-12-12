@@ -50,7 +50,7 @@ const getNodeInfoBySlotConfigMap = (
 
   return {
     slotKey,
-    placeholder: dataset.dataset,
+    placeholder: dataset.placeholder,
     nodeType: dataset.nodeType as 'nbsp' | undefined,
     skillKey: dataset.skillKey,
     slotConfig,
