@@ -425,4 +425,40 @@ describe('Sender Component', () => {
       expect(container.querySelector('.ant-sender')).toBeTruthy();
     });
   });
+  describe('show Count', () => {
+    it('should render current character count with max count when maxLength is set', () => {
+      const maxCountValue = 10;
+
+      const { container } = render(<Sender lengthLimit={{ maxLength: maxCountValue }} />);
+      const textLength = container.querySelector('.sender-text-length');
+      expect(textLength).toHaveTextContent('0');
+
+      const maxCount = container.querySelector('.sender-text-max-length');
+      expect(maxCount).toHaveTextContent(maxCountValue.toString());
+    });
+
+    it('should render count in red and error message and disable action button when showCount is true and maxLength is set with text length greater than max length', () => {
+      const maxCountValue = 10;
+
+      const { container } = render(<Sender lengthLimit={{ maxLength: maxCountValue }} />);
+      const textLength = container.querySelector('.sender-text-length');
+
+      const maxCount = container.querySelector('.sender-text-max-length');
+
+      const textarea = container.querySelector('textarea')!;
+      fireEvent.input(textarea, { target: { value: 'Updated longer text' } });
+
+      expect(textLength).toHaveTextContent('19');
+      expect(textLength).toHaveStyle({ color: '#ff4d4f' });
+      expect(maxCount).toHaveTextContent(maxCountValue.toString());
+      expect(maxCount).toHaveStyle({ color: '#ff4d4f' });
+
+      const errorMessage = container.querySelector('.sender-text-max-length-error');
+      expect(errorMessage).toBeVisible();
+      expect(errorMessage).toHaveStyle({ color: '#ff4d4f' });
+
+      const sendButton = container.querySelector('.ant-sender-actions-btn button');
+      expect(sendButton).toBeDisabled();
+    });
+  });
 });

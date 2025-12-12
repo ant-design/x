@@ -155,6 +155,7 @@ export interface SenderProps
   header?: BaseNode | NodeRender;
   autoSize?: boolean | { minRows?: number; maxRows?: number };
   skill?: SkillType;
+  lengthLimit?: { maxLength: number; exceedMessage?: string };
 }
 
 export type SenderRef = Omit<TextAreaRef, 'nativeElement'> &

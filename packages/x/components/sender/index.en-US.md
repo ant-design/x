@@ -31,6 +31,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/footer.tsx">Custom Footer Content</code>
 <code src="./demo/send-style.tsx">Style Adjustment</code>
 <code src="./demo/paste-image.tsx">Paste Files</code>
+<code src="./demo/length-limit.tsx">Text Length Limit</code>
 
 ## API
 
@@ -40,6 +41,7 @@ Common props ref：[Common props](/docs/react/common-props)
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
+| lengthLimit | Set maximum length of input with customizable error message | { maxLength: number; exceedMessage?: string } | - | - |
 | allowSpeech | Whether to allow voice input | boolean \| SpeechConfig | false | - |
 | classNames | Style class names | [See below](#semantic-dom) | - | - |
 | components | Custom components | Record<'input', ComponentType> | - | - |

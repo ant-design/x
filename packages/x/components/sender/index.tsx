@@ -1,4 +1,4 @@
-import { Flex } from 'antd';
+import { Flex, Typography } from 'antd';
 import classnames from 'classnames';
 import { useMergedState } from 'rc-util';
 import pickAttrs from 'rc-util/lib/pickAttrs';
@@ -80,6 +80,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     onFocus,
     onBlur,
     skill,
+    lengthLimit,
     ...restProps
   } = props;
 
@@ -220,6 +221,12 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
       ? header(actionNode, { components: sharedRenderComponents })
       : header || null;
 
+  // ============================ Input ============================
+  const exceedLengthIsTrue =
+    lengthLimit !== undefined &&
+    lengthLimit.maxLength > 0 &&
+    (innerValue.length || 0) > lengthLimit.maxLength;
+
   // ============================ Footer ============================
   const footerNode =
     typeof footer === 'function'
@@ -230,7 +237,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   const actionsButtonContextProps = {
     prefixCls: actionBtnCls,
     onSend: triggerSend,
-    onSendDisabled: !innerValue,
+    onSendDisabled: !innerValue || exceedLengthIsTrue,
     onClear: triggerClear,
     onClearDisabled: !innerValue,
     onCancel,
@@ -346,11 +353,35 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
             )}
 
             {/* Input */}
-            {isSlotMode ? (
-              <SlotTextArea ref={inputRef as React.Ref<SlotTextAreaRef>} />
-            ) : (
-              <TextArea ref={inputRef as React.Ref<TextAreaRef>} />
-            )}
+            <Flex orientation="vertical" flex={1} style={{ width: '100%' }}>
+              {isSlotMode ? (
+                <SlotTextArea ref={inputRef as React.Ref<SlotTextAreaRef>} />
+              ) : (
+                <TextArea ref={inputRef as React.Ref<TextAreaRef>} />
+              )}
+              {lengthLimit !== undefined && (
+                <Flex justify="flex-start" gap={4}>
+                  <Typography.Text type={exceedLengthIsTrue ? 'danger' : 'secondary'}>
+                    <small>
+                      <span className={`sender-text-length`}>{innerValue.length || '0'}</span>
+                      {' / '}
+                      <span className={`sender-text-max-length`}>
+                        {lengthLimit.maxLength.toString()}
+                      </span>
+                    </small>
+                  </Typography.Text>
+                  {exceedLengthIsTrue && (
+                    <Typography.Text type={'danger'}>
+                      <small>
+                        <span className="sender-text-max-length-error">
+                          {lengthLimit.exceedMessage ?? 'Exceeded maximum length'}
+                        </span>
+                      </small>
+                    </Typography.Text>
+                  )}
+                </Flex>
+              )}
+            </Flex>
 
             {/* Action List */}
             {suffixNode && (
