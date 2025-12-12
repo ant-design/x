@@ -423,7 +423,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
    * @returns 包含插入类型和对应 range 的对象
    */
   const getInsertPosition = (
-    position: InsertPosition,
+    position?: InsertPosition,
   ): {
     type: 'box' | 'slot' | 'end' | 'start';
     range?: Range;
