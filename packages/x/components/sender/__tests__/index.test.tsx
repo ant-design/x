@@ -426,20 +426,10 @@ describe('Sender Component', () => {
     });
   });
   describe('show Count', () => {
-    it('should render current character count when showCount is true', () => {
-      const { container } = render(<Sender showCount={true} />);
-      const textLength = container.querySelector('.sender-text-length');
-      expect(textLength).toHaveTextContent('0');
-
-      const textarea = container.querySelector('textarea')!;
-      fireEvent.input(textarea, { target: { textContent: 'Updated' } });
-
-      expect(textLength).toHaveTextContent('7');
-    });
-    it('should render current character count with max count when showCount is true and maxLength is set', () => {
+    it('should render current character count with max count when maxLength is set', () => {
       const maxCountValue = 10;
 
-      const { container } = render(<Sender showCount={true} maxLength={maxCountValue} />);
+      const { container } = render(<Sender lengthLimit={{ maxLength: maxCountValue }} />);
       const textLength = container.querySelector('.sender-text-length');
       expect(textLength).toHaveTextContent('0');
 
@@ -450,13 +440,13 @@ describe('Sender Component', () => {
     it('should render count in red and error message and disable action button when showCount is true and maxLength is set with text length greater than max length', () => {
       const maxCountValue = 10;
 
-      const { container } = render(<Sender showCount={true} maxLength={maxCountValue} />);
+      const { container } = render(<Sender lengthLimit={{ maxLength: maxCountValue }} />);
       const textLength = container.querySelector('.sender-text-length');
 
       const maxCount = container.querySelector('.sender-text-max-length');
 
       const textarea = container.querySelector('textarea')!;
-      fireEvent.input(textarea, { target: { textContent: 'Updated longer text' } });
+      fireEvent.input(textarea, { target: { value: 'Updated longer text' } });
 
       expect(textLength).toHaveTextContent('19');
       expect(textLength).toHaveStyle({ color: '#ff4d4f' });
@@ -466,6 +456,9 @@ describe('Sender Component', () => {
       const errorMessage = container.querySelector('.sender-text-max-length-error');
       expect(errorMessage).toBeVisible();
       expect(errorMessage).toHaveStyle({ color: '#ff4d4f' });
+
+      const sendButton = container.querySelector('.ant-sender-actions-btn button');
+      expect(sendButton).toBeDisabled();
     });
   });
 });

@@ -80,8 +80,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     onFocus,
     onBlur,
     skill,
-    maxLength,
-    showCount = false,
+    lengthLimit,
     ...restProps
   } = props;
 
@@ -224,7 +223,9 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
 
   // ============================ Input ============================
   const exceedLengthIsTrue =
-    maxLength !== undefined && maxLength > 0 && (innerValue.length || 0) > maxLength;
+    lengthLimit !== undefined &&
+    lengthLimit.maxLength > 0 &&
+    (innerValue.length || 0) > lengthLimit.maxLength;
 
   // ============================ Footer ============================
   const footerNode =
@@ -358,29 +359,27 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
               ) : (
                 <TextArea ref={inputRef as React.Ref<TextAreaRef>} />
               )}
-              {showCount && (
-                <Flex justify="flex-start">
+              {lengthLimit !== undefined && (
+                <Flex justify="flex-start" gap={4}>
                   <Typography.Text type={exceedLengthIsTrue ? 'danger' : 'secondary'}>
                     <small>
                       <span className={`sender-text-length`}>{innerValue.length || '0'}</span>
-                      {maxLength && (
-                        <>
-                          {' / '}
-                          <span className={`sender-text-max-length`}>{maxLength.toString()}</span>
-                        </>
-                      )}{' '}
+                      {' / '}
+                      <span className={`sender-text-max-length`}>
+                        {lengthLimit.maxLength.toString()}
+                      </span>
                     </small>
                   </Typography.Text>
+                  {exceedLengthIsTrue && (
+                    <Typography.Text type={'danger'}>
+                      <small>
+                        <span className="sender-text-max-length-error">
+                          {lengthLimit.exceedMessage ?? 'Exceeded maximum length'}
+                        </span>
+                      </small>
+                    </Typography.Text>
+                  )}
                 </Flex>
-              )}
-              {exceedLengthIsTrue && (
-                <Typography.Text type={exceedLengthIsTrue ? 'danger' : 'secondary'}>
-                  <small>
-                    <span className="sender-text-max-length-error">
-                      {'Exceeded maximum length'}
-                    </span>
-                  </small>
-                </Typography.Text>
               )}
             </Flex>
 

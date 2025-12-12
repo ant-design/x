@@ -121,10 +121,8 @@ export type SlotConfigType =
 export type EventType =
   | React.FormEvent<HTMLTextAreaElement>
   | React.ChangeEvent<HTMLTextAreaElement>;
-export interface SenderProps extends Pick<
-  TextareaProps,
-  'placeholder' | 'onKeyUp' | 'onFocus' | 'onBlur'
-> {
+export interface SenderProps
+  extends Pick<TextareaProps, 'placeholder' | 'onKeyUp' | 'onFocus' | 'onBlur'> {
   prefixCls?: string;
   defaultValue?: string;
   value?: string;
@@ -157,8 +155,7 @@ export interface SenderProps extends Pick<
   header?: BaseNode | NodeRender;
   autoSize?: boolean | { minRows?: number; maxRows?: number };
   skill?: SkillType;
-  maxLength?: number;
-  showCount?: boolean;
+  lengthLimit?: { maxLength: number; exceedMessage?: string };
 }
 
 export type SenderRef = Omit<TextAreaRef, 'nativeElement'> &
