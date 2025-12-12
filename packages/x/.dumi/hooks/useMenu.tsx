@@ -67,7 +67,7 @@ const MenuItemLabelWithTag: React.FC<MenuItemLabelProps> = (props) => {
           {subtitle && <span className={styles.subtitle}>{subtitle}</span>}
         </Flex>
         {tag && (
-          <Tag variant="filled" className={clsx(styles.tag)} color={getTagColor(tag)}>
+          <Tag variant="filled" className={styles.tag} color={getTagColor(tag)}>
             {tag.replace(/VERSION/i, version)}
           </Tag>
         )}

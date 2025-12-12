@@ -67,7 +67,7 @@ const VideoPlayer: React.FC<React.HtmlHTMLAttributes<HTMLVideoElement>> = ({
         setPlaying(!playing);
       }}
     >
-      <div className={clsx(styles.holder)}>
+      <div className={styles.holder}>
         <video ref={videoRef} className={styles.video} muted loop {...restProps} />
         <div className={styles.play}>{playing ? <PauseCircleFilled /> : <PlayCircleFilled />}</div>
       </div>
