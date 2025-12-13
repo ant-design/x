@@ -9,9 +9,17 @@ import warning from '../_util/warning';
 import { useXProviderContext } from '../x-provider';
 import Skill from './components/Skill';
 import { SenderContext } from './context';
+import useCursor from './hooks/use-cursor';
 import useInputHeight from './hooks/use-input-height';
+import useSlotBuilder from './hooks/use-slot-builder';
 import useSlotConfigState from './hooks/use-slot-config-state';
-import type { EventType, InsertPosition, SkillType, SlotConfigType } from './interface';
+import type {
+  EventType,
+  InsertPosition,
+  SkillType,
+  SlotConfigBaseType,
+  SlotConfigType,
+} from './interface';
 
 export interface SlotTextAreaRef {
   focus: (options?: FocusOptions) => void;
@@ -21,6 +29,7 @@ export interface SlotTextAreaRef {
     slotConfig: SlotConfigType[],
     position?: InsertPosition,
     replaceCharacters?: string,
+    preventScroll?: boolean,
   ) => void;
   clear: () => void;
   getValue: () => {
@@ -102,11 +111,30 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   };
 
   // ============================ State =============================
-
-  const [slotConfigMap, getSlotValues, setSlotValues, setSlotConfigMap] =
+  const [slotConfigMap, { getSlotValues, setSlotValues, getNodeInfo, mergeSlotConfig }] =
     useSlotConfigState(slotConfig);
   const [slotPlaceholders, setSlotPlaceholders] = useState<Map<string, React.ReactNode>>(new Map());
   const [skillPlaceholders, setSkillPlaceholders] = useState<React.ReactNode>(null);
+  // ============================ Cursor =============================
+  const {
+    setEndCursor,
+    setStartCursor,
+    setAllSelectCursor,
+    setCursorPosition,
+    setSlotFocus,
+    setAfterNodeFocus,
+    getTextBeforeCursor,
+  } = useCursor({
+    prefixCls,
+    getSlotDom: (key: string) => slotDomMap.current.get(key),
+    slotConfigMap,
+  });
+
+  // ============================ Slot Builder =============================
+  const { buildSkillSpan, buildEditSlotSpan, buildSlotSpan, buildSpaceSpan } = useSlotBuilder({
+    prefixCls,
+    placeholder,
+  });
 
   // ============================ Methods =============================
   const triggerValueChange = (e?: EventType) => {
@@ -123,42 +151,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     onChange?.(newValue.value, e, newValue.slotConfig, newValue.skill);
   };
 
-  const buildSlotSpan = (key: string) => {
-    const span = document.createElement('span');
-    span.setAttribute('contenteditable', 'false');
-    span.dataset.slotKey = key;
-    span.className = `${prefixCls}-slot`;
-    return span;
-  };
-
-  const buildSkillSpan = (key: string) => {
-    const span = document.createElement('span');
-    span.setAttribute('contenteditable', 'false');
-    span.dataset.skillKey = key;
-    span.dataset.placeholder = placeholder;
-    span.className = `${prefixCls}-skill`;
-    return span;
-  };
-
-  const buildEditSlotSpan = (config: SlotConfigType) => {
-    const span = document.createElement('span');
-    span.setAttribute('contenteditable', 'true');
-    span.dataset.slotKey = config.key;
-    span.className = clsx(`${prefixCls}-slot`, `${prefixCls}-slot-content`);
-    return span;
-  };
-
-  const buildSpan = (slotKey: string, positions: 'before' | 'after') => {
-    const span = document.createElement('span');
-    span.setAttribute('contenteditable', 'false');
-    span.dataset.slotKey = slotKey;
-    span.dataset.nodeType = 'nbsp';
-    span.className = clsx(`${prefixCls}-slot-${positions}`, `${prefixCls}-slot-no-width`);
-    span.innerHTML = '&nbsp;';
-
-    return span;
-  };
-
   const saveSlotDom = (key: string, dom: HTMLSpanElement) => {
     slotDomMap.current.set(key, dom);
   };
@@ -166,7 +158,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const getSlotDom = (key: string): HTMLSpanElement | undefined => {
     return slotDomMap.current.get(key);
   };
-
   const updateSlot = (key: string, value: any, e?: EventType) => {
     const slotDom = getSlotDom(key);
     const node = slotConfigMap.get(key);
@@ -187,13 +178,13 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const renderSlot = (node: SlotConfigType, slotSpan: HTMLSpanElement) => {
     if (!node.key) return null;
     const value = getSlotValues()[node.key];
+
     const renderContent = () => {
       switch (node.type) {
         case 'content':
           slotSpan.innerHTML = value || '';
           slotSpan.setAttribute('data-placeholder', node.props?.placeholder || '');
           return null;
-
         case 'input':
           return (
             <Input
@@ -277,13 +268,13 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         return nodeList;
       }
       const slotKey = config.key;
-      warning(!!slotKey, 'sender', `Slot key is missing: ${slotKey}`);
+      warning(!!slotKey, 'Sender', `Slot key is missing: ${slotKey}`);
       if (slotKey) {
         let slotSpan: HTMLElement[];
         let slotDom: HTMLSpanElement;
         if (config.type === 'content') {
           slotDom = buildEditSlotSpan(config);
-          slotSpan = [buildSpan(slotKey, 'before'), slotDom, buildSpan(slotKey, 'after')];
+          slotSpan = [buildSpaceSpan(slotKey, 'before'), slotDom, buildSpaceSpan(slotKey, 'after')];
         } else {
           slotDom = buildSlotSpan(slotKey);
           slotSpan = [slotDom];
@@ -306,91 +297,119 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   };
 
   const getNodeTextValue = (node: Node): string => {
-    if (node.nodeType === Node.TEXT_NODE) {
+    const nodeType = node.nodeType;
+
+    if (nodeType === Node.TEXT_NODE) {
       return node.textContent || '';
     }
 
-    if (node.nodeType !== Node.ELEMENT_NODE) {
+    if (nodeType !== Node.ELEMENT_NODE) {
       return '';
     }
 
-    const el = node as HTMLElement;
-    const { dataset } = el;
+    const element = node as HTMLElement;
+    const nodeInfo = getNodeInfo(element);
+
+    // 无节点信息，直接返回文本内容
+    if (!nodeInfo) {
+      return element.innerText || '';
+    }
+
+    const { slotKey, skillKey, nodeType: infoNodeType, slotConfig } = nodeInfo;
+
+    // 缓存文本内容，避免重复获取
+    const textContent = element.innerText || '';
 
     // 处理 slot 节点
-    if (dataset.slotKey) {
-      if (dataset.nodeType === 'nbsp') {
+    if (slotKey) {
+      if (infoNodeType === 'nbsp') {
         return ' ';
       }
-
-      const nodeConfig = slotConfigMap.get(dataset.slotKey);
-      if (!nodeConfig) {
-        return '';
+      if (!slotConfig || slotConfig.type === 'content') {
+        return textContent;
       }
-
-      if (nodeConfig.type === 'content') {
-        return el.innerText || '';
-      }
-
-      const slotValue = getSlotValues()[dataset.slotKey] ?? '';
-      return nodeConfig.formatResult ? nodeConfig.formatResult(slotValue) : slotValue;
+      const slotValue = getSlotValues()[slotKey] ?? '';
+      return slotConfig.formatResult?.(slotValue) ?? slotValue;
     }
 
     // 处理 skill 节点
-    if (dataset.skillKey) {
-      const skillWrapper = el.querySelector(`.${prefixCls}-skill-wrapper`) as HTMLElement;
-      const fullText = el.innerText || '';
-
+    if (skillKey) {
+      const skillWrapper = element.querySelector(`.${prefixCls}-skill-wrapper`);
       if (!skillWrapper) {
-        return fullText;
+        return textContent;
       }
-
-      const skillText = skillWrapper.innerText || '';
-      return fullText.replace(skillText, '').replace(/\n/g, '');
+      const skillText = skillWrapper.textContent || '';
+      return textContent.replace(skillText, '').replace(/\n/g, '');
     }
 
-    return '';
+    return textContent;
   };
 
   const getEditorValue: SlotTextAreaRef['getValue'] = () => {
-    const result: string[] = [];
+    const editableDom = editableRef.current;
+    const emptyRes = { value: '', slotConfig: [], skill: undefined };
+    if (!editableDom) {
+      return emptyRes;
+    }
+
+    const childNodes = editableDom.childNodes;
+    if (childNodes.length === 0) {
+      return emptyRes;
+    }
+
+    const hasSkill = !!skill;
+    const result: string[] = new Array(childNodes.length);
     const currentSlotConfig: (SlotConfigType & { value: string })[] = [];
     let currentSkillConfig: SkillType | undefined;
-    editableRef.current?.childNodes.forEach((node) => {
+    let resultIndex = 0;
+
+    for (let i = 0; i < childNodes.length; i++) {
+      const node = childNodes[i];
       const textValue = getNodeTextValue(node);
-      result.push(textValue);
+      result[resultIndex++] = textValue;
+
       if (node.nodeType === Node.TEXT_NODE) {
-        currentSlotConfig.push({
-          type: 'text',
-          value: textValue,
-        });
+        if (textValue) {
+          currentSlotConfig.push({
+            type: 'text',
+            value: textValue,
+          });
+        }
       } else if (node.nodeType === Node.ELEMENT_NODE) {
         const el = node as HTMLElement;
-        const slotKey = el.getAttribute('data-slot-key');
-        const slotType = el.getAttribute('data-node-type');
-        const skillKey = el.getAttribute('data-skill-key');
-        if (skillKey && skill) {
-          currentSkillConfig = skill;
-        }
-        if (slotKey && slotType !== 'nbsp') {
-          const nodeConfig = slotConfigMap.get(slotKey);
-          if (nodeConfig) {
-            currentSlotConfig.push({ ...nodeConfig, value: textValue });
+        const nodeInfo = getNodeInfo(el);
+
+        if (nodeInfo) {
+          const { skillKey, slotKey, nodeType } = nodeInfo;
+
+          if (skillKey && hasSkill) {
+            currentSkillConfig = skill;
+          }
+
+          if (slotKey && nodeType !== 'nbsp') {
+            const nodeConfig = slotConfigMap.get(slotKey);
+            if (nodeConfig) {
+              currentSlotConfig.push({ ...nodeConfig, value: textValue });
+            }
           }
         }
       }
-    });
-    if (!result.length) {
-      const div = editableRef.current;
-      if (div) {
-        div.innerHTML = '';
-      }
     }
+
+    if (resultIndex === 0) {
+      editableDom.innerHTML = '';
+      skillDomRef.current = null;
+      return emptyRes;
+    }
+
+    const finalValue = result.slice(0, resultIndex).join('');
+
     if (!currentSkillConfig) {
       skillDomRef.current = null;
     }
+
     return {
-      value: result.join(''),
+      value: finalValue,
       slotConfig: currentSlotConfig,
       skill: currentSkillConfig,
     };
@@ -411,56 +430,52 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
    * @returns 包含插入类型和对应 range 的对象
    */
   const getInsertPosition = (
-    position: InsertPosition,
+    position?: InsertPosition,
   ): {
-    type: 'box' | 'slot' | 'end' | 'start';
+    type: 'box' | 'slot' | 'end' | 'start' | 'content';
+    slotType?: SlotConfigBaseType['type'];
     range?: Range;
+    selection: Selection | null;
   } => {
-    // 处理特殊位置：开始和结束
-    if (position === 'start') {
-      return { type: 'start' };
-    }
-    if (position === 'end') {
-      return { type: 'end' };
-    }
-
     const selection = window?.getSelection?.();
-    if (!selection) {
-      return { type: 'end' };
+    if (position === 'start' || position === 'end') {
+      return { type: position, selection };
     }
 
-    // 获取有效的 range
-    const currentRange = selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
-    const range = lastSelectionRef.current || currentRange;
+    if (!selection || selection.rangeCount === 0) {
+      return { type: 'end', selection };
+    }
+
+    const range = lastSelectionRef.current || selection.getRangeAt(0);
     if (!range) {
-      return { type: 'end' };
+      return { type: 'end', selection };
     }
 
     const editableDom = editableRef.current;
     if (!editableDom) {
-      return { type: 'end' };
+      return { type: 'end', selection };
     }
 
-    // 检查是否在 slot 元素内
-    const endContainer = range.endContainer as HTMLElement;
+    const container =
+      range.endContainer.nodeType === Node.TEXT_NODE
+        ? range.endContainer.parentElement
+        : (range.endContainer as HTMLElement);
 
-    if (
-      endContainer?.className?.includes(`${prefixCls}-skill`) ||
-      endContainer?.className?.includes(`${prefixCls}-slot`)
-    ) {
-      return { type: 'slot', range };
+    if (!container) {
+      return { type: 'end', selection };
+    }
+    const { slotKey, slotConfig } = getNodeInfo(container) || {};
+
+    if (slotKey || slotKey) {
+      return { type: 'slot', slotType: slotConfig?.type, range, selection };
     }
 
-    // 检查是否在编辑框内
-    const isInEditableBox =
-      range.endContainer === editableDom || range.endContainer.parentElement === editableDom;
-
+    const isInEditableBox = editableDom.contains(range.endContainer);
     if (isInEditableBox) {
-      return { type: 'box', range };
+      return { type: 'box', range, selection };
     }
 
-    // 默认返回结束位置
-    return { type: 'end' };
+    return { type: 'end', selection };
   };
 
   const appendNodeList = (slotNodeList: HTMLElement[]) => {
@@ -473,12 +488,10 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const editableDom = editableRef.current;
     if (!editableDom) return;
 
-    // 直接移除所有相关的DOM元素
     editableDom.querySelectorAll(`[data-slot-key="${key}"]`).forEach((element) => {
       element.remove();
     });
 
-    // 清理所有相关引用
     slotDomMap.current.delete(key);
 
     setSlotValues((prev) => {
@@ -534,51 +547,89 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     });
   };
 
-  const slotFocus = (key?: string) => {
-    const editor = editableRef.current;
-    if (!editor) return;
-    // 处理 slot 类型的焦点
-
-    const focusSlotInput = () => {
-      // 如果指定了 key，直接查找对应的 slot
-      if (key) {
-        const slotDom = getSlotDom(key);
-        return slotDom?.querySelector<HTMLInputElement>('input') || null;
-      }
-
-      // 否则查找第一个可聚焦的 slot
-      for (const node of Array.from(editor.childNodes)) {
-        const slotKey = (node as Element)?.getAttribute?.('data-slot-key') || '';
-        const nodeType = (node as Element)?.getAttribute?.('data-node-type') || '';
-        const nodeConfig = slotConfigMap.get(slotKey);
-        if (node.nodeType !== Node.ELEMENT_NODE) continue;
-        if (nodeConfig?.type === 'input') {
-          return (node as Element).querySelector<HTMLInputElement>('input');
-        }
-        if (nodeConfig?.type === 'content' && nodeType !== 'nbsp') {
-          return node;
-        }
-      }
-      return null;
-    };
-
-    const targetElement = focusSlotInput();
-    if (targetElement && targetElement.nodeName === 'INPUT') {
-      (targetElement as HTMLInputElement).focus();
-      return;
-    }
-
-    // 处理 content 类型的 slot
-    if (targetElement) {
-      editor.focus();
-      setCursorPosition(targetElement, 0);
-    }
-  };
   const initRenderSlot = () => {
     if (slotConfig && slotConfig.length > 0 && editableRef.current) {
       initClear();
       appendNodeList(getSlotListNode(slotConfig) as HTMLElement[]);
     }
+  };
+
+  /**
+   * 检查是否应该跳过键盘事件处理
+   */
+  const shouldSkipKeyHandling = (e: React.KeyboardEvent<HTMLDivElement>): boolean => {
+    const eventRes = onKeyDown?.(e);
+    return keyLockRef.current || isCompositionRef.current || eventRes === false;
+  };
+
+  /**
+   * 处理退格键删除逻辑
+   */
+  const handleBackspaceKey = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.target !== editableRef.current) return;
+
+    const selection = window.getSelection();
+    if (!selection) return;
+
+    const { focusOffset, anchorNode } = selection;
+
+    // 处理删除单个字符的slot
+    if (focusOffset === 1) {
+      const slotKey = (anchorNode?.parentNode as Element)?.getAttribute?.('data-slot-key');
+      if (slotKey && anchorNode?.parentNode && anchorNode.textContent?.length === 1) {
+        e.preventDefault();
+        (anchorNode.parentNode as HTMLElement).innerHTML = '';
+        return true;
+      }
+    }
+
+    // 处理删除整个slot或skill
+    if (focusOffset === 0) {
+      const nodeInfo = getNodeInfo(anchorNode?.previousSibling as HTMLElement);
+      if (nodeInfo) {
+        const { slotKey, skillKey } = nodeInfo;
+        if (slotKey) {
+          e.preventDefault();
+          removeSlot(slotKey, e as unknown as EventType);
+          return true;
+        }
+        if (skillKey) {
+          e.preventDefault();
+          removeSkill();
+          return true;
+        }
+      }
+    }
+
+    return false;
+  };
+
+  /**
+   * 检查是否应该提交表单
+   */
+  const shouldSubmitForm = (e: React.KeyboardEvent<HTMLDivElement>): boolean => {
+    const { key, shiftKey, ctrlKey, altKey, metaKey } = e;
+    if (key !== 'Enter') return false;
+
+    const isModifierPressed = ctrlKey || altKey || metaKey;
+    return (
+      (submitType === 'enter' && !shiftKey && !isModifierPressed) ||
+      (submitType === 'shiftEnter' && shiftKey && !isModifierPressed)
+    );
+  };
+
+  /**
+   * 处理skill区域的键盘事件
+   */
+  const handleSkillAreaKeyEvent = () => {
+    if (!skillDomRef.current) return;
+
+    const selection = window.getSelection();
+    if (!selection?.anchorNode || !skillDomRef.current.contains(selection.anchorNode)) return;
+
+    skillDomRef.current.setAttribute('contenteditable', 'false');
+    skillDomRef.current.classList.remove(`${prefixCls}-skill-empty`);
+    focus({ cursor: 'end' });
   };
 
   // ============================ Events =============================
@@ -591,89 +642,34 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     // 组合输入结束后清除键盘锁定
     keyLockRef.current = false;
   };
-  const onInternalKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    const { key, target, shiftKey, ctrlKey, altKey, metaKey } = e;
-    // 如果键盘被锁定或者正在组合输入，则跳过处理
-    const eventRes = onKeyDown?.(e);
 
-    // 如果键盘被锁定或者正在组合输入，直接跳过处理
-    if (keyLockRef.current || isCompositionRef.current || eventRes === false) {
+  const onInternalKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    // 检查是否应该跳过处理
+    if (shouldSkipKeyHandling(e)) {
       onKeyDown?.(e as unknown as React.KeyboardEvent<HTMLTextAreaElement>);
       return;
     }
-    const selection = window.getSelection();
 
-    // 处理退格键删除slot
-    if (key === 'Backspace' && target === editableRef.current) {
-      if (selection?.focusOffset === 1) {
-        const slotKey = (selection.anchorNode?.parentNode as Element)?.getAttribute?.(
-          'data-slot-key',
-        );
-        if (slotKey && selection.anchorNode?.parentNode) {
-          e.preventDefault();
-          (selection.anchorNode.parentNode as HTMLElement).innerHTML = '';
-          return;
-        }
-      }
-      if (selection?.focusOffset === 0) {
-        const slotKey = (selection.anchorNode?.previousSibling as Element)?.getAttribute?.(
-          'data-slot-key',
-        );
-        if (slotKey) {
-          e.preventDefault();
-          removeSlot(slotKey, e as unknown as EventType);
-          return;
-        }
-        const skillKey = (selection.anchorNode?.previousSibling as Element)?.getAttribute?.(
-          'data-skill-key',
-        );
-        if (skillKey) {
-          e.preventDefault();
-          removeSkill();
-          return;
-        }
-      }
+    // 处理退格键
+    if (e.key === 'Backspace') {
+      if (handleBackspaceKey(e)) return;
     }
 
     // 处理Enter键提交
-    if (key === 'Enter') {
-      const isModifierPressed = ctrlKey || altKey || metaKey;
-      const shouldSubmit =
-        (submitType === 'enter' && !shiftKey && !isModifierPressed) ||
-        (submitType === 'shiftEnter' && shiftKey && !isModifierPressed);
-      if (shouldSubmit) {
-        e.preventDefault();
-        if (!submitDisabledRef.current) {
-          keyLockRef.current = true;
-          triggerSend?.();
-        }
-        return;
+    if (shouldSubmitForm(e)) {
+      e.preventDefault();
+      if (!submitDisabledRef.current) {
+        keyLockRef.current = true;
+        triggerSend?.();
       }
+      return;
     }
 
-    if (
-      skillDomRef.current &&
-      selection?.anchorNode &&
-      skillDomRef.current.contains(selection.anchorNode)
-    ) {
-      skillDomRef.current.setAttribute('contenteditable', 'false');
-      skillDomRef.current.classList.remove(`${prefixCls}-skill-empty`);
-      focus({ cursor: 'end' });
-    }
+    // 处理skill区域的键盘事件
+    handleSkillAreaKeyEvent();
   };
 
-  // ============================ Input Event ============================
-
   const onInternalFocus = (e: React.FocusEvent<HTMLDivElement>) => {
-    const selection = window.getSelection();
-    if (selection) {
-      const range = document.createRange();
-      range.selectNodeContents(editableRef.current!);
-      range.collapse(true);
-      selection.removeAllRanges();
-      selection.addRange(range);
-    }
-
     onFocus?.(e as unknown as React.FocusEvent<HTMLTextAreaElement>);
   };
 
@@ -726,26 +722,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     onKeyUp?.(e as unknown as React.KeyboardEvent<HTMLTextAreaElement>);
   };
 
-  const setCursorPosition = (element: Node, position: number) => {
-    // 创建一个range对象
-
-    const range = document.createRange();
-    // 设置range的起始点和结束点
-
-    range.setStart(element, position);
-    range.setEnd(element, position);
-
-    // 创建一个selection对象
-    const selection = window.getSelection();
-    if (selection) {
-      // 清除之前的selection
-      selection.removeAllRanges();
-      // 添加新的range到selection
-      range.collapse(false);
-      selection.addRange(range);
-    }
-  };
-
   const onInternalSelect: React.ReactEventHandler<HTMLDivElement> = () => {
     const editableDom = editableRef.current;
     const selection = window.getSelection();
@@ -755,7 +731,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       selection.focusOffset === 0 &&
       getEditorValue().skill
     ) {
-      setCursorPosition(editableDom, 1);
+      setCursorPosition(editableDom, editableRef.current, 1);
     }
   };
 
@@ -763,73 +739,78 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
   const insert: SlotTextAreaRef['insert'] = (
     slotConfig,
-    position = 'cursor',
-    replaceCharacters?: string,
+    position,
+    replaceCharacters,
+    preventScroll,
   ) => {
     const editableDom = editableRef.current;
-    const selection = window.getSelection();
-    if (!editableDom || !selection) return;
+    if (!editableDom) return;
+    mergeSlotConfig(slotConfig);
     const slotNode = getSlotListNode(slotConfig);
-    const { type, range: lastRage } = getInsertPosition(position);
-    let range: Range = document.createRange();
-    setSlotValues((prev) => ({ ...prev, ...slotConfig }));
-    setSlotConfigMap(slotConfig);
-    // 光标不在输入框内，将内容插入最末位
+
+    const { type, slotType, range: lastRage, selection } = getInsertPosition(position);
+    let range: Range | null = null;
     if (type === 'end') {
-      selection.removeAllRanges();
-      selection.addRange(range);
       const lastNode = editableDom.childNodes[editableDom.childNodes.length - 1];
       if (lastNode.nodeType === Node.TEXT_NODE && lastNode.textContent === '\n') {
-        range.setStart(editableDom, editableDom.childNodes.length - 1);
+        range = setCursorPosition(
+          editableDom,
+          editableDom,
+          editableDom.childNodes.length - 1,
+        ).range;
       } else {
-        range.setStart(editableDom, editableDom.childNodes.length);
+        range = setCursorPosition(editableDom, editableDom, editableDom.childNodes.length).range;
       }
     }
     if (type === 'start') {
-      range.setStart(editableDom, getEditorValue().skill ? 1 : 0);
+      range = setCursorPosition(
+        editableDom,
+        editableRef.current,
+        getEditorValue().skill ? 1 : 0,
+      ).range;
     }
     if (type === 'box') {
       range = lastRage as Range;
     }
-    if (type === 'slot') {
-      range = selection?.getRangeAt?.(0);
-      if (selection.focusNode) {
-        range.setStartAfter(selection.focusNode);
+    if (type === 'slot' && selection) {
+      range = selection.getRangeAt?.(0) || null;
+      if (slotType !== 'content') {
+        if (selection.focusNode) {
+          range?.setStartAfter(selection.focusNode);
+        }
       }
     }
-
+    if (!selection || !range) return;
     // 如果光标前有字符
-    if (replaceCharacters?.length) {
-      const startOffset = range.startOffset;
-      const container = range.startContainer;
-      const preCaretRange = range.cloneRange();
-      preCaretRange.selectNodeContents(editableDom);
-      preCaretRange.setEnd(range.endContainer, range.endOffset);
-      preCaretRange.setStart(editableDom, 0);
-      const textBeforeCursor = preCaretRange.toString();
-      const cursorPosition = textBeforeCursor.length; // 光标位置前的字符数
 
+    if (replaceCharacters?.length) {
+      const {
+        value: textBeforeCursor,
+        startContainer,
+        startOffset,
+      } = getTextBeforeCursor(editableDom);
+      const cursorPosition = textBeforeCursor.length; // 光标位置前的字符数
       if (cursorPosition >= replaceCharacters.length) {
-        if (textBeforeCursor.endsWith(replaceCharacters)) {
-          range.setStart(container, startOffset - replaceCharacters.length);
-          range.setEnd(container, startOffset);
+        if (textBeforeCursor.endsWith(replaceCharacters) && startContainer && startOffset >= 0) {
+          range.setStart(startContainer, startOffset - replaceCharacters.length);
+          range.setEnd(startContainer, startOffset);
           range.deleteContents();
         }
       }
     }
-
     selection.deleteFromDocument();
-    slotNode.forEach((node) => {
-      range.insertNode(node);
-      range.setStartAfter(node);
-      range = range.cloneRange();
+
+    [...slotNode].reverse().forEach((node) => {
+      range?.insertNode(node);
     });
 
-    editableDom.focus();
-    range.collapse(false);
-    selection.removeAllRanges();
-    selection.addRange(range);
-
+    setAfterNodeFocus(
+      slotNode[slotNode.length - 1] as HTMLDivElement,
+      editableDom,
+      range,
+      selection,
+      preventScroll,
+    );
     const timer = setTimeout(() => {
       onInternalInput(null as unknown as React.FormEvent<HTMLDivElement>);
       clearTimeout(timer);
@@ -837,34 +818,26 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   };
 
   const focus = (options?: FocusOptions) => {
-    const editor = editableRef.current;
+    const mergeOptions = {
+      preventScroll: options?.preventScroll ?? false,
+      cursor: options?.cursor ?? 'end',
+      key: (options as SlotFocusOptions)?.key,
+    };
 
-    if (!editor) return;
-    editor.focus({ preventScroll: options?.preventScroll || false });
-    if (!options?.cursor) return;
-    // 处理 slot 类型的焦点
-    if (options?.cursor === 'slot') {
-      return slotFocus(options?.key);
-    }
-    const selection = window.getSelection();
-    if (!selection) return;
-    const range = document.createRange();
-    range.selectNodeContents(editor);
-
-    switch (options.cursor) {
+    switch (mergeOptions.cursor) {
+      case 'slot':
+        setSlotFocus(editableRef, (options as SlotFocusOptions)?.key, mergeOptions.preventScroll);
+        break;
       case 'start':
-        range.collapse(true);
+        setStartCursor(editableRef.current, mergeOptions.preventScroll);
         break;
       case 'all':
-        // 保持全选状态
+        setAllSelectCursor(editableRef.current, mergeOptions.preventScroll);
         break;
-      default:
-        range.collapse(false);
+      case 'end':
+        setEndCursor(editableRef.current, mergeOptions.preventScroll);
         break;
     }
-
-    selection.removeAllRanges();
-    selection.addRange(range);
   };
 
   const clear = () => {
@@ -903,9 +876,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     return {
       nativeElement: editableRef.current! as unknown as HTMLTextAreaElement,
       focus,
-      blur: () => {
-        editableRef.current?.blur();
-      },
+      blur: () => editableRef.current?.blur(),
       insert,
       clear,
       getValue: getEditorValue,

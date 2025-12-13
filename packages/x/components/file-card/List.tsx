@@ -60,17 +60,9 @@ const List: React.FC<FileCardListProps> = (props) => {
   const [pingEnd, setPingEnd] = React.useState(false);
 
   const { root: classNameRoot, card: classNameCard, ...classNameOther } = classNames;
-  const mergedCls = clsx(
-    compCls,
-    rootClassName,
-    className,
-    classNameRoot,
-    hashId,
-    cssVarCls,
-    {
-      [`${prefixCls}-rtl`]: direction === 'rtl',
-    },
-  );
+  const mergedCls = clsx(compCls, rootClassName, className, classNameRoot, hashId, cssVarCls, {
+    [`${prefixCls}-rtl`]: direction === 'rtl',
+  });
 
   const checkPing = () => {
     const containerEle = containerRef.current;

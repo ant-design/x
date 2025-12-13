@@ -6,7 +6,7 @@ const useInputHeight = (
   styles: React.CSSProperties,
   autoSize: SenderProps['autoSize'],
   editableRef: React.RefObject<HTMLDivElement | null>,
-) => {
+): React.CSSProperties => {
   const { token } = useToken();
   const computedStyle: any = editableRef.current
     ? window.getComputedStyle(editableRef.current)

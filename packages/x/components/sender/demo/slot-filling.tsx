@@ -143,9 +143,9 @@ const App: React.FC = () => {
           onClick={() => {
             senderRef.current?.insert?.([
               {
-                type: 'input',
-                key: `partner_2_${Date.now()}`,
-                props: { placeholder: 'Enter a name' },
+                type: 'content',
+                key: `partner_1_${Date.now()}`,
+                props: { defaultValue: 'NingNing', placeholder: 'Enter a name' },
               },
             ]);
           }}

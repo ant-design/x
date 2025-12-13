@@ -104,7 +104,7 @@ type ActionsComponents = {
 | nativeElement | Outer container | `HTMLDivElement` | - | - |
 | focus | Get focus, when `cursor = 'slot'` the focus will be in the first slot of type `input`, if no corresponding `input` exists it will behave the same as `end` | (option?: { preventScroll?: boolean, cursor?: 'start' \| 'end' \| 'all' \| 'slot' }) | - | - |
 | blur | Remove focus | () => void | - | - |
-| insert | Insert text or slots, when using slots ensure slotConfig is configured | (value: string) => void \| (slotConfig: SlotConfigType[], position?: insertPosition, replaceCharacters?: string) => void; | - | - |
+| insert | Insert text or slots, when using slots ensure slotConfig is configured | (value: string) => void \| (slotConfig: SlotConfigType[], position: insertPosition, replaceCharacters: string, preventScroll: boolean) => void; | - | - |
 | clear | Clear content | () => void | - | - |
 | getValue | Get current content and structured configuration | () => { value: string; slotConfig: SlotConfigType[], skill: SkillType } | - | - |
 

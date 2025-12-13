@@ -82,12 +82,14 @@ describe('Mermaid Component', () => {
 
     it('should handle invalid mermaid syntax', async () => {
       mockParse.mockResolvedValue(false);
-      const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
+      const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
 
       render(<Mermaid>invalid syntax</Mermaid>);
 
       await waitFor(() => {
-        expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('Mermaid render failed'));
+        expect(consoleSpy).toHaveBeenCalledWith(
+          expect.stringContaining('[antdx: Mermaid] Render failed'),
+        );
       });
 
       consoleSpy.mockRestore();
@@ -418,13 +420,13 @@ describe('Mermaid Component', () => {
   describe('Error Handling', () => {
     it('should handle mermaid render errors', async () => {
       mockRender.mockRejectedValue(new Error('Render error'));
-      const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
+      const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
 
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
       await waitFor(() => {
         expect(consoleSpy).toHaveBeenCalledWith(
-          expect.stringContaining('Mermaid render failed: Error: Render error'),
+          expect.stringContaining('[antdx: Mermaid] Render failed: Error: Render error'),
         );
       });
 
