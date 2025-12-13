@@ -64,6 +64,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     onFocus,
     onBlur,
     slotConfig,
+    maxLength,
     skill,
     ...restProps
   } = React.useContext(SenderContext);
@@ -590,9 +591,13 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         return;
       }
     }
+
+    onKeyDown?.(e as unknown as React.KeyboardEvent<HTMLTextAreaElement>);
+  };
   };
 
   // ============================ Input Event ============================
+
 
   const onInternalFocus = (e: React.FocusEvent<HTMLDivElement>) => {
     const selection = window.getSelection();
@@ -626,6 +631,16 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     onBlur?.(e as unknown as React.FocusEvent<HTMLTextAreaElement>);
   };
 
+  // 获取当前选中文本长度
+  const getSelectedTextLength = (): number => {
+    const selection = window.getSelection();
+    if (selection && selection.rangeCount > 0) {
+      const range = selection.getRangeAt(0);
+      return range.toString().length;
+    }
+    return 0;
+  };
+
   const onInternalInput = (e: React.FormEvent<HTMLDivElement>) => {
     const newValue = getEditorValue();
     removeSpecificBRs(editableRef?.current);
@@ -646,7 +661,21 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
 
     if (text) {
-      insert([{ type: 'text', value: text.replace(/\n/g, '') }]);
+      const currentValue = getEditorValue().value;
+      const newText = text.replace(/\n/g, '');
+
+      // 检查最大长度限制
+      if (maxLength !== undefined) {
+        const selectedLength = getSelectedTextLength();
+        const remainingLength = maxLength - (currentValue.length - selectedLength);
+        if (remainingLength <= 0) {
+          return; // 已达到最大长度，不再插入
+        }
+        const truncatedText = newText.slice(0, remainingLength);
+        insert([{ type: 'text', value: truncatedText.replace(/\n/g, '') }]);
+      } else {
+        insert([{ type: 'text', value: newText.replace(/\n/g, '') }]);
+      }
     }
 
     onPaste?.(e as unknown as React.ClipboardEvent<HTMLTextAreaElement>);
@@ -704,6 +733,37 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const editableDom = editableRef.current;
     const selection = window.getSelection();
     if (!editableDom || !selection) return;
+
+    // 检查最大长度限制
+    if (maxLength !== undefined) {
+      const currentValue = getEditorValue().value;
+      const selectedLength = getSelectedTextLength();
+      const remainingLength = maxLength - (currentValue.length - selectedLength);
+
+      if (remainingLength <= 0) {
+        return;
+      }
+
+      // 渐进式截断文本slot
+      let remainingChars = remainingLength;
+      slotConfig = slotConfig.map((item) => {
+        if (item.type === 'text' && remainingChars > 0) {
+          const textLength = (item.value || '').length;
+          if (textLength <= remainingChars) {
+            remainingChars -= textLength;
+            return item;
+          }
+          const truncated = (item.value || '').slice(0, remainingChars);
+          remainingChars = 0;
+          return { ...item, value: truncated };
+        }
+        if (item.type === 'text') {
+          return { ...item, value: '' };
+        }
+        return item;
+      });
+    }
+
     const slotNode = getSlotListNode(slotConfig);
     const { type, range: lastRage } = getInsertPosition(position);
     let range: Range = document.createRange();
@@ -880,6 +940,18 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         onBlur={onInternalBlur}
         onSelect={onInternalSelect}
         onInput={onInternalInput}
+        onBeforeInput={(e) => {
+          if (maxLength !== undefined) {
+            const currentValue = getEditorValue().value;
+            const selectedLength = getSelectedTextLength();
+            const inputLength = (e as any).data?.length ?? 0;
+            const newLength = currentValue.length - selectedLength + inputLength;
+            if (newLength > maxLength) {
+              e.preventDefault();
+              return;
+            }
+          }
+        }}
         {...(restProps as React.HTMLAttributes<HTMLDivElement>)}
       />
       <div
