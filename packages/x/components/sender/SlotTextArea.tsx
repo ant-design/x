@@ -554,6 +554,84 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
   };
 
+  /**
+   * 检查是否应该跳过键盘事件处理
+   */
+  const shouldSkipKeyHandling = (e: React.KeyboardEvent<HTMLDivElement>): boolean => {
+    const eventRes = onKeyDown?.(e);
+    return keyLockRef.current || isCompositionRef.current || eventRes === false;
+  };
+
+  /**
+   * 处理退格键删除逻辑
+   */
+  const handleBackspaceKey = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.target !== editableRef.current) return;
+
+    const selection = window.getSelection();
+    if (!selection) return;
+
+    const { focusOffset, anchorNode } = selection;
+
+    // 处理删除单个字符的slot
+    if (focusOffset === 1) {
+      const slotKey = (anchorNode?.parentNode as Element)?.getAttribute?.('data-slot-key');
+      if (slotKey && anchorNode?.parentNode && anchorNode.textContent?.length === 1) {
+        e.preventDefault();
+        (anchorNode.parentNode as HTMLElement).innerHTML = '';
+        return true;
+      }
+    }
+
+    // 处理删除整个slot或skill
+    if (focusOffset === 0) {
+      const nodeInfo = getNodeInfo(anchorNode?.previousSibling as HTMLElement);
+      if (nodeInfo) {
+        const { slotKey, skillKey } = nodeInfo;
+        if (slotKey) {
+          e.preventDefault();
+          removeSlot(slotKey, e as unknown as EventType);
+          return true;
+        }
+        if (skillKey) {
+          e.preventDefault();
+          removeSkill();
+          return true;
+        }
+      }
+    }
+
+    return false;
+  };
+
+  /**
+   * 检查是否应该提交表单
+   */
+  const shouldSubmitForm = (e: React.KeyboardEvent<HTMLDivElement>): boolean => {
+    const { key, shiftKey, ctrlKey, altKey, metaKey } = e;
+    if (key !== 'Enter') return false;
+
+    const isModifierPressed = ctrlKey || altKey || metaKey;
+    return (
+      (submitType === 'enter' && !shiftKey && !isModifierPressed) ||
+      (submitType === 'shiftEnter' && shiftKey && !isModifierPressed)
+    );
+  };
+
+  /**
+   * 处理skill区域的键盘事件
+   */
+  const handleSkillAreaKeyEvent = () => {
+    if (!skillDomRef.current) return;
+
+    const selection = window.getSelection();
+    if (!selection?.anchorNode || !skillDomRef.current.contains(selection.anchorNode)) return;
+
+    skillDomRef.current.setAttribute('contenteditable', 'false');
+    skillDomRef.current.classList.remove(`${prefixCls}-skill-empty`);
+    focus({ cursor: 'end' });
+  };
+
   // ============================ Events =============================
   const onInternalCompositionStart = () => {
     isCompositionRef.current = true;
@@ -564,80 +642,32 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     // 组合输入结束后清除键盘锁定
     keyLockRef.current = false;
   };
-  const onInternalKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    const { key, target, shiftKey, ctrlKey, altKey, metaKey } = e;
-    // 如果键盘被锁定或者正在组合输入，则跳过处理
-    const eventRes = onKeyDown?.(e);
 
-    // 如果键盘被锁定或者正在组合输入，直接跳过处理
-    if (keyLockRef.current || isCompositionRef.current || eventRes === false) {
+  const onInternalKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    // 检查是否应该跳过处理
+    if (shouldSkipKeyHandling(e)) {
       onKeyDown?.(e as unknown as React.KeyboardEvent<HTMLTextAreaElement>);
       return;
     }
-    const selection = window.getSelection();
 
-    // 处理退格键删除slot
-    if (key === 'Backspace' && target === editableRef.current) {
-      if (selection?.focusOffset === 1) {
-        const slotKey = (selection.anchorNode?.parentNode as Element)?.getAttribute?.(
-          'data-slot-key',
-        );
-        if (
-          slotKey &&
-          selection.anchorNode?.parentNode &&
-          selection.anchorNode.textContent?.length === 1
-        ) {
-          e.preventDefault();
-          (selection.anchorNode.parentNode as HTMLElement).innerHTML = '';
-          return;
-        }
-      }
-      if (selection?.focusOffset === 0) {
-        const nodeInfo = getNodeInfo(selection.anchorNode?.previousSibling as HTMLElement);
-        if (nodeInfo) {
-          const { slotKey, skillKey } = nodeInfo;
-          if (slotKey) {
-            e.preventDefault();
-            removeSlot(slotKey, e as unknown as EventType);
-            return;
-          }
-          if (skillKey) {
-            e.preventDefault();
-            removeSkill();
-            return;
-          }
-        }
-      }
+    // 处理退格键
+    if (e.key === 'Backspace') {
+      if (handleBackspaceKey(e)) return;
     }
 
     // 处理Enter键提交
-    if (key === 'Enter') {
-      const isModifierPressed = ctrlKey || altKey || metaKey;
-      const shouldSubmit =
-        (submitType === 'enter' && !shiftKey && !isModifierPressed) ||
-        (submitType === 'shiftEnter' && shiftKey && !isModifierPressed);
-      if (shouldSubmit) {
-        e.preventDefault();
-        if (!submitDisabledRef.current) {
-          keyLockRef.current = true;
-          triggerSend?.();
-        }
-        return;
+    if (shouldSubmitForm(e)) {
+      e.preventDefault();
+      if (!submitDisabledRef.current) {
+        keyLockRef.current = true;
+        triggerSend?.();
       }
+      return;
     }
 
-    if (
-      skillDomRef.current &&
-      selection?.anchorNode &&
-      skillDomRef.current.contains(selection.anchorNode)
-    ) {
-      skillDomRef.current.setAttribute('contenteditable', 'false');
-      skillDomRef.current.classList.remove(`${prefixCls}-skill-empty`);
-      focus({ cursor: 'end' });
-    }
+    // 处理skill区域的键盘事件
+    handleSkillAreaKeyEvent();
   };
-
-  // ============================ Input Event ============================
 
   const onInternalFocus = (e: React.FocusEvent<HTMLDivElement>) => {
     onFocus?.(e as unknown as React.FocusEvent<HTMLTextAreaElement>);
