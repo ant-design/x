@@ -2,7 +2,7 @@ import React from 'react';
 import { fireEvent, render, waitFor } from '../../../tests/utils';
 import Sender, { SlotConfigType } from '../index';
 
-// 设置全局的 DOM API mock
+// Set up global DOM API mock
 beforeEach(() => {
   // Mock DOM API
   if (!document.createRange) {
@@ -88,8 +88,8 @@ describe('Sender.SlotTextArea', () => {
     },
   ];
 
-  describe('核心功能测试', () => {
-    it('应该正确渲染所有slot类型', () => {
+  describe('Core functionality tests', () => {
+    it('should correctly render all slot types', () => {
       const { getByText, getByPlaceholderText, getByTestId } = render(
         <Sender slotConfig={baseSlotConfig} />,
       );
@@ -101,12 +101,12 @@ describe('Sender.SlotTextArea', () => {
       expect(getByTestId('custom-btn')).toBeInTheDocument();
     });
 
-    it('应该处理空配置', () => {
+    it('should handle empty configuration', () => {
       const { container } = render(<Sender slotConfig={[]} />);
       expect(container.querySelector('[role="textbox"]')).toBeInTheDocument();
     });
 
-    it('应该提供完整的ref接口', () => {
+    it('should provide complete ref interface', () => {
       const ref = React.createRef<any>();
       render(<Sender slotConfig={baseSlotConfig} ref={ref} />);
 
@@ -118,7 +118,7 @@ describe('Sender.SlotTextArea', () => {
       expect(typeof ref.current.insert).toBe('function');
     });
 
-    it('应该正确获取和设置值', () => {
+    it('should correctly get and set values', () => {
       const ref = React.createRef<any>();
       render(<Sender slotConfig={baseSlotConfig} ref={ref} />);
 
@@ -133,8 +133,8 @@ describe('Sender.SlotTextArea', () => {
     });
   });
 
-  describe('交互测试', () => {
-    it('应该处理输入交互', () => {
+  describe('Interaction tests', () => {
+    it('should handle input interaction', () => {
       const onChange = jest.fn();
       const { getByPlaceholderText } = render(
         <Sender slotConfig={baseSlotConfig} onChange={onChange} />,
@@ -145,7 +145,7 @@ describe('Sender.SlotTextArea', () => {
       expect(input.value).toBe('New Value');
     });
 
-    it('应该处理自定义slot交互', () => {
+    it('should handle custom slot interaction', () => {
       const { getByTestId } = render(<Sender slotConfig={baseSlotConfig} />);
       const customBtn = getByTestId('custom-btn');
 
@@ -154,7 +154,7 @@ describe('Sender.SlotTextArea', () => {
       expect(customBtn.textContent).toBe('custom-value');
     });
 
-    it('应该处理键盘事件', () => {
+    it('should handle keyboard events', () => {
       const onSubmit = jest.fn();
       const { container } = render(
         <Sender slotConfig={baseSlotConfig} onSubmit={onSubmit} submitType="enter" />,
@@ -165,7 +165,7 @@ describe('Sender.SlotTextArea', () => {
       expect(onSubmit).toHaveBeenCalled();
     });
 
-    it('应该处理Shift+Enter提交', () => {
+    it('should handle Shift+Enter submission', () => {
       const onSubmit = jest.fn();
       const { container } = render(
         <Sender slotConfig={baseSlotConfig} onSubmit={onSubmit} submitType="shiftEnter" />,
@@ -176,7 +176,7 @@ describe('Sender.SlotTextArea', () => {
       expect(onSubmit).toHaveBeenCalled();
     });
 
-    it('应该处理粘贴事件', () => {
+    it('should handle paste events', () => {
       const onPasteFile = jest.fn();
       const { container } = render(
         <Sender slotConfig={baseSlotConfig} onPasteFile={onPasteFile} />,
@@ -196,8 +196,8 @@ describe('Sender.SlotTextArea', () => {
     });
   });
 
-  describe('Skill功能测试', () => {
-    it('应该渲染带关闭按钮的skill', async () => {
+  describe('Skill functionality tests', () => {
+    it('should render skill with close button', async () => {
       const mockClose = jest.fn();
       const { container } = render(
         <Sender
@@ -218,7 +218,7 @@ describe('Sender.SlotTextArea', () => {
       });
     });
 
-    it('应该处理不可关闭的skill', async () => {
+    it('should handle non-closable skill', async () => {
       const { container } = render(
         <Sender
           slotConfig={[]}
@@ -235,8 +235,8 @@ describe('Sender.SlotTextArea', () => {
     });
   });
 
-  describe('边界条件测试', () => {
-    it('应该处理缺失key的警告', () => {
+  describe('Boundary condition tests', () => {
+    it('should handle missing key warning', () => {
       const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
       const invalidConfig = [{ type: 'input', props: { placeholder: 'No key' } } as SlotConfigType];
 
@@ -246,7 +246,7 @@ describe('Sender.SlotTextArea', () => {
       consoleSpy.mockRestore();
     });
 
-    it('应该处理禁用和只读状态', () => {
+    it('should handle disabled and read-only states', () => {
       const { container: disabledContainer } = render(
         <Sender slotConfig={baseSlotConfig} disabled />,
       );
@@ -258,7 +258,7 @@ describe('Sender.SlotTextArea', () => {
       expect(readonlyContainer.querySelector('[role="textbox"]')).toBeInTheDocument();
     });
 
-    it('应该处理autoSize配置', () => {
+    it('should handle autoSize configuration', () => {
       const { container: autoSizeContainer } = render(
         <Sender slotConfig={[{ type: 'text', value: 'Test' }]} autoSize />,
       );
@@ -277,7 +277,7 @@ describe('Sender.SlotTextArea', () => {
       expect(rangeContainer.querySelector('[role="textbox"]')).toBeInTheDocument();
     });
 
-    it('应该处理所有事件回调', () => {
+    it('should handle all event callbacks', () => {
       const onFocus = jest.fn();
       const onBlur = jest.fn();
       const onKeyUp = jest.fn();
@@ -309,8 +309,8 @@ describe('Sender.SlotTextArea', () => {
     });
   });
 
-  describe('高覆盖率测试', () => {
-    it('应该处理所有slot类型的边界情况', () => {
+  describe('High coverage tests', () => {
+    it('should handle boundary cases for all slot types', () => {
       const { container } = render(
         <Sender
           slotConfig={[
@@ -325,7 +325,7 @@ describe('Sender.SlotTextArea', () => {
       expect(container.querySelector('[role="textbox"]')).toBeInTheDocument();
     });
 
-    it('应该处理所有焦点选项', () => {
+    it('should handle all focus options', () => {
       const ref = React.createRef<any>();
       render(
         <Sender
@@ -342,7 +342,7 @@ describe('Sender.SlotTextArea', () => {
       expect(() => ref.current?.focus({ cursor: 'all' })).not.toThrow();
     });
 
-    it('应该处理submitDisabled状态', () => {
+    it('should handle submitDisabled state', () => {
       const onSubmit = jest.fn();
       const { container } = render(
         <Sender slotConfig={baseSlotConfig} onSubmit={onSubmit} submitType="enter" />,

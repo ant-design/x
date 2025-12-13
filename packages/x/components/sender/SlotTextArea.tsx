@@ -13,7 +13,13 @@ import useCursor from './hooks/use-cursor';
 import useInputHeight from './hooks/use-input-height';
 import useSlotBuilder from './hooks/use-slot-builder';
 import useSlotConfigState from './hooks/use-slot-config-state';
-import type { EventType, InsertPosition, SkillType, SlotConfigType } from './interface';
+import type {
+  EventType,
+  InsertPosition,
+  SkillType,
+  SlotConfigBaseType,
+  SlotConfigType,
+} from './interface';
 
 export interface SlotTextAreaRef {
   focus: (options?: FocusOptions) => void;
@@ -105,7 +111,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   };
 
   // ============================ State =============================
-  const [slotConfigMap, { getSlotValues, setSlotValues, getNodeInfo, addSlotValuesBySlotConfig }] =
+  const [slotConfigMap, { getSlotValues, setSlotValues, getNodeInfo, mergeSlotConfig }] =
     useSlotConfigState(slotConfig);
   const [slotPlaceholders, setSlotPlaceholders] = useState<Map<string, React.ReactNode>>(new Map());
   const [skillPlaceholders, setSkillPlaceholders] = useState<React.ReactNode>(null);
@@ -152,7 +158,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const getSlotDom = (key: string): HTMLSpanElement | undefined => {
     return slotDomMap.current.get(key);
   };
-
   const updateSlot = (key: string, value: any, e?: EventType) => {
     const slotDom = getSlotDom(key);
     const node = slotConfigMap.get(key);
@@ -173,6 +178,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const renderSlot = (node: SlotConfigType, slotSpan: HTMLSpanElement) => {
     if (!node.key) return null;
     const value = getSlotValues()[node.key];
+
     const renderContent = () => {
       switch (node.type) {
         case 'content':
@@ -426,7 +432,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const getInsertPosition = (
     position?: InsertPosition,
   ): {
-    type: 'box' | 'slot' | 'end' | 'start';
+    type: 'box' | 'slot' | 'end' | 'start' | 'content';
+    slotType?: SlotConfigBaseType['type'];
     range?: Range;
     selection: Selection | null;
   } => {
@@ -457,10 +464,10 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     if (!container) {
       return { type: 'end', selection };
     }
+    const { slotKey, slotConfig } = getNodeInfo(container) || {};
 
-    const isInSlot = container.closest(`.${prefixCls}-skill, .${prefixCls}-slot`);
-    if (isInSlot) {
-      return { type: 'slot', range, selection };
+    if (slotKey || slotKey) {
+      return { type: 'slot', slotType: slotConfig?.type, range, selection };
     }
 
     const isInEditableBox = editableDom.contains(range.endContainer);
@@ -575,7 +582,11 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         const slotKey = (selection.anchorNode?.parentNode as Element)?.getAttribute?.(
           'data-slot-key',
         );
-        if (slotKey && selection.anchorNode?.parentNode) {
+        if (
+          slotKey &&
+          selection.anchorNode?.parentNode &&
+          selection.anchorNode.textContent?.length === 1
+        ) {
           e.preventDefault();
           (selection.anchorNode.parentNode as HTMLElement).innerHTML = '';
           return;
@@ -704,10 +715,10 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   ) => {
     const editableDom = editableRef.current;
     if (!editableDom) return;
-    addSlotValuesBySlotConfig(slotConfig);
+    mergeSlotConfig(slotConfig);
     const slotNode = getSlotListNode(slotConfig);
 
-    const { type, range: lastRage, selection } = getInsertPosition(position);
+    const { type, slotType, range: lastRage, selection } = getInsertPosition(position);
     let range: Range | null = null;
     if (type === 'end') {
       const lastNode = editableDom.childNodes[editableDom.childNodes.length - 1];
@@ -733,8 +744,10 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
     if (type === 'slot' && selection) {
       range = selection.getRangeAt?.(0) || null;
-      if (selection.focusNode) {
-        range?.setStartAfter(selection.focusNode);
+      if (slotType !== 'content') {
+        if (selection.focusNode) {
+          range?.setStartAfter(selection.focusNode);
+        }
       }
     }
     if (!selection || !range) return;

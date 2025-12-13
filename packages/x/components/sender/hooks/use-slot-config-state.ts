@@ -10,147 +10,117 @@ interface NodeInfo {
   targetNode: HTMLElement;
 }
 
-interface SlotValues {
-  [key: string]: any;
-}
+type SlotValues = Record<string, any>;
+
+// 支持的输入类型集合
+const SUPPORTED_INPUT_TYPES = new Set(['input', 'select', 'custom', 'content']);
 
 /**
- * 根据 slotConfig 构建 slotValues 对象
+ * 从 slot 配置中提取默认值构建 slotValues
  */
-const buildSlotValues = (slotConfig: readonly SlotConfigType[]): SlotValues => {
-  return slotConfig?.reduce<SlotValues>((acc, node) => {
-    if (node.key) {
-      if (
-        node.type === 'input' ||
-        node.type === 'select' ||
-        node.type === 'custom' ||
-        node.type === 'content'
-      ) {
-        acc[node.key] = node.props?.defaultValue || '';
-      } else if (node.type === 'tag') {
-        acc[node.key] = node.props?.value || node.props?.label || '';
-      }
-    }
+const buildSlotValues = (slotConfig: readonly SlotConfigType[]): SlotValues =>
+  slotConfig?.reduce<SlotValues>((acc, node) => {
+    const { key, type } = node;
+    if (!key) return acc;
+
+    const props = (node as any).props || {};
+    const defaultValue = SUPPORTED_INPUT_TYPES.has(type)
+      ? props.defaultValue
+      : (props.value ?? props.label);
+
+    acc[key] = defaultValue ?? '';
     return acc;
-  }, {});
+  }, {}) ?? {};
+
+/**
+ * 将 slot 配置数组转换为 Map 结构便于查找
+ */
+const buildSlotConfigMap = (
+  slotConfig: readonly SlotConfigType[],
+  slotConfigMap: Map<string, SlotConfigType>,
+) => {
+  slotConfig?.forEach((node) => {
+    if (node.key) slotConfigMap.set(node.key, node);
+  });
 };
 
 /**
- * 根据 slotConfig 构建 slotConfigMap
+ * 根据目标节点和配置映射获取节点信息
  */
-const buildSlotConfigMap = (slotConfig: readonly SlotConfigType[]): Map<string, SlotConfigType> => {
-  const map = new Map<string, SlotConfigType>();
-  slotConfig?.forEach((node) => {
-    if (node.key) {
-      map.set(node.key, node);
-    }
-  });
-  return map;
-};
-
 const getNodeInfoBySlotConfigMap = (
   targetNode: HTMLElement,
   slotConfigMap: Map<string, SlotConfigType>,
 ): NodeInfo | null => {
-  if (!targetNode || !(targetNode instanceof HTMLElement)) {
-    return null;
-  }
+  if (!targetNode?.dataset) return null;
+
   const { dataset } = targetNode;
-  const slotKey = dataset.slotKey;
-  const slotConfig = slotKey ? slotConfigMap.get(slotKey) : undefined;
 
   return {
-    slotKey,
+    slotKey: dataset.slotKey,
     placeholder: dataset.placeholder,
     nodeType: dataset.nodeType as 'nbsp' | undefined,
     skillKey: dataset.skillKey,
-    slotConfig,
+    slotConfig: dataset.slotKey ? slotConfigMap.get(dataset.slotKey) : undefined,
     targetNode,
   };
 };
 
-function useSlotConfigState(slotConfig?: readonly SlotConfigType[]): [
+const useSlotConfigState = (
+  slotConfig?: readonly SlotConfigType[],
+): [
   Map<string, SlotConfigType>,
   {
     getSlotValues: () => SlotValues;
     setSlotValues: React.Dispatch<React.SetStateAction<SlotValues>>;
-    setSlotConfigMap: (slotConfigs: SlotConfigType[]) => void;
-    addSlotValuesBySlotConfig: (newSlotConfig: SlotConfigType[]) => void;
+    mergeSlotConfig: (newSlotConfig: SlotConfigType[]) => void;
     getNodeInfo: (targetNode: HTMLElement) => NodeInfo | null;
   },
-] {
+] => {
   const [state, _setState] = useState<SlotValues>({});
   const stateRef = useRef<SlotValues>(state);
-  const slotConfigMap = useRef<Map<string, SlotConfigType>>(new Map());
+  const slotConfigMapRef = useRef<Map<string, SlotConfigType>>(new Map());
 
+  // 初始化 slotConfig
   useEffect(() => {
     if (!slotConfig) return;
-    setSlotValuesBySlotConfig(slotConfig);
+    buildSlotConfigMap(slotConfig, slotConfigMapRef.current);
+    const newValues = buildSlotValues(slotConfig);
+    _setState(newValues);
+    stateRef.current = newValues;
   }, [slotConfig]);
 
   const setState = useCallback((newValue: React.SetStateAction<SlotValues>) => {
     const value = typeof newValue === 'function' ? newValue(stateRef.current) : newValue;
-    stateRef.current = value;
     _setState(value);
+    stateRef.current = value;
   }, []);
 
-  const setSlotConfigMap = useCallback((slotConfigs: SlotConfigType[]) => {
-    slotConfigMap.current.clear();
-    slotConfigs.forEach((config) => {
-      if (config.key) {
-        slotConfigMap.current.set(config.key, config);
-      }
-    });
-  }, []);
+  const mergeSlotConfig = useCallback((newSlotConfig: SlotConfigType[]) => {
+    const newValues = buildSlotValues(newSlotConfig);
 
-  const setSlotValuesBySlotConfig = useCallback((slotConfig: readonly SlotConfigType[]) => {
-    const newSlotConfigMap = buildSlotConfigMap(slotConfig);
-    const newSlotValues = buildSlotValues(slotConfig);
-
-    slotConfigMap.current = newSlotConfigMap;
-    _setState(newSlotValues);
-    stateRef.current = newSlotValues;
-  }, []);
-
-  const addSlotValuesBySlotConfig = useCallback((newSlotConfig: SlotConfigType[]) => {
-    // 构建新的 slot 配置和值
-    const newSlotValues = buildSlotValues(newSlotConfig);
-    // 合并新的 slot 配置到现有配置中
-    newSlotConfig.forEach((config) => {
-      if (config.key) {
-        slotConfigMap.current.set(config.key, config);
-      }
+    // 更新配置映射
+    newSlotConfig.forEach((node) => {
+      if (node.key) slotConfigMapRef.current.set(node.key, node);
     });
 
-    _setState((prevState) => ({
-      ...prevState,
-      ...newSlotValues,
-    }));
-
-    stateRef.current = {
-      ...stateRef.current,
-      ...newSlotValues,
-    };
+    _setState((prev) => ({ ...prev, ...newValues }));
+    stateRef.current = { ...stateRef.current, ...newValues };
   }, []);
 
-  const getState = useCallback(() => {
-    return stateRef.current;
-  }, []);
-
-  const getNodeInfo = useCallback((targetNode: HTMLElement) => {
-    return getNodeInfoBySlotConfigMap(targetNode, slotConfigMap.current);
-  }, []);
+  const getNodeInfo = useCallback(
+    (targetNode: HTMLElement) => getNodeInfoBySlotConfigMap(targetNode, slotConfigMapRef.current),
+    [],
+  );
 
   return [
-    slotConfigMap.current,
+    slotConfigMapRef.current,
     {
-      getSlotValues: getState,
+      getSlotValues: () => stateRef.current,
       setSlotValues: setState,
-      setSlotConfigMap,
-      addSlotValuesBySlotConfig,
+      mergeSlotConfig,
       getNodeInfo,
     },
   ];
-}
+};
 
 export default useSlotConfigState;
