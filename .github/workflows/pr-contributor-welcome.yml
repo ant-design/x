@@ -36,7 +36,7 @@ jobs:
 
             🎉 感谢您的贡献！如果您还没有加入钉钉社区群，请扫描下方二维码加入我们（加群时请提供此 PR 链接）。
 
-            <img src="https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/gGRQTaOkHf8AAAAAQvAAAAgADtFMAQFr/original" target="_blank" alt="Thank you for your contribution!" height="200" />
+            <img src="https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/gGRQTaOkHf8AAAAAQvAAAAgADtFMAQFr/original" alt="Thank you for your contribution!" height="200" />
 
             <!-- WELCOME_CONTRIBUTION -->
           body-include: <!-- WELCOME_CONTRIBUTION -->
