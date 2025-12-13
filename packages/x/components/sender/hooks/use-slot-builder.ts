@@ -24,7 +24,7 @@ const useSlotBuilder = (options: UseSlotBuilderOptions): UseSlotBuilderReturn =>
   const buildSkillSpan = useCallback(
     (key: string): HTMLSpanElement => {
       const span = document.createElement('span');
-      span.setAttribute('contenteditable', 'true');
+      span.setAttribute('contenteditable', 'false');
       span.dataset.skillKey = key;
       span.dataset.placeholder = placeholder || '';
       span.className = `${prefixCls}-skill`;

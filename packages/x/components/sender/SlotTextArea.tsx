@@ -105,7 +105,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   };
 
   // ============================ State =============================
-  const [slotConfigMap, { getSlotValues, setSlotValues, setSlotConfigMap, getNodeInfo }] =
+  const [slotConfigMap, { getSlotValues, setSlotValues, getNodeInfo, addSlotValuesBySlotConfig }] =
     useSlotConfigState(slotConfig);
   const [slotPlaceholders, setSlotPlaceholders] = useState<Map<string, React.ReactNode>>(new Map());
   const [skillPlaceholders, setSkillPlaceholders] = useState<React.ReactNode>(null);
@@ -704,11 +704,11 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   ) => {
     const editableDom = editableRef.current;
     if (!editableDom) return;
+    addSlotValuesBySlotConfig(slotConfig);
     const slotNode = getSlotListNode(slotConfig);
+
     const { type, range: lastRage, selection } = getInsertPosition(position);
     let range: Range | null = null;
-    setSlotValues((prev) => ({ ...prev, ...slotConfig }));
-    setSlotConfigMap(slotConfig);
     if (type === 'end') {
       const lastNode = editableDom.childNodes[editableDom.childNodes.length - 1];
       if (lastNode.nodeType === Node.TEXT_NODE && lastNode.textContent === '\n') {
@@ -757,7 +757,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
     selection.deleteFromDocument();
 
-    slotNode.forEach((node) => {
+    [...slotNode].reverse().forEach((node) => {
       range?.insertNode(node);
     });
 

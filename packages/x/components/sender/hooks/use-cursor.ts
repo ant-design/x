@@ -168,7 +168,7 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
 
       if (range && selection) {
         try {
-          const maxPosition = Math.min(position, targetNode.textContent?.length || 0);
+          const maxPosition = Math.min(position, targetNode.childNodes.length);
           range.setStart(targetNode, maxPosition);
           range.setEnd(targetNode, maxPosition);
           range.collapse(false);
@@ -253,12 +253,11 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
       if (!range || !selection) return;
       focus(editableNode, preventScroll);
       range?.setStartAfter(targetNode);
-      const newRange = range?.cloneRange() || null;
-      newRange.collapse(false);
+      range.collapse(false);
       selection.removeAllRanges();
       selection.addRange(range);
     },
-    [],
+    [focus],
   );
 
   const getTextBeforeCursor = useCallback(
