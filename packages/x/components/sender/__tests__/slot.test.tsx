@@ -345,12 +345,7 @@ describe('Sender.SlotTextArea', () => {
     it('应该处理submitDisabled状态', () => {
       const onSubmit = jest.fn();
       const { container } = render(
-        <Sender
-          slotConfig={baseSlotConfig}
-          onSubmit={onSubmit}
-          submitDisabled={true}
-          submitType="enter"
-        />,
+        <Sender slotConfig={baseSlotConfig} onSubmit={onSubmit} submitType="enter" />,
       );
 
       const inputArea = container.querySelector('[role="textbox"]') as HTMLElement;
