@@ -1,0 +1,2924 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`renders components/conversations/demo/basic.tsx extend context correctly 1`] = `
+<ul
+  class="ant-conversations css-var-_r_1u_"
+  style="width: 256px; background: #ffffff; border-radius: 6px;"
+>
+  <li
+    class="ant-conversations-item ant-conversations-item-active"
+    title="Help Me Write"
+  >
+    <div
+      class="ant-conversations-icon"
+    >
+      <span
+        aria-label="signature"
+        class="anticon anticon-signature"
+        role="img"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="signature"
+          fill="currentColor"
+          fill-rule="evenodd"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M145.71 752c2 0 4-.2 5.98-.5L319.9 722c1.99-.4 3.88-1.3 5.28-2.8l423.91-423.87a9.93 9.93 0 000-14.06L582.88 114.9C581 113 578.5 112 575.82 112s-5.18 1-7.08 2.9L144.82 538.76c-1.5 1.5-2.4 3.29-2.8 5.28l-29.5 168.17a33.59 33.59 0 009.37 29.81c6.58 6.48 14.95 9.97 23.82 9.97m51.75-85.43l15.65-88.92 362.7-362.67 73.28 73.27-362.7 362.67zm401.37-98.64c27.69-14.81 57.29-20.85 85.54-15.52 32.37 6.1 59.72 26.53 78.96 59.4 29.97 51.22 21.64 102.34-18.48 144.26-17.58 18.36-41.07 35.01-70 50.3l-.3.15.86.26a147.88 147.88 0 0041.54 6.2l1.17.01c61.07 0 100.98-22.1 125.28-67.87a36 36 0 0163.6 33.76C869.7 849.1 804.9 885 718.12 885c-47.69 0-91.94-15.03-128.19-41.36l-1.05-.78-1.36.47c-46.18 16-98.74 29.95-155.37 41.94l-2.24.47a1931.1 1931.1 0 01-139.16 23.96 36 36 0 11-9.5-71.38 1860.1 1860.1 0 00133.84-23.04c42.8-9 83-19.13 119.35-30.34l.24-.08-.44-.69c-16.46-26.45-25.86-55.43-26.14-83.24v-1.3c0-49.9 39.55-104.32 90.73-131.7M671 623.17c-10.74-2.03-24.1.7-38.22 8.26-29.55 15.8-52.7 47.64-52.7 68.2 0 18.2 8.9 40.14 24.71 59.73l.24.3 1.22-.52c39.17-16.58 68.49-34.27 85.93-52.18l.64-.67c18.74-19.57 21.39-35.84 8.36-58.1-9.06-15.47-19.03-22.92-30.18-25.02"
+          />
+        </svg>
+      </span>
+    </div>
+    <span
+      class="ant-typography ant-conversations-label css-var-_r_1u_"
+    >
+      Help Me Write
+    </span>
+  </li>
+  <li
+    class="ant-conversations-item"
+    title="AI Coding"
+  >
+    <div
+      class="ant-conversations-icon"
+    >
+      <span
+        aria-label="code"
+        class="anticon anticon-code"
+        role="img"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="code"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M516 673c0 4.4 3.4 8 7.5 8h185c4.1 0 7.5-3.6 7.5-8v-48c0-4.4-3.4-8-7.5-8h-185c-4.1 0-7.5 3.6-7.5 8v48zm-194.9 6.1l192-161c3.8-3.2 3.8-9.1 0-12.3l-192-160.9A7.95 7.95 0 00308 351v62.7c0 2.4 1 4.6 2.9 6.1L420.7 512l-109.8 92.2a8.1 8.1 0 00-2.9 6.1V673c0 6.8 7.9 10.5 13.1 6.1zM880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 728H184V184h656v656z"
+          />
+        </svg>
+      </span>
+    </div>
+    <span
+      class="ant-typography ant-conversations-label css-var-_r_1u_"
+    >
+      AI Coding
+    </span>
+  </li>
+  <li
+    class="ant-conversations-item"
+    title="Create Image"
+  >
+    <div
+      class="ant-conversations-icon"
+    >
+      <span
+        aria-label="file-image"
+        class="anticon anticon-file-image"
+        role="img"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="file-image"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M553.1 509.1l-77.8 99.2-41.1-52.4a8 8 0 00-12.6 0l-99.8 127.2a7.98 7.98 0 006.3 12.9H696c6.7 0 10.4-7.7 6.3-12.9l-136.5-174a8.1 8.1 0 00-12.7 0zM360 442a40 40 0 1080 0 40 40 0 10-80 0zm494.6-153.4L639.4 73.4c-6-6-14.1-9.4-22.6-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.7-9.4-22.7zM790.2 326H602V137.8L790.2 326zm1.8 562H232V136h302v216a42 42 0 0042 42h216v494z"
+          />
+        </svg>
+      </span>
+    </div>
+    <span
+      class="ant-typography ant-conversations-label css-var-_r_1u_"
+    >
+      Create Image
+    </span>
+  </li>
+  <li
+    class="ant-conversations-item ant-conversations-item-disabled"
+  >
+    <div
+      class="ant-conversations-icon"
+    >
+      <span
+        aria-label="file-search"
+        class="anticon anticon-file-search"
+        role="img"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="file-search"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M688 312v-48c0-4.4-3.6-8-8-8H296c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h384c4.4 0 8-3.6 8-8zm-392 88c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H296zm144 452H208V148h560v344c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V108c0-17.7-14.3-32-32-32H168c-17.7 0-32 14.3-32 32v784c0 17.7 14.3 32 32 32h272c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm445.7 51.5l-93.3-93.3C814.7 780.7 828 743.9 828 704c0-97.2-78.8-176-176-176s-176 78.8-176 176 78.8 176 176 176c35.8 0 69-10.7 96.8-29l94.7 94.7c1.6 1.6 3.6 2.3 5.6 2.3s4.1-.8 5.6-2.3l31-31a7.9 7.9 0 000-11.2zM652 816c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"
+          />
+        </svg>
+      </span>
+    </div>
+    <span
+      class="ant-typography ant-conversations-label css-var-_r_1u_"
+    >
+      <div
+        class="ant-flex css-var-_r_1u_ ant-flex-align-center ant-flex-gap-small"
+      >
+        Deep Search
+        <button
+          aria-checked="false"
+          class="ant-switch ant-switch-small css-var-_r_1u_"
+          role="switch"
+          type="button"
+        >
+          <div
+            class="ant-switch-handle"
+          />
+          <span
+            class="ant-switch-inner"
+          >
+            <span
+              class="ant-switch-inner-checked"
+            />
+            <span
+              class="ant-switch-inner-unchecked"
+            />
+          </span>
+        </button>
+      </div>
+    </span>
+  </li>
+</ul>
+`;
+
+exports[`renders components/conversations/demo/basic.tsx extend context correctly 2`] = `[]`;
+
+exports[`renders components/conversations/demo/controlled-collapsible.tsx extend context correctly 1`] = `
+<ul
+  class="ant-conversations css-var-_r_1t_"
+  style="width: 256px; background: #ffffff; border-radius: 6px;"
+>
+  <li
+    class=""
+  >
+    <div
+      class="ant-conversations-group-title"
+    >
+      <div
+        class="ant-conversations-group-label"
+      >
+        <div
+          class="ant-flex css-var-_r_1t_ ant-flex-gap-small"
+        >
+          <span
+            aria-label="field-time"
+            class="anticon anticon-field-time"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="field-time"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <defs>
+                <style />
+              </defs>
+              <path
+                d="M945 412H689c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h256c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8zM811 548H689c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h122c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8zM477.3 322.5H434c-6.2 0-11.2 5-11.2 11.2v248c0 3.6 1.7 6.9 4.6 9l148.9 108.6c5 3.6 12 2.6 15.6-2.4l25.7-35.1v-.1c3.6-5 2.5-12-2.5-15.6l-126.7-91.6V333.7c.1-6.2-5-11.2-11.1-11.2z"
+              />
+              <path
+                d="M804.8 673.9H747c-5.6 0-10.9 2.9-13.9 7.7a321 321 0 01-44.5 55.7 317.17 317.17 0 01-101.3 68.3c-39.3 16.6-81 25-124 25-43.1 0-84.8-8.4-124-25-37.9-16-72-39-101.3-68.3s-52.3-63.4-68.3-101.3c-16.6-39.2-25-80.9-25-124 0-43.1 8.4-84.7 25-124 16-37.9 39-72 68.3-101.3 29.3-29.3 63.4-52.3 101.3-68.3 39.2-16.6 81-25 124-25 43.1 0 84.8 8.4 124 25 37.9 16 72 39 101.3 68.3a321 321 0 0144.5 55.7c3 4.8 8.3 7.7 13.9 7.7h57.8c6.9 0 11.3-7.2 8.2-13.3-65.2-129.7-197.4-214-345-215.7-216.1-2.7-395.6 174.2-396 390.1C71.6 727.5 246.9 903 463.2 903c149.5 0 283.9-84.6 349.8-215.8a9.18 9.18 0 00-8.2-13.3z"
+              />
+            </svg>
+          </span>
+          Today
+        </div>
+      </div>
+    </div>
+    <div
+      class=""
+    >
+      <ul
+        class="ant-conversations-list"
+      >
+        <li
+          class="ant-conversations-item ant-conversations-item-active"
+          title="Conversation Item 1"
+        >
+          <span
+            class="ant-typography ant-conversations-label css-var-_r_1t_"
+          >
+            Conversation Item 1
+          </span>
+        </li>
+        <li
+          class="ant-conversations-item"
+          title="Conversation Item 4"
+        >
+          <span
+            class="ant-typography ant-conversations-label css-var-_r_1t_"
+          >
+            Conversation Item 4
+          </span>
+        </li>
+        <li
+          class="ant-conversations-item"
+          title="Conversation Item 7"
+        >
+          <span
+            class="ant-typography ant-conversations-label css-var-_r_1t_"
+          >
+            Conversation Item 7
+          </span>
+        </li>
+      </ul>
+    </div>
+  </li>
+  <li
+    class=""
+  >
+    <div
+      class="ant-conversations-group-title ant-conversations-group-title-collapsible"
+    >
+      <div
+        class="ant-conversations-group-label"
+      >
+        <div
+          class="ant-flex css-var-_r_1t_ ant-flex-gap-small"
+        >
+          <span
+            aria-label="field-time"
+            class="anticon anticon-field-time"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="field-time"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <defs>
+                <style />
+              </defs>
+              <path
+                d="M945 412H689c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h256c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8zM811 548H689c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h122c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8zM477.3 322.5H434c-6.2 0-11.2 5-11.2 11.2v248c0 3.6 1.7 6.9 4.6 9l148.9 108.6c5 3.6 12 2.6 15.6-2.4l25.7-35.1v-.1c3.6-5 2.5-12-2.5-15.6l-126.7-91.6V333.7c.1-6.2-5-11.2-11.1-11.2z"
+              />
+              <path
+                d="M804.8 673.9H747c-5.6 0-10.9 2.9-13.9 7.7a321 321 0 01-44.5 55.7 317.17 317.17 0 01-101.3 68.3c-39.3 16.6-81 25-124 25-43.1 0-84.8-8.4-124-25-37.9-16-72-39-101.3-68.3s-52.3-63.4-68.3-101.3c-16.6-39.2-25-80.9-25-124 0-43.1 8.4-84.7 25-124 16-37.9 39-72 68.3-101.3 29.3-29.3 63.4-52.3 101.3-68.3 39.2-16.6 81-25 124-25 43.1 0 84.8 8.4 124 25 37.9 16 72 39 101.3 68.3a321 321 0 0144.5 55.7c3 4.8 8.3 7.7 13.9 7.7h57.8c6.9 0 11.3-7.2 8.2-13.3-65.2-129.7-197.4-214-345-215.7-216.1-2.7-395.6 174.2-396 390.1C71.6 727.5 246.9 903 463.2 903c149.5 0 283.9-84.6 349.8-215.8a9.18 9.18 0 00-8.2-13.3z"
+              />
+            </svg>
+          </span>
+          Yesterday
+        </div>
+      </div>
+      <div
+        class="ant-conversations-group-collapse-trigger  ant-conversations-group-collapse-trigger-open"
+      >
+        <span
+          aria-label="right"
+          class="anticon anticon-right"
+          role="img"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="right"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+            />
+          </svg>
+        </span>
+      </div>
+    </div>
+    <div
+      class=""
+    >
+      <ul
+        class="ant-conversations-list ant-conversations-group-collapsible-list"
+      >
+        <li
+          class="ant-conversations-item"
+          title="Conversation Item 2"
+        >
+          <span
+            class="ant-typography ant-conversations-label css-var-_r_1t_"
+          >
+            Conversation Item 2
+          </span>
+        </li>
+        <li
+          class="ant-conversations-item"
+          title="Conversation Item 5"
+        >
+          <span
+            class="ant-typography ant-conversations-label css-var-_r_1t_"
+          >
+            Conversation Item 5
+          </span>
+        </li>
+        <li
+          class="ant-conversations-item"
+          title="Conversation Item 8"
+        >
+          <span
+            class="ant-typography ant-conversations-label css-var-_r_1t_"
+          >
+            Conversation Item 8
+          </span>
+        </li>
+      </ul>
+    </div>
+  </li>
+  <li
+    class=""
+  >
+    <div
+      class="ant-conversations-group-title ant-conversations-group-title-collapsible"
+    >
+      <div
+        class="ant-conversations-group-label"
+      >
+        <div
+          class="ant-flex css-var-_r_1t_ ant-flex-gap-small"
+        >
+          <span
+            aria-label="field-time"
+            class="anticon anticon-field-time"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="field-time"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <defs>
+                <style />
+              </defs>
+              <path
+                d="M945 412H689c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h256c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8zM811 548H689c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h122c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8zM477.3 322.5H434c-6.2 0-11.2 5-11.2 11.2v248c0 3.6 1.7 6.9 4.6 9l148.9 108.6c5 3.6 12 2.6 15.6-2.4l25.7-35.1v-.1c3.6-5 2.5-12-2.5-15.6l-126.7-91.6V333.7c.1-6.2-5-11.2-11.1-11.2z"
+              />
+              <path
+                d="M804.8 673.9H747c-5.6 0-10.9 2.9-13.9 7.7a321 321 0 01-44.5 55.7 317.17 317.17 0 01-101.3 68.3c-39.3 16.6-81 25-124 25-43.1 0-84.8-8.4-124-25-37.9-16-72-39-101.3-68.3s-52.3-63.4-68.3-101.3c-16.6-39.2-25-80.9-25-124 0-43.1 8.4-84.7 25-124 16-37.9 39-72 68.3-101.3 29.3-29.3 63.4-52.3 101.3-68.3 39.2-16.6 81-25 124-25 43.1 0 84.8 8.4 124 25 37.9 16 72 39 101.3 68.3a321 321 0 0144.5 55.7c3 4.8 8.3 7.7 13.9 7.7h57.8c6.9 0 11.3-7.2 8.2-13.3-65.2-129.7-197.4-214-345-215.7-216.1-2.7-395.6 174.2-396 390.1C71.6 727.5 246.9 903 463.2 903c149.5 0 283.9-84.6 349.8-215.8a9.18 9.18 0 00-8.2-13.3z"
+              />
+            </svg>
+          </span>
+          Historical chats
+        </div>
+      </div>
+      <div
+        class="ant-conversations-group-collapse-trigger  ant-conversations-group-collapse-trigger-close"
+      >
+        <span
+          aria-label="right"
+          class="anticon anticon-right"
+          role="img"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="right"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+            />
+          </svg>
+        </span>
+      </div>
+    </div>
+  </li>
+</ul>
+`;
+
+exports[`renders components/conversations/demo/controlled-collapsible.tsx extend context correctly 2`] = `[]`;
+
+exports[`renders components/conversations/demo/controlled-mode.tsx extend context correctly 1`] = `
+<div
+  class="ant-flex css-var-_r_1s_ ant-flex-align-flex-start ant-flex-gap-small ant-flex-vertical"
+>
+  <ul
+    class="ant-conversations css-var-_r_1s_"
+    style="width: 256px; background: #ffffff; border-radius: 6px;"
+  >
+    <li
+      class="ant-conversations-item"
+      title="Help Me Write"
+    >
+      <div
+        class="ant-conversations-icon"
+      >
+        <span
+          aria-label="signature"
+          class="anticon anticon-signature"
+          role="img"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="signature"
+            fill="currentColor"
+            fill-rule="evenodd"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M145.71 752c2 0 4-.2 5.98-.5L319.9 722c1.99-.4 3.88-1.3 5.28-2.8l423.91-423.87a9.93 9.93 0 000-14.06L582.88 114.9C581 113 578.5 112 575.82 112s-5.18 1-7.08 2.9L144.82 538.76c-1.5 1.5-2.4 3.29-2.8 5.28l-29.5 168.17a33.59 33.59 0 009.37 29.81c6.58 6.48 14.95 9.97 23.82 9.97m51.75-85.43l15.65-88.92 362.7-362.67 73.28 73.27-362.7 362.67zm401.37-98.64c27.69-14.81 57.29-20.85 85.54-15.52 32.37 6.1 59.72 26.53 78.96 59.4 29.97 51.22 21.64 102.34-18.48 144.26-17.58 18.36-41.07 35.01-70 50.3l-.3.15.86.26a147.88 147.88 0 0041.54 6.2l1.17.01c61.07 0 100.98-22.1 125.28-67.87a36 36 0 0163.6 33.76C869.7 849.1 804.9 885 718.12 885c-47.69 0-91.94-15.03-128.19-41.36l-1.05-.78-1.36.47c-46.18 16-98.74 29.95-155.37 41.94l-2.24.47a1931.1 1931.1 0 01-139.16 23.96 36 36 0 11-9.5-71.38 1860.1 1860.1 0 00133.84-23.04c42.8-9 83-19.13 119.35-30.34l.24-.08-.44-.69c-16.46-26.45-25.86-55.43-26.14-83.24v-1.3c0-49.9 39.55-104.32 90.73-131.7M671 623.17c-10.74-2.03-24.1.7-38.22 8.26-29.55 15.8-52.7 47.64-52.7 68.2 0 18.2 8.9 40.14 24.71 59.73l.24.3 1.22-.52c39.17-16.58 68.49-34.27 85.93-52.18l.64-.67c18.74-19.57 21.39-35.84 8.36-58.1-9.06-15.47-19.03-22.92-30.18-25.02"
+            />
+          </svg>
+        </span>
+      </div>
+      <span
+        class="ant-typography ant-conversations-label css-var-_r_1s_"
+      >
+        Help Me Write
+      </span>
+    </li>
+    <li
+      class="ant-conversations-item"
+      title="AI Coding"
+    >
+      <div
+        class="ant-conversations-icon"
+      >
+        <span
+          aria-label="code"
+          class="anticon anticon-code"
+          role="img"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="code"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M516 673c0 4.4 3.4 8 7.5 8h185c4.1 0 7.5-3.6 7.5-8v-48c0-4.4-3.4-8-7.5-8h-185c-4.1 0-7.5 3.6-7.5 8v48zm-194.9 6.1l192-161c3.8-3.2 3.8-9.1 0-12.3l-192-160.9A7.95 7.95 0 00308 351v62.7c0 2.4 1 4.6 2.9 6.1L420.7 512l-109.8 92.2a8.1 8.1 0 00-2.9 6.1V673c0 6.8 7.9 10.5 13.1 6.1zM880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 728H184V184h656v656z"
+            />
+          </svg>
+        </span>
+      </div>
+      <span
+        class="ant-typography ant-conversations-label css-var-_r_1s_"
+      >
+        AI Coding
+      </span>
+    </li>
+    <li
+      class="ant-conversations-item"
+      title="Create Image"
+    >
+      <div
+        class="ant-conversations-icon"
+      >
+        <span
+          aria-label="file-image"
+          class="anticon anticon-file-image"
+          role="img"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="file-image"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M553.1 509.1l-77.8 99.2-41.1-52.4a8 8 0 00-12.6 0l-99.8 127.2a7.98 7.98 0 006.3 12.9H696c6.7 0 10.4-7.7 6.3-12.9l-136.5-174a8.1 8.1 0 00-12.7 0zM360 442a40 40 0 1080 0 40 40 0 10-80 0zm494.6-153.4L639.4 73.4c-6-6-14.1-9.4-22.6-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.7-9.4-22.7zM790.2 326H602V137.8L790.2 326zm1.8 562H232V136h302v216a42 42 0 0042 42h216v494z"
+            />
+          </svg>
+        </span>
+      </div>
+      <span
+        class="ant-typography ant-conversations-label css-var-_r_1s_"
+      >
+        Create Image
+      </span>
+    </li>
+    <li
+      class="ant-conversations-item"
+      title="Deep Search"
+    >
+      <div
+        class="ant-conversations-icon"
+      >
+        <span
+          aria-label="file-search"
+          class="anticon anticon-file-search"
+          role="img"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="file-search"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M688 312v-48c0-4.4-3.6-8-8-8H296c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h384c4.4 0 8-3.6 8-8zm-392 88c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H296zm144 452H208V148h560v344c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V108c0-17.7-14.3-32-32-32H168c-17.7 0-32 14.3-32 32v784c0 17.7 14.3 32 32 32h272c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm445.7 51.5l-93.3-93.3C814.7 780.7 828 743.9 828 704c0-97.2-78.8-176-176-176s-176 78.8-176 176 78.8 176 176 176c35.8 0 69-10.7 96.8-29l94.7 94.7c1.6 1.6 3.6 2.3 5.6 2.3s4.1-.8 5.6-2.3l31-31a7.9 7.9 0 000-11.2zM652 816c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"
+            />
+          </svg>
+        </span>
+      </div>
+      <span
+        class="ant-typography ant-conversations-label css-var-_r_1s_"
+      >
+        Deep Search
+      </span>
+    </li>
+  </ul>
+  <div
+    class="ant-flex css-var-_r_1s_ ant-flex-gap-small"
+  >
+    <button
+      class="ant-btn css-var-_r_1s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      type="button"
+    >
+      <span>
+        Active First
+      </span>
+    </button>
+    <button
+      class="ant-btn css-var-_r_1s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      type="button"
+    >
+      <span>
+        Active Last
+      </span>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`renders components/conversations/demo/controlled-mode.tsx extend context correctly 2`] = `[]`;
+
+exports[`renders components/conversations/demo/custom-new-chat.tsx extend context correctly 1`] = `
+<ul
+  class="ant-conversations css-var-_r_1r_"
+  style="width: 256px; background: #ffffff; border-radius: 6px;"
+>
+  <button
+    class="ant-conversations-creation ant-conversations-creation-start"
+    type="button"
+  >
+    <span
+      aria-label="appstore-add"
+      class="anticon anticon-appstore-add"
+      role="img"
+    >
+      <svg
+        aria-hidden="true"
+        data-icon="appstore-add"
+        fill="currentColor"
+        focusable="false"
+        height="1em"
+        viewBox="64 64 896 896"
+        width="1em"
+      >
+        <defs>
+          <style />
+        </defs>
+        <path
+          d="M464 144H160c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V160c0-8.8-7.2-16-16-16zm-52 268H212V212h200v200zm452-268H560c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V160c0-8.8-7.2-16-16-16zm-52 268H612V212h200v200zm52 132H560c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V560c0-8.8-7.2-16-16-16zm-52 268H612V612h200v200zM424 712H296V584c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v128H104c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h128v128c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V776h128c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
+        />
+      </svg>
+    </span>
+    Create a new chat
+  </button>
+  <li
+    class="ant-conversations-item ant-conversations-item-active"
+    title="Help Me Write"
+  >
+    <div
+      class="ant-conversations-icon"
+    >
+      <span
+        aria-label="signature"
+        class="anticon anticon-signature"
+        role="img"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="signature"
+          fill="currentColor"
+          fill-rule="evenodd"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M145.71 752c2 0 4-.2 5.98-.5L319.9 722c1.99-.4 3.88-1.3 5.28-2.8l423.91-423.87a9.93 9.93 0 000-14.06L582.88 114.9C581 113 578.5 112 575.82 112s-5.18 1-7.08 2.9L144.82 538.76c-1.5 1.5-2.4 3.29-2.8 5.28l-29.5 168.17a33.59 33.59 0 009.37 29.81c6.58 6.48 14.95 9.97 23.82 9.97m51.75-85.43l15.65-88.92 362.7-362.67 73.28 73.27-362.7 362.67zm401.37-98.64c27.69-14.81 57.29-20.85 85.54-15.52 32.37 6.1 59.72 26.53 78.96 59.4 29.97 51.22 21.64 102.34-18.48 144.26-17.58 18.36-41.07 35.01-70 50.3l-.3.15.86.26a147.88 147.88 0 0041.54 6.2l1.17.01c61.07 0 100.98-22.1 125.28-67.87a36 36 0 0163.6 33.76C869.7 849.1 804.9 885 718.12 885c-47.69 0-91.94-15.03-128.19-41.36l-1.05-.78-1.36.47c-46.18 16-98.74 29.95-155.37 41.94l-2.24.47a1931.1 1931.1 0 01-139.16 23.96 36 36 0 11-9.5-71.38 1860.1 1860.1 0 00133.84-23.04c42.8-9 83-19.13 119.35-30.34l.24-.08-.44-.69c-16.46-26.45-25.86-55.43-26.14-83.24v-1.3c0-49.9 39.55-104.32 90.73-131.7M671 623.17c-10.74-2.03-24.1.7-38.22 8.26-29.55 15.8-52.7 47.64-52.7 68.2 0 18.2 8.9 40.14 24.71 59.73l.24.3 1.22-.52c39.17-16.58 68.49-34.27 85.93-52.18l.64-.67c18.74-19.57 21.39-35.84 8.36-58.1-9.06-15.47-19.03-22.92-30.18-25.02"
+          />
+        </svg>
+      </span>
+    </div>
+    <span
+      class="ant-typography ant-conversations-label css-var-_r_1r_"
+    >
+      Help Me Write
+    </span>
+  </li>
+  <li
+    class="ant-conversations-item"
+    title="AI Coding"
+  >
+    <div
+      class="ant-conversations-icon"
+    >
+      <span
+        aria-label="code"
+        class="anticon anticon-code"
+        role="img"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="code"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M516 673c0 4.4 3.4 8 7.5 8h185c4.1 0 7.5-3.6 7.5-8v-48c0-4.4-3.4-8-7.5-8h-185c-4.1 0-7.5 3.6-7.5 8v48zm-194.9 6.1l192-161c3.8-3.2 3.8-9.1 0-12.3l-192-160.9A7.95 7.95 0 00308 351v62.7c0 2.4 1 4.6 2.9 6.1L420.7 512l-109.8 92.2a8.1 8.1 0 00-2.9 6.1V673c0 6.8 7.9 10.5 13.1 6.1zM880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 728H184V184h656v656z"
+          />
+        </svg>
+      </span>
+    </div>
+    <span
+      class="ant-typography ant-conversations-label css-var-_r_1r_"
+    >
+      AI Coding
+    </span>
+  </li>
+  <li
+    class="ant-conversations-item"
+    title="Create Image"
+  >
+    <div
+      class="ant-conversations-icon"
+    >
+      <span
+        aria-label="file-image"
+        class="anticon anticon-file-image"
+        role="img"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="file-image"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M553.1 509.1l-77.8 99.2-41.1-52.4a8 8 0 00-12.6 0l-99.8 127.2a7.98 7.98 0 006.3 12.9H696c6.7 0 10.4-7.7 6.3-12.9l-136.5-174a8.1 8.1 0 00-12.7 0zM360 442a40 40 0 1080 0 40 40 0 10-80 0zm494.6-153.4L639.4 73.4c-6-6-14.1-9.4-22.6-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.7-9.4-22.7zM790.2 326H602V137.8L790.2 326zm1.8 562H232V136h302v216a42 42 0 0042 42h216v494z"
+          />
+        </svg>
+      </span>
+    </div>
+    <span
+      class="ant-typography ant-conversations-label css-var-_r_1r_"
+    >
+      Create Image
+    </span>
+  </li>
+  <li
+    class="ant-conversations-item"
+    title="Deep Search"
+  >
+    <div
+      class="ant-conversations-icon"
+    >
+      <span
+        aria-label="file-search"
+        class="anticon anticon-file-search"
+        role="img"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="file-search"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M688 312v-48c0-4.4-3.6-8-8-8H296c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h384c4.4 0 8-3.6 8-8zm-392 88c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H296zm144 452H208V148h560v344c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V108c0-17.7-14.3-32-32-32H168c-17.7 0-32 14.3-32 32v784c0 17.7 14.3 32 32 32h272c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm445.7 51.5l-93.3-93.3C814.7 780.7 828 743.9 828 704c0-97.2-78.8-176-176-176s-176 78.8-176 176 78.8 176 176 176c35.8 0 69-10.7 96.8-29l94.7 94.7c1.6 1.6 3.6 2.3 5.6 2.3s4.1-.8 5.6-2.3l31-31a7.9 7.9 0 000-11.2zM652 816c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"
+          />
+        </svg>
+      </span>
+    </div>
+    <span
+      class="ant-typography ant-conversations-label css-var-_r_1r_"
+    >
+      Deep Search
+    </span>
+  </li>
+  <div
+    class="ant-divider css-var-_r_1r_ ant-divider-horizontal ant-divider-rail ant-conversations-divider"
+    role="separator"
+  />
+  <li
+    class=""
+  >
+    <div
+      class="ant-conversations-group-title"
+    >
+      <div
+        class="ant-conversations-group-label"
+      >
+        Today
+      </div>
+    </div>
+    <div
+      class=""
+    >
+      <ul
+        class="ant-conversations-list"
+      >
+        <li
+          class="ant-conversations-item"
+          title="Conversation Item 1"
+        >
+          <span
+            class="ant-typography ant-conversations-label css-var-_r_1r_"
+          >
+            Conversation Item 1
+          </span>
+        </li>
+      </ul>
+    </div>
+  </li>
+</ul>
+`;
+
+exports[`renders components/conversations/demo/custom-new-chat.tsx extend context correctly 2`] = `[]`;
+
+exports[`renders components/conversations/demo/group.tsx extend context correctly 1`] = `
+<ul
+  class="ant-conversations css-var-_r_1p_"
+  style="width: 256px; background: #ffffff; border-radius: 6px;"
+>
+  <li
+    class=""
+  >
+    <div
+      class="ant-conversations-group-title"
+    >
+      <div
+        class="ant-conversations-group-label"
+      >
+        Today
+      </div>
+    </div>
+    <div
+      class=""
+    >
+      <ul
+        class="ant-conversations-list"
+      >
+        <li
+          class="ant-conversations-item ant-conversations-item-active"
+          title="This's Conversation Item 1, you can click me!"
+        >
+          <span
+            class="ant-typography ant-conversations-label css-var-_r_1p_"
+          >
+            This's Conversation Item 1, you can click me!
+          </span>
+        </li>
+        <li
+          class="ant-conversations-item"
+          title="Conversation Item 2"
+        >
+          <span
+            class="ant-typography ant-conversations-label css-var-_r_1p_"
+          >
+            Conversation Item 2
+          </span>
+        </li>
+        <li
+          class="ant-conversations-item"
+          title="Conversation Item 3"
+        >
+          <span
+            class="ant-typography ant-conversations-label css-var-_r_1p_"
+          >
+            Conversation Item 3
+          </span>
+        </li>
+      </ul>
+    </div>
+  </li>
+  <li
+    class=""
+  >
+    <div
+      class="ant-conversations-group-title"
+    >
+      <div
+        class="ant-conversations-group-label"
+      >
+        Yesterday
+      </div>
+    </div>
+    <div
+      class=""
+    >
+      <ul
+        class="ant-conversations-list"
+      >
+        <li
+          class="ant-conversations-item"
+          title="Conversation Item 4"
+        >
+          <span
+            class="ant-typography ant-conversations-label css-var-_r_1p_"
+          >
+            Conversation Item 4
+          </span>
+        </li>
+        <li
+          class="ant-conversations-item"
+          title="Conversation Item 5"
+        >
+          <span
+            class="ant-typography ant-conversations-label css-var-_r_1p_"
+          >
+            Conversation Item 5
+          </span>
+        </li>
+        <li
+          class="ant-conversations-item"
+          title="Conversation Item 6"
+        >
+          <span
+            class="ant-typography ant-conversations-label css-var-_r_1p_"
+          >
+            Conversation Item 6
+          </span>
+        </li>
+      </ul>
+    </div>
+  </li>
+</ul>
+`;
+
+exports[`renders components/conversations/demo/group.tsx extend context correctly 2`] = `[]`;
+
+exports[`renders components/conversations/demo/group-collapsible.tsx extend context correctly 1`] = `
+<ul
+  class="ant-conversations css-var-_r_1q_"
+  style="width: 256px; background: #ffffff; border-radius: 6px;"
+>
+  <li
+    class=""
+  >
+    <div
+      class="ant-conversations-group-title ant-conversations-group-title-collapsible"
+    >
+      <div
+        class="ant-conversations-group-label"
+      >
+        Today(3)
+      </div>
+      <div
+        class="ant-conversations-group-collapse-trigger  ant-conversations-group-collapse-trigger-close"
+      >
+        <span
+          aria-label="right"
+          class="anticon anticon-right"
+          role="img"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="right"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+            />
+          </svg>
+        </span>
+      </div>
+    </div>
+  </li>
+  <li
+    class=""
+  >
+    <div
+      class="ant-conversations-group-title ant-conversations-group-title-collapsible"
+    >
+      <div
+        class="ant-conversations-group-label"
+      >
+        Yesterday(3)
+      </div>
+      <div
+        class="ant-conversations-group-collapse-trigger  ant-conversations-group-collapse-trigger-close"
+      >
+        <span
+          aria-label="right"
+          class="anticon anticon-right"
+          role="img"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="right"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+            />
+          </svg>
+        </span>
+      </div>
+    </div>
+  </li>
+</ul>
+`;
+
+exports[`renders components/conversations/demo/group-collapsible.tsx extend context correctly 2`] = `[]`;
+
+exports[`renders components/conversations/demo/infinite-load.tsx extend context correctly 1`] = `
+<div
+  id="scrollableDiv"
+  style="width: 280px; height: 600px; background: #ffffff; border-radius: 6px; overflow: auto;"
+>
+  <div
+    class="infinite-scroll-component__outerdiv"
+  >
+    <div
+      class="infinite-scroll-component "
+      style="height: auto; overflow: hidden;"
+    >
+      <ul
+        class="ant-conversations css-var-_r_1o_"
+      />
+      <div
+        style="text-align: center;"
+      >
+        <div
+          aria-busy="true"
+          aria-live="polite"
+          class="ant-spin ant-spin-sm ant-spin-spinning css-var-_r_1o_"
+        >
+          <span
+            aria-label="redo"
+            class="anticon anticon-redo anticon-spin ant-spin-dot"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="redo"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M758.2 839.1C851.8 765.9 912 651.9 912 523.9 912 303 733.5 124.3 512.6 124 291.4 123.7 112 302.8 112 523.9c0 125.2 57.5 236.9 147.6 310.2 3.5 2.8 8.6 2.2 11.4-1.3l39.4-50.5c2.7-3.4 2.1-8.3-1.2-11.1-8.1-6.6-15.9-13.7-23.4-21.2a318.64 318.64 0 01-68.6-101.7C200.4 609 192 567.1 192 523.9s8.4-85.1 25.1-124.5c16.1-38.1 39.2-72.3 68.6-101.7 29.4-29.4 63.6-52.5 101.7-68.6C426.9 212.4 468.8 204 512 204s85.1 8.4 124.5 25.1c38.1 16.1 72.3 39.2 101.7 68.6 29.4 29.4 52.5 63.6 68.6 101.7 16.7 39.4 25.1 81.3 25.1 124.5s-8.4 85.1-25.1 124.5a318.64 318.64 0 01-68.6 101.7c-9.3 9.3-19.1 18-29.3 26L668.2 724a8 8 0 00-14.1 3l-39.6 162.2c-1.2 5 2.6 9.9 7.7 9.9l167 .8c6.7 0 10.5-7.7 6.3-12.9l-37.3-47.9z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders components/conversations/demo/infinite-load.tsx extend context correctly 2`] = `[]`;
+
+exports[`renders components/conversations/demo/menu-trigger.tsx extend context correctly 1`] = `
+<ul
+  class="ant-conversations css-var-_r_11_"
+  style="width: 256px; background: #ffffff; border-radius: 6px;"
+>
+  <li
+    class="ant-conversations-item ant-conversations-item-active"
+    title="Conversation Item 1"
+  >
+    <span
+      class="ant-typography ant-conversations-label css-var-_r_11_"
+    >
+      Conversation Item 1
+    </span>
+    <div>
+      <span
+        aria-label="plus-square"
+        class="anticon anticon-plus-square ant-dropdown-trigger"
+        role="img"
+        tabindex="-1"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="plus-square"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M328 544h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8z"
+          />
+          <path
+            d="M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 728H184V184h656v656z"
+          />
+        </svg>
+      </span>
+      <div
+        class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-_r_11_ ant-dropdown-css-var ant-dropdown-placement-bottomRight"
+        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+      >
+        <ul
+          class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-_r_11_ ant-dropdown-css-var css-var-_r_11_ ant-dropdown-menu-css-var"
+          data-menu-list="true"
+          role="menu"
+          tabindex="0"
+        >
+          <li
+            aria-describedby="test-id"
+            class="ant-dropdown-menu-item"
+            data-menu-id="rc-menu-uuid-Rename"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <span
+              aria-label="edit"
+              class="anticon anticon-edit ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="edit"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Rename
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_11_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            >
+              <span
+                class="ant-tooltip-arrow-content"
+              />
+            </div>
+            <div
+              class="ant-tooltip-container"
+              id="test-id"
+              role="tooltip"
+            />
+          </div>
+          <li
+            aria-describedby="test-id"
+            class="ant-dropdown-menu-item"
+            data-menu-id="rc-menu-uuid-Share"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <span
+              aria-label="share-alt"
+              class="anticon anticon-share-alt ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="share-alt"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M752 664c-28.5 0-54.8 10-75.4 26.7L469.4 540.8a160.68 160.68 0 000-57.6l207.2-149.9C697.2 350 723.5 360 752 360c66.2 0 120-53.8 120-120s-53.8-120-120-120-120 53.8-120 120c0 11.6 1.6 22.7 4.7 33.3L439.9 415.8C410.7 377.1 364.3 352 312 352c-88.4 0-160 71.6-160 160s71.6 160 160 160c52.3 0 98.7-25.1 127.9-63.8l196.8 142.5c-3.1 10.6-4.7 21.8-4.7 33.3 0 66.2 53.8 120 120 120s120-53.8 120-120-53.8-120-120-120zm0-476c28.7 0 52 23.3 52 52s-23.3 52-52 52-52-23.3-52-52 23.3-52 52-52zM312 600c-48.5 0-88-39.5-88-88s39.5-88 88-88 88 39.5 88 88-39.5 88-88 88zm440 236c-28.7 0-52-23.3-52-52s23.3-52 52-52 52 23.3 52 52-23.3 52-52 52z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Share
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_11_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            >
+              <span
+                class="ant-tooltip-arrow-content"
+              />
+            </div>
+            <div
+              class="ant-tooltip-container"
+              id="test-id"
+              role="tooltip"
+            />
+          </div>
+          <li
+            class="ant-dropdown-menu-item-divider"
+            role="separator"
+          />
+          <li
+            aria-describedby="test-id"
+            aria-disabled="true"
+            class="ant-dropdown-menu-item ant-dropdown-menu-item-disabled"
+            data-menu-id="rc-menu-uuid-Archive"
+            role="menuitem"
+          >
+            <span
+              aria-label="stop"
+              class="anticon anticon-stop ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="stop"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372 0-89 31.3-170.8 83.5-234.8l523.3 523.3C682.8 852.7 601 884 512 884zm288.5-137.2L277.2 223.5C341.2 171.3 423 140 512 140c205.4 0 372 166.6 372 372 0 89-31.3 170.8-83.5 234.8z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Archive
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_11_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            >
+              <span
+                class="ant-tooltip-arrow-content"
+              />
+            </div>
+            <div
+              class="ant-tooltip-container"
+              id="test-id"
+              role="tooltip"
+            />
+          </div>
+          <li
+            aria-describedby="test-id"
+            class="ant-dropdown-menu-item ant-dropdown-menu-item-danger"
+            data-menu-id="rc-menu-uuid-deleteChat"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <span
+              aria-label="delete"
+              class="anticon anticon-delete ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="delete"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M360 184h-8c4.4 0 8-3.6 8-8v8h304v-8c0 4.4 3.6 8 8 8h-8v72h72v-80c0-35.3-28.7-64-64-64H352c-35.3 0-64 28.7-64 64v80h72v-72zm504 72H160c-17.7 0-32 14.3-32 32v32c0 4.4 3.6 8 8 8h60.4l24.7 523c1.6 34.1 29.8 61 63.9 61h454c34.2 0 62.3-26.8 63.9-61l24.7-523H888c4.4 0 8-3.6 8-8v-32c0-17.7-14.3-32-32-32zM731.3 840H292.7l-24.2-512h487l-24.2 512z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Delete Chat
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_11_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            >
+              <span
+                class="ant-tooltip-arrow-content"
+              />
+            </div>
+            <div
+              class="ant-tooltip-container"
+              id="test-id"
+              role="tooltip"
+            />
+          </div>
+        </ul>
+        <div
+          aria-hidden="true"
+          style="display: none;"
+        />
+      </div>
+    </div>
+  </li>
+  <li
+    class="ant-conversations-item"
+    title="Conversation Item 2"
+  >
+    <span
+      class="ant-typography ant-conversations-label css-var-_r_11_"
+    >
+      Conversation Item 2
+    </span>
+    <div>
+      <span
+        aria-label="share-alt"
+        class="anticon anticon-share-alt ant-dropdown-trigger"
+        role="img"
+        tabindex="-1"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="share-alt"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M752 664c-28.5 0-54.8 10-75.4 26.7L469.4 540.8a160.68 160.68 0 000-57.6l207.2-149.9C697.2 350 723.5 360 752 360c66.2 0 120-53.8 120-120s-53.8-120-120-120-120 53.8-120 120c0 11.6 1.6 22.7 4.7 33.3L439.9 415.8C410.7 377.1 364.3 352 312 352c-88.4 0-160 71.6-160 160s71.6 160 160 160c52.3 0 98.7-25.1 127.9-63.8l196.8 142.5c-3.1 10.6-4.7 21.8-4.7 33.3 0 66.2 53.8 120 120 120s120-53.8 120-120-53.8-120-120-120zm0-476c28.7 0 52 23.3 52 52s-23.3 52-52 52-52-23.3-52-52 23.3-52 52-52zM312 600c-48.5 0-88-39.5-88-88s39.5-88 88-88 88 39.5 88 88-39.5 88-88 88zm440 236c-28.7 0-52-23.3-52-52s23.3-52 52-52 52 23.3 52 52-23.3 52-52 52z"
+          />
+        </svg>
+      </span>
+      <div
+        class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-_r_11_ ant-dropdown-css-var ant-dropdown-placement-bottomRight"
+        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+      >
+        <ul
+          class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-_r_11_ ant-dropdown-css-var css-var-_r_11_ ant-dropdown-menu-css-var"
+          data-menu-list="true"
+          role="menu"
+          tabindex="0"
+        />
+        <div
+          aria-hidden="true"
+          style="display: none;"
+        />
+      </div>
+    </div>
+  </li>
+  <li
+    class="ant-conversations-item"
+    title="Conversation Item 3"
+  >
+    <span
+      class="ant-typography ant-conversations-label css-var-_r_11_"
+    >
+      Conversation Item 3
+    </span>
+    <div>
+      <span
+        aria-label="plus-square"
+        class="anticon anticon-plus-square ant-dropdown-trigger"
+        role="img"
+        tabindex="-1"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="plus-square"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M328 544h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8z"
+          />
+          <path
+            d="M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 728H184V184h656v656z"
+          />
+        </svg>
+      </span>
+      <div
+        class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-_r_11_ ant-dropdown-css-var ant-dropdown-placement-bottomRight"
+        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+      >
+        <ul
+          class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-_r_11_ ant-dropdown-css-var css-var-_r_11_ ant-dropdown-menu-css-var"
+          data-menu-list="true"
+          role="menu"
+          tabindex="0"
+        >
+          <li
+            aria-describedby="test-id"
+            class="ant-dropdown-menu-item"
+            data-menu-id="rc-menu-uuid-Rename"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <span
+              aria-label="edit"
+              class="anticon anticon-edit ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="edit"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Rename
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_11_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            >
+              <span
+                class="ant-tooltip-arrow-content"
+              />
+            </div>
+            <div
+              class="ant-tooltip-container"
+              id="test-id"
+              role="tooltip"
+            />
+          </div>
+          <li
+            aria-describedby="test-id"
+            class="ant-dropdown-menu-item"
+            data-menu-id="rc-menu-uuid-Share"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <span
+              aria-label="share-alt"
+              class="anticon anticon-share-alt ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="share-alt"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M752 664c-28.5 0-54.8 10-75.4 26.7L469.4 540.8a160.68 160.68 0 000-57.6l207.2-149.9C697.2 350 723.5 360 752 360c66.2 0 120-53.8 120-120s-53.8-120-120-120-120 53.8-120 120c0 11.6 1.6 22.7 4.7 33.3L439.9 415.8C410.7 377.1 364.3 352 312 352c-88.4 0-160 71.6-160 160s71.6 160 160 160c52.3 0 98.7-25.1 127.9-63.8l196.8 142.5c-3.1 10.6-4.7 21.8-4.7 33.3 0 66.2 53.8 120 120 120s120-53.8 120-120-53.8-120-120-120zm0-476c28.7 0 52 23.3 52 52s-23.3 52-52 52-52-23.3-52-52 23.3-52 52-52zM312 600c-48.5 0-88-39.5-88-88s39.5-88 88-88 88 39.5 88 88-39.5 88-88 88zm440 236c-28.7 0-52-23.3-52-52s23.3-52 52-52 52 23.3 52 52-23.3 52-52 52z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Share
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_11_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            >
+              <span
+                class="ant-tooltip-arrow-content"
+              />
+            </div>
+            <div
+              class="ant-tooltip-container"
+              id="test-id"
+              role="tooltip"
+            />
+          </div>
+          <li
+            class="ant-dropdown-menu-item-divider"
+            role="separator"
+          />
+          <li
+            aria-describedby="test-id"
+            aria-disabled="true"
+            class="ant-dropdown-menu-item ant-dropdown-menu-item-disabled"
+            data-menu-id="rc-menu-uuid-Archive"
+            role="menuitem"
+          >
+            <span
+              aria-label="stop"
+              class="anticon anticon-stop ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="stop"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372 0-89 31.3-170.8 83.5-234.8l523.3 523.3C682.8 852.7 601 884 512 884zm288.5-137.2L277.2 223.5C341.2 171.3 423 140 512 140c205.4 0 372 166.6 372 372 0 89-31.3 170.8-83.5 234.8z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Archive
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_11_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            >
+              <span
+                class="ant-tooltip-arrow-content"
+              />
+            </div>
+            <div
+              class="ant-tooltip-container"
+              id="test-id"
+              role="tooltip"
+            />
+          </div>
+          <li
+            aria-describedby="test-id"
+            class="ant-dropdown-menu-item ant-dropdown-menu-item-danger"
+            data-menu-id="rc-menu-uuid-deleteChat"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <span
+              aria-label="delete"
+              class="anticon anticon-delete ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="delete"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M360 184h-8c4.4 0 8-3.6 8-8v8h304v-8c0 4.4 3.6 8 8 8h-8v72h72v-80c0-35.3-28.7-64-64-64H352c-35.3 0-64 28.7-64 64v80h72v-72zm504 72H160c-17.7 0-32 14.3-32 32v32c0 4.4 3.6 8 8 8h60.4l24.7 523c1.6 34.1 29.8 61 63.9 61h454c34.2 0 62.3-26.8 63.9-61l24.7-523H888c4.4 0 8-3.6 8-8v-32c0-17.7-14.3-32-32-32zM731.3 840H292.7l-24.2-512h487l-24.2 512z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Delete Chat
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_11_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            >
+              <span
+                class="ant-tooltip-arrow-content"
+              />
+            </div>
+            <div
+              class="ant-tooltip-container"
+              id="test-id"
+              role="tooltip"
+            />
+          </div>
+        </ul>
+        <div
+          aria-hidden="true"
+          style="display: none;"
+        />
+      </div>
+    </div>
+  </li>
+  <li
+    class="ant-conversations-item ant-conversations-item-disabled"
+    title="Conversation Item 4"
+  >
+    <span
+      class="ant-typography ant-conversations-label css-var-_r_11_"
+    >
+      Conversation Item 4
+    </span>
+  </li>
+</ul>
+`;
+
+exports[`renders components/conversations/demo/menu-trigger.tsx extend context correctly 2`] = `[]`;
+
+exports[`renders components/conversations/demo/new-chat.tsx extend context correctly 1`] = `
+<ul
+  class="ant-conversations css-var-_r_10_"
+  style="width: 256px; background: #ffffff; border-radius: 6px;"
+>
+  <button
+    class="ant-conversations-creation ant-conversations-creation-center"
+    type="button"
+  >
+    <span
+      aria-label="plus"
+      class="anticon anticon-plus ant-conversations-creation-icon"
+      role="img"
+    >
+      <svg
+        aria-hidden="true"
+        data-icon="plus"
+        fill="currentColor"
+        focusable="false"
+        height="1em"
+        viewBox="64 64 896 896"
+        width="1em"
+      >
+        <path
+          d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
+        />
+        <path
+          d="M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+        />
+      </svg>
+    </span>
+    <div
+      class="ant-conversations-creation-label"
+    >
+      <span>
+        New chat
+      </span>
+    </div>
+  </button>
+  <li
+    class="ant-conversations-item ant-conversations-item-active"
+    title="Help Me Write"
+  >
+    <div
+      class="ant-conversations-icon"
+    >
+      <span
+        aria-label="signature"
+        class="anticon anticon-signature"
+        role="img"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="signature"
+          fill="currentColor"
+          fill-rule="evenodd"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M145.71 752c2 0 4-.2 5.98-.5L319.9 722c1.99-.4 3.88-1.3 5.28-2.8l423.91-423.87a9.93 9.93 0 000-14.06L582.88 114.9C581 113 578.5 112 575.82 112s-5.18 1-7.08 2.9L144.82 538.76c-1.5 1.5-2.4 3.29-2.8 5.28l-29.5 168.17a33.59 33.59 0 009.37 29.81c6.58 6.48 14.95 9.97 23.82 9.97m51.75-85.43l15.65-88.92 362.7-362.67 73.28 73.27-362.7 362.67zm401.37-98.64c27.69-14.81 57.29-20.85 85.54-15.52 32.37 6.1 59.72 26.53 78.96 59.4 29.97 51.22 21.64 102.34-18.48 144.26-17.58 18.36-41.07 35.01-70 50.3l-.3.15.86.26a147.88 147.88 0 0041.54 6.2l1.17.01c61.07 0 100.98-22.1 125.28-67.87a36 36 0 0163.6 33.76C869.7 849.1 804.9 885 718.12 885c-47.69 0-91.94-15.03-128.19-41.36l-1.05-.78-1.36.47c-46.18 16-98.74 29.95-155.37 41.94l-2.24.47a1931.1 1931.1 0 01-139.16 23.96 36 36 0 11-9.5-71.38 1860.1 1860.1 0 00133.84-23.04c42.8-9 83-19.13 119.35-30.34l.24-.08-.44-.69c-16.46-26.45-25.86-55.43-26.14-83.24v-1.3c0-49.9 39.55-104.32 90.73-131.7M671 623.17c-10.74-2.03-24.1.7-38.22 8.26-29.55 15.8-52.7 47.64-52.7 68.2 0 18.2 8.9 40.14 24.71 59.73l.24.3 1.22-.52c39.17-16.58 68.49-34.27 85.93-52.18l.64-.67c18.74-19.57 21.39-35.84 8.36-58.1-9.06-15.47-19.03-22.92-30.18-25.02"
+          />
+        </svg>
+      </span>
+    </div>
+    <span
+      class="ant-typography ant-conversations-label css-var-_r_10_"
+    >
+      Help Me Write
+    </span>
+  </li>
+  <li
+    class="ant-conversations-item"
+    title="AI Coding"
+  >
+    <div
+      class="ant-conversations-icon"
+    >
+      <span
+        aria-label="code"
+        class="anticon anticon-code"
+        role="img"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="code"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M516 673c0 4.4 3.4 8 7.5 8h185c4.1 0 7.5-3.6 7.5-8v-48c0-4.4-3.4-8-7.5-8h-185c-4.1 0-7.5 3.6-7.5 8v48zm-194.9 6.1l192-161c3.8-3.2 3.8-9.1 0-12.3l-192-160.9A7.95 7.95 0 00308 351v62.7c0 2.4 1 4.6 2.9 6.1L420.7 512l-109.8 92.2a8.1 8.1 0 00-2.9 6.1V673c0 6.8 7.9 10.5 13.1 6.1zM880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 728H184V184h656v656z"
+          />
+        </svg>
+      </span>
+    </div>
+    <span
+      class="ant-typography ant-conversations-label css-var-_r_10_"
+    >
+      AI Coding
+    </span>
+  </li>
+  <li
+    class="ant-conversations-item"
+    title="Create Image"
+  >
+    <div
+      class="ant-conversations-icon"
+    >
+      <span
+        aria-label="file-image"
+        class="anticon anticon-file-image"
+        role="img"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="file-image"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M553.1 509.1l-77.8 99.2-41.1-52.4a8 8 0 00-12.6 0l-99.8 127.2a7.98 7.98 0 006.3 12.9H696c6.7 0 10.4-7.7 6.3-12.9l-136.5-174a8.1 8.1 0 00-12.7 0zM360 442a40 40 0 1080 0 40 40 0 10-80 0zm494.6-153.4L639.4 73.4c-6-6-14.1-9.4-22.6-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.7-9.4-22.7zM790.2 326H602V137.8L790.2 326zm1.8 562H232V136h302v216a42 42 0 0042 42h216v494z"
+          />
+        </svg>
+      </span>
+    </div>
+    <span
+      class="ant-typography ant-conversations-label css-var-_r_10_"
+    >
+      Create Image
+    </span>
+  </li>
+  <li
+    class="ant-conversations-item"
+    title="Deep Search"
+  >
+    <div
+      class="ant-conversations-icon"
+    >
+      <span
+        aria-label="file-search"
+        class="anticon anticon-file-search"
+        role="img"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="file-search"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M688 312v-48c0-4.4-3.6-8-8-8H296c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h384c4.4 0 8-3.6 8-8zm-392 88c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H296zm144 452H208V148h560v344c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V108c0-17.7-14.3-32-32-32H168c-17.7 0-32 14.3-32 32v784c0 17.7 14.3 32 32 32h272c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm445.7 51.5l-93.3-93.3C814.7 780.7 828 743.9 828 704c0-97.2-78.8-176-176-176s-176 78.8-176 176 78.8 176 176 176c35.8 0 69-10.7 96.8-29l94.7 94.7c1.6 1.6 3.6 2.3 5.6 2.3s4.1-.8 5.6-2.3l31-31a7.9 7.9 0 000-11.2zM652 816c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"
+          />
+        </svg>
+      </span>
+    </div>
+    <span
+      class="ant-typography ant-conversations-label css-var-_r_10_"
+    >
+      Deep Search
+    </span>
+  </li>
+  <div
+    class="ant-divider css-var-_r_10_ ant-divider-horizontal ant-divider-rail ant-conversations-divider"
+    role="separator"
+  />
+  <li
+    class=""
+  >
+    <div
+      class="ant-conversations-group-title"
+    >
+      <div
+        class="ant-conversations-group-label"
+      >
+        Today
+      </div>
+    </div>
+    <div
+      class=""
+    >
+      <ul
+        class="ant-conversations-list"
+      >
+        <li
+          class="ant-conversations-item"
+          title="Conversation Item 1"
+        >
+          <span
+            class="ant-typography ant-conversations-label css-var-_r_10_"
+          >
+            Conversation Item 1
+          </span>
+        </li>
+      </ul>
+    </div>
+  </li>
+</ul>
+`;
+
+exports[`renders components/conversations/demo/new-chat.tsx extend context correctly 2`] = `[]`;
+
+exports[`renders components/conversations/demo/shortcutKeys.tsx extend context correctly 1`] = `
+Array [
+  <div
+    style="margin-bottom: 16px;"
+  >
+    You can switch sessions using the shortcut key: 
+    <span
+      class="ant-tag ant-tag-filled css-var-_r_v_"
+    >
+      Alt/⌥
+    </span>
+     + 
+    <span
+      class="ant-tag ant-tag-filled css-var-_r_v_"
+    >
+      number
+    </span>
+    , and create new chat using the shortcut key: 
+    <span
+      class="ant-tag ant-tag-filled css-var-_r_v_"
+    >
+      Win/⌘
+    </span>
+     + 
+    <span
+      class="ant-tag ant-tag-filled css-var-_r_v_"
+    >
+      K
+    </span>
+    .
+  </div>,
+  <ul
+    class="ant-conversations css-var-_r_v_"
+    style="width: 256px; background: #ffffff; border-radius: 6px;"
+  >
+    <button
+      class="ant-conversations-creation ant-conversations-creation-center"
+      type="button"
+    >
+      <span
+        aria-label="plus"
+        class="anticon anticon-plus ant-conversations-creation-icon"
+        role="img"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="plus"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
+          />
+          <path
+            d="M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+          />
+        </svg>
+      </span>
+      <div
+        class="ant-conversations-creation-label ant-conversations-creation-label-shortcut-keys-show"
+      >
+        <span>
+          New chat
+        </span>
+        <span
+          class="ant-conversations-creation-label-shortcut-keys"
+        >
+          <span
+            class="ant-conversations-creation-label-shortcut-key"
+          >
+            Win
+          </span>
+          <span
+            class="ant-conversations-creation-label-shortcut-key"
+          >
+            K
+          </span>
+        </span>
+      </div>
+    </button>
+    <li
+      class="ant-conversations-item ant-conversations-item-active"
+      title="Help Me Write"
+    >
+      <div
+        class="ant-conversations-icon"
+      >
+        <span
+          aria-label="signature"
+          class="anticon anticon-signature"
+          role="img"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="signature"
+            fill="currentColor"
+            fill-rule="evenodd"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M145.71 752c2 0 4-.2 5.98-.5L319.9 722c1.99-.4 3.88-1.3 5.28-2.8l423.91-423.87a9.93 9.93 0 000-14.06L582.88 114.9C581 113 578.5 112 575.82 112s-5.18 1-7.08 2.9L144.82 538.76c-1.5 1.5-2.4 3.29-2.8 5.28l-29.5 168.17a33.59 33.59 0 009.37 29.81c6.58 6.48 14.95 9.97 23.82 9.97m51.75-85.43l15.65-88.92 362.7-362.67 73.28 73.27-362.7 362.67zm401.37-98.64c27.69-14.81 57.29-20.85 85.54-15.52 32.37 6.1 59.72 26.53 78.96 59.4 29.97 51.22 21.64 102.34-18.48 144.26-17.58 18.36-41.07 35.01-70 50.3l-.3.15.86.26a147.88 147.88 0 0041.54 6.2l1.17.01c61.07 0 100.98-22.1 125.28-67.87a36 36 0 0163.6 33.76C869.7 849.1 804.9 885 718.12 885c-47.69 0-91.94-15.03-128.19-41.36l-1.05-.78-1.36.47c-46.18 16-98.74 29.95-155.37 41.94l-2.24.47a1931.1 1931.1 0 01-139.16 23.96 36 36 0 11-9.5-71.38 1860.1 1860.1 0 00133.84-23.04c42.8-9 83-19.13 119.35-30.34l.24-.08-.44-.69c-16.46-26.45-25.86-55.43-26.14-83.24v-1.3c0-49.9 39.55-104.32 90.73-131.7M671 623.17c-10.74-2.03-24.1.7-38.22 8.26-29.55 15.8-52.7 47.64-52.7 68.2 0 18.2 8.9 40.14 24.71 59.73l.24.3 1.22-.52c39.17-16.58 68.49-34.27 85.93-52.18l.64-.67c18.74-19.57 21.39-35.84 8.36-58.1-9.06-15.47-19.03-22.92-30.18-25.02"
+            />
+          </svg>
+        </span>
+      </div>
+      <span
+        class="ant-typography ant-conversations-label css-var-_r_v_"
+      >
+        Help Me Write
+      </span>
+    </li>
+    <li
+      class="ant-conversations-item"
+      title="AI Coding"
+    >
+      <div
+        class="ant-conversations-icon"
+      >
+        <span
+          aria-label="code"
+          class="anticon anticon-code"
+          role="img"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="code"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M516 673c0 4.4 3.4 8 7.5 8h185c4.1 0 7.5-3.6 7.5-8v-48c0-4.4-3.4-8-7.5-8h-185c-4.1 0-7.5 3.6-7.5 8v48zm-194.9 6.1l192-161c3.8-3.2 3.8-9.1 0-12.3l-192-160.9A7.95 7.95 0 00308 351v62.7c0 2.4 1 4.6 2.9 6.1L420.7 512l-109.8 92.2a8.1 8.1 0 00-2.9 6.1V673c0 6.8 7.9 10.5 13.1 6.1zM880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 728H184V184h656v656z"
+            />
+          </svg>
+        </span>
+      </div>
+      <span
+        class="ant-typography ant-conversations-label css-var-_r_v_"
+      >
+        AI Coding
+      </span>
+    </li>
+    <li
+      class="ant-conversations-item"
+      title="Create Image"
+    >
+      <div
+        class="ant-conversations-icon"
+      >
+        <span
+          aria-label="file-image"
+          class="anticon anticon-file-image"
+          role="img"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="file-image"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M553.1 509.1l-77.8 99.2-41.1-52.4a8 8 0 00-12.6 0l-99.8 127.2a7.98 7.98 0 006.3 12.9H696c6.7 0 10.4-7.7 6.3-12.9l-136.5-174a8.1 8.1 0 00-12.7 0zM360 442a40 40 0 1080 0 40 40 0 10-80 0zm494.6-153.4L639.4 73.4c-6-6-14.1-9.4-22.6-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.7-9.4-22.7zM790.2 326H602V137.8L790.2 326zm1.8 562H232V136h302v216a42 42 0 0042 42h216v494z"
+            />
+          </svg>
+        </span>
+      </div>
+      <span
+        class="ant-typography ant-conversations-label css-var-_r_v_"
+      >
+        Create Image
+      </span>
+    </li>
+    <li
+      class="ant-conversations-item"
+      title="Deep Search"
+    >
+      <div
+        class="ant-conversations-icon"
+      >
+        <span
+          aria-label="file-search"
+          class="anticon anticon-file-search"
+          role="img"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="file-search"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M688 312v-48c0-4.4-3.6-8-8-8H296c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h384c4.4 0 8-3.6 8-8zm-392 88c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H296zm144 452H208V148h560v344c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V108c0-17.7-14.3-32-32-32H168c-17.7 0-32 14.3-32 32v784c0 17.7 14.3 32 32 32h272c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm445.7 51.5l-93.3-93.3C814.7 780.7 828 743.9 828 704c0-97.2-78.8-176-176-176s-176 78.8-176 176 78.8 176 176 176c35.8 0 69-10.7 96.8-29l94.7 94.7c1.6 1.6 3.6 2.3 5.6 2.3s4.1-.8 5.6-2.3l31-31a7.9 7.9 0 000-11.2zM652 816c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"
+            />
+          </svg>
+        </span>
+      </div>
+      <span
+        class="ant-typography ant-conversations-label css-var-_r_v_"
+      >
+        Deep Search
+      </span>
+    </li>
+    <li
+      class=""
+    >
+      <div
+        class="ant-conversations-group-title ant-conversations-group-title-collapsible"
+      >
+        <div
+          class="ant-conversations-group-label"
+        >
+          <div
+            class="ant-flex css-var-_r_v_ ant-flex-gap-small"
+          >
+            <span
+              aria-label="code-sandbox"
+              class="anticon anticon-code-sandbox"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="code-sandbox"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M709.6 210l.4-.2h.2L512 96 313.9 209.8h-.2l.7.3L151.5 304v416L512 928l360.5-208V304l-162.9-94zM482.7 843.6L339.6 761V621.4L210 547.8V372.9l272.7 157.3v313.4zM238.2 321.5l134.7-77.8 138.9 79.7 139.1-79.9 135.2 78-273.9 158-274-158zM814 548.3l-128.8 73.1v139.1l-143.9 83V530.4L814 373.1v175.2z"
+                />
+              </svg>
+            </span>
+            More Features
+          </div>
+        </div>
+        <div
+          class="ant-conversations-group-collapse-trigger  ant-conversations-group-collapse-trigger-close"
+        >
+          <span
+            aria-label="right"
+            class="anticon anticon-right"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="right"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+    </li>
+    <div
+      class="ant-divider css-var-_r_v_ ant-divider-horizontal ant-divider-rail ant-conversations-divider"
+      role="separator"
+    />
+    <li
+      class=""
+    >
+      <div
+        class="ant-conversations-group-title"
+      >
+        <div
+          class="ant-conversations-group-label"
+        >
+          Today
+        </div>
+      </div>
+      <div
+        class=""
+      >
+        <ul
+          class="ant-conversations-list"
+        >
+          <li
+            class="ant-conversations-item"
+            title="Conversation Item 1"
+          >
+            <span
+              class="ant-typography ant-conversations-label css-var-_r_v_"
+            >
+              Conversation Item 1
+            </span>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>,
+]
+`;
+
+exports[`renders components/conversations/demo/shortcutKeys.tsx extend context correctly 2`] = `[]`;
+
+exports[`renders components/conversations/demo/with-menu.tsx extend context correctly 1`] = `
+<ul
+  class="ant-conversations css-var-_r_0_"
+  style="width: 256px; background: #ffffff; border-radius: 6px;"
+>
+  <li
+    class="ant-conversations-item ant-conversations-item-active"
+    title="Conversation Item 1"
+  >
+    <span
+      class="ant-typography ant-conversations-label css-var-_r_0_"
+    >
+      Conversation Item 1
+    </span>
+    <div>
+      <span
+        aria-label="ellipsis"
+        class="anticon anticon-ellipsis ant-dropdown-trigger ant-conversations-menu-icon"
+        role="img"
+        tabindex="-1"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="ellipsis"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          />
+        </svg>
+      </span>
+      <div
+        class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-_r_0_ ant-dropdown-css-var ant-dropdown-placement-bottomRight"
+        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+      >
+        <ul
+          class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-_r_0_ ant-dropdown-css-var css-var-_r_0_ ant-dropdown-menu-css-var"
+          data-menu-list="true"
+          role="menu"
+          tabindex="0"
+        >
+          <li
+            aria-describedby="test-id"
+            class="ant-dropdown-menu-item"
+            data-menu-id="rc-menu-uuid-Rename"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <span
+              aria-label="edit"
+              class="anticon anticon-edit ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="edit"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Rename
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_0_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            >
+              <span
+                class="ant-tooltip-arrow-content"
+              />
+            </div>
+            <div
+              class="ant-tooltip-container"
+              id="test-id"
+              role="tooltip"
+            />
+          </div>
+          <li
+            aria-describedby="test-id"
+            class="ant-dropdown-menu-item"
+            data-menu-id="rc-menu-uuid-Share"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <span
+              aria-label="share-alt"
+              class="anticon anticon-share-alt ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="share-alt"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M752 664c-28.5 0-54.8 10-75.4 26.7L469.4 540.8a160.68 160.68 0 000-57.6l207.2-149.9C697.2 350 723.5 360 752 360c66.2 0 120-53.8 120-120s-53.8-120-120-120-120 53.8-120 120c0 11.6 1.6 22.7 4.7 33.3L439.9 415.8C410.7 377.1 364.3 352 312 352c-88.4 0-160 71.6-160 160s71.6 160 160 160c52.3 0 98.7-25.1 127.9-63.8l196.8 142.5c-3.1 10.6-4.7 21.8-4.7 33.3 0 66.2 53.8 120 120 120s120-53.8 120-120-53.8-120-120-120zm0-476c28.7 0 52 23.3 52 52s-23.3 52-52 52-52-23.3-52-52 23.3-52 52-52zM312 600c-48.5 0-88-39.5-88-88s39.5-88 88-88 88 39.5 88 88-39.5 88-88 88zm440 236c-28.7 0-52-23.3-52-52s23.3-52 52-52 52 23.3 52 52-23.3 52-52 52z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Share
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_0_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            >
+              <span
+                class="ant-tooltip-arrow-content"
+              />
+            </div>
+            <div
+              class="ant-tooltip-container"
+              id="test-id"
+              role="tooltip"
+            />
+          </div>
+          <li
+            class="ant-dropdown-menu-item-divider"
+            role="separator"
+          />
+          <li
+            aria-describedby="test-id"
+            aria-disabled="true"
+            class="ant-dropdown-menu-item ant-dropdown-menu-item-disabled"
+            data-menu-id="rc-menu-uuid-Archive"
+            role="menuitem"
+          >
+            <span
+              aria-label="stop"
+              class="anticon anticon-stop ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="stop"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372 0-89 31.3-170.8 83.5-234.8l523.3 523.3C682.8 852.7 601 884 512 884zm288.5-137.2L277.2 223.5C341.2 171.3 423 140 512 140c205.4 0 372 166.6 372 372 0 89-31.3 170.8-83.5 234.8z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Archive
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_0_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            >
+              <span
+                class="ant-tooltip-arrow-content"
+              />
+            </div>
+            <div
+              class="ant-tooltip-container"
+              id="test-id"
+              role="tooltip"
+            />
+          </div>
+          <li
+            aria-describedby="test-id"
+            class="ant-dropdown-menu-item ant-dropdown-menu-item-danger"
+            data-menu-id="rc-menu-uuid-deleteChat"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <span
+              aria-label="delete"
+              class="anticon anticon-delete ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="delete"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M360 184h-8c4.4 0 8-3.6 8-8v8h304v-8c0 4.4 3.6 8 8 8h-8v72h72v-80c0-35.3-28.7-64-64-64H352c-35.3 0-64 28.7-64 64v80h72v-72zm504 72H160c-17.7 0-32 14.3-32 32v32c0 4.4 3.6 8 8 8h60.4l24.7 523c1.6 34.1 29.8 61 63.9 61h454c34.2 0 62.3-26.8 63.9-61l24.7-523H888c4.4 0 8-3.6 8-8v-32c0-17.7-14.3-32-32-32zM731.3 840H292.7l-24.2-512h487l-24.2 512z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Delete Chat
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_0_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            >
+              <span
+                class="ant-tooltip-arrow-content"
+              />
+            </div>
+            <div
+              class="ant-tooltip-container"
+              id="test-id"
+              role="tooltip"
+            />
+          </div>
+        </ul>
+        <div
+          aria-hidden="true"
+          style="display: none;"
+        />
+      </div>
+    </div>
+  </li>
+  <li
+    class="ant-conversations-item"
+    title="Conversation Item 2"
+  >
+    <span
+      class="ant-typography ant-conversations-label css-var-_r_0_"
+    >
+      Conversation Item 2
+    </span>
+    <div>
+      <span
+        aria-label="ellipsis"
+        class="anticon anticon-ellipsis ant-dropdown-trigger ant-conversations-menu-icon"
+        role="img"
+        tabindex="-1"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="ellipsis"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          />
+        </svg>
+      </span>
+      <div
+        class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-_r_0_ ant-dropdown-css-var ant-dropdown-placement-bottomRight"
+        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+      >
+        <ul
+          class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-_r_0_ ant-dropdown-css-var css-var-_r_0_ ant-dropdown-menu-css-var"
+          data-menu-list="true"
+          role="menu"
+          tabindex="0"
+        >
+          <li
+            aria-describedby="test-id"
+            class="ant-dropdown-menu-item"
+            data-menu-id="rc-menu-uuid-Rename"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <span
+              aria-label="edit"
+              class="anticon anticon-edit ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="edit"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Rename
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_0_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            >
+              <span
+                class="ant-tooltip-arrow-content"
+              />
+            </div>
+            <div
+              class="ant-tooltip-container"
+              id="test-id"
+              role="tooltip"
+            />
+          </div>
+          <li
+            aria-describedby="test-id"
+            class="ant-dropdown-menu-item"
+            data-menu-id="rc-menu-uuid-Share"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <span
+              aria-label="share-alt"
+              class="anticon anticon-share-alt ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="share-alt"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M752 664c-28.5 0-54.8 10-75.4 26.7L469.4 540.8a160.68 160.68 0 000-57.6l207.2-149.9C697.2 350 723.5 360 752 360c66.2 0 120-53.8 120-120s-53.8-120-120-120-120 53.8-120 120c0 11.6 1.6 22.7 4.7 33.3L439.9 415.8C410.7 377.1 364.3 352 312 352c-88.4 0-160 71.6-160 160s71.6 160 160 160c52.3 0 98.7-25.1 127.9-63.8l196.8 142.5c-3.1 10.6-4.7 21.8-4.7 33.3 0 66.2 53.8 120 120 120s120-53.8 120-120-53.8-120-120-120zm0-476c28.7 0 52 23.3 52 52s-23.3 52-52 52-52-23.3-52-52 23.3-52 52-52zM312 600c-48.5 0-88-39.5-88-88s39.5-88 88-88 88 39.5 88 88-39.5 88-88 88zm440 236c-28.7 0-52-23.3-52-52s23.3-52 52-52 52 23.3 52 52-23.3 52-52 52z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Share
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_0_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            >
+              <span
+                class="ant-tooltip-arrow-content"
+              />
+            </div>
+            <div
+              class="ant-tooltip-container"
+              id="test-id"
+              role="tooltip"
+            />
+          </div>
+          <li
+            class="ant-dropdown-menu-item-divider"
+            role="separator"
+          />
+          <li
+            aria-describedby="test-id"
+            aria-disabled="true"
+            class="ant-dropdown-menu-item ant-dropdown-menu-item-disabled"
+            data-menu-id="rc-menu-uuid-Archive"
+            role="menuitem"
+          >
+            <span
+              aria-label="stop"
+              class="anticon anticon-stop ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="stop"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372 0-89 31.3-170.8 83.5-234.8l523.3 523.3C682.8 852.7 601 884 512 884zm288.5-137.2L277.2 223.5C341.2 171.3 423 140 512 140c205.4 0 372 166.6 372 372 0 89-31.3 170.8-83.5 234.8z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Archive
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_0_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            >
+              <span
+                class="ant-tooltip-arrow-content"
+              />
+            </div>
+            <div
+              class="ant-tooltip-container"
+              id="test-id"
+              role="tooltip"
+            />
+          </div>
+          <li
+            aria-describedby="test-id"
+            class="ant-dropdown-menu-item ant-dropdown-menu-item-danger"
+            data-menu-id="rc-menu-uuid-deleteChat"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <span
+              aria-label="delete"
+              class="anticon anticon-delete ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="delete"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M360 184h-8c4.4 0 8-3.6 8-8v8h304v-8c0 4.4 3.6 8 8 8h-8v72h72v-80c0-35.3-28.7-64-64-64H352c-35.3 0-64 28.7-64 64v80h72v-72zm504 72H160c-17.7 0-32 14.3-32 32v32c0 4.4 3.6 8 8 8h60.4l24.7 523c1.6 34.1 29.8 61 63.9 61h454c34.2 0 62.3-26.8 63.9-61l24.7-523H888c4.4 0 8-3.6 8-8v-32c0-17.7-14.3-32-32-32zM731.3 840H292.7l-24.2-512h487l-24.2 512z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Delete Chat
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_0_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            >
+              <span
+                class="ant-tooltip-arrow-content"
+              />
+            </div>
+            <div
+              class="ant-tooltip-container"
+              id="test-id"
+              role="tooltip"
+            />
+          </div>
+        </ul>
+        <div
+          aria-hidden="true"
+          style="display: none;"
+        />
+      </div>
+    </div>
+  </li>
+  <li
+    class="ant-conversations-item"
+    title="Conversation Item 3"
+  >
+    <span
+      class="ant-typography ant-conversations-label css-var-_r_0_"
+    >
+      Conversation Item 3
+    </span>
+    <div>
+      <span
+        aria-label="ellipsis"
+        class="anticon anticon-ellipsis ant-dropdown-trigger ant-conversations-menu-icon"
+        role="img"
+        tabindex="-1"
+      >
+        <svg
+          aria-hidden="true"
+          data-icon="ellipsis"
+          fill="currentColor"
+          focusable="false"
+          height="1em"
+          viewBox="64 64 896 896"
+          width="1em"
+        >
+          <path
+            d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          />
+        </svg>
+      </span>
+      <div
+        class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-_r_0_ ant-dropdown-css-var ant-dropdown-placement-bottomRight"
+        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+      >
+        <ul
+          class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-_r_0_ ant-dropdown-css-var css-var-_r_0_ ant-dropdown-menu-css-var"
+          data-menu-list="true"
+          role="menu"
+          tabindex="0"
+        >
+          <li
+            aria-describedby="test-id"
+            class="ant-dropdown-menu-item"
+            data-menu-id="rc-menu-uuid-Rename"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <span
+              aria-label="edit"
+              class="anticon anticon-edit ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="edit"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Rename
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_0_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            >
+              <span
+                class="ant-tooltip-arrow-content"
+              />
+            </div>
+            <div
+              class="ant-tooltip-container"
+              id="test-id"
+              role="tooltip"
+            />
+          </div>
+          <li
+            aria-describedby="test-id"
+            class="ant-dropdown-menu-item"
+            data-menu-id="rc-menu-uuid-Share"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <span
+              aria-label="share-alt"
+              class="anticon anticon-share-alt ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="share-alt"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M752 664c-28.5 0-54.8 10-75.4 26.7L469.4 540.8a160.68 160.68 0 000-57.6l207.2-149.9C697.2 350 723.5 360 752 360c66.2 0 120-53.8 120-120s-53.8-120-120-120-120 53.8-120 120c0 11.6 1.6 22.7 4.7 33.3L439.9 415.8C410.7 377.1 364.3 352 312 352c-88.4 0-160 71.6-160 160s71.6 160 160 160c52.3 0 98.7-25.1 127.9-63.8l196.8 142.5c-3.1 10.6-4.7 21.8-4.7 33.3 0 66.2 53.8 120 120 120s120-53.8 120-120-53.8-120-120-120zm0-476c28.7 0 52 23.3 52 52s-23.3 52-52 52-52-23.3-52-52 23.3-52 52-52zM312 600c-48.5 0-88-39.5-88-88s39.5-88 88-88 88 39.5 88 88-39.5 88-88 88zm440 236c-28.7 0-52-23.3-52-52s23.3-52 52-52 52 23.3 52 52-23.3 52-52 52z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Share
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_0_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            >
+              <span
+                class="ant-tooltip-arrow-content"
+              />
+            </div>
+            <div
+              class="ant-tooltip-container"
+              id="test-id"
+              role="tooltip"
+            />
+          </div>
+          <li
+            class="ant-dropdown-menu-item-divider"
+            role="separator"
+          />
+          <li
+            aria-describedby="test-id"
+            aria-disabled="true"
+            class="ant-dropdown-menu-item ant-dropdown-menu-item-disabled"
+            data-menu-id="rc-menu-uuid-Archive"
+            role="menuitem"
+          >
+            <span
+              aria-label="stop"
+              class="anticon anticon-stop ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="stop"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372 0-89 31.3-170.8 83.5-234.8l523.3 523.3C682.8 852.7 601 884 512 884zm288.5-137.2L277.2 223.5C341.2 171.3 423 140 512 140c205.4 0 372 166.6 372 372 0 89-31.3 170.8-83.5 234.8z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Archive
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_0_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            >
+              <span
+                class="ant-tooltip-arrow-content"
+              />
+            </div>
+            <div
+              class="ant-tooltip-container"
+              id="test-id"
+              role="tooltip"
+            />
+          </div>
+          <li
+            aria-describedby="test-id"
+            class="ant-dropdown-menu-item ant-dropdown-menu-item-danger"
+            data-menu-id="rc-menu-uuid-deleteChat"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <span
+              aria-label="delete"
+              class="anticon anticon-delete ant-dropdown-menu-item-icon"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="delete"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M360 184h-8c4.4 0 8-3.6 8-8v8h304v-8c0 4.4 3.6 8 8 8h-8v72h72v-80c0-35.3-28.7-64-64-64H352c-35.3 0-64 28.7-64 64v80h72v-72zm504 72H160c-17.7 0-32 14.3-32 32v32c0 4.4 3.6 8 8 8h60.4l24.7 523c1.6 34.1 29.8 61 63.9 61h454c34.2 0 62.3-26.8 63.9-61l24.7-523H888c4.4 0 8-3.6 8-8v-32c0-17.7-14.3-32-32-32zM731.3 840H292.7l-24.2-512h487l-24.2 512z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ant-dropdown-menu-title-content"
+            >
+              Delete Chat
+            </span>
+          </li>
+          <div
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_0_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+            style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+          >
+            <div
+              class="ant-tooltip-arrow"
+              style="position: absolute; top: 0px; left: 0px;"
+            >
+              <span
+                class="ant-tooltip-arrow-content"
+              />
+            </div>
+            <div
+              class="ant-tooltip-container"
+              id="test-id"
+              role="tooltip"
+            />
+          </div>
+        </ul>
+        <div
+          aria-hidden="true"
+          style="display: none;"
+        />
+      </div>
+    </div>
+  </li>
+  <li
+    class="ant-conversations-item ant-conversations-item-disabled"
+    title="Conversation Item 4"
+  >
+    <span
+      class="ant-typography ant-conversations-label css-var-_r_0_"
+    >
+      Conversation Item 4
+    </span>
+  </li>
+</ul>
+`;
+
+exports[`renders components/conversations/demo/with-menu.tsx extend context correctly 2`] = `[]`;

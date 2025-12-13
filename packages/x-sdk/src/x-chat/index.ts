@@ -1,0 +1,408 @@
+import { useEvent } from '@rc-component/util';
+import React, { useEffect, useState } from 'react';
+import type { AnyObject } from '../_util/type';
+import { AbstractChatProvider } from '../chat-providers';
+import { ConversationData } from '../x-conversations';
+import { AbstractXRequestClass } from '../x-request';
+import type { SSEOutput } from '../x-stream';
+import { ConversationKey, useChatStore } from './store';
+
+export type SimpleType = string | number | boolean | object;
+
+enum MessageStatusEnum {
+  local = 'local',
+  loading = 'loading',
+  updating = 'updating',
+  success = 'success',
+  error = 'error',
+  abort = 'abort',
+}
+
+export type MessageStatus = `${MessageStatusEnum}`;
+
+type RequestPlaceholderFn<Input, Message> = (
+  requestParams: Partial<Input>,
+  info: { messages: Message[] },
+) => Message;
+
+type RequestFallbackFn<Input, MessageInfo, Message> = (
+  requestParams: Partial<Input>,
+  info: { error: Error; errorInfo?: any; messages: Message[]; messageInfo: MessageInfo },
+) => Message | Promise<Message>;
+
+export type RequestParams<Message> = {
+  [Key: PropertyKey]: Message;
+} & AnyObject;
+
+export interface XChatConfig<
+  ChatMessage extends SimpleType = string,
+  BubbleMessage extends SimpleType = ChatMessage,
+  Input = ChatMessage,
+  Output = ChatMessage,
+> {
+  provider?: AbstractChatProvider<ChatMessage, Input, Output>;
+  conversationKey?: ConversationData['key'];
+  defaultMessages?: DefaultMessageInfo<ChatMessage>[];
+  /** Convert agent message to bubble usage message type */
+  parser?: (message: ChatMessage) => BubbleMessage | BubbleMessage[];
+  requestPlaceholder?: ChatMessage | RequestPlaceholderFn<Input, ChatMessage>;
+  requestFallback?: ChatMessage | RequestFallbackFn<Input, MessageInfo<ChatMessage>, ChatMessage>;
+}
+
+export interface MessageInfo<Message extends SimpleType> {
+  id: number | string;
+  message: Message;
+  status: MessageStatus;
+  extraInfo?: AnyObject;
+}
+
+export type DefaultMessageInfo<Message extends SimpleType> = Pick<MessageInfo<Message>, 'message'> &
+  Partial<Omit<MessageInfo<Message>, 'message'>>;
+
+export type RequestResultObject<Message> = {
+  message: Message | Message[];
+  status: MessageStatus;
+};
+
+export type StandardRequestResult<Message extends SimpleType> = Omit<
+  RequestResultObject<Message>,
+  'message' | 'status'
+> & {
+  message: Message;
+  status?: MessageStatus;
+};
+
+function toArray<T>(item: T | T[]): T[] {
+  return Array.isArray(item) ? item : [item];
+}
+
+const IsRequestingMap = new Map<ConversationKey, boolean>();
+const generateConversationKey = () => Symbol('ConversationKey');
+
+export default function useXChat<
+  ChatMessage extends SimpleType = string,
+  ParsedMessage extends SimpleType = ChatMessage,
+  Input = RequestParams<ChatMessage>,
+  Output = SSEOutput,
+>(config: XChatConfig<ChatMessage, ParsedMessage, Input, Output>) {
+  const {
+    defaultMessages,
+    requestFallback,
+    requestPlaceholder,
+    parser,
+    provider,
+    conversationKey: originalConversationKey,
+  } = config;
+
+  // ========================= Agent Messages =========================
+  const idRef = React.useRef(0);
+  const requestHandlerRef = React.useRef<AbstractXRequestClass<Input, Output>>(undefined);
+  const [isRequesting, setIsRequesting] = useState<boolean>(false);
+  // fix #1431, should give a default key to create store
+  const [conversationKey, setConversationKey] = useState(
+    originalConversationKey || generateConversationKey(),
+  );
+
+  useEffect(() => {
+    if (originalConversationKey) {
+      setConversationKey(originalConversationKey);
+    }
+  }, [originalConversationKey]);
+
+  const { messages, setMessages, getMessages, setMessage } = useChatStore<MessageInfo<ChatMessage>>(
+    () =>
+      (defaultMessages || []).map((info, index) => ({
+        id: `default_${index}`,
+        status: 'local',
+        ...info,
+      })),
+    conversationKey,
+  );
+
+  const createMessage = (message: ChatMessage, status: MessageStatus, extraInfo?: AnyObject) => {
+    const msg: MessageInfo<ChatMessage> = {
+      id: `msg_${idRef.current}`,
+      message,
+      status,
+    };
+    if (extraInfo) {
+      msg.extraInfo = extraInfo;
+    }
+    idRef.current += 1;
+
+    return msg;
+  };
+
+  // ========================= BubbleMessages =========================
+  const parsedMessages = React.useMemo(() => {
+    const list: MessageInfo<ParsedMessage>[] = [];
+
+    messages.forEach((agentMsg) => {
+      const rawParsedMsg = parser ? parser(agentMsg.message) : agentMsg.message;
+      const bubbleMsgs = toArray(rawParsedMsg as ParsedMessage);
+
+      bubbleMsgs.forEach((bubbleMsg, bubbleMsgIndex) => {
+        let key = agentMsg.id;
+        if (bubbleMsgs.length > 1) {
+          key = `${key}_${bubbleMsgIndex}`;
+        }
+
+        list.push({
+          id: key,
+          message: bubbleMsg,
+          status: agentMsg.status,
+        });
+      });
+    });
+
+    return list;
+  }, [messages]);
+
+  // ============================ Request =============================
+  const getFilteredMessages = (msgs: MessageInfo<ChatMessage>[]) =>
+    msgs.filter((info) => info.status !== 'loading').map((info) => info.message);
+
+  provider?.injectGetMessages(() => {
+    return getFilteredMessages(getMessages());
+  });
+  requestHandlerRef.current = provider?.request;
+  // For agent to use. Will filter out loading and error message
+  const getRequestMessages = () => getFilteredMessages(getMessages());
+
+  const innerOnRequest = (
+    requestParams: Partial<Input>,
+    opts?: {
+      updatingId?: number | string;
+      reload?: boolean;
+      extraInfo?: AnyObject;
+    },
+  ) => {
+    if (!provider) {
+      return;
+    }
+    const { updatingId, reload } = opts || {};
+    let loadingMsgId: number | string | null | undefined = null;
+    const localMessage = provider.transformLocalMessage(requestParams);
+    const messages = (Array.isArray(localMessage) ? localMessage : [localMessage]).map((message) =>
+      createMessage(message, 'local', opts?.extraInfo),
+    );
+    if (reload) {
+      loadingMsgId = updatingId;
+      setMessages((ori: MessageInfo<ChatMessage>[]) => {
+        const nextMessages = [...ori];
+        if (requestPlaceholder) {
+          let placeholderMsg: ChatMessage;
+          if (typeof requestPlaceholder === 'function') {
+            // typescript has bug that not get real return type when use `typeof function` check
+            placeholderMsg = (requestPlaceholder as RequestPlaceholderFn<Input, ChatMessage>)(
+              requestParams,
+              {
+                messages: getFilteredMessages(nextMessages),
+              },
+            );
+          } else {
+            placeholderMsg = requestPlaceholder;
+          }
+          nextMessages.forEach((info) => {
+            if (info.id === updatingId) {
+              info.status = 'loading';
+              info.message = placeholderMsg;
+              if (opts?.extraInfo) {
+                info.extraInfo = opts?.extraInfo;
+              }
+            }
+          });
+        }
+        return nextMessages;
+      });
+    } else {
+      // Add placeholder message
+      setMessages((ori: MessageInfo<ChatMessage>[]) => {
+        let nextMessages = [...ori, ...messages];
+        if (requestPlaceholder) {
+          let placeholderMsg: ChatMessage;
+          if (typeof requestPlaceholder === 'function') {
+            // typescript has bug that not get real return type when use `typeof function` check
+            placeholderMsg = (requestPlaceholder as RequestPlaceholderFn<Input, ChatMessage>)(
+              requestParams,
+              {
+                messages: getFilteredMessages(nextMessages),
+              },
+            );
+          } else {
+            placeholderMsg = requestPlaceholder;
+          }
+          const loadingMsg = createMessage(placeholderMsg, 'loading');
+          loadingMsgId = loadingMsg.id;
+
+          nextMessages = [...nextMessages, loadingMsg];
+        }
+
+        return nextMessages;
+      });
+    }
+
+    // Request
+    let updatingMsgId: number | string | null | undefined = null;
+    const updateMessage = (
+      status: MessageStatus,
+      chunk: Output,
+      chunks: Output[],
+      responseHeaders: Headers,
+    ) => {
+      let msg = getMessages().find((info) => info.id === updatingMsgId);
+      if (!msg) {
+        if (reload && updatingId) {
+          msg = getMessages().find((info) => info.id === updatingId);
+          if (msg) {
+            msg.status = status;
+            msg.message = provider.transformMessage({ chunk, status, chunks, responseHeaders });
+            setMessages((ori: MessageInfo<ChatMessage>[]) => {
+              return [...ori];
+            });
+            updatingMsgId = msg.id;
+          }
+        } else {
+          // Create if not exist
+          const transformData = provider.transformMessage({
+            chunk,
+            status,
+            chunks,
+            responseHeaders,
+          });
+          msg = createMessage(transformData, status);
+          setMessages((ori: MessageInfo<ChatMessage>[]) => {
+            const oriWithoutPending = ori.filter(
+              (info: { id: string | number | null | undefined }) => info.id !== loadingMsgId,
+            );
+            return [...oriWithoutPending, msg!];
+          });
+          updatingMsgId = msg.id;
+        }
+      } else {
+        // Update directly
+        setMessages((ori: MessageInfo<ChatMessage>[]) => {
+          return ori.map((info: MessageInfo<ChatMessage>) => {
+            if (info.id === updatingMsgId) {
+              const transformData = provider.transformMessage({
+                originMessage: info.message,
+                chunk,
+                chunks,
+                status,
+                responseHeaders,
+              });
+              return {
+                ...info,
+                message: transformData,
+                status,
+              };
+            }
+            return info;
+          });
+        });
+      }
+
+      return msg;
+    };
+    provider.injectRequest({
+      onUpdate: (chunk: Output, headers: Headers) => {
+        updateMessage('updating', chunk, [], headers);
+      },
+      onSuccess: (chunks: Output[], headers: Headers) => {
+        setIsRequesting(false);
+        conversationKey && IsRequestingMap.delete(conversationKey);
+        updateMessage('success', undefined as Output, chunks, headers);
+      },
+      onError: async (error: Error, errorInfo: any) => {
+        setIsRequesting(false);
+        conversationKey && IsRequestingMap.delete(conversationKey);
+        if (requestFallback) {
+          let fallbackMsg: ChatMessage;
+          // Update as error
+          if (typeof requestFallback === 'function') {
+            // typescript has bug that not get real return type when use `typeof function` check
+            const messages = getRequestMessages();
+            const msg = getMessages().find(
+              (info) => info.id === loadingMsgId || info.id === updatingMsgId,
+            );
+
+            fallbackMsg = await (
+              requestFallback as RequestFallbackFn<Input, MessageInfo<ChatMessage>, ChatMessage>
+            )(requestParams, {
+              error,
+              errorInfo,
+              messageInfo: msg as MessageInfo<ChatMessage>,
+              messages,
+            });
+          } else {
+            fallbackMsg = requestFallback;
+          }
+          setMessages((ori: MessageInfo<ChatMessage>[]) => [
+            ...ori.filter(
+              (info: { id: string | number | null | undefined }) =>
+                info.id !== loadingMsgId && info.id !== updatingMsgId,
+            ),
+            createMessage(fallbackMsg, error.name === 'AbortError' ? 'abort' : 'error'),
+          ]);
+        } else {
+          // Remove directly
+          setMessages((ori: MessageInfo<ChatMessage>[]) => {
+            return ori.map((info: MessageInfo<ChatMessage>) => {
+              if (info.id === loadingMsgId || info.id === updatingMsgId) {
+                return {
+                  ...info,
+                  status: error.name === 'AbortError' ? 'abort' : 'error',
+                };
+              }
+              return info;
+            });
+          });
+        }
+      },
+    });
+    setIsRequesting(true);
+    conversationKey && IsRequestingMap.set(conversationKey, true);
+    provider.request.run(provider.transformParams(requestParams, provider.request.options));
+  };
+
+  const onRequest = useEvent((requestParams: Partial<Input>, opts?: { extraInfo: AnyObject }) => {
+    if (!provider) {
+      throw new Error('provider is required');
+    }
+    innerOnRequest(requestParams, opts);
+  });
+
+  const onReload = (
+    id: string | number,
+    requestParams: Partial<Input>,
+    opts?: { extraInfo: AnyObject },
+  ) => {
+    if (!provider) {
+      throw new Error('provider is required');
+    }
+    if (!id || !getMessages().find((info) => info.id === id)) {
+      throw new Error(`message [${id}] is not found`);
+    }
+    innerOnRequest(requestParams, {
+      updatingId: id,
+      reload: true,
+      extraInfo: opts?.extraInfo,
+    });
+  };
+
+  return {
+    onRequest,
+    messages,
+    parsedMessages,
+    setMessages,
+    setMessage,
+    abort: () => {
+      if (!provider) {
+        throw new Error('provider is required');
+      }
+      requestHandlerRef.current?.abort();
+    },
+    isRequesting: conversationKey ? IsRequestingMap?.get(conversationKey) || false : isRequesting,
+    onReload,
+  } as const;
+}

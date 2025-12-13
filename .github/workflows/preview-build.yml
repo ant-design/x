@@ -19,19 +19,20 @@ jobs:
     name: build preview
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: oven-sh/setup-bun@v2
-      - run: bun install
-      - name: bun run site
+      - uses: actions/checkout@v6
+      - uses: utooland/setup-utoo@v1
+      - run: ut
+      - run: ut prestart --workspaces
+      - name: ut site
         id: site
-        run: bun run site
+        run: ut site --workspace packages/x
         env:
-          NODE_OPTIONS: "--max_old_space_size=4096"
+          NODE_OPTIONS: '--max_old_space_size=4096'
       - name: upload site artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: site
-          path: _site/
+          path: packages/x/_site/
           retention-days: 5
       # Upload PR id for next workflow use
       - name: Save PR number
@@ -40,7 +41,7 @@ jobs:
 
       - name: Upload PR number
         if: ${{ always() }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: pr
           path: ./pr-id.txt

@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`antd dist files exports modules correctly 1`] = `
+[
+  "Actions",
+  "Attachments",
+  "Bubble",
+  "CodeHighlighter",
+  "Conversations",
+  "FileCard",
+  "Mermaid",
+  "Prompts",
+  "Sender",
+  "SenderSwitch",
+  "Sources",
+  "Suggestion",
+  "Think",
+  "ThoughtChain",
+  "Welcome",
+  "XProvider",
+  "notification",
+  "version",
+]
+`;

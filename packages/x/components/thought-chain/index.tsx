@@ -1,0 +1,146 @@
+import pickAttrs from '@rc-component/util/lib/pickAttrs';
+import { clsx } from 'clsx';
+import React from 'react';
+import useCollapsible from '../_util/hooks/use-collapsible';
+import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
+import useXComponentConfig from '../_util/hooks/use-x-component-config';
+import { useXProviderContext } from '../x-provider';
+import type { ThoughtChainItemProps } from './Item';
+import Item from './Item';
+import type { ThoughtChainItemType, ThoughtChainProps } from './interface';
+import ThoughtChainNode, { ThoughtChainContext } from './Node';
+import useStyle from './style';
+
+type CompoundedComponent = typeof ForwardThoughtChain & {
+  Item: typeof Item;
+};
+
+const ForwardThoughtChain = React.forwardRef<any, ThoughtChainProps>((props, ref) => {
+  const {
+    prefixCls: customizePrefixCls,
+    className,
+    items,
+    defaultExpandedKeys,
+    expandedKeys: customExpandedKeys,
+    onExpand,
+    rootClassName,
+    styles = {},
+    classNames = {},
+    line = true,
+    style,
+    ...restProps
+  } = props;
+
+  const domProps = pickAttrs(restProps, {
+    attr: true,
+    aria: true,
+    data: true,
+  });
+
+  // ============================ Prefix ============================
+
+  const { direction, getPrefixCls } = useXProviderContext();
+
+  const prefixCls = getPrefixCls('thought-chain', customizePrefixCls);
+
+  // ===================== Component Config =========================
+
+  const contextConfig = useXComponentConfig('thoughtChain');
+
+  // ============================ Style ============================
+
+  const [hashId, cssVarCls] = useStyle(prefixCls);
+
+  const mergedCls = clsx(
+    className,
+    prefixCls,
+    contextConfig.className,
+    contextConfig.classNames.root,
+    rootClassName,
+    hashId,
+    cssVarCls,
+    className,
+    classNames.root,
+    `${prefixCls}-box`,
+    {
+      [`${prefixCls}-rtl`]: direction === 'rtl',
+    },
+  );
+  //  ============================ Item Collapsible ============================
+
+  const rootPrefixCls = getPrefixCls();
+  const collapsibleOptions = {
+    defaultExpandedKeys,
+    expandedKeys: customExpandedKeys,
+    onExpand,
+  };
+
+  const [_, expandedKeys, onItemExpand, collapseMotion] = useCollapsible(
+    collapsibleOptions,
+    prefixCls,
+    rootPrefixCls,
+  );
+
+  // ============================= Refs =============================
+
+  const thoughtChainRef = React.useRef<HTMLDivElement>(null);
+
+  useProxyImperativeHandle(ref, () => {
+    return {
+      nativeElement: thoughtChainRef.current!,
+    };
+  });
+
+  // ============================ Render ============================
+  return (
+    <div
+      ref={thoughtChainRef}
+      className={mergedCls}
+      {...domProps}
+      style={{ ...contextConfig.style, ...styles.root, ...style }}
+    >
+      <ThoughtChainContext.Provider
+        value={{
+          prefixCls,
+          expandedKeys,
+          onItemExpand,
+          collapseMotion,
+          classNames: {
+            itemHeader: clsx(contextConfig.classNames.itemHeader, classNames.itemHeader),
+            itemContent: clsx(contextConfig.classNames.itemContent, classNames.itemContent),
+            itemFooter: clsx(contextConfig.classNames.itemFooter, classNames.itemFooter),
+            itemIcon: clsx(contextConfig.classNames.itemIcon, classNames.itemIcon),
+          },
+          styles: {
+            itemHeader: { ...contextConfig.styles.itemHeader, ...styles.itemHeader },
+            itemContent: { ...contextConfig.styles.itemContent, ...styles.itemContent },
+            itemFooter: { ...contextConfig.styles.itemFooter, ...styles.itemFooter },
+            itemIcon: { ...contextConfig.styles.itemIcon, ...styles.itemIcon },
+          },
+        }}
+      >
+        {items?.map((item, index) => (
+          <ThoughtChainNode
+            key={item.key || `key_${index}`}
+            index={index}
+            line={line}
+            className={clsx(contextConfig.classNames.item, classNames.item)}
+            style={{ ...contextConfig.styles.item, ...styles.item }}
+            info={item}
+          />
+        ))}
+      </ThoughtChainContext.Provider>
+    </div>
+  );
+});
+
+const ThoughtChain = ForwardThoughtChain as CompoundedComponent;
+
+ThoughtChain.Item = Item;
+
+if (process.env.NODE_ENV !== 'production') {
+  ThoughtChain.displayName = 'ThoughtChain';
+}
+
+export type { ThoughtChainProps, ThoughtChainItemType, ThoughtChainItemProps };
+export default ThoughtChain;

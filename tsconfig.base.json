@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "module": "esnext",
+    "moduleResolution": "Bundler",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "jsx": "react",
+    "jsxFactory": "React.createElement",
+    "jsxFragmentFactory": "React.Fragment",
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "noImplicitAny": true,
+    "target": "es2020",
+    "lib": ["dom", "es2020"],
+    "skipLibCheck": true,
+    "stripInternal": true,
+    "resolvePackageJsonExports": true
+  },
+  "exclude": ["**/node_modules", "**/examples", "**/dist"]
+}

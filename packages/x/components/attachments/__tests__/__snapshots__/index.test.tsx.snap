@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`attachments rtl render component should be rendered correctly in RTL direction 1`] = `
+<div
+  class="ant-attachment css-var-root ant-attachment-rtl"
+  dir="rtl"
+>
+  <div
+    class="ant-file-card-list ant-attachment-list css-var-root ant-file-card-rtl"
+  >
+    <div
+      class="ant-file-card-list-content"
+      dir="rtl"
+      style="display: none;"
+    >
+      <span
+        class="ant-upload-wrapper css-var-root ant-upload-rtl"
+      >
+        <div
+          class="ant-upload ant-upload-select"
+        >
+          <span
+            class="ant-upload"
+          >
+            <input
+              accept=""
+              name="file"
+              style="display: none;"
+              type="file"
+            />
+            <button
+              class="ant-btn css-var-root ant-btn-dashed ant-btn-color-default ant-btn-variant-dashed ant-btn-rtl ant-attachment-list-upload-btn"
+              type="button"
+            >
+              <span
+                aria-label="plus"
+                class="anticon anticon-plus ant-attachment-list-upload-btn-icon"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="plus"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
+                  />
+                  <path
+                    d="M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+                  />
+                </svg>
+              </span>
+            </button>
+          </span>
+        </div>
+      </span>
+    </div>
+  </div>
+  <div
+    class="ant-attachment-placeholder"
+  >
+    <span
+      class="ant-upload-wrapper css-var-root ant-upload-rtl"
+    >
+      <div
+        class="ant-upload ant-upload-drag ant-upload-rtl"
+        style="padding: 0px; border: 0px; background: transparent;"
+      >
+        <span
+          class="ant-upload ant-upload-btn"
+          role="button"
+          tabindex="0"
+        >
+          <input
+            accept=""
+            name="file"
+            style="display: none;"
+            type="file"
+          />
+          <div
+            class="ant-upload-drag-container"
+          >
+            <div
+              class="ant-attachment-placeholder-inner ant-flex css-var-root ant-flex-align-center ant-flex-justify-center ant-flex-rtl ant-flex-vertical"
+            >
+              <span
+                class="ant-typography ant-typography-rtl ant-attachment-placeholder-icon css-var-root"
+              />
+              <h5
+                class="ant-typography ant-typography-rtl ant-attachment-placeholder-title css-var-root"
+              />
+              <span
+                class="ant-typography ant-typography-rtl ant-typography-secondary ant-attachment-placeholder-description css-var-root"
+              />
+            </div>
+          </div>
+        </span>
+      </div>
+    </span>
+  </div>
+  <div
+    class="ant-attachment-drop-area css-var-root"
+    style="display: none;"
+  >
+    <div
+      class="ant-attachment-placeholder"
+    >
+      <span
+        class="ant-upload-wrapper css-var-root ant-upload-rtl"
+      >
+        <div
+          class="ant-upload ant-upload-drag ant-upload-rtl"
+          style="padding: 0px; border: 0px; background: transparent;"
+        >
+          <span
+            class="ant-upload ant-upload-btn"
+            role="button"
+            tabindex="0"
+          >
+            <input
+              accept=""
+              name="file"
+              style="display: none;"
+              type="file"
+            />
+            <div
+              class="ant-upload-drag-container"
+            >
+              <div
+                class="ant-attachment-placeholder-inner ant-flex css-var-root ant-flex-align-center ant-flex-justify-center ant-flex-rtl ant-flex-vertical"
+              >
+                <span
+                  class="ant-typography ant-typography-rtl ant-attachment-placeholder-icon css-var-root"
+                />
+                <h5
+                  class="ant-typography ant-typography-rtl ant-attachment-placeholder-title css-var-root"
+                />
+                <span
+                  class="ant-typography ant-typography-rtl ant-typography-secondary ant-attachment-placeholder-description css-var-root"
+                />
+              </div>
+            </div>
+          </span>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`prompts rtl render component should be rendered correctly in RTL direction 1`] = `
+<div
+  class="ant-prompts css-var-root ant-prompts-rtl"
+>
+  <div
+    class="ant-prompts-list"
+  />
+</div>
+`;

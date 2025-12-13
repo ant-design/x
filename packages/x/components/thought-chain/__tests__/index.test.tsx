@@ -1,0 +1,205 @@
+import { CheckCircleOutlined } from '@ant-design/icons';
+import React from 'react';
+import mountTest from '../../../tests/shared/mountTest';
+import rtlTest from '../../../tests/shared/rtlTest';
+import themeTest from '../../../tests/shared/themeTest';
+import { fireEvent, render } from '../../../tests/utils';
+import XProvider from '../../x-provider';
+import type { ThoughtChainItemType } from '../index';
+import ThoughtChain from '../index';
+
+const customizationProps = (key: string): ThoughtChainItemType => ({
+  title: 'Thought Chain Item Title',
+  description: 'description',
+  icon: <CheckCircleOutlined />,
+  footer: 'Thought Chain Item Footer',
+  content: `content ${key}`,
+});
+
+const items: ThoughtChainItemType[] = [
+  {
+    ...customizationProps('test1'),
+    status: 'success',
+    key: 'test1',
+  },
+  {
+    ...customizationProps('test2'),
+    status: 'error',
+    key: 'test2',
+  },
+  {
+    ...customizationProps('test3'),
+    status: 'loading',
+    key: 'test3',
+  },
+];
+
+const items_collapsible: ThoughtChainItemType[] = [
+  {
+    ...customizationProps('test1'),
+    status: 'success',
+    key: 'test1',
+    collapsible: true,
+  },
+  {
+    ...customizationProps('test2'),
+    status: 'error',
+    key: 'test2',
+    collapsible: true,
+  },
+  {
+    ...customizationProps('test3'),
+    status: 'loading',
+    key: 'test3',
+    collapsible: true,
+  },
+];
+
+describe('ThoughtChain Component', () => {
+  mountTest(() => <ThoughtChain />);
+  rtlTest(() => <ThoughtChain />);
+
+  themeTest(() => <ThoughtChain items={items} />);
+
+  beforeAll(() => {
+    jest.useFakeTimers();
+  });
+
+  afterAll(() => {
+    jest.useRealTimers();
+  });
+
+  it('ThoughtChain component work', () => {
+    const { container, getByText } = render(<ThoughtChain items={items} />);
+    const element = container.querySelector<HTMLUListElement>('.ant-thought-chain');
+    const elementHeader = container.querySelectorAll<HTMLDivElement>(
+      '.ant-thought-chain-node-title',
+    )[0];
+    fireEvent.click(elementHeader as Element);
+
+    expect(getByText('content test1')).toBeInTheDocument();
+    expect(element).toBeTruthy();
+    expect(element).toMatchSnapshot();
+  });
+  it('ThoughtChain component supports ref', () => {
+    const ref = React.createRef<any>();
+    render(<ThoughtChain ref={ref} items={items} />);
+    expect(ref.current).not.toBeNull();
+  });
+  it('ThoughtChain component work with collapsible', () => {
+    const onExpand = jest.fn();
+    const App = () => {
+      const [expandedKeys, setExpandedKeys] = React.useState<string[]>([]);
+      return (
+        <ThoughtChain
+          items={items_collapsible}
+          expandedKeys={expandedKeys}
+          onExpand={(keys) => {
+            setExpandedKeys(keys);
+            onExpand(keys);
+          }}
+        />
+      );
+    };
+    const { container } = render(<App />);
+
+    const element = container.querySelectorAll<HTMLDivElement>('.ant-thought-chain-node-title')[0];
+    fireEvent.click(element as Element);
+    expect(onExpand).toHaveBeenCalledWith(['test1']);
+    fireEvent.click(element as Element);
+    expect(onExpand).toHaveBeenCalledWith([]);
+  });
+  it('ThoughtChain component work with controlled mode', async () => {
+    const onExpand = jest.fn();
+    const App = () => {
+      const [expandedKeys] = React.useState<string[]>(['test1']);
+      return (
+        <ThoughtChain
+          items={items_collapsible}
+          expandedKeys={expandedKeys}
+          onExpand={(keys) => {
+            onExpand(keys);
+          }}
+        />
+      );
+    };
+    const { container } = render(<App />);
+
+    const expandBodyBeforeElements = container.querySelectorAll<HTMLDivElement>(
+      '.ant-thought-chain-node-content',
+    );
+    expect(expandBodyBeforeElements).toHaveLength(1);
+
+    const itemHeaderElement = container.querySelectorAll<HTMLDivElement>(
+      '.ant-thought-chain-node-title',
+    )[0];
+    fireEvent.click(itemHeaderElement as Element);
+    expect(onExpand).toHaveBeenCalledWith([]);
+
+    // click again
+    fireEvent.click(itemHeaderElement as Element);
+    expect(onExpand).toHaveBeenCalledWith([]);
+
+    const expandBodyAfterElements = container.querySelectorAll<HTMLDivElement>(
+      '.ant-thought-chain-node-content',
+    );
+    expect(expandBodyAfterElements).toHaveLength(1);
+  });
+  it('ThoughtChain component work collapsible without expandedKeys', async () => {
+    const onExpand = jest.fn();
+    const App = () => {
+      return (
+        <ThoughtChain
+          items={items_collapsible}
+          onExpand={(keys) => {
+            onExpand(keys);
+          }}
+        />
+      );
+    };
+    const { container } = render(<App />);
+
+    const expandBodyElementBefore = container.querySelectorAll<HTMLDivElement>(
+      '.ant-thought-chain-node-content',
+    );
+    expect(expandBodyElementBefore).toHaveLength(0);
+
+    const element = container.querySelectorAll<HTMLDivElement>('.ant-thought-chain-node-title')[0];
+    fireEvent.click(element as Element);
+    expect(onExpand).toHaveBeenCalledWith(['test1']);
+
+    const expandBodyElementsAfter = container.querySelectorAll<HTMLDivElement>(
+      '.ant-thought-chain-node-content',
+    );
+    expect(expandBodyElementsAfter).toHaveLength(1);
+  });
+  it('ThoughtChain component with XProvider', async () => {
+    const App = () => {
+      return (
+        <XProvider
+          direction="rtl"
+          thoughtChain={{
+            className: 'test-thoughtChain',
+            classNames: {
+              item: 'test-thoughtChain-item',
+            },
+            styles: {
+              item: {
+                backgroundColor: 'red',
+              },
+            },
+          }}
+        >
+          <ThoughtChain items={items_collapsible} />
+        </XProvider>
+      );
+    };
+    const { container } = render(<App />);
+
+    const element = container.querySelector('.test-thoughtChain');
+    expect(element).toBeTruthy();
+    const itemElement = container.querySelector('.ant-thought-chain-node');
+    expect(itemElement).toBeInTheDocument();
+    expect(window.getComputedStyle(itemElement as Element).backgroundColor).toBe('red');
+  });
+});

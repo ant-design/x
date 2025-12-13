@@ -16,11 +16,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: oven-sh/setup-bun@v2
       - name: size-limit
         uses: ant-design/size-limit-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          package_manager: bun
+          package_manager: npm
           build_script: compile

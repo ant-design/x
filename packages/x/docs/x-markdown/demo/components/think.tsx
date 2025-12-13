@@ -1,0 +1,88 @@
+import { Bubble, Think } from '@ant-design/x';
+import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
+import { Button, Flex } from 'antd';
+import React from 'react';
+
+const text = `
+<think>Deep thinking is a systematic and structured cognitive approach that requires individuals to move beyond intuition and superficial information, delving into the essence of a problem and its underlying principles through logical analysis, multi-perspective examination, and persistent inquiry. Unlike quick reactions or heuristic judgments, deep thinking emphasizes ​slow thinking, actively engaging knowledge reserves, critical thinking, and creativity to uncover deeper connections and meanings.
+Key characteristics of deep thinking include:
+​Probing the Essence: Not settling for "what it is," but continuously asking "why" and "how it works" until reaching the fundamental logic.
+​Multidimensional Connections: Placing the issue in a broader context and analyzing it through interdisciplinary knowledge or diverse perspectives.
+​Skepticism & Reflection: Challenging existing conclusions, authoritative opinions, and even personal biases, validating them through logic or evidence.
+​Long-term Value Focus: Prioritizing systemic consequences and sustainable impact over short-term or localized benefits.
+This mode of thinking helps individuals avoid cognitive biases in complex scenarios, improve decision-making, and generate groundbreaking insights in fields such as academic research, business innovation, and social problem-solving.</think>
+# Hello Deep Thinking\n Deep thinking is over.\n\n You can use the think tag to package your thoughts.
+`;
+
+const ThinkComponent = React.memo((props: ComponentProps) => {
+  const [title, setTitle] = React.useState('Deep thinking...');
+  const [loading, setLoading] = React.useState(true);
+  const [expand, setExpand] = React.useState(true);
+
+  React.useEffect(() => {
+    if (props.streamStatus === 'done') {
+      setTitle('Complete thinking');
+      setLoading(false);
+      setExpand(false);
+    }
+  }, [props.streamStatus]);
+
+  return (
+    <Think title={title} loading={loading} expanded={expand} onClick={() => setExpand(!expand)}>
+      {props.children}
+    </Think>
+  );
+});
+
+const App = () => {
+  const [index, setIndex] = React.useState(0);
+  const timer = React.useRef<NodeJS.Timeout | null>(null);
+  const contentRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    if (index >= text.length) return;
+
+    timer.current = setTimeout(() => {
+      setIndex(Math.min(index + 5, text.length));
+    }, 20);
+
+    return () => {
+      if (timer.current) {
+        clearTimeout(timer.current);
+        timer.current = null;
+      }
+    };
+  }, [index]);
+
+  React.useEffect(() => {
+    if (contentRef.current && index > 0 && index < text.length) {
+      const { scrollHeight, clientHeight } = contentRef.current;
+      if (scrollHeight > clientHeight) {
+        contentRef.current.scrollTo({
+          top: scrollHeight,
+          behavior: 'smooth',
+        });
+      }
+    }
+  }, [index]);
+
+  return (
+    <Flex vertical gap="small" style={{ height: 600, overflow: 'auto' }} ref={contentRef}>
+      <Flex justify="flex-end">
+        <Button onClick={() => setIndex(0)}>Re-Render</Button>
+      </Flex>
+
+      <Bubble
+        content={text.slice(0, index)}
+        contentRender={(content) => (
+          <XMarkdown components={{ think: ThinkComponent }} paragraphTag="div">
+            {content}
+          </XMarkdown>
+        )}
+        variant="outlined"
+      />
+    </Flex>
+  );
+};
+
+export default App;
