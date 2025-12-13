@@ -7,7 +7,7 @@ export const genSlotStyle: GenerateStyle<BubbleToken> = (token) => {
   return {
     [componentCls]: {
       // ======================== Header & Footer ========================
-      [`& ${componentCls}-header`]: {
+      [`${componentCls}-header`]: {
         display: 'flex',
         marginBottom: paddingXXS,
         fontSize: fontSize,
@@ -15,7 +15,7 @@ export const genSlotStyle: GenerateStyle<BubbleToken> = (token) => {
         color: colorText,
       },
 
-      [`& ${componentCls}-footer`]: {
+      [`${componentCls}-footer`]: {
         display: 'flex',
         marginBlockStart: margin,
         fontSize: fontSize,
@@ -32,11 +32,9 @@ export const genSlotStyle: GenerateStyle<BubbleToken> = (token) => {
       },
 
       // ======================== Sider ========================
-      '&-avatar': {
+      [`${componentCls}-avatar`]: {
         minWidth: calc(fontSizeLG).mul(2).equal(),
       },
-
-      '&-extra': {},
     },
   };
 };

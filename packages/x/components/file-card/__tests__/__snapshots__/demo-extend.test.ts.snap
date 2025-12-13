@@ -1047,9 +1047,11 @@ exports[`renders components/file-card/demo/image-loading.tsx extend context corr
       >
         <div
           class="ant-skeleton ant-skeleton-element ant-skeleton-active ant-file-card-image-skeleton css-var-_r_6_"
+          style="width: 100%; height: 100%;"
         >
           <div
             class="ant-skeleton-node"
+            style="width: 100%; height: 100%;"
           >
             <div
               class="ant-file-card-image-spin ant-file-card-image-spin-small ant-flex css-var-_r_6_ ant-flex-align-center ant-flex-gap-small"
@@ -1123,9 +1125,11 @@ exports[`renders components/file-card/demo/image-loading.tsx extend context corr
       >
         <div
           class="ant-skeleton ant-skeleton-element ant-skeleton-active ant-file-card-image-skeleton css-var-_r_6_"
+          style="width: 100%; height: 100%;"
         >
           <div
             class="ant-skeleton-node"
+            style="width: 100%; height: 100%;"
           >
             <div
               class="ant-file-card-image-spin ant-file-card-image-spin-default ant-flex css-var-_r_6_ ant-flex-align-center ant-flex-gap-small"
@@ -1199,10 +1203,10 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
   style="width: 900px;"
 >
   <div
-    class="ant-file-card-list-wrapper"
+    class="ant-file-card-list css-var-_r_4_"
   >
     <div
-      class="ant-file-card-list css-var-_r_4_"
+      class="ant-file-card-list-content"
     >
       <div
         class="ant-file-card-list-item"
@@ -1705,10 +1709,10 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-file-card-list-wrapper"
+    class="ant-file-card-list css-var-_r_4_"
   >
     <div
-      class="ant-file-card-list css-var-_r_4_ ant-file-card-list-small"
+      class="ant-file-card-list-content ant-file-card-list-small"
     >
       <div
         class="ant-file-card-list-item"
@@ -2211,10 +2215,10 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-file-card-list-wrapper"
+    class="ant-file-card-list css-var-_r_4_"
   >
     <div
-      class="ant-file-card-list css-var-_r_4_"
+      class="ant-file-card-list-content"
     >
       <div
         class="ant-file-card-list-item"
@@ -2363,10 +2367,10 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-file-card-list-wrapper"
+    class="ant-file-card-list css-var-_r_4_"
   >
     <div
-      class="ant-file-card-list css-var-_r_4_"
+      class="ant-file-card-list-content"
     >
       <div
         class="ant-file-card-list-item"
@@ -2620,10 +2624,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
     </div>
   </div>
   <div
-    class="ant-file-card-list-wrapper"
+    class="ant-file-card-list css-var-_r_1_"
   >
     <div
-      class="ant-file-card-list css-var-_r_1_ ant-file-card-list-overflow-wrap"
+      class="ant-file-card-list-content ant-file-card-list-overflow-wrap"
     >
       <div
         class="ant-file-card-list-item"

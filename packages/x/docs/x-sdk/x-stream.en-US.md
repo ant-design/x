@@ -36,7 +36,9 @@ async function request() {
 
 ## Examples
 
-<code src="./demos/x-stream/default-protocol.tsx">Default Protocol - SSE</code> <code src="./demos/x-stream/custom-protocol.tsx">Custom Protocol</code>
+<!-- prettier-ignore -->
+<code src="./demos/x-stream/default-protocol.tsx">Default Protocol - SSE</code>
+<code src="./demos/x-stream/custom-protocol.tsx">Custom Protocol</code>
 
 ## API
 

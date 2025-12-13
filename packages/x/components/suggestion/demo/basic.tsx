@@ -1,7 +1,7 @@
 import { OpenAIFilled } from '@ant-design/icons';
 import { Sender, Suggestion } from '@ant-design/x';
-import type { GetProp } from 'antd';
-import React from 'react';
+import { type GetProp, message } from 'antd';
+import React, { useState } from 'react';
 
 type SuggestionItems = Exclude<GetProp<typeof Suggestion, 'items'>, () => void>;
 
@@ -26,7 +26,9 @@ const suggestions: SuggestionItems = [
 ];
 
 const Demo: React.FC = () => {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
 
   return (
     <Suggestion
@@ -37,19 +39,31 @@ const Demo: React.FC = () => {
     >
       {({ onTrigger, onKeyDown }) => {
         return (
-          <Sender
-            value={value}
-            onChange={(nextVal) => {
-              if (nextVal === '/') {
-                onTrigger();
-              } else if (!nextVal) {
-                onTrigger(false);
-              }
-              setValue(nextVal);
-            }}
-            onKeyDown={onKeyDown}
-            placeholder="输入 / 获取建议"
-          />
+          <>
+            {contextHolder}
+            <Sender
+              loading={loading}
+              value={value}
+              onSubmit={(value) => {
+                messageApi.success(`message send success: ${value}`);
+                setValue('');
+                setLoading(true);
+                setTimeout(() => {
+                  setLoading(false);
+                }, 3000);
+              }}
+              onChange={(nextVal) => {
+                if (nextVal === '/') {
+                  onTrigger();
+                } else if (!nextVal) {
+                  onTrigger(false);
+                }
+                setValue(nextVal);
+              }}
+              onKeyDown={onKeyDown}
+              placeholder="输入 / 获取建议"
+            />
+          </>
         );
       }}
     </Suggestion>

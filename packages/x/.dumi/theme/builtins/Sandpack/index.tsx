@@ -59,10 +59,10 @@ const Sandpack: React.FC<React.PropsWithChildren<SandpackProps>> = ({
     dependencies: {
       react: '^19.0.2',
       'react-dom': '^19.0.2',
-      antd: '^6.0.0-alpha.3',
-      '@ant-design/x': '^2.0.0-alpha.9',
-      '@ant-design/x-markdown': '^2.0.0-alpha.9',
-      '@ant-design/x-sdk': '^2.0.0-alpha.9',
+      antd: '^6.0.1',
+      '@ant-design/x': '^2.0.0',
+      '@ant-design/x-markdown': '^2.0.0',
+      '@ant-design/x-sdk': '^2.0.0',
       ...dependencies,
     },
     devDependencies: {

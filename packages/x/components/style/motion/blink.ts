@@ -32,18 +32,20 @@ export const blinkMotion = (
   return [
     blink,
     {
-      [motionCls]: {
-        backgroundClip: 'text',
-        color: token.colorTextBlinkDefault,
-        WebkitBackgroundClip: 'text', // For Safari
-        backgroundImage: `linear-gradient(90deg,transparent,${token.colorTextBlink},transparent)`,
-        animationDuration: '1s',
-        animationIterationCount: 'infinite',
-        animationTimingFunction: 'linear',
-        animationFillMode: 'forwards',
-        backgroundSize: '50%',
-        backgroundRepeat: 'no-repeat',
-        animationName: blink,
+      [token.componentCls]: {
+        [motionCls]: {
+          backgroundClip: 'text',
+          color: token.colorTextBlinkDefault,
+          WebkitBackgroundClip: 'text', // For Safari
+          backgroundImage: `linear-gradient(90deg,transparent,${token.colorTextBlink},transparent)`,
+          animationDuration: '1s',
+          animationIterationCount: 'infinite',
+          animationTimingFunction: 'linear',
+          animationFillMode: 'forwards',
+          backgroundSize: '50%',
+          backgroundRepeat: 'no-repeat',
+          animationName: blink,
+        },
       },
     },
   ];

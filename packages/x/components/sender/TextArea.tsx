@@ -111,9 +111,9 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
   };
 
   const onInternalKeyDown: React.KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
-    const canSubmit = e.key === 'Enter';
-    if (isCompositionRef.current || !canSubmit) {
-      onKeyDown?.(e as unknown as React.KeyboardEvent<HTMLTextAreaElement>);
+    const eventRes = onKeyDown?.(e);
+
+    if (isCompositionRef.current || e.key !== 'Enter' || eventRes === false) {
       return;
     }
 
@@ -132,8 +132,6 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
         }
         break;
     }
-
-    onKeyDown?.(e);
   };
 
   // ============================ Paste =============================

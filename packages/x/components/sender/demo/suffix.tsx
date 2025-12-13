@@ -36,7 +36,6 @@ const Demo: React.FC = () => {
       }}
       suffix={(_, info) => {
         const { SendButton, LoadingButton, ClearButton, SpeechButton } = info.components;
-
         return (
           <Space size="small">
             <Typography.Text style={{ whiteSpace: 'nowrap' }} type="secondary">
@@ -45,7 +44,20 @@ const Demo: React.FC = () => {
             <ClearButton />
             <SpeechButton />
             {loading ? (
-              <LoadingButton type="default" icon={<Spin size="small" />} disabled />
+              <LoadingButton
+                type="default"
+                icon={
+                  <Spin
+                    styles={{
+                      indicator: {
+                        color: '#fff',
+                      },
+                    }}
+                    size="small"
+                  />
+                }
+                disabled
+              />
             ) : (
               <SendButton type="primary" icon={<OpenAIOutlined />} disabled={false} />
             )}

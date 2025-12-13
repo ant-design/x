@@ -4,7 +4,7 @@ group:
   order: 5
 title: Think
 subtitle: 思考过程
-order: 2
+order: 4
 ---
 
 配合 [`Think`](../../components/think/index.zh-CN.md) 在流式过程中自动打开，流式结束后自动关闭。

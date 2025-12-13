@@ -369,7 +369,7 @@ exports[`renders components/sources/demo/inline.tsx correctly 1`] = `
   >
     <div
       aria-describedby="test-id"
-      class="ant-sources-title-wrapper"
+      class="ant-sources ant-sources-title-wrapper"
     >
       <span
         class="ant-sources-title"
@@ -399,7 +399,7 @@ exports[`renders components/sources/demo/inline.tsx correctly 1`] = `
           class="ant-popover-content"
         >
           <div
-            class="ant-sources-carousel-wrapper"
+            class="ant-sources-carousel-wrapper ant-sources css-var-_R_0_"
           >
             <div
               class="ant-sources-carousel-title"
@@ -571,7 +571,7 @@ exports[`renders components/sources/demo/inline.tsx correctly 1`] = `
   >
     <div
       aria-describedby="test-id"
-      class="ant-sources-title-wrapper"
+      class="ant-sources ant-sources-title-wrapper"
     >
       <span
         class="ant-sources-title"
@@ -601,7 +601,7 @@ exports[`renders components/sources/demo/inline.tsx correctly 1`] = `
           class="ant-popover-content"
         >
           <div
-            class="ant-sources-carousel-wrapper"
+            class="ant-sources-carousel-wrapper ant-sources css-var-_R_0_"
           >
             <div
               class="ant-sources-carousel-title"

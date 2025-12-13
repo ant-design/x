@@ -4,7 +4,7 @@ group:
   order: 5
 title: Sources
 subtitle: 来源应用
-order: 2
+order: 6
 ---
 
 配合 [`sources`](../../components/sources/index.zh-CN.md) 渲染来源引用。

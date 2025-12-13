@@ -69,10 +69,6 @@ const List: React.FC<FileCardListProps> = (props) => {
     cssVarCls,
     {
       [`${prefixCls}-rtl`]: direction === 'rtl',
-      [`${compCls}-overflow-${props.overflow}`]: overflow,
-      [`${compCls}-overflow-ping-start`]: pingStart,
-      [`${compCls}-overflow-ping-end`]: pingEnd,
-      [`${compCls}-small`]: size === 'small',
     },
   );
 
@@ -126,9 +122,14 @@ const List: React.FC<FileCardListProps> = (props) => {
   const { root, card: _, ...other } = styles;
 
   return (
-    <div className={`${compCls}-wrapper`}>
+    <div className={classnames(mergedCls)}>
       <div
-        className={mergedCls}
+        className={classnames(`${compCls}-content`, {
+          [`${compCls}-overflow-${props.overflow}`]: overflow,
+          [`${compCls}-overflow-ping-start`]: pingStart,
+          [`${compCls}-overflow-ping-end`]: pingEnd,
+          [`${compCls}-small`]: size === 'small',
+        })}
         dir={direction}
         style={{ ...style, ...styles?.root }}
         ref={containerRef}

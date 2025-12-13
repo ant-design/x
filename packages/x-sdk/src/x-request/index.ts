@@ -13,7 +13,7 @@ export interface XRequestCallbacks<Output> {
   /**
    * @description Callback when the request fails
    */
-  onError: (error: Error) => void;
+  onError: (error: Error, errorInfo?: any) => void;
 
   /**
    * @description Callback when the request is updated
@@ -341,7 +341,7 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
     if ((chunk as JSONOutPut)?.success === false) {
       const error = new Error((chunk as JSONOutPut).message || 'System error');
       error.name = (chunk as JSONOutPut).name || 'SystemError';
-      callbacks?.onError?.(error);
+      callbacks?.onError?.(error, chunk);
     } else {
       callbacks?.onUpdate?.(chunk, response.headers);
       this.finishRequest();

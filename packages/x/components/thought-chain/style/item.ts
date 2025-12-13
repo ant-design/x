@@ -9,21 +9,19 @@ const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (
   const { componentCls, calc } = token;
   const itemCls = `${componentCls}-item`;
   return {
-    [componentCls]: {
-      [`& ${componentCls}-status`]: {
+    [itemCls]: {
+      [`${componentCls}-status`]: {
         color: 'inherit',
       },
-      [`& ${componentCls}-status-error`]: {
+      [`${componentCls}-status-error`]: {
         color: token.colorError,
       },
-      [`& ${componentCls}-status-success`]: {
+      [`${componentCls}-status-success`]: {
         color: token.colorSuccess,
       },
-      [`& ${componentCls}-status-loading`]: {
+      [`${componentCls}-status-loading`]: {
         color: token.colorPrimary,
       },
-    },
-    [itemCls]: {
       display: 'inline-flex',
       gap: unit(calc(token.marginXXS).add(1).equal()),
       whiteSpace: 'normal',
@@ -85,28 +83,25 @@ const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (
       },
       [`&${itemCls}-click`]: {
         cursor: 'pointer',
-        '&-solid:hover': {
+        transition: `all ${token.motionDurationMid} ${token.motionEaseInOut}`,
+        [`&${itemCls}-solid:hover`]: {
           background: token.itemSolidHoverBg,
         },
       },
-      [`&${itemCls}-click`]: {
-        cursor: 'pointer',
-        transition: `all ${token.motionDurationMid}  ${token.motionEaseInOut}`,
-      },
-      [`& ${itemCls}-title`]: {
+      [`${itemCls}-title`]: {
         display: 'inline-block',
         whiteSpace: 'nowrap',
       },
-      [`& ${itemCls}-title-with-description`]: {
+      [`${itemCls}-title-with-description`]: {
         marginInlineEnd: token.marginXS,
       },
-      [`& ${itemCls}-description`]: {
+      [`${itemCls}-description`]: {
         color: token.colorTextDescription,
         display: 'inline-block',
         whiteSpace: 'break-spaces',
       },
-      [`& ${componentCls}-motion-blink`]: {
-        [`& ${itemCls}-description`]: {
+      [`${componentCls}-motion-blink`]: {
+        [`${itemCls}-description`]: {
           color: token.itemMotionDescription,
         },
       },

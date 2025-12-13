@@ -3,7 +3,7 @@ group:
   title: Components
   order: 5
 title: DataChart
-order: 3
+order: 5
 ---
 
 Works with [`GPT-VIS`](https://github.com/antvis/GPT-Vis) to display loading states during streaming and show final results after streaming completes.

@@ -1,17 +1,13 @@
 import type { LocaleComponentName as AntdLocaleContextProps } from 'antd/es/locale/useLocale';
 import defaultAntdEnUS from 'antd/locale/en_US';
 import * as React from 'react';
-import type { Locale, xLocale, xMarkdownLocale } from '.';
+import type { Locale, xLocale } from '.';
 import type { LocaleContextProps } from './context';
 import LocaleContext from './context';
 import defaultLocaleData from './en_US';
 
 type LocaleComponentName = Exclude<keyof xLocale, 'locale'>;
-type MarkdownComponentName = Exclude<keyof xMarkdownLocale, 'locale'>;
-type mergeLocaleComponentName =
-  | LocaleComponentName
-  | AntdLocaleContextProps
-  | MarkdownComponentName;
+type mergeLocaleComponentName = LocaleComponentName | AntdLocaleContextProps;
 const useLocale = <C extends mergeLocaleComponentName = LocaleComponentName>(
   componentName: C,
   defaultLocale?: Locale[C] | (() => Locale[C]),

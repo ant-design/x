@@ -23,30 +23,30 @@ const genBubbleListStyle: GenerateStyle<BubbleToken> = (token) => {
       [`& ${componentCls}-end:not(${componentCls}-divider):not(${componentCls}-system)`]: {
         paddingInlineStart: '15%',
       },
-    },
-    [`${componentCls}-list-scroll-box`]: {
-      overflowY: 'auto',
-      display: 'flex',
-      alignItems: 'center',
-      width: '100%',
-      scrollbarWidth: 'thin',
-      maxHeight: '100%',
-      flexDirection: 'column',
-      boxSizing: 'border-box',
-      paddingInline: token.paddingXS,
-      scrollbarColor: `${token.colorTextTertiary} transparent`,
-      '&::-webkit-scrollbar': {
-        width: 8,
-        backgroundColor: 'transparent',
-      },
+      [`${componentCls}-list-scroll-box`]: {
+        overflowY: 'auto',
+        display: 'flex',
+        alignItems: 'center',
+        width: '100%',
+        scrollbarWidth: 'thin',
+        maxHeight: '100%',
+        flexDirection: 'column',
+        boxSizing: 'border-box',
+        paddingInline: token.paddingXS,
+        scrollbarColor: `${token.colorTextTertiary} transparent`,
+        '&::-webkit-scrollbar': {
+          width: 8,
+          backgroundColor: 'transparent',
+        },
 
-      '&::-webkit-scrollbar-thumb': {
-        backgroundColor: token.colorTextTertiary,
-        borderRadius: token.borderRadiusSM,
+        '&::-webkit-scrollbar-thumb': {
+          backgroundColor: token.colorTextTertiary,
+          borderRadius: token.borderRadiusSM,
+        },
       },
-    },
-    [`${componentCls}-list-autoscroll`]: {
-      flexDirection: 'column-reverse',
+      [`${componentCls}-list-autoscroll`]: {
+        flexDirection: 'column-reverse',
+      },
     },
   };
 };

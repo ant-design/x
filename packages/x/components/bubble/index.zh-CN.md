@@ -8,8 +8,6 @@ subtitle: 对话气泡
 description: 用于聊天的气泡组件。
 cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*rHIYQIL1X-QAAAAAAAAAAAAADgCCAQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*uaGhTY1-LL0AAAAAAAAAAAAADgCCAQ/original
-demo:
-  cols: 1
 ---
 
 ## 何时使用
@@ -19,19 +17,19 @@ demo:
 ## 代码演示
 
 <!-- prettier-ignore -->
-<code src="./demo/basic.tsx">基本</code>
-<code src="./demo/variant-and-shape.tsx">变体与形状</code>
-<code src="./demo/sider-and-placement.tsx">边栏与位置</code>
-<code src="./demo/system.tsx">系统信息气泡</code>
-<code src="./demo/divider.tsx">分割线气泡</code>
-<code src="./demo/header.tsx">气泡头</code>
-<code src="./demo/footer.tsx">气泡尾</code>
-<code src="./demo/loading.tsx">加载中</code>
-<code src="./demo/animation.tsx">动画</code>
-<code src="./demo/stream.tsx">流式传输</code>
-<code src="./demo/custom-content.tsx">自定义渲染内容</code>
-<code src="./demo/markdown.tsx">渲染markdown内容</code>
-<code src="./demo/gpt-vis.tsx">使用 GPT-Vis 渲染图表</code>
+<code src="./demo/basic.tsx">基本</code> 
+<code src="./demo/variant-and-shape.tsx">变体与形状</code> 
+<code src="./demo/sider-and-placement.tsx">边栏与位置</code> 
+<code src="./demo/system.tsx">系统信息气泡</code> 
+<code src="./demo/divider.tsx">分割线气泡</code> 
+<code src="./demo/header.tsx">气泡头</code> 
+<code src="./demo/footer.tsx">气泡尾</code> 
+<code src="./demo/loading.tsx">加载中</code> 
+<code src="./demo/animation.tsx">动画</code> 
+<code src="./demo/stream.tsx">流式传输</code> 
+<code src="./demo/custom-content.tsx">自定义渲染内容</code> 
+<code src="./demo/markdown.tsx">渲染markdown内容</code> 
+<code src="./demo/gpt-vis.tsx">使用 GPT-Vis 渲染图表</code> 
 <code src="./demo/editable.tsx">可编辑气泡</code>
 
 ## 列表演示
@@ -56,19 +54,19 @@ demo:
 | loadingRender | 自定义加载内容渲染 | () => React.ReactNode | - | - | 
 | content | 气泡内容 | [ContentType](#contenttype) | - | - | 
 | contentRender | 自定义内容渲染 | (content: ContentType, info: InfoType ) => React.ReactNode | - | - | 
-| editable | 是否可编辑 | boolean \| [EditableBubbleOption](#editablebubbleoption) | `false` | - | 
+| editable | 是否可编辑 | boolean \| [EditableBubbleOption](#editablebubbleoption) | `false` | 2.0.0 | 
 | typing | 打字动画效果 |  boolean \| [BubbleAnimationOption](#bubbleanimationoption) \| ((content: ContentType, info: InfoType) => boolean \| [BubbleAnimationOption](#bubbleanimationoption)) | `false` | - | 
 | streaming | 是否为流式传输 | boolean | `false` | - | 
 | variant | 气泡样式变体 | `filled` \| `outlined` \| `shadow` \| `borderless` | `filled` | - | 
 | shape | 气泡形状 | `default` \| `round` \| `corner` | `default` | - | 
-| footerPlacement | 底部插槽位置 | `outer-start` \| `outer-end` \| `inner-start` \| `inner-end` | `outer-start` | - | 
+| footerPlacement | 底部插槽位置 | `outer-start` \| `outer-end` \| `inner-start` \| `inner-end` | `outer-start` | 2.0.0 | 
 | header | 头部插槽 | [BubbleSlot](#bubbleslot) | - | - |
 | footer | 底部插槽 | [BubbleSlot](#bubbleslot) | - | - |
 | avatar | 头像插槽 | [BubbleSlot](#bubbleslot) | - | - |
 | extra | 额外插槽 | [BubbleSlot](#bubbleslot) | - | - |
-| onTyping | 动画执行回调 | (rendererContent: string, currentContent: string) => void | - | - | 
+| onTyping | 动画执行回调 | (rendererContent: string, currentContent: string) => void | - | 2.0.0 | 
 | onTypingComplete | 动画结束回调 | (content: string) => void | - | - |
-| onEditing | 编辑态下内容变化时回调 | (content: string) => void | - | - |
+| onEditing | 编辑态下内容变化时回调 | (content: string) => void | - | 2.0.0 |
 
 #### ContentType
 

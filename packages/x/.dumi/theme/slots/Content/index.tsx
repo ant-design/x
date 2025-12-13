@@ -102,7 +102,7 @@ const Content: React.FC<React.PropsWithChildren> = ({ children }) => {
           </InViewSuspense>
           <div style={{ marginTop: 120 }}>
             <InViewSuspense fallback={<AvatarPlaceholder />}>
-              <Contributors filename={meta.frontmatter.filename} />
+              <Contributors filename={`packages/x/${meta.frontmatter.filename}`} />
             </InViewSuspense>
           </div>
         </article>

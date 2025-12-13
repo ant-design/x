@@ -81,6 +81,28 @@ exports[`renders components/bubble/demo/animation.tsx extend context correctly 1
           typing
         </span>
       </label>
+      <label
+        class="ant-radio-wrapper css-var-_r_3u_ ant-radio-css-var"
+      >
+        <span
+          class="ant-radio ant-wave-target"
+        >
+          <input
+            class="ant-radio-input"
+            name="test-id"
+            type="radio"
+            value="custom-typing"
+          />
+          <span
+            class="ant-radio-inner"
+          />
+        </span>
+        <span
+          class="ant-radio-label"
+        >
+          typing with 💖 
+        </span>
+      </label>
     </div>
   </div>
   <div
@@ -118,13 +140,13 @@ exports[`renders components/bubble/demo/animation.tsx extend context correctly 1
     class="ant-flex css-var-_r_3u_ ant-flex-align-center ant-flex-gap-small"
   >
     <div
-      class="ant-bubble css-var-_r_3u_ ant-bubble-start ant-bubble-loading"
+      class="ant-bubble css-var-_r_40_ ant-bubble-start ant-bubble-loading"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_3u_ ant-avatar-css-var"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_40_ ant-avatar-css-var"
         >
           <span
             aria-label="user"
@@ -225,7 +247,7 @@ exports[`renders components/bubble/demo/basic.tsx extend context correctly 1`] =
           class="ant-actions-list ant-actions-variant-borderless"
         >
           <span
-            class="ant-actions-copy ant-actions-copy css-var-_r_3n_ ant-actions-item css-var-_r_3n_"
+            class="ant-actions-copy ant-actions-item ant-actions-copy css-var-_r_3n_ css-var-_r_3n_"
           >
             <button
               aria-describedby="test-id"
@@ -406,7 +428,7 @@ exports[`renders components/bubble/demo/divider.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble ant-bubble-divider css-var-_r_3l_ ant-bubble-start"
+    class="ant-bubble css-var-_r_3l_ ant-bubble ant-bubble-divider css-var-_r_3l_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -447,7 +469,7 @@ exports[`renders components/bubble/demo/divider.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble ant-bubble-divider css-var-_r_3l_ ant-bubble-start"
+    class="ant-bubble css-var-_r_3l_ ant-bubble ant-bubble-divider css-var-_r_3l_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -488,7 +510,7 @@ exports[`renders components/bubble/demo/divider.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble ant-bubble-divider css-var-_r_3l_ ant-bubble-start"
+    class="ant-bubble css-var-_r_3l_ ant-bubble ant-bubble-divider css-var-_r_3l_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -529,7 +551,7 @@ exports[`renders components/bubble/demo/divider.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble ant-bubble-divider css-var-_r_3l_ ant-bubble-start"
+    class="ant-bubble css-var-_r_3l_ ant-bubble ant-bubble-divider css-var-_r_3l_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -1633,6 +1655,9 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
       class="ant-bubble-list-scroll-box ant-bubble-list-autoscroll"
     >
       <div
+        style="bottom: 0px; flex-shrink: 0; pointer-events: none; height: 10px; visibility: hidden;"
+      />
+      <div
         class="ant-bubble css-var-_r_f_ ant-bubble-start ant-bubble-loading"
       >
         <div
@@ -1782,7 +1807,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
         </div>
       </div>
       <div
-        class="ant-bubble ant-bubble ant-bubble-divider css-var-_r_f_ ant-bubble-start"
+        class="ant-bubble css-var-_r_f_ ant-bubble ant-bubble-divider css-var-_r_f_ ant-bubble-start"
       >
         <div
           class="ant-bubble-body"
@@ -2068,7 +2093,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
         </div>
       </div>
       <div
-        class="ant-bubble ant-bubble-system ant-bubble css-var-_r_f_ ant-bubble-start"
+        class="ant-bubble css-var-_r_f_ ant-bubble-system ant-bubble css-var-_r_f_ ant-bubble-start"
       >
         <div
           class="ant-bubble-body"
@@ -2164,7 +2189,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
               class="ant-actions-list ant-actions-variant-borderless"
             >
               <span
-                class="ant-actions-copy ant-actions-copy css-var-_r_1r_ ant-actions-item css-var-_r_1r_"
+                class="ant-actions-copy ant-actions-item ant-actions-copy css-var-_r_1r_ css-var-_r_1r_"
               >
                 <button
                   aria-describedby="test-id"
@@ -2301,7 +2326,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
               class="ant-actions-list ant-actions-variant-borderless"
             >
               <span
-                class="ant-actions-copy ant-actions-copy css-var-_r_1r_ ant-actions-item css-var-_r_1r_"
+                class="ant-actions-copy ant-actions-item ant-actions-copy css-var-_r_1r_ css-var-_r_1r_"
               >
                 <button
                   aria-describedby="test-id"
@@ -2437,7 +2462,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
               class="ant-actions-list ant-actions-variant-borderless"
             >
               <span
-                class="ant-actions-copy ant-actions-copy css-var-_r_1r_ ant-actions-item css-var-_r_1r_"
+                class="ant-actions-copy ant-actions-item ant-actions-copy css-var-_r_1r_ css-var-_r_1r_"
               >
                 <button
                   aria-describedby="test-id"
@@ -2573,7 +2598,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
               class="ant-actions-list ant-actions-variant-borderless"
             >
               <span
-                class="ant-actions-copy ant-actions-copy css-var-_r_1r_ ant-actions-item css-var-_r_1r_"
+                class="ant-actions-copy ant-actions-item ant-actions-copy css-var-_r_1r_ css-var-_r_1r_"
               >
                 <button
                   aria-describedby="test-id"
@@ -2741,6 +2766,9 @@ exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly
     <div
       class="ant-bubble-list-scroll-box ant-bubble-list-autoscroll"
     >
+      <div
+        style="bottom: 0px; flex-shrink: 0; pointer-events: none; height: 10px; visibility: hidden;"
+      />
       <div
         class="ant-bubble css-var-_r_s_ ant-bubble-end"
       >
@@ -3867,8 +3895,7 @@ exports[`renders components/bubble/demo/markdown.tsx extend context correctly 1`
             class="ant-typography css-var-_r_d_"
           >
             <div
-              class="ant-x-markdown x-markdown"
-              style="direction: ltr;"
+              class="x-markdown"
             >
               <blockquote>
                 <p>
@@ -4463,7 +4490,7 @@ exports[`renders components/bubble/demo/system.tsx extend context correctly 1`] 
   style="gap: 16px;"
 >
   <div
-    class="ant-bubble ant-bubble-system ant-bubble css-var-_r_1_ ant-bubble-start"
+    class="ant-bubble css-var-_r_1_ ant-bubble-system ant-bubble css-var-_r_1_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -4476,7 +4503,7 @@ exports[`renders components/bubble/demo/system.tsx extend context correctly 1`] 
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-system ant-bubble css-var-_r_1_ ant-bubble-start"
+    class="ant-bubble css-var-_r_1_ ant-bubble-system ant-bubble css-var-_r_1_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"
@@ -4506,7 +4533,7 @@ exports[`renders components/bubble/demo/system.tsx extend context correctly 1`] 
     </div>
   </div>
   <div
-    class="ant-bubble ant-bubble-system ant-bubble css-var-_r_1_ ant-bubble-start"
+    class="ant-bubble css-var-_r_1_ ant-bubble-system ant-bubble css-var-_r_1_ ant-bubble-start"
   >
     <div
       class="ant-bubble-body"

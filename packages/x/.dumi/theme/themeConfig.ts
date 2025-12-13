@@ -46,5 +46,7 @@ export default {
     模板文档: 3,
     'Template Document': 3,
   },
-  docVersions: {},
+  docVersions: {
+    '1.x': 'https://1x-ant-design-x.antgroup.com',
+  },
 };

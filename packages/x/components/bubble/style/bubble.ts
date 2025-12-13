@@ -46,6 +46,7 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
   const {
     componentCls,
     fontSize,
+    typingContent,
     typingAnimationDuration,
     typingAnimationName,
     lineHeight,
@@ -67,13 +68,14 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
           alignItems: 'center',
         },
 
-        [`& ${componentCls}-body`]: {
+        [`${componentCls}-body`]: {
           display: 'flex',
           flexDirection: 'column',
+          maxWidth: '100%',
         },
 
         // =========================== Content =============================
-        [`& ${componentCls}-content`]: {
+        [`${componentCls}-content`]: {
           position: 'relative',
           boxSizing: 'border-box',
           minWidth: 0,
@@ -89,8 +91,8 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
             whiteSpace: 'pre-wrap',
           },
         },
-        '&-typing:last-child::after': {
-          content: '"|"',
+        [`${componentCls}-typing:last-child::after`]: {
+          content: typingContent,
           fontWeight: 900,
           userSelect: 'none',
           opacity: 1,
@@ -100,15 +102,14 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
           animationIterationCount: 'infinite',
           animationTimingFunction: 'linear',
         },
-
-        '&-fade-in .fade-in': {
+        [`${componentCls}-fade-in .fade-in`]: {
           display: 'inline',
           animationName: fadeIn,
           animationDuration: '1s',
           animationTimingFunction: 'linear',
         },
 
-        [`& ${componentCls}-dot`]: {
+        [`${componentCls}-dot`]: {
           position: 'relative',
           height: token.controlHeight,
           display: 'flex',
@@ -138,7 +139,7 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
         },
 
         // ======================== placement ============================
-        '&-start': {
+        [`&${componentCls}-start`]: {
           flexDirection: 'row',
 
           [`& ${componentCls}-header`]: {
@@ -146,7 +147,7 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
           },
         },
 
-        '&-end': {
+        [`&${componentCls}-end`]: {
           flexDirection: 'row-reverse',
           justifySelf: 'flex-end',
 

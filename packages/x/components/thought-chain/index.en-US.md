@@ -7,8 +7,7 @@ title: ThoughtChain
 description: The ThoughtChain component is used to visualize and track the call chain of an Agent to Actions and Tools.
 cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*GaspS5T6proAAAAAAAAAAAAADgCCAQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*siL-Qpl794sAAAAAAAAAAAAADgCCAQ/original
-demo:
-  cols: 1
+tag: 2.0.0
 ---
 
 ## When to use

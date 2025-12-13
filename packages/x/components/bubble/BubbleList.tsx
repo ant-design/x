@@ -7,6 +7,7 @@ import { useXProviderContext } from '../x-provider';
 import Bubble from './Bubble';
 import { BubbleContext } from './context';
 import DividerBubble from './Divider';
+import { useCompatibleScroll } from './hooks/useCompatibleScroll';
 import {
   BubbleItemType,
   BubbleListProps,
@@ -138,6 +139,8 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
 
   const bubblesRef = React.useRef<BubblesRecord>({});
 
+  const { reset } = useCompatibleScroll(autoScroll ? scrollBoxRef.current : null);
+
   // ============================ Prefix ============================
   const { getPrefixCls } = useXProviderContext();
 
@@ -165,8 +168,9 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   const lastItemKey = items[items.length - 1]?.key || items.length;
   React.useEffect(() => {
     if (!scrollBoxRef.current) return;
+    reset();
     scrollBoxRef.current?.scrollTo({ top: autoScroll ? 0 : scrollBoxRef.current.scrollHeight });
-  }, [lastItemKey, autoScroll]);
+  }, [lastItemKey, autoScroll, reset]);
 
   // ============================= Refs =============================
   useProxyImperativeHandle(ref, () => {

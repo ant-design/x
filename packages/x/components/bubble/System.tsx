@@ -4,6 +4,7 @@ import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 import Bubble from './Bubble';
 import type { BubbleContentType, BubbleRef, SystemBubbleProps } from './interface';
+import useStyle from './style';
 
 const SystemBubble: React.ForwardRefRenderFunction<BubbleRef, SystemBubbleProps> = (
   {
@@ -26,10 +27,13 @@ const SystemBubble: React.ForwardRefRenderFunction<BubbleRef, SystemBubbleProps>
   // ============================ Prefix ============================
   const { getPrefixCls } = useXProviderContext();
   const prefixCls = getPrefixCls('bubble', customizePrefixCls);
+  const [hashId, cssVarCls] = useStyle(prefixCls);
 
   // ============================ Styles ============================
   const cls = `${prefixCls}-system`;
   const rootMergedCls = classnames(
+    hashId,
+    cssVarCls,
     cls,
     prefixCls,
     contextConfig.className,

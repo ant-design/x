@@ -9,12 +9,15 @@ import { getLocalizedPathname } from '../../utils';
 
 import type { SharedProps } from './interface';
 
+const zhHrefOrigin = 'https://ant-design-x.antgroup.com';
+
 const locales = {
   cn: {
     design: '设计',
     development: '研发',
     components: '组件',
     playground: '演示',
+    zhUrl: '国内镜像',
     blog: '博客',
     sdk: 'X SDK',
     markdown: 'X Markdown',
@@ -25,6 +28,7 @@ const locales = {
     development: 'Development',
     components: 'Components',
     playground: 'Playground',
+    zhUrl: '',
     blog: 'Blog',
     sdk: 'X SDK',
     markdown: 'X Markdown',
@@ -140,6 +144,8 @@ const HeaderNavigation: React.FC<HeaderNavigationProps> = (props) => {
 
   const blogList = sidebarData['/docs/blog']?.[0]?.children || [];
 
+  const origin = typeof location !== 'undefined' ? location.origin : '';
+
   const items = React.useMemo(() => {
     const navItems = [...defaultItems];
 
@@ -157,7 +163,7 @@ const HeaderNavigation: React.FC<HeaderNavigationProps> = (props) => {
   React.useEffect(() => {
     if (!items.length || !pathname) return;
 
-    const activeIndex = items.findIndex((item) => pathname.includes(item.basePath));
+    const activeIndex = items.findIndex((item) => pathname.includes(item.basePath!));
 
     if (activeIndex === -1) {
       setActiveKey(undefined);
@@ -188,6 +194,9 @@ const HeaderNavigation: React.FC<HeaderNavigationProps> = (props) => {
           {locale[item.key as keyof typeof locale]}
         </Link>
       ))}
+      {isZhCN && origin !== zhHrefOrigin && (
+        <a href={`${zhHrefOrigin}/index-cn`}>{locale['zhUrl']}</a>
+      )}
     </nav>
   );
 };
