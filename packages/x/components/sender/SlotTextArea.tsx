@@ -156,6 +156,13 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const getSlotDom = (key: string): HTMLSpanElement | undefined => {
     return slotDomMap.current.get(key);
   };
+  const getSlotLastDom = (slotKey: string, slotType?: SlotConfigBaseType['type']) => {
+    const mergeSlotType = slotType ?? slotConfigMap.get(slotKey)?.type;
+    if (mergeSlotType === 'content') {
+      return getSlotDom(`${slotKey}_after`);
+    }
+    return skillDomRef.current;
+  };
   const updateSlot = (key: string, value: any, e?: EventType) => {
     const slotDom = getSlotDom(key);
     const node = slotConfigMap.get(key);
@@ -272,12 +279,17 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         let slotDom: HTMLSpanElement;
         if (config.type === 'content') {
           slotDom = buildEditSlotSpan(config);
-          slotSpan = [buildSpaceSpan(slotKey, 'before'), slotDom, buildSpaceSpan(slotKey, 'after')];
+          const before = buildSpaceSpan(slotKey, 'before');
+          const after = buildSpaceSpan(slotKey, 'after');
+          slotSpan = [before, slotDom, after];
+          saveSlotDom(`${slotKey}_before`, before);
+          saveSlotDom(slotKey, slotDom);
+          saveSlotDom(`${slotKey}_after`, after);
         } else {
           slotDom = buildSlotSpan(slotKey);
           slotSpan = [slotDom];
+          saveSlotDom(slotKey, slotDom);
         }
-        saveSlotDom(slotKey, slotDom);
         if (slotDom) {
           const reactNode = renderSlot(config, slotDom);
           if (reactNode) {
@@ -433,6 +445,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     type: 'box' | 'slot' | 'end' | 'start' | 'content';
     slotType?: SlotConfigBaseType['type'];
     range?: Range;
+    slotKey?: string;
     selection: Selection | null;
   } => {
     const selection = window?.getSelection?.();
@@ -465,7 +478,13 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const { slotKey, slotConfig } = getNodeInfo(container) || {};
 
     if (slotKey || slotKey) {
-      return { type: 'slot', slotType: slotConfig?.type, range, selection };
+      return {
+        type: 'slot',
+        slotKey: slotConfig?.key,
+        slotType: slotConfig?.type,
+        range,
+        selection,
+      };
     }
 
     const isInEditableBox = editableDom.contains(range.endContainer);
@@ -645,7 +664,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       focus({ cursor: 'end' });
     } catch (error) {
       // 静默处理可能的DOM操作错误
-      console.warn('Failed to handle skill area key event:', error);
+      warning(false, `Failed to handle skill area key event:${error}`);
     }
   };
 
@@ -775,8 +794,9 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     mergeSlotConfig(slotConfig);
     const slotNode = getSlotListNode(slotConfig);
 
-    const { type, slotType, range: lastRage, selection } = getInsertPosition(position);
+    const { type, slotType, slotKey, range: lastRage, selection } = getInsertPosition(position);
     let range: Range | null = null;
+    if (!selection) return;
     if (type === 'end') {
       const lastNode = editableDom.childNodes[editableDom.childNodes.length - 1];
       if (lastNode.nodeType === Node.TEXT_NODE && lastNode.textContent === '\n') {
@@ -796,18 +816,13 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         getEditorValue().skill ? 1 : 0,
       ).range;
     }
+    if (type === 'slot') {
+      range = selection.getRangeAt?.(0) || null;
+    }
     if (type === 'box') {
       range = lastRage as Range;
     }
-    if (type === 'slot' && selection) {
-      range = selection.getRangeAt?.(0) || null;
-      if (slotType !== 'content') {
-        if (selection.focusNode) {
-          range?.setStartAfter(selection.focusNode);
-        }
-      }
-    }
-    if (!selection || !range) return;
+    if (!range) return;
     // 如果光标前有字符
 
     if (replaceCharacters?.length) {
@@ -825,10 +840,20 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         }
       }
     }
-    selection.deleteFromDocument();
 
-    [...slotNode].reverse().forEach((node) => {
-      range?.insertNode(node);
+    selection.deleteFromDocument();
+    [...slotNode].forEach((node) => {
+      if (
+        type === 'slot' &&
+        (slotType !== 'content' || node.nodeType !== Node.TEXT_NODE) &&
+        slotKey
+      ) {
+        range?.setStartAfter(getSlotLastDom(slotKey) as HTMLSpanElement);
+        range?.insertNode(node);
+      } else {
+        range?.insertNode(node);
+        range?.setStartAfter(node);
+      }
     });
 
     setAfterNodeFocus(

@@ -134,7 +134,10 @@ const App: React.FC = () => {
         </Button>
         <Button
           onClick={() => {
-            senderRef.current?.insert?.([{ type: 'text', value: ' some text ' }]);
+            senderRef.current?.insert?.([
+              { type: 'text', value: ' some text ' },
+              { type: 'content', key: `partner_3_${Date.now()}`, props: { defaultValue: '11' } },
+            ]);
           }}
         >
           Insert Text
