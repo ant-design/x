@@ -15,7 +15,11 @@ interface UseCursorOptions {
 interface UseCursorReturn {
   setEndCursor: (targetNode: HTMLDivElement | null, preventScroll?: boolean) => void;
   setStartCursor: (targetNode: HTMLDivElement | null, preventScroll?: boolean) => void;
-  setAllSelectCursor: (targetNode: HTMLDivElement | null, preventScroll?: boolean) => void;
+  setAllSelectCursor: (
+    targetNode: HTMLDivElement | null,
+    skillDom: HTMLDivElement | null,
+    preventScroll?: boolean,
+  ) => void;
   setCursorPosition: (
     targetNode: HTMLDivElement | null,
     editableNode: HTMLDivElement | null,
@@ -137,7 +141,7 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
   );
 
   const setAllSelectCursor: UseCursorReturn['setAllSelectCursor'] = useCallback(
-    (targetNode, preventScroll): void => {
+    (targetNode, skillDom, preventScroll): void => {
       if (!targetNode) {
         return;
       }
@@ -148,6 +152,10 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
       if (range && selection) {
         try {
           range.selectNodeContents(targetNode);
+          if (skillDom) {
+            range.setStart(targetNode, 1);
+          }
+
           setRange(range, selection);
         } catch (error) {
           warning(false, 'Sender', `Failed to select all content: ${error}`);

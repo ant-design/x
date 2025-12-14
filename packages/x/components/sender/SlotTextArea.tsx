@@ -88,7 +88,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const isCompositionRef = useRef<boolean>(false);
   const keyLockRef = useRef<boolean>(false);
   const lastSelectionRef = useRef<Range | null>(null);
-  const skillDomRef = useRef<HTMLSpanElement>(null);
+  const skillDomRef = useRef<HTMLDivElement>(null);
   const skillRef = useRef<SkillType>(null);
   const submitDisabledRef = useRef<boolean>(false);
 
@@ -664,6 +664,13 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       return;
     }
 
+    // 处理全选
+    if (e.key === 'a' && e.metaKey) {
+      setAllSelectCursor(editableRef.current, skillDomRef.current);
+      e.preventDefault();
+      return;
+    }
+
     // 处理skill区域的键盘事件
     handleSkillAreaKeyEvent();
   };
@@ -831,7 +838,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         setStartCursor(editableRef.current, mergeOptions.preventScroll);
         break;
       case 'all':
-        setAllSelectCursor(editableRef.current, mergeOptions.preventScroll);
+        setAllSelectCursor(editableRef.current, skillDomRef.current, mergeOptions.preventScroll);
         break;
       case 'end':
         setEndCursor(editableRef.current, mergeOptions.preventScroll);
