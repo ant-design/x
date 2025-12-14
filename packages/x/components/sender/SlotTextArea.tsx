@@ -74,7 +74,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     onBlur,
     slotConfig,
     skill,
-    submitDisabled,
     ...restProps
   } = React.useContext(SenderContext);
   // ============================= MISC =============================
@@ -854,10 +853,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   };
 
   // ============================ Effects =============================
-
-  useEffect(() => {
-    submitDisabledRef.current = submitDisabled ?? false;
-  }, [submitDisabled]);
 
   useEffect(() => {
     initRenderSlot();

@@ -40,7 +40,6 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
     classNames = {},
     autoSize,
     components,
-    submitDisabled,
     triggerSend,
     placeholder,
     onFocus,
@@ -128,9 +127,7 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
 
       if (shouldSubmit) {
         e.preventDefault();
-        if (!submitDisabled) {
-          triggerSend?.();
-        }
+        triggerSend?.();
         return;
       }
     }
