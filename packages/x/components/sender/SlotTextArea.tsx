@@ -88,9 +88,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const isCompositionRef = useRef<boolean>(false);
   const keyLockRef = useRef<boolean>(false);
   const lastSelectionRef = useRef<Range | null>(null);
-  const skillDomRef = useRef<HTMLDivElement>(null);
+  const skillDomRef = useRef<HTMLSpanElement>(null);
   const skillRef = useRef<SkillType>(null);
-  const submitDisabledRef = useRef<boolean>(false);
 
   // ============================ Style =============================
 
@@ -565,17 +564,22 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
    * 处理退格键删除逻辑
    */
   const handleBackspaceKey = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.target !== editableRef.current) return;
-
+    if (!editableRef.current) return false;
     const selection = window.getSelection();
-    if (!selection) return;
+    if (!selection || selection.rangeCount === 0) return false;
 
     const { focusOffset, anchorNode } = selection;
 
+    // 确保锚节点存在且在可编辑区域内
+    if (!anchorNode || !editableRef.current.contains(anchorNode)) {
+      return false;
+    }
+
     // 处理删除单个字符的slot
-    if (focusOffset === 1) {
-      const slotKey = (anchorNode?.parentNode as Element)?.getAttribute?.('data-slot-key');
-      if (slotKey && anchorNode?.parentNode && anchorNode.textContent?.length === 1) {
+    if (focusOffset === 1 && anchorNode.nodeType === Node.TEXT_NODE) {
+      const parentElement = anchorNode.parentNode as Element;
+      const slotKey = parentElement?.getAttribute?.('data-slot-key');
+      if (slotKey && anchorNode.textContent?.length === 1) {
         e.preventDefault();
         (anchorNode.parentNode as HTMLElement).innerHTML = '';
         return true;
@@ -584,18 +588,21 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
     // 处理删除整个slot或skill
     if (focusOffset === 0) {
-      const nodeInfo = getNodeInfo(anchorNode?.previousSibling as HTMLElement);
-      if (nodeInfo) {
-        const { slotKey, skillKey } = nodeInfo;
-        if (slotKey) {
-          e.preventDefault();
-          removeSlot(slotKey, e as unknown as EventType);
-          return true;
-        }
-        if (skillKey) {
-          e.preventDefault();
-          removeSkill();
-          return true;
+      const previousSibling = anchorNode.previousSibling;
+      if (previousSibling) {
+        const nodeInfo = getNodeInfo(previousSibling as HTMLElement);
+        if (nodeInfo) {
+          const { slotKey, skillKey } = nodeInfo;
+          if (slotKey) {
+            e.preventDefault();
+            removeSlot(slotKey, e as unknown as EventType);
+            return true;
+          }
+          if (skillKey) {
+            e.preventDefault();
+            removeSkill();
+            return true;
+          }
         }
       }
     }
@@ -621,14 +628,25 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
    * 处理skill区域的键盘事件
    */
   const handleSkillAreaKeyEvent = () => {
-    if (!skillDomRef.current) return;
+    if (!skillDomRef.current || !editableRef.current) return;
 
     const selection = window.getSelection();
-    if (!selection?.anchorNode || !skillDomRef.current.contains(selection.anchorNode)) return;
+    if (!selection?.anchorNode) return;
 
-    skillDomRef.current.setAttribute('contenteditable', 'false');
-    skillDomRef.current.classList.remove(`${prefixCls}-skill-empty`);
-    focus({ cursor: 'end' });
+    // 确保选择节点在skill区域内
+    if (!skillDomRef.current.contains(selection.anchorNode)) return;
+
+    // 确保选择节点在可编辑区域内
+    if (!editableRef.current.contains(selection.anchorNode)) return;
+
+    try {
+      skillDomRef.current.setAttribute('contenteditable', 'false');
+      skillDomRef.current.classList.remove(`${prefixCls}-skill-empty`);
+      focus({ cursor: 'end' });
+    } catch (error) {
+      // 静默处理可能的DOM操作错误
+      console.warn('Failed to handle skill area key event:', error);
+    }
   };
 
   // ============================ Events =============================
@@ -649,6 +667,11 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       return;
     }
 
+    // 确保事件目标是可编辑区域
+    if (e.target !== editableRef.current && !editableRef.current?.contains(e.target as Node)) {
+      return;
+    }
+
     // 处理退格键
     if (e.key === 'Backspace') {
       if (handleBackspaceKey(e)) return;
@@ -657,15 +680,13 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     // 处理Enter键提交
     if (shouldSubmitForm(e)) {
       e.preventDefault();
-      if (!submitDisabledRef.current) {
-        keyLockRef.current = true;
-        triggerSend?.();
-      }
+      keyLockRef.current = true;
+      triggerSend?.();
       return;
     }
 
-    // 处理全选
-    if (e.key === 'a' && e.metaKey) {
+    // 处理全选 (支持 Ctrl+A 和 Cmd+A)
+    if (e.key === 'a' && (e.ctrlKey || e.metaKey) && !e.shiftKey && !e.altKey) {
       setAllSelectCursor(editableRef.current, skillDomRef.current);
       e.preventDefault();
       return;

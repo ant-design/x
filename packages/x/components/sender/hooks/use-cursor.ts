@@ -17,7 +17,7 @@ interface UseCursorReturn {
   setStartCursor: (targetNode: HTMLDivElement | null, preventScroll?: boolean) => void;
   setAllSelectCursor: (
     targetNode: HTMLDivElement | null,
-    skillDom: HTMLDivElement | null,
+    skillDom: HTMLSpanElement | null,
     preventScroll?: boolean,
   ) => void;
   setCursorPosition: (
