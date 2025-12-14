@@ -161,7 +161,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     if (mergeSlotType === 'content') {
       return getSlotDom(`${slotKey}_after`);
     }
-    return skillDomRef.current;
+    return getSlotDom(slotKey);
   };
   const updateSlot = (key: string, value: any, e?: EventType) => {
     const slotDom = getSlotDom(key);
@@ -816,7 +816,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         getEditorValue().skill ? 1 : 0,
       ).range;
     }
-    if (type === 'slot') {
+    if (type === 'slot' && slotKey) {
       range = selection.getRangeAt?.(0) || null;
     }
     if (type === 'box') {
@@ -842,18 +842,19 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
 
     selection.deleteFromDocument();
-    [...slotNode].forEach((node) => {
+    let isJump = true;
+    slotNode.forEach((node) => {
       if (
+        isJump &&
         type === 'slot' &&
         (slotType !== 'content' || node.nodeType !== Node.TEXT_NODE) &&
         slotKey
       ) {
+        isJump = false;
         range?.setStartAfter(getSlotLastDom(slotKey) as HTMLSpanElement);
-        range?.insertNode(node);
-      } else {
-        range?.insertNode(node);
-        range?.setStartAfter(node);
       }
+      range?.insertNode(node);
+      range?.setStartAfter(node);
     });
 
     setAfterNodeFocus(
