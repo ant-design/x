@@ -84,6 +84,7 @@ const useSlotConfigState = (
   // 初始化 slotConfig
   useEffect(() => {
     if (!slotConfig) return;
+    slotConfigMapRef.current.clear();
     buildSlotConfigMap(slotConfig, slotConfigMapRef.current);
     const newValues = buildSlotValues(slotConfig);
     _setState(newValues);
