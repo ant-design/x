@@ -45,6 +45,7 @@ interface UseCursorReturn {
     startContainer: Node | null;
     startOffset: number;
   };
+  removeAllRanges: () => void;
 }
 
 const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
@@ -83,6 +84,19 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
       warning(false, 'Sender', `Failed to set range: ${error}`);
     }
   }, []);
+
+  const removeAllRanges = useCallback(() => {
+    const selection = getSelection();
+    if (!selection) {
+      return;
+    }
+
+    try {
+      selection.removeAllRanges();
+    } catch (error) {
+      warning(false, 'Sender', `Failed to remove all ranges: ${error}`);
+    }
+  }, [getSelection]);
 
   const focus = useCallback((targetNode: HTMLDivElement, preventScroll = false): void => {
     if (!targetNode || typeof targetNode.focus !== 'function') {
@@ -317,6 +331,7 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
     setSlotFocus,
     getTextBeforeCursor,
     getSelection,
+    removeAllRanges,
     getRange,
   };
 };

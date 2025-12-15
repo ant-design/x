@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { SlotConfigType } from '../../sender';
+import type { SlotConfigType } from '../interface';
 
 interface NodeInfo {
   slotKey?: string;
@@ -74,6 +74,7 @@ const useSlotConfigState = (
     setSlotValues: React.Dispatch<React.SetStateAction<SlotValues>>;
     mergeSlotConfig: (newSlotConfig: SlotConfigType[]) => void;
     getNodeInfo: (targetNode: HTMLElement) => NodeInfo | null;
+    getNodeTextValue: (node: Node) => string;
   },
 ] => {
   const [state, _setState] = useState<SlotValues>({});
@@ -112,6 +113,48 @@ const useSlotConfigState = (
     [],
   );
 
+  const getNodeTextValue = (node: Node): string => {
+    const nodeType = node.nodeType;
+
+    if (nodeType === Node.TEXT_NODE) {
+      return node.textContent || '';
+    }
+
+    if (nodeType !== Node.ELEMENT_NODE) {
+      return '';
+    }
+
+    const element = node as HTMLElement;
+    const nodeInfo = getNodeInfo(element);
+
+    // 无节点信息，直接返回文本内容
+    if (!nodeInfo) {
+      return element.innerText || '';
+    }
+
+    const { slotKey, skillKey, nodeType: infoNodeType, slotConfig } = nodeInfo;
+    if (skillKey) {
+      return '';
+    }
+
+    // 缓存文本内容，避免重复获取
+    const textContent = element.innerText || '';
+
+    // 处理 slot 节点
+    if (slotKey) {
+      if (infoNodeType === 'nbsp') {
+        return ' ';
+      }
+      if (!slotConfig || slotConfig.type === 'content') {
+        return textContent;
+      }
+      const slotValue = stateRef.current[slotKey] ?? '';
+      return slotConfig.formatResult?.(slotValue) ?? slotValue;
+    }
+
+    return textContent;
+  };
+
   return [
     slotConfigMapRef.current,
     {
@@ -119,6 +162,7 @@ const useSlotConfigState = (
       setSlotValues: setState,
       mergeSlotConfig,
       getNodeInfo,
+      getNodeTextValue,
     },
   ];
 };
