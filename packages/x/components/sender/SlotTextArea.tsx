@@ -456,6 +456,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       triggerValueChange();
     }
   };
+
   // 移除<br>标签（仅在enter模式下）
   const removeSpecificBRs = (element: HTMLDivElement | null) => {
     if (submitType !== 'enter' || !element) return;
@@ -463,7 +464,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       br.remove();
     });
   };
-
   const initRenderSlot = () => {
     if (slotConfig && slotConfig.length > 0 && editableRef.current) {
       initClear();
@@ -471,30 +471,21 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
   };
 
-  /**
-   * 检查是否应该跳过键盘事件处理
-   */
+  // 检查是否应该跳过键盘事件处理
   const shouldSkipKeyHandling = (e: React.KeyboardEvent<HTMLDivElement>): boolean => {
     const eventRes = onKeyDown?.(e);
     return keyLockRef.current || isCompositionRef.current || eventRes === false;
   };
 
-  /**
-   * 处理退格键删除逻辑
-   */
+  // 处理退格键删除逻辑
   const handleBackspaceKey = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (!editableRef.current) return false;
     const selection = window.getSelection();
     if (!selection || selection.rangeCount === 0) return false;
-
     const { focusOffset, anchorNode } = selection;
-
-    // 确保锚节点存在且在可编辑区域内
     if (!anchorNode || !editableRef.current.contains(anchorNode)) {
       return false;
     }
-
-    // 处理删除单个字符的slot
     if (focusOffset === 1 && anchorNode.nodeType === Node.TEXT_NODE) {
       const parentElement = anchorNode.parentNode as Element;
       const slotKey = parentElement?.getAttribute?.('data-slot-key');
@@ -504,8 +495,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         return true;
       }
     }
-
-    // 处理删除整个slot或skill
     if (focusOffset === 0) {
       const previousSibling = anchorNode.previousSibling;
       if (previousSibling) {
@@ -525,13 +514,10 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         }
       }
     }
-
     return false;
   };
 
-  /**
-   * 检查是否应该提交表单
-   */
+  // 检查是否应该提交表单
   const shouldSubmitForm = (e: React.KeyboardEvent<HTMLDivElement>): boolean => {
     const { key, shiftKey, ctrlKey, altKey, metaKey } = e;
     if (key !== 'Enter') return false;
@@ -543,27 +529,18 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     );
   };
 
-  /**
-   * 处理skill区域的键盘事件
-   */
+  //  处理skill区域的键盘事件
   const handleSkillAreaKeyEvent = () => {
     if (!skillDomRef.current || !editableRef.current) return;
-
     const selection = window.getSelection();
     if (!selection?.anchorNode) return;
-
-    // 确保选择节点在skill区域内
     if (!skillDomRef.current.contains(selection.anchorNode)) return;
-
-    // 确保选择节点在可编辑区域内
     if (!editableRef.current.contains(selection.anchorNode)) return;
-
     try {
       skillDomRef.current.setAttribute('contenteditable', 'false');
       skillDomRef.current.classList.remove(`${prefixCls}-skill-empty`);
       focus({ cursor: 'end' });
     } catch (error) {
-      // 静默处理可能的DOM操作错误
       warning(false, 'Sender', `Failed to handle skill area key event:${error}`);
     }
   };
@@ -575,7 +552,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
   const onInternalCompositionEnd = () => {
     isCompositionRef.current = false;
-    // 组合输入结束后清除键盘锁定
     keyLockRef.current = false;
   };
 
@@ -719,9 +695,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
   };
 
-  /**
-   * 获取插入上下文信息
-   */
+  // 获取插入上下文信息
   const getInsertContext = (
     position: InsertPosition | undefined,
     editableDom: HTMLDivElement,
@@ -769,9 +743,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     return { range, selection, type, slotKey, slotType };
   };
 
-  /**
-   * 处理字符替换
-   */
+  // 处理字符替换
   const handleCharacterReplacement = (
     range: Range,
     replaceCharacters: string,
@@ -828,9 +800,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     });
   };
 
-  /**
-   * 完成插入操作，设置光标并触发更新
-   */
+  // 完成插入操作，设置光标并触发更新
   const finalizeInsertion = (
     slotNodes: SlotNode[],
     range: Range,
