@@ -168,10 +168,10 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   };
   const updateSlot = (key: string, value: any, e?: EventType) => {
     const slotDom = getSlotDom(key);
-    const node = slotConfigMap.get(key);
+    const config = slotConfigMap.get(key);
     setSlotValues((prev) => ({ ...prev, [key]: value }));
-    if (slotDom && node) {
-      const newReactNode = renderSlot(node, slotDom);
+    if (slotDom && config) {
+      const newReactNode = renderSlot(config, slotDom);
       setSlotPlaceholders((prev) => {
         const newMap = new Map(prev);
         newMap.set(key, newReactNode);
@@ -183,30 +183,30 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
   };
 
-  const renderSlot = (node: SlotConfigType, slotSpan: HTMLSpanElement) => {
-    if (!node.key) return null;
-    const value = getSlotValues()[node.key];
+  const renderSlot = (config: SlotConfigType, slotSpan: HTMLSpanElement) => {
+    if (!config.key) return null;
+    const value = getSlotValues()[config.key];
 
     const renderContent = () => {
-      switch (node.type) {
+      switch (config.type) {
         case 'content':
           slotSpan.innerHTML = value || '';
-          slotSpan.setAttribute('data-placeholder', node.props?.placeholder || '');
+          slotSpan.setAttribute('data-placeholder', config.props?.placeholder || '');
           return null;
         case 'input':
           return (
             <Input
               readOnly={readOnly}
               className={`${prefixCls}-slot-input`}
-              placeholder={node.props?.placeholder || ''}
-              data-slot-input={node.key}
+              placeholder={config.props?.placeholder || ''}
+              data-slot-input={config.key}
               size="small"
               variant="borderless"
               value={value || ''}
               tabIndex={0}
               onKeyDown={onInternalKeyDown}
               onChange={(e) => {
-                updateSlot(node.key as string, e.target.value, e as unknown as EventType);
+                updateSlot(config.key as string, e.target.value, e as unknown as EventType);
               }}
               spellCheck={false}
             />
@@ -216,14 +216,14 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
             <Dropdown
               disabled={readOnly}
               menu={{
-                items: node.props?.options?.map((opt: any) => ({
+                items: config.props?.options?.map((opt: any) => ({
                   label: opt,
                   key: opt,
                 })),
-                defaultSelectedKeys: node.props?.defaultValue ? [node.props.defaultValue] : [],
+                defaultSelectedKeys: config.props?.defaultValue ? [config.props.defaultValue] : [],
                 selectable: true,
                 onSelect: ({ key, domEvent }) => {
-                  updateSlot(node.key as string, key, domEvent as unknown as EventType);
+                  updateSlot(config.key as string, key, domEvent as unknown as EventType);
                 },
               }}
               trigger={['click']}
@@ -235,7 +235,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
                 })}
               >
                 <span
-                  data-placeholder={node.props?.placeholder}
+                  data-placeholder={config.props?.placeholder}
                   className={`${prefixCls}-slot-select-value`}
                 >
                   {value || ''}
@@ -249,17 +249,17 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         case 'tag':
           return (
             <div className={`${prefixCls}-slot-tag`}>
-              {node.props?.label || node.props?.value || ''}
+              {config.props?.label || config.props?.value || ''}
             </div>
           );
         case 'custom':
-          return node.customRender?.(
+          return config.customRender?.(
             value,
             (value: any) => {
-              updateSlot(node.key as string, value);
+              updateSlot(config.key as string, value);
             },
             { disabled, readOnly },
-            node,
+            config,
           );
         default:
           return null;
