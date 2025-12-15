@@ -127,6 +127,15 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
           color: token.colorTextLightSolid,
         },
 
+        // Speech button disabled style (e.g. browser doesn't support SpeechRecognition)
+        '&-speech-disabled, &-speech-disabled[disabled]': {
+          color: token.colorTextDisabled,
+          cursor: 'not-allowed',
+          '&:hover': {
+            color: token.colorTextDisabled,
+          },
+        },
+
         '&-loading-button': {
           padding: 0,
           border: 0,
