@@ -54,7 +54,7 @@ interface UseCursorReturn {
   getInsertPosition: (
     position?: InsertPosition,
     editableRef?: React.RefObject<HTMLDivElement | null>,
-    lastSelectionRef?: React.MutableRefObject<Range | null>,
+    lastSelectionRef?: React.RefObject<Range | null>,
   ) => {
     type: 'box' | 'slot' | 'end' | 'start' | 'content';
     slotType?: SlotConfigBaseType['type'];
@@ -349,7 +349,7 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
     (
       position?: InsertPosition,
       editableRef?: React.RefObject<HTMLDivElement | null>,
-      lastSelectionRef?: React.MutableRefObject<Range | null>,
+      lastSelectionRef?: React.RefObject<Range | null>,
     ) => {
       const selection = window?.getSelection?.();
       if (position === 'start' || position === 'end') {

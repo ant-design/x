@@ -5,7 +5,7 @@ import type { SlotConfigBaseType, SlotConfigType } from '../interface';
 interface UseSlotBuilderOptions {
   prefixCls: string;
   placeholder?: string;
-  slotDomMap: React.MutableRefObject<Map<string, HTMLSpanElement>>;
+  slotDomMap: React.RefObject<Map<string, HTMLSpanElement>>;
   slotConfigMap: Map<string, SlotConfigBaseType>;
 }
 
