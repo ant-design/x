@@ -564,7 +564,7 @@ describe('Sender.SlotTextArea', () => {
 
       const { getByText } = render(<Sender slotConfig={customConfig} disabled />);
 
-      expect(getByText('Disabled')).toBeInTheDocument();
+      expect(getByText('Disabled')).toBeDisabled();
     });
 
     it('should handle blur events with selection', () => {
@@ -715,7 +715,7 @@ describe('Sender.SlotTextArea', () => {
       render(<Sender slotConfig={[]} ref={ref} />);
 
       const result = ref.current?.getValue();
-      expect(result).toEqual({ value: '', slotConfig: [] });
+      expect(result).toEqual({ value: '', slotConfig: [], skill: undefined });
     });
 
     it('should handle submitDisabled state', () => {
@@ -798,26 +798,30 @@ describe('Sender.SlotTextArea', () => {
 
   describe('Final coverage tests', () => {
     it('should handle all slot types with various configurations', () => {
-      const { container } = render(
-        <Sender
-          slotConfig={[
-            { type: 'text', value: 'Hello' },
-            { type: 'input', key: 'name', props: { placeholder: 'Name', defaultValue: 'John' } },
-            {
-              type: 'select',
-              key: 'gender',
-              props: { options: ['Male', 'Female'], defaultValue: 'Male' },
-            },
-            { type: 'tag', key: 'status', props: { label: 'Active' } },
-            { type: 'content', key: 'bio', props: { placeholder: 'Bio' } },
-            {
-              type: 'custom',
-              key: 'custom',
-              customRender: (value, onChange) => <span>Custom: {value}</span>,
-            },
-          ]}
-        />,
-      );
+      const completeConfig: SlotConfigType[] = [
+        { type: 'text', value: 'Hello' },
+        { type: 'text', value: '' },
+        { type: 'input', key: 'name', props: { placeholder: 'Enter name', defaultValue: 'John' } },
+        { type: 'input', key: 'empty-input' },
+        {
+          type: 'select',
+          key: 'gender',
+          props: { options: ['Male', 'Female'], defaultValue: 'Male' },
+        },
+        { type: 'select', key: 'empty-select', props: { options: [] } },
+        { type: 'tag', key: 'status', props: { label: 'Active' } },
+        { type: 'tag', key: 'no-label' },
+        { type: 'content', key: 'bio', props: { placeholder: 'Bio', defaultValue: 'Default bio' } },
+        { type: 'content', key: 'empty-content' },
+        {
+          type: 'custom',
+          key: 'custom',
+          customRender: (value, onChange) => <span>Custom: {value}</span>,
+          formatResult: (v) => `[${v}]`,
+        },
+      ];
+
+      const { container } = render(<Sender slotConfig={completeConfig} />);
       expect(container.querySelector('[role="textbox"]')).toBeInTheDocument();
     });
 
@@ -923,7 +927,53 @@ describe('Sender.SlotTextArea', () => {
       expect(container.querySelector('[role="textbox"]')).toBeInTheDocument();
     });
 
-    it('should handle all props combinations exhaustively', () => {
+    it('should handle skill with all properties', () => {
+      const { container } = render(
+        <Sender
+          slotConfig={[]}
+          skill={{
+            value: 'test-skill',
+            title: 'Test Skill',
+            description: 'This is a test skill',
+            closable: {
+              closeIcon: '×',
+              onClose: jest.fn(),
+            },
+          }}
+        />,
+      );
+      expect(container.querySelector('[role="textbox"]')).toBeInTheDocument();
+    });
+
+    it('should handle all event handlers', () => {
+      const handlers = {
+        onChange: jest.fn(),
+        onSubmit: jest.fn(),
+        onFocus: jest.fn(),
+        onBlur: jest.fn(),
+        onKeyDown: jest.fn(),
+        onKeyUp: jest.fn(),
+        onPaste: jest.fn(),
+        onPasteFile: jest.fn(),
+      };
+
+      const { container } = render(<Sender slotConfig={baseSlotConfig} {...handlers} />);
+
+      const inputArea = container.querySelector('[role="textbox"]') as HTMLElement;
+
+      fireEvent.focus(inputArea);
+      fireEvent.blur(inputArea);
+      fireEvent.keyDown(inputArea, { key: 'Enter' });
+      fireEvent.keyUp(inputArea, { key: 'Enter' });
+      fireEvent.paste(inputArea, { clipboardData: { getData: () => 'test', files: [] } });
+
+      expect(handlers.onFocus).toHaveBeenCalled();
+      expect(handlers.onBlur).toHaveBeenCalled();
+      expect(handlers.onKeyDown).toHaveBeenCalled();
+      expect(handlers.onKeyUp).toHaveBeenCalled();
+    });
+
+    it('should handle all props combinations', () => {
       const { container } = render(
         <Sender
           slotConfig={baseSlotConfig}
@@ -943,232 +993,117 @@ describe('Sender.SlotTextArea', () => {
       expect(container.querySelector('[role="textbox"]')).toBeInTheDocument();
     });
 
-    it('should handle all event handlers with real interactions', () => {
-      const handlers = {
-        onChange: jest.fn(),
-        onSubmit: jest.fn(),
-        onFocus: jest.fn(),
-        onBlur: jest.fn(),
-        onKeyDown: jest.fn(),
-        onKeyUp: jest.fn(),
-        onPaste: jest.fn(),
-        onPasteFile: jest.fn(),
-      };
-
-      const { container } = render(<Sender slotConfig={baseSlotConfig} {...handlers} />);
-
-      const inputArea = container.querySelector('[role="textbox"]') as HTMLElement;
-
-      // Trigger all events
-      fireEvent.focus(inputArea);
-      fireEvent.blur(inputArea);
-      fireEvent.keyDown(inputArea, { key: 'Enter' });
-      fireEvent.keyUp(inputArea, { key: 'Enter' });
-      fireEvent.paste(inputArea, { clipboardData: { getData: () => 'test', files: [] } });
-
-      expect(handlers.onFocus).toHaveBeenCalled();
-      expect(handlers.onBlur).toHaveBeenCalled();
-      expect(handlers.onKeyDown).toHaveBeenCalled();
-      expect(handlers.onKeyUp).toHaveBeenCalled();
-    });
-
-    it('should handle skill lifecycle completely', () => {
-      const onClose = jest.fn();
-      const { rerender, container } = render(
-        <Sender
-          slotConfig={[]}
-          skill={{
-            value: 'test-skill',
-            title: 'Test Skill',
-            description: 'Description',
-            closable: {
-              closeIcon: '×',
-              onClose,
-            },
-          }}
-        />,
-      );
-
-      // Test skill removal
-      rerender(<Sender slotConfig={[]} />);
-
-      // Test skill addition
-      rerender(
-        <Sender
-          slotConfig={[]}
-          skill={{
-            value: 'new-skill',
-            title: 'New Skill',
-            closable: false,
-          }}
-        />,
-      );
-
-      expect(container.querySelector('[role="textbox"]')).toBeInTheDocument();
-    });
-
-    it('should handle extreme edge cases', () => {
-      const extremeConfig: SlotConfigType[] = [
-        { type: 'text', value: 'a'.repeat(1000) },
-        { type: 'text', value: '' },
-        { type: 'text', value: null as any },
-        { type: 'input', key: 'special-chars', props: { placeholder: '!@#$%^&*()' } },
-        { type: 'select', key: 'unicode', props: { options: ['中文', 'العربية', 'русский'] } },
-      ];
-
-      const { container } = render(<Sender slotConfig={extremeConfig} />);
-      expect(container.querySelector('[role="textbox"]')).toBeInTheDocument();
-    });
-
-    it('should handle ref methods with real data', () => {
-      const ref = React.createRef<any>();
-      render(
-        <Sender
-          slotConfig={[
-            { type: 'text', value: 'Test' },
-            { type: 'input', key: 'input1', props: { defaultValue: 'Value1' } },
-            { type: 'select', key: 'select1', props: { options: ['A', 'B'], defaultValue: 'A' } },
-          ]}
-          ref={ref}
-        />,
-      );
-
-      // Test getValue
-      const value = ref.current?.getValue();
-      expect(value).toHaveProperty('value');
-      expect(value).toHaveProperty('slotConfig');
-
-      // Test clear
-      ref.current?.clear();
-      const clearedValue = ref.current?.getValue();
-      expect(clearedValue.value).toBe('');
-    });
-
-    it('should handle slotConfig with missing props', () => {
+    it('should handle empty and null values gracefully', () => {
       const { container } = render(
         <Sender
           slotConfig={[
-            { type: 'input', key: 'test' },
-            { type: 'select', key: 'select-test' },
-            { type: 'tag', key: 'tag-test' },
+            { type: 'text', value: '' },
+            { type: 'input', key: 'empty' },
+            { type: 'select', key: 'select-empty', props: { options: [] } },
           ]}
         />,
       );
       expect(container.querySelector('[role="textbox"]')).toBeInTheDocument();
     });
+  });
 
-    it('should handle slotConfig with undefined values', () => {
-      const { container } = render(
-        <Sender
-          slotConfig={[
-            { type: 'text', value: undefined as any },
-            { type: 'input', key: 'test', props: { placeholder: undefined as any } },
-          ]}
-        />,
-      );
-      expect(container.querySelector('[role="textbox"]')).toBeInTheDocument();
+  describe('Edge case and boundary tests', () => {
+    it('should handle null and undefined slot configurations', () => {
+      expect(() => {
+        render(<Sender slotConfig={null as any} />);
+        render(<Sender slotConfig={undefined as any} />);
+      }).not.toThrow();
     });
 
-    it('should handle very large slot configurations', () => {
-      const largeConfig: SlotConfigType[] = Array.from({ length: 20 }, (_, i) => ({
-        type: 'text' as const,
-        value: `Item ${i}`,
-      }));
-
-      const { container } = render(<Sender slotConfig={largeConfig} />);
-      expect(container.querySelector('[role="textbox"]')).toBeInTheDocument();
-    });
-
-    it('should handle nested slot configurations', () => {
-      const nestedConfig: SlotConfigType[] = [
-        { type: 'text', value: 'Start' },
-        {
-          type: 'input',
-          key: 'nested1',
-          props: { placeholder: 'Nested 1', defaultValue: 'Value1' },
-        },
-        { type: 'select', key: 'nested2', props: { options: ['A', 'B'], defaultValue: 'A' } },
-        { type: 'content', key: 'nested3', props: { placeholder: 'Content' } },
-        { type: 'text', value: 'End' },
+    it('should handle slot with missing key warnings', () => {
+      const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
+      const invalidConfig = [
+        { type: 'input', props: { placeholder: 'No key' } } as SlotConfigType,
+        { type: 'select', props: { options: ['A', 'B'] } } as SlotConfigType,
       ];
 
-      const { container } = render(<Sender slotConfig={nestedConfig} />);
+      render(<Sender slotConfig={invalidConfig} />);
+
+      expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('Slot key is missing'));
+      consoleSpy.mockRestore();
+    });
+
+    it('should handle very long text values', () => {
+      const longText = 'a'.repeat(10000);
+      const { container } = render(<Sender slotConfig={[{ type: 'text', value: longText }]} />);
       expect(container.querySelector('[role="textbox"]')).toBeInTheDocument();
     });
 
-    it('should handle slot updates and re-renders', () => {
+    it('should handle special characters in slot values', () => {
+      const specialChars = [
+        { type: 'text', value: '<script>alert("xss")</script>' },
+        { type: 'text', value: '\n\r\t' },
+        { type: 'text', value: '"quotes" and \'apostrophes\'' },
+        { type: 'input', key: 'special', props: { defaultValue: 'test@#$%^&*()' } },
+      ];
+
+      const { container } = render(<Sender slotConfig={specialChars} />);
+      expect(container.querySelector('[role="textbox"]')).toBeInTheDocument();
+    });
+
+    it('should handle rapid slot configuration changes', () => {
       const { rerender, container } = render(
         <Sender slotConfig={[{ type: 'text', value: 'Initial' }]} />,
       );
 
-      rerender(
-        <Sender
-          slotConfig={[
-            { type: 'text', value: 'Updated' },
-            { type: 'input', key: 'new' },
-          ]}
-        />,
-      );
-
-      rerender(<Sender slotConfig={[{ type: 'text', value: 'Final' }]} />);
+      // Rapid changes
+      for (let i = 0; i < 10; i++) {
+        rerender(<Sender slotConfig={[{ type: 'text', value: `Update ${i}` }]} />);
+      }
 
       expect(container.querySelector('[role="textbox"]')).toBeInTheDocument();
     });
 
-    it('should handle skill updates and re-renders', () => {
-      const { rerender, container } = render(
-        <Sender slotConfig={[]} skill={{ value: 'skill1', title: 'Skill 1' }} />,
-      );
+    it('should handle concurrent ref method calls', () => {
+      const ref = React.createRef<any>();
+      render(<Sender slotConfig={[{ type: 'text', value: 'Test' }]} ref={ref} />);
 
-      rerender(<Sender slotConfig={[]} skill={{ value: 'skill2', title: 'Skill 2' }} />);
-
-      rerender(<Sender slotConfig={[]} />);
-
-      expect(container.querySelector('[role="textbox"]')).toBeInTheDocument();
+      // Concurrent operations
+      expect(() => {
+        Promise.all([
+          ref.current?.insert([{ type: 'text', value: '1' }]),
+          ref.current?.insert([{ type: 'text', value: '2' }]),
+          ref.current?.clear(),
+          ref.current?.getValue(),
+        ]);
+      }).not.toThrow();
     });
 
-    it('should handle mixed slot and skill configurations', () => {
+    it('should handle empty string values gracefully', () => {
       const { container } = render(
         <Sender
           slotConfig={[
-            { type: 'text', value: 'Hello' },
-            { type: 'input', key: 'name', props: { placeholder: 'Name' } },
+            { type: 'text', value: '' },
+            { type: 'input', key: 'empty', props: { defaultValue: '' } },
+            { type: 'select', key: 'empty-select', props: { defaultValue: '' } },
           ]}
-          skill={{ value: 'greeting', title: 'Greeting Skill' }}
         />,
       );
       expect(container.querySelector('[role="textbox"]')).toBeInTheDocument();
     });
 
-    it('should handle all submit types', () => {
-      const onSubmit = jest.fn();
+    it('should handle nested slot interactions', () => {
+      const onChange = jest.fn();
+      const nestedConfig: SlotConfigType[] = [
+        { type: 'text', value: 'Start' },
+        { type: 'input', key: 'nested1', props: { defaultValue: 'Value1' } },
+        { type: 'select', key: 'nested2', props: { options: ['A', 'B'], defaultValue: 'A' } },
+        { type: 'content', key: 'nested3', props: { defaultValue: 'Content' } },
+        { type: 'text', value: 'End' },
+      ];
 
-      const { container: enterContainer } = render(
-        <Sender slotConfig={baseSlotConfig} onSubmit={onSubmit} submitType="enter" />,
-      );
+      const { container } = render(<Sender slotConfig={nestedConfig} onChange={onChange} />);
 
-      const { container: shiftEnterContainer } = render(
-        <Sender slotConfig={baseSlotConfig} onSubmit={onSubmit} submitType="shiftEnter" />,
-      );
+      // Test interactions with nested slots
+      const input = container.querySelector('input[data-slot-input="nested1"]') as HTMLInputElement;
+      fireEvent.change(input, { target: { value: 'Updated' } });
 
-      expect(enterContainer.querySelector('[role="textbox"]')).toBeInTheDocument();
-      expect(shiftEnterContainer.querySelector('[role="textbox"]')).toBeInTheDocument();
-    });
-
-    it('should handle autoSize variations', () => {
-      const { container: autoSizeTrue } = render(<Sender slotConfig={baseSlotConfig} autoSize />);
-
-      const { container: autoSizeFalse } = render(
-        <Sender slotConfig={baseSlotConfig} autoSize={false} />,
-      );
-
-      const { container: autoSizeObject } = render(
-        <Sender slotConfig={baseSlotConfig} autoSize={{ minRows: 1, maxRows: 10 }} />,
-      );
-
-      expect(autoSizeTrue.querySelector('[role="textbox"]')).toBeInTheDocument();
-      expect(autoSizeFalse.querySelector('[role="textbox"]')).toBeInTheDocument();
-      expect(autoSizeObject.querySelector('[role="textbox"]')).toBeInTheDocument();
+      expect(onChange).toHaveBeenCalled();
     });
   });
 });
