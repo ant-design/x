@@ -24,21 +24,45 @@ export class ChatMessagesStore<T extends { id: number | string }> {
   private listeners: (() => void)[] = [];
   private conversationKey: ConversationKey | undefined;
 
+  // Throttle state for preventing "Maximum update depth exceeded" during streaming
+  private throttleTimer: ReturnType<typeof setTimeout> | null = null;
+  private pendingEmit = false;
+  private readonly throttleInterval: number = 50;
+
   private emitListeners() {
     this.listeners.forEach((listener) => {
       listener();
     });
   }
 
+  private throttledEmitListeners() {
+    if (!this.throttleTimer) {
+      // Leading edge: execute immediately
+      this.emitListeners();
+      this.pendingEmit = false;
+
+      this.throttleTimer = setTimeout(() => {
+        this.throttleTimer = null;
+        // Trailing edge: flush pending updates
+        if (this.pendingEmit) {
+          this.emitListeners();
+          this.pendingEmit = false;
+        }
+      }, this.throttleInterval);
+    } else {
+      this.pendingEmit = true;
+    }
+  }
+
   constructor(defaultMessages: T[], conversationKey?: ConversationKey) {
-    this.setMessages(defaultMessages);
+    this.setMessagesInternal(defaultMessages, false);
     if (conversationKey) {
       this.conversationKey = conversationKey;
       chatMessagesStoreHelper.set(this.conversationKey, this);
     }
   }
 
-  setMessages = (messages: T[] | ((ori: T[]) => T[])) => {
+  private setMessagesInternal = (messages: T[] | ((ori: T[]) => T[]), throttle = true) => {
     let list: T[];
     if (typeof messages === 'function') {
       list = messages(this.messages);
@@ -46,8 +70,16 @@ export class ChatMessagesStore<T extends { id: number | string }> {
       list = messages as T[];
     }
     this.messages = [...list];
-    this.emitListeners();
+    if (throttle) {
+      this.throttledEmitListeners();
+    } else {
+      this.emitListeners();
+    }
     return true;
+  };
+
+  setMessages = (messages: T[] | ((ori: T[]) => T[])) => {
+    return this.setMessagesInternal(messages, true);
   };
 
   getMessages = () => {
@@ -96,7 +128,29 @@ export class ChatMessagesStore<T extends { id: number | string }> {
     this.listeners.push(callback);
     return () => {
       this.listeners = this.listeners.filter((listener) => listener !== callback);
+      // Clean up throttle timer when no listeners remain to prevent memory leaks
+      // and "setState on unmounted component" warnings
+      if (this.listeners.length === 0) {
+        if (this.throttleTimer) {
+          clearTimeout(this.throttleTimer);
+          this.throttleTimer = null;
+        }
+        this.pendingEmit = false;
+      }
     };
+  };
+
+  /**
+   * Clean up resources (throttle timer) when the store is no longer needed.
+   * Should be called when the component unmounts or the store is disposed.
+   */
+  destroy = () => {
+    if (this.throttleTimer) {
+      clearTimeout(this.throttleTimer);
+      this.throttleTimer = null;
+    }
+    this.pendingEmit = false;
+    this.listeners = [];
   };
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "x-mono",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "private": true,
   "scripts": {
     "presite": "npm run prestart --workspaces",
@@ -15,7 +15,7 @@
     "publish-version": "tsx ./scripts/synchronize-version.ts",
     "prepublishOnly": "tsx ./scripts/pre-publish.ts",
     "precompile": "npm run precompile --workspaces",
-    "prepare": "husky install",
+    "prepare": "husky",
     "size-limit": "size-limit",
     "lint": "npm run lint --workspaces",
     "tsc": "npm run tsc --workspaces",
@@ -44,7 +44,7 @@
     "marked-emoji": "^2.0.1",
     "prettier": "^3.3.3",
     "react-markdown": "^10.1.0",
-    "size-limit": "^11.1.5"
+    "size-limit": "^12.0.0"
   },
   "size-limit": [
     {

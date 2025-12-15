@@ -1,7 +1,7 @@
 import { CloseOutlined, MenuOutlined } from '@ant-design/icons';
 import { Button, Drawer } from 'antd';
 import { createStyles } from 'antd-style';
-import classnames from 'classnames';
+import { clsx } from 'clsx';
 import { useLocation } from 'dumi';
 import React, { useEffect } from 'react';
 import useLocale from '../../../hooks/useLocale';
@@ -149,10 +149,7 @@ const Header: React.FC = () => {
   } else {
     content = (
       <>
-        <Navigation
-          {...sharedProps}
-          className={classnames(!isMobile && !isMini && styles.background)}
-        />
+        <Navigation {...sharedProps} className={clsx(!isMobile && !isMini && styles.background)} />
         {!isActionHidden ? <HeaderActions {...sharedProps} /> : null}
       </>
     );
@@ -160,7 +157,7 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className={classnames(
+      className={clsx(
         styles.header,
         (isMobile || isMini) && styles.background,
         (isMobile || isMini) && styles.mobile,

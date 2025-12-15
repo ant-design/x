@@ -1,7 +1,6 @@
 import PluginMeta from '@ant-design/x-markdown/plugins/version/plugin-meta.json';
 import { List } from 'antd';
 import { createStyles, css } from 'antd-style';
-import classnames from 'classnames';
 import { Link } from 'dumi';
 import React from 'react';
 import useLocale from '../../hooks/useLocale';
@@ -55,15 +54,15 @@ const MarkdownPluginsOverView: React.FC<null> = () => {
   return (
     <List
       itemLayout="horizontal"
-      className={classnames(styles.container)}
+      className={styles.container}
       dataSource={PluginMeta || []}
       renderItem={(item: PluginItem) => {
         const info = getInfo(item);
         return (
-          <List.Item className={classnames(styles.item)}>
+          <List.Item className={styles.item}>
             <Link to={info?.href}>
               <List.Item.Meta
-                className={classnames(styles.itemMeta)}
+                className={styles.itemMeta}
                 title={item?.plugin}
                 description={info.description}
               />

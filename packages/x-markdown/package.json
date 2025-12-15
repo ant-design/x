@@ -1,6 +1,6 @@
 {
   "name": "@ant-design/x-markdown",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "scripts": {
     "compile": "father build",
     "tsc": "tsc --noEmit",
@@ -49,7 +49,7 @@
   "license": "MIT",
   "description": "placeholder for @ant-design/x-markdown",
   "dependencies": {
-    "classnames": "^2.5.1",
+    "clsx": "^2.1.1",
     "dompurify": "^3.2.6",
     "html-react-parser": "^5.2.5",
     "katex": "^0.16.22",

@@ -1,5 +1,5 @@
+import { removeCSS, updateCSS } from '@rc-component/util/lib/Dom/dynamicCSS';
 import { useTheme } from 'antd-style';
-import { removeCSS, updateCSS } from 'rc-util/lib/Dom/dynamicCSS';
 import { useEffect, useRef } from 'react';
 
 const viewTransitionStyle = `

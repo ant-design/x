@@ -56,7 +56,7 @@ export function useCompatibleScroll(dom?: HTMLElement | null) {
       intersectionObserver.disconnect();
       mutationObserver.disconnect();
       clearTimeout(scrolling.current);
-      if (sentinelRef.current && sentinelRef.current.parentNode) {
+      if (sentinelRef.current?.parentNode) {
         sentinelRef.current.parentNode.removeChild(sentinelRef.current);
         sentinelRef.current = null;
       }

@@ -28,7 +28,7 @@ import {
 import enUS_X from '@ant-design/x/locale/en_US';
 import zhCN_X from '@ant-design/x/locale/zh_CN';
 import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
-import type { TransformMessage } from '@ant-design/x-sdk';
+import type { MessageInfo, TransformMessage } from '@ant-design/x-sdk';
 import {
   AbstractChatProvider,
   AbstractXRequestClass,
@@ -41,7 +41,7 @@ import enUS_antd from 'antd/locale/en_US';
 import zhCN_antd from 'antd/locale/zh_CN';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
-import React, { useState } from 'react';
+import React, { createContext, memo, useContext, useEffect, useState } from 'react';
 import { TboxClient } from 'tbox-nodejs-sdk';
 import { useMarkdownTheme } from '../x-markdown/demo/_utils';
 
@@ -81,6 +81,8 @@ const zhCN = {
   nowNenConversation: '当前已经是新会话',
   isMock: '当前为模拟功能',
   retry: '重新生成',
+  AbortThinking: '思考已中止',
+  ErrThinking: '思考出错',
 };
 
 const enUS = {
@@ -118,6 +120,8 @@ const enUS = {
   nowNenConversation: 'It is now a new conversation.',
   retry: 'retry',
   isMock: 'It is Mock',
+  AbortThinking: 'Thinking aborted',
+  ErrThinking: 'Thinking error',
 };
 
 const isZhCN = window.parent?.location?.pathname?.includes('-cn');
@@ -344,7 +348,7 @@ class TboxRequest<
 > extends AbstractXRequestClass<Input, Output> {
   tboxClient: TboxClient;
   tboxStream: any;
-
+  _status: MessageInfo<TboxMessage>['status'] | undefined;
   _isTimeout = false;
   _isStreamTimeout = false;
   _isRequesting = false;
@@ -374,6 +378,7 @@ class TboxRequest<
     return true;
   }
   run(params?: Input | undefined): void {
+    this._status = 'loading';
     const stream = tboxClient.chat({
       appId: 'your-app-id', // Replace with your app ID
       query: params?.message?.content,
@@ -386,6 +391,7 @@ class TboxRequest<
     const dataArr: Output[] = [];
 
     stream.on('data', (data) => {
+      this._status = 'updating';
       let parsedPayload: any;
       try {
         const payload = (data as any).data?.payload || '{}';
@@ -406,16 +412,17 @@ class TboxRequest<
     });
 
     stream.on('error', (error) => {
-      if (!error?.message?.includes('abort')) {
-        callbacks?.onError(error);
-      }
+      this._status = 'error';
+      callbacks?.onError(error);
     });
 
     stream.on('end', () => {
-      callbacks?.onSuccess(dataArr, new Headers());
+      if (this._status !== 'abort' && this._status !== 'error' && this._status !== 'success')
+        callbacks?.onSuccess(dataArr, new Headers());
     });
 
     stream.on('abort', () => {
+      this._status = 'abort';
       callbacks?.onError({ name: 'AbortError', message: '' });
     });
   }
@@ -490,21 +497,32 @@ const providerFactory = (conversationKey: string) => {
 };
 
 // ==================== Context ====================
-const ChatContext = React.createContext<{
+const ChatContext = createContext<{
   onReload?: ReturnType<typeof useXChat>['onReload'];
-}>({});
+}>({} as const);
+
+// ==================== Context ====================
+const MessageContext = createContext<{
+  chatStatus?: MessageInfo<TboxMessage>['status'];
+}>({} as const);
 
 // ==================== Sub Component====================
-const ThinkComponent = React.memo((props: ComponentProps) => {
-  const [title, setTitle] = React.useState(`${t.DeepThinking}...`);
-  const [loading, setLoading] = React.useState(true);
-
-  React.useEffect(() => {
+const ThinkComponent = memo((props: ComponentProps) => {
+  const [title, setTitle] = useState(`${t.DeepThinking}...`);
+  const [loading, setLoading] = useState(true);
+  const { chatStatus } = useContext(MessageContext);
+  useEffect(() => {
     if (props.streamStatus === 'done') {
       setTitle(t.CompleteThinking);
       setLoading(false);
+    } else if (chatStatus === 'abort') {
+      setTitle(t.AbortThinking);
+      setLoading(false);
+    } else if (chatStatus === 'error') {
+      setTitle(t.ErrThinking);
+      setLoading(false);
     }
-  }, [props.streamStatus]);
+  }, [props.streamStatus, chatStatus]);
 
   return (
     <Think title={title} loading={loading}>
@@ -516,9 +534,9 @@ const ThinkComponent = React.memo((props: ComponentProps) => {
 const Footer: React.FC<{
   id?: number | string;
   content: string;
-  status?: string;
+  status?: MessageInfo<TboxMessage>['status'];
 }> = ({ id, content, status }) => {
-  const context = React.useContext(ChatContext);
+  const context = useContext(ChatContext);
   const [mockFeedback, setMockFeedback] = useState<ActionsFeedbackProps['value']>('default');
   const Items = [
     {
@@ -738,14 +756,16 @@ const AgentTbox: React.FC = () => {
       contentRender: (content, { status }) => {
         const markdownText = `${content.ext_text ? `<think>\n\n${content.ext_text}${content.text ? '\n\n</think>\n\n' : ''}` : ''}${content.text || ''}`;
         return (
-          <XMarkdown
-            content={markdownText as string}
-            className={className}
-            components={{
-              think: ThinkComponent,
-            }}
-            streaming={{ hasNextChunk: status === 'updating', enableAnimation: true }}
-          />
+          <MessageContext.Provider value={{ chatStatus: status }}>
+            <XMarkdown
+              content={markdownText as string}
+              className={className}
+              components={{
+                think: ThinkComponent,
+              }}
+              streaming={{ hasNextChunk: status === 'updating', enableAnimation: true }}
+            />
+          </MessageContext.Provider>
         );
       },
     },

@@ -1,7 +1,7 @@
+import CSSMotion from '@rc-component/motion';
+import { composeRef } from '@rc-component/util/lib/ref';
 import { Typography } from 'antd';
-import classnames from 'classnames';
-import CSSMotion from 'rc-motion';
-import { composeRef } from 'rc-util/lib/ref';
+import { clsx } from 'clsx';
 import React from 'react';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
@@ -153,7 +153,7 @@ const ForwardPrompts = React.forwardRef<ActionsRef, PromptsProps>((props, ref) =
   // ============================ Style ============================
   const [hashId, cssVarCls] = useStyle(prefixCls);
 
-  const mergedCls = classnames(
+  const mergedCls = clsx(
     prefixCls,
     contextConfig.className,
     className,
@@ -166,7 +166,7 @@ const ForwardPrompts = React.forwardRef<ActionsRef, PromptsProps>((props, ref) =
     },
   );
 
-  const mergedListCls = classnames(
+  const mergedListCls = clsx(
     `${prefixCls}-list`,
     contextConfig.classNames.list,
     classNames.list,
@@ -196,14 +196,14 @@ const ForwardPrompts = React.forwardRef<ActionsRef, PromptsProps>((props, ref) =
           <div
             {...htmlProps}
             ref={composeRef(containerRef, ref)}
-            className={classnames(mergedCls, motionClassName)}
+            className={clsx(mergedCls, motionClassName)}
             style={{ ...style, ...contextConfig.style, ...styles.root }}
           >
             {/* Title */}
             {title && (
               <Typography.Title
                 level={5}
-                className={classnames(
+                className={clsx(
                   `${prefixCls}-title`,
                   contextConfig.classNames.title,
                   classNames.title,
@@ -222,7 +222,7 @@ const ForwardPrompts = React.forwardRef<ActionsRef, PromptsProps>((props, ref) =
                   <div
                     key={info.key || `key_${index}`}
                     style={{ ...contextConfig.styles.item, ...styles.item }}
-                    className={classnames(
+                    className={clsx(
                       `${prefixCls}-item`,
                       contextConfig.classNames.item,
                       classNames.item,
@@ -241,7 +241,7 @@ const ForwardPrompts = React.forwardRef<ActionsRef, PromptsProps>((props, ref) =
                     {info.icon && <div className={`${prefixCls}-icon`}>{info.icon}</div>}
                     {/* Content */}
                     <div
-                      className={classnames(
+                      className={clsx(
                         `${prefixCls}-content`,
                         contextConfig.classNames.itemContent,
                         classNames.itemContent,

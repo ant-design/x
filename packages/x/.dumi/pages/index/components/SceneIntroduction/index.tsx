@@ -1,6 +1,6 @@
 import { Button, Carousel } from 'antd';
 import { createStyles } from 'antd-style';
-import classnames from 'classnames';
+import { clsx } from 'clsx';
 import React from 'react';
 
 import useLocale from '../../../../hooks/useLocale';
@@ -228,7 +228,7 @@ const SceneBanner: React.FC = () => {
               <Button
                 key={item.key}
                 disabled={item.disabled}
-                className={classnames(
+                className={clsx(
                   styles.item,
                   active === item.key && styles['item-active'],
                   item.disabled && styles['item-disabled'],

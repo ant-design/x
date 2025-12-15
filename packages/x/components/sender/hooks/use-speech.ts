@@ -1,4 +1,4 @@
-import { useEvent, useMergedState } from 'rc-util';
+import { useEvent, useMergedState } from '@rc-component/util';
 import React from 'react';
 
 export type ControlledSpeechConfig = {

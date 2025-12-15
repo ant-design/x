@@ -2048,7 +2048,7 @@ exports[`renders components/sender/demo/slot-filling.tsx correctly 1`] = `
     </button>
   </div>
   <div
-    class="ant-sender css-var-_R_l_ ant-sender-main"
+    class="ant-sender css-var-_R_t_ ant-sender-main"
   >
     <div
       class="ant-sender-content"
@@ -2071,10 +2071,10 @@ exports[`renders components/sender/demo/slot-filling.tsx correctly 1`] = `
         class="ant-sender-actions-list"
       >
         <div
-          class="ant-sender-actions-list-presets ant-flex css-var-_R_l_"
+          class="ant-sender-actions-list-presets ant-flex css-var-_R_t_"
         >
           <button
-            class="ant-btn css-var-_R_l_ ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+            class="ant-btn css-var-_R_t_ ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
             disabled=""
             type="button"
           >
@@ -2109,7 +2109,7 @@ exports[`renders components/sender/demo/slot-filling.tsx correctly 1`] = `
             </span>
           </button>
           <button
-            class="ant-btn css-var-_R_l_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+            class="ant-btn css-var-_R_t_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
             disabled=""
             type="button"
           >

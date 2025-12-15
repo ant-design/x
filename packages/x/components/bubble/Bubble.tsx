@@ -1,5 +1,5 @@
-import classnames from 'classnames';
-import pickAttrs from 'rc-util/lib/pickAttrs';
+import pickAttrs from '@rc-component/util/lib/pickAttrs';
+import { clsx } from 'clsx';
 import React from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
@@ -75,7 +75,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
     ...styles.root,
     ...style,
   };
-  const rootMergedCls = classnames(
+  const rootMergedCls = clsx(
     prefixCls,
     contextConfig.className,
     contextConfig.classNames.root,
@@ -154,7 +154,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
             ...contextConfig.styles.content,
             ...styles.content,
           }}
-          className={classnames(
+          className={clsx(
             `${prefixCls}-content`,
             `${prefixCls}-content-${variant}`,
             contextConfig.classNames.content,
@@ -179,7 +179,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
           ) : (
             <>
               {isFooterIn ? (
-                <div className={classnames(`${prefixCls}-content-with-footer`)}>{_content}</div>
+                <div className={clsx(`${prefixCls}-content-with-footer`)}>{_content}</div>
               ) : (
                 _content
               )}
@@ -193,11 +193,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
   };
 
   const getSlotClassName = (slotType: SemanticType) =>
-    classnames(
-      `${prefixCls}-${slotType}`,
-      contextConfig.classNames[slotType],
-      classNames[slotType],
-    );
+    clsx(`${prefixCls}-${slotType}`, contextConfig.classNames[slotType], classNames[slotType]);
 
   const getSlotStyle = (slotType: SemanticType) => ({
     ...contextConfig.styles[slotType],
@@ -236,7 +232,7 @@ const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
 
   const renderFooter = () => {
     if (!footer) return null;
-    const cls = classnames(getSlotClassName('footer'), {
+    const cls = clsx(getSlotClassName('footer'), {
       [`${prefixCls}-footer-start`]: _footerPlacement.includes('start'),
       [`${prefixCls}-footer-end`]: _footerPlacement.includes('end'),
     });

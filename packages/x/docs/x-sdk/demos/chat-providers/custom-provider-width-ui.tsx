@@ -73,7 +73,7 @@ class CustomProvider<
         content: `${content}${chunkJson.data || ''}`,
         role: 'assistant',
       } as ChatMessage;
-    } catch (error) {
+    } catch (_error) {
       // 如果解析失败，直接使用原始数据
       // If parsing fails, use raw data directly
       return {

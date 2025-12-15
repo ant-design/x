@@ -45,8 +45,8 @@ showImport: false
 - 通用: `Bubble` - 消息气泡、`Conversations` - 会话管理、`Notification` - 系统通知
 - 唤醒: `Welcome` - 欢迎、`Prompts` - 提示集
 - 表达: `Sender` - 发送框、`Attachment` - 输入附件、`Suggestion` - 快捷指令
-- 确认: `Think` - 思考过程、 `ThoughtChain` - 思维链、`Sources` - 来源引用
-- 反馈: `Actions` - 操作列表、`FileCard` - 文件卡片
+- 确认: `Think` - 思考过程、`ThoughtChain` - 思维链
+- 反馈: `Actions` - 操作列表、`FileCard` - 文件卡片、`Sources` - 来源引用、`CodeHighlighter` - 代码高亮、`Mermaid` - 图表工具
 - 其他: `XProvider` - 全局配置：主题、国际化等
 
 下面是使用原子组件搭建一个最简单的对话框的代码示例:

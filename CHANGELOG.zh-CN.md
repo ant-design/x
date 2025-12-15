@@ -15,6 +15,31 @@ tag: vVERSION
 
 ---
 
+## 2.1.1
+
+`2025-12-10`
+
+### @ant-design/x
+
+- Sender
+  - 🐛 修复发送快捷键 enter 和 shift + enter 未受 submit 按钮 disabled 状态控制的问题，修复 `onSubmit` 快捷键和按钮参数不一致问题。 [#1472](https://github.com/ant-design/x/pull/1472) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 🐛 修复 `onChange` 缺少 `skill` 参数问题，修复词槽模式仅展示技能能力时 placeholder 未展示问题，并重构 `onChange`逻辑。[#1477](https://github.com/ant-design/x/pull/1477) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 🐛 修复词槽模式 `input` 类型词槽激活焦点时发送快捷键 enter 和 shift + enter 未触发问题。[#1498](https://github.com/ant-design/x/pull/1498) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- Attachment
+  - 🐛 修复设置 `maxCount` 后最后一个文件未上传问题。[#1486](https://github.com/ant-design/x/pull/1486) 由 [@kimteayon](https://github.com/kimteayon) 提交
+  - 🐛 修复上传图片后 antd 报警告问题。[#1492](https://github.com/ant-design/x/pull/1492) 由 [@kimteayon](https://github.com/kimteayon) 提交
+- 🐛 修复 Mermaid 渲染抖动问题。[#1497](https://github.com/ant-design/x/pull/1497) 由 [@Div627](https://github.com/Div627) 提交
+- 📖 优化官网站点提升用户体验。[#1464](https://github.com/ant-design/x/pull/1464) 由 [@IsDyh01](https://github.com/IsDyh01) 提交、[#1483](https://github.com/ant-design/x/pull/1483) 由 [@Chiaki-xps](https://github.com/Chiaki-xps) 提交、[#1463](https://github.com/ant-design/x/pull/1463) 由 [@J-Da-Shi](https://github.com/J-Da-Shi) 提交、[#1489](https://github.com/ant-design/x/pull/1489) 由 [@Chiaki-xps](https://github.com/Chiaki-xps) 提交、[#1499](https://github.com/ant-design/x/pull/1499) 由 [@kimteayon](https://github.com/kimteayon) 提交、[#1500](https://github.com/ant-design/x/pull/1500) 由 [@kimteayon](https://github.com/kimteayon) 提交、[#1501](https://github.com/ant-design/x/pull/1501) 由 [@Samoy](https://github.com/Samoy) 提交
+- 🛠 修改对 `mermaid` 的依赖配置。[#1475](https://github.com/ant-design/x/pull/1475) 由 [@Div627](https://github.com/Div627) 提交
+
+### @ant-design/x-sdk
+
+- 🐛 优化消息流的节流与发射逻辑，避免高频流式更新导致的深度更新错误，提升实时消息稳定性与性能。[#1418](https://github.com/ant-design/x/pull/1418) 由 [@Afee2019](https://github.com/Afee2019) 提交
+
+### @ant-design/x-markdown
+
+- 🛠 优化 `sideEffects` 配置。[#1408](https://github.com/ant-design/x/pull/1408) 由 [@hongxuWei](https://github.com/hongxuWei) 提交
+
 ## 2.1.0
 
 `2025-12-05`
