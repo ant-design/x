@@ -711,7 +711,19 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
 
     if (text) {
-      insert([{ type: 'text', value: text.replace(/\n/g, '') }]);
+      const cleanText = text.replace(/\n/g, '');
+
+      let success = false;
+
+      try {
+        success = document.execCommand('insertText', false, cleanText);
+      } catch (err) {
+        // ignore
+      }
+
+      if (!success) {
+        insert([{ type: 'text', value: cleanText }]);
+      }
     }
 
     onPaste?.(e as unknown as React.ClipboardEvent<HTMLTextAreaElement>);
