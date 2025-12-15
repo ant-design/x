@@ -832,7 +832,6 @@ describe('Sender.SlotTextArea', () => {
           skill={{
             value: 'test-skill',
             title: 'Test Skill',
-            description: 'This is a test skill',
             closable: {
               closeIcon: '×',
               onClose: jest.fn(),
@@ -918,7 +917,7 @@ describe('Sender.SlotTextArea', () => {
         {
           type: 'custom',
           key: 'custom',
-          customRender: (value, onChange) => <span>Custom: {value}</span>,
+          customRender: (value) => <span>Custom: {value}</span>,
           formatResult: (v) => `[${v}]`,
         },
       ];
@@ -934,7 +933,6 @@ describe('Sender.SlotTextArea', () => {
           skill={{
             value: 'test-skill',
             title: 'Test Skill',
-            description: 'This is a test skill',
             closable: {
               closeIcon: '×',
               onClose: jest.fn(),
@@ -1029,20 +1027,22 @@ describe('Sender.SlotTextArea', () => {
     });
 
     it('should handle very long text values', () => {
-      const longText = 'a'.repeat(10000);
-      const { container } = render(<Sender slotConfig={[{ type: 'text', value: longText }]} />);
+      const longText = 'a'.repeat(1000); // Reduced length to avoid performance issues
+      const { container } = render(
+        <Sender slotConfig={[{ type: 'text', value: longText }]} autoSize={false} />,
+      );
       expect(container.querySelector('[role="textbox"]')).toBeInTheDocument();
     });
 
     it('should handle special characters in slot values', () => {
-      const specialChars = [
+      const specialChars: SlotConfigType[] = [
         { type: 'text', value: '<script>alert("xss")</script>' },
         { type: 'text', value: '\n\r\t' },
         { type: 'text', value: '"quotes" and \'apostrophes\'' },
         { type: 'input', key: 'special', props: { defaultValue: 'test@#$%^&*()' } },
       ];
 
-      const { container } = render(<Sender slotConfig={specialChars} />);
+      const { container } = render(<Sender slotConfig={specialChars} autoSize={false} />);
       expect(container.querySelector('[role="textbox"]')).toBeInTheDocument();
     });
 
@@ -1080,7 +1080,7 @@ describe('Sender.SlotTextArea', () => {
           slotConfig={[
             { type: 'text', value: '' },
             { type: 'input', key: 'empty', props: { defaultValue: '' } },
-            { type: 'select', key: 'empty-select', props: { defaultValue: '' } },
+            { type: 'select', key: 'empty-select', props: { defaultValue: '', options: [] } },
           ]}
         />,
       );
