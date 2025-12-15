@@ -549,13 +549,12 @@ describe('Sender.SlotTextArea', () => {
     });
 
     it('should handle custom slot with disabled state', () => {
-      const onChange = jest.fn();
       const customConfig: SlotConfigType[] = [
         {
           type: 'custom',
           key: 'custom-disabled',
-          customRender: (value: any, onChange: (value: any) => void, { disabled }: any) => (
-            <button type="button" disabled={disabled} onClick={() => onChange('test')}>
+          customRender: (_value: any, _onChange: (value: any) => void, { disabled }: any) => (
+            <button type="button" disabled={disabled} onClick={() => _onChange('test')}>
               {disabled ? 'Disabled' : 'Enabled'}
             </button>
           ),
@@ -779,7 +778,7 @@ describe('Sender.SlotTextArea', () => {
         {
           type: 'custom',
           key: 'custom-format',
-          customRender: (value: any, onChange: (value: any) => void) => (
+          customRender: (_value: any, onChange: (value: any) => void) => (
             <button type="button" onClick={() => onChange('test-value')}>
               Click
             </button>
@@ -816,7 +815,7 @@ describe('Sender.SlotTextArea', () => {
         {
           type: 'custom',
           key: 'custom',
-          customRender: (value, onChange) => <span>Custom: {value}</span>,
+          customRender: (value) => <span>Custom: {value}</span>,
           formatResult: (v) => `[${v}]`,
         },
       ];
