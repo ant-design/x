@@ -1,10 +1,12 @@
 import classnames from 'classnames';
 import { useCallback } from 'react';
-import type { SlotConfigType } from '../interface';
+import type { SlotConfigBaseType, SlotConfigType } from '../interface';
 
 interface UseSlotBuilderOptions {
   prefixCls: string;
   placeholder?: string;
+  slotDomMap: React.MutableRefObject<Map<string, HTMLSpanElement>>;
+  slotConfigMap: Map<string, SlotConfigBaseType>;
 }
 
 interface UseSlotBuilderReturn {
@@ -12,10 +14,16 @@ interface UseSlotBuilderReturn {
   buildEditSlotSpan: (config: SlotConfigType) => HTMLSpanElement;
   buildSlotSpan: (key: string) => HTMLSpanElement;
   buildSpaceSpan: (slotKey: string, positions: 'before' | 'after') => HTMLSpanElement;
+  saveSlotDom: (key: string, dom: HTMLSpanElement) => void;
+  getSlotDom: (key: string) => HTMLSpanElement | undefined;
+  getSlotLastDom: (
+    slotKey: string,
+    slotType?: SlotConfigBaseType['type'],
+  ) => HTMLSpanElement | undefined;
 }
 
 const useSlotBuilder = (options: UseSlotBuilderOptions): UseSlotBuilderReturn => {
-  const { prefixCls, placeholder } = options;
+  const { prefixCls, placeholder, slotDomMap, slotConfigMap } = options;
 
   /**
    * 创建技能span元素
@@ -80,11 +88,29 @@ const useSlotBuilder = (options: UseSlotBuilderOptions): UseSlotBuilderReturn =>
     [prefixCls],
   );
 
+  const saveSlotDom = (key: string, dom: HTMLSpanElement) => {
+    slotDomMap.current.set(key, dom);
+  };
+
+  const getSlotDom = (key: string): HTMLSpanElement | undefined => {
+    return slotDomMap.current.get(key);
+  };
+  const getSlotLastDom = (slotKey: string, slotType?: SlotConfigBaseType['type']) => {
+    const mergeSlotType = slotType ?? slotConfigMap.get(slotKey)?.type;
+    if (mergeSlotType === 'content') {
+      return getSlotDom(`${slotKey}_after`);
+    }
+    return getSlotDom(slotKey);
+  };
+
   return {
     buildSkillSpan,
     buildEditSlotSpan,
     buildSlotSpan,
     buildSpaceSpan,
+    saveSlotDom,
+    getSlotDom,
+    getSlotLastDom,
   };
 };
 

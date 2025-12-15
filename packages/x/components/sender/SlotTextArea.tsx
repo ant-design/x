@@ -137,9 +137,19 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   });
 
   // ============================ Slot Builder =============================
-  const { buildSkillSpan, buildEditSlotSpan, buildSlotSpan, buildSpaceSpan } = useSlotBuilder({
+  const {
+    buildSkillSpan,
+    buildEditSlotSpan,
+    buildSlotSpan,
+    buildSpaceSpan,
+    getSlotDom,
+    saveSlotDom,
+    getSlotLastDom,
+  } = useSlotBuilder({
     prefixCls,
     placeholder,
+    slotDomMap,
+    slotConfigMap,
   });
 
   // ============================ Methods =============================
@@ -157,20 +167,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     onChange?.(newValue.value, e, newValue.slotConfig, newValue.skill);
   };
 
-  const saveSlotDom = (key: string, dom: HTMLSpanElement) => {
-    slotDomMap.current.set(key, dom);
-  };
-
-  const getSlotDom = (key: string): HTMLSpanElement | undefined => {
-    return slotDomMap.current.get(key);
-  };
-  const getSlotLastDom = (slotKey: string, slotType?: SlotConfigBaseType['type']) => {
-    const mergeSlotType = slotType ?? slotConfigMap.get(slotKey)?.type;
-    if (mergeSlotType === 'content') {
-      return getSlotDom(`${slotKey}_after`);
-    }
-    return getSlotDom(slotKey);
-  };
   const updateSlot = (key: string, value: any, e?: EventType) => {
     const slotDom = getSlotDom(key);
     const config = slotConfigMap.get(key);
