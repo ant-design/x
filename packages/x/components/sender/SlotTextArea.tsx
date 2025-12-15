@@ -125,10 +125,15 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     setAfterNodeFocus,
     getTextBeforeCursor,
     removeAllRanges,
+    getInsertPosition,
+    getEndRange,
+    getStartRange,
   } = useCursor({
     prefixCls,
     getSlotDom: (key: string) => slotDomMap.current.get(key),
     slotConfigMap,
+    getNodeInfo,
+    getEditorValue: () => getEditorValue(),
   });
 
   // ============================ Slot Builder =============================
@@ -388,67 +393,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     lastSelectionRef.current = null;
     removeAllRanges();
     slotDomMap?.current?.clear();
-  };
-
-  /**
-   * 获取插入位置信息
-   * @param position - 插入位置类型：'cursor' | 'end' | 'start'
-   * @returns 包含插入类型和对应 range 的对象
-   */
-  const getInsertPosition = (
-    position?: InsertPosition,
-  ): {
-    type: 'box' | 'slot' | 'end' | 'start' | 'content';
-    slotType?: SlotConfigBaseType['type'];
-    range?: Range;
-    slotKey?: string;
-    selection: Selection | null;
-  } => {
-    const selection = window?.getSelection?.();
-    if (position === 'start' || position === 'end') {
-      return { type: position, selection };
-    }
-
-    if (!selection || selection.rangeCount === 0) {
-      return { type: 'end', selection };
-    }
-
-    const range = lastSelectionRef.current || selection.getRangeAt(0);
-    if (!range) {
-      return { type: 'end', selection };
-    }
-
-    const editableDom = editableRef.current;
-    if (!editableDom) {
-      return { type: 'end', selection };
-    }
-
-    const container =
-      range.endContainer.nodeType === Node.TEXT_NODE
-        ? range.endContainer.parentElement
-        : (range.endContainer as HTMLElement);
-
-    if (!container) {
-      return { type: 'end', selection };
-    }
-    const { slotKey, slotConfig } = getNodeInfo(container) || {};
-
-    if (slotKey || slotKey) {
-      return {
-        type: 'slot',
-        slotKey: slotConfig?.key,
-        slotType: slotConfig?.type,
-        range,
-        selection,
-      };
-    }
-
-    const isInEditableBox = editableDom.contains(range.endContainer);
-    if (isInEditableBox) {
-      return { type: 'box', range, selection };
-    }
-
-    return { type: 'end', selection };
   };
 
   const appendNodeList = (slotNodeList: HTMLElement[]) => {
@@ -788,7 +732,13 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     slotKey?: string;
     slotType?: SlotConfigBaseType['type'];
   } => {
-    const { type, slotKey, slotType, range: lastRange, selection } = getInsertPosition(position);
+    const {
+      type,
+      slotKey,
+      slotType,
+      range: lastRange,
+      selection,
+    } = getInsertPosition(position, editableRef, lastSelectionRef);
 
     if (!selection) {
       return { range: null, selection: null, type };
@@ -817,29 +767,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
 
     return { range, selection, type, slotKey, slotType };
-  };
-
-  /**
-   * 获取末尾插入范围
-   */
-  const getEndRange = (editableDom: HTMLDivElement): Range => {
-    const lastNode = editableDom.childNodes[editableDom.childNodes.length - 1];
-    const targetIndex =
-      lastNode?.nodeType === Node.TEXT_NODE && lastNode.textContent === '\n'
-        ? editableDom.childNodes.length - 1
-        : editableDom.childNodes.length;
-
-    const result = setCursorPosition(editableDom, editableDom, targetIndex);
-    return result.range || document.createRange();
-  };
-
-  /**
-   * 获取开头插入范围
-   */
-  const getStartRange = (editableDom: HTMLDivElement): Range => {
-    const startIndex = getEditorValue().skill ? 1 : 0;
-    const result = setCursorPosition(editableDom, editableRef.current!, startIndex);
-    return result.range || document.createRange();
   };
 
   /**

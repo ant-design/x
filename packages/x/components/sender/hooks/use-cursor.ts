@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import warning from '../../_util/warning';
+import type { InsertPosition, SlotConfigBaseType } from '../interface';
 
 interface CursorPosition {
   element: Node;
@@ -10,6 +11,10 @@ interface UseCursorOptions {
   prefixCls: string;
   getSlotDom: (key: string) => HTMLSpanElement | undefined;
   slotConfigMap: Map<string, any>;
+  getNodeInfo: (
+    element: HTMLElement,
+  ) => { slotKey?: string; skillKey?: string; slotConfig?: any; nodeType?: string } | null;
+  getEditorValue: () => { value: string; slotConfig: any[]; skill?: any };
 }
 
 interface UseCursorReturn {
@@ -46,6 +51,19 @@ interface UseCursorReturn {
     startOffset: number;
   };
   removeAllRanges: () => void;
+  getInsertPosition: (
+    position?: InsertPosition,
+    editableRef?: React.RefObject<HTMLDivElement | null>,
+    lastSelectionRef?: React.MutableRefObject<Range | null>,
+  ) => {
+    type: 'box' | 'slot' | 'end' | 'start' | 'content';
+    slotType?: SlotConfigBaseType['type'];
+    range?: Range;
+    slotKey?: string;
+    selection: Selection | null;
+  };
+  getEndRange: (editableDom: HTMLDivElement) => Range;
+  getStartRange: (editableDom: HTMLDivElement) => Range;
 }
 
 const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
@@ -322,6 +340,98 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
     [getSelection],
   );
 
+  /**
+   * 获取插入位置信息
+   * @param position - 插入位置类型：'cursor' | 'end' | 'start'
+   * @returns 包含插入类型和对应 range 的对象
+   */
+  const getInsertPosition: UseCursorReturn['getInsertPosition'] = useCallback(
+    (
+      position?: InsertPosition,
+      editableRef?: React.RefObject<HTMLDivElement | null>,
+      lastSelectionRef?: React.MutableRefObject<Range | null>,
+    ) => {
+      const selection = window?.getSelection?.();
+      if (position === 'start' || position === 'end') {
+        return { type: position, selection };
+      }
+
+      if (!selection || selection.rangeCount === 0) {
+        return { type: 'end', selection };
+      }
+
+      const range = lastSelectionRef?.current || selection.getRangeAt(0);
+      if (!range) {
+        return { type: 'end', selection };
+      }
+
+      const editableDom = editableRef?.current;
+      if (!editableDom) {
+        return { type: 'end', selection };
+      }
+
+      const container =
+        range.endContainer.nodeType === Node.TEXT_NODE
+          ? range.endContainer.parentElement
+          : (range.endContainer as HTMLElement);
+
+      if (!container) {
+        return { type: 'end', selection };
+      }
+
+      if (options?.getNodeInfo) {
+        const { slotKey, slotConfig } = options.getNodeInfo(container) || {};
+
+        if (slotKey) {
+          return {
+            type: 'slot',
+            slotKey: slotConfig?.key,
+            slotType: slotConfig?.type,
+            range,
+            selection,
+          };
+        }
+      }
+
+      const isInEditableBox = editableDom.contains(range.endContainer);
+      if (isInEditableBox) {
+        return { type: 'box', range, selection };
+      }
+
+      return { type: 'end', selection };
+    },
+    [options],
+  );
+
+  /**
+   * 获取末尾插入范围
+   */
+  const getEndRange: UseCursorReturn['getEndRange'] = useCallback(
+    (editableDom: HTMLDivElement): Range => {
+      const lastNode = editableDom.childNodes[editableDom.childNodes.length - 1];
+      const targetIndex =
+        lastNode?.nodeType === Node.TEXT_NODE && lastNode.textContent === '\n'
+          ? editableDom.childNodes.length - 1
+          : editableDom.childNodes.length;
+
+      const result = setCursorPosition(editableDom, editableDom, targetIndex);
+      return result.range || document.createRange();
+    },
+    [setCursorPosition],
+  );
+
+  /**
+   * 获取开头插入范围
+   */
+  const getStartRange: UseCursorReturn['getStartRange'] = useCallback(
+    (editableDom: HTMLDivElement): Range => {
+      const startIndex = options?.getEditorValue?.().skill ? 1 : 0;
+      const result = setCursorPosition(editableDom, editableDom, startIndex);
+      return result.range || document.createRange();
+    },
+    [setCursorPosition, options],
+  );
+
   return {
     setEndCursor,
     setStartCursor,
@@ -333,6 +443,9 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
     getSelection,
     removeAllRanges,
     getRange,
+    getInsertPosition,
+    getEndRange,
+    getStartRange,
   };
 };
 
