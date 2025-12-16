@@ -57,7 +57,7 @@ class CustomProvider<
 
     // 处理完成标记或空数据
     // Handle completion marker or empty data
-    if (!chunk || !chunk?.data || (chunk?.data && chunk?.data?.includes('[DONE]'))) {
+    if (!chunk || !chunk?.data || chunk?.data?.includes('[DONE]')) {
       return {
         content: `${originMessage?.content}`,
         role: 'assistant',

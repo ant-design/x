@@ -2,7 +2,7 @@ import { Suggestion } from '@ant-design/x';
 import { Select } from 'antd';
 import React from 'react';
 
-let uuid = 0;
+let _uuid = 0;
 
 const Demo: React.FC = () => {
   const [tags, setTags] = React.useState<string[]>([]);
@@ -12,7 +12,7 @@ const Demo: React.FC = () => {
     <Suggestion<string>
       items={(info) => [{ label: `Trigger by '${info}'`, value: String(info) }]}
       onSelect={() => {
-        uuid += 1;
+        _uuid += 1;
         setTags([...tags, `Cell_${value.replace('/g', '')}`]);
         setValue('');
       }}
