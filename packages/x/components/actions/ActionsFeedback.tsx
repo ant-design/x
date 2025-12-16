@@ -135,7 +135,7 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
               `${feedbackCls}-item-dislike`,
               classNames.dislike,
               {
-                [`${classNames.disliked}`]: classNames.disliked && value === 'like',
+                [`${classNames.disliked}`]: classNames.disliked && value === 'dislike',
                 [`${feedbackCls}-item-dislike-active`]: value === 'dislike',
               },
             )}
