@@ -1,6 +1,9 @@
 import DOMPurify from 'dompurify';
 import { JSDOM } from 'jsdom';
 
+let serverDOMPurify: ReturnType<typeof DOMPurify> | null = null;
+let jsdomInstance: JSDOM | null = null;
+
 /**
  * Returns the DOMPurify instance, compatible with both server-side (Node.js) and client-side (browser) environments.
  *
@@ -8,10 +11,13 @@ import { JSDOM } from 'jsdom';
  *
  * @see https://github.com/cure53/DOMPurify?tab=readme-ov-file#running-dompurify-on-the-server
  */
-export function getDOMPurify() {
+export function getDOMPurify(): ReturnType<typeof DOMPurify> {
   if (typeof window === 'undefined') {
-    const jsWindow = new JSDOM('').window;
-    return DOMPurify(jsWindow);
+    if (!serverDOMPurify) {
+      jsdomInstance = new JSDOM('');
+      serverDOMPurify = DOMPurify(jsdomInstance.window);
+    }
+    return serverDOMPurify;
   }
 
   return DOMPurify;

@@ -52,11 +52,13 @@
     "clsx": "^2.1.1",
     "dompurify": "^3.2.6",
     "html-react-parser": "^5.2.5",
+    "jsdom": "^26.1.0",
     "katex": "^0.16.22",
     "marked": "^15.0.12"
   },
   "devDependencies": {
     "@types/dompurify": "^3.0.5",
+    "@types/jsdom": "^27.0.0",
     "@types/lodash.throttle": "^4.1.9",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
