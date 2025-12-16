@@ -1,6 +1,6 @@
-import DOMPurify from 'dompurify';
 import React from 'react';
 import Renderer from '../core/Renderer';
+import { getDOMPurify } from '../utils';
 
 // Mock React components for testing
 const MockComponent: React.FC<any> = (props) => {
@@ -776,6 +776,7 @@ describe('Renderer', () => {
       const renderer = new Renderer({ components });
 
       // Spy on DOMPurify.sanitize
+      const DOMPurify = getDOMPurify();
       const sanitizeSpy = jest.spyOn(DOMPurify, 'sanitize');
 
       const html = '<custom-tag>content</custom-tag><script>alert("xss")</script>';
@@ -807,6 +808,7 @@ describe('Renderer', () => {
       });
 
       // Spy on DOMPurify.sanitize
+      const DOMPurify = getDOMPurify();
       const sanitizeSpy = jest.spyOn(DOMPurify, 'sanitize');
 
       const html = '<custom-tag class="test" id="test-id">content</custom-tag>';
