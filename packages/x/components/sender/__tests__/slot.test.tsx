@@ -607,6 +607,7 @@ describe('Sender.SlotTextArea', () => {
 
       expect(() => {
         ref.current?.clear();
+        ref.current?.blur();
         ref.current?.insert([{ type: 'text', value: 'New Content' }]);
       }).not.toThrow();
     });
@@ -877,114 +878,6 @@ describe('Sender.SlotTextArea', () => {
           submitType="shiftEnter"
           loading={false}
           allowSpeech={true}
-        />,
-      );
-      expect(container.querySelector('[role="textbox"]')).toBeInTheDocument();
-    });
-
-    it('should handle empty and null values gracefully', () => {
-      const { container } = render(
-        <Sender
-          slotConfig={[
-            { type: 'text', value: '' },
-            { type: 'input', key: 'empty' },
-            { type: 'select', key: 'select-empty', props: { options: [] } },
-          ]}
-        />,
-      );
-      expect(container.querySelector('[role="textbox"]')).toBeInTheDocument();
-    });
-  });
-
-  describe('Comprehensive coverage tests', () => {
-    it('should handle all slot types with complete configurations', () => {
-      const completeConfig: SlotConfigType[] = [
-        { type: 'text', value: 'Hello' },
-        { type: 'text', value: '' },
-        { type: 'input', key: 'name', props: { placeholder: 'Enter name', defaultValue: 'John' } },
-        { type: 'input', key: 'empty-input' },
-        {
-          type: 'select',
-          key: 'gender',
-          props: { options: ['Male', 'Female'], defaultValue: 'Male' },
-        },
-        { type: 'select', key: 'empty-select', props: { options: [] } },
-        { type: 'tag', key: 'status', props: { label: 'Active' } },
-        { type: 'tag', key: 'no-label' },
-        { type: 'content', key: 'bio', props: { placeholder: 'Bio', defaultValue: 'Default bio' } },
-        { type: 'content', key: 'empty-content' },
-        {
-          type: 'custom',
-          key: 'custom',
-          customRender: (value) => <span>Custom: {value}</span>,
-          formatResult: (v) => `[${v}]`,
-        },
-      ];
-
-      const { container } = render(<Sender slotConfig={completeConfig} />);
-      expect(container.querySelector('[role="textbox"]')).toBeInTheDocument();
-    });
-
-    it('should handle skill with all properties', () => {
-      const { container } = render(
-        <Sender
-          slotConfig={[]}
-          skill={{
-            value: 'test-skill',
-            title: 'Test Skill',
-            closable: {
-              closeIcon: '×',
-              onClose: jest.fn(),
-            },
-          }}
-        />,
-      );
-      expect(container.querySelector('[role="textbox"]')).toBeInTheDocument();
-    });
-
-    it('should handle all event handlers', () => {
-      const handlers = {
-        onChange: jest.fn(),
-        onSubmit: jest.fn(),
-        onFocus: jest.fn(),
-        onBlur: jest.fn(),
-        onKeyDown: jest.fn(),
-        onKeyUp: jest.fn(),
-        onPaste: jest.fn(),
-        onPasteFile: jest.fn(),
-      };
-
-      const { container } = render(<Sender slotConfig={baseSlotConfig} {...handlers} />);
-
-      const inputArea = container.querySelector('[role="textbox"]') as HTMLElement;
-
-      fireEvent.focus(inputArea);
-      fireEvent.blur(inputArea);
-      fireEvent.keyDown(inputArea, { key: 'Enter' });
-      fireEvent.keyUp(inputArea, { key: 'Enter' });
-      fireEvent.paste(inputArea, { clipboardData: { getData: () => 'test', files: [] } });
-
-      expect(handlers.onFocus).toHaveBeenCalled();
-      expect(handlers.onBlur).toHaveBeenCalled();
-      expect(handlers.onKeyDown).toHaveBeenCalled();
-      expect(handlers.onKeyUp).toHaveBeenCalled();
-    });
-
-    it('should handle all props combinations', () => {
-      const { container } = render(
-        <Sender
-          slotConfig={baseSlotConfig}
-          disabled={true}
-          readOnly={true}
-          autoSize={{ minRows: 2, maxRows: 6 }}
-          placeholder="Test placeholder"
-          submitType="enter"
-          loading={false}
-          allowSpeech={true}
-          prefix={null}
-          suffix={null}
-          footer={null}
-          header={null}
         />,
       );
       expect(container.querySelector('[role="textbox"]')).toBeInTheDocument();

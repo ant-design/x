@@ -42,7 +42,7 @@ beforeEach(() => {
     value: () => ({
       rangeCount: 1,
       getRangeAt: (index: number) => {
-        if (index !== 0) return null;
+        if (index !== 0) throw new DOMException('Index out of range', 'IndexSizeError');
         return {
           startContainer: document.createElement('div'),
           endContainer: document.createElement('div'),
@@ -66,6 +66,9 @@ beforeEach(() => {
     writable: true,
   });
 });
+afterEach(() => {
+  jest.restoreAllMocks();
+});
 
 describe('SlotTextArea Final Coverage Enhancement', () => {
   describe('Advanced edge cases and error handling', () => {
@@ -86,6 +89,7 @@ describe('SlotTextArea Final Coverage Enhancement', () => {
       // Test various edge cases
       expect(() => {
         // Test with empty selection
+        const originalGetSelection = window.getSelection;
         Object.defineProperty(window, 'getSelection', {
           value: () => ({
             rangeCount: 0,
@@ -97,6 +101,14 @@ describe('SlotTextArea Final Coverage Enhancement', () => {
         });
 
         ref.current?.insert([{ type: 'text', value: 'test' }]);
+        +(
+          // Restore
+          Object.defineProperty(window, 'getSelection', {
+            value: originalGetSelection,
+            writable: true,
+          })
+        );
+
         ref.current?.focus();
         ref.current?.clear();
       }).not.toThrow();
