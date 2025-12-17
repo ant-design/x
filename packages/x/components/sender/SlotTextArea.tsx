@@ -156,7 +156,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const triggerValueChange = (e?: EventType) => {
     const newValue = getEditorValue();
     if (skillDomRef.current) {
-      if (!newValue?.value && newValue.slotConfig.length === 0) {
+      if (!newValue?.value && newValue.slotConfig.length === 0 && placeholder) {
         skillDomRef.current.setAttribute('contenteditable', 'true');
         skillDomRef.current.classList.add(`${prefixCls}-skill-empty`);
       } else {
@@ -527,18 +527,19 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
   //  处理skill区域的键盘事件
   const handleSkillAreaKeyEvent = () => {
-    if (!skillDomRef.current || !editableRef.current) return;
+    if (
+      !skillDomRef.current ||
+      !editableRef.current ||
+      skillDomRef.current.getAttribute('contenteditable') === 'false'
+    )
+      return;
     const selection = window.getSelection();
     if (!selection?.anchorNode) return;
     if (!skillDomRef.current.contains(selection.anchorNode)) return;
     if (!editableRef.current.contains(selection.anchorNode)) return;
-    try {
-      skillDomRef.current.setAttribute('contenteditable', 'false');
-      skillDomRef.current.classList.remove(`${prefixCls}-skill-empty`);
-      focus({ cursor: 'end' });
-    } catch (error) {
-      warning(false, 'Sender', `Failed to handle skill area key event:${error}`);
-    }
+    skillDomRef.current.setAttribute('contenteditable', 'false');
+    skillDomRef.current.classList.remove(`${prefixCls}-skill-empty`);
+    focus({ cursor: 'end' });
   };
 
   // ============================ Events =============================
