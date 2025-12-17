@@ -55,15 +55,33 @@ export interface ComponentToken {
    * @descEN Input border color
    */
   colorBorderInput: string;
+  /**
+   * @desc 技能背景颜色
+   * @descEN Skill background color
+   */
   colorBgSkill: string;
+  /**
+   * @desc 技能悬浮态背景颜色
+   * @descEN Skill hover background color
+   */
   colorBgSkillHover: string;
+  /**
+   * @desc 操作按钮禁用文本颜色
+   * @descEN Actions disabled text color
+   */
+  colorTextActionsDisabled: string;
+  /**
+   * @desc 操作按钮禁用背景颜色
+   * @descEN Actions disabled background color
+   */
+  colorBgActionsDisabled: string;
 }
 
 export interface SenderToken extends FullToken<'Sender'> {
   SenderContentMaxWidth: number | string;
 }
 const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
-  const { componentCls, paddingSM, paddingXS, paddingXXS, lineWidth, calc } = token;
+  const { antCls, componentCls, paddingSM, paddingXS, paddingXXS, lineWidth, calc } = token;
   return {
     [componentCls]: {
       [`&${componentCls}-main`]: {
@@ -121,12 +139,13 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
       },
 
       [`${componentCls}-actions-btn`]: {
-        '&-disabled': {
-          background: token.colorPrimary,
-          opacity: 0.45,
+        [`&-disabled:where(${antCls}-btn-variant-text)`]: {
+          color: token.colorTextActionsDisabled,
+        },
+        [`&-disabled:not(${antCls}-btn-variant-text)`]: {
+          background: token.colorBgActionsDisabled,
           color: token.colorTextLightSolid,
         },
-
         '&-loading-button': {
           padding: 0,
           border: 0,
@@ -173,6 +192,8 @@ export const prepareComponentToken: GetDefaultToken<'Sender'> = (token) => {
   const colorBorderInput = new FastColor(colorFillTertiary).setA(0.1).toRgbString();
 
   const boxShadowInput = `0 4px 12px 0 ${new FastColor(colorPrimary).setA(0.1).toRgbString()}`;
+  const colorBgActionsDisabled = new FastColor(colorPrimary).setA(0.45).toRgbString();
+  const colorTextActionsDisabled = new FastColor(colorPrimary).setA(0.45).toRgbString();
   return {
     colorBgSlot,
     colorBgSkill,
@@ -186,6 +207,8 @@ export const prepareComponentToken: GetDefaultToken<'Sender'> = (token) => {
     switchUncheckedHoverBg,
     colorBorderInput,
     boxShadowInput,
+    colorBgActionsDisabled,
+    colorTextActionsDisabled,
   };
 };
 
