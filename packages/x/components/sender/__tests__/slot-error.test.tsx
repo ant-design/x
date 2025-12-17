@@ -101,14 +101,11 @@ describe('SlotTextArea Final Coverage Enhancement', () => {
         });
 
         ref.current?.insert([{ type: 'text', value: 'test' }]);
-        +(
-          // Restore
-          Object.defineProperty(window, 'getSelection', {
-            value: originalGetSelection,
-            writable: true,
-          })
-        );
-
+        // Restore
+        Object.defineProperty(window, 'getSelection', {
+          value: originalGetSelection,
+          writable: true,
+        });
         ref.current?.focus();
         ref.current?.clear();
       }).not.toThrow();

@@ -906,7 +906,7 @@ describe('Sender.SlotTextArea', () => {
     });
 
     it('should handle slot with missing key warnings', () => {
-      const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
+      const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
       const invalidConfig = [
         { type: 'input', props: { placeholder: 'No key' } } as SlotConfigType,
         { type: 'select', props: { options: ['A', 'B'] } } as SlotConfigType,

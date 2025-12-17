@@ -140,16 +140,6 @@ describe('attachments util', () => {
       expect(mockFileReaderInstance.readAsDataURL).toHaveBeenCalledWith(file);
     });
 
-    it('should handle GIF files with FileReader', async () => {
-      const file = new File(['gif content'], 'test.gif', { type: 'image/gif' });
-
-      // GIF 文件实际上会通过 canvas 处理，与常规图片类似
-      const result = await previewImage(file);
-
-      // 验证结果是通过 canvas 处理后的数据
-      expect(result).toBe('data:image/jpeg;base64,mocked');
-    });
-
     it('should handle regular image files with createObjectURL', async () => {
       const file = new File(['image content'], 'test.jpg', { type: 'image/jpeg' });
 

@@ -82,7 +82,7 @@ describe('Mermaid Component', () => {
 
     it('should handle invalid mermaid syntax', async () => {
       mockParse.mockResolvedValue(false);
-      const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
+      const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
 
       render(<Mermaid>invalid syntax</Mermaid>);
 
