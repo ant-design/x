@@ -37,7 +37,7 @@
     "antd": "^6.1.0",
     "circular-dependency-plugin": "^5.2.2",
     "dekko": "^0.2.1",
-    "father": "^4.6.0",
+    "father": "^4.6.10",
     "gh-pages": "^6.3.0",
     "husky": "^9.1.6",
     "lint-staged": "^16.1.5",
