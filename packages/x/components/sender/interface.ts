@@ -30,7 +30,7 @@ export type NodeRender = (
   },
 ) => BaseNode;
 
-interface SlotConfigBaseType {
+export interface SlotConfigBaseType {
   type: 'text' | 'input' | 'select' | 'tag' | 'custom' | 'content' | 'skill';
   formatResult?: (value: any) => string;
 }
