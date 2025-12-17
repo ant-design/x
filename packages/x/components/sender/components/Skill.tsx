@@ -63,7 +63,13 @@ const Skill: React.FC<SkillProps> = ({
   }, [closable, removeSkill]);
 
   const mergeTitle = title || value;
-  const titleNode = toolTip ? <Tooltip {...toolTip}>{mergeTitle}</Tooltip> : mergeTitle;
+  const titleNode = toolTip ? (
+    <Tooltip {...toolTip}>
+      <span>{mergeTitle}</span>
+    </Tooltip>
+  ) : (
+    mergeTitle
+  );
 
   return (
     <div className={`${componentCls}-wrapper`} contentEditable={false}>
