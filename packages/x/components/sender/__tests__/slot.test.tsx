@@ -423,7 +423,7 @@ describe('Sender.SlotTextArea', () => {
 
   describe('Boundary condition tests', () => {
     it('should handle missing key warning', () => {
-      const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
+      const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
       const invalidConfig = [{ type: 'input', props: { placeholder: 'No key' } } as SlotConfigType];
 
       render(<Sender slotConfig={invalidConfig} />);
