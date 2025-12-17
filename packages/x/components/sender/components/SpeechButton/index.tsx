@@ -24,9 +24,9 @@ function SpeechButton(props: ButtonProps, ref: React.Ref<HTMLButtonElement>) {
   return (
     <ActionButton
       icon={icon}
+      variant="text"
       color="primary"
       {...props}
-      variant={'text'}
       action="onSpeech"
       ref={ref}
     />

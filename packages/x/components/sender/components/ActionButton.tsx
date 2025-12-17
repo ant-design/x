@@ -35,6 +35,7 @@ export function ActionButton(props: ActionButtonProps, ref: React.Ref<HTMLButton
       setSubmitDisabled?.(mergedDisabled);
     }
   }, [mergedDisabled, action, setSubmitDisabled]);
+
   return (
     <Button
       type="text"
