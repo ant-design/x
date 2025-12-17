@@ -1,4 +1,4 @@
-import { useMergedState } from '@rc-component/util';
+import { useControlledState } from '@rc-component/util';
 import pickAttrs from '@rc-component/util/lib/pickAttrs';
 import { Flex } from 'antd';
 import { clsx } from 'clsx';
@@ -139,9 +139,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
   const actionListCls = `${prefixCls}-actions-list`;
 
   // ============================ Value =============================
-  const [innerValue, setInnerValue] = useMergedState(defaultValue || '', {
-    value,
-  });
+  const [innerValue, setInnerValue] = useControlledState(defaultValue || '', value);
 
   const triggerValueChange: SenderProps['onChange'] = (nextValue, event, slotConfig, skill) => {
     setInnerValue(nextValue);
@@ -164,7 +162,7 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
 
   // ============================ Events ============================
   const triggerSend = () => {
-    if (inputRef?.current && onSubmit && !loading) {
+    if (inputRef?.current && onSubmit && !loading && !submitDisabled) {
       const inputValue = inputRef.current.getValue();
       onSubmit(inputValue.value, inputValue.slotConfig, inputValue.skill);
     }
@@ -258,7 +256,6 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
       onFocus,
       onBlur,
       skill,
-      submitDisabled,
       ...restProps,
     }),
     [
@@ -282,7 +279,6 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
       onFocus,
       onBlur,
       skill,
-      submitDisabled,
       restProps,
     ],
   );

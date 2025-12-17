@@ -134,7 +134,7 @@ const App: React.FC = () => {
         </Button>
         <Button
           onClick={() => {
-            senderRef.current?.insert?.([{ type: 'text', value: ' some text ' }]);
+            senderRef.current?.insert?.([{ type: 'text', value: ' some text A' }]);
           }}
         >
           Insert Text
@@ -142,10 +142,20 @@ const App: React.FC = () => {
         <Button
           onClick={() => {
             senderRef.current?.insert?.([
+              { type: 'text', value: ' some text B' },
+              { type: 'content', key: `partner_3_${Date.now()}`, props: { defaultValue: '11' } },
+            ]);
+          }}
+        >
+          Insert Slots
+        </Button>
+        <Button
+          onClick={() => {
+            senderRef.current?.insert?.([
               {
-                type: 'input',
-                key: `partner_2_${Date.now()}`,
-                props: { placeholder: 'Enter a name' },
+                type: 'content',
+                key: `partner_1_${Date.now()}`,
+                props: { defaultValue: 'NingNing', placeholder: 'Enter a name' },
               },
             ]);
           }}
