@@ -193,7 +193,7 @@ export const prepareComponentToken: GetDefaultToken<'Sender'> = (token) => {
 
   const boxShadowInput = `0 4px 12px 0 ${new FastColor(colorPrimary).setA(0.1).toRgbString()}`;
   const colorBgActionsDisabled = new FastColor(colorPrimary).setA(0.45).toRgbString();
-  const colorTextActionsDisabled = new FastColor(colorPrimary).setA(0.45).toRgbString();
+  const colorTextActionsDisabled = colorBgActionsDisabled;
   return {
     colorBgSlot,
     colorBgSkill,
