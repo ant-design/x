@@ -19,7 +19,7 @@ exports[`XMarkdown animation parent is not custom components 1`] = `
   >
     <p>
       <span
-        style="animation: x-markdown-fade-in 200ms ease-in-out forwards;"
+        style="animation: x-markdown-fade-in 200ms ease-in-out forwards; color: inherit;"
       >
         This is Text.
       </span>
