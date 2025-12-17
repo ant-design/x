@@ -4,23 +4,23 @@ import { App, Space, Spin, Typography } from 'antd';
 import React from 'react';
 
 const Demo: React.FC = () => {
-  const [loading, setLoading] = React.useState(true);
+  const [loading, setLoading] = React.useState(false);
   const [value, setValue] = React.useState<string>('');
 
   const { message } = App.useApp();
 
-  // React.useEffect(() => {
-  //   if (loading) {
-  //     const timer = setTimeout(() => {
-  //       setLoading(false);
-  //       setValue('');
-  //       message.success('Send message successfully!');
-  //     }, 2000);
-  //     return () => {
-  //       clearTimeout(timer);
-  //     };
-  //   }
-  // }, [loading]);
+  React.useEffect(() => {
+    if (loading) {
+      const timer = setTimeout(() => {
+        setLoading(false);
+        setValue('');
+        message.success('Send message successfully!');
+      }, 2000);
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [loading]);
 
   return (
     <Sender
