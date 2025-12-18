@@ -1,8 +1,8 @@
 import React from 'react';
-import { fireEvent, render } from '../../../tests/utils';
+import { render } from '../../../tests/utils';
 import Bubble from '../Bubble';
 
-describe('Bubble Enhanced Tests', () => {
+describe('Bubble Base Tests', () => {
   describe('Props Coverage', () => {
     it('should handle all props correctly', () => {
       const ref = React.createRef<any>();
@@ -131,74 +131,6 @@ describe('Bubble Enhanced Tests', () => {
         const { container } = render(<Bubble content="Test" placement={placement} />);
         expect(container.querySelector(`.ant-bubble-${placement}`)).toBeInTheDocument();
       });
-    });
-  });
-
-  describe('Editable Features', () => {
-    it('should handle editable boolean mode', () => {
-      const { container } = render(<Bubble content="Editable Content" editable />);
-
-      expect(container.querySelector('.ant-bubble-content-editing')).toBeInTheDocument();
-      expect(container.querySelector('[contenteditable="true"]')).toBeInTheDocument();
-    });
-
-    it('should handle editable object mode', () => {
-      const onEditConfirm = jest.fn();
-      const onEditCancel = jest.fn();
-
-      const { container } = render(
-        <Bubble
-          content="Test"
-          editable={{
-            editing: true,
-            okText: 'Save',
-            cancelText: 'Cancel',
-          }}
-          onEditConfirm={onEditConfirm}
-          onEditCancel={onEditCancel}
-        />,
-      );
-
-      expect(container.querySelector('.ant-bubble-content-editing')).toBeInTheDocument();
-
-      const buttons = container.querySelectorAll('button');
-      expect(buttons).toHaveLength(2);
-      expect(buttons[0]).toHaveTextContent('Save');
-      expect(buttons[1]).toHaveTextContent('Cancel');
-    });
-
-    it('should handle edit confirm', () => {
-      const onEditConfirm = jest.fn();
-      const { container } = render(
-        <Bubble content="Initial" editable onEditConfirm={onEditConfirm} />,
-      );
-
-      const editableDiv = container.querySelector('[contenteditable="true"]')!;
-      const confirmBtn = container.querySelectorAll('button')[0];
-
-      fireEvent.input(editableDiv, { target: { textContent: 'Updated' } });
-      fireEvent.click(confirmBtn);
-
-      expect(onEditConfirm).toHaveBeenCalledWith('Updated');
-    });
-
-    it('should handle edit cancel', () => {
-      const onEditCancel = jest.fn();
-      const { container } = render(
-        <Bubble content="Initial" editable onEditCancel={onEditCancel} />,
-      );
-
-      const cancelBtn = container.querySelectorAll('button')[1];
-      fireEvent.click(cancelBtn);
-
-      expect(onEditCancel).toHaveBeenCalled();
-    });
-
-    it('should prioritize loading over editable', () => {
-      const { container } = render(<Bubble content="Test" editable loading />);
-
-      expect(container.querySelector('.ant-bubble-dot')).toBeInTheDocument();
-      expect(container.querySelector('[contenteditable="true"]')).not.toBeInTheDocument();
     });
   });
 

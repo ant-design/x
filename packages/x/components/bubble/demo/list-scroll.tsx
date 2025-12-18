@@ -22,13 +22,12 @@ let id = 0;
 
 const getKey = () => `bubble_${id++}`;
 
-const genItem = (isAI: boolean, config?: Partial<BubbleItemType>) => {
+const genItem = (isAI: boolean, config?: Partial<BubbleItemType>, repeat = 50) => {
   return {
     key: getKey(),
     role: isAI ? 'ai' : 'user',
-    content: `${id} : ${isAI ? 'Mock AI content'.repeat(50) : 'Mock user content.'}`,
+    content: `${id} : ${isAI ? 'Mock AI content'.repeat(repeat) : 'Mock user content.'}`,
     ...config,
-    // cache: true,
   };
 };
 
@@ -44,7 +43,7 @@ function useBubbleList(initialItems: BubbleItemType[] = []) {
 
 const App = () => {
   const listRef = React.useRef<GetRef<typeof Bubble.List>>(null);
-  const [items, setItems] = useBubbleList();
+  const [items, setItems, add] = useBubbleList();
 
   useEffect(() => {
     setItems([
@@ -84,14 +83,23 @@ const App = () => {
     <Flex vertical style={{ height: 720 }} gap="small">
       <Flex gap="small" justify="space-between">
         <Flex gap="small">
-          <Button type="primary" onClick={() => console.log(listRef.current?.nativeElement)}>
-            Get Dom
+          <Button
+            type="primary"
+            onClick={() => {
+              const isAI = !!(items.length % 2);
+              add(genItem(isAI, { typing: { effect: 'fade-in', step: [20, 50] } }, 500));
+            }}
+          >
+            Add Long Bubble
           </Button>
           <Button onClick={() => listRef.current?.scrollTo({ top: 'top' })}>Scroll To Top</Button>
           <Button onClick={() => listRef.current?.scrollTo({ top: 'bottom', behavior: 'smooth' })}>
-            Scroll To Bottom
+            Scroll To Bottom smooth
           </Button>
-          <Button onClick={() => listRef.current?.scrollTo({ top: Math.random() * 1000 })}>
+          <Button onClick={() => listRef.current?.scrollTo({ top: 'bottom', behavior: 'instant' })}>
+            Scroll To Bottom instant
+          </Button>
+          <Button onClick={() => listRef.current?.scrollTo({ top: Math.random() * 10000 })}>
             Scroll To Ramdom
           </Button>
           <Button

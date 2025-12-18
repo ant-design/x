@@ -257,6 +257,12 @@ describe('useCompatibleScroll', () => {
 
       renderHook(() => useCompatibleScroll(mockDom));
 
+      // set view not at bottom
+      act(() => {
+        Object.defineProperty(mockDom, 'scrollTop', { value: -300, writable: true });
+        intersectionCallback([{ isIntersecting: false }]);
+      });
+
       act(() => {
         Object.defineProperty(mockDom, 'scrollHeight', { value: 1200, writable: true });
         mutationCallback();

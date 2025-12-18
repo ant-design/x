@@ -167,13 +167,14 @@ export interface DividerBubbleProps<ContentType extends BubbleContentType = stri
 
 export interface BubbleListRef {
   nativeElement: HTMLDivElement;
+  scrollBoxNativeElement: HTMLDivElement;
   scrollTo: (options: {
     /**
      * @description 数据项唯一标识
      */
     key?: string | number;
     /**
-     * @description 滚动条位置，可选传递 'bottom'（视觉底部）、'top'（视觉顶部）
+     * @description 滚动条位置，可选固定值：'bottom'（视觉底部 | 'top'（视觉顶部）
      */
     top?: number | 'bottom' | 'top';
     behavior?: ScrollBehavior;

@@ -136,10 +136,15 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   // ============================= Refs =============================
   const listRef = React.useRef<HTMLDivElement>(null);
   const scrollBoxRef = React.useRef<HTMLDivElement>(null);
-
   const bubblesRef = React.useRef<BubblesRecord>({});
+  const [_, setRefLoaded] = React.useState(false);
 
-  const { reset } = useCompatibleScroll(autoScroll ? scrollBoxRef.current : null);
+  const { scrollTo } = useCompatibleScroll(scrollBoxRef.current);
+
+  // 确保 useCompatibleScroll 取到 dom
+  React.useEffect(() => {
+    setRefLoaded(true);
+  }, []);
 
   // ============================ Prefix ============================
   const { getPrefixCls } = useXProviderContext();
@@ -163,45 +168,29 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
     ...style,
   };
 
-  // ============================ Scroll ============================
-  // 只有最后一条数据变更才需要滚动到底部
-  const lastItemKey = items[items.length - 1]?.key || items.length;
-  React.useEffect(() => {
-    if (!scrollBoxRef.current) return;
-    reset();
-    scrollBoxRef.current?.scrollTo({ top: autoScroll ? 0 : scrollBoxRef.current.scrollHeight });
-  }, [lastItemKey, autoScroll, reset]);
-
   // ============================= Refs =============================
-  useProxyImperativeHandle(ref, () => {
+  useProxyImperativeHandle<HTMLDivElement, BubbleListRef>(ref, () => {
     return {
       nativeElement: listRef.current!,
       scrollBoxNativeElement: scrollBoxRef.current!,
-      scrollTo: ({
-        key,
-        top,
-        behavior = 'smooth',
-        block,
-      }: {
-        key: string | number;
-        top: number | 'bottom' | 'top';
-        behavior?: ScrollBehavior;
-        block?: ScrollLogicalPosition;
-      }) => {
+      scrollTo: ({ key, top, behavior = 'smooth', block }) => {
         const { scrollHeight, clientHeight } = scrollBoxRef.current!;
         if (typeof top === 'number') {
-          scrollBoxRef.current?.scrollTo({
+          scrollTo({
             top: autoScroll ? -scrollHeight + clientHeight + top : top,
             behavior,
           });
         } else if (top === 'bottom') {
           const bottomOffset = autoScroll ? 0 : scrollHeight;
-          scrollBoxRef.current?.scrollTo({ top: bottomOffset, behavior });
+          scrollTo({ top: bottomOffset, behavior });
         } else if (top === 'top') {
           const topOffset = autoScroll ? -scrollHeight : 0;
-          scrollBoxRef.current?.scrollTo({ top: topOffset, behavior });
+          scrollTo({ top: topOffset, behavior });
         } else if (key && bubblesRef.current[key]) {
-          bubblesRef.current[key].nativeElement.scrollIntoView({ behavior, block });
+          scrollTo({
+            intoView: { behavior, block },
+            intoViewDom: bubblesRef.current[key].nativeElement,
+          });
         }
       },
     };

@@ -240,7 +240,7 @@ describe('Bubble.List', () => {
       const listElement = container.querySelector('.ant-bubble-list-scroll-box') as HTMLDivElement;
       const system = container.querySelector('.ant-bubble-system');
 
-      expect(listElement.childNodes.length).toBe(2);
+      expect(listElement.querySelectorAll('.ant-bubble').length).toBe(2);
       expect(system).toBeInTheDocument();
     });
   });
@@ -280,22 +280,6 @@ describe('Bubble.List', () => {
       mockScrollIntoView.mockClear();
     });
 
-    it('应该在 items 长度变化时自动滚动到底部', () => {
-      const { rerender, container } = render(<BubbleList items={mockItems} />);
-      const scrollBoxElement = container.querySelector(
-        '.ant-bubble-list-scroll-box',
-      ) as HTMLDivElement;
-      scrollBoxElement.scrollTo = mockScrollTo;
-
-      // 清除初始渲染时的调用
-      mockScrollTo.mockClear();
-
-      const newItems = [...mockItems, { key: 'item4', role: 'user', content: '新消息' }];
-      rerender(<BubbleList items={newItems} />);
-      // 源代码中执行了 scrollTo 即滚动到底部
-      expect(mockScrollTo).toHaveBeenCalled();
-    });
-
     it('应该支持禁用自动滚动', async () => {
       const { container, rerender } = render(<BubbleList items={mockItems} autoScroll />);
       const scrollBoxElement = container.querySelector(
@@ -313,11 +297,6 @@ describe('Bubble.List', () => {
       ];
       rerender(<BubbleList items={newItems} autoScroll={false} />);
       expect(scrollBoxElement).not.toHaveClass('ant-bubble-list-autoscroll');
-      // 仅在添加消息时滚动到底部，后续动画过程不触发滚动
-      expect(mockScrollTo).toHaveBeenCalledTimes(1);
-
-      await waitFakeTimer(1000, 10);
-      expect(mockScrollTo).toHaveBeenCalledTimes(1);
     });
 
     it('应该支持 onScroll 回调', () => {
@@ -417,6 +396,26 @@ describe('Bubble.List', () => {
     it('应该支持通过 ref.scrollTo 滚动到指定 key 的元素', () => {
       const ref = React.createRef<BubbleListRef>();
       const { container } = render(<BubbleList items={mockItems} ref={ref} />);
+
+      // 模拟 bubble 元素的 scrollIntoView 方法
+      const bubbles = container.querySelectorAll('.ant-bubble');
+      bubbles.forEach((bubble) => {
+        (bubble as any).scrollIntoView = mockScrollIntoView;
+      });
+
+      act(() => {
+        ref.current!.scrollTo({ key: 'item2', behavior: 'smooth', block: 'center' });
+      });
+
+      expect(mockScrollIntoView).toHaveBeenCalledWith({
+        behavior: 'smooth',
+        block: 'center',
+      });
+    });
+
+    it('应该支持非自动滚动时通过 ref.scrollTo 滚动到指定 key 的元素', () => {
+      const ref = React.createRef<BubbleListRef>();
+      const { container } = render(<BubbleList items={mockItems} ref={ref} autoScroll={false} />);
 
       // 模拟 bubble 元素的 scrollIntoView 方法
       const bubbles = container.querySelectorAll('.ant-bubble');
