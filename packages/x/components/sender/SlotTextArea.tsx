@@ -474,7 +474,10 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   };
 
   // 处理退格键删除逻辑
-  const handleBackspaceKey = (e: React.KeyboardEvent<HTMLDivElement>, isBackspace?: boolean) => {
+  const handleBackspaceKey = (
+    e: React.KeyboardEvent<HTMLDivElement> | React.ClipboardEvent<HTMLDivElement>,
+    isBackspace?: boolean,
+  ) => {
     if (!editableRef.current) return false;
     const selection = window.getSelection();
     if (!selection || selection.rangeCount === 0) return false;
@@ -621,8 +624,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     removeSpecificBRs(editableRef?.current);
     triggerValueChange(e as unknown as EventType);
   };
-
-  const onInternalCut = (e: React.KeyboardEvent<HTMLDivElement>) => handleBackspaceKey(e);
+  const onInternalCut = (e: React.ClipboardEvent<HTMLDivElement>) => handleBackspaceKey(e);
 
   const onInternalPaste: React.ClipboardEventHandler<HTMLDivElement> = (e) => {
     e.preventDefault();
