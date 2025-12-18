@@ -66,11 +66,7 @@ const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((
 
     return (
       <div
-        className={clsx(
-          `${prefixCls}-header`,
-          contextConfig.classNames?.header,
-          classNames.header,
-        )}
+        className={clsx(`${prefixCls}-header`, contextConfig.classNames?.header, classNames.header)}
         style={{ ...contextConfig.styles?.header, ...styles.header }}
       >
         <span

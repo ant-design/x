@@ -194,9 +194,7 @@ const HeaderNavigation: React.FC<HeaderNavigationProps> = (props) => {
           {locale[item.key as keyof typeof locale]}
         </Link>
       ))}
-      {isZhCN && origin !== zhHrefOrigin && (
-        <a href={`${zhHrefOrigin}/index-cn`}>{locale['zhUrl']}</a>
-      )}
+      {isZhCN && origin !== zhHrefOrigin && <a href={`${zhHrefOrigin}/index-cn`}>{locale.zhUrl}</a>}
     </nav>
   );
 };

@@ -106,7 +106,7 @@ const App: React.FC = () => {
           return node;
         }}
         onSubmit={() => {
-          // setValue('');
+          senderRef.current?.clear();
           setItems([]);
           setLoading(true);
           setTimeout(() => {
