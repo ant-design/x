@@ -492,7 +492,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       const range = selection.getRangeAt(0).toString();
       if (
         slotKey &&
-        (anchorNode.textContent?.length === range.length || 1 === anchorNode.textContent?.length)
+        (anchorNode.textContent?.length === range.length ||
+          (1 === anchorNode.textContent?.length && focusOffset === 1))
       ) {
         e.preventDefault();
         (anchorNode.parentNode as HTMLElement).innerHTML = '';
