@@ -114,7 +114,7 @@ type ActionsComponents = {
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| type | 节点类型，决定渲染组件类型，必填 | 'text' \| 'input' \| 'select' \| 'tag' \| 'custom' | - | 2.0.0 |
+| type | 节点类型，决定渲染组件类型，必填 | 'text' \| 'input' \| 'select' \| 'tag' \| 'content' \| 'custom' | - | 2.0.0 |
 | key | 唯一标识，type 为 text 时可省略 | string | - | - |
 | formatResult | 格式化最终结果 | (value: any) => string | - | 2.0.0 |
 
@@ -145,6 +145,12 @@ type ActionsComponents = {
 | ----------- | -------------- | --------- | ------ | ----- |
 | props.label | 标签内容，必填 | ReactNode | -      | 2.0.0 |
 | props.value | 标签值         | string    | -      | 2.0.0 |
+
+##### content 节点属性
+
+| 属性               | 说明   | 类型 | 默认值 | 版本  |
+| ------------------ | ------ | ---- | ------ | ----- |
+| props.defaultValue | 默认值 | any  | -      | 2.0.0 |
 
 ##### custom 节点属性
 
