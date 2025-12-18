@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '../../../tests/utils';
 import Bubble from '../Bubble';
 
-describe('Bubble Base Tests', () => {
+describe('Bubble Basic Tests', () => {
   describe('Props Coverage', () => {
     it('should handle all props correctly', () => {
       const ref = React.createRef<any>();

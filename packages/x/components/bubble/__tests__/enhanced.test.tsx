@@ -18,7 +18,7 @@ describe('Bubble Enhanced Tests', () => {
   });
 
   describe('Animation', () => {
-    it('应该支持基础动画', async () => {
+    it('should support basic animation', async () => {
       const { container } = render(<Bubble content="测试内容" typing />);
       const contentElement = container.querySelector('.ant-bubble-content');
 
@@ -29,7 +29,7 @@ describe('Bubble Enhanced Tests', () => {
       expect(container.querySelector('.ant-bubble')).toBeInTheDocument();
     });
 
-    it('应该正确显示打字机输出效果', async () => {
+    it('should correctly display typing effect', async () => {
       const typingConfig: BubbleAnimationOption = {
         effect: 'typing',
         step: 1,
@@ -57,7 +57,7 @@ describe('Bubble Enhanced Tests', () => {
       expect(container).toHaveTextContent('Test');
     });
 
-    it('应该正确显示渐入动画的输出效果', async () => {
+    it('should correctly display fade-in animation effect', async () => {
       const typingConfig: BubbleAnimationOption = {
         effect: 'fade-in',
         step: 2,
@@ -89,7 +89,7 @@ describe('Bubble Enhanced Tests', () => {
       expect(container).toHaveTextContent('Hello World');
     });
 
-    it('应该正确显示动画的中间状态', async () => {
+    it('should correctly display intermediate state of animation', async () => {
       const onTyping = jest.fn();
       const typingConfig: BubbleAnimationOption = {
         effect: 'typing',
@@ -128,7 +128,7 @@ describe('Bubble Enhanced Tests', () => {
       expect(container).toHaveTextContent(text);
     });
 
-    it('应该支持动画回调函数', async () => {
+    it('should support animation callback functions', async () => {
       const onTyping = jest.fn();
       const onTypingComplete = jest.fn();
 
@@ -153,7 +153,7 @@ describe('Bubble Enhanced Tests', () => {
       expect(onTypingComplete).toHaveBeenCalledWith('Test');
     });
 
-    it('应该支持从公共前缀处开始输出', async () => {
+    it('should support starting output from common prefix', async () => {
       const typingConfig: BubbleAnimationOption = {
         effect: 'typing',
         step: 2,
@@ -174,7 +174,7 @@ describe('Bubble Enhanced Tests', () => {
       expect(contentElement?.textContent).toBe('Test-second');
     });
 
-    it('应该支持完全重新输出', async () => {
+    it('should support complete re-output', async () => {
       const typingConfig: BubbleAnimationOption = {
         effect: 'typing',
         step: 2,
@@ -197,7 +197,7 @@ describe('Bubble Enhanced Tests', () => {
       expect(contentElement?.textContent).toBe(text2);
     });
 
-    it('应该在内容为空时不执行动画', () => {
+    it('should not execute animation when content is empty', () => {
       const onTyping = jest.fn();
       const onTypingComplete = jest.fn();
 
@@ -209,7 +209,7 @@ describe('Bubble Enhanced Tests', () => {
       expect(onTypingComplete).not.toHaveBeenCalled();
     });
 
-    it('应该在内容变化时重新开始动画', async () => {
+    it('should restart animation when content changes', async () => {
       const onTyping = jest.fn();
       const onTypingComplete = jest.fn();
 
@@ -247,7 +247,7 @@ describe('Bubble Enhanced Tests', () => {
       expect(onTypingComplete).toHaveBeenLastCalledWith('World');
     });
 
-    it('应该在内容完全不同时中断并重新开始动画', async () => {
+    it('should interrupt and restart animation when content is completely different', async () => {
       const onTyping = jest.fn();
       const onTypingComplete = jest.fn();
 
@@ -285,7 +285,7 @@ describe('Bubble Enhanced Tests', () => {
       expect(onTypingComplete).toHaveBeenLastCalledWith('Goodbye');
     });
 
-    it('应该在 content 相同，配置不同的情况下不重新渲染 content', async () => {
+    it('should not re-render content when content is same but configuration differs', async () => {
       const onTyping = jest.fn();
       const step = 5;
       const typingConfig: BubbleAnimationOption = {
@@ -325,7 +325,7 @@ describe('Bubble Enhanced Tests', () => {
       expect(onTyping).toHaveBeenCalledTimes(times);
     });
 
-    it('应该支持数组形式的随机 step', async () => {
+    it('should support random step in array form', async () => {
       const onTyping = jest.fn();
       const onTypingComplete = jest.fn();
 
@@ -350,7 +350,7 @@ describe('Bubble Enhanced Tests', () => {
       expect(onTypingComplete).toHaveBeenCalledWith('Hello World');
     });
 
-    it('应该在动画过程中调用 onTyping 回调', async () => {
+    it('should call onTyping callback during animation', async () => {
       const onTyping = jest.fn();
 
       const typingConfig: BubbleAnimationOption = {
@@ -370,14 +370,14 @@ describe('Bubble Enhanced Tests', () => {
       expect(calls[calls.length - 1]).toEqual(['Hello', 'Hello']);
     });
 
-    it('应该在非动画模式下触发 onTypingComplete', () => {
+    it('should trigger onTypingComplete in non-animation mode', () => {
       const onTypingComplete = jest.fn();
       render(<Bubble content="测试内容" onTypingComplete={onTypingComplete} />);
 
       expect(onTypingComplete).toHaveBeenCalledWith('测试内容');
     });
 
-    it('应该在内容变为空时重置动画，但不触发 onTypingComplete', async () => {
+    it('should reset animation when content becomes empty, but not trigger onTypingComplete', async () => {
       const onTypingComplete = jest.fn();
 
       const typingConfig: BubbleAnimationOption = {
@@ -402,7 +402,7 @@ describe('Bubble Enhanced Tests', () => {
       expect(onTypingComplete).toHaveBeenCalledTimes(1);
     });
 
-    it('应该在非动画模式下更改 content 多次触发 onTypingComplete', () => {
+    it('should trigger onTypingComplete multiple times when content changes in non-animation mode', () => {
       const onTypingComplete = jest.fn();
 
       render(<Bubble content="测试内容1" onTypingComplete={onTypingComplete} />);
@@ -417,7 +417,7 @@ describe('Bubble Enhanced Tests', () => {
       expect(onTypingComplete).toHaveBeenCalledTimes(3);
     });
 
-    it('应该在非动画模式下流式输入结束时触发 onTypingComplete', async () => {
+    it('should trigger onTypingComplete when streaming input ends in non-animation mode', async () => {
       const onTypingComplete = jest.fn();
       const { rerender } = render(
         <Bubble content="内容1内容1" onTypingComplete={onTypingComplete} streaming />,
@@ -432,7 +432,7 @@ describe('Bubble Enhanced Tests', () => {
       expect(onTypingComplete).toHaveBeenCalledWith('内容1内容1-完成');
     });
 
-    it('应该在动画模式下流式输入结束且动画结束时触发 onTypingComplete', async () => {
+    it('should trigger onTypingComplete when streaming input ends and animation completes in animation mode', async () => {
       const onTypingComplete = jest.fn();
       const firstString = '内容1内容1';
       const { container, rerender } = render(
@@ -475,8 +475,8 @@ describe('Bubble Enhanced Tests', () => {
       expect(onTypingComplete).toHaveBeenCalledWith(doneText);
     });
 
-    describe('关闭流式输入声明', () => {
-      it('应该在content 实际采用流式传输但速度赶不上动画速度时多次触发 onTypingComplete', async () => {
+    describe('Close streaming input declaration', () => {
+      it('should trigger onTypingComplete multiple times when actual streaming speed cannot keep up with animation speed', async () => {
         const onTypingComplete = jest.fn();
         const text = '内容1内容2内容3';
         const typing = { effect: 'typing', step: 5, interval: 50 } as const;
@@ -518,8 +518,8 @@ describe('Bubble Enhanced Tests', () => {
       });
     });
 
-    describe('参数验证', () => {
-      it('应该抛出错误当 interval 无效', () => {
+    describe('Parameter validation', () => {
+      it('should throw error when interval is invalid', () => {
         const invalidConfig = {
           effect: 'typing' as const,
           interval: -1,
@@ -530,7 +530,7 @@ describe('Bubble Enhanced Tests', () => {
         }).toThrow('[Bubble] invalid prop typing.interval, expect positive number.');
       });
 
-      it('应该抛出错误当 interval 为 0', () => {
+      it('should throw error when interval is 0', () => {
         const invalidConfig = {
           effect: 'typing' as const,
           interval: 0,
@@ -541,7 +541,7 @@ describe('Bubble Enhanced Tests', () => {
         }).toThrow('[Bubble] invalid prop typing.interval, expect positive number.');
       });
 
-      it('应该抛出错误当 interval 不是数字', () => {
+      it('should throw error when interval is not a number', () => {
         const invalidConfig = {
           effect: 'typing' as const,
           interval: 'invalid' as any,
@@ -552,7 +552,7 @@ describe('Bubble Enhanced Tests', () => {
         }).toThrow('[Bubble] invalid prop typing.interval, expect positive number.');
       });
 
-      it('应该抛出错误当 step 无效', () => {
+      it('should throw error when step is invalid', () => {
         const invalidConfig = {
           effect: 'typing' as const,
           step: 'invalid' as any,
@@ -565,7 +565,7 @@ describe('Bubble Enhanced Tests', () => {
         );
       });
 
-      it('应该抛出错误当 step 为负数', () => {
+      it('should throw error when step is negative', () => {
         const invalidConfig = {
           effect: 'typing' as const,
           step: -1,
@@ -576,7 +576,7 @@ describe('Bubble Enhanced Tests', () => {
         }).toThrow('[Bubble] invalid prop typing.step, expect positive number');
       });
 
-      it('应该抛出错误当 step 为 0', () => {
+      it('should throw error when step is 0', () => {
         const invalidConfig = {
           effect: 'typing' as const,
           step: 0,
@@ -587,7 +587,7 @@ describe('Bubble Enhanced Tests', () => {
         }).toThrow('[Bubble] invalid prop typing.step, expect positive number');
       });
 
-      it('应该抛出错误当 step 数组第一个元素无效', () => {
+      it('should throw error when first element of step array is invalid', () => {
         const invalidConfig = {
           effect: 'typing' as const,
           step: [-1, 5] as any,
@@ -598,7 +598,7 @@ describe('Bubble Enhanced Tests', () => {
         }).toThrow('[Bubble] invalid prop typing.step[0], expect positive number');
       });
 
-      it('应该抛出错误当 step 数组第二个元素无效', () => {
+      it('should throw error when second element of step array is invalid', () => {
         const invalidConfig = {
           effect: 'typing' as const,
           step: [2, -1] as any,
@@ -609,7 +609,7 @@ describe('Bubble Enhanced Tests', () => {
         }).toThrow('[Bubble] invalid prop typing.step[1], expect positive number');
       });
 
-      it('应该抛出错误当 step 数组顺序错误', () => {
+      it('should throw error when step array order is incorrect', () => {
         const invalidConfig = {
           effect: 'typing' as const,
           step: [5, 2] as any,
@@ -621,8 +621,8 @@ describe('Bubble Enhanced Tests', () => {
       });
     });
 
-    describe('边界情况处理', () => {
-      it('应该处理任务 ID 不匹配的情况', async () => {
+    describe('Edge case handling', () => {
+      it('should handle task ID mismatch', async () => {
         const onTyping = jest.fn();
         const onTypingComplete = jest.fn();
 
@@ -665,7 +665,7 @@ describe('Bubble Enhanced Tests', () => {
         expect(onTypingComplete).toHaveBeenLastCalledWith('Test');
       });
 
-      it('应该正确处理空的 nextText', async () => {
+      it('should correctly handle empty nextText', async () => {
         const onTypingComplete = jest.fn();
 
         const typingConfig: BubbleAnimationOption = {
@@ -681,7 +681,7 @@ describe('Bubble Enhanced Tests', () => {
         expect(onTypingComplete).toHaveBeenCalledWith('Hi');
       });
 
-      it('应该在组件卸载时清理资源', () => {
+      it('should clean up resources when component unmounts', () => {
         const typingConfig: BubbleAnimationOption = {
           effect: 'typing',
           step: 1,
@@ -699,7 +699,7 @@ describe('Bubble Enhanced Tests', () => {
         }).not.toThrow();
       });
 
-      it('应该处理动画进行中内容部分匹配的情况', async () => {
+      it('should handle partial content match during animation', async () => {
         const onTyping = jest.fn();
         const onTypingComplete = jest.fn();
 
@@ -740,7 +740,7 @@ describe('Bubble Enhanced Tests', () => {
   });
 
   describe('Editable', () => {
-    it('应该支持 boolean 类型的 editable 配置', () => {
+    it('should support boolean type editable configuration', () => {
       const { container } = render(<Bubble content="可编辑内容" editable />);
 
       const contentElement = container.querySelector('.ant-bubble-content');
@@ -751,7 +751,7 @@ describe('Bubble Enhanced Tests', () => {
       expect(editableDiv).toHaveTextContent('可编辑内容');
     });
 
-    it('应该支持 EditableBubbleOption 类型的 editable 配置', () => {
+    it('should support EditableBubbleOption type editable configuration', () => {
       const { container } = render(
         <Bubble
           content="测试内容"
@@ -769,7 +769,7 @@ describe('Bubble Enhanced Tests', () => {
       expect(btns[1].innerHTML).toBe('<span>放弃</span>');
     });
 
-    it('应该支持 editable.editing 控制编辑状态', () => {
+    it('should support editable.editing to control editing state', () => {
       const { container, rerender } = render(
         <Bubble content="测试内容" editable={{ editing: false }} onEditConfirm={jest.fn()} />,
       );
@@ -787,7 +787,7 @@ describe('Bubble Enhanced Tests', () => {
       );
     });
 
-    it('应该支持 onEditConfirm 回调', () => {
+    it('should support onEditConfirm callback', () => {
       const onEditConfirm = jest.fn();
       const { container } = render(
         <Bubble content="初始内容" editable onEditConfirm={onEditConfirm} />,
@@ -805,7 +805,7 @@ describe('Bubble Enhanced Tests', () => {
       expect(onEditConfirm).toHaveBeenCalledWith('');
     });
 
-    it('应该支持 onEditCancel 回调', () => {
+    it('should support onEditCancel callback', () => {
       const onEditCancel = jest.fn();
       const { container } = render(
         <Bubble content="初始内容" editable onEditCancel={onEditCancel} />,
@@ -817,7 +817,7 @@ describe('Bubble Enhanced Tests', () => {
       expect(onEditCancel).toHaveBeenCalled();
     });
 
-    it('应该支持 editable 与 typing 同时启用时优先显示编辑模式', () => {
+    it('should prioritize editing mode when both editable and typing are enabled', () => {
       const { container } = render(
         <Bubble content="测试内容" editable typing={{ effect: 'typing', step: 1 }} />,
       );
@@ -829,7 +829,7 @@ describe('Bubble Enhanced Tests', () => {
       expect(container.querySelector('.ant-bubble-typing')).not.toBeInTheDocument();
     });
 
-    it('应该支持 editable 与 loading 同时启用时优先显示加载状态', () => {
+    it('should prioritize loading state when both editable and loading are enabled', () => {
       const { container } = render(<Bubble content="测试内容" editable loading />);
 
       // 应该显示加载状态
@@ -840,14 +840,14 @@ describe('Bubble Enhanced Tests', () => {
       expect(container.querySelector('[contenteditable="true"]')).not.toBeInTheDocument();
     });
 
-    it('应该支持 editable 模式下空内容', () => {
+    it('should support empty content in editable mode', () => {
       const { container } = render(<Bubble content="" editable />);
 
       const editableDiv = container.querySelector('[contenteditable="true"]')!;
       expect(editableDiv).toHaveTextContent('');
     });
 
-    it('应该支持 editable 模式下拒绝非字符串内容', () => {
+    it('should reject non-string content in editable mode', () => {
       expect(() => {
         render(
           <Bubble
@@ -859,7 +859,7 @@ describe('Bubble Enhanced Tests', () => {
       }).toThrow('Content of editable Bubble should be string');
     });
 
-    it('应该支持 editable 配置切换时的行为', () => {
+    it('should support behavior when editable configuration changes', () => {
       const { container, rerender } = render(<Bubble content="测试内容" editable={false} />);
 
       expect(container.querySelector('.ant-bubble-content')).not.toHaveClass(
@@ -879,7 +879,7 @@ describe('Bubble Enhanced Tests', () => {
       { tag: 'section', display: 'flex' },
       { tag: 'li', display: 'list-item' },
       { tag: 'table', display: 'table' },
-    ])('应支持任意块级元素换行情况', ({ tag }) => {
+    ])('should support line breaks for any block-level elements', ({ tag }) => {
       const onEditConfirm = jest.fn();
       const { container } = render(
         <Bubble content="初始内容" editable onEditConfirm={onEditConfirm} />,
@@ -893,7 +893,7 @@ describe('Bubble Enhanced Tests', () => {
       expect(onEditConfirm).toHaveBeenCalledWith('a\nb');
     });
 
-    it('应支持 span 不触发换行', () => {
+    it('should support span not triggering line breaks', () => {
       const onEditConfirm = jest.fn();
       const { container } = render(
         <Bubble content="初始内容" editable onEditConfirm={onEditConfirm} />,
@@ -908,7 +908,7 @@ describe('Bubble Enhanced Tests', () => {
       expect(onEditConfirm).toHaveBeenCalledWith('ab');
     });
 
-    it('应支持 <br> 触发换行', () => {
+    it('should support <br> triggering line breaks', () => {
       const onEditConfirm = jest.fn();
       const { container } = render(
         <Bubble content="初始内容" editable onEditConfirm={onEditConfirm} />,
@@ -923,7 +923,7 @@ describe('Bubble Enhanced Tests', () => {
       expect(onEditConfirm).toHaveBeenCalledWith('a\nb\nc');
     });
 
-    it('应支持连续换行', () => {
+    it('should support consecutive line breaks', () => {
       const onEditConfirm = jest.fn();
       const { container } = render(
         <Bubble content="初始内容" editable onEditConfirm={onEditConfirm} />,
