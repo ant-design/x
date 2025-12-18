@@ -1,8 +1,12 @@
 import { useCallback, useLayoutEffect, useRef } from 'react';
 
+function isReverse(dom: HTMLElement) {
+  return getComputedStyle(dom).flexDirection === 'column-reverse';
+}
+
 /**
- * Safari 兼容的倒序滚动视窗锁定
- * @param {HTMLElement} dom - 倒序滚动容器元素（flex-direction: column-reverse）
+ * Safari 兼容的倒序滚动视窗锁定与 scrollTo 方法适配
+ * @param {HTMLElement} dom - 倒序滚动容器元素
  */
 export function useCompatibleScroll(dom?: HTMLElement | null) {
   // 底部哨兵
@@ -15,11 +19,9 @@ export function useCompatibleScroll(dom?: HTMLElement | null) {
   const callOnScrollNotNative = useRef(false);
   const isScrollToBottom = useRef<boolean>(false);
 
-  const disable = () => !dom || getComputedStyle(dom).flexDirection !== 'column-reverse';
-
   // 初始化哨兵元素
   useLayoutEffect(() => {
-    if (disable()) return;
+    if (!dom) return;
     if (!sentinelRef.current) {
       const sentinel = document.createElement('div');
       // sentinel.style.position = 'absolute';
@@ -29,7 +31,7 @@ export function useCompatibleScroll(dom?: HTMLElement | null) {
       sentinel.style.height = `${sentineHeight}px`;
       sentinel.style.visibility = 'hidden';
 
-      dom!.insertBefore(sentinel, dom!.firstChild);
+      dom.insertBefore(sentinel, dom.firstChild);
       sentinelRef.current = sentinel;
     }
 
@@ -45,22 +47,23 @@ export function useCompatibleScroll(dom?: HTMLElement | null) {
 
     // 监听 DOM 内容变化，锁定视窗
     const mutationObserver = new MutationObserver(() => {
-      if (disable()) return;
+      if (!dom) return;
       // 内容变化时正在滚动，交互优先，不锁定视窗
       if (scrolling.current) {
         // 动态处理滚动到底
         isScrollToBottom.current &&
-          dom!.scrollTo({
-            top: getComputedStyle(dom!).flexDirection === 'column-reverse' ? 0 : Infinity,
-            behavior: 'instant',
-          });
-
+          requestAnimationFrame(() =>
+            dom.scrollTo({
+              top: isReverse(dom) ? 0 : dom.scrollHeight,
+              behavior: 'instant',
+            }),
+          );
         return;
       }
-      shouldLock.current && enforceScrollLock();
+      isReverse(dom) && shouldLock.current && enforceScrollLock();
     });
 
-    mutationObserver.observe(dom!, {
+    mutationObserver.observe(dom, {
       childList: true,
       subtree: true,
       attributes: false,
@@ -87,7 +90,9 @@ export function useCompatibleScroll(dom?: HTMLElement | null) {
 
   const handleScroll = useCallback(
     (e: Event) => {
-      const { scrollTop, scrollHeight } = e.target as HTMLElement;
+      const target = e.target as HTMLElement;
+      if (!isReverse(target)) return;
+      const { scrollTop, scrollHeight } = target;
       // 倒序， top 在变化，但 bottom 固定
       lockedScrollBottomPos.current = scrollHeight + scrollTop;
       // 检测并恢复自然触发状态
@@ -104,21 +109,21 @@ export function useCompatibleScroll(dom?: HTMLElement | null) {
   );
 
   useLayoutEffect(() => {
-    if (disable()) return;
-    dom!.addEventListener('scroll', handleScroll, { capture: true });
+    if (!dom) return;
+    dom.addEventListener('scroll', handleScroll, { capture: true });
     return () => dom?.removeEventListener('scroll', handleScroll, { capture: true });
-  }, [dom, disable, handleScroll]);
+  }, [dom, handleScroll]);
 
   // 强制锁定滚动位置
   const enforceScrollLock = useCallback(() => {
     /**
-     * 同时发生滚动+内容变化，有两种可选行为：
+     * 同时发生滚动+内容变化，在 safari 内有两种可选行为：
      * 1、强制锁定视窗，可视内容不变，但会造成滚动抖动。
-     * 2、不锁定视窗，内容会变化（safari行为）。
+     * 2、不锁定视窗，内容会变化。
      * 出于鲁棒性考虑，选择行为2，在滚动结束后再锁视窗
      * 最终效果：
-     * 1、滚动+内容变化同时发生，表现为 safari 行为
-     * 2、仅内容变化，表现为 chrome 行为（无论是否贴底）
+     * 1、滚动+内容变化同时发生，表现为浏览器默认行为
+     * 2、仅内容变化，表现为 chrome 行为（视窗锁定）（无论是否贴底）
      **/
     const targetScroll = lockedScrollBottomPos.current - dom!.scrollHeight;
     dom!.scrollTop = targetScroll;
@@ -127,10 +132,9 @@ export function useCompatibleScroll(dom?: HTMLElement | null) {
   }, [dom]);
 
   const reset = useCallback(() => {
-    if (disable()) return;
     isAtBottom.current = true;
     shouldLock.current = false;
-    lockedScrollBottomPos.current = dom!.scrollHeight;
+    lockedScrollBottomPos.current = dom?.scrollHeight || 0;
   }, [dom]);
 
   const scrollTo = useCallback(
@@ -147,8 +151,7 @@ export function useCompatibleScroll(dom?: HTMLElement | null) {
       } else {
         dom.scrollTo(option);
       }
-      const isReverse = getComputedStyle(dom).flexDirection === 'column-reverse';
-      if (isReverse) {
+      if (isReverse(dom)) {
         if ((top as any) === 'bottom' || (top as any) >= -sentineHeight) {
           isScrollToBottom.current = true;
         } else if (intoViewDom) {

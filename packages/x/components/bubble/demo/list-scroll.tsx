@@ -99,7 +99,13 @@ const App = () => {
           <Button onClick={() => listRef.current?.scrollTo({ top: 'bottom', behavior: 'instant' })}>
             Scroll To Bottom instant
           </Button>
-          <Button onClick={() => listRef.current?.scrollTo({ top: Math.random() * 10000 })}>
+          <Button
+            onClick={() =>
+              listRef.current?.scrollTo({
+                top: Math.random() * listRef.current.scrollBoxNativeElement.scrollHeight,
+              })
+            }
+          >
             Scroll To Ramdom
           </Button>
           <Button
