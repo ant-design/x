@@ -474,7 +474,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   };
 
   // 处理退格键删除逻辑
-  const handleBackspaceKey = (e: React.KeyboardEvent<HTMLDivElement>) => {
+  const handleBackspaceKey = (e: React.KeyboardEvent<HTMLDivElement>, isBackspace?: boolean) => {
     if (!editableRef.current) return false;
     const selection = window.getSelection();
     if (!selection || selection.rangeCount === 0) return false;
@@ -482,16 +482,22 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     if (!anchorNode || !editableRef.current.contains(anchorNode)) {
       return false;
     }
-    if (focusOffset === 1 && anchorNode.nodeType === Node.TEXT_NODE) {
+
+    if (anchorNode.nodeType === Node.TEXT_NODE) {
       const parentElement = anchorNode.parentNode as Element;
       const slotKey = parentElement?.getAttribute?.('data-slot-key');
-      if (slotKey && anchorNode.textContent?.length === 1) {
+      const range = selection.getRangeAt(0).toString();
+      if (
+        slotKey &&
+        (anchorNode.textContent?.length === range.length || 1 === anchorNode.textContent?.length)
+      ) {
         e.preventDefault();
         (anchorNode.parentNode as HTMLElement).innerHTML = '';
         return true;
       }
     }
-    if (focusOffset === 0) {
+
+    if (isBackspace && focusOffset === 0) {
       const previousSibling = anchorNode.previousSibling;
       if (previousSibling) {
         const nodeInfo = getNodeInfo(previousSibling as HTMLElement);
@@ -566,7 +572,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
     // 处理退格键
     if (e.key === 'Backspace') {
-      if (handleBackspaceKey(e)) return;
+      if (handleBackspaceKey(e, true)) return;
     }
 
     // 处理Enter键提交
@@ -615,6 +621,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     removeSpecificBRs(editableRef?.current);
     triggerValueChange(e as unknown as EventType);
   };
+
+  const onInternalCut = (e: React.KeyboardEvent<HTMLDivElement>) => handleBackspaceKey(e);
 
   const onInternalPaste: React.ClipboardEventHandler<HTMLDivElement> = (e) => {
     e.preventDefault();
@@ -897,6 +905,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         contentEditable={!readOnly}
         suppressContentEditableWarning
         spellCheck={false}
+        onCut={onInternalCut}
         onKeyDown={onInternalKeyDown}
         onKeyUp={onInternalKeyUp}
         onPaste={onInternalPaste}
