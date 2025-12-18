@@ -1,6 +1,6 @@
 import React from 'react';
 import { fireEvent, render, waitFor } from '../../../tests/utils';
-import Sender, { SlotConfigType } from '../index';
+import Sender, { SenderProps, SlotConfigType } from '../index';
 
 // Set up global DOM API mock
 beforeEach(() => {
@@ -996,6 +996,42 @@ describe('Sender.SlotTextArea', () => {
       fireEvent.change(input, { target: { value: 'Updated' } });
 
       expect(onChange).toHaveBeenCalled();
+    });
+  });
+
+  describe('ref insert', () => {
+    it('should handle ref insert', () => {
+      const ref = React.createRef<any>();
+      const slotConfig: SenderProps['slotConfig'] = [
+        { type: 'text', value: 'Test' },
+        { type: 'input', key: 'input1', props: { defaultValue: 'Value' } },
+      ];
+      render(<Sender slotConfig={slotConfig} ref={ref} />);
+      ref.current.focus({
+        cursor: 'slot',
+        key: 'input1',
+      });
+      ref.current?.insert([{ type: 'text', value: 'Test1' }]);
+    });
+    it('should handle insert handleCharacterReplacement', () => {
+      const ref = React.createRef<any>();
+      const slotConfig: SenderProps['slotConfig'] = [{ type: 'text', value: '@' }];
+      render(<Sender slotConfig={slotConfig} ref={ref} />);
+      ref.current.focus({
+        cursor: 'end',
+      });
+      ref.current?.insert?.(
+        [
+          {
+            type: 'content',
+            key: `partner_2_${Date.now()}`,
+            props: { placeholder: 'Enter a name' },
+          },
+        ],
+        'cursor',
+        '@',
+      );
+      ref.current?.insert([{ type: 'text', value: 'Test1' }]);
     });
   });
 });

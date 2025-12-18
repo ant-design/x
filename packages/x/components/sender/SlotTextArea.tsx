@@ -752,7 +752,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       startOffset,
     } = getTextBeforeCursor(editableDom);
     const cursorPosition = textBeforeCursor.length;
-
     if (
       cursorPosition >= replaceCharacters.length &&
       textBeforeCursor.endsWith(replaceCharacters) &&
