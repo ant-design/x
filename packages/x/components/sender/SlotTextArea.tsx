@@ -540,12 +540,16 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       !skillDomRef.current ||
       !editableRef.current ||
       skillDomRef.current.getAttribute('contenteditable') === 'false'
+    ) {
+      return;
+    }
+    const selection = window.getSelection();
+    if (
+      !selection?.anchorNode ||
+      !skillDomRef.current.contains(selection.anchorNode) ||
+      !editableRef.current.contains(selection.anchorNode)
     )
       return;
-    const selection = window.getSelection();
-    if (!selection?.anchorNode) return;
-    if (!skillDomRef.current.contains(selection.anchorNode)) return;
-    if (!editableRef.current.contains(selection.anchorNode)) return;
     skillDomRef.current.setAttribute('contenteditable', 'false');
     skillDomRef.current.classList.remove(`${prefixCls}-skill-empty`);
     focus({ cursor: 'end' });
