@@ -443,7 +443,7 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
   const getCleanedText = useCallback((ori: string) => {
     return ori
       .replace(/\u200B/g, '') // 移除零宽空格
-      .replace(/\n{3,}/g, '\n\n') // 限制连续换行最多为2个
+      .replace(/\n/g, '')
       .replace(/^\n+|\n+$/g, ''); // 移除开头和结尾的换行
   }, []);
 
@@ -454,7 +454,7 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
         return false;
       }
 
-      const selectingString = selection.toString().trim();
+      const selectingString = selection.toString();
       if (!selectingString) {
         return false;
       }

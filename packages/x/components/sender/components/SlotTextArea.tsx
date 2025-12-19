@@ -253,9 +253,9 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
           );
         case 'tag':
           return (
-            <div className={`${prefixCls}-slot-tag`}>
+            <span className={`${prefixCls}-slot-tag`}>
               {config.props?.label || config.props?.value || ''}
-            </div>
+            </span>
           );
         case 'custom':
           return config.customRender?.(
@@ -650,8 +650,17 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       return;
     }
     if (text) {
+      let success = false;
       const cleanedText = getCleanedText(text);
-      insert([{ type: 'text', value: cleanedText }]);
+      try {
+        success = document.execCommand('insertText', false, cleanedText);
+      } catch (err) {
+        warning(false, 'Sender', `insertText command failed: ${err}`);
+      }
+
+      if (!success) {
+        insert([{ type: 'text', value: cleanedText }]);
+      }
     }
 
     onPaste?.(e as unknown as React.ClipboardEvent<HTMLTextAreaElement>);
