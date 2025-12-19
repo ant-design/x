@@ -641,7 +641,25 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
 
     if (text) {
-      insert([{ type: 'text', value: text.replace(/\n/g, '') }]);
+      const cleanText = text.replace(/\n/g, '');
+
+      let success = false;
+
+      try {
+        // 虽然 document.execCommand 已被废弃，但此处使用是为了确保粘贴操作
+        // 能被正确添加到浏览器的撤销（undo）栈中。
+        // TODO: 未来使用 'beforeinput' 事件进行重构。
+        // @ts-ignore
+        success = document.execCommand('insertText', false, cleanText);
+      } catch (err) {
+        if (process.env.NODE_ENV !== 'production') {
+          console.error('`insertText` command failed:', err);
+        }
+      }
+
+      if (!success) {
+        insert([{ type: 'text', value: cleanText }]);
+      }
     }
 
     onPaste?.(e as unknown as React.ClipboardEvent<HTMLTextAreaElement>);
