@@ -1,6 +1,6 @@
 import React from 'react';
 import { fireEvent, render, waitFor } from '../../../tests/utils';
-import Sender, { SlotConfigType } from '../index';
+import Sender, { SenderProps, SlotConfigType } from '../index';
 
 // Set up global DOM API mock
 beforeEach(() => {
@@ -32,28 +32,46 @@ beforeEach(() => {
     );
   }
 
+  // 更完整的Selection mock
+  const mockRange = {
+    startContainer: document.createElement('div'),
+    endContainer: document.createElement('div'),
+    startOffset: 0,
+    endOffset: 0,
+    collapse: jest.fn(),
+    selectNodeContents: jest.fn(),
+    deleteContents: jest.fn(),
+    insertNode: jest.fn(),
+    setStart: jest.fn(),
+    setEnd: jest.fn(),
+    setStartAfter: jest.fn(),
+    setEndAfter: jest.fn(),
+    cloneRange: jest.fn(),
+    toString: jest.fn(() => ''),
+    deleteFromDocument: jest.fn(),
+  };
+
   Object.defineProperty(window, 'getSelection', {
     value: () => ({
       rangeCount: 1,
-      getRangeAt: () => ({
-        startContainer: document.createElement('div'),
-        endContainer: document.createElement('div'),
-        startOffset: 0,
-        endOffset: 0,
-        collapse: jest.fn(),
-        selectNodeContents: jest.fn(),
-        deleteContents: jest.fn(),
-        insertNode: jest.fn(),
-        setStart: jest.fn(),
-        setEnd: jest.fn(),
-        cloneRange: jest.fn(),
-        toString: jest.fn(),
-        deleteFromDocument: jest.fn(),
-      }),
+      getRangeAt: () => mockRange,
       removeAllRanges: jest.fn(),
       addRange: jest.fn(),
+      collapse: jest.fn(),
+      selectAllChildren: jest.fn(),
     }),
     writable: true,
+  });
+
+  // Mock Node API
+  Object.defineProperty(Node.prototype, 'textContent', {
+    get: function () {
+      return this.innerText || '';
+    },
+    set: function (value) {
+      this.innerHTML = value;
+    },
+    configurable: true,
   });
 });
 
@@ -996,6 +1014,124 @@ describe('Sender.SlotTextArea', () => {
       fireEvent.change(input, { target: { value: 'Updated' } });
 
       expect(onChange).toHaveBeenCalled();
+    });
+  });
+
+  describe('ref insert and cursor positioning', () => {
+    it('should handle ref insert', () => {
+      const ref = React.createRef<any>();
+      const slotConfig: SenderProps['slotConfig'] = [
+        { type: 'text', value: 'Test' },
+        { type: 'input', key: 'input1', props: { defaultValue: 'Value' } },
+      ];
+      render(<Sender slotConfig={slotConfig} ref={ref} />);
+
+      // 验证ref方法存在
+      expect(typeof ref.current?.focus).toBe('function');
+      expect(typeof ref.current?.insert).toBe('function');
+
+      // 调用方法不抛出错误
+      expect(() => {
+        ref.current.focus({
+          cursor: 'slot',
+          key: 'input1',
+        });
+        ref.current?.insert([{ type: 'text', value: 'Test1' }]);
+      }).not.toThrow();
+    });
+
+    it('should handle insert with handleCharacterReplacement', () => {
+      const ref = React.createRef<any>();
+      const slotConfig: SenderProps['slotConfig'] = [{ type: 'text', value: '@' }];
+      render(<Sender slotConfig={slotConfig} ref={ref} />);
+
+      // 验证ref方法存在且可调用
+      expect(typeof ref.current?.insert).toBe('function');
+
+      // 使用handleCharacterReplacement插入内容
+      expect(() => {
+        ref.current?.insert?.(
+          [
+            {
+              type: 'content',
+              key: 'test_content',
+              props: { placeholder: 'Enter a name' },
+            },
+          ],
+          'cursor',
+          '@',
+        );
+      }).not.toThrow();
+    });
+
+    it('should handle cursor positioning options', () => {
+      const ref = React.createRef<any>();
+      const slotConfig: SenderProps['slotConfig'] = [
+        { type: 'text', value: 'Hello' },
+        { type: 'input', key: 'name', props: { defaultValue: 'World' } },
+      ];
+      render(<Sender slotConfig={slotConfig} ref={ref} />);
+
+      // 验证所有cursor选项都能被正确处理
+      expect(() => {
+        ref.current.focus({ cursor: 'start' });
+        ref.current.focus({ cursor: 'end' });
+        ref.current.focus({ cursor: 'all' });
+        ref.current.focus({ cursor: 'slot', key: 'name' });
+      }).not.toThrow();
+    });
+
+    it('should handle insert with different positions', () => {
+      const ref = React.createRef<any>();
+      const slotConfig: SenderProps['slotConfig'] = [{ type: 'text', value: 'Test' }];
+      render(<Sender slotConfig={slotConfig} ref={ref} />);
+
+      // 验证所有position选项都能被正确处理
+      expect(() => {
+        ref.current?.insert([{ type: 'text', value: 'Start' }], 'start');
+        ref.current?.insert([{ type: 'text', value: 'End' }], 'end');
+        ref.current?.insert([{ type: 'text', value: 'Cursor' }], 'cursor');
+      }).not.toThrow();
+    });
+
+    it('should handle cursor positioning at specific slot', () => {
+      const ref = React.createRef<any>();
+      const slotConfig: SenderProps['slotConfig'] = [
+        { type: 'text', value: 'Prefix ' },
+        { type: 'input', key: 'middle', props: { defaultValue: 'Middle' } },
+        { type: 'text', value: ' Suffix' },
+      ];
+      const { container } = render(<Sender slotConfig={slotConfig} ref={ref} />);
+
+      // 验证input元素存在
+      const input = container.querySelector('input[data-slot-input="middle"]') as HTMLInputElement;
+      expect(input).toBeInTheDocument();
+
+      // 验证可以聚焦到特定slot
+      expect(() => {
+        ref.current.focus({ cursor: 'slot', key: 'middle' });
+      }).not.toThrow();
+    });
+
+    it('should handle character replacement with various trigger characters', () => {
+      const ref = React.createRef<any>();
+      const slotConfig: SenderProps['slotConfig'] = [{ type: 'text', value: 'Hello @@ world' }];
+      render(<Sender slotConfig={slotConfig} ref={ref} />);
+
+      // 验证不同触发字符的替换
+      expect(() => {
+        ref.current?.insert?.(
+          [
+            {
+              type: 'content',
+              key: 'replacement',
+              props: { placeholder: 'Replaced' },
+            },
+          ],
+          'cursor',
+          '@@',
+        );
+      }).not.toThrow();
     });
   });
 });
