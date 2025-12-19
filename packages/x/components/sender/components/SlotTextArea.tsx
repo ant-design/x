@@ -130,6 +130,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     getEndRange,
     getStartRange,
     getSelection,
+    copySelectionString,
+    getCleanedText,
   } = useCursor({
     prefixCls,
     getSlotDom: (key: string) => slotDomMap.current.get(key),
@@ -499,6 +501,9 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       const isSingleCharAtEnd = anchorNode.textContent?.length === 1 && focusOffset === 1;
       if (nodeInfo?.slotConfig?.type === 'content' && (isFullTextSelected || isSingleCharAtEnd)) {
         e.preventDefault();
+        if (operationType === 'cut') {
+          copySelectionString();
+        }
         (anchorNode.parentNode as HTMLElement).innerHTML = '';
         return true;
       }
@@ -634,7 +639,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
   const onInternalCut = (e: React.ClipboardEvent<HTMLDivElement>) => {
     handleDeleteOperation(e, 'cut');
-    onInternalCopy();
   };
 
   const onInternalPaste: React.ClipboardEventHandler<HTMLDivElement> = (e) => {
@@ -645,15 +649,12 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       e.preventDefault();
       return;
     }
+    if (text) {
+      const cleanedText = getCleanedText(text);
+      insert([{ type: 'text', value: cleanedText }]);
+    }
 
     onPaste?.(e as unknown as React.ClipboardEvent<HTMLTextAreaElement>);
-  };
-  const onInternalCopy = () => {
-    const selection = getSelection();
-    const selectingString = selection?.toString() ?? '';
-    if (selectingString.length > 0) {
-      navigator.clipboard.writeText(selectingString.replace(/\n/g, ''));
-    }
   };
 
   const onInternalKeyUp = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -752,7 +753,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         range = getRange().range;
         break;
       case 'box':
-        range = lastRange as Range;
+        range = lastRange || null;
         if (range && skillDomRef.current && range.collapsed && range.startOffset === 0) {
           range.setStartAfter(skillDomRef.current);
         }
@@ -922,7 +923,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         suppressContentEditableWarning
         spellCheck={false}
         onCut={onInternalCut}
-        onCopy={onInternalCopy}
         onKeyDown={onInternalKeyDown}
         onKeyUp={onInternalKeyUp}
         onPaste={onInternalPaste}

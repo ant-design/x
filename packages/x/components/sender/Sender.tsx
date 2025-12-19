@@ -85,11 +85,12 @@ const ForwardSender = React.forwardRef<SenderRef, SenderProps>((props, ref) => {
     return {
       nativeElement: containerRef.current!,
       inputElement: inputRef.current?.nativeElement,
-      focus: inputRef.current?.focus!,
-      blur: inputRef.current?.blur!,
-      insert: inputRef.current?.insert!,
-      clear: inputRef.current?.clear!,
-      getValue: inputRef.current?.getValue!,
+      focus: (options?: any) => inputRef.current?.focus(options),
+      blur: () => inputRef.current?.blur(),
+      insert: (...args: any[]) => (inputRef.current as any)?.insert?.(...args),
+      clear: () => inputRef.current?.clear(),
+      getValue: () =>
+        inputRef.current?.getValue() ?? { value: '', slotConfig: [], skill: undefined },
     };
   });
 

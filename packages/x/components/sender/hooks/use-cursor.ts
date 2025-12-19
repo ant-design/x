@@ -64,6 +64,8 @@ interface UseCursorReturn {
   };
   getEndRange: (editableDom: HTMLDivElement) => Range;
   getStartRange: (editableDom: HTMLDivElement) => Range;
+  copySelectionString: () => Promise<boolean>;
+  getCleanedText: (ori: string) => string;
 }
 
 const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
@@ -438,6 +440,33 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
     [setCursorPosition, options],
   );
 
+  const getCleanedText = useCallback((ori: string) => {
+    return ori
+      .replace(/\u200B/g, '') // 移除零宽空格
+      .replace(/\n{3,}/g, '\n\n') // 限制连续换行最多为2个
+      .replace(/^\n+|\n+$/g, ''); // 移除开头和结尾的换行
+  }, []);
+
+  const copySelectionString = useCallback(async (): Promise<boolean> => {
+    try {
+      const selection = getSelection();
+      if (!selection) {
+        return false;
+      }
+
+      const selectingString = selection.toString().trim();
+      if (!selectingString) {
+        return false;
+      }
+      const cleanedText = getCleanedText(selectingString);
+      await navigator.clipboard.writeText(cleanedText);
+      return true;
+    } catch (error) {
+      warning(false, 'Sender', `Failed to copy selection: ${error}`);
+      return false;
+    }
+  }, [getSelection, getCleanedText]);
+
   return {
     setEndCursor,
     setStartCursor,
@@ -452,6 +481,8 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
     getInsertPosition,
     getEndRange,
     getStartRange,
+    copySelectionString,
+    getCleanedText,
   };
 };
 
