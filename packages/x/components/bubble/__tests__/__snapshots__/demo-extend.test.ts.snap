@@ -2833,7 +2833,7 @@ exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly
         type="button"
       >
         <span>
-          Scroll To Ramdom
+          Scroll To Random
         </span>
       </button>
       <button

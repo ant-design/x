@@ -135,16 +135,11 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
 
   // ============================= Refs =============================
   const listRef = React.useRef<HTMLDivElement>(null);
-  const scrollBoxRef = React.useRef<HTMLDivElement>(null);
   const bubblesRef = React.useRef<BubblesRecord>({});
-  const [_, setRefLoaded] = React.useState(false);
 
-  const { scrollTo } = useCompatibleScroll(scrollBoxRef.current);
-
-  // 确保 useCompatibleScroll 取到 dom
-  React.useEffect(() => {
-    setRefLoaded(true);
-  }, []);
+  // ============================= States =============================
+  const [scrollBoxDom, setScrollBoxDom] = React.useState<HTMLDivElement | null>();
+  const { scrollTo } = useCompatibleScroll(scrollBoxDom);
 
   // ============================ Prefix ============================
   const { getPrefixCls } = useXProviderContext();
@@ -172,9 +167,9 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   useProxyImperativeHandle<HTMLDivElement, BubbleListRef>(ref, () => {
     return {
       nativeElement: listRef.current!,
-      scrollBoxNativeElement: scrollBoxRef.current!,
+      scrollBoxNativeElement: scrollBoxDom!,
       scrollTo: ({ key, top, behavior = 'smooth', block }) => {
-        const { scrollHeight, clientHeight } = scrollBoxRef.current!;
+        const { scrollHeight, clientHeight } = scrollBoxDom!;
         if (typeof top === 'number') {
           scrollTo({
             top: autoScroll ? -scrollHeight + clientHeight + top : top,
@@ -206,7 +201,7 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
           [`${listPrefixCls}-autoscroll`]: autoScroll,
         })}
         style={styles.scroll}
-        ref={scrollBoxRef}
+        ref={(node) => setScrollBoxDom(node)}
         onScroll={onScroll}
       >
         {renderData.map((item) => {

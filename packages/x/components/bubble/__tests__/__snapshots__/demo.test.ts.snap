@@ -1947,7 +1947,7 @@ exports[`renders components/bubble/demo/list-scroll.tsx correctly 1`] = `
         type="button"
       >
         <span>
-          Scroll To Ramdom
+          Scroll To Random
         </span>
       </button>
       <button

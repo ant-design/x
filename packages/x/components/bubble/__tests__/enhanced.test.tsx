@@ -405,13 +405,15 @@ describe('Bubble Enhanced Tests', () => {
     it('should trigger onTypingComplete multiple times when content changes in non-animation mode', () => {
       const onTypingComplete = jest.fn();
 
-      render(<Bubble content="测试内容1" onTypingComplete={onTypingComplete} />);
+      const { rerender } = render(
+        <Bubble content="测试内容1" onTypingComplete={onTypingComplete} />,
+      );
       expect(onTypingComplete).toHaveBeenCalledWith('测试内容1');
 
-      render(<Bubble content="测试内容2" onTypingComplete={onTypingComplete} />);
+      rerender(<Bubble content="测试内容2" onTypingComplete={onTypingComplete} />);
       expect(onTypingComplete).toHaveBeenCalledWith('测试内容2');
 
-      render(<Bubble content="测试内容3" onTypingComplete={onTypingComplete} />);
+      rerender(<Bubble content="测试内容3" onTypingComplete={onTypingComplete} />);
       expect(onTypingComplete).toHaveBeenCalledWith('测试内容3');
 
       expect(onTypingComplete).toHaveBeenCalledTimes(3);

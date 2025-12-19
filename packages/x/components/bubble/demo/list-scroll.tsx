@@ -106,7 +106,7 @@ const App = () => {
               })
             }
           >
-            Scroll To Ramdom
+            Scroll To Random
           </Button>
           <Button
             onClick={() => listRef.current?.scrollTo({ key: items[1].key, block: 'nearest' })}

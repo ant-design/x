@@ -174,7 +174,7 @@ export interface BubbleListRef {
      */
     key?: string | number;
     /**
-     * @description 滚动条位置，可选固定值：'bottom'（视觉底部 | 'top'（视觉顶部）
+     * @description 滚动条位置，可选固定值：'bottom'（视觉底部) | 'top'（视觉顶部）
      */
     top?: number | 'bottom' | 'top';
     behavior?: ScrollBehavior;

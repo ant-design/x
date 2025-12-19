@@ -11,7 +11,7 @@ function isReverse(dom: HTMLElement) {
 export function useCompatibleScroll(dom?: HTMLElement | null) {
   // 底部哨兵
   const sentinelRef = useRef<HTMLElement>(null);
-  const sentineHeight = 10;
+  const sentinelHeight = 10;
   const isAtBottom = useRef(true);
   const shouldLock = useRef(false);
   const lockedScrollBottomPos = useRef(0);
@@ -28,7 +28,7 @@ export function useCompatibleScroll(dom?: HTMLElement | null) {
       sentinel.style.bottom = '0';
       sentinel.style.flexShrink = '0';
       sentinel.style.pointerEvents = 'none';
-      sentinel.style.height = `${sentineHeight}px`;
+      sentinel.style.height = `${sentinelHeight}px`;
       sentinel.style.visibility = 'hidden';
 
       dom.insertBefore(sentinel, dom.firstChild);
@@ -142,6 +142,7 @@ export function useCompatibleScroll(dom?: HTMLElement | null) {
       option?: ScrollToOptions & {
         intoView?: ScrollIntoViewOptions;
         intoViewDom?: HTMLElement;
+        top?: number | 'bottom' | 'top';
       },
     ) => {
       if (!dom) return;
@@ -152,7 +153,7 @@ export function useCompatibleScroll(dom?: HTMLElement | null) {
         dom.scrollTo(option);
       }
       if (isReverse(dom)) {
-        if ((top as any) === 'bottom' || (top as any) >= -sentineHeight) {
+        if ((top as any) === 'bottom' || (top as any) >= -sentinelHeight) {
           isScrollToBottom.current = true;
         } else if (intoViewDom) {
           isScrollToBottom.current = dom.childNodes[1] === intoViewDom;
@@ -162,7 +163,7 @@ export function useCompatibleScroll(dom?: HTMLElement | null) {
       } else {
         if (
           (top as any) === 'bottom' ||
-          (top as any) >= dom.scrollHeight - dom.clientHeight - sentineHeight
+          (top as any) >= dom.scrollHeight - dom.clientHeight - sentinelHeight
         ) {
           isScrollToBottom.current = true;
         } else if (intoViewDom) {

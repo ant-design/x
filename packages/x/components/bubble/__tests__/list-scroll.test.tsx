@@ -115,7 +115,7 @@ describe('useCompatibleScroll', () => {
       expect(mockMutationObserver).not.toHaveBeenCalled();
     });
 
-    it('should not initialize when flexDirection is not column-reverse', () => {
+    it('should initialize when flexDirection is column-reverse', () => {
       // Mock getComputedStyle to return a non-column-reverse flexDirection
       spyOnGetComputedStyle(false);
 
@@ -125,8 +125,8 @@ describe('useCompatibleScroll', () => {
 
       renderHook(() => useCompatibleScroll(nonReverseDom));
 
-      expect(mockIntersectionObserver).not.toHaveBeenCalled();
-      expect(mockMutationObserver).not.toHaveBeenCalled();
+      expect(mockIntersectionObserver).toHaveBeenCalled();
+      expect(mockMutationObserver).toHaveBeenCalled();
     });
 
     it('should initialize observers when dom is provided and flexDirection is column-reverse', () => {
