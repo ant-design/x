@@ -232,6 +232,8 @@ describe('useCompatibleScroll', () => {
       // Mock getComputedStyle to return column-reverse flexDirection
       spyOnGetComputedStyle();
 
+      mockDom.scrollTo = jest.fn();
+
       renderHook(() => useCompatibleScroll(mockDom));
 
       act(() => {
@@ -245,6 +247,35 @@ describe('useCompatibleScroll', () => {
         mutationCallback();
       });
 
+      expect(mockDom.scrollTop).toBe(-300);
+    });
+
+    it('should keep going bottom when content mutating and scrolling', async () => {
+      // Mock getComputedStyle to return column-reverse flexDirection
+      spyOnGetComputedStyle();
+
+      mockDom.scrollTo = jest.fn();
+
+      const { result } = renderHook(() => useCompatibleScroll(mockDom));
+      const spyScrollTo = jest.spyOn(mockDom, 'scrollTo');
+
+      act(() => {
+        Object.defineProperty(mockDom, 'scrollTop', { value: -300, writable: true });
+        intersectionCallback([{ isIntersecting: false }]);
+      });
+
+      await waitFakeTimer(100);
+
+      act(() => {
+        result.current.scrollTo({ top: 0 });
+        Object.defineProperty(mockDom, 'scrollHeight', { value: 1200, writable: true });
+        mutationCallback();
+      });
+
+      // wait for raf
+      await waitFakeTimer(100);
+
+      expect(spyScrollTo).toHaveBeenCalledTimes(2);
       expect(mockDom.scrollTop).toBe(-300);
     });
 

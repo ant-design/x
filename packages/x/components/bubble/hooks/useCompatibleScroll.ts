@@ -142,7 +142,6 @@ export function useCompatibleScroll(dom?: HTMLElement | null) {
       option?: ScrollToOptions & {
         intoView?: ScrollIntoViewOptions;
         intoViewDom?: HTMLElement;
-        top?: number | 'bottom' | 'top';
       },
     ) => {
       if (!dom) return;
@@ -153,7 +152,7 @@ export function useCompatibleScroll(dom?: HTMLElement | null) {
         dom.scrollTo(option);
       }
       if (isReverse(dom)) {
-        if ((top as any) === 'bottom' || (top as any) >= -sentinelHeight) {
+        if (top !== undefined && top >= -sentinelHeight) {
           isScrollToBottom.current = true;
         } else if (intoViewDom) {
           isScrollToBottom.current = dom.childNodes[1] === intoViewDom;
@@ -161,10 +160,7 @@ export function useCompatibleScroll(dom?: HTMLElement | null) {
           isScrollToBottom.current = false;
         }
       } else {
-        if (
-          (top as any) === 'bottom' ||
-          (top as any) >= dom.scrollHeight - dom.clientHeight - sentinelHeight
-        ) {
+        if (top !== undefined && top >= dom.scrollHeight - dom.clientHeight - sentinelHeight) {
           isScrollToBottom.current = true;
         } else if (intoViewDom) {
           isScrollToBottom.current = dom.lastElementChild === intoViewDom;

@@ -80,7 +80,7 @@ describe('Bubble Enhanced Tests', () => {
 
       // 检查是否有渐入效果的元素
       const fadeInElements = container.querySelectorAll('.fade-in');
-      expect(fadeInElements.length).toBeGreaterThanOrEqual(0);
+      expect(fadeInElements.length).toBeGreaterThan(0);
 
       // 等待动画完成
       await waitFakeTimer(100, 10);
