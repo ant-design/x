@@ -129,6 +129,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     getInsertPosition,
     getEndRange,
     getStartRange,
+    getSelection,
   } = useCursor({
     prefixCls,
     getSlotDom: (key: string) => slotDomMap.current.get(key),
@@ -548,7 +549,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     ) {
       return;
     }
-    const selection = window.getSelection();
+    const selection = getSelection();
     if (
       !selection?.anchorNode ||
       !skillDomRef.current.contains(selection.anchorNode) ||
@@ -633,22 +634,26 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
   const onInternalCut = (e: React.ClipboardEvent<HTMLDivElement>) => {
     handleDeleteOperation(e, 'cut');
+    onInternalCopy();
   };
 
   const onInternalPaste: React.ClipboardEventHandler<HTMLDivElement> = (e) => {
-    e.preventDefault();
     const files = e.clipboardData?.files;
     const text = e.clipboardData?.getData('text/plain');
     if (!text && files?.length && onPasteFile) {
       onPasteFile(files);
+      e.preventDefault();
       return;
     }
 
-    if (text) {
-      insert([{ type: 'text', value: text.replace(/\n/g, '') }]);
-    }
-
     onPaste?.(e as unknown as React.ClipboardEvent<HTMLTextAreaElement>);
+  };
+
+  const onInternalCopy = () => {
+    const selection = getSelection();
+    if (selection?.toString().length) {
+      navigator.clipboard.writeText(selection.toString().replace(/\n/g, ''));
+    }
   };
 
   const onInternalKeyUp = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -662,7 +667,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
   const onInternalSelect: React.ReactEventHandler<HTMLDivElement> = () => {
     const editableDom = editableRef.current;
-    const selection = window.getSelection();
+    const selection = getSelection();
     if (
       editableDom &&
       selection?.focusNode === editableDom &&
@@ -917,6 +922,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         suppressContentEditableWarning
         spellCheck={false}
         onCut={onInternalCut}
+        onCopy={onInternalCopy}
         onKeyDown={onInternalKeyDown}
         onKeyUp={onInternalKeyUp}
         onPaste={onInternalPaste}
