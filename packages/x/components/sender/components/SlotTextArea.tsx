@@ -4,22 +4,22 @@ import { Dropdown, Input, type InputRef } from 'antd';
 import { clsx } from 'clsx';
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import useXComponentConfig from '../_util/hooks/use-x-component-config';
-import warning from '../_util/warning';
-import { useXProviderContext } from '../x-provider';
-import Skill from './components/Skill';
-import { SenderContext } from './context';
-import useCursor from './hooks/use-cursor';
-import useInputHeight from './hooks/use-input-height';
-import useSlotBuilder from './hooks/use-slot-builder';
-import useSlotConfigState from './hooks/use-slot-config-state';
+import useXComponentConfig from '../../_util/hooks/use-x-component-config';
+import warning from '../../_util/warning';
+import { useXProviderContext } from '../../x-provider';
+import { SenderContext } from '../context';
+import useCursor from '../hooks/use-cursor';
+import useInputHeight from '../hooks/use-input-height';
+import useSlotBuilder from '../hooks/use-slot-builder';
+import useSlotConfigState from '../hooks/use-slot-config-state';
 import type {
   EventType,
   InsertPosition,
   SkillType,
   SlotConfigBaseType,
   SlotConfigType,
-} from './interface';
+} from '../interface';
+import Skill from './Skill';
 
 export interface SlotTextAreaRef {
   focus: (options?: FocusOptions) => void;
@@ -629,6 +629,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     removeSpecificBRs(editableRef?.current);
     triggerValueChange(e as unknown as EventType);
   };
+
   const onInternalCut = (e: React.ClipboardEvent<HTMLDivElement>) => handleBackspaceKey(e);
 
   const onInternalPaste: React.ClipboardEventHandler<HTMLDivElement> = (e) => {
