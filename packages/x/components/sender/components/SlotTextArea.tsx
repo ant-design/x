@@ -648,11 +648,11 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
     onPaste?.(e as unknown as React.ClipboardEvent<HTMLTextAreaElement>);
   };
-
   const onInternalCopy = () => {
     const selection = getSelection();
-    if (selection?.toString().length) {
-      navigator.clipboard.writeText(selection.toString().replace(/\n/g, ''));
+    const selectingString = selection?.toString() ?? '';
+    if (selectingString.length > 0) {
+      navigator.clipboard.writeText(selectingString.replace(/\n/g, ''));
     }
   };
 
