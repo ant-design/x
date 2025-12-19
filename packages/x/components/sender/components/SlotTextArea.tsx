@@ -125,6 +125,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     setAfterNodeFocus,
     getTextBeforeCursor,
     removeAllRanges,
+    getRange,
     getInsertPosition,
     getEndRange,
     getStartRange,
@@ -473,35 +474,37 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     return keyLockRef.current || isCompositionRef.current || eventRes === false;
   };
 
-  // 处理退格键删除逻辑
-  const handleBackspaceKey = (
+  // 处理删除操作（退格键、剪切等）
+  const handleDeleteOperation = (
     e: React.KeyboardEvent<HTMLDivElement> | React.ClipboardEvent<HTMLDivElement>,
-    isBackspace?: boolean,
-  ) => {
+    operationType: 'backspace' | 'cut' | 'delete',
+  ): boolean => {
     if (!editableRef.current) return false;
-    const selection = window.getSelection();
+
+    const { range, selection } = getRange();
     if (!selection || selection.rangeCount === 0) return false;
+
     const { focusOffset, anchorNode } = selection;
     if (!anchorNode || !editableRef.current.contains(anchorNode)) {
       return false;
     }
 
-    if (anchorNode.nodeType === Node.TEXT_NODE) {
-      const parentElement = anchorNode.parentNode as Element;
-      const slotKey = parentElement?.getAttribute?.('data-slot-key');
-      const range = selection.getRangeAt(0).toString();
-      if (
-        slotKey &&
-        (anchorNode.textContent?.length === range.length ||
-          (1 === anchorNode.textContent?.length && focusOffset === 1))
-      ) {
+    // 处理文本节点中的slot删除
+    if (anchorNode.nodeType === Node.TEXT_NODE && range) {
+      const parentElement = anchorNode.parentNode as HTMLElement;
+      const nodeInfo = getNodeInfo(parentElement);
+      const selectedText = range.toString();
+      const isFullTextSelected = anchorNode.textContent?.length === selectedText.length;
+      const isSingleCharAtEnd = anchorNode.textContent?.length === 1 && focusOffset === 1;
+      if (nodeInfo?.slotConfig?.type === 'content' && (isFullTextSelected || isSingleCharAtEnd)) {
         e.preventDefault();
         (anchorNode.parentNode as HTMLElement).innerHTML = '';
         return true;
       }
     }
 
-    if (isBackspace && focusOffset === 0) {
+    // 处理退格键删除前一个元素
+    if (operationType === 'backspace' && focusOffset === 0) {
       const previousSibling = anchorNode.previousSibling;
       if (previousSibling) {
         const nodeInfo = getNodeInfo(previousSibling as HTMLElement);
@@ -520,6 +523,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         }
       }
     }
+
     return false;
   };
 
@@ -578,9 +582,9 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       return;
     }
 
-    // 处理退格键
+    // 处理退格键删除
     if (e.key === 'Backspace') {
-      if (handleBackspaceKey(e, true)) return;
+      if (handleDeleteOperation(e, 'backspace')) return;
     }
 
     // 处理Enter键提交
@@ -610,11 +614,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     if (keyLockRef.current) {
       keyLockRef.current = false;
     }
-    const selection = window.getSelection();
-
-    if (selection) {
-      lastSelectionRef.current = selection.rangeCount ? selection?.getRangeAt?.(0) : null;
-    }
+    const { range } = getRange();
+    lastSelectionRef.current = range;
 
     const timer = setTimeout(() => {
       lastSelectionRef.current = null;
@@ -630,7 +631,9 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     triggerValueChange(e as unknown as EventType);
   };
 
-  const onInternalCut = (e: React.ClipboardEvent<HTMLDivElement>) => handleBackspaceKey(e);
+  const onInternalCut = (e: React.ClipboardEvent<HTMLDivElement>) => {
+    handleDeleteOperation(e, 'cut');
+  };
 
   const onInternalPaste: React.ClipboardEventHandler<HTMLDivElement> = (e) => {
     e.preventDefault();
@@ -741,10 +744,10 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         range = getStartRange(editableDom);
         break;
       case 'slot':
-        range = selection.getRangeAt?.(0) || null;
+        range = getRange().range;
         break;
       case 'box':
-        range = lastRange || null;
+        range = lastRange as Range;
         if (range && skillDomRef.current && range.collapsed && range.startOffset === 0) {
           range.setStartAfter(skillDomRef.current);
         }

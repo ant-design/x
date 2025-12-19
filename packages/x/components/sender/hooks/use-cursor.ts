@@ -351,17 +351,23 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
       editableRef?: React.RefObject<HTMLDivElement | null>,
       lastSelectionRef?: React.RefObject<Range | null>,
     ) => {
-      const selection = window?.getSelection?.();
       if (position === 'start' || position === 'end') {
-        return { type: position, selection };
+        return { type: position, selection: getSelection() };
       }
 
-      if (!selection || selection.rangeCount === 0) {
-        return { type: 'end', selection };
+      let range: Range | null = null;
+      let selection: Selection | null = null;
+
+      if (lastSelectionRef?.current) {
+        range = lastSelectionRef.current;
+        selection = getSelection();
+      } else {
+        const rangeResult = getRange();
+        range = rangeResult.range;
+        selection = rangeResult.selection;
       }
 
-      const range = lastSelectionRef?.current || selection.getRangeAt(0);
-      if (!range) {
+      if (!range || !selection) {
         return { type: 'end', selection };
       }
 
@@ -400,7 +406,7 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
 
       return { type: 'end', selection };
     },
-    [options],
+    [options, getRange, getSelection],
   );
 
   /**
