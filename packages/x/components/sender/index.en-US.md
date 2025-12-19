@@ -148,7 +148,7 @@ type ActionsComponents = {
 
 | Property           | Description   | Type | Default | Version |
 | ------------------ | ------------- | ---- | ------- | ------- |
-| props.defaultValue | Default value | any  | -       | 2.0.0   |
+| props.defaultValue | Default value | any  | -       | 2.1.0   |
 
 ##### custom node properties
 
