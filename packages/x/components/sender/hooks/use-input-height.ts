@@ -1,5 +1,5 @@
 import useToken from '../../theme/useToken';
-import { SenderProps } from '../interface';
+import type { SenderProps } from '../interface';
 
 const SENDER_INPUT_PADDING_HEIGHT = 4.35;
 const useInputHeight = (
