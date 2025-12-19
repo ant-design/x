@@ -276,7 +276,68 @@ describe('useCompatibleScroll', () => {
       await waitFakeTimer(100);
 
       expect(spyScrollTo).toHaveBeenCalledTimes(2);
-      expect(mockDom.scrollTop).toBe(-300);
+    });
+
+    it('should keep going bottom by scrollIntoView when content mutating and scrolling', async () => {
+      // Mock getComputedStyle to return column-reverse flexDirection
+      spyOnGetComputedStyle();
+
+      const { result } = renderHook(() => useCompatibleScroll(mockDom));
+
+      const child = document.createElement('div');
+      child.style.height = '100px';
+      mockDom.appendChild(child);
+
+      const spyScrollTo = jest.spyOn(mockDom, 'scrollTo');
+
+      act(() => {
+        Object.defineProperty(mockDom, 'scrollTop', { value: -300, writable: true });
+        intersectionCallback([{ isIntersecting: false }]);
+      });
+
+      await waitFakeTimer(100);
+
+      act(() => {
+        result.current.scrollTo({ intoViewDom: child, intoView: { block: 'end' } });
+        Object.defineProperty(mockDom, 'scrollHeight', { value: 1200, writable: true });
+        mutationCallback();
+      });
+
+      // wait for raf
+      await waitFakeTimer(100);
+
+      expect(spyScrollTo).toHaveBeenCalledTimes(1);
+    });
+
+    it('should keep going bottom by scrollIntoView in column when content mutating and scrolling', async () => {
+      // Mock getComputedStyle to return column flexDirection
+      spyOnGetComputedStyle(false);
+
+      const { result } = renderHook(() => useCompatibleScroll(mockDom));
+
+      const child = document.createElement('div');
+      child.style.height = '100px';
+      mockDom.appendChild(child);
+
+      const spyScrollTo = jest.spyOn(mockDom, 'scrollTo');
+
+      act(() => {
+        Object.defineProperty(mockDom, 'scrollTop', { value: -300, writable: true });
+        intersectionCallback([{ isIntersecting: false }]);
+      });
+
+      await waitFakeTimer(100);
+
+      act(() => {
+        result.current.scrollTo({ intoViewDom: child, intoView: { block: 'end' } });
+        Object.defineProperty(mockDom, 'scrollHeight', { value: 1200, writable: true });
+        mutationCallback();
+      });
+
+      // wait for raf
+      await waitFakeTimer(100);
+
+      expect(spyScrollTo).toHaveBeenCalledTimes(1);
     });
 
     it('should onScroll return early after call enforceScrollLock', () => {

@@ -2841,7 +2841,15 @@ exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly
         type="button"
       >
         <span>
-          Scroll To Second
+          Scroll To Second Bubble
+        </span>
+      </button>
+      <button
+        class="ant-btn css-var-_r_s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+        type="button"
+      >
+        <span>
+          Scroll To Last Bubble
         </span>
       </button>
     </div>

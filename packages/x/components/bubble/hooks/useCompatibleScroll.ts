@@ -154,7 +154,7 @@ export function useCompatibleScroll(dom?: HTMLElement | null) {
       if (isReverse(dom)) {
         if (top !== undefined && top >= -sentinelHeight) {
           isScrollToBottom.current = true;
-        } else if (intoViewDom) {
+        } else if (intoViewDom && intoView?.block === 'end') {
           isScrollToBottom.current = dom.childNodes[1] === intoViewDom;
         } else {
           isScrollToBottom.current = false;
@@ -162,7 +162,7 @@ export function useCompatibleScroll(dom?: HTMLElement | null) {
       } else {
         if (top !== undefined && top >= dom.scrollHeight - dom.clientHeight - sentinelHeight) {
           isScrollToBottom.current = true;
-        } else if (intoViewDom) {
+        } else if (intoViewDom && intoView?.block === 'end') {
           isScrollToBottom.current = dom.lastElementChild === intoViewDom;
         } else {
           isScrollToBottom.current = false;

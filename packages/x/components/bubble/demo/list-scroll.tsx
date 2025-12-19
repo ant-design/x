@@ -111,7 +111,14 @@ const App = () => {
           <Button
             onClick={() => listRef.current?.scrollTo({ key: items[1].key, block: 'nearest' })}
           >
-            Scroll To Second
+            Scroll To Second Bubble
+          </Button>
+          <Button
+            onClick={() =>
+              listRef.current?.scrollTo({ key: items[items.length - 1].key, block: 'end' })
+            }
+          >
+            Scroll To Last Bubble
           </Button>
         </Flex>
       </Flex>
