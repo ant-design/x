@@ -148,9 +148,10 @@ type ActionsComponents = {
 
 ##### content 节点属性
 
-| 属性               | 说明   | 类型 | 默认值 | 版本  |
-| ------------------ | ------ | ---- | ------ | ----- |
-| props.defaultValue | 默认值 | any  | -      | 2.1.0 |
+| 属性               | 说明   | 类型   | 默认值 | 版本  |
+| ------------------ | ------ | ------ | ------ | ----- |
+| props.defaultValue | 默认值 | any    | -      | 2.1.0 |
+| props.placeholder  | 占位符 | string | -      | 2.1.0 |
 
 ##### custom 节点属性
 

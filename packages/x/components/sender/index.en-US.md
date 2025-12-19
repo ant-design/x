@@ -146,9 +146,10 @@ type ActionsComponents = {
 
 ##### content node properties
 
-| Property           | Description   | Type | Default | Version |
-| ------------------ | ------------- | ---- | ------- | ------- |
-| props.defaultValue | Default value | any  | -       | 2.1.0   |
+| Property           | Description   | Type   | Default | Version |
+| ------------------ | ------------- | ------ | ------- | ------- |
+| props.defaultValue | Default value | any    | -       | 2.1.0   |
+| props.placeholder  | Placeholder   | string | -       | 2.1.0   |
 
 ##### custom node properties
 
