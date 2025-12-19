@@ -64,6 +64,8 @@ interface UseCursorReturn {
   };
   getEndRange: (editableDom: HTMLDivElement) => Range;
   getStartRange: (editableDom: HTMLDivElement) => Range;
+  copySelectionString: () => Promise<boolean>;
+  getCleanedText: (ori: string) => string;
 }
 
 const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
@@ -351,17 +353,23 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
       editableRef?: React.RefObject<HTMLDivElement | null>,
       lastSelectionRef?: React.RefObject<Range | null>,
     ) => {
-      const selection = window?.getSelection?.();
       if (position === 'start' || position === 'end') {
-        return { type: position, selection };
+        return { type: position, selection: getSelection() };
       }
 
-      if (!selection || selection.rangeCount === 0) {
-        return { type: 'end', selection };
+      let range: Range | null = null;
+      let selection: Selection | null = null;
+
+      if (lastSelectionRef?.current) {
+        range = lastSelectionRef.current;
+        selection = getSelection();
+      } else {
+        const rangeResult = getRange();
+        range = rangeResult.range;
+        selection = rangeResult.selection;
       }
 
-      const range = lastSelectionRef?.current || selection.getRangeAt(0);
-      if (!range) {
+      if (!range || !selection) {
         return { type: 'end', selection };
       }
 
@@ -400,7 +408,7 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
 
       return { type: 'end', selection };
     },
-    [options],
+    [options, getRange, getSelection],
   );
 
   /**
@@ -432,6 +440,33 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
     [setCursorPosition, options],
   );
 
+  const getCleanedText = useCallback((ori: string) => {
+    return ori
+      .replace(/\u200B/g, '') // 移除零宽空格
+      .replace(/\n/g, '')
+      .replace(/^\n+|\n+$/g, ''); // 移除开头和结尾的换行
+  }, []);
+
+  const copySelectionString = useCallback(async (): Promise<boolean> => {
+    try {
+      const selection = getSelection();
+      if (!selection) {
+        return false;
+      }
+
+      const selectingString = selection.toString();
+      if (!selectingString) {
+        return false;
+      }
+      const cleanedText = getCleanedText(selectingString);
+      await navigator.clipboard.writeText(cleanedText);
+      return true;
+    } catch (error) {
+      warning(false, 'Sender', `Failed to copy selection: ${error}`);
+      return false;
+    }
+  }, [getSelection, getCleanedText]);
+
   return {
     setEndCursor,
     setStartCursor,
@@ -446,6 +481,8 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
     getInsertPosition,
     getEndRange,
     getStartRange,
+    copySelectionString,
+    getCleanedText,
   };
 };
 

@@ -3594,11 +3594,11 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
           contenteditable="false"
           data-slot-key="tag"
         >
-          <div
+          <span
             class="ant-sender-slot-tag"
           >
             @Travel Planner 
-          </div>
+          </span>
         </span>
         help me create a travel itinerary,Use account 
         <span

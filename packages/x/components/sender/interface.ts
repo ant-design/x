@@ -1,12 +1,12 @@
 import type { ButtonProps, GetProps, InputProps, TooltipProps } from 'antd';
 import type React from 'react';
+import type { SlotTextAreaRef } from './components/SlotTextArea';
+import type { TextAreaRef } from './components/TextArea';
 import type { AllowSpeech } from './hooks/use-speech';
-import type { SlotTextAreaRef } from './SlotTextArea';
-import type { TextAreaRef } from './TextArea';
 
 type TextareaProps = GetProps<typeof import('antd').Input.TextArea>;
 
-export type SubmitType = 'enter' | 'shiftEnter' | false;
+type SubmitType = 'enter' | 'shiftEnter';
 
 type SemanticType = 'root' | 'prefix' | 'input' | 'suffix' | 'footer' | 'switch' | 'content';
 
@@ -48,7 +48,7 @@ interface SlotConfigContentType extends SlotConfigBaseType {
   key: string;
   props?: {
     defaultValue?: any;
-    [key: string]: any;
+    placeholder?: string;
   };
 }
 export interface SkillType {
@@ -69,7 +69,7 @@ interface SlotConfigInputType extends SlotConfigBaseType {
   key: string;
   props?: {
     defaultValue?: InputProps['defaultValue'];
-    placeholder?: string | undefined;
+    placeholder?: string;
   };
 }
 
@@ -79,7 +79,7 @@ interface SlotConfigSelectType extends SlotConfigBaseType {
   props?: {
     defaultValue?: string;
     options: string[];
-    placeholder?: string | undefined;
+    placeholder?: string;
   };
 }
 
