@@ -112,7 +112,7 @@ type ActionsComponents = {
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| type | Node type, determines the rendering component type, required | 'text' \| 'input' \| 'select' \| 'tag' \| 'custom' | - | 2.0.0 |
+| type | Node type, determines the rendering component type, required | 'text' \| 'input' \| 'select' \| 'tag' \| 'content' \| 'custom' | - | 2.0.0 |
 | key | Unique identifier, can be omitted when type is text | string | - | - |
 | formatResult | Format the final result | (value: any) => string | - | 2.0.0 |
 
@@ -143,6 +143,13 @@ type ActionsComponents = {
 | ----------- | --------------------- | --------- | ------- | ------- |
 | props.label | Tag content, required | ReactNode | -       | 2.0.0   |
 | props.value | Tag value             | string    | -       | 2.0.0   |
+
+##### content node properties
+
+| Property           | Description   | Type   | Default | Version |
+| ------------------ | ------------- | ------ | ------- | ------- |
+| props.defaultValue | Default value | any    | -       | 2.1.0   |
+| props.placeholder  | Placeholder   | string | -       | 2.1.0   |
 
 ##### custom node properties
 
