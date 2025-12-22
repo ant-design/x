@@ -108,8 +108,8 @@ type ActionsComponents = {
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| nativeElement | 外层容器 | `HTMLDivElement` | - | - |
 | inputElement | 输入框元素 | `HTMLTextAreaElement` | - | - |
+| nativeElement | 外层容器 | `HTMLDivElement` | - | - |
 | focus | 获取焦点，当 `cursor = 'slot'` 时焦点会在第一个插槽类型为 `input` 的输入框内，若不存在对应的 `input` 则效果会和 `end` 一致。 | (option?: { preventScroll?: boolean, cursor?: 'start' \| 'end' \| 'all' \| 'slot' }) | - | - |
 | blur | 取消焦点 | () => void | - | - |
 | insert | 插入文本或者插槽，使用插槽时需确保 slotConfig 已配置 | (value: string) => void \| (slotConfig: SlotConfigType[], position: insertPosition, replaceCharacters: string, preventScroll: boolean) => void; | - | - |
@@ -186,12 +186,10 @@ type ActionsComponents = {
 | children          | 通用内容         | ReactNode                  | -      | 2.0.0 |
 | checkedChildren   | 选中时的内容     | ReactNode                  | -      | 2.0.0 |
 | unCheckedChildren | 非选中时的内容   | ReactNode                  | -      | 2.0.0 |
-| defaultValue      | 默认选中状态     | boolean                    | -      | 2.0.0 |
-| classNames        | 语义化样式类名   | [见下](#semantic-dom)      | -      | 2.0.0 |
-| styles            | 语义化样式       | [见下](#semantic-dom)      | -      | 2.0.0 |
 | icon              | 设置图标组件     | ReactNode                  | -      | 2.0.0 |
 | disabled          | 是否禁用         | boolean                    | false  | 2.0.0 |
 | loading           | 加载中的开关     | boolean                    | -      | 2.0.0 |
+| defaultValue      | 默认选中状态     | boolean                    | -      | 2.0.0 |
 | value             | 开关的值         | boolean                    | false  | 2.0.0 |
 | onChange          | 变化时的回调函数 | function(checked: boolean) | -      | 2.0.0 |
 | rootClassName     | 根元素样式类     | string                     | -      | 2.0.0 |

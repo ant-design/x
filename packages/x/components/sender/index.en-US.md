@@ -106,8 +106,8 @@ type ActionsComponents = {
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| nativeElement | Outer container | `HTMLDivElement` | - | - |
 | inputElement | Input element | `HTMLTextAreaElement` | - | - |
+| nativeElement | Outer container | `HTMLDivElement` | - | - |
 | focus | Get focus, when `cursor = 'slot'` the focus will be in the first slot of type `input`, if no corresponding `input` exists it will behave the same as `end` | (option?: { preventScroll?: boolean, cursor?: 'start' \| 'end' \| 'all' \| 'slot' }) | - | - |
 | blur | Remove focus | () => void | - | - |
 | insert | Insert text or slots, when using slots ensure slotConfig is configured | (value: string) => void \| (slotConfig: SlotConfigType[], position: insertPosition, replaceCharacters: string, preventScroll: boolean) => void; | - | - |
@@ -179,20 +179,18 @@ type ActionsComponents = {
 
 ### Sender.Switch
 
-| Property          | Description                | Type                       | Default | Version |
-| ----------------- | -------------------------- | -------------------------- | ------- | ------- |
-| children          | General content            | ReactNode                  | -       | 2.0.0   |
-| checkedChildren   | Content when checked       | ReactNode                  | -       | 2.0.0   |
-| unCheckedChildren | Content when unchecked     | ReactNode                  | -       | 2.0.0   |
-| defaultValue      | Default checked state      | boolean                    | -       | 2.0.0   |
-| classNames        | Semantic style class names | [See below](#semantic-dom) | -       | 2.0.0   |
-| styles            | Semantic styles            | [See below](#semantic-dom) | -       | 2.0.0   |
-| icon              | Set icon component         | ReactNode                  | -       | 2.0.0   |
-| disabled          | Whether disabled           | boolean                    | false   | 2.0.0   |
-| loading           | Loading switch             | boolean                    | -       | 2.0.0   |
-| value             | Switch value               | boolean                    | false   | 2.0.0   |
-| onChange          | Callback when changed      | function(checked: boolean) | -       | 2.0.0   |
-| rootClassName     | Root element style class   | string                     | -       | 2.0.0   |
+| Property          | Description              | Type                       | Default | Version |
+| ----------------- | ------------------------ | -------------------------- | ------- | ------- |
+| children          | General content          | ReactNode                  | -       | 2.0.0   |
+| checkedChildren   | Content when checked     | ReactNode                  | -       | 2.0.0   |
+| unCheckedChildren | Content when unchecked   | ReactNode                  | -       | 2.0.0   |
+| icon              | Set icon component       | ReactNode                  | -       | 2.0.0   |
+| disabled          | Whether disabled         | boolean                    | false   | 2.0.0   |
+| loading           | Loading switch           | boolean                    | -       | 2.0.0   |
+| defaultValue      | Default checked state    | boolean                    | -       | 2.0.0   |
+| value             | Switch value             | boolean                    | false   | 2.0.0   |
+| onChange          | Callback when changed    | function(checked: boolean) | -       | 2.0.0   |
+| rootClassName     | Root element style class | string                     | -       | 2.0.0   |
 
 ### ⚠️ Slot Mode Notes
 
