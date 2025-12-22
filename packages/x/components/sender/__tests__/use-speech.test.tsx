@@ -1,4 +1,5 @@
 import { act, renderHook } from '@testing-library/react';
+import warning from '../../_util/warning';
 import useSpeech from '../hooks/use-speech';
 
 // Mock dependencies
@@ -9,6 +10,11 @@ jest.mock('@rc-component/util', () => ({
     const [value, setValue] = React.useState(options?.value ?? defaultValue);
     return [value, setValue];
   },
+}));
+
+jest.mock('../../_util/warning', () => ({
+  __esModule: true,
+  default: jest.fn(),
 }));
 
 // Setup global mocks
@@ -389,6 +395,74 @@ describe('useSpeech', () => {
 
         // Should not call stop since we're not recording
         expect(mockRecognition.stop).not.toHaveBeenCalled();
+        resolve(undefined);
+      }, 0);
+    });
+  });
+
+  it('should handle permission query rejection', () => {
+    const queryMock = jest.fn().mockRejectedValue(new Error('Permission query not supported'));
+
+    (global as any).window = {
+      SpeechRecognition: mockSpeechRecognition,
+    };
+
+    const mockNavigator = {
+      permissions: {
+        query: queryMock,
+      },
+    };
+    Object.defineProperty(global, 'navigator', {
+      value: mockNavigator,
+      writable: true,
+      configurable: true,
+    });
+
+    const onSpeech = jest.fn();
+    renderHook(() => useSpeech(onSpeech));
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        expect(queryMock).toHaveBeenCalledWith({ name: 'microphone' });
+        expect(warning).toHaveBeenCalledWith(
+          false,
+          'Sender',
+          expect.stringContaining('Browser does not support querying microphone permission'),
+        );
+        resolve(undefined);
+      }, 0);
+    });
+  });
+
+  it('should handle permission query rejection with non-Error value', () => {
+    const queryMock = jest.fn().mockRejectedValue('Some string error');
+
+    (global as any).window = {
+      SpeechRecognition: mockSpeechRecognition,
+    };
+
+    const mockNavigator = {
+      permissions: {
+        query: queryMock,
+      },
+    };
+    Object.defineProperty(global, 'navigator', {
+      value: mockNavigator,
+      writable: true,
+      configurable: true,
+    });
+
+    const onSpeech = jest.fn();
+    renderHook(() => useSpeech(onSpeech));
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        expect(queryMock).toHaveBeenCalledWith({ name: 'microphone' });
+        expect(warning).toHaveBeenCalledWith(
+          false,
+          'Sender',
+          expect.stringContaining('Browser does not support querying microphone permission'),
+        );
         resolve(undefined);
       }, 0);
     });
