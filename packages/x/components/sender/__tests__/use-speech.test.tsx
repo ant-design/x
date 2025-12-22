@@ -427,7 +427,7 @@ describe('useSpeech', () => {
         expect(warning).toHaveBeenCalledWith(
           false,
           'Sender',
-          expect.stringContaining('Browser does not support querying microphone permission'),
+          'Browser does not support querying microphone permission. Permission query not supported',
         );
         resolve(undefined);
       }, 0);
@@ -461,7 +461,7 @@ describe('useSpeech', () => {
         expect(warning).toHaveBeenCalledWith(
           false,
           'Sender',
-          expect.stringContaining('Browser does not support querying microphone permission'),
+          'Browser does not support querying microphone permission. Some string error',
         );
         resolve(undefined);
       }, 0);
