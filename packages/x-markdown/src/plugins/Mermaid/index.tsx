@@ -1,11 +1,15 @@
-import { CopyOutlined, DownloadOutlined, ZoomInOutlined, ZoomOutOutlined } from '@ant-design/icons';
+import {
+  DownloadOutlined,
+  OneToOneOutlined,
+  ZoomInOutlined,
+  ZoomOutOutlined,
+} from '@ant-design/icons';
 import useXComponentConfig from '@ant-design/x/es/_util/hooks/use-x-component-config';
 import Actions from '@ant-design/x/es/actions';
-import { ItemType } from '@ant-design/x/es/actions/interface';
 import useLocale from '@ant-design/x/es/locale/useLocale';
 import useXProviderContext from '@ant-design/x/es/x-provider/hooks/use-x-provider-context';
 import locale_EN from '@ant-design/x/locale/en_US';
-import { Button, message, Segmented, Tooltip } from 'antd';
+import { Segmented, Space } from 'antd';
 import classnames from 'classnames';
 import throttle from 'lodash.throttle';
 import mermaid from 'mermaid';
@@ -46,7 +50,6 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
   const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
   const id = `mermaid-${uuid++}-${children?.length || 0}`;
-  const [messageApi, contextHolder] = message.useMessage();
 
   // ============================ locale ============================
   const [contextLocale] = useLocale('Mermaid', locale_EN.Mermaid);
@@ -210,64 +213,9 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
     setScale((prev) => Math.max(prev - 0.2, 0.5));
   };
 
-  const handleCopyCode = async () => {
-    if (!children) return;
-
-    try {
-      await navigator.clipboard.writeText(children.trim());
-      messageApi.open({
-        type: 'success',
-        content: contextLocale.copySuccess,
-      });
-    } catch (error) {
-      console.error('Failed to copy code:', error);
-    }
-  };
-
   const renderHeader = () => {
     if (header === null) return null;
     if (header) return header;
-
-    const items: ItemType[] = [
-      {
-        key: 'copy',
-        icon: <CopyOutlined />,
-        label: contextLocale.copy,
-        onItemClick: handleCopyCode,
-      },
-      ...(renderType === RenderType.Image
-        ? [
-            {
-              key: 'zoomIn',
-              icon: <ZoomInOutlined />,
-              label: contextLocale.zoomIn,
-              onItemClick: handleZoomIn,
-            },
-            {
-              key: 'zoomOut',
-              icon: <ZoomOutOutlined />,
-              label: contextLocale.zoomOut,
-              onItemClick: handleZoomOut,
-            },
-            {
-              key: 'zoomReset',
-              actionRender: () => (
-                <Tooltip title={contextLocale.zoomReset}>
-                  <Button type="text" size="small" onClick={handleReset}>
-                    {contextLocale.zoomReset}
-                  </Button>
-                </Tooltip>
-              ),
-            },
-            {
-              key: 'download',
-              icon: <DownloadOutlined />,
-              label: contextLocale.download,
-              onItemClick: handleDownload,
-            },
-          ]
-        : []),
-    ];
 
     return (
       <div
@@ -278,7 +226,6 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
         )}
         style={{ ...contextConfig.styles.header, ...styles.header }}
       >
-        {contextHolder}
         <Segmented
           options={[
             { label: contextLocale.image, value: RenderType.Image },
@@ -287,7 +234,41 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
           value={renderType}
           onChange={setRenderType}
         />
-        <Actions items={items} />
+        <Space>
+          <Actions.Copy text={children.trim()} />
+          {renderType === RenderType.Image ? (
+            <>
+              <Actions
+                items={[
+                  {
+                    label: contextLocale.zoomOut,
+                    key: 'zoomOut',
+                    icon: <ZoomInOutlined />,
+                    onItemClick: handleZoomIn,
+                  },
+                  {
+                    label: contextLocale.zoomIn,
+                    key: 'zoomIn',
+                    icon: <ZoomOutOutlined />,
+                    onItemClick: handleZoomOut,
+                  },
+                  {
+                    label: contextLocale.zoomReset,
+                    key: 'zoomReset',
+                    icon: <OneToOneOutlined />,
+                    onItemClick: handleReset,
+                  },
+                  {
+                    label: contextLocale.download,
+                    key: 'download',
+                    icon: <DownloadOutlined />,
+                    onItemClick: handleDownload,
+                  },
+                ]}
+              />
+            </>
+          ) : null}
+        </Space>
       </div>
     );
   };
