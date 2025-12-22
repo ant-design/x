@@ -1,4 +1,4 @@
-import { CaretDownFilled } from '@ant-design/icons';
+import { CaretDownFilled, CloseOutlined } from '@ant-design/icons';
 import { Dropdown, Input, InputRef } from 'antd';
 import classnames from 'classnames';
 import pickAttrs from 'rc-util/lib/pickAttrs';
@@ -137,6 +137,29 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
   };
 
+  const removeTagSlot = (key: string, e?: EventType) => {
+    const span = getSlotDom(key);
+    if (span && editableRef.current && editableRef.current.contains(span)) {
+      editableRef.current.removeChild(span);
+    }
+    slotDomMap.current.delete(key);
+    // 移除配置与值
+    slotConfigRef.current = (slotConfigRef.current || []).filter((item) => item.key !== key);
+    setSlotValues((prev) => {
+      const next = { ...prev };
+      delete next[key];
+      return next;
+    });
+    setSlotPlaceholders((prev) => {
+      const next = new Map(prev);
+      next.delete(key);
+      return next;
+    });
+    // 触发 onChange
+    const newValue = getEditorValue();
+    onChange?.(newValue.value, e, newValue.config);
+  };
+
   const renderSlot = (node: SlotConfigType, slotSpan: HTMLSpanElement) => {
     if (!node.key) return null;
     const value = getSlotValues()[node.key];
@@ -194,8 +217,38 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
               </span>
             </Dropdown>
           );
-        case 'tag':
-          return <div className={`${prefixCls}-slot-tag`}>{node.props?.label || ''}</div>;
+        case 'tag': {
+          const allowClear =
+            typeof node.props?.allowClear === 'boolean'
+              ? node.props?.allowClear
+              : node.props?.allowClear?.clearIcon;
+          const clearIcon =
+            typeof node.props?.allowClear === 'object' ? (
+              node.props?.allowClear?.clearIcon ? (
+                node.props?.allowClear?.clearIcon
+              ) : (
+                <CloseOutlined />
+              )
+            ) : (
+              <CloseOutlined />
+            );
+          return (
+            <div className={`${prefixCls}-slot-tag`}>
+              <span className={`${prefixCls}-slot-tag-label`}>{node.props?.label || ''}</span>
+              {!readOnly && allowClear && (
+                <span
+                  className={`${prefixCls}-slot-tag-clear-icon`}
+                  onMouseDown={(e) => e.preventDefault()}
+                  onClick={(e) => {
+                    removeTagSlot(node.key as string, e as unknown as EventType);
+                  }}
+                >
+                  {clearIcon}
+                </span>
+              )}
+            </div>
+          );
+        }
         case 'custom':
           return node.customRender?.(
             value,
@@ -318,6 +371,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
     const currentRange = selection?.rangeCount > 0 ? selection?.getRangeAt?.(0) : null;
     const range = lastSelectionRef.current || currentRange;
+
     if (range) {
       if ((range.endContainer as HTMLElement)?.className?.includes(`${prefixCls}-slot`)) {
         return {
@@ -468,6 +522,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     if (!editableDom || !selection) return;
     const slotNode = getSlotListNode(slotConfig);
     const { type, range: lastRage } = getInsertPosition(position);
+
     let range: Range = document.createRange();
     slotConfigRef.current = [...slotConfigRef.current, ...slotConfig];
     setSlotValues(slotConfig);
