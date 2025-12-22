@@ -61,7 +61,12 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 | onSubmit | 点击发送按钮的回调 | (message: string, slotConfig: SlotConfigType[], skill: SkillType) => void | - | - |
 | onChange | 输入框值改变的回调 | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`>, slotConfig: SlotConfigType[],skill: SkillType) => void | - | - |
 | onCancel | 点击取消按钮的回调 | () => void | - | - |
+| onPaste | 粘贴回调 | React.ClipboardEventHandler<HTMLElement> | - | - |
 | onPasteFile | 黏贴文件的回调 | (files: FileList) => void | - | - |
+| onKeyDown | 键盘按下回调 | (event: React.KeyboardEvent) => void \| false | - | - |
+| onFocus | 获取焦点回调 | React.FocusEventHandler<HTMLTextAreaElement> | - | - |
+| onBlur | 失去焦点回调 | React.FocusEventHandler<HTMLTextAreaElement> | - | - |
+| placeholder | 输入框占位符 | string | - | - |
 | autoSize | 自适应内容高度，可设置为 true \| false 或对象：{ minRows: 2, maxRows: 6 } | boolean \| { minRows?: number; maxRows?: number } | { maxRows: 8 } | - |
 | slotConfig | 词槽配置，配置后输入框将变为词槽模式，支持结构化输入，此模式`value` 和 `defaultValue` 配置将无效。 | SlotConfigType[] | - | 2.0.0 |
 | skill | 技能配置，输入框将变为词槽模式，支持结构化输入，此模式`value` 和 `defaultValue` 配置将无效。 | SkillType | - | 2.0.0 |
@@ -104,6 +109,7 @@ type ActionsComponents = {
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
 | nativeElement | 外层容器 | `HTMLDivElement` | - | - |
+| inputElement | 输入框元素 | `HTMLTextAreaElement` | - | - |
 | focus | 获取焦点，当 `cursor = 'slot'` 时焦点会在第一个插槽类型为 `input` 的输入框内，若不存在对应的 `input` 则效果会和 `end` 一致。 | (option?: { preventScroll?: boolean, cursor?: 'start' \| 'end' \| 'all' \| 'slot' }) | - | - |
 | blur | 取消焦点 | () => void | - | - |
 | insert | 插入文本或者插槽，使用插槽时需确保 slotConfig 已配置 | (value: string) => void \| (slotConfig: SlotConfigType[], position: insertPosition, replaceCharacters: string, preventScroll: boolean) => void; | - | - |
@@ -180,6 +186,9 @@ type ActionsComponents = {
 | children          | 通用内容         | ReactNode                  | -      | 2.0.0 |
 | checkedChildren   | 选中时的内容     | ReactNode                  | -      | 2.0.0 |
 | unCheckedChildren | 非选中时的内容   | ReactNode                  | -      | 2.0.0 |
+| defaultValue      | 默认选中状态     | boolean                    | -      | 2.0.0 |
+| classNames        | 语义化样式类名   | [见下](#semantic-dom)      | -      | 2.0.0 |
+| styles            | 语义化样式       | [见下](#semantic-dom)      | -      | 2.0.0 |
 | icon              | 设置图标组件     | ReactNode                  | -      | 2.0.0 |
 | disabled          | 是否禁用         | boolean                    | false  | 2.0.0 |
 | loading           | 加载中的开关     | boolean                    | -      | 2.0.0 |
