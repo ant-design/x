@@ -40,7 +40,6 @@
     "prepublishOnly": "tsx ../../scripts/pre-publish.ts x",
     "authors": "tsx scripts/generate-authors.ts",
     "changelog": "npm run lint:changelog && tsx scripts/print-changelog.ts",
-    "check-commit": "tsx scripts/check-commit.ts",
     "clean": "antd-tools run clean && rm -rf es lib coverage locale dist report.html artifacts.zip oss-artifacts.zip",
     "precompile": "npm run prestart",
     "compile": "father build && cp -r locale es",

@@ -66,7 +66,8 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*uaGhTY1-LL0AAA
 | extra | 额外插槽 | [BubbleSlot](#bubbleslot) | - | - |
 | onTyping | 动画执行回调 | (rendererContent: string, currentContent: string) => void | - | 2.0.0 | 
 | onTypingComplete | 动画结束回调 | (content: string) => void | - | - |
-| onEditing | 编辑态下内容变化时回调 | (content: string) => void | - | 2.0.0 |
+| onEditConfirm | 编辑确认回调 | (content: string) => void | - | 2.0.0 |
+| onEditCancel | 编辑取消回调 | () => void | - | 2.0.0 |
 
 #### ContentType
 

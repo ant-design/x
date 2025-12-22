@@ -64,8 +64,9 @@ Common Props Reference: [Common Props](/docs/react/common-props)
 | avatar | Avatar slot | [BubbleSlot](#bubbleslot) | - | - |
 | extra | Extra slot | [BubbleSlot](#bubbleslot) | - | - |
 | onTyping | Typing animation callback | (rendererContent: string, currentContent: string) => void | - | 2.0.0 |
-| onEditing | Callback when content changes in editing mode | (content: string) => void | - | 2.0.0 |
 | onTypingComplete | Typing animation complete callback | (content: string) => void | - | - |
+| onEditConfirm | Edit confirm callback | (content: string) => void | - | 2.0.0 |
+| onEditCancel | Edit cancel callback | () => void | - | 2.0.0 |
 
 #### ContentType
 
