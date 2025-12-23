@@ -59,11 +59,11 @@ Common props ref：[Common props](/docs/react/common-props)
 | onSubmit | Callback for clicking the send button | (message: string, slotConfig: SlotConfigType[], skill: SkillType) => void | - | - |
 | onChange | Callback for input box value change | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`>, slotConfig: SlotConfigType[], skill: SkillType) => void | - | - |
 | onCancel | Callback for clicking the cancel button | () => void | - | - |
-| onPaste | Callback for pasting | React.ClipboardEventHandler<HTMLElement> | - | - |
+| onPaste | Callback for pasting | React.ClipboardEventHandler<`HTMLElement`> | - | - |
 | onPasteFile | Callback for pasting files | (files: FileList) => void | - | - |
 | onKeyDown | Callback for keyboard press | (event: React.KeyboardEvent) => void \| false | - | - |
-| onFocus | Callback for getting focus | React.FocusEventHandler<HTMLTextAreaElement> | - | - |
-| onBlur | Callback for losing focus | React.FocusEventHandler<HTMLTextAreaElement> | - | - |
+| onFocus | Callback for getting focus | React.FocusEventHandler<`HTMLTextAreaElement`> | - | - |
+| onBlur | Callback for losing focus | React.FocusEventHandler<`HTMLTextAreaElement`> | - | - |
 | placeholder | Placeholder of the input box | string | - | - |
 | autoSize | Auto-adjust content height, can be set to true \| false or object: { minRows: 2, maxRows: 6 } | boolean \| { minRows?: number; maxRows?: number } | { maxRows: 8 } | - |
 | slotConfig | Slot configuration, after configuration the input box will switch to slot mode, supporting structured input. In this mode, `value` and `defaultValue` configurations will be invalid. | SlotConfigType[] | - | 2.0.0 |

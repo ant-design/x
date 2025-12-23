@@ -61,11 +61,11 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 | onSubmit | 点击发送按钮的回调 | (message: string, slotConfig: SlotConfigType[], skill: SkillType) => void | - | - |
 | onChange | 输入框值改变的回调 | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`>, slotConfig: SlotConfigType[],skill: SkillType) => void | - | - |
 | onCancel | 点击取消按钮的回调 | () => void | - | - |
-| onPaste | 粘贴回调 | React.ClipboardEventHandler<HTMLElement> | - | - |
+| onPaste | 粘贴回调 | React.ClipboardEventHandler<`HTMLElement`> | - | - |
 | onPasteFile | 黏贴文件的回调 | (files: FileList) => void | - | - |
 | onKeyDown | 键盘按下回调 | (event: React.KeyboardEvent) => void \| false | - | - |
-| onFocus | 获取焦点回调 | React.FocusEventHandler<HTMLTextAreaElement> | - | - |
-| onBlur | 失去焦点回调 | React.FocusEventHandler<HTMLTextAreaElement> | - | - |
+| onFocus | 获取焦点回调 | React.FocusEventHandler<`HTMLTextAreaElement`> | - | - |
+| onBlur | 失去焦点回调 | React.FocusEventHandler<`HTMLTextAreaElement`> | - | - |
 | placeholder | 输入框占位符 | string | - | - |
 | autoSize | 自适应内容高度，可设置为 true \| false 或对象：{ minRows: 2, maxRows: 6 } | boolean \| { minRows?: number; maxRows?: number } | { maxRows: 8 } | - |
 | slotConfig | 词槽配置，配置后输入框将变为词槽模式，支持结构化输入，此模式`value` 和 `defaultValue` 配置将无效。 | SlotConfigType[] | - | 2.0.0 |
