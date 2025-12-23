@@ -2,7 +2,7 @@ import { Bubble } from '@ant-design/x';
 import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
 import { Infographic } from '@antv/infographic';
 import { Button, Flex } from 'antd';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 const text = `
 **[Infographic](https://github.com/antvis/Infographic)**, An Infographic Generation and Rendering Framework, bring words to life with AI!
@@ -41,7 +41,7 @@ function ReactInfographic(props: any) {
   const $container = React.useRef<HTMLDivElement>(null);
   const infographicInstance = React.useRef<any>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if ($container.current) {
       infographicInstance.current = new Infographic({
         container: $container.current,
@@ -53,7 +53,7 @@ function ReactInfographic(props: any) {
     };
   }, []);
 
-  useEffect(() => {
+  React.useEffect(() => {
     infographicInstance.current?.render(children);
   }, [children]);
 
