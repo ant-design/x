@@ -2,7 +2,7 @@ import { FastColor } from '@ant-design/fast-color';
 import { Flex, theme } from 'antd';
 import tokenMeta from 'antd/es/version/token-meta.json';
 import { createStyles } from 'antd-style';
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 // 用于 color.md 中的颜色对比
 import React from 'react';
 
@@ -107,7 +107,7 @@ const TokenCompare: React.FC<TokenCompareProps> = (props) => {
           <div className={styles.col}>
             <ColorCircle color={data.light} />
           </div>
-          <div className={classNames(styles.col, styles.colDark)}>
+          <div className={clsx(styles.col, styles.colDark)}>
             <ColorCircle color={data.dark} />
           </div>
         </div>

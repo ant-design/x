@@ -106,7 +106,7 @@ type ActionsComponents = {
 | nativeElement | 外层容器 | `HTMLDivElement` | - | - |
 | focus | 获取焦点，当 `cursor = 'slot'` 时焦点会在第一个插槽类型为 `input` 的输入框内，若不存在对应的 `input` 则效果会和 `end` 一致。 | (option?: { preventScroll?: boolean, cursor?: 'start' \| 'end' \| 'all' \| 'slot' }) | - | - |
 | blur | 取消焦点 | () => void | - | - |
-| insert | 插入文本或者插槽，使用插槽时需确保 slotConfig 已配置 | (value: string) => void \| (slotConfig: SlotConfigType[], position?: insertPosition, replaceCharacters?: string) => void; | - | - |
+| insert | 插入文本或者插槽，使用插槽时需确保 slotConfig 已配置 | (value: string) => void \| (slotConfig: SlotConfigType[], position: insertPosition, replaceCharacters: string, preventScroll: boolean) => void; | - | - |
 | clear | 清空内容 | () => void | - | - |
 | getValue | 获取当前内容和结构化配置 | () => { value: string; slotConfig: SlotConfigType[],skill: SkillType } | - | - |
 
@@ -114,7 +114,7 @@ type ActionsComponents = {
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| type | 节点类型，决定渲染组件类型，必填 | 'text' \| 'input' \| 'select' \| 'tag' \| 'custom' | - | 2.0.0 |
+| type | 节点类型，决定渲染组件类型，必填 | 'text' \| 'input' \| 'select' \| 'tag' \| 'content' \| 'custom' | - | 2.0.0 |
 | key | 唯一标识，type 为 text 时可省略 | string | - | - |
 | formatResult | 格式化最终结果 | (value: any) => string | - | 2.0.0 |
 
@@ -145,6 +145,13 @@ type ActionsComponents = {
 | ----------- | -------------- | --------- | ------ | ----- |
 | props.label | 标签内容，必填 | ReactNode | -      | 2.0.0 |
 | props.value | 标签值         | string    | -      | 2.0.0 |
+
+##### content 节点属性
+
+| 属性               | 说明   | 类型   | 默认值 | 版本  |
+| ------------------ | ------ | ------ | ------ | ----- |
+| props.defaultValue | 默认值 | any    | -      | 2.1.0 |
+| props.placeholder  | 占位符 | string | -      | 2.1.0 |
 
 ##### custom 节点属性
 

@@ -1,8 +1,8 @@
 import { RightOutlined } from '@ant-design/icons';
+import type { CSSMotionProps } from '@rc-component/motion';
+import CSSMotion from '@rc-component/motion';
 import type { ConfigProviderProps, GetProp } from 'antd';
-import classnames from 'classnames';
-import type { CSSMotionProps } from 'rc-motion';
-import CSSMotion from 'rc-motion';
+import { clsx } from 'clsx';
 import React from 'react';
 import type { GroupInfoType } from './hooks/useGroupable';
 
@@ -44,15 +44,15 @@ const GroupTitle: React.FC<GroupTitleProps> = ({ className, children }) => {
   return (
     <li className={className}>
       <div
-        className={classnames(`${prefixCls}-group-title`, {
+        className={clsx(`${prefixCls}-group-title`, {
           [`${prefixCls}-group-title-collapsible`]: mergeCollapsible,
         })}
         onClick={expandFun}
       >
-        {labelNode && <div className={classnames(`${prefixCls}-group-label`)}>{labelNode}</div>}
+        {labelNode && <div className={clsx(`${prefixCls}-group-label`)}>{labelNode}</div>}
         {mergeCollapsible && (
           <div
-            className={classnames(
+            className={clsx(
               `${prefixCls}-group-collapse-trigger `,
               `${prefixCls}-group-collapse-trigger-${groupOpen ? 'open' : 'close'}`,
             )}
@@ -63,7 +63,7 @@ const GroupTitle: React.FC<GroupTitleProps> = ({ className, children }) => {
       </div>
       <CSSMotion {...collapseMotion} visible={mergeCollapsible ? groupOpen : true}>
         {({ className: motionClassName, style }, motionRef) => (
-          <div className={classnames(motionClassName)} ref={motionRef} style={style}>
+          <div className={clsx(motionClassName)} ref={motionRef} style={style}>
             {children}
           </div>
         )}

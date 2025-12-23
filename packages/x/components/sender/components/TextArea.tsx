@@ -1,11 +1,11 @@
+import pickAttrs from '@rc-component/util/lib/pickAttrs';
+import getValue from '@rc-component/util/lib/utils/get';
 import type { InputRef as AntdInputRef, InputRef } from 'antd';
 import { Input } from 'antd';
-import classnames from 'classnames';
-import pickAttrs from 'rc-util/lib/pickAttrs';
-import getValue from 'rc-util/lib/utils/get';
+import { clsx } from 'clsx';
 import React from 'react';
-import { SenderContext } from './context';
-import type { InsertPosition, SkillType } from './interface';
+import { SenderContext } from '../context';
+import type { InsertPosition, SkillType } from '../interface';
 
 function getComponent<T>(
   components: { input?: React.ComponentType<T> } | undefined,
@@ -40,7 +40,6 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
     classNames = {},
     autoSize,
     components,
-    submitDisabled,
     triggerSend,
     placeholder,
     onFocus,
@@ -128,9 +127,7 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
 
       if (shouldSubmit) {
         e.preventDefault();
-        if (!submitDisabled) {
-          triggerSend?.();
-        }
+        triggerSend?.();
         return;
       }
     }
@@ -174,7 +171,7 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
       {...inputProps}
       disabled={disabled}
       style={styles.input}
-      className={classnames(`${prefixCls}-input`, classNames.input)}
+      className={clsx(`${prefixCls}-input`, classNames.input)}
       autoSize={autoSize}
       value={value}
       onChange={mergeOnChange}

@@ -1,7 +1,7 @@
+import useMergedState from '@rc-component/util/lib/hooks/useMergedState';
+import pickAttrs from '@rc-component/util/lib/pickAttrs';
 import { Divider } from 'antd';
-import classnames from 'classnames';
-import useMergedState from 'rc-util/lib/hooks/useMergedState';
-import pickAttrs from 'rc-util/lib/pickAttrs';
+import { clsx } from 'clsx';
 import React from 'react';
 import useCollapsible from '../_util/hooks/use-collapsible';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
@@ -169,7 +169,7 @@ const ForwardConversations = React.forwardRef<ConversationsRef, ConversationsPro
     // ============================ Style ============================
     const [hashId, cssVarCls] = useStyle(prefixCls);
 
-    const mergedCls = classnames(
+    const mergedCls = clsx(
       prefixCls,
       contextConfig.className,
       contextConfig.classNames.root,
@@ -236,7 +236,7 @@ const ForwardConversations = React.forwardRef<ConversationsRef, ConversationsPro
             info={baseConversationInfo}
             prefixCls={prefixCls}
             direction={direction}
-            className={classnames(
+            className={clsx(
               classNames.item,
               contextConfig.classNames.item,
               baseConversationInfo.className,
@@ -276,7 +276,7 @@ const ForwardConversations = React.forwardRef<ConversationsRef, ConversationsPro
       >
         {!!creation && (
           <Creation
-            className={classnames(contextConfig.classNames.creation, classNames.creation)}
+            className={clsx(contextConfig.classNames.creation, classNames.creation)}
             style={{
               ...contextConfig.styles.creation,
               ...styles.creation,
@@ -300,9 +300,9 @@ const ForwardConversations = React.forwardRef<ConversationsRef, ConversationsPro
                 collapseMotion,
               }}
             >
-              <GroupTitle className={classnames(contextConfig.classNames.group, classNames.group)}>
+              <GroupTitle className={clsx(contextConfig.classNames.group, classNames.group)}>
                 <ul
-                  className={classnames(`${prefixCls}-list`, {
+                  className={clsx(`${prefixCls}-list`, {
                     [`${prefixCls}-group-collapsible-list`]: groupInfo.collapsible,
                   })}
                   style={{ ...contextConfig.styles.group, ...styles.group }}

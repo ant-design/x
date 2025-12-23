@@ -1,7 +1,7 @@
 import { GithubOutlined } from '@ant-design/icons';
 import { Button, Select } from 'antd';
 import { createStyles } from 'antd-style';
-import classnames from 'classnames';
+import { clsx } from 'clsx';
 import { useLocation, useSiteData } from 'dumi';
 import React from 'react';
 
@@ -152,7 +152,7 @@ const HeaderActions: React.FC<HeaderActionsProps> = (props) => {
 
   return (
     <div
-      className={classnames(
+      className={clsx(
         styles.actions,
         props.isMini && styles.mini,
         props.isMobile && styles.mobile,

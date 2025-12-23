@@ -1,7 +1,7 @@
 import { DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined } from '@ant-design/icons';
+import pickAttrs from '@rc-component/util/lib/pickAttrs';
 import { Tooltip } from 'antd';
-import classnames from 'classnames';
-import pickAttrs from 'rc-util/lib/pickAttrs';
+import { clsx } from 'clsx';
 import React from 'react';
 import { useLocale } from '../locale';
 import enUS from '../locale/en_US';
@@ -81,7 +81,7 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
   const feedbackCls = `${prefixCls}-feedback`;
 
   // ============================ Classname ============================
-  const mergedCls = classnames(
+  const mergedCls = clsx(
     prefixCls,
     feedbackCls,
     hashId,
@@ -108,7 +108,7 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
               )
             }
             style={{ ...styles.like, ...(value === 'like' ? styles.liked : {}) }}
-            className={classnames(
+            className={clsx(
               `${feedbackCls}-item`,
               `${prefixCls}-item`,
               `${feedbackCls}-item-like`,
@@ -129,13 +129,13 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
           <span
             onClick={onFeedBacKClick}
             style={{ ...styles.dislike, ...(value === 'dislike' ? styles.disliked : {}) }}
-            className={classnames(
+            className={clsx(
               `${feedbackCls}-item`,
               `${prefixCls}-item`,
               `${feedbackCls}-item-dislike`,
               classNames.dislike,
               {
-                [`${classNames.disliked}`]: classNames.disliked && value === 'like',
+                [`${classNames.disliked}`]: classNames.disliked && value === 'dislike',
                 [`${feedbackCls}-item-dislike-active`]: value === 'dislike',
               },
             )}

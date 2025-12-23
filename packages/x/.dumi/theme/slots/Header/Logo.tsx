@@ -1,5 +1,5 @@
 import { createStyles } from 'antd-style';
-import classnames from 'classnames';
+import { clsx } from 'clsx';
 import { useLocation } from 'dumi';
 import * as React from 'react';
 
@@ -74,7 +74,7 @@ const Logo: React.FC<LogoProps> = ({ isZhCN, isMobile, isMini }) => {
     <h1>
       <Link
         to={utils.getLocalizedPathname('/', isZhCN, search)}
-        className={classnames(styles.logo, (isMobile || isMini) && styles.mobile)}
+        className={clsx(styles.logo, (isMobile || isMini) && styles.mobile)}
       >
         <img src={logoSrc} draggable={false} alt="logo" />
         <span className={styles.title}>Ant Design X</span>
