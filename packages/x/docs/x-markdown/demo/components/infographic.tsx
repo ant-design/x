@@ -43,7 +43,7 @@ function ReactInfographic(props: ReactInfographicProps) {
   const { children } = props;
 
   const $container = React.useRef<HTMLDivElement>(null);
-  const infographicInstance = React.useRef<any>(null);
+  const infographicInstance = React.useRef<Infographic>(null);
 
   React.useEffect(() => {
     if ($container.current) {
@@ -58,7 +58,7 @@ function ReactInfographic(props: ReactInfographicProps) {
   }, []);
 
   React.useEffect(() => {
-    infographicInstance.current?.render(children);
+    infographicInstance.current?.render(children as string);
   }, [children]);
 
   return <div ref={$container} />;
