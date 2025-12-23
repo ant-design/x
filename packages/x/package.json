@@ -91,6 +91,7 @@
   },
   "devDependencies": {
     "@antv/gpt-vis": "^0.4.1",
+    "@antv/infographic": "^0.1.4",
     "@codesandbox/sandpack-react": "^2.19.8",
     "@emotion/react": "^11.13.5",
     "@emotion/server": "^11.11.0",
@@ -243,9 +244,9 @@
   },
   "peerDependencies": {
     "antd": "^6.0.1",
+    "mermaid": "^11.12.1",
     "react": ">=18.0.0",
-    "react-dom": ">=18.0.0",
-    "mermaid": "^11.12.1"
+    "react-dom": ">=18.0.0"
   },
   "peerDependenciesMeta": {
     "mermaid": {
