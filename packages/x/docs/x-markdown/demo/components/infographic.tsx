@@ -17,25 +17,29 @@ data
   items
     - label 战略创新
       desc 数据驱动决策，引领行业变革
-      icon mdi/lightbulb-on
+      icon ref:search:lightbulb-on
     - label 智能运营
       desc AI赋能业务，实现自动化管理
-      icon mdi/robot
+      icon ref:search:robot
     - label 数据整合
       desc 打通数据孤岛，建立统一平台
-      icon mdi/database-sync
+      icon ref:search:database-sync
     - label 流程优化
       desc 数字化核心业务流程和协作
-      icon mdi/workflow
+      icon ref:search:workflow
     - label 基础设施
       desc 构建云计算和网络基础架构
-      icon mdi/server-network
+      icon ref:search:server-network
 themeConfig
   palette antv
 \`\`\`
 `;
 
-function ReactInfographic(props: any) {
+type ReactInfographicProps = {
+  children: React.ReactNode;
+};
+
+function ReactInfographic(props: ReactInfographicProps) {
   const { children } = props;
 
   const $container = React.useRef<HTMLDivElement>(null);
