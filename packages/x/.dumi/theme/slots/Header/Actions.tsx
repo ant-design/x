@@ -74,23 +74,8 @@ const HeaderActions: React.FC<HeaderActionsProps> = (props) => {
   };
 
   const handleVersionChange = React.useCallback((url: string) => {
-    const currentUrl = window.location.href;
-    const currentPathname = window.location.pathname;
-    if (/overview/.test(currentPathname) && /0?[1-39][0-3]?x/.test(url)) {
-      window.location.href = currentUrl
-        .replace(window.location.origin, url)
-        .replace(/\/components\/overview/, `/docs${/0(9|10)x/.test(url) ? '' : '/react'}/introduce`)
-        .replace(/\/$/, '');
-      return;
-    }
-    // Mirror url must have `/`, we add this for compatible
-    const urlObj = new URL(currentUrl.replace(window.location.origin, url));
-    if (urlObj.host.includes('antgroup')) {
-      urlObj.pathname = `${urlObj.pathname.replace(/\/$/, '')}/`;
-      window.location.href = urlObj.toString();
-    } else {
-      window.location.href = urlObj.href.replace(/\/$/, '');
-    }
+    // 切换版本时直接跳转到目标版本首页
+    window.location.href = url;
   }, []);
 
   const onLangChange = React.useCallback(() => {
