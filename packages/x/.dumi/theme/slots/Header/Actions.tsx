@@ -73,25 +73,42 @@ const HeaderActions: React.FC<HeaderActionsProps> = (props) => {
     updateSiteConfig({ direction: direction !== 'rtl' ? 'rtl' : 'ltr' });
   };
 
-  const handleVersionChange = React.useCallback((url: string) => {
-    const currentUrl = window.location.href;
-    const currentPathname = window.location.pathname;
-    if (/overview/.test(currentPathname) && /0?[1-39][0-3]?x/.test(url)) {
-      window.location.href = currentUrl
-        .replace(window.location.origin, url)
-        .replace(/\/components\/overview/, `/docs${/0(9|10)x/.test(url) ? '' : '/react'}/introduce`)
-        .replace(/\/$/, '');
-      return;
-    }
-    // Mirror url must have `/`, we add this for compatible
-    const urlObj = new URL(currentUrl.replace(window.location.origin, url));
-    if (urlObj.host.includes('antgroup')) {
-      urlObj.pathname = `${urlObj.pathname.replace(/\/$/, '')}/`;
-      window.location.href = urlObj.toString();
-    } else {
-      window.location.href = urlObj.href.replace(/\/$/, '');
-    }
-  }, []);
+  const targetPathV1TOV2 = [
+    ['docs/react', '/docs/react/introduce', '/docs/react/introduce'],
+    ['components', '/components/overview', '/components/introduce'],
+    ['x-markdowns', '/index', '/x-markdowns/introduce'],
+    ['x-sdks', '/index', '/x-sdks/introduce'],
+    ['playground', '/docs/playground/independent', '/docs/playground/ultramodern'],
+  ];
+  const handleVersionChange = React.useCallback(
+    (url: string) => {
+      const currentUrl = window.location.href;
+      const currentPathname = window.location.pathname;
+      const currentVersion = pkg.version;
+      const isZh = !utils.isZhCN(currentPathname);
+
+      const isFromV2ToV1 = /^2\./.test(currentVersion) && /1x-/.test(url);
+
+      for (const [pathPrefix, v1Path, v2Path] of targetPathV1TOV2) {
+        if (currentPathname.includes(pathPrefix)) {
+          const targetPath = isFromV2ToV1 ? v1Path : v2Path;
+          const finalPath = `${url}${targetPath}${isZh ? '-cn' : ''}`;
+          window.location.href = finalPath;
+          return;
+        }
+      }
+
+      // Mirror url must have `/`, we add this for compatible
+      const urlObj = new URL(currentUrl.replace(window.location.origin, url));
+      if (urlObj.host.includes('antgroup')) {
+        urlObj.pathname = `${urlObj.pathname.replace(/\/$/, '')}/`;
+        window.location.href = urlObj.toString();
+      } else {
+        window.location.href = urlObj.href.replace(/\/$/, '');
+      }
+    },
+    [pkg.version],
+  );
 
   const onLangChange = React.useCallback(() => {
     const currentProtocol = `${window.location.protocol}//`;
@@ -113,7 +130,7 @@ const HeaderActions: React.FC<HeaderActionsProps> = (props) => {
       <Select
         size="large"
         variant="borderless"
-        defaultValue={pkg.version}
+        value={pkg.version}
         onChange={handleVersionChange}
         styles={{
           popup: {
