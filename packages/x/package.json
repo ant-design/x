@@ -40,7 +40,6 @@
     "prepublishOnly": "tsx ../../scripts/pre-publish.ts x",
     "authors": "tsx scripts/generate-authors.ts",
     "changelog": "npm run lint:changelog && tsx scripts/print-changelog.ts",
-    "check-commit": "tsx scripts/check-commit.ts",
     "clean": "antd-tools run clean && rm -rf es lib coverage locale dist report.html artifacts.zip oss-artifacts.zip",
     "precompile": "npm run prestart",
     "compile": "father build && cp -r locale es",
@@ -92,6 +91,7 @@
   },
   "devDependencies": {
     "@antv/gpt-vis": "^0.5.10",
+    "@antv/infographic": "^0.1.4",
     "@codesandbox/sandpack-react": "^2.19.8",
     "@emotion/react": "^11.13.5",
     "@emotion/server": "^11.11.0",

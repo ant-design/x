@@ -4,22 +4,22 @@ import { Dropdown, Input, type InputRef } from 'antd';
 import { clsx } from 'clsx';
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import useXComponentConfig from '../_util/hooks/use-x-component-config';
-import warning from '../_util/warning';
-import { useXProviderContext } from '../x-provider';
-import Skill from './components/Skill';
-import { SenderContext } from './context';
-import useCursor from './hooks/use-cursor';
-import useInputHeight from './hooks/use-input-height';
-import useSlotBuilder from './hooks/use-slot-builder';
-import useSlotConfigState from './hooks/use-slot-config-state';
+import useXComponentConfig from '../../_util/hooks/use-x-component-config';
+import warning from '../../_util/warning';
+import { useXProviderContext } from '../../x-provider';
+import { SenderContext } from '../context';
+import useCursor from '../hooks/use-cursor';
+import useInputHeight from '../hooks/use-input-height';
+import useSlotBuilder from '../hooks/use-slot-builder';
+import useSlotConfigState from '../hooks/use-slot-config-state';
 import type {
   EventType,
   InsertPosition,
   SkillType,
   SlotConfigBaseType,
   SlotConfigType,
-} from './interface';
+} from '../interface';
+import Skill from './Skill';
 
 export interface SlotTextAreaRef {
   focus: (options?: FocusOptions) => void;
@@ -125,9 +125,13 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     setAfterNodeFocus,
     getTextBeforeCursor,
     removeAllRanges,
+    getRange,
     getInsertPosition,
     getEndRange,
     getStartRange,
+    getSelection,
+    copySelectionString,
+    getCleanedText,
   } = useCursor({
     prefixCls,
     getSlotDom: (key: string) => slotDomMap.current.get(key),
@@ -249,9 +253,9 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
           );
         case 'tag':
           return (
-            <div className={`${prefixCls}-slot-tag`}>
+            <span className={`${prefixCls}-slot-tag`}>
               {config.props?.label || config.props?.value || ''}
-            </div>
+            </span>
           );
         case 'custom':
           return config.customRender?.(
@@ -473,35 +477,40 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     return keyLockRef.current || isCompositionRef.current || eventRes === false;
   };
 
-  // 处理退格键删除逻辑
-  const handleBackspaceKey = (
+  // 处理删除操作（退格键、剪切等）
+  const handleDeleteOperation = (
     e: React.KeyboardEvent<HTMLDivElement> | React.ClipboardEvent<HTMLDivElement>,
-    isBackspace?: boolean,
-  ) => {
+    operationType: 'backspace' | 'cut' | 'delete',
+  ): boolean => {
     if (!editableRef.current) return false;
-    const selection = window.getSelection();
+
+    const { range, selection } = getRange();
     if (!selection || selection.rangeCount === 0) return false;
+
     const { focusOffset, anchorNode } = selection;
     if (!anchorNode || !editableRef.current.contains(anchorNode)) {
       return false;
     }
 
-    if (anchorNode.nodeType === Node.TEXT_NODE) {
-      const parentElement = anchorNode.parentNode as Element;
-      const slotKey = parentElement?.getAttribute?.('data-slot-key');
-      const range = selection.getRangeAt(0).toString();
-      if (
-        slotKey &&
-        (anchorNode.textContent?.length === range.length ||
-          (1 === anchorNode.textContent?.length && focusOffset === 1))
-      ) {
+    // 处理文本节点中的slot删除
+    if (anchorNode.nodeType === Node.TEXT_NODE && range) {
+      const parentElement = anchorNode.parentNode as HTMLElement;
+      const nodeInfo = getNodeInfo(parentElement);
+      const selectedText = range.toString();
+      const isFullTextSelected = anchorNode.textContent?.length === selectedText.length;
+      const isSingleCharAtEnd = anchorNode.textContent?.length === 1 && focusOffset === 1;
+      if (nodeInfo?.slotConfig?.type === 'content' && (isFullTextSelected || isSingleCharAtEnd)) {
         e.preventDefault();
+        if (operationType === 'cut') {
+          copySelectionString();
+        }
         (anchorNode.parentNode as HTMLElement).innerHTML = '';
         return true;
       }
     }
 
-    if (isBackspace && focusOffset === 0) {
+    // 处理退格键删除前一个元素
+    if (operationType === 'backspace' && focusOffset === 0) {
       const previousSibling = anchorNode.previousSibling;
       if (previousSibling) {
         const nodeInfo = getNodeInfo(previousSibling as HTMLElement);
@@ -520,6 +529,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         }
       }
     }
+
     return false;
   };
 
@@ -544,7 +554,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     ) {
       return;
     }
-    const selection = window.getSelection();
+    const selection = getSelection();
     if (
       !selection?.anchorNode ||
       !skillDomRef.current.contains(selection.anchorNode) ||
@@ -578,9 +588,9 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       return;
     }
 
-    // 处理退格键
+    // 处理退格键删除
     if (e.key === 'Backspace') {
-      if (handleBackspaceKey(e, true)) return;
+      if (handleDeleteOperation(e, 'backspace')) return;
     }
 
     // 处理Enter键提交
@@ -610,11 +620,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     if (keyLockRef.current) {
       keyLockRef.current = false;
     }
-    const selection = window.getSelection();
-
-    if (selection) {
-      lastSelectionRef.current = selection.rangeCount ? selection?.getRangeAt?.(0) : null;
-    }
+    const { range } = getRange();
+    lastSelectionRef.current = range;
 
     const timer = setTimeout(() => {
       lastSelectionRef.current = null;
@@ -629,7 +636,10 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     removeSpecificBRs(editableRef?.current);
     triggerValueChange(e as unknown as EventType);
   };
-  const onInternalCut = (e: React.ClipboardEvent<HTMLDivElement>) => handleBackspaceKey(e);
+
+  const onInternalCut = (e: React.ClipboardEvent<HTMLDivElement>) => {
+    handleDeleteOperation(e, 'cut');
+  };
 
   const onInternalPaste: React.ClipboardEventHandler<HTMLDivElement> = (e) => {
     e.preventDefault();
@@ -639,26 +649,17 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       onPasteFile(files);
       return;
     }
-
     if (text) {
-      const cleanText = text.replace(/\n/g, '');
-
       let success = false;
-
+      const cleanedText = getCleanedText(text);
       try {
-        // 虽然 document.execCommand 已被废弃，但此处使用是为了确保粘贴操作
-        // 能被正确添加到浏览器的撤销（undo）栈中。
-        // TODO: 未来使用 'beforeinput' 事件进行重构。
-        // @ts-ignore
-        success = document.execCommand('insertText', false, cleanText);
+        success = document.execCommand('insertText', false, cleanedText);
       } catch (err) {
-        if (process.env.NODE_ENV !== 'production') {
-          console.error('`insertText` command failed:', err);
-        }
+        warning(false, 'Sender', `insertText command failed: ${err}`);
       }
 
       if (!success) {
-        insert([{ type: 'text', value: cleanText }]);
+        insert([{ type: 'text', value: cleanedText }]);
       }
     }
 
@@ -676,7 +677,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
   const onInternalSelect: React.ReactEventHandler<HTMLDivElement> = () => {
     const editableDom = editableRef.current;
-    const selection = window.getSelection();
+    const selection = getSelection();
     if (
       editableDom &&
       selection?.focusNode === editableDom &&
@@ -758,7 +759,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         range = getStartRange(editableDom);
         break;
       case 'slot':
-        range = selection.getRangeAt?.(0) || null;
+        range = getRange().range;
         break;
       case 'box':
         range = lastRange || null;

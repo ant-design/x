@@ -1597,6 +1597,80 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
   style="height: 720px; gap: 20px;"
 >
   <div
+    class="ant-flex css-var-_r_f_ ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+  >
+    <div
+      class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-_r_f_"
+    >
+      <div
+        class="ant-space-item"
+      >
+        <button
+          aria-checked="true"
+          class="ant-switch css-var-_r_f_ ant-switch-checked"
+          role="switch"
+          type="button"
+        >
+          <div
+            class="ant-switch-handle"
+          />
+          <span
+            class="ant-switch-inner"
+          >
+            <span
+              class="ant-switch-inner-checked"
+            />
+            <span
+              class="ant-switch-inner-unchecked"
+            />
+          </span>
+        </button>
+      </div>
+      <div
+        class="ant-space-item"
+      >
+        <span>
+          启用 autoScroll / enabled autoScroll
+        </span>
+      </div>
+    </div>
+    <div
+      class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-_r_f_"
+    >
+      <div
+        class="ant-space-item"
+      >
+        <button
+          aria-checked="true"
+          class="ant-switch css-var-_r_f_ ant-switch-checked"
+          role="switch"
+          type="button"
+        >
+          <div
+            class="ant-switch-handle"
+          />
+          <span
+            class="ant-switch-inner"
+          >
+            <span
+              class="ant-switch-inner-checked"
+            />
+            <span
+              class="ant-switch-inner-unchecked"
+            />
+          </span>
+        </button>
+      </div>
+      <div
+        class="ant-space-item"
+      >
+        <span>
+          定位到新气泡 / locate to new bubble
+        </span>
+      </div>
+    </div>
+  </div>
+  <div
     class="ant-flex css-var-_r_f_ ant-flex-gap-small"
   >
     <button
@@ -1612,7 +1686,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
       type="button"
     >
       <span>
-        Add Markdown Msg
+        Add Markdown
       </span>
     </button>
     <button
@@ -1636,7 +1710,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
       type="button"
     >
       <span>
-        Add To Pre
+        Add To Top
       </span>
     </button>
     <button
@@ -1650,6 +1724,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
   </div>
   <div
     class="ant-bubble-list css-var-_r_f_"
+    style="height: 620px;"
   >
     <div
       class="ant-bubble-list-scroll-box ant-bubble-list-autoscroll"
@@ -2120,6 +2195,9 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
   <div
     class="ant-bubble-list-scroll-box ant-bubble-list-autoscroll"
   >
+    <div
+      style="bottom: 0px; flex-shrink: 0; pointer-events: none; height: 10px; visibility: hidden;"
+    />
     <div
       class="ant-bubble css-var-_r_1r_ ant-bubble-start ant-bubble-loading"
     >
@@ -2723,7 +2801,7 @@ exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly
         type="button"
       >
         <span>
-          Get Dom
+          Add Long Bubble
         </span>
       </button>
       <button
@@ -2739,7 +2817,7 @@ exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly
         type="button"
       >
         <span>
-          Scroll To Bottom
+          Scroll To Bottom smooth
         </span>
       </button>
       <button
@@ -2747,7 +2825,7 @@ exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly
         type="button"
       >
         <span>
-          Scroll To Ramdom
+          Scroll To Bottom instant
         </span>
       </button>
       <button
@@ -2755,7 +2833,23 @@ exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly
         type="button"
       >
         <span>
-          Scroll To Second
+          Scroll To Random
+        </span>
+      </button>
+      <button
+        class="ant-btn css-var-_r_s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+        type="button"
+      >
+        <span>
+          Scroll To Second Bubble
+        </span>
+      </button>
+      <button
+        class="ant-btn css-var-_r_s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+        type="button"
+      >
+        <span>
+          Scroll To Last Bubble
         </span>
       </button>
     </div>
@@ -3929,6 +4023,9 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context 
   <div
     class="ant-bubble-list-scroll-box ant-bubble-list-autoscroll"
   >
+    <div
+      style="bottom: 0px; flex-shrink: 0; pointer-events: none; height: 10px; visibility: hidden;"
+    />
     <div
       class="ant-bubble css-var-_r_c_ ant-bubble-start ant-bubble-loading"
     >
