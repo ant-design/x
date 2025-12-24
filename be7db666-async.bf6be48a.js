@@ -1,0 +1,2 @@
+(("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@ant-design/x"]=("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@ant-design/x"]||[]).push([["be7db666"],{be7db666:function(e,a,n){"use strict";n.d(a,"__esModule",{value:!0}),n.d(a,"texts",{enumerable:!0,get:function(){return t;}}),n("9bac85d6");let t=[{value:"Works with ",paraId:0},{value:"Infographic",paraId:0},{value:" to display loading states during streaming and show final infographic chart after streaming completes.",paraId:0}];}}]);
+//# sourceMappingURL=be7db666-async.bf6be48a.js.map

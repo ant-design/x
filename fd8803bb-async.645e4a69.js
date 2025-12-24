@@ -1,0 +1,2 @@
+(("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@ant-design/x"]=("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@ant-design/x"]||[]).push([["fd8803bb"],{fd8803bb:function(e,a,l){"use strict";l.d(a,"__esModule",{value:!0}),l.d(a,"texts",{enumerable:!0,get:function(){return t;}}),l("9bb60c87");let t=[{value:"Use with ",paraId:0},{value:"CodeHighlighter",paraId:1},{value:" to highlight code.",paraId:0}];}}]);
+//# sourceMappingURL=fd8803bb-async.645e4a69.js.map
