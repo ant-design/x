@@ -85,14 +85,14 @@ const HeaderActions: React.FC<HeaderActionsProps> = (props) => {
       const currentUrl = window.location.href;
       const currentPathname = window.location.pathname;
       const currentVersion = pkg.version;
-      const isEn = !currentPathname.includes('-cn');
+      const isZh = !utils.isZhCN(currentPathname);
 
       const isFromV2ToV1 = /^2\./.test(currentVersion) && /1x-/.test(url);
 
       for (const [pathPrefix, v1Path, v2Path] of targetPathV1TOV2) {
         if (currentPathname.includes(pathPrefix)) {
           const targetPath = isFromV2ToV1 ? v1Path : v2Path;
-          const finalPath = `${url}${targetPath}${isEn ? '' : '-cn'}`;
+          const finalPath = `${url}${targetPath}${isZh ? '-cn' : ''}`;
           window.location.href = finalPath;
           return;
         }
