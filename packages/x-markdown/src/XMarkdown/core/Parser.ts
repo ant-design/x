@@ -1,10 +1,11 @@
-import { Marked, Renderer, Tokens } from 'marked';
+import { Marked, Renderer, RendererObject, Tokens } from 'marked';
 import { XMarkdownProps } from '../interface';
 
 type ParserOptions = {
   markedConfig?: XMarkdownProps['config'];
   paragraphTag?: string;
   openLinksInNewTab?: boolean;
+  configureRenderCleaner?: (content: string, type: keyof RendererObject) => string;
 };
 
 export const other = {
@@ -50,8 +51,8 @@ class Parser {
     this.markdownInstance = new Marked();
 
     this.configureLinkRenderer();
-    this.configureParagraphRenderer();
-    this.configureCodeRenderer();
+    this.configureParagraphRenderer(options.configureRenderCleaner);
+    this.configureCodeRenderer(options.configureRenderCleaner);
     // user config at last
     this.markdownInstance.use(markedConfig);
   }
@@ -69,19 +70,24 @@ class Parser {
     this.markdownInstance.use({ renderer });
   }
 
-  public configureParagraphRenderer() {
+  public configureParagraphRenderer(
+    configureRenderCleaner: ParserOptions['configureRenderCleaner'] = (s) => s,
+  ) {
     const { paragraphTag } = this.options;
     if (!paragraphTag) return;
 
     const renderer = {
       paragraph(this: Renderer, { tokens }: Tokens.Paragraph) {
-        return `<${paragraphTag}>${this.parser.parseInline(tokens)}</${paragraphTag}>\n`;
+        const code = `<${paragraphTag}>${this.parser.parseInline(tokens)}</${paragraphTag}>\n`;
+        return configureRenderCleaner(code, 'paragraph');
       },
     };
     this.markdownInstance.use({ renderer });
   }
 
-  public configureCodeRenderer() {
+  public configureCodeRenderer(
+    configureRenderCleaner: ParserOptions['configureRenderCleaner'] = (s) => s,
+  ) {
     const renderer = {
       code({ text, raw, lang, escaped, codeBlockStyle }: Tokens.Code): string {
         const langString = (lang || '').match(other.notSpaceStart)?.[0];
@@ -90,7 +96,9 @@ class Parser {
         // if code is indented, it's done because it has no end tag
         const streamStatus =
           isIndentedCode || other.completeFencedCode.test(raw) ? 'done' : 'loading';
-        const escapedCode = escaped ? code : escapeHtml(code, true);
+
+        const cleanedCode = configureRenderCleaner(code, 'code');
+        const escapedCode = escaped ? cleanedCode : escapeHtml(cleanedCode, true);
 
         const classAttr = langString ? ` class="language-${escapeHtml(langString)}"` : '';
 

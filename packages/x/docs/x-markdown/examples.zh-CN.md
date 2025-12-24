@@ -21,6 +21,7 @@ order: 2
 <code src="./demo/codeDemo/link.tsx" title="中文链接处理"></code>
 <code src="./demo/codeDemo/xss.tsx"  title="XSS 防御"></code>
 <code src="./demo/codeDemo/open-links-in-new-tab.tsx" description="链接在新标签页打开。" title="新标签页打开链接"></code>
+<code src="./demo/codeDemo/md-footer.tsx"  title="流式渲染 Footer"></code>
 
 ## API
 
@@ -30,6 +31,7 @@ order: 2
 | content | 需要渲染的 Markdown 内容 | `string` | - |
 | children | Markdown 内容，作为 `content` 属性的别名 | `string` | - |
 | components | 用于替换 HTML 元素的自定义 React 组件 | `Record<string, React.ComponentType<ComponentProps> \| keyof JSX.IntrinsicElements>`，查看[详情](/x-markdowns/components-cn) | - |
+| footer | 用于在流式渲染过程中自定义渲染尾部内容的 React 组件 | `React.ComponentType<ComponentProps> \| keyof JSX.IntrinsicElements` | - |
 | paragraphTag | 段落元素的自定义 HTML 标签，防止自定义组件包含块级元素时的验证错误 | `keyof JSX.IntrinsicElements` | `'p'` |
 | streaming | 流式渲染行为的配置 | `StreamingOption`，查看[语法处理](/x-markdowns/streaming-syntax)和[动画效果](/x-markdowns/streaming-animation) | - |
 | config | Markdown 解析和扩展的 Marked.js 配置 | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |

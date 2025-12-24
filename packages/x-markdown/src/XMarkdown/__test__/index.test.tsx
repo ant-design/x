@@ -492,3 +492,33 @@ console.log(1);
     expect(code).not.toHaveAttribute('data-state');
   });
 });
+
+describe('streaming', () => {
+  it('should append footer tag when hasNextChunk is true', () => {
+    const { container } = render(
+      <XMarkdown content="# Title\n\nContent" streaming={{ hasNextChunk: true }} />,
+    );
+
+    expect(container.innerHTML).toContain('<xmd-footer></xmd-footer>');
+  });
+
+  it('should not append footer tag when hasNextChunk is false', () => {
+    const { container } = render(
+      <XMarkdown content="# Title\n\nContent" streaming={{ hasNextChunk: false }} />,
+    );
+
+    expect(container.innerHTML).not.toContain('<xmd-footer></xmd-footer>');
+  });
+
+  it('should remove footer tag when hasNextChunk changes from true to false', () => {
+    const { rerender, container } = render(
+      <XMarkdown content="# Title\n\nContent" streaming={{ hasNextChunk: true }} />,
+    );
+
+    expect(container.innerHTML).toContain('<xmd-footer></xmd-footer>');
+
+    rerender(<XMarkdown content="# Title\n\nContent" streaming={{ hasNextChunk: false }} />);
+
+    expect(container.innerHTML).not.toContain('<xmd-footer></xmd-footer>');
+  });
+});
