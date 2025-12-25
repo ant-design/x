@@ -260,16 +260,14 @@ const FileCard: React.FC<FileCardProps> = (props) => {
         })}
         style={styles.file}
       >
-        {src && (
-          <Image
-            rootClassName={clsx(`${prefixCls}-image-img`)}
-            width={styles?.file?.width}
-            height={styles?.file?.height}
-            alt={name}
-            src={src}
-            {...(imageProps as ImageProps)}
-          />
-        )}
+        <Image
+          rootClassName={clsx(`${prefixCls}-image-img`)}
+          width={styles?.file?.width}
+          height={styles?.file?.height}
+          alt={name}
+          src={src}
+          {...(imageProps as ImageProps)}
+        />
         {loading && (
           <ImageLoading spinProps={spinProps} prefixCls={prefixCls} style={styles.file} />
         )}
