@@ -170,8 +170,8 @@ export default genStyleHooks(
     return [
       genPromptsStyle(compToken),
       genNestStyle(compToken),
-      initFadeLeftMotion(compToken),
-      initFadeMotion(compToken),
+      initFadeLeftMotion(compToken, true),
+      initFadeMotion(compToken, true),
     ];
   },
   prepareComponentToken,
