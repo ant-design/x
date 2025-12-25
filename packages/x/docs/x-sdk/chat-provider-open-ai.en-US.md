@@ -1,9 +1,11 @@
 ---
+category: Components
 group:
   title: Chat Provider
   order: 2
 title: OpenAIChatProvider
 order: 2
+tag: 2.0.0
 ---
 
 `OpenAIChatProvider` is a `Chat Provider` compatible with `OpenAI`. It converts request parameters and response data into a format compatible with the `OpenAI` interface.

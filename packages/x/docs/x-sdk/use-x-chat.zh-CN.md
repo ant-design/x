@@ -1,10 +1,13 @@
 ---
+category: Components
 group:
   title: 数据流
   order: 1
 title: useXChat
 order: 1
 subtitle: 会话数据
+description: 单对话的数据管理。
+tag: 2.0.0
 demo:
   cols: 1
 ---

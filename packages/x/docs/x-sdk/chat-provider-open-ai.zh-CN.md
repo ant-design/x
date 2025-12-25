@@ -1,8 +1,10 @@
 ---
+category: Components
 group:
   title: 数据提供
   order: 2
 title: OpenAIChatProvider
+tag: 2.0.0
 order: 2
 ---
 

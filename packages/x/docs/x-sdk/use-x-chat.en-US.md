@@ -1,11 +1,14 @@
 ---
+category: Components
 group:
   title: Data Flow
   order: 1
 title: useXChat
 order: 1
+description: Data management for single conversations.
 demo:
   cols: 1
+tag: 2.0.0
 ---
 
 ## When to Use

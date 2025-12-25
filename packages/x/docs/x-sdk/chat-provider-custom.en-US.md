@@ -1,9 +1,11 @@
 ---
+category: Components
 group:
   title: Chat Provider
   order: 2
 title: Custom Chat Provider
 order: 4
+tag: 2.0.0
 ---
 
 When the built-in Chat Provider doesn't meet your needs, you can implement the abstract class `AbstractChatProvider` (which only contains three abstract methods) to convert data from different model providers or Agentic services into a unified format that `useXChat` can consume, enabling seamless integration and switching between different models and agents.
