@@ -2,7 +2,7 @@ import { DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined } from '@ant-d
 import pickAttrs from '@rc-component/util/lib/pickAttrs';
 import { Tooltip } from 'antd';
 import { clsx } from 'clsx';
-import React from 'react';
+import React, { useRef } from 'react';
 import { useLocale } from '../locale';
 import enUS from '../locale/en_US';
 import { useXProviderContext } from '../x-provider';
@@ -100,7 +100,7 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
   return (
     <div {...domProps} className={mergedCls} style={{ ...style, ...styles.root }}>
       {[FEEDBACK_VALUE.default, FEEDBACK_VALUE.like].includes(value as FEEDBACK_VALUE) && (
-        <Tooltip title={contextLocale.feedbackLike}>
+        <Tooltip key={`like_${value}`} title={contextLocale.feedbackLike}>
           <span
             onClick={() =>
               onChange?.(
@@ -125,7 +125,7 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
       )}
 
       {[FEEDBACK_VALUE.default, FEEDBACK_VALUE.dislike].includes(value as FEEDBACK_VALUE) && (
-        <Tooltip title={contextLocale.feedbackDislike}>
+        <Tooltip key={`dislike_${value}`} trigger="hover" title={contextLocale.feedbackDislike}>
           <span
             onClick={onFeedBacKClick}
             style={{ ...styles.dislike, ...(value === 'dislike' ? styles.disliked : {}) }}
