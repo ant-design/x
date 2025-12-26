@@ -27,6 +27,7 @@ import dayjs from 'dayjs';
 import React, { useEffect, useRef, useState } from 'react';
 import '@ant-design/x-markdown/themes/light.css';
 import '@ant-design/x-markdown/themes/dark.css';
+import { BubbleListRef } from '@ant-design/x/es/bubble';
 import { useMarkdownTheme } from '../x-markdown/demo/_utils';
 import locale from './_utils/local';
 
@@ -272,6 +273,8 @@ const App = () => {
 
   const [activeConversation, setActiveConversation] = useState<string>();
 
+  const listRef = useRef<BubbleListRef>(null);
+
   // ==================== Runtime ====================
 
   const { onRequest, messages, isRequesting, abort, onReload } = useXChat({
@@ -378,6 +381,7 @@ const App = () => {
               {messages?.length !== 0 && (
                 /* 🌟 消息列表 */
                 <Bubble.List
+                  ref={listRef}
                   style={{
                     height: 'calc(100% - 160px)',
                   }}
@@ -418,6 +422,7 @@ const App = () => {
                         type: 'disabled',
                       },
                     });
+                    listRef.current?.scrollTo({ top: 'bottom' });
                     setActiveConversation(curConversation);
                     senderRef.current?.clear?.();
                   }}

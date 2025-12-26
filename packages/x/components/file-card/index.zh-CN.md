@@ -1,5 +1,5 @@
 ---
-category: FileCard
+category: Components
 group:
   title: 反馈
   order: 4

@@ -4,8 +4,8 @@ import type { InputRef as AntdInputRef, InputRef } from 'antd';
 import { Input } from 'antd';
 import { clsx } from 'clsx';
 import React from 'react';
-import { SenderContext } from './context';
-import type { InsertPosition, SkillType } from './interface';
+import { SenderContext } from '../context';
+import type { InsertPosition, SkillType } from '../interface';
 
 function getComponent<T>(
   components: { input?: React.ComponentType<T> } | undefined,
@@ -40,7 +40,6 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
     classNames = {},
     autoSize,
     components,
-    submitDisabled,
     triggerSend,
     placeholder,
     onFocus,
@@ -128,9 +127,7 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
 
       if (shouldSubmit) {
         e.preventDefault();
-        if (!submitDisabled) {
-          triggerSend?.();
-        }
+        triggerSend?.();
         return;
       }
     }

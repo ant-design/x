@@ -154,11 +154,7 @@ export default function FileList(props: FileListProps) {
       extension={
         <SilentUploader visible={showExtension} upload={upload}>
           <Button
-            className={clsx(
-              classNames.upload,
-              contextClassNames.upload,
-              `${listCls}-upload-btn`,
-            )}
+            className={clsx(classNames.upload, contextClassNames.upload, `${listCls}-upload-btn`)}
             style={{ ...styles.upload, ...contextStyles.upload }}
             type="dashed"
           >

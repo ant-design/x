@@ -46,8 +46,12 @@ const Demo: React.FC = () => {
             {loading ? (
               <LoadingButton
                 type="default"
+                variant="filled"
                 icon={
                   <Spin
+                    style={{
+                      display: 'flex',
+                    }}
                     styles={{
                       indicator: {
                         color: '#fff',
