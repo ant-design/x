@@ -1,10 +1,12 @@
 ---
+category: Components
 group:
   title: Data Flow
   order: 1
 title: useXConversations
 order: 2
-description:
+description: Manage conversation persistence and CRUD operations for multiple sessions.
+tag: 2.0.0
 ---
 
 ## When To Use
