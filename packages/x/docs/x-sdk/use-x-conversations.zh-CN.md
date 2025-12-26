@@ -1,13 +1,15 @@
 ---
+category: Components
 group:
   title: 数据流
   order: 1
 title: useXConversations
 order: 2
 subtitle: 会话管理
-description:
+description: 用于多会话的对话保持和增删改查。
 demo:
   cols: 1
+tag: 2.0.0
 ---
 
 ## 何时使用
