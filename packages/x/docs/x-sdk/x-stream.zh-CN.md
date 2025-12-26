@@ -1,11 +1,13 @@
 ---
+category: Components
 group:
   title: 工具
   order: 3
 title: XStream
 subtitle: 流
 order: 2
-description: 转换可读数据流
+description: 转换可读数据流。
+tag: 2.0.0
 demo:
   cols: 1
 ---
