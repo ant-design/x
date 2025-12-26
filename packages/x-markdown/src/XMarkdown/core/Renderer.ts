@@ -15,6 +15,22 @@ interface RendererOptions {
 class Renderer {
   private readonly options: RendererOptions;
   private static readonly NON_WHITESPACE_REGEX = /[^\r\n\s]+/;
+  private static readonly VOID_ELEMENTS = new Set<string>([
+    'area',
+    'base',
+    'br',
+    'col',
+    'embed',
+    'hr',
+    'img',
+    'input',
+    'link',
+    'meta',
+    'param',
+    'source',
+    'track',
+    'wbr',
+  ]);
 
   constructor(options: RendererOptions) {
     this.options = options;
@@ -25,34 +41,128 @@ class Renderer {
    */
   private detectUnclosedTags(htmlString: string): Set<string> {
     const unclosedTags = new Set<string>();
-    const stack: string[] = [];
-    const tagRegex = /<\/?([a-zA-Z][a-zA-Z0-9-]*)(?:\s[^>]*)?>/g;
 
-    let match = tagRegex.exec(htmlString);
-    while (match !== null) {
-      const [fullMatch, tagName] = match;
-      const isClosing = fullMatch.startsWith('</');
-      const isSelfClosing = fullMatch.endsWith('/>');
+    // Convert tags to lowercase Set for case-insensitive lookup
+    const tagsToCheckLower = new Set<string>(
+      Object.keys(this.options.components ?? {}).map((tag) => tag.toLowerCase()),
+    );
 
-      if (this.options.components?.[tagName.toLowerCase()]) {
-        if (isClosing) {
-          // Found closing tag, pop from stack
-          const lastIndex = stack.lastIndexOf(tagName.toLowerCase());
-          if (lastIndex !== -1) {
-            stack.splice(lastIndex, 1);
+    // Track occurrence count for each tag type to generate unique identifiers
+    const tagCount: Record<string, number> = {};
+
+    // Stack to track opening tags of non-void elements awaiting closure
+    const openTagsStack: Record<string, number[]> = {};
+
+    let currentPos = 0;
+    const htmlLength = htmlString.length;
+
+    while (currentPos < htmlLength) {
+      if (htmlString[currentPos] === '<') {
+        // Check if this is a closing tag (e.g., </tag>)
+        if (currentPos + 1 < htmlLength && htmlString[currentPos + 1] === '/') {
+          // Attempt to parse the closing tag
+          let scanPos = currentPos + 2;
+          let tagName = '';
+
+          // Skip leading whitespace after </
+          while (scanPos < htmlLength && /\s/.test(htmlString[scanPos])) scanPos++;
+
+          // Extract the tag name (alphanumeric characters and hyphens for custom components)
+          while (scanPos < htmlLength && /[a-zA-Z0-9-]/.test(htmlString[scanPos])) {
+            tagName += htmlString[scanPos];
+            scanPos++;
           }
-        } else if (!isSelfClosing) {
-          // Found opening tag, push to stack
-          stack.push(tagName.toLowerCase());
+
+          // Skip trailing whitespace before >
+          while (scanPos < htmlLength && /\s/.test(htmlString[scanPos])) scanPos++;
+
+          // Validate closing tag syntax and process if valid
+          if (scanPos < htmlLength && htmlString[scanPos] === '>' && tagName) {
+            const tagNameLower = tagName.toLowerCase();
+            if (tagsToCheckLower.has(tagNameLower)) {
+              // Pop the most recent matching opening tag from the stack
+              if (openTagsStack[tagNameLower] && openTagsStack[tagNameLower].length > 0) {
+                openTagsStack[tagNameLower].pop();
+              }
+            }
+            currentPos = scanPos + 1;
+            continue;
+          }
+        } else {
+          // Attempt to parse an opening tag (e.g., <tag ...>)
+          let scanPos = currentPos + 1;
+          let tagName = '';
+
+          // Extract the tag name (alphanumeric characters and hyphens for custom components)
+          while (scanPos < htmlLength && /[a-zA-Z0-9-]/.test(htmlString[scanPos])) {
+            tagName += htmlString[scanPos];
+            scanPos++;
+          }
+
+          if (tagName) {
+            const tagNameLower = tagName.toLowerCase();
+
+            if (tagsToCheckLower.has(tagNameLower)) {
+              // Increment occurrence counter for this tag type
+              tagCount[tagNameLower] = (tagCount[tagNameLower] || 0) + 1;
+              const currentIndex = tagCount[tagNameLower];
+
+              // Scan forward to find the end of the opening tag
+              let foundTagEnd = false;
+              let isSelfClosing = false;
+
+              // Continue scanning until we find the closing '>'
+              while (scanPos < htmlLength) {
+                if (htmlString[scanPos] === '>') {
+                  foundTagEnd = true;
+                  // Detect self-closing syntax (e.g., <br/> or < img />)
+                  if (scanPos > 0 && htmlString[scanPos - 1] === '/') {
+                    isSelfClosing = true;
+                  }
+                  break;
+                }
+                // Handle quoted attribute values to avoid false positives on '>' within quotes
+                if (htmlString[scanPos] === '"' || htmlString[scanPos] === "'") {
+                  const quoteChar = htmlString[scanPos];
+                  scanPos++;
+                  while (scanPos < htmlLength && htmlString[scanPos] !== quoteChar) {
+                    scanPos++;
+                  }
+                }
+                scanPos++;
+              }
+
+              if (!foundTagEnd) {
+                // Tag syntax is incomplete (missing closing '>')
+                unclosedTags.add(`${tagNameLower}-${currentIndex}`);
+              } else if (!isSelfClosing && !Renderer.VOID_ELEMENTS.has(tagNameLower)) {
+                // Non-void, non-self-closing tag requires a matching closing tag
+                if (!openTagsStack[tagNameLower]) {
+                  openTagsStack[tagNameLower] = [];
+                }
+                openTagsStack[tagNameLower].push(currentIndex);
+              }
+              // Void elements and self-closing tags are considered properly closed
+
+              currentPos = foundTagEnd ? scanPos + 1 : htmlLength;
+              continue;
+            }
+          }
         }
       }
-      match = tagRegex.exec(htmlString);
+      currentPos++;
     }
 
-    // Remaining tags in stack are unclosed
-    stack.forEach((tag) => {
-      unclosedTags.add(tag);
-    });
+    // Any tags remaining on the stack were never closed
+    for (const tagNameLower of tagsToCheckLower) {
+      if (openTagsStack[tagNameLower]) {
+        for (const tagIndex of openTagsStack[tagNameLower]) {
+          // unclosedTags.add(`${tagNameLower}`);
+          unclosedTags.add(`${tagNameLower}-${tagIndex}`);
+        }
+      }
+    }
+
     return unclosedTags;
   }
 
@@ -73,7 +183,10 @@ class Renderer {
     };
   }
 
-  private createReplaceElement(unclosedTags: Set<string> | undefined, cidRef: { current: number }) {
+  private createReplaceElement(
+    unclosedTags: Set<string> | undefined,
+    cidRef: { current: number; tagIndexes: Record<string, number> },
+  ) {
     const { enableAnimation, animationConfig } = this.options.streaming || {};
     return (domNode: DOMNode) => {
       const key = `x-markdown-component-${cidRef.current++}`;
@@ -94,7 +207,11 @@ class Renderer {
       const { name, attribs, children } = domNode as Element;
       const renderElement = this.options.components?.[name];
       if (renderElement) {
-        const streamStatus = unclosedTags?.has(name) ? 'loading' : 'done';
+        // Manage tag indexes for custom components used for streaming status determination
+        cidRef.tagIndexes[name] = (cidRef.tagIndexes[name] ?? 0) + 1;
+        const streamStatus = unclosedTags?.has(`${name}-${cidRef.tagIndexes[name]}`)
+          ? 'loading'
+          : 'done';
         const props: ComponentProps = {
           domNode,
           streamStatus,
@@ -130,7 +247,7 @@ class Renderer {
   private processChildren(
     children: DOMNode[],
     unclosedTags: Set<string> | undefined,
-    cidRef: { current: number },
+    cidRef: { current: number; tagIndexes: Record<string, number> },
   ): ReactNode {
     return domToReact(children as DOMNode[], {
       replace: this.createReplaceElement(unclosedTags, cidRef),
@@ -139,7 +256,7 @@ class Renderer {
 
   public processHtml(htmlString: string): React.ReactNode {
     const unclosedTags = this.detectUnclosedTags(htmlString);
-    const cidRef = { current: 0 };
+    const cidRef = { current: 0, tagIndexes: {} };
 
     // Use DOMPurify to clean HTML while preserving custom components and target attributes
     const purifyConfig = this.configureDOMPurify();

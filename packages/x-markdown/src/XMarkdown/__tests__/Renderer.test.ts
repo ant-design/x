@@ -22,17 +22,17 @@ describe('Renderer', () => {
       // Test case 1: Unclosed tag
       const html1 = '<custom-tag>content';
       const result1 = detectUnclosedTags(html1);
-      expect(result1.has('custom-tag')).toBe(true);
+      expect(result1.has('custom-tag-1')).toBe(true);
 
       // Test case 2: Closed tag
       const html2 = '<custom-tag>content</custom-tag>';
       const result2 = detectUnclosedTags(html2);
-      expect(result2.has('custom-tag')).toBe(false);
+      expect(result2.size).toBe(0);
 
       // Test case 3: Self-closing tag
       const html3 = '<custom-tag />';
       const result3 = detectUnclosedTags(html3);
-      expect(result3.has('custom-tag')).toBe(false);
+      expect(result3.size).toBe(0);
     });
 
     it('should handle multiple tags correctly', () => {
@@ -49,8 +49,9 @@ describe('Renderer', () => {
       // Test case: One closed, one unclosed
       const html = '<tag-a>content</tag-a><tag-b>content';
       const result = detectUnclosedTags(html);
-      expect(result.has('tag-a')).toBe(false);
-      expect(result.has('tag-b')).toBe(true);
+      expect(result.size).toBe(1);
+      expect(result.has('tag-a-1')).toBe(false);
+      expect(result.has('tag-b-1')).toBe(true);
     });
 
     it('should ignore non-custom tags', () => {
@@ -68,7 +69,24 @@ describe('Renderer', () => {
       const result = detectUnclosedTags(html);
       expect(result.size).toBe(0);
     });
-  });
+
+    it('should handle void elements correctly', () => {
+      const renderer = new Renderer({
+        components: {
+          'img': MockComponent,
+        },
+      });
+      // Access private method for testing
+      const detectUnclosedTags = (renderer as any).detectUnclosedTags.bind(renderer);
+      // Test case: Void elements should not be considered unclosed
+      const html = '<img src="image.png"><img src="image2.png" />';
+      const result = detectUnclosedTags(html);
+      expect(result.size).toBe(0);
+
+      const html2 = '<img src="image.p';
+      const result2 = detectUnclosedTags(html2);
+      expect(result2.has('img-1')).toBe(true);
+    });
 
   describe('processHtml', () => {
     it('should pass correct streamStatus to custom components', () => {
@@ -442,14 +460,16 @@ describe('Renderer', () => {
       // Test case: Inner tag unclosed
       const html2 = '<outer-tag><inner-tag>content</outer-tag>';
       const result2 = detectUnclosedTags(html2);
-      expect(result2.has('inner-tag')).toBe(true);
-      expect(result2.has('outer-tag')).toBe(false);
+      expect(result2.size).toBe(1);
+      expect(result2.has('inner-tag-1')).toBe(true);
+      expect(result2.has('outer-tag-1')).toBe(false);
 
       // Test case: Outer tag unclosed
       const html3 = '<outer-tag><inner-tag>content</inner-tag>';
       const result3 = detectUnclosedTags(html3);
-      expect(result3.has('outer-tag')).toBe(true);
-      expect(result3.has('inner-tag')).toBe(false);
+      expect(result3.size).toBe(1);
+      expect(result3.has('outer-tag-1')).toBe(true);
+      expect(result3.has('inner-tag-1')).toBe(false);
     });
 
     it('should handle case insensitive tag names', () => {
@@ -465,11 +485,11 @@ describe('Renderer', () => {
       // Test case: Mixed case tags
       const html1 = '<Test-Tag>content';
       const result1 = detectUnclosedTags(html1);
-      expect(result1.has('test-tag')).toBe(true);
+      expect(result1.has('test-tag-1')).toBe(true);
 
       const html2 = '<TEST-TAG>content</TEST-TAG>';
       const result2 = detectUnclosedTags(html2);
-      expect(result2.has('test-tag')).toBe(false);
+      expect(result2.size).toBe(0);
     });
 
     it('should handle tags with attributes', () => {
@@ -485,12 +505,12 @@ describe('Renderer', () => {
       // Test case: Tag with attributes, unclosed
       const html1 = '<custom-tag class="test" id="my-id">content';
       const result1 = detectUnclosedTags(html1);
-      expect(result1.has('custom-tag')).toBe(true);
+      expect(result1.has('custom-tag-1')).toBe(true);
 
       // Test case: Tag with attributes, closed
       const html2 = '<custom-tag class="test" id="my-id">content</custom-tag>';
       const result2 = detectUnclosedTags(html2);
-      expect(result2.has('custom-tag')).toBe(false);
+      expect(result2.size).toBe(0);
     });
 
     it('should handle malformed HTML gracefully', () => {
@@ -506,17 +526,17 @@ describe('Renderer', () => {
       // Test case: Malformed closing tag
       const html1 = '<custom-tag>content</custom-tag';
       const result1 = detectUnclosedTags(html1);
-      expect(result1.has('custom-tag')).toBe(true);
+      expect(result1.has('custom-tag-1')).toBe(true);
 
       // Test case: Missing closing bracket
       const html2 = '<custom-tag>content';
       const result2 = detectUnclosedTags(html2);
-      expect(result2.has('custom-tag')).toBe(true);
+      expect(result2.has('custom-tag-1')).toBe(true);
 
       // Test case: Extra closing tags
       const html3 = '<custom-tag>content</custom-tag></custom-tag>';
       const result3 = detectUnclosedTags(html3);
-      expect(result3.has('custom-tag')).toBe(false);
+      expect(result3.size).toBe(0);
     });
 
     it('should handle empty string', () => {
@@ -546,7 +566,7 @@ describe('Renderer', () => {
       // Test case: Multiple instances, some closed, some not
       const html = '<custom-tag>first</custom-tag><custom-tag>second';
       const result = detectUnclosedTags(html);
-      expect(result.has('custom-tag')).toBe(true);
+      expect(result.has('custom-tag-2')).toBe(true);
     });
   });
 
@@ -564,7 +584,7 @@ describe('Renderer', () => {
       // Note: Due to html-react-parser behavior, we need to simulate the scenario
       // where we have valid HTML but want to test the streamStatus logic
       // We'll use a mock to control the detectUnclosedTags result
-      const mockUnclosedTags = new Set(['streaming-tag']);
+      const mockUnclosedTags = new Set(['streaming-tag-1']);
       jest.spyOn(renderer as any, 'detectUnclosedTags').mockReturnValue(mockUnclosedTags);
 
       const html = '<streaming-tag>content</streaming-tag>';
@@ -967,7 +987,7 @@ describe('Renderer', () => {
       const renderer = new Renderer({ components });
 
       // Mock detectUnclosedTags to simulate unclosed div
-      const mockUnclosedTags = new Set(['div']);
+      const mockUnclosedTags = new Set(['div-1']);
       jest.spyOn(renderer as any, 'detectUnclosedTags').mockReturnValue(mockUnclosedTags);
 
       const createElementSpy = jest.spyOn(React, 'createElement');
@@ -1003,7 +1023,7 @@ describe('Renderer', () => {
       const renderer = new Renderer({ components });
 
       // Mock detectUnclosedTags to simulate unclosed span
-      const mockUnclosedTags = new Set(['span']);
+      const mockUnclosedTags = new Set(['span-1']);
       jest.spyOn(renderer as any, 'detectUnclosedTags').mockReturnValue(mockUnclosedTags);
 
       const createElementSpy = jest.spyOn(React, 'createElement');
@@ -1040,7 +1060,7 @@ describe('Renderer', () => {
       const renderer = new Renderer({ components });
 
       // Mock detectUnclosedTags to simulate unclosed div and span
-      const mockUnclosedTags = new Set(['div', 'span']);
+      const mockUnclosedTags = new Set(['div-1', 'span-1']);
       jest.spyOn(renderer as any, 'detectUnclosedTags').mockReturnValue(mockUnclosedTags);
 
       const createElementSpy = jest.spyOn(React, 'createElement');
@@ -1074,7 +1094,7 @@ describe('Renderer', () => {
       const renderer = new Renderer({ components });
 
       // Mock detectUnclosedTags to simulate all tags unclosed
-      const mockUnclosedTags = new Set(['div', 'p', 'a']);
+      const mockUnclosedTags = new Set(['div-1', 'p-1', 'a-1']);
       jest.spyOn(renderer as any, 'detectUnclosedTags').mockReturnValue(mockUnclosedTags);
 
       const createElementSpy = jest.spyOn(React, 'createElement');
