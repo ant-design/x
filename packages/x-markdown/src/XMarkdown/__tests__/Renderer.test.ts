@@ -210,6 +210,142 @@ describe('Renderer', () => {
       createElementSpy.mockRestore();
     });
 
+    it('should handle multiple instances of the same component with correct streamStatus', () => {
+      const components = {
+        'multi-instance': MockComponent,
+      };
+
+      const renderer = new Renderer({ components });
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      // Scenario: First instance is closed (done), second instance is open (loading)
+      const html = '<multi-instance>Instance 1</multi-instance><multi-instance>Instance 2';
+      renderer.processHtml(html);
+
+      // Filter calls to MockComponent
+      const calls = createElementSpy.mock.calls.filter((call) => call[0] === MockComponent);
+
+      expect(calls.length).toBe(2);
+
+      // First instance should be done
+      expect(calls[0][1]).toEqual(
+        expect.objectContaining({
+          streamStatus: 'done',
+        }),
+      );
+
+      // Second instance should be loading
+      expect(calls[1][1]).toEqual(
+        expect.objectContaining({
+          streamStatus: 'loading',
+        }),
+      );
+
+      createElementSpy.mockRestore();
+    });
+
+    it('should mark all instances as done when all are closed', () => {
+      const components = {
+        'multi-instance': MockComponent,
+      };
+
+      const renderer = new Renderer({ components });
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      const html =
+        '<multi-instance>Instance 1</multi-instance><multi-instance>Instance 2</multi-instance>';
+      renderer.processHtml(html);
+
+      const calls = createElementSpy.mock.calls.filter((call) => call[0] === MockComponent);
+
+      expect(calls.length).toBe(2);
+      expect(calls[0][1]).toEqual(expect.objectContaining({ streamStatus: 'done' }));
+      expect(calls[1][1]).toEqual(expect.objectContaining({ streamStatus: 'done' }));
+
+      createElementSpy.mockRestore();
+    });
+
+    it('should handle nested instances of the same component correctly', () => {
+      const components = {
+        'multi-instance': MockComponent,
+      };
+
+      const renderer = new Renderer({ components });
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      // Outer open, Inner closed
+      const html = '<multi-instance>Outer <multi-instance>Inner</multi-instance>';
+      renderer.processHtml(html);
+
+      const calls = createElementSpy.mock.calls.filter((call) => call[0] === MockComponent);
+      expect(calls.length).toBe(2);
+
+      // Inner instance (processed first as children are created before parent)
+      expect(calls[0][1]).toEqual(expect.objectContaining({ streamStatus: 'done' }));
+      // Outer instance
+      expect(calls[1][1]).toEqual(expect.objectContaining({ streamStatus: 'loading' }));
+
+      createElementSpy.mockRestore();
+    });
+
+    it('should handle deep nesting with mixed states', () => {
+      const components = {
+        'multi-instance': MockComponent,
+      };
+
+      const renderer = new Renderer({ components });
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      // Level 1: Open
+      // Level 2: Open
+      // Level 3: Closed
+      const html = '<multi-instance>1<multi-instance>2<multi-instance>3</multi-instance>';
+      renderer.processHtml(html);
+
+      const calls = createElementSpy.mock.calls.filter((call) => call[0] === MockComponent);
+      expect(calls.length).toBe(3);
+
+      // Level 3 (Inner most) - Done
+      expect(calls[0][1]).toEqual(expect.objectContaining({ streamStatus: 'done' }));
+
+      // Level 2 - Loading
+      expect(calls[1][1]).toEqual(expect.objectContaining({ streamStatus: 'loading' }));
+
+      // Level 1 - Loading
+      expect(calls[2][1]).toEqual(expect.objectContaining({ streamStatus: 'loading' }));
+
+      createElementSpy.mockRestore();
+    });
+
+    it('should handle interleaved components correctly', () => {
+      const components = {
+        'comp-a': MockComponent,
+        'comp-b': MockComponent,
+      };
+      const renderer = new Renderer({ components });
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      // comp-a closed, comp-b closed, comp-a open
+      const html = '<comp-a>A1</comp-a><comp-b>B1</comp-b><comp-a>A2';
+      renderer.processHtml(html);
+
+      const callsA = createElementSpy.mock.calls.filter(
+        (call) => call[0] === MockComponent && (call[1] as any).domNode.name === 'comp-a',
+      );
+      const callsB = createElementSpy.mock.calls.filter(
+        (call) => call[0] === MockComponent && (call[1] as any).domNode.name === 'comp-b',
+      );
+
+      expect(callsA.length).toBe(2);
+      expect(callsB.length).toBe(1);
+
+      expect(callsA[0][1]).toEqual(expect.objectContaining({ streamStatus: 'done' }));
+      expect(callsB[0][1]).toEqual(expect.objectContaining({ streamStatus: 'done' }));
+      expect(callsA[1][1]).toEqual(expect.objectContaining({ streamStatus: 'loading' }));
+
+      createElementSpy.mockRestore();
+    });
+
     it('should merge class and className attributes correctly', () => {
       const components = {
         'test-component': MockComponent,
