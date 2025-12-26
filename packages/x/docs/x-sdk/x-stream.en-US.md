@@ -1,13 +1,15 @@
 ---
+category: Components
 group:
   title: Utilities
   order: 3
 title: XStream
 subtitle: Stream
 order: 2
-description: 转换可读数据流
+description: Transform readable data streams.
 demo:
   cols: 1
+tag: 2.0.0
 ---
 
 ## When To Use
