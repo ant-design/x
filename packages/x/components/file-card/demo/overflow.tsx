@@ -49,7 +49,7 @@ const App = () => {
         onChange={setOverflow}
         style={{ marginInlineEnd: 'auto' }}
       />
-      <FileCard.List items={[...images, ...files]} removable overflow={'scrollX'} />
+      <FileCard.List items={[...images, ...files]} removable overflow={overflow} />
     </Flex>
   );
 };
