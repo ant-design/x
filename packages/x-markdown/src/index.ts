@@ -5,6 +5,7 @@ export { useStreaming } from './XMarkdown/hooks';
 export type {
   ComponentProps,
   StreamStatus,
+  StreamCacheTokenType,
   Token,
   Tokens,
   XMarkdownProps,
