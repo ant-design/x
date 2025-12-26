@@ -1,10 +1,10 @@
 import type { Config as DOMPurifyConfig } from 'dompurify';
-import DOMPurify from 'dompurify';
 import type { DOMNode, Element } from 'html-react-parser';
 import parseHtml, { domToReact } from 'html-react-parser';
 import React, { ReactNode } from 'react';
 import AnimationText from '../AnimationText';
 import type { ComponentProps, XMarkdownProps } from '../interface';
+import { getDOMPurify } from '../utils';
 
 interface RendererOptions {
   components?: XMarkdownProps['components'];
@@ -143,6 +143,8 @@ class Renderer {
 
     // Use DOMPurify to clean HTML while preserving custom components and target attributes
     const purifyConfig = this.configureDOMPurify();
+
+    const DOMPurify = getDOMPurify();
     const cleanHtml = DOMPurify.sanitize(htmlString, purifyConfig);
 
     return parseHtml(cleanHtml, {

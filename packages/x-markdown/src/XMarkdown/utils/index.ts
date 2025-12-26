@@ -1,0 +1,1 @@
+export { getDOMPurify } from './getDOMPurify';

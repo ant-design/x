@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { StreamCacheTokenType, XMarkdownProps } from '../interface';
+import { StreamCacheTokenType, StreamingOption, XMarkdownProps } from '../interface';
 
 /* ------------ Type ------------ */
 
@@ -196,6 +196,96 @@ const safeEncodeURIComponent = (str: string): string => {
   }
 };
 
+/* ------------ Pure Processing Functions ------------ */
+const getIncompleteMarkdownPlaceholder = (
+  cache: StreamCache,
+  incompleteMarkdownComponentMap?: StreamingOption['incompleteMarkdownComponentMap'],
+  components?: XMarkdownProps['components'],
+): string | undefined => {
+  const { token, pending } = cache;
+  if (token === StreamCacheTokenType.Text) return;
+  /**
+   * An image tag starts with '!', if it's the only character, it's incomplete and should be stripped.
+   * ！
+   * ^
+   */
+  if (token === StreamCacheTokenType.Image && pending === '!') return undefined;
+
+  /**
+   * If a table has more than two lines (header, separator, and at least one row),
+   * it's considered complete enough to not be replaced by a placeholder.
+   * | column1 | column2 |\n| -- | --|\n
+   *                                   ^
+   */
+  if (token === StreamCacheTokenType.Table && pending.split('\n').length > 2) {
+    return pending;
+  }
+
+  const componentMap = incompleteMarkdownComponentMap || {};
+  const componentName = componentMap[token] || `incomplete-${token}`;
+  const encodedPending = safeEncodeURIComponent(pending);
+
+  return components?.[componentName]
+    ? `<${componentName} data-raw="${encodedPending}" />`
+    : undefined;
+};
+
+const computeStreamingOutput = (
+  text: string,
+  cache: StreamCache,
+  incompleteMarkdownComponentMap?: StreamingOption['incompleteMarkdownComponentMap'],
+  components?: XMarkdownProps['components'],
+): string => {
+  if (!text) {
+    return '';
+  }
+
+  const expectedPrefix = cache.completeMarkdown + cache.pending;
+  // Reset cache if input doesn't continue from previous state
+  if (!text.startsWith(expectedPrefix)) {
+    Object.assign(cache, getInitialCache());
+  }
+
+  const chunk = text.slice(cache.processedLength);
+  if (!chunk) {
+    const incompletePlaceholder = getIncompleteMarkdownPlaceholder(
+      cache,
+      incompleteMarkdownComponentMap,
+      components,
+    );
+    return cache.completeMarkdown + (incompletePlaceholder || '');
+  }
+
+  cache.processedLength += chunk.length;
+  const isTextInBlock = isInCodeBlock(text);
+  for (const char of chunk) {
+    cache.pending += char;
+    // Skip processing if inside code block
+    if (isTextInBlock) {
+      commitCache(cache);
+      continue;
+    }
+
+    if (cache.token === StreamCacheTokenType.Text) {
+      for (const handler of recognizeHandlers) handler.recognize(cache);
+    } else {
+      const handler = recognizeHandlers.find((handler) => handler.tokenType === cache.token);
+      handler?.recognize(cache);
+    }
+
+    if (cache.token === StreamCacheTokenType.Text) {
+      commitCache(cache);
+    }
+  }
+
+  const incompletePlaceholder = getIncompleteMarkdownPlaceholder(
+    cache,
+    incompleteMarkdownComponentMap,
+    components,
+  );
+  return cache.completeMarkdown + (incompletePlaceholder || '');
+};
+
 /* ------------ Main Hook ------------ */
 const useStreaming = (
   input: string,
@@ -203,40 +293,27 @@ const useStreaming = (
 ) => {
   const { streaming, components = {} } = config || {};
   const { hasNextChunk: enableCache = false, incompleteMarkdownComponentMap } = streaming || {};
-  const [output, setOutput] = useState('');
+
   const cacheRef = useRef<StreamCache>(getInitialCache());
 
-  const handleIncompleteMarkdown = useCallback(
-    (cache: StreamCache): string | undefined => {
-      const { token, pending } = cache;
-      if (token === StreamCacheTokenType.Text) return;
-      /**
-       * An image tag starts with '!', if it's the only character, it's incomplete and should be stripped.
-       * ！
-       * ^
-       */
-      if (token === StreamCacheTokenType.Image && pending === '!') return undefined;
+  // Use lazy initializer to compute initial output synchronously on first render
+  const [output, setOutput] = useState(() => {
+    if (typeof input !== 'string') {
+      return '';
+    }
 
-      /**
-       * If a table has more than two lines (header, separator, and at least one row),
-       * it's considered complete enough to not be replaced by a placeholder.
-       * | column1 | column2 |\n| -- | --|\n
-       *                                   ^
-       */
-      if (token === StreamCacheTokenType.Table && pending.split('\n').length > 2) {
-        return pending;
-      }
+    if (!enableCache) {
+      return input;
+    }
 
-      const componentMap = incompleteMarkdownComponentMap || {};
-      const componentName = componentMap[token] || `incomplete-${token}`;
-      const encodedPending = safeEncodeURIComponent(pending);
-
-      return components?.[componentName]
-        ? `<${componentName} data-raw="${encodedPending}" />`
-        : undefined;
-    },
-    [incompleteMarkdownComponentMap, components],
-  );
+    // For streaming mode, compute initial output synchronously to avoid empty content on mount
+    return computeStreamingOutput(
+      input,
+      cacheRef.current,
+      incompleteMarkdownComponentMap,
+      components,
+    );
+  });
 
   const processStreaming = useCallback(
     (text: string): void => {
@@ -246,42 +323,16 @@ const useStreaming = (
         return;
       }
 
-      const expectedPrefix = cacheRef.current.completeMarkdown + cacheRef.current.pending;
-      // Reset cache if input doesn't continue from previous state
-      if (!text.startsWith(expectedPrefix)) {
-        cacheRef.current = getInitialCache();
-      }
+      const result = computeStreamingOutput(
+        text,
+        cacheRef.current,
+        incompleteMarkdownComponentMap,
+        components,
+      );
 
-      const cache = cacheRef.current;
-      const chunk = text.slice(cache.processedLength);
-      if (!chunk) return;
-
-      cache.processedLength += chunk.length;
-      const isTextInBlock = isInCodeBlock(text);
-      for (const char of chunk) {
-        cache.pending += char;
-        // Skip processing if inside code block
-        if (isTextInBlock) {
-          commitCache(cache);
-          continue;
-        }
-
-        if (cache.token === StreamCacheTokenType.Text) {
-          for (const handler of recognizeHandlers) handler.recognize(cache);
-        } else {
-          const handler = recognizeHandlers.find((handler) => handler.tokenType === cache.token);
-          handler?.recognize(cache);
-        }
-
-        if (cache.token === StreamCacheTokenType.Text) {
-          commitCache(cache);
-        }
-      }
-
-      const incompletePlaceholder = handleIncompleteMarkdown(cache);
-      setOutput(cache.completeMarkdown + (incompletePlaceholder || ''));
+      setOutput(result);
     },
-    [handleIncompleteMarkdown],
+    [incompleteMarkdownComponentMap, components],
   );
 
   useEffect(() => {
