@@ -2,7 +2,7 @@ import { DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined } from '@ant-d
 import pickAttrs from '@rc-component/util/lib/pickAttrs';
 import { Tooltip } from 'antd';
 import { clsx } from 'clsx';
-import React, { useRef } from 'react';
+import React from 'react';
 import { useLocale } from '../locale';
 import enUS from '../locale/en_US';
 import { useXProviderContext } from '../x-provider';
