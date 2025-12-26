@@ -113,7 +113,6 @@ const List: React.FC<FileCardListProps> = (props) => {
   return (
     <div className={clsx(mergedCls)}>
       <ResizeObserver
-        disabled={!overflow || overflow === 'wrap'}
         onResize={() => {
           checkPing();
         }}
