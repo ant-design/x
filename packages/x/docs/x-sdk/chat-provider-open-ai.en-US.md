@@ -8,9 +8,9 @@ order: 2
 tag: 2.0.0
 ---
 
-`OpenAIChatProvider` is a `Chat Provider` compatible with `OpenAI`. It converts request parameters and response data into a format compatible with the `OpenAI` interface.
+`OpenAIChatProvider` is a `Chat Provider` compatible with the `OpenAI` interface. It automatically converts request parameters and response data into the OpenAI API format.
 
-`XModelMessage`, `XModelParams`, and `XModelResponse` are the type definitions for input and output of `OpenAIChatProvider`, which can be directly used in the generics `ChatMessage`, `Input`, and `Output` of `useXChat`.
+`XModelParams` defines the request parameter types for `OpenAIChatProvider`, `XModelResponse` defines the response data types, and `XModelMessage` defines the complete message data types. These types can be directly used in the generics `ChatMessage`, `Input`, and `Output` of `useXChat`.
 
 ## Usage Example
 
