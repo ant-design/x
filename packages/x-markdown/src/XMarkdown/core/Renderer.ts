@@ -157,7 +157,6 @@ class Renderer {
     for (const tagNameLower of tagsToCheckLower) {
       if (openTagsStack[tagNameLower]) {
         for (const tagIndex of openTagsStack[tagNameLower]) {
-          // unclosedTags.add(`${tagNameLower}`);
           unclosedTags.add(`${tagNameLower}-${tagIndex}`);
         }
       }

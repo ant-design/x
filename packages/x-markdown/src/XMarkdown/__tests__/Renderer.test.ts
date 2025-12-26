@@ -87,6 +87,7 @@ describe('Renderer', () => {
       const result2 = detectUnclosedTags(html2);
       expect(result2.has('img-1')).toBe(true);
     });
+  });
 
   describe('processHtml', () => {
     it('should pass correct streamStatus to custom components', () => {
