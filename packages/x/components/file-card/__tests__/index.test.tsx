@@ -2,6 +2,49 @@ import React from 'react';
 import { fireEvent, render, waitFor } from '../../../tests/utils';
 import FileCard from '../index';
 
+// Mock resize-observer for file-card tests
+jest.mock('@rc-component/resize-observer', () => {
+  const ResizeObserver = ({ children, onResize, disabled }: any) => {
+    React.useEffect(() => {
+      if (!disabled && onResize) {
+        setTimeout(() => {
+          onResize([
+            {
+              target: document.body,
+              contentRect: {
+                width: 1000,
+                height: 800,
+                x: 0,
+                y: 0,
+                top: 0,
+                right: 1000,
+                bottom: 800,
+                left: 0,
+              },
+              borderBoxSize: [{ inlineSize: 1000, blockSize: 800 }],
+              contentBoxSize: [{ inlineSize: 1000, blockSize: 800 }],
+              devicePixelContentBoxSize: [{ inlineSize: 1000, blockSize: 800 }],
+            },
+          ]);
+        }, 0);
+      }
+    }, [onResize, disabled]);
+
+    return children;
+  };
+
+  return {
+    __esModule: true,
+    default: ResizeObserver,
+    _rs: (entries: any) => {
+      if (entries && entries.length > 0) {
+        const event = new CustomEvent('resize', { detail: entries });
+        window.dispatchEvent(event);
+      }
+    },
+  };
+});
+
 describe('FileCard Component', () => {
   // 基础功能测试
   it('should render basic file card', () => {
