@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '../../../tests/utils';
+import { fireEvent, render, waitFor } from '../../../tests/utils';
 import FileCard from '../index';
 
 describe('FileCard Component', () => {
@@ -198,18 +198,105 @@ describe('FileCard.List', () => {
 
   it('should handle removable', () => {
     const { container } = render(<FileCard.List items={[{ name: 'test.txt' }]} removable />);
+    const removeBtn = container.querySelector('.ant-file-card-list-remove');
+    expect(removeBtn).toBeTruthy();
+    fireEvent.click(removeBtn as HTMLElement);
     expect(container.querySelector('.ant-file-card-list')).toBeTruthy();
   });
 
-  it('should handle different overflow types', () => {
+  it('should handle different overflow types', async () => {
     const overflows = ['scrollX', 'scrollY', 'wrap'] as const;
-
-    overflows.forEach((overflow) => {
+    const scrollContainerStyle = { width: '150px', height: '80px' };
+    for (const overflow of overflows) {
       const { container } = render(
-        <FileCard.List items={[{ name: 'test.txt' }]} overflow={overflow} />,
+        <div style={scrollContainerStyle}>
+          <FileCard.List
+            items={[
+              { name: 'very-long-file-name1.txt' },
+              { name: 'very-long-file-name2.txt' },
+              { name: 'very-long-file-name3.txt' },
+              { name: 'very-long-file-name4.txt' },
+              { name: 'very-long-file-name5.txt' },
+            ]}
+            overflow={overflow}
+          />
+        </div>,
       );
+
+      // 等待可能的异步更新
+      await waitFor(() => {
+        const listContent = container.querySelector(`.ant-file-card-list-overflow-${overflow}`);
+        expect(listContent).toBeTruthy();
+      });
       expect(container.querySelector('.ant-file-card-list')).toBeTruthy();
-    });
+      // 获取滚动容器并模拟滚动来触发checkPing
+      const scrollContainer = container.querySelector('.ant-file-card-list-content');
+      expect(scrollContainer).toBeTruthy();
+      // 模拟滚动到右侧来触发ping状态
+      if (scrollContainer) {
+        if (overflow === 'scrollX') {
+          // 验证滚动按钮存在
+          const prevBtn = container.querySelector('.ant-file-card-list-prev-btn');
+          const nextBtn = container.querySelector('.ant-file-card-list-next-btn');
+          expect(prevBtn).toBeTruthy();
+          expect(nextBtn).toBeTruthy();
+          // 设置scrollLeft来模拟滚动
+          Object.defineProperty(scrollContainer, 'scrollLeft', {
+            value: 50,
+            writable: true,
+            configurable: true,
+          });
+          Object.defineProperty(scrollContainer, 'scrollWidth', {
+            value: 300,
+            writable: true,
+            configurable: true,
+          });
+          Object.defineProperty(scrollContainer, 'clientWidth', {
+            value: 150,
+            writable: true,
+            configurable: true,
+          });
+          fireEvent.click(prevBtn as HTMLElement);
+          fireEvent.click(nextBtn as HTMLElement);
+          // 触发滚动事件来调用checkPing
+          scrollContainer.dispatchEvent(new Event('scroll'));
+
+          await waitFor(() => {
+            // 验证ping状态被设置
+
+            expect(container.querySelector('.ant-file-card-list-overflow-ping-start')).toBeTruthy();
+
+            expect(container.querySelector('.ant-file-card-list-overflow-ping-end')).toBeTruthy();
+          });
+        }
+        if (overflow === 'scrollY') {
+          // 设置scrollTop来模拟滚动
+          Object.defineProperty(scrollContainer, 'scrollTop', {
+            value: 50,
+            writable: true,
+            configurable: true,
+          });
+          Object.defineProperty(scrollContainer, 'scrollHeight', {
+            value: 300,
+            writable: true,
+            configurable: true,
+          });
+          Object.defineProperty(scrollContainer, 'clientHeight', {
+            value: 100,
+            writable: true,
+            configurable: true,
+          });
+          // 触发滚动事件来调用checkPing
+          scrollContainer.dispatchEvent(new Event('scroll'));
+
+          await waitFor(() => {
+            // 验证ping状态被设置
+            expect(container.querySelector('.ant-file-card-list-overflow-ping-start')).toBeTruthy();
+            expect(container.querySelector('.ant-file-card-list-overflow-ping-end')).toBeTruthy();
+          });
+        }
+      }
+    }
   });
 
   it('should handle small size', () => {
