@@ -15,6 +15,8 @@ interface RendererOptions {
 class Renderer {
   private readonly options: RendererOptions;
   private static readonly NON_WHITESPACE_REGEX = /[^\r\n\s]+/;
+  private static readonly WHITESPACE_REGEX = /\s/;
+  private static readonly TAG_NAME_CHAR_REGEX = /[a-zA-Z0-9-]/;
   private static readonly VOID_ELEMENTS = new Set<string>([
     'area',
     'base',
@@ -65,16 +67,16 @@ class Renderer {
           let tagName = '';
 
           // Skip leading whitespace after </
-          while (scanPos < htmlLength && /\s/.test(htmlString[scanPos])) scanPos++;
+          while (scanPos < htmlLength && Renderer.WHITESPACE_REGEX.test(htmlString[scanPos])) scanPos++;
 
           // Extract the tag name (alphanumeric characters and hyphens for custom components)
-          while (scanPos < htmlLength && /[a-zA-Z0-9-]/.test(htmlString[scanPos])) {
+          while (scanPos < htmlLength && Renderer.TAG_NAME_CHAR_REGEX.test(htmlString[scanPos])) {
             tagName += htmlString[scanPos];
             scanPos++;
           }
 
           // Skip trailing whitespace before >
-          while (scanPos < htmlLength && /\s/.test(htmlString[scanPos])) scanPos++;
+          while (scanPos < htmlLength && Renderer.WHITESPACE_REGEX.test(htmlString[scanPos])) scanPos++;
 
           // Validate closing tag syntax and process if valid
           if (scanPos < htmlLength && htmlString[scanPos] === '>' && tagName) {
@@ -94,7 +96,7 @@ class Renderer {
           let tagName = '';
 
           // Extract the tag name (alphanumeric characters and hyphens for custom components)
-          while (scanPos < htmlLength && /[a-zA-Z0-9-]/.test(htmlString[scanPos])) {
+          while (scanPos < htmlLength && Renderer.TAG_NAME_CHAR_REGEX.test(htmlString[scanPos])) {
             tagName += htmlString[scanPos];
             scanPos++;
           }
@@ -115,7 +117,7 @@ class Renderer {
               while (scanPos < htmlLength) {
                 if (htmlString[scanPos] === '>') {
                   foundTagEnd = true;
-                  // Detect self-closing syntax (e.g., <br/> or < img />)
+                  // Detect self-closing syntax (e.g., <br/> or <img />)
                   if (scanPos > 0 && htmlString[scanPos - 1] === '/') {
                     isSelfClosing = true;
                   }

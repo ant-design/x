@@ -78,14 +78,21 @@ describe('Renderer', () => {
       });
       // Access private method for testing
       const detectUnclosedTags = (renderer as any).detectUnclosedTags.bind(renderer);
+
       // Test case: Void elements should not be considered unclosed
       const html = '<img src="image.png"><img src="image2.png" />';
       const result = detectUnclosedTags(html);
       expect(result.size).toBe(0);
 
+      // Test case: Unclosed void element
       const html2 = '<img src="image.p';
       const result2 = detectUnclosedTags(html2);
       expect(result2.has('img-1')).toBe(true);
+
+      // Test case: Nested void elements
+      const html3 = '<div><img src="image.png"></div><p>';
+      const result3 = detectUnclosedTags(html3);
+      expect(result3.size).toBe(0);
     });
   });
 
