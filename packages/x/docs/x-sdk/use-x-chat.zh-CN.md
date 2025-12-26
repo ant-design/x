@@ -1,10 +1,13 @@
 ---
+category: Components
 group:
   title: 数据流
   order: 1
 title: useXChat
 order: 1
 subtitle: 会话数据
+description: 单对话的数据管理。
+tag: 2.0.0
 demo:
   cols: 1
 ---
@@ -35,6 +38,14 @@ type useXChat<
   Output = SSEOutput,
 > = (config: XChatConfig<ChatMessage, ParsedMessage, Input, Output>) => XChatConfigReturnType;
 ```
+
+<!-- prettier-ignore -->
+| 属性 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| ChatMessage | 消息数据类型，定义聊天消息的结构 | object | object | - |
+| ParsedMessage | 解析后的消息类型，用于组件消费的消息格式 | ChatMessage | ChatMessage | - |
+| Input | 请求参数类型，定义发送请求的参数结构 | RequestParams\<ChatMessage\> | RequestParams\<ChatMessage\> | - |
+| Output | 响应数据类型，定义接收响应的数据格式 | SSEOutput | SSEOutput | - |
 
 ### XChatConfig
 

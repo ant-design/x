@@ -1,11 +1,15 @@
 ---
+category: Components
 group:
   title: Data Flow
   order: 1
 title: useXChat
 order: 1
+subtitle: Conversation Data
+description: Data management for single conversations.
 demo:
   cols: 1
+tag: 2.0.0
 ---
 
 ## When to Use
@@ -34,6 +38,14 @@ type useXChat<
   Output = SSEOutput,
 > = (config: XChatConfig<ChatMessage, ParsedMessage, Input, Output>) => XChatConfigReturnType;
 ```
+
+<!-- prettier-ignore -->
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| ChatMessage | Message data type, defines the structure of chat messages | object | object | - |
+| ParsedMessage | Parsed message type, message format for component consumption | ChatMessage | ChatMessage | - |
+| Input | Request parameter type, defines the structure of request parameters | RequestParams\<ChatMessage\> | RequestParams\<ChatMessage\> | - |
+| Output | Response data type, defines the format of received response data | SSEOutput | SSEOutput | - |
 
 ### XChatConfig
 

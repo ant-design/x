@@ -219,6 +219,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
   >
     <div
       aria-label="segmented control"
+      aria-orientation="horizontal"
       class="ant-segmented css-var-_r_b_"
       role="radiogroup"
       style="margin-inline-end: auto;"
@@ -237,9 +238,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             type="radio"
           />
           <div
-            aria-checked="true"
             class="ant-segmented-item-label"
-            role="radio"
             title="Wrap"
           >
             Wrap
@@ -254,9 +253,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             type="radio"
           />
           <div
-            aria-checked="false"
             class="ant-segmented-item-label"
-            role="radio"
             title="Scroll X"
           >
             Scroll X
@@ -271,9 +268,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             type="radio"
           />
           <div
-            aria-checked="false"
             class="ant-segmented-item-label"
-            role="radio"
             title="Scroll Y"
           >
             Scroll Y

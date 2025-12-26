@@ -1,11 +1,13 @@
 ---
+category: Components
 group:
   title: 工具
   order: 3
 title: XRequest
 order: 1
 subtitle: 请求
-description:
+description: 通用流式请求工具。
+tag: 2.0.0
 demo:
   cols: 1
 ---
@@ -48,8 +50,8 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
 | callbacks | 请求回调处理集 | XRequestCallbacks\<Output\> | - | - |
 | params | 请求的参数 | Input | - | - |
 | headers | 额外的请求头配置 | Record\<string, string\> | - | - |
-| timeout | 请求超时配置，单位:ms | number | - | - |
-| streamTimeout | stream模式的数据超时配置，单位:ms | number | - | - |
+| timeout | 请求超时配置 (从发送请求到连接上服务的时间)，单位:ms | number | - | - |
+| streamTimeout | stream 模式的数据超时配置 （每次 chunk 返回的时间间隔），单位:ms | number | - | - |
 | fetch | 自定义fetch对象 | `typeof fetch` | - | - |
 | middlewares | 中间件，支持请求前和请求后处理 | XFetchMiddlewares | - | - |
 | transformStream | stream处理器 | XStreamOptions\<Output\>['transformStream'] \| ((baseURL: string, responseHeaders: Headers) => XStreamOptions\<Output\>['transformStream']) | - | - |

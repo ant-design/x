@@ -91,7 +91,7 @@
   },
   "devDependencies": {
     "@antv/gpt-vis": "^0.5.10",
-    "@antv/infographic": "^0.1.4",
+    "@antv/infographic": "^0.2.0",
     "@blazediff/core": "^1.8.0",
     "@codesandbox/sandpack-react": "^2.19.8",
     "@emotion/react": "^11.13.5",
