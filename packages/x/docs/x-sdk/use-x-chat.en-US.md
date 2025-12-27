@@ -22,6 +22,7 @@ Manage conversation data through Agent and produce data for page rendering.
 <code src="./demos/x-chat/openai.tsx">OpenAI Model Integration</code>
 <code src="./demos/x-chat/deepSeek.tsx">Thinking Model Integration</code>
 <code src="./demos/x-chat/defaultMessages.tsx">Historical Messages Setup</code>
+<code src="./demos/x-chat/setMessages.tsx">Request Remote Historical Messages</code>
 <code src="./demos/x-chat/developer.tsx">System Prompt Setup</code>
 <code src="./demos/x-chat/custom-request-fetch.tsx">Custom XRequest.fetch</code>
 <code src="./demos/x-chat/request-openai-node.tsx">Custom request</code>

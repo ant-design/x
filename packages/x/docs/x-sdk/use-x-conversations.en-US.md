@@ -20,6 +20,7 @@ tag: 2.0.0
 <code src="./demos/x-conversations/operations.tsx">Conversation Operations</code> 
 <code src="./demos/x-conversations/multi-instances.tsx">Multiple Instances</code>
 <code src="./demos/x-conversations/with-x-chat.tsx">Integration with `useXChat` for message management</code>
+<code src="./demos/x-conversations/setMessages.tsx">Request Remote Historical Messages</code>
 
 ## API
 
