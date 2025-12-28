@@ -255,7 +255,7 @@ const App = () => {
         placeholder={locale.placeholder}
         onSubmit={(nextContent) => {
           onRequest({
-            stream: false,
+            stream: true,
             messages: [
               {
                 role: 'user',
