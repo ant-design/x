@@ -4,7 +4,10 @@ describe('ChatMessagesStore', () => {
   let store: ChatMessagesStore<{ id: string; message: string }>;
 
   beforeEach(() => {
-    store = new ChatMessagesStore<{ id: string; message: string }>([]);
+    store = new ChatMessagesStore<{ id: string; message: string }>(
+      async () => [],
+      () => {},
+    );
     jest.useFakeTimers();
   });
 
