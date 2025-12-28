@@ -62,11 +62,11 @@ type useXChat<
 #### DefaultMessagesType
 
 ```ts
-type DefaultMessagesType {
+type DefaultMessagesType = {
   id: string | number;
-   message: ChatMessage,
-   status: MessageStatus
-}
+  message: ChatMessage;
+  status: MessageStatus;
+};
 ```
 
 ### XChatConfigReturnType

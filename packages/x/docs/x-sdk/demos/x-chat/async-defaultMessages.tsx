@@ -154,7 +154,7 @@ const App = () => {
     setMessages([
       ...messages,
       {
-        id: messages.length,
+        id: Date.now(),
         message: { role: 'user', content: locale.newUserMessage },
         status: 'success',
       },
@@ -167,7 +167,7 @@ const App = () => {
     setMessages([
       ...messages,
       {
-        id: messages.length,
+        id: Date.now(),
         message: { role: 'assistant', content: locale.newAIResponse },
         status: 'success',
       },
@@ -180,7 +180,7 @@ const App = () => {
     setMessages([
       ...messages,
       {
-        id: messages.length,
+        id: Date.now(),
         message: { role: 'system', content: locale.newSystemMessage },
         status: 'success',
       },
