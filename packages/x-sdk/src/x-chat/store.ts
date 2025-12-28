@@ -85,13 +85,13 @@ export class ChatMessagesStore<T extends { id: number | string }> {
       if (!this.isDestroyed) {
         this.setMessagesInternal(messages, false);
       }
-      setDefaultMessagesRequesting(false);
     } catch (error) {
       // 错误处理：保持空数组状态，避免应用崩溃
       console.warn('Failed to initialize messages:', error);
       if (!this.isDestroyed) {
         this.setMessagesInternal([], false);
       }
+    } finally {
       setDefaultMessagesRequesting(false);
     }
   }
