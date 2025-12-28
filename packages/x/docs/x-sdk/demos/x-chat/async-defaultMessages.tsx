@@ -11,7 +11,7 @@ import {
 } from '@ant-design/x-sdk';
 import XFetch from '@ant-design/x-sdk/es/x-request/x-fetch';
 import { Button, Divider, Flex, Tooltip } from 'antd';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 /**
  * 🔔 请替换 BASE_URL、PATH、MODEL、API_KEY 为您自己的值
@@ -79,7 +79,6 @@ const role: BubbleListProps['role'] = {
 
 const App = () => {
   const [content, setContent] = React.useState('');
-  const [chatLoading, setChatLoading] = React.useState(false);
   const locale = useLocale();
   // 创建OpenAI聊天提供者：配置请求参数和模型
   // Create OpenAI chat provider: configure request parameters and model
@@ -98,7 +97,6 @@ const App = () => {
   // 获取历史消息列表：从服务器加载历史聊天记录
   // Get history message list: load historical chat records from server
   const getHistoryMessageList = async () => {
-    setChatLoading(true);
     const response = await XFetch(
       `https://api.x.ant.design/api/history_messages?isZH_CN=${typeof location !== 'undefined' && location.pathname.endsWith('-cn')}`,
       {
@@ -107,28 +105,25 @@ const App = () => {
     );
     const responseJson = await response.json();
     if (responseJson?.success) {
-      setMessages((ori) => [...ori, ...(responseJson?.data || [])]);
+      return responseJson?.data || [];
     }
-    setChatLoading(false);
+    return [];
   };
 
-  // 组件挂载时加载历史消息
-  // Load history messages when component mounts
-  useEffect(() => {
-    getHistoryMessageList();
-  }, []);
-
-  // 聊天消息管理：处理消息列表、默认消息、错误处理等
+  // 聊天消息管理：处理消息列表、错误处理等
   // Chat message management: handle message list, default messages, error handling, etc.
-  const { onRequest, messages, setMessages, setMessage, isRequesting, abort, onReload } = useXChat({
+  const {
+    onRequest,
+    isDefaultMessagesRequesting,
+    messages,
+    setMessages,
+    setMessage,
+    isRequesting,
+    abort,
+    onReload,
+  } = useXChat({
     provider,
-    defaultMessages: [
-      {
-        id: 'developer',
-        message: { role: 'developer', content: locale.developerMessage },
-        status: 'success',
-      },
-    ],
+    defaultMessages: getHistoryMessageList,
     requestFallback: (_, { error, errorInfo, messageInfo }) => {
       // 请求失败时的回退处理：区分中止错误和其他错误
       // Fallback handling for request failure: distinguish between abort error and other errors
@@ -275,7 +270,7 @@ const App = () => {
       <Sender
         loading={isRequesting}
         // 禁用状态：历史消息请求进行中时禁用发送器
-        disabled={chatLoading}
+        disabled={isDefaultMessagesRequesting}
         value={content}
         onCancel={() => {
           // 取消当前请求

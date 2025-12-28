@@ -2,9 +2,11 @@ import type { ConversationItemType } from '@ant-design/x';
 import { Bubble, Conversations, Sender } from '@ant-design/x';
 import {
   DeepSeekChatProvider,
+  type DefaultMessageInfo,
   type SSEFields,
   useXChat,
   useXConversations,
+  type XModelMessage,
   type XModelParams,
   type XModelResponse,
   XRequest,
@@ -23,24 +25,6 @@ const useLocale = () => {
       ? '会话项目 3，你可以点击我！'
       : "This's Conversation Item 3, you can click me!",
     conversationItem4: isCN ? '会话项目 4' : 'Conversation Item 4',
-    helloConversation1: isCN ? '你好，这是会话 1！' : 'Hello, this is Conversation 1!',
-    welcomeConversation1: isCN
-      ? '你好！这是会话 1 的欢迎消息。我可以帮助你回答各种问题。'
-      : 'Hello! This is the welcome message for Conversation 1. I can help you answer various questions.',
-    conversation2Started: isCN ? '会话 2 已启动' : 'Conversation 2 has started',
-    welcomeConversation2: isCN
-      ? '欢迎来到会话 2！在这里我们可以讨论与技术相关的话题。'
-      : 'Welcome to Conversation 2! Here we can discuss technology-related topics.',
-    clickedConversation3: isCN ? '点击了会话 3' : 'Clicked on Conversation 3',
-    specialConversation3: isCN
-      ? '你选择了会话 3！这是一个特殊的会话。我该如何帮助你？'
-      : 'You selected Conversation 3! This is a special conversation. How can I help you?',
-    conversation4Initialized: isCN ? '会话 4 已初始化' : 'Conversation 4 initialized',
-    conversation4Disabled: isCN
-      ? '这是会话 4。虽然它被禁用了，但你仍然可以查看历史消息。'
-      : 'This is Conversation 4. Although it is disabled, you can still view historical messages.',
-    helloDefault: isCN ? '你好！' : 'hello!',
-    howCanAssist: isCN ? '你好！我今天能为你做些什么？' : 'Hello! How can I assist you today?',
     thinking: isCN ? '思考中' : 'Thinking',
     requestAborted: isCN ? '请求已中止' : 'Request aborted',
     somethingWrong: isCN ? '出了点问题' : 'Something went wrong',
@@ -50,22 +34,21 @@ const useLocale = () => {
 const App = () => {
   const locale = useLocale();
   const { token } = theme.useToken();
-  const [chatLoading, setChatLoading] = React.useState(false);
   const items: ConversationItemType[] = [
     {
-      key: 'item1',
+      key: 'item2_1',
       label: locale.conversationItem1,
     },
     {
-      key: 'item2',
+      key: 'item2_2',
       label: locale.conversationItem2,
     },
     {
-      key: 'item3',
+      key: 'item2_3',
       label: locale.conversationItem3,
     },
     {
-      key: 'item4',
+      key: 'item2_4',
       label: locale.conversationItem4,
       disabled: true, // 禁用此项目，用户无法点击
     },
@@ -116,11 +99,30 @@ const App = () => {
     borderRadius: token.borderRadius,
   };
 
+  // 获取历史消息列表：从服务器加载历史聊天记录
+  // Get history message list: load historical chat records from server
+  const getHistoryMessageList: (info: {
+    conversationKey?: string;
+  }) => Promise<DefaultMessageInfo<XModelMessage>[]> = async ({ conversationKey }) => {
+    const response = await XFetch(
+      `https://api.x.ant.design/api/history_messages?isZH_CN=${typeof location !== 'undefined' && location.pathname.endsWith('-cn')}&sessionId=${conversationKey}`,
+      {
+        method: 'GET',
+      },
+    );
+    const responseJson = await response.json();
+    if (responseJson?.success) {
+      return responseJson?.data || [];
+    }
+    return [];
+  };
+
   // 聊天管理：使用聊天钩子管理消息和请求
   // Chat management: use chat hook to manage messages and requests
-  const { onRequest, messages, setMessages, isRequesting, abort } = useXChat({
+  const { onRequest, messages, isDefaultMessagesRequesting, isRequesting, abort } = useXChat({
     provider: providerFactory(activeConversationKey), // 每个会话都有独立的提供者
     conversationKey: activeConversationKey,
+    defaultMessages: getHistoryMessageList,
     requestPlaceholder: () => {
       return {
         content: locale.thinking,
@@ -143,27 +145,9 @@ const App = () => {
     },
   });
 
-  // 获取历史消息列表：从服务器加载历史聊天记录
-  // Get history message list: load historical chat records from server
-  const getHistoryMessageList = async (sessionId: string) => {
-    setChatLoading(true);
-    const response = await XFetch(
-      `https://api.x.ant.design/api/history_messages?isZH_CN=${typeof location !== 'undefined' && location.pathname.endsWith('-cn')}&sessionId=${sessionId}`,
-      {
-        method: 'GET',
-      },
-    );
-    const responseJson = await response.json();
-    if (responseJson?.success) {
-      setMessages((ori) => [...ori, ...(responseJson?.data || [])]);
-    }
-    setChatLoading(false);
-  };
-
   useEffect(() => {
     senderRef.current?.clear();
-    getHistoryMessageList(activeConversationKey);
-  }, [setMessages]);
+  }, [activeConversationKey]);
 
   return (
     <Flex gap="small" align="flex-start">
@@ -205,7 +189,7 @@ const App = () => {
         {/* 发送器：用户输入区域，支持发送消息和中止请求 */}
         {/* Sender: user input area, supports sending messages and aborting requests */}
         <Sender
-          disabled={chatLoading}
+          disabled={isDefaultMessagesRequesting}
           ref={senderRef}
           onSubmit={(val: string) => {
             if (!val) return;

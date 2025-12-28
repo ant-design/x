@@ -29,6 +29,9 @@ export class ChatMessagesStore<T extends { id: number | string }> {
   private pendingEmit = false;
   private readonly throttleInterval: number = 50;
 
+  // 竞态条件保护
+  private isDestroyed = false;
+
   private emitListeners() {
     this.listeners.forEach((listener) => {
       listener();
@@ -54,11 +57,42 @@ export class ChatMessagesStore<T extends { id: number | string }> {
     }
   }
 
-  constructor(defaultMessages: T[], conversationKey?: ConversationKey) {
-    this.setMessagesInternal(defaultMessages, false);
+  constructor(
+    defaultMessages: () => Promise<T[]>,
+    setDefaultValueLoading: (defaultValueLoading: boolean) => void,
+    conversationKey?: ConversationKey,
+  ) {
+    // 初始化消息，处理同步和异步情况
+    this.initializeMessages(defaultMessages, setDefaultValueLoading);
+
+    // 注册到全局存储助手
     if (conversationKey) {
       this.conversationKey = conversationKey;
       chatMessagesStoreHelper.set(this.conversationKey, this);
+    }
+  }
+  private async initializeMessages(
+    defaultMessages: T[] | (() => Promise<T[]>),
+    setDefaultMessagesRequesting: (defaultValueLoading: boolean) => void,
+  ) {
+    try {
+      setDefaultMessagesRequesting(true);
+      const messages = await (typeof defaultMessages === 'function'
+        ? defaultMessages()
+        : Promise.resolve(defaultMessages));
+
+      // 检查是否已被销毁，避免竞态条件
+      if (!this.isDestroyed) {
+        this.setMessagesInternal(messages, false);
+      }
+      setDefaultMessagesRequesting(false);
+    } catch (error) {
+      // 错误处理：保持空数组状态，避免应用崩溃
+      console.warn('Failed to initialize messages:', error);
+      if (!this.isDestroyed) {
+        this.setMessagesInternal([], false);
+      }
+      setDefaultMessagesRequesting(false);
     }
   }
 
@@ -145,6 +179,7 @@ export class ChatMessagesStore<T extends { id: number | string }> {
    * Should be called when the component unmounts or the store is disposed.
    */
   destroy = () => {
+    this.isDestroyed = true;
     if (this.throttleTimer) {
       clearTimeout(this.throttleTimer);
       this.throttleTimer = null;
@@ -154,19 +189,22 @@ export class ChatMessagesStore<T extends { id: number | string }> {
   };
 }
 
-type Getter<T> = () => T;
-
 export function useChatStore<T extends { id: number | string }>(
-  defaultValue: T[] | Getter<T[]>,
+  defaultValue: () => Promise<T[]>,
   conversationKey: ConversationKey,
 ) {
+  const [isDefaultMessagesRequesting, setDefaultMessagesRequesting] = useState<boolean>(false);
+
   const createStore = () => {
     if (chatMessagesStoreHelper.get(conversationKey)) {
       return chatMessagesStoreHelper.get(conversationKey) as ChatMessagesStore<T>;
     }
-    const messages =
-      typeof defaultValue === 'function' ? (defaultValue as Getter<T[]>)() : defaultValue;
-    const store = new ChatMessagesStore<T>(messages || [], conversationKey);
+
+    const store = new ChatMessagesStore<T>(
+      defaultValue,
+      setDefaultMessagesRequesting,
+      conversationKey,
+    );
     return store;
   };
   const [store, setStore] = useState(createStore);
@@ -179,6 +217,7 @@ export function useChatStore<T extends { id: number | string }>(
 
   return {
     messages,
+    isDefaultMessagesRequesting,
     addMessage: store.addMessage,
     removeMessage: store.removeMessage,
     setMessage: store.setMessage,
