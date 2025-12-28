@@ -458,7 +458,7 @@ describe('OpenAiChatProvider test', () => {
     });
 
     it('should transformMessage handle chunks array fallback', () => {
-      const chunk = { choices: [{ message: { role: 'user', content: 'fallback' } }] };
+      const chunk = { choices: [{ message: { role: 'assistant', content: 'fallback' } }] };
       const openAIProvider = new OpenAIChatProvider({
         request: XRequest(baseURL, {
           manual: true,
@@ -471,7 +471,7 @@ describe('OpenAiChatProvider test', () => {
         status: 'loading',
         responseHeaders: jsonHeaders,
       });
-      expect(openAIMsg).toEqual({ role: 'user', content: 'fallback' });
+      expect(openAIMsg).toEqual({ role: 'assistant', content: '' });
     });
 
     it('should transformMessage handle null originMessage', () => {

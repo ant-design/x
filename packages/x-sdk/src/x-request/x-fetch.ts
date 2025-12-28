@@ -41,7 +41,11 @@ const XFetch = async <Input, Output>(
   try {
     response = await fetchFn(...fetchArgs);
   } catch (error) {
-    throw new Error(`Fetch failed ${error}`);
+    if (error instanceof Error) {
+      error.message = `Fetch failed: ${error.message}`;
+      throw error;
+    }
+    throw new Error(`Fetch failed: ${String(error)}`);
   }
 
   /** ---------------------- response middleware ---------------------- */
