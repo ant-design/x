@@ -37,16 +37,7 @@ const XFetch = async <Input, Output>(
   }
 
   /** ---------------------- fetch ---------------------- */
-  let response;
-  try {
-    response = await fetchFn(...fetchArgs);
-  } catch (error) {
-    if (error instanceof Error) {
-      error.message = `Fetch failed: ${error.message}`;
-      throw error;
-    }
-    throw new Error(`Fetch failed: ${String(error)}`);
-  }
+  let response = await fetchFn(...fetchArgs);
 
   /** ---------------------- response middleware ---------------------- */
   if (typeof middlewares.onResponse === 'function') {

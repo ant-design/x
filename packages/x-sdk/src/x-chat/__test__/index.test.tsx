@@ -199,7 +199,7 @@ describe('useXChat', () => {
         {
           messageInfo: undefined,
           errorInfo: undefined,
-          error: new Error('Fetch failed: failed'),
+          error: new Error('failed'),
           messages: [{ query: 'little' }],
         },
       );
