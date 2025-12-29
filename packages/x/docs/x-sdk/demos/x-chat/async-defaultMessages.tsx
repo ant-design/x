@@ -9,7 +9,6 @@ import {
   type XModelResponse,
   XRequest,
 } from '@ant-design/x-sdk';
-import XFetch from '@ant-design/x-sdk/es/x-request/x-fetch';
 import { Button, Divider, Flex, Tooltip } from 'antd';
 import React from 'react';
 
@@ -97,7 +96,7 @@ const App = () => {
   // 获取历史消息列表：从服务器加载历史聊天记录
   // Get history message list: load historical chat records from server
   const getHistoryMessageList = async () => {
-    const response = await XFetch(
+    const response = await fetch(
       `https://api.x.ant.design/api/history_messages?isZH_CN=${typeof location !== 'undefined' && location.pathname.endsWith('-cn')}`,
       {
         method: 'GET',

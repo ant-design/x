@@ -11,7 +11,6 @@ import {
   type XModelResponse,
   XRequest,
 } from '@ant-design/x-sdk';
-import XFetch from '@ant-design/x-sdk/es/x-request/x-fetch';
 import { Flex, GetRef, theme } from 'antd';
 
 import React, { useEffect, useRef } from 'react';
@@ -104,7 +103,7 @@ const App = () => {
   const getHistoryMessageList: (info: {
     conversationKey?: string;
   }) => Promise<DefaultMessageInfo<XModelMessage>[]> = async ({ conversationKey }) => {
-    const response = await XFetch(
+    const response = await fetch(
       `https://api.x.ant.design/api/history_messages?isZH_CN=${typeof location !== 'undefined' && location.pathname.endsWith('-cn')}&sessionId=${conversationKey}`,
       {
         method: 'GET',
