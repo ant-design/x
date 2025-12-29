@@ -85,7 +85,7 @@ describe('useXChat', () => {
     const { container } = render(
       <Demo
         provider={provider}
-        defaultMessages={[
+        defaultMessages={() => [
           {
             message: 'default',
           },
