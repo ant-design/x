@@ -162,7 +162,7 @@ const App = () => {
       {/* 聊天区域：右侧显示当前会话的聊天内容 */}
       {/* Chat area: display chat content for current conversation on the right */}
       <Flex style={{ width: 500 }} vertical gap="small" align="flex-start">
-        <div style={{ width: '100%', height: 300, display: 'flex', flexDirection: 'column' }}>
+        <div style={{ width: '100%', height: 350, display: 'flex', flexDirection: 'column' }}>
           <Bubble.List
             items={messages?.map((i) => ({
               ...i.message,
