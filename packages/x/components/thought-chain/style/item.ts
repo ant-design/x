@@ -100,6 +100,17 @@ const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (
         display: 'inline-block',
         whiteSpace: 'break-spaces',
       },
+      [`${itemCls}-disabled`]: {
+        cursor: 'not-allowed',
+        background: token.colorBgContainerDisabled,
+        [`& ${componentCls}-creation-label, ${componentCls}-creation-icon`]: {
+          color: token.colorTextDisabled,
+        },
+        [`& ${componentCls}-creation-label-shortcut-keys`]: {
+          color: token.colorTextDisabled,
+          border: `${unit(token.lineWidth)} ${token.lineType}, ${token.colorBgContainerDisabled}`,
+        },
+      },
       [`${componentCls}-motion-blink`]: {
         [`${itemCls}-description`]: {
           color: token.itemMotionDescription,

@@ -71,6 +71,7 @@ export interface ThoughtChainItemProps
   classNames?: Partial<Record<SemanticType, string>>;
   style?: React.CSSProperties;
   styles?: Partial<Record<SemanticType, React.CSSProperties>>;
+  disabled?: boolean;
 }
 
 type ItemRef = {
@@ -93,6 +94,7 @@ const Item = React.forwardRef<ItemRef, ThoughtChainItemProps>((props, ref) => {
     status,
     onClick,
     description,
+    disabled,
     ...restProps
   } = props;
 
@@ -139,6 +141,7 @@ const Item = React.forwardRef<ItemRef, ThoughtChainItemProps>((props, ref) => {
           [`${itemCls}-click`]: onClick,
           [`${itemCls}-error`]: status === THOUGHT_CHAIN_ITEM_STATUS.ERROR,
           [`${itemCls}-rtl`]: direction === 'rtl',
+          [`${itemCls}-disabled`]: disabled,
         },
       )}
       {...domProps}

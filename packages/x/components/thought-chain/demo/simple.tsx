@@ -82,5 +82,22 @@ export default () => (
         description="Route Information"
       />
     </Flex>
+    <Flex gap="small" wrap align="center">
+      <Text>disabled:</Text>
+      <ThoughtChain.Item disabled variant="solid" icon={<SunOutlined />} title="Task Completed" />
+      <ThoughtChain.Item
+        disabled
+        variant="outlined"
+        icon={<SunOutlined />}
+        title="Task Completed"
+      />
+      <ThoughtChain.Item
+        disabled
+        variant="text"
+        icon={<SunOutlined />}
+        title="Task Completed"
+        description="Route Information"
+      />
+    </Flex>
   </Flex>
 );
