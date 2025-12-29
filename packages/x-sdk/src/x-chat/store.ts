@@ -20,15 +20,19 @@ export const chatMessagesStoreHelper = {
 };
 
 export class ChatMessagesStore<T extends { id: number | string }> {
-  private messages: T[] = [];
   private listeners: (() => void)[] = [];
   private conversationKey: ConversationKey | undefined;
-
+  private snapshotResult: {
+    messages: T[];
+    isDefaultMessagesRequesting: boolean;
+  } = {
+    messages: [],
+    isDefaultMessagesRequesting: false,
+  };
   // Throttle state for preventing "Maximum update depth exceeded" during streaming
   private throttleTimer: ReturnType<typeof setTimeout> | null = null;
   private pendingEmit = false;
   private readonly throttleInterval: number = 50;
-  public isDefaultMessagesRequesting = false;
   // 竞态条件保护
   private isDestroyed = false;
 
@@ -57,15 +61,11 @@ export class ChatMessagesStore<T extends { id: number | string }> {
     }
   }
 
-  constructor(
-    defaultMessages: () => Promise<T[]>,
-    setDefaultMessagesRequesting: (defaultMessagesRequesting: boolean) => void,
-    conversationKey?: ConversationKey,
-  ) {
+  constructor(defaultMessages: () => Promise<T[]>, conversationKey?: ConversationKey) {
     // 初始化消息，处理同步和异步情况
     this.initializeMessages(defaultMessages, (value) => {
-      this.isDefaultMessagesRequesting = value;
-      setDefaultMessagesRequesting(value);
+      this.setSnapshotResult('isDefaultMessagesRequesting', value);
+      this.emitListeners();
     });
 
     // 注册到全局存储助手
@@ -74,6 +74,7 @@ export class ChatMessagesStore<T extends { id: number | string }> {
       chatMessagesStoreHelper.set(this.conversationKey, this);
     }
   }
+
   private async initializeMessages(
     defaultMessages: () => Promise<T[]>,
     setDefaultMessagesRequesting: (defaultValueLoading: boolean) => void,
@@ -96,15 +97,24 @@ export class ChatMessagesStore<T extends { id: number | string }> {
       setDefaultMessagesRequesting(false);
     }
   }
-
+  private setSnapshotResult = <K extends keyof typeof this.snapshotResult>(
+    key: K,
+    value: (typeof this.snapshotResult)[K],
+  ) => {
+    this.snapshotResult = {
+      ...this.snapshotResult,
+      [key]: value,
+    };
+  };
   private setMessagesInternal = (messages: T[] | ((ori: T[]) => T[]), throttle = true) => {
     let list: T[];
     if (typeof messages === 'function') {
-      list = messages(this.messages);
+      list = messages(this.snapshotResult.messages);
     } else {
       list = messages as T[];
     }
-    this.messages = [...list];
+    this.setSnapshotResult('messages', list);
+
     if (throttle) {
       this.throttledEmitListeners();
     } else {
@@ -118,17 +128,17 @@ export class ChatMessagesStore<T extends { id: number | string }> {
   };
 
   getMessages = () => {
-    return this.messages;
+    return this.snapshotResult.messages;
   };
 
   getMessage = (id: string | number) => {
-    return this.messages.find((item) => item.id === id);
+    return this.getMessages().find((item) => item.id === id);
   };
 
   addMessage = (message: T) => {
     const exist = this.getMessage(message.id);
     if (!exist) {
-      this.setMessages([...this.messages, message]);
+      this.setMessages([...this.snapshotResult.messages, message]);
       return true;
     }
     return false;
@@ -139,24 +149,24 @@ export class ChatMessagesStore<T extends { id: number | string }> {
     if (originMessage) {
       const mergeMessage = typeof message === 'function' ? message(originMessage) : message;
       Object.assign(originMessage, mergeMessage);
-      this.setMessages([...this.messages]);
+      this.setMessages([...this.snapshotResult.messages]);
       return true;
     }
     return false;
   };
 
   removeMessage = (id: string) => {
-    const index = this.messages.findIndex((item) => item.id === id);
+    const index = this.getMessages().findIndex((item) => item.id === id);
     if (index !== -1) {
-      this.messages.splice(index, 1);
-      this.setMessages([...this.messages]);
+      this.snapshotResult.messages.splice(index, 1);
+      this.setMessages([...this.getMessages()]);
       return true;
     }
     return false;
   };
 
   getSnapshot = () => {
-    return this.messages;
+    return this.snapshotResult;
   };
 
   subscribe = (callback: () => void) => {
@@ -194,18 +204,12 @@ export function useChatStore<T extends { id: number | string }>(
   defaultValue: () => Promise<T[]>,
   conversationKey: ConversationKey,
 ) {
-  const [isDefaultMessagesRequesting, setDefaultMessagesRequesting] = useState<boolean>(false);
-
   const createStore = () => {
     if (chatMessagesStoreHelper.get(conversationKey)) {
       return chatMessagesStoreHelper.get(conversationKey) as ChatMessagesStore<T>;
     }
 
-    const store = new ChatMessagesStore<T>(
-      defaultValue,
-      setDefaultMessagesRequesting,
-      conversationKey,
-    );
+    const store = new ChatMessagesStore<T>(defaultValue, conversationKey);
     return store;
   };
   const [store, setStore] = useState(createStore);
@@ -214,11 +218,15 @@ export function useChatStore<T extends { id: number | string }>(
     setStore(createStore());
   }, [conversationKey]);
 
-  const messages = useSyncExternalStore(store.subscribe, store.getSnapshot, store.getSnapshot);
+  const { messages, isDefaultMessagesRequesting } = useSyncExternalStore(
+    store.subscribe,
+    store.getSnapshot,
+    store.getSnapshot,
+  );
 
   return {
     messages,
-    isDefaultMessagesRequesting: store.isDefaultMessagesRequesting ?? isDefaultMessagesRequesting,
+    isDefaultMessagesRequesting,
     addMessage: store.addMessage,
     removeMessage: store.removeMessage,
     setMessage: store.setMessage,
