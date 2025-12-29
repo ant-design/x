@@ -4,10 +4,7 @@ describe('ChatMessagesStore', () => {
   let store: ChatMessagesStore<{ id: string; message: string }>;
 
   beforeEach(() => {
-    store = new ChatMessagesStore<{ id: string; message: string }>(
-      async () => [],
-      () => {},
-    );
+    store = new ChatMessagesStore<{ id: string; message: string }>(async () => []);
     jest.useFakeTimers();
   });
 
@@ -140,7 +137,6 @@ describe('ChatMessagesStore', () => {
 
   describe('constructor and initialization', () => {
     it('should handle defaultMessages error gracefully', async () => {
-      const setDefaultValueLoading = jest.fn();
       const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation();
       const error = new Error('Failed to fetch messages');
 
@@ -149,24 +145,13 @@ describe('ChatMessagesStore', () => {
         return Promise.reject(error);
       };
 
-      const testStore = new ChatMessagesStore<{ id: string; message: string }>(
-        defaultMessages,
-        setDefaultValueLoading,
-      );
-
-      // 验证构造函数中立即调用了 setDefaultValueLoading(true)
-      expect(setDefaultValueLoading).toHaveBeenCalledWith(true);
-      expect(setDefaultValueLoading).toHaveBeenCalledTimes(1);
+      const testStore = new ChatMessagesStore<{ id: string; message: string }>(defaultMessages);
 
       // 等待微任务队列，让 Promise 拒绝被处理
       await Promise.resolve();
 
       // 验证错误被捕获并记录到控制台
       expect(consoleWarnSpy).toHaveBeenCalledWith('Failed to initialize messages:', error);
-
-      // 验证 setDefaultValueLoading(false) 被调用（在 finally 块中）
-      expect(setDefaultValueLoading).toHaveBeenCalledWith(false);
-      expect(setDefaultValueLoading).toHaveBeenCalledTimes(2);
 
       // 验证消息数组为空（错误后的回退状态）
       expect(testStore.getMessages()).toEqual([]);
@@ -177,7 +162,6 @@ describe('ChatMessagesStore', () => {
     });
 
     it('should handle defaultMessages error when store is destroyed before completion', async () => {
-      const setDefaultValueLoading = jest.fn();
       const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation();
       let rejectPromise: (error: Error) => void;
 
@@ -188,14 +172,7 @@ describe('ChatMessagesStore', () => {
         });
       };
 
-      const testStore = new ChatMessagesStore<{ id: string; message: string }>(
-        defaultMessages,
-        setDefaultValueLoading,
-      );
-
-      // 验证构造函数中立即调用了 setDefaultValueLoading(true)
-      expect(setDefaultValueLoading).toHaveBeenCalledWith(true);
-      expect(setDefaultValueLoading).toHaveBeenCalledTimes(1);
+      const testStore = new ChatMessagesStore<{ id: string; message: string }>(defaultMessages);
 
       // 立即销毁 store（在 Promise 解决前）
       testStore.destroy();
@@ -211,12 +188,6 @@ describe('ChatMessagesStore', () => {
         'Failed to initialize messages:',
         expect.any(Error),
       );
-
-      // 验证 setDefaultValueLoading 被正确调用（true 和 false 各一次）
-      expect(setDefaultValueLoading).toHaveBeenCalledWith(true);
-      expect(setDefaultValueLoading).toHaveBeenCalledWith(false);
-      expect(setDefaultValueLoading).toHaveBeenCalledTimes(2);
-
       // 清理
       consoleWarnSpy.mockRestore();
     });
