@@ -72,14 +72,12 @@ export class ChatMessagesStore<T extends { id: number | string }> {
     }
   }
   private async initializeMessages(
-    defaultMessages: T[] | (() => Promise<T[]>),
+    defaultMessages: () => Promise<T[]>,
     setDefaultMessagesRequesting: (defaultValueLoading: boolean) => void,
   ) {
     try {
       setDefaultMessagesRequesting(true);
-      const messages = await (typeof defaultMessages === 'function'
-        ? defaultMessages()
-        : Promise.resolve(defaultMessages));
+      const messages = await defaultMessages();
 
       // 检查是否已被销毁，避免竞态条件
       if (!this.isDestroyed) {
