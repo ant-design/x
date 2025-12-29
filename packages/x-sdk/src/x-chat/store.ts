@@ -28,7 +28,7 @@ export class ChatMessagesStore<T extends { id: number | string }> {
   private throttleTimer: ReturnType<typeof setTimeout> | null = null;
   private pendingEmit = false;
   private readonly throttleInterval: number = 50;
-
+  public isDefaultMessagesRequesting = false;
   // 竞态条件保护
   private isDestroyed = false;
 
@@ -59,11 +59,14 @@ export class ChatMessagesStore<T extends { id: number | string }> {
 
   constructor(
     defaultMessages: () => Promise<T[]>,
-    setDefaultValueLoading: (defaultValueLoading: boolean) => void,
+    setDefaultMessagesRequesting: (defaultMessagesRequesting: boolean) => void,
     conversationKey?: ConversationKey,
   ) {
     // 初始化消息，处理同步和异步情况
-    this.initializeMessages(defaultMessages, setDefaultValueLoading);
+    this.initializeMessages(defaultMessages, (value) => {
+      this.isDefaultMessagesRequesting = value;
+      setDefaultMessagesRequesting(value);
+    });
 
     // 注册到全局存储助手
     if (conversationKey) {
@@ -215,7 +218,7 @@ export function useChatStore<T extends { id: number | string }>(
 
   return {
     messages,
-    isDefaultMessagesRequesting,
+    isDefaultMessagesRequesting: store.isDefaultMessagesRequesting ?? isDefaultMessagesRequesting,
     addMessage: store.addMessage,
     removeMessage: store.removeMessage,
     setMessage: store.setMessage,
