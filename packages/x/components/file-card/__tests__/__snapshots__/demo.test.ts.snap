@@ -1041,6 +1041,40 @@ exports[`renders components/file-card/demo/image-loading.tsx correctly 1`] = `
       style="width:200px"
     >
       <div
+        class="ant-image ant-file-card-image-img css-var-_R_0_ ant-image-css-var"
+        style="width:200px"
+      >
+        <img
+          alt="image-file.png"
+          class="ant-image-img"
+          width="200"
+        />
+        <div
+          aria-hidden="true"
+          class="ant-image-placeholder"
+        >
+          <div
+            class="ant-file-card css-var-_R_0_"
+          >
+            <div
+              class="ant-file-card-image"
+            >
+              <div
+                class="ant-image ant-file-card-image-img css-var-_R_0_ ant-image-css-var"
+              >
+                <img
+                  alt="placeholder image"
+                  class="ant-image-img"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-image-cover ant-image-cover-center"
+        />
+      </div>
+      <div
         class="ant-file-card-image-loading"
         style="width:200px"
       >
@@ -1119,6 +1153,38 @@ exports[`renders components/file-card/demo/image-loading.tsx correctly 1`] = `
     <div
       class="ant-file-card-image ant-file-card-loading"
     >
+      <div
+        class="ant-image ant-file-card-image-img css-var-_R_0_ ant-image-css-var"
+      >
+        <img
+          alt="image-file.png"
+          class="ant-image-img"
+        />
+        <div
+          aria-hidden="true"
+          class="ant-image-placeholder"
+        >
+          <div
+            class="ant-file-card css-var-_R_0_"
+          >
+            <div
+              class="ant-file-card-image"
+            >
+              <div
+                class="ant-image ant-file-card-image-img css-var-_R_0_ ant-image-css-var"
+              >
+                <img
+                  alt="placeholder image"
+                  class="ant-image-img"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-image-cover ant-image-cover-center"
+        />
+      </div>
       <div
         class="ant-file-card-image-loading"
       >
