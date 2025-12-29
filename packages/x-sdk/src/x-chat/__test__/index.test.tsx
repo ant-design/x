@@ -186,12 +186,15 @@ describe('useXChat', () => {
         }),
       });
       const requestFallback = jest.fn(async () => 'light');
-      const { container } = render(<Demo provider={provider} requestFallback={requestFallback} />);
-
+      const ref = React.createRef<any>();
+      const { container } = render(
+        <Demo ref={ref} provider={provider} requestFallback={requestFallback} />,
+      );
+      expect(ref.current).not.toBeNull();
       await waitFakeTimer();
 
       fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
-
+      ref.current.abort();
       await waitFakeTimer();
 
       expect(requestFallback).toHaveBeenCalledWith(
