@@ -76,7 +76,7 @@ describe('useXChat', () => {
     return expect.objectContaining(obj);
   }
 
-  it('defaultMessages', () => {
+  it('defaultMessages', async () => {
     const provider = new DefaultChatProvider<string, any, any>({
       request: XRequest('http://localhost:8000/', {
         manual: true,
@@ -92,7 +92,7 @@ describe('useXChat', () => {
         ]}
       />,
     );
-
+    await waitFakeTimer();
     expect(getMessages(container)).toEqual([
       {
         id: 'default_0',
@@ -122,7 +122,7 @@ describe('useXChat', () => {
       ]);
     });
 
-    it('callback', () => {
+    it('callback', async () => {
       const requestPlaceholder = jest.fn(() => 'light');
       const transformStream = new TransformStream();
       const provider = new DefaultChatProvider<ChatInput, any, any>({
@@ -138,7 +138,7 @@ describe('useXChat', () => {
       const { container } = render(
         <Demo provider={provider} requestPlaceholder={requestPlaceholder} />,
       );
-
+      await waitFakeTimer();
       fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
 
       expect(requestPlaceholder).toHaveBeenCalledWith(
@@ -167,8 +167,9 @@ describe('useXChat', () => {
       });
       const { container } = render(<Demo provider={provider} requestFallback="bamboo" />);
 
+      await waitFakeTimer();
       fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
-      await sleep(1000);
+      await waitFakeTimer();
       expect(getMessages(container)).toEqual([
         expectMessage({ query: 'little' }, 'local'),
         expectMessage('bamboo', 'error'),
@@ -187,15 +188,18 @@ describe('useXChat', () => {
       const requestFallback = jest.fn(async () => 'light');
       const { container } = render(<Demo provider={provider} requestFallback={requestFallback} />);
 
+      await waitFakeTimer();
+
       fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
 
-      await sleep(1000);
+      await waitFakeTimer();
 
       expect(requestFallback).toHaveBeenCalledWith(
         { query: 'little' },
         {
-          message: undefined,
-          error: new Error('failed'),
+          messageInfo: undefined,
+          errorInfo: undefined,
+          error: new Error('Fetch failed: failed'),
           messages: [{ query: 'little' }],
         },
       );
@@ -220,6 +224,7 @@ describe('useXChat', () => {
       />,
     );
 
+    await waitFakeTimer();
     fireEvent.change(container.querySelector('input')!, { target: { value: 'light' } });
     await waitFakeTimer();
 
@@ -229,13 +234,12 @@ describe('useXChat', () => {
     ]);
   });
 
-  it('should throw an error if onRequest,onReload,abort is called without an agent', () => {
+  it('should throw an error if onRequest,onReload,abort is called without an agent', async () => {
     const { result } = renderHook(() =>
       useXChat({
         defaultMessages: [{ message: 'Hello' }],
       }),
     );
-
     expect(() => result.current?.onRequest({ query: 'Hello' })).toThrow('provider is required');
     expect(() =>
       result.current?.onReload(
@@ -257,9 +261,9 @@ describe('useXChat', () => {
         defaultMessages: [{ message: 'Hello' }],
       }),
     );
+    await sleep(100);
     result.current?.setMessage('default_0', { message: 'Hello2', extraInfo: { feedback: 'like' } });
     result.current?.setMessage('default_1', { message: 'Hello3' });
-    await sleep(100);
     expect(result.current?.messages.length).toBe(1);
     expect(result.current?.messages[0].message).toEqual('Hello2');
   });
@@ -289,7 +293,7 @@ describe('useXChat', () => {
     const { container } = render(
       <Demo ref={ref} provider={provider} requestPlaceholder="bamboo placeholder" />,
     );
-
+    await sleep(200);
     fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
     expect(ref.current?.isRequesting).toBe(true);
     await sleep(200);
