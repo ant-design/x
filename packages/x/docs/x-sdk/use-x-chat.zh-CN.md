@@ -83,6 +83,7 @@ type DefaultMessagesType = {
 | onRequest | 添加一条 Message，并且触发请求 | (requestParams: Partial\<Input\>,opts: { extra: AnyObject }) => void | - | - |
 | setMessages | 直接修改 messages，不会触发请求 | (messages: Partial\<MessageInfo\<ChatMessage\>\>[]) => void | - | - |
 | setMessage | 直接修改单条 message，不会触发请求 | (id: string \| number, info: Partial\<MessageInfo\<ChatMessage\>\>) => void | - | - |
+| removeMessage | 删除单条 message，不会触发请求 | (id: string \| number) => void | - | - |
 
 #### MessageInfo
 

@@ -114,18 +114,24 @@ export default function useXChat<
     }
   }, [originalConversationKey]);
 
-  const { messages, isDefaultMessagesRequesting, setMessages, getMessages, setMessage } =
-    useChatStore<MessageInfo<ChatMessage>>(async () => {
-      const messageList =
-        typeof defaultMessages === 'function'
-          ? await defaultMessages({ conversationKey: originalConversationKey })
-          : defaultMessages;
-      return (messageList || []).map((info, index) => ({
-        id: `default_${index}`,
-        status: 'local',
-        ...info,
-      }));
-    }, conversationKey);
+  const {
+    messages,
+    isDefaultMessagesRequesting,
+    removeMessage,
+    setMessages,
+    getMessages,
+    setMessage,
+  } = useChatStore<MessageInfo<ChatMessage>>(async () => {
+    const messageList =
+      typeof defaultMessages === 'function'
+        ? await defaultMessages({ conversationKey: originalConversationKey })
+        : defaultMessages;
+    return (messageList || []).map((info, index) => ({
+      id: `default_${index}`,
+      status: 'local',
+      ...info,
+    }));
+  }, conversationKey);
 
   const createMessage = (message: ChatMessage, status: MessageStatus, extraInfo?: AnyObject) => {
     const msg: MessageInfo<ChatMessage> = {
@@ -404,6 +410,7 @@ export default function useXChat<
     messages,
     parsedMessages,
     setMessages,
+    removeMessage,
     setMessage,
     abort: () => {
       if (!provider) {

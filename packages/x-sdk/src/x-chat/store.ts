@@ -155,7 +155,7 @@ export class ChatMessagesStore<T extends { id: number | string }> {
     return false;
   };
 
-  removeMessage = (id: string) => {
+  removeMessage = (id: string | number) => {
     const index = this.getMessages().findIndex((item) => item.id === id);
     if (index !== -1) {
       this.snapshotResult.messages.splice(index, 1);
