@@ -55,7 +55,7 @@ export interface AttachmentsRef {
   nativeElement: HTMLDivElement | null;
   fileNativeElement: HTMLInputElement | null;
   upload: (file: File) => void;
-  select: (options: { accept?: string; multiple?: boolean }) => void;
+  select: (options?: { accept?: string; multiple?: boolean }) => void;
 }
 
 function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
@@ -110,11 +110,11 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
         fileInput.dispatchEvent(new Event('change', { bubbles: true }));
       }
     },
-    select: ({ accept, multiple = false }) => {
+    select: (options) => {
       const fileInput = uploadRef.current?.nativeElement?.querySelector('input[type="file"]');
       if (fileInput) {
-        fileInput.multiple = multiple;
-        fileInput.accept = accept || props.accept;
+        fileInput.multiple = options?.multiple ?? false;
+        fileInput.accept = options?.accept || props.accept;
         fileInput.click();
       }
     },
