@@ -1,4 +1,4 @@
-import { useEvent } from 'rc-util';
+import { useEvent } from '@rc-component/util';
 import React from 'react';
 import type { SuggestionItem } from '.';
 

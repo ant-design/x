@@ -1,6 +1,7 @@
 /* eslint-disable compat/compat */
 /* eslint-disable no-console, no-await-in-loop, import/no-extraneous-dependencies, no-restricted-syntax */
 
+import blazediff from '@blazediff/core';
 import chalk from 'chalk';
 import { assert } from 'console';
 import fs from 'fs';
@@ -9,7 +10,6 @@ import difference from 'lodash/difference';
 import minimist from 'minimist';
 import os from 'os';
 import path from 'path';
-import pixelmatch from 'pixelmatch';
 import { PNG } from 'pngjs';
 import sharp from 'sharp';
 import simpleGit from 'simple-git';
@@ -63,7 +63,7 @@ const compareScreenshots = async (
 
   const diffPng = new PNG({ width: targetWidth, height: targetHeight });
 
-  const mismatchedPixels = pixelmatch(
+  const mismatchedPixels = blazediff(
     resizedBasePng.data,
     resizedCurrentPng.data,
     diffPng.data,

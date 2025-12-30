@@ -1,8 +1,8 @@
 import type { ButtonProps } from 'antd';
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import * as React from 'react';
-import StopLoadingIcon from '../StopLoading';
-import ActionButton, { ActionButtonContext } from './ActionButton';
+import ActionButton, { ActionButtonContext } from '../ActionButton';
+import StopLoadingIcon from './StopLoading';
 
 function LoadingButton(props: ButtonProps, ref: React.Ref<HTMLButtonElement>) {
   const { prefixCls } = React.useContext(ActionButtonContext);
@@ -15,7 +15,7 @@ function LoadingButton(props: ButtonProps, ref: React.Ref<HTMLButtonElement>) {
       variant="text"
       shape="circle"
       {...props}
-      className={classNames(className, `${prefixCls}-loading-button`)}
+      className={clsx(className, `${prefixCls}-loading-button`)}
       action="onCancel"
       ref={ref}
     />

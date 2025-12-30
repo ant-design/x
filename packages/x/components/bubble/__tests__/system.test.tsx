@@ -3,8 +3,8 @@ import React from 'react';
 import SystemBubble from '../System';
 
 describe('Bubble.System', () => {
-  describe('基础功能', () => {
-    it('应该正确渲染基本的 SystemBubble 组件', () => {
+  describe('Basic functionality', () => {
+    it('should correctly render basic SystemBubble component', () => {
       const { container } = render(<SystemBubble content="系统消息" />);
 
       const bubbleElement = container.querySelector('.ant-bubble');
@@ -16,7 +16,7 @@ describe('Bubble.System', () => {
       expect(contentElement).toHaveTextContent('系统消息');
     });
 
-    it('应该支持空内容', () => {
+    it('should support empty content', () => {
       const { container } = render(<SystemBubble content="" />);
 
       const contentElement = container.querySelector('.ant-bubble-content');
@@ -24,7 +24,7 @@ describe('Bubble.System', () => {
       expect(contentElement).toHaveTextContent('');
     });
 
-    it('应该支持自定义 class 前缀', () => {
+    it('should support custom class prefix', () => {
       const { container } = render(<SystemBubble prefixCls="custom-bubble" content="测试内容" />);
 
       const bubbleElement = container.querySelector('.custom-bubble');
@@ -32,8 +32,8 @@ describe('Bubble.System', () => {
     });
   });
 
-  describe('变体和形状', () => {
-    it('应该支持不同的 variant 值', () => {
+  describe('Variants and shapes', () => {
+    it('should support different variant values', () => {
       const { container, rerender } = render(<SystemBubble content="测试" variant="shadow" />);
 
       let contentElement = container.querySelector('.ant-bubble-content');
@@ -52,7 +52,7 @@ describe('Bubble.System', () => {
       expect(contentElement).toHaveClass('ant-bubble-content-borderless');
     });
 
-    it('应该支持不同的 shape 值', () => {
+    it('should support different shape values', () => {
       const { container, rerender } = render(<SystemBubble content="测试" shape="default" />);
 
       let contentElement = container.querySelector('.ant-bubble-content');
@@ -67,7 +67,7 @@ describe('Bubble.System', () => {
       expect(contentElement).toHaveClass('ant-bubble-content-corner');
     });
 
-    it('应该使用默认的 shadow 变体', () => {
+    it('should use default shadow variant', () => {
       const { container } = render(<SystemBubble content="测试" />);
 
       const contentElement = container.querySelector('.ant-bubble-content');
@@ -75,8 +75,8 @@ describe('Bubble.System', () => {
     });
   });
 
-  describe('内容类型支持', () => {
-    it('应该支持 React 节点内容', () => {
+  describe('Content type support', () => {
+    it('should support React node content', () => {
       const content = <div className="custom-content">自定义内容</div>;
       const { container } = render(<SystemBubble content={content as any} />);
 
@@ -85,8 +85,8 @@ describe('Bubble.System', () => {
     });
   });
 
-  describe('样式和类名', () => {
-    it('应该支持自定义 className', () => {
+  describe('Styles and class names', () => {
+    it('should support custom className', () => {
       const { container } = render(<SystemBubble content="测试" className="custom-class" />);
 
       const bubbleElement = container.querySelector('.ant-bubble');
@@ -94,21 +94,21 @@ describe('Bubble.System', () => {
       expect(bubbleElement).toHaveClass('ant-bubble-system');
     });
 
-    it('应该支持自定义 style', () => {
+    it('should support custom style', () => {
       const { container } = render(<SystemBubble content="测试" style={{ padding: '10px' }} />);
 
       const bubbleElement = container.querySelector('.ant-bubble');
       expect(bubbleElement).toHaveStyle({ padding: '10px' });
     });
 
-    it('应该支持 rootClassName', () => {
+    it('should support rootClassName', () => {
       const { container } = render(<SystemBubble content="测试" rootClassName="root-class" />);
 
       const bubbleElement = container.querySelector('.ant-bubble');
       expect(bubbleElement).toHaveClass('root-class');
     });
 
-    it('应该支持 styles 属性', () => {
+    it('should support styles property', () => {
       const { container } = render(
         <SystemBubble content="测试" styles={{ content: { color: 'red' } }} />,
       );
@@ -117,7 +117,7 @@ describe('Bubble.System', () => {
       expect(contentElement).toBeInTheDocument();
     });
 
-    it('应该支持 classNames 属性', () => {
+    it('should support classNames property', () => {
       const { container } = render(
         <SystemBubble content="测试" classNames={{ content: 'custom-content-class' }} />,
       );

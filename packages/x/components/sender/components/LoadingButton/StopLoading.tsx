@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
-import { useLocale } from '../locale';
-import enUS from '../locale/en_US';
+import { useLocale } from '../../../locale';
+import enUS from '../../../locale/en_US';
 
 const StopLoadingIcon = memo((props: { className?: string }) => {
   const { className } = props;

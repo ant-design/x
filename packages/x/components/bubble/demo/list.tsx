@@ -11,8 +11,8 @@ import type { BubbleItemType, BubbleListProps } from '@ant-design/x';
 import { Actions, Bubble, FileCard, FileCardProps } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
 import type { GetRef } from 'antd';
-import { Avatar, Button, Flex, Space, Typography } from 'antd';
-import React, { useCallback, useEffect } from 'react';
+import { Avatar, Button, Flex, Space, Switch, Typography } from 'antd';
+import React, { useCallback, useEffect, useState } from 'react';
 
 const actionItems = [
   {
@@ -67,6 +67,8 @@ function useBubbleList(initialItems: BubbleItemType[] = []) {
 const App = () => {
   const listRef = React.useRef<GetRef<typeof Bubble.List>>(null);
   const [items, set, add, update] = useBubbleList();
+  const [enableLocScroll, setEnableLocScroll] = useState(true);
+  const [autoScroll, setAutoScroll] = useState(true);
 
   useEffect(() => {
     set([
@@ -130,8 +132,25 @@ const App = () => {
     [],
   );
 
+  const scrollTo: GetRef<typeof Bubble.List>['scrollTo'] = (option) => {
+    // 需要等待 Bubble 成功添加后再执行定位跳转，才能到达符合预期的位置
+    // setTimeout(() =>
+    listRef.current?.scrollTo({ ...option, behavior: 'smooth' });
+    // );
+  };
+
   return (
     <Flex vertical style={{ height: 720 }} gap={20}>
+      <Flex vertical gap="small">
+        <Space align="center">
+          <Switch value={autoScroll} onChange={(v) => setAutoScroll(v)} />
+          <span>启用 autoScroll / enabled autoScroll</span>
+        </Space>
+        <Space align="center">
+          <Switch value={enableLocScroll} onChange={(v) => setEnableLocScroll(v)} />
+          <span>定位到新气泡 / locate to new bubble</span>
+        </Space>
+      </Flex>
       <Flex gap="small">
         <Button
           type="primary"
@@ -139,6 +158,9 @@ const App = () => {
             const chatItems = items.filter((item) => item.role === 'ai' || item.role === 'user');
             const isAI = !!(chatItems.length % 2);
             add(genItem(isAI, { typing: { effect: 'fade-in', step: [20, 50] } }));
+            if (enableLocScroll) {
+              scrollTo({ top: 'bottom' });
+            }
           }}
         >
           Add Bubble
@@ -156,13 +178,19 @@ const App = () => {
                 </Typography>
               ),
             });
+            if (enableLocScroll) {
+              scrollTo({ top: 'bottom' });
+            }
           }}
         >
-          Add Markdown Msg
+          Add Markdown
         </Button>
         <Button
           onClick={() => {
             set([...items, { key: getKey(), role: 'divider', content: 'Divider' }]);
+            if (enableLocScroll) {
+              scrollTo({ top: 'bottom' });
+            }
           }}
         >
           Add Divider
@@ -170,6 +198,9 @@ const App = () => {
         <Button
           onClick={() => {
             set([...items, { key: getKey(), role: 'system', content: 'This is a system message' }]);
+            if (enableLocScroll) {
+              scrollTo({ top: 'bottom' });
+            }
           }}
         >
           Add System
@@ -178,12 +209,12 @@ const App = () => {
           onClick={() => {
             const item = genItem(false);
             set((pre) => [item, genItem(true), genItem(false), ...pre]);
-            setTimeout(() => {
-              listRef.current?.scrollTo({ key: item.key });
-            }, 0);
+            if (enableLocScroll) {
+              scrollTo({ top: 'top' });
+            }
           }}
         >
-          Add To Pre
+          Add To Top
         </Button>
         <Button
           onClick={() => {
@@ -199,12 +230,21 @@ const App = () => {
               // message bubble
               genItem(false),
             ]);
+            if (enableLocScroll) {
+              scrollTo({ top: 'bottom' });
+            }
           }}
         >
           Add With Ref
         </Button>
       </Flex>
-      <Bubble.List ref={listRef} role={memoRole} items={items} />
+      <Bubble.List
+        style={{ height: 620 }}
+        ref={listRef}
+        role={memoRole}
+        items={items}
+        autoScroll={autoScroll}
+      />
     </Flex>
   );
 };

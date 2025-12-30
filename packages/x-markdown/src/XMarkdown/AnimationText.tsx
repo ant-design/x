@@ -31,6 +31,7 @@ const AnimationText = React.memo<AnimationTextProps>((props) => {
   const animationStyle = useMemo(
     () => ({
       animation: `x-markdown-fade-in ${fadeDuration}ms ${easing} forwards`,
+      color: 'inherit',
     }),
     [fadeDuration, easing],
   );

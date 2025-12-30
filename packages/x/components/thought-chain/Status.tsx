@@ -4,7 +4,7 @@ import {
   LoadingOutlined,
   MinusCircleOutlined,
 } from '@ant-design/icons';
-import classnames from 'classnames';
+import { clsx } from 'clsx';
 import React from 'react';
 
 export enum THOUGHT_CHAIN_ITEM_STATUS {
@@ -79,7 +79,7 @@ const Status: React.FC<StatusProps> = (props) => {
   // ============================ Render ============================
   return (
     <div
-      className={classnames(statusCls, className, {
+      className={clsx(statusCls, className, {
         [`${statusCls}-${status}`]: status,
       })}
       style={style}

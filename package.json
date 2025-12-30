@@ -1,6 +1,6 @@
 {
   "name": "x-mono",
-  "version": "2.0.1",
+  "version": "2.1.1",
   "private": true,
   "scripts": {
     "presite": "npm run prestart --workspaces",
@@ -15,7 +15,7 @@
     "publish-version": "tsx ./scripts/synchronize-version.ts",
     "prepublishOnly": "tsx ./scripts/pre-publish.ts",
     "precompile": "npm run precompile --workspaces",
-    "prepare": "husky install",
+    "prepare": "husky",
     "size-limit": "size-limit",
     "lint": "npm run lint --workspaces",
     "tsc": "npm run tsc --workspaces",
@@ -29,22 +29,22 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@ant-design/tools": "^19.0.2",
+    "@ant-design/tools": "^19.1.0",
     "@biomejs/biome": "^2.0.5",
     "@codecov/webpack-plugin": "^1.4.0",
     "@madccc/duplicate-package-checker-webpack-plugin": "^1.0.0",
-    "@size-limit/file": "^11.1.5",
-    "antd": "^6.0.1",
+    "@size-limit/file": "^12.0.0",
+    "antd": "^6.1.1",
     "circular-dependency-plugin": "^5.2.2",
     "dekko": "^0.2.1",
-    "father": "^4.6.0",
+    "father": "^4.6.10",
     "gh-pages": "^6.3.0",
     "husky": "^9.1.6",
     "lint-staged": "^16.1.5",
     "marked-emoji": "^2.0.1",
     "prettier": "^3.3.3",
     "react-markdown": "^10.1.0",
-    "size-limit": "^11.1.5"
+    "size-limit": "^12.0.0"
   },
   "size-limit": [
     {

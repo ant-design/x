@@ -1,7 +1,7 @@
 import * as AntdIcons from '@ant-design/icons';
 import { App, Badge } from 'antd';
 import { createStyles } from 'antd-style';
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import React from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
@@ -106,7 +106,7 @@ const CopyableIcon: React.FC<CopyableIconProps> = (props) => {
   };
   return (
     <CopyToClipboard text={`<${name} />`} onCopy={onCopy}>
-      <li className={classNames(theme, styles.iconItem, { copied: justCopied === name })}>
+      <li className={clsx(theme, styles.iconItem, { copied: justCopied === name })}>
         {React.createElement(allIcons[name])}
         <span className={styles.anticonCls}>
           <Badge dot={isNew}>{name}</Badge>

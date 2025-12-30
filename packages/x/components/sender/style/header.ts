@@ -11,13 +11,12 @@ const genSenderHeaderStyle: GenerateStyle<SenderToken> = (token) => {
       [`&${headerCls}-rtl`]: {
         direction: 'rtl',
       },
-      [headerCls]: {
+      [`${headerCls}`]: {
         borderBottomWidth: token.lineWidth,
         borderBottomStyle: 'solid',
         borderBottomColor: token.colorBorderInput,
-
         // ======================== Header ========================
-        '&-header': {
+        [`${headerCls}-header`]: {
           background: token.colorFillAlter,
           fontSize: token.fontSize,
           lineHeight: token.lineHeight,
@@ -25,7 +24,6 @@ const genSenderHeaderStyle: GenerateStyle<SenderToken> = (token) => {
           paddingInlineStart: token.padding,
           paddingInlineEnd: token.paddingXS,
           display: 'flex',
-
           borderRadius: {
             _skip_check_: true,
             value: calc(token.borderRadius).mul(2).equal(),
@@ -39,24 +37,23 @@ const genSenderHeaderStyle: GenerateStyle<SenderToken> = (token) => {
         },
 
         // ======================= Content ========================
-        '&-content': {
+        [`${headerCls}-content`]: {
           padding: token.padding,
         },
+      },
+      // ======================== Motion ========================
+      [`${headerCls}-motion`]: {
+        transition: ['height', 'border']
+          .map((prop) => `${prop} ${token.motionDurationSlow}`)
+          .join(','),
+        overflow: 'hidden',
 
-        // ======================== Motion ========================
-        '&-motion': {
-          transition: ['height', 'border']
-            .map((prop) => `${prop} ${token.motionDurationSlow}`)
-            .join(','),
-          overflow: 'hidden',
+        '&-enter-start, &-leave-active': {
+          borderBottomColor: 'transparent',
+        },
 
-          '&-enter-start, &-leave-active': {
-            borderBottomColor: 'transparent',
-          },
-
-          '&-hidden': {
-            display: 'none',
-          },
+        '&-hidden': {
+          display: 'none',
         },
       },
     },

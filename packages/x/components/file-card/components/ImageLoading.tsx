@@ -1,5 +1,5 @@
 import { Flex, Skeleton, Spin } from 'antd';
-import classnames from 'classnames';
+import { clsx } from 'clsx';
 import React from 'react';
 import { FileCardProps } from '../FileCard';
 import ImageIcon from './ImageIcon';
@@ -25,7 +25,7 @@ const ImageLoading: React.FC<ImageLoadingProps> = (props) => {
     ...spinProps,
   };
   return (
-    <div className={classnames(`${prefixCls}-image-loading`, className)} style={style}>
+    <div className={clsx(`${prefixCls}-image-loading`, className)} style={style}>
       <Skeleton.Node
         styles={{
           root: {
@@ -37,11 +37,11 @@ const ImageLoading: React.FC<ImageLoadingProps> = (props) => {
             height: '100%',
           },
         }}
-        rootClassName={classnames(`${prefixCls}-image-skeleton`)}
+        rootClassName={clsx(`${prefixCls}-image-skeleton`)}
         active
       >
         <Flex
-          className={classnames(`${prefixCls}-image-spin`, {
+          className={clsx(`${prefixCls}-image-spin`, {
             [`${prefixCls}-image-spin-${mergeSinkProps.size}`]: mergeSinkProps.size,
           })}
           align="center"

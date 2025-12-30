@@ -1,4 +1,4 @@
-import useLayoutEffect from 'rc-util/es/hooks/useLayoutEffect';
+import useLayoutEffect from '@rc-component/util/es/hooks/useLayoutEffect';
 import React from 'react';
 import type { BubbleAnimationOption, BubbleProps } from '../interface';
 

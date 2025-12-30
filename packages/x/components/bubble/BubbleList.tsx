@@ -1,6 +1,6 @@
-import classnames from 'classnames';
-import omit from 'rc-util/es/omit';
-import pickAttrs from 'rc-util/es/pickAttrs';
+import omit from '@rc-component/util/es/omit';
+import pickAttrs from '@rc-component/util/es/pickAttrs';
+import { clsx } from 'clsx';
 import * as React from 'react';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import { useXProviderContext } from '../x-provider';
@@ -135,11 +135,11 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
 
   // ============================= Refs =============================
   const listRef = React.useRef<HTMLDivElement>(null);
-  const scrollBoxRef = React.useRef<HTMLDivElement>(null);
-
   const bubblesRef = React.useRef<BubblesRecord>({});
 
-  const { reset } = useCompatibleScroll(autoScroll ? scrollBoxRef.current : null);
+  // ============================= States =============================
+  const [scrollBoxDom, setScrollBoxDom] = React.useState<HTMLDivElement | null>();
+  const { scrollTo } = useCompatibleScroll(scrollBoxDom);
 
   // ============================ Prefix ============================
   const { getPrefixCls } = useXProviderContext();
@@ -149,7 +149,7 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
 
   const [hashId, cssVarCls] = useBubbleListStyle(prefixCls);
 
-  const mergedClassNames = classnames(
+  const mergedClassNames = clsx(
     listPrefixCls,
     rootClassName,
     className,
@@ -163,45 +163,29 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
     ...style,
   };
 
-  // ============================ Scroll ============================
-  // 只有最后一条数据变更才需要滚动到底部
-  const lastItemKey = items[items.length - 1]?.key || items.length;
-  React.useEffect(() => {
-    if (!scrollBoxRef.current) return;
-    reset();
-    scrollBoxRef.current?.scrollTo({ top: autoScroll ? 0 : scrollBoxRef.current.scrollHeight });
-  }, [lastItemKey, autoScroll, reset]);
-
   // ============================= Refs =============================
-  useProxyImperativeHandle(ref, () => {
+  useProxyImperativeHandle<HTMLDivElement, BubbleListRef>(ref, () => {
     return {
       nativeElement: listRef.current!,
-      scrollBoxNativeElement: scrollBoxRef.current!,
-      scrollTo: ({
-        key,
-        top,
-        behavior = 'smooth',
-        block,
-      }: {
-        key: string | number;
-        top: number | 'bottom' | 'top';
-        behavior?: ScrollBehavior;
-        block?: ScrollLogicalPosition;
-      }) => {
-        const { scrollHeight, clientHeight } = scrollBoxRef.current!;
+      scrollBoxNativeElement: scrollBoxDom!,
+      scrollTo: ({ key, top, behavior = 'smooth', block }) => {
+        const { scrollHeight, clientHeight } = scrollBoxDom!;
         if (typeof top === 'number') {
-          scrollBoxRef.current?.scrollTo({
+          scrollTo({
             top: autoScroll ? -scrollHeight + clientHeight + top : top,
             behavior,
           });
         } else if (top === 'bottom') {
           const bottomOffset = autoScroll ? 0 : scrollHeight;
-          scrollBoxRef.current?.scrollTo({ top: bottomOffset, behavior });
+          scrollTo({ top: bottomOffset, behavior });
         } else if (top === 'top') {
           const topOffset = autoScroll ? -scrollHeight : 0;
-          scrollBoxRef.current?.scrollTo({ top: topOffset, behavior });
+          scrollTo({ top: topOffset, behavior });
         } else if (key && bubblesRef.current[key]) {
-          bubblesRef.current[key].nativeElement.scrollIntoView({ behavior, block });
+          scrollTo({
+            intoView: { behavior, block },
+            intoViewDom: bubblesRef.current[key].nativeElement,
+          });
         }
       },
     };
@@ -213,11 +197,11 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   return (
     <div {...domProps} className={mergedClassNames} style={mergedStyle} ref={listRef}>
       <div
-        className={classnames(`${listPrefixCls}-scroll-box`, classNames.scroll, {
+        className={clsx(`${listPrefixCls}-scroll-box`, classNames.scroll, {
           [`${listPrefixCls}-autoscroll`]: autoScroll,
         })}
         style={styles.scroll}
-        ref={scrollBoxRef}
+        ref={(node) => setScrollBoxDom(node)}
         onScroll={onScroll}
       >
         {renderData.map((item) => {

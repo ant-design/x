@@ -51,19 +51,19 @@ const App = () => {
   const { token } = theme.useToken();
   const items: ConversationItemType[] = [
     {
-      key: 'item1',
+      key: 'item1_1',
       label: locale.conversationItem1,
     },
     {
-      key: 'item2',
+      key: 'item1_2',
       label: locale.conversationItem2,
     },
     {
-      key: 'item3',
+      key: 'item1_3',
       label: locale.conversationItem3,
     },
     {
-      key: 'item4',
+      key: 'item1_4',
       label: locale.conversationItem4,
       disabled: true, // 禁用此项目，用户无法点击
     },
@@ -105,7 +105,7 @@ const App = () => {
     // 会话消息映射：为每个会话定义独特的欢迎消息
     // Conversation message mapping: define unique welcome messages for each conversation
     const messagesMap: Record<string, any[]> = {
-      item1: [
+      item1_1: [
         {
           message: { role: 'user', content: locale.helloConversation1 },
           status: 'success',
@@ -118,7 +118,7 @@ const App = () => {
           status: 'success',
         },
       ],
-      item2: [
+      item1_2: [
         {
           message: { role: 'user', content: locale.conversation2Started },
           status: 'success',
@@ -131,7 +131,7 @@ const App = () => {
           status: 'success',
         },
       ],
-      item3: [
+      item1_3: [
         {
           message: { role: 'user', content: locale.clickedConversation3 },
           status: 'success',
@@ -144,7 +144,7 @@ const App = () => {
           status: 'success',
         },
       ],
-      item4: [
+      item1_4: [
         {
           message: { role: 'user', content: locale.conversation4Initialized },
           status: 'success',
