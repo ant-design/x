@@ -12,7 +12,7 @@ const onClick = () => {
 export default () => (
   <Flex vertical gap="middle">
     <Flex gap="small" align="flex-start">
-      <Text>loading status:</Text>
+      <Text style={{ whiteSpace: 'nowrap' }}>loading status:</Text>
       <Flex wrap align="center" gap="middle">
         <ThoughtChain.Item variant="solid" status="loading" title="Tool Calling" />
         <ThoughtChain.Item variant="outlined" status="loading" title="Tool Calling" />
@@ -21,7 +21,7 @@ export default () => (
     </Flex>
 
     <Flex gap="small" align="flex-start">
-      <Text>success status:</Text>
+      <Text style={{ whiteSpace: 'nowrap' }}>success status:</Text>
       <Flex wrap align="center" gap="middle">
         <ThoughtChain.Item variant="solid" status="success" title="Tool Call Finished" />
         <ThoughtChain.Item variant="outlined" status="success" title="Tool Call Finished" />
@@ -30,7 +30,7 @@ export default () => (
     </Flex>
 
     <Flex gap="small" align="flex-start">
-      <Text>error status:</Text>
+      <Text style={{ whiteSpace: 'nowrap' }}>error status:</Text>
       <Flex wrap align="center" gap="middle">
         <ThoughtChain.Item variant="solid" status="error" title="Tool Call Error" />
         <ThoughtChain.Item variant="outlined" status="error" title="Tool Call Error" />
@@ -39,7 +39,7 @@ export default () => (
     </Flex>
 
     <Flex gap="small" align="flex-start">
-      <Text>abort status</Text>
+      <Text style={{ whiteSpace: 'nowrap' }}>abort status</Text>
       <Flex wrap align="center" gap="middle">
         <ThoughtChain.Item variant="solid" status="abort" title="Agent Response Aborted" />
         <ThoughtChain.Item variant="outlined" status="abort" title="Agent Response Aborted" />
@@ -48,7 +48,7 @@ export default () => (
     </Flex>
 
     <Flex gap="small" align="flex-start">
-      <Text>custom icon:</Text>
+      <Text style={{ whiteSpace: 'nowrap' }}>custom icon:</Text>
       <Flex wrap align="center" gap="middle">
         <ThoughtChain.Item variant="solid" icon={<SunOutlined />} title="Task Completed" />
         <ThoughtChain.Item variant="outlined" icon={<SunOutlined />} title="Task Completed" />
@@ -57,7 +57,7 @@ export default () => (
     </Flex>
 
     <Flex gap="small" align="flex-start">
-      <Text>click:</Text>
+      <Text style={{ whiteSpace: 'nowrap' }}>click:</Text>
       <Flex wrap align="center" gap="middle">
         <ThoughtChain.Item
           variant="solid"
@@ -109,7 +109,7 @@ export default () => (
       </Flex>
     </Flex>
     <Flex gap="small" align="flex-start">
-      <Text>blink:</Text>
+      <Text style={{ whiteSpace: 'nowrap' }}>blink:</Text>
       <Flex wrap align="center" gap="middle">
         <ThoughtChain.Item blink variant="solid" icon={<SunOutlined />} title="Task Completed" />
         <ThoughtChain.Item blink variant="outlined" icon={<SunOutlined />} title="Task Completed" />
@@ -123,7 +123,7 @@ export default () => (
       </Flex>
     </Flex>
     <Flex gap="small" align="flex-start">
-      <Text>disabled:</Text>
+      <Text style={{ whiteSpace: 'nowrap' }}>disabled:</Text>
       <Flex wrap align="center" gap="middle">
         <ThoughtChain.Item
           disabled

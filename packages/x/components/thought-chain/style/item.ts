@@ -43,7 +43,6 @@ const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (
       [`${componentCls}-status-loading`]: {
         color: token.colorPrimary,
       },
-
       [`${itemCls}-title`]: {
         display: 'inline-block',
         whiteSpace: 'nowrap',
@@ -68,26 +67,12 @@ const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (
           color: token.colorPrimaryDisabled,
         },
       },
-      [`&${itemCls}-error`]: {
-        [`&:not(${itemCls}-disabled)`]: {
-          color: token.colorErrorText,
-          [`${itemCls}-description`]: {
-            color: token.colorErrorTextDescription,
-          },
-        },
-        [`&:where(${itemCls}-disabled)`]: {
-          color: token.colorErrorTextDisabled,
-          [`${itemCls}-description`]: {
-            color: token.colorErrorTextDescriptionDisabled,
-          },
-        },
-      },
       [`&${itemCls}-solid`]: {
         background: token.itemSolidBg,
         [`&${itemCls}-disabled`]: {
           background: token.colorBgContainerDisabled,
         },
-        [`&${itemCls}-click:not(${itemCls}-error,${itemCls}-disabled):hover`]: {
+        [`&${itemCls}-click:not(${itemCls}-error):hover`]: {
           background: token.itemSolidHoverBg,
         },
         [`&${itemCls}-error:not(${itemCls}-disabled)`]: {
@@ -95,9 +80,6 @@ const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (
         },
         [`&${itemCls}-error:where(${itemCls}-disabled)`]: {
           background: token.colorErrorBgDisabled,
-        },
-        [`&${itemCls}-error:where(${itemCls}-click):not(${itemCls}-disabled):hover`]: {
-          background: token.colorErrorBgFilledHover,
         },
       },
       [`&${itemCls}-outlined`]: {
@@ -114,18 +96,29 @@ const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (
           borderColor: token.colorErrorBorder,
           background: token.colorErrorBgDisabled,
         },
-        [`&${itemCls}-click:not(${itemCls}-error,${itemCls}-disabled):hover`]: {
+        [`&${itemCls}-click:not(${itemCls}-error):hover`]: {
           background: token.itemOutlinedHoverBg,
-        },
-        [`&${itemCls}-error:where(${itemCls}-click):not(${itemCls}-disabled):hover`]: {
-          background: token.colorErrorBgFilledHover,
         },
       },
       [`&${itemCls}-text`]: {
-        [`&${itemCls}-click:not(${itemCls}-error,${itemCls}-disabled):hover`]: {
+        [`&${itemCls}-click:not(${itemCls}-error):hover`]: {
           background: token.itemSolidHoverBg,
         },
-        [`&${itemCls}-error:where(${itemCls}-click):not(${itemCls}-disabled):hover`]: {
+      },
+      [`&${itemCls}-error`]: {
+        [`&:not(${itemCls}-disabled)`]: {
+          color: token.colorErrorText,
+          [`${itemCls}-description`]: {
+            color: token.colorErrorTextDescription,
+          },
+        },
+        [`&:where(${itemCls}-disabled)`]: {
+          color: token.colorErrorTextDisabled,
+          [`${itemCls}-description`]: {
+            color: token.colorErrorTextDescriptionDisabled,
+          },
+        },
+        [`&${itemCls}-click:hover`]: {
           background: token.colorErrorBgFilledHover,
         },
       },

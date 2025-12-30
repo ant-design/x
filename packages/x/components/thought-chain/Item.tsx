@@ -158,7 +158,7 @@ const Item = React.forwardRef<ItemRef, ThoughtChainItemProps>((props, ref) => {
         itemCls,
         {
           [`${itemCls}-${variant}`]: variant,
-          [`${itemCls}-click`]: onClick,
+          [`${itemCls}-click`]: !disabled && onClick,
           [`${itemCls}-error`]: status === THOUGHT_CHAIN_ITEM_STATUS.ERROR,
           [`${itemCls}-rtl`]: direction === 'rtl',
           [`${itemCls}-disabled`]: disabled,
