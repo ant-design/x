@@ -103,13 +103,15 @@ const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (
       [`&${itemCls}-outlined`]: {
         paddingBlock: token.paddingXXS,
         backgroundColor: token.itemOutlinedBg,
-        border: `${unit(token.lineWidth)} ${token.lineType}, ${token.colorBorder}`,
+        borderWidth: token.lineWidth,
+        borderStyle: token.lineType,
+        borderColor: token.colorBorder,
         [`&${itemCls}-error:not(${itemCls}-disabled)`]: {
-          border: `${unit(token.lineWidth)} ${token.lineType}, ${token.colorErrorBorder}`,
+          borderColor: token.colorErrorBorder,
           background: token.colorErrorBg,
         },
         [`&${itemCls}-error:where(${itemCls}-disabled)`]: {
-          border: `${unit(token.lineWidth)} ${token.lineType}, ${token.colorErrorBgDisabled}`,
+          borderColor: token.colorErrorBorder,
           background: token.colorErrorBgDisabled,
         },
         [`&${itemCls}-click:not(${itemCls}-error,${itemCls}-disabled):hover`]: {

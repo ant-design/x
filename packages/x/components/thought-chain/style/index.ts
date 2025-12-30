@@ -177,7 +177,7 @@ export const prepareComponentToken: GetDefaultToken<'ThoughtChain'> = (token) =>
   const colorTextBlinkDefault = token.colorTextDescription;
   const colorTextBlink = token.colorTextBase;
   const colorErrorTextDescription = new FastColor(token.colorErrorText).setA(0.45).toRgbString();
-  const colorErrorTextDisabled = colorErrorTextDescription;
+  const colorErrorTextDisabled = new FastColor(token.colorErrorText).setA(0.45).toRgbString();
   const itemSolidHoverBg = new FastColor(token.colorFillTertiary).setA(0.06).toRgbString();
   const colorErrorTextDescriptionDisabled = new FastColor(token.colorErrorText)
     .setA(0.25)
