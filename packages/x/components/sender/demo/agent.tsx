@@ -193,6 +193,7 @@ const App: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [deepThink, setDeepThink] = useState<boolean>(true);
   const [activeAgentKey, setActiveAgentKey] = useState('ai_writing');
+  const [slotConfig, setSlotConfig] = useState(AgentInfo[activeAgentKey]);
 
   // ======================== sender en ========================
   const senderRef = useRef<GetRef<typeof Sender>>(null);
@@ -234,6 +235,12 @@ const App: React.FC = () => {
 
   const agentItemClick: MenuProps['onClick'] = (item) => {
     setActiveAgentKey(item.key);
+    try {
+      // deep clone
+      setSlotConfig(JSON.parse(JSON.stringify(AgentInfo[item.key])));
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   // ======================== sender zh ========================
@@ -278,7 +285,7 @@ const App: React.FC = () => {
       <Sender
         loading={loading}
         ref={senderRef}
-        skill={AgentInfo[activeAgentKey].skill}
+        skill={slotConfig.skill}
         placeholder="Press Enter to send message"
         footer={(actionNode) => {
           return (
@@ -340,13 +347,13 @@ const App: React.FC = () => {
           setLoading(false);
           message.error('Cancel sending!');
         }}
-        slotConfig={AgentInfo[activeAgentKey].slotConfig}
+        slotConfig={slotConfig.slotConfig}
         autoSize={{ minRows: 3, maxRows: 6 }}
       />
       <Sender
         loading={loading}
         ref={senderZhRef}
-        skill={AgentInfo[activeAgentKey].zh_skill}
+        skill={slotConfig.zh_skill}
         placeholder=""
         footer={(actionNode) => {
           return (
@@ -409,7 +416,7 @@ const App: React.FC = () => {
           setLoading(false);
           message.error('Cancel sending!');
         }}
-        slotConfig={AgentInfo[activeAgentKey].zh_slotConfig}
+        slotConfig={slotConfig.zh_slotConfig}
         autoSize={{ minRows: 3, maxRows: 6 }}
       />
     </Flex>

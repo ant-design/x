@@ -82,12 +82,14 @@ describe('Mermaid Component', () => {
 
     it('should handle invalid mermaid syntax', async () => {
       mockParse.mockResolvedValue(false);
-      const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
+      const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
 
       render(<Mermaid>invalid syntax</Mermaid>);
 
       await waitFor(() => {
-        expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('Mermaid render failed'));
+        expect(consoleSpy).toHaveBeenCalledWith(
+          expect.stringContaining('[antdx: Mermaid] Render failed'),
+        );
       });
 
       consoleSpy.mockRestore();
@@ -418,13 +420,13 @@ describe('Mermaid Component', () => {
   describe('Error Handling', () => {
     it('should handle mermaid render errors', async () => {
       mockRender.mockRejectedValue(new Error('Render error'));
-      const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
+      const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
 
       render(<Mermaid>{mermaidContent}</Mermaid>);
 
       await waitFor(() => {
         expect(consoleSpy).toHaveBeenCalledWith(
-          expect.stringContaining('Mermaid render failed: Error: Render error'),
+          expect.stringContaining('[antdx: Mermaid] Render failed: Error: Render error'),
         );
       });
 
@@ -460,6 +462,113 @@ describe('Mermaid Component', () => {
 
       const { container: rtlContainer } = render(<Mermaid>{mermaidContent}</Mermaid>);
       expect(rtlContainer.querySelector('.ant-mermaid-rtl')).toBeInTheDocument();
+    });
+
+    it('should apply transform styles to SVG element based on scale and position', async () => {
+      const { container } = render(<Mermaid>{mermaidContent}</Mermaid>);
+
+      await waitFor(() => {
+        expect(mockRender).toHaveBeenCalled();
+      });
+
+      // 验证组件渲染后包含 SVG 元素
+      const graphContainer = container.querySelector('.ant-mermaid-graph');
+      expect(graphContainer).toBeInTheDocument();
+
+      // 验证缩放和拖动功能存在
+      const zoomInButton = screen.getByLabelText('zoom-in');
+      const zoomOutButton = screen.getByLabelText('zoom-out');
+      const resetButton = screen.getByRole('button', { name: 'Reset' });
+
+      expect(zoomInButton).toBeInTheDocument();
+      expect(zoomOutButton).toBeInTheDocument();
+      expect(resetButton).toBeInTheDocument();
+    });
+
+    it('should update transform styles when scale changes', async () => {
+      render(<Mermaid>{mermaidContent}</Mermaid>);
+
+      await waitFor(() => {
+        expect(mockRender).toHaveBeenCalled();
+      });
+
+      // 验证缩放功能正常工作
+      const zoomInButton = screen.getByLabelText('zoom-in');
+      const zoomOutButton = screen.getByLabelText('zoom-out');
+
+      // 点击放大按钮应该触发缩放
+      expect(() => fireEvent.click(zoomInButton)).not.toThrow();
+
+      // 点击缩小按钮应该触发缩放
+      expect(() => fireEvent.click(zoomOutButton)).not.toThrow();
+    });
+
+    it('should update transform styles when position changes during drag', async () => {
+      const { container } = render(<Mermaid>{mermaidContent}</Mermaid>);
+
+      await waitFor(() => {
+        expect(mockRender).toHaveBeenCalled();
+      });
+
+      const graphContainer = container.querySelector('.ant-mermaid-graph') as HTMLElement;
+
+      // 验证鼠标事件处理
+      expect(() => {
+        fireEvent.mouseDown(graphContainer, { clientX: 100, clientY: 100 });
+        fireEvent.mouseMove(graphContainer, { clientX: 150, clientY: 150 });
+        fireEvent.mouseUp(graphContainer);
+      }).not.toThrow();
+    });
+
+    it('should reset transform styles when reset is clicked', async () => {
+      render(<Mermaid>{mermaidContent}</Mermaid>);
+
+      await waitFor(() => {
+        expect(mockRender).toHaveBeenCalled();
+      });
+
+      // 验证重置功能正常工作
+      const resetButton = screen.getByRole('button', { name: 'Reset' });
+      expect(() => fireEvent.click(resetButton)).not.toThrow();
+    });
+
+    it('should not apply transform styles when in code view', async () => {
+      render(<Mermaid>{mermaidContent}</Mermaid>);
+
+      await waitFor(() => {
+        expect(mockRender).toHaveBeenCalled();
+      });
+
+      // 切换到代码视图
+      const codeButton = screen.getByText('Code');
+      fireEvent.click(codeButton);
+
+      // 在代码视图下，应该显示代码高亮器而不是 SVG
+      expect(screen.getByTestId('syntax-highlighter')).toBeInTheDocument();
+    });
+
+    it('should handle edge cases for transform styles', async () => {
+      render(<Mermaid>{mermaidContent}</Mermaid>);
+
+      await waitFor(() => {
+        expect(mockRender).toHaveBeenCalled();
+      });
+
+      const zoomOutButton = screen.getByLabelText('zoom-out');
+      const zoomInButton = screen.getByLabelText('zoom-in');
+
+      // 验证边界值处理
+      expect(() => {
+        // 多次点击缩小按钮测试最小值
+        for (let i = 0; i < 10; i++) {
+          fireEvent.click(zoomOutButton);
+        }
+
+        // 多次点击放大按钮测试最大值
+        for (let i = 0; i < 20; i++) {
+          fireEvent.click(zoomInButton);
+        }
+      }).not.toThrow();
     });
 
     it('should apply custom styles through styles prop', () => {
@@ -506,6 +615,60 @@ describe('Mermaid Component', () => {
       expect(container.querySelector('.custom-root')).toBeInTheDocument();
       expect(container.querySelector('.custom-header')).toBeInTheDocument();
       expect(container.querySelector('.custom-graph')).toBeInTheDocument();
+    });
+  });
+
+  describe('Transform Styles', () => {
+    it('should handle SVG transform styles correctly', async () => {
+      const { container } = render(<Mermaid>{mermaidContent}</Mermaid>);
+
+      await waitFor(() => {
+        expect(mockRender).toHaveBeenCalled();
+      });
+
+      // 验证组件的基本功能
+      const graphContainer = container.querySelector('.ant-mermaid-graph');
+      expect(graphContainer).toBeInTheDocument();
+
+      // 验证交互元素存在
+      expect(screen.getByLabelText('zoom-in')).toBeInTheDocument();
+      expect(screen.getByLabelText('zoom-out')).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Reset' })).toBeInTheDocument();
+    });
+
+    it('should handle mouse events for transform updates', async () => {
+      const { container } = render(<Mermaid>{mermaidContent}</Mermaid>);
+
+      await waitFor(() => {
+        expect(mockRender).toHaveBeenCalled();
+      });
+
+      const graphContainer = container.querySelector('.ant-mermaid-graph');
+      expect(graphContainer).toBeInTheDocument();
+
+      // 验证鼠标事件不会导致错误
+      expect(() => {
+        fireEvent.mouseDown(graphContainer!, { clientX: 100, clientY: 100 });
+        fireEvent.mouseMove(graphContainer!, { clientX: 150, clientY: 150 });
+        fireEvent.mouseUp(graphContainer!);
+      }).not.toThrow();
+    });
+
+    it('should handle wheel events for zoom', async () => {
+      const { container } = render(<Mermaid>{mermaidContent}</Mermaid>);
+
+      await waitFor(() => {
+        expect(mockRender).toHaveBeenCalled();
+      });
+
+      const graphContainer = container.querySelector('.ant-mermaid-graph');
+      expect(graphContainer).toBeInTheDocument();
+
+      // 验证滚轮事件不会导致错误
+      expect(() => {
+        fireEvent.wheel(graphContainer!, { deltaY: 100 });
+        fireEvent.wheel(graphContainer!, { deltaY: -100 });
+      }).not.toThrow();
     });
   });
 

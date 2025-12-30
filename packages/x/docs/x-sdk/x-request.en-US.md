@@ -1,13 +1,15 @@
 ---
+category: Components
 group:
   title: Utilities
   order: 3
 title: XRequest
 order: 1
 subtitle: Request
-description:
+description: Make requests to backend service APIs and handle responses.
 demo:
   cols: 1
+tag: 2.0.0
 ---
 
 ## When To Use
@@ -48,8 +50,8 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
 | callbacks | Request callback handlers | XRequestCallbacks\<Output\> | - | - |
 | params | Request parameters | Input | - | - |
 | headers | Additional request headers | Record\<string, string\> | - | - |
-| timeout | Request timeout in milliseconds | number | - | - |
-| streamTimeout | Stream mode data timeout in milliseconds | number | - | - |
+| timeout | Request timeout configuration (time from sending request to connecting to service), unit: ms | number | - | - |
+| streamTimeout | Stream mode data timeout configuration (time interval for each chunk return), unit: ms | number | - | - |
 | fetch | Custom fetch object | `typeof fetch` | - | - |
 | middlewares | Middlewares for pre- and post-request processing | XFetchMiddlewares | - | - |
 | transformStream | Stream processor | XStreamOptions\<Output\>['transformStream'] \| ((baseURL: string, responseHeaders: Headers) => XStreamOptions\<Output\>['transformStream']) | - | - |

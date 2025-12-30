@@ -25,6 +25,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/speech.tsx">Voice Input</code>
 <code src="./demo/speech-custom.tsx">Custom Voice Input</code>
 <code src="./demo/suffix.tsx">Custom Suffix</code>
+<code src="./demo/disable-ctrl.tsx">Disable Ctrl</code>
 <code src="./demo/header.tsx">Expand Panel</code>
 <code src="./demo/slot-with-suggestion.tsx">Quick Commands</code>
 <code src="./demo/header-fixed.tsx">References</code>
@@ -55,10 +56,15 @@ Common props ref：[Common props](/docs/react/common-props)
 | styles | Semantic style definition | [See below](#semantic-dom) | - | - |
 | submitType | Submission mode | SubmitType | `enter` \| `shiftEnter` | - |
 | value | Input box value | string | - | - |
-| onSubmit | Callback for clicking the send button | (message: string, slotConfig?: SlotConfigType[], skill: SkillType) => void | - | - |
+| onSubmit | Callback for clicking the send button | (message: string, slotConfig: SlotConfigType[], skill: SkillType) => void | - | - |
 | onChange | Callback for input box value change | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`>, slotConfig: SlotConfigType[], skill: SkillType) => void | - | - |
 | onCancel | Callback for clicking the cancel button | () => void | - | - |
+| onPaste | Callback for pasting | React.ClipboardEventHandler<`HTMLElement`> | - | - |
 | onPasteFile | Callback for pasting files | (files: FileList) => void | - | - |
+| onKeyDown | Callback for keyboard press | (event: React.KeyboardEvent) => void \| false | - | - |
+| onFocus | Callback for getting focus | React.FocusEventHandler<`HTMLTextAreaElement`> | - | - |
+| onBlur | Callback for losing focus | React.FocusEventHandler<`HTMLTextAreaElement`> | - | - |
+| placeholder | Placeholder of the input box | string | - | - |
 | autoSize | Auto-adjust content height, can be set to true \| false or object: { minRows: 2, maxRows: 6 } | boolean \| { minRows?: number; maxRows?: number } | { maxRows: 8 } | - |
 | slotConfig | Slot configuration, after configuration the input box will switch to slot mode, supporting structured input. In this mode, `value` and `defaultValue` configurations will be invalid. | SlotConfigType[] | - | 2.0.0 |
 | skill | Skill configuration, the input box will switch to slot mode, supporting structured input. In this mode, `value` and `defaultValue` configurations will be invalid. | SkillType | - | 2.0.0 |
@@ -100,10 +106,11 @@ type ActionsComponents = {
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
+| inputElement | Input element | `HTMLTextAreaElement` | - | - |
 | nativeElement | Outer container | `HTMLDivElement` | - | - |
 | focus | Get focus, when `cursor = 'slot'` the focus will be in the first slot of type `input`, if no corresponding `input` exists it will behave the same as `end` | (option?: { preventScroll?: boolean, cursor?: 'start' \| 'end' \| 'all' \| 'slot' }) | - | - |
 | blur | Remove focus | () => void | - | - |
-| insert | Insert text or slots, when using slots ensure slotConfig is configured | (value: string) => void \| (slotConfig: SlotConfigType[], position?: insertPosition, replaceCharacters?: string) => void; | - | - |
+| insert | Insert text or slots, when using slots ensure slotConfig is configured | (value: string) => void \| (slotConfig: SlotConfigType[], position: insertPosition, replaceCharacters: string, preventScroll: boolean) => void; | - | - |
 | clear | Clear content | () => void | - | - |
 | getValue | Get current content and structured configuration | () => { value: string; slotConfig: SlotConfigType[], skill: SkillType } | - | - |
 
@@ -111,7 +118,7 @@ type ActionsComponents = {
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| type | Node type, determines the rendering component type, required | 'text' \| 'input' \| 'select' \| 'tag' \| 'custom' | - | 2.0.0 |
+| type | Node type, determines the rendering component type, required | 'text' \| 'input' \| 'select' \| 'tag' \| 'content' \| 'custom' | - | 2.0.0 |
 | key | Unique identifier, can be omitted when type is text | string | - | - |
 | formatResult | Format the final result | (value: any) => string | - | 2.0.0 |
 
@@ -119,7 +126,7 @@ type ActionsComponents = {
 
 | Property | Description  | Type   | Default | Version |
 | -------- | ------------ | ------ | ------- | ------- |
-| text     | Text content | string | -       | 2.0.0   |
+| value    | Text content | string | -       | 2.0.0   |
 
 ##### input node properties
 
@@ -142,6 +149,13 @@ type ActionsComponents = {
 | ----------- | --------------------- | --------- | ------- | ------- |
 | props.label | Tag content, required | ReactNode | -       | 2.0.0   |
 | props.value | Tag value             | string    | -       | 2.0.0   |
+
+##### content node properties
+
+| Property           | Description   | Type   | Default | Version |
+| ------------------ | ------------- | ------ | ------- | ------- |
+| props.defaultValue | Default value | any    | -       | 2.1.0   |
+| props.placeholder  | Placeholder   | string | -       | 2.1.0   |
 
 ##### custom node properties
 
@@ -173,6 +187,7 @@ type ActionsComponents = {
 | icon              | Set icon component       | ReactNode                  | -       | 2.0.0   |
 | disabled          | Whether disabled         | boolean                    | false   | 2.0.0   |
 | loading           | Loading switch           | boolean                    | -       | 2.0.0   |
+| defaultValue      | Default checked state    | boolean                    | -       | 2.0.0   |
 | value             | Switch value             | boolean                    | false   | 2.0.0   |
 | onChange          | Callback when changed    | function(checked: boolean) | -       | 2.0.0   |
 | rootClassName     | Root element style class | string                     | -       | 2.0.0   |

@@ -31,6 +31,28 @@ if (typeof window !== 'undefined') {
       fontSize: '14px',
       fontFamily: 'Arial',
     }));
+  window.getSelection =
+    window.getSelection ||
+    jest.fn(() => ({
+      getRangeAt: jest.fn(() => ({
+        startContainer: document.createElement('div'),
+        startOffset: 0,
+        endContainer: document.createElement('div'),
+        endOffset: 0,
+        commonAncestorContainer: document.createElement('div'),
+        setStart: jest.fn(),
+        setEnd: jest.fn(),
+        deleteContents: jest.fn(),
+        insertNode: jest.fn(),
+        cloneRange: jest.fn(),
+        selectNodeContents: jest.fn(),
+        collapse: jest.fn(),
+      })),
+      removeAllRanges: jest.fn(),
+      addRange: jest.fn(),
+      rangeCount: 1,
+      type: 'Range',
+    }));
 }
 
 // Mock document APIs
@@ -109,7 +131,7 @@ describe('Sender Component', () => {
     const onSubmit = jest.fn();
     const { container } = render(<Sender value="bamboo" onSubmit={onSubmit} />);
     fireEvent.click(container.querySelector('button')!);
-    expect(onSubmit).toHaveBeenCalledWith('bamboo');
+    expect(onSubmit).toHaveBeenCalledWith('bamboo', [], undefined);
   });
 
   it('onCancel', () => {
@@ -129,10 +151,10 @@ describe('Sender Component', () => {
     );
 
     fireEvent.change(container.querySelector('textarea')!, { target: { value: 'bamboo' } });
-    expect(onChange).toHaveBeenCalledWith('bamboo', {});
+    expect(onChange).toHaveBeenCalledWith('bamboo', {}, [], undefined);
 
     fireEvent.click(container.querySelector('button')!);
-    expect(onChange).toHaveBeenCalledWith('', undefined);
+    expect(onChange).toHaveBeenCalledWith('', undefined, [], undefined);
   });
 
   describe('submitType', () => {
@@ -142,7 +164,7 @@ describe('Sender Component', () => {
       act(() => {
         fireEvent.keyDown(container.querySelector('textarea')!, { key: 'Enter', shiftKey: false });
       });
-      expect(onSubmit).toHaveBeenCalledWith('bamboo');
+      expect(onSubmit).toHaveBeenCalledWith('bamboo', [], undefined);
     });
 
     it('shiftEnter', () => {
@@ -153,7 +175,7 @@ describe('Sender Component', () => {
       act(() => {
         fireEvent.keyDown(container.querySelector('textarea')!, { key: 'Enter', shiftKey: true });
       });
-      expect(onSubmit).toHaveBeenCalledWith('bamboo');
+      expect(onSubmit).toHaveBeenCalledWith('bamboo', [], undefined);
     });
   });
 
@@ -351,6 +373,26 @@ describe('Sender Component', () => {
           fontSize: '14px',
           fontFamily: 'Arial',
         })),
+        getSelection: jest.fn(() => ({
+          getRangeAt: jest.fn(() => ({
+            startContainer: document.createElement('div'),
+            startOffset: 0,
+            endContainer: document.createElement('div'),
+            endOffset: 0,
+            commonAncestorContainer: document.createElement('div'),
+            setStart: jest.fn(),
+            setEnd: jest.fn(),
+            deleteContents: jest.fn(),
+            insertNode: jest.fn(),
+            cloneRange: jest.fn(),
+            selectNodeContents: jest.fn(),
+            collapse: jest.fn(),
+          })),
+          removeAllRanges: jest.fn(),
+          addRange: jest.fn(),
+          rangeCount: 1,
+          type: 'Range',
+        })),
       };
 
       global.navigator = {
@@ -413,6 +455,26 @@ describe('Sender Component', () => {
           query: jest.fn().mockResolvedValue({ state: 'granted' }),
         },
       };
+      (global as any).window.getSelection = jest.fn(() => ({
+        getRangeAt: jest.fn(() => ({
+          startContainer: document.createElement('div'),
+          startOffset: 0,
+          endContainer: document.createElement('div'),
+          endOffset: 0,
+          commonAncestorContainer: document.createElement('div'),
+          setStart: jest.fn(),
+          setEnd: jest.fn(),
+          deleteContents: jest.fn(),
+          insertNode: jest.fn(),
+          cloneRange: jest.fn(),
+          selectNodeContents: jest.fn(),
+          collapse: jest.fn(),
+        })),
+        removeAllRanges: jest.fn(),
+        addRange: jest.fn(),
+        rangeCount: 1,
+        type: 'Range',
+      }));
       const { container } = render(<Sender allowSpeech />);
       const speechButton = container.querySelectorAll('.ant-sender-actions-btn');
       expect(speechButton).toHaveLength(2);

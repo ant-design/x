@@ -26,6 +26,8 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/speech.tsx">语音输入</code>
 <code src="./demo/speech-custom.tsx">自定义语音输入</code>
 <code src="./demo/suffix.tsx">自定义后缀</code>
+<code src="./demo/disable-ctrl.tsx">发送控制</code>
+<code src="./demo/disable-ctrl-slot.tsx">词槽发送控制</code>
 <code src="./demo/header.tsx">展开面板</code>
 <code src="./demo/slot-with-suggestion.tsx">快捷指令</code>
 <code src="./demo/header-fixed.tsx">引用</code>
@@ -56,10 +58,15 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 | styles | 语义化定义样式 | [见下](#semantic-dom) | - | - |
 | submitType | 提交模式 | SubmitType | `enter` \| `shiftEnter` | - |
 | value | 输入框值 | string | - | - |
-| onSubmit | 点击发送按钮的回调 | (message: string, slotConfig?: SlotConfigType[], skill: SkillType) => void | - | - |
+| onSubmit | 点击发送按钮的回调 | (message: string, slotConfig: SlotConfigType[], skill: SkillType) => void | - | - |
 | onChange | 输入框值改变的回调 | (value: string, event?: React.FormEvent<`HTMLTextAreaElement`> \| React.ChangeEvent<`HTMLTextAreaElement`>, slotConfig: SlotConfigType[],skill: SkillType) => void | - | - |
 | onCancel | 点击取消按钮的回调 | () => void | - | - |
+| onPaste | 粘贴回调 | React.ClipboardEventHandler<`HTMLElement`> | - | - |
 | onPasteFile | 黏贴文件的回调 | (files: FileList) => void | - | - |
+| onKeyDown | 键盘按下回调 | (event: React.KeyboardEvent) => void \| false | - | - |
+| onFocus | 获取焦点回调 | React.FocusEventHandler<`HTMLTextAreaElement`> | - | - |
+| onBlur | 失去焦点回调 | React.FocusEventHandler<`HTMLTextAreaElement`> | - | - |
+| placeholder | 输入框占位符 | string | - | - |
 | autoSize | 自适应内容高度，可设置为 true \| false 或对象：{ minRows: 2, maxRows: 6 } | boolean \| { minRows?: number; maxRows?: number } | { maxRows: 8 } | - |
 | slotConfig | 词槽配置，配置后输入框将变为词槽模式，支持结构化输入，此模式`value` 和 `defaultValue` 配置将无效。 | SlotConfigType[] | - | 2.0.0 |
 | skill | 技能配置，输入框将变为词槽模式，支持结构化输入，此模式`value` 和 `defaultValue` 配置将无效。 | SkillType | - | 2.0.0 |
@@ -101,10 +108,11 @@ type ActionsComponents = {
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
+| inputElement | 输入框元素 | `HTMLTextAreaElement` | - | - |
 | nativeElement | 外层容器 | `HTMLDivElement` | - | - |
 | focus | 获取焦点，当 `cursor = 'slot'` 时焦点会在第一个插槽类型为 `input` 的输入框内，若不存在对应的 `input` 则效果会和 `end` 一致。 | (option?: { preventScroll?: boolean, cursor?: 'start' \| 'end' \| 'all' \| 'slot' }) | - | - |
 | blur | 取消焦点 | () => void | - | - |
-| insert | 插入文本或者插槽，使用插槽时需确保 slotConfig 已配置 | (value: string) => void \| (slotConfig: SlotConfigType[], position?: insertPosition, replaceCharacters?: string) => void; | - | - |
+| insert | 插入文本或者插槽，使用插槽时需确保 slotConfig 已配置 | (value: string) => void \| (slotConfig: SlotConfigType[], position: insertPosition, replaceCharacters: string, preventScroll: boolean) => void; | - | - |
 | clear | 清空内容 | () => void | - | - |
 | getValue | 获取当前内容和结构化配置 | () => { value: string; slotConfig: SlotConfigType[],skill: SkillType } | - | - |
 
@@ -112,15 +120,15 @@ type ActionsComponents = {
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| type | 节点类型，决定渲染组件类型，必填 | 'text' \| 'input' \| 'select' \| 'tag' \| 'custom' | - | 2.0.0 |
+| type | 节点类型，决定渲染组件类型，必填 | 'text' \| 'input' \| 'select' \| 'tag' \| 'content' \| 'custom' | - | 2.0.0 |
 | key | 唯一标识，type 为 text 时可省略 | string | - | - |
 | formatResult | 格式化最终结果 | (value: any) => string | - | 2.0.0 |
 
 ##### text 节点属性
 
-| 属性 | 说明     | 类型   | 默认值 | 版本  |
-| ---- | -------- | ------ | ------ | ----- |
-| text | 文本内容 | string | -      | 2.0.0 |
+| 属性  | 说明     | 类型   | 默认值 | 版本  |
+| ----- | -------- | ------ | ------ | ----- |
+| value | 文本内容 | string | -      | 2.0.0 |
 
 ##### input 节点属性
 
@@ -143,6 +151,13 @@ type ActionsComponents = {
 | ----------- | -------------- | --------- | ------ | ----- |
 | props.label | 标签内容，必填 | ReactNode | -      | 2.0.0 |
 | props.value | 标签值         | string    | -      | 2.0.0 |
+
+##### content 节点属性
+
+| 属性               | 说明   | 类型   | 默认值 | 版本  |
+| ------------------ | ------ | ------ | ------ | ----- |
+| props.defaultValue | 默认值 | any    | -      | 2.1.0 |
+| props.placeholder  | 占位符 | string | -      | 2.1.0 |
 
 ##### custom 节点属性
 
@@ -174,6 +189,7 @@ type ActionsComponents = {
 | icon              | 设置图标组件     | ReactNode                  | -      | 2.0.0 |
 | disabled          | 是否禁用         | boolean                    | false  | 2.0.0 |
 | loading           | 加载中的开关     | boolean                    | -      | 2.0.0 |
+| defaultValue      | 默认选中状态     | boolean                    | -      | 2.0.0 |
 | value             | 开关的值         | boolean                    | false  | 2.0.0 |
 | onChange          | 变化时的回调函数 | function(checked: boolean) | -      | 2.0.0 |
 | rootClassName     | 根元素样式类     | string                     | -      | 2.0.0 |

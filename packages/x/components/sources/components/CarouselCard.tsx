@@ -1,6 +1,6 @@
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { Carousel } from 'antd';
-import classnames from 'classnames';
+import { clsx } from 'clsx';
 import React, { useEffect } from 'react';
 import type { SourcesItem, SourcesProps } from '../Sources';
 
@@ -33,11 +33,11 @@ const CarouselCard: React.FC<CarouselCardProps> = (props) => {
   }, [slide]);
 
   return (
-    <div style={style} className={classnames(`${compCls}-wrapper`, className)}>
+    <div style={style} className={clsx(`${compCls}-wrapper`, className)}>
       <div className={`${compCls}-title`}>
         <div className={`${compCls}-btn-wrapper`}>
           <span
-            className={classnames(`${compCls}-btn`, `${compCls}-left-btn`, {
+            className={clsx(`${compCls}-btn`, `${compCls}-left-btn`, {
               [`${compCls}-btn-disabled`]: slide === 0,
             })}
             onClick={() => {
@@ -49,7 +49,7 @@ const CarouselCard: React.FC<CarouselCardProps> = (props) => {
             <LeftOutlined />
           </span>
           <span
-            className={classnames(`${compCls}-btn`, `${compCls}-right-btn`, {
+            className={clsx(`${compCls}-btn`, `${compCls}-right-btn`, {
               [`${compCls}-btn-disabled`]: slide === (items?.length || 1) - 1,
             })}
             onClick={() => {

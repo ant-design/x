@@ -1,8 +1,8 @@
 import { CodeOutlined, SkinOutlined } from '@ant-design/icons';
+import type { TabsProps } from '@rc-component/tabs';
 import { Tabs } from 'antd';
 import { useRouteMeta } from 'dumi';
 import type { IContentTabsProps } from 'dumi/theme-default/slots/ContentTabs';
-import type { TabsProps } from 'rc-tabs';
 import type { FC, ReactNode } from 'react';
 import React from 'react';
 

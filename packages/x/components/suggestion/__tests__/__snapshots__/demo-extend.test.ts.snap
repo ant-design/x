@@ -6,7 +6,7 @@ Array [
     class="ant-suggestion ant-suggestion-content css-var-_r_9_"
   >
     <div
-      class="ant-sender css-var-_r_9_"
+      class="ant-sender css-var-_r_9_ ant-sender-main"
     >
       <div
         class="ant-sender-content"
@@ -181,7 +181,7 @@ Array [
     class="ant-suggestion ant-suggestion-content css-var-_r_5_"
   >
     <div
-      class="ant-sender css-var-_r_5_"
+      class="ant-sender css-var-_r_5_ ant-sender-main"
     >
       <div
         class="ant-sender-content"
@@ -345,10 +345,8 @@ Array [
         >
           <input
             aria-autocomplete="list"
-            aria-controls="test-id_list"
             aria-expanded="false"
             aria-haspopup="listbox"
-            aria-owns="test-id_list"
             autocomplete="off"
             class="ant-select-input"
             id="test-id"

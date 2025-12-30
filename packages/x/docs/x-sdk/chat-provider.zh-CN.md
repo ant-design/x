@@ -1,10 +1,13 @@
 ---
+category: Components
 group:
   title: 数据提供
   order: 2
 title: Chat Provider
 subtitle: 数据提供
+description: 发送和接收的数据转换。
 order: 1
+tag: 2.0.0
 ---
 
 `Chat Provider` 用于为 `useXChat` 提供统一的请求管理和数据格式转换，目前内置了 `OpenAI` 和 `DeepSeek` 两种模型服务商的 `Chat Provider`，你可以直接使用。

@@ -45,7 +45,7 @@ const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
       [`${componentCls}-list-danger`]: {
         color: token.colorError,
       },
-      [`${componentCls}-item`]: {
+      [`&${componentCls}-item,${componentCls}-item`]: {
         cursor: 'pointer',
         fontSize: token.fontSize,
         paddingInline: unit(calc(token.paddingXXS).add(1).equal()),
@@ -68,7 +68,7 @@ const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
           background: token.colorBgTextHover,
         },
       },
-      [`${componentCls}-list`]: {
+      [`&${componentCls}-list,${componentCls}-list`]: {
         display: 'inline-flex',
         flexDirection: 'row',
         alignItems: 'center',

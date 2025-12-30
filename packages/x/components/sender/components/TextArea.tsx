@@ -1,11 +1,11 @@
+import pickAttrs from '@rc-component/util/lib/pickAttrs';
+import getValue from '@rc-component/util/lib/utils/get';
 import type { InputRef as AntdInputRef, InputRef } from 'antd';
 import { Input } from 'antd';
-import classnames from 'classnames';
-import pickAttrs from 'rc-util/lib/pickAttrs';
-import getValue from 'rc-util/lib/utils/get';
+import { clsx } from 'clsx';
 import React from 'react';
-import { SenderContext } from './context';
-import type { InsertPosition, SkillType } from './interface';
+import { SenderContext } from '../context';
+import type { InsertPosition, SkillType } from '../interface';
 
 function getComponent<T>(
   components: { input?: React.ComponentType<T> } | undefined,
@@ -40,7 +40,7 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
     classNames = {},
     autoSize,
     components,
-    onSubmit,
+    triggerSend,
     placeholder,
     onFocus,
     onBlur,
@@ -112,25 +112,24 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
 
   const onInternalKeyDown: React.KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
     const eventRes = onKeyDown?.(e);
+    const { key, shiftKey, ctrlKey, altKey, metaKey } = e;
 
-    if (isCompositionRef.current || e.key !== 'Enter' || eventRes === false) {
+    if (isCompositionRef.current || key !== 'Enter' || eventRes === false) {
       return;
     }
 
-    switch (submitType) {
-      case 'enter':
-        if (!e.shiftKey && !e.ctrlKey && !e.altKey && !e.metaKey) {
-          e.preventDefault();
-          onSubmit?.(value || '');
-        }
-        break;
+    // 处理Enter键提交
+    if (key === 'Enter') {
+      const isModifierPressed = ctrlKey || altKey || metaKey;
+      const shouldSubmit =
+        (submitType === 'enter' && !shiftKey && !isModifierPressed) ||
+        (submitType === 'shiftEnter' && shiftKey && !isModifierPressed);
 
-      case 'shiftEnter':
-        if (e.shiftKey && !e.ctrlKey && !e.altKey && !e.metaKey) {
-          e.preventDefault();
-          onSubmit?.(value || '');
-        }
-        break;
+      if (shouldSubmit) {
+        e.preventDefault();
+        triggerSend?.();
+        return;
+      }
     }
   };
 
@@ -172,7 +171,7 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
       {...inputProps}
       disabled={disabled}
       style={styles.input}
-      className={classnames(`${prefixCls}-input`, classNames.input)}
+      className={clsx(`${prefixCls}-input`, classNames.input)}
       autoSize={autoSize}
       value={value}
       onChange={mergeOnChange}

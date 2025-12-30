@@ -5,12 +5,17 @@ import ActionButton, { ActionButtonContext } from '../ActionButton';
 import RecordingIcon from './RecordingIcon';
 
 function SpeechButton(props: ButtonProps, ref: React.Ref<HTMLButtonElement>) {
-  const { speechRecording, onSpeechDisabled, prefixCls } = React.useContext(ActionButtonContext);
-
+  const {
+    speechRecording,
+    disabled: rootDisabled,
+    onSpeechDisabled,
+    prefixCls,
+  } = React.useContext(ActionButtonContext);
+  const mergedDisabled = props.disabled ?? rootDisabled ?? onSpeechDisabled;
   let icon: React.ReactNode = null;
   if (speechRecording) {
     icon = <RecordingIcon className={`${prefixCls}-recording-icon`} />;
-  } else if (onSpeechDisabled) {
+  } else if (mergedDisabled) {
     icon = <AudioMutedOutlined />;
   } else {
     icon = <AudioOutlined />;
@@ -19,8 +24,8 @@ function SpeechButton(props: ButtonProps, ref: React.Ref<HTMLButtonElement>) {
   return (
     <ActionButton
       icon={icon}
-      color="primary"
       variant="text"
+      color="primary"
       {...props}
       action="onSpeech"
       ref={ref}

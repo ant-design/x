@@ -1,7 +1,7 @@
 import { PlusOutlined } from '@ant-design/icons';
 import omit from '@rc-component/util/lib/omit';
 import { Button, type ImageProps, type UploadProps } from 'antd';
-import classnames from 'classnames';
+import { clsx } from 'clsx';
 import React from 'react';
 import useXComponentConfig from '../../_util/hooks/use-x-component-config';
 import FileCard, { FileCardProps } from '../../file-card';
@@ -58,10 +58,10 @@ export default function FileList(props: FileListProps) {
       return item.description;
     }
     if (item.status === 'uploading') {
-      return `${item.percent || 0}%`;
+      return `${item.percent ?? 0}%`;
     }
     if (item.status === 'error') {
-      return item.response || '';
+      return typeof item.response === 'string' ? item.response : 'error';
     }
     return '';
   };
@@ -80,7 +80,7 @@ export default function FileList(props: FileListProps) {
       let preview: ImageProps['preview'];
       if (previewUrl && (status === 'uploading' || status === 'error')) {
         const percent = items[i].percent;
-        const mask = (
+        const cover = (
           <div className={`${cardCls}-file-img-mask`}>
             {status === 'uploading' && percent !== undefined && (
               <Progress percent={percent} prefixCls={cardCls} />
@@ -93,7 +93,7 @@ export default function FileList(props: FileListProps) {
           </div>
         );
         preview = {
-          mask,
+          cover,
         };
       }
       fileCardMap.push({
@@ -101,8 +101,8 @@ export default function FileList(props: FileListProps) {
         description: desc,
         src: previewUrl,
         classNames: {
-          file: classnames(`${cardCls}-status-${status}`, classNames.file),
-          description: classnames(`${cardCls}-desc`, classNames.description),
+          file: clsx(`${cardCls}-status-${status}`, classNames.file),
+          description: clsx(`${cardCls}-desc`, classNames.description),
         },
         byte: items[i].size,
         ...(omit(items[i], ['type']) as FileCardProps),
@@ -130,14 +130,14 @@ export default function FileList(props: FileListProps) {
   return (
     <FileCard.List
       items={list}
-      className={classnames(`${prefixCls}-list`, className)}
+      className={clsx(`${prefixCls}-list`, className)}
       classNames={{
-        root: classnames(classNames.list, contextClassNames.list),
-        card: classnames(classNames.card, contextClassNames.card),
-        file: classnames(classNames.file, contextClassNames.file),
-        description: classnames(classNames.description, contextClassNames.description),
-        icon: classnames(classNames.icon, contextClassNames.icon),
-        name: classnames(classNames.name, contextClassNames.title),
+        root: clsx(classNames.list, contextClassNames.list),
+        card: clsx(classNames.card, contextClassNames.card),
+        file: clsx(classNames.file, contextClassNames.file),
+        description: clsx(classNames.description, contextClassNames.description),
+        icon: clsx(classNames.icon, contextClassNames.icon),
+        name: clsx(classNames.name, contextClassNames.title),
       }}
       styles={{
         root: { ...styles.list, ...contextStyles.list },
@@ -152,21 +152,15 @@ export default function FileList(props: FileListProps) {
       onRemove={handleRemove}
       overflow={overflow}
       extension={
-        showExtension ? (
-          <SilentUploader upload={upload}>
-            <Button
-              className={classnames(
-                classNames.upload,
-                contextClassNames.upload,
-                `${listCls}-upload-btn`,
-              )}
-              style={{ ...styles.upload, ...contextStyles.upload }}
-              type="dashed"
-            >
-              <PlusOutlined className={`${listCls}-upload-btn-icon`} />
-            </Button>
-          </SilentUploader>
-        ) : null
+        <SilentUploader visible={showExtension} upload={upload}>
+          <Button
+            className={clsx(classNames.upload, contextClassNames.upload, `${listCls}-upload-btn`)}
+            style={{ ...styles.upload, ...contextStyles.upload }}
+            type="dashed"
+          >
+            <PlusOutlined className={`${listCls}-upload-btn-icon`} />
+          </Button>
+        </SilentUploader>
       }
     />
   );

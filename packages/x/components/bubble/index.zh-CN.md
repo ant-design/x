@@ -66,7 +66,8 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*uaGhTY1-LL0AAA
 | extra | 额外插槽 | [BubbleSlot](#bubbleslot) | - | - |
 | onTyping | 动画执行回调 | (rendererContent: string, currentContent: string) => void | - | 2.0.0 | 
 | onTypingComplete | 动画结束回调 | (content: string) => void | - | - |
-| onEditing | 编辑态下内容变化时回调 | (content: string) => void | - | 2.0.0 |
+| onEditConfirm | 编辑确认回调 | (content: string) => void | - | 2.0.0 |
+| onEditCancel | 编辑取消回调 | () => void | - | 2.0.0 |
 
 #### ContentType
 
@@ -218,10 +219,14 @@ export type RoleType = Partial<
 
 #### Bubble.List autoScroll
 
-**Bubble.List** 滚动托管需要设置 `height`，否则无法滚动。
+**Bubble.List** 滚动托管需要自身或父容器设置明确的 `height`，否则无法滚动。
 
 ```tsx
 <Bubble.List items={items} style={{ height: 500 }} autoScroll />
+// or
+<div style={{ height: 500 }}>
+  <Bubble.List items={items} autoScroll />
+</div>
 ```
 
 #### Bubble.List role 与自定义 Bubble
@@ -255,6 +260,7 @@ export type RoleType = Partial<
 
 ## Semantic DOM
 
+<!--
 ### Bubble
 
 <code src="./demo/_semantic.tsx" simplify="true"></code>
@@ -269,7 +275,7 @@ export type RoleType = Partial<
 
 ### Bubble.List
 
-<code src="./demo/_semantic-list.tsx" simplify="true"></code>
+<code src="./demo/_semantic-list.tsx" simplify="true"></code> -->
 
 ## 主题变量（Design Token）
 

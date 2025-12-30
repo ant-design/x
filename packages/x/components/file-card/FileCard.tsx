@@ -11,10 +11,10 @@ import {
   JavaScriptOutlined,
   PythonOutlined,
 } from '@ant-design/icons';
+import pickAttrs from '@rc-component/util/lib/pickAttrs';
 import type { ImageProps, SpinProps } from 'antd';
 import { Image } from 'antd';
-import classnames from 'classnames';
-import pickAttrs from 'rc-util/lib/pickAttrs';
+import { clsx } from 'clsx';
 import React, { useMemo } from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
@@ -199,7 +199,7 @@ const FileCard: React.FC<FileCardProps> = (props) => {
 
   const [hashId, cssVarCls] = useStyle(prefixCls);
 
-  const mergedCls = classnames(
+  const mergedCls = clsx(
     prefixCls,
     contextConfig.className,
     className,
@@ -255,21 +255,19 @@ const FileCard: React.FC<FileCardProps> = (props) => {
   if (fileType === 'image') {
     ContentNode = (
       <div
-        className={classnames(`${prefixCls}-image`, classNames.file, {
+        className={clsx(`${prefixCls}-image`, classNames.file, {
           [`${prefixCls}-loading`]: loading,
         })}
         style={styles.file}
       >
-        {src && (
-          <Image
-            rootClassName={classnames(`${prefixCls}-image-img`)}
-            width={styles?.file?.width}
-            height={styles?.file?.height}
-            alt={name}
-            src={src}
-            {...(imageProps as ImageProps)}
-          />
-        )}
+        <Image
+          rootClassName={clsx(`${prefixCls}-image-img`)}
+          width={styles?.file?.width}
+          height={styles?.file?.height}
+          alt={name}
+          src={src}
+          {...(imageProps as ImageProps)}
+        />
         {loading && (
           <ImageLoading spinProps={spinProps} prefixCls={prefixCls} style={styles.file} />
         )}
@@ -281,7 +279,7 @@ const FileCard: React.FC<FileCardProps> = (props) => {
         src={src}
         controls
         style={styles.file}
-        className={classnames(`${prefixCls}-video`, classNames.file)}
+        className={clsx(`${prefixCls}-video`, classNames.file)}
         {...(videoProps as React.JSX.IntrinsicElements['video'])}
       />
     );
@@ -291,7 +289,7 @@ const FileCard: React.FC<FileCardProps> = (props) => {
         src={src}
         controls
         style={styles.file}
-        className={classnames(`${prefixCls}-audio`, classNames.file)}
+        className={clsx(`${prefixCls}-audio`, classNames.file)}
         {...(audioProps as React.JSX.IntrinsicElements['audio'])}
       />
     );

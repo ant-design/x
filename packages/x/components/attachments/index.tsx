@@ -1,6 +1,6 @@
+import { useEvent, useMergedState } from '@rc-component/util';
 import { type GetProp, GetRef, Upload, type UploadProps } from 'antd';
-import classnames from 'classnames';
-import { useEvent, useMergedState } from 'rc-util';
+import { clsx } from 'clsx';
 import React from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { FileCardProps } from '../file-card';
@@ -55,7 +55,7 @@ export interface AttachmentsRef {
   nativeElement: HTMLDivElement | null;
   fileNativeElement: HTMLInputElement | null;
   upload: (file: File) => void;
-  select: (options: { accept?: string; multiple?: boolean }) => void;
+  select: (options?: { accept?: string; multiple?: boolean }) => void;
 }
 
 function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
@@ -110,11 +110,11 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
         fileInput.dispatchEvent(new Event('change', { bubbles: true }));
       }
     },
-    select: ({ accept, multiple = false }) => {
+    select: (options) => {
       const fileInput = uploadRef.current?.nativeElement?.querySelector('input[type="file"]');
       if (fileInput) {
-        fileInput.multiple = multiple;
-        fileInput.accept = accept || props.accept;
+        fileInput.multiple = options?.multiple ?? false;
+        fileInput.accept = options?.accept || props.accept;
         fileInput.click();
       }
     },
@@ -123,7 +123,7 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
   // ============================ Style ============================
   const [hashId, cssVarCls] = useStyle(prefixCls);
 
-  const cssinjsCls = classnames(hashId, cssVarCls);
+  const cssinjsCls = clsx(hashId, cssVarCls);
 
   // ============================ Upload ============================
   const [fileList, setFileList] = useMergedState([], {
@@ -171,7 +171,7 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
         placeholder={placeholderContent}
         upload={mergedUploadProps}
         prefixCls={prefixCls}
-        className={classnames(contextClassNames.placeholder, classNames.placeholder)}
+        className={clsx(contextClassNames.placeholder, classNames.placeholder)}
         style={{
           ...contextStyles.placeholder,
           ...styles.placeholder,
@@ -188,7 +188,7 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
         <SilentUploader
           upload={mergedUploadProps}
           style={rootOfStyles}
-          className={classnames(rootClassName, rootOfClassNames)}
+          className={clsx(rootClassName, rootOfClassNames)}
           ref={uploadRef}
         >
           {children}
@@ -197,7 +197,7 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
           getDropContainer={getDropContainer}
           prefixCls={prefixCls}
           style={rootOfStyles}
-          className={classnames(cssinjsCls, rootClassName, rootOfClassNames)}
+          className={clsx(cssinjsCls, rootClassName, rootOfClassNames)}
         >
           {getPlaceholderNode('drop')}
         </DropArea>
@@ -208,7 +208,7 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
 
     renderChildren = (
       <div
-        className={classnames(
+        className={clsx(
           prefixCls,
           cssinjsCls,
           {

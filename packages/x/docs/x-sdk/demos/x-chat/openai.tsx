@@ -53,6 +53,7 @@ const useLocale = () => {
     historyAIResponse: isCN
       ? '这是一条历史回答消息，请发送新消息。'
       : 'This is a historical response message, please send a new message.',
+    deleteFirstMessage: isCN ? '删除第一条消息' : 'Delete the first message',
   };
 };
 
@@ -92,7 +93,16 @@ const App = () => {
 
   // 聊天消息管理：处理消息列表、历史消息、错误处理等
   // Chat message management: handle message list, historical messages, error handling, etc.
-  const { onRequest, messages, setMessages, setMessage, isRequesting, abort, onReload } = useXChat({
+  const {
+    onRequest,
+    messages,
+    removeMessage,
+    setMessages,
+    setMessage,
+    isRequesting,
+    abort,
+    onReload,
+  } = useXChat({
     provider,
     // 默认消息：包含历史对话作为示例
     // Default messages: include historical conversation as examples
@@ -206,6 +216,14 @@ const App = () => {
           {/* Edit button: only available when messages exist */}
           <Button disabled={!messages.length} onClick={editLastMessage}>
             {locale.editLastMessage}
+          </Button>
+          <Button
+            disabled={!messages.length}
+            onClick={() => {
+              removeMessage(messages?.[0]?.id);
+            }}
+          >
+            {locale.deleteFirstMessage}
           </Button>
         </Flex>
       </Flex>
