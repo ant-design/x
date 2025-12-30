@@ -53,13 +53,45 @@ export interface ComponentToken {
    * @descEN Typing animation color
    */
   colorTextBlink: string;
+  /**
+   * @desc 错误状态描述文字颜色
+   * @descEN Error state description text color
+   */
   colorErrorTextDescription: string;
+  /**
+   * @desc 错误状态禁用文字颜色
+   * @descEN Error state disabled text color
+   */
   colorErrorTextDisabled: string;
+  /**
+   * @desc 错误状态禁用描述文字颜色
+   * @descEN Error state disabled description text color
+   */
   colorErrorTextDescriptionDisabled: string;
+  /**
+   * @desc 错误状态禁用背景色
+   * @descEN Error state disabled background color
+   */
   colorErrorBgDisabled: string;
+  /**
+   * @desc 禁用描述文字颜色
+   * @descEN Disabled description text color
+   */
   colorDescriptionDisabled: string;
+  /**
+   * @desc 禁用标题文字颜色
+   * @descEN Disabled title text color
+   */
   colorTitleDisabled: string;
+  /**
+   * @desc 成功状态禁用颜色
+   * @descEN Success state disabled color
+   */
   colorSuccessDisabled: string;
+  /**
+   * @desc 主要状态禁用颜色
+   * @descEN Primary state disabled color
+   */
   colorPrimaryDisabled: string;
 }
 
