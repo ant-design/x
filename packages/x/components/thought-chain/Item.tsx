@@ -67,10 +67,30 @@ export interface ThoughtChainItemProps
    * @descEN blink
    */
   blink?: boolean;
+  /**
+   * @desc 自定义样式类名
+   * @descEN Custom CSS class name
+   */
   className?: string;
+  /**
+   * @desc 语义化样式类名配置
+   * @descEN Semantic class names configuration
+   */
   classNames?: Partial<Record<SemanticType, string>>;
+  /**
+   * @desc 自定义内联样式
+   * @descEN Custom inline styles
+   */
   style?: React.CSSProperties;
+  /**
+   * @desc 语义化样式配置
+   * @descEN Semantic styles configuration
+   */
   styles?: Partial<Record<SemanticType, React.CSSProperties>>;
+  /**
+   * @desc 是否禁用
+   * @descEN Whether disabled
+   */
   disabled?: boolean;
 }
 
@@ -126,7 +146,7 @@ const Item = React.forwardRef<ItemRef, ThoughtChainItemProps>((props, ref) => {
     <div
       ref={itemRef}
       key={key || id}
-      onClick={onClick}
+      onClick={disabled ? undefined : onClick}
       style={style}
       className={classnames(
         prefixCls,

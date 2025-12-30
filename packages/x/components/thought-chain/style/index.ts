@@ -53,6 +53,14 @@ export interface ComponentToken {
    * @descEN Typing animation color
    */
   colorTextBlink: string;
+  colorErrorTextDescription: string;
+  colorErrorTextDisabled: string;
+  colorErrorTextDescriptionDisabled: string;
+  colorErrorBgDisabled: string;
+  colorDescriptionDisabled: string;
+  colorTitleDisabled: string;
+  colorSuccessDisabled: string;
+  colorPrimaryDisabled: string;
 }
 
 export interface ThoughtChainToken extends FullToken<'ThoughtChain'> {}
@@ -111,7 +119,6 @@ const genThoughtChainStyle: GenerateStyle<ThoughtChainToken, CSSObject> = (token
           transition: `transform ${token.motionDurationMid} ${token.motionEaseInOut}`,
         },
       },
-
       [`${componentCls}-node-description`]: {
         color: token.colorTextDescription,
         fontSize: token.fontSize,
@@ -166,17 +173,38 @@ const genThoughtChainStyle: GenerateStyle<ThoughtChainToken, CSSObject> = (token
 };
 
 export const prepareComponentToken: GetDefaultToken<'ThoughtChain'> = (token) => {
-  const itemMotionDescription = new FastColor(token.colorTextDescription).setA(0.25).toHexString();
+  const itemMotionDescription = new FastColor(token.colorTextDescription).setA(0.25).toRgbString();
   const colorTextBlinkDefault = token.colorTextDescription;
   const colorTextBlink = token.colorTextBase;
+  const colorErrorTextDescription = new FastColor(token.colorErrorText).setA(0.45).toRgbString();
+  const colorErrorTextDisabled = colorErrorTextDescription;
+  const itemSolidHoverBg = new FastColor(token.colorFillTertiary).setA(0.06).toRgbString();
+  const colorErrorTextDescriptionDisabled = new FastColor(token.colorErrorText)
+    .setA(0.25)
+    .toRgbString();
+  const colorDescriptionDisabled = new FastColor(token.colorTextDescription)
+    .setA(0.25)
+    .toRgbString();
+  const colorTitleDisabled = new FastColor(token.colorText).setA(0.45).toRgbString();
+  const colorErrorBgDisabled = new FastColor(token.colorErrorBg).setA(0.25).toRgbString();
+  const itemOutlinedHoverBg = itemSolidHoverBg;
+  const colorSuccessDisabled = new FastColor(token.colorSuccess).setA(0.45).toRgbString();
+  const colorPrimaryDisabled = new FastColor(token.colorPrimary).setA(0.45).toRgbString();
   return {
+    colorDescriptionDisabled,
+    colorPrimaryDisabled,
+    colorSuccessDisabled,
+    colorTitleDisabled,
+    colorErrorTextDisabled,
+    colorErrorBgDisabled,
+    colorErrorTextDescriptionDisabled,
     itemMotionDescription,
     colorTextBlinkDefault,
     colorTextBlink,
     itemSolidBg: token.colorFillTertiary,
-    itemSolidHoverBg: token.colorBgTextHover,
+    itemSolidHoverBg,
     itemOutlinedBg: token.colorBgContainer,
-    itemOutlinedHoverBg: token.colorBgTextHover,
+    itemOutlinedHoverBg,
     itemBorderRadius: token.borderRadius,
     iconSize: token.fontSize,
     titleFontSize: token.fontSize,
@@ -187,6 +215,7 @@ export const prepareComponentToken: GetDefaultToken<'ThoughtChain'> = (token) =>
     borderWidth: token.lineWidth,
     connectorColor: token.colorFillContent,
     connectorWidth: token.lineWidth,
+    colorErrorTextDescription,
     hoverTransitionDuration: `${token.motionDurationMid} ${token.motionEaseInOut}`,
   };
 };
