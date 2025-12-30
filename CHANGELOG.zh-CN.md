@@ -17,6 +17,8 @@ tag: vVERSION
 
 ## 2.1.2
 
+`2025-12-30`
+
 ### @ant-design/x
 
 - 💄 修复 Actions `disliked` 类名错误问题。[#1521](https://github.com/ant-design/x/pull/1521) 由 [kimteayon](https://github.com/kimteayon) 提交

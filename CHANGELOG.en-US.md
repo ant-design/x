@@ -18,6 +18,8 @@ tag: vVERSION
 
 ## 2.1.2
 
+`2025-12-30`
+
 ### @ant-design/x
 
 - 💄 Fixed Actions `disliked` className error issue. [#1521](https://github.com/ant-design/x/pull/1521) by [kimteayon](https://github.com/kimteayon)
